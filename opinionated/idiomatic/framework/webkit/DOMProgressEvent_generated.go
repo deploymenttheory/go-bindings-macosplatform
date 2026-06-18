@@ -66,7 +66,9 @@ func (x *DOMProgressEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent
 
 func (x *DOMProgressEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
-func (x *DOMProgressEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMProgressEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMProgressEventable is the interface implemented by [DOMProgressEvent], for mocking and DI.
 type DOMProgressEventable interface {
@@ -79,4 +81,3 @@ type DOMProgressEventable interface {
 }
 
 var _ DOMProgressEventable = (*DOMProgressEvent)(nil)
-

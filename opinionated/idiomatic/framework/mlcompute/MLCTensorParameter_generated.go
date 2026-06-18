@@ -70,4 +70,3 @@ type TensorParameterable interface {
 }
 
 var _ TensorParameterable = (*TensorParameter)(nil)
-

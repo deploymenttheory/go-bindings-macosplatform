@@ -206,4 +206,3 @@ type YOLOLossDescriptorable interface {
 }
 
 var _ YOLOLossDescriptorable = (*YOLOLossDescriptor)(nil)
-

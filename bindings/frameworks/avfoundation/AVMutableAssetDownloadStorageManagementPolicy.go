@@ -16,8 +16,8 @@ type AVMutableAssetDownloadStorageManagementPolicy struct {
 }
 
 var (
-	_clsAVMutableAssetDownloadStorageManagementPolicy = _objcClass("AVMutableAssetDownloadStorageManagementPolicy")
-	_aVMutableAssetDownloadStorageManagementPolicySelSetPriority = objc.RegisterName("setPriority:")
+	_clsAVMutableAssetDownloadStorageManagementPolicy                  = _objcClass("AVMutableAssetDownloadStorageManagementPolicy")
+	_aVMutableAssetDownloadStorageManagementPolicySelSetPriority       = objc.RegisterName("setPriority:")
 	_aVMutableAssetDownloadStorageManagementPolicySelSetExpirationDate = objc.RegisterName("setExpirationDate:")
 )
 
@@ -38,4 +38,3 @@ func (o *AVMutableAssetDownloadStorageManagementPolicy) SetPriority(priority *fo
 func (o *AVMutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate *foundation.NSDate) {
 	o.Ptr().Send(_aVMutableAssetDownloadStorageManagementPolicySelSetExpirationDate, expirationDate.Ptr())
 }
-

@@ -52,4 +52,3 @@ type ItemBadgeable interface {
 }
 
 var _ ItemBadgeable = (*ItemBadge)(nil)
-

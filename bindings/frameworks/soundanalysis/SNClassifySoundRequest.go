@@ -20,15 +20,15 @@ type SNClassifySoundRequest struct {
 }
 
 var (
-	_clsSNClassifySoundRequest = _objcClass("SNClassifySoundRequest")
-	_sNClassifySoundRequestSelInitWithMLModelError = objc.RegisterName("initWithMLModel:error:")
+	_clsSNClassifySoundRequest                                  = _objcClass("SNClassifySoundRequest")
+	_sNClassifySoundRequestSelInitWithMLModelError              = objc.RegisterName("initWithMLModel:error:")
 	_sNClassifySoundRequestSelInitWithClassifierIdentifierError = objc.RegisterName("initWithClassifierIdentifier:error:")
-	_sNClassifySoundRequestSelOverlapFactor = objc.RegisterName("overlapFactor")
-	_sNClassifySoundRequestSelSetOverlapFactor = objc.RegisterName("setOverlapFactor:")
-	_sNClassifySoundRequestSelWindowDuration = objc.RegisterName("windowDuration")
-	_sNClassifySoundRequestSelSetWindowDuration = objc.RegisterName("setWindowDuration:")
-	_sNClassifySoundRequestSelWindowDurationConstraint = objc.RegisterName("windowDurationConstraint")
-	_sNClassifySoundRequestSelKnownClassifications = objc.RegisterName("knownClassifications")
+	_sNClassifySoundRequestSelOverlapFactor                     = objc.RegisterName("overlapFactor")
+	_sNClassifySoundRequestSelSetOverlapFactor                  = objc.RegisterName("setOverlapFactor:")
+	_sNClassifySoundRequestSelWindowDuration                    = objc.RegisterName("windowDuration")
+	_sNClassifySoundRequestSelSetWindowDuration                 = objc.RegisterName("setWindowDuration:")
+	_sNClassifySoundRequestSelWindowDurationConstraint          = objc.RegisterName("windowDurationConstraint")
+	_sNClassifySoundRequestSelKnownClassifications              = objc.RegisterName("knownClassifications")
 )
 
 func SNClassifySoundRequestFromID(id objc.ID) *SNClassifySoundRequest {
@@ -45,7 +45,9 @@ func SNClassifySoundRequestFromID(id objc.ID) *SNClassifySoundRequest {
 func (o *SNClassifySoundRequest) InitWithMLModelError(mlModel *coreml.MLModel) (*SNClassifySoundRequest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithMLModelError, mlModel.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -56,7 +58,9 @@ func (o *SNClassifySoundRequest) InitWithMLModelError(mlModel *coreml.MLModel) (
 func (o *SNClassifySoundRequest) InitWithClassifierIdentifierError(classifierIdentifier *foundation.NSString) (*SNClassifySoundRequest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelInitWithClassifierIdentifierError, classifierIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -86,7 +90,9 @@ func (o *SNClassifySoundRequest) SetWindowDuration(windowDuration coremedia.CMTi
 // The constraints governing permitted analysis window durations. The analysis window duration is controlled using the `windowDuration` property. If an analysis window duration is selected which does not meet the necessary constraints, it will automatically be adjusted to meet these constraints (see `windowDuration` for more information regarding how this adjustment will be applied).
 func (o *SNClassifySoundRequest) WindowDurationConstraint() *SNTimeDurationConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassifySoundRequestSelWindowDurationConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SNTimeDurationConstraintFromID(_ret)
 }
 
@@ -95,4 +101,3 @@ func (o *SNClassifySoundRequest) KnownClassifications() *foundation.NSArray[*fou
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _sNClassifySoundRequestSelKnownClassifications)
 	return _ret
 }
-

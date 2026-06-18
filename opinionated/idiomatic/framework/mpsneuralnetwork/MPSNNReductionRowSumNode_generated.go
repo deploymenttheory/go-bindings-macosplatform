@@ -55,9 +55,13 @@ func (x *NNReductionRowSumNode) WithLabel(label string) *NNReductionRowSumNode {
 	return x
 }
 
-func (x *NNReductionRowSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionRowSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionRowSumNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionRowSumNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionRowSumNodeable is the interface implemented by [NNReductionRowSumNode], for mocking and DI.
 type NNReductionRowSumNodeable interface {
@@ -68,4 +72,3 @@ type NNReductionRowSumNodeable interface {
 }
 
 var _ NNReductionRowSumNodeable = (*NNReductionRowSumNode)(nil)
-

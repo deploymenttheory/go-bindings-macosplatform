@@ -70,13 +70,19 @@ func (x *DOMProcessingInstruction) Target() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *DOMProcessingInstruction) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
+func (x *DOMProcessingInstruction) asDOMCharacterData() *raw.DOMCharacterData {
+	return &x.inner.DOMCharacterData
+}
 
 func (x *DOMProcessingInstruction) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
 
-func (x *DOMProcessingInstruction) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
+func (x *DOMProcessingInstruction) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMCharacterData.DOMNode.DOMObject
+}
 
-func (x *DOMProcessingInstruction) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMProcessingInstruction) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMProcessingInstructionable is the interface implemented by [DOMProcessingInstruction], for mocking and DI.
 type DOMProcessingInstructionable interface {
@@ -89,4 +95,3 @@ type DOMProcessingInstructionable interface {
 }
 
 var _ DOMProcessingInstructionable = (*DOMProcessingInstruction)(nil)
-

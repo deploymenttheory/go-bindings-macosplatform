@@ -17,20 +17,20 @@ type MDLPhysicallyPlausibleLight struct {
 }
 
 var (
-	_clsMDLPhysicallyPlausibleLight = _objcClass("MDLPhysicallyPlausibleLight")
-	_mDLPhysicallyPlausibleLightSelSetColorByTemperature = objc.RegisterName("setColorByTemperature:")
-	_mDLPhysicallyPlausibleLightSelColor = objc.RegisterName("color")
-	_mDLPhysicallyPlausibleLightSelSetColor = objc.RegisterName("setColor:")
-	_mDLPhysicallyPlausibleLightSelLumens = objc.RegisterName("lumens")
-	_mDLPhysicallyPlausibleLightSelSetLumens = objc.RegisterName("setLumens:")
-	_mDLPhysicallyPlausibleLightSelInnerConeAngle = objc.RegisterName("innerConeAngle")
-	_mDLPhysicallyPlausibleLightSelSetInnerConeAngle = objc.RegisterName("setInnerConeAngle:")
-	_mDLPhysicallyPlausibleLightSelOuterConeAngle = objc.RegisterName("outerConeAngle")
-	_mDLPhysicallyPlausibleLightSelSetOuterConeAngle = objc.RegisterName("setOuterConeAngle:")
-	_mDLPhysicallyPlausibleLightSelAttenuationStartDistance = objc.RegisterName("attenuationStartDistance")
+	_clsMDLPhysicallyPlausibleLight                            = _objcClass("MDLPhysicallyPlausibleLight")
+	_mDLPhysicallyPlausibleLightSelSetColorByTemperature       = objc.RegisterName("setColorByTemperature:")
+	_mDLPhysicallyPlausibleLightSelColor                       = objc.RegisterName("color")
+	_mDLPhysicallyPlausibleLightSelSetColor                    = objc.RegisterName("setColor:")
+	_mDLPhysicallyPlausibleLightSelLumens                      = objc.RegisterName("lumens")
+	_mDLPhysicallyPlausibleLightSelSetLumens                   = objc.RegisterName("setLumens:")
+	_mDLPhysicallyPlausibleLightSelInnerConeAngle              = objc.RegisterName("innerConeAngle")
+	_mDLPhysicallyPlausibleLightSelSetInnerConeAngle           = objc.RegisterName("setInnerConeAngle:")
+	_mDLPhysicallyPlausibleLightSelOuterConeAngle              = objc.RegisterName("outerConeAngle")
+	_mDLPhysicallyPlausibleLightSelSetOuterConeAngle           = objc.RegisterName("setOuterConeAngle:")
+	_mDLPhysicallyPlausibleLightSelAttenuationStartDistance    = objc.RegisterName("attenuationStartDistance")
 	_mDLPhysicallyPlausibleLightSelSetAttenuationStartDistance = objc.RegisterName("setAttenuationStartDistance:")
-	_mDLPhysicallyPlausibleLightSelAttenuationEndDistance = objc.RegisterName("attenuationEndDistance")
-	_mDLPhysicallyPlausibleLightSelSetAttenuationEndDistance = objc.RegisterName("setAttenuationEndDistance:")
+	_mDLPhysicallyPlausibleLightSelAttenuationEndDistance      = objc.RegisterName("attenuationEndDistance")
+	_mDLPhysicallyPlausibleLightSelSetAttenuationEndDistance   = objc.RegisterName("setAttenuationEndDistance:")
 )
 
 func MDLPhysicallyPlausibleLightFromID(id objc.ID) *MDLPhysicallyPlausibleLight {
@@ -101,4 +101,3 @@ func (o *MDLPhysicallyPlausibleLight) AttenuationEndDistance() float32 {
 func (o *MDLPhysicallyPlausibleLight) SetAttenuationEndDistance(attenuationEndDistance float32) {
 	o.Ptr().Send(_mDLPhysicallyPlausibleLightSelSetAttenuationEndDistance, attenuationEndDistance)
 }
-

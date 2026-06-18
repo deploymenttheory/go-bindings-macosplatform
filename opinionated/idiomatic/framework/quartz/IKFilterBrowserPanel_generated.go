@@ -52,4 +52,3 @@ type IKFilterBrowserPanelable interface {
 }
 
 var _ IKFilterBrowserPanelable = (*IKFilterBrowserPanel)(nil)
-

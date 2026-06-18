@@ -16,15 +16,15 @@ type FSProbeResult struct {
 }
 
 var (
-	_clsFSProbeResult = _objcClass("FSProbeResult")
-	_fSProbeResultSelRecognizedProbeResultWithNameContainerID = objc.RegisterName("recognizedProbeResultWithName:containerID:")
+	_clsFSProbeResult                                               = _objcClass("FSProbeResult")
+	_fSProbeResultSelRecognizedProbeResultWithNameContainerID       = objc.RegisterName("recognizedProbeResultWithName:containerID:")
 	_fSProbeResultSelUsableButLimitedProbeResultWithNameContainerID = objc.RegisterName("usableButLimitedProbeResultWithName:containerID:")
-	_fSProbeResultSelUsableProbeResultWithNameContainerID = objc.RegisterName("usableProbeResultWithName:containerID:")
-	_fSProbeResultSelResult = objc.RegisterName("result")
-	_fSProbeResultSelName = objc.RegisterName("name")
-	_fSProbeResultSelContainerID = objc.RegisterName("containerID")
-	_fSProbeResultSelNotRecognizedProbeResult = objc.RegisterName("notRecognizedProbeResult")
-	_fSProbeResultSelUsableButLimitedProbeResult = objc.RegisterName("usableButLimitedProbeResult")
+	_fSProbeResultSelUsableProbeResultWithNameContainerID           = objc.RegisterName("usableProbeResultWithName:containerID:")
+	_fSProbeResultSelResult                                         = objc.RegisterName("result")
+	_fSProbeResultSelName                                           = objc.RegisterName("name")
+	_fSProbeResultSelContainerID                                    = objc.RegisterName("containerID")
+	_fSProbeResultSelNotRecognizedProbeResult                       = objc.RegisterName("notRecognizedProbeResult")
+	_fSProbeResultSelUsableButLimitedProbeResult                    = objc.RegisterName("usableButLimitedProbeResult")
 )
 
 func FSProbeResultFromID(id objc.ID) *FSProbeResult {
@@ -40,21 +40,27 @@ func FSProbeResultFromID(id objc.ID) *FSProbeResult {
 // Creates a probe result for a recognized file system. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
 func FSProbeResultRecognizedProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelRecognizedProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSProbeResultFromID(_ret)
 }
 
 // Creates a probe result for a recognized file system that is usable, but with limited capabilities. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
 func FSProbeResultUsableButLimitedProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelUsableButLimitedProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSProbeResultFromID(_ret)
 }
 
 // Creates a probe result for a recognized and usable file system. - Parameters: - name: The resource name, as found during the probe operation. If the file system doesn't support names, or is awaiting naming, use an empty string. - containerID: The container identifier, as found during the probe operation. If the file system doesn't support durable identifiers, use a random UUID.
 func FSProbeResultUsableProbeResultWithNameContainerID(name *foundation.NSString, containerID *FSContainerIdentifier) *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelUsableProbeResultWithNameContainerID, name.Ptr(), containerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSProbeResultFromID(_ret)
 }
 
@@ -64,31 +70,38 @@ func (o *FSProbeResult) Result() FSMatchResult {
 	return _ret
 }
 
-// The resource name, as found during the probe operation. This value is non-`nil` unless the ``FSProbeResult/result`` is ``FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
+// The resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
 func (o *FSProbeResult) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSProbeResultSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// The container identifier, as found during the probe operation. This value is non-`nil` unless the ``FSProbeResult/result`` is ``FSMatchResult/notRecognized``. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a ``FSUnaryFileSystem`` --- this value may be a random UUID.
+// The container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
 func (o *FSProbeResult) ContainerID() *FSContainerIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSProbeResultSelContainerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSContainerIdentifierFromID(_ret)
 }
 
-// A probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its ``FSProbeResult/name`` and ``FSProbeResult/containerID`` properties.
+// A probe result for an unrecognized file system. An unrecognized probe result contains `nil` for its “FSProbeResult/name“ and “FSProbeResult/containerID“ properties.
 func FSProbeResultNotRecognizedProbeResult() *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelNotRecognizedProbeResult)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSProbeResultFromID(_ret)
 }
 
-// A probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the ``FSProbeResult/name``, ``FSProbeResult/containerID``, or both. Don't return this result from probing a resource that isn't limited.
+// A probe result for a recognized file system that is usable, but with limited capabilities. This kind of probe result lacks the “FSProbeResult/name“, “FSProbeResult/containerID“, or both. Don't return this result from probing a resource that isn't limited.
 func FSProbeResultUsableButLimitedProbeResult() *FSProbeResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSProbeResult), _fSProbeResultSelUsableButLimitedProbeResult)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSProbeResultFromID(_ret)
 }
-

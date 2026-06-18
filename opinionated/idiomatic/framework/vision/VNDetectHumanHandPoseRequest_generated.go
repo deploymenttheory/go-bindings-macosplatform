@@ -106,9 +106,13 @@ func (x *DetectHumanHandPoseRequest) SetMaximumHandCount(maximumHandCount uint) 
 	x.inner.SetMaximumHandCount(maximumHandCount)
 }
 
-func (x *DetectHumanHandPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectHumanHandPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectHumanHandPoseRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectHumanHandPoseRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectHumanHandPoseRequestable is the interface implemented by [DetectHumanHandPoseRequest], for mocking and DI.
 type DetectHumanHandPoseRequestable interface {
@@ -125,4 +129,3 @@ type DetectHumanHandPoseRequestable interface {
 }
 
 var _ DetectHumanHandPoseRequestable = (*DetectHumanHandPoseRequest)(nil)
-

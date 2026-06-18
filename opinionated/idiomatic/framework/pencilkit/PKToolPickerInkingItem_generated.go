@@ -98,7 +98,9 @@ func (x *ToolPickerInkingItem) SetAllowsColorSelection(allowsColorSelection bool
 	x.inner.SetAllowsColorSelection(allowsColorSelection)
 }
 
-func (x *ToolPickerInkingItem) asToolPickerItem() *raw.PKToolPickerItem { return &x.inner.PKToolPickerItem }
+func (x *ToolPickerInkingItem) asToolPickerItem() *raw.PKToolPickerItem {
+	return &x.inner.PKToolPickerItem
+}
 
 // ToolPickerInkingItemable is the interface implemented by [ToolPickerInkingItem], for mocking and DI.
 type ToolPickerInkingItemable interface {
@@ -110,4 +112,3 @@ type ToolPickerInkingItemable interface {
 }
 
 var _ ToolPickerInkingItemable = (*ToolPickerInkingItem)(nil)
-

@@ -62,9 +62,13 @@ func (x *ImageReduceRowMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Im
 	return x
 }
 
-func (x *ImageReduceRowMean) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowMean) asImageReduceUnary() *raw.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowMean) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
 // ImageReduceRowMeanable is the interface implemented by [ImageReduceRowMean], for mocking and DI.
 type ImageReduceRowMeanable interface {
@@ -76,4 +80,3 @@ type ImageReduceRowMeanable interface {
 }
 
 var _ ImageReduceRowMeanable = (*ImageReduceRowMean)(nil)
-

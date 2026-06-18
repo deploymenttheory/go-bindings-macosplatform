@@ -103,4 +103,3 @@ type CheckerboardTextureable interface {
 }
 
 var _ CheckerboardTextureable = (*CheckerboardTexture)(nil)
-

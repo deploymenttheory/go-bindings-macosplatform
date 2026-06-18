@@ -16,22 +16,22 @@ type MTRUnitTestingClusterSimpleStruct struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterSimpleStruct = _objcClass("MTRUnitTestingClusterSimpleStruct")
-	_mTRUnitTestingClusterSimpleStructSelA = objc.RegisterName("a")
+	_clsMTRUnitTestingClusterSimpleStruct     = _objcClass("MTRUnitTestingClusterSimpleStruct")
+	_mTRUnitTestingClusterSimpleStructSelA    = objc.RegisterName("a")
 	_mTRUnitTestingClusterSimpleStructSelSetA = objc.RegisterName("setA:")
-	_mTRUnitTestingClusterSimpleStructSelB = objc.RegisterName("b")
+	_mTRUnitTestingClusterSimpleStructSelB    = objc.RegisterName("b")
 	_mTRUnitTestingClusterSimpleStructSelSetB = objc.RegisterName("setB:")
-	_mTRUnitTestingClusterSimpleStructSelC = objc.RegisterName("c")
+	_mTRUnitTestingClusterSimpleStructSelC    = objc.RegisterName("c")
 	_mTRUnitTestingClusterSimpleStructSelSetC = objc.RegisterName("setC:")
-	_mTRUnitTestingClusterSimpleStructSelD = objc.RegisterName("d")
+	_mTRUnitTestingClusterSimpleStructSelD    = objc.RegisterName("d")
 	_mTRUnitTestingClusterSimpleStructSelSetD = objc.RegisterName("setD:")
-	_mTRUnitTestingClusterSimpleStructSelE = objc.RegisterName("e")
+	_mTRUnitTestingClusterSimpleStructSelE    = objc.RegisterName("e")
 	_mTRUnitTestingClusterSimpleStructSelSetE = objc.RegisterName("setE:")
-	_mTRUnitTestingClusterSimpleStructSelF = objc.RegisterName("f")
+	_mTRUnitTestingClusterSimpleStructSelF    = objc.RegisterName("f")
 	_mTRUnitTestingClusterSimpleStructSelSetF = objc.RegisterName("setF:")
-	_mTRUnitTestingClusterSimpleStructSelG = objc.RegisterName("g")
+	_mTRUnitTestingClusterSimpleStructSelG    = objc.RegisterName("g")
 	_mTRUnitTestingClusterSimpleStructSelSetG = objc.RegisterName("setG:")
-	_mTRUnitTestingClusterSimpleStructSelH = objc.RegisterName("h")
+	_mTRUnitTestingClusterSimpleStructSelH    = objc.RegisterName("h")
 	_mTRUnitTestingClusterSimpleStructSelSetH = objc.RegisterName("setH:")
 )
 
@@ -47,7 +47,9 @@ func MTRUnitTestingClusterSimpleStructFromID(id objc.ID) *MTRUnitTestingClusterS
 
 func (o *MTRUnitTestingClusterSimpleStruct) A() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetA(a *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) B() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetB(b *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) C() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetC(c *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) D() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelD)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetD(d *foundation.NSData) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) E() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelE)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetE(e *foundation.NSString) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) F() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelF)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,7 +119,9 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetF(f *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) G() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelG)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -117,11 +131,12 @@ func (o *MTRUnitTestingClusterSimpleStruct) SetG(g *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterSimpleStruct) H() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructSelH)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterSimpleStruct) SetH(h *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterSimpleStructSelSetH, h.Ptr())
 }
-

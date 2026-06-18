@@ -16,13 +16,13 @@ type HKQuantitySample struct {
 }
 
 var (
-	_clsHKQuantitySample = _objcClass("HKQuantitySample")
-	_hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDate = objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:")
-	_hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateMetadata = objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:")
+	_clsHKQuantitySample                                                             = _objcClass("HKQuantitySample")
+	_hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDate               = objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:")
+	_hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateMetadata       = objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:metadata:")
 	_hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata = objc.RegisterName("quantitySampleWithType:quantity:startDate:endDate:device:metadata:")
-	_hKQuantitySampleSelQuantityType = objc.RegisterName("quantityType")
-	_hKQuantitySampleSelQuantity = objc.RegisterName("quantity")
-	_hKQuantitySampleSelCount = objc.RegisterName("count")
+	_hKQuantitySampleSelQuantityType                                                 = objc.RegisterName("quantityType")
+	_hKQuantitySampleSelQuantity                                                     = objc.RegisterName("quantity")
+	_hKQuantitySampleSelCount                                                        = objc.RegisterName("count")
 )
 
 func HKQuantitySampleFromID(id objc.ID) *HKQuantitySample {
@@ -38,33 +38,43 @@ func HKQuantitySampleFromID(id objc.ID) *HKQuantitySample {
 // @method        quantitySampleWithType:quantity:startDate:endDate: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, and end date. @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDate(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate) *HKQuantitySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDate, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySampleFromID(_ret)
 }
 
 // @method        quantitySampleWithType:quantity:startDate:endDate:metadata: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, end date, and metadata. @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateMetadata(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKQuantitySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySampleFromID(_ret)
 }
 
 // @method        quantitySampleWithType:quantity:startDate:endDate:device:metadata: @abstract      Creates a new HKQuantitySample with the given type, quantity, start date, end date, and metadata. @param         quantityType    The type of the sample. @param         startDate       The start date of the sample. @param         endDate         The end date of the sample. @param         device          The HKDevice that generated the sample (optional). @param         metadata        Metadata for the sample (optional). @discussion    The quantity must have a unit that is compatible with the given quantity type. See -[HKQuantityType isCompatibleWithUnit:].
 func HKQuantitySampleQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata(quantityType *HKQuantityType, quantity *HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKQuantitySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQuantitySample), _hKQuantitySampleSelQuantitySampleWithTypeQuantityStartDateEndDateDeviceMetadata, quantityType.Ptr(), quantity.Ptr(), startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySampleFromID(_ret)
 }
 
 func (o *HKQuantitySample) QuantityType() *HKQuantityType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySampleSelQuantityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityTypeFromID(_ret)
 }
 
 func (o *HKQuantitySample) Quantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySampleSelQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -73,4 +83,3 @@ func (o *HKQuantitySample) Count() int {
 	_ret := objc.Send[int](o.Ptr(), _hKQuantitySampleSelCount)
 	return _ret
 }
-

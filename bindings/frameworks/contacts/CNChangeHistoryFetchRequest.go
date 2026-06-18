@@ -16,19 +16,19 @@ type CNChangeHistoryFetchRequest struct {
 }
 
 var (
-	_clsCNChangeHistoryFetchRequest = _objcClass("CNChangeHistoryFetchRequest")
-	_cNChangeHistoryFetchRequestSelStartingToken = objc.RegisterName("startingToken")
-	_cNChangeHistoryFetchRequestSelSetStartingToken = objc.RegisterName("setStartingToken:")
-	_cNChangeHistoryFetchRequestSelAdditionalContactKeyDescriptors = objc.RegisterName("additionalContactKeyDescriptors")
+	_clsCNChangeHistoryFetchRequest                                   = _objcClass("CNChangeHistoryFetchRequest")
+	_cNChangeHistoryFetchRequestSelStartingToken                      = objc.RegisterName("startingToken")
+	_cNChangeHistoryFetchRequestSelSetStartingToken                   = objc.RegisterName("setStartingToken:")
+	_cNChangeHistoryFetchRequestSelAdditionalContactKeyDescriptors    = objc.RegisterName("additionalContactKeyDescriptors")
 	_cNChangeHistoryFetchRequestSelSetAdditionalContactKeyDescriptors = objc.RegisterName("setAdditionalContactKeyDescriptors:")
-	_cNChangeHistoryFetchRequestSelShouldUnifyResults = objc.RegisterName("shouldUnifyResults")
-	_cNChangeHistoryFetchRequestSelSetShouldUnifyResults = objc.RegisterName("setShouldUnifyResults:")
-	_cNChangeHistoryFetchRequestSelMutableObjects = objc.RegisterName("mutableObjects")
-	_cNChangeHistoryFetchRequestSelSetMutableObjects = objc.RegisterName("setMutableObjects:")
-	_cNChangeHistoryFetchRequestSelIncludeGroupChanges = objc.RegisterName("includeGroupChanges")
-	_cNChangeHistoryFetchRequestSelSetIncludeGroupChanges = objc.RegisterName("setIncludeGroupChanges:")
-	_cNChangeHistoryFetchRequestSelExcludedTransactionAuthors = objc.RegisterName("excludedTransactionAuthors")
-	_cNChangeHistoryFetchRequestSelSetExcludedTransactionAuthors = objc.RegisterName("setExcludedTransactionAuthors:")
+	_cNChangeHistoryFetchRequestSelShouldUnifyResults                 = objc.RegisterName("shouldUnifyResults")
+	_cNChangeHistoryFetchRequestSelSetShouldUnifyResults              = objc.RegisterName("setShouldUnifyResults:")
+	_cNChangeHistoryFetchRequestSelMutableObjects                     = objc.RegisterName("mutableObjects")
+	_cNChangeHistoryFetchRequestSelSetMutableObjects                  = objc.RegisterName("setMutableObjects:")
+	_cNChangeHistoryFetchRequestSelIncludeGroupChanges                = objc.RegisterName("includeGroupChanges")
+	_cNChangeHistoryFetchRequestSelSetIncludeGroupChanges             = objc.RegisterName("setIncludeGroupChanges:")
+	_cNChangeHistoryFetchRequestSelExcludedTransactionAuthors         = objc.RegisterName("excludedTransactionAuthors")
+	_cNChangeHistoryFetchRequestSelSetExcludedTransactionAuthors      = objc.RegisterName("setExcludedTransactionAuthors:")
 )
 
 func CNChangeHistoryFetchRequestFromID(id objc.ID) *CNChangeHistoryFetchRequest {
@@ -44,7 +44,9 @@ func CNChangeHistoryFetchRequestFromID(id objc.ID) *CNChangeHistoryFetchRequest 
 // @abstract    Request changes made after a certain point. @discussion  If non-nil, only changes made after this point in history will be returned. If nil, a @c CNChangeHistoryDropEverythingEvent will be returned, followed by an add event for every contact and group currently in the contacts database.
 func (o *CNChangeHistoryFetchRequest) StartingToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryFetchRequestSelStartingToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *CNChangeHistoryFetchRequest) SetStartingToken(startingToken *foundation
 // @abstract    Additional keys to include in the fetched contacts. @discussion  By default, only @c CNContactIdentifierKey will be fetched. If you would like to include additional key descriptors to process the contacts, include the key descriptors you need. @c CNContactIdentifierKey will always be fetched, whether you request it or not.
 func (o *CNChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() *foundation.NSArray[CNKeyDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryFetchRequestSelAdditionalContactKeyDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[CNKeyDescriptor](_ret)
 }
 
@@ -102,4 +106,3 @@ func (o *CNChangeHistoryFetchRequest) ExcludedTransactionAuthors() *foundation.N
 func (o *CNChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_cNChangeHistoryFetchRequestSelSetExcludedTransactionAuthors, excludedTransactionAuthors)
 }
-

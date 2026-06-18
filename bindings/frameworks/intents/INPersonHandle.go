@@ -16,12 +16,12 @@ type INPersonHandle struct {
 }
 
 var (
-	_clsINPersonHandle = _objcClass("INPersonHandle")
+	_clsINPersonHandle                       = _objcClass("INPersonHandle")
 	_iNPersonHandleSelInitWithValueTypeLabel = objc.RegisterName("initWithValue:type:label:")
-	_iNPersonHandleSelInitWithValueType = objc.RegisterName("initWithValue:type:")
-	_iNPersonHandleSelValue = objc.RegisterName("value")
-	_iNPersonHandleSelType = objc.RegisterName("type")
-	_iNPersonHandleSelLabel = objc.RegisterName("label")
+	_iNPersonHandleSelInitWithValueType      = objc.RegisterName("initWithValue:type:")
+	_iNPersonHandleSelValue                  = objc.RegisterName("value")
+	_iNPersonHandleSelType                   = objc.RegisterName("type")
+	_iNPersonHandleSelLabel                  = objc.RegisterName("label")
 )
 
 func INPersonHandleFromID(id objc.ID) *INPersonHandle {
@@ -36,19 +36,25 @@ func INPersonHandleFromID(id objc.ID) *INPersonHandle {
 
 func (o *INPersonHandle) InitWithValueTypeLabel(value *foundation.NSString, type_ INPersonHandleType, label *foundation.NSString) *INPersonHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelInitWithValueTypeLabel, value.Ptr(), type_, label.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonHandleFromID(_ret)
 }
 
 func (o *INPersonHandle) InitWithValueType(value *foundation.NSString, type_ INPersonHandleType) *INPersonHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelInitWithValueType, value.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonHandleFromID(_ret)
 }
 
 func (o *INPersonHandle) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +65,8 @@ func (o *INPersonHandle) Type() INPersonHandleType {
 
 func (o *INPersonHandle) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNPersonHandleSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

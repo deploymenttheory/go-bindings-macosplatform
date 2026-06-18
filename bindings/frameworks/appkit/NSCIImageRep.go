@@ -16,10 +16,10 @@ type NSCIImageRep struct {
 }
 
 var (
-	_clsNSCIImageRep = _objcClass("NSCIImageRep")
+	_clsNSCIImageRep                    = _objcClass("NSCIImageRep")
 	_nSCIImageRepSelImageRepWithCIImage = objc.RegisterName("imageRepWithCIImage:")
-	_nSCIImageRepSelInitWithCIImage = objc.RegisterName("initWithCIImage:")
-	_nSCIImageRepSelCIImage = objc.RegisterName("CIImage")
+	_nSCIImageRepSelInitWithCIImage     = objc.RegisterName("initWithCIImage:")
+	_nSCIImageRepSelCIImage             = objc.RegisterName("CIImage")
 )
 
 func NSCIImageRepFromID(id objc.ID) *NSCIImageRep {
@@ -34,19 +34,24 @@ func NSCIImageRepFromID(id objc.ID) *NSCIImageRep {
 
 func NSCIImageRepImageRepWithCIImage(image *coreimage.CIImage) *NSCIImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCIImageRep), _nSCIImageRepSelImageRepWithCIImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCIImageRepFromID(_ret)
 }
 
 func (o *NSCIImageRep) InitWithCIImage(image *coreimage.CIImage) *NSCIImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCIImageRepSelInitWithCIImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCIImageRepFromID(_ret)
 }
 
 func (o *NSCIImageRep) CIImage() *coreimage.CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCIImageRepSelCIImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIImageFromID(_ret)
 }
-

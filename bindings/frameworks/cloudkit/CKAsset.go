@@ -16,9 +16,9 @@ type CKAsset struct {
 }
 
 var (
-	_clsCKAsset = _objcClass("CKAsset")
+	_clsCKAsset                = _objcClass("CKAsset")
 	_cKAssetSelInitWithFileURL = objc.RegisterName("initWithFileURL:")
-	_cKAssetSelFileURL = objc.RegisterName("fileURL")
+	_cKAssetSelFileURL         = objc.RegisterName("fileURL")
 )
 
 func CKAssetFromID(id objc.ID) *CKAsset {
@@ -34,13 +34,16 @@ func CKAssetFromID(id objc.ID) *CKAsset {
 // Creates an asset that references a file. - Parameters: - fileURL: The URL of the file that you want to store in CloudKit. You must provide a file URL, and it must not be `nil`. - Returns: An asset object that represents the specified file. Use this method to initialize new file-based assets that you want to transfer to iCloud. After saving an asset to the server, CloudKit doesn't delete the file at the specified URL. If you no longer need the file, you must delete it yourself. When you subsequently download a record that contains an asset, CloudKit downloads its own copy of the asset data to the local device and provides you with a URL to that file. You can assign only one record to the asset that this method returns. If you want multiple records to point to the same file, you must create separate assets for each one. - Important: CloudKit saves only the contents of the file and doesn't save the filename or any file-related metadata. To preserve the filename or any file-related metadata, save that data separately in the record.
 func (o *CKAsset) InitWithFileURL(fileURL *foundation.NSURL) *CKAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAssetSelInitWithFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKAssetFromID(_ret)
 }
 
 func (o *CKAsset) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAssetSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

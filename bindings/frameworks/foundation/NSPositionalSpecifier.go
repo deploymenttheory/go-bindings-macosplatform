@@ -15,15 +15,15 @@ type NSPositionalSpecifier struct {
 }
 
 var (
-	_clsNSPositionalSpecifier = _objcClass("NSPositionalSpecifier")
+	_clsNSPositionalSpecifier                                = _objcClass("NSPositionalSpecifier")
 	_nSPositionalSpecifierSelInitWithPositionObjectSpecifier = objc.RegisterName("initWithPosition:objectSpecifier:")
-	_nSPositionalSpecifierSelSetInsertionClassDescription = objc.RegisterName("setInsertionClassDescription:")
-	_nSPositionalSpecifierSelEvaluate = objc.RegisterName("evaluate")
-	_nSPositionalSpecifierSelPosition = objc.RegisterName("position")
-	_nSPositionalSpecifierSelInsertionContainer = objc.RegisterName("insertionContainer")
-	_nSPositionalSpecifierSelInsertionKey = objc.RegisterName("insertionKey")
-	_nSPositionalSpecifierSelInsertionIndex = objc.RegisterName("insertionIndex")
-	_nSPositionalSpecifierSelInsertionReplaces = objc.RegisterName("insertionReplaces")
+	_nSPositionalSpecifierSelSetInsertionClassDescription    = objc.RegisterName("setInsertionClassDescription:")
+	_nSPositionalSpecifierSelEvaluate                        = objc.RegisterName("evaluate")
+	_nSPositionalSpecifierSelPosition                        = objc.RegisterName("position")
+	_nSPositionalSpecifierSelInsertionContainer              = objc.RegisterName("insertionContainer")
+	_nSPositionalSpecifierSelInsertionKey                    = objc.RegisterName("insertionKey")
+	_nSPositionalSpecifierSelInsertionIndex                  = objc.RegisterName("insertionIndex")
+	_nSPositionalSpecifierSelInsertionReplaces               = objc.RegisterName("insertionReplaces")
 )
 
 func NSPositionalSpecifierFromID(id objc.ID) *NSPositionalSpecifier {
@@ -38,7 +38,9 @@ func NSPositionalSpecifierFromID(id objc.ID) *NSPositionalSpecifier {
 
 func (o *NSPositionalSpecifier) InitWithPositionObjectSpecifier(position NSInsertionPosition, specifier *NSScriptObjectSpecifier) *NSPositionalSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPositionalSpecifierSelInitWithPositionObjectSpecifier, position, specifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPositionalSpecifierFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *NSPositionalSpecifier) InsertionContainer() objc.ID {
 
 func (o *NSPositionalSpecifier) InsertionKey() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPositionalSpecifierSelInsertionKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -75,4 +79,3 @@ func (o *NSPositionalSpecifier) InsertionReplaces() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPositionalSpecifierSelInsertionReplaces)
 	return _ret
 }
-

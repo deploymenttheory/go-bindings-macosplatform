@@ -16,12 +16,12 @@ type MTRDistinguishedNameInfo struct {
 }
 
 var (
-	_clsMTRDistinguishedNameInfo = _objcClass("MTRDistinguishedNameInfo")
-	_mTRDistinguishedNameInfoSelNodeID = objc.RegisterName("nodeID")
-	_mTRDistinguishedNameInfoSelFabricID = objc.RegisterName("fabricID")
-	_mTRDistinguishedNameInfoSelRootCACertificateID = objc.RegisterName("rootCACertificateID")
+	_clsMTRDistinguishedNameInfo                            = _objcClass("MTRDistinguishedNameInfo")
+	_mTRDistinguishedNameInfoSelNodeID                      = objc.RegisterName("nodeID")
+	_mTRDistinguishedNameInfoSelFabricID                    = objc.RegisterName("fabricID")
+	_mTRDistinguishedNameInfoSelRootCACertificateID         = objc.RegisterName("rootCACertificateID")
 	_mTRDistinguishedNameInfoSelIntermediateCACertificateID = objc.RegisterName("intermediateCACertificateID")
-	_mTRDistinguishedNameInfoSelCaseAuthenticatedTags = objc.RegisterName("caseAuthenticatedTags")
+	_mTRDistinguishedNameInfoSelCaseAuthenticatedTags       = objc.RegisterName("caseAuthenticatedTags")
 )
 
 func MTRDistinguishedNameInfoFromID(id objc.ID) *MTRDistinguishedNameInfo {
@@ -37,28 +37,36 @@ func MTRDistinguishedNameInfoFromID(id objc.ID) *MTRDistinguishedNameInfo {
 // The Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
 func (o *MTRDistinguishedNameInfo) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDistinguishedNameInfoSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
 func (o *MTRDistinguishedNameInfo) FabricID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDistinguishedNameInfoSelFabricID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
 func (o *MTRDistinguishedNameInfo) RootCACertificateID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDistinguishedNameInfoSelRootCACertificateID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
 func (o *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDistinguishedNameInfoSelIntermediateCACertificateID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *MTRDistinguishedNameInfo) CaseAuthenticatedTags() *foundation.NSSet[*fo
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _mTRDistinguishedNameInfoSelCaseAuthenticatedTags)
 	return _ret
 }
-

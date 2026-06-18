@@ -14,7 +14,9 @@ import (
 func KCSIdentityErrorDomain() objc.ID { return purego.CFConstant(raw.KCSIdentityErrorDomain()) }
 
 // KCSIdentityGeneratePosixName returns the value of the CoreFoundation reference constant kCSIdentityGeneratePosixName as an objc.ID.
-func KCSIdentityGeneratePosixName() objc.ID { return purego.CFConstant(raw.KCSIdentityGeneratePosixName()) }
+func KCSIdentityGeneratePosixName() objc.ID {
+	return purego.CFConstant(raw.KCSIdentityGeneratePosixName())
+}
 
 // KWSXMLRPCProtocol returns the value of the CoreFoundation reference constant kWSXMLRPCProtocol as an objc.ID.
 func KWSXMLRPCProtocol() objc.ID { return purego.CFConstant(raw.KWSXMLRPCProtocol()) }
@@ -38,7 +40,9 @@ func KWSFaultCode() objc.ID { return purego.CFConstant(raw.KWSFaultCode()) }
 func KWSFaultExtra() objc.ID { return purego.CFConstant(raw.KWSFaultExtra()) }
 
 // KWSNetworkStreamFaultString returns the value of the CoreFoundation reference constant kWSNetworkStreamFaultString as an objc.ID.
-func KWSNetworkStreamFaultString() objc.ID { return purego.CFConstant(raw.KWSNetworkStreamFaultString()) }
+func KWSNetworkStreamFaultString() objc.ID {
+	return purego.CFConstant(raw.KWSNetworkStreamFaultString())
+}
 
 // KWSStreamErrorMessage returns the value of the CoreFoundation reference constant kWSStreamErrorMessage as an objc.ID.
 func KWSStreamErrorMessage() objc.ID { return purego.CFConstant(raw.KWSStreamErrorMessage()) }
@@ -104,8 +108,11 @@ func KWSRecordNamespaceURI() objc.ID { return purego.CFConstant(raw.KWSRecordNam
 func KWSRecordType() objc.ID { return purego.CFConstant(raw.KWSRecordType()) }
 
 // KWSMethodInvocationResultParameterName returns the value of the CoreFoundation reference constant kWSMethodInvocationResultParameterName as an objc.ID.
-func KWSMethodInvocationResultParameterName() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationResultParameterName()) }
+func KWSMethodInvocationResultParameterName() objc.ID {
+	return purego.CFConstant(raw.KWSMethodInvocationResultParameterName())
+}
 
 // KWSMethodInvocationTimeoutValue returns the value of the CoreFoundation reference constant kWSMethodInvocationTimeoutValue as an objc.ID.
-func KWSMethodInvocationTimeoutValue() objc.ID { return purego.CFConstant(raw.KWSMethodInvocationTimeoutValue()) }
-
+func KWSMethodInvocationTimeoutValue() objc.ID {
+	return purego.CFConstant(raw.KWSMethodInvocationTimeoutValue())
+}

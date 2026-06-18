@@ -86,4 +86,3 @@ type ProjectSectionContentable interface {
 }
 
 var _ ProjectSectionContentable = (*ProjectSectionContent)(nil)
-

@@ -84,4 +84,3 @@ type Attachmentable interface {
 }
 
 var _ Attachmentable = (*Attachment)(nil)
-

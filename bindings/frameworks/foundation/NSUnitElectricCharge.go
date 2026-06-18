@@ -15,11 +15,11 @@ type NSUnitElectricCharge struct {
 }
 
 var (
-	_clsNSUnitElectricCharge = _objcClass("NSUnitElectricCharge")
-	_nSUnitElectricChargeSelCoulombs = objc.RegisterName("coulombs")
-	_nSUnitElectricChargeSelMegaampereHours = objc.RegisterName("megaampereHours")
-	_nSUnitElectricChargeSelKiloampereHours = objc.RegisterName("kiloampereHours")
-	_nSUnitElectricChargeSelAmpereHours = objc.RegisterName("ampereHours")
+	_clsNSUnitElectricCharge                 = _objcClass("NSUnitElectricCharge")
+	_nSUnitElectricChargeSelCoulombs         = objc.RegisterName("coulombs")
+	_nSUnitElectricChargeSelMegaampereHours  = objc.RegisterName("megaampereHours")
+	_nSUnitElectricChargeSelKiloampereHours  = objc.RegisterName("kiloampereHours")
+	_nSUnitElectricChargeSelAmpereHours      = objc.RegisterName("ampereHours")
 	_nSUnitElectricChargeSelMilliampereHours = objc.RegisterName("milliampereHours")
 	_nSUnitElectricChargeSelMicroampereHours = objc.RegisterName("microampereHours")
 )
@@ -36,37 +36,48 @@ func NSUnitElectricChargeFromID(id objc.ID) *NSUnitElectricCharge {
 
 func NSUnitElectricChargeCoulombs() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelCoulombs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
 
 func NSUnitElectricChargeMegaampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMegaampereHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
 
 func NSUnitElectricChargeKiloampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelKiloampereHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
 
 func NSUnitElectricChargeAmpereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelAmpereHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
 
 func NSUnitElectricChargeMilliampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMilliampereHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
 
 func NSUnitElectricChargeMicroampereHours() *NSUnitElectricCharge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitElectricCharge), _nSUnitElectricChargeSelMicroampereHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitElectricChargeFromID(_ret)
 }
-

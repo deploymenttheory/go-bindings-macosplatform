@@ -17,7 +17,9 @@ type MTRClusterThreadNetworkDiagnostics struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterThreadNetworkDiagnostics].
-func (x *MTRClusterThreadNetworkDiagnostics) Unwrap() *raw.MTRClusterThreadNetworkDiagnostics { return x.inner }
+func (x *MTRClusterThreadNetworkDiagnostics) Unwrap() *raw.MTRClusterThreadNetworkDiagnostics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -415,9 +417,13 @@ func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithPara
 	return x.inner.ReadAttributeRouteTableListWithParams(params)
 }
 
-func (x *MTRClusterThreadNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterThreadNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterThreadNetworkDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterThreadNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterThreadNetworkDiagnosticsable is the interface implemented by [MTRClusterThreadNetworkDiagnostics], for mocking and DI.
 type MTRClusterThreadNetworkDiagnosticsable interface {
@@ -499,4 +505,3 @@ type MTRClusterThreadNetworkDiagnosticsable interface {
 }
 
 var _ MTRClusterThreadNetworkDiagnosticsable = (*MTRClusterThreadNetworkDiagnostics)(nil)
-

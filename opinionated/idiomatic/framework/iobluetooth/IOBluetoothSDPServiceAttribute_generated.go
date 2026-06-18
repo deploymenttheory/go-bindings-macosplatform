@@ -76,4 +76,3 @@ type IOBluetoothSDPServiceAttributeable interface {
 }
 
 var _ IOBluetoothSDPServiceAttributeable = (*IOBluetoothSDPServiceAttribute)(nil)
-

@@ -17,10 +17,10 @@ type SNClassificationResult struct {
 }
 
 var (
-	_clsSNClassificationResult = _objcClass("SNClassificationResult")
+	_clsSNClassificationResult                            = _objcClass("SNClassificationResult")
 	_sNClassificationResultSelClassificationForIdentifier = objc.RegisterName("classificationForIdentifier:")
-	_sNClassificationResultSelClassifications = objc.RegisterName("classifications")
-	_sNClassificationResultSelTimeRange = objc.RegisterName("timeRange")
+	_sNClassificationResultSelClassifications             = objc.RegisterName("classifications")
+	_sNClassificationResultSelTimeRange                   = objc.RegisterName("timeRange")
 )
 
 func SNClassificationResultFromID(id objc.ID) *SNClassificationResult {
@@ -36,14 +36,18 @@ func SNClassificationResultFromID(id objc.ID) *SNClassificationResult {
 // Retrieves the classification candidate with the specified identifier. - Parameter identifier: An identifier on which to query for a particular classification candidate. The query will match to any classification candidate whose `identifier` property (see `identifier` property of `SNClassification`) contains a value equal to the provided argument. - Returns: The classification candidate which has the specified identifier, if it exists. If no such candidate exists, `nil` will be returned.
 func (o *SNClassificationResult) ClassificationForIdentifier(identifier *foundation.NSString) *SNClassification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassificationResultSelClassificationForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SNClassificationFromID(_ret)
 }
 
 // All classification candidates, sorted with highest confidence first.
 func (o *SNClassificationResult) Classifications() *foundation.NSArray[*SNClassification] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNClassificationResultSelClassifications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SNClassification](_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *SNClassificationResult) TimeRange() coremedia.CMTimeRange {
 	_ret := objc.Send[coremedia.CMTimeRange](o.Ptr(), _sNClassificationResultSelTimeRange)
 	return _ret
 }
-

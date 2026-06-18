@@ -16,9 +16,9 @@ type MLSequenceConstraint struct {
 }
 
 var (
-	_clsMLSequenceConstraint = _objcClass("MLSequenceConstraint")
+	_clsMLSequenceConstraint                 = _objcClass("MLSequenceConstraint")
 	_mLSequenceConstraintSelValueDescription = objc.RegisterName("valueDescription")
-	_mLSequenceConstraintSelCountRange = objc.RegisterName("countRange")
+	_mLSequenceConstraintSelCountRange       = objc.RegisterName("countRange")
 )
 
 func MLSequenceConstraintFromID(id objc.ID) *MLSequenceConstraint {
@@ -33,7 +33,9 @@ func MLSequenceConstraintFromID(id objc.ID) *MLSequenceConstraint {
 
 func (o *MLSequenceConstraint) ValueDescription() *MLFeatureDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLSequenceConstraintSelValueDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureDescriptionFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *MLSequenceConstraint) CountRange() foundation.NSRange {
 	_ret := objc.Send[foundation.NSRange](o.Ptr(), _mLSequenceConstraintSelCountRange)
 	return _ret
 }
-

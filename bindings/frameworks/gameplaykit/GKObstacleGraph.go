@@ -18,24 +18,24 @@ type GKObstacleGraph[NodeType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKObstacleGraph = _objcClass("GKObstacleGraph")
-	_gKObstacleGraphSelGraphWithObstaclesBufferRadius = objc.RegisterName("graphWithObstacles:bufferRadius:")
-	_gKObstacleGraphSelInitWithObstaclesBufferRadius = objc.RegisterName("initWithObstacles:bufferRadius:")
-	_gKObstacleGraphSelGraphWithObstaclesBufferRadiusNodeClass = objc.RegisterName("graphWithObstacles:bufferRadius:nodeClass:")
-	_gKObstacleGraphSelInitWithObstaclesBufferRadiusNodeClass = objc.RegisterName("initWithObstacles:bufferRadius:nodeClass:")
-	_gKObstacleGraphSelConnectNodeUsingObstacles = objc.RegisterName("connectNodeUsingObstacles:")
-	_gKObstacleGraphSelConnectNodeUsingObstaclesIgnoringObstacles = objc.RegisterName("connectNodeUsingObstacles:ignoringObstacles:")
+	_clsGKObstacleGraph                                                         = _objcClass("GKObstacleGraph")
+	_gKObstacleGraphSelGraphWithObstaclesBufferRadius                           = objc.RegisterName("graphWithObstacles:bufferRadius:")
+	_gKObstacleGraphSelInitWithObstaclesBufferRadius                            = objc.RegisterName("initWithObstacles:bufferRadius:")
+	_gKObstacleGraphSelGraphWithObstaclesBufferRadiusNodeClass                  = objc.RegisterName("graphWithObstacles:bufferRadius:nodeClass:")
+	_gKObstacleGraphSelInitWithObstaclesBufferRadiusNodeClass                   = objc.RegisterName("initWithObstacles:bufferRadius:nodeClass:")
+	_gKObstacleGraphSelConnectNodeUsingObstacles                                = objc.RegisterName("connectNodeUsingObstacles:")
+	_gKObstacleGraphSelConnectNodeUsingObstaclesIgnoringObstacles               = objc.RegisterName("connectNodeUsingObstacles:ignoringObstacles:")
 	_gKObstacleGraphSelConnectNodeUsingObstaclesIgnoringBufferRadiusOfObstacles = objc.RegisterName("connectNodeUsingObstacles:ignoringBufferRadiusOfObstacles:")
-	_gKObstacleGraphSelAddObstacles = objc.RegisterName("addObstacles:")
-	_gKObstacleGraphSelRemoveObstacles = objc.RegisterName("removeObstacles:")
-	_gKObstacleGraphSelRemoveAllObstacles = objc.RegisterName("removeAllObstacles")
-	_gKObstacleGraphSelNodesForObstacle = objc.RegisterName("nodesForObstacle:")
-	_gKObstacleGraphSelLockConnectionFromNodeToNode = objc.RegisterName("lockConnectionFromNode:toNode:")
-	_gKObstacleGraphSelUnlockConnectionFromNodeToNode = objc.RegisterName("unlockConnectionFromNode:toNode:")
-	_gKObstacleGraphSelIsConnectionLockedFromNodeToNode = objc.RegisterName("isConnectionLockedFromNode:toNode:")
-	_gKObstacleGraphSelClassForGenericArgumentAtIndex = objc.RegisterName("classForGenericArgumentAtIndex:")
-	_gKObstacleGraphSelObstacles = objc.RegisterName("obstacles")
-	_gKObstacleGraphSelBufferRadius = objc.RegisterName("bufferRadius")
+	_gKObstacleGraphSelAddObstacles                                             = objc.RegisterName("addObstacles:")
+	_gKObstacleGraphSelRemoveObstacles                                          = objc.RegisterName("removeObstacles:")
+	_gKObstacleGraphSelRemoveAllObstacles                                       = objc.RegisterName("removeAllObstacles")
+	_gKObstacleGraphSelNodesForObstacle                                         = objc.RegisterName("nodesForObstacle:")
+	_gKObstacleGraphSelLockConnectionFromNodeToNode                             = objc.RegisterName("lockConnectionFromNode:toNode:")
+	_gKObstacleGraphSelUnlockConnectionFromNodeToNode                           = objc.RegisterName("unlockConnectionFromNode:toNode:")
+	_gKObstacleGraphSelIsConnectionLockedFromNodeToNode                         = objc.RegisterName("isConnectionLockedFromNode:toNode:")
+	_gKObstacleGraphSelClassForGenericArgumentAtIndex                           = objc.RegisterName("classForGenericArgumentAtIndex:")
+	_gKObstacleGraphSelObstacles                                                = objc.RegisterName("obstacles")
+	_gKObstacleGraphSelBufferRadius                                             = objc.RegisterName("bufferRadius")
 )
 
 func GKObstacleGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKObstacleGraph[NodeType] {
@@ -51,26 +51,34 @@ func GKObstacleGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKObstacleGra
 // Creates an optimal bidirectional graph based on a list of obstacles. Each vertex of each obstacle is extruded and a connection is made between each vertex that does not intersect an obstacle Guaranteed not to have any edges which intersect obstacles. Same effect as [[GKObstacleGraph alloc] init], setting bufferRadius, and then calling addObstacles. @param obstacles a list of obstacles to create the graph from @param bufferRadius the circular radius of a potential agent that will navigate this graph.  Obstacles are extruded by this amount to create the graph.  Must be positive.  Negative values are clipped to 0.0f
 func GKObstacleGraphGraphWithObstaclesBufferRadius(obstacles *foundation.NSArray[*GKPolygonObstacle], bufferRadius float32) *GKObstacleGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKObstacleGraph), _gKObstacleGraphSelGraphWithObstaclesBufferRadius, obstacles.Ptr(), bufferRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKObstacleGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKObstacleGraph[NodeType]) InitWithObstaclesBufferRadius(obstacles *foundation.NSArray[*GKPolygonObstacle], bufferRadius float32) *GKObstacleGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKObstacleGraphSelInitWithObstaclesBufferRadius, obstacles.Ptr(), bufferRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKObstacleGraphFromID[NodeType](_ret)
 }
 
 // Creates an optimal bidirectional graph based on a list of obstacles. Each vertex of each obstacle is extruded and a connection is made between each vertex that does not intersect an obstacle Guaranteed not to have any edges which intersect obstacles. Same effect as [[GKObstacleGraph alloc] init], setting bufferRadius, and then calling addObstacles. @param obstacles a list of obstacles to create the graph from @param bufferRadius the circular radius of a potential agent that will navigate this graph.  Obstacles are extruded by this amount to create the graph.  Must be positive.  Negative values are clipped to 0.0f @param nodeClass the class of the nodes that this graph should create.  Must descend from GKGraphNode2D
 func GKObstacleGraphGraphWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NSArray[*GKPolygonObstacle], bufferRadius float32, nodeClass objc.Class) *GKObstacleGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKObstacleGraph), _gKObstacleGraphSelGraphWithObstaclesBufferRadiusNodeClass, obstacles.Ptr(), bufferRadius, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKObstacleGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKObstacleGraph[NodeType]) InitWithObstaclesBufferRadiusNodeClass(obstacles *foundation.NSArray[*GKPolygonObstacle], bufferRadius float32, nodeClass objc.Class) *GKObstacleGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKObstacleGraphSelInitWithObstaclesBufferRadiusNodeClass, obstacles.Ptr(), bufferRadius, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKObstacleGraphFromID[NodeType](_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *GKObstacleGraph[NodeType]) RemoveAllObstacles() {
 // Returns an array of the graph nodes associated with a given obstacle @param obstacle the obstacle who's nodes are to be retrieved
 func (o *GKObstacleGraph[NodeType]) NodesForObstacle(obstacle *GKPolygonObstacle) *foundation.NSArray[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKObstacleGraphSelNodesForObstacle, obstacle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[NodeType](_ret)
 }
 
@@ -135,7 +145,9 @@ func (o *GKObstacleGraph[NodeType]) ClassForGenericArgumentAtIndex(index uint) o
 
 func (o *GKObstacleGraph[NodeType]) Obstacles() *foundation.NSArray[*GKPolygonObstacle] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKObstacleGraphSelObstacles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPolygonObstacle](_ret)
 }
 
@@ -143,4 +155,3 @@ func (o *GKObstacleGraph[NodeType]) BufferRadius() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKObstacleGraphSelBufferRadius)
 	return _ret
 }
-

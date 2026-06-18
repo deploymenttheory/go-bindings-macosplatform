@@ -17,7 +17,9 @@ type ScannerFunctionalUnitNegativeTransparency struct {
 }
 
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitNegativeTransparency].
-func (x *ScannerFunctionalUnitNegativeTransparency) Unwrap() *raw.ICScannerFunctionalUnitNegativeTransparency { return x.inner }
+func (x *ScannerFunctionalUnitNegativeTransparency) Unwrap() *raw.ICScannerFunctionalUnitNegativeTransparency {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -123,7 +125,9 @@ func (x *ScannerFunctionalUnitNegativeTransparency) DocumentSize() corefoundatio
 	return x.inner.DocumentSize()
 }
 
-func (x *ScannerFunctionalUnitNegativeTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+func (x *ScannerFunctionalUnitNegativeTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
+	return &x.inner.ICScannerFunctionalUnit
+}
 
 // ScannerFunctionalUnitNegativeTransparencyable is the interface implemented by [ScannerFunctionalUnitNegativeTransparency], for mocking and DI.
 type ScannerFunctionalUnitNegativeTransparencyable interface {
@@ -146,4 +150,3 @@ type ScannerFunctionalUnitNegativeTransparencyable interface {
 }
 
 var _ ScannerFunctionalUnitNegativeTransparencyable = (*ScannerFunctionalUnitNegativeTransparency)(nil)
-

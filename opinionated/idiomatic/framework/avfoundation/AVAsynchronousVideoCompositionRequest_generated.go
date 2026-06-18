@@ -19,7 +19,9 @@ type AsynchronousVideoCompositionRequest struct {
 }
 
 // Unwrap returns the underlying [raw.AVAsynchronousVideoCompositionRequest].
-func (x *AsynchronousVideoCompositionRequest) Unwrap() *raw.AVAsynchronousVideoCompositionRequest { return x.inner }
+func (x *AsynchronousVideoCompositionRequest) Unwrap() *raw.AVAsynchronousVideoCompositionRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -149,4 +151,3 @@ type AsynchronousVideoCompositionRequestable interface {
 }
 
 var _ AsynchronousVideoCompositionRequestable = (*AsynchronousVideoCompositionRequest)(nil)
-

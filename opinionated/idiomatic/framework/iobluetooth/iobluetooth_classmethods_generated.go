@@ -313,4 +313,3 @@ func WithOBEXSession(inOBEXSession *raw.IOBluetoothOBEXSession) *OBEXFileTransfe
 	}
 	return &OBEXFileTransferServices{inner: _r}
 }
-

@@ -16,16 +16,16 @@ type MTRClusterRefrigeratorAlarm struct {
 }
 
 var (
-	_clsMTRClusterRefrigeratorAlarm = _objcClass("MTRClusterRefrigeratorAlarm")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeMaskWithParams = objc.RegisterName("readAttributeMaskWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeStateWithParams = objc.RegisterName("readAttributeStateWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeSupportedWithParams = objc.RegisterName("readAttributeSupportedWithParams:")
+	_clsMTRClusterRefrigeratorAlarm                                            = _objcClass("MTRClusterRefrigeratorAlarm")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeMaskWithParams                 = objc.RegisterName("readAttributeMaskWithParams:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeStateWithParams                = objc.RegisterName("readAttributeStateWithParams:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeSupportedWithParams            = objc.RegisterName("readAttributeSupportedWithParams:")
 	_mTRClusterRefrigeratorAlarmSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterRefrigeratorAlarmFromID(id objc.ID) *MTRClusterRefrigeratorAlarm {
@@ -81,7 +81,8 @@ func (o *MTRClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithParams(par
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterRefrigeratorAlarm) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRefrigeratorAlarm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterRefrigeratorAlarmFromID(_ret)
 }
-

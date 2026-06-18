@@ -16,10 +16,10 @@ type MKAddress struct {
 }
 
 var (
-	_clsMKAddress = _objcClass("MKAddress")
+	_clsMKAddress                                = _objcClass("MKAddress")
 	_mKAddressSelInitWithFullAddressShortAddress = objc.RegisterName("initWithFullAddress:shortAddress:")
-	_mKAddressSelFullAddress = objc.RegisterName("fullAddress")
-	_mKAddressSelShortAddress = objc.RegisterName("shortAddress")
+	_mKAddressSelFullAddress                     = objc.RegisterName("fullAddress")
+	_mKAddressSelShortAddress                    = objc.RegisterName("shortAddress")
 )
 
 func MKAddressFromID(id objc.ID) *MKAddress {
@@ -34,19 +34,24 @@ func MKAddressFromID(id objc.ID) *MKAddress {
 
 func (o *MKAddress) InitWithFullAddressShortAddress(fullAddress *foundation.NSString, shortAddress *foundation.NSString) *MKAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressSelInitWithFullAddressShortAddress, fullAddress.Ptr(), shortAddress.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFromID(_ret)
 }
 
 func (o *MKAddress) FullAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressSelFullAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddress) ShortAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressSelShortAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

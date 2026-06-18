@@ -16,10 +16,10 @@ type CMIOExtensionClient struct {
 }
 
 var (
-	_clsCMIOExtensionClient = _objcClass("CMIOExtensionClient")
-	_cMIOExtensionClientSelClientID = objc.RegisterName("clientID")
+	_clsCMIOExtensionClient          = _objcClass("CMIOExtensionClient")
+	_cMIOExtensionClientSelClientID  = objc.RegisterName("clientID")
 	_cMIOExtensionClientSelSigningID = objc.RegisterName("signingID")
-	_cMIOExtensionClientSelPid = objc.RegisterName("pid")
+	_cMIOExtensionClientSelPid       = objc.RegisterName("pid")
 )
 
 func CMIOExtensionClientFromID(id objc.ID) *CMIOExtensionClient {
@@ -35,14 +35,18 @@ func CMIOExtensionClientFromID(id objc.ID) *CMIOExtensionClient {
 // @property clientID @abstract The client unique identifier.
 func (o *CMIOExtensionClient) ClientID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionClientSelClientID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @property signingID @abstract The client's signing identifier.
 func (o *CMIOExtensionClient) SigningID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionClientSelSigningID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *CMIOExtensionClient) Pid() int {
 	_ret := objc.Send[int](o.Ptr(), _cMIOExtensionClientSelPid)
 	return _ret
 }
-

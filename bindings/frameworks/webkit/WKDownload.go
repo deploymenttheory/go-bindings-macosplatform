@@ -16,13 +16,13 @@ type WKDownload struct {
 }
 
 var (
-	_clsWKDownload = _objcClass("WKDownload")
-	_wKDownloadSelCancel = objc.RegisterName("cancel:")
-	_wKDownloadSelOriginalRequest = objc.RegisterName("originalRequest")
-	_wKDownloadSelWebView = objc.RegisterName("webView")
-	_wKDownloadSelDelegate = objc.RegisterName("delegate")
-	_wKDownloadSelSetDelegate = objc.RegisterName("setDelegate:")
-	_wKDownloadSelIsUserInitiated = objc.RegisterName("isUserInitiated")
+	_clsWKDownload                 = _objcClass("WKDownload")
+	_wKDownloadSelCancel           = objc.RegisterName("cancel:")
+	_wKDownloadSelOriginalRequest  = objc.RegisterName("originalRequest")
+	_wKDownloadSelWebView          = objc.RegisterName("webView")
+	_wKDownloadSelDelegate         = objc.RegisterName("delegate")
+	_wKDownloadSelSetDelegate      = objc.RegisterName("setDelegate:")
+	_wKDownloadSelIsUserInitiated  = objc.RegisterName("isUserInitiated")
 	_wKDownloadSelOriginatingFrame = objc.RegisterName("originatingFrame")
 )
 
@@ -52,13 +52,17 @@ func (o *WKDownload) Cancel(completionHandler func(*foundation.NSData)) {
 
 func (o *WKDownload) OriginalRequest() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginalRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
 func (o *WKDownload) WebView() *WKWebView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelWebView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewFromID(_ret)
 }
 
@@ -78,7 +82,8 @@ func (o *WKDownload) IsUserInitiated() bool {
 
 func (o *WKDownload) OriginatingFrame() *WKFrameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKDownloadSelOriginatingFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKFrameInfoFromID(_ret)
 }
-

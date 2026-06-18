@@ -13,7 +13,7 @@ type IOUSBHostAbortOption uint64
 
 const (
 	IOUSBHostAbortOptionAsynchronous IOUSBHostAbortOption = 0
-	IOUSBHostAbortOptionSynchronous IOUSBHostAbortOption = 1
+	IOUSBHostAbortOptionSynchronous  IOUSBHostAbortOption = 1
 )
 
 func (e IOUSBHostAbortOption) String() string {
@@ -31,7 +31,7 @@ func (e IOUSBHostAbortOption) String() string {
 type IOUSBHostCIControllerState int64
 
 const (
-	IOUSBHostCIControllerStateOff IOUSBHostCIControllerState = 0
+	IOUSBHostCIControllerStateOff    IOUSBHostCIControllerState = 0
 	IOUSBHostCIControllerStatePaused IOUSBHostCIControllerState = 1
 	IOUSBHostCIControllerStateActive IOUSBHostCIControllerState = 2
 )
@@ -53,14 +53,14 @@ func (e IOUSBHostCIControllerState) String() string {
 type IOUSBHostCIDeviceSpeed int64
 
 const (
-	IOUSBHostCIDeviceSpeedNone IOUSBHostCIDeviceSpeed = 0
-	IOUSBHostCIDeviceSpeedFull IOUSBHostCIDeviceSpeed = 1
-	IOUSBHostCIDeviceSpeedLow IOUSBHostCIDeviceSpeed = 2
-	IOUSBHostCIDeviceSpeedHigh IOUSBHostCIDeviceSpeed = 3
-	IOUSBHostCIDeviceSpeedSuper IOUSBHostCIDeviceSpeed = 4
-	IOUSBHostCIDeviceSpeedSuperPlus IOUSBHostCIDeviceSpeed = 5
+	IOUSBHostCIDeviceSpeedNone         IOUSBHostCIDeviceSpeed = 0
+	IOUSBHostCIDeviceSpeedFull         IOUSBHostCIDeviceSpeed = 1
+	IOUSBHostCIDeviceSpeedLow          IOUSBHostCIDeviceSpeed = 2
+	IOUSBHostCIDeviceSpeedHigh         IOUSBHostCIDeviceSpeed = 3
+	IOUSBHostCIDeviceSpeedSuper        IOUSBHostCIDeviceSpeed = 4
+	IOUSBHostCIDeviceSpeedSuperPlus    IOUSBHostCIDeviceSpeed = 5
 	IOUSBHostCIDeviceSpeedSuperPlusBy2 IOUSBHostCIDeviceSpeed = 6
-	IOUSBHostCIDeviceSpeedOther IOUSBHostCIDeviceSpeed = 7
+	IOUSBHostCIDeviceSpeedOther        IOUSBHostCIDeviceSpeed = 7
 )
 
 func (e IOUSBHostCIDeviceSpeed) String() string {
@@ -91,8 +91,8 @@ type IOUSBHostCIDeviceState int64
 
 const (
 	IOUSBHostCIDeviceStateDestroyed IOUSBHostCIDeviceState = 0
-	IOUSBHostCIDeviceStatePaused IOUSBHostCIDeviceState = 1
-	IOUSBHostCIDeviceStateActive IOUSBHostCIDeviceState = 2
+	IOUSBHostCIDeviceStatePaused    IOUSBHostCIDeviceState = 1
+	IOUSBHostCIDeviceStateActive    IOUSBHostCIDeviceState = 2
 )
 
 func (e IOUSBHostCIDeviceState) String() string {
@@ -113,9 +113,9 @@ type IOUSBHostCIEndpointState int64
 
 const (
 	IOUSBHostCIEndpointStateDestroyed IOUSBHostCIEndpointState = 0
-	IOUSBHostCIEndpointStateHalted IOUSBHostCIEndpointState = 1
-	IOUSBHostCIEndpointStatePaused IOUSBHostCIEndpointState = 2
-	IOUSBHostCIEndpointStateActive IOUSBHostCIEndpointState = 3
+	IOUSBHostCIEndpointStateHalted    IOUSBHostCIEndpointState = 1
+	IOUSBHostCIEndpointStatePaused    IOUSBHostCIEndpointState = 2
+	IOUSBHostCIEndpointStateActive    IOUSBHostCIEndpointState = 3
 )
 
 func (e IOUSBHostCIEndpointState) String() string {
@@ -137,19 +137,19 @@ func (e IOUSBHostCIEndpointState) String() string {
 type IOUSBHostCIExceptionType int64
 
 const (
-	IOUSBHostCIExceptionTypeUnknown IOUSBHostCIExceptionType = 0
-	IOUSBHostCIExceptionTypeCapabilitiesInvalid IOUSBHostCIExceptionType = 1
-	IOUSBHostCIExceptionTypeTerminated IOUSBHostCIExceptionType = 2
-	IOUSBHostCIExceptionTypeCommandReadCollision IOUSBHostCIExceptionType = 3
-	IOUSBHostCIExceptionTypeCommandWriteFailed IOUSBHostCIExceptionType = 4
-	IOUSBHostCIExceptionTypeCommandTimeout IOUSBHostCIExceptionType = 5
-	IOUSBHostCIExceptionTypeCommandFailure IOUSBHostCIExceptionType = 6
-	IOUSBHostCIExceptionTypeInterruptInvalid IOUSBHostCIExceptionType = 7
-	IOUSBHostCIExceptionTypeInterruptOverflow IOUSBHostCIExceptionType = 8
+	IOUSBHostCIExceptionTypeUnknown               IOUSBHostCIExceptionType = 0
+	IOUSBHostCIExceptionTypeCapabilitiesInvalid   IOUSBHostCIExceptionType = 1
+	IOUSBHostCIExceptionTypeTerminated            IOUSBHostCIExceptionType = 2
+	IOUSBHostCIExceptionTypeCommandReadCollision  IOUSBHostCIExceptionType = 3
+	IOUSBHostCIExceptionTypeCommandWriteFailed    IOUSBHostCIExceptionType = 4
+	IOUSBHostCIExceptionTypeCommandTimeout        IOUSBHostCIExceptionType = 5
+	IOUSBHostCIExceptionTypeCommandFailure        IOUSBHostCIExceptionType = 6
+	IOUSBHostCIExceptionTypeInterruptInvalid      IOUSBHostCIExceptionType = 7
+	IOUSBHostCIExceptionTypeInterruptOverflow     IOUSBHostCIExceptionType = 8
 	IOUSBHostCIExceptionTypeDoorbellReadCollision IOUSBHostCIExceptionType = 9
-	IOUSBHostCIExceptionTypeDoorbellOverflow IOUSBHostCIExceptionType = 10
-	IOUSBHostCIExceptionTypeProtocolError IOUSBHostCIExceptionType = 11
-	IOUSBHostCIExceptionTypeFrameUpdateError IOUSBHostCIExceptionType = 12
+	IOUSBHostCIExceptionTypeDoorbellOverflow      IOUSBHostCIExceptionType = 10
+	IOUSBHostCIExceptionTypeProtocolError         IOUSBHostCIExceptionType = 11
+	IOUSBHostCIExceptionTypeFrameUpdateError      IOUSBHostCIExceptionType = 12
 )
 
 func (e IOUSBHostCIExceptionType) String() string {
@@ -189,19 +189,19 @@ func (e IOUSBHostCIExceptionType) String() string {
 type IOUSBHostCILinkState int64
 
 const (
-	IOUSBHostCILinkStateU0 IOUSBHostCILinkState = 0
-	IOUSBHostCILinkStateU1 IOUSBHostCILinkState = 1
-	IOUSBHostCILinkStateU2 IOUSBHostCILinkState = 2
-	IOUSBHostCILinkStateU3 IOUSBHostCILinkState = 3
-	IOUSBHostCILinkStateDisabled IOUSBHostCILinkState = 4
-	IOUSBHostCILinkStateRxDetect IOUSBHostCILinkState = 5
-	IOUSBHostCILinkStateInactive IOUSBHostCILinkState = 6
-	IOUSBHostCILinkStatePolling IOUSBHostCILinkState = 7
-	IOUSBHostCILinkStateRecovery IOUSBHostCILinkState = 8
-	IOUSBHostCILinkStateReset IOUSBHostCILinkState = 9
+	IOUSBHostCILinkStateU0         IOUSBHostCILinkState = 0
+	IOUSBHostCILinkStateU1         IOUSBHostCILinkState = 1
+	IOUSBHostCILinkStateU2         IOUSBHostCILinkState = 2
+	IOUSBHostCILinkStateU3         IOUSBHostCILinkState = 3
+	IOUSBHostCILinkStateDisabled   IOUSBHostCILinkState = 4
+	IOUSBHostCILinkStateRxDetect   IOUSBHostCILinkState = 5
+	IOUSBHostCILinkStateInactive   IOUSBHostCILinkState = 6
+	IOUSBHostCILinkStatePolling    IOUSBHostCILinkState = 7
+	IOUSBHostCILinkStateRecovery   IOUSBHostCILinkState = 8
+	IOUSBHostCILinkStateReset      IOUSBHostCILinkState = 9
 	IOUSBHostCILinkStateCompliance IOUSBHostCILinkState = 10
-	IOUSBHostCILinkStateTest IOUSBHostCILinkState = 11
-	IOUSBHostCILinkStateResume IOUSBHostCILinkState = 15
+	IOUSBHostCILinkStateTest       IOUSBHostCILinkState = 11
+	IOUSBHostCILinkStateResume     IOUSBHostCILinkState = 15
 )
 
 func (e IOUSBHostCILinkState) String() string {
@@ -241,20 +241,20 @@ func (e IOUSBHostCILinkState) String() string {
 type IOUSBHostCIMessageStatus int64
 
 const (
-	IOUSBHostCIMessageStatusReserved IOUSBHostCIMessageStatus = 0
-	IOUSBHostCIMessageStatusSuccess IOUSBHostCIMessageStatus = 1
-	IOUSBHostCIMessageStatusOffline IOUSBHostCIMessageStatus = 2
-	IOUSBHostCIMessageStatusNotPermitted IOUSBHostCIMessageStatus = 3
-	IOUSBHostCIMessageStatusBadArgument IOUSBHostCIMessageStatus = 4
-	IOUSBHostCIMessageStatusTimeout IOUSBHostCIMessageStatus = 5
-	IOUSBHostCIMessageStatusNoResources IOUSBHostCIMessageStatus = 6
-	IOUSBHostCIMessageStatusEndpointStopped IOUSBHostCIMessageStatus = 7
-	IOUSBHostCIMessageStatusProtocolError IOUSBHostCIMessageStatus = 8
-	IOUSBHostCIMessageStatusTransactionError IOUSBHostCIMessageStatus = 9
-	IOUSBHostCIMessageStatusOverrunError IOUSBHostCIMessageStatus = 10
-	IOUSBHostCIMessageStatusStallError IOUSBHostCIMessageStatus = 11
+	IOUSBHostCIMessageStatusReserved           IOUSBHostCIMessageStatus = 0
+	IOUSBHostCIMessageStatusSuccess            IOUSBHostCIMessageStatus = 1
+	IOUSBHostCIMessageStatusOffline            IOUSBHostCIMessageStatus = 2
+	IOUSBHostCIMessageStatusNotPermitted       IOUSBHostCIMessageStatus = 3
+	IOUSBHostCIMessageStatusBadArgument        IOUSBHostCIMessageStatus = 4
+	IOUSBHostCIMessageStatusTimeout            IOUSBHostCIMessageStatus = 5
+	IOUSBHostCIMessageStatusNoResources        IOUSBHostCIMessageStatus = 6
+	IOUSBHostCIMessageStatusEndpointStopped    IOUSBHostCIMessageStatus = 7
+	IOUSBHostCIMessageStatusProtocolError      IOUSBHostCIMessageStatus = 8
+	IOUSBHostCIMessageStatusTransactionError   IOUSBHostCIMessageStatus = 9
+	IOUSBHostCIMessageStatusOverrunError       IOUSBHostCIMessageStatus = 10
+	IOUSBHostCIMessageStatusStallError         IOUSBHostCIMessageStatus = 11
 	IOUSBHostCIMessageStatusMissedServiceError IOUSBHostCIMessageStatus = 12
-	IOUSBHostCIMessageStatusError IOUSBHostCIMessageStatus = 13
+	IOUSBHostCIMessageStatusError              IOUSBHostCIMessageStatus = 13
 )
 
 func (e IOUSBHostCIMessageStatus) String() string {
@@ -296,43 +296,43 @@ func (e IOUSBHostCIMessageStatus) String() string {
 type IOUSBHostCIMessageType int64
 
 const (
-	IOUSBHostCIMessageTypeControllerCapabilities IOUSBHostCIMessageType = 0
-	IOUSBHostCIMessageTypePortCapabilities IOUSBHostCIMessageType = 1
-	IOUSBHostCIMessageTypePortEvent IOUSBHostCIMessageType = 8
-	IOUSBHostCIMessageTypeFrameNumberUpdate IOUSBHostCIMessageType = 9
-	IOUSBHostCIMessageTypeFrameTimestampUpdate IOUSBHostCIMessageType = 10
-	IOUSBHostCIMessageTypeCommandMin IOUSBHostCIMessageType = 16
-	IOUSBHostCIMessageTypeControllerPowerOn IOUSBHostCIMessageType = 16
-	IOUSBHostCIMessageTypeControllerPowerOff IOUSBHostCIMessageType = 17
-	IOUSBHostCIMessageTypeControllerStart IOUSBHostCIMessageType = 18
-	IOUSBHostCIMessageTypeControllerPause IOUSBHostCIMessageType = 19
-	IOUSBHostCIMessageTypeControllerFrameNumber IOUSBHostCIMessageType = 20
-	IOUSBHostCIMessageTypePortPowerOn IOUSBHostCIMessageType = 24
-	IOUSBHostCIMessageTypePortPowerOff IOUSBHostCIMessageType = 25
-	IOUSBHostCIMessageTypePortResume IOUSBHostCIMessageType = 26
-	IOUSBHostCIMessageTypePortSuspend IOUSBHostCIMessageType = 27
-	IOUSBHostCIMessageTypePortReset IOUSBHostCIMessageType = 28
-	IOUSBHostCIMessageTypePortDisable IOUSBHostCIMessageType = 29
-	IOUSBHostCIMessageTypePortStatus IOUSBHostCIMessageType = 30
-	IOUSBHostCIMessageTypeDeviceCreate IOUSBHostCIMessageType = 32
-	IOUSBHostCIMessageTypeDeviceDestroy IOUSBHostCIMessageType = 33
-	IOUSBHostCIMessageTypeDeviceStart IOUSBHostCIMessageType = 34
-	IOUSBHostCIMessageTypeDevicePause IOUSBHostCIMessageType = 35
-	IOUSBHostCIMessageTypeDeviceUpdate IOUSBHostCIMessageType = 36
-	IOUSBHostCIMessageTypeEndpointCreate IOUSBHostCIMessageType = 40
-	IOUSBHostCIMessageTypeEndpointDestroy IOUSBHostCIMessageType = 41
-	IOUSBHostCIMessageTypeEndpoint_reserved_ IOUSBHostCIMessageType = 42
-	IOUSBHostCIMessageTypeEndpointPause IOUSBHostCIMessageType = 43
-	IOUSBHostCIMessageTypeEndpointUpdate IOUSBHostCIMessageType = 44
-	IOUSBHostCIMessageTypeEndpointReset IOUSBHostCIMessageType = 45
+	IOUSBHostCIMessageTypeControllerCapabilities  IOUSBHostCIMessageType = 0
+	IOUSBHostCIMessageTypePortCapabilities        IOUSBHostCIMessageType = 1
+	IOUSBHostCIMessageTypePortEvent               IOUSBHostCIMessageType = 8
+	IOUSBHostCIMessageTypeFrameNumberUpdate       IOUSBHostCIMessageType = 9
+	IOUSBHostCIMessageTypeFrameTimestampUpdate    IOUSBHostCIMessageType = 10
+	IOUSBHostCIMessageTypeCommandMin              IOUSBHostCIMessageType = 16
+	IOUSBHostCIMessageTypeControllerPowerOn       IOUSBHostCIMessageType = 16
+	IOUSBHostCIMessageTypeControllerPowerOff      IOUSBHostCIMessageType = 17
+	IOUSBHostCIMessageTypeControllerStart         IOUSBHostCIMessageType = 18
+	IOUSBHostCIMessageTypeControllerPause         IOUSBHostCIMessageType = 19
+	IOUSBHostCIMessageTypeControllerFrameNumber   IOUSBHostCIMessageType = 20
+	IOUSBHostCIMessageTypePortPowerOn             IOUSBHostCIMessageType = 24
+	IOUSBHostCIMessageTypePortPowerOff            IOUSBHostCIMessageType = 25
+	IOUSBHostCIMessageTypePortResume              IOUSBHostCIMessageType = 26
+	IOUSBHostCIMessageTypePortSuspend             IOUSBHostCIMessageType = 27
+	IOUSBHostCIMessageTypePortReset               IOUSBHostCIMessageType = 28
+	IOUSBHostCIMessageTypePortDisable             IOUSBHostCIMessageType = 29
+	IOUSBHostCIMessageTypePortStatus              IOUSBHostCIMessageType = 30
+	IOUSBHostCIMessageTypeDeviceCreate            IOUSBHostCIMessageType = 32
+	IOUSBHostCIMessageTypeDeviceDestroy           IOUSBHostCIMessageType = 33
+	IOUSBHostCIMessageTypeDeviceStart             IOUSBHostCIMessageType = 34
+	IOUSBHostCIMessageTypeDevicePause             IOUSBHostCIMessageType = 35
+	IOUSBHostCIMessageTypeDeviceUpdate            IOUSBHostCIMessageType = 36
+	IOUSBHostCIMessageTypeEndpointCreate          IOUSBHostCIMessageType = 40
+	IOUSBHostCIMessageTypeEndpointDestroy         IOUSBHostCIMessageType = 41
+	IOUSBHostCIMessageTypeEndpoint_reserved_      IOUSBHostCIMessageType = 42
+	IOUSBHostCIMessageTypeEndpointPause           IOUSBHostCIMessageType = 43
+	IOUSBHostCIMessageTypeEndpointUpdate          IOUSBHostCIMessageType = 44
+	IOUSBHostCIMessageTypeEndpointReset           IOUSBHostCIMessageType = 45
 	IOUSBHostCIMessageTypeEndpointSetNextTransfer IOUSBHostCIMessageType = 46
-	IOUSBHostCIMessageTypeCommandMax IOUSBHostCIMessageType = 55
-	IOUSBHostCIMessageTypeSetupTransfer IOUSBHostCIMessageType = 56
-	IOUSBHostCIMessageTypeNormalTransfer IOUSBHostCIMessageType = 57
-	IOUSBHostCIMessageTypeStatusTransfer IOUSBHostCIMessageType = 58
-	IOUSBHostCIMessageTypeIsochronousTransfer IOUSBHostCIMessageType = 59
-	IOUSBHostCIMessageTypeLink IOUSBHostCIMessageType = 60
-	IOUSBHostCIMessageTypeTransferComplete IOUSBHostCIMessageType = 61
+	IOUSBHostCIMessageTypeCommandMax              IOUSBHostCIMessageType = 55
+	IOUSBHostCIMessageTypeSetupTransfer           IOUSBHostCIMessageType = 56
+	IOUSBHostCIMessageTypeNormalTransfer          IOUSBHostCIMessageType = 57
+	IOUSBHostCIMessageTypeStatusTransfer          IOUSBHostCIMessageType = 58
+	IOUSBHostCIMessageTypeIsochronousTransfer     IOUSBHostCIMessageType = 59
+	IOUSBHostCIMessageTypeLink                    IOUSBHostCIMessageType = 60
+	IOUSBHostCIMessageTypeTransferComplete        IOUSBHostCIMessageType = 61
 )
 
 func (e IOUSBHostCIMessageType) String() string {
@@ -418,10 +418,10 @@ func (e IOUSBHostCIMessageType) String() string {
 type IOUSBHostCIPortState int64
 
 const (
-	IOUSBHostCIPortStateOff IOUSBHostCIPortState = 0
-	IOUSBHostCIPortStatePowered IOUSBHostCIPortState = 1
+	IOUSBHostCIPortStateOff       IOUSBHostCIPortState = 0
+	IOUSBHostCIPortStatePowered   IOUSBHostCIPortState = 1
 	IOUSBHostCIPortStateSuspended IOUSBHostCIPortState = 2
-	IOUSBHostCIPortStateActive IOUSBHostCIPortState = 3
+	IOUSBHostCIPortStateActive    IOUSBHostCIPortState = 3
 )
 
 func (e IOUSBHostCIPortState) String() string {
@@ -458,7 +458,7 @@ func (e IOUSBHostIsochronousTransferOptions) String() string {
 type IOUSBHostObjectDestroyOptions uint64
 
 const (
-	IOUSBHostObjectDestroyOptionsNone IOUSBHostObjectDestroyOptions = 0
+	IOUSBHostObjectDestroyOptionsNone            IOUSBHostObjectDestroyOptions = 0
 	IOUSBHostObjectDestroyOptionsDeviceSurrender IOUSBHostObjectDestroyOptions = 1
 )
 
@@ -477,9 +477,9 @@ func (e IOUSBHostObjectDestroyOptions) String() string {
 type IOUSBHostObjectInitOptions uint64
 
 const (
-	IOUSBHostObjectInitOptionsNone IOUSBHostObjectInitOptions = 0
+	IOUSBHostObjectInitOptionsNone          IOUSBHostObjectInitOptions = 0
 	IOUSBHostObjectInitOptionsDeviceCapture IOUSBHostObjectInitOptions = 1
-	IOUSBHostObjectInitOptionsDeviceSeize IOUSBHostObjectInitOptions = 2
+	IOUSBHostObjectInitOptionsDeviceSeize   IOUSBHostObjectInitOptions = 2
 )
 
 func (e IOUSBHostObjectInitOptions) String() string {
@@ -495,4 +495,3 @@ func (e IOUSBHostObjectInitOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

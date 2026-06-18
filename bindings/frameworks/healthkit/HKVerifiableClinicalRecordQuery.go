@@ -18,11 +18,11 @@ type HKVerifiableClinicalRecordQuery struct {
 }
 
 var (
-	_clsHKVerifiableClinicalRecordQuery = _objcClass("HKVerifiableClinicalRecordQuery")
-	_hKVerifiableClinicalRecordQuerySelInitWithRecordTypesPredicateResultsHandler = objc.RegisterName("initWithRecordTypes:predicate:resultsHandler:")
+	_clsHKVerifiableClinicalRecordQuery                                                      = _objcClass("HKVerifiableClinicalRecordQuery")
+	_hKVerifiableClinicalRecordQuerySelInitWithRecordTypesPredicateResultsHandler            = objc.RegisterName("initWithRecordTypes:predicate:resultsHandler:")
 	_hKVerifiableClinicalRecordQuerySelInitWithRecordTypesSourceTypesPredicateResultsHandler = objc.RegisterName("initWithRecordTypes:sourceTypes:predicate:resultsHandler:")
-	_hKVerifiableClinicalRecordQuerySelRecordTypes = objc.RegisterName("recordTypes")
-	_hKVerifiableClinicalRecordQuerySelSourceTypes = objc.RegisterName("sourceTypes")
+	_hKVerifiableClinicalRecordQuerySelRecordTypes                                           = objc.RegisterName("recordTypes")
+	_hKVerifiableClinicalRecordQuerySelSourceTypes                                           = objc.RegisterName("sourceTypes")
 )
 
 func HKVerifiableClinicalRecordQueryFromID(id objc.ID) *HKVerifiableClinicalRecordQuery {
@@ -51,7 +51,9 @@ func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesPredicateResultsHan
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesPredicateResultsHandler, recordTypes, predicate.Ptr(), __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKVerifiableClinicalRecordQueryFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *HKVerifiableClinicalRecordQuery) InitWithRecordTypesSourceTypesPredicat
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordQuerySelInitWithRecordTypesSourceTypesPredicateResultsHandler, recordTypes, sourceTypes, predicate.Ptr(), __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKVerifiableClinicalRecordQueryFromID(_ret)
 }
 
@@ -86,4 +90,3 @@ func (o *HKVerifiableClinicalRecordQuery) SourceTypes() *foundation.NSArray[*fou
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _hKVerifiableClinicalRecordQuerySelSourceTypes)
 	return _ret
 }
-

@@ -75,4 +75,3 @@ type TokenDriverConfigurationable interface {
 }
 
 var _ TokenDriverConfigurationable = (*TokenDriverConfiguration)(nil)
-

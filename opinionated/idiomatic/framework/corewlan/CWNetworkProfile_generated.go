@@ -80,4 +80,3 @@ type NetworkProfileable interface {
 }
 
 var _ NetworkProfileable = (*NetworkProfile)(nil)
-

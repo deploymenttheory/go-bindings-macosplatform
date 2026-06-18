@@ -102,7 +102,9 @@ func (x *NNReduceColumnMin) WithDestinationImageAllocator(destinationImageAlloca
 
 func (x *NNReduceColumnMin) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
-func (x *NNReduceColumnMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnMin) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceColumnMinable is the interface implemented by [NNReduceColumnMin], for mocking and DI.
 type NNReduceColumnMinable interface {
@@ -119,4 +121,3 @@ type NNReduceColumnMinable interface {
 }
 
 var _ NNReduceColumnMinable = (*NNReduceColumnMin)(nil)
-

@@ -15,7 +15,7 @@ type NSEnumerator[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSEnumerator = _objcClass("NSEnumerator")
+	_clsNSEnumerator           = _objcClass("NSEnumerator")
 	_nSEnumeratorSelNextObject = objc.RegisterName("nextObject")
 	_nSEnumeratorSelAllObjects = objc.RegisterName("allObjects")
 )
@@ -37,7 +37,8 @@ func (o *NSEnumerator[ObjectType]) NextObject() ObjectType {
 
 func (o *NSEnumerator[ObjectType]) AllObjects() *NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnumeratorSelAllObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[ObjectType](_ret)
 }
-

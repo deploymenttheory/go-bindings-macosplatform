@@ -18,9 +18,9 @@ type GKMatchedPlayers struct {
 }
 
 var (
-	_clsGKMatchedPlayers = _objcClass("GKMatchedPlayers")
-	_gKMatchedPlayersSelProperties = objc.RegisterName("properties")
-	_gKMatchedPlayersSelPlayers = objc.RegisterName("players")
+	_clsGKMatchedPlayers                 = _objcClass("GKMatchedPlayers")
+	_gKMatchedPlayersSelProperties       = objc.RegisterName("properties")
+	_gKMatchedPlayersSelPlayers          = objc.RegisterName("players")
 	_gKMatchedPlayersSelPlayerProperties = objc.RegisterName("playerProperties")
 )
 
@@ -41,7 +41,9 @@ func (o *GKMatchedPlayers) Properties() unsafe.Pointer {
 
 func (o *GKMatchedPlayers) Players() *foundation.NSArray[*GKPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchedPlayersSelPlayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPlayer](_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *GKMatchedPlayers) PlayerProperties() *foundation.NSDictionary[*GKPlayer
 	_ret := objc.Send[*foundation.NSDictionary[*GKPlayer, objc.ID]](o.Ptr(), _gKMatchedPlayersSelPlayerProperties)
 	return _ret
 }
-

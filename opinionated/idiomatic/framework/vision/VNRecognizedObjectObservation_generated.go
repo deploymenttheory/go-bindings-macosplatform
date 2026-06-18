@@ -47,9 +47,13 @@ func (x *RecognizedObjectObservation) Labels() []*ClassificationObservation {
 	})
 }
 
-func (x *RecognizedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
+func (x *RecognizedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNDetectedObjectObservation
+}
 
-func (x *RecognizedObjectObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+func (x *RecognizedObjectObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNDetectedObjectObservation.VNObservation
+}
 
 // RecognizedObjectObservationable is the interface implemented by [RecognizedObjectObservation], for mocking and DI.
 type RecognizedObjectObservationable interface {
@@ -58,4 +62,3 @@ type RecognizedObjectObservationable interface {
 }
 
 var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)
-

@@ -62,4 +62,3 @@ type Polylineable interface {
 }
 
 var _ Polylineable = (*Polyline)(nil)
-

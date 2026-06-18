@@ -332,4 +332,3 @@ type MTRChannelClusterProgramStructable interface {
 }
 
 var _ MTRChannelClusterProgramStructable = (*MTRChannelClusterProgramStruct)(nil)
-

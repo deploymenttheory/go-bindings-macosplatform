@@ -16,21 +16,21 @@ type AVAudioNode struct {
 }
 
 var (
-	_clsAVAudioNode = _objcClass("AVAudioNode")
-	_aVAudioNodeSelReset = objc.RegisterName("reset")
-	_aVAudioNodeSelInputFormatForBus = objc.RegisterName("inputFormatForBus:")
-	_aVAudioNodeSelOutputFormatForBus = objc.RegisterName("outputFormatForBus:")
-	_aVAudioNodeSelNameForInputBus = objc.RegisterName("nameForInputBus:")
-	_aVAudioNodeSelNameForOutputBus = objc.RegisterName("nameForOutputBus:")
+	_clsAVAudioNode                                     = _objcClass("AVAudioNode")
+	_aVAudioNodeSelReset                                = objc.RegisterName("reset")
+	_aVAudioNodeSelInputFormatForBus                    = objc.RegisterName("inputFormatForBus:")
+	_aVAudioNodeSelOutputFormatForBus                   = objc.RegisterName("outputFormatForBus:")
+	_aVAudioNodeSelNameForInputBus                      = objc.RegisterName("nameForInputBus:")
+	_aVAudioNodeSelNameForOutputBus                     = objc.RegisterName("nameForOutputBus:")
 	_aVAudioNodeSelInstallTapOnBusBufferSizeFormatBlock = objc.RegisterName("installTapOnBus:bufferSize:format:block:")
-	_aVAudioNodeSelRemoveTapOnBus = objc.RegisterName("removeTapOnBus:")
-	_aVAudioNodeSelEngine = objc.RegisterName("engine")
-	_aVAudioNodeSelNumberOfInputs = objc.RegisterName("numberOfInputs")
-	_aVAudioNodeSelNumberOfOutputs = objc.RegisterName("numberOfOutputs")
-	_aVAudioNodeSelLastRenderTime = objc.RegisterName("lastRenderTime")
-	_aVAudioNodeSelAUAudioUnit = objc.RegisterName("AUAudioUnit")
-	_aVAudioNodeSelLatency = objc.RegisterName("latency")
-	_aVAudioNodeSelOutputPresentationLatency = objc.RegisterName("outputPresentationLatency")
+	_aVAudioNodeSelRemoveTapOnBus                       = objc.RegisterName("removeTapOnBus:")
+	_aVAudioNodeSelEngine                               = objc.RegisterName("engine")
+	_aVAudioNodeSelNumberOfInputs                       = objc.RegisterName("numberOfInputs")
+	_aVAudioNodeSelNumberOfOutputs                      = objc.RegisterName("numberOfOutputs")
+	_aVAudioNodeSelLastRenderTime                       = objc.RegisterName("lastRenderTime")
+	_aVAudioNodeSelAUAudioUnit                          = objc.RegisterName("AUAudioUnit")
+	_aVAudioNodeSelLatency                              = objc.RegisterName("latency")
+	_aVAudioNodeSelOutputPresentationLatency            = objc.RegisterName("outputPresentationLatency")
 )
 
 func AVAudioNodeFromID(id objc.ID) *AVAudioNode {
@@ -51,28 +51,36 @@ func (o *AVAudioNode) Reset() {
 // @method inputFormatForBus: @abstract Obtain an input bus's format.
 func (o *AVAudioNode) InputFormatForBus(bus uint) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelInputFormatForBus, bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method outputFormatForBus: @abstract Obtain an output bus's format.
 func (o *AVAudioNode) OutputFormatForBus(bus uint) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelOutputFormatForBus, bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method nameForInputBus: @abstract Return the name of an input bus.
 func (o *AVAudioNode) NameForInputBus(bus uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelNameForInputBus, bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method nameForOutputBus: @abstract Return the name of an output bus.
 func (o *AVAudioNode) NameForOutputBus(bus uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelNameForOutputBus, bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *AVAudioNode) RemoveTapOnBus(bus uint) {
 // @property engine @abstract The engine to which the node is attached (or nil).
 func (o *AVAudioNode) Engine() *AVAudioEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelEngine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioEngineFromID(_ret)
 }
 
@@ -121,7 +131,9 @@ func (o *AVAudioNode) NumberOfOutputs() uint {
 // @property lastRenderTime @abstract Obtain the time for which the node most recently rendered. @discussion Will return nil if the engine is not running or if the node is not connected to an input or output node.
 func (o *AVAudioNode) LastRenderTime() *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioNodeSelLastRenderTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
@@ -142,4 +154,3 @@ func (o *AVAudioNode) OutputPresentationLatency() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVAudioNodeSelOutputPresentationLatency)
 	return _ret
 }
-

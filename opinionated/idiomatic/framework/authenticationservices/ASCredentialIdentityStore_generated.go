@@ -132,4 +132,3 @@ type CredentialIdentityStoreable interface {
 }
 
 var _ CredentialIdentityStoreable = (*CredentialIdentityStore)(nil)
-

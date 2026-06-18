@@ -15,24 +15,24 @@ type NSURLProtocol struct {
 }
 
 var (
-	_clsNSURLProtocol = _objcClass("NSURLProtocol")
+	_clsNSURLProtocol                                    = _objcClass("NSURLProtocol")
 	_nSURLProtocolSelInitWithRequestCachedResponseClient = objc.RegisterName("initWithRequest:cachedResponse:client:")
-	_nSURLProtocolSelCanInitWithRequest = objc.RegisterName("canInitWithRequest:")
-	_nSURLProtocolSelCanonicalRequestForRequest = objc.RegisterName("canonicalRequestForRequest:")
-	_nSURLProtocolSelRequestIsCacheEquivalentToRequest = objc.RegisterName("requestIsCacheEquivalent:toRequest:")
-	_nSURLProtocolSelStartLoading = objc.RegisterName("startLoading")
-	_nSURLProtocolSelStopLoading = objc.RegisterName("stopLoading")
-	_nSURLProtocolSelPropertyForKeyInRequest = objc.RegisterName("propertyForKey:inRequest:")
-	_nSURLProtocolSelSetPropertyForKeyInRequest = objc.RegisterName("setProperty:forKey:inRequest:")
-	_nSURLProtocolSelRemovePropertyForKeyInRequest = objc.RegisterName("removePropertyForKey:inRequest:")
-	_nSURLProtocolSelRegisterClass = objc.RegisterName("registerClass:")
-	_nSURLProtocolSelUnregisterClass = objc.RegisterName("unregisterClass:")
-	_nSURLProtocolSelClient = objc.RegisterName("client")
-	_nSURLProtocolSelRequest = objc.RegisterName("request")
-	_nSURLProtocolSelCachedResponse = objc.RegisterName("cachedResponse")
-	_nSURLProtocolSelCanInitWithTask = objc.RegisterName("canInitWithTask:")
-	_nSURLProtocolSelInitWithTaskCachedResponseClient = objc.RegisterName("initWithTask:cachedResponse:client:")
-	_nSURLProtocolSelTask = objc.RegisterName("task")
+	_nSURLProtocolSelCanInitWithRequest                  = objc.RegisterName("canInitWithRequest:")
+	_nSURLProtocolSelCanonicalRequestForRequest          = objc.RegisterName("canonicalRequestForRequest:")
+	_nSURLProtocolSelRequestIsCacheEquivalentToRequest   = objc.RegisterName("requestIsCacheEquivalent:toRequest:")
+	_nSURLProtocolSelStartLoading                        = objc.RegisterName("startLoading")
+	_nSURLProtocolSelStopLoading                         = objc.RegisterName("stopLoading")
+	_nSURLProtocolSelPropertyForKeyInRequest             = objc.RegisterName("propertyForKey:inRequest:")
+	_nSURLProtocolSelSetPropertyForKeyInRequest          = objc.RegisterName("setProperty:forKey:inRequest:")
+	_nSURLProtocolSelRemovePropertyForKeyInRequest       = objc.RegisterName("removePropertyForKey:inRequest:")
+	_nSURLProtocolSelRegisterClass                       = objc.RegisterName("registerClass:")
+	_nSURLProtocolSelUnregisterClass                     = objc.RegisterName("unregisterClass:")
+	_nSURLProtocolSelClient                              = objc.RegisterName("client")
+	_nSURLProtocolSelRequest                             = objc.RegisterName("request")
+	_nSURLProtocolSelCachedResponse                      = objc.RegisterName("cachedResponse")
+	_nSURLProtocolSelCanInitWithTask                     = objc.RegisterName("canInitWithTask:")
+	_nSURLProtocolSelInitWithTaskCachedResponseClient    = objc.RegisterName("initWithTask:cachedResponse:client:")
+	_nSURLProtocolSelTask                                = objc.RegisterName("task")
 )
 
 func NSURLProtocolFromID(id objc.ID) *NSURLProtocol {
@@ -48,7 +48,9 @@ func NSURLProtocolFromID(id objc.ID) *NSURLProtocol {
 // @method initWithRequest:cachedResponse:client: @abstract Initializes an NSURLProtocol given request, cached response, and client. @param request The request to load. @param cachedResponse A response that has been retrieved from the cache for the given request. The protocol implementation should apply protocol-specific validity checks if such tests are necessary. @param client The NSURLProtocolClient object that serves as the interface the protocol implementation can use to report results back to the URL loading system.
 func (o *NSURLProtocol) InitWithRequestCachedResponseClient(request *NSURLRequest, cachedResponse *NSCachedURLResponse, client NSURLProtocolClient) *NSURLProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelInitWithRequestCachedResponseClient, request.Ptr(), cachedResponse.Ptr(), client)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLProtocolFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func NSURLProtocolCanInitWithRequest(request *NSURLRequest) bool {
 // @method canonicalRequestForRequest: @abstract This method returns a canonical version of the given request. @discussion It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between NSURLRequest objects. <p> This is an abstract method; subclasses must provide an implementation. @param request A request to make canonical. @result The canonical form of the given request.
 func NSURLProtocolCanonicalRequestForRequest(request *NSURLRequest) *NSURLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLProtocol), _nSURLProtocolSelCanonicalRequestForRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
@@ -117,14 +121,18 @@ func (o *NSURLProtocol) Client() NSURLProtocolClient {
 // @abstract Returns the NSURLRequest of the receiver. @result The NSURLRequest of the receiver.
 func (o *NSURLProtocol) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 // @abstract Returns the NSCachedURLResponse of the receiver. @result The NSCachedURLResponse of the receiver.
 func (o *NSURLProtocol) CachedResponse() *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelCachedResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCachedURLResponseFromID(_ret)
 }
 
@@ -135,13 +143,16 @@ func NSURLProtocolCanInitWithTask(task *NSURLSessionTask) bool {
 
 func (o *NSURLProtocol) InitWithTaskCachedResponseClient(task *NSURLSessionTask, cachedResponse *NSCachedURLResponse, client NSURLProtocolClient) *NSURLProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelInitWithTaskCachedResponseClient, task.Ptr(), cachedResponse.Ptr(), client)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLProtocolFromID(_ret)
 }
 
 func (o *NSURLProtocol) Task() *NSURLSessionTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLProtocolSelTask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionTaskFromID(_ret)
 }
-

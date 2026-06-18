@@ -46,7 +46,9 @@ func (x *AudioConverter) WithChannelMap(items ...*foundation.NSNumber) *AudioCon
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -420,4 +422,3 @@ type AudioConverterable interface {
 }
 
 var _ AudioConverterable = (*AudioConverter)(nil)
-

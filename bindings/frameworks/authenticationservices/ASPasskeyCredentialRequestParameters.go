@@ -16,12 +16,12 @@ type ASPasskeyCredentialRequestParameters struct {
 }
 
 var (
-	_clsASPasskeyCredentialRequestParameters = _objcClass("ASPasskeyCredentialRequestParameters")
-	_aSPasskeyCredentialRequestParametersSelRelyingPartyIdentifier = objc.RegisterName("relyingPartyIdentifier")
-	_aSPasskeyCredentialRequestParametersSelClientDataHash = objc.RegisterName("clientDataHash")
+	_clsASPasskeyCredentialRequestParameters                           = _objcClass("ASPasskeyCredentialRequestParameters")
+	_aSPasskeyCredentialRequestParametersSelRelyingPartyIdentifier     = objc.RegisterName("relyingPartyIdentifier")
+	_aSPasskeyCredentialRequestParametersSelClientDataHash             = objc.RegisterName("clientDataHash")
 	_aSPasskeyCredentialRequestParametersSelUserVerificationPreference = objc.RegisterName("userVerificationPreference")
-	_aSPasskeyCredentialRequestParametersSelAllowedCredentials = objc.RegisterName("allowedCredentials")
-	_aSPasskeyCredentialRequestParametersSelExtensionInput = objc.RegisterName("extensionInput")
+	_aSPasskeyCredentialRequestParametersSelAllowedCredentials         = objc.RegisterName("allowedCredentials")
+	_aSPasskeyCredentialRequestParametersSelExtensionInput             = objc.RegisterName("extensionInput")
 )
 
 func ASPasskeyCredentialRequestParametersFromID(id objc.ID) *ASPasskeyCredentialRequestParameters {
@@ -37,21 +37,27 @@ func ASPasskeyCredentialRequestParametersFromID(id objc.ID) *ASPasskeyCredential
 // The relying party identifier for this request.
 func (o *ASPasskeyCredentialRequestParameters) RelyingPartyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestParametersSelRelyingPartyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Hash of client data for credential provider to sign as part of the operation.
 func (o *ASPasskeyCredentialRequestParameters) ClientDataHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestParametersSelClientDataHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
 func (o *ASPasskeyCredentialRequestParameters) UserVerificationPreference() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestParametersSelUserVerificationPreference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,7 +70,8 @@ func (o *ASPasskeyCredentialRequestParameters) AllowedCredentials() *foundation.
 // Inputs for WebAuthn extensions used for passkey assertion.
 func (o *ASPasskeyCredentialRequestParameters) ExtensionInput() *ASPasskeyAssertionCredentialExtensionInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyCredentialRequestParametersSelExtensionInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialExtensionInputFromID(_ret)
 }
-

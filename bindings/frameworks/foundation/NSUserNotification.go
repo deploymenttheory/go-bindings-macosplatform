@@ -16,45 +16,45 @@ type NSUserNotification struct {
 }
 
 var (
-	_clsNSUserNotification = _objcClass("NSUserNotification")
-	_nSUserNotificationSelInit = objc.RegisterName("init")
-	_nSUserNotificationSelTitle = objc.RegisterName("title")
-	_nSUserNotificationSelSetTitle = objc.RegisterName("setTitle:")
-	_nSUserNotificationSelSubtitle = objc.RegisterName("subtitle")
-	_nSUserNotificationSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_nSUserNotificationSelInformativeText = objc.RegisterName("informativeText")
-	_nSUserNotificationSelSetInformativeText = objc.RegisterName("setInformativeText:")
-	_nSUserNotificationSelActionButtonTitle = objc.RegisterName("actionButtonTitle")
-	_nSUserNotificationSelSetActionButtonTitle = objc.RegisterName("setActionButtonTitle:")
-	_nSUserNotificationSelUserInfo = objc.RegisterName("userInfo")
-	_nSUserNotificationSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSUserNotificationSelDeliveryDate = objc.RegisterName("deliveryDate")
-	_nSUserNotificationSelSetDeliveryDate = objc.RegisterName("setDeliveryDate:")
-	_nSUserNotificationSelDeliveryTimeZone = objc.RegisterName("deliveryTimeZone")
-	_nSUserNotificationSelSetDeliveryTimeZone = objc.RegisterName("setDeliveryTimeZone:")
-	_nSUserNotificationSelDeliveryRepeatInterval = objc.RegisterName("deliveryRepeatInterval")
-	_nSUserNotificationSelSetDeliveryRepeatInterval = objc.RegisterName("setDeliveryRepeatInterval:")
-	_nSUserNotificationSelActualDeliveryDate = objc.RegisterName("actualDeliveryDate")
-	_nSUserNotificationSelIsPresented = objc.RegisterName("isPresented")
-	_nSUserNotificationSelIsRemote = objc.RegisterName("isRemote")
-	_nSUserNotificationSelSoundName = objc.RegisterName("soundName")
-	_nSUserNotificationSelSetSoundName = objc.RegisterName("setSoundName:")
-	_nSUserNotificationSelHasActionButton = objc.RegisterName("hasActionButton")
-	_nSUserNotificationSelSetHasActionButton = objc.RegisterName("setHasActionButton:")
-	_nSUserNotificationSelActivationType = objc.RegisterName("activationType")
-	_nSUserNotificationSelOtherButtonTitle = objc.RegisterName("otherButtonTitle")
-	_nSUserNotificationSelSetOtherButtonTitle = objc.RegisterName("setOtherButtonTitle:")
-	_nSUserNotificationSelIdentifier = objc.RegisterName("identifier")
-	_nSUserNotificationSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSUserNotificationSelContentImage = objc.RegisterName("contentImage")
-	_nSUserNotificationSelSetContentImage = objc.RegisterName("setContentImage:")
-	_nSUserNotificationSelHasReplyButton = objc.RegisterName("hasReplyButton")
-	_nSUserNotificationSelSetHasReplyButton = objc.RegisterName("setHasReplyButton:")
-	_nSUserNotificationSelResponsePlaceholder = objc.RegisterName("responsePlaceholder")
-	_nSUserNotificationSelSetResponsePlaceholder = objc.RegisterName("setResponsePlaceholder:")
-	_nSUserNotificationSelResponse = objc.RegisterName("response")
-	_nSUserNotificationSelAdditionalActions = objc.RegisterName("additionalActions")
-	_nSUserNotificationSelSetAdditionalActions = objc.RegisterName("setAdditionalActions:")
+	_clsNSUserNotification                           = _objcClass("NSUserNotification")
+	_nSUserNotificationSelInit                       = objc.RegisterName("init")
+	_nSUserNotificationSelTitle                      = objc.RegisterName("title")
+	_nSUserNotificationSelSetTitle                   = objc.RegisterName("setTitle:")
+	_nSUserNotificationSelSubtitle                   = objc.RegisterName("subtitle")
+	_nSUserNotificationSelSetSubtitle                = objc.RegisterName("setSubtitle:")
+	_nSUserNotificationSelInformativeText            = objc.RegisterName("informativeText")
+	_nSUserNotificationSelSetInformativeText         = objc.RegisterName("setInformativeText:")
+	_nSUserNotificationSelActionButtonTitle          = objc.RegisterName("actionButtonTitle")
+	_nSUserNotificationSelSetActionButtonTitle       = objc.RegisterName("setActionButtonTitle:")
+	_nSUserNotificationSelUserInfo                   = objc.RegisterName("userInfo")
+	_nSUserNotificationSelSetUserInfo                = objc.RegisterName("setUserInfo:")
+	_nSUserNotificationSelDeliveryDate               = objc.RegisterName("deliveryDate")
+	_nSUserNotificationSelSetDeliveryDate            = objc.RegisterName("setDeliveryDate:")
+	_nSUserNotificationSelDeliveryTimeZone           = objc.RegisterName("deliveryTimeZone")
+	_nSUserNotificationSelSetDeliveryTimeZone        = objc.RegisterName("setDeliveryTimeZone:")
+	_nSUserNotificationSelDeliveryRepeatInterval     = objc.RegisterName("deliveryRepeatInterval")
+	_nSUserNotificationSelSetDeliveryRepeatInterval  = objc.RegisterName("setDeliveryRepeatInterval:")
+	_nSUserNotificationSelActualDeliveryDate         = objc.RegisterName("actualDeliveryDate")
+	_nSUserNotificationSelIsPresented                = objc.RegisterName("isPresented")
+	_nSUserNotificationSelIsRemote                   = objc.RegisterName("isRemote")
+	_nSUserNotificationSelSoundName                  = objc.RegisterName("soundName")
+	_nSUserNotificationSelSetSoundName               = objc.RegisterName("setSoundName:")
+	_nSUserNotificationSelHasActionButton            = objc.RegisterName("hasActionButton")
+	_nSUserNotificationSelSetHasActionButton         = objc.RegisterName("setHasActionButton:")
+	_nSUserNotificationSelActivationType             = objc.RegisterName("activationType")
+	_nSUserNotificationSelOtherButtonTitle           = objc.RegisterName("otherButtonTitle")
+	_nSUserNotificationSelSetOtherButtonTitle        = objc.RegisterName("setOtherButtonTitle:")
+	_nSUserNotificationSelIdentifier                 = objc.RegisterName("identifier")
+	_nSUserNotificationSelSetIdentifier              = objc.RegisterName("setIdentifier:")
+	_nSUserNotificationSelContentImage               = objc.RegisterName("contentImage")
+	_nSUserNotificationSelSetContentImage            = objc.RegisterName("setContentImage:")
+	_nSUserNotificationSelHasReplyButton             = objc.RegisterName("hasReplyButton")
+	_nSUserNotificationSelSetHasReplyButton          = objc.RegisterName("setHasReplyButton:")
+	_nSUserNotificationSelResponsePlaceholder        = objc.RegisterName("responsePlaceholder")
+	_nSUserNotificationSelSetResponsePlaceholder     = objc.RegisterName("setResponsePlaceholder:")
+	_nSUserNotificationSelResponse                   = objc.RegisterName("response")
+	_nSUserNotificationSelAdditionalActions          = objc.RegisterName("additionalActions")
+	_nSUserNotificationSelSetAdditionalActions       = objc.RegisterName("setAdditionalActions:")
 	_nSUserNotificationSelAdditionalActivationAction = objc.RegisterName("additionalActivationAction")
 )
 
@@ -70,13 +70,17 @@ func NSUserNotificationFromID(id objc.ID) *NSUserNotification {
 
 func (o *NSUserNotification) Init() *NSUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserNotificationFromID(_ret)
 }
 
 func (o *NSUserNotification) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -86,7 +90,9 @@ func (o *NSUserNotification) SetTitle(title *NSString) {
 
 func (o *NSUserNotification) Subtitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -96,7 +102,9 @@ func (o *NSUserNotification) SetSubtitle(subtitle *NSString) {
 
 func (o *NSUserNotification) InformativeText() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelInformativeText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -106,7 +114,9 @@ func (o *NSUserNotification) SetInformativeText(informativeText *NSString) {
 
 func (o *NSUserNotification) ActionButtonTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelActionButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -125,7 +135,9 @@ func (o *NSUserNotification) SetUserInfo(userInfo *NSDictionary[*NSString, objc.
 
 func (o *NSUserNotification) DeliveryDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -135,7 +147,9 @@ func (o *NSUserNotification) SetDeliveryDate(deliveryDate *NSDate) {
 
 func (o *NSUserNotification) DeliveryTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -145,7 +159,9 @@ func (o *NSUserNotification) SetDeliveryTimeZone(deliveryTimeZone *NSTimeZone) {
 
 func (o *NSUserNotification) DeliveryRepeatInterval() *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelDeliveryRepeatInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateComponentsFromID(_ret)
 }
 
@@ -155,7 +171,9 @@ func (o *NSUserNotification) SetDeliveryRepeatInterval(deliveryRepeatInterval *N
 
 func (o *NSUserNotification) ActualDeliveryDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelActualDeliveryDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -171,7 +189,9 @@ func (o *NSUserNotification) IsRemote() bool {
 
 func (o *NSUserNotification) SoundName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelSoundName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -195,7 +215,9 @@ func (o *NSUserNotification) ActivationType() NSUserNotificationActivationType {
 
 func (o *NSUserNotification) OtherButtonTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelOtherButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -205,7 +227,9 @@ func (o *NSUserNotification) SetOtherButtonTitle(otherButtonTitle *NSString) {
 
 func (o *NSUserNotification) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -233,7 +257,9 @@ func (o *NSUserNotification) SetHasReplyButton(hasReplyButton bool) {
 
 func (o *NSUserNotification) ResponsePlaceholder() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelResponsePlaceholder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -243,13 +269,17 @@ func (o *NSUserNotification) SetResponsePlaceholder(responsePlaceholder *NSStrin
 
 func (o *NSUserNotification) Response() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 func (o *NSUserNotification) AdditionalActions() *NSArray[*NSUserNotificationAction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelAdditionalActions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSUserNotificationAction](_ret)
 }
 
@@ -259,7 +289,8 @@ func (o *NSUserNotification) SetAdditionalActions(additionalActions *NSArray[*NS
 
 func (o *NSUserNotification) AdditionalActivationAction() *NSUserNotificationAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationSelAdditionalActivationAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserNotificationActionFromID(_ret)
 }
-

@@ -16,4 +16,3 @@ func MPSPolygonBufferPolygonBuffer() *PolygonBuffer {
 	}
 	return &PolygonBuffer{inner: _r}
 }
-

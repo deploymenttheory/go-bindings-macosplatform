@@ -14,8 +14,8 @@ import (
 
 var (
 	_mediaaccessibilityLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce              sync.Once
+	_failedSymbols         = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,33 +48,87 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("MAAudibleMediaCopyPreferredCharacteristics", func() { purego.RegisterLibFunc(&_fnMAAudibleMediaCopyPreferredCharacteristics, _mediaaccessibilityLib, "MAAudibleMediaCopyPreferredCharacteristics") })
-	_register("MACaptionAppearanceAddSelectedLanguage", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceAddSelectedLanguage, _mediaaccessibilityLib, "MACaptionAppearanceAddSelectedLanguage") })
-	_register("MACaptionAppearanceCopyActiveProfileID", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyActiveProfileID, _mediaaccessibilityLib, "MACaptionAppearanceCopyActiveProfileID") })
-	_register("MACaptionAppearanceCopyBackgroundColor", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyBackgroundColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyBackgroundColor") })
-	_register("MACaptionAppearanceCopyFontDescriptorForStyle", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyFontDescriptorForStyle, _mediaaccessibilityLib, "MACaptionAppearanceCopyFontDescriptorForStyle") })
-	_register("MACaptionAppearanceCopyForegroundColor", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyForegroundColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyForegroundColor") })
-	_register("MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics, _mediaaccessibilityLib, "MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics") })
-	_register("MACaptionAppearanceCopyProfileIDs", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileIDs, _mediaaccessibilityLib, "MACaptionAppearanceCopyProfileIDs") })
-	_register("MACaptionAppearanceCopyProfileName", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _mediaaccessibilityLib, "MACaptionAppearanceCopyProfileName") })
-	_register("MACaptionAppearanceCopySelectedLanguages", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopySelectedLanguages, _mediaaccessibilityLib, "MACaptionAppearanceCopySelectedLanguages") })
-	_register("MACaptionAppearanceCopyWindowColor", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyWindowColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyWindowColor") })
-	_register("MACaptionAppearanceDidDisplayCaptions", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceDidDisplayCaptions, _mediaaccessibilityLib, "MACaptionAppearanceDidDisplayCaptions") })
-	_register("MACaptionAppearanceExecuteBlockForProfileID", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceExecuteBlockForProfileID, _mediaaccessibilityLib, "MACaptionAppearanceExecuteBlockForProfileID") })
-	_register("MACaptionAppearanceGetBackgroundOpacity", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetBackgroundOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetBackgroundOpacity") })
-	_register("MACaptionAppearanceGetDisplayType", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetDisplayType, _mediaaccessibilityLib, "MACaptionAppearanceGetDisplayType") })
-	_register("MACaptionAppearanceGetForegroundOpacity", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetForegroundOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetForegroundOpacity") })
-	_register("MACaptionAppearanceGetRelativeCharacterSize", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetRelativeCharacterSize, _mediaaccessibilityLib, "MACaptionAppearanceGetRelativeCharacterSize") })
-	_register("MACaptionAppearanceGetTextEdgeStyle", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetTextEdgeStyle, _mediaaccessibilityLib, "MACaptionAppearanceGetTextEdgeStyle") })
-	_register("MACaptionAppearanceGetWindowOpacity", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetWindowOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetWindowOpacity") })
-	_register("MACaptionAppearanceGetWindowRoundedCornerRadius", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceGetWindowRoundedCornerRadius, _mediaaccessibilityLib, "MACaptionAppearanceGetWindowRoundedCornerRadius") })
-	_register("MACaptionAppearanceIsCustomized", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceIsCustomized, _mediaaccessibilityLib, "MACaptionAppearanceIsCustomized") })
-	_register("MACaptionAppearanceSetActiveProfileID", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceSetActiveProfileID, _mediaaccessibilityLib, "MACaptionAppearanceSetActiveProfileID") })
-	_register("MACaptionAppearanceSetDisplayType", func() { purego.RegisterLibFunc(&_fnMACaptionAppearanceSetDisplayType, _mediaaccessibilityLib, "MACaptionAppearanceSetDisplayType") })
-	_register("MADimFlashingLightsEnabled", func() { purego.RegisterLibFunc(&_fnMADimFlashingLightsEnabled, _mediaaccessibilityLib, "MADimFlashingLightsEnabled") })
-	_register("MAImageCaptioningCopyCaption", func() { purego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _mediaaccessibilityLib, "MAImageCaptioningCopyCaption") })
-	_register("MAImageCaptioningCopyMetadataTagPath", func() { purego.RegisterLibFunc(&_fnMAImageCaptioningCopyMetadataTagPath, _mediaaccessibilityLib, "MAImageCaptioningCopyMetadataTagPath") })
-	_register("MAImageCaptioningSetCaption", func() { purego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _mediaaccessibilityLib, "MAImageCaptioningSetCaption") })
+	_register("MAAudibleMediaCopyPreferredCharacteristics", func() {
+		purego.RegisterLibFunc(&_fnMAAudibleMediaCopyPreferredCharacteristics, _mediaaccessibilityLib, "MAAudibleMediaCopyPreferredCharacteristics")
+	})
+	_register("MACaptionAppearanceAddSelectedLanguage", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceAddSelectedLanguage, _mediaaccessibilityLib, "MACaptionAppearanceAddSelectedLanguage")
+	})
+	_register("MACaptionAppearanceCopyActiveProfileID", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyActiveProfileID, _mediaaccessibilityLib, "MACaptionAppearanceCopyActiveProfileID")
+	})
+	_register("MACaptionAppearanceCopyBackgroundColor", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyBackgroundColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyBackgroundColor")
+	})
+	_register("MACaptionAppearanceCopyFontDescriptorForStyle", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyFontDescriptorForStyle, _mediaaccessibilityLib, "MACaptionAppearanceCopyFontDescriptorForStyle")
+	})
+	_register("MACaptionAppearanceCopyForegroundColor", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyForegroundColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyForegroundColor")
+	})
+	_register("MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics, _mediaaccessibilityLib, "MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics")
+	})
+	_register("MACaptionAppearanceCopyProfileIDs", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileIDs, _mediaaccessibilityLib, "MACaptionAppearanceCopyProfileIDs")
+	})
+	_register("MACaptionAppearanceCopyProfileName", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _mediaaccessibilityLib, "MACaptionAppearanceCopyProfileName")
+	})
+	_register("MACaptionAppearanceCopySelectedLanguages", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopySelectedLanguages, _mediaaccessibilityLib, "MACaptionAppearanceCopySelectedLanguages")
+	})
+	_register("MACaptionAppearanceCopyWindowColor", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceCopyWindowColor, _mediaaccessibilityLib, "MACaptionAppearanceCopyWindowColor")
+	})
+	_register("MACaptionAppearanceDidDisplayCaptions", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceDidDisplayCaptions, _mediaaccessibilityLib, "MACaptionAppearanceDidDisplayCaptions")
+	})
+	_register("MACaptionAppearanceExecuteBlockForProfileID", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceExecuteBlockForProfileID, _mediaaccessibilityLib, "MACaptionAppearanceExecuteBlockForProfileID")
+	})
+	_register("MACaptionAppearanceGetBackgroundOpacity", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetBackgroundOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetBackgroundOpacity")
+	})
+	_register("MACaptionAppearanceGetDisplayType", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetDisplayType, _mediaaccessibilityLib, "MACaptionAppearanceGetDisplayType")
+	})
+	_register("MACaptionAppearanceGetForegroundOpacity", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetForegroundOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetForegroundOpacity")
+	})
+	_register("MACaptionAppearanceGetRelativeCharacterSize", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetRelativeCharacterSize, _mediaaccessibilityLib, "MACaptionAppearanceGetRelativeCharacterSize")
+	})
+	_register("MACaptionAppearanceGetTextEdgeStyle", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetTextEdgeStyle, _mediaaccessibilityLib, "MACaptionAppearanceGetTextEdgeStyle")
+	})
+	_register("MACaptionAppearanceGetWindowOpacity", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetWindowOpacity, _mediaaccessibilityLib, "MACaptionAppearanceGetWindowOpacity")
+	})
+	_register("MACaptionAppearanceGetWindowRoundedCornerRadius", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceGetWindowRoundedCornerRadius, _mediaaccessibilityLib, "MACaptionAppearanceGetWindowRoundedCornerRadius")
+	})
+	_register("MACaptionAppearanceIsCustomized", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceIsCustomized, _mediaaccessibilityLib, "MACaptionAppearanceIsCustomized")
+	})
+	_register("MACaptionAppearanceSetActiveProfileID", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceSetActiveProfileID, _mediaaccessibilityLib, "MACaptionAppearanceSetActiveProfileID")
+	})
+	_register("MACaptionAppearanceSetDisplayType", func() {
+		purego.RegisterLibFunc(&_fnMACaptionAppearanceSetDisplayType, _mediaaccessibilityLib, "MACaptionAppearanceSetDisplayType")
+	})
+	_register("MADimFlashingLightsEnabled", func() {
+		purego.RegisterLibFunc(&_fnMADimFlashingLightsEnabled, _mediaaccessibilityLib, "MADimFlashingLightsEnabled")
+	})
+	_register("MAImageCaptioningCopyCaption", func() {
+		purego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _mediaaccessibilityLib, "MAImageCaptioningCopyCaption")
+	})
+	_register("MAImageCaptioningCopyMetadataTagPath", func() {
+		purego.RegisterLibFunc(&_fnMAImageCaptioningCopyMetadataTagPath, _mediaaccessibilityLib, "MAImageCaptioningCopyMetadataTagPath")
+	})
+	_register("MAImageCaptioningSetCaption", func() {
+		purego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _mediaaccessibilityLib, "MAImageCaptioningSetCaption")
+	})
 }
 
 func init() {

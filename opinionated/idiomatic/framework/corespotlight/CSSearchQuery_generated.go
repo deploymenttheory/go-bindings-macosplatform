@@ -66,7 +66,9 @@ func (x *SearchQuery) WithProtectionClasses(items ...*foundation.NSString) *Sear
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -181,4 +183,3 @@ type SearchQueryable interface {
 }
 
 var _ SearchQueryable = (*SearchQuery)(nil)
-

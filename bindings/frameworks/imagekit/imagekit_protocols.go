@@ -41,4 +41,3 @@ type IKSlideshowDataSource interface {
 	NumberOfSlideshowItems() uint
 	SlideshowItemAtIndex(index uint) objc.ID
 }
-

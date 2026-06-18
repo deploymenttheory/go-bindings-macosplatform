@@ -18,12 +18,12 @@ type HKObject struct {
 }
 
 var (
-	_clsHKObject = _objcClass("HKObject")
-	_hKObjectSelUUID = objc.RegisterName("UUID")
-	_hKObjectSelSource = objc.RegisterName("source")
+	_clsHKObject               = _objcClass("HKObject")
+	_hKObjectSelUUID           = objc.RegisterName("UUID")
+	_hKObjectSelSource         = objc.RegisterName("source")
 	_hKObjectSelSourceRevision = objc.RegisterName("sourceRevision")
-	_hKObjectSelDevice = objc.RegisterName("device")
-	_hKObjectSelMetadata = objc.RegisterName("metadata")
+	_hKObjectSelDevice         = objc.RegisterName("device")
+	_hKObjectSelMetadata       = objc.RegisterName("metadata")
 )
 
 func HKObjectFromID(id objc.ID) *HKObject {
@@ -39,7 +39,9 @@ func HKObjectFromID(id objc.ID) *HKObject {
 // @property      UUID @abstract      A unique identifier of the receiver in the HealthKit database.
 func (o *HKObject) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -51,14 +53,18 @@ func (o *HKObject) Source() unsafe.Pointer {
 // @property      sourceRevision @abstract      Represents the revision of the source responsible for saving the receiver.
 func (o *HKObject) SourceRevision() *HKSourceRevision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectSelSourceRevision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceRevisionFromID(_ret)
 }
 
 // @property      device @abstract      Represents the device that generated the data of the receiver.
 func (o *HKObject) Device() *HKDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKObjectSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDeviceFromID(_ret)
 }
 
@@ -67,4 +73,3 @@ func (o *HKObject) Metadata() *foundation.NSDictionary[*foundation.NSString, obj
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _hKObjectSelMetadata)
 	return _ret
 }
-

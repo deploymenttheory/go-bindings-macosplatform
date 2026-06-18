@@ -19,27 +19,27 @@ type AVAudioFormat struct {
 }
 
 var (
-	_clsAVAudioFormat = _objcClass("AVAudioFormat")
-	_aVAudioFormatSelInitWithStreamDescription = objc.RegisterName("initWithStreamDescription:")
-	_aVAudioFormatSelInitWithStreamDescriptionChannelLayout = objc.RegisterName("initWithStreamDescription:channelLayout:")
-	_aVAudioFormatSelInitStandardFormatWithSampleRateChannels = objc.RegisterName("initStandardFormatWithSampleRate:channels:")
-	_aVAudioFormatSelInitStandardFormatWithSampleRateChannelLayout = objc.RegisterName("initStandardFormatWithSampleRate:channelLayout:")
-	_aVAudioFormatSelInitWithCommonFormatSampleRateChannelsInterleaved = objc.RegisterName("initWithCommonFormat:sampleRate:channels:interleaved:")
+	_clsAVAudioFormat                                                       = _objcClass("AVAudioFormat")
+	_aVAudioFormatSelInitWithStreamDescription                              = objc.RegisterName("initWithStreamDescription:")
+	_aVAudioFormatSelInitWithStreamDescriptionChannelLayout                 = objc.RegisterName("initWithStreamDescription:channelLayout:")
+	_aVAudioFormatSelInitStandardFormatWithSampleRateChannels               = objc.RegisterName("initStandardFormatWithSampleRate:channels:")
+	_aVAudioFormatSelInitStandardFormatWithSampleRateChannelLayout          = objc.RegisterName("initStandardFormatWithSampleRate:channelLayout:")
+	_aVAudioFormatSelInitWithCommonFormatSampleRateChannelsInterleaved      = objc.RegisterName("initWithCommonFormat:sampleRate:channels:interleaved:")
 	_aVAudioFormatSelInitWithCommonFormatSampleRateInterleavedChannelLayout = objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:")
-	_aVAudioFormatSelInitWithSettings = objc.RegisterName("initWithSettings:")
-	_aVAudioFormatSelInitWithCMAudioFormatDescription = objc.RegisterName("initWithCMAudioFormatDescription:")
-	_aVAudioFormatSelIsEqual = objc.RegisterName("isEqual:")
-	_aVAudioFormatSelIsStandard = objc.RegisterName("isStandard")
-	_aVAudioFormatSelCommonFormat = objc.RegisterName("commonFormat")
-	_aVAudioFormatSelChannelCount = objc.RegisterName("channelCount")
-	_aVAudioFormatSelSampleRate = objc.RegisterName("sampleRate")
-	_aVAudioFormatSelIsInterleaved = objc.RegisterName("isInterleaved")
-	_aVAudioFormatSelStreamDescription = objc.RegisterName("streamDescription")
-	_aVAudioFormatSelChannelLayout = objc.RegisterName("channelLayout")
-	_aVAudioFormatSelMagicCookie = objc.RegisterName("magicCookie")
-	_aVAudioFormatSelSetMagicCookie = objc.RegisterName("setMagicCookie:")
-	_aVAudioFormatSelSettings = objc.RegisterName("settings")
-	_aVAudioFormatSelFormatDescription = objc.RegisterName("formatDescription")
+	_aVAudioFormatSelInitWithSettings                                       = objc.RegisterName("initWithSettings:")
+	_aVAudioFormatSelInitWithCMAudioFormatDescription                       = objc.RegisterName("initWithCMAudioFormatDescription:")
+	_aVAudioFormatSelIsEqual                                                = objc.RegisterName("isEqual:")
+	_aVAudioFormatSelIsStandard                                             = objc.RegisterName("isStandard")
+	_aVAudioFormatSelCommonFormat                                           = objc.RegisterName("commonFormat")
+	_aVAudioFormatSelChannelCount                                           = objc.RegisterName("channelCount")
+	_aVAudioFormatSelSampleRate                                             = objc.RegisterName("sampleRate")
+	_aVAudioFormatSelIsInterleaved                                          = objc.RegisterName("isInterleaved")
+	_aVAudioFormatSelStreamDescription                                      = objc.RegisterName("streamDescription")
+	_aVAudioFormatSelChannelLayout                                          = objc.RegisterName("channelLayout")
+	_aVAudioFormatSelMagicCookie                                            = objc.RegisterName("magicCookie")
+	_aVAudioFormatSelSetMagicCookie                                         = objc.RegisterName("setMagicCookie:")
+	_aVAudioFormatSelSettings                                               = objc.RegisterName("settings")
+	_aVAudioFormatSelFormatDescription                                      = objc.RegisterName("formatDescription")
 )
 
 func AVAudioFormatFromID(id objc.ID) *AVAudioFormat {
@@ -55,56 +55,72 @@ func AVAudioFormatFromID(id objc.ID) *AVAudioFormat {
 // @method initWithStreamDescription: @abstract Initialize from an AudioStreamBasicDescription. @param asbd the AudioStreamBasicDescription @discussion If the format specifies more than 2 channels, this method fails (returns nil).
 func (o *AVAudioFormat) InitWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDescription) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithStreamDescription, asbd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initWithStreamDescription:channelLayout: @abstract Initialize from an AudioStreamBasicDescription and optional channel layout. @param asbd the AudioStreamBasicDescription @param layout the channel layout. Can be nil only if asbd specifies 1 or 2 channels. @discussion If the format specifies more than 2 channels, this method fails (returns nil) unless layout is non-nil.
 func (o *AVAudioFormat) InitWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.AudioStreamBasicDescription, layout *AVAudioChannelLayout) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithStreamDescriptionChannelLayout, asbd, layout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initStandardFormatWithSampleRate:channels: @abstract Initialize to deinterleaved float with the specified sample rate and channel count. @param sampleRate the sample rate @param channels the channel count @discussion If the format specifies more than 2 channels, this method fails (returns nil).
 func (o *AVAudioFormat) InitStandardFormatWithSampleRateChannels(sampleRate float64, channels uint32) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitStandardFormatWithSampleRateChannels, sampleRate, channels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initStandardFormatWithSampleRate:channelLayout: @abstract Initialize to deinterleaved float with the specified sample rate and channel layout. @param sampleRate the sample rate @param layout the channel layout. must not be nil.
 func (o *AVAudioFormat) InitStandardFormatWithSampleRateChannelLayout(sampleRate float64, layout *AVAudioChannelLayout) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitStandardFormatWithSampleRateChannelLayout, sampleRate, layout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initWithCommonFormat:sampleRate:channels:interleaved: @abstract Initialize to float with the specified sample rate, channel count and interleavedness. @param format the common format type @param sampleRate the sample rate @param channels the channel count @param interleaved true if interleaved @discussion If the format specifies more than 2 channels, this method fails (returns nil).
 func (o *AVAudioFormat) InitWithCommonFormatSampleRateChannelsInterleaved(format AVAudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithCommonFormatSampleRateChannelsInterleaved, format, sampleRate, channels, interleaved)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initWithCommonFormat:sampleRate:interleaved:channelLayout: @abstract Initialize to float with the specified sample rate, channel layout and interleavedness. @param format the common format type @param sampleRate the sample rate @param interleaved true if interleaved @param layout the channel layout. must not be nil.
 func (o *AVAudioFormat) InitWithCommonFormatSampleRateInterleavedChannelLayout(format AVAudioCommonFormat, sampleRate float64, interleaved bool, layout *AVAudioChannelLayout) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithCommonFormatSampleRateInterleavedChannelLayout, format, sampleRate, interleaved, layout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initWithSettings: @abstract Initialize using a settings dictionary. @discussion See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder settings, not the basic format, and will be ignored. Returns nil if a format cannot be constructed with the provided settings, e.g. when: - AVNumberOfChannelsKey specifies more than 2 channels, but AVChannelLayoutKey hasn't been specified or the layout does not match - AVLinearPCMBitDepthKey for linear PCM format specifies less than 8 or greater than 32 bits - values for the keys are not of the expected types
 func (o *AVAudioFormat) InitWithSettings(settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithSettings, settings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @method initWithCMAudioFormatDescription: @abstract initialize from a CMAudioFormatDescriptionRef. @param formatDescription the CMAudioFormatDescriptionRef. @discussion If formatDescription is invalid, this method fails (returns nil).
 func (o *AVAudioFormat) InitWithCMAudioFormatDescription(formatDescription unsafe.Pointer) *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelInitWithCMAudioFormatDescription, formatDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -153,14 +169,18 @@ func (o *AVAudioFormat) StreamDescription() *coreaudiotypes.AudioStreamBasicDesc
 // @property channelLayout @abstract The underlying AVAudioChannelLayout, if any. @discussion Only formats with more than 2 channels are required to have channel layouts.
 func (o *AVAudioFormat) ChannelLayout() *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelChannelLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
 // @property magicCookie @abstract The underlying magic cookie, if any. @discussion A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
 func (o *AVAudioFormat) MagicCookie() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFormatSelMagicCookie)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -179,4 +199,3 @@ func (o *AVAudioFormat) FormatDescription() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioFormatSelFormatDescription)
 	return _ret
 }
-

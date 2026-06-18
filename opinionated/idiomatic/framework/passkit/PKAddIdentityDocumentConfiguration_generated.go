@@ -16,7 +16,9 @@ type AddIdentityDocumentConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.PKAddIdentityDocumentConfiguration].
-func (x *AddIdentityDocumentConfiguration) Unwrap() *raw.PKAddIdentityDocumentConfiguration { return x.inner }
+func (x *AddIdentityDocumentConfiguration) Unwrap() *raw.PKAddIdentityDocumentConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,7 +59,9 @@ func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata 
 	return &IdentityDocumentMetadata{inner: _r}
 }
 
-func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return &x.inner.PKAddSecureElementPassConfiguration }
+func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
+	return &x.inner.PKAddSecureElementPassConfiguration
+}
 
 // AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
 type AddIdentityDocumentConfigurationable interface {
@@ -68,4 +72,3 @@ type AddIdentityDocumentConfigurationable interface {
 }
 
 var _ AddIdentityDocumentConfigurationable = (*AddIdentityDocumentConfiguration)(nil)
-

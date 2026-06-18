@@ -15,8 +15,8 @@ type NSBatchInsertResult struct {
 }
 
 var (
-	_clsNSBatchInsertResult = _objcClass("NSBatchInsertResult")
-	_nSBatchInsertResultSelResult = objc.RegisterName("result")
+	_clsNSBatchInsertResult           = _objcClass("NSBatchInsertResult")
+	_nSBatchInsertResultSelResult     = objc.RegisterName("result")
 	_nSBatchInsertResultSelResultType = objc.RegisterName("resultType")
 )
 
@@ -39,4 +39,3 @@ func (o *NSBatchInsertResult) ResultType() NSBatchInsertRequestResultType {
 	_ret := objc.Send[NSBatchInsertRequestResultType](o.Ptr(), _nSBatchInsertResultSelResultType)
 	return _ret
 }
-

@@ -130,9 +130,13 @@ func (x *NNComparisonNode) SetComparisonType(comparisonType raw.MPSNNComparisonT
 	x.inner.SetComparisonType(comparisonType)
 }
 
-func (x *NNComparisonNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
+func (x *NNComparisonNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode {
+	return &x.inner.MPSNNBinaryArithmeticNode
+}
 
-func (x *NNComparisonNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+func (x *NNComparisonNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+}
 
 // NNComparisonNodeable is the interface implemented by [NNComparisonNode], for mocking and DI.
 type NNComparisonNodeable interface {
@@ -156,4 +160,3 @@ type NNComparisonNodeable interface {
 }
 
 var _ NNComparisonNodeable = (*NNComparisonNode)(nil)
-

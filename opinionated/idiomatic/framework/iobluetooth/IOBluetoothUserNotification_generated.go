@@ -47,4 +47,3 @@ type IOBluetoothUserNotificationable interface {
 }
 
 var _ IOBluetoothUserNotificationable = (*IOBluetoothUserNotification)(nil)
-

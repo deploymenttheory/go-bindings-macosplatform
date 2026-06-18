@@ -12,7 +12,7 @@ import (
 type AUAudioUnitBusType int64
 
 const (
-	AUAudioUnitBusTypeInput AUAudioUnitBusType = 1
+	AUAudioUnitBusTypeInput  AUAudioUnitBusType = 1
 	AUAudioUnitBusTypeOutput AUAudioUnitBusType = 2
 )
 
@@ -31,10 +31,10 @@ func (e AUAudioUnitBusType) String() string {
 type AUHostTransportStateFlags uint64
 
 const (
-	AUHostTransportStateChanged AUHostTransportStateFlags = 1
-	AUHostTransportStateMoving AUHostTransportStateFlags = 2
+	AUHostTransportStateChanged   AUHostTransportStateFlags = 1
+	AUHostTransportStateMoving    AUHostTransportStateFlags = 2
 	AUHostTransportStateRecording AUHostTransportStateFlags = 4
-	AUHostTransportStateCycling AUHostTransportStateFlags = 8
+	AUHostTransportStateCycling   AUHostTransportStateFlags = 8
 )
 
 func (e AUHostTransportStateFlags) String() string {
@@ -60,8 +60,8 @@ func (e AUHostTransportStateFlags) String() string {
 type AUParameterAutomationEventType int64
 
 const (
-	AUParameterAutomationEventTypeValue AUParameterAutomationEventType = 0
-	AUParameterAutomationEventTypeTouch AUParameterAutomationEventType = 1
+	AUParameterAutomationEventTypeValue   AUParameterAutomationEventType = 0
+	AUParameterAutomationEventTypeTouch   AUParameterAutomationEventType = 1
 	AUParameterAutomationEventTypeRelease AUParameterAutomationEventType = 2
 )
 
@@ -83,7 +83,7 @@ type AudioComponentInstantiationOptions int64
 
 const (
 	KAudioComponentInstantiation_LoadOutOfProcess AudioComponentInstantiationOptions = 1
-	KAudioComponentInstantiation_LoadInProcess AudioComponentInstantiationOptions = 2
+	KAudioComponentInstantiation_LoadInProcess    AudioComponentInstantiationOptions = 2
 )
 
 func (e AudioComponentInstantiationOptions) String() string {
@@ -103,10 +103,10 @@ func (e AudioComponentInstantiationOptions) String() string {
 type AudioComponentValidationResult int64
 
 const (
-	KAudioComponentValidationResult_Unknown AudioComponentValidationResult = 0
-	KAudioComponentValidationResult_Passed AudioComponentValidationResult = 1
-	KAudioComponentValidationResult_Failed AudioComponentValidationResult = 2
-	KAudioComponentValidationResult_TimedOut AudioComponentValidationResult = 3
+	KAudioComponentValidationResult_Unknown                AudioComponentValidationResult = 0
+	KAudioComponentValidationResult_Passed                 AudioComponentValidationResult = 1
+	KAudioComponentValidationResult_Failed                 AudioComponentValidationResult = 2
+	KAudioComponentValidationResult_TimedOut               AudioComponentValidationResult = 3
 	KAudioComponentValidationResult_UnauthorizedError_Open AudioComponentValidationResult = 4
 	KAudioComponentValidationResult_UnauthorizedError_Init AudioComponentValidationResult = 5
 )
@@ -152,7 +152,7 @@ func (e AudioConverterOptions) String() string {
 type AudioFileFlags int64
 
 const (
-	KAudioFileFlags_EraseFile AudioFileFlags = 1
+	KAudioFileFlags_EraseFile              AudioFileFlags = 1
 	KAudioFileFlags_DontPageAlignAudioData AudioFileFlags = 2
 )
 
@@ -173,8 +173,8 @@ func (e AudioFileFlags) String() string {
 type AudioFilePermissions int64
 
 const (
-	KAudioFileReadPermission AudioFilePermissions = 1
-	KAudioFileWritePermission AudioFilePermissions = 2
+	KAudioFileReadPermission      AudioFilePermissions = 1
+	KAudioFileWritePermission     AudioFilePermissions = 2
 	KAudioFileReadWritePermission AudioFilePermissions = 3
 )
 
@@ -231,11 +231,11 @@ func (e AudioFileStreamSeekFlags) String() string {
 type AudioQueueProcessingTapFlags int64
 
 const (
-	KAudioQueueProcessingTap_PreEffects AudioQueueProcessingTapFlags = 1
-	KAudioQueueProcessingTap_PostEffects AudioQueueProcessingTapFlags = 2
-	KAudioQueueProcessingTap_Siphon AudioQueueProcessingTapFlags = 4
+	KAudioQueueProcessingTap_PreEffects    AudioQueueProcessingTapFlags = 1
+	KAudioQueueProcessingTap_PostEffects   AudioQueueProcessingTapFlags = 2
+	KAudioQueueProcessingTap_Siphon        AudioQueueProcessingTapFlags = 4
 	KAudioQueueProcessingTap_StartOfStream AudioQueueProcessingTapFlags = 256
-	KAudioQueueProcessingTap_EndOfStream AudioQueueProcessingTapFlags = 512
+	KAudioQueueProcessingTap_EndOfStream   AudioQueueProcessingTapFlags = 512
 )
 
 func (e AudioQueueProcessingTapFlags) String() string {
@@ -265,28 +265,28 @@ func (e AudioQueueProcessingTapFlags) String() string {
 type AudioUnitParameterOptions int64
 
 const (
-	KAudioUnitParameterFlag_CFNameRelease AudioUnitParameterOptions = 16
-	KAudioUnitParameterFlag_OmitFromPresets AudioUnitParameterOptions = 8192
-	KAudioUnitParameterFlag_PlotHistory AudioUnitParameterOptions = 16384
-	KAudioUnitParameterFlag_MeterReadOnly AudioUnitParameterOptions = 32768
-	KAudioUnitParameterFlag_DisplayMask AudioUnitParameterOptions = 4653056
-	KAudioUnitParameterFlag_DisplaySquareRoot AudioUnitParameterOptions = 65536
-	KAudioUnitParameterFlag_DisplaySquared AudioUnitParameterOptions = 131072
-	KAudioUnitParameterFlag_DisplayCubed AudioUnitParameterOptions = 196608
-	KAudioUnitParameterFlag_DisplayCubeRoot AudioUnitParameterOptions = 262144
+	KAudioUnitParameterFlag_CFNameRelease      AudioUnitParameterOptions = 16
+	KAudioUnitParameterFlag_OmitFromPresets    AudioUnitParameterOptions = 8192
+	KAudioUnitParameterFlag_PlotHistory        AudioUnitParameterOptions = 16384
+	KAudioUnitParameterFlag_MeterReadOnly      AudioUnitParameterOptions = 32768
+	KAudioUnitParameterFlag_DisplayMask        AudioUnitParameterOptions = 4653056
+	KAudioUnitParameterFlag_DisplaySquareRoot  AudioUnitParameterOptions = 65536
+	KAudioUnitParameterFlag_DisplaySquared     AudioUnitParameterOptions = 131072
+	KAudioUnitParameterFlag_DisplayCubed       AudioUnitParameterOptions = 196608
+	KAudioUnitParameterFlag_DisplayCubeRoot    AudioUnitParameterOptions = 262144
 	KAudioUnitParameterFlag_DisplayExponential AudioUnitParameterOptions = 327680
-	KAudioUnitParameterFlag_HasClump AudioUnitParameterOptions = 1048576
-	KAudioUnitParameterFlag_ValuesHaveStrings AudioUnitParameterOptions = 2097152
+	KAudioUnitParameterFlag_HasClump           AudioUnitParameterOptions = 1048576
+	KAudioUnitParameterFlag_ValuesHaveStrings  AudioUnitParameterOptions = 2097152
 	KAudioUnitParameterFlag_DisplayLogarithmic AudioUnitParameterOptions = 4194304
-	KAudioUnitParameterFlag_IsHighResolution AudioUnitParameterOptions = 8388608
-	KAudioUnitParameterFlag_NonRealTime AudioUnitParameterOptions = 16777216
-	KAudioUnitParameterFlag_CanRamp AudioUnitParameterOptions = 33554432
-	KAudioUnitParameterFlag_ExpertMode AudioUnitParameterOptions = 67108864
-	KAudioUnitParameterFlag_HasCFNameString AudioUnitParameterOptions = 134217728
-	KAudioUnitParameterFlag_IsGlobalMeta AudioUnitParameterOptions = 268435456
-	KAudioUnitParameterFlag_IsElementMeta AudioUnitParameterOptions = 536870912
-	KAudioUnitParameterFlag_IsReadable AudioUnitParameterOptions = 1073741824
-	KAudioUnitParameterFlag_IsWritable AudioUnitParameterOptions = 2147483648
+	KAudioUnitParameterFlag_IsHighResolution   AudioUnitParameterOptions = 8388608
+	KAudioUnitParameterFlag_NonRealTime        AudioUnitParameterOptions = 16777216
+	KAudioUnitParameterFlag_CanRamp            AudioUnitParameterOptions = 33554432
+	KAudioUnitParameterFlag_ExpertMode         AudioUnitParameterOptions = 67108864
+	KAudioUnitParameterFlag_HasCFNameString    AudioUnitParameterOptions = 134217728
+	KAudioUnitParameterFlag_IsGlobalMeta       AudioUnitParameterOptions = 268435456
+	KAudioUnitParameterFlag_IsElementMeta      AudioUnitParameterOptions = 536870912
+	KAudioUnitParameterFlag_IsReadable         AudioUnitParameterOptions = 1073741824
+	KAudioUnitParameterFlag_IsWritable         AudioUnitParameterOptions = 2147483648
 )
 
 func (e AudioUnitParameterOptions) String() string {
@@ -366,34 +366,34 @@ func (e AudioUnitParameterOptions) String() string {
 type AudioUnitParameterUnit int64
 
 const (
-	KAudioUnitParameterUnit_Generic AudioUnitParameterUnit = 0
-	KAudioUnitParameterUnit_Indexed AudioUnitParameterUnit = 1
-	KAudioUnitParameterUnit_Boolean AudioUnitParameterUnit = 2
-	KAudioUnitParameterUnit_Percent AudioUnitParameterUnit = 3
-	KAudioUnitParameterUnit_Seconds AudioUnitParameterUnit = 4
-	KAudioUnitParameterUnit_SampleFrames AudioUnitParameterUnit = 5
-	KAudioUnitParameterUnit_Phase AudioUnitParameterUnit = 6
-	KAudioUnitParameterUnit_Rate AudioUnitParameterUnit = 7
-	KAudioUnitParameterUnit_Hertz AudioUnitParameterUnit = 8
-	KAudioUnitParameterUnit_Cents AudioUnitParameterUnit = 9
-	KAudioUnitParameterUnit_RelativeSemiTones AudioUnitParameterUnit = 10
-	KAudioUnitParameterUnit_MIDINoteNumber AudioUnitParameterUnit = 11
-	KAudioUnitParameterUnit_MIDIController AudioUnitParameterUnit = 12
-	KAudioUnitParameterUnit_Decibels AudioUnitParameterUnit = 13
-	KAudioUnitParameterUnit_LinearGain AudioUnitParameterUnit = 14
-	KAudioUnitParameterUnit_Degrees AudioUnitParameterUnit = 15
+	KAudioUnitParameterUnit_Generic             AudioUnitParameterUnit = 0
+	KAudioUnitParameterUnit_Indexed             AudioUnitParameterUnit = 1
+	KAudioUnitParameterUnit_Boolean             AudioUnitParameterUnit = 2
+	KAudioUnitParameterUnit_Percent             AudioUnitParameterUnit = 3
+	KAudioUnitParameterUnit_Seconds             AudioUnitParameterUnit = 4
+	KAudioUnitParameterUnit_SampleFrames        AudioUnitParameterUnit = 5
+	KAudioUnitParameterUnit_Phase               AudioUnitParameterUnit = 6
+	KAudioUnitParameterUnit_Rate                AudioUnitParameterUnit = 7
+	KAudioUnitParameterUnit_Hertz               AudioUnitParameterUnit = 8
+	KAudioUnitParameterUnit_Cents               AudioUnitParameterUnit = 9
+	KAudioUnitParameterUnit_RelativeSemiTones   AudioUnitParameterUnit = 10
+	KAudioUnitParameterUnit_MIDINoteNumber      AudioUnitParameterUnit = 11
+	KAudioUnitParameterUnit_MIDIController      AudioUnitParameterUnit = 12
+	KAudioUnitParameterUnit_Decibels            AudioUnitParameterUnit = 13
+	KAudioUnitParameterUnit_LinearGain          AudioUnitParameterUnit = 14
+	KAudioUnitParameterUnit_Degrees             AudioUnitParameterUnit = 15
 	KAudioUnitParameterUnit_EqualPowerCrossfade AudioUnitParameterUnit = 16
-	KAudioUnitParameterUnit_MixerFaderCurve1 AudioUnitParameterUnit = 17
-	KAudioUnitParameterUnit_Pan AudioUnitParameterUnit = 18
-	KAudioUnitParameterUnit_Meters AudioUnitParameterUnit = 19
-	KAudioUnitParameterUnit_AbsoluteCents AudioUnitParameterUnit = 20
-	KAudioUnitParameterUnit_Octaves AudioUnitParameterUnit = 21
-	KAudioUnitParameterUnit_BPM AudioUnitParameterUnit = 22
-	KAudioUnitParameterUnit_Beats AudioUnitParameterUnit = 23
-	KAudioUnitParameterUnit_Milliseconds AudioUnitParameterUnit = 24
-	KAudioUnitParameterUnit_Ratio AudioUnitParameterUnit = 25
-	KAudioUnitParameterUnit_CustomUnit AudioUnitParameterUnit = 26
-	KAudioUnitParameterUnit_MIDI2Controller AudioUnitParameterUnit = 27
+	KAudioUnitParameterUnit_MixerFaderCurve1    AudioUnitParameterUnit = 17
+	KAudioUnitParameterUnit_Pan                 AudioUnitParameterUnit = 18
+	KAudioUnitParameterUnit_Meters              AudioUnitParameterUnit = 19
+	KAudioUnitParameterUnit_AbsoluteCents       AudioUnitParameterUnit = 20
+	KAudioUnitParameterUnit_Octaves             AudioUnitParameterUnit = 21
+	KAudioUnitParameterUnit_BPM                 AudioUnitParameterUnit = 22
+	KAudioUnitParameterUnit_Beats               AudioUnitParameterUnit = 23
+	KAudioUnitParameterUnit_Milliseconds        AudioUnitParameterUnit = 24
+	KAudioUnitParameterUnit_Ratio               AudioUnitParameterUnit = 25
+	KAudioUnitParameterUnit_CustomUnit          AudioUnitParameterUnit = 26
+	KAudioUnitParameterUnit_MIDI2Controller     AudioUnitParameterUnit = 27
 )
 
 func (e AudioUnitParameterUnit) String() string {
@@ -463,13 +463,13 @@ func (e AudioUnitParameterUnit) String() string {
 type AudioUnitRenderActionFlags int64
 
 const (
-	KAudioUnitRenderAction_PreRender AudioUnitRenderActionFlags = 4
-	KAudioUnitRenderAction_PostRender AudioUnitRenderActionFlags = 8
-	KAudioUnitRenderAction_OutputIsSilence AudioUnitRenderActionFlags = 16
-	KAudioOfflineUnitRenderAction_Preflight AudioUnitRenderActionFlags = 32
-	KAudioOfflineUnitRenderAction_Render AudioUnitRenderActionFlags = 64
-	KAudioOfflineUnitRenderAction_Complete AudioUnitRenderActionFlags = 128
-	KAudioUnitRenderAction_PostRenderError AudioUnitRenderActionFlags = 256
+	KAudioUnitRenderAction_PreRender            AudioUnitRenderActionFlags = 4
+	KAudioUnitRenderAction_PostRender           AudioUnitRenderActionFlags = 8
+	KAudioUnitRenderAction_OutputIsSilence      AudioUnitRenderActionFlags = 16
+	KAudioOfflineUnitRenderAction_Preflight     AudioUnitRenderActionFlags = 32
+	KAudioOfflineUnitRenderAction_Render        AudioUnitRenderActionFlags = 64
+	KAudioOfflineUnitRenderAction_Complete      AudioUnitRenderActionFlags = 128
+	KAudioUnitRenderAction_PostRenderError      AudioUnitRenderActionFlags = 256
 	KAudioUnitRenderAction_DoNotCheckRenderArgs AudioUnitRenderActionFlags = 512
 )
 
@@ -508,19 +508,19 @@ func (e AudioUnitRenderActionFlags) String() string {
 type CAClockPropertyID int64
 
 const (
-	KCAClockProperty_InternalTimebase CAClockPropertyID = 1768846434
-	KCAClockProperty_TimebaseSource CAClockPropertyID = 1769235059
-	KCAClockProperty_SyncMode CAClockPropertyID = 1937337965
-	KCAClockProperty_SyncSource CAClockPropertyID = 1937337971
-	KCAClockProperty_SMPTEFormat CAClockPropertyID = 1936552038
-	KCAClockProperty_SMPTEOffset CAClockPropertyID = 1936552047
+	KCAClockProperty_InternalTimebase      CAClockPropertyID = 1768846434
+	KCAClockProperty_TimebaseSource        CAClockPropertyID = 1769235059
+	KCAClockProperty_SyncMode              CAClockPropertyID = 1937337965
+	KCAClockProperty_SyncSource            CAClockPropertyID = 1937337971
+	KCAClockProperty_SMPTEFormat           CAClockPropertyID = 1936552038
+	KCAClockProperty_SMPTEOffset           CAClockPropertyID = 1936552047
 	KCAClockProperty_MIDIClockDestinations CAClockPropertyID = 1835164516
-	KCAClockProperty_MTCDestinations CAClockPropertyID = 1836344164
-	KCAClockProperty_MTCFreewheelTime CAClockPropertyID = 1836344951
-	KCAClockProperty_TempoMap CAClockPropertyID = 1953329263
-	KCAClockProperty_MeterTrack CAClockPropertyID = 1835365490
-	KCAClockProperty_Name CAClockPropertyID = 1851878757
-	KCAClockProperty_SendMIDISPP CAClockPropertyID = 1836281968
+	KCAClockProperty_MTCDestinations       CAClockPropertyID = 1836344164
+	KCAClockProperty_MTCFreewheelTime      CAClockPropertyID = 1836344951
+	KCAClockProperty_TempoMap              CAClockPropertyID = 1953329263
+	KCAClockProperty_MeterTrack            CAClockPropertyID = 1835365490
+	KCAClockProperty_Name                  CAClockPropertyID = 1851878757
+	KCAClockProperty_SendMIDISPP           CAClockPropertyID = 1836281968
 )
 
 func (e CAClockPropertyID) String() string {
@@ -559,12 +559,12 @@ func (e CAClockPropertyID) String() string {
 type CAClockTimeFormat int64
 
 const (
-	KCAClockTimeFormat_HostTime CAClockTimeFormat = 1752134516
-	KCAClockTimeFormat_Samples CAClockTimeFormat = 1935764848
-	KCAClockTimeFormat_Beats CAClockTimeFormat = 1650811252
-	KCAClockTimeFormat_Seconds CAClockTimeFormat = 1936024435
-	KCAClockTimeFormat_SMPTESeconds CAClockTimeFormat = 1936552051
-	KCAClockTimeFormat_SMPTETime CAClockTimeFormat = 1936552052
+	KCAClockTimeFormat_HostTime        CAClockTimeFormat = 1752134516
+	KCAClockTimeFormat_Samples         CAClockTimeFormat = 1935764848
+	KCAClockTimeFormat_Beats           CAClockTimeFormat = 1650811252
+	KCAClockTimeFormat_Seconds         CAClockTimeFormat = 1936024435
+	KCAClockTimeFormat_SMPTESeconds    CAClockTimeFormat = 1936552051
+	KCAClockTimeFormat_SMPTETime       CAClockTimeFormat = 1936552052
 	KCAClockTimeFormat_AbsoluteSeconds CAClockTimeFormat = 1634952547
 )
 
@@ -593,7 +593,7 @@ func (e CAClockTimeFormat) String() string {
 type MusicSequenceFileFlags int64
 
 const (
-	KMusicSequenceFileFlags_Default MusicSequenceFileFlags = 0
+	KMusicSequenceFileFlags_Default   MusicSequenceFileFlags = 0
 	KMusicSequenceFileFlags_EraseFile MusicSequenceFileFlags = 1
 )
 
@@ -611,8 +611,8 @@ func (e MusicSequenceFileFlags) String() string {
 type MusicSequenceFileTypeID int64
 
 const (
-	KMusicSequenceFile_AnyType MusicSequenceFileTypeID = 0
-	KMusicSequenceFile_MIDIType MusicSequenceFileTypeID = 1835623529
+	KMusicSequenceFile_AnyType     MusicSequenceFileTypeID = 0
+	KMusicSequenceFile_MIDIType    MusicSequenceFileTypeID = 1835623529
 	KMusicSequenceFile_iMelodyType MusicSequenceFileTypeID = 1768777068
 )
 
@@ -633,7 +633,7 @@ func (e MusicSequenceFileTypeID) String() string {
 type MusicSequenceLoadFlags int64
 
 const (
-	KMusicSequenceLoadSMF_PreserveTracks MusicSequenceLoadFlags = 0
+	KMusicSequenceLoadSMF_PreserveTracks   MusicSequenceLoadFlags = 0
 	KMusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadFlags = 1
 )
 
@@ -651,7 +651,7 @@ func (e MusicSequenceLoadFlags) String() string {
 type MusicSequenceType int64
 
 const (
-	KMusicSequenceType_Beats MusicSequenceType = 1650811252
+	KMusicSequenceType_Beats   MusicSequenceType = 1650811252
 	KMusicSequenceType_Seconds MusicSequenceType = 1936024435
 	KMusicSequenceType_Samples MusicSequenceType = 1935764848
 )
@@ -668,4 +668,3 @@ func (e MusicSequenceType) String() string {
 		return fmt.Sprintf("MusicSequenceType(%d)", int64(e))
 	}
 }
-

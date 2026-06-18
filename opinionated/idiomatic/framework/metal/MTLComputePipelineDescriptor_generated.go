@@ -316,4 +316,3 @@ type ComputePipelineDescriptorable interface {
 }
 
 var _ ComputePipelineDescriptorable = (*ComputePipelineDescriptor)(nil)
-

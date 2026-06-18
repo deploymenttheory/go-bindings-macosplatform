@@ -18,37 +18,37 @@ type MTRClusterTestCluster struct {
 }
 
 var (
-	_clsMTRClusterTestCluster = _objcClass("MTRClusterTestCluster")
-	_mTRClusterTestClusterSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterTestClusterSelTestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNotHandledWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNotHandledWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestSpecificWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testUnknownCommandWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testUnknownCommandWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterTestCluster                                                                                                      = _objcClass("MTRClusterTestCluster")
+	_mTRClusterTestClusterSelInitWithDeviceEndpointQueue                                                                           = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterTestClusterSelTestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                                    = objc.RegisterName("testWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestWithExpectedValuesExpectedValueIntervalCompletionHandler                                          = objc.RegisterName("testWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNotHandledWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                          = objc.RegisterName("testNotHandledWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNotHandledWithExpectedValuesExpectedValueIntervalCompletionHandler                                = objc.RegisterName("testNotHandledWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                            = objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestSpecificWithExpectedValuesExpectedValueIntervalCompletionHandler                                  = objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestUnknownCommandWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                      = objc.RegisterName("testUnknownCommandWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestUnknownCommandWithExpectedValuesExpectedValueIntervalCompletionHandler                            = objc.RegisterName("testUnknownCommandWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                        = objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler               = objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler          = objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler               = objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler         = objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler            = objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler     = objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterTestClusterSelTestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testListNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelSimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("timedInvokeRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("timedInvokeRequestWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testSimpleOptionalArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testSimpleOptionalArgumentRequestWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterTestClusterSelTestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                        = objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletionHandler                   = objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler      = objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelSimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                 = objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTimedInvokeRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                      = objc.RegisterName("timedInvokeRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTimedInvokeRequestWithExpectedValuesExpectedValueIntervalCompletionHandler                            = objc.RegisterName("timedInvokeRequestWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("testSimpleOptionalArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestSimpleOptionalArgumentRequestWithExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("testSimpleOptionalArgumentRequestWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                = objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterTestClusterSelTestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler    = objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterTestClusterFromID(id objc.ID) *MTRClusterTestCluster {
@@ -63,7 +63,9 @@ func MTRClusterTestClusterFromID(id objc.ID) *MTRClusterTestCluster {
 
 func (o *MTRClusterTestCluster) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTestCluster {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTestClusterSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTestClusterFromID(_ret)
 }
 
@@ -442,4 +444,3 @@ func (o *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsEx
 	}
 	o.Ptr().Send(_mTRClusterTestClusterSelTestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

@@ -20,18 +20,18 @@ type MPSImageHistogram struct {
 }
 
 var (
-	_clsMPSImageHistogram = _objcClass("MPSImageHistogram")
-	_mPSImageHistogramSelInitWithDeviceHistogramInfo = objc.RegisterName("initWithDevice:histogramInfo:")
-	_mPSImageHistogramSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSImageHistogram                                                           = _objcClass("MPSImageHistogram")
+	_mPSImageHistogramSelInitWithDeviceHistogramInfo                                = objc.RegisterName("initWithDevice:histogramInfo:")
+	_mPSImageHistogramSelInitWithCoderDevice                                        = objc.RegisterName("initWithCoder:device:")
 	_mPSImageHistogramSelEncodeToCommandBufferSourceTextureHistogramHistogramOffset = objc.RegisterName("encodeToCommandBuffer:sourceTexture:histogram:histogramOffset:")
-	_mPSImageHistogramSelHistogramSizeForSourceFormat = objc.RegisterName("histogramSizeForSourceFormat:")
-	_mPSImageHistogramSelClipRectSource = objc.RegisterName("clipRectSource")
-	_mPSImageHistogramSelSetClipRectSource = objc.RegisterName("setClipRectSource:")
-	_mPSImageHistogramSelZeroHistogram = objc.RegisterName("zeroHistogram")
-	_mPSImageHistogramSelSetZeroHistogram = objc.RegisterName("setZeroHistogram:")
-	_mPSImageHistogramSelMinPixelThresholdValue = objc.RegisterName("minPixelThresholdValue")
-	_mPSImageHistogramSelSetMinPixelThresholdValue = objc.RegisterName("setMinPixelThresholdValue:")
-	_mPSImageHistogramSelHistogramInfo = objc.RegisterName("histogramInfo")
+	_mPSImageHistogramSelHistogramSizeForSourceFormat                               = objc.RegisterName("histogramSizeForSourceFormat:")
+	_mPSImageHistogramSelClipRectSource                                             = objc.RegisterName("clipRectSource")
+	_mPSImageHistogramSelSetClipRectSource                                          = objc.RegisterName("setClipRectSource:")
+	_mPSImageHistogramSelZeroHistogram                                              = objc.RegisterName("zeroHistogram")
+	_mPSImageHistogramSelSetZeroHistogram                                           = objc.RegisterName("setZeroHistogram:")
+	_mPSImageHistogramSelMinPixelThresholdValue                                     = objc.RegisterName("minPixelThresholdValue")
+	_mPSImageHistogramSelSetMinPixelThresholdValue                                  = objc.RegisterName("setMinPixelThresholdValue:")
+	_mPSImageHistogramSelHistogramInfo                                              = objc.RegisterName("histogramInfo")
 )
 
 func MPSImageHistogramFromID(id objc.ID) *MPSImageHistogram {
@@ -46,14 +46,18 @@ func MPSImageHistogramFromID(id objc.ID) *MPSImageHistogram {
 
 func (o *MPSImageHistogram) InitWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *MPSImageHistogramInfo) *MPSImageHistogram {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSelInitWithDeviceHistogramInfo, device, histogramInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageHistogramFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageHistogram) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageHistogram {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageHistogramFromID(_ret)
 }
 
@@ -103,4 +107,3 @@ func (o *MPSImageHistogram) HistogramInfo() MPSImageHistogramInfo {
 	_ret := objc.Send[MPSImageHistogramInfo](o.Ptr(), _mPSImageHistogramSelHistogramInfo)
 	return _ret
 }
-

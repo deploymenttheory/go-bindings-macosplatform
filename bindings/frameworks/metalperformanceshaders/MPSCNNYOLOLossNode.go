@@ -18,10 +18,10 @@ type MPSCNNYOLOLossNode struct {
 }
 
 var (
-	_clsMPSCNNYOLOLossNode = _objcClass("MPSCNNYOLOLossNode")
+	_clsMPSCNNYOLOLossNode                             = _objcClass("MPSCNNYOLOLossNode")
 	_mPSCNNYOLOLossNodeSelNodeWithSourceLossDescriptor = objc.RegisterName("nodeWithSource:lossDescriptor:")
 	_mPSCNNYOLOLossNodeSelInitWithSourceLossDescriptor = objc.RegisterName("initWithSource:lossDescriptor:")
-	_mPSCNNYOLOLossNodeSelInputLabels = objc.RegisterName("inputLabels")
+	_mPSCNNYOLOLossNodeSelInputLabels                  = objc.RegisterName("inputLabels")
 )
 
 func MPSCNNYOLOLossNodeFromID(id objc.ID) *MPSCNNYOLOLossNode {
@@ -36,20 +36,25 @@ func MPSCNNYOLOLossNodeFromID(id objc.ID) *MPSCNNYOLOLossNode {
 
 func MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNYOLOLossDescriptor) *MPSCNNYOLOLossNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNYOLOLossNode), _mPSCNNYOLOLossNodeSelNodeWithSourceLossDescriptor, source.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNYOLOLossNodeFromID(_ret)
 }
 
 func (o *MPSCNNYOLOLossNode) InitWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNYOLOLossDescriptor) *MPSCNNYOLOLossNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossNodeSelInitWithSourceLossDescriptor, source.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNYOLOLossNodeFromID(_ret)
 }
 
 // @abstract Get the input node for labes and weights, for example to set the handle
 func (o *MPSCNNYOLOLossNode) InputLabels() *mpsneuralnetwork.MPSNNLabelsNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNYOLOLossNodeSelInputLabels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNLabelsNodeFromID(_ret)
 }
-

@@ -105,4 +105,3 @@ func ConfigWithMonitorNameQueueEventHandler(name string, queue *foundation.NSObj
 	}
 	return &MonitorConfiguration{inner: _r}
 }
-

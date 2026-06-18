@@ -18,16 +18,16 @@ type ASPublicKeyCredentialClientData struct {
 }
 
 var (
-	_clsASPublicKeyCredentialClientData = _objcClass("ASPublicKeyCredentialClientData")
+	_clsASPublicKeyCredentialClientData                        = _objcClass("ASPublicKeyCredentialClientData")
 	_aSPublicKeyCredentialClientDataSelInitWithChallengeOrigin = objc.RegisterName("initWithChallenge:origin:")
-	_aSPublicKeyCredentialClientDataSelChallenge = objc.RegisterName("challenge")
-	_aSPublicKeyCredentialClientDataSelSetChallenge = objc.RegisterName("setChallenge:")
-	_aSPublicKeyCredentialClientDataSelOrigin = objc.RegisterName("origin")
-	_aSPublicKeyCredentialClientDataSelSetOrigin = objc.RegisterName("setOrigin:")
-	_aSPublicKeyCredentialClientDataSelTopOrigin = objc.RegisterName("topOrigin")
-	_aSPublicKeyCredentialClientDataSelSetTopOrigin = objc.RegisterName("setTopOrigin:")
-	_aSPublicKeyCredentialClientDataSelCrossOrigin = objc.RegisterName("crossOrigin")
-	_aSPublicKeyCredentialClientDataSelSetCrossOrigin = objc.RegisterName("setCrossOrigin:")
+	_aSPublicKeyCredentialClientDataSelChallenge               = objc.RegisterName("challenge")
+	_aSPublicKeyCredentialClientDataSelSetChallenge            = objc.RegisterName("setChallenge:")
+	_aSPublicKeyCredentialClientDataSelOrigin                  = objc.RegisterName("origin")
+	_aSPublicKeyCredentialClientDataSelSetOrigin               = objc.RegisterName("setOrigin:")
+	_aSPublicKeyCredentialClientDataSelTopOrigin               = objc.RegisterName("topOrigin")
+	_aSPublicKeyCredentialClientDataSelSetTopOrigin            = objc.RegisterName("setTopOrigin:")
+	_aSPublicKeyCredentialClientDataSelCrossOrigin             = objc.RegisterName("crossOrigin")
+	_aSPublicKeyCredentialClientDataSelSetCrossOrigin          = objc.RegisterName("setCrossOrigin:")
 )
 
 func ASPublicKeyCredentialClientDataFromID(id objc.ID) *ASPublicKeyCredentialClientData {
@@ -42,14 +42,18 @@ func ASPublicKeyCredentialClientDataFromID(id objc.ID) *ASPublicKeyCredentialCli
 
 func (o *ASPublicKeyCredentialClientData) InitWithChallengeOrigin(challenge *foundation.NSData, origin *foundation.NSString) *ASPublicKeyCredentialClientData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPublicKeyCredentialClientDataSelInitWithChallengeOrigin, challenge.Ptr(), origin.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPublicKeyCredentialClientDataFromID(_ret)
 }
 
 // The challenge to be signed during the operation.
 func (o *ASPublicKeyCredentialClientData) Challenge() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPublicKeyCredentialClientDataSelChallenge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *ASPublicKeyCredentialClientData) SetChallenge(challenge *foundation.NSD
 // The origin for where the request was performed.
 func (o *ASPublicKeyCredentialClientData) Origin() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPublicKeyCredentialClientDataSelOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *ASPublicKeyCredentialClientData) SetOrigin(origin *foundation.NSString)
 // The top-level origin, if applicable.
 func (o *ASPublicKeyCredentialClientData) TopOrigin() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPublicKeyCredentialClientDataSelTopOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *ASPublicKeyCredentialClientData) CrossOrigin() ASPublicKeyCredentialCli
 func (o *ASPublicKeyCredentialClientData) SetCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) {
 	o.Ptr().Send(_aSPublicKeyCredentialClientDataSelSetCrossOrigin, crossOrigin)
 }
-

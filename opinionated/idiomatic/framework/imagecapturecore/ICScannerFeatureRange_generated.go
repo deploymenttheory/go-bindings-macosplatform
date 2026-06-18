@@ -71,7 +71,9 @@ func (x *ScannerFeatureRange) StepSize() float64 {
 	return x.inner.StepSize()
 }
 
-func (x *ScannerFeatureRange) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+func (x *ScannerFeatureRange) asScannerFeature() *raw.ICScannerFeature {
+	return &x.inner.ICScannerFeature
+}
 
 // ScannerFeatureRangeable is the interface implemented by [ScannerFeatureRange], for mocking and DI.
 type ScannerFeatureRangeable interface {
@@ -86,4 +88,3 @@ type ScannerFeatureRangeable interface {
 }
 
 var _ ScannerFeatureRangeable = (*ScannerFeatureRange)(nil)
-

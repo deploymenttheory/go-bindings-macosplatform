@@ -53,4 +53,3 @@ type ProductSubscriptionPeriodable interface {
 }
 
 var _ ProductSubscriptionPeriodable = (*ProductSubscriptionPeriod)(nil)
-

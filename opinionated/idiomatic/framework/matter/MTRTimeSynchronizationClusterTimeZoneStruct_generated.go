@@ -17,7 +17,9 @@ type MTRTimeSynchronizationClusterTimeZoneStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterTimeZoneStruct].
-func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return x.inner }
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,7 +91,9 @@ func (x *MTRTimeSynchronizationClusterTimeZoneStruct) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
-func (x *MTRTimeSynchronizationClusterTimeZoneStruct) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return x.inner }
+func (x *MTRTimeSynchronizationClusterTimeZoneStruct) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct {
+	return x.inner
+}
 
 // MTRTimeSynchronizationClusterTimeZoneStructable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneStruct], for mocking and DI.
 type MTRTimeSynchronizationClusterTimeZoneStructable interface {
@@ -106,4 +110,3 @@ type MTRTimeSynchronizationClusterTimeZoneStructable interface {
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneStructable = (*MTRTimeSynchronizationClusterTimeZoneStruct)(nil)
-

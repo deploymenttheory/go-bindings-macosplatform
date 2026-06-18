@@ -175,4 +175,3 @@ type Interactionable interface {
 }
 
 var _ Interactionable = (*Interaction)(nil)
-

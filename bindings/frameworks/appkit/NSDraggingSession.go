@@ -17,17 +17,17 @@ type NSDraggingSession struct {
 }
 
 var (
-	_clsNSDraggingSession = _objcClass("NSDraggingSession")
+	_clsNSDraggingSession                                                                  = _objcClass("NSDraggingSession")
 	_nSDraggingSessionSelEnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing = objc.RegisterName("enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:")
-	_nSDraggingSessionSelDraggingFormation = objc.RegisterName("draggingFormation")
-	_nSDraggingSessionSelSetDraggingFormation = objc.RegisterName("setDraggingFormation:")
-	_nSDraggingSessionSelAnimatesToStartingPositionsOnCancelOrFail = objc.RegisterName("animatesToStartingPositionsOnCancelOrFail")
-	_nSDraggingSessionSelSetAnimatesToStartingPositionsOnCancelOrFail = objc.RegisterName("setAnimatesToStartingPositionsOnCancelOrFail:")
-	_nSDraggingSessionSelDraggingLeaderIndex = objc.RegisterName("draggingLeaderIndex")
-	_nSDraggingSessionSelSetDraggingLeaderIndex = objc.RegisterName("setDraggingLeaderIndex:")
-	_nSDraggingSessionSelDraggingPasteboard = objc.RegisterName("draggingPasteboard")
-	_nSDraggingSessionSelDraggingSequenceNumber = objc.RegisterName("draggingSequenceNumber")
-	_nSDraggingSessionSelDraggingLocation = objc.RegisterName("draggingLocation")
+	_nSDraggingSessionSelDraggingFormation                                                 = objc.RegisterName("draggingFormation")
+	_nSDraggingSessionSelSetDraggingFormation                                              = objc.RegisterName("setDraggingFormation:")
+	_nSDraggingSessionSelAnimatesToStartingPositionsOnCancelOrFail                         = objc.RegisterName("animatesToStartingPositionsOnCancelOrFail")
+	_nSDraggingSessionSelSetAnimatesToStartingPositionsOnCancelOrFail                      = objc.RegisterName("setAnimatesToStartingPositionsOnCancelOrFail:")
+	_nSDraggingSessionSelDraggingLeaderIndex                                               = objc.RegisterName("draggingLeaderIndex")
+	_nSDraggingSessionSelSetDraggingLeaderIndex                                            = objc.RegisterName("setDraggingLeaderIndex:")
+	_nSDraggingSessionSelDraggingPasteboard                                                = objc.RegisterName("draggingPasteboard")
+	_nSDraggingSessionSelDraggingSequenceNumber                                            = objc.RegisterName("draggingSequenceNumber")
+	_nSDraggingSessionSelDraggingLocation                                                  = objc.RegisterName("draggingLocation")
 )
 
 func NSDraggingSessionFromID(id objc.ID) *NSDraggingSession {
@@ -83,7 +83,9 @@ func (o *NSDraggingSession) SetDraggingLeaderIndex(draggingLeaderIndex int) {
 
 func (o *NSDraggingSession) DraggingPasteboard() *NSPasteboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingSessionSelDraggingPasteboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
@@ -96,4 +98,3 @@ func (o *NSDraggingSession) DraggingLocation() corefoundation.CGPoint {
 	_ret := objc.Send[corefoundation.CGPoint](o.Ptr(), _nSDraggingSessionSelDraggingLocation)
 	return _ret
 }
-

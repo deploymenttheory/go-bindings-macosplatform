@@ -16,14 +16,14 @@ type PHProjectInfo struct {
 }
 
 var (
-	_clsPHProjectInfo = _objcClass("PHProjectInfo")
-	_pHProjectInfoSelCreationSource = objc.RegisterName("creationSource")
-	_pHProjectInfoSelProjectType = objc.RegisterName("projectType")
-	_pHProjectInfoSelSections = objc.RegisterName("sections")
-	_pHProjectInfoSelBrandingEnabled = objc.RegisterName("brandingEnabled")
+	_clsPHProjectInfo                   = _objcClass("PHProjectInfo")
+	_pHProjectInfoSelCreationSource     = objc.RegisterName("creationSource")
+	_pHProjectInfoSelProjectType        = objc.RegisterName("projectType")
+	_pHProjectInfoSelSections           = objc.RegisterName("sections")
+	_pHProjectInfoSelBrandingEnabled    = objc.RegisterName("brandingEnabled")
 	_pHProjectInfoSelPageNumbersEnabled = objc.RegisterName("pageNumbersEnabled")
-	_pHProjectInfoSelProductIdentifier = objc.RegisterName("productIdentifier")
-	_pHProjectInfoSelThemeIdentifier = objc.RegisterName("themeIdentifier")
+	_pHProjectInfoSelProductIdentifier  = objc.RegisterName("productIdentifier")
+	_pHProjectInfoSelThemeIdentifier    = objc.RegisterName("themeIdentifier")
 )
 
 func PHProjectInfoFromID(id objc.ID) *PHProjectInfo {
@@ -45,14 +45,18 @@ func (o *PHProjectInfo) CreationSource() PHProjectCreationSource {
 // Selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
 func (o *PHProjectInfo) ProjectType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectInfoSelProjectType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Array of project sections each containing one or more PHProjectSectionContent objects.
 func (o *PHProjectInfo) Sections() *foundation.NSArray[*PHProjectSection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectInfoSelSections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHProjectSection](_ret)
 }
 
@@ -71,14 +75,17 @@ func (o *PHProjectInfo) PageNumbersEnabled() bool {
 // The product identifier of the originating Apple Print Product.
 func (o *PHProjectInfo) ProductIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectInfoSelProductIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The product theme identifier of the originating Apple Print Product.
 func (o *PHProjectInfo) ThemeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectInfoSelThemeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

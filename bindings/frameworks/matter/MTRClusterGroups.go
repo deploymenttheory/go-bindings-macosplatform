@@ -18,28 +18,28 @@ type MTRClusterGroups struct {
 }
 
 var (
-	_clsMTRClusterGroups = _objcClass("MTRClusterGroups")
-	_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addGroupIfIdentifyingWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupsSelReadAttributeNameSupportWithParams = objc.RegisterName("readAttributeNameSupportWithParams:")
-	_mTRClusterGroupsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterGroupsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterGroupsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterGroupsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterGroupsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterGroupsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterGroupsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterGroups                                                                                    = _objcClass("MTRClusterGroups")
+	_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion                     = objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion                    = objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion           = objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion                    = objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("addGroupIfIdentifyingWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupsSelReadAttributeNameSupportWithParams                                                  = objc.RegisterName("readAttributeNameSupportWithParams:")
+	_mTRClusterGroupsSelReadAttributeGeneratedCommandListWithParams                                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterGroupsSelReadAttributeAcceptedCommandListWithParams                                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterGroupsSelReadAttributeAttributeListWithParams                                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterGroupsSelReadAttributeFeatureMapWithParams                                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterGroupsSelReadAttributeClusterRevisionWithParams                                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterGroupsSelInitWithDeviceEndpointIDQueue                                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterGroupsSelInitWithDeviceEndpointQueue                                                         = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterGroupsSelAddGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler              = objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupsSelViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupsSelGetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler    = objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupsSelRemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupsSelRemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("removeAllGroupsWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupsSelRemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("removeAllGroupsWithExpectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addGroupIfIdentifyingWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -175,13 +175,17 @@ func (o *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRRea
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterGroups) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGroups {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGroupsFromID(_ret)
 }
 
 func (o *MTRClusterGroups) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGroups {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGroupsFromID(_ret)
 }
 
@@ -273,4 +277,3 @@ func (o *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpected
 	}
 	o.Ptr().Send(_mTRClusterGroupsSelAddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

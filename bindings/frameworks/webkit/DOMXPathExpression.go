@@ -15,9 +15,9 @@ type DOMXPathExpression struct {
 }
 
 var (
-	_clsDOMXPathExpression = _objcClass("DOMXPathExpression")
+	_clsDOMXPathExpression                     = _objcClass("DOMXPathExpression")
 	_dOMXPathExpressionSelEvaluateTypeInResult = objc.RegisterName("evaluate:type:inResult:")
-	_dOMXPathExpressionSelEvaluate = objc.RegisterName("evaluate:::")
+	_dOMXPathExpressionSelEvaluate             = objc.RegisterName("evaluate:::")
 )
 
 func DOMXPathExpressionFromID(id objc.ID) *DOMXPathExpression {
@@ -32,13 +32,16 @@ func DOMXPathExpressionFromID(id objc.ID) *DOMXPathExpression {
 
 func (o *DOMXPathExpression) EvaluateTypeInResult(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathExpressionSelEvaluateTypeInResult, contextNode.Ptr(), type_, inResult.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMXPathResultFromID(_ret)
 }
 
 func (o *DOMXPathExpression) Evaluate(contextNode *DOMNode, type_ uint16, inResult *DOMXPathResult) *DOMXPathResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMXPathExpressionSelEvaluate, contextNode.Ptr(), type_, inResult.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMXPathResultFromID(_ret)
 }
-

@@ -102,4 +102,3 @@ type AddressRepresentationsable interface {
 }
 
 var _ AddressRepresentationsable = (*AddressRepresentations)(nil)
-

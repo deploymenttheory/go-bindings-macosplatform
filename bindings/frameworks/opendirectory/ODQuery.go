@@ -20,17 +20,17 @@ type ODQuery struct {
 }
 
 var (
-	_clsODQuery = _objcClass("ODQuery")
+	_clsODQuery                                                                                            = _objcClass("ODQuery")
 	_oDQuerySelQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError = objc.RegisterName("queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:")
-	_oDQuerySelInitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError = objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:")
-	_oDQuerySelResultsAllowingPartialError = objc.RegisterName("resultsAllowingPartial:error:")
-	_oDQuerySelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_oDQuerySelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_oDQuerySelSynchronize = objc.RegisterName("synchronize")
-	_oDQuerySelDelegate = objc.RegisterName("delegate")
-	_oDQuerySelSetDelegate = objc.RegisterName("setDelegate:")
-	_oDQuerySelOperationQueue = objc.RegisterName("operationQueue")
-	_oDQuerySelSetOperationQueue = objc.RegisterName("setOperationQueue:")
+	_oDQuerySelInitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError  = objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:")
+	_oDQuerySelResultsAllowingPartialError                                                                 = objc.RegisterName("resultsAllowingPartial:error:")
+	_oDQuerySelScheduleInRunLoopForMode                                                                    = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_oDQuerySelRemoveFromRunLoopForMode                                                                    = objc.RegisterName("removeFromRunLoop:forMode:")
+	_oDQuerySelSynchronize                                                                                 = objc.RegisterName("synchronize")
+	_oDQuerySelDelegate                                                                                    = objc.RegisterName("delegate")
+	_oDQuerySelSetDelegate                                                                                 = objc.RegisterName("setDelegate:")
+	_oDQuerySelOperationQueue                                                                              = objc.RegisterName("operationQueue")
+	_oDQuerySelSetOperationQueue                                                                           = objc.RegisterName("setOperationQueue:")
 )
 
 func ODQueryFromID(id objc.ID) *ODQuery {
@@ -47,7 +47,9 @@ func ODQueryFromID(id objc.ID) *ODQuery {
 func ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*ODQuery, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsODQuery), _oDQuerySelQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -58,7 +60,9 @@ func ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttrib
 func (o *ODQuery) InitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*ODQuery, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDQuerySelInitWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError, inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -103,11 +107,12 @@ func (o *ODQuery) SetDelegate(delegate ODQueryDelegate) {
 // @property   operationQueue @abstract   The NSOperationQueue on which asynchronous results are delivered to the delegate. @discussion The NSOperationQueue on which asynchronous results are delivered to the delegate.
 func (o *ODQuery) OperationQueue() *foundation.NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDQuerySelOperationQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSOperationQueueFromID(_ret)
 }
 
 func (o *ODQuery) SetOperationQueue(operationQueue *foundation.NSOperationQueue) {
 	o.Ptr().Send(_oDQuerySelSetOperationQueue, operationQueue.Ptr())
 }
-

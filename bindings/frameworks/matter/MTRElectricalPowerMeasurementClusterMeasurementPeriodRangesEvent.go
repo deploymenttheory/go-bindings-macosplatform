@@ -16,8 +16,8 @@ type MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent struct {
 }
 
 var (
-	_clsMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")
-	_mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventSelRanges = objc.RegisterName("ranges")
+	_clsMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent          = _objcClass("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")
+	_mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventSelRanges    = objc.RegisterName("ranges")
 	_mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventSelSetRanges = objc.RegisterName("setRanges:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Range
 func (o *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventSelSetRanges, ranges)
 }
-

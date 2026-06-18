@@ -15,22 +15,22 @@ type MTL4AccelerationStructureTriangleGeometryDescriptor struct {
 }
 
 var (
-	_clsMTL4AccelerationStructureTriangleGeometryDescriptor = _objcClass("MTL4AccelerationStructureTriangleGeometryDescriptor")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexBuffer = objc.RegisterName("vertexBuffer")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexBuffer = objc.RegisterName("setVertexBuffer:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexFormat = objc.RegisterName("vertexFormat")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexFormat = objc.RegisterName("setVertexFormat:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexStride = objc.RegisterName("vertexStride")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexStride = objc.RegisterName("setVertexStride:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetIndexBuffer = objc.RegisterName("setIndexBuffer:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelIndexType = objc.RegisterName("indexType")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetIndexType = objc.RegisterName("setIndexType:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTriangleCount = objc.RegisterName("triangleCount")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetTriangleCount = objc.RegisterName("setTriangleCount:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTransformationMatrixBuffer = objc.RegisterName("transformationMatrixBuffer")
+	_clsMTL4AccelerationStructureTriangleGeometryDescriptor                              = _objcClass("MTL4AccelerationStructureTriangleGeometryDescriptor")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexBuffer                  = objc.RegisterName("vertexBuffer")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexBuffer               = objc.RegisterName("setVertexBuffer:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexFormat                  = objc.RegisterName("vertexFormat")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexFormat               = objc.RegisterName("setVertexFormat:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexStride                  = objc.RegisterName("vertexStride")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexStride               = objc.RegisterName("setVertexStride:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelIndexBuffer                   = objc.RegisterName("indexBuffer")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetIndexBuffer                = objc.RegisterName("setIndexBuffer:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelIndexType                     = objc.RegisterName("indexType")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetIndexType                  = objc.RegisterName("setIndexType:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTriangleCount                 = objc.RegisterName("triangleCount")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetTriangleCount              = objc.RegisterName("setTriangleCount:")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTransformationMatrixBuffer    = objc.RegisterName("transformationMatrixBuffer")
 	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetTransformationMatrixBuffer = objc.RegisterName("setTransformationMatrixBuffer:")
-	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTransformationMatrixLayout = objc.RegisterName("transformationMatrixLayout")
+	_mTL4AccelerationStructureTriangleGeometryDescriptorSelTransformationMatrixLayout    = objc.RegisterName("transformationMatrixLayout")
 	_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetTransformationMatrixLayout = objc.RegisterName("setTransformationMatrixLayout:")
 )
 
@@ -44,7 +44,7 @@ func MTL4AccelerationStructureTriangleGeometryDescriptorFromID(id objc.ID) *MTL4
 	return o
 }
 
-// Associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the ``vertexFormat`` property, and that the buffer address for the buffer range is not zero.
+// Associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the “vertexFormat“ property, and that the buffer address for the buffer range is not zero.
 func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexBuffer() MTL4BufferRange {
 	_ret := objc.Send[MTL4BufferRange](o.Ptr(), _mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexBuffer)
 	return _ret
@@ -54,7 +54,7 @@ func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexBuffer(ve
 	o.Ptr().Send(_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexBuffer, vertexBuffer)
 }
 
-// Describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the ``vertexBuffer`` references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
+// Describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
 func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexFormat() MTLAttributeFormat {
 	_ret := objc.Send[MTLAttributeFormat](o.Ptr(), _mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexFormat)
 	return _ret
@@ -64,7 +64,7 @@ func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(ve
 	o.Ptr().Send(_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetVertexFormat, vertexFormat)
 }
 
-// Sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the ``vertexFormat`` property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the ``vertexFormat`` data.
+// Sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
 func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexStride() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTL4AccelerationStructureTriangleGeometryDescriptorSelVertexStride)
 	return _ret
@@ -123,4 +123,3 @@ func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatr
 func (o *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) {
 	o.Ptr().Send(_mTL4AccelerationStructureTriangleGeometryDescriptorSelSetTransformationMatrixLayout, transformationMatrixLayout)
 }
-

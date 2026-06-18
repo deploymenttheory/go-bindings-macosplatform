@@ -97,4 +97,3 @@ type PedometerDataable interface {
 }
 
 var _ PedometerDataable = (*PedometerData)(nil)
-

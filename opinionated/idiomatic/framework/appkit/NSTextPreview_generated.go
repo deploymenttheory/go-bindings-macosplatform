@@ -77,4 +77,3 @@ type TextPreviewable interface {
 }
 
 var _ TextPreviewable = (*TextPreview)(nil)
-

@@ -17,8 +17,8 @@ type MKGeodesicPolyline struct {
 }
 
 var (
-	_clsMKGeodesicPolyline = _objcClass("MKGeodesicPolyline")
-	_mKGeodesicPolylineSelPolylineWithPointsCount = objc.RegisterName("polylineWithPoints:count:")
+	_clsMKGeodesicPolyline                             = _objcClass("MKGeodesicPolyline")
+	_mKGeodesicPolylineSelPolylineWithPointsCount      = objc.RegisterName("polylineWithPoints:count:")
 	_mKGeodesicPolylineSelPolylineWithCoordinatesCount = objc.RegisterName("polylineWithCoordinates:count:")
 )
 
@@ -34,13 +34,16 @@ func MKGeodesicPolylineFromID(id objc.ID) *MKGeodesicPolyline {
 
 func MKGeodesicPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *MKGeodesicPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKGeodesicPolyline), _mKGeodesicPolylineSelPolylineWithPointsCount, points, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKGeodesicPolylineFromID(_ret)
 }
 
 func MKGeodesicPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKGeodesicPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKGeodesicPolyline), _mKGeodesicPolylineSelPolylineWithCoordinatesCount, coords, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKGeodesicPolylineFromID(_ret)
 }
-

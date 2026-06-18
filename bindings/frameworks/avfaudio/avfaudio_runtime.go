@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_avfaudioLib uintptr
-	_loadOnce sync.Once
+	_avfaudioLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,10 +48,14 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("AVAudioMake3DAngularOrientation", func() { purego.RegisterLibFunc(&_fnAVAudioMake3DAngularOrientation, _avfaudioLib, "AVAudioMake3DAngularOrientation") })
+	_register("AVAudioMake3DAngularOrientation", func() {
+		purego.RegisterLibFunc(&_fnAVAudioMake3DAngularOrientation, _avfaudioLib, "AVAudioMake3DAngularOrientation")
+	})
 	_register("AVAudioMake3DPoint", func() { purego.RegisterLibFunc(&_fnAVAudioMake3DPoint, _avfaudioLib, "AVAudioMake3DPoint") })
 	_register("AVAudioMake3DVector", func() { purego.RegisterLibFunc(&_fnAVAudioMake3DVector, _avfaudioLib, "AVAudioMake3DVector") })
-	_register("AVAudioMake3DVectorOrientation", func() { purego.RegisterLibFunc(&_fnAVAudioMake3DVectorOrientation, _avfaudioLib, "AVAudioMake3DVectorOrientation") })
+	_register("AVAudioMake3DVectorOrientation", func() {
+		purego.RegisterLibFunc(&_fnAVAudioMake3DVectorOrientation, _avfaudioLib, "AVAudioMake3DVectorOrientation")
+	})
 	_register("AVMakeBeatRange", func() { purego.RegisterLibFunc(&_fnAVMakeBeatRange, _avfaudioLib, "AVMakeBeatRange") })
 }
 

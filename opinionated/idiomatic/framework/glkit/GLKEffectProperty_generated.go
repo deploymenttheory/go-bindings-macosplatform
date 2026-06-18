@@ -43,4 +43,3 @@ type EffectPropertyable interface {
 }
 
 var _ EffectPropertyable = (*EffectProperty)(nil)
-

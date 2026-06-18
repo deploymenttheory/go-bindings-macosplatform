@@ -73,4 +73,3 @@ type QuantitySampleable interface {
 }
 
 var _ QuantitySampleable = (*QuantitySample)(nil)
-

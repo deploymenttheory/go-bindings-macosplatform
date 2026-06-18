@@ -20,35 +20,35 @@ type SCNMaterialProperty struct {
 }
 
 var (
-	_clsSCNMaterialProperty = _objcClass("SCNMaterialProperty")
-	_sCNMaterialPropertySelMaterialPropertyWithContents = objc.RegisterName("materialPropertyWithContents:")
-	_sCNMaterialPropertySelPrecomputedLightingEnvironmentContentsWithURLError = objc.RegisterName("precomputedLightingEnvironmentContentsWithURL:error:")
-	_sCNMaterialPropertySelPrecomputedLightingEnvironmentContentsWithDataError = objc.RegisterName("precomputedLightingEnvironmentContentsWithData:error:")
+	_clsSCNMaterialProperty                                                         = _objcClass("SCNMaterialProperty")
+	_sCNMaterialPropertySelMaterialPropertyWithContents                             = objc.RegisterName("materialPropertyWithContents:")
+	_sCNMaterialPropertySelPrecomputedLightingEnvironmentContentsWithURLError       = objc.RegisterName("precomputedLightingEnvironmentContentsWithURL:error:")
+	_sCNMaterialPropertySelPrecomputedLightingEnvironmentContentsWithDataError      = objc.RegisterName("precomputedLightingEnvironmentContentsWithData:error:")
 	_sCNMaterialPropertySelPrecomputedLightingEnvironmentDataForContentsDeviceError = objc.RegisterName("precomputedLightingEnvironmentDataForContents:device:error:")
-	_sCNMaterialPropertySelContents = objc.RegisterName("contents")
-	_sCNMaterialPropertySelSetContents = objc.RegisterName("setContents:")
-	_sCNMaterialPropertySelIntensity = objc.RegisterName("intensity")
-	_sCNMaterialPropertySelSetIntensity = objc.RegisterName("setIntensity:")
-	_sCNMaterialPropertySelMinificationFilter = objc.RegisterName("minificationFilter")
-	_sCNMaterialPropertySelSetMinificationFilter = objc.RegisterName("setMinificationFilter:")
-	_sCNMaterialPropertySelMagnificationFilter = objc.RegisterName("magnificationFilter")
-	_sCNMaterialPropertySelSetMagnificationFilter = objc.RegisterName("setMagnificationFilter:")
-	_sCNMaterialPropertySelMipFilter = objc.RegisterName("mipFilter")
-	_sCNMaterialPropertySelSetMipFilter = objc.RegisterName("setMipFilter:")
-	_sCNMaterialPropertySelContentsTransform = objc.RegisterName("contentsTransform")
-	_sCNMaterialPropertySelSetContentsTransform = objc.RegisterName("setContentsTransform:")
-	_sCNMaterialPropertySelWrapS = objc.RegisterName("wrapS")
-	_sCNMaterialPropertySelSetWrapS = objc.RegisterName("setWrapS:")
-	_sCNMaterialPropertySelWrapT = objc.RegisterName("wrapT")
-	_sCNMaterialPropertySelSetWrapT = objc.RegisterName("setWrapT:")
-	_sCNMaterialPropertySelMappingChannel = objc.RegisterName("mappingChannel")
-	_sCNMaterialPropertySelSetMappingChannel = objc.RegisterName("setMappingChannel:")
-	_sCNMaterialPropertySelTextureComponents = objc.RegisterName("textureComponents")
-	_sCNMaterialPropertySelSetTextureComponents = objc.RegisterName("setTextureComponents:")
-	_sCNMaterialPropertySelMaxAnisotropy = objc.RegisterName("maxAnisotropy")
-	_sCNMaterialPropertySelSetMaxAnisotropy = objc.RegisterName("setMaxAnisotropy:")
-	_sCNMaterialPropertySelBorderColor = objc.RegisterName("borderColor")
-	_sCNMaterialPropertySelSetBorderColor = objc.RegisterName("setBorderColor:")
+	_sCNMaterialPropertySelContents                                                 = objc.RegisterName("contents")
+	_sCNMaterialPropertySelSetContents                                              = objc.RegisterName("setContents:")
+	_sCNMaterialPropertySelIntensity                                                = objc.RegisterName("intensity")
+	_sCNMaterialPropertySelSetIntensity                                             = objc.RegisterName("setIntensity:")
+	_sCNMaterialPropertySelMinificationFilter                                       = objc.RegisterName("minificationFilter")
+	_sCNMaterialPropertySelSetMinificationFilter                                    = objc.RegisterName("setMinificationFilter:")
+	_sCNMaterialPropertySelMagnificationFilter                                      = objc.RegisterName("magnificationFilter")
+	_sCNMaterialPropertySelSetMagnificationFilter                                   = objc.RegisterName("setMagnificationFilter:")
+	_sCNMaterialPropertySelMipFilter                                                = objc.RegisterName("mipFilter")
+	_sCNMaterialPropertySelSetMipFilter                                             = objc.RegisterName("setMipFilter:")
+	_sCNMaterialPropertySelContentsTransform                                        = objc.RegisterName("contentsTransform")
+	_sCNMaterialPropertySelSetContentsTransform                                     = objc.RegisterName("setContentsTransform:")
+	_sCNMaterialPropertySelWrapS                                                    = objc.RegisterName("wrapS")
+	_sCNMaterialPropertySelSetWrapS                                                 = objc.RegisterName("setWrapS:")
+	_sCNMaterialPropertySelWrapT                                                    = objc.RegisterName("wrapT")
+	_sCNMaterialPropertySelSetWrapT                                                 = objc.RegisterName("setWrapT:")
+	_sCNMaterialPropertySelMappingChannel                                           = objc.RegisterName("mappingChannel")
+	_sCNMaterialPropertySelSetMappingChannel                                        = objc.RegisterName("setMappingChannel:")
+	_sCNMaterialPropertySelTextureComponents                                        = objc.RegisterName("textureComponents")
+	_sCNMaterialPropertySelSetTextureComponents                                     = objc.RegisterName("setTextureComponents:")
+	_sCNMaterialPropertySelMaxAnisotropy                                            = objc.RegisterName("maxAnisotropy")
+	_sCNMaterialPropertySelSetMaxAnisotropy                                         = objc.RegisterName("setMaxAnisotropy:")
+	_sCNMaterialPropertySelBorderColor                                              = objc.RegisterName("borderColor")
+	_sCNMaterialPropertySelSetBorderColor                                           = objc.RegisterName("setBorderColor:")
 )
 
 func SCNMaterialPropertyFromID(id objc.ID) *SCNMaterialProperty {
@@ -64,7 +64,9 @@ func SCNMaterialPropertyFromID(id objc.ID) *SCNMaterialProperty {
 // @method materialPropertyWithContents: @abstract Creates and initialize a property instance with the specified contents.
 func SCNMaterialPropertyMaterialPropertyWithContents(contents objc.ID) *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNMaterialProperty), _sCNMaterialPropertySelMaterialPropertyWithContents, contents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
@@ -92,7 +94,9 @@ func SCNMaterialPropertyPrecomputedLightingEnvironmentContentsWithDataError(data
 func SCNMaterialPropertyPrecomputedLightingEnvironmentDataForContentsDeviceError(contents objc.ID, device metal.MTLDevice) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNMaterialProperty), _sCNMaterialPropertySelPrecomputedLightingEnvironmentDataForContentsDeviceError, contents, device, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -219,4 +223,3 @@ func (o *SCNMaterialProperty) BorderColor() objc.ID {
 func (o *SCNMaterialProperty) SetBorderColor(borderColor objc.ID) {
 	o.Ptr().Send(_sCNMaterialPropertySelSetBorderColor, borderColor)
 }
-

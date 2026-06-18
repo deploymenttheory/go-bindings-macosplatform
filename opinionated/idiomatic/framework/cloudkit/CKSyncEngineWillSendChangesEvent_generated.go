@@ -15,7 +15,9 @@ type SyncEngineWillSendChangesEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEngineWillSendChangesEvent].
-func (x *SyncEngineWillSendChangesEvent) Unwrap() *raw.CKSyncEngineWillSendChangesEvent { return x.inner }
+func (x *SyncEngineWillSendChangesEvent) Unwrap() *raw.CKSyncEngineWillSendChangesEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -44,7 +46,9 @@ func (x *SyncEngineWillSendChangesEvent) Context() *SyncEngineSendChangesContext
 	return &SyncEngineSendChangesContext{inner: _r}
 }
 
-func (x *SyncEngineWillSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineWillSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineWillSendChangesEventable is the interface implemented by [SyncEngineWillSendChangesEvent], for mocking and DI.
 type SyncEngineWillSendChangesEventable interface {
@@ -53,4 +57,3 @@ type SyncEngineWillSendChangesEventable interface {
 }
 
 var _ SyncEngineWillSendChangesEventable = (*SyncEngineWillSendChangesEvent)(nil)
-

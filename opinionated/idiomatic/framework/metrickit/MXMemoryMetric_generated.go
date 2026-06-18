@@ -56,4 +56,3 @@ type MemoryMetricable interface {
 }
 
 var _ MemoryMetricable = (*MemoryMetric)(nil)
-

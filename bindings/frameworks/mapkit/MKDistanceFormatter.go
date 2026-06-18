@@ -18,15 +18,15 @@ type MKDistanceFormatter struct {
 }
 
 var (
-	_clsMKDistanceFormatter = _objcClass("MKDistanceFormatter")
+	_clsMKDistanceFormatter                   = _objcClass("MKDistanceFormatter")
 	_mKDistanceFormatterSelStringFromDistance = objc.RegisterName("stringFromDistance:")
 	_mKDistanceFormatterSelDistanceFromString = objc.RegisterName("distanceFromString:")
-	_mKDistanceFormatterSelLocale = objc.RegisterName("locale")
-	_mKDistanceFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_mKDistanceFormatterSelUnits = objc.RegisterName("units")
-	_mKDistanceFormatterSelSetUnits = objc.RegisterName("setUnits:")
-	_mKDistanceFormatterSelUnitStyle = objc.RegisterName("unitStyle")
-	_mKDistanceFormatterSelSetUnitStyle = objc.RegisterName("setUnitStyle:")
+	_mKDistanceFormatterSelLocale             = objc.RegisterName("locale")
+	_mKDistanceFormatterSelSetLocale          = objc.RegisterName("setLocale:")
+	_mKDistanceFormatterSelUnits              = objc.RegisterName("units")
+	_mKDistanceFormatterSelSetUnits           = objc.RegisterName("setUnits:")
+	_mKDistanceFormatterSelUnitStyle          = objc.RegisterName("unitStyle")
+	_mKDistanceFormatterSelSetUnitStyle       = objc.RegisterName("setUnitStyle:")
 )
 
 func MKDistanceFormatterFromID(id objc.ID) *MKDistanceFormatter {
@@ -41,7 +41,9 @@ func MKDistanceFormatterFromID(id objc.ID) *MKDistanceFormatter {
 
 func (o *MKDistanceFormatter) StringFromDistance(distance unsafe.Pointer) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDistanceFormatterSelStringFromDistance, distance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *MKDistanceFormatter) DistanceFromString(distance *foundation.NSString) 
 
 func (o *MKDistanceFormatter) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDistanceFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
@@ -77,4 +81,3 @@ func (o *MKDistanceFormatter) UnitStyle() MKDistanceFormatterUnitStyle {
 func (o *MKDistanceFormatter) SetUnitStyle(unitStyle MKDistanceFormatterUnitStyle) {
 	o.Ptr().Send(_mKDistanceFormatterSelSetUnitStyle, unitStyle)
 }
-

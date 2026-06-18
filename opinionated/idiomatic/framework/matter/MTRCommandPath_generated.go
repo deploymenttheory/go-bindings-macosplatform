@@ -50,4 +50,3 @@ type MTRCommandPathable interface {
 }
 
 var _ MTRCommandPathable = (*MTRCommandPath)(nil)
-

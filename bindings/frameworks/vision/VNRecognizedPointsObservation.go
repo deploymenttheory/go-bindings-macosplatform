@@ -19,12 +19,12 @@ type VNRecognizedPointsObservation struct {
 }
 
 var (
-	_clsVNRecognizedPointsObservation = _objcClass("VNRecognizedPointsObservation")
-	_vNRecognizedPointsObservationSelRecognizedPointForKeyError = objc.RegisterName("recognizedPointForKey:error:")
-	_vNRecognizedPointsObservationSelRecognizedPointsForGroupKeyError = objc.RegisterName("recognizedPointsForGroupKey:error:")
+	_clsVNRecognizedPointsObservation                                  = _objcClass("VNRecognizedPointsObservation")
+	_vNRecognizedPointsObservationSelRecognizedPointForKeyError        = objc.RegisterName("recognizedPointForKey:error:")
+	_vNRecognizedPointsObservationSelRecognizedPointsForGroupKeyError  = objc.RegisterName("recognizedPointsForGroupKey:error:")
 	_vNRecognizedPointsObservationSelKeypointsMultiArrayAndReturnError = objc.RegisterName("keypointsMultiArrayAndReturnError:")
-	_vNRecognizedPointsObservationSelAvailableKeys = objc.RegisterName("availableKeys")
-	_vNRecognizedPointsObservationSelAvailableGroupKeys = objc.RegisterName("availableGroupKeys")
+	_vNRecognizedPointsObservationSelAvailableKeys                     = objc.RegisterName("availableKeys")
+	_vNRecognizedPointsObservationSelAvailableGroupKeys                = objc.RegisterName("availableGroupKeys")
 )
 
 func VNRecognizedPointsObservationFromID(id objc.ID) *VNRecognizedPointsObservation {
@@ -41,7 +41,9 @@ func VNRecognizedPointsObservationFromID(id objc.ID) *VNRecognizedPointsObservat
 func (o *VNRecognizedPointsObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +64,9 @@ func (o *VNRecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKe
 func (o *VNRecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*coreml.MLMultiArray, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPointsObservationSelKeypointsMultiArrayAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -80,4 +84,3 @@ func (o *VNRecognizedPointsObservation) AvailableGroupKeys() *foundation.NSArray
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPointsObservationSelAvailableGroupKeys)
 	return _ret
 }
-

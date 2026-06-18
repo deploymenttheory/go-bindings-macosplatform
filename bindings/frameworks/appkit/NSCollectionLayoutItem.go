@@ -16,15 +16,15 @@ type NSCollectionLayoutItem struct {
 }
 
 var (
-	_clsNSCollectionLayoutItem = _objcClass("NSCollectionLayoutItem")
-	_nSCollectionLayoutItemSelItemWithLayoutSize = objc.RegisterName("itemWithLayoutSize:")
+	_clsNSCollectionLayoutItem                                     = _objcClass("NSCollectionLayoutItem")
+	_nSCollectionLayoutItemSelItemWithLayoutSize                   = objc.RegisterName("itemWithLayoutSize:")
 	_nSCollectionLayoutItemSelItemWithLayoutSizeSupplementaryItems = objc.RegisterName("itemWithLayoutSize:supplementaryItems:")
-	_nSCollectionLayoutItemSelContentInsets = objc.RegisterName("contentInsets")
-	_nSCollectionLayoutItemSelSetContentInsets = objc.RegisterName("setContentInsets:")
-	_nSCollectionLayoutItemSelEdgeSpacing = objc.RegisterName("edgeSpacing")
-	_nSCollectionLayoutItemSelSetEdgeSpacing = objc.RegisterName("setEdgeSpacing:")
-	_nSCollectionLayoutItemSelLayoutSize = objc.RegisterName("layoutSize")
-	_nSCollectionLayoutItemSelSupplementaryItems = objc.RegisterName("supplementaryItems")
+	_nSCollectionLayoutItemSelContentInsets                        = objc.RegisterName("contentInsets")
+	_nSCollectionLayoutItemSelSetContentInsets                     = objc.RegisterName("setContentInsets:")
+	_nSCollectionLayoutItemSelEdgeSpacing                          = objc.RegisterName("edgeSpacing")
+	_nSCollectionLayoutItemSelSetEdgeSpacing                       = objc.RegisterName("setEdgeSpacing:")
+	_nSCollectionLayoutItemSelLayoutSize                           = objc.RegisterName("layoutSize")
+	_nSCollectionLayoutItemSelSupplementaryItems                   = objc.RegisterName("supplementaryItems")
 )
 
 func NSCollectionLayoutItemFromID(id objc.ID) *NSCollectionLayoutItem {
@@ -39,13 +39,17 @@ func NSCollectionLayoutItemFromID(id objc.ID) *NSCollectionLayoutItem {
 
 func NSCollectionLayoutItemItemWithLayoutSize(layoutSize *NSCollectionLayoutSize) *NSCollectionLayoutItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSize, layoutSize.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutItemFromID(_ret)
 }
 
 func NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize *NSCollectionLayoutSize, supplementaryItems *foundation.NSArray[*NSCollectionLayoutSupplementaryItem]) *NSCollectionLayoutItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutItem), _nSCollectionLayoutItemSelItemWithLayoutSizeSupplementaryItems, layoutSize.Ptr(), supplementaryItems.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutItemFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *NSCollectionLayoutItem) SetContentInsets(contentInsets NSDirectionalEdg
 
 func (o *NSCollectionLayoutItem) EdgeSpacing() *NSCollectionLayoutEdgeSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelEdgeSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutEdgeSpacingFromID(_ret)
 }
 
@@ -70,13 +76,16 @@ func (o *NSCollectionLayoutItem) SetEdgeSpacing(edgeSpacing *NSCollectionLayoutE
 
 func (o *NSCollectionLayoutItem) LayoutSize() *NSCollectionLayoutSize {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelLayoutSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSizeFromID(_ret)
 }
 
 func (o *NSCollectionLayoutItem) SupplementaryItems() *foundation.NSArray[*NSCollectionLayoutSupplementaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutItemSelSupplementaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionLayoutSupplementaryItem](_ret)
 }
-

@@ -42,7 +42,9 @@ func (x *MetadataBodyObject) BodyID() int {
 
 func (x *MetadataBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject { return x.inner }
 
-func (x *MetadataBodyObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+func (x *MetadataBodyObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataObject
+}
 
 // MetadataBodyObjectable is the interface implemented by [MetadataBodyObject], for mocking and DI.
 type MetadataBodyObjectable interface {
@@ -51,4 +53,3 @@ type MetadataBodyObjectable interface {
 }
 
 var _ MetadataBodyObjectable = (*MetadataBodyObject)(nil)
-

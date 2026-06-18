@@ -74,7 +74,9 @@ func (x *PlayerItemMetadataOutput) SetAdvanceIntervalForDelegateInvocation(advan
 	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
 }
 
-func (x *PlayerItemMetadataOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+func (x *PlayerItemMetadataOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
+	return &x.inner.AVPlayerItemOutput
+}
 
 // PlayerItemMetadataOutputable is the interface implemented by [PlayerItemMetadataOutput], for mocking and DI.
 type PlayerItemMetadataOutputable interface {
@@ -89,4 +91,3 @@ type PlayerItemMetadataOutputable interface {
 }
 
 var _ PlayerItemMetadataOutputable = (*PlayerItemMetadataOutput)(nil)
-

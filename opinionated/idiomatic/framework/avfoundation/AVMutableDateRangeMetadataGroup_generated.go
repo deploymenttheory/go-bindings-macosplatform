@@ -56,7 +56,9 @@ func (x *MutableDateRangeMetadataGroup) WithItems(items ...MetadataItemProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -80,9 +82,13 @@ func (x *MutableDateRangeMetadataGroup) SetItems(items *foundation.NSArray[*raw.
 	x.inner.SetItems(items)
 }
 
-func (x *MutableDateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup { return &x.inner.AVDateRangeMetadataGroup }
+func (x *MutableDateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup {
+	return &x.inner.AVDateRangeMetadataGroup
+}
 
-func (x *MutableDateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVDateRangeMetadataGroup.AVMetadataGroup }
+func (x *MutableDateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
+	return &x.inner.AVDateRangeMetadataGroup.AVMetadataGroup
+}
 
 // MutableDateRangeMetadataGroupable is the interface implemented by [MutableDateRangeMetadataGroup], for mocking and DI.
 type MutableDateRangeMetadataGroupable interface {
@@ -96,4 +102,3 @@ type MutableDateRangeMetadataGroupable interface {
 }
 
 var _ MutableDateRangeMetadataGroupable = (*MutableDateRangeMetadataGroup)(nil)
-

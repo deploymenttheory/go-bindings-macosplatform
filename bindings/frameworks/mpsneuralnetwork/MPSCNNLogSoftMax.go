@@ -25,4 +25,3 @@ func MPSCNNLogSoftMaxFromID(id objc.ID) *MPSCNNLogSoftMax {
 	purego.Track(o)
 	return o
 }
-

@@ -18,45 +18,45 @@ type AVCaptureDeviceFormat struct {
 }
 
 var (
-	_clsAVCaptureDeviceFormat = _objcClass("AVCaptureDeviceFormat")
-	_aVCaptureDeviceFormatSelMediaType = objc.RegisterName("mediaType")
-	_aVCaptureDeviceFormatSelFormatDescription = objc.RegisterName("formatDescription")
-	_aVCaptureDeviceFormatSelVideoSupportedFrameRateRanges = objc.RegisterName("videoSupportedFrameRateRanges")
-	_aVCaptureDeviceFormatSelSystemRecommendedVideoZoomRange = objc.RegisterName("systemRecommendedVideoZoomRange")
-	_aVCaptureDeviceFormatSelSystemRecommendedExposureBiasRange = objc.RegisterName("systemRecommendedExposureBiasRange")
-	_aVCaptureDeviceFormatSelIsHighPhotoQualitySupported = objc.RegisterName("isHighPhotoQualitySupported")
-	_aVCaptureDeviceFormatSelAutoFocusSystem = objc.RegisterName("autoFocusSystem")
-	_aVCaptureDeviceFormatSelSupportedColorSpaces = objc.RegisterName("supportedColorSpaces")
-	_aVCaptureDeviceFormatSelSupportedVideoZoomRangesForDepthDataDelivery = objc.RegisterName("supportedVideoZoomRangesForDepthDataDelivery")
+	_clsAVCaptureDeviceFormat                                                             = _objcClass("AVCaptureDeviceFormat")
+	_aVCaptureDeviceFormatSelMediaType                                                    = objc.RegisterName("mediaType")
+	_aVCaptureDeviceFormatSelFormatDescription                                            = objc.RegisterName("formatDescription")
+	_aVCaptureDeviceFormatSelVideoSupportedFrameRateRanges                                = objc.RegisterName("videoSupportedFrameRateRanges")
+	_aVCaptureDeviceFormatSelSystemRecommendedVideoZoomRange                              = objc.RegisterName("systemRecommendedVideoZoomRange")
+	_aVCaptureDeviceFormatSelSystemRecommendedExposureBiasRange                           = objc.RegisterName("systemRecommendedExposureBiasRange")
+	_aVCaptureDeviceFormatSelIsHighPhotoQualitySupported                                  = objc.RegisterName("isHighPhotoQualitySupported")
+	_aVCaptureDeviceFormatSelAutoFocusSystem                                              = objc.RegisterName("autoFocusSystem")
+	_aVCaptureDeviceFormatSelSupportedColorSpaces                                         = objc.RegisterName("supportedColorSpaces")
+	_aVCaptureDeviceFormatSelSupportedVideoZoomRangesForDepthDataDelivery                 = objc.RegisterName("supportedVideoZoomRangesForDepthDataDelivery")
 	_aVCaptureDeviceFormatSelZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported = objc.RegisterName("zoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported")
-	_aVCaptureDeviceFormatSelSupportedMaxPhotoDimensions = objc.RegisterName("supportedMaxPhotoDimensions")
-	_aVCaptureDeviceFormatSelSecondaryNativeResolutionZoomFactors = objc.RegisterName("secondaryNativeResolutionZoomFactors")
-	_aVCaptureDeviceFormatSelIsAutoVideoFrameRateSupported = objc.RegisterName("isAutoVideoFrameRateSupported")
-	_aVCaptureDeviceFormatSelIsSpatialVideoCaptureSupported = objc.RegisterName("isSpatialVideoCaptureSupported")
-	_aVCaptureDeviceFormatSelIsCenterStageSupported = objc.RegisterName("isCenterStageSupported")
-	_aVCaptureDeviceFormatSelVideoMinZoomFactorForCenterStage = objc.RegisterName("videoMinZoomFactorForCenterStage")
-	_aVCaptureDeviceFormatSelVideoMaxZoomFactorForCenterStage = objc.RegisterName("videoMaxZoomFactorForCenterStage")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForCenterStage = objc.RegisterName("videoFrameRateRangeForCenterStage")
-	_aVCaptureDeviceFormatSelIsPortraitEffectSupported = objc.RegisterName("isPortraitEffectSupported")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForPortraitEffect = objc.RegisterName("videoFrameRateRangeForPortraitEffect")
-	_aVCaptureDeviceFormatSelIsStudioLightSupported = objc.RegisterName("isStudioLightSupported")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForStudioLight = objc.RegisterName("videoFrameRateRangeForStudioLight")
-	_aVCaptureDeviceFormatSelReactionEffectsSupported = objc.RegisterName("reactionEffectsSupported")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForReactionEffectsInProgress = objc.RegisterName("videoFrameRateRangeForReactionEffectsInProgress")
-	_aVCaptureDeviceFormatSelIsBackgroundReplacementSupported = objc.RegisterName("isBackgroundReplacementSupported")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForBackgroundReplacement = objc.RegisterName("videoFrameRateRangeForBackgroundReplacement")
-	_aVCaptureDeviceFormatSelIsEdgeLightSupported = objc.RegisterName("isEdgeLightSupported")
-	_aVCaptureDeviceFormatSelIsCinematicVideoCaptureSupported = objc.RegisterName("isCinematicVideoCaptureSupported")
-	_aVCaptureDeviceFormatSelDefaultSimulatedAperture = objc.RegisterName("defaultSimulatedAperture")
-	_aVCaptureDeviceFormatSelMinSimulatedAperture = objc.RegisterName("minSimulatedAperture")
-	_aVCaptureDeviceFormatSelMaxSimulatedAperture = objc.RegisterName("maxSimulatedAperture")
-	_aVCaptureDeviceFormatSelVideoMinZoomFactorForCinematicVideo = objc.RegisterName("videoMinZoomFactorForCinematicVideo")
-	_aVCaptureDeviceFormatSelVideoMaxZoomFactorForCinematicVideo = objc.RegisterName("videoMaxZoomFactorForCinematicVideo")
-	_aVCaptureDeviceFormatSelVideoFrameRateRangeForCinematicVideo = objc.RegisterName("videoFrameRateRangeForCinematicVideo")
-	_aVCaptureDeviceFormatSelVideoFieldOfViewForAspectRatioGeometricDistortionCorrected = objc.RegisterName("videoFieldOfViewForAspectRatio:geometricDistortionCorrected:")
-	_aVCaptureDeviceFormatSelSupportedDynamicAspectRatios = objc.RegisterName("supportedDynamicAspectRatios")
-	_aVCaptureDeviceFormatSelIsSmartFramingSupported = objc.RegisterName("isSmartFramingSupported")
-	_aVCaptureDeviceFormatSelIsCameraLensSmudgeDetectionSupported = objc.RegisterName("isCameraLensSmudgeDetectionSupported")
+	_aVCaptureDeviceFormatSelSupportedMaxPhotoDimensions                                  = objc.RegisterName("supportedMaxPhotoDimensions")
+	_aVCaptureDeviceFormatSelSecondaryNativeResolutionZoomFactors                         = objc.RegisterName("secondaryNativeResolutionZoomFactors")
+	_aVCaptureDeviceFormatSelIsAutoVideoFrameRateSupported                                = objc.RegisterName("isAutoVideoFrameRateSupported")
+	_aVCaptureDeviceFormatSelIsSpatialVideoCaptureSupported                               = objc.RegisterName("isSpatialVideoCaptureSupported")
+	_aVCaptureDeviceFormatSelIsCenterStageSupported                                       = objc.RegisterName("isCenterStageSupported")
+	_aVCaptureDeviceFormatSelVideoMinZoomFactorForCenterStage                             = objc.RegisterName("videoMinZoomFactorForCenterStage")
+	_aVCaptureDeviceFormatSelVideoMaxZoomFactorForCenterStage                             = objc.RegisterName("videoMaxZoomFactorForCenterStage")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForCenterStage                            = objc.RegisterName("videoFrameRateRangeForCenterStage")
+	_aVCaptureDeviceFormatSelIsPortraitEffectSupported                                    = objc.RegisterName("isPortraitEffectSupported")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForPortraitEffect                         = objc.RegisterName("videoFrameRateRangeForPortraitEffect")
+	_aVCaptureDeviceFormatSelIsStudioLightSupported                                       = objc.RegisterName("isStudioLightSupported")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForStudioLight                            = objc.RegisterName("videoFrameRateRangeForStudioLight")
+	_aVCaptureDeviceFormatSelReactionEffectsSupported                                     = objc.RegisterName("reactionEffectsSupported")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForReactionEffectsInProgress              = objc.RegisterName("videoFrameRateRangeForReactionEffectsInProgress")
+	_aVCaptureDeviceFormatSelIsBackgroundReplacementSupported                             = objc.RegisterName("isBackgroundReplacementSupported")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForBackgroundReplacement                  = objc.RegisterName("videoFrameRateRangeForBackgroundReplacement")
+	_aVCaptureDeviceFormatSelIsEdgeLightSupported                                         = objc.RegisterName("isEdgeLightSupported")
+	_aVCaptureDeviceFormatSelIsCinematicVideoCaptureSupported                             = objc.RegisterName("isCinematicVideoCaptureSupported")
+	_aVCaptureDeviceFormatSelDefaultSimulatedAperture                                     = objc.RegisterName("defaultSimulatedAperture")
+	_aVCaptureDeviceFormatSelMinSimulatedAperture                                         = objc.RegisterName("minSimulatedAperture")
+	_aVCaptureDeviceFormatSelMaxSimulatedAperture                                         = objc.RegisterName("maxSimulatedAperture")
+	_aVCaptureDeviceFormatSelVideoMinZoomFactorForCinematicVideo                          = objc.RegisterName("videoMinZoomFactorForCinematicVideo")
+	_aVCaptureDeviceFormatSelVideoMaxZoomFactorForCinematicVideo                          = objc.RegisterName("videoMaxZoomFactorForCinematicVideo")
+	_aVCaptureDeviceFormatSelVideoFrameRateRangeForCinematicVideo                         = objc.RegisterName("videoFrameRateRangeForCinematicVideo")
+	_aVCaptureDeviceFormatSelVideoFieldOfViewForAspectRatioGeometricDistortionCorrected   = objc.RegisterName("videoFieldOfViewForAspectRatio:geometricDistortionCorrected:")
+	_aVCaptureDeviceFormatSelSupportedDynamicAspectRatios                                 = objc.RegisterName("supportedDynamicAspectRatios")
+	_aVCaptureDeviceFormatSelIsSmartFramingSupported                                      = objc.RegisterName("isSmartFramingSupported")
+	_aVCaptureDeviceFormatSelIsCameraLensSmudgeDetectionSupported                         = objc.RegisterName("isCameraLensSmudgeDetectionSupported")
 )
 
 func AVCaptureDeviceFormatFromID(id objc.ID) *AVCaptureDeviceFormat {
@@ -72,7 +72,9 @@ func AVCaptureDeviceFormatFromID(id objc.ID) *AVCaptureDeviceFormat {
 // @property mediaType @abstract An NSString describing the media type of an AVCaptureDevice active or supported format. @discussion Supported mediaTypes are listed in AVMediaFormat.h. This is a read-only property. The caller assumes no ownership of the returned value and should not CFRelease it.
 func (o *AVCaptureDeviceFormat) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,21 +87,27 @@ func (o *AVCaptureDeviceFormat) FormatDescription() unsafe.Pointer {
 // @property videoSupportedFrameRateRanges @abstract A property indicating the format's supported frame rate ranges. @discussion videoSupportedFrameRateRanges is an array of AVFrameRateRange objects, one for each of the format's supported video frame rate ranges.
 func (o *AVCaptureDeviceFormat) VideoSupportedFrameRateRanges() *foundation.NSArray[*AVFrameRateRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoSupportedFrameRateRanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVFrameRateRange](_ret)
 }
 
 // @property systemRecommendedVideoZoomRange @abstract Indicates the system's recommended zoom range for this device format. @discussion This property can be used to create a slider in your app's user interface to control the device's zoom with a system-recommended video zoom range. When a recommendation is not available, this property returns nil. Clients can key value observe AVCaptureDevice's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor properties to know when a device's supported zoom is restricted within the recommended zoom range. The value of this property is also used for the AVCaptureSystemZoomSlider's range.
 func (o *AVCaptureDeviceFormat) SystemRecommendedVideoZoomRange() *AVZoomRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSystemRecommendedVideoZoomRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVZoomRangeFromID(_ret)
 }
 
 // @property systemRecommendedExposureBiasRange @abstract Indicates the system's recommended exposure bias range for this device format. @discussion This property can be used to create a slider in your app's user interface to control the device's exposure bias with a system-recommended exposure bias range. When a recommendation is not available, this property returns nil. The value of this property is also used for the AVCaptureSystemExposureBiasSlider's range.
 func (o *AVCaptureDeviceFormat) SystemRecommendedExposureBiasRange() *AVExposureBiasRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSystemRecommendedExposureBiasRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExposureBiasRangeFromID(_ret)
 }
 
@@ -124,7 +132,9 @@ func (o *AVCaptureDeviceFormat) SupportedColorSpaces() *foundation.NSArray[*foun
 // @property supportedVideoZoomRangesForDepthDataDelivery @abstract This property returns the zoom ranges within which depth data can be delivered. @discussion Virtual devices support limited zoom ranges when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array. The presence of one or more ranges where the min and max zoom factors are not equal means that "continuous zoom" with depth is supported. For example: a) ranges: @[ [2..2], [4..4] ] only zoom factors 2 and 4 are allowed to be set when depthDataDelivery is enabled. Any other zoom factor results in an exception. b) ranges: @[ [2..5] ] depthDataDelivery is supported with zoom factors [2..5]. Zoom factors outside of this range may be set, but will result in loss of depthDataDeliery. Whenever zoom is set back to a value within the range of [2..5], depthDataDelivery will resume. When depth data delivery is enabled, the effective videoZoomFactorUpscaleThreshold will be 1.0, meaning that all zoom factors that are not native zoom factors (see AVCaptureDevice.virtualDeviceSwitchOverVideoZoomFactors and AVCaptureDevice.secondaryNativeResolutionZoomFactors) result in digital upscaling.
 func (o *AVCaptureDeviceFormat) SupportedVideoZoomRangesForDepthDataDelivery() *foundation.NSArray[*AVZoomRange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelSupportedVideoZoomRangesForDepthDataDelivery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVZoomRange](_ret)
 }
 
@@ -178,7 +188,9 @@ func (o *AVCaptureDeviceFormat) VideoMaxZoomFactorForCenterStage() float64 {
 // @property videoFrameRateRangeForCenterStage @abstract Indicates the minimum / maximum frame rates available when centerStageActive is YES. @discussion Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForCenterStage() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForCenterStage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
@@ -191,7 +203,9 @@ func (o *AVCaptureDeviceFormat) IsPortraitEffectSupported() bool {
 // @property videoFrameRateRangeForPortraitEffect @abstract Indicates the minimum / maximum frame rates available when portraitEffectActive is YES. @discussion Devices may support a limited frame rate range when Portrait Effect is active. If this device format does not support Portrait Effect, this property returns nil.
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForPortraitEffect() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForPortraitEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
@@ -204,7 +218,9 @@ func (o *AVCaptureDeviceFormat) IsStudioLightSupported() bool {
 // @property videoFrameRateRangeForStudioLight @abstract Indicates the minimum / maximum frame rates available when studioLight is YES. @discussion Devices may support a limited frame rate range when Studio Light is active. If this device format does not support Studio Light, this property returns nil.
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForStudioLight() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForStudioLight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
@@ -217,7 +233,9 @@ func (o *AVCaptureDeviceFormat) ReactionEffectsSupported() bool {
 // @property videoFrameRateRangeForReactionEffectsInProgress @abstract Indicates the minimum / maximum frame rates available when a reaction effect is running. @discussion Unlike the other video effects, enabling reaction effects does not limit the stream's frame rate because most of the time no rendering is being performed. The frame rate will only ramp down when a reaction is actually being rendered on the stream (see AVCaptureDevice.reactionEffectsInProgress)
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForReactionEffectsInProgress() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForReactionEffectsInProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
@@ -230,7 +248,9 @@ func (o *AVCaptureDeviceFormat) IsBackgroundReplacementSupported() bool {
 // @property videoFrameRateRangeForBackgroundReplacement @abstract Indicates the minimum / maximum frame rates available when background replacement is active. @discussion Devices may support a limited frame rate range when Background Replacement is active. If this device format does not support Background Replacement, this property returns nil.
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForBackgroundReplacement() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForBackgroundReplacement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
@@ -263,13 +283,13 @@ func (o *AVCaptureDeviceFormat) MaxSimulatedAperture() float32 {
 	return _ret
 }
 
-// Indicates the minimum zoom factor available for the ``AVCaptureDevice/videoZoomFactor`` property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
+// Indicates the minimum zoom factor available for the “AVCaptureDevice/videoZoomFactor“ property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
 func (o *AVCaptureDeviceFormat) VideoMinZoomFactorForCinematicVideo() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVCaptureDeviceFormatSelVideoMinZoomFactorForCinematicVideo)
 	return _ret
 }
 
-// Indicates the maximum zoom factor available for the ``AVCaptureDevice/videoZoomFactor`` property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
+// Indicates the maximum zoom factor available for the “AVCaptureDevice/videoZoomFactor“ property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
 func (o *AVCaptureDeviceFormat) VideoMaxZoomFactorForCinematicVideo() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVCaptureDeviceFormatSelVideoMaxZoomFactorForCinematicVideo)
 	return _ret
@@ -278,11 +298,13 @@ func (o *AVCaptureDeviceFormat) VideoMaxZoomFactorForCinematicVideo() float64 {
 // Indicates the minimum / maximum frame rates available when Cinematic Video capture is enabled on the device input. Devices may support a limited frame rate range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `nil`.
 func (o *AVCaptureDeviceFormat) VideoFrameRateRangeForCinematicVideo() *AVFrameRateRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceFormatSelVideoFrameRateRangeForCinematicVideo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFrameRateRangeFromID(_ret)
 }
 
-// Indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion. A float indicating the field of view for the corresponding ``AVCaptureAspectRatio``. Set ``AVCaptureDevice/geometricDistortionCorrected`` to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
+// Indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion. A float indicating the field of view for the corresponding “AVCaptureAspectRatio“. Set “AVCaptureDevice/geometricDistortionCorrected“ to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
 func (o *AVCaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32 {
 	_ret := objc.Send[float32](o.Ptr(), _aVCaptureDeviceFormatSelVideoFieldOfViewForAspectRatioGeometricDistortionCorrected, aspectRatio.Ptr(), geometricDistortionCorrected)
 	return _ret
@@ -303,4 +325,3 @@ func (o *AVCaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceFormatSelIsCameraLensSmudgeDetectionSupported)
 	return _ret
 }
-

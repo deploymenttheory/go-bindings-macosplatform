@@ -415,9 +415,13 @@ func (x *MTRBaseClusterUnitLocalization) SubscribeAttributeClusterRevisionWithMi
 	}
 }
 
-func (x *MTRBaseClusterUnitLocalization) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterUnitLocalization) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterUnitLocalization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterUnitLocalization) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterUnitLocalizationable is the interface implemented by [MTRBaseClusterUnitLocalization], for mocking and DI.
 type MTRBaseClusterUnitLocalizationable interface {
@@ -453,4 +457,3 @@ type MTRBaseClusterUnitLocalizationable interface {
 }
 
 var _ MTRBaseClusterUnitLocalizationable = (*MTRBaseClusterUnitLocalization)(nil)
-

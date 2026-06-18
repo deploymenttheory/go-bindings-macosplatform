@@ -18,14 +18,14 @@ type AVB17221ACMPInterface struct {
 }
 
 var (
-	_clsAVB17221ACMPInterface = _objcClass("AVB17221ACMPInterface")
-	_aVB17221ACMPInterfaceSelACMPInterfaceWithInterface = objc.RegisterName("ACMPInterfaceWithInterface:")
-	_aVB17221ACMPInterfaceSelACMPInterfaceWithInterfaceNamed = objc.RegisterName("ACMPInterfaceWithInterfaceNamed:")
-	_aVB17221ACMPInterfaceSelSetHandlerForEntityID = objc.RegisterName("setHandler:forEntityID:")
-	_aVB17221ACMPInterfaceSelRemoveHandlerForEntityID = objc.RegisterName("removeHandlerForEntityID:")
-	_aVB17221ACMPInterfaceSelSendACMPResponseMessageError = objc.RegisterName("sendACMPResponseMessage:error:")
+	_clsAVB17221ACMPInterface                                        = _objcClass("AVB17221ACMPInterface")
+	_aVB17221ACMPInterfaceSelACMPInterfaceWithInterface              = objc.RegisterName("ACMPInterfaceWithInterface:")
+	_aVB17221ACMPInterfaceSelACMPInterfaceWithInterfaceNamed         = objc.RegisterName("ACMPInterfaceWithInterfaceNamed:")
+	_aVB17221ACMPInterfaceSelSetHandlerForEntityID                   = objc.RegisterName("setHandler:forEntityID:")
+	_aVB17221ACMPInterfaceSelRemoveHandlerForEntityID                = objc.RegisterName("removeHandlerForEntityID:")
+	_aVB17221ACMPInterfaceSelSendACMPResponseMessageError            = objc.RegisterName("sendACMPResponseMessage:error:")
 	_aVB17221ACMPInterfaceSelSendACMPCommandMessageCompletionHandler = objc.RegisterName("sendACMPCommandMessage:completionHandler:")
-	_aVB17221ACMPInterfaceSelMulticastDestinationAddress = objc.RegisterName("multicastDestinationAddress")
+	_aVB17221ACMPInterfaceSelMulticastDestinationAddress             = objc.RegisterName("multicastDestinationAddress")
 )
 
 func AVB17221ACMPInterfaceFromID(id objc.ID) *AVB17221ACMPInterface {
@@ -41,14 +41,18 @@ func AVB17221ACMPInterfaceFromID(id objc.ID) *AVB17221ACMPInterface {
 // @method		AVB17221ACMPInterfaceWithInterface: @abstract	Creates an autoreleased instance of AVB17221ACMPInterface for the specified AVBInterface @param		anInterface	The interface on which to create the instance. @result		An autoreleased instance of the control service class.
 func AVB17221ACMPInterfaceACMPInterfaceWithInterface(anInterface *AVBInterface) *AVB17221ACMPInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221ACMPInterface), _aVB17221ACMPInterfaceSelACMPInterfaceWithInterface, anInterface.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221ACMPInterfaceFromID(_ret)
 }
 
 // @method		AVB17221ACMPInterfaceWithInterfaceNamed: @abstract	Creates an autoreleased instance of AVB17221ACMPInterfaceWithInterfaceNamed for the specified network interface with the specified BSD name. @param		anInterfaceName	The BSD name of the interface. @result		An autoreleased instance of the control service class.
 func AVB17221ACMPInterfaceACMPInterfaceWithInterfaceNamed(anInterfaceName *foundation.NSString) *AVB17221ACMPInterface {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVB17221ACMPInterface), _aVB17221ACMPInterfaceSelACMPInterfaceWithInterfaceNamed, anInterfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVB17221ACMPInterfaceFromID(_ret)
 }
 
@@ -92,7 +96,8 @@ func (o *AVB17221ACMPInterface) SendACMPCommandMessageCompletionHandler(message 
 // @property	multicastDestinationAddress @abstract	An AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. @discussion	The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
 func (o *AVB17221ACMPInterface) MulticastDestinationAddress() *AVBMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221ACMPInterfaceSelMulticastDestinationAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
-

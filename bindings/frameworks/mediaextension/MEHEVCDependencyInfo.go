@@ -16,27 +16,27 @@ type MEHEVCDependencyInfo struct {
 }
 
 var (
-	_clsMEHEVCDependencyInfo = _objcClass("MEHEVCDependencyInfo")
-	_mEHEVCDependencyInfoSelHasTemporalSubLayerAccess = objc.RegisterName("hasTemporalSubLayerAccess")
-	_mEHEVCDependencyInfoSelSetTemporalSubLayerAccess = objc.RegisterName("setTemporalSubLayerAccess:")
+	_clsMEHEVCDependencyInfo                                  = _objcClass("MEHEVCDependencyInfo")
+	_mEHEVCDependencyInfoSelHasTemporalSubLayerAccess         = objc.RegisterName("hasTemporalSubLayerAccess")
+	_mEHEVCDependencyInfoSelSetTemporalSubLayerAccess         = objc.RegisterName("setTemporalSubLayerAccess:")
 	_mEHEVCDependencyInfoSelHasStepwiseTemporalSubLayerAccess = objc.RegisterName("hasStepwiseTemporalSubLayerAccess")
 	_mEHEVCDependencyInfoSelSetStepwiseTemporalSubLayerAccess = objc.RegisterName("setStepwiseTemporalSubLayerAccess:")
-	_mEHEVCDependencyInfoSelSyncSampleNALUnitType = objc.RegisterName("syncSampleNALUnitType")
-	_mEHEVCDependencyInfoSelSetSyncSampleNALUnitType = objc.RegisterName("setSyncSampleNALUnitType:")
-	_mEHEVCDependencyInfoSelTemporalLevel = objc.RegisterName("temporalLevel")
-	_mEHEVCDependencyInfoSelSetTemporalLevel = objc.RegisterName("setTemporalLevel:")
-	_mEHEVCDependencyInfoSelProfileSpace = objc.RegisterName("profileSpace")
-	_mEHEVCDependencyInfoSelSetProfileSpace = objc.RegisterName("setProfileSpace:")
-	_mEHEVCDependencyInfoSelTierFlag = objc.RegisterName("tierFlag")
-	_mEHEVCDependencyInfoSelSetTierFlag = objc.RegisterName("setTierFlag:")
-	_mEHEVCDependencyInfoSelProfileIndex = objc.RegisterName("profileIndex")
-	_mEHEVCDependencyInfoSelSetProfileIndex = objc.RegisterName("setProfileIndex:")
-	_mEHEVCDependencyInfoSelProfileCompatibilityFlags = objc.RegisterName("profileCompatibilityFlags")
-	_mEHEVCDependencyInfoSelSetProfileCompatibilityFlags = objc.RegisterName("setProfileCompatibilityFlags:")
-	_mEHEVCDependencyInfoSelConstraintIndicatorFlags = objc.RegisterName("constraintIndicatorFlags")
-	_mEHEVCDependencyInfoSelSetConstraintIndicatorFlags = objc.RegisterName("setConstraintIndicatorFlags:")
-	_mEHEVCDependencyInfoSelLevelIndex = objc.RegisterName("levelIndex")
-	_mEHEVCDependencyInfoSelSetLevelIndex = objc.RegisterName("setLevelIndex:")
+	_mEHEVCDependencyInfoSelSyncSampleNALUnitType             = objc.RegisterName("syncSampleNALUnitType")
+	_mEHEVCDependencyInfoSelSetSyncSampleNALUnitType          = objc.RegisterName("setSyncSampleNALUnitType:")
+	_mEHEVCDependencyInfoSelTemporalLevel                     = objc.RegisterName("temporalLevel")
+	_mEHEVCDependencyInfoSelSetTemporalLevel                  = objc.RegisterName("setTemporalLevel:")
+	_mEHEVCDependencyInfoSelProfileSpace                      = objc.RegisterName("profileSpace")
+	_mEHEVCDependencyInfoSelSetProfileSpace                   = objc.RegisterName("setProfileSpace:")
+	_mEHEVCDependencyInfoSelTierFlag                          = objc.RegisterName("tierFlag")
+	_mEHEVCDependencyInfoSelSetTierFlag                       = objc.RegisterName("setTierFlag:")
+	_mEHEVCDependencyInfoSelProfileIndex                      = objc.RegisterName("profileIndex")
+	_mEHEVCDependencyInfoSelSetProfileIndex                   = objc.RegisterName("setProfileIndex:")
+	_mEHEVCDependencyInfoSelProfileCompatibilityFlags         = objc.RegisterName("profileCompatibilityFlags")
+	_mEHEVCDependencyInfoSelSetProfileCompatibilityFlags      = objc.RegisterName("setProfileCompatibilityFlags:")
+	_mEHEVCDependencyInfoSelConstraintIndicatorFlags          = objc.RegisterName("constraintIndicatorFlags")
+	_mEHEVCDependencyInfoSelSetConstraintIndicatorFlags       = objc.RegisterName("setConstraintIndicatorFlags:")
+	_mEHEVCDependencyInfoSelLevelIndex                        = objc.RegisterName("levelIndex")
+	_mEHEVCDependencyInfoSelSetLevelIndex                     = objc.RegisterName("setLevelIndex:")
 )
 
 func MEHEVCDependencyInfoFromID(id objc.ID) *MEHEVCDependencyInfo {
@@ -122,7 +122,9 @@ func (o *MEHEVCDependencyInfo) SetProfileIndex(profileIndex int16) {
 // @property		profileCompatibilityFlags @abstract		The HEVC profile compatibility flags (4 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags sample buffer attachment.
 func (o *MEHEVCDependencyInfo) ProfileCompatibilityFlags() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEHEVCDependencyInfoSelProfileCompatibilityFlags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -133,7 +135,9 @@ func (o *MEHEVCDependencyInfo) SetProfileCompatibilityFlags(profileCompatibility
 // @property		constraintIndicatorFlags @abstract		The HEVC constraint indicator flags (6 bytes), or nil of this information is not available. @discussion		Maps to the kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags sample buffer attachment.
 func (o *MEHEVCDependencyInfo) ConstraintIndicatorFlags() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEHEVCDependencyInfoSelConstraintIndicatorFlags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -150,4 +154,3 @@ func (o *MEHEVCDependencyInfo) LevelIndex() int16 {
 func (o *MEHEVCDependencyInfo) SetLevelIndex(levelIndex int16) {
 	o.Ptr().Send(_mEHEVCDependencyInfoSelSetLevelIndex, levelIndex)
 }
-

@@ -170,7 +170,9 @@ func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -311,4 +313,3 @@ type AudioNodeable interface {
 }
 
 var _ AudioNodeable = (*AudioNode)(nil)
-

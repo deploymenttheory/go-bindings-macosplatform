@@ -120,4 +120,3 @@ type ThumbnailGenerationRequestable interface {
 }
 
 var _ ThumbnailGenerationRequestable = (*ThumbnailGenerationRequest)(nil)
-

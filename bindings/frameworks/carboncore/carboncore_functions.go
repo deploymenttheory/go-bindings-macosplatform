@@ -13,759 +13,759 @@ import (
 )
 
 var (
-	_fnAbsoluteDeltaToDuration func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAbsoluteDeltaToNanoseconds func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnAbsoluteToDuration func(unsafe.Pointer) int
-	_fnAbsoluteToNanoseconds func(unsafe.Pointer) unsafe.Pointer
-	_fnAddAbsoluteToAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnAddAtomic func(int, *int) int
-	_fnAddAtomic16 func(int, *int16) int16
-	_fnAddAtomic8 func(int, *int8) int8
-	_fnAddCollectionItem func(unsafe.Pointer, uint, int, int, unsafe.Pointer) int16
-	_fnAddCollectionItemHdl func(unsafe.Pointer, uint, int, *string) int16
-	_fnAddDurationToAbsolute func(int, unsafe.Pointer) unsafe.Pointer
-	_fnAddFolderDescriptor func(uint, uint, uint, uint, uint, uint, *uint8, uint8) int16
-	_fnAddNanosecondsToAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnAddResource func(*string, uint, int16, *uint8)
-	_fnBitAnd func(int, int) int
-	_fnBitAndAtomic func(uint, *uint) uint
-	_fnBitAndAtomic16 func(uint, *uint16) uint16
-	_fnBitAndAtomic8 func(uint, *uint8) uint8
-	_fnBitClr func(unsafe.Pointer, int)
-	_fnBitNot func(int) int
-	_fnBitOr func(int, int) int
-	_fnBitOrAtomic func(uint, *uint) uint
-	_fnBitOrAtomic16 func(uint, *uint16) uint16
-	_fnBitOrAtomic8 func(uint, *uint8) uint8
-	_fnBitSet func(unsafe.Pointer, int)
-	_fnBitShift func(int, int16) int
-	_fnBitTst func(unsafe.Pointer, int) uint8
-	_fnBitXor func(int, int) int
-	_fnBitXorAtomic func(uint, *uint) uint
-	_fnBitXorAtomic16 func(uint, *uint16) uint16
-	_fnBitXorAtomic8 func(uint, *uint8) uint8
-	_fnCSBackupIsItemExcluded func(unsafe.Pointer, *uint8) uint8
-	_fnCSBackupSetItemExcluded func(unsafe.Pointer, uint8, uint8) int
-	_fnCSCopyMachineName func() unsafe.Pointer
-	_fnCSCopyUserName func(uint8) unsafe.Pointer
-	_fnCSDiskSpaceCancelRecovery func(unsafe.Pointer)
-	_fnCSDiskSpaceGetRecoveryEstimate func(unsafe.Pointer) uint64
-	_fnCSDiskSpaceStartRecovery func(unsafe.Pointer, uint64, int, unsafe.Pointer, objc.ID, objc.Block)
-	_fnCSGetComponentsThreadMode func() uint
-	_fnCSSetComponentsThreadMode func(uint)
-	_fnCallComponentCanDo func(*ComponentInstanceRecord, int16) int
-	_fnCallComponentClose func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
-	_fnCallComponentDispatch func(*ComponentParameters) int
-	_fnCallComponentFunction func(*ComponentParameters, unsafe.Pointer) int
-	_fnCallComponentFunctionWithStorage func(*string, *ComponentParameters, unsafe.Pointer) int
+	_fnAbsoluteDeltaToDuration                  func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAbsoluteDeltaToNanoseconds               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnAbsoluteToDuration                       func(unsafe.Pointer) int
+	_fnAbsoluteToNanoseconds                    func(unsafe.Pointer) unsafe.Pointer
+	_fnAddAbsoluteToAbsolute                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnAddAtomic                                func(int, *int) int
+	_fnAddAtomic16                              func(int, *int16) int16
+	_fnAddAtomic8                               func(int, *int8) int8
+	_fnAddCollectionItem                        func(unsafe.Pointer, uint, int, int, unsafe.Pointer) int16
+	_fnAddCollectionItemHdl                     func(unsafe.Pointer, uint, int, *string) int16
+	_fnAddDurationToAbsolute                    func(int, unsafe.Pointer) unsafe.Pointer
+	_fnAddFolderDescriptor                      func(uint, uint, uint, uint, uint, uint, *uint8, uint8) int16
+	_fnAddNanosecondsToAbsolute                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnAddResource                              func(*string, uint, int16, *uint8)
+	_fnBitAnd                                   func(int, int) int
+	_fnBitAndAtomic                             func(uint, *uint) uint
+	_fnBitAndAtomic16                           func(uint, *uint16) uint16
+	_fnBitAndAtomic8                            func(uint, *uint8) uint8
+	_fnBitClr                                   func(unsafe.Pointer, int)
+	_fnBitNot                                   func(int) int
+	_fnBitOr                                    func(int, int) int
+	_fnBitOrAtomic                              func(uint, *uint) uint
+	_fnBitOrAtomic16                            func(uint, *uint16) uint16
+	_fnBitOrAtomic8                             func(uint, *uint8) uint8
+	_fnBitSet                                   func(unsafe.Pointer, int)
+	_fnBitShift                                 func(int, int16) int
+	_fnBitTst                                   func(unsafe.Pointer, int) uint8
+	_fnBitXor                                   func(int, int) int
+	_fnBitXorAtomic                             func(uint, *uint) uint
+	_fnBitXorAtomic16                           func(uint, *uint16) uint16
+	_fnBitXorAtomic8                            func(uint, *uint8) uint8
+	_fnCSBackupIsItemExcluded                   func(unsafe.Pointer, *uint8) uint8
+	_fnCSBackupSetItemExcluded                  func(unsafe.Pointer, uint8, uint8) int
+	_fnCSCopyMachineName                        func() unsafe.Pointer
+	_fnCSCopyUserName                           func(uint8) unsafe.Pointer
+	_fnCSDiskSpaceCancelRecovery                func(unsafe.Pointer)
+	_fnCSDiskSpaceGetRecoveryEstimate           func(unsafe.Pointer) uint64
+	_fnCSDiskSpaceStartRecovery                 func(unsafe.Pointer, uint64, int, unsafe.Pointer, objc.ID, objc.Block)
+	_fnCSGetComponentsThreadMode                func() uint
+	_fnCSSetComponentsThreadMode                func(uint)
+	_fnCallComponentCanDo                       func(*ComponentInstanceRecord, int16) int
+	_fnCallComponentClose                       func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
+	_fnCallComponentDispatch                    func(*ComponentParameters) int
+	_fnCallComponentFunction                    func(*ComponentParameters, unsafe.Pointer) int
+	_fnCallComponentFunctionWithStorage         func(*string, *ComponentParameters, unsafe.Pointer) int
 	_fnCallComponentFunctionWithStorageProcInfo func(*string, *ComponentParameters, unsafe.Pointer, uint) int
-	_fnCallComponentGetMPWorkFunction func(*ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnCallComponentGetPublicResource func(*ComponentInstanceRecord, uint, int16, **string) int
-	_fnCallComponentOpen func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
-	_fnCallComponentRegister func(*ComponentInstanceRecord) int
-	_fnCallComponentTarget func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
-	_fnCallComponentUnregister func(*ComponentInstanceRecord) int
-	_fnCallComponentVersion func(*ComponentInstanceRecord) int
-	_fnCaptureComponent func(*ComponentRecord, *ComponentRecord) *ComponentRecord
-	_fnChangeTextToUnicodeInfo func(unsafe.Pointer, *UnicodeMapping) int
-	_fnChangeUnicodeToTextInfo func(unsafe.Pointer, *UnicodeMapping) int
-	_fnChangedResource func(*string)
-	_fnCloneCollection func(unsafe.Pointer) unsafe.Pointer
-	_fnCloseComponent func(*ComponentInstanceRecord) int16
-	_fnCloseComponentResFile func(int) int16
-	_fnCloseResFile func(int)
-	_fnCollectionTagExists func(unsafe.Pointer, uint) uint8
-	_fnCompareAndSwap func(uint, uint, *uint) uint8
-	_fnConvertFromPStringToUnicode func(unsafe.Pointer, *uint8, uint, *uint, *uint16) int
-	_fnConvertFromTextToUnicode func(unsafe.Pointer, uint, unsafe.Pointer, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, *uint16) int
-	_fnConvertFromUnicodeToPString func(unsafe.Pointer, uint, *uint16, *uint8) int
-	_fnConvertFromUnicodeToScriptCodeRun func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer, uint, *uint, *ScriptCodeRun) int
-	_fnConvertFromUnicodeToText func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer) int
-	_fnConvertFromUnicodeToTextRun func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer, uint, *uint, *TextEncodingRun) int
-	_fnCopyCollection func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCoreEndianFlipData func(uint, uint, int16, unsafe.Pointer, uint, uint8) int
-	_fnCoreEndianGetFlipper func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCoreEndianInstallFlipper func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCount1Resources func(uint) int16
-	_fnCount1Types func() int16
-	_fnCountCollectionItems func(unsafe.Pointer) int
-	_fnCountCollectionOwners func(unsafe.Pointer) int
-	_fnCountCollectionTags func(unsafe.Pointer) int
-	_fnCountComponentInstances func(*ComponentRecord) int
-	_fnCountComponents func(*ComponentDescription) int
-	_fnCountResources func(uint) int16
-	_fnCountTaggedCollectionItems func(unsafe.Pointer, uint) int
-	_fnCountTypes func() int16
-	_fnCountUnicodeMappings func(uint, *UnicodeMapping, *uint) int
-	_fnCreateTextEncoding func(uint, uint, uint) uint
-	_fnCreateTextToUnicodeInfo func(*UnicodeMapping, unsafe.Pointer) int
-	_fnCreateTextToUnicodeInfoByEncoding func(uint, unsafe.Pointer) int
-	_fnCreateThreadPool func(uint, int16, int) int16
-	_fnCreateUnicodeToTextInfo func(*UnicodeMapping, unsafe.Pointer) int
-	_fnCreateUnicodeToTextInfoByEncoding func(uint, unsafe.Pointer) int
-	_fnCreateUnicodeToTextRunInfo func(uint, *UnicodeMapping, unsafe.Pointer) int
-	_fnCreateUnicodeToTextRunInfoByEncoding func(uint, *uint, unsafe.Pointer) int
-	_fnCreateUnicodeToTextRunInfoByScriptCode func(uint, *int16, unsafe.Pointer) int
-	_fnCurResFile func() int
-	_fnDebugAssert func(uint, uint, string, string, string, string, int, unsafe.Pointer)
-	_fnDecrementAtomic func(*int) int
-	_fnDecrementAtomic16 func(*int16) int16
-	_fnDecrementAtomic8 func(*int8) int8
-	_fnDelay func(uint, unsafe.Pointer)
-	_fnDelegateComponentCall func(*ComponentParameters, *ComponentInstanceRecord) int
-	_fnDeleteGestaltValue func(uint) int16
-	_fnDequeue func(*QElem, *QHdr) int16
-	_fnDetachResource func(*string)
-	_fnDetachResourceFile func(int) int16
-	_fnDetermineIfPathIsEnclosedByFolder func(int16, uint, *uint8, uint8, *uint8) int16
-	_fnDisposeCollection func(unsafe.Pointer)
-	_fnDisposeCollectionExceptionUPP func(unsafe.Pointer)
-	_fnDisposeCollectionFlattenUPP func(unsafe.Pointer)
-	_fnDisposeComponentFunctionUPP func(unsafe.Pointer)
-	_fnDisposeComponentMPWorkFunctionUPP func(unsafe.Pointer)
-	_fnDisposeComponentRoutineUPP func(unsafe.Pointer)
-	_fnDisposeDebugAssertOutputHandlerUPP func(unsafe.Pointer)
-	_fnDisposeDebugComponent func(uint) int
-	_fnDisposeDebugComponentCallbackUPP func(unsafe.Pointer)
-	_fnDisposeDebuggerDisposeThreadUPP func(unsafe.Pointer)
-	_fnDisposeDebuggerNewThreadUPP func(unsafe.Pointer)
-	_fnDisposeDebuggerThreadSchedulerUPP func(unsafe.Pointer)
-	_fnDisposeDeferredTaskUPP func(unsafe.Pointer)
-// Deprecated: No longer supported
-	_fnDisposeExceptionHandlerUPP func(unsafe.Pointer)
-	_fnDisposeFNSubscriptionUPP func(unsafe.Pointer)
-	_fnDisposeFSVolumeEjectUPP func(unsafe.Pointer)
-	_fnDisposeFSVolumeMountUPP func(unsafe.Pointer)
-	_fnDisposeFSVolumeUnmountUPP func(unsafe.Pointer)
-	_fnDisposeFolderManagerNotificationUPP func(unsafe.Pointer)
+	_fnCallComponentGetMPWorkFunction           func(*ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnCallComponentGetPublicResource           func(*ComponentInstanceRecord, uint, int16, **string) int
+	_fnCallComponentOpen                        func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
+	_fnCallComponentRegister                    func(*ComponentInstanceRecord) int
+	_fnCallComponentTarget                      func(*ComponentInstanceRecord, *ComponentInstanceRecord) int
+	_fnCallComponentUnregister                  func(*ComponentInstanceRecord) int
+	_fnCallComponentVersion                     func(*ComponentInstanceRecord) int
+	_fnCaptureComponent                         func(*ComponentRecord, *ComponentRecord) *ComponentRecord
+	_fnChangeTextToUnicodeInfo                  func(unsafe.Pointer, *UnicodeMapping) int
+	_fnChangeUnicodeToTextInfo                  func(unsafe.Pointer, *UnicodeMapping) int
+	_fnChangedResource                          func(*string)
+	_fnCloneCollection                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCloseComponent                           func(*ComponentInstanceRecord) int16
+	_fnCloseComponentResFile                    func(int) int16
+	_fnCloseResFile                             func(int)
+	_fnCollectionTagExists                      func(unsafe.Pointer, uint) uint8
+	_fnCompareAndSwap                           func(uint, uint, *uint) uint8
+	_fnConvertFromPStringToUnicode              func(unsafe.Pointer, *uint8, uint, *uint, *uint16) int
+	_fnConvertFromTextToUnicode                 func(unsafe.Pointer, uint, unsafe.Pointer, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, *uint16) int
+	_fnConvertFromUnicodeToPString              func(unsafe.Pointer, uint, *uint16, *uint8) int
+	_fnConvertFromUnicodeToScriptCodeRun        func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer, uint, *uint, *ScriptCodeRun) int
+	_fnConvertFromUnicodeToText                 func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer) int
+	_fnConvertFromUnicodeToTextRun              func(unsafe.Pointer, uint, *uint16, uint, uint, *uint, *uint, *uint, uint, *uint, *uint, unsafe.Pointer, uint, *uint, *TextEncodingRun) int
+	_fnCopyCollection                           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCoreEndianFlipData                       func(uint, uint, int16, unsafe.Pointer, uint, uint8) int
+	_fnCoreEndianGetFlipper                     func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCoreEndianInstallFlipper                 func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCount1Resources                          func(uint) int16
+	_fnCount1Types                              func() int16
+	_fnCountCollectionItems                     func(unsafe.Pointer) int
+	_fnCountCollectionOwners                    func(unsafe.Pointer) int
+	_fnCountCollectionTags                      func(unsafe.Pointer) int
+	_fnCountComponentInstances                  func(*ComponentRecord) int
+	_fnCountComponents                          func(*ComponentDescription) int
+	_fnCountResources                           func(uint) int16
+	_fnCountTaggedCollectionItems               func(unsafe.Pointer, uint) int
+	_fnCountTypes                               func() int16
+	_fnCountUnicodeMappings                     func(uint, *UnicodeMapping, *uint) int
+	_fnCreateTextEncoding                       func(uint, uint, uint) uint
+	_fnCreateTextToUnicodeInfo                  func(*UnicodeMapping, unsafe.Pointer) int
+	_fnCreateTextToUnicodeInfoByEncoding        func(uint, unsafe.Pointer) int
+	_fnCreateThreadPool                         func(uint, int16, int) int16
+	_fnCreateUnicodeToTextInfo                  func(*UnicodeMapping, unsafe.Pointer) int
+	_fnCreateUnicodeToTextInfoByEncoding        func(uint, unsafe.Pointer) int
+	_fnCreateUnicodeToTextRunInfo               func(uint, *UnicodeMapping, unsafe.Pointer) int
+	_fnCreateUnicodeToTextRunInfoByEncoding     func(uint, *uint, unsafe.Pointer) int
+	_fnCreateUnicodeToTextRunInfoByScriptCode   func(uint, *int16, unsafe.Pointer) int
+	_fnCurResFile                               func() int
+	_fnDebugAssert                              func(uint, uint, string, string, string, string, int, unsafe.Pointer)
+	_fnDecrementAtomic                          func(*int) int
+	_fnDecrementAtomic16                        func(*int16) int16
+	_fnDecrementAtomic8                         func(*int8) int8
+	_fnDelay                                    func(uint, unsafe.Pointer)
+	_fnDelegateComponentCall                    func(*ComponentParameters, *ComponentInstanceRecord) int
+	_fnDeleteGestaltValue                       func(uint) int16
+	_fnDequeue                                  func(*QElem, *QHdr) int16
+	_fnDetachResource                           func(*string)
+	_fnDetachResourceFile                       func(int) int16
+	_fnDetermineIfPathIsEnclosedByFolder        func(int16, uint, *uint8, uint8, *uint8) int16
+	_fnDisposeCollection                        func(unsafe.Pointer)
+	_fnDisposeCollectionExceptionUPP            func(unsafe.Pointer)
+	_fnDisposeCollectionFlattenUPP              func(unsafe.Pointer)
+	_fnDisposeComponentFunctionUPP              func(unsafe.Pointer)
+	_fnDisposeComponentMPWorkFunctionUPP        func(unsafe.Pointer)
+	_fnDisposeComponentRoutineUPP               func(unsafe.Pointer)
+	_fnDisposeDebugAssertOutputHandlerUPP       func(unsafe.Pointer)
+	_fnDisposeDebugComponent                    func(uint) int
+	_fnDisposeDebugComponentCallbackUPP         func(unsafe.Pointer)
+	_fnDisposeDebuggerDisposeThreadUPP          func(unsafe.Pointer)
+	_fnDisposeDebuggerNewThreadUPP              func(unsafe.Pointer)
+	_fnDisposeDebuggerThreadSchedulerUPP        func(unsafe.Pointer)
+	_fnDisposeDeferredTaskUPP                   func(unsafe.Pointer)
+	// Deprecated: No longer supported
+	_fnDisposeExceptionHandlerUPP            func(unsafe.Pointer)
+	_fnDisposeFNSubscriptionUPP              func(unsafe.Pointer)
+	_fnDisposeFSVolumeEjectUPP               func(unsafe.Pointer)
+	_fnDisposeFSVolumeMountUPP               func(unsafe.Pointer)
+	_fnDisposeFSVolumeUnmountUPP             func(unsafe.Pointer)
+	_fnDisposeFolderManagerNotificationUPP   func(unsafe.Pointer)
 	_fnDisposeGetMissingComponentResourceUPP func(unsafe.Pointer)
-	_fnDisposeHandle func(*string)
-	_fnDisposeIOCompletionUPP func(unsafe.Pointer)
-	_fnDisposeIndexToUCStringUPP func(unsafe.Pointer)
-	_fnDisposePtr func(string)
-	_fnDisposeResErrUPP func(unsafe.Pointer)
-	_fnDisposeSelectorFunctionUPP func(unsafe.Pointer)
-	_fnDisposeTextToUnicodeInfo func(unsafe.Pointer) int
-	_fnDisposeThread func(uint, unsafe.Pointer, uint8) int16
-	_fnDisposeThreadEntryUPP func(unsafe.Pointer)
-	_fnDisposeThreadSchedulerUPP func(unsafe.Pointer)
-	_fnDisposeThreadSwitchUPP func(unsafe.Pointer)
-	_fnDisposeThreadTerminationUPP func(unsafe.Pointer)
-	_fnDisposeTimerUPP func(unsafe.Pointer)
-	_fnDisposeUnicodeToTextFallbackUPP func(unsafe.Pointer)
-	_fnDisposeUnicodeToTextInfo func(unsafe.Pointer) int
-	_fnDisposeUnicodeToTextRunInfo func(unsafe.Pointer) int
-	_fnDurationToAbsolute func(int) unsafe.Pointer
-	_fnDurationToNanoseconds func(int) unsafe.Pointer
-	_fnEmptyCollection func(unsafe.Pointer)
-	_fnEmptyHandle func(*string)
-	_fnEnqueue func(*QElem, *QHdr)
-	_fnFNGetDirectoryForSubscription func(unsafe.Pointer, *FSRef) int
-	_fnFNNotify func(*FSRef, uint, uint) int
-	_fnFNNotifyAll func(uint, uint) int
-	_fnFNNotifyByPath func(*uint8, uint, uint) int
-	_fnFNSubscribe func(*FSRef, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnFNSubscribeByPath func(*uint8, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnFNUnsubscribe func(unsafe.Pointer) int
-	_fnFSAllocateFork func(int, uint16, uint16, int64, uint64, *uint64) int16
-	_fnFSCancelVolumeOperation func(unsafe.Pointer) int
-	_fnFSCatalogSearch func(unsafe.Pointer, *FSSearchParams, uint, *uint, *uint8, uint, *FSCatalogInfo, *FSRef, *FSSpec, unsafe.Pointer) int16
-	_fnFSCloseFork func(int) int16
-	_fnFSCloseIterator func(unsafe.Pointer) int16
-	_fnFSCompareFSRefs func(*FSRef, *FSRef) int16
-	_fnFSCopyAliasInfo func(**AliasRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *FSAliasInfo) int
-	_fnFSCopyDADiskForVolume func(int16, unsafe.Pointer) int
-	_fnFSCopyDiskIDForVolume func(int16, unsafe.Pointer) int
-	_fnFSCopyObjectAsync func(unsafe.Pointer, *FSRef, *FSRef, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSCopyObjectSync func(*FSRef, *FSRef, unsafe.Pointer, *FSRef, uint) int
-// Deprecated: since macOS 10.8.
-	_fnFSCopyURLForVolume func(int16, unsafe.Pointer) int
-	_fnFSCreateDirectoryUnicode func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec, *uint) int16
-	_fnFSCreateFileAndOpenForkUnicode func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, uint, *uint16, int8, *int, *FSRef) int
-	_fnFSCreateFileUnicode func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec) int16
-	_fnFSCreateFork func(*FSRef, uint, *uint16) int16
-	_fnFSCreateResFile func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec)
-	_fnFSCreateResourceFile func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, uint, *uint16, *FSRef, *FSSpec) int16
-	_fnFSCreateResourceFork func(*FSRef, uint, *uint16, uint) int16
-	_fnFSCreateStringFromHFSUniStr func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnFSCreateVolumeOperation func(unsafe.Pointer) int
-	_fnFSDeleteFork func(*FSRef, uint, *uint16) int16
-	_fnFSDeleteObject func(*FSRef) int16
-	_fnFSDetermineIfRefIsEnclosedByFolder func(int16, uint, *FSRef, *uint8) int16
-	_fnFSDisposeVolumeOperation func(unsafe.Pointer) int
-	_fnFSEjectVolumeAsync func(int16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSEjectVolumeSync func(int16, uint, *int) int
-	_fnFSExchangeObjects func(*FSRef, *FSRef) int16
-	_fnFSFileOperationCancel func(unsafe.Pointer) int
-	_fnFSFileOperationCopyStatus func(unsafe.Pointer, *FSRef, *uint, *int, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSFileOperationCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnFSFileOperationGetTypeID func() uint
-	_fnFSFileOperationScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSFileOperationUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSFileSecurityCopyAccessControlList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnFSFileSecurityCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnFSFileSecurityCreateWithFSPermissionInfo func(unsafe.Pointer, *FSPermissionInfo) unsafe.Pointer
-	_fnFSFileSecurityGetGroup func(unsafe.Pointer, *uint) int
-	_fnFSFileSecurityGetGroupUUID func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
-	_fnFSFileSecurityGetMode func(unsafe.Pointer, *uint16) int
-	_fnFSFileSecurityGetOwner func(unsafe.Pointer, *uint) int
-	_fnFSFileSecurityGetOwnerUUID func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
-	_fnFSFileSecurityGetTypeID func() uint
-	_fnFSFileSecurityRefCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnFSFileSecuritySetAccessControlList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnFSFileSecuritySetGroup func(unsafe.Pointer, uint) int
-	_fnFSFileSecuritySetGroupUUID func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
-	_fnFSFileSecuritySetMode func(unsafe.Pointer, uint16) int
-	_fnFSFileSecuritySetOwner func(unsafe.Pointer, uint) int
-	_fnFSFileSecuritySetOwnerUUID func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
-	_fnFSFindFolder func(int16, uint, uint8, *FSRef) int16
-	_fnFSFlushFork func(int) int16
-	_fnFSFlushVolume func(int16) int
-	_fnFSFollowFinderAlias func(*FSRef, **AliasRecord, uint8, *FSRef, *uint8) int16
-	_fnFSGetAsyncEjectStatus func(unsafe.Pointer, *uint, *int, *int16, *int, unsafe.Pointer) int
-	_fnFSGetAsyncMountStatus func(unsafe.Pointer, *uint, *int, *int16, unsafe.Pointer) int
-	_fnFSGetAsyncUnmountStatus func(unsafe.Pointer, *uint, *int, *int16, *int, unsafe.Pointer) int
-	_fnFSGetCatalogInfo func(*FSRef, uint, *FSCatalogInfo, unsafe.Pointer, *FSSpec, *FSRef) int16
-	_fnFSGetCatalogInfoBulk func(unsafe.Pointer, uint, *uint, *uint8, uint, *FSCatalogInfo, *FSRef, *FSSpec, unsafe.Pointer) int16
-	_fnFSGetDataForkName func(unsafe.Pointer) int16
-	_fnFSGetForkCBInfo func(int, int16, *int16, *int, *FSForkInfo, *FSRef, unsafe.Pointer) int16
-	_fnFSGetForkPosition func(int, *int64) int16
-	_fnFSGetForkSize func(int, *int64) int16
-	_fnFSGetHFSUniStrFromString func(unsafe.Pointer, unsafe.Pointer) int
-	_fnFSGetResourceForkName func(unsafe.Pointer) int16
-	_fnFSGetTemporaryDirectoryForReplaceObject func(*FSRef, *FSRef, uint) int
-	_fnFSGetVolumeForDADisk func(unsafe.Pointer, *int16) int
-	_fnFSGetVolumeForDiskID func(unsafe.Pointer, *int16) int
-	_fnFSGetVolumeInfo func(int16, uint, *int16, uint, *FSVolumeInfo, unsafe.Pointer, *FSRef) int16
-	_fnFSGetVolumeMountInfo func(int16, *uint8, uint, *uint) int
-	_fnFSGetVolumeMountInfoSize func(int16, *uint) int
-	_fnFSGetVolumeParms func(int16, *GetVolParmsInfoBuffer, uint) int
-	_fnFSIsAliasFile func(*FSRef, *uint8, *uint8) int16
-	_fnFSIsFSRefValid func(*FSRef) uint8
-	_fnFSIterateForks func(*FSRef, *CatPositionRec, unsafe.Pointer, *int64, *uint64) int16
-	_fnFSLockRange func(int, uint16, int64, uint64, *uint64) int
-	_fnFSMakeFSRefUnicode func(*FSRef, uint, *uint16, uint, *FSRef) int16
-	_fnFSMatchAliasBulk func(*FSRef, uint, **AliasRecord, *int16, *FSRef, *uint8, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSMountLocalVolumeAsync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSMountLocalVolumeSync func(unsafe.Pointer, unsafe.Pointer, *int16, uint) int
-	_fnFSMountServerVolumeAsync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSMountServerVolumeSync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int16, uint) int
-	_fnFSMoveObject func(*FSRef, *FSRef, *FSRef) int16
-	_fnFSMoveObjectAsync func(unsafe.Pointer, *FSRef, *FSRef, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSMoveObjectSync func(*FSRef, *FSRef, unsafe.Pointer, *FSRef, uint) int
-	_fnFSMoveObjectToTrashAsync func(unsafe.Pointer, *FSRef, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSMoveObjectToTrashSync func(*FSRef, *FSRef, uint) int
-	_fnFSNewAlias func(*FSRef, *FSRef, ***AliasRecord) int16
-	_fnFSNewAliasFromPath func(string, string, uint, ***AliasRecord, *uint8) int
-	_fnFSNewAliasMinimal func(*FSRef, ***AliasRecord) int16
-	_fnFSNewAliasMinimalUnicode func(*FSRef, uint, *uint16, ***AliasRecord, *uint8) int16
-	_fnFSNewAliasUnicode func(*FSRef, *FSRef, uint, *uint16, ***AliasRecord, *uint8) int16
-	_fnFSOpenFork func(*FSRef, uint, *uint16, int8, *int) int16
-	_fnFSOpenIterator func(*FSRef, uint, unsafe.Pointer) int16
-	_fnFSOpenOrphanResFile func(*FSRef, int8, *int) int16
-	_fnFSOpenResFile func(*FSRef, int8) int
-	_fnFSOpenResourceFile func(*FSRef, uint, *uint16, int8, *int) int16
-	_fnFSPathCopyObjectAsync func(unsafe.Pointer, string, string, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSPathCopyObjectSync func(string, string, unsafe.Pointer, string, uint) int
-	_fnFSPathFileOperationCopyStatus func(unsafe.Pointer, string, *uint, *int, unsafe.Pointer, unsafe.Pointer) int
+	_fnDisposeHandle                         func(*string)
+	_fnDisposeIOCompletionUPP                func(unsafe.Pointer)
+	_fnDisposeIndexToUCStringUPP             func(unsafe.Pointer)
+	_fnDisposePtr                            func(string)
+	_fnDisposeResErrUPP                      func(unsafe.Pointer)
+	_fnDisposeSelectorFunctionUPP            func(unsafe.Pointer)
+	_fnDisposeTextToUnicodeInfo              func(unsafe.Pointer) int
+	_fnDisposeThread                         func(uint, unsafe.Pointer, uint8) int16
+	_fnDisposeThreadEntryUPP                 func(unsafe.Pointer)
+	_fnDisposeThreadSchedulerUPP             func(unsafe.Pointer)
+	_fnDisposeThreadSwitchUPP                func(unsafe.Pointer)
+	_fnDisposeThreadTerminationUPP           func(unsafe.Pointer)
+	_fnDisposeTimerUPP                       func(unsafe.Pointer)
+	_fnDisposeUnicodeToTextFallbackUPP       func(unsafe.Pointer)
+	_fnDisposeUnicodeToTextInfo              func(unsafe.Pointer) int
+	_fnDisposeUnicodeToTextRunInfo           func(unsafe.Pointer) int
+	_fnDurationToAbsolute                    func(int) unsafe.Pointer
+	_fnDurationToNanoseconds                 func(int) unsafe.Pointer
+	_fnEmptyCollection                       func(unsafe.Pointer)
+	_fnEmptyHandle                           func(*string)
+	_fnEnqueue                               func(*QElem, *QHdr)
+	_fnFNGetDirectoryForSubscription         func(unsafe.Pointer, *FSRef) int
+	_fnFNNotify                              func(*FSRef, uint, uint) int
+	_fnFNNotifyAll                           func(uint, uint) int
+	_fnFNNotifyByPath                        func(*uint8, uint, uint) int
+	_fnFNSubscribe                           func(*FSRef, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnFNSubscribeByPath                     func(*uint8, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnFNUnsubscribe                         func(unsafe.Pointer) int
+	_fnFSAllocateFork                        func(int, uint16, uint16, int64, uint64, *uint64) int16
+	_fnFSCancelVolumeOperation               func(unsafe.Pointer) int
+	_fnFSCatalogSearch                       func(unsafe.Pointer, *FSSearchParams, uint, *uint, *uint8, uint, *FSCatalogInfo, *FSRef, *FSSpec, unsafe.Pointer) int16
+	_fnFSCloseFork                           func(int) int16
+	_fnFSCloseIterator                       func(unsafe.Pointer) int16
+	_fnFSCompareFSRefs                       func(*FSRef, *FSRef) int16
+	_fnFSCopyAliasInfo                       func(**AliasRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint, *FSAliasInfo) int
+	_fnFSCopyDADiskForVolume                 func(int16, unsafe.Pointer) int
+	_fnFSCopyDiskIDForVolume                 func(int16, unsafe.Pointer) int
+	_fnFSCopyObjectAsync                     func(unsafe.Pointer, *FSRef, *FSRef, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSCopyObjectSync                      func(*FSRef, *FSRef, unsafe.Pointer, *FSRef, uint) int
+	// Deprecated: since macOS 10.8.
+	_fnFSCopyURLForVolume                          func(int16, unsafe.Pointer) int
+	_fnFSCreateDirectoryUnicode                    func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec, *uint) int16
+	_fnFSCreateFileAndOpenForkUnicode              func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, uint, *uint16, int8, *int, *FSRef) int
+	_fnFSCreateFileUnicode                         func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec) int16
+	_fnFSCreateFork                                func(*FSRef, uint, *uint16) int16
+	_fnFSCreateResFile                             func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, *FSRef, *FSSpec)
+	_fnFSCreateResourceFile                        func(*FSRef, uint, *uint16, uint, *FSCatalogInfo, uint, *uint16, *FSRef, *FSSpec) int16
+	_fnFSCreateResourceFork                        func(*FSRef, uint, *uint16, uint) int16
+	_fnFSCreateStringFromHFSUniStr                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnFSCreateVolumeOperation                     func(unsafe.Pointer) int
+	_fnFSDeleteFork                                func(*FSRef, uint, *uint16) int16
+	_fnFSDeleteObject                              func(*FSRef) int16
+	_fnFSDetermineIfRefIsEnclosedByFolder          func(int16, uint, *FSRef, *uint8) int16
+	_fnFSDisposeVolumeOperation                    func(unsafe.Pointer) int
+	_fnFSEjectVolumeAsync                          func(int16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSEjectVolumeSync                           func(int16, uint, *int) int
+	_fnFSExchangeObjects                           func(*FSRef, *FSRef) int16
+	_fnFSFileOperationCancel                       func(unsafe.Pointer) int
+	_fnFSFileOperationCopyStatus                   func(unsafe.Pointer, *FSRef, *uint, *int, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSFileOperationCreate                       func(unsafe.Pointer) unsafe.Pointer
+	_fnFSFileOperationGetTypeID                    func() uint
+	_fnFSFileOperationScheduleWithRunLoop          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSFileOperationUnscheduleFromRunLoop        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSFileSecurityCopyAccessControlList         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnFSFileSecurityCreate                        func(unsafe.Pointer) unsafe.Pointer
+	_fnFSFileSecurityCreateWithFSPermissionInfo    func(unsafe.Pointer, *FSPermissionInfo) unsafe.Pointer
+	_fnFSFileSecurityGetGroup                      func(unsafe.Pointer, *uint) int
+	_fnFSFileSecurityGetGroupUUID                  func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
+	_fnFSFileSecurityGetMode                       func(unsafe.Pointer, *uint16) int
+	_fnFSFileSecurityGetOwner                      func(unsafe.Pointer, *uint) int
+	_fnFSFileSecurityGetOwnerUUID                  func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
+	_fnFSFileSecurityGetTypeID                     func() uint
+	_fnFSFileSecurityRefCreateCopy                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnFSFileSecuritySetAccessControlList          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnFSFileSecuritySetGroup                      func(unsafe.Pointer, uint) int
+	_fnFSFileSecuritySetGroupUUID                  func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
+	_fnFSFileSecuritySetMode                       func(unsafe.Pointer, uint16) int
+	_fnFSFileSecuritySetOwner                      func(unsafe.Pointer, uint) int
+	_fnFSFileSecuritySetOwnerUUID                  func(unsafe.Pointer, *corefoundation.CFUUIDBytes) int
+	_fnFSFindFolder                                func(int16, uint, uint8, *FSRef) int16
+	_fnFSFlushFork                                 func(int) int16
+	_fnFSFlushVolume                               func(int16) int
+	_fnFSFollowFinderAlias                         func(*FSRef, **AliasRecord, uint8, *FSRef, *uint8) int16
+	_fnFSGetAsyncEjectStatus                       func(unsafe.Pointer, *uint, *int, *int16, *int, unsafe.Pointer) int
+	_fnFSGetAsyncMountStatus                       func(unsafe.Pointer, *uint, *int, *int16, unsafe.Pointer) int
+	_fnFSGetAsyncUnmountStatus                     func(unsafe.Pointer, *uint, *int, *int16, *int, unsafe.Pointer) int
+	_fnFSGetCatalogInfo                            func(*FSRef, uint, *FSCatalogInfo, unsafe.Pointer, *FSSpec, *FSRef) int16
+	_fnFSGetCatalogInfoBulk                        func(unsafe.Pointer, uint, *uint, *uint8, uint, *FSCatalogInfo, *FSRef, *FSSpec, unsafe.Pointer) int16
+	_fnFSGetDataForkName                           func(unsafe.Pointer) int16
+	_fnFSGetForkCBInfo                             func(int, int16, *int16, *int, *FSForkInfo, *FSRef, unsafe.Pointer) int16
+	_fnFSGetForkPosition                           func(int, *int64) int16
+	_fnFSGetForkSize                               func(int, *int64) int16
+	_fnFSGetHFSUniStrFromString                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnFSGetResourceForkName                       func(unsafe.Pointer) int16
+	_fnFSGetTemporaryDirectoryForReplaceObject     func(*FSRef, *FSRef, uint) int
+	_fnFSGetVolumeForDADisk                        func(unsafe.Pointer, *int16) int
+	_fnFSGetVolumeForDiskID                        func(unsafe.Pointer, *int16) int
+	_fnFSGetVolumeInfo                             func(int16, uint, *int16, uint, *FSVolumeInfo, unsafe.Pointer, *FSRef) int16
+	_fnFSGetVolumeMountInfo                        func(int16, *uint8, uint, *uint) int
+	_fnFSGetVolumeMountInfoSize                    func(int16, *uint) int
+	_fnFSGetVolumeParms                            func(int16, *GetVolParmsInfoBuffer, uint) int
+	_fnFSIsAliasFile                               func(*FSRef, *uint8, *uint8) int16
+	_fnFSIsFSRefValid                              func(*FSRef) uint8
+	_fnFSIterateForks                              func(*FSRef, *CatPositionRec, unsafe.Pointer, *int64, *uint64) int16
+	_fnFSLockRange                                 func(int, uint16, int64, uint64, *uint64) int
+	_fnFSMakeFSRefUnicode                          func(*FSRef, uint, *uint16, uint, *FSRef) int16
+	_fnFSMatchAliasBulk                            func(*FSRef, uint, **AliasRecord, *int16, *FSRef, *uint8, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSMountLocalVolumeAsync                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSMountLocalVolumeSync                      func(unsafe.Pointer, unsafe.Pointer, *int16, uint) int
+	_fnFSMountServerVolumeAsync                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSMountServerVolumeSync                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int16, uint) int
+	_fnFSMoveObject                                func(*FSRef, *FSRef, *FSRef) int16
+	_fnFSMoveObjectAsync                           func(unsafe.Pointer, *FSRef, *FSRef, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSMoveObjectSync                            func(*FSRef, *FSRef, unsafe.Pointer, *FSRef, uint) int
+	_fnFSMoveObjectToTrashAsync                    func(unsafe.Pointer, *FSRef, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSMoveObjectToTrashSync                     func(*FSRef, *FSRef, uint) int
+	_fnFSNewAlias                                  func(*FSRef, *FSRef, ***AliasRecord) int16
+	_fnFSNewAliasFromPath                          func(string, string, uint, ***AliasRecord, *uint8) int
+	_fnFSNewAliasMinimal                           func(*FSRef, ***AliasRecord) int16
+	_fnFSNewAliasMinimalUnicode                    func(*FSRef, uint, *uint16, ***AliasRecord, *uint8) int16
+	_fnFSNewAliasUnicode                           func(*FSRef, *FSRef, uint, *uint16, ***AliasRecord, *uint8) int16
+	_fnFSOpenFork                                  func(*FSRef, uint, *uint16, int8, *int) int16
+	_fnFSOpenIterator                              func(*FSRef, uint, unsafe.Pointer) int16
+	_fnFSOpenOrphanResFile                         func(*FSRef, int8, *int) int16
+	_fnFSOpenResFile                               func(*FSRef, int8) int
+	_fnFSOpenResourceFile                          func(*FSRef, uint, *uint16, int8, *int) int16
+	_fnFSPathCopyObjectAsync                       func(unsafe.Pointer, string, string, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSPathCopyObjectSync                        func(string, string, unsafe.Pointer, string, uint) int
+	_fnFSPathFileOperationCopyStatus               func(unsafe.Pointer, string, *uint, *int, unsafe.Pointer, unsafe.Pointer) int
 	_fnFSPathGetTemporaryDirectoryForReplaceObject func(string, string, uint, uint) int
-	_fnFSPathMakeRef func(*uint8, *FSRef, *uint8) int
-	_fnFSPathMakeRefWithOptions func(*uint8, uint, *FSRef, *uint8) int
-	_fnFSPathMoveObjectAsync func(unsafe.Pointer, string, string, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSPathMoveObjectSync func(string, string, unsafe.Pointer, string, uint) int
-	_fnFSPathMoveObjectToTrashAsync func(unsafe.Pointer, string, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
-	_fnFSPathMoveObjectToTrashSync func(string, string, uint) int
-	_fnFSPathReplaceObject func(string, string, unsafe.Pointer, unsafe.Pointer, string, uint) int
-	_fnFSReadFork func(int, uint16, int64, uint, unsafe.Pointer, *uint) int16
-	_fnFSRefMakePath func(*FSRef, *uint8, uint) int
-	_fnFSRenameUnicode func(*FSRef, uint, *uint16, uint, *FSRef) int16
-	_fnFSReplaceObject func(*FSRef, *FSRef, unsafe.Pointer, unsafe.Pointer, *FSRef, uint, *FSRef) int
-	_fnFSResolveAlias func(*FSRef, **AliasRecord, *FSRef, *uint8) int16
-	_fnFSResolveAliasFile func(*FSRef, uint8, *uint8, *uint8) int16
-	_fnFSResolveAliasFileWithMountFlags func(*FSRef, uint8, *uint8, *uint8, uint) int16
-	_fnFSResolveAliasWithMountFlags func(*FSRef, **AliasRecord, *FSRef, *uint8, uint) int16
-	_fnFSResolveNodeID func(int16, uint, *FSRef) int
-	_fnFSResourceFileAlreadyOpen func(*FSRef, *uint8, *int) uint8
-	_fnFSSetCatalogInfo func(*FSRef, uint, *FSCatalogInfo) int16
-	_fnFSSetForkPosition func(int, uint16, int64) int16
-	_fnFSSetForkSize func(int, uint16, int64) int16
-	_fnFSSetVolumeInfo func(int16, uint, *FSVolumeInfo) int16
-	_fnFSUnlinkObject func(*FSRef) int16
-	_fnFSUnlockRange func(int, uint16, int64, uint64, *uint64) int
-	_fnFSUnmountVolumeAsync func(int16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnFSUnmountVolumeSync func(int16, uint, *int) int
-	_fnFSUpdateAlias func(*FSRef, *FSRef, **AliasRecord, *uint8) int16
-	_fnFSVolumeMount func(*uint8, *int16) int
-	_fnFSWriteFork func(int, uint16, int64, uint, unsafe.Pointer, *uint) int16
-	_fnFindFolder func(int16, uint, uint8, *int16, *int) int16
-	_fnFindNextComponent func(*ComponentRecord, *ComponentDescription) *ComponentRecord
-	_fnFix2Frac func(int) int
-	_fnFix2Long func(int) int
-	_fnFix2X func(int) float64
-	_fnFixATan2 func(int, int) int
-	_fnFixDiv func(int, int) int
-	_fnFixMul func(int, int) int
-	_fnFixRatio func(int16, int16) int
-	_fnFixRound func(int) int16
-	_fnFlattenCollection func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnFlattenCollectionToHdl func(unsafe.Pointer, *string) int16
-	_fnFlattenPartialCollection func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int) int16
-	_fnFrac2Fix func(int) int
-	_fnFrac2X func(int) float64
-	_fnFracCos func(int) int
-	_fnFracDiv func(int, int) int
-	_fnFracMul func(int, int) int
-	_fnFracSin func(int) int
-	_fnFracSqrt func(int) int
-	_fnGestalt func(uint, *int) int16
-	_fnGet1IndResource func(uint, int16) *string
-	_fnGet1IndType func(*uint, int16)
-	_fnGet1NamedResource func(uint, *uint8) *string
-	_fnGet1Resource func(uint, int16) *string
-	_fnGetAliasSize func(**AliasRecord) int
-	_fnGetAliasSizeFromPtr func(*AliasRecord) int
-	_fnGetAliasUserType func(**AliasRecord) uint
-	_fnGetAliasUserTypeFromPtr func(*AliasRecord) uint
-	_fnGetCollectionDefaultAttributes func(unsafe.Pointer) int
-	_fnGetCollectionExceptionProc func(unsafe.Pointer) unsafe.Pointer
-	_fnGetCollectionItem func(unsafe.Pointer, uint, int, *int, unsafe.Pointer) int16
-	_fnGetCollectionItemHdl func(unsafe.Pointer, uint, int, *string) int16
-	_fnGetCollectionItemInfo func(unsafe.Pointer, uint, int, *int, *int, *int) int16
-	_fnGetCollectionRetainCount func(unsafe.Pointer) uint
-	_fnGetComponentIndString func(*ComponentRecord, *uint8, int16, int16) int16
-	_fnGetComponentInfo func(*ComponentRecord, *ComponentDescription, *string, *string, *string) int16
-	_fnGetComponentInstanceError func(*ComponentInstanceRecord) int16
-	_fnGetComponentInstanceStorage func(*ComponentInstanceRecord) *string
-	_fnGetComponentListModSeed func() int
-	_fnGetComponentPublicIndString func(*ComponentRecord, *uint8, int16, int16) int16
-	_fnGetComponentPublicResource func(*ComponentRecord, uint, int16, **string) int16
-	_fnGetComponentPublicResourceList func(uint, int16, int, *ComponentDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnGetComponentRefcon func(*ComponentRecord) int
-	_fnGetComponentResource func(*ComponentRecord, uint, int16, **string) int16
-	_fnGetComponentTypeModSeed func(uint) int
-	_fnGetCurrentThread func(*uint) int16
-	_fnGetDebugComponentInfo func(uint, *uint, *uint8) int
-	_fnGetDebugOptionInfo func(uint, uint, *int, *uint8, *uint8) int
-	_fnGetDefaultThreadStackSize func(uint, *int) int16
-	_fnGetFolderNameUnicode func(int16, uint, *int16, unsafe.Pointer) int
-	_fnGetFolderTypes func(uint, *uint, *uint) int16
-	_fnGetHandleSize func(*string) int
-	_fnGetIndResource func(uint, int16) *string
-	_fnGetIndType func(*uint, int16)
-	_fnGetIndexedCollectionItem func(unsafe.Pointer, int, *int, unsafe.Pointer) int16
-	_fnGetIndexedCollectionItemHdl func(unsafe.Pointer, int, *string) int16
-	_fnGetIndexedCollectionItemInfo func(unsafe.Pointer, int, *uint, *int, *int, *int) int16
-	_fnGetIndexedCollectionTag func(unsafe.Pointer, int, *uint) int16
-	_fnGetMacOSStatusCommentString func(int) string
-	_fnGetMacOSStatusErrorString func(int) string
-	_fnGetMaxResourceSize func(*string) int
-	_fnGetNamedResource func(uint, *uint8) *string
-	_fnGetNewCollection func(int16) unsafe.Pointer
-	_fnGetNextFOND func(*string) *string
-	_fnGetNextResourceFile func(int, *int) int16
-	_fnGetPtrSize func(string) int
-	_fnGetResAttrs func(*string) int16
-	_fnGetResFileAttrs func(int) int16
-	_fnGetResInfo func(*string, *int16, *uint, *uint8)
-	_fnGetResource func(uint, int16) *string
-	_fnGetResourceSizeOnDisk func(*string) int
-	_fnGetScriptInfoFromTextEncoding func(uint, *int16, *int16) int
-// Deprecated: Deprecated
-	_fnGetScriptManagerVariable func(int16) int
-	_fnGetTaggedCollectionItem func(unsafe.Pointer, uint, int, *int, unsafe.Pointer) int16
-	_fnGetTaggedCollectionItemInfo func(unsafe.Pointer, uint, int, *int, *int, *int, *int) int16
-	_fnGetTextEncodingBase func(uint) uint
-	_fnGetTextEncodingFormat func(uint) uint
-	_fnGetTextEncodingFromScriptInfo func(int16, int16, int16, *uint) int
-	_fnGetTextEncodingName func(uint, uint, int16, uint, uint, *uint, *int16, *uint, *uint8) int
-	_fnGetTextEncodingVariant func(uint) uint
-	_fnGetThreadCurrentTaskRef func(unsafe.Pointer) int16
-	_fnGetThreadState func(uint, *uint16) int16
-	_fnGetThreadStateGivenTaskRef func(unsafe.Pointer, uint, *uint16) int16
-	_fnGetTopResourceFile func(*int) int16
-	_fnHClrRBit func(*string)
-	_fnHGetState func(*string) int8
-	_fnHLock func(*string)
-	_fnHLockHi func(*string)
-	_fnHSetRBit func(*string)
-	_fnHSetState func(*string, int8)
-	_fnHUnlock func(*string)
-	_fnHandAndHand func(*string, *string) int16
-	_fnHandToHand func(**string) int16
-	_fnHomeResFile func(*string) int
-	_fnIdentifyFolder func(int16, int, *uint) int16
-	_fnIncrementAtomic func(*int) int
-	_fnIncrementAtomic16 func(*int16) int16
-	_fnIncrementAtomic8 func(*int8) int8
-	_fnInsTime func(*QElem)
-	_fnInsXTime func(*QElem)
-	_fnInsertResourceFile func(int, int16) int16
+	_fnFSPathMakeRef                               func(*uint8, *FSRef, *uint8) int
+	_fnFSPathMakeRefWithOptions                    func(*uint8, uint, *FSRef, *uint8) int
+	_fnFSPathMoveObjectAsync                       func(unsafe.Pointer, string, string, unsafe.Pointer, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSPathMoveObjectSync                        func(string, string, unsafe.Pointer, string, uint) int
+	_fnFSPathMoveObjectToTrashAsync                func(unsafe.Pointer, string, uint, unsafe.Pointer, float64, *FSFileOperationClientContext) int
+	_fnFSPathMoveObjectToTrashSync                 func(string, string, uint) int
+	_fnFSPathReplaceObject                         func(string, string, unsafe.Pointer, unsafe.Pointer, string, uint) int
+	_fnFSReadFork                                  func(int, uint16, int64, uint, unsafe.Pointer, *uint) int16
+	_fnFSRefMakePath                               func(*FSRef, *uint8, uint) int
+	_fnFSRenameUnicode                             func(*FSRef, uint, *uint16, uint, *FSRef) int16
+	_fnFSReplaceObject                             func(*FSRef, *FSRef, unsafe.Pointer, unsafe.Pointer, *FSRef, uint, *FSRef) int
+	_fnFSResolveAlias                              func(*FSRef, **AliasRecord, *FSRef, *uint8) int16
+	_fnFSResolveAliasFile                          func(*FSRef, uint8, *uint8, *uint8) int16
+	_fnFSResolveAliasFileWithMountFlags            func(*FSRef, uint8, *uint8, *uint8, uint) int16
+	_fnFSResolveAliasWithMountFlags                func(*FSRef, **AliasRecord, *FSRef, *uint8, uint) int16
+	_fnFSResolveNodeID                             func(int16, uint, *FSRef) int
+	_fnFSResourceFileAlreadyOpen                   func(*FSRef, *uint8, *int) uint8
+	_fnFSSetCatalogInfo                            func(*FSRef, uint, *FSCatalogInfo) int16
+	_fnFSSetForkPosition                           func(int, uint16, int64) int16
+	_fnFSSetForkSize                               func(int, uint16, int64) int16
+	_fnFSSetVolumeInfo                             func(int16, uint, *FSVolumeInfo) int16
+	_fnFSUnlinkObject                              func(*FSRef) int16
+	_fnFSUnlockRange                               func(int, uint16, int64, uint64, *uint64) int
+	_fnFSUnmountVolumeAsync                        func(int16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnFSUnmountVolumeSync                         func(int16, uint, *int) int
+	_fnFSUpdateAlias                               func(*FSRef, *FSRef, **AliasRecord, *uint8) int16
+	_fnFSVolumeMount                               func(*uint8, *int16) int
+	_fnFSWriteFork                                 func(int, uint16, int64, uint, unsafe.Pointer, *uint) int16
+	_fnFindFolder                                  func(int16, uint, uint8, *int16, *int) int16
+	_fnFindNextComponent                           func(*ComponentRecord, *ComponentDescription) *ComponentRecord
+	_fnFix2Frac                                    func(int) int
+	_fnFix2Long                                    func(int) int
+	_fnFix2X                                       func(int) float64
+	_fnFixATan2                                    func(int, int) int
+	_fnFixDiv                                      func(int, int) int
+	_fnFixMul                                      func(int, int) int
+	_fnFixRatio                                    func(int16, int16) int
+	_fnFixRound                                    func(int) int16
+	_fnFlattenCollection                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnFlattenCollectionToHdl                      func(unsafe.Pointer, *string) int16
+	_fnFlattenPartialCollection                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int) int16
+	_fnFrac2Fix                                    func(int) int
+	_fnFrac2X                                      func(int) float64
+	_fnFracCos                                     func(int) int
+	_fnFracDiv                                     func(int, int) int
+	_fnFracMul                                     func(int, int) int
+	_fnFracSin                                     func(int) int
+	_fnFracSqrt                                    func(int) int
+	_fnGestalt                                     func(uint, *int) int16
+	_fnGet1IndResource                             func(uint, int16) *string
+	_fnGet1IndType                                 func(*uint, int16)
+	_fnGet1NamedResource                           func(uint, *uint8) *string
+	_fnGet1Resource                                func(uint, int16) *string
+	_fnGetAliasSize                                func(**AliasRecord) int
+	_fnGetAliasSizeFromPtr                         func(*AliasRecord) int
+	_fnGetAliasUserType                            func(**AliasRecord) uint
+	_fnGetAliasUserTypeFromPtr                     func(*AliasRecord) uint
+	_fnGetCollectionDefaultAttributes              func(unsafe.Pointer) int
+	_fnGetCollectionExceptionProc                  func(unsafe.Pointer) unsafe.Pointer
+	_fnGetCollectionItem                           func(unsafe.Pointer, uint, int, *int, unsafe.Pointer) int16
+	_fnGetCollectionItemHdl                        func(unsafe.Pointer, uint, int, *string) int16
+	_fnGetCollectionItemInfo                       func(unsafe.Pointer, uint, int, *int, *int, *int) int16
+	_fnGetCollectionRetainCount                    func(unsafe.Pointer) uint
+	_fnGetComponentIndString                       func(*ComponentRecord, *uint8, int16, int16) int16
+	_fnGetComponentInfo                            func(*ComponentRecord, *ComponentDescription, *string, *string, *string) int16
+	_fnGetComponentInstanceError                   func(*ComponentInstanceRecord) int16
+	_fnGetComponentInstanceStorage                 func(*ComponentInstanceRecord) *string
+	_fnGetComponentListModSeed                     func() int
+	_fnGetComponentPublicIndString                 func(*ComponentRecord, *uint8, int16, int16) int16
+	_fnGetComponentPublicResource                  func(*ComponentRecord, uint, int16, **string) int16
+	_fnGetComponentPublicResourceList              func(uint, int16, int, *ComponentDescription, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnGetComponentRefcon                          func(*ComponentRecord) int
+	_fnGetComponentResource                        func(*ComponentRecord, uint, int16, **string) int16
+	_fnGetComponentTypeModSeed                     func(uint) int
+	_fnGetCurrentThread                            func(*uint) int16
+	_fnGetDebugComponentInfo                       func(uint, *uint, *uint8) int
+	_fnGetDebugOptionInfo                          func(uint, uint, *int, *uint8, *uint8) int
+	_fnGetDefaultThreadStackSize                   func(uint, *int) int16
+	_fnGetFolderNameUnicode                        func(int16, uint, *int16, unsafe.Pointer) int
+	_fnGetFolderTypes                              func(uint, *uint, *uint) int16
+	_fnGetHandleSize                               func(*string) int
+	_fnGetIndResource                              func(uint, int16) *string
+	_fnGetIndType                                  func(*uint, int16)
+	_fnGetIndexedCollectionItem                    func(unsafe.Pointer, int, *int, unsafe.Pointer) int16
+	_fnGetIndexedCollectionItemHdl                 func(unsafe.Pointer, int, *string) int16
+	_fnGetIndexedCollectionItemInfo                func(unsafe.Pointer, int, *uint, *int, *int, *int) int16
+	_fnGetIndexedCollectionTag                     func(unsafe.Pointer, int, *uint) int16
+	_fnGetMacOSStatusCommentString                 func(int) string
+	_fnGetMacOSStatusErrorString                   func(int) string
+	_fnGetMaxResourceSize                          func(*string) int
+	_fnGetNamedResource                            func(uint, *uint8) *string
+	_fnGetNewCollection                            func(int16) unsafe.Pointer
+	_fnGetNextFOND                                 func(*string) *string
+	_fnGetNextResourceFile                         func(int, *int) int16
+	_fnGetPtrSize                                  func(string) int
+	_fnGetResAttrs                                 func(*string) int16
+	_fnGetResFileAttrs                             func(int) int16
+	_fnGetResInfo                                  func(*string, *int16, *uint, *uint8)
+	_fnGetResource                                 func(uint, int16) *string
+	_fnGetResourceSizeOnDisk                       func(*string) int
+	_fnGetScriptInfoFromTextEncoding               func(uint, *int16, *int16) int
+	// Deprecated: Deprecated
+	_fnGetScriptManagerVariable        func(int16) int
+	_fnGetTaggedCollectionItem         func(unsafe.Pointer, uint, int, *int, unsafe.Pointer) int16
+	_fnGetTaggedCollectionItemInfo     func(unsafe.Pointer, uint, int, *int, *int, *int, *int) int16
+	_fnGetTextEncodingBase             func(uint) uint
+	_fnGetTextEncodingFormat           func(uint) uint
+	_fnGetTextEncodingFromScriptInfo   func(int16, int16, int16, *uint) int
+	_fnGetTextEncodingName             func(uint, uint, int16, uint, uint, *uint, *int16, *uint, *uint8) int
+	_fnGetTextEncodingVariant          func(uint) uint
+	_fnGetThreadCurrentTaskRef         func(unsafe.Pointer) int16
+	_fnGetThreadState                  func(uint, *uint16) int16
+	_fnGetThreadStateGivenTaskRef      func(unsafe.Pointer, uint, *uint16) int16
+	_fnGetTopResourceFile              func(*int) int16
+	_fnHClrRBit                        func(*string)
+	_fnHGetState                       func(*string) int8
+	_fnHLock                           func(*string)
+	_fnHLockHi                         func(*string)
+	_fnHSetRBit                        func(*string)
+	_fnHSetState                       func(*string, int8)
+	_fnHUnlock                         func(*string)
+	_fnHandAndHand                     func(*string, *string) int16
+	_fnHandToHand                      func(**string) int16
+	_fnHomeResFile                     func(*string) int
+	_fnIdentifyFolder                  func(int16, int, *uint) int16
+	_fnIncrementAtomic                 func(*int) int
+	_fnIncrementAtomic16               func(*int16) int16
+	_fnIncrementAtomic8                func(*int8) int8
+	_fnInsTime                         func(*QElem)
+	_fnInsXTime                        func(*QElem)
+	_fnInsertResourceFile              func(int, int16) int16
 	_fnInstallDebugAssertOutputHandler func(unsafe.Pointer)
 	// InstallExceptionHandler() As of macOS 10.16, this call always returns kMPInvalidIDErr and otherwise does nothing.  It has been deprecated since macOS 10.8 and non-functional since macOS10.13. Availability: Mac OS X:         in version 10.0 and later in CoreServices.framework CarbonLib:        in CarbonLib 1.1 and later Non-Carbon CFM:   in InterfaceLib 7.1 and later
-// Deprecated: No longer support
-	_fnInstallExceptionHandler func(unsafe.Pointer) unsafe.Pointer
-	_fnInstallTimeTask func(*QElem) int16
-	_fnInstallXTimeTask func(*QElem) int16
-	_fnInvalidateFolderDescriptorCache func(int16, int) int16
-	_fnInvokeCollectionExceptionUPP func(unsafe.Pointer, int16, unsafe.Pointer) int16
-	_fnInvokeCollectionFlattenUPP func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeComponentMPWorkFunctionUPP func(unsafe.Pointer, *ComponentMPWorkFunctionHeaderRecord, unsafe.Pointer) int
-	_fnInvokeComponentRoutineUPP func(*ComponentParameters, *string, unsafe.Pointer) int
+	// Deprecated: No longer support
+	_fnInstallExceptionHandler           func(unsafe.Pointer) unsafe.Pointer
+	_fnInstallTimeTask                   func(*QElem) int16
+	_fnInstallXTimeTask                  func(*QElem) int16
+	_fnInvalidateFolderDescriptorCache   func(int16, int) int16
+	_fnInvokeCollectionExceptionUPP      func(unsafe.Pointer, int16, unsafe.Pointer) int16
+	_fnInvokeCollectionFlattenUPP        func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeComponentMPWorkFunctionUPP  func(unsafe.Pointer, *ComponentMPWorkFunctionHeaderRecord, unsafe.Pointer) int
+	_fnInvokeComponentRoutineUPP         func(*ComponentParameters, *string, unsafe.Pointer) int
 	_fnInvokeDebugAssertOutputHandlerUPP func(uint, uint, string, string, string, string, int, unsafe.Pointer, *uint8, unsafe.Pointer)
-	_fnInvokeDebugComponentCallbackUPP func(int, uint, *uint8, unsafe.Pointer)
-	_fnInvokeDebuggerDisposeThreadUPP func(uint, unsafe.Pointer)
-	_fnInvokeDebuggerNewThreadUPP func(uint, unsafe.Pointer)
-	_fnInvokeDebuggerThreadSchedulerUPP func(*SchedulerInfoRec, unsafe.Pointer) uint
-	_fnInvokeDeferredTaskUPP func(int, unsafe.Pointer)
-// Deprecated: No longer supported
-	_fnInvokeExceptionHandlerUPP func(*ExceptionInformation, unsafe.Pointer) int
-	_fnInvokeFNSubscriptionUPP func(uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeFSVolumeEjectUPP func(unsafe.Pointer, unsafe.Pointer, int, int16, int, unsafe.Pointer)
-	_fnInvokeFSVolumeMountUPP func(unsafe.Pointer, unsafe.Pointer, int, int16, unsafe.Pointer)
-	_fnInvokeFSVolumeUnmountUPP func(unsafe.Pointer, unsafe.Pointer, int, int16, int, unsafe.Pointer)
-	_fnInvokeFolderManagerNotificationUPP func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeDebugComponentCallbackUPP   func(int, uint, *uint8, unsafe.Pointer)
+	_fnInvokeDebuggerDisposeThreadUPP    func(uint, unsafe.Pointer)
+	_fnInvokeDebuggerNewThreadUPP        func(uint, unsafe.Pointer)
+	_fnInvokeDebuggerThreadSchedulerUPP  func(*SchedulerInfoRec, unsafe.Pointer) uint
+	_fnInvokeDeferredTaskUPP             func(int, unsafe.Pointer)
+	// Deprecated: No longer supported
+	_fnInvokeExceptionHandlerUPP            func(*ExceptionInformation, unsafe.Pointer) int
+	_fnInvokeFNSubscriptionUPP              func(uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeFSVolumeEjectUPP               func(unsafe.Pointer, unsafe.Pointer, int, int16, int, unsafe.Pointer)
+	_fnInvokeFSVolumeMountUPP               func(unsafe.Pointer, unsafe.Pointer, int, int16, unsafe.Pointer)
+	_fnInvokeFSVolumeUnmountUPP             func(unsafe.Pointer, unsafe.Pointer, int, int16, int, unsafe.Pointer)
+	_fnInvokeFolderManagerNotificationUPP   func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnInvokeGetMissingComponentResourceUPP func(*ComponentRecord, uint, int16, unsafe.Pointer, **string, unsafe.Pointer) int16
-	_fnInvokeIOCompletionUPP func(unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeIndexToUCStringUPP func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint16, unsafe.Pointer) uint8
-	_fnInvokeResErrUPP func(int16, unsafe.Pointer)
-	_fnInvokeSelectorFunctionUPP func(uint, *int, unsafe.Pointer) int16
-	_fnInvokeThreadEntryUPP func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnInvokeThreadSchedulerUPP func(*SchedulerInfoRec, unsafe.Pointer) uint
-	_fnInvokeThreadSwitchUPP func(uint, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeThreadTerminationUPP func(uint, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeTimerUPP func(*TMTask, unsafe.Pointer)
-	_fnInvokeUnicodeToTextFallbackUPP func(*uint16, uint, *uint, *uint8, uint, *uint, unsafe.Pointer, *UnicodeMapping, unsafe.Pointer) int
-	_fnIsHandleValid func(*string) uint8
-	_fnIsHeapValid func() uint8
-	_fnIsMetric func() uint8
-	_fnIsPointerValid func(string) uint8
-	_fnLMGetApFontID func() int16
-	_fnLMGetBootDrive func() int16
-	_fnLMGetIntlSpec func() string
-	_fnLMGetMemErr func() int16
-	_fnLMGetResErr func() int16
-	_fnLMGetResLoad func() uint8
-	_fnLMGetSysFontSize func() int16
-	_fnLMGetSysMap func() int16
-	_fnLMGetTmpResLoad func() uint8
-	_fnLMSetApFontID func(int16)
-	_fnLMSetBootDrive func(int16)
-	_fnLMSetIntlSpec func(string)
-	_fnLMSetMemErr func(int16)
-	_fnLMSetResErr func(int16)
-	_fnLMSetResLoad func(uint8)
-	_fnLMSetSysFontFam func(int16)
-	_fnLMSetSysFontSize func(int16)
-	_fnLMSetSysMap func(int16)
-	_fnLMSetTmpResLoad func(uint8)
-	_fnLoadResource func(*string)
-	_fnLocaleCountNames func(unsafe.Pointer, uint, uint, *uint) int
-	_fnLocaleGetIndName func(unsafe.Pointer, uint, uint, uint, uint, *uint, *uint16, unsafe.Pointer) int
-	_fnLocaleGetName func(unsafe.Pointer, uint, uint, unsafe.Pointer, uint, *uint, *uint16) int
-	_fnLocaleOperationCountLocales func(uint, *uint) int
-	_fnLocaleOperationCountNames func(uint, *uint) int
-	_fnLocaleOperationGetIndName func(uint, uint, uint, *uint, *uint16, unsafe.Pointer) int
-	_fnLocaleOperationGetLocales func(uint, uint, *uint, *LocaleAndVariant) int
-	_fnLocaleOperationGetName func(uint, unsafe.Pointer, uint, *uint, *uint16) int
-	_fnLocaleRefFromLangOrRegionCode func(int16, int16, unsafe.Pointer) int
-	_fnLocaleRefFromLocaleString func(string, unsafe.Pointer) int
-	_fnLocaleRefGetPartString func(unsafe.Pointer, uint, uint, string) int
-	_fnLocaleStringToLangAndRegionCodes func(string, *int16, *int16) int
-	_fnLong2Fix func(int) int
+	_fnInvokeIOCompletionUPP                func(unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeIndexToUCStringUPP             func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint16, unsafe.Pointer) uint8
+	_fnInvokeResErrUPP                      func(int16, unsafe.Pointer)
+	_fnInvokeSelectorFunctionUPP            func(uint, *int, unsafe.Pointer) int16
+	_fnInvokeThreadEntryUPP                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnInvokeThreadSchedulerUPP             func(*SchedulerInfoRec, unsafe.Pointer) uint
+	_fnInvokeThreadSwitchUPP                func(uint, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeThreadTerminationUPP           func(uint, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeTimerUPP                       func(*TMTask, unsafe.Pointer)
+	_fnInvokeUnicodeToTextFallbackUPP       func(*uint16, uint, *uint, *uint8, uint, *uint, unsafe.Pointer, *UnicodeMapping, unsafe.Pointer) int
+	_fnIsHandleValid                        func(*string) uint8
+	_fnIsHeapValid                          func() uint8
+	_fnIsMetric                             func() uint8
+	_fnIsPointerValid                       func(string) uint8
+	_fnLMGetApFontID                        func() int16
+	_fnLMGetBootDrive                       func() int16
+	_fnLMGetIntlSpec                        func() string
+	_fnLMGetMemErr                          func() int16
+	_fnLMGetResErr                          func() int16
+	_fnLMGetResLoad                         func() uint8
+	_fnLMGetSysFontSize                     func() int16
+	_fnLMGetSysMap                          func() int16
+	_fnLMGetTmpResLoad                      func() uint8
+	_fnLMSetApFontID                        func(int16)
+	_fnLMSetBootDrive                       func(int16)
+	_fnLMSetIntlSpec                        func(string)
+	_fnLMSetMemErr                          func(int16)
+	_fnLMSetResErr                          func(int16)
+	_fnLMSetResLoad                         func(uint8)
+	_fnLMSetSysFontFam                      func(int16)
+	_fnLMSetSysFontSize                     func(int16)
+	_fnLMSetSysMap                          func(int16)
+	_fnLMSetTmpResLoad                      func(uint8)
+	_fnLoadResource                         func(*string)
+	_fnLocaleCountNames                     func(unsafe.Pointer, uint, uint, *uint) int
+	_fnLocaleGetIndName                     func(unsafe.Pointer, uint, uint, uint, uint, *uint, *uint16, unsafe.Pointer) int
+	_fnLocaleGetName                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, uint, *uint, *uint16) int
+	_fnLocaleOperationCountLocales          func(uint, *uint) int
+	_fnLocaleOperationCountNames            func(uint, *uint) int
+	_fnLocaleOperationGetIndName            func(uint, uint, uint, *uint, *uint16, unsafe.Pointer) int
+	_fnLocaleOperationGetLocales            func(uint, uint, *uint, *LocaleAndVariant) int
+	_fnLocaleOperationGetName               func(uint, unsafe.Pointer, uint, *uint, *uint16) int
+	_fnLocaleRefFromLangOrRegionCode        func(int16, int16, unsafe.Pointer) int
+	_fnLocaleRefFromLocaleString            func(string, unsafe.Pointer) int
+	_fnLocaleRefGetPartString               func(unsafe.Pointer, uint, uint, string) int
+	_fnLocaleStringToLangAndRegionCodes     func(string, *int16, *int16) int
+	_fnLong2Fix                             func(int) int
 	// @brief	Converts a long double to a SInt64.  Any decimal string that fits into a SInt64 can be converted exactly into a long double, using the conversion routines found in fp.h.  Then this routine can be used to complete the conversion to SInt64. @param	value	a long double value @result	the closest SInt64 value to value
 	_fnLongDoubleToSInt64 func(float64) int64
 	// @brief Convert long double (128-bit on PowerPC floating point) to a signed 64-bit integer @param	value	a \c long \c double value @result	a \c UInt64 value created by truncating value to a UInt64
 	_fnLongDoubleToUInt64 func(float64) uint64
-// Deprecated: Use malloc()
+	// Deprecated: Use malloc()
 	_fnMPAllocate func(uint) unsafe.Pointer
-// Deprecated: Use aligned_alloc()
+	// Deprecated: Use aligned_alloc()
 	_fnMPAllocateAligned func(uint, uint8, uint) unsafe.Pointer
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPAllocateTaskStorageIndex func(*uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPArmTimer func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: Use bzero()
+	// Deprecated: Use bzero()
 	_fnMPBlockClear func(unsafe.Pointer, uint)
-// Deprecated: Use memcpy()
+	// Deprecated: Use memcpy()
 	_fnMPBlockCopy func(unsafe.Pointer, unsafe.Pointer, uint)
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCancelTimer func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCauseNotification func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateCriticalRegion func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateEvent func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateNotification func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateQueue func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateSemaphore func(uint, uint, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateTask func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCreateTimer func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPCurrentTaskID func() unsafe.Pointer
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeallocateTaskStorageIndex func(uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDelayUntil func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteCriticalRegion func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteEvent func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteNotification func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteQueue func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteSemaphore func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPDeleteTimer func(unsafe.Pointer) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPDisposeTaskException func(unsafe.Pointer, uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPEnterCriticalRegion func(unsafe.Pointer, int) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPExit func(int)
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPExitCriticalRegion func(unsafe.Pointer) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPExtractTaskState func(unsafe.Pointer, uint, unsafe.Pointer) int
-// Deprecated: Use free()
+	// Deprecated: Use free()
 	_fnMPFree func(unsafe.Pointer)
-// Deprecated: Use malloc_size()
+	// Deprecated: Use malloc_size()
 	_fnMPGetAllocatedBlockSize func(unsafe.Pointer) uint
-	_fnMPGetNextCpuID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnMPGetNextTaskID func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	_fnMPGetNextCpuID          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnMPGetNextTaskID         func(unsafe.Pointer, unsafe.Pointer) int
+	// Deprecated: Use libDispatch
 	_fnMPGetTaskStorageValue func(uint) unsafe.Pointer
-// Deprecated: Use libDispatch
-	_fnMPModifyNotification func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	// Deprecated: Use libDispatch
+	_fnMPModifyNotification           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnMPModifyNotificationParameters func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPNotifyQueue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use sysctl(hw.ncpu)
+	// Deprecated: Use sysctl(hw.ncpu)
 	_fnMPProcessors func() uint
-// Deprecated: Use sysctl(hw.activecpu)
+	// Deprecated: Use sysctl(hw.activecpu)
 	_fnMPProcessorsScheduled func() uint
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPRegisterDebugger func(unsafe.Pointer, uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPRemoteCall func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPRemoteCallCFM func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetEvent func(unsafe.Pointer, uint) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPSetExceptionHandler func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetQueueReserve func(unsafe.Pointer, uint) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPSetTaskState func(unsafe.Pointer, uint, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetTaskStorageValue func(uint, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetTaskType func(unsafe.Pointer, uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetTaskWeight func(unsafe.Pointer, uint) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSetTimerNotify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPSignalSemaphore func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPTaskIsPreemptive func(unsafe.Pointer) uint8
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPTerminateTask func(unsafe.Pointer, int) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPThrowException func(unsafe.Pointer, uint) int
-// Deprecated: No longer supported.
+	// Deprecated: No longer supported.
 	_fnMPUnregisterDebugger func(unsafe.Pointer) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPWaitForEvent func(unsafe.Pointer, *uint, int) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPWaitOnQueue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	_fnMPWaitOnSemaphore func(unsafe.Pointer, int) int
-// Deprecated: Use libDispatch
-	_fnMPYield func()
-	_fnMemError func() int16
-	_fnMicroseconds func(unsafe.Pointer)
-	_fnMunger func(*string, int, unsafe.Pointer, int, unsafe.Pointer, int) int
-	_fnNanosecondsToAbsolute func(unsafe.Pointer) unsafe.Pointer
-	_fnNanosecondsToDuration func(unsafe.Pointer) int
-	_fnNearestMacTextEncodings func(uint, *uint, *uint) int
-	_fnNewCollection func() unsafe.Pointer
-	_fnNewCollectionExceptionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewCollectionFlattenUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewComponentFunctionUPP func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnNewComponentMPWorkFunctionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewComponentRoutineUPP func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use libDispatch
+	_fnMPYield                        func()
+	_fnMemError                       func() int16
+	_fnMicroseconds                   func(unsafe.Pointer)
+	_fnMunger                         func(*string, int, unsafe.Pointer, int, unsafe.Pointer, int) int
+	_fnNanosecondsToAbsolute          func(unsafe.Pointer) unsafe.Pointer
+	_fnNanosecondsToDuration          func(unsafe.Pointer) int
+	_fnNearestMacTextEncodings        func(uint, *uint, *uint) int
+	_fnNewCollection                  func() unsafe.Pointer
+	_fnNewCollectionExceptionUPP      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewCollectionFlattenUPP        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewComponentFunctionUPP        func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnNewComponentMPWorkFunctionUPP  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewComponentRoutineUPP         func(unsafe.Pointer) unsafe.Pointer
 	_fnNewDebugAssertOutputHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDebugComponent func(uint, *uint8, unsafe.Pointer) int
-	_fnNewDebugComponentCallbackUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDebugOption func(uint, int, *uint8) int
-	_fnNewDebuggerDisposeThreadUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDebuggerNewThreadUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDebuggerThreadSchedulerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDeferredTaskUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEmptyHandle func() *string
-// Deprecated: No longer supported
-	_fnNewExceptionHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewFNSubscriptionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewFSVolumeEjectUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewFSVolumeMountUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewFSVolumeUnmountUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewFolderManagerNotificationUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewGestaltValue func(uint, int) int16
-	_fnNewGetMissingComponentResourceUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHandle func(int) *string
-	_fnNewHandleClear func(int) *string
-	_fnNewIOCompletionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewIndexToUCStringUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewPtr func(int) string
-	_fnNewPtrClear func(int) string
-	_fnNewResErrUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewSelectorFunctionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThread func(uint, unsafe.Pointer, unsafe.Pointer, int, uint, unsafe.Pointer, *uint) int16
-	_fnNewThreadEntryUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThreadSchedulerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThreadSwitchUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThreadTerminationUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTimerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewUnicodeToTextFallbackUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnOpenAComponent func(*ComponentRecord, **ComponentInstanceRecord) int16
-	_fnOpenAComponentResFile func(*ComponentRecord, *int) int16
-	_fnOpenADefaultComponent func(uint, uint, **ComponentInstanceRecord) int16
-	_fnOpenComponent func(*ComponentRecord) *ComponentInstanceRecord
-	_fnOpenComponentResFile func(*ComponentRecord) int
-	_fnOpenDefaultComponent func(uint, uint) *ComponentInstanceRecord
-	_fnPBAllocateForkAsync func(*FSForkIOParam)
-	_fnPBAllocateForkSync func(*FSForkIOParam) int16
-	_fnPBCatalogSearchAsync func(*FSCatalogBulkParam)
-	_fnPBCatalogSearchSync func(*FSCatalogBulkParam) int16
-	_fnPBCloseForkAsync func(*FSForkIOParam)
-	_fnPBCloseForkSync func(*FSForkIOParam) int16
-	_fnPBCloseIteratorAsync func(*FSCatalogBulkParam)
-	_fnPBCloseIteratorSync func(*FSCatalogBulkParam) int16
-	_fnPBCompareFSRefsAsync func(*FSRefParam)
-	_fnPBCompareFSRefsSync func(*FSRefParam) int16
-	_fnPBCreateDirectoryUnicodeAsync func(*FSRefParam)
-	_fnPBCreateDirectoryUnicodeSync func(*FSRefParam) int16
+	_fnNewDebugComponent              func(uint, *uint8, unsafe.Pointer) int
+	_fnNewDebugComponentCallbackUPP   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDebugOption                 func(uint, int, *uint8) int
+	_fnNewDebuggerDisposeThreadUPP    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDebuggerNewThreadUPP        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDebuggerThreadSchedulerUPP  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDeferredTaskUPP             func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEmptyHandle                 func() *string
+	// Deprecated: No longer supported
+	_fnNewExceptionHandlerUPP              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewFNSubscriptionUPP                func(unsafe.Pointer) unsafe.Pointer
+	_fnNewFSVolumeEjectUPP                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewFSVolumeMountUPP                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewFSVolumeUnmountUPP               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewFolderManagerNotificationUPP     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewGestaltValue                     func(uint, int) int16
+	_fnNewGetMissingComponentResourceUPP   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHandle                           func(int) *string
+	_fnNewHandleClear                      func(int) *string
+	_fnNewIOCompletionUPP                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewIndexToUCStringUPP               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewPtr                              func(int) string
+	_fnNewPtrClear                         func(int) string
+	_fnNewResErrUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewSelectorFunctionUPP              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThread                           func(uint, unsafe.Pointer, unsafe.Pointer, int, uint, unsafe.Pointer, *uint) int16
+	_fnNewThreadEntryUPP                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThreadSchedulerUPP               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThreadSwitchUPP                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThreadTerminationUPP             func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTimerUPP                         func(unsafe.Pointer) unsafe.Pointer
+	_fnNewUnicodeToTextFallbackUPP         func(unsafe.Pointer) unsafe.Pointer
+	_fnOpenAComponent                      func(*ComponentRecord, **ComponentInstanceRecord) int16
+	_fnOpenAComponentResFile               func(*ComponentRecord, *int) int16
+	_fnOpenADefaultComponent               func(uint, uint, **ComponentInstanceRecord) int16
+	_fnOpenComponent                       func(*ComponentRecord) *ComponentInstanceRecord
+	_fnOpenComponentResFile                func(*ComponentRecord) int
+	_fnOpenDefaultComponent                func(uint, uint) *ComponentInstanceRecord
+	_fnPBAllocateForkAsync                 func(*FSForkIOParam)
+	_fnPBAllocateForkSync                  func(*FSForkIOParam) int16
+	_fnPBCatalogSearchAsync                func(*FSCatalogBulkParam)
+	_fnPBCatalogSearchSync                 func(*FSCatalogBulkParam) int16
+	_fnPBCloseForkAsync                    func(*FSForkIOParam)
+	_fnPBCloseForkSync                     func(*FSForkIOParam) int16
+	_fnPBCloseIteratorAsync                func(*FSCatalogBulkParam)
+	_fnPBCloseIteratorSync                 func(*FSCatalogBulkParam) int16
+	_fnPBCompareFSRefsAsync                func(*FSRefParam)
+	_fnPBCompareFSRefsSync                 func(*FSRefParam) int16
+	_fnPBCreateDirectoryUnicodeAsync       func(*FSRefParam)
+	_fnPBCreateDirectoryUnicodeSync        func(*FSRefParam) int16
 	_fnPBCreateFileAndOpenForkUnicodeAsync func(*FSRefForkIOParam)
-	_fnPBCreateFileAndOpenForkUnicodeSync func(*FSRefForkIOParam) int
-	_fnPBCreateFileUnicodeAsync func(*FSRefParam)
-	_fnPBCreateFileUnicodeSync func(*FSRefParam) int16
-	_fnPBCreateForkAsync func(*FSForkIOParam)
-	_fnPBCreateForkSync func(*FSForkIOParam) int16
-	_fnPBDeleteForkAsync func(*FSForkIOParam)
-	_fnPBDeleteForkSync func(*FSForkIOParam) int16
-	_fnPBDeleteObjectAsync func(*FSRefParam)
-	_fnPBDeleteObjectSync func(*FSRefParam) int16
-	_fnPBExchangeObjectsAsync func(*FSRefParam)
-	_fnPBExchangeObjectsSync func(*FSRefParam) int16
-	_fnPBFSCopyFileAsync func(*FSRefParam) int
-	_fnPBFSCopyFileSync func(*FSRefParam) int
-	_fnPBFSResolveNodeIDAsync func(*FSRefParam) int
-	_fnPBFSResolveNodeIDSync func(*FSRefParam) int
-	_fnPBFlushForkAsync func(*FSForkIOParam)
-	_fnPBFlushForkSync func(*FSForkIOParam) int16
-	_fnPBFlushVolumeAsync func(*FSRefParam) int
-	_fnPBFlushVolumeSync func(*FSRefParam) int
-	_fnPBGetCatalogInfoAsync func(*FSRefParam)
-	_fnPBGetCatalogInfoBulkAsync func(*FSCatalogBulkParam)
-	_fnPBGetCatalogInfoBulkSync func(*FSCatalogBulkParam) int16
-	_fnPBGetCatalogInfoSync func(*FSRefParam) int16
-	_fnPBGetForkCBInfoAsync func(*FSForkCBInfoParam)
-	_fnPBGetForkCBInfoSync func(*FSForkCBInfoParam) int16
-	_fnPBGetForkPositionAsync func(*FSForkIOParam)
-	_fnPBGetForkPositionSync func(*FSForkIOParam) int16
-	_fnPBGetForkSizeAsync func(*FSForkIOParam)
-	_fnPBGetForkSizeSync func(*FSForkIOParam) int16
-	_fnPBGetVolumeInfoAsync func(*FSVolumeInfoParam)
-	_fnPBGetVolumeInfoSync func(*FSVolumeInfoParam) int16
-	_fnPBIterateForksAsync func(*FSForkIOParam)
-	_fnPBIterateForksSync func(*FSForkIOParam) int16
-	_fnPBMakeFSRefUnicodeAsync func(*FSRefParam)
-	_fnPBMakeFSRefUnicodeSync func(*FSRefParam) int16
-	_fnPBMoveObjectAsync func(*FSRefParam)
-	_fnPBMoveObjectSync func(*FSRefParam) int16
-	_fnPBOpenForkAsync func(*FSForkIOParam)
-	_fnPBOpenForkSync func(*FSForkIOParam) int16
-	_fnPBOpenIteratorAsync func(*FSCatalogBulkParam)
-	_fnPBOpenIteratorSync func(*FSCatalogBulkParam) int16
-	_fnPBReadForkAsync func(*FSForkIOParam)
-	_fnPBReadForkSync func(*FSForkIOParam) int16
-	_fnPBRenameUnicodeAsync func(*FSRefParam)
-	_fnPBRenameUnicodeSync func(*FSRefParam) int16
-	_fnPBSetCatalogInfoAsync func(*FSRefParam)
-	_fnPBSetCatalogInfoSync func(*FSRefParam) int16
-	_fnPBSetForkPositionAsync func(*FSForkIOParam)
-	_fnPBSetForkPositionSync func(*FSForkIOParam) int16
-	_fnPBSetForkSizeAsync func(*FSForkIOParam)
-	_fnPBSetForkSizeSync func(*FSForkIOParam) int16
-	_fnPBSetVolumeInfoAsync func(*FSVolumeInfoParam)
-	_fnPBSetVolumeInfoSync func(*FSVolumeInfoParam) int16
-	_fnPBUnlinkObjectAsync func(*FSRefParam)
-	_fnPBUnlinkObjectSync func(*FSRefParam) int16
-	_fnPBWriteForkAsync func(*FSForkIOParam)
-	_fnPBWriteForkSync func(*FSForkIOParam) int16
-	_fnPBXLockRangeAsync func(*FSRangeLockParam) int
-	_fnPBXLockRangeSync func(*FSRangeLockParam) int
-	_fnPBXUnlockRangeAsync func(*FSRangeLockParam) int
-	_fnPBXUnlockRangeSync func(*FSRangeLockParam) int
-	_fnPLpos func(*uint8, *uint8) int16
-	_fnPLstrcat func(*uint8, *uint8) unsafe.Pointer
-	_fnPLstrchr func(*uint8, int16) string
-	_fnPLstrcmp func(*uint8, *uint8) int16
-	_fnPLstrcpy func(*uint8, *uint8) unsafe.Pointer
-	_fnPLstrlen func(*uint8) int16
-	_fnPLstrncat func(*uint8, *uint8, int16) unsafe.Pointer
-	_fnPLstrncmp func(*uint8, *uint8, int16) int16
-	_fnPLstrncpy func(*uint8, *uint8, int16) unsafe.Pointer
-	_fnPLstrpbrk func(*uint8, *uint8) string
-	_fnPLstrrchr func(*uint8, int16) string
-	_fnPLstrspn func(*uint8, *uint8) int16
-	_fnPLstrstr func(*uint8, *uint8) string
-	_fnPrimeTime func(*QElem, int)
-	_fnPrimeTimeTask func(*QElem, int) int16
-	_fnPtrAndHand func(unsafe.Pointer, *string, int) int16
-	_fnPtrToHand func(unsafe.Pointer, **string, int) int16
-	_fnPtrToXHand func(unsafe.Pointer, *string, int) int16
-	_fnPurgeCollection func(unsafe.Pointer, int, int)
-	_fnPurgeCollectionTag func(unsafe.Pointer, uint)
-	_fnQueryUnicodeMappings func(uint, *UnicodeMapping, uint, *uint, *UnicodeMapping) int
-	_fnReadLocation func(*MachineLocation)
-	_fnReadPartialResource func(*string, int, unsafe.Pointer, int)
-	_fnReallocateHandle func(*string, int)
-	_fnRecoverHandle func(string) *string
-	_fnRegisterComponent func(*ComponentDescription, unsafe.Pointer, int16, *string, *string, *string) *ComponentRecord
-	_fnRegisterComponentFileRef func(*FSRef, int16) int16
-	_fnRegisterComponentFileRefEntries func(*FSRef, int16, *ComponentDescription, uint) int16
-	_fnRegisterComponentResource func(**ComponentResource, int16) *ComponentRecord
-	_fnRegisterComponentResourceFile func(int16, int16) int
-	_fnReleaseCollection func(unsafe.Pointer) int
-	_fnReleaseFolder func(int16, uint) int16
-	_fnReleaseResource func(*string)
-	_fnRemoveCollectionItem func(unsafe.Pointer, uint, int) int16
-	_fnRemoveFolderDescriptor func(uint) int16
-	_fnRemoveIndexedCollectionItem func(unsafe.Pointer, int) int16
-	_fnRemoveResource func(*string)
-	_fnRemoveTimeTask func(*QElem) int16
-	_fnReplaceGestaltValue func(uint, int) int16
-	_fnReplaceIndexedCollectionItem func(unsafe.Pointer, int, int, unsafe.Pointer) int16
-	_fnReplaceIndexedCollectionItemHdl func(unsafe.Pointer, int, *string) int16
-	_fnResError func() int16
-	_fnResetTextToUnicodeInfo func(unsafe.Pointer) int
-	_fnResetUnicodeToTextInfo func(unsafe.Pointer) int
-	_fnResetUnicodeToTextRunInfo func(unsafe.Pointer) int
-	_fnResolveComponentAlias func(*ComponentRecord) *ComponentRecord
-	_fnResolveDefaultTextEncoding func(uint) uint
-	_fnRetainCollection func(unsafe.Pointer) int
-	_fnRevertTextEncodingToScriptInfo func(uint, *int16, *int16, *uint8) int
-	_fnRmvTime func(*QElem)
+	_fnPBCreateFileAndOpenForkUnicodeSync  func(*FSRefForkIOParam) int
+	_fnPBCreateFileUnicodeAsync            func(*FSRefParam)
+	_fnPBCreateFileUnicodeSync             func(*FSRefParam) int16
+	_fnPBCreateForkAsync                   func(*FSForkIOParam)
+	_fnPBCreateForkSync                    func(*FSForkIOParam) int16
+	_fnPBDeleteForkAsync                   func(*FSForkIOParam)
+	_fnPBDeleteForkSync                    func(*FSForkIOParam) int16
+	_fnPBDeleteObjectAsync                 func(*FSRefParam)
+	_fnPBDeleteObjectSync                  func(*FSRefParam) int16
+	_fnPBExchangeObjectsAsync              func(*FSRefParam)
+	_fnPBExchangeObjectsSync               func(*FSRefParam) int16
+	_fnPBFSCopyFileAsync                   func(*FSRefParam) int
+	_fnPBFSCopyFileSync                    func(*FSRefParam) int
+	_fnPBFSResolveNodeIDAsync              func(*FSRefParam) int
+	_fnPBFSResolveNodeIDSync               func(*FSRefParam) int
+	_fnPBFlushForkAsync                    func(*FSForkIOParam)
+	_fnPBFlushForkSync                     func(*FSForkIOParam) int16
+	_fnPBFlushVolumeAsync                  func(*FSRefParam) int
+	_fnPBFlushVolumeSync                   func(*FSRefParam) int
+	_fnPBGetCatalogInfoAsync               func(*FSRefParam)
+	_fnPBGetCatalogInfoBulkAsync           func(*FSCatalogBulkParam)
+	_fnPBGetCatalogInfoBulkSync            func(*FSCatalogBulkParam) int16
+	_fnPBGetCatalogInfoSync                func(*FSRefParam) int16
+	_fnPBGetForkCBInfoAsync                func(*FSForkCBInfoParam)
+	_fnPBGetForkCBInfoSync                 func(*FSForkCBInfoParam) int16
+	_fnPBGetForkPositionAsync              func(*FSForkIOParam)
+	_fnPBGetForkPositionSync               func(*FSForkIOParam) int16
+	_fnPBGetForkSizeAsync                  func(*FSForkIOParam)
+	_fnPBGetForkSizeSync                   func(*FSForkIOParam) int16
+	_fnPBGetVolumeInfoAsync                func(*FSVolumeInfoParam)
+	_fnPBGetVolumeInfoSync                 func(*FSVolumeInfoParam) int16
+	_fnPBIterateForksAsync                 func(*FSForkIOParam)
+	_fnPBIterateForksSync                  func(*FSForkIOParam) int16
+	_fnPBMakeFSRefUnicodeAsync             func(*FSRefParam)
+	_fnPBMakeFSRefUnicodeSync              func(*FSRefParam) int16
+	_fnPBMoveObjectAsync                   func(*FSRefParam)
+	_fnPBMoveObjectSync                    func(*FSRefParam) int16
+	_fnPBOpenForkAsync                     func(*FSForkIOParam)
+	_fnPBOpenForkSync                      func(*FSForkIOParam) int16
+	_fnPBOpenIteratorAsync                 func(*FSCatalogBulkParam)
+	_fnPBOpenIteratorSync                  func(*FSCatalogBulkParam) int16
+	_fnPBReadForkAsync                     func(*FSForkIOParam)
+	_fnPBReadForkSync                      func(*FSForkIOParam) int16
+	_fnPBRenameUnicodeAsync                func(*FSRefParam)
+	_fnPBRenameUnicodeSync                 func(*FSRefParam) int16
+	_fnPBSetCatalogInfoAsync               func(*FSRefParam)
+	_fnPBSetCatalogInfoSync                func(*FSRefParam) int16
+	_fnPBSetForkPositionAsync              func(*FSForkIOParam)
+	_fnPBSetForkPositionSync               func(*FSForkIOParam) int16
+	_fnPBSetForkSizeAsync                  func(*FSForkIOParam)
+	_fnPBSetForkSizeSync                   func(*FSForkIOParam) int16
+	_fnPBSetVolumeInfoAsync                func(*FSVolumeInfoParam)
+	_fnPBSetVolumeInfoSync                 func(*FSVolumeInfoParam) int16
+	_fnPBUnlinkObjectAsync                 func(*FSRefParam)
+	_fnPBUnlinkObjectSync                  func(*FSRefParam) int16
+	_fnPBWriteForkAsync                    func(*FSForkIOParam)
+	_fnPBWriteForkSync                     func(*FSForkIOParam) int16
+	_fnPBXLockRangeAsync                   func(*FSRangeLockParam) int
+	_fnPBXLockRangeSync                    func(*FSRangeLockParam) int
+	_fnPBXUnlockRangeAsync                 func(*FSRangeLockParam) int
+	_fnPBXUnlockRangeSync                  func(*FSRangeLockParam) int
+	_fnPLpos                               func(*uint8, *uint8) int16
+	_fnPLstrcat                            func(*uint8, *uint8) unsafe.Pointer
+	_fnPLstrchr                            func(*uint8, int16) string
+	_fnPLstrcmp                            func(*uint8, *uint8) int16
+	_fnPLstrcpy                            func(*uint8, *uint8) unsafe.Pointer
+	_fnPLstrlen                            func(*uint8) int16
+	_fnPLstrncat                           func(*uint8, *uint8, int16) unsafe.Pointer
+	_fnPLstrncmp                           func(*uint8, *uint8, int16) int16
+	_fnPLstrncpy                           func(*uint8, *uint8, int16) unsafe.Pointer
+	_fnPLstrpbrk                           func(*uint8, *uint8) string
+	_fnPLstrrchr                           func(*uint8, int16) string
+	_fnPLstrspn                            func(*uint8, *uint8) int16
+	_fnPLstrstr                            func(*uint8, *uint8) string
+	_fnPrimeTime                           func(*QElem, int)
+	_fnPrimeTimeTask                       func(*QElem, int) int16
+	_fnPtrAndHand                          func(unsafe.Pointer, *string, int) int16
+	_fnPtrToHand                           func(unsafe.Pointer, **string, int) int16
+	_fnPtrToXHand                          func(unsafe.Pointer, *string, int) int16
+	_fnPurgeCollection                     func(unsafe.Pointer, int, int)
+	_fnPurgeCollectionTag                  func(unsafe.Pointer, uint)
+	_fnQueryUnicodeMappings                func(uint, *UnicodeMapping, uint, *uint, *UnicodeMapping) int
+	_fnReadLocation                        func(*MachineLocation)
+	_fnReadPartialResource                 func(*string, int, unsafe.Pointer, int)
+	_fnReallocateHandle                    func(*string, int)
+	_fnRecoverHandle                       func(string) *string
+	_fnRegisterComponent                   func(*ComponentDescription, unsafe.Pointer, int16, *string, *string, *string) *ComponentRecord
+	_fnRegisterComponentFileRef            func(*FSRef, int16) int16
+	_fnRegisterComponentFileRefEntries     func(*FSRef, int16, *ComponentDescription, uint) int16
+	_fnRegisterComponentResource           func(**ComponentResource, int16) *ComponentRecord
+	_fnRegisterComponentResourceFile       func(int16, int16) int
+	_fnReleaseCollection                   func(unsafe.Pointer) int
+	_fnReleaseFolder                       func(int16, uint) int16
+	_fnReleaseResource                     func(*string)
+	_fnRemoveCollectionItem                func(unsafe.Pointer, uint, int) int16
+	_fnRemoveFolderDescriptor              func(uint) int16
+	_fnRemoveIndexedCollectionItem         func(unsafe.Pointer, int) int16
+	_fnRemoveResource                      func(*string)
+	_fnRemoveTimeTask                      func(*QElem) int16
+	_fnReplaceGestaltValue                 func(uint, int) int16
+	_fnReplaceIndexedCollectionItem        func(unsafe.Pointer, int, int, unsafe.Pointer) int16
+	_fnReplaceIndexedCollectionItemHdl     func(unsafe.Pointer, int, *string) int16
+	_fnResError                            func() int16
+	_fnResetTextToUnicodeInfo              func(unsafe.Pointer) int
+	_fnResetUnicodeToTextInfo              func(unsafe.Pointer) int
+	_fnResetUnicodeToTextRunInfo           func(unsafe.Pointer) int
+	_fnResolveComponentAlias               func(*ComponentRecord) *ComponentRecord
+	_fnResolveDefaultTextEncoding          func(uint) uint
+	_fnRetainCollection                    func(unsafe.Pointer) int
+	_fnRevertTextEncodingToScriptInfo      func(uint, *int16, *int16, *uint8) int
+	_fnRmvTime                             func(*QElem)
 	// @brief Given an SInt64, returns an SInt32 by discarding the high-order 32 bits. @param	value	A SInt64 value @result	return the lowest 32 bits of value as a SInt32
 	_fnS32Set func(int64) int
 	// @brief Returns the absolute value of the number (i.e. the number if it is positive, or 0 - the number if it is negative). @param	value	a SInt64 value @result	the absolute value of value
@@ -817,87 +817,87 @@ var (
 	// @brief	Converts SInt64 to long double.  Note all SInt64s fit exactly into long doubles, thus, the binary -> decimal conversion routines in fp.h can be used to achieve SInt64 -> long double ->  decimal conversions. @param	value	a SInt64 value @result	a double equivalent of value
 	_fnSInt64ToLongDouble func(int64) float64
 	// @brief	Coerce a \c SInt64 -> \c UInt64 @param	value	a \c SInt64 value @result	a UInt64 value; if value is less than zero then a positive value greater than SIntMax()
-	_fnSInt64ToUInt64 func(int64) uint64
-	_fnSInt64ToWide func(int64) unsafe.Pointer
-	_fnSetAliasUserType func(**AliasRecord, uint)
-	_fnSetAliasUserTypeWithPtr func(*AliasRecord, uint)
+	_fnSInt64ToUInt64                 func(int64) uint64
+	_fnSInt64ToWide                   func(int64) unsafe.Pointer
+	_fnSetAliasUserType               func(**AliasRecord, uint)
+	_fnSetAliasUserTypeWithPtr        func(*AliasRecord, uint)
 	_fnSetCollectionDefaultAttributes func(unsafe.Pointer, int, int)
-	_fnSetCollectionExceptionProc func(unsafe.Pointer, unsafe.Pointer)
-	_fnSetCollectionItemInfo func(unsafe.Pointer, uint, int, int, int) int16
-	_fnSetComponentInstanceError func(*ComponentInstanceRecord, int16)
-	_fnSetComponentInstanceStorage func(*ComponentInstanceRecord, *string)
-	_fnSetComponentRefcon func(*ComponentRecord, int)
-	_fnSetDebugOptionValue func(uint, int, uint8) int
-	_fnSetDebuggerNotificationProcs func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnSetDefaultComponent func(*ComponentRecord, int16) int16
-	_fnSetFallbackUnicodeToText func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnSetFallbackUnicodeToTextRun func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnSetGestaltValue func(uint, int) int16
-	_fnSetHandleSize func(*string, int)
-	_fnSetIndexedCollectionItemInfo func(unsafe.Pointer, int, int, int) int16
-	_fnSetPtrSize func(string, int)
-	_fnSetResAttrs func(*string, int16)
-	_fnSetResFileAttrs func(int, int16)
-	_fnSetResInfo func(*string, int16, *uint8)
-	_fnSetResLoad func(uint8)
-	_fnSetResPurge func(uint8)
-	_fnSetResourceSize func(*string, int)
-// Deprecated: Deprecated
-	_fnSetScriptManagerVariable func(int16, int) int16
-	_fnSetThreadReadyGivenTaskRef func(unsafe.Pointer, uint) int16
-	_fnSetThreadScheduler func(unsafe.Pointer) int16
-	_fnSetThreadState func(uint, uint16, uint) int16
-	_fnSetThreadStateEndCritical func(uint, uint16, uint) int16
-	_fnSetThreadSwitcher func(uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
-	_fnSetThreadTerminator func(uint, unsafe.Pointer, unsafe.Pointer) int16
-	_fnSubAbsoluteFromAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSubDurationFromAbsolute func(int, unsafe.Pointer) unsafe.Pointer
-	_fnSubNanosecondsFromAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSysError func(int16)
-	_fnTECClearConverterContextInfo func(unsafe.Pointer) int
-	_fnTECClearSnifferContextInfo func(unsafe.Pointer) int
-	_fnTECConvertText func(unsafe.Pointer, *uint8, uint, *uint, *uint8, uint, *uint) int
-	_fnTECConvertTextToMultipleEncodings func(unsafe.Pointer, *uint8, uint, *uint, *uint8, uint, *uint, *TextEncodingRun, uint, *uint) int
-	_fnTECCopyTextEncodingInternetNameAndMIB func(uint, uint, unsafe.Pointer, *int) int
-	_fnTECCountAvailableSniffers func(*uint) int
-	_fnTECCountAvailableTextEncodings func(*uint) int
-	_fnTECCountDestinationTextEncodings func(uint, *uint) int
-	_fnTECCountDirectTextEncodingConversions func(*uint) int
-	_fnTECCountMailTextEncodings func(int16, *uint) int
-	_fnTECCountSubTextEncodings func(uint, *uint) int
-	_fnTECCountWebTextEncodings func(int16, *uint) int
-	_fnTECCreateConverter func(unsafe.Pointer, uint, uint) int
-	_fnTECCreateConverterFromPath func(unsafe.Pointer, *uint, uint) int
-	_fnTECCreateOneToManyConverter func(unsafe.Pointer, uint, uint, *uint) int
-	_fnTECCreateSniffer func(unsafe.Pointer, *uint, uint) int
-	_fnTECDisposeConverter func(unsafe.Pointer) int
-	_fnTECDisposeSniffer func(unsafe.Pointer) int
-	_fnTECFlushMultipleEncodings func(unsafe.Pointer, *uint8, uint, *uint, *TextEncodingRun, uint, *uint) int
-	_fnTECFlushText func(unsafe.Pointer, *uint8, uint, *uint) int
-	_fnTECGetAvailableSniffers func(*uint, uint, *uint) int
-	_fnTECGetAvailableTextEncodings func(*uint, uint, *uint) int
-	_fnTECGetDestinationTextEncodings func(uint, *uint, uint, *uint) int
-	_fnTECGetDirectTextEncodingConversions func(*TECConversionInfo, uint, *uint) int
-	_fnTECGetEncodingList func(unsafe.Pointer, *uint, **string) int
-	_fnTECGetInfo func(***TECInfo) int
-	_fnTECGetMailTextEncodings func(int16, *uint, uint, *uint) int
-	_fnTECGetSubTextEncodings func(uint, *uint, uint, *uint) int
-	_fnTECGetTextEncodingFromInternetName func(*uint, *uint8) int
+	_fnSetCollectionExceptionProc     func(unsafe.Pointer, unsafe.Pointer)
+	_fnSetCollectionItemInfo          func(unsafe.Pointer, uint, int, int, int) int16
+	_fnSetComponentInstanceError      func(*ComponentInstanceRecord, int16)
+	_fnSetComponentInstanceStorage    func(*ComponentInstanceRecord, *string)
+	_fnSetComponentRefcon             func(*ComponentRecord, int)
+	_fnSetDebugOptionValue            func(uint, int, uint8) int
+	_fnSetDebuggerNotificationProcs   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnSetDefaultComponent            func(*ComponentRecord, int16) int16
+	_fnSetFallbackUnicodeToText       func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnSetFallbackUnicodeToTextRun    func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnSetGestaltValue                func(uint, int) int16
+	_fnSetHandleSize                  func(*string, int)
+	_fnSetIndexedCollectionItemInfo   func(unsafe.Pointer, int, int, int) int16
+	_fnSetPtrSize                     func(string, int)
+	_fnSetResAttrs                    func(*string, int16)
+	_fnSetResFileAttrs                func(int, int16)
+	_fnSetResInfo                     func(*string, int16, *uint8)
+	_fnSetResLoad                     func(uint8)
+	_fnSetResPurge                    func(uint8)
+	_fnSetResourceSize                func(*string, int)
+	// Deprecated: Deprecated
+	_fnSetScriptManagerVariable                func(int16, int) int16
+	_fnSetThreadReadyGivenTaskRef              func(unsafe.Pointer, uint) int16
+	_fnSetThreadScheduler                      func(unsafe.Pointer) int16
+	_fnSetThreadState                          func(uint, uint16, uint) int16
+	_fnSetThreadStateEndCritical               func(uint, uint16, uint) int16
+	_fnSetThreadSwitcher                       func(uint, unsafe.Pointer, unsafe.Pointer, uint8) int16
+	_fnSetThreadTerminator                     func(uint, unsafe.Pointer, unsafe.Pointer) int16
+	_fnSubAbsoluteFromAbsolute                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSubDurationFromAbsolute                 func(int, unsafe.Pointer) unsafe.Pointer
+	_fnSubNanosecondsFromAbsolute              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSysError                                func(int16)
+	_fnTECClearConverterContextInfo            func(unsafe.Pointer) int
+	_fnTECClearSnifferContextInfo              func(unsafe.Pointer) int
+	_fnTECConvertText                          func(unsafe.Pointer, *uint8, uint, *uint, *uint8, uint, *uint) int
+	_fnTECConvertTextToMultipleEncodings       func(unsafe.Pointer, *uint8, uint, *uint, *uint8, uint, *uint, *TextEncodingRun, uint, *uint) int
+	_fnTECCopyTextEncodingInternetNameAndMIB   func(uint, uint, unsafe.Pointer, *int) int
+	_fnTECCountAvailableSniffers               func(*uint) int
+	_fnTECCountAvailableTextEncodings          func(*uint) int
+	_fnTECCountDestinationTextEncodings        func(uint, *uint) int
+	_fnTECCountDirectTextEncodingConversions   func(*uint) int
+	_fnTECCountMailTextEncodings               func(int16, *uint) int
+	_fnTECCountSubTextEncodings                func(uint, *uint) int
+	_fnTECCountWebTextEncodings                func(int16, *uint) int
+	_fnTECCreateConverter                      func(unsafe.Pointer, uint, uint) int
+	_fnTECCreateConverterFromPath              func(unsafe.Pointer, *uint, uint) int
+	_fnTECCreateOneToManyConverter             func(unsafe.Pointer, uint, uint, *uint) int
+	_fnTECCreateSniffer                        func(unsafe.Pointer, *uint, uint) int
+	_fnTECDisposeConverter                     func(unsafe.Pointer) int
+	_fnTECDisposeSniffer                       func(unsafe.Pointer) int
+	_fnTECFlushMultipleEncodings               func(unsafe.Pointer, *uint8, uint, *uint, *TextEncodingRun, uint, *uint) int
+	_fnTECFlushText                            func(unsafe.Pointer, *uint8, uint, *uint) int
+	_fnTECGetAvailableSniffers                 func(*uint, uint, *uint) int
+	_fnTECGetAvailableTextEncodings            func(*uint, uint, *uint) int
+	_fnTECGetDestinationTextEncodings          func(uint, *uint, uint, *uint) int
+	_fnTECGetDirectTextEncodingConversions     func(*TECConversionInfo, uint, *uint) int
+	_fnTECGetEncodingList                      func(unsafe.Pointer, *uint, **string) int
+	_fnTECGetInfo                              func(***TECInfo) int
+	_fnTECGetMailTextEncodings                 func(int16, *uint, uint, *uint) int
+	_fnTECGetSubTextEncodings                  func(uint, *uint, uint, *uint) int
+	_fnTECGetTextEncodingFromInternetName      func(*uint, *uint8) int
 	_fnTECGetTextEncodingFromInternetNameOrMIB func(*uint, uint, unsafe.Pointer, int) int
-	_fnTECGetTextEncodingInternetName func(uint, *uint8) int
-	_fnTECGetWebTextEncodings func(int16, *uint, uint, *uint) int
-	_fnTECSetBasicOptions func(unsafe.Pointer, uint) int
-	_fnTECSniffTextEncoding func(unsafe.Pointer, *uint8, uint, *uint, uint, *uint, uint, *uint, uint) int
-	_fnTaskLevel func() uint
-	_fnTempNewHandle func(int, *int16) *string
-	_fnTestAndClear func(uint, *uint8) uint8
-	_fnTestAndSet func(uint, *uint8) uint8
-	_fnThreadBeginCritical func() int16
-	_fnThreadCurrentStackSpace func(uint, *uint) int16
-	_fnThreadEndCritical func() int16
-	_fnTickCount func() uint
-	_fnTruncateForTextToUnicode func(unsafe.Pointer, uint, unsafe.Pointer, uint, *uint) int
-	_fnTruncateForUnicodeToText func(unsafe.Pointer, uint, *uint16, uint, uint, *uint) int
+	_fnTECGetTextEncodingInternetName          func(uint, *uint8) int
+	_fnTECGetWebTextEncodings                  func(int16, *uint, uint, *uint) int
+	_fnTECSetBasicOptions                      func(unsafe.Pointer, uint) int
+	_fnTECSniffTextEncoding                    func(unsafe.Pointer, *uint8, uint, *uint, uint, *uint, uint, *uint, uint) int
+	_fnTaskLevel                               func() uint
+	_fnTempNewHandle                           func(int, *int16) *string
+	_fnTestAndClear                            func(uint, *uint8) uint8
+	_fnTestAndSet                              func(uint, *uint8) uint8
+	_fnThreadBeginCritical                     func() int16
+	_fnThreadCurrentStackSpace                 func(uint, *uint) int16
+	_fnThreadEndCritical                       func() int16
+	_fnTickCount                               func() uint
+	_fnTruncateForTextToUnicode                func(unsafe.Pointer, uint, unsafe.Pointer, uint, *uint) int
+	_fnTruncateForUnicodeToText                func(unsafe.Pointer, uint, *uint16, uint, uint, *uint) int
 	// @brief	Given an UInt64, returns an UInt32 by discarding the high-order 32 bits. @param	value	A \c UInt64 value @result	the \c SInt32 value created by discarding the high-order 32 bits of value
 	_fnU32SetU func(uint64) uint
 	// @brief	Adds two unsigned integers, producing an integer result.  If an overflow occurs the result is congruent mod (2^64) as if the operands and result were unsigned.  No overflow is signaled. @param	left	a \c UInt64 value @param	right	a \c UInt64 value @result	the result of adding left to right, ignoring overflow and truncating to a UInt64
@@ -939,98 +939,98 @@ var (
 	// @brief	Return a \c UInt64 value created by shifting a given value right by a given number of bit positions @param	value	a \c UInt64 value @param	shift	a \c UInt32 number of positions to shift, between 0 and 127 @result	the result of shifting value to the right by shift bit positions
 	_fnU64ShiftRight func(uint64, uint) uint64
 	// @brief	Subtracts two unsigned integers, producing an integer result.  If an overflow occurs the result is congruent mod (2^64) as if the operands and result were unsigned.  No overflow is signaled. @param	left	a \c UInt64 value @param	right	a \c UInt64 value @result	the result of subtracting the value right from left, ignoring underflow
-	_fnU64Subtract func(uint64, uint64) uint64
-	_fnUCCompareCollationKeys func(*uint, uint, *uint, uint, *uint8, *int) int
-	_fnUCCompareText func(unsafe.Pointer, *uint16, uint, *uint16, uint, *uint8, *int) int
-	_fnUCCompareTextDefault func(uint, *uint16, uint, *uint16, uint, *uint8, *int) int
-	_fnUCCompareTextNoLocale func(uint, *uint16, uint, *uint16, uint, *uint8, *int) int
+	_fnU64Subtract                           func(uint64, uint64) uint64
+	_fnUCCompareCollationKeys                func(*uint, uint, *uint, uint, *uint8, *int) int
+	_fnUCCompareText                         func(unsafe.Pointer, *uint16, uint, *uint16, uint, *uint8, *int) int
+	_fnUCCompareTextDefault                  func(uint, *uint16, uint, *uint16, uint, *uint8, *int) int
+	_fnUCCompareTextNoLocale                 func(uint, *uint16, uint, *uint16, uint, *uint8, *int) int
 	_fnUCConvertCFAbsoluteTimeToLongDateTime func(float64, *int64) int
-	_fnUCConvertCFAbsoluteTimeToSeconds func(float64, *uint) int
-	_fnUCConvertCFAbsoluteTimeToUTCDateTime func(float64, *UTCDateTime) int
+	_fnUCConvertCFAbsoluteTimeToSeconds      func(float64, *uint) int
+	_fnUCConvertCFAbsoluteTimeToUTCDateTime  func(float64, *UTCDateTime) int
 	_fnUCConvertLongDateTimeToCFAbsoluteTime func(int64, *float64) int
-	_fnUCConvertSecondsToCFAbsoluteTime func(uint, *float64) int
-	_fnUCConvertUTCDateTimeToCFAbsoluteTime func(*UTCDateTime, *float64) int
-	_fnUCCreateCollator func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnUCCreateTextBreakLocator func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnUCDisposeCollator func(unsafe.Pointer) int
-	_fnUCDisposeTextBreakLocator func(unsafe.Pointer) int
-	_fnUCFindTextBreak func(unsafe.Pointer, uint, uint, *uint16, uint, uint, *uint) int
-	_fnUCGetCharProperty func(*uint16, uint, int, *uint) int
-	_fnUCGetCollationKey func(unsafe.Pointer, *uint16, uint, uint, *uint, *uint) int
+	_fnUCConvertSecondsToCFAbsoluteTime      func(uint, *float64) int
+	_fnUCConvertUTCDateTimeToCFAbsoluteTime  func(*UTCDateTime, *float64) int
+	_fnUCCreateCollator                      func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnUCCreateTextBreakLocator              func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnUCDisposeCollator                     func(unsafe.Pointer) int
+	_fnUCDisposeTextBreakLocator             func(unsafe.Pointer) int
+	_fnUCFindTextBreak                       func(unsafe.Pointer, uint, uint, *uint16, uint, uint, *uint) int
+	_fnUCGetCharProperty                     func(*uint16, uint, int, *uint) int
+	_fnUCGetCollationKey                     func(unsafe.Pointer, *uint16, uint, uint, *uint, *uint) int
 	// @function UCGetUnicodeScalarValueForSurrogatePair Returns the UTF-32 value corresponding to the surrogate pair passed in. @param surrogateHigh  The high surrogate character.  If this parameter is not a valid high surrogate character, the behavior is undefined. @param surrogateLow  The low surrogate character.  If this parameter is not a valid low surrogate character, the behavior is undefined. @result The UTF-32 value for the surrogate pair.
 	_fnUCGetUnicodeScalarValueForSurrogatePair func(uint16, uint16) uint
 	// @function UCIsSurrogateHighCharacter Reports whether or not the character is a high surrogate. @param character  The character to be checked. @result true, if character is a high surrogate, otherwise false.
 	_fnUCIsSurrogateHighCharacter func(uint16) uint8
 	// @function UCIsSurrogateLowCharacter Reports whether or not the character is a low surrogate. @param character  The character to be checked. @result true, if character is a low surrogate, otherwise false.
-	_fnUCIsSurrogateLowCharacter func(uint16) uint8
-	_fnUCKeyTranslate func(*UCKeyboardLayout, uint16, uint16, uint, uint, uint, *uint, uint, *uint, *uint16) int
-	_fnUCTypeSelectAddKeyToSelector func(unsafe.Pointer, unsafe.Pointer, float64, *uint8) int
-	_fnUCTypeSelectCompare func(unsafe.Pointer, unsafe.Pointer, *int) int
-	_fnUCTypeSelectCreateSelector func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnUCTypeSelectFindItem func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnUCIsSurrogateLowCharacter     func(uint16) uint8
+	_fnUCKeyTranslate                func(*UCKeyboardLayout, uint16, uint16, uint, uint, uint, *uint, uint, *uint, *uint16) int
+	_fnUCTypeSelectAddKeyToSelector  func(unsafe.Pointer, unsafe.Pointer, float64, *uint8) int
+	_fnUCTypeSelectCompare           func(unsafe.Pointer, unsafe.Pointer, *int) int
+	_fnUCTypeSelectCreateSelector    func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnUCTypeSelectFindItem          func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
 	_fnUCTypeSelectFlushSelectorData func(unsafe.Pointer) int
-	_fnUCTypeSelectReleaseSelector func(unsafe.Pointer) int
-	_fnUCTypeSelectWalkList func(unsafe.Pointer, unsafe.Pointer, uint16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnUCTypeSelectWouldResetBuffer func(unsafe.Pointer, unsafe.Pointer, float64) uint8
+	_fnUCTypeSelectReleaseSelector   func(unsafe.Pointer) int
+	_fnUCTypeSelectWalkList          func(unsafe.Pointer, unsafe.Pointer, uint16, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnUCTypeSelectWouldResetBuffer  func(unsafe.Pointer, unsafe.Pointer, float64) uint8
 	// @brief Convert an signed 64 bit integer to a long double @param	value	a \c UInt64 value @result	a long double equivalent to double
 	_fnUInt64ToLongDouble func(uint64) float64
 	// @brief	Coerces a \c UInt64 -> \c SInt64 @param	value	a \c UInt64 value @result	the result of coercing value into a \c SInt64; if value is > SIntMax() then a negavite value
-	_fnUInt64ToSInt64 func(uint64) int64
-	_fnUInt64ToUnsignedWide func(uint64) unsafe.Pointer
-	_fnUncaptureComponent func(*ComponentRecord) int16
-	_fnUnflattenCollection func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnUnflattenCollectionFromHdl func(unsafe.Pointer, *string) int16
-	_fnUnique1ID func(uint) int16
-	_fnUniqueID func(uint) int16
-	_fnUnregisterComponent func(*ComponentRecord) int16
-	_fnUnsignedFixedMulDiv func(uint, uint, uint) uint
-	_fnUnsignedWideToUInt64 func(unsafe.Pointer) uint64
-	_fnUpTime func() unsafe.Pointer
-	_fnUpdateResFile func(int)
+	_fnUInt64ToSInt64                  func(uint64) int64
+	_fnUInt64ToUnsignedWide            func(uint64) unsafe.Pointer
+	_fnUncaptureComponent              func(*ComponentRecord) int16
+	_fnUnflattenCollection             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnUnflattenCollectionFromHdl      func(unsafe.Pointer, *string) int16
+	_fnUnique1ID                       func(uint) int16
+	_fnUniqueID                        func(uint) int16
+	_fnUnregisterComponent             func(*ComponentRecord) int16
+	_fnUnsignedFixedMulDiv             func(uint, uint, uint) uint
+	_fnUnsignedWideToUInt64            func(unsafe.Pointer) uint64
+	_fnUpTime                          func() unsafe.Pointer
+	_fnUpdateResFile                   func(int)
 	_fnUpgradeScriptInfoToTextEncoding func(int16, int16, int16, *uint8, *uint) int
-	_fnUseResFile func(int)
-	_fnWideAdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnWideBitShift func(unsafe.Pointer, int) unsafe.Pointer
-	_fnWideCompare func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnWideDivide func(unsafe.Pointer, int, *int) int
-	_fnWideMultiply func(int, int, unsafe.Pointer) unsafe.Pointer
-	_fnWideNegate func(unsafe.Pointer) unsafe.Pointer
-	_fnWideShift func(unsafe.Pointer, int) unsafe.Pointer
-	_fnWideSquareRoot func(unsafe.Pointer) uint
-	_fnWideSubtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnWideToSInt64 func(unsafe.Pointer) int64
-	_fnWideWideDivide func(unsafe.Pointer, int, *int) unsafe.Pointer
-	_fnWritePartialResource func(*string, int, unsafe.Pointer, int)
-	_fnWriteResource func(*string)
-	_fnX2Fix func(float64) int
-	_fnX2Frac func(float64) int
-	_fnYieldToAnyThread func() int16
-	_fnYieldToThread func(uint) int16
-// Deprecated: No longer useful (always true)
+	_fnUseResFile                      func(int)
+	_fnWideAdd                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnWideBitShift                    func(unsafe.Pointer, int) unsafe.Pointer
+	_fnWideCompare                     func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnWideDivide                      func(unsafe.Pointer, int, *int) int
+	_fnWideMultiply                    func(int, int, unsafe.Pointer) unsafe.Pointer
+	_fnWideNegate                      func(unsafe.Pointer) unsafe.Pointer
+	_fnWideShift                       func(unsafe.Pointer, int) unsafe.Pointer
+	_fnWideSquareRoot                  func(unsafe.Pointer) uint
+	_fnWideSubtract                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnWideToSInt64                    func(unsafe.Pointer) int64
+	_fnWideWideDivide                  func(unsafe.Pointer, int, *int) unsafe.Pointer
+	_fnWritePartialResource            func(*string, int, unsafe.Pointer, int)
+	_fnWriteResource                   func(*string)
+	_fnX2Fix                           func(float64) int
+	_fnX2Frac                          func(float64) int
+	_fnYieldToAnyThread                func() int16
+	_fnYieldToThread                   func(uint) int16
+	// Deprecated: No longer useful (always true)
 	__MPIsFullyInitialized func() uint8
-// Deprecated: Use libDispatch
+	// Deprecated: Use libDispatch
 	__MPLibraryIsCompatible func(string, uint, uint, uint, uint) uint8
-// Deprecated: No longer useful
+	// Deprecated: No longer useful
 	__MPLibraryVersion func(string, *uint, *uint, *uint, *uint)
-	_annuity func(float64, float64) float64
-	_compound func(float64, float64) float64
-	_dec2f func(*Decimal) float32
-	_dec2l func(*Decimal) int
-	_dec2num func(*Decimal) float64
-	_dec2numl func(*Decimal) float64
-	_dec2s func(*Decimal) int16
-	_dec2str func(*Decform, *Decimal, string)
-	_dtox80 func(*float64, unsafe.Pointer)
-	_ldtox80 func(unsafe.Pointer, unsafe.Pointer)
-	_num2dec func(*Decform, float64, *Decimal)
-	_num2decl func(*Decform, float64, *Decimal)
-	_numtostring func(int, string)
-	_randomx func(*float64) float64
-	_relation func(float64, float64) int16
-	_relationl func(float64, float64) int16
-	_str2dec func(string, *int16, *Decimal, *int16)
-	_x80tod func(unsafe.Pointer) float64
-	_x80told func(unsafe.Pointer, unsafe.Pointer)
+	_annuity           func(float64, float64) float64
+	_compound          func(float64, float64) float64
+	_dec2f             func(*Decimal) float32
+	_dec2l             func(*Decimal) int
+	_dec2num           func(*Decimal) float64
+	_dec2numl          func(*Decimal) float64
+	_dec2s             func(*Decimal) int16
+	_dec2str           func(*Decform, *Decimal, string)
+	_dtox80            func(*float64, unsafe.Pointer)
+	_ldtox80           func(unsafe.Pointer, unsafe.Pointer)
+	_num2dec           func(*Decform, float64, *Decimal)
+	_num2decl          func(*Decform, float64, *Decimal)
+	_numtostring       func(int, string)
+	_randomx           func(*float64) float64
+	_relation          func(float64, float64) int16
+	_relationl         func(float64, float64) int16
+	_str2dec           func(string, *int16, *Decimal, *int16)
+	_x80tod            func(unsafe.Pointer) float64
+	_x80told           func(unsafe.Pointer, unsafe.Pointer)
 )
 
 func AbsoluteDeltaToDuration(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) int {
@@ -4770,4 +4770,3 @@ func X80tod(x80 unsafe.Pointer) float64 {
 func X80told(x80 unsafe.Pointer, x unsafe.Pointer) {
 	_x80told(x80, x)
 }
-

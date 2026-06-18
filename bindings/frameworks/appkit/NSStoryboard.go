@@ -16,13 +16,13 @@ type NSStoryboard struct {
 }
 
 var (
-	_clsNSStoryboard = _objcClass("NSStoryboard")
-	_nSStoryboardSelStoryboardWithNameBundle = objc.RegisterName("storyboardWithName:bundle:")
-	_nSStoryboardSelInstantiateInitialController = objc.RegisterName("instantiateInitialController")
-	_nSStoryboardSelInstantiateInitialControllerWithCreator = objc.RegisterName("instantiateInitialControllerWithCreator:")
-	_nSStoryboardSelInstantiateControllerWithIdentifier = objc.RegisterName("instantiateControllerWithIdentifier:")
+	_clsNSStoryboard                                           = _objcClass("NSStoryboard")
+	_nSStoryboardSelStoryboardWithNameBundle                   = objc.RegisterName("storyboardWithName:bundle:")
+	_nSStoryboardSelInstantiateInitialController               = objc.RegisterName("instantiateInitialController")
+	_nSStoryboardSelInstantiateInitialControllerWithCreator    = objc.RegisterName("instantiateInitialControllerWithCreator:")
+	_nSStoryboardSelInstantiateControllerWithIdentifier        = objc.RegisterName("instantiateControllerWithIdentifier:")
 	_nSStoryboardSelInstantiateControllerWithIdentifierCreator = objc.RegisterName("instantiateControllerWithIdentifier:creator:")
-	_nSStoryboardSelMainStoryboard = objc.RegisterName("mainStoryboard")
+	_nSStoryboardSelMainStoryboard                             = objc.RegisterName("mainStoryboard")
 )
 
 func NSStoryboardFromID(id objc.ID) *NSStoryboard {
@@ -37,7 +37,9 @@ func NSStoryboardFromID(id objc.ID) *NSStoryboard {
 
 func NSStoryboardStoryboardWithNameBundle(name *foundation.NSString, storyboardBundleOrNil *foundation.NSBundle) *NSStoryboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStoryboard), _nSStoryboardSelStoryboardWithNameBundle, name.Ptr(), storyboardBundleOrNil.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardFromID(_ret)
 }
 
@@ -83,7 +85,8 @@ func (o *NSStoryboard) InstantiateControllerWithIdentifierCreator(identifier *fo
 
 func NSStoryboardMainStoryboard() *NSStoryboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStoryboard), _nSStoryboardSelMainStoryboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardFromID(_ret)
 }
-

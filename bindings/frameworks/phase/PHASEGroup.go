@@ -16,23 +16,23 @@ type PHASEGroup struct {
 }
 
 var (
-	_clsPHASEGroup = _objcClass("PHASEGroup")
-	_pHASEGroupSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_pHASEGroupSelRegisterWithEngine = objc.RegisterName("registerWithEngine:")
-	_pHASEGroupSelUnregisterFromEngine = objc.RegisterName("unregisterFromEngine")
+	_clsPHASEGroup                          = _objcClass("PHASEGroup")
+	_pHASEGroupSelInitWithIdentifier        = objc.RegisterName("initWithIdentifier:")
+	_pHASEGroupSelRegisterWithEngine        = objc.RegisterName("registerWithEngine:")
+	_pHASEGroupSelUnregisterFromEngine      = objc.RegisterName("unregisterFromEngine")
 	_pHASEGroupSelFadeGainDurationCurveType = objc.RegisterName("fadeGain:duration:curveType:")
 	_pHASEGroupSelFadeRateDurationCurveType = objc.RegisterName("fadeRate:duration:curveType:")
-	_pHASEGroupSelMute = objc.RegisterName("mute")
-	_pHASEGroupSelUnmute = objc.RegisterName("unmute")
-	_pHASEGroupSelSolo = objc.RegisterName("solo")
-	_pHASEGroupSelUnsolo = objc.RegisterName("unsolo")
-	_pHASEGroupSelIdentifier = objc.RegisterName("identifier")
-	_pHASEGroupSelGain = objc.RegisterName("gain")
-	_pHASEGroupSelSetGain = objc.RegisterName("setGain:")
-	_pHASEGroupSelRate = objc.RegisterName("rate")
-	_pHASEGroupSelSetRate = objc.RegisterName("setRate:")
-	_pHASEGroupSelIsMuted = objc.RegisterName("isMuted")
-	_pHASEGroupSelIsSoloed = objc.RegisterName("isSoloed")
+	_pHASEGroupSelMute                      = objc.RegisterName("mute")
+	_pHASEGroupSelUnmute                    = objc.RegisterName("unmute")
+	_pHASEGroupSelSolo                      = objc.RegisterName("solo")
+	_pHASEGroupSelUnsolo                    = objc.RegisterName("unsolo")
+	_pHASEGroupSelIdentifier                = objc.RegisterName("identifier")
+	_pHASEGroupSelGain                      = objc.RegisterName("gain")
+	_pHASEGroupSelSetGain                   = objc.RegisterName("setGain:")
+	_pHASEGroupSelRate                      = objc.RegisterName("rate")
+	_pHASEGroupSelSetRate                   = objc.RegisterName("setRate:")
+	_pHASEGroupSelIsMuted                   = objc.RegisterName("isMuted")
+	_pHASEGroupSelIsSoloed                  = objc.RegisterName("isSoloed")
 )
 
 func PHASEGroupFromID(id objc.ID) *PHASEGroup {
@@ -48,7 +48,9 @@ func PHASEGroupFromID(id objc.ID) *PHASEGroup {
 // @method initWithIdentifier: @abstract Create a new group. @param identifier The identifier that uniquely represents this group.
 func (o *PHASEGroup) InitWithIdentifier(identifier *foundation.NSString) *PHASEGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGroupFromID(_ret)
 }
 
@@ -95,7 +97,9 @@ func (o *PHASEGroup) Unsolo() {
 // @property identifier @abstract The identifier that uniquely represents this group.
 func (o *PHASEGroup) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGroupSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,4 +134,3 @@ func (o *PHASEGroup) IsSoloed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHASEGroupSelIsSoloed)
 	return _ret
 }
-

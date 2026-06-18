@@ -17,22 +17,22 @@ type NSScriptCommandDescription struct {
 }
 
 var (
-	_clsNSScriptCommandDescription = _objcClass("NSScriptCommandDescription")
+	_clsNSScriptCommandDescription                                       = _objcClass("NSScriptCommandDescription")
 	_nSScriptCommandDescriptionSelInitWithSuiteNameCommandNameDictionary = objc.RegisterName("initWithSuiteName:commandName:dictionary:")
-	_nSScriptCommandDescriptionSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScriptCommandDescriptionSelTypeForArgumentWithName = objc.RegisterName("typeForArgumentWithName:")
-	_nSScriptCommandDescriptionSelAppleEventCodeForArgumentWithName = objc.RegisterName("appleEventCodeForArgumentWithName:")
-	_nSScriptCommandDescriptionSelIsOptionalArgumentWithName = objc.RegisterName("isOptionalArgumentWithName:")
-	_nSScriptCommandDescriptionSelCreateCommandInstance = objc.RegisterName("createCommandInstance")
-	_nSScriptCommandDescriptionSelCreateCommandInstanceWithZone = objc.RegisterName("createCommandInstanceWithZone:")
-	_nSScriptCommandDescriptionSelSuiteName = objc.RegisterName("suiteName")
-	_nSScriptCommandDescriptionSelCommandName = objc.RegisterName("commandName")
-	_nSScriptCommandDescriptionSelAppleEventClassCode = objc.RegisterName("appleEventClassCode")
-	_nSScriptCommandDescriptionSelAppleEventCode = objc.RegisterName("appleEventCode")
-	_nSScriptCommandDescriptionSelCommandClassName = objc.RegisterName("commandClassName")
-	_nSScriptCommandDescriptionSelReturnType = objc.RegisterName("returnType")
-	_nSScriptCommandDescriptionSelAppleEventCodeForReturnType = objc.RegisterName("appleEventCodeForReturnType")
-	_nSScriptCommandDescriptionSelArgumentNames = objc.RegisterName("argumentNames")
+	_nSScriptCommandDescriptionSelInitWithCoder                          = objc.RegisterName("initWithCoder:")
+	_nSScriptCommandDescriptionSelTypeForArgumentWithName                = objc.RegisterName("typeForArgumentWithName:")
+	_nSScriptCommandDescriptionSelAppleEventCodeForArgumentWithName      = objc.RegisterName("appleEventCodeForArgumentWithName:")
+	_nSScriptCommandDescriptionSelIsOptionalArgumentWithName             = objc.RegisterName("isOptionalArgumentWithName:")
+	_nSScriptCommandDescriptionSelCreateCommandInstance                  = objc.RegisterName("createCommandInstance")
+	_nSScriptCommandDescriptionSelCreateCommandInstanceWithZone          = objc.RegisterName("createCommandInstanceWithZone:")
+	_nSScriptCommandDescriptionSelSuiteName                              = objc.RegisterName("suiteName")
+	_nSScriptCommandDescriptionSelCommandName                            = objc.RegisterName("commandName")
+	_nSScriptCommandDescriptionSelAppleEventClassCode                    = objc.RegisterName("appleEventClassCode")
+	_nSScriptCommandDescriptionSelAppleEventCode                         = objc.RegisterName("appleEventCode")
+	_nSScriptCommandDescriptionSelCommandClassName                       = objc.RegisterName("commandClassName")
+	_nSScriptCommandDescriptionSelReturnType                             = objc.RegisterName("returnType")
+	_nSScriptCommandDescriptionSelAppleEventCodeForReturnType            = objc.RegisterName("appleEventCodeForReturnType")
+	_nSScriptCommandDescriptionSelArgumentNames                          = objc.RegisterName("argumentNames")
 )
 
 func NSScriptCommandDescriptionFromID(id objc.ID) *NSScriptCommandDescription {
@@ -47,19 +47,25 @@ func NSScriptCommandDescriptionFromID(id objc.ID) *NSScriptCommandDescription {
 
 func (o *NSScriptCommandDescription) InitWithSuiteNameCommandNameDictionary(suiteName *NSString, commandName *NSString, commandDeclaration *NSDictionary[objc.ID, objc.ID]) *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelInitWithSuiteNameCommandNameDictionary, suiteName.Ptr(), commandName.Ptr(), commandDeclaration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) InitWithCoder(inCoder *NSCoder) *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) TypeForArgumentWithName(argumentName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelTypeForArgumentWithName, argumentName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -75,25 +81,33 @@ func (o *NSScriptCommandDescription) IsOptionalArgumentWithName(argumentName *NS
 
 func (o *NSScriptCommandDescription) CreateCommandInstance() *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCreateCommandInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.Pointer) *NSScriptCommand {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCreateCommandInstanceWithZone, zone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) SuiteName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelSuiteName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) CommandName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCommandName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -109,13 +123,17 @@ func (o *NSScriptCommandDescription) AppleEventCode() uint {
 
 func (o *NSScriptCommandDescription) CommandClassName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelCommandClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptCommandDescription) ReturnType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelReturnType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -126,7 +144,8 @@ func (o *NSScriptCommandDescription) AppleEventCodeForReturnType() uint {
 
 func (o *NSScriptCommandDescription) ArgumentNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptCommandDescriptionSelArgumentNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
-

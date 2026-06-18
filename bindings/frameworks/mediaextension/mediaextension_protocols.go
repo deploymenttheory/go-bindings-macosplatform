@@ -74,4 +74,3 @@ type MEVideoDecoderExtension interface {
 	Init() unsafe.Pointer
 	VideoDecoderWithCodecTypeVideoFormatDescriptionVideoDecoderSpecificationsExtensionDecoderPixelBufferManagerError(codecType uint, videoFormatDescription unsafe.Pointer, videoDecoderSpecifications *foundation.NSDictionary[*foundation.NSString, objc.ID], extensionDecoderPixelBufferManager *MEVideoDecoderPixelBufferManager) (MEVideoDecoder, error)
 }
-

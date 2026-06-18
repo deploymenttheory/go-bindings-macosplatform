@@ -16,11 +16,11 @@ type AVAssetDownloadContentConfiguration struct {
 }
 
 var (
-	_clsAVAssetDownloadContentConfiguration = _objcClass("AVAssetDownloadContentConfiguration")
-	_aVAssetDownloadContentConfigurationSelVariantQualifiers = objc.RegisterName("variantQualifiers")
+	_clsAVAssetDownloadContentConfiguration                     = _objcClass("AVAssetDownloadContentConfiguration")
+	_aVAssetDownloadContentConfigurationSelVariantQualifiers    = objc.RegisterName("variantQualifiers")
 	_aVAssetDownloadContentConfigurationSelSetVariantQualifiers = objc.RegisterName("setVariantQualifiers:")
-	_aVAssetDownloadContentConfigurationSelMediaSelections = objc.RegisterName("mediaSelections")
-	_aVAssetDownloadContentConfigurationSelSetMediaSelections = objc.RegisterName("setMediaSelections:")
+	_aVAssetDownloadContentConfigurationSelMediaSelections      = objc.RegisterName("mediaSelections")
+	_aVAssetDownloadContentConfigurationSelSetMediaSelections   = objc.RegisterName("setMediaSelections:")
 )
 
 func AVAssetDownloadContentConfigurationFromID(id objc.ID) *AVAssetDownloadContentConfiguration {
@@ -36,7 +36,9 @@ func AVAssetDownloadContentConfigurationFromID(id objc.ID) *AVAssetDownloadConte
 // An array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
 func (o *AVAssetDownloadContentConfiguration) VariantQualifiers() *foundation.NSArray[*AVAssetVariantQualifier] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadContentConfigurationSelVariantQualifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetVariantQualifier](_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *AVAssetDownloadContentConfiguration) SetVariantQualifiers(variantQualif
 // An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
 func (o *AVAssetDownloadContentConfiguration) MediaSelections() *foundation.NSArray[*AVMediaSelection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadContentConfigurationSelMediaSelections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMediaSelection](_ret)
 }
 
 func (o *AVAssetDownloadContentConfiguration) SetMediaSelections(mediaSelections *foundation.NSArray[*AVMediaSelection]) {
 	o.Ptr().Send(_aVAssetDownloadContentConfigurationSelSetMediaSelections, mediaSelections.Ptr())
 }
-

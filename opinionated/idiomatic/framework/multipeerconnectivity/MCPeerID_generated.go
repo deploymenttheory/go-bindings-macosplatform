@@ -54,4 +54,3 @@ type PeerIDable interface {
 }
 
 var _ PeerIDable = (*PeerID)(nil)
-

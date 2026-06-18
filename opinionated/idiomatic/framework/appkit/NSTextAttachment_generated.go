@@ -218,4 +218,3 @@ type TextAttachmentable interface {
 }
 
 var _ TextAttachmentable = (*TextAttachment)(nil)
-

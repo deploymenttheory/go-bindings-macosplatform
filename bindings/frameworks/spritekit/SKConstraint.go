@@ -17,21 +17,21 @@ type SKConstraint struct {
 }
 
 var (
-	_clsSKConstraint = _objcClass("SKConstraint")
-	_sKConstraintSelPositionX = objc.RegisterName("positionX:")
-	_sKConstraintSelPositionY = objc.RegisterName("positionY:")
-	_sKConstraintSelPositionXY = objc.RegisterName("positionX:Y:")
-	_sKConstraintSelDistanceToNode = objc.RegisterName("distance:toNode:")
-	_sKConstraintSelDistanceToPoint = objc.RegisterName("distance:toPoint:")
-	_sKConstraintSelDistanceToPointInNode = objc.RegisterName("distance:toPoint:inNode:")
-	_sKConstraintSelZRotation = objc.RegisterName("zRotation:")
-	_sKConstraintSelOrientToNodeOffset = objc.RegisterName("orientToNode:offset:")
-	_sKConstraintSelOrientToPointOffset = objc.RegisterName("orientToPoint:offset:")
+	_clsSKConstraint                          = _objcClass("SKConstraint")
+	_sKConstraintSelPositionX                 = objc.RegisterName("positionX:")
+	_sKConstraintSelPositionY                 = objc.RegisterName("positionY:")
+	_sKConstraintSelPositionXY                = objc.RegisterName("positionX:Y:")
+	_sKConstraintSelDistanceToNode            = objc.RegisterName("distance:toNode:")
+	_sKConstraintSelDistanceToPoint           = objc.RegisterName("distance:toPoint:")
+	_sKConstraintSelDistanceToPointInNode     = objc.RegisterName("distance:toPoint:inNode:")
+	_sKConstraintSelZRotation                 = objc.RegisterName("zRotation:")
+	_sKConstraintSelOrientToNodeOffset        = objc.RegisterName("orientToNode:offset:")
+	_sKConstraintSelOrientToPointOffset       = objc.RegisterName("orientToPoint:offset:")
 	_sKConstraintSelOrientToPointInNodeOffset = objc.RegisterName("orientToPoint:inNode:offset:")
-	_sKConstraintSelEnabled = objc.RegisterName("enabled")
-	_sKConstraintSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sKConstraintSelReferenceNode = objc.RegisterName("referenceNode")
-	_sKConstraintSelSetReferenceNode = objc.RegisterName("setReferenceNode:")
+	_sKConstraintSelEnabled                   = objc.RegisterName("enabled")
+	_sKConstraintSelSetEnabled                = objc.RegisterName("setEnabled:")
+	_sKConstraintSelReferenceNode             = objc.RegisterName("referenceNode")
+	_sKConstraintSelSetReferenceNode          = objc.RegisterName("setReferenceNode:")
 )
 
 func SKConstraintFromID(id objc.ID) *SKConstraint {
@@ -47,64 +47,84 @@ func SKConstraintFromID(id objc.ID) *SKConstraint {
 // Constrain the node's position to a range
 func SKConstraintPositionX(range_ *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionX, range_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintPositionY(range_ *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionY, range_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintPositionXY(xRange *SKRange, yRange *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelPositionXY, xRange.Ptr(), yRange.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 // Constrain the node's position to be within a distance of a point or node
 func SKConstraintDistanceToNode(range_ *SKRange, node *SKNode) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToNode, range_.Ptr(), node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintDistanceToPoint(range_ *SKRange, point corefoundation.CGPoint) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToPoint, range_.Ptr(), point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintDistanceToPointInNode(range_ *SKRange, point corefoundation.CGPoint, node *SKNode) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelDistanceToPointInNode, range_.Ptr(), point, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 // Constrain the node's rotation to a range
 func SKConstraintZRotation(zRange *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelZRotation, zRange.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 // Constrain the node's rotation to orient to a point or node
 func SKConstraintOrientToNodeOffset(node *SKNode, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToNodeOffset, node.Ptr(), radians.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintOrientToPointOffset(point corefoundation.CGPoint, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToPointOffset, point, radians.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
 func SKConstraintOrientToPointInNodeOffset(point corefoundation.CGPoint, node *SKNode, radians *SKRange) *SKConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKConstraint), _sKConstraintSelOrientToPointInNodeOffset, point, node.Ptr(), radians.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKConstraintFromID(_ret)
 }
 
@@ -119,11 +139,12 @@ func (o *SKConstraint) SetEnabled(enabled bool) {
 
 func (o *SKConstraint) ReferenceNode() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKConstraintSelReferenceNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
 func (o *SKConstraint) SetReferenceNode(referenceNode *SKNode) {
 	o.Ptr().Send(_sKConstraintSelSetReferenceNode, referenceNode.Ptr())
 }
-

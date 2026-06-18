@@ -16,12 +16,12 @@ type MLCTensorParameter struct {
 }
 
 var (
-	_clsMLCTensorParameter = _objcClass("MLCTensorParameter")
-	_mLCTensorParameterSelParameterWithTensor = objc.RegisterName("parameterWithTensor:")
+	_clsMLCTensorParameter                                 = _objcClass("MLCTensorParameter")
+	_mLCTensorParameterSelParameterWithTensor              = objc.RegisterName("parameterWithTensor:")
 	_mLCTensorParameterSelParameterWithTensorOptimizerData = objc.RegisterName("parameterWithTensor:optimizerData:")
-	_mLCTensorParameterSelTensor = objc.RegisterName("tensor")
-	_mLCTensorParameterSelIsUpdatable = objc.RegisterName("isUpdatable")
-	_mLCTensorParameterSelSetIsUpdatable = objc.RegisterName("setIsUpdatable:")
+	_mLCTensorParameterSelTensor                           = objc.RegisterName("tensor")
+	_mLCTensorParameterSelIsUpdatable                      = objc.RegisterName("isUpdatable")
+	_mLCTensorParameterSelSetIsUpdatable                   = objc.RegisterName("setIsUpdatable:")
 )
 
 func MLCTensorParameterFromID(id objc.ID) *MLCTensorParameter {
@@ -37,21 +37,27 @@ func MLCTensorParameterFromID(id objc.ID) *MLCTensorParameter {
 // @abstract   Create a tensor parameter @param      tensor            The unedrlying tensor @return     A new tensor parameter object
 func MLCTensorParameterParameterWithTensor(tensor *MLCTensor) *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorParameter), _mLCTensorParameterSelParameterWithTensor, tensor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @abstract   Create a tensor parameter @param      tensor            The unedrlying tensor @param      optimizerData   The optimizer data needed for this input tensor @return     A new tensor parameter object
 func MLCTensorParameterParameterWithTensorOptimizerData(tensor *MLCTensor, optimizerData *foundation.NSArray[*MLCTensorData]) *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorParameter), _mLCTensorParameterSelParameterWithTensorOptimizerData, tensor.Ptr(), optimizerData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   tensor @abstract   The underlying tensor
 func (o *MLCTensorParameter) Tensor() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTensorParameterSelTensor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *MLCTensorParameter) IsUpdatable() bool {
 func (o *MLCTensorParameter) SetIsUpdatable(isUpdatable bool) {
 	o.Ptr().Send(_mLCTensorParameterSelSetIsUpdatable, isUpdatable)
 }
-

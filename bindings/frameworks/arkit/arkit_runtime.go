@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_arkitLib uintptr
-	_loadOnce sync.Once
+	_arkitLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,45 +49,103 @@ func _loadLibrary() {
 		return
 	}
 	_register("ar_anchor_get_identifier", func() { purego.RegisterLibFunc(&_ar_anchor_get_identifier, _arkitLib, "ar_anchor_get_identifier") })
-	_register("ar_anchor_get_origin_from_anchor_transform", func() { purego.RegisterLibFunc(&_ar_anchor_get_origin_from_anchor_transform, _arkitLib, "ar_anchor_get_origin_from_anchor_transform") })
+	_register("ar_anchor_get_origin_from_anchor_transform", func() {
+		purego.RegisterLibFunc(&_ar_anchor_get_origin_from_anchor_transform, _arkitLib, "ar_anchor_get_origin_from_anchor_transform")
+	})
 	_register("ar_anchor_get_timestamp", func() { purego.RegisterLibFunc(&_ar_anchor_get_timestamp, _arkitLib, "ar_anchor_get_timestamp") })
-	_register("ar_authorization_result_get_authorization_type", func() { purego.RegisterLibFunc(&_ar_authorization_result_get_authorization_type, _arkitLib, "ar_authorization_result_get_authorization_type") })
-	_register("ar_authorization_result_get_status", func() { purego.RegisterLibFunc(&_ar_authorization_result_get_status, _arkitLib, "ar_authorization_result_get_status") })
-	_register("ar_authorization_results_enumerate_results", func() { purego.RegisterLibFunc(&_ar_authorization_results_enumerate_results, _arkitLib, "ar_authorization_results_enumerate_results") })
-	_register("ar_authorization_results_enumerate_results_f", func() { purego.RegisterLibFunc(&_ar_authorization_results_enumerate_results_f, _arkitLib, "ar_authorization_results_enumerate_results_f") })
-	_register("ar_authorization_results_get_count", func() { purego.RegisterLibFunc(&_ar_authorization_results_get_count, _arkitLib, "ar_authorization_results_get_count") })
-	_register("ar_data_provider_get_required_authorization_type", func() { purego.RegisterLibFunc(&_ar_data_provider_get_required_authorization_type, _arkitLib, "ar_data_provider_get_required_authorization_type") })
+	_register("ar_authorization_result_get_authorization_type", func() {
+		purego.RegisterLibFunc(&_ar_authorization_result_get_authorization_type, _arkitLib, "ar_authorization_result_get_authorization_type")
+	})
+	_register("ar_authorization_result_get_status", func() {
+		purego.RegisterLibFunc(&_ar_authorization_result_get_status, _arkitLib, "ar_authorization_result_get_status")
+	})
+	_register("ar_authorization_results_enumerate_results", func() {
+		purego.RegisterLibFunc(&_ar_authorization_results_enumerate_results, _arkitLib, "ar_authorization_results_enumerate_results")
+	})
+	_register("ar_authorization_results_enumerate_results_f", func() {
+		purego.RegisterLibFunc(&_ar_authorization_results_enumerate_results_f, _arkitLib, "ar_authorization_results_enumerate_results_f")
+	})
+	_register("ar_authorization_results_get_count", func() {
+		purego.RegisterLibFunc(&_ar_authorization_results_get_count, _arkitLib, "ar_authorization_results_get_count")
+	})
+	_register("ar_data_provider_get_required_authorization_type", func() {
+		purego.RegisterLibFunc(&_ar_data_provider_get_required_authorization_type, _arkitLib, "ar_data_provider_get_required_authorization_type")
+	})
 	_register("ar_data_provider_get_state", func() { purego.RegisterLibFunc(&_ar_data_provider_get_state, _arkitLib, "ar_data_provider_get_state") })
-	_register("ar_data_providers_add_data_provider", func() { purego.RegisterLibFunc(&_ar_data_providers_add_data_provider, _arkitLib, "ar_data_providers_add_data_provider") })
-	_register("ar_data_providers_add_data_providers", func() { purego.RegisterLibFunc(&_ar_data_providers_add_data_providers, _arkitLib, "ar_data_providers_add_data_providers") })
+	_register("ar_data_providers_add_data_provider", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_add_data_provider, _arkitLib, "ar_data_providers_add_data_provider")
+	})
+	_register("ar_data_providers_add_data_providers", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_add_data_providers, _arkitLib, "ar_data_providers_add_data_providers")
+	})
 	_register("ar_data_providers_create", func() { purego.RegisterLibFunc(&_ar_data_providers_create, _arkitLib, "ar_data_providers_create") })
-	_register("ar_data_providers_enumerate_data_providers", func() { purego.RegisterLibFunc(&_ar_data_providers_enumerate_data_providers, _arkitLib, "ar_data_providers_enumerate_data_providers") })
-	_register("ar_data_providers_enumerate_data_providers_f", func() { purego.RegisterLibFunc(&_ar_data_providers_enumerate_data_providers_f, _arkitLib, "ar_data_providers_enumerate_data_providers_f") })
-	_register("ar_data_providers_get_count", func() { purego.RegisterLibFunc(&_ar_data_providers_get_count, _arkitLib, "ar_data_providers_get_count") })
-	_register("ar_data_providers_remove_data_provider", func() { purego.RegisterLibFunc(&_ar_data_providers_remove_data_provider, _arkitLib, "ar_data_providers_remove_data_provider") })
-	_register("ar_data_providers_remove_data_providers", func() { purego.RegisterLibFunc(&_ar_data_providers_remove_data_providers, _arkitLib, "ar_data_providers_remove_data_providers") })
+	_register("ar_data_providers_enumerate_data_providers", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_enumerate_data_providers, _arkitLib, "ar_data_providers_enumerate_data_providers")
+	})
+	_register("ar_data_providers_enumerate_data_providers_f", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_enumerate_data_providers_f, _arkitLib, "ar_data_providers_enumerate_data_providers_f")
+	})
+	_register("ar_data_providers_get_count", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_get_count, _arkitLib, "ar_data_providers_get_count")
+	})
+	_register("ar_data_providers_remove_data_provider", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_remove_data_provider, _arkitLib, "ar_data_providers_remove_data_provider")
+	})
+	_register("ar_data_providers_remove_data_providers", func() {
+		purego.RegisterLibFunc(&_ar_data_providers_remove_data_providers, _arkitLib, "ar_data_providers_remove_data_providers")
+	})
 	_register("ar_device_anchor_create", func() { purego.RegisterLibFunc(&_ar_device_anchor_create, _arkitLib, "ar_device_anchor_create") })
-	_register("ar_device_anchor_get_identifier", func() { purego.RegisterLibFunc(&_ar_device_anchor_get_identifier, _arkitLib, "ar_device_anchor_get_identifier") })
-	_register("ar_device_anchor_get_origin_from_anchor_transform", func() { purego.RegisterLibFunc(&_ar_device_anchor_get_origin_from_anchor_transform, _arkitLib, "ar_device_anchor_get_origin_from_anchor_transform") })
-	_register("ar_device_anchor_get_timestamp", func() { purego.RegisterLibFunc(&_ar_device_anchor_get_timestamp, _arkitLib, "ar_device_anchor_get_timestamp") })
-	_register("ar_device_anchor_get_tracking_state", func() { purego.RegisterLibFunc(&_ar_device_anchor_get_tracking_state, _arkitLib, "ar_device_anchor_get_tracking_state") })
-	_register("ar_device_anchor_is_tracked", func() { purego.RegisterLibFunc(&_ar_device_anchor_is_tracked, _arkitLib, "ar_device_anchor_is_tracked") })
+	_register("ar_device_anchor_get_identifier", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_get_identifier, _arkitLib, "ar_device_anchor_get_identifier")
+	})
+	_register("ar_device_anchor_get_origin_from_anchor_transform", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_get_origin_from_anchor_transform, _arkitLib, "ar_device_anchor_get_origin_from_anchor_transform")
+	})
+	_register("ar_device_anchor_get_timestamp", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_get_timestamp, _arkitLib, "ar_device_anchor_get_timestamp")
+	})
+	_register("ar_device_anchor_get_tracking_state", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_get_tracking_state, _arkitLib, "ar_device_anchor_get_tracking_state")
+	})
+	_register("ar_device_anchor_is_tracked", func() {
+		purego.RegisterLibFunc(&_ar_device_anchor_is_tracked, _arkitLib, "ar_device_anchor_is_tracked")
+	})
 	_register("ar_error_copy_cf_error", func() { purego.RegisterLibFunc(&_ar_error_copy_cf_error, _arkitLib, "ar_error_copy_cf_error") })
 	_register("ar_error_get_error_code", func() { purego.RegisterLibFunc(&_ar_error_get_error_code, _arkitLib, "ar_error_get_error_code") })
 	_register("ar_release", func() { purego.RegisterLibFunc(&_ar_release, _arkitLib, "ar_release") })
 	_register("ar_retain", func() { purego.RegisterLibFunc(&_ar_retain, _arkitLib, "ar_retain") })
-	_register("ar_session_copy_data_providers", func() { purego.RegisterLibFunc(&_ar_session_copy_data_providers, _arkitLib, "ar_session_copy_data_providers") })
-	_register("ar_session_create_with_device", func() { purego.RegisterLibFunc(&_ar_session_create_with_device, _arkitLib, "ar_session_create_with_device") })
+	_register("ar_session_copy_data_providers", func() {
+		purego.RegisterLibFunc(&_ar_session_copy_data_providers, _arkitLib, "ar_session_copy_data_providers")
+	})
+	_register("ar_session_create_with_device", func() {
+		purego.RegisterLibFunc(&_ar_session_create_with_device, _arkitLib, "ar_session_create_with_device")
+	})
 	_register("ar_session_run", func() { purego.RegisterLibFunc(&_ar_session_run, _arkitLib, "ar_session_run") })
-	_register("ar_session_set_data_provider_state_change_handler", func() { purego.RegisterLibFunc(&_ar_session_set_data_provider_state_change_handler, _arkitLib, "ar_session_set_data_provider_state_change_handler") })
-	_register("ar_session_set_data_provider_state_change_handler_f", func() { purego.RegisterLibFunc(&_ar_session_set_data_provider_state_change_handler_f, _arkitLib, "ar_session_set_data_provider_state_change_handler_f") })
+	_register("ar_session_set_data_provider_state_change_handler", func() {
+		purego.RegisterLibFunc(&_ar_session_set_data_provider_state_change_handler, _arkitLib, "ar_session_set_data_provider_state_change_handler")
+	})
+	_register("ar_session_set_data_provider_state_change_handler_f", func() {
+		purego.RegisterLibFunc(&_ar_session_set_data_provider_state_change_handler_f, _arkitLib, "ar_session_set_data_provider_state_change_handler_f")
+	})
 	_register("ar_session_stop", func() { purego.RegisterLibFunc(&_ar_session_stop, _arkitLib, "ar_session_stop") })
-	_register("ar_trackable_anchor_is_tracked", func() { purego.RegisterLibFunc(&_ar_trackable_anchor_is_tracked, _arkitLib, "ar_trackable_anchor_is_tracked") })
-	_register("ar_world_tracking_configuration_create", func() { purego.RegisterLibFunc(&_ar_world_tracking_configuration_create, _arkitLib, "ar_world_tracking_configuration_create") })
-	_register("ar_world_tracking_provider_create", func() { purego.RegisterLibFunc(&_ar_world_tracking_provider_create, _arkitLib, "ar_world_tracking_provider_create") })
-	_register("ar_world_tracking_provider_get_required_authorization_type", func() { purego.RegisterLibFunc(&_ar_world_tracking_provider_get_required_authorization_type, _arkitLib, "ar_world_tracking_provider_get_required_authorization_type") })
-	_register("ar_world_tracking_provider_is_supported", func() { purego.RegisterLibFunc(&_ar_world_tracking_provider_is_supported, _arkitLib, "ar_world_tracking_provider_is_supported") })
-	_register("ar_world_tracking_provider_query_device_anchor_at_timestamp", func() { purego.RegisterLibFunc(&_ar_world_tracking_provider_query_device_anchor_at_timestamp, _arkitLib, "ar_world_tracking_provider_query_device_anchor_at_timestamp") })
+	_register("ar_trackable_anchor_is_tracked", func() {
+		purego.RegisterLibFunc(&_ar_trackable_anchor_is_tracked, _arkitLib, "ar_trackable_anchor_is_tracked")
+	})
+	_register("ar_world_tracking_configuration_create", func() {
+		purego.RegisterLibFunc(&_ar_world_tracking_configuration_create, _arkitLib, "ar_world_tracking_configuration_create")
+	})
+	_register("ar_world_tracking_provider_create", func() {
+		purego.RegisterLibFunc(&_ar_world_tracking_provider_create, _arkitLib, "ar_world_tracking_provider_create")
+	})
+	_register("ar_world_tracking_provider_get_required_authorization_type", func() {
+		purego.RegisterLibFunc(&_ar_world_tracking_provider_get_required_authorization_type, _arkitLib, "ar_world_tracking_provider_get_required_authorization_type")
+	})
+	_register("ar_world_tracking_provider_is_supported", func() {
+		purego.RegisterLibFunc(&_ar_world_tracking_provider_is_supported, _arkitLib, "ar_world_tracking_provider_is_supported")
+	})
+	_register("ar_world_tracking_provider_query_device_anchor_at_timestamp", func() {
+		purego.RegisterLibFunc(&_ar_world_tracking_provider_query_device_anchor_at_timestamp, _arkitLib, "ar_world_tracking_provider_query_device_anchor_at_timestamp")
+	})
 }
 
 func init() {

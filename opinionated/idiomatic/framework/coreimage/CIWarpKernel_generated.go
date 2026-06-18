@@ -55,4 +55,3 @@ type WarpKernelable interface {
 }
 
 var _ WarpKernelable = (*WarpKernel)(nil)
-

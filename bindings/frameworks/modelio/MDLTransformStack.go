@@ -18,22 +18,22 @@ type MDLTransformStack struct {
 }
 
 var (
-	_clsMDLTransformStack = _objcClass("MDLTransformStack")
-	_mDLTransformStackSelInit = objc.RegisterName("init")
-	_mDLTransformStackSelAddTranslateOpInverse = objc.RegisterName("addTranslateOp:inverse:")
-	_mDLTransformStackSelAddRotateXOpInverse = objc.RegisterName("addRotateXOp:inverse:")
-	_mDLTransformStackSelAddRotateYOpInverse = objc.RegisterName("addRotateYOp:inverse:")
-	_mDLTransformStackSelAddRotateZOpInverse = objc.RegisterName("addRotateZOp:inverse:")
+	_clsMDLTransformStack                        = _objcClass("MDLTransformStack")
+	_mDLTransformStackSelInit                    = objc.RegisterName("init")
+	_mDLTransformStackSelAddTranslateOpInverse   = objc.RegisterName("addTranslateOp:inverse:")
+	_mDLTransformStackSelAddRotateXOpInverse     = objc.RegisterName("addRotateXOp:inverse:")
+	_mDLTransformStackSelAddRotateYOpInverse     = objc.RegisterName("addRotateYOp:inverse:")
+	_mDLTransformStackSelAddRotateZOpInverse     = objc.RegisterName("addRotateZOp:inverse:")
 	_mDLTransformStackSelAddRotateOpOrderInverse = objc.RegisterName("addRotateOp:order:inverse:")
-	_mDLTransformStackSelAddScaleOpInverse = objc.RegisterName("addScaleOp:inverse:")
-	_mDLTransformStackSelAddMatrixOpInverse = objc.RegisterName("addMatrixOp:inverse:")
-	_mDLTransformStackSelAddOrientOpInverse = objc.RegisterName("addOrientOp:inverse:")
-	_mDLTransformStackSelAnimatedValueWithName = objc.RegisterName("animatedValueWithName:")
-	_mDLTransformStackSelFloat4x4AtTime = objc.RegisterName("float4x4AtTime:")
-	_mDLTransformStackSelDouble4x4AtTime = objc.RegisterName("double4x4AtTime:")
-	_mDLTransformStackSelCount = objc.RegisterName("count")
-	_mDLTransformStackSelKeyTimes = objc.RegisterName("keyTimes")
-	_mDLTransformStackSelTransformOps = objc.RegisterName("transformOps")
+	_mDLTransformStackSelAddScaleOpInverse       = objc.RegisterName("addScaleOp:inverse:")
+	_mDLTransformStackSelAddMatrixOpInverse      = objc.RegisterName("addMatrixOp:inverse:")
+	_mDLTransformStackSelAddOrientOpInverse      = objc.RegisterName("addOrientOp:inverse:")
+	_mDLTransformStackSelAnimatedValueWithName   = objc.RegisterName("animatedValueWithName:")
+	_mDLTransformStackSelFloat4x4AtTime          = objc.RegisterName("float4x4AtTime:")
+	_mDLTransformStackSelDouble4x4AtTime         = objc.RegisterName("double4x4AtTime:")
+	_mDLTransformStackSelCount                   = objc.RegisterName("count")
+	_mDLTransformStackSelKeyTimes                = objc.RegisterName("keyTimes")
+	_mDLTransformStackSelTransformOps            = objc.RegisterName("transformOps")
 )
 
 func MDLTransformStackFromID(id objc.ID) *MDLTransformStack {
@@ -53,55 +53,73 @@ func (o *MDLTransformStack) Init() objc.ID {
 
 func (o *MDLTransformStack) AddTranslateOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformTranslateOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddTranslateOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformTranslateOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddRotateXOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformRotateXOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddRotateXOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformRotateXOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddRotateYOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformRotateYOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddRotateYOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformRotateYOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddRotateZOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformRotateZOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddRotateZOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformRotateZOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddRotateOpOrderInverse(animatedValueName *foundation.NSString, order MDLTransformOpRotationOrder, inverse bool) *MDLTransformRotateOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddRotateOpOrderInverse, animatedValueName.Ptr(), order, inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformRotateOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddScaleOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformScaleOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddScaleOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformScaleOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddMatrixOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformMatrixOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddMatrixOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformMatrixOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AddOrientOpInverse(animatedValueName *foundation.NSString, inverse bool) *MDLTransformOrientOp {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAddOrientOpInverse, animatedValueName.Ptr(), inverse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformOrientOpFromID(_ret)
 }
 
 func (o *MDLTransformStack) AnimatedValueWithName(name *foundation.NSString) *MDLAnimatedValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelAnimatedValueWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedValueFromID(_ret)
 }
 
@@ -127,7 +145,8 @@ func (o *MDLTransformStack) KeyTimes() *foundation.NSArray[*foundation.NSNumber]
 
 func (o *MDLTransformStack) TransformOps() *foundation.NSArray[MDLTransformOp] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformStackSelTransformOps)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MDLTransformOp](_ret)
 }
-

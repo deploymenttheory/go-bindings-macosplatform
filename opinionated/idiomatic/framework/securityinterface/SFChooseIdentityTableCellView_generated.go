@@ -61,4 +61,3 @@ type ChooseIdentityTableCellViewable interface {
 }
 
 var _ ChooseIdentityTableCellViewable = (*ChooseIdentityTableCellView)(nil)
-

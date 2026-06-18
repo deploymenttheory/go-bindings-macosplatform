@@ -67,4 +67,3 @@ type FunctionConstantValuesable interface {
 }
 
 var _ FunctionConstantValuesable = (*FunctionConstantValues)(nil)
-

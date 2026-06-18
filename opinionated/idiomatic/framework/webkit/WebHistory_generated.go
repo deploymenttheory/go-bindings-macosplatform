@@ -132,4 +132,3 @@ type WebHistoryable interface {
 }
 
 var _ WebHistoryable = (*WebHistory)(nil)
-

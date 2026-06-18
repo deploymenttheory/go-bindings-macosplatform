@@ -78,4 +78,3 @@ type PostalAddressFormatterable interface {
 }
 
 var _ PostalAddressFormatterable = (*PostalAddressFormatter)(nil)
-

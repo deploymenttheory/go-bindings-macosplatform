@@ -17,41 +17,41 @@ type NSMutableOrderedSet[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSMutableOrderedSet = _objcClass("NSMutableOrderedSet")
-	_nSMutableOrderedSetSelInsertObjectAtIndex = objc.RegisterName("insertObject:atIndex:")
-	_nSMutableOrderedSetSelRemoveObjectAtIndex = objc.RegisterName("removeObjectAtIndex:")
-	_nSMutableOrderedSetSelReplaceObjectAtIndexWithObject = objc.RegisterName("replaceObjectAtIndex:withObject:")
-	_nSMutableOrderedSetSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMutableOrderedSetSelInit = objc.RegisterName("init")
-	_nSMutableOrderedSetSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableOrderedSetSelAddObject = objc.RegisterName("addObject:")
-	_nSMutableOrderedSetSelAddObjectsCount = objc.RegisterName("addObjects:count:")
-	_nSMutableOrderedSetSelAddObjectsFromArray = objc.RegisterName("addObjectsFromArray:")
+	_clsNSMutableOrderedSet                                       = _objcClass("NSMutableOrderedSet")
+	_nSMutableOrderedSetSelInsertObjectAtIndex                    = objc.RegisterName("insertObject:atIndex:")
+	_nSMutableOrderedSetSelRemoveObjectAtIndex                    = objc.RegisterName("removeObjectAtIndex:")
+	_nSMutableOrderedSetSelReplaceObjectAtIndexWithObject         = objc.RegisterName("replaceObjectAtIndex:withObject:")
+	_nSMutableOrderedSetSelInitWithCoder                          = objc.RegisterName("initWithCoder:")
+	_nSMutableOrderedSetSelInit                                   = objc.RegisterName("init")
+	_nSMutableOrderedSetSelInitWithCapacity                       = objc.RegisterName("initWithCapacity:")
+	_nSMutableOrderedSetSelAddObject                              = objc.RegisterName("addObject:")
+	_nSMutableOrderedSetSelAddObjectsCount                        = objc.RegisterName("addObjects:count:")
+	_nSMutableOrderedSetSelAddObjectsFromArray                    = objc.RegisterName("addObjectsFromArray:")
 	_nSMutableOrderedSetSelExchangeObjectAtIndexWithObjectAtIndex = objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:")
-	_nSMutableOrderedSetSelMoveObjectsAtIndexesToIndex = objc.RegisterName("moveObjectsAtIndexes:toIndex:")
-	_nSMutableOrderedSetSelInsertObjectsAtIndexes = objc.RegisterName("insertObjects:atIndexes:")
-	_nSMutableOrderedSetSelSetObjectAtIndex = objc.RegisterName("setObject:atIndex:")
-	_nSMutableOrderedSetSelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
-	_nSMutableOrderedSetSelReplaceObjectsInRangeWithObjectsCount = objc.RegisterName("replaceObjectsInRange:withObjects:count:")
-	_nSMutableOrderedSetSelReplaceObjectsAtIndexesWithObjects = objc.RegisterName("replaceObjectsAtIndexes:withObjects:")
-	_nSMutableOrderedSetSelRemoveObjectsInRange = objc.RegisterName("removeObjectsInRange:")
-	_nSMutableOrderedSetSelRemoveObjectsAtIndexes = objc.RegisterName("removeObjectsAtIndexes:")
-	_nSMutableOrderedSetSelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSMutableOrderedSetSelRemoveObject = objc.RegisterName("removeObject:")
-	_nSMutableOrderedSetSelRemoveObjectsInArray = objc.RegisterName("removeObjectsInArray:")
-	_nSMutableOrderedSetSelIntersectOrderedSet = objc.RegisterName("intersectOrderedSet:")
-	_nSMutableOrderedSetSelMinusOrderedSet = objc.RegisterName("minusOrderedSet:")
-	_nSMutableOrderedSetSelUnionOrderedSet = objc.RegisterName("unionOrderedSet:")
-	_nSMutableOrderedSetSelIntersectSet = objc.RegisterName("intersectSet:")
-	_nSMutableOrderedSetSelMinusSet = objc.RegisterName("minusSet:")
-	_nSMutableOrderedSetSelUnionSet = objc.RegisterName("unionSet:")
-	_nSMutableOrderedSetSelSortUsingComparator = objc.RegisterName("sortUsingComparator:")
-	_nSMutableOrderedSetSelSortWithOptionsUsingComparator = objc.RegisterName("sortWithOptions:usingComparator:")
-	_nSMutableOrderedSetSelSortRangeOptionsUsingComparator = objc.RegisterName("sortRange:options:usingComparator:")
-	_nSMutableOrderedSetSelOrderedSetWithCapacity = objc.RegisterName("orderedSetWithCapacity:")
-	_nSMutableOrderedSetSelApplyDifference = objc.RegisterName("applyDifference:")
-	_nSMutableOrderedSetSelSortUsingDescriptors = objc.RegisterName("sortUsingDescriptors:")
-	_nSMutableOrderedSetSelFilterUsingPredicate = objc.RegisterName("filterUsingPredicate:")
+	_nSMutableOrderedSetSelMoveObjectsAtIndexesToIndex            = objc.RegisterName("moveObjectsAtIndexes:toIndex:")
+	_nSMutableOrderedSetSelInsertObjectsAtIndexes                 = objc.RegisterName("insertObjects:atIndexes:")
+	_nSMutableOrderedSetSelSetObjectAtIndex                       = objc.RegisterName("setObject:atIndex:")
+	_nSMutableOrderedSetSelSetObjectAtIndexedSubscript            = objc.RegisterName("setObject:atIndexedSubscript:")
+	_nSMutableOrderedSetSelReplaceObjectsInRangeWithObjectsCount  = objc.RegisterName("replaceObjectsInRange:withObjects:count:")
+	_nSMutableOrderedSetSelReplaceObjectsAtIndexesWithObjects     = objc.RegisterName("replaceObjectsAtIndexes:withObjects:")
+	_nSMutableOrderedSetSelRemoveObjectsInRange                   = objc.RegisterName("removeObjectsInRange:")
+	_nSMutableOrderedSetSelRemoveObjectsAtIndexes                 = objc.RegisterName("removeObjectsAtIndexes:")
+	_nSMutableOrderedSetSelRemoveAllObjects                       = objc.RegisterName("removeAllObjects")
+	_nSMutableOrderedSetSelRemoveObject                           = objc.RegisterName("removeObject:")
+	_nSMutableOrderedSetSelRemoveObjectsInArray                   = objc.RegisterName("removeObjectsInArray:")
+	_nSMutableOrderedSetSelIntersectOrderedSet                    = objc.RegisterName("intersectOrderedSet:")
+	_nSMutableOrderedSetSelMinusOrderedSet                        = objc.RegisterName("minusOrderedSet:")
+	_nSMutableOrderedSetSelUnionOrderedSet                        = objc.RegisterName("unionOrderedSet:")
+	_nSMutableOrderedSetSelIntersectSet                           = objc.RegisterName("intersectSet:")
+	_nSMutableOrderedSetSelMinusSet                               = objc.RegisterName("minusSet:")
+	_nSMutableOrderedSetSelUnionSet                               = objc.RegisterName("unionSet:")
+	_nSMutableOrderedSetSelSortUsingComparator                    = objc.RegisterName("sortUsingComparator:")
+	_nSMutableOrderedSetSelSortWithOptionsUsingComparator         = objc.RegisterName("sortWithOptions:usingComparator:")
+	_nSMutableOrderedSetSelSortRangeOptionsUsingComparator        = objc.RegisterName("sortRange:options:usingComparator:")
+	_nSMutableOrderedSetSelOrderedSetWithCapacity                 = objc.RegisterName("orderedSetWithCapacity:")
+	_nSMutableOrderedSetSelApplyDifference                        = objc.RegisterName("applyDifference:")
+	_nSMutableOrderedSetSelSortUsingDescriptors                   = objc.RegisterName("sortUsingDescriptors:")
+	_nSMutableOrderedSetSelFilterUsingPredicate                   = objc.RegisterName("filterUsingPredicate:")
 )
 
 func NSMutableOrderedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutableOrderedSet[ObjectType] {
@@ -78,19 +78,25 @@ func (o *NSMutableOrderedSet[ObjectType]) ReplaceObjectAtIndexWithObject(idx uin
 
 func (o *NSMutableOrderedSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableOrderedSetSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableOrderedSet[ObjectType]) Init() *NSMutableOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableOrderedSetSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableOrderedSet[ObjectType]) InitWithCapacity(numItems uint) *NSMutableOrderedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableOrderedSetSelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableOrderedSetFromID[ObjectType](_ret)
 }
 
@@ -213,7 +219,9 @@ func (o *NSMutableOrderedSet[ObjectType]) SortRangeOptionsUsingComparator(range_
 
 func NSMutableOrderedSetOrderedSetWithCapacity(numItems uint) *NSMutableOrderedSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableOrderedSet), _nSMutableOrderedSetSelOrderedSetWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableOrderedSetFromID[objc.ID](_ret)
 }
 
@@ -228,4 +236,3 @@ func (o *NSMutableOrderedSet[ObjectType]) SortUsingDescriptors(sortDescriptors *
 func (o *NSMutableOrderedSet[ObjectType]) FilterUsingPredicate(p *NSPredicate) {
 	o.Ptr().Send(_nSMutableOrderedSetSelFilterUsingPredicate, p.Ptr())
 }
-

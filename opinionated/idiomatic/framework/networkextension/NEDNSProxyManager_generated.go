@@ -167,4 +167,3 @@ type NEDNSProxyManagerable interface {
 }
 
 var _ NEDNSProxyManagerable = (*NEDNSProxyManager)(nil)
-

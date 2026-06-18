@@ -51,4 +51,3 @@ type SCNNodeComponentable interface {
 }
 
 var _ SCNNodeComponentable = (*SCNNodeComponent)(nil)
-

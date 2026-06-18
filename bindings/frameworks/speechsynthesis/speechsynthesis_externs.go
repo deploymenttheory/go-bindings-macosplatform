@@ -351,4 +351,3 @@ func KSpeechWordCFCallBack() uintptr {
 	ptr, _ := purego.Dlsym(_speechsynthesisLib, "kSpeechWordCFCallBack")
 	return ptr
 }
-

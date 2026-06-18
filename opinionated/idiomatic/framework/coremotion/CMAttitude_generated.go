@@ -77,4 +77,3 @@ type Attitudeable interface {
 }
 
 var _ Attitudeable = (*Attitude)(nil)
-

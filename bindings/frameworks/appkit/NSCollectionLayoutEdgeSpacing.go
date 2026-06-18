@@ -16,12 +16,12 @@ type NSCollectionLayoutEdgeSpacing struct {
 }
 
 var (
-	_clsNSCollectionLayoutEdgeSpacing = _objcClass("NSCollectionLayoutEdgeSpacing")
+	_clsNSCollectionLayoutEdgeSpacing                                   = _objcClass("NSCollectionLayoutEdgeSpacing")
 	_nSCollectionLayoutEdgeSpacingSelSpacingForLeadingTopTrailingBottom = objc.RegisterName("spacingForLeading:top:trailing:bottom:")
-	_nSCollectionLayoutEdgeSpacingSelLeading = objc.RegisterName("leading")
-	_nSCollectionLayoutEdgeSpacingSelTop = objc.RegisterName("top")
-	_nSCollectionLayoutEdgeSpacingSelTrailing = objc.RegisterName("trailing")
-	_nSCollectionLayoutEdgeSpacingSelBottom = objc.RegisterName("bottom")
+	_nSCollectionLayoutEdgeSpacingSelLeading                            = objc.RegisterName("leading")
+	_nSCollectionLayoutEdgeSpacingSelTop                                = objc.RegisterName("top")
+	_nSCollectionLayoutEdgeSpacingSelTrailing                           = objc.RegisterName("trailing")
+	_nSCollectionLayoutEdgeSpacingSelBottom                             = objc.RegisterName("bottom")
 )
 
 func NSCollectionLayoutEdgeSpacingFromID(id objc.ID) *NSCollectionLayoutEdgeSpacing {
@@ -36,31 +36,40 @@ func NSCollectionLayoutEdgeSpacingFromID(id objc.ID) *NSCollectionLayoutEdgeSpac
 
 func NSCollectionLayoutEdgeSpacingSpacingForLeadingTopTrailingBottom(leading *NSCollectionLayoutSpacing, top *NSCollectionLayoutSpacing, trailing *NSCollectionLayoutSpacing, bottom *NSCollectionLayoutSpacing) *NSCollectionLayoutEdgeSpacing {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutEdgeSpacing), _nSCollectionLayoutEdgeSpacingSelSpacingForLeadingTopTrailingBottom, leading.Ptr(), top.Ptr(), trailing.Ptr(), bottom.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutEdgeSpacingFromID(_ret)
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Leading() *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelLeading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Top() *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Trailing() *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelTrailing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
 func (o *NSCollectionLayoutEdgeSpacing) Bottom() *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutEdgeSpacingSelBottom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
-

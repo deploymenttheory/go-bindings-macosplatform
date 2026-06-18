@@ -16,7 +16,7 @@ type MPSImageReduceColumnSum struct {
 }
 
 var (
-	_clsMPSImageReduceColumnSum = _objcClass("MPSImageReduceColumnSum")
+	_clsMPSImageReduceColumnSum               = _objcClass("MPSImageReduceColumnSum")
 	_mPSImageReduceColumnSumSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -32,7 +32,8 @@ func MPSImageReduceColumnSumFromID(id objc.ID) *MPSImageReduceColumnSum {
 
 func (o *MPSImageReduceColumnSum) InitWithDevice(device metal.MTLDevice) *MPSImageReduceColumnSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageReduceColumnSumSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageReduceColumnSumFromID(_ret)
 }
-

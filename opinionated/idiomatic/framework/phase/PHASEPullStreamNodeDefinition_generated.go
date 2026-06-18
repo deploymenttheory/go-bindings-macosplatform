@@ -90,11 +90,17 @@ func (x *PullStreamNodeDefinition) SetNormalize(normalize bool) {
 	x.inner.SetNormalize(normalize)
 }
 
-func (x *PullStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition }
+func (x *PullStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition
+}
 
-func (x *PullStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition }
+func (x *PullStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition
+}
 
-func (x *PullStreamNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *PullStreamNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // PullStreamNodeDefinitionable is the interface implemented by [PullStreamNodeDefinition], for mocking and DI.
 type PullStreamNodeDefinitionable interface {
@@ -110,4 +116,3 @@ type PullStreamNodeDefinitionable interface {
 }
 
 var _ PullStreamNodeDefinitionable = (*PullStreamNodeDefinition)(nil)
-

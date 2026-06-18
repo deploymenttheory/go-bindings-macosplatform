@@ -15,9 +15,9 @@ type MLCComparisonLayer struct {
 }
 
 var (
-	_clsMLCComparisonLayer = _objcClass("MLCComparisonLayer")
+	_clsMLCComparisonLayer                   = _objcClass("MLCComparisonLayer")
 	_mLCComparisonLayerSelLayerWithOperation = objc.RegisterName("layerWithOperation:")
-	_mLCComparisonLayerSelOperation = objc.RegisterName("operation")
+	_mLCComparisonLayerSelOperation          = objc.RegisterName("operation")
 )
 
 func MLCComparisonLayerFromID(id objc.ID) *MLCComparisonLayer {
@@ -33,7 +33,9 @@ func MLCComparisonLayerFromID(id objc.ID) *MLCComparisonLayer {
 // @abstract Create a comparison layer. @return   A new compare layer.
 func MLCComparisonLayerLayerWithOperation(operation MLCComparisonOperation) *MLCComparisonLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCComparisonLayer), _mLCComparisonLayerSelLayerWithOperation, operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCComparisonLayerFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *MLCComparisonLayer) Operation() MLCComparisonOperation {
 	_ret := objc.Send[MLCComparisonOperation](o.Ptr(), _mLCComparisonLayerSelOperation)
 	return _ret
 }
-

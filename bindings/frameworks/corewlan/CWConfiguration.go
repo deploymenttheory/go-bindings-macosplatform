@@ -16,17 +16,17 @@ type CWConfiguration struct {
 }
 
 var (
-	_clsCWConfiguration = _objcClass("CWConfiguration")
-	_cWConfigurationSelConfiguration = objc.RegisterName("configuration")
-	_cWConfigurationSelInit = objc.RegisterName("init")
-	_cWConfigurationSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
-	_cWConfigurationSelConfigurationWithConfiguration = objc.RegisterName("configurationWithConfiguration:")
-	_cWConfigurationSelIsEqualToConfiguration = objc.RegisterName("isEqualToConfiguration:")
-	_cWConfigurationSelNetworkProfiles = objc.RegisterName("networkProfiles")
+	_clsCWConfiguration                                   = _objcClass("CWConfiguration")
+	_cWConfigurationSelConfiguration                      = objc.RegisterName("configuration")
+	_cWConfigurationSelInit                               = objc.RegisterName("init")
+	_cWConfigurationSelInitWithConfiguration              = objc.RegisterName("initWithConfiguration:")
+	_cWConfigurationSelConfigurationWithConfiguration     = objc.RegisterName("configurationWithConfiguration:")
+	_cWConfigurationSelIsEqualToConfiguration             = objc.RegisterName("isEqualToConfiguration:")
+	_cWConfigurationSelNetworkProfiles                    = objc.RegisterName("networkProfiles")
 	_cWConfigurationSelRequireAdministratorForAssociation = objc.RegisterName("requireAdministratorForAssociation")
-	_cWConfigurationSelRequireAdministratorForPower = objc.RegisterName("requireAdministratorForPower")
-	_cWConfigurationSelRequireAdministratorForIBSSMode = objc.RegisterName("requireAdministratorForIBSSMode")
-	_cWConfigurationSelRememberJoinedNetworks = objc.RegisterName("rememberJoinedNetworks")
+	_cWConfigurationSelRequireAdministratorForPower       = objc.RegisterName("requireAdministratorForPower")
+	_cWConfigurationSelRequireAdministratorForIBSSMode    = objc.RegisterName("requireAdministratorForIBSSMode")
+	_cWConfigurationSelRememberJoinedNetworks             = objc.RegisterName("rememberJoinedNetworks")
 )
 
 func CWConfigurationFromID(id objc.ID) *CWConfiguration {
@@ -42,28 +42,36 @@ func CWConfigurationFromID(id objc.ID) *CWConfiguration {
 // @method @abstract Convenience method for getting a CWConfiguration object.
 func CWConfigurationConfiguration() *CWConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWConfiguration), _cWConfigurationSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWConfigurationFromID(_ret)
 }
 
 // @method @abstract Initializes a CWConfiguration object.
 func (o *CWConfiguration) Init() *CWConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWConfigurationFromID(_ret)
 }
 
 // @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Initializes a CWConfiguration object with the properties of an existing CWConfiguration object.
 func (o *CWConfiguration) InitWithConfiguration(configuration *CWConfiguration) *CWConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWConfigurationSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWConfigurationFromID(_ret)
 }
 
 // @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Convenience method for getting a CWConfiguration object initialized with the properties of an existing CWConfiguration object.
 func CWConfigurationConfigurationWithConfiguration(configuration *CWConfiguration) *CWConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWConfiguration), _cWConfigurationSelConfigurationWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWConfigurationFromID(_ret)
 }
 
@@ -76,7 +84,9 @@ func (o *CWConfiguration) IsEqualToConfiguration(configuration *CWConfiguration)
 // @property @result An NSOrderedSet of CWNetworkProfile objects. @abstract Returns the preferred networks list. @discussion The order of the ordered set corresponds to the order the preferred networks list.
 func (o *CWConfiguration) NetworkProfiles() *foundation.NSOrderedSet[*CWNetworkProfile] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWConfigurationSelNetworkProfiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSOrderedSetFromID[*CWNetworkProfile](_ret)
 }
 
@@ -103,4 +113,3 @@ func (o *CWConfiguration) RememberJoinedNetworks() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWConfigurationSelRememberJoinedNetworks)
 	return _ret
 }
-

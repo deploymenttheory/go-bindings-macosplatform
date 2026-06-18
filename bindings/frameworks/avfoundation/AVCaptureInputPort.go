@@ -18,13 +18,13 @@ type AVCaptureInputPort struct {
 }
 
 var (
-	_clsAVCaptureInputPort = _objcClass("AVCaptureInputPort")
-	_aVCaptureInputPortSelInput = objc.RegisterName("input")
-	_aVCaptureInputPortSelMediaType = objc.RegisterName("mediaType")
+	_clsAVCaptureInputPort                  = _objcClass("AVCaptureInputPort")
+	_aVCaptureInputPortSelInput             = objc.RegisterName("input")
+	_aVCaptureInputPortSelMediaType         = objc.RegisterName("mediaType")
 	_aVCaptureInputPortSelFormatDescription = objc.RegisterName("formatDescription")
-	_aVCaptureInputPortSelIsEnabled = objc.RegisterName("isEnabled")
-	_aVCaptureInputPortSelSetEnabled = objc.RegisterName("setEnabled:")
-	_aVCaptureInputPortSelClock = objc.RegisterName("clock")
+	_aVCaptureInputPortSelIsEnabled         = objc.RegisterName("isEnabled")
+	_aVCaptureInputPortSelSetEnabled        = objc.RegisterName("setEnabled:")
+	_aVCaptureInputPortSelClock             = objc.RegisterName("clock")
 )
 
 func AVCaptureInputPortFromID(id objc.ID) *AVCaptureInputPort {
@@ -40,14 +40,18 @@ func AVCaptureInputPortFromID(id objc.ID) *AVCaptureInputPort {
 // @property input @abstract The input that owns the receiver. @discussion The value of this property is an AVCaptureInput instance that owns the receiver.
 func (o *AVCaptureInputPort) Input() *AVCaptureInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureInputPortSelInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureInputFromID(_ret)
 }
 
 // @property mediaType @abstract The media type of the data provided by the receiver. @discussion The value of this property is a constant describing the type of media, such as AVMediaTypeVideo or AVMediaTypeAudio, provided by the receiver. Media type constants are defined in AVMediaFormat.h.
 func (o *AVCaptureInputPort) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureInputPortSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *AVCaptureInputPort) Clock() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVCaptureInputPortSelClock)
 	return _ret
 }
-

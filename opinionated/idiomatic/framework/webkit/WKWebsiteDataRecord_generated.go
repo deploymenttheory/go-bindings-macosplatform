@@ -59,4 +59,3 @@ type WKWebsiteDataRecordable interface {
 }
 
 var _ WKWebsiteDataRecordable = (*WKWebsiteDataRecord)(nil)
-

@@ -17,7 +17,9 @@ type MTROvenCavityOperationalStateClusterErrorStateStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterErrorStateStruct].
-func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) Unwrap() *raw.MTROvenCavityOperationalStateClusterErrorStateStruct { return x.inner }
+func (x *MTROvenCavityOperationalStateClusterErrorStateStruct) Unwrap() *raw.MTROvenCavityOperationalStateClusterErrorStateStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,4 +110,3 @@ type MTROvenCavityOperationalStateClusterErrorStateStructable interface {
 }
 
 var _ MTROvenCavityOperationalStateClusterErrorStateStructable = (*MTROvenCavityOperationalStateClusterErrorStateStruct)(nil)
-

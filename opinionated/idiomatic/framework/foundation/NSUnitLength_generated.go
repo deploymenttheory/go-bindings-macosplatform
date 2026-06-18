@@ -54,4 +54,3 @@ type UnitLengthable interface {
 }
 
 var _ UnitLengthable = (*UnitLength)(nil)
-

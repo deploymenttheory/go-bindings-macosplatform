@@ -27,4 +27,3 @@ func WKProcessPoolFromID(id objc.ID) *WKProcessPool {
 	purego.Track(o)
 	return o
 }
-

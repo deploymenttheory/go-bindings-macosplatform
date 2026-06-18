@@ -16,11 +16,11 @@ type ITLibMediaEntity struct {
 }
 
 var (
-	_clsITLibMediaEntity = _objcClass("ITLibMediaEntity")
-	_iTLibMediaEntitySelValueForProperty = objc.RegisterName("valueForProperty:")
-	_iTLibMediaEntitySelEnumerateValuesForPropertiesUsing = objc.RegisterName("enumerateValuesForProperties:usingBlock:")
+	_clsITLibMediaEntity                                        = _objcClass("ITLibMediaEntity")
+	_iTLibMediaEntitySelValueForProperty                        = objc.RegisterName("valueForProperty:")
+	_iTLibMediaEntitySelEnumerateValuesForPropertiesUsing       = objc.RegisterName("enumerateValuesForProperties:usingBlock:")
 	_iTLibMediaEntitySelEnumerateValuesExceptForPropertiesUsing = objc.RegisterName("enumerateValuesExceptForProperties:usingBlock:")
-	_iTLibMediaEntitySelPersistentID = objc.RegisterName("persistentID")
+	_iTLibMediaEntitySelPersistentID                            = objc.RegisterName("persistentID")
 )
 
 func ITLibMediaEntityFromID(id objc.ID) *ITLibMediaEntity {
@@ -72,7 +72,8 @@ func (o *ITLibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *f
 // @abstract The unique identifier of this media entity.
 func (o *ITLibMediaEntity) PersistentID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaEntitySelPersistentID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

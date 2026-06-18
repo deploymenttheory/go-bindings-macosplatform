@@ -50,4 +50,3 @@ type LocalizedNumberFormatRuleable interface {
 }
 
 var _ LocalizedNumberFormatRuleable = (*LocalizedNumberFormatRule)(nil)
-

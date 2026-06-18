@@ -73,4 +73,3 @@ type ImageSizeConstraintable interface {
 }
 
 var _ ImageSizeConstraintable = (*ImageSizeConstraint)(nil)
-

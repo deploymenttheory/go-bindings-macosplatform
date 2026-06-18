@@ -60,4 +60,3 @@ type VirtioSocketListenerable interface {
 }
 
 var _ VirtioSocketListenerable = (*VirtioSocketListener)(nil)
-

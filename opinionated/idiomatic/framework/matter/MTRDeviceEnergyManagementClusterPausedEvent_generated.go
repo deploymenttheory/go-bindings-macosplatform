@@ -15,7 +15,9 @@ type MTRDeviceEnergyManagementClusterPausedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPausedEvent].
-func (x *MTRDeviceEnergyManagementClusterPausedEvent) Unwrap() *raw.MTRDeviceEnergyManagementClusterPausedEvent { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterPausedEvent) Unwrap() *raw.MTRDeviceEnergyManagementClusterPausedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRDeviceEnergyManagementClusterPausedEventable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterPausedEventable = (*MTRDeviceEnergyManagementClusterPausedEvent)(nil)
-

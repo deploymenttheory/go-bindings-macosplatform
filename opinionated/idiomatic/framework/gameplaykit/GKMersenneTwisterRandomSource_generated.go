@@ -58,7 +58,9 @@ func (x *MersenneTwisterRandomSource) SetSeed(seed uint64) {
 	x.inner.SetSeed(seed)
 }
 
-func (x *MersenneTwisterRandomSource) asRandomSource() *raw.GKRandomSource { return &x.inner.GKRandomSource }
+func (x *MersenneTwisterRandomSource) asRandomSource() *raw.GKRandomSource {
+	return &x.inner.GKRandomSource
+}
 
 // MersenneTwisterRandomSourceable is the interface implemented by [MersenneTwisterRandomSource], for mocking and DI.
 type MersenneTwisterRandomSourceable interface {
@@ -69,4 +71,3 @@ type MersenneTwisterRandomSourceable interface {
 }
 
 var _ MersenneTwisterRandomSourceable = (*MersenneTwisterRandomSource)(nil)
-

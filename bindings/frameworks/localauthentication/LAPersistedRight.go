@@ -15,8 +15,8 @@ type LAPersistedRight struct {
 }
 
 var (
-	_clsLAPersistedRight = _objcClass("LAPersistedRight")
-	_lAPersistedRightSelKey = objc.RegisterName("key")
+	_clsLAPersistedRight       = _objcClass("LAPersistedRight")
+	_lAPersistedRightSelKey    = objc.RegisterName("key")
 	_lAPersistedRightSelSecret = objc.RegisterName("secret")
 )
 
@@ -33,14 +33,17 @@ func LAPersistedRightFromID(id objc.ID) *LAPersistedRight {
 // @brief Managed private key
 func (o *LAPersistedRight) Key() *LAPrivateKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAPersistedRightSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAPrivateKeyFromID(_ret)
 }
 
 // @brief Generic secret @discussion This is the generic secret that would have been stored along with the right
 func (o *LAPersistedRight) Secret() *LASecret {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAPersistedRightSelSecret)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LASecretFromID(_ret)
 }
-

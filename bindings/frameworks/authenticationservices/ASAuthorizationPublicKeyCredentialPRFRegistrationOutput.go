@@ -16,10 +16,10 @@ type ASAuthorizationPublicKeyCredentialPRFRegistrationOutput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialPRFRegistrationOutput = _objcClass("ASAuthorizationPublicKeyCredentialPRFRegistrationOutput")
+	_clsASAuthorizationPublicKeyCredentialPRFRegistrationOutput            = _objcClass("ASAuthorizationPublicKeyCredentialPRFRegistrationOutput")
 	_aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelIsSupported = objc.RegisterName("isSupported")
-	_aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelFirst = objc.RegisterName("first")
-	_aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelSecond = objc.RegisterName("second")
+	_aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelFirst       = objc.RegisterName("first")
+	_aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelSecond      = objc.RegisterName("second")
 )
 
 func ASAuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput {
@@ -39,13 +39,16 @@ func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() 
 
 func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput) First() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelFirst)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFRegistrationOutputSelSecond)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

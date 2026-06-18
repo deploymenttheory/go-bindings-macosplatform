@@ -16,9 +16,9 @@ type ITLibArtist struct {
 }
 
 var (
-	_clsITLibArtist = _objcClass("ITLibArtist")
-	_iTLibArtistSelName = objc.RegisterName("name")
-	_iTLibArtistSelSortName = objc.RegisterName("sortName")
+	_clsITLibArtist             = _objcClass("ITLibArtist")
+	_iTLibArtistSelName         = objc.RegisterName("name")
+	_iTLibArtistSelSortName     = objc.RegisterName("sortName")
 	_iTLibArtistSelPersistentID = objc.RegisterName("persistentID")
 )
 
@@ -35,21 +35,26 @@ func ITLibArtistFromID(id objc.ID) *ITLibArtist {
 // @abstract The name of this artist.
 func (o *ITLibArtist) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibArtistSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The name of this artist that should be used for sorting purposes.
 func (o *ITLibArtist) SortName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibArtistSelSortName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The unique identifier of this artist.
 func (o *ITLibArtist) PersistentID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibArtistSelPersistentID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

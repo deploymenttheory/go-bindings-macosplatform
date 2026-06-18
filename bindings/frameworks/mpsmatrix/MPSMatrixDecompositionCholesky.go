@@ -17,8 +17,8 @@ type MPSMatrixDecompositionCholesky struct {
 }
 
 var (
-	_clsMPSMatrixDecompositionCholesky = _objcClass("MPSMatrixDecompositionCholesky")
-	_mPSMatrixDecompositionCholeskySelInitWithDeviceLowerOrder = objc.RegisterName("initWithDevice:lower:order:")
+	_clsMPSMatrixDecompositionCholesky                                                    = _objcClass("MPSMatrixDecompositionCholesky")
+	_mPSMatrixDecompositionCholeskySelInitWithDeviceLowerOrder                            = objc.RegisterName("initWithDevice:lower:order:")
 	_mPSMatrixDecompositionCholeskySelEncodeToCommandBufferSourceMatrixResultMatrixStatus = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:resultMatrix:status:")
 )
 
@@ -35,7 +35,9 @@ func MPSMatrixDecompositionCholeskyFromID(id objc.ID) *MPSMatrixDecompositionCho
 // @abstract   Initialize an MPSMatrixDecompositionCholesky object on a device @param      device          The device on which the kernel will execute. @param      lower           A boolean value indicating if the lower triangular part of the source matrix is stored.  If lower = YES the lower triangular part will be used and the factor will be written to the lower triangular part of the result, otherwise the upper triangular part will be used and the factor will be written to the upper triangular part. @param      order           The number of rows and columns in the source matrix. @return     A valid MPSMatrixDecompositionCholesky object or nil, if failure.
 func (o *MPSMatrixDecompositionCholesky) InitWithDeviceLowerOrder(device metal.MTLDevice, lower bool, order uint) *MPSMatrixDecompositionCholesky {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixDecompositionCholeskySelInitWithDeviceLowerOrder, device, lower, order)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixDecompositionCholeskyFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPSMatrixDecompositionCholesky) InitWithDeviceLowerOrder(device metal.M
 func (o *MPSMatrixDecompositionCholesky) EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	o.Ptr().Send(_mPSMatrixDecompositionCholeskySelEncodeToCommandBufferSourceMatrixResultMatrixStatus, commandBuffer, sourceMatrix.Ptr(), resultMatrix.Ptr(), status)
 }
-

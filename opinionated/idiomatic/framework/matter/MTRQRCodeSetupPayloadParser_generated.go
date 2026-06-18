@@ -56,4 +56,3 @@ type MTRQRCodeSetupPayloadParserable interface {
 }
 
 var _ MTRQRCodeSetupPayloadParserable = (*MTRQRCodeSetupPayloadParser)(nil)
-

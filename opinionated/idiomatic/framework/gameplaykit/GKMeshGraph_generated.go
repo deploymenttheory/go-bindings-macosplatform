@@ -133,4 +133,3 @@ type MeshGraphable interface {
 }
 
 var _ MeshGraphable = (*MeshGraph)(nil)
-

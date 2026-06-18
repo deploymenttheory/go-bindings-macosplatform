@@ -16,23 +16,23 @@ type MTRGeneralDiagnosticsClusterNetworkInterface struct {
 }
 
 var (
-	_clsMTRGeneralDiagnosticsClusterNetworkInterface = _objcClass("MTRGeneralDiagnosticsClusterNetworkInterface")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelName = objc.RegisterName("name")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetName = objc.RegisterName("setName:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIsOperational = objc.RegisterName("isOperational")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIsOperational = objc.RegisterName("setIsOperational:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv4 = objc.RegisterName("offPremiseServicesReachableIPv4")
+	_clsMTRGeneralDiagnosticsClusterNetworkInterface                                   = _objcClass("MTRGeneralDiagnosticsClusterNetworkInterface")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelName                               = objc.RegisterName("name")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetName                            = objc.RegisterName("setName:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIsOperational                      = objc.RegisterName("isOperational")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIsOperational                   = objc.RegisterName("setIsOperational:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv4    = objc.RegisterName("offPremiseServicesReachableIPv4")
 	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetOffPremiseServicesReachableIPv4 = objc.RegisterName("setOffPremiseServicesReachableIPv4:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv6 = objc.RegisterName("offPremiseServicesReachableIPv6")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv6    = objc.RegisterName("offPremiseServicesReachableIPv6")
 	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetOffPremiseServicesReachableIPv6 = objc.RegisterName("setOffPremiseServicesReachableIPv6:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelHardwareAddress = objc.RegisterName("hardwareAddress")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetHardwareAddress = objc.RegisterName("setHardwareAddress:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv4Addresses = objc.RegisterName("iPv4Addresses")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv4Addresses = objc.RegisterName("setIPv4Addresses:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv6Addresses = objc.RegisterName("iPv6Addresses")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv6Addresses = objc.RegisterName("setIPv6Addresses:")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelType = objc.RegisterName("type")
-	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetType = objc.RegisterName("setType:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelHardwareAddress                    = objc.RegisterName("hardwareAddress")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetHardwareAddress                 = objc.RegisterName("setHardwareAddress:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv4Addresses                      = objc.RegisterName("iPv4Addresses")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv4Addresses                   = objc.RegisterName("setIPv4Addresses:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelIPv6Addresses                      = objc.RegisterName("iPv6Addresses")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetIPv6Addresses                   = objc.RegisterName("setIPv6Addresses:")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelType                               = objc.RegisterName("type")
+	_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetType                            = objc.RegisterName("setType:")
 )
 
 func MTRGeneralDiagnosticsClusterNetworkInterfaceFromID(id objc.ID) *MTRGeneralDiagnosticsClusterNetworkInterface {
@@ -47,7 +47,9 @@ func MTRGeneralDiagnosticsClusterNetworkInterfaceFromID(id objc.ID) *MTRGeneralD
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetName(name *foundation.
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) IsOperational() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelIsOperational)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetIsOperational(isOperat
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv4() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv4)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReac
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv6() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelOffPremiseServicesReachableIPv6)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReac
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) HardwareAddress() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelHardwareAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -115,11 +125,12 @@ func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv6Addresses(iPv6Addr
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralDiagnosticsClusterNetworkInterfaceSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralDiagnosticsClusterNetworkInterface) SetType(type_ *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralDiagnosticsClusterNetworkInterfaceSelSetType, type_.Ptr())
 }
-

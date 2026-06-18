@@ -19,7 +19,9 @@ type MTRBaseClusterOtaSoftwareUpdateProvider struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterOtaSoftwareUpdateProvider].
-func (x *MTRBaseClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateProvider { return x.inner }
+func (x *MTRBaseClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateProvider {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -223,11 +225,17 @@ func (x *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeClusterRevis
 	}
 }
 
-func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRBaseClusterOTASoftwareUpdateProvider() *raw.MTRBaseClusterOTASoftwareUpdateProvider { return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider }
+func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRBaseClusterOTASoftwareUpdateProvider() *raw.MTRBaseClusterOTASoftwareUpdateProvider {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider
+}
 
-func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateProvider.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOtaSoftwareUpdateProviderable is the interface implemented by [MTRBaseClusterOtaSoftwareUpdateProvider], for mocking and DI.
 type MTRBaseClusterOtaSoftwareUpdateProviderable interface {
@@ -248,4 +256,3 @@ type MTRBaseClusterOtaSoftwareUpdateProviderable interface {
 }
 
 var _ MTRBaseClusterOtaSoftwareUpdateProviderable = (*MTRBaseClusterOtaSoftwareUpdateProvider)(nil)
-

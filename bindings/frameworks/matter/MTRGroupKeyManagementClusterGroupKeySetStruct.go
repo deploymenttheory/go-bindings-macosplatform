@@ -16,23 +16,23 @@ type MTRGroupKeyManagementClusterGroupKeySetStruct struct {
 }
 
 var (
-	_clsMTRGroupKeyManagementClusterGroupKeySetStruct = _objcClass("MTRGroupKeyManagementClusterGroupKeySetStruct")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySetID = objc.RegisterName("groupKeySetID")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetGroupKeySetID = objc.RegisterName("setGroupKeySetID:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySecurityPolicy = objc.RegisterName("groupKeySecurityPolicy")
+	_clsMTRGroupKeyManagementClusterGroupKeySetStruct                          = _objcClass("MTRGroupKeyManagementClusterGroupKeySetStruct")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySetID             = objc.RegisterName("groupKeySetID")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetGroupKeySetID          = objc.RegisterName("setGroupKeySetID:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySecurityPolicy    = objc.RegisterName("groupKeySecurityPolicy")
 	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetGroupKeySecurityPolicy = objc.RegisterName("setGroupKeySecurityPolicy:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey0 = objc.RegisterName("epochKey0")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey0 = objc.RegisterName("setEpochKey0:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime0 = objc.RegisterName("epochStartTime0")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime0 = objc.RegisterName("setEpochStartTime0:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey1 = objc.RegisterName("epochKey1")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey1 = objc.RegisterName("setEpochKey1:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime1 = objc.RegisterName("epochStartTime1")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime1 = objc.RegisterName("setEpochStartTime1:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey2 = objc.RegisterName("epochKey2")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey2 = objc.RegisterName("setEpochKey2:")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime2 = objc.RegisterName("epochStartTime2")
-	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime2 = objc.RegisterName("setEpochStartTime2:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey0                 = objc.RegisterName("epochKey0")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey0              = objc.RegisterName("setEpochKey0:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime0           = objc.RegisterName("epochStartTime0")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime0        = objc.RegisterName("setEpochStartTime0:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey1                 = objc.RegisterName("epochKey1")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey1              = objc.RegisterName("setEpochKey1:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime1           = objc.RegisterName("epochStartTime1")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime1        = objc.RegisterName("setEpochStartTime1:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey2                 = objc.RegisterName("epochKey2")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochKey2              = objc.RegisterName("setEpochKey2:")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime2           = objc.RegisterName("epochStartTime2")
+	_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime2        = objc.RegisterName("setEpochStartTime2:")
 )
 
 func MTRGroupKeyManagementClusterGroupKeySetStructFromID(id objc.ID) *MTRGroupKeyManagementClusterGroupKeySetStruct {
@@ -47,7 +47,9 @@ func MTRGroupKeyManagementClusterGroupKeySetStructFromID(id objc.ID) *MTRGroupKe
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySetID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySetID(groupKe
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelGroupKeySecurityPolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetGroupKeySecurityPolic
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey0)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey0(epochKey0 *
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime0)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime0(epoch
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey1(epochKey1 *
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,7 +119,9 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime1(epoch
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochKey2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -117,11 +131,12 @@ func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochKey2(epochKey2 *
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupKeySetStructSelEpochStartTime2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterGroupKeySetStruct) SetEpochStartTime2(epochStartTime2 *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupKeyManagementClusterGroupKeySetStructSelSetEpochStartTime2, epochStartTime2.Ptr())
 }
-

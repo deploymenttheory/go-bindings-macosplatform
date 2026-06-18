@@ -16,8 +16,8 @@ type MXMetric struct {
 }
 
 var (
-	_clsMXMetric = _objcClass("MXMetric")
-	_mXMetricSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
+	_clsMXMetric                         = _objcClass("MXMetric")
+	_mXMetricSelJSONRepresentation       = objc.RegisterName("JSONRepresentation")
 	_mXMetricSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
 )
 
@@ -34,7 +34,9 @@ func MXMetricFromID(id objc.ID) *MXMetric {
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this metric. @result        An NSData object containing the JSON representation
 func (o *MXMetric) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXMetricSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MXMetric) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, 
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _mXMetricSelDictionaryRepresentation)
 	return _ret
 }
-

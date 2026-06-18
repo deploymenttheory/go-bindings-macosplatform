@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_fseventsLib uintptr
-	_loadOnce sync.Once
+	_fseventsLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,28 +48,54 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("FSEventStreamCopyDescription", func() { purego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _fseventsLib, "FSEventStreamCopyDescription") })
-	_register("FSEventStreamCopyPathsBeingWatched", func() { purego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _fseventsLib, "FSEventStreamCopyPathsBeingWatched") })
+	_register("FSEventStreamCopyDescription", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _fseventsLib, "FSEventStreamCopyDescription")
+	})
+	_register("FSEventStreamCopyPathsBeingWatched", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _fseventsLib, "FSEventStreamCopyPathsBeingWatched")
+	})
 	_register("FSEventStreamCreate", func() { purego.RegisterLibFunc(&_fnFSEventStreamCreate, _fseventsLib, "FSEventStreamCreate") })
-	_register("FSEventStreamCreateRelativeToDevice", func() { purego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _fseventsLib, "FSEventStreamCreateRelativeToDevice") })
+	_register("FSEventStreamCreateRelativeToDevice", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _fseventsLib, "FSEventStreamCreateRelativeToDevice")
+	})
 	_register("FSEventStreamFlushAsync", func() { purego.RegisterLibFunc(&_fnFSEventStreamFlushAsync, _fseventsLib, "FSEventStreamFlushAsync") })
 	_register("FSEventStreamFlushSync", func() { purego.RegisterLibFunc(&_fnFSEventStreamFlushSync, _fseventsLib, "FSEventStreamFlushSync") })
-	_register("FSEventStreamGetDeviceBeingWatched", func() { purego.RegisterLibFunc(&_fnFSEventStreamGetDeviceBeingWatched, _fseventsLib, "FSEventStreamGetDeviceBeingWatched") })
-	_register("FSEventStreamGetLatestEventId", func() { purego.RegisterLibFunc(&_fnFSEventStreamGetLatestEventId, _fseventsLib, "FSEventStreamGetLatestEventId") })
+	_register("FSEventStreamGetDeviceBeingWatched", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamGetDeviceBeingWatched, _fseventsLib, "FSEventStreamGetDeviceBeingWatched")
+	})
+	_register("FSEventStreamGetLatestEventId", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamGetLatestEventId, _fseventsLib, "FSEventStreamGetLatestEventId")
+	})
 	_register("FSEventStreamInvalidate", func() { purego.RegisterLibFunc(&_fnFSEventStreamInvalidate, _fseventsLib, "FSEventStreamInvalidate") })
 	_register("FSEventStreamRelease", func() { purego.RegisterLibFunc(&_fnFSEventStreamRelease, _fseventsLib, "FSEventStreamRelease") })
 	_register("FSEventStreamRetain", func() { purego.RegisterLibFunc(&_fnFSEventStreamRetain, _fseventsLib, "FSEventStreamRetain") })
-	_register("FSEventStreamScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnFSEventStreamScheduleWithRunLoop, _fseventsLib, "FSEventStreamScheduleWithRunLoop") })
-	_register("FSEventStreamSetDispatchQueue", func() { purego.RegisterLibFunc(&_fnFSEventStreamSetDispatchQueue, _fseventsLib, "FSEventStreamSetDispatchQueue") })
-	_register("FSEventStreamSetExclusionPaths", func() { purego.RegisterLibFunc(&_fnFSEventStreamSetExclusionPaths, _fseventsLib, "FSEventStreamSetExclusionPaths") })
+	_register("FSEventStreamScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamScheduleWithRunLoop, _fseventsLib, "FSEventStreamScheduleWithRunLoop")
+	})
+	_register("FSEventStreamSetDispatchQueue", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamSetDispatchQueue, _fseventsLib, "FSEventStreamSetDispatchQueue")
+	})
+	_register("FSEventStreamSetExclusionPaths", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamSetExclusionPaths, _fseventsLib, "FSEventStreamSetExclusionPaths")
+	})
 	_register("FSEventStreamShow", func() { purego.RegisterLibFunc(&_fnFSEventStreamShow, _fseventsLib, "FSEventStreamShow") })
 	_register("FSEventStreamStart", func() { purego.RegisterLibFunc(&_fnFSEventStreamStart, _fseventsLib, "FSEventStreamStart") })
 	_register("FSEventStreamStop", func() { purego.RegisterLibFunc(&_fnFSEventStreamStop, _fseventsLib, "FSEventStreamStop") })
-	_register("FSEventStreamUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnFSEventStreamUnscheduleFromRunLoop, _fseventsLib, "FSEventStreamUnscheduleFromRunLoop") })
-	_register("FSEventsCopyUUIDForDevice", func() { purego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _fseventsLib, "FSEventsCopyUUIDForDevice") })
-	_register("FSEventsGetCurrentEventId", func() { purego.RegisterLibFunc(&_fnFSEventsGetCurrentEventId, _fseventsLib, "FSEventsGetCurrentEventId") })
-	_register("FSEventsGetLastEventIdForDeviceBeforeTime", func() { purego.RegisterLibFunc(&_fnFSEventsGetLastEventIdForDeviceBeforeTime, _fseventsLib, "FSEventsGetLastEventIdForDeviceBeforeTime") })
-	_register("FSEventsPurgeEventsForDeviceUpToEventId", func() { purego.RegisterLibFunc(&_fnFSEventsPurgeEventsForDeviceUpToEventId, _fseventsLib, "FSEventsPurgeEventsForDeviceUpToEventId") })
+	_register("FSEventStreamUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnFSEventStreamUnscheduleFromRunLoop, _fseventsLib, "FSEventStreamUnscheduleFromRunLoop")
+	})
+	_register("FSEventsCopyUUIDForDevice", func() {
+		purego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _fseventsLib, "FSEventsCopyUUIDForDevice")
+	})
+	_register("FSEventsGetCurrentEventId", func() {
+		purego.RegisterLibFunc(&_fnFSEventsGetCurrentEventId, _fseventsLib, "FSEventsGetCurrentEventId")
+	})
+	_register("FSEventsGetLastEventIdForDeviceBeforeTime", func() {
+		purego.RegisterLibFunc(&_fnFSEventsGetLastEventIdForDeviceBeforeTime, _fseventsLib, "FSEventsGetLastEventIdForDeviceBeforeTime")
+	})
+	_register("FSEventsPurgeEventsForDeviceUpToEventId", func() {
+		purego.RegisterLibFunc(&_fnFSEventsPurgeEventsForDeviceUpToEventId, _fseventsLib, "FSEventsPurgeEventsForDeviceUpToEventId")
+	})
 }
 
 func init() {

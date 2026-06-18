@@ -16,14 +16,14 @@ type NSExceptionHandler struct {
 }
 
 var (
-	_clsNSExceptionHandler = _objcClass("NSExceptionHandler")
-	_nSExceptionHandlerSelDefaultExceptionHandler = objc.RegisterName("defaultExceptionHandler")
+	_clsNSExceptionHandler                         = _objcClass("NSExceptionHandler")
+	_nSExceptionHandlerSelDefaultExceptionHandler  = objc.RegisterName("defaultExceptionHandler")
 	_nSExceptionHandlerSelSetExceptionHandlingMask = objc.RegisterName("setExceptionHandlingMask:")
-	_nSExceptionHandlerSelExceptionHandlingMask = objc.RegisterName("exceptionHandlingMask")
-	_nSExceptionHandlerSelSetExceptionHangingMask = objc.RegisterName("setExceptionHangingMask:")
-	_nSExceptionHandlerSelExceptionHangingMask = objc.RegisterName("exceptionHangingMask")
-	_nSExceptionHandlerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSExceptionHandlerSelDelegate = objc.RegisterName("delegate")
+	_nSExceptionHandlerSelExceptionHandlingMask    = objc.RegisterName("exceptionHandlingMask")
+	_nSExceptionHandlerSelSetExceptionHangingMask  = objc.RegisterName("setExceptionHangingMask:")
+	_nSExceptionHandlerSelExceptionHangingMask     = objc.RegisterName("exceptionHangingMask")
+	_nSExceptionHandlerSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_nSExceptionHandlerSelDelegate                 = objc.RegisterName("delegate")
 )
 
 func NSExceptionHandlerFromID(id objc.ID) *NSExceptionHandler {
@@ -38,7 +38,9 @@ func NSExceptionHandlerFromID(id objc.ID) *NSExceptionHandler {
 
 func NSExceptionHandlerDefaultExceptionHandler() *NSExceptionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSExceptionHandler), _nSExceptionHandlerSelDefaultExceptionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSExceptionHandlerFromID(_ret)
 }
 
@@ -68,4 +70,3 @@ func (o *NSExceptionHandler) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExceptionHandlerSelDelegate)
 	return _ret
 }
-

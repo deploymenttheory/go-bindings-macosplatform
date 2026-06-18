@@ -124,7 +124,9 @@ func (x *AccelerationStructure) SetUsage(usage raw.MPSAccelerationStructureUsage
 	x.inner.SetUsage(usage)
 }
 
-func (x *AccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure { return x.inner }
+func (x *AccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure {
+	return x.inner
+}
 
 // AccelerationStructureable is the interface implemented by [AccelerationStructure], for mocking and DI.
 type AccelerationStructureable interface {
@@ -143,4 +145,3 @@ type AccelerationStructureable interface {
 }
 
 var _ AccelerationStructureable = (*AccelerationStructure)(nil)
-

@@ -15,9 +15,9 @@ type MLCArithmeticLayer struct {
 }
 
 var (
-	_clsMLCArithmeticLayer = _objcClass("MLCArithmeticLayer")
+	_clsMLCArithmeticLayer                   = _objcClass("MLCArithmeticLayer")
 	_mLCArithmeticLayerSelLayerWithOperation = objc.RegisterName("layerWithOperation:")
-	_mLCArithmeticLayerSelOperation = objc.RegisterName("operation")
+	_mLCArithmeticLayerSelOperation          = objc.RegisterName("operation")
 )
 
 func MLCArithmeticLayerFromID(id objc.ID) *MLCArithmeticLayer {
@@ -33,7 +33,9 @@ func MLCArithmeticLayerFromID(id objc.ID) *MLCArithmeticLayer {
 // @abstract   Create an arithmetic layer @param      operation    The arithmetic operation @return     A new arithmetic layer
 func MLCArithmeticLayerLayerWithOperation(operation MLCArithmeticOperation) *MLCArithmeticLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCArithmeticLayer), _mLCArithmeticLayerSelLayerWithOperation, operation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCArithmeticLayerFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *MLCArithmeticLayer) Operation() MLCArithmeticOperation {
 	_ret := objc.Send[MLCArithmeticOperation](o.Ptr(), _mLCArithmeticLayerSelOperation)
 	return _ret
 }
-

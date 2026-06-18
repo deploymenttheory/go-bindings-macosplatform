@@ -17,7 +17,9 @@ type MTRClusterWaterHeaterManagement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterWaterHeaterManagement].
-func (x *MTRClusterWaterHeaterManagement) Unwrap() *raw.MTRClusterWaterHeaterManagement { return x.inner }
+func (x *MTRClusterWaterHeaterManagement) Unwrap() *raw.MTRClusterWaterHeaterManagement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,9 +110,13 @@ func (x *MTRClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithParams
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterWaterHeaterManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterWaterHeaterManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterWaterHeaterManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterWaterHeaterManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterWaterHeaterManagementable is the interface implemented by [MTRClusterWaterHeaterManagement], for mocking and DI.
 type MTRClusterWaterHeaterManagementable interface {
@@ -132,4 +138,3 @@ type MTRClusterWaterHeaterManagementable interface {
 }
 
 var _ MTRClusterWaterHeaterManagementable = (*MTRClusterWaterHeaterManagement)(nil)
-

@@ -17,19 +17,19 @@ type NSURLCredential struct {
 }
 
 var (
-	_clsNSURLCredential = _objcClass("NSURLCredential")
-	_nSURLCredentialSelPersistence = objc.RegisterName("persistence")
-	_nSURLCredentialSelInitWithUserPasswordPersistence = objc.RegisterName("initWithUser:password:persistence:")
-	_nSURLCredentialSelCredentialWithUserPasswordPersistence = objc.RegisterName("credentialWithUser:password:persistence:")
-	_nSURLCredentialSelUser = objc.RegisterName("user")
-	_nSURLCredentialSelPassword = objc.RegisterName("password")
-	_nSURLCredentialSelHasPassword = objc.RegisterName("hasPassword")
-	_nSURLCredentialSelInitWithIdentityCertificatesPersistence = objc.RegisterName("initWithIdentity:certificates:persistence:")
+	_clsNSURLCredential                                              = _objcClass("NSURLCredential")
+	_nSURLCredentialSelPersistence                                   = objc.RegisterName("persistence")
+	_nSURLCredentialSelInitWithUserPasswordPersistence               = objc.RegisterName("initWithUser:password:persistence:")
+	_nSURLCredentialSelCredentialWithUserPasswordPersistence         = objc.RegisterName("credentialWithUser:password:persistence:")
+	_nSURLCredentialSelUser                                          = objc.RegisterName("user")
+	_nSURLCredentialSelPassword                                      = objc.RegisterName("password")
+	_nSURLCredentialSelHasPassword                                   = objc.RegisterName("hasPassword")
+	_nSURLCredentialSelInitWithIdentityCertificatesPersistence       = objc.RegisterName("initWithIdentity:certificates:persistence:")
 	_nSURLCredentialSelCredentialWithIdentityCertificatesPersistence = objc.RegisterName("credentialWithIdentity:certificates:persistence:")
-	_nSURLCredentialSelIdentity = objc.RegisterName("identity")
-	_nSURLCredentialSelCertificates = objc.RegisterName("certificates")
-	_nSURLCredentialSelInitWithTrust = objc.RegisterName("initWithTrust:")
-	_nSURLCredentialSelCredentialForTrust = objc.RegisterName("credentialForTrust:")
+	_nSURLCredentialSelIdentity                                      = objc.RegisterName("identity")
+	_nSURLCredentialSelCertificates                                  = objc.RegisterName("certificates")
+	_nSURLCredentialSelInitWithTrust                                 = objc.RegisterName("initWithTrust:")
+	_nSURLCredentialSelCredentialForTrust                            = objc.RegisterName("credentialForTrust:")
 )
 
 func NSURLCredentialFromID(id objc.ID) *NSURLCredential {
@@ -50,28 +50,36 @@ func (o *NSURLCredential) Persistence() NSURLCredentialPersistence {
 // @method initWithUser:password:persistence: @abstract Initialize a NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The initialized NSURLCredential
 func (o *NSURLCredential) InitWithUserPasswordPersistence(user *NSString, password *NSString, persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithUserPasswordPersistence, user.Ptr(), password.Ptr(), persistence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
 // @method credentialWithUser:password:persistence: @abstract Create a new NSURLCredential with a user and password @param user the username @param password the password @param persistence enum that says to store per session, permanently or not at all @result The new autoreleased NSURLCredential
 func NSURLCredentialCredentialWithUserPasswordPersistence(user *NSString, password *NSString, persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithUserPasswordPersistence, user.Ptr(), password.Ptr(), persistence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
 // @abstract Get the username @result The user string
 func (o *NSURLCredential) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // @abstract Get the password @result The password string @discussion This method might actually attempt to retrieve the password from an external store, possible resulting in prompting, so do not call it unless needed.
 func (o *NSURLCredential) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -84,14 +92,18 @@ func (o *NSURLCredential) HasPassword() bool {
 // @method initWithIdentity:certificates:persistence: @abstract Initialize an NSURLCredential with an identity and array of at least 1 client certificates (SecCertificateRef) @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result the Initialized NSURLCredential
 func (o *NSURLCredential) InitWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithIdentityCertificatesPersistence, identity, certArray, persistence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
 // @method credentialWithIdentity:certificates:persistence: @abstract Create a new NSURLCredential with an identity and certificate array @param identity a SecIdentityRef object @param certArray an array containing at least one SecCertificateRef objects @param persistence enum that says to store per session, permanently or not at all @result The new autoreleased NSURLCredential
 func NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *NSArray[objc.ID], persistence NSURLCredentialPersistence) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialWithIdentityCertificatesPersistence, identity, certArray, persistence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
@@ -110,14 +122,17 @@ func (o *NSURLCredential) Certificates() *NSArray[objc.ID] {
 // @method initWithTrust: @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted. @result the Initialized NSURLCredential
 func (o *NSURLCredential) InitWithTrust(trust unsafe.Pointer) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialSelInitWithTrust, trust)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
 // @method credentialForTrust: @abstract Create a new NSURLCredential which specifies that a handshake has been trusted. @result The new autoreleased NSURLCredential
 func NSURLCredentialCredentialForTrust(trust unsafe.Pointer) *NSURLCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredential), _nSURLCredentialSelCredentialForTrust, trust)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
-

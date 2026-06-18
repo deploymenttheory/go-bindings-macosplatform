@@ -16,15 +16,15 @@ type VNCircle struct {
 }
 
 var (
-	_clsVNCircle = _objcClass("VNCircle")
-	_vNCircleSelInitWithCenterRadius = objc.RegisterName("initWithCenter:radius:")
-	_vNCircleSelInitWithCenterDiameter = objc.RegisterName("initWithCenter:diameter:")
-	_vNCircleSelContainsPoint = objc.RegisterName("containsPoint:")
+	_clsVNCircle                                          = _objcClass("VNCircle")
+	_vNCircleSelInitWithCenterRadius                      = objc.RegisterName("initWithCenter:radius:")
+	_vNCircleSelInitWithCenterDiameter                    = objc.RegisterName("initWithCenter:diameter:")
+	_vNCircleSelContainsPoint                             = objc.RegisterName("containsPoint:")
 	_vNCircleSelContainsPointInCircumferentialRingOfWidth = objc.RegisterName("containsPoint:inCircumferentialRingOfWidth:")
-	_vNCircleSelZeroCircle = objc.RegisterName("zeroCircle")
-	_vNCircleSelCenter = objc.RegisterName("center")
-	_vNCircleSelRadius = objc.RegisterName("radius")
-	_vNCircleSelDiameter = objc.RegisterName("diameter")
+	_vNCircleSelZeroCircle                                = objc.RegisterName("zeroCircle")
+	_vNCircleSelCenter                                    = objc.RegisterName("center")
+	_vNCircleSelRadius                                    = objc.RegisterName("radius")
+	_vNCircleSelDiameter                                  = objc.RegisterName("diameter")
 )
 
 func VNCircleFromID(id objc.ID) *VNCircle {
@@ -40,14 +40,18 @@ func VNCircleFromID(id objc.ID) *VNCircle {
 // @brief Initializes VNCircle object with given circle center and circle radius.
 func (o *VNCircle) InitWithCenterRadius(center *VNPoint, radius float64) *VNCircle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCircleSelInitWithCenterRadius, center.Ptr(), radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCircleFromID(_ret)
 }
 
 // @brief Initializes VNCircle object with given circle center and circle diameter.
 func (o *VNCircle) InitWithCenterDiameter(center *VNPoint, diameter float64) *VNCircle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCircleSelInitWithCenterDiameter, center.Ptr(), diameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCircleFromID(_ret)
 }
 
@@ -66,14 +70,18 @@ func (o *VNCircle) ContainsPointInCircumferentialRingOfWidth(point *VNPoint, rin
 // @brief Returns a VNCircle object with center at the Origin [0.0; 0.0] and zero radius.
 func VNCircleZeroCircle() *VNCircle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNCircle), _vNCircleSelZeroCircle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCircleFromID(_ret)
 }
 
 // @brief Returns circle center.
 func (o *VNCircle) Center() *VNPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCircleSelCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPointFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *VNCircle) Diameter() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNCircleSelDiameter)
 	return _ret
 }
-

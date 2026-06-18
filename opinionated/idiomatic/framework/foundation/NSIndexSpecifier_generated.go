@@ -101,7 +101,9 @@ func (x *IndexSpecifier) SetIndex(index int) {
 	x.inner.SetIndex(index)
 }
 
-func (x *IndexSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *IndexSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
 func (x *IndexSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
@@ -122,4 +124,3 @@ type IndexSpecifierable interface {
 }
 
 var _ IndexSpecifierable = (*IndexSpecifier)(nil)
-

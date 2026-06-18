@@ -18,21 +18,21 @@ type AVContentKeyRequest struct {
 }
 
 var (
-	_clsAVContentKeyRequest = _objcClass("AVContentKeyRequest")
+	_clsAVContentKeyRequest                                                                                  = _objcClass("AVContentKeyRequest")
 	_aVContentKeyRequestSelMakeStreamingContentKeyRequestDataForAppContentIdentifierOptionsCompletionHandler = objc.RegisterName("makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:")
-	_aVContentKeyRequestSelProcessContentKeyResponse = objc.RegisterName("processContentKeyResponse:")
-	_aVContentKeyRequestSelProcessContentKeyResponseError = objc.RegisterName("processContentKeyResponseError:")
-	_aVContentKeyRequestSelRespondByRequestingPersistableContentKeyRequestAndReturnError = objc.RegisterName("respondByRequestingPersistableContentKeyRequestAndReturnError:")
-	_aVContentKeyRequestSelStatus = objc.RegisterName("status")
-	_aVContentKeyRequestSelError = objc.RegisterName("error")
-	_aVContentKeyRequestSelIdentifier = objc.RegisterName("identifier")
-	_aVContentKeyRequestSelInitializationData = objc.RegisterName("initializationData")
-	_aVContentKeyRequestSelOptions = objc.RegisterName("options")
-	_aVContentKeyRequestSelCanProvidePersistableContentKey = objc.RegisterName("canProvidePersistableContentKey")
-	_aVContentKeyRequestSelContentKeySpecifier = objc.RegisterName("contentKeySpecifier")
-	_aVContentKeyRequestSelContentKey = objc.RegisterName("contentKey")
-	_aVContentKeyRequestSelOriginatingRecipient = objc.RegisterName("originatingRecipient")
-	_aVContentKeyRequestSelRenewsExpiringResponseData = objc.RegisterName("renewsExpiringResponseData")
+	_aVContentKeyRequestSelProcessContentKeyResponse                                                         = objc.RegisterName("processContentKeyResponse:")
+	_aVContentKeyRequestSelProcessContentKeyResponseError                                                    = objc.RegisterName("processContentKeyResponseError:")
+	_aVContentKeyRequestSelRespondByRequestingPersistableContentKeyRequestAndReturnError                     = objc.RegisterName("respondByRequestingPersistableContentKeyRequestAndReturnError:")
+	_aVContentKeyRequestSelStatus                                                                            = objc.RegisterName("status")
+	_aVContentKeyRequestSelError                                                                             = objc.RegisterName("error")
+	_aVContentKeyRequestSelIdentifier                                                                        = objc.RegisterName("identifier")
+	_aVContentKeyRequestSelInitializationData                                                                = objc.RegisterName("initializationData")
+	_aVContentKeyRequestSelOptions                                                                           = objc.RegisterName("options")
+	_aVContentKeyRequestSelCanProvidePersistableContentKey                                                   = objc.RegisterName("canProvidePersistableContentKey")
+	_aVContentKeyRequestSelContentKeySpecifier                                                               = objc.RegisterName("contentKeySpecifier")
+	_aVContentKeyRequestSelContentKey                                                                        = objc.RegisterName("contentKey")
+	_aVContentKeyRequestSelOriginatingRecipient                                                              = objc.RegisterName("originatingRecipient")
+	_aVContentKeyRequestSelRenewsExpiringResponseData                                                        = objc.RegisterName("renewsExpiringResponseData")
 )
 
 func AVContentKeyRequestFromID(id objc.ID) *AVContentKeyRequest {
@@ -100,7 +100,9 @@ func (o *AVContentKeyRequest) Identifier() objc.ID {
 
 func (o *AVContentKeyRequest) InitializationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeyRequestSelInitializationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -119,14 +121,18 @@ func (o *AVContentKeyRequest) CanProvidePersistableContentKey() bool {
 // Specifies the requested content key.
 func (o *AVContentKeyRequest) ContentKeySpecifier() *AVContentKeySpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeyRequestSelContentKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySpecifierFromID(_ret)
 }
 
 // Represents an AVContentKey that results from an invocation of -processContentKeyResponse:. Before the receiver achieves the status AVContentKeyRequestReceivedResponse, the value of this property will be nil. Once that status has been achieved, the value of this property becomes a non-nil AVContentKey that can be provided to content key recipients that apply content keys manually to objects that require them, such as CMSampleBuffers, or to initiate renewal. A non-nil value does not indicate that the content key is valid; authorization failures may yet be possible.
 func (o *AVContentKeyRequest) ContentKey() *AVContentKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVContentKeyRequestSelContentKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeyFromID(_ret)
 }
 
@@ -140,4 +146,3 @@ func (o *AVContentKeyRequest) RenewsExpiringResponseData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVContentKeyRequestSelRenewsExpiringResponseData)
 	return _ret
 }
-

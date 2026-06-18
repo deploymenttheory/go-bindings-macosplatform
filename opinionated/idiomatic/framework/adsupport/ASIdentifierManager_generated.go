@@ -54,4 +54,3 @@ type IdentifierManagerable interface {
 }
 
 var _ IdentifierManagerable = (*IdentifierManager)(nil)
-

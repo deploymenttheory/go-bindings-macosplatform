@@ -15,7 +15,9 @@ type CredentialProviderExtensionContext struct {
 }
 
 // Unwrap returns the underlying [raw.ASCredentialProviderExtensionContext].
-func (x *CredentialProviderExtensionContext) Unwrap() *raw.ASCredentialProviderExtensionContext { return x.inner }
+func (x *CredentialProviderExtensionContext) Unwrap() *raw.ASCredentialProviderExtensionContext {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -71,4 +73,3 @@ type CredentialProviderExtensionContextable interface {
 }
 
 var _ CredentialProviderExtensionContextable = (*CredentialProviderExtensionContext)(nil)
-

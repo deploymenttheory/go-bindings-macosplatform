@@ -114,4 +114,3 @@ type CaptureManagerable interface {
 }
 
 var _ CaptureManagerable = (*CaptureManager)(nil)
-

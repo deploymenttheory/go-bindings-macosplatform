@@ -16,10 +16,10 @@ type AVMetricPlayerItemInitialLikelyToKeepUpEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemInitialLikelyToKeepUpEvent = _objcClass("AVMetricPlayerItemInitialLikelyToKeepUpEvent")
-	_aVMetricPlayerItemInitialLikelyToKeepUpEventSelPlaylistRequestEvents = objc.RegisterName("playlistRequestEvents")
+	_clsAVMetricPlayerItemInitialLikelyToKeepUpEvent                          = _objcClass("AVMetricPlayerItemInitialLikelyToKeepUpEvent")
+	_aVMetricPlayerItemInitialLikelyToKeepUpEventSelPlaylistRequestEvents     = objc.RegisterName("playlistRequestEvents")
 	_aVMetricPlayerItemInitialLikelyToKeepUpEventSelMediaSegmentRequestEvents = objc.RegisterName("mediaSegmentRequestEvents")
-	_aVMetricPlayerItemInitialLikelyToKeepUpEventSelContentKeyRequestEvents = objc.RegisterName("contentKeyRequestEvents")
+	_aVMetricPlayerItemInitialLikelyToKeepUpEventSelContentKeyRequestEvents   = objc.RegisterName("contentKeyRequestEvents")
 )
 
 func AVMetricPlayerItemInitialLikelyToKeepUpEventFromID(id objc.ID) *AVMetricPlayerItemInitialLikelyToKeepUpEvent {
@@ -35,21 +35,26 @@ func AVMetricPlayerItemInitialLikelyToKeepUpEventFromID(id objc.ID) *AVMetricPla
 // Returns the playlist request events required to reach likely to keep up.
 func (o *AVMetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() *foundation.NSArray[*AVMetricHLSPlaylistRequestEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemInitialLikelyToKeepUpEventSelPlaylistRequestEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetricHLSPlaylistRequestEvent](_ret)
 }
 
 // Returns the media segment request events required to reach likely to keep up.
 func (o *AVMetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents() *foundation.NSArray[*AVMetricHLSMediaSegmentRequestEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemInitialLikelyToKeepUpEventSelMediaSegmentRequestEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetricHLSMediaSegmentRequestEvent](_ret)
 }
 
 // Returns the content key request required to reach likely to keep up.
 func (o *AVMetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() *foundation.NSArray[*AVMetricContentKeyRequestEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemInitialLikelyToKeepUpEventSelContentKeyRequestEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetricContentKeyRequestEvent](_ret)
 }
-

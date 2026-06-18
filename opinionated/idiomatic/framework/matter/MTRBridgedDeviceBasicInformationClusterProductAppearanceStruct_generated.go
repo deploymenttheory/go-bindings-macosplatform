@@ -16,11 +16,15 @@ type MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct].
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct (nil for 0).
 func MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
@@ -80,4 +84,3 @@ type MTRBridgedDeviceBasicInformationClusterProductAppearanceStructable interfac
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterProductAppearanceStructable = (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct)(nil)
-

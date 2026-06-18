@@ -18,12 +18,12 @@ type LAPublicKey struct {
 }
 
 var (
-	_clsLAPublicKey = _objcClass("LAPublicKey")
-	_lAPublicKeySelExportBytesWithCompletion = objc.RegisterName("exportBytesWithCompletion:")
-	_lAPublicKeySelEncryptDataSecKeyAlgorithmCompletion = objc.RegisterName("encryptData:secKeyAlgorithm:completion:")
-	_lAPublicKeySelCanEncryptUsingSecKeyAlgorithm = objc.RegisterName("canEncryptUsingSecKeyAlgorithm:")
+	_clsLAPublicKey                                             = _objcClass("LAPublicKey")
+	_lAPublicKeySelExportBytesWithCompletion                    = objc.RegisterName("exportBytesWithCompletion:")
+	_lAPublicKeySelEncryptDataSecKeyAlgorithmCompletion         = objc.RegisterName("encryptData:secKeyAlgorithm:completion:")
+	_lAPublicKeySelCanEncryptUsingSecKeyAlgorithm               = objc.RegisterName("canEncryptUsingSecKeyAlgorithm:")
 	_lAPublicKeySelVerifyDataSignatureSecKeyAlgorithmCompletion = objc.RegisterName("verifyData:signature:secKeyAlgorithm:completion:")
-	_lAPublicKeySelCanVerifyUsingSecKeyAlgorithm = objc.RegisterName("canVerifyUsingSecKeyAlgorithm:")
+	_lAPublicKeySelCanVerifyUsingSecKeyAlgorithm                = objc.RegisterName("canVerifyUsingSecKeyAlgorithm:")
 )
 
 func LAPublicKeyFromID(id objc.ID) *LAPublicKey {
@@ -89,4 +89,3 @@ func (o *LAPublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bo
 	_ret := objc.Send[bool](o.Ptr(), _lAPublicKeySelCanVerifyUsingSecKeyAlgorithm, algorithm)
 	return _ret
 }
-

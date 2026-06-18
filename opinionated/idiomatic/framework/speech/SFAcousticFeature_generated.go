@@ -61,4 +61,3 @@ type AcousticFeatureable interface {
 }
 
 var _ AcousticFeatureable = (*AcousticFeature)(nil)
-

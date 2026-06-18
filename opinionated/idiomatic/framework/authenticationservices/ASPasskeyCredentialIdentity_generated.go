@@ -105,4 +105,3 @@ type PasskeyCredentialIdentityable interface {
 }
 
 var _ PasskeyCredentialIdentityable = (*PasskeyCredentialIdentity)(nil)
-

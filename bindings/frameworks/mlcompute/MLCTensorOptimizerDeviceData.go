@@ -26,4 +26,3 @@ func MLCTensorOptimizerDeviceDataFromID(id objc.ID) *MLCTensorOptimizerDeviceDat
 	purego.Track(o)
 	return o
 }
-

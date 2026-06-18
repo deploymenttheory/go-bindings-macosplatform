@@ -17,7 +17,9 @@ type MTRContentLauncherClusterLaunchURLParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterLaunchURLParams].
-func (x *MTRContentLauncherClusterLaunchURLParams) Unwrap() *raw.MTRContentLauncherClusterLaunchURLParams { return x.inner }
+func (x *MTRContentLauncherClusterLaunchURLParams) Unwrap() *raw.MTRContentLauncherClusterLaunchURLParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -150,4 +152,3 @@ type MTRContentLauncherClusterLaunchURLParamsable interface {
 }
 
 var _ MTRContentLauncherClusterLaunchURLParamsable = (*MTRContentLauncherClusterLaunchURLParams)(nil)
-

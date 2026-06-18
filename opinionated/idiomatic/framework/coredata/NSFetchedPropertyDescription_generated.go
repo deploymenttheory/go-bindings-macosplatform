@@ -106,7 +106,9 @@ func (x *FetchedPropertyDescription) SetFetchRequest(fetchRequest *raw.NSFetchRe
 	x.inner.SetFetchRequest(fetchRequest)
 }
 
-func (x *FetchedPropertyDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+func (x *FetchedPropertyDescription) asPropertyDescription() *raw.NSPropertyDescription {
+	return &x.inner.NSPropertyDescription
+}
 
 // FetchedPropertyDescriptionable is the interface implemented by [FetchedPropertyDescription], for mocking and DI.
 type FetchedPropertyDescriptionable interface {
@@ -126,4 +128,3 @@ type FetchedPropertyDescriptionable interface {
 }
 
 var _ FetchedPropertyDescriptionable = (*FetchedPropertyDescription)(nil)
-

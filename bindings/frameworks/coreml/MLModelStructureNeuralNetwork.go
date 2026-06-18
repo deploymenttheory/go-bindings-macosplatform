@@ -16,7 +16,7 @@ type MLModelStructureNeuralNetwork struct {
 }
 
 var (
-	_clsMLModelStructureNeuralNetwork = _objcClass("MLModelStructureNeuralNetwork")
+	_clsMLModelStructureNeuralNetwork       = _objcClass("MLModelStructureNeuralNetwork")
 	_mLModelStructureNeuralNetworkSelLayers = objc.RegisterName("layers")
 )
 
@@ -32,7 +32,8 @@ func MLModelStructureNeuralNetworkFromID(id objc.ID) *MLModelStructureNeuralNetw
 
 func (o *MLModelStructureNeuralNetwork) Layers() *foundation.NSArray[*MLModelStructureNeuralNetworkLayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureNeuralNetworkSelLayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureNeuralNetworkLayer](_ret)
 }
-

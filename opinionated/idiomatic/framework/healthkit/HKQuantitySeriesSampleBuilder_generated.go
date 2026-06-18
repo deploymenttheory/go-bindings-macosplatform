@@ -140,4 +140,3 @@ type QuantitySeriesSampleBuilderable interface {
 }
 
 var _ QuantitySeriesSampleBuilderable = (*QuantitySeriesSampleBuilder)(nil)
-

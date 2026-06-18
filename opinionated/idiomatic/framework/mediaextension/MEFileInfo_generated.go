@@ -105,4 +105,3 @@ type FileInfoable interface {
 }
 
 var _ FileInfoable = (*FileInfo)(nil)
-

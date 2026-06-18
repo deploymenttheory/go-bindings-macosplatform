@@ -112,7 +112,9 @@ func (x *NameSpecifier) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
-func (x *NameSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *NameSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
 func (x *NameSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
@@ -133,4 +135,3 @@ type NameSpecifierable interface {
 }
 
 var _ NameSpecifierable = (*NameSpecifier)(nil)
-

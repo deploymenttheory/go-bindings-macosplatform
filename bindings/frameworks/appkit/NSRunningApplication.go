@@ -16,31 +16,31 @@ type NSRunningApplication struct {
 }
 
 var (
-	_clsNSRunningApplication = _objcClass("NSRunningApplication")
-	_nSRunningApplicationSelHide = objc.RegisterName("hide")
-	_nSRunningApplicationSelUnhide = objc.RegisterName("unhide")
-	_nSRunningApplicationSelActivateFromApplicationOptions = objc.RegisterName("activateFromApplication:options:")
-	_nSRunningApplicationSelActivateWithOptions = objc.RegisterName("activateWithOptions:")
-	_nSRunningApplicationSelTerminate = objc.RegisterName("terminate")
-	_nSRunningApplicationSelForceTerminate = objc.RegisterName("forceTerminate")
-	_nSRunningApplicationSelRunningApplicationsWithBundleIdentifier = objc.RegisterName("runningApplicationsWithBundleIdentifier:")
-	_nSRunningApplicationSelRunningApplicationWithProcessIdentifier = objc.RegisterName("runningApplicationWithProcessIdentifier:")
+	_clsNSRunningApplication                                             = _objcClass("NSRunningApplication")
+	_nSRunningApplicationSelHide                                         = objc.RegisterName("hide")
+	_nSRunningApplicationSelUnhide                                       = objc.RegisterName("unhide")
+	_nSRunningApplicationSelActivateFromApplicationOptions               = objc.RegisterName("activateFromApplication:options:")
+	_nSRunningApplicationSelActivateWithOptions                          = objc.RegisterName("activateWithOptions:")
+	_nSRunningApplicationSelTerminate                                    = objc.RegisterName("terminate")
+	_nSRunningApplicationSelForceTerminate                               = objc.RegisterName("forceTerminate")
+	_nSRunningApplicationSelRunningApplicationsWithBundleIdentifier      = objc.RegisterName("runningApplicationsWithBundleIdentifier:")
+	_nSRunningApplicationSelRunningApplicationWithProcessIdentifier      = objc.RegisterName("runningApplicationWithProcessIdentifier:")
 	_nSRunningApplicationSelTerminateAutomaticallyTerminableApplications = objc.RegisterName("terminateAutomaticallyTerminableApplications")
-	_nSRunningApplicationSelIsTerminated = objc.RegisterName("isTerminated")
-	_nSRunningApplicationSelIsFinishedLaunching = objc.RegisterName("isFinishedLaunching")
-	_nSRunningApplicationSelIsHidden = objc.RegisterName("isHidden")
-	_nSRunningApplicationSelIsActive = objc.RegisterName("isActive")
-	_nSRunningApplicationSelOwnsMenuBar = objc.RegisterName("ownsMenuBar")
-	_nSRunningApplicationSelActivationPolicy = objc.RegisterName("activationPolicy")
-	_nSRunningApplicationSelLocalizedName = objc.RegisterName("localizedName")
-	_nSRunningApplicationSelBundleIdentifier = objc.RegisterName("bundleIdentifier")
-	_nSRunningApplicationSelBundleURL = objc.RegisterName("bundleURL")
-	_nSRunningApplicationSelExecutableURL = objc.RegisterName("executableURL")
-	_nSRunningApplicationSelProcessIdentifier = objc.RegisterName("processIdentifier")
-	_nSRunningApplicationSelLaunchDate = objc.RegisterName("launchDate")
-	_nSRunningApplicationSelIcon = objc.RegisterName("icon")
-	_nSRunningApplicationSelExecutableArchitecture = objc.RegisterName("executableArchitecture")
-	_nSRunningApplicationSelCurrentApplication = objc.RegisterName("currentApplication")
+	_nSRunningApplicationSelIsTerminated                                 = objc.RegisterName("isTerminated")
+	_nSRunningApplicationSelIsFinishedLaunching                          = objc.RegisterName("isFinishedLaunching")
+	_nSRunningApplicationSelIsHidden                                     = objc.RegisterName("isHidden")
+	_nSRunningApplicationSelIsActive                                     = objc.RegisterName("isActive")
+	_nSRunningApplicationSelOwnsMenuBar                                  = objc.RegisterName("ownsMenuBar")
+	_nSRunningApplicationSelActivationPolicy                             = objc.RegisterName("activationPolicy")
+	_nSRunningApplicationSelLocalizedName                                = objc.RegisterName("localizedName")
+	_nSRunningApplicationSelBundleIdentifier                             = objc.RegisterName("bundleIdentifier")
+	_nSRunningApplicationSelBundleURL                                    = objc.RegisterName("bundleURL")
+	_nSRunningApplicationSelExecutableURL                                = objc.RegisterName("executableURL")
+	_nSRunningApplicationSelProcessIdentifier                            = objc.RegisterName("processIdentifier")
+	_nSRunningApplicationSelLaunchDate                                   = objc.RegisterName("launchDate")
+	_nSRunningApplicationSelIcon                                         = objc.RegisterName("icon")
+	_nSRunningApplicationSelExecutableArchitecture                       = objc.RegisterName("executableArchitecture")
+	_nSRunningApplicationSelCurrentApplication                           = objc.RegisterName("currentApplication")
 )
 
 func NSRunningApplicationFromID(id objc.ID) *NSRunningApplication {
@@ -92,14 +92,18 @@ func (o *NSRunningApplication) ForceTerminate() bool {
 // @return An array of currently running applications with the given bundle identifier, or an empty array if no apps match.
 func NSRunningApplicationRunningApplicationsWithBundleIdentifier(bundleIdentifier *foundation.NSString) *foundation.NSArray[*NSRunningApplication] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunningApplication), _nSRunningApplicationSelRunningApplicationsWithBundleIdentifier, bundleIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSRunningApplication](_ret)
 }
 
 // @return The running application with the given process identifier, or nil if no application has that pid. Applications that do not have PIDs cannot be returned from this method.
 func NSRunningApplicationRunningApplicationWithProcessIdentifier(pid int) *NSRunningApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunningApplication), _nSRunningApplicationSelRunningApplicationWithProcessIdentifier, pid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunningApplicationFromID(_ret)
 }
 
@@ -147,28 +151,36 @@ func (o *NSRunningApplication) ActivationPolicy() NSApplicationActivationPolicy 
 // Indicates the name of the application. This is dependent on the current localization of the referenced app, and is suitable for presentation to the user.
 func (o *NSRunningApplication) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Indicates the `CFBundleIdentifier` of the application, or nil if the application does not have an `Info.plist`.
 func (o *NSRunningApplication) BundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Indicates the URL to the application's bundle, or nil if the application does not have a bundle.
 func (o *NSRunningApplication) BundleURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelBundleURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Indicates the URL to the application's executable.
 func (o *NSRunningApplication) ExecutableURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelExecutableURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -181,14 +193,18 @@ func (o *NSRunningApplication) ProcessIdentifier() int {
 // Indicates the date when the application was launched. This property is not available for all applications. Specifically, it is not available for applications that were launched without going through `LaunchServices`.
 func (o *NSRunningApplication) LaunchDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelLaunchDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @return The icon of the application.
 func (o *NSRunningApplication) Icon() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunningApplicationSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -201,7 +217,8 @@ func (o *NSRunningApplication) ExecutableArchitecture() int {
 // @return An @c NSRunningApplication representing this application.
 func NSRunningApplicationCurrentApplication() *NSRunningApplication {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunningApplication), _nSRunningApplicationSelCurrentApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunningApplicationFromID(_ret)
 }
-

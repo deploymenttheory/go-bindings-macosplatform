@@ -48,4 +48,3 @@ type MediaTimingFunctionable interface {
 }
 
 var _ MediaTimingFunctionable = (*MediaTimingFunction)(nil)
-

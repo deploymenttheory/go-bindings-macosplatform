@@ -88,4 +88,3 @@ type DirectoryEnumeratorable interface {
 }
 
 var _ DirectoryEnumeratorable = (*DirectoryEnumerator)(nil)
-

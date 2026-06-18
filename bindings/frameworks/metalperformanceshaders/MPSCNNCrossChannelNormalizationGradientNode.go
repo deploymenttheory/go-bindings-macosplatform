@@ -16,10 +16,10 @@ type MPSCNNCrossChannelNormalizationGradientNode struct {
 }
 
 var (
-	_clsMPSCNNCrossChannelNormalizationGradientNode = _objcClass("MPSCNNCrossChannelNormalizationGradientNode")
+	_clsMPSCNNCrossChannelNormalizationGradientNode                                                         = _objcClass("MPSCNNCrossChannelNormalizationGradientNode")
 	_mPSCNNCrossChannelNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelSize = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:")
 	_mPSCNNCrossChannelNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelSize = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelSize:")
-	_mPSCNNCrossChannelNormalizationGradientNodeSelKernelSize = objc.RegisterName("kernelSize")
+	_mPSCNNCrossChannelNormalizationGradientNodeSelKernelSize                                               = objc.RegisterName("kernelSize")
 )
 
 func MPSCNNCrossChannelNormalizationGradientNodeFromID(id objc.ID) *MPSCNNCrossChannelNormalizationGradientNode {
@@ -34,13 +34,17 @@ func MPSCNNCrossChannelNormalizationGradientNodeFromID(id objc.ID) *MPSCNNCrossC
 
 func MPSCNNCrossChannelNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, kernelSize uint) *MPSCNNCrossChannelNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNCrossChannelNormalizationGradientNode), _mPSCNNCrossChannelNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelSize, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNCrossChannelNormalizationGradientNode) InitWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, kernelSize uint) *MPSCNNCrossChannelNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelSize, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationGradientNodeFromID(_ret)
 }
 
@@ -48,4 +52,3 @@ func (o *MPSCNNCrossChannelNormalizationGradientNode) KernelSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNCrossChannelNormalizationGradientNodeSelKernelSize)
 	return _ret
 }
-

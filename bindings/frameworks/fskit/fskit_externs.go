@@ -13,37 +13,48 @@ import (
 
 func FSDirectoryCookieInitial() uint64 {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSDirectoryCookieInitial")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint64)(unsafe.Pointer(ptr))
 }
 
 func FSDirectoryVerifierInitial() uint64 {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSDirectoryVerifierInitial")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint64)(unsafe.Pointer(ptr))
 }
 
 func FSKitErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSKitErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func FSKitVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSKitVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func FSKitVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSKitVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
 
 func FSOperationIDUnspecified() uint {
 	ptr, _ := purego.Dlsym(_fskitLib, "FSOperationIDUnspecified")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
-

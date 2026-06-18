@@ -16,7 +16,9 @@ type MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent].
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent { return x.inner }
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable interface {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent)(nil)
-

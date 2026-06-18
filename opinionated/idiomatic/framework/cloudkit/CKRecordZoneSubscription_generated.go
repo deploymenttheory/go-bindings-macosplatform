@@ -100,4 +100,3 @@ type RecordZoneSubscriptionable interface {
 }
 
 var _ RecordZoneSubscriptionable = (*RecordZoneSubscription)(nil)
-

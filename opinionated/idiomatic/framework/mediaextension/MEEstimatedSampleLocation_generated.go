@@ -65,4 +65,3 @@ type EstimatedSampleLocationable interface {
 }
 
 var _ EstimatedSampleLocationable = (*EstimatedSampleLocation)(nil)
-

@@ -70,4 +70,3 @@ type TemporaryImageable interface {
 }
 
 var _ TemporaryImageable = (*TemporaryImage)(nil)
-

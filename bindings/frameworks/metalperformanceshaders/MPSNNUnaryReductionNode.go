@@ -19,10 +19,10 @@ type MPSNNUnaryReductionNode struct {
 }
 
 var (
-	_clsMPSNNUnaryReductionNode = _objcClass("MPSNNUnaryReductionNode")
-	_mPSNNUnaryReductionNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSNNUnaryReductionNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSNNUnaryReductionNodeSelClipRectSource = objc.RegisterName("clipRectSource")
+	_clsMPSNNUnaryReductionNode                  = _objcClass("MPSNNUnaryReductionNode")
+	_mPSNNUnaryReductionNodeSelNodeWithSource    = objc.RegisterName("nodeWithSource:")
+	_mPSNNUnaryReductionNodeSelInitWithSource    = objc.RegisterName("initWithSource:")
+	_mPSNNUnaryReductionNodeSelClipRectSource    = objc.RegisterName("clipRectSource")
 	_mPSNNUnaryReductionNodeSelSetClipRectSource = objc.RegisterName("setClipRectSource:")
 )
 
@@ -39,14 +39,18 @@ func MPSNNUnaryReductionNodeFromID(id objc.ID) *MPSNNUnaryReductionNode {
 // @abstract   Create an autoreleased node representing an MPS reduction kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for an MPS reduction kernel.
 func MPSNNUnaryReductionNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSNNUnaryReductionNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNUnaryReductionNode), _mPSNNUnaryReductionNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNUnaryReductionNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing an MPS reduction kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for an MPS reduction kernel.
 func (o *MPSNNUnaryReductionNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSNNUnaryReductionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNUnaryReductionNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNUnaryReductionNodeFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *MPSNNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
 func (o *MPSNNUnaryReductionNode) SetClipRectSource(clipRectSource metal.MTLRegion) {
 	o.Ptr().Send(_mPSNNUnaryReductionNodeSelSetClipRectSource, clipRectSource)
 }
-

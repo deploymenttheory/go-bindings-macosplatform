@@ -141,9 +141,13 @@ func (x *DetectContoursRequest) SetMaximumImageDimension(maximumImageDimension u
 	x.inner.SetMaximumImageDimension(maximumImageDimension)
 }
 
-func (x *DetectContoursRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectContoursRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectContoursRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectContoursRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectContoursRequestable is the interface implemented by [DetectContoursRequest], for mocking and DI.
 type DetectContoursRequestable interface {
@@ -170,4 +174,3 @@ type DetectContoursRequestable interface {
 }
 
 var _ DetectContoursRequestable = (*DetectContoursRequest)(nil)
-

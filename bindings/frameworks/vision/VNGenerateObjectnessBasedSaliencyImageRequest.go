@@ -25,4 +25,3 @@ func VNGenerateObjectnessBasedSaliencyImageRequestFromID(id objc.ID) *VNGenerate
 	purego.Track(o)
 	return o
 }
-

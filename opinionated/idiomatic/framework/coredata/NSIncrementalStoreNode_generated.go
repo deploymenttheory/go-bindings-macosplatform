@@ -65,4 +65,3 @@ type IncrementalStoreNodeable interface {
 }
 
 var _ IncrementalStoreNodeable = (*IncrementalStoreNode)(nil)
-

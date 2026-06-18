@@ -19,19 +19,19 @@ type AVDepthData struct {
 }
 
 var (
-	_clsAVDepthData = _objcClass("AVDepthData")
-	_aVDepthDataSelDepthDataFromDictionaryRepresentationError = objc.RegisterName("depthDataFromDictionaryRepresentation:error:")
-	_aVDepthDataSelDepthDataByConvertingToDepthDataType = objc.RegisterName("depthDataByConvertingToDepthDataType:")
-	_aVDepthDataSelDepthDataByApplyingExifOrientation = objc.RegisterName("depthDataByApplyingExifOrientation:")
+	_clsAVDepthData                                                     = _objcClass("AVDepthData")
+	_aVDepthDataSelDepthDataFromDictionaryRepresentationError           = objc.RegisterName("depthDataFromDictionaryRepresentation:error:")
+	_aVDepthDataSelDepthDataByConvertingToDepthDataType                 = objc.RegisterName("depthDataByConvertingToDepthDataType:")
+	_aVDepthDataSelDepthDataByApplyingExifOrientation                   = objc.RegisterName("depthDataByApplyingExifOrientation:")
 	_aVDepthDataSelDepthDataByReplacingDepthDataMapWithPixelBufferError = objc.RegisterName("depthDataByReplacingDepthDataMapWithPixelBuffer:error:")
-	_aVDepthDataSelDictionaryRepresentationForAuxiliaryDataType = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
-	_aVDepthDataSelAvailableDepthDataTypes = objc.RegisterName("availableDepthDataTypes")
-	_aVDepthDataSelDepthDataType = objc.RegisterName("depthDataType")
-	_aVDepthDataSelDepthDataMap = objc.RegisterName("depthDataMap")
-	_aVDepthDataSelDepthDataQuality = objc.RegisterName("depthDataQuality")
-	_aVDepthDataSelIsDepthDataFiltered = objc.RegisterName("isDepthDataFiltered")
-	_aVDepthDataSelDepthDataAccuracy = objc.RegisterName("depthDataAccuracy")
-	_aVDepthDataSelCameraCalibrationData = objc.RegisterName("cameraCalibrationData")
+	_aVDepthDataSelDictionaryRepresentationForAuxiliaryDataType         = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
+	_aVDepthDataSelAvailableDepthDataTypes                              = objc.RegisterName("availableDepthDataTypes")
+	_aVDepthDataSelDepthDataType                                        = objc.RegisterName("depthDataType")
+	_aVDepthDataSelDepthDataMap                                         = objc.RegisterName("depthDataMap")
+	_aVDepthDataSelDepthDataQuality                                     = objc.RegisterName("depthDataQuality")
+	_aVDepthDataSelIsDepthDataFiltered                                  = objc.RegisterName("isDepthDataFiltered")
+	_aVDepthDataSelDepthDataAccuracy                                    = objc.RegisterName("depthDataAccuracy")
+	_aVDepthDataSelCameraCalibrationData                                = objc.RegisterName("cameraCalibrationData")
 )
 
 func AVDepthDataFromID(id objc.ID) *AVDepthData {
@@ -48,7 +48,9 @@ func AVDepthDataFromID(id objc.ID) *AVDepthData {
 func AVDepthDataDepthDataFromDictionaryRepresentationError(imageSourceAuxDataInfoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) (*AVDepthData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVDepthData), _aVDepthDataSelDepthDataFromDictionaryRepresentationError, imageSourceAuxDataInfoDictionary, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -58,14 +60,18 @@ func AVDepthDataDepthDataFromDictionaryRepresentationError(imageSourceAuxDataInf
 // @method depthDataByConvertingToDepthDataType: @abstract Returns a converted, derivative AVDepthData instance in the specified depthDataType. @param depthDataType The OSType of depthData object to which you'd like to convert. Must be present in availableDepthDataTypes. @result An AVDepthData instance. @discussion This method throws an NSInvalidArgumentException if you pass an unrecognized depthDataType. See
 func (o *AVDepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *AVDepthData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByConvertingToDepthDataType, depthDataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVDepthDataFromID(_ret)
 }
 
 // @method depthDataByApplyingExifOrientation: @abstract Returns a derivative AVDepthData instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the depth data should be rotated / mirrored. @result An AVDepthData instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing depth data, you may use this initializer to create a derivative copy of the depth in which the specified orientation is applied to both the underlying pixel map data and the camera calibration data. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
 func (o *AVDepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *AVDepthData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByApplyingExifOrientation, exifOrientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVDepthDataFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *AVDepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio
 func (o *AVDepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*AVDepthData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelDepthDataByReplacingDepthDataMapWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -125,7 +133,8 @@ func (o *AVDepthData) DepthDataAccuracy() AVDepthDataAccuracy {
 // @property cameraCalibrationData @abstract The calibration data of the camera with which AVDepthData map's values are aligned. @discussion See AVCameraCalibrationData for more information. This property may return nil if no camera calibration data is available for the depth data.
 func (o *AVDepthData) CameraCalibrationData() *AVCameraCalibrationData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDepthDataSelCameraCalibrationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCameraCalibrationDataFromID(_ret)
 }
-

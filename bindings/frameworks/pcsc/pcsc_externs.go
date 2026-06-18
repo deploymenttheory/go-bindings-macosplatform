@@ -11,19 +11,24 @@ import (
 
 func G_rgSCardRawPci() SCARD_IO_REQUEST {
 	ptr, _ := purego.Dlsym(_pcscLib, "g_rgSCardRawPci")
-	if ptr == 0 { return SCARD_IO_REQUEST{} }
+	if ptr == 0 {
+		return SCARD_IO_REQUEST{}
+	}
 	return *(*SCARD_IO_REQUEST)(unsafe.Pointer(ptr))
 }
 
 func G_rgSCardT0Pci() SCARD_IO_REQUEST {
 	ptr, _ := purego.Dlsym(_pcscLib, "g_rgSCardT0Pci")
-	if ptr == 0 { return SCARD_IO_REQUEST{} }
+	if ptr == 0 {
+		return SCARD_IO_REQUEST{}
+	}
 	return *(*SCARD_IO_REQUEST)(unsafe.Pointer(ptr))
 }
 
 func G_rgSCardT1Pci() SCARD_IO_REQUEST {
 	ptr, _ := purego.Dlsym(_pcscLib, "g_rgSCardT1Pci")
-	if ptr == 0 { return SCARD_IO_REQUEST{} }
+	if ptr == 0 {
+		return SCARD_IO_REQUEST{}
+	}
 	return *(*SCARD_IO_REQUEST)(unsafe.Pointer(ptr))
 }
-

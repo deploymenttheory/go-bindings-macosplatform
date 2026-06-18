@@ -47,7 +47,9 @@ func (x *MathExpressionIdentifier) Content() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *MathExpressionIdentifier) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionIdentifier) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionIdentifierable is the interface implemented by [MathExpressionIdentifier], for mocking and DI.
 type MathExpressionIdentifierable interface {
@@ -56,4 +58,3 @@ type MathExpressionIdentifierable interface {
 }
 
 var _ MathExpressionIdentifierable = (*MathExpressionIdentifier)(nil)
-

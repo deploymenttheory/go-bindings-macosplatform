@@ -17,21 +17,21 @@ type AVSampleBufferRequest struct {
 }
 
 var (
-	_clsAVSampleBufferRequest = _objcClass("AVSampleBufferRequest")
-	_aVSampleBufferRequestSelInitWithStartCursor = objc.RegisterName("initWithStartCursor:")
-	_aVSampleBufferRequestSelStartCursor = objc.RegisterName("startCursor")
-	_aVSampleBufferRequestSelDirection = objc.RegisterName("direction")
-	_aVSampleBufferRequestSelSetDirection = objc.RegisterName("setDirection:")
-	_aVSampleBufferRequestSelLimitCursor = objc.RegisterName("limitCursor")
-	_aVSampleBufferRequestSelSetLimitCursor = objc.RegisterName("setLimitCursor:")
-	_aVSampleBufferRequestSelPreferredMinSampleCount = objc.RegisterName("preferredMinSampleCount")
+	_clsAVSampleBufferRequest                           = _objcClass("AVSampleBufferRequest")
+	_aVSampleBufferRequestSelInitWithStartCursor        = objc.RegisterName("initWithStartCursor:")
+	_aVSampleBufferRequestSelStartCursor                = objc.RegisterName("startCursor")
+	_aVSampleBufferRequestSelDirection                  = objc.RegisterName("direction")
+	_aVSampleBufferRequestSelSetDirection               = objc.RegisterName("setDirection:")
+	_aVSampleBufferRequestSelLimitCursor                = objc.RegisterName("limitCursor")
+	_aVSampleBufferRequestSelSetLimitCursor             = objc.RegisterName("setLimitCursor:")
+	_aVSampleBufferRequestSelPreferredMinSampleCount    = objc.RegisterName("preferredMinSampleCount")
 	_aVSampleBufferRequestSelSetPreferredMinSampleCount = objc.RegisterName("setPreferredMinSampleCount:")
-	_aVSampleBufferRequestSelMaxSampleCount = objc.RegisterName("maxSampleCount")
-	_aVSampleBufferRequestSelSetMaxSampleCount = objc.RegisterName("setMaxSampleCount:")
-	_aVSampleBufferRequestSelMode = objc.RegisterName("mode")
-	_aVSampleBufferRequestSelSetMode = objc.RegisterName("setMode:")
-	_aVSampleBufferRequestSelOverrideTime = objc.RegisterName("overrideTime")
-	_aVSampleBufferRequestSelSetOverrideTime = objc.RegisterName("setOverrideTime:")
+	_aVSampleBufferRequestSelMaxSampleCount             = objc.RegisterName("maxSampleCount")
+	_aVSampleBufferRequestSelSetMaxSampleCount          = objc.RegisterName("setMaxSampleCount:")
+	_aVSampleBufferRequestSelMode                       = objc.RegisterName("mode")
+	_aVSampleBufferRequestSelSetMode                    = objc.RegisterName("setMode:")
+	_aVSampleBufferRequestSelOverrideTime               = objc.RegisterName("overrideTime")
+	_aVSampleBufferRequestSelSetOverrideTime            = objc.RegisterName("setOverrideTime:")
 )
 
 func AVSampleBufferRequestFromID(id objc.ID) *AVSampleBufferRequest {
@@ -46,13 +46,17 @@ func AVSampleBufferRequestFromID(id objc.ID) *AVSampleBufferRequest {
 
 func (o *AVSampleBufferRequest) InitWithStartCursor(startCursor *AVSampleCursor) *AVSampleBufferRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferRequestSelInitWithStartCursor, startCursor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleBufferRequestFromID(_ret)
 }
 
 func (o *AVSampleBufferRequest) StartCursor() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferRequestSelStartCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleCursorFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *AVSampleBufferRequest) SetDirection(direction AVSampleBufferRequestDire
 
 func (o *AVSampleBufferRequest) LimitCursor() *AVSampleCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferRequestSelLimitCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleCursorFromID(_ret)
 }
 
@@ -110,4 +116,3 @@ func (o *AVSampleBufferRequest) OverrideTime() coremedia.CMTime {
 func (o *AVSampleBufferRequest) SetOverrideTime(overrideTime coremedia.CMTime) {
 	o.Ptr().Send(_aVSampleBufferRequestSelSetOverrideTime, overrideTime)
 }
-

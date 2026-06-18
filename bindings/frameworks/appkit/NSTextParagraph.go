@@ -16,11 +16,11 @@ type NSTextParagraph struct {
 }
 
 var (
-	_clsNSTextParagraph = _objcClass("NSTextParagraph")
+	_clsNSTextParagraph                         = _objcClass("NSTextParagraph")
 	_nSTextParagraphSelInitWithAttributedString = objc.RegisterName("initWithAttributedString:")
-	_nSTextParagraphSelAttributedString = objc.RegisterName("attributedString")
-	_nSTextParagraphSelParagraphContentRange = objc.RegisterName("paragraphContentRange")
-	_nSTextParagraphSelParagraphSeparatorRange = objc.RegisterName("paragraphSeparatorRange")
+	_nSTextParagraphSelAttributedString         = objc.RegisterName("attributedString")
+	_nSTextParagraphSelParagraphContentRange    = objc.RegisterName("paragraphContentRange")
+	_nSTextParagraphSelParagraphSeparatorRange  = objc.RegisterName("paragraphSeparatorRange")
 )
 
 func NSTextParagraphFromID(id objc.ID) *NSTextParagraph {
@@ -35,25 +35,32 @@ func NSTextParagraphFromID(id objc.ID) *NSTextParagraph {
 
 func (o *NSTextParagraph) InitWithAttributedString(attributedString *foundation.NSAttributedString) *NSTextParagraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelInitWithAttributedString, attributedString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextParagraphFromID(_ret)
 }
 
 func (o *NSTextParagraph) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *NSTextParagraph) ParagraphContentRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelParagraphContentRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
 
 func (o *NSTextParagraph) ParagraphSeparatorRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextParagraphSelParagraphSeparatorRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
-

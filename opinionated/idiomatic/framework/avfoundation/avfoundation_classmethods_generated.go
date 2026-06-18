@@ -1594,4 +1594,3 @@ func VideoCompositionCoreAnimationToolWithPostProcessingAsVideoLayersInLayer(vid
 	}
 	return &VideoCompositionCoreAnimationTool{inner: _r}
 }
-

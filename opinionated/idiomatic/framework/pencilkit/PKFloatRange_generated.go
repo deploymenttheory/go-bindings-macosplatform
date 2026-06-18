@@ -54,4 +54,3 @@ type FloatRangeable interface {
 }
 
 var _ FloatRangeable = (*FloatRange)(nil)
-

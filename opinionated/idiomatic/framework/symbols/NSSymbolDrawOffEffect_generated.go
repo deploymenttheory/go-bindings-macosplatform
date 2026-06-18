@@ -93,4 +93,3 @@ type SymbolDrawOffEffectable interface {
 }
 
 var _ SymbolDrawOffEffectable = (*SymbolDrawOffEffect)(nil)
-

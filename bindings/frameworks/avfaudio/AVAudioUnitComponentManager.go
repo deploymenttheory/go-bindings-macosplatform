@@ -16,13 +16,13 @@ type AVAudioUnitComponentManager struct {
 }
 
 var (
-	_clsAVAudioUnitComponentManager = _objcClass("AVAudioUnitComponentManager")
+	_clsAVAudioUnitComponentManager                                = _objcClass("AVAudioUnitComponentManager")
 	_aVAudioUnitComponentManagerSelSharedAudioUnitComponentManager = objc.RegisterName("sharedAudioUnitComponentManager")
-	_aVAudioUnitComponentManagerSelComponentsMatchingPredicate = objc.RegisterName("componentsMatchingPredicate:")
-	_aVAudioUnitComponentManagerSelComponentsPassingTest = objc.RegisterName("componentsPassingTest:")
-	_aVAudioUnitComponentManagerSelComponentsMatchingDescription = objc.RegisterName("componentsMatchingDescription:")
-	_aVAudioUnitComponentManagerSelTagNames = objc.RegisterName("tagNames")
-	_aVAudioUnitComponentManagerSelStandardLocalizedTagNames = objc.RegisterName("standardLocalizedTagNames")
+	_aVAudioUnitComponentManagerSelComponentsMatchingPredicate     = objc.RegisterName("componentsMatchingPredicate:")
+	_aVAudioUnitComponentManagerSelComponentsPassingTest           = objc.RegisterName("componentsPassingTest:")
+	_aVAudioUnitComponentManagerSelComponentsMatchingDescription   = objc.RegisterName("componentsMatchingDescription:")
+	_aVAudioUnitComponentManagerSelTagNames                        = objc.RegisterName("tagNames")
+	_aVAudioUnitComponentManagerSelStandardLocalizedTagNames       = objc.RegisterName("standardLocalizedTagNames")
 )
 
 func AVAudioUnitComponentManagerFromID(id objc.ID) *AVAudioUnitComponentManager {
@@ -37,14 +37,18 @@ func AVAudioUnitComponentManagerFromID(id objc.ID) *AVAudioUnitComponentManager 
 
 func AVAudioUnitComponentManagerSharedAudioUnitComponentManager() *AVAudioUnitComponentManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioUnitComponentManager), _aVAudioUnitComponentManagerSelSharedAudioUnitComponentManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitComponentManagerFromID(_ret)
 }
 
 // @method componentsMatchingPredicate: @abstract	returns an array of AVAudioUnitComponent objects that match the search predicate. @discussion AudioComponent's information or tags can be used to build a search criteria. For example, "typeName CONTAINS 'Effect'" or tags IN {'Sampler', 'MIDI'}"
 func (o *AVAudioUnitComponentManager) ComponentsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*AVAudioUnitComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelComponentsMatchingPredicate, predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioUnitComponent](_ret)
 }
 
@@ -61,14 +65,18 @@ func (o *AVAudioUnitComponentManager) ComponentsPassingTest(testHandler func(*AV
 		defer __block_testHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelComponentsPassingTest, __block_testHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioUnitComponent](_ret)
 }
 
 // @method componentsMatchingDescription: @abstract	returns an array of AVAudioUnitComponent objects that match the description. @discussion This method provides a mechanism to search for AudioComponents using AudioComponentDescription structure. The type, subtype and manufacturer fields are used to search for audio units. A value of 0 for any of these fields is a wildcard and returns the first match found.
 func (o *AVAudioUnitComponentManager) ComponentsMatchingDescription(desc objc.ID) *foundation.NSArray[*AVAudioUnitComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitComponentManagerSelComponentsMatchingDescription, desc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioUnitComponent](_ret)
 }
 
@@ -82,4 +90,3 @@ func (o *AVAudioUnitComponentManager) StandardLocalizedTagNames() *foundation.NS
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAudioUnitComponentManagerSelStandardLocalizedTagNames)
 	return _ret
 }
-

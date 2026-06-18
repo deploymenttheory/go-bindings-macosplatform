@@ -82,4 +82,3 @@ type Graphable interface {
 }
 
 var _ Graphable = (*Graph)(nil)
-

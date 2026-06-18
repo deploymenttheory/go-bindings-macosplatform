@@ -25,4 +25,3 @@ func VNGenerateForegroundInstanceMaskRequestFromID(id objc.ID) *VNGenerateForegr
 	purego.Track(o)
 	return o
 }
-

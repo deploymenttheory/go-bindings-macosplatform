@@ -88,7 +88,9 @@ func (x *AnimatedVector3Array) ElementCount() uint {
 	return x.inner.ElementCount()
 }
 
-func (x *AnimatedVector3Array) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+func (x *AnimatedVector3Array) asAnimatedValue() *raw.MDLAnimatedValue {
+	return &x.inner.MDLAnimatedValue
+}
 
 // AnimatedVector3Arrayable is the interface implemented by [AnimatedVector3Array], for mocking and DI.
 type AnimatedVector3Arrayable interface {
@@ -106,4 +108,3 @@ type AnimatedVector3Arrayable interface {
 }
 
 var _ AnimatedVector3Arrayable = (*AnimatedVector3Array)(nil)
-

@@ -41,7 +41,9 @@ func (x *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorRespons
 	return x.inner.PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse, options)
 }
 
-func (x *PersistableContentKeyRequest) asContentKeyRequest() *raw.AVContentKeyRequest { return &x.inner.AVContentKeyRequest }
+func (x *PersistableContentKeyRequest) asContentKeyRequest() *raw.AVContentKeyRequest {
+	return &x.inner.AVContentKeyRequest
+}
 
 // PersistableContentKeyRequestable is the interface implemented by [PersistableContentKeyRequest], for mocking and DI.
 type PersistableContentKeyRequestable interface {
@@ -50,4 +52,3 @@ type PersistableContentKeyRequestable interface {
 }
 
 var _ PersistableContentKeyRequestable = (*PersistableContentKeyRequest)(nil)
-

@@ -26,4 +26,3 @@ func VZVirtioSoundDeviceStreamConfigurationFromID(id objc.ID) *VZVirtioSoundDevi
 	purego.Track(o)
 	return o
 }
-

@@ -16,10 +16,10 @@ type CBMutableService struct {
 }
 
 var (
-	_clsCBMutableService = _objcClass("CBMutableService")
+	_clsCBMutableService                    = _objcClass("CBMutableService")
 	_cBMutableServiceSelInitWithTypePrimary = objc.RegisterName("initWithType:primary:")
 	_cBMutableServiceSelSetIncludedServices = objc.RegisterName("setIncludedServices:")
-	_cBMutableServiceSelSetCharacteristics = objc.RegisterName("setCharacteristics:")
+	_cBMutableServiceSelSetCharacteristics  = objc.RegisterName("setCharacteristics:")
 )
 
 func CBMutableServiceFromID(id objc.ID) *CBMutableService {
@@ -35,7 +35,9 @@ func CBMutableServiceFromID(id objc.ID) *CBMutableService {
 // @method initWithType:primary: @param UUID			The Bluetooth UUID of the service. @param isPrimary	The type of the service (primary or secondary). @discussion			Returns a service, initialized with a service type and UUID.
 func (o *CBMutableService) InitWithTypePrimary(uUID *CBUUID, isPrimary bool) *CBMutableService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableServiceSelInitWithTypePrimary, uUID.Ptr(), isPrimary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBMutableServiceFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *CBMutableService) SetIncludedServices(includedServices *foundation.NSAr
 func (o *CBMutableService) SetCharacteristics(characteristics *foundation.NSArray[*CBCharacteristic]) {
 	o.Ptr().Send(_cBMutableServiceSelSetCharacteristics, characteristics.Ptr())
 }
-

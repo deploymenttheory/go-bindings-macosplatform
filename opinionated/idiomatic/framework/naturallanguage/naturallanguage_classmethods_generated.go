@@ -187,4 +187,3 @@ func AvailableTagSchemesForUnitLanguage(unit raw.NLTokenUnit, language *foundati
 func RequestAssetsForLanguageTagSchemeCompletionHandler(language *foundation.NSString, tagScheme *foundation.NSString, completionHandler func(raw.NLTaggerAssetsResult, unsafe.Pointer)) {
 	raw.NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language, tagScheme, completionHandler)
 }
-

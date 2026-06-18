@@ -16,28 +16,28 @@ type OBEXFileTransferServices struct {
 }
 
 var (
-	_clsOBEXFileTransferServices = _objcClass("OBEXFileTransferServices")
-	_oBEXFileTransferServicesSelWithOBEXSession = objc.RegisterName("withOBEXSession:")
-	_oBEXFileTransferServicesSelInitWithOBEXSession = objc.RegisterName("initWithOBEXSession:")
-	_oBEXFileTransferServicesSelCurrentPath = objc.RegisterName("currentPath")
-	_oBEXFileTransferServicesSelIsBusy = objc.RegisterName("isBusy")
-	_oBEXFileTransferServicesSelIsConnected = objc.RegisterName("isConnected")
-	_oBEXFileTransferServicesSelConnectToFTPService = objc.RegisterName("connectToFTPService")
-	_oBEXFileTransferServicesSelConnectToObjectPushService = objc.RegisterName("connectToObjectPushService")
-	_oBEXFileTransferServicesSelDisconnect = objc.RegisterName("disconnect")
-	_oBEXFileTransferServicesSelChangeCurrentFolderToRoot = objc.RegisterName("changeCurrentFolderToRoot")
-	_oBEXFileTransferServicesSelChangeCurrentFolderBackward = objc.RegisterName("changeCurrentFolderBackward")
+	_clsOBEXFileTransferServices                                 = _objcClass("OBEXFileTransferServices")
+	_oBEXFileTransferServicesSelWithOBEXSession                  = objc.RegisterName("withOBEXSession:")
+	_oBEXFileTransferServicesSelInitWithOBEXSession              = objc.RegisterName("initWithOBEXSession:")
+	_oBEXFileTransferServicesSelCurrentPath                      = objc.RegisterName("currentPath")
+	_oBEXFileTransferServicesSelIsBusy                           = objc.RegisterName("isBusy")
+	_oBEXFileTransferServicesSelIsConnected                      = objc.RegisterName("isConnected")
+	_oBEXFileTransferServicesSelConnectToFTPService              = objc.RegisterName("connectToFTPService")
+	_oBEXFileTransferServicesSelConnectToObjectPushService       = objc.RegisterName("connectToObjectPushService")
+	_oBEXFileTransferServicesSelDisconnect                       = objc.RegisterName("disconnect")
+	_oBEXFileTransferServicesSelChangeCurrentFolderToRoot        = objc.RegisterName("changeCurrentFolderToRoot")
+	_oBEXFileTransferServicesSelChangeCurrentFolderBackward      = objc.RegisterName("changeCurrentFolderBackward")
 	_oBEXFileTransferServicesSelChangeCurrentFolderForwardToPath = objc.RegisterName("changeCurrentFolderForwardToPath:")
-	_oBEXFileTransferServicesSelCreateFolder = objc.RegisterName("createFolder:")
-	_oBEXFileTransferServicesSelRemoveItem = objc.RegisterName("removeItem:")
-	_oBEXFileTransferServicesSelRetrieveFolderListing = objc.RegisterName("retrieveFolderListing")
-	_oBEXFileTransferServicesSelSendFile = objc.RegisterName("sendFile:")
-	_oBEXFileTransferServicesSelCopyRemoteFileToLocalPath = objc.RegisterName("copyRemoteFile:toLocalPath:")
-	_oBEXFileTransferServicesSelSendDataTypeName = objc.RegisterName("sendData:type:name:")
-	_oBEXFileTransferServicesSelGetDefaultVCard = objc.RegisterName("getDefaultVCard:")
-	_oBEXFileTransferServicesSelAbort = objc.RegisterName("abort")
-	_oBEXFileTransferServicesSelDelegate = objc.RegisterName("delegate")
-	_oBEXFileTransferServicesSelSetDelegate = objc.RegisterName("setDelegate:")
+	_oBEXFileTransferServicesSelCreateFolder                     = objc.RegisterName("createFolder:")
+	_oBEXFileTransferServicesSelRemoveItem                       = objc.RegisterName("removeItem:")
+	_oBEXFileTransferServicesSelRetrieveFolderListing            = objc.RegisterName("retrieveFolderListing")
+	_oBEXFileTransferServicesSelSendFile                         = objc.RegisterName("sendFile:")
+	_oBEXFileTransferServicesSelCopyRemoteFileToLocalPath        = objc.RegisterName("copyRemoteFile:toLocalPath:")
+	_oBEXFileTransferServicesSelSendDataTypeName                 = objc.RegisterName("sendData:type:name:")
+	_oBEXFileTransferServicesSelGetDefaultVCard                  = objc.RegisterName("getDefaultVCard:")
+	_oBEXFileTransferServicesSelAbort                            = objc.RegisterName("abort")
+	_oBEXFileTransferServicesSelDelegate                         = objc.RegisterName("delegate")
+	_oBEXFileTransferServicesSelSetDelegate                      = objc.RegisterName("setDelegate:")
 )
 
 func OBEXFileTransferServicesFromID(id objc.ID) *OBEXFileTransferServices {
@@ -53,21 +53,27 @@ func OBEXFileTransferServicesFromID(id objc.ID) *OBEXFileTransferServices {
 // @method			withOBEXSession: @abstract		Create a new OBEXFileTransferServices object @discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given IOBluetoothOBEXSession does not need to be connected to the remote server. This module can be manually connected through the connect(void) method. @param			inOBEXSession A valid IOBluetoothOBEXSession @result			A newly created OBEXFileTransferServices object on success, nil on failure
 func OBEXFileTransferServicesWithOBEXSession(inOBEXSession *IOBluetoothOBEXSession) *OBEXFileTransferServices {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOBEXFileTransferServices), _oBEXFileTransferServicesSelWithOBEXSession, inOBEXSession.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OBEXFileTransferServicesFromID(_ret)
 }
 
 // @method			initWithOBEXSession: @abstract		Create a new OBEXFileTransferServices object @discussion		This object must be constructed with a valid IOBluetoothOBEXSession. The given IOBluetoothOBEXSession does not need to be connected to the remote server. OBEXFileTransferServices can be manually connected through the provided connection methods. @param			inOBEXSession A valid IOBluetoothOBEXSession @result			A newly created OBEXFileTransferServices object on success, nil on failure
 func (o *OBEXFileTransferServices) InitWithOBEXSession(inOBEXSession *IOBluetoothOBEXSession) *OBEXFileTransferServices {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oBEXFileTransferServicesSelInitWithOBEXSession, inOBEXSession.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OBEXFileTransferServicesFromID(_ret)
 }
 
 // @method     currentPath @abstract   Get the remote current directory path during an FTP session @discussion This path is changed with each path-specific command called on OBEXFileTransferServices. @result		The current path being browsed over FTP
 func (o *OBEXFileTransferServices) CurrentPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oBEXFileTransferServicesSelCurrentPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -175,4 +181,3 @@ func (o *OBEXFileTransferServices) Delegate() objc.ID {
 func (o *OBEXFileTransferServices) SetDelegate(delegate objc.ID) {
 	o.Ptr().Send(_oBEXFileTransferServicesSelSetDelegate, delegate)
 }
-

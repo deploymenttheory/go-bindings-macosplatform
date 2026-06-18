@@ -15,7 +15,9 @@ type MTRBridgedDeviceBasicInformationClusterShutDownEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewMTRBridgedDeviceBasicInformationClusterShutDownEvent() *MTRBridgedDevice
 	return &MTRBridgedDeviceBasicInformationClusterShutDownEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterShutDownEventFromID(_id)}
 }
 
-func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterShutDownEvent) asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent {
+	return x.inner
+}
 
 // MTRBridgedDeviceBasicInformationClusterShutDownEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterShutDownEvent], for mocking and DI.
 type MTRBridgedDeviceBasicInformationClusterShutDownEventable interface {
@@ -43,4 +47,3 @@ type MTRBridgedDeviceBasicInformationClusterShutDownEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterShutDownEventable = (*MTRBridgedDeviceBasicInformationClusterShutDownEvent)(nil)
-

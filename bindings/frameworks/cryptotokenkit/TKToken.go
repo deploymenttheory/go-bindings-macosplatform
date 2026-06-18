@@ -16,13 +16,13 @@ type TKToken struct {
 }
 
 var (
-	_clsTKToken = _objcClass("TKToken")
+	_clsTKToken                              = _objcClass("TKToken")
 	_tKTokenSelInitWithTokenDriverInstanceID = objc.RegisterName("initWithTokenDriver:instanceID:")
-	_tKTokenSelTokenDriver = objc.RegisterName("tokenDriver")
-	_tKTokenSelDelegate = objc.RegisterName("delegate")
-	_tKTokenSelSetDelegate = objc.RegisterName("setDelegate:")
-	_tKTokenSelConfiguration = objc.RegisterName("configuration")
-	_tKTokenSelKeychainContents = objc.RegisterName("keychainContents")
+	_tKTokenSelTokenDriver                   = objc.RegisterName("tokenDriver")
+	_tKTokenSelDelegate                      = objc.RegisterName("delegate")
+	_tKTokenSelSetDelegate                   = objc.RegisterName("setDelegate:")
+	_tKTokenSelConfiguration                 = objc.RegisterName("configuration")
+	_tKTokenSelKeychainContents              = objc.RegisterName("keychainContents")
 )
 
 func TKTokenFromID(id objc.ID) *TKToken {
@@ -38,13 +38,17 @@ func TKTokenFromID(id objc.ID) *TKToken {
 // @discussion Initializes token instance @param tokenDriver Creating token driver. @param instanceID Unique, persistent identifier of this token.
 func (o *TKToken) InitWithTokenDriverInstanceID(tokenDriver *TKTokenDriver, instanceID *foundation.NSString) *TKToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSelInitWithTokenDriverInstanceID, tokenDriver.Ptr(), instanceID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenFromID(_ret)
 }
 
 func (o *TKToken) TokenDriver() *TKTokenDriver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSelTokenDriver)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenDriverFromID(_ret)
 }
 
@@ -60,14 +64,17 @@ func (o *TKToken) SetDelegate(delegate TKTokenDelegate) {
 // Token configuration associated with this token instance.
 func (o *TKToken) Configuration() *TKTokenConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenConfigurationFromID(_ret)
 }
 
 // @discussion Keychain contents (certificate and key items) representing this token.
 func (o *TKToken) KeychainContents() *TKTokenKeychainContents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSelKeychainContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenKeychainContentsFromID(_ret)
 }
-

@@ -209,4 +209,3 @@ func ArWorldTrackingProviderIsSupported() bool {
 func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider *foundation.NSObject, timestamp float64, device_anchor *foundation.NSObject) raw.Ar_device_anchor_query_status_t {
 	return raw.ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider, timestamp, device_anchor)
 }
-

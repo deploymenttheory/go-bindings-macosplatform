@@ -16,17 +16,17 @@ type MERAWProcessingListParameter struct {
 }
 
 var (
-	_clsMERAWProcessingListParameter = _objcClass("MERAWProcessingListParameter")
-	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValue = objc.RegisterName("initWithName:key:description:list:initialValue:")
-	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueNeutralValue = objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:")
-	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueCameraValue = objc.RegisterName("initWithName:key:description:list:initialValue:cameraValue:")
+	_clsMERAWProcessingListParameter                                                                  = _objcClass("MERAWProcessingListParameter")
+	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValue                        = objc.RegisterName("initWithName:key:description:list:initialValue:")
+	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueNeutralValue            = objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:")
+	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueCameraValue             = objc.RegisterName("initWithName:key:description:list:initialValue:cameraValue:")
 	_mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueNeutralValueCameraValue = objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:cameraValue:")
-	_mERAWProcessingListParameterSelHasNeutralValue = objc.RegisterName("hasNeutralValue:")
-	_mERAWProcessingListParameterSelHasCameraValue = objc.RegisterName("hasCameraValue:")
-	_mERAWProcessingListParameterSelListElements = objc.RegisterName("listElements")
-	_mERAWProcessingListParameterSelInitialValue = objc.RegisterName("initialValue")
-	_mERAWProcessingListParameterSelCurrentValue = objc.RegisterName("currentValue")
-	_mERAWProcessingListParameterSelSetCurrentValue = objc.RegisterName("setCurrentValue:")
+	_mERAWProcessingListParameterSelHasNeutralValue                                                   = objc.RegisterName("hasNeutralValue:")
+	_mERAWProcessingListParameterSelHasCameraValue                                                    = objc.RegisterName("hasCameraValue:")
+	_mERAWProcessingListParameterSelListElements                                                      = objc.RegisterName("listElements")
+	_mERAWProcessingListParameterSelInitialValue                                                      = objc.RegisterName("initialValue")
+	_mERAWProcessingListParameterSelCurrentValue                                                      = objc.RegisterName("currentValue")
+	_mERAWProcessingListParameterSelSetCurrentValue                                                   = objc.RegisterName("setCurrentValue:")
 )
 
 func MERAWProcessingListParameterFromID(id objc.ID) *MERAWProcessingListParameter {
@@ -41,25 +41,33 @@ func MERAWProcessingListParameterFromID(id objc.ID) *MERAWProcessingListParamete
 
 func (o *MERAWProcessingListParameter) InitWithNameKeyDescriptionListInitialValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, listElements *foundation.NSArray[*MERAWProcessingListElementParameter], initialValue int) *MERAWProcessingListParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValue, name.Ptr(), key.Ptr(), description.Ptr(), listElements.Ptr(), initialValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingListParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingListParameter) InitWithNameKeyDescriptionListInitialValueNeutralValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, listElements *foundation.NSArray[*MERAWProcessingListElementParameter], initialValue int, neutralValue int) *MERAWProcessingListParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueNeutralValue, name.Ptr(), key.Ptr(), description.Ptr(), listElements.Ptr(), initialValue, neutralValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingListParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingListParameter) InitWithNameKeyDescriptionListInitialValueCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, listElements *foundation.NSArray[*MERAWProcessingListElementParameter], initialValue int, cameraValue int) *MERAWProcessingListParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), listElements.Ptr(), initialValue, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingListParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingListParameter) InitWithNameKeyDescriptionListInitialValueNeutralValueCameraValue(name *foundation.NSString, key *foundation.NSString, description *foundation.NSString, listElements *foundation.NSArray[*MERAWProcessingListElementParameter], initialValue int, neutralValue int, cameraValue int) *MERAWProcessingListParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListParameterSelInitWithNameKeyDescriptionListInitialValueNeutralValueCameraValue, name.Ptr(), key.Ptr(), description.Ptr(), listElements.Ptr(), initialValue, neutralValue, cameraValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingListParameterFromID(_ret)
 }
 
@@ -78,7 +86,9 @@ func (o *MERAWProcessingListParameter) HasCameraValue(outCameraValue *int64) boo
 // @property		listElements @abstract		The ordered array of MERAWProcessingListElementParameter which make up this list.
 func (o *MERAWProcessingListParameter) ListElements() *foundation.NSArray[*MERAWProcessingListElementParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListParameterSelListElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MERAWProcessingListElementParameter](_ret)
 }
 
@@ -97,4 +107,3 @@ func (o *MERAWProcessingListParameter) CurrentValue() int {
 func (o *MERAWProcessingListParameter) SetCurrentValue(currentValue int) {
 	o.Ptr().Send(_mERAWProcessingListParameterSelSetCurrentValue, currentValue)
 }
-

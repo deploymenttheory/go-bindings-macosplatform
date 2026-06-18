@@ -68,4 +68,3 @@ type TimedMetadataGroupable interface {
 }
 
 var _ TimedMetadataGroupable = (*TimedMetadataGroup)(nil)
-

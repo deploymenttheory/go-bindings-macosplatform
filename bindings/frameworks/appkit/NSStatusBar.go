@@ -16,12 +16,12 @@ type NSStatusBar struct {
 }
 
 var (
-	_clsNSStatusBar = _objcClass("NSStatusBar")
+	_clsNSStatusBar                     = _objcClass("NSStatusBar")
 	_nSStatusBarSelStatusItemWithLength = objc.RegisterName("statusItemWithLength:")
-	_nSStatusBarSelRemoveStatusItem = objc.RegisterName("removeStatusItem:")
-	_nSStatusBarSelSystemStatusBar = objc.RegisterName("systemStatusBar")
-	_nSStatusBarSelIsVertical = objc.RegisterName("isVertical")
-	_nSStatusBarSelThickness = objc.RegisterName("thickness")
+	_nSStatusBarSelRemoveStatusItem     = objc.RegisterName("removeStatusItem:")
+	_nSStatusBarSelSystemStatusBar      = objc.RegisterName("systemStatusBar")
+	_nSStatusBarSelIsVertical           = objc.RegisterName("isVertical")
+	_nSStatusBarSelThickness            = objc.RegisterName("thickness")
 )
 
 func NSStatusBarFromID(id objc.ID) *NSStatusBar {
@@ -36,7 +36,9 @@ func NSStatusBarFromID(id objc.ID) *NSStatusBar {
 
 func (o *NSStatusBar) StatusItemWithLength(length float64) *NSStatusItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStatusBarSelStatusItemWithLength, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStatusItemFromID(_ret)
 }
 
@@ -46,7 +48,9 @@ func (o *NSStatusBar) RemoveStatusItem(item *NSStatusItem) {
 
 func NSStatusBarSystemStatusBar() *NSStatusBar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStatusBar), _nSStatusBarSelSystemStatusBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStatusBarFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *NSStatusBar) Thickness() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSStatusBarSelThickness)
 	return _ret
 }
-

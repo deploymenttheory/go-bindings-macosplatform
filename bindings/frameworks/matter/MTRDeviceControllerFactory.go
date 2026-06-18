@@ -18,15 +18,15 @@ type MTRDeviceControllerFactory struct {
 }
 
 var (
-	_clsMTRDeviceControllerFactory = _objcClass("MTRDeviceControllerFactory")
-	_mTRDeviceControllerFactorySelSharedInstance = objc.RegisterName("sharedInstance")
-	_mTRDeviceControllerFactorySelStartControllerFactoryError = objc.RegisterName("startControllerFactory:error:")
-	_mTRDeviceControllerFactorySelStopControllerFactory = objc.RegisterName("stopControllerFactory")
+	_clsMTRDeviceControllerFactory                                      = _objcClass("MTRDeviceControllerFactory")
+	_mTRDeviceControllerFactorySelSharedInstance                        = objc.RegisterName("sharedInstance")
+	_mTRDeviceControllerFactorySelStartControllerFactoryError           = objc.RegisterName("startControllerFactory:error:")
+	_mTRDeviceControllerFactorySelStopControllerFactory                 = objc.RegisterName("stopControllerFactory")
 	_mTRDeviceControllerFactorySelCreateControllerOnExistingFabricError = objc.RegisterName("createControllerOnExistingFabric:error:")
-	_mTRDeviceControllerFactorySelCreateControllerOnNewFabricError = objc.RegisterName("createControllerOnNewFabric:error:")
-	_mTRDeviceControllerFactorySelPreWarmCommissioningSession = objc.RegisterName("preWarmCommissioningSession")
-	_mTRDeviceControllerFactorySelIsRunning = objc.RegisterName("isRunning")
-	_mTRDeviceControllerFactorySelKnownFabrics = objc.RegisterName("knownFabrics")
+	_mTRDeviceControllerFactorySelCreateControllerOnNewFabricError      = objc.RegisterName("createControllerOnNewFabric:error:")
+	_mTRDeviceControllerFactorySelPreWarmCommissioningSession           = objc.RegisterName("preWarmCommissioningSession")
+	_mTRDeviceControllerFactorySelIsRunning                             = objc.RegisterName("isRunning")
+	_mTRDeviceControllerFactorySelKnownFabrics                          = objc.RegisterName("knownFabrics")
 )
 
 func MTRDeviceControllerFactoryFromID(id objc.ID) *MTRDeviceControllerFactory {
@@ -42,7 +42,9 @@ func MTRDeviceControllerFactoryFromID(id objc.ID) *MTRDeviceControllerFactory {
 // Return the single MTRDeviceControllerFactory we support existing.  It starts off in a "not started" state.
 func MTRDeviceControllerFactorySharedInstance() *MTRDeviceControllerFactory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceControllerFactory), _mTRDeviceControllerFactorySelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFactoryFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *MTRDeviceControllerFactory) StopControllerFactory() {
 func (o *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactorySelCreateControllerOnExistingFabricError, startupParams.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -76,7 +80,9 @@ func (o *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(start
 func (o *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactorySelCreateControllerOnNewFabricError, startupParams.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -97,7 +103,8 @@ func (o *MTRDeviceControllerFactory) IsRunning() bool {
 // Returns the list of MTRFabricInfo representing the fabrics the MTRDeviceControllerFactory knows about and the corresponding node identities of the controller factory on those fabrics.  Returns nil if the factory is not running or if there is an error reading fabric information. All entries in this list will have a non-nil rootCertificate.
 func (o *MTRDeviceControllerFactory) KnownFabrics() *foundation.NSArray[*MTRFabricInfo] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactorySelKnownFabrics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRFabricInfo](_ret)
 }
-

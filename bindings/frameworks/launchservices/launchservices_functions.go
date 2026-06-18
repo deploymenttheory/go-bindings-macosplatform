@@ -12,155 +12,155 @@ import (
 )
 
 var (
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnAcquireIconRef func(unsafe.Pointer) int16
-// Deprecated: Use NSImage or Core Graphics to composite images.
+	// Deprecated: Use NSImage or Core Graphics to composite images.
 	_fnCompositeIconRef func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnGetCustomIconsEnabled func(int16, *uint8) int16
-// Deprecated: Use -[NSWorkspace iconForFile:] instead.
+	// Deprecated: Use -[NSWorkspace iconForFile:] instead.
 	_fnGetIconRef func(int16, uint, uint, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnGetIconRefFromComponent func(*carboncore.ComponentRecord, unsafe.Pointer) int
-// Deprecated: Use -[NSWorkspace iconForFile:] instead.
+	// Deprecated: Use -[NSWorkspace iconForFile:] instead.
 	_fnGetIconRefFromFileInfo func(*carboncore.FSRef, uint, *uint16, uint, *carboncore.FSCatalogInfo, uint, unsafe.Pointer, *int16) int
-// Deprecated: Use -[NSWorkspace iconForFile:] instead.
+	// Deprecated: Use -[NSWorkspace iconForFile:] instead.
 	_fnGetIconRefFromFolder func(int16, int, int, int8, int8, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnGetIconRefFromIconFamilyPtr func(*osservices.IconFamilyResource, int, unsafe.Pointer) int
-// Deprecated: Use -[NSWorkspace iconForFileType:] instead.
+	// Deprecated: Use -[NSWorkspace iconForFileType:] instead.
 	_fnGetIconRefFromTypeInfo func(uint, uint, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnGetIconRefOwners func(unsafe.Pointer, *uint16) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnIsDataAvailableInIconRef func(uint, unsafe.Pointer) uint8
-// Deprecated: Use NSImage or Core Graphics to composite images.
+	// Deprecated: Use NSImage or Core Graphics to composite images.
 	_fnIsIconRefComposite func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnIsValidIconRef func(unsafe.Pointer) uint8
-// Deprecated: Use LSCanURLAcceptURL instead.
+	// Deprecated: Use LSCanURLAcceptURL instead.
 	_fnLSCanRefAcceptItem func(*carboncore.FSRef, *carboncore.FSRef, LSRolesMask, LSAcceptanceFlags, *uint8) int
-	_fnLSCanURLAcceptURL func(unsafe.Pointer, unsafe.Pointer, LSRolesMask, LSAcceptanceFlags, *uint8) int
-// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.
+	_fnLSCanURLAcceptURL  func(unsafe.Pointer, unsafe.Pointer, LSRolesMask, LSAcceptanceFlags, *uint8) int
+	// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.
 	_fnLSCopyAllHandlersForURLScheme func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenContentType:] instead.
+	// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenContentType:] instead.
 	_fnLSCopyAllRoleHandlersForContentType func(unsafe.Pointer, LSRolesMask) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
 	_fnLSCopyApplicationForMIMEType func(unsafe.Pointer, LSRolesMask, unsafe.Pointer) int
-// Deprecated: Use -[NSWorkspace URLsForApplicationsWithBundleIdentifier:] instead.
+	// Deprecated: Use -[NSWorkspace URLsForApplicationsWithBundleIdentifier:] instead.
 	_fnLSCopyApplicationURLsForBundleIdentifier func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.
+	// Deprecated: Use -[NSWorkspace URLsForApplicationsToOpenURL:] instead.
 	_fnLSCopyApplicationURLsForURL func(unsafe.Pointer, LSRolesMask) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
 	_fnLSCopyDefaultApplicationURLForContentType func(unsafe.Pointer, LSRolesMask, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenURL:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenURL:] instead.
 	_fnLSCopyDefaultApplicationURLForURL func(unsafe.Pointer, LSRolesMask, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenURL:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenURL:] instead.
 	_fnLSCopyDefaultHandlerForURLScheme func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
 	_fnLSCopyDefaultRoleHandlerForContentType func(unsafe.Pointer, LSRolesMask) unsafe.Pointer
-// Deprecated: Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
+	// Deprecated: Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
 	_fnLSCopyDisplayNameForRef func(*carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
+	// Deprecated: Use the URL resource property kCFURLLocalizedNameKey or NSURLLocalizedNameKey instead.
 	_fnLSCopyDisplayNameForURL func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.
+	// Deprecated: Use CFURLCopyResourcePropertyForKey or -[NSURL getResourceValue:forKey:error:] instead.
 	_fnLSCopyItemAttribute func(*carboncore.FSRef, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.
+	// Deprecated: Use CFURLCopyResourcePropertiesForKeys or -[NSURL resourceValuesForKeys:error:] instead.
 	_fnLSCopyItemAttributes func(*carboncore.FSRef, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use URL resource properties instead.
+	// Deprecated: Use URL resource properties instead.
 	_fnLSCopyItemInfoForRef func(*carboncore.FSRef, LSRequestedInfo, *LSItemInfoRecord) int
-// Deprecated: Use URL resource properties instead.
+	// Deprecated: Use URL resource properties instead.
 	_fnLSCopyItemInfoForURL func(unsafe.Pointer, LSRequestedInfo, *LSItemInfoRecord) int
-// Deprecated: Use UTTypeCopyDescription instead.
+	// Deprecated: Use UTTypeCopyDescription instead.
 	_fnLSCopyKindStringForMIMEType func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
+	// Deprecated: Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
 	_fnLSCopyKindStringForRef func(*carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use UTTypeCopyDescription instead.
+	// Deprecated: Use UTTypeCopyDescription instead.
 	_fnLSCopyKindStringForTypeInfo func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
+	// Deprecated: Use the URL resource property kCFURLLocalizedTypeDescriptionKey or NSURLLocalizedTypeDescriptionKey instead.
 	_fnLSCopyKindStringForURL func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use LSCopyApplicationURLsForBundleIdentifier instead.
+	// Deprecated: Use LSCopyApplicationURLsForBundleIdentifier instead.
 	_fnLSFindApplicationForInfo func(uint, unsafe.Pointer, unsafe.Pointer, *carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
+	// Deprecated: Use -[NSWorkspace URLForApplicationToOpenContentType:] instead.
 	_fnLSGetApplicationForInfo func(uint, uint, unsafe.Pointer, LSRolesMask, *carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use LSCopyDefaultApplicationURLForURL instead.
+	// Deprecated: Use LSCopyDefaultApplicationURLForURL instead.
 	_fnLSGetApplicationForItem func(*carboncore.FSRef, LSRolesMask, *carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use LSCopyDefaultApplicationURLForURL instead.
+	// Deprecated: Use LSCopyDefaultApplicationURLForURL instead.
 	_fnLSGetApplicationForURL func(unsafe.Pointer, LSRolesMask, *carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.
+	// Deprecated: Use CFURLCopyPathExtension(), -[NSURL pathExtension], or -[NSString pathExtension] instead.
 	_fnLSGetExtensionInfo func(uint, *uint16, *uint) int
-// Deprecated: Creator codes are deprecated on OS X.
+	// Deprecated: Creator codes are deprecated on OS X.
 	_fnLSGetHandlerOptionsForContentType func(unsafe.Pointer) LSHandlerOptions
-// Deprecated: Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.
+	// Deprecated: Use -[NSWorkspace launchApplicationAtURL:options:configuration:error:] instead.
 	_fnLSOpenApplication func(*LSApplicationParameters, unsafe.Pointer) int
-	_fnLSOpenCFURLRef func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.
+	_fnLSOpenCFURLRef    func(unsafe.Pointer, unsafe.Pointer) int
+	// Deprecated: Use LSOpenCFURLRef or -[NSWorkspace openURL:] instead.
 	_fnLSOpenFSRef func(*carboncore.FSRef, *carboncore.FSRef) int
-// Deprecated: Use LSOpenFromURLSpec or NSWorkspace instead.
+	// Deprecated: Use LSOpenFromURLSpec or NSWorkspace instead.
 	_fnLSOpenFromRefSpec func(*LSLaunchFSRefSpec, *carboncore.FSRef) int
 	_fnLSOpenFromURLSpec func(*LSLaunchURLSpec, unsafe.Pointer) int
-// Deprecated: Use NSWorkspace instead.
+	// Deprecated: Use NSWorkspace instead.
 	_fnLSOpenItemsWithRole func(*carboncore.FSRef, int, LSRolesMask, *ae.AEKeyDesc, *LSApplicationParameters, unsafe.Pointer, int) int
-// Deprecated: Use NSWorkspace instead.
+	// Deprecated: Use NSWorkspace instead.
 	_fnLSOpenURLsWithRole func(unsafe.Pointer, LSRolesMask, *ae.AEKeyDesc, *LSApplicationParameters, unsafe.Pointer, int) int
-// Deprecated: Use LSRegisterURL instead.
+	// Deprecated: Use LSRegisterURL instead.
 	_fnLSRegisterFSRef func(*carboncore.FSRef, uint8) int
-	_fnLSRegisterURL func(unsafe.Pointer, uint8) int
-// Deprecated: Use -[NSWorkspace setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:] instead.
+	_fnLSRegisterURL   func(unsafe.Pointer, uint8) int
+	// Deprecated: Use -[NSWorkspace setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:] instead.
 	_fnLSSetDefaultHandlerForURLScheme func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: Use -[NSWorkspace setDefaultApplicationAtURL:toOpenContentType:completionHandler:] instead.
+	// Deprecated: Use -[NSWorkspace setDefaultApplicationAtURL:toOpenContentType:completionHandler:] instead.
 	_fnLSSetDefaultRoleHandlerForContentType func(unsafe.Pointer, LSRolesMask, unsafe.Pointer) int
-// Deprecated: Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
+	// Deprecated: Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
 	_fnLSSetExtensionHiddenForRef func(*carboncore.FSRef, uint8) int
-// Deprecated: Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
+	// Deprecated: Use the URL resource property kCFURLHasHiddenExtensionKey or NSURLHasHiddenExtensionKey instead.
 	_fnLSSetExtensionHiddenForURL func(unsafe.Pointer, uint8) int
-// Deprecated: Creator codes are deprecated on OS X.
+	// Deprecated: Creator codes are deprecated on OS X.
 	_fnLSSetHandlerOptionsForContentType func(unsafe.Pointer, LSHandlerOptions) int
-// Deprecated: Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.
+	// Deprecated: Use CFURLSetResourcePropertyForKey or -[NSURL setResourceValue:forKey:error:] instead.
 	_fnLSSetItemAttribute func(*carboncore.FSRef, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnOverrideIconRef func(unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: Use -[NSWorkspace iconForFile:] instead.
+	// Deprecated: Use -[NSWorkspace iconForFile:] instead.
 	_fnReadIconFromFSRef func(*carboncore.FSRef, ***osservices.IconFamilyResource) int
-// Deprecated: You do not need to register .icns files to use them with -[NSImage initWithContentsOfURL:].
+	// Deprecated: You do not need to register .icns files to use them with -[NSImage initWithContentsOfURL:].
 	_fnRegisterIconRefFromFSRef func(uint, uint, *carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnRegisterIconRefFromIconFamily func(uint, uint, **osservices.IconFamilyResource, unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnReleaseIconRef func(unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnRemoveIconRefOverride func(unsafe.Pointer) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnSetCustomIconsEnabled func(int16, uint8) int16
-// Deprecated: HFS type codes are obsolete.
+	// Deprecated: HFS type codes are obsolete.
 	_fnUTCreateStringForOSType func(uint) unsafe.Pointer
-// Deprecated: HFS type codes are obsolete.
+	// Deprecated: HFS type codes are obsolete.
 	_fnUTGetOSTypeFromString func(unsafe.Pointer) uint
-// Deprecated: Use -[UTType conformsToType:] instead.
+	// Deprecated: Use -[UTType conformsToType:] instead.
 	_fnUTTypeConformsTo func(unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: Use the UTType class instead.
+	// Deprecated: Use the UTType class instead.
 	_fnUTTypeCopyAllTagsWithClass func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use the UTType class instead.
+	// Deprecated: Use the UTType class instead.
 	_fnUTTypeCopyDeclaration func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 11.0.
+	// Deprecated: since macOS 11.0.
 	_fnUTTypeCopyDeclaringBundleURL func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use UTType.localizedDescription instead.
+	// Deprecated: Use UTType.localizedDescription instead.
 	_fnUTTypeCopyDescription func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use the UTType class instead.
+	// Deprecated: Use the UTType class instead.
 	_fnUTTypeCopyPreferredTagWithClass func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use the UTType class instead.
+	// Deprecated: Use the UTType class instead.
 	_fnUTTypeCreateAllIdentifiersForTag func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use the UTType class instead.
+	// Deprecated: Use the UTType class instead.
 	_fnUTTypeCreatePreferredIdentifierForTag func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use -[UTType isEqual:] instead.
+	// Deprecated: Use -[UTType isEqual:] instead.
 	_fnUTTypeEqual func(unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: Use UTType.declared instead.
+	// Deprecated: Use UTType.declared instead.
 	_fnUTTypeIsDeclared func(unsafe.Pointer) uint8
-// Deprecated: Use UTType.dynamic instead.
+	// Deprecated: Use UTType.dynamic instead.
 	_fnUTTypeIsDynamic func(unsafe.Pointer) uint8
-// Deprecated: You do not need to unregister icons.
+	// Deprecated: You do not need to unregister icons.
 	_fnUnregisterIconRef func(uint, uint) int16
-// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
+	// Deprecated: This function is no longer supported. Use NSWorkspace and NSImage to get icons.
 	_fnUpdateIconRef func(unsafe.Pointer) int16
 )
 
@@ -544,4 +544,3 @@ func UnregisterIconRef(creator uint, iconType uint) int16 {
 func UpdateIconRef(theIconRef unsafe.Pointer) int16 {
 	return _fnUpdateIconRef(theIconRef)
 }
-

@@ -16,11 +16,11 @@ type ASPasswordCredential struct {
 }
 
 var (
-	_clsASPasswordCredential = _objcClass("ASPasswordCredential")
-	_aSPasswordCredentialSelInitWithUserPassword = objc.RegisterName("initWithUser:password:")
+	_clsASPasswordCredential                           = _objcClass("ASPasswordCredential")
+	_aSPasswordCredentialSelInitWithUserPassword       = objc.RegisterName("initWithUser:password:")
 	_aSPasswordCredentialSelCredentialWithUserPassword = objc.RegisterName("credentialWithUser:password:")
-	_aSPasswordCredentialSelUser = objc.RegisterName("user")
-	_aSPasswordCredentialSelPassword = objc.RegisterName("password")
+	_aSPasswordCredentialSelUser                       = objc.RegisterName("user")
+	_aSPasswordCredentialSelPassword                   = objc.RegisterName("password")
 )
 
 func ASPasswordCredentialFromID(id objc.ID) *ASPasswordCredential {
@@ -36,28 +36,35 @@ func ASPasswordCredentialFromID(id objc.ID) *ASPasswordCredential {
 // @abstract Initializes an ASPasswordCredential object. @param user the user. @param password the password.
 func (o *ASPasswordCredential) InitWithUserPassword(user *foundation.NSString, password *foundation.NSString) *ASPasswordCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialSelInitWithUserPassword, user.Ptr(), password.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialFromID(_ret)
 }
 
 // @abstract Creates and initializes a new ASPasswordCredential object. @param user the user. @param password the password.
 func ASPasswordCredentialCredentialWithUserPassword(user *foundation.NSString, password *foundation.NSString) *ASPasswordCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredential), _aSPasswordCredentialSelCredentialWithUserPassword, user.Ptr(), password.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialFromID(_ret)
 }
 
 // @abstract The user name of this credential. @result The user string.
 func (o *ASPasswordCredential) User() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The password of this credential. @result The password string.
 func (o *ASPasswordCredential) Password() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

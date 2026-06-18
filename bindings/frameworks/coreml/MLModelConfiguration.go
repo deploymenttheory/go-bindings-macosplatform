@@ -17,21 +17,21 @@ type MLModelConfiguration struct {
 }
 
 var (
-	_clsMLModelConfiguration = _objcClass("MLModelConfiguration")
-	_mLModelConfigurationSelModelDisplayName = objc.RegisterName("modelDisplayName")
-	_mLModelConfigurationSelSetModelDisplayName = objc.RegisterName("setModelDisplayName:")
-	_mLModelConfigurationSelComputeUnits = objc.RegisterName("computeUnits")
-	_mLModelConfigurationSelSetComputeUnits = objc.RegisterName("setComputeUnits:")
-	_mLModelConfigurationSelOptimizationHints = objc.RegisterName("optimizationHints")
-	_mLModelConfigurationSelSetOptimizationHints = objc.RegisterName("setOptimizationHints:")
-	_mLModelConfigurationSelAllowLowPrecisionAccumulationOnGPU = objc.RegisterName("allowLowPrecisionAccumulationOnGPU")
+	_clsMLModelConfiguration                                      = _objcClass("MLModelConfiguration")
+	_mLModelConfigurationSelModelDisplayName                      = objc.RegisterName("modelDisplayName")
+	_mLModelConfigurationSelSetModelDisplayName                   = objc.RegisterName("setModelDisplayName:")
+	_mLModelConfigurationSelComputeUnits                          = objc.RegisterName("computeUnits")
+	_mLModelConfigurationSelSetComputeUnits                       = objc.RegisterName("setComputeUnits:")
+	_mLModelConfigurationSelOptimizationHints                     = objc.RegisterName("optimizationHints")
+	_mLModelConfigurationSelSetOptimizationHints                  = objc.RegisterName("setOptimizationHints:")
+	_mLModelConfigurationSelAllowLowPrecisionAccumulationOnGPU    = objc.RegisterName("allowLowPrecisionAccumulationOnGPU")
 	_mLModelConfigurationSelSetAllowLowPrecisionAccumulationOnGPU = objc.RegisterName("setAllowLowPrecisionAccumulationOnGPU:")
-	_mLModelConfigurationSelPreferredMetalDevice = objc.RegisterName("preferredMetalDevice")
-	_mLModelConfigurationSelSetPreferredMetalDevice = objc.RegisterName("setPreferredMetalDevice:")
-	_mLModelConfigurationSelParameters = objc.RegisterName("parameters")
-	_mLModelConfigurationSelSetParameters = objc.RegisterName("setParameters:")
-	_mLModelConfigurationSelFunctionName = objc.RegisterName("functionName")
-	_mLModelConfigurationSelSetFunctionName = objc.RegisterName("setFunctionName:")
+	_mLModelConfigurationSelPreferredMetalDevice                  = objc.RegisterName("preferredMetalDevice")
+	_mLModelConfigurationSelSetPreferredMetalDevice               = objc.RegisterName("setPreferredMetalDevice:")
+	_mLModelConfigurationSelParameters                            = objc.RegisterName("parameters")
+	_mLModelConfigurationSelSetParameters                         = objc.RegisterName("setParameters:")
+	_mLModelConfigurationSelFunctionName                          = objc.RegisterName("functionName")
+	_mLModelConfigurationSelSetFunctionName                       = objc.RegisterName("setFunctionName:")
 )
 
 func MLModelConfigurationFromID(id objc.ID) *MLModelConfiguration {
@@ -47,7 +47,9 @@ func MLModelConfigurationFromID(id objc.ID) *MLModelConfiguration {
 // A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
 func (o *MLModelConfiguration) ModelDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelConfigurationSelModelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func (o *MLModelConfiguration) SetComputeUnits(computeUnits MLComputeUnits) {
 // A group of hints for CoreML to optimize
 func (o *MLModelConfiguration) OptimizationHints() *MLOptimizationHints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelConfigurationSelOptimizationHints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLOptimizationHintsFromID(_ret)
 }
 
@@ -106,11 +110,12 @@ func (o *MLModelConfiguration) SetParameters(parameters *foundation.NSDictionary
 
 func (o *MLModelConfiguration) FunctionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelConfigurationSelFunctionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MLModelConfiguration) SetFunctionName(functionName *foundation.NSString) {
 	o.Ptr().Send(_mLModelConfigurationSelSetFunctionName, functionName.Ptr())
 }
-

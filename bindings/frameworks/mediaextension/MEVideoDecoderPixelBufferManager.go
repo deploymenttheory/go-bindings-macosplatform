@@ -18,11 +18,11 @@ type MEVideoDecoderPixelBufferManager struct {
 }
 
 var (
-	_clsMEVideoDecoderPixelBufferManager = _objcClass("MEVideoDecoderPixelBufferManager")
+	_clsMEVideoDecoderPixelBufferManager                                = _objcClass("MEVideoDecoderPixelBufferManager")
 	_mEVideoDecoderPixelBufferManagerSelCreatePixelBufferAndReturnError = objc.RegisterName("createPixelBufferAndReturnError:")
-	_mEVideoDecoderPixelBufferManagerSelRegisterCustomPixelFormat = objc.RegisterName("registerCustomPixelFormat:")
-	_mEVideoDecoderPixelBufferManagerSelPixelBufferAttributes = objc.RegisterName("pixelBufferAttributes")
-	_mEVideoDecoderPixelBufferManagerSelSetPixelBufferAttributes = objc.RegisterName("setPixelBufferAttributes:")
+	_mEVideoDecoderPixelBufferManagerSelRegisterCustomPixelFormat       = objc.RegisterName("registerCustomPixelFormat:")
+	_mEVideoDecoderPixelBufferManagerSelPixelBufferAttributes           = objc.RegisterName("pixelBufferAttributes")
+	_mEVideoDecoderPixelBufferManagerSelSetPixelBufferAttributes        = objc.RegisterName("setPixelBufferAttributes:")
 )
 
 func MEVideoDecoderPixelBufferManagerFromID(id objc.ID) *MEVideoDecoderPixelBufferManager {
@@ -59,4 +59,3 @@ func (o *MEVideoDecoderPixelBufferManager) PixelBufferAttributes() *foundation.N
 func (o *MEVideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_mEVideoDecoderPixelBufferManagerSelSetPixelBufferAttributes, pixelBufferAttributes)
 }
-

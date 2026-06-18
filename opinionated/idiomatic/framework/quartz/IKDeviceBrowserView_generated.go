@@ -162,4 +162,3 @@ type IKDeviceBrowserViewable interface {
 }
 
 var _ IKDeviceBrowserViewable = (*IKDeviceBrowserView)(nil)
-

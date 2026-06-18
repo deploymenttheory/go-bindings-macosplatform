@@ -41,4 +41,3 @@ type HapticFeedbackManagerable interface {
 }
 
 var _ HapticFeedbackManagerable = (*HapticFeedbackManager)(nil)
-

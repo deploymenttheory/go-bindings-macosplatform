@@ -15,7 +15,7 @@ type VZMacKeyboardConfiguration struct {
 }
 
 var (
-	_clsVZMacKeyboardConfiguration = _objcClass("VZMacKeyboardConfiguration")
+	_clsVZMacKeyboardConfiguration     = _objcClass("VZMacKeyboardConfiguration")
 	_vZMacKeyboardConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZMacKeyboardConfigurationFromID(id objc.ID) *VZMacKeyboardConfiguration {
 
 func (o *VZMacKeyboardConfiguration) Init() *VZMacKeyboardConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacKeyboardConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacKeyboardConfigurationFromID(_ret)
 }
-

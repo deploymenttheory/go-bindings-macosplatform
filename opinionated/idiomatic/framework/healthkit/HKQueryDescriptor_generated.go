@@ -59,4 +59,3 @@ type QueryDescriptorable interface {
 }
 
 var _ QueryDescriptorable = (*QueryDescriptor)(nil)
-

@@ -16,12 +16,12 @@ type MTLVertexAttribute struct {
 }
 
 var (
-	_clsMTLVertexAttribute = _objcClass("MTLVertexAttribute")
-	_mTLVertexAttributeSelName = objc.RegisterName("name")
-	_mTLVertexAttributeSelAttributeIndex = objc.RegisterName("attributeIndex")
-	_mTLVertexAttributeSelAttributeType = objc.RegisterName("attributeType")
-	_mTLVertexAttributeSelIsActive = objc.RegisterName("isActive")
-	_mTLVertexAttributeSelIsPatchData = objc.RegisterName("isPatchData")
+	_clsMTLVertexAttribute                        = _objcClass("MTLVertexAttribute")
+	_mTLVertexAttributeSelName                    = objc.RegisterName("name")
+	_mTLVertexAttributeSelAttributeIndex          = objc.RegisterName("attributeIndex")
+	_mTLVertexAttributeSelAttributeType           = objc.RegisterName("attributeType")
+	_mTLVertexAttributeSelIsActive                = objc.RegisterName("isActive")
+	_mTLVertexAttributeSelIsPatchData             = objc.RegisterName("isPatchData")
 	_mTLVertexAttributeSelIsPatchControlPointData = objc.RegisterName("isPatchControlPointData")
 )
 
@@ -37,7 +37,9 @@ func MTLVertexAttributeFromID(id objc.ID) *MTLVertexAttribute {
 
 func (o *MTLVertexAttribute) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLVertexAttributeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,4 +67,3 @@ func (o *MTLVertexAttribute) IsPatchControlPointData() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLVertexAttributeSelIsPatchControlPointData)
 	return _ret
 }
-

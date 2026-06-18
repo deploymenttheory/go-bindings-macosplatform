@@ -17,7 +17,9 @@ type AccelerationStructureGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureGeometryDescriptor].
-func (x *AccelerationStructureGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -169,7 +171,9 @@ func (x *AccelerationStructureGeometryDescriptor) SetPrimitiveDataElementSize(pr
 	x.inner.SetPrimitiveDataElementSize(primitiveDataElementSize)
 }
 
-func (x *AccelerationStructureGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return x.inner
+}
 
 // AccelerationStructureGeometryDescriptorable is the interface implemented by [AccelerationStructureGeometryDescriptor], for mocking and DI.
 type AccelerationStructureGeometryDescriptorable interface {
@@ -201,4 +205,3 @@ type AccelerationStructureGeometryDescriptorable interface {
 }
 
 var _ AccelerationStructureGeometryDescriptorable = (*AccelerationStructureGeometryDescriptor)(nil)
-

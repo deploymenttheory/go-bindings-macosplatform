@@ -17,7 +17,9 @@ type MTRContentLauncherClusterAdditionalInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterAdditionalInfoStruct].
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return x.inner }
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) Unwrap() *raw.MTRContentLauncherClusterAdditionalInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -77,7 +79,9 @@ func (x *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value string) {
 	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
 }
 
-func (x *MTRContentLauncherClusterAdditionalInfoStruct) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return x.inner }
+func (x *MTRContentLauncherClusterAdditionalInfoStruct) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct {
+	return x.inner
+}
 
 // MTRContentLauncherClusterAdditionalInfoStructable is the interface implemented by [MTRContentLauncherClusterAdditionalInfoStruct], for mocking and DI.
 type MTRContentLauncherClusterAdditionalInfoStructable interface {
@@ -91,4 +95,3 @@ type MTRContentLauncherClusterAdditionalInfoStructable interface {
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoStructable = (*MTRContentLauncherClusterAdditionalInfoStruct)(nil)
-

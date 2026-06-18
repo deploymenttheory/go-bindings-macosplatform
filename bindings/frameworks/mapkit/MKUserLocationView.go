@@ -25,4 +25,3 @@ func MKUserLocationViewFromID(id objc.ID) *MKUserLocationView {
 	purego.Track(o)
 	return o
 }
-

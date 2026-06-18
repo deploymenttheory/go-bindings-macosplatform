@@ -98,4 +98,3 @@ type AttributeDescriptorable interface {
 }
 
 var _ AttributeDescriptorable = (*AttributeDescriptor)(nil)
-

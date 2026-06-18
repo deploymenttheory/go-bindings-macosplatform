@@ -16,10 +16,10 @@ type AVZoomRange struct {
 }
 
 var (
-	_clsAVZoomRange = _objcClass("AVZoomRange")
+	_clsAVZoomRange                   = _objcClass("AVZoomRange")
 	_aVZoomRangeSelContainsZoomFactor = objc.RegisterName("containsZoomFactor:")
-	_aVZoomRangeSelMinZoomFactor = objc.RegisterName("minZoomFactor")
-	_aVZoomRangeSelMaxZoomFactor = objc.RegisterName("maxZoomFactor")
+	_aVZoomRangeSelMinZoomFactor      = objc.RegisterName("minZoomFactor")
+	_aVZoomRangeSelMaxZoomFactor      = objc.RegisterName("maxZoomFactor")
 )
 
 func AVZoomRangeFromID(id objc.ID) *AVZoomRange {
@@ -49,4 +49,3 @@ func (o *AVZoomRange) MaxZoomFactor() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVZoomRangeSelMaxZoomFactor)
 	return _ret
 }
-

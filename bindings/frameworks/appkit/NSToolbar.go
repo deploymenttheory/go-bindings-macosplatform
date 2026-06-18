@@ -17,52 +17,52 @@ type NSToolbar struct {
 }
 
 var (
-	_clsNSToolbar = _objcClass("NSToolbar")
-	_nSToolbarSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_nSToolbarSelInit = objc.RegisterName("init")
+	_clsNSToolbar                                    = _objcClass("NSToolbar")
+	_nSToolbarSelInitWithIdentifier                  = objc.RegisterName("initWithIdentifier:")
+	_nSToolbarSelInit                                = objc.RegisterName("init")
 	_nSToolbarSelInsertItemWithItemIdentifierAtIndex = objc.RegisterName("insertItemWithItemIdentifier:atIndex:")
-	_nSToolbarSelRemoveItemAtIndex = objc.RegisterName("removeItemAtIndex:")
-	_nSToolbarSelRemoveItemWithItemIdentifier = objc.RegisterName("removeItemWithItemIdentifier:")
-	_nSToolbarSelRunCustomizationPalette = objc.RegisterName("runCustomizationPalette:")
-	_nSToolbarSelValidateVisibleItems = objc.RegisterName("validateVisibleItems")
-	_nSToolbarSelDelegate = objc.RegisterName("delegate")
-	_nSToolbarSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSToolbarSelIsVisible = objc.RegisterName("isVisible")
-	_nSToolbarSelSetVisible = objc.RegisterName("setVisible:")
-	_nSToolbarSelCustomizationPaletteIsRunning = objc.RegisterName("customizationPaletteIsRunning")
-	_nSToolbarSelDisplayMode = objc.RegisterName("displayMode")
-	_nSToolbarSelSetDisplayMode = objc.RegisterName("setDisplayMode:")
-	_nSToolbarSelSelectedItemIdentifier = objc.RegisterName("selectedItemIdentifier")
-	_nSToolbarSelSetSelectedItemIdentifier = objc.RegisterName("setSelectedItemIdentifier:")
-	_nSToolbarSelAllowsUserCustomization = objc.RegisterName("allowsUserCustomization")
-	_nSToolbarSelSetAllowsUserCustomization = objc.RegisterName("setAllowsUserCustomization:")
-	_nSToolbarSelAllowsDisplayModeCustomization = objc.RegisterName("allowsDisplayModeCustomization")
-	_nSToolbarSelSetAllowsDisplayModeCustomization = objc.RegisterName("setAllowsDisplayModeCustomization:")
-	_nSToolbarSelIdentifier = objc.RegisterName("identifier")
-	_nSToolbarSelItems = objc.RegisterName("items")
-	_nSToolbarSelVisibleItems = objc.RegisterName("visibleItems")
-	_nSToolbarSelItemIdentifiers = objc.RegisterName("itemIdentifiers")
-	_nSToolbarSelSetItemIdentifiers = objc.RegisterName("setItemIdentifiers:")
-	_nSToolbarSelCenteredItemIdentifiers = objc.RegisterName("centeredItemIdentifiers")
-	_nSToolbarSelSetCenteredItemIdentifiers = objc.RegisterName("setCenteredItemIdentifiers:")
-	_nSToolbarSelAutosavesConfiguration = objc.RegisterName("autosavesConfiguration")
-	_nSToolbarSelSetAutosavesConfiguration = objc.RegisterName("setAutosavesConfiguration:")
-	_nSToolbarSelAllowsExtensionItems = objc.RegisterName("allowsExtensionItems")
-	_nSToolbarSelSetAllowsExtensionItems = objc.RegisterName("setAllowsExtensionItems:")
-	_nSToolbarSelSetConfigurationFromDictionary = objc.RegisterName("setConfigurationFromDictionary:")
-	_nSToolbarSelSizeMode = objc.RegisterName("sizeMode")
-	_nSToolbarSelSetSizeMode = objc.RegisterName("setSizeMode:")
-	_nSToolbarSelCenteredItemIdentifier = objc.RegisterName("centeredItemIdentifier")
-	_nSToolbarSelSetCenteredItemIdentifier = objc.RegisterName("setCenteredItemIdentifier:")
-	_nSToolbarSelFullScreenAccessoryView = objc.RegisterName("fullScreenAccessoryView")
-	_nSToolbarSelSetFullScreenAccessoryView = objc.RegisterName("setFullScreenAccessoryView:")
-	_nSToolbarSelFullScreenAccessoryViewMinHeight = objc.RegisterName("fullScreenAccessoryViewMinHeight")
+	_nSToolbarSelRemoveItemAtIndex                   = objc.RegisterName("removeItemAtIndex:")
+	_nSToolbarSelRemoveItemWithItemIdentifier        = objc.RegisterName("removeItemWithItemIdentifier:")
+	_nSToolbarSelRunCustomizationPalette             = objc.RegisterName("runCustomizationPalette:")
+	_nSToolbarSelValidateVisibleItems                = objc.RegisterName("validateVisibleItems")
+	_nSToolbarSelDelegate                            = objc.RegisterName("delegate")
+	_nSToolbarSelSetDelegate                         = objc.RegisterName("setDelegate:")
+	_nSToolbarSelIsVisible                           = objc.RegisterName("isVisible")
+	_nSToolbarSelSetVisible                          = objc.RegisterName("setVisible:")
+	_nSToolbarSelCustomizationPaletteIsRunning       = objc.RegisterName("customizationPaletteIsRunning")
+	_nSToolbarSelDisplayMode                         = objc.RegisterName("displayMode")
+	_nSToolbarSelSetDisplayMode                      = objc.RegisterName("setDisplayMode:")
+	_nSToolbarSelSelectedItemIdentifier              = objc.RegisterName("selectedItemIdentifier")
+	_nSToolbarSelSetSelectedItemIdentifier           = objc.RegisterName("setSelectedItemIdentifier:")
+	_nSToolbarSelAllowsUserCustomization             = objc.RegisterName("allowsUserCustomization")
+	_nSToolbarSelSetAllowsUserCustomization          = objc.RegisterName("setAllowsUserCustomization:")
+	_nSToolbarSelAllowsDisplayModeCustomization      = objc.RegisterName("allowsDisplayModeCustomization")
+	_nSToolbarSelSetAllowsDisplayModeCustomization   = objc.RegisterName("setAllowsDisplayModeCustomization:")
+	_nSToolbarSelIdentifier                          = objc.RegisterName("identifier")
+	_nSToolbarSelItems                               = objc.RegisterName("items")
+	_nSToolbarSelVisibleItems                        = objc.RegisterName("visibleItems")
+	_nSToolbarSelItemIdentifiers                     = objc.RegisterName("itemIdentifiers")
+	_nSToolbarSelSetItemIdentifiers                  = objc.RegisterName("setItemIdentifiers:")
+	_nSToolbarSelCenteredItemIdentifiers             = objc.RegisterName("centeredItemIdentifiers")
+	_nSToolbarSelSetCenteredItemIdentifiers          = objc.RegisterName("setCenteredItemIdentifiers:")
+	_nSToolbarSelAutosavesConfiguration              = objc.RegisterName("autosavesConfiguration")
+	_nSToolbarSelSetAutosavesConfiguration           = objc.RegisterName("setAutosavesConfiguration:")
+	_nSToolbarSelAllowsExtensionItems                = objc.RegisterName("allowsExtensionItems")
+	_nSToolbarSelSetAllowsExtensionItems             = objc.RegisterName("setAllowsExtensionItems:")
+	_nSToolbarSelSetConfigurationFromDictionary      = objc.RegisterName("setConfigurationFromDictionary:")
+	_nSToolbarSelSizeMode                            = objc.RegisterName("sizeMode")
+	_nSToolbarSelSetSizeMode                         = objc.RegisterName("setSizeMode:")
+	_nSToolbarSelCenteredItemIdentifier              = objc.RegisterName("centeredItemIdentifier")
+	_nSToolbarSelSetCenteredItemIdentifier           = objc.RegisterName("setCenteredItemIdentifier:")
+	_nSToolbarSelFullScreenAccessoryView             = objc.RegisterName("fullScreenAccessoryView")
+	_nSToolbarSelSetFullScreenAccessoryView          = objc.RegisterName("setFullScreenAccessoryView:")
+	_nSToolbarSelFullScreenAccessoryViewMinHeight    = objc.RegisterName("fullScreenAccessoryViewMinHeight")
 	_nSToolbarSelSetFullScreenAccessoryViewMinHeight = objc.RegisterName("setFullScreenAccessoryViewMinHeight:")
-	_nSToolbarSelFullScreenAccessoryViewMaxHeight = objc.RegisterName("fullScreenAccessoryViewMaxHeight")
+	_nSToolbarSelFullScreenAccessoryViewMaxHeight    = objc.RegisterName("fullScreenAccessoryViewMaxHeight")
 	_nSToolbarSelSetFullScreenAccessoryViewMaxHeight = objc.RegisterName("setFullScreenAccessoryViewMaxHeight:")
-	_nSToolbarSelShowsBaselineSeparator = objc.RegisterName("showsBaselineSeparator")
-	_nSToolbarSelSetShowsBaselineSeparator = objc.RegisterName("setShowsBaselineSeparator:")
-	_nSToolbarSelConfigurationDictionary = objc.RegisterName("configurationDictionary")
+	_nSToolbarSelShowsBaselineSeparator              = objc.RegisterName("showsBaselineSeparator")
+	_nSToolbarSelSetShowsBaselineSeparator           = objc.RegisterName("setShowsBaselineSeparator:")
+	_nSToolbarSelConfigurationDictionary             = objc.RegisterName("configurationDictionary")
 )
 
 func NSToolbarFromID(id objc.ID) *NSToolbar {
@@ -78,14 +78,18 @@ func NSToolbarFromID(id objc.ID) *NSToolbar {
 // The identifier is used to form the toolbar's autosave name. Toolbars with the same identifier are implicitly synchronized so that they maintain the same state.
 func (o *NSToolbar) InitWithIdentifier(identifier *foundation.NSString) *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarFromID(_ret)
 }
 
 // Calls through to -initWithIdentifier: with an empty string identifier. Customizable toolbars should use `-initWithIdentifier:` with a unique identifier instead.
 func (o *NSToolbar) Init() *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarFromID(_ret)
 }
 
@@ -153,7 +157,9 @@ func (o *NSToolbar) SetDisplayMode(displayMode NSToolbarDisplayMode) {
 // Sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
 func (o *NSToolbar) SelectedItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelSelectedItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -184,21 +190,27 @@ func (o *NSToolbar) SetAllowsDisplayModeCustomization(allowsDisplayModeCustomiza
 // All toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
 func (o *NSToolbar) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Allows you to access all current items in the toolbar.
 func (o *NSToolbar) Items() *foundation.NSArray[*NSToolbarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
 }
 
 // Allows you to access the current visible items (non clipped).
 func (o *NSToolbar) VisibleItems() *foundation.NSArray[*NSToolbarItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelVisibleItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSToolbarItem](_ret)
 }
 
@@ -261,7 +273,9 @@ func (o *NSToolbar) SetSizeMode(sizeMode NSToolbarSizeMode) {
 // Deprecated: Use the centeredItemIdentifiers property instead
 func (o *NSToolbar) CenteredItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelCenteredItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -273,7 +287,9 @@ func (o *NSToolbar) SetCenteredItemIdentifier(centeredItemIdentifier *foundation
 // Deprecated: Use NSTitlebarAccessoryViewController with NSWindow instead
 func (o *NSToolbar) FullScreenAccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarSelFullScreenAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -320,4 +336,3 @@ func (o *NSToolbar) ConfigurationDictionary() *foundation.NSDictionary[*foundati
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSToolbarSelConfigurationDictionary)
 	return _ret
 }
-

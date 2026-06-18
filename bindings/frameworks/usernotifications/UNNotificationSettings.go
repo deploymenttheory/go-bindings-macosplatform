@@ -16,19 +16,19 @@ type UNNotificationSettings struct {
 }
 
 var (
-	_clsUNNotificationSettings = _objcClass("UNNotificationSettings")
-	_uNNotificationSettingsSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_uNNotificationSettingsSelSoundSetting = objc.RegisterName("soundSetting")
-	_uNNotificationSettingsSelBadgeSetting = objc.RegisterName("badgeSetting")
-	_uNNotificationSettingsSelAlertSetting = objc.RegisterName("alertSetting")
-	_uNNotificationSettingsSelNotificationCenterSetting = objc.RegisterName("notificationCenterSetting")
-	_uNNotificationSettingsSelLockScreenSetting = objc.RegisterName("lockScreenSetting")
-	_uNNotificationSettingsSelShowPreviewsSetting = objc.RegisterName("showPreviewsSetting")
-	_uNNotificationSettingsSelCriticalAlertSetting = objc.RegisterName("criticalAlertSetting")
+	_clsUNNotificationSettings                                = _objcClass("UNNotificationSettings")
+	_uNNotificationSettingsSelAuthorizationStatus             = objc.RegisterName("authorizationStatus")
+	_uNNotificationSettingsSelSoundSetting                    = objc.RegisterName("soundSetting")
+	_uNNotificationSettingsSelBadgeSetting                    = objc.RegisterName("badgeSetting")
+	_uNNotificationSettingsSelAlertSetting                    = objc.RegisterName("alertSetting")
+	_uNNotificationSettingsSelNotificationCenterSetting       = objc.RegisterName("notificationCenterSetting")
+	_uNNotificationSettingsSelLockScreenSetting               = objc.RegisterName("lockScreenSetting")
+	_uNNotificationSettingsSelShowPreviewsSetting             = objc.RegisterName("showPreviewsSetting")
+	_uNNotificationSettingsSelCriticalAlertSetting            = objc.RegisterName("criticalAlertSetting")
 	_uNNotificationSettingsSelProvidesAppNotificationSettings = objc.RegisterName("providesAppNotificationSettings")
-	_uNNotificationSettingsSelTimeSensitiveSetting = objc.RegisterName("timeSensitiveSetting")
-	_uNNotificationSettingsSelScheduledDeliverySetting = objc.RegisterName("scheduledDeliverySetting")
-	_uNNotificationSettingsSelDirectMessagesSetting = objc.RegisterName("directMessagesSetting")
+	_uNNotificationSettingsSelTimeSensitiveSetting            = objc.RegisterName("timeSensitiveSetting")
+	_uNNotificationSettingsSelScheduledDeliverySetting        = objc.RegisterName("scheduledDeliverySetting")
+	_uNNotificationSettingsSelDirectMessagesSetting           = objc.RegisterName("directMessagesSetting")
 )
 
 func UNNotificationSettingsFromID(id objc.ID) *UNNotificationSettings {
@@ -100,4 +100,3 @@ func (o *UNNotificationSettings) DirectMessagesSetting() UNNotificationSetting {
 	_ret := objc.Send[UNNotificationSetting](o.Ptr(), _uNNotificationSettingsSelDirectMessagesSetting)
 	return _ret
 }
-

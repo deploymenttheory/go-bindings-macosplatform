@@ -16,14 +16,14 @@ type IOBluetoothSDPServiceAttribute struct {
 }
 
 var (
-	_clsIOBluetoothSDPServiceAttribute = _objcClass("IOBluetoothSDPServiceAttribute")
-	_iOBluetoothSDPServiceAttributeSelWithIDAttributeElementValue = objc.RegisterName("withID:attributeElementValue:")
-	_iOBluetoothSDPServiceAttributeSelWithIDAttributeElement = objc.RegisterName("withID:attributeElement:")
+	_clsIOBluetoothSDPServiceAttribute                                = _objcClass("IOBluetoothSDPServiceAttribute")
+	_iOBluetoothSDPServiceAttributeSelWithIDAttributeElementValue     = objc.RegisterName("withID:attributeElementValue:")
+	_iOBluetoothSDPServiceAttributeSelWithIDAttributeElement          = objc.RegisterName("withID:attributeElement:")
 	_iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElementValue = objc.RegisterName("initWithID:attributeElementValue:")
-	_iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElement = objc.RegisterName("initWithID:attributeElement:")
-	_iOBluetoothSDPServiceAttributeSelGetAttributeID = objc.RegisterName("getAttributeID")
-	_iOBluetoothSDPServiceAttributeSelGetDataElement = objc.RegisterName("getDataElement")
-	_iOBluetoothSDPServiceAttributeSelGetIDDataElement = objc.RegisterName("getIDDataElement")
+	_iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElement      = objc.RegisterName("initWithID:attributeElement:")
+	_iOBluetoothSDPServiceAttributeSelGetAttributeID                  = objc.RegisterName("getAttributeID")
+	_iOBluetoothSDPServiceAttributeSelGetDataElement                  = objc.RegisterName("getDataElement")
+	_iOBluetoothSDPServiceAttributeSelGetIDDataElement                = objc.RegisterName("getIDDataElement")
 )
 
 func IOBluetoothSDPServiceAttributeFromID(id objc.ID) *IOBluetoothSDPServiceAttribute {
@@ -38,25 +38,33 @@ func IOBluetoothSDPServiceAttributeFromID(id objc.ID) *IOBluetoothSDPServiceAttr
 
 func IOBluetoothSDPServiceAttributeWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceAttribute), _iOBluetoothSDPServiceAttributeSelWithIDAttributeElementValue, newAttributeID, attributeElementValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
 func IOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceAttribute), _iOBluetoothSDPServiceAttributeSelWithIDAttributeElement, newAttributeID, attributeElement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
 func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElementValue(newAttributeID uint16, attributeElementValue *foundation.NSObject) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElementValue, newAttributeID, attributeElementValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
 func (o *IOBluetoothSDPServiceAttribute) InitWithIDAttributeElement(newAttributeID uint16, attributeElement *IOBluetoothSDPDataElement) *IOBluetoothSDPServiceAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelInitWithIDAttributeElement, newAttributeID, attributeElement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceAttributeFromID(_ret)
 }
 
@@ -67,13 +75,16 @@ func (o *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
 
 func (o *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelGetDataElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func (o *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceAttributeSelGetIDDataElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
-

@@ -16,24 +16,24 @@ type EKAlarm struct {
 }
 
 var (
-	_clsEKAlarm = _objcClass("EKAlarm")
-	_eKAlarmSelAlarmWithAbsoluteDate = objc.RegisterName("alarmWithAbsoluteDate:")
+	_clsEKAlarm                        = _objcClass("EKAlarm")
+	_eKAlarmSelAlarmWithAbsoluteDate   = objc.RegisterName("alarmWithAbsoluteDate:")
 	_eKAlarmSelAlarmWithRelativeOffset = objc.RegisterName("alarmWithRelativeOffset:")
-	_eKAlarmSelRelativeOffset = objc.RegisterName("relativeOffset")
-	_eKAlarmSelSetRelativeOffset = objc.RegisterName("setRelativeOffset:")
-	_eKAlarmSelAbsoluteDate = objc.RegisterName("absoluteDate")
-	_eKAlarmSelSetAbsoluteDate = objc.RegisterName("setAbsoluteDate:")
-	_eKAlarmSelStructuredLocation = objc.RegisterName("structuredLocation")
-	_eKAlarmSelSetStructuredLocation = objc.RegisterName("setStructuredLocation:")
-	_eKAlarmSelProximity = objc.RegisterName("proximity")
-	_eKAlarmSelSetProximity = objc.RegisterName("setProximity:")
-	_eKAlarmSelType = objc.RegisterName("type")
-	_eKAlarmSelEmailAddress = objc.RegisterName("emailAddress")
-	_eKAlarmSelSetEmailAddress = objc.RegisterName("setEmailAddress:")
-	_eKAlarmSelSoundName = objc.RegisterName("soundName")
-	_eKAlarmSelSetSoundName = objc.RegisterName("setSoundName:")
-	_eKAlarmSelUrl = objc.RegisterName("url")
-	_eKAlarmSelSetUrl = objc.RegisterName("setUrl:")
+	_eKAlarmSelRelativeOffset          = objc.RegisterName("relativeOffset")
+	_eKAlarmSelSetRelativeOffset       = objc.RegisterName("setRelativeOffset:")
+	_eKAlarmSelAbsoluteDate            = objc.RegisterName("absoluteDate")
+	_eKAlarmSelSetAbsoluteDate         = objc.RegisterName("setAbsoluteDate:")
+	_eKAlarmSelStructuredLocation      = objc.RegisterName("structuredLocation")
+	_eKAlarmSelSetStructuredLocation   = objc.RegisterName("setStructuredLocation:")
+	_eKAlarmSelProximity               = objc.RegisterName("proximity")
+	_eKAlarmSelSetProximity            = objc.RegisterName("setProximity:")
+	_eKAlarmSelType                    = objc.RegisterName("type")
+	_eKAlarmSelEmailAddress            = objc.RegisterName("emailAddress")
+	_eKAlarmSelSetEmailAddress         = objc.RegisterName("setEmailAddress:")
+	_eKAlarmSelSoundName               = objc.RegisterName("soundName")
+	_eKAlarmSelSetSoundName            = objc.RegisterName("setSoundName:")
+	_eKAlarmSelUrl                     = objc.RegisterName("url")
+	_eKAlarmSelSetUrl                  = objc.RegisterName("setUrl:")
 )
 
 func EKAlarmFromID(id objc.ID) *EKAlarm {
@@ -49,14 +49,18 @@ func EKAlarmFromID(id objc.ID) *EKAlarm {
 // @method     alarmWithAbsoluteDate: @abstract   Creates a new autoreleased alarm with an absolute trigger time. @param      date    The date the alarm should fire.
 func EKAlarmAlarmWithAbsoluteDate(date *foundation.NSDate) *EKAlarm {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKAlarm), _eKAlarmSelAlarmWithAbsoluteDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKAlarmFromID(_ret)
 }
 
 // @method     alarmWithRelativeOffset: @abstract   Creates a new autoreleased alarm with a relative trigger time. @discussion Creates a new autoreleased alarm with a relative trigger time. This offset is added to the start date of the event. @param      offset    The offset from the event start that the alarm should fire.
 func EKAlarmAlarmWithRelativeOffset(offset float64) *EKAlarm {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKAlarm), _eKAlarmSelAlarmWithRelativeOffset, offset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKAlarmFromID(_ret)
 }
 
@@ -73,7 +77,9 @@ func (o *EKAlarm) SetRelativeOffset(relativeOffset float64) {
 // @property   absoluteDate @abstract   Represents an alarm that fires at a specific date. @discussion Set this property to a date to establish an absolute alarm trigger. Setting this clears any relative interval trigger.
 func (o *EKAlarm) AbsoluteDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKAlarmSelAbsoluteDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -84,7 +90,9 @@ func (o *EKAlarm) SetAbsoluteDate(absoluteDate *foundation.NSDate) {
 // @property   structuredLocation @discussion Allows you to set a structured location (a location with a potential geo-coordinate) on an alarm. This is used in conjunction with proximity to do geofence-based triggering of reminders.
 func (o *EKAlarm) StructuredLocation() *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKAlarmSelStructuredLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKStructuredLocationFromID(_ret)
 }
 
@@ -111,7 +119,9 @@ func (o *EKAlarm) Type() EKAlarmType {
 // @property   emailAddress @abstract   An email address that is the recipient of an email alarm, which is an alarm that triggers an email message. @discussion When you set the emailAddress property, the action property is set to EKAlarmTypeEmail, and the soundName and url properties are set to nil.
 func (o *EKAlarm) EmailAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKAlarmSelEmailAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,7 +132,9 @@ func (o *EKAlarm) SetEmailAddress(emailAddress *foundation.NSString) {
 // @property   soundName @abstract   The name of the sound to play when the alarm triggers. @discussion The value of this property is the name of a system sound that can be used with the soundNamed: class method to create an NSSound object. When you set the soundName property, the action property is set to EKAlarmTypeAudio, and the emailAddress and url properties are set to nil.
 func (o *EKAlarm) SoundName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKAlarmSelSoundName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +146,9 @@ func (o *EKAlarm) SetSoundName(soundName *foundation.NSString) {
 // Deprecated: since macOS 10.9.
 func (o *EKAlarm) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKAlarmSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -142,4 +156,3 @@ func (o *EKAlarm) Url() *foundation.NSURL {
 func (o *EKAlarm) SetUrl(url *foundation.NSURL) {
 	o.Ptr().Send(_eKAlarmSelSetUrl, url.Ptr())
 }
-

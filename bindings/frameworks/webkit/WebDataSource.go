@@ -16,23 +16,23 @@ type WebDataSource struct {
 }
 
 var (
-	_clsWebDataSource = _objcClass("WebDataSource")
-	_webDataSourceSelInitWithRequest = objc.RegisterName("initWithRequest:")
+	_clsWebDataSource                  = _objcClass("WebDataSource")
+	_webDataSourceSelInitWithRequest   = objc.RegisterName("initWithRequest:")
 	_webDataSourceSelSubresourceForURL = objc.RegisterName("subresourceForURL:")
-	_webDataSourceSelAddSubresource = objc.RegisterName("addSubresource:")
-	_webDataSourceSelData = objc.RegisterName("data")
-	_webDataSourceSelRepresentation = objc.RegisterName("representation")
-	_webDataSourceSelWebFrame = objc.RegisterName("webFrame")
-	_webDataSourceSelInitialRequest = objc.RegisterName("initialRequest")
-	_webDataSourceSelRequest = objc.RegisterName("request")
-	_webDataSourceSelResponse = objc.RegisterName("response")
-	_webDataSourceSelTextEncodingName = objc.RegisterName("textEncodingName")
-	_webDataSourceSelIsLoading = objc.RegisterName("isLoading")
-	_webDataSourceSelPageTitle = objc.RegisterName("pageTitle")
-	_webDataSourceSelUnreachableURL = objc.RegisterName("unreachableURL")
-	_webDataSourceSelWebArchive = objc.RegisterName("webArchive")
-	_webDataSourceSelMainResource = objc.RegisterName("mainResource")
-	_webDataSourceSelSubresources = objc.RegisterName("subresources")
+	_webDataSourceSelAddSubresource    = objc.RegisterName("addSubresource:")
+	_webDataSourceSelData              = objc.RegisterName("data")
+	_webDataSourceSelRepresentation    = objc.RegisterName("representation")
+	_webDataSourceSelWebFrame          = objc.RegisterName("webFrame")
+	_webDataSourceSelInitialRequest    = objc.RegisterName("initialRequest")
+	_webDataSourceSelRequest           = objc.RegisterName("request")
+	_webDataSourceSelResponse          = objc.RegisterName("response")
+	_webDataSourceSelTextEncodingName  = objc.RegisterName("textEncodingName")
+	_webDataSourceSelIsLoading         = objc.RegisterName("isLoading")
+	_webDataSourceSelPageTitle         = objc.RegisterName("pageTitle")
+	_webDataSourceSelUnreachableURL    = objc.RegisterName("unreachableURL")
+	_webDataSourceSelWebArchive        = objc.RegisterName("webArchive")
+	_webDataSourceSelMainResource      = objc.RegisterName("mainResource")
+	_webDataSourceSelSubresources      = objc.RegisterName("subresources")
 )
 
 func WebDataSourceFromID(id objc.ID) *WebDataSource {
@@ -48,14 +48,18 @@ func WebDataSourceFromID(id objc.ID) *WebDataSource {
 // @method initWithRequest: @abstract The designated initializer for WebDataSource. @param request The request to use in creating a datasource. @result Returns an initialized WebDataSource.
 func (o *WebDataSource) InitWithRequest(request *foundation.NSURLRequest) *WebDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelInitWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebDataSourceFromID(_ret)
 }
 
 // method subresourceForURL: @abstract Returns a subresource for a given URL. @param URL The URL of the subresource. @description Returns non-nil if the data source has fully downloaded a subresource with the given URL.
 func (o *WebDataSource) SubresourceForURL(uRL *foundation.NSURL) *WebResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelSubresourceForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebResourceFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *WebDataSource) AddSubresource(subresource *WebResource) {
 // @property data @abstract Returns the raw data associated with the datasource.  Returns nil if the datasource hasn't loaded any data. @discussion The data will be incomplete until the datasource has completely loaded.
 func (o *WebDataSource) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -80,35 +86,45 @@ func (o *WebDataSource) Representation() WebDocumentRepresentation {
 // @property webFrame @abstract The frame that represents this data source.
 func (o *WebDataSource) WebFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelWebFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
 // @property initialRequest @abstract A reference to the original request that created the datasource.  This request will be unmodified by WebKit.
 func (o *WebDataSource) InitialRequest() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelInitialRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
 // @property request @abstract The request that was used to create this datasource.
 func (o *WebDataSource) Request() *foundation.NSMutableURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMutableURLRequestFromID(_ret)
 }
 
 // @property response @abstract The NSURLResponse for the data source.
 func (o *WebDataSource) Response() *foundation.NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLResponseFromID(_ret)
 }
 
 // @property textEncodingName @abstract Returns either the override encoding, as set on the WebView for this dataSource or the encoding from the response.
 func (o *WebDataSource) TextEncodingName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelTextEncodingName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,28 +137,36 @@ func (o *WebDataSource) IsLoading() bool {
 // @property pageTitle @abstract The page title or nil.
 func (o *WebDataSource) PageTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelPageTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property unreachableURL @abstract The unreachableURL for which this dataSource is showing alternate content, or nil. @discussion This will be non-nil only for dataSources created by calls to the WebFrame method loadAlternateHTMLString:baseURL:forUnreachableURL:.
 func (o *WebDataSource) UnreachableURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelUnreachableURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property webArchive @abstract A WebArchive representing the data source, its subresources and child frames. @description This method constructs a WebArchive using the original downloaded data. In the case of HTML, if the current state of the document is preferred, webArchive should be called on the DOM document instead.
 func (o *WebDataSource) WebArchive() *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelWebArchive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebArchiveFromID(_ret)
 }
 
 // @property mainResource @abstract A WebResource representing the data source. @description This method constructs a WebResource using the original downloaded data. This method can be used to construct a WebArchive in case the archive returned by WebDataSource's webArchive isn't sufficient.
 func (o *WebDataSource) MainResource() *WebResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelMainResource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebResourceFromID(_ret)
 }
 
@@ -151,4 +175,3 @@ func (o *WebDataSource) Subresources() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _webDataSourceSelSubresources)
 	return _ret
 }
-

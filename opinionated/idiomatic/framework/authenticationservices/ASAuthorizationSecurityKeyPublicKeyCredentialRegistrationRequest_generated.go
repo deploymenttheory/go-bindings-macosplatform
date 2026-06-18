@@ -18,11 +18,15 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest { return x.inner }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest (nil for 0).
 func AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
@@ -45,7 +49,9 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCre
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationPublicKeyCredentialParameters](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +67,9 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithExc
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -142,7 +150,9 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetPrf(
 	x.inner.SetPrf(prf)
 }
 
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest], for mocking and DI.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable interface {
@@ -162,4 +172,3 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable interfac
 }
 
 var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest)(nil)
-

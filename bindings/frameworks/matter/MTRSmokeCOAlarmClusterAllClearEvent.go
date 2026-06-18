@@ -26,4 +26,3 @@ func MTRSmokeCOAlarmClusterAllClearEventFromID(id objc.ID) *MTRSmokeCOAlarmClust
 	purego.Track(o)
 	return o
 }
-

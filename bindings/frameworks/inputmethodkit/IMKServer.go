@@ -18,12 +18,12 @@ type IMKServer struct {
 }
 
 var (
-	_clsIMKServer = _objcClass("IMKServer")
-	_iMKServerSelInitWithNameBundleIdentifier = objc.RegisterName("initWithName:bundleIdentifier:")
+	_clsIMKServer                                         = _objcClass("IMKServer")
+	_iMKServerSelInitWithNameBundleIdentifier             = objc.RegisterName("initWithName:bundleIdentifier:")
 	_iMKServerSelInitWithNameControllerClassDelegateClass = objc.RegisterName("initWithName:controllerClass:delegateClass:")
-	_iMKServerSelBundle = objc.RegisterName("bundle")
-	_iMKServerSelPaletteWillTerminate = objc.RegisterName("paletteWillTerminate")
-	_iMKServerSelLastKeyEventWasDeadKey = objc.RegisterName("lastKeyEventWasDeadKey")
+	_iMKServerSelBundle                                   = objc.RegisterName("bundle")
+	_iMKServerSelPaletteWillTerminate                     = objc.RegisterName("paletteWillTerminate")
+	_iMKServerSelLastKeyEventWasDeadKey                   = objc.RegisterName("lastKeyEventWasDeadKey")
 )
 
 func IMKServerFromID(id objc.ID) *IMKServer {
@@ -51,7 +51,9 @@ func (o *IMKServer) InitWithNameControllerClassDelegateClass(name *foundation.NS
 // @method @abstract   Returns an NSBundle for the input method. @discussion If the IMKServer contains a bundle identifier the NSBundle is created from that.  Otherwise, the bundle  is created for the main bundle.  The returned NSBundle is an autoreleased object.
 func (o *IMKServer) Bundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iMKServerSelBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
@@ -66,4 +68,3 @@ func (o *IMKServer) LastKeyEventWasDeadKey() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iMKServerSelLastKeyEventWasDeadKey)
 	return _ret
 }
-

@@ -414,4 +414,3 @@ type StatusItemable interface {
 }
 
 var _ StatusItemable = (*StatusItem)(nil)
-

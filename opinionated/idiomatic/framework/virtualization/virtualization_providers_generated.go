@@ -177,4 +177,3 @@ type VirtioSoundDeviceStreamConfigurationProvider interface {
 type VirtualMachineStartOptionsProvider interface {
 	asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions
 }
-

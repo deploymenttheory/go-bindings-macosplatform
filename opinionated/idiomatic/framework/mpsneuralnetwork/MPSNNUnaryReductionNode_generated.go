@@ -81,4 +81,3 @@ type NNUnaryReductionNodeable interface {
 }
 
 var _ NNUnaryReductionNodeable = (*NNUnaryReductionNode)(nil)
-

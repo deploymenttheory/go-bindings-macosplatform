@@ -17,41 +17,41 @@ type SKFieldNode struct {
 }
 
 var (
-	_clsSKFieldNode = _objcClass("SKFieldNode")
-	_sKFieldNodeSelDragField = objc.RegisterName("dragField")
-	_sKFieldNodeSelVortexField = objc.RegisterName("vortexField")
-	_sKFieldNodeSelRadialGravityField = objc.RegisterName("radialGravityField")
-	_sKFieldNodeSelLinearGravityFieldWithVector = objc.RegisterName("linearGravityFieldWithVector:")
-	_sKFieldNodeSelVelocityFieldWithVector = objc.RegisterName("velocityFieldWithVector:")
-	_sKFieldNodeSelVelocityFieldWithTexture = objc.RegisterName("velocityFieldWithTexture:")
-	_sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed = objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:")
+	_clsSKFieldNode                                            = _objcClass("SKFieldNode")
+	_sKFieldNodeSelDragField                                   = objc.RegisterName("dragField")
+	_sKFieldNodeSelVortexField                                 = objc.RegisterName("vortexField")
+	_sKFieldNodeSelRadialGravityField                          = objc.RegisterName("radialGravityField")
+	_sKFieldNodeSelLinearGravityFieldWithVector                = objc.RegisterName("linearGravityFieldWithVector:")
+	_sKFieldNodeSelVelocityFieldWithVector                     = objc.RegisterName("velocityFieldWithVector:")
+	_sKFieldNodeSelVelocityFieldWithTexture                    = objc.RegisterName("velocityFieldWithTexture:")
+	_sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed      = objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:")
 	_sKFieldNodeSelTurbulenceFieldWithSmoothnessAnimationSpeed = objc.RegisterName("turbulenceFieldWithSmoothness:animationSpeed:")
-	_sKFieldNodeSelSpringField = objc.RegisterName("springField")
-	_sKFieldNodeSelElectricField = objc.RegisterName("electricField")
-	_sKFieldNodeSelMagneticField = objc.RegisterName("magneticField")
-	_sKFieldNodeSelCustomFieldWithEvaluationBlock = objc.RegisterName("customFieldWithEvaluationBlock:")
-	_sKFieldNodeSelRegion = objc.RegisterName("region")
-	_sKFieldNodeSelSetRegion = objc.RegisterName("setRegion:")
-	_sKFieldNodeSelStrength = objc.RegisterName("strength")
-	_sKFieldNodeSelSetStrength = objc.RegisterName("setStrength:")
-	_sKFieldNodeSelFalloff = objc.RegisterName("falloff")
-	_sKFieldNodeSelSetFalloff = objc.RegisterName("setFalloff:")
-	_sKFieldNodeSelMinimumRadius = objc.RegisterName("minimumRadius")
-	_sKFieldNodeSelSetMinimumRadius = objc.RegisterName("setMinimumRadius:")
-	_sKFieldNodeSelIsEnabled = objc.RegisterName("isEnabled")
-	_sKFieldNodeSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sKFieldNodeSelIsExclusive = objc.RegisterName("isExclusive")
-	_sKFieldNodeSelSetExclusive = objc.RegisterName("setExclusive:")
-	_sKFieldNodeSelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sKFieldNodeSelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
-	_sKFieldNodeSelDirection = objc.RegisterName("direction")
-	_sKFieldNodeSelSetDirection = objc.RegisterName("setDirection:")
-	_sKFieldNodeSelSmoothness = objc.RegisterName("smoothness")
-	_sKFieldNodeSelSetSmoothness = objc.RegisterName("setSmoothness:")
-	_sKFieldNodeSelAnimationSpeed = objc.RegisterName("animationSpeed")
-	_sKFieldNodeSelSetAnimationSpeed = objc.RegisterName("setAnimationSpeed:")
-	_sKFieldNodeSelTexture = objc.RegisterName("texture")
-	_sKFieldNodeSelSetTexture = objc.RegisterName("setTexture:")
+	_sKFieldNodeSelSpringField                                 = objc.RegisterName("springField")
+	_sKFieldNodeSelElectricField                               = objc.RegisterName("electricField")
+	_sKFieldNodeSelMagneticField                               = objc.RegisterName("magneticField")
+	_sKFieldNodeSelCustomFieldWithEvaluationBlock              = objc.RegisterName("customFieldWithEvaluationBlock:")
+	_sKFieldNodeSelRegion                                      = objc.RegisterName("region")
+	_sKFieldNodeSelSetRegion                                   = objc.RegisterName("setRegion:")
+	_sKFieldNodeSelStrength                                    = objc.RegisterName("strength")
+	_sKFieldNodeSelSetStrength                                 = objc.RegisterName("setStrength:")
+	_sKFieldNodeSelFalloff                                     = objc.RegisterName("falloff")
+	_sKFieldNodeSelSetFalloff                                  = objc.RegisterName("setFalloff:")
+	_sKFieldNodeSelMinimumRadius                               = objc.RegisterName("minimumRadius")
+	_sKFieldNodeSelSetMinimumRadius                            = objc.RegisterName("setMinimumRadius:")
+	_sKFieldNodeSelIsEnabled                                   = objc.RegisterName("isEnabled")
+	_sKFieldNodeSelSetEnabled                                  = objc.RegisterName("setEnabled:")
+	_sKFieldNodeSelIsExclusive                                 = objc.RegisterName("isExclusive")
+	_sKFieldNodeSelSetExclusive                                = objc.RegisterName("setExclusive:")
+	_sKFieldNodeSelCategoryBitMask                             = objc.RegisterName("categoryBitMask")
+	_sKFieldNodeSelSetCategoryBitMask                          = objc.RegisterName("setCategoryBitMask:")
+	_sKFieldNodeSelDirection                                   = objc.RegisterName("direction")
+	_sKFieldNodeSelSetDirection                                = objc.RegisterName("setDirection:")
+	_sKFieldNodeSelSmoothness                                  = objc.RegisterName("smoothness")
+	_sKFieldNodeSelSetSmoothness                               = objc.RegisterName("setSmoothness:")
+	_sKFieldNodeSelAnimationSpeed                              = objc.RegisterName("animationSpeed")
+	_sKFieldNodeSelSetAnimationSpeed                           = objc.RegisterName("setAnimationSpeed:")
+	_sKFieldNodeSelTexture                                     = objc.RegisterName("texture")
+	_sKFieldNodeSelSetTexture                                  = objc.RegisterName("setTexture:")
 )
 
 func SKFieldNodeFromID(id objc.ID) *SKFieldNode {
@@ -67,77 +67,99 @@ func SKFieldNodeFromID(id objc.ID) *SKFieldNode {
 // Slows an object proportionally to the object’s velocity. Use this to simulate effects such as friction from motion through the air.
 func SKFieldNodeDragField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelDragField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // Applies a force tangential to the direction from the sample point to the field's position. The force will be CCW to the direction. Make the strength negative to apply force in the CW direction. Amount is proportional to distance from center and the object's mass. Use this to create effects such as tornadoes.
 func SKFieldNodeVortexField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVortexField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // Applies a force in the direction of the origin of the field in local space. To repel objects, use a negative strength. The force is proportional to the distance from the field origin. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
 func SKFieldNodeRadialGravityField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelRadialGravityField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // Applies a force in the direction of the vector in the local space. To repel objects, use a negative strength. The force is the same everywhere in the field. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction. @param direction The direction the force is applied in the x,y plane. The length of the direction vector is multiplied by the field's strength property to get the final calculated force. All three components of the direction vector are used to calculate the length. @see direction
 func SKFieldNodeLinearGravityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelLinearGravityFieldWithVector, direction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // Uses the supplied velocity vector for any object entering the field’s area of effect. Velocity fields override the effect of any other acceleration applied to the body. Velocity fields are typically used for such effects as advection, for example, a velocity field might describe the velocity on the surface of a river. An object placed in the river would then follow the river. @param direction The directed velocity that will be applied to the body. The z component is ignored. @see direction
 func SKFieldNodeVelocityFieldWithVector(direction unsafe.Pointer) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithVector, direction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // The supplied texture contains velocity values for any object entering the field’s area of effect. If no texture is supplied, the direction property is used instead. Velocity fields override the effect of any other acceleration applied to the body. Velocity fields are typically used for such effects as advection, for example, a velocity field might describe the velocity on the surface of a river. An object placed in the river would then follow the river. @param velocityTexture The R and G channels of the supplied texture become x and y components of velocity. B and A, if present in the SKTexture, are ignored. @see texture
 func SKFieldNodeVelocityFieldWithTexture(velocityTexture *SKTexture) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelVelocityFieldWithTexture, velocityTexture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // A time varying differentiable Perlin simplex noise field. By default a smooth noise is calculated, and the field is time varying. Use this to simulate such effects as fireflies, or snow. To freeze the noise in place, set animationSpeed to 0.0. Mass is ignored. @param smoothness value of 0 means as noisy as possible, 1 means as smooth as possible @param speed is the general rate in Hz that any particular texel changes to a different value @see smoothness @see animationSpeed
 func SKFieldNodeNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // Just like Noise, except the strength of the noise is proportional to the velocity of the object in the field. @param smoothness value of 0 means as noisy as possible, 1 means as smooth as possible @param speed is the general rate in Hz that any particular texel changes to a different value @see smoothness @see animationSpeed
 func SKFieldNodeTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // A Hooke’s law force - a force linearly proportional to distance from the center of the field. An object in this field will oscillate with a period proportional to the inverse of the mass. An example use is to keep objects confined to a particular region.
 func SKFieldNodeSpringField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelSpringField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // A force proportional to the charge on the object. A charge property has been added to SKPhysicsBodies to accomplish this. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the first part of the Lorentz equation, F = qE
 func SKFieldNodeElectricField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelElectricField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // A force proportional to the charge on the object and the object’s velocity. A charge property has been added to SKPhysicsBodies to accomplish this. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the second part of the Lorentz equation, F = qvB
 func SKFieldNodeMagneticField() *SKFieldNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelMagneticField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
@@ -150,14 +172,18 @@ func SKFieldNodeCustomFieldWithEvaluationBlock(block func(unsafe.Pointer, unsafe
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKFieldNode), _sKFieldNodeSelCustomFieldWithEvaluationBlock, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKFieldNodeFromID(_ret)
 }
 
 // The region property is the domain of the field's effect. No force is applied to objects outside the region.
 func (o *SKFieldNode) Region() *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
@@ -258,11 +284,12 @@ func (o *SKFieldNode) SetAnimationSpeed(animationSpeed float32) {
 // fields constructed with a texture can be uppdated by assigning a new texture @see velocityFieldWithTexture:velocityTexture
 func (o *SKFieldNode) Texture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKFieldNodeSelTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
 func (o *SKFieldNode) SetTexture(texture *SKTexture) {
 	o.Ptr().Send(_sKFieldNodeSelSetTexture, texture.Ptr())
 }
-

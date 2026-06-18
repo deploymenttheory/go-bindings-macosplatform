@@ -53,4 +53,3 @@ type DeviceBatteryable interface {
 }
 
 var _ DeviceBatteryable = (*DeviceBattery)(nil)
-

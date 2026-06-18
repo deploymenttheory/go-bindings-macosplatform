@@ -28,4 +28,3 @@ func MPSCNNPoolingMaxNodeFromID(id objc.ID) *MPSCNNPoolingMaxNode {
 	purego.Track(o)
 	return o
 }
-

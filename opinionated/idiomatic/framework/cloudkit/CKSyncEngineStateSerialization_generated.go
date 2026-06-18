@@ -41,4 +41,3 @@ type SyncEngineStateSerializationable interface {
 }
 
 var _ SyncEngineStateSerializationable = (*SyncEngineStateSerialization)(nil)
-

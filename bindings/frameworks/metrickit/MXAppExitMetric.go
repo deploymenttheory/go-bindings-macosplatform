@@ -15,7 +15,7 @@ type MXAppExitMetric struct {
 }
 
 var (
-	_clsMXAppExitMetric = _objcClass("MXAppExitMetric")
+	_clsMXAppExitMetric                   = _objcClass("MXAppExitMetric")
 	_mXAppExitMetricSelForegroundExitData = objc.RegisterName("foregroundExitData")
 	_mXAppExitMetricSelBackgroundExitData = objc.RegisterName("backgroundExitData")
 )
@@ -33,14 +33,17 @@ func MXAppExitMetricFromID(id objc.ID) *MXAppExitMetric {
 // @property      foregroundExitData @abstract      Cumulative foreground exit data. @discussion    This includes application exit data when the application was on screen and visible to the user.
 func (o *MXAppExitMetric) ForegroundExitData() *MXForegroundExitData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppExitMetricSelForegroundExitData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXForegroundExitDataFromID(_ret)
 }
 
 // @property      backgroundExitData @abstract      Cumulative background exit data. @discussion    This includes application exit data when the application was off screen and not visible to the user.
 func (o *MXAppExitMetric) BackgroundExitData() *MXBackgroundExitData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXAppExitMetricSelBackgroundExitData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXBackgroundExitDataFromID(_ret)
 }
-

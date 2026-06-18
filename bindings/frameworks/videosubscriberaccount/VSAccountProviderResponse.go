@@ -16,10 +16,10 @@ type VSAccountProviderResponse struct {
 }
 
 var (
-	_clsVSAccountProviderResponse = _objcClass("VSAccountProviderResponse")
+	_clsVSAccountProviderResponse                     = _objcClass("VSAccountProviderResponse")
 	_vSAccountProviderResponseSelAuthenticationScheme = objc.RegisterName("authenticationScheme")
-	_vSAccountProviderResponseSelStatus = objc.RegisterName("status")
-	_vSAccountProviderResponseSelBody = objc.RegisterName("body")
+	_vSAccountProviderResponseSelStatus               = objc.RegisterName("status")
+	_vSAccountProviderResponseSelBody                 = objc.RegisterName("body")
 )
 
 func VSAccountProviderResponseFromID(id objc.ID) *VSAccountProviderResponse {
@@ -35,21 +35,26 @@ func VSAccountProviderResponseFromID(id objc.ID) *VSAccountProviderResponse {
 // Identifies the protocol used in constructing this response.
 func (o *VSAccountProviderResponse) AuthenticationScheme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountProviderResponseSelAuthenticationScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The status code for this response. May be nil if there is no meaningful value for this type of response.
 func (o *VSAccountProviderResponse) Status() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountProviderResponseSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The raw response from the provider. May be nil if the response contained security-sensitive information.
 func (o *VSAccountProviderResponse) Body() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountProviderResponseSelBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

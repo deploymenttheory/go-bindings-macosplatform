@@ -15,7 +15,9 @@ type MTL4InstanceAccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4InstanceAccelerationStructureDescriptor].
-func (x *MTL4InstanceAccelerationStructureDescriptor) Unwrap() *raw.MTL4InstanceAccelerationStructureDescriptor { return x.inner }
+func (x *MTL4InstanceAccelerationStructureDescriptor) Unwrap() *raw.MTL4InstanceAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -185,9 +187,13 @@ func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformStride(m
 	x.inner.SetMotionTransformStride(motionTransformStride)
 }
 
-func (x *MTL4InstanceAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor }
+func (x *MTL4InstanceAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor
+}
 
-func (x *MTL4InstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor }
+func (x *MTL4InstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor
+}
 
 // MTL4InstanceAccelerationStructureDescriptorable is the interface implemented by [MTL4InstanceAccelerationStructureDescriptor], for mocking and DI.
 type MTL4InstanceAccelerationStructureDescriptorable interface {
@@ -223,4 +229,3 @@ type MTL4InstanceAccelerationStructureDescriptorable interface {
 }
 
 var _ MTL4InstanceAccelerationStructureDescriptorable = (*MTL4InstanceAccelerationStructureDescriptor)(nil)
-

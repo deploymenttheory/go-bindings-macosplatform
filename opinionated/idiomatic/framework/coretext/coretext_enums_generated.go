@@ -13,17 +13,17 @@ type CTCharacterCollection int64
 
 const (
 	KCTCharacterCollectionIdentityMapping CTCharacterCollection = 0
-	KCTCharacterCollectionAdobeCNS1 CTCharacterCollection = 1
-	KCTCharacterCollectionAdobeGB1 CTCharacterCollection = 2
-	KCTCharacterCollectionAdobeJapan1 CTCharacterCollection = 3
-	KCTCharacterCollectionAdobeJapan2 CTCharacterCollection = 4
-	KCTCharacterCollectionAdobeKorea1 CTCharacterCollection = 5
+	KCTCharacterCollectionAdobeCNS1       CTCharacterCollection = 1
+	KCTCharacterCollectionAdobeGB1        CTCharacterCollection = 2
+	KCTCharacterCollectionAdobeJapan1     CTCharacterCollection = 3
+	KCTCharacterCollectionAdobeJapan2     CTCharacterCollection = 4
+	KCTCharacterCollectionAdobeKorea1     CTCharacterCollection = 5
 	KCTIdentityMappingCharacterCollection CTCharacterCollection = 0
-	KCTAdobeCNS1CharacterCollection CTCharacterCollection = 1
-	KCTAdobeGB1CharacterCollection CTCharacterCollection = 2
-	KCTAdobeJapan1CharacterCollection CTCharacterCollection = 3
-	KCTAdobeJapan2CharacterCollection CTCharacterCollection = 4
-	KCTAdobeKorea1CharacterCollection CTCharacterCollection = 5
+	KCTAdobeCNS1CharacterCollection       CTCharacterCollection = 1
+	KCTAdobeGB1CharacterCollection        CTCharacterCollection = 2
+	KCTAdobeJapan1CharacterCollection     CTCharacterCollection = 3
+	KCTAdobeJapan2CharacterCollection     CTCharacterCollection = 4
+	KCTAdobeKorea1CharacterCollection     CTCharacterCollection = 5
 )
 
 func (e CTCharacterCollection) String() string {
@@ -50,8 +50,8 @@ type CTFontCollectionCopyOptions int64
 
 const (
 	KCTFontCollectionCopyDefaultOptions CTFontCollectionCopyOptions = 0
-	KCTFontCollectionCopyUnique CTFontCollectionCopyOptions = 1
-	KCTFontCollectionCopyStandardSort CTFontCollectionCopyOptions = 2
+	KCTFontCollectionCopyUnique         CTFontCollectionCopyOptions = 1
+	KCTFontCollectionCopyStandardSort   CTFontCollectionCopyOptions = 2
 )
 
 func (e CTFontCollectionCopyOptions) String() string {
@@ -71,15 +71,15 @@ func (e CTFontCollectionCopyOptions) String() string {
 type CTFontDescriptorMatchingState int64
 
 const (
-	KCTFontDescriptorMatchingDidBegin CTFontDescriptorMatchingState = 0
-	KCTFontDescriptorMatchingDidFinish CTFontDescriptorMatchingState = 1
-	KCTFontDescriptorMatchingWillBeginQuerying CTFontDescriptorMatchingState = 2
-	KCTFontDescriptorMatchingStalled CTFontDescriptorMatchingState = 3
+	KCTFontDescriptorMatchingDidBegin             CTFontDescriptorMatchingState = 0
+	KCTFontDescriptorMatchingDidFinish            CTFontDescriptorMatchingState = 1
+	KCTFontDescriptorMatchingWillBeginQuerying    CTFontDescriptorMatchingState = 2
+	KCTFontDescriptorMatchingStalled              CTFontDescriptorMatchingState = 3
 	KCTFontDescriptorMatchingWillBeginDownloading CTFontDescriptorMatchingState = 4
-	KCTFontDescriptorMatchingDownloading CTFontDescriptorMatchingState = 5
+	KCTFontDescriptorMatchingDownloading          CTFontDescriptorMatchingState = 5
 	KCTFontDescriptorMatchingDidFinishDownloading CTFontDescriptorMatchingState = 6
-	KCTFontDescriptorMatchingDidMatch CTFontDescriptorMatchingState = 7
-	KCTFontDescriptorMatchingDidFailWithError CTFontDescriptorMatchingState = 8
+	KCTFontDescriptorMatchingDidMatch             CTFontDescriptorMatchingState = 7
+	KCTFontDescriptorMatchingDidFailWithError     CTFontDescriptorMatchingState = 8
 )
 
 func (e CTFontDescriptorMatchingState) String() string {
@@ -110,9 +110,9 @@ func (e CTFontDescriptorMatchingState) String() string {
 type CTFontManagerAutoActivationSetting int64
 
 const (
-	KCTFontManagerAutoActivationDefault CTFontManagerAutoActivationSetting = 0
-	KCTFontManagerAutoActivationDisabled CTFontManagerAutoActivationSetting = 1
-	KCTFontManagerAutoActivationEnabled CTFontManagerAutoActivationSetting = 2
+	KCTFontManagerAutoActivationDefault    CTFontManagerAutoActivationSetting = 0
+	KCTFontManagerAutoActivationDisabled   CTFontManagerAutoActivationSetting = 1
+	KCTFontManagerAutoActivationEnabled    CTFontManagerAutoActivationSetting = 2
 	KCTFontManagerAutoActivationPromptUser CTFontManagerAutoActivationSetting = 3
 )
 
@@ -134,11 +134,11 @@ func (e CTFontManagerAutoActivationSetting) String() string {
 type CTFontManagerScope int64
 
 const (
-	KCTFontManagerScopeNone CTFontManagerScope = 0
-	KCTFontManagerScopeProcess CTFontManagerScope = 1
+	KCTFontManagerScopeNone       CTFontManagerScope = 0
+	KCTFontManagerScopeProcess    CTFontManagerScope = 1
 	KCTFontManagerScopePersistent CTFontManagerScope = 2
-	KCTFontManagerScopeSession CTFontManagerScope = 3
-	KCTFontManagerScopeUser CTFontManagerScope = 2
+	KCTFontManagerScopeSession    CTFontManagerScope = 3
+	KCTFontManagerScopeUser       CTFontManagerScope = 2
 )
 
 func (e CTFontManagerScope) String() string {
@@ -160,10 +160,10 @@ func (e CTFontManagerScope) String() string {
 type CTFontOptions int64
 
 const (
-	KCTFontOptionsDefault CTFontOptions = 0
+	KCTFontOptionsDefault               CTFontOptions = 0
 	KCTFontOptionsPreventAutoActivation CTFontOptions = 1
-	KCTFontOptionsPreventAutoDownload CTFontOptions = 2
-	KCTFontOptionsPreferSystemFont CTFontOptions = 4
+	KCTFontOptionsPreventAutoDownload   CTFontOptions = 2
+	KCTFontOptionsPreferSystemFont      CTFontOptions = 4
 )
 
 func (e CTFontOptions) String() string {
@@ -186,12 +186,12 @@ func (e CTFontOptions) String() string {
 type CTFontOrientation int64
 
 const (
-	KCTFontOrientationDefault CTFontOrientation = 0
+	KCTFontOrientationDefault    CTFontOrientation = 0
 	KCTFontOrientationHorizontal CTFontOrientation = 1
-	KCTFontOrientationVertical CTFontOrientation = 2
-	KCTFontDefaultOrientation CTFontOrientation = 0
+	KCTFontOrientationVertical   CTFontOrientation = 2
+	KCTFontDefaultOrientation    CTFontOrientation = 0
 	KCTFontHorizontalOrientation CTFontOrientation = 1
-	KCTFontVerticalOrientation CTFontOrientation = 2
+	KCTFontVerticalOrientation   CTFontOrientation = 2
 )
 
 func (e CTFontOrientation) String() string {
@@ -211,26 +211,26 @@ func (e CTFontOrientation) String() string {
 type CTFontSymbolicTraits int64
 
 const (
-	KCTFontTraitItalic CTFontSymbolicTraits = 1
-	KCTFontTraitBold CTFontSymbolicTraits = 2
-	KCTFontTraitExpanded CTFontSymbolicTraits = 32
-	KCTFontTraitCondensed CTFontSymbolicTraits = 64
-	KCTFontTraitMonoSpace CTFontSymbolicTraits = 1024
-	KCTFontTraitVertical CTFontSymbolicTraits = 2048
+	KCTFontTraitItalic      CTFontSymbolicTraits = 1
+	KCTFontTraitBold        CTFontSymbolicTraits = 2
+	KCTFontTraitExpanded    CTFontSymbolicTraits = 32
+	KCTFontTraitCondensed   CTFontSymbolicTraits = 64
+	KCTFontTraitMonoSpace   CTFontSymbolicTraits = 1024
+	KCTFontTraitVertical    CTFontSymbolicTraits = 2048
 	KCTFontTraitUIOptimized CTFontSymbolicTraits = 4096
 	KCTFontTraitColorGlyphs CTFontSymbolicTraits = 8192
-	KCTFontTraitComposite CTFontSymbolicTraits = 16384
-	KCTFontTraitClassMask CTFontSymbolicTraits = 4026531840
-	KCTFontItalicTrait CTFontSymbolicTraits = 1
-	KCTFontBoldTrait CTFontSymbolicTraits = 2
-	KCTFontExpandedTrait CTFontSymbolicTraits = 32
-	KCTFontCondensedTrait CTFontSymbolicTraits = 64
-	KCTFontMonoSpaceTrait CTFontSymbolicTraits = 1024
-	KCTFontVerticalTrait CTFontSymbolicTraits = 2048
+	KCTFontTraitComposite   CTFontSymbolicTraits = 16384
+	KCTFontTraitClassMask   CTFontSymbolicTraits = 4026531840
+	KCTFontItalicTrait      CTFontSymbolicTraits = 1
+	KCTFontBoldTrait        CTFontSymbolicTraits = 2
+	KCTFontExpandedTrait    CTFontSymbolicTraits = 32
+	KCTFontCondensedTrait   CTFontSymbolicTraits = 64
+	KCTFontMonoSpaceTrait   CTFontSymbolicTraits = 1024
+	KCTFontVerticalTrait    CTFontSymbolicTraits = 2048
 	KCTFontUIOptimizedTrait CTFontSymbolicTraits = 4096
 	KCTFontColorGlyphsTrait CTFontSymbolicTraits = 8192
-	KCTFontCompositeTrait CTFontSymbolicTraits = 16384
-	KCTFontClassMaskTrait CTFontSymbolicTraits = 4026531840
+	KCTFontCompositeTrait   CTFontSymbolicTraits = 16384
+	KCTFontClassMaskTrait   CTFontSymbolicTraits = 4026531840
 )
 
 func (e CTFontSymbolicTraits) String() string {
@@ -305,7 +305,7 @@ func (e CTFontSymbolicTraits) String() string {
 type CTFontTableOptions int64
 
 const (
-	KCTFontTableOptionNoOptions CTFontTableOptions = 0
+	KCTFontTableOptionNoOptions        CTFontTableOptions = 0
 	KCTFontTableOptionExcludeSynthetic CTFontTableOptions = 1
 )
 
@@ -323,62 +323,62 @@ func (e CTFontTableOptions) String() string {
 type CTFontUIFontType int64
 
 const (
-	KCTFontUIFontNone CTFontUIFontType = 4294967295
-	KCTFontUIFontUser CTFontUIFontType = 0
-	KCTFontUIFontUserFixedPitch CTFontUIFontType = 1
-	KCTFontUIFontSystem CTFontUIFontType = 2
-	KCTFontUIFontEmphasizedSystem CTFontUIFontType = 3
-	KCTFontUIFontSmallSystem CTFontUIFontType = 4
-	KCTFontUIFontSmallEmphasizedSystem CTFontUIFontType = 5
-	KCTFontUIFontMiniSystem CTFontUIFontType = 6
-	KCTFontUIFontMiniEmphasizedSystem CTFontUIFontType = 7
-	KCTFontUIFontViews CTFontUIFontType = 8
-	KCTFontUIFontApplication CTFontUIFontType = 9
-	KCTFontUIFontLabel CTFontUIFontType = 10
-	KCTFontUIFontMenuTitle CTFontUIFontType = 11
-	KCTFontUIFontMenuItem CTFontUIFontType = 12
-	KCTFontUIFontMenuItemMark CTFontUIFontType = 13
-	KCTFontUIFontMenuItemCmdKey CTFontUIFontType = 14
-	KCTFontUIFontWindowTitle CTFontUIFontType = 15
-	KCTFontUIFontPushButton CTFontUIFontType = 16
-	KCTFontUIFontUtilityWindowTitle CTFontUIFontType = 17
-	KCTFontUIFontAlertHeader CTFontUIFontType = 18
-	KCTFontUIFontSystemDetail CTFontUIFontType = 19
-	KCTFontUIFontEmphasizedSystemDetail CTFontUIFontType = 20
-	KCTFontUIFontToolbar CTFontUIFontType = 21
-	KCTFontUIFontSmallToolbar CTFontUIFontType = 22
-	KCTFontUIFontMessage CTFontUIFontType = 23
-	KCTFontUIFontPalette CTFontUIFontType = 24
-	KCTFontUIFontToolTip CTFontUIFontType = 25
-	KCTFontUIFontControlContent CTFontUIFontType = 26
-	KCTFontNoFontType CTFontUIFontType = 4294967295
-	KCTFontUserFontType CTFontUIFontType = 0
-	KCTFontUserFixedPitchFontType CTFontUIFontType = 1
-	KCTFontSystemFontType CTFontUIFontType = 2
-	KCTFontEmphasizedSystemFontType CTFontUIFontType = 3
-	KCTFontSmallSystemFontType CTFontUIFontType = 4
-	KCTFontSmallEmphasizedSystemFontType CTFontUIFontType = 5
-	KCTFontMiniSystemFontType CTFontUIFontType = 6
-	KCTFontMiniEmphasizedSystemFontType CTFontUIFontType = 7
-	KCTFontViewsFontType CTFontUIFontType = 8
-	KCTFontApplicationFontType CTFontUIFontType = 9
-	KCTFontLabelFontType CTFontUIFontType = 10
-	KCTFontMenuTitleFontType CTFontUIFontType = 11
-	KCTFontMenuItemFontType CTFontUIFontType = 12
-	KCTFontMenuItemMarkFontType CTFontUIFontType = 13
-	KCTFontMenuItemCmdKeyFontType CTFontUIFontType = 14
-	KCTFontWindowTitleFontType CTFontUIFontType = 15
-	KCTFontPushButtonFontType CTFontUIFontType = 16
-	KCTFontUtilityWindowTitleFontType CTFontUIFontType = 17
-	KCTFontAlertHeaderFontType CTFontUIFontType = 18
-	KCTFontSystemDetailFontType CTFontUIFontType = 19
+	KCTFontUIFontNone                     CTFontUIFontType = 4294967295
+	KCTFontUIFontUser                     CTFontUIFontType = 0
+	KCTFontUIFontUserFixedPitch           CTFontUIFontType = 1
+	KCTFontUIFontSystem                   CTFontUIFontType = 2
+	KCTFontUIFontEmphasizedSystem         CTFontUIFontType = 3
+	KCTFontUIFontSmallSystem              CTFontUIFontType = 4
+	KCTFontUIFontSmallEmphasizedSystem    CTFontUIFontType = 5
+	KCTFontUIFontMiniSystem               CTFontUIFontType = 6
+	KCTFontUIFontMiniEmphasizedSystem     CTFontUIFontType = 7
+	KCTFontUIFontViews                    CTFontUIFontType = 8
+	KCTFontUIFontApplication              CTFontUIFontType = 9
+	KCTFontUIFontLabel                    CTFontUIFontType = 10
+	KCTFontUIFontMenuTitle                CTFontUIFontType = 11
+	KCTFontUIFontMenuItem                 CTFontUIFontType = 12
+	KCTFontUIFontMenuItemMark             CTFontUIFontType = 13
+	KCTFontUIFontMenuItemCmdKey           CTFontUIFontType = 14
+	KCTFontUIFontWindowTitle              CTFontUIFontType = 15
+	KCTFontUIFontPushButton               CTFontUIFontType = 16
+	KCTFontUIFontUtilityWindowTitle       CTFontUIFontType = 17
+	KCTFontUIFontAlertHeader              CTFontUIFontType = 18
+	KCTFontUIFontSystemDetail             CTFontUIFontType = 19
+	KCTFontUIFontEmphasizedSystemDetail   CTFontUIFontType = 20
+	KCTFontUIFontToolbar                  CTFontUIFontType = 21
+	KCTFontUIFontSmallToolbar             CTFontUIFontType = 22
+	KCTFontUIFontMessage                  CTFontUIFontType = 23
+	KCTFontUIFontPalette                  CTFontUIFontType = 24
+	KCTFontUIFontToolTip                  CTFontUIFontType = 25
+	KCTFontUIFontControlContent           CTFontUIFontType = 26
+	KCTFontNoFontType                     CTFontUIFontType = 4294967295
+	KCTFontUserFontType                   CTFontUIFontType = 0
+	KCTFontUserFixedPitchFontType         CTFontUIFontType = 1
+	KCTFontSystemFontType                 CTFontUIFontType = 2
+	KCTFontEmphasizedSystemFontType       CTFontUIFontType = 3
+	KCTFontSmallSystemFontType            CTFontUIFontType = 4
+	KCTFontSmallEmphasizedSystemFontType  CTFontUIFontType = 5
+	KCTFontMiniSystemFontType             CTFontUIFontType = 6
+	KCTFontMiniEmphasizedSystemFontType   CTFontUIFontType = 7
+	KCTFontViewsFontType                  CTFontUIFontType = 8
+	KCTFontApplicationFontType            CTFontUIFontType = 9
+	KCTFontLabelFontType                  CTFontUIFontType = 10
+	KCTFontMenuTitleFontType              CTFontUIFontType = 11
+	KCTFontMenuItemFontType               CTFontUIFontType = 12
+	KCTFontMenuItemMarkFontType           CTFontUIFontType = 13
+	KCTFontMenuItemCmdKeyFontType         CTFontUIFontType = 14
+	KCTFontWindowTitleFontType            CTFontUIFontType = 15
+	KCTFontPushButtonFontType             CTFontUIFontType = 16
+	KCTFontUtilityWindowTitleFontType     CTFontUIFontType = 17
+	KCTFontAlertHeaderFontType            CTFontUIFontType = 18
+	KCTFontSystemDetailFontType           CTFontUIFontType = 19
 	KCTFontEmphasizedSystemDetailFontType CTFontUIFontType = 20
-	KCTFontToolbarFontType CTFontUIFontType = 21
-	KCTFontSmallToolbarFontType CTFontUIFontType = 22
-	KCTFontMessageFontType CTFontUIFontType = 23
-	KCTFontPaletteFontType CTFontUIFontType = 24
-	KCTFontToolTipFontType CTFontUIFontType = 25
-	KCTFontControlContentFontType CTFontUIFontType = 26
+	KCTFontToolbarFontType                CTFontUIFontType = 21
+	KCTFontSmallToolbarFontType           CTFontUIFontType = 22
+	KCTFontMessageFontType                CTFontUIFontType = 23
+	KCTFontPaletteFontType                CTFontUIFontType = 24
+	KCTFontToolTipFontType                CTFontUIFontType = 25
+	KCTFontControlContentFontType         CTFontUIFontType = 26
 )
 
 func (e CTFontUIFontType) String() string {
@@ -449,11 +449,11 @@ type CTLineBoundsOptions int64
 
 const (
 	KCTLineBoundsExcludeTypographicLeading CTLineBoundsOptions = 1
-	KCTLineBoundsExcludeTypographicShifts CTLineBoundsOptions = 2
-	KCTLineBoundsUseHangingPunctuation CTLineBoundsOptions = 4
-	KCTLineBoundsUseGlyphPathBounds CTLineBoundsOptions = 8
-	KCTLineBoundsUseOpticalBounds CTLineBoundsOptions = 16
-	KCTLineBoundsIncludeLanguageExtents CTLineBoundsOptions = 32
+	KCTLineBoundsExcludeTypographicShifts  CTLineBoundsOptions = 2
+	KCTLineBoundsUseHangingPunctuation     CTLineBoundsOptions = 4
+	KCTLineBoundsUseGlyphPathBounds        CTLineBoundsOptions = 8
+	KCTLineBoundsUseOpticalBounds          CTLineBoundsOptions = 16
+	KCTLineBoundsIncludeLanguageExtents    CTLineBoundsOptions = 32
 )
 
 func (e CTLineBoundsOptions) String() string {
@@ -485,8 +485,8 @@ func (e CTLineBoundsOptions) String() string {
 type CTLineTruncationType int64
 
 const (
-	KCTLineTruncationStart CTLineTruncationType = 0
-	KCTLineTruncationEnd CTLineTruncationType = 1
+	KCTLineTruncationStart  CTLineTruncationType = 0
+	KCTLineTruncationEnd    CTLineTruncationType = 1
 	KCTLineTruncationMiddle CTLineTruncationType = 2
 )
 
@@ -506,25 +506,25 @@ func (e CTLineTruncationType) String() string {
 type CTParagraphStyleSpecifier int64
 
 const (
-	KCTParagraphStyleSpecifierAlignment CTParagraphStyleSpecifier = 0
-	KCTParagraphStyleSpecifierFirstLineHeadIndent CTParagraphStyleSpecifier = 1
-	KCTParagraphStyleSpecifierHeadIndent CTParagraphStyleSpecifier = 2
-	KCTParagraphStyleSpecifierTailIndent CTParagraphStyleSpecifier = 3
-	KCTParagraphStyleSpecifierTabStops CTParagraphStyleSpecifier = 4
-	KCTParagraphStyleSpecifierDefaultTabInterval CTParagraphStyleSpecifier = 5
-	KCTParagraphStyleSpecifierLineBreakMode CTParagraphStyleSpecifier = 6
-	KCTParagraphStyleSpecifierLineHeightMultiple CTParagraphStyleSpecifier = 7
-	KCTParagraphStyleSpecifierMaximumLineHeight CTParagraphStyleSpecifier = 8
-	KCTParagraphStyleSpecifierMinimumLineHeight CTParagraphStyleSpecifier = 9
-	KCTParagraphStyleSpecifierLineSpacing CTParagraphStyleSpecifier = 10
-	KCTParagraphStyleSpecifierParagraphSpacing CTParagraphStyleSpecifier = 11
+	KCTParagraphStyleSpecifierAlignment              CTParagraphStyleSpecifier = 0
+	KCTParagraphStyleSpecifierFirstLineHeadIndent    CTParagraphStyleSpecifier = 1
+	KCTParagraphStyleSpecifierHeadIndent             CTParagraphStyleSpecifier = 2
+	KCTParagraphStyleSpecifierTailIndent             CTParagraphStyleSpecifier = 3
+	KCTParagraphStyleSpecifierTabStops               CTParagraphStyleSpecifier = 4
+	KCTParagraphStyleSpecifierDefaultTabInterval     CTParagraphStyleSpecifier = 5
+	KCTParagraphStyleSpecifierLineBreakMode          CTParagraphStyleSpecifier = 6
+	KCTParagraphStyleSpecifierLineHeightMultiple     CTParagraphStyleSpecifier = 7
+	KCTParagraphStyleSpecifierMaximumLineHeight      CTParagraphStyleSpecifier = 8
+	KCTParagraphStyleSpecifierMinimumLineHeight      CTParagraphStyleSpecifier = 9
+	KCTParagraphStyleSpecifierLineSpacing            CTParagraphStyleSpecifier = 10
+	KCTParagraphStyleSpecifierParagraphSpacing       CTParagraphStyleSpecifier = 11
 	KCTParagraphStyleSpecifierParagraphSpacingBefore CTParagraphStyleSpecifier = 12
-	KCTParagraphStyleSpecifierBaseWritingDirection CTParagraphStyleSpecifier = 13
-	KCTParagraphStyleSpecifierMaximumLineSpacing CTParagraphStyleSpecifier = 14
-	KCTParagraphStyleSpecifierMinimumLineSpacing CTParagraphStyleSpecifier = 15
-	KCTParagraphStyleSpecifierLineSpacingAdjustment CTParagraphStyleSpecifier = 16
-	KCTParagraphStyleSpecifierLineBoundsOptions CTParagraphStyleSpecifier = 17
-	KCTParagraphStyleSpecifierCount CTParagraphStyleSpecifier = 18
+	KCTParagraphStyleSpecifierBaseWritingDirection   CTParagraphStyleSpecifier = 13
+	KCTParagraphStyleSpecifierMaximumLineSpacing     CTParagraphStyleSpecifier = 14
+	KCTParagraphStyleSpecifierMinimumLineSpacing     CTParagraphStyleSpecifier = 15
+	KCTParagraphStyleSpecifierLineSpacingAdjustment  CTParagraphStyleSpecifier = 16
+	KCTParagraphStyleSpecifierLineBoundsOptions      CTParagraphStyleSpecifier = 17
+	KCTParagraphStyleSpecifierCount                  CTParagraphStyleSpecifier = 18
 )
 
 func (e CTParagraphStyleSpecifier) String() string {
@@ -575,14 +575,14 @@ func (e CTParagraphStyleSpecifier) String() string {
 type CTRubyAlignment int64
 
 const (
-	KCTRubyAlignmentInvalid CTRubyAlignment = 255
-	KCTRubyAlignmentAuto CTRubyAlignment = 0
-	KCTRubyAlignmentStart CTRubyAlignment = 1
-	KCTRubyAlignmentCenter CTRubyAlignment = 2
-	KCTRubyAlignmentEnd CTRubyAlignment = 3
+	KCTRubyAlignmentInvalid          CTRubyAlignment = 255
+	KCTRubyAlignmentAuto             CTRubyAlignment = 0
+	KCTRubyAlignmentStart            CTRubyAlignment = 1
+	KCTRubyAlignmentCenter           CTRubyAlignment = 2
+	KCTRubyAlignmentEnd              CTRubyAlignment = 3
 	KCTRubyAlignmentDistributeLetter CTRubyAlignment = 4
-	KCTRubyAlignmentDistributeSpace CTRubyAlignment = 5
-	KCTRubyAlignmentLineEdge CTRubyAlignment = 6
+	KCTRubyAlignmentDistributeSpace  CTRubyAlignment = 5
+	KCTRubyAlignmentLineEdge         CTRubyAlignment = 6
 )
 
 func (e CTRubyAlignment) String() string {
@@ -612,10 +612,10 @@ type CTRubyOverhang int64
 
 const (
 	KCTRubyOverhangInvalid CTRubyOverhang = 255
-	KCTRubyOverhangAuto CTRubyOverhang = 0
-	KCTRubyOverhangStart CTRubyOverhang = 1
-	KCTRubyOverhangEnd CTRubyOverhang = 2
-	KCTRubyOverhangNone CTRubyOverhang = 3
+	KCTRubyOverhangAuto    CTRubyOverhang = 0
+	KCTRubyOverhangStart   CTRubyOverhang = 1
+	KCTRubyOverhangEnd     CTRubyOverhang = 2
+	KCTRubyOverhangNone    CTRubyOverhang = 3
 )
 
 func (e CTRubyOverhang) String() string {
@@ -638,11 +638,11 @@ func (e CTRubyOverhang) String() string {
 type CTRubyPosition int64
 
 const (
-	KCTRubyPositionBefore CTRubyPosition = 0
-	KCTRubyPositionAfter CTRubyPosition = 1
+	KCTRubyPositionBefore         CTRubyPosition = 0
+	KCTRubyPositionAfter          CTRubyPosition = 1
 	KCTRubyPositionInterCharacter CTRubyPosition = 2
-	KCTRubyPositionInline CTRubyPosition = 3
-	KCTRubyPositionCount CTRubyPosition = 4
+	KCTRubyPositionInline         CTRubyPosition = 3
+	KCTRubyPositionCount          CTRubyPosition = 4
 )
 
 func (e CTRubyPosition) String() string {
@@ -666,9 +666,9 @@ func (e CTRubyPosition) String() string {
 type CTRunStatus int64
 
 const (
-	KCTRunStatusNoStatus CTRunStatus = 0
-	KCTRunStatusRightToLeft CTRunStatus = 1
-	KCTRunStatusNonMonotonic CTRunStatus = 2
+	KCTRunStatusNoStatus             CTRunStatus = 0
+	KCTRunStatusRightToLeft          CTRunStatus = 1
+	KCTRunStatusNonMonotonic         CTRunStatus = 2
 	KCTRunStatusHasNonIdentityMatrix CTRunStatus = 4
 )
 
@@ -692,16 +692,16 @@ func (e CTRunStatus) String() string {
 type CTTextAlignment int64
 
 const (
-	KCTTextAlignmentLeft CTTextAlignment = 0
-	KCTTextAlignmentRight CTTextAlignment = 1
-	KCTTextAlignmentCenter CTTextAlignment = 2
+	KCTTextAlignmentLeft      CTTextAlignment = 0
+	KCTTextAlignmentRight     CTTextAlignment = 1
+	KCTTextAlignmentCenter    CTTextAlignment = 2
 	KCTTextAlignmentJustified CTTextAlignment = 3
-	KCTTextAlignmentNatural CTTextAlignment = 4
-	KCTLeftTextAlignment CTTextAlignment = 0
-	KCTRightTextAlignment CTTextAlignment = 1
-	KCTCenterTextAlignment CTTextAlignment = 2
+	KCTTextAlignmentNatural   CTTextAlignment = 4
+	KCTLeftTextAlignment      CTTextAlignment = 0
+	KCTRightTextAlignment     CTTextAlignment = 1
+	KCTCenterTextAlignment    CTTextAlignment = 2
 	KCTJustifiedTextAlignment CTTextAlignment = 3
-	KCTNaturalTextAlignment CTTextAlignment = 4
+	KCTNaturalTextAlignment   CTTextAlignment = 4
 )
 
 func (e CTTextAlignment) String() string {
@@ -720,4 +720,3 @@ func (e CTTextAlignment) String() string {
 		return fmt.Sprintf("CTTextAlignment(%d)", int64(e))
 	}
 }
-

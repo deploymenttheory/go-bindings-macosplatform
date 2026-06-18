@@ -16,9 +16,9 @@ type AVDelegatingPlaybackCoordinatorBufferingCommand struct {
 }
 
 var (
-	_clsAVDelegatingPlaybackCoordinatorBufferingCommand = _objcClass("AVDelegatingPlaybackCoordinatorBufferingCommand")
+	_clsAVDelegatingPlaybackCoordinatorBufferingCommand                        = _objcClass("AVDelegatingPlaybackCoordinatorBufferingCommand")
 	_aVDelegatingPlaybackCoordinatorBufferingCommandSelAnticipatedPlaybackRate = objc.RegisterName("anticipatedPlaybackRate")
-	_aVDelegatingPlaybackCoordinatorBufferingCommandSelCompletionDueDate = objc.RegisterName("completionDueDate")
+	_aVDelegatingPlaybackCoordinatorBufferingCommandSelCompletionDueDate       = objc.RegisterName("completionDueDate")
 )
 
 func AVDelegatingPlaybackCoordinatorBufferingCommandFromID(id objc.ID) *AVDelegatingPlaybackCoordinatorBufferingCommand {
@@ -40,7 +40,8 @@ func (o *AVDelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRat
 // Communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
 func (o *AVDelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDelegatingPlaybackCoordinatorBufferingCommandSelCompletionDueDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

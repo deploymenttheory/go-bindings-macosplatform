@@ -232,4 +232,3 @@ type NetServiceable interface {
 }
 
 var _ NetServiceable = (*NetService)(nil)
-

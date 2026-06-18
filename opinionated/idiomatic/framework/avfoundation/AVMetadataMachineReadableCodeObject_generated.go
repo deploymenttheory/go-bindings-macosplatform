@@ -17,7 +17,9 @@ type MetadataMachineReadableCodeObject struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetadataMachineReadableCodeObject].
-func (x *MetadataMachineReadableCodeObject) Unwrap() *raw.AVMetadataMachineReadableCodeObject { return x.inner }
+func (x *MetadataMachineReadableCodeObject) Unwrap() *raw.AVMetadataMachineReadableCodeObject {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,7 +58,9 @@ func (x *MetadataMachineReadableCodeObject) Descriptor() objc.ID {
 	return x.inner.Descriptor()
 }
 
-func (x *MetadataMachineReadableCodeObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+func (x *MetadataMachineReadableCodeObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataObject
+}
 
 // MetadataMachineReadableCodeObjectable is the interface implemented by [MetadataMachineReadableCodeObject], for mocking and DI.
 type MetadataMachineReadableCodeObjectable interface {
@@ -67,4 +71,3 @@ type MetadataMachineReadableCodeObjectable interface {
 }
 
 var _ MetadataMachineReadableCodeObjectable = (*MetadataMachineReadableCodeObject)(nil)
-

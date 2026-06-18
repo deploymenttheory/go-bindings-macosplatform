@@ -16,13 +16,13 @@ type MTRAsyncCallbackQueueWorkItem struct {
 }
 
 var (
-	_clsMTRAsyncCallbackQueueWorkItem = _objcClass("MTRAsyncCallbackQueueWorkItem")
-	_mTRAsyncCallbackQueueWorkItemSelInitWithQueue = objc.RegisterName("initWithQueue:")
-	_mTRAsyncCallbackQueueWorkItemSelEndWork = objc.RegisterName("endWork")
-	_mTRAsyncCallbackQueueWorkItemSelRetryWork = objc.RegisterName("retryWork")
-	_mTRAsyncCallbackQueueWorkItemSelReadyHandler = objc.RegisterName("readyHandler")
-	_mTRAsyncCallbackQueueWorkItemSelSetReadyHandler = objc.RegisterName("setReadyHandler:")
-	_mTRAsyncCallbackQueueWorkItemSelCancelHandler = objc.RegisterName("cancelHandler")
+	_clsMTRAsyncCallbackQueueWorkItem                 = _objcClass("MTRAsyncCallbackQueueWorkItem")
+	_mTRAsyncCallbackQueueWorkItemSelInitWithQueue    = objc.RegisterName("initWithQueue:")
+	_mTRAsyncCallbackQueueWorkItemSelEndWork          = objc.RegisterName("endWork")
+	_mTRAsyncCallbackQueueWorkItemSelRetryWork        = objc.RegisterName("retryWork")
+	_mTRAsyncCallbackQueueWorkItemSelReadyHandler     = objc.RegisterName("readyHandler")
+	_mTRAsyncCallbackQueueWorkItemSelSetReadyHandler  = objc.RegisterName("setReadyHandler:")
+	_mTRAsyncCallbackQueueWorkItemSelCancelHandler    = objc.RegisterName("cancelHandler")
 	_mTRAsyncCallbackQueueWorkItemSelSetCancelHandler = objc.RegisterName("setCancelHandler:")
 )
 
@@ -38,7 +38,9 @@ func MTRAsyncCallbackQueueWorkItemFromID(id objc.ID) *MTRAsyncCallbackQueueWorkI
 
 func (o *MTRAsyncCallbackQueueWorkItem) InitWithQueue(queue *foundation.NSObject) *MTRAsyncCallbackQueueWorkItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAsyncCallbackQueueWorkItemSelInitWithQueue, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAsyncCallbackQueueWorkItemFromID(_ret)
 }
 
@@ -81,4 +83,3 @@ func (o *MTRAsyncCallbackQueueWorkItem) SetCancelHandler(cancelHandler func()) {
 	}
 	o.Ptr().Send(_mTRAsyncCallbackQueueWorkItemSelSetCancelHandler, __block_cancelHandler)
 }
-

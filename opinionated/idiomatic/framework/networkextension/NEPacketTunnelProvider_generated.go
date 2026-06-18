@@ -114,11 +114,17 @@ func (x *NEPacketTunnelProvider) VirtualInterface() *foundation.NSObject {
 	return x.inner.VirtualInterface()
 }
 
-func (x *NEPacketTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider { return x.inner }
+func (x *NEPacketTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider {
+	return x.inner
+}
 
-func (x *NEPacketTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NETunnelProvider }
+func (x *NEPacketTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider {
+	return &x.inner.NETunnelProvider
+}
 
-func (x *NEPacketTunnelProvider) asNEProvider() *raw.NEProvider { return &x.inner.NETunnelProvider.NEProvider }
+func (x *NEPacketTunnelProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NETunnelProvider.NEProvider
+}
 
 // NEPacketTunnelProviderable is the interface implemented by [NEPacketTunnelProvider], for mocking and DI.
 type NEPacketTunnelProviderable interface {
@@ -134,4 +140,3 @@ type NEPacketTunnelProviderable interface {
 }
 
 var _ NEPacketTunnelProviderable = (*NEPacketTunnelProvider)(nil)
-

@@ -18,11 +18,15 @@ type MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams].
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams { return x.inner }
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams (nil for 0).
 func MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams {
@@ -80,4 +84,3 @@ type MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsable interfac
 }
 
 var _ MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsable = (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams)(nil)
-

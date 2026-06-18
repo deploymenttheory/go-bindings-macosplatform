@@ -16,19 +16,19 @@ type NSHost struct {
 }
 
 var (
-	_clsNSHost = _objcClass("NSHost")
-	_nSHostSelCurrentHost = objc.RegisterName("currentHost")
-	_nSHostSelHostWithName = objc.RegisterName("hostWithName:")
-	_nSHostSelHostWithAddress = objc.RegisterName("hostWithAddress:")
-	_nSHostSelIsEqualToHost = objc.RegisterName("isEqualToHost:")
+	_clsNSHost                    = _objcClass("NSHost")
+	_nSHostSelCurrentHost         = objc.RegisterName("currentHost")
+	_nSHostSelHostWithName        = objc.RegisterName("hostWithName:")
+	_nSHostSelHostWithAddress     = objc.RegisterName("hostWithAddress:")
+	_nSHostSelIsEqualToHost       = objc.RegisterName("isEqualToHost:")
 	_nSHostSelSetHostCacheEnabled = objc.RegisterName("setHostCacheEnabled:")
-	_nSHostSelIsHostCacheEnabled = objc.RegisterName("isHostCacheEnabled")
-	_nSHostSelFlushHostCache = objc.RegisterName("flushHostCache")
-	_nSHostSelName = objc.RegisterName("name")
-	_nSHostSelNames = objc.RegisterName("names")
-	_nSHostSelAddress = objc.RegisterName("address")
-	_nSHostSelAddresses = objc.RegisterName("addresses")
-	_nSHostSelLocalizedName = objc.RegisterName("localizedName")
+	_nSHostSelIsHostCacheEnabled  = objc.RegisterName("isHostCacheEnabled")
+	_nSHostSelFlushHostCache      = objc.RegisterName("flushHostCache")
+	_nSHostSelName                = objc.RegisterName("name")
+	_nSHostSelNames               = objc.RegisterName("names")
+	_nSHostSelAddress             = objc.RegisterName("address")
+	_nSHostSelAddresses           = objc.RegisterName("addresses")
+	_nSHostSelLocalizedName       = objc.RegisterName("localizedName")
 )
 
 func NSHostFromID(id objc.ID) *NSHost {
@@ -43,19 +43,25 @@ func NSHostFromID(id objc.ID) *NSHost {
 
 func NSHostCurrentHost() *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelCurrentHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHostFromID(_ret)
 }
 
 func NSHostHostWithName(name *NSString) *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelHostWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHostFromID(_ret)
 }
 
 func NSHostHostWithAddress(address *NSString) *NSHost {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHost), _nSHostSelHostWithAddress, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHostFromID(_ret)
 }
 
@@ -82,31 +88,40 @@ func NSHostFlushHostCache() {
 
 func (o *NSHost) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSHost) Names() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSHost) Address() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSHost) Addresses() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSHost) LocalizedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHostSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

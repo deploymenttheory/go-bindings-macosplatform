@@ -86,4 +86,3 @@ type CoreMLModelable interface {
 }
 
 var _ CoreMLModelable = (*CoreMLModel)(nil)
-

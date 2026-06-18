@@ -16,15 +16,15 @@ type MTRICDManagementClusterMonitoringRegistrationStruct struct {
 }
 
 var (
-	_clsMTRICDManagementClusterMonitoringRegistrationStruct = _objcClass("MTRICDManagementClusterMonitoringRegistrationStruct")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelCheckInNodeID = objc.RegisterName("checkInNodeID")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelSetCheckInNodeID = objc.RegisterName("setCheckInNodeID:")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelMonitoredSubject = objc.RegisterName("monitoredSubject")
+	_clsMTRICDManagementClusterMonitoringRegistrationStruct                    = _objcClass("MTRICDManagementClusterMonitoringRegistrationStruct")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelCheckInNodeID       = objc.RegisterName("checkInNodeID")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelSetCheckInNodeID    = objc.RegisterName("setCheckInNodeID:")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelMonitoredSubject    = objc.RegisterName("monitoredSubject")
 	_mTRICDManagementClusterMonitoringRegistrationStructSelSetMonitoredSubject = objc.RegisterName("setMonitoredSubject:")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelClientType = objc.RegisterName("clientType")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelSetClientType = objc.RegisterName("setClientType:")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRICDManagementClusterMonitoringRegistrationStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelClientType          = objc.RegisterName("clientType")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelSetClientType       = objc.RegisterName("setClientType:")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelFabricIndex         = objc.RegisterName("fabricIndex")
+	_mTRICDManagementClusterMonitoringRegistrationStructSelSetFabricIndex      = objc.RegisterName("setFabricIndex:")
 )
 
 func MTRICDManagementClusterMonitoringRegistrationStructFromID(id objc.ID) *MTRICDManagementClusterMonitoringRegistrationStruct {
@@ -39,7 +39,9 @@ func MTRICDManagementClusterMonitoringRegistrationStructFromID(id objc.ID) *MTRI
 
 func (o *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterMonitoringRegistrationStructSelCheckInNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRICDManagementClusterMonitoringRegistrationStruct) SetCheckInNodeID(c
 
 func (o *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterMonitoringRegistrationStructSelMonitoredSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRICDManagementClusterMonitoringRegistrationStruct) SetMonitoredSubjec
 
 func (o *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterMonitoringRegistrationStructSelClientType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRICDManagementClusterMonitoringRegistrationStruct) SetClientType(clie
 
 func (o *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterMonitoringRegistrationStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRICDManagementClusterMonitoringRegistrationStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRICDManagementClusterMonitoringRegistrationStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

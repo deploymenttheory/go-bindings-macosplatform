@@ -25,4 +25,3 @@ func NSSecureTextFieldFromID(id objc.ID) *NSSecureTextField {
 	purego.Track(o)
 	return o
 }
-

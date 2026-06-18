@@ -16,11 +16,11 @@ type AXMathExpressionMultiscript struct {
 }
 
 var (
-	_clsAXMathExpressionMultiscript = _objcClass("AXMathExpressionMultiscript")
+	_clsAXMathExpressionMultiscript                                                                = _objcClass("AXMathExpressionMultiscript")
 	_aXMathExpressionMultiscriptSelInitWithBaseExpressionPrescriptExpressionsPostscriptExpressions = objc.RegisterName("initWithBaseExpression:prescriptExpressions:postscriptExpressions:")
-	_aXMathExpressionMultiscriptSelBaseExpression = objc.RegisterName("baseExpression")
-	_aXMathExpressionMultiscriptSelPrescriptExpressions = objc.RegisterName("prescriptExpressions")
-	_aXMathExpressionMultiscriptSelPostscriptExpressions = objc.RegisterName("postscriptExpressions")
+	_aXMathExpressionMultiscriptSelBaseExpression                                                  = objc.RegisterName("baseExpression")
+	_aXMathExpressionMultiscriptSelPrescriptExpressions                                            = objc.RegisterName("prescriptExpressions")
+	_aXMathExpressionMultiscriptSelPostscriptExpressions                                           = objc.RegisterName("postscriptExpressions")
 )
 
 func AXMathExpressionMultiscriptFromID(id objc.ID) *AXMathExpressionMultiscript {
@@ -35,25 +35,32 @@ func AXMathExpressionMultiscriptFromID(id objc.ID) *AXMathExpressionMultiscript 
 
 func (o *AXMathExpressionMultiscript) InitWithBaseExpressionPrescriptExpressionsPostscriptExpressions(baseExpression *AXMathExpression, prescriptExpressions *foundation.NSArray[*AXMathExpressionSubSuperscript], postscriptExpressions *foundation.NSArray[*AXMathExpressionSubSuperscript]) *AXMathExpressionMultiscript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionMultiscriptSelInitWithBaseExpressionPrescriptExpressionsPostscriptExpressions, baseExpression.Ptr(), prescriptExpressions.Ptr(), postscriptExpressions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionMultiscriptFromID(_ret)
 }
 
 func (o *AXMathExpressionMultiscript) BaseExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionMultiscriptSelBaseExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
 
 func (o *AXMathExpressionMultiscript) PrescriptExpressions() *foundation.NSArray[*AXMathExpressionSubSuperscript] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionMultiscriptSelPrescriptExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpressionSubSuperscript](_ret)
 }
 
 func (o *AXMathExpressionMultiscript) PostscriptExpressions() *foundation.NSArray[*AXMathExpressionSubSuperscript] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionMultiscriptSelPostscriptExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpressionSubSuperscript](_ret)
 }
-

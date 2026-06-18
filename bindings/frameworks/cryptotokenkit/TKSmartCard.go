@@ -18,30 +18,30 @@ type TKSmartCard struct {
 }
 
 var (
-	_clsTKSmartCard = _objcClass("TKSmartCard")
-	_tKSmartCardSelBeginSessionWithReply = objc.RegisterName("beginSessionWithReply:")
-	_tKSmartCardSelTransmitRequestReply = objc.RegisterName("transmitRequest:reply:")
-	_tKSmartCardSelEndSession = objc.RegisterName("endSession")
-	_tKSmartCardSelUserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset = objc.RegisterName("userInteractionForSecurePINVerificationWithPINFormat:APDU:PINByteOffset:")
+	_clsTKSmartCard                                                                                       = _objcClass("TKSmartCard")
+	_tKSmartCardSelBeginSessionWithReply                                                                  = objc.RegisterName("beginSessionWithReply:")
+	_tKSmartCardSelTransmitRequestReply                                                                   = objc.RegisterName("transmitRequest:reply:")
+	_tKSmartCardSelEndSession                                                                             = objc.RegisterName("endSession")
+	_tKSmartCardSelUserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset                  = objc.RegisterName("userInteractionForSecurePINVerificationWithPINFormat:APDU:PINByteOffset:")
 	_tKSmartCardSelUserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset = objc.RegisterName("userInteractionForSecurePINChangeWithPINFormat:APDU:currentPINByteOffset:newPINByteOffset:")
-	_tKSmartCardSelSlot = objc.RegisterName("slot")
-	_tKSmartCardSelValid = objc.RegisterName("valid")
-	_tKSmartCardSelAllowedProtocols = objc.RegisterName("allowedProtocols")
-	_tKSmartCardSelSetAllowedProtocols = objc.RegisterName("setAllowedProtocols:")
-	_tKSmartCardSelCurrentProtocol = objc.RegisterName("currentProtocol")
-	_tKSmartCardSelSensitive = objc.RegisterName("sensitive")
-	_tKSmartCardSelSetSensitive = objc.RegisterName("setSensitive:")
-	_tKSmartCardSelContext = objc.RegisterName("context")
-	_tKSmartCardSelSetContext = objc.RegisterName("setContext:")
-	_tKSmartCardSelSendInsP1P2DataLeReply = objc.RegisterName("sendIns:p1:p2:data:le:reply:")
-	_tKSmartCardSelInSessionWithErrorExecuteBlock = objc.RegisterName("inSessionWithError:executeBlock:")
-	_tKSmartCardSelSendInsP1P2DataLeSwError = objc.RegisterName("sendIns:p1:p2:data:le:sw:error:")
-	_tKSmartCardSelCla = objc.RegisterName("cla")
-	_tKSmartCardSelSetCla = objc.RegisterName("setCla:")
-	_tKSmartCardSelUseExtendedLength = objc.RegisterName("useExtendedLength")
-	_tKSmartCardSelSetUseExtendedLength = objc.RegisterName("setUseExtendedLength:")
-	_tKSmartCardSelUseCommandChaining = objc.RegisterName("useCommandChaining")
-	_tKSmartCardSelSetUseCommandChaining = objc.RegisterName("setUseCommandChaining:")
+	_tKSmartCardSelSlot                                                                                   = objc.RegisterName("slot")
+	_tKSmartCardSelValid                                                                                  = objc.RegisterName("valid")
+	_tKSmartCardSelAllowedProtocols                                                                       = objc.RegisterName("allowedProtocols")
+	_tKSmartCardSelSetAllowedProtocols                                                                    = objc.RegisterName("setAllowedProtocols:")
+	_tKSmartCardSelCurrentProtocol                                                                        = objc.RegisterName("currentProtocol")
+	_tKSmartCardSelSensitive                                                                              = objc.RegisterName("sensitive")
+	_tKSmartCardSelSetSensitive                                                                           = objc.RegisterName("setSensitive:")
+	_tKSmartCardSelContext                                                                                = objc.RegisterName("context")
+	_tKSmartCardSelSetContext                                                                             = objc.RegisterName("setContext:")
+	_tKSmartCardSelSendInsP1P2DataLeReply                                                                 = objc.RegisterName("sendIns:p1:p2:data:le:reply:")
+	_tKSmartCardSelInSessionWithErrorExecuteBlock                                                         = objc.RegisterName("inSessionWithError:executeBlock:")
+	_tKSmartCardSelSendInsP1P2DataLeSwError                                                               = objc.RegisterName("sendIns:p1:p2:data:le:sw:error:")
+	_tKSmartCardSelCla                                                                                    = objc.RegisterName("cla")
+	_tKSmartCardSelSetCla                                                                                 = objc.RegisterName("setCla:")
+	_tKSmartCardSelUseExtendedLength                                                                      = objc.RegisterName("useExtendedLength")
+	_tKSmartCardSelSetUseExtendedLength                                                                   = objc.RegisterName("setUseExtendedLength:")
+	_tKSmartCardSelUseCommandChaining                                                                     = objc.RegisterName("useCommandChaining")
+	_tKSmartCardSelSetUseCommandChaining                                                                  = objc.RegisterName("setUseCommandChaining:")
 )
 
 func TKSmartCardFromID(id objc.ID) *TKSmartCard {
@@ -89,21 +89,27 @@ func (o *TKSmartCard) EndSession() {
 // Creates a new user interaction object for secure PIN verification using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN. @param PINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the entered PIN (currently unused, must be 0). @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
 func (o *TKSmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *TKSmartCardUserInteractionForSecurePINVerification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset, pINFormat.Ptr(), aPDU.Ptr(), pINByteOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardUserInteractionForSecurePINVerificationFromID(_ret)
 }
 
 // Creates a new user interaction object for secure PIN change using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN(s). @param currentPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the current PIN. @param newPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the new PIN. @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
 func (o *TKSmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *TKSmartCardUserInteractionForSecurePINChange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelUserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset, pINFormat.Ptr(), aPDU.Ptr(), currentPINByteOffset, newPINByteOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardUserInteractionForSecurePINChangeFromID(_ret)
 }
 
 // Slot in which is this card inserted.
 func (o *TKSmartCard) Slot() *TKSmartCardSlot {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelSlot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardSlotFromID(_ret)
 }
 
@@ -181,7 +187,9 @@ func (o *TKSmartCard) InSessionWithErrorExecuteBlock(error_ unsafe.Pointer, bloc
 func (o *TKSmartCard) SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, sw *uint16) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardSelSendInsP1P2DataLeSwError, ins, p1, p2, requestData.Ptr(), le.Ptr(), sw, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -220,4 +228,3 @@ func (o *TKSmartCard) UseCommandChaining() bool {
 func (o *TKSmartCard) SetUseCommandChaining(useCommandChaining bool) {
 	o.Ptr().Send(_tKSmartCardSelSetUseCommandChaining, useCommandChaining)
 }
-

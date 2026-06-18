@@ -143,4 +143,3 @@ type MetadataProviderable interface {
 }
 
 var _ MetadataProviderable = (*MetadataProvider)(nil)
-

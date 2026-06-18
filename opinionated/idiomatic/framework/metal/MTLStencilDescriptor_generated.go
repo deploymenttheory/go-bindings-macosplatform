@@ -155,4 +155,3 @@ type StencilDescriptorable interface {
 }
 
 var _ StencilDescriptorable = (*StencilDescriptor)(nil)
-

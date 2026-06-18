@@ -194,4 +194,3 @@ type GeometryTessellatorable interface {
 }
 
 var _ GeometryTessellatorable = (*GeometryTessellator)(nil)
-

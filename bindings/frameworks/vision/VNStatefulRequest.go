@@ -18,10 +18,10 @@ type VNStatefulRequest struct {
 }
 
 var (
-	_clsVNStatefulRequest = _objcClass("VNStatefulRequest")
+	_clsVNStatefulRequest                                              = _objcClass("VNStatefulRequest")
 	_vNStatefulRequestSelInitWithFrameAnalysisSpacingCompletionHandler = objc.RegisterName("initWithFrameAnalysisSpacing:completionHandler:")
-	_vNStatefulRequestSelMinimumLatencyFrameCount = objc.RegisterName("minimumLatencyFrameCount")
-	_vNStatefulRequestSelFrameAnalysisSpacing = objc.RegisterName("frameAnalysisSpacing")
+	_vNStatefulRequestSelMinimumLatencyFrameCount                      = objc.RegisterName("minimumLatencyFrameCount")
+	_vNStatefulRequestSelFrameAnalysisSpacing                          = objc.RegisterName("frameAnalysisSpacing")
 )
 
 func VNStatefulRequestFromID(id objc.ID) *VNStatefulRequest {
@@ -47,7 +47,9 @@ func (o *VNStatefulRequest) InitWithFrameAnalysisSpacingCompletionHandler(frameA
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNStatefulRequestSelInitWithFrameAnalysisSpacingCompletionHandler, frameAnalysisSpacing, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNStatefulRequestFromID(_ret)
 }
 
@@ -62,4 +64,3 @@ func (o *VNStatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _vNStatefulRequestSelFrameAnalysisSpacing)
 	return _ret
 }
-

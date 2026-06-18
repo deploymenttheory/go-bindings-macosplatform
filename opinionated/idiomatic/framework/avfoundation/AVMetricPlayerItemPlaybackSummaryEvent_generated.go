@@ -15,7 +15,9 @@ type MetricPlayerItemPlaybackSummaryEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemPlaybackSummaryEvent].
-func (x *MetricPlayerItemPlaybackSummaryEvent) Unwrap() *raw.AVMetricPlayerItemPlaybackSummaryEvent { return x.inner }
+func (x *MetricPlayerItemPlaybackSummaryEvent) Unwrap() *raw.AVMetricPlayerItemPlaybackSummaryEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,7 +91,9 @@ func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
 	return x.inner.TimeWeightedPeakBitrate()
 }
 
-func (x *MetricPlayerItemPlaybackSummaryEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricPlayerItemPlaybackSummaryEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricPlayerItemPlaybackSummaryEventable is the interface implemented by [MetricPlayerItemPlaybackSummaryEvent], for mocking and DI.
 type MetricPlayerItemPlaybackSummaryEventable interface {
@@ -107,4 +111,3 @@ type MetricPlayerItemPlaybackSummaryEventable interface {
 }
 
 var _ MetricPlayerItemPlaybackSummaryEventable = (*MetricPlayerItemPlaybackSummaryEvent)(nil)
-

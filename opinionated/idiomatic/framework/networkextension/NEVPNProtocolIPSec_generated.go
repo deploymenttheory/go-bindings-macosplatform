@@ -248,4 +248,3 @@ type NEVPNProtocolIPSecable interface {
 }
 
 var _ NEVPNProtocolIPSecable = (*NEVPNProtocolIPSec)(nil)
-

@@ -143,4 +143,3 @@ type WidgetSearchViewControllerable interface {
 }
 
 var _ WidgetSearchViewControllerable = (*WidgetSearchViewController)(nil)
-

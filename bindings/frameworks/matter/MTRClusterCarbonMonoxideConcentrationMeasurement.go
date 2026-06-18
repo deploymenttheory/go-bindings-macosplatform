@@ -16,24 +16,24 @@ type MTRClusterCarbonMonoxideConcentrationMeasurement struct {
 }
 
 var (
-	_clsMTRClusterCarbonMonoxideConcentrationMeasurement = _objcClass("MTRClusterCarbonMonoxideConcentrationMeasurement")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
+	_clsMTRClusterCarbonMonoxideConcentrationMeasurement                                                  = _objcClass("MTRClusterCarbonMonoxideConcentrationMeasurement")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasuredValueWithParams              = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMinMeasuredValueWithParams           = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMaxMeasuredValueWithParams           = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributePeakMeasuredValueWithParams          = objc.RegisterName("readAttributePeakMeasuredValueWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributePeakMeasuredValueWindowWithParams    = objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAverageMeasuredValueWithParams       = objc.RegisterName("readAttributeAverageMeasuredValueWithParams:")
 	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAverageMeasuredValueWindowWithParams = objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeUncertaintyWithParams = objc.RegisterName("readAttributeUncertaintyWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeLevelValueWithParams = objc.RegisterName("readAttributeLevelValueWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterCarbonMonoxideConcentrationMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeUncertaintyWithParams                = objc.RegisterName("readAttributeUncertaintyWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasurementUnitWithParams            = objc.RegisterName("readAttributeMeasurementUnitWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeMeasurementMediumWithParams          = objc.RegisterName("readAttributeMeasurementMediumWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeLevelValueWithParams                 = objc.RegisterName("readAttributeLevelValueWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeGeneratedCommandListWithParams       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAcceptedCommandListWithParams        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeAttributeListWithParams              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeFeatureMapWithParams                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelReadAttributeClusterRevisionWithParams            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterCarbonMonoxideConcentrationMeasurementSelInitWithDeviceEndpointIDQueue                     = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterCarbonMonoxideConcentrationMeasurementFromID(id objc.ID) *MTRClusterCarbonMonoxideConcentrationMeasurement {
@@ -129,7 +129,8 @@ func (o *MTRClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeClusterR
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterCarbonMonoxideConcentrationMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterCarbonMonoxideConcentrationMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterCarbonMonoxideConcentrationMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterCarbonMonoxideConcentrationMeasurementFromID(_ret)
 }
-

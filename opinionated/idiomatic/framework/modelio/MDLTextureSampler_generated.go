@@ -110,4 +110,3 @@ type TextureSamplerable interface {
 }
 
 var _ TextureSamplerable = (*TextureSampler)(nil)
-

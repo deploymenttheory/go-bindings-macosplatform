@@ -16,10 +16,10 @@ type VZNetworkDeviceConfiguration struct {
 }
 
 var (
-	_clsVZNetworkDeviceConfiguration = _objcClass("VZNetworkDeviceConfiguration")
-	_vZNetworkDeviceConfigurationSelMACAddress = objc.RegisterName("MACAddress")
+	_clsVZNetworkDeviceConfiguration              = _objcClass("VZNetworkDeviceConfiguration")
+	_vZNetworkDeviceConfigurationSelMACAddress    = objc.RegisterName("MACAddress")
 	_vZNetworkDeviceConfigurationSelSetMACAddress = objc.RegisterName("setMACAddress:")
-	_vZNetworkDeviceConfigurationSelAttachment = objc.RegisterName("attachment")
+	_vZNetworkDeviceConfigurationSelAttachment    = objc.RegisterName("attachment")
 	_vZNetworkDeviceConfigurationSelSetAttachment = objc.RegisterName("setAttachment:")
 )
 
@@ -36,7 +36,9 @@ func VZNetworkDeviceConfigurationFromID(id objc.ID) *VZNetworkDeviceConfiguratio
 // @abstract The media access control address of the device. The default is a random, locally administered, unicast address.
 func (o *VZNetworkDeviceConfiguration) MACAddress() *VZMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkDeviceConfigurationSelMACAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMACAddressFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *VZNetworkDeviceConfiguration) SetMACAddress(mACAddress *VZMACAddress) {
 // @abstract Network device attachment. Defines how the virtual device interfaces with the host system. The default is nil. @see VZBridgedNetworkDeviceAttachment @see VZFileHandleNetworkDeviceAttachment @see VZNATNetworkDeviceAttachment
 func (o *VZNetworkDeviceConfiguration) Attachment() *VZNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkDeviceConfigurationSelAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZNetworkDeviceAttachmentFromID(_ret)
 }
 
 func (o *VZNetworkDeviceConfiguration) SetAttachment(attachment *VZNetworkDeviceAttachment) {
 	o.Ptr().Send(_vZNetworkDeviceConfigurationSelSetAttachment, attachment.Ptr())
 }
-

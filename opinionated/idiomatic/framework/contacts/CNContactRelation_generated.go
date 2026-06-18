@@ -54,4 +54,3 @@ type ContactRelationable interface {
 }
 
 var _ ContactRelationable = (*ContactRelation)(nil)
-

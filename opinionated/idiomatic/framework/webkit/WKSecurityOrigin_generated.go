@@ -68,4 +68,3 @@ type WKSecurityOriginable interface {
 }
 
 var _ WKSecurityOriginable = (*WKSecurityOrigin)(nil)
-

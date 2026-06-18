@@ -16,7 +16,9 @@ type CNNNormalizationMeanAndVarianceState struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNNormalizationMeanAndVarianceState].
-func (x *CNNNormalizationMeanAndVarianceState) Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState { return x.inner }
+func (x *CNNNormalizationMeanAndVarianceState) Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,4 +57,3 @@ type CNNNormalizationMeanAndVarianceStateable interface {
 }
 
 var _ CNNNormalizationMeanAndVarianceStateable = (*CNNNormalizationMeanAndVarianceState)(nil)
-

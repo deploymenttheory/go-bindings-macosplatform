@@ -18,13 +18,13 @@ type VNContoursObservation struct {
 }
 
 var (
-	_clsVNContoursObservation = _objcClass("VNContoursObservation")
-	_vNContoursObservationSelContourAtIndexError = objc.RegisterName("contourAtIndex:error:")
+	_clsVNContoursObservation                        = _objcClass("VNContoursObservation")
+	_vNContoursObservationSelContourAtIndexError     = objc.RegisterName("contourAtIndex:error:")
 	_vNContoursObservationSelContourAtIndexPathError = objc.RegisterName("contourAtIndexPath:error:")
-	_vNContoursObservationSelContourCount = objc.RegisterName("contourCount")
-	_vNContoursObservationSelTopLevelContourCount = objc.RegisterName("topLevelContourCount")
-	_vNContoursObservationSelTopLevelContours = objc.RegisterName("topLevelContours")
-	_vNContoursObservationSelNormalizedPath = objc.RegisterName("normalizedPath")
+	_vNContoursObservationSelContourCount            = objc.RegisterName("contourCount")
+	_vNContoursObservationSelTopLevelContourCount    = objc.RegisterName("topLevelContourCount")
+	_vNContoursObservationSelTopLevelContours        = objc.RegisterName("topLevelContours")
+	_vNContoursObservationSelNormalizedPath          = objc.RegisterName("normalizedPath")
 )
 
 func VNContoursObservationFromID(id objc.ID) *VNContoursObservation {
@@ -41,7 +41,9 @@ func VNContoursObservationFromID(id objc.ID) *VNContoursObservation {
 func (o *VNContoursObservation) ContourAtIndexError(contourIndex int) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContoursObservationSelContourAtIndexError, contourIndex, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func (o *VNContoursObservation) ContourAtIndexError(contourIndex int) (*VNContou
 func (o *VNContoursObservation) ContourAtIndexPathError(indexPath *foundation.NSIndexPath) (*VNContour, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContoursObservationSelContourAtIndexPathError, indexPath.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -74,7 +78,9 @@ func (o *VNContoursObservation) TopLevelContourCount() int {
 // @brief An array of the top level contours (i.e. contours that are not enclosed inside another contour),. @details This array constitutes the top of the contour hierarchy. Each contour object can be further iterated to determine its children. @see VNContour for more information.
 func (o *VNContoursObservation) TopLevelContours() *foundation.NSArray[*VNContour] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNContoursObservationSelTopLevelContours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNContour](_ret)
 }
 
@@ -83,4 +89,3 @@ func (o *VNContoursObservation) NormalizedPath() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNContoursObservationSelNormalizedPath)
 	return _ret
 }
-

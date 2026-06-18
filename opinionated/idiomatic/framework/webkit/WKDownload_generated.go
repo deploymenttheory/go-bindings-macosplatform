@@ -99,4 +99,3 @@ type WKDownloadable interface {
 }
 
 var _ WKDownloadable = (*WKDownload)(nil)
-

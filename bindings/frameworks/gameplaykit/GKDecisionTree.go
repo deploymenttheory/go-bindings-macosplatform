@@ -18,15 +18,15 @@ type GKDecisionTree struct {
 }
 
 var (
-	_clsGKDecisionTree = _objcClass("GKDecisionTree")
-	_gKDecisionTreeSelInitWithAttribute = objc.RegisterName("initWithAttribute:")
+	_clsGKDecisionTree                                  = _objcClass("GKDecisionTree")
+	_gKDecisionTreeSelInitWithAttribute                 = objc.RegisterName("initWithAttribute:")
 	_gKDecisionTreeSelInitWithExamplesActionsAttributes = objc.RegisterName("initWithExamples:actions:attributes:")
-	_gKDecisionTreeSelInitWithURLError = objc.RegisterName("initWithURL:error:")
-	_gKDecisionTreeSelExportToURLError = objc.RegisterName("exportToURL:error:")
-	_gKDecisionTreeSelFindActionForAnswers = objc.RegisterName("findActionForAnswers:")
-	_gKDecisionTreeSelRootNode = objc.RegisterName("rootNode")
-	_gKDecisionTreeSelRandomSource = objc.RegisterName("randomSource")
-	_gKDecisionTreeSelSetRandomSource = objc.RegisterName("setRandomSource:")
+	_gKDecisionTreeSelInitWithURLError                  = objc.RegisterName("initWithURL:error:")
+	_gKDecisionTreeSelExportToURLError                  = objc.RegisterName("exportToURL:error:")
+	_gKDecisionTreeSelFindActionForAnswers              = objc.RegisterName("findActionForAnswers:")
+	_gKDecisionTreeSelRootNode                          = objc.RegisterName("rootNode")
+	_gKDecisionTreeSelRandomSource                      = objc.RegisterName("randomSource")
+	_gKDecisionTreeSelSetRandomSource                   = objc.RegisterName("setRandomSource:")
 )
 
 func GKDecisionTreeFromID(id objc.ID) *GKDecisionTree {
@@ -42,21 +42,27 @@ func GKDecisionTreeFromID(id objc.ID) *GKDecisionTree {
 // Initializes the decision tree with a root node containing the provided attribute @param attribute The attribute to be contained at the root of the tree @return GKDecisionTree with the set root
 func (o *GKDecisionTree) InitWithAttribute(attribute foundation.NSObjectProtocol) *GKDecisionTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithAttribute, attribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionTreeFromID(_ret)
 }
 
 // Initializes and constructs a decision tree by learning from the provided examples & attributes @param examples Must be an array of examples (with each example being a collection of the various attributes at a given state) @param actions An array of the corresponding actions for each example. Ordered such that the first action matches with the first example in examples. @param attributes The list of attributes. Ordered such that the first attribute matches with the first result in each example. So if we have two attributes: [distance, jump height], and two examples: [[20, 8], [15, 14]], and the resulting actions here: [Roll, Jump], we can think of this as a matrix: distance| height            <-  Attributes _______|_______ |       |       | |  20   |   8   |  jump |-------|-------|-------    <-  Results |  15   |   14  |  roll |_______|_______| ^ | Examples @return GKDecisionTree created by learning from the provided examples for the provided attributes
 func (o *GKDecisionTree) InitWithExamplesActionsAttributes(examples *foundation.NSArray[objc.ID], actions *foundation.NSArray[foundation.NSObjectProtocol], attributes *foundation.NSArray[foundation.NSObjectProtocol]) *GKDecisionTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithExamplesActionsAttributes, examples, actions, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionTreeFromID(_ret)
 }
 
 // Initializes a decision tree from the contents of a file @param url The URL from which the contents will be loaded @return The instance of the decision tree constructed
 func (o *GKDecisionTree) InitWithURLError(url *foundation.NSURL, error_ unsafe.Pointer) *GKDecisionTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelInitWithURLError, url.Ptr(), error_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionTreeFromID(_ret)
 }
 
@@ -75,18 +81,21 @@ func (o *GKDecisionTree) FindActionForAnswers(answers *foundation.NSDictionary[f
 // The node for the decision tree that all other nodes descend from
 func (o *GKDecisionTree) RootNode() *GKDecisionNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelRootNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDecisionNodeFromID(_ret)
 }
 
 // The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches @see GKDecisionNode
 func (o *GKDecisionTree) RandomSource() *GKRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDecisionTreeSelRandomSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomSourceFromID(_ret)
 }
 
 func (o *GKDecisionTree) SetRandomSource(randomSource *GKRandomSource) {
 	o.Ptr().Send(_gKDecisionTreeSelSetRandomSource, randomSource.Ptr())
 }
-

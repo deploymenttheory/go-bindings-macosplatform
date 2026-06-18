@@ -16,7 +16,7 @@ type MPSCNNGroupNormalizationGradientNode struct {
 }
 
 var (
-	_clsMPSCNNGroupNormalizationGradientNode = _objcClass("MPSCNNGroupNormalizationGradientNode")
+	_clsMPSCNNGroupNormalizationGradientNode                                               = _objcClass("MPSCNNGroupNormalizationGradientNode")
 	_mPSCNNGroupNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
 	_mPSCNNGroupNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 )
@@ -33,13 +33,16 @@ func MPSCNNGroupNormalizationGradientNodeFromID(id objc.ID) *MPSCNNGroupNormaliz
 
 func MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSCNNGroupNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNGroupNormalizationGradientNode), _mPSCNNGroupNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGroupNormalizationGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNGroupNormalizationGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSCNNGroupNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGroupNormalizationGradientNodeFromID(_ret)
 }
-

@@ -16,11 +16,11 @@ type AXMathExpressionSubSuperscript struct {
 }
 
 var (
-	_clsAXMathExpressionSubSuperscript = _objcClass("AXMathExpressionSubSuperscript")
+	_clsAXMathExpressionSubSuperscript                                                                 = _objcClass("AXMathExpressionSubSuperscript")
 	_aXMathExpressionSubSuperscriptSelInitWithBaseExpressionSubscriptExpressionsSuperscriptExpressions = objc.RegisterName("initWithBaseExpression:subscriptExpressions:superscriptExpressions:")
-	_aXMathExpressionSubSuperscriptSelBaseExpression = objc.RegisterName("baseExpression")
-	_aXMathExpressionSubSuperscriptSelSubscriptExpressions = objc.RegisterName("subscriptExpressions")
-	_aXMathExpressionSubSuperscriptSelSuperscriptExpressions = objc.RegisterName("superscriptExpressions")
+	_aXMathExpressionSubSuperscriptSelBaseExpression                                                   = objc.RegisterName("baseExpression")
+	_aXMathExpressionSubSuperscriptSelSubscriptExpressions                                             = objc.RegisterName("subscriptExpressions")
+	_aXMathExpressionSubSuperscriptSelSuperscriptExpressions                                           = objc.RegisterName("superscriptExpressions")
 )
 
 func AXMathExpressionSubSuperscriptFromID(id objc.ID) *AXMathExpressionSubSuperscript {
@@ -35,25 +35,32 @@ func AXMathExpressionSubSuperscriptFromID(id objc.ID) *AXMathExpressionSubSupers
 
 func (o *AXMathExpressionSubSuperscript) InitWithBaseExpressionSubscriptExpressionsSuperscriptExpressions(baseExpression *foundation.NSArray[*AXMathExpression], subscriptExpressions *foundation.NSArray[*AXMathExpression], superscriptExpressions *foundation.NSArray[*AXMathExpression]) *AXMathExpressionSubSuperscript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionSubSuperscriptSelInitWithBaseExpressionSubscriptExpressionsSuperscriptExpressions, baseExpression.Ptr(), subscriptExpressions.Ptr(), superscriptExpressions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionSubSuperscriptFromID(_ret)
 }
 
 func (o *AXMathExpressionSubSuperscript) BaseExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionSubSuperscriptSelBaseExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
 
 func (o *AXMathExpressionSubSuperscript) SubscriptExpressions() *foundation.NSArray[*AXMathExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionSubSuperscriptSelSubscriptExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpression](_ret)
 }
 
 func (o *AXMathExpressionSubSuperscript) SuperscriptExpressions() *foundation.NSArray[*AXMathExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionSubSuperscriptSelSuperscriptExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpression](_ret)
 }
-

@@ -20,18 +20,18 @@ type MPSImageCanny struct {
 }
 
 var (
-	_clsMPSImageCanny = _objcClass("MPSImageCanny")
-	_mPSImageCannySelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSImageCanny                                              = _objcClass("MPSImageCanny")
+	_mPSImageCannySelInitWithDevice                                = objc.RegisterName("initWithDevice:")
 	_mPSImageCannySelInitWithDeviceLinearToGrayScaleTransformSigma = objc.RegisterName("initWithDevice:linearToGrayScaleTransform:sigma:")
-	_mPSImageCannySelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageCannySelColorTransform = objc.RegisterName("colorTransform")
-	_mPSImageCannySelSigma = objc.RegisterName("sigma")
-	_mPSImageCannySelHighThreshold = objc.RegisterName("highThreshold")
-	_mPSImageCannySelSetHighThreshold = objc.RegisterName("setHighThreshold:")
-	_mPSImageCannySelLowThreshold = objc.RegisterName("lowThreshold")
-	_mPSImageCannySelSetLowThreshold = objc.RegisterName("setLowThreshold:")
-	_mPSImageCannySelUseFastMode = objc.RegisterName("useFastMode")
-	_mPSImageCannySelSetUseFastMode = objc.RegisterName("setUseFastMode:")
+	_mPSImageCannySelInitWithCoderDevice                           = objc.RegisterName("initWithCoder:device:")
+	_mPSImageCannySelColorTransform                                = objc.RegisterName("colorTransform")
+	_mPSImageCannySelSigma                                         = objc.RegisterName("sigma")
+	_mPSImageCannySelHighThreshold                                 = objc.RegisterName("highThreshold")
+	_mPSImageCannySelSetHighThreshold                              = objc.RegisterName("setHighThreshold:")
+	_mPSImageCannySelLowThreshold                                  = objc.RegisterName("lowThreshold")
+	_mPSImageCannySelSetLowThreshold                               = objc.RegisterName("setLowThreshold:")
+	_mPSImageCannySelUseFastMode                                   = objc.RegisterName("useFastMode")
+	_mPSImageCannySelSetUseFastMode                                = objc.RegisterName("setUseFastMode:")
 )
 
 func MPSImageCannyFromID(id objc.ID) *MPSImageCanny {
@@ -47,21 +47,27 @@ func MPSImageCannyFromID(id objc.ID) *MPSImageCanny {
 // @abstract   Initialize a Canny filter on a given device using the default color transform and default sigma value for Gaussian blur. Default transform: BT.601/JPEG {0.299f, 0.587f, 0.114f} Default sigma: sqrt(2) For non-default parameters, use -initWithDevice:linearGrayColorTransform:sigma: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
 func (o *MPSImageCanny) InitWithDevice(device metal.MTLDevice) *MPSImageCanny {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCannySelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageCannyFromID(_ret)
 }
 
 // @abstract   Initialize a Canny filter on a given device with a non-default color transform and non-default sigma. @param      device             The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @param      sigma               The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid n is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-n^2/2*sigma^2) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @return     A valid object or nil, if failure.
 func (o *MPSImageCanny) InitWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevice, transform *float32, sigma unsafe.Pointer) *MPSImageCanny {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCannySelInitWithDeviceLinearToGrayScaleTransformSigma, device, transform, sigma)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageCannyFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageCanny) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageCanny {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageCannySelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageCannyFromID(_ret)
 }
 
@@ -106,4 +112,3 @@ func (o *MPSImageCanny) UseFastMode() bool {
 func (o *MPSImageCanny) SetUseFastMode(useFastMode bool) {
 	o.Ptr().Send(_mPSImageCannySelSetUseFastMode, useFastMode)
 }
-

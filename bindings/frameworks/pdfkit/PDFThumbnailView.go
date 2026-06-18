@@ -18,21 +18,21 @@ type PDFThumbnailView struct {
 }
 
 var (
-	_clsPDFThumbnailView = _objcClass("PDFThumbnailView")
-	_pDFThumbnailViewSelPDFView = objc.RegisterName("PDFView")
-	_pDFThumbnailViewSelSetPDFView = objc.RegisterName("setPDFView:")
-	_pDFThumbnailViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_pDFThumbnailViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_pDFThumbnailViewSelSelectedPages = objc.RegisterName("selectedPages")
-	_pDFThumbnailViewSelThumbnailSize = objc.RegisterName("thumbnailSize")
-	_pDFThumbnailViewSelSetThumbnailSize = objc.RegisterName("setThumbnailSize:")
-	_pDFThumbnailViewSelMaximumNumberOfColumns = objc.RegisterName("maximumNumberOfColumns")
-	_pDFThumbnailViewSelSetMaximumNumberOfColumns = objc.RegisterName("setMaximumNumberOfColumns:")
-	_pDFThumbnailViewSelLabelFont = objc.RegisterName("labelFont")
-	_pDFThumbnailViewSelSetLabelFont = objc.RegisterName("setLabelFont:")
-	_pDFThumbnailViewSelAllowsDragging = objc.RegisterName("allowsDragging")
-	_pDFThumbnailViewSelSetAllowsDragging = objc.RegisterName("setAllowsDragging:")
-	_pDFThumbnailViewSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
+	_clsPDFThumbnailView                           = _objcClass("PDFThumbnailView")
+	_pDFThumbnailViewSelPDFView                    = objc.RegisterName("PDFView")
+	_pDFThumbnailViewSelSetPDFView                 = objc.RegisterName("setPDFView:")
+	_pDFThumbnailViewSelBackgroundColor            = objc.RegisterName("backgroundColor")
+	_pDFThumbnailViewSelSetBackgroundColor         = objc.RegisterName("setBackgroundColor:")
+	_pDFThumbnailViewSelSelectedPages              = objc.RegisterName("selectedPages")
+	_pDFThumbnailViewSelThumbnailSize              = objc.RegisterName("thumbnailSize")
+	_pDFThumbnailViewSelSetThumbnailSize           = objc.RegisterName("setThumbnailSize:")
+	_pDFThumbnailViewSelMaximumNumberOfColumns     = objc.RegisterName("maximumNumberOfColumns")
+	_pDFThumbnailViewSelSetMaximumNumberOfColumns  = objc.RegisterName("setMaximumNumberOfColumns:")
+	_pDFThumbnailViewSelLabelFont                  = objc.RegisterName("labelFont")
+	_pDFThumbnailViewSelSetLabelFont               = objc.RegisterName("setLabelFont:")
+	_pDFThumbnailViewSelAllowsDragging             = objc.RegisterName("allowsDragging")
+	_pDFThumbnailViewSelSetAllowsDragging          = objc.RegisterName("setAllowsDragging:")
+	_pDFThumbnailViewSelAllowsMultipleSelection    = objc.RegisterName("allowsMultipleSelection")
 	_pDFThumbnailViewSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
 )
 
@@ -48,7 +48,9 @@ func PDFThumbnailViewFromID(id objc.ID) *PDFThumbnailView {
 
 func (o *PDFThumbnailView) PDFView() *PDFView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelPDFView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFViewFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *PDFThumbnailView) SetPDFView(pDFView *PDFView) {
 
 func (o *PDFThumbnailView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -68,7 +72,9 @@ func (o *PDFThumbnailView) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 
 func (o *PDFThumbnailView) SelectedPages() *foundation.NSArray[*PDFPage] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelSelectedPages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PDFPage](_ret)
 }
 
@@ -92,7 +98,9 @@ func (o *PDFThumbnailView) SetMaximumNumberOfColumns(maximumNumberOfColumns uint
 
 func (o *PDFThumbnailView) LabelFont() *appkit.NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFThumbnailViewSelLabelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSFontFromID(_ret)
 }
 
@@ -117,4 +125,3 @@ func (o *PDFThumbnailView) AllowsMultipleSelection() bool {
 func (o *PDFThumbnailView) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
 	o.Ptr().Send(_pDFThumbnailViewSelSetAllowsMultipleSelection, allowsMultipleSelection)
 }
-

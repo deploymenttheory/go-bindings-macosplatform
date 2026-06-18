@@ -23,7 +23,9 @@ func SFAuthorizationPluginViewUserShortNameKey() uintptr {
 
 func SFCertificateViewDisclosureStateDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_securityinterfaceLib, "SFCertificateViewDisclosureStateDidChange")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -31,4 +33,3 @@ func SFDisplayViewException() uintptr {
 	ptr, _ := purego.Dlsym(_securityinterfaceLib, "SFDisplayViewException")
 	return ptr
 }
-

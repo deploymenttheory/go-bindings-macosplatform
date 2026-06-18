@@ -50,9 +50,13 @@ func (x *NNReshapeGradientNode) WithLabel(label string) *NNReshapeGradientNode {
 	return x
 }
 
-func (x *NNReshapeGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNReshapeGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNReshapeGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNReshapeGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNReshapeGradientNodeable is the interface implemented by [NNReshapeGradientNode], for mocking and DI.
 type NNReshapeGradientNodeable interface {
@@ -62,4 +66,3 @@ type NNReshapeGradientNodeable interface {
 }
 
 var _ NNReshapeGradientNodeable = (*NNReshapeGradientNode)(nil)
-

@@ -153,4 +153,3 @@ type TextTableable interface {
 }
 
 var _ TextTableable = (*TextTable)(nil)
-

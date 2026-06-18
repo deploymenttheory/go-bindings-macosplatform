@@ -62,4 +62,3 @@ type TLVRecordable interface {
 }
 
 var _ TLVRecordable = (*TLVRecord)(nil)
-

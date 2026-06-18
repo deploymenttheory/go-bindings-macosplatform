@@ -11,14 +11,14 @@ import (
 type ColorSyncDataDepth int64
 
 const (
-	KColorSync1BitGamut ColorSyncDataDepth = 1
-	KColorSync8BitInteger ColorSyncDataDepth = 2
-	KColorSync16BitInteger ColorSyncDataDepth = 3
-	KColorSync16BitFloat ColorSyncDataDepth = 4
-	KColorSync32BitInteger ColorSyncDataDepth = 5
+	KColorSync1BitGamut            ColorSyncDataDepth = 1
+	KColorSync8BitInteger          ColorSyncDataDepth = 2
+	KColorSync16BitInteger         ColorSyncDataDepth = 3
+	KColorSync16BitFloat           ColorSyncDataDepth = 4
+	KColorSync32BitInteger         ColorSyncDataDepth = 5
 	KColorSync32BitNamedColorIndex ColorSyncDataDepth = 6
-	KColorSync32BitFloat ColorSyncDataDepth = 7
-	KColorSync10BitInteger ColorSyncDataDepth = 8
+	KColorSync32BitFloat           ColorSyncDataDepth = 7
+	KColorSync10BitInteger         ColorSyncDataDepth = 8
 )
 
 func (e ColorSyncDataDepth) String() string {
@@ -43,4 +43,3 @@ func (e ColorSyncDataDepth) String() string {
 		return fmt.Sprintf("ColorSyncDataDepth(%d)", int64(e))
 	}
 }
-

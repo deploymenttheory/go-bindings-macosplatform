@@ -16,31 +16,31 @@ type NSURLHandle struct {
 }
 
 var (
-	_clsNSURLHandle = _objcClass("NSURLHandle")
-	_nSURLHandleSelRegisterURLHandleClass = objc.RegisterName("registerURLHandleClass:")
-	_nSURLHandleSelURLHandleClassForURL = objc.RegisterName("URLHandleClassForURL:")
-	_nSURLHandleSelStatus = objc.RegisterName("status")
-	_nSURLHandleSelFailureReason = objc.RegisterName("failureReason")
-	_nSURLHandleSelAddClient = objc.RegisterName("addClient:")
-	_nSURLHandleSelRemoveClient = objc.RegisterName("removeClient:")
-	_nSURLHandleSelLoadInBackground = objc.RegisterName("loadInBackground")
-	_nSURLHandleSelCancelLoadInBackground = objc.RegisterName("cancelLoadInBackground")
-	_nSURLHandleSelResourceData = objc.RegisterName("resourceData")
-	_nSURLHandleSelAvailableResourceData = objc.RegisterName("availableResourceData")
-	_nSURLHandleSelExpectedResourceDataSize = objc.RegisterName("expectedResourceDataSize")
-	_nSURLHandleSelFlushCachedData = objc.RegisterName("flushCachedData")
+	_clsNSURLHandle                                = _objcClass("NSURLHandle")
+	_nSURLHandleSelRegisterURLHandleClass          = objc.RegisterName("registerURLHandleClass:")
+	_nSURLHandleSelURLHandleClassForURL            = objc.RegisterName("URLHandleClassForURL:")
+	_nSURLHandleSelStatus                          = objc.RegisterName("status")
+	_nSURLHandleSelFailureReason                   = objc.RegisterName("failureReason")
+	_nSURLHandleSelAddClient                       = objc.RegisterName("addClient:")
+	_nSURLHandleSelRemoveClient                    = objc.RegisterName("removeClient:")
+	_nSURLHandleSelLoadInBackground                = objc.RegisterName("loadInBackground")
+	_nSURLHandleSelCancelLoadInBackground          = objc.RegisterName("cancelLoadInBackground")
+	_nSURLHandleSelResourceData                    = objc.RegisterName("resourceData")
+	_nSURLHandleSelAvailableResourceData           = objc.RegisterName("availableResourceData")
+	_nSURLHandleSelExpectedResourceDataSize        = objc.RegisterName("expectedResourceDataSize")
+	_nSURLHandleSelFlushCachedData                 = objc.RegisterName("flushCachedData")
 	_nSURLHandleSelBackgroundLoadDidFailWithReason = objc.RegisterName("backgroundLoadDidFailWithReason:")
-	_nSURLHandleSelDidLoadBytesLoadComplete = objc.RegisterName("didLoadBytes:loadComplete:")
-	_nSURLHandleSelCanInitWithURL = objc.RegisterName("canInitWithURL:")
-	_nSURLHandleSelCachedHandleForURL = objc.RegisterName("cachedHandleForURL:")
-	_nSURLHandleSelInitWithURLCached = objc.RegisterName("initWithURL:cached:")
-	_nSURLHandleSelPropertyForKey = objc.RegisterName("propertyForKey:")
-	_nSURLHandleSelPropertyForKeyIfAvailable = objc.RegisterName("propertyForKeyIfAvailable:")
-	_nSURLHandleSelWritePropertyForKey = objc.RegisterName("writeProperty:forKey:")
-	_nSURLHandleSelWriteData = objc.RegisterName("writeData:")
-	_nSURLHandleSelLoadInForeground = objc.RegisterName("loadInForeground")
-	_nSURLHandleSelBeginLoadInBackground = objc.RegisterName("beginLoadInBackground")
-	_nSURLHandleSelEndLoadInBackground = objc.RegisterName("endLoadInBackground")
+	_nSURLHandleSelDidLoadBytesLoadComplete        = objc.RegisterName("didLoadBytes:loadComplete:")
+	_nSURLHandleSelCanInitWithURL                  = objc.RegisterName("canInitWithURL:")
+	_nSURLHandleSelCachedHandleForURL              = objc.RegisterName("cachedHandleForURL:")
+	_nSURLHandleSelInitWithURLCached               = objc.RegisterName("initWithURL:cached:")
+	_nSURLHandleSelPropertyForKey                  = objc.RegisterName("propertyForKey:")
+	_nSURLHandleSelPropertyForKeyIfAvailable       = objc.RegisterName("propertyForKeyIfAvailable:")
+	_nSURLHandleSelWritePropertyForKey             = objc.RegisterName("writeProperty:forKey:")
+	_nSURLHandleSelWriteData                       = objc.RegisterName("writeData:")
+	_nSURLHandleSelLoadInForeground                = objc.RegisterName("loadInForeground")
+	_nSURLHandleSelBeginLoadInBackground           = objc.RegisterName("beginLoadInBackground")
+	_nSURLHandleSelEndLoadInBackground             = objc.RegisterName("endLoadInBackground")
 )
 
 func NSURLHandleFromID(id objc.ID) *NSURLHandle {
@@ -73,7 +73,9 @@ func (o *NSURLHandle) Status() NSURLHandleStatus {
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) FailureReason() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelFailureReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -100,14 +102,18 @@ func (o *NSURLHandle) CancelLoadInBackground() {
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) ResourceData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelResourceData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) AvailableResourceData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelAvailableResourceData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -141,7 +147,9 @@ func NSURLHandleCanInitWithURL(anURL *NSURL) bool {
 // Deprecated: since macOS 10.4.
 func NSURLHandleCachedHandleForURL(anURL *NSURL) *NSURLHandle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLHandle), _nSURLHandleSelCachedHandleForURL, anURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLHandleFromID(_ret)
 }
 
@@ -178,7 +186,9 @@ func (o *NSURLHandle) WriteData(data *NSData) bool {
 // Deprecated: since macOS 10.4.
 func (o *NSURLHandle) LoadInForeground() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLHandleSelLoadInForeground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -191,4 +201,3 @@ func (o *NSURLHandle) BeginLoadInBackground() {
 func (o *NSURLHandle) EndLoadInBackground() {
 	o.Ptr().Send(_nSURLHandleSelEndLoadInBackground)
 }
-

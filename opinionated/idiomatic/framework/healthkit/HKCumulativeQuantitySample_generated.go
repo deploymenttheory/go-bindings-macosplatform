@@ -44,13 +44,21 @@ func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-func (x *CumulativeQuantitySample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample { return x.inner }
+func (x *CumulativeQuantitySample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample {
+	return x.inner
+}
 
-func (x *CumulativeQuantitySample) asQuantitySample() *raw.HKQuantitySample { return &x.inner.HKQuantitySample }
+func (x *CumulativeQuantitySample) asQuantitySample() *raw.HKQuantitySample {
+	return &x.inner.HKQuantitySample
+}
 
-func (x *CumulativeQuantitySample) asSample() *raw.HKSample { return &x.inner.HKQuantitySample.HKSample }
+func (x *CumulativeQuantitySample) asSample() *raw.HKSample {
+	return &x.inner.HKQuantitySample.HKSample
+}
 
-func (x *CumulativeQuantitySample) asObject() *raw.HKObject { return &x.inner.HKQuantitySample.HKSample.HKObject }
+func (x *CumulativeQuantitySample) asObject() *raw.HKObject {
+	return &x.inner.HKQuantitySample.HKSample.HKObject
+}
 
 // CumulativeQuantitySampleable is the interface implemented by [CumulativeQuantitySample], for mocking and DI.
 type CumulativeQuantitySampleable interface {
@@ -59,4 +67,3 @@ type CumulativeQuantitySampleable interface {
 }
 
 var _ CumulativeQuantitySampleable = (*CumulativeQuantitySample)(nil)
-

@@ -18,7 +18,7 @@ type MTROTAHeaderParser struct {
 }
 
 var (
-	_clsMTROTAHeaderParser = _objcClass("MTROTAHeaderParser")
+	_clsMTROTAHeaderParser                    = _objcClass("MTROTAHeaderParser")
 	_mTROTAHeaderParserSelHeaderFromDataError = objc.RegisterName("headerFromData:error:")
 )
 
@@ -35,10 +35,11 @@ func MTROTAHeaderParserFromID(id objc.ID) *MTROTAHeaderParser {
 func MTROTAHeaderParserHeaderFromDataError(data *foundation.NSData) (*MTROTAHeader, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTROTAHeaderParser), _mTROTAHeaderParserSelHeaderFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTROTAHeaderFromID(_ret), nil
 }
-

@@ -104,4 +104,3 @@ type CNNNeuronLinearable interface {
 }
 
 var _ CNNNeuronLinearable = (*CNNNeuronLinear)(nil)
-

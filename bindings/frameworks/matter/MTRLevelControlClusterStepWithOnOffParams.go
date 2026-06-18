@@ -16,20 +16,20 @@ type MTRLevelControlClusterStepWithOnOffParams struct {
 }
 
 var (
-	_clsMTRLevelControlClusterStepWithOnOffParams = _objcClass("MTRLevelControlClusterStepWithOnOffParams")
-	_mTRLevelControlClusterStepWithOnOffParamsSelStepMode = objc.RegisterName("stepMode")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetStepMode = objc.RegisterName("setStepMode:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelStepSize = objc.RegisterName("stepSize")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetStepSize = objc.RegisterName("setStepSize:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRLevelControlClusterStepWithOnOffParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRLevelControlClusterStepWithOnOffParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRLevelControlClusterStepWithOnOffParams                               = _objcClass("MTRLevelControlClusterStepWithOnOffParams")
+	_mTRLevelControlClusterStepWithOnOffParamsSelStepMode                       = objc.RegisterName("stepMode")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetStepMode                    = objc.RegisterName("setStepMode:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelStepSize                       = objc.RegisterName("stepSize")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetStepSize                    = objc.RegisterName("setStepSize:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelTransitionTime                 = objc.RegisterName("transitionTime")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetTransitionTime              = objc.RegisterName("setTransitionTime:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRLevelControlClusterStepWithOnOffParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRLevelControlClusterStepWithOnOffParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRLevelControlClusterStepWithOnOffParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -45,7 +45,9 @@ func MTRLevelControlClusterStepWithOnOffParamsFromID(id objc.ID) *MTRLevelContro
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) StepMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelStepMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetStepMode(stepMode *founda
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) StepSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelStepSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetStepSize(stepSize *founda
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetTransitionTime(transition
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetOptionsMask(optionsMask *
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetOptionsOverride(optionsOv
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRLevelControlClusterStepWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *MTRLevelControlClusterStepWithOnOffParams) SetTimedInvokeTimeoutMs(time
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRLevelControlClusterStepWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStepWithOnOffParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRLevelControlClusterStepWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRLevelControlClusterStepWithOnOffParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

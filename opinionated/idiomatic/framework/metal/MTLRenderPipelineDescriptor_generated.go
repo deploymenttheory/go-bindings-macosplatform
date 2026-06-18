@@ -663,4 +663,3 @@ type RenderPipelineDescriptorable interface {
 }
 
 var _ RenderPipelineDescriptorable = (*RenderPipelineDescriptor)(nil)
-

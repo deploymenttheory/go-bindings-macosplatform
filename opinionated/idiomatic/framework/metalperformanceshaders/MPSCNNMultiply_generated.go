@@ -190,11 +190,17 @@ func (x *CNNMultiply) WithLabel(label string) *CNNMultiply {
 	return x
 }
 
-func (x *CNNMultiply) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
+func (x *CNNMultiply) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
+	return &x.inner.MPSCNNArithmetic
+}
 
-func (x *CNNMultiply) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNMultiply) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
-func (x *CNNMultiply) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNMultiply) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNMultiplyable is the interface implemented by [CNNMultiply], for mocking and DI.
 type CNNMultiplyable interface {
@@ -227,4 +233,3 @@ type CNNMultiplyable interface {
 }
 
 var _ CNNMultiplyable = (*CNNMultiply)(nil)
-

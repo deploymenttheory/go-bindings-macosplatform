@@ -17,7 +17,9 @@ type MTRClusterValveConfigurationAndControl struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterValveConfigurationAndControl].
-func (x *MTRClusterValveConfigurationAndControl) Unwrap() *raw.MTRClusterValveConfigurationAndControl { return x.inner }
+func (x *MTRClusterValveConfigurationAndControl) Unwrap() *raw.MTRClusterValveConfigurationAndControl {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -158,9 +160,13 @@ func (x *MTRClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWit
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterValveConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterValveConfigurationAndControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterValveConfigurationAndControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterValveConfigurationAndControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterValveConfigurationAndControlable is the interface implemented by [MTRClusterValveConfigurationAndControl], for mocking and DI.
 type MTRClusterValveConfigurationAndControlable interface {
@@ -192,4 +198,3 @@ type MTRClusterValveConfigurationAndControlable interface {
 }
 
 var _ MTRClusterValveConfigurationAndControlable = (*MTRClusterValveConfigurationAndControl)(nil)
-

@@ -57,4 +57,3 @@ type MutableGroupable interface {
 }
 
 var _ MutableGroupable = (*MutableGroup)(nil)
-

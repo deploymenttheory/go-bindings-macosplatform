@@ -83,4 +83,3 @@ type UpsampleLayerable interface {
 }
 
 var _ UpsampleLayerable = (*UpsampleLayer)(nil)
-

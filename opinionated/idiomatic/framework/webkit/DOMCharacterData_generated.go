@@ -139,7 +139,9 @@ func (x *DOMCharacterData) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMCharacterData) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMCharacterData) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMCharacterData) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMCharacterDataable is the interface implemented by [DOMCharacterData], for mocking and DI.
 type DOMCharacterDataable interface {
@@ -163,4 +165,3 @@ type DOMCharacterDataable interface {
 }
 
 var _ DOMCharacterDataable = (*DOMCharacterData)(nil)
-

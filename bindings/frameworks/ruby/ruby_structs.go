@@ -9,7 +9,7 @@ import (
 
 type RArray struct {
 	Basic RBasic
-	As unsafe.Pointer
+	As    unsafe.Pointer
 }
 
 type RBasic struct {
@@ -25,53 +25,53 @@ type RData struct {
 	Basic RBasic
 	Dmark unsafe.Pointer
 	Dfree unsafe.Pointer
-	Data unsafe.Pointer
+	Data  unsafe.Pointer
 }
 
 type RFile struct {
 	Basic RBasic
-	Fptr unsafe.Pointer
+	Fptr  unsafe.Pointer
 }
 
 type RObject struct {
 	Basic RBasic
-	As unsafe.Pointer
+	As    unsafe.Pointer
 }
 
 type RRegexp struct {
-	Basic RBasic
-	Ptr unsafe.Pointer
-	Src uint
+	Basic  RBasic
+	Ptr    unsafe.Pointer
+	Src    uint
 	Usecnt uint
 }
 
 type RString struct {
 	Basic RBasic
-	As unsafe.Pointer
+	As    unsafe.Pointer
 }
 
 type RTypedData struct {
-	Basic RBasic
-	Type *RbDataTypeStruct
+	Basic      RBasic
+	Type       *RbDataTypeStruct
 	Typed_flag uint
-	Data unsafe.Pointer
+	Data       unsafe.Pointer
 }
 
 // C struct: rb_arithmetic_sequence_components_t
 type RbArithmeticSequenceComponentsT struct {
-	Begin uint
-	End uint
-	Step uint
+	Begin       uint
+	End         uint
+	Step        uint
 	Exclude_end int
 }
 
 // C struct: rb_data_type_struct
 type RbDataTypeStruct struct {
 	Wrap_struct_name string
-	Function unsafe.Pointer
-	Parent *RbDataTypeStruct
-	Data unsafe.Pointer
-	Flags uint
+	Function         unsafe.Pointer
+	Parent           *RbDataTypeStruct
+	Data             unsafe.Pointer
+	Flags            uint
 }
 
 // C struct: rb_fdset_t
@@ -83,21 +83,21 @@ type RbFdsetT struct {
 // C struct: st_hash_type
 type StHashType struct {
 	Compare unsafe.Pointer
-	Hash unsafe.Pointer
+	Hash    unsafe.Pointer
 }
 
 // C struct: st_table
 type StTable struct {
-	Entry_power uint8
-	Bin_power uint8
-	Size_ind uint8
-	Rebuilds_num uint
-	Type *StHashType
-	Num_entries uint
-	Bins *uint
+	Entry_power   uint8
+	Bin_power     uint8
+	Size_ind      uint8
+	Rebuilds_num  uint
+	Type          *StHashType
+	Num_entries   uint
+	Bins          *uint
 	Entries_start uint
 	Entries_bound uint
-	Entries unsafe.Pointer
+	Entries       unsafe.Pointer
 }
 
 // C struct: st_table_entry
@@ -110,4 +110,3 @@ type Timeval struct{}
 
 // RbDataTypeT is an alias for rb_data_type_struct (C typedef rb_data_type_t).
 type RbDataTypeT = RbDataTypeStruct
-

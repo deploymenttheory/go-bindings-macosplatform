@@ -67,4 +67,3 @@ type GraphTensorable interface {
 }
 
 var _ GraphTensorable = (*GraphTensor)(nil)
-

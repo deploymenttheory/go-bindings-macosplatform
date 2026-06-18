@@ -16,7 +16,9 @@ type MTRSoftwareDiagnosticsClusterResetWatermarksParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams].
-func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Unwrap() *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams { return x.inner }
+func (x *MTRSoftwareDiagnosticsClusterResetWatermarksParams) Unwrap() *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRSoftwareDiagnosticsClusterResetWatermarksParamsable interface {
 }
 
 var _ MTRSoftwareDiagnosticsClusterResetWatermarksParamsable = (*MTRSoftwareDiagnosticsClusterResetWatermarksParams)(nil)
-

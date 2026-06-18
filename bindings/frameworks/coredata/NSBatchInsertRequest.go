@@ -16,27 +16,27 @@ type NSBatchInsertRequest struct {
 }
 
 var (
-	_clsNSBatchInsertRequest = _objcClass("NSBatchInsertRequest")
-	_nSBatchInsertRequestSelBatchInsertRequestWithEntityNameObjects = objc.RegisterName("batchInsertRequestWithEntityName:objects:")
-	_nSBatchInsertRequestSelBatchInsertRequestWithEntityNameDictionaryHandler = objc.RegisterName("batchInsertRequestWithEntityName:dictionaryHandler:")
+	_clsNSBatchInsertRequest                                                     = _objcClass("NSBatchInsertRequest")
+	_nSBatchInsertRequestSelBatchInsertRequestWithEntityNameObjects              = objc.RegisterName("batchInsertRequestWithEntityName:objects:")
+	_nSBatchInsertRequestSelBatchInsertRequestWithEntityNameDictionaryHandler    = objc.RegisterName("batchInsertRequestWithEntityName:dictionaryHandler:")
 	_nSBatchInsertRequestSelBatchInsertRequestWithEntityNameManagedObjectHandler = objc.RegisterName("batchInsertRequestWithEntityName:managedObjectHandler:")
-	_nSBatchInsertRequestSelInit = objc.RegisterName("init")
-	_nSBatchInsertRequestSelInitWithEntityNameObjects = objc.RegisterName("initWithEntityName:objects:")
-	_nSBatchInsertRequestSelInitWithEntityObjects = objc.RegisterName("initWithEntity:objects:")
-	_nSBatchInsertRequestSelInitWithEntityDictionaryHandler = objc.RegisterName("initWithEntity:dictionaryHandler:")
-	_nSBatchInsertRequestSelInitWithEntityManagedObjectHandler = objc.RegisterName("initWithEntity:managedObjectHandler:")
-	_nSBatchInsertRequestSelInitWithEntityNameDictionaryHandler = objc.RegisterName("initWithEntityName:dictionaryHandler:")
-	_nSBatchInsertRequestSelInitWithEntityNameManagedObjectHandler = objc.RegisterName("initWithEntityName:managedObjectHandler:")
-	_nSBatchInsertRequestSelEntityName = objc.RegisterName("entityName")
-	_nSBatchInsertRequestSelEntity = objc.RegisterName("entity")
-	_nSBatchInsertRequestSelObjectsToInsert = objc.RegisterName("objectsToInsert")
-	_nSBatchInsertRequestSelSetObjectsToInsert = objc.RegisterName("setObjectsToInsert:")
-	_nSBatchInsertRequestSelDictionaryHandler = objc.RegisterName("dictionaryHandler")
-	_nSBatchInsertRequestSelSetDictionaryHandler = objc.RegisterName("setDictionaryHandler:")
-	_nSBatchInsertRequestSelManagedObjectHandler = objc.RegisterName("managedObjectHandler")
-	_nSBatchInsertRequestSelSetManagedObjectHandler = objc.RegisterName("setManagedObjectHandler:")
-	_nSBatchInsertRequestSelResultType = objc.RegisterName("resultType")
-	_nSBatchInsertRequestSelSetResultType = objc.RegisterName("setResultType:")
+	_nSBatchInsertRequestSelInit                                                 = objc.RegisterName("init")
+	_nSBatchInsertRequestSelInitWithEntityNameObjects                            = objc.RegisterName("initWithEntityName:objects:")
+	_nSBatchInsertRequestSelInitWithEntityObjects                                = objc.RegisterName("initWithEntity:objects:")
+	_nSBatchInsertRequestSelInitWithEntityDictionaryHandler                      = objc.RegisterName("initWithEntity:dictionaryHandler:")
+	_nSBatchInsertRequestSelInitWithEntityManagedObjectHandler                   = objc.RegisterName("initWithEntity:managedObjectHandler:")
+	_nSBatchInsertRequestSelInitWithEntityNameDictionaryHandler                  = objc.RegisterName("initWithEntityName:dictionaryHandler:")
+	_nSBatchInsertRequestSelInitWithEntityNameManagedObjectHandler               = objc.RegisterName("initWithEntityName:managedObjectHandler:")
+	_nSBatchInsertRequestSelEntityName                                           = objc.RegisterName("entityName")
+	_nSBatchInsertRequestSelEntity                                               = objc.RegisterName("entity")
+	_nSBatchInsertRequestSelObjectsToInsert                                      = objc.RegisterName("objectsToInsert")
+	_nSBatchInsertRequestSelSetObjectsToInsert                                   = objc.RegisterName("setObjectsToInsert:")
+	_nSBatchInsertRequestSelDictionaryHandler                                    = objc.RegisterName("dictionaryHandler")
+	_nSBatchInsertRequestSelSetDictionaryHandler                                 = objc.RegisterName("setDictionaryHandler:")
+	_nSBatchInsertRequestSelManagedObjectHandler                                 = objc.RegisterName("managedObjectHandler")
+	_nSBatchInsertRequestSelSetManagedObjectHandler                              = objc.RegisterName("setManagedObjectHandler:")
+	_nSBatchInsertRequestSelResultType                                           = objc.RegisterName("resultType")
+	_nSBatchInsertRequestSelSetResultType                                        = objc.RegisterName("setResultType:")
 )
 
 func NSBatchInsertRequestFromID(id objc.ID) *NSBatchInsertRequest {
@@ -51,13 +51,17 @@ func NSBatchInsertRequestFromID(id objc.ID) *NSBatchInsertRequest {
 
 func NSBatchInsertRequestBatchInsertRequestWithEntityNameObjects(entityName *foundation.NSString, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameObjects, entityName.Ptr(), dictionaries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 func NSBatchInsertRequestBatchInsertRequestWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler objc.Block) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameDictionaryHandler, entityName.Ptr(), handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
@@ -73,34 +77,44 @@ func NSBatchInsertRequestBatchInsertRequestWithEntityNameManagedObjectHandler(en
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchInsertRequest), _nSBatchInsertRequestSelBatchInsertRequestWithEntityNameManagedObjectHandler, entityName.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) Init() *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) InitWithEntityNameObjects(entityName *foundation.NSString, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameObjects, entityName.Ptr(), dictionaries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 // Deprecated: since macOS 11.0.
 func (o *NSBatchInsertRequest) InitWithEntityObjects(entity *NSEntityDescription, dictionaries *foundation.NSArray[objc.ID]) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityObjects, entity.Ptr(), dictionaries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 func (o *NSBatchInsertRequest) InitWithEntityDictionaryHandler(entity *NSEntityDescription, handler objc.Block) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityDictionaryHandler, entity.Ptr(), handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
@@ -116,13 +130,17 @@ func (o *NSBatchInsertRequest) InitWithEntityManagedObjectHandler(entity *NSEnti
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityManagedObjectHandler, entity.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 func (o *NSBatchInsertRequest) InitWithEntityNameDictionaryHandler(entityName *foundation.NSString, handler objc.Block) *NSBatchInsertRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameDictionaryHandler, entityName.Ptr(), handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
@@ -138,19 +156,25 @@ func (o *NSBatchInsertRequest) InitWithEntityNameManagedObjectHandler(entityName
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelInitWithEntityNameManagedObjectHandler, entityName.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchInsertRequestFromID(_ret)
 }
 
 func (o *NSBatchInsertRequest) EntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSBatchInsertRequest) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchInsertRequestSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -199,4 +223,3 @@ func (o *NSBatchInsertRequest) ResultType() NSBatchInsertRequestResultType {
 func (o *NSBatchInsertRequest) SetResultType(resultType NSBatchInsertRequestResultType) {
 	o.Ptr().Send(_nSBatchInsertRequestSelSetResultType, resultType)
 }
-

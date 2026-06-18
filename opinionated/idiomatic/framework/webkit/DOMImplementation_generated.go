@@ -111,7 +111,9 @@ func (x *DOMImplementation) CreateCSSStyleSheet(title string, media string) *DOM
 
 func (x *DOMImplementation) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMImplementation) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMImplementation) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMImplementationable is the interface implemented by [DOMImplementation], for mocking and DI.
 type DOMImplementationable interface {
@@ -128,4 +130,3 @@ type DOMImplementationable interface {
 }
 
 var _ DOMImplementationable = (*DOMImplementation)(nil)
-

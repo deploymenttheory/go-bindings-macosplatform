@@ -113,11 +113,17 @@ func (x *NNReduceColumnMean) WithLabel(label string) *NNReduceColumnMean {
 	return x
 }
 
-func (x *NNReduceColumnMean) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceColumnMean) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceColumnMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceColumnMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceColumnMean) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceColumnMeanable is the interface implemented by [NNReduceColumnMean], for mocking and DI.
 type NNReduceColumnMeanable interface {
@@ -136,4 +142,3 @@ type NNReduceColumnMeanable interface {
 }
 
 var _ NNReduceColumnMeanable = (*NNReduceColumnMean)(nil)
-

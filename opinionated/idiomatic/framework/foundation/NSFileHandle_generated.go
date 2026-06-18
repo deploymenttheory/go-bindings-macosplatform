@@ -336,4 +336,3 @@ type FileHandleable interface {
 }
 
 var _ FileHandleable = (*FileHandle)(nil)
-

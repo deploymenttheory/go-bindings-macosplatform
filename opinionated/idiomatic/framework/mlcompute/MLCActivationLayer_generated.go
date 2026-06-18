@@ -68,4 +68,3 @@ type ActivationLayerable interface {
 }
 
 var _ ActivationLayerable = (*ActivationLayer)(nil)
-

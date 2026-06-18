@@ -17,7 +17,9 @@ type MTRUnitTestingClusterNullablesAndOptionalsStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterNullablesAndOptionalsStruct].
-func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) Unwrap() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct { return x.inner }
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) Unwrap() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -235,7 +237,9 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalLi
 	x.inner.SetNullableOptionalList(nullableOptionalList)
 }
 
-func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) asMTRUnitTestingClusterNullablesAndOptionalsStruct() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct { return x.inner }
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) asMTRUnitTestingClusterNullablesAndOptionalsStruct() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct {
+	return x.inner
+}
 
 // MTRUnitTestingClusterNullablesAndOptionalsStructable is the interface implemented by [MTRUnitTestingClusterNullablesAndOptionalsStruct], for mocking and DI.
 type MTRUnitTestingClusterNullablesAndOptionalsStructable interface {
@@ -276,4 +280,3 @@ type MTRUnitTestingClusterNullablesAndOptionalsStructable interface {
 }
 
 var _ MTRUnitTestingClusterNullablesAndOptionalsStructable = (*MTRUnitTestingClusterNullablesAndOptionalsStruct)(nil)
-

@@ -16,7 +16,9 @@ type MTRModeSelectClusterSemanticTag struct {
 }
 
 // Unwrap returns the underlying [raw.MTRModeSelectClusterSemanticTag].
-func (x *MTRModeSelectClusterSemanticTag) Unwrap() *raw.MTRModeSelectClusterSemanticTag { return x.inner }
+func (x *MTRModeSelectClusterSemanticTag) Unwrap() *raw.MTRModeSelectClusterSemanticTag {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRModeSelectClusterSemanticTag) WithValue(value *foundation.NSNumber) 
 	return x
 }
 
-func (x *MTRModeSelectClusterSemanticTag) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct { return &x.inner.MTRModeSelectClusterSemanticTagStruct }
+func (x *MTRModeSelectClusterSemanticTag) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct {
+	return &x.inner.MTRModeSelectClusterSemanticTagStruct
+}
 
 // MTRModeSelectClusterSemanticTagable is the interface implemented by [MTRModeSelectClusterSemanticTag], for mocking and DI.
 type MTRModeSelectClusterSemanticTagable interface {
@@ -58,4 +62,3 @@ type MTRModeSelectClusterSemanticTagable interface {
 }
 
 var _ MTRModeSelectClusterSemanticTagable = (*MTRModeSelectClusterSemanticTag)(nil)
-

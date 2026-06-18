@@ -37,11 +37,17 @@ func NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *raw.MTRDevic
 	return &MTRClusterBridgedDeviceBasic{inner: raw.MTRClusterBridgedDeviceBasicFromID(_id)}
 }
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation { return &x.inner.MTRClusterBridgedDeviceBasicInformation }
+func (x *MTRClusterBridgedDeviceBasic) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation {
+	return &x.inner.MTRClusterBridgedDeviceBasicInformation
+}
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster }
+func (x *MTRClusterBridgedDeviceBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster
+}
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBridgedDeviceBasicable is the interface implemented by [MTRClusterBridgedDeviceBasic], for mocking and DI.
 type MTRClusterBridgedDeviceBasicable interface {
@@ -49,4 +55,3 @@ type MTRClusterBridgedDeviceBasicable interface {
 }
 
 var _ MTRClusterBridgedDeviceBasicable = (*MTRClusterBridgedDeviceBasic)(nil)
-

@@ -89,4 +89,3 @@ type DeviceMotionable interface {
 }
 
 var _ DeviceMotionable = (*DeviceMotion)(nil)
-

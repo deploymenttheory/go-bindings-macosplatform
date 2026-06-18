@@ -15,7 +15,9 @@ type IndirectInstanceAccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLIndirectInstanceAccelerationStructureDescriptor].
-func (x *IndirectInstanceAccelerationStructureDescriptor) Unwrap() *raw.MTLIndirectInstanceAccelerationStructureDescriptor { return x.inner }
+func (x *IndirectInstanceAccelerationStructureDescriptor) Unwrap() *raw.MTLIndirectInstanceAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -281,7 +283,9 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformStri
 	x.inner.SetMotionTransformStride(motionTransformStride)
 }
 
-func (x *IndirectInstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTLAccelerationStructureDescriptor }
+func (x *IndirectInstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return &x.inner.MTLAccelerationStructureDescriptor
+}
 
 // IndirectInstanceAccelerationStructureDescriptorable is the interface implemented by [IndirectInstanceAccelerationStructureDescriptor], for mocking and DI.
 type IndirectInstanceAccelerationStructureDescriptorable interface {
@@ -335,4 +339,3 @@ type IndirectInstanceAccelerationStructureDescriptorable interface {
 }
 
 var _ IndirectInstanceAccelerationStructureDescriptorable = (*IndirectInstanceAccelerationStructureDescriptor)(nil)
-

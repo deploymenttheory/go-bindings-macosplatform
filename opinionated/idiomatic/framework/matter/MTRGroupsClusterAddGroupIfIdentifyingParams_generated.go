@@ -17,7 +17,9 @@ type MTRGroupsClusterAddGroupIfIdentifyingParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupsClusterAddGroupIfIdentifyingParams].
-func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) Unwrap() *raw.MTRGroupsClusterAddGroupIfIdentifyingParams { return x.inner }
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) Unwrap() *raw.MTRGroupsClusterAddGroupIfIdentifyingParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -142,4 +144,3 @@ type MTRGroupsClusterAddGroupIfIdentifyingParamsable interface {
 }
 
 var _ MTRGroupsClusterAddGroupIfIdentifyingParamsable = (*MTRGroupsClusterAddGroupIfIdentifyingParams)(nil)
-

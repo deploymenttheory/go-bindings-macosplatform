@@ -16,8 +16,8 @@ type MPSNNReduceUnary struct {
 }
 
 var (
-	_clsMPSNNReduceUnary = _objcClass("MPSNNReduceUnary")
-	_mPSNNReduceUnarySelClipRectSource = objc.RegisterName("clipRectSource")
+	_clsMPSNNReduceUnary                  = _objcClass("MPSNNReduceUnary")
+	_mPSNNReduceUnarySelClipRectSource    = objc.RegisterName("clipRectSource")
 	_mPSNNReduceUnarySelSetClipRectSource = objc.RegisterName("setClipRectSource:")
 )
 
@@ -40,4 +40,3 @@ func (o *MPSNNReduceUnary) ClipRectSource() metal.MTLRegion {
 func (o *MPSNNReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
 	o.Ptr().Send(_mPSNNReduceUnarySelSetClipRectSource, clipRectSource)
 }
-

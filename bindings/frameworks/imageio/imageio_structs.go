@@ -16,4 +16,3 @@ type CGImageMetadataTag struct{}
 
 // CGImageSource is an opaque type.
 type CGImageSource struct{}
-

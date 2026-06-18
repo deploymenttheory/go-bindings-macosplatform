@@ -25,4 +25,3 @@ func MTRTestClusterClusterNullablesAndOptionalsStructFromID(id objc.ID) *MTRTest
 	purego.Track(o)
 	return o
 }
-

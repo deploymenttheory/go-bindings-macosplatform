@@ -88,4 +88,3 @@ type EmbeddingLayerable interface {
 }
 
 var _ EmbeddingLayerable = (*EmbeddingLayer)(nil)
-

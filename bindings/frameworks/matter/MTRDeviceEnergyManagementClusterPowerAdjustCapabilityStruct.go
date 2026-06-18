@@ -16,11 +16,11 @@ type MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct")
-	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelPowerAdjustCapability = objc.RegisterName("powerAdjustCapability")
+	_clsMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct                         = _objcClass("MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct")
+	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelPowerAdjustCapability    = objc.RegisterName("powerAdjustCapability")
 	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetPowerAdjustCapability = objc.RegisterName("setPowerAdjustCapability:")
-	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelCause = objc.RegisterName("cause")
-	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetCause = objc.RegisterName("setCause:")
+	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelCause                    = objc.RegisterName("cause")
+	_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetCause                 = objc.RegisterName("setCause:")
 )
 
 func MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
@@ -44,11 +44,12 @@ func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAd
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelCause)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetCause(cause *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructSelSetCause, cause.Ptr())
 }
-

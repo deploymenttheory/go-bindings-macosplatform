@@ -17,16 +17,16 @@ type VNPoint struct {
 }
 
 var (
-	_clsVNPoint = _objcClass("VNPoint")
+	_clsVNPoint                             = _objcClass("VNPoint")
 	_vNPointSelPointByApplyingVectorToPoint = objc.RegisterName("pointByApplyingVector:toPoint:")
-	_vNPointSelDistanceBetweenPointPoint = objc.RegisterName("distanceBetweenPoint:point:")
-	_vNPointSelDistanceToPoint = objc.RegisterName("distanceToPoint:")
-	_vNPointSelInitWithXY = objc.RegisterName("initWithX:y:")
-	_vNPointSelInitWithLocation = objc.RegisterName("initWithLocation:")
-	_vNPointSelZeroPoint = objc.RegisterName("zeroPoint")
-	_vNPointSelLocation = objc.RegisterName("location")
-	_vNPointSelX = objc.RegisterName("x")
-	_vNPointSelY = objc.RegisterName("y")
+	_vNPointSelDistanceBetweenPointPoint    = objc.RegisterName("distanceBetweenPoint:point:")
+	_vNPointSelDistanceToPoint              = objc.RegisterName("distanceToPoint:")
+	_vNPointSelInitWithXY                   = objc.RegisterName("initWithX:y:")
+	_vNPointSelInitWithLocation             = objc.RegisterName("initWithLocation:")
+	_vNPointSelZeroPoint                    = objc.RegisterName("zeroPoint")
+	_vNPointSelLocation                     = objc.RegisterName("location")
+	_vNPointSelX                            = objc.RegisterName("x")
+	_vNPointSelY                            = objc.RegisterName("y")
 )
 
 func VNPointFromID(id objc.ID) *VNPoint {
@@ -42,7 +42,9 @@ func VNPointFromID(id objc.ID) *VNPoint {
 // @brief Returns a new VNPoint object that is shifted by X and Y offsets of the vector. @param vector	The vector offset to be applied to a source point. @param point	The source point. @return the translated point.
 func VNPointPointByApplyingVectorToPoint(vector *VNVector, point *VNPoint) *VNPoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNPoint), _vNPointSelPointByApplyingVectorToPoint, vector.Ptr(), point.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPointFromID(_ret)
 }
 
@@ -62,21 +64,27 @@ func (o *VNPoint) DistanceToPoint(point *VNPoint) float64 {
 // @brief Initializes a VNPoint object from X and Y coordinates.
 func (o *VNPoint) InitWithXY(x float64, y float64) *VNPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPointSelInitWithXY, x, y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPointFromID(_ret)
 }
 
 // @brief Initializes a VNPoint object from a CGPoint.
 func (o *VNPoint) InitWithLocation(location corefoundation.CGPoint) *VNPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPointSelInitWithLocation, location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPointFromID(_ret)
 }
 
 // @brief Returns a VNPoint object that represents the location of (0.0, 0.0).
 func VNPointZeroPoint() *VNPoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNPoint), _vNPointSelZeroPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPointFromID(_ret)
 }
 
@@ -97,4 +105,3 @@ func (o *VNPoint) Y() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNPointSelY)
 	return _ret
 }
-

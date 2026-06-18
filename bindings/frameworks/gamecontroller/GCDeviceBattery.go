@@ -16,7 +16,7 @@ type GCDeviceBattery struct {
 }
 
 var (
-	_clsGCDeviceBattery = _objcClass("GCDeviceBattery")
+	_clsGCDeviceBattery             = _objcClass("GCDeviceBattery")
 	_gCDeviceBatterySelBatteryLevel = objc.RegisterName("batteryLevel")
 	_gCDeviceBatterySelBatteryState = objc.RegisterName("batteryState")
 )
@@ -42,4 +42,3 @@ func (o *GCDeviceBattery) BatteryState() GCDeviceBatteryState {
 	_ret := objc.Send[GCDeviceBatteryState](o.Ptr(), _gCDeviceBatterySelBatteryState)
 	return _ret
 }
-

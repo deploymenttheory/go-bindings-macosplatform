@@ -18,11 +18,11 @@ type MPSImageThresholdTruncate struct {
 }
 
 var (
-	_clsMPSImageThresholdTruncate = _objcClass("MPSImageThresholdTruncate")
+	_clsMPSImageThresholdTruncate                                                     = _objcClass("MPSImageThresholdTruncate")
 	_mPSImageThresholdTruncateSelInitWithDeviceThresholdValueLinearGrayColorTransform = objc.RegisterName("initWithDevice:thresholdValue:linearGrayColorTransform:")
-	_mPSImageThresholdTruncateSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageThresholdTruncateSelThresholdValue = objc.RegisterName("thresholdValue")
-	_mPSImageThresholdTruncateSelTransform = objc.RegisterName("transform")
+	_mPSImageThresholdTruncateSelInitWithCoderDevice                                  = objc.RegisterName("initWithCoder:device:")
+	_mPSImageThresholdTruncateSelThresholdValue                                       = objc.RegisterName("thresholdValue")
+	_mPSImageThresholdTruncateSelTransform                                            = objc.RegisterName("transform")
 )
 
 func MPSImageThresholdTruncateFromID(id objc.ID) *MPSImageThresholdTruncate {
@@ -38,14 +38,18 @@ func MPSImageThresholdTruncateFromID(id objc.ID) *MPSImageThresholdTruncate {
 // @abstract   initialize a MPSImageThresholdTruncate filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
 func (o *MPSImageThresholdTruncate) InitWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *MPSImageThresholdTruncate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdTruncateSelInitWithDeviceThresholdValueLinearGrayColorTransform, device, thresholdValue, transform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdTruncateFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageThresholdTruncate) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageThresholdTruncate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdTruncateSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdTruncateFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *MPSImageThresholdTruncate) Transform() *float32 {
 	_ret := objc.Send[*float32](o.Ptr(), _mPSImageThresholdTruncateSelTransform)
 	return _ret
 }
-

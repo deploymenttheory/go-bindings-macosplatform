@@ -13,14 +13,14 @@ import (
 type AuthorizationFlags int64
 
 const (
-	KAuthorizationFlagDefaults AuthorizationFlags = 0
+	KAuthorizationFlagDefaults           AuthorizationFlags = 0
 	KAuthorizationFlagInteractionAllowed AuthorizationFlags = 1
-	KAuthorizationFlagExtendRights AuthorizationFlags = 2
-	KAuthorizationFlagPartialRights AuthorizationFlags = 4
-	KAuthorizationFlagDestroyRights AuthorizationFlags = 8
-	KAuthorizationFlagPreAuthorize AuthorizationFlags = 16
-	KAuthorizationFlagSkipInternalAuth AuthorizationFlags = 512
-	KAuthorizationFlagNoData AuthorizationFlags = 1048576
+	KAuthorizationFlagExtendRights       AuthorizationFlags = 2
+	KAuthorizationFlagPartialRights      AuthorizationFlags = 4
+	KAuthorizationFlagDestroyRights      AuthorizationFlags = 8
+	KAuthorizationFlagPreAuthorize       AuthorizationFlags = 16
+	KAuthorizationFlagSkipInternalAuth   AuthorizationFlags = 512
+	KAuthorizationFlagNoData             AuthorizationFlags = 1048576
 )
 
 func (e AuthorizationFlags) String() string {
@@ -55,10 +55,10 @@ func (e AuthorizationFlags) String() string {
 type CMSCertificateChainMode int64
 
 const (
-	KCMSCertificateNone CMSCertificateChainMode = 0
-	KCMSCertificateSignerOnly CMSCertificateChainMode = 1
-	KCMSCertificateChain CMSCertificateChainMode = 2
-	KCMSCertificateChainWithRoot CMSCertificateChainMode = 3
+	KCMSCertificateNone                CMSCertificateChainMode = 0
+	KCMSCertificateSignerOnly          CMSCertificateChainMode = 1
+	KCMSCertificateChain               CMSCertificateChainMode = 2
+	KCMSCertificateChainWithRoot       CMSCertificateChainMode = 3
 	KCMSCertificateChainWithRootOrFail CMSCertificateChainMode = 4
 )
 
@@ -83,14 +83,14 @@ func (e CMSCertificateChainMode) String() string {
 type CMSSignedAttributes int64
 
 const (
-	KCMSAttrNone CMSSignedAttributes = 0
-	KCMSAttrSmimeCapabilities CMSSignedAttributes = 1
-	KCMSAttrSmimeEncryptionKeyPrefs CMSSignedAttributes = 2
-	KCMSAttrSmimeMSEncryptionKeyPrefs CMSSignedAttributes = 4
-	KCMSAttrSigningTime CMSSignedAttributes = 8
-	KCMSAttrAppleCodesigningHashAgility CMSSignedAttributes = 16
+	KCMSAttrNone                          CMSSignedAttributes = 0
+	KCMSAttrSmimeCapabilities             CMSSignedAttributes = 1
+	KCMSAttrSmimeEncryptionKeyPrefs       CMSSignedAttributes = 2
+	KCMSAttrSmimeMSEncryptionKeyPrefs     CMSSignedAttributes = 4
+	KCMSAttrSigningTime                   CMSSignedAttributes = 8
+	KCMSAttrAppleCodesigningHashAgility   CMSSignedAttributes = 16
 	KCMSAttrAppleCodesigningHashAgilityV2 CMSSignedAttributes = 32
-	KCMSAttrAppleExpirationTime CMSSignedAttributes = 64
+	KCMSAttrAppleExpirationTime           CMSSignedAttributes = 64
 )
 
 func (e CMSSignedAttributes) String() string {
@@ -125,12 +125,12 @@ func (e CMSSignedAttributes) String() string {
 type CMSSignerStatus int64
 
 const (
-	KCMSSignerUnsigned CMSSignerStatus = 0
-	KCMSSignerValid CMSSignerStatus = 1
+	KCMSSignerUnsigned             CMSSignerStatus = 0
+	KCMSSignerValid                CMSSignerStatus = 1
 	KCMSSignerNeedsDetachedContent CMSSignerStatus = 2
-	KCMSSignerInvalidSignature CMSSignerStatus = 3
-	KCMSSignerInvalidCert CMSSignerStatus = 4
-	KCMSSignerInvalidIndex CMSSignerStatus = 5
+	KCMSSignerInvalidSignature     CMSSignerStatus = 3
+	KCMSSignerInvalidCert          CMSSignerStatus = 4
+	KCMSSignerInvalidIndex         CMSSignerStatus = 5
 )
 
 func (e CMSSignerStatus) String() string {
@@ -155,9 +155,9 @@ func (e CMSSignerStatus) String() string {
 type SSLAuthenticate int32
 
 const (
-	KNeverAuthenticate SSLAuthenticate = 0
+	KNeverAuthenticate  SSLAuthenticate = 0
 	KAlwaysAuthenticate SSLAuthenticate = 1
-	KTryAuthenticate SSLAuthenticate = 2
+	KTryAuthenticate    SSLAuthenticate = 2
 )
 
 func (e SSLAuthenticate) String() string {
@@ -176,12 +176,12 @@ func (e SSLAuthenticate) String() string {
 type SSLCiphersuiteGroup int32
 
 const (
-	KSSLCiphersuiteGroupDefault SSLCiphersuiteGroup = 0
-	KSSLCiphersuiteGroupCompatibility SSLCiphersuiteGroup = 1
-	KSSLCiphersuiteGroupLegacy SSLCiphersuiteGroup = 2
-	KSSLCiphersuiteGroupATS SSLCiphersuiteGroup = 3
+	KSSLCiphersuiteGroupDefault          SSLCiphersuiteGroup = 0
+	KSSLCiphersuiteGroupCompatibility    SSLCiphersuiteGroup = 1
+	KSSLCiphersuiteGroupLegacy           SSLCiphersuiteGroup = 2
+	KSSLCiphersuiteGroupATS              SSLCiphersuiteGroup = 3
 	KSSLCiphersuiteGroupATSCompatibility SSLCiphersuiteGroup = 4
-	KSSLCiphersuiteGroupATSFCP_v2_1 SSLCiphersuiteGroup = 5
+	KSSLCiphersuiteGroupATSFCP_v2_1      SSLCiphersuiteGroup = 5
 )
 
 func (e SSLCiphersuiteGroup) String() string {
@@ -206,10 +206,10 @@ func (e SSLCiphersuiteGroup) String() string {
 type SSLClientCertificateState int32
 
 const (
-	KSSLClientCertNone SSLClientCertificateState = 0
+	KSSLClientCertNone      SSLClientCertificateState = 0
 	KSSLClientCertRequested SSLClientCertificateState = 1
-	KSSLClientCertSent SSLClientCertificateState = 2
-	KSSLClientCertRejected SSLClientCertificateState = 3
+	KSSLClientCertSent      SSLClientCertificateState = 2
+	KSSLClientCertRejected  SSLClientCertificateState = 3
 )
 
 func (e SSLClientCertificateState) String() string {
@@ -230,7 +230,7 @@ func (e SSLClientCertificateState) String() string {
 type SSLConnectionType int32
 
 const (
-	KSSLStreamType SSLConnectionType = 0
+	KSSLStreamType   SSLConnectionType = 0
 	KSSLDatagramType SSLConnectionType = 1
 )
 
@@ -248,19 +248,19 @@ func (e SSLConnectionType) String() string {
 type SSLProtocol int32
 
 const (
-	KSSLProtocolUnknown SSLProtocol = 0
-	KTLSProtocol1 SSLProtocol = 4
-	KTLSProtocol11 SSLProtocol = 7
-	KTLSProtocol12 SSLProtocol = 8
-	KDTLSProtocol1 SSLProtocol = 9
-	KTLSProtocol13 SSLProtocol = 10
-	KDTLSProtocol12 SSLProtocol = 11
+	KSSLProtocolUnknown      SSLProtocol = 0
+	KTLSProtocol1            SSLProtocol = 4
+	KTLSProtocol11           SSLProtocol = 7
+	KTLSProtocol12           SSLProtocol = 8
+	KDTLSProtocol1           SSLProtocol = 9
+	KTLSProtocol13           SSLProtocol = 10
+	KDTLSProtocol12          SSLProtocol = 11
 	KTLSProtocolMaxSupported SSLProtocol = 999
-	KSSLProtocol2 SSLProtocol = 1
-	KSSLProtocol3 SSLProtocol = 2
-	KSSLProtocol3Only SSLProtocol = 3
-	KTLSProtocol1Only SSLProtocol = 5
-	KSSLProtocolAll SSLProtocol = 6
+	KSSLProtocol2            SSLProtocol = 1
+	KSSLProtocol3            SSLProtocol = 2
+	KSSLProtocol3Only        SSLProtocol = 3
+	KTLSProtocol1Only        SSLProtocol = 5
+	KSSLProtocolAll          SSLProtocol = 6
 )
 
 func (e SSLProtocol) String() string {
@@ -317,16 +317,16 @@ func (e SSLProtocolSide) String() string {
 type SSLSessionOption int32
 
 const (
-	KSSLSessionOptionBreakOnServerAuth SSLSessionOption = 0
-	KSSLSessionOptionBreakOnCertRequested SSLSessionOption = 1
-	KSSLSessionOptionBreakOnClientAuth SSLSessionOption = 2
-	KSSLSessionOptionFalseStart SSLSessionOption = 3
-	KSSLSessionOptionSendOneByteRecord SSLSessionOption = 4
+	KSSLSessionOptionBreakOnServerAuth         SSLSessionOption = 0
+	KSSLSessionOptionBreakOnCertRequested      SSLSessionOption = 1
+	KSSLSessionOptionBreakOnClientAuth         SSLSessionOption = 2
+	KSSLSessionOptionFalseStart                SSLSessionOption = 3
+	KSSLSessionOptionSendOneByteRecord         SSLSessionOption = 4
 	KSSLSessionOptionAllowServerIdentityChange SSLSessionOption = 5
-	KSSLSessionOptionFallback SSLSessionOption = 6
-	KSSLSessionOptionBreakOnClientHello SSLSessionOption = 7
-	KSSLSessionOptionAllowRenegotiation SSLSessionOption = 8
-	KSSLSessionOptionEnableSessionTickets SSLSessionOption = 9
+	KSSLSessionOptionFallback                  SSLSessionOption = 6
+	KSSLSessionOptionBreakOnClientHello        SSLSessionOption = 7
+	KSSLSessionOptionAllowRenegotiation        SSLSessionOption = 8
+	KSSLSessionOptionEnableSessionTickets      SSLSessionOption = 9
 )
 
 func (e SSLSessionOption) String() string {
@@ -359,11 +359,11 @@ func (e SSLSessionOption) String() string {
 type SSLSessionState int32
 
 const (
-	KSSLIdle SSLSessionState = 0
+	KSSLIdle      SSLSessionState = 0
 	KSSLHandshake SSLSessionState = 1
 	KSSLConnected SSLSessionState = 2
-	KSSLClosed SSLSessionState = 3
-	KSSLAborted SSLSessionState = 4
+	KSSLClosed    SSLSessionState = 3
+	KSSLAborted   SSLSessionState = 4
 )
 
 func (e SSLSessionState) String() string {
@@ -388,19 +388,19 @@ type SecAccessControlCreateFlags int64
 
 const (
 	KSecAccessControlUserPresence SecAccessControlCreateFlags = 1
-	KSecAccessControlBiometryAny SecAccessControlCreateFlags = 2
+	KSecAccessControlBiometryAny  SecAccessControlCreateFlags = 2
 	// Deprecated: since macOS 10.13.4.
-	KSecAccessControlTouchIDAny SecAccessControlCreateFlags = 2
+	KSecAccessControlTouchIDAny         SecAccessControlCreateFlags = 2
 	KSecAccessControlBiometryCurrentSet SecAccessControlCreateFlags = 8
 	// Deprecated: since macOS 10.13.4.
 	KSecAccessControlTouchIDCurrentSet SecAccessControlCreateFlags = 8
-	KSecAccessControlDevicePasscode SecAccessControlCreateFlags = 16
+	KSecAccessControlDevicePasscode    SecAccessControlCreateFlags = 16
 	// Deprecated: since macOS 15.0.
-	KSecAccessControlWatch SecAccessControlCreateFlags = 32
-	KSecAccessControlCompanion SecAccessControlCreateFlags = 32
-	KSecAccessControlOr SecAccessControlCreateFlags = 16384
-	KSecAccessControlAnd SecAccessControlCreateFlags = 32768
-	KSecAccessControlPrivateKeyUsage SecAccessControlCreateFlags = 1073741824
+	KSecAccessControlWatch               SecAccessControlCreateFlags = 32
+	KSecAccessControlCompanion           SecAccessControlCreateFlags = 32
+	KSecAccessControlOr                  SecAccessControlCreateFlags = 16384
+	KSecAccessControlAnd                 SecAccessControlCreateFlags = 32768
+	KSecAccessControlPrivateKeyUsage     SecAccessControlCreateFlags = 1073741824
 	KSecAccessControlApplicationPassword SecAccessControlCreateFlags = 2147483648
 )
 
@@ -451,15 +451,15 @@ func (e SecAccessControlCreateFlags) String() string {
 type SecAuthenticationType int64
 
 const (
-	KSecAuthenticationTypeNTLM SecAuthenticationType = 1835824238
-	KSecAuthenticationTypeMSN SecAuthenticationType = 1634628461
-	KSecAuthenticationTypeDPA SecAuthenticationType = 1633775716
-	KSecAuthenticationTypeRPA SecAuthenticationType = 1633775730
-	KSecAuthenticationTypeHTTPBasic SecAuthenticationType = 1886680168
+	KSecAuthenticationTypeNTLM       SecAuthenticationType = 1835824238
+	KSecAuthenticationTypeMSN        SecAuthenticationType = 1634628461
+	KSecAuthenticationTypeDPA        SecAuthenticationType = 1633775716
+	KSecAuthenticationTypeRPA        SecAuthenticationType = 1633775730
+	KSecAuthenticationTypeHTTPBasic  SecAuthenticationType = 1886680168
 	KSecAuthenticationTypeHTTPDigest SecAuthenticationType = 1685353576
-	KSecAuthenticationTypeHTMLForm SecAuthenticationType = 1836216166
-	KSecAuthenticationTypeDefault SecAuthenticationType = 1953261156
-	KSecAuthenticationTypeAny SecAuthenticationType = 0
+	KSecAuthenticationTypeHTMLForm   SecAuthenticationType = 1836216166
+	KSecAuthenticationTypeDefault    SecAuthenticationType = 1953261156
+	KSecAuthenticationTypeAny        SecAuthenticationType = 0
 )
 
 func (e SecAuthenticationType) String() string {
@@ -491,15 +491,15 @@ func (e SecAuthenticationType) String() string {
 type SecCSFlags int64
 
 const (
-	KSecCSDefaultFlags SecCSFlags = 0
-	KSecCSConsiderExpiration SecCSFlags = 2147483648
-	KSecCSEnforceRevocationChecks SecCSFlags = 1073741824
-	KSecCSNoNetworkAccess SecCSFlags = 536870912
-	KSecCSReportProgress SecCSFlags = 268435456
-	KSecCSCheckTrustedAnchors SecCSFlags = 134217728
-	KSecCSQuickCheck SecCSFlags = 67108864
-	KSecCSApplyEmbeddedPolicy SecCSFlags = 33554432
-	KSecCSStripDisallowedXattrs SecCSFlags = 16777216
+	KSecCSDefaultFlags                  SecCSFlags = 0
+	KSecCSConsiderExpiration            SecCSFlags = 2147483648
+	KSecCSEnforceRevocationChecks       SecCSFlags = 1073741824
+	KSecCSNoNetworkAccess               SecCSFlags = 536870912
+	KSecCSReportProgress                SecCSFlags = 268435456
+	KSecCSCheckTrustedAnchors           SecCSFlags = 134217728
+	KSecCSQuickCheck                    SecCSFlags = 67108864
+	KSecCSApplyEmbeddedPolicy           SecCSFlags = 33554432
+	KSecCSStripDisallowedXattrs         SecCSFlags = 16777216
 	KSecCSMatchGuestRequirementInKernel SecCSFlags = 8388608
 )
 
@@ -543,8 +543,8 @@ type SecCredentialType int64
 
 const (
 	KSecCredentialTypeDefault SecCredentialType = 0
-	KSecCredentialTypeWithUI SecCredentialType = 1
-	KSecCredentialTypeNoUI SecCredentialType = 2
+	KSecCredentialTypeWithUI  SecCredentialType = 1
+	KSecCredentialTypeNoUI    SecCredentialType = 2
 )
 
 func (e SecCredentialType) String() string {
@@ -563,21 +563,21 @@ func (e SecCredentialType) String() string {
 type SecExternalFormat int64
 
 const (
-	KSecFormatUnknown SecExternalFormat = 0
-	KSecFormatOpenSSL SecExternalFormat = 1
-	KSecFormatSSH SecExternalFormat = 2
-	KSecFormatBSAFE SecExternalFormat = 3
-	KSecFormatRawKey SecExternalFormat = 4
-	KSecFormatWrappedPKCS8 SecExternalFormat = 5
-	KSecFormatWrappedOpenSSL SecExternalFormat = 6
-	KSecFormatWrappedSSH SecExternalFormat = 7
-	KSecFormatWrappedLSH SecExternalFormat = 8
-	KSecFormatX509Cert SecExternalFormat = 9
-	KSecFormatPEMSequence SecExternalFormat = 10
-	KSecFormatPKCS7 SecExternalFormat = 11
-	KSecFormatPKCS12 SecExternalFormat = 12
+	KSecFormatUnknown              SecExternalFormat = 0
+	KSecFormatOpenSSL              SecExternalFormat = 1
+	KSecFormatSSH                  SecExternalFormat = 2
+	KSecFormatBSAFE                SecExternalFormat = 3
+	KSecFormatRawKey               SecExternalFormat = 4
+	KSecFormatWrappedPKCS8         SecExternalFormat = 5
+	KSecFormatWrappedOpenSSL       SecExternalFormat = 6
+	KSecFormatWrappedSSH           SecExternalFormat = 7
+	KSecFormatWrappedLSH           SecExternalFormat = 8
+	KSecFormatX509Cert             SecExternalFormat = 9
+	KSecFormatPEMSequence          SecExternalFormat = 10
+	KSecFormatPKCS7                SecExternalFormat = 11
+	KSecFormatPKCS12               SecExternalFormat = 12
 	KSecFormatNetscapeCertSequence SecExternalFormat = 13
-	KSecFormatSSHv2 SecExternalFormat = 14
+	KSecFormatSSHv2                SecExternalFormat = 14
 )
 
 func (e SecExternalFormat) String() string {
@@ -620,12 +620,12 @@ func (e SecExternalFormat) String() string {
 type SecExternalItemType int64
 
 const (
-	KSecItemTypeUnknown SecExternalItemType = 0
-	KSecItemTypePrivateKey SecExternalItemType = 1
-	KSecItemTypePublicKey SecExternalItemType = 2
-	KSecItemTypeSessionKey SecExternalItemType = 3
+	KSecItemTypeUnknown     SecExternalItemType = 0
+	KSecItemTypePrivateKey  SecExternalItemType = 1
+	KSecItemTypePublicKey   SecExternalItemType = 2
+	KSecItemTypeSessionKey  SecExternalItemType = 3
 	KSecItemTypeCertificate SecExternalItemType = 4
-	KSecItemTypeAggregate SecExternalItemType = 5
+	KSecItemTypeAggregate   SecExternalItemType = 5
 )
 
 func (e SecExternalItemType) String() string {
@@ -650,13 +650,13 @@ func (e SecExternalItemType) String() string {
 type SecItemClass int64
 
 const (
-	KSecInternetPasswordItemClass SecItemClass = 1768842612
-	KSecGenericPasswordItemClass SecItemClass = 1734700656
+	KSecInternetPasswordItemClass   SecItemClass = 1768842612
+	KSecGenericPasswordItemClass    SecItemClass = 1734700656
 	KSecAppleSharePasswordItemClass SecItemClass = 1634953328
-	KSecCertificateItemClass SecItemClass = 2147487744
-	KSecPublicKeyItemClass SecItemClass = 15
-	KSecPrivateKeyItemClass SecItemClass = 16
-	KSecSymmetricKeyItemClass SecItemClass = 17
+	KSecCertificateItemClass        SecItemClass = 2147487744
+	KSecPublicKeyItemClass          SecItemClass = 15
+	KSecPrivateKeyItemClass         SecItemClass = 16
+	KSecSymmetricKeyItemClass       SecItemClass = 17
 )
 
 func (e SecItemClass) String() string {
@@ -701,10 +701,10 @@ func (e SecItemImportExportFlags) String() string {
 type SecKeyOperationType int64
 
 const (
-	KSecKeyOperationTypeSign SecKeyOperationType = 0
-	KSecKeyOperationTypeVerify SecKeyOperationType = 1
-	KSecKeyOperationTypeEncrypt SecKeyOperationType = 2
-	KSecKeyOperationTypeDecrypt SecKeyOperationType = 3
+	KSecKeyOperationTypeSign        SecKeyOperationType = 0
+	KSecKeyOperationTypeVerify      SecKeyOperationType = 1
+	KSecKeyOperationTypeEncrypt     SecKeyOperationType = 2
+	KSecKeyOperationTypeDecrypt     SecKeyOperationType = 3
 	KSecKeyOperationTypeKeyExchange SecKeyOperationType = 4
 )
 
@@ -729,13 +729,13 @@ func (e SecKeyOperationType) String() string {
 type SecKeychainEventMask int64
 
 const (
-	KSecLockEventMask SecKeychainEventMask = 2
-	KSecUnlockEventMask SecKeychainEventMask = 4
-	KSecAddEventMask SecKeychainEventMask = 8
-	KSecDeleteEventMask SecKeychainEventMask = 16
-	KSecUpdateEventMask SecKeychainEventMask = 32
+	KSecLockEventMask            SecKeychainEventMask = 2
+	KSecUnlockEventMask          SecKeychainEventMask = 4
+	KSecAddEventMask             SecKeychainEventMask = 8
+	KSecDeleteEventMask          SecKeychainEventMask = 16
+	KSecUpdateEventMask          SecKeychainEventMask = 32
 	KSecPasswordChangedEventMask SecKeychainEventMask = 64
-	KSecDefaultChangedEventMask SecKeychainEventMask = 512
+	KSecDefaultChangedEventMask  SecKeychainEventMask = 512
 	// Deprecated: Read events are no longer posted
 	KSecDataAccessEventMask SecKeychainEventMask = 1024
 	// Deprecated: Read events are no longer posted
@@ -792,10 +792,10 @@ type SecKeychainPromptSelector int64
 
 const (
 	KSecKeychainPromptRequirePassphase SecKeychainPromptSelector = 1
-	KSecKeychainPromptUnsigned SecKeychainPromptSelector = 16
-	KSecKeychainPromptUnsignedAct SecKeychainPromptSelector = 32
-	KSecKeychainPromptInvalid SecKeychainPromptSelector = 64
-	KSecKeychainPromptInvalidAct SecKeychainPromptSelector = 128
+	KSecKeychainPromptUnsigned         SecKeychainPromptSelector = 16
+	KSecKeychainPromptUnsignedAct      SecKeychainPromptSelector = 32
+	KSecKeychainPromptInvalid          SecKeychainPromptSelector = 64
+	KSecKeychainPromptInvalidAct       SecKeychainPromptSelector = 128
 )
 
 func (e SecKeychainPromptSelector) String() string {
@@ -824,9 +824,9 @@ func (e SecKeychainPromptSelector) String() string {
 type SecPreferencesDomain int32
 
 const (
-	KSecPreferencesDomainUser SecPreferencesDomain = 0
-	KSecPreferencesDomainSystem SecPreferencesDomain = 1
-	KSecPreferencesDomainCommon SecPreferencesDomain = 2
+	KSecPreferencesDomainUser    SecPreferencesDomain = 0
+	KSecPreferencesDomainSystem  SecPreferencesDomain = 1
+	KSecPreferencesDomainCommon  SecPreferencesDomain = 2
 	KSecPreferencesDomainDynamic SecPreferencesDomain = 3
 )
 
@@ -848,41 +848,41 @@ func (e SecPreferencesDomain) String() string {
 type SecProtocolType int64
 
 const (
-	KSecProtocolTypeFTP SecProtocolType = 1718906912
+	KSecProtocolTypeFTP        SecProtocolType = 1718906912
 	KSecProtocolTypeFTPAccount SecProtocolType = 1718906977
-	KSecProtocolTypeHTTP SecProtocolType = 1752462448
-	KSecProtocolTypeIRC SecProtocolType = 1769104160
-	KSecProtocolTypeNNTP SecProtocolType = 1852732528
-	KSecProtocolTypePOP3 SecProtocolType = 1886351411
-	KSecProtocolTypeSMTP SecProtocolType = 1936553072
-	KSecProtocolTypeSOCKS SecProtocolType = 1936685088
-	KSecProtocolTypeIMAP SecProtocolType = 1768776048
-	KSecProtocolTypeLDAP SecProtocolType = 1818517872
-	KSecProtocolTypeAppleTalk SecProtocolType = 1635019883
-	KSecProtocolTypeAFP SecProtocolType = 1634103328
-	KSecProtocolTypeTelnet SecProtocolType = 1952803950
-	KSecProtocolTypeSSH SecProtocolType = 1936943136
-	KSecProtocolTypeFTPS SecProtocolType = 1718906995
-	KSecProtocolTypeHTTPS SecProtocolType = 1752461427
-	KSecProtocolTypeHTTPProxy SecProtocolType = 1752461432
+	KSecProtocolTypeHTTP       SecProtocolType = 1752462448
+	KSecProtocolTypeIRC        SecProtocolType = 1769104160
+	KSecProtocolTypeNNTP       SecProtocolType = 1852732528
+	KSecProtocolTypePOP3       SecProtocolType = 1886351411
+	KSecProtocolTypeSMTP       SecProtocolType = 1936553072
+	KSecProtocolTypeSOCKS      SecProtocolType = 1936685088
+	KSecProtocolTypeIMAP       SecProtocolType = 1768776048
+	KSecProtocolTypeLDAP       SecProtocolType = 1818517872
+	KSecProtocolTypeAppleTalk  SecProtocolType = 1635019883
+	KSecProtocolTypeAFP        SecProtocolType = 1634103328
+	KSecProtocolTypeTelnet     SecProtocolType = 1952803950
+	KSecProtocolTypeSSH        SecProtocolType = 1936943136
+	KSecProtocolTypeFTPS       SecProtocolType = 1718906995
+	KSecProtocolTypeHTTPS      SecProtocolType = 1752461427
+	KSecProtocolTypeHTTPProxy  SecProtocolType = 1752461432
 	KSecProtocolTypeHTTPSProxy SecProtocolType = 1752462200
-	KSecProtocolTypeFTPProxy SecProtocolType = 1718907000
-	KSecProtocolTypeCIFS SecProtocolType = 1667851891
-	KSecProtocolTypeSMB SecProtocolType = 1936548384
-	KSecProtocolTypeRTSP SecProtocolType = 1920234352
-	KSecProtocolTypeRTSPProxy SecProtocolType = 1920234360
-	KSecProtocolTypeDAAP SecProtocolType = 1684103536
-	KSecProtocolTypeEPPC SecProtocolType = 1701867619
-	KSecProtocolTypeIPP SecProtocolType = 1768976416
-	KSecProtocolTypeNNTPS SecProtocolType = 1853124723
-	KSecProtocolTypeLDAPS SecProtocolType = 1818521715
-	KSecProtocolTypeTelnetS SecProtocolType = 1952803955
-	KSecProtocolTypeIMAPS SecProtocolType = 1768779891
-	KSecProtocolTypeIRCS SecProtocolType = 1769104243
-	KSecProtocolTypePOP3S SecProtocolType = 1886351475
+	KSecProtocolTypeFTPProxy   SecProtocolType = 1718907000
+	KSecProtocolTypeCIFS       SecProtocolType = 1667851891
+	KSecProtocolTypeSMB        SecProtocolType = 1936548384
+	KSecProtocolTypeRTSP       SecProtocolType = 1920234352
+	KSecProtocolTypeRTSPProxy  SecProtocolType = 1920234360
+	KSecProtocolTypeDAAP       SecProtocolType = 1684103536
+	KSecProtocolTypeEPPC       SecProtocolType = 1701867619
+	KSecProtocolTypeIPP        SecProtocolType = 1768976416
+	KSecProtocolTypeNNTPS      SecProtocolType = 1853124723
+	KSecProtocolTypeLDAPS      SecProtocolType = 1818521715
+	KSecProtocolTypeTelnetS    SecProtocolType = 1952803955
+	KSecProtocolTypeIMAPS      SecProtocolType = 1768779891
+	KSecProtocolTypeIRCS       SecProtocolType = 1769104243
+	KSecProtocolTypePOP3S      SecProtocolType = 1886351475
 	KSecProtocolTypeCVSpserver SecProtocolType = 1668707184
-	KSecProtocolTypeSVN SecProtocolType = 1937141280
-	KSecProtocolTypeAny SecProtocolType = 0
+	KSecProtocolTypeSVN        SecProtocolType = 1937141280
+	KSecProtocolTypeAny        SecProtocolType = 0
 )
 
 func (e SecProtocolType) String() string {
@@ -966,17 +966,17 @@ func (e SecProtocolType) String() string {
 type SecTransformMetaAttributeType int64
 
 const (
-	KSecTransformMetaAttributeValue SecTransformMetaAttributeType = 0
-	KSecTransformMetaAttributeName SecTransformMetaAttributeType = 1
-	KSecTransformMetaAttributeRef SecTransformMetaAttributeType = 2
-	KSecTransformMetaAttributeRequired SecTransformMetaAttributeType = 3
+	KSecTransformMetaAttributeValue                      SecTransformMetaAttributeType = 0
+	KSecTransformMetaAttributeName                       SecTransformMetaAttributeType = 1
+	KSecTransformMetaAttributeRef                        SecTransformMetaAttributeType = 2
+	KSecTransformMetaAttributeRequired                   SecTransformMetaAttributeType = 3
 	KSecTransformMetaAttributeRequiresOutboundConnection SecTransformMetaAttributeType = 4
-	KSecTransformMetaAttributeDeferred SecTransformMetaAttributeType = 5
-	KSecTransformMetaAttributeStream SecTransformMetaAttributeType = 6
-	KSecTransformMetaAttributeCanCycle SecTransformMetaAttributeType = 7
-	KSecTransformMetaAttributeExternalize SecTransformMetaAttributeType = 8
-	KSecTransformMetaAttributeHasOutboundConnections SecTransformMetaAttributeType = 9
-	KSecTransformMetaAttributeHasInboundConnection SecTransformMetaAttributeType = 10
+	KSecTransformMetaAttributeDeferred                   SecTransformMetaAttributeType = 5
+	KSecTransformMetaAttributeStream                     SecTransformMetaAttributeType = 6
+	KSecTransformMetaAttributeCanCycle                   SecTransformMetaAttributeType = 7
+	KSecTransformMetaAttributeExternalize                SecTransformMetaAttributeType = 8
+	KSecTransformMetaAttributeHasOutboundConnections     SecTransformMetaAttributeType = 9
+	KSecTransformMetaAttributeHasInboundConnection       SecTransformMetaAttributeType = 10
 )
 
 func (e SecTransformMetaAttributeType) String() string {
@@ -1012,13 +1012,13 @@ func (e SecTransformMetaAttributeType) String() string {
 type SecTrustOptionFlags int64
 
 const (
-	KSecTrustOptionAllowExpired SecTrustOptionFlags = 1
-	KSecTrustOptionLeafIsCA SecTrustOptionFlags = 2
+	KSecTrustOptionAllowExpired       SecTrustOptionFlags = 1
+	KSecTrustOptionLeafIsCA           SecTrustOptionFlags = 2
 	KSecTrustOptionFetchIssuerFromNet SecTrustOptionFlags = 4
-	KSecTrustOptionAllowExpiredRoot SecTrustOptionFlags = 8
-	KSecTrustOptionRequireRevPerCert SecTrustOptionFlags = 16
-	KSecTrustOptionUseTrustSettings SecTrustOptionFlags = 32
-	KSecTrustOptionImplicitAnchors SecTrustOptionFlags = 64
+	KSecTrustOptionAllowExpiredRoot   SecTrustOptionFlags = 8
+	KSecTrustOptionRequireRevPerCert  SecTrustOptionFlags = 16
+	KSecTrustOptionUseTrustSettings   SecTrustOptionFlags = 32
+	KSecTrustOptionImplicitAnchors    SecTrustOptionFlags = 64
 )
 
 func (e SecTrustOptionFlags) String() string {
@@ -1053,14 +1053,14 @@ func (e SecTrustOptionFlags) String() string {
 type SecTrustResultType int64
 
 const (
-	KSecTrustResultInvalid SecTrustResultType = 0
-	KSecTrustResultProceed SecTrustResultType = 1
-	KSecTrustResultConfirm SecTrustResultType = 2
-	KSecTrustResultDeny SecTrustResultType = 3
-	KSecTrustResultUnspecified SecTrustResultType = 4
+	KSecTrustResultInvalid                 SecTrustResultType = 0
+	KSecTrustResultProceed                 SecTrustResultType = 1
+	KSecTrustResultConfirm                 SecTrustResultType = 2
+	KSecTrustResultDeny                    SecTrustResultType = 3
+	KSecTrustResultUnspecified             SecTrustResultType = 4
 	KSecTrustResultRecoverableTrustFailure SecTrustResultType = 5
-	KSecTrustResultFatalTrustFailure SecTrustResultType = 6
-	KSecTrustResultOtherError SecTrustResultType = 7
+	KSecTrustResultFatalTrustFailure       SecTrustResultType = 6
+	KSecTrustResultOtherError              SecTrustResultType = 7
 )
 
 func (e SecTrustResultType) String() string {
@@ -1089,8 +1089,8 @@ func (e SecTrustResultType) String() string {
 type SecTrustSettingsDomain int64
 
 const (
-	KSecTrustSettingsDomainUser SecTrustSettingsDomain = 0
-	KSecTrustSettingsDomainAdmin SecTrustSettingsDomain = 1
+	KSecTrustSettingsDomainUser   SecTrustSettingsDomain = 0
+	KSecTrustSettingsDomainAdmin  SecTrustSettingsDomain = 1
 	KSecTrustSettingsDomainSystem SecTrustSettingsDomain = 2
 )
 
@@ -1111,10 +1111,10 @@ func (e SecTrustSettingsDomain) String() string {
 type SessionAttributeBits int64
 
 const (
-	SessionIsRoot SessionAttributeBits = 1
+	SessionIsRoot           SessionAttributeBits = 1
 	SessionHasGraphicAccess SessionAttributeBits = 16
-	SessionHasTTY SessionAttributeBits = 32
-	SessionIsRemote SessionAttributeBits = 4096
+	SessionHasTTY           SessionAttributeBits = 32
+	SessionIsRemote         SessionAttributeBits = 4096
 )
 
 func (e SessionAttributeBits) String() string {
@@ -1158,12 +1158,12 @@ func (e SessionCreationFlags) String() string {
 type Tls_ciphersuite_group_t int64
 
 const (
-	Tls_ciphersuite_group_default Tls_ciphersuite_group_t = 0
-	Tls_ciphersuite_group_compatibility Tls_ciphersuite_group_t = 1
-	Tls_ciphersuite_group_legacy Tls_ciphersuite_group_t = 2
-	Tls_ciphersuite_group_ats Tls_ciphersuite_group_t = 3
+	Tls_ciphersuite_group_default           Tls_ciphersuite_group_t = 0
+	Tls_ciphersuite_group_compatibility     Tls_ciphersuite_group_t = 1
+	Tls_ciphersuite_group_legacy            Tls_ciphersuite_group_t = 2
+	Tls_ciphersuite_group_ats               Tls_ciphersuite_group_t = 3
 	Tls_ciphersuite_group_ats_compatibility Tls_ciphersuite_group_t = 4
-	Tls_ciphersuite_group_ats_fcp_v2_1 Tls_ciphersuite_group_t = 5
+	Tls_ciphersuite_group_ats_fcp_v2_1      Tls_ciphersuite_group_t = 5
 )
 
 func (e Tls_ciphersuite_group_t) String() string {
@@ -1188,32 +1188,32 @@ func (e Tls_ciphersuite_group_t) String() string {
 type Tls_ciphersuite_t int64
 
 const (
-	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA Tls_ciphersuite_t = 10
-	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA Tls_ciphersuite_t = 47
-	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA Tls_ciphersuite_t = 53
-	Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256 Tls_ciphersuite_t = 156
-	Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384 Tls_ciphersuite_t = 157
-	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256 Tls_ciphersuite_t = 60
-	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256 Tls_ciphersuite_t = 61
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA Tls_ciphersuite_t = 49160
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA Tls_ciphersuite_t = 49161
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA Tls_ciphersuite_t = 49162
-	Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA Tls_ciphersuite_t = 49170
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA Tls_ciphersuite_t = 49171
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA Tls_ciphersuite_t = 49172
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 Tls_ciphersuite_t = 49187
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 Tls_ciphersuite_t = 49188
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256 Tls_ciphersuite_t = 49191
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384 Tls_ciphersuite_t = 49192
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 Tls_ciphersuite_t = 49195
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 Tls_ciphersuite_t = 49196
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256 Tls_ciphersuite_t = 49199
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384 Tls_ciphersuite_t = 49200
-	Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 Tls_ciphersuite_t = 52392
+	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 Tls_ciphersuite_t = 10
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA                  Tls_ciphersuite_t = 47
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA                  Tls_ciphersuite_t = 53
+	Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256               Tls_ciphersuite_t = 156
+	Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384               Tls_ciphersuite_t = 157
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256               Tls_ciphersuite_t = 60
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256               Tls_ciphersuite_t = 61
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA         Tls_ciphersuite_t = 49160
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA          Tls_ciphersuite_t = 49161
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA          Tls_ciphersuite_t = 49162
+	Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA           Tls_ciphersuite_t = 49170
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA            Tls_ciphersuite_t = 49171
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA            Tls_ciphersuite_t = 49172
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256       Tls_ciphersuite_t = 49187
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384       Tls_ciphersuite_t = 49188
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256         Tls_ciphersuite_t = 49191
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384         Tls_ciphersuite_t = 49192
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       Tls_ciphersuite_t = 49195
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       Tls_ciphersuite_t = 49196
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256         Tls_ciphersuite_t = 49199
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384         Tls_ciphersuite_t = 49200
+	Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   Tls_ciphersuite_t = 52392
 	Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 Tls_ciphersuite_t = 52393
-	Tls_ciphersuite_AES_128_GCM_SHA256 Tls_ciphersuite_t = 4865
-	Tls_ciphersuite_AES_256_GCM_SHA384 Tls_ciphersuite_t = 4866
-	Tls_ciphersuite_CHACHA20_POLY1305_SHA256 Tls_ciphersuite_t = 4867
+	Tls_ciphersuite_AES_128_GCM_SHA256                        Tls_ciphersuite_t = 4865
+	Tls_ciphersuite_AES_256_GCM_SHA384                        Tls_ciphersuite_t = 4866
+	Tls_ciphersuite_CHACHA20_POLY1305_SHA256                  Tls_ciphersuite_t = 4867
 )
 
 func (e Tls_ciphersuite_t) String() string {
@@ -1310,4 +1310,3 @@ func (e Tls_protocol_version_t) String() string {
 		return fmt.Sprintf("Tls_protocol_version_t(%d)", int64(e))
 	}
 }
-

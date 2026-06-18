@@ -178,7 +178,9 @@ func (x *CNNDivide) WithDestinationImageAllocator(destinationImageAllocator mpsc
 
 func (x *CNNDivide) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
-func (x *CNNDivide) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNDivide) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
 // CNNDivideable is the interface implemented by [CNNDivide], for mocking and DI.
 type CNNDivideable interface {
@@ -209,4 +211,3 @@ type CNNDivideable interface {
 }
 
 var _ CNNDivideable = (*CNNDivide)(nil)
-

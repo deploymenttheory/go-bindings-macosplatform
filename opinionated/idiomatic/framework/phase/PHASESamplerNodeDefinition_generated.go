@@ -110,11 +110,17 @@ func (x *SamplerNodeDefinition) SetPlaybackMode(playbackMode raw.PHASEPlaybackMo
 	x.inner.SetPlaybackMode(playbackMode)
 }
 
-func (x *SamplerNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition }
+func (x *SamplerNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition
+}
 
-func (x *SamplerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition }
+func (x *SamplerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition
+}
 
-func (x *SamplerNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *SamplerNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // SamplerNodeDefinitionable is the interface implemented by [SamplerNodeDefinition], for mocking and DI.
 type SamplerNodeDefinitionable interface {
@@ -133,4 +139,3 @@ type SamplerNodeDefinitionable interface {
 }
 
 var _ SamplerNodeDefinitionable = (*SamplerNodeDefinition)(nil)
-

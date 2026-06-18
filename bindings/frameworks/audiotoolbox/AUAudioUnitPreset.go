@@ -16,11 +16,11 @@ type AUAudioUnitPreset struct {
 }
 
 var (
-	_clsAUAudioUnitPreset = _objcClass("AUAudioUnitPreset")
-	_aUAudioUnitPresetSelNumber = objc.RegisterName("number")
+	_clsAUAudioUnitPreset          = _objcClass("AUAudioUnitPreset")
+	_aUAudioUnitPresetSelNumber    = objc.RegisterName("number")
 	_aUAudioUnitPresetSelSetNumber = objc.RegisterName("setNumber:")
-	_aUAudioUnitPresetSelName = objc.RegisterName("name")
-	_aUAudioUnitPresetSelSetName = objc.RegisterName("setName:")
+	_aUAudioUnitPresetSelName      = objc.RegisterName("name")
+	_aUAudioUnitPresetSelSetName   = objc.RegisterName("setName:")
 )
 
 func AUAudioUnitPresetFromID(id objc.ID) *AUAudioUnitPreset {
@@ -46,11 +46,12 @@ func (o *AUAudioUnitPreset) SetNumber(number int) {
 // @property	name @brief		The preset's name.
 func (o *AUAudioUnitPreset) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitPresetSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AUAudioUnitPreset) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_aUAudioUnitPresetSelSetName, name.Ptr())
 }
-

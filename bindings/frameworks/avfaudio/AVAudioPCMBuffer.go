@@ -18,16 +18,16 @@ type AVAudioPCMBuffer struct {
 }
 
 var (
-	_clsAVAudioPCMBuffer = _objcClass("AVAudioPCMBuffer")
-	_aVAudioPCMBufferSelInitWithPCMFormatFrameCapacity = objc.RegisterName("initWithPCMFormat:frameCapacity:")
+	_clsAVAudioPCMBuffer                                             = _objcClass("AVAudioPCMBuffer")
+	_aVAudioPCMBufferSelInitWithPCMFormatFrameCapacity               = objc.RegisterName("initWithPCMFormat:frameCapacity:")
 	_aVAudioPCMBufferSelInitWithPCMFormatBufferListNoCopyDeallocator = objc.RegisterName("initWithPCMFormat:bufferListNoCopy:deallocator:")
-	_aVAudioPCMBufferSelFrameCapacity = objc.RegisterName("frameCapacity")
-	_aVAudioPCMBufferSelFrameLength = objc.RegisterName("frameLength")
-	_aVAudioPCMBufferSelSetFrameLength = objc.RegisterName("setFrameLength:")
-	_aVAudioPCMBufferSelStride = objc.RegisterName("stride")
-	_aVAudioPCMBufferSelFloatChannelData = objc.RegisterName("floatChannelData")
-	_aVAudioPCMBufferSelInt16ChannelData = objc.RegisterName("int16ChannelData")
-	_aVAudioPCMBufferSelInt32ChannelData = objc.RegisterName("int32ChannelData")
+	_aVAudioPCMBufferSelFrameCapacity                                = objc.RegisterName("frameCapacity")
+	_aVAudioPCMBufferSelFrameLength                                  = objc.RegisterName("frameLength")
+	_aVAudioPCMBufferSelSetFrameLength                               = objc.RegisterName("setFrameLength:")
+	_aVAudioPCMBufferSelStride                                       = objc.RegisterName("stride")
+	_aVAudioPCMBufferSelFloatChannelData                             = objc.RegisterName("floatChannelData")
+	_aVAudioPCMBufferSelInt16ChannelData                             = objc.RegisterName("int16ChannelData")
+	_aVAudioPCMBufferSelInt32ChannelData                             = objc.RegisterName("int32ChannelData")
 )
 
 func AVAudioPCMBufferFromID(id objc.ID) *AVAudioPCMBuffer {
@@ -43,7 +43,9 @@ func AVAudioPCMBufferFromID(id objc.ID) *AVAudioPCMBuffer {
 // @method initWithPCMFormat:frameCapacity: @abstract Initialize a buffer that is to contain PCM audio samples. @param format The format of the PCM audio to be contained in the buffer. @param frameCapacity The capacity of the buffer in PCM sample frames. @discussion An exception is raised if the format is not PCM. Returns nil in the following cases: - if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0) - if the buffer byte capacity (frameCapacity * format.streamDescription->mBytesPerFrame) cannot be represented by an uint32_t
 func (o *AVAudioPCMBuffer) InitWithPCMFormatFrameCapacity(format *AVAudioFormat, frameCapacity uint32) *AVAudioPCMBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPCMBufferSelInitWithPCMFormatFrameCapacity, format.Ptr(), frameCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioPCMBufferFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *AVAudioPCMBuffer) InitWithPCMFormatBufferListNoCopyDeallocator(format *
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPCMBufferSelInitWithPCMFormatBufferListNoCopyDeallocator, format.Ptr(), bufferList, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioPCMBufferFromID(_ret)
 }
 
@@ -100,4 +104,3 @@ func (o *AVAudioPCMBuffer) Int32ChannelData() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioPCMBufferSelInt32ChannelData)
 	return _ret
 }
-

@@ -16,9 +16,9 @@ type DOMEntity struct {
 }
 
 var (
-	_clsDOMEntity = _objcClass("DOMEntity")
-	_dOMEntitySelPublicId = objc.RegisterName("publicId")
-	_dOMEntitySelSystemId = objc.RegisterName("systemId")
+	_clsDOMEntity             = _objcClass("DOMEntity")
+	_dOMEntitySelPublicId     = objc.RegisterName("publicId")
+	_dOMEntitySelSystemId     = objc.RegisterName("systemId")
 	_dOMEntitySelNotationName = objc.RegisterName("notationName")
 )
 
@@ -34,19 +34,24 @@ func DOMEntityFromID(id objc.ID) *DOMEntity {
 
 func (o *DOMEntity) PublicId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMEntitySelPublicId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMEntity) SystemId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMEntitySelSystemId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMEntity) NotationName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMEntitySelNotationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

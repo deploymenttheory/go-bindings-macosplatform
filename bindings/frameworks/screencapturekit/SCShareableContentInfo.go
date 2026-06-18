@@ -17,10 +17,10 @@ type SCShareableContentInfo struct {
 }
 
 var (
-	_clsSCShareableContentInfo = _objcClass("SCShareableContentInfo")
-	_sCShareableContentInfoSelStyle = objc.RegisterName("style")
+	_clsSCShareableContentInfo                = _objcClass("SCShareableContentInfo")
+	_sCShareableContentInfoSelStyle           = objc.RegisterName("style")
 	_sCShareableContentInfoSelPointPixelScale = objc.RegisterName("pointPixelScale")
-	_sCShareableContentInfoSelContentRect = objc.RegisterName("contentRect")
+	_sCShareableContentInfoSelContentRect     = objc.RegisterName("contentRect")
 )
 
 func SCShareableContentInfoFromID(id objc.ID) *SCShareableContentInfo {
@@ -50,4 +50,3 @@ func (o *SCShareableContentInfo) ContentRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _sCShareableContentInfoSelContentRect)
 	return _ret
 }
-

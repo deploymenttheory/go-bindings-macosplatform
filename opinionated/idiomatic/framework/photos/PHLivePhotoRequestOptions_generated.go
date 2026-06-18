@@ -98,4 +98,3 @@ type LivePhotoRequestOptionsable interface {
 }
 
 var _ LivePhotoRequestOptionsable = (*LivePhotoRequestOptions)(nil)
-

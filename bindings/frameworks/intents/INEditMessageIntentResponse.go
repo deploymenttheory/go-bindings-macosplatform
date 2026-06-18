@@ -16,9 +16,9 @@ type INEditMessageIntentResponse struct {
 }
 
 var (
-	_clsINEditMessageIntentResponse = _objcClass("INEditMessageIntentResponse")
+	_clsINEditMessageIntentResponse                         = _objcClass("INEditMessageIntentResponse")
 	_iNEditMessageIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNEditMessageIntentResponseSelCode = objc.RegisterName("code")
+	_iNEditMessageIntentResponseSelCode                     = objc.RegisterName("code")
 )
 
 func INEditMessageIntentResponseFromID(id objc.ID) *INEditMessageIntentResponse {
@@ -33,7 +33,9 @@ func INEditMessageIntentResponseFromID(id objc.ID) *INEditMessageIntentResponse 
 
 func (o *INEditMessageIntentResponse) InitWithCodeUserActivity(code INEditMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *INEditMessageIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNEditMessageIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INEditMessageIntentResponseFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *INEditMessageIntentResponse) Code() INEditMessageIntentResponseCode {
 	_ret := objc.Send[INEditMessageIntentResponseCode](o.Ptr(), _iNEditMessageIntentResponseSelCode)
 	return _ret
 }
-

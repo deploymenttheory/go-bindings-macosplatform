@@ -17,9 +17,9 @@ type AVFrameRateRange struct {
 }
 
 var (
-	_clsAVFrameRateRange = _objcClass("AVFrameRateRange")
-	_aVFrameRateRangeSelMinFrameRate = objc.RegisterName("minFrameRate")
-	_aVFrameRateRangeSelMaxFrameRate = objc.RegisterName("maxFrameRate")
+	_clsAVFrameRateRange                 = _objcClass("AVFrameRateRange")
+	_aVFrameRateRangeSelMinFrameRate     = objc.RegisterName("minFrameRate")
+	_aVFrameRateRangeSelMaxFrameRate     = objc.RegisterName("maxFrameRate")
 	_aVFrameRateRangeSelMaxFrameDuration = objc.RegisterName("maxFrameDuration")
 	_aVFrameRateRangeSelMinFrameDuration = objc.RegisterName("minFrameDuration")
 )
@@ -57,4 +57,3 @@ func (o *AVFrameRateRange) MinFrameDuration() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVFrameRateRangeSelMinFrameDuration)
 	return _ret
 }
-

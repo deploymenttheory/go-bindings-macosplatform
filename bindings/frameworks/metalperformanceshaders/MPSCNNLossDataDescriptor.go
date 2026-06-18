@@ -19,14 +19,14 @@ type MPSCNNLossDataDescriptor struct {
 }
 
 var (
-	_clsMPSCNNLossDataDescriptor = _objcClass("MPSCNNLossDataDescriptor")
+	_clsMPSCNNLossDataDescriptor                                        = _objcClass("MPSCNNLossDataDescriptor")
 	_mPSCNNLossDataDescriptorSelCnnLossDataDescriptorWithDataLayoutSize = objc.RegisterName("cnnLossDataDescriptorWithData:layout:size:")
-	_mPSCNNLossDataDescriptorSelLayout = objc.RegisterName("layout")
-	_mPSCNNLossDataDescriptorSelSize = objc.RegisterName("size")
-	_mPSCNNLossDataDescriptorSelBytesPerRow = objc.RegisterName("bytesPerRow")
-	_mPSCNNLossDataDescriptorSelSetBytesPerRow = objc.RegisterName("setBytesPerRow:")
-	_mPSCNNLossDataDescriptorSelBytesPerImage = objc.RegisterName("bytesPerImage")
-	_mPSCNNLossDataDescriptorSelSetBytesPerImage = objc.RegisterName("setBytesPerImage:")
+	_mPSCNNLossDataDescriptorSelLayout                                  = objc.RegisterName("layout")
+	_mPSCNNLossDataDescriptorSelSize                                    = objc.RegisterName("size")
+	_mPSCNNLossDataDescriptorSelBytesPerRow                             = objc.RegisterName("bytesPerRow")
+	_mPSCNNLossDataDescriptorSelSetBytesPerRow                          = objc.RegisterName("setBytesPerRow:")
+	_mPSCNNLossDataDescriptorSelBytesPerImage                           = objc.RegisterName("bytesPerImage")
+	_mPSCNNLossDataDescriptorSelSetBytesPerImage                        = objc.RegisterName("setBytesPerImage:")
 )
 
 func MPSCNNLossDataDescriptorFromID(id objc.ID) *MPSCNNLossDataDescriptor {
@@ -42,7 +42,9 @@ func MPSCNNLossDataDescriptorFromID(id objc.ID) *MPSCNNLossDataDescriptor {
 // @abstract   Make a descriptor loss data. The bytesPerRow and bytesPerImage are automatically calculated assuming a dense array. If it is not a dense array, adjust bytesPerRow and bytesPerImage to the right value by changing properties. @param      data                        The per-element loss data. The data must be in floating point format. @param      layout                      The data layout of loss data. @param      size                        The size of loss data. @return     A valid MPSCNNLossDataDescriptor object or nil, if failure.
 func MPSCNNLossDataDescriptorCnnLossDataDescriptorWithDataLayoutSize(data *foundation.NSData, layout mpscore.MPSDataLayout, size metal.MTLSize) *mpsneuralnetwork.MPSCNNLossDataDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNLossDataDescriptor), _mPSCNNLossDataDescriptorSelCnnLossDataDescriptorWithDataLayoutSize, data.Ptr(), layout, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNLossDataDescriptorFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *MPSCNNLossDataDescriptor) BytesPerImage() uint {
 func (o *MPSCNNLossDataDescriptor) SetBytesPerImage(bytesPerImage uint) {
 	o.Ptr().Send(_mPSCNNLossDataDescriptorSelSetBytesPerImage, bytesPerImage)
 }
-

@@ -91,4 +91,3 @@ type Beaconable interface {
 }
 
 var _ Beaconable = (*Beacon)(nil)
-

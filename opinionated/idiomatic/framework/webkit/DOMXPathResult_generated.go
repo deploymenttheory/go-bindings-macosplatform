@@ -99,7 +99,9 @@ func (x *DOMXPathResult) SnapshotLength() uint {
 
 func (x *DOMXPathResult) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMXPathResult) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMXPathResult) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMXPathResultable is the interface implemented by [DOMXPathResult], for mocking and DI.
 type DOMXPathResultable interface {
@@ -116,4 +118,3 @@ type DOMXPathResultable interface {
 }
 
 var _ DOMXPathResultable = (*DOMXPathResult)(nil)
-

@@ -72,4 +72,3 @@ type FlightReservationable interface {
 }
 
 var _ FlightReservationable = (*FlightReservation)(nil)
-

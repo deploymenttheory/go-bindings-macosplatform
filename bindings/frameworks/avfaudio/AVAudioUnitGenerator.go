@@ -15,10 +15,10 @@ type AVAudioUnitGenerator struct {
 }
 
 var (
-	_clsAVAudioUnitGenerator = _objcClass("AVAudioUnitGenerator")
+	_clsAVAudioUnitGenerator                                  = _objcClass("AVAudioUnitGenerator")
 	_aVAudioUnitGeneratorSelInitWithAudioComponentDescription = objc.RegisterName("initWithAudioComponentDescription:")
-	_aVAudioUnitGeneratorSelBypass = objc.RegisterName("bypass")
-	_aVAudioUnitGeneratorSelSetBypass = objc.RegisterName("setBypass:")
+	_aVAudioUnitGeneratorSelBypass                            = objc.RegisterName("bypass")
+	_aVAudioUnitGeneratorSelSetBypass                         = objc.RegisterName("setBypass:")
 )
 
 func AVAudioUnitGeneratorFromID(id objc.ID) *AVAudioUnitGenerator {
@@ -34,7 +34,9 @@ func AVAudioUnitGeneratorFromID(id objc.ID) *AVAudioUnitGenerator {
 // @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitGenerator object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be kAudioUnitType_Generator or kAudioUnitType_RemoteGenerator
 func (o *AVAudioUnitGenerator) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitGeneratorSelInitWithAudioComponentDescription, audioComponentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitGeneratorFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVAudioUnitGenerator) Bypass() bool {
 func (o *AVAudioUnitGenerator) SetBypass(bypass bool) {
 	o.Ptr().Send(_aVAudioUnitGeneratorSelSetBypass, bypass)
 }
-

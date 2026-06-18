@@ -15,18 +15,18 @@ type NSSocketPort struct {
 }
 
 var (
-	_clsNSSocketPort = _objcClass("NSSocketPort")
-	_nSSocketPortSelInit = objc.RegisterName("init")
-	_nSSocketPortSelInitWithTCPPort = objc.RegisterName("initWithTCPPort:")
-	_nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolAddress = objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:")
-	_nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolSocket = objc.RegisterName("initWithProtocolFamily:socketType:protocol:socket:")
-	_nSSocketPortSelInitRemoteWithTCPPortHost = objc.RegisterName("initRemoteWithTCPPort:host:")
+	_clsNSSocketPort                                                      = _objcClass("NSSocketPort")
+	_nSSocketPortSelInit                                                  = objc.RegisterName("init")
+	_nSSocketPortSelInitWithTCPPort                                       = objc.RegisterName("initWithTCPPort:")
+	_nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolAddress       = objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:")
+	_nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolSocket        = objc.RegisterName("initWithProtocolFamily:socketType:protocol:socket:")
+	_nSSocketPortSelInitRemoteWithTCPPortHost                             = objc.RegisterName("initRemoteWithTCPPort:host:")
 	_nSSocketPortSelInitRemoteWithProtocolFamilySocketTypeProtocolAddress = objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:")
-	_nSSocketPortSelProtocolFamily = objc.RegisterName("protocolFamily")
-	_nSSocketPortSelSocketType = objc.RegisterName("socketType")
-	_nSSocketPortSelProtocol = objc.RegisterName("protocol")
-	_nSSocketPortSelAddress = objc.RegisterName("address")
-	_nSSocketPortSelSocket = objc.RegisterName("socket")
+	_nSSocketPortSelProtocolFamily                                        = objc.RegisterName("protocolFamily")
+	_nSSocketPortSelSocketType                                            = objc.RegisterName("socketType")
+	_nSSocketPortSelProtocol                                              = objc.RegisterName("protocol")
+	_nSSocketPortSelAddress                                               = objc.RegisterName("address")
+	_nSSocketPortSelSocket                                                = objc.RegisterName("socket")
 )
 
 func NSSocketPortFromID(id objc.ID) *NSSocketPort {
@@ -41,37 +41,49 @@ func NSSocketPortFromID(id objc.ID) *NSSocketPort {
 
 func (o *NSSocketPort) Init() *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
 func (o *NSSocketPort) InitWithTCPPort(port uint16) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithTCPPort, port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
 func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *NSData) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolAddress, family, type_, protocol, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
 func (o *NSSocketPort) InitWithProtocolFamilySocketTypeProtocolSocket(family int, type_ int, protocol int, sock int) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitWithProtocolFamilySocketTypeProtocolSocket, family, type_, protocol, sock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
 func (o *NSSocketPort) InitRemoteWithTCPPortHost(port uint16, hostName *NSString) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitRemoteWithTCPPortHost, port, hostName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
 func (o *NSSocketPort) InitRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *NSData) *NSSocketPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelInitRemoteWithProtocolFamilySocketTypeProtocolAddress, family, type_, protocol, address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSocketPortFromID(_ret)
 }
 
@@ -92,7 +104,9 @@ func (o *NSSocketPort) Protocol() int {
 
 func (o *NSSocketPort) Address() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSocketPortSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -100,4 +114,3 @@ func (o *NSSocketPort) Socket() int {
 	_ret := objc.Send[int](o.Ptr(), _nSSocketPortSelSocket)
 	return _ret
 }
-

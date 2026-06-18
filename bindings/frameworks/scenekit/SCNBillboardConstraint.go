@@ -15,10 +15,10 @@ type SCNBillboardConstraint struct {
 }
 
 var (
-	_clsSCNBillboardConstraint = _objcClass("SCNBillboardConstraint")
+	_clsSCNBillboardConstraint                    = _objcClass("SCNBillboardConstraint")
 	_sCNBillboardConstraintSelBillboardConstraint = objc.RegisterName("billboardConstraint")
-	_sCNBillboardConstraintSelFreeAxes = objc.RegisterName("freeAxes")
-	_sCNBillboardConstraintSelSetFreeAxes = objc.RegisterName("setFreeAxes:")
+	_sCNBillboardConstraintSelFreeAxes            = objc.RegisterName("freeAxes")
+	_sCNBillboardConstraintSelSetFreeAxes         = objc.RegisterName("setFreeAxes:")
 )
 
 func SCNBillboardConstraintFromID(id objc.ID) *SCNBillboardConstraint {
@@ -34,7 +34,9 @@ func SCNBillboardConstraintFromID(id objc.ID) *SCNBillboardConstraint {
 // @method billboardConstraint: @abstract Creates and returns a SCNBillboardConstraint constraint. @discussion A billboard constraint forces the receiver to look into the direction of the current point of view.
 func SCNBillboardConstraintBillboardConstraint() *SCNBillboardConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNBillboardConstraint), _sCNBillboardConstraintSelBillboardConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNBillboardConstraintFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *SCNBillboardConstraint) FreeAxes() SCNBillboardAxis {
 func (o *SCNBillboardConstraint) SetFreeAxes(freeAxes SCNBillboardAxis) {
 	o.Ptr().Send(_sCNBillboardConstraintSelSetFreeAxes, freeAxes)
 }
-

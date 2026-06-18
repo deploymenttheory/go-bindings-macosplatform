@@ -16,14 +16,14 @@ type MTRLevelControlClusterStopParams struct {
 }
 
 var (
-	_clsMTRLevelControlClusterStopParams = _objcClass("MTRLevelControlClusterStopParams")
-	_mTRLevelControlClusterStopParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRLevelControlClusterStopParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRLevelControlClusterStopParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRLevelControlClusterStopParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRLevelControlClusterStopParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRLevelControlClusterStopParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRLevelControlClusterStopParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRLevelControlClusterStopParams                               = _objcClass("MTRLevelControlClusterStopParams")
+	_mTRLevelControlClusterStopParamsSelOptionsMask                    = objc.RegisterName("optionsMask")
+	_mTRLevelControlClusterStopParamsSelSetOptionsMask                 = objc.RegisterName("setOptionsMask:")
+	_mTRLevelControlClusterStopParamsSelOptionsOverride                = objc.RegisterName("optionsOverride")
+	_mTRLevelControlClusterStopParamsSelSetOptionsOverride             = objc.RegisterName("setOptionsOverride:")
+	_mTRLevelControlClusterStopParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRLevelControlClusterStopParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRLevelControlClusterStopParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRLevelControlClusterStopParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRLevelControlClusterStopParamsFromID(id objc.ID) *MTRLevelControlClusterS
 
 func (o *MTRLevelControlClusterStopParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStopParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRLevelControlClusterStopParams) SetOptionsMask(optionsMask *foundatio
 
 func (o *MTRLevelControlClusterStopParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStopParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRLevelControlClusterStopParams) SetOptionsOverride(optionsOverride *f
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRLevelControlClusterStopParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStopParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRLevelControlClusterStopParams) SetTimedInvokeTimeoutMs(timedInvokeTi
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRLevelControlClusterStopParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLevelControlClusterStopParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRLevelControlClusterStopParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRLevelControlClusterStopParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

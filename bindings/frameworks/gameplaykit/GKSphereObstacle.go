@@ -19,13 +19,13 @@ type GKSphereObstacle struct {
 }
 
 var (
-	_clsGKSphereObstacle = _objcClass("GKSphereObstacle")
+	_clsGKSphereObstacle                   = _objcClass("GKSphereObstacle")
 	_gKSphereObstacleSelObstacleWithRadius = objc.RegisterName("obstacleWithRadius:")
-	_gKSphereObstacleSelInitWithRadius = objc.RegisterName("initWithRadius:")
-	_gKSphereObstacleSelRadius = objc.RegisterName("radius")
-	_gKSphereObstacleSelSetRadius = objc.RegisterName("setRadius:")
-	_gKSphereObstacleSelPosition = objc.RegisterName("position")
-	_gKSphereObstacleSelSetPosition = objc.RegisterName("setPosition:")
+	_gKSphereObstacleSelInitWithRadius     = objc.RegisterName("initWithRadius:")
+	_gKSphereObstacleSelRadius             = objc.RegisterName("radius")
+	_gKSphereObstacleSelSetRadius          = objc.RegisterName("setRadius:")
+	_gKSphereObstacleSelPosition           = objc.RegisterName("position")
+	_gKSphereObstacleSelSetPosition        = objc.RegisterName("setPosition:")
 )
 
 func GKSphereObstacleFromID(id objc.ID) *GKSphereObstacle {
@@ -40,13 +40,17 @@ func GKSphereObstacleFromID(id objc.ID) *GKSphereObstacle {
 
 func GKSphereObstacleObstacleWithRadius(radius float32) *GKSphereObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSphereObstacle), _gKSphereObstacleSelObstacleWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSphereObstacleFromID(_ret)
 }
 
 func (o *GKSphereObstacle) InitWithRadius(radius float32) *GKSphereObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSphereObstacleSelInitWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSphereObstacleFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *GKSphereObstacle) Position() unsafe.Pointer {
 func (o *GKSphereObstacle) SetPosition(position unsafe.Pointer) {
 	o.Ptr().Send(_gKSphereObstacleSelSetPosition, position)
 }
-

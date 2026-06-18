@@ -25,4 +25,3 @@ type PHPhotoLibraryAvailabilityObserver interface {
 type PHPhotoLibraryChangeObserver interface {
 	PhotoLibraryDidChange(changeInstance *PHChange)
 }
-

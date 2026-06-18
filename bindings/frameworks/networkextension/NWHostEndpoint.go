@@ -21,10 +21,10 @@ func (o *NWHostEndpoint) Ptr() objc.ID { return o.ptr }
 func (o *NWHostEndpoint) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsNWHostEndpoint = _objcClass("NWHostEndpoint")
+	_clsNWHostEndpoint                         = _objcClass("NWHostEndpoint")
 	_nWHostEndpointSelEndpointWithHostnamePort = objc.RegisterName("endpointWithHostname:port:")
-	_nWHostEndpointSelHostname = objc.RegisterName("hostname")
-	_nWHostEndpointSelPort = objc.RegisterName("port")
+	_nWHostEndpointSelHostname                 = objc.RegisterName("hostname")
+	_nWHostEndpointSelPort                     = objc.RegisterName("port")
 )
 
 func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
@@ -41,7 +41,9 @@ func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
 // Deprecated: Use `nw_endpoint_create_host` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>
 func NWHostEndpointEndpointWithHostnamePort(hostname *foundation.NSString, port *foundation.NSString) *NWHostEndpoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNWHostEndpoint), _nWHostEndpointSelEndpointWithHostnamePort, hostname.Ptr(), port.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWHostEndpointFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func NWHostEndpointEndpointWithHostnamePort(hostname *foundation.NSString, port 
 // Deprecated: Use `nw_endpoint_get_hostname` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>
 func (o *NWHostEndpoint) Hostname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWHostEndpointSelHostname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,7 +61,8 @@ func (o *NWHostEndpoint) Hostname() *foundation.NSString {
 // Deprecated: Use `nw_endpoint_get_port` in Network framework instead, see deprecation notice in <NetworkExtension/NWHostEndpoint.h>
 func (o *NWHostEndpoint) Port() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWHostEndpointSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

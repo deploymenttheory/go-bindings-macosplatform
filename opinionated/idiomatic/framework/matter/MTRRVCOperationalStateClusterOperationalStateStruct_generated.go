@@ -17,7 +17,9 @@ type MTRRVCOperationalStateClusterOperationalStateStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRRVCOperationalStateClusterOperationalStateStruct].
-func (x *MTRRVCOperationalStateClusterOperationalStateStruct) Unwrap() *raw.MTRRVCOperationalStateClusterOperationalStateStruct { return x.inner }
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) Unwrap() *raw.MTRRVCOperationalStateClusterOperationalStateStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -85,4 +87,3 @@ type MTRRVCOperationalStateClusterOperationalStateStructable interface {
 }
 
 var _ MTRRVCOperationalStateClusterOperationalStateStructable = (*MTRRVCOperationalStateClusterOperationalStateStruct)(nil)
-

@@ -25,4 +25,3 @@ func CNChangeHistoryDropEverythingEventFromID(id objc.ID) *CNChangeHistoryDropEv
 	purego.Track(o)
 	return o
 }
-

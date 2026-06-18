@@ -65,4 +65,3 @@ type Referenceable interface {
 }
 
 var _ Referenceable = (*Reference)(nil)
-

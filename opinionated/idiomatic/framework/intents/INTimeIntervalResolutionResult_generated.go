@@ -35,7 +35,9 @@ func NewTimeIntervalResolutionResult() *TimeIntervalResolutionResult {
 	return &TimeIntervalResolutionResult{inner: raw.INTimeIntervalResolutionResultFromID(_id)}
 }
 
-func (x *TimeIntervalResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *TimeIntervalResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // TimeIntervalResolutionResultable is the interface implemented by [TimeIntervalResolutionResult], for mocking and DI.
 type TimeIntervalResolutionResultable interface {
@@ -43,4 +45,3 @@ type TimeIntervalResolutionResultable interface {
 }
 
 var _ TimeIntervalResolutionResultable = (*TimeIntervalResolutionResult)(nil)
-

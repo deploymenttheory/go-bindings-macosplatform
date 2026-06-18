@@ -16,31 +16,31 @@ type NSPersistentStoreDescription struct {
 }
 
 var (
-	_clsNSPersistentStoreDescription = _objcClass("NSPersistentStoreDescription")
-	_nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL = objc.RegisterName("persistentStoreDescriptionWithURL:")
-	_nSPersistentStoreDescriptionSelSetOptionForKey = objc.RegisterName("setOption:forKey:")
-	_nSPersistentStoreDescriptionSelSetValueForPragmaNamed = objc.RegisterName("setValue:forPragmaNamed:")
-	_nSPersistentStoreDescriptionSelInitWithURL = objc.RegisterName("initWithURL:")
-	_nSPersistentStoreDescriptionSelType = objc.RegisterName("type")
-	_nSPersistentStoreDescriptionSelSetType = objc.RegisterName("setType:")
-	_nSPersistentStoreDescriptionSelConfiguration = objc.RegisterName("configuration")
-	_nSPersistentStoreDescriptionSelSetConfiguration = objc.RegisterName("setConfiguration:")
-	_nSPersistentStoreDescriptionSelURL = objc.RegisterName("URL")
-	_nSPersistentStoreDescriptionSelSetURL = objc.RegisterName("setURL:")
-	_nSPersistentStoreDescriptionSelOptions = objc.RegisterName("options")
-	_nSPersistentStoreDescriptionSelIsReadOnly = objc.RegisterName("isReadOnly")
-	_nSPersistentStoreDescriptionSelSetReadOnly = objc.RegisterName("setReadOnly:")
-	_nSPersistentStoreDescriptionSelTimeout = objc.RegisterName("timeout")
-	_nSPersistentStoreDescriptionSelSetTimeout = objc.RegisterName("setTimeout:")
-	_nSPersistentStoreDescriptionSelSqlitePragmas = objc.RegisterName("sqlitePragmas")
-	_nSPersistentStoreDescriptionSelShouldAddStoreAsynchronously = objc.RegisterName("shouldAddStoreAsynchronously")
-	_nSPersistentStoreDescriptionSelSetShouldAddStoreAsynchronously = objc.RegisterName("setShouldAddStoreAsynchronously:")
-	_nSPersistentStoreDescriptionSelShouldMigrateStoreAutomatically = objc.RegisterName("shouldMigrateStoreAutomatically")
-	_nSPersistentStoreDescriptionSelSetShouldMigrateStoreAutomatically = objc.RegisterName("setShouldMigrateStoreAutomatically:")
-	_nSPersistentStoreDescriptionSelShouldInferMappingModelAutomatically = objc.RegisterName("shouldInferMappingModelAutomatically")
+	_clsNSPersistentStoreDescription                                        = _objcClass("NSPersistentStoreDescription")
+	_nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL       = objc.RegisterName("persistentStoreDescriptionWithURL:")
+	_nSPersistentStoreDescriptionSelSetOptionForKey                         = objc.RegisterName("setOption:forKey:")
+	_nSPersistentStoreDescriptionSelSetValueForPragmaNamed                  = objc.RegisterName("setValue:forPragmaNamed:")
+	_nSPersistentStoreDescriptionSelInitWithURL                             = objc.RegisterName("initWithURL:")
+	_nSPersistentStoreDescriptionSelType                                    = objc.RegisterName("type")
+	_nSPersistentStoreDescriptionSelSetType                                 = objc.RegisterName("setType:")
+	_nSPersistentStoreDescriptionSelConfiguration                           = objc.RegisterName("configuration")
+	_nSPersistentStoreDescriptionSelSetConfiguration                        = objc.RegisterName("setConfiguration:")
+	_nSPersistentStoreDescriptionSelURL                                     = objc.RegisterName("URL")
+	_nSPersistentStoreDescriptionSelSetURL                                  = objc.RegisterName("setURL:")
+	_nSPersistentStoreDescriptionSelOptions                                 = objc.RegisterName("options")
+	_nSPersistentStoreDescriptionSelIsReadOnly                              = objc.RegisterName("isReadOnly")
+	_nSPersistentStoreDescriptionSelSetReadOnly                             = objc.RegisterName("setReadOnly:")
+	_nSPersistentStoreDescriptionSelTimeout                                 = objc.RegisterName("timeout")
+	_nSPersistentStoreDescriptionSelSetTimeout                              = objc.RegisterName("setTimeout:")
+	_nSPersistentStoreDescriptionSelSqlitePragmas                           = objc.RegisterName("sqlitePragmas")
+	_nSPersistentStoreDescriptionSelShouldAddStoreAsynchronously            = objc.RegisterName("shouldAddStoreAsynchronously")
+	_nSPersistentStoreDescriptionSelSetShouldAddStoreAsynchronously         = objc.RegisterName("setShouldAddStoreAsynchronously:")
+	_nSPersistentStoreDescriptionSelShouldMigrateStoreAutomatically         = objc.RegisterName("shouldMigrateStoreAutomatically")
+	_nSPersistentStoreDescriptionSelSetShouldMigrateStoreAutomatically      = objc.RegisterName("setShouldMigrateStoreAutomatically:")
+	_nSPersistentStoreDescriptionSelShouldInferMappingModelAutomatically    = objc.RegisterName("shouldInferMappingModelAutomatically")
 	_nSPersistentStoreDescriptionSelSetShouldInferMappingModelAutomatically = objc.RegisterName("setShouldInferMappingModelAutomatically:")
-	_nSPersistentStoreDescriptionSelCloudKitContainerOptions = objc.RegisterName("cloudKitContainerOptions")
-	_nSPersistentStoreDescriptionSelSetCloudKitContainerOptions = objc.RegisterName("setCloudKitContainerOptions:")
+	_nSPersistentStoreDescriptionSelCloudKitContainerOptions                = objc.RegisterName("cloudKitContainerOptions")
+	_nSPersistentStoreDescriptionSelSetCloudKitContainerOptions             = objc.RegisterName("setCloudKitContainerOptions:")
 )
 
 func NSPersistentStoreDescriptionFromID(id objc.ID) *NSPersistentStoreDescription {
@@ -55,7 +55,9 @@ func NSPersistentStoreDescriptionFromID(id objc.ID) *NSPersistentStoreDescriptio
 
 func NSPersistentStoreDescriptionPersistentStoreDescriptionWithURL(uRL *foundation.NSURL) *NSPersistentStoreDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreDescription), _nSPersistentStoreDescriptionSelPersistentStoreDescriptionWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreDescriptionFromID(_ret)
 }
 
@@ -69,13 +71,17 @@ func (o *NSPersistentStoreDescription) SetValueForPragmaNamed(value *foundation.
 
 func (o *NSPersistentStoreDescription) InitWithURL(url *foundation.NSURL) *NSPersistentStoreDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreDescriptionFromID(_ret)
 }
 
 func (o *NSPersistentStoreDescription) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +91,9 @@ func (o *NSPersistentStoreDescription) SetType(type_ *foundation.NSString) {
 
 func (o *NSPersistentStoreDescription) Configuration() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func (o *NSPersistentStoreDescription) SetConfiguration(configuration *foundatio
 
 func (o *NSPersistentStoreDescription) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -160,11 +170,12 @@ func (o *NSPersistentStoreDescription) SetShouldInferMappingModelAutomatically(s
 
 func (o *NSPersistentStoreDescription) CloudKitContainerOptions() *NSPersistentCloudKitContainerOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreDescriptionSelCloudKitContainerOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentCloudKitContainerOptionsFromID(_ret)
 }
 
 func (o *NSPersistentStoreDescription) SetCloudKitContainerOptions(cloudKitContainerOptions *NSPersistentCloudKitContainerOptions) {
 	o.Ptr().Send(_nSPersistentStoreDescriptionSelSetCloudKitContainerOptions, cloudKitContainerOptions.Ptr())
 }
-

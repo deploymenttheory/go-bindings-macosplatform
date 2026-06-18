@@ -376,4 +376,3 @@ type Leaderboardable interface {
 }
 
 var _ Leaderboardable = (*Leaderboard)(nil)
-

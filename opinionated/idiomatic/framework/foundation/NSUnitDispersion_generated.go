@@ -54,4 +54,3 @@ type UnitDispersionable interface {
 }
 
 var _ UnitDispersionable = (*UnitDispersion)(nil)
-

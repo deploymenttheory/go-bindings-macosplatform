@@ -74,4 +74,3 @@ type MTLResidencySet interface {
 // MTLTexture wraps the ObjC protocol MTLTexture.
 type MTLTexture interface {
 }
-

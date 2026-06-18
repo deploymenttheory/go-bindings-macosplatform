@@ -15,11 +15,11 @@ type NSInvocationOperation struct {
 }
 
 var (
-	_clsNSInvocationOperation = _objcClass("NSInvocationOperation")
+	_clsNSInvocationOperation                             = _objcClass("NSInvocationOperation")
 	_nSInvocationOperationSelInitWithTargetSelectorObject = objc.RegisterName("initWithTarget:selector:object:")
-	_nSInvocationOperationSelInitWithInvocation = objc.RegisterName("initWithInvocation:")
-	_nSInvocationOperationSelInvocation = objc.RegisterName("invocation")
-	_nSInvocationOperationSelResult = objc.RegisterName("result")
+	_nSInvocationOperationSelInitWithInvocation           = objc.RegisterName("initWithInvocation:")
+	_nSInvocationOperationSelInvocation                   = objc.RegisterName("invocation")
+	_nSInvocationOperationSelResult                       = objc.RegisterName("result")
 )
 
 func NSInvocationOperationFromID(id objc.ID) *NSInvocationOperation {
@@ -34,19 +34,25 @@ func NSInvocationOperationFromID(id objc.ID) *NSInvocationOperation {
 
 func (o *NSInvocationOperation) InitWithTargetSelectorObject(target objc.ID, sel objc.SEL, arg objc.ID) *NSInvocationOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInitWithTargetSelectorObject, target, sel, arg)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInvocationOperationFromID(_ret)
 }
 
 func (o *NSInvocationOperation) InitWithInvocation(inv *NSInvocation) *NSInvocationOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInitWithInvocation, inv.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInvocationOperationFromID(_ret)
 }
 
 func (o *NSInvocationOperation) Invocation() *NSInvocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelInvocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInvocationFromID(_ret)
 }
 
@@ -54,4 +60,3 @@ func (o *NSInvocationOperation) Result() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInvocationOperationSelResult)
 	return _ret
 }
-

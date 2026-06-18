@@ -16,19 +16,19 @@ type DOMHTMLTableColElement struct {
 }
 
 var (
-	_clsDOMHTMLTableColElement = _objcClass("DOMHTMLTableColElement")
-	_dOMHTMLTableColElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLTableColElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLTableColElementSelCh = objc.RegisterName("ch")
-	_dOMHTMLTableColElementSelSetCh = objc.RegisterName("setCh:")
-	_dOMHTMLTableColElementSelChOff = objc.RegisterName("chOff")
-	_dOMHTMLTableColElementSelSetChOff = objc.RegisterName("setChOff:")
-	_dOMHTMLTableColElementSelSpan = objc.RegisterName("span")
-	_dOMHTMLTableColElementSelSetSpan = objc.RegisterName("setSpan:")
-	_dOMHTMLTableColElementSelVAlign = objc.RegisterName("vAlign")
+	_clsDOMHTMLTableColElement          = _objcClass("DOMHTMLTableColElement")
+	_dOMHTMLTableColElementSelAlign     = objc.RegisterName("align")
+	_dOMHTMLTableColElementSelSetAlign  = objc.RegisterName("setAlign:")
+	_dOMHTMLTableColElementSelCh        = objc.RegisterName("ch")
+	_dOMHTMLTableColElementSelSetCh     = objc.RegisterName("setCh:")
+	_dOMHTMLTableColElementSelChOff     = objc.RegisterName("chOff")
+	_dOMHTMLTableColElementSelSetChOff  = objc.RegisterName("setChOff:")
+	_dOMHTMLTableColElementSelSpan      = objc.RegisterName("span")
+	_dOMHTMLTableColElementSelSetSpan   = objc.RegisterName("setSpan:")
+	_dOMHTMLTableColElementSelVAlign    = objc.RegisterName("vAlign")
 	_dOMHTMLTableColElementSelSetVAlign = objc.RegisterName("setVAlign:")
-	_dOMHTMLTableColElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLTableColElementSelSetWidth = objc.RegisterName("setWidth:")
+	_dOMHTMLTableColElementSelWidth     = objc.RegisterName("width")
+	_dOMHTMLTableColElementSelSetWidth  = objc.RegisterName("setWidth:")
 )
 
 func DOMHTMLTableColElementFromID(id objc.ID) *DOMHTMLTableColElement {
@@ -43,7 +43,9 @@ func DOMHTMLTableColElementFromID(id objc.ID) *DOMHTMLTableColElement {
 
 func (o *DOMHTMLTableColElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableColElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *DOMHTMLTableColElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLTableColElement) Ch() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableColElementSelCh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *DOMHTMLTableColElement) SetCh(ch *foundation.NSString) {
 
 func (o *DOMHTMLTableColElement) ChOff() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableColElementSelChOff)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *DOMHTMLTableColElement) SetSpan(span int) {
 
 func (o *DOMHTMLTableColElement) VAlign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableColElementSelVAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,11 +100,12 @@ func (o *DOMHTMLTableColElement) SetVAlign(vAlign *foundation.NSString) {
 
 func (o *DOMHTMLTableColElement) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableColElementSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLTableColElement) SetWidth(width *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLTableColElementSelSetWidth, width.Ptr())
 }
-

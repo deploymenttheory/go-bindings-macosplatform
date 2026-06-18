@@ -16,13 +16,13 @@ type DOMHTMLBaseFontElement struct {
 }
 
 var (
-	_clsDOMHTMLBaseFontElement = _objcClass("DOMHTMLBaseFontElement")
-	_dOMHTMLBaseFontElementSelColor = objc.RegisterName("color")
+	_clsDOMHTMLBaseFontElement         = _objcClass("DOMHTMLBaseFontElement")
+	_dOMHTMLBaseFontElementSelColor    = objc.RegisterName("color")
 	_dOMHTMLBaseFontElementSelSetColor = objc.RegisterName("setColor:")
-	_dOMHTMLBaseFontElementSelFace = objc.RegisterName("face")
-	_dOMHTMLBaseFontElementSelSetFace = objc.RegisterName("setFace:")
-	_dOMHTMLBaseFontElementSelSize = objc.RegisterName("size")
-	_dOMHTMLBaseFontElementSelSetSize = objc.RegisterName("setSize:")
+	_dOMHTMLBaseFontElementSelFace     = objc.RegisterName("face")
+	_dOMHTMLBaseFontElementSelSetFace  = objc.RegisterName("setFace:")
+	_dOMHTMLBaseFontElementSelSize     = objc.RegisterName("size")
+	_dOMHTMLBaseFontElementSelSetSize  = objc.RegisterName("setSize:")
 )
 
 func DOMHTMLBaseFontElementFromID(id objc.ID) *DOMHTMLBaseFontElement {
@@ -37,7 +37,9 @@ func DOMHTMLBaseFontElementFromID(id objc.ID) *DOMHTMLBaseFontElement {
 
 func (o *DOMHTMLBaseFontElement) Color() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBaseFontElementSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *DOMHTMLBaseFontElement) SetColor(color *foundation.NSString) {
 
 func (o *DOMHTMLBaseFontElement) Face() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBaseFontElementSelFace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *DOMHTMLBaseFontElement) SetFace(face *foundation.NSString) {
 
 func (o *DOMHTMLBaseFontElement) Size() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLBaseFontElementSelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLBaseFontElement) SetSize(size *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLBaseFontElementSelSetSize, size.Ptr())
 }
-

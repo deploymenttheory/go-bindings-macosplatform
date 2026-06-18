@@ -108,4 +108,3 @@ type MTL4BinaryFunctionDescriptorable interface {
 }
 
 var _ MTL4BinaryFunctionDescriptorable = (*MTL4BinaryFunctionDescriptor)(nil)
-

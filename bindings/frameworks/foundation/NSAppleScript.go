@@ -15,14 +15,14 @@ type NSAppleScript struct {
 }
 
 var (
-	_clsNSAppleScript = _objcClass("NSAppleScript")
+	_clsNSAppleScript                           = _objcClass("NSAppleScript")
 	_nSAppleScriptSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_nSAppleScriptSelInitWithSource = objc.RegisterName("initWithSource:")
-	_nSAppleScriptSelCompileAndReturnError = objc.RegisterName("compileAndReturnError:")
-	_nSAppleScriptSelExecuteAndReturnError = objc.RegisterName("executeAndReturnError:")
-	_nSAppleScriptSelExecuteAppleEventError = objc.RegisterName("executeAppleEvent:error:")
-	_nSAppleScriptSelSource = objc.RegisterName("source")
-	_nSAppleScriptSelIsCompiled = objc.RegisterName("isCompiled")
+	_nSAppleScriptSelInitWithSource             = objc.RegisterName("initWithSource:")
+	_nSAppleScriptSelCompileAndReturnError      = objc.RegisterName("compileAndReturnError:")
+	_nSAppleScriptSelExecuteAndReturnError      = objc.RegisterName("executeAndReturnError:")
+	_nSAppleScriptSelExecuteAppleEventError     = objc.RegisterName("executeAppleEvent:error:")
+	_nSAppleScriptSelSource                     = objc.RegisterName("source")
+	_nSAppleScriptSelIsCompiled                 = objc.RegisterName("isCompiled")
 )
 
 func NSAppleScriptFromID(id objc.ID) *NSAppleScript {
@@ -37,13 +37,17 @@ func NSAppleScriptFromID(id objc.ID) *NSAppleScript {
 
 func (o *NSAppleScript) InitWithContentsOfURLError(url *NSURL, errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleScriptFromID(_ret)
 }
 
 func (o *NSAppleScript) InitWithSource(source *NSString) *NSAppleScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleScriptFromID(_ret)
 }
 
@@ -54,19 +58,25 @@ func (o *NSAppleScript) CompileAndReturnError(errorInfo *NSDictionary[*NSString,
 
 func (o *NSAppleScript) ExecuteAndReturnError(errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAndReturnError, errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleScript) ExecuteAppleEventError(event *NSAppleEventDescriptor, errorInfo *NSDictionary[*NSString, objc.ID]) *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelExecuteAppleEventError, event.Ptr(), errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *NSAppleScript) Source() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppleScriptSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -74,4 +84,3 @@ func (o *NSAppleScript) IsCompiled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAppleScriptSelIsCompiled)
 	return _ret
 }
-

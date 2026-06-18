@@ -17,12 +17,12 @@ type MPSNNCompare struct {
 }
 
 var (
-	_clsMPSNNCompare = _objcClass("MPSNNCompare")
-	_mPSNNCompareSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNNCompareSelComparisonType = objc.RegisterName("comparisonType")
+	_clsMPSNNCompare                  = _objcClass("MPSNNCompare")
+	_mPSNNCompareSelInitWithDevice    = objc.RegisterName("initWithDevice:")
+	_mPSNNCompareSelComparisonType    = objc.RegisterName("comparisonType")
 	_mPSNNCompareSelSetComparisonType = objc.RegisterName("setComparisonType:")
-	_mPSNNCompareSelThreshold = objc.RegisterName("threshold")
-	_mPSNNCompareSelSetThreshold = objc.RegisterName("setThreshold:")
+	_mPSNNCompareSelThreshold         = objc.RegisterName("threshold")
+	_mPSNNCompareSelSetThreshold      = objc.RegisterName("setThreshold:")
 )
 
 func MPSNNCompareFromID(id objc.ID) *MPSNNCompare {
@@ -38,7 +38,9 @@ func MPSNNCompareFromID(id objc.ID) *MPSNNCompare {
 // @abstract  Initialize the comparison operator @param     device           The device the filter will run on. @return    A valid MPSNNCompare object or nil, if failure.
 func (o *MPSNNCompare) InitWithDevice(device metal.MTLDevice) *MPSNNCompare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNCompareSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNCompareFromID(_ret)
 }
 
@@ -61,4 +63,3 @@ func (o *MPSNNCompare) Threshold() float32 {
 func (o *MPSNNCompare) SetThreshold(threshold float32) {
 	o.Ptr().Send(_mPSNNCompareSelSetThreshold, threshold)
 }
-

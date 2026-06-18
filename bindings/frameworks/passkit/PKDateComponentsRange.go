@@ -16,10 +16,10 @@ type PKDateComponentsRange struct {
 }
 
 var (
-	_clsPKDateComponentsRange = _objcClass("PKDateComponentsRange")
+	_clsPKDateComponentsRange                                             = _objcClass("PKDateComponentsRange")
 	_pKDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents = objc.RegisterName("initWithStartDateComponents:endDateComponents:")
-	_pKDateComponentsRangeSelStartDateComponents = objc.RegisterName("startDateComponents")
-	_pKDateComponentsRangeSelEndDateComponents = objc.RegisterName("endDateComponents")
+	_pKDateComponentsRangeSelStartDateComponents                          = objc.RegisterName("startDateComponents")
+	_pKDateComponentsRangeSelEndDateComponents                            = objc.RegisterName("endDateComponents")
 )
 
 func PKDateComponentsRangeFromID(id objc.ID) *PKDateComponentsRange {
@@ -34,19 +34,24 @@ func PKDateComponentsRangeFromID(id objc.ID) *PKDateComponentsRange {
 
 func (o *PKDateComponentsRange) InitWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *PKDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents, startDateComponents.Ptr(), endDateComponents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDateComponentsRangeFromID(_ret)
 }
 
 func (o *PKDateComponentsRange) StartDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDateComponentsRangeSelStartDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
 func (o *PKDateComponentsRange) EndDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDateComponentsRangeSelEndDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
-

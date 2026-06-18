@@ -15,7 +15,9 @@ type ChangeLanguageOptionCommandEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MPChangeLanguageOptionCommandEvent].
-func (x *ChangeLanguageOptionCommandEvent) Unwrap() *raw.MPChangeLanguageOptionCommandEvent { return x.inner }
+func (x *ChangeLanguageOptionCommandEvent) Unwrap() *raw.MPChangeLanguageOptionCommandEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,7 +51,9 @@ func (x *ChangeLanguageOptionCommandEvent) Setting() raw.MPChangeLanguageOptionS
 	return x.inner.Setting()
 }
 
-func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // ChangeLanguageOptionCommandEventable is the interface implemented by [ChangeLanguageOptionCommandEvent], for mocking and DI.
 type ChangeLanguageOptionCommandEventable interface {
@@ -59,4 +63,3 @@ type ChangeLanguageOptionCommandEventable interface {
 }
 
 var _ ChangeLanguageOptionCommandEventable = (*ChangeLanguageOptionCommandEvent)(nil)
-

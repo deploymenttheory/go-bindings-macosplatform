@@ -18,8 +18,8 @@ type MPSNNReshapeGradient struct {
 }
 
 var (
-	_clsMPSNNReshapeGradient = _objcClass("MPSNNReshapeGradient")
-	_mPSNNReshapeGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReshapeGradient                    = _objcClass("MPSNNReshapeGradient")
+	_mPSNNReshapeGradientSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReshapeGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -36,14 +36,17 @@ func MPSNNReshapeGradientFromID(id objc.ID) *MPSNNReshapeGradient {
 // @abstract   Initializes a MPSNNReshapeGradient function @param      device  The MTLDevice on which this filter will be used @return     A valid MPSNNReshapeGradient object or nil, if failure.
 func (o *MPSNNReshapeGradient) InitWithDevice(device metal.MTLDevice) *MPSNNReshapeGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSNNReshapeGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReshapeGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReshapeGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReshapeGradientFromID(_ret)
 }
-

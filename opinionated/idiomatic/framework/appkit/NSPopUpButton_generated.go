@@ -379,7 +379,9 @@ func (x *PopUpButton) WithSubviews(items ...ViewProvider) *PopUpButton {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -521,7 +523,9 @@ func (x *PopUpButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUp
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -543,7 +547,9 @@ func (x *PopUpButton) WithContentFilters(items ...*coreimage.CIFilter) *PopUpBut
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -607,7 +613,9 @@ func (x *PopUpButton) WithGestureRecognizers(items ...GestureRecognizerProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -928,7 +936,9 @@ func (x *PopUpButton) asControl() *raw.NSControl { return &x.inner.NSButton.NSCo
 
 func (x *PopUpButton) asView() *raw.NSView { return &x.inner.NSButton.NSControl.NSView }
 
-func (x *PopUpButton) asResponder() *raw.NSResponder { return &x.inner.NSButton.NSControl.NSView.NSResponder }
+func (x *PopUpButton) asResponder() *raw.NSResponder {
+	return &x.inner.NSButton.NSControl.NSView.NSResponder
+}
 
 // PopUpButtonable is the interface implemented by [PopUpButton], for mocking and DI.
 type PopUpButtonable interface {
@@ -1076,4 +1086,3 @@ type PopUpButtonable interface {
 }
 
 var _ PopUpButtonable = (*PopUpButton)(nil)
-

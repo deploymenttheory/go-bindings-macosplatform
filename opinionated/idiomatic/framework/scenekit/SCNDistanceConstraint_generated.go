@@ -125,4 +125,3 @@ type DistanceConstraintable interface {
 }
 
 var _ DistanceConstraintable = (*DistanceConstraint)(nil)
-

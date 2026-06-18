@@ -15,18 +15,18 @@ type SCNTube struct {
 }
 
 var (
-	_clsSCNTube = _objcClass("SCNTube")
+	_clsSCNTube                                     = _objcClass("SCNTube")
 	_sCNTubeSelTubeWithInnerRadiusOuterRadiusHeight = objc.RegisterName("tubeWithInnerRadius:outerRadius:height:")
-	_sCNTubeSelInnerRadius = objc.RegisterName("innerRadius")
-	_sCNTubeSelSetInnerRadius = objc.RegisterName("setInnerRadius:")
-	_sCNTubeSelOuterRadius = objc.RegisterName("outerRadius")
-	_sCNTubeSelSetOuterRadius = objc.RegisterName("setOuterRadius:")
-	_sCNTubeSelHeight = objc.RegisterName("height")
-	_sCNTubeSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNTubeSelRadialSegmentCount = objc.RegisterName("radialSegmentCount")
-	_sCNTubeSelSetRadialSegmentCount = objc.RegisterName("setRadialSegmentCount:")
-	_sCNTubeSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNTubeSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
+	_sCNTubeSelInnerRadius                          = objc.RegisterName("innerRadius")
+	_sCNTubeSelSetInnerRadius                       = objc.RegisterName("setInnerRadius:")
+	_sCNTubeSelOuterRadius                          = objc.RegisterName("outerRadius")
+	_sCNTubeSelSetOuterRadius                       = objc.RegisterName("setOuterRadius:")
+	_sCNTubeSelHeight                               = objc.RegisterName("height")
+	_sCNTubeSelSetHeight                            = objc.RegisterName("setHeight:")
+	_sCNTubeSelRadialSegmentCount                   = objc.RegisterName("radialSegmentCount")
+	_sCNTubeSelSetRadialSegmentCount                = objc.RegisterName("setRadialSegmentCount:")
+	_sCNTubeSelHeightSegmentCount                   = objc.RegisterName("heightSegmentCount")
+	_sCNTubeSelSetHeightSegmentCount                = objc.RegisterName("setHeightSegmentCount:")
 )
 
 func SCNTubeFromID(id objc.ID) *SCNTube {
@@ -42,7 +42,9 @@ func SCNTubeFromID(id objc.ID) *SCNTube {
 // @method tubeWithInnerRadius:outerRadius:height: @abstract Creates and returns a tube with given inner radius, outer radius and height. @param innerRadius The inner radius of the tube. @param outerRadius The outer radius of the tube. @param height The height of the tube.
 func SCNTubeTubeWithInnerRadiusOuterRadiusHeight(innerRadius float64, outerRadius float64, height float64) *SCNTube {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTube), _sCNTubeSelTubeWithInnerRadiusOuterRadiusHeight, innerRadius, outerRadius, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTubeFromID(_ret)
 }
 
@@ -95,4 +97,3 @@ func (o *SCNTube) HeightSegmentCount() int {
 func (o *SCNTube) SetHeightSegmentCount(heightSegmentCount int) {
 	o.Ptr().Send(_sCNTubeSelSetHeightSegmentCount, heightSegmentCount)
 }
-

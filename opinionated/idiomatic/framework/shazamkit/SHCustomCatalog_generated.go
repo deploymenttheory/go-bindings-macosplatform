@@ -81,4 +81,3 @@ type CustomCatalogable interface {
 }
 
 var _ CustomCatalogable = (*CustomCatalog)(nil)
-

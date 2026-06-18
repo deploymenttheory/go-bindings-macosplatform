@@ -65,4 +65,3 @@ type Channelable interface {
 }
 
 var _ Channelable = (*Channel)(nil)
-

@@ -18,34 +18,34 @@ type AVAudioSequencer struct {
 }
 
 var (
-	_clsAVAudioSequencer = _objcClass("AVAudioSequencer")
-	_aVAudioSequencerSelInit = objc.RegisterName("init")
-	_aVAudioSequencerSelInitWithAudioEngine = objc.RegisterName("initWithAudioEngine:")
-	_aVAudioSequencerSelLoadFromURLOptionsError = objc.RegisterName("loadFromURL:options:error:")
-	_aVAudioSequencerSelLoadFromDataOptionsError = objc.RegisterName("loadFromData:options:error:")
+	_clsAVAudioSequencer                                              = _objcClass("AVAudioSequencer")
+	_aVAudioSequencerSelInit                                          = objc.RegisterName("init")
+	_aVAudioSequencerSelInitWithAudioEngine                           = objc.RegisterName("initWithAudioEngine:")
+	_aVAudioSequencerSelLoadFromURLOptionsError                       = objc.RegisterName("loadFromURL:options:error:")
+	_aVAudioSequencerSelLoadFromDataOptionsError                      = objc.RegisterName("loadFromData:options:error:")
 	_aVAudioSequencerSelWriteToURLSMPTEResolutionReplaceExistingError = objc.RegisterName("writeToURL:SMPTEResolution:replaceExisting:error:")
-	_aVAudioSequencerSelDataWithSMPTEResolutionError = objc.RegisterName("dataWithSMPTEResolution:error:")
-	_aVAudioSequencerSelSecondsForBeats = objc.RegisterName("secondsForBeats:")
-	_aVAudioSequencerSelBeatsForSeconds = objc.RegisterName("beatsForSeconds:")
-	_aVAudioSequencerSelReverseEvents = objc.RegisterName("reverseEvents")
-	_aVAudioSequencerSelCreateAndAppendTrack = objc.RegisterName("createAndAppendTrack")
-	_aVAudioSequencerSelRemoveTrack = objc.RegisterName("removeTrack:")
-	_aVAudioSequencerSelSetUserCallback = objc.RegisterName("setUserCallback:")
-	_aVAudioSequencerSelTracks = objc.RegisterName("tracks")
-	_aVAudioSequencerSelTempoTrack = objc.RegisterName("tempoTrack")
-	_aVAudioSequencerSelUserInfo = objc.RegisterName("userInfo")
-	_aVAudioSequencerSelHostTimeForBeatsError = objc.RegisterName("hostTimeForBeats:error:")
-	_aVAudioSequencerSelBeatsForHostTimeError = objc.RegisterName("beatsForHostTime:error:")
-	_aVAudioSequencerSelPrepareToPlay = objc.RegisterName("prepareToPlay")
-	_aVAudioSequencerSelStartAndReturnError = objc.RegisterName("startAndReturnError:")
-	_aVAudioSequencerSelStop = objc.RegisterName("stop")
-	_aVAudioSequencerSelCurrentPositionInSeconds = objc.RegisterName("currentPositionInSeconds")
-	_aVAudioSequencerSelSetCurrentPositionInSeconds = objc.RegisterName("setCurrentPositionInSeconds:")
-	_aVAudioSequencerSelCurrentPositionInBeats = objc.RegisterName("currentPositionInBeats")
-	_aVAudioSequencerSelSetCurrentPositionInBeats = objc.RegisterName("setCurrentPositionInBeats:")
-	_aVAudioSequencerSelIsPlaying = objc.RegisterName("isPlaying")
-	_aVAudioSequencerSelRate = objc.RegisterName("rate")
-	_aVAudioSequencerSelSetRate = objc.RegisterName("setRate:")
+	_aVAudioSequencerSelDataWithSMPTEResolutionError                  = objc.RegisterName("dataWithSMPTEResolution:error:")
+	_aVAudioSequencerSelSecondsForBeats                               = objc.RegisterName("secondsForBeats:")
+	_aVAudioSequencerSelBeatsForSeconds                               = objc.RegisterName("beatsForSeconds:")
+	_aVAudioSequencerSelReverseEvents                                 = objc.RegisterName("reverseEvents")
+	_aVAudioSequencerSelCreateAndAppendTrack                          = objc.RegisterName("createAndAppendTrack")
+	_aVAudioSequencerSelRemoveTrack                                   = objc.RegisterName("removeTrack:")
+	_aVAudioSequencerSelSetUserCallback                               = objc.RegisterName("setUserCallback:")
+	_aVAudioSequencerSelTracks                                        = objc.RegisterName("tracks")
+	_aVAudioSequencerSelTempoTrack                                    = objc.RegisterName("tempoTrack")
+	_aVAudioSequencerSelUserInfo                                      = objc.RegisterName("userInfo")
+	_aVAudioSequencerSelHostTimeForBeatsError                         = objc.RegisterName("hostTimeForBeats:error:")
+	_aVAudioSequencerSelBeatsForHostTimeError                         = objc.RegisterName("beatsForHostTime:error:")
+	_aVAudioSequencerSelPrepareToPlay                                 = objc.RegisterName("prepareToPlay")
+	_aVAudioSequencerSelStartAndReturnError                           = objc.RegisterName("startAndReturnError:")
+	_aVAudioSequencerSelStop                                          = objc.RegisterName("stop")
+	_aVAudioSequencerSelCurrentPositionInSeconds                      = objc.RegisterName("currentPositionInSeconds")
+	_aVAudioSequencerSelSetCurrentPositionInSeconds                   = objc.RegisterName("setCurrentPositionInSeconds:")
+	_aVAudioSequencerSelCurrentPositionInBeats                        = objc.RegisterName("currentPositionInBeats")
+	_aVAudioSequencerSelSetCurrentPositionInBeats                     = objc.RegisterName("setCurrentPositionInBeats:")
+	_aVAudioSequencerSelIsPlaying                                     = objc.RegisterName("isPlaying")
+	_aVAudioSequencerSelRate                                          = objc.RegisterName("rate")
+	_aVAudioSequencerSelSetRate                                       = objc.RegisterName("setRate:")
 )
 
 func AVAudioSequencerFromID(id objc.ID) *AVAudioSequencer {
@@ -61,14 +61,18 @@ func AVAudioSequencerFromID(id objc.ID) *AVAudioSequencer {
 // @method init @abstract Initialize a new sequencer, which will not be connected to an audio engine. @discussion This is used to create a sequencer whose tracks will only send events to external MIDI endpoints.
 func (o *AVAudioSequencer) Init() *AVAudioSequencer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioSequencerFromID(_ret)
 }
 
 // @method initWithAudioEngine: @abstract Initialize a new sequencer, handing it the audio engine.
 func (o *AVAudioSequencer) InitWithAudioEngine(engine *AVAudioEngine) *AVAudioSequencer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelInitWithAudioEngine, engine.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioSequencerFromID(_ret)
 }
 
@@ -106,7 +110,9 @@ func (o *AVAudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL
 func (o *AVAudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelDataWithSMPTEResolutionError, sMPTEResolution, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -133,7 +139,9 @@ func (o *AVAudioSequencer) ReverseEvents() {
 // @method createAndAppendTrack: @abstract Create a new AVMusicTrack and append it to the AVMusicSequencer's list
 func (o *AVAudioSequencer) CreateAndAppendTrack() *AVMusicTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelCreateAndAppendTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMusicTrackFromID(_ret)
 }
 
@@ -164,14 +172,18 @@ func (o *AVAudioSequencer) SetUserCallback(userCallback func(*AVMusicTrack, *fou
 // @property tracks @abstract An NSArray containing all the AVMusicTracks in the sequence @discussion This list will not include the tempo track.
 func (o *AVAudioSequencer) Tracks() *foundation.NSArray[*AVMusicTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMusicTrack](_ret)
 }
 
 // @property tempoTrack @abstract The tempo track @discussion Each AVMusicSequence has a single tempo track. All tempo events read from external MIDI files are placed into this track (as well as other appropriate events (e.g., the time signature meta event from the file). The tempo track can be edited and iterated upon as any other track. Non-tempo-related events will generate exceptions if added.
 func (o *AVAudioSequencer) TempoTrack() *AVMusicTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSequencerSelTempoTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMusicTrackFromID(_ret)
 }
 
@@ -256,4 +268,3 @@ func (o *AVAudioSequencer) Rate() float32 {
 func (o *AVAudioSequencer) SetRate(rate float32) {
 	o.Ptr().Send(_aVAudioSequencerSelSetRate, rate)
 }
-

@@ -26,4 +26,3 @@ func CKNotificationIDFromID(id objc.ID) *CKNotificationID {
 	purego.Track(o)
 	return o
 }
-

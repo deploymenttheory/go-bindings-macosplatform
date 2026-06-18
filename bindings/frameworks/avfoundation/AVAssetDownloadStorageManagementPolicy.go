@@ -16,8 +16,8 @@ type AVAssetDownloadStorageManagementPolicy struct {
 }
 
 var (
-	_clsAVAssetDownloadStorageManagementPolicy = _objcClass("AVAssetDownloadStorageManagementPolicy")
-	_aVAssetDownloadStorageManagementPolicySelPriority = objc.RegisterName("priority")
+	_clsAVAssetDownloadStorageManagementPolicy               = _objcClass("AVAssetDownloadStorageManagementPolicy")
+	_aVAssetDownloadStorageManagementPolicySelPriority       = objc.RegisterName("priority")
 	_aVAssetDownloadStorageManagementPolicySelExpirationDate = objc.RegisterName("expirationDate")
 )
 
@@ -34,14 +34,17 @@ func AVAssetDownloadStorageManagementPolicyFromID(id objc.ID) *AVAssetDownloadSt
 // Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
 func (o *AVAssetDownloadStorageManagementPolicy) Priority() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadStorageManagementPolicySelPriority)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Returns the expiration date of asset.
 func (o *AVAssetDownloadStorageManagementPolicy) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadStorageManagementPolicySelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

@@ -15,7 +15,9 @@ type VirtioSocketDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioSocketDeviceConfiguration].
-func (x *VirtioSocketDeviceConfiguration) Unwrap() *raw.VZVirtioSocketDeviceConfiguration { return x.inner }
+func (x *VirtioSocketDeviceConfiguration) Unwrap() *raw.VZVirtioSocketDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewVirtioSocketDeviceConfiguration() *VirtioSocketDeviceConfiguration {
 	return &VirtioSocketDeviceConfiguration{inner: raw.VZVirtioSocketDeviceConfigurationFromID(_id)}
 }
 
-func (x *VirtioSocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration { return &x.inner.VZSocketDeviceConfiguration }
+func (x *VirtioSocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration {
+	return &x.inner.VZSocketDeviceConfiguration
+}
 
 // VirtioSocketDeviceConfigurationable is the interface implemented by [VirtioSocketDeviceConfiguration], for mocking and DI.
 type VirtioSocketDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type VirtioSocketDeviceConfigurationable interface {
 }
 
 var _ VirtioSocketDeviceConfigurationable = (*VirtioSocketDeviceConfiguration)(nil)
-

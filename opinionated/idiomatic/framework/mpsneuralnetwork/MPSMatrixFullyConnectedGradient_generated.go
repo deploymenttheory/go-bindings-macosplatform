@@ -140,4 +140,3 @@ type MatrixFullyConnectedGradientable interface {
 }
 
 var _ MatrixFullyConnectedGradientable = (*MatrixFullyConnectedGradient)(nil)
-

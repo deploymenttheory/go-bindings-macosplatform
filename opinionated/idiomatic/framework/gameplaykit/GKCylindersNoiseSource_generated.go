@@ -63,4 +63,3 @@ type CylindersNoiseSourceable interface {
 }
 
 var _ CylindersNoiseSourceable = (*CylindersNoiseSource)(nil)
-

@@ -15,13 +15,13 @@ type NSCachedURLResponse struct {
 }
 
 var (
-	_clsNSCachedURLResponse = _objcClass("NSCachedURLResponse")
-	_nSCachedURLResponseSelInitWithResponseData = objc.RegisterName("initWithResponse:data:")
+	_clsNSCachedURLResponse                                          = _objcClass("NSCachedURLResponse")
+	_nSCachedURLResponseSelInitWithResponseData                      = objc.RegisterName("initWithResponse:data:")
 	_nSCachedURLResponseSelInitWithResponseDataUserInfoStoragePolicy = objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:")
-	_nSCachedURLResponseSelResponse = objc.RegisterName("response")
-	_nSCachedURLResponseSelData = objc.RegisterName("data")
-	_nSCachedURLResponseSelUserInfo = objc.RegisterName("userInfo")
-	_nSCachedURLResponseSelStoragePolicy = objc.RegisterName("storagePolicy")
+	_nSCachedURLResponseSelResponse                                  = objc.RegisterName("response")
+	_nSCachedURLResponseSelData                                      = objc.RegisterName("data")
+	_nSCachedURLResponseSelUserInfo                                  = objc.RegisterName("userInfo")
+	_nSCachedURLResponseSelStoragePolicy                             = objc.RegisterName("storagePolicy")
 )
 
 func NSCachedURLResponseFromID(id objc.ID) *NSCachedURLResponse {
@@ -37,28 +37,36 @@ func NSCachedURLResponseFromID(id objc.ID) *NSCachedURLResponse {
 // @method initWithResponse:data @abstract Initializes an NSCachedURLResponse with the given response and data. @discussion A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @result an initialized NSCachedURLResponse.
 func (o *NSCachedURLResponse) InitWithResponseData(response *NSURLResponse, data *NSData) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseData, response.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCachedURLResponseFromID(_ret)
 }
 
 // @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
 func (o *NSCachedURLResponse) InitWithResponseDataUserInfoStoragePolicy(response *NSURLResponse, data *NSData, userInfo *NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *NSCachedURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelInitWithResponseDataUserInfoStoragePolicy, response.Ptr(), data.Ptr(), userInfo, storagePolicy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCachedURLResponseFromID(_ret)
 }
 
 // @abstract Returns the response wrapped by this instance. @result The response wrapped by this instance.
 func (o *NSCachedURLResponse) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLResponseFromID(_ret)
 }
 
 // @abstract Returns the data of the receiver. @result The data of the receiver.
 func (o *NSCachedURLResponse) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCachedURLResponseSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -73,4 +81,3 @@ func (o *NSCachedURLResponse) StoragePolicy() NSURLCacheStoragePolicy {
 	_ret := objc.Send[NSURLCacheStoragePolicy](o.Ptr(), _nSCachedURLResponseSelStoragePolicy)
 	return _ret
 }
-

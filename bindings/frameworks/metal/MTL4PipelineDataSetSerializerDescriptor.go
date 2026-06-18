@@ -16,8 +16,8 @@ type MTL4PipelineDataSetSerializerDescriptor struct {
 }
 
 var (
-	_clsMTL4PipelineDataSetSerializerDescriptor = _objcClass("MTL4PipelineDataSetSerializerDescriptor")
-	_mTL4PipelineDataSetSerializerDescriptorSelConfiguration = objc.RegisterName("configuration")
+	_clsMTL4PipelineDataSetSerializerDescriptor                 = _objcClass("MTL4PipelineDataSetSerializerDescriptor")
+	_mTL4PipelineDataSetSerializerDescriptorSelConfiguration    = objc.RegisterName("configuration")
 	_mTL4PipelineDataSetSerializerDescriptorSelSetConfiguration = objc.RegisterName("setConfiguration:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDa
 func (o *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) {
 	o.Ptr().Send(_mTL4PipelineDataSetSerializerDescriptorSelSetConfiguration, configuration)
 }
-

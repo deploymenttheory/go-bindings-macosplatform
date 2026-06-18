@@ -17,10 +17,10 @@ type CAScrollLayer struct {
 }
 
 var (
-	_clsCAScrollLayer = _objcClass("CAScrollLayer")
+	_clsCAScrollLayer              = _objcClass("CAScrollLayer")
 	_cAScrollLayerSelScrollToPoint = objc.RegisterName("scrollToPoint:")
-	_cAScrollLayerSelScrollToRect = objc.RegisterName("scrollToRect:")
-	_cAScrollLayerSelScrollMode = objc.RegisterName("scrollMode")
+	_cAScrollLayerSelScrollToRect  = objc.RegisterName("scrollToRect:")
+	_cAScrollLayerSelScrollMode    = objc.RegisterName("scrollMode")
 	_cAScrollLayerSelSetScrollMode = objc.RegisterName("setScrollMode:")
 )
 
@@ -44,11 +44,12 @@ func (o *CAScrollLayer) ScrollToRect(r corefoundation.CGRect) {
 
 func (o *CAScrollLayer) ScrollMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAScrollLayerSelScrollMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CAScrollLayer) SetScrollMode(scrollMode *foundation.NSString) {
 	o.Ptr().Send(_cAScrollLayerSelSetScrollMode, scrollMode.Ptr())
 }
-

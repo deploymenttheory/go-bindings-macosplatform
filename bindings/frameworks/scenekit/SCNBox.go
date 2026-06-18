@@ -15,24 +15,24 @@ type SCNBox struct {
 }
 
 var (
-	_clsSCNBox = _objcClass("SCNBox")
+	_clsSCNBox                                      = _objcClass("SCNBox")
 	_sCNBoxSelBoxWithWidthHeightLengthChamferRadius = objc.RegisterName("boxWithWidth:height:length:chamferRadius:")
-	_sCNBoxSelWidth = objc.RegisterName("width")
-	_sCNBoxSelSetWidth = objc.RegisterName("setWidth:")
-	_sCNBoxSelHeight = objc.RegisterName("height")
-	_sCNBoxSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNBoxSelLength = objc.RegisterName("length")
-	_sCNBoxSelSetLength = objc.RegisterName("setLength:")
-	_sCNBoxSelChamferRadius = objc.RegisterName("chamferRadius")
-	_sCNBoxSelSetChamferRadius = objc.RegisterName("setChamferRadius:")
-	_sCNBoxSelWidthSegmentCount = objc.RegisterName("widthSegmentCount")
-	_sCNBoxSelSetWidthSegmentCount = objc.RegisterName("setWidthSegmentCount:")
-	_sCNBoxSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNBoxSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
-	_sCNBoxSelLengthSegmentCount = objc.RegisterName("lengthSegmentCount")
-	_sCNBoxSelSetLengthSegmentCount = objc.RegisterName("setLengthSegmentCount:")
-	_sCNBoxSelChamferSegmentCount = objc.RegisterName("chamferSegmentCount")
-	_sCNBoxSelSetChamferSegmentCount = objc.RegisterName("setChamferSegmentCount:")
+	_sCNBoxSelWidth                                 = objc.RegisterName("width")
+	_sCNBoxSelSetWidth                              = objc.RegisterName("setWidth:")
+	_sCNBoxSelHeight                                = objc.RegisterName("height")
+	_sCNBoxSelSetHeight                             = objc.RegisterName("setHeight:")
+	_sCNBoxSelLength                                = objc.RegisterName("length")
+	_sCNBoxSelSetLength                             = objc.RegisterName("setLength:")
+	_sCNBoxSelChamferRadius                         = objc.RegisterName("chamferRadius")
+	_sCNBoxSelSetChamferRadius                      = objc.RegisterName("setChamferRadius:")
+	_sCNBoxSelWidthSegmentCount                     = objc.RegisterName("widthSegmentCount")
+	_sCNBoxSelSetWidthSegmentCount                  = objc.RegisterName("setWidthSegmentCount:")
+	_sCNBoxSelHeightSegmentCount                    = objc.RegisterName("heightSegmentCount")
+	_sCNBoxSelSetHeightSegmentCount                 = objc.RegisterName("setHeightSegmentCount:")
+	_sCNBoxSelLengthSegmentCount                    = objc.RegisterName("lengthSegmentCount")
+	_sCNBoxSelSetLengthSegmentCount                 = objc.RegisterName("setLengthSegmentCount:")
+	_sCNBoxSelChamferSegmentCount                   = objc.RegisterName("chamferSegmentCount")
+	_sCNBoxSelSetChamferSegmentCount                = objc.RegisterName("setChamferSegmentCount:")
 )
 
 func SCNBoxFromID(id objc.ID) *SCNBox {
@@ -48,7 +48,9 @@ func SCNBoxFromID(id objc.ID) *SCNBox {
 // @method boxWithWidth:height:length:chamferRadius: @abstract Creates and returns a box with given width, height, length and chamfer radius. @param width The width of the box. @param height The height of the box. @param length The length of the box. @param chamferRadius The chamfer radius of the box.
 func SCNBoxBoxWithWidthHeightLengthChamferRadius(width float64, height float64, length float64, chamferRadius float64) *SCNBox {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNBox), _sCNBoxSelBoxWithWidthHeightLengthChamferRadius, width, height, length, chamferRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNBoxFromID(_ret)
 }
 
@@ -131,4 +133,3 @@ func (o *SCNBox) ChamferSegmentCount() int {
 func (o *SCNBox) SetChamferSegmentCount(chamferSegmentCount int) {
 	o.Ptr().Send(_sCNBoxSelSetChamferSegmentCount, chamferSegmentCount)
 }
-

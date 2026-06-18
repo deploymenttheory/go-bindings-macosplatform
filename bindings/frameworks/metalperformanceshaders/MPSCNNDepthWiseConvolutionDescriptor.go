@@ -16,7 +16,7 @@ type MPSCNNDepthWiseConvolutionDescriptor struct {
 }
 
 var (
-	_clsMPSCNNDepthWiseConvolutionDescriptor = _objcClass("MPSCNNDepthWiseConvolutionDescriptor")
+	_clsMPSCNNDepthWiseConvolutionDescriptor                  = _objcClass("MPSCNNDepthWiseConvolutionDescriptor")
 	_mPSCNNDepthWiseConvolutionDescriptorSelChannelMultiplier = objc.RegisterName("channelMultiplier")
 )
 
@@ -35,4 +35,3 @@ func (o *MPSCNNDepthWiseConvolutionDescriptor) ChannelMultiplier() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNDepthWiseConvolutionDescriptorSelChannelMultiplier)
 	return _ret
 }
-

@@ -89,7 +89,9 @@ func (x *SymbolVariableColorEffect) EffectWithDimInactiveLayers() *SymbolVariabl
 	return &SymbolVariableColorEffect{inner: _r}
 }
 
-func (x *SymbolVariableColorEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+func (x *SymbolVariableColorEffect) asSymbolEffect() *raw.NSSymbolEffect {
+	return &x.inner.NSSymbolEffect
+}
 
 // SymbolVariableColorEffectable is the interface implemented by [SymbolVariableColorEffect], for mocking and DI.
 type SymbolVariableColorEffectable interface {
@@ -103,4 +105,3 @@ type SymbolVariableColorEffectable interface {
 }
 
 var _ SymbolVariableColorEffectable = (*SymbolVariableColorEffect)(nil)
-

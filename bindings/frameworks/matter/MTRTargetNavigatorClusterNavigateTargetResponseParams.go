@@ -18,14 +18,14 @@ type MTRTargetNavigatorClusterNavigateTargetResponseParams struct {
 }
 
 var (
-	_clsMTRTargetNavigatorClusterNavigateTargetResponseParams = _objcClass("MTRTargetNavigatorClusterNavigateTargetResponseParams")
+	_clsMTRTargetNavigatorClusterNavigateTargetResponseParams                           = _objcClass("MTRTargetNavigatorClusterNavigateTargetResponseParams")
 	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelData = objc.RegisterName("data")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRTargetNavigatorClusterNavigateTargetResponseParamsFromID(id objc.ID) *MTRTargetNavigatorClusterNavigateTargetResponseParams {
@@ -42,7 +42,9 @@ func MTRTargetNavigatorClusterNavigateTargetResponseParamsFromID(id objc.ID) *MT
 func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRTargetNavigatorClusterNavigateTargetResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterNavigateTargetResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) InitWithResponse
 
 func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterNavigateTargetResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetStatus(status
 
 func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterNavigateTargetResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetData(data *fo
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterNavigateTargetResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTargetNavigatorClusterNavigateTargetResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

@@ -17,8 +17,8 @@ type MPSNNPadGradient struct {
 }
 
 var (
-	_clsMPSNNPadGradient = _objcClass("MPSNNPadGradient")
-	_mPSNNPadGradientSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNPadGradient                    = _objcClass("MPSNNPadGradient")
+	_mPSNNPadGradientSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNPadGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -35,14 +35,17 @@ func MPSNNPadGradientFromID(id objc.ID) *MPSNNPadGradient {
 // @abstract   Initializes a MPSNNPadGradient filter @param      device  The MTLDevice on which this filter will be used @return     A valid MPSNNPadGradient object or nil, if failure.
 func (o *MPSNNPadGradient) InitWithDevice(device metal.MTLDevice) *MPSNNPadGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadGradientSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadGradientFromID(_ret)
 }
 
 // @abstract   NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSNNPadGradient. @param      device      The MTLDevice on which to make the MPSNNPadGradient. @return     A new MPSNNPadGradient object, or nil if failure.
 func (o *MPSNNPadGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNPadGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadGradientFromID(_ret)
 }
-

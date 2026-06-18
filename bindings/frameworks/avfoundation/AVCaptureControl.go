@@ -16,8 +16,8 @@ type AVCaptureControl struct {
 }
 
 var (
-	_clsAVCaptureControl = _objcClass("AVCaptureControl")
-	_aVCaptureControlSelIsEnabled = objc.RegisterName("isEnabled")
+	_clsAVCaptureControl           = _objcClass("AVCaptureControl")
+	_aVCaptureControlSelIsEnabled  = objc.RegisterName("isEnabled")
 	_aVCaptureControlSelSetEnabled = objc.RegisterName("setEnabled:")
 )
 
@@ -39,4 +39,3 @@ func (o *AVCaptureControl) IsEnabled() bool {
 func (o *AVCaptureControl) SetEnabled(enabled bool) {
 	o.Ptr().Send(_aVCaptureControlSelSetEnabled, enabled)
 }
-

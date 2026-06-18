@@ -16,20 +16,20 @@ type VTMotionBlurConfiguration struct {
 }
 
 var (
-	_clsVTMotionBlurConfiguration = _objcClass("VTMotionBlurConfiguration")
+	_clsVTMotionBlurConfiguration                                                                             = _objcClass("VTMotionBlurConfiguration")
 	_vTMotionBlurConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision = objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:")
-	_vTMotionBlurConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTMotionBlurConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTMotionBlurConfigurationSelUsePrecomputedFlow = objc.RegisterName("usePrecomputedFlow")
-	_vTMotionBlurConfigurationSelQualityPrioritization = objc.RegisterName("qualityPrioritization")
-	_vTMotionBlurConfigurationSelRevision = objc.RegisterName("revision")
-	_vTMotionBlurConfigurationSelSupportedRevisions = objc.RegisterName("supportedRevisions")
-	_vTMotionBlurConfigurationSelDefaultRevision = objc.RegisterName("defaultRevision")
-	_vTMotionBlurConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTMotionBlurConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTMotionBlurConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTMotionBlurConfigurationSelIsSupported = objc.RegisterName("isSupported")
-	_vTMotionBlurConfigurationSelProcessorSupported = objc.RegisterName("processorSupported")
+	_vTMotionBlurConfigurationSelFrameWidth                                                                   = objc.RegisterName("frameWidth")
+	_vTMotionBlurConfigurationSelFrameHeight                                                                  = objc.RegisterName("frameHeight")
+	_vTMotionBlurConfigurationSelUsePrecomputedFlow                                                           = objc.RegisterName("usePrecomputedFlow")
+	_vTMotionBlurConfigurationSelQualityPrioritization                                                        = objc.RegisterName("qualityPrioritization")
+	_vTMotionBlurConfigurationSelRevision                                                                     = objc.RegisterName("revision")
+	_vTMotionBlurConfigurationSelSupportedRevisions                                                           = objc.RegisterName("supportedRevisions")
+	_vTMotionBlurConfigurationSelDefaultRevision                                                              = objc.RegisterName("defaultRevision")
+	_vTMotionBlurConfigurationSelFrameSupportedPixelFormats                                                   = objc.RegisterName("frameSupportedPixelFormats")
+	_vTMotionBlurConfigurationSelSourcePixelBufferAttributes                                                  = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTMotionBlurConfigurationSelDestinationPixelBufferAttributes                                             = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTMotionBlurConfigurationSelIsSupported                                                                  = objc.RegisterName("isSupported")
+	_vTMotionBlurConfigurationSelProcessorSupported                                                           = objc.RegisterName("processorSupported")
 )
 
 func VTMotionBlurConfigurationFromID(id objc.ID) *VTMotionBlurConfiguration {
@@ -42,10 +42,12 @@ func VTMotionBlurConfigurationFromID(id objc.ID) *VTMotionBlurConfiguration {
 	return o
 }
 
-// Creates a new motion blur configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: Boolean value that indicates whether you will provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see ``VTMotionBlurConfigurationQualityPrioritization``. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new motion blur configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: Boolean value that indicates whether you will provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
 func (o *VTMotionBlurConfiguration) InitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTMotionBlurConfigurationQualityPrioritization, revision VTMotionBlurConfigurationRevision) *VTMotionBlurConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTMotionBlurConfigurationSelInitWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision, frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTMotionBlurConfigurationFromID(_ret)
 }
 
@@ -67,7 +69,7 @@ func (o *VTMotionBlurConfiguration) UsePrecomputedFlow() bool {
 	return _ret
 }
 
-// A parameter you use to control quality and performance levels. For more information about supported levels, see ``VTMotionBlurConfigurationQualityPrioritization``.
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“.
 func (o *VTMotionBlurConfiguration) QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization {
 	_ret := objc.Send[VTMotionBlurConfigurationQualityPrioritization](o.Ptr(), _vTMotionBlurConfigurationSelQualityPrioritization)
 	return _ret
@@ -82,7 +84,9 @@ func (o *VTMotionBlurConfiguration) Revision() VTMotionBlurConfigurationRevision
 // Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTMotionBlurConfigurationSupportedRevisions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVTMotionBlurConfiguration), _vTMotionBlurConfigurationSelSupportedRevisions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -98,13 +102,13 @@ func (o *VTMotionBlurConfiguration) FrameSupportedPixelFormats() *foundation.NSA
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTMotionBlurConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTMotionBlurConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTMotionBlurConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTMotionBlurConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -121,4 +125,3 @@ func VTMotionBlurConfigurationProcessorSupported() uint8 {
 	_ret := objc.Send[uint8](objc.ID(_clsVTMotionBlurConfiguration), _vTMotionBlurConfigurationSelProcessorSupported)
 	return _ret
 }
-

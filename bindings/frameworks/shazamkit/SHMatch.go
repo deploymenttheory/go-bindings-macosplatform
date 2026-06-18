@@ -16,8 +16,8 @@ type SHMatch struct {
 }
 
 var (
-	_clsSHMatch = _objcClass("SHMatch")
-	_sHMatchSelMediaItems = objc.RegisterName("mediaItems")
+	_clsSHMatch               = _objcClass("SHMatch")
+	_sHMatchSelMediaItems     = objc.RegisterName("mediaItems")
 	_sHMatchSelQuerySignature = objc.RegisterName("querySignature")
 )
 
@@ -34,14 +34,17 @@ func SHMatchFromID(id objc.ID) *SHMatch {
 // An array of the media items in the catalog that match the query signature, in order of the quality of the match.
 func (o *SHMatch) MediaItems() *foundation.NSArray[*SHMatchedMediaItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMatchSelMediaItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SHMatchedMediaItem](_ret)
 }
 
 // The query signature for the match.
 func (o *SHMatch) QuerySignature() *SHSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHMatchSelQuerySignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHSignatureFromID(_ret)
 }
-

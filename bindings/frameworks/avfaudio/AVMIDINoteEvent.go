@@ -15,16 +15,16 @@ type AVMIDINoteEvent struct {
 }
 
 var (
-	_clsAVMIDINoteEvent = _objcClass("AVMIDINoteEvent")
+	_clsAVMIDINoteEvent                                   = _objcClass("AVMIDINoteEvent")
 	_aVMIDINoteEventSelInitWithChannelKeyVelocityDuration = objc.RegisterName("initWithChannel:key:velocity:duration:")
-	_aVMIDINoteEventSelChannel = objc.RegisterName("channel")
-	_aVMIDINoteEventSelSetChannel = objc.RegisterName("setChannel:")
-	_aVMIDINoteEventSelKey = objc.RegisterName("key")
-	_aVMIDINoteEventSelSetKey = objc.RegisterName("setKey:")
-	_aVMIDINoteEventSelVelocity = objc.RegisterName("velocity")
-	_aVMIDINoteEventSelSetVelocity = objc.RegisterName("setVelocity:")
-	_aVMIDINoteEventSelDuration = objc.RegisterName("duration")
-	_aVMIDINoteEventSelSetDuration = objc.RegisterName("setDuration:")
+	_aVMIDINoteEventSelChannel                            = objc.RegisterName("channel")
+	_aVMIDINoteEventSelSetChannel                         = objc.RegisterName("setChannel:")
+	_aVMIDINoteEventSelKey                                = objc.RegisterName("key")
+	_aVMIDINoteEventSelSetKey                             = objc.RegisterName("setKey:")
+	_aVMIDINoteEventSelVelocity                           = objc.RegisterName("velocity")
+	_aVMIDINoteEventSelSetVelocity                        = objc.RegisterName("setVelocity:")
+	_aVMIDINoteEventSelDuration                           = objc.RegisterName("duration")
+	_aVMIDINoteEventSelSetDuration                        = objc.RegisterName("setDuration:")
 )
 
 func AVMIDINoteEventFromID(id objc.ID) *AVMIDINoteEvent {
@@ -40,7 +40,9 @@ func AVMIDINoteEventFromID(id objc.ID) *AVMIDINoteEvent {
 // @method initWithChannel:key:velocity:duration @abstract Initialize the event with a MIDI channel, key number, velocity and duration. @param channel The MIDI channel.  Range: 0-15. @param key The MIDI key number.  Range: 0-127. @param velocity The MIDI velocity.  Range: 0-127 with zero indicating a note-off event. @param duration The duration in beats for this note.  Range: Any non-negative number.
 func (o *AVMIDINoteEvent) InitWithChannelKeyVelocityDuration(channel uint, keyNum uint, velocity uint, duration float64) *AVMIDINoteEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDINoteEventSelInitWithChannelKeyVelocityDuration, channel, keyNum, velocity, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDINoteEventFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *AVMIDINoteEvent) Duration() float64 {
 func (o *AVMIDINoteEvent) SetDuration(duration float64) {
 	o.Ptr().Send(_aVMIDINoteEventSelSetDuration, duration)
 }
-

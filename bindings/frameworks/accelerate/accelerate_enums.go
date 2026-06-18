@@ -11,43 +11,43 @@ import (
 type BNNSActivationFunction int64
 
 const (
-	BNNSActivationFunctionIdentity BNNSActivationFunction = 0
-	BNNSActivationFunctionRectifiedLinear BNNSActivationFunction = 1
-	BNNSActivationFunctionLeakyRectifiedLinear BNNSActivationFunction = 2
-	BNNSActivationFunctionSigmoid BNNSActivationFunction = 3
-	BNNSActivationFunctionTanh BNNSActivationFunction = 4
-	BNNSActivationFunctionScaledTanh BNNSActivationFunction = 5
-	BNNSActivationFunctionAbs BNNSActivationFunction = 6
-	BNNSActivationFunctionLinear BNNSActivationFunction = 7
-	BNNSActivationFunctionClamp BNNSActivationFunction = 8
-	BNNSActivationFunctionIntegerLinearSaturate BNNSActivationFunction = 9
+	BNNSActivationFunctionIdentity                        BNNSActivationFunction = 0
+	BNNSActivationFunctionRectifiedLinear                 BNNSActivationFunction = 1
+	BNNSActivationFunctionLeakyRectifiedLinear            BNNSActivationFunction = 2
+	BNNSActivationFunctionSigmoid                         BNNSActivationFunction = 3
+	BNNSActivationFunctionTanh                            BNNSActivationFunction = 4
+	BNNSActivationFunctionScaledTanh                      BNNSActivationFunction = 5
+	BNNSActivationFunctionAbs                             BNNSActivationFunction = 6
+	BNNSActivationFunctionLinear                          BNNSActivationFunction = 7
+	BNNSActivationFunctionClamp                           BNNSActivationFunction = 8
+	BNNSActivationFunctionIntegerLinearSaturate           BNNSActivationFunction = 9
 	BNNSActivationFunctionIntegerLinearSaturatePerChannel BNNSActivationFunction = 10
-	BNNSActivationFunctionSoftmax BNNSActivationFunction = 11
-	BNNSActivationFunctionGELUApproximation BNNSActivationFunction = 12
-	BNNSActivationFunctionGumbel BNNSActivationFunction = 13
-	BNNSActivationFunctionGumbelMax BNNSActivationFunction = 14
-	BNNSActivationFunctionHardSigmoid BNNSActivationFunction = 15
-	BNNSActivationFunctionSoftplus BNNSActivationFunction = 16
-	BNNSActivationFunctionSoftsign BNNSActivationFunction = 17
-	BNNSActivationFunctionELU BNNSActivationFunction = 18
-	BNNSActivationFunctionClampedLeakyRectifiedLinear BNNSActivationFunction = 19
-	BNNSActivationFunctionLinearWithBias BNNSActivationFunction = 20
-	BNNSActivationFunctionLogSoftmax BNNSActivationFunction = 21
-	BNNSActivationFunctionLogSigmoid BNNSActivationFunction = 22
-	BNNSActivationFunctionSELU BNNSActivationFunction = 23
-	BNNSActivationFunctionCELU BNNSActivationFunction = 24
-	BNNSActivationFunctionHardShrink BNNSActivationFunction = 25
-	BNNSActivationFunctionSoftShrink BNNSActivationFunction = 26
-	BNNSActivationFunctionTanhShrink BNNSActivationFunction = 27
-	BNNSActivationFunctionThreshold BNNSActivationFunction = 28
-	BNNSActivationFunctionPReLUPerChannel BNNSActivationFunction = 29
-	BNNSActivationFunctionGELUApproximation2 BNNSActivationFunction = 30
-	BNNSActivationFunctionHardSwish BNNSActivationFunction = 30
-	BNNSActivationFunctionSiLU BNNSActivationFunction = 31
-	BNNSActivationFunctionReLU6 BNNSActivationFunction = 32
-	BNNSActivationFunctionErf BNNSActivationFunction = 33
-	BNNSActivationFunctionGELU BNNSActivationFunction = 34
-	BNNSActivationFunctionGELUApproximationSigmoid BNNSActivationFunction = 35
+	BNNSActivationFunctionSoftmax                         BNNSActivationFunction = 11
+	BNNSActivationFunctionGELUApproximation               BNNSActivationFunction = 12
+	BNNSActivationFunctionGumbel                          BNNSActivationFunction = 13
+	BNNSActivationFunctionGumbelMax                       BNNSActivationFunction = 14
+	BNNSActivationFunctionHardSigmoid                     BNNSActivationFunction = 15
+	BNNSActivationFunctionSoftplus                        BNNSActivationFunction = 16
+	BNNSActivationFunctionSoftsign                        BNNSActivationFunction = 17
+	BNNSActivationFunctionELU                             BNNSActivationFunction = 18
+	BNNSActivationFunctionClampedLeakyRectifiedLinear     BNNSActivationFunction = 19
+	BNNSActivationFunctionLinearWithBias                  BNNSActivationFunction = 20
+	BNNSActivationFunctionLogSoftmax                      BNNSActivationFunction = 21
+	BNNSActivationFunctionLogSigmoid                      BNNSActivationFunction = 22
+	BNNSActivationFunctionSELU                            BNNSActivationFunction = 23
+	BNNSActivationFunctionCELU                            BNNSActivationFunction = 24
+	BNNSActivationFunctionHardShrink                      BNNSActivationFunction = 25
+	BNNSActivationFunctionSoftShrink                      BNNSActivationFunction = 26
+	BNNSActivationFunctionTanhShrink                      BNNSActivationFunction = 27
+	BNNSActivationFunctionThreshold                       BNNSActivationFunction = 28
+	BNNSActivationFunctionPReLUPerChannel                 BNNSActivationFunction = 29
+	BNNSActivationFunctionGELUApproximation2              BNNSActivationFunction = 30
+	BNNSActivationFunctionHardSwish                       BNNSActivationFunction = 30
+	BNNSActivationFunctionSiLU                            BNNSActivationFunction = 31
+	BNNSActivationFunctionReLU6                           BNNSActivationFunction = 32
+	BNNSActivationFunctionErf                             BNNSActivationFunction = 33
+	BNNSActivationFunctionGELU                            BNNSActivationFunction = 34
+	BNNSActivationFunctionGELUApproximationSigmoid        BNNSActivationFunction = 35
 )
 
 func (e BNNSActivationFunction) String() string {
@@ -132,47 +132,47 @@ func (e BNNSActivationFunction) String() string {
 type BNNSArithmeticFunction int64
 
 const (
-	BNNSArithmeticAdd BNNSArithmeticFunction = 0
-	BNNSArithmeticSubtract BNNSArithmeticFunction = 1
-	BNNSArithmeticMultiply BNNSArithmeticFunction = 2
-	BNNSArithmeticDivide BNNSArithmeticFunction = 3
-	BNNSArithmeticSquareRoot BNNSArithmeticFunction = 4
+	BNNSArithmeticAdd                  BNNSArithmeticFunction = 0
+	BNNSArithmeticSubtract             BNNSArithmeticFunction = 1
+	BNNSArithmeticMultiply             BNNSArithmeticFunction = 2
+	BNNSArithmeticDivide               BNNSArithmeticFunction = 3
+	BNNSArithmeticSquareRoot           BNNSArithmeticFunction = 4
 	BNNSArithmeticReciprocalSquareRoot BNNSArithmeticFunction = 5
-	BNNSArithmeticCeil BNNSArithmeticFunction = 6
-	BNNSArithmeticFloor BNNSArithmeticFunction = 7
-	BNNSArithmeticRound BNNSArithmeticFunction = 8
-	BNNSArithmeticSin BNNSArithmeticFunction = 9
-	BNNSArithmeticCos BNNSArithmeticFunction = 10
-	BNNSArithmeticTan BNNSArithmeticFunction = 11
-	BNNSArithmeticAsin BNNSArithmeticFunction = 12
-	BNNSArithmeticAcos BNNSArithmeticFunction = 13
-	BNNSArithmeticAtan BNNSArithmeticFunction = 14
-	BNNSArithmeticSinh BNNSArithmeticFunction = 15
-	BNNSArithmeticCosh BNNSArithmeticFunction = 16
-	BNNSArithmeticTanh BNNSArithmeticFunction = 17
-	BNNSArithmeticAsinh BNNSArithmeticFunction = 18
-	BNNSArithmeticAcosh BNNSArithmeticFunction = 19
-	BNNSArithmeticAtanh BNNSArithmeticFunction = 20
-	BNNSArithmeticPow BNNSArithmeticFunction = 21
-	BNNSArithmeticExp BNNSArithmeticFunction = 22
-	BNNSArithmeticExp2 BNNSArithmeticFunction = 23
-	BNNSArithmeticLog BNNSArithmeticFunction = 24
-	BNNSArithmeticLog2 BNNSArithmeticFunction = 25
-	BNNSArithmeticMultiplyNoNaN BNNSArithmeticFunction = 26
-	BNNSArithmeticDivideNoNaN BNNSArithmeticFunction = 27
-	BNNSArithmeticMultiplyAdd BNNSArithmeticFunction = 28
-	BNNSArithmeticMinimum BNNSArithmeticFunction = 29
-	BNNSArithmeticMaximum BNNSArithmeticFunction = 30
-	BNNSArithmeticSelect BNNSArithmeticFunction = 31
-	BNNSArithmeticAbs BNNSArithmeticFunction = 32
-	BNNSArithmeticSign BNNSArithmeticFunction = 33
-	BNNSArithmeticNegate BNNSArithmeticFunction = 34
-	BNNSArithmeticReciprocal BNNSArithmeticFunction = 35
-	BNNSArithmeticSquare BNNSArithmeticFunction = 36
-	BNNSArithmeticFloorDivide BNNSArithmeticFunction = 37
-	BNNSArithmeticTruncDivide BNNSArithmeticFunction = 38
-	BNNSArithmeticTruncRemainder BNNSArithmeticFunction = 39
-	BNNSArithmeticErf BNNSArithmeticFunction = 40
+	BNNSArithmeticCeil                 BNNSArithmeticFunction = 6
+	BNNSArithmeticFloor                BNNSArithmeticFunction = 7
+	BNNSArithmeticRound                BNNSArithmeticFunction = 8
+	BNNSArithmeticSin                  BNNSArithmeticFunction = 9
+	BNNSArithmeticCos                  BNNSArithmeticFunction = 10
+	BNNSArithmeticTan                  BNNSArithmeticFunction = 11
+	BNNSArithmeticAsin                 BNNSArithmeticFunction = 12
+	BNNSArithmeticAcos                 BNNSArithmeticFunction = 13
+	BNNSArithmeticAtan                 BNNSArithmeticFunction = 14
+	BNNSArithmeticSinh                 BNNSArithmeticFunction = 15
+	BNNSArithmeticCosh                 BNNSArithmeticFunction = 16
+	BNNSArithmeticTanh                 BNNSArithmeticFunction = 17
+	BNNSArithmeticAsinh                BNNSArithmeticFunction = 18
+	BNNSArithmeticAcosh                BNNSArithmeticFunction = 19
+	BNNSArithmeticAtanh                BNNSArithmeticFunction = 20
+	BNNSArithmeticPow                  BNNSArithmeticFunction = 21
+	BNNSArithmeticExp                  BNNSArithmeticFunction = 22
+	BNNSArithmeticExp2                 BNNSArithmeticFunction = 23
+	BNNSArithmeticLog                  BNNSArithmeticFunction = 24
+	BNNSArithmeticLog2                 BNNSArithmeticFunction = 25
+	BNNSArithmeticMultiplyNoNaN        BNNSArithmeticFunction = 26
+	BNNSArithmeticDivideNoNaN          BNNSArithmeticFunction = 27
+	BNNSArithmeticMultiplyAdd          BNNSArithmeticFunction = 28
+	BNNSArithmeticMinimum              BNNSArithmeticFunction = 29
+	BNNSArithmeticMaximum              BNNSArithmeticFunction = 30
+	BNNSArithmeticSelect               BNNSArithmeticFunction = 31
+	BNNSArithmeticAbs                  BNNSArithmeticFunction = 32
+	BNNSArithmeticSign                 BNNSArithmeticFunction = 33
+	BNNSArithmeticNegate               BNNSArithmeticFunction = 34
+	BNNSArithmeticReciprocal           BNNSArithmeticFunction = 35
+	BNNSArithmeticSquare               BNNSArithmeticFunction = 36
+	BNNSArithmeticFloorDivide          BNNSArithmeticFunction = 37
+	BNNSArithmeticTruncDivide          BNNSArithmeticFunction = 38
+	BNNSArithmeticTruncRemainder       BNNSArithmeticFunction = 39
+	BNNSArithmeticErf                  BNNSArithmeticFunction = 40
 )
 
 func (e BNNSArithmeticFunction) String() string {
@@ -267,10 +267,10 @@ func (e BNNSArithmeticFunction) String() string {
 type BNNSBoxCoordinateMode int64
 
 const (
-	BNNSCornersHeightFirst BNNSBoxCoordinateMode = 0
-	BNNSCornersWidthFirst BNNSBoxCoordinateMode = 1
+	BNNSCornersHeightFirst    BNNSBoxCoordinateMode = 0
+	BNNSCornersWidthFirst     BNNSBoxCoordinateMode = 1
 	BNNSCenterSizeHeightFirst BNNSBoxCoordinateMode = 2
-	BNNSCenterSizeWidthFirst BNNSBoxCoordinateMode = 3
+	BNNSCenterSizeWidthFirst  BNNSBoxCoordinateMode = 3
 )
 
 func (e BNNSBoxCoordinateMode) String() string {
@@ -291,34 +291,34 @@ func (e BNNSBoxCoordinateMode) String() string {
 type BNNSDataLayout int64
 
 const (
-	BNNSDataLayoutVector BNNSDataLayout = 65536
-	BNNSDataLayout1DLastMajor BNNSDataLayout = 98304
-	BNNSDataLayout1DFirstMajor BNNSDataLayout = 98305
-	BNNSDataLayoutRowMajorMatrix BNNSDataLayout = 131072
-	BNNSDataLayoutColumnMajorMatrix BNNSDataLayout = 131073
-	BNNSDataLayout2DLastMajor BNNSDataLayout = 163840
-	BNNSDataLayout2DFirstMajor BNNSDataLayout = 163841
-	BNNSDataLayoutFullyConnectedSparse BNNSDataLayout = 135169
-	BNNSDataLayoutImageCHW BNNSDataLayout = 196608
-	BNNSDataLayoutSNE BNNSDataLayout = 196609
-	BNNSDataLayoutNSE BNNSDataLayout = 196610
-	BNNSDataLayoutMHA_DHK BNNSDataLayout = 196611
-	BNNSDataLayout3DLastMajor BNNSDataLayout = 229376
-	BNNSDataLayout3DFirstMajor BNNSDataLayout = 229377
-	BNNSDataLayoutConvolutionWeightsOIHW BNNSDataLayout = 262144
-	BNNSDataLayoutConvolutionWeightsOIHrWr BNNSDataLayout = 262145
-	BNNSDataLayoutConvolutionWeightsIOHrWr BNNSDataLayout = 262146
+	BNNSDataLayoutVector                        BNNSDataLayout = 65536
+	BNNSDataLayout1DLastMajor                   BNNSDataLayout = 98304
+	BNNSDataLayout1DFirstMajor                  BNNSDataLayout = 98305
+	BNNSDataLayoutRowMajorMatrix                BNNSDataLayout = 131072
+	BNNSDataLayoutColumnMajorMatrix             BNNSDataLayout = 131073
+	BNNSDataLayout2DLastMajor                   BNNSDataLayout = 163840
+	BNNSDataLayout2DFirstMajor                  BNNSDataLayout = 163841
+	BNNSDataLayoutFullyConnectedSparse          BNNSDataLayout = 135169
+	BNNSDataLayoutImageCHW                      BNNSDataLayout = 196608
+	BNNSDataLayoutSNE                           BNNSDataLayout = 196609
+	BNNSDataLayoutNSE                           BNNSDataLayout = 196610
+	BNNSDataLayoutMHA_DHK                       BNNSDataLayout = 196611
+	BNNSDataLayout3DLastMajor                   BNNSDataLayout = 229376
+	BNNSDataLayout3DFirstMajor                  BNNSDataLayout = 229377
+	BNNSDataLayoutConvolutionWeightsOIHW        BNNSDataLayout = 262144
+	BNNSDataLayoutConvolutionWeightsOIHrWr      BNNSDataLayout = 262145
+	BNNSDataLayoutConvolutionWeightsIOHrWr      BNNSDataLayout = 262146
 	BNNSDataLayoutConvolutionWeightsOIHW_Pack32 BNNSDataLayout = 262160
-	BNNSDataLayout4DLastMajor BNNSDataLayout = 294912
-	BNNSDataLayout4DFirstMajor BNNSDataLayout = 294913
-	BNNSDataLayout5DLastMajor BNNSDataLayout = 360448
-	BNNSDataLayout5DFirstMajor BNNSDataLayout = 360449
-	BNNSDataLayout6DLastMajor BNNSDataLayout = 425984
-	BNNSDataLayout6DFirstMajor BNNSDataLayout = 425985
-	BNNSDataLayout7DLastMajor BNNSDataLayout = 491520
-	BNNSDataLayout7DFirstMajor BNNSDataLayout = 491521
-	BNNSDataLayout8DLastMajor BNNSDataLayout = 557056
-	BNNSDataLayout8DFirstMajor BNNSDataLayout = 557057
+	BNNSDataLayout4DLastMajor                   BNNSDataLayout = 294912
+	BNNSDataLayout4DFirstMajor                  BNNSDataLayout = 294913
+	BNNSDataLayout5DLastMajor                   BNNSDataLayout = 360448
+	BNNSDataLayout5DFirstMajor                  BNNSDataLayout = 360449
+	BNNSDataLayout6DLastMajor                   BNNSDataLayout = 425984
+	BNNSDataLayout6DFirstMajor                  BNNSDataLayout = 425985
+	BNNSDataLayout7DLastMajor                   BNNSDataLayout = 491520
+	BNNSDataLayout7DFirstMajor                  BNNSDataLayout = 491521
+	BNNSDataLayout8DLastMajor                   BNNSDataLayout = 557056
+	BNNSDataLayout8DFirstMajor                  BNNSDataLayout = 557057
 )
 
 func (e BNNSDataLayout) String() string {
@@ -387,35 +387,35 @@ func (e BNNSDataLayout) String() string {
 type BNNSDataType int64
 
 const (
-	BNNSDataTypeFloatBit BNNSDataType = 65536
-	BNNSDataTypeFloat16 BNNSDataType = 65552
-	BNNSDataTypeFloat32 BNNSDataType = 65568
-	BNNSDataTypeBFloat16 BNNSDataType = 98320
-	BNNSDataTypeIntBit BNNSDataType = 131072
-	BNNSDataTypeInt1 BNNSDataType = 131073
-	BNNSDataTypeInt2 BNNSDataType = 131074
-	BNNSDataTypeInt4 BNNSDataType = 131076
-	BNNSDataTypeInt8 BNNSDataType = 131080
-	BNNSDataTypeInt16 BNNSDataType = 131088
-	BNNSDataTypeInt32 BNNSDataType = 131104
-	BNNSDataTypeInt64 BNNSDataType = 131136
-	BNNSDataTypeUIntBit BNNSDataType = 262144
-	BNNSDataTypeUInt1 BNNSDataType = 262145
-	BNNSDataTypeUInt2 BNNSDataType = 262146
-	BNNSDataTypeUInt3 BNNSDataType = 262147
-	BNNSDataTypeUInt4 BNNSDataType = 262148
-	BNNSDataTypeUInt6 BNNSDataType = 262150
-	BNNSDataTypeUInt8 BNNSDataType = 262152
-	BNNSDataTypeUInt16 BNNSDataType = 262160
-	BNNSDataTypeUInt32 BNNSDataType = 262176
-	BNNSDataTypeUInt64 BNNSDataType = 262208
-	BNNSDataTypeIndexedBit BNNSDataType = 524288
-	BNNSDataTypeIndexed1 BNNSDataType = 524289
-	BNNSDataTypeIndexed2 BNNSDataType = 524290
-	BNNSDataTypeIndexed4 BNNSDataType = 524292
-	BNNSDataTypeIndexed8 BNNSDataType = 524296
+	BNNSDataTypeFloatBit         BNNSDataType = 65536
+	BNNSDataTypeFloat16          BNNSDataType = 65552
+	BNNSDataTypeFloat32          BNNSDataType = 65568
+	BNNSDataTypeBFloat16         BNNSDataType = 98320
+	BNNSDataTypeIntBit           BNNSDataType = 131072
+	BNNSDataTypeInt1             BNNSDataType = 131073
+	BNNSDataTypeInt2             BNNSDataType = 131074
+	BNNSDataTypeInt4             BNNSDataType = 131076
+	BNNSDataTypeInt8             BNNSDataType = 131080
+	BNNSDataTypeInt16            BNNSDataType = 131088
+	BNNSDataTypeInt32            BNNSDataType = 131104
+	BNNSDataTypeInt64            BNNSDataType = 131136
+	BNNSDataTypeUIntBit          BNNSDataType = 262144
+	BNNSDataTypeUInt1            BNNSDataType = 262145
+	BNNSDataTypeUInt2            BNNSDataType = 262146
+	BNNSDataTypeUInt3            BNNSDataType = 262147
+	BNNSDataTypeUInt4            BNNSDataType = 262148
+	BNNSDataTypeUInt6            BNNSDataType = 262150
+	BNNSDataTypeUInt8            BNNSDataType = 262152
+	BNNSDataTypeUInt16           BNNSDataType = 262160
+	BNNSDataTypeUInt32           BNNSDataType = 262176
+	BNNSDataTypeUInt64           BNNSDataType = 262208
+	BNNSDataTypeIndexedBit       BNNSDataType = 524288
+	BNNSDataTypeIndexed1         BNNSDataType = 524289
+	BNNSDataTypeIndexed2         BNNSDataType = 524290
+	BNNSDataTypeIndexed4         BNNSDataType = 524292
+	BNNSDataTypeIndexed8         BNNSDataType = 524296
 	BNNSDataTypeMiscellaneousBit BNNSDataType = 1048576
-	BNNSDataTypeBoolean BNNSDataType = 1048584
+	BNNSDataTypeBoolean          BNNSDataType = 1048584
 )
 
 func (e BNNSDataType) String() string {
@@ -486,8 +486,8 @@ func (e BNNSDataType) String() string {
 type BNNSDescriptorType int64
 
 const (
-	BNNSConstant BNNSDescriptorType = 0
-	BNNSSample BNNSDescriptorType = 1
+	BNNSConstant  BNNSDescriptorType = 0
+	BNNSSample    BNNSDescriptorType = 1
 	BNNSParameter BNNSDescriptorType = 2
 )
 
@@ -522,15 +522,15 @@ func (e BNNSEmbeddingFlags) String() string {
 type BNNSFilterType int64
 
 const (
-	BNNSConvolution BNNSFilterType = 0
-	BNNSFullyConnected BNNSFilterType = 1
-	BNNSBatchNorm BNNSFilterType = 2
-	BNNSInstanceNorm BNNSFilterType = 3
-	BNNSLayerNorm BNNSFilterType = 4
-	BNNSGroupNorm BNNSFilterType = 5
+	BNNSConvolution           BNNSFilterType = 0
+	BNNSFullyConnected        BNNSFilterType = 1
+	BNNSBatchNorm             BNNSFilterType = 2
+	BNNSInstanceNorm          BNNSFilterType = 3
+	BNNSLayerNorm             BNNSFilterType = 4
+	BNNSGroupNorm             BNNSFilterType = 5
 	BNNSTransposedConvolution BNNSFilterType = 6
-	BNNSQuantization BNNSFilterType = 7
-	BNNSArithmetic BNNSFilterType = 8
+	BNNSQuantization          BNNSFilterType = 7
+	BNNSArithmetic            BNNSFilterType = 8
 )
 
 func (e BNNSFilterType) String() string {
@@ -576,8 +576,8 @@ func (e BNNSFlags) String() string {
 type BNNSGraphArgumentIntent int64
 
 const (
-	BNNSGraphArgumentIntentIn BNNSGraphArgumentIntent = 1
-	BNNSGraphArgumentIntentOut BNNSGraphArgumentIntent = 2
+	BNNSGraphArgumentIntentIn    BNNSGraphArgumentIntent = 1
+	BNNSGraphArgumentIntentOut   BNNSGraphArgumentIntent = 2
 	BNNSGraphArgumentIntentInOut BNNSGraphArgumentIntent = 3
 )
 
@@ -598,7 +598,7 @@ type BNNSGraphArgumentType int64
 
 const (
 	BNNSGraphArgumentTypePointer BNNSGraphArgumentType = 0
-	BNNSGraphArgumentTypeTensor BNNSGraphArgumentType = 2
+	BNNSGraphArgumentTypeTensor  BNNSGraphArgumentType = 2
 )
 
 func (e BNNSGraphArgumentType) String() string {
@@ -615,10 +615,10 @@ func (e BNNSGraphArgumentType) String() string {
 type BNNSGraphMessageLevel int64
 
 const (
-	BNNSGraphMessageLevelInfo BNNSGraphMessageLevel = 1
+	BNNSGraphMessageLevelInfo        BNNSGraphMessageLevel = 1
 	BNNSGraphMessageLevelUnsupported BNNSGraphMessageLevel = 2
-	BNNSGraphMessageLevelWarning BNNSGraphMessageLevel = 4
-	BNNSGraphMessageLevelError BNNSGraphMessageLevel = 8
+	BNNSGraphMessageLevelWarning     BNNSGraphMessageLevel = 4
+	BNNSGraphMessageLevelError       BNNSGraphMessageLevel = 8
 )
 
 func (e BNNSGraphMessageLevel) String() string {
@@ -640,7 +640,7 @@ type BNNSGraphOptimizationPreference int64
 
 const (
 	BNNSGraphOptimizationPreferencePerformance BNNSGraphOptimizationPreference = 0
-	BNNSGraphOptimizationPreferenceIRSize BNNSGraphOptimizationPreference = 1
+	BNNSGraphOptimizationPreferenceIRSize      BNNSGraphOptimizationPreference = 1
 )
 
 func (e BNNSGraphOptimizationPreference) String() string {
@@ -658,7 +658,7 @@ type BNNSInterpolationMethod int64
 
 const (
 	BNNSInterpolationMethodNearest BNNSInterpolationMethod = 0
-	BNNSInterpolationMethodLinear BNNSInterpolationMethod = 1
+	BNNSInterpolationMethodLinear  BNNSInterpolationMethod = 1
 )
 
 func (e BNNSInterpolationMethod) String() string {
@@ -675,7 +675,7 @@ func (e BNNSInterpolationMethod) String() string {
 type BNNSLayerFlags int64
 
 const (
-	BNNSLayerFlagsLSTMBidirectional BNNSLayerFlags = 1
+	BNNSLayerFlagsLSTMBidirectional      BNNSLayerFlags = 1
 	BNNSLayerFlagsLSTMDefaultActivations BNNSLayerFlags = 2
 )
 
@@ -693,11 +693,11 @@ func (e BNNSLayerFlags) String() string {
 type BNNSLinearSamplingMode int64
 
 const (
-	BNNSLinearSamplingDefault BNNSLinearSamplingMode = 0
-	BNNSLinearSamplingAlignCorners BNNSLinearSamplingMode = 1
-	BNNSLinearSamplingUnalignCorners BNNSLinearSamplingMode = 2
+	BNNSLinearSamplingDefault            BNNSLinearSamplingMode = 0
+	BNNSLinearSamplingAlignCorners       BNNSLinearSamplingMode = 1
+	BNNSLinearSamplingUnalignCorners     BNNSLinearSamplingMode = 2
 	BNNSLinearSamplingStrictAlignCorners BNNSLinearSamplingMode = 3
-	BNNSLinearSamplingOffsetCorners BNNSLinearSamplingMode = 4
+	BNNSLinearSamplingOffsetCorners      BNNSLinearSamplingMode = 4
 )
 
 func (e BNNSLinearSamplingMode) String() string {
@@ -720,15 +720,15 @@ func (e BNNSLinearSamplingMode) String() string {
 type BNNSLossFunction int64
 
 const (
-	BNNSLossFunctionSoftmaxCrossEntropy BNNSLossFunction = 1
-	BNNSLossFunctionSigmoidCrossEntropy BNNSLossFunction = 2
-	BNNSLossFunctionMeanSquareError BNNSLossFunction = 3
-	BNNSLossFunctionHuber BNNSLossFunction = 4
-	BNNSLossFunctionYolo BNNSLossFunction = 5
-	BNNSLossFunctionLog BNNSLossFunction = 6
-	BNNSLossFunctionCosineDistance BNNSLossFunction = 7
-	BNNSLossFunctionHinge BNNSLossFunction = 8
-	BNNSLossFunctionMeanAbsoluteError BNNSLossFunction = 9
+	BNNSLossFunctionSoftmaxCrossEntropy     BNNSLossFunction = 1
+	BNNSLossFunctionSigmoidCrossEntropy     BNNSLossFunction = 2
+	BNNSLossFunctionMeanSquareError         BNNSLossFunction = 3
+	BNNSLossFunctionHuber                   BNNSLossFunction = 4
+	BNNSLossFunctionYolo                    BNNSLossFunction = 5
+	BNNSLossFunctionLog                     BNNSLossFunction = 6
+	BNNSLossFunctionCosineDistance          BNNSLossFunction = 7
+	BNNSLossFunctionHinge                   BNNSLossFunction = 8
+	BNNSLossFunctionMeanAbsoluteError       BNNSLossFunction = 9
 	BNNSLossFunctionCategoricalCrossEntropy BNNSLossFunction = 10
 )
 
@@ -762,10 +762,10 @@ func (e BNNSLossFunction) String() string {
 type BNNSLossReductionFunction int64
 
 const (
-	BNNSLossReductionNone BNNSLossReductionFunction = 0
-	BNNSLossReductionSum BNNSLossReductionFunction = 1
-	BNNSLossReductionWeightedMean BNNSLossReductionFunction = 2
-	BNNSLossReductionMean BNNSLossReductionFunction = 3
+	BNNSLossReductionNone              BNNSLossReductionFunction = 0
+	BNNSLossReductionSum               BNNSLossReductionFunction = 1
+	BNNSLossReductionWeightedMean      BNNSLossReductionFunction = 2
+	BNNSLossReductionMean              BNNSLossReductionFunction = 3
 	BNNSLossReductionNonZeroWeightMean BNNSLossReductionFunction = 4
 )
 
@@ -789,7 +789,7 @@ func (e BNNSLossReductionFunction) String() string {
 type BNNSNDArrayFlags int64
 
 const (
-	BNNSNDArrayFlagBackpropSet BNNSNDArrayFlags = 0
+	BNNSNDArrayFlagBackpropSet        BNNSNDArrayFlags = 0
 	BNNSNDArrayFlagBackpropAccumulate BNNSNDArrayFlags = 1
 )
 
@@ -822,9 +822,9 @@ func (e BNNSNormType) String() string {
 type BNNSOptimizerClippingFunction int64
 
 const (
-	BNNSOptimizerClippingNone BNNSOptimizerClippingFunction = 0
-	BNNSOptimizerClippingByValue BNNSOptimizerClippingFunction = 1
-	BNNSOptimizerClippingByNorm BNNSOptimizerClippingFunction = 2
+	BNNSOptimizerClippingNone         BNNSOptimizerClippingFunction = 0
+	BNNSOptimizerClippingByValue      BNNSOptimizerClippingFunction = 1
+	BNNSOptimizerClippingByNorm       BNNSOptimizerClippingFunction = 2
 	BNNSOptimizerClippingByGlobalNorm BNNSOptimizerClippingFunction = 3
 )
 
@@ -846,17 +846,17 @@ func (e BNNSOptimizerClippingFunction) String() string {
 type BNNSOptimizerFunction int64
 
 const (
-	BNNSOptimizerFunctionSGDMomentum BNNSOptimizerFunction = 1
-	BNNSOptimizerFunctionAdam BNNSOptimizerFunction = 2
-	BNNSOptimizerFunctionRMSProp BNNSOptimizerFunction = 3
-	BNNSOptimizerFunctionAdamW BNNSOptimizerFunction = 4
-	BNNSOptimizerFunctionAdamAMSGrad BNNSOptimizerFunction = 5
-	BNNSOptimizerFunctionAdamWAMSGrad BNNSOptimizerFunction = 6
-	BNNSOptimizerFunctionSGDMomentumWithClipping BNNSOptimizerFunction = 7
-	BNNSOptimizerFunctionAdamWithClipping BNNSOptimizerFunction = 8
-	BNNSOptimizerFunctionRMSPropWithClipping BNNSOptimizerFunction = 9
-	BNNSOptimizerFunctionAdamWWithClipping BNNSOptimizerFunction = 10
-	BNNSOptimizerFunctionAdamAMSGradWithClipping BNNSOptimizerFunction = 11
+	BNNSOptimizerFunctionSGDMomentum              BNNSOptimizerFunction = 1
+	BNNSOptimizerFunctionAdam                     BNNSOptimizerFunction = 2
+	BNNSOptimizerFunctionRMSProp                  BNNSOptimizerFunction = 3
+	BNNSOptimizerFunctionAdamW                    BNNSOptimizerFunction = 4
+	BNNSOptimizerFunctionAdamAMSGrad              BNNSOptimizerFunction = 5
+	BNNSOptimizerFunctionAdamWAMSGrad             BNNSOptimizerFunction = 6
+	BNNSOptimizerFunctionSGDMomentumWithClipping  BNNSOptimizerFunction = 7
+	BNNSOptimizerFunctionAdamWithClipping         BNNSOptimizerFunction = 8
+	BNNSOptimizerFunctionRMSPropWithClipping      BNNSOptimizerFunction = 9
+	BNNSOptimizerFunctionAdamWWithClipping        BNNSOptimizerFunction = 10
+	BNNSOptimizerFunctionAdamAMSGradWithClipping  BNNSOptimizerFunction = 11
 	BNNSOptimizerFunctionAdamWAMSGradWithClipping BNNSOptimizerFunction = 12
 )
 
@@ -895,8 +895,8 @@ type BNNSOptimizerRegularizationFunction int64
 
 const (
 	BNNSOptimizerRegularizationNone BNNSOptimizerRegularizationFunction = 0
-	BNNSOptimizerRegularizationL1 BNNSOptimizerRegularizationFunction = 1
-	BNNSOptimizerRegularizationL2 BNNSOptimizerRegularizationFunction = 2
+	BNNSOptimizerRegularizationL1   BNNSOptimizerRegularizationFunction = 1
+	BNNSOptimizerRegularizationL2   BNNSOptimizerRegularizationFunction = 2
 )
 
 func (e BNNSOptimizerRegularizationFunction) String() string {
@@ -936,8 +936,8 @@ func (e BNNSOptimizerSGDMomentumVariant) String() string {
 type BNNSPaddingMode int64
 
 const (
-	BNNSPaddingModeConstant BNNSPaddingMode = 0
-	BNNSPaddingModeReflect BNNSPaddingMode = 1
+	BNNSPaddingModeConstant  BNNSPaddingMode = 0
+	BNNSPaddingModeReflect   BNNSPaddingMode = 1
 	BNNSPaddingModeSymmetric BNNSPaddingMode = 2
 )
 
@@ -958,7 +958,7 @@ type BNNSPointerSpecifier int64
 
 const (
 	BNNSPointerSpecifierAlpha BNNSPointerSpecifier = 0
-	BNNSPointerSpecifierBeta BNNSPointerSpecifier = 1
+	BNNSPointerSpecifierBeta  BNNSPointerSpecifier = 1
 )
 
 func (e BNNSPointerSpecifier) String() string {
@@ -975,12 +975,12 @@ func (e BNNSPointerSpecifier) String() string {
 type BNNSPoolingFunction int64
 
 const (
-	BNNSPoolingFunctionMax BNNSPoolingFunction = 0
+	BNNSPoolingFunctionMax                        BNNSPoolingFunction = 0
 	BNNSPoolingFunctionAverageCountIncludePadding BNNSPoolingFunction = 1
 	BNNSPoolingFunctionAverageCountExcludePadding BNNSPoolingFunction = 2
-	BNNSPoolingFunctionUnMax BNNSPoolingFunction = 3
-	BNNSPoolingFunctionL2Norm BNNSPoolingFunction = 4
-	BNNSPoolingFunctionAverage BNNSPoolingFunction = 1
+	BNNSPoolingFunctionUnMax                      BNNSPoolingFunction = 3
+	BNNSPoolingFunctionL2Norm                     BNNSPoolingFunction = 4
+	BNNSPoolingFunctionAverage                    BNNSPoolingFunction = 1
 )
 
 func (e BNNSPoolingFunction) String() string {
@@ -1003,7 +1003,7 @@ func (e BNNSPoolingFunction) String() string {
 type BNNSQuantizerFunction int64
 
 const (
-	BNNSQuantizerFunctionQuantize BNNSQuantizerFunction = 0
+	BNNSQuantizerFunctionQuantize   BNNSQuantizerFunction = 0
 	BNNSQuantizerFunctionDequantize BNNSQuantizerFunction = 1
 )
 
@@ -1036,25 +1036,25 @@ func (e BNNSRandomGeneratorMethod) String() string {
 type BNNSReduceFunction int64
 
 const (
-	BNNSReduceFunctionMax BNNSReduceFunction = 0
-	BNNSReduceFunctionMin BNNSReduceFunction = 1
-	BNNSReduceFunctionArgMax BNNSReduceFunction = 2
-	BNNSReduceFunctionArgMin BNNSReduceFunction = 3
-	BNNSReduceFunctionMean BNNSReduceFunction = 4
+	BNNSReduceFunctionMax         BNNSReduceFunction = 0
+	BNNSReduceFunctionMin         BNNSReduceFunction = 1
+	BNNSReduceFunctionArgMax      BNNSReduceFunction = 2
+	BNNSReduceFunctionArgMin      BNNSReduceFunction = 3
+	BNNSReduceFunctionMean        BNNSReduceFunction = 4
 	BNNSReduceFunctionMeanNonZero BNNSReduceFunction = 5
-	BNNSReduceFunctionSum BNNSReduceFunction = 6
-	BNNSReduceFunctionSumSquare BNNSReduceFunction = 7
-	BNNSReduceFunctionSumLog BNNSReduceFunction = 8
-	BNNSReduceFunctionL1Norm BNNSReduceFunction = 9
-	BNNSReduceFunctionLogicalOr BNNSReduceFunction = 10
-	BNNSReduceFunctionLogicalAnd BNNSReduceFunction = 11
-	BNNSReduceFunctionL2Norm BNNSReduceFunction = 12
-	BNNSReduceFunctionLogSumExp BNNSReduceFunction = 13
-	BNNSReduceFunctionProduct BNNSReduceFunction = 14
-	BNNSReduceFunctionNone BNNSReduceFunction = 15
-	BNNSReduceFunctionLogSum BNNSReduceFunction = 16
-	BNNSReduceFunctionAny BNNSReduceFunction = 10
-	BNNSReduceFunctionAll BNNSReduceFunction = 11
+	BNNSReduceFunctionSum         BNNSReduceFunction = 6
+	BNNSReduceFunctionSumSquare   BNNSReduceFunction = 7
+	BNNSReduceFunctionSumLog      BNNSReduceFunction = 8
+	BNNSReduceFunctionL1Norm      BNNSReduceFunction = 9
+	BNNSReduceFunctionLogicalOr   BNNSReduceFunction = 10
+	BNNSReduceFunctionLogicalAnd  BNNSReduceFunction = 11
+	BNNSReduceFunctionL2Norm      BNNSReduceFunction = 12
+	BNNSReduceFunctionLogSumExp   BNNSReduceFunction = 13
+	BNNSReduceFunctionProduct     BNNSReduceFunction = 14
+	BNNSReduceFunctionNone        BNNSReduceFunction = 15
+	BNNSReduceFunctionLogSum      BNNSReduceFunction = 16
+	BNNSReduceFunctionAny         BNNSReduceFunction = 10
+	BNNSReduceFunctionAll         BNNSReduceFunction = 11
 )
 
 func (e BNNSReduceFunction) String() string {
@@ -1101,18 +1101,18 @@ func (e BNNSReduceFunction) String() string {
 type BNNSRelationalOperator int64
 
 const (
-	BNNSRelationalOperatorEqual BNNSRelationalOperator = 0
-	BNNSRelationalOperatorLess BNNSRelationalOperator = 1
-	BNNSRelationalOperatorLessEqual BNNSRelationalOperator = 2
-	BNNSRelationalOperatorGreater BNNSRelationalOperator = 3
+	BNNSRelationalOperatorEqual        BNNSRelationalOperator = 0
+	BNNSRelationalOperatorLess         BNNSRelationalOperator = 1
+	BNNSRelationalOperatorLessEqual    BNNSRelationalOperator = 2
+	BNNSRelationalOperatorGreater      BNNSRelationalOperator = 3
 	BNNSRelationalOperatorGreaterEqual BNNSRelationalOperator = 4
-	BNNSRelationalOperatorNotEqual BNNSRelationalOperator = 5
-	BNNSRelationalOperatorLogicalAND BNNSRelationalOperator = 6
-	BNNSRelationalOperatorLogicalOR BNNSRelationalOperator = 7
-	BNNSRelationalOperatorLogicalNOT BNNSRelationalOperator = 8
-	BNNSRelationalOperatorLogicalNAND BNNSRelationalOperator = 9
-	BNNSRelationalOperatorLogicalNOR BNNSRelationalOperator = 10
-	BNNSRelationalOperatorLogicalXOR BNNSRelationalOperator = 11
+	BNNSRelationalOperatorNotEqual     BNNSRelationalOperator = 5
+	BNNSRelationalOperatorLogicalAND   BNNSRelationalOperator = 6
+	BNNSRelationalOperatorLogicalOR    BNNSRelationalOperator = 7
+	BNNSRelationalOperatorLogicalNOT   BNNSRelationalOperator = 8
+	BNNSRelationalOperatorLogicalNAND  BNNSRelationalOperator = 9
+	BNNSRelationalOperatorLogicalNOR   BNNSRelationalOperator = 10
+	BNNSRelationalOperatorLogicalXOR   BNNSRelationalOperator = 11
 )
 
 func (e BNNSRelationalOperator) String() string {
@@ -1149,10 +1149,10 @@ func (e BNNSRelationalOperator) String() string {
 type BNNSShuffleType int64
 
 const (
-	BNNSShuffleTypePixelShuffleNCHW BNNSShuffleType = 0
+	BNNSShuffleTypePixelShuffleNCHW   BNNSShuffleType = 0
 	BNNSShuffleTypePixelUnshuffleNCHW BNNSShuffleType = 1
-	BNNSShuffleTypeDepthToSpaceNCHW BNNSShuffleType = 2
-	BNNSShuffleTypeSpaceToDepthNCHW BNNSShuffleType = 3
+	BNNSShuffleTypeDepthToSpaceNCHW   BNNSShuffleType = 2
+	BNNSShuffleTypeSpaceToDepthNCHW   BNNSShuffleType = 3
 )
 
 func (e BNNSShuffleType) String() string {
@@ -1203,10 +1203,10 @@ func (e BNNSTargetSystem) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -1231,7 +1231,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -1249,8 +1249,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -1286,8 +1286,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -1307,7 +1307,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -1340,17 +1340,17 @@ func (e SparseControl_t) String() string {
 type SparseFactorization_t int64
 
 const (
-	SparseFactorizationCholesky SparseFactorization_t = 0
-	SparseFactorizationLDLT SparseFactorization_t = 1
+	SparseFactorizationCholesky      SparseFactorization_t = 0
+	SparseFactorizationLDLT          SparseFactorization_t = 1
 	SparseFactorizationLDLTUnpivoted SparseFactorization_t = 2
-	SparseFactorizationLDLTSBK SparseFactorization_t = 3
-	SparseFactorizationLDLTTPP SparseFactorization_t = 4
-	SparseFactorizationQR SparseFactorization_t = 40
-	SparseFactorizationCholeskyAtA SparseFactorization_t = 41
-	SparseFactorizationLU SparseFactorization_t = 80
-	SparseFactorizationLUUnpivoted SparseFactorization_t = 81
-	SparseFactorizationLUSPP SparseFactorization_t = 82
-	SparseFactorizationLUTPP SparseFactorization_t = 83
+	SparseFactorizationLDLTSBK       SparseFactorization_t = 3
+	SparseFactorizationLDLTTPP       SparseFactorization_t = 4
+	SparseFactorizationQR            SparseFactorization_t = 40
+	SparseFactorizationCholeskyAtA   SparseFactorization_t = 41
+	SparseFactorizationLU            SparseFactorization_t = 80
+	SparseFactorizationLUUnpivoted   SparseFactorization_t = 81
+	SparseFactorizationLUSPP         SparseFactorization_t = 82
+	SparseFactorizationLUTPP         SparseFactorization_t = 83
 )
 
 func (e SparseFactorization_t) String() string {
@@ -1386,8 +1386,8 @@ type SparseGMRESVariant_t int64
 
 const (
 	SparseVariantDQGMRES SparseGMRESVariant_t = 0
-	SparseVariantGMRES SparseGMRESVariant_t = 1
-	SparseVariantFGMRES SparseGMRESVariant_t = 2
+	SparseVariantGMRES   SparseGMRESVariant_t = 1
+	SparseVariantFGMRES  SparseGMRESVariant_t = 2
 )
 
 func (e SparseGMRESVariant_t) String() string {
@@ -1406,11 +1406,11 @@ func (e SparseGMRESVariant_t) String() string {
 type SparseIterativeStatus_t int32
 
 const (
-	SparseIterativeConverged SparseIterativeStatus_t = 0
-	SparseIterativeMaxIterations SparseIterativeStatus_t = 1
+	SparseIterativeConverged      SparseIterativeStatus_t = 0
+	SparseIterativeMaxIterations  SparseIterativeStatus_t = 1
 	SparseIterativeParameterError SparseIterativeStatus_t = -1
 	SparseIterativeIllConditioned SparseIterativeStatus_t = -2
-	SparseIterativeInternalError SparseIterativeStatus_t = -99
+	SparseIterativeInternalError  SparseIterativeStatus_t = -99
 )
 
 func (e SparseIterativeStatus_t) String() string {
@@ -1433,11 +1433,11 @@ func (e SparseIterativeStatus_t) String() string {
 type SparseKind_t uint32
 
 const (
-	SparseOrdinary SparseKind_t = 0
-	SparseTriangular SparseKind_t = 1
+	SparseOrdinary       SparseKind_t = 0
+	SparseTriangular     SparseKind_t = 1
 	SparseUnitTriangular SparseKind_t = 2
-	SparseSymmetric SparseKind_t = 3
-	SparseHermitian SparseKind_t = 7
+	SparseSymmetric      SparseKind_t = 3
+	SparseHermitian      SparseKind_t = 7
 )
 
 func (e SparseKind_t) String() string {
@@ -1460,7 +1460,7 @@ func (e SparseKind_t) String() string {
 type SparseLSMRConvergenceTest_t int32
 
 const (
-	SparseLSMRCTDefault SparseLSMRConvergenceTest_t = 0
+	SparseLSMRCTDefault      SparseLSMRConvergenceTest_t = 0
 	SparseLSMRCTFongSaunders SparseLSMRConvergenceTest_t = 1
 )
 
@@ -1479,10 +1479,10 @@ type SparseOrder_t int64
 
 const (
 	SparseOrderDefault SparseOrder_t = 0
-	SparseOrderUser SparseOrder_t = 1
-	SparseOrderAMD SparseOrder_t = 2
-	SparseOrderMetis SparseOrder_t = 3
-	SparseOrderCOLAMD SparseOrder_t = 4
+	SparseOrderUser    SparseOrder_t = 1
+	SparseOrderAMD     SparseOrder_t = 2
+	SparseOrderMetis   SparseOrder_t = 3
+	SparseOrderCOLAMD  SparseOrder_t = 4
 	SparseOrderMTMetis SparseOrder_t = 5
 )
 
@@ -1508,9 +1508,9 @@ func (e SparseOrder_t) String() string {
 type SparsePreconditioner_t int32
 
 const (
-	SparsePreconditionerNone SparsePreconditioner_t = 0
-	SparsePreconditionerUser SparsePreconditioner_t = 1
-	SparsePreconditionerDiagonal SparsePreconditioner_t = 2
+	SparsePreconditionerNone        SparsePreconditioner_t = 0
+	SparsePreconditionerUser        SparsePreconditioner_t = 1
+	SparsePreconditionerDiagonal    SparsePreconditioner_t = 2
 	SparsePreconditionerDiagScaling SparsePreconditioner_t = 3
 )
 
@@ -1532,10 +1532,10 @@ func (e SparsePreconditioner_t) String() string {
 type SparseScaling_t int64
 
 const (
-	SparseScalingDefault SparseScaling_t = 0
-	SparseScalingUser SparseScaling_t = 1
-	SparseScalingEquilibriationInf SparseScaling_t = 2
-	SparseScalingHungarianScalingOnly SparseScaling_t = 3
+	SparseScalingDefault                     SparseScaling_t = 0
+	SparseScalingUser                        SparseScaling_t = 1
+	SparseScalingEquilibriationInf           SparseScaling_t = 2
+	SparseScalingHungarianScalingOnly        SparseScaling_t = 3
 	SparseScalingHungarianScalingAndOrdering SparseScaling_t = 4
 )
 
@@ -1559,12 +1559,12 @@ func (e SparseScaling_t) String() string {
 type SparseStatus_t int32
 
 const (
-	SparseStatusOK SparseStatus_t = 0
+	SparseStatusOK            SparseStatus_t = 0
 	SparseFactorizationFailed SparseStatus_t = -1
-	SparseMatrixIsSingular SparseStatus_t = -2
-	SparseInternalError SparseStatus_t = -3
-	SparseParameterError SparseStatus_t = -4
-	SparseStatusReleased SparseStatus_t = -2147483647
+	SparseMatrixIsSingular    SparseStatus_t = -2
+	SparseInternalError       SparseStatus_t = -3
+	SparseParameterError      SparseStatus_t = -4
+	SparseStatusReleased      SparseStatus_t = -2147483647
 )
 
 func (e SparseStatus_t) String() string {
@@ -1590,16 +1590,16 @@ type SparseSubfactor_t int64
 
 const (
 	SparseSubfactorInvalid SparseSubfactor_t = 0
-	SparseSubfactorP SparseSubfactor_t = 1
-	SparseSubfactorS SparseSubfactor_t = 2
-	SparseSubfactorL SparseSubfactor_t = 3
-	SparseSubfactorD SparseSubfactor_t = 4
-	SparseSubfactorPLPS SparseSubfactor_t = 5
-	SparseSubfactorQ SparseSubfactor_t = 6
-	SparseSubfactorR SparseSubfactor_t = 7
-	SparseSubfactorRP SparseSubfactor_t = 8
-	SparseSubfactorSr SparseSubfactor_t = 9
-	SparseSubfactorSc SparseSubfactor_t = 10
+	SparseSubfactorP       SparseSubfactor_t = 1
+	SparseSubfactorS       SparseSubfactor_t = 2
+	SparseSubfactorL       SparseSubfactor_t = 3
+	SparseSubfactorD       SparseSubfactor_t = 4
+	SparseSubfactorPLPS    SparseSubfactor_t = 5
+	SparseSubfactorQ       SparseSubfactor_t = 6
+	SparseSubfactorR       SparseSubfactor_t = 7
+	SparseSubfactorRP      SparseSubfactor_t = 8
+	SparseSubfactorSr      SparseSubfactor_t = 9
+	SparseSubfactorSc      SparseSubfactor_t = 10
 )
 
 func (e SparseSubfactor_t) String() string {
@@ -1692,8 +1692,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1712,13 +1712,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1745,24 +1745,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1803,9 +1803,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1825,12 +1825,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1857,14 +1857,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1893,9 +1893,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1914,36 +1914,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1973,8 +1987,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1994,62 +2008,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -2175,15 +2189,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -2221,7 +2235,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2229,7 +2245,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -2247,8 +2263,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -2267,26 +2283,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2309,10 +2341,10 @@ type Os_log_type_t int64
 
 const (
 	OS_LOG_TYPE_DEFAULT Os_log_type_t = 0
-	OS_LOG_TYPE_INFO Os_log_type_t = 1
-	OS_LOG_TYPE_DEBUG Os_log_type_t = 2
-	OS_LOG_TYPE_ERROR Os_log_type_t = 16
-	OS_LOG_TYPE_FAULT Os_log_type_t = 17
+	OS_LOG_TYPE_INFO    Os_log_type_t = 1
+	OS_LOG_TYPE_DEBUG   Os_log_type_t = 2
+	OS_LOG_TYPE_ERROR   Os_log_type_t = 16
+	OS_LOG_TYPE_FAULT   Os_log_type_t = 17
 )
 
 func (e Os_log_type_t) String() string {
@@ -2335,27 +2367,27 @@ func (e Os_log_type_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2379,11 +2411,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2409,8 +2441,8 @@ func (e Qos_class_t) String() string {
 type Quadrature_integrator int64
 
 const (
-	QUADRATURE_INTEGRATE_QNG Quadrature_integrator = 0
-	QUADRATURE_INTEGRATE_QAG Quadrature_integrator = 1
+	QUADRATURE_INTEGRATE_QNG  Quadrature_integrator = 0
+	QUADRATURE_INTEGRATE_QAG  Quadrature_integrator = 1
 	QUADRATURE_INTEGRATE_QAGS Quadrature_integrator = 2
 )
 
@@ -2431,12 +2463,12 @@ func (e Quadrature_integrator) String() string {
 type Quadrature_status int64
 
 const (
-	QUADRATURE_SUCCESS Quadrature_status = 0
-	QUADRATURE_ERROR Quadrature_status = -1
-	QUADRATURE_INVALID_ARG_ERROR Quadrature_status = -2
-	QUADRATURE_ALLOC_ERROR Quadrature_status = -3
-	QUADRATURE_INTERNAL_ERROR Quadrature_status = -99
-	QUADRATURE_INTEGRATE_MAX_EVAL_ERROR Quadrature_status = -101
+	QUADRATURE_SUCCESS                       Quadrature_status = 0
+	QUADRATURE_ERROR                         Quadrature_status = -1
+	QUADRATURE_INVALID_ARG_ERROR             Quadrature_status = -2
+	QUADRATURE_ALLOC_ERROR                   Quadrature_status = -3
+	QUADRATURE_INTERNAL_ERROR                Quadrature_status = -99
+	QUADRATURE_INTEGRATE_MAX_EVAL_ERROR      Quadrature_status = -101
 	QUADRATURE_INTEGRATE_BAD_BEHAVIOUR_ERROR Quadrature_status = -102
 )
 
@@ -2467,8 +2499,8 @@ type Sparse_matrix_property int64
 const (
 	SPARSE_UPPER_TRIANGULAR Sparse_matrix_property = 1
 	SPARSE_LOWER_TRIANGULAR Sparse_matrix_property = 2
-	SPARSE_UPPER_SYMMETRIC Sparse_matrix_property = 4
-	SPARSE_LOWER_SYMMETRIC Sparse_matrix_property = 8
+	SPARSE_UPPER_SYMMETRIC  Sparse_matrix_property = 4
+	SPARSE_LOWER_SYMMETRIC  Sparse_matrix_property = 8
 )
 
 func (e Sparse_matrix_property) String() string {
@@ -2493,7 +2525,7 @@ const (
 	SPARSE_NORM_ONE Sparse_norm = 171
 	SPARSE_NORM_TWO Sparse_norm = 173
 	SPARSE_NORM_INF Sparse_norm = 175
-	SPARSE_NORM_R1 Sparse_norm = 179
+	SPARSE_NORM_R1  Sparse_norm = 179
 )
 
 func (e Sparse_norm) String() string {
@@ -2515,10 +2547,10 @@ func (e Sparse_norm) String() string {
 type Sparse_status int64
 
 const (
-	SPARSE_SUCCESS Sparse_status = 0
-	SPARSE_ILLEGAL_PARAMETER Sparse_status = -1000
+	SPARSE_SUCCESS             Sparse_status = 0
+	SPARSE_ILLEGAL_PARAMETER   Sparse_status = -1000
 	SPARSE_CANNOT_SET_PROPERTY Sparse_status = -1001
-	SPARSE_SYSTEM_ERROR Sparse_status = -1002
+	SPARSE_SYSTEM_ERROR        Sparse_status = -1002
 )
 
 func (e Sparse_status) String() string {
@@ -2540,8 +2572,8 @@ func (e Sparse_status) String() string {
 type VImageARGBType int64
 
 const (
-	KvImageARGB8888 VImageARGBType = 0
-	KvImageARGB16U VImageARGBType = 1
+	KvImageARGB8888  VImageARGBType = 0
+	KvImageARGB16U   VImageARGBType = 1
 	KvImageARGB16Q12 VImageARGBType = 2
 )
 
@@ -2580,18 +2612,18 @@ func (e VImageMDTableUsageHint) String() string {
 type VImageYpCbCrType int64
 
 const (
-	KvImage422CbYpCrYp8 VImageYpCbCrType = 0
-	KvImage422YpCbYpCr8 VImageYpCbCrType = 1
-	KvImage422CbYpCrYp8_AA8 VImageYpCbCrType = 2
-	KvImage420Yp8_Cb8_Cr8 VImageYpCbCrType = 3
-	KvImage420Yp8_CbCr8 VImageYpCbCrType = 4
-	KvImage444AYpCbCr8 VImageYpCbCrType = 5
-	KvImage444CrYpCb8 VImageYpCbCrType = 6
-	KvImage444CbYpCrA8 VImageYpCbCrType = 7
-	KvImage444CrYpCb10 VImageYpCbCrType = 8
+	KvImage422CbYpCrYp8                  VImageYpCbCrType = 0
+	KvImage422YpCbYpCr8                  VImageYpCbCrType = 1
+	KvImage422CbYpCrYp8_AA8              VImageYpCbCrType = 2
+	KvImage420Yp8_Cb8_Cr8                VImageYpCbCrType = 3
+	KvImage420Yp8_CbCr8                  VImageYpCbCrType = 4
+	KvImage444AYpCbCr8                   VImageYpCbCrType = 5
+	KvImage444CrYpCb8                    VImageYpCbCrType = 6
+	KvImage444CbYpCrA8                   VImageYpCbCrType = 7
+	KvImage444CrYpCb10                   VImageYpCbCrType = 8
 	KvImage422CrYpCbYpCbYpCbYpCrYpCrYp10 VImageYpCbCrType = 9
-	KvImage422CbYpCrYp16 VImageYpCbCrType = 13
-	KvImage444AYpCbCr16 VImageYpCbCrType = 14
+	KvImage422CbYpCrYp16                 VImageYpCbCrType = 13
+	KvImage444AYpCbCr16                  VImageYpCbCrType = 14
 )
 
 func (e VImageYpCbCrType) String() string {
@@ -2628,7 +2660,7 @@ func (e VImageYpCbCrType) String() string {
 type VImage_InterpolationMethod int64
 
 const (
-	KvImageNoInterpolation VImage_InterpolationMethod = 0
+	KvImageNoInterpolation   VImage_InterpolationMethod = 0
 	KvImageFullInterpolation VImage_InterpolationMethod = 1
 	KvImageHalfInterpolation VImage_InterpolationMethod = 2
 )
@@ -2649,22 +2681,22 @@ func (e VImage_InterpolationMethod) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2715,34 +2747,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

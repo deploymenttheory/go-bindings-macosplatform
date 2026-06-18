@@ -91,4 +91,3 @@ func KFontPanelVariationValuesKey() uintptr {
 	ptr, _ := purego.Dlsym(_commonpanelsLib, "kFontPanelVariationValuesKey")
 	return ptr
 }
-

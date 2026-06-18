@@ -510,4 +510,3 @@ type LocalPlayerable interface {
 }
 
 var _ LocalPlayerable = (*LocalPlayer)(nil)
-

@@ -17,11 +17,11 @@ type MPSNNReduceFeatureChannelsSum struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsSum = _objcClass("MPSNNReduceFeatureChannelsSum")
-	_mPSNNReduceFeatureChannelsSumSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsSum                    = _objcClass("MPSNNReduceFeatureChannelsSum")
+	_mPSNNReduceFeatureChannelsSumSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsSumSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNReduceFeatureChannelsSumSelWeight = objc.RegisterName("weight")
-	_mPSNNReduceFeatureChannelsSumSelSetWeight = objc.RegisterName("setWeight:")
+	_mPSNNReduceFeatureChannelsSumSelWeight              = objc.RegisterName("weight")
+	_mPSNNReduceFeatureChannelsSumSelSetWeight           = objc.RegisterName("setWeight:")
 )
 
 func MPSNNReduceFeatureChannelsSumFromID(id objc.ID) *MPSNNReduceFeatureChannelsSum {
@@ -36,14 +36,18 @@ func MPSNNReduceFeatureChannelsSumFromID(id objc.ID) *MPSNNReduceFeatureChannels
 
 func (o *MPSNNReduceFeatureChannelsSum) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsSumSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsSumFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceFeatureChannelsSum object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsSum) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsSumSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsSumFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *MPSNNReduceFeatureChannelsSum) Weight() float32 {
 func (o *MPSNNReduceFeatureChannelsSum) SetWeight(weight float32) {
 	o.Ptr().Send(_mPSNNReduceFeatureChannelsSumSelSetWeight, weight)
 }
-

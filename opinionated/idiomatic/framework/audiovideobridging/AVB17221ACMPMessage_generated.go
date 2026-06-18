@@ -463,4 +463,3 @@ type AVB17221ACMPMessageable interface {
 }
 
 var _ AVB17221ACMPMessageable = (*AVB17221ACMPMessage)(nil)
-

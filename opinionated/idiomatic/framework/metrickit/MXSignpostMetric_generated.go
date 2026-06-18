@@ -80,4 +80,3 @@ type SignpostMetricable interface {
 }
 
 var _ SignpostMetricable = (*SignpostMetric)(nil)
-

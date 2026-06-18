@@ -16,9 +16,9 @@ type VZBridgedNetworkInterface struct {
 }
 
 var (
-	_clsVZBridgedNetworkInterface = _objcClass("VZBridgedNetworkInterface")
-	_vZBridgedNetworkInterfaceSelNetworkInterfaces = objc.RegisterName("networkInterfaces")
-	_vZBridgedNetworkInterfaceSelIdentifier = objc.RegisterName("identifier")
+	_clsVZBridgedNetworkInterface                     = _objcClass("VZBridgedNetworkInterface")
+	_vZBridgedNetworkInterfaceSelNetworkInterfaces    = objc.RegisterName("networkInterfaces")
+	_vZBridgedNetworkInterfaceSelIdentifier           = objc.RegisterName("identifier")
 	_vZBridgedNetworkInterfaceSelLocalizedDisplayName = objc.RegisterName("localizedDisplayName")
 )
 
@@ -35,21 +35,26 @@ func VZBridgedNetworkInterfaceFromID(id objc.ID) *VZBridgedNetworkInterface {
 // @abstract Return the list of network interfaces available for bridging.
 func VZBridgedNetworkInterfaceNetworkInterfaces() *foundation.NSArray[*VZBridgedNetworkInterface] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZBridgedNetworkInterface), _vZBridgedNetworkInterfaceSelNetworkInterfaces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZBridgedNetworkInterface](_ret)
 }
 
 // @abstract Return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
 func (o *VZBridgedNetworkInterface) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZBridgedNetworkInterfaceSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Return a display name if available (e.g. "Ethernet").
 func (o *VZBridgedNetworkInterface) LocalizedDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZBridgedNetworkInterfaceSelLocalizedDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

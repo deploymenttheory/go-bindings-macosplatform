@@ -16,12 +16,12 @@ type NSBindingSelectionMarker struct {
 }
 
 var (
-	_clsNSBindingSelectionMarker = _objcClass("NSBindingSelectionMarker")
+	_clsNSBindingSelectionMarker                                                 = _objcClass("NSBindingSelectionMarker")
 	_nSBindingSelectionMarkerSelSetDefaultPlaceholderForMarkerOnClassWithBinding = objc.RegisterName("setDefaultPlaceholder:forMarker:onClass:withBinding:")
-	_nSBindingSelectionMarkerSelDefaultPlaceholderForMarkerOnClassWithBinding = objc.RegisterName("defaultPlaceholderForMarker:onClass:withBinding:")
-	_nSBindingSelectionMarkerSelMultipleValuesSelectionMarker = objc.RegisterName("multipleValuesSelectionMarker")
-	_nSBindingSelectionMarkerSelNoSelectionMarker = objc.RegisterName("noSelectionMarker")
-	_nSBindingSelectionMarkerSelNotApplicableSelectionMarker = objc.RegisterName("notApplicableSelectionMarker")
+	_nSBindingSelectionMarkerSelDefaultPlaceholderForMarkerOnClassWithBinding    = objc.RegisterName("defaultPlaceholderForMarker:onClass:withBinding:")
+	_nSBindingSelectionMarkerSelMultipleValuesSelectionMarker                    = objc.RegisterName("multipleValuesSelectionMarker")
+	_nSBindingSelectionMarkerSelNoSelectionMarker                                = objc.RegisterName("noSelectionMarker")
+	_nSBindingSelectionMarkerSelNotApplicableSelectionMarker                     = objc.RegisterName("notApplicableSelectionMarker")
 )
 
 func NSBindingSelectionMarkerFromID(id objc.ID) *NSBindingSelectionMarker {
@@ -45,19 +45,24 @@ func NSBindingSelectionMarkerDefaultPlaceholderForMarkerOnClassWithBinding(marke
 
 func NSBindingSelectionMarkerMultipleValuesSelectionMarker() *NSBindingSelectionMarker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBindingSelectionMarker), _nSBindingSelectionMarkerSelMultipleValuesSelectionMarker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBindingSelectionMarkerFromID(_ret)
 }
 
 func NSBindingSelectionMarkerNoSelectionMarker() *NSBindingSelectionMarker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBindingSelectionMarker), _nSBindingSelectionMarkerSelNoSelectionMarker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBindingSelectionMarkerFromID(_ret)
 }
 
 func NSBindingSelectionMarkerNotApplicableSelectionMarker() *NSBindingSelectionMarker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBindingSelectionMarker), _nSBindingSelectionMarkerSelNotApplicableSelectionMarker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBindingSelectionMarkerFromID(_ret)
 }
-

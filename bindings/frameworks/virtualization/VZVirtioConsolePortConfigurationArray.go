@@ -16,11 +16,11 @@ type VZVirtioConsolePortConfigurationArray struct {
 }
 
 var (
-	_clsVZVirtioConsolePortConfigurationArray = _objcClass("VZVirtioConsolePortConfigurationArray")
-	_vZVirtioConsolePortConfigurationArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsVZVirtioConsolePortConfigurationArray                            = _objcClass("VZVirtioConsolePortConfigurationArray")
+	_vZVirtioConsolePortConfigurationArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_vZVirtioConsolePortConfigurationArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
-	_vZVirtioConsolePortConfigurationArraySelMaximumPortCount = objc.RegisterName("maximumPortCount")
-	_vZVirtioConsolePortConfigurationArraySelSetMaximumPortCount = objc.RegisterName("setMaximumPortCount:")
+	_vZVirtioConsolePortConfigurationArraySelMaximumPortCount            = objc.RegisterName("maximumPortCount")
+	_vZVirtioConsolePortConfigurationArraySelSetMaximumPortCount         = objc.RegisterName("setMaximumPortCount:")
 )
 
 func VZVirtioConsolePortConfigurationArrayFromID(id objc.ID) *VZVirtioConsolePortConfigurationArray {
@@ -36,7 +36,9 @@ func VZVirtioConsolePortConfigurationArrayFromID(id objc.ID) *VZVirtioConsolePor
 // @abstract Get a port configuration at the specified index.
 func (o *VZVirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex uint) *VZVirtioConsolePortConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortConfigurationArraySelObjectAtIndexedSubscript, portIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsolePortConfigurationFromID(_ret)
 }
 
@@ -54,4 +56,3 @@ func (o *VZVirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
 func (o *VZVirtioConsolePortConfigurationArray) SetMaximumPortCount(maximumPortCount uint32) {
 	o.Ptr().Send(_vZVirtioConsolePortConfigurationArraySelSetMaximumPortCount, maximumPortCount)
 }
-

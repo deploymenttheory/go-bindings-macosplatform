@@ -19,52 +19,52 @@ type AVPlayerView struct {
 }
 
 var (
-	_clsAVPlayerView = _objcClass("AVPlayerView")
-	_aVPlayerViewSelSelectSpeed = objc.RegisterName("selectSpeed:")
-	_aVPlayerViewSelSetMagnificationCenteredAtPoint = objc.RegisterName("setMagnification:centeredAtPoint:")
-	_aVPlayerViewSelPlayer = objc.RegisterName("player")
-	_aVPlayerViewSelSetPlayer = objc.RegisterName("setPlayer:")
-	_aVPlayerViewSelControlsStyle = objc.RegisterName("controlsStyle")
-	_aVPlayerViewSelSetControlsStyle = objc.RegisterName("setControlsStyle:")
-	_aVPlayerViewSelVideoGravity = objc.RegisterName("videoGravity")
-	_aVPlayerViewSelSetVideoGravity = objc.RegisterName("setVideoGravity:")
-	_aVPlayerViewSelIsReadyForDisplay = objc.RegisterName("isReadyForDisplay")
-	_aVPlayerViewSelVideoBounds = objc.RegisterName("videoBounds")
-	_aVPlayerViewSelContentOverlayView = objc.RegisterName("contentOverlayView")
-	_aVPlayerViewSelUpdatesNowPlayingInfoCenter = objc.RegisterName("updatesNowPlayingInfoCenter")
-	_aVPlayerViewSelSetUpdatesNowPlayingInfoCenter = objc.RegisterName("setUpdatesNowPlayingInfoCenter:")
-	_aVPlayerViewSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVPlayerViewSelSpeeds = objc.RegisterName("speeds")
-	_aVPlayerViewSelSetSpeeds = objc.RegisterName("setSpeeds:")
-	_aVPlayerViewSelSelectedSpeed = objc.RegisterName("selectedSpeed")
-	_aVPlayerViewSelAllowsVideoFrameAnalysis = objc.RegisterName("allowsVideoFrameAnalysis")
-	_aVPlayerViewSelSetAllowsVideoFrameAnalysis = objc.RegisterName("setAllowsVideoFrameAnalysis:")
-	_aVPlayerViewSelVideoFrameAnalysisTypes = objc.RegisterName("videoFrameAnalysisTypes")
-	_aVPlayerViewSelSetVideoFrameAnalysisTypes = objc.RegisterName("setVideoFrameAnalysisTypes:")
-	_aVPlayerViewSelAllowsMagnification = objc.RegisterName("allowsMagnification")
-	_aVPlayerViewSelSetAllowsMagnification = objc.RegisterName("setAllowsMagnification:")
-	_aVPlayerViewSelMagnification = objc.RegisterName("magnification")
-	_aVPlayerViewSelSetMagnification = objc.RegisterName("setMagnification:")
-	_aVPlayerViewSelPreferredDisplayDynamicRange = objc.RegisterName("preferredDisplayDynamicRange")
-	_aVPlayerViewSelSetPreferredDisplayDynamicRange = objc.RegisterName("setPreferredDisplayDynamicRange:")
-	_aVPlayerViewSelShowsFrameSteppingButtons = objc.RegisterName("showsFrameSteppingButtons")
-	_aVPlayerViewSelSetShowsFrameSteppingButtons = objc.RegisterName("setShowsFrameSteppingButtons:")
-	_aVPlayerViewSelShowsSharingServiceButton = objc.RegisterName("showsSharingServiceButton")
-	_aVPlayerViewSelSetShowsSharingServiceButton = objc.RegisterName("setShowsSharingServiceButton:")
-	_aVPlayerViewSelActionPopUpButtonMenu = objc.RegisterName("actionPopUpButtonMenu")
-	_aVPlayerViewSelSetActionPopUpButtonMenu = objc.RegisterName("setActionPopUpButtonMenu:")
-	_aVPlayerViewSelShowsFullScreenToggleButton = objc.RegisterName("showsFullScreenToggleButton")
-	_aVPlayerViewSelSetShowsFullScreenToggleButton = objc.RegisterName("setShowsFullScreenToggleButton:")
-	_aVPlayerViewSelShowsTimecodes = objc.RegisterName("showsTimecodes")
-	_aVPlayerViewSelSetShowsTimecodes = objc.RegisterName("setShowsTimecodes:")
+	_clsAVPlayerView                                   = _objcClass("AVPlayerView")
+	_aVPlayerViewSelSelectSpeed                        = objc.RegisterName("selectSpeed:")
+	_aVPlayerViewSelSetMagnificationCenteredAtPoint    = objc.RegisterName("setMagnification:centeredAtPoint:")
+	_aVPlayerViewSelPlayer                             = objc.RegisterName("player")
+	_aVPlayerViewSelSetPlayer                          = objc.RegisterName("setPlayer:")
+	_aVPlayerViewSelControlsStyle                      = objc.RegisterName("controlsStyle")
+	_aVPlayerViewSelSetControlsStyle                   = objc.RegisterName("setControlsStyle:")
+	_aVPlayerViewSelVideoGravity                       = objc.RegisterName("videoGravity")
+	_aVPlayerViewSelSetVideoGravity                    = objc.RegisterName("setVideoGravity:")
+	_aVPlayerViewSelIsReadyForDisplay                  = objc.RegisterName("isReadyForDisplay")
+	_aVPlayerViewSelVideoBounds                        = objc.RegisterName("videoBounds")
+	_aVPlayerViewSelContentOverlayView                 = objc.RegisterName("contentOverlayView")
+	_aVPlayerViewSelUpdatesNowPlayingInfoCenter        = objc.RegisterName("updatesNowPlayingInfoCenter")
+	_aVPlayerViewSelSetUpdatesNowPlayingInfoCenter     = objc.RegisterName("setUpdatesNowPlayingInfoCenter:")
+	_aVPlayerViewSelDelegate                           = objc.RegisterName("delegate")
+	_aVPlayerViewSelSetDelegate                        = objc.RegisterName("setDelegate:")
+	_aVPlayerViewSelSpeeds                             = objc.RegisterName("speeds")
+	_aVPlayerViewSelSetSpeeds                          = objc.RegisterName("setSpeeds:")
+	_aVPlayerViewSelSelectedSpeed                      = objc.RegisterName("selectedSpeed")
+	_aVPlayerViewSelAllowsVideoFrameAnalysis           = objc.RegisterName("allowsVideoFrameAnalysis")
+	_aVPlayerViewSelSetAllowsVideoFrameAnalysis        = objc.RegisterName("setAllowsVideoFrameAnalysis:")
+	_aVPlayerViewSelVideoFrameAnalysisTypes            = objc.RegisterName("videoFrameAnalysisTypes")
+	_aVPlayerViewSelSetVideoFrameAnalysisTypes         = objc.RegisterName("setVideoFrameAnalysisTypes:")
+	_aVPlayerViewSelAllowsMagnification                = objc.RegisterName("allowsMagnification")
+	_aVPlayerViewSelSetAllowsMagnification             = objc.RegisterName("setAllowsMagnification:")
+	_aVPlayerViewSelMagnification                      = objc.RegisterName("magnification")
+	_aVPlayerViewSelSetMagnification                   = objc.RegisterName("setMagnification:")
+	_aVPlayerViewSelPreferredDisplayDynamicRange       = objc.RegisterName("preferredDisplayDynamicRange")
+	_aVPlayerViewSelSetPreferredDisplayDynamicRange    = objc.RegisterName("setPreferredDisplayDynamicRange:")
+	_aVPlayerViewSelShowsFrameSteppingButtons          = objc.RegisterName("showsFrameSteppingButtons")
+	_aVPlayerViewSelSetShowsFrameSteppingButtons       = objc.RegisterName("setShowsFrameSteppingButtons:")
+	_aVPlayerViewSelShowsSharingServiceButton          = objc.RegisterName("showsSharingServiceButton")
+	_aVPlayerViewSelSetShowsSharingServiceButton       = objc.RegisterName("setShowsSharingServiceButton:")
+	_aVPlayerViewSelActionPopUpButtonMenu              = objc.RegisterName("actionPopUpButtonMenu")
+	_aVPlayerViewSelSetActionPopUpButtonMenu           = objc.RegisterName("setActionPopUpButtonMenu:")
+	_aVPlayerViewSelShowsFullScreenToggleButton        = objc.RegisterName("showsFullScreenToggleButton")
+	_aVPlayerViewSelSetShowsFullScreenToggleButton     = objc.RegisterName("setShowsFullScreenToggleButton:")
+	_aVPlayerViewSelShowsTimecodes                     = objc.RegisterName("showsTimecodes")
+	_aVPlayerViewSelSetShowsTimecodes                  = objc.RegisterName("setShowsTimecodes:")
 	_aVPlayerViewSelBeginTrimmingWithCompletionHandler = objc.RegisterName("beginTrimmingWithCompletionHandler:")
-	_aVPlayerViewSelCanBeginTrimming = objc.RegisterName("canBeginTrimming")
-	_aVPlayerViewSelFlashChapterNumberChapterTitle = objc.RegisterName("flashChapterNumber:chapterTitle:")
-	_aVPlayerViewSelAllowsPictureInPicturePlayback = objc.RegisterName("allowsPictureInPicturePlayback")
-	_aVPlayerViewSelSetAllowsPictureInPicturePlayback = objc.RegisterName("setAllowsPictureInPicturePlayback:")
-	_aVPlayerViewSelPictureInPictureDelegate = objc.RegisterName("pictureInPictureDelegate")
-	_aVPlayerViewSelSetPictureInPictureDelegate = objc.RegisterName("setPictureInPictureDelegate:")
+	_aVPlayerViewSelCanBeginTrimming                   = objc.RegisterName("canBeginTrimming")
+	_aVPlayerViewSelFlashChapterNumberChapterTitle     = objc.RegisterName("flashChapterNumber:chapterTitle:")
+	_aVPlayerViewSelAllowsPictureInPicturePlayback     = objc.RegisterName("allowsPictureInPicturePlayback")
+	_aVPlayerViewSelSetAllowsPictureInPicturePlayback  = objc.RegisterName("setAllowsPictureInPicturePlayback:")
+	_aVPlayerViewSelPictureInPictureDelegate           = objc.RegisterName("pictureInPictureDelegate")
+	_aVPlayerViewSelSetPictureInPictureDelegate        = objc.RegisterName("setPictureInPictureDelegate:")
 )
 
 func AVPlayerViewFromID(id objc.ID) *AVPlayerView {
@@ -90,7 +90,9 @@ func (o *AVPlayerView) SetMagnificationCenteredAtPoint(magnification float64, po
 // @property	player @abstract	The player from which to source the media content for the view.
 func (o *AVPlayerView) Player() *avfoundation.AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVPlayerFromID(_ret)
 }
 
@@ -111,7 +113,9 @@ func (o *AVPlayerView) SetControlsStyle(controlsStyle AVPlayerViewControlsStyle)
 // @property	videoGravity @abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
 func (o *AVPlayerView) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelVideoGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +138,9 @@ func (o *AVPlayerView) VideoBounds() corefoundation.CGRect {
 // @property	contentOverlayView @abstract	Use the content overlay view to add additional custom views between the video content and the controls.
 func (o *AVPlayerView) ContentOverlayView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelContentOverlayView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -161,7 +167,9 @@ func (o *AVPlayerView) SetDelegate(delegate AVPlayerViewDelegate) {
 // @property		speeds @abstract		A list of user selectable playback speeds to be shown in the playback speed control. @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
 func (o *AVPlayerView) Speeds() *foundation.NSArray[*AVPlaybackSpeed] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSpeeds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlaybackSpeed](_ret)
 }
 
@@ -172,7 +180,9 @@ func (o *AVPlayerView) SetSpeeds(speeds *foundation.NSArray[*AVPlaybackSpeed]) {
 // @property		selectedSpeed @abstract		The currently selected playback speed. @discussion	Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
 func (o *AVPlayerView) SelectedSpeed() *AVPlaybackSpeed {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelSelectedSpeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlaybackSpeedFromID(_ret)
 }
 
@@ -216,7 +226,7 @@ func (o *AVPlayerView) SetMagnification(magnification float64) {
 	o.Ptr().Send(_aVPlayerViewSelSetMagnification, magnification)
 }
 
-// Describes how High Dynamic Range (HDR) video content renders. Defaults to ``AVDisplayDynamicRangeAutomatic``. - Note: This property will only have effect if the video content supports HDR.
+// Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
 func (o *AVPlayerView) PreferredDisplayDynamicRange() AVDisplayDynamicRange {
 	_ret := objc.Send[AVDisplayDynamicRange](o.Ptr(), _aVPlayerViewSelPreferredDisplayDynamicRange)
 	return _ret
@@ -249,7 +259,9 @@ func (o *AVPlayerView) SetShowsSharingServiceButton(showsSharingServiceButton bo
 // @property	actionPopUpButtonMenu @abstract	Clients can set this property in order to show an action pop up button. Default is nil.
 func (o *AVPlayerView) ActionPopUpButtonMenu() *appkit.NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerViewSelActionPopUpButtonMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuFromID(_ret)
 }
 
@@ -319,4 +331,3 @@ func (o *AVPlayerView) PictureInPictureDelegate() AVPlayerViewPictureInPictureDe
 func (o *AVPlayerView) SetPictureInPictureDelegate(pictureInPictureDelegate AVPlayerViewPictureInPictureDelegate) {
 	o.Ptr().Send(_aVPlayerViewSelSetPictureInPictureDelegate, pictureInPictureDelegate)
 }
-

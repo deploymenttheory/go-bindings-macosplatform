@@ -963,4 +963,3 @@ func KUTTypeZipArchive() uintptr {
 	ptr, _ := purego.Dlsym(_launchservicesLib, "kUTTypeZipArchive")
 	return ptr
 }
-

@@ -19,17 +19,17 @@ type SKRegion struct {
 }
 
 var (
-	_clsSKRegion = _objcClass("SKRegion")
-	_sKRegionSelInfiniteRegion = objc.RegisterName("infiniteRegion")
-	_sKRegionSelInitWithRadius = objc.RegisterName("initWithRadius:")
-	_sKRegionSelInitWithSize = objc.RegisterName("initWithSize:")
-	_sKRegionSelInitWithPath = objc.RegisterName("initWithPath:")
-	_sKRegionSelInverseRegion = objc.RegisterName("inverseRegion")
-	_sKRegionSelRegionByUnionWithRegion = objc.RegisterName("regionByUnionWithRegion:")
-	_sKRegionSelRegionByDifferenceFromRegion = objc.RegisterName("regionByDifferenceFromRegion:")
+	_clsSKRegion                               = _objcClass("SKRegion")
+	_sKRegionSelInfiniteRegion                 = objc.RegisterName("infiniteRegion")
+	_sKRegionSelInitWithRadius                 = objc.RegisterName("initWithRadius:")
+	_sKRegionSelInitWithSize                   = objc.RegisterName("initWithSize:")
+	_sKRegionSelInitWithPath                   = objc.RegisterName("initWithPath:")
+	_sKRegionSelInverseRegion                  = objc.RegisterName("inverseRegion")
+	_sKRegionSelRegionByUnionWithRegion        = objc.RegisterName("regionByUnionWithRegion:")
+	_sKRegionSelRegionByDifferenceFromRegion   = objc.RegisterName("regionByDifferenceFromRegion:")
 	_sKRegionSelRegionByIntersectionWithRegion = objc.RegisterName("regionByIntersectionWithRegion:")
-	_sKRegionSelContainsPoint = objc.RegisterName("containsPoint:")
-	_sKRegionSelPath = objc.RegisterName("path")
+	_sKRegionSelContainsPoint                  = objc.RegisterName("containsPoint:")
+	_sKRegionSelPath                           = objc.RegisterName("path")
 )
 
 func SKRegionFromID(id objc.ID) *SKRegion {
@@ -45,56 +45,72 @@ func SKRegionFromID(id objc.ID) *SKRegion {
 // A shared infinite region
 func SKRegionInfiniteRegion() *SKRegion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKRegion), _sKRegionSelInfiniteRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a circular region with radius
 func (o *SKRegion) InitWithRadius(radius float32) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a rectangular region of size
 func (o *SKRegion) InitWithSize(size corefoundation.CGSize) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a region bounded by a CGPath. Note that this option can be costly to evaluate.
 func (o *SKRegion) InitWithPath(path unsafe.Pointer) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInitWithPath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a new region that is the inverse of the current region. The inverse of the infiniteRegion is an empty region. Subclasses of SKRegion need to provide an implementation of inverseRegion.
 func (o *SKRegion) InverseRegion() *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelInverseRegion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a new region that is the original region plus the supplied region
 func (o *SKRegion) RegionByUnionWithRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByUnionWithRegion, region.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a new region that is the original region minus the supplied region
 func (o *SKRegion) RegionByDifferenceFromRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByDifferenceFromRegion, region.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
 // Create a new region that is the region covered by the original region and the supplied region
 func (o *SKRegion) RegionByIntersectionWithRegion(region *SKRegion) *SKRegion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKRegionSelRegionByIntersectionWithRegion, region.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKRegionFromID(_ret)
 }
 
@@ -108,4 +124,3 @@ func (o *SKRegion) Path() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sKRegionSelPath)
 	return _ret
 }
-

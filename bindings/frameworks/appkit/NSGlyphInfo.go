@@ -16,16 +16,16 @@ type NSGlyphInfo struct {
 }
 
 var (
-	_clsNSGlyphInfo = _objcClass("NSGlyphInfo")
-	_nSGlyphInfoSelGlyphInfoWithCGGlyphForFontBaseString = objc.RegisterName("glyphInfoWithCGGlyph:forFont:baseString:")
-	_nSGlyphInfoSelGlyphID = objc.RegisterName("glyphID")
-	_nSGlyphInfoSelBaseString = objc.RegisterName("baseString")
-	_nSGlyphInfoSelGlyphInfoWithGlyphNameForFontBaseString = objc.RegisterName("glyphInfoWithGlyphName:forFont:baseString:")
-	_nSGlyphInfoSelGlyphInfoWithGlyphForFontBaseString = objc.RegisterName("glyphInfoWithGlyph:forFont:baseString:")
+	_clsNSGlyphInfo                                                     = _objcClass("NSGlyphInfo")
+	_nSGlyphInfoSelGlyphInfoWithCGGlyphForFontBaseString                = objc.RegisterName("glyphInfoWithCGGlyph:forFont:baseString:")
+	_nSGlyphInfoSelGlyphID                                              = objc.RegisterName("glyphID")
+	_nSGlyphInfoSelBaseString                                           = objc.RegisterName("baseString")
+	_nSGlyphInfoSelGlyphInfoWithGlyphNameForFontBaseString              = objc.RegisterName("glyphInfoWithGlyphName:forFont:baseString:")
+	_nSGlyphInfoSelGlyphInfoWithGlyphForFontBaseString                  = objc.RegisterName("glyphInfoWithGlyph:forFont:baseString:")
 	_nSGlyphInfoSelGlyphInfoWithCharacterIdentifierCollectionBaseString = objc.RegisterName("glyphInfoWithCharacterIdentifier:collection:baseString:")
-	_nSGlyphInfoSelGlyphName = objc.RegisterName("glyphName")
-	_nSGlyphInfoSelCharacterIdentifier = objc.RegisterName("characterIdentifier")
-	_nSGlyphInfoSelCharacterCollection = objc.RegisterName("characterCollection")
+	_nSGlyphInfoSelGlyphName                                            = objc.RegisterName("glyphName")
+	_nSGlyphInfoSelCharacterIdentifier                                  = objc.RegisterName("characterIdentifier")
+	_nSGlyphInfoSelCharacterCollection                                  = objc.RegisterName("characterCollection")
 )
 
 func NSGlyphInfoFromID(id objc.ID) *NSGlyphInfo {
@@ -40,7 +40,9 @@ func NSGlyphInfoFromID(id objc.ID) *NSGlyphInfo {
 
 func NSGlyphInfoGlyphInfoWithCGGlyphForFontBaseString(glyph uint16, font *NSFont, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithCGGlyphForFontBaseString, glyph, font.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphInfoFromID(_ret)
 }
 
@@ -51,31 +53,41 @@ func (o *NSGlyphInfo) GlyphID() uint16 {
 
 func (o *NSGlyphInfo) BaseString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlyphInfoSelBaseString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSGlyphInfoGlyphInfoWithGlyphNameForFontBaseString(glyphName *foundation.NSString, font *NSFont, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithGlyphNameForFontBaseString, glyphName.Ptr(), font.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphInfoFromID(_ret)
 }
 
 func NSGlyphInfoGlyphInfoWithGlyphForFontBaseString(glyph uint, font *NSFont, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithGlyphForFontBaseString, glyph, font.Ptr(), string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphInfoFromID(_ret)
 }
 
 func NSGlyphInfoGlyphInfoWithCharacterIdentifierCollectionBaseString(cid uint, characterCollection NSCharacterCollection, string_ *foundation.NSString) *NSGlyphInfo {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGlyphInfo), _nSGlyphInfoSelGlyphInfoWithCharacterIdentifierCollectionBaseString, cid, characterCollection, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphInfoFromID(_ret)
 }
 
 func (o *NSGlyphInfo) GlyphName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlyphInfoSelGlyphName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +100,3 @@ func (o *NSGlyphInfo) CharacterCollection() NSCharacterCollection {
 	_ret := objc.Send[NSCharacterCollection](o.Ptr(), _nSGlyphInfoSelCharacterCollection)
 	return _ret
 }
-

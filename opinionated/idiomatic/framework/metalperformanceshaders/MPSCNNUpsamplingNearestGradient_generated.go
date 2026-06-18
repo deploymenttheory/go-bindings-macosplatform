@@ -160,13 +160,21 @@ func (x *CNNUpsamplingNearestGradient) WithLabel(label string) *CNNUpsamplingNea
 	return x
 }
 
-func (x *CNNUpsamplingNearestGradient) asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient { return &x.inner.MPSCNNUpsamplingGradient }
+func (x *CNNUpsamplingNearestGradient) asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient {
+	return &x.inner.MPSCNNUpsamplingGradient
+}
 
-func (x *CNNUpsamplingNearestGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel }
+func (x *CNNUpsamplingNearestGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNUpsamplingNearestGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNUpsamplingNearestGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNUpsamplingNearestGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNUpsamplingNearestGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNUpsamplingNearestGradientable is the interface implemented by [CNNUpsamplingNearestGradient], for mocking and DI.
 type CNNUpsamplingNearestGradientable interface {
@@ -194,4 +202,3 @@ type CNNUpsamplingNearestGradientable interface {
 }
 
 var _ CNNUpsamplingNearestGradientable = (*CNNUpsamplingNearestGradient)(nil)
-

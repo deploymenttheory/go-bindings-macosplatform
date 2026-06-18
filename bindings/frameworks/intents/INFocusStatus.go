@@ -16,9 +16,9 @@ type INFocusStatus struct {
 }
 
 var (
-	_clsINFocusStatus = _objcClass("INFocusStatus")
+	_clsINFocusStatus                  = _objcClass("INFocusStatus")
 	_iNFocusStatusSelInitWithIsFocused = objc.RegisterName("initWithIsFocused:")
-	_iNFocusStatusSelIsFocused = objc.RegisterName("isFocused")
+	_iNFocusStatusSelIsFocused         = objc.RegisterName("isFocused")
 )
 
 func INFocusStatusFromID(id objc.ID) *INFocusStatus {
@@ -33,13 +33,16 @@ func INFocusStatusFromID(id objc.ID) *INFocusStatus {
 
 func (o *INFocusStatus) InitWithIsFocused(isFocused *foundation.NSNumber) *INFocusStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFocusStatusSelInitWithIsFocused, isFocused.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFocusStatusFromID(_ret)
 }
 
 func (o *INFocusStatus) IsFocused() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFocusStatusSelIsFocused)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

@@ -20,30 +20,30 @@ type VNTargetedImageRequest struct {
 }
 
 var (
-	_clsVNTargetedImageRequest = _objcClass("VNTargetedImageRequest")
-	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptions = objc.RegisterName("initWithTargetedCVPixelBuffer:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptionsCompletionHandler = objc.RegisterName("initWithTargetedCVPixelBuffer:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptions = objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCGImageOptions = objc.RegisterName("initWithTargetedCGImage:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCGImageOptionsCompletionHandler = objc.RegisterName("initWithTargetedCGImage:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptions = objc.RegisterName("initWithTargetedCGImage:orientation:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedCGImage:orientation:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCIImageOptions = objc.RegisterName("initWithTargetedCIImage:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCIImageOptionsCompletionHandler = objc.RegisterName("initWithTargetedCIImage:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptions = objc.RegisterName("initWithTargetedCIImage:orientation:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedCIImage:orientation:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedImageURLOptions = objc.RegisterName("initWithTargetedImageURL:options:")
-	_vNTargetedImageRequestSelInitWithTargetedImageURLOptionsCompletionHandler = objc.RegisterName("initWithTargetedImageURL:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptions = objc.RegisterName("initWithTargetedImageURL:orientation:options:")
-	_vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedImageURL:orientation:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedImageDataOptions = objc.RegisterName("initWithTargetedImageData:options:")
-	_vNTargetedImageRequestSelInitWithTargetedImageDataOptionsCompletionHandler = objc.RegisterName("initWithTargetedImageData:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptions = objc.RegisterName("initWithTargetedImageData:orientation:options:")
-	_vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedImageData:orientation:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptions = objc.RegisterName("initWithTargetedCMSampleBuffer:options:")
-	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptionsCompletionHandler = objc.RegisterName("initWithTargetedCMSampleBuffer:options:completionHandler:")
-	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOrientationOptions = objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:")
+	_clsVNTargetedImageRequest                                                                  = _objcClass("VNTargetedImageRequest")
+	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptions                              = objc.RegisterName("initWithTargetedCVPixelBuffer:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptionsCompletionHandler             = objc.RegisterName("initWithTargetedCVPixelBuffer:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptions                   = objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptionsCompletionHandler  = objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCGImageOptions                                    = objc.RegisterName("initWithTargetedCGImage:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCGImageOptionsCompletionHandler                   = objc.RegisterName("initWithTargetedCGImage:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptions                         = objc.RegisterName("initWithTargetedCGImage:orientation:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptionsCompletionHandler        = objc.RegisterName("initWithTargetedCGImage:orientation:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCIImageOptions                                    = objc.RegisterName("initWithTargetedCIImage:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCIImageOptionsCompletionHandler                   = objc.RegisterName("initWithTargetedCIImage:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptions                         = objc.RegisterName("initWithTargetedCIImage:orientation:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptionsCompletionHandler        = objc.RegisterName("initWithTargetedCIImage:orientation:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedImageURLOptions                                   = objc.RegisterName("initWithTargetedImageURL:options:")
+	_vNTargetedImageRequestSelInitWithTargetedImageURLOptionsCompletionHandler                  = objc.RegisterName("initWithTargetedImageURL:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptions                        = objc.RegisterName("initWithTargetedImageURL:orientation:options:")
+	_vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptionsCompletionHandler       = objc.RegisterName("initWithTargetedImageURL:orientation:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedImageDataOptions                                  = objc.RegisterName("initWithTargetedImageData:options:")
+	_vNTargetedImageRequestSelInitWithTargetedImageDataOptionsCompletionHandler                 = objc.RegisterName("initWithTargetedImageData:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptions                       = objc.RegisterName("initWithTargetedImageData:orientation:options:")
+	_vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptionsCompletionHandler      = objc.RegisterName("initWithTargetedImageData:orientation:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptions                             = objc.RegisterName("initWithTargetedCMSampleBuffer:options:")
+	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptionsCompletionHandler            = objc.RegisterName("initWithTargetedCMSampleBuffer:options:completionHandler:")
+	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOrientationOptions                  = objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:")
 	_vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOrientationOptionsCompletionHandler = objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:completionHandler:")
 )
 
@@ -60,7 +60,9 @@ func VNTargetedImageRequestFromID(id objc.ID) *VNTargetedImageRequest {
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptions, pixelBuffer, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -77,14 +79,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCVPixelBufferOptionsCompletionH
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOptionsCompletionHandler, pixelBuffer, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptions, pixelBuffer, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -101,14 +107,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCVPixelBufferOrientationOptions
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCVPixelBufferOrientationOptionsCompletionHandler, pixelBuffer, orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCGImageOptions(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCGImageOptions, cgImage, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -125,14 +135,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCGImageOptionsCompletionHandler
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCGImageOptionsCompletionHandler, cgImage, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCGImageOrientationOptions(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptions, cgImage, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -149,14 +163,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCGImageOrientationOptionsComple
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCGImageOrientationOptionsCompletionHandler, cgImage, orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCIImageOptions(ciImage *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCIImageOptions, ciImage.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -173,14 +191,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCIImageOptionsCompletionHandler
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCIImageOptionsCompletionHandler, ciImage.Ptr(), options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCIImageOrientationOptions(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptions, ciImage.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -197,14 +219,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCIImageOrientationOptionsComple
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCIImageOrientationOptionsCompletionHandler, ciImage.Ptr(), orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedImageURLOptions(imageURL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageURLOptions, imageURL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -221,14 +247,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedImageURLOptionsCompletionHandle
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageURLOptionsCompletionHandler, imageURL.Ptr(), options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedImageURLOrientationOptions(imageURL *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptions, imageURL.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -245,14 +275,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedImageURLOrientationOptionsCompl
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageURLOrientationOptionsCompletionHandler, imageURL.Ptr(), orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedImageDataOptions(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageDataOptions, imageData.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -269,14 +303,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedImageDataOptionsCompletionHandl
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageDataOptionsCompletionHandler, imageData.Ptr(), options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedImageDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptions, imageData.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -293,14 +331,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedImageDataOrientationOptionsComp
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedImageDataOrientationOptionsCompletionHandler, imageData.Ptr(), orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param options A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptions, sampleBuffer, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -317,14 +359,18 @@ func (o *VNTargetedImageRequest) InitWithTargetedCMSampleBufferOptionsCompletion
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOptionsCompletionHandler, sampleBuffer, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the image.
 func (o *VNTargetedImageRequest) InitWithTargetedCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNTargetedImageRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOrientationOptions, sampleBuffer, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
 
@@ -341,7 +387,8 @@ func (o *VNTargetedImageRequest) InitWithTargetedCMSampleBufferOrientationOption
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTargetedImageRequestSelInitWithTargetedCMSampleBufferOrientationOptionsCompletionHandler, sampleBuffer, orientation, options, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTargetedImageRequestFromID(_ret)
 }
-

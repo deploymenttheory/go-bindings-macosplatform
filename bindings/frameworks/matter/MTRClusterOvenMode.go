@@ -18,16 +18,16 @@ type MTRClusterOvenMode struct {
 }
 
 var (
-	_clsMTRClusterOvenMode = _objcClass("MTRClusterOvenMode")
+	_clsMTRClusterOvenMode                                                                    = _objcClass("MTRClusterOvenMode")
 	_mTRClusterOvenModeSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOvenModeSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterOvenModeSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
-	_mTRClusterOvenModeSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOvenModeSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOvenModeSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOvenModeSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOvenModeSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOvenModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOvenModeSelReadAttributeSupportedModesWithParams                               = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterOvenModeSelReadAttributeCurrentModeWithParams                                  = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_mTRClusterOvenModeSelReadAttributeGeneratedCommandListWithParams                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOvenModeSelReadAttributeAcceptedCommandListWithParams                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOvenModeSelReadAttributeAttributeListWithParams                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOvenModeSelReadAttributeFeatureMapWithParams                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOvenModeSelReadAttributeClusterRevisionWithParams                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOvenModeSelInitWithDeviceEndpointIDQueue                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterOvenModeFromID(id objc.ID) *MTRClusterOvenMode {
@@ -92,7 +92,8 @@ func (o *MTRClusterOvenMode) ReadAttributeClusterRevisionWithParams(params *MTRR
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOvenMode) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOvenMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOvenModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOvenModeFromID(_ret)
 }
-

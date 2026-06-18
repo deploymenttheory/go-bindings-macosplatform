@@ -16,66 +16,66 @@ type SCNPhysicsBody struct {
 }
 
 var (
-	_clsSCNPhysicsBody = _objcClass("SCNPhysicsBody")
-	_sCNPhysicsBodySelStaticBody = objc.RegisterName("staticBody")
-	_sCNPhysicsBodySelDynamicBody = objc.RegisterName("dynamicBody")
-	_sCNPhysicsBodySelKinematicBody = objc.RegisterName("kinematicBody")
-	_sCNPhysicsBodySelBodyWithTypeShape = objc.RegisterName("bodyWithType:shape:")
-	_sCNPhysicsBodySelApplyForceImpulse = objc.RegisterName("applyForce:impulse:")
-	_sCNPhysicsBodySelApplyForceAtPositionImpulse = objc.RegisterName("applyForce:atPosition:impulse:")
-	_sCNPhysicsBodySelApplyTorqueImpulse = objc.RegisterName("applyTorque:impulse:")
-	_sCNPhysicsBodySelClearAllForces = objc.RegisterName("clearAllForces")
-	_sCNPhysicsBodySelResetTransform = objc.RegisterName("resetTransform")
-	_sCNPhysicsBodySelSetResting = objc.RegisterName("setResting:")
-	_sCNPhysicsBodySelType = objc.RegisterName("type")
-	_sCNPhysicsBodySelSetType = objc.RegisterName("setType:")
-	_sCNPhysicsBodySelMass = objc.RegisterName("mass")
-	_sCNPhysicsBodySelSetMass = objc.RegisterName("setMass:")
-	_sCNPhysicsBodySelMomentOfInertia = objc.RegisterName("momentOfInertia")
-	_sCNPhysicsBodySelSetMomentOfInertia = objc.RegisterName("setMomentOfInertia:")
-	_sCNPhysicsBodySelUsesDefaultMomentOfInertia = objc.RegisterName("usesDefaultMomentOfInertia")
-	_sCNPhysicsBodySelSetUsesDefaultMomentOfInertia = objc.RegisterName("setUsesDefaultMomentOfInertia:")
-	_sCNPhysicsBodySelCharge = objc.RegisterName("charge")
-	_sCNPhysicsBodySelSetCharge = objc.RegisterName("setCharge:")
-	_sCNPhysicsBodySelFriction = objc.RegisterName("friction")
-	_sCNPhysicsBodySelSetFriction = objc.RegisterName("setFriction:")
-	_sCNPhysicsBodySelRestitution = objc.RegisterName("restitution")
-	_sCNPhysicsBodySelSetRestitution = objc.RegisterName("setRestitution:")
-	_sCNPhysicsBodySelRollingFriction = objc.RegisterName("rollingFriction")
-	_sCNPhysicsBodySelSetRollingFriction = objc.RegisterName("setRollingFriction:")
-	_sCNPhysicsBodySelPhysicsShape = objc.RegisterName("physicsShape")
-	_sCNPhysicsBodySelSetPhysicsShape = objc.RegisterName("setPhysicsShape:")
-	_sCNPhysicsBodySelIsResting = objc.RegisterName("isResting")
-	_sCNPhysicsBodySelAllowsResting = objc.RegisterName("allowsResting")
-	_sCNPhysicsBodySelSetAllowsResting = objc.RegisterName("setAllowsResting:")
-	_sCNPhysicsBodySelVelocity = objc.RegisterName("velocity")
-	_sCNPhysicsBodySelSetVelocity = objc.RegisterName("setVelocity:")
-	_sCNPhysicsBodySelAngularVelocity = objc.RegisterName("angularVelocity")
-	_sCNPhysicsBodySelSetAngularVelocity = objc.RegisterName("setAngularVelocity:")
-	_sCNPhysicsBodySelDamping = objc.RegisterName("damping")
-	_sCNPhysicsBodySelSetDamping = objc.RegisterName("setDamping:")
-	_sCNPhysicsBodySelAngularDamping = objc.RegisterName("angularDamping")
-	_sCNPhysicsBodySelSetAngularDamping = objc.RegisterName("setAngularDamping:")
-	_sCNPhysicsBodySelVelocityFactor = objc.RegisterName("velocityFactor")
-	_sCNPhysicsBodySelSetVelocityFactor = objc.RegisterName("setVelocityFactor:")
-	_sCNPhysicsBodySelAngularVelocityFactor = objc.RegisterName("angularVelocityFactor")
-	_sCNPhysicsBodySelSetAngularVelocityFactor = objc.RegisterName("setAngularVelocityFactor:")
-	_sCNPhysicsBodySelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sCNPhysicsBodySelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
-	_sCNPhysicsBodySelCollisionBitMask = objc.RegisterName("collisionBitMask")
-	_sCNPhysicsBodySelSetCollisionBitMask = objc.RegisterName("setCollisionBitMask:")
-	_sCNPhysicsBodySelContactTestBitMask = objc.RegisterName("contactTestBitMask")
-	_sCNPhysicsBodySelSetContactTestBitMask = objc.RegisterName("setContactTestBitMask:")
-	_sCNPhysicsBodySelIsAffectedByGravity = objc.RegisterName("isAffectedByGravity")
-	_sCNPhysicsBodySelSetAffectedByGravity = objc.RegisterName("setAffectedByGravity:")
-	_sCNPhysicsBodySelContinuousCollisionDetectionThreshold = objc.RegisterName("continuousCollisionDetectionThreshold")
+	_clsSCNPhysicsBody                                         = _objcClass("SCNPhysicsBody")
+	_sCNPhysicsBodySelStaticBody                               = objc.RegisterName("staticBody")
+	_sCNPhysicsBodySelDynamicBody                              = objc.RegisterName("dynamicBody")
+	_sCNPhysicsBodySelKinematicBody                            = objc.RegisterName("kinematicBody")
+	_sCNPhysicsBodySelBodyWithTypeShape                        = objc.RegisterName("bodyWithType:shape:")
+	_sCNPhysicsBodySelApplyForceImpulse                        = objc.RegisterName("applyForce:impulse:")
+	_sCNPhysicsBodySelApplyForceAtPositionImpulse              = objc.RegisterName("applyForce:atPosition:impulse:")
+	_sCNPhysicsBodySelApplyTorqueImpulse                       = objc.RegisterName("applyTorque:impulse:")
+	_sCNPhysicsBodySelClearAllForces                           = objc.RegisterName("clearAllForces")
+	_sCNPhysicsBodySelResetTransform                           = objc.RegisterName("resetTransform")
+	_sCNPhysicsBodySelSetResting                               = objc.RegisterName("setResting:")
+	_sCNPhysicsBodySelType                                     = objc.RegisterName("type")
+	_sCNPhysicsBodySelSetType                                  = objc.RegisterName("setType:")
+	_sCNPhysicsBodySelMass                                     = objc.RegisterName("mass")
+	_sCNPhysicsBodySelSetMass                                  = objc.RegisterName("setMass:")
+	_sCNPhysicsBodySelMomentOfInertia                          = objc.RegisterName("momentOfInertia")
+	_sCNPhysicsBodySelSetMomentOfInertia                       = objc.RegisterName("setMomentOfInertia:")
+	_sCNPhysicsBodySelUsesDefaultMomentOfInertia               = objc.RegisterName("usesDefaultMomentOfInertia")
+	_sCNPhysicsBodySelSetUsesDefaultMomentOfInertia            = objc.RegisterName("setUsesDefaultMomentOfInertia:")
+	_sCNPhysicsBodySelCharge                                   = objc.RegisterName("charge")
+	_sCNPhysicsBodySelSetCharge                                = objc.RegisterName("setCharge:")
+	_sCNPhysicsBodySelFriction                                 = objc.RegisterName("friction")
+	_sCNPhysicsBodySelSetFriction                              = objc.RegisterName("setFriction:")
+	_sCNPhysicsBodySelRestitution                              = objc.RegisterName("restitution")
+	_sCNPhysicsBodySelSetRestitution                           = objc.RegisterName("setRestitution:")
+	_sCNPhysicsBodySelRollingFriction                          = objc.RegisterName("rollingFriction")
+	_sCNPhysicsBodySelSetRollingFriction                       = objc.RegisterName("setRollingFriction:")
+	_sCNPhysicsBodySelPhysicsShape                             = objc.RegisterName("physicsShape")
+	_sCNPhysicsBodySelSetPhysicsShape                          = objc.RegisterName("setPhysicsShape:")
+	_sCNPhysicsBodySelIsResting                                = objc.RegisterName("isResting")
+	_sCNPhysicsBodySelAllowsResting                            = objc.RegisterName("allowsResting")
+	_sCNPhysicsBodySelSetAllowsResting                         = objc.RegisterName("setAllowsResting:")
+	_sCNPhysicsBodySelVelocity                                 = objc.RegisterName("velocity")
+	_sCNPhysicsBodySelSetVelocity                              = objc.RegisterName("setVelocity:")
+	_sCNPhysicsBodySelAngularVelocity                          = objc.RegisterName("angularVelocity")
+	_sCNPhysicsBodySelSetAngularVelocity                       = objc.RegisterName("setAngularVelocity:")
+	_sCNPhysicsBodySelDamping                                  = objc.RegisterName("damping")
+	_sCNPhysicsBodySelSetDamping                               = objc.RegisterName("setDamping:")
+	_sCNPhysicsBodySelAngularDamping                           = objc.RegisterName("angularDamping")
+	_sCNPhysicsBodySelSetAngularDamping                        = objc.RegisterName("setAngularDamping:")
+	_sCNPhysicsBodySelVelocityFactor                           = objc.RegisterName("velocityFactor")
+	_sCNPhysicsBodySelSetVelocityFactor                        = objc.RegisterName("setVelocityFactor:")
+	_sCNPhysicsBodySelAngularVelocityFactor                    = objc.RegisterName("angularVelocityFactor")
+	_sCNPhysicsBodySelSetAngularVelocityFactor                 = objc.RegisterName("setAngularVelocityFactor:")
+	_sCNPhysicsBodySelCategoryBitMask                          = objc.RegisterName("categoryBitMask")
+	_sCNPhysicsBodySelSetCategoryBitMask                       = objc.RegisterName("setCategoryBitMask:")
+	_sCNPhysicsBodySelCollisionBitMask                         = objc.RegisterName("collisionBitMask")
+	_sCNPhysicsBodySelSetCollisionBitMask                      = objc.RegisterName("setCollisionBitMask:")
+	_sCNPhysicsBodySelContactTestBitMask                       = objc.RegisterName("contactTestBitMask")
+	_sCNPhysicsBodySelSetContactTestBitMask                    = objc.RegisterName("setContactTestBitMask:")
+	_sCNPhysicsBodySelIsAffectedByGravity                      = objc.RegisterName("isAffectedByGravity")
+	_sCNPhysicsBodySelSetAffectedByGravity                     = objc.RegisterName("setAffectedByGravity:")
+	_sCNPhysicsBodySelContinuousCollisionDetectionThreshold    = objc.RegisterName("continuousCollisionDetectionThreshold")
 	_sCNPhysicsBodySelSetContinuousCollisionDetectionThreshold = objc.RegisterName("setContinuousCollisionDetectionThreshold:")
-	_sCNPhysicsBodySelCenterOfMassOffset = objc.RegisterName("centerOfMassOffset")
-	_sCNPhysicsBodySelSetCenterOfMassOffset = objc.RegisterName("setCenterOfMassOffset:")
-	_sCNPhysicsBodySelLinearRestingThreshold = objc.RegisterName("linearRestingThreshold")
-	_sCNPhysicsBodySelSetLinearRestingThreshold = objc.RegisterName("setLinearRestingThreshold:")
-	_sCNPhysicsBodySelAngularRestingThreshold = objc.RegisterName("angularRestingThreshold")
-	_sCNPhysicsBodySelSetAngularRestingThreshold = objc.RegisterName("setAngularRestingThreshold:")
+	_sCNPhysicsBodySelCenterOfMassOffset                       = objc.RegisterName("centerOfMassOffset")
+	_sCNPhysicsBodySelSetCenterOfMassOffset                    = objc.RegisterName("setCenterOfMassOffset:")
+	_sCNPhysicsBodySelLinearRestingThreshold                   = objc.RegisterName("linearRestingThreshold")
+	_sCNPhysicsBodySelSetLinearRestingThreshold                = objc.RegisterName("setLinearRestingThreshold:")
+	_sCNPhysicsBodySelAngularRestingThreshold                  = objc.RegisterName("angularRestingThreshold")
+	_sCNPhysicsBodySelSetAngularRestingThreshold               = objc.RegisterName("setAngularRestingThreshold:")
 )
 
 func SCNPhysicsBodyFromID(id objc.ID) *SCNPhysicsBody {
@@ -90,25 +90,33 @@ func SCNPhysicsBodyFromID(id objc.ID) *SCNPhysicsBody {
 
 func SCNPhysicsBodyStaticBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelStaticBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
 func SCNPhysicsBodyDynamicBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelDynamicBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
 func SCNPhysicsBodyKinematicBody() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelKinematicBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
 func SCNPhysicsBodyBodyWithTypeShape(type_ SCNPhysicsBodyType, shape *SCNPhysicsShape) *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBody), _sCNPhysicsBodySelBodyWithTypeShape, type_, shape.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -210,7 +218,9 @@ func (o *SCNPhysicsBody) SetRollingFriction(rollingFriction float64) {
 
 func (o *SCNPhysicsBody) PhysicsShape() *SCNPhysicsShape {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsBodySelPhysicsShape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsShapeFromID(_ret)
 }
 
@@ -357,4 +367,3 @@ func (o *SCNPhysicsBody) AngularRestingThreshold() float64 {
 func (o *SCNPhysicsBody) SetAngularRestingThreshold(angularRestingThreshold float64) {
 	o.Ptr().Send(_sCNPhysicsBodySelSetAngularRestingThreshold, angularRestingThreshold)
 }
-

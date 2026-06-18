@@ -56,4 +56,3 @@ type AssetTrackSegmentable interface {
 }
 
 var _ AssetTrackSegmentable = (*AssetTrackSegment)(nil)
-

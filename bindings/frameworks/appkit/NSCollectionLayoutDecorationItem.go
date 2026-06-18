@@ -16,11 +16,11 @@ type NSCollectionLayoutDecorationItem struct {
 }
 
 var (
-	_clsNSCollectionLayoutDecorationItem = _objcClass("NSCollectionLayoutDecorationItem")
+	_clsNSCollectionLayoutDecorationItem                                        = _objcClass("NSCollectionLayoutDecorationItem")
 	_nSCollectionLayoutDecorationItemSelBackgroundDecorationItemWithElementKind = objc.RegisterName("backgroundDecorationItemWithElementKind:")
-	_nSCollectionLayoutDecorationItemSelZIndex = objc.RegisterName("zIndex")
-	_nSCollectionLayoutDecorationItemSelSetZIndex = objc.RegisterName("setZIndex:")
-	_nSCollectionLayoutDecorationItemSelElementKind = objc.RegisterName("elementKind")
+	_nSCollectionLayoutDecorationItemSelZIndex                                  = objc.RegisterName("zIndex")
+	_nSCollectionLayoutDecorationItemSelSetZIndex                               = objc.RegisterName("setZIndex:")
+	_nSCollectionLayoutDecorationItemSelElementKind                             = objc.RegisterName("elementKind")
 )
 
 func NSCollectionLayoutDecorationItemFromID(id objc.ID) *NSCollectionLayoutDecorationItem {
@@ -35,7 +35,9 @@ func NSCollectionLayoutDecorationItemFromID(id objc.ID) *NSCollectionLayoutDecor
 
 func NSCollectionLayoutDecorationItemBackgroundDecorationItemWithElementKind(elementKind *foundation.NSString) *NSCollectionLayoutDecorationItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDecorationItem), _nSCollectionLayoutDecorationItemSelBackgroundDecorationItemWithElementKind, elementKind.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDecorationItemFromID(_ret)
 }
 
@@ -50,7 +52,8 @@ func (o *NSCollectionLayoutDecorationItem) SetZIndex(zIndex int) {
 
 func (o *NSCollectionLayoutDecorationItem) ElementKind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutDecorationItemSelElementKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 }
 
 var (
-	_clsMTL4RenderPipelineDynamicLinkingDescriptor = _objcClass("MTL4RenderPipelineDynamicLinkingDescriptor")
-	_mTL4RenderPipelineDynamicLinkingDescriptorSelVertexLinkingDescriptor = objc.RegisterName("vertexLinkingDescriptor")
+	_clsMTL4RenderPipelineDynamicLinkingDescriptor                          = _objcClass("MTL4RenderPipelineDynamicLinkingDescriptor")
+	_mTL4RenderPipelineDynamicLinkingDescriptorSelVertexLinkingDescriptor   = objc.RegisterName("vertexLinkingDescriptor")
 	_mTL4RenderPipelineDynamicLinkingDescriptorSelFragmentLinkingDescriptor = objc.RegisterName("fragmentLinkingDescriptor")
-	_mTL4RenderPipelineDynamicLinkingDescriptorSelTileLinkingDescriptor = objc.RegisterName("tileLinkingDescriptor")
-	_mTL4RenderPipelineDynamicLinkingDescriptorSelObjectLinkingDescriptor = objc.RegisterName("objectLinkingDescriptor")
-	_mTL4RenderPipelineDynamicLinkingDescriptorSelMeshLinkingDescriptor = objc.RegisterName("meshLinkingDescriptor")
+	_mTL4RenderPipelineDynamicLinkingDescriptorSelTileLinkingDescriptor     = objc.RegisterName("tileLinkingDescriptor")
+	_mTL4RenderPipelineDynamicLinkingDescriptorSelObjectLinkingDescriptor   = objc.RegisterName("objectLinkingDescriptor")
+	_mTL4RenderPipelineDynamicLinkingDescriptorSelMeshLinkingDescriptor     = objc.RegisterName("meshLinkingDescriptor")
 )
 
 func MTL4RenderPipelineDynamicLinkingDescriptorFromID(id objc.ID) *MTL4RenderPipelineDynamicLinkingDescriptor {
@@ -37,35 +37,44 @@ func MTL4RenderPipelineDynamicLinkingDescriptorFromID(id objc.ID) *MTL4RenderPip
 // Controls properties for linking the vertex stage of the render pipeline.
 func (o *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineDynamicLinkingDescriptorSelVertexLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_ret)
 }
 
 // Controls properties for linking the fragment stage of the render pipeline.
 func (o *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineDynamicLinkingDescriptorSelFragmentLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_ret)
 }
 
 // Controls properties for linking the tile stage of the render pipeline.
 func (o *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineDynamicLinkingDescriptorSelTileLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_ret)
 }
 
 // Controls properties for link the object stage of the render pipeline.
 func (o *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineDynamicLinkingDescriptorSelObjectLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_ret)
 }
 
 // Controls properties for linking the mesh stage of the render pipeline.
 func (o *MTL4RenderPipelineDynamicLinkingDescriptor) MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4RenderPipelineDynamicLinkingDescriptorSelMeshLinkingDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineStageDynamicLinkingDescriptorFromID(_ret)
 }
-

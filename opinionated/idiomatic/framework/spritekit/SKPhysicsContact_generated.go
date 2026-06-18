@@ -80,4 +80,3 @@ type PhysicsContactable interface {
 }
 
 var _ PhysicsContactable = (*PhysicsContact)(nil)
-

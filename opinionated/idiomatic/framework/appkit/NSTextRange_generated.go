@@ -111,4 +111,3 @@ type TextRangeable interface {
 }
 
 var _ TextRangeable = (*TextRange)(nil)
-

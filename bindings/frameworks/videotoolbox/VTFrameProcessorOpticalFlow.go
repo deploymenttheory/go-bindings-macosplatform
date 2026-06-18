@@ -18,10 +18,10 @@ type VTFrameProcessorOpticalFlow struct {
 }
 
 var (
-	_clsVTFrameProcessorOpticalFlow = _objcClass("VTFrameProcessorOpticalFlow")
+	_clsVTFrameProcessorOpticalFlow                                = _objcClass("VTFrameProcessorOpticalFlow")
 	_vTFrameProcessorOpticalFlowSelInitWithForwardFlowBackwardFlow = objc.RegisterName("initWithForwardFlow:backwardFlow:")
-	_vTFrameProcessorOpticalFlowSelForwardFlow = objc.RegisterName("forwardFlow")
-	_vTFrameProcessorOpticalFlowSelBackwardFlow = objc.RegisterName("backwardFlow")
+	_vTFrameProcessorOpticalFlowSelForwardFlow                     = objc.RegisterName("forwardFlow")
+	_vTFrameProcessorOpticalFlowSelBackwardFlow                    = objc.RegisterName("backwardFlow")
 )
 
 func VTFrameProcessorOpticalFlowFromID(id objc.ID) *VTFrameProcessorOpticalFlow {
@@ -34,10 +34,12 @@ func VTFrameProcessorOpticalFlowFromID(id objc.ID) *VTFrameProcessorOpticalFlow 
 	return o
 }
 
-// Creates a new instance of forward and backward optical flow with pixel buffers. Create a new instance with forward and backward optical flow ``CVPixelBuffer``s. Instances retain the pixel buffers you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed. - Parameters: - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed. - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
+// Creates a new instance of forward and backward optical flow with pixel buffers. Create a new instance with forward and backward optical flow “CVPixelBuffer“s. Instances retain the pixel buffers you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed. - Parameters: - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed. - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
 func (o *VTFrameProcessorOpticalFlow) InitWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *VTFrameProcessorOpticalFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameProcessorOpticalFlowSelInitWithForwardFlowBackwardFlow, forwardFlow, backwardFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorOpticalFlowFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *VTFrameProcessorOpticalFlow) BackwardFlow() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vTFrameProcessorOpticalFlowSelBackwardFlow)
 	return _ret
 }
-

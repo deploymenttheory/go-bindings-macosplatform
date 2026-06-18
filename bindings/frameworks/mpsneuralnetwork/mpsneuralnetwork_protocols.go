@@ -71,4 +71,3 @@ type MPSNNTrainableNode interface {
 	TrainingStyle() MPSNNTrainingStyle
 	SetTrainingStyle(trainingStyle MPSNNTrainingStyle)
 }
-

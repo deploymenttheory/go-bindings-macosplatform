@@ -16,4 +16,3 @@ type CBPeripheralDelegate interface {
 type CBPeripheralManagerDelegate interface {
 	PeripheralManagerDidUpdateState(peripheral *CBPeripheralManager)
 }
-

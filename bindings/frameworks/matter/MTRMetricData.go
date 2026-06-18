@@ -16,10 +16,10 @@ type MTRMetricData struct {
 }
 
 var (
-	_clsMTRMetricData = _objcClass("MTRMetricData")
-	_mTRMetricDataSelValue = objc.RegisterName("value")
+	_clsMTRMetricData          = _objcClass("MTRMetricData")
+	_mTRMetricDataSelValue     = objc.RegisterName("value")
 	_mTRMetricDataSelErrorCode = objc.RegisterName("errorCode")
-	_mTRMetricDataSelDuration = objc.RegisterName("duration")
+	_mTRMetricDataSelDuration  = objc.RegisterName("duration")
 )
 
 func MTRMetricDataFromID(id objc.ID) *MTRMetricData {
@@ -35,21 +35,26 @@ func MTRMetricDataFromID(id objc.ID) *MTRMetricData {
 // Value for the metric data. The value may be nil depending on the event emitted.
 func (o *MTRMetricData) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricDataSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
 func (o *MTRMetricData) ErrorCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricDataSelErrorCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // Duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
 func (o *MTRMetricData) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricDataSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

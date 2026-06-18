@@ -95,4 +95,3 @@ type GeometrySourceable interface {
 }
 
 var _ GeometrySourceable = (*GeometrySource)(nil)
-

@@ -62,9 +62,13 @@ func (x *ImageReduceRowSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Ima
 	return x
 }
 
-func (x *ImageReduceRowSum) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowSum) asImageReduceUnary() *raw.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
@@ -76,4 +80,3 @@ type ImageReduceRowSumable interface {
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)
-

@@ -16,19 +16,19 @@ type AVSpeechSynthesisProviderVoice struct {
 }
 
 var (
-	_clsAVSpeechSynthesisProviderVoice = _objcClass("AVSpeechSynthesisProviderVoice")
+	_clsAVSpeechSynthesisProviderVoice                                                         = _objcClass("AVSpeechSynthesisProviderVoice")
 	_aVSpeechSynthesisProviderVoiceSelInitWithNameIdentifierPrimaryLanguagesSupportedLanguages = objc.RegisterName("initWithName:identifier:primaryLanguages:supportedLanguages:")
-	_aVSpeechSynthesisProviderVoiceSelUpdateSpeechVoices = objc.RegisterName("updateSpeechVoices")
-	_aVSpeechSynthesisProviderVoiceSelName = objc.RegisterName("name")
-	_aVSpeechSynthesisProviderVoiceSelIdentifier = objc.RegisterName("identifier")
-	_aVSpeechSynthesisProviderVoiceSelPrimaryLanguages = objc.RegisterName("primaryLanguages")
-	_aVSpeechSynthesisProviderVoiceSelSupportedLanguages = objc.RegisterName("supportedLanguages")
-	_aVSpeechSynthesisProviderVoiceSelVoiceSize = objc.RegisterName("voiceSize")
-	_aVSpeechSynthesisProviderVoiceSelSetVoiceSize = objc.RegisterName("setVoiceSize:")
-	_aVSpeechSynthesisProviderVoiceSelGender = objc.RegisterName("gender")
-	_aVSpeechSynthesisProviderVoiceSelSetGender = objc.RegisterName("setGender:")
-	_aVSpeechSynthesisProviderVoiceSelAge = objc.RegisterName("age")
-	_aVSpeechSynthesisProviderVoiceSelSetAge = objc.RegisterName("setAge:")
+	_aVSpeechSynthesisProviderVoiceSelUpdateSpeechVoices                                       = objc.RegisterName("updateSpeechVoices")
+	_aVSpeechSynthesisProviderVoiceSelName                                                     = objc.RegisterName("name")
+	_aVSpeechSynthesisProviderVoiceSelIdentifier                                               = objc.RegisterName("identifier")
+	_aVSpeechSynthesisProviderVoiceSelPrimaryLanguages                                         = objc.RegisterName("primaryLanguages")
+	_aVSpeechSynthesisProviderVoiceSelSupportedLanguages                                       = objc.RegisterName("supportedLanguages")
+	_aVSpeechSynthesisProviderVoiceSelVoiceSize                                                = objc.RegisterName("voiceSize")
+	_aVSpeechSynthesisProviderVoiceSelSetVoiceSize                                             = objc.RegisterName("setVoiceSize:")
+	_aVSpeechSynthesisProviderVoiceSelGender                                                   = objc.RegisterName("gender")
+	_aVSpeechSynthesisProviderVoiceSelSetGender                                                = objc.RegisterName("setGender:")
+	_aVSpeechSynthesisProviderVoiceSelAge                                                      = objc.RegisterName("age")
+	_aVSpeechSynthesisProviderVoiceSelSetAge                                                   = objc.RegisterName("setAge:")
 )
 
 func AVSpeechSynthesisProviderVoiceFromID(id objc.ID) *AVSpeechSynthesisProviderVoice {
@@ -43,7 +43,9 @@ func AVSpeechSynthesisProviderVoiceFromID(id objc.ID) *AVSpeechSynthesisProvider
 
 func (o *AVSpeechSynthesisProviderVoice) InitWithNameIdentifierPrimaryLanguagesSupportedLanguages(name *foundation.NSString, identifier *foundation.NSString, primaryLanguages *foundation.NSArray[*foundation.NSString], supportedLanguages *foundation.NSArray[*foundation.NSString]) *AVSpeechSynthesisProviderVoice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelInitWithNameIdentifierPrimaryLanguagesSupportedLanguages, name.Ptr(), identifier.Ptr(), primaryLanguages, supportedLanguages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisProviderVoiceFromID(_ret)
 }
 
@@ -55,14 +57,18 @@ func AVSpeechSynthesisProviderVoiceUpdateSpeechVoices() {
 // @brief  The localized name of the voice
 func (o *AVSpeechSynthesisProviderVoice) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief  A unique identifier for the voice @discussion The recommended format is reverse domain notation. Behavior is undefined if identifiers are not unique for all voices within a given extension.
 func (o *AVSpeechSynthesisProviderVoice) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisProviderVoiceSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,4 +113,3 @@ func (o *AVSpeechSynthesisProviderVoice) Age() int {
 func (o *AVSpeechSynthesisProviderVoice) SetAge(age int) {
 	o.Ptr().Send(_aVSpeechSynthesisProviderVoiceSelSetAge, age)
 }
-

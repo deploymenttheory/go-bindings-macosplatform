@@ -179,15 +179,25 @@ func (x *DOMHTMLFrameSetElement) SetRows(rows string) {
 	x.inner.SetRows(foundation.NSStringStringWithUTF8String(rows))
 }
 
-func (x *DOMHTMLFrameSetElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
+func (x *DOMHTMLFrameSetElement) asDOMHTMLElement() *raw.DOMHTMLElement {
+	return &x.inner.DOMHTMLElement
+}
 
-func (x *DOMHTMLFrameSetElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
+func (x *DOMHTMLFrameSetElement) asDOMElement() *raw.DOMElement {
+	return &x.inner.DOMHTMLElement.DOMElement
+}
 
-func (x *DOMHTMLFrameSetElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLFrameSetElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLFrameSetElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLFrameSetElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLFrameSetElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLFrameSetElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLFrameSetElementable is the interface implemented by [DOMHTMLFrameSetElement], for mocking and DI.
 type DOMHTMLFrameSetElementable interface {
@@ -218,4 +228,3 @@ type DOMHTMLFrameSetElementable interface {
 }
 
 var _ DOMHTMLFrameSetElementable = (*DOMHTMLFrameSetElement)(nil)
-

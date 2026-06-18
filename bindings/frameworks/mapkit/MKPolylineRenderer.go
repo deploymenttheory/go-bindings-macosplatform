@@ -15,13 +15,13 @@ type MKPolylineRenderer struct {
 }
 
 var (
-	_clsMKPolylineRenderer = _objcClass("MKPolylineRenderer")
+	_clsMKPolylineRenderer                 = _objcClass("MKPolylineRenderer")
 	_mKPolylineRendererSelInitWithPolyline = objc.RegisterName("initWithPolyline:")
-	_mKPolylineRendererSelPolyline = objc.RegisterName("polyline")
-	_mKPolylineRendererSelStrokeStart = objc.RegisterName("strokeStart")
-	_mKPolylineRendererSelSetStrokeStart = objc.RegisterName("setStrokeStart:")
-	_mKPolylineRendererSelStrokeEnd = objc.RegisterName("strokeEnd")
-	_mKPolylineRendererSelSetStrokeEnd = objc.RegisterName("setStrokeEnd:")
+	_mKPolylineRendererSelPolyline         = objc.RegisterName("polyline")
+	_mKPolylineRendererSelStrokeStart      = objc.RegisterName("strokeStart")
+	_mKPolylineRendererSelSetStrokeStart   = objc.RegisterName("setStrokeStart:")
+	_mKPolylineRendererSelStrokeEnd        = objc.RegisterName("strokeEnd")
+	_mKPolylineRendererSelSetStrokeEnd     = objc.RegisterName("setStrokeEnd:")
 )
 
 func MKPolylineRendererFromID(id objc.ID) *MKPolylineRenderer {
@@ -36,13 +36,17 @@ func MKPolylineRendererFromID(id objc.ID) *MKPolylineRenderer {
 
 func (o *MKPolylineRenderer) InitWithPolyline(polyline *MKPolyline) *MKPolylineRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolylineRendererSelInitWithPolyline, polyline.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineRendererFromID(_ret)
 }
 
 func (o *MKPolylineRenderer) Polyline() *MKPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolylineRendererSelPolyline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MKPolylineRenderer) StrokeEnd() float64 {
 func (o *MKPolylineRenderer) SetStrokeEnd(strokeEnd float64) {
 	o.Ptr().Send(_mKPolylineRendererSelSetStrokeEnd, strokeEnd)
 }
-

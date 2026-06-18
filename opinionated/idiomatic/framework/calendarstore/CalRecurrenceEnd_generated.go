@@ -60,4 +60,3 @@ type CalRecurrenceEndable interface {
 }
 
 var _ CalRecurrenceEndable = (*CalRecurrenceEnd)(nil)
-

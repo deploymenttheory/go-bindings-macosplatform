@@ -85,4 +85,3 @@ type GroupPresetable interface {
 }
 
 var _ GroupPresetable = (*GroupPreset)(nil)
-

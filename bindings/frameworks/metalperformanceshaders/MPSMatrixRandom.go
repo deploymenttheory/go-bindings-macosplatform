@@ -18,15 +18,15 @@ type MPSMatrixRandom struct {
 }
 
 var (
-	_clsMPSMatrixRandom = _objcClass("MPSMatrixRandom")
+	_clsMPSMatrixRandom                                       = _objcClass("MPSMatrixRandom")
 	_mPSMatrixRandomSelEncodeToCommandBufferDestinationVector = objc.RegisterName("encodeToCommandBuffer:destinationVector:")
 	_mPSMatrixRandomSelEncodeToCommandBufferDestinationMatrix = objc.RegisterName("encodeToCommandBuffer:destinationMatrix:")
-	_mPSMatrixRandomSelDestinationDataType = objc.RegisterName("destinationDataType")
-	_mPSMatrixRandomSelDistributionType = objc.RegisterName("distributionType")
-	_mPSMatrixRandomSelBatchStart = objc.RegisterName("batchStart")
-	_mPSMatrixRandomSelSetBatchStart = objc.RegisterName("setBatchStart:")
-	_mPSMatrixRandomSelBatchSize = objc.RegisterName("batchSize")
-	_mPSMatrixRandomSelSetBatchSize = objc.RegisterName("setBatchSize:")
+	_mPSMatrixRandomSelDestinationDataType                    = objc.RegisterName("destinationDataType")
+	_mPSMatrixRandomSelDistributionType                       = objc.RegisterName("distributionType")
+	_mPSMatrixRandomSelBatchStart                             = objc.RegisterName("batchStart")
+	_mPSMatrixRandomSelSetBatchStart                          = objc.RegisterName("setBatchStart:")
+	_mPSMatrixRandomSelBatchSize                              = objc.RegisterName("batchSize")
+	_mPSMatrixRandomSelSetBatchSize                           = objc.RegisterName("setBatchSize:")
 )
 
 func MPSMatrixRandomFromID(id objc.ID) *MPSMatrixRandom {
@@ -80,4 +80,3 @@ func (o *MPSMatrixRandom) BatchSize() uint {
 func (o *MPSMatrixRandom) SetBatchSize(batchSize uint) {
 	o.Ptr().Send(_mPSMatrixRandomSelSetBatchSize, batchSize)
 }
-

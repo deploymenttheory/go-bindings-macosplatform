@@ -18,27 +18,27 @@ type NSMigrationManager struct {
 }
 
 var (
-	_clsNSMigrationManager = _objcClass("NSMigrationManager")
-	_nSMigrationManagerSelInitWithSourceModelDestinationModel = objc.RegisterName("initWithSourceModel:destinationModel:")
+	_clsNSMigrationManager                                                                                                     = _objcClass("NSMigrationManager")
+	_nSMigrationManagerSelInitWithSourceModelDestinationModel                                                                  = objc.RegisterName("initWithSourceModel:destinationModel:")
 	_nSMigrationManagerSelMigrateStoreFromURLTypeOptionsWithMappingModelToDestinationURLDestinationTypeDestinationOptionsError = objc.RegisterName("migrateStoreFromURL:type:options:withMappingModel:toDestinationURL:destinationType:destinationOptions:error:")
-	_nSMigrationManagerSelReset = objc.RegisterName("reset")
-	_nSMigrationManagerSelSourceEntityForEntityMapping = objc.RegisterName("sourceEntityForEntityMapping:")
-	_nSMigrationManagerSelDestinationEntityForEntityMapping = objc.RegisterName("destinationEntityForEntityMapping:")
-	_nSMigrationManagerSelAssociateSourceInstanceWithDestinationInstanceForEntityMapping = objc.RegisterName("associateSourceInstance:withDestinationInstance:forEntityMapping:")
-	_nSMigrationManagerSelDestinationInstancesForEntityMappingNamedSourceInstances = objc.RegisterName("destinationInstancesForEntityMappingNamed:sourceInstances:")
-	_nSMigrationManagerSelSourceInstancesForEntityMappingNamedDestinationInstances = objc.RegisterName("sourceInstancesForEntityMappingNamed:destinationInstances:")
-	_nSMigrationManagerSelCancelMigrationWithError = objc.RegisterName("cancelMigrationWithError:")
-	_nSMigrationManagerSelUsesStoreSpecificMigrationManager = objc.RegisterName("usesStoreSpecificMigrationManager")
-	_nSMigrationManagerSelSetUsesStoreSpecificMigrationManager = objc.RegisterName("setUsesStoreSpecificMigrationManager:")
-	_nSMigrationManagerSelMappingModel = objc.RegisterName("mappingModel")
-	_nSMigrationManagerSelSourceModel = objc.RegisterName("sourceModel")
-	_nSMigrationManagerSelDestinationModel = objc.RegisterName("destinationModel")
-	_nSMigrationManagerSelSourceContext = objc.RegisterName("sourceContext")
-	_nSMigrationManagerSelDestinationContext = objc.RegisterName("destinationContext")
-	_nSMigrationManagerSelCurrentEntityMapping = objc.RegisterName("currentEntityMapping")
-	_nSMigrationManagerSelMigrationProgress = objc.RegisterName("migrationProgress")
-	_nSMigrationManagerSelUserInfo = objc.RegisterName("userInfo")
-	_nSMigrationManagerSelSetUserInfo = objc.RegisterName("setUserInfo:")
+	_nSMigrationManagerSelReset                                                                                                = objc.RegisterName("reset")
+	_nSMigrationManagerSelSourceEntityForEntityMapping                                                                         = objc.RegisterName("sourceEntityForEntityMapping:")
+	_nSMigrationManagerSelDestinationEntityForEntityMapping                                                                    = objc.RegisterName("destinationEntityForEntityMapping:")
+	_nSMigrationManagerSelAssociateSourceInstanceWithDestinationInstanceForEntityMapping                                       = objc.RegisterName("associateSourceInstance:withDestinationInstance:forEntityMapping:")
+	_nSMigrationManagerSelDestinationInstancesForEntityMappingNamedSourceInstances                                             = objc.RegisterName("destinationInstancesForEntityMappingNamed:sourceInstances:")
+	_nSMigrationManagerSelSourceInstancesForEntityMappingNamedDestinationInstances                                             = objc.RegisterName("sourceInstancesForEntityMappingNamed:destinationInstances:")
+	_nSMigrationManagerSelCancelMigrationWithError                                                                             = objc.RegisterName("cancelMigrationWithError:")
+	_nSMigrationManagerSelUsesStoreSpecificMigrationManager                                                                    = objc.RegisterName("usesStoreSpecificMigrationManager")
+	_nSMigrationManagerSelSetUsesStoreSpecificMigrationManager                                                                 = objc.RegisterName("setUsesStoreSpecificMigrationManager:")
+	_nSMigrationManagerSelMappingModel                                                                                         = objc.RegisterName("mappingModel")
+	_nSMigrationManagerSelSourceModel                                                                                          = objc.RegisterName("sourceModel")
+	_nSMigrationManagerSelDestinationModel                                                                                     = objc.RegisterName("destinationModel")
+	_nSMigrationManagerSelSourceContext                                                                                        = objc.RegisterName("sourceContext")
+	_nSMigrationManagerSelDestinationContext                                                                                   = objc.RegisterName("destinationContext")
+	_nSMigrationManagerSelCurrentEntityMapping                                                                                 = objc.RegisterName("currentEntityMapping")
+	_nSMigrationManagerSelMigrationProgress                                                                                    = objc.RegisterName("migrationProgress")
+	_nSMigrationManagerSelUserInfo                                                                                             = objc.RegisterName("userInfo")
+	_nSMigrationManagerSelSetUserInfo                                                                                          = objc.RegisterName("setUserInfo:")
 )
 
 func NSMigrationManagerFromID(id objc.ID) *NSMigrationManager {
@@ -53,7 +53,9 @@ func NSMigrationManagerFromID(id objc.ID) *NSMigrationManager {
 
 func (o *NSMigrationManager) InitWithSourceModelDestinationModel(sourceModel *NSManagedObjectModel, destinationModel *NSManagedObjectModel) *NSMigrationManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelInitWithSourceModelDestinationModel, sourceModel.Ptr(), destinationModel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMigrationManagerFromID(_ret)
 }
 
@@ -72,13 +74,17 @@ func (o *NSMigrationManager) Reset() {
 
 func (o *NSMigrationManager) SourceEntityForEntityMapping(mEntity *NSEntityMapping) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceEntityForEntityMapping, mEntity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSMigrationManager) DestinationEntityForEntityMapping(mEntity *NSEntityMapping) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationEntityForEntityMapping, mEntity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -88,13 +94,17 @@ func (o *NSMigrationManager) AssociateSourceInstanceWithDestinationInstanceForEn
 
 func (o *NSMigrationManager) DestinationInstancesForEntityMappingNamedSourceInstances(mappingName *foundation.NSString, sourceInstances *foundation.NSArray[*NSManagedObject]) *foundation.NSArray[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationInstancesForEntityMappingNamedSourceInstances, mappingName.Ptr(), sourceInstances.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSMigrationManager) SourceInstancesForEntityMappingNamedDestinationInstances(mappingName *foundation.NSString, destinationInstances *foundation.NSArray[*NSManagedObject]) *foundation.NSArray[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceInstancesForEntityMappingNamedDestinationInstances, mappingName.Ptr(), destinationInstances.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSManagedObject](_ret)
 }
 
@@ -113,37 +123,49 @@ func (o *NSMigrationManager) SetUsesStoreSpecificMigrationManager(usesStoreSpeci
 
 func (o *NSMigrationManager) MappingModel() *NSMappingModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelMappingModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMappingModelFromID(_ret)
 }
 
 func (o *NSMigrationManager) SourceModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSMigrationManager) DestinationModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSMigrationManager) SourceContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelSourceContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSMigrationManager) DestinationContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelDestinationContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSMigrationManager) CurrentEntityMapping() *NSEntityMapping {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMigrationManagerSelCurrentEntityMapping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityMappingFromID(_ret)
 }
 
@@ -160,4 +182,3 @@ func (o *NSMigrationManager) UserInfo() *foundation.NSDictionary[objc.ID, objc.I
 func (o *NSMigrationManager) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSMigrationManagerSelSetUserInfo, userInfo)
 }
-

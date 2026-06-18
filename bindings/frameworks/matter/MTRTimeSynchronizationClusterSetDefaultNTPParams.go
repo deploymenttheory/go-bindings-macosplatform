@@ -16,12 +16,12 @@ type MTRTimeSynchronizationClusterSetDefaultNTPParams struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterSetDefaultNTPParams = _objcClass("MTRTimeSynchronizationClusterSetDefaultNTPParams")
-	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelDefaultNTP = objc.RegisterName("defaultNTP")
-	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetDefaultNTP = objc.RegisterName("setDefaultNTP:")
-	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRTimeSynchronizationClusterSetDefaultNTPParams                               = _objcClass("MTRTimeSynchronizationClusterSetDefaultNTPParams")
+	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelDefaultNTP                     = objc.RegisterName("defaultNTP")
+	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetDefaultNTP                  = objc.RegisterName("setDefaultNTP:")
+	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRTimeSynchronizationClusterSetDefaultNTPParamsFromID(id objc.ID) *MTRTime
 
 func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) DefaultNTP() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetDefaultNTPParamsSelDefaultNTP)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetDefaultNTP(default
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetDefaultNTPParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetTimedInvokeTimeout
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterSetDefaultNTPParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterSetDefaultNTPParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

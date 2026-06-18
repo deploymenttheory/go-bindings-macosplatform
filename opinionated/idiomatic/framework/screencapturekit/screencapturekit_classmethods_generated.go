@@ -248,4 +248,3 @@ func StreamConfigurationWithPreset(preset raw.SCStreamConfigurationPreset) *Stre
 	}
 	return &StreamConfiguration{inner: _r}
 }
-

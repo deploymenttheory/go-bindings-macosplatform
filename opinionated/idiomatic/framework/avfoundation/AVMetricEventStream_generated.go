@@ -72,4 +72,3 @@ type MetricEventStreamable interface {
 }
 
 var _ MetricEventStreamable = (*MetricEventStream)(nil)
-

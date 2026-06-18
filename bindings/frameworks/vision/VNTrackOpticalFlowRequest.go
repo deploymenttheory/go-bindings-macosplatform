@@ -17,15 +17,15 @@ type VNTrackOpticalFlowRequest struct {
 }
 
 var (
-	_clsVNTrackOpticalFlowRequest = _objcClass("VNTrackOpticalFlowRequest")
-	_vNTrackOpticalFlowRequestSelInit = objc.RegisterName("init")
+	_clsVNTrackOpticalFlowRequest                          = _objcClass("VNTrackOpticalFlowRequest")
+	_vNTrackOpticalFlowRequestSelInit                      = objc.RegisterName("init")
 	_vNTrackOpticalFlowRequestSelInitWithCompletionHandler = objc.RegisterName("initWithCompletionHandler:")
-	_vNTrackOpticalFlowRequestSelComputationAccuracy = objc.RegisterName("computationAccuracy")
-	_vNTrackOpticalFlowRequestSelSetComputationAccuracy = objc.RegisterName("setComputationAccuracy:")
-	_vNTrackOpticalFlowRequestSelOutputPixelFormat = objc.RegisterName("outputPixelFormat")
-	_vNTrackOpticalFlowRequestSelSetOutputPixelFormat = objc.RegisterName("setOutputPixelFormat:")
-	_vNTrackOpticalFlowRequestSelKeepNetworkOutput = objc.RegisterName("keepNetworkOutput")
-	_vNTrackOpticalFlowRequestSelSetKeepNetworkOutput = objc.RegisterName("setKeepNetworkOutput:")
+	_vNTrackOpticalFlowRequestSelComputationAccuracy       = objc.RegisterName("computationAccuracy")
+	_vNTrackOpticalFlowRequestSelSetComputationAccuracy    = objc.RegisterName("setComputationAccuracy:")
+	_vNTrackOpticalFlowRequestSelOutputPixelFormat         = objc.RegisterName("outputPixelFormat")
+	_vNTrackOpticalFlowRequestSelSetOutputPixelFormat      = objc.RegisterName("setOutputPixelFormat:")
+	_vNTrackOpticalFlowRequestSelKeepNetworkOutput         = objc.RegisterName("keepNetworkOutput")
+	_vNTrackOpticalFlowRequestSelSetKeepNetworkOutput      = objc.RegisterName("setKeepNetworkOutput:")
 )
 
 func VNTrackOpticalFlowRequestFromID(id objc.ID) *VNTrackOpticalFlowRequest {
@@ -41,7 +41,9 @@ func VNTrackOpticalFlowRequestFromID(id objc.ID) *VNTrackOpticalFlowRequest {
 // @brief Create a new request that can statefully track the optical from from one image to another. @discussion This is a convenience initializer for a frame analysis spacing of kCMTimeZero and a nil completion handler.
 func (o *VNTrackOpticalFlowRequest) Init() *VNTrackOpticalFlowRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackOpticalFlowRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackOpticalFlowRequestFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *VNTrackOpticalFlowRequest) InitWithCompletionHandler(completionHandler 
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackOpticalFlowRequestSelInitWithCompletionHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackOpticalFlowRequestFromID(_ret)
 }
 
@@ -91,4 +95,3 @@ func (o *VNTrackOpticalFlowRequest) KeepNetworkOutput() bool {
 func (o *VNTrackOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
 	o.Ptr().Send(_vNTrackOpticalFlowRequestSelSetKeepNetworkOutput, keepNetworkOutput)
 }
-

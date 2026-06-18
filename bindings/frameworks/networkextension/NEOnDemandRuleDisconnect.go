@@ -25,4 +25,3 @@ func NEOnDemandRuleDisconnectFromID(id objc.ID) *NEOnDemandRuleDisconnect {
 	purego.Track(o)
 	return o
 }
-

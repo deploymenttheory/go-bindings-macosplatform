@@ -61,4 +61,3 @@ type BinaryArchiveDescriptorable interface {
 }
 
 var _ BinaryArchiveDescriptorable = (*BinaryArchiveDescriptor)(nil)
-

@@ -138,4 +138,3 @@ type ImageGuidedFilterable interface {
 }
 
 var _ ImageGuidedFilterable = (*ImageGuidedFilter)(nil)
-

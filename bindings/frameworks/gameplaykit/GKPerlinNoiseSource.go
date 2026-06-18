@@ -17,11 +17,11 @@ type GKPerlinNoiseSource struct {
 }
 
 var (
-	_clsGKPerlinNoiseSource = _objcClass("GKPerlinNoiseSource")
+	_clsGKPerlinNoiseSource                                                                   = _objcClass("GKPerlinNoiseSource")
 	_gKPerlinNoiseSourceSelPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed = objc.RegisterName("perlinNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:")
-	_gKPerlinNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed = objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:")
-	_gKPerlinNoiseSourceSelPersistence = objc.RegisterName("persistence")
-	_gKPerlinNoiseSourceSelSetPersistence = objc.RegisterName("setPersistence:")
+	_gKPerlinNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed              = objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:")
+	_gKPerlinNoiseSourceSelPersistence                                                        = objc.RegisterName("persistence")
+	_gKPerlinNoiseSourceSelSetPersistence                                                     = objc.RegisterName("setPersistence:")
 )
 
 func GKPerlinNoiseSourceFromID(id objc.ID) *GKPerlinNoiseSource {
@@ -36,13 +36,17 @@ func GKPerlinNoiseSourceFromID(id objc.ID) *GKPerlinNoiseSource {
 
 func GKPerlinNoiseSourcePerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKPerlinNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKPerlinNoiseSource), _gKPerlinNoiseSourceSelPerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPerlinNoiseSourceFromID(_ret)
 }
 
 func (o *GKPerlinNoiseSource) InitWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *GKPerlinNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKPerlinNoiseSourceSelInitWithFrequencyOctaveCountPersistenceLacunaritySeed, frequency, octaveCount, persistence, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPerlinNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKPerlinNoiseSource) Persistence() float64 {
 func (o *GKPerlinNoiseSource) SetPersistence(persistence float64) {
 	o.Ptr().Send(_gKPerlinNoiseSourceSelSetPersistence, persistence)
 }
-

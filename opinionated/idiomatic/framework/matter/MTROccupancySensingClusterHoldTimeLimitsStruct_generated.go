@@ -16,7 +16,9 @@ type MTROccupancySensingClusterHoldTimeLimitsStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROccupancySensingClusterHoldTimeLimitsStruct].
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) Unwrap() *raw.MTROccupancySensingClusterHoldTimeLimitsStruct { return x.inner }
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) Unwrap() *raw.MTROccupancySensingClusterHoldTimeLimitsStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTROccupancySensingClusterHoldTimeLimitsStructable interface {
 }
 
 var _ MTROccupancySensingClusterHoldTimeLimitsStructable = (*MTROccupancySensingClusterHoldTimeLimitsStruct)(nil)
-

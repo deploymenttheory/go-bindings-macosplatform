@@ -89,4 +89,3 @@ type HostInterfaceable interface {
 }
 
 var _ HostInterfaceable = (*HostInterface)(nil)
-

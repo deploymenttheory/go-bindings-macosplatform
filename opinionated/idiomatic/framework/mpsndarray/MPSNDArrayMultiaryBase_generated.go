@@ -121,4 +121,3 @@ type ArrayMultiaryBaseable interface {
 }
 
 var _ ArrayMultiaryBaseable = (*ArrayMultiaryBase)(nil)
-

@@ -16,11 +16,11 @@ type MLModelStructureProgramOperation struct {
 }
 
 var (
-	_clsMLModelStructureProgramOperation = _objcClass("MLModelStructureProgramOperation")
+	_clsMLModelStructureProgramOperation             = _objcClass("MLModelStructureProgramOperation")
 	_mLModelStructureProgramOperationSelOperatorName = objc.RegisterName("operatorName")
-	_mLModelStructureProgramOperationSelInputs = objc.RegisterName("inputs")
-	_mLModelStructureProgramOperationSelOutputs = objc.RegisterName("outputs")
-	_mLModelStructureProgramOperationSelBlocks = objc.RegisterName("blocks")
+	_mLModelStructureProgramOperationSelInputs       = objc.RegisterName("inputs")
+	_mLModelStructureProgramOperationSelOutputs      = objc.RegisterName("outputs")
+	_mLModelStructureProgramOperationSelBlocks       = objc.RegisterName("blocks")
 )
 
 func MLModelStructureProgramOperationFromID(id objc.ID) *MLModelStructureProgramOperation {
@@ -36,7 +36,9 @@ func MLModelStructureProgramOperationFromID(id objc.ID) *MLModelStructureProgram
 // The name of the operator, e.g., "conv", "pool", "softmax", etc.
 func (o *MLModelStructureProgramOperation) OperatorName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramOperationSelOperatorName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,14 +51,17 @@ func (o *MLModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*fo
 // The outputs of the Operation.
 func (o *MLModelStructureProgramOperation) Outputs() *foundation.NSArray[*MLModelStructureProgramNamedValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramOperationSelOutputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramNamedValueType](_ret)
 }
 
 // Nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
 func (o *MLModelStructureProgramOperation) Blocks() *foundation.NSArray[*MLModelStructureProgramBlock] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramOperationSelBlocks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramBlock](_ret)
 }
-

@@ -36,4 +36,3 @@ func KSMErrorDomainLaunchd() uintptr {
 	ptr, _ := purego.Dlsym(_servicemanagementLib, "kSMErrorDomainLaunchd")
 	return ptr
 }
-

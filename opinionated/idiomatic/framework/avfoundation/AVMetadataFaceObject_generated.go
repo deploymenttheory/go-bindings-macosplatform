@@ -60,7 +60,9 @@ func (x *MetadataFaceObject) YawAngle() float64 {
 	return x.inner.YawAngle()
 }
 
-func (x *MetadataFaceObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+func (x *MetadataFaceObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataObject
+}
 
 // MetadataFaceObjectable is the interface implemented by [MetadataFaceObject], for mocking and DI.
 type MetadataFaceObjectable interface {
@@ -73,4 +75,3 @@ type MetadataFaceObjectable interface {
 }
 
 var _ MetadataFaceObjectable = (*MetadataFaceObject)(nil)
-

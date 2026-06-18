@@ -20,55 +20,55 @@ type AVAssetWriter struct {
 }
 
 var (
-	_clsAVAssetWriter = _objcClass("AVAssetWriter")
-	_aVAssetWriterSelAssetWriterWithURLFileTypeError = objc.RegisterName("assetWriterWithURL:fileType:error:")
-	_aVAssetWriterSelInitWithURLFileTypeError = objc.RegisterName("initWithURL:fileType:error:")
-	_aVAssetWriterSelInitWithContentType = objc.RegisterName("initWithContentType:")
-	_aVAssetWriterSelCanApplyOutputSettingsForMediaType = objc.RegisterName("canApplyOutputSettings:forMediaType:")
-	_aVAssetWriterSelCanAddInput = objc.RegisterName("canAddInput:")
-	_aVAssetWriterSelAddInput = objc.RegisterName("addInput:")
-	_aVAssetWriterSelStartWriting = objc.RegisterName("startWriting")
-	_aVAssetWriterSelStartSessionAtSourceTime = objc.RegisterName("startSessionAtSourceTime:")
-	_aVAssetWriterSelEndSessionAtSourceTime = objc.RegisterName("endSessionAtSourceTime:")
-	_aVAssetWriterSelCancelWriting = objc.RegisterName("cancelWriting")
-	_aVAssetWriterSelFinishWriting = objc.RegisterName("finishWriting")
-	_aVAssetWriterSelFinishWritingWithCompletionHandler = objc.RegisterName("finishWritingWithCompletionHandler:")
-	_aVAssetWriterSelOutputURL = objc.RegisterName("outputURL")
-	_aVAssetWriterSelOutputFileType = objc.RegisterName("outputFileType")
-	_aVAssetWriterSelAvailableMediaTypes = objc.RegisterName("availableMediaTypes")
-	_aVAssetWriterSelStatus = objc.RegisterName("status")
-	_aVAssetWriterSelError = objc.RegisterName("error")
-	_aVAssetWriterSelMetadata = objc.RegisterName("metadata")
-	_aVAssetWriterSelSetMetadata = objc.RegisterName("setMetadata:")
-	_aVAssetWriterSelShouldOptimizeForNetworkUse = objc.RegisterName("shouldOptimizeForNetworkUse")
-	_aVAssetWriterSelSetShouldOptimizeForNetworkUse = objc.RegisterName("setShouldOptimizeForNetworkUse:")
-	_aVAssetWriterSelDirectoryForTemporaryFiles = objc.RegisterName("directoryForTemporaryFiles")
-	_aVAssetWriterSelSetDirectoryForTemporaryFiles = objc.RegisterName("setDirectoryForTemporaryFiles:")
-	_aVAssetWriterSelInputs = objc.RegisterName("inputs")
-	_aVAssetWriterSelMovieFragmentInterval = objc.RegisterName("movieFragmentInterval")
-	_aVAssetWriterSelSetMovieFragmentInterval = objc.RegisterName("setMovieFragmentInterval:")
-	_aVAssetWriterSelInitialMovieFragmentInterval = objc.RegisterName("initialMovieFragmentInterval")
-	_aVAssetWriterSelSetInitialMovieFragmentInterval = objc.RegisterName("setInitialMovieFragmentInterval:")
-	_aVAssetWriterSelInitialMovieFragmentSequenceNumber = objc.RegisterName("initialMovieFragmentSequenceNumber")
+	_clsAVAssetWriter                                      = _objcClass("AVAssetWriter")
+	_aVAssetWriterSelAssetWriterWithURLFileTypeError       = objc.RegisterName("assetWriterWithURL:fileType:error:")
+	_aVAssetWriterSelInitWithURLFileTypeError              = objc.RegisterName("initWithURL:fileType:error:")
+	_aVAssetWriterSelInitWithContentType                   = objc.RegisterName("initWithContentType:")
+	_aVAssetWriterSelCanApplyOutputSettingsForMediaType    = objc.RegisterName("canApplyOutputSettings:forMediaType:")
+	_aVAssetWriterSelCanAddInput                           = objc.RegisterName("canAddInput:")
+	_aVAssetWriterSelAddInput                              = objc.RegisterName("addInput:")
+	_aVAssetWriterSelStartWriting                          = objc.RegisterName("startWriting")
+	_aVAssetWriterSelStartSessionAtSourceTime              = objc.RegisterName("startSessionAtSourceTime:")
+	_aVAssetWriterSelEndSessionAtSourceTime                = objc.RegisterName("endSessionAtSourceTime:")
+	_aVAssetWriterSelCancelWriting                         = objc.RegisterName("cancelWriting")
+	_aVAssetWriterSelFinishWriting                         = objc.RegisterName("finishWriting")
+	_aVAssetWriterSelFinishWritingWithCompletionHandler    = objc.RegisterName("finishWritingWithCompletionHandler:")
+	_aVAssetWriterSelOutputURL                             = objc.RegisterName("outputURL")
+	_aVAssetWriterSelOutputFileType                        = objc.RegisterName("outputFileType")
+	_aVAssetWriterSelAvailableMediaTypes                   = objc.RegisterName("availableMediaTypes")
+	_aVAssetWriterSelStatus                                = objc.RegisterName("status")
+	_aVAssetWriterSelError                                 = objc.RegisterName("error")
+	_aVAssetWriterSelMetadata                              = objc.RegisterName("metadata")
+	_aVAssetWriterSelSetMetadata                           = objc.RegisterName("setMetadata:")
+	_aVAssetWriterSelShouldOptimizeForNetworkUse           = objc.RegisterName("shouldOptimizeForNetworkUse")
+	_aVAssetWriterSelSetShouldOptimizeForNetworkUse        = objc.RegisterName("setShouldOptimizeForNetworkUse:")
+	_aVAssetWriterSelDirectoryForTemporaryFiles            = objc.RegisterName("directoryForTemporaryFiles")
+	_aVAssetWriterSelSetDirectoryForTemporaryFiles         = objc.RegisterName("setDirectoryForTemporaryFiles:")
+	_aVAssetWriterSelInputs                                = objc.RegisterName("inputs")
+	_aVAssetWriterSelMovieFragmentInterval                 = objc.RegisterName("movieFragmentInterval")
+	_aVAssetWriterSelSetMovieFragmentInterval              = objc.RegisterName("setMovieFragmentInterval:")
+	_aVAssetWriterSelInitialMovieFragmentInterval          = objc.RegisterName("initialMovieFragmentInterval")
+	_aVAssetWriterSelSetInitialMovieFragmentInterval       = objc.RegisterName("setInitialMovieFragmentInterval:")
+	_aVAssetWriterSelInitialMovieFragmentSequenceNumber    = objc.RegisterName("initialMovieFragmentSequenceNumber")
 	_aVAssetWriterSelSetInitialMovieFragmentSequenceNumber = objc.RegisterName("setInitialMovieFragmentSequenceNumber:")
-	_aVAssetWriterSelProducesCombinableFragments = objc.RegisterName("producesCombinableFragments")
-	_aVAssetWriterSelSetProducesCombinableFragments = objc.RegisterName("setProducesCombinableFragments:")
-	_aVAssetWriterSelOverallDurationHint = objc.RegisterName("overallDurationHint")
-	_aVAssetWriterSelSetOverallDurationHint = objc.RegisterName("setOverallDurationHint:")
-	_aVAssetWriterSelMovieTimeScale = objc.RegisterName("movieTimeScale")
-	_aVAssetWriterSelSetMovieTimeScale = objc.RegisterName("setMovieTimeScale:")
-	_aVAssetWriterSelCanAddInputGroup = objc.RegisterName("canAddInputGroup:")
-	_aVAssetWriterSelAddInputGroup = objc.RegisterName("addInputGroup:")
-	_aVAssetWriterSelInputGroups = objc.RegisterName("inputGroups")
-	_aVAssetWriterSelFlushSegment = objc.RegisterName("flushSegment")
-	_aVAssetWriterSelPreferredOutputSegmentInterval = objc.RegisterName("preferredOutputSegmentInterval")
-	_aVAssetWriterSelSetPreferredOutputSegmentInterval = objc.RegisterName("setPreferredOutputSegmentInterval:")
-	_aVAssetWriterSelInitialSegmentStartTime = objc.RegisterName("initialSegmentStartTime")
-	_aVAssetWriterSelSetInitialSegmentStartTime = objc.RegisterName("setInitialSegmentStartTime:")
-	_aVAssetWriterSelOutputFileTypeProfile = objc.RegisterName("outputFileTypeProfile")
-	_aVAssetWriterSelSetOutputFileTypeProfile = objc.RegisterName("setOutputFileTypeProfile:")
-	_aVAssetWriterSelDelegate = objc.RegisterName("delegate")
-	_aVAssetWriterSelSetDelegate = objc.RegisterName("setDelegate:")
+	_aVAssetWriterSelProducesCombinableFragments           = objc.RegisterName("producesCombinableFragments")
+	_aVAssetWriterSelSetProducesCombinableFragments        = objc.RegisterName("setProducesCombinableFragments:")
+	_aVAssetWriterSelOverallDurationHint                   = objc.RegisterName("overallDurationHint")
+	_aVAssetWriterSelSetOverallDurationHint                = objc.RegisterName("setOverallDurationHint:")
+	_aVAssetWriterSelMovieTimeScale                        = objc.RegisterName("movieTimeScale")
+	_aVAssetWriterSelSetMovieTimeScale                     = objc.RegisterName("setMovieTimeScale:")
+	_aVAssetWriterSelCanAddInputGroup                      = objc.RegisterName("canAddInputGroup:")
+	_aVAssetWriterSelAddInputGroup                         = objc.RegisterName("addInputGroup:")
+	_aVAssetWriterSelInputGroups                           = objc.RegisterName("inputGroups")
+	_aVAssetWriterSelFlushSegment                          = objc.RegisterName("flushSegment")
+	_aVAssetWriterSelPreferredOutputSegmentInterval        = objc.RegisterName("preferredOutputSegmentInterval")
+	_aVAssetWriterSelSetPreferredOutputSegmentInterval     = objc.RegisterName("setPreferredOutputSegmentInterval:")
+	_aVAssetWriterSelInitialSegmentStartTime               = objc.RegisterName("initialSegmentStartTime")
+	_aVAssetWriterSelSetInitialSegmentStartTime            = objc.RegisterName("setInitialSegmentStartTime:")
+	_aVAssetWriterSelOutputFileTypeProfile                 = objc.RegisterName("outputFileTypeProfile")
+	_aVAssetWriterSelSetOutputFileTypeProfile              = objc.RegisterName("setOutputFileTypeProfile:")
+	_aVAssetWriterSelDelegate                              = objc.RegisterName("delegate")
+	_aVAssetWriterSelSetDelegate                           = objc.RegisterName("setDelegate:")
 )
 
 func AVAssetWriterFromID(id objc.ID) *AVAssetWriter {
@@ -85,7 +85,9 @@ func AVAssetWriterFromID(id objc.ID) *AVAssetWriter {
 func AVAssetWriterAssetWriterWithURLFileTypeError(outputURL *foundation.NSURL, outputFileType *foundation.NSString) (*AVAssetWriter, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriter), _aVAssetWriterSelAssetWriterWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -96,7 +98,9 @@ func AVAssetWriterAssetWriterWithURLFileTypeError(outputURL *foundation.NSURL, o
 func (o *AVAssetWriter) InitWithURLFileTypeError(outputURL *foundation.NSURL, outputFileType *foundation.NSString) (*AVAssetWriter, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInitWithURLFileTypeError, outputURL.Ptr(), outputFileType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -106,7 +110,9 @@ func (o *AVAssetWriter) InitWithURLFileTypeError(outputURL *foundation.NSURL, ou
 // @method initWithContentType: @abstract Creates an instance of AVAssetWriter configured to output segment data in a specified container format. @param outputContentType A UTType indicating the format of the segment data to be output. @result An instance of AVAssetWriter. @discussion Clients that want to receive segment data through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should use this initializer instead of -initWithURL:fileType:error:. Clients may use +typeWithIdentifier: with a UTI to create an instance of UTType. See <UniformTypeIdentifiers/UTType.h>. This method throws an exception if the output content type UTI for container format is not declared in AVMediaFormat.h.
 func (o *AVAssetWriter) InitWithContentType(outputContentType *uniformtypeidentifiers.UTType) *AVAssetWriter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInitWithContentType, outputContentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterFromID(_ret)
 }
 
@@ -170,14 +176,18 @@ func (o *AVAssetWriter) FinishWritingWithCompletionHandler(handler func()) {
 // @property outputURL @abstract The location of the file for which the instance of AVAssetWriter was initialized for writing. @discussion You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
 func (o *AVAssetWriter) OutputURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property outputFileType @abstract The UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
 func (o *AVAssetWriter) OutputFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -202,7 +212,9 @@ func (o *AVAssetWriter) Error() unsafe.Pointer {
 // @property metadata @abstract A collection of metadata to be written to the receiver's output file. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
 func (o *AVAssetWriter) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -223,7 +235,9 @@ func (o *AVAssetWriter) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkU
 // @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. @discussion AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
 func (o *AVAssetWriter) DirectoryForTemporaryFiles() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelDirectoryForTemporaryFiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -234,7 +248,9 @@ func (o *AVAssetWriter) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles
 // @property inputs @abstract The inputs from which the asset writer receives media data. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
 func (o *AVAssetWriter) Inputs() *foundation.NSArray[*AVAssetWriterInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetWriterInput](_ret)
 }
 
@@ -310,7 +326,9 @@ func (o *AVAssetWriter) AddInputGroup(inputGroup *AVAssetWriterInputGroup) {
 
 func (o *AVAssetWriter) InputGroups() *foundation.NSArray[*AVAssetWriterInputGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelInputGroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetWriterInputGroup](_ret)
 }
 
@@ -341,7 +359,9 @@ func (o *AVAssetWriter) SetInitialSegmentStartTime(initialSegmentStartTime corem
 
 func (o *AVAssetWriter) OutputFileTypeProfile() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterSelOutputFileTypeProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -358,4 +378,3 @@ func (o *AVAssetWriter) Delegate() AVAssetWriterDelegate {
 func (o *AVAssetWriter) SetDelegate(delegate AVAssetWriterDelegate) {
 	o.Ptr().Send(_aVAssetWriterSelSetDelegate, delegate)
 }
-

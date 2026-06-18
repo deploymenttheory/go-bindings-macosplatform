@@ -16,11 +16,11 @@ type PHASESwitchNodeDefinition struct {
 }
 
 var (
-	_clsPHASESwitchNodeDefinition = _objcClass("PHASESwitchNodeDefinition")
+	_clsPHASESwitchNodeDefinition                                                = _objcClass("PHASESwitchNodeDefinition")
 	_pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinitionIdentifier = objc.RegisterName("initWithSwitchMetaParameterDefinition:identifier:")
-	_pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinition = objc.RegisterName("initWithSwitchMetaParameterDefinition:")
-	_pHASESwitchNodeDefinitionSelAddSubtreeSwitchValue = objc.RegisterName("addSubtree:switchValue:")
-	_pHASESwitchNodeDefinitionSelSwitchMetaParameterDefinition = objc.RegisterName("switchMetaParameterDefinition")
+	_pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinition           = objc.RegisterName("initWithSwitchMetaParameterDefinition:")
+	_pHASESwitchNodeDefinitionSelAddSubtreeSwitchValue                           = objc.RegisterName("addSubtree:switchValue:")
+	_pHASESwitchNodeDefinitionSelSwitchMetaParameterDefinition                   = objc.RegisterName("switchMetaParameterDefinition")
 )
 
 func PHASESwitchNodeDefinitionFromID(id objc.ID) *PHASESwitchNodeDefinition {
@@ -36,14 +36,18 @@ func PHASESwitchNodeDefinitionFromID(id objc.ID) *PHASESwitchNodeDefinition {
 // @method initWithSwitchMetaParameterDefinition:identifier @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASESwitchNodeDefinition object
 func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *PHASEStringMetaParameterDefinition, identifier *foundation.NSString) *PHASESwitchNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinitionIdentifier, switchMetaParameterDefinition.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESwitchNodeDefinitionFromID(_ret)
 }
 
 // @method initWithSwitchMetaParameterDefinition @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @return A new PHASESwitchNodeDefinition object
 func (o *PHASESwitchNodeDefinition) InitWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *PHASEStringMetaParameterDefinition) *PHASESwitchNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESwitchNodeDefinitionSelInitWithSwitchMetaParameterDefinition, switchMetaParameterDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESwitchNodeDefinitionFromID(_ret)
 }
 
@@ -54,7 +58,8 @@ func (o *PHASESwitchNodeDefinition) AddSubtreeSwitchValue(subtree *PHASESoundEve
 
 func (o *PHASESwitchNodeDefinition) SwitchMetaParameterDefinition() *PHASEStringMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESwitchNodeDefinitionSelSwitchMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEStringMetaParameterDefinitionFromID(_ret)
 }
-

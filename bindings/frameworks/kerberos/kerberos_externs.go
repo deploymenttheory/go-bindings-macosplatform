@@ -13,43 +13,57 @@ import (
 
 func GSS_C_NT_ANONYMOUS() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_ANONYMOUS")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_EXPORT_NAME() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_EXPORT_NAME")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_HOSTBASED_SERVICE() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_HOSTBASED_SERVICE")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_HOSTBASED_SERVICE_X() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_HOSTBASED_SERVICE_X")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_MACHINE_UID_NAME() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_MACHINE_UID_NAME")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_STRING_UID_NAME() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_STRING_UID_NAME")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func GSS_C_NT_USER_NAME() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "GSS_C_NT_USER_NAME")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
@@ -85,7 +99,9 @@ func Gss_mech_set_krb5_old() uintptr {
 
 func Gss_nt_exported_name() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_exported_name")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
@@ -101,37 +117,48 @@ func Gss_nt_krb5_principal() uintptr {
 
 func Gss_nt_machine_uid_name() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_machine_uid_name")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func Gss_nt_service_name() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_service_name")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func Gss_nt_service_name_v2() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_service_name_v2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func Gss_nt_string_uid_name() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_string_uid_name")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func Gss_nt_user_name() *gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "gss_nt_user_name")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
 
 func Krb5_gss_oid_array() []gss.GssOIDDescStruct {
 	ptr, _ := purego.Dlsym(_kerberosLib, "krb5_gss_oid_array")
-	if ptr == 0 { return []gss.GssOIDDescStruct{} }
+	if ptr == 0 {
+		return []gss.GssOIDDescStruct{}
+	}
 	return *(*[]gss.GssOIDDescStruct)(unsafe.Pointer(ptr))
 }
-

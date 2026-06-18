@@ -17,15 +17,15 @@ type MDLAnimatedVector3 struct {
 }
 
 var (
-	_clsMDLAnimatedVector3 = _objcClass("MDLAnimatedVector3")
-	_mDLAnimatedVector3SelSetFloat3AtTime = objc.RegisterName("setFloat3:atTime:")
-	_mDLAnimatedVector3SelSetDouble3AtTime = objc.RegisterName("setDouble3:atTime:")
-	_mDLAnimatedVector3SelFloat3AtTime = objc.RegisterName("float3AtTime:")
-	_mDLAnimatedVector3SelDouble3AtTime = objc.RegisterName("double3AtTime:")
-	_mDLAnimatedVector3SelResetWithFloat3ArrayAtTimesCount = objc.RegisterName("resetWithFloat3Array:atTimes:count:")
+	_clsMDLAnimatedVector3                                  = _objcClass("MDLAnimatedVector3")
+	_mDLAnimatedVector3SelSetFloat3AtTime                   = objc.RegisterName("setFloat3:atTime:")
+	_mDLAnimatedVector3SelSetDouble3AtTime                  = objc.RegisterName("setDouble3:atTime:")
+	_mDLAnimatedVector3SelFloat3AtTime                      = objc.RegisterName("float3AtTime:")
+	_mDLAnimatedVector3SelDouble3AtTime                     = objc.RegisterName("double3AtTime:")
+	_mDLAnimatedVector3SelResetWithFloat3ArrayAtTimesCount  = objc.RegisterName("resetWithFloat3Array:atTimes:count:")
 	_mDLAnimatedVector3SelResetWithDouble3ArrayAtTimesCount = objc.RegisterName("resetWithDouble3Array:atTimes:count:")
-	_mDLAnimatedVector3SelGetFloat3ArrayMaxCount = objc.RegisterName("getFloat3Array:maxCount:")
-	_mDLAnimatedVector3SelGetDouble3ArrayMaxCount = objc.RegisterName("getDouble3Array:maxCount:")
+	_mDLAnimatedVector3SelGetFloat3ArrayMaxCount            = objc.RegisterName("getFloat3Array:maxCount:")
+	_mDLAnimatedVector3SelGetDouble3ArrayMaxCount           = objc.RegisterName("getDouble3Array:maxCount:")
 )
 
 func MDLAnimatedVector3FromID(id objc.ID) *MDLAnimatedVector3 {
@@ -73,4 +73,3 @@ func (o *MDLAnimatedVector3) GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer,
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedVector3SelGetDouble3ArrayMaxCount, valuesArray, maxCount)
 	return _ret
 }
-

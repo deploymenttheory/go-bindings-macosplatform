@@ -18,19 +18,19 @@ type EAAccessory struct {
 }
 
 var (
-	_clsEAAccessory = _objcClass("EAAccessory")
-	_eAAccessorySelIsConnected = objc.RegisterName("isConnected")
-	_eAAccessorySelConnectionID = objc.RegisterName("connectionID")
-	_eAAccessorySelManufacturer = objc.RegisterName("manufacturer")
-	_eAAccessorySelName = objc.RegisterName("name")
-	_eAAccessorySelModelNumber = objc.RegisterName("modelNumber")
-	_eAAccessorySelSerialNumber = objc.RegisterName("serialNumber")
+	_clsEAAccessory                 = _objcClass("EAAccessory")
+	_eAAccessorySelIsConnected      = objc.RegisterName("isConnected")
+	_eAAccessorySelConnectionID     = objc.RegisterName("connectionID")
+	_eAAccessorySelManufacturer     = objc.RegisterName("manufacturer")
+	_eAAccessorySelName             = objc.RegisterName("name")
+	_eAAccessorySelModelNumber      = objc.RegisterName("modelNumber")
+	_eAAccessorySelSerialNumber     = objc.RegisterName("serialNumber")
 	_eAAccessorySelFirmwareRevision = objc.RegisterName("firmwareRevision")
 	_eAAccessorySelHardwareRevision = objc.RegisterName("hardwareRevision")
-	_eAAccessorySelDockType = objc.RegisterName("dockType")
-	_eAAccessorySelProtocolStrings = objc.RegisterName("protocolStrings")
-	_eAAccessorySelDelegate = objc.RegisterName("delegate")
-	_eAAccessorySelSetDelegate = objc.RegisterName("setDelegate:")
+	_eAAccessorySelDockType         = objc.RegisterName("dockType")
+	_eAAccessorySelProtocolStrings  = objc.RegisterName("protocolStrings")
+	_eAAccessorySelDelegate         = objc.RegisterName("delegate")
+	_eAAccessorySelSetDelegate      = objc.RegisterName("setDelegate:")
 )
 
 func EAAccessoryFromID(id objc.ID) *EAAccessory {
@@ -86,7 +86,9 @@ func (o *EAAccessory) HardwareRevision() unsafe.Pointer {
 // Deprecated: Not supported
 func (o *EAAccessory) DockType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eAAccessorySelDockType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,4 +106,3 @@ func (o *EAAccessory) Delegate() unsafe.Pointer {
 func (o *EAAccessory) SetDelegate(delegate unsafe.Pointer) {
 	o.Ptr().Send(_eAAccessorySelSetDelegate, delegate)
 }
-

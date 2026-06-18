@@ -16,15 +16,15 @@ type ITLibMediaItemVideoInfo struct {
 }
 
 var (
-	_clsITLibMediaItemVideoInfo = _objcClass("ITLibMediaItemVideoInfo")
-	_iTLibMediaItemVideoInfoSelSeries = objc.RegisterName("series")
-	_iTLibMediaItemVideoInfoSelSortSeries = objc.RegisterName("sortSeries")
-	_iTLibMediaItemVideoInfoSelSeason = objc.RegisterName("season")
-	_iTLibMediaItemVideoInfoSelEpisode = objc.RegisterName("episode")
+	_clsITLibMediaItemVideoInfo             = _objcClass("ITLibMediaItemVideoInfo")
+	_iTLibMediaItemVideoInfoSelSeries       = objc.RegisterName("series")
+	_iTLibMediaItemVideoInfoSelSortSeries   = objc.RegisterName("sortSeries")
+	_iTLibMediaItemVideoInfoSelSeason       = objc.RegisterName("season")
+	_iTLibMediaItemVideoInfoSelEpisode      = objc.RegisterName("episode")
 	_iTLibMediaItemVideoInfoSelEpisodeOrder = objc.RegisterName("episodeOrder")
-	_iTLibMediaItemVideoInfoSelIsHD = objc.RegisterName("isHD")
-	_iTLibMediaItemVideoInfoSelVideoWidth = objc.RegisterName("videoWidth")
-	_iTLibMediaItemVideoInfoSelVideoHeight = objc.RegisterName("videoHeight")
+	_iTLibMediaItemVideoInfoSelIsHD         = objc.RegisterName("isHD")
+	_iTLibMediaItemVideoInfoSelVideoWidth   = objc.RegisterName("videoWidth")
+	_iTLibMediaItemVideoInfoSelVideoHeight  = objc.RegisterName("videoHeight")
 )
 
 func ITLibMediaItemVideoInfoFromID(id objc.ID) *ITLibMediaItemVideoInfo {
@@ -40,14 +40,18 @@ func ITLibMediaItemVideoInfoFromID(id objc.ID) *ITLibMediaItemVideoInfo {
 // @abstract The name of TV series the video is associated with (implies track is a TV show).
 func (o *ITLibMediaItemVideoInfo) Series() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemVideoInfoSelSeries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
 func (o *ITLibMediaItemVideoInfo) SortSeries() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemVideoInfoSelSortSeries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *ITLibMediaItemVideoInfo) Season() uint {
 // @abstract The TV episode the video is associated with (implies the track is a TV show).
 func (o *ITLibMediaItemVideoInfo) Episode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemVideoInfoSelEpisode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,4 +93,3 @@ func (o *ITLibMediaItemVideoInfo) VideoHeight() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iTLibMediaItemVideoInfoSelVideoHeight)
 	return _ret
 }
-

@@ -15,12 +15,12 @@ type NSURLSessionTaskMetrics struct {
 }
 
 var (
-	_clsNSURLSessionTaskMetrics = _objcClass("NSURLSessionTaskMetrics")
-	_nSURLSessionTaskMetricsSelInit = objc.RegisterName("init")
-	_nSURLSessionTaskMetricsSelNew = objc.RegisterName("new")
+	_clsNSURLSessionTaskMetrics                   = _objcClass("NSURLSessionTaskMetrics")
+	_nSURLSessionTaskMetricsSelInit               = objc.RegisterName("init")
+	_nSURLSessionTaskMetricsSelNew                = objc.RegisterName("new")
 	_nSURLSessionTaskMetricsSelTransactionMetrics = objc.RegisterName("transactionMetrics")
-	_nSURLSessionTaskMetricsSelTaskInterval = objc.RegisterName("taskInterval")
-	_nSURLSessionTaskMetricsSelRedirectCount = objc.RegisterName("redirectCount")
+	_nSURLSessionTaskMetricsSelTaskInterval       = objc.RegisterName("taskInterval")
+	_nSURLSessionTaskMetricsSelRedirectCount      = objc.RegisterName("redirectCount")
 )
 
 func NSURLSessionTaskMetricsFromID(id objc.ID) *NSURLSessionTaskMetrics {
@@ -36,7 +36,9 @@ func NSURLSessionTaskMetricsFromID(id objc.ID) *NSURLSessionTaskMetrics {
 // Deprecated: Not supported
 func (o *NSURLSessionTaskMetrics) Init() *NSURLSessionTaskMetrics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionTaskMetricsFromID(_ret)
 }
 
@@ -48,13 +50,17 @@ func NSURLSessionTaskMetricsNew() *NSURLSessionTaskMetrics {
 
 func (o *NSURLSessionTaskMetrics) TransactionMetrics() *NSArray[*NSURLSessionTaskTransactionMetrics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelTransactionMetrics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSURLSessionTaskTransactionMetrics](_ret)
 }
 
 func (o *NSURLSessionTaskMetrics) TaskInterval() *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskMetricsSelTaskInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
@@ -62,4 +68,3 @@ func (o *NSURLSessionTaskMetrics) RedirectCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSURLSessionTaskMetricsSelRedirectCount)
 	return _ret
 }
-

@@ -41,4 +41,3 @@ type RNNMatrixTrainingStateable interface {
 }
 
 var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)
-

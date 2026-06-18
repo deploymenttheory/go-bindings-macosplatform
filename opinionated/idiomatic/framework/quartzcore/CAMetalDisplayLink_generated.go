@@ -137,4 +137,3 @@ type MetalDisplayLinkable interface {
 }
 
 var _ MetalDisplayLinkable = (*MetalDisplayLink)(nil)
-

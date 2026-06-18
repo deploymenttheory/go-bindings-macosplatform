@@ -114,4 +114,3 @@ type Strokeable interface {
 }
 
 var _ Strokeable = (*Stroke)(nil)
-

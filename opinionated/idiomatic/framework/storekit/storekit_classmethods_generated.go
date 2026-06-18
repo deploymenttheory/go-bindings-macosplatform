@@ -81,4 +81,3 @@ func DefaultController() *ProductStorePromotionController {
 func RequestReview() {
 	raw.SKStoreReviewControllerRequestReview()
 }
-

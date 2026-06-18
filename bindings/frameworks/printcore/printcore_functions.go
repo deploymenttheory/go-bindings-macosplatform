@@ -8,125 +8,125 @@ import (
 )
 
 var (
-	_fnPMCGImageCreateWithEPSDataProvider func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnPMCopyAvailablePPDs func(uint16, unsafe.Pointer) int
-	_fnPMCopyLocalizedPPD func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMCopyPPDData func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMCopyPageFormat func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMCopyPrintSettings func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMCreateGenericPrinter func(unsafe.Pointer) int
-	_fnPMCreatePageFormat func(unsafe.Pointer) int
-	_fnPMCreatePageFormatWithPMPaper func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMCreatePrintSettings func(unsafe.Pointer) int
-	_fnPMCreateSession func(unsafe.Pointer) int
-	_fnPMGetAdjustedPageRect func(unsafe.Pointer, *PMRect) int
-	_fnPMGetAdjustedPaperRect func(unsafe.Pointer, *PMRect) int
-	_fnPMGetCollate func(unsafe.Pointer, *uint8) int
-	_fnPMGetCopies func(unsafe.Pointer, *uint) int
-	_fnPMGetDuplex func(unsafe.Pointer, *uint) int
-	_fnPMGetFirstPage func(unsafe.Pointer, *uint) int
-	_fnPMGetLastPage func(unsafe.Pointer, *uint) int
-	_fnPMGetOrientation func(unsafe.Pointer, *uint16) int
-	_fnPMGetPageFormatExtendedData func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
-	_fnPMGetPageFormatPaper func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMGetPageRange func(unsafe.Pointer, *uint, *uint) int
-	_fnPMGetScale func(unsafe.Pointer, *float64) int
-	_fnPMGetUnadjustedPageRect func(unsafe.Pointer, *PMRect) int
-	_fnPMGetUnadjustedPaperRect func(unsafe.Pointer, *PMRect) int
-	_fnPMPageFormatCreateDataRepresentation func(unsafe.Pointer, unsafe.Pointer, PMDataFormat) int
-	_fnPMPageFormatCreateWithDataRepresentation func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPageFormatGetPrinterID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPaperCreateCustom func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64, float64, *PMRect, unsafe.Pointer) int
-	_fnPMPaperCreateLocalizedName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPaperGetHeight func(unsafe.Pointer, *float64) int
-	_fnPMPaperGetID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPaperGetMargins func(unsafe.Pointer, *PMRect) int
-	_fnPMPaperGetPPDPaperName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPaperGetPrinterID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPaperGetWidth func(unsafe.Pointer, *float64) int
-	_fnPMPaperIsCustom func(unsafe.Pointer) uint8
-	_fnPMPresetCopyName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPresetCreatePrintSettings func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPresetGetAttributes func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsCopyAsDictionary func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsCopyKeys func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsCreateDataRepresentation func(unsafe.Pointer, unsafe.Pointer, PMDataFormat) int
-	_fnPMPrintSettingsCreateWithDataRepresentation func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsGetJobName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsGetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsSetJobName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrintSettingsSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) int
-	_fnPMPrintSettingsToOptions func(unsafe.Pointer, string) int
+	_fnPMCGImageCreateWithEPSDataProvider               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnPMCopyAvailablePPDs                              func(uint16, unsafe.Pointer) int
+	_fnPMCopyLocalizedPPD                               func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMCopyPPDData                                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMCopyPageFormat                                 func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMCopyPrintSettings                              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMCreateGenericPrinter                           func(unsafe.Pointer) int
+	_fnPMCreatePageFormat                               func(unsafe.Pointer) int
+	_fnPMCreatePageFormatWithPMPaper                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMCreatePrintSettings                            func(unsafe.Pointer) int
+	_fnPMCreateSession                                  func(unsafe.Pointer) int
+	_fnPMGetAdjustedPageRect                            func(unsafe.Pointer, *PMRect) int
+	_fnPMGetAdjustedPaperRect                           func(unsafe.Pointer, *PMRect) int
+	_fnPMGetCollate                                     func(unsafe.Pointer, *uint8) int
+	_fnPMGetCopies                                      func(unsafe.Pointer, *uint) int
+	_fnPMGetDuplex                                      func(unsafe.Pointer, *uint) int
+	_fnPMGetFirstPage                                   func(unsafe.Pointer, *uint) int
+	_fnPMGetLastPage                                    func(unsafe.Pointer, *uint) int
+	_fnPMGetOrientation                                 func(unsafe.Pointer, *uint16) int
+	_fnPMGetPageFormatExtendedData                      func(unsafe.Pointer, uint, *uint, unsafe.Pointer) int
+	_fnPMGetPageFormatPaper                             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMGetPageRange                                   func(unsafe.Pointer, *uint, *uint) int
+	_fnPMGetScale                                       func(unsafe.Pointer, *float64) int
+	_fnPMGetUnadjustedPageRect                          func(unsafe.Pointer, *PMRect) int
+	_fnPMGetUnadjustedPaperRect                         func(unsafe.Pointer, *PMRect) int
+	_fnPMPageFormatCreateDataRepresentation             func(unsafe.Pointer, unsafe.Pointer, PMDataFormat) int
+	_fnPMPageFormatCreateWithDataRepresentation         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPageFormatGetPrinterID                         func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPaperCreateCustom                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64, float64, *PMRect, unsafe.Pointer) int
+	_fnPMPaperCreateLocalizedName                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPaperGetHeight                                 func(unsafe.Pointer, *float64) int
+	_fnPMPaperGetID                                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPaperGetMargins                                func(unsafe.Pointer, *PMRect) int
+	_fnPMPaperGetPPDPaperName                           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPaperGetPrinterID                              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPaperGetWidth                                  func(unsafe.Pointer, *float64) int
+	_fnPMPaperIsCustom                                  func(unsafe.Pointer) uint8
+	_fnPMPresetCopyName                                 func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPresetCreatePrintSettings                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPresetGetAttributes                            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsCopyAsDictionary                  func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsCopyKeys                          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsCreateDataRepresentation          func(unsafe.Pointer, unsafe.Pointer, PMDataFormat) int
+	_fnPMPrintSettingsCreateWithDataRepresentation      func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsGetJobName                        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsGetValue                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsSetJobName                        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrintSettingsSetValue                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) int
+	_fnPMPrintSettingsToOptions                         func(unsafe.Pointer, string) int
 	_fnPMPrintSettingsToOptionsWithPrinterAndPageFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) int
-	_fnPMPrinterCopyDescriptionURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterCopyDeviceURI func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterCopyHostName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterCopyPresets func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterCopyState func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterCreateFromPrinterID func(unsafe.Pointer) unsafe.Pointer
-	_fnPMPrinterGetCommInfo func(unsafe.Pointer, *uint8, *uint8) int
-	_fnPMPrinterGetDriverCreator func(unsafe.Pointer, *uint) int
-	_fnPMPrinterGetDriverReleaseInfo func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterGetID func(unsafe.Pointer) unsafe.Pointer
-	_fnPMPrinterGetIndexedPrinterResolution func(unsafe.Pointer, uint, *PMResolution) int
-	_fnPMPrinterGetLanguageInfo func(unsafe.Pointer, *PMLanguageInfo) int
-	_fnPMPrinterGetLocation func(unsafe.Pointer) unsafe.Pointer
-	_fnPMPrinterGetMakeAndModelName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterGetMimeTypes func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnPMPrinterGetOutputResolution func(unsafe.Pointer, unsafe.Pointer, *PMResolution) int
-	_fnPMPrinterGetPaperList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterGetPrinterResolutionCount func(unsafe.Pointer, *uint) int
-	_fnPMPrinterGetState func(unsafe.Pointer, *uint16) int
-	_fnPMPrinterIsDefault func(unsafe.Pointer) uint8
-	_fnPMPrinterIsFavorite func(unsafe.Pointer) uint8
-	_fnPMPrinterIsPostScriptCapable func(unsafe.Pointer) uint8
-	_fnPMPrinterIsPostScriptPrinter func(unsafe.Pointer, *uint8) int
-	_fnPMPrinterIsRemote func(unsafe.Pointer, *uint8) int
-	_fnPMPrinterPrintWithFile func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterPrintWithProvider func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterSendCommand func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMPrinterSetDefault func(unsafe.Pointer) int
-	_fnPMPrinterSetOutputResolution func(unsafe.Pointer, unsafe.Pointer, *PMResolution) int
-	_fnPMPrinterWritePostScriptToURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMRelease func(unsafe.Pointer) int
-	_fnPMRetain func(unsafe.Pointer) int
-	_fnPMServerCreatePrinterList func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMServerLaunchPrinterBrowser func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionBeginCGDocumentNoDialog func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionBeginPageNoDialog func(unsafe.Pointer, unsafe.Pointer, *PMRect) int
-	_fnPMSessionCopyDestinationFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionCopyDestinationLocation func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionCopyOutputFormatList func(unsafe.Pointer, uint16, unsafe.Pointer) int
-	_fnPMSessionCreatePageFormatList func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionCreatePrinterList func(unsafe.Pointer, unsafe.Pointer, *int, unsafe.Pointer) int
-	_fnPMSessionDefaultPageFormat func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionDefaultPrintSettings func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionEndDocumentNoDialog func(unsafe.Pointer) int
-	_fnPMSessionEndPageNoDialog func(unsafe.Pointer) int
-	_fnPMSessionError func(unsafe.Pointer) int
-	_fnPMSessionGetCGGraphicsContext func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionGetCurrentPrinter func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionGetDataFromSession func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionGetDestinationType func(unsafe.Pointer, unsafe.Pointer, *uint16) int
-	_fnPMSessionSetCurrentPMPrinter func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionSetDataInSession func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionSetDestination func(unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer) int
-	_fnPMSessionSetError func(unsafe.Pointer, int) int
-	_fnPMSessionValidatePageFormat func(unsafe.Pointer, unsafe.Pointer, *uint8) int
-	_fnPMSessionValidatePrintSettings func(unsafe.Pointer, unsafe.Pointer, *uint8) int
-	_fnPMSetCollate func(unsafe.Pointer, uint8) int
-	_fnPMSetCopies func(unsafe.Pointer, uint, uint8) int
-	_fnPMSetDuplex func(unsafe.Pointer, uint) int
-	_fnPMSetFirstPage func(unsafe.Pointer, uint, uint8) int
-	_fnPMSetLastPage func(unsafe.Pointer, uint, uint8) int
-	_fnPMSetOrientation func(unsafe.Pointer, uint16, uint8) int
-	_fnPMSetPageFormatExtendedData func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnPMSetPageRange func(unsafe.Pointer, uint, uint) int
-	_fnPMSetScale func(unsafe.Pointer, float64) int
-	_fnPMWorkflowCopyItems func(unsafe.Pointer) int
-	_fnPMWorkflowSubmitPDFWithOptions func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int
-	_fnPMWorkflowSubmitPDFWithSettings func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCopyDescriptionURL                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCopyDeviceURI                           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCopyHostName                            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCopyPresets                             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCopyState                               func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterCreateFromPrinterID                     func(unsafe.Pointer) unsafe.Pointer
+	_fnPMPrinterGetCommInfo                             func(unsafe.Pointer, *uint8, *uint8) int
+	_fnPMPrinterGetDriverCreator                        func(unsafe.Pointer, *uint) int
+	_fnPMPrinterGetDriverReleaseInfo                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterGetID                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnPMPrinterGetIndexedPrinterResolution             func(unsafe.Pointer, uint, *PMResolution) int
+	_fnPMPrinterGetLanguageInfo                         func(unsafe.Pointer, *PMLanguageInfo) int
+	_fnPMPrinterGetLocation                             func(unsafe.Pointer) unsafe.Pointer
+	_fnPMPrinterGetMakeAndModelName                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterGetMimeTypes                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterGetName                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnPMPrinterGetOutputResolution                     func(unsafe.Pointer, unsafe.Pointer, *PMResolution) int
+	_fnPMPrinterGetPaperList                            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterGetPrinterResolutionCount               func(unsafe.Pointer, *uint) int
+	_fnPMPrinterGetState                                func(unsafe.Pointer, *uint16) int
+	_fnPMPrinterIsDefault                               func(unsafe.Pointer) uint8
+	_fnPMPrinterIsFavorite                              func(unsafe.Pointer) uint8
+	_fnPMPrinterIsPostScriptCapable                     func(unsafe.Pointer) uint8
+	_fnPMPrinterIsPostScriptPrinter                     func(unsafe.Pointer, *uint8) int
+	_fnPMPrinterIsRemote                                func(unsafe.Pointer, *uint8) int
+	_fnPMPrinterPrintWithFile                           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterPrintWithProvider                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterSendCommand                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMPrinterSetDefault                              func(unsafe.Pointer) int
+	_fnPMPrinterSetOutputResolution                     func(unsafe.Pointer, unsafe.Pointer, *PMResolution) int
+	_fnPMPrinterWritePostScriptToURL                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMRelease                                        func(unsafe.Pointer) int
+	_fnPMRetain                                         func(unsafe.Pointer) int
+	_fnPMServerCreatePrinterList                        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMServerLaunchPrinterBrowser                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionBeginCGDocumentNoDialog                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionBeginPageNoDialog                       func(unsafe.Pointer, unsafe.Pointer, *PMRect) int
+	_fnPMSessionCopyDestinationFormat                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionCopyDestinationLocation                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionCopyOutputFormatList                    func(unsafe.Pointer, uint16, unsafe.Pointer) int
+	_fnPMSessionCreatePageFormatList                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionCreatePrinterList                       func(unsafe.Pointer, unsafe.Pointer, *int, unsafe.Pointer) int
+	_fnPMSessionDefaultPageFormat                       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionDefaultPrintSettings                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionEndDocumentNoDialog                     func(unsafe.Pointer) int
+	_fnPMSessionEndPageNoDialog                         func(unsafe.Pointer) int
+	_fnPMSessionError                                   func(unsafe.Pointer) int
+	_fnPMSessionGetCGGraphicsContext                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionGetCurrentPrinter                       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionGetDataFromSession                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionGetDestinationType                      func(unsafe.Pointer, unsafe.Pointer, *uint16) int
+	_fnPMSessionSetCurrentPMPrinter                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionSetDataInSession                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionSetDestination                          func(unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer) int
+	_fnPMSessionSetError                                func(unsafe.Pointer, int) int
+	_fnPMSessionValidatePageFormat                      func(unsafe.Pointer, unsafe.Pointer, *uint8) int
+	_fnPMSessionValidatePrintSettings                   func(unsafe.Pointer, unsafe.Pointer, *uint8) int
+	_fnPMSetCollate                                     func(unsafe.Pointer, uint8) int
+	_fnPMSetCopies                                      func(unsafe.Pointer, uint, uint8) int
+	_fnPMSetDuplex                                      func(unsafe.Pointer, uint) int
+	_fnPMSetFirstPage                                   func(unsafe.Pointer, uint, uint8) int
+	_fnPMSetLastPage                                    func(unsafe.Pointer, uint, uint8) int
+	_fnPMSetOrientation                                 func(unsafe.Pointer, uint16, uint8) int
+	_fnPMSetPageFormatExtendedData                      func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnPMSetPageRange                                   func(unsafe.Pointer, uint, uint) int
+	_fnPMSetScale                                       func(unsafe.Pointer, float64) int
+	_fnPMWorkflowCopyItems                              func(unsafe.Pointer) int
+	_fnPMWorkflowSubmitPDFWithOptions                   func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int
+	_fnPMWorkflowSubmitPDFWithSettings                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 )
 
 func PMCGImageCreateWithEPSDataProvider(epsDataProvider unsafe.Pointer, epsPreview unsafe.Pointer) unsafe.Pointer {
@@ -604,4 +604,3 @@ func PMWorkflowSubmitPDFWithOptions(workflowItem unsafe.Pointer, title unsafe.Po
 func PMWorkflowSubmitPDFWithSettings(workflowItem unsafe.Pointer, settings unsafe.Pointer, pdfFile unsafe.Pointer) int {
 	return _fnPMWorkflowSubmitPDFWithSettings(workflowItem, settings, pdfFile)
 }
-

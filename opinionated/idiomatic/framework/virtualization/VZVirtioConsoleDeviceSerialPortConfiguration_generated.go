@@ -15,7 +15,9 @@ type VirtioConsoleDeviceSerialPortConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioConsoleDeviceSerialPortConfiguration].
-func (x *VirtioConsoleDeviceSerialPortConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration { return x.inner }
+func (x *VirtioConsoleDeviceSerialPortConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceSerialPortConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,7 +43,9 @@ func (x *VirtioConsoleDeviceSerialPortConfiguration) WithAttachment(attachment S
 	return x
 }
 
-func (x *VirtioConsoleDeviceSerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration { return &x.inner.VZSerialPortConfiguration }
+func (x *VirtioConsoleDeviceSerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration {
+	return &x.inner.VZSerialPortConfiguration
+}
 
 // VirtioConsoleDeviceSerialPortConfigurationable is the interface implemented by [VirtioConsoleDeviceSerialPortConfiguration], for mocking and DI.
 type VirtioConsoleDeviceSerialPortConfigurationable interface {
@@ -50,4 +54,3 @@ type VirtioConsoleDeviceSerialPortConfigurationable interface {
 }
 
 var _ VirtioConsoleDeviceSerialPortConfigurationable = (*VirtioConsoleDeviceSerialPortConfiguration)(nil)
-

@@ -16,18 +16,18 @@ type MTRContentLauncherClusterLaunchContentParams struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterLaunchContentParams = _objcClass("MTRContentLauncherClusterLaunchContentParams")
-	_mTRContentLauncherClusterLaunchContentParamsSelSearch = objc.RegisterName("search")
-	_mTRContentLauncherClusterLaunchContentParamsSelSetSearch = objc.RegisterName("setSearch:")
-	_mTRContentLauncherClusterLaunchContentParamsSelAutoPlay = objc.RegisterName("autoPlay")
-	_mTRContentLauncherClusterLaunchContentParamsSelSetAutoPlay = objc.RegisterName("setAutoPlay:")
-	_mTRContentLauncherClusterLaunchContentParamsSelData = objc.RegisterName("data")
-	_mTRContentLauncherClusterLaunchContentParamsSelSetData = objc.RegisterName("setData:")
-	_mTRContentLauncherClusterLaunchContentParamsSelUseCurrentContext = objc.RegisterName("useCurrentContext")
-	_mTRContentLauncherClusterLaunchContentParamsSelSetUseCurrentContext = objc.RegisterName("setUseCurrentContext:")
-	_mTRContentLauncherClusterLaunchContentParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRContentLauncherClusterLaunchContentParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRContentLauncherClusterLaunchContentParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRContentLauncherClusterLaunchContentParams                               = _objcClass("MTRContentLauncherClusterLaunchContentParams")
+	_mTRContentLauncherClusterLaunchContentParamsSelSearch                         = objc.RegisterName("search")
+	_mTRContentLauncherClusterLaunchContentParamsSelSetSearch                      = objc.RegisterName("setSearch:")
+	_mTRContentLauncherClusterLaunchContentParamsSelAutoPlay                       = objc.RegisterName("autoPlay")
+	_mTRContentLauncherClusterLaunchContentParamsSelSetAutoPlay                    = objc.RegisterName("setAutoPlay:")
+	_mTRContentLauncherClusterLaunchContentParamsSelData                           = objc.RegisterName("data")
+	_mTRContentLauncherClusterLaunchContentParamsSelSetData                        = objc.RegisterName("setData:")
+	_mTRContentLauncherClusterLaunchContentParamsSelUseCurrentContext              = objc.RegisterName("useCurrentContext")
+	_mTRContentLauncherClusterLaunchContentParamsSelSetUseCurrentContext           = objc.RegisterName("setUseCurrentContext:")
+	_mTRContentLauncherClusterLaunchContentParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRContentLauncherClusterLaunchContentParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRContentLauncherClusterLaunchContentParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRContentLauncherClusterLaunchContentParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRContentLauncherClusterLaunchContentParamsFromID(id objc.ID) *MTRContentL
 
 func (o *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelSearch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterContentSearchStructFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRContentLauncherClusterLaunchContentParams) SetSearch(search *MTRCont
 
 func (o *MTRContentLauncherClusterLaunchContentParams) AutoPlay() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelAutoPlay)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRContentLauncherClusterLaunchContentParams) SetAutoPlay(autoPlay *fou
 
 func (o *MTRContentLauncherClusterLaunchContentParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRContentLauncherClusterLaunchContentParams) SetData(data *foundation.
 
 func (o *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelUseCurrentContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRContentLauncherClusterLaunchContentParams) SetUseCurrentContext(useC
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRContentLauncherClusterLaunchContentParams) SetTimedInvokeTimeoutMs(t
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLaunchContentParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterLaunchContentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRContentLauncherClusterLaunchContentParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

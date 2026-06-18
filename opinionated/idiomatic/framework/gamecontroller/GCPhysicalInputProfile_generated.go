@@ -184,4 +184,3 @@ type PhysicalInputProfileable interface {
 }
 
 var _ PhysicalInputProfileable = (*PhysicalInputProfile)(nil)
-

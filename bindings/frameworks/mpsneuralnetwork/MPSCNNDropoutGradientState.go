@@ -16,7 +16,7 @@ type MPSCNNDropoutGradientState struct {
 }
 
 var (
-	_clsMPSCNNDropoutGradientState = _objcClass("MPSCNNDropoutGradientState")
+	_clsMPSCNNDropoutGradientState         = _objcClass("MPSCNNDropoutGradientState")
 	_mPSCNNDropoutGradientStateSelMaskData = objc.RegisterName("maskData")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNDropoutGradientStateFromID(id objc.ID) *MPSCNNDropoutGradientState {
 // @abstract   Mask data accessor method. @return     An autoreleased NSData object, containing the mask data. The mask data is populated in the -encode call, thus the contents are undefined until you -encode the filter. Use for debugging purposes only. In order to gaurantee that the mask data is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the mask data.
 func (o *MPSCNNDropoutGradientState) MaskData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutGradientStateSelMaskData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

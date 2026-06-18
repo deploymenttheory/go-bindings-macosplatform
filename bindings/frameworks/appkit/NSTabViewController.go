@@ -16,30 +16,30 @@ type NSTabViewController struct {
 }
 
 var (
-	_clsNSTabViewController = _objcClass("NSTabViewController")
-	_nSTabViewControllerSelAddTabViewItem = objc.RegisterName("addTabViewItem:")
-	_nSTabViewControllerSelInsertTabViewItemAtIndex = objc.RegisterName("insertTabViewItem:atIndex:")
-	_nSTabViewControllerSelRemoveTabViewItem = objc.RegisterName("removeTabViewItem:")
-	_nSTabViewControllerSelTabViewItemForViewController = objc.RegisterName("tabViewItemForViewController:")
-	_nSTabViewControllerSelTabViewWillSelectTabViewItem = objc.RegisterName("tabView:willSelectTabViewItem:")
-	_nSTabViewControllerSelTabViewDidSelectTabViewItem = objc.RegisterName("tabView:didSelectTabViewItem:")
-	_nSTabViewControllerSelTabViewShouldSelectTabViewItem = objc.RegisterName("tabView:shouldSelectTabViewItem:")
+	_clsNSTabViewController                                                      = _objcClass("NSTabViewController")
+	_nSTabViewControllerSelAddTabViewItem                                        = objc.RegisterName("addTabViewItem:")
+	_nSTabViewControllerSelInsertTabViewItemAtIndex                              = objc.RegisterName("insertTabViewItem:atIndex:")
+	_nSTabViewControllerSelRemoveTabViewItem                                     = objc.RegisterName("removeTabViewItem:")
+	_nSTabViewControllerSelTabViewItemForViewController                          = objc.RegisterName("tabViewItemForViewController:")
+	_nSTabViewControllerSelTabViewWillSelectTabViewItem                          = objc.RegisterName("tabView:willSelectTabViewItem:")
+	_nSTabViewControllerSelTabViewDidSelectTabViewItem                           = objc.RegisterName("tabView:didSelectTabViewItem:")
+	_nSTabViewControllerSelTabViewShouldSelectTabViewItem                        = objc.RegisterName("tabView:shouldSelectTabViewItem:")
 	_nSTabViewControllerSelToolbarItemForItemIdentifierWillBeInsertedIntoToolbar = objc.RegisterName("toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:")
-	_nSTabViewControllerSelToolbarDefaultItemIdentifiers = objc.RegisterName("toolbarDefaultItemIdentifiers:")
-	_nSTabViewControllerSelToolbarAllowedItemIdentifiers = objc.RegisterName("toolbarAllowedItemIdentifiers:")
-	_nSTabViewControllerSelToolbarSelectableItemIdentifiers = objc.RegisterName("toolbarSelectableItemIdentifiers:")
-	_nSTabViewControllerSelTabStyle = objc.RegisterName("tabStyle")
-	_nSTabViewControllerSelSetTabStyle = objc.RegisterName("setTabStyle:")
-	_nSTabViewControllerSelTabView = objc.RegisterName("tabView")
-	_nSTabViewControllerSelSetTabView = objc.RegisterName("setTabView:")
-	_nSTabViewControllerSelTransitionOptions = objc.RegisterName("transitionOptions")
-	_nSTabViewControllerSelSetTransitionOptions = objc.RegisterName("setTransitionOptions:")
-	_nSTabViewControllerSelCanPropagateSelectedChildViewControllerTitle = objc.RegisterName("canPropagateSelectedChildViewControllerTitle")
-	_nSTabViewControllerSelSetCanPropagateSelectedChildViewControllerTitle = objc.RegisterName("setCanPropagateSelectedChildViewControllerTitle:")
-	_nSTabViewControllerSelTabViewItems = objc.RegisterName("tabViewItems")
-	_nSTabViewControllerSelSetTabViewItems = objc.RegisterName("setTabViewItems:")
-	_nSTabViewControllerSelSelectedTabViewItemIndex = objc.RegisterName("selectedTabViewItemIndex")
-	_nSTabViewControllerSelSetSelectedTabViewItemIndex = objc.RegisterName("setSelectedTabViewItemIndex:")
+	_nSTabViewControllerSelToolbarDefaultItemIdentifiers                         = objc.RegisterName("toolbarDefaultItemIdentifiers:")
+	_nSTabViewControllerSelToolbarAllowedItemIdentifiers                         = objc.RegisterName("toolbarAllowedItemIdentifiers:")
+	_nSTabViewControllerSelToolbarSelectableItemIdentifiers                      = objc.RegisterName("toolbarSelectableItemIdentifiers:")
+	_nSTabViewControllerSelTabStyle                                              = objc.RegisterName("tabStyle")
+	_nSTabViewControllerSelSetTabStyle                                           = objc.RegisterName("setTabStyle:")
+	_nSTabViewControllerSelTabView                                               = objc.RegisterName("tabView")
+	_nSTabViewControllerSelSetTabView                                            = objc.RegisterName("setTabView:")
+	_nSTabViewControllerSelTransitionOptions                                     = objc.RegisterName("transitionOptions")
+	_nSTabViewControllerSelSetTransitionOptions                                  = objc.RegisterName("setTransitionOptions:")
+	_nSTabViewControllerSelCanPropagateSelectedChildViewControllerTitle          = objc.RegisterName("canPropagateSelectedChildViewControllerTitle")
+	_nSTabViewControllerSelSetCanPropagateSelectedChildViewControllerTitle       = objc.RegisterName("setCanPropagateSelectedChildViewControllerTitle:")
+	_nSTabViewControllerSelTabViewItems                                          = objc.RegisterName("tabViewItems")
+	_nSTabViewControllerSelSetTabViewItems                                       = objc.RegisterName("setTabViewItems:")
+	_nSTabViewControllerSelSelectedTabViewItemIndex                              = objc.RegisterName("selectedTabViewItemIndex")
+	_nSTabViewControllerSelSetSelectedTabViewItemIndex                           = objc.RegisterName("setSelectedTabViewItemIndex:")
 )
 
 func NSTabViewControllerFromID(id objc.ID) *NSTabViewController {
@@ -70,7 +70,9 @@ func (o *NSTabViewController) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
 // Convenience method for getting the associated tab view item for a particular childViewController. \param viewController The ViewController to look up. \return The corresponding TabViewItem. Returns nil if \c viewController is not a child of the TabViewController.
 func (o *NSTabViewController) TabViewItemForViewController(viewController *NSViewController) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItemForViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
@@ -89,7 +91,9 @@ func (o *NSTabViewController) TabViewShouldSelectTabViewItem(tabView *NSTabView,
 
 func (o *NSTabViewController) ToolbarItemForItemIdentifierWillBeInsertedIntoToolbar(toolbar *NSToolbar, itemIdentifier *foundation.NSString, flag bool) *NSToolbarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelToolbarItemForItemIdentifierWillBeInsertedIntoToolbar, toolbar.Ptr(), itemIdentifier.Ptr(), flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarItemFromID(_ret)
 }
 
@@ -122,7 +126,9 @@ func (o *NSTabViewController) SetTabStyle(tabStyle NSTabViewControllerTabStyle) 
 // Access to the tab view that the controller is controlling. To provide a custom NSTabView, assign the value anytime before \c self.viewLoaded is \c YES. Querying the value will create it on-demand, if needed. Check \c self.viewLoaded before querying the value to avoid prematurely creating the view. Note that the \c -tabView may not be equal to the \c viewController.view. Properties such as the tabStyle can be directly manipulated, but calling methods that add and remove tabViewItems or changing the delegate is not allowed. The NSTabViewController will be made the delegate of the NSTabView. Internally, the NSTabView is always used to switch between displayed childViewControllers, regardless of the style displayed.
 func (o *NSTabViewController) TabView() *NSTabView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewFromID(_ret)
 }
 
@@ -156,7 +162,9 @@ func (o *NSTabViewController) SetCanPropagateSelectedChildViewControllerTitle(ca
 // The array of tab view items that correspond to the current child view controllers. After a child view controller is added to the receiving TabViewController, a NSTabViewItem with the default values will be created for it. Once the child is removed, its corresponding tabViewItem will be removed from the tabViewItems array.
 func (o *NSTabViewController) TabViewItems() *foundation.NSArray[*NSTabViewItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewControllerSelTabViewItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTabViewItem](_ret)
 }
 
@@ -175,4 +183,3 @@ func (o *NSTabViewController) SelectedTabViewItemIndex() int {
 func (o *NSTabViewController) SetSelectedTabViewItemIndex(selectedTabViewItemIndex int) {
 	o.Ptr().Send(_nSTabViewControllerSelSetSelectedTabViewItemIndex, selectedTabViewItemIndex)
 }
-

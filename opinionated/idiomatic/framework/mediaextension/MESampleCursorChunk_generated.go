@@ -71,4 +71,3 @@ type SampleCursorChunkable interface {
 }
 
 var _ SampleCursorChunkable = (*SampleCursorChunk)(nil)
-

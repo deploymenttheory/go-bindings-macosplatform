@@ -51,4 +51,3 @@ type Point3Dable interface {
 }
 
 var _ Point3Dable = (*Point3D)(nil)
-

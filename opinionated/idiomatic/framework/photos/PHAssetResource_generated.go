@@ -97,4 +97,3 @@ type AssetResourceable interface {
 }
 
 var _ AssetResourceable = (*AssetResource)(nil)
-

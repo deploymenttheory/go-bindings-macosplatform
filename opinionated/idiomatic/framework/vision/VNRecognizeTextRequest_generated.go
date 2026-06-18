@@ -46,7 +46,9 @@ func (x *RecognizeTextRequest) WithRecognitionLanguages(items ...*foundation.NSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -62,7 +64,9 @@ func (x *RecognizeTextRequest) WithCustomWords(items ...*foundation.NSString) *R
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -205,9 +209,13 @@ func (x *RecognizeTextRequest) SetMinimumTextHeight(minimumTextHeight float32) {
 	x.inner.SetMinimumTextHeight(minimumTextHeight)
 }
 
-func (x *RecognizeTextRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *RecognizeTextRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *RecognizeTextRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *RecognizeTextRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // RecognizeTextRequestable is the interface implemented by [RecognizeTextRequest], for mocking and DI.
 type RecognizeTextRequestable interface {
@@ -238,4 +246,3 @@ type RecognizeTextRequestable interface {
 }
 
 var _ RecognizeTextRequestable = (*RecognizeTextRequest)(nil)
-

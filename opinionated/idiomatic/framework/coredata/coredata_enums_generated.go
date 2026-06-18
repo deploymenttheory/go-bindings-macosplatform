@@ -12,22 +12,22 @@ import (
 type NSAttributeType uint64
 
 const (
-	NSUndefinedAttributeType NSAttributeType = 0
-	NSInteger16AttributeType NSAttributeType = 100
-	NSInteger32AttributeType NSAttributeType = 200
-	NSInteger64AttributeType NSAttributeType = 300
-	NSDecimalAttributeType NSAttributeType = 400
-	NSDoubleAttributeType NSAttributeType = 500
-	NSFloatAttributeType NSAttributeType = 600
-	NSStringAttributeType NSAttributeType = 700
-	NSBooleanAttributeType NSAttributeType = 800
-	NSDateAttributeType NSAttributeType = 900
-	NSBinaryDataAttributeType NSAttributeType = 1000
-	NSUUIDAttributeType NSAttributeType = 1100
-	NSURIAttributeType NSAttributeType = 1200
+	NSUndefinedAttributeType     NSAttributeType = 0
+	NSInteger16AttributeType     NSAttributeType = 100
+	NSInteger32AttributeType     NSAttributeType = 200
+	NSInteger64AttributeType     NSAttributeType = 300
+	NSDecimalAttributeType       NSAttributeType = 400
+	NSDoubleAttributeType        NSAttributeType = 500
+	NSFloatAttributeType         NSAttributeType = 600
+	NSStringAttributeType        NSAttributeType = 700
+	NSBooleanAttributeType       NSAttributeType = 800
+	NSDateAttributeType          NSAttributeType = 900
+	NSBinaryDataAttributeType    NSAttributeType = 1000
+	NSUUIDAttributeType          NSAttributeType = 1100
+	NSURIAttributeType           NSAttributeType = 1200
 	NSTransformableAttributeType NSAttributeType = 1800
-	NSObjectIDAttributeType NSAttributeType = 2000
-	NSCompositeAttributeType NSAttributeType = 2100
+	NSObjectIDAttributeType      NSAttributeType = 2000
+	NSCompositeAttributeType     NSAttributeType = 2100
 )
 
 func (e NSAttributeType) String() string {
@@ -73,8 +73,8 @@ type NSBatchDeleteRequestResultType uint64
 
 const (
 	NSBatchDeleteResultTypeStatusOnly NSBatchDeleteRequestResultType = 0
-	NSBatchDeleteResultTypeObjectIDs NSBatchDeleteRequestResultType = 1
-	NSBatchDeleteResultTypeCount NSBatchDeleteRequestResultType = 2
+	NSBatchDeleteResultTypeObjectIDs  NSBatchDeleteRequestResultType = 1
+	NSBatchDeleteResultTypeCount      NSBatchDeleteRequestResultType = 2
 )
 
 func (e NSBatchDeleteRequestResultType) String() string {
@@ -94,8 +94,8 @@ type NSBatchInsertRequestResultType uint64
 
 const (
 	NSBatchInsertRequestResultTypeStatusOnly NSBatchInsertRequestResultType = 0
-	NSBatchInsertRequestResultTypeObjectIDs NSBatchInsertRequestResultType = 1
-	NSBatchInsertRequestResultTypeCount NSBatchInsertRequestResultType = 2
+	NSBatchInsertRequestResultTypeObjectIDs  NSBatchInsertRequestResultType = 1
+	NSBatchInsertRequestResultTypeCount      NSBatchInsertRequestResultType = 2
 )
 
 func (e NSBatchInsertRequestResultType) String() string {
@@ -114,8 +114,8 @@ func (e NSBatchInsertRequestResultType) String() string {
 type NSBatchUpdateRequestResultType uint64
 
 const (
-	NSStatusOnlyResultType NSBatchUpdateRequestResultType = 0
-	NSUpdatedObjectIDsResultType NSBatchUpdateRequestResultType = 1
+	NSStatusOnlyResultType          NSBatchUpdateRequestResultType = 0
+	NSUpdatedObjectIDsResultType    NSBatchUpdateRequestResultType = 1
 	NSUpdatedObjectsCountResultType NSBatchUpdateRequestResultType = 2
 )
 
@@ -136,9 +136,9 @@ type NSDeleteRule uint64
 
 const (
 	NSNoActionDeleteRule NSDeleteRule = 0
-	NSNullifyDeleteRule NSDeleteRule = 1
-	NSCascadeDeleteRule NSDeleteRule = 2
-	NSDenyDeleteRule NSDeleteRule = 3
+	NSNullifyDeleteRule  NSDeleteRule = 1
+	NSCascadeDeleteRule  NSDeleteRule = 2
+	NSDenyDeleteRule     NSDeleteRule = 3
 )
 
 func (e NSDeleteRule) String() string {
@@ -160,10 +160,10 @@ type NSEntityMappingType uint64
 
 const (
 	NSUndefinedEntityMappingType NSEntityMappingType = 0
-	NSCustomEntityMappingType NSEntityMappingType = 1
-	NSAddEntityMappingType NSEntityMappingType = 2
-	NSRemoveEntityMappingType NSEntityMappingType = 3
-	NSCopyEntityMappingType NSEntityMappingType = 4
+	NSCustomEntityMappingType    NSEntityMappingType = 1
+	NSAddEntityMappingType       NSEntityMappingType = 2
+	NSRemoveEntityMappingType    NSEntityMappingType = 3
+	NSCopyEntityMappingType      NSEntityMappingType = 4
 	NSTransformEntityMappingType NSEntityMappingType = 5
 )
 
@@ -190,7 +190,7 @@ type NSFetchIndexElementType uint64
 
 const (
 	NSFetchIndexElementTypeBinary NSFetchIndexElementType = 0
-	NSFetchIndexElementTypeRTree NSFetchIndexElementType = 1
+	NSFetchIndexElementTypeRTree  NSFetchIndexElementType = 1
 )
 
 func (e NSFetchIndexElementType) String() string {
@@ -208,10 +208,10 @@ func (e NSFetchIndexElementType) String() string {
 type NSFetchRequestResultType uint64
 
 const (
-	NSManagedObjectResultType NSFetchRequestResultType = 0
+	NSManagedObjectResultType   NSFetchRequestResultType = 0
 	NSManagedObjectIDResultType NSFetchRequestResultType = 1
-	NSDictionaryResultType NSFetchRequestResultType = 2
-	NSCountResultType NSFetchRequestResultType = 4
+	NSDictionaryResultType      NSFetchRequestResultType = 2
+	NSCountResultType           NSFetchRequestResultType = 4
 )
 
 func (e NSFetchRequestResultType) String() string {
@@ -258,11 +258,11 @@ func (e NSManagedObjectContextConcurrencyType) String() string {
 type NSMergePolicyType uint64
 
 const (
-	NSErrorMergePolicyType NSMergePolicyType = 0
-	NSMergeByPropertyStoreTrumpMergePolicyType NSMergePolicyType = 1
+	NSErrorMergePolicyType                      NSMergePolicyType = 0
+	NSMergeByPropertyStoreTrumpMergePolicyType  NSMergePolicyType = 1
 	NSMergeByPropertyObjectTrumpMergePolicyType NSMergePolicyType = 2
-	NSOverwriteMergePolicyType NSMergePolicyType = 3
-	NSRollbackMergePolicyType NSMergePolicyType = 4
+	NSOverwriteMergePolicyType                  NSMergePolicyType = 3
+	NSRollbackMergePolicyType                   NSMergePolicyType = 4
 )
 
 func (e NSMergePolicyType) String() string {
@@ -285,7 +285,7 @@ func (e NSMergePolicyType) String() string {
 type NSPersistentCloudKitContainerEventResultType int64
 
 const (
-	NSPersistentCloudKitContainerEventResultTypeEvents NSPersistentCloudKitContainerEventResultType = 0
+	NSPersistentCloudKitContainerEventResultTypeEvents      NSPersistentCloudKitContainerEventResultType = 0
 	NSPersistentCloudKitContainerEventResultTypeCountEvents NSPersistentCloudKitContainerEventResultType = 1
 )
 
@@ -303,7 +303,7 @@ func (e NSPersistentCloudKitContainerEventResultType) String() string {
 type NSPersistentCloudKitContainerEventType int64
 
 const (
-	NSPersistentCloudKitContainerEventTypeSetup NSPersistentCloudKitContainerEventType = 0
+	NSPersistentCloudKitContainerEventTypeSetup  NSPersistentCloudKitContainerEventType = 0
 	NSPersistentCloudKitContainerEventTypeImport NSPersistentCloudKitContainerEventType = 1
 	NSPersistentCloudKitContainerEventTypeExport NSPersistentCloudKitContainerEventType = 2
 )
@@ -325,8 +325,8 @@ func (e NSPersistentCloudKitContainerEventType) String() string {
 type NSPersistentCloudKitContainerSchemaInitializationOptions uint64
 
 const (
-	NSPersistentCloudKitContainerSchemaInitializationOptionsNone NSPersistentCloudKitContainerSchemaInitializationOptions = 0
-	NSPersistentCloudKitContainerSchemaInitializationOptionsDryRun NSPersistentCloudKitContainerSchemaInitializationOptions = 2
+	NSPersistentCloudKitContainerSchemaInitializationOptionsNone        NSPersistentCloudKitContainerSchemaInitializationOptions = 0
+	NSPersistentCloudKitContainerSchemaInitializationOptionsDryRun      NSPersistentCloudKitContainerSchemaInitializationOptions = 2
 	NSPersistentCloudKitContainerSchemaInitializationOptionsPrintSchema NSPersistentCloudKitContainerSchemaInitializationOptions = 4
 )
 
@@ -368,11 +368,11 @@ func (e NSPersistentHistoryChangeType) String() string {
 type NSPersistentHistoryResultType int64
 
 const (
-	NSPersistentHistoryResultTypeStatusOnly NSPersistentHistoryResultType = 0
-	NSPersistentHistoryResultTypeObjectIDs NSPersistentHistoryResultType = 1
-	NSPersistentHistoryResultTypeCount NSPersistentHistoryResultType = 2
-	NSPersistentHistoryResultTypeTransactionsOnly NSPersistentHistoryResultType = 3
-	NSPersistentHistoryResultTypeChangesOnly NSPersistentHistoryResultType = 4
+	NSPersistentHistoryResultTypeStatusOnly             NSPersistentHistoryResultType = 0
+	NSPersistentHistoryResultTypeObjectIDs              NSPersistentHistoryResultType = 1
+	NSPersistentHistoryResultTypeCount                  NSPersistentHistoryResultType = 2
+	NSPersistentHistoryResultTypeTransactionsOnly       NSPersistentHistoryResultType = 3
+	NSPersistentHistoryResultTypeChangesOnly            NSPersistentHistoryResultType = 4
 	NSPersistentHistoryResultTypeTransactionsAndChanges NSPersistentHistoryResultType = 5
 )
 
@@ -398,8 +398,8 @@ func (e NSPersistentHistoryResultType) String() string {
 type NSPersistentStoreRequestType uint64
 
 const (
-	NSFetchRequestType NSPersistentStoreRequestType = 1
-	NSSaveRequestType NSPersistentStoreRequestType = 2
+	NSFetchRequestType       NSPersistentStoreRequestType = 1
+	NSSaveRequestType        NSPersistentStoreRequestType = 2
 	NSBatchInsertRequestType NSPersistentStoreRequestType = 5
 	NSBatchUpdateRequestType NSPersistentStoreRequestType = 6
 	NSBatchDeleteRequestType NSPersistentStoreRequestType = 7
@@ -427,11 +427,11 @@ type NSSnapshotEventType uint64
 
 const (
 	NSSnapshotEventUndoInsertion NSSnapshotEventType = 2
-	NSSnapshotEventUndoDeletion NSSnapshotEventType = 4
-	NSSnapshotEventUndoUpdate NSSnapshotEventType = 8
-	NSSnapshotEventRollback NSSnapshotEventType = 16
-	NSSnapshotEventRefresh NSSnapshotEventType = 32
-	NSSnapshotEventMergePolicy NSSnapshotEventType = 64
+	NSSnapshotEventUndoDeletion  NSSnapshotEventType = 4
+	NSSnapshotEventUndoUpdate    NSSnapshotEventType = 8
+	NSSnapshotEventRollback      NSSnapshotEventType = 16
+	NSSnapshotEventRefresh       NSSnapshotEventType = 32
+	NSSnapshotEventMergePolicy   NSSnapshotEventType = 64
 )
 
 func (e NSSnapshotEventType) String() string {
@@ -459,4 +459,3 @@ func (e NSSnapshotEventType) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

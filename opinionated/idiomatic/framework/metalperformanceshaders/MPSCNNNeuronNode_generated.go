@@ -64,7 +64,9 @@ func (x *CNNNeuronNode) C() float32 {
 	return x.inner.C()
 }
 
-func (x *CNNNeuronNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNNeuronNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNNeuronNodeable is the interface implemented by [CNNNeuronNode], for mocking and DI.
 type CNNNeuronNodeable interface {
@@ -77,4 +79,3 @@ type CNNNeuronNodeable interface {
 }
 
 var _ CNNNeuronNodeable = (*CNNNeuronNode)(nil)
-

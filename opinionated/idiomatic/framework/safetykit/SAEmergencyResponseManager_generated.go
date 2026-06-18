@@ -68,4 +68,3 @@ type EmergencyResponseManagerable interface {
 }
 
 var _ EmergencyResponseManagerable = (*EmergencyResponseManager)(nil)
-

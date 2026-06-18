@@ -72,4 +72,3 @@ type UnitConverterLinearable interface {
 }
 
 var _ UnitConverterLinearable = (*UnitConverterLinear)(nil)
-

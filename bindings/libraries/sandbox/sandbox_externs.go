@@ -33,4 +33,3 @@ var (
 	// Deprecated: Deprecated in macOS 10.8. No longer supported
 	KSBXProfilePureComputation unsafe.Pointer
 )
-

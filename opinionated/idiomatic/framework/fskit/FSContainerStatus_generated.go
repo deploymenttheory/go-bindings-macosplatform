@@ -54,4 +54,3 @@ type ContainerStatusable interface {
 }
 
 var _ ContainerStatusable = (*ContainerStatus)(nil)
-

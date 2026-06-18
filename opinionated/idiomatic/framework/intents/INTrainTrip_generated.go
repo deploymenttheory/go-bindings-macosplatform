@@ -117,4 +117,3 @@ type TrainTripable interface {
 }
 
 var _ TrainTripable = (*TrainTrip)(nil)
-

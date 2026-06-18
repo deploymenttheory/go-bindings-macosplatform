@@ -15,10 +15,10 @@ type NSUnitFuelEfficiency struct {
 }
 
 var (
-	_clsNSUnitFuelEfficiency = _objcClass("NSUnitFuelEfficiency")
+	_clsNSUnitFuelEfficiency                       = _objcClass("NSUnitFuelEfficiency")
 	_nSUnitFuelEfficiencySelLitersPer100Kilometers = objc.RegisterName("litersPer100Kilometers")
 	_nSUnitFuelEfficiencySelMilesPerImperialGallon = objc.RegisterName("milesPerImperialGallon")
-	_nSUnitFuelEfficiencySelMilesPerGallon = objc.RegisterName("milesPerGallon")
+	_nSUnitFuelEfficiencySelMilesPerGallon         = objc.RegisterName("milesPerGallon")
 )
 
 func NSUnitFuelEfficiencyFromID(id objc.ID) *NSUnitFuelEfficiency {
@@ -33,19 +33,24 @@ func NSUnitFuelEfficiencyFromID(id objc.ID) *NSUnitFuelEfficiency {
 
 func NSUnitFuelEfficiencyLitersPer100Kilometers() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelLitersPer100Kilometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFuelEfficiencyFromID(_ret)
 }
 
 func NSUnitFuelEfficiencyMilesPerImperialGallon() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelMilesPerImperialGallon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFuelEfficiencyFromID(_ret)
 }
 
 func NSUnitFuelEfficiencyMilesPerGallon() *NSUnitFuelEfficiency {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitFuelEfficiency), _nSUnitFuelEfficiencySelMilesPerGallon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitFuelEfficiencyFromID(_ret)
 }
-

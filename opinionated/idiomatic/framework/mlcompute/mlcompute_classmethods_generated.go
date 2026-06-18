@@ -1650,4 +1650,3 @@ func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *raw.MLCYOLOLossDescript
 	}
 	return &YOLOLossLayer{inner: _r}
 }
-

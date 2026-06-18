@@ -76,4 +76,3 @@ type Transcriptionable interface {
 }
 
 var _ Transcriptionable = (*Transcription)(nil)
-

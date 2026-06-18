@@ -18,9 +18,9 @@ type MTRQRCodeSetupPayloadParser struct {
 }
 
 var (
-	_clsMTRQRCodeSetupPayloadParser = _objcClass("MTRQRCodeSetupPayloadParser")
+	_clsMTRQRCodeSetupPayloadParser                             = _objcClass("MTRQRCodeSetupPayloadParser")
 	_mTRQRCodeSetupPayloadParserSelInitWithBase38Representation = objc.RegisterName("initWithBase38Representation:")
-	_mTRQRCodeSetupPayloadParserSelPopulatePayload = objc.RegisterName("populatePayload:")
+	_mTRQRCodeSetupPayloadParserSelPopulatePayload              = objc.RegisterName("populatePayload:")
 )
 
 func MTRQRCodeSetupPayloadParserFromID(id objc.ID) *MTRQRCodeSetupPayloadParser {
@@ -35,17 +35,20 @@ func MTRQRCodeSetupPayloadParserFromID(id objc.ID) *MTRQRCodeSetupPayloadParser 
 
 func (o *MTRQRCodeSetupPayloadParser) InitWithBase38Representation(base38Representation *foundation.NSString) *MTRQRCodeSetupPayloadParser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRQRCodeSetupPayloadParserSelInitWithBase38Representation, base38Representation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRQRCodeSetupPayloadParserFromID(_ret)
 }
 
 func (o *MTRQRCodeSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRQRCodeSetupPayloadParserSelPopulatePayload, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MTRSetupPayloadFromID(_ret), nil
 }
-

@@ -16,7 +16,9 @@ type MTRDeviceEnergyManagementClusterSlotStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterSlotStruct].
-func (x *MTRDeviceEnergyManagementClusterSlotStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterSlotStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterSlotStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -377,4 +379,3 @@ type MTRDeviceEnergyManagementClusterSlotStructable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterSlotStructable = (*MTRDeviceEnergyManagementClusterSlotStruct)(nil)
-

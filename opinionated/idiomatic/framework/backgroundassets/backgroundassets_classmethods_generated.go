@@ -25,4 +25,3 @@ func BADownloadManagerSharedManager() *DownloadManager {
 	}
 	return &DownloadManager{inner: _r}
 }
-

@@ -15,9 +15,9 @@ type FSItemSetAttributesRequest struct {
 }
 
 var (
-	_clsFSItemSetAttributesRequest = _objcClass("FSItemSetAttributesRequest")
-	_fSItemSetAttributesRequestSelWasAttributeConsumed = objc.RegisterName("wasAttributeConsumed:")
-	_fSItemSetAttributesRequestSelConsumedAttributes = objc.RegisterName("consumedAttributes")
+	_clsFSItemSetAttributesRequest                      = _objcClass("FSItemSetAttributesRequest")
+	_fSItemSetAttributesRequestSelWasAttributeConsumed  = objc.RegisterName("wasAttributeConsumed:")
+	_fSItemSetAttributesRequestSelConsumedAttributes    = objc.RegisterName("consumedAttributes")
 	_fSItemSetAttributesRequestSelSetConsumedAttributes = objc.RegisterName("setConsumedAttributes:")
 )
 
@@ -31,7 +31,7 @@ func FSItemSetAttributesRequestFromID(id objc.ID) *FSItemSetAttributesRequest {
 	return o
 }
 
-// A method that indicates whether the file system used the given attribute. - Parameter attribute: The ``FSItemAttribute`` to check.
+// A method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (o *FSItemSetAttributesRequest) WasAttributeConsumed(attribute FSItemAttribute) bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSItemSetAttributesRequestSelWasAttributeConsumed, attribute)
 	return _ret
@@ -46,4 +46,3 @@ func (o *FSItemSetAttributesRequest) ConsumedAttributes() FSItemAttribute {
 func (o *FSItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes FSItemAttribute) {
 	o.Ptr().Send(_fSItemSetAttributesRequestSelSetConsumedAttributes, consumedAttributes)
 }
-

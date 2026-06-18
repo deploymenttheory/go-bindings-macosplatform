@@ -55,9 +55,13 @@ func (x *NNReductionRowMaxNode) WithLabel(label string) *NNReductionRowMaxNode {
 	return x
 }
 
-func (x *NNReductionRowMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionRowMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionRowMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionRowMaxNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionRowMaxNodeable is the interface implemented by [NNReductionRowMaxNode], for mocking and DI.
 type NNReductionRowMaxNodeable interface {
@@ -68,4 +72,3 @@ type NNReductionRowMaxNodeable interface {
 }
 
 var _ NNReductionRowMaxNodeable = (*NNReductionRowMaxNode)(nil)
-

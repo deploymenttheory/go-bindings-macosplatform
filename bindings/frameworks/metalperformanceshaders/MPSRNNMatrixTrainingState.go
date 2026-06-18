@@ -26,4 +26,3 @@ func MPSRNNMatrixTrainingStateFromID(id objc.ID) *MPSRNNMatrixTrainingState {
 	purego.Track(o)
 	return o
 }
-

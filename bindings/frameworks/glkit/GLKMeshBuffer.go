@@ -17,13 +17,13 @@ type GLKMeshBuffer struct {
 }
 
 var (
-	_clsGLKMeshBuffer = _objcClass("GLKMeshBuffer")
-	_gLKMeshBufferSelLength = objc.RegisterName("length")
-	_gLKMeshBufferSelAllocator = objc.RegisterName("allocator")
+	_clsGLKMeshBuffer             = _objcClass("GLKMeshBuffer")
+	_gLKMeshBufferSelLength       = objc.RegisterName("length")
+	_gLKMeshBufferSelAllocator    = objc.RegisterName("allocator")
 	_gLKMeshBufferSelGlBufferName = objc.RegisterName("glBufferName")
-	_gLKMeshBufferSelOffset = objc.RegisterName("offset")
-	_gLKMeshBufferSelZone = objc.RegisterName("zone")
-	_gLKMeshBufferSelType = objc.RegisterName("type")
+	_gLKMeshBufferSelOffset       = objc.RegisterName("offset")
+	_gLKMeshBufferSelZone         = objc.RegisterName("zone")
+	_gLKMeshBufferSelType         = objc.RegisterName("type")
 )
 
 func GLKMeshBufferFromID(id objc.ID) *GLKMeshBuffer {
@@ -45,7 +45,9 @@ func (o *GLKMeshBuffer) Length() uint {
 // @property allocator @abstract Allocator object used to create this buffer. @discussion This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
 func (o *GLKMeshBuffer) Allocator() *GLKMeshBufferAllocator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKMeshBufferSelAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKMeshBufferAllocatorFromID(_ret)
 }
 
@@ -72,4 +74,3 @@ func (o *GLKMeshBuffer) Type() modelio.MDLMeshBufferType {
 	_ret := objc.Send[modelio.MDLMeshBufferType](o.Ptr(), _gLKMeshBufferSelType)
 	return _ret
 }
-

@@ -88,7 +88,9 @@ func MTRDoubleValueType() uintptr {
 
 func MTRErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -139,7 +141,9 @@ func MTRFloatValueType() uintptr {
 
 func MTRInteractionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRInteractionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -165,38 +169,50 @@ func MTRSignedIntegerValueType() uintptr {
 
 func MTRSizeThreadExtendedPANID() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadExtendedPANID")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func MTRSizeThreadExtendedPanId() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadExtendedPanId")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func MTRSizeThreadMasterKey() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadMasterKey")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 // The expected lengths of each of the NSData fields in the MTRThreadOperationalDataset
 func MTRSizeThreadNetworkName() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadNetworkName")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func MTRSizeThreadPANID() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadPANID")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
 func MTRSizeThreadPSKc() uint {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSizeThreadPSKc")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
@@ -224,4 +240,3 @@ func MTRValueKey() uintptr {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRValueKey")
 	return ptr
 }
-

@@ -66,4 +66,3 @@ type GroupPresetSettingable interface {
 }
 
 var _ GroupPresetSettingable = (*GroupPresetSetting)(nil)
-

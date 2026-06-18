@@ -15,9 +15,9 @@ type NSCreateCommand struct {
 }
 
 var (
-	_clsNSCreateCommand = _objcClass("NSCreateCommand")
+	_clsNSCreateCommand                       = _objcClass("NSCreateCommand")
 	_nSCreateCommandSelCreateClassDescription = objc.RegisterName("createClassDescription")
-	_nSCreateCommandSelResolvedKeyDictionary = objc.RegisterName("resolvedKeyDictionary")
+	_nSCreateCommandSelResolvedKeyDictionary  = objc.RegisterName("resolvedKeyDictionary")
 )
 
 func NSCreateCommandFromID(id objc.ID) *NSCreateCommand {
@@ -32,7 +32,9 @@ func NSCreateCommandFromID(id objc.ID) *NSCreateCommand {
 
 func (o *NSCreateCommand) CreateClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCreateCommandSelCreateClassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *NSCreateCommand) ResolvedKeyDictionary() *NSDictionary[*NSString, objc.
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSCreateCommandSelResolvedKeyDictionary)
 	return _ret
 }
-

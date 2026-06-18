@@ -15,7 +15,9 @@ type CNNConvolutionGradientStateNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNConvolutionGradientStateNode].
-func (x *CNNConvolutionGradientStateNode) Unwrap() *raw.MPSCNNConvolutionGradientStateNode { return x.inner }
+func (x *CNNConvolutionGradientStateNode) Unwrap() *raw.MPSCNNConvolutionGradientStateNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,11 +55,17 @@ func (x *CNNConvolutionGradientStateNode) WithSynchronizeResource(synchronizeRes
 	return x
 }
 
-func (x *CNNConvolutionGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode { return x.inner }
+func (x *CNNConvolutionGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode {
+	return x.inner
+}
 
-func (x *CNNConvolutionGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode { return &x.inner.MPSNNGradientStateNode }
+func (x *CNNConvolutionGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode {
+	return &x.inner.MPSNNGradientStateNode
+}
 
-func (x *CNNConvolutionGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNGradientStateNode.MPSNNStateNode }
+func (x *CNNConvolutionGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
+	return &x.inner.MPSNNGradientStateNode.MPSNNStateNode
+}
 
 // CNNConvolutionGradientStateNodeable is the interface implemented by [CNNConvolutionGradientStateNode], for mocking and DI.
 type CNNConvolutionGradientStateNodeable interface {
@@ -68,4 +76,3 @@ type CNNConvolutionGradientStateNodeable interface {
 }
 
 var _ CNNConvolutionGradientStateNodeable = (*CNNConvolutionGradientStateNode)(nil)
-

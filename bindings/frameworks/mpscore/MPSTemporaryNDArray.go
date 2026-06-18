@@ -16,11 +16,11 @@ type MPSTemporaryNDArray struct {
 }
 
 var (
-	_clsMPSTemporaryNDArray = _objcClass("MPSTemporaryNDArray")
-	_mPSTemporaryNDArraySelDefaultAllocator = objc.RegisterName("defaultAllocator")
+	_clsMPSTemporaryNDArray                                            = _objcClass("MPSTemporaryNDArray")
+	_mPSTemporaryNDArraySelDefaultAllocator                            = objc.RegisterName("defaultAllocator")
 	_mPSTemporaryNDArraySelTemporaryNDArrayWithCommandBufferDescriptor = objc.RegisterName("temporaryNDArrayWithCommandBuffer:descriptor:")
-	_mPSTemporaryNDArraySelReadCount = objc.RegisterName("readCount")
-	_mPSTemporaryNDArraySelSetReadCount = objc.RegisterName("setReadCount:")
+	_mPSTemporaryNDArraySelReadCount                                   = objc.RegisterName("readCount")
+	_mPSTemporaryNDArraySelSetReadCount                                = objc.RegisterName("setReadCount:")
 )
 
 func MPSTemporaryNDArrayFromID(id objc.ID) *MPSTemporaryNDArray {
@@ -42,7 +42,9 @@ func MPSTemporaryNDArrayDefaultAllocator() MPSNDArrayAllocator {
 // @abstract   Initialize a MPSTemporaryNDArray for use on a MTLCommandBuffer @param      commandBuffer       The MTLCommandBuffer on which the MPSTemporaryNDArray will be exclusively used @param      descriptor          A valid MPSNDArrayDescriptor describing the MPSNDArray format to create @return     A valid MPSTemporaryNDArray.  The object is not managed by a NSAutoreleasePool. The object will be released when the command buffer is committed. The underlying buffer will become invalid before this time due to the action of the readCount property.  Please read and understand the use of the readCount property before using this object.
 func MPSTemporaryNDArrayTemporaryNDArrayWithCommandBufferDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *MPSNDArrayDescriptor) *MPSTemporaryNDArray {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSTemporaryNDArray), _mPSTemporaryNDArraySelTemporaryNDArrayWithCommandBufferDescriptor, commandBuffer, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporaryNDArrayFromID(_ret)
 }
 
@@ -55,4 +57,3 @@ func (o *MPSTemporaryNDArray) ReadCount() uint {
 func (o *MPSTemporaryNDArray) SetReadCount(readCount uint) {
 	o.Ptr().Send(_mPSTemporaryNDArraySelSetReadCount, readCount)
 }
-

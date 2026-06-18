@@ -117,4 +117,3 @@ type SequenceRequestHandlerable interface {
 }
 
 var _ SequenceRequestHandlerable = (*SequenceRequestHandler)(nil)
-

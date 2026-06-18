@@ -101,7 +101,9 @@ func (x *ImagePyramid) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
-func (x *ImagePyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImagePyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImagePyramid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -118,4 +120,3 @@ type ImagePyramidable interface {
 }
 
 var _ ImagePyramidable = (*ImagePyramid)(nil)
-

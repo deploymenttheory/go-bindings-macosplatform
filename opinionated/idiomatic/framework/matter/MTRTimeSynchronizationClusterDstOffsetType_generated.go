@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterDstOffsetType struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDstOffsetType].
-func (x *MTRTimeSynchronizationClusterDstOffsetType) Unwrap() *raw.MTRTimeSynchronizationClusterDstOffsetType { return x.inner }
+func (x *MTRTimeSynchronizationClusterDstOffsetType) Unwrap() *raw.MTRTimeSynchronizationClusterDstOffsetType {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil *
 	return x
 }
 
-func (x *MTRTimeSynchronizationClusterDstOffsetType) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return &x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct }
+func (x *MTRTimeSynchronizationClusterDstOffsetType) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct {
+	return &x.inner.MTRTimeSynchronizationClusterDSTOffsetStruct
+}
 
 // MTRTimeSynchronizationClusterDstOffsetTypeable is the interface implemented by [MTRTimeSynchronizationClusterDstOffsetType], for mocking and DI.
 type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
@@ -65,4 +69,3 @@ type MTRTimeSynchronizationClusterDstOffsetTypeable interface {
 }
 
 var _ MTRTimeSynchronizationClusterDstOffsetTypeable = (*MTRTimeSynchronizationClusterDstOffsetType)(nil)
-

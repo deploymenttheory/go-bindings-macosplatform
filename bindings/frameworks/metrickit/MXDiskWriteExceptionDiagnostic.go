@@ -16,8 +16,8 @@ type MXDiskWriteExceptionDiagnostic struct {
 }
 
 var (
-	_clsMXDiskWriteExceptionDiagnostic = _objcClass("MXDiskWriteExceptionDiagnostic")
-	_mXDiskWriteExceptionDiagnosticSelCallStackTree = objc.RegisterName("callStackTree")
+	_clsMXDiskWriteExceptionDiagnostic                  = _objcClass("MXDiskWriteExceptionDiagnostic")
+	_mXDiskWriteExceptionDiagnosticSelCallStackTree     = objc.RegisterName("callStackTree")
 	_mXDiskWriteExceptionDiagnosticSelTotalWritesCaused = objc.RegisterName("totalWritesCaused")
 )
 
@@ -34,7 +34,9 @@ func MXDiskWriteExceptionDiagnosticFromID(id objc.ID) *MXDiskWriteExceptionDiagn
 // @property      callStackTree @abstract      The application call stack tree associated with the excessive disk writes.
 func (o *MXDiskWriteExceptionDiagnostic) CallStackTree() *MXCallStackTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiskWriteExceptionDiagnosticSelCallStackTree)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXCallStackTreeFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MXDiskWriteExceptionDiagnostic) TotalWritesCaused() *foundation.NSMeasu
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskWriteExceptionDiagnosticSelTotalWritesCaused)
 	return _ret
 }
-

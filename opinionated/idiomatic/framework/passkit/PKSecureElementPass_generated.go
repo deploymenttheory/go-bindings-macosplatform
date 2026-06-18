@@ -112,4 +112,3 @@ type SecureElementPassable interface {
 }
 
 var _ SecureElementPassable = (*SecureElementPass)(nil)
-

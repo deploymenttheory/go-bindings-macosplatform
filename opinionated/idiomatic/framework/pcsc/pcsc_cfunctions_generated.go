@@ -308,4 +308,3 @@ func MscError(errorCode uint) string {
 func StringifyError(err int32) string {
 	return raw.PcscStringifyError(err)
 }
-

@@ -16,26 +16,26 @@ type MTRDeviceStorageBehaviorConfiguration struct {
 }
 
 var (
-	_clsMTRDeviceStorageBehaviorConfiguration = _objcClass("MTRDeviceStorageBehaviorConfiguration")
-	_mTRDeviceStorageBehaviorConfigurationSelConfigurationWithDefaultStorageBehavior = objc.RegisterName("configurationWithDefaultStorageBehavior")
-	_mTRDeviceStorageBehaviorConfigurationSelConfigurationWithStorageBehaviorOptimizationDisabled = objc.RegisterName("configurationWithStorageBehaviorOptimizationDisabled")
+	_clsMTRDeviceStorageBehaviorConfiguration                                                                                                                                                                                                                                                               = _objcClass("MTRDeviceStorageBehaviorConfiguration")
+	_mTRDeviceStorageBehaviorConfigurationSelConfigurationWithDefaultStorageBehavior                                                                                                                                                                                                                        = objc.RegisterName("configurationWithDefaultStorageBehavior")
+	_mTRDeviceStorageBehaviorConfigurationSelConfigurationWithStorageBehaviorOptimizationDisabled                                                                                                                                                                                                           = objc.RegisterName("configurationWithStorageBehaviorOptimizationDisabled")
 	_mTRDeviceStorageBehaviorConfigurationSelConfigurationWithReportToPersistenceDelayTimeReportToPersistenceDelayTimeMaxRecentReportTimesMaxCountTimeBetweenReportsTooShortThresholdTimeBetweenReportsTooShortMinThresholdReportToPersistenceDelayMaxMultiplierDeviceReportingExcessivelyIntervalThreshold = objc.RegisterName("configurationWithReportToPersistenceDelayTime:reportToPersistenceDelayTimeMax:recentReportTimesMaxCount:timeBetweenReportsTooShortThreshold:timeBetweenReportsTooShortMinThreshold:reportToPersistenceDelayMaxMultiplier:deviceReportingExcessivelyIntervalThreshold:")
-	_mTRDeviceStorageBehaviorConfigurationSelDisableStorageBehaviorOptimization = objc.RegisterName("disableStorageBehaviorOptimization")
-	_mTRDeviceStorageBehaviorConfigurationSelSetDisableStorageBehaviorOptimization = objc.RegisterName("setDisableStorageBehaviorOptimization:")
-	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayTime = objc.RegisterName("reportToPersistenceDelayTime")
-	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayTime = objc.RegisterName("setReportToPersistenceDelayTime:")
-	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayTimeMax = objc.RegisterName("reportToPersistenceDelayTimeMax")
-	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayTimeMax = objc.RegisterName("setReportToPersistenceDelayTimeMax:")
-	_mTRDeviceStorageBehaviorConfigurationSelRecentReportTimesMaxCount = objc.RegisterName("recentReportTimesMaxCount")
-	_mTRDeviceStorageBehaviorConfigurationSelSetRecentReportTimesMaxCount = objc.RegisterName("setRecentReportTimesMaxCount:")
-	_mTRDeviceStorageBehaviorConfigurationSelTimeBetweenReportsTooShortThreshold = objc.RegisterName("timeBetweenReportsTooShortThreshold")
-	_mTRDeviceStorageBehaviorConfigurationSelSetTimeBetweenReportsTooShortThreshold = objc.RegisterName("setTimeBetweenReportsTooShortThreshold:")
-	_mTRDeviceStorageBehaviorConfigurationSelTimeBetweenReportsTooShortMinThreshold = objc.RegisterName("timeBetweenReportsTooShortMinThreshold")
-	_mTRDeviceStorageBehaviorConfigurationSelSetTimeBetweenReportsTooShortMinThreshold = objc.RegisterName("setTimeBetweenReportsTooShortMinThreshold:")
-	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayMaxMultiplier = objc.RegisterName("reportToPersistenceDelayMaxMultiplier")
-	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayMaxMultiplier = objc.RegisterName("setReportToPersistenceDelayMaxMultiplier:")
-	_mTRDeviceStorageBehaviorConfigurationSelDeviceReportingExcessivelyIntervalThreshold = objc.RegisterName("deviceReportingExcessivelyIntervalThreshold")
-	_mTRDeviceStorageBehaviorConfigurationSelSetDeviceReportingExcessivelyIntervalThreshold = objc.RegisterName("setDeviceReportingExcessivelyIntervalThreshold:")
+	_mTRDeviceStorageBehaviorConfigurationSelDisableStorageBehaviorOptimization                                                                                                                                                                                                                             = objc.RegisterName("disableStorageBehaviorOptimization")
+	_mTRDeviceStorageBehaviorConfigurationSelSetDisableStorageBehaviorOptimization                                                                                                                                                                                                                          = objc.RegisterName("setDisableStorageBehaviorOptimization:")
+	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayTime                                                                                                                                                                                                                                   = objc.RegisterName("reportToPersistenceDelayTime")
+	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayTime                                                                                                                                                                                                                                = objc.RegisterName("setReportToPersistenceDelayTime:")
+	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayTimeMax                                                                                                                                                                                                                                = objc.RegisterName("reportToPersistenceDelayTimeMax")
+	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayTimeMax                                                                                                                                                                                                                             = objc.RegisterName("setReportToPersistenceDelayTimeMax:")
+	_mTRDeviceStorageBehaviorConfigurationSelRecentReportTimesMaxCount                                                                                                                                                                                                                                      = objc.RegisterName("recentReportTimesMaxCount")
+	_mTRDeviceStorageBehaviorConfigurationSelSetRecentReportTimesMaxCount                                                                                                                                                                                                                                   = objc.RegisterName("setRecentReportTimesMaxCount:")
+	_mTRDeviceStorageBehaviorConfigurationSelTimeBetweenReportsTooShortThreshold                                                                                                                                                                                                                            = objc.RegisterName("timeBetweenReportsTooShortThreshold")
+	_mTRDeviceStorageBehaviorConfigurationSelSetTimeBetweenReportsTooShortThreshold                                                                                                                                                                                                                         = objc.RegisterName("setTimeBetweenReportsTooShortThreshold:")
+	_mTRDeviceStorageBehaviorConfigurationSelTimeBetweenReportsTooShortMinThreshold                                                                                                                                                                                                                         = objc.RegisterName("timeBetweenReportsTooShortMinThreshold")
+	_mTRDeviceStorageBehaviorConfigurationSelSetTimeBetweenReportsTooShortMinThreshold                                                                                                                                                                                                                      = objc.RegisterName("setTimeBetweenReportsTooShortMinThreshold:")
+	_mTRDeviceStorageBehaviorConfigurationSelReportToPersistenceDelayMaxMultiplier                                                                                                                                                                                                                          = objc.RegisterName("reportToPersistenceDelayMaxMultiplier")
+	_mTRDeviceStorageBehaviorConfigurationSelSetReportToPersistenceDelayMaxMultiplier                                                                                                                                                                                                                       = objc.RegisterName("setReportToPersistenceDelayMaxMultiplier:")
+	_mTRDeviceStorageBehaviorConfigurationSelDeviceReportingExcessivelyIntervalThreshold                                                                                                                                                                                                                    = objc.RegisterName("deviceReportingExcessivelyIntervalThreshold")
+	_mTRDeviceStorageBehaviorConfigurationSelSetDeviceReportingExcessivelyIntervalThreshold                                                                                                                                                                                                                 = objc.RegisterName("setDeviceReportingExcessivelyIntervalThreshold:")
 )
 
 func MTRDeviceStorageBehaviorConfigurationFromID(id objc.ID) *MTRDeviceStorageBehaviorConfiguration {
@@ -51,21 +51,27 @@ func MTRDeviceStorageBehaviorConfigurationFromID(id objc.ID) *MTRDeviceStorageBe
 // Create configuration with a default set of values. See description below for details.
 func MTRDeviceStorageBehaviorConfigurationConfigurationWithDefaultStorageBehavior() *MTRDeviceStorageBehaviorConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceStorageBehaviorConfiguration), _mTRDeviceStorageBehaviorConfigurationSelConfigurationWithDefaultStorageBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceStorageBehaviorConfigurationFromID(_ret)
 }
 
 // Create configuration that disables storage behavior optimizations.
 func MTRDeviceStorageBehaviorConfigurationConfigurationWithStorageBehaviorOptimizationDisabled() *MTRDeviceStorageBehaviorConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceStorageBehaviorConfiguration), _mTRDeviceStorageBehaviorConfigurationSelConfigurationWithStorageBehaviorOptimizationDisabled)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceStorageBehaviorConfigurationFromID(_ret)
 }
 
 // Create configuration with specified values. See description below for details, and the list of properties below for valid ranges of these values.
 func MTRDeviceStorageBehaviorConfigurationConfigurationWithReportToPersistenceDelayTimeReportToPersistenceDelayTimeMaxRecentReportTimesMaxCountTimeBetweenReportsTooShortThresholdTimeBetweenReportsTooShortMinThresholdReportToPersistenceDelayMaxMultiplierDeviceReportingExcessivelyIntervalThreshold(reportToPersistenceDelayTime float64, reportToPersistenceDelayTimeMax float64, recentReportTimesMaxCount uint, timeBetweenReportsTooShortThreshold float64, timeBetweenReportsTooShortMinThreshold float64, reportToPersistenceDelayMaxMultiplier float64, deviceReportingExcessivelyIntervalThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDeviceStorageBehaviorConfiguration), _mTRDeviceStorageBehaviorConfigurationSelConfigurationWithReportToPersistenceDelayTimeReportToPersistenceDelayTimeMaxRecentReportTimesMaxCountTimeBetweenReportsTooShortThresholdTimeBetweenReportsTooShortMinThresholdReportToPersistenceDelayMaxMultiplierDeviceReportingExcessivelyIntervalThreshold, reportToPersistenceDelayTime, reportToPersistenceDelayTimeMax, recentReportTimesMaxCount, timeBetweenReportsTooShortThreshold, timeBetweenReportsTooShortMinThreshold, reportToPersistenceDelayMaxMultiplier, deviceReportingExcessivelyIntervalThreshold)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceStorageBehaviorConfigurationFromID(_ret)
 }
 
@@ -142,4 +148,3 @@ func (o *MTRDeviceStorageBehaviorConfiguration) DeviceReportingExcessivelyInterv
 func (o *MTRDeviceStorageBehaviorConfiguration) SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) {
 	o.Ptr().Send(_mTRDeviceStorageBehaviorConfigurationSelSetDeviceReportingExcessivelyIntervalThreshold, deviceReportingExcessivelyIntervalThreshold)
 }
-

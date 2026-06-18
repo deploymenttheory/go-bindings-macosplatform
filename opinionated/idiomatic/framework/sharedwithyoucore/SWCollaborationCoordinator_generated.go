@@ -60,4 +60,3 @@ type CollaborationCoordinatorable interface {
 }
 
 var _ CollaborationCoordinatorable = (*CollaborationCoordinator)(nil)
-

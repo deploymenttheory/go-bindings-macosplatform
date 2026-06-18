@@ -51,7 +51,9 @@ func (x *SpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
 	x.inner.SetSharesClipboard(sharesClipboard)
 }
 
-func (x *SpiceAgentPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+func (x *SpiceAgentPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
+	return &x.inner.VZSerialPortAttachment
+}
 
 // SpiceAgentPortAttachmentable is the interface implemented by [SpiceAgentPortAttachment], for mocking and DI.
 type SpiceAgentPortAttachmentable interface {
@@ -62,4 +64,3 @@ type SpiceAgentPortAttachmentable interface {
 }
 
 var _ SpiceAgentPortAttachmentable = (*SpiceAgentPortAttachment)(nil)
-

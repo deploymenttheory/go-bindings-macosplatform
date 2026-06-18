@@ -16,15 +16,15 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelCredentialParameters = objc.RegisterName("credentialParameters")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetCredentialParameters = objc.RegisterName("setCredentialParameters:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelExcludedCredentials = objc.RegisterName("excludedCredentials")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetExcludedCredentials = objc.RegisterName("setExcludedCredentials:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelResidentKeyPreference = objc.RegisterName("residentKeyPreference")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest                         = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelCredentialParameters     = objc.RegisterName("credentialParameters")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetCredentialParameters  = objc.RegisterName("setCredentialParameters:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelExcludedCredentials      = objc.RegisterName("excludedCredentials")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetExcludedCredentials   = objc.RegisterName("setExcludedCredentials:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelResidentKeyPreference    = objc.RegisterName("residentKeyPreference")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetResidentKeyPreference = objc.RegisterName("setResidentKeyPreference:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelPrf = objc.RegisterName("prf")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetPrf = objc.RegisterName("setPrf:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelPrf                      = objc.RegisterName("prf")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetPrf                   = objc.RegisterName("setPrf:")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
@@ -40,7 +40,9 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(id o
 // @abstract A list of parameters for the new credential which are supported by the Relying Party. The authenticator should choose from these parameters when creating the credential.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) CredentialParameters() *foundation.NSArray[*ASAuthorizationPublicKeyCredentialParameters] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelCredentialParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationPublicKeyCredentialParameters](_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetCr
 // @abstract A list of descriptors indicating credentials which must not already exist on the authenticator. If a credential already exists on the authenticator which matches one or more of these descriptors, a new credential will not be created and authentication will fail.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ExcludedCredentials() *foundation.NSArray[*ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelExcludedCredentials)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetEx
 // @abstract A preference whether the authenticator should store the private key of the newly created credential.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ResidentKeyPreference() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelResidentKeyPreference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetRe
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Prf() *ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_ret)
 }
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetPrf(prf *ASAuthorizationPublicKeyCredentialPRFRegistrationInput) {
 	o.Ptr().Send(_aSAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestSelSetPrf, prf.Ptr())
 }
-

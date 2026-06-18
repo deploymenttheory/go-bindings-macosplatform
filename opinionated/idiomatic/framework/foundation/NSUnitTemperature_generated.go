@@ -54,4 +54,3 @@ type UnitTemperatureable interface {
 }
 
 var _ UnitTemperatureable = (*UnitTemperature)(nil)
-

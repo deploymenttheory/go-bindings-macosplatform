@@ -16,7 +16,9 @@ type MTRMediaPlaybackClusterSeekParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterSeekParams].
-func (x *MTRMediaPlaybackClusterSeekParams) Unwrap() *raw.MTRMediaPlaybackClusterSeekParams { return x.inner }
+func (x *MTRMediaPlaybackClusterSeekParams) Unwrap() *raw.MTRMediaPlaybackClusterSeekParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRMediaPlaybackClusterSeekParamsable interface {
 }
 
 var _ MTRMediaPlaybackClusterSeekParamsable = (*MTRMediaPlaybackClusterSeekParams)(nil)
-

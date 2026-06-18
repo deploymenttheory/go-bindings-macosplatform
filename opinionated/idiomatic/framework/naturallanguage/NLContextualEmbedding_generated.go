@@ -134,4 +134,3 @@ type ContextualEmbeddingable interface {
 }
 
 var _ ContextualEmbeddingable = (*ContextualEmbedding)(nil)
-

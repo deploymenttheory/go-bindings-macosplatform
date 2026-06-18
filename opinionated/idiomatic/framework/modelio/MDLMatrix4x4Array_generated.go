@@ -85,4 +85,3 @@ type Matrix4x4Arrayable interface {
 }
 
 var _ Matrix4x4Arrayable = (*Matrix4x4Array)(nil)
-

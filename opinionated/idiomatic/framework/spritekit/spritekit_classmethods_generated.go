@@ -2250,4 +2250,3 @@ func GridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourceP
 	}
 	return &WarpGeometryGrid{inner: _r}
 }
-

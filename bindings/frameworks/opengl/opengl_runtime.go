@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_openglLib uintptr
-	_loadOnce sync.Once
+	_openglLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -66,7 +66,9 @@ func _loadLibrary() {
 	_register("CGLFlushDrawable", func() { purego.RegisterLibFunc(&_fnCGLFlushDrawable, _openglLib, "CGLFlushDrawable") })
 	_register("CGLGetContextRetainCount", func() { purego.RegisterLibFunc(&_fnCGLGetContextRetainCount, _openglLib, "CGLGetContextRetainCount") })
 	_register("CGLGetCurrentContext", func() { purego.RegisterLibFunc(&_fnCGLGetCurrentContext, _openglLib, "CGLGetCurrentContext") })
-	_register("CGLGetDeviceFromGLRenderer", func() { purego.RegisterLibFunc(&_fnCGLGetDeviceFromGLRenderer, _openglLib, "CGLGetDeviceFromGLRenderer") })
+	_register("CGLGetDeviceFromGLRenderer", func() {
+		purego.RegisterLibFunc(&_fnCGLGetDeviceFromGLRenderer, _openglLib, "CGLGetDeviceFromGLRenderer")
+	})
 	_register("CGLGetGlobalOption", func() { purego.RegisterLibFunc(&_fnCGLGetGlobalOption, _openglLib, "CGLGetGlobalOption") })
 	_register("CGLGetOffScreen", func() { purego.RegisterLibFunc(&_fnCGLGetOffScreen, _openglLib, "CGLGetOffScreen") })
 	_register("CGLGetOption", func() { purego.RegisterLibFunc(&_fnCGLGetOption, _openglLib, "CGLGetOption") })
@@ -74,7 +76,9 @@ func _loadLibrary() {
 	_register("CGLGetPBufferRetainCount", func() { purego.RegisterLibFunc(&_fnCGLGetPBufferRetainCount, _openglLib, "CGLGetPBufferRetainCount") })
 	_register("CGLGetParameter", func() { purego.RegisterLibFunc(&_fnCGLGetParameter, _openglLib, "CGLGetParameter") })
 	_register("CGLGetPixelFormat", func() { purego.RegisterLibFunc(&_fnCGLGetPixelFormat, _openglLib, "CGLGetPixelFormat") })
-	_register("CGLGetPixelFormatRetainCount", func() { purego.RegisterLibFunc(&_fnCGLGetPixelFormatRetainCount, _openglLib, "CGLGetPixelFormatRetainCount") })
+	_register("CGLGetPixelFormatRetainCount", func() {
+		purego.RegisterLibFunc(&_fnCGLGetPixelFormatRetainCount, _openglLib, "CGLGetPixelFormatRetainCount")
+	})
 	_register("CGLGetShareGroup", func() { purego.RegisterLibFunc(&_fnCGLGetShareGroup, _openglLib, "CGLGetShareGroup") })
 	_register("CGLGetVersion", func() { purego.RegisterLibFunc(&_fnCGLGetVersion, _openglLib, "CGLGetVersion") })
 	_register("CGLGetVirtualScreen", func() { purego.RegisterLibFunc(&_fnCGLGetVirtualScreen, _openglLib, "CGLGetVirtualScreen") })

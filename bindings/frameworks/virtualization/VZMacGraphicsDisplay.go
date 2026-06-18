@@ -15,7 +15,7 @@ type VZMacGraphicsDisplay struct {
 }
 
 var (
-	_clsVZMacGraphicsDisplay = _objcClass("VZMacGraphicsDisplay")
+	_clsVZMacGraphicsDisplay              = _objcClass("VZMacGraphicsDisplay")
 	_vZMacGraphicsDisplaySelPixelsPerInch = objc.RegisterName("pixelsPerInch")
 )
 
@@ -33,4 +33,3 @@ func (o *VZMacGraphicsDisplay) PixelsPerInch() int {
 	_ret := objc.Send[int](o.Ptr(), _vZMacGraphicsDisplaySelPixelsPerInch)
 	return _ret
 }
-

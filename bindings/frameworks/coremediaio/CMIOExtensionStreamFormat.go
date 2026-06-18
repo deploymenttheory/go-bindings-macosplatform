@@ -19,13 +19,13 @@ type CMIOExtensionStreamFormat struct {
 }
 
 var (
-	_clsCMIOExtensionStreamFormat = _objcClass("CMIOExtensionStreamFormat")
+	_clsCMIOExtensionStreamFormat                                                                                     = _objcClass("CMIOExtensionStreamFormat")
 	_cMIOExtensionStreamFormatSelStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations = objc.RegisterName("streamFormatWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:")
-	_cMIOExtensionStreamFormatSelInitWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations = objc.RegisterName("initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:")
-	_cMIOExtensionStreamFormatSelFormatDescription = objc.RegisterName("formatDescription")
-	_cMIOExtensionStreamFormatSelMinFrameDuration = objc.RegisterName("minFrameDuration")
-	_cMIOExtensionStreamFormatSelMaxFrameDuration = objc.RegisterName("maxFrameDuration")
-	_cMIOExtensionStreamFormatSelValidFrameDurations = objc.RegisterName("validFrameDurations")
+	_cMIOExtensionStreamFormatSelInitWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations         = objc.RegisterName("initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:")
+	_cMIOExtensionStreamFormatSelFormatDescription                                                                    = objc.RegisterName("formatDescription")
+	_cMIOExtensionStreamFormatSelMinFrameDuration                                                                     = objc.RegisterName("minFrameDuration")
+	_cMIOExtensionStreamFormatSelMaxFrameDuration                                                                     = objc.RegisterName("maxFrameDuration")
+	_cMIOExtensionStreamFormatSelValidFrameDurations                                                                  = objc.RegisterName("validFrameDurations")
 )
 
 func CMIOExtensionStreamFormatFromID(id objc.ID) *CMIOExtensionStreamFormat {
@@ -41,14 +41,18 @@ func CMIOExtensionStreamFormatFromID(id objc.ID) *CMIOExtensionStreamFormat {
 // @method streamFormatWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations: @abstract Returns a stream format instance. @param formatDescription The format description of the samples delivered by the stream. @param maxFrameDuration The maximum frame duration. @param minFrameDuration The minimum frame duration. @param validFrameDurations The list of valid CMTime as dictionaries. If nil the full range between min and max is valid. The CMTime in dictionary format are made with CMTimeCopyAsDictionary. @result A CMIOExtensionStreamFormat instance that describes the stream format. @discussion A frame duration is the reciprocal of a frame rate. If a CMIOExtensionStreamFormat's validFrameDurations property is not nil and not empty, the frame duration are discrete and can only have a certain set of value. Current frame duration and maximum frame duration can be changed with the properties CMIOExtensionPropertyStreamFrameDuration and CMIOExtensionPropertyStreamMaxFrameDuration.
 func CMIOExtensionStreamFormatStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *CMIOExtensionStreamFormat {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStreamFormat), _cMIOExtensionStreamFormatSelStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations, formatDescription, maxFrameDuration, minFrameDuration, validFrameDurations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFormatFromID(_ret)
 }
 
 // @method initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations: @abstract Initialize a stream format instance. @param formatDescription The format description of the samples delivered by the stream. @param maxFrameDuration The maximum frame duration. @param minFrameDuration The minimum frame duration. @param validFrameDurations The list of valid CMTime as dictionaries if nil the full range between min and max is valid. The CMTime in dictionary format are made with CMTimeCopyAsDictionary. @result A CMIOExtensionStreamFormat instance that describes the stream format. @discussion A frame duration is the reciprocal of a frame rate. If a CMIOExtensionStreamFormat's validFrameDurations property is not nil and not empty, the frame duration are discrete and can only have a certain set of value. Current frame duration and maximum frame duration can be changed with the properties CMIOExtensionPropertyStreamFrameDuration and CMIOExtensionPropertyStreamMaxFrameDuration.
 func (o *CMIOExtensionStreamFormat) InitWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *CMIOExtensionStreamFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamFormatSelInitWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations, formatDescription, maxFrameDuration, minFrameDuration, validFrameDurations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFormatFromID(_ret)
 }
 
@@ -75,4 +79,3 @@ func (o *CMIOExtensionStreamFormat) ValidFrameDurations() *foundation.NSArray[ob
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cMIOExtensionStreamFormatSelValidFrameDurations)
 	return _ret
 }
-

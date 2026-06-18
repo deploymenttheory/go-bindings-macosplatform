@@ -16,20 +16,20 @@ type PHFetchOptions struct {
 }
 
 var (
-	_clsPHFetchOptions = _objcClass("PHFetchOptions")
-	_pHFetchOptionsSelPredicate = objc.RegisterName("predicate")
-	_pHFetchOptionsSelSetPredicate = objc.RegisterName("setPredicate:")
-	_pHFetchOptionsSelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_pHFetchOptionsSelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
-	_pHFetchOptionsSelIncludeHiddenAssets = objc.RegisterName("includeHiddenAssets")
-	_pHFetchOptionsSelSetIncludeHiddenAssets = objc.RegisterName("setIncludeHiddenAssets:")
-	_pHFetchOptionsSelIncludeAllBurstAssets = objc.RegisterName("includeAllBurstAssets")
-	_pHFetchOptionsSelSetIncludeAllBurstAssets = objc.RegisterName("setIncludeAllBurstAssets:")
-	_pHFetchOptionsSelIncludeAssetSourceTypes = objc.RegisterName("includeAssetSourceTypes")
-	_pHFetchOptionsSelSetIncludeAssetSourceTypes = objc.RegisterName("setIncludeAssetSourceTypes:")
-	_pHFetchOptionsSelFetchLimit = objc.RegisterName("fetchLimit")
-	_pHFetchOptionsSelSetFetchLimit = objc.RegisterName("setFetchLimit:")
-	_pHFetchOptionsSelWantsIncrementalChangeDetails = objc.RegisterName("wantsIncrementalChangeDetails")
+	_clsPHFetchOptions                                 = _objcClass("PHFetchOptions")
+	_pHFetchOptionsSelPredicate                        = objc.RegisterName("predicate")
+	_pHFetchOptionsSelSetPredicate                     = objc.RegisterName("setPredicate:")
+	_pHFetchOptionsSelSortDescriptors                  = objc.RegisterName("sortDescriptors")
+	_pHFetchOptionsSelSetSortDescriptors               = objc.RegisterName("setSortDescriptors:")
+	_pHFetchOptionsSelIncludeHiddenAssets              = objc.RegisterName("includeHiddenAssets")
+	_pHFetchOptionsSelSetIncludeHiddenAssets           = objc.RegisterName("setIncludeHiddenAssets:")
+	_pHFetchOptionsSelIncludeAllBurstAssets            = objc.RegisterName("includeAllBurstAssets")
+	_pHFetchOptionsSelSetIncludeAllBurstAssets         = objc.RegisterName("setIncludeAllBurstAssets:")
+	_pHFetchOptionsSelIncludeAssetSourceTypes          = objc.RegisterName("includeAssetSourceTypes")
+	_pHFetchOptionsSelSetIncludeAssetSourceTypes       = objc.RegisterName("setIncludeAssetSourceTypes:")
+	_pHFetchOptionsSelFetchLimit                       = objc.RegisterName("fetchLimit")
+	_pHFetchOptionsSelSetFetchLimit                    = objc.RegisterName("setFetchLimit:")
+	_pHFetchOptionsSelWantsIncrementalChangeDetails    = objc.RegisterName("wantsIncrementalChangeDetails")
 	_pHFetchOptionsSelSetWantsIncrementalChangeDetails = objc.RegisterName("setWantsIncrementalChangeDetails:")
 )
 
@@ -45,7 +45,9 @@ func PHFetchOptionsFromID(id objc.ID) *PHFetchOptions {
 
 func (o *PHFetchOptions) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHFetchOptionsSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -106,4 +108,3 @@ func (o *PHFetchOptions) WantsIncrementalChangeDetails() bool {
 func (o *PHFetchOptions) SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) {
 	o.Ptr().Send(_pHFetchOptionsSelSetWantsIncrementalChangeDetails, wantsIncrementalChangeDetails)
 }
-

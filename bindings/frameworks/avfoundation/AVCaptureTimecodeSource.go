@@ -16,10 +16,10 @@ type AVCaptureTimecodeSource struct {
 }
 
 var (
-	_clsAVCaptureTimecodeSource = _objcClass("AVCaptureTimecodeSource")
+	_clsAVCaptureTimecodeSource            = _objcClass("AVCaptureTimecodeSource")
 	_aVCaptureTimecodeSourceSelDisplayName = objc.RegisterName("displayName")
-	_aVCaptureTimecodeSourceSelType = objc.RegisterName("type")
-	_aVCaptureTimecodeSourceSelUuid = objc.RegisterName("uuid")
+	_aVCaptureTimecodeSourceSelType        = objc.RegisterName("type")
+	_aVCaptureTimecodeSourceSelUuid        = objc.RegisterName("uuid")
 )
 
 func AVCaptureTimecodeSourceFromID(id objc.ID) *AVCaptureTimecodeSource {
@@ -35,11 +35,13 @@ func AVCaptureTimecodeSourceFromID(id objc.ID) *AVCaptureTimecodeSource {
 // The name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
 func (o *AVCaptureTimecodeSource) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureTimecodeSourceSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// The type of timecode source. Indicates the type of timecode source, represented as a value from the ``AVCaptureTimecodeSynchronizationSourceType`` enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
+// The type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
 func (o *AVCaptureTimecodeSource) Type() AVCaptureTimecodeSourceType {
 	_ret := objc.Send[AVCaptureTimecodeSourceType](o.Ptr(), _aVCaptureTimecodeSourceSelType)
 	return _ret
@@ -48,7 +50,8 @@ func (o *AVCaptureTimecodeSource) Type() AVCaptureTimecodeSourceType {
 // A unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
 func (o *AVCaptureTimecodeSource) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureTimecodeSourceSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

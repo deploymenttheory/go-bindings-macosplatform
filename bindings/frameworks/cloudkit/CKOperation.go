@@ -16,25 +16,25 @@ type CKOperation struct {
 }
 
 var (
-	_clsCKOperation = _objcClass("CKOperation")
-	_cKOperationSelInit = objc.RegisterName("init")
-	_cKOperationSelConfiguration = objc.RegisterName("configuration")
-	_cKOperationSelSetConfiguration = objc.RegisterName("setConfiguration:")
-	_cKOperationSelGroup = objc.RegisterName("group")
-	_cKOperationSelSetGroup = objc.RegisterName("setGroup:")
-	_cKOperationSelOperationID = objc.RegisterName("operationID")
-	_cKOperationSelLongLivedOperationWasPersistedBlock = objc.RegisterName("longLivedOperationWasPersistedBlock")
+	_clsCKOperation                                       = _objcClass("CKOperation")
+	_cKOperationSelInit                                   = objc.RegisterName("init")
+	_cKOperationSelConfiguration                          = objc.RegisterName("configuration")
+	_cKOperationSelSetConfiguration                       = objc.RegisterName("setConfiguration:")
+	_cKOperationSelGroup                                  = objc.RegisterName("group")
+	_cKOperationSelSetGroup                               = objc.RegisterName("setGroup:")
+	_cKOperationSelOperationID                            = objc.RegisterName("operationID")
+	_cKOperationSelLongLivedOperationWasPersistedBlock    = objc.RegisterName("longLivedOperationWasPersistedBlock")
 	_cKOperationSelSetLongLivedOperationWasPersistedBlock = objc.RegisterName("setLongLivedOperationWasPersistedBlock:")
-	_cKOperationSelContainer = objc.RegisterName("container")
-	_cKOperationSelSetContainer = objc.RegisterName("setContainer:")
-	_cKOperationSelAllowsCellularAccess = objc.RegisterName("allowsCellularAccess")
-	_cKOperationSelSetAllowsCellularAccess = objc.RegisterName("setAllowsCellularAccess:")
-	_cKOperationSelIsLongLived = objc.RegisterName("isLongLived")
-	_cKOperationSelSetLongLived = objc.RegisterName("setLongLived:")
-	_cKOperationSelTimeoutIntervalForRequest = objc.RegisterName("timeoutIntervalForRequest")
-	_cKOperationSelSetTimeoutIntervalForRequest = objc.RegisterName("setTimeoutIntervalForRequest:")
-	_cKOperationSelTimeoutIntervalForResource = objc.RegisterName("timeoutIntervalForResource")
-	_cKOperationSelSetTimeoutIntervalForResource = objc.RegisterName("setTimeoutIntervalForResource:")
+	_cKOperationSelContainer                              = objc.RegisterName("container")
+	_cKOperationSelSetContainer                           = objc.RegisterName("setContainer:")
+	_cKOperationSelAllowsCellularAccess                   = objc.RegisterName("allowsCellularAccess")
+	_cKOperationSelSetAllowsCellularAccess                = objc.RegisterName("setAllowsCellularAccess:")
+	_cKOperationSelIsLongLived                            = objc.RegisterName("isLongLived")
+	_cKOperationSelSetLongLived                           = objc.RegisterName("setLongLived:")
+	_cKOperationSelTimeoutIntervalForRequest              = objc.RegisterName("timeoutIntervalForRequest")
+	_cKOperationSelSetTimeoutIntervalForRequest           = objc.RegisterName("setTimeoutIntervalForRequest:")
+	_cKOperationSelTimeoutIntervalForResource             = objc.RegisterName("timeoutIntervalForResource")
+	_cKOperationSelSetTimeoutIntervalForResource          = objc.RegisterName("setTimeoutIntervalForResource:")
 )
 
 func CKOperationFromID(id objc.ID) *CKOperation {
@@ -50,14 +50,18 @@ func CKOperationFromID(id objc.ID) *CKOperation {
 // Creates an operation. - Important: Don't use this method directly. Instead, create database operations using the initializers of the concrete subclasses.
 func (o *CKOperation) Init() *CKOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationFromID(_ret)
 }
 
 // The operation's configuration.
 func (o *CKOperation) Configuration() *CKOperationConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationConfigurationFromID(_ret)
 }
 
@@ -68,7 +72,9 @@ func (o *CKOperation) SetConfiguration(configuration *CKOperationConfiguration) 
 // The operation's group.
 func (o *CKOperation) Group() *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationGroupFromID(_ret)
 }
 
@@ -76,14 +82,16 @@ func (o *CKOperation) SetGroup(group *CKOperationGroup) {
 	o.Ptr().Send(_cKOperationSelSetGroup, group.Ptr())
 }
 
-// A unique identifier for a long-lived operation. Pass this property's value to the ``CKContainer/longLivedOperation(for:)`` method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
 func (o *CKOperation) OperationID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelOperationID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the ``CKContainer/allLongLivedOperationIDs()`` method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
 func (o *CKOperation) LongLivedOperationWasPersistedBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKOperationSelLongLivedOperationWasPersistedBlock)
 	return _ret
@@ -100,11 +108,13 @@ func (o *CKOperation) SetLongLivedOperationWasPersistedBlock(longLivedOperationW
 	o.Ptr().Send(_cKOperationSelSetLongLivedOperationWasPersistedBlock, __block_longLivedOperationWasPersistedBlock)
 }
 
-// The operation's container. @DeprecationSummary { Use ``CKOperation/Configuration/container`` instead. } The container defines where the operation executes. The ``CKContainer/add(_:)`` method of the ``CKContainer`` and ``CKDatabase`` classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
 // Deprecated: Use CKOperationConfiguration
 func (o *CKOperation) Container() *CKContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationSelContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKContainerFromID(_ret)
 }
 
@@ -113,7 +123,7 @@ func (o *CKOperation) SetContainer(container *CKContainer) {
 	o.Ptr().Send(_cKOperationSelSetContainer, container.Ptr())
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use ``CKOperation/Configuration/allowsCellularAccess`` instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
 // Deprecated: Use CKOperationConfiguration
 func (o *CKOperation) AllowsCellularAccess() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKOperationSelAllowsCellularAccess)
@@ -125,7 +135,7 @@ func (o *CKOperation) SetAllowsCellularAccess(allowsCellularAccess bool) {
 	o.Ptr().Send(_cKOperationSelSetAllowsCellularAccess, allowsCellularAccess)
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use ``CKOperation/Configuration/isLongLived`` instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
 // Deprecated: Use CKOperationConfiguration
 func (o *CKOperation) IsLongLived() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKOperationSelIsLongLived)
@@ -137,7 +147,7 @@ func (o *CKOperation) SetLongLived(longLived bool) {
 	o.Ptr().Send(_cKOperationSelSetLongLived, longLived)
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use ``CKOperation/Configuration/timeoutIntervalForRequest`` instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
 // Deprecated: Use CKOperationConfiguration
 func (o *CKOperation) TimeoutIntervalForRequest() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cKOperationSelTimeoutIntervalForRequest)
@@ -149,7 +159,7 @@ func (o *CKOperation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest flo
 	o.Ptr().Send(_cKOperationSelSetTimeoutIntervalForRequest, timeoutIntervalForRequest)
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use ``CKOperation/Configuration/timeoutIntervalForResource`` instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
 // Deprecated: Use CKOperationConfiguration
 func (o *CKOperation) TimeoutIntervalForResource() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cKOperationSelTimeoutIntervalForResource)
@@ -160,4 +170,3 @@ func (o *CKOperation) TimeoutIntervalForResource() float64 {
 func (o *CKOperation) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
 	o.Ptr().Send(_cKOperationSelSetTimeoutIntervalForResource, timeoutIntervalForResource)
 }
-

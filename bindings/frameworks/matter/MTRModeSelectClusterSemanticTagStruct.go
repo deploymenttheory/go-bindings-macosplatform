@@ -16,11 +16,11 @@ type MTRModeSelectClusterSemanticTagStruct struct {
 }
 
 var (
-	_clsMTRModeSelectClusterSemanticTagStruct = _objcClass("MTRModeSelectClusterSemanticTagStruct")
-	_mTRModeSelectClusterSemanticTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRModeSelectClusterSemanticTagStruct           = _objcClass("MTRModeSelectClusterSemanticTagStruct")
+	_mTRModeSelectClusterSemanticTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRModeSelectClusterSemanticTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRModeSelectClusterSemanticTagStructSelValue = objc.RegisterName("value")
-	_mTRModeSelectClusterSemanticTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRModeSelectClusterSemanticTagStructSelValue      = objc.RegisterName("value")
+	_mTRModeSelectClusterSemanticTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRModeSelectClusterSemanticTagStructFromID(id objc.ID) *MTRModeSelectClusterSemanticTagStruct {
@@ -35,7 +35,9 @@ func MTRModeSelectClusterSemanticTagStructFromID(id objc.ID) *MTRModeSelectClust
 
 func (o *MTRModeSelectClusterSemanticTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRModeSelectClusterSemanticTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRModeSelectClusterSemanticTagStruct) SetMfgCode(mfgCode *foundation.N
 
 func (o *MTRModeSelectClusterSemanticTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRModeSelectClusterSemanticTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRModeSelectClusterSemanticTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRModeSelectClusterSemanticTagStructSelSetValue, value.Ptr())
 }
-

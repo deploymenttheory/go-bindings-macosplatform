@@ -17,11 +17,11 @@ type AVCoordinatedPlaybackSuspension struct {
 }
 
 var (
-	_clsAVCoordinatedPlaybackSuspension = _objcClass("AVCoordinatedPlaybackSuspension")
-	_aVCoordinatedPlaybackSuspensionSelEnd = objc.RegisterName("end")
+	_clsAVCoordinatedPlaybackSuspension                    = _objcClass("AVCoordinatedPlaybackSuspension")
+	_aVCoordinatedPlaybackSuspensionSelEnd                 = objc.RegisterName("end")
 	_aVCoordinatedPlaybackSuspensionSelEndProposingNewTime = objc.RegisterName("endProposingNewTime:")
-	_aVCoordinatedPlaybackSuspensionSelReason = objc.RegisterName("reason")
-	_aVCoordinatedPlaybackSuspensionSelBeginDate = objc.RegisterName("beginDate")
+	_aVCoordinatedPlaybackSuspensionSelReason              = objc.RegisterName("reason")
+	_aVCoordinatedPlaybackSuspensionSelBeginDate           = objc.RegisterName("beginDate")
 )
 
 func AVCoordinatedPlaybackSuspensionFromID(id objc.ID) *AVCoordinatedPlaybackSuspension {
@@ -47,14 +47,17 @@ func (o *AVCoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CM
 // The reason for the suspension. This will be communicated to other participants while coordination is suspended.
 func (o *AVCoordinatedPlaybackSuspension) Reason() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCoordinatedPlaybackSuspensionSelReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The begin time of the suspension.
 func (o *AVCoordinatedPlaybackSuspension) BeginDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCoordinatedPlaybackSuspensionSelBeginDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

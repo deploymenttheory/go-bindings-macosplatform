@@ -6,4 +6,3 @@ package metrickit
 // MXMetricManagerSubscriber wraps the ObjC protocol MXMetricManagerSubscriber.
 type MXMetricManagerSubscriber interface {
 }
-

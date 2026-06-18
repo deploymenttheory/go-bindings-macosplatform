@@ -108,4 +108,3 @@ type FetchResultChangeDetailsable interface {
 }
 
 var _ FetchResultChangeDetailsable = (*FetchResultChangeDetails)(nil)
-

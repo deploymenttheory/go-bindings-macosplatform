@@ -13,42 +13,42 @@ import (
 
 var (
 	// Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
-// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 	_fnGCExtendedGamepadSnapShotDataV100FromNSData func(*GCExtendedGamepadSnapShotDataV100, objc.ID) bool
 	// Fills out a snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
-// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 	_fnGCExtendedGamepadSnapshotDataFromNSData func(*GCExtendedGamepadSnapshotData, objc.ID) bool
 	// Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
-// Deprecated: Use GCExtendedGamepad instead
+	// Deprecated: Use GCExtendedGamepad instead
 	_fnGCGamepadSnapShotDataV100FromNSData func(*GCGamepadSnapShotDataV100, objc.ID) bool
 	// Gets the name of an arcade button at a certain position.
 	_fnGCInputArcadeButtonName func(int, int) unsafe.Pointer
-	_fnGCInputBackLeftButton func(int) unsafe.Pointer
-	_fnGCInputBackRightButton func(int) unsafe.Pointer
+	_fnGCInputBackLeftButton   func(int) unsafe.Pointer
+	_fnGCInputBackRightButton  func(int) unsafe.Pointer
 	// Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
-// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 	_fnGCMicroGamepadSnapShotDataV100FromNSData func(*GCMicroGamepadSnapShotDataV100, objc.ID) bool
 	// Fills out a snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
-// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 	_fnGCMicroGamepadSnapshotDataFromNSData func(*GCMicroGamepadSnapshotData, objc.ID) bool
-	_fnGCPoint2Equal func(GCPoint2, GCPoint2) bool
-	_fnGCPoint2Make func(float32, float32) GCPoint2
+	_fnGCPoint2Equal                        func(GCPoint2, GCPoint2) bool
+	_fnGCPoint2Make                         func(float32, float32) GCPoint2
 	// Creates an NSData object from a v100 snapshot. If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCExtendedGamepadSnapShotDataV100) set as the values implicitly. @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCExtendedGamepadSnapshot.snapshotData
-// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 	_fnNSDataFromGCExtendedGamepadSnapShotDataV100 func(*GCExtendedGamepadSnapShotDataV100) objc.ID
 	// Creates an NSData object from a snapshot. If the version and size is not set in the snapshot the data will automatically have the version GCCurrentExtendedGamepadSnapshotDataVersion and sizeof(GCExtendedGamepadSnapshotData) set as the values implicitly. @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCExtendedGamepadSnapshot.snapshotData
-// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 	_fnNSDataFromGCExtendedGamepadSnapshotData func(*GCExtendedGamepadSnapshotData) objc.ID
 	// Creates an NSData object from a v100 snapshot. If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCGamepadSnapShotDataV100) set as the values implicitly. @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
-// Deprecated: Use GCExtendedGamepad instead
+	// Deprecated: Use GCExtendedGamepad instead
 	_fnNSDataFromGCGamepadSnapShotDataV100 func(*GCGamepadSnapShotDataV100) objc.ID
 	// Creates an NSData object from a v100 snapshot. If the version and size is not set in the snapshot the data will automatically have version 0x100 and sizeof(GCMicroGamepadSnapShotDataV100) set as the values implicitly. @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
-// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 	_fnNSDataFromGCMicroGamepadSnapShotDataV100 func(*GCMicroGamepadSnapShotDataV100) objc.ID
 	// Creates an NSData object from a snapshot. If the version and size is not set in the snapshot the data will automatically have version GCCurrentMicroGamepadSnapshotDataVersion and sizeof(GCMicroGamepadSnapshotData) set as the values implicitly. @return nil if the snapshot is NULL, otherwise an NSData instance compatible with GCGamepadSnapshot.snapshotData
-// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
+	// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 	_fnNSDataFromGCMicroGamepadSnapshotData func(*GCMicroGamepadSnapshotData) objc.ID
-	_fnNSStringFromGCPoint2 func(GCPoint2) objc.ID
+	_fnNSStringFromGCPoint2                 func(GCPoint2) objc.ID
 )
 
 // Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
@@ -106,7 +106,9 @@ func GCPoint2Make(x float32, y float32) GCPoint2 {
 // Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 func NSDataFromGCExtendedGamepadSnapShotDataV100(snapshotData *GCExtendedGamepadSnapShotDataV100) *foundation.NSData {
 	_ret := _fnNSDataFromGCExtendedGamepadSnapShotDataV100(snapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -114,7 +116,9 @@ func NSDataFromGCExtendedGamepadSnapShotDataV100(snapshotData *GCExtendedGamepad
 // Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 func NSDataFromGCExtendedGamepadSnapshotData(snapshotData *GCExtendedGamepadSnapshotData) *foundation.NSData {
 	_ret := _fnNSDataFromGCExtendedGamepadSnapshotData(snapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -122,7 +126,9 @@ func NSDataFromGCExtendedGamepadSnapshotData(snapshotData *GCExtendedGamepadSnap
 // Deprecated: Use GCExtendedGamepad instead
 func NSDataFromGCGamepadSnapShotDataV100(snapshotData *GCGamepadSnapShotDataV100) *foundation.NSData {
 	_ret := _fnNSDataFromGCGamepadSnapShotDataV100(snapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -130,7 +136,9 @@ func NSDataFromGCGamepadSnapShotDataV100(snapshotData *GCGamepadSnapShotDataV100
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 func NSDataFromGCMicroGamepadSnapShotDataV100(snapshotData *GCMicroGamepadSnapShotDataV100) *foundation.NSData {
 	_ret := _fnNSDataFromGCMicroGamepadSnapShotDataV100(snapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -138,13 +146,16 @@ func NSDataFromGCMicroGamepadSnapShotDataV100(snapshotData *GCMicroGamepadSnapSh
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 func NSDataFromGCMicroGamepadSnapshotData(snapshotData *GCMicroGamepadSnapshotData) *foundation.NSData {
 	_ret := _fnNSDataFromGCMicroGamepadSnapshotData(snapshotData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func NSStringFromGCPoint2(point GCPoint2) *foundation.NSString {
 	_ret := _fnNSStringFromGCPoint2(point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

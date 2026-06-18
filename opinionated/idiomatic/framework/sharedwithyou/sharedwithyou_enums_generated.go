@@ -83,7 +83,7 @@ func (e SWAttributionViewHorizontalAlignment) String() string {
 type SWHighlightChangeEventTrigger int64
 
 const (
-	SWHighlightChangeEventTriggerEdit SWHighlightChangeEventTrigger = 1
+	SWHighlightChangeEventTriggerEdit    SWHighlightChangeEventTrigger = 1
 	SWHighlightChangeEventTriggerComment SWHighlightChangeEventTrigger = 2
 )
 
@@ -101,7 +101,7 @@ func (e SWHighlightChangeEventTrigger) String() string {
 type SWHighlightMembershipEventTrigger int64
 
 const (
-	SWHighlightMembershipEventTriggerAddedCollaborator SWHighlightMembershipEventTrigger = 1
+	SWHighlightMembershipEventTriggerAddedCollaborator   SWHighlightMembershipEventTrigger = 1
 	SWHighlightMembershipEventTriggerRemovedCollaborator SWHighlightMembershipEventTrigger = 2
 )
 
@@ -122,7 +122,7 @@ const (
 	SWHighlightPersistenceEventTriggerCreated SWHighlightPersistenceEventTrigger = 1
 	SWHighlightPersistenceEventTriggerDeleted SWHighlightPersistenceEventTrigger = 2
 	SWHighlightPersistenceEventTriggerRenamed SWHighlightPersistenceEventTrigger = 3
-	SWHighlightPersistenceEventTriggerMoved SWHighlightPersistenceEventTrigger = 4
+	SWHighlightPersistenceEventTriggerMoved   SWHighlightPersistenceEventTrigger = 4
 )
 
 func (e SWHighlightPersistenceEventTrigger) String() string {
@@ -139,4 +139,3 @@ func (e SWHighlightPersistenceEventTrigger) String() string {
 		return fmt.Sprintf("SWHighlightPersistenceEventTrigger(%d)", int64(e))
 	}
 }
-

@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(id objc.ID) *
 	purego.Track(o)
 	return o
 }
-

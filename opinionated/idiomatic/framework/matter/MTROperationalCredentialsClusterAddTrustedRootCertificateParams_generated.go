@@ -16,11 +16,15 @@ type MTROperationalCredentialsClusterAddTrustedRootCertificateParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams].
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) Unwrap() *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams { return x.inner }
+func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) Unwrap() *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterAddTrustedRootCertificateParams (nil for 0).
 func MTROperationalCredentialsClusterAddTrustedRootCertificateParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
@@ -118,4 +122,3 @@ type MTROperationalCredentialsClusterAddTrustedRootCertificateParamsable interfa
 }
 
 var _ MTROperationalCredentialsClusterAddTrustedRootCertificateParamsable = (*MTROperationalCredentialsClusterAddTrustedRootCertificateParams)(nil)
-

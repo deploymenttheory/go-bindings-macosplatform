@@ -16,21 +16,21 @@ type MTRDoorLockClusterLockUserChangeEvent struct {
 }
 
 var (
-	_clsMTRDoorLockClusterLockUserChangeEvent = _objcClass("MTRDoorLockClusterLockUserChangeEvent")
-	_mTRDoorLockClusterLockUserChangeEventSelLockDataType = objc.RegisterName("lockDataType")
-	_mTRDoorLockClusterLockUserChangeEventSelSetLockDataType = objc.RegisterName("setLockDataType:")
-	_mTRDoorLockClusterLockUserChangeEventSelDataOperationType = objc.RegisterName("dataOperationType")
+	_clsMTRDoorLockClusterLockUserChangeEvent                     = _objcClass("MTRDoorLockClusterLockUserChangeEvent")
+	_mTRDoorLockClusterLockUserChangeEventSelLockDataType         = objc.RegisterName("lockDataType")
+	_mTRDoorLockClusterLockUserChangeEventSelSetLockDataType      = objc.RegisterName("setLockDataType:")
+	_mTRDoorLockClusterLockUserChangeEventSelDataOperationType    = objc.RegisterName("dataOperationType")
 	_mTRDoorLockClusterLockUserChangeEventSelSetDataOperationType = objc.RegisterName("setDataOperationType:")
-	_mTRDoorLockClusterLockUserChangeEventSelOperationSource = objc.RegisterName("operationSource")
-	_mTRDoorLockClusterLockUserChangeEventSelSetOperationSource = objc.RegisterName("setOperationSource:")
-	_mTRDoorLockClusterLockUserChangeEventSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterLockUserChangeEventSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterLockUserChangeEventSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRDoorLockClusterLockUserChangeEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
-	_mTRDoorLockClusterLockUserChangeEventSelSourceNode = objc.RegisterName("sourceNode")
-	_mTRDoorLockClusterLockUserChangeEventSelSetSourceNode = objc.RegisterName("setSourceNode:")
-	_mTRDoorLockClusterLockUserChangeEventSelDataIndex = objc.RegisterName("dataIndex")
-	_mTRDoorLockClusterLockUserChangeEventSelSetDataIndex = objc.RegisterName("setDataIndex:")
+	_mTRDoorLockClusterLockUserChangeEventSelOperationSource      = objc.RegisterName("operationSource")
+	_mTRDoorLockClusterLockUserChangeEventSelSetOperationSource   = objc.RegisterName("setOperationSource:")
+	_mTRDoorLockClusterLockUserChangeEventSelUserIndex            = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterLockUserChangeEventSelSetUserIndex         = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterLockUserChangeEventSelFabricIndex          = objc.RegisterName("fabricIndex")
+	_mTRDoorLockClusterLockUserChangeEventSelSetFabricIndex       = objc.RegisterName("setFabricIndex:")
+	_mTRDoorLockClusterLockUserChangeEventSelSourceNode           = objc.RegisterName("sourceNode")
+	_mTRDoorLockClusterLockUserChangeEventSelSetSourceNode        = objc.RegisterName("setSourceNode:")
+	_mTRDoorLockClusterLockUserChangeEventSelDataIndex            = objc.RegisterName("dataIndex")
+	_mTRDoorLockClusterLockUserChangeEventSelSetDataIndex         = objc.RegisterName("setDataIndex:")
 )
 
 func MTRDoorLockClusterLockUserChangeEventFromID(id objc.ID) *MTRDoorLockClusterLockUserChangeEvent {
@@ -45,7 +45,9 @@ func MTRDoorLockClusterLockUserChangeEventFromID(id objc.ID) *MTRDoorLockCluster
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) LockDataType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelLockDataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetLockDataType(lockDataType *fo
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) DataOperationType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelDataOperationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetDataOperationType(dataOperati
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) OperationSource() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelOperationSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetOperationSource(operationSour
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetUserIndex(userIndex *foundati
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetFabricIndex(fabricIndex *foun
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) SourceNode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelSourceNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -105,11 +117,12 @@ func (o *MTRDoorLockClusterLockUserChangeEvent) SetSourceNode(sourceNode *founda
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) DataIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockUserChangeEventSelDataIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterLockUserChangeEvent) SetDataIndex(dataIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterLockUserChangeEventSelSetDataIndex, dataIndex.Ptr())
 }
-

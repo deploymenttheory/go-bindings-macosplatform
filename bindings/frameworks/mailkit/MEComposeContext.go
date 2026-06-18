@@ -16,13 +16,13 @@ type MEComposeContext struct {
 }
 
 var (
-	_clsMEComposeContext = _objcClass("MEComposeContext")
+	_clsMEComposeContext                = _objcClass("MEComposeContext")
 	_mEComposeContextSelOriginalMessage = objc.RegisterName("originalMessage")
-	_mEComposeContextSelAction = objc.RegisterName("action")
-	_mEComposeContextSelIsEncrypted = objc.RegisterName("isEncrypted")
-	_mEComposeContextSelShouldEncrypt = objc.RegisterName("shouldEncrypt")
-	_mEComposeContextSelIsSigned = objc.RegisterName("isSigned")
-	_mEComposeContextSelShouldSign = objc.RegisterName("shouldSign")
+	_mEComposeContextSelAction          = objc.RegisterName("action")
+	_mEComposeContextSelIsEncrypted     = objc.RegisterName("isEncrypted")
+	_mEComposeContextSelShouldEncrypt   = objc.RegisterName("shouldEncrypt")
+	_mEComposeContextSelIsSigned        = objc.RegisterName("isSigned")
+	_mEComposeContextSelShouldSign      = objc.RegisterName("shouldSign")
 )
 
 func MEComposeContextFromID(id objc.ID) *MEComposeContext {
@@ -38,7 +38,9 @@ func MEComposeContextFromID(id objc.ID) *MEComposeContext {
 // @brief The original email message on which user performed an action It is @c nil for @c MEComposeUserActionNewMessage actions.
 func (o *MEComposeContext) OriginalMessage() *MEMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEComposeContextSelOriginalMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *MEComposeContext) ShouldSign() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mEComposeContextSelShouldSign)
 	return _ret
 }
-

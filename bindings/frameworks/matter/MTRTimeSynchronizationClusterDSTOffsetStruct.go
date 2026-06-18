@@ -16,13 +16,13 @@ type MTRTimeSynchronizationClusterDSTOffsetStruct struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterDSTOffsetStruct = _objcClass("MTRTimeSynchronizationClusterDSTOffsetStruct")
-	_mTRTimeSynchronizationClusterDSTOffsetStructSelOffset = objc.RegisterName("offset")
-	_mTRTimeSynchronizationClusterDSTOffsetStructSelSetOffset = objc.RegisterName("setOffset:")
-	_mTRTimeSynchronizationClusterDSTOffsetStructSelValidStarting = objc.RegisterName("validStarting")
+	_clsMTRTimeSynchronizationClusterDSTOffsetStruct                 = _objcClass("MTRTimeSynchronizationClusterDSTOffsetStruct")
+	_mTRTimeSynchronizationClusterDSTOffsetStructSelOffset           = objc.RegisterName("offset")
+	_mTRTimeSynchronizationClusterDSTOffsetStructSelSetOffset        = objc.RegisterName("setOffset:")
+	_mTRTimeSynchronizationClusterDSTOffsetStructSelValidStarting    = objc.RegisterName("validStarting")
 	_mTRTimeSynchronizationClusterDSTOffsetStructSelSetValidStarting = objc.RegisterName("setValidStarting:")
-	_mTRTimeSynchronizationClusterDSTOffsetStructSelValidUntil = objc.RegisterName("validUntil")
-	_mTRTimeSynchronizationClusterDSTOffsetStructSelSetValidUntil = objc.RegisterName("setValidUntil:")
+	_mTRTimeSynchronizationClusterDSTOffsetStructSelValidUntil       = objc.RegisterName("validUntil")
+	_mTRTimeSynchronizationClusterDSTOffsetStructSelSetValidUntil    = objc.RegisterName("setValidUntil:")
 )
 
 func MTRTimeSynchronizationClusterDSTOffsetStructFromID(id objc.ID) *MTRTimeSynchronizationClusterDSTOffsetStruct {
@@ -37,7 +37,9 @@ func MTRTimeSynchronizationClusterDSTOffsetStructFromID(id objc.ID) *MTRTimeSync
 
 func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterDSTOffsetStructSelOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) SetOffset(offset *foundat
 
 func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterDSTOffsetStructSelValidStarting)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidStarting(validSta
 
 func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterDSTOffsetStructSelValidUntil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidUntil(validUntil *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterDSTOffsetStructSelSetValidUntil, validUntil.Ptr())
 }
-

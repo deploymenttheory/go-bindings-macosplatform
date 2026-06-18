@@ -101,4 +101,3 @@ type QCRendererable interface {
 }
 
 var _ QCRendererable = (*QCRenderer)(nil)
-

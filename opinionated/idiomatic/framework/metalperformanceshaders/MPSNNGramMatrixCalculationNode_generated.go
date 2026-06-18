@@ -78,7 +78,9 @@ func (x *NNGramMatrixCalculationNode) SetPropertyCallBack(propertyCallBack mpsne
 	x.inner.SetPropertyCallBack(propertyCallBack)
 }
 
-func (x *NNGramMatrixCalculationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNGramMatrixCalculationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNGramMatrixCalculationNodeable is the interface implemented by [NNGramMatrixCalculationNode], for mocking and DI.
 type NNGramMatrixCalculationNodeable interface {
@@ -92,4 +94,3 @@ type NNGramMatrixCalculationNodeable interface {
 }
 
 var _ NNGramMatrixCalculationNodeable = (*NNGramMatrixCalculationNode)(nil)
-

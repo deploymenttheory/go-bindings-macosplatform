@@ -11,11 +11,11 @@ import (
 type INUIAddVoiceShortcutButtonStyle uint64
 
 const (
-	INUIAddVoiceShortcutButtonStyleWhite INUIAddVoiceShortcutButtonStyle = 0
-	INUIAddVoiceShortcutButtonStyleWhiteOutline INUIAddVoiceShortcutButtonStyle = 1
-	INUIAddVoiceShortcutButtonStyleBlack INUIAddVoiceShortcutButtonStyle = 2
-	INUIAddVoiceShortcutButtonStyleBlackOutline INUIAddVoiceShortcutButtonStyle = 3
-	INUIAddVoiceShortcutButtonStyleAutomatic INUIAddVoiceShortcutButtonStyle = 4
+	INUIAddVoiceShortcutButtonStyleWhite            INUIAddVoiceShortcutButtonStyle = 0
+	INUIAddVoiceShortcutButtonStyleWhiteOutline     INUIAddVoiceShortcutButtonStyle = 1
+	INUIAddVoiceShortcutButtonStyleBlack            INUIAddVoiceShortcutButtonStyle = 2
+	INUIAddVoiceShortcutButtonStyleBlackOutline     INUIAddVoiceShortcutButtonStyle = 3
+	INUIAddVoiceShortcutButtonStyleAutomatic        INUIAddVoiceShortcutButtonStyle = 4
 	INUIAddVoiceShortcutButtonStyleAutomaticOutline INUIAddVoiceShortcutButtonStyle = 5
 )
 
@@ -37,4 +37,3 @@ func (e INUIAddVoiceShortcutButtonStyle) String() string {
 		return fmt.Sprintf("INUIAddVoiceShortcutButtonStyle(%d)", int64(e))
 	}
 }
-

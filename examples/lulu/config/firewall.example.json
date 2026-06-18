@@ -1,0 +1,33 @@
+{
+  "version": "1",
+  "defaultAction": "block",
+  "rules": [
+    {
+      "name": "Homebrew",
+      "path": "/opt/homebrew/bin/brew",
+      "action": "allow"
+    },
+    {
+      "name": "curl to example.com",
+      "path": "/usr/bin/curl",
+      "action": "allow",
+      "endpoints": [
+        { "host": "example.com", "port": "443" }
+      ]
+    },
+    {
+      "name": "netcat",
+      "path": "/usr/bin/nc",
+      "action": "block"
+    },
+    {
+      "name": "telemetry blocklist",
+      "path": "/Applications/SomeApp.app/Contents/MacOS/SomeApp",
+      "action": "block",
+      "endpoints": [
+        { "host": "telemetry.example.net" },
+        { "host": "203.0.113.10", "port": "443" }
+      ]
+    }
+  ]
+}

@@ -99,4 +99,3 @@ func AuthorizationStatusClass() raw.SFSpeechRecognizerAuthorizationStatus {
 func RequestAuthorization(handler func(raw.SFSpeechRecognizerAuthorizationStatus)) {
 	raw.SFSpeechRecognizerRequestAuthorization(handler)
 }
-

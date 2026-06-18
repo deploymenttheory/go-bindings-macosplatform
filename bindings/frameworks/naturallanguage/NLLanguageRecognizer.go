@@ -16,17 +16,17 @@ type NLLanguageRecognizer struct {
 }
 
 var (
-	_clsNLLanguageRecognizer = _objcClass("NLLanguageRecognizer")
-	_nLLanguageRecognizerSelDominantLanguageForString = objc.RegisterName("dominantLanguageForString:")
-	_nLLanguageRecognizerSelInit = objc.RegisterName("init")
-	_nLLanguageRecognizerSelProcessString = objc.RegisterName("processString:")
-	_nLLanguageRecognizerSelReset = objc.RegisterName("reset")
+	_clsNLLanguageRecognizer                              = _objcClass("NLLanguageRecognizer")
+	_nLLanguageRecognizerSelDominantLanguageForString     = objc.RegisterName("dominantLanguageForString:")
+	_nLLanguageRecognizerSelInit                          = objc.RegisterName("init")
+	_nLLanguageRecognizerSelProcessString                 = objc.RegisterName("processString:")
+	_nLLanguageRecognizerSelReset                         = objc.RegisterName("reset")
 	_nLLanguageRecognizerSelLanguageHypothesesWithMaximum = objc.RegisterName("languageHypothesesWithMaximum:")
-	_nLLanguageRecognizerSelDominantLanguage = objc.RegisterName("dominantLanguage")
-	_nLLanguageRecognizerSelLanguageHints = objc.RegisterName("languageHints")
-	_nLLanguageRecognizerSelSetLanguageHints = objc.RegisterName("setLanguageHints:")
-	_nLLanguageRecognizerSelLanguageConstraints = objc.RegisterName("languageConstraints")
-	_nLLanguageRecognizerSelSetLanguageConstraints = objc.RegisterName("setLanguageConstraints:")
+	_nLLanguageRecognizerSelDominantLanguage              = objc.RegisterName("dominantLanguage")
+	_nLLanguageRecognizerSelLanguageHints                 = objc.RegisterName("languageHints")
+	_nLLanguageRecognizerSelSetLanguageHints              = objc.RegisterName("setLanguageHints:")
+	_nLLanguageRecognizerSelLanguageConstraints           = objc.RegisterName("languageConstraints")
+	_nLLanguageRecognizerSelSetLanguageConstraints        = objc.RegisterName("setLanguageConstraints:")
 )
 
 func NLLanguageRecognizerFromID(id objc.ID) *NLLanguageRecognizer {
@@ -41,13 +41,17 @@ func NLLanguageRecognizerFromID(id objc.ID) *NLLanguageRecognizer {
 
 func NLLanguageRecognizerDominantLanguageForString(string_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLLanguageRecognizer), _nLLanguageRecognizerSelDominantLanguageForString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NLLanguageRecognizer) Init() *NLLanguageRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLLanguageRecognizerFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *NLLanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses uint)
 
 func (o *NLLanguageRecognizer) DominantLanguage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLLanguageRecognizerSelDominantLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,4 +93,3 @@ func (o *NLLanguageRecognizer) LanguageConstraints() *foundation.NSArray[*founda
 func (o *NLLanguageRecognizer) SetLanguageConstraints(languageConstraints *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_nLLanguageRecognizerSelSetLanguageConstraints, languageConstraints)
 }
-

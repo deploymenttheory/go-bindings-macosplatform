@@ -17,82 +17,82 @@ type NSFileManager struct {
 }
 
 var (
-	_clsNSFileManager = _objcClass("NSFileManager")
-	_nSFileManagerSelMountedVolumeURLsIncludingResourceValuesForKeysOptions = objc.RegisterName("mountedVolumeURLsIncludingResourceValuesForKeys:options:")
-	_nSFileManagerSelUnmountVolumeAtURLOptionsCompletionHandler = objc.RegisterName("unmountVolumeAtURL:options:completionHandler:")
-	_nSFileManagerSelContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError = objc.RegisterName("contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error:")
-	_nSFileManagerSelURLsForDirectoryInDomains = objc.RegisterName("URLsForDirectory:inDomains:")
-	_nSFileManagerSelURLForDirectoryInDomainAppropriateForURLCreateError = objc.RegisterName("URLForDirectory:inDomain:appropriateForURL:create:error:")
-	_nSFileManagerSelGetRelationshipOfDirectoryAtURLToItemAtURLError = objc.RegisterName("getRelationship:ofDirectoryAtURL:toItemAtURL:error:")
-	_nSFileManagerSelGetRelationshipOfDirectoryInDomainToItemAtURLError = objc.RegisterName("getRelationship:ofDirectory:inDomain:toItemAtURL:error:")
-	_nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError = objc.RegisterName("createDirectoryAtURL:withIntermediateDirectories:attributes:error:")
-	_nSFileManagerSelCreateSymbolicLinkAtURLWithDestinationURLError = objc.RegisterName("createSymbolicLinkAtURL:withDestinationURL:error:")
-	_nSFileManagerSelSetAttributesOfItemAtPathError = objc.RegisterName("setAttributes:ofItemAtPath:error:")
-	_nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError = objc.RegisterName("createDirectoryAtPath:withIntermediateDirectories:attributes:error:")
-	_nSFileManagerSelContentsOfDirectoryAtPathError = objc.RegisterName("contentsOfDirectoryAtPath:error:")
-	_nSFileManagerSelSubpathsOfDirectoryAtPathError = objc.RegisterName("subpathsOfDirectoryAtPath:error:")
-	_nSFileManagerSelAttributesOfItemAtPathError = objc.RegisterName("attributesOfItemAtPath:error:")
-	_nSFileManagerSelAttributesOfFileSystemForPathError = objc.RegisterName("attributesOfFileSystemForPath:error:")
-	_nSFileManagerSelCreateSymbolicLinkAtPathWithDestinationPathError = objc.RegisterName("createSymbolicLinkAtPath:withDestinationPath:error:")
-	_nSFileManagerSelDestinationOfSymbolicLinkAtPathError = objc.RegisterName("destinationOfSymbolicLinkAtPath:error:")
-	_nSFileManagerSelCopyItemAtPathToPathError = objc.RegisterName("copyItemAtPath:toPath:error:")
-	_nSFileManagerSelMoveItemAtPathToPathError = objc.RegisterName("moveItemAtPath:toPath:error:")
-	_nSFileManagerSelLinkItemAtPathToPathError = objc.RegisterName("linkItemAtPath:toPath:error:")
-	_nSFileManagerSelRemoveItemAtPathError = objc.RegisterName("removeItemAtPath:error:")
-	_nSFileManagerSelCopyItemAtURLToURLError = objc.RegisterName("copyItemAtURL:toURL:error:")
-	_nSFileManagerSelMoveItemAtURLToURLError = objc.RegisterName("moveItemAtURL:toURL:error:")
-	_nSFileManagerSelLinkItemAtURLToURLError = objc.RegisterName("linkItemAtURL:toURL:error:")
-	_nSFileManagerSelRemoveItemAtURLError = objc.RegisterName("removeItemAtURL:error:")
-	_nSFileManagerSelTrashItemAtURLResultingItemURLError = objc.RegisterName("trashItemAtURL:resultingItemURL:error:")
-	_nSFileManagerSelFileAttributesAtPathTraverseLink = objc.RegisterName("fileAttributesAtPath:traverseLink:")
-	_nSFileManagerSelChangeFileAttributesAtPath = objc.RegisterName("changeFileAttributes:atPath:")
-	_nSFileManagerSelDirectoryContentsAtPath = objc.RegisterName("directoryContentsAtPath:")
-	_nSFileManagerSelFileSystemAttributesAtPath = objc.RegisterName("fileSystemAttributesAtPath:")
-	_nSFileManagerSelPathContentOfSymbolicLinkAtPath = objc.RegisterName("pathContentOfSymbolicLinkAtPath:")
-	_nSFileManagerSelCreateSymbolicLinkAtPathPathContent = objc.RegisterName("createSymbolicLinkAtPath:pathContent:")
-	_nSFileManagerSelCreateDirectoryAtPathAttributes = objc.RegisterName("createDirectoryAtPath:attributes:")
-	_nSFileManagerSelLinkPathToPathHandler = objc.RegisterName("linkPath:toPath:handler:")
-	_nSFileManagerSelCopyPathToPathHandler = objc.RegisterName("copyPath:toPath:handler:")
-	_nSFileManagerSelMovePathToPathHandler = objc.RegisterName("movePath:toPath:handler:")
-	_nSFileManagerSelRemoveFileAtPathHandler = objc.RegisterName("removeFileAtPath:handler:")
-	_nSFileManagerSelChangeCurrentDirectoryPath = objc.RegisterName("changeCurrentDirectoryPath:")
-	_nSFileManagerSelFileExistsAtPath = objc.RegisterName("fileExistsAtPath:")
-	_nSFileManagerSelFileExistsAtPathIsDirectory = objc.RegisterName("fileExistsAtPath:isDirectory:")
-	_nSFileManagerSelIsReadableFileAtPath = objc.RegisterName("isReadableFileAtPath:")
-	_nSFileManagerSelIsWritableFileAtPath = objc.RegisterName("isWritableFileAtPath:")
-	_nSFileManagerSelIsExecutableFileAtPath = objc.RegisterName("isExecutableFileAtPath:")
-	_nSFileManagerSelIsDeletableFileAtPath = objc.RegisterName("isDeletableFileAtPath:")
-	_nSFileManagerSelContentsEqualAtPathAndPath = objc.RegisterName("contentsEqualAtPath:andPath:")
-	_nSFileManagerSelDisplayNameAtPath = objc.RegisterName("displayNameAtPath:")
-	_nSFileManagerSelComponentsToDisplayForPath = objc.RegisterName("componentsToDisplayForPath:")
-	_nSFileManagerSelEnumeratorAtPath = objc.RegisterName("enumeratorAtPath:")
-	_nSFileManagerSelEnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler = objc.RegisterName("enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:")
-	_nSFileManagerSelSubpathsAtPath = objc.RegisterName("subpathsAtPath:")
-	_nSFileManagerSelContentsAtPath = objc.RegisterName("contentsAtPath:")
-	_nSFileManagerSelCreateFileAtPathContentsAttributes = objc.RegisterName("createFileAtPath:contents:attributes:")
-	_nSFileManagerSelFileSystemRepresentationWithPath = objc.RegisterName("fileSystemRepresentationWithPath:")
-	_nSFileManagerSelStringWithFileSystemRepresentationLength = objc.RegisterName("stringWithFileSystemRepresentation:length:")
-	_nSFileManagerSelReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError = objc.RegisterName("replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:")
-	_nSFileManagerSelSetUbiquitousItemAtURLDestinationURLError = objc.RegisterName("setUbiquitous:itemAtURL:destinationURL:error:")
-	_nSFileManagerSelIsUbiquitousItemAtURL = objc.RegisterName("isUbiquitousItemAtURL:")
-	_nSFileManagerSelStartDownloadingUbiquitousItemAtURLError = objc.RegisterName("startDownloadingUbiquitousItemAtURL:error:")
-	_nSFileManagerSelEvictUbiquitousItemAtURLError = objc.RegisterName("evictUbiquitousItemAtURL:error:")
-	_nSFileManagerSelURLForUbiquityContainerIdentifier = objc.RegisterName("URLForUbiquityContainerIdentifier:")
-	_nSFileManagerSelURLForPublishingUbiquitousItemAtURLExpirationDateError = objc.RegisterName("URLForPublishingUbiquitousItemAtURL:expirationDate:error:")
-	_nSFileManagerSelPauseSyncForUbiquitousItemAtURLCompletionHandler = objc.RegisterName("pauseSyncForUbiquitousItemAtURL:completionHandler:")
-	_nSFileManagerSelResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler = objc.RegisterName("resumeSyncForUbiquitousItemAtURL:withBehavior:completionHandler:")
-	_nSFileManagerSelFetchLatestRemoteVersionOfItemAtURLCompletionHandler = objc.RegisterName("fetchLatestRemoteVersionOfItemAtURL:completionHandler:")
+	_clsNSFileManager                                                                                     = _objcClass("NSFileManager")
+	_nSFileManagerSelMountedVolumeURLsIncludingResourceValuesForKeysOptions                               = objc.RegisterName("mountedVolumeURLsIncludingResourceValuesForKeys:options:")
+	_nSFileManagerSelUnmountVolumeAtURLOptionsCompletionHandler                                           = objc.RegisterName("unmountVolumeAtURL:options:completionHandler:")
+	_nSFileManagerSelContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError                       = objc.RegisterName("contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error:")
+	_nSFileManagerSelURLsForDirectoryInDomains                                                            = objc.RegisterName("URLsForDirectory:inDomains:")
+	_nSFileManagerSelURLForDirectoryInDomainAppropriateForURLCreateError                                  = objc.RegisterName("URLForDirectory:inDomain:appropriateForURL:create:error:")
+	_nSFileManagerSelGetRelationshipOfDirectoryAtURLToItemAtURLError                                      = objc.RegisterName("getRelationship:ofDirectoryAtURL:toItemAtURL:error:")
+	_nSFileManagerSelGetRelationshipOfDirectoryInDomainToItemAtURLError                                   = objc.RegisterName("getRelationship:ofDirectory:inDomain:toItemAtURL:error:")
+	_nSFileManagerSelCreateDirectoryAtURLWithIntermediateDirectoriesAttributesError                       = objc.RegisterName("createDirectoryAtURL:withIntermediateDirectories:attributes:error:")
+	_nSFileManagerSelCreateSymbolicLinkAtURLWithDestinationURLError                                       = objc.RegisterName("createSymbolicLinkAtURL:withDestinationURL:error:")
+	_nSFileManagerSelSetAttributesOfItemAtPathError                                                       = objc.RegisterName("setAttributes:ofItemAtPath:error:")
+	_nSFileManagerSelCreateDirectoryAtPathWithIntermediateDirectoriesAttributesError                      = objc.RegisterName("createDirectoryAtPath:withIntermediateDirectories:attributes:error:")
+	_nSFileManagerSelContentsOfDirectoryAtPathError                                                       = objc.RegisterName("contentsOfDirectoryAtPath:error:")
+	_nSFileManagerSelSubpathsOfDirectoryAtPathError                                                       = objc.RegisterName("subpathsOfDirectoryAtPath:error:")
+	_nSFileManagerSelAttributesOfItemAtPathError                                                          = objc.RegisterName("attributesOfItemAtPath:error:")
+	_nSFileManagerSelAttributesOfFileSystemForPathError                                                   = objc.RegisterName("attributesOfFileSystemForPath:error:")
+	_nSFileManagerSelCreateSymbolicLinkAtPathWithDestinationPathError                                     = objc.RegisterName("createSymbolicLinkAtPath:withDestinationPath:error:")
+	_nSFileManagerSelDestinationOfSymbolicLinkAtPathError                                                 = objc.RegisterName("destinationOfSymbolicLinkAtPath:error:")
+	_nSFileManagerSelCopyItemAtPathToPathError                                                            = objc.RegisterName("copyItemAtPath:toPath:error:")
+	_nSFileManagerSelMoveItemAtPathToPathError                                                            = objc.RegisterName("moveItemAtPath:toPath:error:")
+	_nSFileManagerSelLinkItemAtPathToPathError                                                            = objc.RegisterName("linkItemAtPath:toPath:error:")
+	_nSFileManagerSelRemoveItemAtPathError                                                                = objc.RegisterName("removeItemAtPath:error:")
+	_nSFileManagerSelCopyItemAtURLToURLError                                                              = objc.RegisterName("copyItemAtURL:toURL:error:")
+	_nSFileManagerSelMoveItemAtURLToURLError                                                              = objc.RegisterName("moveItemAtURL:toURL:error:")
+	_nSFileManagerSelLinkItemAtURLToURLError                                                              = objc.RegisterName("linkItemAtURL:toURL:error:")
+	_nSFileManagerSelRemoveItemAtURLError                                                                 = objc.RegisterName("removeItemAtURL:error:")
+	_nSFileManagerSelTrashItemAtURLResultingItemURLError                                                  = objc.RegisterName("trashItemAtURL:resultingItemURL:error:")
+	_nSFileManagerSelFileAttributesAtPathTraverseLink                                                     = objc.RegisterName("fileAttributesAtPath:traverseLink:")
+	_nSFileManagerSelChangeFileAttributesAtPath                                                           = objc.RegisterName("changeFileAttributes:atPath:")
+	_nSFileManagerSelDirectoryContentsAtPath                                                              = objc.RegisterName("directoryContentsAtPath:")
+	_nSFileManagerSelFileSystemAttributesAtPath                                                           = objc.RegisterName("fileSystemAttributesAtPath:")
+	_nSFileManagerSelPathContentOfSymbolicLinkAtPath                                                      = objc.RegisterName("pathContentOfSymbolicLinkAtPath:")
+	_nSFileManagerSelCreateSymbolicLinkAtPathPathContent                                                  = objc.RegisterName("createSymbolicLinkAtPath:pathContent:")
+	_nSFileManagerSelCreateDirectoryAtPathAttributes                                                      = objc.RegisterName("createDirectoryAtPath:attributes:")
+	_nSFileManagerSelLinkPathToPathHandler                                                                = objc.RegisterName("linkPath:toPath:handler:")
+	_nSFileManagerSelCopyPathToPathHandler                                                                = objc.RegisterName("copyPath:toPath:handler:")
+	_nSFileManagerSelMovePathToPathHandler                                                                = objc.RegisterName("movePath:toPath:handler:")
+	_nSFileManagerSelRemoveFileAtPathHandler                                                              = objc.RegisterName("removeFileAtPath:handler:")
+	_nSFileManagerSelChangeCurrentDirectoryPath                                                           = objc.RegisterName("changeCurrentDirectoryPath:")
+	_nSFileManagerSelFileExistsAtPath                                                                     = objc.RegisterName("fileExistsAtPath:")
+	_nSFileManagerSelFileExistsAtPathIsDirectory                                                          = objc.RegisterName("fileExistsAtPath:isDirectory:")
+	_nSFileManagerSelIsReadableFileAtPath                                                                 = objc.RegisterName("isReadableFileAtPath:")
+	_nSFileManagerSelIsWritableFileAtPath                                                                 = objc.RegisterName("isWritableFileAtPath:")
+	_nSFileManagerSelIsExecutableFileAtPath                                                               = objc.RegisterName("isExecutableFileAtPath:")
+	_nSFileManagerSelIsDeletableFileAtPath                                                                = objc.RegisterName("isDeletableFileAtPath:")
+	_nSFileManagerSelContentsEqualAtPathAndPath                                                           = objc.RegisterName("contentsEqualAtPath:andPath:")
+	_nSFileManagerSelDisplayNameAtPath                                                                    = objc.RegisterName("displayNameAtPath:")
+	_nSFileManagerSelComponentsToDisplayForPath                                                           = objc.RegisterName("componentsToDisplayForPath:")
+	_nSFileManagerSelEnumeratorAtPath                                                                     = objc.RegisterName("enumeratorAtPath:")
+	_nSFileManagerSelEnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler                         = objc.RegisterName("enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:")
+	_nSFileManagerSelSubpathsAtPath                                                                       = objc.RegisterName("subpathsAtPath:")
+	_nSFileManagerSelContentsAtPath                                                                       = objc.RegisterName("contentsAtPath:")
+	_nSFileManagerSelCreateFileAtPathContentsAttributes                                                   = objc.RegisterName("createFileAtPath:contents:attributes:")
+	_nSFileManagerSelFileSystemRepresentationWithPath                                                     = objc.RegisterName("fileSystemRepresentationWithPath:")
+	_nSFileManagerSelStringWithFileSystemRepresentationLength                                             = objc.RegisterName("stringWithFileSystemRepresentation:length:")
+	_nSFileManagerSelReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError              = objc.RegisterName("replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:")
+	_nSFileManagerSelSetUbiquitousItemAtURLDestinationURLError                                            = objc.RegisterName("setUbiquitous:itemAtURL:destinationURL:error:")
+	_nSFileManagerSelIsUbiquitousItemAtURL                                                                = objc.RegisterName("isUbiquitousItemAtURL:")
+	_nSFileManagerSelStartDownloadingUbiquitousItemAtURLError                                             = objc.RegisterName("startDownloadingUbiquitousItemAtURL:error:")
+	_nSFileManagerSelEvictUbiquitousItemAtURLError                                                        = objc.RegisterName("evictUbiquitousItemAtURL:error:")
+	_nSFileManagerSelURLForUbiquityContainerIdentifier                                                    = objc.RegisterName("URLForUbiquityContainerIdentifier:")
+	_nSFileManagerSelURLForPublishingUbiquitousItemAtURLExpirationDateError                               = objc.RegisterName("URLForPublishingUbiquitousItemAtURL:expirationDate:error:")
+	_nSFileManagerSelPauseSyncForUbiquitousItemAtURLCompletionHandler                                     = objc.RegisterName("pauseSyncForUbiquitousItemAtURL:completionHandler:")
+	_nSFileManagerSelResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler                        = objc.RegisterName("resumeSyncForUbiquitousItemAtURL:withBehavior:completionHandler:")
+	_nSFileManagerSelFetchLatestRemoteVersionOfItemAtURLCompletionHandler                                 = objc.RegisterName("fetchLatestRemoteVersionOfItemAtURL:completionHandler:")
 	_nSFileManagerSelUploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler = objc.RegisterName("uploadLocalVersionOfUbiquitousItemAtURL:withConflictResolutionPolicy:completionHandler:")
-	_nSFileManagerSelGetFileProviderServicesForItemAtURLCompletionHandler = objc.RegisterName("getFileProviderServicesForItemAtURL:completionHandler:")
-	_nSFileManagerSelContainerURLForSecurityApplicationGroupIdentifier = objc.RegisterName("containerURLForSecurityApplicationGroupIdentifier:")
-	_nSFileManagerSelDefaultManager = objc.RegisterName("defaultManager")
-	_nSFileManagerSelDelegate = objc.RegisterName("delegate")
-	_nSFileManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSFileManagerSelCurrentDirectoryPath = objc.RegisterName("currentDirectoryPath")
-	_nSFileManagerSelUbiquityIdentityToken = objc.RegisterName("ubiquityIdentityToken")
-	_nSFileManagerSelHomeDirectoryForUser = objc.RegisterName("homeDirectoryForUser:")
-	_nSFileManagerSelHomeDirectoryForCurrentUser = objc.RegisterName("homeDirectoryForCurrentUser")
-	_nSFileManagerSelTemporaryDirectory = objc.RegisterName("temporaryDirectory")
+	_nSFileManagerSelGetFileProviderServicesForItemAtURLCompletionHandler                                 = objc.RegisterName("getFileProviderServicesForItemAtURL:completionHandler:")
+	_nSFileManagerSelContainerURLForSecurityApplicationGroupIdentifier                                    = objc.RegisterName("containerURLForSecurityApplicationGroupIdentifier:")
+	_nSFileManagerSelDefaultManager                                                                       = objc.RegisterName("defaultManager")
+	_nSFileManagerSelDelegate                                                                             = objc.RegisterName("delegate")
+	_nSFileManagerSelSetDelegate                                                                          = objc.RegisterName("setDelegate:")
+	_nSFileManagerSelCurrentDirectoryPath                                                                 = objc.RegisterName("currentDirectoryPath")
+	_nSFileManagerSelUbiquityIdentityToken                                                                = objc.RegisterName("ubiquityIdentityToken")
+	_nSFileManagerSelHomeDirectoryForUser                                                                 = objc.RegisterName("homeDirectoryForUser:")
+	_nSFileManagerSelHomeDirectoryForCurrentUser                                                          = objc.RegisterName("homeDirectoryForCurrentUser")
+	_nSFileManagerSelTemporaryDirectory                                                                   = objc.RegisterName("temporaryDirectory")
 )
 
 func NSFileManagerFromID(id objc.ID) *NSFileManager {
@@ -107,7 +107,9 @@ func NSFileManagerFromID(id objc.ID) *NSFileManager {
 
 func (o *NSFileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *NSArray[*NSString], options NSVolumeEnumerationOptions) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelMountedVolumeURLsIncludingResourceValuesForKeysOptions, propertyKeys.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSURL](_ret)
 }
 
@@ -125,7 +127,9 @@ func (o *NSFileManager) UnmountVolumeAtURLOptionsCompletionHandler(url *NSURL, m
 func (o *NSFileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url *NSURL, keys *NSArray[*NSString], mask NSDirectoryEnumerationOptions) (*NSArray[*NSURL], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError, url.Ptr(), keys.Ptr(), mask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -134,14 +138,18 @@ func (o *NSFileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOption
 
 func (o *NSFileManager) URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *NSArray[*NSURL] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLsForDirectoryInDomains, directory, domainMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSURL](_ret)
 }
 
 func (o *NSFileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url *NSURL, shouldCreate bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForDirectoryInDomainAppropriateForURLCreateError, directory, domain, url.Ptr(), shouldCreate, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -205,7 +213,9 @@ func (o *NSFileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttribut
 func (o *NSFileManager) ContentsOfDirectoryAtPathError(path *NSString) (*NSArray[*NSString], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -215,7 +225,9 @@ func (o *NSFileManager) ContentsOfDirectoryAtPathError(path *NSString) (*NSArray
 func (o *NSFileManager) SubpathsOfDirectoryAtPathError(path *NSString) (*NSArray[*NSString], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelSubpathsOfDirectoryAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -252,7 +264,9 @@ func (o *NSFileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path *N
 func (o *NSFileManager) DestinationOfSymbolicLinkAtPathError(path *NSString) (*NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDestinationOfSymbolicLinkAtPathError, path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -367,7 +381,9 @@ func (o *NSFileManager) FileSystemAttributesAtPath(path *NSString) *NSDictionary
 // Deprecated: Use -destinationOfSymbolicLinkAtPath:error:
 func (o *NSFileManager) PathContentOfSymbolicLinkAtPath(path *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelPathContentOfSymbolicLinkAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -449,19 +465,25 @@ func (o *NSFileManager) ContentsEqualAtPathAndPath(path1 *NSString, path2 *NSStr
 
 func (o *NSFileManager) DisplayNameAtPath(path *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelDisplayNameAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFileManager) ComponentsToDisplayForPath(path *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelComponentsToDisplayForPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSFileManager) EnumeratorAtPath(path *NSString) *NSDirectoryEnumerator[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelEnumeratorAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDirectoryEnumeratorFromID[*NSString](_ret)
 }
 
@@ -477,19 +499,25 @@ func (o *NSFileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHan
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelEnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler, url.Ptr(), keys.Ptr(), mask, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDirectoryEnumeratorFromID[*NSURL](_ret)
 }
 
 func (o *NSFileManager) SubpathsAtPath(path *NSString) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelSubpathsAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSFileManager) ContentsAtPath(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContentsAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -505,7 +533,9 @@ func (o *NSFileManager) FileSystemRepresentationWithPath(path *NSString) string 
 
 func (o *NSFileManager) StringWithFileSystemRepresentationLength(str string, len_ uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelStringWithFileSystemRepresentationLength, str, len_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -552,21 +582,25 @@ func (o *NSFileManager) EvictUbiquitousItemAtURLError(url *NSURL) (bool, error) 
 
 func (o *NSFileManager) URLForUbiquityContainerIdentifier(containerIdentifier *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForUbiquityContainerIdentifier, containerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSFileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(url *NSURL, outDate *NSDate) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelURLForPublishingUbiquitousItemAtURLExpirationDateError, url.Ptr(), outDate.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NSURLFromID(_ret), nil
 }
 
-// Asynchronously pauses sync of an item at the given URL. Call this when opening an item to prevent sync from altering the contents of the URL. Once paused, the file provider will not upload local changes nor download remote changes. While paused, call ``uploadLocalVersionOfUbiquitousItem(at:withConflictResolutionPolicy:completionHandler:)`` when the document is in a stable state. This action keeps the server version as up-to-date as possible. If the item is already paused, a second call to this method reports success. If the file provider is already applying changes to the item, the pause fails with an ``NSFileWriteUnknownError-enum.case``, with an underlying error that has domain ``NSPOSIXErrorDomain`` and code ``POSIXError/EBUSY``. If the pause fails, wait for the state to stabilize before retrying. Pausing also fails with ``CocoaError/featureUnsupported`` if `url` refers to a regular (non-package) directory. Pausing sync is independent of the calling app's lifecycle; sync doesn't automatically resume if the app closes or crashes and relaunches later. To resume syncing, explicitly call ``resumeSyncForUbiquitousItem(at:with:completionHandler:)``. Always be sure to resume syncing before you close the item. - Parameters: - url: The URL of the item for which to pause sync. - completionHandler: A closure or block that the framework calls when the pause action completes. It receives a single ``NSError`` parameter to indicate an error that prevented pausing; this value is `nil` if the pause succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
+// Asynchronously pauses sync of an item at the given URL. Call this when opening an item to prevent sync from altering the contents of the URL. Once paused, the file provider will not upload local changes nor download remote changes. While paused, call “uploadLocalVersionOfUbiquitousItem(at:withConflictResolutionPolicy:completionHandler:)“ when the document is in a stable state. This action keeps the server version as up-to-date as possible. If the item is already paused, a second call to this method reports success. If the file provider is already applying changes to the item, the pause fails with an “NSFileWriteUnknownError-enum.case“, with an underlying error that has domain “NSPOSIXErrorDomain“ and code “POSIXError/EBUSY“. If the pause fails, wait for the state to stabilize before retrying. Pausing also fails with “CocoaError/featureUnsupported“ if `url` refers to a regular (non-package) directory. Pausing sync is independent of the calling app's lifecycle; sync doesn't automatically resume if the app closes or crashes and relaunches later. To resume syncing, explicitly call “resumeSyncForUbiquitousItem(at:with:completionHandler:)“. Always be sure to resume syncing before you close the item. - Parameters: - url: The URL of the item for which to pause sync. - completionHandler: A closure or block that the framework calls when the pause action completes. It receives a single “NSError“ parameter to indicate an error that prevented pausing; this value is `nil` if the pause succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
 func (o *NSFileManager) PauseSyncForUbiquitousItemAtURLCompletionHandler(url *NSURL, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -578,7 +612,7 @@ func (o *NSFileManager) PauseSyncForUbiquitousItemAtURLCompletionHandler(url *NS
 	o.Ptr().Send(_nSFileManagerSelPauseSyncForUbiquitousItemAtURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// Asynchronously resumes the sync on a paused item using the given resume behavior. Always call this method when your app closes an item to allow the file provider to sync local changes back to the server. In most situations, the ``NSFileManagerResumeSyncBehavior/preserveLocalChanges`` behavior is the best choice to avoid any risk of data loss. The resume call fails with ``CocoaError/featureUnsupported`` if `url` isn't currently paused. If the device isn't connected to the network, the call may fail with ``NSFileWriteUnknownError-enum.case``, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to resume sync. - behavior: A ``NSFileManagerResumeSyncBehavior`` value that tells the file manager how to handle conflicts between local and remote versions of files. - completionHandler: A closure or block that the framework calls when the resume action completes. It receives a single ``NSError`` parameter to indicate an error that prevented the resume action; the value is `nil` if the resume succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
+// Asynchronously resumes the sync on a paused item using the given resume behavior. Always call this method when your app closes an item to allow the file provider to sync local changes back to the server. In most situations, the “NSFileManagerResumeSyncBehavior/preserveLocalChanges“ behavior is the best choice to avoid any risk of data loss. The resume call fails with “CocoaError/featureUnsupported“ if `url` isn't currently paused. If the device isn't connected to the network, the call may fail with “NSFileWriteUnknownError-enum.case“, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to resume sync. - behavior: A “NSFileManagerResumeSyncBehavior“ value that tells the file manager how to handle conflicts between local and remote versions of files. - completionHandler: A closure or block that the framework calls when the resume action completes. It receives a single “NSError“ parameter to indicate an error that prevented the resume action; the value is `nil` if the resume succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
 func (o *NSFileManager) ResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler(url *NSURL, behavior NSFileManagerResumeSyncBehavior, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -590,7 +624,7 @@ func (o *NSFileManager) ResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHa
 	o.Ptr().Send(_nSFileManagerSelResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler, url.Ptr(), behavior, __block_completionHandler)
 }
 
-// Asynchronously fetches the latest remote version of a given item from the server. Use this method if uploading fails due to a version conflict and sync is paused. In this case, fetching the latest remote version allows you to inspect the newer item from the server, resolve the conflict, and resume uploading. The version provided by this call depends on several factors: * If there is no newer version of the file on the server, the caller receives the current version of the file. * If the server has a newer version and sync isn't paused, this call replaces the local item and provides the version of the new item. * If the server has a newer version but sync is paused, the returned version points to a side location. In this case, call ``NSFileVersion/replaceItem(at:options:)`` on the provided version object to replace the local item with the newer item from the server. If the device isn't connected to the network, the call may fail with ``NSFileReadUnknownError-enum.case``, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to check the version. - completionHandler: A closure or block that the framework calls when the fetch action completes. It receives parameters of types ``NSFileVersion`` and ``NSError``. The error is `nil` if fetching the remote version succeeded; otherwise it indicates the error that caused the call to fail. In Swift, you can omit the completion handler, catching any error in a `do`-`catch` block and receiving the version as the return value.
+// Asynchronously fetches the latest remote version of a given item from the server. Use this method if uploading fails due to a version conflict and sync is paused. In this case, fetching the latest remote version allows you to inspect the newer item from the server, resolve the conflict, and resume uploading. The version provided by this call depends on several factors: * If there is no newer version of the file on the server, the caller receives the current version of the file. * If the server has a newer version and sync isn't paused, this call replaces the local item and provides the version of the new item. * If the server has a newer version but sync is paused, the returned version points to a side location. In this case, call “NSFileVersion/replaceItem(at:options:)“ on the provided version object to replace the local item with the newer item from the server. If the device isn't connected to the network, the call may fail with “NSFileReadUnknownError-enum.case“, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to check the version. - completionHandler: A closure or block that the framework calls when the fetch action completes. It receives parameters of types “NSFileVersion“ and “NSError“. The error is `nil` if fetching the remote version succeeded; otherwise it indicates the error that caused the call to fail. In Swift, you can omit the completion handler, catching any error in a `do`-`catch` block and receiving the version as the return value.
 func (o *NSFileManager) FetchLatestRemoteVersionOfItemAtURLCompletionHandler(url *NSURL, completionHandler func(*NSFileVersion, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -605,7 +639,7 @@ func (o *NSFileManager) FetchLatestRemoteVersionOfItemAtURLCompletionHandler(url
 	o.Ptr().Send(_nSFileManagerSelFetchLatestRemoteVersionOfItemAtURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
-// Asynchronously uploads the local version of the item using the provided conflict resolution policy. Once your app pauses a sync for an item, call this method every time your document is in a stable state. This action keeps the server version as up-to-date as possible. If the server has a newer version than the one to which the app made changes, uploading fails with ``NSFileWriteUnknownError-enum.case``, with an underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/localVersionConflictingWithServer>. In this case, call ``FileManager/fetchLatestRemoteVersionOfItem(at:completionHandler:)``, rebase local changes on top of that version, and retry the upload. If the device isn't connected to the network, the call may fail with ``NSFileWriteUnknownError-enum.case``, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to check the version. - conflictResolutionPolicy: The policy the file manager applies if the local and server versions conflict. - completionHandler: A closure or block that the framework calls when the upload completes. It receives parameters of types ``NSFileVersion`` and ``NSError``. The error is `nil` if fetching the remote version succeeded; otherwise it indicates the error that caused the call to fail. In Swift, you can omit the completion handler, catching any error in a `do`-`catch` block and receiving the version as the return value.
+// Asynchronously uploads the local version of the item using the provided conflict resolution policy. Once your app pauses a sync for an item, call this method every time your document is in a stable state. This action keeps the server version as up-to-date as possible. If the server has a newer version than the one to which the app made changes, uploading fails with “NSFileWriteUnknownError-enum.case“, with an underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/localVersionConflictingWithServer>. In this case, call “FileManager/fetchLatestRemoteVersionOfItem(at:completionHandler:)“, rebase local changes on top of that version, and retry the upload. If the device isn't connected to the network, the call may fail with “NSFileWriteUnknownError-enum.case“, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to check the version. - conflictResolutionPolicy: The policy the file manager applies if the local and server versions conflict. - completionHandler: A closure or block that the framework calls when the upload completes. It receives parameters of types “NSFileVersion“ and “NSError“. The error is `nil` if fetching the remote version succeeded; otherwise it indicates the error that caused the call to fail. In Swift, you can omit the completion handler, catching any error in a `do`-`catch` block and receiving the version as the return value.
 func (o *NSFileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler(url *NSURL, conflictResolutionPolicy NSFileManagerUploadLocalVersionConflictPolicy, completionHandler func(*NSFileVersion, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -636,13 +670,17 @@ func (o *NSFileManager) GetFileProviderServicesForItemAtURLCompletionHandler(url
 
 func (o *NSFileManager) ContainerURLForSecurityApplicationGroupIdentifier(groupIdentifier *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelContainerURLForSecurityApplicationGroupIdentifier, groupIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSFileManagerDefaultManager() *NSFileManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileManager), _nSFileManagerSelDefaultManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileManagerFromID(_ret)
 }
 
@@ -657,7 +695,9 @@ func (o *NSFileManager) SetDelegate(delegate NSFileManagerDelegate) {
 
 func (o *NSFileManager) CurrentDirectoryPath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelCurrentDirectoryPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -668,19 +708,24 @@ func (o *NSFileManager) UbiquityIdentityToken() objc.ID {
 
 func (o *NSFileManager) HomeDirectoryForUser(userName *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelHomeDirectoryForUser, userName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSFileManager) HomeDirectoryForCurrentUser() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelHomeDirectoryForCurrentUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSFileManager) TemporaryDirectory() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileManagerSelTemporaryDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
-

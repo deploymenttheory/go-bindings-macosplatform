@@ -18,10 +18,10 @@ type MPSCNNLossNode struct {
 }
 
 var (
-	_clsMPSCNNLossNode = _objcClass("MPSCNNLossNode")
+	_clsMPSCNNLossNode                             = _objcClass("MPSCNNLossNode")
 	_mPSCNNLossNodeSelNodeWithSourceLossDescriptor = objc.RegisterName("nodeWithSource:lossDescriptor:")
 	_mPSCNNLossNodeSelInitWithSourceLossDescriptor = objc.RegisterName("initWithSource:lossDescriptor:")
-	_mPSCNNLossNodeSelInputLabels = objc.RegisterName("inputLabels")
+	_mPSCNNLossNodeSelInputLabels                  = objc.RegisterName("inputLabels")
 )
 
 func MPSCNNLossNodeFromID(id objc.ID) *MPSCNNLossNode {
@@ -36,20 +36,25 @@ func MPSCNNLossNodeFromID(id objc.ID) *MPSCNNLossNode {
 
 func MPSCNNLossNodeNodeWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSCNNLossNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNLossNode), _mPSCNNLossNodeSelNodeWithSourceLossDescriptor, source.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossNodeFromID(_ret)
 }
 
 func (o *MPSCNNLossNode) InitWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSCNNLossNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLossNodeSelInitWithSourceLossDescriptor, source.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossNodeFromID(_ret)
 }
 
 // @abstract Get the input node for labes and weights, for example to set the handle
 func (o *MPSCNNLossNode) InputLabels() *mpsneuralnetwork.MPSNNLabelsNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLossNodeSelInputLabels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNLabelsNodeFromID(_ret)
 }
-

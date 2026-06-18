@@ -20,14 +20,14 @@ type DRBurnProgressPanel struct {
 }
 
 var (
-	_clsDRBurnProgressPanel = _objcClass("DRBurnProgressPanel")
-	_dRBurnProgressPanelSelProgressPanel = objc.RegisterName("progressPanel")
+	_clsDRBurnProgressPanel                                              = _objcClass("DRBurnProgressPanel")
+	_dRBurnProgressPanelSelProgressPanel                                 = objc.RegisterName("progressPanel")
 	_dRBurnProgressPanelSelBeginProgressSheetForBurnLayoutModalForWindow = objc.RegisterName("beginProgressSheetForBurn:layout:modalForWindow:")
-	_dRBurnProgressPanelSelBeginProgressPanelForBurnLayout = objc.RegisterName("beginProgressPanelForBurn:layout:")
-	_dRBurnProgressPanelSelSetDescription = objc.RegisterName("setDescription:")
-	_dRBurnProgressPanelSelSetVerboseProgressStatus = objc.RegisterName("setVerboseProgressStatus:")
-	_dRBurnProgressPanelSelVerboseProgressStatus = objc.RegisterName("verboseProgressStatus")
-	_dRBurnProgressPanelSelStopBurn = objc.RegisterName("stopBurn:")
+	_dRBurnProgressPanelSelBeginProgressPanelForBurnLayout               = objc.RegisterName("beginProgressPanelForBurn:layout:")
+	_dRBurnProgressPanelSelSetDescription                                = objc.RegisterName("setDescription:")
+	_dRBurnProgressPanelSelSetVerboseProgressStatus                      = objc.RegisterName("setVerboseProgressStatus:")
+	_dRBurnProgressPanelSelVerboseProgressStatus                         = objc.RegisterName("verboseProgressStatus")
+	_dRBurnProgressPanelSelStopBurn                                      = objc.RegisterName("stopBurn:")
 )
 
 func DRBurnProgressPanelFromID(id objc.ID) *DRBurnProgressPanel {
@@ -43,7 +43,9 @@ func DRBurnProgressPanelFromID(id objc.ID) *DRBurnProgressPanel {
 // @method			progressPanel @abstract		Creates and returns an instance of the burn progress panel. @result			A pointer to the newly created DRBurnProgressPanel.
 func DRBurnProgressPanelProgressPanel() *DRBurnProgressPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRBurnProgressPanel), _dRBurnProgressPanelSelProgressPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRBurnProgressPanelFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *DRBurnProgressPanel) VerboseProgressStatus() bool {
 func (o *DRBurnProgressPanel) StopBurn(sender objc.ID) {
 	o.Ptr().Send(_dRBurnProgressPanelSelStopBurn, sender)
 }
-

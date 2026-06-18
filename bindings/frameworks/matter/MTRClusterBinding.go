@@ -16,17 +16,17 @@ type MTRClusterBinding struct {
 }
 
 var (
-	_clsMTRClusterBinding = _objcClass("MTRClusterBinding")
-	_mTRClusterBindingSelReadAttributeBindingWithParams = objc.RegisterName("readAttributeBindingWithParams:")
-	_mTRClusterBindingSelWriteAttributeBindingWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBindingWithValue:expectedValueInterval:")
+	_clsMTRClusterBinding                                                          = _objcClass("MTRClusterBinding")
+	_mTRClusterBindingSelReadAttributeBindingWithParams                            = objc.RegisterName("readAttributeBindingWithParams:")
+	_mTRClusterBindingSelWriteAttributeBindingWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeBindingWithValue:expectedValueInterval:")
 	_mTRClusterBindingSelWriteAttributeBindingWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBindingWithValue:expectedValueInterval:params:")
-	_mTRClusterBindingSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBindingSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBindingSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBindingSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBindingSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBindingSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterBindingSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterBindingSelReadAttributeGeneratedCommandListWithParams               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBindingSelReadAttributeAcceptedCommandListWithParams                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBindingSelReadAttributeAttributeListWithParams                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBindingSelReadAttributeFeatureMapWithParams                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBindingSelReadAttributeClusterRevisionWithParams                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBindingSelInitWithDeviceEndpointIDQueue                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBindingSelInitWithDeviceEndpointQueue                               = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterBindingFromID(id objc.ID) *MTRClusterBinding {
@@ -80,13 +80,16 @@ func (o *MTRClusterBinding) ReadAttributeClusterRevisionWithParams(params *MTRRe
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterBinding) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinding {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBindingSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBindingFromID(_ret)
 }
 
 func (o *MTRClusterBinding) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBinding {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBindingSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBindingFromID(_ret)
 }
-

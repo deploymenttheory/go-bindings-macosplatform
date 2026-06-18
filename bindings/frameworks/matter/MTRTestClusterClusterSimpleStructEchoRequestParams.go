@@ -25,4 +25,3 @@ func MTRTestClusterClusterSimpleStructEchoRequestParamsFromID(id objc.ID) *MTRTe
 	purego.Track(o)
 	return o
 }
-

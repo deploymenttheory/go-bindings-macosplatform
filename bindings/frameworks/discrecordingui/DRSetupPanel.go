@@ -22,18 +22,18 @@ type DRSetupPanel struct {
 }
 
 var (
-	_clsDRSetupPanel = _objcClass("DRSetupPanel")
-	_dRSetupPanelSelInitWithNibName = objc.RegisterName("initWithNibName:")
-	_dRSetupPanelSelRunSetupPanel = objc.RegisterName("runSetupPanel")
+	_clsDRSetupPanel                                                               = _objcClass("DRSetupPanel")
+	_dRSetupPanelSelInitWithNibName                                                = objc.RegisterName("initWithNibName:")
+	_dRSetupPanelSelRunSetupPanel                                                  = objc.RegisterName("runSetupPanel")
 	_dRSetupPanelSelBeginSetupSheetForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_dRSetupPanelSelOk = objc.RegisterName("ok:")
-	_dRSetupPanelSelCancel = objc.RegisterName("cancel:")
-	_dRSetupPanelSelEject = objc.RegisterName("eject:")
-	_dRSetupPanelSelOpen = objc.RegisterName("open:")
-	_dRSetupPanelSelClose = objc.RegisterName("close:")
-	_dRSetupPanelSelDeviceSelectionChanged = objc.RegisterName("deviceSelectionChanged:")
-	_dRSetupPanelSelMediaStateChanged = objc.RegisterName("mediaStateChanged:")
-	_dRSetupPanelSelSetupForDisplay = objc.RegisterName("setupForDisplay")
+	_dRSetupPanelSelOk                                                             = objc.RegisterName("ok:")
+	_dRSetupPanelSelCancel                                                         = objc.RegisterName("cancel:")
+	_dRSetupPanelSelEject                                                          = objc.RegisterName("eject:")
+	_dRSetupPanelSelOpen                                                           = objc.RegisterName("open:")
+	_dRSetupPanelSelClose                                                          = objc.RegisterName("close:")
+	_dRSetupPanelSelDeviceSelectionChanged                                         = objc.RegisterName("deviceSelectionChanged:")
+	_dRSetupPanelSelMediaStateChanged                                              = objc.RegisterName("mediaStateChanged:")
+	_dRSetupPanelSelSetupForDisplay                                                = objc.RegisterName("setupForDisplay")
 )
 
 func DRSetupPanelFromID(id objc.ID) *DRSetupPanel {
@@ -103,4 +103,3 @@ func (o *DRSetupPanel) MediaStateChanged(status *foundation.NSDictionary[objc.ID
 func (o *DRSetupPanel) SetupForDisplay() {
 	o.Ptr().Send(_dRSetupPanelSelSetupForDisplay)
 }
-

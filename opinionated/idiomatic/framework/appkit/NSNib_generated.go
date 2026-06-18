@@ -75,4 +75,3 @@ type Nibable interface {
 }
 
 var _ Nibable = (*Nib)(nil)
-

@@ -19,11 +19,11 @@ type AVAudioMixInputParameters struct {
 }
 
 var (
-	_clsAVAudioMixInputParameters = _objcClass("AVAudioMixInputParameters")
+	_clsAVAudioMixInputParameters                                                  = _objcClass("AVAudioMixInputParameters")
 	_aVAudioMixInputParametersSelGetVolumeRampForTimeStartVolumeEndVolumeTimeRange = objc.RegisterName("getVolumeRampForTime:startVolume:endVolume:timeRange:")
-	_aVAudioMixInputParametersSelTrackID = objc.RegisterName("trackID")
-	_aVAudioMixInputParametersSelAudioTimePitchAlgorithm = objc.RegisterName("audioTimePitchAlgorithm")
-	_aVAudioMixInputParametersSelAudioTapProcessor = objc.RegisterName("audioTapProcessor")
+	_aVAudioMixInputParametersSelTrackID                                           = objc.RegisterName("trackID")
+	_aVAudioMixInputParametersSelAudioTimePitchAlgorithm                           = objc.RegisterName("audioTimePitchAlgorithm")
+	_aVAudioMixInputParametersSelAudioTapProcessor                                 = objc.RegisterName("audioTapProcessor")
 )
 
 func AVAudioMixInputParametersFromID(id objc.ID) *AVAudioMixInputParameters {
@@ -50,7 +50,9 @@ func (o *AVAudioMixInputParameters) TrackID() int32 {
 // @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 func (o *AVAudioMixInputParameters) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioMixInputParametersSelAudioTimePitchAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *AVAudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioMixInputParametersSelAudioTapProcessor)
 	return _ret
 }
-

@@ -16,9 +16,9 @@ type MXHistogramBucket[UnitType purego.AnyObject] struct {
 }
 
 var (
-	_clsMXHistogramBucket = _objcClass("MXHistogramBucket")
+	_clsMXHistogramBucket            = _objcClass("MXHistogramBucket")
 	_mXHistogramBucketSelBucketStart = objc.RegisterName("bucketStart")
-	_mXHistogramBucketSelBucketEnd = objc.RegisterName("bucketEnd")
+	_mXHistogramBucketSelBucketEnd   = objc.RegisterName("bucketEnd")
 	_mXHistogramBucketSelBucketCount = objc.RegisterName("bucketCount")
 )
 
@@ -35,14 +35,18 @@ func MXHistogramBucketFromID[UnitType purego.AnyObject](id objc.ID) *MXHistogram
 // @property      bucketStart @abstract      An NSMeasurement representing the start of a histogram bucket.
 func (o *MXHistogramBucket[UnitType]) BucketStart() *foundation.NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXHistogramBucketSelBucketStart)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMeasurementFromID[UnitType](_ret)
 }
 
 // @property      bucketEnd @abstract      An NSMeasurement representing the end of a histogram bucket.
 func (o *MXHistogramBucket[UnitType]) BucketEnd() *foundation.NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXHistogramBucketSelBucketEnd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMeasurementFromID[UnitType](_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *MXHistogramBucket[UnitType]) BucketCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mXHistogramBucketSelBucketCount)
 	return _ret
 }
-

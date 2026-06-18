@@ -16,14 +16,14 @@ type WebFrameView struct {
 }
 
 var (
-	_clsWebFrameView = _objcClass("WebFrameView")
-	_webFrameViewSelPrintOperationWithPrintInfo = objc.RegisterName("printOperationWithPrintInfo:")
-	_webFrameViewSelPrintDocumentView = objc.RegisterName("printDocumentView")
-	_webFrameViewSelWebFrame = objc.RegisterName("webFrame")
-	_webFrameViewSelDocumentView = objc.RegisterName("documentView")
-	_webFrameViewSelAllowsScrolling = objc.RegisterName("allowsScrolling")
-	_webFrameViewSelSetAllowsScrolling = objc.RegisterName("setAllowsScrolling:")
-	_webFrameViewSelCanPrintHeadersAndFooters = objc.RegisterName("canPrintHeadersAndFooters")
+	_clsWebFrameView                              = _objcClass("WebFrameView")
+	_webFrameViewSelPrintOperationWithPrintInfo   = objc.RegisterName("printOperationWithPrintInfo:")
+	_webFrameViewSelPrintDocumentView             = objc.RegisterName("printDocumentView")
+	_webFrameViewSelWebFrame                      = objc.RegisterName("webFrame")
+	_webFrameViewSelDocumentView                  = objc.RegisterName("documentView")
+	_webFrameViewSelAllowsScrolling               = objc.RegisterName("allowsScrolling")
+	_webFrameViewSelSetAllowsScrolling            = objc.RegisterName("setAllowsScrolling:")
+	_webFrameViewSelCanPrintHeadersAndFooters     = objc.RegisterName("canPrintHeadersAndFooters")
 	_webFrameViewSelDocumentViewShouldHandlePrint = objc.RegisterName("documentViewShouldHandlePrint")
 )
 
@@ -40,7 +40,9 @@ func WebFrameViewFromID(id objc.ID) *WebFrameView {
 // @method printOperationWithPrintInfo @abstract Creates a print operation set up to print this frame @result A newly created print operation object
 func (o *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelPrintOperationWithPrintInfo, printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSPrintOperationFromID(_ret)
 }
 
@@ -52,14 +54,18 @@ func (o *WebFrameView) PrintDocumentView() {
 // @property webFrame @abstract The WebFrame associated with this WebFrameView
 func (o *WebFrameView) WebFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelWebFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
 
 // @property documentView @abstract The WebFrameView's document subview @discussion The subview that renders the WebFrameView's contents
 func (o *WebFrameView) DocumentView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webFrameViewSelDocumentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -84,4 +90,3 @@ func (o *WebFrameView) DocumentViewShouldHandlePrint() bool {
 	_ret := objc.Send[bool](o.Ptr(), _webFrameViewSelDocumentViewShouldHandlePrint)
 	return _ret
 }
-

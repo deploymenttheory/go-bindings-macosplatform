@@ -15,38 +15,38 @@ type NSUnitVolume struct {
 }
 
 var (
-	_clsNSUnitVolume = _objcClass("NSUnitVolume")
-	_nSUnitVolumeSelMegaliters = objc.RegisterName("megaliters")
-	_nSUnitVolumeSelKiloliters = objc.RegisterName("kiloliters")
-	_nSUnitVolumeSelLiters = objc.RegisterName("liters")
-	_nSUnitVolumeSelDeciliters = objc.RegisterName("deciliters")
-	_nSUnitVolumeSelCentiliters = objc.RegisterName("centiliters")
-	_nSUnitVolumeSelMilliliters = objc.RegisterName("milliliters")
-	_nSUnitVolumeSelCubicKilometers = objc.RegisterName("cubicKilometers")
-	_nSUnitVolumeSelCubicMeters = objc.RegisterName("cubicMeters")
-	_nSUnitVolumeSelCubicDecimeters = objc.RegisterName("cubicDecimeters")
-	_nSUnitVolumeSelCubicCentimeters = objc.RegisterName("cubicCentimeters")
-	_nSUnitVolumeSelCubicMillimeters = objc.RegisterName("cubicMillimeters")
-	_nSUnitVolumeSelCubicInches = objc.RegisterName("cubicInches")
-	_nSUnitVolumeSelCubicFeet = objc.RegisterName("cubicFeet")
-	_nSUnitVolumeSelCubicYards = objc.RegisterName("cubicYards")
-	_nSUnitVolumeSelCubicMiles = objc.RegisterName("cubicMiles")
-	_nSUnitVolumeSelAcreFeet = objc.RegisterName("acreFeet")
-	_nSUnitVolumeSelBushels = objc.RegisterName("bushels")
-	_nSUnitVolumeSelTeaspoons = objc.RegisterName("teaspoons")
-	_nSUnitVolumeSelTablespoons = objc.RegisterName("tablespoons")
-	_nSUnitVolumeSelFluidOunces = objc.RegisterName("fluidOunces")
-	_nSUnitVolumeSelCups = objc.RegisterName("cups")
-	_nSUnitVolumeSelPints = objc.RegisterName("pints")
-	_nSUnitVolumeSelQuarts = objc.RegisterName("quarts")
-	_nSUnitVolumeSelGallons = objc.RegisterName("gallons")
-	_nSUnitVolumeSelImperialTeaspoons = objc.RegisterName("imperialTeaspoons")
+	_clsNSUnitVolume                    = _objcClass("NSUnitVolume")
+	_nSUnitVolumeSelMegaliters          = objc.RegisterName("megaliters")
+	_nSUnitVolumeSelKiloliters          = objc.RegisterName("kiloliters")
+	_nSUnitVolumeSelLiters              = objc.RegisterName("liters")
+	_nSUnitVolumeSelDeciliters          = objc.RegisterName("deciliters")
+	_nSUnitVolumeSelCentiliters         = objc.RegisterName("centiliters")
+	_nSUnitVolumeSelMilliliters         = objc.RegisterName("milliliters")
+	_nSUnitVolumeSelCubicKilometers     = objc.RegisterName("cubicKilometers")
+	_nSUnitVolumeSelCubicMeters         = objc.RegisterName("cubicMeters")
+	_nSUnitVolumeSelCubicDecimeters     = objc.RegisterName("cubicDecimeters")
+	_nSUnitVolumeSelCubicCentimeters    = objc.RegisterName("cubicCentimeters")
+	_nSUnitVolumeSelCubicMillimeters    = objc.RegisterName("cubicMillimeters")
+	_nSUnitVolumeSelCubicInches         = objc.RegisterName("cubicInches")
+	_nSUnitVolumeSelCubicFeet           = objc.RegisterName("cubicFeet")
+	_nSUnitVolumeSelCubicYards          = objc.RegisterName("cubicYards")
+	_nSUnitVolumeSelCubicMiles          = objc.RegisterName("cubicMiles")
+	_nSUnitVolumeSelAcreFeet            = objc.RegisterName("acreFeet")
+	_nSUnitVolumeSelBushels             = objc.RegisterName("bushels")
+	_nSUnitVolumeSelTeaspoons           = objc.RegisterName("teaspoons")
+	_nSUnitVolumeSelTablespoons         = objc.RegisterName("tablespoons")
+	_nSUnitVolumeSelFluidOunces         = objc.RegisterName("fluidOunces")
+	_nSUnitVolumeSelCups                = objc.RegisterName("cups")
+	_nSUnitVolumeSelPints               = objc.RegisterName("pints")
+	_nSUnitVolumeSelQuarts              = objc.RegisterName("quarts")
+	_nSUnitVolumeSelGallons             = objc.RegisterName("gallons")
+	_nSUnitVolumeSelImperialTeaspoons   = objc.RegisterName("imperialTeaspoons")
 	_nSUnitVolumeSelImperialTablespoons = objc.RegisterName("imperialTablespoons")
 	_nSUnitVolumeSelImperialFluidOunces = objc.RegisterName("imperialFluidOunces")
-	_nSUnitVolumeSelImperialPints = objc.RegisterName("imperialPints")
-	_nSUnitVolumeSelImperialQuarts = objc.RegisterName("imperialQuarts")
-	_nSUnitVolumeSelImperialGallons = objc.RegisterName("imperialGallons")
-	_nSUnitVolumeSelMetricCups = objc.RegisterName("metricCups")
+	_nSUnitVolumeSelImperialPints       = objc.RegisterName("imperialPints")
+	_nSUnitVolumeSelImperialQuarts      = objc.RegisterName("imperialQuarts")
+	_nSUnitVolumeSelImperialGallons     = objc.RegisterName("imperialGallons")
+	_nSUnitVolumeSelMetricCups          = objc.RegisterName("metricCups")
 )
 
 func NSUnitVolumeFromID(id objc.ID) *NSUnitVolume {
@@ -61,187 +61,248 @@ func NSUnitVolumeFromID(id objc.ID) *NSUnitVolume {
 
 func NSUnitVolumeMegaliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMegaliters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeKiloliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelKiloliters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeLiters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelLiters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeDeciliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelDeciliters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCentiliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCentiliters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeMilliliters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMilliliters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicKilometers() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicKilometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicMeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicDecimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicDecimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicCentimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicCentimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicMillimeters() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMillimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicInches() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicInches)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicFeet() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicFeet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicYards() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicYards)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCubicMiles() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCubicMiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeAcreFeet() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelAcreFeet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeBushels() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelBushels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeTeaspoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelTeaspoons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeTablespoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelTablespoons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeFluidOunces() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelFluidOunces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeCups() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelCups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumePints() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelPints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeQuarts() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelQuarts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeGallons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelGallons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialTeaspoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialTeaspoons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialTablespoons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialTablespoons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialFluidOunces() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialFluidOunces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialPints() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialPints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialQuarts() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialQuarts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeImperialGallons() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelImperialGallons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
 
 func NSUnitVolumeMetricCups() *NSUnitVolume {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitVolume), _nSUnitVolumeSelMetricCups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitVolumeFromID(_ret)
 }
-

@@ -11,7 +11,7 @@ import (
 type CLAccuracyAuthorization int64
 
 const (
-	CLAccuracyAuthorizationFullAccuracy CLAccuracyAuthorization = 0
+	CLAccuracyAuthorizationFullAccuracy    CLAccuracyAuthorization = 0
 	CLAccuracyAuthorizationReducedAccuracy CLAccuracyAuthorization = 1
 )
 
@@ -29,11 +29,11 @@ func (e CLAccuracyAuthorization) String() string {
 type CLActivityType int64
 
 const (
-	CLActivityTypeOther CLActivityType = 1
+	CLActivityTypeOther                CLActivityType = 1
 	CLActivityTypeAutomotiveNavigation CLActivityType = 2
-	CLActivityTypeFitness CLActivityType = 3
-	CLActivityTypeOtherNavigation CLActivityType = 4
-	CLActivityTypeAirborne CLActivityType = 5
+	CLActivityTypeFitness              CLActivityType = 3
+	CLActivityTypeOtherNavigation      CLActivityType = 4
+	CLActivityTypeAirborne             CLActivityType = 5
 )
 
 func (e CLActivityType) String() string {
@@ -56,11 +56,11 @@ func (e CLActivityType) String() string {
 type CLAuthorizationStatus int32
 
 const (
-	KCLAuthorizationStatusNotDetermined CLAuthorizationStatus = 0
-	KCLAuthorizationStatusRestricted CLAuthorizationStatus = 1
-	KCLAuthorizationStatusDenied CLAuthorizationStatus = 2
+	KCLAuthorizationStatusNotDetermined    CLAuthorizationStatus = 0
+	KCLAuthorizationStatusRestricted       CLAuthorizationStatus = 1
+	KCLAuthorizationStatusDenied           CLAuthorizationStatus = 2
 	KCLAuthorizationStatusAuthorizedAlways CLAuthorizationStatus = 3
-	KCLAuthorizationStatusAuthorized CLAuthorizationStatus = 3
+	KCLAuthorizationStatusAuthorized       CLAuthorizationStatus = 3
 )
 
 func (e CLAuthorizationStatus) String() string {
@@ -81,13 +81,13 @@ func (e CLAuthorizationStatus) String() string {
 type CLDeviceOrientation int32
 
 const (
-	CLDeviceOrientationUnknown CLDeviceOrientation = 0
-	CLDeviceOrientationPortrait CLDeviceOrientation = 1
+	CLDeviceOrientationUnknown            CLDeviceOrientation = 0
+	CLDeviceOrientationPortrait           CLDeviceOrientation = 1
 	CLDeviceOrientationPortraitUpsideDown CLDeviceOrientation = 2
-	CLDeviceOrientationLandscapeLeft CLDeviceOrientation = 3
-	CLDeviceOrientationLandscapeRight CLDeviceOrientation = 4
-	CLDeviceOrientationFaceUp CLDeviceOrientation = 5
-	CLDeviceOrientationFaceDown CLDeviceOrientation = 6
+	CLDeviceOrientationLandscapeLeft      CLDeviceOrientation = 3
+	CLDeviceOrientationLandscapeRight     CLDeviceOrientation = 4
+	CLDeviceOrientationFaceUp             CLDeviceOrientation = 5
+	CLDeviceOrientationFaceDown           CLDeviceOrientation = 6
 )
 
 func (e CLDeviceOrientation) String() string {
@@ -114,11 +114,11 @@ func (e CLDeviceOrientation) String() string {
 type CLLiveUpdateConfiguration int64
 
 const (
-	CLLiveUpdateConfigurationDefault CLLiveUpdateConfiguration = 0
+	CLLiveUpdateConfigurationDefault              CLLiveUpdateConfiguration = 0
 	CLLiveUpdateConfigurationAutomotiveNavigation CLLiveUpdateConfiguration = 1
-	CLLiveUpdateConfigurationOtherNavigation CLLiveUpdateConfiguration = 2
-	CLLiveUpdateConfigurationFitness CLLiveUpdateConfiguration = 3
-	CLLiveUpdateConfigurationAirborne CLLiveUpdateConfiguration = 4
+	CLLiveUpdateConfigurationOtherNavigation      CLLiveUpdateConfiguration = 2
+	CLLiveUpdateConfigurationFitness              CLLiveUpdateConfiguration = 3
+	CLLiveUpdateConfigurationAirborne             CLLiveUpdateConfiguration = 4
 )
 
 func (e CLLiveUpdateConfiguration) String() string {
@@ -141,8 +141,8 @@ func (e CLLiveUpdateConfiguration) String() string {
 type CLMonitoringState uint64
 
 const (
-	CLMonitoringStateUnknown CLMonitoringState = 0
-	CLMonitoringStateSatisfied CLMonitoringState = 1
+	CLMonitoringStateUnknown     CLMonitoringState = 0
+	CLMonitoringStateSatisfied   CLMonitoringState = 1
 	CLMonitoringStateUnsatisfied CLMonitoringState = 2
 	CLMonitoringStateUnmonitored CLMonitoringState = 3
 )
@@ -165,10 +165,10 @@ func (e CLMonitoringState) String() string {
 type CLProximity int64
 
 const (
-	CLProximityUnknown CLProximity = 0
+	CLProximityUnknown   CLProximity = 0
 	CLProximityImmediate CLProximity = 1
-	CLProximityNear CLProximity = 2
-	CLProximityFar CLProximity = 3
+	CLProximityNear      CLProximity = 2
+	CLProximityFar       CLProximity = 3
 )
 
 func (e CLProximity) String() string {
@@ -185,4 +185,3 @@ func (e CLProximity) String() string {
 		return fmt.Sprintf("CLProximity(%d)", int64(e))
 	}
 }
-

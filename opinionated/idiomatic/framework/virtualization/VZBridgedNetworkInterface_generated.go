@@ -62,4 +62,3 @@ type BridgedNetworkInterfaceable interface {
 }
 
 var _ BridgedNetworkInterfaceable = (*BridgedNetworkInterface)(nil)
-

@@ -18,22 +18,22 @@ type AUParameter struct {
 }
 
 var (
-	_clsAUParameter = _objcClass("AUParameter")
-	_aUParameterSelSetValueOriginator = objc.RegisterName("setValue:originator:")
-	_aUParameterSelSetValueOriginatorAtHostTime = objc.RegisterName("setValue:originator:atHostTime:")
+	_clsAUParameter                                      = _objcClass("AUParameter")
+	_aUParameterSelSetValueOriginator                    = objc.RegisterName("setValue:originator:")
+	_aUParameterSelSetValueOriginatorAtHostTime          = objc.RegisterName("setValue:originator:atHostTime:")
 	_aUParameterSelSetValueOriginatorAtHostTimeEventType = objc.RegisterName("setValue:originator:atHostTime:eventType:")
-	_aUParameterSelStringFromValue = objc.RegisterName("stringFromValue:")
-	_aUParameterSelValueFromString = objc.RegisterName("valueFromString:")
-	_aUParameterSelMinValue = objc.RegisterName("minValue")
-	_aUParameterSelMaxValue = objc.RegisterName("maxValue")
-	_aUParameterSelUnit = objc.RegisterName("unit")
-	_aUParameterSelUnitName = objc.RegisterName("unitName")
-	_aUParameterSelFlags = objc.RegisterName("flags")
-	_aUParameterSelAddress = objc.RegisterName("address")
-	_aUParameterSelValueStrings = objc.RegisterName("valueStrings")
-	_aUParameterSelDependentParameters = objc.RegisterName("dependentParameters")
-	_aUParameterSelValue = objc.RegisterName("value")
-	_aUParameterSelSetValue = objc.RegisterName("setValue:")
+	_aUParameterSelStringFromValue                       = objc.RegisterName("stringFromValue:")
+	_aUParameterSelValueFromString                       = objc.RegisterName("valueFromString:")
+	_aUParameterSelMinValue                              = objc.RegisterName("minValue")
+	_aUParameterSelMaxValue                              = objc.RegisterName("maxValue")
+	_aUParameterSelUnit                                  = objc.RegisterName("unit")
+	_aUParameterSelUnitName                              = objc.RegisterName("unitName")
+	_aUParameterSelFlags                                 = objc.RegisterName("flags")
+	_aUParameterSelAddress                               = objc.RegisterName("address")
+	_aUParameterSelValueStrings                          = objc.RegisterName("valueStrings")
+	_aUParameterSelDependentParameters                   = objc.RegisterName("dependentParameters")
+	_aUParameterSelValue                                 = objc.RegisterName("value")
+	_aUParameterSelSetValue                              = objc.RegisterName("setValue:")
 )
 
 func AUParameterFromID(id objc.ID) *AUParameter {
@@ -64,7 +64,9 @@ func (o *AUParameter) SetValueOriginatorAtHostTimeEventType(value float32, origi
 // @brief Get a textual representation of a value for the parameter. Use value==nil to use the current value. Bridged to the v2 property kAudioUnitProperty_ParameterStringFromValue. @discussion This is currently only supported for parameters whose flags include kAudioUnitParameterFlag_ValuesHaveStrings.
 func (o *AUParameter) StringFromValue(value *float32) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterSelStringFromValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +97,9 @@ func (o *AUParameter) Unit() AudioUnitParameterUnit {
 // A localized name for the parameter's unit. Supplied by the AU if kAudioUnitParameterUnit_CustomUnit; else by the framework.
 func (o *AUParameter) UnitName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUParameterSelUnitName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -132,4 +136,3 @@ func (o *AUParameter) Value() float32 {
 func (o *AUParameter) SetValue(value float32) {
 	o.Ptr().Send(_aUParameterSelSetValue, value)
 }
-

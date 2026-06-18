@@ -79,4 +79,3 @@ type ResidencySetDescriptorable interface {
 }
 
 var _ ResidencySetDescriptorable = (*ResidencySetDescriptor)(nil)
-

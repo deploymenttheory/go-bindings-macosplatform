@@ -16,7 +16,9 @@ type MTRApplicationLauncherClusterLaunchAppParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterLaunchAppParams].
-func (x *MTRApplicationLauncherClusterLaunchAppParams) Unwrap() *raw.MTRApplicationLauncherClusterLaunchAppParams { return x.inner }
+func (x *MTRApplicationLauncherClusterLaunchAppParams) Unwrap() *raw.MTRApplicationLauncherClusterLaunchAppParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -122,4 +124,3 @@ type MTRApplicationLauncherClusterLaunchAppParamsable interface {
 }
 
 var _ MTRApplicationLauncherClusterLaunchAppParamsable = (*MTRApplicationLauncherClusterLaunchAppParams)(nil)
-

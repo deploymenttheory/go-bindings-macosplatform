@@ -178,7 +178,9 @@ func (x *IOBluetoothHandsFreeDevice) SendATCommandTimeoutSelectorTarget(atComman
 	x.inner.SendATCommandTimeoutSelectorTarget(foundation.NSStringStringWithUTF8String(atCommand), timeout, selector, target)
 }
 
-func (x *IOBluetoothHandsFreeDevice) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree { return &x.inner.IOBluetoothHandsFree }
+func (x *IOBluetoothHandsFreeDevice) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree {
+	return &x.inner.IOBluetoothHandsFree
+}
 
 // IOBluetoothHandsFreeDeviceable is the interface implemented by [IOBluetoothHandsFreeDevice], for mocking and DI.
 type IOBluetoothHandsFreeDeviceable interface {
@@ -213,4 +215,3 @@ type IOBluetoothHandsFreeDeviceable interface {
 }
 
 var _ IOBluetoothHandsFreeDeviceable = (*IOBluetoothHandsFreeDevice)(nil)
-

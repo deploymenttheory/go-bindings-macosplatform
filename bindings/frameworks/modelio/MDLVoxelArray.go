@@ -18,36 +18,36 @@ type MDLVoxelArray struct {
 }
 
 var (
-	_clsMDLVoxelArray = _objcClass("MDLVoxelArray")
-	_mDLVoxelArraySelInitWithAssetDivisionsPatchRadius = objc.RegisterName("initWithAsset:divisions:patchRadius:")
-	_mDLVoxelArraySelInitWithDataBoundingBoxVoxelExtent = objc.RegisterName("initWithData:boundingBox:voxelExtent:")
-	_mDLVoxelArraySelInitWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius = objc.RegisterName("initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:")
-	_mDLVoxelArraySelInitWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius = objc.RegisterName("initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:")
-	_mDLVoxelArraySelVoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell = objc.RegisterName("voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:")
-	_mDLVoxelArraySelVoxelsWithinExtent = objc.RegisterName("voxelsWithinExtent:")
-	_mDLVoxelArraySelVoxelIndices = objc.RegisterName("voxelIndices")
-	_mDLVoxelArraySelSetVoxelAtIndex = objc.RegisterName("setVoxelAtIndex:")
-	_mDLVoxelArraySelSetVoxelsForMeshDivisionsPatchRadius = objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:")
-	_mDLVoxelArraySelSetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius = objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:")
+	_clsMDLVoxelArray                                                                   = _objcClass("MDLVoxelArray")
+	_mDLVoxelArraySelInitWithAssetDivisionsPatchRadius                                  = objc.RegisterName("initWithAsset:divisions:patchRadius:")
+	_mDLVoxelArraySelInitWithDataBoundingBoxVoxelExtent                                 = objc.RegisterName("initWithData:boundingBox:voxelExtent:")
+	_mDLVoxelArraySelInitWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius      = objc.RegisterName("initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:")
+	_mDLVoxelArraySelInitWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius    = objc.RegisterName("initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:")
+	_mDLVoxelArraySelVoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell         = objc.RegisterName("voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:")
+	_mDLVoxelArraySelVoxelsWithinExtent                                                 = objc.RegisterName("voxelsWithinExtent:")
+	_mDLVoxelArraySelVoxelIndices                                                       = objc.RegisterName("voxelIndices")
+	_mDLVoxelArraySelSetVoxelAtIndex                                                    = objc.RegisterName("setVoxelAtIndex:")
+	_mDLVoxelArraySelSetVoxelsForMeshDivisionsPatchRadius                               = objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:")
+	_mDLVoxelArraySelSetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius   = objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:")
 	_mDLVoxelArraySelSetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius = objc.RegisterName("setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:")
-	_mDLVoxelArraySelUnionWithVoxels = objc.RegisterName("unionWithVoxels:")
-	_mDLVoxelArraySelIntersectWithVoxels = objc.RegisterName("intersectWithVoxels:")
-	_mDLVoxelArraySelDifferenceWithVoxels = objc.RegisterName("differenceWithVoxels:")
-	_mDLVoxelArraySelIndexOfSpatialLocation = objc.RegisterName("indexOfSpatialLocation:")
-	_mDLVoxelArraySelSpatialLocationOfIndex = objc.RegisterName("spatialLocationOfIndex:")
-	_mDLVoxelArraySelVoxelBoundingBoxAtIndex = objc.RegisterName("voxelBoundingBoxAtIndex:")
-	_mDLVoxelArraySelConvertToSignedShellField = objc.RegisterName("convertToSignedShellField")
-	_mDLVoxelArraySelCoarseMesh = objc.RegisterName("coarseMesh")
-	_mDLVoxelArraySelCoarseMeshUsingAllocator = objc.RegisterName("coarseMeshUsingAllocator:")
-	_mDLVoxelArraySelMeshUsingAllocator = objc.RegisterName("meshUsingAllocator:")
-	_mDLVoxelArraySelCount = objc.RegisterName("count")
-	_mDLVoxelArraySelVoxelIndexExtent = objc.RegisterName("voxelIndexExtent")
-	_mDLVoxelArraySelBoundingBox = objc.RegisterName("boundingBox")
-	_mDLVoxelArraySelIsValidSignedShellField = objc.RegisterName("isValidSignedShellField")
-	_mDLVoxelArraySelShellFieldInteriorThickness = objc.RegisterName("shellFieldInteriorThickness")
-	_mDLVoxelArraySelSetShellFieldInteriorThickness = objc.RegisterName("setShellFieldInteriorThickness:")
-	_mDLVoxelArraySelShellFieldExteriorThickness = objc.RegisterName("shellFieldExteriorThickness")
-	_mDLVoxelArraySelSetShellFieldExteriorThickness = objc.RegisterName("setShellFieldExteriorThickness:")
+	_mDLVoxelArraySelUnionWithVoxels                                                    = objc.RegisterName("unionWithVoxels:")
+	_mDLVoxelArraySelIntersectWithVoxels                                                = objc.RegisterName("intersectWithVoxels:")
+	_mDLVoxelArraySelDifferenceWithVoxels                                               = objc.RegisterName("differenceWithVoxels:")
+	_mDLVoxelArraySelIndexOfSpatialLocation                                             = objc.RegisterName("indexOfSpatialLocation:")
+	_mDLVoxelArraySelSpatialLocationOfIndex                                             = objc.RegisterName("spatialLocationOfIndex:")
+	_mDLVoxelArraySelVoxelBoundingBoxAtIndex                                            = objc.RegisterName("voxelBoundingBoxAtIndex:")
+	_mDLVoxelArraySelConvertToSignedShellField                                          = objc.RegisterName("convertToSignedShellField")
+	_mDLVoxelArraySelCoarseMesh                                                         = objc.RegisterName("coarseMesh")
+	_mDLVoxelArraySelCoarseMeshUsingAllocator                                           = objc.RegisterName("coarseMeshUsingAllocator:")
+	_mDLVoxelArraySelMeshUsingAllocator                                                 = objc.RegisterName("meshUsingAllocator:")
+	_mDLVoxelArraySelCount                                                              = objc.RegisterName("count")
+	_mDLVoxelArraySelVoxelIndexExtent                                                   = objc.RegisterName("voxelIndexExtent")
+	_mDLVoxelArraySelBoundingBox                                                        = objc.RegisterName("boundingBox")
+	_mDLVoxelArraySelIsValidSignedShellField                                            = objc.RegisterName("isValidSignedShellField")
+	_mDLVoxelArraySelShellFieldInteriorThickness                                        = objc.RegisterName("shellFieldInteriorThickness")
+	_mDLVoxelArraySelSetShellFieldInteriorThickness                                     = objc.RegisterName("setShellFieldInteriorThickness:")
+	_mDLVoxelArraySelShellFieldExteriorThickness                                        = objc.RegisterName("shellFieldExteriorThickness")
+	_mDLVoxelArraySelSetShellFieldExteriorThickness                                     = objc.RegisterName("setShellFieldExteriorThickness:")
 )
 
 func MDLVoxelArrayFromID(id objc.ID) *MDLVoxelArray {
@@ -63,14 +63,18 @@ func MDLVoxelArrayFromID(id objc.ID) *MDLVoxelArray {
 // Initialize a voxel grid from an MDLAsset. Attempts to create a closed volume model by applying "patches" of radius patchRadius to any holes found in the orginal mesh. Choose a patch radius that will be large enough to fill in the largest hole in the model.
 func (o *MDLVoxelArray) InitWithAssetDivisionsPatchRadius(asset *MDLAsset, divisions int, patchRadius float32) *MDLVoxelArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelInitWithAssetDivisionsPatchRadius, asset.Ptr(), divisions, patchRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVoxelArrayFromID(_ret)
 }
 
 // Initialize a voxel grid from an NSData containing an array of MDLVoxelIndex values. @param boundingBox The bounds defining the extent of the volume model in Cartesian space @param voxelExtent The extent of a single voxel
 func (o *MDLVoxelArray) InitWithDataBoundingBoxVoxelExtent(voxelData *foundation.NSData, boundingBox MDLAxisAlignedBoundingBox, voxelExtent float32) *MDLVoxelArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelInitWithDataBoundingBoxVoxelExtent, voxelData.Ptr(), boundingBox, voxelExtent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVoxelArrayFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *MDLVoxelArray) InitWithDataBoundingBoxVoxelExtent(voxelData *foundation
 // Deprecated: since macOS 10.12.
 func (o *MDLVoxelArray) InitWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asset *MDLAsset, divisions int, interiorShells int, exteriorShells int, patchRadius float32) *MDLVoxelArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelInitWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius, asset.Ptr(), divisions, interiorShells, exteriorShells, patchRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVoxelArrayFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *MDLVoxelArray) InitWithAssetDivisionsInteriorShellsExteriorShellsPatchR
 // Deprecated: since macOS 10.12.
 func (o *MDLVoxelArray) InitWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(asset *MDLAsset, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) *MDLVoxelArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelInitWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius, asset.Ptr(), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVoxelArrayFromID(_ret)
 }
 
@@ -99,14 +107,18 @@ func (o *MDLVoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShe
 // Returns an NSData containing the indices of all voxels found in the extent
 func (o *MDLVoxelArray) VoxelsWithinExtent(extent MDLVoxelIndexExtent) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelVoxelsWithinExtent, extent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Returns an NSData containing the indices of all voxels in the voxel grid
 func (o *MDLVoxelArray) VoxelIndices() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelVoxelIndices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -173,20 +185,26 @@ func (o *MDLVoxelArray) ConvertToSignedShellField() {
 // Creates a coarse mesh from the voxel grid
 func (o *MDLVoxelArray) CoarseMesh() *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelCoarseMesh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 func (o *MDLVoxelArray) CoarseMeshUsingAllocator(allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelCoarseMeshUsingAllocator, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
 // Creates a smooth mesh from the voxel grid
 func (o *MDLVoxelArray) MeshUsingAllocator(allocator MDLMeshBufferAllocator) *MDLMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVoxelArraySelMeshUsingAllocator, allocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshFromID(_ret)
 }
 
@@ -233,4 +251,3 @@ func (o *MDLVoxelArray) ShellFieldExteriorThickness() float32 {
 func (o *MDLVoxelArray) SetShellFieldExteriorThickness(shellFieldExteriorThickness float32) {
 	o.Ptr().Send(_mDLVoxelArraySelSetShellFieldExteriorThickness, shellFieldExteriorThickness)
 }
-

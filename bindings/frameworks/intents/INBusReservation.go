@@ -16,10 +16,10 @@ type INBusReservation struct {
 }
 
 var (
-	_clsINBusReservation = _objcClass("INBusReservation")
+	_clsINBusReservation                                                                                                                     = _objcClass("INBusReservation")
 	_iNBusReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:")
-	_iNBusReservationSelReservedSeat = objc.RegisterName("reservedSeat")
-	_iNBusReservationSelBusTrip = objc.RegisterName("busTrip")
+	_iNBusReservationSelReservedSeat                                                                                                         = objc.RegisterName("reservedSeat")
+	_iNBusReservationSelBusTrip                                                                                                              = objc.RegisterName("busTrip")
 )
 
 func INBusReservationFromID(id objc.ID) *INBusReservation {
@@ -34,19 +34,24 @@ func INBusReservationFromID(id objc.ID) *INBusReservation {
 
 func (o *INBusReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, busTrip *INBusTrip) *INBusReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), busTrip.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBusReservationFromID(_ret)
 }
 
 func (o *INBusReservation) ReservedSeat() *INSeat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusReservationSelReservedSeat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSeatFromID(_ret)
 }
 
 func (o *INBusReservation) BusTrip() *INBusTrip {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNBusReservationSelBusTrip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBusTripFromID(_ret)
 }
-

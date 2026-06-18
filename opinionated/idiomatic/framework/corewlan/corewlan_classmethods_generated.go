@@ -89,4 +89,3 @@ func CWWiFiClientInterfaceNames() []string {
 		return purego.GoString(_id)
 	})
 }
-

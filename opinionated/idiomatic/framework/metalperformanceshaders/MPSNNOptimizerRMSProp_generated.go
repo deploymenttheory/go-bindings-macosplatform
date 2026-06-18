@@ -106,7 +106,9 @@ func (x *NNOptimizerRMSProp) Epsilon() float32 {
 	return x.inner.Epsilon()
 }
 
-func (x *NNOptimizerRMSProp) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
+func (x *NNOptimizerRMSProp) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer {
+	return &x.inner.MPSNNOptimizer
+}
 
 func (x *NNOptimizerRMSProp) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNOptimizer.MPSKernel }
 
@@ -127,4 +129,3 @@ type NNOptimizerRMSPropable interface {
 }
 
 var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
-

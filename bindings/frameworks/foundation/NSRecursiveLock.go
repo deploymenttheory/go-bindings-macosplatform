@@ -15,11 +15,11 @@ type NSRecursiveLock struct {
 }
 
 var (
-	_clsNSRecursiveLock = _objcClass("NSRecursiveLock")
-	_nSRecursiveLockSelTryLock = objc.RegisterName("tryLock")
+	_clsNSRecursiveLock               = _objcClass("NSRecursiveLock")
+	_nSRecursiveLockSelTryLock        = objc.RegisterName("tryLock")
 	_nSRecursiveLockSelLockBeforeDate = objc.RegisterName("lockBeforeDate:")
-	_nSRecursiveLockSelName = objc.RegisterName("name")
-	_nSRecursiveLockSelSetName = objc.RegisterName("setName:")
+	_nSRecursiveLockSelName           = objc.RegisterName("name")
+	_nSRecursiveLockSelSetName        = objc.RegisterName("setName:")
 )
 
 func NSRecursiveLockFromID(id objc.ID) *NSRecursiveLock {
@@ -44,11 +44,12 @@ func (o *NSRecursiveLock) LockBeforeDate(limit *NSDate) bool {
 
 func (o *NSRecursiveLock) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRecursiveLockSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSRecursiveLock) SetName(name *NSString) {
 	o.Ptr().Send(_nSRecursiveLockSelSetName, name.Ptr())
 }
-

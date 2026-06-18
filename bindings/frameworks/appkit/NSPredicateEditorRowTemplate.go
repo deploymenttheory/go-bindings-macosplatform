@@ -17,23 +17,23 @@ type NSPredicateEditorRowTemplate struct {
 }
 
 var (
-	_clsNSPredicateEditorRowTemplate = _objcClass("NSPredicateEditorRowTemplate")
-	_nSPredicateEditorRowTemplateSelMatchForPredicate = objc.RegisterName("matchForPredicate:")
-	_nSPredicateEditorRowTemplateSelSetPredicate = objc.RegisterName("setPredicate:")
-	_nSPredicateEditorRowTemplateSelPredicateWithSubpredicates = objc.RegisterName("predicateWithSubpredicates:")
-	_nSPredicateEditorRowTemplateSelDisplayableSubpredicatesOfPredicate = objc.RegisterName("displayableSubpredicatesOfPredicate:")
-	_nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionsModifierOperatorsOptions = objc.RegisterName("initWithLeftExpressions:rightExpressions:modifier:operators:options:")
+	_clsNSPredicateEditorRowTemplate                                                                            = _objcClass("NSPredicateEditorRowTemplate")
+	_nSPredicateEditorRowTemplateSelMatchForPredicate                                                           = objc.RegisterName("matchForPredicate:")
+	_nSPredicateEditorRowTemplateSelSetPredicate                                                                = objc.RegisterName("setPredicate:")
+	_nSPredicateEditorRowTemplateSelPredicateWithSubpredicates                                                  = objc.RegisterName("predicateWithSubpredicates:")
+	_nSPredicateEditorRowTemplateSelDisplayableSubpredicatesOfPredicate                                         = objc.RegisterName("displayableSubpredicatesOfPredicate:")
+	_nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionsModifierOperatorsOptions             = objc.RegisterName("initWithLeftExpressions:rightExpressions:modifier:operators:options:")
 	_nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions = objc.RegisterName("initWithLeftExpressions:rightExpressionAttributeType:modifier:operators:options:")
-	_nSPredicateEditorRowTemplateSelInitWithCompoundTypes = objc.RegisterName("initWithCompoundTypes:")
-	_nSPredicateEditorRowTemplateSelTemplatesWithAttributeKeyPathsInEntityDescription = objc.RegisterName("templatesWithAttributeKeyPaths:inEntityDescription:")
-	_nSPredicateEditorRowTemplateSelTemplateViews = objc.RegisterName("templateViews")
-	_nSPredicateEditorRowTemplateSelLeftExpressions = objc.RegisterName("leftExpressions")
-	_nSPredicateEditorRowTemplateSelRightExpressions = objc.RegisterName("rightExpressions")
-	_nSPredicateEditorRowTemplateSelRightExpressionAttributeType = objc.RegisterName("rightExpressionAttributeType")
-	_nSPredicateEditorRowTemplateSelModifier = objc.RegisterName("modifier")
-	_nSPredicateEditorRowTemplateSelOperators = objc.RegisterName("operators")
-	_nSPredicateEditorRowTemplateSelOptions = objc.RegisterName("options")
-	_nSPredicateEditorRowTemplateSelCompoundTypes = objc.RegisterName("compoundTypes")
+	_nSPredicateEditorRowTemplateSelInitWithCompoundTypes                                                       = objc.RegisterName("initWithCompoundTypes:")
+	_nSPredicateEditorRowTemplateSelTemplatesWithAttributeKeyPathsInEntityDescription                           = objc.RegisterName("templatesWithAttributeKeyPaths:inEntityDescription:")
+	_nSPredicateEditorRowTemplateSelTemplateViews                                                               = objc.RegisterName("templateViews")
+	_nSPredicateEditorRowTemplateSelLeftExpressions                                                             = objc.RegisterName("leftExpressions")
+	_nSPredicateEditorRowTemplateSelRightExpressions                                                            = objc.RegisterName("rightExpressions")
+	_nSPredicateEditorRowTemplateSelRightExpressionAttributeType                                                = objc.RegisterName("rightExpressionAttributeType")
+	_nSPredicateEditorRowTemplateSelModifier                                                                    = objc.RegisterName("modifier")
+	_nSPredicateEditorRowTemplateSelOperators                                                                   = objc.RegisterName("operators")
+	_nSPredicateEditorRowTemplateSelOptions                                                                     = objc.RegisterName("options")
+	_nSPredicateEditorRowTemplateSelCompoundTypes                                                               = objc.RegisterName("compoundTypes")
 )
 
 func NSPredicateEditorRowTemplateFromID(id objc.ID) *NSPredicateEditorRowTemplate {
@@ -57,7 +57,9 @@ func (o *NSPredicateEditorRowTemplate) SetPredicate(predicate *foundation.NSPred
 
 func (o *NSPredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelPredicateWithSubpredicates, subpredicates)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -68,31 +70,41 @@ func (o *NSPredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predi
 
 func (o *NSPredicateEditorRowTemplate) InitWithLeftExpressionsRightExpressionsModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], rightExpressions *foundation.NSArray[*foundation.NSExpression], modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *NSPredicateEditorRowTemplate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionsModifierOperatorsOptions, leftExpressions, rightExpressions, modifier, operators, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) InitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], attributeType coredata.NSAttributeType, modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *NSPredicateEditorRowTemplate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions, leftExpressions, attributeType, modifier, operators, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) InitWithCompoundTypes(compoundTypes *foundation.NSArray[*foundation.NSNumber]) *NSPredicateEditorRowTemplate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelInitWithCompoundTypes, compoundTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateEditorRowTemplateFromID(_ret)
 }
 
 func NSPredicateEditorRowTemplateTemplatesWithAttributeKeyPathsInEntityDescription(keyPaths *foundation.NSArray[*foundation.NSString], entityDescription *coredata.NSEntityDescription) *foundation.NSArray[*NSPredicateEditorRowTemplate] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicateEditorRowTemplate), _nSPredicateEditorRowTemplateSelTemplatesWithAttributeKeyPathsInEntityDescription, keyPaths, entityDescription.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPredicateEditorRowTemplate](_ret)
 }
 
 func (o *NSPredicateEditorRowTemplate) TemplateViews() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateEditorRowTemplateSelTemplateViews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -130,4 +142,3 @@ func (o *NSPredicateEditorRowTemplate) CompoundTypes() *foundation.NSArray[*foun
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _nSPredicateEditorRowTemplateSelCompoundTypes)
 	return _ret
 }
-

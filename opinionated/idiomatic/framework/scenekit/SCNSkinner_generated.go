@@ -153,4 +153,3 @@ type Skinnerable interface {
 }
 
 var _ Skinnerable = (*Skinner)(nil)
-

@@ -9,35 +9,34 @@ import (
 
 // @struct		DRFileForkSizeInfo @abstract	Structure used when requesting fork sizes. @field		fork					(in) which fork is being requested @field		query					(in) type of query, estimate or actual @field		size					(out) returned size
 type DRFileForkSizeInfo struct {
-	Fork uint
+	Fork  uint
 	Query uint
-	Size uint64
+	Size  uint64
 }
 
 // @struct		DRFileProductionInfo @abstract	Structure used by the @link DRFileProc DRFileProc @/link callback during production of a track. @field		requestedAddress		(out) byte address that the burn engine is requesting @field		buffer					(out) buffer to produce into @field		reqCount				(out) number of bytes requested @field		actCount				(in) number of bytes you actually produced @field		blockSize				(out) current block size, you must always return multiples of this @field		fork					(out) which fork is being requested
 type DRFileProductionInfo struct {
 	RequestedAddress uint64
-	Buffer unsafe.Pointer
-	ReqCount uint
-	ActCount uint
-	BlockSize uint
-	Fork uint
+	Buffer           unsafe.Pointer
+	ReqCount         uint
+	ActCount         uint
+	BlockSize        uint
+	Fork             uint
 }
 
 // @struct		DRRefConCallbacks @abstract	Contains a set of callbacks for use by a Disc Recording object in managing its reference context. @field		version	The version of this structure. The value must be a known version, or zero. @field		retain	An optional callback used by a Disc Recording object to retain its reference context. When <tt>NULL</tt>, the Disc Recording object will not retain the reference context when set. @field		release An optional callback used by a Disc Recording object to remove a retain previously added for its reference context. When <tt>NULL</tt>, the Disc Recording objecting will not release its reference context when the object is destroyed or when a new reference context value is set.
 type DRRefConCallbacks struct {
 	Version uint
-	Retain unsafe.Pointer
+	Retain  unsafe.Pointer
 	Release unsafe.Pointer
 }
 
 // @struct		DRTrackProductionInfo @abstract	Parmeter block used for data production. @field		buffer				In - The buffer to produce into. This buffer is passed into the track production callback and only the contents should be modified. @field		reqCount			In - The number of bytes requested by the engine. @field		actCount			Out - The number of bytes actually produced (between 0 and reqCount). @field		flags				InOut - Miscellaneous flags. Flags are passed into the track production callback callback from the Disc Recording engine and the callback can set flags to be passed back to the engine. @field		blockSize			In - The block size the engine is expecting. For best results, return multiples of this size. @field		requestedAddress	In - The byte address that the burn engine is requesting from the object (0-based). This increments when you send data, as one would expect.
 type DRTrackProductionInfo struct {
-	Buffer unsafe.Pointer
-	ReqCount uint
-	ActCount uint
-	Flags uint
-	BlockSize uint
+	Buffer           unsafe.Pointer
+	ReqCount         uint
+	ActCount         uint
+	Flags            uint
+	BlockSize        uint
 	RequestedAddress uint64
 }
-

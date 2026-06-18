@@ -18,27 +18,27 @@ type GKMatchmaker struct {
 }
 
 var (
-	_clsGKMatchmaker = _objcClass("GKMatchmaker")
-	_gKMatchmakerSelSharedMatchmaker = objc.RegisterName("sharedMatchmaker")
-	_gKMatchmakerSelMatchForInviteCompletionHandler = objc.RegisterName("matchForInvite:completionHandler:")
-	_gKMatchmakerSelFindMatchForRequestWithCompletionHandler = objc.RegisterName("findMatchForRequest:withCompletionHandler:")
-	_gKMatchmakerSelFindPlayersForHostedRequestWithCompletionHandler = objc.RegisterName("findPlayersForHostedRequest:withCompletionHandler:")
-	_gKMatchmakerSelFindMatchedPlayersWithCompletionHandler = objc.RegisterName("findMatchedPlayers:withCompletionHandler:")
-	_gKMatchmakerSelAddPlayersToMatchMatchRequestCompletionHandler = objc.RegisterName("addPlayersToMatch:matchRequest:completionHandler:")
-	_gKMatchmakerSelCancel = objc.RegisterName("cancel")
-	_gKMatchmakerSelCancelPendingInviteToPlayer = objc.RegisterName("cancelPendingInviteToPlayer:")
-	_gKMatchmakerSelFinishMatchmakingForMatch = objc.RegisterName("finishMatchmakingForMatch:")
-	_gKMatchmakerSelQueryPlayerGroupActivityWithCompletionHandler = objc.RegisterName("queryPlayerGroupActivity:withCompletionHandler:")
-	_gKMatchmakerSelQueryActivityWithCompletionHandler = objc.RegisterName("queryActivityWithCompletionHandler:")
-	_gKMatchmakerSelQueryQueueActivityWithCompletionHandler = objc.RegisterName("queryQueueActivity:withCompletionHandler:")
-	_gKMatchmakerSelStartBrowsingForNearbyPlayersWithHandler = objc.RegisterName("startBrowsingForNearbyPlayersWithHandler:")
-	_gKMatchmakerSelStopBrowsingForNearbyPlayers = objc.RegisterName("stopBrowsingForNearbyPlayers")
-	_gKMatchmakerSelStartGroupActivityWithPlayerHandler = objc.RegisterName("startGroupActivityWithPlayerHandler:")
-	_gKMatchmakerSelStopGroupActivity = objc.RegisterName("stopGroupActivity")
-	_gKMatchmakerSelInviteHandler = objc.RegisterName("inviteHandler")
-	_gKMatchmakerSelSetInviteHandler = objc.RegisterName("setInviteHandler:")
-	_gKMatchmakerSelStartBrowsingForNearbyPlayersWithReachableHandler = objc.RegisterName("startBrowsingForNearbyPlayersWithReachableHandler:")
-	_gKMatchmakerSelCancelInviteToPlayer = objc.RegisterName("cancelInviteToPlayer:")
+	_clsGKMatchmaker                                                      = _objcClass("GKMatchmaker")
+	_gKMatchmakerSelSharedMatchmaker                                      = objc.RegisterName("sharedMatchmaker")
+	_gKMatchmakerSelMatchForInviteCompletionHandler                       = objc.RegisterName("matchForInvite:completionHandler:")
+	_gKMatchmakerSelFindMatchForRequestWithCompletionHandler              = objc.RegisterName("findMatchForRequest:withCompletionHandler:")
+	_gKMatchmakerSelFindPlayersForHostedRequestWithCompletionHandler      = objc.RegisterName("findPlayersForHostedRequest:withCompletionHandler:")
+	_gKMatchmakerSelFindMatchedPlayersWithCompletionHandler               = objc.RegisterName("findMatchedPlayers:withCompletionHandler:")
+	_gKMatchmakerSelAddPlayersToMatchMatchRequestCompletionHandler        = objc.RegisterName("addPlayersToMatch:matchRequest:completionHandler:")
+	_gKMatchmakerSelCancel                                                = objc.RegisterName("cancel")
+	_gKMatchmakerSelCancelPendingInviteToPlayer                           = objc.RegisterName("cancelPendingInviteToPlayer:")
+	_gKMatchmakerSelFinishMatchmakingForMatch                             = objc.RegisterName("finishMatchmakingForMatch:")
+	_gKMatchmakerSelQueryPlayerGroupActivityWithCompletionHandler         = objc.RegisterName("queryPlayerGroupActivity:withCompletionHandler:")
+	_gKMatchmakerSelQueryActivityWithCompletionHandler                    = objc.RegisterName("queryActivityWithCompletionHandler:")
+	_gKMatchmakerSelQueryQueueActivityWithCompletionHandler               = objc.RegisterName("queryQueueActivity:withCompletionHandler:")
+	_gKMatchmakerSelStartBrowsingForNearbyPlayersWithHandler              = objc.RegisterName("startBrowsingForNearbyPlayersWithHandler:")
+	_gKMatchmakerSelStopBrowsingForNearbyPlayers                          = objc.RegisterName("stopBrowsingForNearbyPlayers")
+	_gKMatchmakerSelStartGroupActivityWithPlayerHandler                   = objc.RegisterName("startGroupActivityWithPlayerHandler:")
+	_gKMatchmakerSelStopGroupActivity                                     = objc.RegisterName("stopGroupActivity")
+	_gKMatchmakerSelInviteHandler                                         = objc.RegisterName("inviteHandler")
+	_gKMatchmakerSelSetInviteHandler                                      = objc.RegisterName("setInviteHandler:")
+	_gKMatchmakerSelStartBrowsingForNearbyPlayersWithReachableHandler     = objc.RegisterName("startBrowsingForNearbyPlayersWithReachableHandler:")
+	_gKMatchmakerSelCancelInviteToPlayer                                  = objc.RegisterName("cancelInviteToPlayer:")
 	_gKMatchmakerSelFindPlayersForHostedMatchRequestWithCompletionHandler = objc.RegisterName("findPlayersForHostedMatchRequest:withCompletionHandler:")
 )
 
@@ -55,7 +55,9 @@ func GKMatchmakerFromID(id objc.ID) *GKMatchmaker {
 // The shared matchmaker
 func GKMatchmakerSharedMatchmaker() *GKMatchmaker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKMatchmaker), _gKMatchmakerSelSharedMatchmaker)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMatchmakerFromID(_ret)
 }
 
@@ -222,13 +224,13 @@ func (o *GKMatchmaker) StopGroupActivity() {
 	o.Ptr().Send(_gKMatchmakerSelStopGroupActivity)
 }
 
-// Deprecated: Use the ``GKLocalPlayer/register(_:)`` method instead.
+// Deprecated: Use the “GKLocalPlayer/register(_:)“ method instead.
 func (o *GKMatchmaker) InviteHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _gKMatchmakerSelInviteHandler)
 	return _ret
 }
 
-// Deprecated: Use the ``GKLocalPlayer/register(_:)`` method instead.
+// Deprecated: Use the “GKLocalPlayer/register(_:)“ method instead.
 func (o *GKMatchmaker) SetInviteHandler(inviteHandler objc.Block) {
 	o.Ptr().Send(_gKMatchmakerSelSetInviteHandler, inviteHandler)
 }
@@ -260,4 +262,3 @@ func (o *GKMatchmaker) CancelInviteToPlayer(playerID *foundation.NSString) {
 func (o *GKMatchmaker) FindPlayersForHostedMatchRequestWithCompletionHandler(request *GKMatchRequest, completionHandler objc.Block) {
 	o.Ptr().Send(_gKMatchmakerSelFindPlayersForHostedMatchRequestWithCompletionHandler, request.Ptr(), completionHandler)
 }
-

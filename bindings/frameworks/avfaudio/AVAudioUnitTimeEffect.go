@@ -15,10 +15,10 @@ type AVAudioUnitTimeEffect struct {
 }
 
 var (
-	_clsAVAudioUnitTimeEffect = _objcClass("AVAudioUnitTimeEffect")
+	_clsAVAudioUnitTimeEffect                                  = _objcClass("AVAudioUnitTimeEffect")
 	_aVAudioUnitTimeEffectSelInitWithAudioComponentDescription = objc.RegisterName("initWithAudioComponentDescription:")
-	_aVAudioUnitTimeEffectSelBypass = objc.RegisterName("bypass")
-	_aVAudioUnitTimeEffectSelSetBypass = objc.RegisterName("setBypass:")
+	_aVAudioUnitTimeEffectSelBypass                            = objc.RegisterName("bypass")
+	_aVAudioUnitTimeEffectSelSetBypass                         = objc.RegisterName("setBypass:")
 )
 
 func AVAudioUnitTimeEffectFromID(id objc.ID) *AVAudioUnitTimeEffect {
@@ -34,7 +34,9 @@ func AVAudioUnitTimeEffectFromID(id objc.ID) *AVAudioUnitTimeEffect {
 // @method initWithAudioComponentDescription: @abstract create an AVAudioUnitTimeEffect object @param audioComponentDescription AudioComponentDescription of the audio unit to be initialized @discussion The componentType must be kAudioUnitType_FormatConverter
 func (o *AVAudioUnitTimeEffect) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitTimeEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitTimeEffectSelInitWithAudioComponentDescription, audioComponentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitTimeEffectFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVAudioUnitTimeEffect) Bypass() bool {
 func (o *AVAudioUnitTimeEffect) SetBypass(bypass bool) {
 	o.Ptr().Send(_aVAudioUnitTimeEffectSelSetBypass, bypass)
 }
-

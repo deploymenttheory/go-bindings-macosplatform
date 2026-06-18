@@ -16,10 +16,10 @@ type AVMetadataMachineReadableCodeObject struct {
 }
 
 var (
-	_clsAVMetadataMachineReadableCodeObject = _objcClass("AVMetadataMachineReadableCodeObject")
-	_aVMetadataMachineReadableCodeObjectSelCorners = objc.RegisterName("corners")
+	_clsAVMetadataMachineReadableCodeObject            = _objcClass("AVMetadataMachineReadableCodeObject")
+	_aVMetadataMachineReadableCodeObjectSelCorners     = objc.RegisterName("corners")
 	_aVMetadataMachineReadableCodeObjectSelStringValue = objc.RegisterName("stringValue")
-	_aVMetadataMachineReadableCodeObjectSelDescriptor = objc.RegisterName("descriptor")
+	_aVMetadataMachineReadableCodeObjectSelDescriptor  = objc.RegisterName("descriptor")
 )
 
 func AVMetadataMachineReadableCodeObjectFromID(id objc.ID) *AVMetadataMachineReadableCodeObject {
@@ -41,7 +41,9 @@ func (o *AVMetadataMachineReadableCodeObject) Corners() *foundation.NSArray[objc
 // @property stringValue @abstract Returns the receiver's errorCorrectedData decoded into a human-readable string. @discussion The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
 func (o *AVMetadataMachineReadableCodeObject) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataMachineReadableCodeObjectSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *AVMetadataMachineReadableCodeObject) Descriptor() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataMachineReadableCodeObjectSelDescriptor)
 	return _ret
 }
-

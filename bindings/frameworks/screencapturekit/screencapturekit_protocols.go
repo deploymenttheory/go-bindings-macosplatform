@@ -25,4 +25,3 @@ type SCStreamDelegate interface {
 // SCStreamOutput wraps the ObjC protocol SCStreamOutput.
 type SCStreamOutput interface {
 }
-

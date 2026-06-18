@@ -16,26 +16,26 @@ type CXProviderConfiguration struct {
 }
 
 var (
-	_clsCXProviderConfiguration = _objcClass("CXProviderConfiguration")
-	_cXProviderConfigurationSelInit = objc.RegisterName("init")
-	_cXProviderConfigurationSelInitWithLocalizedName = objc.RegisterName("initWithLocalizedName:")
-	_cXProviderConfigurationSelLocalizedName = objc.RegisterName("localizedName")
-	_cXProviderConfigurationSelRingtoneSound = objc.RegisterName("ringtoneSound")
-	_cXProviderConfigurationSelSetRingtoneSound = objc.RegisterName("setRingtoneSound:")
-	_cXProviderConfigurationSelIconTemplateImageData = objc.RegisterName("iconTemplateImageData")
-	_cXProviderConfigurationSelSetIconTemplateImageData = objc.RegisterName("setIconTemplateImageData:")
-	_cXProviderConfigurationSelMaximumCallGroups = objc.RegisterName("maximumCallGroups")
-	_cXProviderConfigurationSelSetMaximumCallGroups = objc.RegisterName("setMaximumCallGroups:")
-	_cXProviderConfigurationSelMaximumCallsPerCallGroup = objc.RegisterName("maximumCallsPerCallGroup")
+	_clsCXProviderConfiguration                            = _objcClass("CXProviderConfiguration")
+	_cXProviderConfigurationSelInit                        = objc.RegisterName("init")
+	_cXProviderConfigurationSelInitWithLocalizedName       = objc.RegisterName("initWithLocalizedName:")
+	_cXProviderConfigurationSelLocalizedName               = objc.RegisterName("localizedName")
+	_cXProviderConfigurationSelRingtoneSound               = objc.RegisterName("ringtoneSound")
+	_cXProviderConfigurationSelSetRingtoneSound            = objc.RegisterName("setRingtoneSound:")
+	_cXProviderConfigurationSelIconTemplateImageData       = objc.RegisterName("iconTemplateImageData")
+	_cXProviderConfigurationSelSetIconTemplateImageData    = objc.RegisterName("setIconTemplateImageData:")
+	_cXProviderConfigurationSelMaximumCallGroups           = objc.RegisterName("maximumCallGroups")
+	_cXProviderConfigurationSelSetMaximumCallGroups        = objc.RegisterName("setMaximumCallGroups:")
+	_cXProviderConfigurationSelMaximumCallsPerCallGroup    = objc.RegisterName("maximumCallsPerCallGroup")
 	_cXProviderConfigurationSelSetMaximumCallsPerCallGroup = objc.RegisterName("setMaximumCallsPerCallGroup:")
-	_cXProviderConfigurationSelIncludesCallsInRecents = objc.RegisterName("includesCallsInRecents")
-	_cXProviderConfigurationSelSetIncludesCallsInRecents = objc.RegisterName("setIncludesCallsInRecents:")
-	_cXProviderConfigurationSelSupportsVideo = objc.RegisterName("supportsVideo")
-	_cXProviderConfigurationSelSetSupportsVideo = objc.RegisterName("setSupportsVideo:")
-	_cXProviderConfigurationSelSupportsAudioTranslation = objc.RegisterName("supportsAudioTranslation")
+	_cXProviderConfigurationSelIncludesCallsInRecents      = objc.RegisterName("includesCallsInRecents")
+	_cXProviderConfigurationSelSetIncludesCallsInRecents   = objc.RegisterName("setIncludesCallsInRecents:")
+	_cXProviderConfigurationSelSupportsVideo               = objc.RegisterName("supportsVideo")
+	_cXProviderConfigurationSelSetSupportsVideo            = objc.RegisterName("setSupportsVideo:")
+	_cXProviderConfigurationSelSupportsAudioTranslation    = objc.RegisterName("supportsAudioTranslation")
 	_cXProviderConfigurationSelSetSupportsAudioTranslation = objc.RegisterName("setSupportsAudioTranslation:")
-	_cXProviderConfigurationSelSupportedHandleTypes = objc.RegisterName("supportedHandleTypes")
-	_cXProviderConfigurationSelSetSupportedHandleTypes = objc.RegisterName("setSupportedHandleTypes:")
+	_cXProviderConfigurationSelSupportedHandleTypes        = objc.RegisterName("supportedHandleTypes")
+	_cXProviderConfigurationSelSetSupportedHandleTypes     = objc.RegisterName("setSupportedHandleTypes:")
 )
 
 func CXProviderConfigurationFromID(id objc.ID) *CXProviderConfiguration {
@@ -50,14 +50,18 @@ func CXProviderConfigurationFromID(id objc.ID) *CXProviderConfiguration {
 
 func (o *CXProviderConfiguration) Init() *CXProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CXProviderConfigurationFromID(_ret)
 }
 
 // Deprecated: since macOS 11.0.
 func (o *CXProviderConfiguration) InitWithLocalizedName(localizedName *foundation.NSString) *CXProviderConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelInitWithLocalizedName, localizedName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CXProviderConfigurationFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *CXProviderConfiguration) InitWithLocalizedName(localizedName *foundatio
 // Deprecated: No longer supported
 func (o *CXProviderConfiguration) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *CXProviderConfiguration) LocalizedName() *foundation.NSString {
 // Deprecated: No longer supported
 func (o *CXProviderConfiguration) RingtoneSound() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelRingtoneSound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *CXProviderConfiguration) SetRingtoneSound(ringtoneSound *foundation.NSS
 
 func (o *CXProviderConfiguration) IconTemplateImageData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cXProviderConfigurationSelIconTemplateImageData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -145,4 +155,3 @@ func (o *CXProviderConfiguration) SupportedHandleTypes() *foundation.NSSet[*foun
 func (o *CXProviderConfiguration) SetSupportedHandleTypes(supportedHandleTypes *foundation.NSSet[*foundation.NSNumber]) {
 	o.Ptr().Send(_cXProviderConfigurationSelSetSupportedHandleTypes, supportedHandleTypes)
 }
-

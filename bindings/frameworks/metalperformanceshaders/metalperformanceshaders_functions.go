@@ -37,4 +37,3 @@ func MPSSetHeapCacheDuration(cmdBuf metal.MTLCommandBuffer, seconds float64) {
 func MPSSupportsMTLDevice(device metal.MTLDevice) bool {
 	return _fnMPSSupportsMTLDevice(device)
 }
-

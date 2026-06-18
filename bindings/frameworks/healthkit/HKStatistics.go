@@ -16,25 +16,25 @@ type HKStatistics struct {
 }
 
 var (
-	_clsHKStatistics = _objcClass("HKStatistics")
-	_hKStatisticsSelAverageQuantityForSource = objc.RegisterName("averageQuantityForSource:")
-	_hKStatisticsSelAverageQuantity = objc.RegisterName("averageQuantity")
-	_hKStatisticsSelMinimumQuantityForSource = objc.RegisterName("minimumQuantityForSource:")
-	_hKStatisticsSelMinimumQuantity = objc.RegisterName("minimumQuantity")
-	_hKStatisticsSelMaximumQuantityForSource = objc.RegisterName("maximumQuantityForSource:")
-	_hKStatisticsSelMaximumQuantity = objc.RegisterName("maximumQuantity")
-	_hKStatisticsSelMostRecentQuantityForSource = objc.RegisterName("mostRecentQuantityForSource:")
-	_hKStatisticsSelMostRecentQuantity = objc.RegisterName("mostRecentQuantity")
+	_clsHKStatistics                                        = _objcClass("HKStatistics")
+	_hKStatisticsSelAverageQuantityForSource                = objc.RegisterName("averageQuantityForSource:")
+	_hKStatisticsSelAverageQuantity                         = objc.RegisterName("averageQuantity")
+	_hKStatisticsSelMinimumQuantityForSource                = objc.RegisterName("minimumQuantityForSource:")
+	_hKStatisticsSelMinimumQuantity                         = objc.RegisterName("minimumQuantity")
+	_hKStatisticsSelMaximumQuantityForSource                = objc.RegisterName("maximumQuantityForSource:")
+	_hKStatisticsSelMaximumQuantity                         = objc.RegisterName("maximumQuantity")
+	_hKStatisticsSelMostRecentQuantityForSource             = objc.RegisterName("mostRecentQuantityForSource:")
+	_hKStatisticsSelMostRecentQuantity                      = objc.RegisterName("mostRecentQuantity")
 	_hKStatisticsSelMostRecentQuantityDateIntervalForSource = objc.RegisterName("mostRecentQuantityDateIntervalForSource:")
-	_hKStatisticsSelMostRecentQuantityDateInterval = objc.RegisterName("mostRecentQuantityDateInterval")
-	_hKStatisticsSelSumQuantityForSource = objc.RegisterName("sumQuantityForSource:")
-	_hKStatisticsSelSumQuantity = objc.RegisterName("sumQuantity")
-	_hKStatisticsSelDuration = objc.RegisterName("duration")
-	_hKStatisticsSelDurationForSource = objc.RegisterName("durationForSource:")
-	_hKStatisticsSelQuantityType = objc.RegisterName("quantityType")
-	_hKStatisticsSelStartDate = objc.RegisterName("startDate")
-	_hKStatisticsSelEndDate = objc.RegisterName("endDate")
-	_hKStatisticsSelSources = objc.RegisterName("sources")
+	_hKStatisticsSelMostRecentQuantityDateInterval          = objc.RegisterName("mostRecentQuantityDateInterval")
+	_hKStatisticsSelSumQuantityForSource                    = objc.RegisterName("sumQuantityForSource:")
+	_hKStatisticsSelSumQuantity                             = objc.RegisterName("sumQuantity")
+	_hKStatisticsSelDuration                                = objc.RegisterName("duration")
+	_hKStatisticsSelDurationForSource                       = objc.RegisterName("durationForSource:")
+	_hKStatisticsSelQuantityType                            = objc.RegisterName("quantityType")
+	_hKStatisticsSelStartDate                               = objc.RegisterName("startDate")
+	_hKStatisticsSelEndDate                                 = objc.RegisterName("endDate")
+	_hKStatisticsSelSources                                 = objc.RegisterName("sources")
 )
 
 func HKStatisticsFromID(id objc.ID) *HKStatistics {
@@ -50,122 +50,157 @@ func HKStatisticsFromID(id objc.ID) *HKStatistics {
 // @method        averageQuantityForSource: @abstract      Returns the average quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) AverageQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelAverageQuantityForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        averageQuantity @abstract      Returns the average quantity in the time period represented by the receiver.
 func (o *HKStatistics) AverageQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelAverageQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        minimumQuantityForSource: @abstract      Returns the minimum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) MinimumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMinimumQuantityForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        minimumQuantity @abstract      Returns the minimum quantity in the time period represented by the receiver.
 func (o *HKStatistics) MinimumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMinimumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        maximumQuantityForSource: @abstract      Returns the maximum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) MaximumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMaximumQuantityForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        maximumQuantity @abstract      Returns the maximum quantity in the time period represented by the receiver.
 func (o *HKStatistics) MaximumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMaximumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        mostRecentQuantityForSource: @abstract      Returns the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) MostRecentQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        mostRecentQuantity @abstract      Returns the most recent quantity in the time period represented by the receiver.
 func (o *HKStatistics) MostRecentQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        mostRecentQuantityDateIntervalForSource: @abstract      Returns the date interval of the most recent quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) MostRecentQuantityDateIntervalForSource(source *HKSource) *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityDateIntervalForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
 // @method        mostRecentQuantityDateInterval @abstract      Returns the date interval of the most recent quantity in the time period represented by the receiver.
 func (o *HKStatistics) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelMostRecentQuantityDateInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
 // @method        sumQuantityForSource: @abstract      Returns the sum quantity for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) SumQuantityForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelSumQuantityForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        sumQuantity @abstract      Returns the sum of quantities in the time period represented by the receiver.
 func (o *HKStatistics) SumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelSumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // Total duration (in seconds) covered by the samples represented by these statistics. Only present if HKStatisticsOptionDuration is is specified. @method        duration @abstract      Total duration, as a time-unit compatible quantity, covered by the samples represented by these statistics. @discussion    Only present if HKStatisticsOptionDuration is is specified.
 func (o *HKStatistics) Duration() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @method        durationForSource: @abstract      Returns the duration, as a time-unit compatible quantity, for the given source in the time period represented by the receiver. @discussion    If HKStatisticsOptionSeparateBySource is not specified, then this will always be nil.
 func (o *HKStatistics) DurationForSource(source *HKSource) *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelDurationForSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 func (o *HKStatistics) QuantityType() *HKQuantityType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelQuantityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityTypeFromID(_ret)
 }
 
 func (o *HKStatistics) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *HKStatistics) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *HKStatistics) Sources() *foundation.NSArray[*HKSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsSelSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKSource](_ret)
 }
-

@@ -15,7 +15,9 @@ type SymbolMagicReplaceContentTransition struct {
 }
 
 // Unwrap returns the underlying [raw.NSSymbolMagicReplaceContentTransition].
-func (x *SymbolMagicReplaceContentTransition) Unwrap() *raw.NSSymbolMagicReplaceContentTransition { return x.inner }
+func (x *SymbolMagicReplaceContentTransition) Unwrap() *raw.NSSymbolMagicReplaceContentTransition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewSymbolMagicReplaceContentTransition() *SymbolMagicReplaceContentTransiti
 	return &SymbolMagicReplaceContentTransition{inner: raw.NSSymbolMagicReplaceContentTransitionFromID(_id)}
 }
 
-func (x *SymbolMagicReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
+func (x *SymbolMagicReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
+	return &x.inner.NSSymbolContentTransition
+}
 
 // SymbolMagicReplaceContentTransitionable is the interface implemented by [SymbolMagicReplaceContentTransition], for mocking and DI.
 type SymbolMagicReplaceContentTransitionable interface {
@@ -43,4 +47,3 @@ type SymbolMagicReplaceContentTransitionable interface {
 }
 
 var _ SymbolMagicReplaceContentTransitionable = (*SymbolMagicReplaceContentTransition)(nil)
-

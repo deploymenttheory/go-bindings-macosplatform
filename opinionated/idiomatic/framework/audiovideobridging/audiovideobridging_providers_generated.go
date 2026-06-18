@@ -22,4 +22,3 @@ type AVB1722ControlInterfaceProvider interface {
 type InterfaceProvider interface {
 	asInterface() *raw.AVBInterface
 }
-

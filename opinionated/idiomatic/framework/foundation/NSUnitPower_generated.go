@@ -54,4 +54,3 @@ type UnitPowerable interface {
 }
 
 var _ UnitPowerable = (*UnitPower)(nil)
-

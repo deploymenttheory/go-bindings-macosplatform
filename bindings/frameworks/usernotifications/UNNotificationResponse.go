@@ -16,8 +16,8 @@ type UNNotificationResponse struct {
 }
 
 var (
-	_clsUNNotificationResponse = _objcClass("UNNotificationResponse")
-	_uNNotificationResponseSelNotification = objc.RegisterName("notification")
+	_clsUNNotificationResponse                 = _objcClass("UNNotificationResponse")
+	_uNNotificationResponseSelNotification     = objc.RegisterName("notification")
 	_uNNotificationResponseSelActionIdentifier = objc.RegisterName("actionIdentifier")
 )
 
@@ -33,13 +33,16 @@ func UNNotificationResponseFromID(id objc.ID) *UNNotificationResponse {
 
 func (o *UNNotificationResponse) Notification() *UNNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationResponseSelNotification)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationFromID(_ret)
 }
 
 func (o *UNNotificationResponse) ActionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationResponseSelActionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

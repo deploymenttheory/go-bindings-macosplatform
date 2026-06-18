@@ -15,10 +15,10 @@ type VNDetectFaceLandmarksRequest struct {
 }
 
 var (
-	_clsVNDetectFaceLandmarksRequest = _objcClass("VNDetectFaceLandmarksRequest")
+	_clsVNDetectFaceLandmarksRequest                              = _objcClass("VNDetectFaceLandmarksRequest")
 	_vNDetectFaceLandmarksRequestSelRevisionSupportsConstellation = objc.RegisterName("revision:supportsConstellation:")
-	_vNDetectFaceLandmarksRequestSelConstellation = objc.RegisterName("constellation")
-	_vNDetectFaceLandmarksRequestSelSetConstellation = objc.RegisterName("setConstellation:")
+	_vNDetectFaceLandmarksRequestSelConstellation                 = objc.RegisterName("constellation")
+	_vNDetectFaceLandmarksRequestSelSetConstellation              = objc.RegisterName("setConstellation:")
 )
 
 func VNDetectFaceLandmarksRequestFromID(id objc.ID) *VNDetectFaceLandmarksRequest {
@@ -45,4 +45,3 @@ func (o *VNDetectFaceLandmarksRequest) Constellation() VNRequestFaceLandmarksCon
 func (o *VNDetectFaceLandmarksRequest) SetConstellation(constellation VNRequestFaceLandmarksConstellation) {
 	o.Ptr().Send(_vNDetectFaceLandmarksRequestSelSetConstellation, constellation)
 }
-

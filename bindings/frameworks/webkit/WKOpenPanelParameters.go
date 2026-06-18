@@ -16,9 +16,9 @@ type WKOpenPanelParameters struct {
 }
 
 var (
-	_clsWKOpenPanelParameters = _objcClass("WKOpenPanelParameters")
+	_clsWKOpenPanelParameters                        = _objcClass("WKOpenPanelParameters")
 	_wKOpenPanelParametersSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_wKOpenPanelParametersSelAllowsDirectories = objc.RegisterName("allowsDirectories")
+	_wKOpenPanelParametersSelAllowsDirectories       = objc.RegisterName("allowsDirectories")
 )
 
 func WKOpenPanelParametersFromID(id objc.ID) *WKOpenPanelParameters {
@@ -42,4 +42,3 @@ func (o *WKOpenPanelParameters) AllowsDirectories() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKOpenPanelParametersSelAllowsDirectories)
 	return _ret
 }
-

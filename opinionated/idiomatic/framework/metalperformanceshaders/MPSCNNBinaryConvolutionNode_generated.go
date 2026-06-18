@@ -69,9 +69,13 @@ func (x *CNNBinaryConvolutionNode) WithLabel(label string) *CNNBinaryConvolution
 	return x
 }
 
-func (x *CNNBinaryConvolutionNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode { return &x.inner.MPSCNNConvolutionNode }
+func (x *CNNBinaryConvolutionNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode {
+	return &x.inner.MPSCNNConvolutionNode
+}
 
-func (x *CNNBinaryConvolutionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode }
+func (x *CNNBinaryConvolutionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode
+}
 
 // CNNBinaryConvolutionNodeable is the interface implemented by [CNNBinaryConvolutionNode], for mocking and DI.
 type CNNBinaryConvolutionNodeable interface {
@@ -83,4 +87,3 @@ type CNNBinaryConvolutionNodeable interface {
 }
 
 var _ CNNBinaryConvolutionNodeable = (*CNNBinaryConvolutionNode)(nil)
-

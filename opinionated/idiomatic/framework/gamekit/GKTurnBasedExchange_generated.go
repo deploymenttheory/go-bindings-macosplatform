@@ -167,4 +167,3 @@ type TurnBasedExchangeable interface {
 }
 
 var _ TurnBasedExchangeable = (*TurnBasedExchange)(nil)
-

@@ -18,10 +18,10 @@ type MTRAccessControlClusterReviewFabricRestrictionsResponseParams struct {
 }
 
 var (
-	_clsMTRAccessControlClusterReviewFabricRestrictionsResponseParams = _objcClass("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")
+	_clsMTRAccessControlClusterReviewFabricRestrictionsResponseParams                           = _objcClass("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")
 	_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelToken = objc.RegisterName("token")
-	_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelSetToken = objc.RegisterName("setToken:")
+	_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelToken                      = objc.RegisterName("token")
+	_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelSetToken                   = objc.RegisterName("setToken:")
 )
 
 func MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
@@ -38,7 +38,9 @@ func MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id objc
 func (o *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) InitWith
 
 func (o *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) SetToken(token *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterReviewFabricRestrictionsResponseParamsSelSetToken, token.Ptr())
 }
-

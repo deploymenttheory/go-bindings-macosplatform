@@ -19,7 +19,9 @@ type MTRBaseClusterTemperatureControl struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterTemperatureControl].
-func (x *MTRBaseClusterTemperatureControl) Unwrap() *raw.MTRBaseClusterTemperatureControl { return x.inner }
+func (x *MTRBaseClusterTemperatureControl) Unwrap() *raw.MTRBaseClusterTemperatureControl {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -426,9 +428,13 @@ func (x *MTRBaseClusterTemperatureControl) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-func (x *MTRBaseClusterTemperatureControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTemperatureControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTemperatureControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTemperatureControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTemperatureControlable is the interface implemented by [MTRBaseClusterTemperatureControl], for mocking and DI.
 type MTRBaseClusterTemperatureControlable interface {
@@ -460,4 +466,3 @@ type MTRBaseClusterTemperatureControlable interface {
 }
 
 var _ MTRBaseClusterTemperatureControlable = (*MTRBaseClusterTemperatureControl)(nil)
-

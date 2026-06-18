@@ -16,9 +16,9 @@ type PHASEMixer struct {
 }
 
 var (
-	_clsPHASEMixer = _objcClass("PHASEMixer")
-	_pHASEMixerSelIdentifier = objc.RegisterName("identifier")
-	_pHASEMixerSelGain = objc.RegisterName("gain")
+	_clsPHASEMixer                  = _objcClass("PHASEMixer")
+	_pHASEMixerSelIdentifier        = objc.RegisterName("identifier")
+	_pHASEMixerSelGain              = objc.RegisterName("gain")
 	_pHASEMixerSelGainMetaParameter = objc.RegisterName("gainMetaParameter")
 )
 
@@ -35,7 +35,9 @@ func PHASEMixerFromID(id objc.ID) *PHASEMixer {
 // @property identifier @abstract The identifier that uniquely represents this mixer.
 func (o *PHASEMixer) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMixerSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *PHASEMixer) Gain() float64 {
 // @property gainMetaParameter @abstract The metaparameter that can be used to adjust the gain during playback
 func (o *PHASEMixer) GainMetaParameter() *PHASEMetaParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMixerSelGainMetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMetaParameterFromID(_ret)
 }
-

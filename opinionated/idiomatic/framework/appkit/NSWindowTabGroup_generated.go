@@ -130,4 +130,3 @@ type WindowTabGroupable interface {
 }
 
 var _ WindowTabGroupable = (*WindowTabGroup)(nil)
-

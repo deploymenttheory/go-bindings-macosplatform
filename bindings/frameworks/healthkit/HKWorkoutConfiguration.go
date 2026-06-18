@@ -16,15 +16,15 @@ type HKWorkoutConfiguration struct {
 }
 
 var (
-	_clsHKWorkoutConfiguration = _objcClass("HKWorkoutConfiguration")
-	_hKWorkoutConfigurationSelActivityType = objc.RegisterName("activityType")
-	_hKWorkoutConfigurationSelSetActivityType = objc.RegisterName("setActivityType:")
-	_hKWorkoutConfigurationSelLocationType = objc.RegisterName("locationType")
-	_hKWorkoutConfigurationSelSetLocationType = objc.RegisterName("setLocationType:")
-	_hKWorkoutConfigurationSelSwimmingLocationType = objc.RegisterName("swimmingLocationType")
+	_clsHKWorkoutConfiguration                        = _objcClass("HKWorkoutConfiguration")
+	_hKWorkoutConfigurationSelActivityType            = objc.RegisterName("activityType")
+	_hKWorkoutConfigurationSelSetActivityType         = objc.RegisterName("setActivityType:")
+	_hKWorkoutConfigurationSelLocationType            = objc.RegisterName("locationType")
+	_hKWorkoutConfigurationSelSetLocationType         = objc.RegisterName("setLocationType:")
+	_hKWorkoutConfigurationSelSwimmingLocationType    = objc.RegisterName("swimmingLocationType")
 	_hKWorkoutConfigurationSelSetSwimmingLocationType = objc.RegisterName("setSwimmingLocationType:")
-	_hKWorkoutConfigurationSelLapLength = objc.RegisterName("lapLength")
-	_hKWorkoutConfigurationSelSetLapLength = objc.RegisterName("setLapLength:")
+	_hKWorkoutConfigurationSelLapLength               = objc.RegisterName("lapLength")
+	_hKWorkoutConfigurationSelSetLapLength            = objc.RegisterName("setLapLength:")
 )
 
 func HKWorkoutConfigurationFromID(id objc.ID) *HKWorkoutConfiguration {
@@ -70,11 +70,12 @@ func (o *HKWorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType HK
 // @property      lapLength @abstract      Indicates the length of the pool, when the workout location type is pool. @discussion    This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
 func (o *HKWorkoutConfiguration) LapLength() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutConfigurationSelLapLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 func (o *HKWorkoutConfiguration) SetLapLength(lapLength *HKQuantity) {
 	o.Ptr().Send(_hKWorkoutConfigurationSelSetLapLength, lapLength.Ptr())
 }
-

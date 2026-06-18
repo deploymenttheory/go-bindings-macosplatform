@@ -18,15 +18,15 @@ type STWebHistory struct {
 }
 
 var (
-	_clsSTWebHistory = _objcClass("STWebHistory")
+	_clsSTWebHistory                                               = _objcClass("STWebHistory")
 	_sTWebHistorySelInitWithBundleIdentifierProfileIdentifierError = objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:")
-	_sTWebHistorySelInitWithProfileIdentifier = objc.RegisterName("initWithProfileIdentifier:")
-	_sTWebHistorySelInitWithBundleIdentifierError = objc.RegisterName("initWithBundleIdentifier:error:")
-	_sTWebHistorySelFetchHistoryDuringIntervalCompletionHandler = objc.RegisterName("fetchHistoryDuringInterval:completionHandler:")
-	_sTWebHistorySelFetchAllHistoryWithCompletionHandler = objc.RegisterName("fetchAllHistoryWithCompletionHandler:")
-	_sTWebHistorySelDeleteHistoryForURL = objc.RegisterName("deleteHistoryForURL:")
-	_sTWebHistorySelDeleteHistoryDuringInterval = objc.RegisterName("deleteHistoryDuringInterval:")
-	_sTWebHistorySelDeleteAllHistory = objc.RegisterName("deleteAllHistory")
+	_sTWebHistorySelInitWithProfileIdentifier                      = objc.RegisterName("initWithProfileIdentifier:")
+	_sTWebHistorySelInitWithBundleIdentifierError                  = objc.RegisterName("initWithBundleIdentifier:error:")
+	_sTWebHistorySelFetchHistoryDuringIntervalCompletionHandler    = objc.RegisterName("fetchHistoryDuringInterval:completionHandler:")
+	_sTWebHistorySelFetchAllHistoryWithCompletionHandler           = objc.RegisterName("fetchAllHistoryWithCompletionHandler:")
+	_sTWebHistorySelDeleteHistoryForURL                            = objc.RegisterName("deleteHistoryForURL:")
+	_sTWebHistorySelDeleteHistoryDuringInterval                    = objc.RegisterName("deleteHistoryDuringInterval:")
+	_sTWebHistorySelDeleteAllHistory                               = objc.RegisterName("deleteAllHistory")
 )
 
 func STWebHistoryFromID(id objc.ID) *STWebHistory {
@@ -43,7 +43,9 @@ func STWebHistoryFromID(id objc.ID) *STWebHistory {
 func (o *STWebHistory) InitWithBundleIdentifierProfileIdentifierError(bundleIdentifier *foundation.NSString, profileIdentifier *foundation.NSString) (*STWebHistory, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierProfileIdentifierError, bundleIdentifier.Ptr(), profileIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *STWebHistory) InitWithBundleIdentifierProfileIdentifierError(bundleIden
 // Creates a web history instance to delete web-usage data associated to the profile identifier you specify. The default value for `profileIdentifier` is `nil`. This identifier can be used to delete browsing history for a specific profile. Using `nil` will only delete web history reported without a profile identifier. - Parameters: - profileIdentifier: The identifier of the current browsing profile.
 func (o *STWebHistory) InitWithProfileIdentifier(profileIdentifier *foundation.NSString) *STWebHistory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithProfileIdentifier, profileIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return STWebHistoryFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *STWebHistory) InitWithProfileIdentifier(profileIdentifier *foundation.N
 func (o *STWebHistory) InitWithBundleIdentifierError(bundleIdentifier *foundation.NSString) (*STWebHistory, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sTWebHistorySelInitWithBundleIdentifierError, bundleIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -92,4 +98,3 @@ func (o *STWebHistory) DeleteHistoryDuringInterval(interval *foundation.NSDateIn
 func (o *STWebHistory) DeleteAllHistory() {
 	o.Ptr().Send(_sTWebHistorySelDeleteAllHistory)
 }
-

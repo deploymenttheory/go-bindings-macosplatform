@@ -26,4 +26,3 @@ func MKLookAroundSceneFromID(id objc.ID) *MKLookAroundScene {
 	purego.Track(o)
 	return o
 }
-

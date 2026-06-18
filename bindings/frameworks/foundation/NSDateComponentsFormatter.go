@@ -15,33 +15,33 @@ type NSDateComponentsFormatter struct {
 }
 
 var (
-	_clsNSDateComponentsFormatter = _objcClass("NSDateComponentsFormatter")
-	_nSDateComponentsFormatterSelStringFromDateComponents = objc.RegisterName("stringFromDateComponents:")
-	_nSDateComponentsFormatterSelStringFromDateToDate = objc.RegisterName("stringFromDate:toDate:")
-	_nSDateComponentsFormatterSelStringFromTimeInterval = objc.RegisterName("stringFromTimeInterval:")
+	_clsNSDateComponentsFormatter                                            = _objcClass("NSDateComponentsFormatter")
+	_nSDateComponentsFormatterSelStringFromDateComponents                    = objc.RegisterName("stringFromDateComponents:")
+	_nSDateComponentsFormatterSelStringFromDateToDate                        = objc.RegisterName("stringFromDate:toDate:")
+	_nSDateComponentsFormatterSelStringFromTimeInterval                      = objc.RegisterName("stringFromTimeInterval:")
 	_nSDateComponentsFormatterSelLocalizedStringFromDateComponentsUnitsStyle = objc.RegisterName("localizedStringFromDateComponents:unitsStyle:")
-	_nSDateComponentsFormatterSelUnitsStyle = objc.RegisterName("unitsStyle")
-	_nSDateComponentsFormatterSelSetUnitsStyle = objc.RegisterName("setUnitsStyle:")
-	_nSDateComponentsFormatterSelAllowedUnits = objc.RegisterName("allowedUnits")
-	_nSDateComponentsFormatterSelSetAllowedUnits = objc.RegisterName("setAllowedUnits:")
-	_nSDateComponentsFormatterSelZeroFormattingBehavior = objc.RegisterName("zeroFormattingBehavior")
-	_nSDateComponentsFormatterSelSetZeroFormattingBehavior = objc.RegisterName("setZeroFormattingBehavior:")
-	_nSDateComponentsFormatterSelCalendar = objc.RegisterName("calendar")
-	_nSDateComponentsFormatterSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSDateComponentsFormatterSelReferenceDate = objc.RegisterName("referenceDate")
-	_nSDateComponentsFormatterSelSetReferenceDate = objc.RegisterName("setReferenceDate:")
-	_nSDateComponentsFormatterSelAllowsFractionalUnits = objc.RegisterName("allowsFractionalUnits")
-	_nSDateComponentsFormatterSelSetAllowsFractionalUnits = objc.RegisterName("setAllowsFractionalUnits:")
-	_nSDateComponentsFormatterSelMaximumUnitCount = objc.RegisterName("maximumUnitCount")
-	_nSDateComponentsFormatterSelSetMaximumUnitCount = objc.RegisterName("setMaximumUnitCount:")
-	_nSDateComponentsFormatterSelCollapsesLargestUnit = objc.RegisterName("collapsesLargestUnit")
-	_nSDateComponentsFormatterSelSetCollapsesLargestUnit = objc.RegisterName("setCollapsesLargestUnit:")
-	_nSDateComponentsFormatterSelIncludesApproximationPhrase = objc.RegisterName("includesApproximationPhrase")
-	_nSDateComponentsFormatterSelSetIncludesApproximationPhrase = objc.RegisterName("setIncludesApproximationPhrase:")
-	_nSDateComponentsFormatterSelIncludesTimeRemainingPhrase = objc.RegisterName("includesTimeRemainingPhrase")
-	_nSDateComponentsFormatterSelSetIncludesTimeRemainingPhrase = objc.RegisterName("setIncludesTimeRemainingPhrase:")
-	_nSDateComponentsFormatterSelFormattingContext = objc.RegisterName("formattingContext")
-	_nSDateComponentsFormatterSelSetFormattingContext = objc.RegisterName("setFormattingContext:")
+	_nSDateComponentsFormatterSelUnitsStyle                                  = objc.RegisterName("unitsStyle")
+	_nSDateComponentsFormatterSelSetUnitsStyle                               = objc.RegisterName("setUnitsStyle:")
+	_nSDateComponentsFormatterSelAllowedUnits                                = objc.RegisterName("allowedUnits")
+	_nSDateComponentsFormatterSelSetAllowedUnits                             = objc.RegisterName("setAllowedUnits:")
+	_nSDateComponentsFormatterSelZeroFormattingBehavior                      = objc.RegisterName("zeroFormattingBehavior")
+	_nSDateComponentsFormatterSelSetZeroFormattingBehavior                   = objc.RegisterName("setZeroFormattingBehavior:")
+	_nSDateComponentsFormatterSelCalendar                                    = objc.RegisterName("calendar")
+	_nSDateComponentsFormatterSelSetCalendar                                 = objc.RegisterName("setCalendar:")
+	_nSDateComponentsFormatterSelReferenceDate                               = objc.RegisterName("referenceDate")
+	_nSDateComponentsFormatterSelSetReferenceDate                            = objc.RegisterName("setReferenceDate:")
+	_nSDateComponentsFormatterSelAllowsFractionalUnits                       = objc.RegisterName("allowsFractionalUnits")
+	_nSDateComponentsFormatterSelSetAllowsFractionalUnits                    = objc.RegisterName("setAllowsFractionalUnits:")
+	_nSDateComponentsFormatterSelMaximumUnitCount                            = objc.RegisterName("maximumUnitCount")
+	_nSDateComponentsFormatterSelSetMaximumUnitCount                         = objc.RegisterName("setMaximumUnitCount:")
+	_nSDateComponentsFormatterSelCollapsesLargestUnit                        = objc.RegisterName("collapsesLargestUnit")
+	_nSDateComponentsFormatterSelSetCollapsesLargestUnit                     = objc.RegisterName("setCollapsesLargestUnit:")
+	_nSDateComponentsFormatterSelIncludesApproximationPhrase                 = objc.RegisterName("includesApproximationPhrase")
+	_nSDateComponentsFormatterSelSetIncludesApproximationPhrase              = objc.RegisterName("setIncludesApproximationPhrase:")
+	_nSDateComponentsFormatterSelIncludesTimeRemainingPhrase                 = objc.RegisterName("includesTimeRemainingPhrase")
+	_nSDateComponentsFormatterSelSetIncludesTimeRemainingPhrase              = objc.RegisterName("setIncludesTimeRemainingPhrase:")
+	_nSDateComponentsFormatterSelFormattingContext                           = objc.RegisterName("formattingContext")
+	_nSDateComponentsFormatterSelSetFormattingContext                        = objc.RegisterName("setFormattingContext:")
 )
 
 func NSDateComponentsFormatterFromID(id objc.ID) *NSDateComponentsFormatter {
@@ -56,25 +56,33 @@ func NSDateComponentsFormatterFromID(id objc.ID) *NSDateComponentsFormatter {
 
 func (o *NSDateComponentsFormatter) StringFromDateComponents(components *NSDateComponents) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromDateComponents, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSDateComponentsFormatter) StringFromDateToDate(startDate *NSDate, endDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromDateToDate, startDate.Ptr(), endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSDateComponentsFormatter) StringFromTimeInterval(ti float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelStringFromTimeInterval, ti)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(components *NSDateComponents, unitsStyle NSDateComponentsFormatterUnitsStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDateComponentsFormatter), _nSDateComponentsFormatterSelLocalizedStringFromDateComponentsUnitsStyle, components.Ptr(), unitsStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *NSDateComponentsFormatter) SetZeroFormattingBehavior(zeroFormattingBeha
 
 func (o *NSDateComponentsFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -117,7 +127,9 @@ func (o *NSDateComponentsFormatter) SetCalendar(calendar *NSCalendar) {
 
 func (o *NSDateComponentsFormatter) ReferenceDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsFormatterSelReferenceDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -178,4 +190,3 @@ func (o *NSDateComponentsFormatter) FormattingContext() NSFormattingContext {
 func (o *NSDateComponentsFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
 	o.Ptr().Send(_nSDateComponentsFormatterSelSetFormattingContext, formattingContext)
 }
-

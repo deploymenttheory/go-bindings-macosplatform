@@ -25,4 +25,3 @@ func MTRMediaPlaybackClusterStopPlaybackParamsFromID(id objc.ID) *MTRMediaPlayba
 	purego.Track(o)
 	return o
 }
-

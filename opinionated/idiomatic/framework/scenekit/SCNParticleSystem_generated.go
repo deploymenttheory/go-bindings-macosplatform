@@ -340,7 +340,9 @@ func (x *ParticleSystem) WithColliderNodes(items ...NodeProvider) *ParticleSyste
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNode().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNode().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNNode](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -1323,4 +1325,3 @@ type ParticleSystemable interface {
 }
 
 var _ ParticleSystemable = (*ParticleSystem)(nil)
-

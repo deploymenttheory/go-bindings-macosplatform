@@ -79,4 +79,3 @@ type MonteCarloStrategistable interface {
 }
 
 var _ MonteCarloStrategistable = (*MonteCarloStrategist)(nil)
-

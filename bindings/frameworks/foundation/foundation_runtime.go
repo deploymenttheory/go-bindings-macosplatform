@@ -14,7 +14,7 @@ import (
 
 var (
 	_foundationLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -60,10 +60,18 @@ func _loadLibrary() {
 	_register("NSCompareHashTables", func() { purego.RegisterLibFunc(&_fnNSCompareHashTables, _foundationLib, "NSCompareHashTables") })
 	_register("NSCompareMapTables", func() { purego.RegisterLibFunc(&_fnNSCompareMapTables, _foundationLib, "NSCompareMapTables") })
 	_register("NSContainsRect", func() { purego.RegisterLibFunc(&_fnNSContainsRect, _foundationLib, "NSContainsRect") })
-	_register("NSConvertHostDoubleToSwapped", func() { purego.RegisterLibFunc(&_fnNSConvertHostDoubleToSwapped, _foundationLib, "NSConvertHostDoubleToSwapped") })
-	_register("NSConvertHostFloatToSwapped", func() { purego.RegisterLibFunc(&_fnNSConvertHostFloatToSwapped, _foundationLib, "NSConvertHostFloatToSwapped") })
-	_register("NSConvertSwappedDoubleToHost", func() { purego.RegisterLibFunc(&_fnNSConvertSwappedDoubleToHost, _foundationLib, "NSConvertSwappedDoubleToHost") })
-	_register("NSConvertSwappedFloatToHost", func() { purego.RegisterLibFunc(&_fnNSConvertSwappedFloatToHost, _foundationLib, "NSConvertSwappedFloatToHost") })
+	_register("NSConvertHostDoubleToSwapped", func() {
+		purego.RegisterLibFunc(&_fnNSConvertHostDoubleToSwapped, _foundationLib, "NSConvertHostDoubleToSwapped")
+	})
+	_register("NSConvertHostFloatToSwapped", func() {
+		purego.RegisterLibFunc(&_fnNSConvertHostFloatToSwapped, _foundationLib, "NSConvertHostFloatToSwapped")
+	})
+	_register("NSConvertSwappedDoubleToHost", func() {
+		purego.RegisterLibFunc(&_fnNSConvertSwappedDoubleToHost, _foundationLib, "NSConvertSwappedDoubleToHost")
+	})
+	_register("NSConvertSwappedFloatToHost", func() {
+		purego.RegisterLibFunc(&_fnNSConvertSwappedFloatToHost, _foundationLib, "NSConvertSwappedFloatToHost")
+	})
 	_register("NSCopyHashTableWithZone", func() { purego.RegisterLibFunc(&_fnNSCopyHashTableWithZone, _foundationLib, "NSCopyHashTableWithZone") })
 	_register("NSCopyMapTableWithZone", func() { purego.RegisterLibFunc(&_fnNSCopyMapTableWithZone, _foundationLib, "NSCopyMapTableWithZone") })
 	_register("NSCopyMemoryPages", func() { purego.RegisterLibFunc(&_fnNSCopyMemoryPages, _foundationLib, "NSCopyMemoryPages") })
@@ -71,9 +79,13 @@ func _loadLibrary() {
 	_register("NSCountHashTable", func() { purego.RegisterLibFunc(&_fnNSCountHashTable, _foundationLib, "NSCountHashTable") })
 	_register("NSCountMapTable", func() { purego.RegisterLibFunc(&_fnNSCountMapTable, _foundationLib, "NSCountMapTable") })
 	_register("NSCreateHashTable", func() { purego.RegisterLibFunc(&_fnNSCreateHashTable, _foundationLib, "NSCreateHashTable") })
-	_register("NSCreateHashTableWithZone", func() { purego.RegisterLibFunc(&_fnNSCreateHashTableWithZone, _foundationLib, "NSCreateHashTableWithZone") })
+	_register("NSCreateHashTableWithZone", func() {
+		purego.RegisterLibFunc(&_fnNSCreateHashTableWithZone, _foundationLib, "NSCreateHashTableWithZone")
+	})
 	_register("NSCreateMapTable", func() { purego.RegisterLibFunc(&_fnNSCreateMapTable, _foundationLib, "NSCreateMapTable") })
-	_register("NSCreateMapTableWithZone", func() { purego.RegisterLibFunc(&_fnNSCreateMapTableWithZone, _foundationLib, "NSCreateMapTableWithZone") })
+	_register("NSCreateMapTableWithZone", func() {
+		purego.RegisterLibFunc(&_fnNSCreateMapTableWithZone, _foundationLib, "NSCreateMapTableWithZone")
+	})
 	_register("NSCreateZone", func() { purego.RegisterLibFunc(&_fnNSCreateZone, _foundationLib, "NSCreateZone") })
 	_register("NSDeallocateMemoryPages", func() { purego.RegisterLibFunc(&_fnNSDeallocateMemoryPages, _foundationLib, "NSDeallocateMemoryPages") })
 	_register("NSDeallocateObject", func() { purego.RegisterLibFunc(&_fnNSDeallocateObject, _foundationLib, "NSDeallocateObject") })
@@ -84,19 +96,27 @@ func _loadLibrary() {
 	_register("NSDecimalDivide", func() { purego.RegisterLibFunc(&_fnNSDecimalDivide, _foundationLib, "NSDecimalDivide") })
 	_register("NSDecimalIsNotANumber", func() { purego.RegisterLibFunc(&_fnNSDecimalIsNotANumber, _foundationLib, "NSDecimalIsNotANumber") })
 	_register("NSDecimalMultiply", func() { purego.RegisterLibFunc(&_fnNSDecimalMultiply, _foundationLib, "NSDecimalMultiply") })
-	_register("NSDecimalMultiplyByPowerOf10", func() { purego.RegisterLibFunc(&_fnNSDecimalMultiplyByPowerOf10, _foundationLib, "NSDecimalMultiplyByPowerOf10") })
+	_register("NSDecimalMultiplyByPowerOf10", func() {
+		purego.RegisterLibFunc(&_fnNSDecimalMultiplyByPowerOf10, _foundationLib, "NSDecimalMultiplyByPowerOf10")
+	})
 	_register("NSDecimalNormalize", func() { purego.RegisterLibFunc(&_fnNSDecimalNormalize, _foundationLib, "NSDecimalNormalize") })
 	_register("NSDecimalPower", func() { purego.RegisterLibFunc(&_fnNSDecimalPower, _foundationLib, "NSDecimalPower") })
 	_register("NSDecimalRound", func() { purego.RegisterLibFunc(&_fnNSDecimalRound, _foundationLib, "NSDecimalRound") })
 	_register("NSDecimalString", func() { purego.RegisterLibFunc(&_fnNSDecimalString, _foundationLib, "NSDecimalString") })
 	_register("NSDecimalSubtract", func() { purego.RegisterLibFunc(&_fnNSDecimalSubtract, _foundationLib, "NSDecimalSubtract") })
-	_register("NSDecrementExtraRefCountWasZero", func() { purego.RegisterLibFunc(&_fnNSDecrementExtraRefCountWasZero, _foundationLib, "NSDecrementExtraRefCountWasZero") })
+	_register("NSDecrementExtraRefCountWasZero", func() {
+		purego.RegisterLibFunc(&_fnNSDecrementExtraRefCountWasZero, _foundationLib, "NSDecrementExtraRefCountWasZero")
+	})
 	_register("NSDefaultMallocZone", func() { purego.RegisterLibFunc(&_fnNSDefaultMallocZone, _foundationLib, "NSDefaultMallocZone") })
 	_register("NSDivideRect", func() { purego.RegisterLibFunc(&_fnNSDivideRect, _foundationLib, "NSDivideRect") })
 	_register("NSEdgeInsetsEqual", func() { purego.RegisterLibFunc(&_fnNSEdgeInsetsEqual, _foundationLib, "NSEdgeInsetsEqual") })
 	_register("NSEdgeInsetsMake", func() { purego.RegisterLibFunc(&_fnNSEdgeInsetsMake, _foundationLib, "NSEdgeInsetsMake") })
-	_register("NSEndHashTableEnumeration", func() { purego.RegisterLibFunc(&_fnNSEndHashTableEnumeration, _foundationLib, "NSEndHashTableEnumeration") })
-	_register("NSEndMapTableEnumeration", func() { purego.RegisterLibFunc(&_fnNSEndMapTableEnumeration, _foundationLib, "NSEndMapTableEnumeration") })
+	_register("NSEndHashTableEnumeration", func() {
+		purego.RegisterLibFunc(&_fnNSEndHashTableEnumeration, _foundationLib, "NSEndHashTableEnumeration")
+	})
+	_register("NSEndMapTableEnumeration", func() {
+		purego.RegisterLibFunc(&_fnNSEndMapTableEnumeration, _foundationLib, "NSEndMapTableEnumeration")
+	})
 	_register("NSEnumerateHashTable", func() { purego.RegisterLibFunc(&_fnNSEnumerateHashTable, _foundationLib, "NSEnumerateHashTable") })
 	_register("NSEnumerateMapTable", func() { purego.RegisterLibFunc(&_fnNSEnumerateMapTable, _foundationLib, "NSEnumerateMapTable") })
 	_register("NSEqualPoints", func() { purego.RegisterLibFunc(&_fnNSEqualPoints, _foundationLib, "NSEqualPoints") })
@@ -104,13 +124,19 @@ func _loadLibrary() {
 	_register("NSEqualRects", func() { purego.RegisterLibFunc(&_fnNSEqualRects, _foundationLib, "NSEqualRects") })
 	_register("NSEqualSizes", func() { purego.RegisterLibFunc(&_fnNSEqualSizes, _foundationLib, "NSEqualSizes") })
 	_register("NSExtraRefCount", func() { purego.RegisterLibFunc(&_fnNSExtraRefCount, _foundationLib, "NSExtraRefCount") })
-	_register("NSFileTypeForHFSTypeCode", func() { purego.RegisterLibFunc(&_fnNSFileTypeForHFSTypeCode, _foundationLib, "NSFileTypeForHFSTypeCode") })
+	_register("NSFileTypeForHFSTypeCode", func() {
+		purego.RegisterLibFunc(&_fnNSFileTypeForHFSTypeCode, _foundationLib, "NSFileTypeForHFSTypeCode")
+	})
 	_register("NSFreeHashTable", func() { purego.RegisterLibFunc(&_fnNSFreeHashTable, _foundationLib, "NSFreeHashTable") })
 	_register("NSFreeMapTable", func() { purego.RegisterLibFunc(&_fnNSFreeMapTable, _foundationLib, "NSFreeMapTable") })
 	_register("NSFullUserName", func() { purego.RegisterLibFunc(&_fnNSFullUserName, _foundationLib, "NSFullUserName") })
 	_register("NSGetSizeAndAlignment", func() { purego.RegisterLibFunc(&_fnNSGetSizeAndAlignment, _foundationLib, "NSGetSizeAndAlignment") })
-	_register("NSGetUncaughtExceptionHandler", func() { purego.RegisterLibFunc(&_fnNSGetUncaughtExceptionHandler, _foundationLib, "NSGetUncaughtExceptionHandler") })
-	_register("NSHFSTypeCodeFromFileType", func() { purego.RegisterLibFunc(&_fnNSHFSTypeCodeFromFileType, _foundationLib, "NSHFSTypeCodeFromFileType") })
+	_register("NSGetUncaughtExceptionHandler", func() {
+		purego.RegisterLibFunc(&_fnNSGetUncaughtExceptionHandler, _foundationLib, "NSGetUncaughtExceptionHandler")
+	})
+	_register("NSHFSTypeCodeFromFileType", func() {
+		purego.RegisterLibFunc(&_fnNSHFSTypeCodeFromFileType, _foundationLib, "NSHFSTypeCodeFromFileType")
+	})
 	_register("NSHFSTypeOfFile", func() { purego.RegisterLibFunc(&_fnNSHFSTypeOfFile, _foundationLib, "NSHFSTypeOfFile") })
 	_register("NSHashGet", func() { purego.RegisterLibFunc(&_fnNSHashGet, _foundationLib, "NSHashGet") })
 	_register("NSHashInsert", func() { purego.RegisterLibFunc(&_fnNSHashInsert, _foundationLib, "NSHashInsert") })
@@ -121,10 +147,14 @@ func _loadLibrary() {
 	_register("NSHomeDirectory", func() { purego.RegisterLibFunc(&_fnNSHomeDirectory, _foundationLib, "NSHomeDirectory") })
 	_register("NSHomeDirectoryForUser", func() { purego.RegisterLibFunc(&_fnNSHomeDirectoryForUser, _foundationLib, "NSHomeDirectoryForUser") })
 	_register("NSHostByteOrder", func() { purego.RegisterLibFunc(&_fnNSHostByteOrder, _foundationLib, "NSHostByteOrder") })
-	_register("NSIncrementExtraRefCount", func() { purego.RegisterLibFunc(&_fnNSIncrementExtraRefCount, _foundationLib, "NSIncrementExtraRefCount") })
+	_register("NSIncrementExtraRefCount", func() {
+		purego.RegisterLibFunc(&_fnNSIncrementExtraRefCount, _foundationLib, "NSIncrementExtraRefCount")
+	})
 	_register("NSInsetRect", func() { purego.RegisterLibFunc(&_fnNSInsetRect, _foundationLib, "NSInsetRect") })
 	_register("NSIntegralRect", func() { purego.RegisterLibFunc(&_fnNSIntegralRect, _foundationLib, "NSIntegralRect") })
-	_register("NSIntegralRectWithOptions", func() { purego.RegisterLibFunc(&_fnNSIntegralRectWithOptions, _foundationLib, "NSIntegralRectWithOptions") })
+	_register("NSIntegralRectWithOptions", func() {
+		purego.RegisterLibFunc(&_fnNSIntegralRectWithOptions, _foundationLib, "NSIntegralRectWithOptions")
+	})
 	_register("NSIntersectionRange", func() { purego.RegisterLibFunc(&_fnNSIntersectionRange, _foundationLib, "NSIntersectionRange") })
 	_register("NSIntersectionRect", func() { purego.RegisterLibFunc(&_fnNSIntersectionRect, _foundationLib, "NSIntersectionRect") })
 	_register("NSIntersectsRect", func() { purego.RegisterLibFunc(&_fnNSIntersectsRect, _foundationLib, "NSIntersectsRect") })
@@ -151,7 +181,9 @@ func _loadLibrary() {
 	_register("NSMinX", func() { purego.RegisterLibFunc(&_fnNSMinX, _foundationLib, "NSMinX") })
 	_register("NSMinY", func() { purego.RegisterLibFunc(&_fnNSMinY, _foundationLib, "NSMinY") })
 	_register("NSMouseInRect", func() { purego.RegisterLibFunc(&_fnNSMouseInRect, _foundationLib, "NSMouseInRect") })
-	_register("NSNextHashEnumeratorItem", func() { purego.RegisterLibFunc(&_fnNSNextHashEnumeratorItem, _foundationLib, "NSNextHashEnumeratorItem") })
+	_register("NSNextHashEnumeratorItem", func() {
+		purego.RegisterLibFunc(&_fnNSNextHashEnumeratorItem, _foundationLib, "NSNextHashEnumeratorItem")
+	})
 	_register("NSNextMapEnumeratorPair", func() { purego.RegisterLibFunc(&_fnNSNextMapEnumeratorPair, _foundationLib, "NSNextMapEnumeratorPair") })
 	_register("NSOffsetRect", func() { purego.RegisterLibFunc(&_fnNSOffsetRect, _foundationLib, "NSOffsetRect") })
 	_register("NSOpenStepRootDirectory", func() { purego.RegisterLibFunc(&_fnNSOpenStepRootDirectory, _foundationLib, "NSOpenStepRootDirectory") })
@@ -170,11 +202,19 @@ func _loadLibrary() {
 	_register("NSRecycleZone", func() { purego.RegisterLibFunc(&_fnNSRecycleZone, _foundationLib, "NSRecycleZone") })
 	_register("NSResetHashTable", func() { purego.RegisterLibFunc(&_fnNSResetHashTable, _foundationLib, "NSResetHashTable") })
 	_register("NSResetMapTable", func() { purego.RegisterLibFunc(&_fnNSResetMapTable, _foundationLib, "NSResetMapTable") })
-	_register("NSRoundDownToMultipleOfPageSize", func() { purego.RegisterLibFunc(&_fnNSRoundDownToMultipleOfPageSize, _foundationLib, "NSRoundDownToMultipleOfPageSize") })
-	_register("NSRoundUpToMultipleOfPageSize", func() { purego.RegisterLibFunc(&_fnNSRoundUpToMultipleOfPageSize, _foundationLib, "NSRoundUpToMultipleOfPageSize") })
-	_register("NSSearchPathForDirectoriesInDomains", func() { purego.RegisterLibFunc(&_fnNSSearchPathForDirectoriesInDomains, _foundationLib, "NSSearchPathForDirectoriesInDomains") })
+	_register("NSRoundDownToMultipleOfPageSize", func() {
+		purego.RegisterLibFunc(&_fnNSRoundDownToMultipleOfPageSize, _foundationLib, "NSRoundDownToMultipleOfPageSize")
+	})
+	_register("NSRoundUpToMultipleOfPageSize", func() {
+		purego.RegisterLibFunc(&_fnNSRoundUpToMultipleOfPageSize, _foundationLib, "NSRoundUpToMultipleOfPageSize")
+	})
+	_register("NSSearchPathForDirectoriesInDomains", func() {
+		purego.RegisterLibFunc(&_fnNSSearchPathForDirectoriesInDomains, _foundationLib, "NSSearchPathForDirectoriesInDomains")
+	})
 	_register("NSSelectorFromString", func() { purego.RegisterLibFunc(&_fnNSSelectorFromString, _foundationLib, "NSSelectorFromString") })
-	_register("NSSetUncaughtExceptionHandler", func() { purego.RegisterLibFunc(&_fnNSSetUncaughtExceptionHandler, _foundationLib, "NSSetUncaughtExceptionHandler") })
+	_register("NSSetUncaughtExceptionHandler", func() {
+		purego.RegisterLibFunc(&_fnNSSetUncaughtExceptionHandler, _foundationLib, "NSSetUncaughtExceptionHandler")
+	})
 	_register("NSSetZoneName", func() { purego.RegisterLibFunc(&_fnNSSetZoneName, _foundationLib, "NSSetZoneName") })
 	_register("NSShouldRetainWithZone", func() { purego.RegisterLibFunc(&_fnNSShouldRetainWithZone, _foundationLib, "NSShouldRetainWithZone") })
 	_register("NSSizeFromCGSize", func() { purego.RegisterLibFunc(&_fnNSSizeFromCGSize, _foundationLib, "NSSizeFromCGSize") })
@@ -198,22 +238,30 @@ func _loadLibrary() {
 	_register("NSSwapDouble", func() { purego.RegisterLibFunc(&_fnNSSwapDouble, _foundationLib, "NSSwapDouble") })
 	_register("NSSwapFloat", func() { purego.RegisterLibFunc(&_fnNSSwapFloat, _foundationLib, "NSSwapFloat") })
 	_register("NSSwapHostDoubleToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostDoubleToBig, _foundationLib, "NSSwapHostDoubleToBig") })
-	_register("NSSwapHostDoubleToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostDoubleToLittle, _foundationLib, "NSSwapHostDoubleToLittle") })
+	_register("NSSwapHostDoubleToLittle", func() {
+		purego.RegisterLibFunc(&_fnNSSwapHostDoubleToLittle, _foundationLib, "NSSwapHostDoubleToLittle")
+	})
 	_register("NSSwapHostFloatToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostFloatToBig, _foundationLib, "NSSwapHostFloatToBig") })
 	_register("NSSwapHostFloatToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostFloatToLittle, _foundationLib, "NSSwapHostFloatToLittle") })
 	_register("NSSwapHostIntToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostIntToBig, _foundationLib, "NSSwapHostIntToBig") })
 	_register("NSSwapHostIntToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostIntToLittle, _foundationLib, "NSSwapHostIntToLittle") })
 	_register("NSSwapHostLongLongToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostLongLongToBig, _foundationLib, "NSSwapHostLongLongToBig") })
-	_register("NSSwapHostLongLongToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostLongLongToLittle, _foundationLib, "NSSwapHostLongLongToLittle") })
+	_register("NSSwapHostLongLongToLittle", func() {
+		purego.RegisterLibFunc(&_fnNSSwapHostLongLongToLittle, _foundationLib, "NSSwapHostLongLongToLittle")
+	})
 	_register("NSSwapHostLongToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostLongToBig, _foundationLib, "NSSwapHostLongToBig") })
 	_register("NSSwapHostLongToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostLongToLittle, _foundationLib, "NSSwapHostLongToLittle") })
 	_register("NSSwapHostShortToBig", func() { purego.RegisterLibFunc(&_fnNSSwapHostShortToBig, _foundationLib, "NSSwapHostShortToBig") })
 	_register("NSSwapHostShortToLittle", func() { purego.RegisterLibFunc(&_fnNSSwapHostShortToLittle, _foundationLib, "NSSwapHostShortToLittle") })
 	_register("NSSwapInt", func() { purego.RegisterLibFunc(&_fnNSSwapInt, _foundationLib, "NSSwapInt") })
-	_register("NSSwapLittleDoubleToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleDoubleToHost, _foundationLib, "NSSwapLittleDoubleToHost") })
+	_register("NSSwapLittleDoubleToHost", func() {
+		purego.RegisterLibFunc(&_fnNSSwapLittleDoubleToHost, _foundationLib, "NSSwapLittleDoubleToHost")
+	})
 	_register("NSSwapLittleFloatToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleFloatToHost, _foundationLib, "NSSwapLittleFloatToHost") })
 	_register("NSSwapLittleIntToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleIntToHost, _foundationLib, "NSSwapLittleIntToHost") })
-	_register("NSSwapLittleLongLongToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleLongLongToHost, _foundationLib, "NSSwapLittleLongLongToHost") })
+	_register("NSSwapLittleLongLongToHost", func() {
+		purego.RegisterLibFunc(&_fnNSSwapLittleLongLongToHost, _foundationLib, "NSSwapLittleLongLongToHost")
+	})
 	_register("NSSwapLittleLongToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleLongToHost, _foundationLib, "NSSwapLittleLongToHost") })
 	_register("NSSwapLittleShortToHost", func() { purego.RegisterLibFunc(&_fnNSSwapLittleShortToHost, _foundationLib, "NSSwapLittleShortToHost") })
 	_register("NSSwapLong", func() { purego.RegisterLibFunc(&_fnNSSwapLong, _foundationLib, "NSSwapLong") })

@@ -16,9 +16,9 @@ type MERAWProcessingListElementParameter struct {
 }
 
 var (
-	_clsMERAWProcessingListElementParameter = _objcClass("MERAWProcessingListElementParameter")
+	_clsMERAWProcessingListElementParameter                                 = _objcClass("MERAWProcessingListElementParameter")
 	_mERAWProcessingListElementParameterSelInitWithNameDescriptionElementID = objc.RegisterName("initWithName:description:elementID:")
-	_mERAWProcessingListElementParameterSelListElementID = objc.RegisterName("listElementID")
+	_mERAWProcessingListElementParameterSelListElementID                    = objc.RegisterName("listElementID")
 )
 
 func MERAWProcessingListElementParameterFromID(id objc.ID) *MERAWProcessingListElementParameter {
@@ -33,7 +33,9 @@ func MERAWProcessingListElementParameterFromID(id objc.ID) *MERAWProcessingListE
 
 func (o *MERAWProcessingListElementParameter) InitWithNameDescriptionElementID(name *foundation.NSString, description *foundation.NSString, elementID int) *MERAWProcessingListElementParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingListElementParameterSelInitWithNameDescriptionElementID, name.Ptr(), description.Ptr(), elementID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingListElementParameterFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *MERAWProcessingListElementParameter) ListElementID() int {
 	_ret := objc.Send[int](o.Ptr(), _mERAWProcessingListElementParameterSelListElementID)
 	return _ret
 }
-

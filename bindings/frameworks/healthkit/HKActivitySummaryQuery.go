@@ -18,10 +18,10 @@ type HKActivitySummaryQuery struct {
 }
 
 var (
-	_clsHKActivitySummaryQuery = _objcClass("HKActivitySummaryQuery")
+	_clsHKActivitySummaryQuery                                = _objcClass("HKActivitySummaryQuery")
 	_hKActivitySummaryQuerySelInitWithPredicateResultsHandler = objc.RegisterName("initWithPredicate:resultsHandler:")
-	_hKActivitySummaryQuerySelUpdateHandler = objc.RegisterName("updateHandler")
-	_hKActivitySummaryQuerySelSetUpdateHandler = objc.RegisterName("setUpdateHandler:")
+	_hKActivitySummaryQuerySelUpdateHandler                   = objc.RegisterName("updateHandler")
+	_hKActivitySummaryQuerySelSetUpdateHandler                = objc.RegisterName("setUpdateHandler:")
 )
 
 func HKActivitySummaryQueryFromID(id objc.ID) *HKActivitySummaryQuery {
@@ -50,7 +50,9 @@ func (o *HKActivitySummaryQuery) InitWithPredicateResultsHandler(predicate *foun
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummaryQuerySelInitWithPredicateResultsHandler, predicate.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKActivitySummaryQueryFromID(_ret)
 }
 
@@ -76,4 +78,3 @@ func (o *HKActivitySummaryQuery) SetUpdateHandler(updateHandler func(*HKActivity
 	}
 	o.Ptr().Send(_hKActivitySummaryQuerySelSetUpdateHandler, __block_updateHandler)
 }
-

@@ -16,44 +16,44 @@ type MTLTextureDescriptor struct {
 }
 
 var (
-	_clsMTLTextureDescriptor = _objcClass("MTLTextureDescriptor")
-	_mTLTextureDescriptorSelTexture2DDescriptorWithPixelFormatWidthHeightMipmapped = objc.RegisterName("texture2DDescriptorWithPixelFormat:width:height:mipmapped:")
-	_mTLTextureDescriptorSelTextureCubeDescriptorWithPixelFormatSizeMipmapped = objc.RegisterName("textureCubeDescriptorWithPixelFormat:size:mipmapped:")
+	_clsMTLTextureDescriptor                                                                = _objcClass("MTLTextureDescriptor")
+	_mTLTextureDescriptorSelTexture2DDescriptorWithPixelFormatWidthHeightMipmapped          = objc.RegisterName("texture2DDescriptorWithPixelFormat:width:height:mipmapped:")
+	_mTLTextureDescriptorSelTextureCubeDescriptorWithPixelFormatSizeMipmapped               = objc.RegisterName("textureCubeDescriptorWithPixelFormat:size:mipmapped:")
 	_mTLTextureDescriptorSelTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage = objc.RegisterName("textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage:")
-	_mTLTextureDescriptorSelTextureType = objc.RegisterName("textureType")
-	_mTLTextureDescriptorSelSetTextureType = objc.RegisterName("setTextureType:")
-	_mTLTextureDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
-	_mTLTextureDescriptorSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_mTLTextureDescriptorSelWidth = objc.RegisterName("width")
-	_mTLTextureDescriptorSelSetWidth = objc.RegisterName("setWidth:")
-	_mTLTextureDescriptorSelHeight = objc.RegisterName("height")
-	_mTLTextureDescriptorSelSetHeight = objc.RegisterName("setHeight:")
-	_mTLTextureDescriptorSelDepth = objc.RegisterName("depth")
-	_mTLTextureDescriptorSelSetDepth = objc.RegisterName("setDepth:")
-	_mTLTextureDescriptorSelMipmapLevelCount = objc.RegisterName("mipmapLevelCount")
-	_mTLTextureDescriptorSelSetMipmapLevelCount = objc.RegisterName("setMipmapLevelCount:")
-	_mTLTextureDescriptorSelSampleCount = objc.RegisterName("sampleCount")
-	_mTLTextureDescriptorSelSetSampleCount = objc.RegisterName("setSampleCount:")
-	_mTLTextureDescriptorSelArrayLength = objc.RegisterName("arrayLength")
-	_mTLTextureDescriptorSelSetArrayLength = objc.RegisterName("setArrayLength:")
-	_mTLTextureDescriptorSelResourceOptions = objc.RegisterName("resourceOptions")
-	_mTLTextureDescriptorSelSetResourceOptions = objc.RegisterName("setResourceOptions:")
-	_mTLTextureDescriptorSelCpuCacheMode = objc.RegisterName("cpuCacheMode")
-	_mTLTextureDescriptorSelSetCpuCacheMode = objc.RegisterName("setCpuCacheMode:")
-	_mTLTextureDescriptorSelStorageMode = objc.RegisterName("storageMode")
-	_mTLTextureDescriptorSelSetStorageMode = objc.RegisterName("setStorageMode:")
-	_mTLTextureDescriptorSelHazardTrackingMode = objc.RegisterName("hazardTrackingMode")
-	_mTLTextureDescriptorSelSetHazardTrackingMode = objc.RegisterName("setHazardTrackingMode:")
-	_mTLTextureDescriptorSelUsage = objc.RegisterName("usage")
-	_mTLTextureDescriptorSelSetUsage = objc.RegisterName("setUsage:")
-	_mTLTextureDescriptorSelAllowGPUOptimizedContents = objc.RegisterName("allowGPUOptimizedContents")
-	_mTLTextureDescriptorSelSetAllowGPUOptimizedContents = objc.RegisterName("setAllowGPUOptimizedContents:")
-	_mTLTextureDescriptorSelCompressionType = objc.RegisterName("compressionType")
-	_mTLTextureDescriptorSelSetCompressionType = objc.RegisterName("setCompressionType:")
-	_mTLTextureDescriptorSelSwizzle = objc.RegisterName("swizzle")
-	_mTLTextureDescriptorSelSetSwizzle = objc.RegisterName("setSwizzle:")
-	_mTLTextureDescriptorSelPlacementSparsePageSize = objc.RegisterName("placementSparsePageSize")
-	_mTLTextureDescriptorSelSetPlacementSparsePageSize = objc.RegisterName("setPlacementSparsePageSize:")
+	_mTLTextureDescriptorSelTextureType                                                     = objc.RegisterName("textureType")
+	_mTLTextureDescriptorSelSetTextureType                                                  = objc.RegisterName("setTextureType:")
+	_mTLTextureDescriptorSelPixelFormat                                                     = objc.RegisterName("pixelFormat")
+	_mTLTextureDescriptorSelSetPixelFormat                                                  = objc.RegisterName("setPixelFormat:")
+	_mTLTextureDescriptorSelWidth                                                           = objc.RegisterName("width")
+	_mTLTextureDescriptorSelSetWidth                                                        = objc.RegisterName("setWidth:")
+	_mTLTextureDescriptorSelHeight                                                          = objc.RegisterName("height")
+	_mTLTextureDescriptorSelSetHeight                                                       = objc.RegisterName("setHeight:")
+	_mTLTextureDescriptorSelDepth                                                           = objc.RegisterName("depth")
+	_mTLTextureDescriptorSelSetDepth                                                        = objc.RegisterName("setDepth:")
+	_mTLTextureDescriptorSelMipmapLevelCount                                                = objc.RegisterName("mipmapLevelCount")
+	_mTLTextureDescriptorSelSetMipmapLevelCount                                             = objc.RegisterName("setMipmapLevelCount:")
+	_mTLTextureDescriptorSelSampleCount                                                     = objc.RegisterName("sampleCount")
+	_mTLTextureDescriptorSelSetSampleCount                                                  = objc.RegisterName("setSampleCount:")
+	_mTLTextureDescriptorSelArrayLength                                                     = objc.RegisterName("arrayLength")
+	_mTLTextureDescriptorSelSetArrayLength                                                  = objc.RegisterName("setArrayLength:")
+	_mTLTextureDescriptorSelResourceOptions                                                 = objc.RegisterName("resourceOptions")
+	_mTLTextureDescriptorSelSetResourceOptions                                              = objc.RegisterName("setResourceOptions:")
+	_mTLTextureDescriptorSelCpuCacheMode                                                    = objc.RegisterName("cpuCacheMode")
+	_mTLTextureDescriptorSelSetCpuCacheMode                                                 = objc.RegisterName("setCpuCacheMode:")
+	_mTLTextureDescriptorSelStorageMode                                                     = objc.RegisterName("storageMode")
+	_mTLTextureDescriptorSelSetStorageMode                                                  = objc.RegisterName("setStorageMode:")
+	_mTLTextureDescriptorSelHazardTrackingMode                                              = objc.RegisterName("hazardTrackingMode")
+	_mTLTextureDescriptorSelSetHazardTrackingMode                                           = objc.RegisterName("setHazardTrackingMode:")
+	_mTLTextureDescriptorSelUsage                                                           = objc.RegisterName("usage")
+	_mTLTextureDescriptorSelSetUsage                                                        = objc.RegisterName("setUsage:")
+	_mTLTextureDescriptorSelAllowGPUOptimizedContents                                       = objc.RegisterName("allowGPUOptimizedContents")
+	_mTLTextureDescriptorSelSetAllowGPUOptimizedContents                                    = objc.RegisterName("setAllowGPUOptimizedContents:")
+	_mTLTextureDescriptorSelCompressionType                                                 = objc.RegisterName("compressionType")
+	_mTLTextureDescriptorSelSetCompressionType                                              = objc.RegisterName("setCompressionType:")
+	_mTLTextureDescriptorSelSwizzle                                                         = objc.RegisterName("swizzle")
+	_mTLTextureDescriptorSelSetSwizzle                                                      = objc.RegisterName("setSwizzle:")
+	_mTLTextureDescriptorSelPlacementSparsePageSize                                         = objc.RegisterName("placementSparsePageSize")
+	_mTLTextureDescriptorSelSetPlacementSparsePageSize                                      = objc.RegisterName("setPlacementSparsePageSize:")
 )
 
 func MTLTextureDescriptorFromID(id objc.ID) *MTLTextureDescriptor {
@@ -69,21 +69,27 @@ func MTLTextureDescriptorFromID(id objc.ID) *MTLTextureDescriptor {
 // @method texture2DDescriptorWithPixelFormat:width:height:mipmapped: @abstract Create a TextureDescriptor for a common 2D texture.
 func MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat MTLPixelFormat, width uint, height uint, mipmapped bool) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTexture2DDescriptorWithPixelFormatWidthHeightMipmapped, pixelFormat, width, height, mipmapped)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTextureDescriptorFromID(_ret)
 }
 
 // @method textureCubeDescriptorWithPixelFormat:size:mipmapped: @abstract Create a TextureDescriptor for a common Cube texture.
 func MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat MTLPixelFormat, size uint, mipmapped bool) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTextureCubeDescriptorWithPixelFormatSizeMipmapped, pixelFormat, size, mipmapped)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTextureDescriptorFromID(_ret)
 }
 
 // @method textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage: @abstract Create a TextureDescriptor for a common texture buffer.
 func MTLTextureDescriptorTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat MTLPixelFormat, width uint, resourceOptions MTLResourceOptions, usage MTLTextureUsage) *MTLTextureDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLTextureDescriptor), _mTLTextureDescriptorSelTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage, pixelFormat, width, resourceOptions, usage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTextureDescriptorFromID(_ret)
 }
 
@@ -247,7 +253,7 @@ func (o *MTLTextureDescriptor) SetSwizzle(swizzle MTLTextureSwizzleChannels) {
 	o.Ptr().Send(_mTLTextureDescriptorSelSetSwizzle, swizzle)
 }
 
-// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of ``MTLTexture`` that you assign memory to using a ``MTLHeap`` instance of type ``MTLHeapType/MTLHeapTypePlacement`` and a ``MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize`` at least as large as the ``MTLSparsePageSize`` value you assign to this property. This value is 0 by default.
+// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
 func (o *MTLTextureDescriptor) PlacementSparsePageSize() MTLSparsePageSize {
 	_ret := objc.Send[MTLSparsePageSize](o.Ptr(), _mTLTextureDescriptorSelPlacementSparsePageSize)
 	return _ret
@@ -256,4 +262,3 @@ func (o *MTLTextureDescriptor) PlacementSparsePageSize() MTLSparsePageSize {
 func (o *MTLTextureDescriptor) SetPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) {
 	o.Ptr().Send(_mTLTextureDescriptorSelSetPlacementSparsePageSize, placementSparsePageSize)
 }
-

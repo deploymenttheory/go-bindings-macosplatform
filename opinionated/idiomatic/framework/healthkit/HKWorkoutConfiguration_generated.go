@@ -121,4 +121,3 @@ type WorkoutConfigurationable interface {
 }
 
 var _ WorkoutConfigurationable = (*WorkoutConfiguration)(nil)
-

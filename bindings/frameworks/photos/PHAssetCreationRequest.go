@@ -16,11 +16,11 @@ type PHAssetCreationRequest struct {
 }
 
 var (
-	_clsPHAssetCreationRequest = _objcClass("PHAssetCreationRequest")
-	_pHAssetCreationRequestSelCreationRequestForAsset = objc.RegisterName("creationRequestForAsset")
-	_pHAssetCreationRequestSelSupportsAssetResourceTypes = objc.RegisterName("supportsAssetResourceTypes:")
+	_clsPHAssetCreationRequest                                  = _objcClass("PHAssetCreationRequest")
+	_pHAssetCreationRequestSelCreationRequestForAsset           = objc.RegisterName("creationRequestForAsset")
+	_pHAssetCreationRequestSelSupportsAssetResourceTypes        = objc.RegisterName("supportsAssetResourceTypes:")
 	_pHAssetCreationRequestSelAddResourceWithTypeFileURLOptions = objc.RegisterName("addResourceWithType:fileURL:options:")
-	_pHAssetCreationRequestSelAddResourceWithTypeDataOptions = objc.RegisterName("addResourceWithType:data:options:")
+	_pHAssetCreationRequestSelAddResourceWithTypeDataOptions    = objc.RegisterName("addResourceWithType:data:options:")
 )
 
 func PHAssetCreationRequestFromID(id objc.ID) *PHAssetCreationRequest {
@@ -35,7 +35,9 @@ func PHAssetCreationRequestFromID(id objc.ID) *PHAssetCreationRequest {
 
 func PHAssetCreationRequestCreationRequestForAsset() *PHAssetCreationRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCreationRequest), _pHAssetCreationRequestSelCreationRequestForAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCreationRequestFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *PHAssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAsset
 func (o *PHAssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *PHAssetResourceCreationOptions) {
 	o.Ptr().Send(_pHAssetCreationRequestSelAddResourceWithTypeDataOptions, type_, data.Ptr(), options.Ptr())
 }
-

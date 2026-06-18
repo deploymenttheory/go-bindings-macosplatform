@@ -20,33 +20,33 @@ type MKOverlayPathRenderer struct {
 }
 
 var (
-	_clsMKOverlayPathRenderer = _objcClass("MKOverlayPathRenderer")
-	_mKOverlayPathRendererSelCreatePath = objc.RegisterName("createPath")
-	_mKOverlayPathRendererSelInvalidatePath = objc.RegisterName("invalidatePath")
+	_clsMKOverlayPathRenderer                                          = _objcClass("MKOverlayPathRenderer")
+	_mKOverlayPathRendererSelCreatePath                                = objc.RegisterName("createPath")
+	_mKOverlayPathRendererSelInvalidatePath                            = objc.RegisterName("invalidatePath")
 	_mKOverlayPathRendererSelApplyStrokePropertiesToContextAtZoomScale = objc.RegisterName("applyStrokePropertiesToContext:atZoomScale:")
-	_mKOverlayPathRendererSelApplyFillPropertiesToContextAtZoomScale = objc.RegisterName("applyFillPropertiesToContext:atZoomScale:")
-	_mKOverlayPathRendererSelStrokePathInContext = objc.RegisterName("strokePath:inContext:")
-	_mKOverlayPathRendererSelFillPathInContext = objc.RegisterName("fillPath:inContext:")
-	_mKOverlayPathRendererSelFillColor = objc.RegisterName("fillColor")
-	_mKOverlayPathRendererSelSetFillColor = objc.RegisterName("setFillColor:")
-	_mKOverlayPathRendererSelStrokeColor = objc.RegisterName("strokeColor")
-	_mKOverlayPathRendererSelSetStrokeColor = objc.RegisterName("setStrokeColor:")
-	_mKOverlayPathRendererSelLineWidth = objc.RegisterName("lineWidth")
-	_mKOverlayPathRendererSelSetLineWidth = objc.RegisterName("setLineWidth:")
-	_mKOverlayPathRendererSelLineJoin = objc.RegisterName("lineJoin")
-	_mKOverlayPathRendererSelSetLineJoin = objc.RegisterName("setLineJoin:")
-	_mKOverlayPathRendererSelLineCap = objc.RegisterName("lineCap")
-	_mKOverlayPathRendererSelSetLineCap = objc.RegisterName("setLineCap:")
-	_mKOverlayPathRendererSelMiterLimit = objc.RegisterName("miterLimit")
-	_mKOverlayPathRendererSelSetMiterLimit = objc.RegisterName("setMiterLimit:")
-	_mKOverlayPathRendererSelLineDashPhase = objc.RegisterName("lineDashPhase")
-	_mKOverlayPathRendererSelSetLineDashPhase = objc.RegisterName("setLineDashPhase:")
-	_mKOverlayPathRendererSelLineDashPattern = objc.RegisterName("lineDashPattern")
-	_mKOverlayPathRendererSelSetLineDashPattern = objc.RegisterName("setLineDashPattern:")
-	_mKOverlayPathRendererSelShouldRasterize = objc.RegisterName("shouldRasterize")
-	_mKOverlayPathRendererSelSetShouldRasterize = objc.RegisterName("setShouldRasterize:")
-	_mKOverlayPathRendererSelPath = objc.RegisterName("path")
-	_mKOverlayPathRendererSelSetPath = objc.RegisterName("setPath:")
+	_mKOverlayPathRendererSelApplyFillPropertiesToContextAtZoomScale   = objc.RegisterName("applyFillPropertiesToContext:atZoomScale:")
+	_mKOverlayPathRendererSelStrokePathInContext                       = objc.RegisterName("strokePath:inContext:")
+	_mKOverlayPathRendererSelFillPathInContext                         = objc.RegisterName("fillPath:inContext:")
+	_mKOverlayPathRendererSelFillColor                                 = objc.RegisterName("fillColor")
+	_mKOverlayPathRendererSelSetFillColor                              = objc.RegisterName("setFillColor:")
+	_mKOverlayPathRendererSelStrokeColor                               = objc.RegisterName("strokeColor")
+	_mKOverlayPathRendererSelSetStrokeColor                            = objc.RegisterName("setStrokeColor:")
+	_mKOverlayPathRendererSelLineWidth                                 = objc.RegisterName("lineWidth")
+	_mKOverlayPathRendererSelSetLineWidth                              = objc.RegisterName("setLineWidth:")
+	_mKOverlayPathRendererSelLineJoin                                  = objc.RegisterName("lineJoin")
+	_mKOverlayPathRendererSelSetLineJoin                               = objc.RegisterName("setLineJoin:")
+	_mKOverlayPathRendererSelLineCap                                   = objc.RegisterName("lineCap")
+	_mKOverlayPathRendererSelSetLineCap                                = objc.RegisterName("setLineCap:")
+	_mKOverlayPathRendererSelMiterLimit                                = objc.RegisterName("miterLimit")
+	_mKOverlayPathRendererSelSetMiterLimit                             = objc.RegisterName("setMiterLimit:")
+	_mKOverlayPathRendererSelLineDashPhase                             = objc.RegisterName("lineDashPhase")
+	_mKOverlayPathRendererSelSetLineDashPhase                          = objc.RegisterName("setLineDashPhase:")
+	_mKOverlayPathRendererSelLineDashPattern                           = objc.RegisterName("lineDashPattern")
+	_mKOverlayPathRendererSelSetLineDashPattern                        = objc.RegisterName("setLineDashPattern:")
+	_mKOverlayPathRendererSelShouldRasterize                           = objc.RegisterName("shouldRasterize")
+	_mKOverlayPathRendererSelSetShouldRasterize                        = objc.RegisterName("setShouldRasterize:")
+	_mKOverlayPathRendererSelPath                                      = objc.RegisterName("path")
+	_mKOverlayPathRendererSelSetPath                                   = objc.RegisterName("setPath:")
 )
 
 func MKOverlayPathRendererFromID(id objc.ID) *MKOverlayPathRenderer {
@@ -85,7 +85,9 @@ func (o *MKOverlayPathRenderer) FillPathInContext(path unsafe.Pointer, context_ 
 
 func (o *MKOverlayPathRenderer) FillColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKOverlayPathRendererSelFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -95,7 +97,9 @@ func (o *MKOverlayPathRenderer) SetFillColor(fillColor *appkit.NSColor) {
 
 func (o *MKOverlayPathRenderer) StrokeColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKOverlayPathRendererSelStrokeColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -174,4 +178,3 @@ func (o *MKOverlayPathRenderer) Path() unsafe.Pointer {
 func (o *MKOverlayPathRenderer) SetPath(path unsafe.Pointer) {
 	o.Ptr().Send(_mKOverlayPathRendererSelSetPath, path)
 }
-

@@ -18,12 +18,12 @@ type HKHeartbeatSeriesBuilder struct {
 }
 
 var (
-	_clsHKHeartbeatSeriesBuilder = _objcClass("HKHeartbeatSeriesBuilder")
-	_hKHeartbeatSeriesBuilderSelInitWithHealthStoreDeviceStartDate = objc.RegisterName("initWithHealthStore:device:startDate:")
+	_clsHKHeartbeatSeriesBuilder                                                                        = _objcClass("HKHeartbeatSeriesBuilder")
+	_hKHeartbeatSeriesBuilderSelInitWithHealthStoreDeviceStartDate                                      = objc.RegisterName("initWithHealthStore:device:startDate:")
 	_hKHeartbeatSeriesBuilderSelAddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion = objc.RegisterName("addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion:")
-	_hKHeartbeatSeriesBuilderSelAddMetadataCompletion = objc.RegisterName("addMetadata:completion:")
-	_hKHeartbeatSeriesBuilderSelFinishSeriesWithCompletion = objc.RegisterName("finishSeriesWithCompletion:")
-	_hKHeartbeatSeriesBuilderSelMaximumCount = objc.RegisterName("maximumCount")
+	_hKHeartbeatSeriesBuilderSelAddMetadataCompletion                                                   = objc.RegisterName("addMetadata:completion:")
+	_hKHeartbeatSeriesBuilderSelFinishSeriesWithCompletion                                              = objc.RegisterName("finishSeriesWithCompletion:")
+	_hKHeartbeatSeriesBuilderSelMaximumCount                                                            = objc.RegisterName("maximumCount")
 )
 
 func HKHeartbeatSeriesBuilderFromID(id objc.ID) *HKHeartbeatSeriesBuilder {
@@ -39,7 +39,9 @@ func HKHeartbeatSeriesBuilderFromID(id objc.ID) *HKHeartbeatSeriesBuilder {
 // @method             initWithHealthStore:device:startDate: @abstract           The designated initializer to create an HKHeartbeatSeriesBuilder. @discussion         The HKHealthStore is retained during the life of the object for the saving of the series data and final return of the series sample. @param              healthStore  Specifies the HKHealthStore object to use for building the series. @param              device       The optional device represents the HKDevice from which the data is provided. @param              startDate    The start date of the HKHeartbeatSeriesSample that will be generated.
 func (o *HKHeartbeatSeriesBuilder) InitWithHealthStoreDeviceStartDate(healthStore *HKHealthStore, device *HKDevice, startDate *foundation.NSDate) *HKHeartbeatSeriesBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHeartbeatSeriesBuilderSelInitWithHealthStoreDeviceStartDate, healthStore.Ptr(), device.Ptr(), startDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKHeartbeatSeriesBuilderFromID(_ret)
 }
 
@@ -87,4 +89,3 @@ func HKHeartbeatSeriesBuilderMaximumCount() uint {
 	_ret := objc.Send[uint](objc.ID(_clsHKHeartbeatSeriesBuilder), _hKHeartbeatSeriesBuilderSelMaximumCount)
 	return _ret
 }
-

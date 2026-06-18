@@ -15,20 +15,20 @@ type MPSCNNArithmeticGradient struct {
 }
 
 var (
-	_clsMPSCNNArithmeticGradient = _objcClass("MPSCNNArithmeticGradient")
-	_mPSCNNArithmeticGradientSelPrimaryScale = objc.RegisterName("primaryScale")
-	_mPSCNNArithmeticGradientSelSetPrimaryScale = objc.RegisterName("setPrimaryScale:")
-	_mPSCNNArithmeticGradientSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_mPSCNNArithmeticGradientSelSetSecondaryScale = objc.RegisterName("setSecondaryScale:")
-	_mPSCNNArithmeticGradientSelBias = objc.RegisterName("bias")
-	_mPSCNNArithmeticGradientSelSetBias = objc.RegisterName("setBias:")
-	_mPSCNNArithmeticGradientSelSecondaryStrideInFeatureChannels = objc.RegisterName("secondaryStrideInFeatureChannels")
+	_clsMPSCNNArithmeticGradient                                    = _objcClass("MPSCNNArithmeticGradient")
+	_mPSCNNArithmeticGradientSelPrimaryScale                        = objc.RegisterName("primaryScale")
+	_mPSCNNArithmeticGradientSelSetPrimaryScale                     = objc.RegisterName("setPrimaryScale:")
+	_mPSCNNArithmeticGradientSelSecondaryScale                      = objc.RegisterName("secondaryScale")
+	_mPSCNNArithmeticGradientSelSetSecondaryScale                   = objc.RegisterName("setSecondaryScale:")
+	_mPSCNNArithmeticGradientSelBias                                = objc.RegisterName("bias")
+	_mPSCNNArithmeticGradientSelSetBias                             = objc.RegisterName("setBias:")
+	_mPSCNNArithmeticGradientSelSecondaryStrideInFeatureChannels    = objc.RegisterName("secondaryStrideInFeatureChannels")
 	_mPSCNNArithmeticGradientSelSetSecondaryStrideInFeatureChannels = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
-	_mPSCNNArithmeticGradientSelMinimumValue = objc.RegisterName("minimumValue")
-	_mPSCNNArithmeticGradientSelSetMinimumValue = objc.RegisterName("setMinimumValue:")
-	_mPSCNNArithmeticGradientSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSCNNArithmeticGradientSelSetMaximumValue = objc.RegisterName("setMaximumValue:")
-	_mPSCNNArithmeticGradientSelIsSecondarySourceFilter = objc.RegisterName("isSecondarySourceFilter")
+	_mPSCNNArithmeticGradientSelMinimumValue                        = objc.RegisterName("minimumValue")
+	_mPSCNNArithmeticGradientSelSetMinimumValue                     = objc.RegisterName("setMinimumValue:")
+	_mPSCNNArithmeticGradientSelMaximumValue                        = objc.RegisterName("maximumValue")
+	_mPSCNNArithmeticGradientSelSetMaximumValue                     = objc.RegisterName("setMaximumValue:")
+	_mPSCNNArithmeticGradientSelIsSecondarySourceFilter             = objc.RegisterName("isSecondarySourceFilter")
 )
 
 func MPSCNNArithmeticGradientFromID(id objc.ID) *MPSCNNArithmeticGradient {
@@ -103,4 +103,3 @@ func (o *MPSCNNArithmeticGradient) IsSecondarySourceFilter() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSCNNArithmeticGradientSelIsSecondarySourceFilter)
 	return _ret
 }
-

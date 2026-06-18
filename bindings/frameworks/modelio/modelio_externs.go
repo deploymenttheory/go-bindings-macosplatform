@@ -126,4 +126,3 @@ func KUTTypeUniversalSceneDescriptionMobile() uintptr {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypeUniversalSceneDescriptionMobile")
 	return ptr
 }
-

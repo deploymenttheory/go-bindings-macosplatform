@@ -110,9 +110,13 @@ func (x *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpecte
 	x.inner.ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterSoftwareDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterSoftwareDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterSoftwareDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterSoftwareDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterSoftwareDiagnosticsable is the interface implemented by [MTRClusterSoftwareDiagnostics], for mocking and DI.
 type MTRClusterSoftwareDiagnosticsable interface {
@@ -133,4 +137,3 @@ type MTRClusterSoftwareDiagnosticsable interface {
 }
 
 var _ MTRClusterSoftwareDiagnosticsable = (*MTRClusterSoftwareDiagnostics)(nil)
-

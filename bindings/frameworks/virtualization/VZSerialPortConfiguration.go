@@ -16,8 +16,8 @@ type VZSerialPortConfiguration struct {
 }
 
 var (
-	_clsVZSerialPortConfiguration = _objcClass("VZSerialPortConfiguration")
-	_vZSerialPortConfigurationSelAttachment = objc.RegisterName("attachment")
+	_clsVZSerialPortConfiguration              = _objcClass("VZSerialPortConfiguration")
+	_vZSerialPortConfigurationSelAttachment    = objc.RegisterName("attachment")
 	_vZSerialPortConfigurationSelSetAttachment = objc.RegisterName("setAttachment:")
 )
 
@@ -33,11 +33,12 @@ func VZSerialPortConfigurationFromID(id objc.ID) *VZSerialPortConfiguration {
 
 func (o *VZSerialPortConfiguration) Attachment() *VZSerialPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSerialPortConfigurationSelAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSerialPortAttachmentFromID(_ret)
 }
 
 func (o *VZSerialPortConfiguration) SetAttachment(attachment *VZSerialPortAttachment) {
 	o.Ptr().Send(_vZSerialPortConfigurationSelSetAttachment, attachment.Ptr())
 }
-

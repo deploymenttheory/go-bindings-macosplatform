@@ -58,9 +58,13 @@ func (x *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParame
 	return &StringMetaParameterDefinition{inner: _r}
 }
 
-func (x *SwitchNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
+func (x *SwitchNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition
+}
 
-func (x *SwitchNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *SwitchNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // SwitchNodeDefinitionable is the interface implemented by [SwitchNodeDefinition], for mocking and DI.
 type SwitchNodeDefinitionable interface {
@@ -70,4 +74,3 @@ type SwitchNodeDefinitionable interface {
 }
 
 var _ SwitchNodeDefinitionable = (*SwitchNodeDefinition)(nil)
-

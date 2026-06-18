@@ -85,7 +85,9 @@ func (x *PhysicsBallSocketJoint) SetAnchorB(anchorB raw.SCNVector3) {
 	x.inner.SetAnchorB(anchorB)
 }
 
-func (x *PhysicsBallSocketJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+func (x *PhysicsBallSocketJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
+	return &x.inner.SCNPhysicsBehavior
+}
 
 // PhysicsBallSocketJointable is the interface implemented by [PhysicsBallSocketJoint], for mocking and DI.
 type PhysicsBallSocketJointable interface {
@@ -101,4 +103,3 @@ type PhysicsBallSocketJointable interface {
 }
 
 var _ PhysicsBallSocketJointable = (*PhysicsBallSocketJoint)(nil)
-

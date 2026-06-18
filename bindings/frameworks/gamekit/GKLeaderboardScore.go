@@ -16,14 +16,14 @@ type GKLeaderboardScore struct {
 }
 
 var (
-	_clsGKLeaderboardScore = _objcClass("GKLeaderboardScore")
-	_gKLeaderboardScoreSelPlayer = objc.RegisterName("player")
-	_gKLeaderboardScoreSelSetPlayer = objc.RegisterName("setPlayer:")
-	_gKLeaderboardScoreSelValue = objc.RegisterName("value")
-	_gKLeaderboardScoreSelSetValue = objc.RegisterName("setValue:")
-	_gKLeaderboardScoreSelContext = objc.RegisterName("context")
-	_gKLeaderboardScoreSelSetContext = objc.RegisterName("setContext:")
-	_gKLeaderboardScoreSelLeaderboardID = objc.RegisterName("leaderboardID")
+	_clsGKLeaderboardScore                 = _objcClass("GKLeaderboardScore")
+	_gKLeaderboardScoreSelPlayer           = objc.RegisterName("player")
+	_gKLeaderboardScoreSelSetPlayer        = objc.RegisterName("setPlayer:")
+	_gKLeaderboardScoreSelValue            = objc.RegisterName("value")
+	_gKLeaderboardScoreSelSetValue         = objc.RegisterName("setValue:")
+	_gKLeaderboardScoreSelContext          = objc.RegisterName("context")
+	_gKLeaderboardScoreSelSetContext       = objc.RegisterName("setContext:")
+	_gKLeaderboardScoreSelLeaderboardID    = objc.RegisterName("leaderboardID")
 	_gKLeaderboardScoreSelSetLeaderboardID = objc.RegisterName("setLeaderboardID:")
 )
 
@@ -40,7 +40,9 @@ func GKLeaderboardScoreFromID(id objc.ID) *GKLeaderboardScore {
 // The player who earns the score.
 func (o *GKLeaderboardScore) Player() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardScoreSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -71,11 +73,12 @@ func (o *GKLeaderboardScore) SetContext(context_ uint) {
 // The ID that Game Center uses for the leaderboard.
 func (o *GKLeaderboardScore) LeaderboardID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardScoreSelLeaderboardID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GKLeaderboardScore) SetLeaderboardID(leaderboardID *foundation.NSString) {
 	o.Ptr().Send(_gKLeaderboardScoreSelSetLeaderboardID, leaderboardID.Ptr())
 }
-

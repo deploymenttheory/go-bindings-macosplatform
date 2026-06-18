@@ -15,8 +15,8 @@ type DOMHTMLMenuElement struct {
 }
 
 var (
-	_clsDOMHTMLMenuElement = _objcClass("DOMHTMLMenuElement")
-	_dOMHTMLMenuElementSelCompact = objc.RegisterName("compact")
+	_clsDOMHTMLMenuElement           = _objcClass("DOMHTMLMenuElement")
+	_dOMHTMLMenuElementSelCompact    = objc.RegisterName("compact")
 	_dOMHTMLMenuElementSelSetCompact = objc.RegisterName("setCompact:")
 )
 
@@ -38,4 +38,3 @@ func (o *DOMHTMLMenuElement) Compact() bool {
 func (o *DOMHTMLMenuElement) SetCompact(compact bool) {
 	o.Ptr().Send(_dOMHTMLMenuElementSelSetCompact, compact)
 }
-

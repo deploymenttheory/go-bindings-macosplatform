@@ -17,8 +17,8 @@ type MPSImageBilinearScale struct {
 }
 
 var (
-	_clsMPSImageBilinearScale = _objcClass("MPSImageBilinearScale")
-	_mPSImageBilinearScaleSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSImageBilinearScale                    = _objcClass("MPSImageBilinearScale")
+	_mPSImageBilinearScaleSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSImageBilinearScaleSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSImageBilinearScaleFromID(id objc.ID) *MPSImageBilinearScale {
 
 func (o *MPSImageBilinearScale) InitWithDevice(device metal.MTLDevice) *MPSImageBilinearScale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageBilinearScaleSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageBilinearScaleFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageBilinearScale) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageBilinearScale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageBilinearScaleSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageBilinearScaleFromID(_ret)
 }
-

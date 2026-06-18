@@ -16,12 +16,12 @@ type AVB17221AECPAddressAccessTLV struct {
 }
 
 var (
-	_clsAVB17221AECPAddressAccessTLV = _objcClass("AVB17221AECPAddressAccessTLV")
-	_aVB17221AECPAddressAccessTLVSelMode = objc.RegisterName("mode")
-	_aVB17221AECPAddressAccessTLVSelSetMode = objc.RegisterName("setMode:")
-	_aVB17221AECPAddressAccessTLVSelAddress = objc.RegisterName("address")
-	_aVB17221AECPAddressAccessTLVSelSetAddress = objc.RegisterName("setAddress:")
-	_aVB17221AECPAddressAccessTLVSelMemoryData = objc.RegisterName("memoryData")
+	_clsAVB17221AECPAddressAccessTLV              = _objcClass("AVB17221AECPAddressAccessTLV")
+	_aVB17221AECPAddressAccessTLVSelMode          = objc.RegisterName("mode")
+	_aVB17221AECPAddressAccessTLVSelSetMode       = objc.RegisterName("setMode:")
+	_aVB17221AECPAddressAccessTLVSelAddress       = objc.RegisterName("address")
+	_aVB17221AECPAddressAccessTLVSelSetAddress    = objc.RegisterName("setAddress:")
+	_aVB17221AECPAddressAccessTLVSelMemoryData    = objc.RegisterName("memoryData")
 	_aVB17221AECPAddressAccessTLVSelSetMemoryData = objc.RegisterName("setMemoryData:")
 )
 
@@ -58,11 +58,12 @@ func (o *AVB17221AECPAddressAccessTLV) SetAddress(address uint64) {
 // @property	memoryData @abstract	The memory_data field of the Address Access TLV.
 func (o *AVB17221AECPAddressAccessTLV) MemoryData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221AECPAddressAccessTLVSelMemoryData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *AVB17221AECPAddressAccessTLV) SetMemoryData(memoryData *foundation.NSData) {
 	o.Ptr().Send(_aVB17221AECPAddressAccessTLVSelSetMemoryData, memoryData.Ptr())
 }
-

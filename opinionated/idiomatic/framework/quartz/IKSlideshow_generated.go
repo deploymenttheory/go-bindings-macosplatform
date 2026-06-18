@@ -91,4 +91,3 @@ type IKSlideshowable interface {
 }
 
 var _ IKSlideshowable = (*IKSlideshow)(nil)
-

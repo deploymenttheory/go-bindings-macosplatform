@@ -18,7 +18,9 @@ type MTRGeneralDiagnosticsClusterPayloadTestResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams].
-func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams { return x.inner }
+func (x *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,4 +70,3 @@ type MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable interface {
 }
 
 var _ MTRGeneralDiagnosticsClusterPayloadTestResponseParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams)(nil)
-

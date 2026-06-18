@@ -158,4 +158,3 @@ type FetchedResultsControllerable interface {
 }
 
 var _ FetchedResultsControllerable = (*FetchedResultsController)(nil)
-

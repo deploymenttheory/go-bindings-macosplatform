@@ -16,8 +16,8 @@ type INLengthResolutionResult struct {
 }
 
 var (
-	_clsINLengthResolutionResult = _objcClass("INLengthResolutionResult")
-	_iNLengthResolutionResultSelSuccessWithResolvedLength = objc.RegisterName("successWithResolvedLength:")
+	_clsINLengthResolutionResult                                        = _objcClass("INLengthResolutionResult")
+	_iNLengthResolutionResultSelSuccessWithResolvedLength               = objc.RegisterName("successWithResolvedLength:")
 	_iNLengthResolutionResultSelDisambiguationWithLengthsToDisambiguate = objc.RegisterName("disambiguationWithLengthsToDisambiguate:")
 	_iNLengthResolutionResultSelConfirmationRequiredWithLengthToConfirm = objc.RegisterName("confirmationRequiredWithLengthToConfirm:")
 )
@@ -34,19 +34,24 @@ func INLengthResolutionResultFromID(id objc.ID) *INLengthResolutionResult {
 
 func INLengthResolutionResultSuccessWithResolvedLength(resolvedLength *foundation.NSMeasurement[*foundation.NSUnitLength]) *INLengthResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelSuccessWithResolvedLength, resolvedLength)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INLengthResolutionResultFromID(_ret)
 }
 
 func INLengthResolutionResultDisambiguationWithLengthsToDisambiguate(lengthsToDisambiguate *foundation.NSArray[objc.ID]) *INLengthResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelDisambiguationWithLengthsToDisambiguate, lengthsToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INLengthResolutionResultFromID(_ret)
 }
 
 func INLengthResolutionResultConfirmationRequiredWithLengthToConfirm(lengthToConfirm *foundation.NSMeasurement[*foundation.NSUnitLength]) *INLengthResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINLengthResolutionResult), _iNLengthResolutionResultSelConfirmationRequiredWithLengthToConfirm, lengthToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INLengthResolutionResultFromID(_ret)
 }
-

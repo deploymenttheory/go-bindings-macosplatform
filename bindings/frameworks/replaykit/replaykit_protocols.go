@@ -27,4 +27,3 @@ type RPPreviewViewControllerDelegate interface {
 // RPScreenRecorderDelegate wraps the ObjC protocol RPScreenRecorderDelegate.
 type RPScreenRecorderDelegate interface {
 }
-

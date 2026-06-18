@@ -156,4 +156,3 @@ type MTROptionalQRCodeInfoable interface {
 }
 
 var _ MTROptionalQRCodeInfoable = (*MTROptionalQRCodeInfo)(nil)
-

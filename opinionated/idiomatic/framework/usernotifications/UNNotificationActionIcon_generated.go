@@ -41,4 +41,3 @@ type NotificationActionIconable interface {
 }
 
 var _ NotificationActionIconable = (*NotificationActionIcon)(nil)
-

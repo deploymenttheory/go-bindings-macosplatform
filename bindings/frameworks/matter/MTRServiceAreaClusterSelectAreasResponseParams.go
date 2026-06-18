@@ -18,12 +18,12 @@ type MTRServiceAreaClusterSelectAreasResponseParams struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterSelectAreasResponseParams = _objcClass("MTRServiceAreaClusterSelectAreasResponseParams")
+	_clsMTRServiceAreaClusterSelectAreasResponseParams                           = _objcClass("MTRServiceAreaClusterSelectAreasResponseParams")
 	_mTRServiceAreaClusterSelectAreasResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRServiceAreaClusterSelectAreasResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRServiceAreaClusterSelectAreasResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRServiceAreaClusterSelectAreasResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRServiceAreaClusterSelectAreasResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRServiceAreaClusterSelectAreasResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRServiceAreaClusterSelectAreasResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRServiceAreaClusterSelectAreasResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRServiceAreaClusterSelectAreasResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRServiceAreaClusterSelectAreasResponseParamsFromID(id objc.ID) *MTRServiceAreaClusterSelectAreasResponseParams {
@@ -40,7 +40,9 @@ func MTRServiceAreaClusterSelectAreasResponseParamsFromID(id objc.ID) *MTRServic
 func (o *MTRServiceAreaClusterSelectAreasResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSelectAreasResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRServiceAreaClusterSelectAreasResponseParams) InitWithResponseValueEr
 
 func (o *MTRServiceAreaClusterSelectAreasResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSelectAreasResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRServiceAreaClusterSelectAreasResponseParams) SetStatus(status *found
 
 func (o *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSelectAreasResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterSelectAreasResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRServiceAreaClusterSelectAreasResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

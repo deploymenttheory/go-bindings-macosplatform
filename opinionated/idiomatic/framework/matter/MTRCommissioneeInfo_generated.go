@@ -74,4 +74,3 @@ type MTRCommissioneeInfoable interface {
 }
 
 var _ MTRCommissioneeInfoable = (*MTRCommissioneeInfo)(nil)
-

@@ -17,7 +17,9 @@ type MTRClusterBridgedDeviceBasicInformation struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterBridgedDeviceBasicInformation].
-func (x *MTRClusterBridgedDeviceBasicInformation) Unwrap() *raw.MTRClusterBridgedDeviceBasicInformation { return x.inner }
+func (x *MTRClusterBridgedDeviceBasicInformation) Unwrap() *raw.MTRClusterBridgedDeviceBasicInformation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -163,11 +165,17 @@ func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWi
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation { return x.inner }
+func (x *MTRClusterBridgedDeviceBasicInformation) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation {
+	return x.inner
+}
 
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBridgedDeviceBasicInformation) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBridgedDeviceBasicInformation) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBridgedDeviceBasicInformationable is the interface implemented by [MTRClusterBridgedDeviceBasicInformation], for mocking and DI.
 type MTRClusterBridgedDeviceBasicInformationable interface {
@@ -200,4 +208,3 @@ type MTRClusterBridgedDeviceBasicInformationable interface {
 }
 
 var _ MTRClusterBridgedDeviceBasicInformationable = (*MTRClusterBridgedDeviceBasicInformation)(nil)
-

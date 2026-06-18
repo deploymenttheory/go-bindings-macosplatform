@@ -18,7 +18,9 @@ type SmartCardUserInteractionForPINOperation struct {
 }
 
 // Unwrap returns the underlying [raw.TKSmartCardUserInteractionForPINOperation].
-func (x *SmartCardUserInteractionForPINOperation) Unwrap() *raw.TKSmartCardUserInteractionForPINOperation { return x.inner }
+func (x *SmartCardUserInteractionForPINOperation) Unwrap() *raw.TKSmartCardUserInteractionForPINOperation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ..
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -152,9 +156,13 @@ func (x *SmartCardUserInteractionForPINOperation) SetResultData(resultData *foun
 	x.inner.SetResultData(resultData)
 }
 
-func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation { return x.inner }
+func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
+	return x.inner
+}
 
-func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteraction }
+func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
+	return &x.inner.TKSmartCardUserInteraction
+}
 
 // SmartCardUserInteractionForPINOperationable is the interface implemented by [SmartCardUserInteractionForPINOperation], for mocking and DI.
 type SmartCardUserInteractionForPINOperationable interface {
@@ -180,4 +188,3 @@ type SmartCardUserInteractionForPINOperationable interface {
 }
 
 var _ SmartCardUserInteractionForPINOperationable = (*SmartCardUserInteractionForPINOperation)(nil)
-

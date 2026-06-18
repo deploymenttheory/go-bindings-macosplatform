@@ -19,7 +19,9 @@ type CNNUpsamplingBilinearGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingBilinearGradient].
-func (x *CNNUpsamplingBilinearGradient) Unwrap() *raw.MPSCNNUpsamplingBilinearGradient { return x.inner }
+func (x *CNNUpsamplingBilinearGradient) Unwrap() *raw.MPSCNNUpsamplingBilinearGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -160,13 +162,21 @@ func (x *CNNUpsamplingBilinearGradient) WithLabel(label string) *CNNUpsamplingBi
 	return x
 }
 
-func (x *CNNUpsamplingBilinearGradient) asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient { return &x.inner.MPSCNNUpsamplingGradient }
+func (x *CNNUpsamplingBilinearGradient) asCNNUpsamplingGradient() *mpsneuralnetwork.MPSCNNUpsamplingGradient {
+	return &x.inner.MPSCNNUpsamplingGradient
+}
 
-func (x *CNNUpsamplingBilinearGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel }
+func (x *CNNUpsamplingBilinearGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNUpsamplingBilinearGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNUpsamplingBilinearGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNUpsamplingBilinearGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNUpsamplingBilinearGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNUpsamplingBilinearGradientable is the interface implemented by [CNNUpsamplingBilinearGradient], for mocking and DI.
 type CNNUpsamplingBilinearGradientable interface {
@@ -194,4 +204,3 @@ type CNNUpsamplingBilinearGradientable interface {
 }
 
 var _ CNNUpsamplingBilinearGradientable = (*CNNUpsamplingBilinearGradient)(nil)
-

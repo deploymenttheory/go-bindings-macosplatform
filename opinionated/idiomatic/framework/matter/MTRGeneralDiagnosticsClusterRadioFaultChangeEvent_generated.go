@@ -16,7 +16,9 @@ type MTRGeneralDiagnosticsClusterRadioFaultChangeEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent].
-func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent { return x.inner }
+func (x *MTRGeneralDiagnosticsClusterRadioFaultChangeEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterRadioFaultChangeEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,4 +68,3 @@ type MTRGeneralDiagnosticsClusterRadioFaultChangeEventable interface {
 }
 
 var _ MTRGeneralDiagnosticsClusterRadioFaultChangeEventable = (*MTRGeneralDiagnosticsClusterRadioFaultChangeEvent)(nil)
-

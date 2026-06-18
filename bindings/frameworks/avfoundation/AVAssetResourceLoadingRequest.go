@@ -18,22 +18,22 @@ type AVAssetResourceLoadingRequest struct {
 }
 
 var (
-	_clsAVAssetResourceLoadingRequest = _objcClass("AVAssetResourceLoadingRequest")
-	_aVAssetResourceLoadingRequestSelFinishLoading = objc.RegisterName("finishLoading")
-	_aVAssetResourceLoadingRequestSelFinishLoadingWithError = objc.RegisterName("finishLoadingWithError:")
-	_aVAssetResourceLoadingRequestSelRequest = objc.RegisterName("request")
-	_aVAssetResourceLoadingRequestSelIsFinished = objc.RegisterName("isFinished")
-	_aVAssetResourceLoadingRequestSelIsCancelled = objc.RegisterName("isCancelled")
-	_aVAssetResourceLoadingRequestSelContentInformationRequest = objc.RegisterName("contentInformationRequest")
-	_aVAssetResourceLoadingRequestSelDataRequest = objc.RegisterName("dataRequest")
-	_aVAssetResourceLoadingRequestSelResponse = objc.RegisterName("response")
-	_aVAssetResourceLoadingRequestSelSetResponse = objc.RegisterName("setResponse:")
-	_aVAssetResourceLoadingRequestSelRedirect = objc.RegisterName("redirect")
-	_aVAssetResourceLoadingRequestSelSetRedirect = objc.RegisterName("setRedirect:")
-	_aVAssetResourceLoadingRequestSelRequestor = objc.RegisterName("requestor")
+	_clsAVAssetResourceLoadingRequest                                                                  = _objcClass("AVAssetResourceLoadingRequest")
+	_aVAssetResourceLoadingRequestSelFinishLoading                                                     = objc.RegisterName("finishLoading")
+	_aVAssetResourceLoadingRequestSelFinishLoadingWithError                                            = objc.RegisterName("finishLoadingWithError:")
+	_aVAssetResourceLoadingRequestSelRequest                                                           = objc.RegisterName("request")
+	_aVAssetResourceLoadingRequestSelIsFinished                                                        = objc.RegisterName("isFinished")
+	_aVAssetResourceLoadingRequestSelIsCancelled                                                       = objc.RegisterName("isCancelled")
+	_aVAssetResourceLoadingRequestSelContentInformationRequest                                         = objc.RegisterName("contentInformationRequest")
+	_aVAssetResourceLoadingRequestSelDataRequest                                                       = objc.RegisterName("dataRequest")
+	_aVAssetResourceLoadingRequestSelResponse                                                          = objc.RegisterName("response")
+	_aVAssetResourceLoadingRequestSelSetResponse                                                       = objc.RegisterName("setResponse:")
+	_aVAssetResourceLoadingRequestSelRedirect                                                          = objc.RegisterName("redirect")
+	_aVAssetResourceLoadingRequestSelSetRedirect                                                       = objc.RegisterName("setRedirect:")
+	_aVAssetResourceLoadingRequestSelRequestor                                                         = objc.RegisterName("requestor")
 	_aVAssetResourceLoadingRequestSelStreamingContentKeyRequestDataForAppContentIdentifierOptionsError = objc.RegisterName("streamingContentKeyRequestDataForApp:contentIdentifier:options:error:")
-	_aVAssetResourceLoadingRequestSelPersistentContentKeyFromKeyVendorResponseOptionsError = objc.RegisterName("persistentContentKeyFromKeyVendorResponse:options:error:")
-	_aVAssetResourceLoadingRequestSelFinishLoadingWithResponseDataRedirect = objc.RegisterName("finishLoadingWithResponse:data:redirect:")
+	_aVAssetResourceLoadingRequestSelPersistentContentKeyFromKeyVendorResponseOptionsError             = objc.RegisterName("persistentContentKeyFromKeyVendorResponse:options:error:")
+	_aVAssetResourceLoadingRequestSelFinishLoadingWithResponseDataRedirect                             = objc.RegisterName("finishLoadingWithResponse:data:redirect:")
 )
 
 func AVAssetResourceLoadingRequestFromID(id objc.ID) *AVAssetResourceLoadingRequest {
@@ -59,7 +59,9 @@ func (o *AVAssetResourceLoadingRequest) FinishLoadingWithError(error_ unsafe.Poi
 // @property 		request @abstract		An NSURLRequest for the requested resource.
 func (o *AVAssetResourceLoadingRequest) Request() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
@@ -78,21 +80,27 @@ func (o *AVAssetResourceLoadingRequest) IsCancelled() bool {
 // @property 		contentInformationRequest @abstract		An instance of AVAssetResourceLoadingContentInformationRequest that you must populate with information about the resource before responding to any AVAssetResourceLoadingDataRequests for the resource.  The value of this property will be nil if no such information is being requested.
 func (o *AVAssetResourceLoadingRequest) ContentInformationRequest() *AVAssetResourceLoadingContentInformationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelContentInformationRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetResourceLoadingContentInformationRequestFromID(_ret)
 }
 
 // @property 		dataRequest @abstract		An instance of AVAssetResourceLoadingDataRequest that indicates the range of resource data that's being requested.  If an AVAssetResourceLoadingContentInformationRequest has been provided, you must set its properties appropriately before responding to any AVAssetResourceLoadingDataRequests.  The value of this property will be nil if no data is being requested.
 func (o *AVAssetResourceLoadingRequest) DataRequest() *AVAssetResourceLoadingDataRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelDataRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetResourceLoadingDataRequestFromID(_ret)
 }
 
 // @property 		response @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
 func (o *AVAssetResourceLoadingRequest) Response() *foundation.NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLResponseFromID(_ret)
 }
 
@@ -103,7 +111,9 @@ func (o *AVAssetResourceLoadingRequest) SetResponse(response *foundation.NSURLRe
 // @property 		redirect @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil. @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
 func (o *AVAssetResourceLoadingRequest) Redirect() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelRedirect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
@@ -114,7 +124,9 @@ func (o *AVAssetResourceLoadingRequest) SetRedirect(redirect *foundation.NSURLRe
 // @property 		requestor @abstract		The AVAssetResourceLoadingRequestor that made this request
 func (o *AVAssetResourceLoadingRequest) Requestor() *AVAssetResourceLoadingRequestor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelRequestor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetResourceLoadingRequestorFromID(_ret)
 }
 
@@ -123,7 +135,9 @@ func (o *AVAssetResourceLoadingRequest) Requestor() *AVAssetResourceLoadingReque
 func (o *AVAssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelStreamingContentKeyRequestDataForAppContentIdentifierOptionsError, appIdentifier.Ptr(), contentIdentifier.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -135,7 +149,9 @@ func (o *AVAssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppCont
 func (o *AVAssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingRequestSelPersistentContentKeyFromKeyVendorResponseOptionsError, keyVendorResponse.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -147,4 +163,3 @@ func (o *AVAssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorRespons
 func (o *AVAssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest) {
 	o.Ptr().Send(_aVAssetResourceLoadingRequestSelFinishLoadingWithResponseDataRedirect, response.Ptr(), data.Ptr(), redirect.Ptr())
 }
-

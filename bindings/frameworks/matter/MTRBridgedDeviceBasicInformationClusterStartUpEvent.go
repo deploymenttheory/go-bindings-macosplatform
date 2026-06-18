@@ -16,8 +16,8 @@ type MTRBridgedDeviceBasicInformationClusterStartUpEvent struct {
 }
 
 var (
-	_clsMTRBridgedDeviceBasicInformationClusterStartUpEvent = _objcClass("MTRBridgedDeviceBasicInformationClusterStartUpEvent")
-	_mTRBridgedDeviceBasicInformationClusterStartUpEventSelSoftwareVersion = objc.RegisterName("softwareVersion")
+	_clsMTRBridgedDeviceBasicInformationClusterStartUpEvent                   = _objcClass("MTRBridgedDeviceBasicInformationClusterStartUpEvent")
+	_mTRBridgedDeviceBasicInformationClusterStartUpEventSelSoftwareVersion    = objc.RegisterName("softwareVersion")
 	_mTRBridgedDeviceBasicInformationClusterStartUpEventSelSetSoftwareVersion = objc.RegisterName("setSoftwareVersion:")
 )
 
@@ -33,11 +33,12 @@ func MTRBridgedDeviceBasicInformationClusterStartUpEventFromID(id objc.ID) *MTRB
 
 func (o *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBridgedDeviceBasicInformationClusterStartUpEventSelSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBridgedDeviceBasicInformationClusterStartUpEventSelSetSoftwareVersion, softwareVersion.Ptr())
 }
-

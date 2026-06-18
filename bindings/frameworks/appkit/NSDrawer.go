@@ -18,32 +18,32 @@ type NSDrawer struct {
 }
 
 var (
-	_clsNSDrawer = _objcClass("NSDrawer")
+	_clsNSDrawer                                 = _objcClass("NSDrawer")
 	_nSDrawerSelInitWithContentSizePreferredEdge = objc.RegisterName("initWithContentSize:preferredEdge:")
-	_nSDrawerSelOpen = objc.RegisterName("open")
-	_nSDrawerSelOpenOnEdge = objc.RegisterName("openOnEdge:")
-	_nSDrawerSelClose = objc.RegisterName("close")
-	_nSDrawerSelToggle = objc.RegisterName("toggle:")
-	_nSDrawerSelParentWindow = objc.RegisterName("parentWindow")
-	_nSDrawerSelSetParentWindow = objc.RegisterName("setParentWindow:")
-	_nSDrawerSelContentView = objc.RegisterName("contentView")
-	_nSDrawerSelSetContentView = objc.RegisterName("setContentView:")
-	_nSDrawerSelPreferredEdge = objc.RegisterName("preferredEdge")
-	_nSDrawerSelSetPreferredEdge = objc.RegisterName("setPreferredEdge:")
-	_nSDrawerSelDelegate = objc.RegisterName("delegate")
-	_nSDrawerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSDrawerSelState = objc.RegisterName("state")
-	_nSDrawerSelEdge = objc.RegisterName("edge")
-	_nSDrawerSelContentSize = objc.RegisterName("contentSize")
-	_nSDrawerSelSetContentSize = objc.RegisterName("setContentSize:")
-	_nSDrawerSelMinContentSize = objc.RegisterName("minContentSize")
-	_nSDrawerSelSetMinContentSize = objc.RegisterName("setMinContentSize:")
-	_nSDrawerSelMaxContentSize = objc.RegisterName("maxContentSize")
-	_nSDrawerSelSetMaxContentSize = objc.RegisterName("setMaxContentSize:")
-	_nSDrawerSelLeadingOffset = objc.RegisterName("leadingOffset")
-	_nSDrawerSelSetLeadingOffset = objc.RegisterName("setLeadingOffset:")
-	_nSDrawerSelTrailingOffset = objc.RegisterName("trailingOffset")
-	_nSDrawerSelSetTrailingOffset = objc.RegisterName("setTrailingOffset:")
+	_nSDrawerSelOpen                             = objc.RegisterName("open")
+	_nSDrawerSelOpenOnEdge                       = objc.RegisterName("openOnEdge:")
+	_nSDrawerSelClose                            = objc.RegisterName("close")
+	_nSDrawerSelToggle                           = objc.RegisterName("toggle:")
+	_nSDrawerSelParentWindow                     = objc.RegisterName("parentWindow")
+	_nSDrawerSelSetParentWindow                  = objc.RegisterName("setParentWindow:")
+	_nSDrawerSelContentView                      = objc.RegisterName("contentView")
+	_nSDrawerSelSetContentView                   = objc.RegisterName("setContentView:")
+	_nSDrawerSelPreferredEdge                    = objc.RegisterName("preferredEdge")
+	_nSDrawerSelSetPreferredEdge                 = objc.RegisterName("setPreferredEdge:")
+	_nSDrawerSelDelegate                         = objc.RegisterName("delegate")
+	_nSDrawerSelSetDelegate                      = objc.RegisterName("setDelegate:")
+	_nSDrawerSelState                            = objc.RegisterName("state")
+	_nSDrawerSelEdge                             = objc.RegisterName("edge")
+	_nSDrawerSelContentSize                      = objc.RegisterName("contentSize")
+	_nSDrawerSelSetContentSize                   = objc.RegisterName("setContentSize:")
+	_nSDrawerSelMinContentSize                   = objc.RegisterName("minContentSize")
+	_nSDrawerSelSetMinContentSize                = objc.RegisterName("setMinContentSize:")
+	_nSDrawerSelMaxContentSize                   = objc.RegisterName("maxContentSize")
+	_nSDrawerSelSetMaxContentSize                = objc.RegisterName("setMaxContentSize:")
+	_nSDrawerSelLeadingOffset                    = objc.RegisterName("leadingOffset")
+	_nSDrawerSelSetLeadingOffset                 = objc.RegisterName("setLeadingOffset:")
+	_nSDrawerSelTrailingOffset                   = objc.RegisterName("trailingOffset")
+	_nSDrawerSelSetTrailingOffset                = objc.RegisterName("setTrailingOffset:")
 )
 
 func NSDrawerFromID(id objc.ID) *NSDrawer {
@@ -59,7 +59,9 @@ func NSDrawerFromID(id objc.ID) *NSDrawer {
 // Deprecated: Drawers are deprecated; consider using NSSplitViewController
 func (o *NSDrawer) InitWithContentSizePreferredEdge(contentSize corefoundation.CGSize, edge foundation.NSRectEdge) *NSDrawer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelInitWithContentSizePreferredEdge, contentSize, edge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDrawerFromID(_ret)
 }
 
@@ -89,7 +91,9 @@ func (o *NSDrawer) Toggle(sender objc.ID) {
 
 func (o *NSDrawer) ParentWindow() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelParentWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -99,7 +103,9 @@ func (o *NSDrawer) SetParentWindow(parentWindow *NSWindow) {
 
 func (o *NSDrawer) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDrawerSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -179,4 +185,3 @@ func (o *NSDrawer) TrailingOffset() float64 {
 func (o *NSDrawer) SetTrailingOffset(trailingOffset float64) {
 	o.Ptr().Send(_nSDrawerSelSetTrailingOffset, trailingOffset)
 }
-

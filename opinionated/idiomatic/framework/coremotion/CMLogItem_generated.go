@@ -49,4 +49,3 @@ type LogItemable interface {
 }
 
 var _ LogItemable = (*LogItem)(nil)
-

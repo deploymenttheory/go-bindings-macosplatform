@@ -207,4 +207,3 @@ type DecimalNumberable interface {
 }
 
 var _ DecimalNumberable = (*DecimalNumber)(nil)
-

@@ -82,4 +82,3 @@ type MatrixRandomPhiloxable interface {
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)
-

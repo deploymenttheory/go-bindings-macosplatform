@@ -16,7 +16,9 @@ type MTRBooleanStateConfigurationClusterSensorFaultEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBooleanStateConfigurationClusterSensorFaultEvent].
-func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) Unwrap() *raw.MTRBooleanStateConfigurationClusterSensorFaultEvent { return x.inner }
+func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) Unwrap() *raw.MTRBooleanStateConfigurationClusterSensorFaultEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRBooleanStateConfigurationClusterSensorFaultEventable interface {
 }
 
 var _ MTRBooleanStateConfigurationClusterSensorFaultEventable = (*MTRBooleanStateConfigurationClusterSensorFaultEvent)(nil)
-

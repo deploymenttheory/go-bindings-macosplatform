@@ -54,4 +54,3 @@ func MainAppService() *AppService {
 	}
 	return &AppService{inner: _r}
 }
-

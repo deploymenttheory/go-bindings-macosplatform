@@ -18,14 +18,14 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams struct {
 }
 
 var (
-	_clsMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams = _objcClass("MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams")
+	_clsMTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams                           = _objcClass("MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams")
 	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelErrorCode = objc.RegisterName("errorCode")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetErrorCode = objc.RegisterName("setErrorCode:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelDebugText = objc.RegisterName("debugText")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetDebugText = objc.RegisterName("setDebugText:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelErrorCode                  = objc.RegisterName("errorCode")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetErrorCode               = objc.RegisterName("setErrorCode:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelDebugText                  = objc.RegisterName("debugText")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetDebugText               = objc.RegisterName("setDebugText:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams {
@@ -42,7 +42,9 @@ func MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(id ob
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) InitWi
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) ErrorCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelErrorCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetErr
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) DebugText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelDebugText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetDeb
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

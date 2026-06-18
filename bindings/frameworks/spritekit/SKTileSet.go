@@ -19,23 +19,23 @@ type SKTileSet struct {
 }
 
 var (
-	_clsSKTileSet = _objcClass("SKTileSet")
-	_sKTileSetSelTileSetWithTileGroups = objc.RegisterName("tileSetWithTileGroups:")
+	_clsSKTileSet                                 = _objcClass("SKTileSet")
+	_sKTileSetSelTileSetWithTileGroups            = objc.RegisterName("tileSetWithTileGroups:")
 	_sKTileSetSelTileSetWithTileGroupsTileSetType = objc.RegisterName("tileSetWithTileGroups:tileSetType:")
-	_sKTileSetSelInitWithTileGroups = objc.RegisterName("initWithTileGroups:")
-	_sKTileSetSelInitWithTileGroupsTileSetType = objc.RegisterName("initWithTileGroups:tileSetType:")
-	_sKTileSetSelTileSetNamed = objc.RegisterName("tileSetNamed:")
-	_sKTileSetSelTileSetFromURL = objc.RegisterName("tileSetFromURL:")
-	_sKTileSetSelTileGroups = objc.RegisterName("tileGroups")
-	_sKTileSetSelSetTileGroups = objc.RegisterName("setTileGroups:")
-	_sKTileSetSelName = objc.RegisterName("name")
-	_sKTileSetSelSetName = objc.RegisterName("setName:")
-	_sKTileSetSelType = objc.RegisterName("type")
-	_sKTileSetSelSetType = objc.RegisterName("setType:")
-	_sKTileSetSelDefaultTileGroup = objc.RegisterName("defaultTileGroup")
-	_sKTileSetSelSetDefaultTileGroup = objc.RegisterName("setDefaultTileGroup:")
-	_sKTileSetSelDefaultTileSize = objc.RegisterName("defaultTileSize")
-	_sKTileSetSelSetDefaultTileSize = objc.RegisterName("setDefaultTileSize:")
+	_sKTileSetSelInitWithTileGroups               = objc.RegisterName("initWithTileGroups:")
+	_sKTileSetSelInitWithTileGroupsTileSetType    = objc.RegisterName("initWithTileGroups:tileSetType:")
+	_sKTileSetSelTileSetNamed                     = objc.RegisterName("tileSetNamed:")
+	_sKTileSetSelTileSetFromURL                   = objc.RegisterName("tileSetFromURL:")
+	_sKTileSetSelTileGroups                       = objc.RegisterName("tileGroups")
+	_sKTileSetSelSetTileGroups                    = objc.RegisterName("setTileGroups:")
+	_sKTileSetSelName                             = objc.RegisterName("name")
+	_sKTileSetSelSetName                          = objc.RegisterName("setName:")
+	_sKTileSetSelType                             = objc.RegisterName("type")
+	_sKTileSetSelSetType                          = objc.RegisterName("setType:")
+	_sKTileSetSelDefaultTileGroup                 = objc.RegisterName("defaultTileGroup")
+	_sKTileSetSelSetDefaultTileGroup              = objc.RegisterName("setDefaultTileGroup:")
+	_sKTileSetSelDefaultTileSize                  = objc.RegisterName("defaultTileSize")
+	_sKTileSetSelSetDefaultTileSize               = objc.RegisterName("setDefaultTileSize:")
 )
 
 func SKTileSetFromID(id objc.ID) *SKTileSet {
@@ -51,49 +51,63 @@ func SKTileSetFromID(id objc.ID) *SKTileSet {
 // Create a tile set with the specified tile groups. @param tileGroups the tile groups that will be available for use with this set
 func SKTileSetTileSetWithTileGroups(tileGroups *foundation.NSArray[*SKTileGroup]) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetWithTileGroups, tileGroups.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // Create a tile set with the specified tile groups and tile set type. @param tileGroups the tile groups that will be available for use with this set @param tileSetType the type of tile set this will be
 func SKTileSetTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*SKTileGroup], tileSetType SKTileSetType) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetWithTileGroupsTileSetType, tileGroups.Ptr(), tileSetType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // Initilize a tile set with the specified tile groups. @param tileGroups the tile groups that will be available for use with this set
 func (o *SKTileSet) InitWithTileGroups(tileGroups *foundation.NSArray[*SKTileGroup]) *SKTileSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelInitWithTileGroups, tileGroups.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // Initilize a tile set with the specified tile groups and tile set type. @param tileGroups the tile groups that will be available for use with this set @param tileSetType the type of tile set this will be
 func (o *SKTileSet) InitWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*SKTileGroup], tileSetType SKTileSetType) *SKTileSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelInitWithTileGroupsTileSetType, tileGroups.Ptr(), tileSetType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // Gets the tile set with the specified name from the SpriteKit resource bundle. Returns nil if a tile set with a matching name cannot be found. @param name the name of the tile set to search for
 func SKTileSetTileSetNamed(name *foundation.NSString) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // Creates a tile set from the specified tile set file. Returns nil if the URL doesn't point to a valid tile set file. @param url the URL of the tile set file
 func SKTileSetTileSetFromURL(url *foundation.NSURL) *SKTileSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileSet), _sKTileSetSelTileSetFromURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileSetFromID(_ret)
 }
 
 // The tile groups that this set provides for use.
 func (o *SKTileSet) TileGroups() *foundation.NSArray[*SKTileGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelTileGroups)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKTileGroup](_ret)
 }
 
@@ -104,7 +118,9 @@ func (o *SKTileSet) SetTileGroups(tileGroups *foundation.NSArray[*SKTileGroup]) 
 // Client-assignable name for the tile set. Defaults to nil.
 func (o *SKTileSet) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,7 +140,9 @@ func (o *SKTileSet) SetType(type_ SKTileSetType) {
 
 func (o *SKTileSet) DefaultTileGroup() *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileSetSelDefaultTileGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
@@ -141,4 +159,3 @@ func (o *SKTileSet) DefaultTileSize() corefoundation.CGSize {
 func (o *SKTileSet) SetDefaultTileSize(defaultTileSize corefoundation.CGSize) {
 	o.Ptr().Send(_sKTileSetSelSetDefaultTileSize, defaultTileSize)
 }
-

@@ -18,11 +18,11 @@ type AVPlayerVideoOutputConfiguration struct {
 }
 
 var (
-	_clsAVPlayerVideoOutputConfiguration = _objcClass("AVPlayerVideoOutputConfiguration")
-	_aVPlayerVideoOutputConfigurationSelSourcePlayerItem = objc.RegisterName("sourcePlayerItem")
+	_clsAVPlayerVideoOutputConfiguration                        = _objcClass("AVPlayerVideoOutputConfiguration")
+	_aVPlayerVideoOutputConfigurationSelSourcePlayerItem        = objc.RegisterName("sourcePlayerItem")
 	_aVPlayerVideoOutputConfigurationSelDataChannelDescriptions = objc.RegisterName("dataChannelDescriptions")
-	_aVPlayerVideoOutputConfigurationSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_aVPlayerVideoOutputConfigurationSelActivationTime = objc.RegisterName("activationTime")
+	_aVPlayerVideoOutputConfigurationSelPreferredTransform      = objc.RegisterName("preferredTransform")
+	_aVPlayerVideoOutputConfigurationSelActivationTime          = objc.RegisterName("activationTime")
 )
 
 func AVPlayerVideoOutputConfigurationFromID(id objc.ID) *AVPlayerVideoOutputConfiguration {
@@ -38,7 +38,9 @@ func AVPlayerVideoOutputConfigurationFromID(id objc.ID) *AVPlayerVideoOutputConf
 // @property 	sourcePlayerItem @abstract	The AVPlayerItem which is the source of this configuration. @discussion	This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
 func (o *AVPlayerVideoOutputConfiguration) SourcePlayerItem() *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerVideoOutputConfigurationSelSourcePlayerItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *AVPlayerVideoOutputConfiguration) ActivationTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVPlayerVideoOutputConfigurationSelActivationTime)
 	return _ret
 }
-

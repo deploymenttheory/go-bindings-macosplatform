@@ -41,4 +41,3 @@ type QCPatchControllerable interface {
 }
 
 var _ QCPatchControllerable = (*QCPatchController)(nil)
-

@@ -57,4 +57,3 @@ type BufferLayoutDescriptorArrayable interface {
 }
 
 var _ BufferLayoutDescriptorArrayable = (*BufferLayoutDescriptorArray)(nil)
-

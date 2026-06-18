@@ -289,4 +289,3 @@ type CNNConvolutionDescriptorable interface {
 }
 
 var _ CNNConvolutionDescriptorable = (*CNNConvolutionDescriptor)(nil)
-

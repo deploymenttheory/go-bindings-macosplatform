@@ -16,17 +16,17 @@ type MTRClusterUserLabel struct {
 }
 
 var (
-	_clsMTRClusterUserLabel = _objcClass("MTRClusterUserLabel")
-	_mTRClusterUserLabelSelReadAttributeLabelListWithParams = objc.RegisterName("readAttributeLabelListWithParams:")
-	_mTRClusterUserLabelSelWriteAttributeLabelListWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLabelListWithValue:expectedValueInterval:")
+	_clsMTRClusterUserLabel                                                            = _objcClass("MTRClusterUserLabel")
+	_mTRClusterUserLabelSelReadAttributeLabelListWithParams                            = objc.RegisterName("readAttributeLabelListWithParams:")
+	_mTRClusterUserLabelSelWriteAttributeLabelListWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeLabelListWithValue:expectedValueInterval:")
 	_mTRClusterUserLabelSelWriteAttributeLabelListWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLabelListWithValue:expectedValueInterval:params:")
-	_mTRClusterUserLabelSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterUserLabelSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterUserLabelSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterUserLabelSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterUserLabelSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterUserLabelSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterUserLabelSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterUserLabelSelReadAttributeGeneratedCommandListWithParams                 = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterUserLabelSelReadAttributeAcceptedCommandListWithParams                  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterUserLabelSelReadAttributeAttributeListWithParams                        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterUserLabelSelReadAttributeFeatureMapWithParams                           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterUserLabelSelReadAttributeClusterRevisionWithParams                      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterUserLabelSelInitWithDeviceEndpointIDQueue                               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterUserLabelSelInitWithDeviceEndpointQueue                                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterUserLabelFromID(id objc.ID) *MTRClusterUserLabel {
@@ -80,13 +80,16 @@ func (o *MTRClusterUserLabel) ReadAttributeClusterRevisionWithParams(params *MTR
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterUserLabel) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterUserLabel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterUserLabelSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterUserLabelFromID(_ret)
 }
 
 func (o *MTRClusterUserLabel) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterUserLabel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterUserLabelSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterUserLabelFromID(_ret)
 }
-

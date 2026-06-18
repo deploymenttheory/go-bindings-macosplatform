@@ -51,4 +51,3 @@ type Mouseable interface {
 }
 
 var _ Mouseable = (*Mouse)(nil)
-

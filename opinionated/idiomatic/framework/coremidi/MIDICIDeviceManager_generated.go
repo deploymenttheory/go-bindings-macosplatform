@@ -54,4 +54,3 @@ type CIDeviceManagerable interface {
 }
 
 var _ CIDeviceManagerable = (*CIDeviceManager)(nil)
-

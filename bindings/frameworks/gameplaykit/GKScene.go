@@ -18,17 +18,17 @@ type GKScene struct {
 }
 
 var (
-	_clsGKScene = _objcClass("GKScene")
-	_gKSceneSelSceneWithFileNamed = objc.RegisterName("sceneWithFileNamed:")
+	_clsGKScene                           = _objcClass("GKScene")
+	_gKSceneSelSceneWithFileNamed         = objc.RegisterName("sceneWithFileNamed:")
 	_gKSceneSelSceneWithFileNamedRootNode = objc.RegisterName("sceneWithFileNamed:rootNode:")
-	_gKSceneSelAddEntity = objc.RegisterName("addEntity:")
-	_gKSceneSelRemoveEntity = objc.RegisterName("removeEntity:")
-	_gKSceneSelAddGraphName = objc.RegisterName("addGraph:name:")
-	_gKSceneSelRemoveGraph = objc.RegisterName("removeGraph:")
-	_gKSceneSelEntities = objc.RegisterName("entities")
-	_gKSceneSelRootNode = objc.RegisterName("rootNode")
-	_gKSceneSelSetRootNode = objc.RegisterName("setRootNode:")
-	_gKSceneSelGraphs = objc.RegisterName("graphs")
+	_gKSceneSelAddEntity                  = objc.RegisterName("addEntity:")
+	_gKSceneSelRemoveEntity               = objc.RegisterName("removeEntity:")
+	_gKSceneSelAddGraphName               = objc.RegisterName("addGraph:name:")
+	_gKSceneSelRemoveGraph                = objc.RegisterName("removeGraph:")
+	_gKSceneSelEntities                   = objc.RegisterName("entities")
+	_gKSceneSelRootNode                   = objc.RegisterName("rootNode")
+	_gKSceneSelSetRootNode                = objc.RegisterName("setRootNode:")
+	_gKSceneSelGraphs                     = objc.RegisterName("graphs")
 )
 
 func GKSceneFromID(id objc.ID) *GKScene {
@@ -44,14 +44,18 @@ func GKSceneFromID(id objc.ID) *GKScene {
 // Loads a scene from a file contained within the bundle.
 func GKSceneSceneWithFileNamed(filename *foundation.NSString) *GKScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKScene), _gKSceneSelSceneWithFileNamed, filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSceneFromID(_ret)
 }
 
 // Loads a scene from a file contained within the bundle and link with the specified rootNode.
 func GKSceneSceneWithFileNamedRootNode(filename *foundation.NSString, rootNode GKSceneRootNodeType) *GKScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKScene), _gKSceneSelSceneWithFileNamedRootNode, filename.Ptr(), rootNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSceneFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *GKScene) RemoveGraph(name *foundation.NSString) {
 // The entities of this scene.
 func (o *GKScene) Entities() *foundation.NSArray[*GKEntity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSceneSelEntities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKEntity](_ret)
 }
 
@@ -97,4 +103,3 @@ func (o *GKScene) Graphs() *foundation.NSDictionary[*foundation.NSString, *GKGra
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *GKGraph]](o.Ptr(), _gKSceneSelGraphs)
 	return _ret
 }
-

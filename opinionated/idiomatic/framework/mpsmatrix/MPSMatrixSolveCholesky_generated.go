@@ -73,7 +73,9 @@ func (x *MatrixSolveCholesky) EncodeToCommandBufferSourceMatrixRightHandSideMatr
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
 }
 
-func (x *MatrixSolveCholesky) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixSolveCholesky) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
 // MatrixSolveCholeskyable is the interface implemented by [MatrixSolveCholesky], for mocking and DI.
 type MatrixSolveCholeskyable interface {
@@ -87,4 +89,3 @@ type MatrixSolveCholeskyable interface {
 }
 
 var _ MatrixSolveCholeskyable = (*MatrixSolveCholesky)(nil)
-

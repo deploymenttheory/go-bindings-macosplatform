@@ -20,27 +20,27 @@ type AVMutableVideoComposition struct {
 }
 
 var (
-	_clsAVMutableVideoComposition = _objcClass("AVMutableVideoComposition")
-	_aVMutableVideoCompositionSelVideoComposition = objc.RegisterName("videoComposition")
-	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAsset = objc.RegisterName("videoCompositionWithPropertiesOfAsset:")
-	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetCompletionHandler = objc.RegisterName("videoCompositionWithPropertiesOfAsset:completionHandler:")
-	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetPrototypeInstruction = objc.RegisterName("videoCompositionWithPropertiesOfAsset:prototypeInstruction:")
+	_clsAVMutableVideoComposition                                                                           = _objcClass("AVMutableVideoComposition")
+	_aVMutableVideoCompositionSelVideoComposition                                                           = objc.RegisterName("videoComposition")
+	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAsset                                      = objc.RegisterName("videoCompositionWithPropertiesOfAsset:")
+	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetCompletionHandler                     = objc.RegisterName("videoCompositionWithPropertiesOfAsset:completionHandler:")
+	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetPrototypeInstruction                  = objc.RegisterName("videoCompositionWithPropertiesOfAsset:prototypeInstruction:")
 	_aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetPrototypeInstructionCompletionHandler = objc.RegisterName("videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:")
-	_aVMutableVideoCompositionSelSetCustomVideoCompositorClass = objc.RegisterName("setCustomVideoCompositorClass:")
-	_aVMutableVideoCompositionSelSetFrameDuration = objc.RegisterName("setFrameDuration:")
-	_aVMutableVideoCompositionSelSetSourceTrackIDForFrameTiming = objc.RegisterName("setSourceTrackIDForFrameTiming:")
-	_aVMutableVideoCompositionSelSetRenderSize = objc.RegisterName("setRenderSize:")
-	_aVMutableVideoCompositionSelSetRenderScale = objc.RegisterName("setRenderScale:")
-	_aVMutableVideoCompositionSelSetInstructions = objc.RegisterName("setInstructions:")
-	_aVMutableVideoCompositionSelSetAnimationTool = objc.RegisterName("setAnimationTool:")
-	_aVMutableVideoCompositionSelSetSourceSampleDataTrackIDs = objc.RegisterName("setSourceSampleDataTrackIDs:")
-	_aVMutableVideoCompositionSelSetOutputBufferDescription = objc.RegisterName("setOutputBufferDescription:")
-	_aVMutableVideoCompositionSelSetColorPrimaries = objc.RegisterName("setColorPrimaries:")
-	_aVMutableVideoCompositionSelSetColorYCbCrMatrix = objc.RegisterName("setColorYCbCrMatrix:")
-	_aVMutableVideoCompositionSelSetColorTransferFunction = objc.RegisterName("setColorTransferFunction:")
-	_aVMutableVideoCompositionSelSetPerFrameHDRDisplayMetadataPolicy = objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:")
-	_aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:")
-	_aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandlerCompletionHandler = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:")
+	_aVMutableVideoCompositionSelSetCustomVideoCompositorClass                                              = objc.RegisterName("setCustomVideoCompositorClass:")
+	_aVMutableVideoCompositionSelSetFrameDuration                                                           = objc.RegisterName("setFrameDuration:")
+	_aVMutableVideoCompositionSelSetSourceTrackIDForFrameTiming                                             = objc.RegisterName("setSourceTrackIDForFrameTiming:")
+	_aVMutableVideoCompositionSelSetRenderSize                                                              = objc.RegisterName("setRenderSize:")
+	_aVMutableVideoCompositionSelSetRenderScale                                                             = objc.RegisterName("setRenderScale:")
+	_aVMutableVideoCompositionSelSetInstructions                                                            = objc.RegisterName("setInstructions:")
+	_aVMutableVideoCompositionSelSetAnimationTool                                                           = objc.RegisterName("setAnimationTool:")
+	_aVMutableVideoCompositionSelSetSourceSampleDataTrackIDs                                                = objc.RegisterName("setSourceSampleDataTrackIDs:")
+	_aVMutableVideoCompositionSelSetOutputBufferDescription                                                 = objc.RegisterName("setOutputBufferDescription:")
+	_aVMutableVideoCompositionSelSetColorPrimaries                                                          = objc.RegisterName("setColorPrimaries:")
+	_aVMutableVideoCompositionSelSetColorYCbCrMatrix                                                        = objc.RegisterName("setColorYCbCrMatrix:")
+	_aVMutableVideoCompositionSelSetColorTransferFunction                                                   = objc.RegisterName("setColorTransferFunction:")
+	_aVMutableVideoCompositionSelSetPerFrameHDRDisplayMetadataPolicy                                        = objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:")
+	_aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler                      = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:")
+	_aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandlerCompletionHandler     = objc.RegisterName("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:")
 )
 
 func AVMutableVideoCompositionFromID(id objc.ID) *AVMutableVideoComposition {
@@ -56,7 +56,9 @@ func AVMutableVideoCompositionFromID(id objc.ID) *AVMutableVideoComposition {
 // Returns a new instance of AVMutableVideoComposition. The returned AVMutableVideoComposition will have a frameDuration of kCMTimeZero, a renderSize of {0.0, 0.0}, a nil array of instructions, and a nil animationTool.
 func AVMutableVideoCompositionVideoComposition() *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func AVMutableVideoCompositionVideoComposition() *AVMutableVideoComposition {
 // Deprecated: Use videoCompositionWithPropertiesOfAsset:completionHandler: instead
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAsset(asset *AVAsset) *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
@@ -87,7 +91,9 @@ func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetCompletionHan
 // Deprecated: Use videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler: instead
 func AVMutableVideoCompositionVideoCompositionWithPropertiesOfAssetPrototypeInstruction(asset *AVAsset, prototypeInstruction *AVVideoCompositionInstruction) *AVMutableVideoComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoCompositionWithPropertiesOfAssetPrototypeInstruction, asset.Ptr(), prototypeInstruction.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
@@ -172,7 +178,9 @@ func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHand
 		defer __block_applier.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoComposition), _aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandler, asset.Ptr(), __block_applier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionFromID(_ret)
 }
 
@@ -200,4 +208,3 @@ func AVMutableVideoCompositionVideoCompositionWithAssetApplyingCIFiltersWithHand
 	}
 	objc.ID(_clsAVMutableVideoComposition).Send(_aVMutableVideoCompositionSelVideoCompositionWithAssetApplyingCIFiltersWithHandlerCompletionHandler, asset.Ptr(), __block_applier, __block_completionHandler)
 }
-

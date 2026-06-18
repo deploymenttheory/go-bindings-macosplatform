@@ -17,15 +17,15 @@ type NSURLAuthenticationChallenge struct {
 }
 
 var (
-	_clsNSURLAuthenticationChallenge = _objcClass("NSURLAuthenticationChallenge")
+	_clsNSURLAuthenticationChallenge                                                                                        = _objcClass("NSURLAuthenticationChallenge")
 	_nSURLAuthenticationChallengeSelInitWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender = objc.RegisterName("initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error:sender:")
-	_nSURLAuthenticationChallengeSelInitWithAuthenticationChallengeSender = objc.RegisterName("initWithAuthenticationChallenge:sender:")
-	_nSURLAuthenticationChallengeSelProtectionSpace = objc.RegisterName("protectionSpace")
-	_nSURLAuthenticationChallengeSelProposedCredential = objc.RegisterName("proposedCredential")
-	_nSURLAuthenticationChallengeSelPreviousFailureCount = objc.RegisterName("previousFailureCount")
-	_nSURLAuthenticationChallengeSelFailureResponse = objc.RegisterName("failureResponse")
-	_nSURLAuthenticationChallengeSelError = objc.RegisterName("error")
-	_nSURLAuthenticationChallengeSelSender = objc.RegisterName("sender")
+	_nSURLAuthenticationChallengeSelInitWithAuthenticationChallengeSender                                                   = objc.RegisterName("initWithAuthenticationChallenge:sender:")
+	_nSURLAuthenticationChallengeSelProtectionSpace                                                                         = objc.RegisterName("protectionSpace")
+	_nSURLAuthenticationChallengeSelProposedCredential                                                                      = objc.RegisterName("proposedCredential")
+	_nSURLAuthenticationChallengeSelPreviousFailureCount                                                                    = objc.RegisterName("previousFailureCount")
+	_nSURLAuthenticationChallengeSelFailureResponse                                                                         = objc.RegisterName("failureResponse")
+	_nSURLAuthenticationChallengeSelError                                                                                   = objc.RegisterName("error")
+	_nSURLAuthenticationChallengeSelSender                                                                                  = objc.RegisterName("sender")
 )
 
 func NSURLAuthenticationChallengeFromID(id objc.ID) *NSURLAuthenticationChallenge {
@@ -41,28 +41,36 @@ func NSURLAuthenticationChallengeFromID(id objc.ID) *NSURLAuthenticationChalleng
 // @method initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error: @abstract Initialize an authentication challenge @param space The NSURLProtectionSpace to use @param credential The proposed NSURLCredential for this challenge, or nil @param previousFailureCount A count of previous failures attempting access. @param response The NSURLResponse for the authentication failure, if applicable, else nil @param error The NSError for the authentication failure, if applicable, else nil @result An authentication challenge initialized with the specified parameters
 func (o *NSURLAuthenticationChallenge) InitWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender(space *NSURLProtectionSpace, credential *NSURLCredential, previousFailureCount int, response *NSURLResponse, error_ unsafe.Pointer, sender NSURLAuthenticationChallengeSender) *NSURLAuthenticationChallenge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelInitWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender, space.Ptr(), credential.Ptr(), previousFailureCount, response.Ptr(), error_, sender)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLAuthenticationChallengeFromID(_ret)
 }
 
 // @method initWithAuthenticationChallenge: @abstract Initialize an authentication challenge copying all parameters from another one. @result A new challenge initialized with the parameters from the passed in challenge @discussion This initializer may be useful to subclassers that want to proxy one type of authentication challenge to look like another type.
 func (o *NSURLAuthenticationChallenge) InitWithAuthenticationChallengeSender(challenge *NSURLAuthenticationChallenge, sender NSURLAuthenticationChallengeSender) *NSURLAuthenticationChallenge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelInitWithAuthenticationChallengeSender, challenge.Ptr(), sender)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLAuthenticationChallengeFromID(_ret)
 }
 
 // @abstract Get a description of the protection space that requires authentication @result The protection space that needs authentication
 func (o *NSURLAuthenticationChallenge) ProtectionSpace() *NSURLProtectionSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelProtectionSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLProtectionSpaceFromID(_ret)
 }
 
 // @abstract Get the proposed credential for this challenge @result The proposed credential @discussion proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
 func (o *NSURLAuthenticationChallenge) ProposedCredential() *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelProposedCredential)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
@@ -75,7 +83,9 @@ func (o *NSURLAuthenticationChallenge) PreviousFailureCount() int {
 // @abstract Get the response representing authentication failure. @result The failure response or nil @discussion If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
 func (o *NSURLAuthenticationChallenge) FailureResponse() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLAuthenticationChallengeSelFailureResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLResponseFromID(_ret)
 }
 
@@ -90,4 +100,3 @@ func (o *NSURLAuthenticationChallenge) Sender() NSURLAuthenticationChallengeSend
 	_ret := objc.Send[NSURLAuthenticationChallengeSender](o.Ptr(), _nSURLAuthenticationChallengeSelSender)
 	return _ret
 }
-

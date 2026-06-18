@@ -64,4 +64,3 @@ type Enumeratorable interface {
 }
 
 var _ Enumeratorable = (*Enumerator)(nil)
-

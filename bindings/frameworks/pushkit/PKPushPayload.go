@@ -16,8 +16,8 @@ type PKPushPayload struct {
 }
 
 var (
-	_clsPKPushPayload = _objcClass("PKPushPayload")
-	_pKPushPayloadSelType = objc.RegisterName("type")
+	_clsPKPushPayload                  = _objcClass("PKPushPayload")
+	_pKPushPayloadSelType              = objc.RegisterName("type")
 	_pKPushPayloadSelDictionaryPayload = objc.RegisterName("dictionaryPayload")
 )
 
@@ -31,10 +31,12 @@ func PKPushPayloadFromID(id objc.ID) *PKPushPayload {
 	return o
 }
 
-// The type value indicating how to interpret the payload. For possible values, see ``PushKit/PKPushType``.
+// The type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
 func (o *PKPushPayload) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPushPayloadSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *PKPushPayload) DictionaryPayload() *foundation.NSDictionary[objc.ID, ob
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pKPushPayloadSelDictionaryPayload)
 	return _ret
 }
-

@@ -18,13 +18,13 @@ type PHProjectAssetElement struct {
 }
 
 var (
-	_clsPHProjectAssetElement = _objcClass("PHProjectAssetElement")
+	_clsPHProjectAssetElement                     = _objcClass("PHProjectAssetElement")
 	_pHProjectAssetElementSelCloudAssetIdentifier = objc.RegisterName("cloudAssetIdentifier")
-	_pHProjectAssetElementSelAnnotation = objc.RegisterName("annotation")
-	_pHProjectAssetElementSelCropRect = objc.RegisterName("cropRect")
-	_pHProjectAssetElementSelRegionsOfInterest = objc.RegisterName("regionsOfInterest")
-	_pHProjectAssetElementSelHorizontallyFlipped = objc.RegisterName("horizontallyFlipped")
-	_pHProjectAssetElementSelVerticallyFlipped = objc.RegisterName("verticallyFlipped")
+	_pHProjectAssetElementSelAnnotation           = objc.RegisterName("annotation")
+	_pHProjectAssetElementSelCropRect             = objc.RegisterName("cropRect")
+	_pHProjectAssetElementSelRegionsOfInterest    = objc.RegisterName("regionsOfInterest")
+	_pHProjectAssetElementSelHorizontallyFlipped  = objc.RegisterName("horizontallyFlipped")
+	_pHProjectAssetElementSelVerticallyFlipped    = objc.RegisterName("verticallyFlipped")
 )
 
 func PHProjectAssetElementFromID(id objc.ID) *PHProjectAssetElement {
@@ -40,14 +40,18 @@ func PHProjectAssetElementFromID(id objc.ID) *PHProjectAssetElement {
 // Cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
 func (o *PHProjectAssetElement) CloudAssetIdentifier() *photos.PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectAssetElementSelCloudAssetIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return photos.PHCloudIdentifierFromID(_ret)
 }
 
 // If a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
 func (o *PHProjectAssetElement) Annotation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectAssetElementSelAnnotation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *PHProjectAssetElement) CropRect() corefoundation.CGRect {
 // Array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
 func (o *PHProjectAssetElement) RegionsOfInterest() *foundation.NSArray[*PHProjectRegionOfInterest] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectAssetElementSelRegionsOfInterest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHProjectRegionOfInterest](_ret)
 }
 
@@ -75,4 +81,3 @@ func (o *PHProjectAssetElement) VerticallyFlipped() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHProjectAssetElementSelVerticallyFlipped)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type MTLCommandQueueDescriptor struct {
 }
 
 var (
-	_clsMTLCommandQueueDescriptor = _objcClass("MTLCommandQueueDescriptor")
-	_mTLCommandQueueDescriptorSelMaxCommandBufferCount = objc.RegisterName("maxCommandBufferCount")
+	_clsMTLCommandQueueDescriptor                         = _objcClass("MTLCommandQueueDescriptor")
+	_mTLCommandQueueDescriptorSelMaxCommandBufferCount    = objc.RegisterName("maxCommandBufferCount")
 	_mTLCommandQueueDescriptorSelSetMaxCommandBufferCount = objc.RegisterName("setMaxCommandBufferCount:")
-	_mTLCommandQueueDescriptorSelLogState = objc.RegisterName("logState")
-	_mTLCommandQueueDescriptorSelSetLogState = objc.RegisterName("setLogState:")
+	_mTLCommandQueueDescriptorSelLogState                 = objc.RegisterName("logState")
+	_mTLCommandQueueDescriptorSelSetLogState              = objc.RegisterName("setLogState:")
 )
 
 func MTLCommandQueueDescriptorFromID(id objc.ID) *MTLCommandQueueDescriptor {
@@ -52,4 +52,3 @@ func (o *MTLCommandQueueDescriptor) LogState() MTLLogState {
 func (o *MTLCommandQueueDescriptor) SetLogState(logState MTLLogState) {
 	o.Ptr().Send(_mTLCommandQueueDescriptorSelSetLogState, logState)
 }
-

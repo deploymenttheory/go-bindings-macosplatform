@@ -100,4 +100,3 @@ type Constraintable interface {
 }
 
 var _ Constraintable = (*Constraint)(nil)
-

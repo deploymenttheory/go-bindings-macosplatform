@@ -16,10 +16,10 @@ type AVPlayerItemAccessLog struct {
 }
 
 var (
-	_clsAVPlayerItemAccessLog = _objcClass("AVPlayerItemAccessLog")
-	_aVPlayerItemAccessLogSelExtendedLogData = objc.RegisterName("extendedLogData")
+	_clsAVPlayerItemAccessLog                              = _objcClass("AVPlayerItemAccessLog")
+	_aVPlayerItemAccessLogSelExtendedLogData               = objc.RegisterName("extendedLogData")
 	_aVPlayerItemAccessLogSelExtendedLogDataStringEncoding = objc.RegisterName("extendedLogDataStringEncoding")
-	_aVPlayerItemAccessLogSelEvents = objc.RegisterName("events")
+	_aVPlayerItemAccessLogSelEvents                        = objc.RegisterName("events")
 )
 
 func AVPlayerItemAccessLogFromID(id objc.ID) *AVPlayerItemAccessLog {
@@ -35,7 +35,9 @@ func AVPlayerItemAccessLogFromID(id objc.ID) *AVPlayerItemAccessLog {
 // Serializes an AVPlayerItemAccessLog in the Extended Log File Format. This method converts the webserver access log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
 func (o *AVPlayerItemAccessLog) ExtendedLogData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogSelExtendedLogData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *AVPlayerItemAccessLog) ExtendedLogDataStringEncoding() uint {
 // An ordered collection of AVPlayerItemAccessLogEvent instances. An ordered collection of AVPlayerItemAccessLogEvent instances that represent the chronological sequence of events contained in the access log. This property is not observable.
 func (o *AVPlayerItemAccessLog) Events() *foundation.NSArray[*AVPlayerItemAccessLogEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemAccessLogSelEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemAccessLogEvent](_ret)
 }
-

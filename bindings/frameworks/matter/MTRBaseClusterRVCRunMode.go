@@ -18,30 +18,30 @@ type MTRBaseClusterRVCRunMode struct {
 }
 
 var (
-	_clsMTRBaseClusterRVCRunMode = _objcClass("MTRBaseClusterRVCRunMode")
-	_mTRBaseClusterRVCRunModeSelChangeToModeWithParamsCompletion = objc.RegisterName("changeToModeWithParams:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeSupportedModesWithCompletion = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeCurrentModeWithCompletion = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterRVCRunMode                                                                                     = _objcClass("MTRBaseClusterRVCRunMode")
+	_mTRBaseClusterRVCRunModeSelChangeToModeWithParamsCompletion                                                     = objc.RegisterName("changeToModeWithParams:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeSupportedModesWithCompletion                                            = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion              = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeCurrentModeWithCompletion                                               = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterRVCRunModeSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterRVCRunModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRVCRunModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRVCRunModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterRVCRunModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRVCRunModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRVCRunModeSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterRVCRunModeFromID(id objc.ID) *MTRBaseClusterRVCRunMode {
@@ -295,7 +295,8 @@ func MTRBaseClusterRVCRunModeReadAttributeClusterRevisionWithClusterStateCacheEn
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterRVCRunMode) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRVCRunMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterRVCRunModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterRVCRunModeFromID(_ret)
 }
-

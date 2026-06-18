@@ -16,11 +16,15 @@ type MTRBooleanStateConfigurationClusterEnableDisableAlarmParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams].
-func (x *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) Unwrap() *raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams { return x.inner }
+func (x *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) Unwrap() *raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRBooleanStateConfigurationClusterEnableDisableAlarmParamsFromID adopts an existing object pointer as a MTRBooleanStateConfigurationClusterEnableDisableAlarmParams (nil for 0).
 func MTRBooleanStateConfigurationClusterEnableDisableAlarmParamsFromID(id objc.ID) *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
@@ -99,4 +103,3 @@ type MTRBooleanStateConfigurationClusterEnableDisableAlarmParamsable interface {
 }
 
 var _ MTRBooleanStateConfigurationClusterEnableDisableAlarmParamsable = (*MTRBooleanStateConfigurationClusterEnableDisableAlarmParams)(nil)
-

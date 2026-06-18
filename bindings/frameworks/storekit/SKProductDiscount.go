@@ -17,14 +17,14 @@ type SKProductDiscount struct {
 }
 
 var (
-	_clsSKProductDiscount = _objcClass("SKProductDiscount")
-	_sKProductDiscountSelPrice = objc.RegisterName("price")
-	_sKProductDiscountSelPriceLocale = objc.RegisterName("priceLocale")
-	_sKProductDiscountSelIdentifier = objc.RegisterName("identifier")
+	_clsSKProductDiscount                   = _objcClass("SKProductDiscount")
+	_sKProductDiscountSelPrice              = objc.RegisterName("price")
+	_sKProductDiscountSelPriceLocale        = objc.RegisterName("priceLocale")
+	_sKProductDiscountSelIdentifier         = objc.RegisterName("identifier")
 	_sKProductDiscountSelSubscriptionPeriod = objc.RegisterName("subscriptionPeriod")
-	_sKProductDiscountSelNumberOfPeriods = objc.RegisterName("numberOfPeriods")
-	_sKProductDiscountSelPaymentMode = objc.RegisterName("paymentMode")
-	_sKProductDiscountSelType = objc.RegisterName("type")
+	_sKProductDiscountSelNumberOfPeriods    = objc.RegisterName("numberOfPeriods")
+	_sKProductDiscountSelPaymentMode        = objc.RegisterName("paymentMode")
+	_sKProductDiscountSelType               = objc.RegisterName("type")
 )
 
 func SKProductDiscountFromID(id objc.ID) *SKProductDiscount {
@@ -40,28 +40,36 @@ func SKProductDiscountFromID(id objc.ID) *SKProductDiscount {
 // Deprecated: Use Product.SubscriptionOffer.displayPrice.
 func (o *SKProductDiscount) Price() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductDiscountSelPrice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 // Deprecated: Use Product.SubscriptionOffer.displayPrice.
 func (o *SKProductDiscount) PriceLocale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductDiscountSelPriceLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 // Deprecated: Use Product.SubscriptionOffer.id.
 func (o *SKProductDiscount) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductDiscountSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use Product.SubscriptionOffer.period.
 func (o *SKProductDiscount) SubscriptionPeriod() *SKProductSubscriptionPeriod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductDiscountSelSubscriptionPeriod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKProductSubscriptionPeriodFromID(_ret)
 }
 
@@ -82,4 +90,3 @@ func (o *SKProductDiscount) Type() SKProductDiscountType {
 	_ret := objc.Send[SKProductDiscountType](o.Ptr(), _sKProductDiscountSelType)
 	return _ret
 }
-

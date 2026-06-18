@@ -18,12 +18,12 @@ type VNHumanHandPoseObservation struct {
 }
 
 var (
-	_clsVNHumanHandPoseObservation = _objcClass("VNHumanHandPoseObservation")
-	_vNHumanHandPoseObservationSelRecognizedPointForJointNameError = objc.RegisterName("recognizedPointForJointName:error:")
+	_clsVNHumanHandPoseObservation                                        = _objcClass("VNHumanHandPoseObservation")
+	_vNHumanHandPoseObservationSelRecognizedPointForJointNameError        = objc.RegisterName("recognizedPointForJointName:error:")
 	_vNHumanHandPoseObservationSelRecognizedPointsForJointsGroupNameError = objc.RegisterName("recognizedPointsForJointsGroupName:error:")
-	_vNHumanHandPoseObservationSelAvailableJointNames = objc.RegisterName("availableJointNames")
-	_vNHumanHandPoseObservationSelAvailableJointsGroupNames = objc.RegisterName("availableJointsGroupNames")
-	_vNHumanHandPoseObservationSelChirality = objc.RegisterName("chirality")
+	_vNHumanHandPoseObservationSelAvailableJointNames                     = objc.RegisterName("availableJointNames")
+	_vNHumanHandPoseObservationSelAvailableJointsGroupNames               = objc.RegisterName("availableJointsGroupNames")
+	_vNHumanHandPoseObservationSelChirality                               = objc.RegisterName("chirality")
 )
 
 func VNHumanHandPoseObservationFromID(id objc.ID) *VNHumanHandPoseObservation {
@@ -40,7 +40,9 @@ func VNHumanHandPoseObservationFromID(id objc.ID) *VNHumanHandPoseObservation {
 func (o *VNHumanHandPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*VNRecognizedPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanHandPoseObservationSelRecognizedPointForJointNameError, jointName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -74,4 +76,3 @@ func (o *VNHumanHandPoseObservation) Chirality() VNChirality {
 	_ret := objc.Send[VNChirality](o.Ptr(), _vNHumanHandPoseObservationSelChirality)
 	return _ret
 }
-

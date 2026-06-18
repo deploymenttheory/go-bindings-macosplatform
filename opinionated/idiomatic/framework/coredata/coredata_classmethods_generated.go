@@ -477,4 +477,3 @@ func CurrentQueryGenerationToken() *QueryGenerationToken {
 	}
 	return &QueryGenerationToken{inner: _r}
 }
-

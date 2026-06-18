@@ -16,12 +16,12 @@ type MTRModeSelectClusterModeOptionStruct struct {
 }
 
 var (
-	_clsMTRModeSelectClusterModeOptionStruct = _objcClass("MTRModeSelectClusterModeOptionStruct")
-	_mTRModeSelectClusterModeOptionStructSelLabel = objc.RegisterName("label")
-	_mTRModeSelectClusterModeOptionStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRModeSelectClusterModeOptionStructSelMode = objc.RegisterName("mode")
-	_mTRModeSelectClusterModeOptionStructSelSetMode = objc.RegisterName("setMode:")
-	_mTRModeSelectClusterModeOptionStructSelSemanticTags = objc.RegisterName("semanticTags")
+	_clsMTRModeSelectClusterModeOptionStruct                = _objcClass("MTRModeSelectClusterModeOptionStruct")
+	_mTRModeSelectClusterModeOptionStructSelLabel           = objc.RegisterName("label")
+	_mTRModeSelectClusterModeOptionStructSelSetLabel        = objc.RegisterName("setLabel:")
+	_mTRModeSelectClusterModeOptionStructSelMode            = objc.RegisterName("mode")
+	_mTRModeSelectClusterModeOptionStructSelSetMode         = objc.RegisterName("setMode:")
+	_mTRModeSelectClusterModeOptionStructSelSemanticTags    = objc.RegisterName("semanticTags")
 	_mTRModeSelectClusterModeOptionStructSelSetSemanticTags = objc.RegisterName("setSemanticTags:")
 )
 
@@ -37,7 +37,9 @@ func MTRModeSelectClusterModeOptionStructFromID(id objc.ID) *MTRModeSelectCluste
 
 func (o *MTRModeSelectClusterModeOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRModeSelectClusterModeOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRModeSelectClusterModeOptionStruct) SetLabel(label *foundation.NSStri
 
 func (o *MTRModeSelectClusterModeOptionStruct) Mode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRModeSelectClusterModeOptionStructSelMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRModeSelectClusterModeOptionStruct) SemanticTags() *foundation.NSArra
 func (o *MTRModeSelectClusterModeOptionStruct) SetSemanticTags(semanticTags *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRModeSelectClusterModeOptionStructSelSetSemanticTags, semanticTags)
 }
-

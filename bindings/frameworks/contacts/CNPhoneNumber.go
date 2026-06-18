@@ -16,12 +16,12 @@ type CNPhoneNumber struct {
 }
 
 var (
-	_clsCNPhoneNumber = _objcClass("CNPhoneNumber")
+	_clsCNPhoneNumber                           = _objcClass("CNPhoneNumber")
 	_cNPhoneNumberSelPhoneNumberWithStringValue = objc.RegisterName("phoneNumberWithStringValue:")
-	_cNPhoneNumberSelInitWithStringValue = objc.RegisterName("initWithStringValue:")
-	_cNPhoneNumberSelInit = objc.RegisterName("init")
-	_cNPhoneNumberSelNew = objc.RegisterName("new")
-	_cNPhoneNumberSelStringValue = objc.RegisterName("stringValue")
+	_cNPhoneNumberSelInitWithStringValue        = objc.RegisterName("initWithStringValue:")
+	_cNPhoneNumberSelInit                       = objc.RegisterName("init")
+	_cNPhoneNumberSelNew                        = objc.RegisterName("new")
+	_cNPhoneNumberSelStringValue                = objc.RegisterName("stringValue")
 )
 
 func CNPhoneNumberFromID(id objc.ID) *CNPhoneNumber {
@@ -37,20 +37,26 @@ func CNPhoneNumberFromID(id objc.ID) *CNPhoneNumber {
 // These will return nil if the stringValue is nil.
 func CNPhoneNumberPhoneNumberWithStringValue(stringValue *foundation.NSString) *CNPhoneNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNPhoneNumber), _cNPhoneNumberSelPhoneNumberWithStringValue, stringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNPhoneNumberFromID(_ret)
 }
 
 func (o *CNPhoneNumber) InitWithStringValue(string_ *foundation.NSString) *CNPhoneNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNPhoneNumberSelInitWithStringValue, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNPhoneNumberFromID(_ret)
 }
 
 // Deprecated: since macOS 10.13.
 func (o *CNPhoneNumber) Init() *CNPhoneNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNPhoneNumberSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNPhoneNumberFromID(_ret)
 }
 
@@ -62,7 +68,8 @@ func CNPhoneNumberNew() *CNPhoneNumber {
 
 func (o *CNPhoneNumber) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNPhoneNumberSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -27,4 +27,3 @@ type ScannerFeatureProvider interface {
 type ScannerFunctionalUnitProvider interface {
 	asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit
 }
-

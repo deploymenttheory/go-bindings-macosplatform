@@ -21,4 +21,3 @@ func AERestrictedSystemParticipantsKey() uintptr {
 	ptr, _ := purego.Dlsym(_automaticassessmentconfigurationLib, "AERestrictedSystemParticipantsKey")
 	return ptr
 }
-

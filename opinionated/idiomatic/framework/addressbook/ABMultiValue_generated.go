@@ -111,4 +111,3 @@ type MultiValueable interface {
 }
 
 var _ MultiValueable = (*MultiValue)(nil)
-

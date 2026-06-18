@@ -80,4 +80,3 @@ type NotificationActionable interface {
 }
 
 var _ NotificationActionable = (*NotificationAction)(nil)
-

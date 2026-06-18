@@ -4,9 +4,9 @@
 package avfaudio
 
 type AVAudio3DAngularOrientation struct {
-	Yaw float32
+	Yaw   float32
 	Pitch float32
-	Roll float32
+	Roll  float32
 }
 
 type AVAudio3DPoint struct {
@@ -17,25 +17,24 @@ type AVAudio3DPoint struct {
 
 type AVAudio3DVectorOrientation struct {
 	Forward AVAudio3DPoint
-	Up AVAudio3DPoint
+	Up      AVAudio3DPoint
 }
 
 type AVAudioConverterPrimeInfo struct {
-	LeadingFrames uint32
+	LeadingFrames  uint32
 	TrailingFrames uint32
 }
 
 type AVAudioVoiceProcessingOtherAudioDuckingConfiguration struct {
 	EnableAdvancedDucking bool
-	DuckingLevel AVAudioVoiceProcessingOtherAudioDuckingLevel
+	DuckingLevel          AVAudioVoiceProcessingOtherAudioDuckingLevel
 }
 
 // C struct: _AVBeatRange
 type AVBeatRange struct {
-	Start float64
+	Start  float64
 	Length float64
 }
 
 // AVAudio3DVector is an alias for AVAudio3DPoint (C typedef AVAudio3DVector).
 type AVAudio3DVector = AVAudio3DPoint
-

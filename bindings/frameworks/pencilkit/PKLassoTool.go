@@ -15,7 +15,7 @@ type PKLassoTool struct {
 }
 
 var (
-	_clsPKLassoTool = _objcClass("PKLassoTool")
+	_clsPKLassoTool     = _objcClass("PKLassoTool")
 	_pKLassoToolSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func PKLassoToolFromID(id objc.ID) *PKLassoTool {
 
 func (o *PKLassoTool) Init() *PKLassoTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKLassoToolSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKLassoToolFromID(_ret)
 }
-

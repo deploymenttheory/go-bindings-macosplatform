@@ -166,4 +166,3 @@ type ParticlePropertyControllerable interface {
 }
 
 var _ ParticlePropertyControllerable = (*ParticlePropertyController)(nil)
-

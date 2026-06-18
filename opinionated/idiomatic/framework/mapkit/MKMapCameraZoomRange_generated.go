@@ -69,4 +69,3 @@ type MapCameraZoomRangeable interface {
 }
 
 var _ MapCameraZoomRangeable = (*MapCameraZoomRange)(nil)
-

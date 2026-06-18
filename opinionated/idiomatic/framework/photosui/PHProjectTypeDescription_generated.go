@@ -133,4 +133,3 @@ type ProjectTypeDescriptionable interface {
 }
 
 var _ ProjectTypeDescriptionable = (*ProjectTypeDescription)(nil)
-

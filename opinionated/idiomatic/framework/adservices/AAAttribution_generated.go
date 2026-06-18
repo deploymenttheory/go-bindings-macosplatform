@@ -41,4 +41,3 @@ type Attributionable interface {
 }
 
 var _ Attributionable = (*Attribution)(nil)
-

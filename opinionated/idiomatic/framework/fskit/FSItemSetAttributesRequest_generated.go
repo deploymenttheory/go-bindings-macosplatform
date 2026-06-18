@@ -128,7 +128,9 @@ func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes raw.
 	x.inner.SetConsumedAttributes(consumedAttributes)
 }
 
-func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes { return &x.inner.FSItemAttributes }
+func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes {
+	return &x.inner.FSItemAttributes
+}
 
 // ItemSetAttributesRequestable is the interface implemented by [ItemSetAttributesRequest], for mocking and DI.
 type ItemSetAttributesRequestable interface {
@@ -152,4 +154,3 @@ type ItemSetAttributesRequestable interface {
 }
 
 var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)
-

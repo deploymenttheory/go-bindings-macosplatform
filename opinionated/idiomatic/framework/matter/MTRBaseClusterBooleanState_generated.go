@@ -395,9 +395,13 @@ func (x *MTRBaseClusterBooleanState) SubscribeAttributeClusterRevisionWithMinInt
 	}
 }
 
-func (x *MTRBaseClusterBooleanState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBooleanState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBooleanState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBooleanState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBooleanStateable is the interface implemented by [MTRBaseClusterBooleanState], for mocking and DI.
 type MTRBaseClusterBooleanStateable interface {
@@ -429,4 +433,3 @@ type MTRBaseClusterBooleanStateable interface {
 }
 
 var _ MTRBaseClusterBooleanStateable = (*MTRBaseClusterBooleanState)(nil)
-

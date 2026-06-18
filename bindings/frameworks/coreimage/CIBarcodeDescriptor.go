@@ -26,4 +26,3 @@ func CIBarcodeDescriptorFromID(id objc.ID) *CIBarcodeDescriptor {
 	purego.Track(o)
 	return o
 }
-

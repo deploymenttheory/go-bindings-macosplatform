@@ -16,32 +16,32 @@ type HKActivitySummary struct {
 }
 
 var (
-	_clsHKActivitySummary = _objcClass("HKActivitySummary")
+	_clsHKActivitySummary                          = _objcClass("HKActivitySummary")
 	_hKActivitySummarySelDateComponentsForCalendar = objc.RegisterName("dateComponentsForCalendar:")
-	_hKActivitySummarySelActivityMoveMode = objc.RegisterName("activityMoveMode")
-	_hKActivitySummarySelSetActivityMoveMode = objc.RegisterName("setActivityMoveMode:")
-	_hKActivitySummarySelIsPaused = objc.RegisterName("isPaused")
-	_hKActivitySummarySelSetPaused = objc.RegisterName("setPaused:")
-	_hKActivitySummarySelActiveEnergyBurned = objc.RegisterName("activeEnergyBurned")
-	_hKActivitySummarySelSetActiveEnergyBurned = objc.RegisterName("setActiveEnergyBurned:")
-	_hKActivitySummarySelAppleMoveTime = objc.RegisterName("appleMoveTime")
-	_hKActivitySummarySelSetAppleMoveTime = objc.RegisterName("setAppleMoveTime:")
-	_hKActivitySummarySelAppleExerciseTime = objc.RegisterName("appleExerciseTime")
-	_hKActivitySummarySelSetAppleExerciseTime = objc.RegisterName("setAppleExerciseTime:")
-	_hKActivitySummarySelAppleStandHours = objc.RegisterName("appleStandHours")
-	_hKActivitySummarySelSetAppleStandHours = objc.RegisterName("setAppleStandHours:")
-	_hKActivitySummarySelActiveEnergyBurnedGoal = objc.RegisterName("activeEnergyBurnedGoal")
+	_hKActivitySummarySelActivityMoveMode          = objc.RegisterName("activityMoveMode")
+	_hKActivitySummarySelSetActivityMoveMode       = objc.RegisterName("setActivityMoveMode:")
+	_hKActivitySummarySelIsPaused                  = objc.RegisterName("isPaused")
+	_hKActivitySummarySelSetPaused                 = objc.RegisterName("setPaused:")
+	_hKActivitySummarySelActiveEnergyBurned        = objc.RegisterName("activeEnergyBurned")
+	_hKActivitySummarySelSetActiveEnergyBurned     = objc.RegisterName("setActiveEnergyBurned:")
+	_hKActivitySummarySelAppleMoveTime             = objc.RegisterName("appleMoveTime")
+	_hKActivitySummarySelSetAppleMoveTime          = objc.RegisterName("setAppleMoveTime:")
+	_hKActivitySummarySelAppleExerciseTime         = objc.RegisterName("appleExerciseTime")
+	_hKActivitySummarySelSetAppleExerciseTime      = objc.RegisterName("setAppleExerciseTime:")
+	_hKActivitySummarySelAppleStandHours           = objc.RegisterName("appleStandHours")
+	_hKActivitySummarySelSetAppleStandHours        = objc.RegisterName("setAppleStandHours:")
+	_hKActivitySummarySelActiveEnergyBurnedGoal    = objc.RegisterName("activeEnergyBurnedGoal")
 	_hKActivitySummarySelSetActiveEnergyBurnedGoal = objc.RegisterName("setActiveEnergyBurnedGoal:")
-	_hKActivitySummarySelAppleMoveTimeGoal = objc.RegisterName("appleMoveTimeGoal")
-	_hKActivitySummarySelSetAppleMoveTimeGoal = objc.RegisterName("setAppleMoveTimeGoal:")
-	_hKActivitySummarySelAppleExerciseTimeGoal = objc.RegisterName("appleExerciseTimeGoal")
-	_hKActivitySummarySelSetAppleExerciseTimeGoal = objc.RegisterName("setAppleExerciseTimeGoal:")
-	_hKActivitySummarySelExerciseTimeGoal = objc.RegisterName("exerciseTimeGoal")
-	_hKActivitySummarySelSetExerciseTimeGoal = objc.RegisterName("setExerciseTimeGoal:")
-	_hKActivitySummarySelAppleStandHoursGoal = objc.RegisterName("appleStandHoursGoal")
-	_hKActivitySummarySelSetAppleStandHoursGoal = objc.RegisterName("setAppleStandHoursGoal:")
-	_hKActivitySummarySelStandHoursGoal = objc.RegisterName("standHoursGoal")
-	_hKActivitySummarySelSetStandHoursGoal = objc.RegisterName("setStandHoursGoal:")
+	_hKActivitySummarySelAppleMoveTimeGoal         = objc.RegisterName("appleMoveTimeGoal")
+	_hKActivitySummarySelSetAppleMoveTimeGoal      = objc.RegisterName("setAppleMoveTimeGoal:")
+	_hKActivitySummarySelAppleExerciseTimeGoal     = objc.RegisterName("appleExerciseTimeGoal")
+	_hKActivitySummarySelSetAppleExerciseTimeGoal  = objc.RegisterName("setAppleExerciseTimeGoal:")
+	_hKActivitySummarySelExerciseTimeGoal          = objc.RegisterName("exerciseTimeGoal")
+	_hKActivitySummarySelSetExerciseTimeGoal       = objc.RegisterName("setExerciseTimeGoal:")
+	_hKActivitySummarySelAppleStandHoursGoal       = objc.RegisterName("appleStandHoursGoal")
+	_hKActivitySummarySelSetAppleStandHoursGoal    = objc.RegisterName("setAppleStandHoursGoal:")
+	_hKActivitySummarySelStandHoursGoal            = objc.RegisterName("standHoursGoal")
+	_hKActivitySummarySelSetStandHoursGoal         = objc.RegisterName("setStandHoursGoal:")
 )
 
 func HKActivitySummaryFromID(id objc.ID) *HKActivitySummary {
@@ -57,7 +57,9 @@ func HKActivitySummaryFromID(id objc.ID) *HKActivitySummary {
 // @method        dateComponentsForCalendar: @abstract      The date components representing the day for this particular HKActivitySummary. @discussion    These date components will contain era, year, month, and day components in the provided calendar.
 func (o *HKActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelDateComponentsForCalendar, calendar.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -84,7 +86,9 @@ func (o *HKActivitySummary) SetPaused(paused bool) {
 // @property      activeEnergyBurned @abstract      The amount of active energy that the user burned. @discussion    This quantity is compatible with energy units.
 func (o *HKActivitySummary) ActiveEnergyBurned() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelActiveEnergyBurned)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -95,7 +99,9 @@ func (o *HKActivitySummary) SetActiveEnergyBurned(activeEnergyBurned *HKQuantity
 // @property      appleMoveTime @abstract      The amount of move time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
 func (o *HKActivitySummary) AppleMoveTime() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleMoveTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -106,7 +112,9 @@ func (o *HKActivitySummary) SetAppleMoveTime(appleMoveTime *HKQuantity) {
 // @property      appleExerciseTime @abstract      The amount of exercise time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
 func (o *HKActivitySummary) AppleExerciseTime() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleExerciseTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -117,7 +125,9 @@ func (o *HKActivitySummary) SetAppleExerciseTime(appleExerciseTime *HKQuantity) 
 // @property      appleStandHours @abstract      The number of stand hours that the user earned. @discussion     This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
 func (o *HKActivitySummary) AppleStandHours() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleStandHours)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -128,7 +138,9 @@ func (o *HKActivitySummary) SetAppleStandHours(appleStandHours *HKQuantity) {
 // @property      activeEnergyBurnedGoal @abstract      The user's active energy goal for the day. @discussion    This quantity is compatible with energy units.
 func (o *HKActivitySummary) ActiveEnergyBurnedGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelActiveEnergyBurnedGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -139,7 +151,9 @@ func (o *HKActivitySummary) SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *HK
 // @property      appleMoveTimeGoal @abstract      The user's move time goal for the day. @discussion    This quantity is compatible with time units.
 func (o *HKActivitySummary) AppleMoveTimeGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleMoveTimeGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -150,7 +164,9 @@ func (o *HKActivitySummary) SetAppleMoveTimeGoal(appleMoveTimeGoal *HKQuantity) 
 // @property      appleExerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
 func (o *HKActivitySummary) AppleExerciseTimeGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleExerciseTimeGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -161,7 +177,9 @@ func (o *HKActivitySummary) SetAppleExerciseTimeGoal(appleExerciseTimeGoal *HKQu
 // @property      exerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
 func (o *HKActivitySummary) ExerciseTimeGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelExerciseTimeGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -172,7 +190,9 @@ func (o *HKActivitySummary) SetExerciseTimeGoal(exerciseTimeGoal *HKQuantity) {
 // @property      appleStandHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
 func (o *HKActivitySummary) AppleStandHoursGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelAppleStandHoursGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
@@ -183,11 +203,12 @@ func (o *HKActivitySummary) SetAppleStandHoursGoal(appleStandHoursGoal *HKQuanti
 // @property      standHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
 func (o *HKActivitySummary) StandHoursGoal() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKActivitySummarySelStandHoursGoal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 func (o *HKActivitySummary) SetStandHoursGoal(standHoursGoal *HKQuantity) {
 	o.Ptr().Send(_hKActivitySummarySelSetStandHoursGoal, standHoursGoal.Ptr())
 }
-

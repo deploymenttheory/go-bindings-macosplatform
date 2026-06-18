@@ -17,12 +17,12 @@ type VNCoreMLRequest struct {
 }
 
 var (
-	_clsVNCoreMLRequest = _objcClass("VNCoreMLRequest")
-	_vNCoreMLRequestSelInitWithModel = objc.RegisterName("initWithModel:")
+	_clsVNCoreMLRequest                               = _objcClass("VNCoreMLRequest")
+	_vNCoreMLRequestSelInitWithModel                  = objc.RegisterName("initWithModel:")
 	_vNCoreMLRequestSelInitWithModelCompletionHandler = objc.RegisterName("initWithModel:completionHandler:")
-	_vNCoreMLRequestSelModel = objc.RegisterName("model")
-	_vNCoreMLRequestSelImageCropAndScaleOption = objc.RegisterName("imageCropAndScaleOption")
-	_vNCoreMLRequestSelSetImageCropAndScaleOption = objc.RegisterName("setImageCropAndScaleOption:")
+	_vNCoreMLRequestSelModel                          = objc.RegisterName("model")
+	_vNCoreMLRequestSelImageCropAndScaleOption        = objc.RegisterName("imageCropAndScaleOption")
+	_vNCoreMLRequestSelSetImageCropAndScaleOption     = objc.RegisterName("setImageCropAndScaleOption:")
 )
 
 func VNCoreMLRequestFromID(id objc.ID) *VNCoreMLRequest {
@@ -38,7 +38,9 @@ func VNCoreMLRequestFromID(id objc.ID) *VNCoreMLRequest {
 // @brief Create a new request with a model. @param model		The VNCoreMLModel to be used.
 func (o *VNCoreMLRequest) InitWithModel(model *VNCoreMLModel) *VNCoreMLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLRequestSelInitWithModel, model.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCoreMLRequestFromID(_ret)
 }
 
@@ -55,14 +57,18 @@ func (o *VNCoreMLRequest) InitWithModelCompletionHandler(model *VNCoreMLModel, c
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLRequestSelInitWithModelCompletionHandler, model.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCoreMLRequestFromID(_ret)
 }
 
 // @brief The model from CoreML wrapped in a VNCoreMLModel.
 func (o *VNCoreMLRequest) Model() *VNCoreMLModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLRequestSelModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNCoreMLModelFromID(_ret)
 }
 
@@ -74,4 +80,3 @@ func (o *VNCoreMLRequest) ImageCropAndScaleOption() VNImageCropAndScaleOption {
 func (o *VNCoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
 	o.Ptr().Send(_vNCoreMLRequestSelSetImageCropAndScaleOption, imageCropAndScaleOption)
 }
-

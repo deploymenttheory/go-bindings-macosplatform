@@ -64,4 +64,3 @@ type ComparisonLayerable interface {
 }
 
 var _ ComparisonLayerable = (*ComparisonLayer)(nil)
-

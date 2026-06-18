@@ -15,40 +15,40 @@ type NSTextCheckingResult struct {
 }
 
 var (
-	_clsNSTextCheckingResult = _objcClass("NSTextCheckingResult")
-	_nSTextCheckingResultSelResultType = objc.RegisterName("resultType")
-	_nSTextCheckingResultSelRange = objc.RegisterName("range")
-	_nSTextCheckingResultSelRangeAtIndex = objc.RegisterName("rangeAtIndex:")
-	_nSTextCheckingResultSelRangeWithName = objc.RegisterName("rangeWithName:")
-	_nSTextCheckingResultSelResultByAdjustingRangesWithOffset = objc.RegisterName("resultByAdjustingRangesWithOffset:")
-	_nSTextCheckingResultSelOrthography = objc.RegisterName("orthography")
-	_nSTextCheckingResultSelGrammarDetails = objc.RegisterName("grammarDetails")
-	_nSTextCheckingResultSelDate = objc.RegisterName("date")
-	_nSTextCheckingResultSelTimeZone = objc.RegisterName("timeZone")
-	_nSTextCheckingResultSelDuration = objc.RegisterName("duration")
-	_nSTextCheckingResultSelComponents = objc.RegisterName("components")
-	_nSTextCheckingResultSelURL = objc.RegisterName("URL")
-	_nSTextCheckingResultSelReplacementString = objc.RegisterName("replacementString")
-	_nSTextCheckingResultSelAlternativeStrings = objc.RegisterName("alternativeStrings")
-	_nSTextCheckingResultSelRegularExpression = objc.RegisterName("regularExpression")
-	_nSTextCheckingResultSelPhoneNumber = objc.RegisterName("phoneNumber")
-	_nSTextCheckingResultSelNumberOfRanges = objc.RegisterName("numberOfRanges")
-	_nSTextCheckingResultSelAddressComponents = objc.RegisterName("addressComponents")
-	_nSTextCheckingResultSelOrthographyCheckingResultWithRangeOrthography = objc.RegisterName("orthographyCheckingResultWithRange:orthography:")
-	_nSTextCheckingResultSelSpellCheckingResultWithRange = objc.RegisterName("spellCheckingResultWithRange:")
-	_nSTextCheckingResultSelGrammarCheckingResultWithRangeDetails = objc.RegisterName("grammarCheckingResultWithRange:details:")
-	_nSTextCheckingResultSelDateCheckingResultWithRangeDate = objc.RegisterName("dateCheckingResultWithRange:date:")
-	_nSTextCheckingResultSelDateCheckingResultWithRangeDateTimeZoneDuration = objc.RegisterName("dateCheckingResultWithRange:date:timeZone:duration:")
-	_nSTextCheckingResultSelAddressCheckingResultWithRangeComponents = objc.RegisterName("addressCheckingResultWithRange:components:")
-	_nSTextCheckingResultSelLinkCheckingResultWithRangeURL = objc.RegisterName("linkCheckingResultWithRange:URL:")
-	_nSTextCheckingResultSelQuoteCheckingResultWithRangeReplacementString = objc.RegisterName("quoteCheckingResultWithRange:replacementString:")
-	_nSTextCheckingResultSelDashCheckingResultWithRangeReplacementString = objc.RegisterName("dashCheckingResultWithRange:replacementString:")
-	_nSTextCheckingResultSelReplacementCheckingResultWithRangeReplacementString = objc.RegisterName("replacementCheckingResultWithRange:replacementString:")
-	_nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementString = objc.RegisterName("correctionCheckingResultWithRange:replacementString:")
+	_clsNSTextCheckingResult                                                                     = _objcClass("NSTextCheckingResult")
+	_nSTextCheckingResultSelResultType                                                           = objc.RegisterName("resultType")
+	_nSTextCheckingResultSelRange                                                                = objc.RegisterName("range")
+	_nSTextCheckingResultSelRangeAtIndex                                                         = objc.RegisterName("rangeAtIndex:")
+	_nSTextCheckingResultSelRangeWithName                                                        = objc.RegisterName("rangeWithName:")
+	_nSTextCheckingResultSelResultByAdjustingRangesWithOffset                                    = objc.RegisterName("resultByAdjustingRangesWithOffset:")
+	_nSTextCheckingResultSelOrthography                                                          = objc.RegisterName("orthography")
+	_nSTextCheckingResultSelGrammarDetails                                                       = objc.RegisterName("grammarDetails")
+	_nSTextCheckingResultSelDate                                                                 = objc.RegisterName("date")
+	_nSTextCheckingResultSelTimeZone                                                             = objc.RegisterName("timeZone")
+	_nSTextCheckingResultSelDuration                                                             = objc.RegisterName("duration")
+	_nSTextCheckingResultSelComponents                                                           = objc.RegisterName("components")
+	_nSTextCheckingResultSelURL                                                                  = objc.RegisterName("URL")
+	_nSTextCheckingResultSelReplacementString                                                    = objc.RegisterName("replacementString")
+	_nSTextCheckingResultSelAlternativeStrings                                                   = objc.RegisterName("alternativeStrings")
+	_nSTextCheckingResultSelRegularExpression                                                    = objc.RegisterName("regularExpression")
+	_nSTextCheckingResultSelPhoneNumber                                                          = objc.RegisterName("phoneNumber")
+	_nSTextCheckingResultSelNumberOfRanges                                                       = objc.RegisterName("numberOfRanges")
+	_nSTextCheckingResultSelAddressComponents                                                    = objc.RegisterName("addressComponents")
+	_nSTextCheckingResultSelOrthographyCheckingResultWithRangeOrthography                        = objc.RegisterName("orthographyCheckingResultWithRange:orthography:")
+	_nSTextCheckingResultSelSpellCheckingResultWithRange                                         = objc.RegisterName("spellCheckingResultWithRange:")
+	_nSTextCheckingResultSelGrammarCheckingResultWithRangeDetails                                = objc.RegisterName("grammarCheckingResultWithRange:details:")
+	_nSTextCheckingResultSelDateCheckingResultWithRangeDate                                      = objc.RegisterName("dateCheckingResultWithRange:date:")
+	_nSTextCheckingResultSelDateCheckingResultWithRangeDateTimeZoneDuration                      = objc.RegisterName("dateCheckingResultWithRange:date:timeZone:duration:")
+	_nSTextCheckingResultSelAddressCheckingResultWithRangeComponents                             = objc.RegisterName("addressCheckingResultWithRange:components:")
+	_nSTextCheckingResultSelLinkCheckingResultWithRangeURL                                       = objc.RegisterName("linkCheckingResultWithRange:URL:")
+	_nSTextCheckingResultSelQuoteCheckingResultWithRangeReplacementString                        = objc.RegisterName("quoteCheckingResultWithRange:replacementString:")
+	_nSTextCheckingResultSelDashCheckingResultWithRangeReplacementString                         = objc.RegisterName("dashCheckingResultWithRange:replacementString:")
+	_nSTextCheckingResultSelReplacementCheckingResultWithRangeReplacementString                  = objc.RegisterName("replacementCheckingResultWithRange:replacementString:")
+	_nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementString                   = objc.RegisterName("correctionCheckingResultWithRange:replacementString:")
 	_nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings = objc.RegisterName("correctionCheckingResultWithRange:replacementString:alternativeStrings:")
-	_nSTextCheckingResultSelRegularExpressionCheckingResultWithRangesCountRegularExpression = objc.RegisterName("regularExpressionCheckingResultWithRanges:count:regularExpression:")
-	_nSTextCheckingResultSelPhoneNumberCheckingResultWithRangePhoneNumber = objc.RegisterName("phoneNumberCheckingResultWithRange:phoneNumber:")
-	_nSTextCheckingResultSelTransitInformationCheckingResultWithRangeComponents = objc.RegisterName("transitInformationCheckingResultWithRange:components:")
+	_nSTextCheckingResultSelRegularExpressionCheckingResultWithRangesCountRegularExpression      = objc.RegisterName("regularExpressionCheckingResultWithRanges:count:regularExpression:")
+	_nSTextCheckingResultSelPhoneNumberCheckingResultWithRangePhoneNumber                        = objc.RegisterName("phoneNumberCheckingResultWithRange:phoneNumber:")
+	_nSTextCheckingResultSelTransitInformationCheckingResultWithRangeComponents                  = objc.RegisterName("transitInformationCheckingResultWithRange:components:")
 )
 
 func NSTextCheckingResultFromID(id objc.ID) *NSTextCheckingResult {
@@ -83,13 +83,17 @@ func (o *NSTextCheckingResult) RangeWithName(name *NSString) NSRange {
 
 func (o *NSTextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelResultByAdjustingRangesWithOffset, offset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func (o *NSTextCheckingResult) Orthography() *NSOrthography {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelOrthography)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrthographyFromID(_ret)
 }
 
@@ -100,13 +104,17 @@ func (o *NSTextCheckingResult) GrammarDetails() *NSArray[objc.ID] {
 
 func (o *NSTextCheckingResult) Date() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSTextCheckingResult) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -117,37 +125,49 @@ func (o *NSTextCheckingResult) Duration() float64 {
 
 func (o *NSTextCheckingResult) Components() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
 func (o *NSTextCheckingResult) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSTextCheckingResult) ReplacementString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelReplacementString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSTextCheckingResult) AlternativeStrings() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelAlternativeStrings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSTextCheckingResult) RegularExpression() *NSRegularExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelRegularExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRegularExpressionFromID(_ret)
 }
 
 func (o *NSTextCheckingResult) PhoneNumber() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelPhoneNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -158,97 +178,128 @@ func (o *NSTextCheckingResult) NumberOfRanges() uint {
 
 func (o *NSTextCheckingResult) AddressComponents() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingResultSelAddressComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
 func NSTextCheckingResultOrthographyCheckingResultWithRangeOrthography(range_ NSRange, orthography *NSOrthography) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelOrthographyCheckingResultWithRangeOrthography, range_, orthography.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultSpellCheckingResultWithRange(range_ NSRange) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelSpellCheckingResultWithRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultGrammarCheckingResultWithRangeDetails(range_ NSRange, details *NSArray[objc.ID]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelGrammarCheckingResultWithRangeDetails, range_, details)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultDateCheckingResultWithRangeDate(range_ NSRange, date *NSDate) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDateCheckingResultWithRangeDate, range_, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultDateCheckingResultWithRangeDateTimeZoneDuration(range_ NSRange, date *NSDate, timeZone *NSTimeZone, duration float64) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDateCheckingResultWithRangeDateTimeZoneDuration, range_, date.Ptr(), timeZone.Ptr(), duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultAddressCheckingResultWithRangeComponents(range_ NSRange, components *NSDictionary[*NSString, *NSString]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelAddressCheckingResultWithRangeComponents, range_, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultLinkCheckingResultWithRangeURL(range_ NSRange, url *NSURL) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelLinkCheckingResultWithRangeURL, range_, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultQuoteCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelQuoteCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultDashCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelDashCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultReplacementCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelReplacementCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementString(range_ NSRange, replacementString *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementString, range_, replacementString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings(range_ NSRange, replacementString *NSString, alternativeStrings *NSArray[*NSString]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelCorrectionCheckingResultWithRangeReplacementStringAlternativeStrings, range_, replacementString.Ptr(), alternativeStrings.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultRegularExpressionCheckingResultWithRangesCountRegularExpression(ranges *NSRange, count uint, regularExpression *NSRegularExpression) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelRegularExpressionCheckingResultWithRangesCountRegularExpression, ranges, count, regularExpression.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultPhoneNumberCheckingResultWithRangePhoneNumber(range_ NSRange, phoneNumber *NSString) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelPhoneNumberCheckingResultWithRangePhoneNumber, range_, phoneNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
 
 func NSTextCheckingResultTransitInformationCheckingResultWithRangeComponents(range_ NSRange, components *NSDictionary[*NSString, *NSString]) *NSTextCheckingResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextCheckingResult), _nSTextCheckingResultSelTransitInformationCheckingResultWithRangeComponents, range_, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingResultFromID(_ret)
 }
-

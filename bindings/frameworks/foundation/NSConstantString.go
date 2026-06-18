@@ -25,4 +25,3 @@ func NSConstantStringFromID(id objc.ID) *NSConstantString {
 	purego.Track(o)
 	return o
 }
-

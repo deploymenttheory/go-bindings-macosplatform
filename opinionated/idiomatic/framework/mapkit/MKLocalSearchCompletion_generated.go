@@ -87,4 +87,3 @@ type LocalSearchCompletionable interface {
 }
 
 var _ LocalSearchCompletionable = (*LocalSearchCompletion)(nil)
-

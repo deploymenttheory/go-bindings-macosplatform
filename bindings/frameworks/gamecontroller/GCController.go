@@ -18,32 +18,32 @@ type GCController struct {
 }
 
 var (
-	_clsGCController = _objcClass("GCController")
-	_gCControllerSelControllers = objc.RegisterName("controllers")
-	_gCControllerSelSupportsHIDDevice = objc.RegisterName("supportsHIDDevice:")
-	_gCControllerSelCurrent = objc.RegisterName("current")
-	_gCControllerSelControllerPausedHandler = objc.RegisterName("controllerPausedHandler")
-	_gCControllerSelSetControllerPausedHandler = objc.RegisterName("setControllerPausedHandler:")
-	_gCControllerSelShouldMonitorBackgroundEvents = objc.RegisterName("shouldMonitorBackgroundEvents")
-	_gCControllerSelSetShouldMonitorBackgroundEvents = objc.RegisterName("setShouldMonitorBackgroundEvents:")
-	_gCControllerSelIsAttachedToDevice = objc.RegisterName("isAttachedToDevice")
-	_gCControllerSelPlayerIndex = objc.RegisterName("playerIndex")
-	_gCControllerSelSetPlayerIndex = objc.RegisterName("setPlayerIndex:")
-	_gCControllerSelInput = objc.RegisterName("input")
-	_gCControllerSelBattery = objc.RegisterName("battery")
-	_gCControllerSelPhysicalInputProfile = objc.RegisterName("physicalInputProfile")
-	_gCControllerSelGamepad = objc.RegisterName("gamepad")
-	_gCControllerSelMicroGamepad = objc.RegisterName("microGamepad")
-	_gCControllerSelExtendedGamepad = objc.RegisterName("extendedGamepad")
-	_gCControllerSelMotion = objc.RegisterName("motion")
-	_gCControllerSelLight = objc.RegisterName("light")
-	_gCControllerSelHaptics = objc.RegisterName("haptics")
-	_gCControllerSelCapture = objc.RegisterName("capture")
-	_gCControllerSelControllerWithMicroGamepad = objc.RegisterName("controllerWithMicroGamepad")
-	_gCControllerSelControllerWithExtendedGamepad = objc.RegisterName("controllerWithExtendedGamepad")
-	_gCControllerSelIsSnapshot = objc.RegisterName("isSnapshot")
+	_clsGCController                                                      = _objcClass("GCController")
+	_gCControllerSelControllers                                           = objc.RegisterName("controllers")
+	_gCControllerSelSupportsHIDDevice                                     = objc.RegisterName("supportsHIDDevice:")
+	_gCControllerSelCurrent                                               = objc.RegisterName("current")
+	_gCControllerSelControllerPausedHandler                               = objc.RegisterName("controllerPausedHandler")
+	_gCControllerSelSetControllerPausedHandler                            = objc.RegisterName("setControllerPausedHandler:")
+	_gCControllerSelShouldMonitorBackgroundEvents                         = objc.RegisterName("shouldMonitorBackgroundEvents")
+	_gCControllerSelSetShouldMonitorBackgroundEvents                      = objc.RegisterName("setShouldMonitorBackgroundEvents:")
+	_gCControllerSelIsAttachedToDevice                                    = objc.RegisterName("isAttachedToDevice")
+	_gCControllerSelPlayerIndex                                           = objc.RegisterName("playerIndex")
+	_gCControllerSelSetPlayerIndex                                        = objc.RegisterName("setPlayerIndex:")
+	_gCControllerSelInput                                                 = objc.RegisterName("input")
+	_gCControllerSelBattery                                               = objc.RegisterName("battery")
+	_gCControllerSelPhysicalInputProfile                                  = objc.RegisterName("physicalInputProfile")
+	_gCControllerSelGamepad                                               = objc.RegisterName("gamepad")
+	_gCControllerSelMicroGamepad                                          = objc.RegisterName("microGamepad")
+	_gCControllerSelExtendedGamepad                                       = objc.RegisterName("extendedGamepad")
+	_gCControllerSelMotion                                                = objc.RegisterName("motion")
+	_gCControllerSelLight                                                 = objc.RegisterName("light")
+	_gCControllerSelHaptics                                               = objc.RegisterName("haptics")
+	_gCControllerSelCapture                                               = objc.RegisterName("capture")
+	_gCControllerSelControllerWithMicroGamepad                            = objc.RegisterName("controllerWithMicroGamepad")
+	_gCControllerSelControllerWithExtendedGamepad                         = objc.RegisterName("controllerWithExtendedGamepad")
+	_gCControllerSelIsSnapshot                                            = objc.RegisterName("isSnapshot")
 	_gCControllerSelStartWirelessControllerDiscoveryWithCompletionHandler = objc.RegisterName("startWirelessControllerDiscoveryWithCompletionHandler:")
-	_gCControllerSelStopWirelessControllerDiscovery = objc.RegisterName("stopWirelessControllerDiscovery")
+	_gCControllerSelStopWirelessControllerDiscovery                       = objc.RegisterName("stopWirelessControllerDiscovery")
 )
 
 func GCControllerFromID(id objc.ID) *GCController {
@@ -59,7 +59,9 @@ func GCControllerFromID(id objc.ID) *GCController {
 // Get a list of controllers currently attached to the system. @see GCControllerDidConnectNotification @see GCControllerDidDisconnectNotification
 func GCControllerControllers() *foundation.NSArray[*GCController] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GCController](_ret)
 }
 
@@ -72,7 +74,9 @@ func GCControllerSupportsHIDDevice(device unsafe.Pointer) bool {
 // The most recently used game controller. If a user actuates a game controller input, that controller will become the current one. @note This is useful for single player games where you only care about whether an input is pressed, and not where it came from.  You will still need to register for changes to GCController.current so that your UI can remain up-to-date with the current controller.
 func GCControllerCurrent() *GCController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelCurrent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -127,21 +131,27 @@ func (o *GCController) SetPlayerIndex(playerIndex GCControllerPlayerIndex) {
 // Gets the input profile for the controller.
 func (o *GCController) Input() *GCControllerLiveInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerLiveInputFromID(_ret)
 }
 
 // Gets the battery information if controller supports one This property is useful when you try to notify your user to change or charge controller before it runs out of battery life or simply display the current battery level and status.
 func (o *GCController) Battery() *GCDeviceBattery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelBattery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCDeviceBatteryFromID(_ret)
 }
 
 // Gets the physical input profile for the controller. @note This is equivalent to the controller's microGamepad, or extendedGamepad instance. @see microGamepad @see extendedGamepad
 func (o *GCController) PhysicalInputProfile() *GCPhysicalInputProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelPhysicalInputProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCPhysicalInputProfileFromID(_ret)
 }
 
@@ -149,61 +159,79 @@ func (o *GCController) PhysicalInputProfile() *GCPhysicalInputProfile {
 // Deprecated: since macOS 10.12.
 func (o *GCController) Gamepad() *GCGamepad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelGamepad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCGamepadFromID(_ret)
 }
 
 func (o *GCController) MicroGamepad() *GCMicroGamepad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelMicroGamepad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMicroGamepadFromID(_ret)
 }
 
 func (o *GCController) ExtendedGamepad() *GCExtendedGamepad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelExtendedGamepad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCExtendedGamepadFromID(_ret)
 }
 
 // Gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion. If this is nil the controller does not support motion input and only the gamepad & extendedGamepad profiles are available. @see gamepad @see extendedGamepad
 func (o *GCController) Motion() *GCMotion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelMotion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMotionFromID(_ret)
 }
 
 // Gets the light for the controller, if one exists. A controller's light can be used to signal information to the player, such as using different light colors based on the player index. It can also be used to react to in-game events and enhance user immersion.
 func (o *GCController) Light() *GCDeviceLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelLight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCDeviceLightFromID(_ret)
 }
 
 // Gets the haptics for the controller, if one exists. Use this property to create CHHapticEngine instances according to your needs. @note Haptics are a drain on the controller's battery, and can be distracting when used excessively.
 func (o *GCController) Haptics() *GCDeviceHaptics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelHaptics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCDeviceHapticsFromID(_ret)
 }
 
 // Polls the state vector of the controller and saves it to a new and writable instance of GCController. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new controller with the duplicated state vector of the current controller.
 func (o *GCController) Capture() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerSelCapture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
 // Creates a controller with a micro gamepad profile. This controller will be considered a snapshot, allowing developers to write to any GCControllerElement of its profiles. @see snapshot @return A new controller with a micro gamepad profile
 func GCControllerControllerWithMicroGamepad() *GCController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllerWithMicroGamepad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
 // Creates a controller with an extended gamepad profile. This controller will be considered a snapshot, allowing developers to write to any GCControllerElement of its profiles. @see snapshot @return A new controller with an extended gamepad profile
 func GCControllerControllerWithExtendedGamepad() *GCController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCController), _gCControllerSelControllerWithExtendedGamepad)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -229,4 +257,3 @@ func GCControllerStartWirelessControllerDiscoveryWithCompletionHandler(completio
 func GCControllerStopWirelessControllerDiscovery() {
 	objc.ID(_clsGCController).Send(_gCControllerSelStopWirelessControllerDiscovery)
 }
-

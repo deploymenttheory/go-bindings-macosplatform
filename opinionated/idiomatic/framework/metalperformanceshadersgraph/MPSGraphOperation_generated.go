@@ -102,4 +102,3 @@ type GraphOperationable interface {
 }
 
 var _ GraphOperationable = (*GraphOperation)(nil)
-

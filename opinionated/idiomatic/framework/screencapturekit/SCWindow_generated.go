@@ -93,4 +93,3 @@ type Windowable interface {
 }
 
 var _ Windowable = (*Window)(nil)
-

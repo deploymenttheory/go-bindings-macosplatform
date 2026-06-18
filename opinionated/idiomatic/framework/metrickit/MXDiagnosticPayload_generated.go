@@ -115,4 +115,3 @@ type DiagnosticPayloadable interface {
 }
 
 var _ DiagnosticPayloadable = (*DiagnosticPayload)(nil)
-

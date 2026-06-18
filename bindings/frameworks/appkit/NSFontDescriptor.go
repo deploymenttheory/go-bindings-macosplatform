@@ -16,27 +16,27 @@ type NSFontDescriptor struct {
 }
 
 var (
-	_clsNSFontDescriptor = _objcClass("NSFontDescriptor")
-	_nSFontDescriptorSelObjectForKey = objc.RegisterName("objectForKey:")
-	_nSFontDescriptorSelFontDescriptorWithFontAttributes = objc.RegisterName("fontDescriptorWithFontAttributes:")
-	_nSFontDescriptorSelFontDescriptorWithNameSize = objc.RegisterName("fontDescriptorWithName:size:")
-	_nSFontDescriptorSelFontDescriptorWithNameMatrix = objc.RegisterName("fontDescriptorWithName:matrix:")
-	_nSFontDescriptorSelInitWithFontAttributes = objc.RegisterName("initWithFontAttributes:")
-	_nSFontDescriptorSelMatchingFontDescriptorsWithMandatoryKeys = objc.RegisterName("matchingFontDescriptorsWithMandatoryKeys:")
-	_nSFontDescriptorSelMatchingFontDescriptorWithMandatoryKeys = objc.RegisterName("matchingFontDescriptorWithMandatoryKeys:")
-	_nSFontDescriptorSelFontDescriptorByAddingAttributes = objc.RegisterName("fontDescriptorByAddingAttributes:")
-	_nSFontDescriptorSelFontDescriptorWithSymbolicTraits = objc.RegisterName("fontDescriptorWithSymbolicTraits:")
-	_nSFontDescriptorSelFontDescriptorWithSize = objc.RegisterName("fontDescriptorWithSize:")
-	_nSFontDescriptorSelFontDescriptorWithMatrix = objc.RegisterName("fontDescriptorWithMatrix:")
-	_nSFontDescriptorSelFontDescriptorWithFace = objc.RegisterName("fontDescriptorWithFace:")
-	_nSFontDescriptorSelFontDescriptorWithFamily = objc.RegisterName("fontDescriptorWithFamily:")
-	_nSFontDescriptorSelFontDescriptorWithDesign = objc.RegisterName("fontDescriptorWithDesign:")
-	_nSFontDescriptorSelPostscriptName = objc.RegisterName("postscriptName")
-	_nSFontDescriptorSelPointSize = objc.RegisterName("pointSize")
-	_nSFontDescriptorSelMatrix = objc.RegisterName("matrix")
-	_nSFontDescriptorSelSymbolicTraits = objc.RegisterName("symbolicTraits")
-	_nSFontDescriptorSelRequiresFontAssetRequest = objc.RegisterName("requiresFontAssetRequest")
-	_nSFontDescriptorSelFontAttributes = objc.RegisterName("fontAttributes")
+	_clsNSFontDescriptor                                           = _objcClass("NSFontDescriptor")
+	_nSFontDescriptorSelObjectForKey                               = objc.RegisterName("objectForKey:")
+	_nSFontDescriptorSelFontDescriptorWithFontAttributes           = objc.RegisterName("fontDescriptorWithFontAttributes:")
+	_nSFontDescriptorSelFontDescriptorWithNameSize                 = objc.RegisterName("fontDescriptorWithName:size:")
+	_nSFontDescriptorSelFontDescriptorWithNameMatrix               = objc.RegisterName("fontDescriptorWithName:matrix:")
+	_nSFontDescriptorSelInitWithFontAttributes                     = objc.RegisterName("initWithFontAttributes:")
+	_nSFontDescriptorSelMatchingFontDescriptorsWithMandatoryKeys   = objc.RegisterName("matchingFontDescriptorsWithMandatoryKeys:")
+	_nSFontDescriptorSelMatchingFontDescriptorWithMandatoryKeys    = objc.RegisterName("matchingFontDescriptorWithMandatoryKeys:")
+	_nSFontDescriptorSelFontDescriptorByAddingAttributes           = objc.RegisterName("fontDescriptorByAddingAttributes:")
+	_nSFontDescriptorSelFontDescriptorWithSymbolicTraits           = objc.RegisterName("fontDescriptorWithSymbolicTraits:")
+	_nSFontDescriptorSelFontDescriptorWithSize                     = objc.RegisterName("fontDescriptorWithSize:")
+	_nSFontDescriptorSelFontDescriptorWithMatrix                   = objc.RegisterName("fontDescriptorWithMatrix:")
+	_nSFontDescriptorSelFontDescriptorWithFace                     = objc.RegisterName("fontDescriptorWithFace:")
+	_nSFontDescriptorSelFontDescriptorWithFamily                   = objc.RegisterName("fontDescriptorWithFamily:")
+	_nSFontDescriptorSelFontDescriptorWithDesign                   = objc.RegisterName("fontDescriptorWithDesign:")
+	_nSFontDescriptorSelPostscriptName                             = objc.RegisterName("postscriptName")
+	_nSFontDescriptorSelPointSize                                  = objc.RegisterName("pointSize")
+	_nSFontDescriptorSelMatrix                                     = objc.RegisterName("matrix")
+	_nSFontDescriptorSelSymbolicTraits                             = objc.RegisterName("symbolicTraits")
+	_nSFontDescriptorSelRequiresFontAssetRequest                   = objc.RegisterName("requiresFontAssetRequest")
+	_nSFontDescriptorSelFontAttributes                             = objc.RegisterName("fontAttributes")
 	_nSFontDescriptorSelPreferredFontDescriptorForTextStyleOptions = objc.RegisterName("preferredFontDescriptorForTextStyle:options:")
 )
 
@@ -57,85 +57,113 @@ func (o *NSFontDescriptor) ObjectForKey(attribute *foundation.NSString) objc.ID 
 
 func NSFontDescriptorFontDescriptorWithFontAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontDescriptor), _nSFontDescriptorSelFontDescriptorWithFontAttributes, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func NSFontDescriptorFontDescriptorWithNameSize(fontName *foundation.NSString, size float64) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontDescriptor), _nSFontDescriptorSelFontDescriptorWithNameSize, fontName.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func NSFontDescriptorFontDescriptorWithNameMatrix(fontName *foundation.NSString, matrix *foundation.NSAffineTransform) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontDescriptor), _nSFontDescriptorSelFontDescriptorWithNameMatrix, fontName.Ptr(), matrix.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) InitWithFontAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelInitWithFontAttributes, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *foundation.NSArray[*NSFontDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelMatchingFontDescriptorsWithMandatoryKeys, mandatoryKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSFontDescriptor](_ret)
 }
 
 func (o *NSFontDescriptor) MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelMatchingFontDescriptorWithMandatoryKeys, mandatoryKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorByAddingAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorByAddingAttributes, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits NSFontDescriptorSymbolicTraits) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithSymbolicTraits, symbolicTraits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithSize(newPointSize float64) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithSize, newPointSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithMatrix(matrix *foundation.NSAffineTransform) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithMatrix, matrix.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithFace(newFace *foundation.NSString) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithFace, newFace.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithFamily(newFamily *foundation.NSString) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithFamily, newFamily.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) FontDescriptorWithDesign(design *foundation.NSString) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelFontDescriptorWithDesign, design.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
 
 func (o *NSFontDescriptor) PostscriptName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelPostscriptName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -146,7 +174,9 @@ func (o *NSFontDescriptor) PointSize() float64 {
 
 func (o *NSFontDescriptor) Matrix() *foundation.NSAffineTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontDescriptorSelMatrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAffineTransformFromID(_ret)
 }
 
@@ -167,7 +197,8 @@ func (o *NSFontDescriptor) FontAttributes() *foundation.NSDictionary[*foundation
 
 func NSFontDescriptorPreferredFontDescriptorForTextStyleOptions(style *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSFontDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFontDescriptor), _nSFontDescriptorSelPreferredFontDescriptorForTextStyleOptions, style.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontDescriptorFromID(_ret)
 }
-

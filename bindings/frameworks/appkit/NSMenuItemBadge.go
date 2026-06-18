@@ -16,16 +16,16 @@ type NSMenuItemBadge struct {
 }
 
 var (
-	_clsNSMenuItemBadge = _objcClass("NSMenuItemBadge")
-	_nSMenuItemBadgeSelUpdatesWithCount = objc.RegisterName("updatesWithCount:")
+	_clsNSMenuItemBadge                  = _objcClass("NSMenuItemBadge")
+	_nSMenuItemBadgeSelUpdatesWithCount  = objc.RegisterName("updatesWithCount:")
 	_nSMenuItemBadgeSelNewItemsWithCount = objc.RegisterName("newItemsWithCount:")
-	_nSMenuItemBadgeSelAlertsWithCount = objc.RegisterName("alertsWithCount:")
+	_nSMenuItemBadgeSelAlertsWithCount   = objc.RegisterName("alertsWithCount:")
 	_nSMenuItemBadgeSelInitWithCountType = objc.RegisterName("initWithCount:type:")
-	_nSMenuItemBadgeSelInitWithCount = objc.RegisterName("initWithCount:")
-	_nSMenuItemBadgeSelInitWithString = objc.RegisterName("initWithString:")
-	_nSMenuItemBadgeSelItemCount = objc.RegisterName("itemCount")
-	_nSMenuItemBadgeSelType = objc.RegisterName("type")
-	_nSMenuItemBadgeSelStringValue = objc.RegisterName("stringValue")
+	_nSMenuItemBadgeSelInitWithCount     = objc.RegisterName("initWithCount:")
+	_nSMenuItemBadgeSelInitWithString    = objc.RegisterName("initWithString:")
+	_nSMenuItemBadgeSelItemCount         = objc.RegisterName("itemCount")
+	_nSMenuItemBadgeSelType              = objc.RegisterName("type")
+	_nSMenuItemBadgeSelStringValue       = objc.RegisterName("stringValue")
 )
 
 func NSMenuItemBadgeFromID(id objc.ID) *NSMenuItemBadge {
@@ -41,7 +41,9 @@ func NSMenuItemBadgeFromID(id objc.ID) *NSMenuItemBadge {
 // Creates a badge with an integer count and a label representing the number of available updates.
 func NSMenuItemBadgeUpdatesWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItemBadge), _nSMenuItemBadgeSelUpdatesWithCount, itemCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
@@ -54,28 +56,36 @@ func NSMenuItemBadgeNewItemsWithCount(itemCount int) *NSMenuItemBadge {
 // Creates a badge with an integer count and a label representing the number of alerts.
 func NSMenuItemBadgeAlertsWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenuItemBadge), _nSMenuItemBadgeSelAlertsWithCount, itemCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
 // Initializes the badge with a count and a pre-defined badge type.
 func (o *NSMenuItemBadge) InitWithCountType(itemCount int, type_ NSMenuItemBadgeType) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelInitWithCountType, itemCount, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
 // Initializes the badge with an integer count and an empty string.
 func (o *NSMenuItemBadge) InitWithCount(itemCount int) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelInitWithCount, itemCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
 // Initializes the badge with the provided custom string.
 func (o *NSMenuItemBadge) InitWithString(string_ *foundation.NSString) *NSMenuItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelInitWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemBadgeFromID(_ret)
 }
 
@@ -94,7 +104,8 @@ func (o *NSMenuItemBadge) Type() NSMenuItemBadgeType {
 // The string representation of the badge as it would appear when the badge is displayed.
 func (o *NSMenuItemBadge) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuItemBadgeSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

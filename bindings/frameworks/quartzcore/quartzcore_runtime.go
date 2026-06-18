@@ -14,7 +14,7 @@ import (
 
 var (
 	_quartzcoreLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,18 +49,30 @@ func _loadLibrary() {
 		return
 	}
 	_register("CACurrentMediaTime", func() { purego.RegisterLibFunc(&_fnCACurrentMediaTime, _quartzcoreLib, "CACurrentMediaTime") })
-	_register("CAFrameRateRangeIsEqualToRange", func() { purego.RegisterLibFunc(&_fnCAFrameRateRangeIsEqualToRange, _quartzcoreLib, "CAFrameRateRangeIsEqualToRange") })
+	_register("CAFrameRateRangeIsEqualToRange", func() {
+		purego.RegisterLibFunc(&_fnCAFrameRateRangeIsEqualToRange, _quartzcoreLib, "CAFrameRateRangeIsEqualToRange")
+	})
 	_register("CAFrameRateRangeMake", func() { purego.RegisterLibFunc(&_fnCAFrameRateRangeMake, _quartzcoreLib, "CAFrameRateRangeMake") })
 	_register("CATransform3DConcat", func() { purego.RegisterLibFunc(&_fnCATransform3DConcat, _quartzcoreLib, "CATransform3DConcat") })
-	_register("CATransform3DEqualToTransform", func() { purego.RegisterLibFunc(&_fnCATransform3DEqualToTransform, _quartzcoreLib, "CATransform3DEqualToTransform") })
-	_register("CATransform3DGetAffineTransform", func() { purego.RegisterLibFunc(&_fnCATransform3DGetAffineTransform, _quartzcoreLib, "CATransform3DGetAffineTransform") })
+	_register("CATransform3DEqualToTransform", func() {
+		purego.RegisterLibFunc(&_fnCATransform3DEqualToTransform, _quartzcoreLib, "CATransform3DEqualToTransform")
+	})
+	_register("CATransform3DGetAffineTransform", func() {
+		purego.RegisterLibFunc(&_fnCATransform3DGetAffineTransform, _quartzcoreLib, "CATransform3DGetAffineTransform")
+	})
 	_register("CATransform3DInvert", func() { purego.RegisterLibFunc(&_fnCATransform3DInvert, _quartzcoreLib, "CATransform3DInvert") })
 	_register("CATransform3DIsAffine", func() { purego.RegisterLibFunc(&_fnCATransform3DIsAffine, _quartzcoreLib, "CATransform3DIsAffine") })
 	_register("CATransform3DIsIdentity", func() { purego.RegisterLibFunc(&_fnCATransform3DIsIdentity, _quartzcoreLib, "CATransform3DIsIdentity") })
-	_register("CATransform3DMakeAffineTransform", func() { purego.RegisterLibFunc(&_fnCATransform3DMakeAffineTransform, _quartzcoreLib, "CATransform3DMakeAffineTransform") })
-	_register("CATransform3DMakeRotation", func() { purego.RegisterLibFunc(&_fnCATransform3DMakeRotation, _quartzcoreLib, "CATransform3DMakeRotation") })
+	_register("CATransform3DMakeAffineTransform", func() {
+		purego.RegisterLibFunc(&_fnCATransform3DMakeAffineTransform, _quartzcoreLib, "CATransform3DMakeAffineTransform")
+	})
+	_register("CATransform3DMakeRotation", func() {
+		purego.RegisterLibFunc(&_fnCATransform3DMakeRotation, _quartzcoreLib, "CATransform3DMakeRotation")
+	})
 	_register("CATransform3DMakeScale", func() { purego.RegisterLibFunc(&_fnCATransform3DMakeScale, _quartzcoreLib, "CATransform3DMakeScale") })
-	_register("CATransform3DMakeTranslation", func() { purego.RegisterLibFunc(&_fnCATransform3DMakeTranslation, _quartzcoreLib, "CATransform3DMakeTranslation") })
+	_register("CATransform3DMakeTranslation", func() {
+		purego.RegisterLibFunc(&_fnCATransform3DMakeTranslation, _quartzcoreLib, "CATransform3DMakeTranslation")
+	})
 	_register("CATransform3DRotate", func() { purego.RegisterLibFunc(&_fnCATransform3DRotate, _quartzcoreLib, "CATransform3DRotate") })
 	_register("CATransform3DScale", func() { purego.RegisterLibFunc(&_fnCATransform3DScale, _quartzcoreLib, "CATransform3DScale") })
 	_register("CATransform3DTranslate", func() { purego.RegisterLibFunc(&_fnCATransform3DTranslate, _quartzcoreLib, "CATransform3DTranslate") })

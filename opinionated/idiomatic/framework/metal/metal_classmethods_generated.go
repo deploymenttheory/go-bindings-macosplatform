@@ -278,4 +278,3 @@ func MTLVisibleFunctionTableDescriptorVisibleFunctionTableDescriptor() *VisibleF
 	}
 	return &VisibleFunctionTableDescriptor{inner: _r}
 }
-

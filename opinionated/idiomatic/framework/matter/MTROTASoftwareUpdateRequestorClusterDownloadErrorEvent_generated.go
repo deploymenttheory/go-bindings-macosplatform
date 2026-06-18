@@ -16,7 +16,9 @@ type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent { return x.inner }
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCod
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent }
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
+	return &x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent
+}
 
 // MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
@@ -72,4 +76,3 @@ type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)
-

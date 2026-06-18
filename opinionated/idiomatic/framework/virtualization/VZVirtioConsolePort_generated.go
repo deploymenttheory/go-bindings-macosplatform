@@ -75,4 +75,3 @@ type VirtioConsolePortable interface {
 }
 
 var _ VirtioConsolePortable = (*VirtioConsolePort)(nil)
-

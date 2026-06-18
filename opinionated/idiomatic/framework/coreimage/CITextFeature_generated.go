@@ -75,4 +75,3 @@ type TextFeatureable interface {
 }
 
 var _ TextFeatureable = (*TextFeature)(nil)
-

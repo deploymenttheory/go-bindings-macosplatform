@@ -16,7 +16,7 @@ type AVAssetTrackGroup struct {
 }
 
 var (
-	_clsAVAssetTrackGroup = _objcClass("AVAssetTrackGroup")
+	_clsAVAssetTrackGroup         = _objcClass("AVAssetTrackGroup")
 	_aVAssetTrackGroupSelTrackIDs = objc.RegisterName("trackIDs")
 )
 
@@ -34,4 +34,3 @@ func (o *AVAssetTrackGroup) TrackIDs() *foundation.NSArray[*foundation.NSNumber]
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAssetTrackGroupSelTrackIDs)
 	return _ret
 }
-

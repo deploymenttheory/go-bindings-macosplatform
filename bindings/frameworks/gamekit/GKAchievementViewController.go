@@ -16,8 +16,8 @@ type GKAchievementViewController struct {
 }
 
 var (
-	_clsGKAchievementViewController = _objcClass("GKAchievementViewController")
-	_gKAchievementViewControllerSelAchievementDelegate = objc.RegisterName("achievementDelegate")
+	_clsGKAchievementViewController                       = _objcClass("GKAchievementViewController")
+	_gKAchievementViewControllerSelAchievementDelegate    = objc.RegisterName("achievementDelegate")
 	_gKAchievementViewControllerSelSetAchievementDelegate = objc.RegisterName("setAchievementDelegate:")
 )
 
@@ -39,4 +39,3 @@ func (o *GKAchievementViewController) AchievementDelegate() GKAchievementViewCon
 func (o *GKAchievementViewController) SetAchievementDelegate(achievementDelegate GKAchievementViewControllerDelegate) {
 	o.Ptr().Send(_gKAchievementViewControllerSelSetAchievementDelegate, achievementDelegate)
 }
-

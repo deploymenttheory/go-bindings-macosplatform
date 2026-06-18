@@ -16,10 +16,10 @@ type MTLFunctionConstant struct {
 }
 
 var (
-	_clsMTLFunctionConstant = _objcClass("MTLFunctionConstant")
-	_mTLFunctionConstantSelName = objc.RegisterName("name")
-	_mTLFunctionConstantSelType = objc.RegisterName("type")
-	_mTLFunctionConstantSelIndex = objc.RegisterName("index")
+	_clsMTLFunctionConstant         = _objcClass("MTLFunctionConstant")
+	_mTLFunctionConstantSelName     = objc.RegisterName("name")
+	_mTLFunctionConstantSelType     = objc.RegisterName("type")
+	_mTLFunctionConstantSelIndex    = objc.RegisterName("index")
 	_mTLFunctionConstantSelRequired = objc.RegisterName("required")
 )
 
@@ -35,7 +35,9 @@ func MTLFunctionConstantFromID(id objc.ID) *MTLFunctionConstant {
 
 func (o *MTLFunctionConstant) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionConstantSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *MTLFunctionConstant) Required() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLFunctionConstantSelRequired)
 	return _ret
 }
-

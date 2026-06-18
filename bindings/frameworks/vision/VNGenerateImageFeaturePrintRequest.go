@@ -15,8 +15,8 @@ type VNGenerateImageFeaturePrintRequest struct {
 }
 
 var (
-	_clsVNGenerateImageFeaturePrintRequest = _objcClass("VNGenerateImageFeaturePrintRequest")
-	_vNGenerateImageFeaturePrintRequestSelImageCropAndScaleOption = objc.RegisterName("imageCropAndScaleOption")
+	_clsVNGenerateImageFeaturePrintRequest                           = _objcClass("VNGenerateImageFeaturePrintRequest")
+	_vNGenerateImageFeaturePrintRequestSelImageCropAndScaleOption    = objc.RegisterName("imageCropAndScaleOption")
 	_vNGenerateImageFeaturePrintRequestSelSetImageCropAndScaleOption = objc.RegisterName("setImageCropAndScaleOption:")
 )
 
@@ -39,4 +39,3 @@ func (o *VNGenerateImageFeaturePrintRequest) ImageCropAndScaleOption() VNImageCr
 func (o *VNGenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
 	o.Ptr().Send(_vNGenerateImageFeaturePrintRequestSelSetImageCropAndScaleOption, imageCropAndScaleOption)
 }
-

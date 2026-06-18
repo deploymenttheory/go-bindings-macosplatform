@@ -18,7 +18,9 @@ type CNNConvolutionTransposeGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradient].
-func (x *CNNConvolutionTransposeGradient) Unwrap() *raw.MPSCNNConvolutionTransposeGradient { return x.inner }
+func (x *CNNConvolutionTransposeGradient) Unwrap() *raw.MPSCNNConvolutionTransposeGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -200,9 +202,13 @@ func (x *CNNConvolutionTransposeGradient) SetGradientOption(gradientOption raw.M
 	x.inner.SetGradientOption(gradientOption)
 }
 
-func (x *CNNConvolutionTransposeGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNConvolutionTransposeGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNConvolutionTransposeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNConvolutionTransposeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNConvolutionTransposeGradientable is the interface implemented by [CNNConvolutionTransposeGradient], for mocking and DI.
 type CNNConvolutionTransposeGradientable interface {
@@ -237,4 +243,3 @@ type CNNConvolutionTransposeGradientable interface {
 }
 
 var _ CNNConvolutionTransposeGradientable = (*CNNConvolutionTransposeGradient)(nil)
-

@@ -18,12 +18,12 @@ type PKVehicleConnectionSession struct {
 }
 
 var (
-	_clsPKVehicleConnectionSession = _objcClass("PKVehicleConnectionSession")
+	_clsPKVehicleConnectionSession                                 = _objcClass("PKVehicleConnectionSession")
 	_pKVehicleConnectionSessionSelSessionForPassDelegateCompletion = objc.RegisterName("sessionForPass:delegate:completion:")
-	_pKVehicleConnectionSessionSelSendDataError = objc.RegisterName("sendData:error:")
-	_pKVehicleConnectionSessionSelInvalidate = objc.RegisterName("invalidate")
-	_pKVehicleConnectionSessionSelDelegate = objc.RegisterName("delegate")
-	_pKVehicleConnectionSessionSelConnectionStatus = objc.RegisterName("connectionStatus")
+	_pKVehicleConnectionSessionSelSendDataError                    = objc.RegisterName("sendData:error:")
+	_pKVehicleConnectionSessionSelInvalidate                       = objc.RegisterName("invalidate")
+	_pKVehicleConnectionSessionSelDelegate                         = objc.RegisterName("delegate")
+	_pKVehicleConnectionSessionSelConnectionStatus                 = objc.RegisterName("connectionStatus")
 )
 
 func PKVehicleConnectionSessionFromID(id objc.ID) *PKVehicleConnectionSession {
@@ -72,4 +72,3 @@ func (o *PKVehicleConnectionSession) ConnectionStatus() PKVehicleConnectionSessi
 	_ret := objc.Send[PKVehicleConnectionSessionConnectionState](o.Ptr(), _pKVehicleConnectionSessionSelConnectionStatus)
 	return _ret
 }
-

@@ -15,7 +15,7 @@ type MPSCNNConvolutionTransposeGradientState struct {
 }
 
 var (
-	_clsMPSCNNConvolutionTransposeGradientState = _objcClass("MPSCNNConvolutionTransposeGradientState")
+	_clsMPSCNNConvolutionTransposeGradientState                     = _objcClass("MPSCNNConvolutionTransposeGradientState")
 	_mPSCNNConvolutionTransposeGradientStateSelConvolutionTranspose = objc.RegisterName("convolutionTranspose")
 )
 
@@ -32,7 +32,8 @@ func MPSCNNConvolutionTransposeGradientStateFromID(id objc.ID) *MPSCNNConvolutio
 // @property   convolutionTranspose @abstract   The convolutionTranspose filter that produced the state.
 func (o *MPSCNNConvolutionTransposeGradientState) ConvolutionTranspose() *MPSCNNConvolutionTranspose {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeGradientStateSelConvolutionTranspose)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeFromID(_ret)
 }
-

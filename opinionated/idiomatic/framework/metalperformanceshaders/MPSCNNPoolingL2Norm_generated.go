@@ -107,11 +107,17 @@ func (x *CNNPoolingL2Norm) WithLabel(label string) *CNNPoolingL2Norm {
 	return x
 }
 
-func (x *CNNPoolingL2Norm) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
+func (x *CNNPoolingL2Norm) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling {
+	return &x.inner.MPSCNNPooling
+}
 
-func (x *CNNPoolingL2Norm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNPoolingL2Norm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
-func (x *CNNPoolingL2Norm) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
+func (x *CNNPoolingL2Norm) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel
+}
 
 // CNNPoolingL2Normable is the interface implemented by [CNNPoolingL2Norm], for mocking and DI.
 type CNNPoolingL2Normable interface {
@@ -129,4 +135,3 @@ type CNNPoolingL2Normable interface {
 }
 
 var _ CNNPoolingL2Normable = (*CNNPoolingL2Norm)(nil)
-

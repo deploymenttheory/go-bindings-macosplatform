@@ -164,4 +164,3 @@ type MultiArrayable interface {
 }
 
 var _ MultiArrayable = (*MultiArray)(nil)
-

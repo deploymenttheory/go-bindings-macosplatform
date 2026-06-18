@@ -11,7 +11,7 @@ import (
 type ICDeviceType uint64
 
 const (
-	ICDeviceTypeCamera ICDeviceType = 1
+	ICDeviceTypeCamera  ICDeviceType = 1
 	ICDeviceTypeScanner ICDeviceType = 2
 )
 
@@ -29,7 +29,7 @@ func (e ICDeviceType) String() string {
 type ICDeviceTypeMask uint64
 
 const (
-	ICDeviceTypeMaskCamera ICDeviceTypeMask = 1
+	ICDeviceTypeMaskCamera  ICDeviceTypeMask = 1
 	ICDeviceTypeMaskScanner ICDeviceTypeMask = 2
 )
 
@@ -84,7 +84,7 @@ type ICMediaPresentation uint64
 
 const (
 	ICMediaPresentationConvertedAssets ICMediaPresentation = 1
-	ICMediaPresentationOriginalAssets ICMediaPresentation = 2
+	ICMediaPresentationOriginalAssets  ICMediaPresentation = 2
 )
 
 func (e ICMediaPresentation) String() string {
@@ -101,8 +101,8 @@ func (e ICMediaPresentation) String() string {
 type ICScannerBitDepth uint64
 
 const (
-	ICScannerBitDepth1Bit ICScannerBitDepth = 1
-	ICScannerBitDepth8Bits ICScannerBitDepth = 8
+	ICScannerBitDepth1Bit   ICScannerBitDepth = 1
+	ICScannerBitDepth8Bits  ICScannerBitDepth = 8
 	ICScannerBitDepth16Bits ICScannerBitDepth = 16
 )
 
@@ -122,78 +122,78 @@ func (e ICScannerBitDepth) String() string {
 type ICScannerDocumentType uint64
 
 const (
-	ICScannerDocumentTypeDefault ICScannerDocumentType = 0
-	ICScannerDocumentTypeA4 ICScannerDocumentType = 1
-	ICScannerDocumentTypeB5 ICScannerDocumentType = 2
-	ICScannerDocumentTypeUSLetter ICScannerDocumentType = 3
-	ICScannerDocumentTypeUSLegal ICScannerDocumentType = 4
-	ICScannerDocumentTypeA5 ICScannerDocumentType = 5
-	ICScannerDocumentTypeISOB4 ICScannerDocumentType = 6
-	ICScannerDocumentTypeISOB6 ICScannerDocumentType = 7
-	ICScannerDocumentTypeUSLedger ICScannerDocumentType = 9
-	ICScannerDocumentTypeUSExecutive ICScannerDocumentType = 10
-	ICScannerDocumentTypeA3 ICScannerDocumentType = 11
-	ICScannerDocumentTypeISOB3 ICScannerDocumentType = 12
-	ICScannerDocumentTypeA6 ICScannerDocumentType = 13
-	ICScannerDocumentTypeC4 ICScannerDocumentType = 14
-	ICScannerDocumentTypeC5 ICScannerDocumentType = 15
-	ICScannerDocumentTypeC6 ICScannerDocumentType = 16
-	ICScannerDocumentType4A0 ICScannerDocumentType = 17
-	ICScannerDocumentType2A0 ICScannerDocumentType = 18
-	ICScannerDocumentTypeA0 ICScannerDocumentType = 19
-	ICScannerDocumentTypeA1 ICScannerDocumentType = 20
-	ICScannerDocumentTypeA2 ICScannerDocumentType = 21
-	ICScannerDocumentTypeA7 ICScannerDocumentType = 22
-	ICScannerDocumentTypeA8 ICScannerDocumentType = 23
-	ICScannerDocumentTypeA9 ICScannerDocumentType = 24
-	ICScannerDocumentType10 ICScannerDocumentType = 25
-	ICScannerDocumentTypeISOB0 ICScannerDocumentType = 26
-	ICScannerDocumentTypeISOB1 ICScannerDocumentType = 27
-	ICScannerDocumentTypeISOB2 ICScannerDocumentType = 28
-	ICScannerDocumentTypeISOB5 ICScannerDocumentType = 29
-	ICScannerDocumentTypeISOB7 ICScannerDocumentType = 30
-	ICScannerDocumentTypeISOB8 ICScannerDocumentType = 31
-	ICScannerDocumentTypeISOB9 ICScannerDocumentType = 32
-	ICScannerDocumentTypeISOB10 ICScannerDocumentType = 33
-	ICScannerDocumentTypeJISB0 ICScannerDocumentType = 34
-	ICScannerDocumentTypeJISB1 ICScannerDocumentType = 35
-	ICScannerDocumentTypeJISB2 ICScannerDocumentType = 36
-	ICScannerDocumentTypeJISB3 ICScannerDocumentType = 37
-	ICScannerDocumentTypeJISB4 ICScannerDocumentType = 38
-	ICScannerDocumentTypeJISB6 ICScannerDocumentType = 39
-	ICScannerDocumentTypeJISB7 ICScannerDocumentType = 40
-	ICScannerDocumentTypeJISB8 ICScannerDocumentType = 41
-	ICScannerDocumentTypeJISB9 ICScannerDocumentType = 42
-	ICScannerDocumentTypeJISB10 ICScannerDocumentType = 43
-	ICScannerDocumentTypeC0 ICScannerDocumentType = 44
-	ICScannerDocumentTypeC1 ICScannerDocumentType = 45
-	ICScannerDocumentTypeC2 ICScannerDocumentType = 46
-	ICScannerDocumentTypeC3 ICScannerDocumentType = 47
-	ICScannerDocumentTypeC7 ICScannerDocumentType = 48
-	ICScannerDocumentTypeC8 ICScannerDocumentType = 49
-	ICScannerDocumentTypeC9 ICScannerDocumentType = 50
-	ICScannerDocumentTypeC10 ICScannerDocumentType = 51
-	ICScannerDocumentTypeUSStatement ICScannerDocumentType = 52
+	ICScannerDocumentTypeDefault      ICScannerDocumentType = 0
+	ICScannerDocumentTypeA4           ICScannerDocumentType = 1
+	ICScannerDocumentTypeB5           ICScannerDocumentType = 2
+	ICScannerDocumentTypeUSLetter     ICScannerDocumentType = 3
+	ICScannerDocumentTypeUSLegal      ICScannerDocumentType = 4
+	ICScannerDocumentTypeA5           ICScannerDocumentType = 5
+	ICScannerDocumentTypeISOB4        ICScannerDocumentType = 6
+	ICScannerDocumentTypeISOB6        ICScannerDocumentType = 7
+	ICScannerDocumentTypeUSLedger     ICScannerDocumentType = 9
+	ICScannerDocumentTypeUSExecutive  ICScannerDocumentType = 10
+	ICScannerDocumentTypeA3           ICScannerDocumentType = 11
+	ICScannerDocumentTypeISOB3        ICScannerDocumentType = 12
+	ICScannerDocumentTypeA6           ICScannerDocumentType = 13
+	ICScannerDocumentTypeC4           ICScannerDocumentType = 14
+	ICScannerDocumentTypeC5           ICScannerDocumentType = 15
+	ICScannerDocumentTypeC6           ICScannerDocumentType = 16
+	ICScannerDocumentType4A0          ICScannerDocumentType = 17
+	ICScannerDocumentType2A0          ICScannerDocumentType = 18
+	ICScannerDocumentTypeA0           ICScannerDocumentType = 19
+	ICScannerDocumentTypeA1           ICScannerDocumentType = 20
+	ICScannerDocumentTypeA2           ICScannerDocumentType = 21
+	ICScannerDocumentTypeA7           ICScannerDocumentType = 22
+	ICScannerDocumentTypeA8           ICScannerDocumentType = 23
+	ICScannerDocumentTypeA9           ICScannerDocumentType = 24
+	ICScannerDocumentType10           ICScannerDocumentType = 25
+	ICScannerDocumentTypeISOB0        ICScannerDocumentType = 26
+	ICScannerDocumentTypeISOB1        ICScannerDocumentType = 27
+	ICScannerDocumentTypeISOB2        ICScannerDocumentType = 28
+	ICScannerDocumentTypeISOB5        ICScannerDocumentType = 29
+	ICScannerDocumentTypeISOB7        ICScannerDocumentType = 30
+	ICScannerDocumentTypeISOB8        ICScannerDocumentType = 31
+	ICScannerDocumentTypeISOB9        ICScannerDocumentType = 32
+	ICScannerDocumentTypeISOB10       ICScannerDocumentType = 33
+	ICScannerDocumentTypeJISB0        ICScannerDocumentType = 34
+	ICScannerDocumentTypeJISB1        ICScannerDocumentType = 35
+	ICScannerDocumentTypeJISB2        ICScannerDocumentType = 36
+	ICScannerDocumentTypeJISB3        ICScannerDocumentType = 37
+	ICScannerDocumentTypeJISB4        ICScannerDocumentType = 38
+	ICScannerDocumentTypeJISB6        ICScannerDocumentType = 39
+	ICScannerDocumentTypeJISB7        ICScannerDocumentType = 40
+	ICScannerDocumentTypeJISB8        ICScannerDocumentType = 41
+	ICScannerDocumentTypeJISB9        ICScannerDocumentType = 42
+	ICScannerDocumentTypeJISB10       ICScannerDocumentType = 43
+	ICScannerDocumentTypeC0           ICScannerDocumentType = 44
+	ICScannerDocumentTypeC1           ICScannerDocumentType = 45
+	ICScannerDocumentTypeC2           ICScannerDocumentType = 46
+	ICScannerDocumentTypeC3           ICScannerDocumentType = 47
+	ICScannerDocumentTypeC7           ICScannerDocumentType = 48
+	ICScannerDocumentTypeC8           ICScannerDocumentType = 49
+	ICScannerDocumentTypeC9           ICScannerDocumentType = 50
+	ICScannerDocumentTypeC10          ICScannerDocumentType = 51
+	ICScannerDocumentTypeUSStatement  ICScannerDocumentType = 52
 	ICScannerDocumentTypeBusinessCard ICScannerDocumentType = 53
-	ICScannerDocumentTypeE ICScannerDocumentType = 60
-	ICScannerDocumentType3R ICScannerDocumentType = 61
-	ICScannerDocumentType4R ICScannerDocumentType = 62
-	ICScannerDocumentType5R ICScannerDocumentType = 63
-	ICScannerDocumentType6R ICScannerDocumentType = 64
-	ICScannerDocumentType8R ICScannerDocumentType = 65
-	ICScannerDocumentTypeS8R ICScannerDocumentType = 66
-	ICScannerDocumentType10R ICScannerDocumentType = 67
-	ICScannerDocumentTypeS10R ICScannerDocumentType = 68
-	ICScannerDocumentType11R ICScannerDocumentType = 69
-	ICScannerDocumentType12R ICScannerDocumentType = 70
-	ICScannerDocumentTypeS12R ICScannerDocumentType = 71
-	ICScannerDocumentType110 ICScannerDocumentType = 72
-	ICScannerDocumentTypeAPSH ICScannerDocumentType = 73
-	ICScannerDocumentTypeAPSC ICScannerDocumentType = 74
-	ICScannerDocumentTypeAPSP ICScannerDocumentType = 75
-	ICScannerDocumentType135 ICScannerDocumentType = 76
-	ICScannerDocumentTypeMF ICScannerDocumentType = 77
-	ICScannerDocumentTypeLF ICScannerDocumentType = 78
+	ICScannerDocumentTypeE            ICScannerDocumentType = 60
+	ICScannerDocumentType3R           ICScannerDocumentType = 61
+	ICScannerDocumentType4R           ICScannerDocumentType = 62
+	ICScannerDocumentType5R           ICScannerDocumentType = 63
+	ICScannerDocumentType6R           ICScannerDocumentType = 64
+	ICScannerDocumentType8R           ICScannerDocumentType = 65
+	ICScannerDocumentTypeS8R          ICScannerDocumentType = 66
+	ICScannerDocumentType10R          ICScannerDocumentType = 67
+	ICScannerDocumentTypeS10R         ICScannerDocumentType = 68
+	ICScannerDocumentType11R          ICScannerDocumentType = 69
+	ICScannerDocumentType12R          ICScannerDocumentType = 70
+	ICScannerDocumentTypeS12R         ICScannerDocumentType = 71
+	ICScannerDocumentType110          ICScannerDocumentType = 72
+	ICScannerDocumentTypeAPSH         ICScannerDocumentType = 73
+	ICScannerDocumentTypeAPSC         ICScannerDocumentType = 74
+	ICScannerDocumentTypeAPSP         ICScannerDocumentType = 75
+	ICScannerDocumentType135          ICScannerDocumentType = 76
+	ICScannerDocumentTypeMF           ICScannerDocumentType = 77
+	ICScannerDocumentTypeLF           ICScannerDocumentType = 78
 )
 
 func (e ICScannerDocumentType) String() string {
@@ -351,9 +351,9 @@ type ICScannerFeatureType uint64
 
 const (
 	ICScannerFeatureTypeEnumeration ICScannerFeatureType = 0
-	ICScannerFeatureTypeRange ICScannerFeatureType = 1
-	ICScannerFeatureTypeBoolean ICScannerFeatureType = 2
-	ICScannerFeatureTypeTemplate ICScannerFeatureType = 3
+	ICScannerFeatureTypeRange       ICScannerFeatureType = 1
+	ICScannerFeatureTypeBoolean     ICScannerFeatureType = 2
+	ICScannerFeatureTypeTemplate    ICScannerFeatureType = 3
 )
 
 func (e ICScannerFeatureType) String() string {
@@ -374,8 +374,8 @@ func (e ICScannerFeatureType) String() string {
 type ICScannerFunctionalUnitState uint64
 
 const (
-	ICScannerFunctionalUnitStateReady ICScannerFunctionalUnitState = 1
-	ICScannerFunctionalUnitStateScanInProgress ICScannerFunctionalUnitState = 2
+	ICScannerFunctionalUnitStateReady                  ICScannerFunctionalUnitState = 1
+	ICScannerFunctionalUnitStateScanInProgress         ICScannerFunctionalUnitState = 2
 	ICScannerFunctionalUnitStateOverviewScanInProgress ICScannerFunctionalUnitState = 4
 )
 
@@ -395,10 +395,10 @@ func (e ICScannerFunctionalUnitState) String() string {
 type ICScannerFunctionalUnitType uint64
 
 const (
-	ICScannerFunctionalUnitTypeFlatbed ICScannerFunctionalUnitType = 0
+	ICScannerFunctionalUnitTypeFlatbed              ICScannerFunctionalUnitType = 0
 	ICScannerFunctionalUnitTypePositiveTransparency ICScannerFunctionalUnitType = 1
 	ICScannerFunctionalUnitTypeNegativeTransparency ICScannerFunctionalUnitType = 2
-	ICScannerFunctionalUnitTypeDocumentFeeder ICScannerFunctionalUnitType = 3
+	ICScannerFunctionalUnitTypeDocumentFeeder       ICScannerFunctionalUnitType = 3
 )
 
 func (e ICScannerFunctionalUnitType) String() string {
@@ -419,12 +419,12 @@ func (e ICScannerFunctionalUnitType) String() string {
 type ICScannerMeasurementUnit uint64
 
 const (
-	ICScannerMeasurementUnitInches ICScannerMeasurementUnit = 0
+	ICScannerMeasurementUnitInches      ICScannerMeasurementUnit = 0
 	ICScannerMeasurementUnitCentimeters ICScannerMeasurementUnit = 1
-	ICScannerMeasurementUnitPicas ICScannerMeasurementUnit = 2
-	ICScannerMeasurementUnitPoints ICScannerMeasurementUnit = 3
-	ICScannerMeasurementUnitTwips ICScannerMeasurementUnit = 4
-	ICScannerMeasurementUnitPixels ICScannerMeasurementUnit = 5
+	ICScannerMeasurementUnitPicas       ICScannerMeasurementUnit = 2
+	ICScannerMeasurementUnitPoints      ICScannerMeasurementUnit = 3
+	ICScannerMeasurementUnitTwips       ICScannerMeasurementUnit = 4
+	ICScannerMeasurementUnitPixels      ICScannerMeasurementUnit = 5
 )
 
 func (e ICScannerMeasurementUnit) String() string {
@@ -449,15 +449,15 @@ func (e ICScannerMeasurementUnit) String() string {
 type ICScannerPixelDataType uint64
 
 const (
-	ICScannerPixelDataTypeBW ICScannerPixelDataType = 0
-	ICScannerPixelDataTypeGray ICScannerPixelDataType = 1
-	ICScannerPixelDataTypeRGB ICScannerPixelDataType = 2
+	ICScannerPixelDataTypeBW      ICScannerPixelDataType = 0
+	ICScannerPixelDataTypeGray    ICScannerPixelDataType = 1
+	ICScannerPixelDataTypeRGB     ICScannerPixelDataType = 2
 	ICScannerPixelDataTypePalette ICScannerPixelDataType = 3
-	ICScannerPixelDataTypeCMY ICScannerPixelDataType = 4
-	ICScannerPixelDataTypeCMYK ICScannerPixelDataType = 5
-	ICScannerPixelDataTypeYUV ICScannerPixelDataType = 6
-	ICScannerPixelDataTypeYUVK ICScannerPixelDataType = 7
-	ICScannerPixelDataTypeCIEXYZ ICScannerPixelDataType = 8
+	ICScannerPixelDataTypeCMY     ICScannerPixelDataType = 4
+	ICScannerPixelDataTypeCMYK    ICScannerPixelDataType = 5
+	ICScannerPixelDataTypeYUV     ICScannerPixelDataType = 6
+	ICScannerPixelDataTypeYUVK    ICScannerPixelDataType = 7
+	ICScannerPixelDataTypeCIEXYZ  ICScannerPixelDataType = 8
 )
 
 func (e ICScannerPixelDataType) String() string {
@@ -488,7 +488,7 @@ func (e ICScannerPixelDataType) String() string {
 type ICScannerTransferMode uint64
 
 const (
-	ICScannerTransferModeFileBased ICScannerTransferMode = 0
+	ICScannerTransferModeFileBased   ICScannerTransferMode = 0
 	ICScannerTransferModeMemoryBased ICScannerTransferMode = 1
 )
 
@@ -502,4 +502,3 @@ func (e ICScannerTransferMode) String() string {
 		return fmt.Sprintf("ICScannerTransferMode(%d)", int64(e))
 	}
 }
-

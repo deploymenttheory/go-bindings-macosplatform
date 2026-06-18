@@ -1873,9 +1873,13 @@ func (x *MTRBaseClusterLevelControl) SubscribeAttributeClusterRevisionWithMinInt
 	}
 }
 
-func (x *MTRBaseClusterLevelControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterLevelControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterLevelControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterLevelControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterLevelControlable is the interface implemented by [MTRBaseClusterLevelControl], for mocking and DI.
 type MTRBaseClusterLevelControlable interface {
@@ -2005,4 +2009,3 @@ type MTRBaseClusterLevelControlable interface {
 }
 
 var _ MTRBaseClusterLevelControlable = (*MTRBaseClusterLevelControl)(nil)
-

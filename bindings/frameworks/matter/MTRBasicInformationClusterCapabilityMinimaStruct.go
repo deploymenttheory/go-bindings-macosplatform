@@ -16,10 +16,10 @@ type MTRBasicInformationClusterCapabilityMinimaStruct struct {
 }
 
 var (
-	_clsMTRBasicInformationClusterCapabilityMinimaStruct = _objcClass("MTRBasicInformationClusterCapabilityMinimaStruct")
-	_mTRBasicInformationClusterCapabilityMinimaStructSelCaseSessionsPerFabric = objc.RegisterName("caseSessionsPerFabric")
-	_mTRBasicInformationClusterCapabilityMinimaStructSelSetCaseSessionsPerFabric = objc.RegisterName("setCaseSessionsPerFabric:")
-	_mTRBasicInformationClusterCapabilityMinimaStructSelSubscriptionsPerFabric = objc.RegisterName("subscriptionsPerFabric")
+	_clsMTRBasicInformationClusterCapabilityMinimaStruct                          = _objcClass("MTRBasicInformationClusterCapabilityMinimaStruct")
+	_mTRBasicInformationClusterCapabilityMinimaStructSelCaseSessionsPerFabric     = objc.RegisterName("caseSessionsPerFabric")
+	_mTRBasicInformationClusterCapabilityMinimaStructSelSetCaseSessionsPerFabric  = objc.RegisterName("setCaseSessionsPerFabric:")
+	_mTRBasicInformationClusterCapabilityMinimaStructSelSubscriptionsPerFabric    = objc.RegisterName("subscriptionsPerFabric")
 	_mTRBasicInformationClusterCapabilityMinimaStructSelSetSubscriptionsPerFabric = objc.RegisterName("setSubscriptionsPerFabric:")
 )
 
@@ -35,7 +35,9 @@ func MTRBasicInformationClusterCapabilityMinimaStructFromID(id objc.ID) *MTRBasi
 
 func (o *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBasicInformationClusterCapabilityMinimaStructSelCaseSessionsPerFabric)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRBasicInformationClusterCapabilityMinimaStruct) SetCaseSessionsPerFab
 
 func (o *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBasicInformationClusterCapabilityMinimaStructSelSubscriptionsPerFabric)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBasicInformationClusterCapabilityMinimaStruct) SetSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBasicInformationClusterCapabilityMinimaStructSelSetSubscriptionsPerFabric, subscriptionsPerFabric.Ptr())
 }
-

@@ -167,7 +167,9 @@ func (x *NNReduceBinary) SetSecondarySourceClipRect(secondarySourceClipRect meta
 
 func (x *NNReduceBinary) asNNReduceBinary() *raw.MPSNNReduceBinary { return x.inner }
 
-func (x *NNReduceBinary) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNReduceBinary) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 // NNReduceBinaryable is the interface implemented by [NNReduceBinary], for mocking and DI.
 type NNReduceBinaryable interface {
@@ -197,4 +199,3 @@ type NNReduceBinaryable interface {
 }
 
 var _ NNReduceBinaryable = (*NNReduceBinary)(nil)
-

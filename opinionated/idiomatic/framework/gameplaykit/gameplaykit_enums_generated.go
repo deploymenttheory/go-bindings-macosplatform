@@ -13,8 +13,8 @@ import (
 type GKMeshGraphTriangulationMode uint64
 
 const (
-	GKMeshGraphTriangulationModeVertices GKMeshGraphTriangulationMode = 1
-	GKMeshGraphTriangulationModeCenters GKMeshGraphTriangulationMode = 2
+	GKMeshGraphTriangulationModeVertices      GKMeshGraphTriangulationMode = 1
+	GKMeshGraphTriangulationModeCenters       GKMeshGraphTriangulationMode = 2
 	GKMeshGraphTriangulationModeEdgeMidpoints GKMeshGraphTriangulationMode = 4
 )
 
@@ -38,9 +38,9 @@ func (e GKMeshGraphTriangulationMode) String() string {
 type GKRTreeSplitStrategy int64
 
 const (
-	GKRTreeSplitStrategyHalve GKRTreeSplitStrategy = 0
-	GKRTreeSplitStrategyLinear GKRTreeSplitStrategy = 1
-	GKRTreeSplitStrategyQuadratic GKRTreeSplitStrategy = 2
+	GKRTreeSplitStrategyHalve         GKRTreeSplitStrategy = 0
+	GKRTreeSplitStrategyLinear        GKRTreeSplitStrategy = 1
+	GKRTreeSplitStrategyQuadratic     GKRTreeSplitStrategy = 2
 	GKRTreeSplitStrategyReduceOverlap GKRTreeSplitStrategy = 3
 )
 
@@ -58,4 +58,3 @@ func (e GKRTreeSplitStrategy) String() string {
 		return fmt.Sprintf("GKRTreeSplitStrategy(%d)", int64(e))
 	}
 }
-

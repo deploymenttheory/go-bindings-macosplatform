@@ -19,19 +19,19 @@ type AVAssetReader struct {
 }
 
 var (
-	_clsAVAssetReader = _objcClass("AVAssetReader")
+	_clsAVAssetReader                          = _objcClass("AVAssetReader")
 	_aVAssetReaderSelAssetReaderWithAssetError = objc.RegisterName("assetReaderWithAsset:error:")
-	_aVAssetReaderSelInitWithAssetError = objc.RegisterName("initWithAsset:error:")
-	_aVAssetReaderSelCanAddOutput = objc.RegisterName("canAddOutput:")
-	_aVAssetReaderSelAddOutput = objc.RegisterName("addOutput:")
-	_aVAssetReaderSelStartReading = objc.RegisterName("startReading")
-	_aVAssetReaderSelCancelReading = objc.RegisterName("cancelReading")
-	_aVAssetReaderSelAsset = objc.RegisterName("asset")
-	_aVAssetReaderSelStatus = objc.RegisterName("status")
-	_aVAssetReaderSelError = objc.RegisterName("error")
-	_aVAssetReaderSelTimeRange = objc.RegisterName("timeRange")
-	_aVAssetReaderSelSetTimeRange = objc.RegisterName("setTimeRange:")
-	_aVAssetReaderSelOutputs = objc.RegisterName("outputs")
+	_aVAssetReaderSelInitWithAssetError        = objc.RegisterName("initWithAsset:error:")
+	_aVAssetReaderSelCanAddOutput              = objc.RegisterName("canAddOutput:")
+	_aVAssetReaderSelAddOutput                 = objc.RegisterName("addOutput:")
+	_aVAssetReaderSelStartReading              = objc.RegisterName("startReading")
+	_aVAssetReaderSelCancelReading             = objc.RegisterName("cancelReading")
+	_aVAssetReaderSelAsset                     = objc.RegisterName("asset")
+	_aVAssetReaderSelStatus                    = objc.RegisterName("status")
+	_aVAssetReaderSelError                     = objc.RegisterName("error")
+	_aVAssetReaderSelTimeRange                 = objc.RegisterName("timeRange")
+	_aVAssetReaderSelSetTimeRange              = objc.RegisterName("setTimeRange:")
+	_aVAssetReaderSelOutputs                   = objc.RegisterName("outputs")
 )
 
 func AVAssetReaderFromID(id objc.ID) *AVAssetReader {
@@ -48,7 +48,9 @@ func AVAssetReaderFromID(id objc.ID) *AVAssetReader {
 func AVAssetReaderAssetReaderWithAssetError(asset *AVAsset) (*AVAssetReader, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReader), _aVAssetReaderSelAssetReaderWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,7 +61,9 @@ func AVAssetReaderAssetReaderWithAssetError(asset *AVAsset) (*AVAssetReader, err
 func (o *AVAssetReader) InitWithAssetError(asset *AVAsset) (*AVAssetReader, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSelInitWithAssetError, asset.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -91,7 +95,9 @@ func (o *AVAssetReader) CancelReading() {
 // @property asset @abstract The asset from which the receiver's outputs read sample buffers. @discussion The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
 func (o *AVAssetReader) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
@@ -120,7 +126,8 @@ func (o *AVAssetReader) SetTimeRange(timeRange coremedia.CMTimeRange) {
 // @property outputs @abstract The outputs from which clients of receiver can read media data. @discussion The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
 func (o *AVAssetReader) Outputs() *foundation.NSArray[*AVAssetReaderOutput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSelOutputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetReaderOutput](_ret)
 }
-

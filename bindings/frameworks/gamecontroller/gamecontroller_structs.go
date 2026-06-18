@@ -21,70 +21,70 @@ type GCDualSenseAdaptiveTriggerPositionalResistiveStrengths struct {
 // A structure containing 3-axis rotation data. The angles are rotated in order or pitch then yaw then roll. @field pitch X-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the X axis such that the tip of the thumb points toward positive X, a positive rotation is one toward the tips of the other 4 fingers). @field yaw   Y-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Y axis such that the tip of the thumb points toward positive Y, a positive rotation is one toward the tips of the other 4 fingers). @field roll  Z-axis rotation in radians. The sign follows the right hand rule (i.e. if the right hand is wrapped around the Z axis such that the tip of the thumb points toward positive Z, a positive rotation is one toward the tips of the other 4 fingers).
 type GCEulerAngles struct {
 	Pitch float64
-	Yaw float64
-	Roll float64
+	Yaw   float64
+	Roll  float64
 }
 
 type GCExtendedGamepadSnapShotDataV100 struct {
-	Version uint16
-	Size uint16
-	DpadX float32
-	DpadY float32
-	ButtonA float32
-	ButtonB float32
-	ButtonX float32
-	ButtonY float32
-	LeftShoulder float32
-	RightShoulder float32
-	LeftThumbstickX float32
-	LeftThumbstickY float32
+	Version          uint16
+	Size             uint16
+	DpadX            float32
+	DpadY            float32
+	ButtonA          float32
+	ButtonB          float32
+	ButtonX          float32
+	ButtonY          float32
+	LeftShoulder     float32
+	RightShoulder    float32
+	LeftThumbstickX  float32
+	LeftThumbstickY  float32
 	RightThumbstickX float32
 	RightThumbstickY float32
-	LeftTrigger float32
-	RightTrigger float32
+	LeftTrigger      float32
+	RightTrigger     float32
 }
 
 // Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
 type GCExtendedGamepadSnapshotData struct {
-	Version uint16
-	Size uint16
-	DpadX float32
-	DpadY float32
-	ButtonA float32
-	ButtonB float32
-	ButtonX float32
-	ButtonY float32
-	LeftShoulder float32
-	RightShoulder float32
-	LeftThumbstickX float32
-	LeftThumbstickY float32
-	RightThumbstickX float32
-	RightThumbstickY float32
-	LeftTrigger float32
-	RightTrigger float32
+	Version                      uint16
+	Size                         uint16
+	DpadX                        float32
+	DpadY                        float32
+	ButtonA                      float32
+	ButtonB                      float32
+	ButtonX                      float32
+	ButtonY                      float32
+	LeftShoulder                 float32
+	RightShoulder                float32
+	LeftThumbstickX              float32
+	LeftThumbstickY              float32
+	RightThumbstickX             float32
+	RightThumbstickY             float32
+	LeftTrigger                  float32
+	RightTrigger                 float32
 	SupportsClickableThumbsticks bool
-	LeftThumbstickButton bool
-	RightThumbstickButton bool
+	LeftThumbstickButton         bool
+	RightThumbstickButton        bool
 }
 
 type GCGamepadSnapShotDataV100 struct {
-	Version uint16
-	Size uint16
-	DpadX float32
-	DpadY float32
-	ButtonA float32
-	ButtonB float32
-	ButtonX float32
-	ButtonY float32
-	LeftShoulder float32
+	Version       uint16
+	Size          uint16
+	DpadX         float32
+	DpadY         float32
+	ButtonA       float32
+	ButtonB       float32
+	ButtonX       float32
+	ButtonY       float32
+	LeftShoulder  float32
 	RightShoulder float32
 }
 
 type GCMicroGamepadSnapShotDataV100 struct {
 	Version uint16
-	Size uint16
-	DpadX float32
-	DpadY float32
+	Size    uint16
+	DpadX   float32
+	DpadY   float32
 	ButtonA float32
 	ButtonX float32
 }
@@ -92,9 +92,9 @@ type GCMicroGamepadSnapShotDataV100 struct {
 // Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 type GCMicroGamepadSnapshotData struct {
 	Version uint16
-	Size uint16
-	DpadX float32
-	DpadY float32
+	Size    uint16
+	DpadX   float32
+	DpadY   float32
 	ButtonA float32
 	ButtonX float32
 }
@@ -118,4 +118,3 @@ type GCRotationRate struct {
 	Y float64
 	Z float64
 }
-

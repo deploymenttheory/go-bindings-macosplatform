@@ -18,19 +18,19 @@ type SCNSceneSource struct {
 }
 
 var (
-	_clsSCNSceneSource = _objcClass("SCNSceneSource")
-	_sCNSceneSourceSelSceneSourceWithURLOptions = objc.RegisterName("sceneSourceWithURL:options:")
-	_sCNSceneSourceSelSceneSourceWithDataOptions = objc.RegisterName("sceneSourceWithData:options:")
-	_sCNSceneSourceSelInitWithURLOptions = objc.RegisterName("initWithURL:options:")
-	_sCNSceneSourceSelInitWithDataOptions = objc.RegisterName("initWithData:options:")
+	_clsSCNSceneSource                              = _objcClass("SCNSceneSource")
+	_sCNSceneSourceSelSceneSourceWithURLOptions     = objc.RegisterName("sceneSourceWithURL:options:")
+	_sCNSceneSourceSelSceneSourceWithDataOptions    = objc.RegisterName("sceneSourceWithData:options:")
+	_sCNSceneSourceSelInitWithURLOptions            = objc.RegisterName("initWithURL:options:")
+	_sCNSceneSourceSelInitWithDataOptions           = objc.RegisterName("initWithData:options:")
 	_sCNSceneSourceSelSceneWithOptionsStatusHandler = objc.RegisterName("sceneWithOptions:statusHandler:")
-	_sCNSceneSourceSelSceneWithOptionsError = objc.RegisterName("sceneWithOptions:error:")
-	_sCNSceneSourceSelPropertyForKey = objc.RegisterName("propertyForKey:")
-	_sCNSceneSourceSelEntryWithIdentifierWithClass = objc.RegisterName("entryWithIdentifier:withClass:")
+	_sCNSceneSourceSelSceneWithOptionsError         = objc.RegisterName("sceneWithOptions:error:")
+	_sCNSceneSourceSelPropertyForKey                = objc.RegisterName("propertyForKey:")
+	_sCNSceneSourceSelEntryWithIdentifierWithClass  = objc.RegisterName("entryWithIdentifier:withClass:")
 	_sCNSceneSourceSelIdentifiersOfEntriesWithClass = objc.RegisterName("identifiersOfEntriesWithClass:")
-	_sCNSceneSourceSelEntriesPassingTest = objc.RegisterName("entriesPassingTest:")
-	_sCNSceneSourceSelUrl = objc.RegisterName("url")
-	_sCNSceneSourceSelData = objc.RegisterName("data")
+	_sCNSceneSourceSelEntriesPassingTest            = objc.RegisterName("entriesPassingTest:")
+	_sCNSceneSourceSelUrl                           = objc.RegisterName("url")
+	_sCNSceneSourceSelData                          = objc.RegisterName("data")
 )
 
 func SCNSceneSourceFromID(id objc.ID) *SCNSceneSource {
@@ -46,28 +46,36 @@ func SCNSceneSourceFromID(id objc.ID) *SCNSceneSource {
 // @method sceneSourceWithURL:options: @abstract Creates and initialize a SCNSceneSource instance. @param url The URL to read scenes from. @param options An optional dictionary for future extensions.
 func SCNSceneSourceSceneSourceWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNSceneSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSceneSource), _sCNSceneSourceSelSceneSourceWithURLOptions, url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneSourceFromID(_ret)
 }
 
 // @method sceneSourceWithData:options: @abstract Creates and initialize a SCNSceneSource instance. @param data The scene data. @param options An optional dictionary for future extensions.
 func SCNSceneSourceSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNSceneSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSceneSource), _sCNSceneSourceSelSceneSourceWithDataOptions, data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneSourceFromID(_ret)
 }
 
 // @method initWithURL:options: @abstract Initialize a SCNSceneSource instance from a URL. @param url The URL to read scenes from. @param options An optional dictionary for future extensions.
 func (o *SCNSceneSource) InitWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNSceneSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelInitWithURLOptions, url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneSourceFromID(_ret)
 }
 
 // @method initWithData:options: @abstract Initialize a SCNSceneSource instance from a NSData object. @param data The data to read scenes from. @param options An optional dictionary for future extensions.
 func (o *SCNSceneSource) InitWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNSceneSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelInitWithDataOptions, data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneSourceFromID(_ret)
 }
 
@@ -81,7 +89,9 @@ func (o *SCNSceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDic
 		defer __block_statusHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelSceneWithOptionsStatusHandler, options, __block_statusHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
@@ -89,7 +99,9 @@ func (o *SCNSceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDic
 func (o *SCNSceneSource) SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*SCNScene, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelSceneWithOptionsError, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -133,14 +145,17 @@ func (o *SCNSceneSource) EntriesPassingTest(predicate func(objc.ID, *foundation.
 // @property url @abstract The receiver's URL (if any).
 func (o *SCNSceneSource) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property data @abstract The receiver's data (if any).
 func (o *SCNSceneSource) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSourceSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

@@ -18,12 +18,12 @@ type MEOutgoingMessageEncodingStatus struct {
 }
 
 var (
-	_clsMEOutgoingMessageEncodingStatus = _objcClass("MEOutgoingMessageEncodingStatus")
+	_clsMEOutgoingMessageEncodingStatus                                                                 = _objcClass("MEOutgoingMessageEncodingStatus")
 	_mEOutgoingMessageEncodingStatusSelInitWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption = objc.RegisterName("initWithCanSign:canEncrypt:securityError:addressesFailingEncryption:")
-	_mEOutgoingMessageEncodingStatusSelCanSign = objc.RegisterName("canSign")
-	_mEOutgoingMessageEncodingStatusSelCanEncrypt = objc.RegisterName("canEncrypt")
-	_mEOutgoingMessageEncodingStatusSelSecurityError = objc.RegisterName("securityError")
-	_mEOutgoingMessageEncodingStatusSelAddressesFailingEncryption = objc.RegisterName("addressesFailingEncryption")
+	_mEOutgoingMessageEncodingStatusSelCanSign                                                          = objc.RegisterName("canSign")
+	_mEOutgoingMessageEncodingStatusSelCanEncrypt                                                       = objc.RegisterName("canEncrypt")
+	_mEOutgoingMessageEncodingStatusSelSecurityError                                                    = objc.RegisterName("securityError")
+	_mEOutgoingMessageEncodingStatusSelAddressesFailingEncryption                                       = objc.RegisterName("addressesFailingEncryption")
 )
 
 func MEOutgoingMessageEncodingStatusFromID(id objc.ID) *MEOutgoingMessageEncodingStatus {
@@ -38,7 +38,9 @@ func MEOutgoingMessageEncodingStatusFromID(id objc.ID) *MEOutgoingMessageEncodin
 
 func (o *MEOutgoingMessageEncodingStatus) InitWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption(canSign bool, canEncrypt bool, securityError unsafe.Pointer, addressesFailingEncryption *foundation.NSArray[*MEEmailAddress]) *MEOutgoingMessageEncodingStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEOutgoingMessageEncodingStatusSelInitWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption, canSign, canEncrypt, securityError, addressesFailingEncryption.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEOutgoingMessageEncodingStatusFromID(_ret)
 }
 
@@ -63,7 +65,8 @@ func (o *MEOutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
 // @brief A list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
 func (o *MEOutgoingMessageEncodingStatus) AddressesFailingEncryption() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEOutgoingMessageEncodingStatusSelAddressesFailingEncryption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
-

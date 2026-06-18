@@ -59,4 +59,3 @@ type ExposureBiasRangeable interface {
 }
 
 var _ ExposureBiasRangeable = (*ExposureBiasRange)(nil)
-

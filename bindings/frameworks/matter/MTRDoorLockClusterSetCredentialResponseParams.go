@@ -18,16 +18,16 @@ type MTRDoorLockClusterSetCredentialResponseParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterSetCredentialResponseParams = _objcClass("MTRDoorLockClusterSetCredentialResponseParams")
+	_clsMTRDoorLockClusterSetCredentialResponseParams                           = _objcClass("MTRDoorLockClusterSetCredentialResponseParams")
 	_mTRDoorLockClusterSetCredentialResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelNextCredentialIndex = objc.RegisterName("nextCredentialIndex")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelSetNextCredentialIndex = objc.RegisterName("setNextCredentialIndex:")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterSetCredentialResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelUserIndex                  = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelSetUserIndex               = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelNextCredentialIndex        = objc.RegisterName("nextCredentialIndex")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelSetNextCredentialIndex     = objc.RegisterName("setNextCredentialIndex:")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterSetCredentialResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRDoorLockClusterSetCredentialResponseParamsFromID(id objc.ID) *MTRDoorLockClusterSetCredentialResponseParams {
@@ -44,7 +44,9 @@ func MTRDoorLockClusterSetCredentialResponseParamsFromID(id objc.ID) *MTRDoorLoc
 func (o *MTRDoorLockClusterSetCredentialResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDoorLockClusterSetCredentialResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetCredentialResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *MTRDoorLockClusterSetCredentialResponseParams) InitWithResponseValueErr
 
 func (o *MTRDoorLockClusterSetCredentialResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetCredentialResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRDoorLockClusterSetCredentialResponseParams) SetStatus(status *founda
 
 func (o *MTRDoorLockClusterSetCredentialResponseParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetCredentialResponseParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRDoorLockClusterSetCredentialResponseParams) SetUserIndex(userIndex *
 
 func (o *MTRDoorLockClusterSetCredentialResponseParams) NextCredentialIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetCredentialResponseParamsSelNextCredentialIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,11 +92,12 @@ func (o *MTRDoorLockClusterSetCredentialResponseParams) SetNextCredentialIndex(n
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterSetCredentialResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetCredentialResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterSetCredentialResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterSetCredentialResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

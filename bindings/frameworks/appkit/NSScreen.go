@@ -20,37 +20,37 @@ type NSScreen struct {
 }
 
 var (
-	_clsNSScreen = _objcClass("NSScreen")
-	_nSScreenSelCanRepresentDisplayGamut = objc.RegisterName("canRepresentDisplayGamut:")
-	_nSScreenSelConvertRectToBacking = objc.RegisterName("convertRectToBacking:")
-	_nSScreenSelConvertRectFromBacking = objc.RegisterName("convertRectFromBacking:")
-	_nSScreenSelBackingAlignedRectOptions = objc.RegisterName("backingAlignedRect:options:")
-	_nSScreenSelScreens = objc.RegisterName("screens")
-	_nSScreenSelMainScreen = objc.RegisterName("mainScreen")
-	_nSScreenSelDeepestScreen = objc.RegisterName("deepestScreen")
-	_nSScreenSelScreensHaveSeparateSpaces = objc.RegisterName("screensHaveSeparateSpaces")
-	_nSScreenSelDepth = objc.RegisterName("depth")
-	_nSScreenSelFrame = objc.RegisterName("frame")
-	_nSScreenSelVisibleFrame = objc.RegisterName("visibleFrame")
-	_nSScreenSelDeviceDescription = objc.RegisterName("deviceDescription")
-	_nSScreenSelColorSpace = objc.RegisterName("colorSpace")
-	_nSScreenSelSupportedWindowDepths = objc.RegisterName("supportedWindowDepths")
-	_nSScreenSelBackingScaleFactor = objc.RegisterName("backingScaleFactor")
-	_nSScreenSelLocalizedName = objc.RegisterName("localizedName")
-	_nSScreenSelSafeAreaInsets = objc.RegisterName("safeAreaInsets")
-	_nSScreenSelAuxiliaryTopLeftArea = objc.RegisterName("auxiliaryTopLeftArea")
-	_nSScreenSelAuxiliaryTopRightArea = objc.RegisterName("auxiliaryTopRightArea")
-	_nSScreenSelCGDirectDisplayID = objc.RegisterName("CGDirectDisplayID")
-	_nSScreenSelMaximumExtendedDynamicRangeColorComponentValue = objc.RegisterName("maximumExtendedDynamicRangeColorComponentValue")
+	_clsNSScreen                                                        = _objcClass("NSScreen")
+	_nSScreenSelCanRepresentDisplayGamut                                = objc.RegisterName("canRepresentDisplayGamut:")
+	_nSScreenSelConvertRectToBacking                                    = objc.RegisterName("convertRectToBacking:")
+	_nSScreenSelConvertRectFromBacking                                  = objc.RegisterName("convertRectFromBacking:")
+	_nSScreenSelBackingAlignedRectOptions                               = objc.RegisterName("backingAlignedRect:options:")
+	_nSScreenSelScreens                                                 = objc.RegisterName("screens")
+	_nSScreenSelMainScreen                                              = objc.RegisterName("mainScreen")
+	_nSScreenSelDeepestScreen                                           = objc.RegisterName("deepestScreen")
+	_nSScreenSelScreensHaveSeparateSpaces                               = objc.RegisterName("screensHaveSeparateSpaces")
+	_nSScreenSelDepth                                                   = objc.RegisterName("depth")
+	_nSScreenSelFrame                                                   = objc.RegisterName("frame")
+	_nSScreenSelVisibleFrame                                            = objc.RegisterName("visibleFrame")
+	_nSScreenSelDeviceDescription                                       = objc.RegisterName("deviceDescription")
+	_nSScreenSelColorSpace                                              = objc.RegisterName("colorSpace")
+	_nSScreenSelSupportedWindowDepths                                   = objc.RegisterName("supportedWindowDepths")
+	_nSScreenSelBackingScaleFactor                                      = objc.RegisterName("backingScaleFactor")
+	_nSScreenSelLocalizedName                                           = objc.RegisterName("localizedName")
+	_nSScreenSelSafeAreaInsets                                          = objc.RegisterName("safeAreaInsets")
+	_nSScreenSelAuxiliaryTopLeftArea                                    = objc.RegisterName("auxiliaryTopLeftArea")
+	_nSScreenSelAuxiliaryTopRightArea                                   = objc.RegisterName("auxiliaryTopRightArea")
+	_nSScreenSelCGDirectDisplayID                                       = objc.RegisterName("CGDirectDisplayID")
+	_nSScreenSelMaximumExtendedDynamicRangeColorComponentValue          = objc.RegisterName("maximumExtendedDynamicRangeColorComponentValue")
 	_nSScreenSelMaximumPotentialExtendedDynamicRangeColorComponentValue = objc.RegisterName("maximumPotentialExtendedDynamicRangeColorComponentValue")
 	_nSScreenSelMaximumReferenceExtendedDynamicRangeColorComponentValue = objc.RegisterName("maximumReferenceExtendedDynamicRangeColorComponentValue")
-	_nSScreenSelMaximumFramesPerSecond = objc.RegisterName("maximumFramesPerSecond")
-	_nSScreenSelMinimumRefreshInterval = objc.RegisterName("minimumRefreshInterval")
-	_nSScreenSelMaximumRefreshInterval = objc.RegisterName("maximumRefreshInterval")
-	_nSScreenSelDisplayUpdateGranularity = objc.RegisterName("displayUpdateGranularity")
-	_nSScreenSelLastDisplayUpdateTimestamp = objc.RegisterName("lastDisplayUpdateTimestamp")
-	_nSScreenSelDisplayLinkWithTargetSelector = objc.RegisterName("displayLinkWithTarget:selector:")
-	_nSScreenSelUserSpaceScaleFactor = objc.RegisterName("userSpaceScaleFactor")
+	_nSScreenSelMaximumFramesPerSecond                                  = objc.RegisterName("maximumFramesPerSecond")
+	_nSScreenSelMinimumRefreshInterval                                  = objc.RegisterName("minimumRefreshInterval")
+	_nSScreenSelMaximumRefreshInterval                                  = objc.RegisterName("maximumRefreshInterval")
+	_nSScreenSelDisplayUpdateGranularity                                = objc.RegisterName("displayUpdateGranularity")
+	_nSScreenSelLastDisplayUpdateTimestamp                              = objc.RegisterName("lastDisplayUpdateTimestamp")
+	_nSScreenSelDisplayLinkWithTargetSelector                           = objc.RegisterName("displayLinkWithTarget:selector:")
+	_nSScreenSelUserSpaceScaleFactor                                    = objc.RegisterName("userSpaceScaleFactor")
 )
 
 func NSScreenFromID(id objc.ID) *NSScreen {
@@ -85,19 +85,25 @@ func (o *NSScreen) BackingAlignedRectOptions(rect corefoundation.CGRect, options
 
 func NSScreenScreens() *foundation.NSArray[*NSScreen] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScreen), _nSScreenSelScreens)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSScreen](_ret)
 }
 
 func NSScreenMainScreen() *NSScreen {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScreen), _nSScreenSelMainScreen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScreenFromID(_ret)
 }
 
 func NSScreenDeepestScreen() *NSScreen {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScreen), _nSScreenSelDeepestScreen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScreenFromID(_ret)
 }
 
@@ -128,7 +134,9 @@ func (o *NSScreen) DeviceDescription() *foundation.NSDictionary[*foundation.NSSt
 
 func (o *NSScreen) ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScreenSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
@@ -144,7 +152,9 @@ func (o *NSScreen) BackingScaleFactor() float64 {
 
 func (o *NSScreen) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScreenSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -217,7 +227,9 @@ func (o *NSScreen) LastDisplayUpdateTimestamp() float64 {
 // Returns a new display link whose callback will be invoked in-sync with the display the screen is on. Note that views and windows can move between screens and you may want to get a display link directly from `NSView` or `NSWindow` which will track those changes automatically.
 func (o *NSScreen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScreenSelDisplayLinkWithTargetSelector, target, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CADisplayLinkFromID(_ret)
 }
 
@@ -226,4 +238,3 @@ func (o *NSScreen) UserSpaceScaleFactor() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSScreenSelUserSpaceScaleFactor)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type LAEnvironmentMechanismBiometry struct {
 }
 
 var (
-	_clsLAEnvironmentMechanismBiometry = _objcClass("LAEnvironmentMechanismBiometry")
-	_lAEnvironmentMechanismBiometrySelBiometryType = objc.RegisterName("biometryType")
-	_lAEnvironmentMechanismBiometrySelIsEnrolled = objc.RegisterName("isEnrolled")
-	_lAEnvironmentMechanismBiometrySelIsLockedOut = objc.RegisterName("isLockedOut")
-	_lAEnvironmentMechanismBiometrySelStateHash = objc.RegisterName("stateHash")
+	_clsLAEnvironmentMechanismBiometry                          = _objcClass("LAEnvironmentMechanismBiometry")
+	_lAEnvironmentMechanismBiometrySelBiometryType              = objc.RegisterName("biometryType")
+	_lAEnvironmentMechanismBiometrySelIsEnrolled                = objc.RegisterName("isEnrolled")
+	_lAEnvironmentMechanismBiometrySelIsLockedOut               = objc.RegisterName("isLockedOut")
+	_lAEnvironmentMechanismBiometrySelStateHash                 = objc.RegisterName("stateHash")
 	_lAEnvironmentMechanismBiometrySelBuiltInSensorInaccessible = objc.RegisterName("builtInSensorInaccessible")
 )
 
@@ -55,7 +55,9 @@ func (o *LAEnvironmentMechanismBiometry) IsLockedOut() bool {
 // @brief The application specific state of the biometric enrollment as returned by @c LAContext.domainState.biometry.stateHash @discussion This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
 func (o *LAEnvironmentMechanismBiometry) StateHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentMechanismBiometrySelStateHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *LAEnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
 	_ret := objc.Send[bool](o.Ptr(), _lAEnvironmentMechanismBiometrySelBuiltInSensorInaccessible)
 	return _ret
 }
-

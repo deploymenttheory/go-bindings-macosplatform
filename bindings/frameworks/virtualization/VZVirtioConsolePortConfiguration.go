@@ -16,11 +16,11 @@ type VZVirtioConsolePortConfiguration struct {
 }
 
 var (
-	_clsVZVirtioConsolePortConfiguration = _objcClass("VZVirtioConsolePortConfiguration")
-	_vZVirtioConsolePortConfigurationSelInit = objc.RegisterName("init")
-	_vZVirtioConsolePortConfigurationSelName = objc.RegisterName("name")
-	_vZVirtioConsolePortConfigurationSelSetName = objc.RegisterName("setName:")
-	_vZVirtioConsolePortConfigurationSelIsConsole = objc.RegisterName("isConsole")
+	_clsVZVirtioConsolePortConfiguration             = _objcClass("VZVirtioConsolePortConfiguration")
+	_vZVirtioConsolePortConfigurationSelInit         = objc.RegisterName("init")
+	_vZVirtioConsolePortConfigurationSelName         = objc.RegisterName("name")
+	_vZVirtioConsolePortConfigurationSelSetName      = objc.RegisterName("setName:")
+	_vZVirtioConsolePortConfigurationSelIsConsole    = objc.RegisterName("isConsole")
 	_vZVirtioConsolePortConfigurationSelSetIsConsole = objc.RegisterName("setIsConsole:")
 )
 
@@ -36,14 +36,18 @@ func VZVirtioConsolePortConfigurationFromID(id objc.ID) *VZVirtioConsolePortConf
 
 func (o *VZVirtioConsolePortConfiguration) Init() *VZVirtioConsolePortConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsolePortConfigurationFromID(_ret)
 }
 
 // @abstract The console port's name. The default behavior is to not use a name unless set.
 func (o *VZVirtioConsolePortConfiguration) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortConfigurationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *VZVirtioConsolePortConfiguration) IsConsole() bool {
 func (o *VZVirtioConsolePortConfiguration) SetIsConsole(isConsole bool) {
 	o.Ptr().Send(_vZVirtioConsolePortConfigurationSelSetIsConsole, isConsole)
 }
-

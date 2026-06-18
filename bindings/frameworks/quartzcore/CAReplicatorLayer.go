@@ -17,24 +17,24 @@ type CAReplicatorLayer struct {
 }
 
 var (
-	_clsCAReplicatorLayer = _objcClass("CAReplicatorLayer")
-	_cAReplicatorLayerSelInstanceCount = objc.RegisterName("instanceCount")
-	_cAReplicatorLayerSelSetInstanceCount = objc.RegisterName("setInstanceCount:")
-	_cAReplicatorLayerSelPreservesDepth = objc.RegisterName("preservesDepth")
-	_cAReplicatorLayerSelSetPreservesDepth = objc.RegisterName("setPreservesDepth:")
-	_cAReplicatorLayerSelInstanceDelay = objc.RegisterName("instanceDelay")
-	_cAReplicatorLayerSelSetInstanceDelay = objc.RegisterName("setInstanceDelay:")
-	_cAReplicatorLayerSelInstanceTransform = objc.RegisterName("instanceTransform")
-	_cAReplicatorLayerSelSetInstanceTransform = objc.RegisterName("setInstanceTransform:")
-	_cAReplicatorLayerSelInstanceColor = objc.RegisterName("instanceColor")
-	_cAReplicatorLayerSelSetInstanceColor = objc.RegisterName("setInstanceColor:")
-	_cAReplicatorLayerSelInstanceRedOffset = objc.RegisterName("instanceRedOffset")
-	_cAReplicatorLayerSelSetInstanceRedOffset = objc.RegisterName("setInstanceRedOffset:")
-	_cAReplicatorLayerSelInstanceGreenOffset = objc.RegisterName("instanceGreenOffset")
+	_clsCAReplicatorLayer                       = _objcClass("CAReplicatorLayer")
+	_cAReplicatorLayerSelInstanceCount          = objc.RegisterName("instanceCount")
+	_cAReplicatorLayerSelSetInstanceCount       = objc.RegisterName("setInstanceCount:")
+	_cAReplicatorLayerSelPreservesDepth         = objc.RegisterName("preservesDepth")
+	_cAReplicatorLayerSelSetPreservesDepth      = objc.RegisterName("setPreservesDepth:")
+	_cAReplicatorLayerSelInstanceDelay          = objc.RegisterName("instanceDelay")
+	_cAReplicatorLayerSelSetInstanceDelay       = objc.RegisterName("setInstanceDelay:")
+	_cAReplicatorLayerSelInstanceTransform      = objc.RegisterName("instanceTransform")
+	_cAReplicatorLayerSelSetInstanceTransform   = objc.RegisterName("setInstanceTransform:")
+	_cAReplicatorLayerSelInstanceColor          = objc.RegisterName("instanceColor")
+	_cAReplicatorLayerSelSetInstanceColor       = objc.RegisterName("setInstanceColor:")
+	_cAReplicatorLayerSelInstanceRedOffset      = objc.RegisterName("instanceRedOffset")
+	_cAReplicatorLayerSelSetInstanceRedOffset   = objc.RegisterName("setInstanceRedOffset:")
+	_cAReplicatorLayerSelInstanceGreenOffset    = objc.RegisterName("instanceGreenOffset")
 	_cAReplicatorLayerSelSetInstanceGreenOffset = objc.RegisterName("setInstanceGreenOffset:")
-	_cAReplicatorLayerSelInstanceBlueOffset = objc.RegisterName("instanceBlueOffset")
-	_cAReplicatorLayerSelSetInstanceBlueOffset = objc.RegisterName("setInstanceBlueOffset:")
-	_cAReplicatorLayerSelInstanceAlphaOffset = objc.RegisterName("instanceAlphaOffset")
+	_cAReplicatorLayerSelInstanceBlueOffset     = objc.RegisterName("instanceBlueOffset")
+	_cAReplicatorLayerSelSetInstanceBlueOffset  = objc.RegisterName("setInstanceBlueOffset:")
+	_cAReplicatorLayerSelInstanceAlphaOffset    = objc.RegisterName("instanceAlphaOffset")
 	_cAReplicatorLayerSelSetInstanceAlphaOffset = objc.RegisterName("setInstanceAlphaOffset:")
 )
 
@@ -128,4 +128,3 @@ func (o *CAReplicatorLayer) InstanceAlphaOffset() float32 {
 func (o *CAReplicatorLayer) SetInstanceAlphaOffset(instanceAlphaOffset float32) {
 	o.Ptr().Send(_cAReplicatorLayerSelSetInstanceAlphaOffset, instanceAlphaOffset)
 }
-

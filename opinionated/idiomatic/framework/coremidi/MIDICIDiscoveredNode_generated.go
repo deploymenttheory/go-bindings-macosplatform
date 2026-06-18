@@ -76,4 +76,3 @@ type CIDiscoveredNodeable interface {
 }
 
 var _ CIDiscoveredNodeable = (*CIDiscoveredNode)(nil)
-

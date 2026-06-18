@@ -20,4 +20,3 @@ type HKWorkoutSessionDelegate interface {
 	WorkoutSessionDidChangeToStateFromStateDate(workoutSession *HKWorkoutSession, toState HKWorkoutSessionState, fromState HKWorkoutSessionState, date *foundation.NSDate)
 	WorkoutSessionDidFailWithError(workoutSession *HKWorkoutSession, error_ unsafe.Pointer)
 }
-

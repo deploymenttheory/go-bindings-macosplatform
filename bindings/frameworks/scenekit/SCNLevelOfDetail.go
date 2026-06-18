@@ -16,12 +16,12 @@ type SCNLevelOfDetail struct {
 }
 
 var (
-	_clsSCNLevelOfDetail = _objcClass("SCNLevelOfDetail")
-	_sCNLevelOfDetailSelLevelOfDetailWithGeometryScreenSpaceRadius = objc.RegisterName("levelOfDetailWithGeometry:screenSpaceRadius:")
+	_clsSCNLevelOfDetail                                            = _objcClass("SCNLevelOfDetail")
+	_sCNLevelOfDetailSelLevelOfDetailWithGeometryScreenSpaceRadius  = objc.RegisterName("levelOfDetailWithGeometry:screenSpaceRadius:")
 	_sCNLevelOfDetailSelLevelOfDetailWithGeometryWorldSpaceDistance = objc.RegisterName("levelOfDetailWithGeometry:worldSpaceDistance:")
-	_sCNLevelOfDetailSelGeometry = objc.RegisterName("geometry")
-	_sCNLevelOfDetailSelScreenSpaceRadius = objc.RegisterName("screenSpaceRadius")
-	_sCNLevelOfDetailSelWorldSpaceDistance = objc.RegisterName("worldSpaceDistance")
+	_sCNLevelOfDetailSelGeometry                                    = objc.RegisterName("geometry")
+	_sCNLevelOfDetailSelScreenSpaceRadius                           = objc.RegisterName("screenSpaceRadius")
+	_sCNLevelOfDetailSelWorldSpaceDistance                          = objc.RegisterName("worldSpaceDistance")
 )
 
 func SCNLevelOfDetailFromID(id objc.ID) *SCNLevelOfDetail {
@@ -37,21 +37,27 @@ func SCNLevelOfDetailFromID(id objc.ID) *SCNLevelOfDetail {
 // @method levelOfDetailWithGeometry:screenSpaceRadius: @abstract This is a convenience method to create a level of detail with a coverage radius threshold mode. @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail. @param radius The maximum radius in screen-space that this level of detail is suitable for. The coverage radius is calculated from the projected bounding sphere and expressed in pixels.
 func SCNLevelOfDetailLevelOfDetailWithGeometryScreenSpaceRadius(geometry *SCNGeometry, radius float64) *SCNLevelOfDetail {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLevelOfDetail), _sCNLevelOfDetailSelLevelOfDetailWithGeometryScreenSpaceRadius, geometry.Ptr(), radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNLevelOfDetailFromID(_ret)
 }
 
 // @method levelOfDetailWithGeometry:worldSpaceDistance: @abstract This is a convenience method to create a level of detail with a distance threshold mode. @param geometry The geometry for this level of detail. nil is supported and indicates that no geometry should be rendered for this level of detail. @param distance The minimum distance to the current point of view that this level of detail is suitable for.
 func SCNLevelOfDetailLevelOfDetailWithGeometryWorldSpaceDistance(geometry *SCNGeometry, distance float64) *SCNLevelOfDetail {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLevelOfDetail), _sCNLevelOfDetailSelLevelOfDetailWithGeometryWorldSpaceDistance, geometry.Ptr(), distance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNLevelOfDetailFromID(_ret)
 }
 
 // @property geometry @abstract Returns the geometry of the receiver.
 func (o *SCNLevelOfDetail) Geometry() *SCNGeometry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLevelOfDetailSelGeometry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *SCNLevelOfDetail) WorldSpaceDistance() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sCNLevelOfDetailSelWorldSpaceDistance)
 	return _ret
 }
-

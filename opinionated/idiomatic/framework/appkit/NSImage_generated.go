@@ -677,4 +677,3 @@ type Imageable interface {
 }
 
 var _ Imageable = (*Image)(nil)
-

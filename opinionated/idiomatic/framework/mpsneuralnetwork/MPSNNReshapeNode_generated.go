@@ -59,4 +59,3 @@ type NNReshapeNodeable interface {
 }
 
 var _ NNReshapeNodeable = (*NNReshapeNode)(nil)
-

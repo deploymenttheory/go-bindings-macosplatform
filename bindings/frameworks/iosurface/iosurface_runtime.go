@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_iosurfaceLib uintptr
-	_loadOnce sync.Once
+	_iosurfaceLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,52 +49,104 @@ func _loadLibrary() {
 		return
 	}
 	_register("IOSurfaceAlignProperty", func() { purego.RegisterLibFunc(&_fnIOSurfaceAlignProperty, _iosurfaceLib, "IOSurfaceAlignProperty") })
-	_register("IOSurfaceAllowsPixelSizeCasting", func() { purego.RegisterLibFunc(&_fnIOSurfaceAllowsPixelSizeCasting, _iosurfaceLib, "IOSurfaceAllowsPixelSizeCasting") })
+	_register("IOSurfaceAllowsPixelSizeCasting", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceAllowsPixelSizeCasting, _iosurfaceLib, "IOSurfaceAllowsPixelSizeCasting")
+	})
 	_register("IOSurfaceCopyAllValues", func() { purego.RegisterLibFunc(&_fnIOSurfaceCopyAllValues, _iosurfaceLib, "IOSurfaceCopyAllValues") })
 	_register("IOSurfaceCopyValue", func() { purego.RegisterLibFunc(&_fnIOSurfaceCopyValue, _iosurfaceLib, "IOSurfaceCopyValue") })
 	_register("IOSurfaceCreate", func() { purego.RegisterLibFunc(&_fnIOSurfaceCreate, _iosurfaceLib, "IOSurfaceCreate") })
 	_register("IOSurfaceCreateMachPort", func() { purego.RegisterLibFunc(&_fnIOSurfaceCreateMachPort, _iosurfaceLib, "IOSurfaceCreateMachPort") })
-	_register("IOSurfaceCreateXPCObject", func() { purego.RegisterLibFunc(&_fnIOSurfaceCreateXPCObject, _iosurfaceLib, "IOSurfaceCreateXPCObject") })
-	_register("IOSurfaceDecrementUseCount", func() { purego.RegisterLibFunc(&_fnIOSurfaceDecrementUseCount, _iosurfaceLib, "IOSurfaceDecrementUseCount") })
+	_register("IOSurfaceCreateXPCObject", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceCreateXPCObject, _iosurfaceLib, "IOSurfaceCreateXPCObject")
+	})
+	_register("IOSurfaceDecrementUseCount", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceDecrementUseCount, _iosurfaceLib, "IOSurfaceDecrementUseCount")
+	})
 	_register("IOSurfaceGetAllocSize", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetAllocSize, _iosurfaceLib, "IOSurfaceGetAllocSize") })
 	_register("IOSurfaceGetBaseAddress", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddress, _iosurfaceLib, "IOSurfaceGetBaseAddress") })
-	_register("IOSurfaceGetBaseAddressOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddressOfPlane, _iosurfaceLib, "IOSurfaceGetBaseAddressOfPlane") })
-	_register("IOSurfaceGetBitDepthOfComponentOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBitDepthOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetBitDepthOfComponentOfPlane") })
-	_register("IOSurfaceGetBitOffsetOfComponentOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBitOffsetOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetBitOffsetOfComponentOfPlane") })
-	_register("IOSurfaceGetBytesPerElement", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElement, _iosurfaceLib, "IOSurfaceGetBytesPerElement") })
-	_register("IOSurfaceGetBytesPerElementOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElementOfPlane, _iosurfaceLib, "IOSurfaceGetBytesPerElementOfPlane") })
+	_register("IOSurfaceGetBaseAddressOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddressOfPlane, _iosurfaceLib, "IOSurfaceGetBaseAddressOfPlane")
+	})
+	_register("IOSurfaceGetBitDepthOfComponentOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBitDepthOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetBitDepthOfComponentOfPlane")
+	})
+	_register("IOSurfaceGetBitOffsetOfComponentOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBitOffsetOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetBitOffsetOfComponentOfPlane")
+	})
+	_register("IOSurfaceGetBytesPerElement", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElement, _iosurfaceLib, "IOSurfaceGetBytesPerElement")
+	})
+	_register("IOSurfaceGetBytesPerElementOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerElementOfPlane, _iosurfaceLib, "IOSurfaceGetBytesPerElementOfPlane")
+	})
 	_register("IOSurfaceGetBytesPerRow", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerRow, _iosurfaceLib, "IOSurfaceGetBytesPerRow") })
-	_register("IOSurfaceGetBytesPerRowOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerRowOfPlane, _iosurfaceLib, "IOSurfaceGetBytesPerRowOfPlane") })
-	_register("IOSurfaceGetElementHeight", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetElementHeight, _iosurfaceLib, "IOSurfaceGetElementHeight") })
-	_register("IOSurfaceGetElementHeightOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetElementHeightOfPlane, _iosurfaceLib, "IOSurfaceGetElementHeightOfPlane") })
-	_register("IOSurfaceGetElementWidth", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetElementWidth, _iosurfaceLib, "IOSurfaceGetElementWidth") })
-	_register("IOSurfaceGetElementWidthOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetElementWidthOfPlane, _iosurfaceLib, "IOSurfaceGetElementWidthOfPlane") })
+	_register("IOSurfaceGetBytesPerRowOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetBytesPerRowOfPlane, _iosurfaceLib, "IOSurfaceGetBytesPerRowOfPlane")
+	})
+	_register("IOSurfaceGetElementHeight", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetElementHeight, _iosurfaceLib, "IOSurfaceGetElementHeight")
+	})
+	_register("IOSurfaceGetElementHeightOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetElementHeightOfPlane, _iosurfaceLib, "IOSurfaceGetElementHeightOfPlane")
+	})
+	_register("IOSurfaceGetElementWidth", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetElementWidth, _iosurfaceLib, "IOSurfaceGetElementWidth")
+	})
+	_register("IOSurfaceGetElementWidthOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetElementWidthOfPlane, _iosurfaceLib, "IOSurfaceGetElementWidthOfPlane")
+	})
 	_register("IOSurfaceGetHeight", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetHeight, _iosurfaceLib, "IOSurfaceGetHeight") })
-	_register("IOSurfaceGetHeightOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetHeightOfPlane, _iosurfaceLib, "IOSurfaceGetHeightOfPlane") })
+	_register("IOSurfaceGetHeightOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetHeightOfPlane, _iosurfaceLib, "IOSurfaceGetHeightOfPlane")
+	})
 	_register("IOSurfaceGetID", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetID, _iosurfaceLib, "IOSurfaceGetID") })
-	_register("IOSurfaceGetNameOfComponentOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetNameOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetNameOfComponentOfPlane") })
-	_register("IOSurfaceGetNumberOfComponentsOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetNumberOfComponentsOfPlane, _iosurfaceLib, "IOSurfaceGetNumberOfComponentsOfPlane") })
+	_register("IOSurfaceGetNameOfComponentOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetNameOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetNameOfComponentOfPlane")
+	})
+	_register("IOSurfaceGetNumberOfComponentsOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetNumberOfComponentsOfPlane, _iosurfaceLib, "IOSurfaceGetNumberOfComponentsOfPlane")
+	})
 	_register("IOSurfaceGetPixelFormat", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetPixelFormat, _iosurfaceLib, "IOSurfaceGetPixelFormat") })
 	_register("IOSurfaceGetPlaneCount", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetPlaneCount, _iosurfaceLib, "IOSurfaceGetPlaneCount") })
-	_register("IOSurfaceGetPropertyAlignment", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetPropertyAlignment, _iosurfaceLib, "IOSurfaceGetPropertyAlignment") })
-	_register("IOSurfaceGetPropertyMaximum", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetPropertyMaximum, _iosurfaceLib, "IOSurfaceGetPropertyMaximum") })
-	_register("IOSurfaceGetRangeOfComponentOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetRangeOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetRangeOfComponentOfPlane") })
+	_register("IOSurfaceGetPropertyAlignment", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetPropertyAlignment, _iosurfaceLib, "IOSurfaceGetPropertyAlignment")
+	})
+	_register("IOSurfaceGetPropertyMaximum", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetPropertyMaximum, _iosurfaceLib, "IOSurfaceGetPropertyMaximum")
+	})
+	_register("IOSurfaceGetRangeOfComponentOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetRangeOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetRangeOfComponentOfPlane")
+	})
 	_register("IOSurfaceGetSeed", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetSeed, _iosurfaceLib, "IOSurfaceGetSeed") })
 	_register("IOSurfaceGetSubsampling", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetSubsampling, _iosurfaceLib, "IOSurfaceGetSubsampling") })
 	_register("IOSurfaceGetTypeID", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetTypeID, _iosurfaceLib, "IOSurfaceGetTypeID") })
-	_register("IOSurfaceGetTypeOfComponentOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetTypeOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetTypeOfComponentOfPlane") })
+	_register("IOSurfaceGetTypeOfComponentOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetTypeOfComponentOfPlane, _iosurfaceLib, "IOSurfaceGetTypeOfComponentOfPlane")
+	})
 	_register("IOSurfaceGetUseCount", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetUseCount, _iosurfaceLib, "IOSurfaceGetUseCount") })
 	_register("IOSurfaceGetWidth", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetWidth, _iosurfaceLib, "IOSurfaceGetWidth") })
-	_register("IOSurfaceGetWidthOfPlane", func() { purego.RegisterLibFunc(&_fnIOSurfaceGetWidthOfPlane, _iosurfaceLib, "IOSurfaceGetWidthOfPlane") })
-	_register("IOSurfaceIncrementUseCount", func() { purego.RegisterLibFunc(&_fnIOSurfaceIncrementUseCount, _iosurfaceLib, "IOSurfaceIncrementUseCount") })
+	_register("IOSurfaceGetWidthOfPlane", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceGetWidthOfPlane, _iosurfaceLib, "IOSurfaceGetWidthOfPlane")
+	})
+	_register("IOSurfaceIncrementUseCount", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceIncrementUseCount, _iosurfaceLib, "IOSurfaceIncrementUseCount")
+	})
 	_register("IOSurfaceIsInUse", func() { purego.RegisterLibFunc(&_fnIOSurfaceIsInUse, _iosurfaceLib, "IOSurfaceIsInUse") })
 	_register("IOSurfaceLock", func() { purego.RegisterLibFunc(&_fnIOSurfaceLock, _iosurfaceLib, "IOSurfaceLock") })
 	_register("IOSurfaceLookup", func() { purego.RegisterLibFunc(&_fnIOSurfaceLookup, _iosurfaceLib, "IOSurfaceLookup") })
-	_register("IOSurfaceLookupFromMachPort", func() { purego.RegisterLibFunc(&_fnIOSurfaceLookupFromMachPort, _iosurfaceLib, "IOSurfaceLookupFromMachPort") })
-	_register("IOSurfaceLookupFromXPCObject", func() { purego.RegisterLibFunc(&_fnIOSurfaceLookupFromXPCObject, _iosurfaceLib, "IOSurfaceLookupFromXPCObject") })
-	_register("IOSurfaceRemoveAllValues", func() { purego.RegisterLibFunc(&_fnIOSurfaceRemoveAllValues, _iosurfaceLib, "IOSurfaceRemoveAllValues") })
+	_register("IOSurfaceLookupFromMachPort", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceLookupFromMachPort, _iosurfaceLib, "IOSurfaceLookupFromMachPort")
+	})
+	_register("IOSurfaceLookupFromXPCObject", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceLookupFromXPCObject, _iosurfaceLib, "IOSurfaceLookupFromXPCObject")
+	})
+	_register("IOSurfaceRemoveAllValues", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceRemoveAllValues, _iosurfaceLib, "IOSurfaceRemoveAllValues")
+	})
 	_register("IOSurfaceRemoveValue", func() { purego.RegisterLibFunc(&_fnIOSurfaceRemoveValue, _iosurfaceLib, "IOSurfaceRemoveValue") })
-	_register("IOSurfaceSetOwnershipIdentity", func() { purego.RegisterLibFunc(&_fnIOSurfaceSetOwnershipIdentity, _iosurfaceLib, "IOSurfaceSetOwnershipIdentity") })
+	_register("IOSurfaceSetOwnershipIdentity", func() {
+		purego.RegisterLibFunc(&_fnIOSurfaceSetOwnershipIdentity, _iosurfaceLib, "IOSurfaceSetOwnershipIdentity")
+	})
 	_register("IOSurfaceSetPurgeable", func() { purego.RegisterLibFunc(&_fnIOSurfaceSetPurgeable, _iosurfaceLib, "IOSurfaceSetPurgeable") })
 	_register("IOSurfaceSetValue", func() { purego.RegisterLibFunc(&_fnIOSurfaceSetValue, _iosurfaceLib, "IOSurfaceSetValue") })
 	_register("IOSurfaceSetValues", func() { purego.RegisterLibFunc(&_fnIOSurfaceSetValues, _iosurfaceLib, "IOSurfaceSetValues") })

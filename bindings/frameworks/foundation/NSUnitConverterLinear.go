@@ -15,11 +15,11 @@ type NSUnitConverterLinear struct {
 }
 
 var (
-	_clsNSUnitConverterLinear = _objcClass("NSUnitConverterLinear")
-	_nSUnitConverterLinearSelInitWithCoefficient = objc.RegisterName("initWithCoefficient:")
+	_clsNSUnitConverterLinear                            = _objcClass("NSUnitConverterLinear")
+	_nSUnitConverterLinearSelInitWithCoefficient         = objc.RegisterName("initWithCoefficient:")
 	_nSUnitConverterLinearSelInitWithCoefficientConstant = objc.RegisterName("initWithCoefficient:constant:")
-	_nSUnitConverterLinearSelCoefficient = objc.RegisterName("coefficient")
-	_nSUnitConverterLinearSelConstant = objc.RegisterName("constant")
+	_nSUnitConverterLinearSelCoefficient                 = objc.RegisterName("coefficient")
+	_nSUnitConverterLinearSelConstant                    = objc.RegisterName("constant")
 )
 
 func NSUnitConverterLinearFromID(id objc.ID) *NSUnitConverterLinear {
@@ -34,13 +34,17 @@ func NSUnitConverterLinearFromID(id objc.ID) *NSUnitConverterLinear {
 
 func (o *NSUnitConverterLinear) InitWithCoefficient(coefficient float64) *NSUnitConverterLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnitConverterLinearSelInitWithCoefficient, coefficient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConverterLinearFromID(_ret)
 }
 
 func (o *NSUnitConverterLinear) InitWithCoefficientConstant(coefficient float64, constant float64) *NSUnitConverterLinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUnitConverterLinearSelInitWithCoefficientConstant, coefficient, constant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConverterLinearFromID(_ret)
 }
 
@@ -53,4 +57,3 @@ func (o *NSUnitConverterLinear) Constant() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterLinearSelConstant)
 	return _ret
 }
-

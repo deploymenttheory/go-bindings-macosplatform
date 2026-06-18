@@ -27,4 +27,3 @@ type LossLayerProvider interface {
 type OptimizerProvider interface {
 	asOptimizer() *raw.MLCOptimizer
 }
-

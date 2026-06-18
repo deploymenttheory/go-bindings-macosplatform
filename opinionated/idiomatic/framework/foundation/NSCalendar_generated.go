@@ -652,4 +652,3 @@ type Calendarable interface {
 }
 
 var _ Calendarable = (*Calendar)(nil)
-

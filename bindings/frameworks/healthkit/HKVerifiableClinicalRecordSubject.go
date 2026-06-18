@@ -16,8 +16,8 @@ type HKVerifiableClinicalRecordSubject struct {
 }
 
 var (
-	_clsHKVerifiableClinicalRecordSubject = _objcClass("HKVerifiableClinicalRecordSubject")
-	_hKVerifiableClinicalRecordSubjectSelFullName = objc.RegisterName("fullName")
+	_clsHKVerifiableClinicalRecordSubject                      = _objcClass("HKVerifiableClinicalRecordSubject")
+	_hKVerifiableClinicalRecordSubjectSelFullName              = objc.RegisterName("fullName")
 	_hKVerifiableClinicalRecordSubjectSelDateOfBirthComponents = objc.RegisterName("dateOfBirthComponents")
 )
 
@@ -34,14 +34,17 @@ func HKVerifiableClinicalRecordSubjectFromID(id objc.ID) *HKVerifiableClinicalRe
 // @property     fullName @abstract     The subject's full name.
 func (o *HKVerifiableClinicalRecordSubject) FullName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSubjectSelFullName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property     dateOfBirthComponents @abstract     The subject's date of birth components.
 func (o *HKVerifiableClinicalRecordSubject) DateOfBirthComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKVerifiableClinicalRecordSubjectSelDateOfBirthComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
-

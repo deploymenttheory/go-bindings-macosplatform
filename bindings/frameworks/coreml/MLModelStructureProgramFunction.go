@@ -16,9 +16,9 @@ type MLModelStructureProgramFunction struct {
 }
 
 var (
-	_clsMLModelStructureProgramFunction = _objcClass("MLModelStructureProgramFunction")
+	_clsMLModelStructureProgramFunction       = _objcClass("MLModelStructureProgramFunction")
 	_mLModelStructureProgramFunctionSelInputs = objc.RegisterName("inputs")
-	_mLModelStructureProgramFunctionSelBlock = objc.RegisterName("block")
+	_mLModelStructureProgramFunctionSelBlock  = objc.RegisterName("block")
 )
 
 func MLModelStructureProgramFunctionFromID(id objc.ID) *MLModelStructureProgramFunction {
@@ -34,14 +34,17 @@ func MLModelStructureProgramFunctionFromID(id objc.ID) *MLModelStructureProgramF
 // The named inputs to the function.
 func (o *MLModelStructureProgramFunction) Inputs() *foundation.NSArray[*MLModelStructureProgramNamedValueType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramFunctionSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLModelStructureProgramNamedValueType](_ret)
 }
 
 // The active block in the function.
 func (o *MLModelStructureProgramFunction) Block() *MLModelStructureProgramBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureProgramFunctionSelBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureProgramBlockFromID(_ret)
 }
-

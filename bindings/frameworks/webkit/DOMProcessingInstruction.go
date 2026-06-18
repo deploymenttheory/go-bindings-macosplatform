@@ -16,7 +16,7 @@ type DOMProcessingInstruction struct {
 }
 
 var (
-	_clsDOMProcessingInstruction = _objcClass("DOMProcessingInstruction")
+	_clsDOMProcessingInstruction       = _objcClass("DOMProcessingInstruction")
 	_dOMProcessingInstructionSelTarget = objc.RegisterName("target")
 )
 
@@ -32,7 +32,8 @@ func DOMProcessingInstructionFromID(id objc.ID) *DOMProcessingInstruction {
 
 func (o *DOMProcessingInstruction) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMProcessingInstructionSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

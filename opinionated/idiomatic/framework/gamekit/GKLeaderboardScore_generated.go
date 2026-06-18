@@ -127,4 +127,3 @@ type LeaderboardScoreable interface {
 }
 
 var _ LeaderboardScoreable = (*LeaderboardScore)(nil)
-

@@ -21,11 +21,11 @@ type MKPlacemark struct {
 }
 
 var (
-	_clsMKPlacemark = _objcClass("MKPlacemark")
-	_mKPlacemarkSelInitWithCoordinate = objc.RegisterName("initWithCoordinate:")
+	_clsMKPlacemark                                    = _objcClass("MKPlacemark")
+	_mKPlacemarkSelInitWithCoordinate                  = objc.RegisterName("initWithCoordinate:")
 	_mKPlacemarkSelInitWithCoordinateAddressDictionary = objc.RegisterName("initWithCoordinate:addressDictionary:")
-	_mKPlacemarkSelInitWithCoordinatePostalAddress = objc.RegisterName("initWithCoordinate:postalAddress:")
-	_mKPlacemarkSelCountryCode = objc.RegisterName("countryCode")
+	_mKPlacemarkSelInitWithCoordinatePostalAddress     = objc.RegisterName("initWithCoordinate:postalAddress:")
+	_mKPlacemarkSelCountryCode                         = objc.RegisterName("countryCode")
 )
 
 func MKPlacemarkFromID(id objc.ID) *MKPlacemark {
@@ -40,25 +40,32 @@ func MKPlacemarkFromID(id objc.ID) *MKPlacemark {
 
 func (o *MKPlacemark) InitWithCoordinate(coordinate unsafe.Pointer) *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinate, coordinate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPlacemarkFromID(_ret)
 }
 
 func (o *MKPlacemark) InitWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinateAddressDictionary, coordinate, addressDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPlacemarkFromID(_ret)
 }
 
 func (o *MKPlacemark) InitWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress *contacts.CNPostalAddress) *MKPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelInitWithCoordinatePostalAddress, coordinate, postalAddress.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPlacemarkFromID(_ret)
 }
 
 func (o *MKPlacemark) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPlacemarkSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

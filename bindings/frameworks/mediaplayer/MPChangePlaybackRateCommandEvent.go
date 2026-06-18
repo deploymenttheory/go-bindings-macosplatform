@@ -15,7 +15,7 @@ type MPChangePlaybackRateCommandEvent struct {
 }
 
 var (
-	_clsMPChangePlaybackRateCommandEvent = _objcClass("MPChangePlaybackRateCommandEvent")
+	_clsMPChangePlaybackRateCommandEvent             = _objcClass("MPChangePlaybackRateCommandEvent")
 	_mPChangePlaybackRateCommandEventSelPlaybackRate = objc.RegisterName("playbackRate")
 )
 
@@ -33,4 +33,3 @@ func (o *MPChangePlaybackRateCommandEvent) PlaybackRate() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPChangePlaybackRateCommandEventSelPlaybackRate)
 	return _ret
 }
-

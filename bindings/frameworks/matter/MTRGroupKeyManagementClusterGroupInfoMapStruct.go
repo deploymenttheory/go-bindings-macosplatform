@@ -16,14 +16,14 @@ type MTRGroupKeyManagementClusterGroupInfoMapStruct struct {
 }
 
 var (
-	_clsMTRGroupKeyManagementClusterGroupInfoMapStruct = _objcClass("MTRGroupKeyManagementClusterGroupInfoMapStruct")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupId = objc.RegisterName("groupId")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetGroupId = objc.RegisterName("setGroupId:")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelEndpoints = objc.RegisterName("endpoints")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetEndpoints = objc.RegisterName("setEndpoints:")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupName = objc.RegisterName("groupName")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetGroupName = objc.RegisterName("setGroupName:")
-	_mTRGroupKeyManagementClusterGroupInfoMapStructSelFabricIndex = objc.RegisterName("fabricIndex")
+	_clsMTRGroupKeyManagementClusterGroupInfoMapStruct               = _objcClass("MTRGroupKeyManagementClusterGroupInfoMapStruct")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupId        = objc.RegisterName("groupId")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetGroupId     = objc.RegisterName("setGroupId:")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelEndpoints      = objc.RegisterName("endpoints")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetEndpoints   = objc.RegisterName("setEndpoints:")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupName      = objc.RegisterName("groupName")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetGroupName   = objc.RegisterName("setGroupName:")
+	_mTRGroupKeyManagementClusterGroupInfoMapStructSelFabricIndex    = objc.RegisterName("fabricIndex")
 	_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
 )
 
@@ -39,7 +39,9 @@ func MTRGroupKeyManagementClusterGroupInfoMapStructFromID(id objc.ID) *MTRGroupK
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints 
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupInfoMapStructSelGroupName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,11 +72,12 @@ func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupName(groupName 
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterGroupInfoMapStructSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupKeyManagementClusterGroupInfoMapStructSelSetFabricIndex, fabricIndex.Ptr())
 }
-

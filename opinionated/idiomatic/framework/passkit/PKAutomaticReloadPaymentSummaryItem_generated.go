@@ -16,7 +16,9 @@ type AutomaticReloadPaymentSummaryItem struct {
 }
 
 // Unwrap returns the underlying [raw.PKAutomaticReloadPaymentSummaryItem].
-func (x *AutomaticReloadPaymentSummaryItem) Unwrap() *raw.PKAutomaticReloadPaymentSummaryItem { return x.inner }
+func (x *AutomaticReloadPaymentSummaryItem) Unwrap() *raw.PKAutomaticReloadPaymentSummaryItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -70,7 +72,9 @@ func (x *AutomaticReloadPaymentSummaryItem) SetThresholdAmount(thresholdAmount *
 	x.inner.SetThresholdAmount(thresholdAmount)
 }
 
-func (x *AutomaticReloadPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+func (x *AutomaticReloadPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
+	return &x.inner.PKPaymentSummaryItem
+}
 
 // AutomaticReloadPaymentSummaryItemable is the interface implemented by [AutomaticReloadPaymentSummaryItem], for mocking and DI.
 type AutomaticReloadPaymentSummaryItemable interface {
@@ -84,4 +88,3 @@ type AutomaticReloadPaymentSummaryItemable interface {
 }
 
 var _ AutomaticReloadPaymentSummaryItemable = (*AutomaticReloadPaymentSummaryItem)(nil)
-

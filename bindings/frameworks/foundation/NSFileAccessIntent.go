@@ -15,10 +15,10 @@ type NSFileAccessIntent struct {
 }
 
 var (
-	_clsNSFileAccessIntent = _objcClass("NSFileAccessIntent")
+	_clsNSFileAccessIntent                            = _objcClass("NSFileAccessIntent")
 	_nSFileAccessIntentSelReadingIntentWithURLOptions = objc.RegisterName("readingIntentWithURL:options:")
 	_nSFileAccessIntentSelWritingIntentWithURLOptions = objc.RegisterName("writingIntentWithURL:options:")
-	_nSFileAccessIntentSelURL = objc.RegisterName("URL")
+	_nSFileAccessIntentSelURL                         = objc.RegisterName("URL")
 )
 
 func NSFileAccessIntentFromID(id objc.ID) *NSFileAccessIntent {
@@ -33,19 +33,24 @@ func NSFileAccessIntentFromID(id objc.ID) *NSFileAccessIntent {
 
 func NSFileAccessIntentReadingIntentWithURLOptions(url *NSURL, options NSFileCoordinatorReadingOptions) *NSFileAccessIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileAccessIntent), _nSFileAccessIntentSelReadingIntentWithURLOptions, url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileAccessIntentFromID(_ret)
 }
 
 func NSFileAccessIntentWritingIntentWithURLOptions(url *NSURL, options NSFileCoordinatorWritingOptions) *NSFileAccessIntent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileAccessIntent), _nSFileAccessIntentSelWritingIntentWithURLOptions, url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileAccessIntentFromID(_ret)
 }
 
 func (o *NSFileAccessIntent) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileAccessIntentSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
-

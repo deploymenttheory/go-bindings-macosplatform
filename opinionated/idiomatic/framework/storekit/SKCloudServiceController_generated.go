@@ -132,4 +132,3 @@ type CloudServiceControllerable interface {
 }
 
 var _ CloudServiceControllerable = (*CloudServiceController)(nil)
-

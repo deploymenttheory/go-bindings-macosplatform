@@ -15141,4 +15141,3 @@ func Zupgtr(__uplo string, __n *int, __ap *raw.CLPKDoublecomplex, __tau *raw.CLP
 func Zupmtr(__side string, __uplo string, __trans string, __m *int, __n *int, __ap *raw.CLPKDoublecomplex, __tau *raw.CLPKDoublecomplex, __c__ *raw.CLPKDoublecomplex, __ldc *int, __work *raw.CLPKDoublecomplex, __info *int) int {
 	return raw.Zupmtr(__side, __uplo, __trans, __m, __n, __ap, __tau, __c__, __ldc, __work, __info)
 }
-

@@ -54,4 +54,3 @@ type MapItemIdentifierable interface {
 }
 
 var _ MapItemIdentifierable = (*MapItemIdentifier)(nil)
-

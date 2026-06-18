@@ -15,13 +15,13 @@ type NSCondition struct {
 }
 
 var (
-	_clsNSCondition = _objcClass("NSCondition")
-	_nSConditionSelWait = objc.RegisterName("wait")
+	_clsNSCondition              = _objcClass("NSCondition")
+	_nSConditionSelWait          = objc.RegisterName("wait")
 	_nSConditionSelWaitUntilDate = objc.RegisterName("waitUntilDate:")
-	_nSConditionSelSignal = objc.RegisterName("signal")
-	_nSConditionSelBroadcast = objc.RegisterName("broadcast")
-	_nSConditionSelName = objc.RegisterName("name")
-	_nSConditionSelSetName = objc.RegisterName("setName:")
+	_nSConditionSelSignal        = objc.RegisterName("signal")
+	_nSConditionSelBroadcast     = objc.RegisterName("broadcast")
+	_nSConditionSelName          = objc.RegisterName("name")
+	_nSConditionSelSetName       = objc.RegisterName("setName:")
 )
 
 func NSConditionFromID(id objc.ID) *NSCondition {
@@ -53,11 +53,12 @@ func (o *NSCondition) Broadcast() {
 
 func (o *NSCondition) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConditionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSCondition) SetName(name *NSString) {
 	o.Ptr().Send(_nSConditionSelSetName, name.Ptr())
 }
-

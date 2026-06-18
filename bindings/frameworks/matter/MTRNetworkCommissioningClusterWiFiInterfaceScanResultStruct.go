@@ -16,19 +16,19 @@ type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct = _objcClass("MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSecurity = objc.RegisterName("security")
+	_clsMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct            = _objcClass("MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSecurity    = objc.RegisterName("security")
 	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetSecurity = objc.RegisterName("setSecurity:")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSsid = objc.RegisterName("ssid")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetSsid = objc.RegisterName("setSsid:")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelBssid = objc.RegisterName("bssid")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetBssid = objc.RegisterName("setBssid:")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelChannel = objc.RegisterName("channel")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetChannel = objc.RegisterName("setChannel:")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelWiFiBand = objc.RegisterName("wiFiBand")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSsid        = objc.RegisterName("ssid")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetSsid     = objc.RegisterName("setSsid:")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelBssid       = objc.RegisterName("bssid")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetBssid    = objc.RegisterName("setBssid:")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelChannel     = objc.RegisterName("channel")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetChannel  = objc.RegisterName("setChannel:")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelWiFiBand    = objc.RegisterName("wiFiBand")
 	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetWiFiBand = objc.RegisterName("setWiFiBand:")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelRssi = objc.RegisterName("rssi")
-	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetRssi = objc.RegisterName("setRssi:")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelRssi        = objc.RegisterName("rssi")
+	_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetRssi     = objc.RegisterName("setRssi:")
 )
 
 func MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructFromID(id objc.ID) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
@@ -43,7 +43,9 @@ func MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructFromID(id objc.I
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSecurity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSecurit
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetSsid(ss
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelBssid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetBssid(b
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetChannel
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelWiFiBand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetWiFiBan
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelRssi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) SetRssi(rssi *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructSelSetRssi, rssi.Ptr())
 }
-

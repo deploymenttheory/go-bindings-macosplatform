@@ -12,23 +12,23 @@ import (
 // @brief A struct representing a range of a Metal buffer. The offset into the buffer is included in the address. The length is generally optional, which a value of (uint64_t)-1 representing the range from the given address to the end of the buffer. However, providing the length can enable more accurate API validation, especially when sub-allocating ranges of a buffer.
 type MTL4BufferRange struct {
 	BufferAddress uint64
-	Length uint64
+	Length        uint64
 }
 
 // Groups together arguments for an operation to copy a sparse buffer mapping.
 type MTL4CopySparseBufferMappingOperation struct {
-	SourceRange foundation.NSRange
+	SourceRange       foundation.NSRange
 	DestinationOffset uint
 }
 
 // Groups together arguments for an operation to copy a sparse texture mapping.
 type MTL4CopySparseTextureMappingOperation struct {
-	SourceRegion MTLRegion
-	SourceLevel uint
-	SourceSlice uint
+	SourceRegion      MTLRegion
+	SourceLevel       uint
+	SourceSlice       uint
 	DestinationOrigin MTLOrigin
-	DestinationLevel uint
-	DestinationSlice uint
+	DestinationLevel  uint
+	DestinationSlice  uint
 }
 
 // Represents a timestamp data entry in a counter heap of type `MTL4CounterHeapTypeTimestamp`.
@@ -38,92 +38,92 @@ type MTL4TimestampHeapEntry struct {
 
 // Groups together arguments for an operation to update a sparse buffer mapping.
 type MTL4UpdateSparseBufferMappingOperation struct {
-	Mode MTLSparseTextureMappingMode
+	Mode        MTLSparseTextureMappingMode
 	BufferRange foundation.NSRange
-	HeapOffset uint
+	HeapOffset  uint
 }
 
-// Groups together arguments for an operation to update a sparse texture mapping. When performing a sparse mapping update, you are responsible for issuing a barrier against stage `MTLStageResourceState`. You can determine the sparse texture tier by calling ``MTLTexture/sparseTextureTier``.
+// Groups together arguments for an operation to update a sparse texture mapping. When performing a sparse mapping update, you are responsible for issuing a barrier against stage `MTLStageResourceState`. You can determine the sparse texture tier by calling “MTLTexture/sparseTextureTier“.
 type MTL4UpdateSparseTextureMappingOperation struct {
-	Mode MTLSparseTextureMappingMode
+	Mode          MTLSparseTextureMappingMode
 	TextureRegion MTLRegion
-	TextureLevel uint
-	TextureSlice uint
-	HeapOffset uint
+	TextureLevel  uint
+	TextureSlice  uint
+	HeapOffset    uint
 }
 
 type MTLAccelerationStructureInstanceDescriptor struct {
-	TransformationMatrix MTLPackedFloat4x3
-	Options MTLAccelerationStructureInstanceOptions
-	Mask uint32
+	TransformationMatrix            MTLPackedFloat4x3
+	Options                         MTLAccelerationStructureInstanceOptions
+	Mask                            uint32
 	IntersectionFunctionTableOffset uint32
-	AccelerationStructureIndex uint32
+	AccelerationStructureIndex      uint32
 }
 
 type MTLAccelerationStructureMotionInstanceDescriptor struct {
-	Options MTLAccelerationStructureInstanceOptions
-	Mask uint32
+	Options                         MTLAccelerationStructureInstanceOptions
+	Mask                            uint32
 	IntersectionFunctionTableOffset uint32
-	AccelerationStructureIndex uint32
-	UserID uint32
-	MotionTransformsStartIndex uint32
-	MotionTransformsCount uint32
-	MotionStartBorderMode MTLMotionBorderMode
-	MotionEndBorderMode MTLMotionBorderMode
-	MotionStartTime float32
-	MotionEndTime float32
+	AccelerationStructureIndex      uint32
+	UserID                          uint32
+	MotionTransformsStartIndex      uint32
+	MotionTransformsCount           uint32
+	MotionStartBorderMode           MTLMotionBorderMode
+	MotionEndBorderMode             MTLMotionBorderMode
+	MotionStartTime                 float32
+	MotionEndTime                   float32
 }
 
 // @brief Describes the memory requirements for an acceleration structure
 type MTLAccelerationStructureSizes struct {
 	AccelerationStructureSize uint
-	BuildScratchBufferSize uint
-	RefitScratchBufferSize uint
+	BuildScratchBufferSize    uint
+	RefitScratchBufferSize    uint
 }
 
 type MTLAccelerationStructureUserIDInstanceDescriptor struct {
-	TransformationMatrix MTLPackedFloat4x3
-	Options MTLAccelerationStructureInstanceOptions
-	Mask uint32
+	TransformationMatrix            MTLPackedFloat4x3
+	Options                         MTLAccelerationStructureInstanceOptions
+	Mask                            uint32
 	IntersectionFunctionTableOffset uint32
-	AccelerationStructureIndex uint32
-	UserID uint32
+	AccelerationStructureIndex      uint32
+	UserID                          uint32
 }
 
 type MTLClearColor struct {
-	Red float64
+	Red   float64
 	Green float64
-	Blue float64
+	Blue  float64
 	Alpha float64
 }
 
 // @brief A transformation represented by individual components such as translation and rotation. The rotation is represented by a quaternion, allowing for correct motion interpolation.
 type MTLComponentTransform struct {
-	Scale MTLPackedFloat3
-	Shear MTLPackedFloat3
-	Pivot MTLPackedFloat3
-	Rotation MTLPackedFloatQuaternion
+	Scale       MTLPackedFloat3
+	Shear       MTLPackedFloat3
+	Pivot       MTLPackedFloat3
+	Rotation    MTLPackedFloatQuaternion
 	Translation MTLPackedFloat3
 }
 
 type MTLCounterResultStageUtilization struct {
-	TotalCycles uint64
-	VertexCycles uint64
-	TessellationCycles uint64
+	TotalCycles                  uint64
+	VertexCycles                 uint64
+	TessellationCycles           uint64
 	PostTessellationVertexCycles uint64
-	FragmentCycles uint64
-	RenderTargetCycles uint64
+	FragmentCycles               uint64
+	RenderTargetCycles           uint64
 }
 
 type MTLCounterResultStatistic struct {
-	TessellationInputPatches uint64
-	VertexInvocations uint64
+	TessellationInputPatches          uint64
+	VertexInvocations                 uint64
 	PostTessellationVertexInvocations uint64
-	ClipperInvocations uint64
-	ClipperPrimitivesOut uint64
-	FragmentInvocations uint64
-	FragmentsPassed uint64
-	ComputeKernelInvocations uint64
+	ClipperInvocations                uint64
+	ClipperPrimitivesOut              uint64
+	FragmentInvocations               uint64
+	FragmentsPassed                   uint64
+	ComputeKernelInvocations          uint64
 }
 
 type MTLCounterResultTimestamp struct {
@@ -135,78 +135,78 @@ type MTLDispatchThreadgroupsIndirectArguments struct {
 }
 
 type MTLDispatchThreadsIndirectArguments struct {
-	ThreadsPerGrid [3]uint32
+	ThreadsPerGrid        [3]uint32
 	ThreadsPerThreadgroup [3]uint32
 }
 
 type MTLDrawIndexedPrimitivesIndirectArguments struct {
-	IndexCount uint32
+	IndexCount    uint32
 	InstanceCount uint32
-	IndexStart uint32
-	BaseVertex int32
-	BaseInstance uint32
+	IndexStart    uint32
+	BaseVertex    int32
+	BaseInstance  uint32
 }
 
 type MTLDrawPatchIndirectArguments struct {
-	PatchCount uint32
+	PatchCount    uint32
 	InstanceCount uint32
-	PatchStart uint32
-	BaseInstance uint32
+	PatchStart    uint32
+	BaseInstance  uint32
 }
 
 type MTLDrawPrimitivesIndirectArguments struct {
-	VertexCount uint32
+	VertexCount   uint32
 	InstanceCount uint32
-	VertexStart uint32
-	BaseInstance uint32
+	VertexStart   uint32
+	BaseInstance  uint32
 }
 
 type MTLIndirectAccelerationStructureInstanceDescriptor struct {
-	TransformationMatrix MTLPackedFloat4x3
-	Options MTLAccelerationStructureInstanceOptions
-	Mask uint32
+	TransformationMatrix            MTLPackedFloat4x3
+	Options                         MTLAccelerationStructureInstanceOptions
+	Mask                            uint32
 	IntersectionFunctionTableOffset uint32
-	UserID uint32
-	AccelerationStructureID MTLResourceID
+	UserID                          uint32
+	AccelerationStructureID         MTLResourceID
 }
 
 type MTLIndirectAccelerationStructureMotionInstanceDescriptor struct {
-	Options MTLAccelerationStructureInstanceOptions
-	Mask uint32
+	Options                         MTLAccelerationStructureInstanceOptions
+	Mask                            uint32
 	IntersectionFunctionTableOffset uint32
-	UserID uint32
-	AccelerationStructureID MTLResourceID
-	MotionTransformsStartIndex uint32
-	MotionTransformsCount uint32
-	MotionStartBorderMode MTLMotionBorderMode
-	MotionEndBorderMode MTLMotionBorderMode
-	MotionStartTime float32
-	MotionEndTime float32
+	UserID                          uint32
+	AccelerationStructureID         MTLResourceID
+	MotionTransformsStartIndex      uint32
+	MotionTransformsCount           uint32
+	MotionStartBorderMode           MTLMotionBorderMode
+	MotionEndBorderMode             MTLMotionBorderMode
+	MotionStartTime                 float32
+	MotionEndTime                   float32
 }
 
 // @abstract The data layout required for specifying an indirect command buffer execution range.
 type MTLIndirectCommandBufferExecutionRange struct {
 	Location uint32
-	Length uint32
+	Length   uint32
 }
 
 // @brief struct containing arguments for intersection function buffers.
 type MTLIntersectionFunctionBufferArguments struct {
-	IntersectionFunctionBuffer uint64
+	IntersectionFunctionBuffer     uint64
 	IntersectionFunctionBufferSize uint64
-	IntersectionFunctionStride uint64
+	IntersectionFunctionStride     uint64
 }
 
 // @enum MTLMapIndirectArguments @abstract Structure describing indirect mapping region. This structure is used to populate a buffer for the method  'MTLResourceStateCommandEncoder updateTextureMapping:indirectBuffer:indirectBufferOffset:' @discussion The correct data format for the buffer used in 'MTLResourceStateCommandEncoder updateTextureMapping:indirectBuffer:indirectBufferOffset: is the following: struct MTLMapIndirectBufferFormat{ uint32_t numMappings; MTLMapIndirectArguments mappings[numMappings]; }
 type MTLMapIndirectArguments struct {
-	RegionOriginX uint32
-	RegionOriginY uint32
-	RegionOriginZ uint32
-	RegionSizeWidth uint32
+	RegionOriginX    uint32
+	RegionOriginY    uint32
+	RegionOriginZ    uint32
+	RegionSizeWidth  uint32
 	RegionSizeHeight uint32
-	RegionSizeDepth uint32
-	MipMapLevel uint32
-	SliceId uint32
+	RegionSizeDepth  uint32
+	MipMapLevel      uint32
+	SliceId          uint32
 }
 
 // @struct MTLOrigin @abstract Identify a pixel in an image. MTLOrigin is ususally used as the upper-left corner of a region of a texture.
@@ -224,13 +224,13 @@ type MTLPackedFloatQuaternion struct {
 }
 
 type MTLQuadTessellationFactorsHalf struct {
-	EdgeTessellationFactor [4]uint16
+	EdgeTessellationFactor   [4]uint16
 	InsideTessellationFactor [2]uint16
 }
 
 type MTLRegion struct {
 	Origin MTLOrigin
-	Size MTLSize
+	Size   MTLSize
 }
 
 // @typedef MTLResourceID @abstract Handle of the GPU resource used for binding resources to argument tables, navigating resource view pools and storing resources in an argument buffer @discussion MTLResourceID represents a specific GPU resource. This handle can be mutated by modifying textureID or samplerID values to get to individual resource views in a resource view pool.
@@ -243,54 +243,54 @@ type MTLSamplePosition struct {
 }
 
 type MTLScissorRect struct {
-	X uint
-	Y uint
-	Width uint
+	X      uint
+	Y      uint
+	Width  uint
 	Height uint
 }
 
 // @typedef MTLSize @abstract A set of dimensions to declare the size of an object, such as an image, texture, threadgroup, or grid.
 type MTLSize struct {
-	Width uint
+	Width  uint
 	Height uint
-	Depth uint
+	Depth  uint
 }
 
 // @abstract Represent a memory size and alignment in bytes.
 type MTLSizeAndAlign struct {
-	Size uint
+	Size  uint
 	Align uint
 }
 
 type MTLStageInRegionIndirectArguments struct {
 	StageInOrigin [3]uint32
-	StageInSize [3]uint32
+	StageInSize   [3]uint32
 }
 
 type MTLTextureSwizzleChannels struct {
-	Red MTLTextureSwizzle
+	Red   MTLTextureSwizzle
 	Green MTLTextureSwizzle
-	Blue MTLTextureSwizzle
+	Blue  MTLTextureSwizzle
 	Alpha MTLTextureSwizzle
 }
 
 type MTLTriangleTessellationFactorsHalf struct {
-	EdgeTessellationFactor [3]uint16
+	EdgeTessellationFactor   [3]uint16
 	InsideTessellationFactor uint16
 }
 
 type MTLVertexAmplificationViewMapping struct {
-	ViewportArrayIndexOffset uint32
+	ViewportArrayIndexOffset     uint32
 	RenderTargetArrayIndexOffset uint32
 }
 
 type MTLViewport struct {
 	OriginX float64
 	OriginY float64
-	Width float64
-	Height float64
-	Znear float64
-	Zfar float64
+	Width   float64
+	Height  float64
+	Znear   float64
+	Zfar    float64
 }
 
 // @brief An axis aligned bounding box with a min and max point
@@ -309,4 +309,3 @@ type MTLPackedFloat3 struct {
 type MTLPackedFloat4x3 struct {
 	Columns [4]MTLPackedFloat3
 }
-

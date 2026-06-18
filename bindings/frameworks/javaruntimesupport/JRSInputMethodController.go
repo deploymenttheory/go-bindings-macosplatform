@@ -16,11 +16,11 @@ type JRSInputMethodController struct {
 }
 
 var (
-	_clsJRSInputMethodController = _objcClass("JRSInputMethodController")
-	_jRSInputMethodControllerSelController = objc.RegisterName("controller")
-	_jRSInputMethodControllerSelAvailableInputMethodLocales = objc.RegisterName("availableInputMethodLocales")
-	_jRSInputMethodControllerSelCurrentInputMethodName = objc.RegisterName("currentInputMethodName")
-	_jRSInputMethodControllerSelCurrentInputMethodLocale = objc.RegisterName("currentInputMethodLocale")
+	_clsJRSInputMethodController                               = _objcClass("JRSInputMethodController")
+	_jRSInputMethodControllerSelController                     = objc.RegisterName("controller")
+	_jRSInputMethodControllerSelAvailableInputMethodLocales    = objc.RegisterName("availableInputMethodLocales")
+	_jRSInputMethodControllerSelCurrentInputMethodName         = objc.RegisterName("currentInputMethodName")
+	_jRSInputMethodControllerSelCurrentInputMethodLocale       = objc.RegisterName("currentInputMethodLocale")
 	_jRSInputMethodControllerSelSetCurrentInputMethodForLocale = objc.RegisterName("setCurrentInputMethodForLocale:")
 )
 
@@ -36,7 +36,9 @@ func JRSInputMethodControllerFromID(id objc.ID) *JRSInputMethodController {
 
 func JRSInputMethodControllerController() *JRSInputMethodController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJRSInputMethodController), _jRSInputMethodControllerSelController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JRSInputMethodControllerFromID(_ret)
 }
 
@@ -47,17 +49,20 @@ func (o *JRSInputMethodController) AvailableInputMethodLocales() *foundation.NSA
 
 func (o *JRSInputMethodController) CurrentInputMethodName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jRSInputMethodControllerSelCurrentInputMethodName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *JRSInputMethodController) CurrentInputMethodLocale() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jRSInputMethodControllerSelCurrentInputMethodLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *JRSInputMethodController) SetCurrentInputMethodForLocale(theLocale *foundation.NSString) {
 	o.Ptr().Send(_jRSInputMethodControllerSelSetCurrentInputMethodForLocale, theLocale.Ptr())
 }
-

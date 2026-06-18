@@ -593,4 +593,3 @@ type SegmentedCellable interface {
 }
 
 var _ SegmentedCellable = (*SegmentedCell)(nil)
-

@@ -16,17 +16,17 @@ type DOMNamedNodeMap struct {
 }
 
 var (
-	_clsDOMNamedNodeMap = _objcClass("DOMNamedNodeMap")
-	_dOMNamedNodeMapSelGetNamedItem = objc.RegisterName("getNamedItem:")
-	_dOMNamedNodeMapSelSetNamedItem = objc.RegisterName("setNamedItem:")
-	_dOMNamedNodeMapSelRemoveNamedItem = objc.RegisterName("removeNamedItem:")
-	_dOMNamedNodeMapSelItem = objc.RegisterName("item:")
-	_dOMNamedNodeMapSelGetNamedItemNSLocalName = objc.RegisterName("getNamedItemNS:localName:")
-	_dOMNamedNodeMapSelSetNamedItemNS = objc.RegisterName("setNamedItemNS:")
+	_clsDOMNamedNodeMap                           = _objcClass("DOMNamedNodeMap")
+	_dOMNamedNodeMapSelGetNamedItem               = objc.RegisterName("getNamedItem:")
+	_dOMNamedNodeMapSelSetNamedItem               = objc.RegisterName("setNamedItem:")
+	_dOMNamedNodeMapSelRemoveNamedItem            = objc.RegisterName("removeNamedItem:")
+	_dOMNamedNodeMapSelItem                       = objc.RegisterName("item:")
+	_dOMNamedNodeMapSelGetNamedItemNSLocalName    = objc.RegisterName("getNamedItemNS:localName:")
+	_dOMNamedNodeMapSelSetNamedItemNS             = objc.RegisterName("setNamedItemNS:")
 	_dOMNamedNodeMapSelRemoveNamedItemNSLocalName = objc.RegisterName("removeNamedItemNS:localName:")
-	_dOMNamedNodeMapSelLength = objc.RegisterName("length")
-	_dOMNamedNodeMapSelGetNamedItemNS = objc.RegisterName("getNamedItemNS::")
-	_dOMNamedNodeMapSelRemoveNamedItemNS = objc.RegisterName("removeNamedItemNS::")
+	_dOMNamedNodeMapSelLength                     = objc.RegisterName("length")
+	_dOMNamedNodeMapSelGetNamedItemNS             = objc.RegisterName("getNamedItemNS::")
+	_dOMNamedNodeMapSelRemoveNamedItemNS          = objc.RegisterName("removeNamedItemNS::")
 )
 
 func DOMNamedNodeMapFromID(id objc.ID) *DOMNamedNodeMap {
@@ -41,43 +41,57 @@ func DOMNamedNodeMapFromID(id objc.ID) *DOMNamedNodeMap {
 
 func (o *DOMNamedNodeMap) GetNamedItem(name *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelGetNamedItem, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) SetNamedItem(node *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelSetNamedItem, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) RemoveNamedItem(name *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelRemoveNamedItem, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) Item(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) GetNamedItemNSLocalName(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelGetNamedItemNSLocalName, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) SetNamedItemNS(node *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelSetNamedItemNS, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) RemoveNamedItemNSLocalName(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelRemoveNamedItemNSLocalName, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -88,13 +102,16 @@ func (o *DOMNamedNodeMap) Length() uint {
 
 func (o *DOMNamedNodeMap) GetNamedItemNS(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelGetNamedItemNS, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNamedNodeMapSelRemoveNamedItemNS, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
-

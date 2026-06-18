@@ -96,9 +96,13 @@ func (x *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerD
 	return &SpatialMixerDefinition{inner: _r}
 }
 
-func (x *BlendNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
+func (x *BlendNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition
+}
 
-func (x *BlendNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *BlendNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // BlendNodeDefinitionable is the interface implemented by [BlendNodeDefinition], for mocking and DI.
 type BlendNodeDefinitionable interface {
@@ -112,4 +116,3 @@ type BlendNodeDefinitionable interface {
 }
 
 var _ BlendNodeDefinitionable = (*BlendNodeDefinition)(nil)
-

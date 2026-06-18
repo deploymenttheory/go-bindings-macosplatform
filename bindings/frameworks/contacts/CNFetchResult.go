@@ -16,8 +16,8 @@ type CNFetchResult[ValueType purego.AnyObject] struct {
 }
 
 var (
-	_clsCNFetchResult = _objcClass("CNFetchResult")
-	_cNFetchResultSelValue = objc.RegisterName("value")
+	_clsCNFetchResult                    = _objcClass("CNFetchResult")
+	_cNFetchResultSelValue               = objc.RegisterName("value")
 	_cNFetchResultSelCurrentHistoryToken = objc.RegisterName("currentHistoryToken")
 )
 
@@ -38,7 +38,8 @@ func (o *CNFetchResult[ValueType]) Value() ValueType {
 
 func (o *CNFetchResult[ValueType]) CurrentHistoryToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNFetchResultSelCurrentHistoryToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

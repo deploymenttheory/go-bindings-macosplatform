@@ -16,15 +16,15 @@ type PHASEConeDirectivityModelSubbandParameters struct {
 }
 
 var (
-	_clsPHASEConeDirectivityModelSubbandParameters = _objcClass("PHASEConeDirectivityModelSubbandParameters")
-	_pHASEConeDirectivityModelSubbandParametersSelInit = objc.RegisterName("init")
+	_clsPHASEConeDirectivityModelSubbandParameters                        = _objcClass("PHASEConeDirectivityModelSubbandParameters")
+	_pHASEConeDirectivityModelSubbandParametersSelInit                    = objc.RegisterName("init")
 	_pHASEConeDirectivityModelSubbandParametersSelSetInnerAngleOuterAngle = objc.RegisterName("setInnerAngle:outerAngle:")
-	_pHASEConeDirectivityModelSubbandParametersSelFrequency = objc.RegisterName("frequency")
-	_pHASEConeDirectivityModelSubbandParametersSelSetFrequency = objc.RegisterName("setFrequency:")
-	_pHASEConeDirectivityModelSubbandParametersSelInnerAngle = objc.RegisterName("innerAngle")
-	_pHASEConeDirectivityModelSubbandParametersSelOuterAngle = objc.RegisterName("outerAngle")
-	_pHASEConeDirectivityModelSubbandParametersSelOuterGain = objc.RegisterName("outerGain")
-	_pHASEConeDirectivityModelSubbandParametersSelSetOuterGain = objc.RegisterName("setOuterGain:")
+	_pHASEConeDirectivityModelSubbandParametersSelFrequency               = objc.RegisterName("frequency")
+	_pHASEConeDirectivityModelSubbandParametersSelSetFrequency            = objc.RegisterName("setFrequency:")
+	_pHASEConeDirectivityModelSubbandParametersSelInnerAngle              = objc.RegisterName("innerAngle")
+	_pHASEConeDirectivityModelSubbandParametersSelOuterAngle              = objc.RegisterName("outerAngle")
+	_pHASEConeDirectivityModelSubbandParametersSelOuterGain               = objc.RegisterName("outerGain")
+	_pHASEConeDirectivityModelSubbandParametersSelSetOuterGain            = objc.RegisterName("setOuterGain:")
 )
 
 func PHASEConeDirectivityModelSubbandParametersFromID(id objc.ID) *PHASEConeDirectivityModelSubbandParameters {
@@ -39,7 +39,9 @@ func PHASEConeDirectivityModelSubbandParametersFromID(id objc.ID) *PHASEConeDire
 
 func (o *PHASEConeDirectivityModelSubbandParameters) Init() *PHASEConeDirectivityModelSubbandParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEConeDirectivityModelSubbandParametersSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEConeDirectivityModelSubbandParametersFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *PHASEConeDirectivityModelSubbandParameters) OuterGain() float64 {
 func (o *PHASEConeDirectivityModelSubbandParameters) SetOuterGain(outerGain float64) {
 	o.Ptr().Send(_pHASEConeDirectivityModelSubbandParametersSelSetOuterGain, outerGain)
 }
-

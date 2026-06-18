@@ -15,8 +15,8 @@ type MPChangeRepeatModeCommand struct {
 }
 
 var (
-	_clsMPChangeRepeatModeCommand = _objcClass("MPChangeRepeatModeCommand")
-	_mPChangeRepeatModeCommandSelCurrentRepeatType = objc.RegisterName("currentRepeatType")
+	_clsMPChangeRepeatModeCommand                     = _objcClass("MPChangeRepeatModeCommand")
+	_mPChangeRepeatModeCommandSelCurrentRepeatType    = objc.RegisterName("currentRepeatType")
 	_mPChangeRepeatModeCommandSelSetCurrentRepeatType = objc.RegisterName("setCurrentRepeatType:")
 )
 
@@ -38,4 +38,3 @@ func (o *MPChangeRepeatModeCommand) CurrentRepeatType() MPRepeatType {
 func (o *MPChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType MPRepeatType) {
 	o.Ptr().Send(_mPChangeRepeatModeCommandSelSetCurrentRepeatType, currentRepeatType)
 }
-

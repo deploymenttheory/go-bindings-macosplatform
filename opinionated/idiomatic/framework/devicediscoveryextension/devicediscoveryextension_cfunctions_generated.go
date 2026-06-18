@@ -33,4 +33,3 @@ func DDDeviceStateToString(inValue raw.DDDeviceState) *foundation.NSString {
 func DDEventTypeToString(inValue raw.DDEventType) *foundation.NSString {
 	return raw.DDEventTypeToString(inValue)
 }
-

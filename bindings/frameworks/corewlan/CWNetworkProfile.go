@@ -16,15 +16,15 @@ type CWNetworkProfile struct {
 }
 
 var (
-	_clsCWNetworkProfile = _objcClass("CWNetworkProfile")
-	_cWNetworkProfileSelNetworkProfile = objc.RegisterName("networkProfile")
-	_cWNetworkProfileSelInit = objc.RegisterName("init")
-	_cWNetworkProfileSelInitWithNetworkProfile = objc.RegisterName("initWithNetworkProfile:")
+	_clsCWNetworkProfile                                 = _objcClass("CWNetworkProfile")
+	_cWNetworkProfileSelNetworkProfile                   = objc.RegisterName("networkProfile")
+	_cWNetworkProfileSelInit                             = objc.RegisterName("init")
+	_cWNetworkProfileSelInitWithNetworkProfile           = objc.RegisterName("initWithNetworkProfile:")
 	_cWNetworkProfileSelNetworkProfileWithNetworkProfile = objc.RegisterName("networkProfileWithNetworkProfile:")
-	_cWNetworkProfileSelIsEqualToNetworkProfile = objc.RegisterName("isEqualToNetworkProfile:")
-	_cWNetworkProfileSelSsid = objc.RegisterName("ssid")
-	_cWNetworkProfileSelSsidData = objc.RegisterName("ssidData")
-	_cWNetworkProfileSelSecurity = objc.RegisterName("security")
+	_cWNetworkProfileSelIsEqualToNetworkProfile          = objc.RegisterName("isEqualToNetworkProfile:")
+	_cWNetworkProfileSelSsid                             = objc.RegisterName("ssid")
+	_cWNetworkProfileSelSsidData                         = objc.RegisterName("ssidData")
+	_cWNetworkProfileSelSecurity                         = objc.RegisterName("security")
 )
 
 func CWNetworkProfileFromID(id objc.ID) *CWNetworkProfile {
@@ -40,28 +40,36 @@ func CWNetworkProfileFromID(id objc.ID) *CWNetworkProfile {
 // @method @abstract Convenience method for getting a CWNetworkProfile object.
 func CWNetworkProfileNetworkProfile() *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWNetworkProfile), _cWNetworkProfileSelNetworkProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWNetworkProfileFromID(_ret)
 }
 
 // @method @abstract Initializes a CWNetworkProfile object.
 func (o *CWNetworkProfile) Init() *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWNetworkProfileFromID(_ret)
 }
 
 // @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Initializes a CWNetworkProfile object with the properties of an existing CWNetworkProfile object.
 func (o *CWNetworkProfile) InitWithNetworkProfile(networkProfile *CWNetworkProfile) *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelInitWithNetworkProfile, networkProfile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWNetworkProfileFromID(_ret)
 }
 
 // @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Convenience method for getting a CWNetworkProfile object initialized with the properties of an existing CWNetworkProfile object.
 func CWNetworkProfileNetworkProfileWithNetworkProfile(networkProfile *CWNetworkProfile) *CWNetworkProfile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWNetworkProfile), _cWNetworkProfileSelNetworkProfileWithNetworkProfile, networkProfile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWNetworkProfileFromID(_ret)
 }
 
@@ -74,14 +82,18 @@ func (o *CWNetworkProfile) IsEqualToNetworkProfile(networkProfile *CWNetworkProf
 // @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (o *CWNetworkProfile) Ssid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. @discussion The SSID is 1-32 octets.
 func (o *CWNetworkProfile) SsidData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkProfileSelSsidData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -90,4 +102,3 @@ func (o *CWNetworkProfile) Security() CWSecurity {
 	_ret := objc.Send[CWSecurity](o.Ptr(), _cWNetworkProfileSelSecurity)
 	return _ret
 }
-

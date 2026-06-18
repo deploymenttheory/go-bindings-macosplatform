@@ -105,4 +105,3 @@ type Reservationable interface {
 }
 
 var _ Reservationable = (*Reservation)(nil)
-

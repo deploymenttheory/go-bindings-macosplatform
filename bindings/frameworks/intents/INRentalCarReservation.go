@@ -17,13 +17,13 @@ type INRentalCarReservation struct {
 }
 
 var (
-	_clsINRentalCarReservation = _objcClass("INRentalCarReservation")
+	_clsINRentalCarReservation                                                                                                                                                      = _objcClass("INRentalCarReservation")
 	_iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:rentalCar:rentalDuration:pickupLocation:dropOffLocation:")
-	_iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:")
-	_iNRentalCarReservationSelRentalCar = objc.RegisterName("rentalCar")
-	_iNRentalCarReservationSelRentalDuration = objc.RegisterName("rentalDuration")
-	_iNRentalCarReservationSelPickupLocation = objc.RegisterName("pickupLocation")
-	_iNRentalCarReservationSelDropOffLocation = objc.RegisterName("dropOffLocation")
+	_iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation    = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:")
+	_iNRentalCarReservationSelRentalCar                                                                                                                                             = objc.RegisterName("rentalCar")
+	_iNRentalCarReservationSelRentalDuration                                                                                                                                        = objc.RegisterName("rentalDuration")
+	_iNRentalCarReservationSelPickupLocation                                                                                                                                        = objc.RegisterName("pickupLocation")
+	_iNRentalCarReservationSelDropOffLocation                                                                                                                                       = objc.RegisterName("dropOffLocation")
 )
 
 func INRentalCarReservationFromID(id objc.ID) *INRentalCarReservation {
@@ -38,37 +38,48 @@ func INRentalCarReservationFromID(id objc.ID) *INRentalCarReservation {
 
 func (o *INRentalCarReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, rentalCar *INRentalCar, rentalDuration *INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *INRentalCarReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRentalCarReservationFromID(_ret)
 }
 
 func (o *INRentalCarReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], rentalCar *INRentalCar, rentalDuration *INDateComponentsRange, pickupLocation *corelocation.CLPlacemark, dropOffLocation *corelocation.CLPlacemark) *INRentalCarReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), rentalCar.Ptr(), rentalDuration.Ptr(), pickupLocation.Ptr(), dropOffLocation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRentalCarReservationFromID(_ret)
 }
 
 func (o *INRentalCarReservation) RentalCar() *INRentalCar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelRentalCar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INRentalCarFromID(_ret)
 }
 
 func (o *INRentalCarReservation) RentalDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelRentalDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INRentalCarReservation) PickupLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelPickupLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INRentalCarReservation) DropOffLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNRentalCarReservationSelDropOffLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
-

@@ -18,10 +18,10 @@ type MLDictionaryFeatureProvider struct {
 }
 
 var (
-	_clsMLDictionaryFeatureProvider = _objcClass("MLDictionaryFeatureProvider")
+	_clsMLDictionaryFeatureProvider                        = _objcClass("MLDictionaryFeatureProvider")
 	_mLDictionaryFeatureProviderSelInitWithDictionaryError = objc.RegisterName("initWithDictionary:error:")
 	_mLDictionaryFeatureProviderSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_mLDictionaryFeatureProviderSelDictionary = objc.RegisterName("dictionary")
+	_mLDictionaryFeatureProviderSelDictionary              = objc.RegisterName("dictionary")
 )
 
 func MLDictionaryFeatureProviderFromID(id objc.ID) *MLDictionaryFeatureProvider {
@@ -38,7 +38,9 @@ func MLDictionaryFeatureProviderFromID(id objc.ID) *MLDictionaryFeatureProvider 
 func (o *MLDictionaryFeatureProvider) InitWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLDictionaryFeatureProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelInitWithDictionaryError, dictionary, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,7 +50,9 @@ func (o *MLDictionaryFeatureProvider) InitWithDictionaryError(dictionary *founda
 // Get the value for specified feature
 func (o *MLDictionaryFeatureProvider) ObjectForKeyedSubscript(featureName *foundation.NSString) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLDictionaryFeatureProviderSelObjectForKeyedSubscript, featureName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MLDictionaryFeatureProvider) Dictionary() *foundation.NSDictionary[*fou
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLFeatureValue]](o.Ptr(), _mLDictionaryFeatureProviderSelDictionary)
 	return _ret
 }
-

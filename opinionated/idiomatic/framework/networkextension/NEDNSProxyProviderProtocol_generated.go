@@ -157,7 +157,9 @@ func (x *NEDNSProxyProviderProtocol) SetProviderBundleIdentifier(providerBundleI
 	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
 }
 
-func (x *NEDNSProxyProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocol }
+func (x *NEDNSProxyProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol {
+	return &x.inner.NEVPNProtocol
+}
 
 // NEDNSProxyProviderProtocolable is the interface implemented by [NEDNSProxyProviderProtocol], for mocking and DI.
 type NEDNSProxyProviderProtocolable interface {
@@ -185,4 +187,3 @@ type NEDNSProxyProviderProtocolable interface {
 }
 
 var _ NEDNSProxyProviderProtocolable = (*NEDNSProxyProviderProtocol)(nil)
-

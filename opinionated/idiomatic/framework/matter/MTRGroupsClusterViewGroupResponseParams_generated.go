@@ -18,7 +18,9 @@ type MTRGroupsClusterViewGroupResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupsClusterViewGroupResponseParams].
-func (x *MTRGroupsClusterViewGroupResponseParams) Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams { return x.inner }
+func (x *MTRGroupsClusterViewGroupResponseParams) Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -148,4 +150,3 @@ type MTRGroupsClusterViewGroupResponseParamsable interface {
 }
 
 var _ MTRGroupsClusterViewGroupResponseParamsable = (*MTRGroupsClusterViewGroupResponseParams)(nil)
-

@@ -154,9 +154,13 @@ func (x *NNPadGradient) WithDestinationImageAllocator(destinationImageAllocator 
 	return x
 }
 
-func (x *NNPadGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *NNPadGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *NNPadGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *NNPadGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // NNPadGradientable is the interface implemented by [NNPadGradient], for mocking and DI.
 type NNPadGradientable interface {
@@ -182,4 +186,3 @@ type NNPadGradientable interface {
 }
 
 var _ NNPadGradientable = (*NNPadGradient)(nil)
-

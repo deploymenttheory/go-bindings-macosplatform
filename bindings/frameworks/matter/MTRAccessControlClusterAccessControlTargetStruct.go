@@ -16,12 +16,12 @@ type MTRAccessControlClusterAccessControlTargetStruct struct {
 }
 
 var (
-	_clsMTRAccessControlClusterAccessControlTargetStruct = _objcClass("MTRAccessControlClusterAccessControlTargetStruct")
-	_mTRAccessControlClusterAccessControlTargetStructSelCluster = objc.RegisterName("cluster")
-	_mTRAccessControlClusterAccessControlTargetStructSelSetCluster = objc.RegisterName("setCluster:")
-	_mTRAccessControlClusterAccessControlTargetStructSelEndpoint = objc.RegisterName("endpoint")
-	_mTRAccessControlClusterAccessControlTargetStructSelSetEndpoint = objc.RegisterName("setEndpoint:")
-	_mTRAccessControlClusterAccessControlTargetStructSelDeviceType = objc.RegisterName("deviceType")
+	_clsMTRAccessControlClusterAccessControlTargetStruct              = _objcClass("MTRAccessControlClusterAccessControlTargetStruct")
+	_mTRAccessControlClusterAccessControlTargetStructSelCluster       = objc.RegisterName("cluster")
+	_mTRAccessControlClusterAccessControlTargetStructSelSetCluster    = objc.RegisterName("setCluster:")
+	_mTRAccessControlClusterAccessControlTargetStructSelEndpoint      = objc.RegisterName("endpoint")
+	_mTRAccessControlClusterAccessControlTargetStructSelSetEndpoint   = objc.RegisterName("setEndpoint:")
+	_mTRAccessControlClusterAccessControlTargetStructSelDeviceType    = objc.RegisterName("deviceType")
 	_mTRAccessControlClusterAccessControlTargetStructSelSetDeviceType = objc.RegisterName("setDeviceType:")
 )
 
@@ -37,7 +37,9 @@ func MTRAccessControlClusterAccessControlTargetStructFromID(id objc.ID) *MTRAcce
 
 func (o *MTRAccessControlClusterAccessControlTargetStruct) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlTargetStructSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRAccessControlClusterAccessControlTargetStruct) SetCluster(cluster *f
 
 func (o *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlTargetStructSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRAccessControlClusterAccessControlTargetStruct) SetEndpoint(endpoint 
 
 func (o *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlTargetStructSelDeviceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlTargetStruct) SetDeviceType(deviceType *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterAccessControlTargetStructSelSetDeviceType, deviceType.Ptr())
 }
-

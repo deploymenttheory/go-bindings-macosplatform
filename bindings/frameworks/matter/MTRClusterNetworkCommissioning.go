@@ -18,40 +18,40 @@ type MTRClusterNetworkCommissioning struct {
 }
 
 var (
-	_clsMTRClusterNetworkCommissioning = _objcClass("MTRClusterNetworkCommissioning")
-	_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelScanNetworksWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("scanNetworksWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterNetworkCommissioningSelReadAttributeMaxNetworksWithParams = objc.RegisterName("readAttributeMaxNetworksWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeNetworksWithParams = objc.RegisterName("readAttributeNetworksWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeScanMaxTimeSecondsWithParams = objc.RegisterName("readAttributeScanMaxTimeSecondsWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeConnectMaxTimeSecondsWithParams = objc.RegisterName("readAttributeConnectMaxTimeSecondsWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeInterfaceEnabledWithParams = objc.RegisterName("readAttributeInterfaceEnabledWithParams:")
-	_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueInterval = objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:")
-	_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:params:")
-	_mTRClusterNetworkCommissioningSelReadAttributeLastNetworkingStatusWithParams = objc.RegisterName("readAttributeLastNetworkingStatusWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeLastNetworkIDWithParams = objc.RegisterName("readAttributeLastNetworkIDWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeLastConnectErrorValueWithParams = objc.RegisterName("readAttributeLastConnectErrorValueWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeSupportedWiFiBandsWithParams = objc.RegisterName("readAttributeSupportedWiFiBandsWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeSupportedThreadFeaturesWithParams = objc.RegisterName("readAttributeSupportedThreadFeaturesWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeThreadVersionWithParams = objc.RegisterName("readAttributeThreadVersionWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterNetworkCommissioningSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterNetworkCommissioningSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterNetworkCommissioningSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterNetworkCommissioning                                                                                       = _objcClass("MTRClusterNetworkCommissioning")
+	_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion                    = objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelScanNetworksWithExpectedValuesExpectedValueIntervalCompletion                          = objc.RegisterName("scanNetworksWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion                   = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterNetworkCommissioningSelReadAttributeMaxNetworksWithParams                                                     = objc.RegisterName("readAttributeMaxNetworksWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeNetworksWithParams                                                        = objc.RegisterName("readAttributeNetworksWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeScanMaxTimeSecondsWithParams                                              = objc.RegisterName("readAttributeScanMaxTimeSecondsWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeConnectMaxTimeSecondsWithParams                                           = objc.RegisterName("readAttributeConnectMaxTimeSecondsWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeInterfaceEnabledWithParams                                                = objc.RegisterName("readAttributeInterfaceEnabledWithParams:")
+	_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueInterval                           = objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:")
+	_mTRClusterNetworkCommissioningSelWriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams                     = objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:params:")
+	_mTRClusterNetworkCommissioningSelReadAttributeLastNetworkingStatusWithParams                                            = objc.RegisterName("readAttributeLastNetworkingStatusWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeLastNetworkIDWithParams                                                   = objc.RegisterName("readAttributeLastNetworkIDWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeLastConnectErrorValueWithParams                                           = objc.RegisterName("readAttributeLastConnectErrorValueWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeSupportedWiFiBandsWithParams                                              = objc.RegisterName("readAttributeSupportedWiFiBandsWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeSupportedThreadFeaturesWithParams                                         = objc.RegisterName("readAttributeSupportedThreadFeaturesWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeThreadVersionWithParams                                                   = objc.RegisterName("readAttributeThreadVersionWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeGeneratedCommandListWithParams                                            = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeAcceptedCommandListWithParams                                             = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeAttributeListWithParams                                                   = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeFeatureMapWithParams                                                      = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterNetworkCommissioningSelReadAttributeClusterRevisionWithParams                                                 = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterNetworkCommissioningSelInitWithDeviceEndpointIDQueue                                                          = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterNetworkCommissioningSelInitWithDeviceEndpointQueue                                                            = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterNetworkCommissioningSelScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler             = objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterNetworkCommissioningSelAddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterNetworkCommissioningSelAddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterNetworkCommissioningSelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler            = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterNetworkCommissioningSelConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterNetworkCommissioningFromID(id objc.ID) *MTRClusterNetworkCommissioning {
@@ -253,13 +253,17 @@ func (o *MTRClusterNetworkCommissioning) ReadAttributeClusterRevisionWithParams(
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterNetworkCommissioning) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterNetworkCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterNetworkCommissioningFromID(_ret)
 }
 
 func (o *MTRClusterNetworkCommissioning) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterNetworkCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterNetworkCommissioningSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterNetworkCommissioningFromID(_ret)
 }
 
@@ -346,4 +350,3 @@ func (o *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 	}
 	o.Ptr().Send(_mTRClusterNetworkCommissioningSelReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

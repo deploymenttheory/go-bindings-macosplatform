@@ -18,11 +18,15 @@ type MTRNetworkCommissioningClusterConnectNetworkResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams].
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams { return x.inner }
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) Unwrap() *raw.MTRNetworkCommissioningClusterConnectNetworkResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterConnectNetworkResponseParams (nil for 0).
 func MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
@@ -129,4 +133,3 @@ type MTRNetworkCommissioningClusterConnectNetworkResponseParamsable interface {
 }
 
 var _ MTRNetworkCommissioningClusterConnectNetworkResponseParamsable = (*MTRNetworkCommissioningClusterConnectNetworkResponseParams)(nil)
-

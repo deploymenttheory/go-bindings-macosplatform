@@ -71,4 +71,3 @@ type Componentable interface {
 }
 
 var _ Componentable = (*Component)(nil)
-

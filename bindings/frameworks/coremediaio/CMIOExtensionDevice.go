@@ -18,17 +18,17 @@ type CMIOExtensionDevice struct {
 }
 
 var (
-	_clsCMIOExtensionDevice = _objcClass("CMIOExtensionDevice")
+	_clsCMIOExtensionDevice                                                    = _objcClass("CMIOExtensionDevice")
 	_cMIOExtensionDeviceSelDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource = objc.RegisterName("deviceWithLocalizedName:deviceID:legacyDeviceID:source:")
-	_cMIOExtensionDeviceSelInitWithLocalizedNameDeviceIDLegacyDeviceIDSource = objc.RegisterName("initWithLocalizedName:deviceID:legacyDeviceID:source:")
-	_cMIOExtensionDeviceSelAddStreamError = objc.RegisterName("addStream:error:")
-	_cMIOExtensionDeviceSelRemoveStreamError = objc.RegisterName("removeStream:error:")
-	_cMIOExtensionDeviceSelNotifyPropertiesChanged = objc.RegisterName("notifyPropertiesChanged:")
-	_cMIOExtensionDeviceSelLocalizedName = objc.RegisterName("localizedName")
-	_cMIOExtensionDeviceSelDeviceID = objc.RegisterName("deviceID")
-	_cMIOExtensionDeviceSelLegacyDeviceID = objc.RegisterName("legacyDeviceID")
-	_cMIOExtensionDeviceSelSource = objc.RegisterName("source")
-	_cMIOExtensionDeviceSelStreams = objc.RegisterName("streams")
+	_cMIOExtensionDeviceSelInitWithLocalizedNameDeviceIDLegacyDeviceIDSource   = objc.RegisterName("initWithLocalizedName:deviceID:legacyDeviceID:source:")
+	_cMIOExtensionDeviceSelAddStreamError                                      = objc.RegisterName("addStream:error:")
+	_cMIOExtensionDeviceSelRemoveStreamError                                   = objc.RegisterName("removeStream:error:")
+	_cMIOExtensionDeviceSelNotifyPropertiesChanged                             = objc.RegisterName("notifyPropertiesChanged:")
+	_cMIOExtensionDeviceSelLocalizedName                                       = objc.RegisterName("localizedName")
+	_cMIOExtensionDeviceSelDeviceID                                            = objc.RegisterName("deviceID")
+	_cMIOExtensionDeviceSelLegacyDeviceID                                      = objc.RegisterName("legacyDeviceID")
+	_cMIOExtensionDeviceSelSource                                              = objc.RegisterName("source")
+	_cMIOExtensionDeviceSelStreams                                             = objc.RegisterName("streams")
 )
 
 func CMIOExtensionDeviceFromID(id objc.ID) *CMIOExtensionDevice {
@@ -44,14 +44,18 @@ func CMIOExtensionDeviceFromID(id objc.ID) *CMIOExtensionDevice {
 // @method deviceWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Returns a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
 func CMIOExtensionDeviceDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName *foundation.NSString, deviceID *foundation.NSUUID, legacyDeviceID *foundation.NSString, source CMIOExtensionDeviceSource) *CMIOExtensionDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionDevice), _cMIOExtensionDeviceSelDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource, localizedName.Ptr(), deviceID.Ptr(), legacyDeviceID.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionDeviceFromID(_ret)
 }
 
 // @method initWithLocalizedName:deviceID:legacyDeviceID:source: @abstract Initialize a device instance. @param localizedName The localized name of the device. @param deviceID The device id (as a UUID). @param legacyDeviceID The device identifier as a string (for backward compatibility with existing CMIO DAL clients, it may differ from deviceID.UUIDString). May be nil if your device has no compatibility requirements. @param source The device source, a client instantiated object for the device that conforms to the CMIOExtensionDeviceSource protocol. @result A CMIOExtensionDevice instance.
 func (o *CMIOExtensionDevice) InitWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName *foundation.NSString, deviceID *foundation.NSUUID, legacyDeviceID *foundation.NSString, source CMIOExtensionDeviceSource) *CMIOExtensionDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelInitWithLocalizedNameDeviceIDLegacyDeviceIDSource, localizedName.Ptr(), deviceID.Ptr(), legacyDeviceID.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionDeviceFromID(_ret)
 }
 
@@ -83,21 +87,27 @@ func (o *CMIOExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation
 // @property localizedName @abstract The localized name of the device.
 func (o *CMIOExtensionDevice) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property deviceID @abstract The device identifier as UUID.
 func (o *CMIOExtensionDevice) DeviceID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelDeviceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @property legacyDeviceID @abstract The device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
 func (o *CMIOExtensionDevice) LegacyDeviceID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelLegacyDeviceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +120,8 @@ func (o *CMIOExtensionDevice) Source() CMIOExtensionDeviceSource {
 // @property streams @abstract The streams array of the device. @discussion This property is not key-value observable.
 func (o *CMIOExtensionDevice) Streams() *foundation.NSArray[*CMIOExtensionStream] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionDeviceSelStreams)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CMIOExtensionStream](_ret)
 }
-

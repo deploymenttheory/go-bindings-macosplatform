@@ -16,12 +16,12 @@ type MTRSoftwareDiagnosticsClusterSoftwareFaultEvent struct {
 }
 
 var (
-	_clsMTRSoftwareDiagnosticsClusterSoftwareFaultEvent = _objcClass("MTRSoftwareDiagnosticsClusterSoftwareFaultEvent")
-	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelId = objc.RegisterName("id")
-	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetId = objc.RegisterName("setId:")
-	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelName = objc.RegisterName("name")
-	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetName = objc.RegisterName("setName:")
-	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelFaultRecording = objc.RegisterName("faultRecording")
+	_clsMTRSoftwareDiagnosticsClusterSoftwareFaultEvent                  = _objcClass("MTRSoftwareDiagnosticsClusterSoftwareFaultEvent")
+	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelId                = objc.RegisterName("id")
+	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetId             = objc.RegisterName("setId:")
+	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelName              = objc.RegisterName("name")
+	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetName           = objc.RegisterName("setName:")
+	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelFaultRecording    = objc.RegisterName("faultRecording")
 	_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetFaultRecording = objc.RegisterName("setFaultRecording:")
 )
 
@@ -37,7 +37,9 @@ func MTRSoftwareDiagnosticsClusterSoftwareFaultEventFromID(id objc.ID) *MTRSoftw
 
 func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Id() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetId(id_ *foundation.
 
 func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetName(name *foundati
 
 func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelFaultRecording)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetFaultRecording(faultRecording *foundation.NSData) {
 	o.Ptr().Send(_mTRSoftwareDiagnosticsClusterSoftwareFaultEventSelSetFaultRecording, faultRecording.Ptr())
 }
-

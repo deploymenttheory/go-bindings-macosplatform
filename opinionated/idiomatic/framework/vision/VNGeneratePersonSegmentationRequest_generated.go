@@ -19,7 +19,9 @@ type GeneratePersonSegmentationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGeneratePersonSegmentationRequest].
-func (x *GeneratePersonSegmentationRequest) Unwrap() *raw.VNGeneratePersonSegmentationRequest { return x.inner }
+func (x *GeneratePersonSegmentationRequest) Unwrap() *raw.VNGeneratePersonSegmentationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -116,11 +118,17 @@ func (x *GeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelForm
 	x.inner.SetOutputPixelFormat(outputPixelFormat)
 }
 
-func (x *GeneratePersonSegmentationRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
+func (x *GeneratePersonSegmentationRequest) asStatefulRequest() *raw.VNStatefulRequest {
+	return &x.inner.VNStatefulRequest
+}
 
-func (x *GeneratePersonSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
+func (x *GeneratePersonSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest
+}
 
-func (x *GeneratePersonSegmentationRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+func (x *GeneratePersonSegmentationRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+}
 
 // GeneratePersonSegmentationRequestable is the interface implemented by [GeneratePersonSegmentationRequest], for mocking and DI.
 type GeneratePersonSegmentationRequestable interface {
@@ -139,4 +147,3 @@ type GeneratePersonSegmentationRequestable interface {
 }
 
 var _ GeneratePersonSegmentationRequestable = (*GeneratePersonSegmentationRequest)(nil)
-

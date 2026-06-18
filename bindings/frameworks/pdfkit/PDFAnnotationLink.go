@@ -25,4 +25,3 @@ func PDFAnnotationLinkFromID(id objc.ID) *PDFAnnotationLink {
 	purego.Track(o)
 	return o
 }
-

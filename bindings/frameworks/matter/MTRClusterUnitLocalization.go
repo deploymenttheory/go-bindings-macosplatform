@@ -16,17 +16,17 @@ type MTRClusterUnitLocalization struct {
 }
 
 var (
-	_clsMTRClusterUnitLocalization = _objcClass("MTRClusterUnitLocalization")
-	_mTRClusterUnitLocalizationSelReadAttributeTemperatureUnitWithParams = objc.RegisterName("readAttributeTemperatureUnitWithParams:")
-	_mTRClusterUnitLocalizationSelWriteAttributeTemperatureUnitWithValueExpectedValueInterval = objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:")
+	_clsMTRClusterUnitLocalization                                                                  = _objcClass("MTRClusterUnitLocalization")
+	_mTRClusterUnitLocalizationSelReadAttributeTemperatureUnitWithParams                            = objc.RegisterName("readAttributeTemperatureUnitWithParams:")
+	_mTRClusterUnitLocalizationSelWriteAttributeTemperatureUnitWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:")
 	_mTRClusterUnitLocalizationSelWriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:params:")
-	_mTRClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterUnitLocalizationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterUnitLocalizationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterUnitLocalizationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterUnitLocalizationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterUnitLocalizationSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterUnitLocalizationSelReadAttributeGeneratedCommandListWithParams                       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterUnitLocalizationSelReadAttributeAcceptedCommandListWithParams                        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterUnitLocalizationSelReadAttributeAttributeListWithParams                              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterUnitLocalizationSelReadAttributeFeatureMapWithParams                                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterUnitLocalizationSelReadAttributeClusterRevisionWithParams                            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterUnitLocalizationSelInitWithDeviceEndpointIDQueue                                     = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterUnitLocalizationSelInitWithDeviceEndpointQueue                                       = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterUnitLocalizationFromID(id objc.ID) *MTRClusterUnitLocalization {
@@ -80,13 +80,16 @@ func (o *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(para
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterUnitLocalization) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterUnitLocalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterUnitLocalizationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterUnitLocalizationFromID(_ret)
 }
 
 func (o *MTRClusterUnitLocalization) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterUnitLocalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterUnitLocalizationSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterUnitLocalizationFromID(_ret)
 }
-

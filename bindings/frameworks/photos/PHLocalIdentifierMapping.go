@@ -18,9 +18,9 @@ type PHLocalIdentifierMapping struct {
 }
 
 var (
-	_clsPHLocalIdentifierMapping = _objcClass("PHLocalIdentifierMapping")
+	_clsPHLocalIdentifierMapping                = _objcClass("PHLocalIdentifierMapping")
 	_pHLocalIdentifierMappingSelLocalIdentifier = objc.RegisterName("localIdentifier")
-	_pHLocalIdentifierMappingSelError = objc.RegisterName("error")
+	_pHLocalIdentifierMappingSelError           = objc.RegisterName("error")
 )
 
 func PHLocalIdentifierMappingFromID(id objc.ID) *PHLocalIdentifierMapping {
@@ -36,7 +36,9 @@ func PHLocalIdentifierMappingFromID(id objc.ID) *PHLocalIdentifierMapping {
 // The \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
 func (o *PHLocalIdentifierMapping) LocalIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLocalIdentifierMappingSelLocalIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *PHLocalIdentifierMapping) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pHLocalIdentifierMappingSelError)
 	return _ret
 }
-

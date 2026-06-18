@@ -71,7 +71,9 @@ func (x *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
 	})
 }
 
-func (x *MaterialPropertyGraph) asMaterialPropertyNode() *raw.MDLMaterialPropertyNode { return &x.inner.MDLMaterialPropertyNode }
+func (x *MaterialPropertyGraph) asMaterialPropertyNode() *raw.MDLMaterialPropertyNode {
+	return &x.inner.MDLMaterialPropertyNode
+}
 
 // MaterialPropertyGraphable is the interface implemented by [MaterialPropertyGraph], for mocking and DI.
 type MaterialPropertyGraphable interface {
@@ -83,4 +85,3 @@ type MaterialPropertyGraphable interface {
 }
 
 var _ MaterialPropertyGraphable = (*MaterialPropertyGraph)(nil)
-

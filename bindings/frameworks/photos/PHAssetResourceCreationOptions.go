@@ -17,15 +17,15 @@ type PHAssetResourceCreationOptions struct {
 }
 
 var (
-	_clsPHAssetResourceCreationOptions = _objcClass("PHAssetResourceCreationOptions")
-	_pHAssetResourceCreationOptionsSelOriginalFilename = objc.RegisterName("originalFilename")
-	_pHAssetResourceCreationOptionsSelSetOriginalFilename = objc.RegisterName("setOriginalFilename:")
-	_pHAssetResourceCreationOptionsSelContentType = objc.RegisterName("contentType")
-	_pHAssetResourceCreationOptionsSelSetContentType = objc.RegisterName("setContentType:")
-	_pHAssetResourceCreationOptionsSelUniformTypeIdentifier = objc.RegisterName("uniformTypeIdentifier")
+	_clsPHAssetResourceCreationOptions                         = _objcClass("PHAssetResourceCreationOptions")
+	_pHAssetResourceCreationOptionsSelOriginalFilename         = objc.RegisterName("originalFilename")
+	_pHAssetResourceCreationOptionsSelSetOriginalFilename      = objc.RegisterName("setOriginalFilename:")
+	_pHAssetResourceCreationOptionsSelContentType              = objc.RegisterName("contentType")
+	_pHAssetResourceCreationOptionsSelSetContentType           = objc.RegisterName("setContentType:")
+	_pHAssetResourceCreationOptionsSelUniformTypeIdentifier    = objc.RegisterName("uniformTypeIdentifier")
 	_pHAssetResourceCreationOptionsSelSetUniformTypeIdentifier = objc.RegisterName("setUniformTypeIdentifier:")
-	_pHAssetResourceCreationOptionsSelShouldMoveFile = objc.RegisterName("shouldMoveFile")
-	_pHAssetResourceCreationOptionsSelSetShouldMoveFile = objc.RegisterName("setShouldMoveFile:")
+	_pHAssetResourceCreationOptionsSelShouldMoveFile           = objc.RegisterName("shouldMoveFile")
+	_pHAssetResourceCreationOptionsSelSetShouldMoveFile        = objc.RegisterName("setShouldMoveFile:")
 )
 
 func PHAssetResourceCreationOptionsFromID(id objc.ID) *PHAssetResourceCreationOptions {
@@ -40,7 +40,9 @@ func PHAssetResourceCreationOptionsFromID(id objc.ID) *PHAssetResourceCreationOp
 
 func (o *PHAssetResourceCreationOptions) OriginalFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceCreationOptionsSelOriginalFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *PHAssetResourceCreationOptions) SetOriginalFilename(originalFilename *f
 // The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
 func (o *PHAssetResourceCreationOptions) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceCreationOptionsSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *PHAssetResourceCreationOptions) SetContentType(contentType *uniformtype
 // Deprecated: Use contentType instead
 func (o *PHAssetResourceCreationOptions) UniformTypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetResourceCreationOptionsSelUniformTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,4 +87,3 @@ func (o *PHAssetResourceCreationOptions) ShouldMoveFile() bool {
 func (o *PHAssetResourceCreationOptions) SetShouldMoveFile(shouldMoveFile bool) {
 	o.Ptr().Send(_pHAssetResourceCreationOptionsSelSetShouldMoveFile, shouldMoveFile)
 }
-

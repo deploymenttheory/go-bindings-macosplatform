@@ -16,12 +16,12 @@ type MTRContentLauncherClusterDimensionStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterDimensionStruct = _objcClass("MTRContentLauncherClusterDimensionStruct")
-	_mTRContentLauncherClusterDimensionStructSelWidth = objc.RegisterName("width")
-	_mTRContentLauncherClusterDimensionStructSelSetWidth = objc.RegisterName("setWidth:")
-	_mTRContentLauncherClusterDimensionStructSelHeight = objc.RegisterName("height")
+	_clsMTRContentLauncherClusterDimensionStruct          = _objcClass("MTRContentLauncherClusterDimensionStruct")
+	_mTRContentLauncherClusterDimensionStructSelWidth     = objc.RegisterName("width")
+	_mTRContentLauncherClusterDimensionStructSelSetWidth  = objc.RegisterName("setWidth:")
+	_mTRContentLauncherClusterDimensionStructSelHeight    = objc.RegisterName("height")
 	_mTRContentLauncherClusterDimensionStructSelSetHeight = objc.RegisterName("setHeight:")
-	_mTRContentLauncherClusterDimensionStructSelMetric = objc.RegisterName("metric")
+	_mTRContentLauncherClusterDimensionStructSelMetric    = objc.RegisterName("metric")
 	_mTRContentLauncherClusterDimensionStructSelSetMetric = objc.RegisterName("setMetric:")
 )
 
@@ -37,7 +37,9 @@ func MTRContentLauncherClusterDimensionStructFromID(id objc.ID) *MTRContentLaunc
 
 func (o *MTRContentLauncherClusterDimensionStruct) Width() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterDimensionStructSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRContentLauncherClusterDimensionStruct) SetWidth(width *foundation.NS
 
 func (o *MTRContentLauncherClusterDimensionStruct) Height() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterDimensionStructSelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRContentLauncherClusterDimensionStruct) SetHeight(height *foundation.
 
 func (o *MTRContentLauncherClusterDimensionStruct) Metric() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterDimensionStructSelMetric)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterDimensionStruct) SetMetric(metric *foundation.NSNumber) {
 	o.Ptr().Send(_mTRContentLauncherClusterDimensionStructSelSetMetric, metric.Ptr())
 }
-

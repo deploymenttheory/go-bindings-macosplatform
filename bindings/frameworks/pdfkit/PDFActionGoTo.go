@@ -15,10 +15,10 @@ type PDFActionGoTo struct {
 }
 
 var (
-	_clsPDFActionGoTo = _objcClass("PDFActionGoTo")
+	_clsPDFActionGoTo                    = _objcClass("PDFActionGoTo")
 	_pDFActionGoToSelInitWithDestination = objc.RegisterName("initWithDestination:")
-	_pDFActionGoToSelDestination = objc.RegisterName("destination")
-	_pDFActionGoToSelSetDestination = objc.RegisterName("setDestination:")
+	_pDFActionGoToSelDestination         = objc.RegisterName("destination")
+	_pDFActionGoToSelSetDestination      = objc.RegisterName("setDestination:")
 )
 
 func PDFActionGoToFromID(id objc.ID) *PDFActionGoTo {
@@ -33,17 +33,20 @@ func PDFActionGoToFromID(id objc.ID) *PDFActionGoTo {
 
 func (o *PDFActionGoTo) InitWithDestination(destination *PDFDestination) *PDFActionGoTo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionGoToSelInitWithDestination, destination.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFActionGoToFromID(_ret)
 }
 
 func (o *PDFActionGoTo) Destination() *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionGoToSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDestinationFromID(_ret)
 }
 
 func (o *PDFActionGoTo) SetDestination(destination *PDFDestination) {
 	o.Ptr().Send(_pDFActionGoToSelSetDestination, destination.Ptr())
 }
-

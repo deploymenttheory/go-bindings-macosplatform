@@ -17,9 +17,9 @@ type TKSmartCardTokenSession struct {
 }
 
 var (
-	_clsTKSmartCardTokenSession = _objcClass("TKSmartCardTokenSession")
+	_clsTKSmartCardTokenSession                      = _objcClass("TKSmartCardTokenSession")
 	_tKSmartCardTokenSessionSelGetSmartCardWithError = objc.RegisterName("getSmartCardWithError:")
-	_tKSmartCardTokenSessionSelSmartCard = objc.RegisterName("smartCard")
+	_tKSmartCardTokenSessionSelSmartCard             = objc.RegisterName("smartCard")
 )
 
 func TKSmartCardTokenSessionFromID(id objc.ID) *TKSmartCardTokenSession {
@@ -36,7 +36,9 @@ func TKSmartCardTokenSessionFromID(id objc.ID) *TKSmartCardTokenSession {
 func (o *TKSmartCardTokenSession) GetSmartCardWithError() (*TKSmartCard, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSessionSelGetSmartCardWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,7 +49,8 @@ func (o *TKSmartCardTokenSession) GetSmartCardWithError() (*TKSmartCard, error) 
 // Deprecated: since macOS 26.0.
 func (o *TKSmartCardTokenSession) SmartCard() *TKSmartCard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSessionSelSmartCard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKSmartCardFromID(_ret)
 }
-

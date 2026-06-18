@@ -45,4 +45,3 @@ type CategoryTypeable interface {
 }
 
 var _ CategoryTypeable = (*CategoryType)(nil)
-

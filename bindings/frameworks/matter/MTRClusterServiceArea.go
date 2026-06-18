@@ -18,21 +18,21 @@ type MTRClusterServiceArea struct {
 }
 
 var (
-	_clsMTRClusterServiceArea = _objcClass("MTRClusterServiceArea")
+	_clsMTRClusterServiceArea                                                                   = _objcClass("MTRClusterServiceArea")
 	_mTRClusterServiceAreaSelSelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("selectAreasWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterServiceAreaSelSkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("skipAreaWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterServiceAreaSelReadAttributeSupportedAreasWithParams = objc.RegisterName("readAttributeSupportedAreasWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeSupportedMapsWithParams = objc.RegisterName("readAttributeSupportedMapsWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeSelectedAreasWithParams = objc.RegisterName("readAttributeSelectedAreasWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeCurrentAreaWithParams = objc.RegisterName("readAttributeCurrentAreaWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeEstimatedEndTimeWithParams = objc.RegisterName("readAttributeEstimatedEndTimeWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeProgressWithParams = objc.RegisterName("readAttributeProgressWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterServiceAreaSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterServiceAreaSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterServiceAreaSelSkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion    = objc.RegisterName("skipAreaWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterServiceAreaSelReadAttributeSupportedAreasWithParams                              = objc.RegisterName("readAttributeSupportedAreasWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeSupportedMapsWithParams                               = objc.RegisterName("readAttributeSupportedMapsWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeSelectedAreasWithParams                               = objc.RegisterName("readAttributeSelectedAreasWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeCurrentAreaWithParams                                 = objc.RegisterName("readAttributeCurrentAreaWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeEstimatedEndTimeWithParams                            = objc.RegisterName("readAttributeEstimatedEndTimeWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeProgressWithParams                                    = objc.RegisterName("readAttributeProgressWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeGeneratedCommandListWithParams                        = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeAcceptedCommandListWithParams                         = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeAttributeListWithParams                               = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeFeatureMapWithParams                                  = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterServiceAreaSelReadAttributeClusterRevisionWithParams                             = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterServiceAreaSelInitWithDeviceEndpointIDQueue                                      = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterServiceAreaFromID(id objc.ID) *MTRClusterServiceArea {
@@ -131,7 +131,8 @@ func (o *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *M
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterServiceArea) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterServiceArea {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterServiceAreaSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterServiceAreaFromID(_ret)
 }
-

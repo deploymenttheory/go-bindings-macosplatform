@@ -165,4 +165,3 @@ type WorkoutSessionable interface {
 }
 
 var _ WorkoutSessionable = (*WorkoutSession)(nil)
-

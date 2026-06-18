@@ -43,4 +43,3 @@ type ControllerInputStateable interface {
 }
 
 var _ ControllerInputStateable = (*ControllerInputState)(nil)
-

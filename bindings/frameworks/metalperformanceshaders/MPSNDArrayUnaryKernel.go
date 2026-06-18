@@ -18,17 +18,17 @@ type MPSNDArrayUnaryKernel struct {
 }
 
 var (
-	_clsMPSNDArrayUnaryKernel = _objcClass("MPSNDArrayUnaryKernel")
-	_mPSNDArrayUnaryKernelSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArray = objc.RegisterName("encodeToCommandBuffer:sourceArray:")
-	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayDestinationArray = objc.RegisterName("encodeToCommandBuffer:sourceArray:destinationArray:")
+	_clsMPSNDArrayUnaryKernel                                                                  = _objcClass("MPSNDArrayUnaryKernel")
+	_mPSNDArrayUnaryKernelSelInitWithDevice                                                    = objc.RegisterName("initWithDevice:")
+	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArray                                  = objc.RegisterName("encodeToCommandBuffer:sourceArray:")
+	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayDestinationArray                  = objc.RegisterName("encodeToCommandBuffer:sourceArray:destinationArray:")
 	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary = objc.RegisterName("encodeToCommandBuffer:sourceArray:resultState:outputStateIsTemporary:")
-	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateDestinationArray = objc.RegisterName("encodeToCommandBuffer:sourceArray:resultState:destinationArray:")
-	_mPSNDArrayUnaryKernelSelOffsets = objc.RegisterName("offsets")
-	_mPSNDArrayUnaryKernelSelEdgeMode = objc.RegisterName("edgeMode")
-	_mPSNDArrayUnaryKernelSelKernelSizes = objc.RegisterName("kernelSizes")
-	_mPSNDArrayUnaryKernelSelStrides = objc.RegisterName("strides")
-	_mPSNDArrayUnaryKernelSelDilationRates = objc.RegisterName("dilationRates")
+	_mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateDestinationArray       = objc.RegisterName("encodeToCommandBuffer:sourceArray:resultState:destinationArray:")
+	_mPSNDArrayUnaryKernelSelOffsets                                                           = objc.RegisterName("offsets")
+	_mPSNDArrayUnaryKernelSelEdgeMode                                                          = objc.RegisterName("edgeMode")
+	_mPSNDArrayUnaryKernelSelKernelSizes                                                       = objc.RegisterName("kernelSizes")
+	_mPSNDArrayUnaryKernelSelStrides                                                           = objc.RegisterName("strides")
+	_mPSNDArrayUnaryKernelSelDilationRates                                                     = objc.RegisterName("dilationRates")
 )
 
 func MPSNDArrayUnaryKernelFromID(id objc.ID) *MPSNDArrayUnaryKernel {
@@ -43,14 +43,18 @@ func MPSNDArrayUnaryKernelFromID(id objc.ID) *MPSNDArrayUnaryKernel {
 
 func (o *MPSNDArrayUnaryKernel) InitWithDevice(device metal.MTLDevice) *MPSNDArrayUnaryKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayUnaryKernelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayUnaryKernelFromID(_ret)
 }
 
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayUnaryKernel) EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArray, cmdBuf, sourceArray.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *MPSNDArrayUnaryKernel) EncodeToCommandBufferSourceArrayDestinationArray
 // @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
 func (o *MPSNDArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayUnaryKernelSelEncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary, cmdBuf, sourceArray.Ptr(), outGradientState.Ptr(), outputStateIsTemporary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
@@ -100,4 +106,3 @@ func (o *MPSNDArrayUnaryKernel) DilationRates() mpsndarray.MPSNDArraySizes {
 	_ret := objc.Send[mpsndarray.MPSNDArraySizes](o.Ptr(), _mPSNDArrayUnaryKernelSelDilationRates)
 	return _ret
 }
-

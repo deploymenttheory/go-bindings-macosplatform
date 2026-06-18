@@ -67,9 +67,13 @@ func (x *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*raw.NEFilt
 	x.inner.SetPacketHandler(packetHandler)
 }
 
-func (x *NEFilterPacketProvider) asNEFilterProvider() *raw.NEFilterProvider { return &x.inner.NEFilterProvider }
+func (x *NEFilterPacketProvider) asNEFilterProvider() *raw.NEFilterProvider {
+	return &x.inner.NEFilterProvider
+}
 
-func (x *NEFilterPacketProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEFilterProvider.NEProvider }
+func (x *NEFilterPacketProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NEFilterProvider.NEProvider
+}
 
 // NEFilterPacketProviderable is the interface implemented by [NEFilterPacketProvider], for mocking and DI.
 type NEFilterPacketProviderable interface {
@@ -82,4 +86,3 @@ type NEFilterPacketProviderable interface {
 }
 
 var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)
-

@@ -89,4 +89,3 @@ type FilterBrowserPanelable interface {
 }
 
 var _ FilterBrowserPanelable = (*FilterBrowserPanel)(nil)
-

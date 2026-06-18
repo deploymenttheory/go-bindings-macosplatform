@@ -74,4 +74,3 @@ type SyncedDirectoryStateable interface {
 }
 
 var _ SyncedDirectoryStateable = (*SyncedDirectoryState)(nil)
-

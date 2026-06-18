@@ -137,10 +137,10 @@ type TKSmartCardProtocol uint64
 
 const (
 	TKSmartCardProtocolNone TKSmartCardProtocol = 0
-	TKSmartCardProtocolT0 TKSmartCardProtocol = 1
-	TKSmartCardProtocolT1 TKSmartCardProtocol = 2
-	TKSmartCardProtocolT15 TKSmartCardProtocol = 32768
-	TKSmartCardProtocolAny TKSmartCardProtocol = 65535
+	TKSmartCardProtocolT0   TKSmartCardProtocol = 1
+	TKSmartCardProtocolT1   TKSmartCardProtocol = 2
+	TKSmartCardProtocolT15  TKSmartCardProtocol = 32768
+	TKSmartCardProtocolAny  TKSmartCardProtocol = 65535
 )
 
 func (e TKSmartCardProtocol) String() string {
@@ -194,4 +194,3 @@ func (e TKSmartCardSlotState) String() string {
 		return fmt.Sprintf("TKSmartCardSlotState(%d)", int64(e))
 	}
 }
-

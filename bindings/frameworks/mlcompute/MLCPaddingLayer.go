@@ -16,17 +16,17 @@ type MLCPaddingLayer struct {
 }
 
 var (
-	_clsMLCPaddingLayer = _objcClass("MLCPaddingLayer")
-	_mLCPaddingLayerSelLayerWithReflectionPadding = objc.RegisterName("layerWithReflectionPadding:")
-	_mLCPaddingLayerSelLayerWithSymmetricPadding = objc.RegisterName("layerWithSymmetricPadding:")
-	_mLCPaddingLayerSelLayerWithZeroPadding = objc.RegisterName("layerWithZeroPadding:")
+	_clsMLCPaddingLayer                                      = _objcClass("MLCPaddingLayer")
+	_mLCPaddingLayerSelLayerWithReflectionPadding            = objc.RegisterName("layerWithReflectionPadding:")
+	_mLCPaddingLayerSelLayerWithSymmetricPadding             = objc.RegisterName("layerWithSymmetricPadding:")
+	_mLCPaddingLayerSelLayerWithZeroPadding                  = objc.RegisterName("layerWithZeroPadding:")
 	_mLCPaddingLayerSelLayerWithConstantPaddingConstantValue = objc.RegisterName("layerWithConstantPadding:constantValue:")
-	_mLCPaddingLayerSelPaddingType = objc.RegisterName("paddingType")
-	_mLCPaddingLayerSelPaddingLeft = objc.RegisterName("paddingLeft")
-	_mLCPaddingLayerSelPaddingRight = objc.RegisterName("paddingRight")
-	_mLCPaddingLayerSelPaddingTop = objc.RegisterName("paddingTop")
-	_mLCPaddingLayerSelPaddingBottom = objc.RegisterName("paddingBottom")
-	_mLCPaddingLayerSelConstantValue = objc.RegisterName("constantValue")
+	_mLCPaddingLayerSelPaddingType                           = objc.RegisterName("paddingType")
+	_mLCPaddingLayerSelPaddingLeft                           = objc.RegisterName("paddingLeft")
+	_mLCPaddingLayerSelPaddingRight                          = objc.RegisterName("paddingRight")
+	_mLCPaddingLayerSelPaddingTop                            = objc.RegisterName("paddingTop")
+	_mLCPaddingLayerSelPaddingBottom                         = objc.RegisterName("paddingBottom")
+	_mLCPaddingLayerSelConstantValue                         = objc.RegisterName("constantValue")
 )
 
 func MLCPaddingLayerFromID(id objc.ID) *MLCPaddingLayer {
@@ -42,28 +42,36 @@ func MLCPaddingLayerFromID(id objc.ID) *MLCPaddingLayer {
 // @abstract   Create a padding layer with reflection padding @param      padding  The padding sizes. @return     A new padding layer
 func MLCPaddingLayerLayerWithReflectionPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithReflectionPadding, padding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
 // @abstract   Create a padding layer with symmetric padding @param      padding  The padding sizes. @return     A new padding layer
 func MLCPaddingLayerLayerWithSymmetricPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithSymmetricPadding, padding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
 // @abstract   Create a padding layer with zero padding @param      padding  The padding sizes. @return     A new padding layer
 func MLCPaddingLayerLayerWithZeroPadding(padding *foundation.NSArray[*foundation.NSNumber]) *MLCPaddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithZeroPadding, padding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
 // @abstract   Create a padding layer with constant padding @param      padding                 The padding sizes. @param      constantValue   The constant value to pad the source tensor. @return     A new padding layer
 func MLCPaddingLayerLayerWithConstantPaddingConstantValue(padding *foundation.NSArray[*foundation.NSNumber], constantValue float32) *MLCPaddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPaddingLayer), _mLCPaddingLayerSelLayerWithConstantPaddingConstantValue, padding, constantValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCPaddingLayerFromID(_ret)
 }
 
@@ -102,4 +110,3 @@ func (o *MLCPaddingLayer) ConstantValue() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCPaddingLayerSelConstantValue)
 	return _ret
 }
-

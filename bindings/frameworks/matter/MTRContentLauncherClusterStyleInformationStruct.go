@@ -16,15 +16,15 @@ type MTRContentLauncherClusterStyleInformationStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterStyleInformationStruct = _objcClass("MTRContentLauncherClusterStyleInformationStruct")
-	_mTRContentLauncherClusterStyleInformationStructSelImageURL = objc.RegisterName("imageURL")
+	_clsMTRContentLauncherClusterStyleInformationStruct            = _objcClass("MTRContentLauncherClusterStyleInformationStruct")
+	_mTRContentLauncherClusterStyleInformationStructSelImageURL    = objc.RegisterName("imageURL")
 	_mTRContentLauncherClusterStyleInformationStructSelSetImageURL = objc.RegisterName("setImageURL:")
-	_mTRContentLauncherClusterStyleInformationStructSelImageUrl = objc.RegisterName("imageUrl")
+	_mTRContentLauncherClusterStyleInformationStructSelImageUrl    = objc.RegisterName("imageUrl")
 	_mTRContentLauncherClusterStyleInformationStructSelSetImageUrl = objc.RegisterName("setImageUrl:")
-	_mTRContentLauncherClusterStyleInformationStructSelColor = objc.RegisterName("color")
-	_mTRContentLauncherClusterStyleInformationStructSelSetColor = objc.RegisterName("setColor:")
-	_mTRContentLauncherClusterStyleInformationStructSelSize = objc.RegisterName("size")
-	_mTRContentLauncherClusterStyleInformationStructSelSetSize = objc.RegisterName("setSize:")
+	_mTRContentLauncherClusterStyleInformationStructSelColor       = objc.RegisterName("color")
+	_mTRContentLauncherClusterStyleInformationStructSelSetColor    = objc.RegisterName("setColor:")
+	_mTRContentLauncherClusterStyleInformationStructSelSize        = objc.RegisterName("size")
+	_mTRContentLauncherClusterStyleInformationStructSelSetSize     = objc.RegisterName("setSize:")
 )
 
 func MTRContentLauncherClusterStyleInformationStructFromID(id objc.ID) *MTRContentLauncherClusterStyleInformationStruct {
@@ -39,7 +39,9 @@ func MTRContentLauncherClusterStyleInformationStructFromID(id objc.ID) *MTRConte
 
 func (o *MTRContentLauncherClusterStyleInformationStruct) ImageURL() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterStyleInformationStructSelImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRContentLauncherClusterStyleInformationStruct) SetImageURL(imageURL *
 
 func (o *MTRContentLauncherClusterStyleInformationStruct) ImageUrl() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterStyleInformationStructSelImageUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRContentLauncherClusterStyleInformationStruct) SetImageUrl(imageUrl *
 
 func (o *MTRContentLauncherClusterStyleInformationStruct) Color() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterStyleInformationStructSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRContentLauncherClusterStyleInformationStruct) SetColor(color *founda
 
 func (o *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterStyleInformationStructSelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRContentLauncherClusterDimensionStructFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterStyleInformationStruct) SetSize(size *MTRContentLauncherClusterDimensionStruct) {
 	o.Ptr().Send(_mTRContentLauncherClusterStyleInformationStructSelSetSize, size.Ptr())
 }
-

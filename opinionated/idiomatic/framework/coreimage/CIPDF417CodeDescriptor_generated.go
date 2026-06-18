@@ -57,7 +57,9 @@ func (x *PDF417CodeDescriptor) ColumnCount() int {
 	return x.inner.ColumnCount()
 }
 
-func (x *PDF417CodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+func (x *PDF417CodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
+	return &x.inner.CIBarcodeDescriptor
+}
 
 // PDF417CodeDescriptorable is the interface implemented by [PDF417CodeDescriptor], for mocking and DI.
 type PDF417CodeDescriptorable interface {
@@ -69,4 +71,3 @@ type PDF417CodeDescriptorable interface {
 }
 
 var _ PDF417CodeDescriptorable = (*PDF417CodeDescriptor)(nil)
-

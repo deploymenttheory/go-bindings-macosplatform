@@ -47,4 +47,3 @@ type PersistentStoreResultProvider interface {
 type PropertyDescriptionProvider interface {
 	asPropertyDescription() *raw.NSPropertyDescription
 }
-

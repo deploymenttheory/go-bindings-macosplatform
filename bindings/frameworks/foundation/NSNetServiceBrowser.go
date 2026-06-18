@@ -16,18 +16,18 @@ type NSNetServiceBrowser struct {
 }
 
 var (
-	_clsNSNetServiceBrowser = _objcClass("NSNetServiceBrowser")
-	_nSNetServiceBrowserSelInit = objc.RegisterName("init")
-	_nSNetServiceBrowserSelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_nSNetServiceBrowserSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_nSNetServiceBrowserSelSearchForBrowsableDomains = objc.RegisterName("searchForBrowsableDomains")
-	_nSNetServiceBrowserSelSearchForRegistrationDomains = objc.RegisterName("searchForRegistrationDomains")
+	_clsNSNetServiceBrowser                                = _objcClass("NSNetServiceBrowser")
+	_nSNetServiceBrowserSelInit                            = objc.RegisterName("init")
+	_nSNetServiceBrowserSelScheduleInRunLoopForMode        = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_nSNetServiceBrowserSelRemoveFromRunLoopForMode        = objc.RegisterName("removeFromRunLoop:forMode:")
+	_nSNetServiceBrowserSelSearchForBrowsableDomains       = objc.RegisterName("searchForBrowsableDomains")
+	_nSNetServiceBrowserSelSearchForRegistrationDomains    = objc.RegisterName("searchForRegistrationDomains")
 	_nSNetServiceBrowserSelSearchForServicesOfTypeInDomain = objc.RegisterName("searchForServicesOfType:inDomain:")
-	_nSNetServiceBrowserSelStop = objc.RegisterName("stop")
-	_nSNetServiceBrowserSelDelegate = objc.RegisterName("delegate")
-	_nSNetServiceBrowserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSNetServiceBrowserSelIncludesPeerToPeer = objc.RegisterName("includesPeerToPeer")
-	_nSNetServiceBrowserSelSetIncludesPeerToPeer = objc.RegisterName("setIncludesPeerToPeer:")
+	_nSNetServiceBrowserSelStop                            = objc.RegisterName("stop")
+	_nSNetServiceBrowserSelDelegate                        = objc.RegisterName("delegate")
+	_nSNetServiceBrowserSelSetDelegate                     = objc.RegisterName("setDelegate:")
+	_nSNetServiceBrowserSelIncludesPeerToPeer              = objc.RegisterName("includesPeerToPeer")
+	_nSNetServiceBrowserSelSetIncludesPeerToPeer           = objc.RegisterName("setIncludesPeerToPeer:")
 )
 
 func NSNetServiceBrowserFromID(id objc.ID) *NSNetServiceBrowser {
@@ -42,7 +42,9 @@ func NSNetServiceBrowserFromID(id objc.ID) *NSNetServiceBrowser {
 
 func (o *NSNetServiceBrowser) Init() *NSNetServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNetServiceBrowserSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNetServiceBrowserFromID(_ret)
 }
 
@@ -87,4 +89,3 @@ func (o *NSNetServiceBrowser) IncludesPeerToPeer() bool {
 func (o *NSNetServiceBrowser) SetIncludesPeerToPeer(includesPeerToPeer bool) {
 	o.Ptr().Send(_nSNetServiceBrowserSelSetIncludesPeerToPeer, includesPeerToPeer)
 }
-

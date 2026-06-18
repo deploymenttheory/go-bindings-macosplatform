@@ -88,4 +88,3 @@ type SyncEngineSendChangesOptionsable interface {
 }
 
 var _ SyncEngineSendChangesOptionsable = (*SyncEngineSendChangesOptions)(nil)
-

@@ -16,16 +16,16 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigParams struct {
 }
 
 var (
-	_clsMTRGeneralCommissioningClusterSetRegulatoryConfigParams = _objcClass("MTRGeneralCommissioningClusterSetRegulatoryConfigParams")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelGetNewRegulatoryConfig = objc.RegisterName("getNewRegulatoryConfig")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetNewRegulatoryConfig = objc.RegisterName("setNewRegulatoryConfig:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelCountryCode = objc.RegisterName("countryCode")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetCountryCode = objc.RegisterName("setCountryCode:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelBreadcrumb = objc.RegisterName("breadcrumb")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetBreadcrumb = objc.RegisterName("setBreadcrumb:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRGeneralCommissioningClusterSetRegulatoryConfigParams                               = _objcClass("MTRGeneralCommissioningClusterSetRegulatoryConfigParams")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelGetNewRegulatoryConfig         = objc.RegisterName("getNewRegulatoryConfig")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetNewRegulatoryConfig         = objc.RegisterName("setNewRegulatoryConfig:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelCountryCode                    = objc.RegisterName("countryCode")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetCountryCode                 = objc.RegisterName("setCountryCode:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelBreadcrumb                     = objc.RegisterName("breadcrumb")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetBreadcrumb                  = objc.RegisterName("setBreadcrumb:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRGeneralCommissioningClusterSetRegulatoryConfigParamsFromID(id objc.ID) *
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) GetNewRegulatoryConfig() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelGetNewRegulatoryConfig)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetNewRegulato
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetCountryCode
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelBreadcrumb)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetBreadcrumb(
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetTimedInvoke
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralCommissioningClusterSetRegulatoryConfigParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

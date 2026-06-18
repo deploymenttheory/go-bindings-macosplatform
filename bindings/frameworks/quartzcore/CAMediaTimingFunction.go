@@ -16,10 +16,10 @@ type CAMediaTimingFunction struct {
 }
 
 var (
-	_clsCAMediaTimingFunction = _objcClass("CAMediaTimingFunction")
-	_cAMediaTimingFunctionSelFunctionWithName = objc.RegisterName("functionWithName:")
-	_cAMediaTimingFunctionSelFunctionWithControlPoints = objc.RegisterName("functionWithControlPoints::::")
-	_cAMediaTimingFunctionSelInitWithControlPoints = objc.RegisterName("initWithControlPoints::::")
+	_clsCAMediaTimingFunction                             = _objcClass("CAMediaTimingFunction")
+	_cAMediaTimingFunctionSelFunctionWithName             = objc.RegisterName("functionWithName:")
+	_cAMediaTimingFunctionSelFunctionWithControlPoints    = objc.RegisterName("functionWithControlPoints::::")
+	_cAMediaTimingFunctionSelInitWithControlPoints        = objc.RegisterName("initWithControlPoints::::")
 	_cAMediaTimingFunctionSelGetControlPointAtIndexValues = objc.RegisterName("getControlPointAtIndex:values:")
 )
 
@@ -35,23 +35,28 @@ func CAMediaTimingFunctionFromID(id objc.ID) *CAMediaTimingFunction {
 
 func CAMediaTimingFunctionFunctionWithName(name *foundation.NSString) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAMediaTimingFunction), _cAMediaTimingFunctionSelFunctionWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
 func CAMediaTimingFunctionFunctionWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAMediaTimingFunction), _cAMediaTimingFunctionSelFunctionWithControlPoints, c1x, c1y, c2x, c2y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
 func (o *CAMediaTimingFunction) InitWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAMediaTimingFunctionSelInitWithControlPoints, c1x, c1y, c2x, c2y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
 func (o *CAMediaTimingFunction) GetControlPointAtIndexValues(idx uint, ptr *float32) {
 	o.Ptr().Send(_cAMediaTimingFunctionSelGetControlPointAtIndexValues, idx, ptr)
 }
-

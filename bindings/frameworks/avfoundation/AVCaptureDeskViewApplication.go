@@ -18,8 +18,8 @@ type AVCaptureDeskViewApplication struct {
 }
 
 var (
-	_clsAVCaptureDeskViewApplication = _objcClass("AVCaptureDeskViewApplication")
-	_aVCaptureDeskViewApplicationSelPresentWithCompletionHandler = objc.RegisterName("presentWithCompletionHandler:")
+	_clsAVCaptureDeskViewApplication                                                = _objcClass("AVCaptureDeskViewApplication")
+	_aVCaptureDeskViewApplicationSelPresentWithCompletionHandler                    = objc.RegisterName("presentWithCompletionHandler:")
 	_aVCaptureDeskViewApplicationSelPresentWithLaunchConfigurationCompletionHandler = objc.RegisterName("presentWithLaunchConfiguration:completionHandler:")
 )
 
@@ -56,4 +56,3 @@ func (o *AVCaptureDeskViewApplication) PresentWithLaunchConfigurationCompletionH
 	}
 	o.Ptr().Send(_aVCaptureDeskViewApplicationSelPresentWithLaunchConfigurationCompletionHandler, launchConfiguration.Ptr(), __block_completionHandler)
 }
-

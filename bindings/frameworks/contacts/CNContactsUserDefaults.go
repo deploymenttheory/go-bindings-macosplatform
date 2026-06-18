@@ -16,10 +16,10 @@ type CNContactsUserDefaults struct {
 }
 
 var (
-	_clsCNContactsUserDefaults = _objcClass("CNContactsUserDefaults")
+	_clsCNContactsUserDefaults               = _objcClass("CNContactsUserDefaults")
 	_cNContactsUserDefaultsSelSharedDefaults = objc.RegisterName("sharedDefaults")
-	_cNContactsUserDefaultsSelSortOrder = objc.RegisterName("sortOrder")
-	_cNContactsUserDefaultsSelCountryCode = objc.RegisterName("countryCode")
+	_cNContactsUserDefaultsSelSortOrder      = objc.RegisterName("sortOrder")
+	_cNContactsUserDefaultsSelCountryCode    = objc.RegisterName("countryCode")
 )
 
 func CNContactsUserDefaultsFromID(id objc.ID) *CNContactsUserDefaults {
@@ -34,7 +34,9 @@ func CNContactsUserDefaultsFromID(id objc.ID) *CNContactsUserDefaults {
 
 func CNContactsUserDefaultsSharedDefaults() *CNContactsUserDefaults {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCNContactsUserDefaults), _cNContactsUserDefaultsSelSharedDefaults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactsUserDefaultsFromID(_ret)
 }
 
@@ -45,7 +47,8 @@ func (o *CNContactsUserDefaults) SortOrder() CNContactSortOrder {
 
 func (o *CNContactsUserDefaults) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactsUserDefaultsSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

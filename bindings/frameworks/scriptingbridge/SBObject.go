@@ -18,17 +18,17 @@ type SBObject struct {
 }
 
 var (
-	_clsSBObject = _objcClass("SBObject")
-	_sBObjectSelInit = objc.RegisterName("init")
-	_sBObjectSelInitWithProperties = objc.RegisterName("initWithProperties:")
-	_sBObjectSelInitWithData = objc.RegisterName("initWithData:")
-	_sBObjectSelGet = objc.RegisterName("get")
-	_sBObjectSelLastError = objc.RegisterName("lastError")
+	_clsSBObject                                  = _objcClass("SBObject")
+	_sBObjectSelInit                              = objc.RegisterName("init")
+	_sBObjectSelInitWithProperties                = objc.RegisterName("initWithProperties:")
+	_sBObjectSelInitWithData                      = objc.RegisterName("initWithData:")
+	_sBObjectSelGet                               = objc.RegisterName("get")
+	_sBObjectSelLastError                         = objc.RegisterName("lastError")
 	_sBObjectSelInitWithElementCodePropertiesData = objc.RegisterName("initWithElementCode:properties:data:")
-	_sBObjectSelPropertyWithCode = objc.RegisterName("propertyWithCode:")
-	_sBObjectSelPropertyWithClassCode = objc.RegisterName("propertyWithClass:code:")
-	_sBObjectSelElementArrayWithCode = objc.RegisterName("elementArrayWithCode:")
-	_sBObjectSelSetTo = objc.RegisterName("setTo:")
+	_sBObjectSelPropertyWithCode                  = objc.RegisterName("propertyWithCode:")
+	_sBObjectSelPropertyWithClassCode             = objc.RegisterName("propertyWithClass:code:")
+	_sBObjectSelElementArrayWithCode              = objc.RegisterName("elementArrayWithCode:")
+	_sBObjectSelSetTo                             = objc.RegisterName("setTo:")
 )
 
 func SBObjectFromID(id objc.ID) *SBObject {
@@ -41,28 +41,34 @@ func SBObjectFromID(id objc.ID) *SBObject {
 	return o
 }
 
-// Initializes and returns an instance of an `SBObject` subclass. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (``SBElementArray``). - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Initializes and returns an instance of an `SBObject` subclass. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (“SBElementArray“). - Returns: An `SBObject` object or `nil` if the object could not be initialized.
 func (o *SBObject) Init() *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
-// Returns an instance of an `SBObject` subclass initialized with the specified properties. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (``SBElementArray``). - Parameters: - properties: A dictionary with keys specifying the names of properties (that is, attributes or to-one relationships) and the values for those properties. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Returns an instance of an `SBObject` subclass initialized with the specified properties. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (“SBElementArray“). - Parameters: - properties: A dictionary with keys specifying the names of properties (that is, attributes or to-one relationships) and the values for those properties. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
 func (o *SBObject) InitWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelInitWithProperties, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
-// Returns an instance of an `SBObject` subclass initialized with the given data. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (``SBElementArray``). - Parameters: - data: An object containing data for the new `SBObject` object. The data varies according to the type of scripting object to be created. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Returns an instance of an `SBObject` subclass initialized with the given data. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (“SBElementArray“). - Parameters: - data: An object containing data for the new `SBObject` object. The data varies according to the type of scripting object to be created. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
 func (o *SBObject) InitWithData(data objc.ID) *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelInitWithData, data)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
-// Forces evaluation of the receiver, causing the real object to be returned immediately. This method forces the current object reference (the receiver) to be evaluated, resulting in the return of the referenced object. By default, Scripting Bridge deals with references to objects until you actually request some concrete data from them or until you call the `get` method. - Returns: For most properties, the result is a Foundation object such as an `NSString`. For properties with no Foundation equivalent, the result is an `NSAppleEventDescriptor` or another ``SBObject`` for most elements.
+// Forces evaluation of the receiver, causing the real object to be returned immediately. This method forces the current object reference (the receiver) to be evaluated, resulting in the return of the referenced object. By default, Scripting Bridge deals with references to objects until you actually request some concrete data from them or until you call the `get` method. - Returns: For most properties, the result is a Foundation object such as an `NSString`. For properties with no Foundation equivalent, the result is an `NSAppleEventDescriptor` or another “SBObject“ for most elements.
 func (o *SBObject) Get() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelGet)
 	return _ret
@@ -77,25 +83,31 @@ func (o *SBObject) LastError() unsafe.Pointer {
 // Returns an instance of an `SBObject` subclass initialized with the specified properties and data and added to the designated element array. Unlike the other initializers of this class, this method not only initializes the `SBObject` object but adds it to a specified element array. This method is the designated initializer. - Parameters: - code: A four-character code used to identify an element in the target application’s scripting interface. See <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager> for details. - properties: A dictionary with <doc://com.apple.documentation/documentation/foundation/nsnumber> keys specifying the four-character codes of properties (that is, attributes or to-one relationships) and the values for those properties. Pass `nil` if you are initializing the object by `data` only. - data: An object containing data for the new `SBObject` object. The data varies according to the type of scripting object to be created. Pass `nil` if you initializing the object by `properties` only. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
 func (o *SBObject) InitWithElementCodePropertiesData(code uint, properties *foundation.NSDictionary[*foundation.NSString, objc.ID], data objc.ID) *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelInitWithElementCodePropertiesData, code, properties, data)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
 // Returns an object representing the specified property of the receiver. `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. - Parameters: - code: A four-character code that uniquely identifies a property of the receiver. - Returns: An object representing the receiver’s property as identified by `code`.
 func (o *SBObject) PropertyWithCode(code uint) *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelPropertyWithCode, code)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
-// Returns an object of the designated scripting class representing the specified property of the receiver `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call ``get``. - Parameters: - class: The `SBObject` subclass with which to instantiate the object. - code: A four-character code that uniquely identifies a property of the receiver. - Returns: An instance of the designated `class` that represents the receiver’s property identified by `code`.
+// Returns an object of the designated scripting class representing the specified property of the receiver `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call “get“. - Parameters: - class: The `SBObject` subclass with which to instantiate the object. - code: A four-character code that uniquely identifies a property of the receiver. - Returns: An instance of the designated `class` that represents the receiver’s property identified by `code`.
 func (o *SBObject) PropertyWithClassCode(cls objc.Class, code uint) *SBObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBObjectSelPropertyWithClassCode, cls, code)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SBObjectFromID(_ret)
 }
 
-// Returns an array containing every child of the receiver with the given class-type code. `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call ``get``. - Parameters: - code: A four-character code that identifies a scripting class. - Returns: An ``SBElementArray`` object containing every child of the receiver whose class matches `code`.
+// Returns an array containing every child of the receiver with the given class-type code. `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call “get“. - Parameters: - code: A four-character code that identifies a scripting class. - Returns: An “SBElementArray“ object containing every child of the receiver whose class matches `code`.
 func (o *SBObject) ElementArrayWithCode(code uint) *SBElementArray[objc.ID] {
 	_ret := objc.Send[*SBElementArray[objc.ID]](o.Ptr(), _sBObjectSelElementArrayWithCode, code)
 	return _ret
@@ -105,4 +117,3 @@ func (o *SBObject) ElementArrayWithCode(code uint) *SBElementArray[objc.ID] {
 func (o *SBObject) SetTo(value objc.ID) {
 	o.Ptr().Send(_sBObjectSelSetTo, value)
 }
-

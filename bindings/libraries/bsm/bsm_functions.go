@@ -1905,4 +1905,3 @@ func Audit_get_expire_after(expire unsafe.Pointer, sz uint64) int32 {
 	cgo.RaiseIfException(_exc)
 	return _result
 }
-

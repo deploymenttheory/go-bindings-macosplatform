@@ -16,7 +16,7 @@ type WKNavigation struct {
 }
 
 var (
-	_clsWKNavigation = _objcClass("WKNavigation")
+	_clsWKNavigation                     = _objcClass("WKNavigation")
 	_wKNavigationSelEffectiveContentMode = objc.RegisterName("effectiveContentMode")
 )
 
@@ -34,4 +34,3 @@ func (o *WKNavigation) EffectiveContentMode() WKContentMode {
 	_ret := objc.Send[WKContentMode](o.Ptr(), _wKNavigationSelEffectiveContentMode)
 	return _ret
 }
-

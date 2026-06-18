@@ -35,7 +35,9 @@ func NewEnumResolutionResult() *EnumResolutionResult {
 	return &EnumResolutionResult{inner: raw.INEnumResolutionResultFromID(_id)}
 }
 
-func (x *EnumResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *EnumResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // EnumResolutionResultable is the interface implemented by [EnumResolutionResult], for mocking and DI.
 type EnumResolutionResultable interface {
@@ -43,4 +45,3 @@ type EnumResolutionResultable interface {
 }
 
 var _ EnumResolutionResultable = (*EnumResolutionResult)(nil)
-

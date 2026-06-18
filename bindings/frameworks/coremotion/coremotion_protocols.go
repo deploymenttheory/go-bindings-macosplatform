@@ -6,4 +6,3 @@ package coremotion
 // CMHeadphoneMotionManagerDelegate wraps the ObjC protocol CMHeadphoneMotionManagerDelegate.
 type CMHeadphoneMotionManagerDelegate interface {
 }
-

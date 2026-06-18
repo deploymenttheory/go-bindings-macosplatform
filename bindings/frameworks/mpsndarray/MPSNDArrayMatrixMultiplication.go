@@ -15,11 +15,11 @@ type MPSNDArrayMatrixMultiplication struct {
 }
 
 var (
-	_clsMPSNDArrayMatrixMultiplication = _objcClass("MPSNDArrayMatrixMultiplication")
-	_mPSNDArrayMatrixMultiplicationSelAlpha = objc.RegisterName("alpha")
+	_clsMPSNDArrayMatrixMultiplication         = _objcClass("MPSNDArrayMatrixMultiplication")
+	_mPSNDArrayMatrixMultiplicationSelAlpha    = objc.RegisterName("alpha")
 	_mPSNDArrayMatrixMultiplicationSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSNDArrayMatrixMultiplicationSelBeta = objc.RegisterName("beta")
-	_mPSNDArrayMatrixMultiplicationSelSetBeta = objc.RegisterName("setBeta:")
+	_mPSNDArrayMatrixMultiplicationSelBeta     = objc.RegisterName("beta")
+	_mPSNDArrayMatrixMultiplicationSelSetBeta  = objc.RegisterName("setBeta:")
 )
 
 func MPSNDArrayMatrixMultiplicationFromID(id objc.ID) *MPSNDArrayMatrixMultiplication {
@@ -51,4 +51,3 @@ func (o *MPSNDArrayMatrixMultiplication) Beta() float64 {
 func (o *MPSNDArrayMatrixMultiplication) SetBeta(beta float64) {
 	o.Ptr().Send(_mPSNDArrayMatrixMultiplicationSelSetBeta, beta)
 }
-

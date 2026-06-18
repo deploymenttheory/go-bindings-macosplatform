@@ -18,27 +18,27 @@ type MTRClusterApplicationLauncher struct {
 }
 
 var (
-	_clsMTRClusterApplicationLauncher = _objcClass("MTRClusterApplicationLauncher")
-	_mTRClusterApplicationLauncherSelLaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("launchAppWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelLaunchAppWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("launchAppWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelStopAppWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopAppWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelStopAppWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopAppWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelHideAppWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("hideAppWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelHideAppWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("hideAppWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterApplicationLauncherSelReadAttributeCatalogListWithParams = objc.RegisterName("readAttributeCatalogListWithParams:")
-	_mTRClusterApplicationLauncherSelReadAttributeCurrentAppWithParams = objc.RegisterName("readAttributeCurrentAppWithParams:")
-	_mTRClusterApplicationLauncherSelWriteAttributeCurrentAppWithValueExpectedValueInterval = objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:")
-	_mTRClusterApplicationLauncherSelWriteAttributeCurrentAppWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:params:")
-	_mTRClusterApplicationLauncherSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterApplicationLauncherSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterApplicationLauncherSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterApplicationLauncherSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterApplicationLauncherSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterApplicationLauncherSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterApplicationLauncherSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterApplicationLauncher                                                                        = _objcClass("MTRClusterApplicationLauncher")
+	_mTRClusterApplicationLauncherSelLaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("launchAppWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelLaunchAppWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("launchAppWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelStopAppWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("stopAppWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelStopAppWithExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("stopAppWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelHideAppWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("hideAppWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelHideAppWithExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("hideAppWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterApplicationLauncherSelReadAttributeCatalogListWithParams                                      = objc.RegisterName("readAttributeCatalogListWithParams:")
+	_mTRClusterApplicationLauncherSelReadAttributeCurrentAppWithParams                                       = objc.RegisterName("readAttributeCurrentAppWithParams:")
+	_mTRClusterApplicationLauncherSelWriteAttributeCurrentAppWithValueExpectedValueInterval                  = objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:")
+	_mTRClusterApplicationLauncherSelWriteAttributeCurrentAppWithValueExpectedValueIntervalParams            = objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:params:")
+	_mTRClusterApplicationLauncherSelReadAttributeGeneratedCommandListWithParams                             = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterApplicationLauncherSelReadAttributeAcceptedCommandListWithParams                              = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterApplicationLauncherSelReadAttributeAttributeListWithParams                                    = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterApplicationLauncherSelReadAttributeFeatureMapWithParams                                       = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterApplicationLauncherSelReadAttributeClusterRevisionWithParams                                  = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterApplicationLauncherSelInitWithDeviceEndpointIDQueue                                           = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterApplicationLauncherSelInitWithDeviceEndpointQueue                                             = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterApplicationLauncherSelLaunchAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("launchAppWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterApplicationLauncherSelStopAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("stopAppWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterApplicationLauncherSelHideAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("hideAppWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterApplicationLauncherSelStopAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("stopAppWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterApplicationLauncherSelHideAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("hideAppWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterApplicationLauncherFromID(id objc.ID) *MTRClusterApplicationLauncher {
@@ -181,13 +181,17 @@ func (o *MTRClusterApplicationLauncher) ReadAttributeClusterRevisionWithParams(p
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterApplicationLauncher) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterApplicationLauncher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationLauncherSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterApplicationLauncherFromID(_ret)
 }
 
 func (o *MTRClusterApplicationLauncher) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterApplicationLauncher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterApplicationLauncherSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterApplicationLauncherFromID(_ret)
 }
 
@@ -232,4 +236,3 @@ func (o *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedV
 	}
 	o.Ptr().Send(_mTRClusterApplicationLauncherSelHideAppWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

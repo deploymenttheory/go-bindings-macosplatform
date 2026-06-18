@@ -17,7 +17,9 @@ type NNReductionFeatureChannelsSumNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsSumNode].
-func (x *NNReductionFeatureChannelsSumNode) Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode { return x.inner }
+func (x *NNReductionFeatureChannelsSumNode) Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -71,9 +73,13 @@ func (x *NNReductionFeatureChannelsSumNode) SetWeight(weight float32) {
 	x.inner.SetWeight(weight)
 }
 
-func (x *NNReductionFeatureChannelsSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionFeatureChannelsSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionFeatureChannelsSumNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionFeatureChannelsSumNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionFeatureChannelsSumNodeable is the interface implemented by [NNReductionFeatureChannelsSumNode], for mocking and DI.
 type NNReductionFeatureChannelsSumNodeable interface {
@@ -87,4 +93,3 @@ type NNReductionFeatureChannelsSumNodeable interface {
 }
 
 var _ NNReductionFeatureChannelsSumNodeable = (*NNReductionFeatureChannelsSumNode)(nil)
-

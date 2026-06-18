@@ -16,8 +16,8 @@ type INFileResolutionResult struct {
 }
 
 var (
-	_clsINFileResolutionResult = _objcClass("INFileResolutionResult")
-	_iNFileResolutionResultSelSuccessWithResolvedFile = objc.RegisterName("successWithResolvedFile:")
+	_clsINFileResolutionResult                                      = _objcClass("INFileResolutionResult")
+	_iNFileResolutionResultSelSuccessWithResolvedFile               = objc.RegisterName("successWithResolvedFile:")
 	_iNFileResolutionResultSelDisambiguationWithFilesToDisambiguate = objc.RegisterName("disambiguationWithFilesToDisambiguate:")
 	_iNFileResolutionResultSelConfirmationRequiredWithFileToConfirm = objc.RegisterName("confirmationRequiredWithFileToConfirm:")
 )
@@ -34,19 +34,24 @@ func INFileResolutionResultFromID(id objc.ID) *INFileResolutionResult {
 
 func INFileResolutionResultSuccessWithResolvedFile(resolvedFile *INFile) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelSuccessWithResolvedFile, resolvedFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileResolutionResultFromID(_ret)
 }
 
 func INFileResolutionResultDisambiguationWithFilesToDisambiguate(filesToDisambiguate *foundation.NSArray[*INFile]) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelDisambiguationWithFilesToDisambiguate, filesToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileResolutionResultFromID(_ret)
 }
 
 func INFileResolutionResultConfirmationRequiredWithFileToConfirm(fileToConfirm *INFile) *INFileResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFileResolutionResult), _iNFileResolutionResultSelConfirmationRequiredWithFileToConfirm, fileToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileResolutionResultFromID(_ret)
 }
-

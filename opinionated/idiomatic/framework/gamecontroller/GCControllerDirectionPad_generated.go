@@ -141,9 +141,13 @@ func (x *ControllerDirectionPad) Right() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
-func (x *ControllerDirectionPad) asControllerDirectionPad() *raw.GCControllerDirectionPad { return x.inner }
+func (x *ControllerDirectionPad) asControllerDirectionPad() *raw.GCControllerDirectionPad {
+	return x.inner
+}
 
-func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerElement
+}
 
 // ControllerDirectionPadable is the interface implemented by [ControllerDirectionPad], for mocking and DI.
 type ControllerDirectionPadable interface {
@@ -166,4 +170,3 @@ type ControllerDirectionPadable interface {
 }
 
 var _ ControllerDirectionPadable = (*ControllerDirectionPad)(nil)
-

@@ -195,4 +195,3 @@ type AppearanceCharacteristicsable interface {
 }
 
 var _ AppearanceCharacteristicsable = (*AppearanceCharacteristics)(nil)
-

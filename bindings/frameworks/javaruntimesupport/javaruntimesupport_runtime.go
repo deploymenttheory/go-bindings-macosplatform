@@ -14,8 +14,8 @@ import (
 
 var (
 	_javaruntimesupportLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce              sync.Once
+	_failedSymbols         = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,43 +48,105 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("JRSAccessibilityUnregisterUniqueIdForUIElement", func() { purego.RegisterLibFunc(&_fnJRSAccessibilityUnregisterUniqueIdForUIElement, _javaruntimesupportLib, "JRSAccessibilityUnregisterUniqueIdForUIElement") })
-	_register("JRSFontAlignStyleForFractionalMeasurement", func() { purego.RegisterLibFunc(&_fnJRSFontAlignStyleForFractionalMeasurement, _javaruntimesupportLib, "JRSFontAlignStyleForFractionalMeasurement") })
-	_register("JRSFontAlignStyleForIntegerMeasurement", func() { purego.RegisterLibFunc(&_fnJRSFontAlignStyleForIntegerMeasurement, _javaruntimesupportLib, "JRSFontAlignStyleForIntegerMeasurement") })
-	_register("JRSFontCreateFallbackFontForCharacters", func() { purego.RegisterLibFunc(&_fnJRSFontCreateFallbackFontForCharacters, _javaruntimesupportLib, "JRSFontCreateFallbackFontForCharacters") })
-	_register("JRSFontGetAdvancesForGlyphsAndStyle", func() { purego.RegisterLibFunc(&_fnJRSFontGetAdvancesForGlyphsAndStyle, _javaruntimesupportLib, "JRSFontGetAdvancesForGlyphsAndStyle") })
-	_register("JRSFontGetBoundingBoxesForGlyphsAndStyle", func() { purego.RegisterLibFunc(&_fnJRSFontGetBoundingBoxesForGlyphsAndStyle, _javaruntimesupportLib, "JRSFontGetBoundingBoxesForGlyphsAndStyle") })
-	_register("JRSFontGetRenderingStyleForContext", func() { purego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _javaruntimesupportLib, "JRSFontGetRenderingStyleForContext") })
-	_register("JRSFontGetRenderingStyleForHints", func() { purego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForHints, _javaruntimesupportLib, "JRSFontGetRenderingStyleForHints") })
-	_register("JRSFontSetRenderingStyleOnContext", func() { purego.RegisterLibFunc(&_fnJRSFontSetRenderingStyleOnContext, _javaruntimesupportLib, "JRSFontSetRenderingStyleOnContext") })
-	_register("JRSFontStyleIsAntialiased", func() { purego.RegisterLibFunc(&_fnJRSFontStyleIsAntialiased, _javaruntimesupportLib, "JRSFontStyleIsAntialiased") })
-	_register("JRSFontStyleUsesFractionalMetrics", func() { purego.RegisterLibFunc(&_fnJRSFontStyleUsesFractionalMetrics, _javaruntimesupportLib, "JRSFontStyleUsesFractionalMetrics") })
+	_register("JRSAccessibilityUnregisterUniqueIdForUIElement", func() {
+		purego.RegisterLibFunc(&_fnJRSAccessibilityUnregisterUniqueIdForUIElement, _javaruntimesupportLib, "JRSAccessibilityUnregisterUniqueIdForUIElement")
+	})
+	_register("JRSFontAlignStyleForFractionalMeasurement", func() {
+		purego.RegisterLibFunc(&_fnJRSFontAlignStyleForFractionalMeasurement, _javaruntimesupportLib, "JRSFontAlignStyleForFractionalMeasurement")
+	})
+	_register("JRSFontAlignStyleForIntegerMeasurement", func() {
+		purego.RegisterLibFunc(&_fnJRSFontAlignStyleForIntegerMeasurement, _javaruntimesupportLib, "JRSFontAlignStyleForIntegerMeasurement")
+	})
+	_register("JRSFontCreateFallbackFontForCharacters", func() {
+		purego.RegisterLibFunc(&_fnJRSFontCreateFallbackFontForCharacters, _javaruntimesupportLib, "JRSFontCreateFallbackFontForCharacters")
+	})
+	_register("JRSFontGetAdvancesForGlyphsAndStyle", func() {
+		purego.RegisterLibFunc(&_fnJRSFontGetAdvancesForGlyphsAndStyle, _javaruntimesupportLib, "JRSFontGetAdvancesForGlyphsAndStyle")
+	})
+	_register("JRSFontGetBoundingBoxesForGlyphsAndStyle", func() {
+		purego.RegisterLibFunc(&_fnJRSFontGetBoundingBoxesForGlyphsAndStyle, _javaruntimesupportLib, "JRSFontGetBoundingBoxesForGlyphsAndStyle")
+	})
+	_register("JRSFontGetRenderingStyleForContext", func() {
+		purego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _javaruntimesupportLib, "JRSFontGetRenderingStyleForContext")
+	})
+	_register("JRSFontGetRenderingStyleForHints", func() {
+		purego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForHints, _javaruntimesupportLib, "JRSFontGetRenderingStyleForHints")
+	})
+	_register("JRSFontSetRenderingStyleOnContext", func() {
+		purego.RegisterLibFunc(&_fnJRSFontSetRenderingStyleOnContext, _javaruntimesupportLib, "JRSFontSetRenderingStyleOnContext")
+	})
+	_register("JRSFontStyleIsAntialiased", func() {
+		purego.RegisterLibFunc(&_fnJRSFontStyleIsAntialiased, _javaruntimesupportLib, "JRSFontStyleIsAntialiased")
+	})
+	_register("JRSFontStyleUsesFractionalMetrics", func() {
+		purego.RegisterLibFunc(&_fnJRSFontStyleUsesFractionalMetrics, _javaruntimesupportLib, "JRSFontStyleUsesFractionalMetrics")
+	})
 	_register("JRSUIControlCreate", func() { purego.RegisterLibFunc(&_fnJRSUIControlCreate, _javaruntimesupportLib, "JRSUIControlCreate") })
 	_register("JRSUIControlDraw", func() { purego.RegisterLibFunc(&_fnJRSUIControlDraw, _javaruntimesupportLib, "JRSUIControlDraw") })
-	_register("JRSUIControlGetHitPart", func() { purego.RegisterLibFunc(&_fnJRSUIControlGetHitPart, _javaruntimesupportLib, "JRSUIControlGetHitPart") })
-	_register("JRSUIControlGetScrollBarOffsetFor", func() { purego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarOffsetFor, _javaruntimesupportLib, "JRSUIControlGetScrollBarOffsetFor") })
-	_register("JRSUIControlGetScrollBarPartBounds", func() { purego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarPartBounds, _javaruntimesupportLib, "JRSUIControlGetScrollBarPartBounds") })
+	_register("JRSUIControlGetHitPart", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlGetHitPart, _javaruntimesupportLib, "JRSUIControlGetHitPart")
+	})
+	_register("JRSUIControlGetScrollBarOffsetFor", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarOffsetFor, _javaruntimesupportLib, "JRSUIControlGetScrollBarOffsetFor")
+	})
+	_register("JRSUIControlGetScrollBarPartBounds", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarPartBounds, _javaruntimesupportLib, "JRSUIControlGetScrollBarPartBounds")
+	})
 	_register("JRSUIControlRelease", func() { purego.RegisterLibFunc(&_fnJRSUIControlRelease, _javaruntimesupportLib, "JRSUIControlRelease") })
-	_register("JRSUIControlSetAlignmentHorizontal", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentHorizontal, _javaruntimesupportLib, "JRSUIControlSetAlignmentHorizontal") })
-	_register("JRSUIControlSetAlignmentVertical", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentVertical, _javaruntimesupportLib, "JRSUIControlSetAlignmentVertical") })
-	_register("JRSUIControlSetAnimating", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetAnimating, _javaruntimesupportLib, "JRSUIControlSetAnimating") })
-	_register("JRSUIControlSetDirection", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetDirection, _javaruntimesupportLib, "JRSUIControlSetDirection") })
-	_register("JRSUIControlSetOrientation", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetOrientation, _javaruntimesupportLib, "JRSUIControlSetOrientation") })
-	_register("JRSUIControlSetPresentationState", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetPresentationState, _javaruntimesupportLib, "JRSUIControlSetPresentationState") })
-	_register("JRSUIControlSetScrollBarPart", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetScrollBarPart, _javaruntimesupportLib, "JRSUIControlSetScrollBarPart") })
-	_register("JRSUIControlSetSegmentPosition", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetSegmentPosition, _javaruntimesupportLib, "JRSUIControlSetSegmentPosition") })
-	_register("JRSUIControlSetShowArrows", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetShowArrows, _javaruntimesupportLib, "JRSUIControlSetShowArrows") })
+	_register("JRSUIControlSetAlignmentHorizontal", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentHorizontal, _javaruntimesupportLib, "JRSUIControlSetAlignmentHorizontal")
+	})
+	_register("JRSUIControlSetAlignmentVertical", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentVertical, _javaruntimesupportLib, "JRSUIControlSetAlignmentVertical")
+	})
+	_register("JRSUIControlSetAnimating", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetAnimating, _javaruntimesupportLib, "JRSUIControlSetAnimating")
+	})
+	_register("JRSUIControlSetDirection", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetDirection, _javaruntimesupportLib, "JRSUIControlSetDirection")
+	})
+	_register("JRSUIControlSetOrientation", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetOrientation, _javaruntimesupportLib, "JRSUIControlSetOrientation")
+	})
+	_register("JRSUIControlSetPresentationState", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetPresentationState, _javaruntimesupportLib, "JRSUIControlSetPresentationState")
+	})
+	_register("JRSUIControlSetScrollBarPart", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetScrollBarPart, _javaruntimesupportLib, "JRSUIControlSetScrollBarPart")
+	})
+	_register("JRSUIControlSetSegmentPosition", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetSegmentPosition, _javaruntimesupportLib, "JRSUIControlSetSegmentPosition")
+	})
+	_register("JRSUIControlSetShowArrows", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetShowArrows, _javaruntimesupportLib, "JRSUIControlSetShowArrows")
+	})
 	_register("JRSUIControlSetSize", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetSize, _javaruntimesupportLib, "JRSUIControlSetSize") })
-	_register("JRSUIControlSetState", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetState, _javaruntimesupportLib, "JRSUIControlSetState") })
-	_register("JRSUIControlSetUserInterfaceLayoutDirection", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetUserInterfaceLayoutDirection, _javaruntimesupportLib, "JRSUIControlSetUserInterfaceLayoutDirection") })
-	_register("JRSUIControlSetValueByKey", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _javaruntimesupportLib, "JRSUIControlSetValueByKey") })
-	_register("JRSUIControlSetVariant", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetVariant, _javaruntimesupportLib, "JRSUIControlSetVariant") })
-	_register("JRSUIControlSetWidget", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetWidget, _javaruntimesupportLib, "JRSUIControlSetWidget") })
-	_register("JRSUIControlSetWindowType", func() { purego.RegisterLibFunc(&_fnJRSUIControlSetWindowType, _javaruntimesupportLib, "JRSUIControlSetWindowType") })
-	_register("JRSUIControlShouldScrollToClick", func() { purego.RegisterLibFunc(&_fnJRSUIControlShouldScrollToClick, _javaruntimesupportLib, "JRSUIControlShouldScrollToClick") })
+	_register("JRSUIControlSetState", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetState, _javaruntimesupportLib, "JRSUIControlSetState")
+	})
+	_register("JRSUIControlSetUserInterfaceLayoutDirection", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetUserInterfaceLayoutDirection, _javaruntimesupportLib, "JRSUIControlSetUserInterfaceLayoutDirection")
+	})
+	_register("JRSUIControlSetValueByKey", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _javaruntimesupportLib, "JRSUIControlSetValueByKey")
+	})
+	_register("JRSUIControlSetVariant", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetVariant, _javaruntimesupportLib, "JRSUIControlSetVariant")
+	})
+	_register("JRSUIControlSetWidget", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetWidget, _javaruntimesupportLib, "JRSUIControlSetWidget")
+	})
+	_register("JRSUIControlSetWindowType", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlSetWindowType, _javaruntimesupportLib, "JRSUIControlSetWindowType")
+	})
+	_register("JRSUIControlShouldScrollToClick", func() {
+		purego.RegisterLibFunc(&_fnJRSUIControlShouldScrollToClick, _javaruntimesupportLib, "JRSUIControlShouldScrollToClick")
+	})
 	_register("JRSUIGetKey", func() { purego.RegisterLibFunc(&_fnJRSUIGetKey, _javaruntimesupportLib, "JRSUIGetKey") })
 	_register("JRSUIRendererCreate", func() { purego.RegisterLibFunc(&_fnJRSUIRendererCreate, _javaruntimesupportLib, "JRSUIRendererCreate") })
-	_register("JRSUIRendererRelease", func() { purego.RegisterLibFunc(&_fnJRSUIRendererRelease, _javaruntimesupportLib, "JRSUIRendererRelease") })
+	_register("JRSUIRendererRelease", func() {
+		purego.RegisterLibFunc(&_fnJRSUIRendererRelease, _javaruntimesupportLib, "JRSUIRendererRelease")
+	})
 }
 
 func init() {

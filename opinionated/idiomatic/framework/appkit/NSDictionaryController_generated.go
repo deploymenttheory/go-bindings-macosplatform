@@ -58,7 +58,9 @@ func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -74,7 +76,9 @@ func (x *DictionaryController) WithExcludedKeys(items ...*foundation.NSString) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -108,7 +112,9 @@ func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -279,11 +285,17 @@ func (x *DictionaryController) SetLocalizedKeyTable(localizedKeyTable string) {
 	x.inner.SetLocalizedKeyTable(foundation.NSStringStringWithUTF8String(localizedKeyTable))
 }
 
-func (x *DictionaryController) asArrayController() *raw.NSArrayController { return &x.inner.NSArrayController }
+func (x *DictionaryController) asArrayController() *raw.NSArrayController {
+	return &x.inner.NSArrayController
+}
 
-func (x *DictionaryController) asObjectController() *raw.NSObjectController { return &x.inner.NSArrayController.NSObjectController }
+func (x *DictionaryController) asObjectController() *raw.NSObjectController {
+	return &x.inner.NSArrayController.NSObjectController
+}
 
-func (x *DictionaryController) asController() *raw.NSController { return &x.inner.NSArrayController.NSObjectController.NSController }
+func (x *DictionaryController) asController() *raw.NSController {
+	return &x.inner.NSArrayController.NSObjectController.NSController
+}
 
 // DictionaryControllerable is the interface implemented by [DictionaryController], for mocking and DI.
 type DictionaryControllerable interface {
@@ -325,4 +337,3 @@ type DictionaryControllerable interface {
 }
 
 var _ DictionaryControllerable = (*DictionaryController)(nil)
-

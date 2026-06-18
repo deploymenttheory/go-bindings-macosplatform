@@ -16,7 +16,9 @@ type MTRThermostatClusterSetWeeklyScheduleParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetWeeklyScheduleParams].
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) Unwrap() *raw.MTRThermostatClusterSetWeeklyScheduleParams { return x.inner }
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) Unwrap() *raw.MTRThermostatClusterSetWeeklyScheduleParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -149,4 +151,3 @@ type MTRThermostatClusterSetWeeklyScheduleParamsable interface {
 }
 
 var _ MTRThermostatClusterSetWeeklyScheduleParamsable = (*MTRThermostatClusterSetWeeklyScheduleParams)(nil)
-

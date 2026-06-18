@@ -17,10 +17,10 @@ type PHPickerUpdateConfiguration struct {
 }
 
 var (
-	_clsPHPickerUpdateConfiguration = _objcClass("PHPickerUpdateConfiguration")
-	_pHPickerUpdateConfigurationSelSelectionLimit = objc.RegisterName("selectionLimit")
-	_pHPickerUpdateConfigurationSelSetSelectionLimit = objc.RegisterName("setSelectionLimit:")
-	_pHPickerUpdateConfigurationSelEdgesWithoutContentMargins = objc.RegisterName("edgesWithoutContentMargins")
+	_clsPHPickerUpdateConfiguration                              = _objcClass("PHPickerUpdateConfiguration")
+	_pHPickerUpdateConfigurationSelSelectionLimit                = objc.RegisterName("selectionLimit")
+	_pHPickerUpdateConfigurationSelSetSelectionLimit             = objc.RegisterName("setSelectionLimit:")
+	_pHPickerUpdateConfigurationSelEdgesWithoutContentMargins    = objc.RegisterName("edgesWithoutContentMargins")
 	_pHPickerUpdateConfigurationSelSetEdgesWithoutContentMargins = objc.RegisterName("setEdgesWithoutContentMargins:")
 )
 
@@ -55,4 +55,3 @@ func (o *PHPickerUpdateConfiguration) EdgesWithoutContentMargins() appkit.NSDire
 func (o *PHPickerUpdateConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
 	o.Ptr().Send(_pHPickerUpdateConfigurationSelSetEdgesWithoutContentMargins, edgesWithoutContentMargins)
 }
-

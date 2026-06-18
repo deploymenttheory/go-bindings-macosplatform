@@ -18,67 +18,67 @@ type SKUniform struct {
 }
 
 var (
-	_clsSKUniform = _objcClass("SKUniform")
-	_sKUniformSelUniformWithName = objc.RegisterName("uniformWithName:")
-	_sKUniformSelUniformWithNameTexture = objc.RegisterName("uniformWithName:texture:")
-	_sKUniformSelUniformWithNameFloat = objc.RegisterName("uniformWithName:float:")
-	_sKUniformSelUniformWithNameVectorFloat2 = objc.RegisterName("uniformWithName:vectorFloat2:")
-	_sKUniformSelUniformWithNameVectorFloat3 = objc.RegisterName("uniformWithName:vectorFloat3:")
-	_sKUniformSelUniformWithNameVectorFloat4 = objc.RegisterName("uniformWithName:vectorFloat4:")
+	_clsSKUniform                              = _objcClass("SKUniform")
+	_sKUniformSelUniformWithName               = objc.RegisterName("uniformWithName:")
+	_sKUniformSelUniformWithNameTexture        = objc.RegisterName("uniformWithName:texture:")
+	_sKUniformSelUniformWithNameFloat          = objc.RegisterName("uniformWithName:float:")
+	_sKUniformSelUniformWithNameVectorFloat2   = objc.RegisterName("uniformWithName:vectorFloat2:")
+	_sKUniformSelUniformWithNameVectorFloat3   = objc.RegisterName("uniformWithName:vectorFloat3:")
+	_sKUniformSelUniformWithNameVectorFloat4   = objc.RegisterName("uniformWithName:vectorFloat4:")
 	_sKUniformSelUniformWithNameMatrixFloat2x2 = objc.RegisterName("uniformWithName:matrixFloat2x2:")
 	_sKUniformSelUniformWithNameMatrixFloat3x3 = objc.RegisterName("uniformWithName:matrixFloat3x3:")
 	_sKUniformSelUniformWithNameMatrixFloat4x4 = objc.RegisterName("uniformWithName:matrixFloat4x4:")
-	_sKUniformSelInitWithName = objc.RegisterName("initWithName:")
-	_sKUniformSelInitWithNameTexture = objc.RegisterName("initWithName:texture:")
-	_sKUniformSelInitWithNameFloat = objc.RegisterName("initWithName:float:")
-	_sKUniformSelInitWithNameVectorFloat2 = objc.RegisterName("initWithName:vectorFloat2:")
-	_sKUniformSelInitWithNameVectorFloat3 = objc.RegisterName("initWithName:vectorFloat3:")
-	_sKUniformSelInitWithNameVectorFloat4 = objc.RegisterName("initWithName:vectorFloat4:")
-	_sKUniformSelInitWithNameMatrixFloat2x2 = objc.RegisterName("initWithName:matrixFloat2x2:")
-	_sKUniformSelInitWithNameMatrixFloat3x3 = objc.RegisterName("initWithName:matrixFloat3x3:")
-	_sKUniformSelInitWithNameMatrixFloat4x4 = objc.RegisterName("initWithName:matrixFloat4x4:")
-	_sKUniformSelUniformWithNameFloatVector2 = objc.RegisterName("uniformWithName:floatVector2:")
-	_sKUniformSelUniformWithNameFloatVector3 = objc.RegisterName("uniformWithName:floatVector3:")
-	_sKUniformSelUniformWithNameFloatVector4 = objc.RegisterName("uniformWithName:floatVector4:")
-	_sKUniformSelUniformWithNameFloatMatrix2 = objc.RegisterName("uniformWithName:floatMatrix2:")
-	_sKUniformSelUniformWithNameFloatMatrix3 = objc.RegisterName("uniformWithName:floatMatrix3:")
-	_sKUniformSelUniformWithNameFloatMatrix4 = objc.RegisterName("uniformWithName:floatMatrix4:")
-	_sKUniformSelInitWithNameFloatVector2 = objc.RegisterName("initWithName:floatVector2:")
-	_sKUniformSelInitWithNameFloatVector3 = objc.RegisterName("initWithName:floatVector3:")
-	_sKUniformSelInitWithNameFloatVector4 = objc.RegisterName("initWithName:floatVector4:")
-	_sKUniformSelInitWithNameFloatMatrix2 = objc.RegisterName("initWithName:floatMatrix2:")
-	_sKUniformSelInitWithNameFloatMatrix3 = objc.RegisterName("initWithName:floatMatrix3:")
-	_sKUniformSelInitWithNameFloatMatrix4 = objc.RegisterName("initWithName:floatMatrix4:")
-	_sKUniformSelName = objc.RegisterName("name")
-	_sKUniformSelUniformType = objc.RegisterName("uniformType")
-	_sKUniformSelTextureValue = objc.RegisterName("textureValue")
-	_sKUniformSelSetTextureValue = objc.RegisterName("setTextureValue:")
-	_sKUniformSelFloatValue = objc.RegisterName("floatValue")
-	_sKUniformSelSetFloatValue = objc.RegisterName("setFloatValue:")
-	_sKUniformSelVectorFloat2Value = objc.RegisterName("vectorFloat2Value")
-	_sKUniformSelSetVectorFloat2Value = objc.RegisterName("setVectorFloat2Value:")
-	_sKUniformSelVectorFloat3Value = objc.RegisterName("vectorFloat3Value")
-	_sKUniformSelSetVectorFloat3Value = objc.RegisterName("setVectorFloat3Value:")
-	_sKUniformSelVectorFloat4Value = objc.RegisterName("vectorFloat4Value")
-	_sKUniformSelSetVectorFloat4Value = objc.RegisterName("setVectorFloat4Value:")
-	_sKUniformSelMatrixFloat2x2Value = objc.RegisterName("matrixFloat2x2Value")
-	_sKUniformSelSetMatrixFloat2x2Value = objc.RegisterName("setMatrixFloat2x2Value:")
-	_sKUniformSelMatrixFloat3x3Value = objc.RegisterName("matrixFloat3x3Value")
-	_sKUniformSelSetMatrixFloat3x3Value = objc.RegisterName("setMatrixFloat3x3Value:")
-	_sKUniformSelMatrixFloat4x4Value = objc.RegisterName("matrixFloat4x4Value")
-	_sKUniformSelSetMatrixFloat4x4Value = objc.RegisterName("setMatrixFloat4x4Value:")
-	_sKUniformSelFloatVector2Value = objc.RegisterName("floatVector2Value")
-	_sKUniformSelSetFloatVector2Value = objc.RegisterName("setFloatVector2Value:")
-	_sKUniformSelFloatVector3Value = objc.RegisterName("floatVector3Value")
-	_sKUniformSelSetFloatVector3Value = objc.RegisterName("setFloatVector3Value:")
-	_sKUniformSelFloatVector4Value = objc.RegisterName("floatVector4Value")
-	_sKUniformSelSetFloatVector4Value = objc.RegisterName("setFloatVector4Value:")
-	_sKUniformSelFloatMatrix2Value = objc.RegisterName("floatMatrix2Value")
-	_sKUniformSelSetFloatMatrix2Value = objc.RegisterName("setFloatMatrix2Value:")
-	_sKUniformSelFloatMatrix3Value = objc.RegisterName("floatMatrix3Value")
-	_sKUniformSelSetFloatMatrix3Value = objc.RegisterName("setFloatMatrix3Value:")
-	_sKUniformSelFloatMatrix4Value = objc.RegisterName("floatMatrix4Value")
-	_sKUniformSelSetFloatMatrix4Value = objc.RegisterName("setFloatMatrix4Value:")
+	_sKUniformSelInitWithName                  = objc.RegisterName("initWithName:")
+	_sKUniformSelInitWithNameTexture           = objc.RegisterName("initWithName:texture:")
+	_sKUniformSelInitWithNameFloat             = objc.RegisterName("initWithName:float:")
+	_sKUniformSelInitWithNameVectorFloat2      = objc.RegisterName("initWithName:vectorFloat2:")
+	_sKUniformSelInitWithNameVectorFloat3      = objc.RegisterName("initWithName:vectorFloat3:")
+	_sKUniformSelInitWithNameVectorFloat4      = objc.RegisterName("initWithName:vectorFloat4:")
+	_sKUniformSelInitWithNameMatrixFloat2x2    = objc.RegisterName("initWithName:matrixFloat2x2:")
+	_sKUniformSelInitWithNameMatrixFloat3x3    = objc.RegisterName("initWithName:matrixFloat3x3:")
+	_sKUniformSelInitWithNameMatrixFloat4x4    = objc.RegisterName("initWithName:matrixFloat4x4:")
+	_sKUniformSelUniformWithNameFloatVector2   = objc.RegisterName("uniformWithName:floatVector2:")
+	_sKUniformSelUniformWithNameFloatVector3   = objc.RegisterName("uniformWithName:floatVector3:")
+	_sKUniformSelUniformWithNameFloatVector4   = objc.RegisterName("uniformWithName:floatVector4:")
+	_sKUniformSelUniformWithNameFloatMatrix2   = objc.RegisterName("uniformWithName:floatMatrix2:")
+	_sKUniformSelUniformWithNameFloatMatrix3   = objc.RegisterName("uniformWithName:floatMatrix3:")
+	_sKUniformSelUniformWithNameFloatMatrix4   = objc.RegisterName("uniformWithName:floatMatrix4:")
+	_sKUniformSelInitWithNameFloatVector2      = objc.RegisterName("initWithName:floatVector2:")
+	_sKUniformSelInitWithNameFloatVector3      = objc.RegisterName("initWithName:floatVector3:")
+	_sKUniformSelInitWithNameFloatVector4      = objc.RegisterName("initWithName:floatVector4:")
+	_sKUniformSelInitWithNameFloatMatrix2      = objc.RegisterName("initWithName:floatMatrix2:")
+	_sKUniformSelInitWithNameFloatMatrix3      = objc.RegisterName("initWithName:floatMatrix3:")
+	_sKUniformSelInitWithNameFloatMatrix4      = objc.RegisterName("initWithName:floatMatrix4:")
+	_sKUniformSelName                          = objc.RegisterName("name")
+	_sKUniformSelUniformType                   = objc.RegisterName("uniformType")
+	_sKUniformSelTextureValue                  = objc.RegisterName("textureValue")
+	_sKUniformSelSetTextureValue               = objc.RegisterName("setTextureValue:")
+	_sKUniformSelFloatValue                    = objc.RegisterName("floatValue")
+	_sKUniformSelSetFloatValue                 = objc.RegisterName("setFloatValue:")
+	_sKUniformSelVectorFloat2Value             = objc.RegisterName("vectorFloat2Value")
+	_sKUniformSelSetVectorFloat2Value          = objc.RegisterName("setVectorFloat2Value:")
+	_sKUniformSelVectorFloat3Value             = objc.RegisterName("vectorFloat3Value")
+	_sKUniformSelSetVectorFloat3Value          = objc.RegisterName("setVectorFloat3Value:")
+	_sKUniformSelVectorFloat4Value             = objc.RegisterName("vectorFloat4Value")
+	_sKUniformSelSetVectorFloat4Value          = objc.RegisterName("setVectorFloat4Value:")
+	_sKUniformSelMatrixFloat2x2Value           = objc.RegisterName("matrixFloat2x2Value")
+	_sKUniformSelSetMatrixFloat2x2Value        = objc.RegisterName("setMatrixFloat2x2Value:")
+	_sKUniformSelMatrixFloat3x3Value           = objc.RegisterName("matrixFloat3x3Value")
+	_sKUniformSelSetMatrixFloat3x3Value        = objc.RegisterName("setMatrixFloat3x3Value:")
+	_sKUniformSelMatrixFloat4x4Value           = objc.RegisterName("matrixFloat4x4Value")
+	_sKUniformSelSetMatrixFloat4x4Value        = objc.RegisterName("setMatrixFloat4x4Value:")
+	_sKUniformSelFloatVector2Value             = objc.RegisterName("floatVector2Value")
+	_sKUniformSelSetFloatVector2Value          = objc.RegisterName("setFloatVector2Value:")
+	_sKUniformSelFloatVector3Value             = objc.RegisterName("floatVector3Value")
+	_sKUniformSelSetFloatVector3Value          = objc.RegisterName("setFloatVector3Value:")
+	_sKUniformSelFloatVector4Value             = objc.RegisterName("floatVector4Value")
+	_sKUniformSelSetFloatVector4Value          = objc.RegisterName("setFloatVector4Value:")
+	_sKUniformSelFloatMatrix2Value             = objc.RegisterName("floatMatrix2Value")
+	_sKUniformSelSetFloatMatrix2Value          = objc.RegisterName("setFloatMatrix2Value:")
+	_sKUniformSelFloatMatrix3Value             = objc.RegisterName("floatMatrix3Value")
+	_sKUniformSelSetFloatMatrix3Value          = objc.RegisterName("setFloatMatrix3Value:")
+	_sKUniformSelFloatMatrix4Value             = objc.RegisterName("floatMatrix4Value")
+	_sKUniformSelSetFloatMatrix4Value          = objc.RegisterName("setFloatMatrix4Value:")
 )
 
 func SKUniformFromID(id objc.ID) *SKUniform {
@@ -94,207 +94,269 @@ func SKUniformFromID(id objc.ID) *SKUniform {
 // Create a shader uniform with a given name. @param name the name of the shader uniform.
 func SKUniformUniformWithName(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and texture data @param name the name of the shader uniform. @param texture the texture data associated with this uniform.
 func SKUniformUniformWithNameTexture(name *foundation.NSString, texture *SKTexture) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameTexture, name.Ptr(), texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a float value @param name the name of the shader uniform. @param value the floating point value associated with this uniform.
 func SKUniformUniformWithNameFloat(name *foundation.NSString, value float32) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloat, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a float vector2 value @param name the name of the shader uniform. @param value the float vector2 value associated with this uniform.
 func SKUniformUniformWithNameVectorFloat2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameVectorFloat2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a float vector3 value @param name the name of the shader uniform. @param value the float vector3 value associated with this uniform.
 func SKUniformUniformWithNameVectorFloat3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameVectorFloat3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a float vector4 value @param name the name of the shader uniform. @param value the float vector4 value associated with this uniform.
 func SKUniformUniformWithNameVectorFloat4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameVectorFloat4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a 2x2 matrix value @param name the name of the shader uniform. @param value the 2x2 matrix value associated with this uniform.
 func SKUniformUniformWithNameMatrixFloat2x2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameMatrixFloat2x2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a 3x3 matrix value @param name the name of the shader uniform. @param value the 3x3 matrix value associated with this uniform.
 func SKUniformUniformWithNameMatrixFloat3x3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameMatrixFloat3x3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Create a shader uniform with a given name, and a 4x4 matrix value @param name the name of the shader uniform. @param value the 4x4 matrix value associated with this uniform.
 func SKUniformUniformWithNameMatrixFloat4x4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameMatrixFloat4x4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithName(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameTexture(name *foundation.NSString, texture *SKTexture) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameTexture, name.Ptr(), texture.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameFloat(name *foundation.NSString, value float32) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloat, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameVectorFloat2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameVectorFloat2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameVectorFloat3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameVectorFloat3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameVectorFloat4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameVectorFloat4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameMatrixFloat2x2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameMatrixFloat2x2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameMatrixFloat3x3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameMatrixFloat3x3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) InitWithNameMatrixFloat4x4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameMatrixFloat4x4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatVector4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatVector4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func SKUniformUniformWithNameFloatMatrix4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKUniform), _sKUniformSelUniformWithNameFloatMatrix4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatVector4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatVector4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix2(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix2, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix3(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix3, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.12.
 func (o *SKUniform) InitWithNameFloatMatrix4(name *foundation.NSString, value unsafe.Pointer) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelInitWithNameFloatMatrix4, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
 func (o *SKUniform) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -305,7 +367,9 @@ func (o *SKUniform) UniformType() SKUniformType {
 
 func (o *SKUniform) TextureValue() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKUniformSelTextureValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -441,4 +505,3 @@ func (o *SKUniform) FloatMatrix4Value() unsafe.Pointer {
 func (o *SKUniform) SetFloatMatrix4Value(floatMatrix4Value unsafe.Pointer) {
 	o.Ptr().Send(_sKUniformSelSetFloatMatrix4Value, floatMatrix4Value)
 }
-

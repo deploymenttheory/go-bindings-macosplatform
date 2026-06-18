@@ -15,7 +15,9 @@ type CapturePhotoOutputReadinessCoordinator struct {
 }
 
 // Unwrap returns the underlying [raw.AVCapturePhotoOutputReadinessCoordinator].
-func (x *CapturePhotoOutputReadinessCoordinator) Unwrap() *raw.AVCapturePhotoOutputReadinessCoordinator { return x.inner }
+func (x *CapturePhotoOutputReadinessCoordinator) Unwrap() *raw.AVCapturePhotoOutputReadinessCoordinator {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -79,4 +81,3 @@ type CapturePhotoOutputReadinessCoordinatorable interface {
 }
 
 var _ CapturePhotoOutputReadinessCoordinatorable = (*CapturePhotoOutputReadinessCoordinator)(nil)
-

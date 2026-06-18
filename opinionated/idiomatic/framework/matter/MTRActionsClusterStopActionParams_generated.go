@@ -16,7 +16,9 @@ type MTRActionsClusterStopActionParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterStopActionParams].
-func (x *MTRActionsClusterStopActionParams) Unwrap() *raw.MTRActionsClusterStopActionParams { return x.inner }
+func (x *MTRActionsClusterStopActionParams) Unwrap() *raw.MTRActionsClusterStopActionParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRActionsClusterStopActionParamsable interface {
 }
 
 var _ MTRActionsClusterStopActionParamsable = (*MTRActionsClusterStopActionParams)(nil)
-

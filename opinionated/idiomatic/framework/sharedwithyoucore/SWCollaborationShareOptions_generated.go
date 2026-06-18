@@ -60,7 +60,9 @@ func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOpti
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -117,4 +119,3 @@ type CollaborationShareOptionsable interface {
 }
 
 var _ CollaborationShareOptionsable = (*CollaborationShareOptions)(nil)
-

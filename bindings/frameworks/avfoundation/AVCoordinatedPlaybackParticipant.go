@@ -16,10 +16,10 @@ type AVCoordinatedPlaybackParticipant struct {
 }
 
 var (
-	_clsAVCoordinatedPlaybackParticipant = _objcClass("AVCoordinatedPlaybackParticipant")
+	_clsAVCoordinatedPlaybackParticipant                  = _objcClass("AVCoordinatedPlaybackParticipant")
 	_aVCoordinatedPlaybackParticipantSelSuspensionReasons = objc.RegisterName("suspensionReasons")
-	_aVCoordinatedPlaybackParticipantSelIsReadyToPlay = objc.RegisterName("isReadyToPlay")
-	_aVCoordinatedPlaybackParticipantSelIdentifier = objc.RegisterName("identifier")
+	_aVCoordinatedPlaybackParticipantSelIsReadyToPlay     = objc.RegisterName("isReadyToPlay")
+	_aVCoordinatedPlaybackParticipantSelIdentifier        = objc.RegisterName("identifier")
 )
 
 func AVCoordinatedPlaybackParticipantFromID(id objc.ID) *AVCoordinatedPlaybackParticipant {
@@ -47,7 +47,8 @@ func (o *AVCoordinatedPlaybackParticipant) IsReadyToPlay() bool {
 // A unique id for the participant. Use this identifier to distinguish participants.
 func (o *AVCoordinatedPlaybackParticipant) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCoordinatedPlaybackParticipantSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

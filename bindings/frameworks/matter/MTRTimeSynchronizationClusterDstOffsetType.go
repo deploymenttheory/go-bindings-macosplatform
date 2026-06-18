@@ -25,4 +25,3 @@ func MTRTimeSynchronizationClusterDstOffsetTypeFromID(id objc.ID) *MTRTimeSynchr
 	purego.Track(o)
 	return o
 }
-

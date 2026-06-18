@@ -64,4 +64,3 @@ type ActionURLable interface {
 }
 
 var _ ActionURLable = (*ActionURL)(nil)
-

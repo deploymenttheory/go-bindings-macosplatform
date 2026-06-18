@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterTurbineOperationEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent].
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterTurbineOperationEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterTurbineOperationEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterTurbineOperationEventable = (*MTRPumpConfigurationAndControlClusterTurbineOperationEvent)(nil)
-

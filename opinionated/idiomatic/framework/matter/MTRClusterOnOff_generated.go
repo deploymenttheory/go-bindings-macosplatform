@@ -225,9 +225,13 @@ func (x *MTRClusterOnOff) OnWithTimedOffWithParamsExpectedValuesExpectedValueInt
 	x.inner.OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterOnOff) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterOnOff) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterOnOff) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterOnOff) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterOnOffable is the interface implemented by [MTRClusterOnOff], for mocking and DI.
 type MTRClusterOnOffable interface {
@@ -271,4 +275,3 @@ type MTRClusterOnOffable interface {
 }
 
 var _ MTRClusterOnOffable = (*MTRClusterOnOff)(nil)
-

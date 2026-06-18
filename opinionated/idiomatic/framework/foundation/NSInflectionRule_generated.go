@@ -52,4 +52,3 @@ type InflectionRuleable interface {
 }
 
 var _ InflectionRuleable = (*InflectionRule)(nil)
-

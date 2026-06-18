@@ -135,7 +135,9 @@ func (x *DOMEvent) asDOMEvent() *raw.DOMEvent { return x.inner }
 
 func (x *DOMEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMEventable is the interface implemented by [DOMEvent], for mocking and DI.
 type DOMEventable interface {
@@ -159,4 +161,3 @@ type DOMEventable interface {
 }
 
 var _ DOMEventable = (*DOMEvent)(nil)
-

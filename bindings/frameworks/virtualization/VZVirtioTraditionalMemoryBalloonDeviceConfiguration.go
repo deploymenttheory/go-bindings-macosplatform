@@ -15,7 +15,7 @@ type VZVirtioTraditionalMemoryBalloonDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioTraditionalMemoryBalloonDeviceConfiguration = _objcClass("VZVirtioTraditionalMemoryBalloonDeviceConfiguration")
+	_clsVZVirtioTraditionalMemoryBalloonDeviceConfiguration     = _objcClass("VZVirtioTraditionalMemoryBalloonDeviceConfiguration")
 	_vZVirtioTraditionalMemoryBalloonDeviceConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(id objc.ID) *VZVi
 
 func (o *VZVirtioTraditionalMemoryBalloonDeviceConfiguration) Init() *VZVirtioTraditionalMemoryBalloonDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioTraditionalMemoryBalloonDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(_ret)
 }
-

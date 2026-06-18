@@ -88,7 +88,9 @@ func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*raw.NSColor) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSColor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -183,7 +185,9 @@ func (x *CollectionViewGridLayout) SetBackgroundColors(backgroundColors *foundat
 	x.inner.SetBackgroundColors(backgroundColors)
 }
 
-func (x *CollectionViewGridLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+func (x *CollectionViewGridLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
+	return &x.inner.NSCollectionViewLayout
+}
 
 // CollectionViewGridLayoutable is the interface implemented by [CollectionViewGridLayout], for mocking and DI.
 type CollectionViewGridLayoutable interface {
@@ -215,4 +219,3 @@ type CollectionViewGridLayoutable interface {
 }
 
 var _ CollectionViewGridLayoutable = (*CollectionViewGridLayout)(nil)
-

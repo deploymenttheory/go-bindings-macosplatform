@@ -15,7 +15,9 @@ type OrderedCollectionDifference struct {
 }
 
 // Unwrap returns the underlying [raw.NSOrderedCollectionDifference].
-func (x *OrderedCollectionDifference) Unwrap() *raw.NSOrderedCollectionDifference[objc.ID] { return x.inner }
+func (x *OrderedCollectionDifference) Unwrap() *raw.NSOrderedCollectionDifference[objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -95,4 +97,3 @@ type OrderedCollectionDifferenceable interface {
 }
 
 var _ OrderedCollectionDifferenceable = (*OrderedCollectionDifference)(nil)
-

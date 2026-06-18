@@ -18,14 +18,14 @@ type MTRContentAppObserverClusterContentAppMessageResponseParams struct {
 }
 
 var (
-	_clsMTRContentAppObserverClusterContentAppMessageResponseParams = _objcClass("MTRContentAppObserverClusterContentAppMessageResponseParams")
+	_clsMTRContentAppObserverClusterContentAppMessageResponseParams                           = _objcClass("MTRContentAppObserverClusterContentAppMessageResponseParams")
 	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelData = objc.RegisterName("data")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelEncodingHint = objc.RegisterName("encodingHint")
-	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetEncodingHint = objc.RegisterName("setEncodingHint:")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelEncodingHint               = objc.RegisterName("encodingHint")
+	_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetEncodingHint            = objc.RegisterName("setEncodingHint:")
 )
 
 func MTRContentAppObserverClusterContentAppMessageResponseParamsFromID(id objc.ID) *MTRContentAppObserverClusterContentAppMessageResponseParams {
@@ -42,7 +42,9 @@ func MTRContentAppObserverClusterContentAppMessageResponseParamsFromID(id objc.I
 func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRContentAppObserverClusterContentAppMessageResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentAppObserverClusterContentAppMessageResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) InitWithRe
 
 func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentAppObserverClusterContentAppMessageResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) SetStatus(
 
 func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentAppObserverClusterContentAppMessageResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) SetData(da
 
 func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentAppObserverClusterContentAppMessageResponseParamsSelEncodingHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRContentAppObserverClusterContentAppMessageResponseParams) SetEncodingHint(encodingHint *foundation.NSString) {
 	o.Ptr().Send(_mTRContentAppObserverClusterContentAppMessageResponseParamsSelSetEncodingHint, encodingHint.Ptr())
 }
-

@@ -31,4 +31,3 @@ func (e MTLFXSpatialScalerColorProcessingMode) String() string {
 		return fmt.Sprintf("MTLFXSpatialScalerColorProcessingMode(%d)", int64(e))
 	}
 }
-

@@ -362,4 +362,3 @@ type CNNMultiaryKernelable interface {
 }
 
 var _ CNNMultiaryKernelable = (*CNNMultiaryKernel)(nil)
-

@@ -180,4 +180,3 @@ type PhysicsWorldable interface {
 }
 
 var _ PhysicsWorldable = (*PhysicsWorld)(nil)
-

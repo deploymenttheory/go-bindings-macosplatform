@@ -47,4 +47,3 @@ type VSAccountManagerResultable interface {
 }
 
 var _ VSAccountManagerResultable = (*VSAccountManagerResult)(nil)
-

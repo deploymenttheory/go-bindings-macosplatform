@@ -84,9 +84,13 @@ func (x *MTRClusterBinding) ReadAttributeClusterRevisionWithParams(params *raw.M
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterBinding) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBinding) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBinding) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBinding) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBindingable is the interface implemented by [MTRClusterBinding], for mocking and DI.
 type MTRClusterBindingable interface {
@@ -102,4 +106,3 @@ type MTRClusterBindingable interface {
 }
 
 var _ MTRClusterBindingable = (*MTRClusterBinding)(nil)
-

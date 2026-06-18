@@ -16,10 +16,10 @@ type MTRUserLabelClusterLabelStruct struct {
 }
 
 var (
-	_clsMTRUserLabelClusterLabelStruct = _objcClass("MTRUserLabelClusterLabelStruct")
-	_mTRUserLabelClusterLabelStructSelLabel = objc.RegisterName("label")
+	_clsMTRUserLabelClusterLabelStruct         = _objcClass("MTRUserLabelClusterLabelStruct")
+	_mTRUserLabelClusterLabelStructSelLabel    = objc.RegisterName("label")
 	_mTRUserLabelClusterLabelStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRUserLabelClusterLabelStructSelValue = objc.RegisterName("value")
+	_mTRUserLabelClusterLabelStructSelValue    = objc.RegisterName("value")
 	_mTRUserLabelClusterLabelStructSelSetValue = objc.RegisterName("setValue:")
 )
 
@@ -35,7 +35,9 @@ func MTRUserLabelClusterLabelStructFromID(id objc.ID) *MTRUserLabelClusterLabelS
 
 func (o *MTRUserLabelClusterLabelStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUserLabelClusterLabelStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRUserLabelClusterLabelStruct) SetLabel(label *foundation.NSString) {
 
 func (o *MTRUserLabelClusterLabelStruct) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUserLabelClusterLabelStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRUserLabelClusterLabelStruct) SetValue(value *foundation.NSString) {
 	o.Ptr().Send(_mTRUserLabelClusterLabelStructSelSetValue, value.Ptr())
 }
-

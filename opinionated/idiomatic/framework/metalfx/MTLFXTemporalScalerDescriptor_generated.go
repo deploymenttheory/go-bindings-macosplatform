@@ -339,4 +339,3 @@ type TemporalScalerDescriptorable interface {
 }
 
 var _ TemporalScalerDescriptorable = (*TemporalScalerDescriptor)(nil)
-

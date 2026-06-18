@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent].
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent)(nil)
-

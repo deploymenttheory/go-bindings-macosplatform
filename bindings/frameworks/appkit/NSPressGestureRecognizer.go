@@ -15,14 +15,14 @@ type NSPressGestureRecognizer struct {
 }
 
 var (
-	_clsNSPressGestureRecognizer = _objcClass("NSPressGestureRecognizer")
-	_nSPressGestureRecognizerSelButtonMask = objc.RegisterName("buttonMask")
-	_nSPressGestureRecognizerSelSetButtonMask = objc.RegisterName("setButtonMask:")
-	_nSPressGestureRecognizerSelMinimumPressDuration = objc.RegisterName("minimumPressDuration")
-	_nSPressGestureRecognizerSelSetMinimumPressDuration = objc.RegisterName("setMinimumPressDuration:")
-	_nSPressGestureRecognizerSelAllowableMovement = objc.RegisterName("allowableMovement")
-	_nSPressGestureRecognizerSelSetAllowableMovement = objc.RegisterName("setAllowableMovement:")
-	_nSPressGestureRecognizerSelNumberOfTouchesRequired = objc.RegisterName("numberOfTouchesRequired")
+	_clsNSPressGestureRecognizer                           = _objcClass("NSPressGestureRecognizer")
+	_nSPressGestureRecognizerSelButtonMask                 = objc.RegisterName("buttonMask")
+	_nSPressGestureRecognizerSelSetButtonMask              = objc.RegisterName("setButtonMask:")
+	_nSPressGestureRecognizerSelMinimumPressDuration       = objc.RegisterName("minimumPressDuration")
+	_nSPressGestureRecognizerSelSetMinimumPressDuration    = objc.RegisterName("setMinimumPressDuration:")
+	_nSPressGestureRecognizerSelAllowableMovement          = objc.RegisterName("allowableMovement")
+	_nSPressGestureRecognizerSelSetAllowableMovement       = objc.RegisterName("setAllowableMovement:")
+	_nSPressGestureRecognizerSelNumberOfTouchesRequired    = objc.RegisterName("numberOfTouchesRequired")
 	_nSPressGestureRecognizerSelSetNumberOfTouchesRequired = objc.RegisterName("setNumberOfTouchesRequired:")
 )
 
@@ -71,4 +71,3 @@ func (o *NSPressGestureRecognizer) NumberOfTouchesRequired() int {
 func (o *NSPressGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
 	o.Ptr().Send(_nSPressGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
 }
-

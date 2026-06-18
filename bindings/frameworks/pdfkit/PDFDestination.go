@@ -17,13 +17,13 @@ type PDFDestination struct {
 }
 
 var (
-	_clsPDFDestination = _objcClass("PDFDestination")
+	_clsPDFDestination                    = _objcClass("PDFDestination")
 	_pDFDestinationSelInitWithPageAtPoint = objc.RegisterName("initWithPage:atPoint:")
-	_pDFDestinationSelCompare = objc.RegisterName("compare:")
-	_pDFDestinationSelPage = objc.RegisterName("page")
-	_pDFDestinationSelPoint = objc.RegisterName("point")
-	_pDFDestinationSelZoom = objc.RegisterName("zoom")
-	_pDFDestinationSelSetZoom = objc.RegisterName("setZoom:")
+	_pDFDestinationSelCompare             = objc.RegisterName("compare:")
+	_pDFDestinationSelPage                = objc.RegisterName("page")
+	_pDFDestinationSelPoint               = objc.RegisterName("point")
+	_pDFDestinationSelZoom                = objc.RegisterName("zoom")
+	_pDFDestinationSelSetZoom             = objc.RegisterName("setZoom:")
 )
 
 func PDFDestinationFromID(id objc.ID) *PDFDestination {
@@ -38,7 +38,9 @@ func PDFDestinationFromID(id objc.ID) *PDFDestination {
 
 func (o *PDFDestination) InitWithPageAtPoint(page *PDFPage, point corefoundation.CGPoint) *PDFDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDestinationSelInitWithPageAtPoint, page.Ptr(), point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDestinationFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *PDFDestination) Compare(destination *PDFDestination) foundation.NSCompa
 
 func (o *PDFDestination) Page() *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFDestinationSelPage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *PDFDestination) Zoom() float64 {
 func (o *PDFDestination) SetZoom(zoom float64) {
 	o.Ptr().Send(_pDFDestinationSelSetZoom, zoom)
 }
-

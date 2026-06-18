@@ -16,7 +16,9 @@ type MTRCommissionerControlClusterCommissionNodeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRCommissionerControlClusterCommissionNodeParams].
-func (x *MTRCommissionerControlClusterCommissionNodeParams) Unwrap() *raw.MTRCommissionerControlClusterCommissionNodeParams { return x.inner }
+func (x *MTRCommissionerControlClusterCommissionNodeParams) Unwrap() *raw.MTRCommissionerControlClusterCommissionNodeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRCommissionerControlClusterCommissionNodeParamsable interface {
 }
 
 var _ MTRCommissionerControlClusterCommissionNodeParamsable = (*MTRCommissionerControlClusterCommissionNodeParams)(nil)
-

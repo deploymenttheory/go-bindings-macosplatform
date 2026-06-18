@@ -16,10 +16,10 @@ type AVAssetCache struct {
 }
 
 var (
-	_clsAVAssetCache = _objcClass("AVAssetCache")
-	_aVAssetCacheSelMediaSelectionOptionsInMediaSelectionGroup = objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:")
-	_aVAssetCacheSelIsPlayableOffline = objc.RegisterName("isPlayableOffline")
-	_aVAssetCacheSelMediaPresentationSettingsForMediaSelectionGroup = objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:")
+	_clsAVAssetCache                                                 = _objcClass("AVAssetCache")
+	_aVAssetCacheSelMediaSelectionOptionsInMediaSelectionGroup       = objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:")
+	_aVAssetCacheSelIsPlayableOffline                                = objc.RegisterName("isPlayableOffline")
+	_aVAssetCacheSelMediaPresentationSettingsForMediaSelectionGroup  = objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:")
 	_aVAssetCacheSelMediaPresentationLanguagesForMediaSelectionGroup = objc.RegisterName("mediaPresentationLanguagesForMediaSelectionGroup:")
 )
 
@@ -36,7 +36,9 @@ func AVAssetCacheFromID(id objc.ID) *AVAssetCache {
 // Returns an array of AVMediaSelectionOptions in an AVMediaSelectionGroup that are available for offline operations, e.g. playback.
 func (o *AVAssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSArray[*AVMediaSelectionOption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetCacheSelMediaSelectionOptionsInMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMediaSelectionOption](_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *AVAssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSel
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVAssetCacheSelMediaPresentationLanguagesForMediaSelectionGroup, mediaSelectionGroup.Ptr())
 	return _ret
 }
-

@@ -16,17 +16,17 @@ type MTRAccessControlClusterAccessControlExtensionChangedEvent struct {
 }
 
 var (
-	_clsMTRAccessControlClusterAccessControlExtensionChangedEvent = _objcClass("MTRAccessControlClusterAccessControlExtensionChangedEvent")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminNodeID = objc.RegisterName("adminNodeID")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetAdminNodeID = objc.RegisterName("setAdminNodeID:")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminPasscodeID = objc.RegisterName("adminPasscodeID")
+	_clsMTRAccessControlClusterAccessControlExtensionChangedEvent                   = _objcClass("MTRAccessControlClusterAccessControlExtensionChangedEvent")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminNodeID        = objc.RegisterName("adminNodeID")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetAdminNodeID     = objc.RegisterName("setAdminNodeID:")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminPasscodeID    = objc.RegisterName("adminPasscodeID")
 	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetAdminPasscodeID = objc.RegisterName("setAdminPasscodeID:")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelChangeType = objc.RegisterName("changeType")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetChangeType = objc.RegisterName("setChangeType:")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelLatestValue = objc.RegisterName("latestValue")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetLatestValue = objc.RegisterName("setLatestValue:")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelChangeType         = objc.RegisterName("changeType")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetChangeType      = objc.RegisterName("setChangeType:")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelLatestValue        = objc.RegisterName("latestValue")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetLatestValue     = objc.RegisterName("setLatestValue:")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelFabricIndex        = objc.RegisterName("fabricIndex")
+	_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetFabricIndex     = objc.RegisterName("setFabricIndex:")
 )
 
 func MTRAccessControlClusterAccessControlExtensionChangedEventFromID(id objc.ID) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
@@ -41,7 +41,9 @@ func MTRAccessControlClusterAccessControlExtensionChangedEventFromID(id objc.ID)
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminNode
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminPasscodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionChangedEventSelAdminPasscodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetAdminPass
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) ChangeType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionChangedEventSelChangeType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetChangeTyp
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlExtensionStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionChangedEventSelLatestValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAccessControlClusterAccessControlExtensionStructFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetLatestVal
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterAccessControlExtensionChangedEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccessControlClusterAccessControlExtensionChangedEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccessControlClusterAccessControlExtensionChangedEventSelSetFabricIndex, fabricIndex.Ptr())
 }
-

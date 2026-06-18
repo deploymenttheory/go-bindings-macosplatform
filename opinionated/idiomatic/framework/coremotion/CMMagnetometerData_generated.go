@@ -49,4 +49,3 @@ type MagnetometerDataable interface {
 }
 
 var _ MagnetometerDataable = (*MagnetometerData)(nil)
-

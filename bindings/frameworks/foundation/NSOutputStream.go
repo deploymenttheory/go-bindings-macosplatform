@@ -15,17 +15,17 @@ type NSOutputStream struct {
 }
 
 var (
-	_clsNSOutputStream = _objcClass("NSOutputStream")
-	_nSOutputStreamSelWriteMaxLength = objc.RegisterName("write:maxLength:")
-	_nSOutputStreamSelInitToMemory = objc.RegisterName("initToMemory")
-	_nSOutputStreamSelInitToBufferCapacity = objc.RegisterName("initToBuffer:capacity:")
-	_nSOutputStreamSelInitWithURLAppend = objc.RegisterName("initWithURL:append:")
-	_nSOutputStreamSelHasSpaceAvailable = objc.RegisterName("hasSpaceAvailable")
-	_nSOutputStreamSelInitToFileAtPathAppend = objc.RegisterName("initToFileAtPath:append:")
-	_nSOutputStreamSelOutputStreamToMemory = objc.RegisterName("outputStreamToMemory")
-	_nSOutputStreamSelOutputStreamToBufferCapacity = objc.RegisterName("outputStreamToBuffer:capacity:")
+	_clsNSOutputStream                               = _objcClass("NSOutputStream")
+	_nSOutputStreamSelWriteMaxLength                 = objc.RegisterName("write:maxLength:")
+	_nSOutputStreamSelInitToMemory                   = objc.RegisterName("initToMemory")
+	_nSOutputStreamSelInitToBufferCapacity           = objc.RegisterName("initToBuffer:capacity:")
+	_nSOutputStreamSelInitWithURLAppend              = objc.RegisterName("initWithURL:append:")
+	_nSOutputStreamSelHasSpaceAvailable              = objc.RegisterName("hasSpaceAvailable")
+	_nSOutputStreamSelInitToFileAtPathAppend         = objc.RegisterName("initToFileAtPath:append:")
+	_nSOutputStreamSelOutputStreamToMemory           = objc.RegisterName("outputStreamToMemory")
+	_nSOutputStreamSelOutputStreamToBufferCapacity   = objc.RegisterName("outputStreamToBuffer:capacity:")
 	_nSOutputStreamSelOutputStreamToFileAtPathAppend = objc.RegisterName("outputStreamToFileAtPath:append:")
-	_nSOutputStreamSelOutputStreamWithURLAppend = objc.RegisterName("outputStreamWithURL:append:")
+	_nSOutputStreamSelOutputStreamWithURLAppend      = objc.RegisterName("outputStreamWithURL:append:")
 )
 
 func NSOutputStreamFromID(id objc.ID) *NSOutputStream {
@@ -45,19 +45,25 @@ func (o *NSOutputStream) WriteMaxLength(buffer *uint8, len_ uint) int {
 
 func (o *NSOutputStream) InitToMemory() *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToMemory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func (o *NSOutputStream) InitToBufferCapacity(buffer *uint8, capacity uint) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToBufferCapacity, buffer, capacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func (o *NSOutputStream) InitWithURLAppend(url *NSURL, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitWithURLAppend, url.Ptr(), shouldAppend)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
@@ -68,31 +74,40 @@ func (o *NSOutputStream) HasSpaceAvailable() bool {
 
 func (o *NSOutputStream) InitToFileAtPathAppend(path *NSString, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOutputStreamSelInitToFileAtPathAppend, path.Ptr(), shouldAppend)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func NSOutputStreamOutputStreamToMemory() *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToMemory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func NSOutputStreamOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToBufferCapacity, buffer, capacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func NSOutputStreamOutputStreamToFileAtPathAppend(path *NSString, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamToFileAtPathAppend, path.Ptr(), shouldAppend)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
 
 func NSOutputStreamOutputStreamWithURLAppend(url *NSURL, shouldAppend bool) *NSOutputStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOutputStream), _nSOutputStreamSelOutputStreamWithURLAppend, url.Ptr(), shouldAppend)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOutputStreamFromID(_ret)
 }
-

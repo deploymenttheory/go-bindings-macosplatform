@@ -18,15 +18,15 @@ type AVMetadataObject struct {
 }
 
 var (
-	_clsAVMetadataObject = _objcClass("AVMetadataObject")
-	_aVMetadataObjectSelTime = objc.RegisterName("time")
-	_aVMetadataObjectSelDuration = objc.RegisterName("duration")
-	_aVMetadataObjectSelBounds = objc.RegisterName("bounds")
-	_aVMetadataObjectSelType = objc.RegisterName("type")
-	_aVMetadataObjectSelGroupID = objc.RegisterName("groupID")
-	_aVMetadataObjectSelObjectID = objc.RegisterName("objectID")
+	_clsAVMetadataObject                        = _objcClass("AVMetadataObject")
+	_aVMetadataObjectSelTime                    = objc.RegisterName("time")
+	_aVMetadataObjectSelDuration                = objc.RegisterName("duration")
+	_aVMetadataObjectSelBounds                  = objc.RegisterName("bounds")
+	_aVMetadataObjectSelType                    = objc.RegisterName("type")
+	_aVMetadataObjectSelGroupID                 = objc.RegisterName("groupID")
+	_aVMetadataObjectSelObjectID                = objc.RegisterName("objectID")
 	_aVMetadataObjectSelCinematicVideoFocusMode = objc.RegisterName("cinematicVideoFocusMode")
-	_aVMetadataObjectSelIsFixedFocus = objc.RegisterName("isFixedFocus")
+	_aVMetadataObjectSelIsFixedFocus            = objc.RegisterName("isFixedFocus")
 )
 
 func AVMetadataObjectFromID(id objc.ID) *AVMetadataObject {
@@ -60,23 +60,25 @@ func (o *AVMetadataObject) Bounds() corefoundation.CGRect {
 // @property type @abstract An identifier for the metadata object. @discussion The value of this property is an AVMetadataObjectType representing the type of the metadata object. Clients inspecting a collection of metadata objects can use this property to filter objects with a matching type.
 func (o *AVMetadataObject) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataObjectSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// An identifier associated with a metadata object used to group it with other metadata objects belonging to a common parent. When presented with a collection of ``AVMetadataObject`` instances of different types, you may use the objects' ``groupID`` to combine them into groups. For example, a human body and face belonging to the same person have the same ``groupID``.  If an object's ``groupID`` property is set to -1, it is invalid. When set to a value of >=0, it is unique across all object groups.
+// An identifier associated with a metadata object used to group it with other metadata objects belonging to a common parent. When presented with a collection of “AVMetadataObject“ instances of different types, you may use the objects' “groupID“ to combine them into groups. For example, a human body and face belonging to the same person have the same “groupID“.  If an object's “groupID“ property is set to -1, it is invalid. When set to a value of >=0, it is unique across all object groups.
 func (o *AVMetadataObject) GroupID() int {
 	_ret := objc.Send[int](o.Ptr(), _aVMetadataObjectSelGroupID)
 	return _ret
 }
 
-// A unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an ``AVCaptureMetadataOutput``, each newly detected object that enters the scene is assigned a unique identifier. ``objectID``s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new ``objectID``.
+// A unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
 func (o *AVMetadataObject) ObjectID() int {
 	_ret := objc.Send[int](o.Ptr(), _aVMetadataObjectSelObjectID)
 	return _ret
 }
 
-// The current focus mode when an object is detected during a Cinematic Video recording. Default is ``AVCaptureCinematicVideoFocusMode/AVCaptureCinematicVideoFocusModeNone``.
+// The current focus mode when an object is detected during a Cinematic Video recording. Default is “AVCaptureCinematicVideoFocusMode/AVCaptureCinematicVideoFocusModeNone“.
 func (o *AVMetadataObject) CinematicVideoFocusMode() AVCaptureCinematicVideoFocusMode {
 	_ret := objc.Send[AVCaptureCinematicVideoFocusMode](o.Ptr(), _aVMetadataObjectSelCinematicVideoFocusMode)
 	return _ret
@@ -87,4 +89,3 @@ func (o *AVMetadataObject) IsFixedFocus() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMetadataObjectSelIsFixedFocus)
 	return _ret
 }
-

@@ -18,10 +18,10 @@ type MDLNoiseTexture struct {
 }
 
 var (
-	_clsMDLNoiseTexture = _objcClass("MDLNoiseTexture")
-	_mDLNoiseTextureSelInitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding = objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:")
+	_clsMDLNoiseTexture                                                                                       = _objcClass("MDLNoiseTexture")
+	_mDLNoiseTextureSelInitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding                      = objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:")
 	_mDLNoiseTextureSelInitScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale = objc.RegisterName("initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:")
-	_mDLNoiseTextureSelInitCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding = objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:")
+	_mDLNoiseTextureSelInitCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding                     = objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:")
 )
 
 func MDLNoiseTextureFromID(id objc.ID) *MDLNoiseTexture {
@@ -37,21 +37,26 @@ func MDLNoiseTextureFromID(id objc.ID) *MDLNoiseTexture {
 // Create a four channel texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth.
 func (o *MDLNoiseTexture) InitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name *foundation.NSString, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *MDLNoiseTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNoiseTextureSelInitVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding, smoothness, name.Ptr(), textureDimensions, channelEncoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLNoiseTextureFromID(_ret)
 }
 
 // Create a texture containing colored noise. The noise texture is tileable with itself. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth. @param grayscale if YES, RGB and A will all be the same. If no, RGB and A will all be different. A is not pre-multiplied, because the intent is that if you read a texel in a shader, all four values will be exactly the same value if grayscale, or four different, uncorrelated values if not grayscale.
 func (o *MDLNoiseTexture) InitScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name *foundation.NSString, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *MDLNoiseTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNoiseTextureSelInitScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale, smoothness, name.Ptr(), textureDimensions, channelCount, channelEncoding, grayscale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLNoiseTextureFromID(_ret)
 }
 
 // Create a texture containing cellular noise. @param frequency How large the cells will be
 func (o *MDLNoiseTexture) InitCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name *foundation.NSString, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *MDLNoiseTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLNoiseTextureSelInitCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding, frequency, name.Ptr(), textureDimensions, channelEncoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLNoiseTextureFromID(_ret)
 }
-

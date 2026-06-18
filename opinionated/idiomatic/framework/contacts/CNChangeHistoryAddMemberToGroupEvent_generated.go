@@ -15,7 +15,9 @@ type ChangeHistoryAddMemberToGroupEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryAddMemberToGroupEvent].
-func (x *ChangeHistoryAddMemberToGroupEvent) Unwrap() *raw.CNChangeHistoryAddMemberToGroupEvent { return x.inner }
+func (x *ChangeHistoryAddMemberToGroupEvent) Unwrap() *raw.CNChangeHistoryAddMemberToGroupEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,7 +55,9 @@ func (x *ChangeHistoryAddMemberToGroupEvent) Group() *Group {
 	return &Group{inner: _r}
 }
 
-func (x *ChangeHistoryAddMemberToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryAddMemberToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryAddMemberToGroupEventable is the interface implemented by [ChangeHistoryAddMemberToGroupEvent], for mocking and DI.
 type ChangeHistoryAddMemberToGroupEventable interface {
@@ -63,4 +67,3 @@ type ChangeHistoryAddMemberToGroupEventable interface {
 }
 
 var _ ChangeHistoryAddMemberToGroupEventable = (*ChangeHistoryAddMemberToGroupEvent)(nil)
-

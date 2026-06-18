@@ -16,12 +16,12 @@ type TKTLVRecord struct {
 }
 
 var (
-	_clsTKTLVRecord = _objcClass("TKTLVRecord")
-	_tKTLVRecordSelRecordFromData = objc.RegisterName("recordFromData:")
+	_clsTKTLVRecord                          = _objcClass("TKTLVRecord")
+	_tKTLVRecordSelRecordFromData            = objc.RegisterName("recordFromData:")
 	_tKTLVRecordSelSequenceOfRecordsFromData = objc.RegisterName("sequenceOfRecordsFromData:")
-	_tKTLVRecordSelTag = objc.RegisterName("tag")
-	_tKTLVRecordSelValue = objc.RegisterName("value")
-	_tKTLVRecordSelData = objc.RegisterName("data")
+	_tKTLVRecordSelTag                       = objc.RegisterName("tag")
+	_tKTLVRecordSelValue                     = objc.RegisterName("value")
+	_tKTLVRecordSelData                      = objc.RegisterName("data")
 )
 
 func TKTLVRecordFromID(id objc.ID) *TKTLVRecord {
@@ -37,14 +37,18 @@ func TKTLVRecordFromID(id objc.ID) *TKTLVRecord {
 // Parses TLV record from data block @param data Data block containing serialized form of TLV record. @return newly parsed record instance or nil if data do not represent valid record.
 func TKTLVRecordRecordFromData(data *foundation.NSData) *TKTLVRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKTLVRecord), _tKTLVRecordSelRecordFromData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTLVRecordFromID(_ret)
 }
 
 // Parses sequence of TLV records from data block. The amount of records is determined by the length of input data block. @param data Data block containing zero or more serialized forms of TLV record. @return An array of TLV record instances parsed from input data block or nil if data do not form valid TLV record sequence.
 func TKTLVRecordSequenceOfRecordsFromData(data *foundation.NSData) *foundation.NSArray[*TKTLVRecord] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsTKTLVRecord), _tKTLVRecordSelSequenceOfRecordsFromData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*TKTLVRecord](_ret)
 }
 
@@ -57,14 +61,17 @@ func (o *TKTLVRecord) Tag() uint64 {
 // Value field of the record.
 func (o *TKTLVRecord) Value() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTLVRecordSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Data object containing whole encoded record, including tag, length and value.
 func (o *TKTLVRecord) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTLVRecordSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

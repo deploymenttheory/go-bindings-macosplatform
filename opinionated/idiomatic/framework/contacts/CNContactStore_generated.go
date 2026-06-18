@@ -134,4 +134,3 @@ type ContactStoreable interface {
 }
 
 var _ ContactStoreable = (*ContactStore)(nil)
-

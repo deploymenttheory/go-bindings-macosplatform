@@ -56,16 +56,24 @@ func KIOSurfacePlaneSize() objc.ID { return purego.CFConstant(raw.KIOSurfacePlan
 func KIOSurfacePlaneBase() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBase()) }
 
 // KIOSurfacePlaneBitsPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBitsPerElement as an objc.ID.
-func KIOSurfacePlaneBitsPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBitsPerElement()) }
+func KIOSurfacePlaneBitsPerElement() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneBitsPerElement())
+}
 
 // KIOSurfacePlaneBytesPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBytesPerElement as an objc.ID.
-func KIOSurfacePlaneBytesPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBytesPerElement()) }
+func KIOSurfacePlaneBytesPerElement() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneBytesPerElement())
+}
 
 // KIOSurfacePlaneElementWidth returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementWidth as an objc.ID.
-func KIOSurfacePlaneElementWidth() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneElementWidth()) }
+func KIOSurfacePlaneElementWidth() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneElementWidth())
+}
 
 // KIOSurfacePlaneElementHeight returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementHeight as an objc.ID.
-func KIOSurfacePlaneElementHeight() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneElementHeight()) }
+func KIOSurfacePlaneElementHeight() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneElementHeight())
+}
 
 // KIOSurfaceCacheMode returns the value of the CoreFoundation reference constant kIOSurfaceCacheMode as an objc.ID.
 func KIOSurfaceCacheMode() objc.ID { return purego.CFConstant(raw.KIOSurfaceCacheMode()) }
@@ -77,25 +85,37 @@ func KIOSurfaceIsGlobal() objc.ID { return purego.CFConstant(raw.KIOSurfaceIsGlo
 func KIOSurfacePixelFormat() objc.ID { return purego.CFConstant(raw.KIOSurfacePixelFormat()) }
 
 // KIOSurfacePixelSizeCastingAllowed returns the value of the CoreFoundation reference constant kIOSurfacePixelSizeCastingAllowed as an objc.ID.
-func KIOSurfacePixelSizeCastingAllowed() objc.ID { return purego.CFConstant(raw.KIOSurfacePixelSizeCastingAllowed()) }
+func KIOSurfacePixelSizeCastingAllowed() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePixelSizeCastingAllowed())
+}
 
 // KIOSurfacePlaneComponentBitDepths returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitDepths as an objc.ID.
-func KIOSurfacePlaneComponentBitDepths() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentBitDepths()) }
+func KIOSurfacePlaneComponentBitDepths() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneComponentBitDepths())
+}
 
 // KIOSurfacePlaneComponentBitOffsets returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitOffsets as an objc.ID.
-func KIOSurfacePlaneComponentBitOffsets() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentBitOffsets()) }
+func KIOSurfacePlaneComponentBitOffsets() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneComponentBitOffsets())
+}
 
 // KIOSurfaceName returns the value of the CoreFoundation reference constant kIOSurfaceName as an objc.ID.
 func KIOSurfaceName() objc.ID { return purego.CFConstant(raw.KIOSurfaceName()) }
 
 // KIOSurfacePlaneComponentNames returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentNames as an objc.ID.
-func KIOSurfacePlaneComponentNames() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentNames()) }
+func KIOSurfacePlaneComponentNames() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneComponentNames())
+}
 
 // KIOSurfacePlaneComponentTypes returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentTypes as an objc.ID.
-func KIOSurfacePlaneComponentTypes() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentTypes()) }
+func KIOSurfacePlaneComponentTypes() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneComponentTypes())
+}
 
 // KIOSurfacePlaneComponentRanges returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentRanges as an objc.ID.
-func KIOSurfacePlaneComponentRanges() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneComponentRanges()) }
+func KIOSurfacePlaneComponentRanges() objc.ID {
+	return purego.CFConstant(raw.KIOSurfacePlaneComponentRanges())
+}
 
 // KIOSurfaceSubsampling returns the value of the CoreFoundation reference constant kIOSurfaceSubsampling as an objc.ID.
 func KIOSurfaceSubsampling() objc.ID { return purego.CFConstant(raw.KIOSurfaceSubsampling()) }
@@ -108,4 +128,3 @@ func KIOSurfaceICCProfile() objc.ID { return purego.CFConstant(raw.KIOSurfaceICC
 
 // KIOSurfaceContentHeadroom returns the value of the CoreFoundation reference constant kIOSurfaceContentHeadroom as an objc.ID.
 func KIOSurfaceContentHeadroom() objc.ID { return purego.CFConstant(raw.KIOSurfaceContentHeadroom()) }
-

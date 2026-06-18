@@ -12,57 +12,57 @@ import (
 )
 
 var (
-	_fnIOSurfaceAlignProperty func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceAllowsPixelSizeCasting func(unsafe.Pointer) uint8
-	_fnIOSurfaceCopyAllValues func(unsafe.Pointer) unsafe.Pointer
-	_fnIOSurfaceCopyValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnIOSurfaceCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnIOSurfaceCreateMachPort func(unsafe.Pointer) uint
-	_fnIOSurfaceCreateXPCObject func(unsafe.Pointer) unsafe.Pointer
-	_fnIOSurfaceDecrementUseCount func(unsafe.Pointer)
-	_fnIOSurfaceGetAllocSize func(unsafe.Pointer) uint
-	_fnIOSurfaceGetBaseAddress func(unsafe.Pointer) unsafe.Pointer
-	_fnIOSurfaceGetBaseAddressOfPlane func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnIOSurfaceGetBitDepthOfComponentOfPlane func(unsafe.Pointer, uint, uint) uint
+	_fnIOSurfaceAlignProperty                  func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceAllowsPixelSizeCasting         func(unsafe.Pointer) uint8
+	_fnIOSurfaceCopyAllValues                  func(unsafe.Pointer) unsafe.Pointer
+	_fnIOSurfaceCopyValue                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOSurfaceCreate                         func(unsafe.Pointer) unsafe.Pointer
+	_fnIOSurfaceCreateMachPort                 func(unsafe.Pointer) uint
+	_fnIOSurfaceCreateXPCObject                func(unsafe.Pointer) unsafe.Pointer
+	_fnIOSurfaceDecrementUseCount              func(unsafe.Pointer)
+	_fnIOSurfaceGetAllocSize                   func(unsafe.Pointer) uint
+	_fnIOSurfaceGetBaseAddress                 func(unsafe.Pointer) unsafe.Pointer
+	_fnIOSurfaceGetBaseAddressOfPlane          func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnIOSurfaceGetBitDepthOfComponentOfPlane  func(unsafe.Pointer, uint, uint) uint
 	_fnIOSurfaceGetBitOffsetOfComponentOfPlane func(unsafe.Pointer, uint, uint) uint
-	_fnIOSurfaceGetBytesPerElement func(unsafe.Pointer) uint
-	_fnIOSurfaceGetBytesPerElementOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetBytesPerRow func(unsafe.Pointer) uint
-	_fnIOSurfaceGetBytesPerRowOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetElementHeight func(unsafe.Pointer) uint
-	_fnIOSurfaceGetElementHeightOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetElementWidth func(unsafe.Pointer) uint
-	_fnIOSurfaceGetElementWidthOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetHeight func(unsafe.Pointer) uint
-	_fnIOSurfaceGetHeightOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetID func(unsafe.Pointer) uint32
-	_fnIOSurfaceGetNameOfComponentOfPlane func(unsafe.Pointer, uint, uint) IOSurfaceComponentName
-	_fnIOSurfaceGetNumberOfComponentsOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceGetPixelFormat func(unsafe.Pointer) uint
-	_fnIOSurfaceGetPlaneCount func(unsafe.Pointer) uint
-	_fnIOSurfaceGetPropertyAlignment func(unsafe.Pointer) uint
-	_fnIOSurfaceGetPropertyMaximum func(unsafe.Pointer) uint
-	_fnIOSurfaceGetRangeOfComponentOfPlane func(unsafe.Pointer, uint, uint) IOSurfaceComponentRange
-	_fnIOSurfaceGetSeed func(unsafe.Pointer) uint32
-	_fnIOSurfaceGetSubsampling func(unsafe.Pointer) IOSurfaceSubsampling
-	_fnIOSurfaceGetTypeID func() uint
-	_fnIOSurfaceGetTypeOfComponentOfPlane func(unsafe.Pointer, uint, uint) IOSurfaceComponentType
-	_fnIOSurfaceGetUseCount func(unsafe.Pointer) int32
-	_fnIOSurfaceGetWidth func(unsafe.Pointer) uint
-	_fnIOSurfaceGetWidthOfPlane func(unsafe.Pointer, uint) uint
-	_fnIOSurfaceIncrementUseCount func(unsafe.Pointer)
-	_fnIOSurfaceIsInUse func(unsafe.Pointer) uint8
-	_fnIOSurfaceLock func(unsafe.Pointer, IOSurfaceLockOptions, *uint32) int
-	_fnIOSurfaceLookup func(uint32) unsafe.Pointer
-	_fnIOSurfaceLookupFromMachPort func(uint) unsafe.Pointer
-	_fnIOSurfaceLookupFromXPCObject func(objc.ID) unsafe.Pointer
-	_fnIOSurfaceRemoveAllValues func(unsafe.Pointer)
-	_fnIOSurfaceRemoveValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnIOSurfaceSetOwnershipIdentity func(unsafe.Pointer, uint, int, uint32) int
-	_fnIOSurfaceSetPurgeable func(unsafe.Pointer, uint32, *uint32) int
-	_fnIOSurfaceSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnIOSurfaceSetValues func(unsafe.Pointer, unsafe.Pointer)
-	_fnIOSurfaceUnlock func(unsafe.Pointer, IOSurfaceLockOptions, *uint32) int
+	_fnIOSurfaceGetBytesPerElement             func(unsafe.Pointer) uint
+	_fnIOSurfaceGetBytesPerElementOfPlane      func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetBytesPerRow                 func(unsafe.Pointer) uint
+	_fnIOSurfaceGetBytesPerRowOfPlane          func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetElementHeight               func(unsafe.Pointer) uint
+	_fnIOSurfaceGetElementHeightOfPlane        func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetElementWidth                func(unsafe.Pointer) uint
+	_fnIOSurfaceGetElementWidthOfPlane         func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetHeight                      func(unsafe.Pointer) uint
+	_fnIOSurfaceGetHeightOfPlane               func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetID                          func(unsafe.Pointer) uint32
+	_fnIOSurfaceGetNameOfComponentOfPlane      func(unsafe.Pointer, uint, uint) IOSurfaceComponentName
+	_fnIOSurfaceGetNumberOfComponentsOfPlane   func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceGetPixelFormat                 func(unsafe.Pointer) uint
+	_fnIOSurfaceGetPlaneCount                  func(unsafe.Pointer) uint
+	_fnIOSurfaceGetPropertyAlignment           func(unsafe.Pointer) uint
+	_fnIOSurfaceGetPropertyMaximum             func(unsafe.Pointer) uint
+	_fnIOSurfaceGetRangeOfComponentOfPlane     func(unsafe.Pointer, uint, uint) IOSurfaceComponentRange
+	_fnIOSurfaceGetSeed                        func(unsafe.Pointer) uint32
+	_fnIOSurfaceGetSubsampling                 func(unsafe.Pointer) IOSurfaceSubsampling
+	_fnIOSurfaceGetTypeID                      func() uint
+	_fnIOSurfaceGetTypeOfComponentOfPlane      func(unsafe.Pointer, uint, uint) IOSurfaceComponentType
+	_fnIOSurfaceGetUseCount                    func(unsafe.Pointer) int32
+	_fnIOSurfaceGetWidth                       func(unsafe.Pointer) uint
+	_fnIOSurfaceGetWidthOfPlane                func(unsafe.Pointer, uint) uint
+	_fnIOSurfaceIncrementUseCount              func(unsafe.Pointer)
+	_fnIOSurfaceIsInUse                        func(unsafe.Pointer) uint8
+	_fnIOSurfaceLock                           func(unsafe.Pointer, IOSurfaceLockOptions, *uint32) int
+	_fnIOSurfaceLookup                         func(uint32) unsafe.Pointer
+	_fnIOSurfaceLookupFromMachPort             func(uint) unsafe.Pointer
+	_fnIOSurfaceLookupFromXPCObject            func(objc.ID) unsafe.Pointer
+	_fnIOSurfaceRemoveAllValues                func(unsafe.Pointer)
+	_fnIOSurfaceRemoveValue                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnIOSurfaceSetOwnershipIdentity           func(unsafe.Pointer, uint, int, uint32) int
+	_fnIOSurfaceSetPurgeable                   func(unsafe.Pointer, uint32, *uint32) int
+	_fnIOSurfaceSetValue                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnIOSurfaceSetValues                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnIOSurfaceUnlock                         func(unsafe.Pointer, IOSurfaceLockOptions, *uint32) int
 )
 
 func IOSurfaceAlignProperty(property unsafe.Pointer, value uint) uint {
@@ -268,4 +268,3 @@ func IOSurfaceSetValues(buffer unsafe.Pointer, keysAndValues unsafe.Pointer) {
 func IOSurfaceUnlock(buffer unsafe.Pointer, options IOSurfaceLockOptions, seed *uint32) int {
 	return _fnIOSurfaceUnlock(buffer, options, seed)
 }
-

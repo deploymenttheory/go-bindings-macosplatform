@@ -15,7 +15,7 @@ type NSSetCommand struct {
 }
 
 var (
-	_clsNSSetCommand = _objcClass("NSSetCommand")
+	_clsNSSetCommand             = _objcClass("NSSetCommand")
 	_nSSetCommandSelKeySpecifier = objc.RegisterName("keySpecifier")
 )
 
@@ -31,7 +31,8 @@ func NSSetCommandFromID(id objc.ID) *NSSetCommand {
 
 func (o *NSSetCommand) KeySpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSetCommandSelKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
-

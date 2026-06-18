@@ -18,15 +18,15 @@ type VNGeneratePersonSegmentationRequest struct {
 }
 
 var (
-	_clsVNGeneratePersonSegmentationRequest = _objcClass("VNGeneratePersonSegmentationRequest")
-	_vNGeneratePersonSegmentationRequestSelNew = objc.RegisterName("new")
-	_vNGeneratePersonSegmentationRequestSelInit = objc.RegisterName("init")
-	_vNGeneratePersonSegmentationRequestSelInitWithCompletionHandler = objc.RegisterName("initWithCompletionHandler:")
+	_clsVNGeneratePersonSegmentationRequest                                          = _objcClass("VNGeneratePersonSegmentationRequest")
+	_vNGeneratePersonSegmentationRequestSelNew                                       = objc.RegisterName("new")
+	_vNGeneratePersonSegmentationRequestSelInit                                      = objc.RegisterName("init")
+	_vNGeneratePersonSegmentationRequestSelInitWithCompletionHandler                 = objc.RegisterName("initWithCompletionHandler:")
 	_vNGeneratePersonSegmentationRequestSelSupportedOutputPixelFormatsAndReturnError = objc.RegisterName("supportedOutputPixelFormatsAndReturnError:")
-	_vNGeneratePersonSegmentationRequestSelQualityLevel = objc.RegisterName("qualityLevel")
-	_vNGeneratePersonSegmentationRequestSelSetQualityLevel = objc.RegisterName("setQualityLevel:")
-	_vNGeneratePersonSegmentationRequestSelOutputPixelFormat = objc.RegisterName("outputPixelFormat")
-	_vNGeneratePersonSegmentationRequestSelSetOutputPixelFormat = objc.RegisterName("setOutputPixelFormat:")
+	_vNGeneratePersonSegmentationRequestSelQualityLevel                              = objc.RegisterName("qualityLevel")
+	_vNGeneratePersonSegmentationRequestSelSetQualityLevel                           = objc.RegisterName("setQualityLevel:")
+	_vNGeneratePersonSegmentationRequestSelOutputPixelFormat                         = objc.RegisterName("outputPixelFormat")
+	_vNGeneratePersonSegmentationRequestSelSetOutputPixelFormat                      = objc.RegisterName("setOutputPixelFormat:")
 )
 
 func VNGeneratePersonSegmentationRequestFromID(id objc.ID) *VNGeneratePersonSegmentationRequest {
@@ -46,7 +46,9 @@ func VNGeneratePersonSegmentationRequestNew() *VNGeneratePersonSegmentationReque
 
 func (o *VNGeneratePersonSegmentationRequest) Init() *VNGeneratePersonSegmentationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNGeneratePersonSegmentationRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNGeneratePersonSegmentationRequestFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *VNGeneratePersonSegmentationRequest) InitWithCompletionHandler(completi
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNGeneratePersonSegmentationRequestSelInitWithCompletionHandler, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNGeneratePersonSegmentationRequestFromID(_ret)
 }
 
@@ -95,4 +99,3 @@ func (o *VNGeneratePersonSegmentationRequest) OutputPixelFormat() uint {
 func (o *VNGeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelFormat uint) {
 	o.Ptr().Send(_vNGeneratePersonSegmentationRequestSelSetOutputPixelFormat, outputPixelFormat)
 }
-

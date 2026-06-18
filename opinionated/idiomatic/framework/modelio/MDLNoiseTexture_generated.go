@@ -74,4 +74,3 @@ type NoiseTextureable interface {
 }
 
 var _ NoiseTextureable = (*NoiseTexture)(nil)
-

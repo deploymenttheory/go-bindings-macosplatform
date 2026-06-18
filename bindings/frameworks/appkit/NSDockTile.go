@@ -17,16 +17,16 @@ type NSDockTile struct {
 }
 
 var (
-	_clsNSDockTile = _objcClass("NSDockTile")
-	_nSDockTileSelDisplay = objc.RegisterName("display")
-	_nSDockTileSelSize = objc.RegisterName("size")
-	_nSDockTileSelContentView = objc.RegisterName("contentView")
-	_nSDockTileSelSetContentView = objc.RegisterName("setContentView:")
-	_nSDockTileSelShowsApplicationBadge = objc.RegisterName("showsApplicationBadge")
+	_clsNSDockTile                         = _objcClass("NSDockTile")
+	_nSDockTileSelDisplay                  = objc.RegisterName("display")
+	_nSDockTileSelSize                     = objc.RegisterName("size")
+	_nSDockTileSelContentView              = objc.RegisterName("contentView")
+	_nSDockTileSelSetContentView           = objc.RegisterName("setContentView:")
+	_nSDockTileSelShowsApplicationBadge    = objc.RegisterName("showsApplicationBadge")
 	_nSDockTileSelSetShowsApplicationBadge = objc.RegisterName("setShowsApplicationBadge:")
-	_nSDockTileSelBadgeLabel = objc.RegisterName("badgeLabel")
-	_nSDockTileSelSetBadgeLabel = objc.RegisterName("setBadgeLabel:")
-	_nSDockTileSelOwner = objc.RegisterName("owner")
+	_nSDockTileSelBadgeLabel               = objc.RegisterName("badgeLabel")
+	_nSDockTileSelSetBadgeLabel            = objc.RegisterName("setBadgeLabel:")
+	_nSDockTileSelOwner                    = objc.RegisterName("owner")
 )
 
 func NSDockTileFromID(id objc.ID) *NSDockTile {
@@ -50,7 +50,9 @@ func (o *NSDockTile) Size() corefoundation.CGSize {
 
 func (o *NSDockTile) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDockTileSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *NSDockTile) SetShowsApplicationBadge(showsApplicationBadge bool) {
 
 func (o *NSDockTile) BadgeLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDockTileSelBadgeLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *NSDockTile) Owner() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDockTileSelOwner)
 	return _ret
 }
-

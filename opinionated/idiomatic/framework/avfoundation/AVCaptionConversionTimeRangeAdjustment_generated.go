@@ -16,7 +16,9 @@ type CaptionConversionTimeRangeAdjustment struct {
 }
 
 // Unwrap returns the underlying [raw.AVCaptionConversionTimeRangeAdjustment].
-func (x *CaptionConversionTimeRangeAdjustment) Unwrap() *raw.AVCaptionConversionTimeRangeAdjustment { return x.inner }
+func (x *CaptionConversionTimeRangeAdjustment) Unwrap() *raw.AVCaptionConversionTimeRangeAdjustment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,7 +48,9 @@ func (x *CaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTime
 	return x.inner.DurationOffset()
 }
 
-func (x *CaptionConversionTimeRangeAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment { return &x.inner.AVCaptionConversionAdjustment }
+func (x *CaptionConversionTimeRangeAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment {
+	return &x.inner.AVCaptionConversionAdjustment
+}
 
 // CaptionConversionTimeRangeAdjustmentable is the interface implemented by [CaptionConversionTimeRangeAdjustment], for mocking and DI.
 type CaptionConversionTimeRangeAdjustmentable interface {
@@ -56,4 +60,3 @@ type CaptionConversionTimeRangeAdjustmentable interface {
 }
 
 var _ CaptionConversionTimeRangeAdjustmentable = (*CaptionConversionTimeRangeAdjustment)(nil)
-

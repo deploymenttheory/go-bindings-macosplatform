@@ -61,8 +61,8 @@ func (e BAAssetPackStatus) String() string {
 type BAContentRequest int64
 
 const (
-	BAContentRequestInstall BAContentRequest = 1
-	BAContentRequestUpdate BAContentRequest = 2
+	BAContentRequestInstall  BAContentRequest = 1
+	BAContentRequestUpdate   BAContentRequest = 2
 	BAContentRequestPeriodic BAContentRequest = 3
 )
 
@@ -82,11 +82,11 @@ func (e BAContentRequest) String() string {
 type BADownloadState int64
 
 const (
-	BADownloadStateFailed BADownloadState = -1
-	BADownloadStateCreated BADownloadState = 0
-	BADownloadStateWaiting BADownloadState = 1
+	BADownloadStateFailed      BADownloadState = -1
+	BADownloadStateCreated     BADownloadState = 0
+	BADownloadStateWaiting     BADownloadState = 1
 	BADownloadStateDownloading BADownloadState = 2
-	BADownloadStateFinished BADownloadState = 3
+	BADownloadStateFinished    BADownloadState = 3
 )
 
 func (e BADownloadState) String() string {
@@ -105,4 +105,3 @@ func (e BADownloadState) String() string {
 		return fmt.Sprintf("BADownloadState(%d)", int64(e))
 	}
 }
-

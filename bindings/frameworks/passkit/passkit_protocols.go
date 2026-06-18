@@ -31,4 +31,3 @@ type PKVehicleConnectionDelegate interface {
 	SessionDidChangeConnectionState(newState PKVehicleConnectionSessionConnectionState)
 	SessionDidReceiveData(data *foundation.NSData)
 }
-

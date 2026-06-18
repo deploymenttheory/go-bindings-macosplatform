@@ -19,7 +19,9 @@ type MTRBaseClusterGeneralDiagnostics struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterGeneralDiagnostics].
-func (x *MTRBaseClusterGeneralDiagnostics) Unwrap() *raw.MTRBaseClusterGeneralDiagnostics { return x.inner }
+func (x *MTRBaseClusterGeneralDiagnostics) Unwrap() *raw.MTRBaseClusterGeneralDiagnostics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -947,9 +949,13 @@ func (x *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-func (x *MTRBaseClusterGeneralDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterGeneralDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterGeneralDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterGeneralDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterGeneralDiagnosticsable is the interface implemented by [MTRBaseClusterGeneralDiagnostics], for mocking and DI.
 type MTRBaseClusterGeneralDiagnosticsable interface {
@@ -1018,4 +1024,3 @@ type MTRBaseClusterGeneralDiagnosticsable interface {
 }
 
 var _ MTRBaseClusterGeneralDiagnosticsable = (*MTRBaseClusterGeneralDiagnostics)(nil)
-

@@ -16,7 +16,9 @@ type CandidateListTouchBarItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSCandidateListTouchBarItem].
-func (x *CandidateListTouchBarItem) Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID] { return x.inner }
+func (x *CandidateListTouchBarItem) Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -173,7 +175,9 @@ func (x *CandidateListTouchBarItem) SetCustomizationLabel(customizationLabel str
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
 }
 
-func (x *CandidateListTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+func (x *CandidateListTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem {
+	return &x.inner.NSTouchBarItem
+}
 
 // CandidateListTouchBarItemable is the interface implemented by [CandidateListTouchBarItem], for mocking and DI.
 type CandidateListTouchBarItemable interface {
@@ -206,4 +210,3 @@ type CandidateListTouchBarItemable interface {
 }
 
 var _ CandidateListTouchBarItemable = (*CandidateListTouchBarItem)(nil)
-

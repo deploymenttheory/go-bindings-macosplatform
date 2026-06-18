@@ -14,4 +14,3 @@ var (
 func ASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports() *foundation.NSArray[*foundation.NSString] {
 	return _fnASAuthorizationAllSupportedPublicKeyCredentialDescriptorTransports()
 }
-

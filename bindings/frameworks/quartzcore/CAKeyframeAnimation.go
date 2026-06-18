@@ -18,25 +18,25 @@ type CAKeyframeAnimation struct {
 }
 
 var (
-	_clsCAKeyframeAnimation = _objcClass("CAKeyframeAnimation")
-	_cAKeyframeAnimationSelValues = objc.RegisterName("values")
-	_cAKeyframeAnimationSelSetValues = objc.RegisterName("setValues:")
-	_cAKeyframeAnimationSelPath = objc.RegisterName("path")
-	_cAKeyframeAnimationSelSetPath = objc.RegisterName("setPath:")
-	_cAKeyframeAnimationSelKeyTimes = objc.RegisterName("keyTimes")
-	_cAKeyframeAnimationSelSetKeyTimes = objc.RegisterName("setKeyTimes:")
-	_cAKeyframeAnimationSelTimingFunctions = objc.RegisterName("timingFunctions")
-	_cAKeyframeAnimationSelSetTimingFunctions = objc.RegisterName("setTimingFunctions:")
-	_cAKeyframeAnimationSelCalculationMode = objc.RegisterName("calculationMode")
-	_cAKeyframeAnimationSelSetCalculationMode = objc.RegisterName("setCalculationMode:")
-	_cAKeyframeAnimationSelTensionValues = objc.RegisterName("tensionValues")
-	_cAKeyframeAnimationSelSetTensionValues = objc.RegisterName("setTensionValues:")
-	_cAKeyframeAnimationSelContinuityValues = objc.RegisterName("continuityValues")
+	_clsCAKeyframeAnimation                    = _objcClass("CAKeyframeAnimation")
+	_cAKeyframeAnimationSelValues              = objc.RegisterName("values")
+	_cAKeyframeAnimationSelSetValues           = objc.RegisterName("setValues:")
+	_cAKeyframeAnimationSelPath                = objc.RegisterName("path")
+	_cAKeyframeAnimationSelSetPath             = objc.RegisterName("setPath:")
+	_cAKeyframeAnimationSelKeyTimes            = objc.RegisterName("keyTimes")
+	_cAKeyframeAnimationSelSetKeyTimes         = objc.RegisterName("setKeyTimes:")
+	_cAKeyframeAnimationSelTimingFunctions     = objc.RegisterName("timingFunctions")
+	_cAKeyframeAnimationSelSetTimingFunctions  = objc.RegisterName("setTimingFunctions:")
+	_cAKeyframeAnimationSelCalculationMode     = objc.RegisterName("calculationMode")
+	_cAKeyframeAnimationSelSetCalculationMode  = objc.RegisterName("setCalculationMode:")
+	_cAKeyframeAnimationSelTensionValues       = objc.RegisterName("tensionValues")
+	_cAKeyframeAnimationSelSetTensionValues    = objc.RegisterName("setTensionValues:")
+	_cAKeyframeAnimationSelContinuityValues    = objc.RegisterName("continuityValues")
 	_cAKeyframeAnimationSelSetContinuityValues = objc.RegisterName("setContinuityValues:")
-	_cAKeyframeAnimationSelBiasValues = objc.RegisterName("biasValues")
-	_cAKeyframeAnimationSelSetBiasValues = objc.RegisterName("setBiasValues:")
-	_cAKeyframeAnimationSelRotationMode = objc.RegisterName("rotationMode")
-	_cAKeyframeAnimationSelSetRotationMode = objc.RegisterName("setRotationMode:")
+	_cAKeyframeAnimationSelBiasValues          = objc.RegisterName("biasValues")
+	_cAKeyframeAnimationSelSetBiasValues       = objc.RegisterName("setBiasValues:")
+	_cAKeyframeAnimationSelRotationMode        = objc.RegisterName("rotationMode")
+	_cAKeyframeAnimationSelSetRotationMode     = objc.RegisterName("setRotationMode:")
 )
 
 func CAKeyframeAnimationFromID(id objc.ID) *CAKeyframeAnimation {
@@ -78,7 +78,9 @@ func (o *CAKeyframeAnimation) SetKeyTimes(keyTimes *foundation.NSArray[*foundati
 
 func (o *CAKeyframeAnimation) TimingFunctions() *foundation.NSArray[*CAMediaTimingFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelTimingFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CAMediaTimingFunction](_ret)
 }
 
@@ -88,7 +90,9 @@ func (o *CAKeyframeAnimation) SetTimingFunctions(timingFunctions *foundation.NSA
 
 func (o *CAKeyframeAnimation) CalculationMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelCalculationMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,11 +129,12 @@ func (o *CAKeyframeAnimation) SetBiasValues(biasValues *foundation.NSArray[*foun
 
 func (o *CAKeyframeAnimation) RotationMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAKeyframeAnimationSelRotationMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CAKeyframeAnimation) SetRotationMode(rotationMode *foundation.NSString) {
 	o.Ptr().Send(_cAKeyframeAnimationSelSetRotationMode, rotationMode.Ptr())
 }
-

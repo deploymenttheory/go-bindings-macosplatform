@@ -15,15 +15,15 @@ type NSSearchToolbarItem struct {
 }
 
 var (
-	_clsNSSearchToolbarItem = _objcClass("NSSearchToolbarItem")
-	_nSSearchToolbarItemSelBeginSearchInteraction = objc.RegisterName("beginSearchInteraction")
-	_nSSearchToolbarItemSelEndSearchInteraction = objc.RegisterName("endSearchInteraction")
-	_nSSearchToolbarItemSelSearchField = objc.RegisterName("searchField")
-	_nSSearchToolbarItemSelSetSearchField = objc.RegisterName("setSearchField:")
-	_nSSearchToolbarItemSelResignsFirstResponderWithCancel = objc.RegisterName("resignsFirstResponderWithCancel")
+	_clsNSSearchToolbarItem                                   = _objcClass("NSSearchToolbarItem")
+	_nSSearchToolbarItemSelBeginSearchInteraction             = objc.RegisterName("beginSearchInteraction")
+	_nSSearchToolbarItemSelEndSearchInteraction               = objc.RegisterName("endSearchInteraction")
+	_nSSearchToolbarItemSelSearchField                        = objc.RegisterName("searchField")
+	_nSSearchToolbarItemSelSetSearchField                     = objc.RegisterName("setSearchField:")
+	_nSSearchToolbarItemSelResignsFirstResponderWithCancel    = objc.RegisterName("resignsFirstResponderWithCancel")
 	_nSSearchToolbarItemSelSetResignsFirstResponderWithCancel = objc.RegisterName("setResignsFirstResponderWithCancel:")
-	_nSSearchToolbarItemSelPreferredWidthForSearchField = objc.RegisterName("preferredWidthForSearchField")
-	_nSSearchToolbarItemSelSetPreferredWidthForSearchField = objc.RegisterName("setPreferredWidthForSearchField:")
+	_nSSearchToolbarItemSelPreferredWidthForSearchField       = objc.RegisterName("preferredWidthForSearchField")
+	_nSSearchToolbarItemSelSetPreferredWidthForSearchField    = objc.RegisterName("setPreferredWidthForSearchField:")
 )
 
 func NSSearchToolbarItemFromID(id objc.ID) *NSSearchToolbarItem {
@@ -49,7 +49,9 @@ func (o *NSSearchToolbarItem) EndSearchInteraction() {
 // An `NSSearchField` displayed in the toolbar item. While inside the toolbar item, the field properties and layout constraints are managed by the item. The field should be configured before assigned. The width constraint for the field could be updated after assigned. When set to nil, will reset to a search field with the default configuration.
 func (o *NSSearchToolbarItem) SearchField() *NSSearchField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchToolbarItemSelSearchField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSearchFieldFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *NSSearchToolbarItem) PreferredWidthForSearchField() float64 {
 func (o *NSSearchToolbarItem) SetPreferredWidthForSearchField(preferredWidthForSearchField float64) {
 	o.Ptr().Send(_nSSearchToolbarItemSelSetPreferredWidthForSearchField, preferredWidthForSearchField)
 }
-

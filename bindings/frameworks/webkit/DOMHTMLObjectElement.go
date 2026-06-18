@@ -16,43 +16,43 @@ type DOMHTMLObjectElement struct {
 }
 
 var (
-	_clsDOMHTMLObjectElement = _objcClass("DOMHTMLObjectElement")
-	_dOMHTMLObjectElementSelForm = objc.RegisterName("form")
-	_dOMHTMLObjectElementSelCode = objc.RegisterName("code")
-	_dOMHTMLObjectElementSelSetCode = objc.RegisterName("setCode:")
-	_dOMHTMLObjectElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLObjectElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLObjectElementSelArchive = objc.RegisterName("archive")
-	_dOMHTMLObjectElementSelSetArchive = objc.RegisterName("setArchive:")
-	_dOMHTMLObjectElementSelBorder = objc.RegisterName("border")
-	_dOMHTMLObjectElementSelSetBorder = objc.RegisterName("setBorder:")
-	_dOMHTMLObjectElementSelCodeBase = objc.RegisterName("codeBase")
-	_dOMHTMLObjectElementSelSetCodeBase = objc.RegisterName("setCodeBase:")
-	_dOMHTMLObjectElementSelCodeType = objc.RegisterName("codeType")
-	_dOMHTMLObjectElementSelSetCodeType = objc.RegisterName("setCodeType:")
-	_dOMHTMLObjectElementSelData = objc.RegisterName("data")
-	_dOMHTMLObjectElementSelSetData = objc.RegisterName("setData:")
-	_dOMHTMLObjectElementSelDeclare = objc.RegisterName("declare")
-	_dOMHTMLObjectElementSelSetDeclare = objc.RegisterName("setDeclare:")
-	_dOMHTMLObjectElementSelHeight = objc.RegisterName("height")
-	_dOMHTMLObjectElementSelSetHeight = objc.RegisterName("setHeight:")
-	_dOMHTMLObjectElementSelHspace = objc.RegisterName("hspace")
-	_dOMHTMLObjectElementSelSetHspace = objc.RegisterName("setHspace:")
-	_dOMHTMLObjectElementSelName = objc.RegisterName("name")
-	_dOMHTMLObjectElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLObjectElementSelStandby = objc.RegisterName("standby")
-	_dOMHTMLObjectElementSelSetStandby = objc.RegisterName("setStandby:")
-	_dOMHTMLObjectElementSelType = objc.RegisterName("type")
-	_dOMHTMLObjectElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLObjectElementSelUseMap = objc.RegisterName("useMap")
-	_dOMHTMLObjectElementSelSetUseMap = objc.RegisterName("setUseMap:")
-	_dOMHTMLObjectElementSelVspace = objc.RegisterName("vspace")
-	_dOMHTMLObjectElementSelSetVspace = objc.RegisterName("setVspace:")
-	_dOMHTMLObjectElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLObjectElementSelSetWidth = objc.RegisterName("setWidth:")
-	_dOMHTMLObjectElementSelContentDocument = objc.RegisterName("contentDocument")
+	_clsDOMHTMLObjectElement                 = _objcClass("DOMHTMLObjectElement")
+	_dOMHTMLObjectElementSelForm             = objc.RegisterName("form")
+	_dOMHTMLObjectElementSelCode             = objc.RegisterName("code")
+	_dOMHTMLObjectElementSelSetCode          = objc.RegisterName("setCode:")
+	_dOMHTMLObjectElementSelAlign            = objc.RegisterName("align")
+	_dOMHTMLObjectElementSelSetAlign         = objc.RegisterName("setAlign:")
+	_dOMHTMLObjectElementSelArchive          = objc.RegisterName("archive")
+	_dOMHTMLObjectElementSelSetArchive       = objc.RegisterName("setArchive:")
+	_dOMHTMLObjectElementSelBorder           = objc.RegisterName("border")
+	_dOMHTMLObjectElementSelSetBorder        = objc.RegisterName("setBorder:")
+	_dOMHTMLObjectElementSelCodeBase         = objc.RegisterName("codeBase")
+	_dOMHTMLObjectElementSelSetCodeBase      = objc.RegisterName("setCodeBase:")
+	_dOMHTMLObjectElementSelCodeType         = objc.RegisterName("codeType")
+	_dOMHTMLObjectElementSelSetCodeType      = objc.RegisterName("setCodeType:")
+	_dOMHTMLObjectElementSelData             = objc.RegisterName("data")
+	_dOMHTMLObjectElementSelSetData          = objc.RegisterName("setData:")
+	_dOMHTMLObjectElementSelDeclare          = objc.RegisterName("declare")
+	_dOMHTMLObjectElementSelSetDeclare       = objc.RegisterName("setDeclare:")
+	_dOMHTMLObjectElementSelHeight           = objc.RegisterName("height")
+	_dOMHTMLObjectElementSelSetHeight        = objc.RegisterName("setHeight:")
+	_dOMHTMLObjectElementSelHspace           = objc.RegisterName("hspace")
+	_dOMHTMLObjectElementSelSetHspace        = objc.RegisterName("setHspace:")
+	_dOMHTMLObjectElementSelName             = objc.RegisterName("name")
+	_dOMHTMLObjectElementSelSetName          = objc.RegisterName("setName:")
+	_dOMHTMLObjectElementSelStandby          = objc.RegisterName("standby")
+	_dOMHTMLObjectElementSelSetStandby       = objc.RegisterName("setStandby:")
+	_dOMHTMLObjectElementSelType             = objc.RegisterName("type")
+	_dOMHTMLObjectElementSelSetType          = objc.RegisterName("setType:")
+	_dOMHTMLObjectElementSelUseMap           = objc.RegisterName("useMap")
+	_dOMHTMLObjectElementSelSetUseMap        = objc.RegisterName("setUseMap:")
+	_dOMHTMLObjectElementSelVspace           = objc.RegisterName("vspace")
+	_dOMHTMLObjectElementSelSetVspace        = objc.RegisterName("setVspace:")
+	_dOMHTMLObjectElementSelWidth            = objc.RegisterName("width")
+	_dOMHTMLObjectElementSelSetWidth         = objc.RegisterName("setWidth:")
+	_dOMHTMLObjectElementSelContentDocument  = objc.RegisterName("contentDocument")
 	_dOMHTMLObjectElementSelAbsoluteImageURL = objc.RegisterName("absoluteImageURL")
-	_dOMHTMLObjectElementSelContentFrame = objc.RegisterName("contentFrame")
+	_dOMHTMLObjectElementSelContentFrame     = objc.RegisterName("contentFrame")
 )
 
 func DOMHTMLObjectElementFromID(id objc.ID) *DOMHTMLObjectElement {
@@ -67,13 +67,17 @@ func DOMHTMLObjectElementFromID(id objc.ID) *DOMHTMLObjectElement {
 
 func (o *DOMHTMLObjectElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLObjectElement) Code() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,7 +87,9 @@ func (o *DOMHTMLObjectElement) SetCode(code *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,7 +99,9 @@ func (o *DOMHTMLObjectElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Archive() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelArchive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,7 +111,9 @@ func (o *DOMHTMLObjectElement) SetArchive(archive *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Border() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelBorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,7 +123,9 @@ func (o *DOMHTMLObjectElement) SetBorder(border *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) CodeBase() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelCodeBase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +135,9 @@ func (o *DOMHTMLObjectElement) SetCodeBase(codeBase *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) CodeType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelCodeType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -133,7 +147,9 @@ func (o *DOMHTMLObjectElement) SetCodeType(codeType *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -152,7 +168,9 @@ func (o *DOMHTMLObjectElement) SetDeclare(declare bool) {
 
 func (o *DOMHTMLObjectElement) Height() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -171,7 +189,9 @@ func (o *DOMHTMLObjectElement) SetHspace(hspace int) {
 
 func (o *DOMHTMLObjectElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -181,7 +201,9 @@ func (o *DOMHTMLObjectElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Standby() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelStandby)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -191,7 +213,9 @@ func (o *DOMHTMLObjectElement) SetStandby(standby *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -201,7 +225,9 @@ func (o *DOMHTMLObjectElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) UseMap() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelUseMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -220,7 +246,9 @@ func (o *DOMHTMLObjectElement) SetVspace(vspace int) {
 
 func (o *DOMHTMLObjectElement) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -230,19 +258,24 @@ func (o *DOMHTMLObjectElement) SetWidth(width *foundation.NSString) {
 
 func (o *DOMHTMLObjectElement) ContentDocument() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelContentDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 func (o *DOMHTMLObjectElement) AbsoluteImageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelAbsoluteImageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *DOMHTMLObjectElement) ContentFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLObjectElementSelContentFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
-

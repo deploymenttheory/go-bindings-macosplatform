@@ -16,17 +16,17 @@ type NSTokenFieldCell struct {
 }
 
 var (
-	_clsNSTokenFieldCell = _objcClass("NSTokenFieldCell")
-	_nSTokenFieldCellSelTokenStyle = objc.RegisterName("tokenStyle")
-	_nSTokenFieldCellSelSetTokenStyle = objc.RegisterName("setTokenStyle:")
-	_nSTokenFieldCellSelCompletionDelay = objc.RegisterName("completionDelay")
-	_nSTokenFieldCellSelSetCompletionDelay = objc.RegisterName("setCompletionDelay:")
-	_nSTokenFieldCellSelDefaultCompletionDelay = objc.RegisterName("defaultCompletionDelay")
-	_nSTokenFieldCellSelTokenizingCharacterSet = objc.RegisterName("tokenizingCharacterSet")
-	_nSTokenFieldCellSelSetTokenizingCharacterSet = objc.RegisterName("setTokenizingCharacterSet:")
+	_clsNSTokenFieldCell                              = _objcClass("NSTokenFieldCell")
+	_nSTokenFieldCellSelTokenStyle                    = objc.RegisterName("tokenStyle")
+	_nSTokenFieldCellSelSetTokenStyle                 = objc.RegisterName("setTokenStyle:")
+	_nSTokenFieldCellSelCompletionDelay               = objc.RegisterName("completionDelay")
+	_nSTokenFieldCellSelSetCompletionDelay            = objc.RegisterName("setCompletionDelay:")
+	_nSTokenFieldCellSelDefaultCompletionDelay        = objc.RegisterName("defaultCompletionDelay")
+	_nSTokenFieldCellSelTokenizingCharacterSet        = objc.RegisterName("tokenizingCharacterSet")
+	_nSTokenFieldCellSelSetTokenizingCharacterSet     = objc.RegisterName("setTokenizingCharacterSet:")
 	_nSTokenFieldCellSelDefaultTokenizingCharacterSet = objc.RegisterName("defaultTokenizingCharacterSet")
-	_nSTokenFieldCellSelDelegate = objc.RegisterName("delegate")
-	_nSTokenFieldCellSelSetDelegate = objc.RegisterName("setDelegate:")
+	_nSTokenFieldCellSelDelegate                      = objc.RegisterName("delegate")
+	_nSTokenFieldCellSelSetDelegate                   = objc.RegisterName("setDelegate:")
 )
 
 func NSTokenFieldCellFromID(id objc.ID) *NSTokenFieldCell {
@@ -64,7 +64,9 @@ func NSTokenFieldCellDefaultCompletionDelay() float64 {
 
 func (o *NSTokenFieldCell) TokenizingCharacterSet() *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTokenFieldCellSelTokenizingCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *NSTokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet *fou
 
 func NSTokenFieldCellDefaultTokenizingCharacterSet() *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTokenFieldCell), _nSTokenFieldCellSelDefaultTokenizingCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
@@ -86,4 +90,3 @@ func (o *NSTokenFieldCell) Delegate() NSTokenFieldCellDelegate {
 func (o *NSTokenFieldCell) SetDelegate(delegate NSTokenFieldCellDelegate) {
 	o.Ptr().Send(_nSTokenFieldCellSelSetDelegate, delegate)
 }
-

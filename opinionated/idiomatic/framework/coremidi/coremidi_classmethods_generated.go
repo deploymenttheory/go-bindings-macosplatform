@@ -80,4 +80,3 @@ func MIDIUMPEndpointManagerSharedInstance() *UMPEndpointManager {
 	}
 	return &UMPEndpointManager{inner: _r}
 }
-

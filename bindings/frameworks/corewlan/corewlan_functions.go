@@ -13,23 +13,23 @@ import (
 
 var (
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param identity A SecIdentityRef passed by reference, which upon return will contain the SecIdentityRef associated with the specified SSID. This parameter is optional.  The returned value must be released by the caller. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns the identity stored for the specified SSID and keychain domain. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainCopyEAPIdentity func(unsafe.Pointer, unsafe.Pointer) int
 	// @method @param identityList A CFArrayRef passed by reference, which upon return will be populated with a list of SecIdentityRef objects. This parameter is optional.  The returned value must be released by the caller. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns all available identities.
 	_fnCWKeychainCopyEAPIdentityList func(unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param username A CFStringRef passed by reference, which upon return will contain the 802.1X username for the specified SSID. This parameter is optional.  The returned value must be released by the caller. @param password A CFStringRef passed by reference, which upon return will contain the 802.1X password for the specified SSID. This parameter is optional.  The returned value must be released by the caller. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns the 802.1X username and password stored for the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainCopyEAPUsernameAndPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param password A CFStringRef passed by reference, which upon return will contain the Wi-Fi keychain password for the specified SSID. This parameter is optional.  The returned value must be released by the caller. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns (by reference) the password for the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainCopyPassword func(unsafe.Pointer, unsafe.Pointer) int
 	// @method @param domain The keychain domain, which determines which keychain will be used. @param ssid The service set identifier (SSID) which is used to uniquely identify the keychain item. @param identity A SecIdentityRef passed by reference, which upon return will contain the SecIdentityRef associated with the specified SSID. This parameter is optional.  The returned value must be released by the caller. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns the identity stored for the specified SSID and keychain domain.
 	_fnCWKeychainCopyWiFiEAPIdentity func(CWKeychainDomain, objc.ID, unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Deletes the 802.1X username and password for the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainDeleteEAPUsernameAndPassword func(unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Deletes the password for the specified SSID and keychain domain. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainDeletePassword func(unsafe.Pointer) int
 	// @method @param domain The keychain domain, which determines which keychain will be used. @param ssid The service set identifier (SSID) which is used to uniquely identify the keychain item. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Deletes the 802.1X username and password for the specified SSID and keychain domain.
 	_fnCWKeychainDeleteWiFiEAPUsernameAndPassword func(CWKeychainDomain, objc.ID) int
@@ -40,13 +40,13 @@ var (
 	// @method @param domain The keychain domain, which determines which keychain will be used. @param ssid The service set identifier (SSID) which is used to uniquely identify the keychain item. @param password An NSString passed by reference, which upon return will contain the Wi-Fi keychain password for the specified SSID. This parameter is optional. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Finds and returns (by reference) the password for the specified SSID and keychain domain.
 	_fnCWKeychainFindWiFiPassword func(CWKeychainDomain, objc.ID, objc.ID) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param identity The identity containing the certificate to use for 802.1X authentication. Passing nil clears any identity association for the specified SSID. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Associates an identity to the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainSetEAPIdentity func(unsafe.Pointer, unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param username The 802.1X username. @param password The 802.1X password. This parameter is optional. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Sets the 802.1X username and password for the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainSetEAPUsernameAndPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @method @param ssidData The service set identifier (SSID) which is used to uniquely identify the keychain item. @param password The Wi-Fi network password. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Sets the Wi-Fi network keychain password for the specified SSID. The keychain used is determined by the SecPreferencesDomain of the caller as returned by SecKeychainGetPreferenceDomain().
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnCWKeychainSetPassword func(unsafe.Pointer, unsafe.Pointer) int
 	// @method @param domain The keychain domain, which determines which keychain will be used. @param ssid The service set identifier (SSID) which is used to uniquely identify the keychain item. @param identity The identity containing the certificate to use for 802.1X authentication. Passing nil clears any identity association for the specified SSID. @result An OSStatus error code indicating whether or not a failure occurred. <i>errSecSuccess</i> indicates no error occurred. @abstract Associates an identity to the specified SSID and keychain domain.
 	_fnCWKeychainSetWiFiEAPIdentity func(CWKeychainDomain, objc.ID, unsafe.Pointer) int
@@ -154,7 +154,8 @@ func CWKeychainSetWiFiPassword(domain CWKeychainDomain, ssid *foundation.NSData,
 // @method @param networks The set of networks to merge. @abstract Merges the specified set of CWNetwork objects. @discussion Duplicate networks are defined as networks with the same SSID, security type, and BSS type (IBSS or Infrastructure). When duplicate networks exist, the network with the best RSSI value will be chosen.
 func CWMergeNetworks(networks *foundation.NSSet[*CWNetwork]) *foundation.NSSet[*CWNetwork] {
 	_ret := _fnCWMergeNetworks(networks.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*CWNetwork](_ret)
 }
-

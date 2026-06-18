@@ -18,11 +18,11 @@ type VZVirtioBlockDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioBlockDeviceConfiguration = _objcClass("VZVirtioBlockDeviceConfiguration")
-	_vZVirtioBlockDeviceConfigurationSelInitWithAttachment = objc.RegisterName("initWithAttachment:")
+	_clsVZVirtioBlockDeviceConfiguration                                   = _objcClass("VZVirtioBlockDeviceConfiguration")
+	_vZVirtioBlockDeviceConfigurationSelInitWithAttachment                 = objc.RegisterName("initWithAttachment:")
 	_vZVirtioBlockDeviceConfigurationSelValidateBlockDeviceIdentifierError = objc.RegisterName("validateBlockDeviceIdentifier:error:")
-	_vZVirtioBlockDeviceConfigurationSelBlockDeviceIdentifier = objc.RegisterName("blockDeviceIdentifier")
-	_vZVirtioBlockDeviceConfigurationSelSetBlockDeviceIdentifier = objc.RegisterName("setBlockDeviceIdentifier:")
+	_vZVirtioBlockDeviceConfigurationSelBlockDeviceIdentifier              = objc.RegisterName("blockDeviceIdentifier")
+	_vZVirtioBlockDeviceConfigurationSelSetBlockDeviceIdentifier           = objc.RegisterName("setBlockDeviceIdentifier:")
 )
 
 func VZVirtioBlockDeviceConfigurationFromID(id objc.ID) *VZVirtioBlockDeviceConfiguration {
@@ -38,7 +38,9 @@ func VZVirtioBlockDeviceConfigurationFromID(id objc.ID) *VZVirtioBlockDeviceConf
 // @abstract Initialize a VZVirtioBlockDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
 func (o *VZVirtioBlockDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZVirtioBlockDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioBlockDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioBlockDeviceConfigurationFromID(_ret)
 }
 
@@ -54,11 +56,12 @@ func VZVirtioBlockDeviceConfigurationValidateBlockDeviceIdentifierError(blockDev
 
 func (o *VZVirtioBlockDeviceConfiguration) BlockDeviceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioBlockDeviceConfigurationSelBlockDeviceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *VZVirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIdentifier *foundation.NSString) {
 	o.Ptr().Send(_vZVirtioBlockDeviceConfigurationSelSetBlockDeviceIdentifier, blockDeviceIdentifier.Ptr())
 }
-

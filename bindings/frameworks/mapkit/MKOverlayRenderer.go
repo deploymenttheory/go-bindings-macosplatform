@@ -19,21 +19,21 @@ type MKOverlayRenderer struct {
 }
 
 var (
-	_clsMKOverlayRenderer = _objcClass("MKOverlayRenderer")
-	_mKOverlayRendererSelInitWithOverlay = objc.RegisterName("initWithOverlay:")
-	_mKOverlayRendererSelPointForMapPoint = objc.RegisterName("pointForMapPoint:")
-	_mKOverlayRendererSelMapPointForPoint = objc.RegisterName("mapPointForPoint:")
-	_mKOverlayRendererSelRectForMapRect = objc.RegisterName("rectForMapRect:")
-	_mKOverlayRendererSelMapRectForRect = objc.RegisterName("mapRectForRect:")
-	_mKOverlayRendererSelCanDrawMapRectZoomScale = objc.RegisterName("canDrawMapRect:zoomScale:")
-	_mKOverlayRendererSelDrawMapRectZoomScaleInContext = objc.RegisterName("drawMapRect:zoomScale:inContext:")
-	_mKOverlayRendererSelSetNeedsDisplay = objc.RegisterName("setNeedsDisplay")
-	_mKOverlayRendererSelSetNeedsDisplayInMapRect = objc.RegisterName("setNeedsDisplayInMapRect:")
+	_clsMKOverlayRenderer                                  = _objcClass("MKOverlayRenderer")
+	_mKOverlayRendererSelInitWithOverlay                   = objc.RegisterName("initWithOverlay:")
+	_mKOverlayRendererSelPointForMapPoint                  = objc.RegisterName("pointForMapPoint:")
+	_mKOverlayRendererSelMapPointForPoint                  = objc.RegisterName("mapPointForPoint:")
+	_mKOverlayRendererSelRectForMapRect                    = objc.RegisterName("rectForMapRect:")
+	_mKOverlayRendererSelMapRectForRect                    = objc.RegisterName("mapRectForRect:")
+	_mKOverlayRendererSelCanDrawMapRectZoomScale           = objc.RegisterName("canDrawMapRect:zoomScale:")
+	_mKOverlayRendererSelDrawMapRectZoomScaleInContext     = objc.RegisterName("drawMapRect:zoomScale:inContext:")
+	_mKOverlayRendererSelSetNeedsDisplay                   = objc.RegisterName("setNeedsDisplay")
+	_mKOverlayRendererSelSetNeedsDisplayInMapRect          = objc.RegisterName("setNeedsDisplayInMapRect:")
 	_mKOverlayRendererSelSetNeedsDisplayInMapRectZoomScale = objc.RegisterName("setNeedsDisplayInMapRect:zoomScale:")
-	_mKOverlayRendererSelOverlay = objc.RegisterName("overlay")
-	_mKOverlayRendererSelAlpha = objc.RegisterName("alpha")
-	_mKOverlayRendererSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mKOverlayRendererSelContentScaleFactor = objc.RegisterName("contentScaleFactor")
+	_mKOverlayRendererSelOverlay                           = objc.RegisterName("overlay")
+	_mKOverlayRendererSelAlpha                             = objc.RegisterName("alpha")
+	_mKOverlayRendererSelSetAlpha                          = objc.RegisterName("setAlpha:")
+	_mKOverlayRendererSelContentScaleFactor                = objc.RegisterName("contentScaleFactor")
 )
 
 func MKOverlayRendererFromID(id objc.ID) *MKOverlayRenderer {
@@ -48,7 +48,9 @@ func MKOverlayRendererFromID(id objc.ID) *MKOverlayRenderer {
 
 func (o *MKOverlayRenderer) InitWithOverlay(overlay MKOverlay) *MKOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKOverlayRendererSelInitWithOverlay, overlay)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKOverlayRendererFromID(_ret)
 }
 
@@ -111,4 +113,3 @@ func (o *MKOverlayRenderer) ContentScaleFactor() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mKOverlayRendererSelContentScaleFactor)
 	return _ret
 }
-

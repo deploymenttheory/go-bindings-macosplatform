@@ -145,4 +145,3 @@ type URLCredentialStorageable interface {
 }
 
 var _ URLCredentialStorageable = (*URLCredentialStorage)(nil)
-

@@ -18,12 +18,12 @@ type CKFetchWebAuthTokenOperation struct {
 }
 
 var (
-	_clsCKFetchWebAuthTokenOperation = _objcClass("CKFetchWebAuthTokenOperation")
-	_cKFetchWebAuthTokenOperationSelInit = objc.RegisterName("init")
-	_cKFetchWebAuthTokenOperationSelInitWithAPIToken = objc.RegisterName("initWithAPIToken:")
-	_cKFetchWebAuthTokenOperationSelAPIToken = objc.RegisterName("APIToken")
-	_cKFetchWebAuthTokenOperationSelSetAPIToken = objc.RegisterName("setAPIToken:")
-	_cKFetchWebAuthTokenOperationSelFetchWebAuthTokenCompletionBlock = objc.RegisterName("fetchWebAuthTokenCompletionBlock")
+	_clsCKFetchWebAuthTokenOperation                                    = _objcClass("CKFetchWebAuthTokenOperation")
+	_cKFetchWebAuthTokenOperationSelInit                                = objc.RegisterName("init")
+	_cKFetchWebAuthTokenOperationSelInitWithAPIToken                    = objc.RegisterName("initWithAPIToken:")
+	_cKFetchWebAuthTokenOperationSelAPIToken                            = objc.RegisterName("APIToken")
+	_cKFetchWebAuthTokenOperationSelSetAPIToken                         = objc.RegisterName("setAPIToken:")
+	_cKFetchWebAuthTokenOperationSelFetchWebAuthTokenCompletionBlock    = objc.RegisterName("fetchWebAuthTokenCompletionBlock")
 	_cKFetchWebAuthTokenOperationSelSetFetchWebAuthTokenCompletionBlock = objc.RegisterName("setFetchWebAuthTokenCompletionBlock:")
 )
 
@@ -37,24 +37,30 @@ func CKFetchWebAuthTokenOperationFromID(id objc.ID) *CKFetchWebAuthTokenOperatio
 	return o
 }
 
-// Creates an empty fetch operation. You must set ``CKFetchWebAuthTokenOperation/apiToken`` before you execute the operation or add it to a queue.
+// Creates an empty fetch operation. You must set “CKFetchWebAuthTokenOperation/apiToken“ before you execute the operation or add it to a queue.
 func (o *CKFetchWebAuthTokenOperation) Init() *CKFetchWebAuthTokenOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchWebAuthTokenOperationFromID(_ret)
 }
 
 // Creates a fetch operation for the specified API token. - Parameters: - APIToken: The API token that allows access to an app's container.
 func (o *CKFetchWebAuthTokenOperation) InitWithAPIToken(aPIToken *foundation.NSString) *CKFetchWebAuthTokenOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInitWithAPIToken, aPIToken.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchWebAuthTokenOperationFromID(_ret)
 }
 
 // The API token that allows access to an app's container.
 func (o *CKFetchWebAuthTokenOperation) APIToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelAPIToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,4 +87,3 @@ func (o *CKFetchWebAuthTokenOperation) SetFetchWebAuthTokenCompletionBlock(fetch
 	}
 	o.Ptr().Send(_cKFetchWebAuthTokenOperationSelSetFetchWebAuthTokenCompletionBlock, __block_fetchWebAuthTokenCompletionBlock)
 }
-

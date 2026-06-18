@@ -17,7 +17,9 @@ type VideoDecoderPixelBufferManager struct {
 }
 
 // Unwrap returns the underlying [raw.MEVideoDecoderPixelBufferManager].
-func (x *VideoDecoderPixelBufferManager) Unwrap() *raw.MEVideoDecoderPixelBufferManager { return x.inner }
+func (x *VideoDecoderPixelBufferManager) Unwrap() *raw.MEVideoDecoderPixelBufferManager {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -74,4 +76,3 @@ type VideoDecoderPixelBufferManagerable interface {
 }
 
 var _ VideoDecoderPixelBufferManagerable = (*VideoDecoderPixelBufferManager)(nil)
-

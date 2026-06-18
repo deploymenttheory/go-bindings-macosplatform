@@ -48,4 +48,3 @@ type PHProjectTypeDescriptionInvalidator interface {
 	InvalidateTypeDescriptionForProjectType(projectType *foundation.NSString)
 	InvalidateFooterTextForSubtypesOfProjectType(projectType *foundation.NSString)
 }
-

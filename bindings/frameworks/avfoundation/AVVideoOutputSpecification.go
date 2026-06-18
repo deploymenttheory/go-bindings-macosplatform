@@ -18,15 +18,15 @@ type AVVideoOutputSpecification struct {
 }
 
 var (
-	_clsAVVideoOutputSpecification = _objcClass("AVVideoOutputSpecification")
-	_aVVideoOutputSpecificationSelInitWithTagCollections = objc.RegisterName("initWithTagCollections:")
+	_clsAVVideoOutputSpecification                                               = _objcClass("AVVideoOutputSpecification")
+	_aVVideoOutputSpecificationSelInitWithTagCollections                         = objc.RegisterName("initWithTagCollections:")
 	_aVVideoOutputSpecificationSelSetOutputPixelBufferAttributesForTagCollection = objc.RegisterName("setOutputPixelBufferAttributes:forTagCollection:")
-	_aVVideoOutputSpecificationSelSetOutputSettingsForTagCollection = objc.RegisterName("setOutputSettings:forTagCollection:")
-	_aVVideoOutputSpecificationSelPreferredTagCollections = objc.RegisterName("preferredTagCollections")
-	_aVVideoOutputSpecificationSelDefaultPixelBufferAttributes = objc.RegisterName("defaultPixelBufferAttributes")
-	_aVVideoOutputSpecificationSelSetDefaultPixelBufferAttributes = objc.RegisterName("setDefaultPixelBufferAttributes:")
-	_aVVideoOutputSpecificationSelDefaultOutputSettings = objc.RegisterName("defaultOutputSettings")
-	_aVVideoOutputSpecificationSelSetDefaultOutputSettings = objc.RegisterName("setDefaultOutputSettings:")
+	_aVVideoOutputSpecificationSelSetOutputSettingsForTagCollection              = objc.RegisterName("setOutputSettings:forTagCollection:")
+	_aVVideoOutputSpecificationSelPreferredTagCollections                        = objc.RegisterName("preferredTagCollections")
+	_aVVideoOutputSpecificationSelDefaultPixelBufferAttributes                   = objc.RegisterName("defaultPixelBufferAttributes")
+	_aVVideoOutputSpecificationSelSetDefaultPixelBufferAttributes                = objc.RegisterName("setDefaultPixelBufferAttributes:")
+	_aVVideoOutputSpecificationSelDefaultOutputSettings                          = objc.RegisterName("defaultOutputSettings")
+	_aVVideoOutputSpecificationSelSetDefaultOutputSettings                       = objc.RegisterName("setDefaultOutputSettings:")
 )
 
 func AVVideoOutputSpecificationFromID(id objc.ID) *AVVideoOutputSpecification {
@@ -42,7 +42,9 @@ func AVVideoOutputSpecificationFromID(id objc.ID) *AVVideoOutputSpecification {
 // @method	 	 initWithTagCollections: @abstract	 Creates an instance of AVVideoOutputSpecification initialized with the specified tag collections. @param		 tagCollections Expects a non-empty array of CMTagCollections.  Tag collections are given priority based on their position in the array, where position i take priority over position i+1. @discussion  This method throws an exception for the following reasons: - tagCollections is nil or has a count of 0. - tagCollections contains elements that are not of the type CMTagCollection.
 func (o *AVVideoOutputSpecification) InitWithTagCollections(tagCollections *foundation.NSArray[objc.ID]) *AVVideoOutputSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoOutputSpecificationSelInitWithTagCollections, tagCollections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoOutputSpecificationFromID(_ret)
 }
 
@@ -86,4 +88,3 @@ func (o *AVVideoOutputSpecification) DefaultOutputSettings() *foundation.NSDicti
 func (o *AVVideoOutputSpecification) SetDefaultOutputSettings(defaultOutputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aVVideoOutputSpecificationSelSetDefaultOutputSettings, defaultOutputSettings)
 }
-

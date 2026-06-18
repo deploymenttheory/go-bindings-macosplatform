@@ -16,19 +16,19 @@ type MTRClusterElectricalEnergyMeasurement struct {
 }
 
 var (
-	_clsMTRClusterElectricalEnergyMeasurement = _objcClass("MTRClusterElectricalEnergyMeasurement")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAccuracyWithParams = objc.RegisterName("readAttributeAccuracyWithParams:")
+	_clsMTRClusterElectricalEnergyMeasurement                                                = _objcClass("MTRClusterElectricalEnergyMeasurement")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAccuracyWithParams                 = objc.RegisterName("readAttributeAccuracyWithParams:")
 	_mTRClusterElectricalEnergyMeasurementSelReadAttributeCumulativeEnergyImportedWithParams = objc.RegisterName("readAttributeCumulativeEnergyImportedWithParams:")
 	_mTRClusterElectricalEnergyMeasurementSelReadAttributeCumulativeEnergyExportedWithParams = objc.RegisterName("readAttributeCumulativeEnergyExportedWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributePeriodicEnergyImportedWithParams = objc.RegisterName("readAttributePeriodicEnergyImportedWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributePeriodicEnergyExportedWithParams = objc.RegisterName("readAttributePeriodicEnergyExportedWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeCumulativeEnergyResetWithParams = objc.RegisterName("readAttributeCumulativeEnergyResetWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterElectricalEnergyMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributePeriodicEnergyImportedWithParams   = objc.RegisterName("readAttributePeriodicEnergyImportedWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributePeriodicEnergyExportedWithParams   = objc.RegisterName("readAttributePeriodicEnergyExportedWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeCumulativeEnergyResetWithParams    = objc.RegisterName("readAttributeCumulativeEnergyResetWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeGeneratedCommandListWithParams     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAcceptedCommandListWithParams      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeAttributeListWithParams            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeFeatureMapWithParams               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelReadAttributeClusterRevisionWithParams          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterElectricalEnergyMeasurementSelInitWithDeviceEndpointIDQueue                   = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterElectricalEnergyMeasurementFromID(id objc.ID) *MTRClusterElectricalEnergyMeasurement {
@@ -99,7 +99,8 @@ func (o *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWith
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterElectricalEnergyMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterElectricalEnergyMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalEnergyMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterElectricalEnergyMeasurementFromID(_ret)
 }
-

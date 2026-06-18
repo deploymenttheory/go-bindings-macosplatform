@@ -13,532 +13,706 @@ import (
 
 func HKCategoryTypeIdentifierAbdominalCramps() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAbdominalCramps")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierAcne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAcne")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierAppetiteChanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAppetiteChanges")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierAppleStandHour() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAppleStandHour")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierAppleWalkingSteadinessEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAppleWalkingSteadinessEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierAudioExposureEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierAudioExposureEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierBladderIncontinence() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBladderIncontinence")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierBleedingAfterPregnancy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBleedingAfterPregnancy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierBleedingDuringPregnancy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBleedingDuringPregnancy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierBloating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBloating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierBreastPain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierBreastPain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierCervicalMucusQuality() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierCervicalMucusQuality")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierChestTightnessOrPain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierChestTightnessOrPain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierChills() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierChills")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierConstipation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierConstipation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierContraceptive() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierContraceptive")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierCoughing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierCoughing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierDiarrhea() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierDiarrhea")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierDizziness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierDizziness")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierDrySkin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierDrySkin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierFainting() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierFainting")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierFatigue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierFatigue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierFever() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierFever")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierGeneralizedBodyAche() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierGeneralizedBodyAche")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHairLoss() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHairLoss")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHandwashingEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHandwashingEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHeadache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHeadache")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHeadphoneAudioExposureEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHeadphoneAudioExposureEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHeartburn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHeartburn")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHighHeartRateEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHighHeartRateEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHotFlashes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHotFlashes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierHypertensionEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierHypertensionEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierInfrequentMenstrualCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierInfrequentMenstrualCycles")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierIntermenstrualBleeding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierIntermenstrualBleeding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierIrregularHeartRhythmEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierIrregularHeartRhythmEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierIrregularMenstrualCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierIrregularMenstrualCycles")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLactation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLactation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLossOfSmell() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLossOfSmell")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLossOfTaste() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLossOfTaste")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLowCardioFitnessEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLowCardioFitnessEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLowHeartRateEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLowHeartRateEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierLowerBackPain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierLowerBackPain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierMemoryLapse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMemoryLapse")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierMenstrualFlow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMenstrualFlow")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierMindfulSession() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMindfulSession")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierMoodChanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierMoodChanges")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierNausea() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierNausea")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierNightSweats() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierNightSweats")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierOvulationTestResult() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierOvulationTestResult")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierPelvicPain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierPelvicPain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierPersistentIntermenstrualBleeding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierPersistentIntermenstrualBleeding")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierPregnancy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierPregnancy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierPregnancyTestResult() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierPregnancyTestResult")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierProgesteroneTestResult() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierProgesteroneTestResult")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierProlongedMenstrualPeriods() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierProlongedMenstrualPeriods")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierRunnyNose() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierRunnyNose")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSexualActivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSexualActivity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierShortnessOfBreath() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierShortnessOfBreath")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSinusCongestion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSinusCongestion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSkippedHeartbeat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSkippedHeartbeat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSleepAnalysis() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSleepAnalysis")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSleepApneaEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSleepApneaEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSleepChanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSleepChanges")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierSoreThroat() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierSoreThroat")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierToothbrushingEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierToothbrushingEvent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierVaginalDryness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierVaginalDryness")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierVomiting() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierVomiting")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCategoryTypeIdentifierWheezing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCategoryTypeIdentifierWheezing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierActivityMoveMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierActivityMoveMode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierBiologicalSex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierBiologicalSex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierBloodType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierBloodType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierDateOfBirth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierDateOfBirth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierFitzpatrickSkinType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierFitzpatrickSkinType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCharacteristicTypeIdentifierWheelchairUse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCharacteristicTypeIdentifierWheelchairUse")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of allergies or intolerances.
 func HKClinicalTypeIdentifierAllergyRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierAllergyRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records that represent clinical notes.
 func HKClinicalTypeIdentifierClinicalNoteRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierClinicalNoteRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of a condition, problem, or diagnosis.
 func HKClinicalTypeIdentifierConditionRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierConditionRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records containing information about the user’s insurance coverage.
 func HKClinicalTypeIdentifierCoverageRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierCoverageRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of vaccine administration.
 func HKClinicalTypeIdentifierImmunizationRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierImmunizationRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of lab results.
 func HKClinicalTypeIdentifierLabResultRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierLabResultRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of medication prescription, intake, or administration.
 func HKClinicalTypeIdentifierMedicationRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierMedicationRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of clinical procedures.
 func HKClinicalTypeIdentifierProcedureRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierProcedureRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // A type identifier for records of vital signs.
 func HKClinicalTypeIdentifierVitalSignRecord() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKClinicalTypeIdentifierVitalSignRecord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCorrelationTypeIdentifierBloodPressure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCorrelationTypeIdentifierBloodPressure")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKCorrelationTypeIdentifierFood() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKCorrelationTypeIdentifierFood")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -615,7 +789,9 @@ func HKDevicePropertyKeyUDIDeviceIdentifier() uintptr {
 
 func HKDocumentTypeIdentifierCDA() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDocumentTypeIdentifierCDA")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -705,7 +881,9 @@ func HKFHIRResourceTypeProcedure() uintptr {
 // The domain that represents medication concepts. Use with identifiers for medications, such as ibuprofen or insulin.
 func HKHealthConceptDomainMedication() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKHealthConceptDomainMedication")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -718,126 +896,162 @@ func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() uintptr {
 // The medication comes in capsule form, such as a hard-shell capsule or softgel.
 func HKMedicationGeneralFormCapsule() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormCapsule")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as a cream.
 func HKMedicationGeneralFormCream() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormCream")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is administered through a device, such as an infusion pump for controlled fluid delivery.
 func HKMedicationGeneralFormDevice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormDevice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is taken as drops, for example eye drops or ear drops.
 func HKMedicationGeneralFormDrops() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormDrops")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as a foam.
 func HKMedicationGeneralFormFoam() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormFoam")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as a gel.
 func HKMedicationGeneralFormGel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormGel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is delivered through an inhaler.
 func HKMedicationGeneralFormInhaler() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormInhaler")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is given as an injection.
 func HKMedicationGeneralFormInjection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormInjection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is taken as a liquid, such as a syrup.
 func HKMedicationGeneralFormLiquid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormLiquid")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as a lotion.
 func HKMedicationGeneralFormLotion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormLotion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as an ointment.
 func HKMedicationGeneralFormOintment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormOintment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied as a patch worn on the skin.
 func HKMedicationGeneralFormPatch() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormPatch")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is taken as a powder.
 func HKMedicationGeneralFormPowder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormPowder")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is delivered as a spray, for example a nasal spray or throat spray.
 func HKMedicationGeneralFormSpray() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormSpray")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is delivered as a suppository.
 func HKMedicationGeneralFormSuppository() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormSuppository")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication comes in tablet form, such as a pill or caplet.
 func HKMedicationGeneralFormTablet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormTablet")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The medication is applied topically in a form that wasn't specified.
 func HKMedicationGeneralFormTopical() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormTopical")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // The system doesn't know the general form of the medication.
 func HKMedicationGeneralFormUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationGeneralFormUnknown")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1552,721 +1766,961 @@ func HKPredicateKeyPathWorkoutType() uintptr {
 
 func HKQuantityTypeIdentifierActiveEnergyBurned() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierActiveEnergyBurned")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleExerciseTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleExerciseTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleMoveTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleMoveTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleSleepingWristTemperature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleSleepingWristTemperature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleStandTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleStandTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAppleWalkingSteadiness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAppleWalkingSteadiness")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierAtrialFibrillationBurden() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierAtrialFibrillationBurden")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBasalBodyTemperature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBasalBodyTemperature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBasalEnergyBurned() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBasalEnergyBurned")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBloodAlcoholContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBloodAlcoholContent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBloodGlucose() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBloodGlucose")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBloodPressureDiastolic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBloodPressureDiastolic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBloodPressureSystolic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBloodPressureSystolic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBodyFatPercentage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBodyFatPercentage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBodyMass() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBodyMass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBodyMassIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBodyMassIndex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierBodyTemperature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierBodyTemperature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierCrossCountrySkiingSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierCrossCountrySkiingSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierCyclingCadence() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierCyclingCadence")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierCyclingFunctionalThresholdPower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierCyclingFunctionalThresholdPower")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierCyclingPower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierCyclingPower")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierCyclingSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierCyclingSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryBiotin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryBiotin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryCaffeine() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryCaffeine")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryCalcium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryCalcium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryCarbohydrates() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryCarbohydrates")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryChloride() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryChloride")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryCholesterol() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryCholesterol")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryChromium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryChromium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryCopper() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryCopper")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryEnergyConsumed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryEnergyConsumed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFatMonounsaturated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFatMonounsaturated")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFatPolyunsaturated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFatPolyunsaturated")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFatSaturated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFatSaturated")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFatTotal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFatTotal")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFiber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFiber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryFolate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryFolate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryIodine() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryIodine")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryIron() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryIron")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryMagnesium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryMagnesium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryManganese() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryManganese")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryMolybdenum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryMolybdenum")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryNiacin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryNiacin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryPantothenicAcid() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryPantothenicAcid")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryPhosphorus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryPhosphorus")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryPotassium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryPotassium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryProtein() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryProtein")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryRiboflavin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryRiboflavin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietarySelenium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietarySelenium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietarySodium() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietarySodium")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietarySugar() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietarySugar")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryThiamin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryThiamin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminA() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminA")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminB12() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminB12")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminB6() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminB6")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminC")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminD")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminE() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminE")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminK() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryVitaminK")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryWater() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryWater")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDietaryZinc() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDietaryZinc")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceCrossCountrySkiing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceCrossCountrySkiing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceCycling() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceCycling")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceDownhillSnowSports() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceDownhillSnowSports")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistancePaddleSports() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistancePaddleSports")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceRowing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceRowing")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceSkatingSports() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceSkatingSports")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceSwimming() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceSwimming")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceWalkingRunning() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceWalkingRunning")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierDistanceWheelchair() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierDistanceWheelchair")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierElectrodermalActivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierElectrodermalActivity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierEnvironmentalAudioExposure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierEnvironmentalAudioExposure")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierEnvironmentalSoundReduction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierEnvironmentalSoundReduction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierEstimatedWorkoutEffortScore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierEstimatedWorkoutEffortScore")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierFlightsClimbed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierFlightsClimbed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierForcedExpiratoryVolume1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierForcedExpiratoryVolume1")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierForcedVitalCapacity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierForcedVitalCapacity")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierHeadphoneAudioExposure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeadphoneAudioExposure")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierHeartRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeartRate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeartRateRecoveryOneMinute")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeartRateVariabilitySDNN")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierHeight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierHeight")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierInhalerUsage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierInhalerUsage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierInsulinDelivery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierInsulinDelivery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierLeanBodyMass() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierLeanBodyMass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierNikeFuel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierNikeFuel")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierNumberOfAlcoholicBeverages() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierNumberOfAlcoholicBeverages")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierNumberOfTimesFallen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierNumberOfTimesFallen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierOxygenSaturation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierOxygenSaturation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierPaddleSportsSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierPaddleSportsSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierPeakExpiratoryFlowRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierPeakExpiratoryFlowRate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierPeripheralPerfusionIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierPeripheralPerfusionIndex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierPhysicalEffort() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierPhysicalEffort")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierPushCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierPushCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRespiratoryRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRespiratoryRate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRestingHeartRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRestingHeartRate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRowingSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRowingSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRunningGroundContactTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRunningGroundContactTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRunningPower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRunningPower")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRunningSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRunningSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRunningStrideLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRunningStrideLength")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierRunningVerticalOscillation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierRunningVerticalOscillation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierSixMinuteWalkTestDistance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierSixMinuteWalkTestDistance")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierStairAscentSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierStairAscentSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierStairDescentSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierStairDescentSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierStepCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierStepCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierSwimmingStrokeCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierSwimmingStrokeCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierTimeInDaylight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierTimeInDaylight")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierUVExposure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierUVExposure")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierUnderwaterDepth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierUnderwaterDepth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierVO2Max() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierVO2Max")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWaistCircumference() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWaistCircumference")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWalkingAsymmetryPercentage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWalkingAsymmetryPercentage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWalkingDoubleSupportPercentage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWalkingDoubleSupportPercentage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWalkingHeartRateAverage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWalkingHeartRateAverage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWalkingSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWalkingSpeed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWalkingStepLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWalkingStepLength")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWaterTemperature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWaterTemperature")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKQuantityTypeIdentifierWorkoutEffortScore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKQuantityTypeIdentifierWorkoutEffortScore")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2282,19 +2736,25 @@ func HKSampleSortIdentifierStartDate() uintptr {
 
 func HKScoredAssessmentTypeIdentifierGAD7() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKScoredAssessmentTypeIdentifierGAD7")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKScoredAssessmentTypeIdentifierPHQ9() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKScoredAssessmentTypeIdentifierPHQ9")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func HKSourceRevisionAnyOperatingSystem() foundation.NSOperatingSystemVersion {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKSourceRevisionAnyOperatingSystem")
-	if ptr == 0 { return foundation.NSOperatingSystemVersion{} }
+	if ptr == 0 {
+		return foundation.NSOperatingSystemVersion{}
+	}
 	return *(*foundation.NSOperatingSystemVersion)(unsafe.Pointer(ptr))
 }
 
@@ -2308,13 +2768,13 @@ func HKSourceRevisionAnyVersion() uintptr {
 	return ptr
 }
 
-// The key path you use to create predicates for whether or not a medication has a schedule. Use to predicate against the ``HKUserAnnotatedMedication/hasSchedule`` property of a medication.
+// The key path you use to create predicates for whether or not a medication has a schedule. Use to predicate against the “HKUserAnnotatedMedication/hasSchedule“ property of a medication.
 func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() uintptr {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKUserAnnotatedMedicationPredicateKeyPathHasSchedule")
 	return ptr
 }
 
-// The key path you use to create predicates for the medication's archived status. Use to predicate against the ``HKUserAnnotatedMedication/isArchived`` property of a medication.
+// The key path you use to create predicates for the medication's archived status. Use to predicate against the “HKUserAnnotatedMedication/isArchived“ property of a medication.
 func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() uintptr {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKUserAnnotatedMedicationPredicateKeyPathIsArchived")
 	return ptr
@@ -2335,35 +2795,45 @@ func HKVerifiableClinicalRecordCredentialTypeCOVID19() uintptr {
 // @constant      HKVerifiableClinicalRecordCredentialTypeImmunization @abstract      Represents the immunization credential type for a verifiable record.
 func HKVerifiableClinicalRecordCredentialTypeImmunization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordCredentialTypeImmunization")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeLaboratory @abstract      Represents the laboratory credential type for a verifiable record.
 func HKVerifiableClinicalRecordCredentialTypeLaboratory() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordCredentialTypeLaboratory")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeRecovery @abstract      Represents the recovery credential type for a verifiable record.
 func HKVerifiableClinicalRecordCredentialTypeRecovery() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordCredentialTypeRecovery")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate @abstract      Represents a EU Digital COVID Certificate source type for a verifiable record.
 func HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @constant      HKVerifiableClinicalRecordSourceTypeSMARTHealthCard @abstract      Represents a SMART Health Card source type for a verifiable record.
 func HKVerifiableClinicalRecordSourceTypeSMARTHealthCard() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVerifiableClinicalRecordSourceTypeSMARTHealthCard")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2406,4 +2876,3 @@ func HKWorkoutTypeIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutTypeIdentifier")
 	return ptr
 }
-

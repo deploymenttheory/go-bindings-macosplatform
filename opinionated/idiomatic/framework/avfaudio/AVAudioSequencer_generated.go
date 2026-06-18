@@ -236,4 +236,3 @@ type AudioSequencerable interface {
 }
 
 var _ AudioSequencerable = (*AudioSequencer)(nil)
-

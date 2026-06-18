@@ -65,4 +65,3 @@ type MonitorConfigurationable interface {
 }
 
 var _ MonitorConfigurationable = (*MonitorConfiguration)(nil)
-

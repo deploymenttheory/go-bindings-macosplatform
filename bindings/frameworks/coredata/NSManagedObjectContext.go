@@ -18,68 +18,68 @@ type NSManagedObjectContext struct {
 }
 
 var (
-	_clsNSManagedObjectContext = _objcClass("NSManagedObjectContext")
-	_nSManagedObjectContextSelNew = objc.RegisterName("new")
-	_nSManagedObjectContextSelInit = objc.RegisterName("init")
-	_nSManagedObjectContextSelInitWithConcurrencyType = objc.RegisterName("initWithConcurrencyType:")
-	_nSManagedObjectContextSelPerformBlock = objc.RegisterName("performBlock:")
-	_nSManagedObjectContextSelPerformBlockAndWait = objc.RegisterName("performBlockAndWait:")
-	_nSManagedObjectContextSelObjectRegisteredForID = objc.RegisterName("objectRegisteredForID:")
-	_nSManagedObjectContextSelObjectWithID = objc.RegisterName("objectWithID:")
-	_nSManagedObjectContextSelExistingObjectWithIDError = objc.RegisterName("existingObjectWithID:error:")
-	_nSManagedObjectContextSelExecuteFetchRequestError = objc.RegisterName("executeFetchRequest:error:")
-	_nSManagedObjectContextSelCountForFetchRequestError = objc.RegisterName("countForFetchRequest:error:")
-	_nSManagedObjectContextSelExecuteRequestError = objc.RegisterName("executeRequest:error:")
-	_nSManagedObjectContextSelInsertObject = objc.RegisterName("insertObject:")
-	_nSManagedObjectContextSelDeleteObject = objc.RegisterName("deleteObject:")
-	_nSManagedObjectContextSelRefreshObjectMergeChanges = objc.RegisterName("refreshObject:mergeChanges:")
-	_nSManagedObjectContextSelDetectConflictsForObject = objc.RegisterName("detectConflictsForObject:")
-	_nSManagedObjectContextSelProcessPendingChanges = objc.RegisterName("processPendingChanges")
-	_nSManagedObjectContextSelAssignObjectToPersistentStore = objc.RegisterName("assignObject:toPersistentStore:")
-	_nSManagedObjectContextSelUndo = objc.RegisterName("undo")
-	_nSManagedObjectContextSelRedo = objc.RegisterName("redo")
-	_nSManagedObjectContextSelReset = objc.RegisterName("reset")
-	_nSManagedObjectContextSelRollback = objc.RegisterName("rollback")
-	_nSManagedObjectContextSelSave = objc.RegisterName("save:")
-	_nSManagedObjectContextSelRefreshAllObjects = objc.RegisterName("refreshAllObjects")
-	_nSManagedObjectContextSelLock = objc.RegisterName("lock")
-	_nSManagedObjectContextSelUnlock = objc.RegisterName("unlock")
-	_nSManagedObjectContextSelTryLock = objc.RegisterName("tryLock")
+	_clsNSManagedObjectContext                                                            = _objcClass("NSManagedObjectContext")
+	_nSManagedObjectContextSelNew                                                         = objc.RegisterName("new")
+	_nSManagedObjectContextSelInit                                                        = objc.RegisterName("init")
+	_nSManagedObjectContextSelInitWithConcurrencyType                                     = objc.RegisterName("initWithConcurrencyType:")
+	_nSManagedObjectContextSelPerformBlock                                                = objc.RegisterName("performBlock:")
+	_nSManagedObjectContextSelPerformBlockAndWait                                         = objc.RegisterName("performBlockAndWait:")
+	_nSManagedObjectContextSelObjectRegisteredForID                                       = objc.RegisterName("objectRegisteredForID:")
+	_nSManagedObjectContextSelObjectWithID                                                = objc.RegisterName("objectWithID:")
+	_nSManagedObjectContextSelExistingObjectWithIDError                                   = objc.RegisterName("existingObjectWithID:error:")
+	_nSManagedObjectContextSelExecuteFetchRequestError                                    = objc.RegisterName("executeFetchRequest:error:")
+	_nSManagedObjectContextSelCountForFetchRequestError                                   = objc.RegisterName("countForFetchRequest:error:")
+	_nSManagedObjectContextSelExecuteRequestError                                         = objc.RegisterName("executeRequest:error:")
+	_nSManagedObjectContextSelInsertObject                                                = objc.RegisterName("insertObject:")
+	_nSManagedObjectContextSelDeleteObject                                                = objc.RegisterName("deleteObject:")
+	_nSManagedObjectContextSelRefreshObjectMergeChanges                                   = objc.RegisterName("refreshObject:mergeChanges:")
+	_nSManagedObjectContextSelDetectConflictsForObject                                    = objc.RegisterName("detectConflictsForObject:")
+	_nSManagedObjectContextSelProcessPendingChanges                                       = objc.RegisterName("processPendingChanges")
+	_nSManagedObjectContextSelAssignObjectToPersistentStore                               = objc.RegisterName("assignObject:toPersistentStore:")
+	_nSManagedObjectContextSelUndo                                                        = objc.RegisterName("undo")
+	_nSManagedObjectContextSelRedo                                                        = objc.RegisterName("redo")
+	_nSManagedObjectContextSelReset                                                       = objc.RegisterName("reset")
+	_nSManagedObjectContextSelRollback                                                    = objc.RegisterName("rollback")
+	_nSManagedObjectContextSelSave                                                        = objc.RegisterName("save:")
+	_nSManagedObjectContextSelRefreshAllObjects                                           = objc.RegisterName("refreshAllObjects")
+	_nSManagedObjectContextSelLock                                                        = objc.RegisterName("lock")
+	_nSManagedObjectContextSelUnlock                                                      = objc.RegisterName("unlock")
+	_nSManagedObjectContextSelTryLock                                                     = objc.RegisterName("tryLock")
 	_nSManagedObjectContextSelShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty = objc.RegisterName("shouldHandleInaccessibleFault:forObjectID:triggeredByProperty:")
-	_nSManagedObjectContextSelObtainPermanentIDsForObjectsError = objc.RegisterName("obtainPermanentIDsForObjects:error:")
-	_nSManagedObjectContextSelMergeChangesFromContextDidSaveNotification = objc.RegisterName("mergeChangesFromContextDidSaveNotification:")
-	_nSManagedObjectContextSelMergeChangesFromRemoteContextSaveIntoContexts = objc.RegisterName("mergeChangesFromRemoteContextSave:intoContexts:")
-	_nSManagedObjectContextSelSetQueryGenerationFromTokenError = objc.RegisterName("setQueryGenerationFromToken:error:")
-	_nSManagedObjectContextSelPersistentStoreCoordinator = objc.RegisterName("persistentStoreCoordinator")
-	_nSManagedObjectContextSelSetPersistentStoreCoordinator = objc.RegisterName("setPersistentStoreCoordinator:")
-	_nSManagedObjectContextSelParentContext = objc.RegisterName("parentContext")
-	_nSManagedObjectContextSelSetParentContext = objc.RegisterName("setParentContext:")
-	_nSManagedObjectContextSelName = objc.RegisterName("name")
-	_nSManagedObjectContextSelSetName = objc.RegisterName("setName:")
-	_nSManagedObjectContextSelUndoManager = objc.RegisterName("undoManager")
-	_nSManagedObjectContextSelSetUndoManager = objc.RegisterName("setUndoManager:")
-	_nSManagedObjectContextSelHasChanges = objc.RegisterName("hasChanges")
-	_nSManagedObjectContextSelUserInfo = objc.RegisterName("userInfo")
-	_nSManagedObjectContextSelConcurrencyType = objc.RegisterName("concurrencyType")
-	_nSManagedObjectContextSelInsertedObjects = objc.RegisterName("insertedObjects")
-	_nSManagedObjectContextSelUpdatedObjects = objc.RegisterName("updatedObjects")
-	_nSManagedObjectContextSelDeletedObjects = objc.RegisterName("deletedObjects")
-	_nSManagedObjectContextSelRegisteredObjects = objc.RegisterName("registeredObjects")
-	_nSManagedObjectContextSelPropagatesDeletesAtEndOfEvent = objc.RegisterName("propagatesDeletesAtEndOfEvent")
-	_nSManagedObjectContextSelSetPropagatesDeletesAtEndOfEvent = objc.RegisterName("setPropagatesDeletesAtEndOfEvent:")
-	_nSManagedObjectContextSelRetainsRegisteredObjects = objc.RegisterName("retainsRegisteredObjects")
-	_nSManagedObjectContextSelSetRetainsRegisteredObjects = objc.RegisterName("setRetainsRegisteredObjects:")
-	_nSManagedObjectContextSelShouldDeleteInaccessibleFaults = objc.RegisterName("shouldDeleteInaccessibleFaults")
-	_nSManagedObjectContextSelSetShouldDeleteInaccessibleFaults = objc.RegisterName("setShouldDeleteInaccessibleFaults:")
-	_nSManagedObjectContextSelStalenessInterval = objc.RegisterName("stalenessInterval")
-	_nSManagedObjectContextSelSetStalenessInterval = objc.RegisterName("setStalenessInterval:")
-	_nSManagedObjectContextSelMergePolicy = objc.RegisterName("mergePolicy")
-	_nSManagedObjectContextSelSetMergePolicy = objc.RegisterName("setMergePolicy:")
-	_nSManagedObjectContextSelQueryGenerationToken = objc.RegisterName("queryGenerationToken")
-	_nSManagedObjectContextSelAutomaticallyMergesChangesFromParent = objc.RegisterName("automaticallyMergesChangesFromParent")
-	_nSManagedObjectContextSelSetAutomaticallyMergesChangesFromParent = objc.RegisterName("setAutomaticallyMergesChangesFromParent:")
-	_nSManagedObjectContextSelTransactionAuthor = objc.RegisterName("transactionAuthor")
-	_nSManagedObjectContextSelSetTransactionAuthor = objc.RegisterName("setTransactionAuthor:")
+	_nSManagedObjectContextSelObtainPermanentIDsForObjectsError                           = objc.RegisterName("obtainPermanentIDsForObjects:error:")
+	_nSManagedObjectContextSelMergeChangesFromContextDidSaveNotification                  = objc.RegisterName("mergeChangesFromContextDidSaveNotification:")
+	_nSManagedObjectContextSelMergeChangesFromRemoteContextSaveIntoContexts               = objc.RegisterName("mergeChangesFromRemoteContextSave:intoContexts:")
+	_nSManagedObjectContextSelSetQueryGenerationFromTokenError                            = objc.RegisterName("setQueryGenerationFromToken:error:")
+	_nSManagedObjectContextSelPersistentStoreCoordinator                                  = objc.RegisterName("persistentStoreCoordinator")
+	_nSManagedObjectContextSelSetPersistentStoreCoordinator                               = objc.RegisterName("setPersistentStoreCoordinator:")
+	_nSManagedObjectContextSelParentContext                                               = objc.RegisterName("parentContext")
+	_nSManagedObjectContextSelSetParentContext                                            = objc.RegisterName("setParentContext:")
+	_nSManagedObjectContextSelName                                                        = objc.RegisterName("name")
+	_nSManagedObjectContextSelSetName                                                     = objc.RegisterName("setName:")
+	_nSManagedObjectContextSelUndoManager                                                 = objc.RegisterName("undoManager")
+	_nSManagedObjectContextSelSetUndoManager                                              = objc.RegisterName("setUndoManager:")
+	_nSManagedObjectContextSelHasChanges                                                  = objc.RegisterName("hasChanges")
+	_nSManagedObjectContextSelUserInfo                                                    = objc.RegisterName("userInfo")
+	_nSManagedObjectContextSelConcurrencyType                                             = objc.RegisterName("concurrencyType")
+	_nSManagedObjectContextSelInsertedObjects                                             = objc.RegisterName("insertedObjects")
+	_nSManagedObjectContextSelUpdatedObjects                                              = objc.RegisterName("updatedObjects")
+	_nSManagedObjectContextSelDeletedObjects                                              = objc.RegisterName("deletedObjects")
+	_nSManagedObjectContextSelRegisteredObjects                                           = objc.RegisterName("registeredObjects")
+	_nSManagedObjectContextSelPropagatesDeletesAtEndOfEvent                               = objc.RegisterName("propagatesDeletesAtEndOfEvent")
+	_nSManagedObjectContextSelSetPropagatesDeletesAtEndOfEvent                            = objc.RegisterName("setPropagatesDeletesAtEndOfEvent:")
+	_nSManagedObjectContextSelRetainsRegisteredObjects                                    = objc.RegisterName("retainsRegisteredObjects")
+	_nSManagedObjectContextSelSetRetainsRegisteredObjects                                 = objc.RegisterName("setRetainsRegisteredObjects:")
+	_nSManagedObjectContextSelShouldDeleteInaccessibleFaults                              = objc.RegisterName("shouldDeleteInaccessibleFaults")
+	_nSManagedObjectContextSelSetShouldDeleteInaccessibleFaults                           = objc.RegisterName("setShouldDeleteInaccessibleFaults:")
+	_nSManagedObjectContextSelStalenessInterval                                           = objc.RegisterName("stalenessInterval")
+	_nSManagedObjectContextSelSetStalenessInterval                                        = objc.RegisterName("setStalenessInterval:")
+	_nSManagedObjectContextSelMergePolicy                                                 = objc.RegisterName("mergePolicy")
+	_nSManagedObjectContextSelSetMergePolicy                                              = objc.RegisterName("setMergePolicy:")
+	_nSManagedObjectContextSelQueryGenerationToken                                        = objc.RegisterName("queryGenerationToken")
+	_nSManagedObjectContextSelAutomaticallyMergesChangesFromParent                        = objc.RegisterName("automaticallyMergesChangesFromParent")
+	_nSManagedObjectContextSelSetAutomaticallyMergesChangesFromParent                     = objc.RegisterName("setAutomaticallyMergesChangesFromParent:")
+	_nSManagedObjectContextSelTransactionAuthor                                           = objc.RegisterName("transactionAuthor")
+	_nSManagedObjectContextSelSetTransactionAuthor                                        = objc.RegisterName("setTransactionAuthor:")
 )
 
 func NSManagedObjectContextFromID(id objc.ID) *NSManagedObjectContext {
@@ -101,13 +101,17 @@ func NSManagedObjectContextNew() *NSManagedObjectContext {
 // Deprecated: Use -initWithConcurrencyType: instead
 func (o *NSManagedObjectContext) Init() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSManagedObjectContext) InitWithConcurrencyType(ct NSManagedObjectContextConcurrencyType) *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelInitWithConcurrencyType, ct)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
@@ -135,20 +139,26 @@ func (o *NSManagedObjectContext) PerformBlockAndWait(block func()) {
 
 func (o *NSManagedObjectContext) ObjectRegisteredForID(objectID *NSManagedObjectID) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelObjectRegisteredForID, objectID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
 func (o *NSManagedObjectContext) ObjectWithID(objectID *NSManagedObjectID) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelObjectWithID, objectID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
 func (o *NSManagedObjectContext) ExistingObjectWithIDError(objectID *NSManagedObjectID) (*NSManagedObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExistingObjectWithIDError, objectID.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -176,7 +186,9 @@ func (o *NSManagedObjectContext) CountForFetchRequestError(request *NSFetchReque
 func (o *NSManagedObjectContext) ExecuteRequestError(request *NSPersistentStoreRequest) (*NSPersistentStoreResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelExecuteRequestError, request.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -285,7 +297,9 @@ func (o *NSManagedObjectContext) SetQueryGenerationFromTokenError(generation *NS
 
 func (o *NSManagedObjectContext) PersistentStoreCoordinator() *NSPersistentStoreCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelPersistentStoreCoordinator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreCoordinatorFromID(_ret)
 }
 
@@ -295,7 +309,9 @@ func (o *NSManagedObjectContext) SetPersistentStoreCoordinator(persistentStoreCo
 
 func (o *NSManagedObjectContext) ParentContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelParentContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
@@ -305,7 +321,9 @@ func (o *NSManagedObjectContext) SetParentContext(parentContext *NSManagedObject
 
 func (o *NSManagedObjectContext) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -315,7 +333,9 @@ func (o *NSManagedObjectContext) SetName(name *foundation.NSString) {
 
 func (o *NSManagedObjectContext) UndoManager() *foundation.NSUndoManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelUndoManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUndoManagerFromID(_ret)
 }
 
@@ -340,25 +360,33 @@ func (o *NSManagedObjectContext) ConcurrencyType() NSManagedObjectContextConcurr
 
 func (o *NSManagedObjectContext) InsertedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelInsertedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSManagedObjectContext) UpdatedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelUpdatedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSManagedObjectContext) DeletedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelDeletedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSManagedObjectContext) RegisteredObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelRegisteredObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
@@ -410,7 +438,9 @@ func (o *NSManagedObjectContext) SetMergePolicy(mergePolicy objc.ID) {
 
 func (o *NSManagedObjectContext) QueryGenerationToken() *NSQueryGenerationToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelQueryGenerationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSQueryGenerationTokenFromID(_ret)
 }
 
@@ -425,11 +455,12 @@ func (o *NSManagedObjectContext) SetAutomaticallyMergesChangesFromParent(automat
 
 func (o *NSManagedObjectContext) TransactionAuthor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectContextSelTransactionAuthor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSManagedObjectContext) SetTransactionAuthor(transactionAuthor *foundation.NSString) {
 	o.Ptr().Send(_nSManagedObjectContextSelSetTransactionAuthor, transactionAuthor.Ptr())
 }
-

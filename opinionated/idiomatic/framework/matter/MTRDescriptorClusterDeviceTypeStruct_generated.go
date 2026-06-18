@@ -16,7 +16,9 @@ type MTRDescriptorClusterDeviceTypeStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDescriptorClusterDeviceTypeStruct].
-func (x *MTRDescriptorClusterDeviceTypeStruct) Unwrap() *raw.MTRDescriptorClusterDeviceTypeStruct { return x.inner }
+func (x *MTRDescriptorClusterDeviceTypeStruct) Unwrap() *raw.MTRDescriptorClusterDeviceTypeStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -84,7 +86,9 @@ func (x *MTRDescriptorClusterDeviceTypeStruct) SetRevision(revision *foundation.
 	x.inner.SetRevision(revision)
 }
 
-func (x *MTRDescriptorClusterDeviceTypeStruct) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct { return x.inner }
+func (x *MTRDescriptorClusterDeviceTypeStruct) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct {
+	return x.inner
+}
 
 // MTRDescriptorClusterDeviceTypeStructable is the interface implemented by [MTRDescriptorClusterDeviceTypeStruct], for mocking and DI.
 type MTRDescriptorClusterDeviceTypeStructable interface {
@@ -101,4 +105,3 @@ type MTRDescriptorClusterDeviceTypeStructable interface {
 }
 
 var _ MTRDescriptorClusterDeviceTypeStructable = (*MTRDescriptorClusterDeviceTypeStruct)(nil)
-

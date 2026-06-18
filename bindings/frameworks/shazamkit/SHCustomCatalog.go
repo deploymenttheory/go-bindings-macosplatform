@@ -18,14 +18,14 @@ type SHCustomCatalog struct {
 }
 
 var (
-	_clsSHCustomCatalog = _objcClass("SHCustomCatalog")
+	_clsSHCustomCatalog                                                 = _objcClass("SHCustomCatalog")
 	_sHCustomCatalogSelAddReferenceSignatureRepresentingMediaItemsError = objc.RegisterName("addReferenceSignature:representingMediaItems:error:")
-	_sHCustomCatalogSelAddCustomCatalogFromURLError = objc.RegisterName("addCustomCatalogFromURL:error:")
-	_sHCustomCatalogSelWriteToURLError = objc.RegisterName("writeToURL:error:")
-	_sHCustomCatalogSelNew = objc.RegisterName("new")
-	_sHCustomCatalogSelInit = objc.RegisterName("init")
-	_sHCustomCatalogSelInitWithDataRepresentationError = objc.RegisterName("initWithDataRepresentation:error:")
-	_sHCustomCatalogSelDataRepresentation = objc.RegisterName("dataRepresentation")
+	_sHCustomCatalogSelAddCustomCatalogFromURLError                     = objc.RegisterName("addCustomCatalogFromURL:error:")
+	_sHCustomCatalogSelWriteToURLError                                  = objc.RegisterName("writeToURL:error:")
+	_sHCustomCatalogSelNew                                              = objc.RegisterName("new")
+	_sHCustomCatalogSelInit                                             = objc.RegisterName("init")
+	_sHCustomCatalogSelInitWithDataRepresentationError                  = objc.RegisterName("initWithDataRepresentation:error:")
+	_sHCustomCatalogSelDataRepresentation                               = objc.RegisterName("dataRepresentation")
 )
 
 func SHCustomCatalogFromID(id objc.ID) *SHCustomCatalog {
@@ -78,7 +78,9 @@ func SHCustomCatalogNew() *SHCustomCatalog {
 // Creates a new custom catalog object for storing reference audio signatures and their associated metadata.
 func (o *SHCustomCatalog) Init() *SHCustomCatalog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHCustomCatalogSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHCustomCatalogFromID(_ret)
 }
 
@@ -86,7 +88,9 @@ func (o *SHCustomCatalog) Init() *SHCustomCatalog {
 func (o *SHCustomCatalog) InitWithDataRepresentationError(dataRepresentation *foundation.NSData) (*SHCustomCatalog, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHCustomCatalogSelInitWithDataRepresentationError, dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -96,7 +100,8 @@ func (o *SHCustomCatalog) InitWithDataRepresentationError(dataRepresentation *fo
 // The data representation of this file, it can be written to disk
 func (o *SHCustomCatalog) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHCustomCatalogSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

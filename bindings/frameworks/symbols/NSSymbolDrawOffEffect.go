@@ -15,13 +15,13 @@ type NSSymbolDrawOffEffect struct {
 }
 
 var (
-	_clsNSSymbolDrawOffEffect = _objcClass("NSSymbolDrawOffEffect")
-	_nSSymbolDrawOffEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolDrawOffEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
-	_nSSymbolDrawOffEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
+	_clsNSSymbolDrawOffEffect                       = _objcClass("NSSymbolDrawOffEffect")
+	_nSSymbolDrawOffEffectSelEffect                 = objc.RegisterName("effect")
+	_nSSymbolDrawOffEffectSelEffectWithByLayer      = objc.RegisterName("effectWithByLayer")
+	_nSSymbolDrawOffEffectSelEffectWithWholeSymbol  = objc.RegisterName("effectWithWholeSymbol")
 	_nSSymbolDrawOffEffectSelEffectWithIndividually = objc.RegisterName("effectWithIndividually")
-	_nSSymbolDrawOffEffectSelEffectWithReversed = objc.RegisterName("effectWithReversed")
-	_nSSymbolDrawOffEffectSelEffectWithNonReversed = objc.RegisterName("effectWithNonReversed")
+	_nSSymbolDrawOffEffectSelEffectWithReversed     = objc.RegisterName("effectWithReversed")
+	_nSSymbolDrawOffEffectSelEffectWithNonReversed  = objc.RegisterName("effectWithNonReversed")
 )
 
 func NSSymbolDrawOffEffectFromID(id objc.ID) *NSSymbolDrawOffEffect {
@@ -37,42 +37,53 @@ func NSSymbolDrawOffEffectFromID(id objc.ID) *NSSymbolDrawOffEffect {
 // The default draw off effect, determined by the system.
 func NSSymbolDrawOffEffectEffect() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDrawOffEffect), _nSSymbolDrawOffEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (o *NSSymbolDrawOffEffect) EffectWithByLayer() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOffEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (o *NSSymbolDrawOffEffect) EffectWithWholeSymbol() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOffEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (o *NSSymbolDrawOffEffect) EffectWithIndividually() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOffEffectSelEffectWithIndividually)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
 func (o *NSSymbolDrawOffEffect) EffectWithReversed() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOffEffectSelEffectWithReversed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that only animates forwards. This cancels the reversed variant.
 func (o *NSSymbolDrawOffEffect) EffectWithNonReversed() *NSSymbolDrawOffEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDrawOffEffectSelEffectWithNonReversed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDrawOffEffectFromID(_ret)
 }
-

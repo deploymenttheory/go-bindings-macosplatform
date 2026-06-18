@@ -16,13 +16,13 @@ type MTLBlitPassSampleBufferAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLBlitPassSampleBufferAttachmentDescriptor = _objcClass("MTLBlitPassSampleBufferAttachmentDescriptor")
-	_mTLBlitPassSampleBufferAttachmentDescriptorSelSampleBuffer = objc.RegisterName("sampleBuffer")
-	_mTLBlitPassSampleBufferAttachmentDescriptorSelSetSampleBuffer = objc.RegisterName("setSampleBuffer:")
-	_mTLBlitPassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex = objc.RegisterName("startOfEncoderSampleIndex")
+	_clsMTLBlitPassSampleBufferAttachmentDescriptor                             = _objcClass("MTLBlitPassSampleBufferAttachmentDescriptor")
+	_mTLBlitPassSampleBufferAttachmentDescriptorSelSampleBuffer                 = objc.RegisterName("sampleBuffer")
+	_mTLBlitPassSampleBufferAttachmentDescriptorSelSetSampleBuffer              = objc.RegisterName("setSampleBuffer:")
+	_mTLBlitPassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex    = objc.RegisterName("startOfEncoderSampleIndex")
 	_mTLBlitPassSampleBufferAttachmentDescriptorSelSetStartOfEncoderSampleIndex = objc.RegisterName("setStartOfEncoderSampleIndex:")
-	_mTLBlitPassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex = objc.RegisterName("endOfEncoderSampleIndex")
-	_mTLBlitPassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex = objc.RegisterName("setEndOfEncoderSampleIndex:")
+	_mTLBlitPassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex      = objc.RegisterName("endOfEncoderSampleIndex")
+	_mTLBlitPassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex   = objc.RegisterName("setEndOfEncoderSampleIndex:")
 )
 
 func MTLBlitPassSampleBufferAttachmentDescriptorFromID(id objc.ID) *MTLBlitPassSampleBufferAttachmentDescriptor {
@@ -64,4 +64,3 @@ func (o *MTLBlitPassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() 
 func (o *MTLBlitPassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
 	o.Ptr().Send(_mTLBlitPassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex, endOfEncoderSampleIndex)
 }
-

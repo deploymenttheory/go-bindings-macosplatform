@@ -15,17 +15,17 @@ type NSAttributedStringMarkdownParsingOptions struct {
 }
 
 var (
-	_clsNSAttributedStringMarkdownParsingOptions = _objcClass("NSAttributedStringMarkdownParsingOptions")
-	_nSAttributedStringMarkdownParsingOptionsSelInit = objc.RegisterName("init")
-	_nSAttributedStringMarkdownParsingOptionsSelAllowsExtendedAttributes = objc.RegisterName("allowsExtendedAttributes")
-	_nSAttributedStringMarkdownParsingOptionsSelSetAllowsExtendedAttributes = objc.RegisterName("setAllowsExtendedAttributes:")
-	_nSAttributedStringMarkdownParsingOptionsSelInterpretedSyntax = objc.RegisterName("interpretedSyntax")
-	_nSAttributedStringMarkdownParsingOptionsSelSetInterpretedSyntax = objc.RegisterName("setInterpretedSyntax:")
-	_nSAttributedStringMarkdownParsingOptionsSelFailurePolicy = objc.RegisterName("failurePolicy")
-	_nSAttributedStringMarkdownParsingOptionsSelSetFailurePolicy = objc.RegisterName("setFailurePolicy:")
-	_nSAttributedStringMarkdownParsingOptionsSelLanguageCode = objc.RegisterName("languageCode")
-	_nSAttributedStringMarkdownParsingOptionsSelSetLanguageCode = objc.RegisterName("setLanguageCode:")
-	_nSAttributedStringMarkdownParsingOptionsSelAppliesSourcePositionAttributes = objc.RegisterName("appliesSourcePositionAttributes")
+	_clsNSAttributedStringMarkdownParsingOptions                                   = _objcClass("NSAttributedStringMarkdownParsingOptions")
+	_nSAttributedStringMarkdownParsingOptionsSelInit                               = objc.RegisterName("init")
+	_nSAttributedStringMarkdownParsingOptionsSelAllowsExtendedAttributes           = objc.RegisterName("allowsExtendedAttributes")
+	_nSAttributedStringMarkdownParsingOptionsSelSetAllowsExtendedAttributes        = objc.RegisterName("setAllowsExtendedAttributes:")
+	_nSAttributedStringMarkdownParsingOptionsSelInterpretedSyntax                  = objc.RegisterName("interpretedSyntax")
+	_nSAttributedStringMarkdownParsingOptionsSelSetInterpretedSyntax               = objc.RegisterName("setInterpretedSyntax:")
+	_nSAttributedStringMarkdownParsingOptionsSelFailurePolicy                      = objc.RegisterName("failurePolicy")
+	_nSAttributedStringMarkdownParsingOptionsSelSetFailurePolicy                   = objc.RegisterName("setFailurePolicy:")
+	_nSAttributedStringMarkdownParsingOptionsSelLanguageCode                       = objc.RegisterName("languageCode")
+	_nSAttributedStringMarkdownParsingOptionsSelSetLanguageCode                    = objc.RegisterName("setLanguageCode:")
+	_nSAttributedStringMarkdownParsingOptionsSelAppliesSourcePositionAttributes    = objc.RegisterName("appliesSourcePositionAttributes")
 	_nSAttributedStringMarkdownParsingOptionsSelSetAppliesSourcePositionAttributes = objc.RegisterName("setAppliesSourcePositionAttributes:")
 )
 
@@ -41,7 +41,9 @@ func NSAttributedStringMarkdownParsingOptionsFromID(id objc.ID) *NSAttributedStr
 
 func (o *NSAttributedStringMarkdownParsingOptions) Init() *NSAttributedStringMarkdownParsingOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringMarkdownParsingOptionsFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *NSAttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolic
 
 func (o *NSAttributedStringMarkdownParsingOptions) LanguageCode() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownParsingOptionsSelLanguageCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -90,4 +94,3 @@ func (o *NSAttributedStringMarkdownParsingOptions) AppliesSourcePositionAttribut
 func (o *NSAttributedStringMarkdownParsingOptions) SetAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) {
 	o.Ptr().Send(_nSAttributedStringMarkdownParsingOptionsSelSetAppliesSourcePositionAttributes, appliesSourcePositionAttributes)
 }
-

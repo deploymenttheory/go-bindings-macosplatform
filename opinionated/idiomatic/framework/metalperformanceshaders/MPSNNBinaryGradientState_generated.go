@@ -59,4 +59,3 @@ type NNBinaryGradientStateable interface {
 }
 
 var _ NNBinaryGradientStateable = (*NNBinaryGradientState)(nil)
-

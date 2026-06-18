@@ -16,7 +16,7 @@ type MTLType struct {
 }
 
 var (
-	_clsMTLType = _objcClass("MTLType")
+	_clsMTLType         = _objcClass("MTLType")
 	_mTLTypeSelDataType = objc.RegisterName("dataType")
 )
 
@@ -34,4 +34,3 @@ func (o *MTLType) DataType() MTLDataType {
 	_ret := objc.Send[MTLDataType](o.Ptr(), _mTLTypeSelDataType)
 	return _ret
 }
-

@@ -18,21 +18,21 @@ type NSColorList struct {
 }
 
 var (
-	_clsNSColorList = _objcClass("NSColorList")
-	_nSColorListSelColorListNamed = objc.RegisterName("colorListNamed:")
-	_nSColorListSelInitWithName = objc.RegisterName("initWithName:")
-	_nSColorListSelInitWithNameFromFile = objc.RegisterName("initWithName:fromFile:")
-	_nSColorListSelSetColorForKey = objc.RegisterName("setColor:forKey:")
+	_clsNSColorList                      = _objcClass("NSColorList")
+	_nSColorListSelColorListNamed        = objc.RegisterName("colorListNamed:")
+	_nSColorListSelInitWithName          = objc.RegisterName("initWithName:")
+	_nSColorListSelInitWithNameFromFile  = objc.RegisterName("initWithName:fromFile:")
+	_nSColorListSelSetColorForKey        = objc.RegisterName("setColor:forKey:")
 	_nSColorListSelInsertColorKeyAtIndex = objc.RegisterName("insertColor:key:atIndex:")
-	_nSColorListSelRemoveColorWithKey = objc.RegisterName("removeColorWithKey:")
-	_nSColorListSelColorWithKey = objc.RegisterName("colorWithKey:")
-	_nSColorListSelWriteToURLError = objc.RegisterName("writeToURL:error:")
-	_nSColorListSelWriteToFile = objc.RegisterName("writeToFile:")
-	_nSColorListSelRemoveFile = objc.RegisterName("removeFile")
-	_nSColorListSelAvailableColorLists = objc.RegisterName("availableColorLists")
-	_nSColorListSelName = objc.RegisterName("name")
-	_nSColorListSelAllKeys = objc.RegisterName("allKeys")
-	_nSColorListSelIsEditable = objc.RegisterName("isEditable")
+	_nSColorListSelRemoveColorWithKey    = objc.RegisterName("removeColorWithKey:")
+	_nSColorListSelColorWithKey          = objc.RegisterName("colorWithKey:")
+	_nSColorListSelWriteToURLError       = objc.RegisterName("writeToURL:error:")
+	_nSColorListSelWriteToFile           = objc.RegisterName("writeToFile:")
+	_nSColorListSelRemoveFile            = objc.RegisterName("removeFile")
+	_nSColorListSelAvailableColorLists   = objc.RegisterName("availableColorLists")
+	_nSColorListSelName                  = objc.RegisterName("name")
+	_nSColorListSelAllKeys               = objc.RegisterName("allKeys")
+	_nSColorListSelIsEditable            = objc.RegisterName("isEditable")
 )
 
 func NSColorListFromID(id objc.ID) *NSColorList {
@@ -47,19 +47,25 @@ func NSColorListFromID(id objc.ID) *NSColorList {
 
 func NSColorListColorListNamed(name *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorList), _nSColorListSelColorListNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorListFromID(_ret)
 }
 
 func (o *NSColorList) InitWithName(name *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorListFromID(_ret)
 }
 
 func (o *NSColorList) InitWithNameFromFile(name *foundation.NSString, path *foundation.NSString) *NSColorList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelInitWithNameFromFile, name.Ptr(), path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorListFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *NSColorList) RemoveColorWithKey(key *foundation.NSString) {
 
 func (o *NSColorList) ColorWithKey(key *foundation.NSString) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelColorWithKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -103,13 +111,17 @@ func (o *NSColorList) RemoveFile() {
 
 func NSColorListAvailableColorLists() *foundation.NSArray[*NSColorList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorList), _nSColorListSelAvailableColorLists)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColorList](_ret)
 }
 
 func (o *NSColorList) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorListSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -122,4 +134,3 @@ func (o *NSColorList) IsEditable() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSColorListSelIsEditable)
 	return _ret
 }
-

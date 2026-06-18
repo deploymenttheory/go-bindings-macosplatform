@@ -17,20 +17,20 @@ type NSAnimationContext struct {
 }
 
 var (
-	_clsNSAnimationContext = _objcClass("NSAnimationContext")
+	_clsNSAnimationContext                                   = _objcClass("NSAnimationContext")
 	_nSAnimationContextSelRunAnimationGroupCompletionHandler = objc.RegisterName("runAnimationGroup:completionHandler:")
-	_nSAnimationContextSelRunAnimationGroup = objc.RegisterName("runAnimationGroup:")
-	_nSAnimationContextSelBeginGrouping = objc.RegisterName("beginGrouping")
-	_nSAnimationContextSelEndGrouping = objc.RegisterName("endGrouping")
-	_nSAnimationContextSelCurrentContext = objc.RegisterName("currentContext")
-	_nSAnimationContextSelDuration = objc.RegisterName("duration")
-	_nSAnimationContextSelSetDuration = objc.RegisterName("setDuration:")
-	_nSAnimationContextSelTimingFunction = objc.RegisterName("timingFunction")
-	_nSAnimationContextSelSetTimingFunction = objc.RegisterName("setTimingFunction:")
-	_nSAnimationContextSelCompletionHandler = objc.RegisterName("completionHandler")
-	_nSAnimationContextSelSetCompletionHandler = objc.RegisterName("setCompletionHandler:")
-	_nSAnimationContextSelAllowsImplicitAnimation = objc.RegisterName("allowsImplicitAnimation")
-	_nSAnimationContextSelSetAllowsImplicitAnimation = objc.RegisterName("setAllowsImplicitAnimation:")
+	_nSAnimationContextSelRunAnimationGroup                  = objc.RegisterName("runAnimationGroup:")
+	_nSAnimationContextSelBeginGrouping                      = objc.RegisterName("beginGrouping")
+	_nSAnimationContextSelEndGrouping                        = objc.RegisterName("endGrouping")
+	_nSAnimationContextSelCurrentContext                     = objc.RegisterName("currentContext")
+	_nSAnimationContextSelDuration                           = objc.RegisterName("duration")
+	_nSAnimationContextSelSetDuration                        = objc.RegisterName("setDuration:")
+	_nSAnimationContextSelTimingFunction                     = objc.RegisterName("timingFunction")
+	_nSAnimationContextSelSetTimingFunction                  = objc.RegisterName("setTimingFunction:")
+	_nSAnimationContextSelCompletionHandler                  = objc.RegisterName("completionHandler")
+	_nSAnimationContextSelSetCompletionHandler               = objc.RegisterName("setCompletionHandler:")
+	_nSAnimationContextSelAllowsImplicitAnimation            = objc.RegisterName("allowsImplicitAnimation")
+	_nSAnimationContextSelSetAllowsImplicitAnimation         = objc.RegisterName("setAllowsImplicitAnimation:")
 )
 
 func NSAnimationContextFromID(id objc.ID) *NSAnimationContext {
@@ -88,7 +88,9 @@ func NSAnimationContextEndGrouping() {
 
 func NSAnimationContextCurrentContext() *NSAnimationContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAnimationContext), _nSAnimationContextSelCurrentContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAnimationContextFromID(_ret)
 }
 
@@ -103,7 +105,9 @@ func (o *NSAnimationContext) SetDuration(duration float64) {
 
 func (o *NSAnimationContext) TimingFunction() *quartzcore.CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationContextSelTimingFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CAMediaTimingFunctionFromID(_ret)
 }
 
@@ -135,4 +139,3 @@ func (o *NSAnimationContext) AllowsImplicitAnimation() bool {
 func (o *NSAnimationContext) SetAllowsImplicitAnimation(allowsImplicitAnimation bool) {
 	o.Ptr().Send(_nSAnimationContextSelSetAllowsImplicitAnimation, allowsImplicitAnimation)
 }
-

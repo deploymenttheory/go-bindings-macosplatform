@@ -16,17 +16,17 @@ type PKBarcodeEventSignatureRequest struct {
 }
 
 var (
-	_clsPKBarcodeEventSignatureRequest = _objcClass("PKBarcodeEventSignatureRequest")
+	_clsPKBarcodeEventSignatureRequest                        = _objcClass("PKBarcodeEventSignatureRequest")
 	_pKBarcodeEventSignatureRequestSelDeviceAccountIdentifier = objc.RegisterName("deviceAccountIdentifier")
-	_pKBarcodeEventSignatureRequestSelTransactionIdentifier = objc.RegisterName("transactionIdentifier")
-	_pKBarcodeEventSignatureRequestSelBarcodeIdentifier = objc.RegisterName("barcodeIdentifier")
-	_pKBarcodeEventSignatureRequestSelRawMerchantName = objc.RegisterName("rawMerchantName")
-	_pKBarcodeEventSignatureRequestSelMerchantName = objc.RegisterName("merchantName")
-	_pKBarcodeEventSignatureRequestSelTransactionDate = objc.RegisterName("transactionDate")
-	_pKBarcodeEventSignatureRequestSelCurrencyCode = objc.RegisterName("currencyCode")
-	_pKBarcodeEventSignatureRequestSelAmount = objc.RegisterName("amount")
-	_pKBarcodeEventSignatureRequestSelTransactionStatus = objc.RegisterName("transactionStatus")
-	_pKBarcodeEventSignatureRequestSelPartialSignature = objc.RegisterName("partialSignature")
+	_pKBarcodeEventSignatureRequestSelTransactionIdentifier   = objc.RegisterName("transactionIdentifier")
+	_pKBarcodeEventSignatureRequestSelBarcodeIdentifier       = objc.RegisterName("barcodeIdentifier")
+	_pKBarcodeEventSignatureRequestSelRawMerchantName         = objc.RegisterName("rawMerchantName")
+	_pKBarcodeEventSignatureRequestSelMerchantName            = objc.RegisterName("merchantName")
+	_pKBarcodeEventSignatureRequestSelTransactionDate         = objc.RegisterName("transactionDate")
+	_pKBarcodeEventSignatureRequestSelCurrencyCode            = objc.RegisterName("currencyCode")
+	_pKBarcodeEventSignatureRequestSelAmount                  = objc.RegisterName("amount")
+	_pKBarcodeEventSignatureRequestSelTransactionStatus       = objc.RegisterName("transactionStatus")
+	_pKBarcodeEventSignatureRequestSelPartialSignature        = objc.RegisterName("partialSignature")
 )
 
 func PKBarcodeEventSignatureRequestFromID(id objc.ID) *PKBarcodeEventSignatureRequest {
@@ -41,61 +41,80 @@ func PKBarcodeEventSignatureRequestFromID(id objc.ID) *PKBarcodeEventSignatureRe
 
 func (o *PKBarcodeEventSignatureRequest) DeviceAccountIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelDeviceAccountIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) TransactionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelTransactionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) BarcodeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelBarcodeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) RawMerchantName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelRawMerchantName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) MerchantName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelMerchantName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) TransactionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelTransactionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) CurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) Amount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) TransactionStatus() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelTransactionStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureRequest) PartialSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureRequestSelPartialSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

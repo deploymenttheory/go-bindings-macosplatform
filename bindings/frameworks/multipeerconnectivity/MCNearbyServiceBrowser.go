@@ -16,15 +16,15 @@ type MCNearbyServiceBrowser struct {
 }
 
 var (
-	_clsMCNearbyServiceBrowser = _objcClass("MCNearbyServiceBrowser")
-	_mCNearbyServiceBrowserSelInitWithPeerServiceType = objc.RegisterName("initWithPeer:serviceType:")
-	_mCNearbyServiceBrowserSelStartBrowsingForPeers = objc.RegisterName("startBrowsingForPeers")
-	_mCNearbyServiceBrowserSelStopBrowsingForPeers = objc.RegisterName("stopBrowsingForPeers")
+	_clsMCNearbyServiceBrowser                                      = _objcClass("MCNearbyServiceBrowser")
+	_mCNearbyServiceBrowserSelInitWithPeerServiceType               = objc.RegisterName("initWithPeer:serviceType:")
+	_mCNearbyServiceBrowserSelStartBrowsingForPeers                 = objc.RegisterName("startBrowsingForPeers")
+	_mCNearbyServiceBrowserSelStopBrowsingForPeers                  = objc.RegisterName("stopBrowsingForPeers")
 	_mCNearbyServiceBrowserSelInvitePeerToSessionWithContextTimeout = objc.RegisterName("invitePeer:toSession:withContext:timeout:")
-	_mCNearbyServiceBrowserSelDelegate = objc.RegisterName("delegate")
-	_mCNearbyServiceBrowserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mCNearbyServiceBrowserSelMyPeerID = objc.RegisterName("myPeerID")
-	_mCNearbyServiceBrowserSelServiceType = objc.RegisterName("serviceType")
+	_mCNearbyServiceBrowserSelDelegate                              = objc.RegisterName("delegate")
+	_mCNearbyServiceBrowserSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_mCNearbyServiceBrowserSelMyPeerID                              = objc.RegisterName("myPeerID")
+	_mCNearbyServiceBrowserSelServiceType                           = objc.RegisterName("serviceType")
 )
 
 func MCNearbyServiceBrowserFromID(id objc.ID) *MCNearbyServiceBrowser {
@@ -39,7 +39,9 @@ func MCNearbyServiceBrowserFromID(id objc.ID) *MCNearbyServiceBrowser {
 
 func (o *MCNearbyServiceBrowser) InitWithPeerServiceType(myPeerID *MCPeerID, serviceType *foundation.NSString) *MCNearbyServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceBrowserSelInitWithPeerServiceType, myPeerID.Ptr(), serviceType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCNearbyServiceBrowserFromID(_ret)
 }
 
@@ -66,13 +68,16 @@ func (o *MCNearbyServiceBrowser) SetDelegate(delegate MCNearbyServiceBrowserDele
 
 func (o *MCNearbyServiceBrowser) MyPeerID() *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceBrowserSelMyPeerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCPeerIDFromID(_ret)
 }
 
 func (o *MCNearbyServiceBrowser) ServiceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceBrowserSelServiceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

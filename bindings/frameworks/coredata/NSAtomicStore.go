@@ -18,19 +18,19 @@ type NSAtomicStore struct {
 }
 
 var (
-	_clsNSAtomicStore = _objcClass("NSAtomicStore")
+	_clsNSAtomicStore                                                              = _objcClass("NSAtomicStore")
 	_nSAtomicStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions = objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:")
-	_nSAtomicStoreSelLoad = objc.RegisterName("load:")
-	_nSAtomicStoreSelSave = objc.RegisterName("save:")
-	_nSAtomicStoreSelNewCacheNodeForManagedObject = objc.RegisterName("newCacheNodeForManagedObject:")
-	_nSAtomicStoreSelUpdateCacheNodeFromManagedObject = objc.RegisterName("updateCacheNode:fromManagedObject:")
-	_nSAtomicStoreSelCacheNodes = objc.RegisterName("cacheNodes")
-	_nSAtomicStoreSelAddCacheNodes = objc.RegisterName("addCacheNodes:")
-	_nSAtomicStoreSelWillRemoveCacheNodes = objc.RegisterName("willRemoveCacheNodes:")
-	_nSAtomicStoreSelCacheNodeForObjectID = objc.RegisterName("cacheNodeForObjectID:")
-	_nSAtomicStoreSelObjectIDForEntityReferenceObject = objc.RegisterName("objectIDForEntity:referenceObject:")
-	_nSAtomicStoreSelNewReferenceObjectForManagedObject = objc.RegisterName("newReferenceObjectForManagedObject:")
-	_nSAtomicStoreSelReferenceObjectForObjectID = objc.RegisterName("referenceObjectForObjectID:")
+	_nSAtomicStoreSelLoad                                                          = objc.RegisterName("load:")
+	_nSAtomicStoreSelSave                                                          = objc.RegisterName("save:")
+	_nSAtomicStoreSelNewCacheNodeForManagedObject                                  = objc.RegisterName("newCacheNodeForManagedObject:")
+	_nSAtomicStoreSelUpdateCacheNodeFromManagedObject                              = objc.RegisterName("updateCacheNode:fromManagedObject:")
+	_nSAtomicStoreSelCacheNodes                                                    = objc.RegisterName("cacheNodes")
+	_nSAtomicStoreSelAddCacheNodes                                                 = objc.RegisterName("addCacheNodes:")
+	_nSAtomicStoreSelWillRemoveCacheNodes                                          = objc.RegisterName("willRemoveCacheNodes:")
+	_nSAtomicStoreSelCacheNodeForObjectID                                          = objc.RegisterName("cacheNodeForObjectID:")
+	_nSAtomicStoreSelObjectIDForEntityReferenceObject                              = objc.RegisterName("objectIDForEntity:referenceObject:")
+	_nSAtomicStoreSelNewReferenceObjectForManagedObject                            = objc.RegisterName("newReferenceObjectForManagedObject:")
+	_nSAtomicStoreSelReferenceObjectForObjectID                                    = objc.RegisterName("referenceObjectForObjectID:")
 )
 
 func NSAtomicStoreFromID(id objc.ID) *NSAtomicStore {
@@ -45,7 +45,9 @@ func NSAtomicStoreFromID(id objc.ID) *NSAtomicStore {
 
 func (o *NSAtomicStore) InitWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *NSPersistentStoreCoordinator, configurationName *foundation.NSString, url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) *NSAtomicStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelInitWithPersistentStoreCoordinatorConfigurationNameURLOptions, coordinator.Ptr(), configurationName.Ptr(), url.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAtomicStoreFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func (o *NSAtomicStore) UpdateCacheNodeFromManagedObject(node *NSAtomicStoreCach
 
 func (o *NSAtomicStore) CacheNodes() *foundation.NSSet[*NSAtomicStoreCacheNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelCacheNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSAtomicStoreCacheNode](_ret)
 }
 
@@ -92,13 +96,17 @@ func (o *NSAtomicStore) WillRemoveCacheNodes(cacheNodes *foundation.NSSet[*NSAto
 
 func (o *NSAtomicStore) CacheNodeForObjectID(objectID *NSManagedObjectID) *NSAtomicStoreCacheNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelCacheNodeForObjectID, objectID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAtomicStoreCacheNodeFromID(_ret)
 }
 
 func (o *NSAtomicStore) ObjectIDForEntityReferenceObject(entity *NSEntityDescription, data objc.ID) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelObjectIDForEntityReferenceObject, entity.Ptr(), data)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -111,4 +119,3 @@ func (o *NSAtomicStore) ReferenceObjectForObjectID(objectID *NSManagedObjectID) 
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAtomicStoreSelReferenceObjectForObjectID, objectID.Ptr())
 	return _ret
 }
-

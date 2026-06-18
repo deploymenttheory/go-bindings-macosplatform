@@ -16,21 +16,21 @@ type SCNPhysicsConeTwistJoint struct {
 }
 
 var (
-	_clsSCNPhysicsConeTwistJoint = _objcClass("SCNPhysicsConeTwistJoint")
+	_clsSCNPhysicsConeTwistJoint                                = _objcClass("SCNPhysicsConeTwistJoint")
 	_sCNPhysicsConeTwistJointSelJointWithBodyAFrameABodyBFrameB = objc.RegisterName("jointWithBodyA:frameA:bodyB:frameB:")
-	_sCNPhysicsConeTwistJointSelJointWithBodyFrame = objc.RegisterName("jointWithBody:frame:")
-	_sCNPhysicsConeTwistJointSelBodyA = objc.RegisterName("bodyA")
-	_sCNPhysicsConeTwistJointSelFrameA = objc.RegisterName("frameA")
-	_sCNPhysicsConeTwistJointSelSetFrameA = objc.RegisterName("setFrameA:")
-	_sCNPhysicsConeTwistJointSelBodyB = objc.RegisterName("bodyB")
-	_sCNPhysicsConeTwistJointSelFrameB = objc.RegisterName("frameB")
-	_sCNPhysicsConeTwistJointSelSetFrameB = objc.RegisterName("setFrameB:")
-	_sCNPhysicsConeTwistJointSelMaximumAngularLimit1 = objc.RegisterName("maximumAngularLimit1")
-	_sCNPhysicsConeTwistJointSelSetMaximumAngularLimit1 = objc.RegisterName("setMaximumAngularLimit1:")
-	_sCNPhysicsConeTwistJointSelMaximumAngularLimit2 = objc.RegisterName("maximumAngularLimit2")
-	_sCNPhysicsConeTwistJointSelSetMaximumAngularLimit2 = objc.RegisterName("setMaximumAngularLimit2:")
-	_sCNPhysicsConeTwistJointSelMaximumTwistAngle = objc.RegisterName("maximumTwistAngle")
-	_sCNPhysicsConeTwistJointSelSetMaximumTwistAngle = objc.RegisterName("setMaximumTwistAngle:")
+	_sCNPhysicsConeTwistJointSelJointWithBodyFrame              = objc.RegisterName("jointWithBody:frame:")
+	_sCNPhysicsConeTwistJointSelBodyA                           = objc.RegisterName("bodyA")
+	_sCNPhysicsConeTwistJointSelFrameA                          = objc.RegisterName("frameA")
+	_sCNPhysicsConeTwistJointSelSetFrameA                       = objc.RegisterName("setFrameA:")
+	_sCNPhysicsConeTwistJointSelBodyB                           = objc.RegisterName("bodyB")
+	_sCNPhysicsConeTwistJointSelFrameB                          = objc.RegisterName("frameB")
+	_sCNPhysicsConeTwistJointSelSetFrameB                       = objc.RegisterName("setFrameB:")
+	_sCNPhysicsConeTwistJointSelMaximumAngularLimit1            = objc.RegisterName("maximumAngularLimit1")
+	_sCNPhysicsConeTwistJointSelSetMaximumAngularLimit1         = objc.RegisterName("setMaximumAngularLimit1:")
+	_sCNPhysicsConeTwistJointSelMaximumAngularLimit2            = objc.RegisterName("maximumAngularLimit2")
+	_sCNPhysicsConeTwistJointSelSetMaximumAngularLimit2         = objc.RegisterName("setMaximumAngularLimit2:")
+	_sCNPhysicsConeTwistJointSelMaximumTwistAngle               = objc.RegisterName("maximumTwistAngle")
+	_sCNPhysicsConeTwistJointSelSetMaximumTwistAngle            = objc.RegisterName("setMaximumTwistAngle:")
 )
 
 func SCNPhysicsConeTwistJointFromID(id objc.ID) *SCNPhysicsConeTwistJoint {
@@ -45,19 +45,25 @@ func SCNPhysicsConeTwistJointFromID(id objc.ID) *SCNPhysicsConeTwistJoint {
 
 func SCNPhysicsConeTwistJointJointWithBodyAFrameABodyBFrameB(bodyA *SCNPhysicsBody, frameA quartzcore.CATransform3D, bodyB *SCNPhysicsBody, frameB quartzcore.CATransform3D) *SCNPhysicsConeTwistJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsConeTwistJoint), _sCNPhysicsConeTwistJointSelJointWithBodyAFrameABodyBFrameB, bodyA.Ptr(), frameA, bodyB.Ptr(), frameB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsConeTwistJointFromID(_ret)
 }
 
 func SCNPhysicsConeTwistJointJointWithBodyFrame(body *SCNPhysicsBody, frame quartzcore.CATransform3D) *SCNPhysicsConeTwistJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsConeTwistJoint), _sCNPhysicsConeTwistJointSelJointWithBodyFrame, body.Ptr(), frame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsConeTwistJointFromID(_ret)
 }
 
 func (o *SCNPhysicsConeTwistJoint) BodyA() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsConeTwistJointSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *SCNPhysicsConeTwistJoint) SetFrameA(frameA quartzcore.CATransform3D) {
 
 func (o *SCNPhysicsConeTwistJoint) BodyB() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsConeTwistJointSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -111,4 +119,3 @@ func (o *SCNPhysicsConeTwistJoint) MaximumTwistAngle() float64 {
 func (o *SCNPhysicsConeTwistJoint) SetMaximumTwistAngle(maximumTwistAngle float64) {
 	o.Ptr().Send(_sCNPhysicsConeTwistJointSelSetMaximumTwistAngle, maximumTwistAngle)
 }
-

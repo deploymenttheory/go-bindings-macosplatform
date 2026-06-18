@@ -16,7 +16,9 @@ type FileHandleNetworkDeviceAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZFileHandleNetworkDeviceAttachment].
-func (x *FileHandleNetworkDeviceAttachment) Unwrap() *raw.VZFileHandleNetworkDeviceAttachment { return x.inner }
+func (x *FileHandleNetworkDeviceAttachment) Unwrap() *raw.VZFileHandleNetworkDeviceAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *FileHandleNetworkDeviceAttachment) SetMaximumTransmissionUnit(maximumTr
 	x.inner.SetMaximumTransmissionUnit(maximumTransmissionUnit)
 }
 
-func (x *FileHandleNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+func (x *FileHandleNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
+	return &x.inner.VZNetworkDeviceAttachment
+}
 
 // FileHandleNetworkDeviceAttachmentable is the interface implemented by [FileHandleNetworkDeviceAttachment], for mocking and DI.
 type FileHandleNetworkDeviceAttachmentable interface {
@@ -70,4 +74,3 @@ type FileHandleNetworkDeviceAttachmentable interface {
 }
 
 var _ FileHandleNetworkDeviceAttachmentable = (*FileHandleNetworkDeviceAttachment)(nil)
-

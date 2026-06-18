@@ -10,49 +10,49 @@ import (
 )
 
 var (
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListAddObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListCopySnapshot func(unsafe.Pointer, *uint) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListGetSeedValue func(unsafe.Pointer) uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListGetTypeID func() uint
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnLSSharedFileListInsertItemFSRef func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *carboncore.FSRef, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListInsertItemURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemCopyDisplayName func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemCopyIconRef func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemCopyResolvedURL func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemGetID func(unsafe.Pointer) uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemGetTypeID func() uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemMove func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemRemove func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnLSSharedFileListItemResolve func(unsafe.Pointer, uint, unsafe.Pointer, *carboncore.FSRef) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListItemSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListRemoveAllItems func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListRemoveObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListSetAuthorization func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnLSSharedFileListSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 )
 
@@ -165,4 +165,3 @@ func LSSharedFileListSetAuthorization(inList unsafe.Pointer, inAuthorization uns
 func LSSharedFileListSetProperty(inList unsafe.Pointer, inPropertyName unsafe.Pointer, inPropertyData unsafe.Pointer) int {
 	return _fnLSSharedFileListSetProperty(inList, inPropertyName, inPropertyData)
 }
-

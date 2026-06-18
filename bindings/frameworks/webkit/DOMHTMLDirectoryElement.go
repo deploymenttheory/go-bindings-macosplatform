@@ -15,8 +15,8 @@ type DOMHTMLDirectoryElement struct {
 }
 
 var (
-	_clsDOMHTMLDirectoryElement = _objcClass("DOMHTMLDirectoryElement")
-	_dOMHTMLDirectoryElementSelCompact = objc.RegisterName("compact")
+	_clsDOMHTMLDirectoryElement           = _objcClass("DOMHTMLDirectoryElement")
+	_dOMHTMLDirectoryElementSelCompact    = objc.RegisterName("compact")
 	_dOMHTMLDirectoryElementSelSetCompact = objc.RegisterName("setCompact:")
 )
 
@@ -38,4 +38,3 @@ func (o *DOMHTMLDirectoryElement) Compact() bool {
 func (o *DOMHTMLDirectoryElement) SetCompact(compact bool) {
 	o.Ptr().Send(_dOMHTMLDirectoryElementSelSetCompact, compact)
 }
-

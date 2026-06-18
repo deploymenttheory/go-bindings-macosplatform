@@ -56,7 +56,9 @@ func (x *ProjectTextElement) TextElementType() raw.PHProjectTextElementType {
 	return x.inner.TextElementType()
 }
 
-func (x *ProjectTextElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+func (x *ProjectTextElement) asProjectElement() *raw.PHProjectElement {
+	return &x.inner.PHProjectElement
+}
 
 // ProjectTextElementable is the interface implemented by [ProjectTextElement], for mocking and DI.
 type ProjectTextElementable interface {
@@ -67,4 +69,3 @@ type ProjectTextElementable interface {
 }
 
 var _ ProjectTextElementable = (*ProjectTextElement)(nil)
-

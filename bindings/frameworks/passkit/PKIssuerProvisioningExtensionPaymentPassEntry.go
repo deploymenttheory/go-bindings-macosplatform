@@ -18,9 +18,9 @@ type PKIssuerProvisioningExtensionPaymentPassEntry struct {
 }
 
 var (
-	_clsPKIssuerProvisioningExtensionPaymentPassEntry = _objcClass("PKIssuerProvisioningExtensionPaymentPassEntry")
+	_clsPKIssuerProvisioningExtensionPaymentPassEntry                                                  = _objcClass("PKIssuerProvisioningExtensionPaymentPassEntry")
 	_pKIssuerProvisioningExtensionPaymentPassEntrySelInitWithIdentifierTitleArtAddRequestConfiguration = objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:")
-	_pKIssuerProvisioningExtensionPaymentPassEntrySelAddRequestConfiguration = objc.RegisterName("addRequestConfiguration")
+	_pKIssuerProvisioningExtensionPaymentPassEntrySelAddRequestConfiguration                           = objc.RegisterName("addRequestConfiguration")
 )
 
 func PKIssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *PKIssuerProvisioningExtensionPaymentPassEntry {
@@ -35,13 +35,16 @@ func PKIssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *PKIssuerPr
 
 func (o *PKIssuerProvisioningExtensionPaymentPassEntry) InitWithIdentifierTitleArtAddRequestConfiguration(identifier *foundation.NSString, title *foundation.NSString, art unsafe.Pointer, configuration *PKAddPaymentPassRequestConfiguration) *PKIssuerProvisioningExtensionPaymentPassEntry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionPaymentPassEntrySelInitWithIdentifierTitleArtAddRequestConfiguration, identifier.Ptr(), title.Ptr(), art, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKIssuerProvisioningExtensionPaymentPassEntryFromID(_ret)
 }
 
 func (o *PKIssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *PKAddPaymentPassRequestConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionPaymentPassEntrySelAddRequestConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPaymentPassRequestConfigurationFromID(_ret)
 }
-

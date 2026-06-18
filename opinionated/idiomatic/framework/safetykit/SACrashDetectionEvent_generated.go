@@ -61,4 +61,3 @@ type CrashDetectionEventable interface {
 }
 
 var _ CrashDetectionEventable = (*CrashDetectionEvent)(nil)
-

@@ -97,4 +97,3 @@ type LinkedFunctionsable interface {
 }
 
 var _ LinkedFunctionsable = (*LinkedFunctions)(nil)
-

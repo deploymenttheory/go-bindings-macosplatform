@@ -191,4 +191,3 @@ type QCViewable interface {
 }
 
 var _ QCViewable = (*QCView)(nil)
-

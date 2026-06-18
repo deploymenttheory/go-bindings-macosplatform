@@ -10,19 +10,19 @@ import (
 type Ldap_sync_refresh_t int64
 
 const (
-	LDAP_SYNC_CAPI_NONE Ldap_sync_refresh_t = -1
-	LDAP_SYNC_CAPI_PHASE_FLAG Ldap_sync_refresh_t = 16
-	LDAP_SYNC_CAPI_IDSET_FLAG Ldap_sync_refresh_t = 32
-	LDAP_SYNC_CAPI_DONE_FLAG Ldap_sync_refresh_t = 64
-	LDAP_SYNC_CAPI_PRESENT Ldap_sync_refresh_t = 0
-	LDAP_SYNC_CAPI_ADD Ldap_sync_refresh_t = 1
-	LDAP_SYNC_CAPI_MODIFY Ldap_sync_refresh_t = 2
-	LDAP_SYNC_CAPI_DELETE Ldap_sync_refresh_t = 3
-	LDAP_SYNC_CAPI_PRESENTS Ldap_sync_refresh_t = 16
-	LDAP_SYNC_CAPI_DELETES Ldap_sync_refresh_t = 19
+	LDAP_SYNC_CAPI_NONE           Ldap_sync_refresh_t = -1
+	LDAP_SYNC_CAPI_PHASE_FLAG     Ldap_sync_refresh_t = 16
+	LDAP_SYNC_CAPI_IDSET_FLAG     Ldap_sync_refresh_t = 32
+	LDAP_SYNC_CAPI_DONE_FLAG      Ldap_sync_refresh_t = 64
+	LDAP_SYNC_CAPI_PRESENT        Ldap_sync_refresh_t = 0
+	LDAP_SYNC_CAPI_ADD            Ldap_sync_refresh_t = 1
+	LDAP_SYNC_CAPI_MODIFY         Ldap_sync_refresh_t = 2
+	LDAP_SYNC_CAPI_DELETE         Ldap_sync_refresh_t = 3
+	LDAP_SYNC_CAPI_PRESENTS       Ldap_sync_refresh_t = 16
+	LDAP_SYNC_CAPI_DELETES        Ldap_sync_refresh_t = 19
 	LDAP_SYNC_CAPI_PRESENTS_IDSET Ldap_sync_refresh_t = 48
-	LDAP_SYNC_CAPI_DELETES_IDSET Ldap_sync_refresh_t = 51
-	LDAP_SYNC_CAPI_DONE Ldap_sync_refresh_t = 80
+	LDAP_SYNC_CAPI_DELETES_IDSET  Ldap_sync_refresh_t = 51
+	LDAP_SYNC_CAPI_DONE           Ldap_sync_refresh_t = 80
 )
 
 func (e Ldap_sync_refresh_t) String() string {
@@ -55,4 +55,3 @@ func (e Ldap_sync_refresh_t) String() string {
 		return fmt.Sprintf("Ldap_sync_refresh_t(%d)", int64(e))
 	}
 }
-

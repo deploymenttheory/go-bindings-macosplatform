@@ -54,7 +54,9 @@ func (x *TextInputNotificationAction) TextInputPlaceholder() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *TextInputNotificationAction) asNotificationAction() *raw.UNNotificationAction { return &x.inner.UNNotificationAction }
+func (x *TextInputNotificationAction) asNotificationAction() *raw.UNNotificationAction {
+	return &x.inner.UNNotificationAction
+}
 
 // TextInputNotificationActionable is the interface implemented by [TextInputNotificationAction], for mocking and DI.
 type TextInputNotificationActionable interface {
@@ -64,4 +66,3 @@ type TextInputNotificationActionable interface {
 }
 
 var _ TextInputNotificationActionable = (*TextInputNotificationAction)(nil)
-

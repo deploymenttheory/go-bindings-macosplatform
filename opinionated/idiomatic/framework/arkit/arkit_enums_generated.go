@@ -13,8 +13,8 @@ type Ar_authorization_status_t int64
 
 const (
 	Ar_authorization_status_not_determined Ar_authorization_status_t = 0
-	Ar_authorization_status_allowed Ar_authorization_status_t = 1
-	Ar_authorization_status_denied Ar_authorization_status_t = 2
+	Ar_authorization_status_allowed        Ar_authorization_status_t = 1
+	Ar_authorization_status_denied         Ar_authorization_status_t = 2
 )
 
 func (e Ar_authorization_status_t) String() string {
@@ -64,9 +64,9 @@ type Ar_data_provider_state_t int64
 
 const (
 	Ar_data_provider_state_initialized Ar_data_provider_state_t = 0
-	Ar_data_provider_state_running Ar_data_provider_state_t = 1
-	Ar_data_provider_state_paused Ar_data_provider_state_t = 2
-	Ar_data_provider_state_stopped Ar_data_provider_state_t = 3
+	Ar_data_provider_state_running     Ar_data_provider_state_t = 1
+	Ar_data_provider_state_paused      Ar_data_provider_state_t = 2
+	Ar_data_provider_state_stopped     Ar_data_provider_state_t = 3
 )
 
 func (e Ar_data_provider_state_t) String() string {
@@ -105,9 +105,9 @@ func (e Ar_device_anchor_query_status_t) String() string {
 type Ar_device_anchor_tracking_state_t int64
 
 const (
-	Ar_device_anchor_tracking_state_untracked Ar_device_anchor_tracking_state_t = 0
+	Ar_device_anchor_tracking_state_untracked           Ar_device_anchor_tracking_state_t = 0
 	Ar_device_anchor_tracking_state_orientation_tracked Ar_device_anchor_tracking_state_t = 1
-	Ar_device_anchor_tracking_state_tracked Ar_device_anchor_tracking_state_t = 2
+	Ar_device_anchor_tracking_state_tracked             Ar_device_anchor_tracking_state_t = 2
 )
 
 func (e Ar_device_anchor_tracking_state_t) String() string {
@@ -122,4 +122,3 @@ func (e Ar_device_anchor_tracking_state_t) String() string {
 		return fmt.Sprintf("Ar_device_anchor_tracking_state_t(%d)", int64(e))
 	}
 }
-

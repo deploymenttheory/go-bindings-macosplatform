@@ -16,11 +16,15 @@ type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent].
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent { return x.inner }
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent (nil for 0).
 func MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent {
@@ -66,4 +70,3 @@ type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable interface {
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable = (*MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent)(nil)
-

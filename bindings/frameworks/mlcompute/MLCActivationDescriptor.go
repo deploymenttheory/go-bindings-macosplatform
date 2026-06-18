@@ -16,15 +16,15 @@ type MLCActivationDescriptor struct {
 }
 
 var (
-	_clsMLCActivationDescriptor = _objcClass("MLCActivationDescriptor")
-	_mLCActivationDescriptorSelDescriptorWithType = objc.RegisterName("descriptorWithType:")
-	_mLCActivationDescriptorSelDescriptorWithTypeA = objc.RegisterName("descriptorWithType:a:")
-	_mLCActivationDescriptorSelDescriptorWithTypeAB = objc.RegisterName("descriptorWithType:a:b:")
+	_clsMLCActivationDescriptor                      = _objcClass("MLCActivationDescriptor")
+	_mLCActivationDescriptorSelDescriptorWithType    = objc.RegisterName("descriptorWithType:")
+	_mLCActivationDescriptorSelDescriptorWithTypeA   = objc.RegisterName("descriptorWithType:a:")
+	_mLCActivationDescriptorSelDescriptorWithTypeAB  = objc.RegisterName("descriptorWithType:a:b:")
 	_mLCActivationDescriptorSelDescriptorWithTypeABC = objc.RegisterName("descriptorWithType:a:b:c:")
-	_mLCActivationDescriptorSelActivationType = objc.RegisterName("activationType")
-	_mLCActivationDescriptorSelA = objc.RegisterName("a")
-	_mLCActivationDescriptorSelB = objc.RegisterName("b")
-	_mLCActivationDescriptorSelC = objc.RegisterName("c")
+	_mLCActivationDescriptorSelActivationType        = objc.RegisterName("activationType")
+	_mLCActivationDescriptorSelA                     = objc.RegisterName("a")
+	_mLCActivationDescriptorSelB                     = objc.RegisterName("b")
+	_mLCActivationDescriptorSelC                     = objc.RegisterName("c")
 )
 
 func MLCActivationDescriptorFromID(id objc.ID) *MLCActivationDescriptor {
@@ -40,28 +40,36 @@ func MLCActivationDescriptorFromID(id objc.ID) *MLCActivationDescriptor {
 // @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @return    A new neuron descriptor or nil if failure
 func MLCActivationDescriptorDescriptorWithType(activationType MLCActivationType) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithType, activationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCActivationDescriptorFromID(_ret)
 }
 
 // @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @return    A new neuron descriptor or nil if failure
 func MLCActivationDescriptorDescriptorWithTypeA(activationType MLCActivationType, a float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeA, activationType, a)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCActivationDescriptorFromID(_ret)
 }
 
 // @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @param     b                      Parameter "b". @return    A new neuron descriptor or nil if failure
 func MLCActivationDescriptorDescriptorWithTypeAB(activationType MLCActivationType, a float32, b float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeAB, activationType, a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCActivationDescriptorFromID(_ret)
 }
 
 // @abstract  Create a MLCActivationDescriptor object @param     activationType  A type of activation function. @param     a                      Parameter "a". @param     b                      Parameter "b". @param     c                      Parameter "c". @return    A new neuron descriptor or nil if failure
 func MLCActivationDescriptorDescriptorWithTypeABC(activationType MLCActivationType, a float32, b float32, c float32) *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCActivationDescriptor), _mLCActivationDescriptorSelDescriptorWithTypeABC, activationType, a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCActivationDescriptorFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *MLCActivationDescriptor) C() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCActivationDescriptorSelC)
 	return _ret
 }
-

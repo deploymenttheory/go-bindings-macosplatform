@@ -17,21 +17,21 @@ type PDFAppearanceCharacteristics struct {
 }
 
 var (
-	_clsPDFAppearanceCharacteristics = _objcClass("PDFAppearanceCharacteristics")
-	_pDFAppearanceCharacteristicsSelControlType = objc.RegisterName("controlType")
-	_pDFAppearanceCharacteristicsSelSetControlType = objc.RegisterName("setControlType:")
-	_pDFAppearanceCharacteristicsSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_pDFAppearanceCharacteristicsSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_pDFAppearanceCharacteristicsSelBorderColor = objc.RegisterName("borderColor")
-	_pDFAppearanceCharacteristicsSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_pDFAppearanceCharacteristicsSelRotation = objc.RegisterName("rotation")
-	_pDFAppearanceCharacteristicsSelSetRotation = objc.RegisterName("setRotation:")
-	_pDFAppearanceCharacteristicsSelCaption = objc.RegisterName("caption")
-	_pDFAppearanceCharacteristicsSelSetCaption = objc.RegisterName("setCaption:")
-	_pDFAppearanceCharacteristicsSelRolloverCaption = objc.RegisterName("rolloverCaption")
-	_pDFAppearanceCharacteristicsSelSetRolloverCaption = objc.RegisterName("setRolloverCaption:")
-	_pDFAppearanceCharacteristicsSelDownCaption = objc.RegisterName("downCaption")
-	_pDFAppearanceCharacteristicsSelSetDownCaption = objc.RegisterName("setDownCaption:")
+	_clsPDFAppearanceCharacteristics                                   = _objcClass("PDFAppearanceCharacteristics")
+	_pDFAppearanceCharacteristicsSelControlType                        = objc.RegisterName("controlType")
+	_pDFAppearanceCharacteristicsSelSetControlType                     = objc.RegisterName("setControlType:")
+	_pDFAppearanceCharacteristicsSelBackgroundColor                    = objc.RegisterName("backgroundColor")
+	_pDFAppearanceCharacteristicsSelSetBackgroundColor                 = objc.RegisterName("setBackgroundColor:")
+	_pDFAppearanceCharacteristicsSelBorderColor                        = objc.RegisterName("borderColor")
+	_pDFAppearanceCharacteristicsSelSetBorderColor                     = objc.RegisterName("setBorderColor:")
+	_pDFAppearanceCharacteristicsSelRotation                           = objc.RegisterName("rotation")
+	_pDFAppearanceCharacteristicsSelSetRotation                        = objc.RegisterName("setRotation:")
+	_pDFAppearanceCharacteristicsSelCaption                            = objc.RegisterName("caption")
+	_pDFAppearanceCharacteristicsSelSetCaption                         = objc.RegisterName("setCaption:")
+	_pDFAppearanceCharacteristicsSelRolloverCaption                    = objc.RegisterName("rolloverCaption")
+	_pDFAppearanceCharacteristicsSelSetRolloverCaption                 = objc.RegisterName("setRolloverCaption:")
+	_pDFAppearanceCharacteristicsSelDownCaption                        = objc.RegisterName("downCaption")
+	_pDFAppearanceCharacteristicsSelSetDownCaption                     = objc.RegisterName("setDownCaption:")
 	_pDFAppearanceCharacteristicsSelAppearanceCharacteristicsKeyValues = objc.RegisterName("appearanceCharacteristicsKeyValues")
 )
 
@@ -56,7 +56,9 @@ func (o *PDFAppearanceCharacteristics) SetControlType(controlType PDFWidgetContr
 
 func (o *PDFAppearanceCharacteristics) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *PDFAppearanceCharacteristics) SetBackgroundColor(backgroundColor *appki
 
 func (o *PDFAppearanceCharacteristics) BorderColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelBorderColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -85,7 +89,9 @@ func (o *PDFAppearanceCharacteristics) SetRotation(rotation int) {
 
 func (o *PDFAppearanceCharacteristics) Caption() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *PDFAppearanceCharacteristics) SetCaption(caption *foundation.NSString) 
 
 func (o *PDFAppearanceCharacteristics) RolloverCaption() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelRolloverCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +113,9 @@ func (o *PDFAppearanceCharacteristics) SetRolloverCaption(rolloverCaption *found
 
 func (o *PDFAppearanceCharacteristics) DownCaption() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAppearanceCharacteristicsSelDownCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -117,4 +127,3 @@ func (o *PDFAppearanceCharacteristics) AppearanceCharacteristicsKeyValues() *fou
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pDFAppearanceCharacteristicsSelAppearanceCharacteristicsKeyValues)
 	return _ret
 }
-

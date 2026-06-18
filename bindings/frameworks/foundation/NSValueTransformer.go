@@ -15,14 +15,14 @@ type NSValueTransformer struct {
 }
 
 var (
-	_clsNSValueTransformer = _objcClass("NSValueTransformer")
-	_nSValueTransformerSelSetValueTransformerForName = objc.RegisterName("setValueTransformer:forName:")
-	_nSValueTransformerSelValueTransformerForName = objc.RegisterName("valueTransformerForName:")
-	_nSValueTransformerSelValueTransformerNames = objc.RegisterName("valueTransformerNames")
-	_nSValueTransformerSelTransformedValueClass = objc.RegisterName("transformedValueClass")
+	_clsNSValueTransformer                            = _objcClass("NSValueTransformer")
+	_nSValueTransformerSelSetValueTransformerForName  = objc.RegisterName("setValueTransformer:forName:")
+	_nSValueTransformerSelValueTransformerForName     = objc.RegisterName("valueTransformerForName:")
+	_nSValueTransformerSelValueTransformerNames       = objc.RegisterName("valueTransformerNames")
+	_nSValueTransformerSelTransformedValueClass       = objc.RegisterName("transformedValueClass")
 	_nSValueTransformerSelAllowsReverseTransformation = objc.RegisterName("allowsReverseTransformation")
-	_nSValueTransformerSelTransformedValue = objc.RegisterName("transformedValue:")
-	_nSValueTransformerSelReverseTransformedValue = objc.RegisterName("reverseTransformedValue:")
+	_nSValueTransformerSelTransformedValue            = objc.RegisterName("transformedValue:")
+	_nSValueTransformerSelReverseTransformedValue     = objc.RegisterName("reverseTransformedValue:")
 )
 
 func NSValueTransformerFromID(id objc.ID) *NSValueTransformer {
@@ -41,13 +41,17 @@ func NSValueTransformerSetValueTransformerForName(transformer *NSValueTransforme
 
 func NSValueTransformerValueTransformerForName(name *NSString) *NSValueTransformer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelValueTransformerForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSValueTransformerFromID(_ret)
 }
 
 func NSValueTransformerValueTransformerNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSValueTransformer), _nSValueTransformerSelValueTransformerNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -70,4 +74,3 @@ func (o *NSValueTransformer) ReverseTransformedValue(value objc.ID) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSValueTransformerSelReverseTransformedValue, value)
 	return _ret
 }
-

@@ -22,34 +22,34 @@ type CNScript struct {
 }
 
 var (
-	_clsCNScript = _objcClass("CNScript")
+	_clsCNScript                                              = _objcClass("CNScript")
 	_cNScriptSelLoadFromAssetChangesProgressCompletionHandler = objc.RegisterName("loadFromAsset:changes:progress:completionHandler:")
-	_cNScriptSelReloadWithChanges = objc.RegisterName("reloadWithChanges:")
-	_cNScriptSelChanges = objc.RegisterName("changes")
-	_cNScriptSelChangesTrimmedByTimeRange = objc.RegisterName("changesTrimmedByTimeRange:")
-	_cNScriptSelFrameAtTimeTolerance = objc.RegisterName("frameAtTime:tolerance:")
-	_cNScriptSelFramesInTimeRange = objc.RegisterName("framesInTimeRange:")
-	_cNScriptSelDecisionAtTimeTolerance = objc.RegisterName("decisionAtTime:tolerance:")
-	_cNScriptSelDecisionsInTimeRange = objc.RegisterName("decisionsInTimeRange:")
-	_cNScriptSelDecisionAfterTime = objc.RegisterName("decisionAfterTime:")
-	_cNScriptSelDecisionBeforeTime = objc.RegisterName("decisionBeforeTime:")
-	_cNScriptSelPrimaryDecisionAtTime = objc.RegisterName("primaryDecisionAtTime:")
-	_cNScriptSelSecondaryDecisionAtTime = objc.RegisterName("secondaryDecisionAtTime:")
-	_cNScriptSelTimeRangeOfTransitionAfterDecision = objc.RegisterName("timeRangeOfTransitionAfterDecision:")
-	_cNScriptSelTimeRangeOfTransitionBeforeDecision = objc.RegisterName("timeRangeOfTransitionBeforeDecision:")
-	_cNScriptSelUserDecisionsInTimeRange = objc.RegisterName("userDecisionsInTimeRange:")
-	_cNScriptSelBaseDecisionsInTimeRange = objc.RegisterName("baseDecisionsInTimeRange:")
-	_cNScriptSelDetectionTrackForID = objc.RegisterName("detectionTrackForID:")
-	_cNScriptSelDetectionTrackForDecision = objc.RegisterName("detectionTrackForDecision:")
-	_cNScriptSelAddUserDecision = objc.RegisterName("addUserDecision:")
-	_cNScriptSelRemoveUserDecision = objc.RegisterName("removeUserDecision:")
-	_cNScriptSelRemoveAllUserDecisions = objc.RegisterName("removeAllUserDecisions")
-	_cNScriptSelAddDetectionTrack = objc.RegisterName("addDetectionTrack:")
-	_cNScriptSelRemoveDetectionTrack = objc.RegisterName("removeDetectionTrack:")
-	_cNScriptSelTimeRange = objc.RegisterName("timeRange")
-	_cNScriptSelFNumber = objc.RegisterName("fNumber")
-	_cNScriptSelSetFNumber = objc.RegisterName("setFNumber:")
-	_cNScriptSelAddedDetectionTracks = objc.RegisterName("addedDetectionTracks")
+	_cNScriptSelReloadWithChanges                             = objc.RegisterName("reloadWithChanges:")
+	_cNScriptSelChanges                                       = objc.RegisterName("changes")
+	_cNScriptSelChangesTrimmedByTimeRange                     = objc.RegisterName("changesTrimmedByTimeRange:")
+	_cNScriptSelFrameAtTimeTolerance                          = objc.RegisterName("frameAtTime:tolerance:")
+	_cNScriptSelFramesInTimeRange                             = objc.RegisterName("framesInTimeRange:")
+	_cNScriptSelDecisionAtTimeTolerance                       = objc.RegisterName("decisionAtTime:tolerance:")
+	_cNScriptSelDecisionsInTimeRange                          = objc.RegisterName("decisionsInTimeRange:")
+	_cNScriptSelDecisionAfterTime                             = objc.RegisterName("decisionAfterTime:")
+	_cNScriptSelDecisionBeforeTime                            = objc.RegisterName("decisionBeforeTime:")
+	_cNScriptSelPrimaryDecisionAtTime                         = objc.RegisterName("primaryDecisionAtTime:")
+	_cNScriptSelSecondaryDecisionAtTime                       = objc.RegisterName("secondaryDecisionAtTime:")
+	_cNScriptSelTimeRangeOfTransitionAfterDecision            = objc.RegisterName("timeRangeOfTransitionAfterDecision:")
+	_cNScriptSelTimeRangeOfTransitionBeforeDecision           = objc.RegisterName("timeRangeOfTransitionBeforeDecision:")
+	_cNScriptSelUserDecisionsInTimeRange                      = objc.RegisterName("userDecisionsInTimeRange:")
+	_cNScriptSelBaseDecisionsInTimeRange                      = objc.RegisterName("baseDecisionsInTimeRange:")
+	_cNScriptSelDetectionTrackForID                           = objc.RegisterName("detectionTrackForID:")
+	_cNScriptSelDetectionTrackForDecision                     = objc.RegisterName("detectionTrackForDecision:")
+	_cNScriptSelAddUserDecision                               = objc.RegisterName("addUserDecision:")
+	_cNScriptSelRemoveUserDecision                            = objc.RegisterName("removeUserDecision:")
+	_cNScriptSelRemoveAllUserDecisions                        = objc.RegisterName("removeAllUserDecisions")
+	_cNScriptSelAddDetectionTrack                             = objc.RegisterName("addDetectionTrack:")
+	_cNScriptSelRemoveDetectionTrack                          = objc.RegisterName("removeDetectionTrack:")
+	_cNScriptSelTimeRange                                     = objc.RegisterName("timeRange")
+	_cNScriptSelFNumber                                       = objc.RegisterName("fNumber")
+	_cNScriptSelSetFNumber                                    = objc.RegisterName("setFNumber:")
+	_cNScriptSelAddedDetectionTracks                          = objc.RegisterName("addedDetectionTracks")
 )
 
 func CNScriptFromID(id objc.ID) *CNScript {
@@ -85,70 +85,90 @@ func (o *CNScript) ReloadWithChanges(changes *CNScriptChanges) {
 // Changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
 func (o *CNScript) Changes() *CNScriptChanges {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNScriptChangesFromID(_ret)
 }
 
 // Changes trimmed and time range shifted to start at zero — for use with a similarly trimmed cinematic asset.
 func (o *CNScript) ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *CNScriptChanges {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelChangesTrimmedByTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNScriptChangesFromID(_ret)
 }
 
 // The closest frame to the given time within the given tolerance. Returns `nil` if there are none.
 func (o *CNScript) FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *CNScriptFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelFrameAtTimeTolerance, time_, tolerance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNScriptFrameFromID(_ret)
 }
 
 // All frames within the given time range.
 func (o *CNScript) FramesInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*CNScriptFrame] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelFramesInTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNScriptFrame](_ret)
 }
 
 // The closest decision to the given time within the given tolerance. Returns `nil` if there are none.
 func (o *CNScript) DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDecisionAtTimeTolerance, time_, tolerance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
 // All decisions within the given time range.
 func (o *CNScript) DecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*CNDecision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDecisionsInTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDecision](_ret)
 }
 
 // The decision that occurs after the given time. Pass the time of an existing decision to find the next one.
 func (o *CNScript) DecisionAfterTime(time_ coremedia.CMTime) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDecisionAfterTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
 // The decision that occurs before the given time. Pass the time of an existing decisions to find the previous one.
 func (o *CNScript) DecisionBeforeTime(time_ coremedia.CMTime) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDecisionBeforeTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
 // The primary decision that is in effect at the specified time, unless if it's outside the time range of the cinematic script. Also represents the decision that is being transitioned away from if the given time is during a focus transition.
 func (o *CNScript) PrimaryDecisionAtTime(time_ coremedia.CMTime) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelPrimaryDecisionAtTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
 // The secondary decision that is being transitioned towards if the given time is during a focus transition.
 func (o *CNScript) SecondaryDecisionAtTime(time_ coremedia.CMTime) *CNDecision {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelSecondaryDecisionAtTime, time_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDecisionFromID(_ret)
 }
 
@@ -167,28 +187,36 @@ func (o *CNScript) TimeRangeOfTransitionBeforeDecision(decision *CNDecision) cor
 // All user decisions in the given time range. Includes user decisions made during recording or added to the script.
 func (o *CNScript) UserDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*CNDecision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelUserDecisionsInTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDecision](_ret)
 }
 
 // All base decisions made automatically during recording in the given time range. These apply if no user decision overrides them.
 func (o *CNScript) BaseDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*CNDecision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelBaseDecisionsInTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDecision](_ret)
 }
 
 // A detection track representing all detections with the given detectionID over the entire cinematic script.
 func (o *CNScript) DetectionTrackForID(detectionID int64) *CNDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDetectionTrackForID, detectionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionTrackFromID(_ret)
 }
 
 // A detection track representing all detections that would be chosen by a given decision.
 func (o *CNScript) DetectionTrackForDecision(decision *CNDecision) *CNDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelDetectionTrackForDecision, decision.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionTrackFromID(_ret)
 }
 
@@ -240,7 +268,8 @@ func (o *CNScript) SetFNumber(fNumber float32) {
 // All detection tracks that have been added since recording.
 func (o *CNScript) AddedDetectionTracks() *foundation.NSArray[*CNDetectionTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNScriptSelAddedDetectionTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CNDetectionTrack](_ret)
 }
-

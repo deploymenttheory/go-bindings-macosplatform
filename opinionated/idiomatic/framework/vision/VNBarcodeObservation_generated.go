@@ -95,11 +95,17 @@ func (x *BarcodeObservation) SupplementalPayloadData() *foundation.NSData {
 	return x.inner.SupplementalPayloadData()
 }
 
-func (x *BarcodeObservation) asRectangleObservation() *raw.VNRectangleObservation { return &x.inner.VNRectangleObservation }
+func (x *BarcodeObservation) asRectangleObservation() *raw.VNRectangleObservation {
+	return &x.inner.VNRectangleObservation
+}
 
-func (x *BarcodeObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation }
+func (x *BarcodeObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation
+}
 
-func (x *BarcodeObservation) asObservation() *raw.VNObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation }
+func (x *BarcodeObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation
+}
 
 // BarcodeObservationable is the interface implemented by [BarcodeObservation], for mocking and DI.
 type BarcodeObservationable interface {
@@ -116,4 +122,3 @@ type BarcodeObservationable interface {
 }
 
 var _ BarcodeObservationable = (*BarcodeObservation)(nil)
-

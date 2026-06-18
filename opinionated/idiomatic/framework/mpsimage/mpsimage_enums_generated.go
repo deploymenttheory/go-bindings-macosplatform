@@ -12,8 +12,8 @@ type MPSAlphaType uint64
 
 const (
 	MPSAlphaTypeNonPremultiplied MPSAlphaType = 0
-	MPSAlphaTypeAlphaIsOne MPSAlphaType = 1
-	MPSAlphaTypePremultiplied MPSAlphaType = 2
+	MPSAlphaTypeAlphaIsOne       MPSAlphaType = 1
+	MPSAlphaTypePremultiplied    MPSAlphaType = 2
 )
 
 func (e MPSAlphaType) String() string {
@@ -28,4 +28,3 @@ func (e MPSAlphaType) String() string {
 		return fmt.Sprintf("MPSAlphaType(%d)", int64(e))
 	}
 }
-

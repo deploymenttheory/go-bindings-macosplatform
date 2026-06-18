@@ -16,19 +16,19 @@ type CLSActivity struct {
 }
 
 var (
-	_clsCLSActivity = _objcClass("CLSActivity")
+	_clsCLSActivity                               = _objcClass("CLSActivity")
 	_cLSActivitySelAddProgressRangeFromStartToEnd = objc.RegisterName("addProgressRangeFromStart:toEnd:")
-	_cLSActivitySelAddAdditionalActivityItem = objc.RegisterName("addAdditionalActivityItem:")
-	_cLSActivitySelProgress = objc.RegisterName("progress")
-	_cLSActivitySelSetProgress = objc.RegisterName("setProgress:")
-	_cLSActivitySelDuration = objc.RegisterName("duration")
-	_cLSActivitySelPrimaryActivityItem = objc.RegisterName("primaryActivityItem")
-	_cLSActivitySelSetPrimaryActivityItem = objc.RegisterName("setPrimaryActivityItem:")
-	_cLSActivitySelAdditionalActivityItems = objc.RegisterName("additionalActivityItems")
-	_cLSActivitySelStart = objc.RegisterName("start")
-	_cLSActivitySelStop = objc.RegisterName("stop")
-	_cLSActivitySelRemoveAllActivityItems = objc.RegisterName("removeAllActivityItems")
-	_cLSActivitySelIsStarted = objc.RegisterName("isStarted")
+	_cLSActivitySelAddAdditionalActivityItem      = objc.RegisterName("addAdditionalActivityItem:")
+	_cLSActivitySelProgress                       = objc.RegisterName("progress")
+	_cLSActivitySelSetProgress                    = objc.RegisterName("setProgress:")
+	_cLSActivitySelDuration                       = objc.RegisterName("duration")
+	_cLSActivitySelPrimaryActivityItem            = objc.RegisterName("primaryActivityItem")
+	_cLSActivitySelSetPrimaryActivityItem         = objc.RegisterName("setPrimaryActivityItem:")
+	_cLSActivitySelAdditionalActivityItems        = objc.RegisterName("additionalActivityItems")
+	_cLSActivitySelStart                          = objc.RegisterName("start")
+	_cLSActivitySelStop                           = objc.RegisterName("stop")
+	_cLSActivitySelRemoveAllActivityItems         = objc.RegisterName("removeAllActivityItems")
+	_cLSActivitySelIsStarted                      = objc.RegisterName("isStarted")
 )
 
 func CLSActivityFromID(id objc.ID) *CLSActivity {
@@ -70,7 +70,9 @@ func (o *CLSActivity) Duration() float64 {
 // @abstract      The primary activityItem to be reported on. @discussion    This can be nil indicating @c progress property is the primary data instead of any activityItems.
 func (o *CLSActivity) PrimaryActivityItem() *CLSActivityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSActivitySelPrimaryActivityItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSActivityItemFromID(_ret)
 }
 
@@ -81,7 +83,9 @@ func (o *CLSActivity) SetPrimaryActivityItem(primaryActivityItem *CLSActivityIte
 // @abstract      Array of all additional activity items on this CLSActivity.
 func (o *CLSActivity) AdditionalActivityItems() *foundation.NSArray[*CLSActivityItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSActivitySelAdditionalActivityItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CLSActivityItem](_ret)
 }
 
@@ -105,4 +109,3 @@ func (o *CLSActivity) IsStarted() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cLSActivitySelIsStarted)
 	return _ret
 }
-

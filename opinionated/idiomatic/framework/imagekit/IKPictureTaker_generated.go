@@ -97,4 +97,3 @@ type PictureTakerable interface {
 }
 
 var _ PictureTakerable = (*PictureTaker)(nil)
-

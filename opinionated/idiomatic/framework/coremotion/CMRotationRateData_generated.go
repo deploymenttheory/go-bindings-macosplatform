@@ -51,4 +51,3 @@ type RotationRateDataable interface {
 }
 
 var _ RotationRateDataable = (*RotationRateData)(nil)
-

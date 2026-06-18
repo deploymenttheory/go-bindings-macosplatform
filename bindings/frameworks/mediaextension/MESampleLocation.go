@@ -17,10 +17,10 @@ type MESampleLocation struct {
 }
 
 var (
-	_clsMESampleLocation = _objcClass("MESampleLocation")
+	_clsMESampleLocation                                 = _objcClass("MESampleLocation")
 	_mESampleLocationSelInitWithByteSourceSampleLocation = objc.RegisterName("initWithByteSource:sampleLocation:")
-	_mESampleLocationSelSampleLocation = objc.RegisterName("sampleLocation")
-	_mESampleLocationSelByteSource = objc.RegisterName("byteSource")
+	_mESampleLocationSelSampleLocation                   = objc.RegisterName("sampleLocation")
+	_mESampleLocationSelByteSource                       = objc.RegisterName("byteSource")
 )
 
 func MESampleLocationFromID(id objc.ID) *MESampleLocation {
@@ -36,7 +36,9 @@ func MESampleLocationFromID(id objc.ID) *MESampleLocation {
 // @property		initWithByteSource @abstract		The initializer for the MESampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			sampleLocation The starting file offset and size in bytes of the sample.
 func (o *MESampleLocation) InitWithByteSourceSampleLocation(byteSource *MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *MESampleLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleLocationSelInitWithByteSourceSampleLocation, byteSource.Ptr(), sampleLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MESampleLocationFromID(_ret)
 }
 
@@ -49,7 +51,8 @@ func (o *MESampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRa
 // @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
 func (o *MESampleLocation) ByteSource() *MEByteSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleLocationSelByteSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEByteSourceFromID(_ret)
 }
-

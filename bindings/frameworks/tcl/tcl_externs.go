@@ -11,13 +11,16 @@ import (
 
 func TclPlatStubsPtr() *TclPlatStubs {
 	ptr, _ := purego.Dlsym(_tclLib, "tclPlatStubsPtr")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**TclPlatStubs)(unsafe.Pointer(ptr))
 }
 
 func TclStubsPtr() *TclStubs {
 	ptr, _ := purego.Dlsym(_tclLib, "tclStubsPtr")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**TclStubs)(unsafe.Pointer(ptr))
 }
-

@@ -41,4 +41,3 @@ type UnitAveragePixelLuminanceable interface {
 }
 
 var _ UnitAveragePixelLuminanceable = (*UnitAveragePixelLuminance)(nil)
-

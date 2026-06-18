@@ -45,4 +45,3 @@ type FragmentedMovieable interface {
 }
 
 var _ FragmentedMovieable = (*FragmentedMovie)(nil)
-

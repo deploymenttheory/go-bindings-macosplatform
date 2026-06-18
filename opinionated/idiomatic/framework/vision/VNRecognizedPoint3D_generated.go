@@ -56,4 +56,3 @@ type RecognizedPoint3Dable interface {
 }
 
 var _ RecognizedPoint3Dable = (*RecognizedPoint3D)(nil)
-

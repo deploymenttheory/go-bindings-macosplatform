@@ -17,21 +17,21 @@ type AVCaptureScreenInput struct {
 }
 
 var (
-	_clsAVCaptureScreenInput = _objcClass("AVCaptureScreenInput")
-	_aVCaptureScreenInputSelInit = objc.RegisterName("init")
-	_aVCaptureScreenInputSelNew = objc.RegisterName("new")
-	_aVCaptureScreenInputSelInitWithDisplayID = objc.RegisterName("initWithDisplayID:")
-	_aVCaptureScreenInputSelMinFrameDuration = objc.RegisterName("minFrameDuration")
-	_aVCaptureScreenInputSelSetMinFrameDuration = objc.RegisterName("setMinFrameDuration:")
-	_aVCaptureScreenInputSelCropRect = objc.RegisterName("cropRect")
-	_aVCaptureScreenInputSelSetCropRect = objc.RegisterName("setCropRect:")
-	_aVCaptureScreenInputSelScaleFactor = objc.RegisterName("scaleFactor")
-	_aVCaptureScreenInputSelSetScaleFactor = objc.RegisterName("setScaleFactor:")
-	_aVCaptureScreenInputSelCapturesMouseClicks = objc.RegisterName("capturesMouseClicks")
-	_aVCaptureScreenInputSelSetCapturesMouseClicks = objc.RegisterName("setCapturesMouseClicks:")
-	_aVCaptureScreenInputSelCapturesCursor = objc.RegisterName("capturesCursor")
-	_aVCaptureScreenInputSelSetCapturesCursor = objc.RegisterName("setCapturesCursor:")
-	_aVCaptureScreenInputSelRemovesDuplicateFrames = objc.RegisterName("removesDuplicateFrames")
+	_clsAVCaptureScreenInput                          = _objcClass("AVCaptureScreenInput")
+	_aVCaptureScreenInputSelInit                      = objc.RegisterName("init")
+	_aVCaptureScreenInputSelNew                       = objc.RegisterName("new")
+	_aVCaptureScreenInputSelInitWithDisplayID         = objc.RegisterName("initWithDisplayID:")
+	_aVCaptureScreenInputSelMinFrameDuration          = objc.RegisterName("minFrameDuration")
+	_aVCaptureScreenInputSelSetMinFrameDuration       = objc.RegisterName("setMinFrameDuration:")
+	_aVCaptureScreenInputSelCropRect                  = objc.RegisterName("cropRect")
+	_aVCaptureScreenInputSelSetCropRect               = objc.RegisterName("setCropRect:")
+	_aVCaptureScreenInputSelScaleFactor               = objc.RegisterName("scaleFactor")
+	_aVCaptureScreenInputSelSetScaleFactor            = objc.RegisterName("setScaleFactor:")
+	_aVCaptureScreenInputSelCapturesMouseClicks       = objc.RegisterName("capturesMouseClicks")
+	_aVCaptureScreenInputSelSetCapturesMouseClicks    = objc.RegisterName("setCapturesMouseClicks:")
+	_aVCaptureScreenInputSelCapturesCursor            = objc.RegisterName("capturesCursor")
+	_aVCaptureScreenInputSelSetCapturesCursor         = objc.RegisterName("setCapturesCursor:")
+	_aVCaptureScreenInputSelRemovesDuplicateFrames    = objc.RegisterName("removesDuplicateFrames")
 	_aVCaptureScreenInputSelSetRemovesDuplicateFrames = objc.RegisterName("setRemovesDuplicateFrames:")
 )
 
@@ -48,7 +48,9 @@ func AVCaptureScreenInputFromID(id objc.ID) *AVCaptureScreenInput {
 // @method init @abstract Creates an AVCaptureScreenInput instance that provides media data from the main display. @discussion This method creates an instance of AVCaptureScreenInput using the main display whose id is returned from CGMainDisplayID().
 func (o *AVCaptureScreenInput) Init() *AVCaptureScreenInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureScreenInputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureScreenInputFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func AVCaptureScreenInputNew() *AVCaptureScreenInput {
 // @method initWithDisplayID: @abstract Creates an AVCaptureScreenInput instance that provides media data from the given display. @param displayID The id of the display from which to capture video. CGDirectDisplayID is defined in <CoreGraphics/CGDirectDisplay.h> @result An AVCaptureScreenInput instance that provides data from the given screen, or nil, if the screen could not be used for capture. @discussion This method creates an instance of AVCaptureScreenInput that can be used to capture data from a display in an AVCaptureSession. This method validates the displayID. If the display cannot be used because it is not available on the system, for example, this method returns nil.
 func (o *AVCaptureScreenInput) InitWithDisplayID(displayID uint32) *AVCaptureScreenInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureScreenInputSelInitWithDisplayID, displayID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureScreenInputFromID(_ret)
 }
 
@@ -125,4 +129,3 @@ func (o *AVCaptureScreenInput) RemovesDuplicateFrames() bool {
 func (o *AVCaptureScreenInput) SetRemovesDuplicateFrames(removesDuplicateFrames bool) {
 	o.Ptr().Send(_aVCaptureScreenInputSelSetRemovesDuplicateFrames, removesDuplicateFrames)
 }
-

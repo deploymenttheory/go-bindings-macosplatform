@@ -18,7 +18,9 @@ type ImageEuclideanDistanceTransform struct {
 }
 
 // Unwrap returns the underlying [raw.MPSImageEuclideanDistanceTransform].
-func (x *ImageEuclideanDistanceTransform) Unwrap() *raw.MPSImageEuclideanDistanceTransform { return x.inner }
+func (x *ImageEuclideanDistanceTransform) Unwrap() *raw.MPSImageEuclideanDistanceTransform {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,7 +82,9 @@ func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius
 	x.inner.SetSearchLimitRadius(searchLimitRadius)
 }
 
-func (x *ImageEuclideanDistanceTransform) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageEuclideanDistanceTransform) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageEuclideanDistanceTransformable is the interface implemented by [ImageEuclideanDistanceTransform], for mocking and DI.
 type ImageEuclideanDistanceTransformable interface {
@@ -94,4 +98,3 @@ type ImageEuclideanDistanceTransformable interface {
 }
 
 var _ ImageEuclideanDistanceTransformable = (*ImageEuclideanDistanceTransform)(nil)
-

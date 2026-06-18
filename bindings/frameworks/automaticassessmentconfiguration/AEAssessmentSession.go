@@ -16,17 +16,17 @@ type AEAssessmentSession struct {
 }
 
 var (
-	_clsAEAssessmentSession = _objcClass("AEAssessmentSession")
-	_aEAssessmentSessionSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
-	_aEAssessmentSessionSelBegin = objc.RegisterName("begin")
-	_aEAssessmentSessionSelEnd = objc.RegisterName("end")
-	_aEAssessmentSessionSelUpdateToConfiguration = objc.RegisterName("updateToConfiguration:")
+	_clsAEAssessmentSession                             = _objcClass("AEAssessmentSession")
+	_aEAssessmentSessionSelInitWithConfiguration        = objc.RegisterName("initWithConfiguration:")
+	_aEAssessmentSessionSelBegin                        = objc.RegisterName("begin")
+	_aEAssessmentSessionSelEnd                          = objc.RegisterName("end")
+	_aEAssessmentSessionSelUpdateToConfiguration        = objc.RegisterName("updateToConfiguration:")
 	_aEAssessmentSessionSelSupportsMultipleParticipants = objc.RegisterName("supportsMultipleParticipants")
 	_aEAssessmentSessionSelSupportsConfigurationUpdates = objc.RegisterName("supportsConfigurationUpdates")
-	_aEAssessmentSessionSelDelegate = objc.RegisterName("delegate")
-	_aEAssessmentSessionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aEAssessmentSessionSelConfiguration = objc.RegisterName("configuration")
-	_aEAssessmentSessionSelIsActive = objc.RegisterName("isActive")
+	_aEAssessmentSessionSelDelegate                     = objc.RegisterName("delegate")
+	_aEAssessmentSessionSelSetDelegate                  = objc.RegisterName("setDelegate:")
+	_aEAssessmentSessionSelConfiguration                = objc.RegisterName("configuration")
+	_aEAssessmentSessionSelIsActive                     = objc.RegisterName("isActive")
 )
 
 func AEAssessmentSessionFromID(id objc.ID) *AEAssessmentSession {
@@ -41,7 +41,9 @@ func AEAssessmentSessionFromID(id objc.ID) *AEAssessmentSession {
 
 func (o *AEAssessmentSession) InitWithConfiguration(configuration *AEAssessmentConfiguration) *AEAssessmentSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentSessionSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AEAssessmentSessionFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func (o *AEAssessmentSession) SetDelegate(delegate AEAssessmentSessionDelegate) 
 
 func (o *AEAssessmentSession) Configuration() *AEAssessmentConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentSessionSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AEAssessmentConfigurationFromID(_ret)
 }
 
@@ -86,4 +90,3 @@ func (o *AEAssessmentSession) IsActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aEAssessmentSessionSelIsActive)
 	return _ret
 }
-

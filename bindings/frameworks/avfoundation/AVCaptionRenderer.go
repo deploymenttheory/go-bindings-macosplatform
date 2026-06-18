@@ -20,14 +20,14 @@ type AVCaptionRenderer struct {
 }
 
 var (
-	_clsAVCaptionRenderer = _objcClass("AVCaptionRenderer")
-	_aVCaptionRendererSelInit = objc.RegisterName("init")
-	_aVCaptionRendererSelCaptionSceneChangesInRange = objc.RegisterName("captionSceneChangesInRange:")
-	_aVCaptionRendererSelRenderInContextForTime = objc.RegisterName("renderInContext:forTime:")
-	_aVCaptionRendererSelCaptions = objc.RegisterName("captions")
-	_aVCaptionRendererSelSetCaptions = objc.RegisterName("setCaptions:")
-	_aVCaptionRendererSelBounds = objc.RegisterName("bounds")
-	_aVCaptionRendererSelSetBounds = objc.RegisterName("setBounds:")
+	_clsAVCaptionRenderer                                                        = _objcClass("AVCaptionRenderer")
+	_aVCaptionRendererSelInit                                                    = objc.RegisterName("init")
+	_aVCaptionRendererSelCaptionSceneChangesInRange                              = objc.RegisterName("captionSceneChangesInRange:")
+	_aVCaptionRendererSelRenderInContextForTime                                  = objc.RegisterName("renderInContext:forTime:")
+	_aVCaptionRendererSelCaptions                                                = objc.RegisterName("captions")
+	_aVCaptionRendererSelSetCaptions                                             = objc.RegisterName("setCaptions:")
+	_aVCaptionRendererSelBounds                                                  = objc.RegisterName("bounds")
+	_aVCaptionRendererSelSetBounds                                               = objc.RegisterName("setBounds:")
 	_aVCaptionRendererSelCaptionPreviewForProfileIDExtendedLanguageTagRenderSize = objc.RegisterName("captionPreviewForProfileID:extendedLanguageTag:renderSize:")
 )
 
@@ -43,14 +43,18 @@ func AVCaptionRendererFromID(id objc.ID) *AVCaptionRenderer {
 
 func (o *AVCaptionRenderer) Init() *AVCaptionRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRendererSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRendererFromID(_ret)
 }
 
 // @method		captionSceneChangesInRange: @abstract		Determine render time ranges within an enclosing time range to account for visual changes among captions. @result		An NSArray of AVCaptionRendererScenes; perhaps empty if there are no captions intersecting with the consideredTimeRange @discussion This is an optional service useful for optimizing drawing. A client can perform drawing without it. As captions may become active and inactive throughout the timeline, this method will return a NSArray holding scene objects with time ranges on whose edges there's a visual change. The client can use the ranges of time between these edges with -renderInContext:atTime: to ensure all visual changes are rendered. The returned time ranges consider activation/deactivation of captions, temporal overlapping, and intra-caption timing requirements (e.g., character reveal animations). Time ranges may be returned where no captions are active as this is also a change in the caption "scene". The returned NSArray contains AVCaptionRendererScenes, each holding the CMTimeRange of that scene but potentially other information that may be useful to the client during renderering. The consideredTimeRange parameter is a CMTimeRange expressing the limits for consideration. The extent of this range does not need to correspond to the timing of captions. It might be the range from 0 to some duration. For efficiency, the range can be limited to a window of time. It is also possible to use the range anchored at a time and extending in the direction of playback.
 func (o *AVCaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*AVCaptionRendererScene] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRendererSelCaptionSceneChangesInRange, consideredTimeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptionRendererScene](_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *AVCaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ cor
 // @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
 func (o *AVCaptionRenderer) Captions() *foundation.NSArray[*AVCaption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRendererSelCaptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaption](_ret)
 }
 
@@ -83,7 +89,8 @@ func (o *AVCaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
 // @method		captionPreviewForProfileID:extendedLanguageTag:renderSize: @abstract		Generate a caption preview attributed string for the specified profile ID. @discussion	Returns an attributed string containing a preview of captions rendered using the specified profile ID. @param			profileID The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from MACaptionAppearanceCopyProfileIDs(). This determines font, color, background, and other visual characteristics. @param			extendedLanguageTag The IETF BCP 47 (RFC 4646) language identifier that will be used to generate the localized caption preview text.  If nil, the system language will be used. @param			renderSize The size of the layer into which the captions will be rendered. This determines the layout and positioning of the caption text. @result		An NSAttributedString containing the caption preview. @discussion	It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread.
 func AVCaptionRendererCaptionPreviewForProfileIDExtendedLanguageTagRenderSize(profileID *foundation.NSString, extendedLanguageTag *foundation.NSString, renderSize corefoundation.CGSize) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRenderer), _aVCaptionRendererSelCaptionPreviewForProfileIDExtendedLanguageTagRenderSize, profileID.Ptr(), extendedLanguageTag.Ptr(), renderSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
-

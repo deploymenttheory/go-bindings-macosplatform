@@ -153,4 +153,3 @@ type ModuleEntryable interface {
 }
 
 var _ ModuleEntryable = (*ModuleEntry)(nil)
-

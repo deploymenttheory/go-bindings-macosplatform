@@ -16,7 +16,7 @@ type MTRSwitchClusterInitialPressEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterInitialPressEvent = _objcClass("MTRSwitchClusterInitialPressEvent")
+	_clsMTRSwitchClusterInitialPressEvent               = _objcClass("MTRSwitchClusterInitialPressEvent")
 	_mTRSwitchClusterInitialPressEventSelGetNewPosition = objc.RegisterName("getNewPosition")
 	_mTRSwitchClusterInitialPressEventSelSetNewPosition = objc.RegisterName("setNewPosition:")
 )
@@ -33,11 +33,12 @@ func MTRSwitchClusterInitialPressEventFromID(id objc.ID) *MTRSwitchClusterInitia
 
 func (o *MTRSwitchClusterInitialPressEvent) GetNewPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterInitialPressEventSelGetNewPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterInitialPressEventSelSetNewPosition, newPosition.Ptr())
 }
-

@@ -50,4 +50,3 @@ type CompositionInfoable interface {
 }
 
 var _ CompositionInfoable = (*CompositionInfo)(nil)
-

@@ -53,4 +53,3 @@ type ObserverQueryable interface {
 }
 
 var _ ObserverQueryable = (*ObserverQuery)(nil)
-

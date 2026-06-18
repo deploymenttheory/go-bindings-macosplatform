@@ -17,7 +17,9 @@ type MTRContentLauncherClusterBrandingInformationStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterBrandingInformationStruct].
-func (x *MTRContentLauncherClusterBrandingInformationStruct) Unwrap() *raw.MTRContentLauncherClusterBrandingInformationStruct { return x.inner }
+func (x *MTRContentLauncherClusterBrandingInformationStruct) Unwrap() *raw.MTRContentLauncherClusterBrandingInformationStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -157,7 +159,9 @@ func (x *MTRContentLauncherClusterBrandingInformationStruct) SetWaterMark(waterM
 	x.inner.SetWaterMark(waterMark)
 }
 
-func (x *MTRContentLauncherClusterBrandingInformationStruct) asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct { return x.inner }
+func (x *MTRContentLauncherClusterBrandingInformationStruct) asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct {
+	return x.inner
+}
 
 // MTRContentLauncherClusterBrandingInformationStructable is the interface implemented by [MTRContentLauncherClusterBrandingInformationStruct], for mocking and DI.
 type MTRContentLauncherClusterBrandingInformationStructable interface {
@@ -183,4 +187,3 @@ type MTRContentLauncherClusterBrandingInformationStructable interface {
 }
 
 var _ MTRContentLauncherClusterBrandingInformationStructable = (*MTRContentLauncherClusterBrandingInformationStruct)(nil)
-

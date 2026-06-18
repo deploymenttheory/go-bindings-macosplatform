@@ -111,4 +111,3 @@ type InferenceGraphable interface {
 }
 
 var _ InferenceGraphable = (*InferenceGraph)(nil)
-

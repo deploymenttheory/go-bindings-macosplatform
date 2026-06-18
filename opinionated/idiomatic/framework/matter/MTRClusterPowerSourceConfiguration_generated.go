@@ -16,7 +16,9 @@ type MTRClusterPowerSourceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterPowerSourceConfiguration].
-func (x *MTRClusterPowerSourceConfiguration) Unwrap() *raw.MTRClusterPowerSourceConfiguration { return x.inner }
+func (x *MTRClusterPowerSourceConfiguration) Unwrap() *raw.MTRClusterPowerSourceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -74,9 +76,13 @@ func (x *MTRClusterPowerSourceConfiguration) ReadAttributeClusterRevisionWithPar
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterPowerSourceConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterPowerSourceConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterPowerSourceConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterPowerSourceConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterPowerSourceConfigurationable is the interface implemented by [MTRClusterPowerSourceConfiguration], for mocking and DI.
 type MTRClusterPowerSourceConfigurationable interface {
@@ -90,4 +96,3 @@ type MTRClusterPowerSourceConfigurationable interface {
 }
 
 var _ MTRClusterPowerSourceConfigurationable = (*MTRClusterPowerSourceConfiguration)(nil)
-

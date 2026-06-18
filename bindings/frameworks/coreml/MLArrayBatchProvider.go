@@ -18,10 +18,10 @@ type MLArrayBatchProvider struct {
 }
 
 var (
-	_clsMLArrayBatchProvider = _objcClass("MLArrayBatchProvider")
+	_clsMLArrayBatchProvider                             = _objcClass("MLArrayBatchProvider")
 	_mLArrayBatchProviderSelInitWithFeatureProviderArray = objc.RegisterName("initWithFeatureProviderArray:")
-	_mLArrayBatchProviderSelInitWithDictionaryError = objc.RegisterName("initWithDictionary:error:")
-	_mLArrayBatchProviderSelArray = objc.RegisterName("array")
+	_mLArrayBatchProviderSelInitWithDictionaryError      = objc.RegisterName("initWithDictionary:error:")
+	_mLArrayBatchProviderSelArray                        = objc.RegisterName("array")
 )
 
 func MLArrayBatchProviderFromID(id objc.ID) *MLArrayBatchProvider {
@@ -37,7 +37,9 @@ func MLArrayBatchProviderFromID(id objc.ID) *MLArrayBatchProvider {
 // Initalize with an array of feature providers
 func (o *MLArrayBatchProvider) InitWithFeatureProviderArray(array *foundation.NSArray[MLFeatureProvider]) *MLArrayBatchProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelInitWithFeatureProviderArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLArrayBatchProviderFromID(_ret)
 }
 
@@ -45,7 +47,9 @@ func (o *MLArrayBatchProvider) InitWithFeatureProviderArray(array *foundation.NS
 func (o *MLArrayBatchProvider) InitWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLArrayBatchProvider, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelInitWithDictionaryError, dictionary, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -54,7 +58,8 @@ func (o *MLArrayBatchProvider) InitWithDictionaryError(dictionary *foundation.NS
 
 func (o *MLArrayBatchProvider) Array() *foundation.NSArray[MLFeatureProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLArrayBatchProviderSelArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MLFeatureProvider](_ret)
 }
-

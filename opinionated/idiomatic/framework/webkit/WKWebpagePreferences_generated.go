@@ -136,4 +136,3 @@ type WKWebpagePreferencesable interface {
 }
 
 var _ WKWebpagePreferencesable = (*WKWebpagePreferences)(nil)
-

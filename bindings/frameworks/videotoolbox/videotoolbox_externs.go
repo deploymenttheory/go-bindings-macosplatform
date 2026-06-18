@@ -633,13 +633,13 @@ func KVTCompressionPropertyKey_YCbCrMatrix() uintptr {
 	return ptr
 }
 
-// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle @abstract CGRect within the image to be used for content analysis, cropped before applying rotation. @discussion This value specifies a rectangle within the original frame that should be used for content analysis. The cropping is applied before any rotation specified by kVTDecodeFrameOptionKey_ContentAnalyzerRotation. The value should be a CFDictionary representing a CGRect created using CGRectCreateDictionaryRepresentation(). This key is not used unless you have attached a ``SCVideoStreamAnalyzer`` to the decompression session.
+// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle @abstract CGRect within the image to be used for content analysis, cropped before applying rotation. @discussion This value specifies a rectangle within the original frame that should be used for content analysis. The cropping is applied before any rotation specified by kVTDecodeFrameOptionKey_ContentAnalyzerRotation. The value should be a CFDictionary representing a CGRect created using CGRectCreateDictionaryRepresentation(). This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
 func KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle")
 	return ptr
 }
 
-// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerRotation @abstract Clockwise rotation (one of 0, 90, 180, 270) to be applied for proper display orientation. @discussion This value is used for content analysis to properly orient the image before analysis. The value should be a CFNumber with values of 0, 90, 180, or 270, representing degrees of clockwise rotation. This key is not used unless you have attached a ``SCVideoStreamAnalyzer`` to the decompression session.
+// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerRotation @abstract Clockwise rotation (one of 0, 90, 180, 270) to be applied for proper display orientation. @discussion This value is used for content analysis to properly orient the image before analysis. The value should be a CFNumber with values of 0, 90, 180, or 270, representing degrees of clockwise rotation. This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
 func KVTDecodeFrameOptionKey_ContentAnalyzerRotation() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTDecodeFrameOptionKey_ContentAnalyzerRotation")
 	return ptr
@@ -1006,19 +1006,19 @@ func KVTHeroEye_Right() uintptr {
 	return ptr
 }
 
-// A label you use to log and track resources. ``VTMotionEstimationSessionCreate`` takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply ``kVTMotionEstimationSessionCreationOption_Label`` with `CFString` to specify a label used in logging and resource tracking.
+// A label you use to log and track resources. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_Label“ with `CFString` to specify a label used in logging and resource tracking.
 func KVTMotionEstimationSessionCreationOption_Label() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTMotionEstimationSessionCreationOption_Label")
 	return ptr
 }
 
-// The size of the search blocks that motion estimation session uses. ``VTMotionEstimationSessionCreate`` takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply ``kVTMotionEstimationSessionCreationOption_MotionVectorSize`` with `CFNumber` to override the default search block size. Supported motion vector size is 4 or 16, meaning 4x4 or 16x16 respectively. 16x16 is the default if you don't provide this key.
+// The size of the search blocks that motion estimation session uses. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_MotionVectorSize“ with `CFNumber` to override the default search block size. Supported motion vector size is 4 or 16, meaning 4x4 or 16x16 respectively. 16x16 is the default if you don't provide this key.
 func KVTMotionEstimationSessionCreationOption_MotionVectorSize() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTMotionEstimationSessionCreationOption_MotionVectorSize")
 	return ptr
 }
 
-// An option to use for higher quality motion estimation. ``VTMotionEstimationSessionCreate`` takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply ``kVTMotionEstimationSessionCreationOption_UseMultiPassSearch`` with `kCFBooleanTrue` to provide higher quality motion estimation. True-motion achieves higher quality by running the motion estimator in multiple passes. The default is `kCFBooleanFalse`.
+// An option to use for higher quality motion estimation. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_UseMultiPassSearch“ with `kCFBooleanTrue` to provide higher quality motion estimation. True-motion achieves higher quality by running the motion estimator in multiple passes. The default is `kCFBooleanFalse`.
 func KVTMotionEstimationSessionCreationOption_UseMultiPassSearch() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTMotionEstimationSessionCreationOption_UseMultiPassSearch")
 	return ptr
@@ -1793,4 +1793,3 @@ func KVTViewPackingKind_SideBySide() uintptr {
 	ptr, _ := purego.Dlsym(_videotoolboxLib, "kVTViewPackingKind_SideBySide")
 	return ptr
 }
-

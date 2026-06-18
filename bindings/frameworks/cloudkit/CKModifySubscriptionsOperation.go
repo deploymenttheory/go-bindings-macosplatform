@@ -18,19 +18,19 @@ type CKModifySubscriptionsOperation struct {
 }
 
 var (
-	_clsCKModifySubscriptionsOperation = _objcClass("CKModifySubscriptionsOperation")
-	_cKModifySubscriptionsOperationSelInit = objc.RegisterName("init")
+	_clsCKModifySubscriptionsOperation                                                   = _objcClass("CKModifySubscriptionsOperation")
+	_cKModifySubscriptionsOperationSelInit                                               = objc.RegisterName("init")
 	_cKModifySubscriptionsOperationSelInitWithSubscriptionsToSaveSubscriptionIDsToDelete = objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:")
-	_cKModifySubscriptionsOperationSelSubscriptionsToSave = objc.RegisterName("subscriptionsToSave")
-	_cKModifySubscriptionsOperationSelSetSubscriptionsToSave = objc.RegisterName("setSubscriptionsToSave:")
-	_cKModifySubscriptionsOperationSelSubscriptionIDsToDelete = objc.RegisterName("subscriptionIDsToDelete")
-	_cKModifySubscriptionsOperationSelSetSubscriptionIDsToDelete = objc.RegisterName("setSubscriptionIDsToDelete:")
-	_cKModifySubscriptionsOperationSelPerSubscriptionSaveBlock = objc.RegisterName("perSubscriptionSaveBlock")
-	_cKModifySubscriptionsOperationSelSetPerSubscriptionSaveBlock = objc.RegisterName("setPerSubscriptionSaveBlock:")
-	_cKModifySubscriptionsOperationSelPerSubscriptionDeleteBlock = objc.RegisterName("perSubscriptionDeleteBlock")
-	_cKModifySubscriptionsOperationSelSetPerSubscriptionDeleteBlock = objc.RegisterName("setPerSubscriptionDeleteBlock:")
-	_cKModifySubscriptionsOperationSelModifySubscriptionsCompletionBlock = objc.RegisterName("modifySubscriptionsCompletionBlock")
-	_cKModifySubscriptionsOperationSelSetModifySubscriptionsCompletionBlock = objc.RegisterName("setModifySubscriptionsCompletionBlock:")
+	_cKModifySubscriptionsOperationSelSubscriptionsToSave                                = objc.RegisterName("subscriptionsToSave")
+	_cKModifySubscriptionsOperationSelSetSubscriptionsToSave                             = objc.RegisterName("setSubscriptionsToSave:")
+	_cKModifySubscriptionsOperationSelSubscriptionIDsToDelete                            = objc.RegisterName("subscriptionIDsToDelete")
+	_cKModifySubscriptionsOperationSelSetSubscriptionIDsToDelete                         = objc.RegisterName("setSubscriptionIDsToDelete:")
+	_cKModifySubscriptionsOperationSelPerSubscriptionSaveBlock                           = objc.RegisterName("perSubscriptionSaveBlock")
+	_cKModifySubscriptionsOperationSelSetPerSubscriptionSaveBlock                        = objc.RegisterName("setPerSubscriptionSaveBlock:")
+	_cKModifySubscriptionsOperationSelPerSubscriptionDeleteBlock                         = objc.RegisterName("perSubscriptionDeleteBlock")
+	_cKModifySubscriptionsOperationSelSetPerSubscriptionDeleteBlock                      = objc.RegisterName("setPerSubscriptionDeleteBlock:")
+	_cKModifySubscriptionsOperationSelModifySubscriptionsCompletionBlock                 = objc.RegisterName("modifySubscriptionsCompletionBlock")
+	_cKModifySubscriptionsOperationSelSetModifySubscriptionsCompletionBlock              = objc.RegisterName("setModifySubscriptionsCompletionBlock:")
 )
 
 func CKModifySubscriptionsOperationFromID(id objc.ID) *CKModifySubscriptionsOperation {
@@ -46,21 +46,27 @@ func CKModifySubscriptionsOperationFromID(id objc.ID) *CKModifySubscriptionsOper
 // Creates an empty modify subscriptions operation.
 func (o *CKModifySubscriptionsOperation) Init() *CKModifySubscriptionsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKModifySubscriptionsOperationFromID(_ret)
 }
 
 // Creates an operation for saving and deleting the specified subscriptions. - Parameters: - subscriptionsToSave: The subscriptions to save or update. You can specify `nil` for this parameter. - subscriptionIDsToDelete: The IDs of the subscriptions to delete. You can specify `nil` for this parameter. The subscriptions that you want to save or delete must reside in the same container. CloudKit creates a subscription if you save one that doesn't already exist. CloudKit returns an error if you try to delete a subscription that doesn't exist.
 func (o *CKModifySubscriptionsOperation) InitWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave *foundation.NSArray[*CKSubscription], subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) *CKModifySubscriptionsOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelInitWithSubscriptionsToSaveSubscriptionIDsToDelete, subscriptionsToSave.Ptr(), subscriptionIDsToDelete)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKModifySubscriptionsOperationFromID(_ret)
 }
 
-// The subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the ``CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)`` method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
+// The subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
 func (o *CKModifySubscriptionsOperation) SubscriptionsToSave() *foundation.NSArray[*CKSubscription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKModifySubscriptionsOperationSelSubscriptionsToSave)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKSubscription](_ret)
 }
 
@@ -68,7 +74,7 @@ func (o *CKModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToS
 	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetSubscriptionsToSave, subscriptionsToSave.Ptr())
 }
 
-// The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the ``CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)`` method. Modify this property as necessary before you execute the operation or submit it to a queue.
+// The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
 func (o *CKModifySubscriptionsOperation) SubscriptionIDsToDelete() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKModifySubscriptionsOperationSelSubscriptionIDsToDelete)
 	return _ret
@@ -78,7 +84,7 @@ func (o *CKModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscription
 	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetSubscriptionIDsToDelete, subscriptionIDsToDelete)
 }
 
-// The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the ``CKModifySubscriptionsOperation/subscriptionsToSave`` property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionsToSave“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKModifySubscriptionsOperation) PerSubscriptionSaveBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifySubscriptionsOperationSelPerSubscriptionSaveBlock)
 	return _ret
@@ -101,7 +107,7 @@ func (o *CKModifySubscriptionsOperation) SetPerSubscriptionSaveBlock(perSubscrip
 	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetPerSubscriptionSaveBlock, __block_perSubscriptionSaveBlock)
 }
 
-// The closure to execute when CloudKit deletes a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit deletes. - If CloudKit can't delete the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the ``CKModifySubscriptionsOperation/subscriptionIDsToDelete-14x82`` property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit deletes a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit deletes. - If CloudKit can't delete the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionIDsToDelete-14x82“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKModifySubscriptionsOperation) PerSubscriptionDeleteBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifySubscriptionsOperationSelPerSubscriptionDeleteBlock)
 	return _ret
@@ -121,7 +127,7 @@ func (o *CKModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(perSubscr
 	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetPerSubscriptionDeleteBlock, __block_perSubscriptionDeleteBlock)
 }
 
-// The block to execute after the operation modifies the subscriptions. The block returns no value and takes the following parameters: - term `savedSubscriptions`: The subscriptions to save. - term `deletedSubscriptionIDs`: The IDs of the subscriptions to delete. - term `operationError`: An error that contains information about a problem, or `nil` if CloudKit successfully modifies the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type ``CKError/Code/partialFailure`` when it can't modify some of the subscriptions. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that CloudKit can't modify, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The block to execute after the operation modifies the subscriptions. The block returns no value and takes the following parameters: - term `savedSubscriptions`: The subscriptions to save. - term `deletedSubscriptionIDs`: The IDs of the subscriptions to delete. - term `operationError`: An error that contains information about a problem, or `nil` if CloudKit successfully modifies the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it can't modify some of the subscriptions. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that CloudKit can't modify, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
 func (o *CKModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKModifySubscriptionsOperationSelModifySubscriptionsCompletionBlock)
 	return _ret
@@ -130,4 +136,3 @@ func (o *CKModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() ob
 func (o *CKModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) {
 	o.Ptr().Send(_cKModifySubscriptionsOperationSelSetModifySubscriptionsCompletionBlock, modifySubscriptionsCompletionBlock)
 }
-

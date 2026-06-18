@@ -65,4 +65,3 @@ type ScriptWhoseTestable interface {
 }
 
 var _ ScriptWhoseTestable = (*ScriptWhoseTest)(nil)
-

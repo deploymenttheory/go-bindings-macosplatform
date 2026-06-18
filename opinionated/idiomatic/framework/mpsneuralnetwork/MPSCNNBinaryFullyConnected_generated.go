@@ -101,9 +101,13 @@ func (x *CNNBinaryFullyConnected) WithDestinationImageAllocator(destinationImage
 	return x
 }
 
-func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *raw.MPSCNNBinaryConvolution { return &x.inner.MPSCNNBinaryConvolution }
+func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *raw.MPSCNNBinaryConvolution {
+	return &x.inner.MPSCNNBinaryConvolution
+}
 
-func (x *CNNBinaryFullyConnected) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel }
+func (x *CNNBinaryFullyConnected) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel
+}
 
 // CNNBinaryFullyConnectedable is the interface implemented by [CNNBinaryFullyConnected], for mocking and DI.
 type CNNBinaryFullyConnectedable interface {
@@ -119,4 +123,3 @@ type CNNBinaryFullyConnectedable interface {
 }
 
 var _ CNNBinaryFullyConnectedable = (*CNNBinaryFullyConnected)(nil)
-

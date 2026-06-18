@@ -98,4 +98,3 @@ type CommandBufferDescriptorable interface {
 }
 
 var _ CommandBufferDescriptorable = (*CommandBufferDescriptor)(nil)
-

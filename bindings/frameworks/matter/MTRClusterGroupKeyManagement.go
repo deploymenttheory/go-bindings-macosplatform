@@ -18,28 +18,28 @@ type MTRClusterGroupKeyManagement struct {
 }
 
 var (
-	_clsMTRClusterGroupKeyManagement = _objcClass("MTRClusterGroupKeyManagement")
-	_mTRClusterGroupKeyManagementSelKeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupKeyManagementSelKeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupKeyManagementSelKeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keySetReadAllIndicesWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keySetReadAllIndicesWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterGroupKeyManagementSelReadAttributeGroupKeyMapWithParams = objc.RegisterName("readAttributeGroupKeyMapWithParams:")
-	_mTRClusterGroupKeyManagementSelWriteAttributeGroupKeyMapWithValueExpectedValueInterval = objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:")
-	_mTRClusterGroupKeyManagementSelWriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:")
-	_mTRClusterGroupKeyManagementSelReadAttributeGroupTableWithParams = objc.RegisterName("readAttributeGroupTableWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeMaxGroupsPerFabricWithParams = objc.RegisterName("readAttributeMaxGroupsPerFabricWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeMaxGroupKeysPerFabricWithParams = objc.RegisterName("readAttributeMaxGroupKeysPerFabricWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterGroupKeyManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterGroupKeyManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterGroupKeyManagementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterGroupKeyManagementSelKeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupKeyManagementSelKeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGroupKeyManagementSelKeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterGroupKeyManagement                                                                                   = _objcClass("MTRClusterGroupKeyManagement")
+	_mTRClusterGroupKeyManagementSelKeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion                 = objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupKeyManagementSelKeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupKeyManagementSelKeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("keySetReadAllIndicesWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("keySetReadAllIndicesWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterGroupKeyManagementSelReadAttributeGroupKeyMapWithParams                                                 = objc.RegisterName("readAttributeGroupKeyMapWithParams:")
+	_mTRClusterGroupKeyManagementSelWriteAttributeGroupKeyMapWithValueExpectedValueInterval                            = objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:")
+	_mTRClusterGroupKeyManagementSelWriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams                      = objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:")
+	_mTRClusterGroupKeyManagementSelReadAttributeGroupTableWithParams                                                  = objc.RegisterName("readAttributeGroupTableWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeMaxGroupsPerFabricWithParams                                          = objc.RegisterName("readAttributeMaxGroupsPerFabricWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeMaxGroupKeysPerFabricWithParams                                       = objc.RegisterName("readAttributeMaxGroupKeysPerFabricWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeGeneratedCommandListWithParams                                        = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeAcceptedCommandListWithParams                                         = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeAttributeListWithParams                                               = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeFeatureMapWithParams                                                  = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterGroupKeyManagementSelReadAttributeClusterRevisionWithParams                                             = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterGroupKeyManagementSelInitWithDeviceEndpointIDQueue                                                      = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterGroupKeyManagementSelInitWithDeviceEndpointQueue                                                        = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterGroupKeyManagementSelKeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler          = objc.RegisterName("keySetWriteWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupKeyManagementSelKeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGroupKeyManagementSelKeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler         = objc.RegisterName("keySetRemoveWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("keySetReadAllIndicesWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -173,13 +173,17 @@ func (o *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(pa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterGroupKeyManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGroupKeyManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupKeyManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGroupKeyManagementFromID(_ret)
 }
 
 func (o *MTRClusterGroupKeyManagement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGroupKeyManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGroupKeyManagementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGroupKeyManagementFromID(_ret)
 }
 
@@ -232,4 +236,3 @@ func (o *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedVal
 	}
 	o.Ptr().Send(_mTRClusterGroupKeyManagementSelKeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

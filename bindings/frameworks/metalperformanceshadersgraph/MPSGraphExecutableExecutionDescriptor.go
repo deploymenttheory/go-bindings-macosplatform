@@ -19,15 +19,15 @@ type MPSGraphExecutableExecutionDescriptor struct {
 }
 
 var (
-	_clsMPSGraphExecutableExecutionDescriptor = _objcClass("MPSGraphExecutableExecutionDescriptor")
-	_mPSGraphExecutableExecutionDescriptorSelWaitForEventValue = objc.RegisterName("waitForEvent:value:")
+	_clsMPSGraphExecutableExecutionDescriptor                                 = _objcClass("MPSGraphExecutableExecutionDescriptor")
+	_mPSGraphExecutableExecutionDescriptorSelWaitForEventValue                = objc.RegisterName("waitForEvent:value:")
 	_mPSGraphExecutableExecutionDescriptorSelSignalEventAtExecutionEventValue = objc.RegisterName("signalEvent:atExecutionEvent:value:")
-	_mPSGraphExecutableExecutionDescriptorSelScheduledHandler = objc.RegisterName("scheduledHandler")
-	_mPSGraphExecutableExecutionDescriptorSelSetScheduledHandler = objc.RegisterName("setScheduledHandler:")
-	_mPSGraphExecutableExecutionDescriptorSelCompletionHandler = objc.RegisterName("completionHandler")
-	_mPSGraphExecutableExecutionDescriptorSelSetCompletionHandler = objc.RegisterName("setCompletionHandler:")
-	_mPSGraphExecutableExecutionDescriptorSelWaitUntilCompleted = objc.RegisterName("waitUntilCompleted")
-	_mPSGraphExecutableExecutionDescriptorSelSetWaitUntilCompleted = objc.RegisterName("setWaitUntilCompleted:")
+	_mPSGraphExecutableExecutionDescriptorSelScheduledHandler                 = objc.RegisterName("scheduledHandler")
+	_mPSGraphExecutableExecutionDescriptorSelSetScheduledHandler              = objc.RegisterName("setScheduledHandler:")
+	_mPSGraphExecutableExecutionDescriptorSelCompletionHandler                = objc.RegisterName("completionHandler")
+	_mPSGraphExecutableExecutionDescriptorSelSetCompletionHandler             = objc.RegisterName("setCompletionHandler:")
+	_mPSGraphExecutableExecutionDescriptorSelWaitUntilCompleted               = objc.RegisterName("waitUntilCompleted")
+	_mPSGraphExecutableExecutionDescriptorSelSetWaitUntilCompleted            = objc.RegisterName("setWaitUntilCompleted:")
 )
 
 func MPSGraphExecutableExecutionDescriptorFromID(id objc.ID) *MPSGraphExecutableExecutionDescriptor {
@@ -99,4 +99,3 @@ func (o *MPSGraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
 func (o *MPSGraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
 	o.Ptr().Send(_mPSGraphExecutableExecutionDescriptorSelSetWaitUntilCompleted, waitUntilCompleted)
 }
-

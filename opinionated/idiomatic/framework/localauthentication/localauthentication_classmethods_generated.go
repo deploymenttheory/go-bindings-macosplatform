@@ -79,4 +79,3 @@ func SharedStore() *RightStore {
 	}
 	return &RightStore{inner: _r}
 }
-

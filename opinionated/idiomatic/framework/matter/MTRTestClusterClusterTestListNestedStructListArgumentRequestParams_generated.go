@@ -16,11 +16,15 @@ type MTRTestClusterClusterTestListNestedStructListArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestListNestedStructListArgumentRequestParams].
-func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListNestedStructListArgumentRequestParams { return x.inner }
+func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) Unwrap() *raw.MTRTestClusterClusterTestListNestedStructListArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestListNestedStructListArgumentRequestParams (nil for 0).
 func MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsFromID(id objc.ID) *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams {
@@ -48,7 +52,9 @@ func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) Wit
 	return x
 }
 
-func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) asMTRUnitTestingClusterTestListNestedStructListArgumentRequestParams() *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams }
+func (x *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams) asMTRUnitTestingClusterTestListNestedStructListArgumentRequestParams() *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams {
+	return &x.inner.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams
+}
 
 // MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListNestedStructListArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsable interface {
@@ -58,4 +64,3 @@ type MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsable inte
 }
 
 var _ MTRTestClusterClusterTestListNestedStructListArgumentRequestParamsable = (*MTRTestClusterClusterTestListNestedStructListArgumentRequestParams)(nil)
-

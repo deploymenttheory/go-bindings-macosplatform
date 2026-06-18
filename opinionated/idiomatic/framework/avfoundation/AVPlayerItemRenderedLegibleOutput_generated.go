@@ -17,7 +17,9 @@ type PlayerItemRenderedLegibleOutput struct {
 }
 
 // Unwrap returns the underlying [raw.AVPlayerItemRenderedLegibleOutput].
-func (x *PlayerItemRenderedLegibleOutput) Unwrap() *raw.AVPlayerItemRenderedLegibleOutput { return x.inner }
+func (x *PlayerItemRenderedLegibleOutput) Unwrap() *raw.AVPlayerItemRenderedLegibleOutput {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,7 +93,9 @@ func (x *PlayerItemRenderedLegibleOutput) SetVideoDisplaySize(videoDisplaySize c
 	x.inner.SetVideoDisplaySize(videoDisplaySize)
 }
 
-func (x *PlayerItemRenderedLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+func (x *PlayerItemRenderedLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
+	return &x.inner.AVPlayerItemOutput
+}
 
 // PlayerItemRenderedLegibleOutputable is the interface implemented by [PlayerItemRenderedLegibleOutput], for mocking and DI.
 type PlayerItemRenderedLegibleOutputable interface {
@@ -109,4 +113,3 @@ type PlayerItemRenderedLegibleOutputable interface {
 }
 
 var _ PlayerItemRenderedLegibleOutputable = (*PlayerItemRenderedLegibleOutput)(nil)
-

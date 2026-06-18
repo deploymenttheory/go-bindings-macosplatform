@@ -92,4 +92,3 @@ type VectorDescriptorable interface {
 }
 
 var _ VectorDescriptorable = (*VectorDescriptor)(nil)
-

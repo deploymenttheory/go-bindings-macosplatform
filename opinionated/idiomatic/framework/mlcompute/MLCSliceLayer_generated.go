@@ -95,4 +95,3 @@ type SliceLayerable interface {
 }
 
 var _ SliceLayerable = (*SliceLayer)(nil)
-

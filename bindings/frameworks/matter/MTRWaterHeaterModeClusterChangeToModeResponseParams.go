@@ -18,12 +18,12 @@ type MTRWaterHeaterModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTRWaterHeaterModeClusterChangeToModeResponseParams = _objcClass("MTRWaterHeaterModeClusterChangeToModeResponseParams")
+	_clsMTRWaterHeaterModeClusterChangeToModeResponseParams                           = _objcClass("MTRWaterHeaterModeClusterChangeToModeResponseParams")
 	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRWaterHeaterModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRWaterHeaterModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRW
 func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) InitWithResponseVa
 
 func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) SetStatus(status *
 
 func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWaterHeaterModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRWaterHeaterModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRWaterHeaterModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

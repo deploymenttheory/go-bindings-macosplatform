@@ -91,7 +91,9 @@ func (x *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []string {
 	})
 }
 
-func (x *ScannerFeatureEnumeration) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+func (x *ScannerFeatureEnumeration) asScannerFeature() *raw.ICScannerFeature {
+	return &x.inner.ICScannerFeature
+}
 
 // ScannerFeatureEnumerationable is the interface implemented by [ScannerFeatureEnumeration], for mocking and DI.
 type ScannerFeatureEnumerationable interface {
@@ -106,4 +108,3 @@ type ScannerFeatureEnumerationable interface {
 }
 
 var _ ScannerFeatureEnumerationable = (*ScannerFeatureEnumeration)(nil)
-

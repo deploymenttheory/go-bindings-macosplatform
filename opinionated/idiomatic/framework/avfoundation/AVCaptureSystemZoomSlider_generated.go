@@ -49,7 +49,9 @@ func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSl
 	return x
 }
 
-func (x *CaptureSystemZoomSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
+func (x *CaptureSystemZoomSlider) asCaptureControl() *raw.AVCaptureControl {
+	return &x.inner.AVCaptureControl
+}
 
 // CaptureSystemZoomSliderable is the interface implemented by [CaptureSystemZoomSlider], for mocking and DI.
 type CaptureSystemZoomSliderable interface {
@@ -58,4 +60,3 @@ type CaptureSystemZoomSliderable interface {
 }
 
 var _ CaptureSystemZoomSliderable = (*CaptureSystemZoomSlider)(nil)
-

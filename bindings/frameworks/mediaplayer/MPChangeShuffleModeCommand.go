@@ -15,8 +15,8 @@ type MPChangeShuffleModeCommand struct {
 }
 
 var (
-	_clsMPChangeShuffleModeCommand = _objcClass("MPChangeShuffleModeCommand")
-	_mPChangeShuffleModeCommandSelCurrentShuffleType = objc.RegisterName("currentShuffleType")
+	_clsMPChangeShuffleModeCommand                      = _objcClass("MPChangeShuffleModeCommand")
+	_mPChangeShuffleModeCommandSelCurrentShuffleType    = objc.RegisterName("currentShuffleType")
 	_mPChangeShuffleModeCommandSelSetCurrentShuffleType = objc.RegisterName("setCurrentShuffleType:")
 )
 
@@ -38,4 +38,3 @@ func (o *MPChangeShuffleModeCommand) CurrentShuffleType() MPShuffleType {
 func (o *MPChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType MPShuffleType) {
 	o.Ptr().Send(_mPChangeShuffleModeCommandSelSetCurrentShuffleType, currentShuffleType)
 }
-

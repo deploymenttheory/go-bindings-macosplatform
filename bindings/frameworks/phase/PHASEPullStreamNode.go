@@ -16,8 +16,8 @@ type PHASEPullStreamNode struct {
 }
 
 var (
-	_clsPHASEPullStreamNode = _objcClass("PHASEPullStreamNode")
-	_pHASEPullStreamNodeSelRenderBlock = objc.RegisterName("renderBlock")
+	_clsPHASEPullStreamNode               = _objcClass("PHASEPullStreamNode")
+	_pHASEPullStreamNodeSelRenderBlock    = objc.RegisterName("renderBlock")
 	_pHASEPullStreamNodeSelSetRenderBlock = objc.RegisterName("setRenderBlock:")
 )
 
@@ -46,4 +46,3 @@ func (o *PHASEPullStreamNode) SetRenderBlock(renderBlock func(*bool, *coreaudiot
 	}
 	o.Ptr().Send(_pHASEPullStreamNodeSelSetRenderBlock, __block_renderBlock)
 }
-

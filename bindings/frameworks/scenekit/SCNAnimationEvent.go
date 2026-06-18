@@ -16,7 +16,7 @@ type SCNAnimationEvent struct {
 }
 
 var (
-	_clsSCNAnimationEvent = _objcClass("SCNAnimationEvent")
+	_clsSCNAnimationEvent                               = _objcClass("SCNAnimationEvent")
 	_sCNAnimationEventSelAnimationEventWithKeyTimeBlock = objc.RegisterName("animationEventWithKeyTime:block:")
 )
 
@@ -40,7 +40,8 @@ func SCNAnimationEventAnimationEventWithKeyTimeBlock(time_ float64, eventBlock f
 		defer __block_eventBlock.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAnimationEvent), _sCNAnimationEventSelAnimationEventWithKeyTimeBlock, time_, __block_eventBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAnimationEventFromID(_ret)
 }
-

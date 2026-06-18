@@ -15,9 +15,9 @@ type MKMultiPolygonRenderer struct {
 }
 
 var (
-	_clsMKMultiPolygonRenderer = _objcClass("MKMultiPolygonRenderer")
+	_clsMKMultiPolygonRenderer                     = _objcClass("MKMultiPolygonRenderer")
 	_mKMultiPolygonRendererSelInitWithMultiPolygon = objc.RegisterName("initWithMultiPolygon:")
-	_mKMultiPolygonRendererSelMultiPolygon = objc.RegisterName("multiPolygon")
+	_mKMultiPolygonRendererSelMultiPolygon         = objc.RegisterName("multiPolygon")
 )
 
 func MKMultiPolygonRendererFromID(id objc.ID) *MKMultiPolygonRenderer {
@@ -32,13 +32,16 @@ func MKMultiPolygonRendererFromID(id objc.ID) *MKMultiPolygonRenderer {
 
 func (o *MKMultiPolygonRenderer) InitWithMultiPolygon(multiPolygon *MKMultiPolygon) *MKMultiPolygonRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonRendererSelInitWithMultiPolygon, multiPolygon.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolygonRendererFromID(_ret)
 }
 
 func (o *MKMultiPolygonRenderer) MultiPolygon() *MKMultiPolygon {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonRendererSelMultiPolygon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolygonFromID(_ret)
 }
-

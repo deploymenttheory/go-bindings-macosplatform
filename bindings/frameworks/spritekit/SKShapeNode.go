@@ -22,47 +22,47 @@ type SKShapeNode struct {
 }
 
 var (
-	_clsSKShapeNode = _objcClass("SKShapeNode")
-	_sKShapeNodeSelShapeNodeWithPath = objc.RegisterName("shapeNodeWithPath:")
-	_sKShapeNodeSelShapeNodeWithPathCentered = objc.RegisterName("shapeNodeWithPath:centered:")
-	_sKShapeNodeSelShapeNodeWithRect = objc.RegisterName("shapeNodeWithRect:")
-	_sKShapeNodeSelShapeNodeWithRectOfSize = objc.RegisterName("shapeNodeWithRectOfSize:")
-	_sKShapeNodeSelShapeNodeWithRectCornerRadius = objc.RegisterName("shapeNodeWithRect:cornerRadius:")
+	_clsSKShapeNode                                    = _objcClass("SKShapeNode")
+	_sKShapeNodeSelShapeNodeWithPath                   = objc.RegisterName("shapeNodeWithPath:")
+	_sKShapeNodeSelShapeNodeWithPathCentered           = objc.RegisterName("shapeNodeWithPath:centered:")
+	_sKShapeNodeSelShapeNodeWithRect                   = objc.RegisterName("shapeNodeWithRect:")
+	_sKShapeNodeSelShapeNodeWithRectOfSize             = objc.RegisterName("shapeNodeWithRectOfSize:")
+	_sKShapeNodeSelShapeNodeWithRectCornerRadius       = objc.RegisterName("shapeNodeWithRect:cornerRadius:")
 	_sKShapeNodeSelShapeNodeWithRectOfSizeCornerRadius = objc.RegisterName("shapeNodeWithRectOfSize:cornerRadius:")
-	_sKShapeNodeSelShapeNodeWithCircleOfRadius = objc.RegisterName("shapeNodeWithCircleOfRadius:")
-	_sKShapeNodeSelShapeNodeWithEllipseInRect = objc.RegisterName("shapeNodeWithEllipseInRect:")
-	_sKShapeNodeSelShapeNodeWithEllipseOfSize = objc.RegisterName("shapeNodeWithEllipseOfSize:")
-	_sKShapeNodeSelShapeNodeWithPointsCount = objc.RegisterName("shapeNodeWithPoints:count:")
-	_sKShapeNodeSelShapeNodeWithSplinePointsCount = objc.RegisterName("shapeNodeWithSplinePoints:count:")
-	_sKShapeNodeSelPath = objc.RegisterName("path")
-	_sKShapeNodeSelSetPath = objc.RegisterName("setPath:")
-	_sKShapeNodeSelStrokeColor = objc.RegisterName("strokeColor")
-	_sKShapeNodeSelSetStrokeColor = objc.RegisterName("setStrokeColor:")
-	_sKShapeNodeSelFillColor = objc.RegisterName("fillColor")
-	_sKShapeNodeSelSetFillColor = objc.RegisterName("setFillColor:")
-	_sKShapeNodeSelBlendMode = objc.RegisterName("blendMode")
-	_sKShapeNodeSelSetBlendMode = objc.RegisterName("setBlendMode:")
-	_sKShapeNodeSelIsAntialiased = objc.RegisterName("isAntialiased")
-	_sKShapeNodeSelSetAntialiased = objc.RegisterName("setAntialiased:")
-	_sKShapeNodeSelLineWidth = objc.RegisterName("lineWidth")
-	_sKShapeNodeSelSetLineWidth = objc.RegisterName("setLineWidth:")
-	_sKShapeNodeSelGlowWidth = objc.RegisterName("glowWidth")
-	_sKShapeNodeSelSetGlowWidth = objc.RegisterName("setGlowWidth:")
-	_sKShapeNodeSelLineCap = objc.RegisterName("lineCap")
-	_sKShapeNodeSelSetLineCap = objc.RegisterName("setLineCap:")
-	_sKShapeNodeSelLineJoin = objc.RegisterName("lineJoin")
-	_sKShapeNodeSelSetLineJoin = objc.RegisterName("setLineJoin:")
-	_sKShapeNodeSelMiterLimit = objc.RegisterName("miterLimit")
-	_sKShapeNodeSelSetMiterLimit = objc.RegisterName("setMiterLimit:")
-	_sKShapeNodeSelLineLength = objc.RegisterName("lineLength")
-	_sKShapeNodeSelFillTexture = objc.RegisterName("fillTexture")
-	_sKShapeNodeSelSetFillTexture = objc.RegisterName("setFillTexture:")
-	_sKShapeNodeSelFillShader = objc.RegisterName("fillShader")
-	_sKShapeNodeSelSetFillShader = objc.RegisterName("setFillShader:")
-	_sKShapeNodeSelStrokeTexture = objc.RegisterName("strokeTexture")
-	_sKShapeNodeSelSetStrokeTexture = objc.RegisterName("setStrokeTexture:")
-	_sKShapeNodeSelStrokeShader = objc.RegisterName("strokeShader")
-	_sKShapeNodeSelSetStrokeShader = objc.RegisterName("setStrokeShader:")
+	_sKShapeNodeSelShapeNodeWithCircleOfRadius         = objc.RegisterName("shapeNodeWithCircleOfRadius:")
+	_sKShapeNodeSelShapeNodeWithEllipseInRect          = objc.RegisterName("shapeNodeWithEllipseInRect:")
+	_sKShapeNodeSelShapeNodeWithEllipseOfSize          = objc.RegisterName("shapeNodeWithEllipseOfSize:")
+	_sKShapeNodeSelShapeNodeWithPointsCount            = objc.RegisterName("shapeNodeWithPoints:count:")
+	_sKShapeNodeSelShapeNodeWithSplinePointsCount      = objc.RegisterName("shapeNodeWithSplinePoints:count:")
+	_sKShapeNodeSelPath                                = objc.RegisterName("path")
+	_sKShapeNodeSelSetPath                             = objc.RegisterName("setPath:")
+	_sKShapeNodeSelStrokeColor                         = objc.RegisterName("strokeColor")
+	_sKShapeNodeSelSetStrokeColor                      = objc.RegisterName("setStrokeColor:")
+	_sKShapeNodeSelFillColor                           = objc.RegisterName("fillColor")
+	_sKShapeNodeSelSetFillColor                        = objc.RegisterName("setFillColor:")
+	_sKShapeNodeSelBlendMode                           = objc.RegisterName("blendMode")
+	_sKShapeNodeSelSetBlendMode                        = objc.RegisterName("setBlendMode:")
+	_sKShapeNodeSelIsAntialiased                       = objc.RegisterName("isAntialiased")
+	_sKShapeNodeSelSetAntialiased                      = objc.RegisterName("setAntialiased:")
+	_sKShapeNodeSelLineWidth                           = objc.RegisterName("lineWidth")
+	_sKShapeNodeSelSetLineWidth                        = objc.RegisterName("setLineWidth:")
+	_sKShapeNodeSelGlowWidth                           = objc.RegisterName("glowWidth")
+	_sKShapeNodeSelSetGlowWidth                        = objc.RegisterName("setGlowWidth:")
+	_sKShapeNodeSelLineCap                             = objc.RegisterName("lineCap")
+	_sKShapeNodeSelSetLineCap                          = objc.RegisterName("setLineCap:")
+	_sKShapeNodeSelLineJoin                            = objc.RegisterName("lineJoin")
+	_sKShapeNodeSelSetLineJoin                         = objc.RegisterName("setLineJoin:")
+	_sKShapeNodeSelMiterLimit                          = objc.RegisterName("miterLimit")
+	_sKShapeNodeSelSetMiterLimit                       = objc.RegisterName("setMiterLimit:")
+	_sKShapeNodeSelLineLength                          = objc.RegisterName("lineLength")
+	_sKShapeNodeSelFillTexture                         = objc.RegisterName("fillTexture")
+	_sKShapeNodeSelSetFillTexture                      = objc.RegisterName("setFillTexture:")
+	_sKShapeNodeSelFillShader                          = objc.RegisterName("fillShader")
+	_sKShapeNodeSelSetFillShader                       = objc.RegisterName("setFillShader:")
+	_sKShapeNodeSelStrokeTexture                       = objc.RegisterName("strokeTexture")
+	_sKShapeNodeSelSetStrokeTexture                    = objc.RegisterName("setStrokeTexture:")
+	_sKShapeNodeSelStrokeShader                        = objc.RegisterName("strokeShader")
+	_sKShapeNodeSelSetStrokeShader                     = objc.RegisterName("setStrokeShader:")
 )
 
 func SKShapeNodeFromID(id objc.ID) *SKShapeNode {
@@ -77,67 +77,89 @@ func SKShapeNodeFromID(id objc.ID) *SKShapeNode {
 
 func SKShapeNodeShapeNodeWithPath(path unsafe.Pointer) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithPathCentered(path unsafe.Pointer, centered bool) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPathCentered, path, centered)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithRect(rect corefoundation.CGRect) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithRectOfSize(size corefoundation.CGSize) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithRectCornerRadius(rect corefoundation.CGRect, cornerRadius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectCornerRadius, rect, cornerRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithRectOfSizeCornerRadius(size corefoundation.CGSize, cornerRadius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithRectOfSizeCornerRadius, size, cornerRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithCircleOfRadius(radius float64) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithCircleOfRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithEllipseInRect(rect corefoundation.CGRect) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithEllipseOfSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithPointsCount, points, numPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
 func SKShapeNodeShapeNodeWithSplinePointsCount(points *corefoundation.CGPoint, numPoints uint) *SKShapeNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShapeNode), _sKShapeNodeSelShapeNodeWithSplinePointsCount, points, numPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShapeNodeFromID(_ret)
 }
 
@@ -154,7 +176,9 @@ func (o *SKShapeNode) SetPath(path unsafe.Pointer) {
 // The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
 func (o *SKShapeNode) StrokeColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -165,7 +189,9 @@ func (o *SKShapeNode) SetStrokeColor(strokeColor *appkit.NSColor) {
 // The color to fill the path with. Defaults to [SKColor clearColor] (no fill).
 func (o *SKShapeNode) FillColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -251,7 +277,9 @@ func (o *SKShapeNode) LineLength() float64 {
 
 func (o *SKShapeNode) FillTexture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -261,7 +289,9 @@ func (o *SKShapeNode) SetFillTexture(fillTexture *SKTexture) {
 
 func (o *SKShapeNode) FillShader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelFillShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
@@ -271,7 +301,9 @@ func (o *SKShapeNode) SetFillShader(fillShader *SKShader) {
 
 func (o *SKShapeNode) StrokeTexture() *SKTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeTexture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTextureFromID(_ret)
 }
 
@@ -281,11 +313,12 @@ func (o *SKShapeNode) SetStrokeTexture(strokeTexture *SKTexture) {
 
 func (o *SKShapeNode) StrokeShader() *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShapeNodeSelStrokeShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func (o *SKShapeNode) SetStrokeShader(strokeShader *SKShader) {
 	o.Ptr().Send(_sKShapeNodeSelSetStrokeShader, strokeShader.Ptr())
 }
-

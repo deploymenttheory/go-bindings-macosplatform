@@ -17,17 +17,17 @@ type NSOpenGLLayer struct {
 }
 
 var (
-	_clsNSOpenGLLayer = _objcClass("NSOpenGLLayer")
-	_nSOpenGLLayerSelOpenGLPixelFormatForDisplayMask = objc.RegisterName("openGLPixelFormatForDisplayMask:")
-	_nSOpenGLLayerSelOpenGLContextForPixelFormat = objc.RegisterName("openGLContextForPixelFormat:")
+	_clsNSOpenGLLayer                                                         = _objcClass("NSOpenGLLayer")
+	_nSOpenGLLayerSelOpenGLPixelFormatForDisplayMask                          = objc.RegisterName("openGLPixelFormatForDisplayMask:")
+	_nSOpenGLLayerSelOpenGLContextForPixelFormat                              = objc.RegisterName("openGLContextForPixelFormat:")
 	_nSOpenGLLayerSelCanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime = objc.RegisterName("canDrawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")
-	_nSOpenGLLayerSelDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime = objc.RegisterName("drawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")
-	_nSOpenGLLayerSelView = objc.RegisterName("view")
-	_nSOpenGLLayerSelSetView = objc.RegisterName("setView:")
-	_nSOpenGLLayerSelOpenGLPixelFormat = objc.RegisterName("openGLPixelFormat")
-	_nSOpenGLLayerSelSetOpenGLPixelFormat = objc.RegisterName("setOpenGLPixelFormat:")
-	_nSOpenGLLayerSelOpenGLContext = objc.RegisterName("openGLContext")
-	_nSOpenGLLayerSelSetOpenGLContext = objc.RegisterName("setOpenGLContext:")
+	_nSOpenGLLayerSelDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime    = objc.RegisterName("drawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")
+	_nSOpenGLLayerSelView                                                     = objc.RegisterName("view")
+	_nSOpenGLLayerSelSetView                                                  = objc.RegisterName("setView:")
+	_nSOpenGLLayerSelOpenGLPixelFormat                                        = objc.RegisterName("openGLPixelFormat")
+	_nSOpenGLLayerSelSetOpenGLPixelFormat                                     = objc.RegisterName("setOpenGLPixelFormat:")
+	_nSOpenGLLayerSelOpenGLContext                                            = objc.RegisterName("openGLContext")
+	_nSOpenGLLayerSelSetOpenGLContext                                         = objc.RegisterName("setOpenGLContext:")
 )
 
 func NSOpenGLLayerFromID(id objc.ID) *NSOpenGLLayer {
@@ -42,13 +42,17 @@ func NSOpenGLLayerFromID(id objc.ID) *NSOpenGLLayer {
 
 func (o *NSOpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLPixelFormatForDisplayMask, mask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
 func (o *NSOpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *NSOpenGLPixelFormat) *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLContextForPixelFormat, pixelFormat.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *NSOpenGLLayer) DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(co
 
 func (o *NSOpenGLLayer) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *NSOpenGLLayer) SetView(view *NSView) {
 
 func (o *NSOpenGLLayer) OpenGLPixelFormat() *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLPixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *NSOpenGLLayer) SetOpenGLPixelFormat(openGLPixelFormat *NSOpenGLPixelFor
 
 func (o *NSOpenGLLayer) OpenGLContext() *NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLLayerSelOpenGLContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLContextFromID(_ret)
 }
 
 func (o *NSOpenGLLayer) SetOpenGLContext(openGLContext *NSOpenGLContext) {
 	o.Ptr().Send(_nSOpenGLLayerSelSetOpenGLContext, openGLContext.Ptr())
 }
-

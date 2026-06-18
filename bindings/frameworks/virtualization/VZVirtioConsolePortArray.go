@@ -16,9 +16,9 @@ type VZVirtioConsolePortArray struct {
 }
 
 var (
-	_clsVZVirtioConsolePortArray = _objcClass("VZVirtioConsolePortArray")
+	_clsVZVirtioConsolePortArray                         = _objcClass("VZVirtioConsolePortArray")
 	_vZVirtioConsolePortArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_vZVirtioConsolePortArraySelMaximumPortCount = objc.RegisterName("maximumPortCount")
+	_vZVirtioConsolePortArraySelMaximumPortCount         = objc.RegisterName("maximumPortCount")
 )
 
 func VZVirtioConsolePortArrayFromID(id objc.ID) *VZVirtioConsolePortArray {
@@ -34,7 +34,9 @@ func VZVirtioConsolePortArrayFromID(id objc.ID) *VZVirtioConsolePortArray {
 // @abstract Get a port at the specified index.
 func (o *VZVirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex uint) *VZVirtioConsolePort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortArraySelObjectAtIndexedSubscript, portIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsolePortFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *VZVirtioConsolePortArray) MaximumPortCount() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _vZVirtioConsolePortArraySelMaximumPortCount)
 	return _ret
 }
-

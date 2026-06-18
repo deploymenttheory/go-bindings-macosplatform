@@ -66,4 +66,3 @@ type URLDownloadable interface {
 }
 
 var _ URLDownloadable = (*URLDownload)(nil)
-

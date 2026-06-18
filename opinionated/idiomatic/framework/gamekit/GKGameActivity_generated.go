@@ -287,4 +287,3 @@ type GameActivityable interface {
 }
 
 var _ GameActivityable = (*GameActivity)(nil)
-

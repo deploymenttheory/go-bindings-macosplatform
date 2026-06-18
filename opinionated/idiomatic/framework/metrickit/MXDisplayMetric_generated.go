@@ -49,4 +49,3 @@ type DisplayMetricable interface {
 }
 
 var _ DisplayMetricable = (*DisplayMetric)(nil)
-

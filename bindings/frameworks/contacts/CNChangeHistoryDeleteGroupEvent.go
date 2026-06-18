@@ -16,7 +16,7 @@ type CNChangeHistoryDeleteGroupEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryDeleteGroupEvent = _objcClass("CNChangeHistoryDeleteGroupEvent")
+	_clsCNChangeHistoryDeleteGroupEvent                = _objcClass("CNChangeHistoryDeleteGroupEvent")
 	_cNChangeHistoryDeleteGroupEventSelGroupIdentifier = objc.RegisterName("groupIdentifier")
 )
 
@@ -32,7 +32,8 @@ func CNChangeHistoryDeleteGroupEventFromID(id objc.ID) *CNChangeHistoryDeleteGro
 
 func (o *CNChangeHistoryDeleteGroupEvent) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryDeleteGroupEventSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

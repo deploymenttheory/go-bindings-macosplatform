@@ -108,4 +108,3 @@ type DownloadManagerable interface {
 }
 
 var _ DownloadManagerable = (*DownloadManager)(nil)
-

@@ -17,23 +17,23 @@ type NSXMLDTD struct {
 }
 
 var (
-	_clsNSXMLDTD = _objcClass("NSXMLDTD")
-	_nSXMLDTDSelInit = objc.RegisterName("init")
-	_nSXMLDTDSelInsertChildAtIndex = objc.RegisterName("insertChild:atIndex:")
-	_nSXMLDTDSelInsertChildrenAtIndex = objc.RegisterName("insertChildren:atIndex:")
-	_nSXMLDTDSelRemoveChildAtIndex = objc.RegisterName("removeChildAtIndex:")
-	_nSXMLDTDSelSetChildren = objc.RegisterName("setChildren:")
-	_nSXMLDTDSelAddChild = objc.RegisterName("addChild:")
-	_nSXMLDTDSelReplaceChildAtIndexWithNode = objc.RegisterName("replaceChildAtIndex:withNode:")
-	_nSXMLDTDSelEntityDeclarationForName = objc.RegisterName("entityDeclarationForName:")
-	_nSXMLDTDSelNotationDeclarationForName = objc.RegisterName("notationDeclarationForName:")
-	_nSXMLDTDSelElementDeclarationForName = objc.RegisterName("elementDeclarationForName:")
+	_clsNSXMLDTD                                       = _objcClass("NSXMLDTD")
+	_nSXMLDTDSelInit                                   = objc.RegisterName("init")
+	_nSXMLDTDSelInsertChildAtIndex                     = objc.RegisterName("insertChild:atIndex:")
+	_nSXMLDTDSelInsertChildrenAtIndex                  = objc.RegisterName("insertChildren:atIndex:")
+	_nSXMLDTDSelRemoveChildAtIndex                     = objc.RegisterName("removeChildAtIndex:")
+	_nSXMLDTDSelSetChildren                            = objc.RegisterName("setChildren:")
+	_nSXMLDTDSelAddChild                               = objc.RegisterName("addChild:")
+	_nSXMLDTDSelReplaceChildAtIndexWithNode            = objc.RegisterName("replaceChildAtIndex:withNode:")
+	_nSXMLDTDSelEntityDeclarationForName               = objc.RegisterName("entityDeclarationForName:")
+	_nSXMLDTDSelNotationDeclarationForName             = objc.RegisterName("notationDeclarationForName:")
+	_nSXMLDTDSelElementDeclarationForName              = objc.RegisterName("elementDeclarationForName:")
 	_nSXMLDTDSelAttributeDeclarationForNameElementName = objc.RegisterName("attributeDeclarationForName:elementName:")
-	_nSXMLDTDSelPredefinedEntityDeclarationForName = objc.RegisterName("predefinedEntityDeclarationForName:")
-	_nSXMLDTDSelPublicID = objc.RegisterName("publicID")
-	_nSXMLDTDSelSetPublicID = objc.RegisterName("setPublicID:")
-	_nSXMLDTDSelSystemID = objc.RegisterName("systemID")
-	_nSXMLDTDSelSetSystemID = objc.RegisterName("setSystemID:")
+	_nSXMLDTDSelPredefinedEntityDeclarationForName     = objc.RegisterName("predefinedEntityDeclarationForName:")
+	_nSXMLDTDSelPublicID                               = objc.RegisterName("publicID")
+	_nSXMLDTDSelSetPublicID                            = objc.RegisterName("setPublicID:")
+	_nSXMLDTDSelSystemID                               = objc.RegisterName("systemID")
+	_nSXMLDTDSelSetSystemID                            = objc.RegisterName("setSystemID:")
 )
 
 func NSXMLDTDFromID(id objc.ID) *NSXMLDTD {
@@ -48,7 +48,9 @@ func NSXMLDTDFromID(id objc.ID) *NSXMLDTD {
 
 func (o *NSXMLDTD) Init() *NSXMLDTD {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDFromID(_ret)
 }
 
@@ -85,42 +87,54 @@ func (o *NSXMLDTD) ReplaceChildAtIndexWithNode(index uint, node *NSXMLNode) {
 // @method entityDeclarationForName: @abstract Returns the entity declaration matching this name.
 func (o *NSXMLDTD) EntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelEntityDeclarationForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 // @method notationDeclarationForName: @abstract Returns the notation declaration matching this name.
 func (o *NSXMLDTD) NotationDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelNotationDeclarationForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 // @method elementDeclarationForName: @abstract Returns the element declaration matching this name.
 func (o *NSXMLDTD) ElementDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelElementDeclarationForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 // @method attributeDeclarationForName: @abstract Returns the attribute declaration matching this name.
 func (o *NSXMLDTD) AttributeDeclarationForNameElementName(name *NSString, elementName *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelAttributeDeclarationForNameElementName, name.Ptr(), elementName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 // @method predefinedEntityDeclarationForName: @abstract Returns the predefined entity declaration matching this name. @discussion The five predefined entities are <ul><li>&amp;lt; - &lt;</li><li>&amp;gt; - &gt;</li><li>&amp;amp; - &amp;</li><li>&amp;quot; - &quot;</li><li>&amp;apos; - &amp;</li></ul>
 func NSXMLDTDPredefinedEntityDeclarationForName(name *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXMLDTD), _nSXMLDTDSelPredefinedEntityDeclarationForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 // @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
 func (o *NSXMLDTD) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelPublicID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -131,11 +145,12 @@ func (o *NSXMLDTD) SetPublicID(publicID *NSString) {
 // @abstract Sets the system id. This should be a URL that points to a valid DTD.
 func (o *NSXMLDTD) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDSelSystemID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSXMLDTD) SetSystemID(systemID *NSString) {
 	o.Ptr().Send(_nSXMLDTDSelSetSystemID, systemID.Ptr())
 }
-

@@ -18,18 +18,18 @@ type MTRUnitTestingClusterTestNullableOptionalResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestNullableOptionalResponseParams = _objcClass("MTRUnitTestingClusterTestNullableOptionalResponseParams")
+	_clsMTRUnitTestingClusterTestNullableOptionalResponseParams                           = _objcClass("MTRUnitTestingClusterTestNullableOptionalResponseParams")
 	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasPresent = objc.RegisterName("wasPresent")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetWasPresent = objc.RegisterName("setWasPresent:")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasNull = objc.RegisterName("wasNull")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetWasNull = objc.RegisterName("setWasNull:")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelValue = objc.RegisterName("value")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetValue = objc.RegisterName("setValue:")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelOriginalValue = objc.RegisterName("originalValue")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetOriginalValue = objc.RegisterName("setOriginalValue:")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasPresent                 = objc.RegisterName("wasPresent")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetWasPresent              = objc.RegisterName("setWasPresent:")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasNull                    = objc.RegisterName("wasNull")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetWasNull                 = objc.RegisterName("setWasNull:")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelValue                      = objc.RegisterName("value")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetValue                   = objc.RegisterName("setValue:")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelOriginalValue              = objc.RegisterName("originalValue")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetOriginalValue           = objc.RegisterName("setOriginalValue:")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
@@ -46,7 +46,9 @@ func MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(id objc.ID) *
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) InitWithRespon
 
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasPresent(
 
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetWasNull(was
 
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetValue(value
 
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) OriginalValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelOriginalValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,11 +106,12 @@ func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetOriginalVal
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestNullableOptionalResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestNullableOptionalResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

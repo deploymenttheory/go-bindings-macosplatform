@@ -55,4 +55,3 @@ type FrameProcessorOpticalFlowable interface {
 }
 
 var _ FrameProcessorOpticalFlowable = (*FrameProcessorOpticalFlow)(nil)
-

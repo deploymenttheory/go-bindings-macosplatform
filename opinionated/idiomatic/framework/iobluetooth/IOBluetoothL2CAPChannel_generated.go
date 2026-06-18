@@ -169,7 +169,9 @@ func (x *IOBluetoothL2CAPChannel) RemoteChannelID() uint16 {
 	return x.inner.RemoteChannelID()
 }
 
-func (x *IOBluetoothL2CAPChannel) asIOBluetoothObject() *raw.IOBluetoothObject { return &x.inner.IOBluetoothObject }
+func (x *IOBluetoothL2CAPChannel) asIOBluetoothObject() *raw.IOBluetoothObject {
+	return &x.inner.IOBluetoothObject
+}
 
 // IOBluetoothL2CAPChannelable is the interface implemented by [IOBluetoothL2CAPChannel], for mocking and DI.
 type IOBluetoothL2CAPChannelable interface {
@@ -201,4 +203,3 @@ type IOBluetoothL2CAPChannelable interface {
 }
 
 var _ IOBluetoothL2CAPChannelable = (*IOBluetoothL2CAPChannel)(nil)
-

@@ -16,11 +16,11 @@ type AVMovieTrack struct {
 }
 
 var (
-	_clsAVMovieTrack = _objcClass("AVMovieTrack")
+	_clsAVMovieTrack                           = _objcClass("AVMovieTrack")
 	_aVMovieTrackSelMediaPresentationTimeRange = objc.RegisterName("mediaPresentationTimeRange")
-	_aVMovieTrackSelMediaDecodeTimeRange = objc.RegisterName("mediaDecodeTimeRange")
-	_aVMovieTrackSelAlternateGroupID = objc.RegisterName("alternateGroupID")
-	_aVMovieTrackSelMediaDataStorage = objc.RegisterName("mediaDataStorage")
+	_aVMovieTrackSelMediaDecodeTimeRange       = objc.RegisterName("mediaDecodeTimeRange")
+	_aVMovieTrackSelAlternateGroupID           = objc.RegisterName("alternateGroupID")
+	_aVMovieTrackSelMediaDataStorage           = objc.RegisterName("mediaDataStorage")
 )
 
 func AVMovieTrackFromID(id objc.ID) *AVMovieTrack {
@@ -52,7 +52,8 @@ func (o *AVMovieTrack) AlternateGroupID() int {
 
 func (o *AVMovieTrack) MediaDataStorage() *AVMediaDataStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMovieTrackSelMediaDataStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaDataStorageFromID(_ret)
 }
-

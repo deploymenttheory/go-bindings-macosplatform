@@ -66,7 +66,9 @@ func (x *CNNInstanceNormalizationNode) SetTrainingStyle(trainingStyle mpsneuraln
 	x.inner.SetTrainingStyle(trainingStyle)
 }
 
-func (x *CNNInstanceNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNInstanceNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNInstanceNormalizationNodeable is the interface implemented by [CNNInstanceNormalizationNode], for mocking and DI.
 type CNNInstanceNormalizationNodeable interface {
@@ -79,4 +81,3 @@ type CNNInstanceNormalizationNodeable interface {
 }
 
 var _ CNNInstanceNormalizationNodeable = (*CNNInstanceNormalizationNode)(nil)
-

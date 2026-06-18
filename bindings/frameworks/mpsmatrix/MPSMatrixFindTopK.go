@@ -18,18 +18,18 @@ type MPSMatrixFindTopK struct {
 }
 
 var (
-	_clsMPSMatrixFindTopK = _objcClass("MPSMatrixFindTopK")
-	_mPSMatrixFindTopKSelInitWithDeviceNumberOfTopKValues = objc.RegisterName("initWithDevice:numberOfTopKValues:")
+	_clsMPSMatrixFindTopK                                                                   = _objcClass("MPSMatrixFindTopK")
+	_mPSMatrixFindTopKSelInitWithDeviceNumberOfTopKValues                                   = objc.RegisterName("initWithDevice:numberOfTopKValues:")
 	_mPSMatrixFindTopKSelEncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix = objc.RegisterName("encodeToCommandBuffer:inputMatrix:resultIndexMatrix:resultValueMatrix:")
-	_mPSMatrixFindTopKSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixFindTopKSelSourceRows = objc.RegisterName("sourceRows")
-	_mPSMatrixFindTopKSelSetSourceRows = objc.RegisterName("setSourceRows:")
-	_mPSMatrixFindTopKSelSourceColumns = objc.RegisterName("sourceColumns")
-	_mPSMatrixFindTopKSelSetSourceColumns = objc.RegisterName("setSourceColumns:")
-	_mPSMatrixFindTopKSelIndexOffset = objc.RegisterName("indexOffset")
-	_mPSMatrixFindTopKSelSetIndexOffset = objc.RegisterName("setIndexOffset:")
-	_mPSMatrixFindTopKSelNumberOfTopKValues = objc.RegisterName("numberOfTopKValues")
-	_mPSMatrixFindTopKSelSetNumberOfTopKValues = objc.RegisterName("setNumberOfTopKValues:")
+	_mPSMatrixFindTopKSelInitWithCoderDevice                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixFindTopKSelSourceRows                                                         = objc.RegisterName("sourceRows")
+	_mPSMatrixFindTopKSelSetSourceRows                                                      = objc.RegisterName("setSourceRows:")
+	_mPSMatrixFindTopKSelSourceColumns                                                      = objc.RegisterName("sourceColumns")
+	_mPSMatrixFindTopKSelSetSourceColumns                                                   = objc.RegisterName("setSourceColumns:")
+	_mPSMatrixFindTopKSelIndexOffset                                                        = objc.RegisterName("indexOffset")
+	_mPSMatrixFindTopKSelSetIndexOffset                                                     = objc.RegisterName("setIndexOffset:")
+	_mPSMatrixFindTopKSelNumberOfTopKValues                                                 = objc.RegisterName("numberOfTopKValues")
+	_mPSMatrixFindTopKSelSetNumberOfTopKValues                                              = objc.RegisterName("setNumberOfTopKValues:")
 )
 
 func MPSMatrixFindTopKFromID(id objc.ID) *MPSMatrixFindTopK {
@@ -44,7 +44,9 @@ func MPSMatrixFindTopKFromID(id objc.ID) *MPSMatrixFindTopK {
 
 func (o *MPSMatrixFindTopK) InitWithDeviceNumberOfTopKValues(device metal.MTLDevice, numberOfTopKValues uint) *MPSMatrixFindTopK {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFindTopKSelInitWithDeviceNumberOfTopKValues, device, numberOfTopKValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFindTopKFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MPSMatrixFindTopK) EncodeToCommandBufferInputMatrixResultIndexMatrixRes
 
 func (o *MPSMatrixFindTopK) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixFindTopK {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixFindTopKSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFindTopKFromID(_ret)
 }
 
@@ -98,4 +102,3 @@ func (o *MPSMatrixFindTopK) NumberOfTopKValues() uint {
 func (o *MPSMatrixFindTopK) SetNumberOfTopKValues(numberOfTopKValues uint) {
 	o.Ptr().Send(_mPSMatrixFindTopKSelSetNumberOfTopKValues, numberOfTopKValues)
 }
-

@@ -18,30 +18,30 @@ type MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
 }
 
 var (
-	_clsMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode = _objcClass("MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelChangeToModeWithParamsCompletion = objc.RegisterName("changeToModeWithParams:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithCompletion = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithCompletion = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode                                                                                     = _objcClass("MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelChangeToModeWithParamsCompletion                                                     = objc.RegisterName("changeToModeWithParams:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithCompletion                                            = objc.RegisterName("readAttributeSupportedModesWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler       = objc.RegisterName("subscribeAttributeSupportedModesWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeSupportedModesWithClusterStateCacheEndpointQueueCompletion              = objc.RegisterName("readAttributeSupportedModesWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithCompletion                                               = objc.RegisterName("readAttributeCurrentModeWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler          = objc.RegisterName("subscribeAttributeCurrentModeWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeCurrentModeWithClusterStateCacheEndpointQueueCompletion                 = objc.RegisterName("readAttributeCurrentModeWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID) *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
@@ -295,7 +295,8 @@ func MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeReadAttributeC
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(_ret)
 }
-

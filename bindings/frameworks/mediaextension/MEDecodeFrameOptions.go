@@ -16,10 +16,10 @@ type MEDecodeFrameOptions struct {
 }
 
 var (
-	_clsMEDecodeFrameOptions = _objcClass("MEDecodeFrameOptions")
-	_mEDecodeFrameOptionsSelDoNotOutputFrame = objc.RegisterName("doNotOutputFrame")
+	_clsMEDecodeFrameOptions                    = _objcClass("MEDecodeFrameOptions")
+	_mEDecodeFrameOptionsSelDoNotOutputFrame    = objc.RegisterName("doNotOutputFrame")
 	_mEDecodeFrameOptionsSelSetDoNotOutputFrame = objc.RegisterName("setDoNotOutputFrame:")
-	_mEDecodeFrameOptionsSelRealTimePlayback = objc.RegisterName("realTimePlayback")
+	_mEDecodeFrameOptionsSelRealTimePlayback    = objc.RegisterName("realTimePlayback")
 	_mEDecodeFrameOptionsSelSetRealTimePlayback = objc.RegisterName("setRealTimePlayback:")
 )
 
@@ -52,4 +52,3 @@ func (o *MEDecodeFrameOptions) RealTimePlayback() bool {
 func (o *MEDecodeFrameOptions) SetRealTimePlayback(realTimePlayback bool) {
 	o.Ptr().Send(_mEDecodeFrameOptionsSelSetRealTimePlayback, realTimePlayback)
 }
-

@@ -117,4 +117,3 @@ type NEDNSProxyProviderable interface {
 }
 
 var _ NEDNSProxyProviderable = (*NEDNSProxyProvider)(nil)
-

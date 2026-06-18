@@ -16,7 +16,7 @@ type CNChangeHistoryEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryEvent = _objcClass("CNChangeHistoryEvent")
+	_clsCNChangeHistoryEvent                   = _objcClass("CNChangeHistoryEvent")
 	_cNChangeHistoryEventSelAcceptEventVisitor = objc.RegisterName("acceptEventVisitor:")
 )
 
@@ -33,4 +33,3 @@ func CNChangeHistoryEventFromID(id objc.ID) *CNChangeHistoryEvent {
 func (o *CNChangeHistoryEvent) AcceptEventVisitor(visitor CNChangeHistoryEventVisitor) {
 	o.Ptr().Send(_cNChangeHistoryEventSelAcceptEventVisitor, visitor)
 }
-

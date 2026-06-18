@@ -17,14 +17,14 @@ type PDFActionRemoteGoTo struct {
 }
 
 var (
-	_clsPDFActionRemoteGoTo = _objcClass("PDFActionRemoteGoTo")
+	_clsPDFActionRemoteGoTo                                = _objcClass("PDFActionRemoteGoTo")
 	_pDFActionRemoteGoToSelInitWithPageIndexAtPointFileURL = objc.RegisterName("initWithPageIndex:atPoint:fileURL:")
-	_pDFActionRemoteGoToSelPageIndex = objc.RegisterName("pageIndex")
-	_pDFActionRemoteGoToSelSetPageIndex = objc.RegisterName("setPageIndex:")
-	_pDFActionRemoteGoToSelPoint = objc.RegisterName("point")
-	_pDFActionRemoteGoToSelSetPoint = objc.RegisterName("setPoint:")
-	_pDFActionRemoteGoToSelURL = objc.RegisterName("URL")
-	_pDFActionRemoteGoToSelSetURL = objc.RegisterName("setURL:")
+	_pDFActionRemoteGoToSelPageIndex                       = objc.RegisterName("pageIndex")
+	_pDFActionRemoteGoToSelSetPageIndex                    = objc.RegisterName("setPageIndex:")
+	_pDFActionRemoteGoToSelPoint                           = objc.RegisterName("point")
+	_pDFActionRemoteGoToSelSetPoint                        = objc.RegisterName("setPoint:")
+	_pDFActionRemoteGoToSelURL                             = objc.RegisterName("URL")
+	_pDFActionRemoteGoToSelSetURL                          = objc.RegisterName("setURL:")
 )
 
 func PDFActionRemoteGoToFromID(id objc.ID) *PDFActionRemoteGoTo {
@@ -39,7 +39,9 @@ func PDFActionRemoteGoToFromID(id objc.ID) *PDFActionRemoteGoTo {
 
 func (o *PDFActionRemoteGoTo) InitWithPageIndexAtPointFileURL(pageIndex uint, point corefoundation.CGPoint, url *foundation.NSURL) *PDFActionRemoteGoTo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionRemoteGoToSelInitWithPageIndexAtPointFileURL, pageIndex, point, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFActionRemoteGoToFromID(_ret)
 }
 
@@ -63,11 +65,12 @@ func (o *PDFActionRemoteGoTo) SetPoint(point corefoundation.CGPoint) {
 
 func (o *PDFActionRemoteGoTo) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFActionRemoteGoToSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *PDFActionRemoteGoTo) SetURL(uRL *foundation.NSURL) {
 	o.Ptr().Send(_pDFActionRemoteGoToSelSetURL, uRL.Ptr())
 }
-

@@ -571,4 +571,3 @@ func VoronoiNoiseWithFrequencyDisplacementDistanceEnabledSeed(frequency float64,
 	}
 	return &VoronoiNoiseSource{inner: _r}
 }
-

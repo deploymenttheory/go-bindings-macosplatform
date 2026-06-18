@@ -20,21 +20,21 @@ type IKImageBrowserCell struct {
 }
 
 var (
-	_clsIKImageBrowserCell = _objcClass("IKImageBrowserCell")
-	_iKImageBrowserCellSelImageBrowserView = objc.RegisterName("imageBrowserView")
-	_iKImageBrowserCellSelRepresentedItem = objc.RegisterName("representedItem")
+	_clsIKImageBrowserCell                       = _objcClass("IKImageBrowserCell")
+	_iKImageBrowserCellSelImageBrowserView       = objc.RegisterName("imageBrowserView")
+	_iKImageBrowserCellSelRepresentedItem        = objc.RegisterName("representedItem")
 	_iKImageBrowserCellSelIndexOfRepresentedItem = objc.RegisterName("indexOfRepresentedItem")
-	_iKImageBrowserCellSelFrame = objc.RegisterName("frame")
-	_iKImageBrowserCellSelImageContainerFrame = objc.RegisterName("imageContainerFrame")
-	_iKImageBrowserCellSelImageFrame = objc.RegisterName("imageFrame")
-	_iKImageBrowserCellSelSelectionFrame = objc.RegisterName("selectionFrame")
-	_iKImageBrowserCellSelTitleFrame = objc.RegisterName("titleFrame")
-	_iKImageBrowserCellSelSubtitleFrame = objc.RegisterName("subtitleFrame")
-	_iKImageBrowserCellSelImageAlignment = objc.RegisterName("imageAlignment")
-	_iKImageBrowserCellSelIsSelected = objc.RegisterName("isSelected")
-	_iKImageBrowserCellSelCellState = objc.RegisterName("cellState")
-	_iKImageBrowserCellSelOpacity = objc.RegisterName("opacity")
-	_iKImageBrowserCellSelLayerForType = objc.RegisterName("layerForType:")
+	_iKImageBrowserCellSelFrame                  = objc.RegisterName("frame")
+	_iKImageBrowserCellSelImageContainerFrame    = objc.RegisterName("imageContainerFrame")
+	_iKImageBrowserCellSelImageFrame             = objc.RegisterName("imageFrame")
+	_iKImageBrowserCellSelSelectionFrame         = objc.RegisterName("selectionFrame")
+	_iKImageBrowserCellSelTitleFrame             = objc.RegisterName("titleFrame")
+	_iKImageBrowserCellSelSubtitleFrame          = objc.RegisterName("subtitleFrame")
+	_iKImageBrowserCellSelImageAlignment         = objc.RegisterName("imageAlignment")
+	_iKImageBrowserCellSelIsSelected             = objc.RegisterName("isSelected")
+	_iKImageBrowserCellSelCellState              = objc.RegisterName("cellState")
+	_iKImageBrowserCellSelOpacity                = objc.RegisterName("opacity")
+	_iKImageBrowserCellSelLayerForType           = objc.RegisterName("layerForType:")
 )
 
 func IKImageBrowserCellFromID(id objc.ID) *IKImageBrowserCell {
@@ -50,7 +50,9 @@ func IKImageBrowserCellFromID(id objc.ID) *IKImageBrowserCell {
 // @method imageBrowserView @abstract Returns the view the receiver uses to display its represented object. @discussion Subclasses should not override this method.
 func (o *IKImageBrowserCell) ImageBrowserView() *IKImageBrowserView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserCellSelImageBrowserView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IKImageBrowserViewFromID(_ret)
 }
 
@@ -129,7 +131,8 @@ func (o *IKImageBrowserCell) Opacity() float64 {
 // @method layerForType: @abstract Provides the receiver�s layer for the given type. The default is nil. @discussion Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
 func (o *IKImageBrowserCell) LayerForType(type_ *foundation.NSString) *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKImageBrowserCellSelLayerForType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
-

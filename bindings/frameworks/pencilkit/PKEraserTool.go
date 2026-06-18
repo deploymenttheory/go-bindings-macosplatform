@@ -15,14 +15,14 @@ type PKEraserTool struct {
 }
 
 var (
-	_clsPKEraserTool = _objcClass("PKEraserTool")
-	_pKEraserToolSelInitWithEraserType = objc.RegisterName("initWithEraserType:")
-	_pKEraserToolSelInitWithEraserTypeWidth = objc.RegisterName("initWithEraserType:width:")
+	_clsPKEraserTool                          = _objcClass("PKEraserTool")
+	_pKEraserToolSelInitWithEraserType        = objc.RegisterName("initWithEraserType:")
+	_pKEraserToolSelInitWithEraserTypeWidth   = objc.RegisterName("initWithEraserType:width:")
 	_pKEraserToolSelDefaultWidthForEraserType = objc.RegisterName("defaultWidthForEraserType:")
 	_pKEraserToolSelMinimumWidthForEraserType = objc.RegisterName("minimumWidthForEraserType:")
 	_pKEraserToolSelMaximumWidthForEraserType = objc.RegisterName("maximumWidthForEraserType:")
-	_pKEraserToolSelEraserType = objc.RegisterName("eraserType")
-	_pKEraserToolSelWidth = objc.RegisterName("width")
+	_pKEraserToolSelEraserType                = objc.RegisterName("eraserType")
+	_pKEraserToolSelWidth                     = objc.RegisterName("width")
 )
 
 func PKEraserToolFromID(id objc.ID) *PKEraserTool {
@@ -37,14 +37,18 @@ func PKEraserToolFromID(id objc.ID) *PKEraserTool {
 
 func (o *PKEraserTool) InitWithEraserType(eraserType PKEraserType) *PKEraserTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKEraserToolSelInitWithEraserType, eraserType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKEraserToolFromID(_ret)
 }
 
 // Create a new eraser tool with a width. @param eraserType The type of eraser. @param width The width of the eraser.
 func (o *PKEraserTool) InitWithEraserTypeWidth(eraserType PKEraserType, width float64) *PKEraserTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKEraserToolSelInitWithEraserTypeWidth, eraserType, width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKEraserToolFromID(_ret)
 }
 
@@ -77,4 +81,3 @@ func (o *PKEraserTool) Width() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKEraserToolSelWidth)
 	return _ret
 }
-

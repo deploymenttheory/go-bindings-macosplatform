@@ -16,13 +16,13 @@ type CKSyncEngineFetchChangesOptions struct {
 }
 
 var (
-	_clsCKSyncEngineFetchChangesOptions = _objcClass("CKSyncEngineFetchChangesOptions")
-	_cKSyncEngineFetchChangesOptionsSelInitWithScope = objc.RegisterName("initWithScope:")
-	_cKSyncEngineFetchChangesOptionsSelScope = objc.RegisterName("scope")
-	_cKSyncEngineFetchChangesOptionsSelSetScope = objc.RegisterName("setScope:")
-	_cKSyncEngineFetchChangesOptionsSelOperationGroup = objc.RegisterName("operationGroup")
-	_cKSyncEngineFetchChangesOptionsSelSetOperationGroup = objc.RegisterName("setOperationGroup:")
-	_cKSyncEngineFetchChangesOptionsSelPrioritizedZoneIDs = objc.RegisterName("prioritizedZoneIDs")
+	_clsCKSyncEngineFetchChangesOptions                      = _objcClass("CKSyncEngineFetchChangesOptions")
+	_cKSyncEngineFetchChangesOptionsSelInitWithScope         = objc.RegisterName("initWithScope:")
+	_cKSyncEngineFetchChangesOptionsSelScope                 = objc.RegisterName("scope")
+	_cKSyncEngineFetchChangesOptionsSelSetScope              = objc.RegisterName("setScope:")
+	_cKSyncEngineFetchChangesOptionsSelOperationGroup        = objc.RegisterName("operationGroup")
+	_cKSyncEngineFetchChangesOptionsSelSetOperationGroup     = objc.RegisterName("setOperationGroup:")
+	_cKSyncEngineFetchChangesOptionsSelPrioritizedZoneIDs    = objc.RegisterName("prioritizedZoneIDs")
 	_cKSyncEngineFetchChangesOptionsSelSetPrioritizedZoneIDs = objc.RegisterName("setPrioritizedZoneIDs:")
 )
 
@@ -39,14 +39,18 @@ func CKSyncEngineFetchChangesOptionsFromID(id objc.ID) *CKSyncEngineFetchChanges
 // Initializes a set of options with the specific scope. If you provide a `nil` scope, the default scope is used. The default scope includes everything.
 func (o *CKSyncEngineFetchChangesOptions) InitWithScope(scope *CKSyncEngineFetchChangesScope) *CKSyncEngineFetchChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesOptionsSelInitWithScope, scope.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesOptionsFromID(_ret)
 }
 
 // The scope in which to fetch changes from the server.
 func (o *CKSyncEngineFetchChangesOptions) Scope() *CKSyncEngineFetchChangesScope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesOptionsSelScope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesScopeFromID(_ret)
 }
 
@@ -57,7 +61,9 @@ func (o *CKSyncEngineFetchChangesOptions) SetScope(scope *CKSyncEngineFetchChang
 // The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
 func (o *CKSyncEngineFetchChangesOptions) OperationGroup() *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesOptionsSelOperationGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationGroupFromID(_ret)
 }
 
@@ -68,11 +74,12 @@ func (o *CKSyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *CKOp
 // A list of zones that are prioritized over others while fetching changes. `CKSyncEngine` fetches changes for the zones in this list first. You might use this to prioritize a specific set of zones for initial sync. You could also prioritize the object currently showing in the UI by putting it first in this list. Any zones not included in this list are prioritized in a default manner. If a zone in this list has no changes to fetch, then that zone is ignored.
 func (o *CKSyncEngineFetchChangesOptions) PrioritizedZoneIDs() *foundation.NSArray[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesOptionsSelPrioritizedZoneIDs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZoneID](_ret)
 }
 
 func (o *CKSyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*CKRecordZoneID]) {
 	o.Ptr().Send(_cKSyncEngineFetchChangesOptionsSelSetPrioritizedZoneIDs, prioritizedZoneIDs.Ptr())
 }
-

@@ -18,15 +18,15 @@ type MTRClusterKeypadInput struct {
 }
 
 var (
-	_clsMTRClusterKeypadInput = _objcClass("MTRClusterKeypadInput")
-	_mTRClusterKeypadInputSelSendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("sendKeyWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterKeypadInputSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterKeypadInputSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterKeypadInputSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterKeypadInputSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterKeypadInputSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterKeypadInputSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterKeypadInputSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterKeypadInput                                                                      = _objcClass("MTRClusterKeypadInput")
+	_mTRClusterKeypadInputSelSendKeyWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("sendKeyWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterKeypadInputSelReadAttributeGeneratedCommandListWithParams                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterKeypadInputSelReadAttributeAcceptedCommandListWithParams                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterKeypadInputSelReadAttributeAttributeListWithParams                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterKeypadInputSelReadAttributeFeatureMapWithParams                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterKeypadInputSelReadAttributeClusterRevisionWithParams                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterKeypadInputSelInitWithDeviceEndpointIDQueue                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterKeypadInputSelInitWithDeviceEndpointQueue                                           = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterKeypadInputSelSendKeyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("sendKeyWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -82,13 +82,17 @@ func (o *MTRClusterKeypadInput) ReadAttributeClusterRevisionWithParams(params *M
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterKeypadInput) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterKeypadInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterKeypadInputSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterKeypadInputFromID(_ret)
 }
 
 func (o *MTRClusterKeypadInput) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterKeypadInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterKeypadInputSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterKeypadInputFromID(_ret)
 }
 
@@ -105,4 +109,3 @@ func (o *MTRClusterKeypadInput) SendKeyWithParamsExpectedValuesExpectedValueInte
 	}
 	o.Ptr().Send(_mTRClusterKeypadInputSelSendKeyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

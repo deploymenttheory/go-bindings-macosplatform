@@ -16,15 +16,15 @@ type MTLStageInputOutputDescriptor struct {
 }
 
 var (
-	_clsMTLStageInputOutputDescriptor = _objcClass("MTLStageInputOutputDescriptor")
+	_clsMTLStageInputOutputDescriptor                           = _objcClass("MTLStageInputOutputDescriptor")
 	_mTLStageInputOutputDescriptorSelStageInputOutputDescriptor = objc.RegisterName("stageInputOutputDescriptor")
-	_mTLStageInputOutputDescriptorSelReset = objc.RegisterName("reset")
-	_mTLStageInputOutputDescriptorSelLayouts = objc.RegisterName("layouts")
-	_mTLStageInputOutputDescriptorSelAttributes = objc.RegisterName("attributes")
-	_mTLStageInputOutputDescriptorSelIndexType = objc.RegisterName("indexType")
-	_mTLStageInputOutputDescriptorSelSetIndexType = objc.RegisterName("setIndexType:")
-	_mTLStageInputOutputDescriptorSelIndexBufferIndex = objc.RegisterName("indexBufferIndex")
-	_mTLStageInputOutputDescriptorSelSetIndexBufferIndex = objc.RegisterName("setIndexBufferIndex:")
+	_mTLStageInputOutputDescriptorSelReset                      = objc.RegisterName("reset")
+	_mTLStageInputOutputDescriptorSelLayouts                    = objc.RegisterName("layouts")
+	_mTLStageInputOutputDescriptorSelAttributes                 = objc.RegisterName("attributes")
+	_mTLStageInputOutputDescriptorSelIndexType                  = objc.RegisterName("indexType")
+	_mTLStageInputOutputDescriptorSelSetIndexType               = objc.RegisterName("setIndexType:")
+	_mTLStageInputOutputDescriptorSelIndexBufferIndex           = objc.RegisterName("indexBufferIndex")
+	_mTLStageInputOutputDescriptorSelSetIndexBufferIndex        = objc.RegisterName("setIndexBufferIndex:")
 )
 
 func MTLStageInputOutputDescriptorFromID(id objc.ID) *MTLStageInputOutputDescriptor {
@@ -39,7 +39,9 @@ func MTLStageInputOutputDescriptorFromID(id objc.ID) *MTLStageInputOutputDescrip
 
 func MTLStageInputOutputDescriptorStageInputOutputDescriptor() *MTLStageInputOutputDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLStageInputOutputDescriptor), _mTLStageInputOutputDescriptorSelStageInputOutputDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStageInputOutputDescriptorFromID(_ret)
 }
 
@@ -49,13 +51,17 @@ func (o *MTLStageInputOutputDescriptor) Reset() {
 
 func (o *MTLStageInputOutputDescriptor) Layouts() *MTLBufferLayoutDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStageInputOutputDescriptorSelLayouts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLBufferLayoutDescriptorArrayFromID(_ret)
 }
 
 func (o *MTLStageInputOutputDescriptor) Attributes() *MTLAttributeDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLStageInputOutputDescriptorSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAttributeDescriptorArrayFromID(_ret)
 }
 
@@ -76,4 +82,3 @@ func (o *MTLStageInputOutputDescriptor) IndexBufferIndex() uint {
 func (o *MTLStageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex uint) {
 	o.Ptr().Send(_mTLStageInputOutputDescriptorSelSetIndexBufferIndex, indexBufferIndex)
 }
-

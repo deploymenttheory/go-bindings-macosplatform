@@ -87,7 +87,9 @@ func (x *ImageBox) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
-func (x *ImageBox) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageBox) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageBox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -104,4 +106,3 @@ type ImageBoxable interface {
 }
 
 var _ ImageBoxable = (*ImageBox)(nil)
-

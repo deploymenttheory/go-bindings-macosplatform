@@ -15,11 +15,11 @@ type NSScrubberImageItemView struct {
 }
 
 var (
-	_clsNSScrubberImageItemView = _objcClass("NSScrubberImageItemView")
-	_nSScrubberImageItemViewSelImageView = objc.RegisterName("imageView")
-	_nSScrubberImageItemViewSelImage = objc.RegisterName("image")
-	_nSScrubberImageItemViewSelSetImage = objc.RegisterName("setImage:")
-	_nSScrubberImageItemViewSelImageAlignment = objc.RegisterName("imageAlignment")
+	_clsNSScrubberImageItemView                  = _objcClass("NSScrubberImageItemView")
+	_nSScrubberImageItemViewSelImageView         = objc.RegisterName("imageView")
+	_nSScrubberImageItemViewSelImage             = objc.RegisterName("image")
+	_nSScrubberImageItemViewSelSetImage          = objc.RegisterName("setImage:")
+	_nSScrubberImageItemViewSelImageAlignment    = objc.RegisterName("imageAlignment")
 	_nSScrubberImageItemViewSelSetImageAlignment = objc.RegisterName("setImageAlignment:")
 )
 
@@ -35,13 +35,17 @@ func NSScrubberImageItemViewFromID(id objc.ID) *NSScrubberImageItemView {
 
 func (o *NSScrubberImageItemView) ImageView() *NSImageView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImageView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageViewFromID(_ret)
 }
 
 func (o *NSScrubberImageItemView) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberImageItemViewSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *NSScrubberImageItemView) ImageAlignment() NSImageAlignment {
 func (o *NSScrubberImageItemView) SetImageAlignment(imageAlignment NSImageAlignment) {
 	o.Ptr().Send(_nSScrubberImageItemViewSelSetImageAlignment, imageAlignment)
 }
-

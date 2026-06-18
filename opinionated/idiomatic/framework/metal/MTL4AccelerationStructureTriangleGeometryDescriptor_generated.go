@@ -16,7 +16,9 @@ type MTL4AccelerationStructureTriangleGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4AccelerationStructureTriangleGeometryDescriptor].
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureTriangleGeometryDescriptor { return x.inner }
+func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureTriangleGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -206,7 +208,9 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTransformationM
 	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
 }
 
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor { return &x.inner.MTL4AccelerationStructureGeometryDescriptor }
+func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor {
+	return &x.inner.MTL4AccelerationStructureGeometryDescriptor
+}
 
 // MTL4AccelerationStructureTriangleGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureTriangleGeometryDescriptor], for mocking and DI.
 type MTL4AccelerationStructureTriangleGeometryDescriptorable interface {
@@ -245,4 +249,3 @@ type MTL4AccelerationStructureTriangleGeometryDescriptorable interface {
 }
 
 var _ MTL4AccelerationStructureTriangleGeometryDescriptorable = (*MTL4AccelerationStructureTriangleGeometryDescriptor)(nil)
-

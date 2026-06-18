@@ -16,11 +16,11 @@ type INFocusStatusCenter struct {
 }
 
 var (
-	_clsINFocusStatusCenter = _objcClass("INFocusStatusCenter")
+	_clsINFocusStatusCenter                                          = _objcClass("INFocusStatusCenter")
 	_iNFocusStatusCenterSelRequestAuthorizationWithCompletionHandler = objc.RegisterName("requestAuthorizationWithCompletionHandler:")
-	_iNFocusStatusCenterSelDefaultCenter = objc.RegisterName("defaultCenter")
-	_iNFocusStatusCenterSelFocusStatus = objc.RegisterName("focusStatus")
-	_iNFocusStatusCenterSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
+	_iNFocusStatusCenterSelDefaultCenter                             = objc.RegisterName("defaultCenter")
+	_iNFocusStatusCenterSelFocusStatus                               = objc.RegisterName("focusStatus")
+	_iNFocusStatusCenterSelAuthorizationStatus                       = objc.RegisterName("authorizationStatus")
 )
 
 func INFocusStatusCenterFromID(id objc.ID) *INFocusStatusCenter {
@@ -46,13 +46,17 @@ func (o *INFocusStatusCenter) RequestAuthorizationWithCompletionHandler(completi
 
 func INFocusStatusCenterDefaultCenter() *INFocusStatusCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFocusStatusCenter), _iNFocusStatusCenterSelDefaultCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFocusStatusCenterFromID(_ret)
 }
 
 func (o *INFocusStatusCenter) FocusStatus() *INFocusStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFocusStatusCenterSelFocusStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFocusStatusFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *INFocusStatusCenter) AuthorizationStatus() INFocusStatusAuthorizationSt
 	_ret := objc.Send[INFocusStatusAuthorizationStatus](o.Ptr(), _iNFocusStatusCenterSelAuthorizationStatus)
 	return _ret
 }
-

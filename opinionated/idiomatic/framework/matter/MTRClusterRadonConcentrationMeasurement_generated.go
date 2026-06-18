@@ -16,7 +16,9 @@ type MTRClusterRadonConcentrationMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterRadonConcentrationMeasurement].
-func (x *MTRClusterRadonConcentrationMeasurement) Unwrap() *raw.MTRClusterRadonConcentrationMeasurement { return x.inner }
+func (x *MTRClusterRadonConcentrationMeasurement) Unwrap() *raw.MTRClusterRadonConcentrationMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -117,9 +119,13 @@ func (x *MTRClusterRadonConcentrationMeasurement) ReadAttributeClusterRevisionWi
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRadonConcentrationMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRadonConcentrationMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRadonConcentrationMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRadonConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRadonConcentrationMeasurementable is the interface implemented by [MTRClusterRadonConcentrationMeasurement], for mocking and DI.
 type MTRClusterRadonConcentrationMeasurementable interface {
@@ -143,4 +149,3 @@ type MTRClusterRadonConcentrationMeasurementable interface {
 }
 
 var _ MTRClusterRadonConcentrationMeasurementable = (*MTRClusterRadonConcentrationMeasurement)(nil)
-

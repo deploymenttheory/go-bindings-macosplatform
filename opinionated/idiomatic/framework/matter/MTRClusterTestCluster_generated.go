@@ -584,11 +584,17 @@ func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsEx
 	}
 }
 
-func (x *MTRClusterTestCluster) asMTRClusterUnitTesting() *raw.MTRClusterUnitTesting { return &x.inner.MTRClusterUnitTesting }
+func (x *MTRClusterTestCluster) asMTRClusterUnitTesting() *raw.MTRClusterUnitTesting {
+	return &x.inner.MTRClusterUnitTesting
+}
 
-func (x *MTRClusterTestCluster) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterUnitTesting.MTRGenericCluster }
+func (x *MTRClusterTestCluster) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRClusterUnitTesting.MTRGenericCluster
+}
 
-func (x *MTRClusterTestCluster) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterUnitTesting.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterTestCluster) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRClusterUnitTesting.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterTestClusterable is the interface implemented by [MTRClusterTestCluster], for mocking and DI.
 type MTRClusterTestClusterable interface {
@@ -625,4 +631,3 @@ type MTRClusterTestClusterable interface {
 }
 
 var _ MTRClusterTestClusterable = (*MTRClusterTestCluster)(nil)
-

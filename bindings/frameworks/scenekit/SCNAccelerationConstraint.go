@@ -15,16 +15,16 @@ type SCNAccelerationConstraint struct {
 }
 
 var (
-	_clsSCNAccelerationConstraint = _objcClass("SCNAccelerationConstraint")
-	_sCNAccelerationConstraintSelAccelerationConstraint = objc.RegisterName("accelerationConstraint")
-	_sCNAccelerationConstraintSelMaximumLinearAcceleration = objc.RegisterName("maximumLinearAcceleration")
+	_clsSCNAccelerationConstraint                             = _objcClass("SCNAccelerationConstraint")
+	_sCNAccelerationConstraintSelAccelerationConstraint       = objc.RegisterName("accelerationConstraint")
+	_sCNAccelerationConstraintSelMaximumLinearAcceleration    = objc.RegisterName("maximumLinearAcceleration")
 	_sCNAccelerationConstraintSelSetMaximumLinearAcceleration = objc.RegisterName("setMaximumLinearAcceleration:")
-	_sCNAccelerationConstraintSelMaximumLinearVelocity = objc.RegisterName("maximumLinearVelocity")
-	_sCNAccelerationConstraintSelSetMaximumLinearVelocity = objc.RegisterName("setMaximumLinearVelocity:")
-	_sCNAccelerationConstraintSelDecelerationDistance = objc.RegisterName("decelerationDistance")
-	_sCNAccelerationConstraintSelSetDecelerationDistance = objc.RegisterName("setDecelerationDistance:")
-	_sCNAccelerationConstraintSelDamping = objc.RegisterName("damping")
-	_sCNAccelerationConstraintSelSetDamping = objc.RegisterName("setDamping:")
+	_sCNAccelerationConstraintSelMaximumLinearVelocity        = objc.RegisterName("maximumLinearVelocity")
+	_sCNAccelerationConstraintSelSetMaximumLinearVelocity     = objc.RegisterName("setMaximumLinearVelocity:")
+	_sCNAccelerationConstraintSelDecelerationDistance         = objc.RegisterName("decelerationDistance")
+	_sCNAccelerationConstraintSelSetDecelerationDistance      = objc.RegisterName("setDecelerationDistance:")
+	_sCNAccelerationConstraintSelDamping                      = objc.RegisterName("damping")
+	_sCNAccelerationConstraintSelSetDamping                   = objc.RegisterName("setDamping:")
 )
 
 func SCNAccelerationConstraintFromID(id objc.ID) *SCNAccelerationConstraint {
@@ -40,7 +40,9 @@ func SCNAccelerationConstraintFromID(id objc.ID) *SCNAccelerationConstraint {
 // @method accelerationConstraint @abstract Creates and returns a SCNAccelerationConstraint object.
 func SCNAccelerationConstraintAccelerationConstraint() *SCNAccelerationConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAccelerationConstraint), _sCNAccelerationConstraintSelAccelerationConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAccelerationConstraintFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *SCNAccelerationConstraint) Damping() float64 {
 func (o *SCNAccelerationConstraint) SetDamping(damping float64) {
 	o.Ptr().Send(_sCNAccelerationConstraintSelSetDamping, damping)
 }
-

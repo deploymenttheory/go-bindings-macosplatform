@@ -80,4 +80,3 @@ type PickerUpdateConfigurationable interface {
 }
 
 var _ PickerUpdateConfigurationable = (*PickerUpdateConfiguration)(nil)
-

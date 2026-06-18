@@ -15,7 +15,7 @@ type HKScoredAssessment struct {
 }
 
 var (
-	_clsHKScoredAssessment = _objcClass("HKScoredAssessment")
+	_clsHKScoredAssessment      = _objcClass("HKScoredAssessment")
 	_hKScoredAssessmentSelScore = objc.RegisterName("score")
 )
 
@@ -34,4 +34,3 @@ func (o *HKScoredAssessment) Score() int {
 	_ret := objc.Send[int](o.Ptr(), _hKScoredAssessmentSelScore)
 	return _ret
 }
-

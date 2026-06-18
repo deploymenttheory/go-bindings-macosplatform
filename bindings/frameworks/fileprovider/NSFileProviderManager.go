@@ -18,38 +18,38 @@ type NSFileProviderManager struct {
 }
 
 var (
-	_clsNSFileProviderManager = _objcClass("NSFileProviderManager")
-	_nSFileProviderManagerSelManagerForDomain = objc.RegisterName("managerForDomain:")
-	_nSFileProviderManagerSelSignalEnumeratorForContainerItemIdentifierCompletionHandler = objc.RegisterName("signalEnumeratorForContainerItemIdentifier:completionHandler:")
-	_nSFileProviderManagerSelGetUserVisibleURLForItemIdentifierCompletionHandler = objc.RegisterName("getUserVisibleURLForItemIdentifier:completionHandler:")
-	_nSFileProviderManagerSelGetIdentifierForUserVisibleFileAtURLCompletionHandler = objc.RegisterName("getIdentifierForUserVisibleFileAtURL:completionHandler:")
-	_nSFileProviderManagerSelRegisterURLSessionTaskForItemWithIdentifierCompletionHandler = objc.RegisterName("registerURLSessionTask:forItemWithIdentifier:completionHandler:")
-	_nSFileProviderManagerSelTemporaryDirectoryURLWithError = objc.RegisterName("temporaryDirectoryURLWithError:")
-	_nSFileProviderManagerSelAddDomainCompletionHandler = objc.RegisterName("addDomain:completionHandler:")
-	_nSFileProviderManagerSelRemoveDomainCompletionHandler = objc.RegisterName("removeDomain:completionHandler:")
-	_nSFileProviderManagerSelRemoveDomainModeCompletionHandler = objc.RegisterName("removeDomain:mode:completionHandler:")
-	_nSFileProviderManagerSelGetDomainsWithCompletionHandler = objc.RegisterName("getDomainsWithCompletionHandler:")
-	_nSFileProviderManagerSelRemoveAllDomainsWithCompletionHandler = objc.RegisterName("removeAllDomainsWithCompletionHandler:")
-	_nSFileProviderManagerSelSignalErrorResolvedCompletionHandler = objc.RegisterName("signalErrorResolved:completionHandler:")
-	_nSFileProviderManagerSelGlobalProgressForKind = objc.RegisterName("globalProgressForKind:")
-	_nSFileProviderManagerSelEnumeratorForMaterializedItems = objc.RegisterName("enumeratorForMaterializedItems")
-	_nSFileProviderManagerSelEnumeratorForPendingItems = objc.RegisterName("enumeratorForPendingItems")
-	_nSFileProviderManagerSelImportDomainFromDirectoryAtURLCompletionHandler = objc.RegisterName("importDomain:fromDirectoryAtURL:completionHandler:")
-	_nSFileProviderManagerSelReimportItemsBelowItemWithIdentifierCompletionHandler = objc.RegisterName("reimportItemsBelowItemWithIdentifier:completionHandler:")
-	_nSFileProviderManagerSelEvictItemWithIdentifierCompletionHandler = objc.RegisterName("evictItemWithIdentifier:completionHandler:")
-	_nSFileProviderManagerSelWaitForChangesOnItemsBelowItemWithIdentifierCompletionHandler = objc.RegisterName("waitForChangesOnItemsBelowItemWithIdentifier:completionHandler:")
-	_nSFileProviderManagerSelWaitForStabilizationWithCompletionHandler = objc.RegisterName("waitForStabilizationWithCompletionHandler:")
-	_nSFileProviderManagerSelDisconnectWithReasonOptionsCompletionHandler = objc.RegisterName("disconnectWithReason:options:completionHandler:")
-	_nSFileProviderManagerSelReconnectWithCompletionHandler = objc.RegisterName("reconnectWithCompletionHandler:")
-	_nSFileProviderManagerSelRequestDownloadForItemWithIdentifierRequestedRangeCompletionHandler = objc.RegisterName("requestDownloadForItemWithIdentifier:requestedRange:completionHandler:")
-	_nSFileProviderManagerSelStateDirectoryURLWithError = objc.RegisterName("stateDirectoryURLWithError:")
-	_nSFileProviderManagerSelCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError = objc.RegisterName("checkDomainsCanBeStored:onVolumeAtURL:unsupportedReason:error:")
+	_clsNSFileProviderManager                                                                             = _objcClass("NSFileProviderManager")
+	_nSFileProviderManagerSelManagerForDomain                                                             = objc.RegisterName("managerForDomain:")
+	_nSFileProviderManagerSelSignalEnumeratorForContainerItemIdentifierCompletionHandler                  = objc.RegisterName("signalEnumeratorForContainerItemIdentifier:completionHandler:")
+	_nSFileProviderManagerSelGetUserVisibleURLForItemIdentifierCompletionHandler                          = objc.RegisterName("getUserVisibleURLForItemIdentifier:completionHandler:")
+	_nSFileProviderManagerSelGetIdentifierForUserVisibleFileAtURLCompletionHandler                        = objc.RegisterName("getIdentifierForUserVisibleFileAtURL:completionHandler:")
+	_nSFileProviderManagerSelRegisterURLSessionTaskForItemWithIdentifierCompletionHandler                 = objc.RegisterName("registerURLSessionTask:forItemWithIdentifier:completionHandler:")
+	_nSFileProviderManagerSelTemporaryDirectoryURLWithError                                               = objc.RegisterName("temporaryDirectoryURLWithError:")
+	_nSFileProviderManagerSelAddDomainCompletionHandler                                                   = objc.RegisterName("addDomain:completionHandler:")
+	_nSFileProviderManagerSelRemoveDomainCompletionHandler                                                = objc.RegisterName("removeDomain:completionHandler:")
+	_nSFileProviderManagerSelRemoveDomainModeCompletionHandler                                            = objc.RegisterName("removeDomain:mode:completionHandler:")
+	_nSFileProviderManagerSelGetDomainsWithCompletionHandler                                              = objc.RegisterName("getDomainsWithCompletionHandler:")
+	_nSFileProviderManagerSelRemoveAllDomainsWithCompletionHandler                                        = objc.RegisterName("removeAllDomainsWithCompletionHandler:")
+	_nSFileProviderManagerSelSignalErrorResolvedCompletionHandler                                         = objc.RegisterName("signalErrorResolved:completionHandler:")
+	_nSFileProviderManagerSelGlobalProgressForKind                                                        = objc.RegisterName("globalProgressForKind:")
+	_nSFileProviderManagerSelEnumeratorForMaterializedItems                                               = objc.RegisterName("enumeratorForMaterializedItems")
+	_nSFileProviderManagerSelEnumeratorForPendingItems                                                    = objc.RegisterName("enumeratorForPendingItems")
+	_nSFileProviderManagerSelImportDomainFromDirectoryAtURLCompletionHandler                              = objc.RegisterName("importDomain:fromDirectoryAtURL:completionHandler:")
+	_nSFileProviderManagerSelReimportItemsBelowItemWithIdentifierCompletionHandler                        = objc.RegisterName("reimportItemsBelowItemWithIdentifier:completionHandler:")
+	_nSFileProviderManagerSelEvictItemWithIdentifierCompletionHandler                                     = objc.RegisterName("evictItemWithIdentifier:completionHandler:")
+	_nSFileProviderManagerSelWaitForChangesOnItemsBelowItemWithIdentifierCompletionHandler                = objc.RegisterName("waitForChangesOnItemsBelowItemWithIdentifier:completionHandler:")
+	_nSFileProviderManagerSelWaitForStabilizationWithCompletionHandler                                    = objc.RegisterName("waitForStabilizationWithCompletionHandler:")
+	_nSFileProviderManagerSelDisconnectWithReasonOptionsCompletionHandler                                 = objc.RegisterName("disconnectWithReason:options:completionHandler:")
+	_nSFileProviderManagerSelReconnectWithCompletionHandler                                               = objc.RegisterName("reconnectWithCompletionHandler:")
+	_nSFileProviderManagerSelRequestDownloadForItemWithIdentifierRequestedRangeCompletionHandler          = objc.RegisterName("requestDownloadForItemWithIdentifier:requestedRange:completionHandler:")
+	_nSFileProviderManagerSelStateDirectoryURLWithError                                                   = objc.RegisterName("stateDirectoryURLWithError:")
+	_nSFileProviderManagerSelCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError                   = objc.RegisterName("checkDomainsCanBeStored:onVolumeAtURL:unsupportedReason:error:")
 	_nSFileProviderManagerSelRequestDiagnosticCollectionForItemWithIdentifierErrorReasonCompletionHandler = objc.RegisterName("requestDiagnosticCollectionForItemWithIdentifier:errorReason:completionHandler:")
-	_nSFileProviderManagerSelGetServiceWithNameItemIdentifierCompletionHandler = objc.RegisterName("getServiceWithName:itemIdentifier:completionHandler:")
-	_nSFileProviderManagerSelListAvailableTestingOperationsWithError = objc.RegisterName("listAvailableTestingOperationsWithError:")
-	_nSFileProviderManagerSelRunTestingOperationsError = objc.RegisterName("runTestingOperations:error:")
-	_nSFileProviderManagerSelClaimKnownFoldersLocalizedReasonCompletionHandler = objc.RegisterName("claimKnownFolders:localizedReason:completionHandler:")
-	_nSFileProviderManagerSelReleaseKnownFoldersLocalizedReasonCompletionHandler = objc.RegisterName("releaseKnownFolders:localizedReason:completionHandler:")
+	_nSFileProviderManagerSelGetServiceWithNameItemIdentifierCompletionHandler                            = objc.RegisterName("getServiceWithName:itemIdentifier:completionHandler:")
+	_nSFileProviderManagerSelListAvailableTestingOperationsWithError                                      = objc.RegisterName("listAvailableTestingOperationsWithError:")
+	_nSFileProviderManagerSelRunTestingOperationsError                                                    = objc.RegisterName("runTestingOperations:error:")
+	_nSFileProviderManagerSelClaimKnownFoldersLocalizedReasonCompletionHandler                            = objc.RegisterName("claimKnownFolders:localizedReason:completionHandler:")
+	_nSFileProviderManagerSelReleaseKnownFoldersLocalizedReasonCompletionHandler                          = objc.RegisterName("releaseKnownFolders:localizedReason:completionHandler:")
 )
 
 func NSFileProviderManagerFromID(id objc.ID) *NSFileProviderManager {
@@ -65,7 +65,9 @@ func NSFileProviderManagerFromID(id objc.ID) *NSFileProviderManager {
 // Return the manager for the specified domain.
 func NSFileProviderManagerManagerForDomain(domain *NSFileProviderDomain) *NSFileProviderManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileProviderManager), _nSFileProviderManagerSelManagerForDomain, domain.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderManagerFromID(_ret)
 }
 
@@ -130,7 +132,9 @@ func (o *NSFileProviderManager) RegisterURLSessionTaskForItemWithIdentifierCompl
 func (o *NSFileProviderManager) TemporaryDirectoryURLWithError() (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelTemporaryDirectoryURLWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -215,7 +219,9 @@ func (o *NSFileProviderManager) SignalErrorResolvedCompletionHandler(error_ unsa
 // Returns the global progress for the specified kind of operations This progress tracks all the ongoing kind of operations (from disk to the provider). Uploading operations are the operations from disk to the provider. Downloading operations are the operations from the provider to the disk. The global progress exposes the two following data: - Number of items with an ongoing matching kind operation along with the grand total; - Number of bytes already transferred along with the total amount of bytes to transfer. `totalUnitCount` will only be reset when there are no operations left. If new operations of the matching kind arrive while the global progress is already ongoing, they will just be summed to the existing global progress. By default, when no matching kind operations are active, the progress has its values set to 1 and its state set to finished. The progress will be updated on the main queue. It is to be retained by the caller and to be observed through KVO. The two only supported values for kind are: - NSProgressFileOperationKindUploading - NSProgressFileOperationKindDownloading The returned progress will have its fileOperationKind property set.
 func (o *NSFileProviderManager) GlobalProgressForKind(kind *foundation.NSString) *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelGlobalProgressForKind, kind.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -329,7 +335,9 @@ func (o *NSFileProviderManager) RequestDownloadForItemWithIdentifierRequestedRan
 func (o *NSFileProviderManager) StateDirectoryURLWithError() (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelStateDirectoryURLWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -374,7 +382,9 @@ func (o *NSFileProviderManager) GetServiceWithNameItemIdentifierCompletionHandle
 func (o *NSFileProviderManager) ListAvailableTestingOperationsWithError() (*foundation.NSArray[NSFileProviderTestingOperation], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderManagerSelListAvailableTestingOperationsWithError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -414,4 +424,3 @@ func (o *NSFileProviderManager) ReleaseKnownFoldersLocalizedReasonCompletionHand
 	}
 	o.Ptr().Send(_nSFileProviderManagerSelReleaseKnownFoldersLocalizedReasonCompletionHandler, knownFolders, localizedReason.Ptr(), __block_completionHandler)
 }
-

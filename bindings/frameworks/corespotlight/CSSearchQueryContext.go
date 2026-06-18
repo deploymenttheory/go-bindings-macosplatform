@@ -16,15 +16,15 @@ type CSSearchQueryContext struct {
 }
 
 var (
-	_clsCSSearchQueryContext = _objcClass("CSSearchQueryContext")
-	_cSSearchQueryContextSelFetchAttributes = objc.RegisterName("fetchAttributes")
-	_cSSearchQueryContextSelSetFetchAttributes = objc.RegisterName("setFetchAttributes:")
-	_cSSearchQueryContextSelFilterQueries = objc.RegisterName("filterQueries")
-	_cSSearchQueryContextSelSetFilterQueries = objc.RegisterName("setFilterQueries:")
-	_cSSearchQueryContextSelKeyboardLanguage = objc.RegisterName("keyboardLanguage")
+	_clsCSSearchQueryContext                    = _objcClass("CSSearchQueryContext")
+	_cSSearchQueryContextSelFetchAttributes     = objc.RegisterName("fetchAttributes")
+	_cSSearchQueryContextSelSetFetchAttributes  = objc.RegisterName("setFetchAttributes:")
+	_cSSearchQueryContextSelFilterQueries       = objc.RegisterName("filterQueries")
+	_cSSearchQueryContextSelSetFilterQueries    = objc.RegisterName("setFilterQueries:")
+	_cSSearchQueryContextSelKeyboardLanguage    = objc.RegisterName("keyboardLanguage")
 	_cSSearchQueryContextSelSetKeyboardLanguage = objc.RegisterName("setKeyboardLanguage:")
-	_cSSearchQueryContextSelSourceOptions = objc.RegisterName("sourceOptions")
-	_cSSearchQueryContextSelSetSourceOptions = objc.RegisterName("setSourceOptions:")
+	_cSSearchQueryContextSelSourceOptions       = objc.RegisterName("sourceOptions")
+	_cSSearchQueryContextSelSetSourceOptions    = objc.RegisterName("setSourceOptions:")
 )
 
 func CSSearchQueryContextFromID(id objc.ID) *CSSearchQueryContext {
@@ -57,7 +57,9 @@ func (o *CSSearchQueryContext) SetFilterQueries(filterQueries *foundation.NSArra
 
 func (o *CSSearchQueryContext) KeyboardLanguage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSearchQueryContextSelKeyboardLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,4 +75,3 @@ func (o *CSSearchQueryContext) SourceOptions() CSSearchQuerySourceOptions {
 func (o *CSSearchQueryContext) SetSourceOptions(sourceOptions CSSearchQuerySourceOptions) {
 	o.Ptr().Send(_cSSearchQueryContextSelSetSourceOptions, sourceOptions)
 }
-

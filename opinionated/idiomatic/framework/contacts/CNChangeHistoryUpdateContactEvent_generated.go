@@ -15,7 +15,9 @@ type ChangeHistoryUpdateContactEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CNChangeHistoryUpdateContactEvent].
-func (x *ChangeHistoryUpdateContactEvent) Unwrap() *raw.CNChangeHistoryUpdateContactEvent { return x.inner }
+func (x *ChangeHistoryUpdateContactEvent) Unwrap() *raw.CNChangeHistoryUpdateContactEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -44,7 +46,9 @@ func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
 	return &Contact{inner: _r}
 }
 
-func (x *ChangeHistoryUpdateContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryUpdateContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryUpdateContactEventable is the interface implemented by [ChangeHistoryUpdateContactEvent], for mocking and DI.
 type ChangeHistoryUpdateContactEventable interface {
@@ -53,4 +57,3 @@ type ChangeHistoryUpdateContactEventable interface {
 }
 
 var _ ChangeHistoryUpdateContactEventable = (*ChangeHistoryUpdateContactEvent)(nil)
-

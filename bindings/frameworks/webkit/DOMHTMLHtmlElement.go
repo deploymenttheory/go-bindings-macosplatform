@@ -25,4 +25,3 @@ func DOMHTMLHtmlElementFromID(id objc.ID) *DOMHTMLHtmlElement {
 	purego.Track(o)
 	return o
 }
-

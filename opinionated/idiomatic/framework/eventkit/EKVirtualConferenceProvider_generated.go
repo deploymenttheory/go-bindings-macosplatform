@@ -97,4 +97,3 @@ type VirtualConferenceProviderable interface {
 }
 
 var _ VirtualConferenceProviderable = (*VirtualConferenceProvider)(nil)
-

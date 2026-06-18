@@ -98,7 +98,9 @@ func (x *ControllerAxisInput) Value() float32 {
 	return x.inner.Value()
 }
 
-func (x *ControllerAxisInput) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+func (x *ControllerAxisInput) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerElement
+}
 
 // ControllerAxisInputable is the interface implemented by [ControllerAxisInput], for mocking and DI.
 type ControllerAxisInputable interface {
@@ -117,4 +119,3 @@ type ControllerAxisInputable interface {
 }
 
 var _ ControllerAxisInputable = (*ControllerAxisInput)(nil)
-

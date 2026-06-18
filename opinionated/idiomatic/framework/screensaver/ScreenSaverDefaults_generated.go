@@ -41,4 +41,3 @@ type ScreenSaverDefaultsable interface {
 }
 
 var _ ScreenSaverDefaultsable = (*ScreenSaverDefaults)(nil)
-

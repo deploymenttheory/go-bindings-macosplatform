@@ -109,4 +109,3 @@ type MapCameraable interface {
 }
 
 var _ MapCameraable = (*MapCamera)(nil)
-

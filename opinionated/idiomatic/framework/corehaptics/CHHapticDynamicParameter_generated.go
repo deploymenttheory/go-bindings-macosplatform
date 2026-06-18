@@ -92,4 +92,3 @@ type HapticDynamicParameterable interface {
 }
 
 var _ HapticDynamicParameterable = (*HapticDynamicParameter)(nil)
-

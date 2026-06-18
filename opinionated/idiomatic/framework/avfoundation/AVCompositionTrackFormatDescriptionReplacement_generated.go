@@ -16,7 +16,9 @@ type CompositionTrackFormatDescriptionReplacement struct {
 }
 
 // Unwrap returns the underlying [raw.AVCompositionTrackFormatDescriptionReplacement].
-func (x *CompositionTrackFormatDescriptionReplacement) Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement { return x.inner }
+func (x *CompositionTrackFormatDescriptionReplacement) Unwrap() *raw.AVCompositionTrackFormatDescriptionReplacement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,4 +56,3 @@ type CompositionTrackFormatDescriptionReplacementable interface {
 }
 
 var _ CompositionTrackFormatDescriptionReplacementable = (*CompositionTrackFormatDescriptionReplacement)(nil)
-

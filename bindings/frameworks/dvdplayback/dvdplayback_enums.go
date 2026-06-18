@@ -12,10 +12,10 @@ type DVDAspectRatio int64
 
 const (
 	KDVDAspectRatioUninitialized DVDAspectRatio = 0
-	KDVDAspectRatio4x3 DVDAspectRatio = 1
+	KDVDAspectRatio4x3           DVDAspectRatio = 1
 	KDVDAspectRatio4x3PanAndScan DVDAspectRatio = 2
-	KDVDAspectRatio16x9 DVDAspectRatio = 3
-	KDVDAspectRatioLetterBox DVDAspectRatio = 4
+	KDVDAspectRatio16x9          DVDAspectRatio = 3
+	KDVDAspectRatioLetterBox     DVDAspectRatio = 4
 )
 
 func (e DVDAspectRatio) String() string {
@@ -39,15 +39,15 @@ type DVDAudioFormat int64
 
 const (
 	KDVDAudioUnknownFormat DVDAudioFormat = 0
-	KDVDAudioAC3Format DVDAudioFormat = 1
-	KDVDAudioMPEG1Format DVDAudioFormat = 2
-	KDVDAudioMPEG2Format DVDAudioFormat = 3
-	KDVDAudioPCMFormat DVDAudioFormat = 4
-	KDVDAudioDTSFormat DVDAudioFormat = 5
-	KDVDAudioSDDSFormat DVDAudioFormat = 6
-	KDVDAudioMLPFormat DVDAudioFormat = 7
-	KDVDAudioDDPlusFormat DVDAudioFormat = 8
-	KDVDAudioDTSHDFormat DVDAudioFormat = 9
+	KDVDAudioAC3Format     DVDAudioFormat = 1
+	KDVDAudioMPEG1Format   DVDAudioFormat = 2
+	KDVDAudioMPEG2Format   DVDAudioFormat = 3
+	KDVDAudioPCMFormat     DVDAudioFormat = 4
+	KDVDAudioDTSFormat     DVDAudioFormat = 5
+	KDVDAudioSDDSFormat    DVDAudioFormat = 6
+	KDVDAudioMLPFormat     DVDAudioFormat = 7
+	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
+	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
 )
 
 func (e DVDAudioFormat) String() string {
@@ -80,10 +80,10 @@ func (e DVDAudioFormat) String() string {
 type DVDDomainCode int64
 
 const (
-	KDVDFPDomain DVDDomainCode = 0
+	KDVDFPDomain   DVDDomainCode = 0
 	KDVDVMGMDomain DVDDomainCode = 1
 	KDVDVTSMDomain DVDDomainCode = 2
-	KDVDTTDomain DVDDomainCode = 3
+	KDVDTTDomain   DVDDomainCode = 3
 	KDVDSTOPDomain DVDDomainCode = 4
 	KDVDAMGMDomain DVDDomainCode = 5
 	KDVDTTGRDomain DVDDomainCode = 6
@@ -113,32 +113,32 @@ func (e DVDDomainCode) String() string {
 type DVDEventCode int64
 
 const (
-	KDVDEventTitle DVDEventCode = 1
-	KDVDEventPTT DVDEventCode = 2
-	KDVDEventValidUOP DVDEventCode = 3
-	KDVDEventAngle DVDEventCode = 4
-	KDVDEventAudioStream DVDEventCode = 5
-	KDVDEventSubpictureStream DVDEventCode = 6
-	KDVDEventDisplayMode DVDEventCode = 7
-	KDVDEventDomain DVDEventCode = 8
-	KDVDEventBitrate DVDEventCode = 9
-	KDVDEventStill DVDEventCode = 10
-	KDVDEventPlayback DVDEventCode = 11
-	KDVDEventVideoStandard DVDEventCode = 12
-	KDVDEventStreams DVDEventCode = 13
-	KDVDEventScanSpeed DVDEventCode = 14
-	KDVDEventMenuCalled DVDEventCode = 15
-	KDVDEventParental DVDEventCode = 16
-	KDVDEventPGC DVDEventCode = 17
-	KDVDEventGPRM DVDEventCode = 18
-	KDVDEventRegionMismatch DVDEventCode = 19
-	KDVDEventTitleTime DVDEventCode = 20
+	KDVDEventTitle                   DVDEventCode = 1
+	KDVDEventPTT                     DVDEventCode = 2
+	KDVDEventValidUOP                DVDEventCode = 3
+	KDVDEventAngle                   DVDEventCode = 4
+	KDVDEventAudioStream             DVDEventCode = 5
+	KDVDEventSubpictureStream        DVDEventCode = 6
+	KDVDEventDisplayMode             DVDEventCode = 7
+	KDVDEventDomain                  DVDEventCode = 8
+	KDVDEventBitrate                 DVDEventCode = 9
+	KDVDEventStill                   DVDEventCode = 10
+	KDVDEventPlayback                DVDEventCode = 11
+	KDVDEventVideoStandard           DVDEventCode = 12
+	KDVDEventStreams                 DVDEventCode = 13
+	KDVDEventScanSpeed               DVDEventCode = 14
+	KDVDEventMenuCalled              DVDEventCode = 15
+	KDVDEventParental                DVDEventCode = 16
+	KDVDEventPGC                     DVDEventCode = 17
+	KDVDEventGPRM                    DVDEventCode = 18
+	KDVDEventRegionMismatch          DVDEventCode = 19
+	KDVDEventTitleTime               DVDEventCode = 20
 	KDVDEventSubpictureStreamNumbers DVDEventCode = 21
-	KDVDEventAudioStreamNumbers DVDEventCode = 22
-	KDVDEventAngleNumbers DVDEventCode = 23
-	KDVDEventError DVDEventCode = 24
-	KDVDEventCCInfo DVDEventCode = 25
-	KDVDEventChapterTime DVDEventCode = 26
+	KDVDEventAudioStreamNumbers      DVDEventCode = 22
+	KDVDEventAngleNumbers            DVDEventCode = 23
+	KDVDEventError                   DVDEventCode = 24
+	KDVDEventCCInfo                  DVDEventCode = 25
+	KDVDEventChapterTime             DVDEventCode = 26
 )
 
 func (e DVDEventCode) String() string {
@@ -204,10 +204,10 @@ type DVDFormat int64
 
 const (
 	KDVDFormatUninitialized DVDFormat = 0
-	KDVDFormatNTSC DVDFormat = 1
-	KDVDFormatPAL DVDFormat = 2
-	KDVDFormatNTSC_HDTV DVDFormat = 3
-	KDVDFormatPAL_HDTV DVDFormat = 4
+	KDVDFormatNTSC          DVDFormat = 1
+	KDVDFormatPAL           DVDFormat = 2
+	KDVDFormatNTSC_HDTV     DVDFormat = 3
+	KDVDFormatPAL_HDTV      DVDFormat = 4
 )
 
 func (e DVDFormat) String() string {
@@ -230,13 +230,13 @@ func (e DVDFormat) String() string {
 type DVDMenu int64
 
 const (
-	KDVDMenuTitle DVDMenu = 0
-	KDVDMenuRoot DVDMenu = 1
+	KDVDMenuTitle      DVDMenu = 0
+	KDVDMenuRoot       DVDMenu = 1
 	KDVDMenuSubPicture DVDMenu = 2
-	KDVDMenuAudio DVDMenu = 3
-	KDVDMenuAngle DVDMenu = 4
-	KDVDMenuPTT DVDMenu = 5
-	KDVDMenuNone DVDMenu = 6
+	KDVDMenuAudio      DVDMenu = 3
+	KDVDMenuAngle      DVDMenu = 4
+	KDVDMenuPTT        DVDMenu = 5
+	KDVDMenuNone       DVDMenu = 6
 )
 
 func (e DVDMenu) String() string {
@@ -263,7 +263,7 @@ func (e DVDMenu) String() string {
 type DVDScanDirection int64
 
 const (
-	KDVDScanDirectionForward DVDScanDirection = 0
+	KDVDScanDirectionForward  DVDScanDirection = 0
 	KDVDScanDirectionBackward DVDScanDirection = 1
 )
 
@@ -281,15 +281,15 @@ func (e DVDScanDirection) String() string {
 type DVDScanRate int64
 
 const (
-	KDVDScanRateOneEigth DVDScanRate = -8
+	KDVDScanRateOneEigth  DVDScanRate = -8
 	KDVDScanRateOneFourth DVDScanRate = -4
-	KDVDScanRateOneHalf DVDScanRate = -2
-	KDVDScanRate1x DVDScanRate = 1
-	KDVDScanRate2x DVDScanRate = 2
-	KDVDScanRate4x DVDScanRate = 4
-	KDVDScanRate8x DVDScanRate = 8
-	KDVDScanRate16x DVDScanRate = 16
-	KDVDScanRate32x DVDScanRate = 32
+	KDVDScanRateOneHalf   DVDScanRate = -2
+	KDVDScanRate1x        DVDScanRate = 1
+	KDVDScanRate2x        DVDScanRate = 2
+	KDVDScanRate4x        DVDScanRate = 4
+	KDVDScanRate8x        DVDScanRate = 8
+	KDVDScanRate16x       DVDScanRate = 16
+	KDVDScanRate32x       DVDScanRate = 32
 )
 
 func (e DVDScanRate) String() string {
@@ -320,14 +320,14 @@ func (e DVDScanRate) String() string {
 type DVDState int64
 
 const (
-	KDVDStateUnknown DVDState = 0
-	KDVDStatePlaying DVDState = 1
+	KDVDStateUnknown      DVDState = 0
+	KDVDStatePlaying      DVDState = 1
 	KDVDStatePlayingStill DVDState = 2
-	KDVDStatePaused DVDState = 3
-	KDVDStateStopped DVDState = 4
-	KDVDStateScanning DVDState = 5
-	KDVDStateIdle DVDState = 6
-	KDVDStatePlayingSlow DVDState = 7
+	KDVDStatePaused       DVDState = 3
+	KDVDStateStopped      DVDState = 4
+	KDVDStateScanning     DVDState = 5
+	KDVDStateIdle         DVDState = 6
+	KDVDStatePlayingSlow  DVDState = 7
 )
 
 func (e DVDState) String() string {
@@ -356,11 +356,11 @@ func (e DVDState) String() string {
 type DVDUserNavigation int64
 
 const (
-	KDVDUserNavigationMoveUp DVDUserNavigation = 1
-	KDVDUserNavigationMoveDown DVDUserNavigation = 2
-	KDVDUserNavigationMoveLeft DVDUserNavigation = 3
+	KDVDUserNavigationMoveUp    DVDUserNavigation = 1
+	KDVDUserNavigationMoveDown  DVDUserNavigation = 2
+	KDVDUserNavigationMoveLeft  DVDUserNavigation = 3
 	KDVDUserNavigationMoveRight DVDUserNavigation = 4
-	KDVDUserNavigationEnter DVDUserNavigation = 5
+	KDVDUserNavigationEnter     DVDUserNavigation = 5
 )
 
 func (e DVDUserNavigation) String() string {
@@ -383,10 +383,10 @@ func (e DVDUserNavigation) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -411,7 +411,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -429,8 +429,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -466,8 +466,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -487,7 +487,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -506,8 +506,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -526,13 +526,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -559,24 +559,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -617,9 +617,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -639,12 +639,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -671,14 +671,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -707,9 +707,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -728,36 +728,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -787,8 +801,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -808,62 +822,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -989,15 +1003,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1035,7 +1049,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1043,7 +1059,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1061,8 +1077,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1081,26 +1097,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1122,27 +1154,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1166,11 +1198,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1195,22 +1227,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1261,48 +1293,62 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
 	KDVDAudioExtensionCodeDirectorsComment1 = 3
 	KDVDAudioExtensionCodeDirectorsComment2 = 4
-	KDVDAudioExtensionCodeNVisualImpaired = 2
-	KDVDAudioExtensionCodeNormalCaptions = 1
-	KDVDAudioExtensionCodeNotSpecified = 0
+	KDVDAudioExtensionCodeNVisualImpaired   = 2
+	KDVDAudioExtensionCodeNormalCaptions    = 1
+	KDVDAudioExtensionCodeNotSpecified      = 0
 )
 
 const (
-	KDVDAudioModeProLogic = 1
-	KDVDAudioModeSPDIF = 2
+	KDVDAudioModeProLogic      = 1
+	KDVDAudioModeSPDIF         = 2
 	KDVDAudioModeUninitialized = 0
 )
 
@@ -1311,247 +1357,246 @@ const (
 )
 
 const (
-	KDVDErrorAlreadyPlaying = -70006
-	KDVDErrorAuthentification = -70025
-	KDVDErrorDisplayAuthentification = -70034
-	KDVDErrorDontNeedWakeup = -70009
-	KDVDErrorGraphicsDevice = -70018
-	KDVDErrorInitializingLib = -70002
-	KDVDErrorInvalidBookmarkForMedia = -70032
-	KDVDErrorInvalidBookmarkSize = -70031
-	KDVDErrorInvalidBookmarkVersion = -70030
-	KDVDErrorInvalidRegionCode = -70020
-	KDVDErrorIsAlreadySleeping = -70008
-	KDVDErrorMismatchedRegionCode = -70022
-	KDVDErrorMissingDrive = -70012
-	KDVDErrorMissingGraphicsDevice = -70017
-	KDVDErrorNavigation = -70029
-	KDVDErrorNoAudioOutputDevice = -70027
-	KDVDErrorNoFatalErrCallBack = -70007
-	KDVDErrorNoMoreRegionSets = -70023
+	KDVDErrorAlreadyPlaying             = -70006
+	KDVDErrorAuthentification           = -70025
+	KDVDErrorDisplayAuthentification    = -70034
+	KDVDErrorDontNeedWakeup             = -70009
+	KDVDErrorGraphicsDevice             = -70018
+	KDVDErrorInitializingLib            = -70002
+	KDVDErrorInvalidBookmarkForMedia    = -70032
+	KDVDErrorInvalidBookmarkSize        = -70031
+	KDVDErrorInvalidBookmarkVersion     = -70030
+	KDVDErrorInvalidRegionCode          = -70020
+	KDVDErrorIsAlreadySleeping          = -70008
+	KDVDErrorMismatchedRegionCode       = -70022
+	KDVDErrorMissingDrive               = -70012
+	KDVDErrorMissingGraphicsDevice      = -70017
+	KDVDErrorNavigation                 = -70029
+	KDVDErrorNoAudioOutputDevice        = -70027
+	KDVDErrorNoFatalErrCallBack         = -70007
+	KDVDErrorNoMoreRegionSets           = -70023
 	KDVDErrorNoValidBookmarkForLastPlay = -70033
-	KDVDErrorNoValidMedia = -70015
-	KDVDErrorNotAllowedDuringPlayback = -70004
-	KDVDErrorNotSupportedConfiguration = -70013
-	KDVDErrorNotSupportedFunction = -70014
-	KDVDErrorOutOfVideoMemory = -70026
-	KDVDErrorPlaybackOpen = -70019
-	KDVDErrorRgnMgrInstall = -70021
-	KDVDErrorSystem = -70028
-	KDVDErrorTimeOutOfRange = -70010
-	KDVDErrorUnassignedGrafPort = -70005
-	KDVDErrorUninitializedLib = -70003
-	KDVDErrorUnknown = -70001
-	KDVDErrorUserActionNoOp = -70011
-	KDVDErrorWrongParam = -70016
-	KDVDErrordRegionCodeUninitialized = -70024
+	KDVDErrorNoValidMedia               = -70015
+	KDVDErrorNotAllowedDuringPlayback   = -70004
+	KDVDErrorNotSupportedConfiguration  = -70013
+	KDVDErrorNotSupportedFunction       = -70014
+	KDVDErrorOutOfVideoMemory           = -70026
+	KDVDErrorPlaybackOpen               = -70019
+	KDVDErrorRgnMgrInstall              = -70021
+	KDVDErrorSystem                     = -70028
+	KDVDErrorTimeOutOfRange             = -70010
+	KDVDErrorUnassignedGrafPort         = -70005
+	KDVDErrorUninitializedLib           = -70003
+	KDVDErrorUnknown                    = -70001
+	KDVDErrorUserActionNoOp             = -70011
+	KDVDErrorWrongParam                 = -70016
+	KDVDErrordRegionCodeUninitialized   = -70024
 )
 
 const (
-	KDVDLanguageCodeAbkhazian = 1633820704
-	KDVDLanguageCodeAfar = 1633755168
-	KDVDLanguageCodeAfrikaans = 1634082848
-	KDVDLanguageCodeAlbanian = 1936793632
-	KDVDLanguageCodeAmharic = 1634541600
-	KDVDLanguageCodeArabic = 1634869280
-	KDVDLanguageCodeArmenian = 1752768544
-	KDVDLanguageCodeAssamese = 1634934816
-	KDVDLanguageCodeAymara = 1635328032
-	KDVDLanguageCodeAzerbaijani = 1635393568
-	KDVDLanguageCodeBashkir = 1650532384
-	KDVDLanguageCodeBasque = 1702174752
-	KDVDLanguageCodeBengali = 1651384352
-	KDVDLanguageCodeBhutani = 1685725216
-	KDVDLanguageCodeBihari = 1650991136
-	KDVDLanguageCodeBislama = 1651056672
-	KDVDLanguageCodeBreton = 1651646496
-	KDVDLanguageCodeBulgarian = 1650925600
-	KDVDLanguageCodeBurmese = 1836654624
-	KDVDLanguageCodeByelorussian = 1650794528
-	KDVDLanguageCodeCambodian = 1802313760
-	KDVDLanguageCodeCatalan = 1667309600
-	KDVDLanguageCodeChinese = 2053644320
-	KDVDLanguageCodeCorsican = 1668227104
-	KDVDLanguageCodeCroatian = 1752309792
-	KDVDLanguageCodeCzech = 1668489248
-	KDVDLanguageCodeDanish = 1684086816
-	KDVDLanguageCodeDutch = 1852579872
-	KDVDLanguageCodeEnglish = 1701716000
-	KDVDLanguageCodeEsperanto = 1701781536
-	KDVDLanguageCodeEstonian = 1702109216
-	KDVDLanguageCodeFaeroese = 1718558752
-	KDVDLanguageCodeFiji = 1718231072
-	KDVDLanguageCodeFinnish = 1718165536
-	KDVDLanguageCodeFrench = 1718755360
-	KDVDLanguageCodeFrisian = 1719214112
-	KDVDLanguageCodeGalician = 1735139360
-	KDVDLanguageCodeGeorgian = 1801527328
-	KDVDLanguageCodeGerman = 1684348960
-	KDVDLanguageCodeGreek = 1701584928
-	KDVDLanguageCodeGreenlandic = 1802248224
-	KDVDLanguageCodeGuarani = 1735270432
-	KDVDLanguageCodeGujarati = 1735729184
-	KDVDLanguageCodeHausa = 1751195680
-	KDVDLanguageCodeHebrew = 1769414688
-	KDVDLanguageCodeHindi = 1751719968
-	KDVDLanguageCodeHungarian = 1752506400
-	KDVDLanguageCodeIcelandic = 1769152544
-	KDVDLanguageCodeIndonesian = 1768824864
-	KDVDLanguageCodeInterlingua = 1767972896
-	KDVDLanguageCodeInterlingue = 1768235040
-	KDVDLanguageCodeInupiak = 1768628256
-	KDVDLanguageCodeIrish = 1734418464
-	KDVDLanguageCodeItalian = 1769218080
-	KDVDLanguageCodeJapanese = 1784750112
-	KDVDLanguageCodeJavanese = 1786191904
-	KDVDLanguageCodeKannada = 1802379296
-	KDVDLanguageCodeKashmiri = 1802706976
-	KDVDLanguageCodeKazakh = 1802182688
-	KDVDLanguageCodeKinyarwanda = 1920409632
-	KDVDLanguageCodeKirghiz = 1803100192
-	KDVDLanguageCodeKirundi = 1919819808
-	KDVDLanguageCodeKorean = 1802444832
-	KDVDLanguageCodeKurdish = 1802838048
-	KDVDLanguageCodeLaothian = 1819222048
-	KDVDLanguageCodeLatin = 1818304544
-	KDVDLanguageCodeLatvian = 1819680800
-	KDVDLanguageCodeLingala = 1819156512
-	KDVDLanguageCodeLithuanian = 1819549728
-	KDVDLanguageCodeMacedonian = 1835737120
-	KDVDLanguageCodeMalagasy = 1835474976
-	KDVDLanguageCodeMalay = 1836261408
-	KDVDLanguageCodeMalayalam = 1835802656
-	KDVDLanguageCodeMaltese = 1836326944
-	KDVDLanguageCodeMaori = 1835606048
-	KDVDLanguageCodeMarathi = 1836195872
-	KDVDLanguageCodeMoldavian = 1835999264
-	KDVDLanguageCodeMongolian = 1835933728
-	KDVDLanguageCodeNauru = 1851858976
-	KDVDLanguageCodeNepali = 1852121120
-	KDVDLanguageCodeNone = 808460320
-	KDVDLanguageCodeNorwegian = 1852776480
-	KDVDLanguageCodeOccitan = 1868767264
-	KDVDLanguageCodeOriya = 1869750304
-	KDVDLanguageCodeOromo = 1869422624
-	KDVDLanguageCodePashto = 1886593056
-	KDVDLanguageCodePersian = 1717641248
-	KDVDLanguageCodePolish = 1886134304
-	KDVDLanguageCodePortugese = 1886658592
-	KDVDLanguageCodePunjabi = 1885413408
-	KDVDLanguageCodeQuechua = 1903501344
+	KDVDLanguageCodeAbkhazian     = 1633820704
+	KDVDLanguageCodeAfar          = 1633755168
+	KDVDLanguageCodeAfrikaans     = 1634082848
+	KDVDLanguageCodeAlbanian      = 1936793632
+	KDVDLanguageCodeAmharic       = 1634541600
+	KDVDLanguageCodeArabic        = 1634869280
+	KDVDLanguageCodeArmenian      = 1752768544
+	KDVDLanguageCodeAssamese      = 1634934816
+	KDVDLanguageCodeAymara        = 1635328032
+	KDVDLanguageCodeAzerbaijani   = 1635393568
+	KDVDLanguageCodeBashkir       = 1650532384
+	KDVDLanguageCodeBasque        = 1702174752
+	KDVDLanguageCodeBengali       = 1651384352
+	KDVDLanguageCodeBhutani       = 1685725216
+	KDVDLanguageCodeBihari        = 1650991136
+	KDVDLanguageCodeBislama       = 1651056672
+	KDVDLanguageCodeBreton        = 1651646496
+	KDVDLanguageCodeBulgarian     = 1650925600
+	KDVDLanguageCodeBurmese       = 1836654624
+	KDVDLanguageCodeByelorussian  = 1650794528
+	KDVDLanguageCodeCambodian     = 1802313760
+	KDVDLanguageCodeCatalan       = 1667309600
+	KDVDLanguageCodeChinese       = 2053644320
+	KDVDLanguageCodeCorsican      = 1668227104
+	KDVDLanguageCodeCroatian      = 1752309792
+	KDVDLanguageCodeCzech         = 1668489248
+	KDVDLanguageCodeDanish        = 1684086816
+	KDVDLanguageCodeDutch         = 1852579872
+	KDVDLanguageCodeEnglish       = 1701716000
+	KDVDLanguageCodeEsperanto     = 1701781536
+	KDVDLanguageCodeEstonian      = 1702109216
+	KDVDLanguageCodeFaeroese      = 1718558752
+	KDVDLanguageCodeFiji          = 1718231072
+	KDVDLanguageCodeFinnish       = 1718165536
+	KDVDLanguageCodeFrench        = 1718755360
+	KDVDLanguageCodeFrisian       = 1719214112
+	KDVDLanguageCodeGalician      = 1735139360
+	KDVDLanguageCodeGeorgian      = 1801527328
+	KDVDLanguageCodeGerman        = 1684348960
+	KDVDLanguageCodeGreek         = 1701584928
+	KDVDLanguageCodeGreenlandic   = 1802248224
+	KDVDLanguageCodeGuarani       = 1735270432
+	KDVDLanguageCodeGujarati      = 1735729184
+	KDVDLanguageCodeHausa         = 1751195680
+	KDVDLanguageCodeHebrew        = 1769414688
+	KDVDLanguageCodeHindi         = 1751719968
+	KDVDLanguageCodeHungarian     = 1752506400
+	KDVDLanguageCodeIcelandic     = 1769152544
+	KDVDLanguageCodeIndonesian    = 1768824864
+	KDVDLanguageCodeInterlingua   = 1767972896
+	KDVDLanguageCodeInterlingue   = 1768235040
+	KDVDLanguageCodeInupiak       = 1768628256
+	KDVDLanguageCodeIrish         = 1734418464
+	KDVDLanguageCodeItalian       = 1769218080
+	KDVDLanguageCodeJapanese      = 1784750112
+	KDVDLanguageCodeJavanese      = 1786191904
+	KDVDLanguageCodeKannada       = 1802379296
+	KDVDLanguageCodeKashmiri      = 1802706976
+	KDVDLanguageCodeKazakh        = 1802182688
+	KDVDLanguageCodeKinyarwanda   = 1920409632
+	KDVDLanguageCodeKirghiz       = 1803100192
+	KDVDLanguageCodeKirundi       = 1919819808
+	KDVDLanguageCodeKorean        = 1802444832
+	KDVDLanguageCodeKurdish       = 1802838048
+	KDVDLanguageCodeLaothian      = 1819222048
+	KDVDLanguageCodeLatin         = 1818304544
+	KDVDLanguageCodeLatvian       = 1819680800
+	KDVDLanguageCodeLingala       = 1819156512
+	KDVDLanguageCodeLithuanian    = 1819549728
+	KDVDLanguageCodeMacedonian    = 1835737120
+	KDVDLanguageCodeMalagasy      = 1835474976
+	KDVDLanguageCodeMalay         = 1836261408
+	KDVDLanguageCodeMalayalam     = 1835802656
+	KDVDLanguageCodeMaltese       = 1836326944
+	KDVDLanguageCodeMaori         = 1835606048
+	KDVDLanguageCodeMarathi       = 1836195872
+	KDVDLanguageCodeMoldavian     = 1835999264
+	KDVDLanguageCodeMongolian     = 1835933728
+	KDVDLanguageCodeNauru         = 1851858976
+	KDVDLanguageCodeNepali        = 1852121120
+	KDVDLanguageCodeNone          = 808460320
+	KDVDLanguageCodeNorwegian     = 1852776480
+	KDVDLanguageCodeOccitan       = 1868767264
+	KDVDLanguageCodeOriya         = 1869750304
+	KDVDLanguageCodeOromo         = 1869422624
+	KDVDLanguageCodePashto        = 1886593056
+	KDVDLanguageCodePersian       = 1717641248
+	KDVDLanguageCodePolish        = 1886134304
+	KDVDLanguageCodePortugese     = 1886658592
+	KDVDLanguageCodePunjabi       = 1885413408
+	KDVDLanguageCodeQuechua       = 1903501344
 	KDVDLanguageCodeRhaetoRomance = 1919754272
-	KDVDLanguageCodeRomanian = 1919885344
-	KDVDLanguageCodeRussian = 1920278560
-	KDVDLanguageCodeSamoan = 1936531488
-	KDVDLanguageCodeSangro = 1936138272
-	KDVDLanguageCodeSanskrit = 1935745056
-	KDVDLanguageCodeScotsGaelic = 1734615072
-	KDVDLanguageCodeSerbian = 1936859168
+	KDVDLanguageCodeRomanian      = 1919885344
+	KDVDLanguageCodeRussian       = 1920278560
+	KDVDLanguageCodeSamoan        = 1936531488
+	KDVDLanguageCodeSangro        = 1936138272
+	KDVDLanguageCodeSanskrit      = 1935745056
+	KDVDLanguageCodeScotsGaelic   = 1734615072
+	KDVDLanguageCodeSerbian       = 1936859168
 	KDVDLanguageCodeSerboCroatian = 1936203808
-	KDVDLanguageCodeSesotho = 1936990240
-	KDVDLanguageCodeSetswana = 1953374240
-	KDVDLanguageCodeShona = 1936597024
-	KDVDLanguageCodeSindhi = 1935941664
-	KDVDLanguageCodeSinghalese = 1936269344
-	KDVDLanguageCodeSiswati = 1936924704
-	KDVDLanguageCodeSlovak = 1936400416
-	KDVDLanguageCodeSlovenian = 1936465952
-	KDVDLanguageCodeSomali = 1936662560
-	KDVDLanguageCodeSpanish = 1702043680
-	KDVDLanguageCodeSudanese = 1937055776
-	KDVDLanguageCodeSwahili = 1937186848
-	KDVDLanguageCodeSwedish = 1937121312
-	KDVDLanguageCodeTagalog = 1953243168
-	KDVDLanguageCodeTajik = 1952915488
-	KDVDLanguageCodeTamil = 1952522272
-	KDVDLanguageCodeTatar = 1953767456
-	KDVDLanguageCodeTelugu = 1952784416
-	KDVDLanguageCodeThai = 1952981024
-	KDVDLanguageCodeTibetan = 1651449888
-	KDVDLanguageCodeTigrinya = 1953046560
-	KDVDLanguageCodeTonga = 1953439776
-	KDVDLanguageCodeTsonga = 1953701920
-	KDVDLanguageCodeTurkish = 1953636384
-	KDVDLanguageCodeTurkmen = 1953177632
-	KDVDLanguageCodeTwi = 1953964064
-	KDVDLanguageCodeUkranian = 1969954848
+	KDVDLanguageCodeSesotho       = 1936990240
+	KDVDLanguageCodeSetswana      = 1953374240
+	KDVDLanguageCodeShona         = 1936597024
+	KDVDLanguageCodeSindhi        = 1935941664
+	KDVDLanguageCodeSinghalese    = 1936269344
+	KDVDLanguageCodeSiswati       = 1936924704
+	KDVDLanguageCodeSlovak        = 1936400416
+	KDVDLanguageCodeSlovenian     = 1936465952
+	KDVDLanguageCodeSomali        = 1936662560
+	KDVDLanguageCodeSpanish       = 1702043680
+	KDVDLanguageCodeSudanese      = 1937055776
+	KDVDLanguageCodeSwahili       = 1937186848
+	KDVDLanguageCodeSwedish       = 1937121312
+	KDVDLanguageCodeTagalog       = 1953243168
+	KDVDLanguageCodeTajik         = 1952915488
+	KDVDLanguageCodeTamil         = 1952522272
+	KDVDLanguageCodeTatar         = 1953767456
+	KDVDLanguageCodeTelugu        = 1952784416
+	KDVDLanguageCodeThai          = 1952981024
+	KDVDLanguageCodeTibetan       = 1651449888
+	KDVDLanguageCodeTigrinya      = 1953046560
+	KDVDLanguageCodeTonga         = 1953439776
+	KDVDLanguageCodeTsonga        = 1953701920
+	KDVDLanguageCodeTurkish       = 1953636384
+	KDVDLanguageCodeTurkmen       = 1953177632
+	KDVDLanguageCodeTwi           = 1953964064
+	KDVDLanguageCodeUkranian      = 1969954848
 	KDVDLanguageCodeUninitialized = 1061101600
-	KDVDLanguageCodeUrdu = 1970413600
-	KDVDLanguageCodeUzbek = 1970937888
-	KDVDLanguageCodeVietnamese = 1986600992
-	KDVDLanguageCodeVolapuk = 1986994208
-	KDVDLanguageCodeWelsh = 1668882464
-	KDVDLanguageCodeWolof = 2003771424
-	KDVDLanguageCodeXhosa = 2020089888
-	KDVDLanguageCodeYiddish = 1785274400
-	KDVDLanguageCodeYoruba = 2037325856
-	KDVDLanguageCodeZulu = 2054496288
-	KDVDLanguageNoPreference = 707403808
+	KDVDLanguageCodeUrdu          = 1970413600
+	KDVDLanguageCodeUzbek         = 1970937888
+	KDVDLanguageCodeVietnamese    = 1986600992
+	KDVDLanguageCodeVolapuk       = 1986994208
+	KDVDLanguageCodeWelsh         = 1668882464
+	KDVDLanguageCodeWolof         = 2003771424
+	KDVDLanguageCodeXhosa         = 2020089888
+	KDVDLanguageCodeYiddish       = 1785274400
+	KDVDLanguageCodeYoruba        = 2037325856
+	KDVDLanguageCodeZulu          = 2054496288
+	KDVDLanguageNoPreference      = 707403808
 )
 
 const (
-	KDVDRegionCode1 = 254
-	KDVDRegionCode2 = 253
-	KDVDRegionCode3 = 251
-	KDVDRegionCode4 = 247
-	KDVDRegionCode5 = 239
-	KDVDRegionCode6 = 223
-	KDVDRegionCode7 = 191
-	KDVDRegionCode8 = 127
+	KDVDRegionCode1             = 254
+	KDVDRegionCode2             = 253
+	KDVDRegionCode3             = 251
+	KDVDRegionCode4             = 247
+	KDVDRegionCode5             = 239
+	KDVDRegionCode6             = 223
+	KDVDRegionCode7             = 191
+	KDVDRegionCode8             = 127
 	KDVDRegionCodeUninitialized = 255
 )
 
 const (
-	KDVDSubpictureExtensionCodeCaption4Children = 3
-	KDVDSubpictureExtensionCodeCaptionBiggerSize = 2
-	KDVDSubpictureExtensionCodeCaptionNormalSize = 1
-	KDVDSubpictureExtensionCodeClosedCaption4Children = 7
+	KDVDSubpictureExtensionCodeCaption4Children        = 3
+	KDVDSubpictureExtensionCodeCaptionBiggerSize       = 2
+	KDVDSubpictureExtensionCodeCaptionNormalSize       = 1
+	KDVDSubpictureExtensionCodeClosedCaption4Children  = 7
 	KDVDSubpictureExtensionCodeClosedCaptionBiggerSize = 6
 	KDVDSubpictureExtensionCodeClosedCaptionNormalSize = 5
-	KDVDSubpictureExtensionCodeForcedCaption = 9
-	KDVDSubpictureExtensionCodeNotSpecified = 0
-	KDVDSubpictureExtensionDirectorsComment4Children = 15
-	KDVDSubpictureExtensionDirectorsCommentBiggerSize = 14
-	KDVDSubpictureExtensionDirectorsCommentNormalSize = 13
+	KDVDSubpictureExtensionCodeForcedCaption           = 9
+	KDVDSubpictureExtensionCodeNotSpecified            = 0
+	KDVDSubpictureExtensionDirectorsComment4Children   = 15
+	KDVDSubpictureExtensionDirectorsCommentBiggerSize  = 14
+	KDVDSubpictureExtensionDirectorsCommentNormalSize  = 13
 )
 
 const (
-	KDVDTimeCodeChapterDurationSeconds = 6
-	KDVDTimeCodeChapterElapsedSeconds = 4
+	KDVDTimeCodeChapterDurationSeconds  = 6
+	KDVDTimeCodeChapterElapsedSeconds   = 4
 	KDVDTimeCodeChapterRemainingSeconds = 5
-	KDVDTimeCodeElapsedSeconds = 1
-	KDVDTimeCodeRemainingSeconds = 2
-	KDVDTimeCodeTitleDurationSeconds = 3
-	KDVDTimeCodeUninitialized = 0
+	KDVDTimeCodeElapsedSeconds          = 1
+	KDVDTimeCodeRemainingSeconds        = 2
+	KDVDTimeCodeTitleDurationSeconds    = 3
+	KDVDTimeCodeUninitialized           = 0
 )
 
 const (
-	KDVDUOPAngleChange = 4194304
-	KDVDUOPAudioStreamChange = 1048576
-	KDVDUOPBackwardScan = 512
-	KDVDUOPButton = 131072
-	KDVDUOPForwardScan = 256
-	KDVDUOPGoUp = 16
-	KDVDUOPKaraokeModeChange = 8388608
-	KDVDUOPMenuCallAngle = 16384
-	KDVDUOPMenuCallAudio = 8192
-	KDVDUOPMenuCallPTT = 32768
-	KDVDUOPMenuCallRoot = 2048
-	KDVDUOPMenuCallSubPicture = 4096
-	KDVDUOPMenuCallTitle = 1024
-	KDVDUOPNextPGSearch = 128
-	KDVDUOPPTTPlaySearch = 2
-	KDVDUOPPauseOff = 67108864
-	KDVDUOPPauseOn = 524288
-	KDVDUOPPrevTopPGSearch = 64
-	KDVDUOPResume = 65536
-	KDVDUOPScanOff = 33554432
-	KDVDUOPStillOff = 262144
-	KDVDUOPStop = 8
+	KDVDUOPAngleChange            = 4194304
+	KDVDUOPAudioStreamChange      = 1048576
+	KDVDUOPBackwardScan           = 512
+	KDVDUOPButton                 = 131072
+	KDVDUOPForwardScan            = 256
+	KDVDUOPGoUp                   = 16
+	KDVDUOPKaraokeModeChange      = 8388608
+	KDVDUOPMenuCallAngle          = 16384
+	KDVDUOPMenuCallAudio          = 8192
+	KDVDUOPMenuCallPTT            = 32768
+	KDVDUOPMenuCallRoot           = 2048
+	KDVDUOPMenuCallSubPicture     = 4096
+	KDVDUOPMenuCallTitle          = 1024
+	KDVDUOPNextPGSearch           = 128
+	KDVDUOPPTTPlaySearch          = 2
+	KDVDUOPPauseOff               = 67108864
+	KDVDUOPPauseOn                = 524288
+	KDVDUOPPrevTopPGSearch        = 64
+	KDVDUOPResume                 = 65536
+	KDVDUOPScanOff                = 33554432
+	KDVDUOPStillOff               = 262144
+	KDVDUOPStop                   = 8
 	KDVDUOPSubPictureStreamChange = 2097152
-	KDVDUOPTimePTTSearch = 32
-	KDVDUOPTimePlaySearch = 1
-	KDVDUOPTitlePlay = 4
-	KDVDUOPVideoModeChange = 16777216
+	KDVDUOPTimePTTSearch          = 32
+	KDVDUOPTimePlaySearch         = 1
+	KDVDUOPTitlePlay              = 4
+	KDVDUOPVideoModeChange        = 16777216
 )
-

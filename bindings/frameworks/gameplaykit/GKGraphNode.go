@@ -18,14 +18,14 @@ type GKGraphNode struct {
 }
 
 var (
-	_clsGKGraphNode = _objcClass("GKGraphNode")
-	_gKGraphNodeSelAddConnectionsToNodesBidirectional = objc.RegisterName("addConnectionsToNodes:bidirectional:")
+	_clsGKGraphNode                                      = _objcClass("GKGraphNode")
+	_gKGraphNodeSelAddConnectionsToNodesBidirectional    = objc.RegisterName("addConnectionsToNodes:bidirectional:")
 	_gKGraphNodeSelRemoveConnectionsToNodesBidirectional = objc.RegisterName("removeConnectionsToNodes:bidirectional:")
-	_gKGraphNodeSelEstimatedCostToNode = objc.RegisterName("estimatedCostToNode:")
-	_gKGraphNodeSelCostToNode = objc.RegisterName("costToNode:")
-	_gKGraphNodeSelFindPathToNode = objc.RegisterName("findPathToNode:")
-	_gKGraphNodeSelFindPathFromNode = objc.RegisterName("findPathFromNode:")
-	_gKGraphNodeSelConnectedNodes = objc.RegisterName("connectedNodes")
+	_gKGraphNodeSelEstimatedCostToNode                   = objc.RegisterName("estimatedCostToNode:")
+	_gKGraphNodeSelCostToNode                            = objc.RegisterName("costToNode:")
+	_gKGraphNodeSelFindPathToNode                        = objc.RegisterName("findPathToNode:")
+	_gKGraphNodeSelFindPathFromNode                      = objc.RegisterName("findPathFromNode:")
+	_gKGraphNodeSelConnectedNodes                        = objc.RegisterName("connectedNodes")
 )
 
 func GKGraphNodeFromID(id objc.ID) *GKGraphNode {
@@ -63,21 +63,26 @@ func (o *GKGraphNode) CostToNode(node *GKGraphNode) float32 {
 // Attempts to find the optimal path between this node and the indicated goal node. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. @param goalNode the goal node of the pathfinding attempt
 func (o *GKGraphNode) FindPathToNode(goalNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNodeSelFindPathToNode, goalNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
 
 // As with findPathToNode: except this node is the goal node and a startNode is specified @param startNode the start node of the pathfinding attempt
 func (o *GKGraphNode) FindPathFromNode(startNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNodeSelFindPathFromNode, startNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
 
 // List of other graph nodes that this node has an edge leading to.
 func (o *GKGraphNode) ConnectedNodes() *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNodeSelConnectedNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
-

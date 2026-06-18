@@ -13,4 +13,3 @@ import (
 func MXSignpostMetricsSnapshot() unsafe.Pointer {
 	return raw.MXSignpostMetricsSnapshot()
 }
-

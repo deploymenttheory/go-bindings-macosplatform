@@ -18,28 +18,28 @@ type MTRClusterMediaInput struct {
 }
 
 var (
-	_clsMTRClusterMediaInput = _objcClass("MTRClusterMediaInput")
-	_mTRClusterMediaInputSelSelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("selectInputWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("showInputStatusWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("showInputStatusWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelHideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("hideInputStatusWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelHideInputStatusWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("hideInputStatusWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelRenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("renameInputWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMediaInputSelReadAttributeInputListWithParams = objc.RegisterName("readAttributeInputListWithParams:")
-	_mTRClusterMediaInputSelReadAttributeCurrentInputWithParams = objc.RegisterName("readAttributeCurrentInputWithParams:")
-	_mTRClusterMediaInputSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterMediaInputSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterMediaInputSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterMediaInputSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterMediaInputSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterMediaInputSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterMediaInputSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterMediaInputSelSelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("selectInputWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterMediaInput                                                                              = _objcClass("MTRClusterMediaInput")
+	_mTRClusterMediaInputSelSelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("selectInputWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("showInputStatusWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("showInputStatusWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelHideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("hideInputStatusWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelHideInputStatusWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("hideInputStatusWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelRenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("renameInputWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMediaInputSelReadAttributeInputListWithParams                                              = objc.RegisterName("readAttributeInputListWithParams:")
+	_mTRClusterMediaInputSelReadAttributeCurrentInputWithParams                                           = objc.RegisterName("readAttributeCurrentInputWithParams:")
+	_mTRClusterMediaInputSelReadAttributeGeneratedCommandListWithParams                                   = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterMediaInputSelReadAttributeAcceptedCommandListWithParams                                    = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterMediaInputSelReadAttributeAttributeListWithParams                                          = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterMediaInputSelReadAttributeFeatureMapWithParams                                             = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterMediaInputSelReadAttributeClusterRevisionWithParams                                        = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterMediaInputSelInitWithDeviceEndpointIDQueue                                                 = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterMediaInputSelInitWithDeviceEndpointQueue                                                   = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterMediaInputSelSelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler     = objc.RegisterName("selectInputWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterMediaInputSelShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("showInputStatusWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterMediaInputSelShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("showInputStatusWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterMediaInputSelShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("showInputStatusWithExpectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterMediaInputSelHideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("hideInputStatusWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterMediaInputSelHideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("hideInputStatusWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterMediaInputSelRenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("renameInputWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterMediaInputSelHideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("hideInputStatusWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterMediaInputSelRenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler     = objc.RegisterName("renameInputWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterMediaInputFromID(id objc.ID) *MTRClusterMediaInput {
@@ -156,13 +156,17 @@ func (o *MTRClusterMediaInput) ReadAttributeClusterRevisionWithParams(params *MT
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterMediaInput) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMediaInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaInputSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterMediaInputFromID(_ret)
 }
 
 func (o *MTRClusterMediaInput) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterMediaInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMediaInputSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterMediaInputFromID(_ret)
 }
 
@@ -231,4 +235,3 @@ func (o *MTRClusterMediaInput) RenameInputWithParamsExpectedValuesExpectedValueI
 	}
 	o.Ptr().Send(_mTRClusterMediaInputSelRenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

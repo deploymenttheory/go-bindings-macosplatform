@@ -193,4 +193,3 @@ type ThumbnailViewable interface {
 }
 
 var _ ThumbnailViewable = (*ThumbnailView)(nil)
-

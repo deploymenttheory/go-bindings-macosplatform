@@ -59,4 +59,3 @@ type NNConcatenationNodeable interface {
 }
 
 var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
-

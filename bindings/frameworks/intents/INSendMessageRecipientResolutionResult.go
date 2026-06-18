@@ -15,8 +15,8 @@ type INSendMessageRecipientResolutionResult struct {
 }
 
 var (
-	_clsINSendMessageRecipientResolutionResult = _objcClass("INSendMessageRecipientResolutionResult")
-	_iNSendMessageRecipientResolutionResultSelUnsupportedForReason = objc.RegisterName("unsupportedForReason:")
+	_clsINSendMessageRecipientResolutionResult                               = _objcClass("INSendMessageRecipientResolutionResult")
+	_iNSendMessageRecipientResolutionResultSelUnsupportedForReason           = objc.RegisterName("unsupportedForReason:")
 	_iNSendMessageRecipientResolutionResultSelInitWithPersonResolutionResult = objc.RegisterName("initWithPersonResolutionResult:")
 )
 
@@ -32,13 +32,16 @@ func INSendMessageRecipientResolutionResultFromID(id objc.ID) *INSendMessageReci
 
 func INSendMessageRecipientResolutionResultUnsupportedForReason(reason INSendMessageRecipientUnsupportedReason) *INSendMessageRecipientResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINSendMessageRecipientResolutionResult), _iNSendMessageRecipientResolutionResultSelUnsupportedForReason, reason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSendMessageRecipientResolutionResultFromID(_ret)
 }
 
 func (o *INSendMessageRecipientResolutionResult) InitWithPersonResolutionResult(personResolutionResult *INPersonResolutionResult) *INSendMessageRecipientResolutionResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageRecipientResolutionResultSelInitWithPersonResolutionResult, personResolutionResult.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSendMessageRecipientResolutionResultFromID(_ret)
 }
-

@@ -16,25 +16,25 @@ type HKWorkoutSession struct {
 }
 
 var (
-	_clsHKWorkoutSession = _objcClass("HKWorkoutSession")
-	_hKWorkoutSessionSelPrepare = objc.RegisterName("prepare")
-	_hKWorkoutSessionSelStartActivityWithDate = objc.RegisterName("startActivityWithDate:")
-	_hKWorkoutSessionSelStopActivityWithDate = objc.RegisterName("stopActivityWithDate:")
-	_hKWorkoutSessionSelEnd = objc.RegisterName("end")
-	_hKWorkoutSessionSelPause = objc.RegisterName("pause")
-	_hKWorkoutSessionSelResume = objc.RegisterName("resume")
+	_clsHKWorkoutSession                                              = _objcClass("HKWorkoutSession")
+	_hKWorkoutSessionSelPrepare                                       = objc.RegisterName("prepare")
+	_hKWorkoutSessionSelStartActivityWithDate                         = objc.RegisterName("startActivityWithDate:")
+	_hKWorkoutSessionSelStopActivityWithDate                          = objc.RegisterName("stopActivityWithDate:")
+	_hKWorkoutSessionSelEnd                                           = objc.RegisterName("end")
+	_hKWorkoutSessionSelPause                                         = objc.RegisterName("pause")
+	_hKWorkoutSessionSelResume                                        = objc.RegisterName("resume")
 	_hKWorkoutSessionSelBeginNewActivityWithConfigurationDateMetadata = objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:")
-	_hKWorkoutSessionSelEndCurrentActivityOnDate = objc.RegisterName("endCurrentActivityOnDate:")
-	_hKWorkoutSessionSelActivityType = objc.RegisterName("activityType")
-	_hKWorkoutSessionSelLocationType = objc.RegisterName("locationType")
-	_hKWorkoutSessionSelWorkoutConfiguration = objc.RegisterName("workoutConfiguration")
-	_hKWorkoutSessionSelDelegate = objc.RegisterName("delegate")
-	_hKWorkoutSessionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_hKWorkoutSessionSelState = objc.RegisterName("state")
-	_hKWorkoutSessionSelType = objc.RegisterName("type")
-	_hKWorkoutSessionSelStartDate = objc.RegisterName("startDate")
-	_hKWorkoutSessionSelEndDate = objc.RegisterName("endDate")
-	_hKWorkoutSessionSelCurrentActivity = objc.RegisterName("currentActivity")
+	_hKWorkoutSessionSelEndCurrentActivityOnDate                      = objc.RegisterName("endCurrentActivityOnDate:")
+	_hKWorkoutSessionSelActivityType                                  = objc.RegisterName("activityType")
+	_hKWorkoutSessionSelLocationType                                  = objc.RegisterName("locationType")
+	_hKWorkoutSessionSelWorkoutConfiguration                          = objc.RegisterName("workoutConfiguration")
+	_hKWorkoutSessionSelDelegate                                      = objc.RegisterName("delegate")
+	_hKWorkoutSessionSelSetDelegate                                   = objc.RegisterName("setDelegate:")
+	_hKWorkoutSessionSelState                                         = objc.RegisterName("state")
+	_hKWorkoutSessionSelType                                          = objc.RegisterName("type")
+	_hKWorkoutSessionSelStartDate                                     = objc.RegisterName("startDate")
+	_hKWorkoutSessionSelEndDate                                       = objc.RegisterName("endDate")
+	_hKWorkoutSessionSelCurrentActivity                               = objc.RegisterName("currentActivity")
 )
 
 func HKWorkoutSessionFromID(id objc.ID) *HKWorkoutSession {
@@ -102,7 +102,9 @@ func (o *HKWorkoutSession) LocationType() HKWorkoutSessionLocationType {
 // @property      workoutConfiguration @abstract      The configuration object describing the workout. @discussion    This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (o *HKWorkoutSession) WorkoutConfiguration() *HKWorkoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutSessionSelWorkoutConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutConfigurationFromID(_ret)
 }
 
@@ -131,21 +133,26 @@ func (o *HKWorkoutSession) Type() HKWorkoutSessionType {
 // @property      startDate @abstract      Indicates the date when the workout session started running. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
 func (o *HKWorkoutSession) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutSessionSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      endDate @abstract      Indicates the date when the workout session stopped. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
 func (o *HKWorkoutSession) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutSessionSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      currentActivity @abstract      The current workout activity. @discussion    This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (o *HKWorkoutSession) CurrentActivity() *HKWorkoutActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutSessionSelCurrentActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutActivityFromID(_ret)
 }
-

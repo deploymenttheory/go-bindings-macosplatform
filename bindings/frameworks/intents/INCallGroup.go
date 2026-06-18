@@ -16,10 +16,10 @@ type INCallGroup struct {
 }
 
 var (
-	_clsINCallGroup = _objcClass("INCallGroup")
+	_clsINCallGroup                         = _objcClass("INCallGroup")
 	_iNCallGroupSelInitWithGroupNameGroupId = objc.RegisterName("initWithGroupName:groupId:")
-	_iNCallGroupSelGroupName = objc.RegisterName("groupName")
-	_iNCallGroupSelGroupId = objc.RegisterName("groupId")
+	_iNCallGroupSelGroupName                = objc.RegisterName("groupName")
+	_iNCallGroupSelGroupId                  = objc.RegisterName("groupId")
 )
 
 func INCallGroupFromID(id objc.ID) *INCallGroup {
@@ -34,19 +34,24 @@ func INCallGroupFromID(id objc.ID) *INCallGroup {
 
 func (o *INCallGroup) InitWithGroupNameGroupId(groupName *foundation.NSString, groupId *foundation.NSString) *INCallGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallGroupSelInitWithGroupNameGroupId, groupName.Ptr(), groupId.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallGroupFromID(_ret)
 }
 
 func (o *INCallGroup) GroupName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallGroupSelGroupName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INCallGroup) GroupId() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallGroupSelGroupId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

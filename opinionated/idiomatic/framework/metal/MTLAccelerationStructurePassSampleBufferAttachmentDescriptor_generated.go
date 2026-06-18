@@ -15,11 +15,15 @@ type AccelerationStructurePassSampleBufferAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor].
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor { return x.inner }
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // AccelerationStructurePassSampleBufferAttachmentDescriptorFromID adopts an existing object pointer as a AccelerationStructurePassSampleBufferAttachmentDescriptor (nil for 0).
 func AccelerationStructurePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
@@ -98,4 +102,3 @@ type AccelerationStructurePassSampleBufferAttachmentDescriptorable interface {
 }
 
 var _ AccelerationStructurePassSampleBufferAttachmentDescriptorable = (*AccelerationStructurePassSampleBufferAttachmentDescriptor)(nil)
-

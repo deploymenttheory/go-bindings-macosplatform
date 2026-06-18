@@ -16,8 +16,8 @@ type NSFileProviderDomainVersion struct {
 }
 
 var (
-	_clsNSFileProviderDomainVersion = _objcClass("NSFileProviderDomainVersion")
-	_nSFileProviderDomainVersionSelNext = objc.RegisterName("next")
+	_clsNSFileProviderDomainVersion        = _objcClass("NSFileProviderDomainVersion")
+	_nSFileProviderDomainVersionSelNext    = objc.RegisterName("next")
 	_nSFileProviderDomainVersionSelCompare = objc.RegisterName("compare:")
 )
 
@@ -34,7 +34,9 @@ func NSFileProviderDomainVersionFromID(id objc.ID) *NSFileProviderDomainVersion 
 // Build a version that is strictly greater than the receiver.
 func (o *NSFileProviderDomainVersion) Next() *NSFileProviderDomainVersion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderDomainVersionSelNext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderDomainVersionFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *NSFileProviderDomainVersion) Compare(otherVersion *NSFileProviderDomain
 	_ret := objc.Send[foundation.NSComparisonResult](o.Ptr(), _nSFileProviderDomainVersionSelCompare, otherVersion.Ptr())
 	return _ret
 }
-

@@ -16,14 +16,14 @@ type VSSubscription struct {
 }
 
 var (
-	_clsVSSubscription = _objcClass("VSSubscription")
-	_vSSubscriptionSelExpirationDate = objc.RegisterName("expirationDate")
-	_vSSubscriptionSelSetExpirationDate = objc.RegisterName("setExpirationDate:")
-	_vSSubscriptionSelAccessLevel = objc.RegisterName("accessLevel")
-	_vSSubscriptionSelSetAccessLevel = objc.RegisterName("setAccessLevel:")
-	_vSSubscriptionSelTierIdentifiers = objc.RegisterName("tierIdentifiers")
-	_vSSubscriptionSelSetTierIdentifiers = objc.RegisterName("setTierIdentifiers:")
-	_vSSubscriptionSelBillingIdentifier = objc.RegisterName("billingIdentifier")
+	_clsVSSubscription                     = _objcClass("VSSubscription")
+	_vSSubscriptionSelExpirationDate       = objc.RegisterName("expirationDate")
+	_vSSubscriptionSelSetExpirationDate    = objc.RegisterName("setExpirationDate:")
+	_vSSubscriptionSelAccessLevel          = objc.RegisterName("accessLevel")
+	_vSSubscriptionSelSetAccessLevel       = objc.RegisterName("setAccessLevel:")
+	_vSSubscriptionSelTierIdentifiers      = objc.RegisterName("tierIdentifiers")
+	_vSSubscriptionSelSetTierIdentifiers   = objc.RegisterName("setTierIdentifiers:")
+	_vSSubscriptionSelBillingIdentifier    = objc.RegisterName("billingIdentifier")
 	_vSSubscriptionSelSetBillingIdentifier = objc.RegisterName("setBillingIdentifier:")
 )
 
@@ -40,7 +40,9 @@ func VSSubscriptionFromID(id objc.ID) *VSSubscription {
 // After this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
 func (o *VSSubscription) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSSubscriptionSelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -71,11 +73,12 @@ func (o *VSSubscription) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[
 // Identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
 func (o *VSSubscription) BillingIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSSubscriptionSelBillingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *VSSubscription) SetBillingIdentifier(billingIdentifier *foundation.NSString) {
 	o.Ptr().Send(_vSSubscriptionSelSetBillingIdentifier, billingIdentifier.Ptr())
 }
-

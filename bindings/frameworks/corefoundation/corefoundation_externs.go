@@ -11,13 +11,17 @@ import (
 
 func KCFAbsoluteTimeIntervalSince1904() float64 {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFAbsoluteTimeIntervalSince1904")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func KCFAbsoluteTimeIntervalSince1970() float64 {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFAbsoluteTimeIntervalSince1970")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -113,25 +117,33 @@ func KCFChineseCalendar() uintptr {
 
 func KCFCopyStringBagCallBacks() CFBagCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFCopyStringBagCallBacks")
-	if ptr == 0 { return CFBagCallBacks{} }
+	if ptr == 0 {
+		return CFBagCallBacks{}
+	}
 	return *(*CFBagCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFCopyStringDictionaryKeyCallBacks() CFDictionaryKeyCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFCopyStringDictionaryKeyCallBacks")
-	if ptr == 0 { return CFDictionaryKeyCallBacks{} }
+	if ptr == 0 {
+		return CFDictionaryKeyCallBacks{}
+	}
 	return *(*CFDictionaryKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFCopyStringSetCallBacks() CFSetCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFCopyStringSetCallBacks")
-	if ptr == 0 { return CFSetCallBacks{} }
+	if ptr == 0 {
+		return CFSetCallBacks{}
+	}
 	return *(*CFSetCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFCoreFoundationVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFCoreFoundationVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -963,7 +975,9 @@ func KCFStreamSocketSecurityLevelTLSv1() uintptr {
 // @constant kCFStringBinaryHeapCallBacks Predefined CFBinaryHeapCallBacks structure containing a set of callbacks appropriate for use when the values in a CFBinaryHeap are all CFString types.
 func KCFStringBinaryHeapCallBacks() CFBinaryHeapCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFStringBinaryHeapCallBacks")
-	if ptr == 0 { return CFBinaryHeapCallBacks{} }
+	if ptr == 0 {
+		return CFBinaryHeapCallBacks{}
+	}
 	return *(*CFBinaryHeapCallBacks)(unsafe.Pointer(ptr))
 }
 
@@ -1064,31 +1078,41 @@ func KCFTimeZoneSystemTimeZoneDidChangeNotification() uintptr {
 
 func KCFTypeArrayCallBacks() CFArrayCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFTypeArrayCallBacks")
-	if ptr == 0 { return CFArrayCallBacks{} }
+	if ptr == 0 {
+		return CFArrayCallBacks{}
+	}
 	return *(*CFArrayCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFTypeBagCallBacks() CFBagCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFTypeBagCallBacks")
-	if ptr == 0 { return CFBagCallBacks{} }
+	if ptr == 0 {
+		return CFBagCallBacks{}
+	}
 	return *(*CFBagCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFTypeDictionaryKeyCallBacks() CFDictionaryKeyCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFTypeDictionaryKeyCallBacks")
-	if ptr == 0 { return CFDictionaryKeyCallBacks{} }
+	if ptr == 0 {
+		return CFDictionaryKeyCallBacks{}
+	}
 	return *(*CFDictionaryKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFTypeDictionaryValueCallBacks() CFDictionaryValueCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFTypeDictionaryValueCallBacks")
-	if ptr == 0 { return CFDictionaryValueCallBacks{} }
+	if ptr == 0 {
+		return CFDictionaryValueCallBacks{}
+	}
 	return *(*CFDictionaryValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func KCFTypeSetCallBacks() CFSetCallBacks {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFTypeSetCallBacks")
-	if ptr == 0 { return CFSetCallBacks{} }
+	if ptr == 0 {
+		return CFSetCallBacks{}
+	}
 	return *(*CFSetCallBacks)(unsafe.Pointer(ptr))
 }
 
@@ -1891,4 +1915,3 @@ func KCFXMLTreeErrorStatusCode() uintptr {
 	ptr, _ := purego.Dlsym(_corefoundationLib, "kCFXMLTreeErrorStatusCode")
 	return ptr
 }
-

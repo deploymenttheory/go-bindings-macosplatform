@@ -40,7 +40,9 @@ func (x *MacGraphicsDisplay) PixelsPerInch() int {
 	return x.inner.PixelsPerInch()
 }
 
-func (x *MacGraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay { return &x.inner.VZGraphicsDisplay }
+func (x *MacGraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay {
+	return &x.inner.VZGraphicsDisplay
+}
 
 // MacGraphicsDisplayable is the interface implemented by [MacGraphicsDisplay], for mocking and DI.
 type MacGraphicsDisplayable interface {
@@ -49,4 +51,3 @@ type MacGraphicsDisplayable interface {
 }
 
 var _ MacGraphicsDisplayable = (*MacGraphicsDisplay)(nil)
-

@@ -19,15 +19,15 @@ type AVVideoCompositionRenderContext struct {
 }
 
 var (
-	_clsAVVideoCompositionRenderContext = _objcClass("AVVideoCompositionRenderContext")
-	_aVVideoCompositionRenderContextSelNewPixelBuffer = objc.RegisterName("newPixelBuffer")
-	_aVVideoCompositionRenderContextSelSize = objc.RegisterName("size")
-	_aVVideoCompositionRenderContextSelRenderTransform = objc.RegisterName("renderTransform")
-	_aVVideoCompositionRenderContextSelRenderScale = objc.RegisterName("renderScale")
-	_aVVideoCompositionRenderContextSelPixelAspectRatio = objc.RegisterName("pixelAspectRatio")
-	_aVVideoCompositionRenderContextSelEdgeWidths = objc.RegisterName("edgeWidths")
+	_clsAVVideoCompositionRenderContext                     = _objcClass("AVVideoCompositionRenderContext")
+	_aVVideoCompositionRenderContextSelNewPixelBuffer       = objc.RegisterName("newPixelBuffer")
+	_aVVideoCompositionRenderContextSelSize                 = objc.RegisterName("size")
+	_aVVideoCompositionRenderContextSelRenderTransform      = objc.RegisterName("renderTransform")
+	_aVVideoCompositionRenderContextSelRenderScale          = objc.RegisterName("renderScale")
+	_aVVideoCompositionRenderContextSelPixelAspectRatio     = objc.RegisterName("pixelAspectRatio")
+	_aVVideoCompositionRenderContextSelEdgeWidths           = objc.RegisterName("edgeWidths")
 	_aVVideoCompositionRenderContextSelHighQualityRendering = objc.RegisterName("highQualityRendering")
-	_aVVideoCompositionRenderContextSelVideoComposition = objc.RegisterName("videoComposition")
+	_aVVideoCompositionRenderContextSelVideoComposition     = objc.RegisterName("videoComposition")
 )
 
 func AVVideoCompositionRenderContextFromID(id objc.ID) *AVVideoCompositionRenderContext {
@@ -85,7 +85,8 @@ func (o *AVVideoCompositionRenderContext) HighQualityRendering() bool {
 // The AVVideoComposition being rendered.
 func (o *AVVideoCompositionRenderContext) VideoComposition() *AVVideoComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVVideoCompositionRenderContextSelVideoComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
-

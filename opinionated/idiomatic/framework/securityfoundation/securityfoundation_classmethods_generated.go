@@ -19,4 +19,3 @@ func SFAuthorizationAuthorization() objc.ID {
 func AuthorizationWithFlagsRightsEnvironment(flags security.AuthorizationFlags, rights *security.AuthorizationItemSet, environment *security.AuthorizationItemSet) objc.ID {
 	return raw.SFAuthorizationAuthorizationWithFlagsRightsEnvironment(flags, rights, environment)
 }
-

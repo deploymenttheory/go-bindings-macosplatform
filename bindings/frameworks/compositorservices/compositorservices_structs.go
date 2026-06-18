@@ -3,12 +3,12 @@
 
 package compositorservices
 
-// An opaque type that contains the textures and other information you need to set up your render pipeline. Use the drawable type to retrieve the textures for your render pipelines, and use the drawable’s views to get details about how to render to those textures. Get the drawable for a frame using the ``cp_frame_query_drawable`` function. The layer manages a limited number of reusable drawable types and recycles them after each use. Draw only one frame at a time to ensure each new frame’s drawable type is ready in time.
+// An opaque type that contains the textures and other information you need to set up your render pipeline. Use the drawable type to retrieve the textures for your render pipelines, and use the drawable’s views to get details about how to render to those textures. Get the drawable for a frame using the “cp_frame_query_drawable“ function. The layer manages a limited number of reusable drawable types and recycles them after each use. Draw only one frame at a time to ensure each new frame’s drawable type is ready in time.
 // C struct: cp_drawable
 // CpDrawable is an opaque type.
 type CpDrawable struct{}
 
-// An opaque type that contains the drawable types and other information you need to set up your render pipeline. See ``cp_drawable_t`` for more information about drawables.
+// An opaque type that contains the drawable types and other information you need to set up your render pipeline. See “cp_drawable_t“ for more information about drawables.
 // C struct: cp_drawable_array
 // CpDrawableArray is an opaque type.
 type CpDrawableArray struct{}
@@ -18,12 +18,12 @@ type CpDrawableArray struct{}
 // CpDrawableRenderContext is an opaque type.
 type CpDrawableRenderContext struct{}
 
-// An opaque type that provides access to the timing information and data types you need to render a single frame of content. During each cycle of your app’s rendering loop, retrieve a frame using the ``cp_layer_renderer_query_next_frame`` function and use it to render your app’s content. The ``cp_frame_t`` type provides access to the information you need to render your frame in a timely manner. It also provides access to the ``cp_drawable_t`` type you use to retrieve the textures you need for drawing. Separate the work you do for each frame into two phases: the update phase and the encode phase. Use the update phase to perform app-specific tasks, such as processing interactions with your content. Use the encode phase to commit the Metal commands you need to draw your content for the current pose. For both phases, use frame functions to notify the Compositor when you start and stop the related work. For example, surround update work with calls to the ``cp_frame_start_update`` and ``cp_frame_end_update`` functions.
+// An opaque type that provides access to the timing information and data types you need to render a single frame of content. During each cycle of your app’s rendering loop, retrieve a frame using the “cp_layer_renderer_query_next_frame“ function and use it to render your app’s content. The “cp_frame_t“ type provides access to the information you need to render your frame in a timely manner. It also provides access to the “cp_drawable_t“ type you use to retrieve the textures you need for drawing. Separate the work you do for each frame into two phases: the update phase and the encode phase. Use the update phase to perform app-specific tasks, such as processing interactions with your content. Use the encode phase to commit the Metal commands you need to draw your content for the current pose. For both phases, use frame functions to notify the Compositor when you start and stop the related work. For example, surround update work with calls to the “cp_frame_start_update“ and “cp_frame_end_update“ functions.
 // C struct: cp_frame
 // CpFrame is an opaque type.
 type CpFrame struct{}
 
-// An opaque type that stores information about a frame’s encoding, rendering, and presentation deadlines. Before you start drawing, call the ``cp_frame_predict_timing`` function to update and retrieve the frame’s timing information. After you access the frame’s ``cp_drawable_t`` type, get the timing information using the ``cp_drawable_get_frame_timing`` function.
+// An opaque type that stores information about a frame’s encoding, rendering, and presentation deadlines. Before you start drawing, call the “cp_frame_predict_timing“ function to update and retrieve the frame’s timing information. After you access the frame’s “cp_drawable_t“ type, get the timing information using the “cp_drawable_get_frame_timing“ function.
 // C struct: cp_frame_timing
 // CpFrameTiming is an opaque type.
 type CpFrameTiming struct{}
@@ -61,4 +61,3 @@ type CpViewTextureMap struct{}
 
 // CpTimeT is an alias for cp_time (C typedef cp_time_t).
 type CpTimeT = CpTime
-

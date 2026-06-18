@@ -17,7 +17,9 @@ type MetricMediaResourceRequestEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricMediaResourceRequestEvent].
-func (x *MetricMediaResourceRequestEvent) Unwrap() *raw.AVMetricMediaResourceRequestEvent { return x.inner }
+func (x *MetricMediaResourceRequestEvent) Unwrap() *raw.AVMetricMediaResourceRequestEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -95,7 +97,9 @@ func (x *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundatio
 	return x.inner.NetworkTransactionMetrics()
 }
 
-func (x *MetricMediaResourceRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricMediaResourceRequestEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricMediaResourceRequestEventable is the interface implemented by [MetricMediaResourceRequestEvent], for mocking and DI.
 type MetricMediaResourceRequestEventable interface {
@@ -113,4 +117,3 @@ type MetricMediaResourceRequestEventable interface {
 }
 
 var _ MetricMediaResourceRequestEventable = (*MetricMediaResourceRequestEvent)(nil)
-

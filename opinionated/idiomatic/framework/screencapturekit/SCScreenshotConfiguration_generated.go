@@ -272,4 +272,3 @@ type ScreenshotConfigurationable interface {
 }
 
 var _ ScreenshotConfigurationable = (*ScreenshotConfiguration)(nil)
-

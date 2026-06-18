@@ -18,8 +18,8 @@ type MPSNNReduceColumnMin struct {
 }
 
 var (
-	_clsMPSNNReduceColumnMin = _objcClass("MPSNNReduceColumnMin")
-	_mPSNNReduceColumnMinSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceColumnMin                    = _objcClass("MPSNNReduceColumnMin")
+	_mPSNNReduceColumnMinSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceColumnMinSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -35,14 +35,17 @@ func MPSNNReduceColumnMinFromID(id objc.ID) *MPSNNReduceColumnMin {
 
 func (o *MPSNNReduceColumnMin) InitWithDevice(device metal.MTLDevice) *MPSNNReduceColumnMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMinSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMinFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceColumnMin object, or nil if failure.
 func (o *MPSNNReduceColumnMin) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceColumnMin {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMinSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMinFromID(_ret)
 }
-

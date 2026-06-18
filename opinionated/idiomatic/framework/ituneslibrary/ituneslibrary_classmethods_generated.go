@@ -32,4 +32,3 @@ func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options raw.I
 	}
 	return &Library{inner: _r}, nil
 }
-

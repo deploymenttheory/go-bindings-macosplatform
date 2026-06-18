@@ -8,4 +8,3 @@ type SWCollaborationActionHandler interface {
 	CollaborationCoordinatorHandleStartCollaborationAction(coordinator *SWCollaborationCoordinator, action *SWStartCollaborationAction)
 	CollaborationCoordinatorHandleUpdateCollaborationParticipantsAction(coordinator *SWCollaborationCoordinator, action *SWUpdateCollaborationParticipantsAction)
 }
-

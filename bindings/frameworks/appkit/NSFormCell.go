@@ -17,25 +17,25 @@ type NSFormCell struct {
 }
 
 var (
-	_clsNSFormCell = _objcClass("NSFormCell")
-	_nSFormCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSFormCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSFormCellSelTitleWidth = objc.RegisterName("titleWidth:")
-	_nSFormCellSelSetTitleWidth = objc.RegisterName("setTitleWidth:")
-	_nSFormCellSelTitleFont = objc.RegisterName("titleFont")
-	_nSFormCellSelSetTitleFont = objc.RegisterName("setTitleFont:")
-	_nSFormCellSelPlaceholderString = objc.RegisterName("placeholderString")
-	_nSFormCellSelSetPlaceholderString = objc.RegisterName("setPlaceholderString:")
-	_nSFormCellSelPlaceholderAttributedString = objc.RegisterName("placeholderAttributedString")
+	_clsNSFormCell                               = _objcClass("NSFormCell")
+	_nSFormCellSelInitTextCell                   = objc.RegisterName("initTextCell:")
+	_nSFormCellSelInitWithCoder                  = objc.RegisterName("initWithCoder:")
+	_nSFormCellSelTitleWidth                     = objc.RegisterName("titleWidth:")
+	_nSFormCellSelSetTitleWidth                  = objc.RegisterName("setTitleWidth:")
+	_nSFormCellSelTitleFont                      = objc.RegisterName("titleFont")
+	_nSFormCellSelSetTitleFont                   = objc.RegisterName("setTitleFont:")
+	_nSFormCellSelPlaceholderString              = objc.RegisterName("placeholderString")
+	_nSFormCellSelSetPlaceholderString           = objc.RegisterName("setPlaceholderString:")
+	_nSFormCellSelPlaceholderAttributedString    = objc.RegisterName("placeholderAttributedString")
 	_nSFormCellSelSetPlaceholderAttributedString = objc.RegisterName("setPlaceholderAttributedString:")
-	_nSFormCellSelTitleAlignment = objc.RegisterName("titleAlignment")
-	_nSFormCellSelSetTitleAlignment = objc.RegisterName("setTitleAlignment:")
-	_nSFormCellSelTitleBaseWritingDirection = objc.RegisterName("titleBaseWritingDirection")
-	_nSFormCellSelSetTitleBaseWritingDirection = objc.RegisterName("setTitleBaseWritingDirection:")
-	_nSFormCellSelPreferredTextFieldWidth = objc.RegisterName("preferredTextFieldWidth")
-	_nSFormCellSelSetPreferredTextFieldWidth = objc.RegisterName("setPreferredTextFieldWidth:")
-	_nSFormCellSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSFormCellSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
+	_nSFormCellSelTitleAlignment                 = objc.RegisterName("titleAlignment")
+	_nSFormCellSelSetTitleAlignment              = objc.RegisterName("setTitleAlignment:")
+	_nSFormCellSelTitleBaseWritingDirection      = objc.RegisterName("titleBaseWritingDirection")
+	_nSFormCellSelSetTitleBaseWritingDirection   = objc.RegisterName("setTitleBaseWritingDirection:")
+	_nSFormCellSelPreferredTextFieldWidth        = objc.RegisterName("preferredTextFieldWidth")
+	_nSFormCellSelSetPreferredTextFieldWidth     = objc.RegisterName("setPreferredTextFieldWidth:")
+	_nSFormCellSelAttributedTitle                = objc.RegisterName("attributedTitle")
+	_nSFormCellSelSetAttributedTitle             = objc.RegisterName("setAttributedTitle:")
 )
 
 func NSFormCellFromID(id objc.ID) *NSFormCell {
@@ -50,13 +50,17 @@ func NSFormCellFromID(id objc.ID) *NSFormCell {
 
 func (o *NSFormCell) InitTextCell(string_ *foundation.NSString) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFormCellFromID(_ret)
 }
 
 func (o *NSFormCell) InitWithCoder(coder *foundation.NSCoder) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFormCellFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *NSFormCell) SetTitleWidth(titleWidth float64) {
 
 func (o *NSFormCell) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelTitleFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *NSFormCell) SetTitleFont(titleFont *NSFont) {
 
 func (o *NSFormCell) PlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,7 +104,9 @@ func (o *NSFormCell) SetPlaceholderString(placeholderString *foundation.NSString
 
 func (o *NSFormCell) PlaceholderAttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelPlaceholderAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -134,7 +144,9 @@ func (o *NSFormCell) SetPreferredTextFieldWidth(preferredTextFieldWidth float64)
 // Deprecated: since macOS 10.8.
 func (o *NSFormCell) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormCellSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -142,4 +154,3 @@ func (o *NSFormCell) AttributedTitle() *foundation.NSAttributedString {
 func (o *NSFormCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
 	o.Ptr().Send(_nSFormCellSelSetAttributedTitle, attributedTitle.Ptr())
 }
-

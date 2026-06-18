@@ -16,16 +16,16 @@ type MTLRasterizationRateLayerDescriptor struct {
 }
 
 var (
-	_clsMTLRasterizationRateLayerDescriptor = _objcClass("MTLRasterizationRateLayerDescriptor")
-	_mTLRasterizationRateLayerDescriptorSelInitWithSampleCount = objc.RegisterName("initWithSampleCount:")
+	_clsMTLRasterizationRateLayerDescriptor                                      = _objcClass("MTLRasterizationRateLayerDescriptor")
+	_mTLRasterizationRateLayerDescriptorSelInitWithSampleCount                   = objc.RegisterName("initWithSampleCount:")
 	_mTLRasterizationRateLayerDescriptorSelInitWithSampleCountHorizontalVertical = objc.RegisterName("initWithSampleCount:horizontal:vertical:")
-	_mTLRasterizationRateLayerDescriptorSelSampleCount = objc.RegisterName("sampleCount")
-	_mTLRasterizationRateLayerDescriptorSelMaxSampleCount = objc.RegisterName("maxSampleCount")
-	_mTLRasterizationRateLayerDescriptorSelHorizontalSampleStorage = objc.RegisterName("horizontalSampleStorage")
-	_mTLRasterizationRateLayerDescriptorSelVerticalSampleStorage = objc.RegisterName("verticalSampleStorage")
-	_mTLRasterizationRateLayerDescriptorSelHorizontal = objc.RegisterName("horizontal")
-	_mTLRasterizationRateLayerDescriptorSelVertical = objc.RegisterName("vertical")
-	_mTLRasterizationRateLayerDescriptorSelSetSampleCount = objc.RegisterName("setSampleCount:")
+	_mTLRasterizationRateLayerDescriptorSelSampleCount                           = objc.RegisterName("sampleCount")
+	_mTLRasterizationRateLayerDescriptorSelMaxSampleCount                        = objc.RegisterName("maxSampleCount")
+	_mTLRasterizationRateLayerDescriptorSelHorizontalSampleStorage               = objc.RegisterName("horizontalSampleStorage")
+	_mTLRasterizationRateLayerDescriptorSelVerticalSampleStorage                 = objc.RegisterName("verticalSampleStorage")
+	_mTLRasterizationRateLayerDescriptorSelHorizontal                            = objc.RegisterName("horizontal")
+	_mTLRasterizationRateLayerDescriptorSelVertical                              = objc.RegisterName("vertical")
+	_mTLRasterizationRateLayerDescriptorSelSetSampleCount                        = objc.RegisterName("setSampleCount:")
 )
 
 func MTLRasterizationRateLayerDescriptorFromID(id objc.ID) *MTLRasterizationRateLayerDescriptor {
@@ -41,14 +41,18 @@ func MTLRasterizationRateLayerDescriptorFromID(id objc.ID) *MTLRasterizationRate
 // @method initWithSampleCount: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @discussion All values are initialized to zero.
 func (o *MTLRasterizationRateLayerDescriptor) InitWithSampleCount(sampleCount MTLSize) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelInitWithSampleCount, sampleCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
 // @method initWithSampleCount:horizontal:vertical: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @param horizontal The initial sample values on the horizontal axis. Must point to an array of sampleCount.width elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @param vertical The initial sample values on the vertical axis. Must point to an array of sampleCount.height elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @discussion Use initWithSampleCount: to initialize with zeroes instead.
 func (o *MTLRasterizationRateLayerDescriptor) InitWithSampleCountHorizontalVertical(sampleCount MTLSize, horizontal *float32, vertical *float32) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelInitWithSampleCountHorizontalVertical, sampleCount, horizontal, vertical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
@@ -79,18 +83,21 @@ func (o *MTLRasterizationRateLayerDescriptor) VerticalSampleStorage() *float32 {
 // @property horizontal @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the horizontal axis.
 func (o *MTLRasterizationRateLayerDescriptor) Horizontal() *MTLRasterizationRateSampleArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelHorizontal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateSampleArrayFromID(_ret)
 }
 
 // @property vertical @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the vertical axis.
 func (o *MTLRasterizationRateLayerDescriptor) Vertical() *MTLRasterizationRateSampleArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateLayerDescriptorSelVertical)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateSampleArrayFromID(_ret)
 }
 
 func (o *MTLRasterizationRateLayerDescriptor) SetSampleCount(sampleCount MTLSize) {
 	o.Ptr().Send(_mTLRasterizationRateLayerDescriptorSelSetSampleCount, sampleCount)
 }
-

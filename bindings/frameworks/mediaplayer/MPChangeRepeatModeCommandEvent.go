@@ -15,8 +15,8 @@ type MPChangeRepeatModeCommandEvent struct {
 }
 
 var (
-	_clsMPChangeRepeatModeCommandEvent = _objcClass("MPChangeRepeatModeCommandEvent")
-	_mPChangeRepeatModeCommandEventSelRepeatType = objc.RegisterName("repeatType")
+	_clsMPChangeRepeatModeCommandEvent                    = _objcClass("MPChangeRepeatModeCommandEvent")
+	_mPChangeRepeatModeCommandEventSelRepeatType          = objc.RegisterName("repeatType")
 	_mPChangeRepeatModeCommandEventSelPreservesRepeatMode = objc.RegisterName("preservesRepeatMode")
 )
 
@@ -41,4 +41,3 @@ func (o *MPChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPChangeRepeatModeCommandEventSelPreservesRepeatMode)
 	return _ret
 }
-

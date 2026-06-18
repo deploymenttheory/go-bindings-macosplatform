@@ -25,4 +25,3 @@ func HKScoredAssessmentTypeFromID(id objc.ID) *HKScoredAssessmentType {
 	purego.Track(o)
 	return o
 }
-

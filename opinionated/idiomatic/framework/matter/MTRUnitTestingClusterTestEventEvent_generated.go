@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestEventEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEventEvent].
-func (x *MTRUnitTestingClusterTestEventEvent) Unwrap() *raw.MTRUnitTestingClusterTestEventEvent { return x.inner }
+func (x *MTRUnitTestingClusterTestEventEvent) Unwrap() *raw.MTRUnitTestingClusterTestEventEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -124,7 +126,9 @@ func (x *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 *foundation.NSArray[o
 	x.inner.SetArg6(arg6)
 }
 
-func (x *MTRUnitTestingClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent { return x.inner }
+func (x *MTRUnitTestingClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestEventEventable is the interface implemented by [MTRUnitTestingClusterTestEventEvent], for mocking and DI.
 type MTRUnitTestingClusterTestEventEventable interface {
@@ -148,4 +152,3 @@ type MTRUnitTestingClusterTestEventEventable interface {
 }
 
 var _ MTRUnitTestingClusterTestEventEventable = (*MTRUnitTestingClusterTestEventEvent)(nil)
-

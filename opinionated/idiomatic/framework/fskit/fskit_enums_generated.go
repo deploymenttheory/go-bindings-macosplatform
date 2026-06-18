@@ -280,4 +280,3 @@ func (e FSVolumeCaseFormat) String() string {
 		return fmt.Sprintf("FSVolumeCaseFormat(%d)", int64(e))
 	}
 }
-

@@ -16,8 +16,8 @@ type RPPreviewViewController struct {
 }
 
 var (
-	_clsRPPreviewViewController = _objcClass("RPPreviewViewController")
-	_rPPreviewViewControllerSelPreviewControllerDelegate = objc.RegisterName("previewControllerDelegate")
+	_clsRPPreviewViewController                             = _objcClass("RPPreviewViewController")
+	_rPPreviewViewControllerSelPreviewControllerDelegate    = objc.RegisterName("previewControllerDelegate")
 	_rPPreviewViewControllerSelSetPreviewControllerDelegate = objc.RegisterName("setPreviewControllerDelegate:")
 )
 
@@ -39,4 +39,3 @@ func (o *RPPreviewViewController) PreviewControllerDelegate() RPPreviewViewContr
 func (o *RPPreviewViewController) SetPreviewControllerDelegate(previewControllerDelegate RPPreviewViewControllerDelegate) {
 	o.Ptr().Send(_rPPreviewViewControllerSelSetPreviewControllerDelegate, previewControllerDelegate)
 }
-

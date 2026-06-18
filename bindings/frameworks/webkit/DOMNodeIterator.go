@@ -15,15 +15,15 @@ type DOMNodeIterator struct {
 }
 
 var (
-	_clsDOMNodeIterator = _objcClass("DOMNodeIterator")
-	_dOMNodeIteratorSelNextNode = objc.RegisterName("nextNode")
-	_dOMNodeIteratorSelPreviousNode = objc.RegisterName("previousNode")
-	_dOMNodeIteratorSelDetach = objc.RegisterName("detach")
-	_dOMNodeIteratorSelRoot = objc.RegisterName("root")
-	_dOMNodeIteratorSelWhatToShow = objc.RegisterName("whatToShow")
-	_dOMNodeIteratorSelFilter = objc.RegisterName("filter")
-	_dOMNodeIteratorSelExpandEntityReferences = objc.RegisterName("expandEntityReferences")
-	_dOMNodeIteratorSelReferenceNode = objc.RegisterName("referenceNode")
+	_clsDOMNodeIterator                           = _objcClass("DOMNodeIterator")
+	_dOMNodeIteratorSelNextNode                   = objc.RegisterName("nextNode")
+	_dOMNodeIteratorSelPreviousNode               = objc.RegisterName("previousNode")
+	_dOMNodeIteratorSelDetach                     = objc.RegisterName("detach")
+	_dOMNodeIteratorSelRoot                       = objc.RegisterName("root")
+	_dOMNodeIteratorSelWhatToShow                 = objc.RegisterName("whatToShow")
+	_dOMNodeIteratorSelFilter                     = objc.RegisterName("filter")
+	_dOMNodeIteratorSelExpandEntityReferences     = objc.RegisterName("expandEntityReferences")
+	_dOMNodeIteratorSelReferenceNode              = objc.RegisterName("referenceNode")
 	_dOMNodeIteratorSelPointerBeforeReferenceNode = objc.RegisterName("pointerBeforeReferenceNode")
 )
 
@@ -39,13 +39,17 @@ func DOMNodeIteratorFromID(id objc.ID) *DOMNodeIterator {
 
 func (o *DOMNodeIterator) NextNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeIteratorSelNextNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNodeIterator) PreviousNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeIteratorSelPreviousNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -55,7 +59,9 @@ func (o *DOMNodeIterator) Detach() {
 
 func (o *DOMNodeIterator) Root() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeIteratorSelRoot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -76,7 +82,9 @@ func (o *DOMNodeIterator) ExpandEntityReferences() bool {
 
 func (o *DOMNodeIterator) ReferenceNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeIteratorSelReferenceNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -84,4 +92,3 @@ func (o *DOMNodeIterator) PointerBeforeReferenceNode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _dOMNodeIteratorSelPointerBeforeReferenceNode)
 	return _ret
 }
-

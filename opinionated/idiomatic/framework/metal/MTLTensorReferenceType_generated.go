@@ -71,4 +71,3 @@ type TensorReferenceTypeable interface {
 }
 
 var _ TensorReferenceTypeable = (*TensorReferenceType)(nil)
-

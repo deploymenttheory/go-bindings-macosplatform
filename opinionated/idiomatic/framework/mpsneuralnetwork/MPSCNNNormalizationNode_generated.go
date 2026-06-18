@@ -118,4 +118,3 @@ type CNNNormalizationNodeable interface {
 }
 
 var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
-

@@ -16,7 +16,7 @@ type MPSCNNFullyConnectedGradientNode struct {
 }
 
 var (
-	_clsMPSCNNFullyConnectedGradientNode = _objcClass("MPSCNNFullyConnectedGradientNode")
+	_clsMPSCNNFullyConnectedGradientNode                                                                 = _objcClass("MPSCNNFullyConnectedGradientNode")
 	_mPSCNNFullyConnectedGradientNodeSelNodeWithSourceGradientSourceImageConvolutionGradientStateWeights = objc.RegisterName("nodeWithSourceGradient:sourceImage:convolutionGradientState:weights:")
 	_mPSCNNFullyConnectedGradientNodeSelInitWithSourceGradientSourceImageConvolutionGradientStateWeights = objc.RegisterName("initWithSourceGradient:sourceImage:convolutionGradientState:weights:")
 )
@@ -34,14 +34,17 @@ func MPSCNNFullyConnectedGradientNodeFromID(id objc.ID) *MPSCNNFullyConnectedGra
 // @abstract   A node to represent the gradient calculation for fully connected training. @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often that is a neuron gradient filter node. @param sourceImage      The input image from the forward fully connected node @param gradientState    The gradient state from the forward fully connected @param weights          The data source from the forward fully connected. It may not contain an integrated neuron. Similary, any normalization should be broken out into a separate node. Pass nil to use the weights from the forward fully connected pass. @return  A MPSCNNFullyConnectedGradientNode
 func MPSCNNFullyConnectedGradientNodeNodeWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSCNNConvolutionGradientStateNode, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNFullyConnectedGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNFullyConnectedGradientNode), _mPSCNNFullyConnectedGradientNodeSelNodeWithSourceGradientSourceImageConvolutionGradientStateWeights, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedGradientNodeFromID(_ret)
 }
 
 // @abstract   A node to represent the gradient calculation for fully connectd training. @param sourceGradient   The input gradient from the 'downstream' gradient filter. Often that is a neuron gradient filter node. @param sourceImage      The input image from the forward fully connected node @param gradientState    The gradient state from the forward fully connected @param weights          The data source from the forward fully connected. It may not contain an integrated neuron. Similary, any normalization should be broken out into a separate node. Pass nil to use the weights from the forward convolution pass. @return  A MPSCNNFullyConnectedGradientNode
 func (o *MPSCNNFullyConnectedGradientNode) InitWithSourceGradientSourceImageConvolutionGradientStateWeights(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSCNNConvolutionGradientStateNode, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNFullyConnectedGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedGradientNodeSelInitWithSourceGradientSourceImageConvolutionGradientStateWeights, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedGradientNodeFromID(_ret)
 }
-

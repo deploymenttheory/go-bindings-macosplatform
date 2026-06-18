@@ -14,8 +14,8 @@ import (
 
 var (
 	_paravirtualizedgraphicsLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce                   sync.Once
+	_failedSymbols              = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,10 +48,18 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("PGCopyOptionROMURL", func() { purego.RegisterLibFunc(&_fnPGCopyOptionROMURL, _paravirtualizedgraphicsLib, "PGCopyOptionROMURL") })
-	_register("PGCreateDeviceWithDescriptor", func() { purego.RegisterLibFunc(&_fnPGCreateDeviceWithDescriptor, _paravirtualizedgraphicsLib, "PGCreateDeviceWithDescriptor") })
-	_register("PGMaxDisplayPortCount", func() { purego.RegisterLibFunc(&_fnPGMaxDisplayPortCount, _paravirtualizedgraphicsLib, "PGMaxDisplayPortCount") })
-	_register("PGNewDeviceWithDescriptor", func() { purego.RegisterLibFunc(&_fnPGNewDeviceWithDescriptor, _paravirtualizedgraphicsLib, "PGNewDeviceWithDescriptor") })
+	_register("PGCopyOptionROMURL", func() {
+		purego.RegisterLibFunc(&_fnPGCopyOptionROMURL, _paravirtualizedgraphicsLib, "PGCopyOptionROMURL")
+	})
+	_register("PGCreateDeviceWithDescriptor", func() {
+		purego.RegisterLibFunc(&_fnPGCreateDeviceWithDescriptor, _paravirtualizedgraphicsLib, "PGCreateDeviceWithDescriptor")
+	})
+	_register("PGMaxDisplayPortCount", func() {
+		purego.RegisterLibFunc(&_fnPGMaxDisplayPortCount, _paravirtualizedgraphicsLib, "PGMaxDisplayPortCount")
+	})
+	_register("PGNewDeviceWithDescriptor", func() {
+		purego.RegisterLibFunc(&_fnPGNewDeviceWithDescriptor, _paravirtualizedgraphicsLib, "PGNewDeviceWithDescriptor")
+	})
 }
 
 func init() {

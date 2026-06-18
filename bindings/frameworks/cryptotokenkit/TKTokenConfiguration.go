@@ -18,14 +18,14 @@ type TKTokenConfiguration struct {
 }
 
 var (
-	_clsTKTokenConfiguration = _objcClass("TKTokenConfiguration")
-	_tKTokenConfigurationSelKeyForObjectIDError = objc.RegisterName("keyForObjectID:error:")
+	_clsTKTokenConfiguration                            = _objcClass("TKTokenConfiguration")
+	_tKTokenConfigurationSelKeyForObjectIDError         = objc.RegisterName("keyForObjectID:error:")
 	_tKTokenConfigurationSelCertificateForObjectIDError = objc.RegisterName("certificateForObjectID:error:")
-	_tKTokenConfigurationSelInstanceID = objc.RegisterName("instanceID")
-	_tKTokenConfigurationSelConfigurationData = objc.RegisterName("configurationData")
-	_tKTokenConfigurationSelSetConfigurationData = objc.RegisterName("setConfigurationData:")
-	_tKTokenConfigurationSelKeychainItems = objc.RegisterName("keychainItems")
-	_tKTokenConfigurationSelSetKeychainItems = objc.RegisterName("setKeychainItems:")
+	_tKTokenConfigurationSelInstanceID                  = objc.RegisterName("instanceID")
+	_tKTokenConfigurationSelConfigurationData           = objc.RegisterName("configurationData")
+	_tKTokenConfigurationSelSetConfigurationData        = objc.RegisterName("setConfigurationData:")
+	_tKTokenConfigurationSelKeychainItems               = objc.RegisterName("keychainItems")
+	_tKTokenConfigurationSelSetKeychainItems            = objc.RegisterName("setKeychainItems:")
 )
 
 func TKTokenConfigurationFromID(id objc.ID) *TKTokenConfiguration {
@@ -42,7 +42,9 @@ func TKTokenConfigurationFromID(id objc.ID) *TKTokenConfiguration {
 func (o *TKTokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TKTokenKeychainKey, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelKeyForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *TKTokenConfiguration) KeyForObjectIDError(objectID objc.ID) (*TKTokenKe
 func (o *TKTokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*TKTokenKeychainCertificate, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelCertificateForObjectIDError, objectID, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -63,14 +67,18 @@ func (o *TKTokenConfiguration) CertificateForObjectIDError(objectID objc.ID) (*T
 // Unique, persistent identifier of this token, always created by specific token implementation. Typically implemented by some kind of serial number of the target hardware, for example SmartCard serial number.
 func (o *TKTokenConfiguration) InstanceID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelInstanceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Additional configuration available for token instance. Token implementation and its hosting application can use this data for specifying any additional configuration for the token. System does not interpret this data in any way. For example, network-based HSM can store here (using Codable or other serialization mechanisms) target network address, access credentials and the list of identities accessible in the HSM.
 func (o *TKTokenConfiguration) ConfigurationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelConfigurationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *TKTokenConfiguration) SetConfigurationData(configurationData *foundatio
 // All keychain items of this token.
 func (o *TKTokenConfiguration) KeychainItems() *foundation.NSArray[*TKTokenKeychainItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenConfigurationSelKeychainItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*TKTokenKeychainItem](_ret)
 }
 
 func (o *TKTokenConfiguration) SetKeychainItems(keychainItems *foundation.NSArray[*TKTokenKeychainItem]) {
 	o.Ptr().Send(_tKTokenConfigurationSelSetKeychainItems, keychainItems.Ptr())
 }
-

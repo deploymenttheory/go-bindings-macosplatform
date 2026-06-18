@@ -55,7 +55,9 @@ func (x *DOMCSSFontFaceRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DO
 
 func (x *DOMCSSFontFaceRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSFontFaceRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSFontFaceRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSFontFaceRuleable is the interface implemented by [DOMCSSFontFaceRule], for mocking and DI.
 type DOMCSSFontFaceRuleable interface {
@@ -65,4 +67,3 @@ type DOMCSSFontFaceRuleable interface {
 }
 
 var _ DOMCSSFontFaceRuleable = (*DOMCSSFontFaceRule)(nil)
-

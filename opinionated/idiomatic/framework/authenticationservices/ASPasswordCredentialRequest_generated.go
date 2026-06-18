@@ -42,4 +42,3 @@ type PasswordCredentialRequestable interface {
 }
 
 var _ PasswordCredentialRequestable = (*PasswordCredentialRequest)(nil)
-

@@ -65,4 +65,3 @@ type ActivitySummaryQueryable interface {
 }
 
 var _ ActivitySummaryQueryable = (*ActivitySummaryQuery)(nil)
-

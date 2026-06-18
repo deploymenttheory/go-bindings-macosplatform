@@ -18,11 +18,15 @@ type MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams].
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams { return x.inner }
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Unwrap() *raw.MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams (nil for 0).
 func MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
@@ -91,4 +95,3 @@ type MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable interfac
 }
 
 var _ MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable = (*MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams)(nil)
-

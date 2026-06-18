@@ -16,12 +16,12 @@ type CAEDRMetadata struct {
 }
 
 var (
-	_clsCAEDRMetadata = _objcClass("CAEDRMetadata")
-	_cAEDRMetadataSelHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale = objc.RegisterName("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:")
+	_clsCAEDRMetadata                                                            = _objcClass("CAEDRMetadata")
+	_cAEDRMetadataSelHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale   = objc.RegisterName("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:")
 	_cAEDRMetadataSelHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale = objc.RegisterName("HDR10MetadataWithMinLuminance:maxLuminance:opticalOutputScale:")
-	_cAEDRMetadataSelHLGMetadataWithAmbientViewingEnvironment = objc.RegisterName("HLGMetadataWithAmbientViewingEnvironment:")
-	_cAEDRMetadataSelHLGMetadata = objc.RegisterName("HLGMetadata")
-	_cAEDRMetadataSelIsAvailable = objc.RegisterName("isAvailable")
+	_cAEDRMetadataSelHLGMetadataWithAmbientViewingEnvironment                    = objc.RegisterName("HLGMetadataWithAmbientViewingEnvironment:")
+	_cAEDRMetadataSelHLGMetadata                                                 = objc.RegisterName("HLGMetadata")
+	_cAEDRMetadataSelIsAvailable                                                 = objc.RegisterName("isAvailable")
 )
 
 func CAEDRMetadataFromID(id objc.ID) *CAEDRMetadata {
@@ -36,25 +36,33 @@ func CAEDRMetadataFromID(id objc.ID) *CAEDRMetadata {
 
 func CAEDRMetadataHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData *foundation.NSData, contentData *foundation.NSData, scale float32) *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale, displayData.Ptr(), contentData.Ptr(), scale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEDRMetadataFromID(_ret)
 }
 
 func CAEDRMetadataHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale(minNits float32, maxNits float32, scale float32) *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale, minNits, maxNits, scale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEDRMetadataFromID(_ret)
 }
 
 func CAEDRMetadataHLGMetadataWithAmbientViewingEnvironment(data *foundation.NSData) *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHLGMetadataWithAmbientViewingEnvironment, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEDRMetadataFromID(_ret)
 }
 
 func CAEDRMetadataHLGMetadata() *CAEDRMetadata {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelHLGMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAEDRMetadataFromID(_ret)
 }
 
@@ -62,4 +70,3 @@ func CAEDRMetadataIsAvailable() bool {
 	_ret := objc.Send[bool](objc.ID(_clsCAEDRMetadata), _cAEDRMetadataSelIsAvailable)
 	return _ret
 }
-

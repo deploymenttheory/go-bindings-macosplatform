@@ -19,4 +19,3 @@ type BAManagedAssetPackDownloadDelegate interface {
 type BAManagedDownloaderExtension interface {
 	BADownloaderExtension
 }
-

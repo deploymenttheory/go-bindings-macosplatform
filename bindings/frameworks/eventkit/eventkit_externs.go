@@ -18,4 +18,3 @@ func EKEventStoreChangedNotification() uintptr {
 	ptr, _ := purego.Dlsym(_eventkitLib, "EKEventStoreChangedNotification")
 	return ptr
 }
-

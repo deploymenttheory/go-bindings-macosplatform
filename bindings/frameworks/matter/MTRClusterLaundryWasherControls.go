@@ -16,21 +16,21 @@ type MTRClusterLaundryWasherControls struct {
 }
 
 var (
-	_clsMTRClusterLaundryWasherControls = _objcClass("MTRClusterLaundryWasherControls")
-	_mTRClusterLaundryWasherControlsSelReadAttributeSpinSpeedsWithParams = objc.RegisterName("readAttributeSpinSpeedsWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeSpinSpeedCurrentWithParams = objc.RegisterName("readAttributeSpinSpeedCurrentWithParams:")
-	_mTRClusterLaundryWasherControlsSelWriteAttributeSpinSpeedCurrentWithValueExpectedValueInterval = objc.RegisterName("writeAttributeSpinSpeedCurrentWithValue:expectedValueInterval:")
+	_clsMTRClusterLaundryWasherControls                                                                   = _objcClass("MTRClusterLaundryWasherControls")
+	_mTRClusterLaundryWasherControlsSelReadAttributeSpinSpeedsWithParams                                  = objc.RegisterName("readAttributeSpinSpeedsWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeSpinSpeedCurrentWithParams                            = objc.RegisterName("readAttributeSpinSpeedCurrentWithParams:")
+	_mTRClusterLaundryWasherControlsSelWriteAttributeSpinSpeedCurrentWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeSpinSpeedCurrentWithValue:expectedValueInterval:")
 	_mTRClusterLaundryWasherControlsSelWriteAttributeSpinSpeedCurrentWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeSpinSpeedCurrentWithValue:expectedValueInterval:params:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeNumberOfRinsesWithParams = objc.RegisterName("readAttributeNumberOfRinsesWithParams:")
-	_mTRClusterLaundryWasherControlsSelWriteAttributeNumberOfRinsesWithValueExpectedValueInterval = objc.RegisterName("writeAttributeNumberOfRinsesWithValue:expectedValueInterval:")
-	_mTRClusterLaundryWasherControlsSelWriteAttributeNumberOfRinsesWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeNumberOfRinsesWithValue:expectedValueInterval:params:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeSupportedRinsesWithParams = objc.RegisterName("readAttributeSupportedRinsesWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterLaundryWasherControlsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterLaundryWasherControlsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeNumberOfRinsesWithParams                              = objc.RegisterName("readAttributeNumberOfRinsesWithParams:")
+	_mTRClusterLaundryWasherControlsSelWriteAttributeNumberOfRinsesWithValueExpectedValueInterval         = objc.RegisterName("writeAttributeNumberOfRinsesWithValue:expectedValueInterval:")
+	_mTRClusterLaundryWasherControlsSelWriteAttributeNumberOfRinsesWithValueExpectedValueIntervalParams   = objc.RegisterName("writeAttributeNumberOfRinsesWithValue:expectedValueInterval:params:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeSupportedRinsesWithParams                             = objc.RegisterName("readAttributeSupportedRinsesWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeGeneratedCommandListWithParams                        = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeAcceptedCommandListWithParams                         = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeAttributeListWithParams                               = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeFeatureMapWithParams                                  = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterLaundryWasherControlsSelReadAttributeClusterRevisionWithParams                             = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterLaundryWasherControlsSelInitWithDeviceEndpointIDQueue                                      = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterLaundryWasherControlsFromID(id objc.ID) *MTRClusterLaundryWasherControls {
@@ -107,7 +107,8 @@ func (o *MTRClusterLaundryWasherControls) ReadAttributeClusterRevisionWithParams
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterLaundryWasherControls) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLaundryWasherControls {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterLaundryWasherControlsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterLaundryWasherControlsFromID(_ret)
 }
-

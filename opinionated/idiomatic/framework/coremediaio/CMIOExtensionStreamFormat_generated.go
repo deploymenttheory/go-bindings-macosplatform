@@ -69,4 +69,3 @@ type ExtensionStreamFormatable interface {
 }
 
 var _ ExtensionStreamFormatable = (*ExtensionStreamFormat)(nil)
-

@@ -14,8 +14,8 @@ import (
 
 var (
 	_screensaverLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce       sync.Once
+	_failedSymbols  = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -51,7 +51,9 @@ func _loadLibrary() {
 	_register("SSCenteredRectInRect", func() { purego.RegisterLibFunc(&_fnSSCenteredRectInRect, _screensaverLib, "SSCenteredRectInRect") })
 	_register("SSRandomFloatBetween", func() { purego.RegisterLibFunc(&_fnSSRandomFloatBetween, _screensaverLib, "SSRandomFloatBetween") })
 	_register("SSRandomIntBetween", func() { purego.RegisterLibFunc(&_fnSSRandomIntBetween, _screensaverLib, "SSRandomIntBetween") })
-	_register("SSRandomPointForSizeWithinRect", func() { purego.RegisterLibFunc(&_fnSSRandomPointForSizeWithinRect, _screensaverLib, "SSRandomPointForSizeWithinRect") })
+	_register("SSRandomPointForSizeWithinRect", func() {
+		purego.RegisterLibFunc(&_fnSSRandomPointForSizeWithinRect, _screensaverLib, "SSRandomPointForSizeWithinRect")
+	})
 }
 
 func init() {

@@ -55,4 +55,3 @@ type MTRProductIdentityable interface {
 }
 
 var _ MTRProductIdentityable = (*MTRProductIdentity)(nil)
-

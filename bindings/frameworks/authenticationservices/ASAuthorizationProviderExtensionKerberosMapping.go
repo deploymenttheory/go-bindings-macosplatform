@@ -16,21 +16,21 @@ type ASAuthorizationProviderExtensionKerberosMapping struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionKerberosMapping = _objcClass("ASAuthorizationProviderExtensionKerberosMapping")
-	_aSAuthorizationProviderExtensionKerberosMappingSelTicketKeyPath = objc.RegisterName("ticketKeyPath")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetTicketKeyPath = objc.RegisterName("setTicketKeyPath:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelMessageBufferKeyName = objc.RegisterName("messageBufferKeyName")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetMessageBufferKeyName = objc.RegisterName("setMessageBufferKeyName:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelRealmKeyName = objc.RegisterName("realmKeyName")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetRealmKeyName = objc.RegisterName("setRealmKeyName:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelServiceNameKeyName = objc.RegisterName("serviceNameKeyName")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetServiceNameKeyName = objc.RegisterName("setServiceNameKeyName:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelClientNameKeyName = objc.RegisterName("clientNameKeyName")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetClientNameKeyName = objc.RegisterName("setClientNameKeyName:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelEncryptionKeyTypeKeyName = objc.RegisterName("encryptionKeyTypeKeyName")
+	_clsASAuthorizationProviderExtensionKerberosMapping                            = _objcClass("ASAuthorizationProviderExtensionKerberosMapping")
+	_aSAuthorizationProviderExtensionKerberosMappingSelTicketKeyPath               = objc.RegisterName("ticketKeyPath")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetTicketKeyPath            = objc.RegisterName("setTicketKeyPath:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelMessageBufferKeyName        = objc.RegisterName("messageBufferKeyName")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetMessageBufferKeyName     = objc.RegisterName("setMessageBufferKeyName:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelRealmKeyName                = objc.RegisterName("realmKeyName")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetRealmKeyName             = objc.RegisterName("setRealmKeyName:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelServiceNameKeyName          = objc.RegisterName("serviceNameKeyName")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetServiceNameKeyName       = objc.RegisterName("setServiceNameKeyName:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelClientNameKeyName           = objc.RegisterName("clientNameKeyName")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetClientNameKeyName        = objc.RegisterName("setClientNameKeyName:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelEncryptionKeyTypeKeyName    = objc.RegisterName("encryptionKeyTypeKeyName")
 	_aSAuthorizationProviderExtensionKerberosMappingSelSetEncryptionKeyTypeKeyName = objc.RegisterName("setEncryptionKeyTypeKeyName:")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSessionKeyKeyName = objc.RegisterName("sessionKeyKeyName")
-	_aSAuthorizationProviderExtensionKerberosMappingSelSetSessionKeyKeyName = objc.RegisterName("setSessionKeyKeyName:")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSessionKeyKeyName           = objc.RegisterName("sessionKeyKeyName")
+	_aSAuthorizationProviderExtensionKerberosMappingSelSetSessionKeyKeyName        = objc.RegisterName("setSessionKeyKeyName:")
 )
 
 func ASAuthorizationProviderExtensionKerberosMappingFromID(id objc.ID) *ASAuthorizationProviderExtensionKerberosMapping {
@@ -46,7 +46,9 @@ func ASAuthorizationProviderExtensionKerberosMappingFromID(id objc.ID) *ASAuthor
 // @abstract The keypath in the response JSON that uses this set of mappings. @discussion If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) TicketKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelTicketKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetTicketKeyPath(ticke
 // @abstract The key name that contains the base64 encoded kerberos AS-REP string.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelMessageBufferKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,7 +72,9 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetMessageBufferKeyNam
 // @abstract The key name that contains the Kerberos Realm string.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) RealmKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelRealmKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetRealmKeyName(realmK
 // @abstract The key name that contains the Kerberos service name string.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelServiceNameKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +98,9 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetServiceNameKeyName(
 // @abstract The key name that contains the Kerberos client name string.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelClientNameKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -101,7 +111,9 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetClientNameKeyName(c
 // @abstract The key name that contains the Kerberos session key type number. @discussion The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelEncryptionKeyTypeKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -112,11 +124,12 @@ func (o *ASAuthorizationProviderExtensionKerberosMapping) SetEncryptionKeyTypeKe
 // @abstract The key name that contains the Kerberos session key.
 func (o *ASAuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionKerberosMappingSelSessionKeyKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ASAuthorizationProviderExtensionKerberosMapping) SetSessionKeyKeyName(sessionKeyKeyName *foundation.NSString) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionKerberosMappingSelSetSessionKeyKeyName, sessionKeyKeyName.Ptr())
 }
-

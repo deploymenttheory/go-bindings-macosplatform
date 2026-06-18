@@ -59,4 +59,3 @@ type LocalIdentifierMappingable interface {
 }
 
 var _ LocalIdentifierMappingable = (*LocalIdentifierMapping)(nil)
-

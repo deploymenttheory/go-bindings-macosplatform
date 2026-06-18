@@ -1400,4 +1400,3 @@ func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors u
 func VectorBytesForLengthDataType(length uint, dataType mpscore.MPSDataType) uint {
 	return raw.MPSVectorDescriptorVectorBytesForLengthDataType(length, dataType)
 }
-

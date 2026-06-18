@@ -57,9 +57,13 @@ func (x *CNNNeuronSoftPlusNode) WithLabel(label string) *CNNNeuronSoftPlusNode {
 	return x
 }
 
-func (x *CNNNeuronSoftPlusNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
+func (x *CNNNeuronSoftPlusNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
+	return &x.inner.MPSCNNNeuronNode
+}
 
-func (x *CNNNeuronSoftPlusNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronSoftPlusNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronSoftPlusNodeable is the interface implemented by [CNNNeuronSoftPlusNode], for mocking and DI.
 type CNNNeuronSoftPlusNodeable interface {
@@ -69,4 +73,3 @@ type CNNNeuronSoftPlusNodeable interface {
 }
 
 var _ CNNNeuronSoftPlusNodeable = (*CNNNeuronSoftPlusNode)(nil)
-

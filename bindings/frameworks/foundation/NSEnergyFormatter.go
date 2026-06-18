@@ -15,17 +15,17 @@ type NSEnergyFormatter struct {
 }
 
 var (
-	_clsNSEnergyFormatter = _objcClass("NSEnergyFormatter")
-	_nSEnergyFormatterSelStringFromValueUnit = objc.RegisterName("stringFromValue:unit:")
-	_nSEnergyFormatterSelStringFromJoules = objc.RegisterName("stringFromJoules:")
-	_nSEnergyFormatterSelUnitStringFromValueUnit = objc.RegisterName("unitStringFromValue:unit:")
+	_clsNSEnergyFormatter                             = _objcClass("NSEnergyFormatter")
+	_nSEnergyFormatterSelStringFromValueUnit          = objc.RegisterName("stringFromValue:unit:")
+	_nSEnergyFormatterSelStringFromJoules             = objc.RegisterName("stringFromJoules:")
+	_nSEnergyFormatterSelUnitStringFromValueUnit      = objc.RegisterName("unitStringFromValue:unit:")
 	_nSEnergyFormatterSelUnitStringFromJoulesUsedUnit = objc.RegisterName("unitStringFromJoules:usedUnit:")
-	_nSEnergyFormatterSelNumberFormatter = objc.RegisterName("numberFormatter")
-	_nSEnergyFormatterSelSetNumberFormatter = objc.RegisterName("setNumberFormatter:")
-	_nSEnergyFormatterSelUnitStyle = objc.RegisterName("unitStyle")
-	_nSEnergyFormatterSelSetUnitStyle = objc.RegisterName("setUnitStyle:")
-	_nSEnergyFormatterSelIsForFoodEnergyUse = objc.RegisterName("isForFoodEnergyUse")
-	_nSEnergyFormatterSelSetForFoodEnergyUse = objc.RegisterName("setForFoodEnergyUse:")
+	_nSEnergyFormatterSelNumberFormatter              = objc.RegisterName("numberFormatter")
+	_nSEnergyFormatterSelSetNumberFormatter           = objc.RegisterName("setNumberFormatter:")
+	_nSEnergyFormatterSelUnitStyle                    = objc.RegisterName("unitStyle")
+	_nSEnergyFormatterSelSetUnitStyle                 = objc.RegisterName("setUnitStyle:")
+	_nSEnergyFormatterSelIsForFoodEnergyUse           = objc.RegisterName("isForFoodEnergyUse")
+	_nSEnergyFormatterSelSetForFoodEnergyUse          = objc.RegisterName("setForFoodEnergyUse:")
 )
 
 func NSEnergyFormatterFromID(id objc.ID) *NSEnergyFormatter {
@@ -40,31 +40,41 @@ func NSEnergyFormatterFromID(id objc.ID) *NSEnergyFormatter {
 
 func (o *NSEnergyFormatter) StringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSEnergyFormatter) StringFromJoules(numberInJoules float64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelStringFromJoules, numberInJoules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSEnergyFormatter) UnitStringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelUnitStringFromValueUnit, value, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSEnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64, unitp *NSEnergyFormatterUnit) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelUnitStringFromJoulesUsedUnit, numberInJoules, unitp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSEnergyFormatter) NumberFormatter() *NSNumberFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEnergyFormatterSelNumberFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFormatterFromID(_ret)
 }
 
@@ -89,4 +99,3 @@ func (o *NSEnergyFormatter) IsForFoodEnergyUse() bool {
 func (o *NSEnergyFormatter) SetForFoodEnergyUse(forFoodEnergyUse bool) {
 	o.Ptr().Send(_nSEnergyFormatterSelSetForFoodEnergyUse, forFoodEnergyUse)
 }
-

@@ -71,9 +71,13 @@ func (x *ImageTent) WithLabel(label string) *ImageTent {
 
 func (x *ImageTent) asImageBox() *mpsimage.MPSImageBox { return &x.inner.MPSImageBox }
 
-func (x *ImageTent) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel }
+func (x *ImageTent) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageBox.MPSUnaryImageKernel
+}
 
-func (x *ImageTent) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageTent) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
 type ImageTentable interface {
@@ -86,4 +90,3 @@ type ImageTentable interface {
 }
 
 var _ ImageTentable = (*ImageTent)(nil)
-

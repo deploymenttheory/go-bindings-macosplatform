@@ -15,10 +15,10 @@ type CKSyncEngineAccountChangeEvent struct {
 }
 
 var (
-	_clsCKSyncEngineAccountChangeEvent = _objcClass("CKSyncEngineAccountChangeEvent")
-	_cKSyncEngineAccountChangeEventSelChangeType = objc.RegisterName("changeType")
+	_clsCKSyncEngineAccountChangeEvent             = _objcClass("CKSyncEngineAccountChangeEvent")
+	_cKSyncEngineAccountChangeEventSelChangeType   = objc.RegisterName("changeType")
 	_cKSyncEngineAccountChangeEventSelPreviousUser = objc.RegisterName("previousUser")
-	_cKSyncEngineAccountChangeEventSelCurrentUser = objc.RegisterName("currentUser")
+	_cKSyncEngineAccountChangeEventSelCurrentUser  = objc.RegisterName("currentUser")
 )
 
 func CKSyncEngineAccountChangeEventFromID(id objc.ID) *CKSyncEngineAccountChangeEvent {
@@ -40,14 +40,17 @@ func (o *CKSyncEngineAccountChangeEvent) ChangeType() CKSyncEngineAccountChangeT
 // The previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
 func (o *CKSyncEngineAccountChangeEvent) PreviousUser() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineAccountChangeEventSelPreviousUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
 // The current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
 func (o *CKSyncEngineAccountChangeEvent) CurrentUser() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineAccountChangeEventSelCurrentUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
-

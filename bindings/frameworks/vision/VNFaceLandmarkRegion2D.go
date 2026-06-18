@@ -19,11 +19,11 @@ type VNFaceLandmarkRegion2D struct {
 }
 
 var (
-	_clsVNFaceLandmarkRegion2D = _objcClass("VNFaceLandmarkRegion2D")
-	_vNFaceLandmarkRegion2DSelPointsInImageOfSize = objc.RegisterName("pointsInImageOfSize:")
-	_vNFaceLandmarkRegion2DSelNormalizedPoints = objc.RegisterName("normalizedPoints")
+	_clsVNFaceLandmarkRegion2D                           = _objcClass("VNFaceLandmarkRegion2D")
+	_vNFaceLandmarkRegion2DSelPointsInImageOfSize        = objc.RegisterName("pointsInImageOfSize:")
+	_vNFaceLandmarkRegion2DSelNormalizedPoints           = objc.RegisterName("normalizedPoints")
 	_vNFaceLandmarkRegion2DSelPrecisionEstimatesPerPoint = objc.RegisterName("precisionEstimatesPerPoint")
-	_vNFaceLandmarkRegion2DSelPointsClassification = objc.RegisterName("pointsClassification")
+	_vNFaceLandmarkRegion2DSelPointsClassification       = objc.RegisterName("pointsClassification")
 )
 
 func VNFaceLandmarkRegion2DFromID(id objc.ID) *VNFaceLandmarkRegion2D {
@@ -59,4 +59,3 @@ func (o *VNFaceLandmarkRegion2D) PointsClassification() VNPointsClassification {
 	_ret := objc.Send[VNPointsClassification](o.Ptr(), _vNFaceLandmarkRegion2DSelPointsClassification)
 	return _ret
 }
-

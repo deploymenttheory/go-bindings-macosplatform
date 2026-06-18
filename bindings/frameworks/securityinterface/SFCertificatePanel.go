@@ -19,21 +19,21 @@ type SFCertificatePanel struct {
 }
 
 var (
-	_clsSFCertificatePanel = _objcClass("SFCertificatePanel")
-	_sFCertificatePanelSelSharedCertificatePanel = objc.RegisterName("sharedCertificatePanel")
-	_sFCertificatePanelSelRunModalForTrustShowGroup = objc.RegisterName("runModalForTrust:showGroup:")
-	_sFCertificatePanelSelRunModalForCertificatesShowGroup = objc.RegisterName("runModalForCertificates:showGroup:")
-	_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup:")
+	_clsSFCertificatePanel                                                                               = _objcClass("SFCertificatePanel")
+	_sFCertificatePanelSelSharedCertificatePanel                                                         = objc.RegisterName("sharedCertificatePanel")
+	_sFCertificatePanelSelRunModalForTrustShowGroup                                                      = objc.RegisterName("runModalForTrust:showGroup:")
+	_sFCertificatePanelSelRunModalForCertificatesShowGroup                                               = objc.RegisterName("runModalForCertificates:showGroup:")
+	_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustShowGroup        = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:showGroup:")
 	_sFCertificatePanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoCertificatesShowGroup = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:certificates:showGroup:")
-	_sFCertificatePanelSelSetPolicies = objc.RegisterName("setPolicies:")
-	_sFCertificatePanelSelPolicies = objc.RegisterName("policies")
-	_sFCertificatePanelSelSetDefaultButtonTitle = objc.RegisterName("setDefaultButtonTitle:")
-	_sFCertificatePanelSelSetAlternateButtonTitle = objc.RegisterName("setAlternateButtonTitle:")
-	_sFCertificatePanelSelSetShowsHelp = objc.RegisterName("setShowsHelp:")
-	_sFCertificatePanelSelShowsHelp = objc.RegisterName("showsHelp")
-	_sFCertificatePanelSelSetHelpAnchor = objc.RegisterName("setHelpAnchor:")
-	_sFCertificatePanelSelHelpAnchor = objc.RegisterName("helpAnchor")
-	_sFCertificatePanelSelCertificateView = objc.RegisterName("certificateView")
+	_sFCertificatePanelSelSetPolicies                                                                    = objc.RegisterName("setPolicies:")
+	_sFCertificatePanelSelPolicies                                                                       = objc.RegisterName("policies")
+	_sFCertificatePanelSelSetDefaultButtonTitle                                                          = objc.RegisterName("setDefaultButtonTitle:")
+	_sFCertificatePanelSelSetAlternateButtonTitle                                                        = objc.RegisterName("setAlternateButtonTitle:")
+	_sFCertificatePanelSelSetShowsHelp                                                                   = objc.RegisterName("setShowsHelp:")
+	_sFCertificatePanelSelShowsHelp                                                                      = objc.RegisterName("showsHelp")
+	_sFCertificatePanelSelSetHelpAnchor                                                                  = objc.RegisterName("setHelpAnchor:")
+	_sFCertificatePanelSelHelpAnchor                                                                     = objc.RegisterName("helpAnchor")
+	_sFCertificatePanelSelCertificateView                                                                = objc.RegisterName("certificateView")
 )
 
 func SFCertificatePanelFromID(id objc.ID) *SFCertificatePanel {
@@ -49,7 +49,9 @@ func SFCertificatePanelFromID(id objc.ID) *SFCertificatePanel {
 // @method sharedCertificatePanel @abstract Returns a shared instance of SFCertificatePanel. @discussion If your application can display multiple SFCertificatePanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 func SFCertificatePanelSharedCertificatePanel() *SFCertificatePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificatePanel), _sFCertificatePanelSelSharedCertificatePanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFCertificatePanelFromID(_ret)
 }
 
@@ -111,13 +113,16 @@ func (o *SFCertificatePanel) SetHelpAnchor(anchor *foundation.NSString) {
 
 func (o *SFCertificatePanel) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelHelpAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SFCertificatePanel) CertificateView() *SFCertificateView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificatePanelSelCertificateView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFCertificateViewFromID(_ret)
 }
-

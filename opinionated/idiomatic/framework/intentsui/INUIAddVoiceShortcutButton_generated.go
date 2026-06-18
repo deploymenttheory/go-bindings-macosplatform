@@ -119,4 +119,3 @@ type AddVoiceShortcutButtonable interface {
 }
 
 var _ AddVoiceShortcutButtonable = (*AddVoiceShortcutButton)(nil)
-

@@ -18,13 +18,13 @@ type MDLLight struct {
 }
 
 var (
-	_clsMDLLight = _objcClass("MDLLight")
-	_mDLLightSelIrradianceAtPoint = objc.RegisterName("irradianceAtPoint:")
+	_clsMDLLight                            = _objcClass("MDLLight")
+	_mDLLightSelIrradianceAtPoint           = objc.RegisterName("irradianceAtPoint:")
 	_mDLLightSelIrradianceAtPointColorSpace = objc.RegisterName("irradianceAtPoint:colorSpace:")
-	_mDLLightSelLightType = objc.RegisterName("lightType")
-	_mDLLightSelSetLightType = objc.RegisterName("setLightType:")
-	_mDLLightSelColorSpace = objc.RegisterName("colorSpace")
-	_mDLLightSelSetColorSpace = objc.RegisterName("setColorSpace:")
+	_mDLLightSelLightType                   = objc.RegisterName("lightType")
+	_mDLLightSelSetLightType                = objc.RegisterName("setLightType:")
+	_mDLLightSelColorSpace                  = objc.RegisterName("colorSpace")
+	_mDLLightSelSetColorSpace               = objc.RegisterName("setColorSpace:")
 )
 
 func MDLLightFromID(id objc.ID) *MDLLight {
@@ -59,11 +59,12 @@ func (o *MDLLight) SetLightType(lightType MDLLightType) {
 
 func (o *MDLLight) ColorSpace() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLLightSelColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLLight) SetColorSpace(colorSpace *foundation.NSString) {
 	o.Ptr().Send(_mDLLightSelSetColorSpace, colorSpace.Ptr())
 }
-

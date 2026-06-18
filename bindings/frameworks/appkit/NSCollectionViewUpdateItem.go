@@ -16,10 +16,10 @@ type NSCollectionViewUpdateItem struct {
 }
 
 var (
-	_clsNSCollectionViewUpdateItem = _objcClass("NSCollectionViewUpdateItem")
+	_clsNSCollectionViewUpdateItem                      = _objcClass("NSCollectionViewUpdateItem")
 	_nSCollectionViewUpdateItemSelIndexPathBeforeUpdate = objc.RegisterName("indexPathBeforeUpdate")
-	_nSCollectionViewUpdateItemSelIndexPathAfterUpdate = objc.RegisterName("indexPathAfterUpdate")
-	_nSCollectionViewUpdateItemSelUpdateAction = objc.RegisterName("updateAction")
+	_nSCollectionViewUpdateItemSelIndexPathAfterUpdate  = objc.RegisterName("indexPathAfterUpdate")
+	_nSCollectionViewUpdateItemSelUpdateAction          = objc.RegisterName("updateAction")
 )
 
 func NSCollectionViewUpdateItemFromID(id objc.ID) *NSCollectionViewUpdateItem {
@@ -34,13 +34,17 @@ func NSCollectionViewUpdateItemFromID(id objc.ID) *NSCollectionViewUpdateItem {
 
 func (o *NSCollectionViewUpdateItem) IndexPathBeforeUpdate() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathBeforeUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
 func (o *NSCollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewUpdateItemSelIndexPathAfterUpdate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -48,4 +52,3 @@ func (o *NSCollectionViewUpdateItem) UpdateAction() NSCollectionUpdateAction {
 	_ret := objc.Send[NSCollectionUpdateAction](o.Ptr(), _nSCollectionViewUpdateItemSelUpdateAction)
 	return _ret
 }
-

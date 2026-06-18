@@ -17,7 +17,9 @@ type CoordinatedPlaybackParticipant struct {
 }
 
 // Unwrap returns the underlying [raw.AVCoordinatedPlaybackParticipant].
-func (x *CoordinatedPlaybackParticipant) Unwrap() *raw.AVCoordinatedPlaybackParticipant { return x.inner }
+func (x *CoordinatedPlaybackParticipant) Unwrap() *raw.AVCoordinatedPlaybackParticipant {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -67,4 +69,3 @@ type CoordinatedPlaybackParticipantable interface {
 }
 
 var _ CoordinatedPlaybackParticipantable = (*CoordinatedPlaybackParticipant)(nil)
-

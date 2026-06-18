@@ -70,4 +70,3 @@ type PersistedRightable interface {
 }
 
 var _ PersistedRightable = (*PersistedRight)(nil)
-

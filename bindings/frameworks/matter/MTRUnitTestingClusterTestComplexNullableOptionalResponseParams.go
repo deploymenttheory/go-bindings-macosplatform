@@ -18,66 +18,66 @@ type MTRUnitTestingClusterTestComplexNullableOptionalResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestComplexNullableOptionalResponseParams = _objcClass("MTRUnitTestingClusterTestComplexNullableOptionalResponseParams")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntWasNull = objc.RegisterName("nullableIntWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableIntWasNull = objc.RegisterName("setNullableIntWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntValue = objc.RegisterName("nullableIntValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableIntValue = objc.RegisterName("setNullableIntValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntWasPresent = objc.RegisterName("optionalIntWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalIntWasPresent = objc.RegisterName("setOptionalIntWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntValue = objc.RegisterName("optionalIntValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalIntValue = objc.RegisterName("setOptionalIntValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasPresent = objc.RegisterName("nullableOptionalIntWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntWasPresent = objc.RegisterName("setNullableOptionalIntWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasNull = objc.RegisterName("nullableOptionalIntWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntWasNull = objc.RegisterName("setNullableOptionalIntWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntValue = objc.RegisterName("nullableOptionalIntValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntValue = objc.RegisterName("setNullableOptionalIntValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringWasNull = objc.RegisterName("nullableStringWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStringWasNull = objc.RegisterName("setNullableStringWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringValue = objc.RegisterName("nullableStringValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStringValue = objc.RegisterName("setNullableStringValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringWasPresent = objc.RegisterName("optionalStringWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStringWasPresent = objc.RegisterName("setOptionalStringWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringValue = objc.RegisterName("optionalStringValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStringValue = objc.RegisterName("setOptionalStringValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasPresent = objc.RegisterName("nullableOptionalStringWasPresent")
+	_clsMTRUnitTestingClusterTestComplexNullableOptionalResponseParams                                    = _objcClass("MTRUnitTestingClusterTestComplexNullableOptionalResponseParams")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelInitWithResponseValueError          = objc.RegisterName("initWithResponseValue:error:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntWasNull                  = objc.RegisterName("nullableIntWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableIntWasNull               = objc.RegisterName("setNullableIntWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntValue                    = objc.RegisterName("nullableIntValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableIntValue                 = objc.RegisterName("setNullableIntValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntWasPresent               = objc.RegisterName("optionalIntWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalIntWasPresent            = objc.RegisterName("setOptionalIntWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntValue                    = objc.RegisterName("optionalIntValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalIntValue                 = objc.RegisterName("setOptionalIntValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasPresent       = objc.RegisterName("nullableOptionalIntWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntWasPresent    = objc.RegisterName("setNullableOptionalIntWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasNull          = objc.RegisterName("nullableOptionalIntWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntWasNull       = objc.RegisterName("setNullableOptionalIntWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntValue            = objc.RegisterName("nullableOptionalIntValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalIntValue         = objc.RegisterName("setNullableOptionalIntValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringWasNull               = objc.RegisterName("nullableStringWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStringWasNull            = objc.RegisterName("setNullableStringWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringValue                 = objc.RegisterName("nullableStringValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStringValue              = objc.RegisterName("setNullableStringValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringWasPresent            = objc.RegisterName("optionalStringWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStringWasPresent         = objc.RegisterName("setOptionalStringWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringValue                 = objc.RegisterName("optionalStringValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStringValue              = objc.RegisterName("setOptionalStringValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasPresent    = objc.RegisterName("nullableOptionalStringWasPresent")
 	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStringWasPresent = objc.RegisterName("setNullableOptionalStringWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasNull = objc.RegisterName("nullableOptionalStringWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStringWasNull = objc.RegisterName("setNullableOptionalStringWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringValue = objc.RegisterName("nullableOptionalStringValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStringValue = objc.RegisterName("setNullableOptionalStringValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructWasNull = objc.RegisterName("nullableStructWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStructWasNull = objc.RegisterName("setNullableStructWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructValue = objc.RegisterName("nullableStructValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStructValue = objc.RegisterName("setNullableStructValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructWasPresent = objc.RegisterName("optionalStructWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStructWasPresent = objc.RegisterName("setOptionalStructWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructValue = objc.RegisterName("optionalStructValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStructValue = objc.RegisterName("setOptionalStructValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasPresent = objc.RegisterName("nullableOptionalStructWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasNull       = objc.RegisterName("nullableOptionalStringWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStringWasNull    = objc.RegisterName("setNullableOptionalStringWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringValue         = objc.RegisterName("nullableOptionalStringValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStringValue      = objc.RegisterName("setNullableOptionalStringValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructWasNull               = objc.RegisterName("nullableStructWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStructWasNull            = objc.RegisterName("setNullableStructWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructValue                 = objc.RegisterName("nullableStructValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableStructValue              = objc.RegisterName("setNullableStructValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructWasPresent            = objc.RegisterName("optionalStructWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStructWasPresent         = objc.RegisterName("setOptionalStructWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructValue                 = objc.RegisterName("optionalStructValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalStructValue              = objc.RegisterName("setOptionalStructValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasPresent    = objc.RegisterName("nullableOptionalStructWasPresent")
 	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStructWasPresent = objc.RegisterName("setNullableOptionalStructWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasNull = objc.RegisterName("nullableOptionalStructWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStructWasNull = objc.RegisterName("setNullableOptionalStructWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructValue = objc.RegisterName("nullableOptionalStructValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStructValue = objc.RegisterName("setNullableOptionalStructValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListWasNull = objc.RegisterName("nullableListWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListWasNull = objc.RegisterName("setNullableListWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListValue = objc.RegisterName("nullableListValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListValue = objc.RegisterName("setNullableListValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListWasPresent = objc.RegisterName("optionalListWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListWasPresent = objc.RegisterName("setOptionalListWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListValue = objc.RegisterName("optionalListValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListValue = objc.RegisterName("setOptionalListValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasPresent = objc.RegisterName("nullableOptionalListWasPresent")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListWasPresent = objc.RegisterName("setNullableOptionalListWasPresent:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasNull = objc.RegisterName("nullableOptionalListWasNull")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListWasNull = objc.RegisterName("setNullableOptionalListWasNull:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListValue = objc.RegisterName("nullableOptionalListValue")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListValue = objc.RegisterName("setNullableOptionalListValue:")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasNull       = objc.RegisterName("nullableOptionalStructWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStructWasNull    = objc.RegisterName("setNullableOptionalStructWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructValue         = objc.RegisterName("nullableOptionalStructValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalStructValue      = objc.RegisterName("setNullableOptionalStructValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListWasNull                 = objc.RegisterName("nullableListWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListWasNull              = objc.RegisterName("setNullableListWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListValue                   = objc.RegisterName("nullableListValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableListValue                = objc.RegisterName("setNullableListValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListWasPresent              = objc.RegisterName("optionalListWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListWasPresent           = objc.RegisterName("setOptionalListWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListValue                   = objc.RegisterName("optionalListValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetOptionalListValue                = objc.RegisterName("setOptionalListValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasPresent      = objc.RegisterName("nullableOptionalListWasPresent")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListWasPresent   = objc.RegisterName("setNullableOptionalListWasPresent:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasNull         = objc.RegisterName("nullableOptionalListWasNull")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListWasNull      = objc.RegisterName("setNullableOptionalListWasNull:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListValue           = objc.RegisterName("nullableOptionalListValue")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetNullableOptionalListValue        = objc.RegisterName("setNullableOptionalListValue:")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelTimedInvokeTimeoutMs                = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs             = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
@@ -94,7 +94,9 @@ func MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(id obj
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -103,7 +105,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) InitWit
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -113,7 +117,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableIntValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -123,7 +129,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -133,7 +141,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalIntValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -143,7 +153,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -153,7 +165,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -163,7 +177,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalIntValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -173,7 +189,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -183,7 +201,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -193,7 +213,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -203,7 +225,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -213,7 +237,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -223,7 +249,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -233,7 +261,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -243,7 +273,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -253,7 +285,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructValue() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableStructValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -263,7 +297,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -273,7 +309,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalStructValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -283,7 +321,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -293,7 +333,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -303,7 +345,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalStructValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -313,7 +357,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableListWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -332,7 +378,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelOptionalListWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -351,7 +399,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOpti
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -361,7 +411,9 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasNull() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelNullableOptionalListWasNull)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -381,11 +433,12 @@ func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNull
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

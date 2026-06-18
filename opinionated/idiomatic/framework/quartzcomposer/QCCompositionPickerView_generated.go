@@ -207,4 +207,3 @@ type CompositionPickerViewable interface {
 }
 
 var _ CompositionPickerViewable = (*CompositionPickerView)(nil)
-

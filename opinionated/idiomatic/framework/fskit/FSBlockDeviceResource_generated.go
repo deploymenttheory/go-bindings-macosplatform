@@ -148,4 +148,3 @@ type BlockDeviceResourceable interface {
 }
 
 var _ BlockDeviceResourceable = (*BlockDeviceResource)(nil)
-

@@ -16,31 +16,31 @@ type DOMHTMLSelectElement struct {
 }
 
 var (
-	_clsDOMHTMLSelectElement = _objcClass("DOMHTMLSelectElement")
-	_dOMHTMLSelectElementSelItem = objc.RegisterName("item:")
-	_dOMHTMLSelectElementSelNamedItem = objc.RegisterName("namedItem:")
-	_dOMHTMLSelectElementSelAddBefore = objc.RegisterName("add:before:")
-	_dOMHTMLSelectElementSelRemove = objc.RegisterName("remove:")
-	_dOMHTMLSelectElementSelAutofocus = objc.RegisterName("autofocus")
-	_dOMHTMLSelectElementSelSetAutofocus = objc.RegisterName("setAutofocus:")
-	_dOMHTMLSelectElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLSelectElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLSelectElementSelForm = objc.RegisterName("form")
-	_dOMHTMLSelectElementSelMultiple = objc.RegisterName("multiple")
-	_dOMHTMLSelectElementSelSetMultiple = objc.RegisterName("setMultiple:")
-	_dOMHTMLSelectElementSelName = objc.RegisterName("name")
-	_dOMHTMLSelectElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLSelectElementSelSize = objc.RegisterName("size")
-	_dOMHTMLSelectElementSelSetSize = objc.RegisterName("setSize:")
-	_dOMHTMLSelectElementSelType = objc.RegisterName("type")
-	_dOMHTMLSelectElementSelOptions = objc.RegisterName("options")
-	_dOMHTMLSelectElementSelLength = objc.RegisterName("length")
-	_dOMHTMLSelectElementSelSelectedIndex = objc.RegisterName("selectedIndex")
+	_clsDOMHTMLSelectElement                 = _objcClass("DOMHTMLSelectElement")
+	_dOMHTMLSelectElementSelItem             = objc.RegisterName("item:")
+	_dOMHTMLSelectElementSelNamedItem        = objc.RegisterName("namedItem:")
+	_dOMHTMLSelectElementSelAddBefore        = objc.RegisterName("add:before:")
+	_dOMHTMLSelectElementSelRemove           = objc.RegisterName("remove:")
+	_dOMHTMLSelectElementSelAutofocus        = objc.RegisterName("autofocus")
+	_dOMHTMLSelectElementSelSetAutofocus     = objc.RegisterName("setAutofocus:")
+	_dOMHTMLSelectElementSelDisabled         = objc.RegisterName("disabled")
+	_dOMHTMLSelectElementSelSetDisabled      = objc.RegisterName("setDisabled:")
+	_dOMHTMLSelectElementSelForm             = objc.RegisterName("form")
+	_dOMHTMLSelectElementSelMultiple         = objc.RegisterName("multiple")
+	_dOMHTMLSelectElementSelSetMultiple      = objc.RegisterName("setMultiple:")
+	_dOMHTMLSelectElementSelName             = objc.RegisterName("name")
+	_dOMHTMLSelectElementSelSetName          = objc.RegisterName("setName:")
+	_dOMHTMLSelectElementSelSize             = objc.RegisterName("size")
+	_dOMHTMLSelectElementSelSetSize          = objc.RegisterName("setSize:")
+	_dOMHTMLSelectElementSelType             = objc.RegisterName("type")
+	_dOMHTMLSelectElementSelOptions          = objc.RegisterName("options")
+	_dOMHTMLSelectElementSelLength           = objc.RegisterName("length")
+	_dOMHTMLSelectElementSelSelectedIndex    = objc.RegisterName("selectedIndex")
 	_dOMHTMLSelectElementSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
-	_dOMHTMLSelectElementSelValue = objc.RegisterName("value")
-	_dOMHTMLSelectElementSelSetValue = objc.RegisterName("setValue:")
-	_dOMHTMLSelectElementSelWillValidate = objc.RegisterName("willValidate")
-	_dOMHTMLSelectElementSelAdd = objc.RegisterName("add::")
+	_dOMHTMLSelectElementSelValue            = objc.RegisterName("value")
+	_dOMHTMLSelectElementSelSetValue         = objc.RegisterName("setValue:")
+	_dOMHTMLSelectElementSelWillValidate     = objc.RegisterName("willValidate")
+	_dOMHTMLSelectElementSelAdd              = objc.RegisterName("add::")
 )
 
 func DOMHTMLSelectElementFromID(id objc.ID) *DOMHTMLSelectElement {
@@ -55,13 +55,17 @@ func DOMHTMLSelectElementFromID(id objc.ID) *DOMHTMLSelectElement {
 
 func (o *DOMHTMLSelectElement) Item(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMHTMLSelectElement) NamedItem(name *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelNamedItem, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -93,7 +97,9 @@ func (o *DOMHTMLSelectElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLSelectElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
@@ -108,7 +114,9 @@ func (o *DOMHTMLSelectElement) SetMultiple(multiple bool) {
 
 func (o *DOMHTMLSelectElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,13 +135,17 @@ func (o *DOMHTMLSelectElement) SetSize(size int) {
 
 func (o *DOMHTMLSelectElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLSelectElement) Options() *DOMHTMLOptionsCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLOptionsCollectionFromID(_ret)
 }
 
@@ -153,7 +165,9 @@ func (o *DOMHTMLSelectElement) SetSelectedIndex(selectedIndex int) {
 
 func (o *DOMHTMLSelectElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLSelectElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,4 +183,3 @@ func (o *DOMHTMLSelectElement) WillValidate() bool {
 func (o *DOMHTMLSelectElement) Add(element *DOMHTMLElement, before *DOMHTMLElement) {
 	o.Ptr().Send(_dOMHTMLSelectElementSelAdd, element.Ptr(), before.Ptr())
 }
-

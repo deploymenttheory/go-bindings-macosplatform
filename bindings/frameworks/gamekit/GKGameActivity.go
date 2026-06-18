@@ -20,41 +20,41 @@ type GKGameActivity struct {
 }
 
 var (
-	_clsGKGameActivity = _objcClass("GKGameActivity")
-	_gKGameActivitySelStartWithDefinitionPartyCodeError = objc.RegisterName("startWithDefinition:partyCode:error:")
-	_gKGameActivitySelStartWithDefinitionError = objc.RegisterName("startWithDefinition:error:")
-	_gKGameActivitySelIsValidPartyCode = objc.RegisterName("isValidPartyCode:")
-	_gKGameActivitySelInitWithDefinition = objc.RegisterName("initWithDefinition:")
-	_gKGameActivitySelStart = objc.RegisterName("start")
-	_gKGameActivitySelPause = objc.RegisterName("pause")
-	_gKGameActivitySelResume = objc.RegisterName("resume")
-	_gKGameActivitySelEnd = objc.RegisterName("end")
-	_gKGameActivitySelSetScoreOnLeaderboardToScoreContext = objc.RegisterName("setScoreOnLeaderboard:toScore:context:")
-	_gKGameActivitySelSetScoreOnLeaderboardToScore = objc.RegisterName("setScoreOnLeaderboard:toScore:")
-	_gKGameActivitySelGetScoreOnLeaderboard = objc.RegisterName("getScoreOnLeaderboard:")
-	_gKGameActivitySelRemoveScoresFromLeaderboards = objc.RegisterName("removeScoresFromLeaderboards:")
-	_gKGameActivitySelSetProgressOnAchievementToPercentComplete = objc.RegisterName("setProgressOnAchievement:toPercentComplete:")
-	_gKGameActivitySelSetAchievementCompleted = objc.RegisterName("setAchievementCompleted:")
-	_gKGameActivitySelGetProgressOnAchievement = objc.RegisterName("getProgressOnAchievement:")
-	_gKGameActivitySelRemoveAchievements = objc.RegisterName("removeAchievements:")
-	_gKGameActivitySelIdentifier = objc.RegisterName("identifier")
-	_gKGameActivitySelActivityDefinition = objc.RegisterName("activityDefinition")
-	_gKGameActivitySelProperties = objc.RegisterName("properties")
-	_gKGameActivitySelSetProperties = objc.RegisterName("setProperties:")
-	_gKGameActivitySelState = objc.RegisterName("state")
-	_gKGameActivitySelPartyCode = objc.RegisterName("partyCode")
-	_gKGameActivitySelPartyURL = objc.RegisterName("partyURL")
-	_gKGameActivitySelCreationDate = objc.RegisterName("creationDate")
-	_gKGameActivitySelStartDate = objc.RegisterName("startDate")
-	_gKGameActivitySelLastResumeDate = objc.RegisterName("lastResumeDate")
-	_gKGameActivitySelEndDate = objc.RegisterName("endDate")
-	_gKGameActivitySelDuration = objc.RegisterName("duration")
-	_gKGameActivitySelAchievements = objc.RegisterName("achievements")
-	_gKGameActivitySelLeaderboardScores = objc.RegisterName("leaderboardScores")
-	_gKGameActivitySelValidPartyCodeAlphabet = objc.RegisterName("validPartyCodeAlphabet")
-	_gKGameActivitySelMakeMatchRequest = objc.RegisterName("makeMatchRequest")
-	_gKGameActivitySelFindMatchWithCompletionHandler = objc.RegisterName("findMatchWithCompletionHandler:")
-	_gKGameActivitySelFindPlayersForHostedMatchWithCompletionHandler = objc.RegisterName("findPlayersForHostedMatchWithCompletionHandler:")
+	_clsGKGameActivity                                                       = _objcClass("GKGameActivity")
+	_gKGameActivitySelStartWithDefinitionPartyCodeError                      = objc.RegisterName("startWithDefinition:partyCode:error:")
+	_gKGameActivitySelStartWithDefinitionError                               = objc.RegisterName("startWithDefinition:error:")
+	_gKGameActivitySelIsValidPartyCode                                       = objc.RegisterName("isValidPartyCode:")
+	_gKGameActivitySelInitWithDefinition                                     = objc.RegisterName("initWithDefinition:")
+	_gKGameActivitySelStart                                                  = objc.RegisterName("start")
+	_gKGameActivitySelPause                                                  = objc.RegisterName("pause")
+	_gKGameActivitySelResume                                                 = objc.RegisterName("resume")
+	_gKGameActivitySelEnd                                                    = objc.RegisterName("end")
+	_gKGameActivitySelSetScoreOnLeaderboardToScoreContext                    = objc.RegisterName("setScoreOnLeaderboard:toScore:context:")
+	_gKGameActivitySelSetScoreOnLeaderboardToScore                           = objc.RegisterName("setScoreOnLeaderboard:toScore:")
+	_gKGameActivitySelGetScoreOnLeaderboard                                  = objc.RegisterName("getScoreOnLeaderboard:")
+	_gKGameActivitySelRemoveScoresFromLeaderboards                           = objc.RegisterName("removeScoresFromLeaderboards:")
+	_gKGameActivitySelSetProgressOnAchievementToPercentComplete              = objc.RegisterName("setProgressOnAchievement:toPercentComplete:")
+	_gKGameActivitySelSetAchievementCompleted                                = objc.RegisterName("setAchievementCompleted:")
+	_gKGameActivitySelGetProgressOnAchievement                               = objc.RegisterName("getProgressOnAchievement:")
+	_gKGameActivitySelRemoveAchievements                                     = objc.RegisterName("removeAchievements:")
+	_gKGameActivitySelIdentifier                                             = objc.RegisterName("identifier")
+	_gKGameActivitySelActivityDefinition                                     = objc.RegisterName("activityDefinition")
+	_gKGameActivitySelProperties                                             = objc.RegisterName("properties")
+	_gKGameActivitySelSetProperties                                          = objc.RegisterName("setProperties:")
+	_gKGameActivitySelState                                                  = objc.RegisterName("state")
+	_gKGameActivitySelPartyCode                                              = objc.RegisterName("partyCode")
+	_gKGameActivitySelPartyURL                                               = objc.RegisterName("partyURL")
+	_gKGameActivitySelCreationDate                                           = objc.RegisterName("creationDate")
+	_gKGameActivitySelStartDate                                              = objc.RegisterName("startDate")
+	_gKGameActivitySelLastResumeDate                                         = objc.RegisterName("lastResumeDate")
+	_gKGameActivitySelEndDate                                                = objc.RegisterName("endDate")
+	_gKGameActivitySelDuration                                               = objc.RegisterName("duration")
+	_gKGameActivitySelAchievements                                           = objc.RegisterName("achievements")
+	_gKGameActivitySelLeaderboardScores                                      = objc.RegisterName("leaderboardScores")
+	_gKGameActivitySelValidPartyCodeAlphabet                                 = objc.RegisterName("validPartyCodeAlphabet")
+	_gKGameActivitySelMakeMatchRequest                                       = objc.RegisterName("makeMatchRequest")
+	_gKGameActivitySelFindMatchWithCompletionHandler                         = objc.RegisterName("findMatchWithCompletionHandler:")
+	_gKGameActivitySelFindPlayersForHostedMatchWithCompletionHandler         = objc.RegisterName("findPlayersForHostedMatchWithCompletionHandler:")
 	_gKGameActivitySelCheckPendingGameActivityExistenceWithCompletionHandler = objc.RegisterName("checkPendingGameActivityExistenceWithCompletionHandler:")
 )
 
@@ -72,7 +72,9 @@ func GKGameActivityFromID(id objc.ID) *GKGameActivity {
 func GKGameActivityStartWithDefinitionPartyCodeError(activityDefinition *GKGameActivityDefinition, partyCode *foundation.NSString) (*GKGameActivity, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGameActivity), _gKGameActivitySelStartWithDefinitionPartyCodeError, activityDefinition.Ptr(), partyCode.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -83,14 +85,16 @@ func GKGameActivityStartWithDefinitionPartyCodeError(activityDefinition *GKGameA
 func GKGameActivityStartWithDefinitionError(activityDefinition *GKGameActivityDefinition) (*GKGameActivity, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGameActivity), _gKGameActivitySelStartWithDefinitionError, activityDefinition.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return GKGameActivityFromID(_ret), nil
 }
 
-// Checks whether a party code is in valid format. Party code should be two parts of strings with the same length (2-6) connected with a dash, and the code can be either pure digits (0-9), or both parts are uppercased characters from ``GKGameActivity/validPartyCodeAlphabet``.
+// Checks whether a party code is in valid format. Party code should be two parts of strings with the same length (2-6) connected with a dash, and the code can be either pure digits (0-9), or both parts are uppercased characters from “GKGameActivity/validPartyCodeAlphabet“.
 func GKGameActivityIsValidPartyCode(partyCode *foundation.NSString) bool {
 	_ret := objc.Send[bool](objc.ID(_clsGKGameActivity), _gKGameActivitySelIsValidPartyCode, partyCode.Ptr())
 	return _ret
@@ -99,7 +103,9 @@ func GKGameActivityIsValidPartyCode(partyCode *foundation.NSString) bool {
 // Creates a game activity with definition.
 func (o *GKGameActivity) InitWithDefinition(activityDefinition *GKGameActivityDefinition) *GKGameActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelInitWithDefinition, activityDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameActivityFromID(_ret)
 }
 
@@ -136,7 +142,9 @@ func (o *GKGameActivity) SetScoreOnLeaderboardToScore(leaderboard *GKLeaderboard
 // Get the leaderboard score from a specific leaderboard of the local player if previously set.
 func (o *GKGameActivity) GetScoreOnLeaderboard(leaderboard *GKLeaderboard) *GKLeaderboardScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelGetScoreOnLeaderboard, leaderboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardScoreFromID(_ret)
 }
 
@@ -169,18 +177,22 @@ func (o *GKGameActivity) RemoveAchievements(achievements *foundation.NSArray[*GK
 // The identifier of this activity instance.
 func (o *GKGameActivity) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The activity definition that this activity instance is based on.
 func (o *GKGameActivity) ActivityDefinition() *GKGameActivityDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelActivityDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGameActivityDefinitionFromID(_ret)
 }
 
-// Properties that contain additional information about the activity. This takes precedence over ``GKGameActivityDefinition/defaultProperties`` on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
+// Properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
 func (o *GKGameActivity) Properties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSString]](o.Ptr(), _gKGameActivitySelProperties)
 	return _ret
@@ -196,45 +208,57 @@ func (o *GKGameActivity) State() GKGameActivityState {
 	return _ret
 }
 
-// If the game supports party code, this is the party code that can be shared among players to join the party. If the game doesn't support party code, this value will be `nil`. Use ``GKGameActivity/start(definition:partyCode:)`` to create a game activity with a custom party code.
+// If the game supports party code, this is the party code that can be shared among players to join the party. If the game doesn't support party code, this value will be `nil`. Use “GKGameActivity/start(definition:partyCode:)“ to create a game activity with a custom party code.
 func (o *GKGameActivity) PartyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelPartyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // If the game supports party code, this is the URL that can be shared among players to join the party.
 func (o *GKGameActivity) PartyURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelPartyURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The date when the activity was created.
 func (o *GKGameActivity) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The date when the activity was initially started.
 func (o *GKGameActivity) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The date when the activity was last resumed. - If the activity was first started, this will be the same as the start date. - If the activity was paused and resumed, this will be the date when the activity was resumed.
 func (o *GKGameActivity) LastResumeDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelLastResumeDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The date when the activity was officially ended.
 func (o *GKGameActivity) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -247,14 +271,18 @@ func (o *GKGameActivity) Duration() float64 {
 // All achievements that have been associated with this activity. Progress of each achievement will be reported when the activity ends.
 func (o *GKGameActivity) Achievements() *foundation.NSSet[*GKAchievement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelAchievements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GKAchievement](_ret)
 }
 
 // All leaderboard scores that have been associated with this activity. Scores will be submitted to the leaderboards when the activity ends.
 func (o *GKGameActivity) LeaderboardScores() *foundation.NSSet[*GKLeaderboardScore] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelLeaderboardScores)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GKLeaderboardScore](_ret)
 }
 
@@ -267,7 +295,9 @@ func GKGameActivityValidPartyCodeAlphabet() *foundation.NSArray[*foundation.NSSt
 // Makes a match request object with information from the activity, which you can use to find matches for the local player.
 func (o *GKGameActivity) MakeMatchRequest() *GKMatchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGameActivitySelMakeMatchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMatchRequestFromID(_ret)
 }
 
@@ -312,4 +342,3 @@ func GKGameActivityCheckPendingGameActivityExistenceWithCompletionHandler(comple
 	}
 	objc.ID(_clsGKGameActivity).Send(_gKGameActivitySelCheckPendingGameActivityExistenceWithCompletionHandler, __block_completionHandler)
 }
-

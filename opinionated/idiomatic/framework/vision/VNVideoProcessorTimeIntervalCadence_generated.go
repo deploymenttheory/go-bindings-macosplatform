@@ -15,7 +15,9 @@ type VideoProcessorTimeIntervalCadence struct {
 }
 
 // Unwrap returns the underlying [raw.VNVideoProcessorTimeIntervalCadence].
-func (x *VideoProcessorTimeIntervalCadence) Unwrap() *raw.VNVideoProcessorTimeIntervalCadence { return x.inner }
+func (x *VideoProcessorTimeIntervalCadence) Unwrap() *raw.VNVideoProcessorTimeIntervalCadence {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,7 +43,9 @@ func (x *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
 	return x.inner.TimeInterval()
 }
 
-func (x *VideoProcessorTimeIntervalCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence { return &x.inner.VNVideoProcessorCadence }
+func (x *VideoProcessorTimeIntervalCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence {
+	return &x.inner.VNVideoProcessorCadence
+}
 
 // VideoProcessorTimeIntervalCadenceable is the interface implemented by [VideoProcessorTimeIntervalCadence], for mocking and DI.
 type VideoProcessorTimeIntervalCadenceable interface {
@@ -50,4 +54,3 @@ type VideoProcessorTimeIntervalCadenceable interface {
 }
 
 var _ VideoProcessorTimeIntervalCadenceable = (*VideoProcessorTimeIntervalCadence)(nil)
-

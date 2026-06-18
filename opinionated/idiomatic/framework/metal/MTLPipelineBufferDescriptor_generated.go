@@ -60,4 +60,3 @@ type PipelineBufferDescriptorable interface {
 }
 
 var _ PipelineBufferDescriptorable = (*PipelineBufferDescriptor)(nil)
-

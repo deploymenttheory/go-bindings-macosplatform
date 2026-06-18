@@ -19,13 +19,13 @@ type AVAudioUnit struct {
 }
 
 var (
-	_clsAVAudioUnit = _objcClass("AVAudioUnit")
+	_clsAVAudioUnit                                                            = _objcClass("AVAudioUnit")
 	_aVAudioUnitSelInstantiateWithComponentDescriptionOptionsCompletionHandler = objc.RegisterName("instantiateWithComponentDescription:options:completionHandler:")
-	_aVAudioUnitSelLoadAudioUnitPresetAtURLError = objc.RegisterName("loadAudioUnitPresetAtURL:error:")
-	_aVAudioUnitSelAudioComponentDescription = objc.RegisterName("audioComponentDescription")
-	_aVAudioUnitSelAudioUnit = objc.RegisterName("audioUnit")
-	_aVAudioUnitSelName = objc.RegisterName("name")
-	_aVAudioUnitSelManufacturerName = objc.RegisterName("manufacturerName")
+	_aVAudioUnitSelLoadAudioUnitPresetAtURLError                               = objc.RegisterName("loadAudioUnitPresetAtURL:error:")
+	_aVAudioUnitSelAudioComponentDescription                                   = objc.RegisterName("audioComponentDescription")
+	_aVAudioUnitSelAudioUnit                                                   = objc.RegisterName("audioUnit")
+	_aVAudioUnitSelName                                                        = objc.RegisterName("name")
+	_aVAudioUnitSelManufacturerName                                            = objc.RegisterName("manufacturerName")
 )
 
 func AVAudioUnitFromID(id objc.ID) *AVAudioUnit {
@@ -78,14 +78,17 @@ func (o *AVAudioUnit) AudioUnit() *carboncore.ComponentInstanceRecord {
 // @property name @abstract Name of the audio unit.
 func (o *AVAudioUnit) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property manufacturerName @abstract Manufacturer name of the audio unit.
 func (o *AVAudioUnit) ManufacturerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitSelManufacturerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

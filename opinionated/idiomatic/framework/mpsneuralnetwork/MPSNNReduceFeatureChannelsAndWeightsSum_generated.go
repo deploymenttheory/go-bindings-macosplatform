@@ -18,7 +18,9 @@ type NNReduceFeatureChannelsAndWeightsSum struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsAndWeightsSum].
-func (x *NNReduceFeatureChannelsAndWeightsSum) Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsSum { return x.inner }
+func (x *NNReduceFeatureChannelsAndWeightsSum) Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsSum {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -166,9 +168,13 @@ func (x *NNReduceFeatureChannelsAndWeightsSum) DoWeightedSumByNonZeroWeights() b
 	return x.inner.DoWeightedSumByNonZeroWeights()
 }
 
-func (x *NNReduceFeatureChannelsAndWeightsSum) asNNReduceBinary() *raw.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
+func (x *NNReduceFeatureChannelsAndWeightsSum) asNNReduceBinary() *raw.MPSNNReduceBinary {
+	return &x.inner.MPSNNReduceBinary
+}
 
-func (x *NNReduceFeatureChannelsAndWeightsSum) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
+func (x *NNReduceFeatureChannelsAndWeightsSum) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel
+}
 
 // NNReduceFeatureChannelsAndWeightsSumable is the interface implemented by [NNReduceFeatureChannelsAndWeightsSum], for mocking and DI.
 type NNReduceFeatureChannelsAndWeightsSumable interface {
@@ -195,4 +201,3 @@ type NNReduceFeatureChannelsAndWeightsSumable interface {
 }
 
 var _ NNReduceFeatureChannelsAndWeightsSumable = (*NNReduceFeatureChannelsAndWeightsSum)(nil)
-

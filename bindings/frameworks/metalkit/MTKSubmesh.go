@@ -17,14 +17,14 @@ type MTKSubmesh struct {
 }
 
 var (
-	_clsMTKSubmesh = _objcClass("MTKSubmesh")
+	_clsMTKSubmesh              = _objcClass("MTKSubmesh")
 	_mTKSubmeshSelPrimitiveType = objc.RegisterName("primitiveType")
-	_mTKSubmeshSelIndexType = objc.RegisterName("indexType")
-	_mTKSubmeshSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mTKSubmeshSelIndexCount = objc.RegisterName("indexCount")
-	_mTKSubmeshSelMesh = objc.RegisterName("mesh")
-	_mTKSubmeshSelName = objc.RegisterName("name")
-	_mTKSubmeshSelSetName = objc.RegisterName("setName:")
+	_mTKSubmeshSelIndexType     = objc.RegisterName("indexType")
+	_mTKSubmeshSelIndexBuffer   = objc.RegisterName("indexBuffer")
+	_mTKSubmeshSelIndexCount    = objc.RegisterName("indexCount")
+	_mTKSubmeshSelMesh          = objc.RegisterName("mesh")
+	_mTKSubmeshSelName          = objc.RegisterName("name")
+	_mTKSubmeshSelSetName       = objc.RegisterName("setName:")
 )
 
 func MTKSubmeshFromID(id objc.ID) *MTKSubmesh {
@@ -52,7 +52,9 @@ func (o *MTKSubmesh) IndexType() metal.MTLIndexType {
 // @property indexBuffer @abstract IndexBuffer (including indexCount) to render the object. @discussion The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
 func (o *MTKSubmesh) IndexBuffer() *MTKMeshBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKSubmeshSelIndexBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKMeshBufferFromID(_ret)
 }
 
@@ -65,18 +67,21 @@ func (o *MTKSubmesh) IndexCount() uint {
 // @property mesh @abstract Parent MTKMesh object containing vertex data of this object. @discussion The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
 func (o *MTKSubmesh) Mesh() *MTKMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKSubmeshSelMesh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKMeshFromID(_ret)
 }
 
 // @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
 func (o *MTKSubmesh) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKSubmeshSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTKSubmesh) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTKSubmeshSelSetName, name.Ptr())
 }
-

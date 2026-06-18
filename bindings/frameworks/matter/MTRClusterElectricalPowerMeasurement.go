@@ -16,32 +16,32 @@ type MTRClusterElectricalPowerMeasurement struct {
 }
 
 var (
-	_clsMTRClusterElectricalPowerMeasurement = _objcClass("MTRClusterElectricalPowerMeasurement")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributePowerModeWithParams = objc.RegisterName("readAttributePowerModeWithParams:")
+	_clsMTRClusterElectricalPowerMeasurement                                                = _objcClass("MTRClusterElectricalPowerMeasurement")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributePowerModeWithParams                = objc.RegisterName("readAttributePowerModeWithParams:")
 	_mTRClusterElectricalPowerMeasurementSelReadAttributeNumberOfMeasurementTypesWithParams = objc.RegisterName("readAttributeNumberOfMeasurementTypesWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeAccuracyWithParams = objc.RegisterName("readAttributeAccuracyWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeRangesWithParams = objc.RegisterName("readAttributeRangesWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeVoltageWithParams = objc.RegisterName("readAttributeVoltageWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeActiveCurrentWithParams = objc.RegisterName("readAttributeActiveCurrentWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeReactiveCurrentWithParams = objc.RegisterName("readAttributeReactiveCurrentWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeApparentCurrentWithParams = objc.RegisterName("readAttributeApparentCurrentWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeActivePowerWithParams = objc.RegisterName("readAttributeActivePowerWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeReactivePowerWithParams = objc.RegisterName("readAttributeReactivePowerWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeApparentPowerWithParams = objc.RegisterName("readAttributeApparentPowerWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSVoltageWithParams = objc.RegisterName("readAttributeRMSVoltageWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSCurrentWithParams = objc.RegisterName("readAttributeRMSCurrentWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSPowerWithParams = objc.RegisterName("readAttributeRMSPowerWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeFrequencyWithParams = objc.RegisterName("readAttributeFrequencyWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeHarmonicCurrentsWithParams = objc.RegisterName("readAttributeHarmonicCurrentsWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeHarmonicPhasesWithParams = objc.RegisterName("readAttributeHarmonicPhasesWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributePowerFactorWithParams = objc.RegisterName("readAttributePowerFactorWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeNeutralCurrentWithParams = objc.RegisterName("readAttributeNeutralCurrentWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterElectricalPowerMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeAccuracyWithParams                 = objc.RegisterName("readAttributeAccuracyWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeRangesWithParams                   = objc.RegisterName("readAttributeRangesWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeVoltageWithParams                  = objc.RegisterName("readAttributeVoltageWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeActiveCurrentWithParams            = objc.RegisterName("readAttributeActiveCurrentWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeReactiveCurrentWithParams          = objc.RegisterName("readAttributeReactiveCurrentWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeApparentCurrentWithParams          = objc.RegisterName("readAttributeApparentCurrentWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeActivePowerWithParams              = objc.RegisterName("readAttributeActivePowerWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeReactivePowerWithParams            = objc.RegisterName("readAttributeReactivePowerWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeApparentPowerWithParams            = objc.RegisterName("readAttributeApparentPowerWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSVoltageWithParams               = objc.RegisterName("readAttributeRMSVoltageWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSCurrentWithParams               = objc.RegisterName("readAttributeRMSCurrentWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeRMSPowerWithParams                 = objc.RegisterName("readAttributeRMSPowerWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeFrequencyWithParams                = objc.RegisterName("readAttributeFrequencyWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeHarmonicCurrentsWithParams         = objc.RegisterName("readAttributeHarmonicCurrentsWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeHarmonicPhasesWithParams           = objc.RegisterName("readAttributeHarmonicPhasesWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributePowerFactorWithParams              = objc.RegisterName("readAttributePowerFactorWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeNeutralCurrentWithParams           = objc.RegisterName("readAttributeNeutralCurrentWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeGeneratedCommandListWithParams     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeAcceptedCommandListWithParams      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeAttributeListWithParams            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeFeatureMapWithParams               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelReadAttributeClusterRevisionWithParams          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterElectricalPowerMeasurementSelInitWithDeviceEndpointIDQueue                   = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterElectricalPowerMeasurementFromID(id objc.ID) *MTRClusterElectricalPowerMeasurement {
@@ -177,7 +177,8 @@ func (o *MTRClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithP
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterElectricalPowerMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterElectricalPowerMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterElectricalPowerMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterElectricalPowerMeasurementFromID(_ret)
 }
-

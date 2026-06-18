@@ -25,4 +25,3 @@ func VZXHCIControllerFromID(id objc.ID) *VZXHCIController {
 	purego.Track(o)
 	return o
 }
-

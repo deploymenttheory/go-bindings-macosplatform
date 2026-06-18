@@ -41,4 +41,3 @@ type UnaryFileSystemable interface {
 }
 
 var _ UnaryFileSystemable = (*UnaryFileSystem)(nil)
-

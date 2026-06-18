@@ -19,18 +19,18 @@ type AVCaptureStillImageOutput struct {
 }
 
 var (
-	_clsAVCaptureStillImageOutput = _objcClass("AVCaptureStillImageOutput")
-	_aVCaptureStillImageOutputSelInit = objc.RegisterName("init")
-	_aVCaptureStillImageOutputSelNew = objc.RegisterName("new")
+	_clsAVCaptureStillImageOutput                                                               = _objcClass("AVCaptureStillImageOutput")
+	_aVCaptureStillImageOutputSelInit                                                           = objc.RegisterName("init")
+	_aVCaptureStillImageOutputSelNew                                                            = objc.RegisterName("new")
 	_aVCaptureStillImageOutputSelCaptureStillImageAsynchronouslyFromConnectionCompletionHandler = objc.RegisterName("captureStillImageAsynchronouslyFromConnection:completionHandler:")
-	_aVCaptureStillImageOutputSelJpegStillImageNSDataRepresentation = objc.RegisterName("jpegStillImageNSDataRepresentation:")
-	_aVCaptureStillImageOutputSelOutputSettings = objc.RegisterName("outputSettings")
-	_aVCaptureStillImageOutputSelSetOutputSettings = objc.RegisterName("setOutputSettings:")
-	_aVCaptureStillImageOutputSelAvailableImageDataCVPixelFormatTypes = objc.RegisterName("availableImageDataCVPixelFormatTypes")
-	_aVCaptureStillImageOutputSelAvailableImageDataCodecTypes = objc.RegisterName("availableImageDataCodecTypes")
-	_aVCaptureStillImageOutputSelIsHighResolutionStillImageOutputEnabled = objc.RegisterName("isHighResolutionStillImageOutputEnabled")
-	_aVCaptureStillImageOutputSelSetHighResolutionStillImageOutputEnabled = objc.RegisterName("setHighResolutionStillImageOutputEnabled:")
-	_aVCaptureStillImageOutputSelIsCapturingStillImage = objc.RegisterName("isCapturingStillImage")
+	_aVCaptureStillImageOutputSelJpegStillImageNSDataRepresentation                             = objc.RegisterName("jpegStillImageNSDataRepresentation:")
+	_aVCaptureStillImageOutputSelOutputSettings                                                 = objc.RegisterName("outputSettings")
+	_aVCaptureStillImageOutputSelSetOutputSettings                                              = objc.RegisterName("setOutputSettings:")
+	_aVCaptureStillImageOutputSelAvailableImageDataCVPixelFormatTypes                           = objc.RegisterName("availableImageDataCVPixelFormatTypes")
+	_aVCaptureStillImageOutputSelAvailableImageDataCodecTypes                                   = objc.RegisterName("availableImageDataCodecTypes")
+	_aVCaptureStillImageOutputSelIsHighResolutionStillImageOutputEnabled                        = objc.RegisterName("isHighResolutionStillImageOutputEnabled")
+	_aVCaptureStillImageOutputSelSetHighResolutionStillImageOutputEnabled                       = objc.RegisterName("setHighResolutionStillImageOutputEnabled:")
+	_aVCaptureStillImageOutputSelIsCapturingStillImage                                          = objc.RegisterName("isCapturingStillImage")
 )
 
 func AVCaptureStillImageOutputFromID(id objc.ID) *AVCaptureStillImageOutput {
@@ -45,7 +45,9 @@ func AVCaptureStillImageOutputFromID(id objc.ID) *AVCaptureStillImageOutput {
 
 func (o *AVCaptureStillImageOutput) Init() *AVCaptureStillImageOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureStillImageOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureStillImageOutputFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *AVCaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectio
 // @method jpegStillImageNSDataRepresentation: @abstract Converts the still image data and metadata attachments in a JPEG sample buffer to an NSData representation. @param jpegSampleBuffer The sample buffer carrying JPEG image data, optionally with Exif metadata sample buffer attachments. This method throws an NSInvalidArgumentException if jpegSampleBuffer is NULL or not in the JPEG format. @discussion This method returns an NSData representation of a JPEG still image sample buffer, merging the image data and Exif metadata sample buffer attachments without recompressing the image. The returned NSData is suitable for writing to disk.
 func AVCaptureStillImageOutputJpegStillImageNSDataRepresentation(jpegSampleBuffer unsafe.Pointer) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureStillImageOutput), _aVCaptureStillImageOutputSelJpegStillImageNSDataRepresentation, jpegSampleBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -110,4 +114,3 @@ func (o *AVCaptureStillImageOutput) IsCapturingStillImage() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureStillImageOutputSelIsCapturingStillImage)
 	return _ret
 }
-

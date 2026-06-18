@@ -87,4 +87,3 @@ type WorkoutRouteBuilderable interface {
 }
 
 var _ WorkoutRouteBuilderable = (*WorkoutRouteBuilder)(nil)
-

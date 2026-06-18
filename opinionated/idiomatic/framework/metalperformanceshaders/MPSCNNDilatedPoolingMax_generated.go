@@ -117,11 +117,17 @@ func (x *CNNDilatedPoolingMax) DilationRateY() uint {
 	return x.inner.DilationRateY()
 }
 
-func (x *CNNDilatedPoolingMax) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
+func (x *CNNDilatedPoolingMax) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling {
+	return &x.inner.MPSCNNPooling
+}
 
-func (x *CNNDilatedPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNDilatedPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
-func (x *CNNDilatedPoolingMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
+func (x *CNNDilatedPoolingMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel
+}
 
 // CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
 type CNNDilatedPoolingMaxable interface {
@@ -141,4 +147,3 @@ type CNNDilatedPoolingMaxable interface {
 }
 
 var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)
-

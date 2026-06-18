@@ -18,13 +18,13 @@ type NEAppProxyProvider struct {
 }
 
 var (
-	_clsNEAppProxyProvider = _objcClass("NEAppProxyProvider")
-	_nEAppProxyProviderSelStartProxyWithOptionsCompletionHandler = objc.RegisterName("startProxyWithOptions:completionHandler:")
-	_nEAppProxyProviderSelStopProxyWithReasonCompletionHandler = objc.RegisterName("stopProxyWithReason:completionHandler:")
-	_nEAppProxyProviderSelCancelProxyWithError = objc.RegisterName("cancelProxyWithError:")
-	_nEAppProxyProviderSelHandleNewFlow = objc.RegisterName("handleNewFlow:")
+	_clsNEAppProxyProvider                                          = _objcClass("NEAppProxyProvider")
+	_nEAppProxyProviderSelStartProxyWithOptionsCompletionHandler    = objc.RegisterName("startProxyWithOptions:completionHandler:")
+	_nEAppProxyProviderSelStopProxyWithReasonCompletionHandler      = objc.RegisterName("stopProxyWithReason:completionHandler:")
+	_nEAppProxyProviderSelCancelProxyWithError                      = objc.RegisterName("cancelProxyWithError:")
+	_nEAppProxyProviderSelHandleNewFlow                             = objc.RegisterName("handleNewFlow:")
 	_nEAppProxyProviderSelHandleNewUDPFlowInitialRemoteFlowEndpoint = objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:")
-	_nEAppProxyProviderSelHandleNewUDPFlowInitialRemoteEndpoint = objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:")
+	_nEAppProxyProviderSelHandleNewUDPFlowInitialRemoteEndpoint     = objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:")
 )
 
 func NEAppProxyProviderFromID(id objc.ID) *NEAppProxyProvider {
@@ -84,4 +84,3 @@ func (o *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *NEAppPr
 	_ret := objc.Send[bool](o.Ptr(), _nEAppProxyProviderSelHandleNewUDPFlowInitialRemoteEndpoint, flow.Ptr(), remoteEndpoint)
 	return _ret
 }
-

@@ -339,9 +339,13 @@ func (x *MTRBaseClusterBinding) SubscribeAttributeClusterRevisionWithMinInterval
 	}
 }
 
-func (x *MTRBaseClusterBinding) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBinding) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBinding) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBinding) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBindingable is the interface implemented by [MTRBaseClusterBinding], for mocking and DI.
 type MTRBaseClusterBindingable interface {
@@ -377,4 +381,3 @@ type MTRBaseClusterBindingable interface {
 }
 
 var _ MTRBaseClusterBindingable = (*MTRBaseClusterBinding)(nil)
-

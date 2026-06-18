@@ -16,7 +16,9 @@ type MTRSwitchClusterInitialPressEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSwitchClusterInitialPressEvent].
-func (x *MTRSwitchClusterInitialPressEvent) Unwrap() *raw.MTRSwitchClusterInitialPressEvent { return x.inner }
+func (x *MTRSwitchClusterInitialPressEvent) Unwrap() *raw.MTRSwitchClusterInitialPressEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRSwitchClusterInitialPressEventable interface {
 }
 
 var _ MTRSwitchClusterInitialPressEventable = (*MTRSwitchClusterInitialPressEvent)(nil)
-

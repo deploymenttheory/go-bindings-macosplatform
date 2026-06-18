@@ -16,10 +16,10 @@ type AVAudioConnectionPoint struct {
 }
 
 var (
-	_clsAVAudioConnectionPoint = _objcClass("AVAudioConnectionPoint")
+	_clsAVAudioConnectionPoint                = _objcClass("AVAudioConnectionPoint")
 	_aVAudioConnectionPointSelInitWithNodeBus = objc.RegisterName("initWithNode:bus:")
-	_aVAudioConnectionPointSelNode = objc.RegisterName("node")
-	_aVAudioConnectionPointSelBus = objc.RegisterName("bus")
+	_aVAudioConnectionPointSelNode            = objc.RegisterName("node")
+	_aVAudioConnectionPointSelBus             = objc.RegisterName("bus")
 )
 
 func AVAudioConnectionPointFromID(id objc.ID) *AVAudioConnectionPoint {
@@ -35,14 +35,18 @@ func AVAudioConnectionPointFromID(id objc.ID) *AVAudioConnectionPoint {
 // @method initWithNode:bus: @abstract Create a connection point object. @param node the source or destination node @param bus the output or input bus on the node @discussion If the node is nil, this method fails (returns nil).
 func (o *AVAudioConnectionPoint) InitWithNodeBus(node *AVAudioNode, bus uint) *AVAudioConnectionPoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConnectionPointSelInitWithNodeBus, node.Ptr(), bus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioConnectionPointFromID(_ret)
 }
 
 // @property node @abstract Returns the node in the connection point.
 func (o *AVAudioConnectionPoint) Node() *AVAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConnectionPointSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioNodeFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *AVAudioConnectionPoint) Bus() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVAudioConnectionPointSelBus)
 	return _ret
 }
-

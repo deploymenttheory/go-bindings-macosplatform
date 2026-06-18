@@ -104,4 +104,3 @@ type CNNNeuronTanHable interface {
 }
 
 var _ CNNNeuronTanHable = (*CNNNeuronTanH)(nil)
-

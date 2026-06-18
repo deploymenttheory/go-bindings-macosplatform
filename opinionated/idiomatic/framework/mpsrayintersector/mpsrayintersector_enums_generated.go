@@ -361,4 +361,3 @@ func (e MPSTriangleIntersectionTestType) String() string {
 		return fmt.Sprintf("MPSTriangleIntersectionTestType(%d)", int64(e))
 	}
 }
-

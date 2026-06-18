@@ -97,4 +97,3 @@ type IKPictureTakerable interface {
 }
 
 var _ IKPictureTakerable = (*IKPictureTaker)(nil)
-

@@ -16,9 +16,9 @@ type JRSRenderServer struct {
 }
 
 var (
-	_clsJRSRenderServer = _objcClass("JRSRenderServer")
-	_jRSRenderServerSelStartRenderServer = objc.RegisterName("startRenderServer")
-	_jRSRenderServerSelSendRenderServer = objc.RegisterName("sendRenderServer:")
+	_clsJRSRenderServer                    = _objcClass("JRSRenderServer")
+	_jRSRenderServerSelStartRenderServer   = objc.RegisterName("startRenderServer")
+	_jRSRenderServerSelSendRenderServer    = objc.RegisterName("sendRenderServer:")
 	_jRSRenderServerSelRecieveRenderServer = objc.RegisterName("recieveRenderServer:")
 )
 
@@ -39,7 +39,9 @@ func JRSRenderServerStartRenderServer() uint {
 
 func JRSRenderServerSendRenderServer(serverPort uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJRSRenderServer), _jRSRenderServerSelSendRenderServer, serverPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func JRSRenderServerRecieveRenderServer(serverName *foundation.NSString) uint {
 	_ret := objc.Send[uint](objc.ID(_clsJRSRenderServer), _jRSRenderServerSelRecieveRenderServer, serverName.Ptr())
 	return _ret
 }
-

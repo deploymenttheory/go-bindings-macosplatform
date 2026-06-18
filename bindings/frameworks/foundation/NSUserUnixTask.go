@@ -17,14 +17,14 @@ type NSUserUnixTask struct {
 }
 
 var (
-	_clsNSUserUnixTask = _objcClass("NSUserUnixTask")
+	_clsNSUserUnixTask                                      = _objcClass("NSUserUnixTask")
 	_nSUserUnixTaskSelExecuteWithArgumentsCompletionHandler = objc.RegisterName("executeWithArguments:completionHandler:")
-	_nSUserUnixTaskSelStandardInput = objc.RegisterName("standardInput")
-	_nSUserUnixTaskSelSetStandardInput = objc.RegisterName("setStandardInput:")
-	_nSUserUnixTaskSelStandardOutput = objc.RegisterName("standardOutput")
-	_nSUserUnixTaskSelSetStandardOutput = objc.RegisterName("setStandardOutput:")
-	_nSUserUnixTaskSelStandardError = objc.RegisterName("standardError")
-	_nSUserUnixTaskSelSetStandardError = objc.RegisterName("setStandardError:")
+	_nSUserUnixTaskSelStandardInput                         = objc.RegisterName("standardInput")
+	_nSUserUnixTaskSelSetStandardInput                      = objc.RegisterName("setStandardInput:")
+	_nSUserUnixTaskSelStandardOutput                        = objc.RegisterName("standardOutput")
+	_nSUserUnixTaskSelSetStandardOutput                     = objc.RegisterName("setStandardOutput:")
+	_nSUserUnixTaskSelStandardError                         = objc.RegisterName("standardError")
+	_nSUserUnixTaskSelSetStandardError                      = objc.RegisterName("setStandardError:")
 )
 
 func NSUserUnixTaskFromID(id objc.ID) *NSUserUnixTask {
@@ -50,7 +50,9 @@ func (o *NSUserUnixTask) ExecuteWithArgumentsCompletionHandler(arguments *NSArra
 
 func (o *NSUserUnixTask) StandardInput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *NSUserUnixTask) SetStandardInput(standardInput *NSFileHandle) {
 
 func (o *NSUserUnixTask) StandardOutput() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
@@ -70,11 +74,12 @@ func (o *NSUserUnixTask) SetStandardOutput(standardOutput *NSFileHandle) {
 
 func (o *NSUserUnixTask) StandardError() *NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserUnixTaskSelStandardError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileHandleFromID(_ret)
 }
 
 func (o *NSUserUnixTask) SetStandardError(standardError *NSFileHandle) {
 	o.Ptr().Send(_nSUserUnixTaskSelSetStandardError, standardError.Ptr())
 }
-

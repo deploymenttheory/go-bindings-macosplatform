@@ -17,11 +17,11 @@ type ICScannerFunctionalUnitFlatbed struct {
 }
 
 var (
-	_clsICScannerFunctionalUnitFlatbed = _objcClass("ICScannerFunctionalUnitFlatbed")
+	_clsICScannerFunctionalUnitFlatbed                       = _objcClass("ICScannerFunctionalUnitFlatbed")
 	_iCScannerFunctionalUnitFlatbedSelSupportedDocumentTypes = objc.RegisterName("supportedDocumentTypes")
-	_iCScannerFunctionalUnitFlatbedSelDocumentType = objc.RegisterName("documentType")
-	_iCScannerFunctionalUnitFlatbedSelSetDocumentType = objc.RegisterName("setDocumentType:")
-	_iCScannerFunctionalUnitFlatbedSelDocumentSize = objc.RegisterName("documentSize")
+	_iCScannerFunctionalUnitFlatbedSelDocumentType           = objc.RegisterName("documentType")
+	_iCScannerFunctionalUnitFlatbedSelSetDocumentType        = objc.RegisterName("setDocumentType:")
+	_iCScannerFunctionalUnitFlatbedSelDocumentSize           = objc.RegisterName("documentSize")
 )
 
 func ICScannerFunctionalUnitFlatbedFromID(id objc.ID) *ICScannerFunctionalUnitFlatbed {
@@ -37,7 +37,9 @@ func ICScannerFunctionalUnitFlatbedFromID(id objc.ID) *ICScannerFunctionalUnitFl
 // @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
 func (o *ICScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCScannerFunctionalUnitFlatbedSelSupportedDocumentTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -56,4 +58,3 @@ func (o *ICScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _iCScannerFunctionalUnitFlatbedSelDocumentSize)
 	return _ret
 }
-

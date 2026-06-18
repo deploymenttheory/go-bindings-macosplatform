@@ -90,9 +90,13 @@ func (x *DetectHumanBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation.
 	}), nil
 }
 
-func (x *DetectHumanBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectHumanBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectHumanBodyPoseRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectHumanBodyPoseRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectHumanBodyPoseRequestable is the interface implemented by [DetectHumanBodyPoseRequest], for mocking and DI.
 type DetectHumanBodyPoseRequestable interface {
@@ -106,4 +110,3 @@ type DetectHumanBodyPoseRequestable interface {
 }
 
 var _ DetectHumanBodyPoseRequestable = (*DetectHumanBodyPoseRequest)(nil)
-

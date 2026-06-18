@@ -147,7 +147,9 @@ func (x *AVB17221Entity) WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVBMACAddress](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -425,4 +427,3 @@ type AVB17221Entityable interface {
 }
 
 var _ AVB17221Entityable = (*AVB17221Entity)(nil)
-

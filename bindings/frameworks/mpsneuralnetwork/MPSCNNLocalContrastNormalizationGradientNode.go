@@ -15,23 +15,23 @@ type MPSCNNLocalContrastNormalizationGradientNode struct {
 }
 
 var (
-	_clsMPSCNNLocalContrastNormalizationGradientNode = _objcClass("MPSCNNLocalContrastNormalizationGradientNode")
+	_clsMPSCNNLocalContrastNormalizationGradientNode                                                                      = _objcClass("MPSCNNLocalContrastNormalizationGradientNode")
 	_mPSCNNLocalContrastNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:")
 	_mPSCNNLocalContrastNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelBeta = objc.RegisterName("beta")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelDelta = objc.RegisterName("delta")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetDelta = objc.RegisterName("setDelta:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelP0 = objc.RegisterName("p0")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetP0 = objc.RegisterName("setP0:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelPm = objc.RegisterName("pm")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetPm = objc.RegisterName("setPm:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelPs = objc.RegisterName("ps")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelSetPs = objc.RegisterName("setPs:")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNLocalContrastNormalizationGradientNodeSelKernelHeight = objc.RegisterName("kernelHeight")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelAlpha                                                                 = objc.RegisterName("alpha")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetAlpha                                                              = objc.RegisterName("setAlpha:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelBeta                                                                  = objc.RegisterName("beta")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetBeta                                                               = objc.RegisterName("setBeta:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelDelta                                                                 = objc.RegisterName("delta")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetDelta                                                              = objc.RegisterName("setDelta:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelP0                                                                    = objc.RegisterName("p0")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetP0                                                                 = objc.RegisterName("setP0:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelPm                                                                    = objc.RegisterName("pm")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetPm                                                                 = objc.RegisterName("setPm:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelPs                                                                    = objc.RegisterName("ps")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelSetPs                                                                 = objc.RegisterName("setPs:")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelKernelWidth                                                           = objc.RegisterName("kernelWidth")
+	_mPSCNNLocalContrastNormalizationGradientNodeSelKernelHeight                                                          = objc.RegisterName("kernelHeight")
 )
 
 func MPSCNNLocalContrastNormalizationGradientNodeFromID(id objc.ID) *MPSCNNLocalContrastNormalizationGradientNode {
@@ -46,13 +46,17 @@ func MPSCNNLocalContrastNormalizationGradientNodeFromID(id objc.ID) *MPSCNNLocal
 
 func MPSCNNLocalContrastNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint) *MPSCNNLocalContrastNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNLocalContrastNormalizationGradientNode), _mPSCNNLocalContrastNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNLocalContrastNormalizationGradientNode) InitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelWidth uint, kernelHeight uint) *MPSCNNLocalContrastNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationGradientNodeFromID(_ret)
 }
 
@@ -125,4 +129,3 @@ func (o *MPSCNNLocalContrastNormalizationGradientNode) KernelHeight() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNLocalContrastNormalizationGradientNodeSelKernelHeight)
 	return _ret
 }
-

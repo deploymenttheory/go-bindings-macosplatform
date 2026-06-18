@@ -18,28 +18,28 @@ type IOBluetoothSDPServiceRecord struct {
 }
 
 var (
-	_clsIOBluetoothSDPServiceRecord = _objcClass("IOBluetoothSDPServiceRecord")
+	_clsIOBluetoothSDPServiceRecord                                     = _objcClass("IOBluetoothSDPServiceRecord")
 	_iOBluetoothSDPServiceRecordSelPublishedServiceRecordWithDictionary = objc.RegisterName("publishedServiceRecordWithDictionary:")
-	_iOBluetoothSDPServiceRecordSelRemoveServiceRecord = objc.RegisterName("removeServiceRecord")
-	_iOBluetoothSDPServiceRecordSelWithServiceDictionaryDevice = objc.RegisterName("withServiceDictionary:device:")
-	_iOBluetoothSDPServiceRecordSelInitWithServiceDictionaryDevice = objc.RegisterName("initWithServiceDictionary:device:")
-	_iOBluetoothSDPServiceRecordSelWithSDPServiceRecordRef = objc.RegisterName("withSDPServiceRecordRef:")
-	_iOBluetoothSDPServiceRecordSelGetSDPServiceRecordRef = objc.RegisterName("getSDPServiceRecordRef")
-	_iOBluetoothSDPServiceRecordSelGetDevice = objc.RegisterName("getDevice")
-	_iOBluetoothSDPServiceRecordSelGetAttributes = objc.RegisterName("getAttributes")
-	_iOBluetoothSDPServiceRecordSelGetAttributeDataElement = objc.RegisterName("getAttributeDataElement:")
-	_iOBluetoothSDPServiceRecordSelGetServiceName = objc.RegisterName("getServiceName")
-	_iOBluetoothSDPServiceRecordSelGetRFCOMMChannelID = objc.RegisterName("getRFCOMMChannelID:")
-	_iOBluetoothSDPServiceRecordSelGetL2CAPPSM = objc.RegisterName("getL2CAPPSM:")
-	_iOBluetoothSDPServiceRecordSelGetServiceRecordHandle = objc.RegisterName("getServiceRecordHandle:")
-	_iOBluetoothSDPServiceRecordSelMatchesUUID16 = objc.RegisterName("matchesUUID16:")
-	_iOBluetoothSDPServiceRecordSelMatchesUUIDArray = objc.RegisterName("matchesUUIDArray:")
-	_iOBluetoothSDPServiceRecordSelMatchesSearchArray = objc.RegisterName("matchesSearchArray:")
-	_iOBluetoothSDPServiceRecordSelHasServiceFromArray = objc.RegisterName("hasServiceFromArray:")
-	_iOBluetoothSDPServiceRecordSelDevice = objc.RegisterName("device")
-	_iOBluetoothSDPServiceRecordSelAttributes = objc.RegisterName("attributes")
-	_iOBluetoothSDPServiceRecordSelSortedAttributes = objc.RegisterName("sortedAttributes")
-	_iOBluetoothSDPServiceRecordSelHandsFreeSupportedFeatures = objc.RegisterName("handsFreeSupportedFeatures")
+	_iOBluetoothSDPServiceRecordSelRemoveServiceRecord                  = objc.RegisterName("removeServiceRecord")
+	_iOBluetoothSDPServiceRecordSelWithServiceDictionaryDevice          = objc.RegisterName("withServiceDictionary:device:")
+	_iOBluetoothSDPServiceRecordSelInitWithServiceDictionaryDevice      = objc.RegisterName("initWithServiceDictionary:device:")
+	_iOBluetoothSDPServiceRecordSelWithSDPServiceRecordRef              = objc.RegisterName("withSDPServiceRecordRef:")
+	_iOBluetoothSDPServiceRecordSelGetSDPServiceRecordRef               = objc.RegisterName("getSDPServiceRecordRef")
+	_iOBluetoothSDPServiceRecordSelGetDevice                            = objc.RegisterName("getDevice")
+	_iOBluetoothSDPServiceRecordSelGetAttributes                        = objc.RegisterName("getAttributes")
+	_iOBluetoothSDPServiceRecordSelGetAttributeDataElement              = objc.RegisterName("getAttributeDataElement:")
+	_iOBluetoothSDPServiceRecordSelGetServiceName                       = objc.RegisterName("getServiceName")
+	_iOBluetoothSDPServiceRecordSelGetRFCOMMChannelID                   = objc.RegisterName("getRFCOMMChannelID:")
+	_iOBluetoothSDPServiceRecordSelGetL2CAPPSM                          = objc.RegisterName("getL2CAPPSM:")
+	_iOBluetoothSDPServiceRecordSelGetServiceRecordHandle               = objc.RegisterName("getServiceRecordHandle:")
+	_iOBluetoothSDPServiceRecordSelMatchesUUID16                        = objc.RegisterName("matchesUUID16:")
+	_iOBluetoothSDPServiceRecordSelMatchesUUIDArray                     = objc.RegisterName("matchesUUIDArray:")
+	_iOBluetoothSDPServiceRecordSelMatchesSearchArray                   = objc.RegisterName("matchesSearchArray:")
+	_iOBluetoothSDPServiceRecordSelHasServiceFromArray                  = objc.RegisterName("hasServiceFromArray:")
+	_iOBluetoothSDPServiceRecordSelDevice                               = objc.RegisterName("device")
+	_iOBluetoothSDPServiceRecordSelAttributes                           = objc.RegisterName("attributes")
+	_iOBluetoothSDPServiceRecordSelSortedAttributes                     = objc.RegisterName("sortedAttributes")
+	_iOBluetoothSDPServiceRecordSelHandsFreeSupportedFeatures           = objc.RegisterName("handsFreeSupportedFeatures")
 )
 
 func IOBluetoothSDPServiceRecordFromID(id objc.ID) *IOBluetoothSDPServiceRecord {
@@ -54,7 +54,9 @@ func IOBluetoothSDPServiceRecordFromID(id objc.ID) *IOBluetoothSDPServiceRecord 
 
 func IOBluetoothSDPServiceRecordPublishedServiceRecordWithDictionary(serviceDict *foundation.NSDictionary[objc.ID, objc.ID]) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelPublishedServiceRecordWithDictionary, serviceDict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
@@ -65,19 +67,25 @@ func (o *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
 
 func IOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelWithServiceDictionaryDevice, serviceDict, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
 func (o *IOBluetoothSDPServiceRecord) InitWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelInitWithServiceDictionaryDevice, serviceDict, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
 func IOBluetoothSDPServiceRecordWithSDPServiceRecordRef(sdpServiceRecordRef unsafe.Pointer) *IOBluetoothSDPServiceRecord {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothSDPServiceRecord), _iOBluetoothSDPServiceRecordSelWithSDPServiceRecordRef, sdpServiceRecordRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPServiceRecordFromID(_ret)
 }
 
@@ -88,7 +96,9 @@ func (o *IOBluetoothSDPServiceRecord) GetSDPServiceRecordRef() unsafe.Pointer {
 
 func (o *IOBluetoothSDPServiceRecord) GetDevice() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -99,13 +109,17 @@ func (o *IOBluetoothSDPServiceRecord) GetAttributes() *foundation.NSDictionary[o
 
 func (o *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16) *IOBluetoothSDPDataElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetAttributeDataElement, attributeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothSDPDataElementFromID(_ret)
 }
 
 func (o *IOBluetoothSDPServiceRecord) GetServiceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelGetServiceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,7 +163,9 @@ func (o *IOBluetoothSDPServiceRecord) HasServiceFromArray(array *foundation.NSAr
 
 func (o *IOBluetoothSDPServiceRecord) Device() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothSDPServiceRecordSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -168,4 +184,3 @@ func (o *IOBluetoothSDPServiceRecord) HandsFreeSupportedFeatures() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothSDPServiceRecordSelHandsFreeSupportedFeatures)
 	return _ret
 }
-

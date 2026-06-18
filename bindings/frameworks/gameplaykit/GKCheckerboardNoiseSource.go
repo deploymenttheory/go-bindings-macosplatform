@@ -17,11 +17,11 @@ type GKCheckerboardNoiseSource struct {
 }
 
 var (
-	_clsGKCheckerboardNoiseSource = _objcClass("GKCheckerboardNoiseSource")
+	_clsGKCheckerboardNoiseSource                                = _objcClass("GKCheckerboardNoiseSource")
 	_gKCheckerboardNoiseSourceSelCheckerboardNoiseWithSquareSize = objc.RegisterName("checkerboardNoiseWithSquareSize:")
-	_gKCheckerboardNoiseSourceSelInitWithSquareSize = objc.RegisterName("initWithSquareSize:")
-	_gKCheckerboardNoiseSourceSelSquareSize = objc.RegisterName("squareSize")
-	_gKCheckerboardNoiseSourceSelSetSquareSize = objc.RegisterName("setSquareSize:")
+	_gKCheckerboardNoiseSourceSelInitWithSquareSize              = objc.RegisterName("initWithSquareSize:")
+	_gKCheckerboardNoiseSourceSelSquareSize                      = objc.RegisterName("squareSize")
+	_gKCheckerboardNoiseSourceSelSetSquareSize                   = objc.RegisterName("setSquareSize:")
 )
 
 func GKCheckerboardNoiseSourceFromID(id objc.ID) *GKCheckerboardNoiseSource {
@@ -36,13 +36,17 @@ func GKCheckerboardNoiseSourceFromID(id objc.ID) *GKCheckerboardNoiseSource {
 
 func GKCheckerboardNoiseSourceCheckerboardNoiseWithSquareSize(squareSize float64) *GKCheckerboardNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCheckerboardNoiseSource), _gKCheckerboardNoiseSourceSelCheckerboardNoiseWithSquareSize, squareSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCheckerboardNoiseSourceFromID(_ret)
 }
 
 func (o *GKCheckerboardNoiseSource) InitWithSquareSize(squareSize float64) *GKCheckerboardNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCheckerboardNoiseSourceSelInitWithSquareSize, squareSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCheckerboardNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKCheckerboardNoiseSource) SquareSize() float64 {
 func (o *GKCheckerboardNoiseSource) SetSquareSize(squareSize float64) {
 	o.Ptr().Send(_gKCheckerboardNoiseSourceSelSetSquareSize, squareSize)
 }
-

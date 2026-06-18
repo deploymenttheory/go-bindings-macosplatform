@@ -80,4 +80,3 @@ type AssetVariantable interface {
 }
 
 var _ AssetVariantable = (*AssetVariant)(nil)
-

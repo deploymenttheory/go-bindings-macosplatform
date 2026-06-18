@@ -18,13 +18,13 @@ type CBUUID struct {
 }
 
 var (
-	_clsCBUUID = _objcClass("CBUUID")
+	_clsCBUUID               = _objcClass("CBUUID")
 	_cBUUIDSelUUIDWithString = objc.RegisterName("UUIDWithString:")
-	_cBUUIDSelUUIDWithData = objc.RegisterName("UUIDWithData:")
+	_cBUUIDSelUUIDWithData   = objc.RegisterName("UUIDWithData:")
 	_cBUUIDSelUUIDWithCFUUID = objc.RegisterName("UUIDWithCFUUID:")
 	_cBUUIDSelUUIDWithNSUUID = objc.RegisterName("UUIDWithNSUUID:")
-	_cBUUIDSelData = objc.RegisterName("data")
-	_cBUUIDSelUUIDString = objc.RegisterName("UUIDString")
+	_cBUUIDSelData           = objc.RegisterName("data")
+	_cBUUIDSelUUIDString     = objc.RegisterName("UUIDString")
 )
 
 func CBUUIDFromID(id objc.ID) *CBUUID {
@@ -40,14 +40,18 @@ func CBUUIDFromID(id objc.ID) *CBUUID {
 // @method UUIDWithString: @discussion Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID string representation. The expected format for 128-bit UUIDs is a string punctuated by hyphens, for example 68753A44-4D6F-1226-9C60-0050E4C00067.
 func CBUUIDUUIDWithString(theString *foundation.NSString) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithString, theString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUUIDFromID(_ret)
 }
 
 // @method UUIDWithData: @discussion Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID data container.
 func CBUUIDUUIDWithData(theData *foundation.NSData) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithData, theData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUUIDFromID(_ret)
 }
 
@@ -55,28 +59,35 @@ func CBUUIDUUIDWithData(theData *foundation.NSData) *CBUUID {
 // Deprecated: since macOS 10.13.
 func CBUUIDUUIDWithCFUUID(theUUID unsafe.Pointer) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithCFUUID, theUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUUIDFromID(_ret)
 }
 
 // @method UUIDWithNSUUID: @discussion Creates a CBUUID with an NSUUID.
 func CBUUIDUUIDWithNSUUID(theUUID *foundation.NSUUID) *CBUUID {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCBUUID), _cBUUIDSelUUIDWithNSUUID, theUUID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUUIDFromID(_ret)
 }
 
 // @property data @discussion The UUID as NSData.
 func (o *CBUUID) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBUUIDSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property UUIDString @discussion The UUID as NSString.
 func (o *CBUUID) UUIDString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBUUIDSelUUIDString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

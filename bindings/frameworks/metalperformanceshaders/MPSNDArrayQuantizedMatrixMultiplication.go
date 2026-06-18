@@ -17,7 +17,7 @@ type MPSNDArrayQuantizedMatrixMultiplication struct {
 }
 
 var (
-	_clsMPSNDArrayQuantizedMatrixMultiplication = _objcClass("MPSNDArrayQuantizedMatrixMultiplication")
+	_clsMPSNDArrayQuantizedMatrixMultiplication                                                                    = _objcClass("MPSNDArrayQuantizedMatrixMultiplication")
 	_mPSNDArrayQuantizedMatrixMultiplicationSelInitWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor = objc.RegisterName("initWithDevice:leftQuantizationDescriptor:rightQuantizationDescriptor:")
 )
 
@@ -34,7 +34,8 @@ func MPSNDArrayQuantizedMatrixMultiplicationFromID(id objc.ID) *MPSNDArrayQuanti
 // @abstract   Initializes a quantized matrix multiplication kernel. @param      leftQuantizationDescriptor    The quantization definition for the LHS input. @param      rightQuantizationDescriptor    The quantization definition for the RHS input. @result     A new valid quantized matrix multiplication kernel.
 func (o *MPSNDArrayQuantizedMatrixMultiplication) InitWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor(device metal.MTLDevice, leftQuantizationDescriptor *mpsndarray.MPSNDArrayQuantizationDescriptor, rightQuantizationDescriptor *mpsndarray.MPSNDArrayQuantizationDescriptor) *MPSNDArrayQuantizedMatrixMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayQuantizedMatrixMultiplicationSelInitWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor, device, leftQuantizationDescriptor.Ptr(), rightQuantizationDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayQuantizedMatrixMultiplicationFromID(_ret)
 }
-

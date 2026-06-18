@@ -20,17 +20,17 @@ type CNRenderingSession struct {
 }
 
 var (
-	_clsCNRenderingSession = _objcClass("CNRenderingSession")
-	_cNRenderingSessionSelInitWithCommandQueueSessionAttributesPreferredTransformQuality = objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:")
-	_cNRenderingSessionSelEncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage = objc.RegisterName("encodeRenderToCommandBuffer:frameAttributes:sourceImage:sourceDisparity:destinationImage:")
-	_cNRenderingSessionSelEncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA = objc.RegisterName("encodeRenderToCommandBuffer:frameAttributes:sourceImage:sourceDisparity:destinationRGBA:")
+	_clsCNRenderingSession                                                                                                     = _objcClass("CNRenderingSession")
+	_cNRenderingSessionSelInitWithCommandQueueSessionAttributesPreferredTransformQuality                                       = objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:")
+	_cNRenderingSessionSelEncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage                 = objc.RegisterName("encodeRenderToCommandBuffer:frameAttributes:sourceImage:sourceDisparity:destinationImage:")
+	_cNRenderingSessionSelEncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA                  = objc.RegisterName("encodeRenderToCommandBuffer:frameAttributes:sourceImage:sourceDisparity:destinationRGBA:")
 	_cNRenderingSessionSelEncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma = objc.RegisterName("encodeRenderToCommandBuffer:frameAttributes:sourceImage:sourceDisparity:destinationLuma:destinationChroma:")
-	_cNRenderingSessionSelCommandQueue = objc.RegisterName("commandQueue")
-	_cNRenderingSessionSelSessionAttributes = objc.RegisterName("sessionAttributes")
-	_cNRenderingSessionSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_cNRenderingSessionSelQuality = objc.RegisterName("quality")
-	_cNRenderingSessionSelSourcePixelFormatTypes = objc.RegisterName("sourcePixelFormatTypes")
-	_cNRenderingSessionSelDestinationPixelFormatTypes = objc.RegisterName("destinationPixelFormatTypes")
+	_cNRenderingSessionSelCommandQueue                                                                                         = objc.RegisterName("commandQueue")
+	_cNRenderingSessionSelSessionAttributes                                                                                    = objc.RegisterName("sessionAttributes")
+	_cNRenderingSessionSelPreferredTransform                                                                                   = objc.RegisterName("preferredTransform")
+	_cNRenderingSessionSelQuality                                                                                              = objc.RegisterName("quality")
+	_cNRenderingSessionSelSourcePixelFormatTypes                                                                               = objc.RegisterName("sourcePixelFormatTypes")
+	_cNRenderingSessionSelDestinationPixelFormatTypes                                                                          = objc.RegisterName("destinationPixelFormatTypes")
 )
 
 func CNRenderingSessionFromID(id objc.ID) *CNRenderingSession {
@@ -45,7 +45,9 @@ func CNRenderingSessionFromID(id objc.ID) *CNRenderingSession {
 
 func (o *CNRenderingSession) InitWithCommandQueueSessionAttributesPreferredTransformQuality(commandQueue metal.MTLCommandQueue, sessionAttributes *CNRenderingSessionAttributes, preferredTransform corefoundation.CGAffineTransform, quality CNRenderingQuality) *CNRenderingSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionSelInitWithCommandQueueSessionAttributesPreferredTransformQuality, commandQueue, sessionAttributes.Ptr(), preferredTransform, quality)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNRenderingSessionFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *CNRenderingSession) CommandQueue() metal.MTLCommandQueue {
 
 func (o *CNRenderingSession) SessionAttributes() *CNRenderingSessionAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionSelSessionAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNRenderingSessionAttributesFromID(_ret)
 }
 
@@ -99,4 +103,3 @@ func CNRenderingSessionDestinationPixelFormatTypes() *foundation.NSArray[*founda
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](objc.ID(_clsCNRenderingSession), _cNRenderingSessionSelDestinationPixelFormatTypes)
 	return _ret
 }
-

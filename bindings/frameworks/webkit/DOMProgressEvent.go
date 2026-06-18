@@ -15,10 +15,10 @@ type DOMProgressEvent struct {
 }
 
 var (
-	_clsDOMProgressEvent = _objcClass("DOMProgressEvent")
+	_clsDOMProgressEvent                 = _objcClass("DOMProgressEvent")
 	_dOMProgressEventSelLengthComputable = objc.RegisterName("lengthComputable")
-	_dOMProgressEventSelLoaded = objc.RegisterName("loaded")
-	_dOMProgressEventSelTotal = objc.RegisterName("total")
+	_dOMProgressEventSelLoaded           = objc.RegisterName("loaded")
+	_dOMProgressEventSelTotal            = objc.RegisterName("total")
 )
 
 func DOMProgressEventFromID(id objc.ID) *DOMProgressEvent {
@@ -45,4 +45,3 @@ func (o *DOMProgressEvent) Total() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _dOMProgressEventSelTotal)
 	return _ret
 }
-

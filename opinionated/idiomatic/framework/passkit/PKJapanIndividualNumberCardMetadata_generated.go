@@ -17,7 +17,9 @@ type JapanIndividualNumberCardMetadata struct {
 }
 
 // Unwrap returns the underlying [raw.PKJapanIndividualNumberCardMetadata].
-func (x *JapanIndividualNumberCardMetadata) Unwrap() *raw.PKJapanIndividualNumberCardMetadata { return x.inner }
+func (x *JapanIndividualNumberCardMetadata) Unwrap() *raw.PKJapanIndividualNumberCardMetadata {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -111,7 +113,9 @@ func (x *JapanIndividualNumberCardMetadata) SetPreview(preview *raw.PKAddPassMet
 	x.inner.SetPreview(preview)
 }
 
-func (x *JapanIndividualNumberCardMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return &x.inner.PKIdentityDocumentMetadata }
+func (x *JapanIndividualNumberCardMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
+	return &x.inner.PKIdentityDocumentMetadata
+}
 
 // JapanIndividualNumberCardMetadataable is the interface implemented by [JapanIndividualNumberCardMetadata], for mocking and DI.
 type JapanIndividualNumberCardMetadataable interface {
@@ -129,4 +133,3 @@ type JapanIndividualNumberCardMetadataable interface {
 }
 
 var _ JapanIndividualNumberCardMetadataable = (*JapanIndividualNumberCardMetadata)(nil)
-

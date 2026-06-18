@@ -16,33 +16,33 @@ type VSAccountMetadataRequest struct {
 }
 
 var (
-	_clsVSAccountMetadataRequest = _objcClass("VSAccountMetadataRequest")
-	_vSAccountMetadataRequestSelChannelIdentifier = objc.RegisterName("channelIdentifier")
-	_vSAccountMetadataRequestSelSetChannelIdentifier = objc.RegisterName("setChannelIdentifier:")
-	_vSAccountMetadataRequestSelSupportedAccountProviderIdentifiers = objc.RegisterName("supportedAccountProviderIdentifiers")
+	_clsVSAccountMetadataRequest                                       = _objcClass("VSAccountMetadataRequest")
+	_vSAccountMetadataRequestSelChannelIdentifier                      = objc.RegisterName("channelIdentifier")
+	_vSAccountMetadataRequestSelSetChannelIdentifier                   = objc.RegisterName("setChannelIdentifier:")
+	_vSAccountMetadataRequestSelSupportedAccountProviderIdentifiers    = objc.RegisterName("supportedAccountProviderIdentifiers")
 	_vSAccountMetadataRequestSelSetSupportedAccountProviderIdentifiers = objc.RegisterName("setSupportedAccountProviderIdentifiers:")
-	_vSAccountMetadataRequestSelFeaturedAccountProviderIdentifiers = objc.RegisterName("featuredAccountProviderIdentifiers")
-	_vSAccountMetadataRequestSelSetFeaturedAccountProviderIdentifiers = objc.RegisterName("setFeaturedAccountProviderIdentifiers:")
-	_vSAccountMetadataRequestSelVerificationToken = objc.RegisterName("verificationToken")
-	_vSAccountMetadataRequestSelSetVerificationToken = objc.RegisterName("setVerificationToken:")
-	_vSAccountMetadataRequestSelIncludeAccountProviderIdentifier = objc.RegisterName("includeAccountProviderIdentifier")
-	_vSAccountMetadataRequestSelSetIncludeAccountProviderIdentifier = objc.RegisterName("setIncludeAccountProviderIdentifier:")
-	_vSAccountMetadataRequestSelIncludeAuthenticationExpirationDate = objc.RegisterName("includeAuthenticationExpirationDate")
+	_vSAccountMetadataRequestSelFeaturedAccountProviderIdentifiers     = objc.RegisterName("featuredAccountProviderIdentifiers")
+	_vSAccountMetadataRequestSelSetFeaturedAccountProviderIdentifiers  = objc.RegisterName("setFeaturedAccountProviderIdentifiers:")
+	_vSAccountMetadataRequestSelVerificationToken                      = objc.RegisterName("verificationToken")
+	_vSAccountMetadataRequestSelSetVerificationToken                   = objc.RegisterName("setVerificationToken:")
+	_vSAccountMetadataRequestSelIncludeAccountProviderIdentifier       = objc.RegisterName("includeAccountProviderIdentifier")
+	_vSAccountMetadataRequestSelSetIncludeAccountProviderIdentifier    = objc.RegisterName("setIncludeAccountProviderIdentifier:")
+	_vSAccountMetadataRequestSelIncludeAuthenticationExpirationDate    = objc.RegisterName("includeAuthenticationExpirationDate")
 	_vSAccountMetadataRequestSelSetIncludeAuthenticationExpirationDate = objc.RegisterName("setIncludeAuthenticationExpirationDate:")
-	_vSAccountMetadataRequestSelLocalizedVideoTitle = objc.RegisterName("localizedVideoTitle")
-	_vSAccountMetadataRequestSelSetLocalizedVideoTitle = objc.RegisterName("setLocalizedVideoTitle:")
-	_vSAccountMetadataRequestSelIsInterruptionAllowed = objc.RegisterName("isInterruptionAllowed")
-	_vSAccountMetadataRequestSelSetInterruptionAllowed = objc.RegisterName("setInterruptionAllowed:")
-	_vSAccountMetadataRequestSelForceAuthentication = objc.RegisterName("forceAuthentication")
-	_vSAccountMetadataRequestSelSetForceAuthentication = objc.RegisterName("setForceAuthentication:")
-	_vSAccountMetadataRequestSelAttributeNames = objc.RegisterName("attributeNames")
-	_vSAccountMetadataRequestSelSetAttributeNames = objc.RegisterName("setAttributeNames:")
-	_vSAccountMetadataRequestSelSupportedAuthenticationSchemes = objc.RegisterName("supportedAuthenticationSchemes")
-	_vSAccountMetadataRequestSelSetSupportedAuthenticationSchemes = objc.RegisterName("setSupportedAuthenticationSchemes:")
-	_vSAccountMetadataRequestSelAccountProviderAuthenticationToken = objc.RegisterName("accountProviderAuthenticationToken")
-	_vSAccountMetadataRequestSelSetAccountProviderAuthenticationToken = objc.RegisterName("setAccountProviderAuthenticationToken:")
-	_vSAccountMetadataRequestSelApplicationAccountProviders = objc.RegisterName("applicationAccountProviders")
-	_vSAccountMetadataRequestSelSetApplicationAccountProviders = objc.RegisterName("setApplicationAccountProviders:")
+	_vSAccountMetadataRequestSelLocalizedVideoTitle                    = objc.RegisterName("localizedVideoTitle")
+	_vSAccountMetadataRequestSelSetLocalizedVideoTitle                 = objc.RegisterName("setLocalizedVideoTitle:")
+	_vSAccountMetadataRequestSelIsInterruptionAllowed                  = objc.RegisterName("isInterruptionAllowed")
+	_vSAccountMetadataRequestSelSetInterruptionAllowed                 = objc.RegisterName("setInterruptionAllowed:")
+	_vSAccountMetadataRequestSelForceAuthentication                    = objc.RegisterName("forceAuthentication")
+	_vSAccountMetadataRequestSelSetForceAuthentication                 = objc.RegisterName("setForceAuthentication:")
+	_vSAccountMetadataRequestSelAttributeNames                         = objc.RegisterName("attributeNames")
+	_vSAccountMetadataRequestSelSetAttributeNames                      = objc.RegisterName("setAttributeNames:")
+	_vSAccountMetadataRequestSelSupportedAuthenticationSchemes         = objc.RegisterName("supportedAuthenticationSchemes")
+	_vSAccountMetadataRequestSelSetSupportedAuthenticationSchemes      = objc.RegisterName("setSupportedAuthenticationSchemes:")
+	_vSAccountMetadataRequestSelAccountProviderAuthenticationToken     = objc.RegisterName("accountProviderAuthenticationToken")
+	_vSAccountMetadataRequestSelSetAccountProviderAuthenticationToken  = objc.RegisterName("setAccountProviderAuthenticationToken:")
+	_vSAccountMetadataRequestSelApplicationAccountProviders            = objc.RegisterName("applicationAccountProviders")
+	_vSAccountMetadataRequestSelSetApplicationAccountProviders         = objc.RegisterName("setApplicationAccountProviders:")
 )
 
 func VSAccountMetadataRequestFromID(id objc.ID) *VSAccountMetadataRequest {
@@ -58,7 +58,9 @@ func VSAccountMetadataRequestFromID(id objc.ID) *VSAccountMetadataRequest {
 // Identifies who is making the request. For use by applications using the SAML authentication scheme only.
 func (o *VSAccountMetadataRequest) ChannelIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelChannelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +92,9 @@ func (o *VSAccountMetadataRequest) SetFeaturedAccountProviderIdentifiers(feature
 // A value that the account provider may use to verify the identity of the requesting app.
 func (o *VSAccountMetadataRequest) VerificationToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelVerificationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,7 +125,9 @@ func (o *VSAccountMetadataRequest) SetIncludeAuthenticationExpirationDate(includ
 // A brief, user-presentable name for the video that the app will play if it receives a successful response. For example, "What's New in Swift" or "Office Space" Do not provide a value if the request will not be used to play a specific video.
 func (o *VSAccountMetadataRequest) LocalizedVideoTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelLocalizedVideoTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -173,7 +179,9 @@ func (o *VSAccountMetadataRequest) SetSupportedAuthenticationSchemes(supportedAu
 // A value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.
 func (o *VSAccountMetadataRequest) AccountProviderAuthenticationToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelAccountProviderAuthenticationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -184,7 +192,9 @@ func (o *VSAccountMetadataRequest) SetAccountProviderAuthenticationToken(account
 // Application-specific providers to be added to the list of account providers.
 func (o *VSAccountMetadataRequest) ApplicationAccountProviders() *foundation.NSArray[*VSAccountApplicationProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountMetadataRequestSelApplicationAccountProviders)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VSAccountApplicationProvider](_ret)
 }
 
@@ -192,4 +202,3 @@ func (o *VSAccountMetadataRequest) ApplicationAccountProviders() *foundation.NSA
 func (o *VSAccountMetadataRequest) SetApplicationAccountProviders(applicationAccountProviders *foundation.NSArray[*VSAccountApplicationProvider]) {
 	o.Ptr().Send(_vSAccountMetadataRequestSelSetApplicationAccountProviders, applicationAccountProviders.Ptr())
 }
-

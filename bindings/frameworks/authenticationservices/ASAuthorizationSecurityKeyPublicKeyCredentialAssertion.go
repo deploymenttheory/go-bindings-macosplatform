@@ -16,9 +16,9 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialAssertion struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialAssertion = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialAssertion")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialAssertion      = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialAssertion")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionSelAppID = objc.RegisterName("appID")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionSelPrf = objc.RegisterName("prf")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionSelPrf   = objc.RegisterName("prf")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialAssertion {
@@ -39,7 +39,8 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *ASAuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialAssertionSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_ret)
 }
-

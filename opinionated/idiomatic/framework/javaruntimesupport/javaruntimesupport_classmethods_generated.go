@@ -73,4 +73,3 @@ func SymbolicatorForPid(pid int) *Symbolicator {
 	}
 	return &Symbolicator{inner: _r}
 }
-

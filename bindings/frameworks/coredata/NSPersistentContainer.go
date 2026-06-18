@@ -18,21 +18,21 @@ type NSPersistentContainer struct {
 }
 
 var (
-	_clsNSPersistentContainer = _objcClass("NSPersistentContainer")
-	_nSPersistentContainerSelPersistentContainerWithName = objc.RegisterName("persistentContainerWithName:")
+	_clsNSPersistentContainer                                              = _objcClass("NSPersistentContainer")
+	_nSPersistentContainerSelPersistentContainerWithName                   = objc.RegisterName("persistentContainerWithName:")
 	_nSPersistentContainerSelPersistentContainerWithNameManagedObjectModel = objc.RegisterName("persistentContainerWithName:managedObjectModel:")
-	_nSPersistentContainerSelDefaultDirectoryURL = objc.RegisterName("defaultDirectoryURL")
-	_nSPersistentContainerSelInitWithName = objc.RegisterName("initWithName:")
-	_nSPersistentContainerSelInitWithNameManagedObjectModel = objc.RegisterName("initWithName:managedObjectModel:")
-	_nSPersistentContainerSelLoadPersistentStoresWithCompletionHandler = objc.RegisterName("loadPersistentStoresWithCompletionHandler:")
-	_nSPersistentContainerSelNewBackgroundContext = objc.RegisterName("newBackgroundContext")
-	_nSPersistentContainerSelPerformBackgroundTask = objc.RegisterName("performBackgroundTask:")
-	_nSPersistentContainerSelName = objc.RegisterName("name")
-	_nSPersistentContainerSelViewContext = objc.RegisterName("viewContext")
-	_nSPersistentContainerSelManagedObjectModel = objc.RegisterName("managedObjectModel")
-	_nSPersistentContainerSelPersistentStoreCoordinator = objc.RegisterName("persistentStoreCoordinator")
-	_nSPersistentContainerSelPersistentStoreDescriptions = objc.RegisterName("persistentStoreDescriptions")
-	_nSPersistentContainerSelSetPersistentStoreDescriptions = objc.RegisterName("setPersistentStoreDescriptions:")
+	_nSPersistentContainerSelDefaultDirectoryURL                           = objc.RegisterName("defaultDirectoryURL")
+	_nSPersistentContainerSelInitWithName                                  = objc.RegisterName("initWithName:")
+	_nSPersistentContainerSelInitWithNameManagedObjectModel                = objc.RegisterName("initWithName:managedObjectModel:")
+	_nSPersistentContainerSelLoadPersistentStoresWithCompletionHandler     = objc.RegisterName("loadPersistentStoresWithCompletionHandler:")
+	_nSPersistentContainerSelNewBackgroundContext                          = objc.RegisterName("newBackgroundContext")
+	_nSPersistentContainerSelPerformBackgroundTask                         = objc.RegisterName("performBackgroundTask:")
+	_nSPersistentContainerSelName                                          = objc.RegisterName("name")
+	_nSPersistentContainerSelViewContext                                   = objc.RegisterName("viewContext")
+	_nSPersistentContainerSelManagedObjectModel                            = objc.RegisterName("managedObjectModel")
+	_nSPersistentContainerSelPersistentStoreCoordinator                    = objc.RegisterName("persistentStoreCoordinator")
+	_nSPersistentContainerSelPersistentStoreDescriptions                   = objc.RegisterName("persistentStoreDescriptions")
+	_nSPersistentContainerSelSetPersistentStoreDescriptions                = objc.RegisterName("setPersistentStoreDescriptions:")
 )
 
 func NSPersistentContainerFromID(id objc.ID) *NSPersistentContainer {
@@ -47,31 +47,41 @@ func NSPersistentContainerFromID(id objc.ID) *NSPersistentContainer {
 
 func NSPersistentContainerPersistentContainerWithName(name *foundation.NSString) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelPersistentContainerWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentContainerFromID(_ret)
 }
 
 func NSPersistentContainerPersistentContainerWithNameManagedObjectModel(name *foundation.NSString, model *NSManagedObjectModel) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelPersistentContainerWithNameManagedObjectModel, name.Ptr(), model.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentContainerFromID(_ret)
 }
 
 func NSPersistentContainerDefaultDirectoryURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentContainer), _nSPersistentContainerSelDefaultDirectoryURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *NSPersistentContainer) InitWithName(name *foundation.NSString) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentContainerFromID(_ret)
 }
 
 func (o *NSPersistentContainer) InitWithNameManagedObjectModel(name *foundation.NSString, model *NSManagedObjectModel) *NSPersistentContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelInitWithNameManagedObjectModel, name.Ptr(), model.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentContainerFromID(_ret)
 }
 
@@ -110,35 +120,44 @@ func (o *NSPersistentContainer) PerformBackgroundTask(block func(*NSManagedObjec
 
 func (o *NSPersistentContainer) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentContainer) ViewContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelViewContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSPersistentContainer) ManagedObjectModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelManagedObjectModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSPersistentContainer) PersistentStoreCoordinator() *NSPersistentStoreCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelPersistentStoreCoordinator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreCoordinatorFromID(_ret)
 }
 
 func (o *NSPersistentContainer) PersistentStoreDescriptions() *foundation.NSArray[*NSPersistentStoreDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentContainerSelPersistentStoreDescriptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPersistentStoreDescription](_ret)
 }
 
 func (o *NSPersistentContainer) SetPersistentStoreDescriptions(persistentStoreDescriptions *foundation.NSArray[*NSPersistentStoreDescription]) {
 	o.Ptr().Send(_nSPersistentContainerSelSetPersistentStoreDescriptions, persistentStoreDescriptions.Ptr())
 }
-

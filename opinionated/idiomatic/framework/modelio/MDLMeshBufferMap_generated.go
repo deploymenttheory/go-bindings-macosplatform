@@ -49,4 +49,3 @@ type MeshBufferMapable interface {
 }
 
 var _ MeshBufferMapable = (*MeshBufferMap)(nil)
-

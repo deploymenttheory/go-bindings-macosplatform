@@ -19,14 +19,14 @@ type VNVideoProcessor struct {
 }
 
 var (
-	_clsVNVideoProcessor = _objcClass("VNVideoProcessor")
-	_vNVideoProcessorSelInitWithURL = objc.RegisterName("initWithURL:")
-	_vNVideoProcessorSelAddRequestProcessingOptionsError = objc.RegisterName("addRequest:processingOptions:error:")
+	_clsVNVideoProcessor                                     = _objcClass("VNVideoProcessor")
+	_vNVideoProcessorSelInitWithURL                          = objc.RegisterName("initWithURL:")
+	_vNVideoProcessorSelAddRequestProcessingOptionsError     = objc.RegisterName("addRequest:processingOptions:error:")
 	_vNVideoProcessorSelAddRequestWithProcessingOptionsError = objc.RegisterName("addRequest:withProcessingOptions:error:")
-	_vNVideoProcessorSelRemoveRequestError = objc.RegisterName("removeRequest:error:")
-	_vNVideoProcessorSelAnalyzeTimeRangeError = objc.RegisterName("analyzeTimeRange:error:")
-	_vNVideoProcessorSelAnalyzeWithTimeRangeError = objc.RegisterName("analyzeWithTimeRange:error:")
-	_vNVideoProcessorSelCancel = objc.RegisterName("cancel")
+	_vNVideoProcessorSelRemoveRequestError                   = objc.RegisterName("removeRequest:error:")
+	_vNVideoProcessorSelAnalyzeTimeRangeError                = objc.RegisterName("analyzeTimeRange:error:")
+	_vNVideoProcessorSelAnalyzeWithTimeRangeError            = objc.RegisterName("analyzeWithTimeRange:error:")
+	_vNVideoProcessorSelCancel                               = objc.RegisterName("cancel")
 )
 
 func VNVideoProcessorFromID(id objc.ID) *VNVideoProcessor {
@@ -42,7 +42,9 @@ func VNVideoProcessorFromID(id objc.ID) *VNVideoProcessor {
 // @brief Creates a VNVideoProcessor to be used for performing requests against a video asset specified by it's URL. @param videoURL A URL pointing at a video asset on which the requests will be performed. The video format has to be supported by AVFoundation.
 func (o *VNVideoProcessor) InitWithURL(videoURL *foundation.NSURL) *VNVideoProcessor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVideoProcessorSelInitWithURL, videoURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVideoProcessorFromID(_ret)
 }
 
@@ -100,4 +102,3 @@ func (o *VNVideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeR
 func (o *VNVideoProcessor) Cancel() {
 	o.Ptr().Send(_vNVideoProcessorSelCancel)
 }
-

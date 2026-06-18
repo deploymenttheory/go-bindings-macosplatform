@@ -16,10 +16,10 @@ type MTL4PipelineDescriptor struct {
 }
 
 var (
-	_clsMTL4PipelineDescriptor = _objcClass("MTL4PipelineDescriptor")
-	_mTL4PipelineDescriptorSelLabel = objc.RegisterName("label")
-	_mTL4PipelineDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTL4PipelineDescriptorSelOptions = objc.RegisterName("options")
+	_clsMTL4PipelineDescriptor           = _objcClass("MTL4PipelineDescriptor")
+	_mTL4PipelineDescriptorSelLabel      = objc.RegisterName("label")
+	_mTL4PipelineDescriptorSelSetLabel   = objc.RegisterName("setLabel:")
+	_mTL4PipelineDescriptorSelOptions    = objc.RegisterName("options")
 	_mTL4PipelineDescriptorSelSetOptions = objc.RegisterName("setOptions:")
 )
 
@@ -36,7 +36,9 @@ func MTL4PipelineDescriptorFromID(id objc.ID) *MTL4PipelineDescriptor {
 // Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
 func (o *MTL4PipelineDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4PipelineDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *MTL4PipelineDescriptor) SetLabel(label *foundation.NSString) {
 // Provides compile-time options when you build the pipeline.
 func (o *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4PipelineDescriptorSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4PipelineOptionsFromID(_ret)
 }
 
 func (o *MTL4PipelineDescriptor) SetOptions(options *MTL4PipelineOptions) {
 	o.Ptr().Send(_mTL4PipelineDescriptorSelSetOptions, options.Ptr())
 }
-

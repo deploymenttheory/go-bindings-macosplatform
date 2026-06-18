@@ -18,12 +18,12 @@ type BAAssetPackManifest struct {
 }
 
 var (
-	_clsBAAssetPackManifest = _objcClass("BAAssetPackManifest")
+	_clsBAAssetPackManifest                                                     = _objcClass("BAAssetPackManifest")
 	_bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError = objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:")
-	_bAAssetPackManifestSelInitFromDataApplicationGroupIdentifierError = objc.RegisterName("initFromData:applicationGroupIdentifier:error:")
-	_bAAssetPackManifestSelAllDownloads = objc.RegisterName("allDownloads")
-	_bAAssetPackManifestSelAllDownloadsForContentRequest = objc.RegisterName("allDownloadsForContentRequest:")
-	_bAAssetPackManifestSelAssetPacks = objc.RegisterName("assetPacks")
+	_bAAssetPackManifestSelInitFromDataApplicationGroupIdentifierError          = objc.RegisterName("initFromData:applicationGroupIdentifier:error:")
+	_bAAssetPackManifestSelAllDownloads                                         = objc.RegisterName("allDownloads")
+	_bAAssetPackManifestSelAllDownloadsForContentRequest                        = objc.RegisterName("allDownloadsForContentRequest:")
+	_bAAssetPackManifestSelAssetPacks                                           = objc.RegisterName("assetPacks")
 )
 
 func BAAssetPackManifestFromID(id objc.ID) *BAAssetPackManifest {
@@ -40,7 +40,9 @@ func BAAssetPackManifestFromID(id objc.ID) *BAAssetPackManifest {
 func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierError(uRL *foundation.NSURL, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitWithContentsOfURLApplicationGroupIdentifierError, uRL.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,31 +53,38 @@ func (o *BAAssetPackManifest) InitWithContentsOfURLApplicationGroupIdentifierErr
 func (o *BAAssetPackManifest) InitFromDataApplicationGroupIdentifierError(data *foundation.NSData, applicationGroupIdentifier *foundation.NSString) (*BAAssetPackManifest, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelInitFromDataApplicationGroupIdentifierError, data.Ptr(), applicationGroupIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return BAAssetPackManifestFromID(_ret), nil
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Returns: A collection of download objects. - Remark: Use this method in your main application; use ``allDownloadsForContentRequest:`` in your downloader extension.
+// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Returns: A collection of download objects. - Remark: Use this method in your main application; use “allDownloadsForContentRequest:“ in your downloader extension.
 func (o *BAAssetPackManifest) AllDownloads() *foundation.NSSet[*BADownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAllDownloads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*BADownload](_ret)
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A collection of download objects. - Remark: Use this method in your downloader extension; use ``allDownloads`` instead in your main application.
+// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A collection of download objects. - Remark: Use this method in your downloader extension; use “allDownloads“ instead in your main application.
 func (o *BAAssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*BADownload] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAllDownloadsForContentRequest, contentRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*BADownload](_ret)
 }
 
 // The asset packs that are available to download.
 func (o *BAAssetPackManifest) AssetPacks() *foundation.NSSet[*BAAssetPack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bAAssetPackManifestSelAssetPacks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*BAAssetPack](_ret)
 }
-

@@ -67,4 +67,3 @@ type StructTypeable interface {
 }
 
 var _ StructTypeable = (*StructType)(nil)
-

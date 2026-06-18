@@ -100,4 +100,3 @@ type VideoOutputSpecificationable interface {
 }
 
 var _ VideoOutputSpecificationable = (*VideoOutputSpecification)(nil)
-

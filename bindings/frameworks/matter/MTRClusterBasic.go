@@ -18,10 +18,10 @@ type MTRClusterBasic struct {
 }
 
 var (
-	_clsMTRClusterBasic = _objcClass("MTRClusterBasic")
-	_mTRClusterBasicSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterBasic                                                                              = _objcClass("MTRClusterBasic")
+	_mTRClusterBasicSelInitWithDeviceEndpointQueue                                                   = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterBasicSelMfgSpecificPingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("mfgSpecificPingWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterBasicSelMfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("mfgSpecificPingWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterBasicSelMfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("mfgSpecificPingWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterBasicFromID(id objc.ID) *MTRClusterBasic {
@@ -36,7 +36,9 @@ func MTRClusterBasicFromID(id objc.ID) *MTRClusterBasic {
 
 func (o *MTRClusterBasic) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBasic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBasicSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBasicFromID(_ret)
 }
 
@@ -61,4 +63,3 @@ func (o *MTRClusterBasic) MfgSpecificPingWithExpectedValuesExpectedValueInterval
 	}
 	o.Ptr().Send(_mTRClusterBasicSelMfgSpecificPingWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

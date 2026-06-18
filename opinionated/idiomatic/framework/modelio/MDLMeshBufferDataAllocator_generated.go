@@ -41,4 +41,3 @@ type MeshBufferDataAllocatorable interface {
 }
 
 var _ MeshBufferDataAllocatorable = (*MeshBufferDataAllocator)(nil)
-

@@ -17,8 +17,8 @@ type MPSNNReduceColumnMean struct {
 }
 
 var (
-	_clsMPSNNReduceColumnMean = _objcClass("MPSNNReduceColumnMean")
-	_mPSNNReduceColumnMeanSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceColumnMean                    = _objcClass("MPSNNReduceColumnMean")
+	_mPSNNReduceColumnMeanSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceColumnMeanSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceColumnMeanFromID(id objc.ID) *MPSNNReduceColumnMean {
 
 func (o *MPSNNReduceColumnMean) InitWithDevice(device metal.MTLDevice) *MPSNNReduceColumnMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMeanSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMeanFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceColumnMean object, or nil if failure.
 func (o *MPSNNReduceColumnMean) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceColumnMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMeanSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMeanFromID(_ret)
 }
-

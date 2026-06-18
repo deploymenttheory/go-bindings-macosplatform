@@ -16,7 +16,7 @@ type PHASESoundEventNodeDefinition struct {
 }
 
 var (
-	_clsPHASESoundEventNodeDefinition = _objcClass("PHASESoundEventNodeDefinition")
+	_clsPHASESoundEventNodeDefinition         = _objcClass("PHASESoundEventNodeDefinition")
 	_pHASESoundEventNodeDefinitionSelChildren = objc.RegisterName("children")
 )
 
@@ -32,7 +32,8 @@ func PHASESoundEventNodeDefinitionFromID(id objc.ID) *PHASESoundEventNodeDefinit
 
 func (o *PHASESoundEventNodeDefinition) Children() *foundation.NSArray[*PHASESoundEventNodeDefinition] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventNodeDefinitionSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASESoundEventNodeDefinition](_ret)
 }
-

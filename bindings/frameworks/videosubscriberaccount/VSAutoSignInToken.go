@@ -16,9 +16,9 @@ type VSAutoSignInToken struct {
 }
 
 var (
-	_clsVSAutoSignInToken = _objcClass("VSAutoSignInToken")
+	_clsVSAutoSignInToken              = _objcClass("VSAutoSignInToken")
 	_vSAutoSignInTokenSelAuthorization = objc.RegisterName("authorization")
-	_vSAutoSignInTokenSelValue = objc.RegisterName("value")
+	_vSAutoSignInTokenSelValue         = objc.RegisterName("value")
 )
 
 func VSAutoSignInTokenFromID(id objc.ID) *VSAutoSignInToken {
@@ -38,7 +38,8 @@ func (o *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
 
 func (o *VSAutoSignInToken) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAutoSignInTokenSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

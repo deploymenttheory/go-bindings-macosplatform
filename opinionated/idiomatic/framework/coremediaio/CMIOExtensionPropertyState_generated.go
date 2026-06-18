@@ -61,4 +61,3 @@ type ExtensionPropertyStateable interface {
 }
 
 var _ ExtensionPropertyStateable = (*ExtensionPropertyState)(nil)
-

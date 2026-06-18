@@ -16,24 +16,24 @@ type SKKeyframeSequence struct {
 }
 
 var (
-	_clsSKKeyframeSequence = _objcClass("SKKeyframeSequence")
-	_sKKeyframeSequenceSelInitWithKeyframeValuesTimes = objc.RegisterName("initWithKeyframeValues:times:")
-	_sKKeyframeSequenceSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_sKKeyframeSequenceSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKKeyframeSequenceSelCount = objc.RegisterName("count")
-	_sKKeyframeSequenceSelAddKeyframeValueTime = objc.RegisterName("addKeyframeValue:time:")
-	_sKKeyframeSequenceSelRemoveLastKeyframe = objc.RegisterName("removeLastKeyframe")
-	_sKKeyframeSequenceSelRemoveKeyframeAtIndex = objc.RegisterName("removeKeyframeAtIndex:")
-	_sKKeyframeSequenceSelSetKeyframeValueForIndex = objc.RegisterName("setKeyframeValue:forIndex:")
-	_sKKeyframeSequenceSelSetKeyframeTimeForIndex = objc.RegisterName("setKeyframeTime:forIndex:")
+	_clsSKKeyframeSequence                             = _objcClass("SKKeyframeSequence")
+	_sKKeyframeSequenceSelInitWithKeyframeValuesTimes  = objc.RegisterName("initWithKeyframeValues:times:")
+	_sKKeyframeSequenceSelInitWithCapacity             = objc.RegisterName("initWithCapacity:")
+	_sKKeyframeSequenceSelInitWithCoder                = objc.RegisterName("initWithCoder:")
+	_sKKeyframeSequenceSelCount                        = objc.RegisterName("count")
+	_sKKeyframeSequenceSelAddKeyframeValueTime         = objc.RegisterName("addKeyframeValue:time:")
+	_sKKeyframeSequenceSelRemoveLastKeyframe           = objc.RegisterName("removeLastKeyframe")
+	_sKKeyframeSequenceSelRemoveKeyframeAtIndex        = objc.RegisterName("removeKeyframeAtIndex:")
+	_sKKeyframeSequenceSelSetKeyframeValueForIndex     = objc.RegisterName("setKeyframeValue:forIndex:")
+	_sKKeyframeSequenceSelSetKeyframeTimeForIndex      = objc.RegisterName("setKeyframeTime:forIndex:")
 	_sKKeyframeSequenceSelSetKeyframeValueTimeForIndex = objc.RegisterName("setKeyframeValue:time:forIndex:")
-	_sKKeyframeSequenceSelGetKeyframeValueForIndex = objc.RegisterName("getKeyframeValueForIndex:")
-	_sKKeyframeSequenceSelGetKeyframeTimeForIndex = objc.RegisterName("getKeyframeTimeForIndex:")
-	_sKKeyframeSequenceSelSampleAtTime = objc.RegisterName("sampleAtTime:")
-	_sKKeyframeSequenceSelInterpolationMode = objc.RegisterName("interpolationMode")
-	_sKKeyframeSequenceSelSetInterpolationMode = objc.RegisterName("setInterpolationMode:")
-	_sKKeyframeSequenceSelRepeatMode = objc.RegisterName("repeatMode")
-	_sKKeyframeSequenceSelSetRepeatMode = objc.RegisterName("setRepeatMode:")
+	_sKKeyframeSequenceSelGetKeyframeValueForIndex     = objc.RegisterName("getKeyframeValueForIndex:")
+	_sKKeyframeSequenceSelGetKeyframeTimeForIndex      = objc.RegisterName("getKeyframeTimeForIndex:")
+	_sKKeyframeSequenceSelSampleAtTime                 = objc.RegisterName("sampleAtTime:")
+	_sKKeyframeSequenceSelInterpolationMode            = objc.RegisterName("interpolationMode")
+	_sKKeyframeSequenceSelSetInterpolationMode         = objc.RegisterName("setInterpolationMode:")
+	_sKKeyframeSequenceSelRepeatMode                   = objc.RegisterName("repeatMode")
+	_sKKeyframeSequenceSelSetRepeatMode                = objc.RegisterName("setRepeatMode:")
 )
 
 func SKKeyframeSequenceFromID(id objc.ID) *SKKeyframeSequence {
@@ -48,20 +48,26 @@ func SKKeyframeSequenceFromID(id objc.ID) *SKKeyframeSequence {
 
 func (o *SKKeyframeSequence) InitWithKeyframeValuesTimes(values *foundation.NSArray[objc.ID], times *foundation.NSArray[*foundation.NSNumber]) *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithKeyframeValuesTimes, values, times)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
 func (o *SKKeyframeSequence) InitWithCapacity(numItems uint) *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SKKeyframeSequence) InitWithCoder(aDecoder *foundation.NSCoder) *SKKeyframeSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKKeyframeSequenceSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKKeyframeSequenceFromID(_ret)
 }
 
@@ -126,4 +132,3 @@ func (o *SKKeyframeSequence) RepeatMode() SKRepeatMode {
 func (o *SKKeyframeSequence) SetRepeatMode(repeatMode SKRepeatMode) {
 	o.Ptr().Send(_sKKeyframeSequenceSelSetRepeatMode, repeatMode)
 }
-

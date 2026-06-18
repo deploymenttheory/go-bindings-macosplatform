@@ -137,4 +137,3 @@ type GeocodingRequestable interface {
 }
 
 var _ GeocodingRequestable = (*GeocodingRequest)(nil)
-

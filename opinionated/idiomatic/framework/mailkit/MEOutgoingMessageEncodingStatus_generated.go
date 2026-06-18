@@ -75,4 +75,3 @@ type OutgoingMessageEncodingStatusable interface {
 }
 
 var _ OutgoingMessageEncodingStatusable = (*OutgoingMessageEncodingStatus)(nil)
-

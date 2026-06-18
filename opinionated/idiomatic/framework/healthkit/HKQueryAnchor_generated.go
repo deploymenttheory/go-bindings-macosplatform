@@ -41,4 +41,3 @@ type QueryAnchorable interface {
 }
 
 var _ QueryAnchorable = (*QueryAnchor)(nil)
-

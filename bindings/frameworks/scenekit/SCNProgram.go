@@ -17,31 +17,31 @@ type SCNProgram struct {
 }
 
 var (
-	_clsSCNProgram = _objcClass("SCNProgram")
-	_sCNProgramSelProgram = objc.RegisterName("program")
+	_clsSCNProgram                                         = _objcClass("SCNProgram")
+	_sCNProgramSelProgram                                  = objc.RegisterName("program")
 	_sCNProgramSelHandleBindingOfBufferNamedFrequencyUsing = objc.RegisterName("handleBindingOfBufferNamed:frequency:usingBlock:")
-	_sCNProgramSelSetSemanticForSymbolOptions = objc.RegisterName("setSemantic:forSymbol:options:")
-	_sCNProgramSelSemanticForSymbol = objc.RegisterName("semanticForSymbol:")
-	_sCNProgramSelVertexShader = objc.RegisterName("vertexShader")
-	_sCNProgramSelSetVertexShader = objc.RegisterName("setVertexShader:")
-	_sCNProgramSelFragmentShader = objc.RegisterName("fragmentShader")
-	_sCNProgramSelSetFragmentShader = objc.RegisterName("setFragmentShader:")
-	_sCNProgramSelTessellationControlShader = objc.RegisterName("tessellationControlShader")
-	_sCNProgramSelSetTessellationControlShader = objc.RegisterName("setTessellationControlShader:")
-	_sCNProgramSelTessellationEvaluationShader = objc.RegisterName("tessellationEvaluationShader")
-	_sCNProgramSelSetTessellationEvaluationShader = objc.RegisterName("setTessellationEvaluationShader:")
-	_sCNProgramSelGeometryShader = objc.RegisterName("geometryShader")
-	_sCNProgramSelSetGeometryShader = objc.RegisterName("setGeometryShader:")
-	_sCNProgramSelVertexFunctionName = objc.RegisterName("vertexFunctionName")
-	_sCNProgramSelSetVertexFunctionName = objc.RegisterName("setVertexFunctionName:")
-	_sCNProgramSelFragmentFunctionName = objc.RegisterName("fragmentFunctionName")
-	_sCNProgramSelSetFragmentFunctionName = objc.RegisterName("setFragmentFunctionName:")
-	_sCNProgramSelIsOpaque = objc.RegisterName("isOpaque")
-	_sCNProgramSelSetOpaque = objc.RegisterName("setOpaque:")
-	_sCNProgramSelDelegate = objc.RegisterName("delegate")
-	_sCNProgramSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sCNProgramSelLibrary = objc.RegisterName("library")
-	_sCNProgramSelSetLibrary = objc.RegisterName("setLibrary:")
+	_sCNProgramSelSetSemanticForSymbolOptions              = objc.RegisterName("setSemantic:forSymbol:options:")
+	_sCNProgramSelSemanticForSymbol                        = objc.RegisterName("semanticForSymbol:")
+	_sCNProgramSelVertexShader                             = objc.RegisterName("vertexShader")
+	_sCNProgramSelSetVertexShader                          = objc.RegisterName("setVertexShader:")
+	_sCNProgramSelFragmentShader                           = objc.RegisterName("fragmentShader")
+	_sCNProgramSelSetFragmentShader                        = objc.RegisterName("setFragmentShader:")
+	_sCNProgramSelTessellationControlShader                = objc.RegisterName("tessellationControlShader")
+	_sCNProgramSelSetTessellationControlShader             = objc.RegisterName("setTessellationControlShader:")
+	_sCNProgramSelTessellationEvaluationShader             = objc.RegisterName("tessellationEvaluationShader")
+	_sCNProgramSelSetTessellationEvaluationShader          = objc.RegisterName("setTessellationEvaluationShader:")
+	_sCNProgramSelGeometryShader                           = objc.RegisterName("geometryShader")
+	_sCNProgramSelSetGeometryShader                        = objc.RegisterName("setGeometryShader:")
+	_sCNProgramSelVertexFunctionName                       = objc.RegisterName("vertexFunctionName")
+	_sCNProgramSelSetVertexFunctionName                    = objc.RegisterName("setVertexFunctionName:")
+	_sCNProgramSelFragmentFunctionName                     = objc.RegisterName("fragmentFunctionName")
+	_sCNProgramSelSetFragmentFunctionName                  = objc.RegisterName("setFragmentFunctionName:")
+	_sCNProgramSelIsOpaque                                 = objc.RegisterName("isOpaque")
+	_sCNProgramSelSetOpaque                                = objc.RegisterName("setOpaque:")
+	_sCNProgramSelDelegate                                 = objc.RegisterName("delegate")
+	_sCNProgramSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_sCNProgramSelLibrary                                  = objc.RegisterName("library")
+	_sCNProgramSelSetLibrary                               = objc.RegisterName("setLibrary:")
 )
 
 func SCNProgramFromID(id objc.ID) *SCNProgram {
@@ -57,7 +57,9 @@ func SCNProgramFromID(id objc.ID) *SCNProgram {
 // @method program @abstract Creates and initialize a program instance.
 func SCNProgramProgram() *SCNProgram {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNProgram), _sCNProgramSelProgram)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNProgramFromID(_ret)
 }
 
@@ -87,14 +89,18 @@ func (o *SCNProgram) SetSemanticForSymbolOptions(semantic *foundation.NSString, 
 // @method semanticForSymbol: @abstract Retrieves the SceneKit semantic associated to a symbol from the program source code. @param symbol A symbol from the program source code.
 func (o *SCNProgram) SemanticForSymbol(symbol *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelSemanticForSymbol, symbol.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property vertexShader @abstract Determines the receiver's vertex shader.
 func (o *SCNProgram) VertexShader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelVertexShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *SCNProgram) SetVertexShader(vertexShader *foundation.NSString) {
 // @property fragmentShader @abstract Determines the receiver's fragment shader.
 func (o *SCNProgram) FragmentShader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelFragmentShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +124,9 @@ func (o *SCNProgram) SetFragmentShader(fragmentShader *foundation.NSString) {
 // @property tessellationControlShader @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
 func (o *SCNProgram) TessellationControlShader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelTessellationControlShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,7 +137,9 @@ func (o *SCNProgram) SetTessellationControlShader(tessellationControlShader *fou
 // @property tessellationEvaluationShader @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
 func (o *SCNProgram) TessellationEvaluationShader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelTessellationEvaluationShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -138,7 +150,9 @@ func (o *SCNProgram) SetTessellationEvaluationShader(tessellationEvaluationShade
 // @property geometryShader @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
 func (o *SCNProgram) GeometryShader() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelGeometryShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,7 +163,9 @@ func (o *SCNProgram) SetGeometryShader(geometryShader *foundation.NSString) {
 // @property vertexFunctionName @abstract Determines the receiver's vertex function name. @discussion The name of the vertex function (for Metal programs).
 func (o *SCNProgram) VertexFunctionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelVertexFunctionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -160,7 +176,9 @@ func (o *SCNProgram) SetVertexFunctionName(vertexFunctionName *foundation.NSStri
 // @property fragmentFunctionName @abstract Determines the receiver's fragment function name. @discussion The name of the fragment function (for Metal programs).
 func (o *SCNProgram) FragmentFunctionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNProgramSelFragmentFunctionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -197,4 +215,3 @@ func (o *SCNProgram) Library() metal.MTLLibrary {
 func (o *SCNProgram) SetLibrary(library metal.MTLLibrary) {
 	o.Ptr().Send(_sCNProgramSelSetLibrary, library)
 }
-

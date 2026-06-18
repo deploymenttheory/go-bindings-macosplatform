@@ -102,4 +102,3 @@ type ContoursObservationable interface {
 }
 
 var _ ContoursObservationable = (*ContoursObservation)(nil)
-

@@ -59,4 +59,3 @@ type LocationUpdaterable interface {
 }
 
 var _ LocationUpdaterable = (*LocationUpdater)(nil)
-

@@ -16,12 +16,12 @@ type DOMCSSRule struct {
 }
 
 var (
-	_clsDOMCSSRule = _objcClass("DOMCSSRule")
-	_dOMCSSRuleSelType = objc.RegisterName("type")
-	_dOMCSSRuleSelCssText = objc.RegisterName("cssText")
-	_dOMCSSRuleSelSetCssText = objc.RegisterName("setCssText:")
+	_clsDOMCSSRule                 = _objcClass("DOMCSSRule")
+	_dOMCSSRuleSelType             = objc.RegisterName("type")
+	_dOMCSSRuleSelCssText          = objc.RegisterName("cssText")
+	_dOMCSSRuleSelSetCssText       = objc.RegisterName("setCssText:")
 	_dOMCSSRuleSelParentStyleSheet = objc.RegisterName("parentStyleSheet")
-	_dOMCSSRuleSelParentRule = objc.RegisterName("parentRule")
+	_dOMCSSRuleSelParentRule       = objc.RegisterName("parentRule")
 )
 
 func DOMCSSRuleFromID(id objc.ID) *DOMCSSRule {
@@ -41,7 +41,9 @@ func (o *DOMCSSRule) Type() uint16 {
 
 func (o *DOMCSSRule) CssText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSRuleSelCssText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,13 +53,16 @@ func (o *DOMCSSRule) SetCssText(cssText *foundation.NSString) {
 
 func (o *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSRuleSelParentStyleSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleSheetFromID(_ret)
 }
 
 func (o *DOMCSSRule) ParentRule() *DOMCSSRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSRuleSelParentRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleFromID(_ret)
 }
-

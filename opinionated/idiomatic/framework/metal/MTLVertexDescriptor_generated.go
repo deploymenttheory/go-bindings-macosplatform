@@ -67,4 +67,3 @@ type VertexDescriptorable interface {
 }
 
 var _ VertexDescriptorable = (*VertexDescriptor)(nil)
-

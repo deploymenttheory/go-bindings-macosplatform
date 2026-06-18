@@ -16,11 +16,15 @@ type MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams].
-func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams (nil for 0).
 func MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams {
@@ -80,4 +84,3 @@ type MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsable interfac
 }
 
 var _ MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams)(nil)
-

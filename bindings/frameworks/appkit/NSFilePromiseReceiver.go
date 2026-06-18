@@ -18,11 +18,11 @@ type NSFilePromiseReceiver struct {
 }
 
 var (
-	_clsNSFilePromiseReceiver = _objcClass("NSFilePromiseReceiver")
+	_clsNSFilePromiseReceiver                                                             = _objcClass("NSFilePromiseReceiver")
 	_nSFilePromiseReceiverSelReceivePromisedFilesAtDestinationOptionsOperationQueueReader = objc.RegisterName("receivePromisedFilesAtDestination:options:operationQueue:reader:")
-	_nSFilePromiseReceiverSelReadableDraggedTypes = objc.RegisterName("readableDraggedTypes")
-	_nSFilePromiseReceiverSelFileTypes = objc.RegisterName("fileTypes")
-	_nSFilePromiseReceiverSelFileNames = objc.RegisterName("fileNames")
+	_nSFilePromiseReceiverSelReadableDraggedTypes                                         = objc.RegisterName("readableDraggedTypes")
+	_nSFilePromiseReceiverSelFileTypes                                                    = objc.RegisterName("fileTypes")
+	_nSFilePromiseReceiverSelFileNames                                                    = objc.RegisterName("fileNames")
 )
 
 func NSFilePromiseReceiverFromID(id objc.ID) *NSFilePromiseReceiver {
@@ -63,4 +63,3 @@ func (o *NSFilePromiseReceiver) FileNames() *foundation.NSArray[*foundation.NSSt
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSFilePromiseReceiverSelFileNames)
 	return _ret
 }
-

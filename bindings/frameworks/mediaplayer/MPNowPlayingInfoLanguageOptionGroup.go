@@ -16,11 +16,11 @@ type MPNowPlayingInfoLanguageOptionGroup struct {
 }
 
 var (
-	_clsMPNowPlayingInfoLanguageOptionGroup = _objcClass("MPNowPlayingInfoLanguageOptionGroup")
+	_clsMPNowPlayingInfoLanguageOptionGroup                                                                = _objcClass("MPNowPlayingInfoLanguageOptionGroup")
 	_mPNowPlayingInfoLanguageOptionGroupSelInitWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection = objc.RegisterName("initWithLanguageOptions:defaultLanguageOption:allowEmptySelection:")
-	_mPNowPlayingInfoLanguageOptionGroupSelLanguageOptions = objc.RegisterName("languageOptions")
-	_mPNowPlayingInfoLanguageOptionGroupSelDefaultLanguageOption = objc.RegisterName("defaultLanguageOption")
-	_mPNowPlayingInfoLanguageOptionGroupSelAllowEmptySelection = objc.RegisterName("allowEmptySelection")
+	_mPNowPlayingInfoLanguageOptionGroupSelLanguageOptions                                                 = objc.RegisterName("languageOptions")
+	_mPNowPlayingInfoLanguageOptionGroupSelDefaultLanguageOption                                           = objc.RegisterName("defaultLanguageOption")
+	_mPNowPlayingInfoLanguageOptionGroupSelAllowEmptySelection                                             = objc.RegisterName("allowEmptySelection")
 )
 
 func MPNowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *MPNowPlayingInfoLanguageOptionGroup {
@@ -35,21 +35,27 @@ func MPNowPlayingInfoLanguageOptionGroupFromID(id objc.ID) *MPNowPlayingInfoLang
 
 func (o *MPNowPlayingInfoLanguageOptionGroup) InitWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection(languageOptions *foundation.NSArray[*MPNowPlayingInfoLanguageOption], defaultLanguageOption *MPNowPlayingInfoLanguageOption, allowEmptySelection bool) *MPNowPlayingInfoLanguageOptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionGroupSelInitWithLanguageOptionsDefaultLanguageOptionAllowEmptySelection, languageOptions.Ptr(), defaultLanguageOption.Ptr(), allowEmptySelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPNowPlayingInfoLanguageOptionGroupFromID(_ret)
 }
 
 // The available language options within this group.
 func (o *MPNowPlayingInfoLanguageOptionGroup) LanguageOptions() *foundation.NSArray[*MPNowPlayingInfoLanguageOption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionGroupSelLanguageOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPNowPlayingInfoLanguageOption](_ret)
 }
 
 // The default language option, if any, within this group.
 func (o *MPNowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *MPNowPlayingInfoLanguageOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPNowPlayingInfoLanguageOptionGroupSelDefaultLanguageOption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPNowPlayingInfoLanguageOptionFromID(_ret)
 }
 
@@ -58,4 +64,3 @@ func (o *MPNowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPNowPlayingInfoLanguageOptionGroupSelAllowEmptySelection)
 	return _ret
 }
-

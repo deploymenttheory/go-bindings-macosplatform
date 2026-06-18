@@ -19,67 +19,67 @@ type SKPhysicsBody struct {
 }
 
 var (
-	_clsSKPhysicsBody = _objcClass("SKPhysicsBody")
-	_sKPhysicsBodySelBodyWithCircleOfRadius = objc.RegisterName("bodyWithCircleOfRadius:")
-	_sKPhysicsBodySelBodyWithCircleOfRadiusCenter = objc.RegisterName("bodyWithCircleOfRadius:center:")
-	_sKPhysicsBodySelBodyWithRectangleOfSize = objc.RegisterName("bodyWithRectangleOfSize:")
-	_sKPhysicsBodySelBodyWithRectangleOfSizeCenter = objc.RegisterName("bodyWithRectangleOfSize:center:")
-	_sKPhysicsBodySelBodyWithPolygonFromPath = objc.RegisterName("bodyWithPolygonFromPath:")
-	_sKPhysicsBodySelBodyWithEdgeFromPointToPoint = objc.RegisterName("bodyWithEdgeFromPoint:toPoint:")
-	_sKPhysicsBodySelBodyWithEdgeChainFromPath = objc.RegisterName("bodyWithEdgeChainFromPath:")
-	_sKPhysicsBodySelBodyWithEdgeLoopFromPath = objc.RegisterName("bodyWithEdgeLoopFromPath:")
-	_sKPhysicsBodySelBodyWithEdgeLoopFromRect = objc.RegisterName("bodyWithEdgeLoopFromRect:")
-	_sKPhysicsBodySelBodyWithTextureSize = objc.RegisterName("bodyWithTexture:size:")
+	_clsSKPhysicsBody                                  = _objcClass("SKPhysicsBody")
+	_sKPhysicsBodySelBodyWithCircleOfRadius            = objc.RegisterName("bodyWithCircleOfRadius:")
+	_sKPhysicsBodySelBodyWithCircleOfRadiusCenter      = objc.RegisterName("bodyWithCircleOfRadius:center:")
+	_sKPhysicsBodySelBodyWithRectangleOfSize           = objc.RegisterName("bodyWithRectangleOfSize:")
+	_sKPhysicsBodySelBodyWithRectangleOfSizeCenter     = objc.RegisterName("bodyWithRectangleOfSize:center:")
+	_sKPhysicsBodySelBodyWithPolygonFromPath           = objc.RegisterName("bodyWithPolygonFromPath:")
+	_sKPhysicsBodySelBodyWithEdgeFromPointToPoint      = objc.RegisterName("bodyWithEdgeFromPoint:toPoint:")
+	_sKPhysicsBodySelBodyWithEdgeChainFromPath         = objc.RegisterName("bodyWithEdgeChainFromPath:")
+	_sKPhysicsBodySelBodyWithEdgeLoopFromPath          = objc.RegisterName("bodyWithEdgeLoopFromPath:")
+	_sKPhysicsBodySelBodyWithEdgeLoopFromRect          = objc.RegisterName("bodyWithEdgeLoopFromRect:")
+	_sKPhysicsBodySelBodyWithTextureSize               = objc.RegisterName("bodyWithTexture:size:")
 	_sKPhysicsBodySelBodyWithTextureAlphaThresholdSize = objc.RegisterName("bodyWithTexture:alphaThreshold:size:")
-	_sKPhysicsBodySelBodyWithBodies = objc.RegisterName("bodyWithBodies:")
-	_sKPhysicsBodySelApplyForce = objc.RegisterName("applyForce:")
-	_sKPhysicsBodySelApplyForceAtPoint = objc.RegisterName("applyForce:atPoint:")
-	_sKPhysicsBodySelApplyTorque = objc.RegisterName("applyTorque:")
-	_sKPhysicsBodySelApplyImpulse = objc.RegisterName("applyImpulse:")
-	_sKPhysicsBodySelApplyImpulseAtPoint = objc.RegisterName("applyImpulse:atPoint:")
-	_sKPhysicsBodySelApplyAngularImpulse = objc.RegisterName("applyAngularImpulse:")
-	_sKPhysicsBodySelAllContactedBodies = objc.RegisterName("allContactedBodies")
-	_sKPhysicsBodySelIsDynamic = objc.RegisterName("isDynamic")
-	_sKPhysicsBodySelSetDynamic = objc.RegisterName("setDynamic:")
-	_sKPhysicsBodySelUsesPreciseCollisionDetection = objc.RegisterName("usesPreciseCollisionDetection")
-	_sKPhysicsBodySelSetUsesPreciseCollisionDetection = objc.RegisterName("setUsesPreciseCollisionDetection:")
-	_sKPhysicsBodySelAllowsRotation = objc.RegisterName("allowsRotation")
-	_sKPhysicsBodySelSetAllowsRotation = objc.RegisterName("setAllowsRotation:")
-	_sKPhysicsBodySelPinned = objc.RegisterName("pinned")
-	_sKPhysicsBodySelSetPinned = objc.RegisterName("setPinned:")
-	_sKPhysicsBodySelIsResting = objc.RegisterName("isResting")
-	_sKPhysicsBodySelSetResting = objc.RegisterName("setResting:")
-	_sKPhysicsBodySelFriction = objc.RegisterName("friction")
-	_sKPhysicsBodySelSetFriction = objc.RegisterName("setFriction:")
-	_sKPhysicsBodySelCharge = objc.RegisterName("charge")
-	_sKPhysicsBodySelSetCharge = objc.RegisterName("setCharge:")
-	_sKPhysicsBodySelRestitution = objc.RegisterName("restitution")
-	_sKPhysicsBodySelSetRestitution = objc.RegisterName("setRestitution:")
-	_sKPhysicsBodySelLinearDamping = objc.RegisterName("linearDamping")
-	_sKPhysicsBodySelSetLinearDamping = objc.RegisterName("setLinearDamping:")
-	_sKPhysicsBodySelAngularDamping = objc.RegisterName("angularDamping")
-	_sKPhysicsBodySelSetAngularDamping = objc.RegisterName("setAngularDamping:")
-	_sKPhysicsBodySelDensity = objc.RegisterName("density")
-	_sKPhysicsBodySelSetDensity = objc.RegisterName("setDensity:")
-	_sKPhysicsBodySelMass = objc.RegisterName("mass")
-	_sKPhysicsBodySelSetMass = objc.RegisterName("setMass:")
-	_sKPhysicsBodySelArea = objc.RegisterName("area")
-	_sKPhysicsBodySelAffectedByGravity = objc.RegisterName("affectedByGravity")
-	_sKPhysicsBodySelSetAffectedByGravity = objc.RegisterName("setAffectedByGravity:")
-	_sKPhysicsBodySelFieldBitMask = objc.RegisterName("fieldBitMask")
-	_sKPhysicsBodySelSetFieldBitMask = objc.RegisterName("setFieldBitMask:")
-	_sKPhysicsBodySelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sKPhysicsBodySelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
-	_sKPhysicsBodySelCollisionBitMask = objc.RegisterName("collisionBitMask")
-	_sKPhysicsBodySelSetCollisionBitMask = objc.RegisterName("setCollisionBitMask:")
-	_sKPhysicsBodySelContactTestBitMask = objc.RegisterName("contactTestBitMask")
-	_sKPhysicsBodySelSetContactTestBitMask = objc.RegisterName("setContactTestBitMask:")
-	_sKPhysicsBodySelJoints = objc.RegisterName("joints")
-	_sKPhysicsBodySelNode = objc.RegisterName("node")
-	_sKPhysicsBodySelVelocity = objc.RegisterName("velocity")
-	_sKPhysicsBodySelSetVelocity = objc.RegisterName("setVelocity:")
-	_sKPhysicsBodySelAngularVelocity = objc.RegisterName("angularVelocity")
-	_sKPhysicsBodySelSetAngularVelocity = objc.RegisterName("setAngularVelocity:")
+	_sKPhysicsBodySelBodyWithBodies                    = objc.RegisterName("bodyWithBodies:")
+	_sKPhysicsBodySelApplyForce                        = objc.RegisterName("applyForce:")
+	_sKPhysicsBodySelApplyForceAtPoint                 = objc.RegisterName("applyForce:atPoint:")
+	_sKPhysicsBodySelApplyTorque                       = objc.RegisterName("applyTorque:")
+	_sKPhysicsBodySelApplyImpulse                      = objc.RegisterName("applyImpulse:")
+	_sKPhysicsBodySelApplyImpulseAtPoint               = objc.RegisterName("applyImpulse:atPoint:")
+	_sKPhysicsBodySelApplyAngularImpulse               = objc.RegisterName("applyAngularImpulse:")
+	_sKPhysicsBodySelAllContactedBodies                = objc.RegisterName("allContactedBodies")
+	_sKPhysicsBodySelIsDynamic                         = objc.RegisterName("isDynamic")
+	_sKPhysicsBodySelSetDynamic                        = objc.RegisterName("setDynamic:")
+	_sKPhysicsBodySelUsesPreciseCollisionDetection     = objc.RegisterName("usesPreciseCollisionDetection")
+	_sKPhysicsBodySelSetUsesPreciseCollisionDetection  = objc.RegisterName("setUsesPreciseCollisionDetection:")
+	_sKPhysicsBodySelAllowsRotation                    = objc.RegisterName("allowsRotation")
+	_sKPhysicsBodySelSetAllowsRotation                 = objc.RegisterName("setAllowsRotation:")
+	_sKPhysicsBodySelPinned                            = objc.RegisterName("pinned")
+	_sKPhysicsBodySelSetPinned                         = objc.RegisterName("setPinned:")
+	_sKPhysicsBodySelIsResting                         = objc.RegisterName("isResting")
+	_sKPhysicsBodySelSetResting                        = objc.RegisterName("setResting:")
+	_sKPhysicsBodySelFriction                          = objc.RegisterName("friction")
+	_sKPhysicsBodySelSetFriction                       = objc.RegisterName("setFriction:")
+	_sKPhysicsBodySelCharge                            = objc.RegisterName("charge")
+	_sKPhysicsBodySelSetCharge                         = objc.RegisterName("setCharge:")
+	_sKPhysicsBodySelRestitution                       = objc.RegisterName("restitution")
+	_sKPhysicsBodySelSetRestitution                    = objc.RegisterName("setRestitution:")
+	_sKPhysicsBodySelLinearDamping                     = objc.RegisterName("linearDamping")
+	_sKPhysicsBodySelSetLinearDamping                  = objc.RegisterName("setLinearDamping:")
+	_sKPhysicsBodySelAngularDamping                    = objc.RegisterName("angularDamping")
+	_sKPhysicsBodySelSetAngularDamping                 = objc.RegisterName("setAngularDamping:")
+	_sKPhysicsBodySelDensity                           = objc.RegisterName("density")
+	_sKPhysicsBodySelSetDensity                        = objc.RegisterName("setDensity:")
+	_sKPhysicsBodySelMass                              = objc.RegisterName("mass")
+	_sKPhysicsBodySelSetMass                           = objc.RegisterName("setMass:")
+	_sKPhysicsBodySelArea                              = objc.RegisterName("area")
+	_sKPhysicsBodySelAffectedByGravity                 = objc.RegisterName("affectedByGravity")
+	_sKPhysicsBodySelSetAffectedByGravity              = objc.RegisterName("setAffectedByGravity:")
+	_sKPhysicsBodySelFieldBitMask                      = objc.RegisterName("fieldBitMask")
+	_sKPhysicsBodySelSetFieldBitMask                   = objc.RegisterName("setFieldBitMask:")
+	_sKPhysicsBodySelCategoryBitMask                   = objc.RegisterName("categoryBitMask")
+	_sKPhysicsBodySelSetCategoryBitMask                = objc.RegisterName("setCategoryBitMask:")
+	_sKPhysicsBodySelCollisionBitMask                  = objc.RegisterName("collisionBitMask")
+	_sKPhysicsBodySelSetCollisionBitMask               = objc.RegisterName("setCollisionBitMask:")
+	_sKPhysicsBodySelContactTestBitMask                = objc.RegisterName("contactTestBitMask")
+	_sKPhysicsBodySelSetContactTestBitMask             = objc.RegisterName("setContactTestBitMask:")
+	_sKPhysicsBodySelJoints                            = objc.RegisterName("joints")
+	_sKPhysicsBodySelNode                              = objc.RegisterName("node")
+	_sKPhysicsBodySelVelocity                          = objc.RegisterName("velocity")
+	_sKPhysicsBodySelSetVelocity                       = objc.RegisterName("setVelocity:")
+	_sKPhysicsBodySelAngularVelocity                   = objc.RegisterName("angularVelocity")
+	_sKPhysicsBodySelSetAngularVelocity                = objc.RegisterName("setAngularVelocity:")
 )
 
 func SKPhysicsBodyFromID(id objc.ID) *SKPhysicsBody {
@@ -95,84 +95,108 @@ func SKPhysicsBodyFromID(id objc.ID) *SKPhysicsBody {
 // Creates a circle of radius r centered at the node's origin. @param r the radius in points
 func SKPhysicsBodyBodyWithCircleOfRadius(r float64) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithCircleOfRadius, r)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates a circle of radius r centered at a point in the node's coordinate space. @param r the radius in points
 func SKPhysicsBodyBodyWithCircleOfRadiusCenter(r float64, center corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithCircleOfRadiusCenter, r, center)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates a rectangle of the specified size centered at the node's origin. @param s the size in points
 func SKPhysicsBodyBodyWithRectangleOfSize(s corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithRectangleOfSize, s)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates a rectangle of the specified size centered at a point in the node's coordinate space. @param s the size in points
 func SKPhysicsBodyBodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithRectangleOfSizeCenter, s, center)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // The path must represent a convex or concave polygon with counter clockwise winding and no self intersection. Positions are relative to the node's origin. @param path the path to use
 func SKPhysicsBodyBodyWithPolygonFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithPolygonFromPath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates an edge from p1 to p2. Edges have no volume and are intended to be used to create static environments. Edges can collide with bodies of volume, but not with each other. @param p1 start point @param p2 end point
 func SKPhysicsBodyBodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 corefoundation.CGPoint) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeFromPointToPoint, p1, p2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates an edge chain from a path. The path must have no self intersection. Edges have no volume and are intended to be used to create static environments. Edges can collide with bodies of volume, but not with each other. @param path the path to use
 func SKPhysicsBodyBodyWithEdgeChainFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeChainFromPath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates an edge loop from a path. A loop is automatically created by joining the last point to the first. The path must have no self intersection. Edges have no volume and are intended to be used to create static environments. Edges can collide with body's of volume, but not with each other. @param path the path to use
 func SKPhysicsBodyBodyWithEdgeLoopFromPath(path unsafe.Pointer) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeLoopFromPath, path)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates an edge loop from a CGRect. Edges have no volume and are intended to be used to create static environments. Edges can collide with body's of volume, but not with each other. @param rect the CGRect to use
 func SKPhysicsBodyBodyWithEdgeLoopFromRect(rect corefoundation.CGRect) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithEdgeLoopFromRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates a body from the alpha values in the supplied texture. @param texture the texture to be interpreted @param size of the generated physics body
 func SKPhysicsBodyBodyWithTextureSize(texture *SKTexture, size corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithTextureSize, texture.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates a body from the alpha values in the supplied texture. @param texture the texture to be interpreted @param alphaThreshold the alpha value above which a pixel is interpreted as opaque @param size of the generated physics body
 func SKPhysicsBodyBodyWithTextureAlphaThresholdSize(texture *SKTexture, alphaThreshold float32, size corefoundation.CGSize) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithTextureAlphaThresholdSize, texture.Ptr(), alphaThreshold, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 // Creates an compound body that is the union of the bodies used to create it.
 func SKPhysicsBodyBodyWithBodies(bodies *foundation.NSArray[*SKPhysicsBody]) *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsBody), _sKPhysicsBodySelBodyWithBodies, bodies.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -202,7 +226,9 @@ func (o *SKPhysicsBody) ApplyAngularImpulse(impulse float64) {
 
 func (o *SKPhysicsBody) AllContactedBodies() *foundation.NSArray[*SKPhysicsBody] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsBodySelAllContactedBodies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKPhysicsBody](_ret)
 }
 
@@ -380,14 +406,18 @@ func (o *SKPhysicsBody) SetContactTestBitMask(contactTestBitMask uint32) {
 
 func (o *SKPhysicsBody) Joints() *foundation.NSArray[*SKPhysicsJoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsBodySelJoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKPhysicsJoint](_ret)
 }
 
 // The representedObject this physicsBody is currently bound to, or nil if it is not.
 func (o *SKPhysicsBody) Node() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsBodySelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
@@ -408,4 +438,3 @@ func (o *SKPhysicsBody) AngularVelocity() float64 {
 func (o *SKPhysicsBody) SetAngularVelocity(angularVelocity float64) {
 	o.Ptr().Send(_sKPhysicsBodySelSetAngularVelocity, angularVelocity)
 }
-

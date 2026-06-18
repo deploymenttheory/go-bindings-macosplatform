@@ -85,4 +85,3 @@ type ResourceViewPoolDescriptorable interface {
 }
 
 var _ ResourceViewPoolDescriptorable = (*ResourceViewPoolDescriptor)(nil)
-

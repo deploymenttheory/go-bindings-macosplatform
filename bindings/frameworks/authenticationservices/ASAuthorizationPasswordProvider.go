@@ -16,7 +16,7 @@ type ASAuthorizationPasswordProvider struct {
 }
 
 var (
-	_clsASAuthorizationPasswordProvider = _objcClass("ASAuthorizationPasswordProvider")
+	_clsASAuthorizationPasswordProvider              = _objcClass("ASAuthorizationPasswordProvider")
 	_aSAuthorizationPasswordProviderSelCreateRequest = objc.RegisterName("createRequest")
 )
 
@@ -32,7 +32,8 @@ func ASAuthorizationPasswordProviderFromID(id objc.ID) *ASAuthorizationPasswordP
 
 func (o *ASAuthorizationPasswordProvider) CreateRequest() *ASAuthorizationPasswordRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPasswordProviderSelCreateRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPasswordRequestFromID(_ret)
 }
-

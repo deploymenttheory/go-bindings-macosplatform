@@ -45,4 +45,3 @@ type ClinicalTypeable interface {
 }
 
 var _ ClinicalTypeable = (*ClinicalType)(nil)
-

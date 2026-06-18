@@ -188,9 +188,13 @@ func (x *MatrixBatchNormalization) SetComputeStatistics(computeStatistics bool) 
 	x.inner.SetComputeStatistics(computeStatistics)
 }
 
-func (x *MatrixBatchNormalization) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixBatchNormalization) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
-func (x *MatrixBatchNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+func (x *MatrixBatchNormalization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixUnaryKernel.MPSKernel
+}
 
 // MatrixBatchNormalizationable is the interface implemented by [MatrixBatchNormalization], for mocking and DI.
 type MatrixBatchNormalizationable interface {
@@ -223,4 +227,3 @@ type MatrixBatchNormalizationable interface {
 }
 
 var _ MatrixBatchNormalizationable = (*MatrixBatchNormalization)(nil)
-

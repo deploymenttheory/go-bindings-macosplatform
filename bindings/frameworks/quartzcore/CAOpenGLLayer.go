@@ -18,17 +18,17 @@ type CAOpenGLLayer struct {
 }
 
 var (
-	_clsCAOpenGLLayer = _objcClass("CAOpenGLLayer")
+	_clsCAOpenGLLayer                                                      = _objcClass("CAOpenGLLayer")
 	_cAOpenGLLayerSelCanDrawInCGLContextPixelFormatForLayerTimeDisplayTime = objc.RegisterName("canDrawInCGLContext:pixelFormat:forLayerTime:displayTime:")
-	_cAOpenGLLayerSelDrawInCGLContextPixelFormatForLayerTimeDisplayTime = objc.RegisterName("drawInCGLContext:pixelFormat:forLayerTime:displayTime:")
-	_cAOpenGLLayerSelCopyCGLPixelFormatForDisplayMask = objc.RegisterName("copyCGLPixelFormatForDisplayMask:")
-	_cAOpenGLLayerSelReleaseCGLPixelFormat = objc.RegisterName("releaseCGLPixelFormat:")
-	_cAOpenGLLayerSelCopyCGLContextForPixelFormat = objc.RegisterName("copyCGLContextForPixelFormat:")
-	_cAOpenGLLayerSelReleaseCGLContext = objc.RegisterName("releaseCGLContext:")
-	_cAOpenGLLayerSelIsAsynchronous = objc.RegisterName("isAsynchronous")
-	_cAOpenGLLayerSelSetAsynchronous = objc.RegisterName("setAsynchronous:")
-	_cAOpenGLLayerSelColorspace = objc.RegisterName("colorspace")
-	_cAOpenGLLayerSelSetColorspace = objc.RegisterName("setColorspace:")
+	_cAOpenGLLayerSelDrawInCGLContextPixelFormatForLayerTimeDisplayTime    = objc.RegisterName("drawInCGLContext:pixelFormat:forLayerTime:displayTime:")
+	_cAOpenGLLayerSelCopyCGLPixelFormatForDisplayMask                      = objc.RegisterName("copyCGLPixelFormatForDisplayMask:")
+	_cAOpenGLLayerSelReleaseCGLPixelFormat                                 = objc.RegisterName("releaseCGLPixelFormat:")
+	_cAOpenGLLayerSelCopyCGLContextForPixelFormat                          = objc.RegisterName("copyCGLContextForPixelFormat:")
+	_cAOpenGLLayerSelReleaseCGLContext                                     = objc.RegisterName("releaseCGLContext:")
+	_cAOpenGLLayerSelIsAsynchronous                                        = objc.RegisterName("isAsynchronous")
+	_cAOpenGLLayerSelSetAsynchronous                                       = objc.RegisterName("setAsynchronous:")
+	_cAOpenGLLayerSelColorspace                                            = objc.RegisterName("colorspace")
+	_cAOpenGLLayerSelSetColorspace                                         = objc.RegisterName("setColorspace:")
 )
 
 func CAOpenGLLayerFromID(id objc.ID) *CAOpenGLLayer {
@@ -85,4 +85,3 @@ func (o *CAOpenGLLayer) Colorspace() unsafe.Pointer {
 func (o *CAOpenGLLayer) SetColorspace(colorspace unsafe.Pointer) {
 	o.Ptr().Send(_cAOpenGLLayerSelSetColorspace, colorspace)
 }
-

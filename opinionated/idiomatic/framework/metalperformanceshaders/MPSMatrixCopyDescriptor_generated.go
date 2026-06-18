@@ -59,4 +59,3 @@ type MatrixCopyDescriptorable interface {
 }
 
 var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)
-

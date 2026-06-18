@@ -76,7 +76,9 @@ func (x *ImageSobel) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
 }
 
-func (x *ImageSobel) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageSobel) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
 type ImageSobelable interface {
@@ -88,4 +90,3 @@ type ImageSobelable interface {
 }
 
 var _ ImageSobelable = (*ImageSobel)(nil)
-

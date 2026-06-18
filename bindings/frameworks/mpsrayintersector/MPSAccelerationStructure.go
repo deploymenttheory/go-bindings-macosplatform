@@ -20,21 +20,21 @@ type MPSAccelerationStructure struct {
 }
 
 var (
-	_clsMPSAccelerationStructure = _objcClass("MPSAccelerationStructure")
-	_mPSAccelerationStructureSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSAccelerationStructureSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSAccelerationStructureSelInitWithGroup = objc.RegisterName("initWithGroup:")
-	_mPSAccelerationStructureSelInitWithCoderGroup = objc.RegisterName("initWithCoder:group:")
-	_mPSAccelerationStructureSelRebuild = objc.RegisterName("rebuild")
+	_clsMPSAccelerationStructure                             = _objcClass("MPSAccelerationStructure")
+	_mPSAccelerationStructureSelInitWithDevice               = objc.RegisterName("initWithDevice:")
+	_mPSAccelerationStructureSelInitWithCoderDevice          = objc.RegisterName("initWithCoder:device:")
+	_mPSAccelerationStructureSelInitWithGroup                = objc.RegisterName("initWithGroup:")
+	_mPSAccelerationStructureSelInitWithCoderGroup           = objc.RegisterName("initWithCoder:group:")
+	_mPSAccelerationStructureSelRebuild                      = objc.RegisterName("rebuild")
 	_mPSAccelerationStructureSelRebuildWithCompletionHandler = objc.RegisterName("rebuildWithCompletionHandler:")
-	_mPSAccelerationStructureSelEncodeRefitToCommandBuffer = objc.RegisterName("encodeRefitToCommandBuffer:")
-	_mPSAccelerationStructureSelCopyWithZoneGroup = objc.RegisterName("copyWithZone:group:")
-	_mPSAccelerationStructureSelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
-	_mPSAccelerationStructureSelGroup = objc.RegisterName("group")
-	_mPSAccelerationStructureSelBoundingBox = objc.RegisterName("boundingBox")
-	_mPSAccelerationStructureSelStatus = objc.RegisterName("status")
-	_mPSAccelerationStructureSelUsage = objc.RegisterName("usage")
-	_mPSAccelerationStructureSelSetUsage = objc.RegisterName("setUsage:")
+	_mPSAccelerationStructureSelEncodeRefitToCommandBuffer   = objc.RegisterName("encodeRefitToCommandBuffer:")
+	_mPSAccelerationStructureSelCopyWithZoneGroup            = objc.RegisterName("copyWithZone:group:")
+	_mPSAccelerationStructureSelEncodeWithCoder              = objc.RegisterName("encodeWithCoder:")
+	_mPSAccelerationStructureSelGroup                        = objc.RegisterName("group")
+	_mPSAccelerationStructureSelBoundingBox                  = objc.RegisterName("boundingBox")
+	_mPSAccelerationStructureSelStatus                       = objc.RegisterName("status")
+	_mPSAccelerationStructureSelUsage                        = objc.RegisterName("usage")
+	_mPSAccelerationStructureSelSetUsage                     = objc.RegisterName("setUsage:")
 )
 
 func MPSAccelerationStructureFromID(id objc.ID) *MPSAccelerationStructure {
@@ -50,28 +50,36 @@ func MPSAccelerationStructureFromID(id objc.ID) *MPSAccelerationStructure {
 // @brief Initialize the acceleration structure with a Metal device
 func (o *MPSAccelerationStructure) InitWithDevice(device metal.MTLDevice) *MPSAccelerationStructure {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureFromID(_ret)
 }
 
 // @brief Initialize the acceleration structure with an NSCoder and a Metal device. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
 func (o *MPSAccelerationStructure) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSAccelerationStructure {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureFromID(_ret)
 }
 
 // @brief Initialize the acceleration structure with an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. @discussion The Metal device is determined from the acceleration structure group. All acceleration structures in the instance hierarchy must share the same group.
 func (o *MPSAccelerationStructure) InitWithGroup(group *MPSAccelerationStructureGroup) *MPSAccelerationStructure {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureSelInitWithGroup, group.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureFromID(_ret)
 }
 
 // @brief Initialize the acceleration structure with an NSCoder and an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. All acceleration structures in the instance hierarchy must share the same group. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
 func (o *MPSAccelerationStructure) InitWithCoderGroup(aDecoder *foundation.NSCoder, group *MPSAccelerationStructureGroup) *MPSAccelerationStructure {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureSelInitWithCoderGroup, aDecoder.Ptr(), group.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureFromID(_ret)
 }
 
@@ -114,7 +122,9 @@ func (o *MPSAccelerationStructure) EncodeWithCoder(coder *foundation.NSCoder) {
 // @brief The group this acceleration structure was created with
 func (o *MPSAccelerationStructure) Group() *MPSAccelerationStructureGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureGroupFromID(_ret)
 }
 
@@ -139,4 +149,3 @@ func (o *MPSAccelerationStructure) Usage() MPSAccelerationStructureUsage {
 func (o *MPSAccelerationStructure) SetUsage(usage MPSAccelerationStructureUsage) {
 	o.Ptr().Send(_mPSAccelerationStructureSelSetUsage, usage)
 }
-

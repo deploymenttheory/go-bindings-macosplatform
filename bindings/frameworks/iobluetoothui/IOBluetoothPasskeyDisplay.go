@@ -18,30 +18,30 @@ type IOBluetoothPasskeyDisplay struct {
 }
 
 var (
-	_clsIOBluetoothPasskeyDisplay = _objcClass("IOBluetoothPasskeyDisplay")
-	_iOBluetoothPasskeyDisplaySelSharedDisplayView = objc.RegisterName("sharedDisplayView")
-	_iOBluetoothPasskeyDisplaySelSetPasskeyForDeviceUsingSSP = objc.RegisterName("setPasskey:forDevice:usingSSP:")
-	_iOBluetoothPasskeyDisplaySelAdvancePasskeyIndicator = objc.RegisterName("advancePasskeyIndicator")
-	_iOBluetoothPasskeyDisplaySelRetreatPasskeyIndicator = objc.RegisterName("retreatPasskeyIndicator")
-	_iOBluetoothPasskeyDisplaySelResetPasskeyIndicator = objc.RegisterName("resetPasskeyIndicator")
-	_iOBluetoothPasskeyDisplaySelSetupUIForDevice = objc.RegisterName("setupUIForDevice:")
-	_iOBluetoothPasskeyDisplaySelSetupUIForSSPDevice = objc.RegisterName("setupUIForSSPDevice:")
-	_iOBluetoothPasskeyDisplaySelSetPasskeyString = objc.RegisterName("setPasskeyString:")
-	_iOBluetoothPasskeyDisplaySelSetPasskeyIndicatorEnabled = objc.RegisterName("setPasskeyIndicatorEnabled:")
-	_iOBluetoothPasskeyDisplaySelResetAll = objc.RegisterName("resetAll")
-	_iOBluetoothPasskeyDisplaySelUsePasskeyNotificaitons = objc.RegisterName("usePasskeyNotificaitons")
-	_iOBluetoothPasskeyDisplaySelSetUsePasskeyNotificaitons = objc.RegisterName("setUsePasskeyNotificaitons:")
-	_iOBluetoothPasskeyDisplaySelIsIncomingRequest = objc.RegisterName("isIncomingRequest")
-	_iOBluetoothPasskeyDisplaySelSetIsIncomingRequest = objc.RegisterName("setIsIncomingRequest:")
-	_iOBluetoothPasskeyDisplaySelPasskey = objc.RegisterName("passkey")
-	_iOBluetoothPasskeyDisplaySelSetPasskey = objc.RegisterName("setPasskey:")
-	_iOBluetoothPasskeyDisplaySelReturnImage = objc.RegisterName("returnImage")
-	_iOBluetoothPasskeyDisplaySelSetReturnImage = objc.RegisterName("setReturnImage:")
-	_iOBluetoothPasskeyDisplaySelReturnHighlightImage = objc.RegisterName("returnHighlightImage")
-	_iOBluetoothPasskeyDisplaySelSetReturnHighlightImage = objc.RegisterName("setReturnHighlightImage:")
-	_iOBluetoothPasskeyDisplaySelCenteredView = objc.RegisterName("centeredView")
-	_iOBluetoothPasskeyDisplaySelSetCenteredView = objc.RegisterName("setCenteredView:")
-	_iOBluetoothPasskeyDisplaySelBackgroundImageConstraint = objc.RegisterName("backgroundImageConstraint")
+	_clsIOBluetoothPasskeyDisplay                             = _objcClass("IOBluetoothPasskeyDisplay")
+	_iOBluetoothPasskeyDisplaySelSharedDisplayView            = objc.RegisterName("sharedDisplayView")
+	_iOBluetoothPasskeyDisplaySelSetPasskeyForDeviceUsingSSP  = objc.RegisterName("setPasskey:forDevice:usingSSP:")
+	_iOBluetoothPasskeyDisplaySelAdvancePasskeyIndicator      = objc.RegisterName("advancePasskeyIndicator")
+	_iOBluetoothPasskeyDisplaySelRetreatPasskeyIndicator      = objc.RegisterName("retreatPasskeyIndicator")
+	_iOBluetoothPasskeyDisplaySelResetPasskeyIndicator        = objc.RegisterName("resetPasskeyIndicator")
+	_iOBluetoothPasskeyDisplaySelSetupUIForDevice             = objc.RegisterName("setupUIForDevice:")
+	_iOBluetoothPasskeyDisplaySelSetupUIForSSPDevice          = objc.RegisterName("setupUIForSSPDevice:")
+	_iOBluetoothPasskeyDisplaySelSetPasskeyString             = objc.RegisterName("setPasskeyString:")
+	_iOBluetoothPasskeyDisplaySelSetPasskeyIndicatorEnabled   = objc.RegisterName("setPasskeyIndicatorEnabled:")
+	_iOBluetoothPasskeyDisplaySelResetAll                     = objc.RegisterName("resetAll")
+	_iOBluetoothPasskeyDisplaySelUsePasskeyNotificaitons      = objc.RegisterName("usePasskeyNotificaitons")
+	_iOBluetoothPasskeyDisplaySelSetUsePasskeyNotificaitons   = objc.RegisterName("setUsePasskeyNotificaitons:")
+	_iOBluetoothPasskeyDisplaySelIsIncomingRequest            = objc.RegisterName("isIncomingRequest")
+	_iOBluetoothPasskeyDisplaySelSetIsIncomingRequest         = objc.RegisterName("setIsIncomingRequest:")
+	_iOBluetoothPasskeyDisplaySelPasskey                      = objc.RegisterName("passkey")
+	_iOBluetoothPasskeyDisplaySelSetPasskey                   = objc.RegisterName("setPasskey:")
+	_iOBluetoothPasskeyDisplaySelReturnImage                  = objc.RegisterName("returnImage")
+	_iOBluetoothPasskeyDisplaySelSetReturnImage               = objc.RegisterName("setReturnImage:")
+	_iOBluetoothPasskeyDisplaySelReturnHighlightImage         = objc.RegisterName("returnHighlightImage")
+	_iOBluetoothPasskeyDisplaySelSetReturnHighlightImage      = objc.RegisterName("setReturnHighlightImage:")
+	_iOBluetoothPasskeyDisplaySelCenteredView                 = objc.RegisterName("centeredView")
+	_iOBluetoothPasskeyDisplaySelSetCenteredView              = objc.RegisterName("setCenteredView:")
+	_iOBluetoothPasskeyDisplaySelBackgroundImageConstraint    = objc.RegisterName("backgroundImageConstraint")
 	_iOBluetoothPasskeyDisplaySelSetBackgroundImageConstraint = objc.RegisterName("setBackgroundImageConstraint:")
 )
 
@@ -57,7 +57,9 @@ func IOBluetoothPasskeyDisplayFromID(id objc.ID) *IOBluetoothPasskeyDisplay {
 
 func IOBluetoothPasskeyDisplaySharedDisplayView() *IOBluetoothPasskeyDisplay {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothPasskeyDisplay), _iOBluetoothPasskeyDisplaySelSharedDisplayView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothPasskeyDisplayFromID(_ret)
 }
 
@@ -117,7 +119,9 @@ func (o *IOBluetoothPasskeyDisplay) SetIsIncomingRequest(isIncomingRequest bool)
 
 func (o *IOBluetoothPasskeyDisplay) Passkey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelPasskey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,7 +131,9 @@ func (o *IOBluetoothPasskeyDisplay) SetPasskey(passkey *foundation.NSString) {
 
 func (o *IOBluetoothPasskeyDisplay) ReturnImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -137,7 +143,9 @@ func (o *IOBluetoothPasskeyDisplay) SetReturnImage(returnImage *appkit.NSImage) 
 
 func (o *IOBluetoothPasskeyDisplay) ReturnHighlightImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelReturnHighlightImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -147,7 +155,9 @@ func (o *IOBluetoothPasskeyDisplay) SetReturnHighlightImage(returnHighlightImage
 
 func (o *IOBluetoothPasskeyDisplay) CenteredView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelCenteredView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -157,11 +167,12 @@ func (o *IOBluetoothPasskeyDisplay) SetCenteredView(centeredView *appkit.NSView)
 
 func (o *IOBluetoothPasskeyDisplay) BackgroundImageConstraint() *appkit.NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothPasskeyDisplaySelBackgroundImageConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSLayoutConstraintFromID(_ret)
 }
 
 func (o *IOBluetoothPasskeyDisplay) SetBackgroundImageConstraint(backgroundImageConstraint *appkit.NSLayoutConstraint) {
 	o.Ptr().Send(_iOBluetoothPasskeyDisplaySelSetBackgroundImageConstraint, backgroundImageConstraint.Ptr())
 }
-

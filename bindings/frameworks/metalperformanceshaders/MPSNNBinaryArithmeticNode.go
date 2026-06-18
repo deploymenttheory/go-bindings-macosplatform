@@ -19,35 +19,35 @@ type MPSNNBinaryArithmeticNode struct {
 }
 
 var (
-	_clsMPSNNBinaryArithmeticNode = _objcClass("MPSNNBinaryArithmeticNode")
-	_mPSNNBinaryArithmeticNodeSelNodeWithSources = objc.RegisterName("nodeWithSources:")
-	_mPSNNBinaryArithmeticNodeSelNodeWithLeftSourceRightSource = objc.RegisterName("nodeWithLeftSource:rightSource:")
-	_mPSNNBinaryArithmeticNodeSelInitWithSources = objc.RegisterName("initWithSources:")
-	_mPSNNBinaryArithmeticNodeSelInitWithLeftSourceRightSource = objc.RegisterName("initWithLeftSource:rightSource:")
-	_mPSNNBinaryArithmeticNodeSelGradientClass = objc.RegisterName("gradientClass")
-	_mPSNNBinaryArithmeticNodeSelGradientFiltersWithSources = objc.RegisterName("gradientFiltersWithSources:")
-	_mPSNNBinaryArithmeticNodeSelPrimaryScale = objc.RegisterName("primaryScale")
-	_mPSNNBinaryArithmeticNodeSelSetPrimaryScale = objc.RegisterName("setPrimaryScale:")
-	_mPSNNBinaryArithmeticNodeSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_mPSNNBinaryArithmeticNodeSelSetSecondaryScale = objc.RegisterName("setSecondaryScale:")
-	_mPSNNBinaryArithmeticNodeSelBias = objc.RegisterName("bias")
-	_mPSNNBinaryArithmeticNodeSelSetBias = objc.RegisterName("setBias:")
-	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInPixelsX = objc.RegisterName("primaryStrideInPixelsX")
-	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInPixelsX = objc.RegisterName("setPrimaryStrideInPixelsX:")
-	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInPixelsY = objc.RegisterName("primaryStrideInPixelsY")
-	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInPixelsY = objc.RegisterName("setPrimaryStrideInPixelsY:")
-	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInFeatureChannels = objc.RegisterName("primaryStrideInFeatureChannels")
-	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInFeatureChannels = objc.RegisterName("setPrimaryStrideInFeatureChannels:")
-	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInPixelsX = objc.RegisterName("secondaryStrideInPixelsX")
-	_mPSNNBinaryArithmeticNodeSelSetSecondaryStrideInPixelsX = objc.RegisterName("setSecondaryStrideInPixelsX:")
-	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInPixelsY = objc.RegisterName("secondaryStrideInPixelsY")
-	_mPSNNBinaryArithmeticNodeSelSetSecondaryStrideInPixelsY = objc.RegisterName("setSecondaryStrideInPixelsY:")
-	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInFeatureChannels = objc.RegisterName("secondaryStrideInFeatureChannels")
+	_clsMPSNNBinaryArithmeticNode                                    = _objcClass("MPSNNBinaryArithmeticNode")
+	_mPSNNBinaryArithmeticNodeSelNodeWithSources                     = objc.RegisterName("nodeWithSources:")
+	_mPSNNBinaryArithmeticNodeSelNodeWithLeftSourceRightSource       = objc.RegisterName("nodeWithLeftSource:rightSource:")
+	_mPSNNBinaryArithmeticNodeSelInitWithSources                     = objc.RegisterName("initWithSources:")
+	_mPSNNBinaryArithmeticNodeSelInitWithLeftSourceRightSource       = objc.RegisterName("initWithLeftSource:rightSource:")
+	_mPSNNBinaryArithmeticNodeSelGradientClass                       = objc.RegisterName("gradientClass")
+	_mPSNNBinaryArithmeticNodeSelGradientFiltersWithSources          = objc.RegisterName("gradientFiltersWithSources:")
+	_mPSNNBinaryArithmeticNodeSelPrimaryScale                        = objc.RegisterName("primaryScale")
+	_mPSNNBinaryArithmeticNodeSelSetPrimaryScale                     = objc.RegisterName("setPrimaryScale:")
+	_mPSNNBinaryArithmeticNodeSelSecondaryScale                      = objc.RegisterName("secondaryScale")
+	_mPSNNBinaryArithmeticNodeSelSetSecondaryScale                   = objc.RegisterName("setSecondaryScale:")
+	_mPSNNBinaryArithmeticNodeSelBias                                = objc.RegisterName("bias")
+	_mPSNNBinaryArithmeticNodeSelSetBias                             = objc.RegisterName("setBias:")
+	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInPixelsX              = objc.RegisterName("primaryStrideInPixelsX")
+	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInPixelsX           = objc.RegisterName("setPrimaryStrideInPixelsX:")
+	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInPixelsY              = objc.RegisterName("primaryStrideInPixelsY")
+	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInPixelsY           = objc.RegisterName("setPrimaryStrideInPixelsY:")
+	_mPSNNBinaryArithmeticNodeSelPrimaryStrideInFeatureChannels      = objc.RegisterName("primaryStrideInFeatureChannels")
+	_mPSNNBinaryArithmeticNodeSelSetPrimaryStrideInFeatureChannels   = objc.RegisterName("setPrimaryStrideInFeatureChannels:")
+	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInPixelsX            = objc.RegisterName("secondaryStrideInPixelsX")
+	_mPSNNBinaryArithmeticNodeSelSetSecondaryStrideInPixelsX         = objc.RegisterName("setSecondaryStrideInPixelsX:")
+	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInPixelsY            = objc.RegisterName("secondaryStrideInPixelsY")
+	_mPSNNBinaryArithmeticNodeSelSetSecondaryStrideInPixelsY         = objc.RegisterName("setSecondaryStrideInPixelsY:")
+	_mPSNNBinaryArithmeticNodeSelSecondaryStrideInFeatureChannels    = objc.RegisterName("secondaryStrideInFeatureChannels")
 	_mPSNNBinaryArithmeticNodeSelSetSecondaryStrideInFeatureChannels = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
-	_mPSNNBinaryArithmeticNodeSelMinimumValue = objc.RegisterName("minimumValue")
-	_mPSNNBinaryArithmeticNodeSelSetMinimumValue = objc.RegisterName("setMinimumValue:")
-	_mPSNNBinaryArithmeticNodeSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSNNBinaryArithmeticNodeSelSetMaximumValue = objc.RegisterName("setMaximumValue:")
+	_mPSNNBinaryArithmeticNodeSelMinimumValue                        = objc.RegisterName("minimumValue")
+	_mPSNNBinaryArithmeticNodeSelSetMinimumValue                     = objc.RegisterName("setMinimumValue:")
+	_mPSNNBinaryArithmeticNodeSelMaximumValue                        = objc.RegisterName("maximumValue")
+	_mPSNNBinaryArithmeticNodeSelSetMaximumValue                     = objc.RegisterName("setMaximumValue:")
 )
 
 func MPSNNBinaryArithmeticNodeFromID(id objc.ID) *MPSNNBinaryArithmeticNode {
@@ -63,28 +63,36 @@ func MPSNNBinaryArithmeticNodeFromID(id objc.ID) *MPSNNBinaryArithmeticNode {
 // @abstract create an autoreleased arithemtic node with an array of sources @param  sourceNodes     A valid NSArray containing two sources
 func MPSNNBinaryArithmeticNodeNodeWithSources(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *MPSNNBinaryArithmeticNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNBinaryArithmeticNode), _mPSNNBinaryArithmeticNodeSelNodeWithSources, sourceNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNBinaryArithmeticNodeFromID(_ret)
 }
 
 // @abstract create an autoreleased arithemtic node with two sources @param  left    the left operand @param  right   the right operand
 func MPSNNBinaryArithmeticNodeNodeWithLeftSourceRightSource(left *mpsneuralnetwork.MPSNNImageNode, right *mpsneuralnetwork.MPSNNImageNode) *MPSNNBinaryArithmeticNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNBinaryArithmeticNode), _mPSNNBinaryArithmeticNodeSelNodeWithLeftSourceRightSource, left.Ptr(), right.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNBinaryArithmeticNodeFromID(_ret)
 }
 
 // @abstract init an arithemtic node with an array of sources @param  sourceNodes     A valid NSArray containing two sources
 func (o *MPSNNBinaryArithmeticNode) InitWithSources(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *MPSNNBinaryArithmeticNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNBinaryArithmeticNodeSelInitWithSources, sourceNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNBinaryArithmeticNodeFromID(_ret)
 }
 
 // @abstract init an arithemtic node with two sources @param  left    the left operand @param  right   the right operand
 func (o *MPSNNBinaryArithmeticNode) InitWithLeftSourceRightSource(left *mpsneuralnetwork.MPSNNImageNode, right *mpsneuralnetwork.MPSNNImageNode) *MPSNNBinaryArithmeticNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNBinaryArithmeticNodeSelInitWithLeftSourceRightSource, left.Ptr(), right.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNBinaryArithmeticNodeFromID(_ret)
 }
 
@@ -197,4 +205,3 @@ func (o *MPSNNBinaryArithmeticNode) MaximumValue() float32 {
 func (o *MPSNNBinaryArithmeticNode) SetMaximumValue(maximumValue float32) {
 	o.Ptr().Send(_mPSNNBinaryArithmeticNodeSelSetMaximumValue, maximumValue)
 }
-

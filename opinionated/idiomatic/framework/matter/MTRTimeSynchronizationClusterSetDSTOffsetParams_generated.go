@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterSetDSTOffsetParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetDSTOffsetParams].
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams { return x.inner }
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,4 +94,3 @@ type MTRTimeSynchronizationClusterSetDSTOffsetParamsable interface {
 }
 
 var _ MTRTimeSynchronizationClusterSetDSTOffsetParamsable = (*MTRTimeSynchronizationClusterSetDSTOffsetParams)(nil)
-

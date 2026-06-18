@@ -86,4 +86,3 @@ type RemoteCommandable interface {
 }
 
 var _ RemoteCommandable = (*RemoteCommand)(nil)
-

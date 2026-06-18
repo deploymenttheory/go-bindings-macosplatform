@@ -16,7 +16,7 @@ type VNFaceLandmarks struct {
 }
 
 var (
-	_clsVNFaceLandmarks = _objcClass("VNFaceLandmarks")
+	_clsVNFaceLandmarks           = _objcClass("VNFaceLandmarks")
 	_vNFaceLandmarksSelConfidence = objc.RegisterName("confidence")
 )
 
@@ -34,4 +34,3 @@ func (o *VNFaceLandmarks) Confidence() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNFaceLandmarksSelConfidence)
 	return _ret
 }
-

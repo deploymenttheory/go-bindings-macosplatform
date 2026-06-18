@@ -16,9 +16,9 @@ type MXCPUExceptionDiagnostic struct {
 }
 
 var (
-	_clsMXCPUExceptionDiagnostic = _objcClass("MXCPUExceptionDiagnostic")
-	_mXCPUExceptionDiagnosticSelCallStackTree = objc.RegisterName("callStackTree")
-	_mXCPUExceptionDiagnosticSelTotalCPUTime = objc.RegisterName("totalCPUTime")
+	_clsMXCPUExceptionDiagnostic                 = _objcClass("MXCPUExceptionDiagnostic")
+	_mXCPUExceptionDiagnosticSelCallStackTree    = objc.RegisterName("callStackTree")
+	_mXCPUExceptionDiagnosticSelTotalCPUTime     = objc.RegisterName("totalCPUTime")
 	_mXCPUExceptionDiagnosticSelTotalSampledTime = objc.RegisterName("totalSampledTime")
 )
 
@@ -35,7 +35,9 @@ func MXCPUExceptionDiagnosticFromID(id objc.ID) *MXCPUExceptionDiagnostic {
 // @property      callStackTree @abstract      The application call stack tree associated with the excessive CPU consumption.
 func (o *MXCPUExceptionDiagnostic) CallStackTree() *MXCallStackTree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXCPUExceptionDiagnosticSelCallStackTree)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXCallStackTreeFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *MXCPUExceptionDiagnostic) TotalSampledTime() *foundation.NSMeasurement[
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXCPUExceptionDiagnosticSelTotalSampledTime)
 	return _ret
 }
-

@@ -194,4 +194,3 @@ type CameraItemable interface {
 }
 
 var _ CameraItemable = (*CameraItem)(nil)
-

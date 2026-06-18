@@ -166,7 +166,9 @@ func (x *MetalLayer) WithSublayers(items ...LayerProvider) *MetalLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -416,7 +418,9 @@ func (x *MetalLayer) WithConstraints(items ...*raw.CAConstraint) *MetalLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -648,4 +652,3 @@ type MetalLayerable interface {
 }
 
 var _ MetalLayerable = (*MetalLayer)(nil)
-

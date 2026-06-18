@@ -80,4 +80,3 @@ type StreamNodeable interface {
 }
 
 var _ StreamNodeable = (*StreamNode)(nil)
-

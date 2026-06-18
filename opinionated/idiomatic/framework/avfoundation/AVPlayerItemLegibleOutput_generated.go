@@ -95,7 +95,9 @@ func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution
 	x.inner.SetTextStylingResolution(textStylingResolution)
 }
 
-func (x *PlayerItemLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+func (x *PlayerItemLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
+	return &x.inner.AVPlayerItemOutput
+}
 
 // PlayerItemLegibleOutputable is the interface implemented by [PlayerItemLegibleOutput], for mocking and DI.
 type PlayerItemLegibleOutputable interface {
@@ -113,4 +115,3 @@ type PlayerItemLegibleOutputable interface {
 }
 
 var _ PlayerItemLegibleOutputable = (*PlayerItemLegibleOutput)(nil)
-

@@ -110,4 +110,3 @@ type StartCallIntentable interface {
 }
 
 var _ StartCallIntentable = (*StartCallIntent)(nil)
-

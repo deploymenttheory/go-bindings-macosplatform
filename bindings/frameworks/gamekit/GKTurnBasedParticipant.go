@@ -16,14 +16,14 @@ type GKTurnBasedParticipant struct {
 }
 
 var (
-	_clsGKTurnBasedParticipant = _objcClass("GKTurnBasedParticipant")
-	_gKTurnBasedParticipantSelPlayer = objc.RegisterName("player")
-	_gKTurnBasedParticipantSelLastTurnDate = objc.RegisterName("lastTurnDate")
-	_gKTurnBasedParticipantSelStatus = objc.RegisterName("status")
-	_gKTurnBasedParticipantSelMatchOutcome = objc.RegisterName("matchOutcome")
+	_clsGKTurnBasedParticipant                = _objcClass("GKTurnBasedParticipant")
+	_gKTurnBasedParticipantSelPlayer          = objc.RegisterName("player")
+	_gKTurnBasedParticipantSelLastTurnDate    = objc.RegisterName("lastTurnDate")
+	_gKTurnBasedParticipantSelStatus          = objc.RegisterName("status")
+	_gKTurnBasedParticipantSelMatchOutcome    = objc.RegisterName("matchOutcome")
 	_gKTurnBasedParticipantSelSetMatchOutcome = objc.RegisterName("setMatchOutcome:")
-	_gKTurnBasedParticipantSelTimeoutDate = objc.RegisterName("timeoutDate")
-	_gKTurnBasedParticipantSelPlayerID = objc.RegisterName("playerID")
+	_gKTurnBasedParticipantSelTimeoutDate     = objc.RegisterName("timeoutDate")
+	_gKTurnBasedParticipantSelPlayerID        = objc.RegisterName("playerID")
 )
 
 func GKTurnBasedParticipantFromID(id objc.ID) *GKTurnBasedParticipant {
@@ -38,13 +38,17 @@ func GKTurnBasedParticipantFromID(id objc.ID) *GKTurnBasedParticipant {
 
 func (o *GKTurnBasedParticipant) Player() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedParticipantSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
 func (o *GKTurnBasedParticipant) LastTurnDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedParticipantSelLastTurnDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -64,14 +68,17 @@ func (o *GKTurnBasedParticipant) SetMatchOutcome(matchOutcome GKTurnBasedMatchOu
 
 func (o *GKTurnBasedParticipant) TimeoutDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedParticipantSelTimeoutDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKTurnBasedParticipant) PlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedParticipantSelPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

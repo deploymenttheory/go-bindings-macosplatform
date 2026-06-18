@@ -145,7 +145,9 @@ func (x *AddCarKeyPassConfiguration) SetProductPlanIdentifier(productPlanIdentif
 	x.inner.SetProductPlanIdentifier(foundation.NSStringStringWithUTF8String(productPlanIdentifier))
 }
 
-func (x *AddCarKeyPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return &x.inner.PKAddSecureElementPassConfiguration }
+func (x *AddCarKeyPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
+	return &x.inner.PKAddSecureElementPassConfiguration
+}
 
 // AddCarKeyPassConfigurationable is the interface implemented by [AddCarKeyPassConfiguration], for mocking and DI.
 type AddCarKeyPassConfigurationable interface {
@@ -170,4 +172,3 @@ type AddCarKeyPassConfigurationable interface {
 }
 
 var _ AddCarKeyPassConfigurationable = (*AddCarKeyPassConfiguration)(nil)
-

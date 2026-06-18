@@ -16,17 +16,17 @@ type MTROnOffClusterOffWithEffectParams struct {
 }
 
 var (
-	_clsMTROnOffClusterOffWithEffectParams = _objcClass("MTROnOffClusterOffWithEffectParams")
-	_mTROnOffClusterOffWithEffectParamsSelEffectIdentifier = objc.RegisterName("effectIdentifier")
-	_mTROnOffClusterOffWithEffectParamsSelSetEffectIdentifier = objc.RegisterName("setEffectIdentifier:")
-	_mTROnOffClusterOffWithEffectParamsSelEffectVariant = objc.RegisterName("effectVariant")
-	_mTROnOffClusterOffWithEffectParamsSelSetEffectVariant = objc.RegisterName("setEffectVariant:")
-	_mTROnOffClusterOffWithEffectParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROnOffClusterOffWithEffectParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROnOffClusterOffWithEffectParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROnOffClusterOffWithEffectParams                               = _objcClass("MTROnOffClusterOffWithEffectParams")
+	_mTROnOffClusterOffWithEffectParamsSelEffectIdentifier               = objc.RegisterName("effectIdentifier")
+	_mTROnOffClusterOffWithEffectParamsSelSetEffectIdentifier            = objc.RegisterName("setEffectIdentifier:")
+	_mTROnOffClusterOffWithEffectParamsSelEffectVariant                  = objc.RegisterName("effectVariant")
+	_mTROnOffClusterOffWithEffectParamsSelSetEffectVariant               = objc.RegisterName("setEffectVariant:")
+	_mTROnOffClusterOffWithEffectParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROnOffClusterOffWithEffectParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROnOffClusterOffWithEffectParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROnOffClusterOffWithEffectParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTROnOffClusterOffWithEffectParamsSelEffectId = objc.RegisterName("effectId")
-	_mTROnOffClusterOffWithEffectParamsSelSetEffectId = objc.RegisterName("setEffectId:")
+	_mTROnOffClusterOffWithEffectParamsSelEffectId                       = objc.RegisterName("effectId")
+	_mTROnOffClusterOffWithEffectParamsSelSetEffectId                    = objc.RegisterName("setEffectId:")
 )
 
 func MTROnOffClusterOffWithEffectParamsFromID(id objc.ID) *MTROnOffClusterOffWithEffectParams {
@@ -41,7 +41,9 @@ func MTROnOffClusterOffWithEffectParamsFromID(id objc.ID) *MTROnOffClusterOffWit
 
 func (o *MTROnOffClusterOffWithEffectParams) EffectIdentifier() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROnOffClusterOffWithEffectParamsSelEffectIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTROnOffClusterOffWithEffectParams) SetEffectIdentifier(effectIdentifie
 
 func (o *MTROnOffClusterOffWithEffectParams) EffectVariant() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROnOffClusterOffWithEffectParamsSelEffectVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *MTROnOffClusterOffWithEffectParams) SetEffectVariant(effectVariant *fou
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROnOffClusterOffWithEffectParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROnOffClusterOffWithEffectParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTROnOffClusterOffWithEffectParams) SetTimedInvokeTimeoutMs(timedInvoke
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROnOffClusterOffWithEffectParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROnOffClusterOffWithEffectParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTROnOffClusterOffWithEffectParams) SetServerSideProcessingTimeout(serv
 
 func (o *MTROnOffClusterOffWithEffectParams) EffectId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROnOffClusterOffWithEffectParamsSelEffectId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROnOffClusterOffWithEffectParams) SetEffectId(effectId *foundation.NSNumber) {
 	o.Ptr().Send(_mTROnOffClusterOffWithEffectParamsSelSetEffectId, effectId.Ptr())
 }
-

@@ -84,7 +84,9 @@ func (x *DOMCSSRule) asDOMCSSRule() *raw.DOMCSSRule { return x.inner }
 
 func (x *DOMCSSRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMCSSRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMCSSRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMCSSRuleable is the interface implemented by [DOMCSSRule], for mocking and DI.
 type DOMCSSRuleable interface {
@@ -98,4 +100,3 @@ type DOMCSSRuleable interface {
 }
 
 var _ DOMCSSRuleable = (*DOMCSSRule)(nil)
-

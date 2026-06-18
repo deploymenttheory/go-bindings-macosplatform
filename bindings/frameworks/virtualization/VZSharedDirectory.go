@@ -16,10 +16,10 @@ type VZSharedDirectory struct {
 }
 
 var (
-	_clsVZSharedDirectory = _objcClass("VZSharedDirectory")
+	_clsVZSharedDirectory                    = _objcClass("VZSharedDirectory")
 	_vZSharedDirectorySelInitWithURLReadOnly = objc.RegisterName("initWithURL:readOnly:")
-	_vZSharedDirectorySelURL = objc.RegisterName("URL")
-	_vZSharedDirectorySelIsReadOnly = objc.RegisterName("isReadOnly")
+	_vZSharedDirectorySelURL                 = objc.RegisterName("URL")
+	_vZSharedDirectorySelIsReadOnly          = objc.RegisterName("isReadOnly")
 )
 
 func VZSharedDirectoryFromID(id objc.ID) *VZSharedDirectory {
@@ -35,14 +35,18 @@ func VZSharedDirectoryFromID(id objc.ID) *VZSharedDirectory {
 // @abstract Initialize with a host directory. @param url Local file URL to expose to the guest. @param readOnly Whether or not the directory will be exposed as read-only to the guest.
 func (o *VZSharedDirectory) InitWithURLReadOnly(url *foundation.NSURL, readOnly bool) *VZSharedDirectory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSharedDirectorySelInitWithURLReadOnly, url.Ptr(), readOnly)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSharedDirectoryFromID(_ret)
 }
 
 // @abstract File URL to a directory on the host to expose to the guest. @discussion The URL must point to an existing directory path in the host file system.
 func (o *VZSharedDirectory) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSharedDirectorySelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *VZSharedDirectory) IsReadOnly() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZSharedDirectorySelIsReadOnly)
 	return _ret
 }
-

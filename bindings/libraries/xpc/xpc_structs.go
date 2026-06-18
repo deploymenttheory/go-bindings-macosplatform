@@ -36,4 +36,3 @@ func NewXpc_type_t(ptr unsafe.Pointer) *Xpc_type_t {
 	cgo.Track(o, o.Ptr)
 	return o
 }
-

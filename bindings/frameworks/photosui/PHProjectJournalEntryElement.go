@@ -16,10 +16,10 @@ type PHProjectJournalEntryElement struct {
 }
 
 var (
-	_clsPHProjectJournalEntryElement = _objcClass("PHProjectJournalEntryElement")
-	_pHProjectJournalEntryElementSelDate = objc.RegisterName("date")
+	_clsPHProjectJournalEntryElement             = _objcClass("PHProjectJournalEntryElement")
+	_pHProjectJournalEntryElementSelDate         = objc.RegisterName("date")
 	_pHProjectJournalEntryElementSelAssetElement = objc.RegisterName("assetElement")
-	_pHProjectJournalEntryElementSelTextElement = objc.RegisterName("textElement")
+	_pHProjectJournalEntryElementSelTextElement  = objc.RegisterName("textElement")
 )
 
 func PHProjectJournalEntryElementFromID(id objc.ID) *PHProjectJournalEntryElement {
@@ -35,21 +35,26 @@ func PHProjectJournalEntryElementFromID(id objc.ID) *PHProjectJournalEntryElemen
 // Date to which the provided asset and/or text pertain
 func (o *PHProjectJournalEntryElement) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectJournalEntryElementSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Representative asset, if any, for that date.
 func (o *PHProjectJournalEntryElement) AssetElement() *PHProjectAssetElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectJournalEntryElementSelAssetElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHProjectAssetElementFromID(_ret)
 }
 
 // Descriptive text (e.g., "Mom's Birthday") for that date.
 func (o *PHProjectJournalEntryElement) TextElement() *PHProjectTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectJournalEntryElementSelTextElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHProjectTextElementFromID(_ret)
 }
-

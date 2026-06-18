@@ -87,9 +87,13 @@ func (x *ImageThresholdToZeroInverse) Transform() *float32 {
 	return x.inner.Transform()
 }
 
-func (x *ImageThresholdToZeroInverse) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageThresholdToZeroInverse) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageThresholdToZeroInverse) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageThresholdToZeroInverse) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
 type ImageThresholdToZeroInverseable interface {
@@ -104,4 +108,3 @@ type ImageThresholdToZeroInverseable interface {
 }
 
 var _ ImageThresholdToZeroInverseable = (*ImageThresholdToZeroInverse)(nil)
-

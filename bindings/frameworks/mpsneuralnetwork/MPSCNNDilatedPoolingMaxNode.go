@@ -17,14 +17,14 @@ type MPSCNNDilatedPoolingMaxNode struct {
 }
 
 var (
-	_clsMPSCNNDilatedPoolingMaxNode = _objcClass("MPSCNNDilatedPoolingMaxNode")
-	_mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSize = objc.RegisterName("nodeWithSource:filterSize:")
-	_mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSizeStrideDilationRate = objc.RegisterName("nodeWithSource:filterSize:stride:dilationRate:")
+	_clsMPSCNNDilatedPoolingMaxNode                                                                                              = _objcClass("MPSCNNDilatedPoolingMaxNode")
+	_mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSize                                                                      = objc.RegisterName("nodeWithSource:filterSize:")
+	_mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSizeStrideDilationRate                                                    = objc.RegisterName("nodeWithSource:filterSize:stride:dilationRate:")
 	_mPSCNNDilatedPoolingMaxNodeSelInitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY = objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:")
-	_mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSizeStrideDilationRate = objc.RegisterName("initWithSource:filterSize:stride:dilationRate:")
-	_mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSize = objc.RegisterName("initWithSource:filterSize:")
-	_mPSCNNDilatedPoolingMaxNodeSelDilationRateX = objc.RegisterName("dilationRateX")
-	_mPSCNNDilatedPoolingMaxNodeSelDilationRateY = objc.RegisterName("dilationRateY")
+	_mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSizeStrideDilationRate                                                    = objc.RegisterName("initWithSource:filterSize:stride:dilationRate:")
+	_mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSize                                                                      = objc.RegisterName("initWithSource:filterSize:")
+	_mPSCNNDilatedPoolingMaxNodeSelDilationRateX                                                                                 = objc.RegisterName("dilationRateX")
+	_mPSCNNDilatedPoolingMaxNodeSelDilationRateY                                                                                 = objc.RegisterName("dilationRateY")
 )
 
 func MPSCNNDilatedPoolingMaxNodeFromID(id objc.ID) *MPSCNNDilatedPoolingMaxNode {
@@ -40,35 +40,45 @@ func MPSCNNDilatedPoolingMaxNodeFromID(id objc.ID) *MPSCNNDilatedPoolingMaxNode 
 // @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = dilationRateX = dilationRateY = size @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
 func MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSize(sourceNode *MPSNNImageNode, size uint) *MPSCNNDilatedPoolingMaxNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDilatedPoolingMaxNode), _mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @param      dilationRate    dilationRateX = dilationRateY = stride @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
 func MPSCNNDilatedPoolingMaxNodeNodeWithSourceFilterSizeStrideDilationRate(sourceNode *MPSNNImageNode, size uint, stride uint, dilationRate uint) *MPSCNNDilatedPoolingMaxNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDilatedPoolingMaxNode), _mPSCNNDilatedPoolingMaxNodeSelNodeWithSourceFilterSizeStrideDilationRate, sourceNode.Ptr(), size, stride, dilationRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNPooling kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      kernelWidth             The width of the max filter window @param      kernelHeight            The height of the max filter window @param      strideInPixelsX         The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY         The output stride (downsampling factor) in the y dimension. @param      dilationRateX           The dilation factor in the x dimension. @param      dilationRateY           The dilation factor in the y dimension. @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func (o *MPSCNNDilatedPoolingMaxNode) InitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode *MPSNNImageNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *MPSCNNDilatedPoolingMaxNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxNodeSelInitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY, sourceNode.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @param      dilationRate    dilationRateX = dilationRateY = stride @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
 func (o *MPSCNNDilatedPoolingMaxNode) InitWithSourceFilterSizeStrideDilationRate(sourceNode *MPSNNImageNode, size uint, stride uint, dilationRate uint) *MPSCNNDilatedPoolingMaxNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSizeStrideDilationRate, sourceNode.Ptr(), size, stride, dilationRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = dilationRateX = dilationRateY = size @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
 func (o *MPSCNNDilatedPoolingMaxNode) InitWithSourceFilterSize(sourceNode *MPSNNImageNode, size uint) *MPSCNNDilatedPoolingMaxNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDilatedPoolingMaxNodeSelInitWithSourceFilterSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDilatedPoolingMaxNodeFromID(_ret)
 }
 
@@ -81,4 +91,3 @@ func (o *MPSCNNDilatedPoolingMaxNode) DilationRateY() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNDilatedPoolingMaxNodeSelDilationRateY)
 	return _ret
 }
-

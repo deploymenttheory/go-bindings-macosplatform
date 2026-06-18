@@ -16,11 +16,15 @@ type MTRElectricalMeasurementClusterGetProfileInfoCommandParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRElectricalMeasurementClusterGetProfileInfoCommandParams].
-func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) Unwrap() *raw.MTRElectricalMeasurementClusterGetProfileInfoCommandParams { return x.inner }
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) Unwrap() *raw.MTRElectricalMeasurementClusterGetProfileInfoCommandParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRElectricalMeasurementClusterGetProfileInfoCommandParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRElectricalMeasurementClusterGetProfileInfoCommandParamsFromID adopts an existing object pointer as a MTRElectricalMeasurementClusterGetProfileInfoCommandParams (nil for 0).
 func MTRElectricalMeasurementClusterGetProfileInfoCommandParamsFromID(id objc.ID) *MTRElectricalMeasurementClusterGetProfileInfoCommandParams {
@@ -80,4 +84,3 @@ type MTRElectricalMeasurementClusterGetProfileInfoCommandParamsable interface {
 }
 
 var _ MTRElectricalMeasurementClusterGetProfileInfoCommandParamsable = (*MTRElectricalMeasurementClusterGetProfileInfoCommandParams)(nil)
-

@@ -16,11 +16,11 @@ type MTRDishwasherModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTRDishwasherModeClusterModeTagStruct = _objcClass("MTRDishwasherModeClusterModeTagStruct")
-	_mTRDishwasherModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRDishwasherModeClusterModeTagStruct           = _objcClass("MTRDishwasherModeClusterModeTagStruct")
+	_mTRDishwasherModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRDishwasherModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRDishwasherModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRDishwasherModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRDishwasherModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRDishwasherModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRDishwasherModeClusterModeTagStructFromID(id objc.ID) *MTRDishwasherModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRDishwasherModeClusterModeTagStructFromID(id objc.ID) *MTRDishwasherModeC
 
 func (o *MTRDishwasherModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRDishwasherModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.N
 
 func (o *MTRDishwasherModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDishwasherModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDishwasherModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

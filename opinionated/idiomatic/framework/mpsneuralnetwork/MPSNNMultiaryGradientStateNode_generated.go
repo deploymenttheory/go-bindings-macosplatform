@@ -53,7 +53,9 @@ func (x *NNMultiaryGradientStateNode) WithSynchronizeResource(synchronizeResourc
 	return x
 }
 
-func (x *NNMultiaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
+func (x *NNMultiaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
+	return &x.inner.MPSNNStateNode
+}
 
 // NNMultiaryGradientStateNodeable is the interface implemented by [NNMultiaryGradientStateNode], for mocking and DI.
 type NNMultiaryGradientStateNodeable interface {
@@ -64,4 +66,3 @@ type NNMultiaryGradientStateNodeable interface {
 }
 
 var _ NNMultiaryGradientStateNodeable = (*NNMultiaryGradientStateNode)(nil)
-

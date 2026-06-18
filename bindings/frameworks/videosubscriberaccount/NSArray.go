@@ -26,4 +26,3 @@ func NSArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSArray[ObjectType]
 	purego.Track(o)
 	return o
 }
-

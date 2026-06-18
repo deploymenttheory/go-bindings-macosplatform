@@ -16,19 +16,19 @@ type MTRThermostatClusterScheduleStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterScheduleStruct = _objcClass("MTRThermostatClusterScheduleStruct")
-	_mTRThermostatClusterScheduleStructSelScheduleHandle = objc.RegisterName("scheduleHandle")
+	_clsMTRThermostatClusterScheduleStruct                  = _objcClass("MTRThermostatClusterScheduleStruct")
+	_mTRThermostatClusterScheduleStructSelScheduleHandle    = objc.RegisterName("scheduleHandle")
 	_mTRThermostatClusterScheduleStructSelSetScheduleHandle = objc.RegisterName("setScheduleHandle:")
-	_mTRThermostatClusterScheduleStructSelSystemMode = objc.RegisterName("systemMode")
-	_mTRThermostatClusterScheduleStructSelSetSystemMode = objc.RegisterName("setSystemMode:")
-	_mTRThermostatClusterScheduleStructSelName = objc.RegisterName("name")
-	_mTRThermostatClusterScheduleStructSelSetName = objc.RegisterName("setName:")
-	_mTRThermostatClusterScheduleStructSelPresetHandle = objc.RegisterName("presetHandle")
-	_mTRThermostatClusterScheduleStructSelSetPresetHandle = objc.RegisterName("setPresetHandle:")
-	_mTRThermostatClusterScheduleStructSelTransitions = objc.RegisterName("transitions")
-	_mTRThermostatClusterScheduleStructSelSetTransitions = objc.RegisterName("setTransitions:")
-	_mTRThermostatClusterScheduleStructSelBuiltIn = objc.RegisterName("builtIn")
-	_mTRThermostatClusterScheduleStructSelSetBuiltIn = objc.RegisterName("setBuiltIn:")
+	_mTRThermostatClusterScheduleStructSelSystemMode        = objc.RegisterName("systemMode")
+	_mTRThermostatClusterScheduleStructSelSetSystemMode     = objc.RegisterName("setSystemMode:")
+	_mTRThermostatClusterScheduleStructSelName              = objc.RegisterName("name")
+	_mTRThermostatClusterScheduleStructSelSetName           = objc.RegisterName("setName:")
+	_mTRThermostatClusterScheduleStructSelPresetHandle      = objc.RegisterName("presetHandle")
+	_mTRThermostatClusterScheduleStructSelSetPresetHandle   = objc.RegisterName("setPresetHandle:")
+	_mTRThermostatClusterScheduleStructSelTransitions       = objc.RegisterName("transitions")
+	_mTRThermostatClusterScheduleStructSelSetTransitions    = objc.RegisterName("setTransitions:")
+	_mTRThermostatClusterScheduleStructSelBuiltIn           = objc.RegisterName("builtIn")
+	_mTRThermostatClusterScheduleStructSelSetBuiltIn        = objc.RegisterName("setBuiltIn:")
 )
 
 func MTRThermostatClusterScheduleStructFromID(id objc.ID) *MTRThermostatClusterScheduleStruct {
@@ -43,7 +43,9 @@ func MTRThermostatClusterScheduleStructFromID(id objc.ID) *MTRThermostatClusterS
 
 func (o *MTRThermostatClusterScheduleStruct) ScheduleHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelScheduleHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRThermostatClusterScheduleStruct) SetScheduleHandle(scheduleHandle *f
 
 func (o *MTRThermostatClusterScheduleStruct) SystemMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelSystemMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRThermostatClusterScheduleStruct) SetSystemMode(systemMode *foundatio
 
 func (o *MTRThermostatClusterScheduleStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRThermostatClusterScheduleStruct) SetName(name *foundation.NSString) 
 
 func (o *MTRThermostatClusterScheduleStruct) PresetHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelPresetHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -92,11 +100,12 @@ func (o *MTRThermostatClusterScheduleStruct) SetTransitions(transitions *foundat
 
 func (o *MTRThermostatClusterScheduleStruct) BuiltIn() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleStructSelBuiltIn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterScheduleStruct) SetBuiltIn(builtIn *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterScheduleStructSelSetBuiltIn, builtIn.Ptr())
 }
-

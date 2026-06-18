@@ -19,7 +19,9 @@ type MTRBaseClusterLaundryWasherControls struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterLaundryWasherControls].
-func (x *MTRBaseClusterLaundryWasherControls) Unwrap() *raw.MTRBaseClusterLaundryWasherControls { return x.inner }
+func (x *MTRBaseClusterLaundryWasherControls) Unwrap() *raw.MTRBaseClusterLaundryWasherControls {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -302,9 +304,13 @@ func (x *MTRBaseClusterLaundryWasherControls) SubscribeAttributeClusterRevisionW
 	}
 }
 
-func (x *MTRBaseClusterLaundryWasherControls) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterLaundryWasherControls) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterLaundryWasherControls) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterLaundryWasherControls) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterLaundryWasherControlsable is the interface implemented by [MTRBaseClusterLaundryWasherControls], for mocking and DI.
 type MTRBaseClusterLaundryWasherControlsable interface {
@@ -334,4 +340,3 @@ type MTRBaseClusterLaundryWasherControlsable interface {
 }
 
 var _ MTRBaseClusterLaundryWasherControlsable = (*MTRBaseClusterLaundryWasherControls)(nil)
-

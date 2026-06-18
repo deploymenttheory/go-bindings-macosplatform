@@ -72,4 +72,3 @@ type RecognizedTextable interface {
 }
 
 var _ RecognizedTextable = (*RecognizedText)(nil)
-

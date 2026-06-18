@@ -78,4 +78,3 @@ type SpeechRecognitionTaskable interface {
 }
 
 var _ SpeechRecognitionTaskable = (*SpeechRecognitionTask)(nil)
-

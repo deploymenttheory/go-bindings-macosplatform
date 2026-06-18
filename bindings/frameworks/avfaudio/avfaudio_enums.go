@@ -11,7 +11,7 @@ import (
 type AVAudio3DMixingPointSourceInHeadMode int64
 
 const (
-	AVAudio3DMixingPointSourceInHeadModeMono AVAudio3DMixingPointSourceInHeadMode = 0
+	AVAudio3DMixingPointSourceInHeadModeMono   AVAudio3DMixingPointSourceInHeadMode = 0
 	AVAudio3DMixingPointSourceInHeadModeBypass AVAudio3DMixingPointSourceInHeadMode = 1
 )
 
@@ -30,12 +30,12 @@ type AVAudio3DMixingRenderingAlgorithm int64
 
 const (
 	AVAudio3DMixingRenderingAlgorithmEqualPowerPanning AVAudio3DMixingRenderingAlgorithm = 0
-	AVAudio3DMixingRenderingAlgorithmSphericalHead AVAudio3DMixingRenderingAlgorithm = 1
-	AVAudio3DMixingRenderingAlgorithmHRTF AVAudio3DMixingRenderingAlgorithm = 2
-	AVAudio3DMixingRenderingAlgorithmSoundField AVAudio3DMixingRenderingAlgorithm = 3
+	AVAudio3DMixingRenderingAlgorithmSphericalHead     AVAudio3DMixingRenderingAlgorithm = 1
+	AVAudio3DMixingRenderingAlgorithmHRTF              AVAudio3DMixingRenderingAlgorithm = 2
+	AVAudio3DMixingRenderingAlgorithmSoundField        AVAudio3DMixingRenderingAlgorithm = 3
 	AVAudio3DMixingRenderingAlgorithmStereoPassThrough AVAudio3DMixingRenderingAlgorithm = 5
-	AVAudio3DMixingRenderingAlgorithmHRTFHQ AVAudio3DMixingRenderingAlgorithm = 6
-	AVAudio3DMixingRenderingAlgorithmAuto AVAudio3DMixingRenderingAlgorithm = 7
+	AVAudio3DMixingRenderingAlgorithmHRTFHQ            AVAudio3DMixingRenderingAlgorithm = 6
+	AVAudio3DMixingRenderingAlgorithmAuto              AVAudio3DMixingRenderingAlgorithm = 7
 )
 
 func (e AVAudio3DMixingRenderingAlgorithm) String() string {
@@ -63,9 +63,9 @@ type AVAudio3DMixingSourceMode int64
 
 const (
 	AVAudio3DMixingSourceModeSpatializeIfMono AVAudio3DMixingSourceMode = 0
-	AVAudio3DMixingSourceModeBypass AVAudio3DMixingSourceMode = 1
-	AVAudio3DMixingSourceModePointSource AVAudio3DMixingSourceMode = 2
-	AVAudio3DMixingSourceModeAmbienceBed AVAudio3DMixingSourceMode = 3
+	AVAudio3DMixingSourceModeBypass           AVAudio3DMixingSourceMode = 1
+	AVAudio3DMixingSourceModePointSource      AVAudio3DMixingSourceMode = 2
+	AVAudio3DMixingSourceModeAmbienceBed      AVAudio3DMixingSourceMode = 3
 )
 
 func (e AVAudio3DMixingSourceMode) String() string {
@@ -87,9 +87,9 @@ type AVAudioApplicationMicrophoneInjectionPermission int64
 
 const (
 	AVAudioApplicationMicrophoneInjectionPermissionServiceDisabled AVAudioApplicationMicrophoneInjectionPermission = 1936876659
-	AVAudioApplicationMicrophoneInjectionPermissionUndetermined AVAudioApplicationMicrophoneInjectionPermission = 1970168948
-	AVAudioApplicationMicrophoneInjectionPermissionDenied AVAudioApplicationMicrophoneInjectionPermission = 1684369017
-	AVAudioApplicationMicrophoneInjectionPermissionGranted AVAudioApplicationMicrophoneInjectionPermission = 1735552628
+	AVAudioApplicationMicrophoneInjectionPermissionUndetermined    AVAudioApplicationMicrophoneInjectionPermission = 1970168948
+	AVAudioApplicationMicrophoneInjectionPermissionDenied          AVAudioApplicationMicrophoneInjectionPermission = 1684369017
+	AVAudioApplicationMicrophoneInjectionPermissionGranted         AVAudioApplicationMicrophoneInjectionPermission = 1735552628
 )
 
 func (e AVAudioApplicationMicrophoneInjectionPermission) String() string {
@@ -111,8 +111,8 @@ type AVAudioApplicationRecordPermission int64
 
 const (
 	AVAudioApplicationRecordPermissionUndetermined AVAudioApplicationRecordPermission = 1970168948
-	AVAudioApplicationRecordPermissionDenied AVAudioApplicationRecordPermission = 1684369017
-	AVAudioApplicationRecordPermissionGranted AVAudioApplicationRecordPermission = 1735552628
+	AVAudioApplicationRecordPermissionDenied       AVAudioApplicationRecordPermission = 1684369017
+	AVAudioApplicationRecordPermissionGranted      AVAudioApplicationRecordPermission = 1735552628
 )
 
 func (e AVAudioApplicationRecordPermission) String() string {
@@ -131,11 +131,11 @@ func (e AVAudioApplicationRecordPermission) String() string {
 type AVAudioCommonFormat uint64
 
 const (
-	AVAudioOtherFormat AVAudioCommonFormat = 0
+	AVAudioOtherFormat      AVAudioCommonFormat = 0
 	AVAudioPCMFormatFloat32 AVAudioCommonFormat = 1
 	AVAudioPCMFormatFloat64 AVAudioCommonFormat = 2
-	AVAudioPCMFormatInt16 AVAudioCommonFormat = 3
-	AVAudioPCMFormatInt32 AVAudioCommonFormat = 4
+	AVAudioPCMFormatInt16   AVAudioCommonFormat = 3
+	AVAudioPCMFormatInt32   AVAudioCommonFormat = 4
 )
 
 func (e AVAudioCommonFormat) String() string {
@@ -158,28 +158,28 @@ func (e AVAudioCommonFormat) String() string {
 type AVAudioContentSource int64
 
 const (
-	AVAudioContentSource_Unspecified AVAudioContentSource = -1
-	AVAudioContentSource_Reserved AVAudioContentSource = 0
-	AVAudioContentSource_AppleCapture_Traditional AVAudioContentSource = 1
-	AVAudioContentSource_AppleCapture_Spatial AVAudioContentSource = 2
+	AVAudioContentSource_Unspecified                   AVAudioContentSource = -1
+	AVAudioContentSource_Reserved                      AVAudioContentSource = 0
+	AVAudioContentSource_AppleCapture_Traditional      AVAudioContentSource = 1
+	AVAudioContentSource_AppleCapture_Spatial          AVAudioContentSource = 2
 	AVAudioContentSource_AppleCapture_Spatial_Enhanced AVAudioContentSource = 3
-	AVAudioContentSource_AppleMusic_Traditional AVAudioContentSource = 4
-	AVAudioContentSource_AppleMusic_Spatial AVAudioContentSource = 5
-	AVAudioContentSource_AppleAV_Traditional_Offline AVAudioContentSource = 6
-	AVAudioContentSource_AppleAV_Spatial_Offline AVAudioContentSource = 7
-	AVAudioContentSource_AppleAV_Traditional_Live AVAudioContentSource = 8
-	AVAudioContentSource_AppleAV_Spatial_Live AVAudioContentSource = 9
-	AVAudioContentSource_ApplePassthrough AVAudioContentSource = 10
-	AVAudioContentSource_Capture_Traditional AVAudioContentSource = 33
-	AVAudioContentSource_Capture_Spatial AVAudioContentSource = 34
-	AVAudioContentSource_Capture_Spatial_Enhanced AVAudioContentSource = 35
-	AVAudioContentSource_Music_Traditional AVAudioContentSource = 36
-	AVAudioContentSource_Music_Spatial AVAudioContentSource = 37
-	AVAudioContentSource_AV_Traditional_Offline AVAudioContentSource = 38
-	AVAudioContentSource_AV_Spatial_Offline AVAudioContentSource = 39
-	AVAudioContentSource_AV_Traditional_Live AVAudioContentSource = 40
-	AVAudioContentSource_AV_Spatial_Live AVAudioContentSource = 41
-	AVAudioContentSource_Passthrough AVAudioContentSource = 42
+	AVAudioContentSource_AppleMusic_Traditional        AVAudioContentSource = 4
+	AVAudioContentSource_AppleMusic_Spatial            AVAudioContentSource = 5
+	AVAudioContentSource_AppleAV_Traditional_Offline   AVAudioContentSource = 6
+	AVAudioContentSource_AppleAV_Spatial_Offline       AVAudioContentSource = 7
+	AVAudioContentSource_AppleAV_Traditional_Live      AVAudioContentSource = 8
+	AVAudioContentSource_AppleAV_Spatial_Live          AVAudioContentSource = 9
+	AVAudioContentSource_ApplePassthrough              AVAudioContentSource = 10
+	AVAudioContentSource_Capture_Traditional           AVAudioContentSource = 33
+	AVAudioContentSource_Capture_Spatial               AVAudioContentSource = 34
+	AVAudioContentSource_Capture_Spatial_Enhanced      AVAudioContentSource = 35
+	AVAudioContentSource_Music_Traditional             AVAudioContentSource = 36
+	AVAudioContentSource_Music_Spatial                 AVAudioContentSource = 37
+	AVAudioContentSource_AV_Traditional_Offline        AVAudioContentSource = 38
+	AVAudioContentSource_AV_Spatial_Offline            AVAudioContentSource = 39
+	AVAudioContentSource_AV_Traditional_Live           AVAudioContentSource = 40
+	AVAudioContentSource_AV_Spatial_Live               AVAudioContentSource = 41
+	AVAudioContentSource_Passthrough                   AVAudioContentSource = 42
 )
 
 func (e AVAudioContentSource) String() string {
@@ -312,10 +312,10 @@ func (e AVAudioConverterPrimeMethod) String() string {
 type AVAudioDynamicRangeControlConfiguration int64
 
 const (
-	AVAudioDynamicRangeControlConfiguration_None AVAudioDynamicRangeControlConfiguration = 0
-	AVAudioDynamicRangeControlConfiguration_Music AVAudioDynamicRangeControlConfiguration = 1
-	AVAudioDynamicRangeControlConfiguration_Speech AVAudioDynamicRangeControlConfiguration = 2
-	AVAudioDynamicRangeControlConfiguration_Movie AVAudioDynamicRangeControlConfiguration = 3
+	AVAudioDynamicRangeControlConfiguration_None    AVAudioDynamicRangeControlConfiguration = 0
+	AVAudioDynamicRangeControlConfiguration_Music   AVAudioDynamicRangeControlConfiguration = 1
+	AVAudioDynamicRangeControlConfiguration_Speech  AVAudioDynamicRangeControlConfiguration = 2
+	AVAudioDynamicRangeControlConfiguration_Movie   AVAudioDynamicRangeControlConfiguration = 3
 	AVAudioDynamicRangeControlConfiguration_Capture AVAudioDynamicRangeControlConfiguration = 4
 )
 
@@ -341,7 +341,7 @@ type AVAudioEngineManualRenderingError int64
 const (
 	AVAudioEngineManualRenderingErrorInvalidMode AVAudioEngineManualRenderingError = -80800
 	AVAudioEngineManualRenderingErrorInitialized AVAudioEngineManualRenderingError = -80801
-	AVAudioEngineManualRenderingErrorNotRunning AVAudioEngineManualRenderingError = -80802
+	AVAudioEngineManualRenderingErrorNotRunning  AVAudioEngineManualRenderingError = -80802
 )
 
 func (e AVAudioEngineManualRenderingError) String() string {
@@ -360,7 +360,7 @@ func (e AVAudioEngineManualRenderingError) String() string {
 type AVAudioEngineManualRenderingMode int64
 
 const (
-	AVAudioEngineManualRenderingModeOffline AVAudioEngineManualRenderingMode = 0
+	AVAudioEngineManualRenderingModeOffline  AVAudioEngineManualRenderingMode = 0
 	AVAudioEngineManualRenderingModeRealtime AVAudioEngineManualRenderingMode = 1
 )
 
@@ -378,10 +378,10 @@ func (e AVAudioEngineManualRenderingMode) String() string {
 type AVAudioEngineManualRenderingStatus int64
 
 const (
-	AVAudioEngineManualRenderingStatusError AVAudioEngineManualRenderingStatus = -1
-	AVAudioEngineManualRenderingStatusSuccess AVAudioEngineManualRenderingStatus = 0
+	AVAudioEngineManualRenderingStatusError                         AVAudioEngineManualRenderingStatus = -1
+	AVAudioEngineManualRenderingStatusSuccess                       AVAudioEngineManualRenderingStatus = 0
 	AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode AVAudioEngineManualRenderingStatus = 1
-	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext AVAudioEngineManualRenderingStatus = 2
+	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext      AVAudioEngineManualRenderingStatus = 2
 )
 
 func (e AVAudioEngineManualRenderingStatus) String() string {
@@ -403,8 +403,8 @@ type AVAudioEnvironmentDistanceAttenuationModel int64
 
 const (
 	AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModel = 1
-	AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModel = 2
-	AVAudioEnvironmentDistanceAttenuationModelLinear AVAudioEnvironmentDistanceAttenuationModel = 3
+	AVAudioEnvironmentDistanceAttenuationModelInverse     AVAudioEnvironmentDistanceAttenuationModel = 2
+	AVAudioEnvironmentDistanceAttenuationModelLinear      AVAudioEnvironmentDistanceAttenuationModel = 3
 )
 
 func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
@@ -423,9 +423,9 @@ func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
 type AVAudioEnvironmentOutputType int64
 
 const (
-	AVAudioEnvironmentOutputTypeAuto AVAudioEnvironmentOutputType = 0
-	AVAudioEnvironmentOutputTypeHeadphones AVAudioEnvironmentOutputType = 1
-	AVAudioEnvironmentOutputTypeBuiltInSpeakers AVAudioEnvironmentOutputType = 2
+	AVAudioEnvironmentOutputTypeAuto             AVAudioEnvironmentOutputType = 0
+	AVAudioEnvironmentOutputTypeHeadphones       AVAudioEnvironmentOutputType = 1
+	AVAudioEnvironmentOutputTypeBuiltInSpeakers  AVAudioEnvironmentOutputType = 2
 	AVAudioEnvironmentOutputTypeExternalSpeakers AVAudioEnvironmentOutputType = 3
 )
 
@@ -447,25 +447,33 @@ func (e AVAudioEnvironmentOutputType) String() string {
 type AVAudioPlayerNodeBufferOptions uint64
 
 const (
-	AVAudioPlayerNodeBufferLoops AVAudioPlayerNodeBufferOptions = 1
-	AVAudioPlayerNodeBufferInterrupts AVAudioPlayerNodeBufferOptions = 2
+	AVAudioPlayerNodeBufferLoops            AVAudioPlayerNodeBufferOptions = 1
+	AVAudioPlayerNodeBufferInterrupts       AVAudioPlayerNodeBufferOptions = 2
 	AVAudioPlayerNodeBufferInterruptsAtLoop AVAudioPlayerNodeBufferOptions = 4
 )
 
 func (e AVAudioPlayerNodeBufferOptions) String() string {
 	var parts []string
-	if e&AVAudioPlayerNodeBufferLoops != 0 { parts = append(parts, "AVAudioPlayerNodeBufferLoops") }
-	if e&AVAudioPlayerNodeBufferInterrupts != 0 { parts = append(parts, "AVAudioPlayerNodeBufferInterrupts") }
-	if e&AVAudioPlayerNodeBufferInterruptsAtLoop != 0 { parts = append(parts, "AVAudioPlayerNodeBufferInterruptsAtLoop") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAudioPlayerNodeBufferLoops != 0 {
+		parts = append(parts, "AVAudioPlayerNodeBufferLoops")
+	}
+	if e&AVAudioPlayerNodeBufferInterrupts != 0 {
+		parts = append(parts, "AVAudioPlayerNodeBufferInterrupts")
+	}
+	if e&AVAudioPlayerNodeBufferInterruptsAtLoop != 0 {
+		parts = append(parts, "AVAudioPlayerNodeBufferInterruptsAtLoop")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AVAudioPlayerNodeCompletionCallbackType int64
 
 const (
-	AVAudioPlayerNodeCompletionDataConsumed AVAudioPlayerNodeCompletionCallbackType = 0
-	AVAudioPlayerNodeCompletionDataRendered AVAudioPlayerNodeCompletionCallbackType = 1
+	AVAudioPlayerNodeCompletionDataConsumed   AVAudioPlayerNodeCompletionCallbackType = 0
+	AVAudioPlayerNodeCompletionDataRendered   AVAudioPlayerNodeCompletionCallbackType = 1
 	AVAudioPlayerNodeCompletionDataPlayedBack AVAudioPlayerNodeCompletionCallbackType = 2
 )
 
@@ -485,11 +493,11 @@ func (e AVAudioPlayerNodeCompletionCallbackType) String() string {
 type AVAudioQuality int64
 
 const (
-	AVAudioQualityMin AVAudioQuality = 0
-	AVAudioQualityLow AVAudioQuality = 32
+	AVAudioQualityMin    AVAudioQuality = 0
+	AVAudioQualityLow    AVAudioQuality = 32
 	AVAudioQualityMedium AVAudioQuality = 64
-	AVAudioQualityHigh AVAudioQuality = 96
-	AVAudioQualityMax AVAudioQuality = 127
+	AVAudioQualityHigh   AVAudioQuality = 96
+	AVAudioQualityMax    AVAudioQuality = 127
 )
 
 func (e AVAudioQuality) String() string {
@@ -512,8 +520,8 @@ func (e AVAudioQuality) String() string {
 type AVAudioRoutingArbitrationCategory int64
 
 const (
-	AVAudioRoutingArbitrationCategoryPlayback AVAudioRoutingArbitrationCategory = 0
-	AVAudioRoutingArbitrationCategoryPlayAndRecord AVAudioRoutingArbitrationCategory = 1
+	AVAudioRoutingArbitrationCategoryPlayback           AVAudioRoutingArbitrationCategory = 0
+	AVAudioRoutingArbitrationCategoryPlayAndRecord      AVAudioRoutingArbitrationCategory = 1
 	AVAudioRoutingArbitrationCategoryPlayAndRecordVoice AVAudioRoutingArbitrationCategory = 2
 )
 
@@ -538,7 +546,9 @@ const (
 
 func (e AVAudioSessionActivationOptions) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -553,9 +563,15 @@ const (
 
 func (e AVAudioSessionCategoryOptions) String() string {
 	var parts []string
-	if e&AVAudioSessionCategoryOptionMixWithOthers != 0 { parts = append(parts, "AVAudioSessionCategoryOptionMixWithOthers") }
-	if e&AVAudioSessionCategoryOptionDuckOthers != 0 { parts = append(parts, "AVAudioSessionCategoryOptionDuckOthers") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAudioSessionCategoryOptionMixWithOthers != 0 {
+		parts = append(parts, "AVAudioSessionCategoryOptionMixWithOthers")
+	}
+	if e&AVAudioSessionCategoryOptionDuckOthers != 0 {
+		parts = append(parts, "AVAudioSessionCategoryOptionDuckOthers")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -563,7 +579,7 @@ type AVAudioSessionIOType uint64
 
 const (
 	AVAudioSessionIOTypeNotSpecified AVAudioSessionIOType = 0
-	AVAudioSessionIOTypeAggregated AVAudioSessionIOType = 1
+	AVAudioSessionIOTypeAggregated   AVAudioSessionIOType = 1
 )
 
 func (e AVAudioSessionIOType) String() string {
@@ -586,15 +602,19 @@ const (
 
 func (e AVAudioSessionInterruptionOptions) String() string {
 	var parts []string
-	if e&AVAudioSessionInterruptionOptionShouldResume != 0 { parts = append(parts, "AVAudioSessionInterruptionOptionShouldResume") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAudioSessionInterruptionOptionShouldResume != 0 {
+		parts = append(parts, "AVAudioSessionInterruptionOptionShouldResume")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AVAudioSessionInterruptionReason uint64
 
 const (
-	AVAudioSessionInterruptionReasonDefault AVAudioSessionInterruptionReason = 0
+	AVAudioSessionInterruptionReasonDefault         AVAudioSessionInterruptionReason = 0
 	AVAudioSessionInterruptionReasonAppWasSuspended AVAudioSessionInterruptionReason = 1
 	AVAudioSessionInterruptionReasonBuiltInMicMuted AVAudioSessionInterruptionReason = 2
 )
@@ -669,8 +689,8 @@ func (e AVAudioSessionPortOverride) String() string {
 type AVAudioSessionPromptStyle uint64
 
 const (
-	AVAudioSessionPromptStyleNone AVAudioSessionPromptStyle = 1852796517
-	AVAudioSessionPromptStyleShort AVAudioSessionPromptStyle = 1936224884
+	AVAudioSessionPromptStyleNone   AVAudioSessionPromptStyle = 1852796517
+	AVAudioSessionPromptStyleShort  AVAudioSessionPromptStyle = 1936224884
 	AVAudioSessionPromptStyleNormal AVAudioSessionPromptStyle = 1852992876
 )
 
@@ -689,8 +709,7 @@ func (e AVAudioSessionPromptStyle) String() string {
 
 type AVAudioSessionRecordPermission uint64
 
-const (
-)
+const ()
 
 func (e AVAudioSessionRecordPermission) String() string {
 	switch e {
@@ -782,7 +801,7 @@ func (e AVAudioSessionRouteChangeReason) String() string {
 type AVAudioSessionRouteSharingPolicy uint64
 
 const (
-	AVAudioSessionRouteSharingPolicyDefault AVAudioSessionRouteSharingPolicy = 0
+	AVAudioSessionRouteSharingPolicyDefault       AVAudioSessionRouteSharingPolicy = 0
 	AVAudioSessionRouteSharingPolicyLongFormAudio AVAudioSessionRouteSharingPolicy = 1
 )
 
@@ -806,8 +825,12 @@ const (
 
 func (e AVAudioSessionSetActiveOptions) String() string {
 	var parts []string
-	if e&AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation != 0 { parts = append(parts, "AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation != 0 {
+		parts = append(parts, "AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -834,11 +857,11 @@ func (e AVAudioSessionSilenceSecondaryAudioHintType) String() string {
 type AVAudioStereoOrientation int64
 
 const (
-	AVAudioStereoOrientationNone AVAudioStereoOrientation = 0
-	AVAudioStereoOrientationPortrait AVAudioStereoOrientation = 1
+	AVAudioStereoOrientationNone               AVAudioStereoOrientation = 0
+	AVAudioStereoOrientationPortrait           AVAudioStereoOrientation = 1
 	AVAudioStereoOrientationPortraitUpsideDown AVAudioStereoOrientation = 2
-	AVAudioStereoOrientationLandscapeRight AVAudioStereoOrientation = 3
-	AVAudioStereoOrientationLandscapeLeft AVAudioStereoOrientation = 4
+	AVAudioStereoOrientationLandscapeRight     AVAudioStereoOrientation = 3
+	AVAudioStereoOrientationLandscapeLeft      AVAudioStereoOrientation = 4
 )
 
 func (e AVAudioStereoOrientation) String() string {
@@ -861,28 +884,28 @@ func (e AVAudioStereoOrientation) String() string {
 type AVAudioUnitDistortionPreset int64
 
 const (
-	AVAudioUnitDistortionPresetDrumsBitBrush AVAudioUnitDistortionPreset = 0
-	AVAudioUnitDistortionPresetDrumsBufferBeats AVAudioUnitDistortionPreset = 1
-	AVAudioUnitDistortionPresetDrumsLoFi AVAudioUnitDistortionPreset = 2
-	AVAudioUnitDistortionPresetMultiBrokenSpeaker AVAudioUnitDistortionPreset = 3
-	AVAudioUnitDistortionPresetMultiCellphoneConcert AVAudioUnitDistortionPreset = 4
-	AVAudioUnitDistortionPresetMultiDecimated1 AVAudioUnitDistortionPreset = 5
-	AVAudioUnitDistortionPresetMultiDecimated2 AVAudioUnitDistortionPreset = 6
-	AVAudioUnitDistortionPresetMultiDecimated3 AVAudioUnitDistortionPreset = 7
-	AVAudioUnitDistortionPresetMultiDecimated4 AVAudioUnitDistortionPreset = 8
-	AVAudioUnitDistortionPresetMultiDistortedFunk AVAudioUnitDistortionPreset = 9
-	AVAudioUnitDistortionPresetMultiDistortedCubed AVAudioUnitDistortionPreset = 10
-	AVAudioUnitDistortionPresetMultiDistortedSquared AVAudioUnitDistortionPreset = 11
-	AVAudioUnitDistortionPresetMultiEcho1 AVAudioUnitDistortionPreset = 12
-	AVAudioUnitDistortionPresetMultiEcho2 AVAudioUnitDistortionPreset = 13
-	AVAudioUnitDistortionPresetMultiEchoTight1 AVAudioUnitDistortionPreset = 14
-	AVAudioUnitDistortionPresetMultiEchoTight2 AVAudioUnitDistortionPreset = 15
-	AVAudioUnitDistortionPresetMultiEverythingIsBroken AVAudioUnitDistortionPreset = 16
-	AVAudioUnitDistortionPresetSpeechAlienChatter AVAudioUnitDistortionPreset = 17
+	AVAudioUnitDistortionPresetDrumsBitBrush            AVAudioUnitDistortionPreset = 0
+	AVAudioUnitDistortionPresetDrumsBufferBeats         AVAudioUnitDistortionPreset = 1
+	AVAudioUnitDistortionPresetDrumsLoFi                AVAudioUnitDistortionPreset = 2
+	AVAudioUnitDistortionPresetMultiBrokenSpeaker       AVAudioUnitDistortionPreset = 3
+	AVAudioUnitDistortionPresetMultiCellphoneConcert    AVAudioUnitDistortionPreset = 4
+	AVAudioUnitDistortionPresetMultiDecimated1          AVAudioUnitDistortionPreset = 5
+	AVAudioUnitDistortionPresetMultiDecimated2          AVAudioUnitDistortionPreset = 6
+	AVAudioUnitDistortionPresetMultiDecimated3          AVAudioUnitDistortionPreset = 7
+	AVAudioUnitDistortionPresetMultiDecimated4          AVAudioUnitDistortionPreset = 8
+	AVAudioUnitDistortionPresetMultiDistortedFunk       AVAudioUnitDistortionPreset = 9
+	AVAudioUnitDistortionPresetMultiDistortedCubed      AVAudioUnitDistortionPreset = 10
+	AVAudioUnitDistortionPresetMultiDistortedSquared    AVAudioUnitDistortionPreset = 11
+	AVAudioUnitDistortionPresetMultiEcho1               AVAudioUnitDistortionPreset = 12
+	AVAudioUnitDistortionPresetMultiEcho2               AVAudioUnitDistortionPreset = 13
+	AVAudioUnitDistortionPresetMultiEchoTight1          AVAudioUnitDistortionPreset = 14
+	AVAudioUnitDistortionPresetMultiEchoTight2          AVAudioUnitDistortionPreset = 15
+	AVAudioUnitDistortionPresetMultiEverythingIsBroken  AVAudioUnitDistortionPreset = 16
+	AVAudioUnitDistortionPresetSpeechAlienChatter       AVAudioUnitDistortionPreset = 17
 	AVAudioUnitDistortionPresetSpeechCosmicInterference AVAudioUnitDistortionPreset = 18
-	AVAudioUnitDistortionPresetSpeechGoldenPi AVAudioUnitDistortionPreset = 19
-	AVAudioUnitDistortionPresetSpeechRadioTower AVAudioUnitDistortionPreset = 20
-	AVAudioUnitDistortionPresetSpeechWaves AVAudioUnitDistortionPreset = 21
+	AVAudioUnitDistortionPresetSpeechGoldenPi           AVAudioUnitDistortionPreset = 19
+	AVAudioUnitDistortionPresetSpeechRadioTower         AVAudioUnitDistortionPreset = 20
+	AVAudioUnitDistortionPresetSpeechWaves              AVAudioUnitDistortionPreset = 21
 )
 
 func (e AVAudioUnitDistortionPreset) String() string {
@@ -939,16 +962,16 @@ func (e AVAudioUnitDistortionPreset) String() string {
 type AVAudioUnitEQFilterType int64
 
 const (
-	AVAudioUnitEQFilterTypeParametric AVAudioUnitEQFilterType = 0
-	AVAudioUnitEQFilterTypeLowPass AVAudioUnitEQFilterType = 1
-	AVAudioUnitEQFilterTypeHighPass AVAudioUnitEQFilterType = 2
-	AVAudioUnitEQFilterTypeResonantLowPass AVAudioUnitEQFilterType = 3
-	AVAudioUnitEQFilterTypeResonantHighPass AVAudioUnitEQFilterType = 4
-	AVAudioUnitEQFilterTypeBandPass AVAudioUnitEQFilterType = 5
-	AVAudioUnitEQFilterTypeBandStop AVAudioUnitEQFilterType = 6
-	AVAudioUnitEQFilterTypeLowShelf AVAudioUnitEQFilterType = 7
-	AVAudioUnitEQFilterTypeHighShelf AVAudioUnitEQFilterType = 8
-	AVAudioUnitEQFilterTypeResonantLowShelf AVAudioUnitEQFilterType = 9
+	AVAudioUnitEQFilterTypeParametric        AVAudioUnitEQFilterType = 0
+	AVAudioUnitEQFilterTypeLowPass           AVAudioUnitEQFilterType = 1
+	AVAudioUnitEQFilterTypeHighPass          AVAudioUnitEQFilterType = 2
+	AVAudioUnitEQFilterTypeResonantLowPass   AVAudioUnitEQFilterType = 3
+	AVAudioUnitEQFilterTypeResonantHighPass  AVAudioUnitEQFilterType = 4
+	AVAudioUnitEQFilterTypeBandPass          AVAudioUnitEQFilterType = 5
+	AVAudioUnitEQFilterTypeBandStop          AVAudioUnitEQFilterType = 6
+	AVAudioUnitEQFilterTypeLowShelf          AVAudioUnitEQFilterType = 7
+	AVAudioUnitEQFilterTypeHighShelf         AVAudioUnitEQFilterType = 8
+	AVAudioUnitEQFilterTypeResonantLowShelf  AVAudioUnitEQFilterType = 9
 	AVAudioUnitEQFilterTypeResonantHighShelf AVAudioUnitEQFilterType = 10
 )
 
@@ -984,19 +1007,19 @@ func (e AVAudioUnitEQFilterType) String() string {
 type AVAudioUnitReverbPreset int64
 
 const (
-	AVAudioUnitReverbPresetSmallRoom AVAudioUnitReverbPreset = 0
-	AVAudioUnitReverbPresetMediumRoom AVAudioUnitReverbPreset = 1
-	AVAudioUnitReverbPresetLargeRoom AVAudioUnitReverbPreset = 2
-	AVAudioUnitReverbPresetMediumHall AVAudioUnitReverbPreset = 3
-	AVAudioUnitReverbPresetLargeHall AVAudioUnitReverbPreset = 4
-	AVAudioUnitReverbPresetPlate AVAudioUnitReverbPreset = 5
+	AVAudioUnitReverbPresetSmallRoom     AVAudioUnitReverbPreset = 0
+	AVAudioUnitReverbPresetMediumRoom    AVAudioUnitReverbPreset = 1
+	AVAudioUnitReverbPresetLargeRoom     AVAudioUnitReverbPreset = 2
+	AVAudioUnitReverbPresetMediumHall    AVAudioUnitReverbPreset = 3
+	AVAudioUnitReverbPresetLargeHall     AVAudioUnitReverbPreset = 4
+	AVAudioUnitReverbPresetPlate         AVAudioUnitReverbPreset = 5
 	AVAudioUnitReverbPresetMediumChamber AVAudioUnitReverbPreset = 6
-	AVAudioUnitReverbPresetLargeChamber AVAudioUnitReverbPreset = 7
-	AVAudioUnitReverbPresetCathedral AVAudioUnitReverbPreset = 8
-	AVAudioUnitReverbPresetLargeRoom2 AVAudioUnitReverbPreset = 9
-	AVAudioUnitReverbPresetMediumHall2 AVAudioUnitReverbPreset = 10
-	AVAudioUnitReverbPresetMediumHall3 AVAudioUnitReverbPreset = 11
-	AVAudioUnitReverbPresetLargeHall2 AVAudioUnitReverbPreset = 12
+	AVAudioUnitReverbPresetLargeChamber  AVAudioUnitReverbPreset = 7
+	AVAudioUnitReverbPresetCathedral     AVAudioUnitReverbPreset = 8
+	AVAudioUnitReverbPresetLargeRoom2    AVAudioUnitReverbPreset = 9
+	AVAudioUnitReverbPresetMediumHall2   AVAudioUnitReverbPreset = 10
+	AVAudioUnitReverbPresetMediumHall3   AVAudioUnitReverbPreset = 11
+	AVAudioUnitReverbPresetLargeHall2    AVAudioUnitReverbPreset = 12
 )
 
 func (e AVAudioUnitReverbPreset) String() string {
@@ -1036,9 +1059,9 @@ type AVAudioVoiceProcessingOtherAudioDuckingLevel int64
 
 const (
 	AVAudioVoiceProcessingOtherAudioDuckingLevelDefault AVAudioVoiceProcessingOtherAudioDuckingLevel = 0
-	AVAudioVoiceProcessingOtherAudioDuckingLevelMin AVAudioVoiceProcessingOtherAudioDuckingLevel = 10
-	AVAudioVoiceProcessingOtherAudioDuckingLevelMid AVAudioVoiceProcessingOtherAudioDuckingLevel = 20
-	AVAudioVoiceProcessingOtherAudioDuckingLevelMax AVAudioVoiceProcessingOtherAudioDuckingLevel = 30
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMin     AVAudioVoiceProcessingOtherAudioDuckingLevel = 10
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMid     AVAudioVoiceProcessingOtherAudioDuckingLevel = 20
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMax     AVAudioVoiceProcessingOtherAudioDuckingLevel = 30
 )
 
 func (e AVAudioVoiceProcessingOtherAudioDuckingLevel) String() string {
@@ -1060,7 +1083,7 @@ type AVAudioVoiceProcessingSpeechActivityEvent int64
 
 const (
 	AVAudioVoiceProcessingSpeechActivityStarted AVAudioVoiceProcessingSpeechActivityEvent = 0
-	AVAudioVoiceProcessingSpeechActivityEnded AVAudioVoiceProcessingSpeechActivityEvent = 1
+	AVAudioVoiceProcessingSpeechActivityEnded   AVAudioVoiceProcessingSpeechActivityEvent = 1
 )
 
 func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
@@ -1077,41 +1100,41 @@ func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
 type AVMIDIControlChangeMessageType int64
 
 const (
-	AVMIDIControlChangeMessageTypeBankSelect AVMIDIControlChangeMessageType = 0
-	AVMIDIControlChangeMessageTypeModWheel AVMIDIControlChangeMessageType = 1
-	AVMIDIControlChangeMessageTypeBreath AVMIDIControlChangeMessageType = 2
-	AVMIDIControlChangeMessageTypeFoot AVMIDIControlChangeMessageType = 4
-	AVMIDIControlChangeMessageTypePortamentoTime AVMIDIControlChangeMessageType = 5
-	AVMIDIControlChangeMessageTypeDataEntry AVMIDIControlChangeMessageType = 6
-	AVMIDIControlChangeMessageTypeVolume AVMIDIControlChangeMessageType = 7
-	AVMIDIControlChangeMessageTypeBalance AVMIDIControlChangeMessageType = 8
-	AVMIDIControlChangeMessageTypePan AVMIDIControlChangeMessageType = 10
-	AVMIDIControlChangeMessageTypeExpression AVMIDIControlChangeMessageType = 11
-	AVMIDIControlChangeMessageTypeSustain AVMIDIControlChangeMessageType = 64
-	AVMIDIControlChangeMessageTypePortamento AVMIDIControlChangeMessageType = 65
-	AVMIDIControlChangeMessageTypeSostenuto AVMIDIControlChangeMessageType = 66
-	AVMIDIControlChangeMessageTypeSoft AVMIDIControlChangeMessageType = 67
-	AVMIDIControlChangeMessageTypeLegatoPedal AVMIDIControlChangeMessageType = 68
-	AVMIDIControlChangeMessageTypeHold2Pedal AVMIDIControlChangeMessageType = 69
-	AVMIDIControlChangeMessageTypeFilterResonance AVMIDIControlChangeMessageType = 71
-	AVMIDIControlChangeMessageTypeReleaseTime AVMIDIControlChangeMessageType = 72
-	AVMIDIControlChangeMessageTypeAttackTime AVMIDIControlChangeMessageType = 73
-	AVMIDIControlChangeMessageTypeBrightness AVMIDIControlChangeMessageType = 74
-	AVMIDIControlChangeMessageTypeDecayTime AVMIDIControlChangeMessageType = 75
-	AVMIDIControlChangeMessageTypeVibratoRate AVMIDIControlChangeMessageType = 76
-	AVMIDIControlChangeMessageTypeVibratoDepth AVMIDIControlChangeMessageType = 77
-	AVMIDIControlChangeMessageTypeVibratoDelay AVMIDIControlChangeMessageType = 78
-	AVMIDIControlChangeMessageTypeReverbLevel AVMIDIControlChangeMessageType = 91
-	AVMIDIControlChangeMessageTypeChorusLevel AVMIDIControlChangeMessageType = 93
-	AVMIDIControlChangeMessageTypeRPN_LSB AVMIDIControlChangeMessageType = 100
-	AVMIDIControlChangeMessageTypeRPN_MSB AVMIDIControlChangeMessageType = 101
-	AVMIDIControlChangeMessageTypeAllSoundOff AVMIDIControlChangeMessageType = 120
+	AVMIDIControlChangeMessageTypeBankSelect          AVMIDIControlChangeMessageType = 0
+	AVMIDIControlChangeMessageTypeModWheel            AVMIDIControlChangeMessageType = 1
+	AVMIDIControlChangeMessageTypeBreath              AVMIDIControlChangeMessageType = 2
+	AVMIDIControlChangeMessageTypeFoot                AVMIDIControlChangeMessageType = 4
+	AVMIDIControlChangeMessageTypePortamentoTime      AVMIDIControlChangeMessageType = 5
+	AVMIDIControlChangeMessageTypeDataEntry           AVMIDIControlChangeMessageType = 6
+	AVMIDIControlChangeMessageTypeVolume              AVMIDIControlChangeMessageType = 7
+	AVMIDIControlChangeMessageTypeBalance             AVMIDIControlChangeMessageType = 8
+	AVMIDIControlChangeMessageTypePan                 AVMIDIControlChangeMessageType = 10
+	AVMIDIControlChangeMessageTypeExpression          AVMIDIControlChangeMessageType = 11
+	AVMIDIControlChangeMessageTypeSustain             AVMIDIControlChangeMessageType = 64
+	AVMIDIControlChangeMessageTypePortamento          AVMIDIControlChangeMessageType = 65
+	AVMIDIControlChangeMessageTypeSostenuto           AVMIDIControlChangeMessageType = 66
+	AVMIDIControlChangeMessageTypeSoft                AVMIDIControlChangeMessageType = 67
+	AVMIDIControlChangeMessageTypeLegatoPedal         AVMIDIControlChangeMessageType = 68
+	AVMIDIControlChangeMessageTypeHold2Pedal          AVMIDIControlChangeMessageType = 69
+	AVMIDIControlChangeMessageTypeFilterResonance     AVMIDIControlChangeMessageType = 71
+	AVMIDIControlChangeMessageTypeReleaseTime         AVMIDIControlChangeMessageType = 72
+	AVMIDIControlChangeMessageTypeAttackTime          AVMIDIControlChangeMessageType = 73
+	AVMIDIControlChangeMessageTypeBrightness          AVMIDIControlChangeMessageType = 74
+	AVMIDIControlChangeMessageTypeDecayTime           AVMIDIControlChangeMessageType = 75
+	AVMIDIControlChangeMessageTypeVibratoRate         AVMIDIControlChangeMessageType = 76
+	AVMIDIControlChangeMessageTypeVibratoDepth        AVMIDIControlChangeMessageType = 77
+	AVMIDIControlChangeMessageTypeVibratoDelay        AVMIDIControlChangeMessageType = 78
+	AVMIDIControlChangeMessageTypeReverbLevel         AVMIDIControlChangeMessageType = 91
+	AVMIDIControlChangeMessageTypeChorusLevel         AVMIDIControlChangeMessageType = 93
+	AVMIDIControlChangeMessageTypeRPN_LSB             AVMIDIControlChangeMessageType = 100
+	AVMIDIControlChangeMessageTypeRPN_MSB             AVMIDIControlChangeMessageType = 101
+	AVMIDIControlChangeMessageTypeAllSoundOff         AVMIDIControlChangeMessageType = 120
 	AVMIDIControlChangeMessageTypeResetAllControllers AVMIDIControlChangeMessageType = 121
-	AVMIDIControlChangeMessageTypeAllNotesOff AVMIDIControlChangeMessageType = 123
-	AVMIDIControlChangeMessageTypeOmniModeOff AVMIDIControlChangeMessageType = 124
-	AVMIDIControlChangeMessageTypeOmniModeOn AVMIDIControlChangeMessageType = 125
-	AVMIDIControlChangeMessageTypeMonoModeOn AVMIDIControlChangeMessageType = 126
-	AVMIDIControlChangeMessageTypeMonoModeOff AVMIDIControlChangeMessageType = 127
+	AVMIDIControlChangeMessageTypeAllNotesOff         AVMIDIControlChangeMessageType = 123
+	AVMIDIControlChangeMessageTypeOmniModeOff         AVMIDIControlChangeMessageType = 124
+	AVMIDIControlChangeMessageTypeOmniModeOn          AVMIDIControlChangeMessageType = 125
+	AVMIDIControlChangeMessageTypeMonoModeOn          AVMIDIControlChangeMessageType = 126
+	AVMIDIControlChangeMessageTypeMonoModeOff         AVMIDIControlChangeMessageType = 127
 )
 
 func (e AVMIDIControlChangeMessageType) String() string {
@@ -1194,21 +1217,21 @@ func (e AVMIDIControlChangeMessageType) String() string {
 type AVMIDIMetaEventType int64
 
 const (
-	AVMIDIMetaEventTypeSequenceNumber AVMIDIMetaEventType = 0
-	AVMIDIMetaEventTypeText AVMIDIMetaEventType = 1
-	AVMIDIMetaEventTypeCopyright AVMIDIMetaEventType = 2
-	AVMIDIMetaEventTypeTrackName AVMIDIMetaEventType = 3
-	AVMIDIMetaEventTypeInstrument AVMIDIMetaEventType = 4
-	AVMIDIMetaEventTypeLyric AVMIDIMetaEventType = 5
-	AVMIDIMetaEventTypeMarker AVMIDIMetaEventType = 6
-	AVMIDIMetaEventTypeCuePoint AVMIDIMetaEventType = 7
-	AVMIDIMetaEventTypeMidiChannel AVMIDIMetaEventType = 32
-	AVMIDIMetaEventTypeMidiPort AVMIDIMetaEventType = 33
-	AVMIDIMetaEventTypeEndOfTrack AVMIDIMetaEventType = 47
-	AVMIDIMetaEventTypeTempo AVMIDIMetaEventType = 81
-	AVMIDIMetaEventTypeSmpteOffset AVMIDIMetaEventType = 84
-	AVMIDIMetaEventTypeTimeSignature AVMIDIMetaEventType = 88
-	AVMIDIMetaEventTypeKeySignature AVMIDIMetaEventType = 89
+	AVMIDIMetaEventTypeSequenceNumber   AVMIDIMetaEventType = 0
+	AVMIDIMetaEventTypeText             AVMIDIMetaEventType = 1
+	AVMIDIMetaEventTypeCopyright        AVMIDIMetaEventType = 2
+	AVMIDIMetaEventTypeTrackName        AVMIDIMetaEventType = 3
+	AVMIDIMetaEventTypeInstrument       AVMIDIMetaEventType = 4
+	AVMIDIMetaEventTypeLyric            AVMIDIMetaEventType = 5
+	AVMIDIMetaEventTypeMarker           AVMIDIMetaEventType = 6
+	AVMIDIMetaEventTypeCuePoint         AVMIDIMetaEventType = 7
+	AVMIDIMetaEventTypeMidiChannel      AVMIDIMetaEventType = 32
+	AVMIDIMetaEventTypeMidiPort         AVMIDIMetaEventType = 33
+	AVMIDIMetaEventTypeEndOfTrack       AVMIDIMetaEventType = 47
+	AVMIDIMetaEventTypeTempo            AVMIDIMetaEventType = 81
+	AVMIDIMetaEventTypeSmpteOffset      AVMIDIMetaEventType = 84
+	AVMIDIMetaEventTypeTimeSignature    AVMIDIMetaEventType = 88
+	AVMIDIMetaEventTypeKeySignature     AVMIDIMetaEventType = 89
 	AVMIDIMetaEventTypeProprietaryEvent AVMIDIMetaEventType = 127
 )
 
@@ -1254,14 +1277,18 @@ func (e AVMIDIMetaEventType) String() string {
 type AVMusicSequenceLoadOptions uint64
 
 const (
-	AVMusicSequenceLoadSMF_PreserveTracks AVMusicSequenceLoadOptions = 0
+	AVMusicSequenceLoadSMF_PreserveTracks   AVMusicSequenceLoadOptions = 0
 	AVMusicSequenceLoadSMF_ChannelsToTracks AVMusicSequenceLoadOptions = 1
 )
 
 func (e AVMusicSequenceLoadOptions) String() string {
 	var parts []string
-	if e&AVMusicSequenceLoadSMF_ChannelsToTracks != 0 { parts = append(parts, "AVMusicSequenceLoadSMF_ChannelsToTracks") }
-	if len(parts) == 0 { return "0" }
+	if e&AVMusicSequenceLoadSMF_ChannelsToTracks != 0 {
+		parts = append(parts, "AVMusicSequenceLoadSMF_ChannelsToTracks")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1284,7 +1311,7 @@ type AVSpeechBoundary int64
 
 const (
 	AVSpeechBoundaryImmediate AVSpeechBoundary = 0
-	AVSpeechBoundaryWord AVSpeechBoundary = 1
+	AVSpeechBoundaryWord      AVSpeechBoundary = 1
 )
 
 func (e AVSpeechBoundary) String() string {
@@ -1301,11 +1328,11 @@ func (e AVSpeechBoundary) String() string {
 type AVSpeechSynthesisMarkerMark int64
 
 const (
-	AVSpeechSynthesisMarkerMarkPhoneme AVSpeechSynthesisMarkerMark = 0
-	AVSpeechSynthesisMarkerMarkWord AVSpeechSynthesisMarkerMark = 1
-	AVSpeechSynthesisMarkerMarkSentence AVSpeechSynthesisMarkerMark = 2
+	AVSpeechSynthesisMarkerMarkPhoneme   AVSpeechSynthesisMarkerMark = 0
+	AVSpeechSynthesisMarkerMarkWord      AVSpeechSynthesisMarkerMark = 1
+	AVSpeechSynthesisMarkerMarkSentence  AVSpeechSynthesisMarkerMark = 2
 	AVSpeechSynthesisMarkerMarkParagraph AVSpeechSynthesisMarkerMark = 3
-	AVSpeechSynthesisMarkerMarkBookmark AVSpeechSynthesisMarkerMark = 4
+	AVSpeechSynthesisMarkerMarkBookmark  AVSpeechSynthesisMarkerMark = 4
 )
 
 func (e AVSpeechSynthesisMarkerMark) String() string {
@@ -1357,8 +1384,8 @@ type AVSpeechSynthesisVoiceGender int64
 
 const (
 	AVSpeechSynthesisVoiceGenderUnspecified AVSpeechSynthesisVoiceGender = 0
-	AVSpeechSynthesisVoiceGenderMale AVSpeechSynthesisVoiceGender = 1
-	AVSpeechSynthesisVoiceGenderFemale AVSpeechSynthesisVoiceGender = 2
+	AVSpeechSynthesisVoiceGenderMale        AVSpeechSynthesisVoiceGender = 1
+	AVSpeechSynthesisVoiceGenderFemale      AVSpeechSynthesisVoiceGender = 2
 )
 
 func (e AVSpeechSynthesisVoiceGender) String() string {
@@ -1377,9 +1404,9 @@ func (e AVSpeechSynthesisVoiceGender) String() string {
 type AVSpeechSynthesisVoiceQuality int64
 
 const (
-	AVSpeechSynthesisVoiceQualityDefault AVSpeechSynthesisVoiceQuality = 1
+	AVSpeechSynthesisVoiceQualityDefault  AVSpeechSynthesisVoiceQuality = 1
 	AVSpeechSynthesisVoiceQualityEnhanced AVSpeechSynthesisVoiceQuality = 2
-	AVSpeechSynthesisVoiceQualityPremium AVSpeechSynthesisVoiceQuality = 3
+	AVSpeechSynthesisVoiceQualityPremium  AVSpeechSynthesisVoiceQuality = 3
 )
 
 func (e AVSpeechSynthesisVoiceQuality) String() string {
@@ -1407,18 +1434,24 @@ const (
 
 func (e AVSpeechSynthesisVoiceTraits) String() string {
 	var parts []string
-	if e&AVSpeechSynthesisVoiceTraitIsNoveltyVoice != 0 { parts = append(parts, "AVSpeechSynthesisVoiceTraitIsNoveltyVoice") }
-	if e&AVSpeechSynthesisVoiceTraitIsPersonalVoice != 0 { parts = append(parts, "AVSpeechSynthesisVoiceTraitIsPersonalVoice") }
-	if len(parts) == 0 { return "0" }
+	if e&AVSpeechSynthesisVoiceTraitIsNoveltyVoice != 0 {
+		parts = append(parts, "AVSpeechSynthesisVoiceTraitIsNoveltyVoice")
+	}
+	if e&AVSpeechSynthesisVoiceTraitIsPersonalVoice != 0 {
+		parts = append(parts, "AVSpeechSynthesisVoiceTraitIsPersonalVoice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -1437,10 +1470,10 @@ func (e CGLCPContextPriorityRequest) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -1465,7 +1498,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -1483,8 +1516,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -1520,8 +1553,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -1541,7 +1574,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -1560,8 +1593,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1580,13 +1613,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1613,24 +1646,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1671,9 +1704,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1693,12 +1726,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1725,14 +1758,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1761,9 +1794,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1782,36 +1815,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1841,8 +1888,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1862,62 +1909,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -2043,15 +2090,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -2089,7 +2136,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2097,7 +2146,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -2115,8 +2164,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -2135,26 +2184,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2176,27 +2241,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2220,11 +2285,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2249,22 +2314,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2315,34 +2380,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

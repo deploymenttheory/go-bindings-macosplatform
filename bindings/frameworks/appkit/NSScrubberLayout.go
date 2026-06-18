@@ -17,21 +17,21 @@ type NSScrubberLayout struct {
 }
 
 var (
-	_clsNSScrubberLayout = _objcClass("NSScrubberLayout")
-	_nSScrubberLayoutSelInit = objc.RegisterName("init")
-	_nSScrubberLayoutSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScrubberLayoutSelInvalidateLayout = objc.RegisterName("invalidateLayout")
-	_nSScrubberLayoutSelPrepareLayout = objc.RegisterName("prepareLayout")
-	_nSScrubberLayoutSelLayoutAttributesForItemAtIndex = objc.RegisterName("layoutAttributesForItemAtIndex:")
-	_nSScrubberLayoutSelLayoutAttributesForItemsInRect = objc.RegisterName("layoutAttributesForItemsInRect:")
+	_clsNSScrubberLayout                                                            = _objcClass("NSScrubberLayout")
+	_nSScrubberLayoutSelInit                                                        = objc.RegisterName("init")
+	_nSScrubberLayoutSelInitWithCoder                                               = objc.RegisterName("initWithCoder:")
+	_nSScrubberLayoutSelInvalidateLayout                                            = objc.RegisterName("invalidateLayout")
+	_nSScrubberLayoutSelPrepareLayout                                               = objc.RegisterName("prepareLayout")
+	_nSScrubberLayoutSelLayoutAttributesForItemAtIndex                              = objc.RegisterName("layoutAttributesForItemAtIndex:")
+	_nSScrubberLayoutSelLayoutAttributesForItemsInRect                              = objc.RegisterName("layoutAttributesForItemsInRect:")
 	_nSScrubberLayoutSelShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect = objc.RegisterName("shouldInvalidateLayoutForChangeFromVisibleRect:toVisibleRect:")
-	_nSScrubberLayoutSelLayoutAttributesClass = objc.RegisterName("layoutAttributesClass")
-	_nSScrubberLayoutSelScrubber = objc.RegisterName("scrubber")
-	_nSScrubberLayoutSelVisibleRect = objc.RegisterName("visibleRect")
-	_nSScrubberLayoutSelScrubberContentSize = objc.RegisterName("scrubberContentSize")
-	_nSScrubberLayoutSelShouldInvalidateLayoutForSelectionChange = objc.RegisterName("shouldInvalidateLayoutForSelectionChange")
-	_nSScrubberLayoutSelShouldInvalidateLayoutForHighlightChange = objc.RegisterName("shouldInvalidateLayoutForHighlightChange")
-	_nSScrubberLayoutSelAutomaticallyMirrorsInRightToLeftLayout = objc.RegisterName("automaticallyMirrorsInRightToLeftLayout")
+	_nSScrubberLayoutSelLayoutAttributesClass                                       = objc.RegisterName("layoutAttributesClass")
+	_nSScrubberLayoutSelScrubber                                                    = objc.RegisterName("scrubber")
+	_nSScrubberLayoutSelVisibleRect                                                 = objc.RegisterName("visibleRect")
+	_nSScrubberLayoutSelScrubberContentSize                                         = objc.RegisterName("scrubberContentSize")
+	_nSScrubberLayoutSelShouldInvalidateLayoutForSelectionChange                    = objc.RegisterName("shouldInvalidateLayoutForSelectionChange")
+	_nSScrubberLayoutSelShouldInvalidateLayoutForHighlightChange                    = objc.RegisterName("shouldInvalidateLayoutForHighlightChange")
+	_nSScrubberLayoutSelAutomaticallyMirrorsInRightToLeftLayout                     = objc.RegisterName("automaticallyMirrorsInRightToLeftLayout")
 )
 
 func NSScrubberLayoutFromID(id objc.ID) *NSScrubberLayout {
@@ -46,13 +46,17 @@ func NSScrubberLayoutFromID(id objc.ID) *NSScrubberLayout {
 
 func (o *NSScrubberLayout) Init() *NSScrubberLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberLayoutFromID(_ret)
 }
 
 func (o *NSScrubberLayout) InitWithCoder(coder *foundation.NSCoder) *NSScrubberLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberLayoutFromID(_ret)
 }
 
@@ -69,14 +73,18 @@ func (o *NSScrubberLayout) PrepareLayout() {
 // Returns the layout attributes for a single item within the scrubber. The base implementation returns @c nil.
 func (o *NSScrubberLayout) LayoutAttributesForItemAtIndex(index int) *NSScrubberLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberLayoutAttributesFromID(_ret)
 }
 
 // Returns the set of layout attributes for all items within the provided rectangle. The base implementation returns an empty set.
 func (o *NSScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*NSScrubberLayoutAttributes] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelLayoutAttributesForItemsInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSScrubberLayoutAttributes](_ret)
 }
 
@@ -95,7 +103,9 @@ func NSScrubberLayoutLayoutAttributesClass() objc.Class {
 // The NSScrubber control that this layout is assigned to, or @c nil if the receiver is not assigned to a scrubber.
 func (o *NSScrubberLayout) Scrubber() *NSScrubber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberLayoutSelScrubber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberFromID(_ret)
 }
 
@@ -128,4 +138,3 @@ func (o *NSScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSScrubberLayoutSelAutomaticallyMirrorsInRightToLeftLayout)
 	return _ret
 }
-

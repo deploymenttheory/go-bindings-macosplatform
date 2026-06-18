@@ -35,436 +35,436 @@ var (
 	// @function AuthorizationRightRemove Request to remove a right from the policy database. @param authRef (input) authRef, to be used to authorize this action. @param rightName (input) the rightname (ASCII).  Wildcard rightnames are not okay.
 	_fnAuthorizationRightRemove func(unsafe.Pointer, string) int
 	// @function AuthorizationRightSet Create or update a right entry.  Only normal rights can be registered (wildcard rights are denied); wildcard rights are considered to be put in by an administrator putting together a site configuration. @param authRef (input) authRef to authorize modifications. @param rightName (input) the rightname (ASCII).  Wildcard rightnames are not okay. @param rightDefinition (input) a CFString of the name of a rule to use (delegate) or CFDictionary containing keys defining one. @param descriptionKey (input/optional) a CFString to use as a key for looking up localized descriptions.  If no localization is found this will be the description itself. @param bundle (input/optional) a bundle to get localizations from if not the main bundle. @param localeTableName (input/optional) stringtable name to get localizations from. @result errAuthorizationSuccess 0 added right definition successfully. errAuthorizationDenied -60005 Unable to create or update right definition. errAuthorizationCanceled -60006 Authorization was canceled by user. errAuthorizationInteractionNotAllowed -60007 Interaction was required but not possible.
-	_fnAuthorizationRightSet func(unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderCopyAllCerts func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderCopyContent func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderCopyDetachedContent func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderCopyEncapsulatedContentType func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderCopySignerCert func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMSDecoderCopySignerEmailAddress func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMSDecoderCopySignerSigningTime func(unsafe.Pointer, uint, *float64) int
-	_fnCMSDecoderCopySignerStatus func(unsafe.Pointer, uint, unsafe.Pointer, uint8, *CMSSignerStatus, unsafe.Pointer, *int) int
-	_fnCMSDecoderCopySignerTimestamp func(unsafe.Pointer, uint, *float64) int
+	_fnAuthorizationRightSet                     func(unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSDecoderCopyAllCerts                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSDecoderCopyContent                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSDecoderCopyDetachedContent             func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSDecoderCopyEncapsulatedContentType     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSDecoderCopySignerCert                  func(unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnCMSDecoderCopySignerEmailAddress          func(unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnCMSDecoderCopySignerSigningTime           func(unsafe.Pointer, uint, *float64) int
+	_fnCMSDecoderCopySignerStatus                func(unsafe.Pointer, uint, unsafe.Pointer, uint8, *CMSSignerStatus, unsafe.Pointer, *int) int
+	_fnCMSDecoderCopySignerTimestamp             func(unsafe.Pointer, uint, *float64) int
 	_fnCMSDecoderCopySignerTimestampCertificates func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMSDecoderCopySignerTimestampWithPolicy func(unsafe.Pointer, unsafe.Pointer, uint, *float64) int
-	_fnCMSDecoderCreate func(unsafe.Pointer) int
-	_fnCMSDecoderFinalizeMessage func(unsafe.Pointer) int
-	_fnCMSDecoderGetNumSigners func(unsafe.Pointer, *uint) int
-	_fnCMSDecoderGetTypeID func() uint
-	_fnCMSDecoderIsContentEncrypted func(unsafe.Pointer, *uint8) int
-	_fnCMSDecoderSetDetachedContent func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.13.
+	_fnCMSDecoderCopySignerTimestampWithPolicy   func(unsafe.Pointer, unsafe.Pointer, uint, *float64) int
+	_fnCMSDecoderCreate                          func(unsafe.Pointer) int
+	_fnCMSDecoderFinalizeMessage                 func(unsafe.Pointer) int
+	_fnCMSDecoderGetNumSigners                   func(unsafe.Pointer, *uint) int
+	_fnCMSDecoderGetTypeID                       func() uint
+	_fnCMSDecoderIsContentEncrypted              func(unsafe.Pointer, *uint8) int
+	_fnCMSDecoderSetDetachedContent              func(unsafe.Pointer, unsafe.Pointer) int
+	// Deprecated: since macOS 10.13.
 	_fnCMSDecoderSetSearchKeychain func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSDecoderUpdateMessage func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.7.
-	_fnCMSEncode func(unsafe.Pointer, unsafe.Pointer, *CssmData, uint8, CMSSignedAttributes, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMSEncodeContent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, CMSSignedAttributes, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMSEncoderAddRecipients func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderAddSignedAttributes func(unsafe.Pointer, CMSSignedAttributes) int
-	_fnCMSEncoderAddSigners func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderAddSupportingCerts func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCopyEncapsulatedContentType func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCopyEncodedContent func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCopyRecipients func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCopySignerTimestamp func(unsafe.Pointer, uint, *float64) int
+	_fnCMSDecoderUpdateMessage     func(unsafe.Pointer, unsafe.Pointer, uint) int
+	// Deprecated: since macOS 10.7.
+	_fnCMSEncode                               func(unsafe.Pointer, unsafe.Pointer, *CssmData, uint8, CMSSignedAttributes, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnCMSEncodeContent                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, CMSSignedAttributes, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnCMSEncoderAddRecipients                 func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderAddSignedAttributes           func(unsafe.Pointer, CMSSignedAttributes) int
+	_fnCMSEncoderAddSigners                    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderAddSupportingCerts            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCopyEncapsulatedContentType   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCopyEncodedContent            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCopyRecipients                func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCopySignerTimestamp           func(unsafe.Pointer, uint, *float64) int
 	_fnCMSEncoderCopySignerTimestampWithPolicy func(unsafe.Pointer, unsafe.Pointer, uint, *float64) int
-	_fnCMSEncoderCopySigners func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCopySupportingCerts func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderCreate func(unsafe.Pointer) int
-	_fnCMSEncoderGetCertificateChainMode func(unsafe.Pointer, *CMSCertificateChainMode) int
-	_fnCMSEncoderGetHasDetachedContent func(unsafe.Pointer, *uint8) int
-	_fnCMSEncoderGetTypeID func() uint
-	_fnCMSEncoderSetCertificateChainMode func(unsafe.Pointer, CMSCertificateChainMode) int
-// Deprecated: since macOS 10.7.
-	_fnCMSEncoderSetEncapsulatedContentType func(unsafe.Pointer, *CssmData) int
+	_fnCMSEncoderCopySigners                   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCopySupportingCerts           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderCreate                        func(unsafe.Pointer) int
+	_fnCMSEncoderGetCertificateChainMode       func(unsafe.Pointer, *CMSCertificateChainMode) int
+	_fnCMSEncoderGetHasDetachedContent         func(unsafe.Pointer, *uint8) int
+	_fnCMSEncoderGetTypeID                     func() uint
+	_fnCMSEncoderSetCertificateChainMode       func(unsafe.Pointer, CMSCertificateChainMode) int
+	// Deprecated: since macOS 10.7.
+	_fnCMSEncoderSetEncapsulatedContentType    func(unsafe.Pointer, *CssmData) int
 	_fnCMSEncoderSetEncapsulatedContentTypeOID func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderSetHasDetachedContent func(unsafe.Pointer, uint8) int
-	_fnCMSEncoderSetSignerAlgorithm func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSEncoderUpdateContent func(unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnCSSM_AC_AuthCompute func(int, *CssmTuplegroup, *CssmTuplegroup, uint32, *CssmList, *CssmList, *CssmList, *CssmTuplegroup) int32
-	_fnCSSM_AC_PassThrough func(int, int, int, uint64, *CssmDlDbList, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_CL_CertAbortCache func(int, int) int32
-	_fnCSSM_CL_CertAbortQuery func(int, int) int32
-	_fnCSSM_CL_CertCache func(int, *CssmData, *int) int32
-	_fnCSSM_CL_CertCreateTemplate func(int, uint32, *CssmField, *CssmData) int32
-	_fnCSSM_CL_CertDescribeFormat func(int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CertGetAllFields func(int, *CssmData, *uint32, **CssmField) int32
-	_fnCSSM_CL_CertGetAllTemplateFields func(int, *CssmData, *uint32, **CssmField) int32
-	_fnCSSM_CL_CertGetFirstCachedFieldValue func(int, int, *CssmData, *int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CertGetFirstFieldValue func(int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CertGetKeyInfo func(int, *CssmData, **CssmKey) int32
-	_fnCSSM_CL_CertGetNextCachedFieldValue func(int, int, **CssmData) int32
-	_fnCSSM_CL_CertGetNextFieldValue func(int, int, **CssmData) int32
-	_fnCSSM_CL_CertGroupFromVerifiedBundle func(int, uint64, *CssmCertBundle, *CssmData, **CssmCertgroup) int32
-	_fnCSSM_CL_CertGroupToSignedBundle func(int, uint64, *CssmCertgroup, *CssmCertBundleHeader, *CssmData) int32
-	_fnCSSM_CL_CertSign func(int, uint64, *CssmData, *CssmField, uint32, *CssmData) int32
-	_fnCSSM_CL_CertVerify func(int, uint64, *CssmData, *CssmData, *CssmField, uint32) int32
-	_fnCSSM_CL_CertVerifyWithKey func(int, uint64, *CssmData) int32
-	_fnCSSM_CL_CrlAbortCache func(int, int) int32
-	_fnCSSM_CL_CrlAbortQuery func(int, int) int32
-	_fnCSSM_CL_CrlAddCert func(int, uint64, *CssmData, uint32, *CssmField, *CssmData, *CssmData) int32
-	_fnCSSM_CL_CrlCache func(int, *CssmData, *int) int32
-	_fnCSSM_CL_CrlCreateTemplate func(int, uint32, *CssmField, *CssmData) int32
-	_fnCSSM_CL_CrlDescribeFormat func(int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CrlGetAllCachedRecordFields func(int, int, *CssmData, *uint32, **CssmField) int32
-	_fnCSSM_CL_CrlGetAllFields func(int, *CssmData, *uint32, **CssmField) int32
-	_fnCSSM_CL_CrlGetFirstCachedFieldValue func(int, int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CrlGetFirstFieldValue func(int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
-	_fnCSSM_CL_CrlGetNextCachedFieldValue func(int, int, **CssmData) int32
-	_fnCSSM_CL_CrlGetNextFieldValue func(int, int, **CssmData) int32
-	_fnCSSM_CL_CrlRemoveCert func(int, *CssmData, *CssmData, *CssmData) int32
-	_fnCSSM_CL_CrlSetFields func(int, uint32, *CssmField, *CssmData, *CssmData) int32
-	_fnCSSM_CL_CrlSign func(int, uint64, *CssmData, *CssmField, uint32, *CssmData) int32
-	_fnCSSM_CL_CrlVerify func(int, uint64, *CssmData, *CssmData, *CssmField, uint32) int32
-	_fnCSSM_CL_CrlVerifyWithKey func(int, uint64, *CssmData) int32
-	_fnCSSM_CL_FreeFieldValue func(int, *CssmData, *CssmData) int32
-	_fnCSSM_CL_FreeFields func(int, uint32, **CssmField) int32
-	_fnCSSM_CL_IsCertInCachedCrl func(int, *CssmData, int, *int32, *CssmData) int32
-	_fnCSSM_CL_IsCertInCrl func(int, *CssmData, *CssmData, *int32) int32
-	_fnCSSM_CL_PassThrough func(int, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_CSP_ChangeLoginAcl func(int, *CssmAccessCredentials, *CssmAclEdit) int32
-	_fnCSSM_CSP_ChangeLoginOwner func(int, *CssmAccessCredentials, *CssmAclOwnerPrototype) int32
-	_fnCSSM_CSP_CreateAsymmetricContext func(int, uint32, *CssmAccessCredentials, *CssmKey, uint32, *uint64) int32
-	_fnCSSM_CSP_CreateDeriveKeyContext func(int, uint32, uint32, uint32, *CssmAccessCredentials, *CssmKey, uint32, *CssmData, *CssmCryptoData, *uint64) int32
-	_fnCSSM_CSP_CreateDigestContext func(int, uint32, *uint64) int32
-	_fnCSSM_CSP_CreateKeyGenContext func(int, uint32, uint32, *CssmCryptoData, *CssmData, *CssmDate, *CssmDate, *CssmData, *uint64) int32
-	_fnCSSM_CSP_CreateMacContext func(int, uint32, *CssmKey, *uint64) int32
-	_fnCSSM_CSP_CreatePassThroughContext func(int, *CssmKey, *uint64) int32
-	_fnCSSM_CSP_CreateRandomGenContext func(int, uint32, *CssmCryptoData, uint, *uint64) int32
-	_fnCSSM_CSP_CreateSignatureContext func(int, uint32, *CssmAccessCredentials, *CssmKey, *uint64) int32
-	_fnCSSM_CSP_CreateSymmetricContext func(int, uint32, uint32, *CssmAccessCredentials, *CssmKey, *CssmData, uint32, unsafe.Pointer, *uint64) int32
-	_fnCSSM_CSP_GetLoginAcl func(int, *[68]int8, *uint32, **CssmAclEntryInfo) int32
-	_fnCSSM_CSP_GetLoginOwner func(int, *CssmAclOwnerPrototype) int32
-	_fnCSSM_CSP_GetOperationalStatistics func(int, *CssmCspOperationalStatistics) int32
-	_fnCSSM_CSP_Login func(int, *CssmAccessCredentials, *CssmData, unsafe.Pointer) int32
-	_fnCSSM_CSP_Logout func(int) int32
-	_fnCSSM_CSP_ObtainPrivateKeyFromPublicKey func(int, *CssmKey, *CssmKey) int32
-	_fnCSSM_CSP_PassThrough func(uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_ChangeKeyAcl func(int, *CssmAccessCredentials, *CssmAclEdit, *CssmKey) int32
-	_fnCSSM_ChangeKeyOwner func(int, *CssmAccessCredentials, *CssmKey, *CssmAclOwnerPrototype) int32
-	_fnCSSM_DL_Authenticate func(CssmDlDbHandle, uint32, *CssmAccessCredentials) int32
-	_fnCSSM_DL_ChangeDbAcl func(CssmDlDbHandle, *CssmAccessCredentials, *CssmAclEdit) int32
-	_fnCSSM_DL_ChangeDbOwner func(CssmDlDbHandle, *CssmAccessCredentials, *CssmAclOwnerPrototype) int32
-	_fnCSSM_DL_CreateRelation func(CssmDlDbHandle, uint32, string, uint32, *CssmDbSchemaAttributeInfo, uint32, *CssmDbSchemaIndexInfo) int32
-	_fnCSSM_DL_DataAbortQuery func(CssmDlDbHandle, int) int32
-	_fnCSSM_DL_DataDelete func(CssmDlDbHandle, *CssmDbUniqueRecord) int32
-	_fnCSSM_DL_DataGetFirst func(CssmDlDbHandle, *CssmQuery, *int, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
-	_fnCSSM_DL_DataGetFromUniqueRecordId func(CssmDlDbHandle, *CssmDbUniqueRecord, *CssmDbRecordAttributeData, *CssmData) int32
-	_fnCSSM_DL_DataGetNext func(CssmDlDbHandle, int, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
-	_fnCSSM_DL_DataInsert func(CssmDlDbHandle, uint32, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
-	_fnCSSM_DL_DataModify func(CssmDlDbHandle, uint32, *CssmDbUniqueRecord, *CssmDbRecordAttributeData, *CssmData, uint32) int32
-	_fnCSSM_DL_DbClose func(CssmDlDbHandle) int32
-	_fnCSSM_DL_DbCreate func(int, string, *CssmNetAddress, *CssmDbinfo, uint32, *CssmResourceControlContext, unsafe.Pointer, *int) int32
-	_fnCSSM_DL_DbDelete func(int, string, *CssmNetAddress, *CssmAccessCredentials) int32
-	_fnCSSM_DL_DbOpen func(int, string, *CssmNetAddress, uint32, *CssmAccessCredentials, unsafe.Pointer, *int) int32
-	_fnCSSM_DL_DestroyRelation func(CssmDlDbHandle, uint32) int32
-	_fnCSSM_DL_FreeNameList func(int, *CssmNameList) int32
-	_fnCSSM_DL_FreeUniqueRecord func(CssmDlDbHandle, *CssmDbUniqueRecord) int32
-	_fnCSSM_DL_GetDbAcl func(CssmDlDbHandle, *[68]int8, *uint32, **CssmAclEntryInfo) int32
-	_fnCSSM_DL_GetDbNameFromHandle func(CssmDlDbHandle, string) int32
-	_fnCSSM_DL_GetDbNames func(int, **CssmNameList) int32
-	_fnCSSM_DL_GetDbOwner func(CssmDlDbHandle, *CssmAclOwnerPrototype) int32
-	_fnCSSM_DL_PassThrough func(CssmDlDbHandle, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_DecryptData func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData) int32
-	_fnCSSM_DecryptDataFinal func(uint64, *CssmData) int32
-	_fnCSSM_DecryptDataInit func(uint64) int32
-	_fnCSSM_DecryptDataInitP func(uint64, uint64) int32
-	_fnCSSM_DecryptDataP func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData, uint64) int32
-	_fnCSSM_DecryptDataUpdate func(uint64, *CssmData, uint32, *CssmData, uint32, *uint) int32
-	_fnCSSM_DeleteContext func(uint64) int32
-	_fnCSSM_DeleteContextAttributes func(uint64, uint32, *CssmContextAttribute) int32
-	_fnCSSM_DeriveKey func(uint64, *CssmData, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
-	_fnCSSM_DigestData func(uint64, *CssmData, uint32, *CssmData) int32
-	_fnCSSM_DigestDataClone func(uint64, *uint64) int32
-	_fnCSSM_DigestDataFinal func(uint64, *CssmData) int32
-	_fnCSSM_DigestDataInit func(uint64) int32
-	_fnCSSM_DigestDataUpdate func(uint64, *CssmData, uint32) int32
-	_fnCSSM_EncryptData func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData) int32
-	_fnCSSM_EncryptDataFinal func(uint64, *CssmData) int32
-	_fnCSSM_EncryptDataInit func(uint64) int32
-	_fnCSSM_EncryptDataInitP func(uint64, uint64) int32
-	_fnCSSM_EncryptDataP func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData, uint64) int32
-	_fnCSSM_EncryptDataUpdate func(uint64, *CssmData, uint32, *CssmData, uint32, *uint) int32
-	_fnCSSM_FreeContext func(*CssmContext) int32
-	_fnCSSM_FreeKey func(int, *CssmAccessCredentials, *CssmKey, int32) int32
-	_fnCSSM_GenerateAlgorithmParams func(uint64, uint32, *CssmData) int32
-	_fnCSSM_GenerateKey func(uint64, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
-	_fnCSSM_GenerateKeyP func(uint64, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, uint64) int32
-	_fnCSSM_GenerateKeyPair func(uint64, uint32, uint32, *CssmData, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
-	_fnCSSM_GenerateKeyPairP func(uint64, uint32, uint32, *CssmData, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, uint64) int32
-	_fnCSSM_GenerateMac func(uint64, *CssmData, uint32, *CssmData) int32
-	_fnCSSM_GenerateMacFinal func(uint64, *CssmData) int32
-	_fnCSSM_GenerateMacInit func(uint64) int32
-	_fnCSSM_GenerateMacUpdate func(uint64, *CssmData, uint32) int32
-	_fnCSSM_GenerateRandom func(uint64, *CssmData) int32
-	_fnCSSM_GetAPIMemoryFunctions func(int, *CssmMemoryFuncs) int32
-	_fnCSSM_GetContext func(uint64, **CssmContext) int32
-	_fnCSSM_GetContextAttribute func(*CssmContext, uint32, **CssmContextAttribute) int32
-	_fnCSSM_GetKeyAcl func(int, *CssmKey, *[68]int8, *uint32, **CssmAclEntryInfo) int32
-	_fnCSSM_GetKeyOwner func(int, *CssmKey, *CssmAclOwnerPrototype) int32
-	_fnCSSM_GetModuleGUIDFromHandle func(int, *CssmGuid) int32
-	_fnCSSM_GetPrivilege func(*uint64) int32
-	_fnCSSM_GetSubserviceUIDFromHandle func(int, *CssmSubserviceUid) int32
-	_fnCSSM_GetTimeValue func(int, uint32, *CssmData) int32
-	_fnCSSM_Init func(*CssmVersion, uint32, *CssmGuid, uint32, *uint32, unsafe.Pointer) int32
-	_fnCSSM_Introduce func(*CssmGuid, uint32) int32
-	_fnCSSM_ListAttachedModuleManagers func(*uint32, *CssmGuid) int32
-	_fnCSSM_ModuleAttach func(*CssmGuid, *CssmVersion, *CssmMemoryFuncs, uint32, uint32, uint32, uint32, *CssmFuncNameAddr, uint32, unsafe.Pointer, *int) int32
-	_fnCSSM_ModuleDetach func(int) int32
-	_fnCSSM_ModuleLoad func(*CssmGuid, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_ModuleUnload func(*CssmGuid, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_QueryKeySizeInBits func(int, uint64, *CssmKey, *CssmKeySize) int32
-	_fnCSSM_QuerySize func(uint64, int32, uint32, *CssmQuerySizeData) int32
-	_fnCSSM_RetrieveCounter func(int, *CssmData) int32
-	_fnCSSM_RetrieveUniqueId func(int, *CssmData) int32
-	_fnCSSM_SetContext func(uint64, *CssmContext) int32
-	_fnCSSM_SetPrivilege func(uint64) int32
-	_fnCSSM_SignData func(uint64, *CssmData, uint32, uint32, *CssmData) int32
-	_fnCSSM_SignDataFinal func(uint64, *CssmData) int32
-	_fnCSSM_SignDataInit func(uint64) int32
-	_fnCSSM_SignDataUpdate func(uint64, *CssmData, uint32) int32
-	_fnCSSM_TP_ApplyCrlToDb func(int, int, int, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
-	_fnCSSM_TP_CertCreateTemplate func(int, int, uint32, *CssmField, *CssmData) int32
-	_fnCSSM_TP_CertGetAllTemplateFields func(int, int, *CssmData, *uint32, **CssmField) int32
-	_fnCSSM_TP_CertGroupConstruct func(int, int, int, *CssmDlDbList, unsafe.Pointer, *CssmCertgroup, **CssmCertgroup) int32
-	_fnCSSM_TP_CertGroupPrune func(int, int, *CssmDlDbList, *CssmCertgroup, **CssmCertgroup) int32
-	_fnCSSM_TP_CertGroupToTupleGroup func(int, int, *CssmCertgroup, **CssmTuplegroup) int32
-	_fnCSSM_TP_CertGroupVerify func(int, int, int, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
-	_fnCSSM_TP_CertReclaimAbort func(int, uint64) int32
-	_fnCSSM_TP_CertReclaimKey func(int, *CssmCertgroup, uint32, uint64, int, *CssmResourceControlContext) int32
-	_fnCSSM_TP_CertRemoveFromCrlTemplate func(int, int, int, *CssmData, *CssmCertgroup, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
-	_fnCSSM_TP_CertRevoke func(int, int, int, *CssmData, *CssmCertgroup, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, uint32, *CssmData) int32
-	_fnCSSM_TP_CertSign func(int, int, uint64, *CssmData, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
-	_fnCSSM_TP_ConfirmCredResult func(int, *CssmData, *CssmTpCallerauthContext, *CssmTpConfirmResponse, *CssmTpAuthorityId) int32
-	_fnCSSM_TP_CrlCreateTemplate func(int, int, uint32, *CssmField, *CssmData) int32
-	_fnCSSM_TP_CrlSign func(int, int, uint64, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
-	_fnCSSM_TP_CrlVerify func(int, int, int, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
-	_fnCSSM_TP_FormRequest func(int, *CssmTpAuthorityId, uint32, *CssmData) int32
-	_fnCSSM_TP_FormSubmit func(int, uint32, *CssmData, *CssmTpAuthorityId, *CssmTpAuthorityId, *CssmAccessCredentials) int32
-	_fnCSSM_TP_PassThrough func(int, int, uint64, *CssmDlDbList, uint32, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCSSM_TP_ReceiveConfirmation func(int, *CssmData, **CssmTpConfirmResponse, *int32) int32
-	_fnCSSM_TP_RetrieveCredResult func(int, *CssmData, *CssmTpCallerauthContext, *int32, *int32, **CssmTpResultSet) int32
-	_fnCSSM_TP_SubmitCredRequest func(int, *CssmTpAuthorityId, uint32, *CssmTpRequestSet, *CssmTpCallerauthContext, *int32, *CssmData) int32
-	_fnCSSM_TP_TupleGroupToCertGroup func(int, int, *CssmTuplegroup, **CssmCertgroup) int32
-	_fnCSSM_Terminate func() int32
-	_fnCSSM_Unintroduce func(*CssmGuid) int32
-	_fnCSSM_UnwrapKey func(uint64, *CssmKey, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, *CssmData) int32
-	_fnCSSM_UnwrapKeyP func(uint64, *CssmKey, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, *CssmData, uint64) int32
-	_fnCSSM_UpdateContextAttributes func(uint64, uint32, *CssmContextAttribute) int32
-	_fnCSSM_VerifyData func(uint64, *CssmData, uint32, uint32, *CssmData) int32
-	_fnCSSM_VerifyDataFinal func(uint64, *CssmData) int32
-	_fnCSSM_VerifyDataInit func(uint64) int32
-	_fnCSSM_VerifyDataUpdate func(uint64, *CssmData, uint32) int32
-	_fnCSSM_VerifyDevice func(int, *CssmData) int32
-	_fnCSSM_VerifyMac func(uint64, *CssmData, uint32, *CssmData) int32
-	_fnCSSM_VerifyMacFinal func(uint64, *CssmData) int32
-	_fnCSSM_VerifyMacInit func(uint64) int32
-	_fnCSSM_VerifyMacUpdate func(uint64, *CssmData, uint32) int32
-	_fnCSSM_WrapKey func(uint64, *CssmAccessCredentials, *CssmKey, *CssmData, *CssmKey) int32
-	_fnCSSM_WrapKeyP func(uint64, *CssmAccessCredentials, *CssmKey, *CssmData, *CssmKey, uint64) int32
-	_fnMDS_Initialize func(*CssmGuid, *CssmMemoryFuncs, *MdsFuncs, *int) int32
-	_fnMDS_Install func(int) int32
-	_fnMDS_Terminate func(int) int32
-	_fnMDS_Uninstall func(int) int32
-// Deprecated: since macOS 10.15.
+	_fnCMSEncoderSetHasDetachedContent         func(unsafe.Pointer, uint8) int
+	_fnCMSEncoderSetSignerAlgorithm            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSEncoderUpdateContent                 func(unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnCSSM_AC_AuthCompute                     func(int, *CssmTuplegroup, *CssmTuplegroup, uint32, *CssmList, *CssmList, *CssmList, *CssmTuplegroup) int32
+	_fnCSSM_AC_PassThrough                     func(int, int, int, uint64, *CssmDlDbList, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_CL_CertAbortCache                  func(int, int) int32
+	_fnCSSM_CL_CertAbortQuery                  func(int, int) int32
+	_fnCSSM_CL_CertCache                       func(int, *CssmData, *int) int32
+	_fnCSSM_CL_CertCreateTemplate              func(int, uint32, *CssmField, *CssmData) int32
+	_fnCSSM_CL_CertDescribeFormat              func(int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CertGetAllFields                func(int, *CssmData, *uint32, **CssmField) int32
+	_fnCSSM_CL_CertGetAllTemplateFields        func(int, *CssmData, *uint32, **CssmField) int32
+	_fnCSSM_CL_CertGetFirstCachedFieldValue    func(int, int, *CssmData, *int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CertGetFirstFieldValue          func(int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CertGetKeyInfo                  func(int, *CssmData, **CssmKey) int32
+	_fnCSSM_CL_CertGetNextCachedFieldValue     func(int, int, **CssmData) int32
+	_fnCSSM_CL_CertGetNextFieldValue           func(int, int, **CssmData) int32
+	_fnCSSM_CL_CertGroupFromVerifiedBundle     func(int, uint64, *CssmCertBundle, *CssmData, **CssmCertgroup) int32
+	_fnCSSM_CL_CertGroupToSignedBundle         func(int, uint64, *CssmCertgroup, *CssmCertBundleHeader, *CssmData) int32
+	_fnCSSM_CL_CertSign                        func(int, uint64, *CssmData, *CssmField, uint32, *CssmData) int32
+	_fnCSSM_CL_CertVerify                      func(int, uint64, *CssmData, *CssmData, *CssmField, uint32) int32
+	_fnCSSM_CL_CertVerifyWithKey               func(int, uint64, *CssmData) int32
+	_fnCSSM_CL_CrlAbortCache                   func(int, int) int32
+	_fnCSSM_CL_CrlAbortQuery                   func(int, int) int32
+	_fnCSSM_CL_CrlAddCert                      func(int, uint64, *CssmData, uint32, *CssmField, *CssmData, *CssmData) int32
+	_fnCSSM_CL_CrlCache                        func(int, *CssmData, *int) int32
+	_fnCSSM_CL_CrlCreateTemplate               func(int, uint32, *CssmField, *CssmData) int32
+	_fnCSSM_CL_CrlDescribeFormat               func(int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CrlGetAllCachedRecordFields     func(int, int, *CssmData, *uint32, **CssmField) int32
+	_fnCSSM_CL_CrlGetAllFields                 func(int, *CssmData, *uint32, **CssmField) int32
+	_fnCSSM_CL_CrlGetFirstCachedFieldValue     func(int, int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CrlGetFirstFieldValue           func(int, *CssmData, *CssmData, *int, *uint32, **CssmData) int32
+	_fnCSSM_CL_CrlGetNextCachedFieldValue      func(int, int, **CssmData) int32
+	_fnCSSM_CL_CrlGetNextFieldValue            func(int, int, **CssmData) int32
+	_fnCSSM_CL_CrlRemoveCert                   func(int, *CssmData, *CssmData, *CssmData) int32
+	_fnCSSM_CL_CrlSetFields                    func(int, uint32, *CssmField, *CssmData, *CssmData) int32
+	_fnCSSM_CL_CrlSign                         func(int, uint64, *CssmData, *CssmField, uint32, *CssmData) int32
+	_fnCSSM_CL_CrlVerify                       func(int, uint64, *CssmData, *CssmData, *CssmField, uint32) int32
+	_fnCSSM_CL_CrlVerifyWithKey                func(int, uint64, *CssmData) int32
+	_fnCSSM_CL_FreeFieldValue                  func(int, *CssmData, *CssmData) int32
+	_fnCSSM_CL_FreeFields                      func(int, uint32, **CssmField) int32
+	_fnCSSM_CL_IsCertInCachedCrl               func(int, *CssmData, int, *int32, *CssmData) int32
+	_fnCSSM_CL_IsCertInCrl                     func(int, *CssmData, *CssmData, *int32) int32
+	_fnCSSM_CL_PassThrough                     func(int, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_CSP_ChangeLoginAcl                 func(int, *CssmAccessCredentials, *CssmAclEdit) int32
+	_fnCSSM_CSP_ChangeLoginOwner               func(int, *CssmAccessCredentials, *CssmAclOwnerPrototype) int32
+	_fnCSSM_CSP_CreateAsymmetricContext        func(int, uint32, *CssmAccessCredentials, *CssmKey, uint32, *uint64) int32
+	_fnCSSM_CSP_CreateDeriveKeyContext         func(int, uint32, uint32, uint32, *CssmAccessCredentials, *CssmKey, uint32, *CssmData, *CssmCryptoData, *uint64) int32
+	_fnCSSM_CSP_CreateDigestContext            func(int, uint32, *uint64) int32
+	_fnCSSM_CSP_CreateKeyGenContext            func(int, uint32, uint32, *CssmCryptoData, *CssmData, *CssmDate, *CssmDate, *CssmData, *uint64) int32
+	_fnCSSM_CSP_CreateMacContext               func(int, uint32, *CssmKey, *uint64) int32
+	_fnCSSM_CSP_CreatePassThroughContext       func(int, *CssmKey, *uint64) int32
+	_fnCSSM_CSP_CreateRandomGenContext         func(int, uint32, *CssmCryptoData, uint, *uint64) int32
+	_fnCSSM_CSP_CreateSignatureContext         func(int, uint32, *CssmAccessCredentials, *CssmKey, *uint64) int32
+	_fnCSSM_CSP_CreateSymmetricContext         func(int, uint32, uint32, *CssmAccessCredentials, *CssmKey, *CssmData, uint32, unsafe.Pointer, *uint64) int32
+	_fnCSSM_CSP_GetLoginAcl                    func(int, *[68]int8, *uint32, **CssmAclEntryInfo) int32
+	_fnCSSM_CSP_GetLoginOwner                  func(int, *CssmAclOwnerPrototype) int32
+	_fnCSSM_CSP_GetOperationalStatistics       func(int, *CssmCspOperationalStatistics) int32
+	_fnCSSM_CSP_Login                          func(int, *CssmAccessCredentials, *CssmData, unsafe.Pointer) int32
+	_fnCSSM_CSP_Logout                         func(int) int32
+	_fnCSSM_CSP_ObtainPrivateKeyFromPublicKey  func(int, *CssmKey, *CssmKey) int32
+	_fnCSSM_CSP_PassThrough                    func(uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_ChangeKeyAcl                       func(int, *CssmAccessCredentials, *CssmAclEdit, *CssmKey) int32
+	_fnCSSM_ChangeKeyOwner                     func(int, *CssmAccessCredentials, *CssmKey, *CssmAclOwnerPrototype) int32
+	_fnCSSM_DL_Authenticate                    func(CssmDlDbHandle, uint32, *CssmAccessCredentials) int32
+	_fnCSSM_DL_ChangeDbAcl                     func(CssmDlDbHandle, *CssmAccessCredentials, *CssmAclEdit) int32
+	_fnCSSM_DL_ChangeDbOwner                   func(CssmDlDbHandle, *CssmAccessCredentials, *CssmAclOwnerPrototype) int32
+	_fnCSSM_DL_CreateRelation                  func(CssmDlDbHandle, uint32, string, uint32, *CssmDbSchemaAttributeInfo, uint32, *CssmDbSchemaIndexInfo) int32
+	_fnCSSM_DL_DataAbortQuery                  func(CssmDlDbHandle, int) int32
+	_fnCSSM_DL_DataDelete                      func(CssmDlDbHandle, *CssmDbUniqueRecord) int32
+	_fnCSSM_DL_DataGetFirst                    func(CssmDlDbHandle, *CssmQuery, *int, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
+	_fnCSSM_DL_DataGetFromUniqueRecordId       func(CssmDlDbHandle, *CssmDbUniqueRecord, *CssmDbRecordAttributeData, *CssmData) int32
+	_fnCSSM_DL_DataGetNext                     func(CssmDlDbHandle, int, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
+	_fnCSSM_DL_DataInsert                      func(CssmDlDbHandle, uint32, *CssmDbRecordAttributeData, *CssmData, **CssmDbUniqueRecord) int32
+	_fnCSSM_DL_DataModify                      func(CssmDlDbHandle, uint32, *CssmDbUniqueRecord, *CssmDbRecordAttributeData, *CssmData, uint32) int32
+	_fnCSSM_DL_DbClose                         func(CssmDlDbHandle) int32
+	_fnCSSM_DL_DbCreate                        func(int, string, *CssmNetAddress, *CssmDbinfo, uint32, *CssmResourceControlContext, unsafe.Pointer, *int) int32
+	_fnCSSM_DL_DbDelete                        func(int, string, *CssmNetAddress, *CssmAccessCredentials) int32
+	_fnCSSM_DL_DbOpen                          func(int, string, *CssmNetAddress, uint32, *CssmAccessCredentials, unsafe.Pointer, *int) int32
+	_fnCSSM_DL_DestroyRelation                 func(CssmDlDbHandle, uint32) int32
+	_fnCSSM_DL_FreeNameList                    func(int, *CssmNameList) int32
+	_fnCSSM_DL_FreeUniqueRecord                func(CssmDlDbHandle, *CssmDbUniqueRecord) int32
+	_fnCSSM_DL_GetDbAcl                        func(CssmDlDbHandle, *[68]int8, *uint32, **CssmAclEntryInfo) int32
+	_fnCSSM_DL_GetDbNameFromHandle             func(CssmDlDbHandle, string) int32
+	_fnCSSM_DL_GetDbNames                      func(int, **CssmNameList) int32
+	_fnCSSM_DL_GetDbOwner                      func(CssmDlDbHandle, *CssmAclOwnerPrototype) int32
+	_fnCSSM_DL_PassThrough                     func(CssmDlDbHandle, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_DecryptData                        func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData) int32
+	_fnCSSM_DecryptDataFinal                   func(uint64, *CssmData) int32
+	_fnCSSM_DecryptDataInit                    func(uint64) int32
+	_fnCSSM_DecryptDataInitP                   func(uint64, uint64) int32
+	_fnCSSM_DecryptDataP                       func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData, uint64) int32
+	_fnCSSM_DecryptDataUpdate                  func(uint64, *CssmData, uint32, *CssmData, uint32, *uint) int32
+	_fnCSSM_DeleteContext                      func(uint64) int32
+	_fnCSSM_DeleteContextAttributes            func(uint64, uint32, *CssmContextAttribute) int32
+	_fnCSSM_DeriveKey                          func(uint64, *CssmData, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
+	_fnCSSM_DigestData                         func(uint64, *CssmData, uint32, *CssmData) int32
+	_fnCSSM_DigestDataClone                    func(uint64, *uint64) int32
+	_fnCSSM_DigestDataFinal                    func(uint64, *CssmData) int32
+	_fnCSSM_DigestDataInit                     func(uint64) int32
+	_fnCSSM_DigestDataUpdate                   func(uint64, *CssmData, uint32) int32
+	_fnCSSM_EncryptData                        func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData) int32
+	_fnCSSM_EncryptDataFinal                   func(uint64, *CssmData) int32
+	_fnCSSM_EncryptDataInit                    func(uint64) int32
+	_fnCSSM_EncryptDataInitP                   func(uint64, uint64) int32
+	_fnCSSM_EncryptDataP                       func(uint64, *CssmData, uint32, *CssmData, uint32, *uint, *CssmData, uint64) int32
+	_fnCSSM_EncryptDataUpdate                  func(uint64, *CssmData, uint32, *CssmData, uint32, *uint) int32
+	_fnCSSM_FreeContext                        func(*CssmContext) int32
+	_fnCSSM_FreeKey                            func(int, *CssmAccessCredentials, *CssmKey, int32) int32
+	_fnCSSM_GenerateAlgorithmParams            func(uint64, uint32, *CssmData) int32
+	_fnCSSM_GenerateKey                        func(uint64, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
+	_fnCSSM_GenerateKeyP                       func(uint64, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, uint64) int32
+	_fnCSSM_GenerateKeyPair                    func(uint64, uint32, uint32, *CssmData, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey) int32
+	_fnCSSM_GenerateKeyPairP                   func(uint64, uint32, uint32, *CssmData, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, uint64) int32
+	_fnCSSM_GenerateMac                        func(uint64, *CssmData, uint32, *CssmData) int32
+	_fnCSSM_GenerateMacFinal                   func(uint64, *CssmData) int32
+	_fnCSSM_GenerateMacInit                    func(uint64) int32
+	_fnCSSM_GenerateMacUpdate                  func(uint64, *CssmData, uint32) int32
+	_fnCSSM_GenerateRandom                     func(uint64, *CssmData) int32
+	_fnCSSM_GetAPIMemoryFunctions              func(int, *CssmMemoryFuncs) int32
+	_fnCSSM_GetContext                         func(uint64, **CssmContext) int32
+	_fnCSSM_GetContextAttribute                func(*CssmContext, uint32, **CssmContextAttribute) int32
+	_fnCSSM_GetKeyAcl                          func(int, *CssmKey, *[68]int8, *uint32, **CssmAclEntryInfo) int32
+	_fnCSSM_GetKeyOwner                        func(int, *CssmKey, *CssmAclOwnerPrototype) int32
+	_fnCSSM_GetModuleGUIDFromHandle            func(int, *CssmGuid) int32
+	_fnCSSM_GetPrivilege                       func(*uint64) int32
+	_fnCSSM_GetSubserviceUIDFromHandle         func(int, *CssmSubserviceUid) int32
+	_fnCSSM_GetTimeValue                       func(int, uint32, *CssmData) int32
+	_fnCSSM_Init                               func(*CssmVersion, uint32, *CssmGuid, uint32, *uint32, unsafe.Pointer) int32
+	_fnCSSM_Introduce                          func(*CssmGuid, uint32) int32
+	_fnCSSM_ListAttachedModuleManagers         func(*uint32, *CssmGuid) int32
+	_fnCSSM_ModuleAttach                       func(*CssmGuid, *CssmVersion, *CssmMemoryFuncs, uint32, uint32, uint32, uint32, *CssmFuncNameAddr, uint32, unsafe.Pointer, *int) int32
+	_fnCSSM_ModuleDetach                       func(int) int32
+	_fnCSSM_ModuleLoad                         func(*CssmGuid, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_ModuleUnload                       func(*CssmGuid, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_QueryKeySizeInBits                 func(int, uint64, *CssmKey, *CssmKeySize) int32
+	_fnCSSM_QuerySize                          func(uint64, int32, uint32, *CssmQuerySizeData) int32
+	_fnCSSM_RetrieveCounter                    func(int, *CssmData) int32
+	_fnCSSM_RetrieveUniqueId                   func(int, *CssmData) int32
+	_fnCSSM_SetContext                         func(uint64, *CssmContext) int32
+	_fnCSSM_SetPrivilege                       func(uint64) int32
+	_fnCSSM_SignData                           func(uint64, *CssmData, uint32, uint32, *CssmData) int32
+	_fnCSSM_SignDataFinal                      func(uint64, *CssmData) int32
+	_fnCSSM_SignDataInit                       func(uint64) int32
+	_fnCSSM_SignDataUpdate                     func(uint64, *CssmData, uint32) int32
+	_fnCSSM_TP_ApplyCrlToDb                    func(int, int, int, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
+	_fnCSSM_TP_CertCreateTemplate              func(int, int, uint32, *CssmField, *CssmData) int32
+	_fnCSSM_TP_CertGetAllTemplateFields        func(int, int, *CssmData, *uint32, **CssmField) int32
+	_fnCSSM_TP_CertGroupConstruct              func(int, int, int, *CssmDlDbList, unsafe.Pointer, *CssmCertgroup, **CssmCertgroup) int32
+	_fnCSSM_TP_CertGroupPrune                  func(int, int, *CssmDlDbList, *CssmCertgroup, **CssmCertgroup) int32
+	_fnCSSM_TP_CertGroupToTupleGroup           func(int, int, *CssmCertgroup, **CssmTuplegroup) int32
+	_fnCSSM_TP_CertGroupVerify                 func(int, int, int, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
+	_fnCSSM_TP_CertReclaimAbort                func(int, uint64) int32
+	_fnCSSM_TP_CertReclaimKey                  func(int, *CssmCertgroup, uint32, uint64, int, *CssmResourceControlContext) int32
+	_fnCSSM_TP_CertRemoveFromCrlTemplate       func(int, int, int, *CssmData, *CssmCertgroup, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
+	_fnCSSM_TP_CertRevoke                      func(int, int, int, *CssmData, *CssmCertgroup, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, uint32, *CssmData) int32
+	_fnCSSM_TP_CertSign                        func(int, int, uint64, *CssmData, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
+	_fnCSSM_TP_ConfirmCredResult               func(int, *CssmData, *CssmTpCallerauthContext, *CssmTpConfirmResponse, *CssmTpAuthorityId) int32
+	_fnCSSM_TP_CrlCreateTemplate               func(int, int, uint32, *CssmField, *CssmData) int32
+	_fnCSSM_TP_CrlSign                         func(int, int, uint64, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult, *CssmData) int32
+	_fnCSSM_TP_CrlVerify                       func(int, int, int, *CssmEncodedCrl, *CssmCertgroup, *CssmTpVerifyContext, *CssmTpVerifyContextResult) int32
+	_fnCSSM_TP_FormRequest                     func(int, *CssmTpAuthorityId, uint32, *CssmData) int32
+	_fnCSSM_TP_FormSubmit                      func(int, uint32, *CssmData, *CssmTpAuthorityId, *CssmTpAuthorityId, *CssmAccessCredentials) int32
+	_fnCSSM_TP_PassThrough                     func(int, int, uint64, *CssmDlDbList, uint32, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCSSM_TP_ReceiveConfirmation             func(int, *CssmData, **CssmTpConfirmResponse, *int32) int32
+	_fnCSSM_TP_RetrieveCredResult              func(int, *CssmData, *CssmTpCallerauthContext, *int32, *int32, **CssmTpResultSet) int32
+	_fnCSSM_TP_SubmitCredRequest               func(int, *CssmTpAuthorityId, uint32, *CssmTpRequestSet, *CssmTpCallerauthContext, *int32, *CssmData) int32
+	_fnCSSM_TP_TupleGroupToCertGroup           func(int, int, *CssmTuplegroup, **CssmCertgroup) int32
+	_fnCSSM_Terminate                          func() int32
+	_fnCSSM_Unintroduce                        func(*CssmGuid) int32
+	_fnCSSM_UnwrapKey                          func(uint64, *CssmKey, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, *CssmData) int32
+	_fnCSSM_UnwrapKeyP                         func(uint64, *CssmKey, *CssmKey, uint32, uint32, *CssmData, *CssmResourceControlContext, *CssmKey, *CssmData, uint64) int32
+	_fnCSSM_UpdateContextAttributes            func(uint64, uint32, *CssmContextAttribute) int32
+	_fnCSSM_VerifyData                         func(uint64, *CssmData, uint32, uint32, *CssmData) int32
+	_fnCSSM_VerifyDataFinal                    func(uint64, *CssmData) int32
+	_fnCSSM_VerifyDataInit                     func(uint64) int32
+	_fnCSSM_VerifyDataUpdate                   func(uint64, *CssmData, uint32) int32
+	_fnCSSM_VerifyDevice                       func(int, *CssmData) int32
+	_fnCSSM_VerifyMac                          func(uint64, *CssmData, uint32, *CssmData) int32
+	_fnCSSM_VerifyMacFinal                     func(uint64, *CssmData) int32
+	_fnCSSM_VerifyMacInit                      func(uint64) int32
+	_fnCSSM_VerifyMacUpdate                    func(uint64, *CssmData, uint32) int32
+	_fnCSSM_WrapKey                            func(uint64, *CssmAccessCredentials, *CssmKey, *CssmData, *CssmKey) int32
+	_fnCSSM_WrapKeyP                           func(uint64, *CssmAccessCredentials, *CssmKey, *CssmData, *CssmKey, uint64) int32
+	_fnMDS_Initialize                          func(*CssmGuid, *CssmMemoryFuncs, *MdsFuncs, *int) int32
+	_fnMDS_Install                             func(int) int32
+	_fnMDS_Terminate                           func(int) int32
+	_fnMDS_Uninstall                           func(int) int32
+	// Deprecated: since macOS 10.15.
 	_fnSSLAddDistinguishedName func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLClose func(unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLContextGetTypeID func() uint
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyALPNProtocols func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyCertificateAuthorities func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyDistinguishedNames func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLCopyPeerCertificates func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyPeerTrust func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyRequestedPeerName func(unsafe.Pointer, string, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCopyRequestedPeerNameLength func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLCopyTrustedRoots func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLCreateContext func(unsafe.Pointer, SSLProtocolSide, SSLConnectionType) unsafe.Pointer
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLDisposeContext func(unsafe.Pointer) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetAllowsAnyRoot func(unsafe.Pointer, *uint8) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetAllowsExpiredCerts func(unsafe.Pointer, *uint8) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetAllowsExpiredRoots func(unsafe.Pointer, *uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetBufferedReadSize func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetClientCertificateState func(unsafe.Pointer, *SSLClientCertificateState) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetConnection func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetDatagramWriteSize func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetDiffieHellmanParams func(unsafe.Pointer, unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetEnableCertVerify func(unsafe.Pointer, *uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetEnabledCiphers func(unsafe.Pointer, *uint16, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetMaxDatagramRecordSize func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetNegotiatedCipher func(unsafe.Pointer, *uint16) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetNegotiatedProtocolVersion func(unsafe.Pointer, *SSLProtocol) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetNumberEnabledCiphers func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetNumberSupportedCiphers func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetPeerDomainName func(unsafe.Pointer, string, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetPeerDomainNameLength func(unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetPeerID func(unsafe.Pointer, unsafe.Pointer, *uint) int
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnSSLGetProtocolVersion func(unsafe.Pointer, *SSLProtocol) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetProtocolVersionEnabled func(unsafe.Pointer, SSLProtocol, *uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetProtocolVersionMax func(unsafe.Pointer, *SSLProtocol) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetProtocolVersionMin func(unsafe.Pointer, *SSLProtocol) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLGetRsaBlinding func(unsafe.Pointer, *uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetSessionOption func(unsafe.Pointer, SSLSessionOption, *uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetSessionState func(unsafe.Pointer, *SSLSessionState) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLGetSupportedCiphers func(unsafe.Pointer, *uint16, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLHandshake func(unsafe.Pointer) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLNewContext func(uint8, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLReHandshake func(unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLRead func(unsafe.Pointer, unsafe.Pointer, uint, *uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetALPNProtocols func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetAllowsAnyRoot func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetAllowsExpiredCerts func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetAllowsExpiredRoots func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetCertificate func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetCertificateAuthorities func(unsafe.Pointer, unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetClientSideAuthenticate func(unsafe.Pointer, SSLAuthenticate) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetConnection func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetDatagramHelloCookie func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetDiffieHellmanParams func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetEnableCertVerify func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetEnabledCiphers func(unsafe.Pointer, *uint16, uint) int
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnSSLSetEncryptionCertificate func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetError func(unsafe.Pointer, int) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetIOFuncs func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetMaxDatagramRecordSize func(unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetOCSPResponse func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetPeerDomainName func(unsafe.Pointer, string, uint) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetPeerID func(unsafe.Pointer, unsafe.Pointer, uint) int
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnSSLSetProtocolVersion func(unsafe.Pointer, SSLProtocol) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetProtocolVersionEnabled func(unsafe.Pointer, SSLProtocol, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetProtocolVersionMax func(unsafe.Pointer, SSLProtocol) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetProtocolVersionMin func(unsafe.Pointer, SSLProtocol) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetRsaBlinding func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetSessionConfig func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetSessionOption func(unsafe.Pointer, SSLSessionOption, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLSetSessionTicketsEnabled func(unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.9.
+	// Deprecated: since macOS 10.9.
 	_fnSSLSetTrustedRoots func(unsafe.Pointer, unsafe.Pointer, uint8) int
-// Deprecated: since macOS 10.15.
+	// Deprecated: since macOS 10.15.
 	_fnSSLWrite func(unsafe.Pointer, unsafe.Pointer, uint, *uint) int
 	// @function SecACLCopyAuthorizations @abstract Retrieve the authorization tags of a given access control list entry. @param acl An access control list entry reference. @result On return, a CFArrayRef of the authorizations for this ACL.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLCopyAuthorizations func(unsafe.Pointer) unsafe.Pointer
 	// @function SecACLCopyContents @abstract Returns the application list, description, and prompt selector for a given access control list entry. @param acl An access control list entry reference. @param applicationList On return, An array of SecTrustedApplication instances that will be allowed access without prompting, for the given access control list entry.  The caller needs to call CFRelease on this array when it's no longer needed. @param description On return, the human readable name that will be used to refer to this item when the user is prompted, for the given access control list entry. The caller needs to call CFRelease on this string when it's no longer needed. @param promptSelector A pointer to a SecKeychainPromptSelector.  On return, this points to the SecKeychainPromptSelector for the given access control list entry. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLCopyContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *SecKeychainPromptSelector) int
 	// @function SecACLCopySimpleContents @abstract Returns the application list, description, and CSSM prompt selector for a given access control list entry. @param acl An access control list entry reference. @param applicationList On return, An array of SecTrustedApplication instances that will be allowed access without prompting, for the given access control list entry.  The caller needs to call CFRelease on this array when it's no longer needed. @param description On return, the human readable name that will be used to refer to this item when the user is prompted, for the given access control list entry. The caller needs to call CFRelease on this string when it's no longer needed. @param promptSelector A pointer to a CSSM prompt selector.  On return, this points to the CSSM prompt selector for the given access control list entry. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in 10.7 and later; use SecACLCopyContents instead.
 	_fnSecACLCopySimpleContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CssmAclKeychainPromptSelector) int
 	// @function SecACLCreateFromSimpleContents @abstract Creates a new access control list entry from the application list, description, and prompt selector provided and adds it to an item's access. @param access An access reference. @param applicationList An array of SecTrustedApplication instances that will be allowed access without prompting. @param description The human readable name that will be used to refer to this item when the user is prompted. @param promptSelector A pointer to a CSSM prompt selector. @param newAcl A pointer to an access control list entry.  On return, this points to the reference of the new access control list entry. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in 10.7 and later; use SecACLCreateWithSimpleContents instead.
 	_fnSecACLCreateFromSimpleContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CssmAclKeychainPromptSelector, unsafe.Pointer) int
 	// @function SecACLCreateWithSimpleContents @abstract Creates a new access control list entry from the application list, description, and prompt selector provided and adds it to an item's access. @param access An access reference. @param applicationList An array of SecTrustedApplication instances that will be allowed access without prompting. @param description The human readable name that will be used to refer to this item when the user is prompted. @param promptSelector A SecKeychainPromptSelector selector. @param newAcl A pointer to an access control list entry.  On return, this points to the reference of the new access control list entry. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLCreateWithSimpleContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, SecKeychainPromptSelector, unsafe.Pointer) int
 	// @function SecACLGetAuthorizations @abstract Retrieve the CSSM authorization tags of a given access control list entry. @param acl An access control list entry reference. @param tags On return, this points to the first item in an array of CSSM authorization tags. @param tagCount On return, this points to the number of tags in the CSSM authorization tag array. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in 10.7 and later; use SecACLCopyAuthorizations instead.
 	_fnSecACLGetAuthorizations func(unsafe.Pointer, *int32, *uint32) int
 	// @function SecACLGetTypeID @abstract Returns the type identifier of SecACL instances. @result The CFTypeID of SecACL instances.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLGetTypeID func() uint
 	// @function SecACLRemove @abstract Removes the access control list entry specified. @param aclRef The reference to the access control list entry to remove. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLRemove func(unsafe.Pointer) int
 	// @function SecACLSetAuthorizations @abstract Sets the CSSM authorization tags of a given access control list entry. @param acl An access control list entry reference. @param tags A pointer to the first item in an array of CSSM authorization tags. @param tagCount The number of tags in the CSSM authorization tag array. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in 10.7 and later; use SecACLUpdateAuthorizations instead.
 	_fnSecACLSetAuthorizations func(unsafe.Pointer, *int32, uint32) int
 	// @function SecACLSetContents @abstract Sets the application list, description, and prompt selector for a given access control list entry. @param acl A reference to the access control list entry to edit. @param applicationList An application list reference. @param description The human readable name that will be used to refer to this item when the user is prompted. @param promptSelector A SecKeychainPromptSelector selector. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecACLSetContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, SecKeychainPromptSelector) int
 	// @function SecACLSetSimpleContents @abstract Sets the application list, description, and CSSM prompt selector for a given access control list entry. @param acl A reference to the access control list entry to edit. @param applicationList An application list reference. @param description The human readable name that will be used to refer to this item when the user is prompted. @param promptSelector A pointer to a CSSM prompt selector. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in 10.7 and later; use SecACLSetContents instead.
 	_fnSecACLSetSimpleContents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CssmAclKeychainPromptSelector) int
 	// @function SecACLUpdateAuthorizations @abstract Sets the authorization tags of a given access control list entry. @param acl An access control list entry reference. @param authorizations A pointer to an array of authorization tags. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
-	_fnSecACLUpdateAuthorizations func(unsafe.Pointer, unsafe.Pointer) int
+	// Deprecated: SecKeychain is deprecated
+	_fnSecACLUpdateAuthorizations      func(unsafe.Pointer, unsafe.Pointer) int
 	_fnSecAccessControlCreateWithFlags func(unsafe.Pointer, unsafe.Pointer, SecAccessControlCreateFlags, unsafe.Pointer) unsafe.Pointer
 	// @function SecAccessControlGetTypeID @abstract Returns the type identifier of SecAccessControl instances. @result The CFTypeID of SecAccessControl instances.
 	_fnSecAccessControlGetTypeID func() uint
 	// @function SecAccessCopyACLList @abstract Copies all the access control lists of a given access. @param accessRef A reference to the access from which to retrieve the information. @param aclList On return, a pointer to a new created CFArray of SecACL instances.  The caller is responsible for calling CFRelease on this array. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessCopyACLList func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessCopyMatchingACLList func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecAccessCopyOwnerAndACL @abstract Retrieves the owner and the access control list of a given access. @param accessRef A reference to the access from which to retrieve the information. @param userId On return, the user id of the owner @param groupId On return, the group id of the owner @param ownerType On return, the type of owner for this AccessRef @param aclList On return, a pointer to a new created CFArray of SecACL instances.  The caller is responsible for calling CFRelease on this array. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessCopyOwnerAndACL func(unsafe.Pointer, *uint, *uint, *uint, unsafe.Pointer) int
 	// @function SecAccessCopySelectedACLList @abstract Copies selected access control lists from a given access. @param accessRef A reference to the access from which to retrieve the information. @param action An authorization tag specifying what action with which to select the action control lists. @param aclList On return, a pointer to the selected access control lists. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion For 10.7 and later please use the SecAccessCopyMatchingACLList API
 	_fnSecAccessCopySelectedACLList func(unsafe.Pointer, int32, unsafe.Pointer) int
 	// @function SecAccessCreate @abstract Creates a new SecAccessRef that is set to the currently designated system default configuration of a (newly created) security object. Note that the precise nature of this default may change between releases. @param descriptor The name of the item as it should appear in security dialogs @param trustedlist A CFArray of TrustedApplicationRefs, specifying which applications should be allowed to access an item without triggering confirmation dialogs. If NULL, defaults to (just) the application creating the item. To set no applications, pass a CFArray with no elements. @param accessRef On return, a pointer to the new access reference. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecAccessCreateFromOwnerAndACL @abstract Creates a new SecAccessRef using the owner and access control list you provide. @param owner A pointer to a CSSM access control list owner. @param aclCount An unsigned 32-bit integer representing the number of items in the access control list. @param acls A pointer to the access control list. @param accessRef On return, a pointer to the new access reference. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion For 10.7 and later please use the SecAccessCreateWithOwnerAndACL API
 	_fnSecAccessCreateFromOwnerAndACL func(*CssmAclOwnerPrototype, uint32, *CssmAclEntryInfo, unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessCreateWithOwnerAndACL func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecAccessGetOwnerAndACL @abstract Retrieves the owner and the access control list of a given access. @param accessRef A reference to the access from which to retrieve the information. @param owner On return, a pointer to the access control list owner. @param aclCount On return, a pointer to an unsigned 32-bit integer representing the number of items in the access control list. @param acls On return, a pointer to the access control list. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion For 10.7 and later please use the SecAccessCopyOwnerAndACL API
 	_fnSecAccessGetOwnerAndACL func(unsafe.Pointer, **CssmAclOwnerPrototype, *uint32, **CssmAclEntryInfo) int
 	// @function SecAccessGetTypeID @abstract Returns the type identifier of SecAccess instances. @result The CFTypeID of SecAccess instances.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecAccessGetTypeID func() uint
 	// @function SecAddSharedWebCredential @abstract Asynchronously store (or update) a shared password for a website. @param fqdn The fully qualified domain name of the website requiring the password. @param account The account name associated with this password. @param password The password to be stored. Pass NULL to remove a shared password if it exists. @param completionHandler A block which will be invoked when the function has completed. If the shared password was successfully added (or removed), the CFErrorRef parameter passed to the block will be NULL. If the error parameter is non-NULL, an error occurred and the error reference will hold the result. Note: the error reference will be automatically released after this handler is called, though you may optionally retain it for as long as needed. @discussion This function adds a shared password item which will be accessible by Safari and applications that have the specified fully-qualified domain name in their 'com.apple.developer.associated-domains' entitlement. If a shared password item already exists for the specified website and account, it will be updated with the provided password. To remove a password, pass NULL for the password parameter. Note: since a request involving shared web credentials may potentially require user interaction or other verification to be approved, this function is dispatched asynchronously; your code provides a completion handler that will be called once the results (if any) are available.
 	_fnSecAddSharedWebCredential func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block)
@@ -475,27 +475,27 @@ var (
 	// @function SecCertificateCopyData @abstract Return the DER representation of an X.509 certificate. @param certificate SecCertificate object created with SecCertificateCreateWithData(). @result DER encoded X.509 certificate.
 	_fnSecCertificateCopyData func(unsafe.Pointer) unsafe.Pointer
 	// @function SecCertificateCopyEmailAddresses @abstract Returns an array of zero or more email addresses for the subject of a given certificate. @param certificate A reference to the certificate from which to retrieve the email addresses. @param emailAddresses On return, an array of zero or more CFStringRef elements corresponding to each email address found. Your code must release this array reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
-	_fnSecCertificateCopyEmailAddresses func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSecCertificateCopyKey func(unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyLongDescription func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyNormalizedIssuerContent func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyNormalizedIssuerSequence func(unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyNormalizedSubjectContent func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyEmailAddresses            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnSecCertificateCopyKey                       func(unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyLongDescription           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyNormalizedIssuerContent   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyNormalizedIssuerSequence  func(unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyNormalizedSubjectContent  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecCertificateCopyNormalizedSubjectSequence func(unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyNotValidAfterDate func(unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyNotValidBeforeDate func(unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyNotValidAfterDate         func(unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyNotValidBeforeDate        func(unsafe.Pointer) unsafe.Pointer
 	// @function SecCertificateCopyPreference @abstract Returns the preferred certificate for the specified name and key usage. If a preferred certificate does not exist for the specified name and key usage, NULL is returned. @param name A string containing an email address (RFC822) or other name for which a preferred certificate is requested. @param keyUsage A CSSM_KEYUSE key usage value, as defined in cssmtype.h. Pass 0 to ignore this parameter. @param certificate On return, a reference to the preferred certificate, or NULL if none was found. You are responsible for releasing this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This function will typically be used to obtain the preferred encryption certificate for an email recipient. This API is deprecated in 10.7. Please use the SecCertificateCopyPreferred API instead.
 	_fnSecCertificateCopyPreference func(unsafe.Pointer, uint32, unsafe.Pointer) int
-	_fnSecCertificateCopyPreferred func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyPreferred  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecCertificateCopyPublicKey @abstract Retrieves the public key for a given certificate. @param certificate A reference to the certificate from which to retrieve the public key. @param key On return, a reference to the public key for the specified certificate. Your code must release this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h). @discussion NOTE: Deprecated in macOS 10.14; use SecCertificateCopyKey instead for cross-platform availability.
-// Deprecated: since macOS 10.14.
+	// Deprecated: since macOS 10.14.
 	_fnSecCertificateCopyPublicKey func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.13.
-	_fnSecCertificateCopySerialNumber func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: since macOS 10.13.
+	_fnSecCertificateCopySerialNumber     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecCertificateCopySerialNumberData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecCertificateCopyShortDescription func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopySubjectSummary func(unsafe.Pointer) unsafe.Pointer
-	_fnSecCertificateCopyValues func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopySubjectSummary   func(unsafe.Pointer) unsafe.Pointer
+	_fnSecCertificateCopyValues           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecCertificateCreateFromData @abstract Creates a certificate based on the input data, type, and encoding. @param data A pointer to the certificate data. @param type The certificate type as defined in cssmtype.h. @param encoding The certificate encoding as defined in cssmtype.h. @param certificate On return, a reference to the newly created certificate. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This API is deprecated in 10.7  Please use the SecCertificateCreateWithData API instead.
 	_fnSecCertificateCreateFromData func(*CssmData, uint32, uint32, unsafe.Pointer) int
 	_fnSecCertificateCreateWithData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -523,58 +523,58 @@ var (
 	_fnSecCodeCheckValidityWithErrors func(unsafe.Pointer, SecCSFlags, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecCodeCopyDesignatedRequirement For a given Code or StaticCode object, determines its Designated Code Requirement. The Designated Requirement is the SecRequirement that the code believes should be used to properly identify it in the future. If the SecCode contains an explicit Designated Requirement, a copy of that is returned. If it does not, a SecRequirement is implicitly constructed from its signing authority and its embedded unique identifier. No Designated Requirement can be obtained from code that is unsigned. Code that is modified after signature, improperly signed, or has become invalid, may or may not yield a Designated Requirement. This call does not validate the SecStaticCode argument. @param code The Code or StaticCode object to be interrogated. For a Code argument, its StaticCode is processed as per SecCodeCopyStaticCode. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param requirement On successful return, contains a copy of a SecRequirement object representing the code's Designated Requirement. On error, unchanged. @result On success, errSecSuccess. On error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
 	_fnSecCodeCopyDesignatedRequirement func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
-	_fnSecCodeCopyGuestWithAttributes func(unsafe.Pointer, unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
+	_fnSecCodeCopyGuestWithAttributes   func(unsafe.Pointer, unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecCodeCopyHost Given a SecCode object, identify the (different) SecCode object that acts as its host. A SecCode's host acts as a supervisor and controller, and is the ultimate authority on the its dynamic validity and status. The host relationship is securely established (absent reported errors). @param guest A valid SecCode object reference representing code running on the system. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param host On successful return, a SecCode object reference identifying the code's host. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
 	_fnSecCodeCopyHost func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecCodeCopyPath For a given Code or StaticCode object, returns a URL to a location on disk where the code object can be found. For single files, the URL points to that file. For bundles, it points to the directory containing the entire bundle. @param staticCode The Code or StaticCode object to be located. For a Code argument, its StaticCode is processed as per SecCodeCopyStaticCode. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param path On successful return, contains a CFURL identifying the location on disk of the staticCode object. @result On success, errSecSuccess. On error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
 	_fnSecCodeCopyPath func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecCodeCopySelf Obtains a SecCode object for the code making the call. The calling code is determined in a way that is subject to modification over time, but obeys the following rules. If it is a UNIX process, its process id (pid) is always used. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param self Upon successful return, contains a SecCodeRef representing the caller. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
-	_fnSecCodeCopySelf func(SecCSFlags, unsafe.Pointer) int
+	_fnSecCodeCopySelf               func(SecCSFlags, unsafe.Pointer) int
 	_fnSecCodeCopySigningInformation func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
-	_fnSecCodeCopyStaticCode func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
+	_fnSecCodeCopyStaticCode         func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecCodeCreateWithXPCMessage Creates a SecCode reference to the process that sent the provided XPC message, using the associated audit token. @param message The xpc_object_t of a message recieved via xpc to look up the audit token of the process that sent the message. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param processRef On successful return, a SecCode object reference identifying the particular guest of the process from the audit token. This argument will not be changed if the call fails (does not return errSecSuccess). @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers. In particular: @error errSecCSInvalidObjectRef The xpc_object_t was not of type XPC_TYPE_DICTIONARY. @error errSecCSInvalidObjectRef The xpc_object_t was not an xpc message with an associated connection. For a complete list of errors, please see {@link SecCodeCopyGuestWithAttributes}.
 	_fnSecCodeCreateWithXPCMessage func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecCodeGetTypeID Returns the type identifier of all SecCode instances.
 	_fnSecCodeGetTypeID func() uint
 	_fnSecCodeMapMemory func(unsafe.Pointer, SecCSFlags) int
 	// @function SecCodeValidateFileResource For a SecStaticCodeRef, check that a given CFData object faithfully represents a plain-file resource in its resource seal. This call will fail if the file is missing in the bundle, even if it is optional. @param code A code or StaticCode object. @param relativePath A CFStringRef containing the relative path to a sealed resource file. This path is relative to the resource base, which is either Contents or the bundle root, depending on bundle format. @param fileData A CFDataRef containing the exact contents of that resource file. @param flags Pass kSecCSDefaultFlags. @result noErr if fileData is the exact content of the file at relativePath at the time it was signed. Various error codes if it is different, there was no such file, it was not a plain file, or anything is irregular.
-	_fnSecCodeValidateFileResource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, SecCSFlags) int
-	_fnSecCopyErrorMessageString func(int, unsafe.Pointer) unsafe.Pointer
+	_fnSecCodeValidateFileResource          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, SecCSFlags) int
+	_fnSecCopyErrorMessageString            func(int, unsafe.Pointer) unsafe.Pointer
 	_fnSecCreateSharedWebCredentialPassword func() unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecDecodeTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecDecryptTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecDecryptTransformGetTypeID func() uint
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecDigestTransformCreate func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecDigestTransformGetTypeID func() uint
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecEncodeTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecEncryptTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecEncryptTransformGetTypeID func() uint
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecGroupTransformGetTypeID func() uint
-	_fnSecHostCreateGuest func(uint, uint32, unsafe.Pointer, unsafe.Pointer, SecCSFlags, *uint) int
-	_fnSecHostRemoveGuest func(uint, uint, SecCSFlags) int
-	_fnSecHostSelectGuest func(uint, SecCSFlags) int
-	_fnSecHostSelectedGuest func(SecCSFlags, *uint) int
-	_fnSecHostSetGuestStatus func(uint, uint32, unsafe.Pointer, SecCSFlags) int
-	_fnSecHostSetHostingPort func(uint, SecCSFlags) int
+	_fnSecHostCreateGuest         func(uint, uint32, unsafe.Pointer, unsafe.Pointer, SecCSFlags, *uint) int
+	_fnSecHostRemoveGuest         func(uint, uint, SecCSFlags) int
+	_fnSecHostSelectGuest         func(uint, SecCSFlags) int
+	_fnSecHostSelectedGuest       func(SecCSFlags, *uint) int
+	_fnSecHostSetGuestStatus      func(uint, uint32, unsafe.Pointer, SecCSFlags) int
+	_fnSecHostSetHostingPort      func(uint, SecCSFlags) int
 	// @function SecIdentityCopyCertificate @abstract Returns a reference to a certificate for the given identity reference. @param identityRef An identity reference. @param certificateRef On return, a pointer to the found certificate reference. You are responsible for releasing this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
 	_fnSecIdentityCopyCertificate func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecIdentityCopyPreference @abstract Returns the preferred identity for the specified name and key usage, optionally limiting the result to an identity issued by a certificate whose subject is one of the distinguished names in validIssuers. If a preferred identity does not exist, NULL is returned. @param name A string containing a URI, RFC822 email address, DNS hostname, or other name which uniquely identifies the service requiring an identity. @param keyUsage A CSSM_KEYUSE key usage value, as defined in cssmtype.h. Pass 0 to ignore this parameter. @param validIssuers (optional) An array of CFDataRef instances whose contents are the subject names of allowable issuers, as returned by a call to SSLCopyDistinguishedNames (SecureTransport.h). Pass NULL if any issuer is allowed. @param identity On return, a reference to the preferred identity, or NULL if none was found. You are responsible for releasing this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This API is deprecated in 10.7. Please use the SecIdentityCopyPreferred API instead.
 	_fnSecIdentityCopyPreference func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int
-	_fnSecIdentityCopyPreferred func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecIdentityCopyPreferred  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecIdentityCopyPrivateKey @abstract Returns the private key associated with an identity. @param identityRef An identity reference. @param privateKeyRef On return, a pointer to the private key for the given identity. On iOS, the private key must be of class type kSecAppleKeyItemClass. You are responsible for releasing this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
 	_fnSecIdentityCopyPrivateKey func(unsafe.Pointer, unsafe.Pointer) int
 	// @function     SecIdentityCopySystemIdentity @abstract     Obtain the system-wide SecIdentityRef associated with a specified domain. @param        domain  Identifies the SecIdentityRef to be obtained, typically in the form "com.apple.subdomain...". @param        idRef     On return, the system SecIdentityRef assicated with the specified domain. Caller must CFRelease this when finished with it. @param        actualDomain (optional) The actual domain name of the the returned identity is returned here. This may be different from the requested domain. @result        A result code.  See "Security Error Codes" (SecBase.h). @discussion   If no system SecIdentityRef exists for the specified domain, a domain-specific alternate may be returned instead, typically (but not exclusively) the kSecIdentityDomainDefault SecIdentityRef.
 	_fnSecIdentityCopySystemIdentity func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnSecIdentityCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecIdentityCreate             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecIdentityCreateWithCertificate @abstract Creates a new identity reference for the given certificate, assuming the associated private key is in one of the specified keychains. @param keychainOrArray A reference to an array of keychains to search, a single keychain, or NULL to search the user's default keychain search list. @param certificateRef A certificate reference. @param identityRef On return, an identity reference. You are responsible for releasing this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
 	_fnSecIdentityCreateWithCertificate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecIdentityGetTypeID @abstract Returns the type identifier of SecIdentity instances. @result The CFTypeID of SecIdentity instances.
@@ -613,7 +613,7 @@ var (
 	_fnSecKeyCreateDecryptedData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyCreateEncryptedData @abstract Encrypt a block of plaintext. @param key Public key with which to encrypt the data. @param algorithm One of SecKeyAlgorithm constants suitable to perform encryption with this key. @param plaintext The data to encrypt. The length and format of the data must conform to chosen algorithm, typically be less or equal to the value returned by SecKeyGetBlockSize(). @param error On error, will be populated with an error object describing the failure. See "Security Error Codes" (SecBase.h). @result The ciphertext represented as a CFData, or NULL on failure. @discussion Encrypts plaintext data using specified key.  The exact type of the operation including the format of input and output data is specified by encryption algorithm.
 	_fnSecKeyCreateEncryptedData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyCreateFromData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyCreatePair @abstract Creates an asymmetric key pair and stores it in a specified keychain. @param keychainRef A reference to the keychain in which to store the private and public key items. Specify NULL for the default keychain. @param algorithm An algorithm for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied. @param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied. @param contextHandle (optional) A CSSM_CC_HANDLE, or 0. If this argument is supplied, the algorithm and keySizeInBits parameters are ignored. If extra parameters are needed to generate a key (some algorithms require this), you should create a context using CSSM_CSP_CreateKeyGenContext, using the CSPHandle obtained by calling SecKeychainGetCSPHandle. Then use CSSM_UpdateContextAttributes to add parameters, and dispose of the context using CSSM_DeleteContext after calling this function. @param publicKeyUsage A bit mask indicating all permitted uses for the new public key. CSSM_KEYUSE bit mask values are defined in cssmtype.h. @param publicKeyAttr A bit mask defining attribute values for the new public key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h. @param privateKeyUsage A bit mask indicating all permitted uses for the new private key. CSSM_KEYUSE bit mask values are defined in cssmtype.h. @param privateKeyAttr A bit mask defining attribute values for the new private key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h. @param initialAccess (optional) A SecAccess object that determines the initial access rights to the private key. The public key is given "any/any" access rights by default. @param publicKey (optional) On return, the keychain item reference of the generated public key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required. @param privateKey (optional) On return, the keychain item reference of the generated private key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. Pass NULL if a reference to this key is not required. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7. Please use the SecKeyGeneratePair API instead.
 	_fnSecKeyCreatePair func(unsafe.Pointer, uint32, uint32, uint64, uint32, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -623,17 +623,17 @@ var (
 	_fnSecKeyCreateSignature func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyCreateWithData @abstract Create a SecKey from a well-defined external representation. @param keyData CFData representing the key. The format of the data depends on the type of key being created. @param attributes Dictionary containing attributes describing the key to be imported. The keys in this dictionary are kSecAttr* constants from SecItem.h.  Mandatory attributes are: kSecAttrKeyType kSecAttrKeyClass @param error On error, will be populated with an error object describing the failure. See "Security Error Codes" (SecBase.h). @result A SecKey object representing the key, or NULL on failure. @discussion This function does not add keys to any keychain, but the SecKey object it returns can be added to keychain using the SecItemAdd function. The requested data format depend on the type of key (kSecAttrKeyType) being created: kSecAttrKeyTypeRSA               PKCS#1 format, public key can be also in x509 public key format kSecAttrKeyTypeECSECPrimeRandom  ANSI X9.63 format (04 || X || Y [ || K])
 	_fnSecKeyCreateWithData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyDeriveFromPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyGenerate @abstract Creates a symmetric key and optionally stores it in a specified keychain. @param keychainRef (optional) A reference to the keychain in which to store the generated key. Specify NULL to generate a transient key. @param algorithm An algorithm for the symmetric key. This parameter is ignored if a valid (non-zero) contextHandle is supplied. @param keySizeInBits A key size for the key pair. This parameter is ignored if a valid (non-zero) contextHandle is supplied. @param contextHandle (optional) A CSSM_CC_HANDLE, or 0. If this argument is supplied, the algorithm and keySizeInBits parameters are ignored. If extra parameters are needed to generate a key (some algorithms require this), you should create a context using CSSM_CSP_CreateKeyGenContext, using the CSPHandle obtained by calling SecKeychainGetCSPHandle. Then use CSSM_UpdateContextAttributes to add parameters, and dispose of the context using CSSM_DeleteContext after calling this function. @param keyUsage A bit mask indicating all permitted uses for the new key. CSSM_KEYUSE bit mask values are defined in cssmtype.h. @param keyAttr A bit mask defining attribute values for the new key. The bit mask values are equivalent to a CSSM_KEYATTR_FLAGS and are defined in cssmtype.h. @param initialAccess (optional) A SecAccess object that determines the initial access rights for the key. This parameter is ignored if the keychainRef is NULL. @param keyRef On return, a reference to the generated key. Use the SecKeyGetCSSMKey function to obtain the CSSM_KEY. The caller must call CFRelease on this value if it is returned. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7.  Please use the SecKeyGenerateSymmetric API instead.
 	_fnSecKeyGenerate func(unsafe.Pointer, uint32, uint32, uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeyGeneratePair @abstract Generate a private/public keypair. @param parameters A dictionary containing one or more key-value pairs. See the discussion sections below for a complete overview of options. @param publicKey On return, a SecKeyRef reference to the public key. @param privateKey On return, a SecKeyRef reference to the private key. @result A result code. See "Security Error Codes" (SecBase.h). @discussion In order to generate a keypair the parameters dictionary must at least contain the following keys: kSecAttrKeyType with a value of kSecAttrKeyTypeRSA or any other kSecAttrKeyType defined in SecItem.h kSecAttrKeySizeInBits with a value being a CFNumberRef containing the requested key size in bits.  Example sizes for RSA keys are: 512, 768, 1024, 2048. The values below may be set either in the top-level dictionary or in a dictionary that is the value of the kSecPrivateKeyAttrs or kSecPublicKeyAttrs key in the top-level dictionary.  Setting these attributes explicitly will override the defaults below.  See SecItem.h for detailed information on these attributes including the types of the values. kSecAttrLabel default NULL kSecUseKeychain default NULL, which specifies the default keychain kSecAttrIsPermanent default false if this key is present and has a Boolean value of true, the key or key pair will be added to the keychain. kSecAttrTokenID default NULL The CFStringRef ID of the token to generate the key or keypair on. This attribute can contain CFStringRef and can be present only in the top-level parameters dictionary. kSecAttrApplicationTag default NULL kSecAttrEffectiveKeySize default NULL same as kSecAttrKeySizeInBits kSecAttrCanEncrypt default false for private keys, true for public keys kSecAttrCanDecrypt default true for private keys, false for public keys kSecAttrCanDerive default true kSecAttrCanSign default true for private keys, false for public keys kSecAttrCanVerify default false for private keys, true for public keys kSecAttrCanWrap default false for private keys, true for public keys kSecAttrCanUnwrap default true for private keys, false for public keys NOTE: The function always saves keys in the keychain on macOS and as such attribute kSecAttrIsPermanent is ignored. The function respects attribute kSecAttrIsPermanent on iOS, tvOS and watchOS. It is recommended to use SecKeyCreateRandomKey() which respects kSecAttrIsPermanent on all platforms.
-// Deprecated: Use SecKeyCreateRandomKey
+	// Deprecated: Use SecKeyCreateRandomKey
 	_fnSecKeyGeneratePair func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeyGeneratePairAsync @abstract Generate a private/public keypair returning the values in a callback. @param parameters A dictionary containing one or more key-value pairs. @param deliveryQueue A dispatch queue to be used to deliver the results. @param result A callback function to result when the operation has completed. @discussion In order to generate a keypair the parameters dictionary must at least contain the following keys: kSecAttrKeyType with a value being kSecAttrKeyTypeRSA or any other kSecAttrKeyType defined in SecItem.h kSecAttrKeySizeInBits with a value being a CFNumberRef or CFStringRef containing the requested key size in bits.  Example sizes for RSA keys are: 512, 768, 1024, 2048. Setting the following attributes explicitly will override the defaults below. See SecItem.h for detailed information on these attributes including the types of the values. kSecAttrLabel default NULL kSecAttrIsPermanent if this key is present and has a Boolean value of true, the key or key pair will be added to the default keychain. kSecAttrApplicationTag default NULL kSecAttrEffectiveKeySize default NULL same as kSecAttrKeySizeInBits kSecAttrCanEncrypt default false for private keys, true for public keys kSecAttrCanDecrypt default true for private keys, false for public keys kSecAttrCanDerive default true kSecAttrCanSign default true for private keys, false for public keys kSecAttrCanVerify default false for private keys, true for public keys kSecAttrCanWrap default false for private keys, true for public keys kSecAttrCanUnwrap default true for private keys, false for public keys
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyGeneratePairAsync func(unsafe.Pointer, unsafe.Pointer, objc.Block)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyGenerateSymmetric func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyGetBlockSize @abstract Returns block length of the key in bytes. @param key The key for which the block length is requested. @result The block length of the key in bytes. @discussion If for example key is an RSA key the value returned by this function is the size of the modulus.
 	_fnSecKeyGetBlockSize func(unsafe.Pointer) uint
@@ -647,183 +647,183 @@ var (
 	_fnSecKeyGetTypeID func() uint
 	// @function SecKeyIsAlgorithmSupported @abstract Checks whether key supports specified algorithm for specified operation. @param key Key to query @param operation Operation type for which the key is queried @param algorithm Algorithm which is queried @return True if key supports specified algorithm for specified operation, False otherwise.
 	_fnSecKeyIsAlgorithmSupported func(unsafe.Pointer, SecKeyOperationType, unsafe.Pointer) uint8
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyUnwrapSymmetric func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeyVerifySignature @abstract Given a public key, data which has been signed, and a signature, verify the signature. @param key Public key with which to verify the signature. @param algorithm One of SecKeyAlgorithm constants suitable to verify signature with this key. @param signedData The data over which sig is being verified, typically the digest of the actual data. @param signature The signature to verify. @param error On error, will be populated with an error object describing the failure. See "Security Error Codes" (SecBase.h). @result True if the signature was valid, False otherwise. @discussion Verifies digital signature operation using specified key and signed data.  The operation algorithm further defines the exact format of input data, signature and operation to be performed.
 	_fnSecKeyVerifySignature func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSecKeyWrapSymmetric func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecKeychainAddCallback @abstract Registers your keychain event callback function @param callbackFunction A pointer to your keychain event callback function, described in SecKeychainCallback. You indicate the type of keychain events you want to receive by passing a bit mask of the desired events in the eventMask parameter. @param eventMask A bit mask indicating the keychain events that your application wishes to be notified of. See SecKeychainEventMask for a description of this bit mask. The Keychain Manager tests this mask to determine the keychain events that you wish to receive, and passes these events in the keychainEvent parameter of your callback function. See SecKeychainEvent for a description of these events. @param userContext A pointer to application-defined storage that will be passed to your callback function. Your application can use this to associate any particular call of SecKeychainAddCallback with any particular call of your keychain event callback function. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainAddCallback func(unsafe.Pointer, SecKeychainEventMask, unsafe.Pointer) int
 	// @function SecKeychainAddGenericPassword @abstract Adds a generic password to the specified keychain. @param keychain A reference to the keychain in which to store a generic password. Pass NULL to specify the user's default keychain. @param serviceNameLength The length of the buffer pointed to by serviceName. @param serviceName A pointer to a string containing the service name associated with this password. @param accountNameLength The length of the buffer pointed to by accountName. @param accountName A pointer to a string containing the account name associated with this password. @param passwordLength The length of the buffer pointed to by passwordData. @param passwordData A pointer to a buffer containing the password data to be stored in the keychain. @param itemRef On return, a reference to the new keychain item. @result A result code. See "Security Error Codes" (SecBase.h). @discussion The SecKeychainAddGenericPassword function adds a new generic password to the default keychain. Required parameters to identify the password are serviceName and accountName, which are application-defined strings. SecKeychainAddGenericPassword optionally returns a reference to the newly added item.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainAddGenericPassword func(unsafe.Pointer, uint, string, uint, string, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainAddInternetPassword @abstract Adds an Internet password to the specified keychain. @param keychain	A reference to a keychain in which to store an Internet password. Pass NULL to specify the user's default keychain. @param serverNameLength The length of the buffer pointed to by serverName. @param serverName A pointer to a string containing the server name associated with this password. @param securityDomainLength The length of the buffer pointed to by securityDomain. @param securityDomain A pointer to a string containing the security domain associated with this password, or NULL if there is no relevant security domain. @param accountNameLength The length of the buffer pointed to by accountName. @param accountName A pointer to a string containing the account name associated with this password. @param pathLength The length of the buffer pointed to by path. @param path A pointer to a string containing the path associated with this password, or NULL if there is no relevant path string. @param port The TCP/IP port number. If no specific port number is associated with this item, pass 0. @param protocol The protocol associated with this password. See SecProtocolType for a description of possible values. @param authenticationType The authentication scheme used. See SecAuthenticationType for a description of possible values. Pass the constant kSecAuthenticationTypeDefault to specify the default authentication scheme. @param passwordLength The length of the buffer pointed to by passwordData. @param passwordData A pointer to a buffer containing the password data to be stored in the keychain. @param itemRef On return, a reference to the new keychain item. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion The SecKeychainAddInternetPassword function adds a new Internet server password to the specified keychain. Required parameters to identify the password are serverName and accountName (you cannot pass NULL for both parameters). In addition, some protocols may require an optional securityDomain when authentication is requested. SecKeychainAddInternetPassword optionally returns a reference to the newly added item.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainAddInternetPassword func(unsafe.Pointer, uint, string, uint, string, uint, string, uint, string, uint16, SecProtocolType, SecAuthenticationType, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainAttributeInfoForItemID @abstract Obtains tags for all possible attributes for a given item class. @param keychain A keychain reference. @param itemID The relation identifier of the item tags (an itemID is a CSSM_DB_RECORDTYPE defined in cssmapple.h). @param info On return, a pointer to the keychain attribute information. User should call the SecKeychainFreeAttributeInfo function to release the structure when done with it. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters were supplied (NULL). @discussion Warning, this call returns more attributes than are support by the old style Keychain API and passing them into older calls will yield an invalid attribute error. The recommended call to retrieve the attribute values is the SecKeychainItemCopyAttributesAndData function.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainAttributeInfoForItemID func(unsafe.Pointer, uint, *SecKeychainAttributeInfo) int
 	// @function SecKeychainCopyAccess @abstract Retrieves the access for a keychain. @param keychain A reference to the keychain from which to copy the access. @param access On return, a pointer to the access reference. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopyAccess func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainCopyDefault @abstract Retrieves a reference to the default keychain. @param keychain On return, a pointer to the default keychain reference. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopyDefault func(unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopyDomainDefault func(SecPreferencesDomain, unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopyDomainSearchList func(SecPreferencesDomain, unsafe.Pointer) int
 	// @function SecKeychainCopySearchList @abstract Retrieves a keychain search list. @param searchList The returned list of keychains to search. When finished with the array, you must call CFRelease() to release the memory. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if the keychain list is not specified (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopySearchList func(unsafe.Pointer) int
 	// @function SecKeychainCopySettings @abstract Copy the keychain settings. @param keychain A reference to the keychain from which to copy its settings. @param outSettings  A pointer to a keychain settings structure. Since this structure is versioned, you must preallocate it and fill in the version of the structure. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCopySettings func(unsafe.Pointer, *SecKeychainSettings) int
 	// @function SecKeychainCreate @abstract Creates a new keychain. @param pathName The POSIX path to a keychain file. @param passwordLength An unsigned 32-bit integer representing the length of the password buffer. @param password A pointer to the buffer containing the password. The password must be in canonical UTF8 encoding. @param promptUser A boolean representing whether to display a password dialog to the user. @param initialAccess An access reference. @param keychain On return, a pointer to a keychain reference. The memory that keychain occupies must be released by calling CFRelease when finished with it. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if the keychain parameter is invalid (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainCreate func(string, uint, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainDelete @abstract Removes one or more keychains from the current keychain searchlist, and deletes the keychain storage (if the keychains are file-based). @param keychainOrArray A single keychain reference or a reference to an array of keychains to delete. IMPORTANT: SecKeychainDelete does not dispose the memory occupied by keychain references; use the CFRelease function when you are completely finished with a keychain. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecInvalidKeychain (-25295) may be returned if the keychain parameter is invalid (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainDelete func(unsafe.Pointer) int
 	// @function SecKeychainFindGenericPassword @abstract Find a generic password based on the attributes passed. @param keychainOrArray A reference to an array of keychains to search, a single keychain, or NULL to search the user's default keychain search list. @param serviceNameLength The length of the buffer pointed to by serviceName. @param serviceName A pointer to a string containing the service name. @param accountNameLength The length of the buffer pointed to by accountName. @param accountName A pointer to a string containing the account name. @param passwordLength On return, the length of the buffer pointed to by passwordData. @param passwordData On return, a pointer to a data buffer containing the password. Your application must call SecKeychainItemFreeContent(NULL, passwordData) to release this data buffer when it is no longer needed. Pass NULL if you are not interested in retrieving the password data at this time, but simply want to find the item reference. @param itemRef On return, a reference to the keychain item which was found. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion The SecKeychainFindGenericPassword function finds the first generic password item which matches the attributes you provide. Most attributes are optional; you should pass only as many as you need to narrow the search sufficiently for your application's intended use. SecKeychainFindGenericPassword optionally returns a reference to the found item.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainFindGenericPassword func(unsafe.Pointer, uint, string, uint, string, *uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainFindInternetPassword @abstract Finds an Internet password based on the attributes passed. @param keychainOrArray A reference to an array of keychains to search, a single keychain, or NULL to search the user's default keychain search list. @param serverNameLength The length of the buffer pointed to by serverName. @param serverName A pointer to a string containing the server name. @param securityDomainLength The length of the buffer pointed to by securityDomain. @param securityDomain A pointer to a string containing the security domain. This parameter is optional, as not all protocols will require it. @param accountNameLength The length of the buffer pointed to by accountName. @param accountName A pointer to a string containing the account name. @param pathLength The length of the buffer pointed to by path. @param path A pointer to a string containing the path. @param port The TCP/IP port number. Pass 0 to ignore the port number. @param protocol The protocol associated with this password. See SecProtocolType for a description of possible values. @param authenticationType The authentication scheme used. See SecAuthenticationType for a description of possible values. Pass the constant kSecAuthenticationTypeDefault to specify the default authentication scheme. @param passwordLength On return, the length of the buffer pointed to by passwordData. @param passwordData On return, a pointer to a data buffer containing the password. Your application must call SecKeychainItemFreeContent(NULL, passwordData) to release this data buffer when it is no longer needed. Pass NULL if you are not interested in retrieving the password data at this time, but simply want to find the item reference. @param itemRef On return, a reference to the keychain item which was found. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion The SecKeychainFindInternetPassword function finds the first Internet password item which matches the attributes you provide. Most attributes are optional; you should pass only as many as you need to narrow the search sufficiently for your application's intended use. SecKeychainFindInternetPassword optionally returns a reference to the found item.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainFindInternetPassword func(unsafe.Pointer, uint, string, uint, string, uint, string, uint, string, uint16, SecProtocolType, SecAuthenticationType, *uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainFreeAttributeInfo @abstract Releases the memory acquired by calling the SecKeychainAttributeInfoForItemID function. @param info A pointer to the keychain attribute information to release. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters were supplied (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainFreeAttributeInfo func(*SecKeychainAttributeInfo) int
 	// @function SecKeychainGetCSPHandle @abstract Returns the CSSM_CSP_HANDLE attachment for the given keychain reference. The handle is valid until the keychain reference is released. @param keychain A keychain reference. @param cspHandle On return, a pointer to the CSSM_CSP_HANDLE for the given keychain. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7. It should nho longer be needed.
 	_fnSecKeychainGetCSPHandle func(unsafe.Pointer, *int) int
 	// @function SecKeychainGetDLDBHandle @abstract Returns the CSSM_DL_DB_HANDLE for a given keychain reference. The handle is valid until the keychain reference is released. @param keychain A keychain reference. @param dldbHandle On return, a pointer to the CSSM_DL_DB_HANDLE for the given keychain. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7. It should nho longer be needed.
 	_fnSecKeychainGetDLDBHandle func(unsafe.Pointer, *CssmDlDbHandle) int
 	// @function SecKeychainGetPath @abstract Get the path of the specified keychain. @param keychain A reference to a keychain. @param ioPathLength On input, a pointer to the size of the buffer pointed to by pathName. On return, the size of the buffer without the zero termination. @param pathName On return, the POSIX path to the keychain. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetPath func(unsafe.Pointer, *uint, string) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetPreferenceDomain func(*SecPreferencesDomain) int
 	// @function SecKeychainGetStatus @abstract Retrieves status information for the specified keychain. @param keychain A keychain reference. Pass NULL to specify the default keychain. @param keychainStatus On return, a pointer to the status of the specified keychain.  See KeychainStatus for valid status constants. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetStatus func(unsafe.Pointer, *uint) int
 	// @function SecKeychainGetTypeID @abstract Returns the type identifier of SecKeychain instances. @result The CFTypeID of SecKeychain instances.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetTypeID func() uint
 	// @function SecKeychainGetUserInteractionAllowed @abstract Retrieves the current state of user interaction. @param state On return, a pointer to the current state of user interaction.  If this is TRUE then user interaction is allowed, if it is FALSE, then user interaction is not allowed. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetUserInteractionAllowed func(*uint8) int
 	// @function SecKeychainGetVersion @abstract Determines the version of the Keychain Manager installed on the user�s system. @param returnVers On return, a pointer to the version number of the Keychain Manager installed on the current system. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainGetVersion func(*uint) int
 	// @function SecKeychainItemCopyAccess @abstract Copies the access of a given keychain item. @param itemRef A reference to a keychain item. @param access On return, a reference to the keychain item's access. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCopyAccess func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemCopyAttributesAndData @abstract Copies the data and/or attributes stored in the given keychain item. You must call SecKeychainItemFreeAttributesAndData when you no longer need the attributes and data. If you want to modify the attributes returned here, use SecKeychainModifyAttributesAndData. @param itemRef A reference to the keychain item to copy. @param info A list of tags and formats of the attributes you wish to retrieve. Pass NULL if you don't need to retrieve any attributes. You can call SecKeychainAttributeInfoForItemID to obtain a list with all possible attribute tags and formats for the item's class. @param itemClass On return, the item's class. Pass NULL if you don't require this information. @param attrList On return, a pointer to the list of retrieved attributes. Pass NULL if you don't need to retrieve any attributes. You must call SecKeychainItemFreeAttributesAndData when you no longer need this list. @param length On return, the length of the buffer pointed to by outData. @param outData On return, a pointer to a buffer containing the data in this item. Pass NULL if you don't need to retrieve the data. You must call SecKeychainItemFreeAttributesAndData when you no longer need the data. @result A result code. See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters are supplied.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCopyAttributesAndData func(unsafe.Pointer, *SecKeychainAttributeInfo, *SecItemClass, *SecKeychainAttributeList, *uint, unsafe.Pointer) int
 	// @function SecKeychainItemCopyContent @abstract Copies the data and/or attributes stored in the given keychain item. It is recommended that you use SecKeychainItemCopyAttributesAndData(). You must call SecKeychainItemFreeContent when you no longer need the attributes and data. If you want to modify the attributes returned here, use SecKeychainModifyContent(). @param itemRef A reference to the keychain item to modify. @param itemClass On return, the item's class. Pass NULL if you don't require this information. @param attrList On input, the list of attributes to retrieve. On output, the attributes are filled in. Pass NULL if you don't need to retrieve any attributes. You must call SecKeychainItemFreeContent when you no longer need the attributes. @param length On return, the length of the buffer pointed to by outData. @param outData On return, a pointer to a buffer containing the data in this item. Pass NULL if you don't need to retrieve the data. You must call SecKeychainItemFreeContent when you no longer need the data. @result A result code. See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters are supplied.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCopyContent func(unsafe.Pointer, *SecItemClass, *SecKeychainAttributeList, *uint, unsafe.Pointer) int
 	// @function SecKeychainItemCopyFromPersistentReference @abstract Returns a SecKeychainItemRef, given a persistent reference previously obtained by calling SecKeychainItemCreatePersistentReference(). @param persistentItemRef A CFDataRef containing a persistent reference to a keychain item. @param itemRef On return, a SecKeychainItemRef for the keychain item described by the persistent reference. You must release this item reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCopyFromPersistentReference func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemCopyKeychain @abstract Copies an existing keychain reference from a keychain item. @param itemRef A keychain item reference. @param keychainRef On return, the keychain reference for the specified item. Release this reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCopyKeychain func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemCreateCopy @abstract Copies a keychain item. @param itemRef A reference to the keychain item to copy. @param destKeychainRef A reference to the keychain in which to insert the copied keychain item. @param initialAccess The initial access for the copied keychain item. @param itemCopy On return, a reference to the copied keychain item. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCreateCopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemCreateFromContent @abstract Creates a new keychain item from the supplied parameters. @param itemClass A constant identifying the class of item to create. @param attrList The list of attributes of the item to create. @param length The length of the buffer pointed to by data. @param data A pointer to a buffer containing the data to store. @param initialAccess A reference to the access for this keychain item. @param keychainRef A reference to the keychain in which to add the item. @param itemRef On return, a pointer to a reference to the newly created keychain item (optional). When the item reference is no longer required, call CFRelease to deallocate memory occupied by the item. @result A result code. See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if not enough valid parameters are supplied, or errSecAllocate (-108) if there is not enough memory in the current heap zone to create the object.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCreateFromContent func(SecItemClass, *SecKeychainAttributeList, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemCreatePersistentReference @abstract Returns a CFDataRef which can be used as a persistent reference to the given keychain item. The data obtained can be turned back into a SecKeychainItemRef later by calling SecKeychainItemCopyFromPersistentReference(). @param itemRef A reference to a keychain item. @param persistentItemRef On return, a CFDataRef containing a persistent reference. You must release this data reference by calling the CFRelease function. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemCreatePersistentReference func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemDelete @abstract Deletes a keychain item from the default keychain's permanent data store. @param itemRef A keychain item reference of the item to delete. @result A result code. See "Security Error Codes" (SecBase.h). @discussion If itemRef has not previously been added to the keychain, SecKeychainItemDelete does nothing and returns errSecSuccess. IMPORTANT: SecKeychainItemDelete does not dispose the memory occupied by the item reference itself; use the CFRelease function when you are completely finished with an item.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemDelete func(unsafe.Pointer) int
-// Deprecated: since macOS 10.7.
+	// Deprecated: since macOS 10.7.
 	_fnSecKeychainItemExport func(unsafe.Pointer, SecExternalFormat, SecItemImportExportFlags, *SecKeyImportExportParameters, unsafe.Pointer) int
 	// @function SecKeychainItemFreeAttributesAndData @abstract Releases the memory used by the keychain attribute list and the keychain data retrieved in a previous call to SecKeychainItemCopyAttributesAndData. @param attrList A pointer to the attribute list to release. Pass NULL to ignore this parameter. @param data A pointer to the data buffer to release. Pass NULL to ignore this parameter. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemFreeAttributesAndData func(*SecKeychainAttributeList, unsafe.Pointer) int
 	// @function SecKeychainItemFreeContent @abstract Releases the memory used by the keychain attribute list and the keychain data retrieved in a previous call to SecKeychainItemCopyContent. @param attrList A pointer to the attribute list to release. Pass NULL to ignore this parameter. @param data A pointer to the data buffer to release. Pass NULL to ignore this parameter.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemFreeContent func(*SecKeychainAttributeList, unsafe.Pointer) int
 	// @function SecKeychainItemGetDLDBHandle @abstract Returns the CSSM_DL_DB_HANDLE for a given keychain item reference. @param keyItemRef A keychain item reference. @param dldbHandle On return, a CSSM_DL_DB_HANDLE for the keychain database containing the given item. The handle is valid until the keychain reference is released. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7. It should no longer be needed.
 	_fnSecKeychainItemGetDLDBHandle func(unsafe.Pointer, *CssmDlDbHandle) int
 	// @function SecKeychainItemGetTypeID @abstract Returns the type identifier of SecKeychainItem instances. @result The CFTypeID of SecKeychainItem instances.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemGetTypeID func() uint
 	// @function SecKeychainItemGetUniqueRecordID @abstract Returns a CSSM_DB_UNIQUE_RECORD for the given keychain item reference. @param itemRef A keychain item reference. @param uniqueRecordID On return, a pointer to a CSSM_DB_UNIQUE_RECORD structure for the given item. The unique record is valid until the item reference is released. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This API is deprecated for 10.7. It should no longer be needed.
 	_fnSecKeychainItemGetUniqueRecordID func(unsafe.Pointer, *CssmDbUniqueRecord) int
-// Deprecated: since macOS 10.7.
+	// Deprecated: since macOS 10.7.
 	_fnSecKeychainItemImport func(unsafe.Pointer, unsafe.Pointer, *SecExternalFormat, *SecExternalItemType, SecItemImportExportFlags, *SecKeyImportExportParameters, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainItemModifyAttributesAndData @abstract Updates an existing keychain item after changing its attributes or data. @param itemRef A reference to the keychain item to modify. @param attrList The list of attributes to modify, along with their new values. Pass NULL if you don't need to modify any attributes. @param length The length of the buffer pointed to by data. @param data Pointer to a buffer containing the data to store. Pass NULL if you don't need to modify the data. @result A result code. See "Security Error Codes" (SecBase.h). @discussion The keychain item is written to the keychain's permanent data store. If the keychain item has not previously been added to a keychain, a call to the SecKeychainItemModifyContent function does nothing and returns errSecSuccess.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemModifyAttributesAndData func(unsafe.Pointer, *SecKeychainAttributeList, uint, unsafe.Pointer) int
 	// @function SecKeychainItemModifyContent @abstract Updates an existing keychain item after changing its attributes or data. This call should only be used in conjunction with SecKeychainItemCopyContent(). @param itemRef A reference to the keychain item to modify. @param attrList The list of attributes to modify, along with their new values. Pass NULL if you don't need to modify any attributes. @param length The length of the buffer pointed to by data. @param data A pointer to a buffer containing the data to store. Pass NULL if you don't need to modify the data. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemModifyContent func(unsafe.Pointer, *SecKeychainAttributeList, uint, unsafe.Pointer) int
 	// @function SecKeychainItemSetAccess @abstract Sets the access of a given keychain item. @param itemRef A reference to a keychain item. @param access A reference to an access to replace the keychain item's current access. @result A result code. See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainItemSetAccess func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainLock @abstract Locks the specified keychain. @param keychain A reference to the keychain to lock. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainLock func(unsafe.Pointer) int
 	// @function SecKeychainLockAll @abstract Locks all keychains belonging to the current user. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainLockAll func() int
 	// @function SecKeychainOpen @abstract Create a SecKeychainRef for a keychain at pathName.  This keychain might not currently exist, use SecKeychainGetStatus if you want to confirm the existence of this keychain. @param pathName The POSIX path to a keychain. @param keychain On return, a pointer to the keychain reference. The memory that keychain occupies must be released by calling CFRelease when finished with it. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if the keychain parameter is invalid (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainOpen func(string, unsafe.Pointer) int
 	// @function SecKeychainRemoveCallback @abstract Unregisters your keychain event callback function. Once removed, keychain events won't be sent to the owner of the callback. @param callbackFunction The callback function pointer to remove @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainRemoveCallback func(unsafe.Pointer) int
 	// @function SecKeychainSearchCopyNext @abstract Finds the next keychain item matching the given search criteria. @param searchRef A reference to the current search criteria.  The search reference is created in the SecKeychainSearchCreateFromAttributes function and must be released by calling the CFRelease function when you are done with it. @param itemRef On return, a pointer to a keychain item reference of the next matching keychain item, if any. @result A result code.  When there are no more items that match the parameters specified to SecPolicySearchCreate, errSecItemNotFound is returned. See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in Mac OS X 10.7 and later; to find keychain items which match specified attributes, please use the SecItemCopyMatching API (see SecItem.h).
-// Deprecated: SecKeychainSearch is not supported
+	// Deprecated: SecKeychainSearch is not supported
 	_fnSecKeychainSearchCopyNext func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainSearchCreateFromAttributes @abstract Creates a search reference matching a list of zero or more specified attributes in the specified keychain. @param keychainOrArray An reference to an array of keychains to search, a single keychain or NULL to search the user's default keychain search list. @param itemClass The keychain item class. @param attrList A pointer to a list of zero or more keychain attribute records to match.  Pass NULL to match any keychain attribute. @param searchRef On return, a pointer to the current search reference. You are responsible for calling the CFRelease function to release this reference when finished with it. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in Mac OS X 10.7 and later; to find keychain items which match specified attributes, please use the SecItemCopyMatching API (see SecItem.h).
-// Deprecated: SecKeychainSearch is not supported
+	// Deprecated: SecKeychainSearch is not supported
 	_fnSecKeychainSearchCreateFromAttributes func(unsafe.Pointer, SecItemClass, *SecKeychainAttributeList, unsafe.Pointer) int
 	// @function SecKeychainSearchGetTypeID @abstract Returns the type identifier of SecKeychainSearch instances. @result The CFTypeID of SecKeychainSearch instances. @discussion This API is deprecated in 10.7. The SecKeychainSearchRef type is no longer used.
-// Deprecated: SecKeychainSearch is not supported
+	// Deprecated: SecKeychainSearch is not supported
 	_fnSecKeychainSearchGetTypeID func() uint
 	// @function SecKeychainSetAccess @abstract Sets the access for a keychain. @param keychain A reference to the keychain for which to set the access. @param access An access reference. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetAccess func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecKeychainSetDefault @abstract Sets the default keychain. @param keychain A reference to the keychain to set as default. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if the keychain parameter is invalid (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetDefault func(unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetDomainDefault func(SecPreferencesDomain, unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetDomainSearchList func(SecPreferencesDomain, unsafe.Pointer) int
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetPreferenceDomain func(SecPreferencesDomain) int
 	// @function SecKeychainSetSearchList @abstract Specifies the list of keychains to use in a keychain search list. @param searchList The list of keychains to use in a search list when the SecKeychainCopySearchList function is called. An empty array clears the search list. @result A result code.  See "Security Error Codes" (SecBase.h). In addition, errSecParam (-50) may be returned if the keychain list is not specified (NULL).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetSearchList func(unsafe.Pointer) int
 	// @function SecKeychainSetSettings @abstract Changes the settings of a keychain. @param keychain A reference to a keychain. @param newSettings A pointer to the new keychain settings. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetSettings func(unsafe.Pointer, *SecKeychainSettings) int
 	// @function SecKeychainSetUserInteractionAllowed @abstract Turns on or off any optional user interaction @param state A boolean representing the state of user interaction.  You should pass TRUE to allow user interaction, and FALSE to disallow user interaction @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainSetUserInteractionAllowed func(uint8) int
 	// @function SecKeychainUnlock @abstract Unlocks the specified keychain. @param keychain A reference to the keychain to unlock. Pass NULL to specify the default keychain. If you pass NULL and the default keychain is currently locked, the keychain will appear as the default choice. If you pass a locked keychain, SecKeychainUnlock will use the password provided to unlock it. If the default keychain is currently unlocked, SecKeychainUnlock returns errSecSuccess. @param passwordLength An unsigned 32-bit integer representing the length of the password buffer. @param password A buffer containing the password for the keychain. Pass NULL if the user password is unknown. In this case, SecKeychainUnlock displays the Unlock Keychain dialog box, and the authentication user interface associated with the keychain about to be unlocked. @param usePassword A boolean indicating whether the password parameter is used.  You should pass TRUE if it is used or FALSE if it is ignored. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion In most cases, your application does not need to call the SecKeychainUnlock function directly, since most Keychain Manager functions that require an unlocked keychain call SecKeychainUnlock automatically. If your application needs to verify that a keychain is unlocked, call the function SecKeychainGetStatus.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecKeychainUnlock func(unsafe.Pointer, uint, unsafe.Pointer, uint8) int
 	// @function SecPKCS12Import @abstract Imports the contents of a PKCS12 formatted blob. @param pkcs12_data The PKCS#12 formatted data to be imported. @param options A dictionary containing import options. A kSecImportExportPassphrase entry is required at minimum. Only password-based PKCS12 blobs are currently supported. @param items On return, an array containing a dictionary for every item extracted. Use kSecImportItem constants to access specific elements of these dictionaries. Your code must CFRelease the array when it is no longer needed. @result errSecSuccess in case of success. errSecDecode means either the blob can't be read or it is malformed. errSecAuthFailed means an incorrect password was supplied, or data in the container is damaged. @discussion The normal behavior of this function is to import items into process memory on iOS, and into the default keychain on macOS. You can modify this behavior with entries in the options dictionary. To specify a file-based keychain and legacy access control on macOS, provide kSecImportExportKeychain with a SecKeychainRef value, and/or kSecImportExportAccess with a SecAccessRef value. In macOS 14 and later, it is possible to specify the data protection keychain instead of a file-based keychain by including kSecUseDataProtectionKeychain with a value of kCFBooleanTrue. Starting with macOS 15 and iOS 18, kSecImportToMemoryOnly (with a value of kCFBooleanTrue) allows you to skip importing to the keychain on macOS and explicitly specify iOS behavior.
-	_fnSecPKCS12Import func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnSecPKCS12Import         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnSecPolicyCopyProperties func(unsafe.Pointer) unsafe.Pointer
 	// @function SecPolicyCreateBasicX509 @abstract Returns a policy object for the default X.509 policy. @result A policy object. The caller is responsible for calling CFRelease on this when it is no longer needed.
-	_fnSecPolicyCreateBasicX509 func() unsafe.Pointer
+	_fnSecPolicyCreateBasicX509  func() unsafe.Pointer
 	_fnSecPolicyCreateRevocation func(uint) unsafe.Pointer
 	// @function SecPolicyCreateSSL @abstract Returns a policy object for evaluating SSL certificate chains. @param server Passing true for this parameter creates a policy for SSL server certificates. @param hostname (Optional) If present, the policy will require the specified hostname to match the hostname in the leaf certificate. @result A policy object. The caller is responsible for calling CFRelease on this when it is no longer needed.
-	_fnSecPolicyCreateSSL func(uint8, unsafe.Pointer) unsafe.Pointer
-	_fnSecPolicyCreateWithOID func(unsafe.Pointer) unsafe.Pointer
+	_fnSecPolicyCreateSSL            func(uint8, unsafe.Pointer) unsafe.Pointer
+	_fnSecPolicyCreateWithOID        func(unsafe.Pointer) unsafe.Pointer
 	_fnSecPolicyCreateWithProperties func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecPolicyGetOID @abstract Returns a policy's object identifier. @param policyRef A policy reference. @param oid On return, a pointer to the policy's object identifier. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This function is deprecated in Mac OS X 10.7 and later; use SecPolicyCopyProperties instead.
 	_fnSecPolicyGetOID func(unsafe.Pointer, *CssmData) int
@@ -854,82 +854,82 @@ var (
 	// @function SecRequirementCreateWithData Create a SecRequirement object from binary form. This is the effective inverse of SecRequirementCopyData. @param data A binary blob obtained earlier from a valid SecRequirement object using the SecRequirementCopyData call. This is the only publicly supported way to get such a data blob. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param requirement On successful return, contains a reference to a SecRequirement object that behaves identically to the one the data blob was obtained from. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
 	_fnSecRequirementCreateWithData func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecRequirementCreateWithString Create a SecRequirement object by compiling a valid text representation of a requirement. @param text A CFString containing the text form of a (single) Code Requirement. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param requirement On successful return, contains a reference to a SecRequirement object that implements the conditions described in text. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
-	_fnSecRequirementCreateWithString func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
+	_fnSecRequirementCreateWithString          func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	_fnSecRequirementCreateWithStringAndErrors func(unsafe.Pointer, SecCSFlags, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecRequirementGetTypeID Returns the type identifier of all SecRequirement instances.
 	_fnSecRequirementGetTypeID func() uint
-// Deprecated: SecTransform is no longer supported
-	_fnSecSignTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecStaticCodeCheckValidity func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
+	// Deprecated: SecTransform is no longer supported
+	_fnSecSignTransformCreate               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecStaticCodeCheckValidity           func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	_fnSecStaticCodeCheckValidityWithErrors func(unsafe.Pointer, SecCSFlags, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecStaticCodeCreateWithPath Given a path to a file system object, create a SecStaticCode object representing the code at that location, if possible. Such a SecStaticCode is not inherently linked to running code in the system. It is possible to create a SecStaticCode object from an unsigned code object. Most uses of such an object will return the errSecCSUnsigned error. However, SecCodeCopyPath and SecCodeCopySigningInformation can be safely applied to such objects. @param path A path to a location in the file system. Only file:// URLs are currently supported. For bundles, pass a URL to the root directory of the bundle. For single files, pass a URL to the file. If you pass a URL to the main executable of a bundle, the bundle as a whole will be generally recognized. Caution: Paths containing embedded // or /../ within a bundle's directory may cause the bundle to be misconstrued. If you expect to submit such paths, first clean them with realpath(3) or equivalent. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param staticCode On successful return, contains a reference to the StaticCode object representing the code at path. Unchanged on error. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers.
 	_fnSecStaticCodeCreateWithPath func(unsafe.Pointer, SecCSFlags, unsafe.Pointer) int
 	// @function SecStaticCodeCreateWithPathAndAttributes Given a path to a file system object, create a SecStaticCode object representing the code at that location, if possible. Such a SecStaticCode is not inherently linked to running code in the system. It is possible to create a SecStaticCode object from an unsigned code object. Most uses of such an object will return the errSecCSUnsigned error. However, SecCodeCopyPath and SecCodeCopySigningInformation can be safely applied to such objects. @param path A path to a location in the file system. Only file:// URLs are currently supported. For bundles, pass a URL to the root directory of the bundle. For single files, pass a URL to the file. If you pass a URL to the main executable of a bundle, the bundle as a whole will be generally recognized. Caution: Paths containing embedded // or /../ within a bundle's directory may cause the bundle to be misconstrued. If you expect to submit such paths, first clean them with realpath(3) or equivalent. @param flags Optional flags. Pass kSecCSDefaultFlags for standard behavior. @param attributes A CFDictionary containing additional attributes of the code sought. @param staticCode On successful return, contains a reference to the StaticCode object representing the code at path. Unchanged on error. @result Upon success, errSecSuccess. Upon error, an OSStatus value documented in CSCommon.h or certain other Security framework headers. @constant kSecCodeAttributeArchitecture Specifies the Mach-O architecture of code desired. This can be a CFString containing a canonical architecture name ("i386" etc.), or a CFNumber specifying an architecture numerically (see mach/machine.h). This key is ignored if the code is not in Mach-O binary form. If the code is Mach-O but not universal ("thin"), the architecture specified must agree with the actual file contents. @constant kSecCodeAttributeSubarchitecture If the architecture is specified numerically (using the kSecCodeAttributeArchitecture key), specifies any sub-architecture by number. This key is ignored if no main architecture is specified; if it is specified by name; or if the code is not in Mach-O form. @constant kSecCodeAttributeUniversalFileOffset The offset of a Mach-O specific slice of a universal Mach-O file. @constant kSecCodeAttributeBundleVersion If the code sought is a deep framework bundle (Something.framework/Versions/...), then select the specified framework version. This key is otherwise ignored.
 	_fnSecStaticCodeCreateWithPathAndAttributes func(unsafe.Pointer, SecCSFlags, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecStaticCodeGetTypeID Returns the type identifier of all SecStaticCode instances.
-	_fnSecStaticCodeGetTypeID func() uint
-	_fnSecTaskCopySigningIdentifier func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecTaskCopyValueForEntitlement func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecStaticCodeGetTypeID           func() uint
+	_fnSecTaskCopySigningIdentifier     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecTaskCopyValueForEntitlement   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnSecTaskCopyValuesForEntitlements func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnSecTaskCreateFromSelf func(unsafe.Pointer) unsafe.Pointer
-	_fnSecTaskCreateWithAuditToken func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnSecTaskCreateFromSelf            func(unsafe.Pointer) unsafe.Pointer
+	_fnSecTaskCreateWithAuditToken      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SecTaskGetTypeID @abstract Returns the type ID for CF instances of SecTask. @result A CFTypeID for SecTask
-	_fnSecTaskGetTypeID func() uint
+	_fnSecTaskGetTypeID              func() uint
 	_fnSecTranformCustomGetAttribute func(unsafe.Pointer, unsafe.Pointer, SecTransformMetaAttributeType) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformConnectTransforms func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCopyExternalRepresentation func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCreateFromExternalRepresentation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCreateGroupTransform func() unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCreateReadTransformWithReadStream func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCustomGetAttribute func(unsafe.Pointer, unsafe.Pointer, SecTransformMetaAttributeType) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformCustomSetAttribute func(unsafe.Pointer, unsafe.Pointer, SecTransformMetaAttributeType, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformExecute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformExecuteAsync func(unsafe.Pointer, unsafe.Pointer, objc.Block)
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformFindByName func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformGetAttribute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformGetTypeID func() uint
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformNoData func() unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformPushbackAttribute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformRegister func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformSetAttribute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformSetAttributeAction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformSetDataAction func(unsafe.Pointer, unsafe.Pointer, objc.Block) unsafe.Pointer
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecTransformSetTransformAction func(unsafe.Pointer, unsafe.Pointer, objc.Block) unsafe.Pointer
 	// @function SecTrustCopyAnchorCertificates @abstract Returns an array of default anchor (root) certificates used by the system. @param anchors On return, an array containing the system's default anchors (roots). Call the CFRelease function to release this pointer. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This function is not available on iOS, as certificate data for system-trusted roots is currently unavailable on that platform.
 	_fnSecTrustCopyAnchorCertificates func(unsafe.Pointer) int
-	_fnSecTrustCopyCertificateChain func(unsafe.Pointer) unsafe.Pointer
+	_fnSecTrustCopyCertificateChain   func(unsafe.Pointer) unsafe.Pointer
 	// @function SecTrustCopyCustomAnchorCertificates @abstract Returns an array of custom anchor certificates used by a given trust, as set by a prior call to SecTrustSetAnchorCertificates, or NULL if no custom anchors have been specified. @param trust  A reference to a trust object. @param anchors On return, an array of custom anchor certificates (roots) used by this trust, or NULL if no custom anchors have been specified. Call the CFRelease function to release this reference. @result A result code. See "Security Error Codes" (SecBase.h).
 	_fnSecTrustCopyCustomAnchorCertificates func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSecTrustCopyExceptions func(unsafe.Pointer) unsafe.Pointer
-	_fnSecTrustCopyKey func(unsafe.Pointer) unsafe.Pointer
+	_fnSecTrustCopyExceptions               func(unsafe.Pointer) unsafe.Pointer
+	_fnSecTrustCopyKey                      func(unsafe.Pointer) unsafe.Pointer
 	// @function SecTrustCopyPolicies @abstract Returns an array of policies used for this evaluation. @param trust  A reference to a trust object. @param policies On return, an array of policies used by this trust. Call the CFRelease function to release this reference. @result A result code. See "Security Error Codes" (SecBase.h).
 	_fnSecTrustCopyPolicies func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 12.0.
+	// Deprecated: since macOS 12.0.
 	_fnSecTrustCopyProperties func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 11.0.
+	// Deprecated: since macOS 11.0.
 	_fnSecTrustCopyPublicKey func(unsafe.Pointer) unsafe.Pointer
-	_fnSecTrustCopyResult func(unsafe.Pointer) unsafe.Pointer
+	_fnSecTrustCopyResult    func(unsafe.Pointer) unsafe.Pointer
 	// @function SecTrustCreateWithCertificates @abstract Creates a trust object based on the given certificates and policies. @param certificates The group of certificates to verify.  This can either be a CFArrayRef of SecCertificateRef objects or a single SecCertificateRef @param policies An array of one or more policies. You may pass a SecPolicyRef to represent a single policy. @param trust On return, a pointer to the trust management reference. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion If multiple policies are passed in, all policies must verify for the chain to be considered valid.
 	_fnSecTrustCreateWithCertificates func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function SecTrustEvaluate @abstract Evaluates a trust reference synchronously. @param trust A reference to the trust object to evaluate. @param result A pointer to a result type. @result A result code. See "Security Error Codes" (SecBase.h). @discussion This function will completely evaluate trust before returning, possibly including network access to fetch intermediate certificates or to perform revocation checking. Since this function can block during those operations, you should call it from within a function that is placed on a dispatch queue, or in a separate thread from your application's main run loop. Alternatively, you can use the SecTrustEvaluateAsync function.
@@ -938,8 +938,8 @@ var (
 	_fnSecTrustEvaluateAsync func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
 	// @function SecTrustEvaluateAsyncWithError @abstract Evaluates a trust reference asynchronously. @param trust A reference to the trust object to evaluate. @param queue A dispatch queue on which the result callback will be executed. Note that this function MUST be called from that queue. @param result A SecTrustWithErrorCallback block which will be executed when the trust evaluation is complete. The block is guaranteed to be called exactly once when the result code is errSecSuccess, and not called otherwise. Note that this block may be called synchronously inline if no asynchronous operations are required. @result A result code. See "Security Error Codes" (SecBase.h). @discussion If the certificate is trusted, the callback will return a result parameter of true and the error will be set to NULL. If the certificate is not trusted or the evaluation was unable to complete, the result parameter will be false and the error will be set with a description of the failure. The error contains a code for the most serious error encountered (if multiple trust failures occurred). The localized description indicates the certificate with the most serious problem and the type of error. The underlying error contains a localized description of each certificate in the chain that had an error and all errors found with that certificate.
 	_fnSecTrustEvaluateAsyncWithError func(unsafe.Pointer, unsafe.Pointer, objc.Block) int
-	_fnSecTrustEvaluateWithError func(unsafe.Pointer, unsafe.Pointer) bool
-// Deprecated: since macOS 12.0.
+	_fnSecTrustEvaluateWithError      func(unsafe.Pointer, unsafe.Pointer) bool
+	// Deprecated: since macOS 12.0.
 	_fnSecTrustGetCertificateAtIndex func(unsafe.Pointer, int) unsafe.Pointer
 	// @function SecTrustGetCertificateCount @abstract Returns the number of certificates in an evaluated certificate chain. @param trust A reference to a trust object. @result The number of certificates in the trust chain, including the anchor. @discussion Important: if the trust reference has not yet been evaluated, this function will evaluate it first before returning. If speed is critical, you may want to call SecTrustGetTrustResult first to make sure that a result other than kSecTrustResultInvalid is present for the trust object.
 	_fnSecTrustGetCertificateCount func(unsafe.Pointer) int
@@ -980,100 +980,100 @@ var (
 	// @function SecTrustSignedCertificateTimestamps @abstract Attach SignedCertificateTimestamp data to a trust object. @param trust A reference to a trust object. @param sctArray is a CFArray of CFData objects each containing a SCT (per RFC 6962). @result A result code. See "Security Error Codes" (SecBase.h). @discussion Allows the caller to provide SCT data (which may be obtained during a TLS/SSL handshake, per RFC 6962) as input to a trust evaluation.
 	_fnSecTrustSetSignedCertificateTimestamps func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecTrustSetVerifyDate @abstract Set the date for which the trust should be verified. @param trust A reference to a trust object. @param verifyDate The date for which to verify trust. @result A result code.  See "Security Error Codes" (SecBase.h). @discussion This function lets you evaluate certificate validity for a given date (for example, to determine if a signature was valid on the date it was signed, even if the certificate has since expired.) If this function is not called, the time at which SecTrustEvaluate() is called is used implicitly as the verification time.
-	_fnSecTrustSetVerifyDate func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSecTrustSettingsCopyCertificates func(SecTrustSettingsDomain, unsafe.Pointer) int
-	_fnSecTrustSettingsCopyModificationDate func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
-	_fnSecTrustSettingsCopyTrustSettings func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
+	_fnSecTrustSetVerifyDate                        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnSecTrustSettingsCopyCertificates             func(SecTrustSettingsDomain, unsafe.Pointer) int
+	_fnSecTrustSettingsCopyModificationDate         func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
+	_fnSecTrustSettingsCopyTrustSettings            func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
 	_fnSecTrustSettingsCreateExternalRepresentation func(SecTrustSettingsDomain, unsafe.Pointer) int
 	_fnSecTrustSettingsImportExternalRepresentation func(SecTrustSettingsDomain, unsafe.Pointer) int
-	_fnSecTrustSettingsRemoveTrustSettings func(unsafe.Pointer, SecTrustSettingsDomain) int
-	_fnSecTrustSettingsSetTrustSettings func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
+	_fnSecTrustSettingsRemoveTrustSettings          func(unsafe.Pointer, SecTrustSettingsDomain) int
+	_fnSecTrustSettingsSetTrustSettings             func(unsafe.Pointer, SecTrustSettingsDomain, unsafe.Pointer) int
 	// @function SecTrustedApplicationCopyData @abstract Retrieves the data of a given trusted application reference @param appRef A trusted application reference to retrieve data from @param data On return, a pointer to a data reference of the trusted application. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecTrustedApplicationCopyData func(unsafe.Pointer, unsafe.Pointer) int
 	// @function SecTrustedApplicationCreateFromPath @abstract Creates a trusted application reference based on the trusted application specified by path. @param path The path to the application or tool to trust. For application bundles, use the path to the bundle directory. Pass NULL to refer to yourself, i.e. the application or tool making this call. @param app On return, a pointer to the trusted application reference. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecTrustedApplicationCreateFromPath func(string, unsafe.Pointer) int
 	// @function SecTrustedApplicationGetTypeID @abstract Returns the type identifier of SecTrustedApplication instances. @result The CFTypeID of SecTrustedApplication instances.
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecTrustedApplicationGetTypeID func() uint
 	// @function SecTrustedApplicationSetData @abstract Sets the data of a given trusted application reference @param appRef A trusted application reference. @param data A reference to the data to set in the trusted application. @result A result code.  See "Security Error Codes" (SecBase.h).
-// Deprecated: SecKeychain is deprecated
+	// Deprecated: SecKeychain is deprecated
 	_fnSecTrustedApplicationSetData func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: SecTransform is no longer supported
+	// Deprecated: SecTransform is no longer supported
 	_fnSecVerifyTransformCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function SessionCreate This (very specialized) function creates a security session. Upon completion, the new session contains the calling process (and none other). You cannot create a session for someone else, and cannot avoid being placed into the new session. This is (currently) the only call that changes a process's session membership. By default, a new bootstrap subset port is created for the calling process. The process acquires this new port as its bootstrap port, which all its children will inherit. If you happen to have created the subset port on your own, you can pass the sessionKeepCurrentBootstrap flag, and SessionCreate will use it. Note however that you cannot supersede a prior SessionCreate call that way; only a single SessionCreate call is allowed for each Session (however made). This call will discard any security information established for the calling process. In particular, any authorization handles acquired will become invalid, and so will any keychain related information. We recommend that you call SessionCreate before making any other security-related calls that establish rights of any kind, to the extent this is practical. Also, we strongly recommend that you do not perform security-related calls in any other threads while calling SessionCreate. @param flags Flags controlling how the session is created. @param attributes The set of attribute bits to set for the new session. Not all bits can be set this way. @result An OSStatus indicating success (errSecSuccess) or an error cause. errSessionInvalidAttributes -60501 Attempt to set invalid attribute bits errSessionAuthorizationDenied -60502 Attempt to re-initialize a session errSessionInvalidFlags -60011 Attempt to specify unsupported flag bits
 	_fnSessionCreate func(SessionCreationFlags, SessionAttributeBits) int
 	// @function SessionGetInfo Obtain information about a session. You can ask about any session whose identifier you know. Use the callerSecuritySession constant to ask about your own session (the one your process is in). @param session (input) The Session you are asking about. Can be one of the special constants defined above. @param sessionId (output/optional) The actual SecuritySessionId for the session you asked about. Will never be one of those constants. @param attributes (output/optional) Receives the attribute bits for the session. @result An OSStatus indicating success (errSecSuccess) or an error cause. errSessionInvalidId -60500 Invalid session id specified
-	_fnSessionGetInfo func(uint, *uint, *SessionAttributeBits) int
-	_cssmAlgToOid func(uint32) *CssmData
-	_cssmOidToAlg func(*CssmData, *uint32) bool
-	_cssmPerror func(string, int32)
-	_sec_certificate_copy_ref func(unsafe.Pointer) unsafe.Pointer
-	_sec_certificate_create func(unsafe.Pointer) unsafe.Pointer
-	_sec_identity_access_certificates func(unsafe.Pointer, objc.Block) bool
-	_sec_identity_copy_certificates_ref func(unsafe.Pointer) unsafe.Pointer
-	_sec_identity_copy_ref func(unsafe.Pointer) unsafe.Pointer
-	_sec_identity_create_with_certificates func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_sec_protocol_metadata_access_distinguished_names func(unsafe.Pointer, objc.Block) bool
-	_sec_protocol_metadata_access_ocsp_response func(unsafe.Pointer, objc.Block) bool
-	_sec_protocol_metadata_access_peer_certificate_chain func(unsafe.Pointer, objc.Block) bool
-	_sec_protocol_metadata_access_pre_shared_keys func(unsafe.Pointer, objc.Block) bool
+	_fnSessionGetInfo                                            func(uint, *uint, *SessionAttributeBits) int
+	_cssmAlgToOid                                                func(uint32) *CssmData
+	_cssmOidToAlg                                                func(*CssmData, *uint32) bool
+	_cssmPerror                                                  func(string, int32)
+	_sec_certificate_copy_ref                                    func(unsafe.Pointer) unsafe.Pointer
+	_sec_certificate_create                                      func(unsafe.Pointer) unsafe.Pointer
+	_sec_identity_access_certificates                            func(unsafe.Pointer, objc.Block) bool
+	_sec_identity_copy_certificates_ref                          func(unsafe.Pointer) unsafe.Pointer
+	_sec_identity_copy_ref                                       func(unsafe.Pointer) unsafe.Pointer
+	_sec_identity_create_with_certificates                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_sec_protocol_metadata_access_distinguished_names            func(unsafe.Pointer, objc.Block) bool
+	_sec_protocol_metadata_access_ocsp_response                  func(unsafe.Pointer, objc.Block) bool
+	_sec_protocol_metadata_access_peer_certificate_chain         func(unsafe.Pointer, objc.Block) bool
+	_sec_protocol_metadata_access_pre_shared_keys                func(unsafe.Pointer, objc.Block) bool
 	_sec_protocol_metadata_access_supported_signature_algorithms func(unsafe.Pointer, objc.Block) bool
-	_sec_protocol_metadata_challenge_parameters_are_equal func(unsafe.Pointer, unsafe.Pointer) bool
-	_sec_protocol_metadata_copy_negotiated_protocol func(unsafe.Pointer) string
-	_sec_protocol_metadata_copy_peer_public_key func(unsafe.Pointer) unsafe.Pointer
-	_sec_protocol_metadata_copy_server_name func(unsafe.Pointer) string
-	_sec_protocol_metadata_create_secret func(unsafe.Pointer, uint, string, uint) unsafe.Pointer
-	_sec_protocol_metadata_create_secret_with_context func(unsafe.Pointer, uint, string, uint, *uint8, uint) unsafe.Pointer
-	_sec_protocol_metadata_get_early_data_accepted func(unsafe.Pointer) bool
-	_sec_protocol_metadata_get_negotiated_ciphersuite func(unsafe.Pointer) uint16
-// Deprecated: since macOS 15.5.
-	_sec_protocol_metadata_get_negotiated_protocol func(unsafe.Pointer) string
-	_sec_protocol_metadata_get_negotiated_protocol_version func(unsafe.Pointer) SSLProtocol
-	_sec_protocol_metadata_get_negotiated_tls_ciphersuite func(unsafe.Pointer) Tls_ciphersuite_t
+	_sec_protocol_metadata_challenge_parameters_are_equal        func(unsafe.Pointer, unsafe.Pointer) bool
+	_sec_protocol_metadata_copy_negotiated_protocol              func(unsafe.Pointer) string
+	_sec_protocol_metadata_copy_peer_public_key                  func(unsafe.Pointer) unsafe.Pointer
+	_sec_protocol_metadata_copy_server_name                      func(unsafe.Pointer) string
+	_sec_protocol_metadata_create_secret                         func(unsafe.Pointer, uint, string, uint) unsafe.Pointer
+	_sec_protocol_metadata_create_secret_with_context            func(unsafe.Pointer, uint, string, uint, *uint8, uint) unsafe.Pointer
+	_sec_protocol_metadata_get_early_data_accepted               func(unsafe.Pointer) bool
+	_sec_protocol_metadata_get_negotiated_ciphersuite            func(unsafe.Pointer) uint16
+	// Deprecated: since macOS 15.5.
+	_sec_protocol_metadata_get_negotiated_protocol             func(unsafe.Pointer) string
+	_sec_protocol_metadata_get_negotiated_protocol_version     func(unsafe.Pointer) SSLProtocol
+	_sec_protocol_metadata_get_negotiated_tls_ciphersuite      func(unsafe.Pointer) Tls_ciphersuite_t
 	_sec_protocol_metadata_get_negotiated_tls_protocol_version func(unsafe.Pointer) Tls_protocol_version_t
-// Deprecated: since macOS 15.5.
-	_sec_protocol_metadata_get_server_name func(unsafe.Pointer) string
-	_sec_protocol_metadata_peers_are_equal func(unsafe.Pointer, unsafe.Pointer) bool
-	_sec_protocol_options_add_pre_shared_key func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: since macOS 15.5.
+	_sec_protocol_metadata_get_server_name             func(unsafe.Pointer) string
+	_sec_protocol_metadata_peers_are_equal             func(unsafe.Pointer, unsafe.Pointer) bool
+	_sec_protocol_options_add_pre_shared_key           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_sec_protocol_options_add_tls_application_protocol func(unsafe.Pointer, string)
-// Deprecated: Use sec_protocol_options_append_tls_ciphersuite
+	// Deprecated: Use sec_protocol_options_append_tls_ciphersuite
 	_sec_protocol_options_add_tls_ciphersuite func(unsafe.Pointer, uint16)
-// Deprecated: Use sec_protocol_options_append_tls_ciphersuite_group
-	_sec_protocol_options_add_tls_ciphersuite_group func(unsafe.Pointer, SSLCiphersuiteGroup)
-	_sec_protocol_options_append_tls_ciphersuite func(unsafe.Pointer, Tls_ciphersuite_t)
-	_sec_protocol_options_append_tls_ciphersuite_group func(unsafe.Pointer, Tls_ciphersuite_group_t)
-	_sec_protocol_options_are_equal func(unsafe.Pointer, unsafe.Pointer) bool
+	// Deprecated: Use sec_protocol_options_append_tls_ciphersuite_group
+	_sec_protocol_options_add_tls_ciphersuite_group             func(unsafe.Pointer, SSLCiphersuiteGroup)
+	_sec_protocol_options_append_tls_ciphersuite                func(unsafe.Pointer, Tls_ciphersuite_t)
+	_sec_protocol_options_append_tls_ciphersuite_group          func(unsafe.Pointer, Tls_ciphersuite_group_t)
+	_sec_protocol_options_are_equal                             func(unsafe.Pointer, unsafe.Pointer) bool
 	_sec_protocol_options_get_default_max_dtls_protocol_version func() Tls_protocol_version_t
-	_sec_protocol_options_get_default_max_tls_protocol_version func() Tls_protocol_version_t
+	_sec_protocol_options_get_default_max_tls_protocol_version  func() Tls_protocol_version_t
 	_sec_protocol_options_get_default_min_dtls_protocol_version func() Tls_protocol_version_t
-	_sec_protocol_options_get_default_min_tls_protocol_version func() Tls_protocol_version_t
-	_sec_protocol_options_set_challenge_block func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_sec_protocol_options_set_key_update_block func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_sec_protocol_options_set_local_identity func(unsafe.Pointer, unsafe.Pointer)
-	_sec_protocol_options_set_max_tls_protocol_version func(unsafe.Pointer, Tls_protocol_version_t)
-	_sec_protocol_options_set_min_tls_protocol_version func(unsafe.Pointer, Tls_protocol_version_t)
-	_sec_protocol_options_set_peer_authentication_required func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_pre_shared_key_selection_block func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-// Deprecated: DHE ciphersuites are no longer supported
-	_sec_protocol_options_set_tls_diffie_hellman_parameters func(unsafe.Pointer, unsafe.Pointer)
-	_sec_protocol_options_set_tls_false_start_enabled func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_tls_is_fallback_attempt func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_tls_max_version func(unsafe.Pointer, SSLProtocol)
-	_sec_protocol_options_set_tls_min_version func(unsafe.Pointer, SSLProtocol)
-	_sec_protocol_options_set_tls_ocsp_enabled func(unsafe.Pointer, bool)
+	_sec_protocol_options_get_default_min_tls_protocol_version  func() Tls_protocol_version_t
+	_sec_protocol_options_set_challenge_block                   func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_sec_protocol_options_set_key_update_block                  func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_sec_protocol_options_set_local_identity                    func(unsafe.Pointer, unsafe.Pointer)
+	_sec_protocol_options_set_max_tls_protocol_version          func(unsafe.Pointer, Tls_protocol_version_t)
+	_sec_protocol_options_set_min_tls_protocol_version          func(unsafe.Pointer, Tls_protocol_version_t)
+	_sec_protocol_options_set_peer_authentication_required      func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_pre_shared_key_selection_block    func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	// Deprecated: DHE ciphersuites are no longer supported
+	_sec_protocol_options_set_tls_diffie_hellman_parameters    func(unsafe.Pointer, unsafe.Pointer)
+	_sec_protocol_options_set_tls_false_start_enabled          func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_tls_is_fallback_attempt          func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_tls_max_version                  func(unsafe.Pointer, SSLProtocol)
+	_sec_protocol_options_set_tls_min_version                  func(unsafe.Pointer, SSLProtocol)
+	_sec_protocol_options_set_tls_ocsp_enabled                 func(unsafe.Pointer, bool)
 	_sec_protocol_options_set_tls_pre_shared_key_identity_hint func(unsafe.Pointer, unsafe.Pointer)
-	_sec_protocol_options_set_tls_renegotiation_enabled func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_tls_resumption_enabled func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_tls_sct_enabled func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_tls_server_name func(unsafe.Pointer, string)
-	_sec_protocol_options_set_tls_tickets_enabled func(unsafe.Pointer, bool)
-	_sec_protocol_options_set_verify_block func(unsafe.Pointer, objc.Block, unsafe.Pointer)
-	_sec_release func(unsafe.Pointer)
-	_sec_retain func(unsafe.Pointer) unsafe.Pointer
-	_sec_trust_copy_ref func(unsafe.Pointer) unsafe.Pointer
-	_sec_trust_create func(unsafe.Pointer) unsafe.Pointer
+	_sec_protocol_options_set_tls_renegotiation_enabled        func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_tls_resumption_enabled           func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_tls_sct_enabled                  func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_tls_server_name                  func(unsafe.Pointer, string)
+	_sec_protocol_options_set_tls_tickets_enabled              func(unsafe.Pointer, bool)
+	_sec_protocol_options_set_verify_block                     func(unsafe.Pointer, objc.Block, unsafe.Pointer)
+	_sec_release                                               func(unsafe.Pointer)
+	_sec_retain                                                func(unsafe.Pointer) unsafe.Pointer
+	_sec_trust_copy_ref                                        func(unsafe.Pointer) unsafe.Pointer
+	_sec_trust_create                                          func(unsafe.Pointer) unsafe.Pointer
 )
 
 // @function AuthorizationCopyInfo Returns sideband information (e.g. access credentials) obtained from a call to AuthorizationCreate.  The format of this data depends of the tag specified. @param authorization (input) The authorization object on which this operation is performed. @param tag (input/optional) An optional string tag specifing which sideband information should be returned.  When NULL is specified all available information is returned. @param info (output) A pointer to a newly allocated AuthorizationInfoSet in which the requested sideband infomation is returned (info should be deallocated by calling AuthorizationFreeItemSet() when it is no longer needed). @result errAuthorizationSuccess 0 No error. errAuthorizationInvalidRef -60002 The authorization parameter is invalid. errAuthorizationInvalidTag -60003 The tag parameter is invalid. errAuthorizationInvalidPointer -60004 The info parameter is invalid.
@@ -4349,4 +4349,3 @@ func SecTrustCopyRef(trust unsafe.Pointer) unsafe.Pointer {
 func SecTrustCreate(trust unsafe.Pointer) unsafe.Pointer {
 	return _sec_trust_create(trust)
 }
-

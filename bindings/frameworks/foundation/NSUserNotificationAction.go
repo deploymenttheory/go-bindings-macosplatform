@@ -16,10 +16,10 @@ type NSUserNotificationAction struct {
 }
 
 var (
-	_clsNSUserNotificationAction = _objcClass("NSUserNotificationAction")
+	_clsNSUserNotificationAction                          = _objcClass("NSUserNotificationAction")
 	_nSUserNotificationActionSelActionWithIdentifierTitle = objc.RegisterName("actionWithIdentifier:title:")
-	_nSUserNotificationActionSelIdentifier = objc.RegisterName("identifier")
-	_nSUserNotificationActionSelTitle = objc.RegisterName("title")
+	_nSUserNotificationActionSelIdentifier                = objc.RegisterName("identifier")
+	_nSUserNotificationActionSelTitle                     = objc.RegisterName("title")
 )
 
 func NSUserNotificationActionFromID(id objc.ID) *NSUserNotificationAction {
@@ -35,19 +35,24 @@ func NSUserNotificationActionFromID(id objc.ID) *NSUserNotificationAction {
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
 func NSUserNotificationActionActionWithIdentifierTitle(identifier *NSString, title *NSString) *NSUserNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUserNotificationAction), _nSUserNotificationActionSelActionWithIdentifierTitle, identifier.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserNotificationActionFromID(_ret)
 }
 
 func (o *NSUserNotificationAction) Identifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationActionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSUserNotificationAction) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserNotificationActionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

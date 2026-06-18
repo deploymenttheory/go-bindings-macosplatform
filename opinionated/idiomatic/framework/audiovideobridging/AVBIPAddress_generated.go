@@ -133,4 +133,3 @@ type IPAddressable interface {
 }
 
 var _ IPAddressable = (*IPAddress)(nil)
-

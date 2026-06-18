@@ -16,10 +16,10 @@ type NEFilterRule struct {
 }
 
 var (
-	_clsNEFilterRule = _objcClass("NEFilterRule")
+	_clsNEFilterRule                          = _objcClass("NEFilterRule")
 	_nEFilterRuleSelInitWithNetworkRuleAction = objc.RegisterName("initWithNetworkRule:action:")
-	_nEFilterRuleSelNetworkRule = objc.RegisterName("networkRule")
-	_nEFilterRuleSelAction = objc.RegisterName("action")
+	_nEFilterRuleSelNetworkRule               = objc.RegisterName("networkRule")
+	_nEFilterRuleSelAction                    = objc.RegisterName("action")
 )
 
 func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
@@ -35,14 +35,18 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 // @method initWithNetworkRule:action: @discussion Initialize a newly-allocated NEFilterRule object @param networkRule A NENetworkRule object that defines the network traffic characteristics that this rule matches. @param action The action to take when this rule matches.
 func (o *NEFilterRule) InitWithNetworkRuleAction(networkRule *NENetworkRule, action NEFilterAction) *NEFilterRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterRuleSelInitWithNetworkRuleAction, networkRule.Ptr(), action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterRuleFromID(_ret)
 }
 
 // @property matchNetworkRule @discussion The NENetworkRule that defines the network traffic characteristics that this rule matches.
 func (o *NEFilterRule) NetworkRule() *NENetworkRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterRuleSelNetworkRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NENetworkRuleFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *NEFilterRule) Action() NEFilterAction {
 	_ret := objc.Send[NEFilterAction](o.Ptr(), _nEFilterRuleSelAction)
 	return _ret
 }
-

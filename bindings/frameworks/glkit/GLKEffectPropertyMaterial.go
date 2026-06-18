@@ -17,17 +17,17 @@ type GLKEffectPropertyMaterial struct {
 }
 
 var (
-	_clsGLKEffectPropertyMaterial = _objcClass("GLKEffectPropertyMaterial")
-	_gLKEffectPropertyMaterialSelAmbientColor = objc.RegisterName("ambientColor")
-	_gLKEffectPropertyMaterialSelSetAmbientColor = objc.RegisterName("setAmbientColor:")
-	_gLKEffectPropertyMaterialSelDiffuseColor = objc.RegisterName("diffuseColor")
-	_gLKEffectPropertyMaterialSelSetDiffuseColor = objc.RegisterName("setDiffuseColor:")
-	_gLKEffectPropertyMaterialSelSpecularColor = objc.RegisterName("specularColor")
+	_clsGLKEffectPropertyMaterial                 = _objcClass("GLKEffectPropertyMaterial")
+	_gLKEffectPropertyMaterialSelAmbientColor     = objc.RegisterName("ambientColor")
+	_gLKEffectPropertyMaterialSelSetAmbientColor  = objc.RegisterName("setAmbientColor:")
+	_gLKEffectPropertyMaterialSelDiffuseColor     = objc.RegisterName("diffuseColor")
+	_gLKEffectPropertyMaterialSelSetDiffuseColor  = objc.RegisterName("setDiffuseColor:")
+	_gLKEffectPropertyMaterialSelSpecularColor    = objc.RegisterName("specularColor")
 	_gLKEffectPropertyMaterialSelSetSpecularColor = objc.RegisterName("setSpecularColor:")
-	_gLKEffectPropertyMaterialSelEmissiveColor = objc.RegisterName("emissiveColor")
+	_gLKEffectPropertyMaterialSelEmissiveColor    = objc.RegisterName("emissiveColor")
 	_gLKEffectPropertyMaterialSelSetEmissiveColor = objc.RegisterName("setEmissiveColor:")
-	_gLKEffectPropertyMaterialSelShininess = objc.RegisterName("shininess")
-	_gLKEffectPropertyMaterialSelSetShininess = objc.RegisterName("setShininess:")
+	_gLKEffectPropertyMaterialSelShininess        = objc.RegisterName("shininess")
+	_gLKEffectPropertyMaterialSelSetShininess     = objc.RegisterName("setShininess:")
 )
 
 func GLKEffectPropertyMaterialFromID(id objc.ID) *GLKEffectPropertyMaterial {
@@ -84,4 +84,3 @@ func (o *GLKEffectPropertyMaterial) Shininess() float32 {
 func (o *GLKEffectPropertyMaterial) SetShininess(shininess float32) {
 	o.Ptr().Send(_gLKEffectPropertyMaterialSelSetShininess, shininess)
 }
-

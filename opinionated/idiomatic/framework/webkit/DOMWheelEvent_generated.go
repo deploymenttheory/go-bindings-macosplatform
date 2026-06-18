@@ -74,9 +74,13 @@ func (x *DOMWheelEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMMous
 
 func (x *DOMWheelEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent }
 
-func (x *DOMWheelEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject }
+func (x *DOMWheelEvent) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject
+}
 
-func (x *DOMWheelEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMWheelEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMWheelEventable is the interface implemented by [DOMWheelEvent], for mocking and DI.
 type DOMWheelEventable interface {
@@ -90,4 +94,3 @@ type DOMWheelEventable interface {
 }
 
 var _ DOMWheelEventable = (*DOMWheelEvent)(nil)
-

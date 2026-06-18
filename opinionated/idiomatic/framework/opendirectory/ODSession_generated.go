@@ -102,4 +102,3 @@ type Sessionable interface {
 }
 
 var _ Sessionable = (*Session)(nil)
-

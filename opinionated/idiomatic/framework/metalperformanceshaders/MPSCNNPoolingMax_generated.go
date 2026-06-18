@@ -109,9 +109,13 @@ func (x *CNNPoolingMax) WithLabel(label string) *CNNPoolingMax {
 
 func (x *CNNPoolingMax) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
-func (x *CNNPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
-func (x *CNNPoolingMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
+func (x *CNNPoolingMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel
+}
 
 // CNNPoolingMaxable is the interface implemented by [CNNPoolingMax], for mocking and DI.
 type CNNPoolingMaxable interface {
@@ -129,4 +133,3 @@ type CNNPoolingMaxable interface {
 }
 
 var _ CNNPoolingMaxable = (*CNNPoolingMax)(nil)
-

@@ -16,9 +16,9 @@ type LAEnvironmentMechanism struct {
 }
 
 var (
-	_clsLAEnvironmentMechanism = _objcClass("LAEnvironmentMechanism")
-	_lAEnvironmentMechanismSelIsUsable = objc.RegisterName("isUsable")
-	_lAEnvironmentMechanismSelLocalizedName = objc.RegisterName("localizedName")
+	_clsLAEnvironmentMechanism               = _objcClass("LAEnvironmentMechanism")
+	_lAEnvironmentMechanismSelIsUsable       = objc.RegisterName("isUsable")
+	_lAEnvironmentMechanismSelLocalizedName  = objc.RegisterName("localizedName")
 	_lAEnvironmentMechanismSelIconSystemName = objc.RegisterName("iconSystemName")
 )
 
@@ -41,14 +41,17 @@ func (o *LAEnvironmentMechanism) IsUsable() bool {
 // The localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
 func (o *LAEnvironmentMechanism) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentMechanismSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Name of the SF Symbol representing this authentication mechanism.
 func (o *LAEnvironmentMechanism) IconSystemName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentMechanismSelIconSystemName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

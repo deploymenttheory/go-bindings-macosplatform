@@ -16,37 +16,37 @@ type NSSound struct {
 }
 
 var (
-	_clsNSSound = _objcClass("NSSound")
-	_nSSoundSelSoundNamed = objc.RegisterName("soundNamed:")
-	_nSSoundSelInitWithContentsOfURLByReference = objc.RegisterName("initWithContentsOfURL:byReference:")
+	_clsNSSound                                  = _objcClass("NSSound")
+	_nSSoundSelSoundNamed                        = objc.RegisterName("soundNamed:")
+	_nSSoundSelInitWithContentsOfURLByReference  = objc.RegisterName("initWithContentsOfURL:byReference:")
 	_nSSoundSelInitWithContentsOfFileByReference = objc.RegisterName("initWithContentsOfFile:byReference:")
-	_nSSoundSelInitWithData = objc.RegisterName("initWithData:")
-	_nSSoundSelSetName = objc.RegisterName("setName:")
-	_nSSoundSelCanInitWithPasteboard = objc.RegisterName("canInitWithPasteboard:")
-	_nSSoundSelInitWithPasteboard = objc.RegisterName("initWithPasteboard:")
-	_nSSoundSelWriteToPasteboard = objc.RegisterName("writeToPasteboard:")
-	_nSSoundSelPlay = objc.RegisterName("play")
-	_nSSoundSelPause = objc.RegisterName("pause")
-	_nSSoundSelResume = objc.RegisterName("resume")
-	_nSSoundSelStop = objc.RegisterName("stop")
-	_nSSoundSelSetChannelMapping = objc.RegisterName("setChannelMapping:")
-	_nSSoundSelChannelMapping = objc.RegisterName("channelMapping")
-	_nSSoundSelName = objc.RegisterName("name")
-	_nSSoundSelSoundUnfilteredTypes = objc.RegisterName("soundUnfilteredTypes")
-	_nSSoundSelIsPlaying = objc.RegisterName("isPlaying")
-	_nSSoundSelDelegate = objc.RegisterName("delegate")
-	_nSSoundSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSoundSelDuration = objc.RegisterName("duration")
-	_nSSoundSelVolume = objc.RegisterName("volume")
-	_nSSoundSelSetVolume = objc.RegisterName("setVolume:")
-	_nSSoundSelCurrentTime = objc.RegisterName("currentTime")
-	_nSSoundSelSetCurrentTime = objc.RegisterName("setCurrentTime:")
-	_nSSoundSelLoops = objc.RegisterName("loops")
-	_nSSoundSelSetLoops = objc.RegisterName("setLoops:")
-	_nSSoundSelPlaybackDeviceIdentifier = objc.RegisterName("playbackDeviceIdentifier")
-	_nSSoundSelSetPlaybackDeviceIdentifier = objc.RegisterName("setPlaybackDeviceIdentifier:")
-	_nSSoundSelSoundUnfilteredFileTypes = objc.RegisterName("soundUnfilteredFileTypes")
-	_nSSoundSelSoundUnfilteredPasteboardTypes = objc.RegisterName("soundUnfilteredPasteboardTypes")
+	_nSSoundSelInitWithData                      = objc.RegisterName("initWithData:")
+	_nSSoundSelSetName                           = objc.RegisterName("setName:")
+	_nSSoundSelCanInitWithPasteboard             = objc.RegisterName("canInitWithPasteboard:")
+	_nSSoundSelInitWithPasteboard                = objc.RegisterName("initWithPasteboard:")
+	_nSSoundSelWriteToPasteboard                 = objc.RegisterName("writeToPasteboard:")
+	_nSSoundSelPlay                              = objc.RegisterName("play")
+	_nSSoundSelPause                             = objc.RegisterName("pause")
+	_nSSoundSelResume                            = objc.RegisterName("resume")
+	_nSSoundSelStop                              = objc.RegisterName("stop")
+	_nSSoundSelSetChannelMapping                 = objc.RegisterName("setChannelMapping:")
+	_nSSoundSelChannelMapping                    = objc.RegisterName("channelMapping")
+	_nSSoundSelName                              = objc.RegisterName("name")
+	_nSSoundSelSoundUnfilteredTypes              = objc.RegisterName("soundUnfilteredTypes")
+	_nSSoundSelIsPlaying                         = objc.RegisterName("isPlaying")
+	_nSSoundSelDelegate                          = objc.RegisterName("delegate")
+	_nSSoundSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_nSSoundSelDuration                          = objc.RegisterName("duration")
+	_nSSoundSelVolume                            = objc.RegisterName("volume")
+	_nSSoundSelSetVolume                         = objc.RegisterName("setVolume:")
+	_nSSoundSelCurrentTime                       = objc.RegisterName("currentTime")
+	_nSSoundSelSetCurrentTime                    = objc.RegisterName("setCurrentTime:")
+	_nSSoundSelLoops                             = objc.RegisterName("loops")
+	_nSSoundSelSetLoops                          = objc.RegisterName("setLoops:")
+	_nSSoundSelPlaybackDeviceIdentifier          = objc.RegisterName("playbackDeviceIdentifier")
+	_nSSoundSelSetPlaybackDeviceIdentifier       = objc.RegisterName("setPlaybackDeviceIdentifier:")
+	_nSSoundSelSoundUnfilteredFileTypes          = objc.RegisterName("soundUnfilteredFileTypes")
+	_nSSoundSelSoundUnfilteredPasteboardTypes    = objc.RegisterName("soundUnfilteredPasteboardTypes")
 )
 
 func NSSoundFromID(id objc.ID) *NSSound {
@@ -61,25 +61,33 @@ func NSSoundFromID(id objc.ID) *NSSound {
 
 func NSSoundSoundNamed(name *foundation.NSString) *NSSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSound), _nSSoundSelSoundNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
 func (o *NSSound) InitWithContentsOfURLByReference(url *foundation.NSURL, byRef bool) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithContentsOfURLByReference, url.Ptr(), byRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
 func (o *NSSound) InitWithContentsOfFileByReference(path *foundation.NSString, byRef bool) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithContentsOfFileByReference, path.Ptr(), byRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
 func (o *NSSound) InitWithData(data *foundation.NSData) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func NSSoundCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 
 func (o *NSSound) InitWithPasteboard(pasteboard *NSPasteboard) *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelInitWithPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
@@ -136,7 +146,9 @@ func (o *NSSound) ChannelMapping() *foundation.NSArray[objc.ID] {
 
 func (o *NSSound) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -193,7 +205,9 @@ func (o *NSSound) SetLoops(loops bool) {
 
 func (o *NSSound) PlaybackDeviceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSoundSelPlaybackDeviceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -212,4 +226,3 @@ func NSSoundSoundUnfilteredPasteboardTypes() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](objc.ID(_clsNSSound), _nSSoundSelSoundUnfilteredPasteboardTypes)
 	return _ret
 }
-

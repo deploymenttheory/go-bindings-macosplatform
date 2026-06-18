@@ -133,4 +133,3 @@ type ContactFetchRequestable interface {
 }
 
 var _ ContactFetchRequestable = (*ContactFetchRequest)(nil)
-

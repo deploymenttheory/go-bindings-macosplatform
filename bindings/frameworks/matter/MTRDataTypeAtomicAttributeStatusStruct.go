@@ -16,11 +16,11 @@ type MTRDataTypeAtomicAttributeStatusStruct struct {
 }
 
 var (
-	_clsMTRDataTypeAtomicAttributeStatusStruct = _objcClass("MTRDataTypeAtomicAttributeStatusStruct")
-	_mTRDataTypeAtomicAttributeStatusStructSelAttributeID = objc.RegisterName("attributeID")
+	_clsMTRDataTypeAtomicAttributeStatusStruct               = _objcClass("MTRDataTypeAtomicAttributeStatusStruct")
+	_mTRDataTypeAtomicAttributeStatusStructSelAttributeID    = objc.RegisterName("attributeID")
 	_mTRDataTypeAtomicAttributeStatusStructSelSetAttributeID = objc.RegisterName("setAttributeID:")
-	_mTRDataTypeAtomicAttributeStatusStructSelStatusCode = objc.RegisterName("statusCode")
-	_mTRDataTypeAtomicAttributeStatusStructSelSetStatusCode = objc.RegisterName("setStatusCode:")
+	_mTRDataTypeAtomicAttributeStatusStructSelStatusCode     = objc.RegisterName("statusCode")
+	_mTRDataTypeAtomicAttributeStatusStructSelSetStatusCode  = objc.RegisterName("setStatusCode:")
 )
 
 func MTRDataTypeAtomicAttributeStatusStructFromID(id objc.ID) *MTRDataTypeAtomicAttributeStatusStruct {
@@ -35,7 +35,9 @@ func MTRDataTypeAtomicAttributeStatusStructFromID(id objc.ID) *MTRDataTypeAtomic
 
 func (o *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDataTypeAtomicAttributeStatusStructSelAttributeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRDataTypeAtomicAttributeStatusStruct) SetAttributeID(attributeID *fou
 
 func (o *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDataTypeAtomicAttributeStatusStructSelStatusCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDataTypeAtomicAttributeStatusStruct) SetStatusCode(statusCode *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDataTypeAtomicAttributeStatusStructSelSetStatusCode, statusCode.Ptr())
 }
-

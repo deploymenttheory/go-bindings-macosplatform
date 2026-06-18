@@ -79,7 +79,9 @@ func (x *CaptureAudioPreviewOutput) SetVolume(volume float32) {
 	x.inner.SetVolume(volume)
 }
 
-func (x *CaptureAudioPreviewOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+func (x *CaptureAudioPreviewOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureOutput
+}
 
 // CaptureAudioPreviewOutputable is the interface implemented by [CaptureAudioPreviewOutput], for mocking and DI.
 type CaptureAudioPreviewOutputable interface {
@@ -94,4 +96,3 @@ type CaptureAudioPreviewOutputable interface {
 }
 
 var _ CaptureAudioPreviewOutputable = (*CaptureAudioPreviewOutput)(nil)
-

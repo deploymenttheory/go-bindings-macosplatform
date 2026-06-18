@@ -116,4 +116,3 @@ type Rendererable interface {
 }
 
 var _ Rendererable = (*Renderer)(nil)
-

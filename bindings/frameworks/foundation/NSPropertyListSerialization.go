@@ -17,13 +17,13 @@ type NSPropertyListSerialization struct {
 }
 
 var (
-	_clsNSPropertyListSerialization = _objcClass("NSPropertyListSerialization")
-	_nSPropertyListSerializationSelPropertyListIsValidForFormat = objc.RegisterName("propertyList:isValidForFormat:")
-	_nSPropertyListSerializationSelDataWithPropertyListFormatOptionsError = objc.RegisterName("dataWithPropertyList:format:options:error:")
-	_nSPropertyListSerializationSelWritePropertyListToStreamFormatOptionsError = objc.RegisterName("writePropertyList:toStream:format:options:error:")
-	_nSPropertyListSerializationSelPropertyListWithDataOptionsFormatError = objc.RegisterName("propertyListWithData:options:format:error:")
-	_nSPropertyListSerializationSelPropertyListWithStreamOptionsFormatError = objc.RegisterName("propertyListWithStream:options:format:error:")
-	_nSPropertyListSerializationSelDataFromPropertyListFormatErrorDescription = objc.RegisterName("dataFromPropertyList:format:errorDescription:")
+	_clsNSPropertyListSerialization                                                           = _objcClass("NSPropertyListSerialization")
+	_nSPropertyListSerializationSelPropertyListIsValidForFormat                               = objc.RegisterName("propertyList:isValidForFormat:")
+	_nSPropertyListSerializationSelDataWithPropertyListFormatOptionsError                     = objc.RegisterName("dataWithPropertyList:format:options:error:")
+	_nSPropertyListSerializationSelWritePropertyListToStreamFormatOptionsError                = objc.RegisterName("writePropertyList:toStream:format:options:error:")
+	_nSPropertyListSerializationSelPropertyListWithDataOptionsFormatError                     = objc.RegisterName("propertyListWithData:options:format:error:")
+	_nSPropertyListSerializationSelPropertyListWithStreamOptionsFormatError                   = objc.RegisterName("propertyListWithStream:options:format:error:")
+	_nSPropertyListSerializationSelDataFromPropertyListFormatErrorDescription                 = objc.RegisterName("dataFromPropertyList:format:errorDescription:")
 	_nSPropertyListSerializationSelPropertyListFromDataMutabilityOptionFormatErrorDescription = objc.RegisterName("propertyListFromData:mutabilityOption:format:errorDescription:")
 )
 
@@ -45,7 +45,9 @@ func NSPropertyListSerializationPropertyListIsValidForFormat(plist objc.ID, form
 func NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist objc.ID, format NSPropertyListFormat, opt uint) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelDataWithPropertyListFormatOptionsError, plist, format, opt, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -82,7 +84,9 @@ func NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream 
 // Deprecated: Use dataWithPropertyList:format:options:error: instead.
 func NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist objc.ID, format NSPropertyListFormat, errorString *NSString) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelDataFromPropertyListFormatErrorDescription, plist, format, errorString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -91,4 +95,3 @@ func NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorD
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPropertyListSerialization), _nSPropertyListSerializationSelPropertyListFromDataMutabilityOptionFormatErrorDescription, data.Ptr(), opt, format, errorString.Ptr())
 	return _ret
 }
-

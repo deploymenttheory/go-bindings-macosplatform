@@ -16,7 +16,7 @@ type HKQueryAnchor struct {
 }
 
 var (
-	_clsHKQueryAnchor = _objcClass("HKQueryAnchor")
+	_clsHKQueryAnchor                = _objcClass("HKQueryAnchor")
 	_hKQueryAnchorSelAnchorFromValue = objc.RegisterName("anchorFromValue:")
 )
 
@@ -33,7 +33,8 @@ func HKQueryAnchorFromID(id objc.ID) *HKQueryAnchor {
 // @method        anchorFromValue: @discussion    Creates an HKQueryAnchor with an integer anchor which was previously obtained from an HKAnchoredObjectQuery prior to iOS 9.0.
 func HKQueryAnchorAnchorFromValue(value uint) *HKQueryAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKQueryAnchor), _hKQueryAnchorSelAnchorFromValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQueryAnchorFromID(_ret)
 }
-

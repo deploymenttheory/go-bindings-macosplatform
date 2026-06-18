@@ -15,17 +15,17 @@ type MDLAnimatedScalarArray struct {
 }
 
 var (
-	_clsMDLAnimatedScalarArray = _objcClass("MDLAnimatedScalarArray")
-	_mDLAnimatedScalarArraySelInitWithElementCount = objc.RegisterName("initWithElementCount:")
-	_mDLAnimatedScalarArraySelSetFloatArrayCountAtTime = objc.RegisterName("setFloatArray:count:atTime:")
-	_mDLAnimatedScalarArraySelSetDoubleArrayCountAtTime = objc.RegisterName("setDoubleArray:count:atTime:")
-	_mDLAnimatedScalarArraySelGetFloatArrayMaxCountAtTime = objc.RegisterName("getFloatArray:maxCount:atTime:")
-	_mDLAnimatedScalarArraySelGetDoubleArrayMaxCountAtTime = objc.RegisterName("getDoubleArray:maxCount:atTime:")
-	_mDLAnimatedScalarArraySelResetWithFloatArrayCountAtTimesCount = objc.RegisterName("resetWithFloatArray:count:atTimes:count:")
+	_clsMDLAnimatedScalarArray                                      = _objcClass("MDLAnimatedScalarArray")
+	_mDLAnimatedScalarArraySelInitWithElementCount                  = objc.RegisterName("initWithElementCount:")
+	_mDLAnimatedScalarArraySelSetFloatArrayCountAtTime              = objc.RegisterName("setFloatArray:count:atTime:")
+	_mDLAnimatedScalarArraySelSetDoubleArrayCountAtTime             = objc.RegisterName("setDoubleArray:count:atTime:")
+	_mDLAnimatedScalarArraySelGetFloatArrayMaxCountAtTime           = objc.RegisterName("getFloatArray:maxCount:atTime:")
+	_mDLAnimatedScalarArraySelGetDoubleArrayMaxCountAtTime          = objc.RegisterName("getDoubleArray:maxCount:atTime:")
+	_mDLAnimatedScalarArraySelResetWithFloatArrayCountAtTimesCount  = objc.RegisterName("resetWithFloatArray:count:atTimes:count:")
 	_mDLAnimatedScalarArraySelResetWithDoubleArrayCountAtTimesCount = objc.RegisterName("resetWithDoubleArray:count:atTimes:count:")
-	_mDLAnimatedScalarArraySelGetFloatArrayMaxCount = objc.RegisterName("getFloatArray:maxCount:")
-	_mDLAnimatedScalarArraySelGetDoubleArrayMaxCount = objc.RegisterName("getDoubleArray:maxCount:")
-	_mDLAnimatedScalarArraySelElementCount = objc.RegisterName("elementCount")
+	_mDLAnimatedScalarArraySelGetFloatArrayMaxCount                 = objc.RegisterName("getFloatArray:maxCount:")
+	_mDLAnimatedScalarArraySelGetDoubleArrayMaxCount                = objc.RegisterName("getDoubleArray:maxCount:")
+	_mDLAnimatedScalarArraySelElementCount                          = objc.RegisterName("elementCount")
 )
 
 func MDLAnimatedScalarArrayFromID(id objc.ID) *MDLAnimatedScalarArray {
@@ -83,4 +83,3 @@ func (o *MDLAnimatedScalarArray) ElementCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedScalarArraySelElementCount)
 	return _ret
 }
-

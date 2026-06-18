@@ -123,7 +123,9 @@ func (x *PersonNameComponentsFormatter) SetLocale(locale *raw.NSLocale) {
 
 func (x *PersonNameComponentsFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
-func (x *PersonNameComponentsFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+func (x *PersonNameComponentsFormatter) asObject() *raw.NSObject {
+	return &x.inner.NSFormatter.NSObject
+}
 
 // PersonNameComponentsFormatterable is the interface implemented by [PersonNameComponentsFormatter], for mocking and DI.
 type PersonNameComponentsFormatterable interface {
@@ -144,4 +146,3 @@ type PersonNameComponentsFormatterable interface {
 }
 
 var _ PersonNameComponentsFormatterable = (*PersonNameComponentsFormatter)(nil)
-

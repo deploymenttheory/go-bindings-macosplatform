@@ -16,7 +16,9 @@ type AccelerationStructureCurveGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureCurveGeometryDescriptor].
-func (x *AccelerationStructureCurveGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureCurveGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureCurveGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureCurveGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -356,7 +358,9 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveEndCaps(curveEndC
 	x.inner.SetCurveEndCaps(curveEndCaps)
 }
 
-func (x *AccelerationStructureCurveGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+func (x *AccelerationStructureCurveGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return &x.inner.MTLAccelerationStructureGeometryDescriptor
+}
 
 // AccelerationStructureCurveGeometryDescriptorable is the interface implemented by [AccelerationStructureCurveGeometryDescriptor], for mocking and DI.
 type AccelerationStructureCurveGeometryDescriptorable interface {
@@ -423,4 +427,3 @@ type AccelerationStructureCurveGeometryDescriptorable interface {
 }
 
 var _ AccelerationStructureCurveGeometryDescriptorable = (*AccelerationStructureCurveGeometryDescriptor)(nil)
-

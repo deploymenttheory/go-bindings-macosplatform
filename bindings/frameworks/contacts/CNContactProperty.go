@@ -16,12 +16,12 @@ type CNContactProperty struct {
 }
 
 var (
-	_clsCNContactProperty = _objcClass("CNContactProperty")
-	_cNContactPropertySelContact = objc.RegisterName("contact")
-	_cNContactPropertySelKey = objc.RegisterName("key")
-	_cNContactPropertySelValue = objc.RegisterName("value")
+	_clsCNContactProperty           = _objcClass("CNContactProperty")
+	_cNContactPropertySelContact    = objc.RegisterName("contact")
+	_cNContactPropertySelKey        = objc.RegisterName("key")
+	_cNContactPropertySelValue      = objc.RegisterName("value")
 	_cNContactPropertySelIdentifier = objc.RegisterName("identifier")
-	_cNContactPropertySelLabel = objc.RegisterName("label")
+	_cNContactPropertySelLabel      = objc.RegisterName("label")
 )
 
 func CNContactPropertyFromID(id objc.ID) *CNContactProperty {
@@ -36,14 +36,18 @@ func CNContactPropertyFromID(id objc.ID) *CNContactProperty {
 
 func (o *CNContactProperty) Contact() *CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactPropertySelContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactFromID(_ret)
 }
 
 // @abstract The key of the contact property, as defined in CNContact.h.
 func (o *CNContactProperty) Key() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactPropertySelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,14 +60,17 @@ func (o *CNContactProperty) Value() objc.ID {
 // @abstract The identifier of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (o *CNContactProperty) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactPropertySelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The label of the labeled value if the property is an array of labeled values, otherwise is nil.
 func (o *CNContactProperty) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactPropertySelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

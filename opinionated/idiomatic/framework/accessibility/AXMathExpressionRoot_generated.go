@@ -58,7 +58,9 @@ func (x *MathExpressionRoot) RootIndexExpression() *MathExpression {
 	return &MathExpression{inner: _r}
 }
 
-func (x *MathExpressionRoot) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionRoot) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionRootable is the interface implemented by [MathExpressionRoot], for mocking and DI.
 type MathExpressionRootable interface {
@@ -68,4 +70,3 @@ type MathExpressionRootable interface {
 }
 
 var _ MathExpressionRootable = (*MathExpressionRoot)(nil)
-

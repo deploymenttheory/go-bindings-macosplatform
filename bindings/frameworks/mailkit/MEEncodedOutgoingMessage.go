@@ -16,11 +16,11 @@ type MEEncodedOutgoingMessage struct {
 }
 
 var (
-	_clsMEEncodedOutgoingMessage = _objcClass("MEEncodedOutgoingMessage")
+	_clsMEEncodedOutgoingMessage                                   = _objcClass("MEEncodedOutgoingMessage")
 	_mEEncodedOutgoingMessageSelInitWithRawDataIsSignedIsEncrypted = objc.RegisterName("initWithRawData:isSigned:isEncrypted:")
-	_mEEncodedOutgoingMessageSelRawData = objc.RegisterName("rawData")
-	_mEEncodedOutgoingMessageSelIsSigned = objc.RegisterName("isSigned")
-	_mEEncodedOutgoingMessageSelIsEncrypted = objc.RegisterName("isEncrypted")
+	_mEEncodedOutgoingMessageSelRawData                            = objc.RegisterName("rawData")
+	_mEEncodedOutgoingMessageSelIsSigned                           = objc.RegisterName("isSigned")
+	_mEEncodedOutgoingMessageSelIsEncrypted                        = objc.RegisterName("isEncrypted")
 )
 
 func MEEncodedOutgoingMessageFromID(id objc.ID) *MEEncodedOutgoingMessage {
@@ -35,14 +35,18 @@ func MEEncodedOutgoingMessageFromID(id objc.ID) *MEEncodedOutgoingMessage {
 
 func (o *MEEncodedOutgoingMessage) InitWithRawDataIsSignedIsEncrypted(rawData *foundation.NSData, isSigned bool, isEncrypted bool) *MEEncodedOutgoingMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEncodedOutgoingMessageSelInitWithRawDataIsSignedIsEncrypted, rawData.Ptr(), isSigned, isEncrypted)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEEncodedOutgoingMessageFromID(_ret)
 }
 
 // @brief The full encoded RFC822 message including headers and body.
 func (o *MEEncodedOutgoingMessage) RawData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEncodedOutgoingMessageSelRawData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *MEEncodedOutgoingMessage) IsEncrypted() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mEEncodedOutgoingMessageSelIsEncrypted)
 	return _ret
 }
-

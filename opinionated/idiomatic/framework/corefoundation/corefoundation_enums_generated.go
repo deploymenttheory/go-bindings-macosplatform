@@ -13,11 +13,11 @@ import (
 type CFCalendarUnit int64
 
 const (
-	KCFCalendarUnitEra CFCalendarUnit = 2
-	KCFCalendarUnitYear CFCalendarUnit = 4
-	KCFCalendarUnitMonth CFCalendarUnit = 8
-	KCFCalendarUnitDay CFCalendarUnit = 16
-	KCFCalendarUnitHour CFCalendarUnit = 32
+	KCFCalendarUnitEra    CFCalendarUnit = 2
+	KCFCalendarUnitYear   CFCalendarUnit = 4
+	KCFCalendarUnitMonth  CFCalendarUnit = 8
+	KCFCalendarUnitDay    CFCalendarUnit = 16
+	KCFCalendarUnitHour   CFCalendarUnit = 32
 	KCFCalendarUnitMinute CFCalendarUnit = 64
 	KCFCalendarUnitSecond CFCalendarUnit = 128
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
@@ -25,12 +25,12 @@ const (
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
 	KCFCalendarUnitWeekday CFCalendarUnit = 512
 	// Deprecated: Use kCFCalendarUnitWeekOfYear or kCFCalendarUnitWeekOfMonth instead
-	KCFCalendarUnitWeekdayOrdinal CFCalendarUnit = 1024
-	KCFCalendarUnitQuarter CFCalendarUnit = 2048
-	KCFCalendarUnitWeekOfMonth CFCalendarUnit = 4096
-	KCFCalendarUnitWeekOfYear CFCalendarUnit = 8192
+	KCFCalendarUnitWeekdayOrdinal    CFCalendarUnit = 1024
+	KCFCalendarUnitQuarter           CFCalendarUnit = 2048
+	KCFCalendarUnitWeekOfMonth       CFCalendarUnit = 4096
+	KCFCalendarUnitWeekOfYear        CFCalendarUnit = 8192
 	KCFCalendarUnitYearForWeekOfYear CFCalendarUnit = 16384
-	KCFCalendarUnitDayOfYear CFCalendarUnit = 65536
+	KCFCalendarUnitDayOfYear         CFCalendarUnit = 65536
 )
 
 func (e CFCalendarUnit) String() string {
@@ -89,21 +89,21 @@ func (e CFCalendarUnit) String() string {
 type CFCharacterSetPredefinedSet int64
 
 const (
-	KCFCharacterSetControl CFCharacterSetPredefinedSet = 1
-	KCFCharacterSetWhitespace CFCharacterSetPredefinedSet = 2
+	KCFCharacterSetControl              CFCharacterSetPredefinedSet = 1
+	KCFCharacterSetWhitespace           CFCharacterSetPredefinedSet = 2
 	KCFCharacterSetWhitespaceAndNewline CFCharacterSetPredefinedSet = 3
-	KCFCharacterSetDecimalDigit CFCharacterSetPredefinedSet = 4
-	KCFCharacterSetLetter CFCharacterSetPredefinedSet = 5
-	KCFCharacterSetLowercaseLetter CFCharacterSetPredefinedSet = 6
-	KCFCharacterSetUppercaseLetter CFCharacterSetPredefinedSet = 7
-	KCFCharacterSetNonBase CFCharacterSetPredefinedSet = 8
-	KCFCharacterSetDecomposable CFCharacterSetPredefinedSet = 9
-	KCFCharacterSetAlphaNumeric CFCharacterSetPredefinedSet = 10
-	KCFCharacterSetPunctuation CFCharacterSetPredefinedSet = 11
-	KCFCharacterSetCapitalizedLetter CFCharacterSetPredefinedSet = 13
-	KCFCharacterSetSymbol CFCharacterSetPredefinedSet = 14
-	KCFCharacterSetNewline CFCharacterSetPredefinedSet = 15
-	KCFCharacterSetIllegal CFCharacterSetPredefinedSet = 12
+	KCFCharacterSetDecimalDigit         CFCharacterSetPredefinedSet = 4
+	KCFCharacterSetLetter               CFCharacterSetPredefinedSet = 5
+	KCFCharacterSetLowercaseLetter      CFCharacterSetPredefinedSet = 6
+	KCFCharacterSetUppercaseLetter      CFCharacterSetPredefinedSet = 7
+	KCFCharacterSetNonBase              CFCharacterSetPredefinedSet = 8
+	KCFCharacterSetDecomposable         CFCharacterSetPredefinedSet = 9
+	KCFCharacterSetAlphaNumeric         CFCharacterSetPredefinedSet = 10
+	KCFCharacterSetPunctuation          CFCharacterSetPredefinedSet = 11
+	KCFCharacterSetCapitalizedLetter    CFCharacterSetPredefinedSet = 13
+	KCFCharacterSetSymbol               CFCharacterSetPredefinedSet = 14
+	KCFCharacterSetNewline              CFCharacterSetPredefinedSet = 15
+	KCFCharacterSetIllegal              CFCharacterSetPredefinedSet = 12
 )
 
 func (e CFCharacterSetPredefinedSet) String() string {
@@ -146,8 +146,8 @@ func (e CFCharacterSetPredefinedSet) String() string {
 type CFComparisonResult int64
 
 const (
-	KCFCompareLessThan CFComparisonResult = -1
-	KCFCompareEqualTo CFComparisonResult = 0
+	KCFCompareLessThan    CFComparisonResult = -1
+	KCFCompareEqualTo     CFComparisonResult = 0
 	KCFCompareGreaterThan CFComparisonResult = 1
 )
 
@@ -169,7 +169,7 @@ type CFDataSearchFlags int64
 
 const (
 	KCFDataSearchBackwards CFDataSearchFlags = 1
-	KCFDataSearchAnchored CFDataSearchFlags = 2
+	KCFDataSearchAnchored  CFDataSearchFlags = 2
 )
 
 func (e CFDataSearchFlags) String() string {
@@ -189,11 +189,11 @@ func (e CFDataSearchFlags) String() string {
 type CFDateFormatterStyle int64
 
 const (
-	KCFDateFormatterNoStyle CFDateFormatterStyle = 0
-	KCFDateFormatterShortStyle CFDateFormatterStyle = 1
+	KCFDateFormatterNoStyle     CFDateFormatterStyle = 0
+	KCFDateFormatterShortStyle  CFDateFormatterStyle = 1
 	KCFDateFormatterMediumStyle CFDateFormatterStyle = 2
-	KCFDateFormatterLongStyle CFDateFormatterStyle = 3
-	KCFDateFormatterFullStyle CFDateFormatterStyle = 4
+	KCFDateFormatterLongStyle   CFDateFormatterStyle = 3
+	KCFDateFormatterFullStyle   CFDateFormatterStyle = 4
 )
 
 func (e CFDateFormatterStyle) String() string {
@@ -217,11 +217,11 @@ func (e CFDateFormatterStyle) String() string {
 type CFFileSecurityClearOptions int64
 
 const (
-	KCFFileSecurityClearOwner CFFileSecurityClearOptions = 1
-	KCFFileSecurityClearGroup CFFileSecurityClearOptions = 2
-	KCFFileSecurityClearMode CFFileSecurityClearOptions = 4
-	KCFFileSecurityClearOwnerUUID CFFileSecurityClearOptions = 8
-	KCFFileSecurityClearGroupUUID CFFileSecurityClearOptions = 16
+	KCFFileSecurityClearOwner             CFFileSecurityClearOptions = 1
+	KCFFileSecurityClearGroup             CFFileSecurityClearOptions = 2
+	KCFFileSecurityClearMode              CFFileSecurityClearOptions = 4
+	KCFFileSecurityClearOwnerUUID         CFFileSecurityClearOptions = 8
+	KCFFileSecurityClearGroupUUID         CFFileSecurityClearOptions = 16
 	KCFFileSecurityClearAccessControlList CFFileSecurityClearOptions = 32
 )
 
@@ -255,20 +255,20 @@ func (e CFFileSecurityClearOptions) String() string {
 type CFISO8601DateFormatOptions int64
 
 const (
-	KCFISO8601DateFormatWithYear CFISO8601DateFormatOptions = 1
-	KCFISO8601DateFormatWithMonth CFISO8601DateFormatOptions = 2
-	KCFISO8601DateFormatWithWeekOfYear CFISO8601DateFormatOptions = 4
-	KCFISO8601DateFormatWithDay CFISO8601DateFormatOptions = 16
-	KCFISO8601DateFormatWithTime CFISO8601DateFormatOptions = 32
-	KCFISO8601DateFormatWithTimeZone CFISO8601DateFormatOptions = 64
-	KCFISO8601DateFormatWithSpaceBetweenDateAndTime CFISO8601DateFormatOptions = 128
-	KCFISO8601DateFormatWithDashSeparatorInDate CFISO8601DateFormatOptions = 256
-	KCFISO8601DateFormatWithColonSeparatorInTime CFISO8601DateFormatOptions = 512
+	KCFISO8601DateFormatWithYear                     CFISO8601DateFormatOptions = 1
+	KCFISO8601DateFormatWithMonth                    CFISO8601DateFormatOptions = 2
+	KCFISO8601DateFormatWithWeekOfYear               CFISO8601DateFormatOptions = 4
+	KCFISO8601DateFormatWithDay                      CFISO8601DateFormatOptions = 16
+	KCFISO8601DateFormatWithTime                     CFISO8601DateFormatOptions = 32
+	KCFISO8601DateFormatWithTimeZone                 CFISO8601DateFormatOptions = 64
+	KCFISO8601DateFormatWithSpaceBetweenDateAndTime  CFISO8601DateFormatOptions = 128
+	KCFISO8601DateFormatWithDashSeparatorInDate      CFISO8601DateFormatOptions = 256
+	KCFISO8601DateFormatWithColonSeparatorInTime     CFISO8601DateFormatOptions = 512
 	KCFISO8601DateFormatWithColonSeparatorInTimeZone CFISO8601DateFormatOptions = 1024
-	KCFISO8601DateFormatWithFractionalSeconds CFISO8601DateFormatOptions = 2048
-	KCFISO8601DateFormatWithFullDate CFISO8601DateFormatOptions = 275
-	KCFISO8601DateFormatWithFullTime CFISO8601DateFormatOptions = 1632
-	KCFISO8601DateFormatWithInternetDateTime CFISO8601DateFormatOptions = 1907
+	KCFISO8601DateFormatWithFractionalSeconds        CFISO8601DateFormatOptions = 2048
+	KCFISO8601DateFormatWithFullDate                 CFISO8601DateFormatOptions = 275
+	KCFISO8601DateFormatWithFullTime                 CFISO8601DateFormatOptions = 1632
+	KCFISO8601DateFormatWithInternetDateTime         CFISO8601DateFormatOptions = 1907
 )
 
 func (e CFISO8601DateFormatOptions) String() string {
@@ -324,7 +324,7 @@ func (e CFISO8601DateFormatOptions) String() string {
 type CFLocaleLanguageDirection int64
 
 const (
-	KCFLocaleLanguageDirectionUnknown CFLocaleLanguageDirection = 0
+	KCFLocaleLanguageDirectionUnknown     CFLocaleLanguageDirection = 0
 	KCFLocaleLanguageDirectionLeftToRight CFLocaleLanguageDirection = 1
 	KCFLocaleLanguageDirectionRightToLeft CFLocaleLanguageDirection = 2
 	KCFLocaleLanguageDirectionTopToBottom CFLocaleLanguageDirection = 3
@@ -351,9 +351,9 @@ func (e CFLocaleLanguageDirection) String() string {
 type CFNotificationSuspensionBehavior int64
 
 const (
-	CFNotificationSuspensionBehaviorDrop CFNotificationSuspensionBehavior = 1
-	CFNotificationSuspensionBehaviorCoalesce CFNotificationSuspensionBehavior = 2
-	CFNotificationSuspensionBehaviorHold CFNotificationSuspensionBehavior = 3
+	CFNotificationSuspensionBehaviorDrop               CFNotificationSuspensionBehavior = 1
+	CFNotificationSuspensionBehaviorCoalesce           CFNotificationSuspensionBehavior = 2
+	CFNotificationSuspensionBehaviorHold               CFNotificationSuspensionBehavior = 3
 	CFNotificationSuspensionBehaviorDeliverImmediately CFNotificationSuspensionBehavior = 4
 )
 
@@ -375,15 +375,15 @@ func (e CFNotificationSuspensionBehavior) String() string {
 type CFNumberFormatterStyle int64
 
 const (
-	KCFNumberFormatterNoStyle CFNumberFormatterStyle = 0
-	KCFNumberFormatterDecimalStyle CFNumberFormatterStyle = 1
-	KCFNumberFormatterCurrencyStyle CFNumberFormatterStyle = 2
-	KCFNumberFormatterPercentStyle CFNumberFormatterStyle = 3
-	KCFNumberFormatterScientificStyle CFNumberFormatterStyle = 4
-	KCFNumberFormatterSpellOutStyle CFNumberFormatterStyle = 5
-	KCFNumberFormatterOrdinalStyle CFNumberFormatterStyle = 6
-	KCFNumberFormatterCurrencyISOCodeStyle CFNumberFormatterStyle = 8
-	KCFNumberFormatterCurrencyPluralStyle CFNumberFormatterStyle = 9
+	KCFNumberFormatterNoStyle                 CFNumberFormatterStyle = 0
+	KCFNumberFormatterDecimalStyle            CFNumberFormatterStyle = 1
+	KCFNumberFormatterCurrencyStyle           CFNumberFormatterStyle = 2
+	KCFNumberFormatterPercentStyle            CFNumberFormatterStyle = 3
+	KCFNumberFormatterScientificStyle         CFNumberFormatterStyle = 4
+	KCFNumberFormatterSpellOutStyle           CFNumberFormatterStyle = 5
+	KCFNumberFormatterOrdinalStyle            CFNumberFormatterStyle = 6
+	KCFNumberFormatterCurrencyISOCodeStyle    CFNumberFormatterStyle = 8
+	KCFNumberFormatterCurrencyPluralStyle     CFNumberFormatterStyle = 9
 	KCFNumberFormatterCurrencyAccountingStyle CFNumberFormatterStyle = 10
 )
 
@@ -417,23 +417,23 @@ func (e CFNumberFormatterStyle) String() string {
 type CFNumberType int64
 
 const (
-	KCFNumberSInt8Type CFNumberType = 1
-	KCFNumberSInt16Type CFNumberType = 2
-	KCFNumberSInt32Type CFNumberType = 3
-	KCFNumberSInt64Type CFNumberType = 4
-	KCFNumberFloat32Type CFNumberType = 5
-	KCFNumberFloat64Type CFNumberType = 6
-	KCFNumberCharType CFNumberType = 7
-	KCFNumberShortType CFNumberType = 8
-	KCFNumberIntType CFNumberType = 9
-	KCFNumberLongType CFNumberType = 10
-	KCFNumberLongLongType CFNumberType = 11
-	KCFNumberFloatType CFNumberType = 12
-	KCFNumberDoubleType CFNumberType = 13
-	KCFNumberCFIndexType CFNumberType = 14
+	KCFNumberSInt8Type     CFNumberType = 1
+	KCFNumberSInt16Type    CFNumberType = 2
+	KCFNumberSInt32Type    CFNumberType = 3
+	KCFNumberSInt64Type    CFNumberType = 4
+	KCFNumberFloat32Type   CFNumberType = 5
+	KCFNumberFloat64Type   CFNumberType = 6
+	KCFNumberCharType      CFNumberType = 7
+	KCFNumberShortType     CFNumberType = 8
+	KCFNumberIntType       CFNumberType = 9
+	KCFNumberLongType      CFNumberType = 10
+	KCFNumberLongLongType  CFNumberType = 11
+	KCFNumberFloatType     CFNumberType = 12
+	KCFNumberDoubleType    CFNumberType = 13
+	KCFNumberCFIndexType   CFNumberType = 14
 	KCFNumberNSIntegerType CFNumberType = 15
-	KCFNumberCGFloatType CFNumberType = 16
-	KCFNumberMaxType CFNumberType = 16
+	KCFNumberCGFloatType   CFNumberType = 16
+	KCFNumberMaxType       CFNumberType = 16
 )
 
 func (e CFNumberType) String() string {
@@ -478,8 +478,8 @@ func (e CFNumberType) String() string {
 type CFPropertyListFormat int64
 
 const (
-	KCFPropertyListOpenStepFormat CFPropertyListFormat = 1
-	KCFPropertyListXMLFormat_v1_0 CFPropertyListFormat = 100
+	KCFPropertyListOpenStepFormat    CFPropertyListFormat = 1
+	KCFPropertyListXMLFormat_v1_0    CFPropertyListFormat = 100
 	KCFPropertyListBinaryFormat_v1_0 CFPropertyListFormat = 200
 )
 
@@ -500,12 +500,12 @@ func (e CFPropertyListFormat) String() string {
 type CFRunLoopActivity int64
 
 const (
-	KCFRunLoopEntry CFRunLoopActivity = 1
-	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
+	KCFRunLoopEntry         CFRunLoopActivity = 1
+	KCFRunLoopBeforeTimers  CFRunLoopActivity = 2
 	KCFRunLoopBeforeSources CFRunLoopActivity = 4
 	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
-	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
-	KCFRunLoopExit CFRunLoopActivity = 128
+	KCFRunLoopAfterWaiting  CFRunLoopActivity = 64
+	KCFRunLoopExit          CFRunLoopActivity = 128
 	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
 )
 
@@ -541,9 +541,9 @@ func (e CFRunLoopActivity) String() string {
 type CFRunLoopRunResult int64
 
 const (
-	KCFRunLoopRunFinished CFRunLoopRunResult = 1
-	KCFRunLoopRunStopped CFRunLoopRunResult = 2
-	KCFRunLoopRunTimedOut CFRunLoopRunResult = 3
+	KCFRunLoopRunFinished      CFRunLoopRunResult = 1
+	KCFRunLoopRunStopped       CFRunLoopRunResult = 2
+	KCFRunLoopRunTimedOut      CFRunLoopRunResult = 3
 	KCFRunLoopRunHandledSource CFRunLoopRunResult = 4
 )
 
@@ -566,7 +566,7 @@ type CFSocketError int64
 
 const (
 	KCFSocketSuccess CFSocketError = 0
-	KCFSocketError CFSocketError = -1
+	KCFSocketError   CFSocketError = -1
 	KCFSocketTimeout CFSocketError = -2
 )
 
@@ -588,12 +588,12 @@ type CFStreamStatus int64
 const (
 	KCFStreamStatusNotOpen CFStreamStatus = 0
 	KCFStreamStatusOpening CFStreamStatus = 1
-	KCFStreamStatusOpen CFStreamStatus = 2
+	KCFStreamStatusOpen    CFStreamStatus = 2
 	KCFStreamStatusReading CFStreamStatus = 3
 	KCFStreamStatusWriting CFStreamStatus = 4
-	KCFStreamStatusAtEnd CFStreamStatus = 5
-	KCFStreamStatusClosed CFStreamStatus = 6
-	KCFStreamStatusError CFStreamStatus = 7
+	KCFStreamStatusAtEnd   CFStreamStatus = 5
+	KCFStreamStatusClosed  CFStreamStatus = 6
+	KCFStreamStatusError   CFStreamStatus = 7
 )
 
 func (e CFStreamStatus) String() string {
@@ -623,15 +623,15 @@ func (e CFStreamStatus) String() string {
 type CFStringCompareFlags int64
 
 const (
-	KCFCompareCaseInsensitive CFStringCompareFlags = 1
-	KCFCompareBackwards CFStringCompareFlags = 4
-	KCFCompareAnchored CFStringCompareFlags = 8
-	KCFCompareNonliteral CFStringCompareFlags = 16
-	KCFCompareLocalized CFStringCompareFlags = 32
-	KCFCompareNumerically CFStringCompareFlags = 64
+	KCFCompareCaseInsensitive      CFStringCompareFlags = 1
+	KCFCompareBackwards            CFStringCompareFlags = 4
+	KCFCompareAnchored             CFStringCompareFlags = 8
+	KCFCompareNonliteral           CFStringCompareFlags = 16
+	KCFCompareLocalized            CFStringCompareFlags = 32
+	KCFCompareNumerically          CFStringCompareFlags = 64
 	KCFCompareDiacriticInsensitive CFStringCompareFlags = 128
-	KCFCompareWidthInsensitive CFStringCompareFlags = 256
-	KCFCompareForcedOrdering CFStringCompareFlags = 512
+	KCFCompareWidthInsensitive     CFStringCompareFlags = 256
+	KCFCompareForcedOrdering       CFStringCompareFlags = 512
 )
 
 func (e CFStringCompareFlags) String() string {
@@ -672,9 +672,9 @@ func (e CFStringCompareFlags) String() string {
 type CFStringNormalizationForm int64
 
 const (
-	KCFStringNormalizationFormD CFStringNormalizationForm = 0
+	KCFStringNormalizationFormD  CFStringNormalizationForm = 0
 	KCFStringNormalizationFormKD CFStringNormalizationForm = 1
-	KCFStringNormalizationFormC CFStringNormalizationForm = 2
+	KCFStringNormalizationFormC  CFStringNormalizationForm = 2
 	KCFStringNormalizationFormKC CFStringNormalizationForm = 3
 )
 
@@ -697,15 +697,15 @@ func (e CFStringNormalizationForm) String() string {
 type CFStringTokenizerTokenType int64
 
 const (
-	KCFStringTokenizerTokenNone CFStringTokenizerTokenType = 0
+	KCFStringTokenizerTokenNone   CFStringTokenizerTokenType = 0
 	KCFStringTokenizerTokenNormal CFStringTokenizerTokenType = 1
 	// Compound token which may contain subtokens but with no derived subtokens. Its subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
 	KCFStringTokenizerTokenHasSubTokensMask CFStringTokenizerTokenType = 2
 	// Compound token which may contain derived subtokens. Its subtokens and derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens.
 	KCFStringTokenizerTokenHasDerivedSubTokensMask CFStringTokenizerTokenType = 4
-	KCFStringTokenizerTokenHasHasNumbersMask CFStringTokenizerTokenType = 8
-	KCFStringTokenizerTokenHasNonLettersMask CFStringTokenizerTokenType = 16
-	KCFStringTokenizerTokenIsCJWordMask CFStringTokenizerTokenType = 32
+	KCFStringTokenizerTokenHasHasNumbersMask       CFStringTokenizerTokenType = 8
+	KCFStringTokenizerTokenHasNonLettersMask       CFStringTokenizerTokenType = 16
+	KCFStringTokenizerTokenIsCJWordMask            CFStringTokenizerTokenType = 32
 )
 
 func (e CFStringTokenizerTokenType) String() string {
@@ -737,12 +737,12 @@ func (e CFStringTokenizerTokenType) String() string {
 type CFTimeZoneNameStyle int64
 
 const (
-	KCFTimeZoneNameStyleStandard CFTimeZoneNameStyle = 0
-	KCFTimeZoneNameStyleShortStandard CFTimeZoneNameStyle = 1
-	KCFTimeZoneNameStyleDaylightSaving CFTimeZoneNameStyle = 2
+	KCFTimeZoneNameStyleStandard            CFTimeZoneNameStyle = 0
+	KCFTimeZoneNameStyleShortStandard       CFTimeZoneNameStyle = 1
+	KCFTimeZoneNameStyleDaylightSaving      CFTimeZoneNameStyle = 2
 	KCFTimeZoneNameStyleShortDaylightSaving CFTimeZoneNameStyle = 3
-	KCFTimeZoneNameStyleGeneric CFTimeZoneNameStyle = 4
-	KCFTimeZoneNameStyleShortGeneric CFTimeZoneNameStyle = 5
+	KCFTimeZoneNameStyleGeneric             CFTimeZoneNameStyle = 4
+	KCFTimeZoneNameStyleShortGeneric        CFTimeZoneNameStyle = 5
 )
 
 func (e CFTimeZoneNameStyle) String() string {
@@ -768,11 +768,11 @@ func (e CFTimeZoneNameStyle) String() string {
 type CFURLBookmarkCreationOptions int64
 
 const (
-	KCFURLBookmarkCreationMinimalBookmarkMask CFURLBookmarkCreationOptions = 512
-	KCFURLBookmarkCreationSuitableForBookmarkFile CFURLBookmarkCreationOptions = 1024
-	KCFURLBookmarkCreationWithSecurityScope CFURLBookmarkCreationOptions = 2048
+	KCFURLBookmarkCreationMinimalBookmarkMask              CFURLBookmarkCreationOptions = 512
+	KCFURLBookmarkCreationSuitableForBookmarkFile          CFURLBookmarkCreationOptions = 1024
+	KCFURLBookmarkCreationWithSecurityScope                CFURLBookmarkCreationOptions = 2048
 	KCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess CFURLBookmarkCreationOptions = 4096
-	KCFURLBookmarkCreationWithoutImplicitSecurityScope CFURLBookmarkCreationOptions = 536870912
+	KCFURLBookmarkCreationWithoutImplicitSecurityScope     CFURLBookmarkCreationOptions = 536870912
 	// Deprecated: kCFURLBookmarkCreationPreferFileIDResolutionMask does nothing and has no effect on bookmark resolution
 	KCFURLBookmarkCreationPreferFileIDResolutionMask CFURLBookmarkCreationOptions = 256
 )
@@ -807,12 +807,12 @@ func (e CFURLBookmarkCreationOptions) String() string {
 type CFURLBookmarkResolutionOptions int64
 
 const (
-	KCFURLBookmarkResolutionWithoutUIMask CFURLBookmarkResolutionOptions = 256
-	KCFURLBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
-	KCFURLBookmarkResolutionWithSecurityScope CFURLBookmarkResolutionOptions = 1024
+	KCFURLBookmarkResolutionWithoutUIMask                 CFURLBookmarkResolutionOptions = 256
+	KCFURLBookmarkResolutionWithoutMountingMask           CFURLBookmarkResolutionOptions = 512
+	KCFURLBookmarkResolutionWithSecurityScope             CFURLBookmarkResolutionOptions = 1024
 	KCFURLBookmarkResolutionWithoutImplicitStartAccessing CFURLBookmarkResolutionOptions = 32768
-	KCFBookmarkResolutionWithoutUIMask CFURLBookmarkResolutionOptions = 256
-	KCFBookmarkResolutionWithoutMountingMask CFURLBookmarkResolutionOptions = 512
+	KCFBookmarkResolutionWithoutUIMask                    CFURLBookmarkResolutionOptions = 256
+	KCFBookmarkResolutionWithoutMountingMask              CFURLBookmarkResolutionOptions = 512
 )
 
 func (e CFURLBookmarkResolutionOptions) String() string {
@@ -844,18 +844,18 @@ func (e CFURLBookmarkResolutionOptions) String() string {
 type CFURLComponentType int64
 
 const (
-	KCFURLComponentScheme CFURLComponentType = 1
-	KCFURLComponentNetLocation CFURLComponentType = 2
-	KCFURLComponentPath CFURLComponentType = 3
+	KCFURLComponentScheme            CFURLComponentType = 1
+	KCFURLComponentNetLocation       CFURLComponentType = 2
+	KCFURLComponentPath              CFURLComponentType = 3
 	KCFURLComponentResourceSpecifier CFURLComponentType = 4
-	KCFURLComponentUser CFURLComponentType = 5
-	KCFURLComponentPassword CFURLComponentType = 6
-	KCFURLComponentUserInfo CFURLComponentType = 7
-	KCFURLComponentHost CFURLComponentType = 8
-	KCFURLComponentPort CFURLComponentType = 9
-	KCFURLComponentParameterString CFURLComponentType = 10
-	KCFURLComponentQuery CFURLComponentType = 11
-	KCFURLComponentFragment CFURLComponentType = 12
+	KCFURLComponentUser              CFURLComponentType = 5
+	KCFURLComponentPassword          CFURLComponentType = 6
+	KCFURLComponentUserInfo          CFURLComponentType = 7
+	KCFURLComponentHost              CFURLComponentType = 8
+	KCFURLComponentPort              CFURLComponentType = 9
+	KCFURLComponentParameterString   CFURLComponentType = 10
+	KCFURLComponentQuery             CFURLComponentType = 11
+	KCFURLComponentFragment          CFURLComponentType = 12
 )
 
 func (e CFURLComponentType) String() string {
@@ -893,14 +893,14 @@ func (e CFURLComponentType) String() string {
 type CFURLEnumeratorOptions int64
 
 const (
-	KCFURLEnumeratorDefaultBehavior CFURLEnumeratorOptions = 0
-	KCFURLEnumeratorDescendRecursively CFURLEnumeratorOptions = 1
-	KCFURLEnumeratorSkipInvisibles CFURLEnumeratorOptions = 2
-	KCFURLEnumeratorGenerateFileReferenceURLs CFURLEnumeratorOptions = 4
-	KCFURLEnumeratorSkipPackageContents CFURLEnumeratorOptions = 8
-	KCFURLEnumeratorIncludeDirectoriesPreOrder CFURLEnumeratorOptions = 16
+	KCFURLEnumeratorDefaultBehavior             CFURLEnumeratorOptions = 0
+	KCFURLEnumeratorDescendRecursively          CFURLEnumeratorOptions = 1
+	KCFURLEnumeratorSkipInvisibles              CFURLEnumeratorOptions = 2
+	KCFURLEnumeratorGenerateFileReferenceURLs   CFURLEnumeratorOptions = 4
+	KCFURLEnumeratorSkipPackageContents         CFURLEnumeratorOptions = 8
+	KCFURLEnumeratorIncludeDirectoriesPreOrder  CFURLEnumeratorOptions = 16
 	KCFURLEnumeratorIncludeDirectoriesPostOrder CFURLEnumeratorOptions = 32
-	KCFURLEnumeratorGenerateRelativePathURLs CFURLEnumeratorOptions = 64
+	KCFURLEnumeratorGenerateRelativePathURLs    CFURLEnumeratorOptions = 64
 )
 
 func (e CFURLEnumeratorOptions) String() string {
@@ -958,20 +958,20 @@ func (e CFURLPathStyle) String() string {
 type CFXMLNodeTypeCode int64
 
 const (
-	KCFXMLNodeTypeDocument CFXMLNodeTypeCode = 1
-	KCFXMLNodeTypeElement CFXMLNodeTypeCode = 2
-	KCFXMLNodeTypeAttribute CFXMLNodeTypeCode = 3
-	KCFXMLNodeTypeProcessingInstruction CFXMLNodeTypeCode = 4
-	KCFXMLNodeTypeComment CFXMLNodeTypeCode = 5
-	KCFXMLNodeTypeText CFXMLNodeTypeCode = 6
-	KCFXMLNodeTypeCDATASection CFXMLNodeTypeCode = 7
-	KCFXMLNodeTypeDocumentFragment CFXMLNodeTypeCode = 8
-	KCFXMLNodeTypeEntity CFXMLNodeTypeCode = 9
-	KCFXMLNodeTypeEntityReference CFXMLNodeTypeCode = 10
-	KCFXMLNodeTypeDocumentType CFXMLNodeTypeCode = 11
-	KCFXMLNodeTypeWhitespace CFXMLNodeTypeCode = 12
-	KCFXMLNodeTypeNotation CFXMLNodeTypeCode = 13
-	KCFXMLNodeTypeElementTypeDeclaration CFXMLNodeTypeCode = 14
+	KCFXMLNodeTypeDocument                 CFXMLNodeTypeCode = 1
+	KCFXMLNodeTypeElement                  CFXMLNodeTypeCode = 2
+	KCFXMLNodeTypeAttribute                CFXMLNodeTypeCode = 3
+	KCFXMLNodeTypeProcessingInstruction    CFXMLNodeTypeCode = 4
+	KCFXMLNodeTypeComment                  CFXMLNodeTypeCode = 5
+	KCFXMLNodeTypeText                     CFXMLNodeTypeCode = 6
+	KCFXMLNodeTypeCDATASection             CFXMLNodeTypeCode = 7
+	KCFXMLNodeTypeDocumentFragment         CFXMLNodeTypeCode = 8
+	KCFXMLNodeTypeEntity                   CFXMLNodeTypeCode = 9
+	KCFXMLNodeTypeEntityReference          CFXMLNodeTypeCode = 10
+	KCFXMLNodeTypeDocumentType             CFXMLNodeTypeCode = 11
+	KCFXMLNodeTypeWhitespace               CFXMLNodeTypeCode = 12
+	KCFXMLNodeTypeNotation                 CFXMLNodeTypeCode = 13
+	KCFXMLNodeTypeElementTypeDeclaration   CFXMLNodeTypeCode = 14
 	KCFXMLNodeTypeAttributeListDeclaration CFXMLNodeTypeCode = 15
 )
 
@@ -1016,24 +1016,24 @@ func (e CFXMLNodeTypeCode) String() string {
 type CFXMLParserStatusCode int64
 
 const (
-	KCFXMLStatusParseNotBegun CFXMLParserStatusCode = -2
-	KCFXMLStatusParseInProgress CFXMLParserStatusCode = -1
-	KCFXMLStatusParseSuccessful CFXMLParserStatusCode = 0
-	KCFXMLErrorUnexpectedEOF CFXMLParserStatusCode = 1
-	KCFXMLErrorUnknownEncoding CFXMLParserStatusCode = 2
-	KCFXMLErrorEncodingConversionFailure CFXMLParserStatusCode = 3
+	KCFXMLStatusParseNotBegun                 CFXMLParserStatusCode = -2
+	KCFXMLStatusParseInProgress               CFXMLParserStatusCode = -1
+	KCFXMLStatusParseSuccessful               CFXMLParserStatusCode = 0
+	KCFXMLErrorUnexpectedEOF                  CFXMLParserStatusCode = 1
+	KCFXMLErrorUnknownEncoding                CFXMLParserStatusCode = 2
+	KCFXMLErrorEncodingConversionFailure      CFXMLParserStatusCode = 3
 	KCFXMLErrorMalformedProcessingInstruction CFXMLParserStatusCode = 4
-	KCFXMLErrorMalformedDTD CFXMLParserStatusCode = 5
-	KCFXMLErrorMalformedName CFXMLParserStatusCode = 6
-	KCFXMLErrorMalformedCDSect CFXMLParserStatusCode = 7
-	KCFXMLErrorMalformedCloseTag CFXMLParserStatusCode = 8
-	KCFXMLErrorMalformedStartTag CFXMLParserStatusCode = 9
-	KCFXMLErrorMalformedDocument CFXMLParserStatusCode = 10
-	KCFXMLErrorElementlessDocument CFXMLParserStatusCode = 11
-	KCFXMLErrorMalformedComment CFXMLParserStatusCode = 12
-	KCFXMLErrorMalformedCharacterReference CFXMLParserStatusCode = 13
-	KCFXMLErrorMalformedParsedCharacterData CFXMLParserStatusCode = 14
-	KCFXMLErrorNoData CFXMLParserStatusCode = 15
+	KCFXMLErrorMalformedDTD                   CFXMLParserStatusCode = 5
+	KCFXMLErrorMalformedName                  CFXMLParserStatusCode = 6
+	KCFXMLErrorMalformedCDSect                CFXMLParserStatusCode = 7
+	KCFXMLErrorMalformedCloseTag              CFXMLParserStatusCode = 8
+	KCFXMLErrorMalformedStartTag              CFXMLParserStatusCode = 9
+	KCFXMLErrorMalformedDocument              CFXMLParserStatusCode = 10
+	KCFXMLErrorElementlessDocument            CFXMLParserStatusCode = 11
+	KCFXMLErrorMalformedComment               CFXMLParserStatusCode = 12
+	KCFXMLErrorMalformedCharacterReference    CFXMLParserStatusCode = 13
+	KCFXMLErrorMalformedParsedCharacterData   CFXMLParserStatusCode = 14
+	KCFXMLErrorNoData                         CFXMLParserStatusCode = 15
 )
 
 func (e CFXMLParserStatusCode) String() string {
@@ -1094,4 +1094,3 @@ func (e CFXMLParserStatusCode) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

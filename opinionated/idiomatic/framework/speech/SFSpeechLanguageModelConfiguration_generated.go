@@ -16,7 +16,9 @@ type SpeechLanguageModelConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.SFSpeechLanguageModelConfiguration].
-func (x *SpeechLanguageModelConfiguration) Unwrap() *raw.SFSpeechLanguageModelConfiguration { return x.inner }
+func (x *SpeechLanguageModelConfiguration) Unwrap() *raw.SFSpeechLanguageModelConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -75,4 +77,3 @@ type SpeechLanguageModelConfigurationable interface {
 }
 
 var _ SpeechLanguageModelConfigurationable = (*SpeechLanguageModelConfiguration)(nil)
-

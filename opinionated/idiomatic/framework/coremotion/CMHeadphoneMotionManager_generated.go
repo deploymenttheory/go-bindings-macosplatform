@@ -120,4 +120,3 @@ type HeadphoneMotionManagerable interface {
 }
 
 var _ HeadphoneMotionManagerable = (*HeadphoneMotionManager)(nil)
-

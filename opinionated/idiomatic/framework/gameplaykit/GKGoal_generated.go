@@ -41,4 +41,3 @@ type Goalable interface {
 }
 
 var _ Goalable = (*Goal)(nil)
-

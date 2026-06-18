@@ -167,7 +167,9 @@ func (x *TokenField) WithPlaceholderStrings(items ...*foundation.NSString) *Toke
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -183,7 +185,9 @@ func (x *TokenField) WithPlaceholderAttributedStrings(items ...*foundation.NSAtt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -373,7 +377,9 @@ func (x *TokenField) WithSubviews(items ...ViewProvider) *TokenField {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -515,7 +521,9 @@ func (x *TokenField) WithBackgroundFilters(items ...*coreimage.CIFilter) *TokenF
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -537,7 +545,9 @@ func (x *TokenField) WithContentFilters(items ...*coreimage.CIFilter) *TokenFiel
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -601,7 +611,9 @@ func (x *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -736,7 +748,9 @@ func (x *TokenField) asControl() *raw.NSControl { return &x.inner.NSTextField.NS
 
 func (x *TokenField) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
 
-func (x *TokenField) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
+func (x *TokenField) asResponder() *raw.NSResponder {
+	return &x.inner.NSTextField.NSControl.NSView.NSResponder
+}
 
 // TokenFieldable is the interface implemented by [TokenField], for mocking and DI.
 type TokenFieldable interface {
@@ -850,4 +864,3 @@ type TokenFieldable interface {
 }
 
 var _ TokenFieldable = (*TokenField)(nil)
-

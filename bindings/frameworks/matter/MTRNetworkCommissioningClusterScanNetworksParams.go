@@ -16,14 +16,14 @@ type MTRNetworkCommissioningClusterScanNetworksParams struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterScanNetworksParams = _objcClass("MTRNetworkCommissioningClusterScanNetworksParams")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelSsid = objc.RegisterName("ssid")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetSsid = objc.RegisterName("setSsid:")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelBreadcrumb = objc.RegisterName("breadcrumb")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetBreadcrumb = objc.RegisterName("setBreadcrumb:")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRNetworkCommissioningClusterScanNetworksParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRNetworkCommissioningClusterScanNetworksParams                               = _objcClass("MTRNetworkCommissioningClusterScanNetworksParams")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelSsid                           = objc.RegisterName("ssid")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetSsid                        = objc.RegisterName("setSsid:")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelBreadcrumb                     = objc.RegisterName("breadcrumb")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetBreadcrumb                  = objc.RegisterName("setBreadcrumb:")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRNetworkCommissioningClusterScanNetworksParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRNetworkCommissioningClusterScanNetworksParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRNetworkCommissioningClusterScanNetworksParamsFromID(id objc.ID) *MTRNetw
 
 func (o *MTRNetworkCommissioningClusterScanNetworksParams) Ssid() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksParamsSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRNetworkCommissioningClusterScanNetworksParams) SetSsid(ssid *foundat
 
 func (o *MTRNetworkCommissioningClusterScanNetworksParams) Breadcrumb() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksParamsSelBreadcrumb)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRNetworkCommissioningClusterScanNetworksParams) SetBreadcrumb(breadcr
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRNetworkCommissioningClusterScanNetworksParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRNetworkCommissioningClusterScanNetworksParams) SetTimedInvokeTimeout
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRNetworkCommissioningClusterScanNetworksParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterScanNetworksParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterScanNetworksParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

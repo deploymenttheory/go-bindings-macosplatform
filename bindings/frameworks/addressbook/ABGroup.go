@@ -16,20 +16,20 @@ type ABGroup struct {
 }
 
 var (
-	_clsABGroup = _objcClass("ABGroup")
-	_aBGroupSelMembers = objc.RegisterName("members")
-	_aBGroupSelAddMember = objc.RegisterName("addMember:")
-	_aBGroupSelRemoveMember = objc.RegisterName("removeMember:")
-	_aBGroupSelSubgroups = objc.RegisterName("subgroups")
-	_aBGroupSelAddSubgroup = objc.RegisterName("addSubgroup:")
-	_aBGroupSelRemoveSubgroup = objc.RegisterName("removeSubgroup:")
-	_aBGroupSelParentGroups = objc.RegisterName("parentGroups")
-	_aBGroupSelSetDistributionIdentifierForPropertyPerson = objc.RegisterName("setDistributionIdentifier:forProperty:person:")
-	_aBGroupSelDistributionIdentifierForPropertyPerson = objc.RegisterName("distributionIdentifierForProperty:person:")
-	_aBGroupSelAddPropertiesAndTypes = objc.RegisterName("addPropertiesAndTypes:")
-	_aBGroupSelRemoveProperties = objc.RegisterName("removeProperties:")
-	_aBGroupSelProperties = objc.RegisterName("properties")
-	_aBGroupSelTypeOfProperty = objc.RegisterName("typeOfProperty:")
+	_clsABGroup                                                = _objcClass("ABGroup")
+	_aBGroupSelMembers                                         = objc.RegisterName("members")
+	_aBGroupSelAddMember                                       = objc.RegisterName("addMember:")
+	_aBGroupSelRemoveMember                                    = objc.RegisterName("removeMember:")
+	_aBGroupSelSubgroups                                       = objc.RegisterName("subgroups")
+	_aBGroupSelAddSubgroup                                     = objc.RegisterName("addSubgroup:")
+	_aBGroupSelRemoveSubgroup                                  = objc.RegisterName("removeSubgroup:")
+	_aBGroupSelParentGroups                                    = objc.RegisterName("parentGroups")
+	_aBGroupSelSetDistributionIdentifierForPropertyPerson      = objc.RegisterName("setDistributionIdentifier:forProperty:person:")
+	_aBGroupSelDistributionIdentifierForPropertyPerson         = objc.RegisterName("distributionIdentifierForProperty:person:")
+	_aBGroupSelAddPropertiesAndTypes                           = objc.RegisterName("addPropertiesAndTypes:")
+	_aBGroupSelRemoveProperties                                = objc.RegisterName("removeProperties:")
+	_aBGroupSelProperties                                      = objc.RegisterName("properties")
+	_aBGroupSelTypeOfProperty                                  = objc.RegisterName("typeOfProperty:")
 	_aBGroupSelSearchElementForPropertyLabelKeyValueComparison = objc.RegisterName("searchElementForProperty:label:key:value:comparison:")
 )
 
@@ -85,7 +85,9 @@ func (o *ABGroup) SetDistributionIdentifierForPropertyPerson(identifier *foundat
 
 func (o *ABGroup) DistributionIdentifierForPropertyPerson(property *foundation.NSString, person *ABPerson) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBGroupSelDistributionIdentifierForPropertyPerson, property.Ptr(), person.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,7 +113,8 @@ func ABGroupTypeOfProperty(property *foundation.NSString) int {
 
 func ABGroupSearchElementForPropertyLabelKeyValueComparison(property *foundation.NSString, label *foundation.NSString, key *foundation.NSString, value objc.ID, comparison int) *ABSearchElement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsABGroup), _aBGroupSelSearchElementForPropertyLabelKeyValueComparison, property.Ptr(), label.Ptr(), key.Ptr(), value, comparison)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ABSearchElementFromID(_ret)
 }
-

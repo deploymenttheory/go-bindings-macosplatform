@@ -52,4 +52,3 @@ type MapItemRequestable interface {
 }
 
 var _ MapItemRequestable = (*MapItemRequest)(nil)
-

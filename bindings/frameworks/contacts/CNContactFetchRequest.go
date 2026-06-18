@@ -16,18 +16,18 @@ type CNContactFetchRequest struct {
 }
 
 var (
-	_clsCNContactFetchRequest = _objcClass("CNContactFetchRequest")
+	_clsCNContactFetchRequest                    = _objcClass("CNContactFetchRequest")
 	_cNContactFetchRequestSelInitWithKeysToFetch = objc.RegisterName("initWithKeysToFetch:")
-	_cNContactFetchRequestSelPredicate = objc.RegisterName("predicate")
-	_cNContactFetchRequestSelSetPredicate = objc.RegisterName("setPredicate:")
-	_cNContactFetchRequestSelKeysToFetch = objc.RegisterName("keysToFetch")
-	_cNContactFetchRequestSelSetKeysToFetch = objc.RegisterName("setKeysToFetch:")
-	_cNContactFetchRequestSelMutableObjects = objc.RegisterName("mutableObjects")
-	_cNContactFetchRequestSelSetMutableObjects = objc.RegisterName("setMutableObjects:")
-	_cNContactFetchRequestSelUnifyResults = objc.RegisterName("unifyResults")
-	_cNContactFetchRequestSelSetUnifyResults = objc.RegisterName("setUnifyResults:")
-	_cNContactFetchRequestSelSortOrder = objc.RegisterName("sortOrder")
-	_cNContactFetchRequestSelSetSortOrder = objc.RegisterName("setSortOrder:")
+	_cNContactFetchRequestSelPredicate           = objc.RegisterName("predicate")
+	_cNContactFetchRequestSelSetPredicate        = objc.RegisterName("setPredicate:")
+	_cNContactFetchRequestSelKeysToFetch         = objc.RegisterName("keysToFetch")
+	_cNContactFetchRequestSelSetKeysToFetch      = objc.RegisterName("setKeysToFetch:")
+	_cNContactFetchRequestSelMutableObjects      = objc.RegisterName("mutableObjects")
+	_cNContactFetchRequestSelSetMutableObjects   = objc.RegisterName("setMutableObjects:")
+	_cNContactFetchRequestSelUnifyResults        = objc.RegisterName("unifyResults")
+	_cNContactFetchRequestSelSetUnifyResults     = objc.RegisterName("setUnifyResults:")
+	_cNContactFetchRequestSelSortOrder           = objc.RegisterName("sortOrder")
+	_cNContactFetchRequestSelSetSortOrder        = objc.RegisterName("setSortOrder:")
 )
 
 func CNContactFetchRequestFromID(id objc.ID) *CNContactFetchRequest {
@@ -43,14 +43,18 @@ func CNContactFetchRequestFromID(id objc.ID) *CNContactFetchRequest {
 // @param      keysToFetch The properties to fetch for the returned contacts. @discussion Only fetch the properties that will be used.
 func (o *CNContactFetchRequest) InitWithKeysToFetch(keysToFetch *foundation.NSArray[CNKeyDescriptor]) *CNContactFetchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFetchRequestSelInitWithKeysToFetch, keysToFetch.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactFetchRequestFromID(_ret)
 }
 
 // @abstract The predicate to match contacts against. @discussion Use only predicates from CNContact+Predicates.h. Compound predicates are not supported. Set to nil to match all contacts.
 func (o *CNContactFetchRequest) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFetchRequestSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *CNContactFetchRequest) SetPredicate(predicate *foundation.NSPredicate) 
 // @abstract The properties to fetch in the returned contacts. @discussion Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors.
 func (o *CNContactFetchRequest) KeysToFetch() *foundation.NSArray[CNKeyDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactFetchRequestSelKeysToFetch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[CNKeyDescriptor](_ret)
 }
 
@@ -98,4 +104,3 @@ func (o *CNContactFetchRequest) SortOrder() CNContactSortOrder {
 func (o *CNContactFetchRequest) SetSortOrder(sortOrder CNContactSortOrder) {
 	o.Ptr().Send(_cNContactFetchRequestSelSetSortOrder, sortOrder)
 }
-

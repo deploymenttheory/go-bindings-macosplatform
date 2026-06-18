@@ -17,12 +17,12 @@ type MPSCNNInstanceNormalizationGradientState struct {
 }
 
 var (
-	_clsMPSCNNInstanceNormalizationGradientState = _objcClass("MPSCNNInstanceNormalizationGradientState")
+	_clsMPSCNNInstanceNormalizationGradientState                      = _objcClass("MPSCNNInstanceNormalizationGradientState")
 	_mPSCNNInstanceNormalizationGradientStateSelInstanceNormalization = objc.RegisterName("instanceNormalization")
-	_mPSCNNInstanceNormalizationGradientStateSelGamma = objc.RegisterName("gamma")
-	_mPSCNNInstanceNormalizationGradientStateSelBeta = objc.RegisterName("beta")
-	_mPSCNNInstanceNormalizationGradientStateSelGradientForGamma = objc.RegisterName("gradientForGamma")
-	_mPSCNNInstanceNormalizationGradientStateSelGradientForBeta = objc.RegisterName("gradientForBeta")
+	_mPSCNNInstanceNormalizationGradientStateSelGamma                 = objc.RegisterName("gamma")
+	_mPSCNNInstanceNormalizationGradientStateSelBeta                  = objc.RegisterName("beta")
+	_mPSCNNInstanceNormalizationGradientStateSelGradientForGamma      = objc.RegisterName("gradientForGamma")
+	_mPSCNNInstanceNormalizationGradientStateSelGradientForBeta       = objc.RegisterName("gradientForBeta")
 )
 
 func MPSCNNInstanceNormalizationGradientStateFromID(id objc.ID) *MPSCNNInstanceNormalizationGradientState {
@@ -38,7 +38,9 @@ func MPSCNNInstanceNormalizationGradientStateFromID(id objc.ID) *MPSCNNInstanceN
 // @abstract The MPSCNNInstanceNormalization object that created this state object.
 func (o *MPSCNNInstanceNormalizationGradientState) InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationGradientStateSelInstanceNormalization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNInstanceNormalizationFromID(_ret)
 }
 
@@ -65,4 +67,3 @@ func (o *MPSCNNInstanceNormalizationGradientState) GradientForBeta() metal.MTLBu
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSCNNInstanceNormalizationGradientStateSelGradientForBeta)
 	return _ret
 }
-

@@ -57,7 +57,9 @@ func (x *ImageTent) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent {
 
 func (x *ImageTent) asImageBox() *raw.MPSImageBox { return &x.inner.MPSImageBox }
 
-func (x *ImageTent) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel }
+func (x *ImageTent) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageBox.MPSUnaryImageKernel
+}
 
 // ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
 type ImageTentable interface {
@@ -68,4 +70,3 @@ type ImageTentable interface {
 }
 
 var _ ImageTentable = (*ImageTent)(nil)
-

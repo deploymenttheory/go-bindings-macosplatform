@@ -48,4 +48,3 @@ type ModelStructureProgramable interface {
 }
 
 var _ ModelStructureProgramable = (*ModelStructureProgram)(nil)
-

@@ -103,4 +103,3 @@ type XPCInterfaceable interface {
 }
 
 var _ XPCInterfaceable = (*XPCInterface)(nil)
-

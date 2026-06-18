@@ -16,14 +16,14 @@ type MTRThreadNetworkDirectoryClusterThreadNetworkStruct struct {
 }
 
 var (
-	_clsMTRThreadNetworkDirectoryClusterThreadNetworkStruct = _objcClass("MTRThreadNetworkDirectoryClusterThreadNetworkStruct")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelExtendedPanID = objc.RegisterName("extendedPanID")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetExtendedPanID = objc.RegisterName("setExtendedPanID:")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelNetworkName = objc.RegisterName("networkName")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetNetworkName = objc.RegisterName("setNetworkName:")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelChannel = objc.RegisterName("channel")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetChannel = objc.RegisterName("setChannel:")
-	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelActiveTimestamp = objc.RegisterName("activeTimestamp")
+	_clsMTRThreadNetworkDirectoryClusterThreadNetworkStruct                   = _objcClass("MTRThreadNetworkDirectoryClusterThreadNetworkStruct")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelExtendedPanID      = objc.RegisterName("extendedPanID")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetExtendedPanID   = objc.RegisterName("setExtendedPanID:")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelNetworkName        = objc.RegisterName("networkName")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetNetworkName     = objc.RegisterName("setNetworkName:")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelChannel            = objc.RegisterName("channel")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetChannel         = objc.RegisterName("setChannel:")
+	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelActiveTimestamp    = objc.RegisterName("activeTimestamp")
 	_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetActiveTimestamp = objc.RegisterName("setActiveTimestamp:")
 )
 
@@ -39,7 +39,9 @@ func MTRThreadNetworkDirectoryClusterThreadNetworkStructFromID(id objc.ID) *MTRT
 
 func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterThreadNetworkStructSelExtendedPanID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetExtendedPanID(e
 
 func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterThreadNetworkStructSelNetworkName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetNetworkName(net
 
 func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterThreadNetworkStructSelChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetChannel(channel
 
 func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDirectoryClusterThreadNetworkStructSelActiveTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetActiveTimestamp(activeTimestamp *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDirectoryClusterThreadNetworkStructSelSetActiveTimestamp, activeTimestamp.Ptr())
 }
-

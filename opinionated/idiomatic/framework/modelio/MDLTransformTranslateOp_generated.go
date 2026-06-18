@@ -62,4 +62,3 @@ type TransformTranslateOpable interface {
 }
 
 var _ TransformTranslateOpable = (*TransformTranslateOp)(nil)
-

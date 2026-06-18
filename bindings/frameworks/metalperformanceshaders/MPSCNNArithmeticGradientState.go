@@ -26,4 +26,3 @@ func MPSCNNArithmeticGradientStateFromID(id objc.ID) *MPSCNNArithmeticGradientSt
 	purego.Track(o)
 	return o
 }
-

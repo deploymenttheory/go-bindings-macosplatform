@@ -50,4 +50,3 @@ type MTRClusterable interface {
 }
 
 var _ MTRClusterable = (*MTRCluster)(nil)
-

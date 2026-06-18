@@ -47,4 +47,3 @@ func NewDispatch_source_type_t(ptr unsafe.Pointer) *Dispatch_source_type_t {
 	cgo.Track(o, o.Ptr)
 	return o
 }
-

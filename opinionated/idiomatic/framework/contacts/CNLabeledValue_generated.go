@@ -88,4 +88,3 @@ type LabeledValueable interface {
 }
 
 var _ LabeledValueable = (*LabeledValue)(nil)
-

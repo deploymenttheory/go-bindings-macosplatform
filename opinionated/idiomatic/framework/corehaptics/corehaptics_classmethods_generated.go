@@ -12,4 +12,3 @@ import (
 func CapabilitiesForHardware() raw.CHHapticDeviceCapability {
 	return raw.CHHapticEngineCapabilitiesForHardware()
 }
-

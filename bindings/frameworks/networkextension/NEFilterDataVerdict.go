@@ -15,13 +15,13 @@ type NEFilterDataVerdict struct {
 }
 
 var (
-	_clsNEFilterDataVerdict = _objcClass("NEFilterDataVerdict")
-	_nEFilterDataVerdictSelAllowVerdict = objc.RegisterName("allowVerdict")
-	_nEFilterDataVerdictSelDropVerdict = objc.RegisterName("dropVerdict")
+	_clsNEFilterDataVerdict                                  = _objcClass("NEFilterDataVerdict")
+	_nEFilterDataVerdictSelAllowVerdict                      = objc.RegisterName("allowVerdict")
+	_nEFilterDataVerdictSelDropVerdict                       = objc.RegisterName("dropVerdict")
 	_nEFilterDataVerdictSelDataVerdictWithPassBytesPeekBytes = objc.RegisterName("dataVerdictWithPassBytes:peekBytes:")
-	_nEFilterDataVerdictSelPauseVerdict = objc.RegisterName("pauseVerdict")
-	_nEFilterDataVerdictSelStatisticsReportFrequency = objc.RegisterName("statisticsReportFrequency")
-	_nEFilterDataVerdictSelSetStatisticsReportFrequency = objc.RegisterName("setStatisticsReportFrequency:")
+	_nEFilterDataVerdictSelPauseVerdict                      = objc.RegisterName("pauseVerdict")
+	_nEFilterDataVerdictSelStatisticsReportFrequency         = objc.RegisterName("statisticsReportFrequency")
+	_nEFilterDataVerdictSelSetStatisticsReportFrequency      = objc.RegisterName("setStatisticsReportFrequency:")
 )
 
 func NEFilterDataVerdictFromID(id objc.ID) *NEFilterDataVerdict {
@@ -37,28 +37,36 @@ func NEFilterDataVerdictFromID(id objc.ID) *NEFilterDataVerdict {
 // @method allowVerdict @discussion This class method returns a verdict indicating that the flow should be allowed. @return The NEFilterDataVerdict object.
 func NEFilterDataVerdictAllowVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelAllowVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method dropVerdict @discussion This class method returns a verdict indicating that the flow should be dropped. @return The NEFilterDataVerdict object.
 func NEFilterDataVerdictDropVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelDropVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method dataVerdictWithPassBytes:peekBytes: @discussion This class method returns a data verdict indicating that the filter is passing a given number of bytes through the filter and needs to see a given number of bytes after the bytes that are passed. @param passBytes The number of bytes to pass through the filter. @param peekBytes The number of bytes after the end of the bytes passed that the filter wants to see in the next call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:] or -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:]. @return The data flow verdict.
 func NEFilterDataVerdictDataVerdictWithPassBytesPeekBytes(passBytes uint, peekBytes uint) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelDataVerdictWithPassBytesPeekBytes, passBytes, peekBytes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method pauseVerdict @discussion This class method returns a verdict indicating that none of the data provider's handler callbacks shall be called for the flow until after the flow is resumed by a call to -[NEFilterDataProvider resumeFlow:withVerdict:]. TCP flows may be paused indefinitely. UDP flows will be dropped if not resumed within 10 seconds of being paused. It is invalid to pause a flow that is already paused. @return The NEFilterDataVerdict object.
 func NEFilterDataVerdictPauseVerdict() *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEFilterDataVerdict), _nEFilterDataVerdictSelPauseVerdict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
@@ -71,4 +79,3 @@ func (o *NEFilterDataVerdict) StatisticsReportFrequency() NEFilterReportFrequenc
 func (o *NEFilterDataVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
 	o.Ptr().Send(_nEFilterDataVerdictSelSetStatisticsReportFrequency, statisticsReportFrequency)
 }
-

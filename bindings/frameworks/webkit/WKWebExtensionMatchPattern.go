@@ -18,24 +18,24 @@ type WKWebExtensionMatchPattern struct {
 }
 
 var (
-	_clsWKWebExtensionMatchPattern = _objcClass("WKWebExtensionMatchPattern")
-	_wKWebExtensionMatchPatternSelRegisterCustomURLScheme = objc.RegisterName("registerCustomURLScheme:")
-	_wKWebExtensionMatchPatternSelAllURLsMatchPattern = objc.RegisterName("allURLsMatchPattern")
+	_clsWKWebExtensionMatchPattern                               = _objcClass("WKWebExtensionMatchPattern")
+	_wKWebExtensionMatchPatternSelRegisterCustomURLScheme        = objc.RegisterName("registerCustomURLScheme:")
+	_wKWebExtensionMatchPatternSelAllURLsMatchPattern            = objc.RegisterName("allURLsMatchPattern")
 	_wKWebExtensionMatchPatternSelAllHostsAndSchemesMatchPattern = objc.RegisterName("allHostsAndSchemesMatchPattern")
-	_wKWebExtensionMatchPatternSelMatchPatternWithString = objc.RegisterName("matchPatternWithString:")
+	_wKWebExtensionMatchPatternSelMatchPatternWithString         = objc.RegisterName("matchPatternWithString:")
 	_wKWebExtensionMatchPatternSelMatchPatternWithSchemeHostPath = objc.RegisterName("matchPatternWithScheme:host:path:")
-	_wKWebExtensionMatchPatternSelInitWithStringError = objc.RegisterName("initWithString:error:")
-	_wKWebExtensionMatchPatternSelInitWithSchemeHostPathError = objc.RegisterName("initWithScheme:host:path:error:")
-	_wKWebExtensionMatchPatternSelMatchesURL = objc.RegisterName("matchesURL:")
-	_wKWebExtensionMatchPatternSelMatchesURLOptions = objc.RegisterName("matchesURL:options:")
-	_wKWebExtensionMatchPatternSelMatchesPattern = objc.RegisterName("matchesPattern:")
-	_wKWebExtensionMatchPatternSelMatchesPatternOptions = objc.RegisterName("matchesPattern:options:")
-	_wKWebExtensionMatchPatternSelString = objc.RegisterName("string")
-	_wKWebExtensionMatchPatternSelScheme = objc.RegisterName("scheme")
-	_wKWebExtensionMatchPatternSelHost = objc.RegisterName("host")
-	_wKWebExtensionMatchPatternSelPath = objc.RegisterName("path")
-	_wKWebExtensionMatchPatternSelMatchesAllURLs = objc.RegisterName("matchesAllURLs")
-	_wKWebExtensionMatchPatternSelMatchesAllHosts = objc.RegisterName("matchesAllHosts")
+	_wKWebExtensionMatchPatternSelInitWithStringError            = objc.RegisterName("initWithString:error:")
+	_wKWebExtensionMatchPatternSelInitWithSchemeHostPathError    = objc.RegisterName("initWithScheme:host:path:error:")
+	_wKWebExtensionMatchPatternSelMatchesURL                     = objc.RegisterName("matchesURL:")
+	_wKWebExtensionMatchPatternSelMatchesURLOptions              = objc.RegisterName("matchesURL:options:")
+	_wKWebExtensionMatchPatternSelMatchesPattern                 = objc.RegisterName("matchesPattern:")
+	_wKWebExtensionMatchPatternSelMatchesPatternOptions          = objc.RegisterName("matchesPattern:options:")
+	_wKWebExtensionMatchPatternSelString                         = objc.RegisterName("string")
+	_wKWebExtensionMatchPatternSelScheme                         = objc.RegisterName("scheme")
+	_wKWebExtensionMatchPatternSelHost                           = objc.RegisterName("host")
+	_wKWebExtensionMatchPatternSelPath                           = objc.RegisterName("path")
+	_wKWebExtensionMatchPatternSelMatchesAllURLs                 = objc.RegisterName("matchesAllURLs")
+	_wKWebExtensionMatchPatternSelMatchesAllHosts                = objc.RegisterName("matchesAllHosts")
 )
 
 func WKWebExtensionMatchPatternFromID(id objc.ID) *WKWebExtensionMatchPattern {
@@ -56,28 +56,36 @@ func WKWebExtensionMatchPatternRegisterCustomURLScheme(urlScheme *foundation.NSS
 // @abstract Returns a pattern object for `<all_urls>`.
 func WKWebExtensionMatchPatternAllURLsMatchPattern() *WKWebExtensionMatchPattern {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllURLsMatchPattern)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionMatchPatternFromID(_ret)
 }
 
 // @abstract Returns a pattern object that has `*` for scheme, host, and path.
 func WKWebExtensionMatchPatternAllHostsAndSchemesMatchPattern() *WKWebExtensionMatchPattern {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelAllHostsAndSchemesMatchPattern)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionMatchPatternFromID(_ret)
 }
 
 // @abstract Returns a pattern object for the specified pattern string. @result Returns `nil` if the pattern string is invalid. @seealso initWithString:error:
 func WKWebExtensionMatchPatternMatchPatternWithString(string_ *foundation.NSString) *WKWebExtensionMatchPattern {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionMatchPatternFromID(_ret)
 }
 
 // @abstract Returns a pattern object for the specified scheme, host, and path strings. @result A pattern object, or `nil` if any of the strings are invalid. @seealso initWithScheme:host:path:error:
 func WKWebExtensionMatchPatternMatchPatternWithSchemeHostPath(scheme *foundation.NSString, host *foundation.NSString, path *foundation.NSString) *WKWebExtensionMatchPattern {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionMatchPattern), _wKWebExtensionMatchPatternSelMatchPatternWithSchemeHostPath, scheme.Ptr(), host.Ptr(), path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionMatchPatternFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func WKWebExtensionMatchPatternMatchPatternWithSchemeHostPath(scheme *foundation
 func (o *WKWebExtensionMatchPattern) InitWithStringError(string_ *foundation.NSString) (*WKWebExtensionMatchPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithStringError, string_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -96,7 +106,9 @@ func (o *WKWebExtensionMatchPattern) InitWithStringError(string_ *foundation.NSS
 func (o *WKWebExtensionMatchPattern) InitWithSchemeHostPathError(scheme *foundation.NSString, host *foundation.NSString, path *foundation.NSString) (*WKWebExtensionMatchPattern, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelInitWithSchemeHostPathError, scheme.Ptr(), host.Ptr(), path.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -130,28 +142,36 @@ func (o *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensi
 // @abstract The original pattern string.
 func (o *WKWebExtensionMatchPattern) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract The scheme part of the pattern string, unless ``matchesAllURLs`` is `YES`.
+// @abstract The scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Scheme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract The host part of the pattern string, unless ``matchesAllURLs`` is `YES`.
+// @abstract The host part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// @abstract The path part of the pattern string, unless ``matchesAllURLs`` is `YES`.
+// @abstract The path part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (o *WKWebExtensionMatchPattern) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMatchPatternSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -166,4 +186,3 @@ func (o *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMatchPatternSelMatchesAllHosts)
 	return _ret
 }
-

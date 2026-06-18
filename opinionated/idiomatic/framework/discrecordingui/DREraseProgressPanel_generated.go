@@ -62,4 +62,3 @@ type EraseProgressPanelable interface {
 }
 
 var _ EraseProgressPanelable = (*EraseProgressPanel)(nil)
-

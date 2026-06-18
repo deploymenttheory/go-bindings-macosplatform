@@ -99,4 +99,3 @@ type AVB17221AECPAddressAccessTLVable interface {
 }
 
 var _ AVB17221AECPAddressAccessTLVable = (*AVB17221AECPAddressAccessTLV)(nil)
-

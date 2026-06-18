@@ -74,4 +74,3 @@ type MatchCalendarEventable interface {
 }
 
 var _ MatchCalendarEventable = (*MatchCalendarEvent)(nil)
-

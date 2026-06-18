@@ -85,4 +85,3 @@ type FHIRResourceable interface {
 }
 
 var _ FHIRResourceable = (*FHIRResource)(nil)
-

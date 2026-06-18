@@ -16,9 +16,9 @@ type VZVirtioFileSystemDevice struct {
 }
 
 var (
-	_clsVZVirtioFileSystemDevice = _objcClass("VZVirtioFileSystemDevice")
-	_vZVirtioFileSystemDeviceSelTag = objc.RegisterName("tag")
-	_vZVirtioFileSystemDeviceSelShare = objc.RegisterName("share")
+	_clsVZVirtioFileSystemDevice         = _objcClass("VZVirtioFileSystemDevice")
+	_vZVirtioFileSystemDeviceSelTag      = objc.RegisterName("tag")
+	_vZVirtioFileSystemDeviceSelShare    = objc.RegisterName("share")
 	_vZVirtioFileSystemDeviceSelSetShare = objc.RegisterName("setShare:")
 )
 
@@ -35,18 +35,21 @@ func VZVirtioFileSystemDeviceFromID(id objc.ID) *VZVirtioFileSystemDevice {
 // @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting.
 func (o *VZVirtioFileSystemDevice) Tag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceSelTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @discussion Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare
 func (o *VZVirtioFileSystemDevice) Share() *VZDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceSelShare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZDirectoryShareFromID(_ret)
 }
 
 func (o *VZVirtioFileSystemDevice) SetShare(share *VZDirectoryShare) {
 	o.Ptr().Send(_vZVirtioFileSystemDeviceSelSetShare, share.Ptr())
 }
-

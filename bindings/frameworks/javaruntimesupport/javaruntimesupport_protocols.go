@@ -11,4 +11,3 @@ type JRSMenuDelegate interface {
 type JRSRemoteLayer interface {
 	LayerID() uint32
 }
-

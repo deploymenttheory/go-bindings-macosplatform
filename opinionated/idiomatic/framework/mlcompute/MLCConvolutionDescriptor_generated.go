@@ -131,4 +131,3 @@ type ConvolutionDescriptorable interface {
 }
 
 var _ ConvolutionDescriptorable = (*ConvolutionDescriptor)(nil)
-

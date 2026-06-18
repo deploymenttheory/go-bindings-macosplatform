@@ -16,18 +16,18 @@ type MTLFunctionDescriptor struct {
 }
 
 var (
-	_clsMTLFunctionDescriptor = _objcClass("MTLFunctionDescriptor")
+	_clsMTLFunctionDescriptor                   = _objcClass("MTLFunctionDescriptor")
 	_mTLFunctionDescriptorSelFunctionDescriptor = objc.RegisterName("functionDescriptor")
-	_mTLFunctionDescriptorSelName = objc.RegisterName("name")
-	_mTLFunctionDescriptorSelSetName = objc.RegisterName("setName:")
-	_mTLFunctionDescriptorSelSpecializedName = objc.RegisterName("specializedName")
+	_mTLFunctionDescriptorSelName               = objc.RegisterName("name")
+	_mTLFunctionDescriptorSelSetName            = objc.RegisterName("setName:")
+	_mTLFunctionDescriptorSelSpecializedName    = objc.RegisterName("specializedName")
 	_mTLFunctionDescriptorSelSetSpecializedName = objc.RegisterName("setSpecializedName:")
-	_mTLFunctionDescriptorSelConstantValues = objc.RegisterName("constantValues")
-	_mTLFunctionDescriptorSelSetConstantValues = objc.RegisterName("setConstantValues:")
-	_mTLFunctionDescriptorSelOptions = objc.RegisterName("options")
-	_mTLFunctionDescriptorSelSetOptions = objc.RegisterName("setOptions:")
-	_mTLFunctionDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
-	_mTLFunctionDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
+	_mTLFunctionDescriptorSelConstantValues     = objc.RegisterName("constantValues")
+	_mTLFunctionDescriptorSelSetConstantValues  = objc.RegisterName("setConstantValues:")
+	_mTLFunctionDescriptorSelOptions            = objc.RegisterName("options")
+	_mTLFunctionDescriptorSelSetOptions         = objc.RegisterName("setOptions:")
+	_mTLFunctionDescriptorSelBinaryArchives     = objc.RegisterName("binaryArchives")
+	_mTLFunctionDescriptorSelSetBinaryArchives  = objc.RegisterName("setBinaryArchives:")
 )
 
 func MTLFunctionDescriptorFromID(id objc.ID) *MTLFunctionDescriptor {
@@ -43,14 +43,18 @@ func MTLFunctionDescriptorFromID(id objc.ID) *MTLFunctionDescriptor {
 // @method functionDescriptor @abstract Create an autoreleased function descriptor
 func MTLFunctionDescriptorFunctionDescriptor() *MTLFunctionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLFunctionDescriptor), _mTLFunctionDescriptorSelFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionDescriptorFromID(_ret)
 }
 
 // @property name @abstract The name of the `visible` function to find.
 func (o *MTLFunctionDescriptor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionDescriptorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTLFunctionDescriptor) SetName(name *foundation.NSString) {
 // @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
 func (o *MTLFunctionDescriptor) SpecializedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionDescriptorSelSpecializedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTLFunctionDescriptor) SetSpecializedName(specializedName *foundation.N
 // @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
 func (o *MTLFunctionDescriptor) ConstantValues() *MTLFunctionConstantValues {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionDescriptorSelConstantValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionConstantValuesFromID(_ret)
 }
 
@@ -93,11 +101,12 @@ func (o *MTLFunctionDescriptor) SetOptions(options MTLFunctionOptions) {
 // @property binaryArchives @abstract The array of archives to be searched. @discussion Binary archives to be searched for precompiled functions during the compilation of this function.
 func (o *MTLFunctionDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
 func (o *MTLFunctionDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[MTLBinaryArchive]) {
 	o.Ptr().Send(_mTLFunctionDescriptorSelSetBinaryArchives, binaryArchives.Ptr())
 }
-

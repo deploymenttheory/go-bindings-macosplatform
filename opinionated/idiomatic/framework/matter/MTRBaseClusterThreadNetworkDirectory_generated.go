@@ -19,7 +19,9 @@ type MTRBaseClusterThreadNetworkDirectory struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterThreadNetworkDirectory].
-func (x *MTRBaseClusterThreadNetworkDirectory) Unwrap() *raw.MTRBaseClusterThreadNetworkDirectory { return x.inner }
+func (x *MTRBaseClusterThreadNetworkDirectory) Unwrap() *raw.MTRBaseClusterThreadNetworkDirectory {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -318,9 +320,13 @@ func (x *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeClusterRevision
 	}
 }
 
-func (x *MTRBaseClusterThreadNetworkDirectory) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterThreadNetworkDirectory) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterThreadNetworkDirectory) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterThreadNetworkDirectory) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterThreadNetworkDirectoryable is the interface implemented by [MTRBaseClusterThreadNetworkDirectory], for mocking and DI.
 type MTRBaseClusterThreadNetworkDirectoryable interface {
@@ -349,4 +355,3 @@ type MTRBaseClusterThreadNetworkDirectoryable interface {
 }
 
 var _ MTRBaseClusterThreadNetworkDirectoryable = (*MTRBaseClusterThreadNetworkDirectory)(nil)
-

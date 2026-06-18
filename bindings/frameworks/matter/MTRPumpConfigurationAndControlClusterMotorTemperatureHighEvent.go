@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(id obj
 	purego.Track(o)
 	return o
 }
-

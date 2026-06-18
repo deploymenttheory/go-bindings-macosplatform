@@ -38,4 +38,3 @@ type VZVirtioSocketListenerDelegate interface {
 // VZVirtualMachineDelegate wraps the ObjC protocol VZVirtualMachineDelegate.
 type VZVirtualMachineDelegate interface {
 }
-

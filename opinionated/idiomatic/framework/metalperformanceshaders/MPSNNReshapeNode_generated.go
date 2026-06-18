@@ -50,7 +50,9 @@ func (x *NNReshapeNode) WithLabel(label string) *NNReshapeNode {
 	return x
 }
 
-func (x *NNReshapeNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNReshapeNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNReshapeNodeable is the interface implemented by [NNReshapeNode], for mocking and DI.
 type NNReshapeNodeable interface {
@@ -60,4 +62,3 @@ type NNReshapeNodeable interface {
 }
 
 var _ NNReshapeNodeable = (*NNReshapeNode)(nil)
-

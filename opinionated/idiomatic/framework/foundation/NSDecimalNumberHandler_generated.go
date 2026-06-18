@@ -51,4 +51,3 @@ type DecimalNumberHandlerable interface {
 }
 
 var _ DecimalNumberHandlerable = (*DecimalNumberHandler)(nil)
-

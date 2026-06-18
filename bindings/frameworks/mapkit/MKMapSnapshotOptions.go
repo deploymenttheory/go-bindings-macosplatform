@@ -18,27 +18,27 @@ type MKMapSnapshotOptions struct {
 }
 
 var (
-	_clsMKMapSnapshotOptions = _objcClass("MKMapSnapshotOptions")
-	_mKMapSnapshotOptionsSelPreferredConfiguration = objc.RegisterName("preferredConfiguration")
+	_clsMKMapSnapshotOptions                          = _objcClass("MKMapSnapshotOptions")
+	_mKMapSnapshotOptionsSelPreferredConfiguration    = objc.RegisterName("preferredConfiguration")
 	_mKMapSnapshotOptionsSelSetPreferredConfiguration = objc.RegisterName("setPreferredConfiguration:")
-	_mKMapSnapshotOptionsSelCamera = objc.RegisterName("camera")
-	_mKMapSnapshotOptionsSelSetCamera = objc.RegisterName("setCamera:")
-	_mKMapSnapshotOptionsSelMapRect = objc.RegisterName("mapRect")
-	_mKMapSnapshotOptionsSelSetMapRect = objc.RegisterName("setMapRect:")
-	_mKMapSnapshotOptionsSelRegion = objc.RegisterName("region")
-	_mKMapSnapshotOptionsSelSetRegion = objc.RegisterName("setRegion:")
-	_mKMapSnapshotOptionsSelMapType = objc.RegisterName("mapType")
-	_mKMapSnapshotOptionsSelSetMapType = objc.RegisterName("setMapType:")
-	_mKMapSnapshotOptionsSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
-	_mKMapSnapshotOptionsSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKMapSnapshotOptionsSelShowsPointsOfInterest = objc.RegisterName("showsPointsOfInterest")
-	_mKMapSnapshotOptionsSelSetShowsPointsOfInterest = objc.RegisterName("setShowsPointsOfInterest:")
-	_mKMapSnapshotOptionsSelShowsBuildings = objc.RegisterName("showsBuildings")
-	_mKMapSnapshotOptionsSelSetShowsBuildings = objc.RegisterName("setShowsBuildings:")
-	_mKMapSnapshotOptionsSelSize = objc.RegisterName("size")
-	_mKMapSnapshotOptionsSelSetSize = objc.RegisterName("setSize:")
-	_mKMapSnapshotOptionsSelAppearance = objc.RegisterName("appearance")
-	_mKMapSnapshotOptionsSelSetAppearance = objc.RegisterName("setAppearance:")
+	_mKMapSnapshotOptionsSelCamera                    = objc.RegisterName("camera")
+	_mKMapSnapshotOptionsSelSetCamera                 = objc.RegisterName("setCamera:")
+	_mKMapSnapshotOptionsSelMapRect                   = objc.RegisterName("mapRect")
+	_mKMapSnapshotOptionsSelSetMapRect                = objc.RegisterName("setMapRect:")
+	_mKMapSnapshotOptionsSelRegion                    = objc.RegisterName("region")
+	_mKMapSnapshotOptionsSelSetRegion                 = objc.RegisterName("setRegion:")
+	_mKMapSnapshotOptionsSelMapType                   = objc.RegisterName("mapType")
+	_mKMapSnapshotOptionsSelSetMapType                = objc.RegisterName("setMapType:")
+	_mKMapSnapshotOptionsSelPointOfInterestFilter     = objc.RegisterName("pointOfInterestFilter")
+	_mKMapSnapshotOptionsSelSetPointOfInterestFilter  = objc.RegisterName("setPointOfInterestFilter:")
+	_mKMapSnapshotOptionsSelShowsPointsOfInterest     = objc.RegisterName("showsPointsOfInterest")
+	_mKMapSnapshotOptionsSelSetShowsPointsOfInterest  = objc.RegisterName("setShowsPointsOfInterest:")
+	_mKMapSnapshotOptionsSelShowsBuildings            = objc.RegisterName("showsBuildings")
+	_mKMapSnapshotOptionsSelSetShowsBuildings         = objc.RegisterName("setShowsBuildings:")
+	_mKMapSnapshotOptionsSelSize                      = objc.RegisterName("size")
+	_mKMapSnapshotOptionsSelSetSize                   = objc.RegisterName("setSize:")
+	_mKMapSnapshotOptionsSelAppearance                = objc.RegisterName("appearance")
+	_mKMapSnapshotOptionsSelSetAppearance             = objc.RegisterName("setAppearance:")
 )
 
 func MKMapSnapshotOptionsFromID(id objc.ID) *MKMapSnapshotOptions {
@@ -53,7 +53,9 @@ func MKMapSnapshotOptionsFromID(id objc.ID) *MKMapSnapshotOptions {
 
 func (o *MKMapSnapshotOptions) PreferredConfiguration() *MKMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotOptionsSelPreferredConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapConfigurationFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *MKMapSnapshotOptions) SetPreferredConfiguration(preferredConfiguration 
 
 func (o *MKMapSnapshotOptions) Camera() *MKMapCamera {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotOptionsSelCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraFromID(_ret)
 }
 
@@ -103,7 +107,9 @@ func (o *MKMapSnapshotOptions) SetMapType(mapType MKMapType) {
 // Deprecated: Use preferredConfiguration
 func (o *MKMapSnapshotOptions) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotOptionsSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -145,11 +151,12 @@ func (o *MKMapSnapshotOptions) SetSize(size corefoundation.CGSize) {
 
 func (o *MKMapSnapshotOptions) Appearance() *appkit.NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotOptionsSelAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSAppearanceFromID(_ret)
 }
 
 func (o *MKMapSnapshotOptions) SetAppearance(appearance *appkit.NSAppearance) {
 	o.Ptr().Send(_mKMapSnapshotOptionsSelSetAppearance, appearance.Ptr())
 }
-

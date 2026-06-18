@@ -70,4 +70,3 @@ func CMIOStreamClockCreate(allocator unsafe.Pointer, clockName unsafe.Pointer, s
 func CMIOStreamCopyBufferQueue(streamID uint, queueAlteredProc unsafe.Pointer, queueAlteredRefCon unsafe.Pointer, queue unsafe.Pointer) int {
 	return raw.CMIOStreamCopyBufferQueue(streamID, queueAlteredProc, queueAlteredRefCon, queue)
 }
-

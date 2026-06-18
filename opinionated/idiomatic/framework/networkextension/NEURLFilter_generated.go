@@ -41,4 +41,3 @@ type NEURLFilterable interface {
 }
 
 var _ NEURLFilterable = (*NEURLFilter)(nil)
-

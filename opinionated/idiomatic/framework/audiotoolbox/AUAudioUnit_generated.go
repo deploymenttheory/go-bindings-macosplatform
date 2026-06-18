@@ -153,7 +153,9 @@ func (x *AudioUnit) WithChannelMap(items ...*foundation.NSNumber) *AudioUnit {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -895,4 +897,3 @@ type AudioUnitable interface {
 }
 
 var _ AudioUnitable = (*AudioUnit)(nil)
-

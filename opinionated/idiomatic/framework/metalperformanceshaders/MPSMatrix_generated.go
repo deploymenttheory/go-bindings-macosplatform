@@ -124,4 +124,3 @@ type Matrixable interface {
 }
 
 var _ Matrixable = (*Matrix)(nil)
-

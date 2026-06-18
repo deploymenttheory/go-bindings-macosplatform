@@ -15,15 +15,15 @@ type NSNotificationCenter struct {
 }
 
 var (
-	_clsNSNotificationCenter = _objcClass("NSNotificationCenter")
-	_nSNotificationCenterSelAddObserverSelectorNameObject = objc.RegisterName("addObserver:selector:name:object:")
-	_nSNotificationCenterSelPostNotification = objc.RegisterName("postNotification:")
-	_nSNotificationCenterSelPostNotificationNameObject = objc.RegisterName("postNotificationName:object:")
+	_clsNSNotificationCenter                                   = _objcClass("NSNotificationCenter")
+	_nSNotificationCenterSelAddObserverSelectorNameObject      = objc.RegisterName("addObserver:selector:name:object:")
+	_nSNotificationCenterSelPostNotification                   = objc.RegisterName("postNotification:")
+	_nSNotificationCenterSelPostNotificationNameObject         = objc.RegisterName("postNotificationName:object:")
 	_nSNotificationCenterSelPostNotificationNameObjectUserInfo = objc.RegisterName("postNotificationName:object:userInfo:")
-	_nSNotificationCenterSelRemoveObserver = objc.RegisterName("removeObserver:")
-	_nSNotificationCenterSelRemoveObserverNameObject = objc.RegisterName("removeObserver:name:object:")
+	_nSNotificationCenterSelRemoveObserver                     = objc.RegisterName("removeObserver:")
+	_nSNotificationCenterSelRemoveObserverNameObject           = objc.RegisterName("removeObserver:name:object:")
 	_nSNotificationCenterSelAddObserverForNameObjectQueueUsing = objc.RegisterName("addObserverForName:object:queue:usingBlock:")
-	_nSNotificationCenterSelDefaultCenter = objc.RegisterName("defaultCenter")
+	_nSNotificationCenterSelDefaultCenter                      = objc.RegisterName("defaultCenter")
 )
 
 func NSNotificationCenterFromID(id objc.ID) *NSNotificationCenter {
@@ -77,7 +77,8 @@ func (o *NSNotificationCenter) AddObserverForNameObjectQueueUsing(name *NSString
 
 func NSNotificationCenterDefaultCenter() *NSNotificationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotificationCenter), _nSNotificationCenterSelDefaultCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationCenterFromID(_ret)
 }
-

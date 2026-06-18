@@ -47,4 +47,3 @@ type DirectoryEntryPackerable interface {
 }
 
 var _ DirectoryEntryPackerable = (*DirectoryEntryPacker)(nil)
-

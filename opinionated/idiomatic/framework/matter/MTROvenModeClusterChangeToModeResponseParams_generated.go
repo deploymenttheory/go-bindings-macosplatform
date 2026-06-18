@@ -18,7 +18,9 @@ type MTROvenModeClusterChangeToModeResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROvenModeClusterChangeToModeResponseParams].
-func (x *MTROvenModeClusterChangeToModeResponseParams) Unwrap() *raw.MTROvenModeClusterChangeToModeResponseParams { return x.inner }
+func (x *MTROvenModeClusterChangeToModeResponseParams) Unwrap() *raw.MTROvenModeClusterChangeToModeResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type MTROvenModeClusterChangeToModeResponseParamsable interface {
 }
 
 var _ MTROvenModeClusterChangeToModeResponseParamsable = (*MTROvenModeClusterChangeToModeResponseParams)(nil)
-

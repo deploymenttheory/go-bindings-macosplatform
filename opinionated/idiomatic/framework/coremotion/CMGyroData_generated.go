@@ -49,4 +49,3 @@ type GyroDataable interface {
 }
 
 var _ GyroDataable = (*GyroData)(nil)
-

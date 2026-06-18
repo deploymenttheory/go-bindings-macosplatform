@@ -98,7 +98,9 @@ func (x *DOMHTMLOptionsCollection) SetLength(length uint) {
 
 func (x *DOMHTMLOptionsCollection) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMHTMLOptionsCollection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMHTMLOptionsCollection) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMHTMLOptionsCollectionable is the interface implemented by [DOMHTMLOptionsCollection], for mocking and DI.
 type DOMHTMLOptionsCollectionable interface {
@@ -116,4 +118,3 @@ type DOMHTMLOptionsCollectionable interface {
 }
 
 var _ DOMHTMLOptionsCollectionable = (*DOMHTMLOptionsCollection)(nil)
-

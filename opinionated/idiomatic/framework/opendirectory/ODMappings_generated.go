@@ -169,4 +169,3 @@ type Mappingsable interface {
 }
 
 var _ Mappingsable = (*Mappings)(nil)
-

@@ -18,17 +18,17 @@ type ASCredentialIdentityStore struct {
 }
 
 var (
-	_clsASCredentialIdentityStore = _objcClass("ASCredentialIdentityStore")
-	_aSCredentialIdentityStoreSelGetCredentialIdentityStoreStateWithCompletion = objc.RegisterName("getCredentialIdentityStoreStateWithCompletion:")
+	_clsASCredentialIdentityStore                                                                          = _objcClass("ASCredentialIdentityStore")
+	_aSCredentialIdentityStoreSelGetCredentialIdentityStoreStateWithCompletion                             = objc.RegisterName("getCredentialIdentityStoreStateWithCompletion:")
 	_aSCredentialIdentityStoreSelGetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler = objc.RegisterName("getCredentialIdentitiesForService:credentialIdentityTypes:completionHandler:")
-	_aSCredentialIdentityStoreSelSaveCredentialIdentitiesCompletion = objc.RegisterName("saveCredentialIdentities:completion:")
-	_aSCredentialIdentityStoreSelSaveCredentialIdentityEntriesCompletion = objc.RegisterName("saveCredentialIdentityEntries:completion:")
-	_aSCredentialIdentityStoreSelRemoveCredentialIdentitiesCompletion = objc.RegisterName("removeCredentialIdentities:completion:")
-	_aSCredentialIdentityStoreSelRemoveCredentialIdentityEntriesCompletion = objc.RegisterName("removeCredentialIdentityEntries:completion:")
-	_aSCredentialIdentityStoreSelRemoveAllCredentialIdentitiesWithCompletion = objc.RegisterName("removeAllCredentialIdentitiesWithCompletion:")
-	_aSCredentialIdentityStoreSelReplaceCredentialIdentitiesWithIdentitiesCompletion = objc.RegisterName("replaceCredentialIdentitiesWithIdentities:completion:")
-	_aSCredentialIdentityStoreSelReplaceCredentialIdentityEntriesCompletion = objc.RegisterName("replaceCredentialIdentityEntries:completion:")
-	_aSCredentialIdentityStoreSelSharedStore = objc.RegisterName("sharedStore")
+	_aSCredentialIdentityStoreSelSaveCredentialIdentitiesCompletion                                        = objc.RegisterName("saveCredentialIdentities:completion:")
+	_aSCredentialIdentityStoreSelSaveCredentialIdentityEntriesCompletion                                   = objc.RegisterName("saveCredentialIdentityEntries:completion:")
+	_aSCredentialIdentityStoreSelRemoveCredentialIdentitiesCompletion                                      = objc.RegisterName("removeCredentialIdentities:completion:")
+	_aSCredentialIdentityStoreSelRemoveCredentialIdentityEntriesCompletion                                 = objc.RegisterName("removeCredentialIdentityEntries:completion:")
+	_aSCredentialIdentityStoreSelRemoveAllCredentialIdentitiesWithCompletion                               = objc.RegisterName("removeAllCredentialIdentitiesWithCompletion:")
+	_aSCredentialIdentityStoreSelReplaceCredentialIdentitiesWithIdentitiesCompletion                       = objc.RegisterName("replaceCredentialIdentitiesWithIdentities:completion:")
+	_aSCredentialIdentityStoreSelReplaceCredentialIdentityEntriesCompletion                                = objc.RegisterName("replaceCredentialIdentityEntries:completion:")
+	_aSCredentialIdentityStoreSelSharedStore                                                               = objc.RegisterName("sharedStore")
 )
 
 func ASCredentialIdentityStoreFromID(id objc.ID) *ASCredentialIdentityStore {
@@ -160,7 +160,8 @@ func (o *ASCredentialIdentityStore) ReplaceCredentialIdentityEntriesCompletion(n
 
 func ASCredentialIdentityStoreSharedStore() *ASCredentialIdentityStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASCredentialIdentityStore), _aSCredentialIdentityStoreSelSharedStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASCredentialIdentityStoreFromID(_ret)
 }
-

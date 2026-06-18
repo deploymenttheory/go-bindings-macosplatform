@@ -33,4 +33,3 @@ func (e MPSDeviceOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

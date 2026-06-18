@@ -124,9 +124,13 @@ func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesEx
 	}
 }
 
-func (x *MTRClusterDiagnosticLogs) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterDiagnosticLogs) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterDiagnosticLogs) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterDiagnosticLogs) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterDiagnosticLogsable is the interface implemented by [MTRClusterDiagnosticLogs], for mocking and DI.
 type MTRClusterDiagnosticLogsable interface {
@@ -141,4 +145,3 @@ type MTRClusterDiagnosticLogsable interface {
 }
 
 var _ MTRClusterDiagnosticLogsable = (*MTRClusterDiagnosticLogs)(nil)
-

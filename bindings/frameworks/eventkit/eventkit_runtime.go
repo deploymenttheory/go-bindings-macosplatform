@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_eventkitLib uintptr
-	_loadOnce sync.Once
+	_eventkitLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,9 +48,15 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DATETIME_COMPONENTS_DO_NOT_USE", func() { purego.RegisterLibFunc(&_fnDATETIME_COMPONENTS_DO_NOT_USE, _eventkitLib, "DATETIME_COMPONENTS_DO_NOT_USE") })
-	_register("DATE_COMPONENTS_DO_NOT_USE", func() { purego.RegisterLibFunc(&_fnDATE_COMPONENTS_DO_NOT_USE, _eventkitLib, "DATE_COMPONENTS_DO_NOT_USE") })
-	_register("EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE", func() { purego.RegisterLibFunc(&_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE, _eventkitLib, "EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE") })
+	_register("DATETIME_COMPONENTS_DO_NOT_USE", func() {
+		purego.RegisterLibFunc(&_fnDATETIME_COMPONENTS_DO_NOT_USE, _eventkitLib, "DATETIME_COMPONENTS_DO_NOT_USE")
+	})
+	_register("DATE_COMPONENTS_DO_NOT_USE", func() {
+		purego.RegisterLibFunc(&_fnDATE_COMPONENTS_DO_NOT_USE, _eventkitLib, "DATE_COMPONENTS_DO_NOT_USE")
+	})
+	_register("EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE", func() {
+		purego.RegisterLibFunc(&_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE, _eventkitLib, "EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE")
+	})
 }
 
 func init() {

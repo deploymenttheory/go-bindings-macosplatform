@@ -69,4 +69,3 @@ type LibArtistable interface {
 }
 
 var _ LibArtistable = (*LibArtist)(nil)
-

@@ -41,4 +41,3 @@ type MTROnboardingPayloadParserable interface {
 }
 
 var _ MTROnboardingPayloadParserable = (*MTROnboardingPayloadParser)(nil)
-

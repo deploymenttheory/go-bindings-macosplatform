@@ -16,7 +16,7 @@ type MPSCNNNeuronPower struct {
 }
 
 var (
-	_clsMPSCNNNeuronPower = _objcClass("MPSCNNNeuronPower")
+	_clsMPSCNNNeuronPower                  = _objcClass("MPSCNNNeuronPower")
 	_mPSCNNNeuronPowerSelInitWithDeviceABC = objc.RegisterName("initWithDevice:a:b:c:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNNeuronPowerFromID(id objc.ID) *MPSCNNNeuronPower {
 // @abstract   Initialize a Power neuron filter. @param      device          The device the filter will run on. @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @param      c               Filter property "c". See class discussion. @return     A valid MPSCNNNeuronPower object or nil, if failure.
 func (o *MPSCNNNeuronPower) InitWithDeviceABC(device metal.MTLDevice, a float32, b float32, c float32) *MPSCNNNeuronPower {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronPowerSelInitWithDeviceABC, device, a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronPowerFromID(_ret)
 }
-

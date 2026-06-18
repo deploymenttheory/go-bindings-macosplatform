@@ -15,16 +15,16 @@ type NSTitlebarAccessoryViewController struct {
 }
 
 var (
-	_clsNSTitlebarAccessoryViewController = _objcClass("NSTitlebarAccessoryViewController")
-	_nSTitlebarAccessoryViewControllerSelLayoutAttribute = objc.RegisterName("layoutAttribute")
-	_nSTitlebarAccessoryViewControllerSelSetLayoutAttribute = objc.RegisterName("setLayoutAttribute:")
-	_nSTitlebarAccessoryViewControllerSelFullScreenMinHeight = objc.RegisterName("fullScreenMinHeight")
-	_nSTitlebarAccessoryViewControllerSelSetFullScreenMinHeight = objc.RegisterName("setFullScreenMinHeight:")
-	_nSTitlebarAccessoryViewControllerSelIsHidden = objc.RegisterName("isHidden")
-	_nSTitlebarAccessoryViewControllerSelSetHidden = objc.RegisterName("setHidden:")
-	_nSTitlebarAccessoryViewControllerSelAutomaticallyAdjustsSize = objc.RegisterName("automaticallyAdjustsSize")
-	_nSTitlebarAccessoryViewControllerSelSetAutomaticallyAdjustsSize = objc.RegisterName("setAutomaticallyAdjustsSize:")
-	_nSTitlebarAccessoryViewControllerSelPreferredScrollEdgeEffectStyle = objc.RegisterName("preferredScrollEdgeEffectStyle")
+	_clsNSTitlebarAccessoryViewController                                  = _objcClass("NSTitlebarAccessoryViewController")
+	_nSTitlebarAccessoryViewControllerSelLayoutAttribute                   = objc.RegisterName("layoutAttribute")
+	_nSTitlebarAccessoryViewControllerSelSetLayoutAttribute                = objc.RegisterName("setLayoutAttribute:")
+	_nSTitlebarAccessoryViewControllerSelFullScreenMinHeight               = objc.RegisterName("fullScreenMinHeight")
+	_nSTitlebarAccessoryViewControllerSelSetFullScreenMinHeight            = objc.RegisterName("setFullScreenMinHeight:")
+	_nSTitlebarAccessoryViewControllerSelIsHidden                          = objc.RegisterName("isHidden")
+	_nSTitlebarAccessoryViewControllerSelSetHidden                         = objc.RegisterName("setHidden:")
+	_nSTitlebarAccessoryViewControllerSelAutomaticallyAdjustsSize          = objc.RegisterName("automaticallyAdjustsSize")
+	_nSTitlebarAccessoryViewControllerSelSetAutomaticallyAdjustsSize       = objc.RegisterName("setAutomaticallyAdjustsSize:")
+	_nSTitlebarAccessoryViewControllerSelPreferredScrollEdgeEffectStyle    = objc.RegisterName("preferredScrollEdgeEffectStyle")
 	_nSTitlebarAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle = objc.RegisterName("setPreferredScrollEdgeEffectStyle:")
 )
 
@@ -77,7 +77,9 @@ func (o *NSTitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(automati
 // The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSTitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *NSScrollEdgeEffectStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTitlebarAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollEdgeEffectStyleFromID(_ret)
 }
 
@@ -85,4 +87,3 @@ func (o *NSTitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *NS
 func (o *NSTitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *NSScrollEdgeEffectStyle) {
 	o.Ptr().Send(_nSTitlebarAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
 }
-

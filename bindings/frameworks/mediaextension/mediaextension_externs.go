@@ -28,7 +28,8 @@ func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() uintptr {
 
 func MediaExtensionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaextensionLib, "MediaExtensionErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

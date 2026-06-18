@@ -114,4 +114,3 @@ type FSVolumeXattrOperations interface {
 	ListXattrsOfItemReplyHandler(item *FSItem, reply func(*foundation.NSArray[*FSFileName], unsafe.Pointer))
 	SetXattrOperationsInhibited(xattrOperationsInhibited bool)
 }
-

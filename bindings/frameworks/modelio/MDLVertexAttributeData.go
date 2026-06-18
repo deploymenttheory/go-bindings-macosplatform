@@ -18,16 +18,16 @@ type MDLVertexAttributeData struct {
 }
 
 var (
-	_clsMDLVertexAttributeData = _objcClass("MDLVertexAttributeData")
-	_mDLVertexAttributeDataSelMap = objc.RegisterName("map")
-	_mDLVertexAttributeDataSelSetMap = objc.RegisterName("setMap:")
-	_mDLVertexAttributeDataSelDataStart = objc.RegisterName("dataStart")
-	_mDLVertexAttributeDataSelSetDataStart = objc.RegisterName("setDataStart:")
-	_mDLVertexAttributeDataSelStride = objc.RegisterName("stride")
-	_mDLVertexAttributeDataSelSetStride = objc.RegisterName("setStride:")
-	_mDLVertexAttributeDataSelFormat = objc.RegisterName("format")
-	_mDLVertexAttributeDataSelSetFormat = objc.RegisterName("setFormat:")
-	_mDLVertexAttributeDataSelBufferSize = objc.RegisterName("bufferSize")
+	_clsMDLVertexAttributeData              = _objcClass("MDLVertexAttributeData")
+	_mDLVertexAttributeDataSelMap           = objc.RegisterName("map")
+	_mDLVertexAttributeDataSelSetMap        = objc.RegisterName("setMap:")
+	_mDLVertexAttributeDataSelDataStart     = objc.RegisterName("dataStart")
+	_mDLVertexAttributeDataSelSetDataStart  = objc.RegisterName("setDataStart:")
+	_mDLVertexAttributeDataSelStride        = objc.RegisterName("stride")
+	_mDLVertexAttributeDataSelSetStride     = objc.RegisterName("setStride:")
+	_mDLVertexAttributeDataSelFormat        = objc.RegisterName("format")
+	_mDLVertexAttributeDataSelSetFormat     = objc.RegisterName("setFormat:")
+	_mDLVertexAttributeDataSelBufferSize    = objc.RegisterName("bufferSize")
 	_mDLVertexAttributeDataSelSetBufferSize = objc.RegisterName("setBufferSize:")
 )
 
@@ -43,7 +43,9 @@ func MDLVertexAttributeDataFromID(id objc.ID) *MDLVertexAttributeData {
 
 func (o *MDLVertexAttributeData) Map() *MDLMeshBufferMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexAttributeDataSelMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshBufferMapFromID(_ret)
 }
 
@@ -86,4 +88,3 @@ func (o *MDLVertexAttributeData) BufferSize() uint {
 func (o *MDLVertexAttributeData) SetBufferSize(bufferSize uint) {
 	o.Ptr().Send(_mDLVertexAttributeDataSelSetBufferSize, bufferSize)
 }
-

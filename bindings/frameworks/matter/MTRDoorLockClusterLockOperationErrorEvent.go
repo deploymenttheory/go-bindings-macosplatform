@@ -16,21 +16,21 @@ type MTRDoorLockClusterLockOperationErrorEvent struct {
 }
 
 var (
-	_clsMTRDoorLockClusterLockOperationErrorEvent = _objcClass("MTRDoorLockClusterLockOperationErrorEvent")
-	_mTRDoorLockClusterLockOperationErrorEventSelLockOperationType = objc.RegisterName("lockOperationType")
+	_clsMTRDoorLockClusterLockOperationErrorEvent                     = _objcClass("MTRDoorLockClusterLockOperationErrorEvent")
+	_mTRDoorLockClusterLockOperationErrorEventSelLockOperationType    = objc.RegisterName("lockOperationType")
 	_mTRDoorLockClusterLockOperationErrorEventSelSetLockOperationType = objc.RegisterName("setLockOperationType:")
-	_mTRDoorLockClusterLockOperationErrorEventSelOperationSource = objc.RegisterName("operationSource")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetOperationSource = objc.RegisterName("setOperationSource:")
-	_mTRDoorLockClusterLockOperationErrorEventSelOperationError = objc.RegisterName("operationError")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetOperationError = objc.RegisterName("setOperationError:")
-	_mTRDoorLockClusterLockOperationErrorEventSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterLockOperationErrorEventSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
-	_mTRDoorLockClusterLockOperationErrorEventSelSourceNode = objc.RegisterName("sourceNode")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetSourceNode = objc.RegisterName("setSourceNode:")
-	_mTRDoorLockClusterLockOperationErrorEventSelCredentials = objc.RegisterName("credentials")
-	_mTRDoorLockClusterLockOperationErrorEventSelSetCredentials = objc.RegisterName("setCredentials:")
+	_mTRDoorLockClusterLockOperationErrorEventSelOperationSource      = objc.RegisterName("operationSource")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetOperationSource   = objc.RegisterName("setOperationSource:")
+	_mTRDoorLockClusterLockOperationErrorEventSelOperationError       = objc.RegisterName("operationError")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetOperationError    = objc.RegisterName("setOperationError:")
+	_mTRDoorLockClusterLockOperationErrorEventSelUserIndex            = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetUserIndex         = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterLockOperationErrorEventSelFabricIndex          = objc.RegisterName("fabricIndex")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetFabricIndex       = objc.RegisterName("setFabricIndex:")
+	_mTRDoorLockClusterLockOperationErrorEventSelSourceNode           = objc.RegisterName("sourceNode")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetSourceNode        = objc.RegisterName("setSourceNode:")
+	_mTRDoorLockClusterLockOperationErrorEventSelCredentials          = objc.RegisterName("credentials")
+	_mTRDoorLockClusterLockOperationErrorEventSelSetCredentials       = objc.RegisterName("setCredentials:")
 )
 
 func MTRDoorLockClusterLockOperationErrorEventFromID(id objc.ID) *MTRDoorLockClusterLockOperationErrorEvent {
@@ -45,7 +45,9 @@ func MTRDoorLockClusterLockOperationErrorEventFromID(id objc.ID) *MTRDoorLockClu
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) LockOperationType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelLockOperationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) SetLockOperationType(lockOpe
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) OperationSource() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelOperationSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) SetOperationSource(operation
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) OperationError() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelOperationError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) SetOperationError(operationE
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) SetUserIndex(userIndex *foun
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) SetFabricIndex(fabricIndex *
 
 func (o *MTRDoorLockClusterLockOperationErrorEvent) SourceNode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterLockOperationErrorEventSelSourceNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -111,4 +123,3 @@ func (o *MTRDoorLockClusterLockOperationErrorEvent) Credentials() *foundation.NS
 func (o *MTRDoorLockClusterLockOperationErrorEvent) SetCredentials(credentials *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRDoorLockClusterLockOperationErrorEventSelSetCredentials, credentials)
 }
-

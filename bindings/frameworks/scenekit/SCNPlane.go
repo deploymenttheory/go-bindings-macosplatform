@@ -15,19 +15,19 @@ type SCNPlane struct {
 }
 
 var (
-	_clsSCNPlane = _objcClass("SCNPlane")
-	_sCNPlaneSelPlaneWithWidthHeight = objc.RegisterName("planeWithWidth:height:")
-	_sCNPlaneSelWidth = objc.RegisterName("width")
-	_sCNPlaneSelSetWidth = objc.RegisterName("setWidth:")
-	_sCNPlaneSelHeight = objc.RegisterName("height")
-	_sCNPlaneSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNPlaneSelWidthSegmentCount = objc.RegisterName("widthSegmentCount")
-	_sCNPlaneSelSetWidthSegmentCount = objc.RegisterName("setWidthSegmentCount:")
-	_sCNPlaneSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
+	_clsSCNPlane                      = _objcClass("SCNPlane")
+	_sCNPlaneSelPlaneWithWidthHeight  = objc.RegisterName("planeWithWidth:height:")
+	_sCNPlaneSelWidth                 = objc.RegisterName("width")
+	_sCNPlaneSelSetWidth              = objc.RegisterName("setWidth:")
+	_sCNPlaneSelHeight                = objc.RegisterName("height")
+	_sCNPlaneSelSetHeight             = objc.RegisterName("setHeight:")
+	_sCNPlaneSelWidthSegmentCount     = objc.RegisterName("widthSegmentCount")
+	_sCNPlaneSelSetWidthSegmentCount  = objc.RegisterName("setWidthSegmentCount:")
+	_sCNPlaneSelHeightSegmentCount    = objc.RegisterName("heightSegmentCount")
 	_sCNPlaneSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
-	_sCNPlaneSelCornerRadius = objc.RegisterName("cornerRadius")
-	_sCNPlaneSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
-	_sCNPlaneSelCornerSegmentCount = objc.RegisterName("cornerSegmentCount")
+	_sCNPlaneSelCornerRadius          = objc.RegisterName("cornerRadius")
+	_sCNPlaneSelSetCornerRadius       = objc.RegisterName("setCornerRadius:")
+	_sCNPlaneSelCornerSegmentCount    = objc.RegisterName("cornerSegmentCount")
 	_sCNPlaneSelSetCornerSegmentCount = objc.RegisterName("setCornerSegmentCount:")
 )
 
@@ -44,7 +44,9 @@ func SCNPlaneFromID(id objc.ID) *SCNPlane {
 // @method planeWithWidth:height: @abstract Creates and returns a plane with given width and height. @param width The width of the plane. @param height The height of the plane.
 func SCNPlanePlaneWithWidthHeight(width float64, height float64) *SCNPlane {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPlane), _sCNPlaneSelPlaneWithWidthHeight, width, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPlaneFromID(_ret)
 }
 
@@ -107,4 +109,3 @@ func (o *SCNPlane) CornerSegmentCount() int {
 func (o *SCNPlane) SetCornerSegmentCount(cornerSegmentCount int) {
 	o.Ptr().Send(_sCNPlaneSelSetCornerSegmentCount, cornerSegmentCount)
 }
-

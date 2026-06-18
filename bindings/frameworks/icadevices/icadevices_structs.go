@@ -11,44 +11,44 @@ import (
 
 // @struct ICACloseSessionPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the session to be closed. <--
 type ICACloseSessionPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
 }
 
 // @struct ICACopyObjectDataPB @field header See description for ICAHeader.  <-> @field object A file object.  <-- @field startByte Starting byte offset of the data in the file object.  <-- @field requestedSize Requested data size in bytes. <-- @field data A pointer to CFDataRef in which the data will be returned. --> It is the responsibility fo the caller to release this object.
 type ICACopyObjectDataPB struct {
-	Header ICAHeader
-	Object uint
-	StartByte uint
+	Header        ICAHeader
+	Object        uint
+	StartByte     uint
 	RequestedSize uint
-	Data unsafe.Pointer
+	Data          unsafe.Pointer
 }
 
 // @struct ICACopyObjectPropertyDictionaryPB @field header See description for ICAHeader. <-> @field object An object whose properties are being requested. <-- @field theDict A dictionary to hold the properties. This must be released by the caller. -->
 type ICACopyObjectPropertyDictionaryPB struct {
-	Header ICAHeader
-	Object uint
+	Header  ICAHeader
+	Object  uint
 	TheDict unsafe.Pointer
 }
 
 // @struct ICACopyObjectThumbnailPB @field header See description for ICAHeader. <-> @field object An object whose thumbail is being requested. <-- @field thumbnailFormat One of the format values defined above. <-- @field thumbnailData A pointer to a CFDataRef holding the thumbnail data. The returned CFDataRef must be released by the caller. -->
 type ICACopyObjectThumbnailPB struct {
-	Header ICAHeader
-	Object uint
+	Header          ICAHeader
+	Object          uint
 	ThumbnailFormat uint
-	ThumbnailData unsafe.Pointer
+	ThumbnailData   unsafe.Pointer
 }
 
 // @struct ICADownloadFilePB
 type ICADownloadFilePB struct {
-	Header ICAHeader
-	Object uint
-	DirFSRef *carboncore.FSRef
-	Flags uint
-	FileType uint
-	FileCreator uint
+	Header        ICAHeader
+	Object        uint
+	DirFSRef      *carboncore.FSRef
+	Flags         uint
+	FileType      uint
+	FileCreator   uint
 	RotationAngle int
-	FileFSRef *carboncore.FSRef
+	FileFSRef     *carboncore.FSRef
 }
 
 // @struct ICAGetDeviceListPB @field header See description for ICAHeader. <--> @field object The device list object, if ICAGetDeviceList returns successfully. -->
@@ -59,170 +59,170 @@ type ICAGetDeviceListPB struct {
 
 // @struct ICAHeader @discussion This is the first field in all parameter blocks used by APIs defined in ICAApplication.h. Type of parameter passed to a callback function used by APIs defined in ICAApplication.h. The parameter for the completion proc should to be casted to an appropriate type such as ICAGetChildCountPB* for it to be useful. @field err Error returned by an API. --> @field refcon An arbitrary refcon value passed to the callback. <--
 type ICAHeader struct {
-	Err int16
+	Err    int16
 	Refcon uint
 }
 
 // @struct ICAImportImagePB @field header See description for ICAHeader.  <-> @field deviceObject Object ID of a camera or scanner device. Set this to NULL to ge the default behavior: (a) if no device is connected, a panel saying that there�s no device connected is displayed, (b) if a single device is connected, an appropriate user interface to access that device will be displayed, (c) if several devices are connected, a device selector panel will be displayed. <-- @field flags One or more flags (combined with an OR operator) defined in ImportImage flags enum. <-- @field supportedFileTypes An array of file extension strings such as "jpg", "tif", etc., that are of interest to the calling application. Set to NULL to display all files. <-- @field filterProc Specify a filter proc to that will be called for each file before it is displayed in the user interface. <-- @field importedImages Returns an array of CFDataRefs for the imported images if the kICADownloadAndReturnPathArray flag is not specified. Otherwise returns an array of CFStringRefs holding the paths of the images that are downloaded. The caller should provide a pointer to a CFArrayRef object initialized to NULL. The caller is responsible for released the array returned by this function. -->
 type ICAImportImagePB struct {
-	Header ICAHeader
-	DeviceObject uint
-	Flags uint
+	Header             ICAHeader
+	DeviceObject       uint
+	Flags              uint
 	SupportedFileTypes unsafe.Pointer
-	FilterProc unsafe.Pointer
-	ImportedImages unsafe.Pointer
+	FilterProc         unsafe.Pointer
+	ImportedImages     unsafe.Pointer
 }
 
 type ICALoadDeviceModulePB struct {
-	Header ICAHeader
+	Header          ICAHeader
 	ParamDictionary unsafe.Pointer
 }
 
 // @struct ICAMessage @field messageType A message type. e.g., kICAMessageCameraCaptureNewImage. <-- @field startByte Offset in dataPtr from where data access for read/write should occur. <-- @field dataPtr A pointer to a data buffer. <-- @field dataSize Size of data. <-- @field dataType Type of data. <--
 type ICAMessage struct {
 	MessageType uint
-	StartByte uint
-	DataPtr unsafe.Pointer
-	DataSize uint
-	DataType uint
+	StartByte   uint
+	DataPtr     unsafe.Pointer
+	DataSize    uint
+	DataType    uint
 }
 
 // @struct ICAObjectInfo @field objectType An object type, e.g., kICAFile. @field objectSubtype An object subtype, e.g., kICAFileImage.
 type ICAObjectInfo struct {
-	ObjectType uint
+	ObjectType    uint
 	ObjectSubtype uint
 }
 
 // @struct ICAObjectSendMessagePB @field header See description for ICAHeader. <--> @field object A target object for the message sent by ICAObjectSendMessage. <-- @field message One of the messages define above. <-- @field result A message specific result is returned here. -->
 type ICAObjectSendMessagePB struct {
-	Header ICAHeader
-	Object uint
+	Header  ICAHeader
+	Object  uint
 	Message ICAMessage
-	Result uint
+	Result  uint
 }
 
 // @struct ICAOpenSessionPB @field header See description for ICAHeader. <-> @field deviceObject A camera object. <-- @field sessionID A session ID of the opened session. -->
 type ICAOpenSessionPB struct {
-	Header ICAHeader
+	Header       ICAHeader
 	DeviceObject uint
-	SessionID uint
+	SessionID    uint
 }
 
 // @struct ICAPTPEventDataset @field dataLength Data length in bytes @field containerType PTP container type @field eventCode PTP event code @field transactionID PTP transaction ID @field params PTP params. The number of params should be (dataLength - 12)/4
 type ICAPTPEventDataset struct {
-	DataLength uint
+	DataLength    uint
 	ContainerType uint16
-	EventCode uint16
+	EventCode     uint16
 	TransactionID uint
-	Params [3]uint
+	Params        [3]uint
 }
 
 // @struct ICAPTPPassThroughPB @field commandCode PTP command code (including vendor specific) <-- @field resultCode PTP response code --> @field numOfInputParams Number of valid parameters to be sent to device <-- @field numOfOutputParams Number of valid parameters expected from device <-- @field params PTP parameters (command specific / optional) <-> @field dataUsageMode One of (kICACameraPassThruSend, kICACameraPassThruReceive, kICACameraPassThruNotUsed) <-- @field flags Not used currently @field dataSize Size of data block <-> @field data Data block <->
 type ICAPTPPassThroughPB struct {
-	CommandCode uint
-	ResultCode uint
-	NumOfInputParams uint
+	CommandCode       uint
+	ResultCode        uint
+	NumOfInputParams  uint
 	NumOfOutputParams uint
-	Params [4]uint
-	DataUsageMode uint
-	Flags uint
-	DataSize uint
-	Data [1]uint8
+	Params            [4]uint
+	DataUsageMode     uint
+	Flags             uint
+	DataSize          uint
+	Data              [1]uint8
 }
 
 type ICARawFileHeader struct {
-	ImageDataOffset uint
-	Version uint
-	ImageWidth uint
-	ImageHeight uint
-	BytesPerRow uint
+	ImageDataOffset    uint
+	Version            uint
+	ImageWidth         uint
+	ImageHeight        uint
+	BytesPerRow        uint
 	NumberOfComponents uint
-	BitsPerComponent uint
-	BitsPerPixel uint
-	CgColorSpaceModel uint
-	BitmapInfo uint
-	Orientation uint
-	Dpi uint
-	ColorSyncModeStr [64]int8
+	BitsPerComponent   uint
+	BitsPerPixel       uint
+	CgColorSpaceModel  uint
+	BitmapInfo         uint
+	Orientation        uint
+	Dpi                uint
+	ColorSyncModeStr   [64]int8
 }
 
 type ICARegisterForEventNotificationPB struct {
-	Header ICAHeader
+	Header           ICAHeader
 	ObjectOfInterest uint
 	EventsOfInterest unsafe.Pointer
 	NotificationProc unsafe.Pointer
-	Options unsafe.Pointer
+	Options          unsafe.Pointer
 }
 
 // @struct ICAScannerCloseSessionPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the session to be closed. <--
 type ICAScannerCloseSessionPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
 }
 
 // @struct ICAScannerGetParametersPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the scanner whose parameters are being fetched. <-- @field theDict A dictionary containing the parameters. -->
 type ICAScannerGetParametersPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
-	TheDict unsafe.Pointer
+	TheDict   unsafe.Pointer
 }
 
 // @struct ICAScannerInitializePB @field header See description for ICAHeader. <-> @field sessionID A session ID of the scanner to be initialized. <--
 type ICAScannerInitializePB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
 }
 
 // @struct ICAScannerOpenSessionPB @field header See description for ICAHeader. <-> @field object A scanner object. <-- @field sessionID A session ID of the opened session. -->
 type ICAScannerOpenSessionPB struct {
-	Header ICAHeader
-	Object uint
+	Header    ICAHeader
+	Object    uint
 	SessionID uint
 }
 
 // @struct ICAScannerSetParametersPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the scanner whose parameters are being set. <-- @field theDict A dictionary containing the parameters. <--
 type ICAScannerSetParametersPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
-	TheDict unsafe.Pointer
+	TheDict   unsafe.Pointer
 }
 
 // @struct ICAScannerStartPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the scanner that should start scanning. <--
 type ICAScannerStartPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
 }
 
 // @struct ICAScannerStatusPB @field header See description for ICAHeader. <-> @field sessionID A session ID of the scanner whose status is being fetched. <-- @field status A status value. -->
 type ICAScannerStatusPB struct {
-	Header ICAHeader
+	Header    ICAHeader
 	SessionID uint
-	Status uint
+	Status    uint
 }
 
 type ICASendNotificationPB struct {
-	Header ICAHeader
+	Header                 ICAHeader
 	NotificationDictionary unsafe.Pointer
-	ReplyCode uint
+	ReplyCode              uint
 }
 
 // @struct ICAUnloadDeviceModulePB @field header See description for ICAHeader. <-> @field deviceObject <-- A device ICAObject.
 type ICAUnloadDeviceModulePB struct {
-	Header ICAHeader
+	Header       ICAHeader
 	DeviceObject uint
 }
 
 // @struct ICAUploadFilePB
 type ICAUploadFilePB struct {
-	Header ICAHeader
+	Header       ICAHeader
 	ParentObject uint
-	FileFSRef *carboncore.FSRef
-	Flags uint
+	FileFSRef    *carboncore.FSRef
+	Flags        uint
 }
 
 // @struct ICDHeader @discussion This is the first field in all parameter blocks used by APIs defined in ICADevices.h. Type of parameter passed to a callback function used by APIs defined in ICADevices.h. The parameter for the completion proc should to be casted to an appropriate type such as ICD_NewObjectPB* for it to be useful. @field err Error returned by an API. --> @field refcon An arbitrary refcon value passed to the callback. <--
 type ICDHeader struct {
-	Err int16
+	Err    int16
 	Refcon uint
 }
 
@@ -234,180 +234,179 @@ type ICD_DisposeObjectPB struct {
 
 // @struct ICD_NewObjectPB @discussion Parameter block passed to function <code>ICDNewObject</code>. @field header The function returns error code in the <code>err</code> field of this structure. The <code>refcon</code> field of this structure is used to pass a pointer to the callback function if <code>ICDNewObject</code> is called asynchronously. @field  parentObject Parent object of the new object. @field  objectInfo <code>ICAObjectInfo</code> struct filled with information about the new object. @field  object New object.
 type ICD_NewObjectPB struct {
-	Header ICDHeader
+	Header       ICDHeader
 	ParentObject uint
-	ObjectInfo ICAObjectInfo
-	Object uint
+	ObjectInfo   ICAObjectInfo
+	Object       uint
 }
 
 type ICD_ObjectSendMessagePB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
-	ConnectionID uint
-	Message ICAMessage
+	Header        ICDHeader
+	Object        uint
+	ObjectInfo    ICAObjectInfo
+	ConnectionID  uint
+	Message       ICAMessage
 	TotalDataSize uint
-	Result uint
+	Result        uint
 }
 
 type ICD_ScannerCloseSessionPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
+	SessionID    uint
 }
 
 type ICD_ScannerGetParametersPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
-	TheDict unsafe.Pointer
+	SessionID    uint
+	TheDict      unsafe.Pointer
 }
 
 type ICD_ScannerInitializePB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
+	SessionID    uint
 }
 
 type ICD_ScannerObjectSendMessagePB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
-	ConnectionID uint
-	Message ICAMessage
+	Header        ICDHeader
+	Object        uint
+	ObjectInfo    ICAObjectInfo
+	ConnectionID  uint
+	Message       ICAMessage
 	TotalDataSize uint
-	Result uint
+	Result        uint
 }
 
 type ICD_ScannerOpenSessionPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
+	SessionID    uint
 }
 
 type ICD_ScannerSetParametersPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
-	TheDict unsafe.Pointer
+	SessionID    uint
+	TheDict      unsafe.Pointer
 }
 
 type ICD_ScannerStartPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
+	SessionID    uint
 }
 
 type ICD_ScannerStatusPB struct {
-	Header ICDHeader
-	Object uint
-	ObjectInfo ICAObjectInfo
+	Header       ICDHeader
+	Object       uint
+	ObjectInfo   ICAObjectInfo
 	ConnectionID uint
-	SessionID uint
-	Status uint
+	SessionID    uint
+	Status       uint
 }
 
 type ICD_Scannerscanner_callback_functions struct {
-	F_ICD_ScannerOpenUSBDevice unsafe.Pointer
-	F_ICD_ScannerOpenUSBDeviceWithIORegPath unsafe.Pointer
-	F_ICD_ScannerCloseDevice unsafe.Pointer
-	F_ICD_ScannerPeriodicTask unsafe.Pointer
-	F_ICD_ScannerGetObjectInfo unsafe.Pointer
-	F_ICD_ScannerCleanup unsafe.Pointer
-	F_ICD_ScannerGetPropertyData unsafe.Pointer
-	F_ICD_ScannerSetPropertyData unsafe.Pointer
-	F_ICD_ScannerReadFileData unsafe.Pointer
-	F_ICD_ScannerWriteFileData unsafe.Pointer
-	F_ICD_ScannerSendMessage unsafe.Pointer
-	F_ICD_ScannerAddPropertiesToCFDictionary unsafe.Pointer
-	F_ICD_ScannerOpenFireWireDevice unsafe.Pointer
+	F_ICD_ScannerOpenUSBDevice                   unsafe.Pointer
+	F_ICD_ScannerOpenUSBDeviceWithIORegPath      unsafe.Pointer
+	F_ICD_ScannerCloseDevice                     unsafe.Pointer
+	F_ICD_ScannerPeriodicTask                    unsafe.Pointer
+	F_ICD_ScannerGetObjectInfo                   unsafe.Pointer
+	F_ICD_ScannerCleanup                         unsafe.Pointer
+	F_ICD_ScannerGetPropertyData                 unsafe.Pointer
+	F_ICD_ScannerSetPropertyData                 unsafe.Pointer
+	F_ICD_ScannerReadFileData                    unsafe.Pointer
+	F_ICD_ScannerWriteFileData                   unsafe.Pointer
+	F_ICD_ScannerSendMessage                     unsafe.Pointer
+	F_ICD_ScannerAddPropertiesToCFDictionary     unsafe.Pointer
+	F_ICD_ScannerOpenFireWireDevice              unsafe.Pointer
 	F_ICD_ScannerOpenFireWireDeviceWithIORegPath unsafe.Pointer
-	F_ICD_ScannerOpenSession unsafe.Pointer
-	F_ICD_ScannerCloseSession unsafe.Pointer
-	F_ICD_ScannerInitialize unsafe.Pointer
-	F_ICD_ScannerGetParameters unsafe.Pointer
-	F_ICD_ScannerSetParameters unsafe.Pointer
-	F_ICD_ScannerStatus unsafe.Pointer
-	F_ICD_ScannerStart unsafe.Pointer
-	F_ICD_ScannerOpenBluetoothDevice unsafe.Pointer
-	F_ICD_ScannerOpenTCPIPDevice unsafe.Pointer
-	F_ICD_ScannerWriteDataToFile unsafe.Pointer
-	F_ICD_ScannerOpenMassStorageDevice unsafe.Pointer
-	F_ICD_ScannerWriteDataToFileDescriptor unsafe.Pointer
-	F_ICD_ScannerWriteDataToFileDescriptor64 unsafe.Pointer
+	F_ICD_ScannerOpenSession                     unsafe.Pointer
+	F_ICD_ScannerCloseSession                    unsafe.Pointer
+	F_ICD_ScannerInitialize                      unsafe.Pointer
+	F_ICD_ScannerGetParameters                   unsafe.Pointer
+	F_ICD_ScannerSetParameters                   unsafe.Pointer
+	F_ICD_ScannerStatus                          unsafe.Pointer
+	F_ICD_ScannerStart                           unsafe.Pointer
+	F_ICD_ScannerOpenBluetoothDevice             unsafe.Pointer
+	F_ICD_ScannerOpenTCPIPDevice                 unsafe.Pointer
+	F_ICD_ScannerWriteDataToFile                 unsafe.Pointer
+	F_ICD_ScannerOpenMassStorageDevice           unsafe.Pointer
+	F_ICD_ScannerWriteDataToFileDescriptor       unsafe.Pointer
+	F_ICD_ScannerWriteDataToFileDescriptor64     unsafe.Pointer
 }
 
 type ICD_callback_functions struct {
-	F_ICD_OpenUSBDevice unsafe.Pointer
-	F_ICD_CloseDevice unsafe.Pointer
-	F_ICD_PeriodicTask unsafe.Pointer
-	F_ICD_GetObjectInfo unsafe.Pointer
-	F_ICD_Cleanup unsafe.Pointer
-	F_ICD_GetPropertyData unsafe.Pointer
-	F_ICD_SetPropertyData unsafe.Pointer
-	F_ICD_ReadFileData unsafe.Pointer
-	F_ICD_WriteFileData unsafe.Pointer
-	F_ICD_SendMessage unsafe.Pointer
-	F_ICD_AddPropertiesToCFDictionary unsafe.Pointer
-	F_ICD_OpenFireWireDevice unsafe.Pointer
-	F_ICD_OpenUSBDeviceWithIORegPath unsafe.Pointer
+	F_ICD_OpenUSBDevice                   unsafe.Pointer
+	F_ICD_CloseDevice                     unsafe.Pointer
+	F_ICD_PeriodicTask                    unsafe.Pointer
+	F_ICD_GetObjectInfo                   unsafe.Pointer
+	F_ICD_Cleanup                         unsafe.Pointer
+	F_ICD_GetPropertyData                 unsafe.Pointer
+	F_ICD_SetPropertyData                 unsafe.Pointer
+	F_ICD_ReadFileData                    unsafe.Pointer
+	F_ICD_WriteFileData                   unsafe.Pointer
+	F_ICD_SendMessage                     unsafe.Pointer
+	F_ICD_AddPropertiesToCFDictionary     unsafe.Pointer
+	F_ICD_OpenFireWireDevice              unsafe.Pointer
+	F_ICD_OpenUSBDeviceWithIORegPath      unsafe.Pointer
 	F_ICD_OpenFireWireDeviceWithIORegPath unsafe.Pointer
-	F_ICD_OpenBluetoothDevice unsafe.Pointer
-	F_ICD_OpenTCPIPDevice unsafe.Pointer
-	F_ICD_WriteDataToFile unsafe.Pointer
-	F_ICD_OpenMassStorageDevice unsafe.Pointer
-	F_ICD_WriteDataToFileDescriptor unsafe.Pointer
-	F_ICD_WriteDataToFileDescriptor64 unsafe.Pointer
-	F_ICD_ReadFileData64 unsafe.Pointer
+	F_ICD_OpenBluetoothDevice             unsafe.Pointer
+	F_ICD_OpenTCPIPDevice                 unsafe.Pointer
+	F_ICD_WriteDataToFile                 unsafe.Pointer
+	F_ICD_OpenMassStorageDevice           unsafe.Pointer
+	F_ICD_WriteDataToFileDescriptor       unsafe.Pointer
+	F_ICD_WriteDataToFileDescriptor64     unsafe.Pointer
+	F_ICD_ReadFileData64                  unsafe.Pointer
 }
 
 type ObjectInfo struct {
-	IcaObject uint
-	Reserved uint
-	IcaObjectInfo ICAObjectInfo
-	UniqueID uint
-	ThumbnailSize uint
-	DataSize uint
-	DataWidth uint
-	DataHeight uint
-	Name [32]uint8
-	CreationDate [20]uint8
-	Flags uint
-	PrivateData string
+	IcaObject        uint
+	Reserved         uint
+	IcaObjectInfo    ICAObjectInfo
+	UniqueID         uint
+	ThumbnailSize    uint
+	DataSize         uint
+	DataWidth        uint
+	DataHeight       uint
+	Name             [32]uint8
+	CreationDate     [20]uint8
+	Flags            uint
+	PrivateData      string
 	UniqueIDFireWire uint64
-	Tag uint
-	DataSize64 uint64
+	Tag              uint
+	DataSize64       uint64
 }
 
 type ScannerObjectInfo struct {
-	IcaObject uint
-	Reserved uint
-	IcaObjectInfo ICAObjectInfo
-	UniqueID uint
+	IcaObject        uint
+	Reserved         uint
+	IcaObjectInfo    ICAObjectInfo
+	UniqueID         uint
 	UniqueIDFireWire uint64
-	ThumbnailSize uint
-	DataSize uint
-	DataWidth uint
-	DataHeight uint
-	Name [32]uint8
-	CreationDate [20]uint8
-	Flags uint
-	PrivateData string
-	Tag uint
+	ThumbnailSize    uint
+	DataSize         uint
+	DataWidth        uint
+	DataHeight       uint
+	Name             [32]uint8
+	CreationDate     [20]uint8
+	Flags            uint
+	PrivateData      string
+	Tag              uint
 }
 
 // ICD_scanner_callback_functions is an alias for ICD_Scannerscanner_callback_functions (C typedef ICD_scanner_callback_functions).
 type ICD_scanner_callback_functions = ICD_Scannerscanner_callback_functions
-

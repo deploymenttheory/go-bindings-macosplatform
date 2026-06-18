@@ -62,4 +62,3 @@ type NEFilterSettingsable interface {
 }
 
 var _ NEFilterSettingsable = (*NEFilterSettings)(nil)
-

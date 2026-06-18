@@ -16,13 +16,13 @@ type NSSliderAccessoryBehavior struct {
 }
 
 var (
-	_clsNSSliderAccessoryBehavior = _objcClass("NSSliderAccessoryBehavior")
+	_clsNSSliderAccessoryBehavior                         = _objcClass("NSSliderAccessoryBehavior")
 	_nSSliderAccessoryBehaviorSelBehaviorWithTargetAction = objc.RegisterName("behaviorWithTarget:action:")
-	_nSSliderAccessoryBehaviorSelBehaviorWithHandler = objc.RegisterName("behaviorWithHandler:")
-	_nSSliderAccessoryBehaviorSelHandleAction = objc.RegisterName("handleAction:")
-	_nSSliderAccessoryBehaviorSelAutomaticBehavior = objc.RegisterName("automaticBehavior")
-	_nSSliderAccessoryBehaviorSelValueStepBehavior = objc.RegisterName("valueStepBehavior")
-	_nSSliderAccessoryBehaviorSelValueResetBehavior = objc.RegisterName("valueResetBehavior")
+	_nSSliderAccessoryBehaviorSelBehaviorWithHandler      = objc.RegisterName("behaviorWithHandler:")
+	_nSSliderAccessoryBehaviorSelHandleAction             = objc.RegisterName("handleAction:")
+	_nSSliderAccessoryBehaviorSelAutomaticBehavior        = objc.RegisterName("automaticBehavior")
+	_nSSliderAccessoryBehaviorSelValueStepBehavior        = objc.RegisterName("valueStepBehavior")
+	_nSSliderAccessoryBehaviorSelValueResetBehavior       = objc.RegisterName("valueResetBehavior")
 )
 
 func NSSliderAccessoryBehaviorFromID(id objc.ID) *NSSliderAccessoryBehavior {
@@ -38,7 +38,9 @@ func NSSliderAccessoryBehaviorFromID(id objc.ID) *NSSliderAccessoryBehavior {
 // The action is sent to the target on interaction. @param target An optional `NSSliderAccessory`.
 func NSSliderAccessoryBehaviorBehaviorWithTargetAction(target objc.ID, action objc.SEL) *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelBehaviorWithTargetAction, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func NSSliderAccessoryBehaviorBehaviorWithHandler(handler func(*NSSliderAccessor
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelBehaviorWithHandler, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
@@ -67,21 +71,26 @@ func (o *NSSliderAccessoryBehavior) HandleAction(sender *NSSliderAccessory) {
 // The behavior is automatically picked to be the system standard, given the slider's current context. For example, NSTouchBarItems have `.valueStep` behavior.
 func NSSliderAccessoryBehaviorAutomaticBehavior() *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelAutomaticBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
 // The value of the slider moves towards the associated value for the accessory with by a delta of the slider's `altIncrementValue`.
 func NSSliderAccessoryBehaviorValueStepBehavior() *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelValueStepBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
 
 // The value of the slider is reset to the associated value for the accessory.
 func NSSliderAccessoryBehaviorValueResetBehavior() *NSSliderAccessoryBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSliderAccessoryBehavior), _nSSliderAccessoryBehaviorSelValueResetBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderAccessoryBehaviorFromID(_ret)
 }
-

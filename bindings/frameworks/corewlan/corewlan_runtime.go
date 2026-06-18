@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_corewlanLib uintptr
-	_loadOnce sync.Once
+	_corewlanLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,23 +48,49 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CWKeychainCopyEAPIdentity", func() { purego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentity, _corewlanLib, "CWKeychainCopyEAPIdentity") })
-	_register("CWKeychainCopyEAPIdentityList", func() { purego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentityList, _corewlanLib, "CWKeychainCopyEAPIdentityList") })
-	_register("CWKeychainCopyEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainCopyEAPUsernameAndPassword, _corewlanLib, "CWKeychainCopyEAPUsernameAndPassword") })
+	_register("CWKeychainCopyEAPIdentity", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentity, _corewlanLib, "CWKeychainCopyEAPIdentity")
+	})
+	_register("CWKeychainCopyEAPIdentityList", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentityList, _corewlanLib, "CWKeychainCopyEAPIdentityList")
+	})
+	_register("CWKeychainCopyEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainCopyEAPUsernameAndPassword, _corewlanLib, "CWKeychainCopyEAPUsernameAndPassword")
+	})
 	_register("CWKeychainCopyPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainCopyPassword, _corewlanLib, "CWKeychainCopyPassword") })
-	_register("CWKeychainCopyWiFiEAPIdentity", func() { purego.RegisterLibFunc(&_fnCWKeychainCopyWiFiEAPIdentity, _corewlanLib, "CWKeychainCopyWiFiEAPIdentity") })
-	_register("CWKeychainDeleteEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainDeleteEAPUsernameAndPassword, _corewlanLib, "CWKeychainDeleteEAPUsernameAndPassword") })
+	_register("CWKeychainCopyWiFiEAPIdentity", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainCopyWiFiEAPIdentity, _corewlanLib, "CWKeychainCopyWiFiEAPIdentity")
+	})
+	_register("CWKeychainDeleteEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainDeleteEAPUsernameAndPassword, _corewlanLib, "CWKeychainDeleteEAPUsernameAndPassword")
+	})
 	_register("CWKeychainDeletePassword", func() { purego.RegisterLibFunc(&_fnCWKeychainDeletePassword, _corewlanLib, "CWKeychainDeletePassword") })
-	_register("CWKeychainDeleteWiFiEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainDeleteWiFiEAPUsernameAndPassword") })
-	_register("CWKeychainDeleteWiFiPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiPassword, _corewlanLib, "CWKeychainDeleteWiFiPassword") })
-	_register("CWKeychainFindWiFiEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainFindWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainFindWiFiEAPUsernameAndPassword") })
-	_register("CWKeychainFindWiFiPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainFindWiFiPassword, _corewlanLib, "CWKeychainFindWiFiPassword") })
+	_register("CWKeychainDeleteWiFiEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainDeleteWiFiEAPUsernameAndPassword")
+	})
+	_register("CWKeychainDeleteWiFiPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiPassword, _corewlanLib, "CWKeychainDeleteWiFiPassword")
+	})
+	_register("CWKeychainFindWiFiEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainFindWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainFindWiFiEAPUsernameAndPassword")
+	})
+	_register("CWKeychainFindWiFiPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainFindWiFiPassword, _corewlanLib, "CWKeychainFindWiFiPassword")
+	})
 	_register("CWKeychainSetEAPIdentity", func() { purego.RegisterLibFunc(&_fnCWKeychainSetEAPIdentity, _corewlanLib, "CWKeychainSetEAPIdentity") })
-	_register("CWKeychainSetEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainSetEAPUsernameAndPassword, _corewlanLib, "CWKeychainSetEAPUsernameAndPassword") })
+	_register("CWKeychainSetEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainSetEAPUsernameAndPassword, _corewlanLib, "CWKeychainSetEAPUsernameAndPassword")
+	})
 	_register("CWKeychainSetPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainSetPassword, _corewlanLib, "CWKeychainSetPassword") })
-	_register("CWKeychainSetWiFiEAPIdentity", func() { purego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPIdentity, _corewlanLib, "CWKeychainSetWiFiEAPIdentity") })
-	_register("CWKeychainSetWiFiEAPUsernameAndPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainSetWiFiEAPUsernameAndPassword") })
-	_register("CWKeychainSetWiFiPassword", func() { purego.RegisterLibFunc(&_fnCWKeychainSetWiFiPassword, _corewlanLib, "CWKeychainSetWiFiPassword") })
+	_register("CWKeychainSetWiFiEAPIdentity", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPIdentity, _corewlanLib, "CWKeychainSetWiFiEAPIdentity")
+	})
+	_register("CWKeychainSetWiFiEAPUsernameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPUsernameAndPassword, _corewlanLib, "CWKeychainSetWiFiEAPUsernameAndPassword")
+	})
+	_register("CWKeychainSetWiFiPassword", func() {
+		purego.RegisterLibFunc(&_fnCWKeychainSetWiFiPassword, _corewlanLib, "CWKeychainSetWiFiPassword")
+	})
 	_register("CWMergeNetworks", func() { purego.RegisterLibFunc(&_fnCWMergeNetworks, _corewlanLib, "CWMergeNetworks") })
 }
 

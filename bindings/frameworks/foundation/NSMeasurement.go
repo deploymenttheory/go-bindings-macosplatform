@@ -15,14 +15,14 @@ type NSMeasurement[UnitType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSMeasurement = _objcClass("NSMeasurement")
-	_nSMeasurementSelInitWithDoubleValueUnit = objc.RegisterName("initWithDoubleValue:unit:")
-	_nSMeasurementSelCanBeConvertedToUnit = objc.RegisterName("canBeConvertedToUnit:")
-	_nSMeasurementSelMeasurementByConvertingToUnit = objc.RegisterName("measurementByConvertingToUnit:")
-	_nSMeasurementSelMeasurementByAddingMeasurement = objc.RegisterName("measurementByAddingMeasurement:")
+	_clsNSMeasurement                                    = _objcClass("NSMeasurement")
+	_nSMeasurementSelInitWithDoubleValueUnit             = objc.RegisterName("initWithDoubleValue:unit:")
+	_nSMeasurementSelCanBeConvertedToUnit                = objc.RegisterName("canBeConvertedToUnit:")
+	_nSMeasurementSelMeasurementByConvertingToUnit       = objc.RegisterName("measurementByConvertingToUnit:")
+	_nSMeasurementSelMeasurementByAddingMeasurement      = objc.RegisterName("measurementByAddingMeasurement:")
 	_nSMeasurementSelMeasurementBySubtractingMeasurement = objc.RegisterName("measurementBySubtractingMeasurement:")
-	_nSMeasurementSelUnit = objc.RegisterName("unit")
-	_nSMeasurementSelDoubleValue = objc.RegisterName("doubleValue")
+	_nSMeasurementSelUnit                                = objc.RegisterName("unit")
+	_nSMeasurementSelDoubleValue                         = objc.RegisterName("doubleValue")
 )
 
 func NSMeasurementFromID[UnitType purego.AnyObject](id objc.ID) *NSMeasurement[UnitType] {
@@ -37,7 +37,9 @@ func NSMeasurementFromID[UnitType purego.AnyObject](id objc.ID) *NSMeasurement[U
 
 func (o *NSMeasurement[UnitType]) InitWithDoubleValueUnit(doubleValue float64, unit UnitType) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelInitWithDoubleValueUnit, doubleValue, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
@@ -53,13 +55,17 @@ func (o *NSMeasurement[UnitType]) MeasurementByConvertingToUnit(unit *NSUnit) *N
 
 func (o *NSMeasurement[UnitType]) MeasurementByAddingMeasurement(measurement *NSMeasurement[UnitType]) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelMeasurementByAddingMeasurement, measurement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
 func (o *NSMeasurement[UnitType]) MeasurementBySubtractingMeasurement(measurement *NSMeasurement[UnitType]) *NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMeasurementSelMeasurementBySubtractingMeasurement, measurement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMeasurementFromID[UnitType](_ret)
 }
 
@@ -72,4 +78,3 @@ func (o *NSMeasurement[UnitType]) DoubleValue() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSMeasurementSelDoubleValue)
 	return _ret
 }
-

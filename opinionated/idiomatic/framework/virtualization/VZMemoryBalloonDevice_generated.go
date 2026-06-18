@@ -43,4 +43,3 @@ type MemoryBalloonDeviceable interface {
 }
 
 var _ MemoryBalloonDeviceable = (*MemoryBalloonDevice)(nil)
-

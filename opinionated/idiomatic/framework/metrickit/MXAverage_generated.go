@@ -60,4 +60,3 @@ type Averageable interface {
 }
 
 var _ Averageable = (*Average)(nil)
-

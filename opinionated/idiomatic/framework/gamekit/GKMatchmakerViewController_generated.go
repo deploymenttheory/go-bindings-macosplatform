@@ -178,4 +178,3 @@ type MatchmakerViewControllerable interface {
 }
 
 var _ MatchmakerViewControllerable = (*MatchmakerViewController)(nil)
-

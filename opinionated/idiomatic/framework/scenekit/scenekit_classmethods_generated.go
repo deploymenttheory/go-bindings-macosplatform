@@ -1264,4 +1264,3 @@ func TubeWithInnerRadiusOuterRadiusHeight(innerRadius float64, outerRadius float
 	}
 	return &Tube{inner: _r}
 }
-

@@ -16,7 +16,7 @@ type MXDiskIOMetric struct {
 }
 
 var (
-	_clsMXDiskIOMetric = _objcClass("MXDiskIOMetric")
+	_clsMXDiskIOMetric                        = _objcClass("MXDiskIOMetric")
 	_mXDiskIOMetricSelCumulativeLogicalWrites = objc.RegisterName("cumulativeLogicalWrites")
 )
 
@@ -34,4 +34,3 @@ func (o *MXDiskIOMetric) CumulativeLogicalWrites() *foundation.NSMeasurement[*fo
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskIOMetricSelCumulativeLogicalWrites)
 	return _ret
 }
-

@@ -5258,11 +5258,17 @@ func (x *MTRBaseClusterTestCluster) SubscribeAttributeClusterRevisionWithMinInte
 	}
 }
 
-func (x *MTRBaseClusterTestCluster) asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting { return &x.inner.MTRBaseClusterUnitTesting }
+func (x *MTRBaseClusterTestCluster) asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting {
+	return &x.inner.MTRBaseClusterUnitTesting
+}
 
-func (x *MTRBaseClusterTestCluster) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterUnitTesting.MTRGenericBaseCluster }
+func (x *MTRBaseClusterTestCluster) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterUnitTesting.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterTestCluster) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterUnitTesting.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterTestCluster) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterUnitTesting.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterTestClusterable is the interface implemented by [MTRBaseClusterTestCluster], for mocking and DI.
 type MTRBaseClusterTestClusterable interface {
@@ -5637,4 +5643,3 @@ type MTRBaseClusterTestClusterable interface {
 }
 
 var _ MTRBaseClusterTestClusterable = (*MTRBaseClusterTestCluster)(nil)
-

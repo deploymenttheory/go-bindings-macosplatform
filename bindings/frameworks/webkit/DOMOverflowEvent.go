@@ -15,11 +15,11 @@ type DOMOverflowEvent struct {
 }
 
 var (
-	_clsDOMOverflowEvent = _objcClass("DOMOverflowEvent")
+	_clsDOMOverflowEvent                                                    = _objcClass("DOMOverflowEvent")
 	_dOMOverflowEventSelInitOverflowEventHorizontalOverflowVerticalOverflow = objc.RegisterName("initOverflowEvent:horizontalOverflow:verticalOverflow:")
-	_dOMOverflowEventSelOrient = objc.RegisterName("orient")
-	_dOMOverflowEventSelHorizontalOverflow = objc.RegisterName("horizontalOverflow")
-	_dOMOverflowEventSelVerticalOverflow = objc.RegisterName("verticalOverflow")
+	_dOMOverflowEventSelOrient                                              = objc.RegisterName("orient")
+	_dOMOverflowEventSelHorizontalOverflow                                  = objc.RegisterName("horizontalOverflow")
+	_dOMOverflowEventSelVerticalOverflow                                    = objc.RegisterName("verticalOverflow")
 )
 
 func DOMOverflowEventFromID(id objc.ID) *DOMOverflowEvent {
@@ -50,4 +50,3 @@ func (o *DOMOverflowEvent) VerticalOverflow() bool {
 	_ret := objc.Send[bool](o.Ptr(), _dOMOverflowEventSelVerticalOverflow)
 	return _ret
 }
-

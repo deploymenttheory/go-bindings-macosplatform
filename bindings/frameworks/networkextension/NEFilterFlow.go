@@ -16,12 +16,12 @@ type NEFilterFlow struct {
 }
 
 var (
-	_clsNEFilterFlow = _objcClass("NEFilterFlow")
-	_nEFilterFlowSelURL = objc.RegisterName("URL")
-	_nEFilterFlowSelDirection = objc.RegisterName("direction")
-	_nEFilterFlowSelSourceAppAuditToken = objc.RegisterName("sourceAppAuditToken")
+	_clsNEFilterFlow                        = _objcClass("NEFilterFlow")
+	_nEFilterFlowSelURL                     = objc.RegisterName("URL")
+	_nEFilterFlowSelDirection               = objc.RegisterName("direction")
+	_nEFilterFlowSelSourceAppAuditToken     = objc.RegisterName("sourceAppAuditToken")
 	_nEFilterFlowSelSourceProcessAuditToken = objc.RegisterName("sourceProcessAuditToken")
-	_nEFilterFlowSelIdentifier = objc.RegisterName("identifier")
+	_nEFilterFlowSelIdentifier              = objc.RegisterName("identifier")
 )
 
 func NEFilterFlowFromID(id objc.ID) *NEFilterFlow {
@@ -37,7 +37,9 @@ func NEFilterFlowFromID(id objc.ID) *NEFilterFlow {
 // @property URL @discussion The flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
 func (o *NEFilterFlow) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterFlowSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -50,21 +52,26 @@ func (o *NEFilterFlow) Direction() NETrafficDirection {
 // @property sourceAppAuditToken @discussion Audit token of the source application of the flow.
 func (o *NEFilterFlow) SourceAppAuditToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterFlowSelSourceAppAuditToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property sourceProcessAuditToken @discussion The audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
 func (o *NEFilterFlow) SourceProcessAuditToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterFlowSelSourceProcessAuditToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property identifier @discussion The unique identifier of the flow.
 func (o *NEFilterFlow) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterFlowSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

@@ -17,7 +17,9 @@ type AuthorizationWebBrowserPublicKeyCredentialManager struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationWebBrowserPublicKeyCredentialManager].
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager { return x.inner }
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -77,4 +79,3 @@ type AuthorizationWebBrowserPublicKeyCredentialManagerable interface {
 }
 
 var _ AuthorizationWebBrowserPublicKeyCredentialManagerable = (*AuthorizationWebBrowserPublicKeyCredentialManager)(nil)
-

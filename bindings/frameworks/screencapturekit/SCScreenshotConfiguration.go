@@ -18,32 +18,32 @@ type SCScreenshotConfiguration struct {
 }
 
 var (
-	_clsSCScreenshotConfiguration = _objcClass("SCScreenshotConfiguration")
-	_sCScreenshotConfigurationSelWidth = objc.RegisterName("width")
-	_sCScreenshotConfigurationSelSetWidth = objc.RegisterName("setWidth:")
-	_sCScreenshotConfigurationSelHeight = objc.RegisterName("height")
-	_sCScreenshotConfigurationSelSetHeight = objc.RegisterName("setHeight:")
-	_sCScreenshotConfigurationSelShowsCursor = objc.RegisterName("showsCursor")
-	_sCScreenshotConfigurationSelSetShowsCursor = objc.RegisterName("setShowsCursor:")
-	_sCScreenshotConfigurationSelSourceRect = objc.RegisterName("sourceRect")
-	_sCScreenshotConfigurationSelSetSourceRect = objc.RegisterName("setSourceRect:")
-	_sCScreenshotConfigurationSelDestinationRect = objc.RegisterName("destinationRect")
-	_sCScreenshotConfigurationSelSetDestinationRect = objc.RegisterName("setDestinationRect:")
-	_sCScreenshotConfigurationSelIgnoreShadows = objc.RegisterName("ignoreShadows")
-	_sCScreenshotConfigurationSelSetIgnoreShadows = objc.RegisterName("setIgnoreShadows:")
-	_sCScreenshotConfigurationSelIgnoreClipping = objc.RegisterName("ignoreClipping")
-	_sCScreenshotConfigurationSelSetIgnoreClipping = objc.RegisterName("setIgnoreClipping:")
-	_sCScreenshotConfigurationSelIncludeChildWindows = objc.RegisterName("includeChildWindows")
+	_clsSCScreenshotConfiguration                       = _objcClass("SCScreenshotConfiguration")
+	_sCScreenshotConfigurationSelWidth                  = objc.RegisterName("width")
+	_sCScreenshotConfigurationSelSetWidth               = objc.RegisterName("setWidth:")
+	_sCScreenshotConfigurationSelHeight                 = objc.RegisterName("height")
+	_sCScreenshotConfigurationSelSetHeight              = objc.RegisterName("setHeight:")
+	_sCScreenshotConfigurationSelShowsCursor            = objc.RegisterName("showsCursor")
+	_sCScreenshotConfigurationSelSetShowsCursor         = objc.RegisterName("setShowsCursor:")
+	_sCScreenshotConfigurationSelSourceRect             = objc.RegisterName("sourceRect")
+	_sCScreenshotConfigurationSelSetSourceRect          = objc.RegisterName("setSourceRect:")
+	_sCScreenshotConfigurationSelDestinationRect        = objc.RegisterName("destinationRect")
+	_sCScreenshotConfigurationSelSetDestinationRect     = objc.RegisterName("setDestinationRect:")
+	_sCScreenshotConfigurationSelIgnoreShadows          = objc.RegisterName("ignoreShadows")
+	_sCScreenshotConfigurationSelSetIgnoreShadows       = objc.RegisterName("setIgnoreShadows:")
+	_sCScreenshotConfigurationSelIgnoreClipping         = objc.RegisterName("ignoreClipping")
+	_sCScreenshotConfigurationSelSetIgnoreClipping      = objc.RegisterName("setIgnoreClipping:")
+	_sCScreenshotConfigurationSelIncludeChildWindows    = objc.RegisterName("includeChildWindows")
 	_sCScreenshotConfigurationSelSetIncludeChildWindows = objc.RegisterName("setIncludeChildWindows:")
-	_sCScreenshotConfigurationSelDisplayIntent = objc.RegisterName("displayIntent")
-	_sCScreenshotConfigurationSelSetDisplayIntent = objc.RegisterName("setDisplayIntent:")
-	_sCScreenshotConfigurationSelDynamicRange = objc.RegisterName("dynamicRange")
-	_sCScreenshotConfigurationSelSetDynamicRange = objc.RegisterName("setDynamicRange:")
-	_sCScreenshotConfigurationSelContentType = objc.RegisterName("contentType")
-	_sCScreenshotConfigurationSelSetContentType = objc.RegisterName("setContentType:")
-	_sCScreenshotConfigurationSelFileURL = objc.RegisterName("fileURL")
-	_sCScreenshotConfigurationSelSetFileURL = objc.RegisterName("setFileURL:")
-	_sCScreenshotConfigurationSelSupportedContentTypes = objc.RegisterName("supportedContentTypes")
+	_sCScreenshotConfigurationSelDisplayIntent          = objc.RegisterName("displayIntent")
+	_sCScreenshotConfigurationSelSetDisplayIntent       = objc.RegisterName("setDisplayIntent:")
+	_sCScreenshotConfigurationSelDynamicRange           = objc.RegisterName("dynamicRange")
+	_sCScreenshotConfigurationSelSetDynamicRange        = objc.RegisterName("setDynamicRange:")
+	_sCScreenshotConfigurationSelContentType            = objc.RegisterName("contentType")
+	_sCScreenshotConfigurationSelSetContentType         = objc.RegisterName("setContentType:")
+	_sCScreenshotConfigurationSelFileURL                = objc.RegisterName("fileURL")
+	_sCScreenshotConfigurationSelSetFileURL             = objc.RegisterName("setFileURL:")
+	_sCScreenshotConfigurationSelSupportedContentTypes  = objc.RegisterName("supportedContentTypes")
 )
 
 func SCScreenshotConfigurationFromID(id objc.ID) *SCScreenshotConfiguration {
@@ -159,7 +159,9 @@ func (o *SCScreenshotConfiguration) SetDynamicRange(dynamicRange SCScreenshotDyn
 // @abstract Specifies the screenshot file format.
 func (o *SCScreenshotConfiguration) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCScreenshotConfigurationSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -170,7 +172,9 @@ func (o *SCScreenshotConfiguration) SetContentType(contentType *uniformtypeident
 // @abstract Specifies output URL to save the screenshot.  If the imageOutputURL is nil, then the file will not be saved.
 func (o *SCScreenshotConfiguration) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCScreenshotConfigurationSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -183,4 +187,3 @@ func SCScreenshotConfigurationSupportedContentTypes() *foundation.NSArray[*unifo
 	_ret := objc.Send[*foundation.NSArray[*uniformtypeidentifiers.UTType]](objc.ID(_clsSCScreenshotConfiguration), _sCScreenshotConfigurationSelSupportedContentTypes)
 	return _ret
 }
-

@@ -16,11 +16,11 @@ type FSVolume struct {
 }
 
 var (
-	_clsFSVolume = _objcClass("FSVolume")
+	_clsFSVolume                           = _objcClass("FSVolume")
 	_fSVolumeSelInitWithVolumeIDVolumeName = objc.RegisterName("initWithVolumeID:volumeName:")
-	_fSVolumeSelVolumeID = objc.RegisterName("volumeID")
-	_fSVolumeSelName = objc.RegisterName("name")
-	_fSVolumeSelSetName = objc.RegisterName("setName:")
+	_fSVolumeSelVolumeID                   = objc.RegisterName("volumeID")
+	_fSVolumeSelName                       = objc.RegisterName("name")
+	_fSVolumeSelSetName                    = objc.RegisterName("setName:")
 )
 
 func FSVolumeFromID(id objc.ID) *FSVolume {
@@ -33,28 +33,33 @@ func FSVolumeFromID(id objc.ID) *FSVolume {
 	return o
 }
 
-// Creates a volume with the given identifier and name. - Parameters: - volumeID: An ``FSVolumeIdentifier`` to uniquely identify the volume. For a network file system that supports multiple authenticated users, disambiguate the users by using qualifying data in the identifier. - volumeName: A name for the volume.
+// Creates a volume with the given identifier and name. - Parameters: - volumeID: An “FSVolumeIdentifier“ to uniquely identify the volume. For a network file system that supports multiple authenticated users, disambiguate the users by using qualifying data in the identifier. - volumeName: A name for the volume.
 func (o *FSVolume) InitWithVolumeIDVolumeName(volumeID *FSVolumeIdentifier, volumeName *FSFileName) *FSVolume {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSVolumeSelInitWithVolumeIDVolumeName, volumeID.Ptr(), volumeName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSVolumeFromID(_ret)
 }
 
 // An identifier that uniquely identifies the volume.
 func (o *FSVolume) VolumeID() *FSVolumeIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSVolumeSelVolumeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSVolumeIdentifierFromID(_ret)
 }
 
 // The name of the volume.
 func (o *FSVolume) Name() *FSFileName {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSVolumeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSFileNameFromID(_ret)
 }
 
 func (o *FSVolume) SetName(name *FSFileName) {
 	o.Ptr().Send(_fSVolumeSelSetName, name.Ptr())
 }
-

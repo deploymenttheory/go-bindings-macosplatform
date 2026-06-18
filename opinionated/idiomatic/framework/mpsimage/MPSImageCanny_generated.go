@@ -130,7 +130,9 @@ func (x *ImageCanny) SetUseFastMode(useFastMode bool) {
 	x.inner.SetUseFastMode(useFastMode)
 }
 
-func (x *ImageCanny) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageCanny) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageCannyable is the interface implemented by [ImageCanny], for mocking and DI.
 type ImageCannyable interface {
@@ -152,4 +154,3 @@ type ImageCannyable interface {
 }
 
 var _ ImageCannyable = (*ImageCanny)(nil)
-

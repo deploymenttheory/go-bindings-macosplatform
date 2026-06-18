@@ -27,4 +27,3 @@ type ODRecord struct{}
 // C struct: __ODSession
 // ODSession is an opaque type.
 type ODSession struct{}
-

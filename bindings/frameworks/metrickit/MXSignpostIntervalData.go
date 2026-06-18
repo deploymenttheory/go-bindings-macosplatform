@@ -16,12 +16,12 @@ type MXSignpostIntervalData struct {
 }
 
 var (
-	_clsMXSignpostIntervalData = _objcClass("MXSignpostIntervalData")
+	_clsMXSignpostIntervalData                             = _objcClass("MXSignpostIntervalData")
 	_mXSignpostIntervalDataSelHistogrammedSignpostDuration = objc.RegisterName("histogrammedSignpostDuration")
-	_mXSignpostIntervalDataSelCumulativeCPUTime = objc.RegisterName("cumulativeCPUTime")
-	_mXSignpostIntervalDataSelAverageMemory = objc.RegisterName("averageMemory")
-	_mXSignpostIntervalDataSelCumulativeLogicalWrites = objc.RegisterName("cumulativeLogicalWrites")
-	_mXSignpostIntervalDataSelCumulativeHitchTimeRatio = objc.RegisterName("cumulativeHitchTimeRatio")
+	_mXSignpostIntervalDataSelCumulativeCPUTime            = objc.RegisterName("cumulativeCPUTime")
+	_mXSignpostIntervalDataSelAverageMemory                = objc.RegisterName("averageMemory")
+	_mXSignpostIntervalDataSelCumulativeLogicalWrites      = objc.RegisterName("cumulativeLogicalWrites")
+	_mXSignpostIntervalDataSelCumulativeHitchTimeRatio     = objc.RegisterName("cumulativeHitchTimeRatio")
 )
 
 func MXSignpostIntervalDataFromID(id objc.ID) *MXSignpostIntervalData {
@@ -63,4 +63,3 @@ func (o *MXSignpostIntervalData) CumulativeHitchTimeRatio() *foundation.NSMeasur
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnit]](o.Ptr(), _mXSignpostIntervalDataSelCumulativeHitchTimeRatio)
 	return _ret
 }
-

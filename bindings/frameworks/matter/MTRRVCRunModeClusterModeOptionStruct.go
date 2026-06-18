@@ -16,12 +16,12 @@ type MTRRVCRunModeClusterModeOptionStruct struct {
 }
 
 var (
-	_clsMTRRVCRunModeClusterModeOptionStruct = _objcClass("MTRRVCRunModeClusterModeOptionStruct")
-	_mTRRVCRunModeClusterModeOptionStructSelLabel = objc.RegisterName("label")
-	_mTRRVCRunModeClusterModeOptionStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRRVCRunModeClusterModeOptionStructSelMode = objc.RegisterName("mode")
-	_mTRRVCRunModeClusterModeOptionStructSelSetMode = objc.RegisterName("setMode:")
-	_mTRRVCRunModeClusterModeOptionStructSelModeTags = objc.RegisterName("modeTags")
+	_clsMTRRVCRunModeClusterModeOptionStruct            = _objcClass("MTRRVCRunModeClusterModeOptionStruct")
+	_mTRRVCRunModeClusterModeOptionStructSelLabel       = objc.RegisterName("label")
+	_mTRRVCRunModeClusterModeOptionStructSelSetLabel    = objc.RegisterName("setLabel:")
+	_mTRRVCRunModeClusterModeOptionStructSelMode        = objc.RegisterName("mode")
+	_mTRRVCRunModeClusterModeOptionStructSelSetMode     = objc.RegisterName("setMode:")
+	_mTRRVCRunModeClusterModeOptionStructSelModeTags    = objc.RegisterName("modeTags")
 	_mTRRVCRunModeClusterModeOptionStructSelSetModeTags = objc.RegisterName("setModeTags:")
 )
 
@@ -37,7 +37,9 @@ func MTRRVCRunModeClusterModeOptionStructFromID(id objc.ID) *MTRRVCRunModeCluste
 
 func (o *MTRRVCRunModeClusterModeOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterModeOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRRVCRunModeClusterModeOptionStruct) SetLabel(label *foundation.NSStri
 
 func (o *MTRRVCRunModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCRunModeClusterModeOptionStructSelMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRRVCRunModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[ob
 func (o *MTRRVCRunModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRRVCRunModeClusterModeOptionStructSelSetModeTags, modeTags)
 }
-

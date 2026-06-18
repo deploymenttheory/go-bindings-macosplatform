@@ -13,19 +13,25 @@ import (
 
 func GKErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func GKExchangeTimeoutDefault() float64 {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKExchangeTimeoutDefault")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func GKExchangeTimeoutNone() float64 {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKExchangeTimeoutNone")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -38,14 +44,18 @@ func GKGameSessionErrorDomain() uintptr {
 // Notification will be posted whenever authentication status changes.
 func GKPlayerAuthenticationDidChangeNotificationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKPlayerAuthenticationDidChangeNotificationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // Notification will be posted whenever the player details changes. The object of the notification will be the player.
 func GKPlayerDidChangeNotificationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKPlayerDidChangeNotificationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -63,13 +73,17 @@ func GKSessionErrorDomain() uintptr {
 
 func GKTurnTimeoutDefault() float64 {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKTurnTimeoutDefault")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func GKTurnTimeoutNone() float64 {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKTurnTimeoutNone")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -78,4 +92,3 @@ func GKVoiceChatServiceErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKVoiceChatServiceErrorDomain")
 	return ptr
 }
-

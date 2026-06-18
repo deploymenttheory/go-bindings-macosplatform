@@ -155,4 +155,3 @@ type AssetChangeRequestable interface {
 }
 
 var _ AssetChangeRequestable = (*AssetChangeRequest)(nil)
-

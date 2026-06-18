@@ -119,4 +119,3 @@ type TextElementable interface {
 }
 
 var _ TextElementable = (*TextElement)(nil)
-

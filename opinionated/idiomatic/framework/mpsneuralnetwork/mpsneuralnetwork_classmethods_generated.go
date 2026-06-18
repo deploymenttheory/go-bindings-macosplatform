@@ -1104,4 +1104,3 @@ func CreateRNNSingleGateDescriptorWithInputFeatureChannelsOutputFeatureChannels(
 	}
 	return &RNNSingleGateDescriptor{inner: _r}
 }
-

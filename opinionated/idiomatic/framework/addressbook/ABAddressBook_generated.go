@@ -162,4 +162,3 @@ type AddressBookable interface {
 }
 
 var _ AddressBookable = (*AddressBook)(nil)
-

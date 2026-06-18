@@ -215,4 +215,3 @@ func SpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
 	}
 	return &SpeechUtterance{inner: _r}
 }
-

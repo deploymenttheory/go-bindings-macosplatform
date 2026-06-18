@@ -57,4 +57,3 @@ type QuantityTypeable interface {
 }
 
 var _ QuantityTypeable = (*QuantityType)(nil)
-

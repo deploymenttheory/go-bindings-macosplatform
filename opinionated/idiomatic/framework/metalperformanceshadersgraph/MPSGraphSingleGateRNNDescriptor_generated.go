@@ -99,7 +99,9 @@ func (x *GraphSingleGateRNNDescriptor) SetActivation(activation raw.MPSGraphRNNA
 	x.inner.SetActivation(activation)
 }
 
-func (x *GraphSingleGateRNNDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphSingleGateRNNDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphSingleGateRNNDescriptorable is the interface implemented by [GraphSingleGateRNNDescriptor], for mocking and DI.
 type GraphSingleGateRNNDescriptorable interface {
@@ -119,4 +121,3 @@ type GraphSingleGateRNNDescriptorable interface {
 }
 
 var _ GraphSingleGateRNNDescriptorable = (*GraphSingleGateRNNDescriptor)(nil)
-

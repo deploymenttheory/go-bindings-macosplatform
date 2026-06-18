@@ -18,11 +18,11 @@ type NEFilterPacketProvider struct {
 }
 
 var (
-	_clsNEFilterPacketProvider = _objcClass("NEFilterPacketProvider")
+	_clsNEFilterPacketProvider                   = _objcClass("NEFilterPacketProvider")
 	_nEFilterPacketProviderSelDelayCurrentPacket = objc.RegisterName("delayCurrentPacket:")
-	_nEFilterPacketProviderSelAllowPacket = objc.RegisterName("allowPacket:")
-	_nEFilterPacketProviderSelPacketHandler = objc.RegisterName("packetHandler")
-	_nEFilterPacketProviderSelSetPacketHandler = objc.RegisterName("setPacketHandler:")
+	_nEFilterPacketProviderSelAllowPacket        = objc.RegisterName("allowPacket:")
+	_nEFilterPacketProviderSelPacketHandler      = objc.RegisterName("packetHandler")
+	_nEFilterPacketProviderSelSetPacketHandler   = objc.RegisterName("setPacketHandler:")
 )
 
 func NEFilterPacketProviderFromID(id objc.ID) *NEFilterPacketProvider {
@@ -38,7 +38,9 @@ func NEFilterPacketProviderFromID(id objc.ID) *NEFilterPacketProvider {
 // @method delayCurrentPacket @discussion This function is used to delay a packet currently presented by packetHandler. This function is only valid within the packetHandler block and a verdict of NEFilterPacketProviderVerdictDelay must be returned after a packet is delayed.  A delayed packet will be prevented from continuing its journey through the networking stack until it is either allowed by calling allow() or is dropped by being released. @param context The context of the current packet filter which is passed to the packetHandler block. The packetHandler block must pass this context when calling delayCurrentPacket().
 func (o *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterPacketProviderSelDelayCurrentPacket, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEPacketFromID(_ret)
 }
 
@@ -69,4 +71,3 @@ func (o *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*NEFilterPa
 	}
 	o.Ptr().Send(_nEFilterPacketProviderSelSetPacketHandler, __block_packetHandler)
 }
-

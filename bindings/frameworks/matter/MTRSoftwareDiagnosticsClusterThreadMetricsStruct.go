@@ -16,17 +16,17 @@ type MTRSoftwareDiagnosticsClusterThreadMetricsStruct struct {
 }
 
 var (
-	_clsMTRSoftwareDiagnosticsClusterThreadMetricsStruct = _objcClass("MTRSoftwareDiagnosticsClusterThreadMetricsStruct")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelId = objc.RegisterName("id")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetId = objc.RegisterName("setId:")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelName = objc.RegisterName("name")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetName = objc.RegisterName("setName:")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeCurrent = objc.RegisterName("stackFreeCurrent")
+	_clsMTRSoftwareDiagnosticsClusterThreadMetricsStruct                    = _objcClass("MTRSoftwareDiagnosticsClusterThreadMetricsStruct")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelId                  = objc.RegisterName("id")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetId               = objc.RegisterName("setId:")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelName                = objc.RegisterName("name")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetName             = objc.RegisterName("setName:")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeCurrent    = objc.RegisterName("stackFreeCurrent")
 	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetStackFreeCurrent = objc.RegisterName("setStackFreeCurrent:")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeMinimum = objc.RegisterName("stackFreeMinimum")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeMinimum    = objc.RegisterName("stackFreeMinimum")
 	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetStackFreeMinimum = objc.RegisterName("setStackFreeMinimum:")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackSize = objc.RegisterName("stackSize")
-	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetStackSize = objc.RegisterName("setStackSize:")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackSize           = objc.RegisterName("stackSize")
+	_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetStackSize        = objc.RegisterName("setStackSize:")
 )
 
 func MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
@@ -41,7 +41,9 @@ func MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(id objc.ID) *MTRSoft
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Id() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterThreadMetricsStructSelId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetId(id_ *foundation
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterThreadMetricsStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetName(name *foundat
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeCurrent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeCurrent(s
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackFreeMinimum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeMinimum(s
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSoftwareDiagnosticsClusterThreadMetricsStructSelStackSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackSize(stackSize *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSoftwareDiagnosticsClusterThreadMetricsStructSelSetStackSize, stackSize.Ptr())
 }
-

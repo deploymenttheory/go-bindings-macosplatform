@@ -21,14 +21,14 @@ type IKFilterBrowserPanel struct {
 }
 
 var (
-	_clsIKFilterBrowserPanel = _objcClass("IKFilterBrowserPanel")
-	_iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask = objc.RegisterName("filterBrowserPanelWithStyleMask:")
-	_iKFilterBrowserPanelSelFilterName = objc.RegisterName("filterName")
-	_iKFilterBrowserPanelSelBeginWithOptionsModelessDelegateDidEndSelectorContextInfo = objc.RegisterName("beginWithOptions:modelessDelegate:didEndSelector:contextInfo:")
+	_clsIKFilterBrowserPanel                                                                          = _objcClass("IKFilterBrowserPanel")
+	_iKFilterBrowserPanelSelFilterBrowserPanelWithStyleMask                                           = objc.RegisterName("filterBrowserPanelWithStyleMask:")
+	_iKFilterBrowserPanelSelFilterName                                                                = objc.RegisterName("filterName")
+	_iKFilterBrowserPanelSelBeginWithOptionsModelessDelegateDidEndSelectorContextInfo                 = objc.RegisterName("beginWithOptions:modelessDelegate:didEndSelector:contextInfo:")
 	_iKFilterBrowserPanelSelBeginSheetWithOptionsModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetWithOptions:modalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_iKFilterBrowserPanelSelRunModalWithOptions = objc.RegisterName("runModalWithOptions:")
-	_iKFilterBrowserPanelSelFilterBrowserViewWithOptions = objc.RegisterName("filterBrowserViewWithOptions:")
-	_iKFilterBrowserPanelSelFinish = objc.RegisterName("finish:")
+	_iKFilterBrowserPanelSelRunModalWithOptions                                                       = objc.RegisterName("runModalWithOptions:")
+	_iKFilterBrowserPanelSelFilterBrowserViewWithOptions                                              = objc.RegisterName("filterBrowserViewWithOptions:")
+	_iKFilterBrowserPanelSelFinish                                                                    = objc.RegisterName("finish:")
 )
 
 func IKFilterBrowserPanelFromID(id objc.ID) *IKFilterBrowserPanel {
@@ -50,7 +50,9 @@ func IKFilterBrowserPanelFilterBrowserPanelWithStyleMask(styleMask uint) objc.ID
 // @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (o *IKFilterBrowserPanel) FilterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *IKFilterBrowserPanel) RunModalWithOptions(inOptions *foundation.NSDicti
 // @method     filterBrowserViewWithOptions @abstract   Returns a view containing the FilterBrowser. @discussion Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below. @param		inOptions	A dictionary describing the desired UI configuration for the IKFilterBrowser
 func (o *IKFilterBrowserPanel) FilterBrowserViewWithOptions(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) *IKFilterBrowserView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKFilterBrowserPanelSelFilterBrowserViewWithOptions, inOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IKFilterBrowserViewFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *IKFilterBrowserPanel) FilterBrowserViewWithOptions(inOptions *foundatio
 func (o *IKFilterBrowserPanel) Finish(sender objc.ID) {
 	o.Ptr().Send(_iKFilterBrowserPanelSelFinish, sender)
 }
-

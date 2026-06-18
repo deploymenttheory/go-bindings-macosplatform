@@ -61,4 +61,3 @@ type EncodedOutgoingMessageable interface {
 }
 
 var _ EncodedOutgoingMessageable = (*EncodedOutgoingMessage)(nil)
-

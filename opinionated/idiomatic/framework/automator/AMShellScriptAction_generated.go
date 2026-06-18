@@ -87,4 +87,3 @@ type ShellScriptActionable interface {
 }
 
 var _ ShellScriptActionable = (*ShellScriptAction)(nil)
-

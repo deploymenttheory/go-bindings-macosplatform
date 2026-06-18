@@ -18,7 +18,9 @@ type CollectionViewLayoutAttributes struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewLayoutAttributes].
-func (x *CollectionViewLayoutAttributes) Unwrap() *raw.NSCollectionViewLayoutAttributes { return x.inner }
+func (x *CollectionViewLayoutAttributes) Unwrap() *raw.NSCollectionViewLayoutAttributes {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -174,4 +176,3 @@ type CollectionViewLayoutAttributesable interface {
 }
 
 var _ CollectionViewLayoutAttributesable = (*CollectionViewLayoutAttributes)(nil)
-

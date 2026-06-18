@@ -44,11 +44,15 @@ func (x *CDADocumentSample) Document() *CDADocument {
 	return &CDADocument{inner: _r}
 }
 
-func (x *CDADocumentSample) asDocumentSample() *raw.HKDocumentSample { return &x.inner.HKDocumentSample }
+func (x *CDADocumentSample) asDocumentSample() *raw.HKDocumentSample {
+	return &x.inner.HKDocumentSample
+}
 
 func (x *CDADocumentSample) asSample() *raw.HKSample { return &x.inner.HKDocumentSample.HKSample }
 
-func (x *CDADocumentSample) asObject() *raw.HKObject { return &x.inner.HKDocumentSample.HKSample.HKObject }
+func (x *CDADocumentSample) asObject() *raw.HKObject {
+	return &x.inner.HKDocumentSample.HKSample.HKObject
+}
 
 // CDADocumentSampleable is the interface implemented by [CDADocumentSample], for mocking and DI.
 type CDADocumentSampleable interface {
@@ -57,4 +61,3 @@ type CDADocumentSampleable interface {
 }
 
 var _ CDADocumentSampleable = (*CDADocumentSample)(nil)
-

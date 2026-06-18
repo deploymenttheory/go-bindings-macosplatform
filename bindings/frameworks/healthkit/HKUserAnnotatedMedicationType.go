@@ -25,4 +25,3 @@ func HKUserAnnotatedMedicationTypeFromID(id objc.ID) *HKUserAnnotatedMedicationT
 	purego.Track(o)
 	return o
 }
-

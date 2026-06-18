@@ -2941,4 +2941,3 @@ func VImageVerticalShearPlanarF(src *raw.VImageBuffer, dest *raw.VImageBuffer, s
 func VImageVerticalShearXRGB2101010W(src *raw.VImageBuffer, dest *raw.VImageBuffer, srcOffsetToROI_X uint, srcOffsetToROI_Y uint, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor uint32, flags uint32) int {
 	return raw.VImageVerticalShearXRGB2101010W(src, dest, srcOffsetToROI_X, srcOffsetToROI_Y, yTranslate, shearSlope, filter, backColor, flags)
 }
-

@@ -114,4 +114,3 @@ type MTRDeviceAttestationDeviceInfoable interface {
 }
 
 var _ MTRDeviceAttestationDeviceInfoable = (*MTRDeviceAttestationDeviceInfo)(nil)
-

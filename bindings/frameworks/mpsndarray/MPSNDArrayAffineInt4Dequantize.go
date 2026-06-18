@@ -16,7 +16,7 @@ type MPSNDArrayAffineInt4Dequantize struct {
 }
 
 var (
-	_clsMPSNDArrayAffineInt4Dequantize = _objcClass("MPSNDArrayAffineInt4Dequantize")
+	_clsMPSNDArrayAffineInt4Dequantize                                     = _objcClass("MPSNDArrayAffineInt4Dequantize")
 	_mPSNDArrayAffineInt4DequantizeSelInitWithDeviceQuantizationDescriptor = objc.RegisterName("initWithDevice:quantizationDescriptor:")
 )
 
@@ -33,7 +33,8 @@ func MPSNDArrayAffineInt4DequantizeFromID(id objc.ID) *MPSNDArrayAffineInt4Dequa
 // @abstract   Initializes a kernel for 4-bit affine dequantization. @param      device    The Metal device to be used with this kernel. @param      quantizationDescriptor        Describes the quantization scheme. @result     A new vector LUT dequantization kernel.
 func (o *MPSNDArrayAffineInt4Dequantize) InitWithDeviceQuantizationDescriptor(device metal.MTLDevice, quantizationDescriptor *MPSNDArrayAffineQuantizationDescriptor) *MPSNDArrayAffineInt4Dequantize {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayAffineInt4DequantizeSelInitWithDeviceQuantizationDescriptor, device, quantizationDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayAffineInt4DequantizeFromID(_ret)
 }
-

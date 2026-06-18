@@ -68,4 +68,3 @@ type AppRunTimeMetricable interface {
 }
 
 var _ AppRunTimeMetricable = (*AppRunTimeMetric)(nil)
-

@@ -50,4 +50,3 @@ type DiskIOMetricable interface {
 }
 
 var _ DiskIOMetricable = (*DiskIOMetric)(nil)
-

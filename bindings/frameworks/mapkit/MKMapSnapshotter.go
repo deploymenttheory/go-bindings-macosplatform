@@ -18,12 +18,12 @@ type MKMapSnapshotter struct {
 }
 
 var (
-	_clsMKMapSnapshotter = _objcClass("MKMapSnapshotter")
-	_mKMapSnapshotterSelInitWithOptions = objc.RegisterName("initWithOptions:")
-	_mKMapSnapshotterSelStartWithCompletionHandler = objc.RegisterName("startWithCompletionHandler:")
+	_clsMKMapSnapshotter                                = _objcClass("MKMapSnapshotter")
+	_mKMapSnapshotterSelInitWithOptions                 = objc.RegisterName("initWithOptions:")
+	_mKMapSnapshotterSelStartWithCompletionHandler      = objc.RegisterName("startWithCompletionHandler:")
 	_mKMapSnapshotterSelStartWithQueueCompletionHandler = objc.RegisterName("startWithQueue:completionHandler:")
-	_mKMapSnapshotterSelCancel = objc.RegisterName("cancel")
-	_mKMapSnapshotterSelIsLoading = objc.RegisterName("isLoading")
+	_mKMapSnapshotterSelCancel                          = objc.RegisterName("cancel")
+	_mKMapSnapshotterSelIsLoading                       = objc.RegisterName("isLoading")
 )
 
 func MKMapSnapshotterFromID(id objc.ID) *MKMapSnapshotter {
@@ -38,7 +38,9 @@ func MKMapSnapshotterFromID(id objc.ID) *MKMapSnapshotter {
 
 func (o *MKMapSnapshotter) InitWithOptions(options *MKMapSnapshotOptions) *MKMapSnapshotter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotterSelInitWithOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapSnapshotterFromID(_ret)
 }
 
@@ -78,4 +80,3 @@ func (o *MKMapSnapshotter) IsLoading() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKMapSnapshotterSelIsLoading)
 	return _ret
 }
-

@@ -47,4 +47,3 @@ type TokenKeychainItemProvider interface {
 type TokenSessionProvider interface {
 	asTokenSession() *raw.TKTokenSession
 }
-

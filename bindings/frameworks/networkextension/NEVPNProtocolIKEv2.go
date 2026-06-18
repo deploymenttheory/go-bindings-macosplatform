@@ -16,39 +16,39 @@ type NEVPNProtocolIKEv2 struct {
 }
 
 var (
-	_clsNEVPNProtocolIKEv2 = _objcClass("NEVPNProtocolIKEv2")
-	_nEVPNProtocolIKEv2SelDeadPeerDetectionRate = objc.RegisterName("deadPeerDetectionRate")
-	_nEVPNProtocolIKEv2SelSetDeadPeerDetectionRate = objc.RegisterName("setDeadPeerDetectionRate:")
-	_nEVPNProtocolIKEv2SelServerCertificateIssuerCommonName = objc.RegisterName("serverCertificateIssuerCommonName")
-	_nEVPNProtocolIKEv2SelSetServerCertificateIssuerCommonName = objc.RegisterName("setServerCertificateIssuerCommonName:")
-	_nEVPNProtocolIKEv2SelServerCertificateCommonName = objc.RegisterName("serverCertificateCommonName")
-	_nEVPNProtocolIKEv2SelSetServerCertificateCommonName = objc.RegisterName("setServerCertificateCommonName:")
-	_nEVPNProtocolIKEv2SelCertificateType = objc.RegisterName("certificateType")
-	_nEVPNProtocolIKEv2SelSetCertificateType = objc.RegisterName("setCertificateType:")
-	_nEVPNProtocolIKEv2SelUseConfigurationAttributeInternalIPSubnet = objc.RegisterName("useConfigurationAttributeInternalIPSubnet")
+	_clsNEVPNProtocolIKEv2                                             = _objcClass("NEVPNProtocolIKEv2")
+	_nEVPNProtocolIKEv2SelDeadPeerDetectionRate                        = objc.RegisterName("deadPeerDetectionRate")
+	_nEVPNProtocolIKEv2SelSetDeadPeerDetectionRate                     = objc.RegisterName("setDeadPeerDetectionRate:")
+	_nEVPNProtocolIKEv2SelServerCertificateIssuerCommonName            = objc.RegisterName("serverCertificateIssuerCommonName")
+	_nEVPNProtocolIKEv2SelSetServerCertificateIssuerCommonName         = objc.RegisterName("setServerCertificateIssuerCommonName:")
+	_nEVPNProtocolIKEv2SelServerCertificateCommonName                  = objc.RegisterName("serverCertificateCommonName")
+	_nEVPNProtocolIKEv2SelSetServerCertificateCommonName               = objc.RegisterName("setServerCertificateCommonName:")
+	_nEVPNProtocolIKEv2SelCertificateType                              = objc.RegisterName("certificateType")
+	_nEVPNProtocolIKEv2SelSetCertificateType                           = objc.RegisterName("setCertificateType:")
+	_nEVPNProtocolIKEv2SelUseConfigurationAttributeInternalIPSubnet    = objc.RegisterName("useConfigurationAttributeInternalIPSubnet")
 	_nEVPNProtocolIKEv2SelSetUseConfigurationAttributeInternalIPSubnet = objc.RegisterName("setUseConfigurationAttributeInternalIPSubnet:")
-	_nEVPNProtocolIKEv2SelIKESecurityAssociationParameters = objc.RegisterName("IKESecurityAssociationParameters")
-	_nEVPNProtocolIKEv2SelChildSecurityAssociationParameters = objc.RegisterName("childSecurityAssociationParameters")
-	_nEVPNProtocolIKEv2SelDisableMOBIKE = objc.RegisterName("disableMOBIKE")
-	_nEVPNProtocolIKEv2SelSetDisableMOBIKE = objc.RegisterName("setDisableMOBIKE:")
-	_nEVPNProtocolIKEv2SelDisableRedirect = objc.RegisterName("disableRedirect")
-	_nEVPNProtocolIKEv2SelSetDisableRedirect = objc.RegisterName("setDisableRedirect:")
-	_nEVPNProtocolIKEv2SelEnablePFS = objc.RegisterName("enablePFS")
-	_nEVPNProtocolIKEv2SelSetEnablePFS = objc.RegisterName("setEnablePFS:")
-	_nEVPNProtocolIKEv2SelAllowPostQuantumKeyExchangeFallback = objc.RegisterName("allowPostQuantumKeyExchangeFallback")
-	_nEVPNProtocolIKEv2SelSetAllowPostQuantumKeyExchangeFallback = objc.RegisterName("setAllowPostQuantumKeyExchangeFallback:")
-	_nEVPNProtocolIKEv2SelEnableRevocationCheck = objc.RegisterName("enableRevocationCheck")
-	_nEVPNProtocolIKEv2SelSetEnableRevocationCheck = objc.RegisterName("setEnableRevocationCheck:")
-	_nEVPNProtocolIKEv2SelStrictRevocationCheck = objc.RegisterName("strictRevocationCheck")
-	_nEVPNProtocolIKEv2SelSetStrictRevocationCheck = objc.RegisterName("setStrictRevocationCheck:")
-	_nEVPNProtocolIKEv2SelMinimumTLSVersion = objc.RegisterName("minimumTLSVersion")
-	_nEVPNProtocolIKEv2SelSetMinimumTLSVersion = objc.RegisterName("setMinimumTLSVersion:")
-	_nEVPNProtocolIKEv2SelMaximumTLSVersion = objc.RegisterName("maximumTLSVersion")
-	_nEVPNProtocolIKEv2SelSetMaximumTLSVersion = objc.RegisterName("setMaximumTLSVersion:")
-	_nEVPNProtocolIKEv2SelMtu = objc.RegisterName("mtu")
-	_nEVPNProtocolIKEv2SelSetMtu = objc.RegisterName("setMtu:")
-	_nEVPNProtocolIKEv2SelPpkConfiguration = objc.RegisterName("ppkConfiguration")
-	_nEVPNProtocolIKEv2SelSetPpkConfiguration = objc.RegisterName("setPpkConfiguration:")
+	_nEVPNProtocolIKEv2SelIKESecurityAssociationParameters             = objc.RegisterName("IKESecurityAssociationParameters")
+	_nEVPNProtocolIKEv2SelChildSecurityAssociationParameters           = objc.RegisterName("childSecurityAssociationParameters")
+	_nEVPNProtocolIKEv2SelDisableMOBIKE                                = objc.RegisterName("disableMOBIKE")
+	_nEVPNProtocolIKEv2SelSetDisableMOBIKE                             = objc.RegisterName("setDisableMOBIKE:")
+	_nEVPNProtocolIKEv2SelDisableRedirect                              = objc.RegisterName("disableRedirect")
+	_nEVPNProtocolIKEv2SelSetDisableRedirect                           = objc.RegisterName("setDisableRedirect:")
+	_nEVPNProtocolIKEv2SelEnablePFS                                    = objc.RegisterName("enablePFS")
+	_nEVPNProtocolIKEv2SelSetEnablePFS                                 = objc.RegisterName("setEnablePFS:")
+	_nEVPNProtocolIKEv2SelAllowPostQuantumKeyExchangeFallback          = objc.RegisterName("allowPostQuantumKeyExchangeFallback")
+	_nEVPNProtocolIKEv2SelSetAllowPostQuantumKeyExchangeFallback       = objc.RegisterName("setAllowPostQuantumKeyExchangeFallback:")
+	_nEVPNProtocolIKEv2SelEnableRevocationCheck                        = objc.RegisterName("enableRevocationCheck")
+	_nEVPNProtocolIKEv2SelSetEnableRevocationCheck                     = objc.RegisterName("setEnableRevocationCheck:")
+	_nEVPNProtocolIKEv2SelStrictRevocationCheck                        = objc.RegisterName("strictRevocationCheck")
+	_nEVPNProtocolIKEv2SelSetStrictRevocationCheck                     = objc.RegisterName("setStrictRevocationCheck:")
+	_nEVPNProtocolIKEv2SelMinimumTLSVersion                            = objc.RegisterName("minimumTLSVersion")
+	_nEVPNProtocolIKEv2SelSetMinimumTLSVersion                         = objc.RegisterName("setMinimumTLSVersion:")
+	_nEVPNProtocolIKEv2SelMaximumTLSVersion                            = objc.RegisterName("maximumTLSVersion")
+	_nEVPNProtocolIKEv2SelSetMaximumTLSVersion                         = objc.RegisterName("setMaximumTLSVersion:")
+	_nEVPNProtocolIKEv2SelMtu                                          = objc.RegisterName("mtu")
+	_nEVPNProtocolIKEv2SelSetMtu                                       = objc.RegisterName("setMtu:")
+	_nEVPNProtocolIKEv2SelPpkConfiguration                             = objc.RegisterName("ppkConfiguration")
+	_nEVPNProtocolIKEv2SelSetPpkConfiguration                          = objc.RegisterName("setPpkConfiguration:")
 )
 
 func NEVPNProtocolIKEv2FromID(id objc.ID) *NEVPNProtocolIKEv2 {
@@ -74,7 +74,9 @@ func (o *NEVPNProtocolIKEv2) SetDeadPeerDetectionRate(deadPeerDetectionRate NEVP
 // @property serverCertificateIssuerCommonName @discussion A string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
 func (o *NEVPNProtocolIKEv2) ServerCertificateIssuerCommonName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIKEv2SelServerCertificateIssuerCommonName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *NEVPNProtocolIKEv2) SetServerCertificateIssuerCommonName(serverCertific
 // @property serverCertificateCommonName @discussion A string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
 func (o *NEVPNProtocolIKEv2) ServerCertificateCommonName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIKEv2SelServerCertificateCommonName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,14 +120,18 @@ func (o *NEVPNProtocolIKEv2) SetUseConfigurationAttributeInternalIPSubnet(useCon
 // @property IKESecurityAssociationParameters @discussion Parameters for the IKE SA
 func (o *NEVPNProtocolIKEv2) IKESecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIKEv2SelIKESecurityAssociationParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNIKEv2SecurityAssociationParametersFromID(_ret)
 }
 
 // @property childSecurityAssociationParameters @discussion Parameters for the child SA
 func (o *NEVPNProtocolIKEv2) ChildSecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIKEv2SelChildSecurityAssociationParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNIKEv2SecurityAssociationParametersFromID(_ret)
 }
 
@@ -220,11 +228,12 @@ func (o *NEVPNProtocolIKEv2) SetMtu(mtu uint) {
 // @property ppkConfiguration @discussion Configuration for the use of a Post-quantum Pre-shared Key (PPK).
 func (o *NEVPNProtocolIKEv2) PpkConfiguration() *NEVPNIKEv2PPKConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNProtocolIKEv2SelPpkConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNIKEv2PPKConfigurationFromID(_ret)
 }
 
 func (o *NEVPNProtocolIKEv2) SetPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) {
 	o.Ptr().Send(_nEVPNProtocolIKEv2SelSetPpkConfiguration, ppkConfiguration.Ptr())
 }
-

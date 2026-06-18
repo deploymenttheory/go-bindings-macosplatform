@@ -16,8 +16,8 @@ type PDFAnnotationStamp struct {
 }
 
 var (
-	_clsPDFAnnotationStamp = _objcClass("PDFAnnotationStamp")
-	_pDFAnnotationStampSelName = objc.RegisterName("name")
+	_clsPDFAnnotationStamp        = _objcClass("PDFAnnotationStamp")
+	_pDFAnnotationStampSelName    = objc.RegisterName("name")
 	_pDFAnnotationStampSelSetName = objc.RegisterName("setName:")
 )
 
@@ -33,11 +33,12 @@ func PDFAnnotationStampFromID(id objc.ID) *PDFAnnotationStamp {
 
 func (o *PDFAnnotationStamp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationStampSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PDFAnnotationStamp) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_pDFAnnotationStampSelSetName, name.Ptr())
 }
-

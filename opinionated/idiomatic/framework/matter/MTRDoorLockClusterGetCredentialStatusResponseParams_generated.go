@@ -18,7 +18,9 @@ type MTRDoorLockClusterGetCredentialStatusResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterGetCredentialStatusResponseParams].
-func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusResponseParams { return x.inner }
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -182,4 +184,3 @@ type MTRDoorLockClusterGetCredentialStatusResponseParamsable interface {
 }
 
 var _ MTRDoorLockClusterGetCredentialStatusResponseParamsable = (*MTRDoorLockClusterGetCredentialStatusResponseParams)(nil)
-

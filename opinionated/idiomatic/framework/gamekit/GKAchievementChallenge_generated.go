@@ -53,4 +53,3 @@ type AchievementChallengeable interface {
 }
 
 var _ AchievementChallengeable = (*AchievementChallenge)(nil)
-

@@ -8,105 +8,105 @@ import (
 )
 
 var (
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnContinueSpeech func(*SpeechChannelRecord) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnCopyPhonemesFromText func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnCopySpeechProperty func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnCountVoices func(*int16) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechChannel func(*SpeechChannelRecord) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechDoneUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechErrorUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechPhonemeUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechSyncUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechTextDoneUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnDisposeSpeechWordUPP func(unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetIndVoice func(int16, *VoiceSpec) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetSpeechInfo func(*SpeechChannelRecord, uint, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetSpeechPitch func(*SpeechChannelRecord, *int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetSpeechRate func(*SpeechChannelRecord, *int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetVoiceDescription func(*VoiceSpec, *VoiceDescription, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnGetVoiceInfo func(*VoiceSpec, uint, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechDoneUPP func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechErrorUPP func(*SpeechChannelRecord, unsafe.Pointer, int16, int, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechPhonemeUPP func(*SpeechChannelRecord, unsafe.Pointer, int16, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechSyncUPP func(*SpeechChannelRecord, unsafe.Pointer, uint, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechTextDoneUPP func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnInvokeSpeechWordUPP func(*SpeechChannelRecord, unsafe.Pointer, uint, uint16, unsafe.Pointer)
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnMakeVoiceSpec func(uint, uint, *VoiceSpec) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechChannel func(*VoiceSpec, **SpeechChannelRecord) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechDoneUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechErrorUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechPhonemeUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechSyncUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechTextDoneUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnNewSpeechWordUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnPauseSpeechAt func(*SpeechChannelRecord, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSetSpeechInfo func(*SpeechChannelRecord, uint, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSetSpeechPitch func(*SpeechChannelRecord, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSetSpeechProperty func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSetSpeechRate func(*SpeechChannelRecord, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeakBuffer func(*SpeechChannelRecord, unsafe.Pointer, uint, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeakCFString func(*SpeechChannelRecord, unsafe.Pointer, unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeakString func(*uint8) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeakText func(*SpeechChannelRecord, unsafe.Pointer, uint) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeechBusy func() int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeechBusySystemWide func() int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeechManagerVersion func() unsafe.Pointer
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeechSynthesisRegisterModuleURL func(unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnSpeechSynthesisUnregisterModuleURL func(unsafe.Pointer) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnStopSpeech func(*SpeechChannelRecord) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnStopSpeechAt func(*SpeechChannelRecord, int) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnTextToPhonemes func(*SpeechChannelRecord, unsafe.Pointer, uint, *string, *int64) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnUseDictionary func(*SpeechChannelRecord, *string) int16
-// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
+	// Deprecated: Use AVSpeechSynthesizer in AVFoundation framework
 	_fnUseSpeechDictionary func(*SpeechChannelRecord, unsafe.Pointer) int16
 )
 
@@ -359,4 +359,3 @@ func UseDictionary(chan_ *SpeechChannelRecord, dictionary *string) int16 {
 func UseSpeechDictionary(chan_ *SpeechChannelRecord, speechDictionary unsafe.Pointer) int16 {
 	return _fnUseSpeechDictionary(chan_, speechDictionary)
 }
-

@@ -19,17 +19,17 @@ type AVSampleBufferVideoRenderer struct {
 }
 
 var (
-	_clsAVSampleBufferVideoRenderer = _objcClass("AVSampleBufferVideoRenderer")
-	_aVSampleBufferVideoRendererSelFlushWithRemovalOfDisplayedImageCompletionHandler = objc.RegisterName("flushWithRemovalOfDisplayedImage:completionHandler:")
-	_aVSampleBufferVideoRendererSelStatus = objc.RegisterName("status")
-	_aVSampleBufferVideoRendererSelError = objc.RegisterName("error")
-	_aVSampleBufferVideoRendererSelRequiresFlushToResumeDecoding = objc.RegisterName("requiresFlushToResumeDecoding")
-	_aVSampleBufferVideoRendererSelCopyDisplayedPixelBuffer = objc.RegisterName("copyDisplayedPixelBuffer")
-	_aVSampleBufferVideoRendererSelExpectMinimumUpcomingSampleBufferPresentationTime = objc.RegisterName("expectMinimumUpcomingSampleBufferPresentationTime:")
+	_clsAVSampleBufferVideoRenderer                                                                   = _objcClass("AVSampleBufferVideoRenderer")
+	_aVSampleBufferVideoRendererSelFlushWithRemovalOfDisplayedImageCompletionHandler                  = objc.RegisterName("flushWithRemovalOfDisplayedImage:completionHandler:")
+	_aVSampleBufferVideoRendererSelStatus                                                             = objc.RegisterName("status")
+	_aVSampleBufferVideoRendererSelError                                                              = objc.RegisterName("error")
+	_aVSampleBufferVideoRendererSelRequiresFlushToResumeDecoding                                      = objc.RegisterName("requiresFlushToResumeDecoding")
+	_aVSampleBufferVideoRendererSelCopyDisplayedPixelBuffer                                           = objc.RegisterName("copyDisplayedPixelBuffer")
+	_aVSampleBufferVideoRendererSelExpectMinimumUpcomingSampleBufferPresentationTime                  = objc.RegisterName("expectMinimumUpcomingSampleBufferPresentationTime:")
 	_aVSampleBufferVideoRendererSelExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes = objc.RegisterName("expectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes")
-	_aVSampleBufferVideoRendererSelResetUpcomingSampleBufferPresentationTimeExpectations = objc.RegisterName("resetUpcomingSampleBufferPresentationTimeExpectations")
-	_aVSampleBufferVideoRendererSelRecommendedPixelBufferAttributes = objc.RegisterName("recommendedPixelBufferAttributes")
-	_aVSampleBufferVideoRendererSelLoadVideoPerformanceMetricsWithCompletionHandler = objc.RegisterName("loadVideoPerformanceMetricsWithCompletionHandler:")
+	_aVSampleBufferVideoRendererSelResetUpcomingSampleBufferPresentationTimeExpectations              = objc.RegisterName("resetUpcomingSampleBufferPresentationTimeExpectations")
+	_aVSampleBufferVideoRendererSelRecommendedPixelBufferAttributes                                   = objc.RegisterName("recommendedPixelBufferAttributes")
+	_aVSampleBufferVideoRendererSelLoadVideoPerformanceMetricsWithCompletionHandler                   = objc.RegisterName("loadVideoPerformanceMetricsWithCompletionHandler:")
 )
 
 func AVSampleBufferVideoRendererFromID(id objc.ID) *AVSampleBufferVideoRenderer {
@@ -108,4 +108,3 @@ func (o *AVSampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionH
 	}
 	o.Ptr().Send(_aVSampleBufferVideoRendererSelLoadVideoPerformanceMetricsWithCompletionHandler, __block_completionHandler)
 }
-

@@ -25,4 +25,3 @@ func PDFAnnotationSquareFromID(id objc.ID) *PDFAnnotationSquare {
 	purego.Track(o)
 	return o
 }
-

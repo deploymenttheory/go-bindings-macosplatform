@@ -18,31 +18,31 @@ type SCNText struct {
 }
 
 var (
-	_clsSCNText = _objcClass("SCNText")
+	_clsSCNText                             = _objcClass("SCNText")
 	_sCNTextSelTextWithStringExtrusionDepth = objc.RegisterName("textWithString:extrusionDepth:")
-	_sCNTextSelExtrusionDepth = objc.RegisterName("extrusionDepth")
-	_sCNTextSelSetExtrusionDepth = objc.RegisterName("setExtrusionDepth:")
-	_sCNTextSelString = objc.RegisterName("string")
-	_sCNTextSelSetString = objc.RegisterName("setString:")
-	_sCNTextSelFont = objc.RegisterName("font")
-	_sCNTextSelSetFont = objc.RegisterName("setFont:")
-	_sCNTextSelIsWrapped = objc.RegisterName("isWrapped")
-	_sCNTextSelSetWrapped = objc.RegisterName("setWrapped:")
-	_sCNTextSelContainerFrame = objc.RegisterName("containerFrame")
-	_sCNTextSelSetContainerFrame = objc.RegisterName("setContainerFrame:")
-	_sCNTextSelTextSize = objc.RegisterName("textSize")
-	_sCNTextSelTruncationMode = objc.RegisterName("truncationMode")
-	_sCNTextSelSetTruncationMode = objc.RegisterName("setTruncationMode:")
-	_sCNTextSelAlignmentMode = objc.RegisterName("alignmentMode")
-	_sCNTextSelSetAlignmentMode = objc.RegisterName("setAlignmentMode:")
-	_sCNTextSelChamferRadius = objc.RegisterName("chamferRadius")
-	_sCNTextSelSetChamferRadius = objc.RegisterName("setChamferRadius:")
-	_sCNTextSelChamferSegmentCount = objc.RegisterName("chamferSegmentCount")
-	_sCNTextSelSetChamferSegmentCount = objc.RegisterName("setChamferSegmentCount:")
-	_sCNTextSelChamferProfile = objc.RegisterName("chamferProfile")
-	_sCNTextSelSetChamferProfile = objc.RegisterName("setChamferProfile:")
-	_sCNTextSelFlatness = objc.RegisterName("flatness")
-	_sCNTextSelSetFlatness = objc.RegisterName("setFlatness:")
+	_sCNTextSelExtrusionDepth               = objc.RegisterName("extrusionDepth")
+	_sCNTextSelSetExtrusionDepth            = objc.RegisterName("setExtrusionDepth:")
+	_sCNTextSelString                       = objc.RegisterName("string")
+	_sCNTextSelSetString                    = objc.RegisterName("setString:")
+	_sCNTextSelFont                         = objc.RegisterName("font")
+	_sCNTextSelSetFont                      = objc.RegisterName("setFont:")
+	_sCNTextSelIsWrapped                    = objc.RegisterName("isWrapped")
+	_sCNTextSelSetWrapped                   = objc.RegisterName("setWrapped:")
+	_sCNTextSelContainerFrame               = objc.RegisterName("containerFrame")
+	_sCNTextSelSetContainerFrame            = objc.RegisterName("setContainerFrame:")
+	_sCNTextSelTextSize                     = objc.RegisterName("textSize")
+	_sCNTextSelTruncationMode               = objc.RegisterName("truncationMode")
+	_sCNTextSelSetTruncationMode            = objc.RegisterName("setTruncationMode:")
+	_sCNTextSelAlignmentMode                = objc.RegisterName("alignmentMode")
+	_sCNTextSelSetAlignmentMode             = objc.RegisterName("setAlignmentMode:")
+	_sCNTextSelChamferRadius                = objc.RegisterName("chamferRadius")
+	_sCNTextSelSetChamferRadius             = objc.RegisterName("setChamferRadius:")
+	_sCNTextSelChamferSegmentCount          = objc.RegisterName("chamferSegmentCount")
+	_sCNTextSelSetChamferSegmentCount       = objc.RegisterName("setChamferSegmentCount:")
+	_sCNTextSelChamferProfile               = objc.RegisterName("chamferProfile")
+	_sCNTextSelSetChamferProfile            = objc.RegisterName("setChamferProfile:")
+	_sCNTextSelFlatness                     = objc.RegisterName("flatness")
+	_sCNTextSelSetFlatness                  = objc.RegisterName("setFlatness:")
 )
 
 func SCNTextFromID(id objc.ID) *SCNText {
@@ -58,7 +58,9 @@ func SCNTextFromID(id objc.ID) *SCNText {
 // @method textWithString:extrusionDepth: @abstract Creates and returns a 3D representation of given text with given extrusion depth. @param string The text to be represented. @param extrusionDepth The extrusion depth.
 func SCNTextTextWithStringExtrusionDepth(string_ objc.ID, extrusionDepth float64) *SCNText {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNText), _sCNTextSelTextWithStringExtrusionDepth, string_, extrusionDepth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTextFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *SCNText) SetString(string_ objc.ID) {
 // @property font @abstract The font used to represent the text. @discussion The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
 func (o *SCNText) Font() *appkit.NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNTextSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSFontFromID(_ret)
 }
 
@@ -122,7 +126,9 @@ func (o *SCNText) TextSize() corefoundation.CGSize {
 // @property truncationMode @abstract Describes how the text is truncated to fit within the bounds. @discussion For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
 func (o *SCNText) TruncationMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNTextSelTruncationMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -133,7 +139,9 @@ func (o *SCNText) SetTruncationMode(truncationMode *foundation.NSString) {
 // @property alignmentMode @abstract Determines how individual lines of text are horizontally aligned within the bounds. @discussion For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
 func (o *SCNText) AlignmentMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNTextSelAlignmentMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -166,7 +174,9 @@ func (o *SCNText) SetChamferSegmentCount(chamferSegmentCount int) {
 // @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
 func (o *SCNText) ChamferProfile() *appkit.NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNTextSelChamferProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSBezierPathFromID(_ret)
 }
 
@@ -183,4 +193,3 @@ func (o *SCNText) Flatness() float64 {
 func (o *SCNText) SetFlatness(flatness float64) {
 	o.Ptr().Send(_sCNTextSelSetFlatness, flatness)
 }
-

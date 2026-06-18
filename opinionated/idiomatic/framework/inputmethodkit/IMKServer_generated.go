@@ -68,4 +68,3 @@ type Serverable interface {
 }
 
 var _ Serverable = (*Server)(nil)
-

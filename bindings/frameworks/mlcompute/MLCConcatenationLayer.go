@@ -15,10 +15,10 @@ type MLCConcatenationLayer struct {
 }
 
 var (
-	_clsMLCConcatenationLayer = _objcClass("MLCConcatenationLayer")
-	_mLCConcatenationLayerSelLayer = objc.RegisterName("layer")
+	_clsMLCConcatenationLayer                   = _objcClass("MLCConcatenationLayer")
+	_mLCConcatenationLayerSelLayer              = objc.RegisterName("layer")
 	_mLCConcatenationLayerSelLayerWithDimension = objc.RegisterName("layerWithDimension:")
-	_mLCConcatenationLayerSelDimension = objc.RegisterName("dimension")
+	_mLCConcatenationLayerSelDimension          = objc.RegisterName("dimension")
 )
 
 func MLCConcatenationLayerFromID(id objc.ID) *MLCConcatenationLayer {
@@ -34,14 +34,18 @@ func MLCConcatenationLayerFromID(id objc.ID) *MLCConcatenationLayer {
 // @abstract   Create a concatenation layer @return     A new concatenation layer
 func MLCConcatenationLayerLayer() *MLCConcatenationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConcatenationLayer), _mLCConcatenationLayerSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConcatenationLayerFromID(_ret)
 }
 
 // @abstract   Create a concatenation layer @param      dimension  The concatenation dimension @return     A new concatenation layer
 func MLCConcatenationLayerLayerWithDimension(dimension uint) *MLCConcatenationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConcatenationLayer), _mLCConcatenationLayerSelLayerWithDimension, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConcatenationLayerFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *MLCConcatenationLayer) Dimension() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCConcatenationLayerSelDimension)
 	return _ret
 }
-

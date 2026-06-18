@@ -16,27 +16,27 @@ type NSTextInputContext struct {
 }
 
 var (
-	_clsNSTextInputContext = _objcClass("NSTextInputContext")
-	_nSTextInputContextSelInitWithClient = objc.RegisterName("initWithClient:")
-	_nSTextInputContextSelActivate = objc.RegisterName("activate")
-	_nSTextInputContextSelDeactivate = objc.RegisterName("deactivate")
-	_nSTextInputContextSelHandleEvent = objc.RegisterName("handleEvent:")
-	_nSTextInputContextSelDiscardMarkedText = objc.RegisterName("discardMarkedText")
-	_nSTextInputContextSelInvalidateCharacterCoordinates = objc.RegisterName("invalidateCharacterCoordinates")
+	_clsNSTextInputContext                                           = _objcClass("NSTextInputContext")
+	_nSTextInputContextSelInitWithClient                             = objc.RegisterName("initWithClient:")
+	_nSTextInputContextSelActivate                                   = objc.RegisterName("activate")
+	_nSTextInputContextSelDeactivate                                 = objc.RegisterName("deactivate")
+	_nSTextInputContextSelHandleEvent                                = objc.RegisterName("handleEvent:")
+	_nSTextInputContextSelDiscardMarkedText                          = objc.RegisterName("discardMarkedText")
+	_nSTextInputContextSelInvalidateCharacterCoordinates             = objc.RegisterName("invalidateCharacterCoordinates")
 	_nSTextInputContextSelTextInputClientWillStartScrollingOrZooming = objc.RegisterName("textInputClientWillStartScrollingOrZooming")
-	_nSTextInputContextSelTextInputClientDidEndScrollingOrZooming = objc.RegisterName("textInputClientDidEndScrollingOrZooming")
-	_nSTextInputContextSelTextInputClientDidUpdateSelection = objc.RegisterName("textInputClientDidUpdateSelection")
-	_nSTextInputContextSelTextInputClientDidScroll = objc.RegisterName("textInputClientDidScroll")
-	_nSTextInputContextSelLocalizedNameForInputSource = objc.RegisterName("localizedNameForInputSource:")
-	_nSTextInputContextSelCurrentInputContext = objc.RegisterName("currentInputContext")
-	_nSTextInputContextSelClient = objc.RegisterName("client")
-	_nSTextInputContextSelAcceptsGlyphInfo = objc.RegisterName("acceptsGlyphInfo")
-	_nSTextInputContextSelSetAcceptsGlyphInfo = objc.RegisterName("setAcceptsGlyphInfo:")
-	_nSTextInputContextSelAllowedInputSourceLocales = objc.RegisterName("allowedInputSourceLocales")
-	_nSTextInputContextSelSetAllowedInputSourceLocales = objc.RegisterName("setAllowedInputSourceLocales:")
-	_nSTextInputContextSelKeyboardInputSources = objc.RegisterName("keyboardInputSources")
-	_nSTextInputContextSelSelectedKeyboardInputSource = objc.RegisterName("selectedKeyboardInputSource")
-	_nSTextInputContextSelSetSelectedKeyboardInputSource = objc.RegisterName("setSelectedKeyboardInputSource:")
+	_nSTextInputContextSelTextInputClientDidEndScrollingOrZooming    = objc.RegisterName("textInputClientDidEndScrollingOrZooming")
+	_nSTextInputContextSelTextInputClientDidUpdateSelection          = objc.RegisterName("textInputClientDidUpdateSelection")
+	_nSTextInputContextSelTextInputClientDidScroll                   = objc.RegisterName("textInputClientDidScroll")
+	_nSTextInputContextSelLocalizedNameForInputSource                = objc.RegisterName("localizedNameForInputSource:")
+	_nSTextInputContextSelCurrentInputContext                        = objc.RegisterName("currentInputContext")
+	_nSTextInputContextSelClient                                     = objc.RegisterName("client")
+	_nSTextInputContextSelAcceptsGlyphInfo                           = objc.RegisterName("acceptsGlyphInfo")
+	_nSTextInputContextSelSetAcceptsGlyphInfo                        = objc.RegisterName("setAcceptsGlyphInfo:")
+	_nSTextInputContextSelAllowedInputSourceLocales                  = objc.RegisterName("allowedInputSourceLocales")
+	_nSTextInputContextSelSetAllowedInputSourceLocales               = objc.RegisterName("setAllowedInputSourceLocales:")
+	_nSTextInputContextSelKeyboardInputSources                       = objc.RegisterName("keyboardInputSources")
+	_nSTextInputContextSelSelectedKeyboardInputSource                = objc.RegisterName("selectedKeyboardInputSource")
+	_nSTextInputContextSelSetSelectedKeyboardInputSource             = objc.RegisterName("setSelectedKeyboardInputSource:")
 )
 
 func NSTextInputContextFromID(id objc.ID) *NSTextInputContext {
@@ -51,7 +51,9 @@ func NSTextInputContextFromID(id objc.ID) *NSTextInputContext {
 
 func (o *NSTextInputContext) InitWithClient(client NSTextInputClient) *NSTextInputContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInputContextSelInitWithClient, client)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextInputContextFromID(_ret)
 }
 
@@ -94,13 +96,17 @@ func (o *NSTextInputContext) TextInputClientDidScroll() {
 
 func NSTextInputContextLocalizedNameForInputSource(inputSourceIdentifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextInputContext), _nSTextInputContextSelLocalizedNameForInputSource, inputSourceIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSTextInputContextCurrentInputContext() *NSTextInputContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextInputContext), _nSTextInputContextSelCurrentInputContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextInputContextFromID(_ret)
 }
 
@@ -134,11 +140,12 @@ func (o *NSTextInputContext) KeyboardInputSources() *foundation.NSArray[*foundat
 
 func (o *NSTextInputContext) SelectedKeyboardInputSource() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextInputContextSelSelectedKeyboardInputSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTextInputContext) SetSelectedKeyboardInputSource(selectedKeyboardInputSource *foundation.NSString) {
 	o.Ptr().Send(_nSTextInputContextSelSetSelectedKeyboardInputSource, selectedKeyboardInputSource.Ptr())
 }
-

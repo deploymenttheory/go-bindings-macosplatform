@@ -49,4 +49,3 @@ type LogEntryActivityable interface {
 }
 
 var _ LogEntryActivityable = (*LogEntryActivity)(nil)
-

@@ -16,17 +16,17 @@ type NSTableCellView struct {
 }
 
 var (
-	_clsNSTableCellView = _objcClass("NSTableCellView")
-	_nSTableCellViewSelObjectValue = objc.RegisterName("objectValue")
-	_nSTableCellViewSelSetObjectValue = objc.RegisterName("setObjectValue:")
-	_nSTableCellViewSelTextField = objc.RegisterName("textField")
-	_nSTableCellViewSelSetTextField = objc.RegisterName("setTextField:")
-	_nSTableCellViewSelImageView = objc.RegisterName("imageView")
-	_nSTableCellViewSelSetImageView = objc.RegisterName("setImageView:")
-	_nSTableCellViewSelBackgroundStyle = objc.RegisterName("backgroundStyle")
-	_nSTableCellViewSelSetBackgroundStyle = objc.RegisterName("setBackgroundStyle:")
-	_nSTableCellViewSelRowSizeStyle = objc.RegisterName("rowSizeStyle")
-	_nSTableCellViewSelSetRowSizeStyle = objc.RegisterName("setRowSizeStyle:")
+	_clsNSTableCellView                        = _objcClass("NSTableCellView")
+	_nSTableCellViewSelObjectValue             = objc.RegisterName("objectValue")
+	_nSTableCellViewSelSetObjectValue          = objc.RegisterName("setObjectValue:")
+	_nSTableCellViewSelTextField               = objc.RegisterName("textField")
+	_nSTableCellViewSelSetTextField            = objc.RegisterName("setTextField:")
+	_nSTableCellViewSelImageView               = objc.RegisterName("imageView")
+	_nSTableCellViewSelSetImageView            = objc.RegisterName("setImageView:")
+	_nSTableCellViewSelBackgroundStyle         = objc.RegisterName("backgroundStyle")
+	_nSTableCellViewSelSetBackgroundStyle      = objc.RegisterName("setBackgroundStyle:")
+	_nSTableCellViewSelRowSizeStyle            = objc.RegisterName("rowSizeStyle")
+	_nSTableCellViewSelSetRowSizeStyle         = objc.RegisterName("setRowSizeStyle:")
 	_nSTableCellViewSelDraggingImageComponents = objc.RegisterName("draggingImageComponents")
 )
 
@@ -51,7 +51,9 @@ func (o *NSTableCellView) SetObjectValue(objectValue objc.ID) {
 
 func (o *NSTableCellView) TextField() *NSTextField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelTextField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *NSTableCellView) SetTextField(textField *NSTextField) {
 
 func (o *NSTableCellView) ImageView() *NSImageView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelImageView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageViewFromID(_ret)
 }
 
@@ -89,7 +93,8 @@ func (o *NSTableCellView) SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) 
 
 func (o *NSTableCellView) DraggingImageComponents() *foundation.NSArray[*NSDraggingImageComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableCellViewSelDraggingImageComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
 }
-

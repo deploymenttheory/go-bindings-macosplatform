@@ -16,11 +16,15 @@ type MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct].
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) Unwrap() *raw.MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct { return x.inner }
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) Unwrap() *raw.MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructFromID adopts an existing object pointer as a MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct (nil for 0).
 func MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
@@ -118,4 +122,3 @@ type MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable interf
 }
 
 var _ MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable = (*MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct)(nil)
-

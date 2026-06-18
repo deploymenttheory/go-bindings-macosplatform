@@ -16,19 +16,19 @@ type MLCOptimizer struct {
 }
 
 var (
-	_clsMLCOptimizer = _objcClass("MLCOptimizer")
-	_mLCOptimizerSelLearningRate = objc.RegisterName("learningRate")
-	_mLCOptimizerSelSetLearningRate = objc.RegisterName("setLearningRate:")
-	_mLCOptimizerSelGradientRescale = objc.RegisterName("gradientRescale")
-	_mLCOptimizerSelAppliesGradientClipping = objc.RegisterName("appliesGradientClipping")
+	_clsMLCOptimizer                           = _objcClass("MLCOptimizer")
+	_mLCOptimizerSelLearningRate               = objc.RegisterName("learningRate")
+	_mLCOptimizerSelSetLearningRate            = objc.RegisterName("setLearningRate:")
+	_mLCOptimizerSelGradientRescale            = objc.RegisterName("gradientRescale")
+	_mLCOptimizerSelAppliesGradientClipping    = objc.RegisterName("appliesGradientClipping")
 	_mLCOptimizerSelSetAppliesGradientClipping = objc.RegisterName("setAppliesGradientClipping:")
-	_mLCOptimizerSelGradientClipMax = objc.RegisterName("gradientClipMax")
-	_mLCOptimizerSelGradientClipMin = objc.RegisterName("gradientClipMin")
-	_mLCOptimizerSelRegularizationScale = objc.RegisterName("regularizationScale")
-	_mLCOptimizerSelRegularizationType = objc.RegisterName("regularizationType")
-	_mLCOptimizerSelGradientClippingType = objc.RegisterName("gradientClippingType")
-	_mLCOptimizerSelMaximumClippingNorm = objc.RegisterName("maximumClippingNorm")
-	_mLCOptimizerSelCustomGlobalNorm = objc.RegisterName("customGlobalNorm")
+	_mLCOptimizerSelGradientClipMax            = objc.RegisterName("gradientClipMax")
+	_mLCOptimizerSelGradientClipMin            = objc.RegisterName("gradientClipMin")
+	_mLCOptimizerSelRegularizationScale        = objc.RegisterName("regularizationScale")
+	_mLCOptimizerSelRegularizationType         = objc.RegisterName("regularizationType")
+	_mLCOptimizerSelGradientClippingType       = objc.RegisterName("gradientClippingType")
+	_mLCOptimizerSelMaximumClippingNorm        = objc.RegisterName("maximumClippingNorm")
+	_mLCOptimizerSelCustomGlobalNorm           = objc.RegisterName("customGlobalNorm")
 )
 
 func MLCOptimizerFromID(id objc.ID) *MLCOptimizer {
@@ -108,4 +108,3 @@ func (o *MLCOptimizer) CustomGlobalNorm() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCOptimizerSelCustomGlobalNorm)
 	return _ret
 }
-

@@ -16,19 +16,19 @@ type MTL4ArgumentTableDescriptor struct {
 }
 
 var (
-	_clsMTL4ArgumentTableDescriptor = _objcClass("MTL4ArgumentTableDescriptor")
-	_mTL4ArgumentTableDescriptorSelMaxBufferBindCount = objc.RegisterName("maxBufferBindCount")
-	_mTL4ArgumentTableDescriptorSelSetMaxBufferBindCount = objc.RegisterName("setMaxBufferBindCount:")
-	_mTL4ArgumentTableDescriptorSelMaxTextureBindCount = objc.RegisterName("maxTextureBindCount")
-	_mTL4ArgumentTableDescriptorSelSetMaxTextureBindCount = objc.RegisterName("setMaxTextureBindCount:")
-	_mTL4ArgumentTableDescriptorSelMaxSamplerStateBindCount = objc.RegisterName("maxSamplerStateBindCount")
+	_clsMTL4ArgumentTableDescriptor                            = _objcClass("MTL4ArgumentTableDescriptor")
+	_mTL4ArgumentTableDescriptorSelMaxBufferBindCount          = objc.RegisterName("maxBufferBindCount")
+	_mTL4ArgumentTableDescriptorSelSetMaxBufferBindCount       = objc.RegisterName("setMaxBufferBindCount:")
+	_mTL4ArgumentTableDescriptorSelMaxTextureBindCount         = objc.RegisterName("maxTextureBindCount")
+	_mTL4ArgumentTableDescriptorSelSetMaxTextureBindCount      = objc.RegisterName("setMaxTextureBindCount:")
+	_mTL4ArgumentTableDescriptorSelMaxSamplerStateBindCount    = objc.RegisterName("maxSamplerStateBindCount")
 	_mTL4ArgumentTableDescriptorSelSetMaxSamplerStateBindCount = objc.RegisterName("setMaxSamplerStateBindCount:")
-	_mTL4ArgumentTableDescriptorSelInitializeBindings = objc.RegisterName("initializeBindings")
-	_mTL4ArgumentTableDescriptorSelSetInitializeBindings = objc.RegisterName("setInitializeBindings:")
-	_mTL4ArgumentTableDescriptorSelSupportAttributeStrides = objc.RegisterName("supportAttributeStrides")
-	_mTL4ArgumentTableDescriptorSelSetSupportAttributeStrides = objc.RegisterName("setSupportAttributeStrides:")
-	_mTL4ArgumentTableDescriptorSelLabel = objc.RegisterName("label")
-	_mTL4ArgumentTableDescriptorSelSetLabel = objc.RegisterName("setLabel:")
+	_mTL4ArgumentTableDescriptorSelInitializeBindings          = objc.RegisterName("initializeBindings")
+	_mTL4ArgumentTableDescriptorSelSetInitializeBindings       = objc.RegisterName("setInitializeBindings:")
+	_mTL4ArgumentTableDescriptorSelSupportAttributeStrides     = objc.RegisterName("supportAttributeStrides")
+	_mTL4ArgumentTableDescriptorSelSetSupportAttributeStrides  = objc.RegisterName("setSupportAttributeStrides:")
+	_mTL4ArgumentTableDescriptorSelLabel                       = objc.RegisterName("label")
+	_mTL4ArgumentTableDescriptorSelSetLabel                    = objc.RegisterName("setLabel:")
 )
 
 func MTL4ArgumentTableDescriptorFromID(id objc.ID) *MTL4ArgumentTableDescriptor {
@@ -81,7 +81,7 @@ func (o *MTL4ArgumentTableDescriptor) SetInitializeBindings(initializeBindings b
 	o.Ptr().Send(_mTL4ArgumentTableDescriptorSelSetInitializeBindings, initializeBindings)
 }
 
-// Controls whether Metal should reserve memory for attribute strides in the argument table. Set this value to true if you intend to provide dynamic attribute strides when binding vertex array buffers to the argument table by calling ``MTL4ArgumentTable/setAddress:attributeStride:atIndex:`` The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// Controls whether Metal should reserve memory for attribute strides in the argument table. Set this value to true if you intend to provide dynamic attribute strides when binding vertex array buffers to the argument table by calling “MTL4ArgumentTable/setAddress:attributeStride:atIndex:“ The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (o *MTL4ArgumentTableDescriptor) SupportAttributeStrides() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTL4ArgumentTableDescriptorSelSupportAttributeStrides)
 	return _ret
@@ -94,11 +94,12 @@ func (o *MTL4ArgumentTableDescriptor) SetSupportAttributeStrides(supportAttribut
 // Assigns an optional label with the argument table for debug purposes.
 func (o *MTL4ArgumentTableDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4ArgumentTableDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTL4ArgumentTableDescriptor) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTL4ArgumentTableDescriptorSelSetLabel, label.Ptr())
 }
-

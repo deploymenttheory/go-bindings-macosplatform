@@ -16,7 +16,9 @@ type MTRAccountLoginClusterLoggedOutEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccountLoginClusterLoggedOutEvent].
-func (x *MTRAccountLoginClusterLoggedOutEvent) Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent { return x.inner }
+func (x *MTRAccountLoginClusterLoggedOutEvent) Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRAccountLoginClusterLoggedOutEventable interface {
 }
 
 var _ MTRAccountLoginClusterLoggedOutEventable = (*MTRAccountLoginClusterLoggedOutEvent)(nil)
-

@@ -19,15 +19,15 @@ type EKStructuredLocation struct {
 }
 
 var (
-	_clsEKStructuredLocation = _objcClass("EKStructuredLocation")
-	_eKStructuredLocationSelLocationWithTitle = objc.RegisterName("locationWithTitle:")
+	_clsEKStructuredLocation                    = _objcClass("EKStructuredLocation")
+	_eKStructuredLocationSelLocationWithTitle   = objc.RegisterName("locationWithTitle:")
 	_eKStructuredLocationSelLocationWithMapItem = objc.RegisterName("locationWithMapItem:")
-	_eKStructuredLocationSelTitle = objc.RegisterName("title")
-	_eKStructuredLocationSelSetTitle = objc.RegisterName("setTitle:")
-	_eKStructuredLocationSelGeoLocation = objc.RegisterName("geoLocation")
-	_eKStructuredLocationSelSetGeoLocation = objc.RegisterName("setGeoLocation:")
-	_eKStructuredLocationSelRadius = objc.RegisterName("radius")
-	_eKStructuredLocationSelSetRadius = objc.RegisterName("setRadius:")
+	_eKStructuredLocationSelTitle               = objc.RegisterName("title")
+	_eKStructuredLocationSelSetTitle            = objc.RegisterName("setTitle:")
+	_eKStructuredLocationSelGeoLocation         = objc.RegisterName("geoLocation")
+	_eKStructuredLocationSelSetGeoLocation      = objc.RegisterName("setGeoLocation:")
+	_eKStructuredLocationSelRadius              = objc.RegisterName("radius")
+	_eKStructuredLocationSelSetRadius           = objc.RegisterName("setRadius:")
 )
 
 func EKStructuredLocationFromID(id objc.ID) *EKStructuredLocation {
@@ -42,19 +42,25 @@ func EKStructuredLocationFromID(id objc.ID) *EKStructuredLocation {
 
 func EKStructuredLocationLocationWithTitle(title *foundation.NSString) *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKStructuredLocation), _eKStructuredLocationSelLocationWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKStructuredLocationFromID(_ret)
 }
 
 func EKStructuredLocationLocationWithMapItem(mapItem *mapkit.MKMapItem) *EKStructuredLocation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKStructuredLocation), _eKStructuredLocationSelLocationWithMapItem, mapItem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKStructuredLocationFromID(_ret)
 }
 
 func (o *EKStructuredLocation) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKStructuredLocationSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -79,4 +85,3 @@ func (o *EKStructuredLocation) Radius() float64 {
 func (o *EKStructuredLocation) SetRadius(radius float64) {
 	o.Ptr().Send(_eKStructuredLocationSelSetRadius, radius)
 }
-

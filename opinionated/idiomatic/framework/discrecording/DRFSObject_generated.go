@@ -173,4 +173,3 @@ type FSObjectable interface {
 }
 
 var _ FSObjectable = (*FSObject)(nil)
-

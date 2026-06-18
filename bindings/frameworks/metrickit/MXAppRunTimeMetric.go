@@ -16,10 +16,10 @@ type MXAppRunTimeMetric struct {
 }
 
 var (
-	_clsMXAppRunTimeMetric = _objcClass("MXAppRunTimeMetric")
-	_mXAppRunTimeMetricSelCumulativeForegroundTime = objc.RegisterName("cumulativeForegroundTime")
-	_mXAppRunTimeMetricSelCumulativeBackgroundTime = objc.RegisterName("cumulativeBackgroundTime")
-	_mXAppRunTimeMetricSelCumulativeBackgroundAudioTime = objc.RegisterName("cumulativeBackgroundAudioTime")
+	_clsMXAppRunTimeMetric                                 = _objcClass("MXAppRunTimeMetric")
+	_mXAppRunTimeMetricSelCumulativeForegroundTime         = objc.RegisterName("cumulativeForegroundTime")
+	_mXAppRunTimeMetricSelCumulativeBackgroundTime         = objc.RegisterName("cumulativeBackgroundTime")
+	_mXAppRunTimeMetricSelCumulativeBackgroundAudioTime    = objc.RegisterName("cumulativeBackgroundAudioTime")
 	_mXAppRunTimeMetricSelCumulativeBackgroundLocationTime = objc.RegisterName("cumulativeBackgroundLocationTime")
 )
 
@@ -56,4 +56,3 @@ func (o *MXAppRunTimeMetric) CumulativeBackgroundLocationTime() *foundation.NSMe
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXAppRunTimeMetricSelCumulativeBackgroundLocationTime)
 	return _ret
 }
-

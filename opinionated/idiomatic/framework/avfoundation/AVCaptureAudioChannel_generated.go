@@ -91,4 +91,3 @@ type CaptureAudioChannelable interface {
 }
 
 var _ CaptureAudioChannelable = (*CaptureAudioChannel)(nil)
-

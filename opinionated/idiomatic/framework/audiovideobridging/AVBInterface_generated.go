@@ -86,4 +86,3 @@ type Interfaceable interface {
 }
 
 var _ Interfaceable = (*Interface)(nil)
-

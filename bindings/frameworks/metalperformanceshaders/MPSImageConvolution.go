@@ -18,13 +18,13 @@ type MPSImageConvolution struct {
 }
 
 var (
-	_clsMPSImageConvolution = _objcClass("MPSImageConvolution")
+	_clsMPSImageConvolution                                             = _objcClass("MPSImageConvolution")
 	_mPSImageConvolutionSelInitWithDeviceKernelWidthKernelHeightWeights = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:weights:")
-	_mPSImageConvolutionSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageConvolutionSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSImageConvolutionSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSImageConvolutionSelBias = objc.RegisterName("bias")
-	_mPSImageConvolutionSelSetBias = objc.RegisterName("setBias:")
+	_mPSImageConvolutionSelInitWithCoderDevice                          = objc.RegisterName("initWithCoder:device:")
+	_mPSImageConvolutionSelKernelHeight                                 = objc.RegisterName("kernelHeight")
+	_mPSImageConvolutionSelKernelWidth                                  = objc.RegisterName("kernelWidth")
+	_mPSImageConvolutionSelBias                                         = objc.RegisterName("bias")
+	_mPSImageConvolutionSelSetBias                                      = objc.RegisterName("setBias:")
 )
 
 func MPSImageConvolutionFromID(id objc.ID) *MPSImageConvolution {
@@ -39,14 +39,18 @@ func MPSImageConvolutionFromID(id objc.ID) *MPSImageConvolution {
 
 func (o *MPSImageConvolution) InitWithDeviceKernelWidthKernelHeightWeights(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, kernelWeights *float32) *MPSImageConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageConvolutionSelInitWithDeviceKernelWidthKernelHeightWeights, device, kernelWidth, kernelHeight, kernelWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageConvolutionFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageConvolution) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageConvolutionSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageConvolutionFromID(_ret)
 }
 
@@ -71,4 +75,3 @@ func (o *MPSImageConvolution) Bias() float32 {
 func (o *MPSImageConvolution) SetBias(bias float32) {
 	o.Ptr().Send(_mPSImageConvolutionSelSetBias, bias)
 }
-

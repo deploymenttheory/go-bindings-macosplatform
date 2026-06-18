@@ -18,14 +18,14 @@ type NSPersistentCloudKitContainerEvent struct {
 }
 
 var (
-	_clsNSPersistentCloudKitContainerEvent = _objcClass("NSPersistentCloudKitContainerEvent")
-	_nSPersistentCloudKitContainerEventSelIdentifier = objc.RegisterName("identifier")
+	_clsNSPersistentCloudKitContainerEvent                = _objcClass("NSPersistentCloudKitContainerEvent")
+	_nSPersistentCloudKitContainerEventSelIdentifier      = objc.RegisterName("identifier")
 	_nSPersistentCloudKitContainerEventSelStoreIdentifier = objc.RegisterName("storeIdentifier")
-	_nSPersistentCloudKitContainerEventSelType = objc.RegisterName("type")
-	_nSPersistentCloudKitContainerEventSelStartDate = objc.RegisterName("startDate")
-	_nSPersistentCloudKitContainerEventSelEndDate = objc.RegisterName("endDate")
-	_nSPersistentCloudKitContainerEventSelSucceeded = objc.RegisterName("succeeded")
-	_nSPersistentCloudKitContainerEventSelError = objc.RegisterName("error")
+	_nSPersistentCloudKitContainerEventSelType            = objc.RegisterName("type")
+	_nSPersistentCloudKitContainerEventSelStartDate       = objc.RegisterName("startDate")
+	_nSPersistentCloudKitContainerEventSelEndDate         = objc.RegisterName("endDate")
+	_nSPersistentCloudKitContainerEventSelSucceeded       = objc.RegisterName("succeeded")
+	_nSPersistentCloudKitContainerEventSelError           = objc.RegisterName("error")
 )
 
 func NSPersistentCloudKitContainerEventFromID(id objc.ID) *NSPersistentCloudKitContainerEvent {
@@ -40,13 +40,17 @@ func NSPersistentCloudKitContainerEventFromID(id objc.ID) *NSPersistentCloudKitC
 
 func (o *NSPersistentCloudKitContainerEvent) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerEventSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *NSPersistentCloudKitContainerEvent) StoreIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerEventSelStoreIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,13 +61,17 @@ func (o *NSPersistentCloudKitContainerEvent) Type() NSPersistentCloudKitContaine
 
 func (o *NSPersistentCloudKitContainerEvent) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerEventSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *NSPersistentCloudKitContainerEvent) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerEventSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -76,4 +84,3 @@ func (o *NSPersistentCloudKitContainerEvent) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSPersistentCloudKitContainerEventSelError)
 	return _ret
 }
-

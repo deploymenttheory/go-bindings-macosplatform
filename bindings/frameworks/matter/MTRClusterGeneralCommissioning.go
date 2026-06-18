@@ -18,29 +18,29 @@ type MTRClusterGeneralCommissioning struct {
 }
 
 var (
-	_clsMTRClusterGeneralCommissioning = _objcClass("MTRClusterGeneralCommissioning")
-	_mTRClusterGeneralCommissioningSelArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralCommissioningSelSetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterGeneralCommissioningSelReadAttributeBreadcrumbWithParams = objc.RegisterName("readAttributeBreadcrumbWithParams:")
-	_mTRClusterGeneralCommissioningSelWriteAttributeBreadcrumbWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:")
-	_mTRClusterGeneralCommissioningSelWriteAttributeBreadcrumbWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:params:")
-	_mTRClusterGeneralCommissioningSelReadAttributeBasicCommissioningInfoWithParams = objc.RegisterName("readAttributeBasicCommissioningInfoWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeRegulatoryConfigWithParams = objc.RegisterName("readAttributeRegulatoryConfigWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeLocationCapabilityWithParams = objc.RegisterName("readAttributeLocationCapabilityWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeSupportsConcurrentConnectionWithParams = objc.RegisterName("readAttributeSupportsConcurrentConnectionWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterGeneralCommissioningSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterGeneralCommissioningSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterGeneralCommissioningSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterGeneralCommissioningSelArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGeneralCommissioningSelSetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterGeneralCommissioning                                                                                    = _objcClass("MTRClusterGeneralCommissioning")
+	_mTRClusterGeneralCommissioningSelArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralCommissioningSelSetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterGeneralCommissioningSelReadAttributeBreadcrumbWithParams                                                   = objc.RegisterName("readAttributeBreadcrumbWithParams:")
+	_mTRClusterGeneralCommissioningSelWriteAttributeBreadcrumbWithValueExpectedValueInterval                              = objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:")
+	_mTRClusterGeneralCommissioningSelWriteAttributeBreadcrumbWithValueExpectedValueIntervalParams                        = objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:params:")
+	_mTRClusterGeneralCommissioningSelReadAttributeBasicCommissioningInfoWithParams                                       = objc.RegisterName("readAttributeBasicCommissioningInfoWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeRegulatoryConfigWithParams                                             = objc.RegisterName("readAttributeRegulatoryConfigWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeLocationCapabilityWithParams                                           = objc.RegisterName("readAttributeLocationCapabilityWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeSupportsConcurrentConnectionWithParams                                 = objc.RegisterName("readAttributeSupportsConcurrentConnectionWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeGeneratedCommandListWithParams                                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeAcceptedCommandListWithParams                                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeAttributeListWithParams                                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeFeatureMapWithParams                                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterGeneralCommissioningSelReadAttributeClusterRevisionWithParams                                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterGeneralCommissioningSelInitWithDeviceEndpointIDQueue                                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterGeneralCommissioningSelInitWithDeviceEndpointQueue                                                         = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterGeneralCommissioningSelArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGeneralCommissioningSelSetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletionHandler   = objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterGeneralCommissioningSelCommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterGeneralCommissioningFromID(id objc.ID) *MTRClusterGeneralCommissioning {
@@ -170,13 +170,17 @@ func (o *MTRClusterGeneralCommissioning) ReadAttributeClusterRevisionWithParams(
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterGeneralCommissioning) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGeneralCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGeneralCommissioningSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGeneralCommissioningFromID(_ret)
 }
 
 func (o *MTRClusterGeneralCommissioning) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGeneralCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterGeneralCommissioningSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterGeneralCommissioningFromID(_ret)
 }
 
@@ -235,4 +239,3 @@ func (o *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 	}
 	o.Ptr().Send(_mTRClusterGeneralCommissioningSelCommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

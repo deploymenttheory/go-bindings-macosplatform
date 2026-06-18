@@ -20,18 +20,18 @@ type AVMutableComposition struct {
 }
 
 var (
-	_clsAVMutableComposition = _objcClass("AVMutableComposition")
-	_aVMutableCompositionSelComposition = objc.RegisterName("composition")
-	_aVMutableCompositionSelCompositionWithURLAssetInitializationOptions = objc.RegisterName("compositionWithURLAssetInitializationOptions:")
-	_aVMutableCompositionSelSetNaturalSize = objc.RegisterName("setNaturalSize:")
-	_aVMutableCompositionSelInsertTimeRangeOfAssetAtTimeError = objc.RegisterName("insertTimeRange:ofAsset:atTime:error:")
+	_clsAVMutableComposition                                              = _objcClass("AVMutableComposition")
+	_aVMutableCompositionSelComposition                                   = objc.RegisterName("composition")
+	_aVMutableCompositionSelCompositionWithURLAssetInitializationOptions  = objc.RegisterName("compositionWithURLAssetInitializationOptions:")
+	_aVMutableCompositionSelSetNaturalSize                                = objc.RegisterName("setNaturalSize:")
+	_aVMutableCompositionSelInsertTimeRangeOfAssetAtTimeError             = objc.RegisterName("insertTimeRange:ofAsset:atTime:error:")
 	_aVMutableCompositionSelInsertTimeRangeOfAssetAtTimeCompletionHandler = objc.RegisterName("insertTimeRange:ofAsset:atTime:completionHandler:")
-	_aVMutableCompositionSelInsertEmptyTimeRange = objc.RegisterName("insertEmptyTimeRange:")
-	_aVMutableCompositionSelRemoveTimeRange = objc.RegisterName("removeTimeRange:")
-	_aVMutableCompositionSelScaleTimeRangeToDuration = objc.RegisterName("scaleTimeRange:toDuration:")
-	_aVMutableCompositionSelAddMutableTrackWithMediaTypePreferredTrackID = objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:")
-	_aVMutableCompositionSelRemoveTrack = objc.RegisterName("removeTrack:")
-	_aVMutableCompositionSelMutableTrackCompatibleWithTrack = objc.RegisterName("mutableTrackCompatibleWithTrack:")
+	_aVMutableCompositionSelInsertEmptyTimeRange                          = objc.RegisterName("insertEmptyTimeRange:")
+	_aVMutableCompositionSelRemoveTimeRange                               = objc.RegisterName("removeTimeRange:")
+	_aVMutableCompositionSelScaleTimeRangeToDuration                      = objc.RegisterName("scaleTimeRange:toDuration:")
+	_aVMutableCompositionSelAddMutableTrackWithMediaTypePreferredTrackID  = objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:")
+	_aVMutableCompositionSelRemoveTrack                                   = objc.RegisterName("removeTrack:")
+	_aVMutableCompositionSelMutableTrackCompatibleWithTrack               = objc.RegisterName("mutableTrackCompatibleWithTrack:")
 )
 
 func AVMutableCompositionFromID(id objc.ID) *AVMutableComposition {
@@ -47,14 +47,18 @@ func AVMutableCompositionFromID(id objc.ID) *AVMutableComposition {
 // @method         composition @abstract       Returns an empty AVMutableComposition.
 func AVMutableCompositionComposition() *AVMutableComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCompositionFromID(_ret)
 }
 
 // @method         compositionWithURLAssetInitializationOptions: @abstract       Returns an empty AVMutableComposition. @param          URLAssetInitializationOptions Specifies the initialization options that the receiver should use when creating AVURLAssets internally, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVMutableComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. @discussion AVMutableCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVMutableCompositionTracks, as needed, whenever AVCompositionTrackSegments are added to tracks via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks.
 func AVMutableCompositionCompositionWithURLAssetInitializationOptions(uRLAssetInitializationOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVMutableComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableComposition), _aVMutableCompositionSelCompositionWithURLAssetInitializationOptions, uRLAssetInitializationOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCompositionFromID(_ret)
 }
 
@@ -103,7 +107,9 @@ func (o *AVMutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTi
 // @method         addMutableTrackWithMediaType:preferredTrackID: @abstract       Adds an empty track to a mutable composition. @param          mediaType The media type of the new track. @param          preferredTrackID Specifies the preferred track ID for the new track. If you do not need to specify a preferred track ID, pass kCMPersistentTrackID_Invalid. Otherwise the preferred track ID will be used for the new track, provided that it is not currently in use and has not previously been used. @result         An instance of AVMutableCompositionTrack representing the new track. Its actual trackID is available via its @"trackID" key. @discussion If the specified preferred track ID is not available, or kCMPersistentTrackID_Invalid was passed in, a unique track ID will be generated.
 func (o *AVMutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *AVMutableCompositionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCompositionSelAddMutableTrackWithMediaTypePreferredTrackID, mediaType.Ptr(), preferredTrackID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCompositionTrackFromID(_ret)
 }
 
@@ -115,7 +121,8 @@ func (o *AVMutableComposition) RemoveTrack(track *AVCompositionTrack) {
 // @method         mutableTrackCompatibleWithTrack: @abstract       Provides a reference to a track of a mutable composition into which any timeRange of an AVAssetTrack can be inserted (via -[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]). @param          track A reference to the AVAssetTrack from which a timeRange may be inserted. @result         An AVMutableCompositionTrack that can accommodate the insertion, or, if no such track is available, nil. @discussion If a compatible track is desired but the result of this method is nil, a new track of the same mediaType as the AVAssetTrack can be created via -addMutableTrackWithMediaType:preferredTrackID:, and this new track will be compatible. For best performance, the number of tracks of a composition should be kept to a minimum, corresponding to the number for which media data must be presented in parallel. If media data of the same type is to be presented serially, even from multiple assets, a single track of that media type should be used. This method, -mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion. Similar to -[AVAsset compatibleTrackForCompositionTrack:].
 func (o *AVMutableComposition) MutableTrackCompatibleWithTrack(track *AVAssetTrack) *AVMutableCompositionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMutableCompositionSelMutableTrackCompatibleWithTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableCompositionTrackFromID(_ret)
 }
-

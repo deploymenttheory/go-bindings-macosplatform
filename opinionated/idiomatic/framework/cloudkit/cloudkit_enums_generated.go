@@ -600,7 +600,7 @@ func (e CKSyncEngineEventType) String() string {
 type CKSyncEnginePendingDatabaseChangeType int64
 
 const (
-	CKSyncEnginePendingDatabaseChangeTypeSaveZone CKSyncEnginePendingDatabaseChangeType = 0
+	CKSyncEnginePendingDatabaseChangeTypeSaveZone   CKSyncEnginePendingDatabaseChangeType = 0
 	CKSyncEnginePendingDatabaseChangeTypeDeleteZone CKSyncEnginePendingDatabaseChangeType = 1
 )
 
@@ -618,7 +618,7 @@ func (e CKSyncEnginePendingDatabaseChangeType) String() string {
 type CKSyncEnginePendingRecordZoneChangeType int64
 
 const (
-	CKSyncEnginePendingRecordZoneChangeTypeSaveRecord CKSyncEnginePendingRecordZoneChangeType = 0
+	CKSyncEnginePendingRecordZoneChangeTypeSaveRecord   CKSyncEnginePendingRecordZoneChangeType = 0
 	CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord CKSyncEnginePendingRecordZoneChangeType = 1
 )
 
@@ -676,4 +676,3 @@ func (e CKSyncEngineZoneDeletionReason) String() string {
 		return fmt.Sprintf("CKSyncEngineZoneDeletionReason(%d)", int64(e))
 	}
 }
-

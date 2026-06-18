@@ -18,22 +18,22 @@ type MTRClusterWaterHeaterManagement struct {
 }
 
 var (
-	_clsMTRClusterWaterHeaterManagement = _objcClass("MTRClusterWaterHeaterManagement")
-	_mTRClusterWaterHeaterManagementSelBoostWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("boostWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterWaterHeaterManagement                                                                   = _objcClass("MTRClusterWaterHeaterManagement")
+	_mTRClusterWaterHeaterManagementSelBoostWithParamsExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("boostWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterWaterHeaterManagementSelCancelBoostWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelBoostWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterWaterHeaterManagementSelCancelBoostWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelBoostWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeHeaterTypesWithParams = objc.RegisterName("readAttributeHeaterTypesWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeHeatDemandWithParams = objc.RegisterName("readAttributeHeatDemandWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeTankVolumeWithParams = objc.RegisterName("readAttributeTankVolumeWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeEstimatedHeatRequiredWithParams = objc.RegisterName("readAttributeEstimatedHeatRequiredWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeTankPercentageWithParams = objc.RegisterName("readAttributeTankPercentageWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeBoostStateWithParams = objc.RegisterName("readAttributeBoostStateWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterWaterHeaterManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterWaterHeaterManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterWaterHeaterManagementSelCancelBoostWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("cancelBoostWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeHeaterTypesWithParams                                 = objc.RegisterName("readAttributeHeaterTypesWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeHeatDemandWithParams                                  = objc.RegisterName("readAttributeHeatDemandWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeTankVolumeWithParams                                  = objc.RegisterName("readAttributeTankVolumeWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeEstimatedHeatRequiredWithParams                       = objc.RegisterName("readAttributeEstimatedHeatRequiredWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeTankPercentageWithParams                              = objc.RegisterName("readAttributeTankPercentageWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeBoostStateWithParams                                  = objc.RegisterName("readAttributeBoostStateWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeGeneratedCommandListWithParams                        = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeAcceptedCommandListWithParams                         = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeAttributeListWithParams                               = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeFeatureMapWithParams                                  = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterWaterHeaterManagementSelReadAttributeClusterRevisionWithParams                             = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterWaterHeaterManagementSelInitWithDeviceEndpointIDQueue                                      = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterWaterHeaterManagementFromID(id objc.ID) *MTRClusterWaterHeaterManagement {
@@ -137,7 +137,8 @@ func (o *MTRClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithParams
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterWaterHeaterManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWaterHeaterManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWaterHeaterManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWaterHeaterManagementFromID(_ret)
 }
-

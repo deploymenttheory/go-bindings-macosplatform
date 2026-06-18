@@ -18,18 +18,18 @@ type NSCoreDataCoreSpotlightDelegate struct {
 }
 
 var (
-	_clsNSCoreDataCoreSpotlightDelegate = _objcClass("NSCoreDataCoreSpotlightDelegate")
-	_nSCoreDataCoreSpotlightDelegateSelDomainIdentifier = objc.RegisterName("domainIdentifier")
-	_nSCoreDataCoreSpotlightDelegateSelIndexName = objc.RegisterName("indexName")
-	_nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionCoordinator = objc.RegisterName("initForStoreWithDescription:coordinator:")
-	_nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionModel = objc.RegisterName("initForStoreWithDescription:model:")
-	_nSCoreDataCoreSpotlightDelegateSelStartSpotlightIndexing = objc.RegisterName("startSpotlightIndexing")
-	_nSCoreDataCoreSpotlightDelegateSelStopSpotlightIndexing = objc.RegisterName("stopSpotlightIndexing")
-	_nSCoreDataCoreSpotlightDelegateSelDeleteSpotlightIndexWithCompletionHandler = objc.RegisterName("deleteSpotlightIndexWithCompletionHandler:")
-	_nSCoreDataCoreSpotlightDelegateSelAttributeSetForObject = objc.RegisterName("attributeSetForObject:")
-	_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler = objc.RegisterName("searchableIndex:reindexAllSearchableItemsWithAcknowledgementHandler:")
+	_clsNSCoreDataCoreSpotlightDelegate                                                                           = _objcClass("NSCoreDataCoreSpotlightDelegate")
+	_nSCoreDataCoreSpotlightDelegateSelDomainIdentifier                                                           = objc.RegisterName("domainIdentifier")
+	_nSCoreDataCoreSpotlightDelegateSelIndexName                                                                  = objc.RegisterName("indexName")
+	_nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionCoordinator                                     = objc.RegisterName("initForStoreWithDescription:coordinator:")
+	_nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionModel                                           = objc.RegisterName("initForStoreWithDescription:model:")
+	_nSCoreDataCoreSpotlightDelegateSelStartSpotlightIndexing                                                     = objc.RegisterName("startSpotlightIndexing")
+	_nSCoreDataCoreSpotlightDelegateSelStopSpotlightIndexing                                                      = objc.RegisterName("stopSpotlightIndexing")
+	_nSCoreDataCoreSpotlightDelegateSelDeleteSpotlightIndexWithCompletionHandler                                  = objc.RegisterName("deleteSpotlightIndexWithCompletionHandler:")
+	_nSCoreDataCoreSpotlightDelegateSelAttributeSetForObject                                                      = objc.RegisterName("attributeSetForObject:")
+	_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler         = objc.RegisterName("searchableIndex:reindexAllSearchableItemsWithAcknowledgementHandler:")
 	_nSCoreDataCoreSpotlightDelegateSelSearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler = objc.RegisterName("searchableIndex:reindexSearchableItemsWithIdentifiers:acknowledgementHandler:")
-	_nSCoreDataCoreSpotlightDelegateSelIsIndexingEnabled = objc.RegisterName("isIndexingEnabled")
+	_nSCoreDataCoreSpotlightDelegateSelIsIndexingEnabled                                                          = objc.RegisterName("isIndexingEnabled")
 )
 
 func NSCoreDataCoreSpotlightDelegateFromID(id objc.ID) *NSCoreDataCoreSpotlightDelegate {
@@ -44,26 +44,34 @@ func NSCoreDataCoreSpotlightDelegateFromID(id objc.ID) *NSCoreDataCoreSpotlightD
 
 func (o *NSCoreDataCoreSpotlightDelegate) DomainIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelDomainIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSCoreDataCoreSpotlightDelegate) IndexName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelIndexName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionCoordinator(description *NSPersistentStoreDescription, psc *NSPersistentStoreCoordinator) *NSCoreDataCoreSpotlightDelegate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionCoordinator, description.Ptr(), psc.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCoreDataCoreSpotlightDelegateFromID(_ret)
 }
 
 // Deprecated: since macOS 12.0.
 func (o *NSCoreDataCoreSpotlightDelegate) InitForStoreWithDescriptionModel(description *NSPersistentStoreDescription, model *NSManagedObjectModel) *NSCoreDataCoreSpotlightDelegate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelInitForStoreWithDescriptionModel, description.Ptr(), model.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCoreDataCoreSpotlightDelegateFromID(_ret)
 }
 
@@ -117,4 +125,3 @@ func (o *NSCoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCoreDataCoreSpotlightDelegateSelIsIndexingEnabled)
 	return _ret
 }
-

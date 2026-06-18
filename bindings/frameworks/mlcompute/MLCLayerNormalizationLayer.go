@@ -16,14 +16,14 @@ type MLCLayerNormalizationLayer struct {
 }
 
 var (
-	_clsMLCLayerNormalizationLayer = _objcClass("MLCLayerNormalizationLayer")
+	_clsMLCLayerNormalizationLayer                                                 = _objcClass("MLCLayerNormalizationLayer")
 	_mLCLayerNormalizationLayerSelLayerWithNormalizedShapeBetaGammaVarianceEpsilon = objc.RegisterName("layerWithNormalizedShape:beta:gamma:varianceEpsilon:")
-	_mLCLayerNormalizationLayerSelNormalizedShape = objc.RegisterName("normalizedShape")
-	_mLCLayerNormalizationLayerSelBeta = objc.RegisterName("beta")
-	_mLCLayerNormalizationLayerSelGamma = objc.RegisterName("gamma")
-	_mLCLayerNormalizationLayerSelBetaParameter = objc.RegisterName("betaParameter")
-	_mLCLayerNormalizationLayerSelGammaParameter = objc.RegisterName("gammaParameter")
-	_mLCLayerNormalizationLayerSelVarianceEpsilon = objc.RegisterName("varianceEpsilon")
+	_mLCLayerNormalizationLayerSelNormalizedShape                                  = objc.RegisterName("normalizedShape")
+	_mLCLayerNormalizationLayerSelBeta                                             = objc.RegisterName("beta")
+	_mLCLayerNormalizationLayerSelGamma                                            = objc.RegisterName("gamma")
+	_mLCLayerNormalizationLayerSelBetaParameter                                    = objc.RegisterName("betaParameter")
+	_mLCLayerNormalizationLayerSelGammaParameter                                   = objc.RegisterName("gammaParameter")
+	_mLCLayerNormalizationLayerSelVarianceEpsilon                                  = objc.RegisterName("varianceEpsilon")
 )
 
 func MLCLayerNormalizationLayerFromID(id objc.ID) *MLCLayerNormalizationLayer {
@@ -39,7 +39,9 @@ func MLCLayerNormalizationLayerFromID(id objc.ID) *MLCLayerNormalizationLayer {
 // @abstract Create a layer normalization layer @param normalizedShape The shape of the axes over which normalization occurs, currently (C,H,W) only @param beta Training parameter @param gamma Training parameter @param varianceEpsilon  A small numerical value added to variance for stability @return A new layer normalization layer.
 func MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape *foundation.NSArray[*foundation.NSNumber], beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCLayerNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLayerNormalizationLayer), _mLCLayerNormalizationLayerSelLayerWithNormalizedShapeBetaGammaVarianceEpsilon, normalizedShape, beta.Ptr(), gamma.Ptr(), varianceEpsilon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLayerNormalizationLayerFromID(_ret)
 }
 
@@ -52,28 +54,36 @@ func (o *MLCLayerNormalizationLayer) NormalizedShape() *foundation.NSArray[*foun
 // @property   beta @abstract   The beta tensor
 func (o *MLCLayerNormalizationLayer) Beta() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerNormalizationLayerSelBeta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   gamma @abstract   The gamma tensor
 func (o *MLCLayerNormalizationLayer) Gamma() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerNormalizationLayerSelGamma)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
 func (o *MLCLayerNormalizationLayer) BetaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerNormalizationLayerSelBetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
 func (o *MLCLayerNormalizationLayer) GammaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLayerNormalizationLayerSelGammaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
@@ -82,4 +92,3 @@ func (o *MLCLayerNormalizationLayer) VarianceEpsilon() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCLayerNormalizationLayerSelVarianceEpsilon)
 	return _ret
 }
-

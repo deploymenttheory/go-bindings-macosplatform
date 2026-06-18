@@ -16,11 +16,11 @@ type CLMonitorConfiguration struct {
 }
 
 var (
-	_clsCLMonitorConfiguration = _objcClass("CLMonitorConfiguration")
+	_clsCLMonitorConfiguration                                       = _objcClass("CLMonitorConfiguration")
 	_cLMonitorConfigurationSelConfigWithMonitorNameQueueEventHandler = objc.RegisterName("configWithMonitorName:queue:eventHandler:")
-	_cLMonitorConfigurationSelName = objc.RegisterName("name")
-	_cLMonitorConfigurationSelQueue = objc.RegisterName("queue")
-	_cLMonitorConfigurationSelEventHandler = objc.RegisterName("eventHandler")
+	_cLMonitorConfigurationSelName                                   = objc.RegisterName("name")
+	_cLMonitorConfigurationSelQueue                                  = objc.RegisterName("queue")
+	_cLMonitorConfigurationSelEventHandler                           = objc.RegisterName("eventHandler")
 )
 
 func CLMonitorConfigurationFromID(id objc.ID) *CLMonitorConfiguration {
@@ -48,19 +48,25 @@ func CLMonitorConfigurationConfigWithMonitorNameQueueEventHandler(name *foundati
 		defer __block_eventHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsCLMonitorConfiguration), _cLMonitorConfigurationSelConfigWithMonitorNameQueueEventHandler, name.Ptr(), queue.Ptr(), __block_eventHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLMonitorConfigurationFromID(_ret)
 }
 
 func (o *CLMonitorConfiguration) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitorConfigurationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CLMonitorConfiguration) Queue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitorConfigurationSelQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -68,4 +74,3 @@ func (o *CLMonitorConfiguration) EventHandler() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cLMonitorConfigurationSelEventHandler)
 	return _ret
 }
-

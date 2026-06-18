@@ -71,7 +71,9 @@ func (x *GenericPlatformConfiguration) SetNestedVirtualizationEnabled(nestedVirt
 	x.inner.SetNestedVirtualizationEnabled(nestedVirtualizationEnabled)
 }
 
-func (x *GenericPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration { return &x.inner.VZPlatformConfiguration }
+func (x *GenericPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
+	return &x.inner.VZPlatformConfiguration
+}
 
 // GenericPlatformConfigurationable is the interface implemented by [GenericPlatformConfiguration], for mocking and DI.
 type GenericPlatformConfigurationable interface {
@@ -85,4 +87,3 @@ type GenericPlatformConfigurationable interface {
 }
 
 var _ GenericPlatformConfigurationable = (*GenericPlatformConfiguration)(nil)
-

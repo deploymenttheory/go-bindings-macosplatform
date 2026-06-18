@@ -16,8 +16,8 @@ type INDoubleResolutionResult struct {
 }
 
 var (
-	_clsINDoubleResolutionResult = _objcClass("INDoubleResolutionResult")
-	_iNDoubleResolutionResultSelSuccessWithResolvedValue = objc.RegisterName("successWithResolvedValue:")
+	_clsINDoubleResolutionResult                                       = _objcClass("INDoubleResolutionResult")
+	_iNDoubleResolutionResultSelSuccessWithResolvedValue               = objc.RegisterName("successWithResolvedValue:")
 	_iNDoubleResolutionResultSelConfirmationRequiredWithValueToConfirm = objc.RegisterName("confirmationRequiredWithValueToConfirm:")
 )
 
@@ -33,13 +33,16 @@ func INDoubleResolutionResultFromID(id objc.ID) *INDoubleResolutionResult {
 
 func INDoubleResolutionResultSuccessWithResolvedValue(resolvedValue float64) *INDoubleResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDoubleResolutionResult), _iNDoubleResolutionResultSelSuccessWithResolvedValue, resolvedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDoubleResolutionResultFromID(_ret)
 }
 
 func INDoubleResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *INDoubleResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINDoubleResolutionResult), _iNDoubleResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDoubleResolutionResultFromID(_ret)
 }
-

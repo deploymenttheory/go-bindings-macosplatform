@@ -17,7 +17,9 @@ type MTRDiagnosticLogsClusterRetrieveLogsRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams].
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams { return x.inner }
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -142,4 +144,3 @@ type MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable interface {
 }
 
 var _ MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable = (*MTRDiagnosticLogsClusterRetrieveLogsRequestParams)(nil)
-

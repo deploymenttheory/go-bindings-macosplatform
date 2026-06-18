@@ -15,20 +15,20 @@ type SCNPyramid struct {
 }
 
 var (
-	_clsSCNPyramid = _objcClass("SCNPyramid")
+	_clsSCNPyramid                             = _objcClass("SCNPyramid")
 	_sCNPyramidSelPyramidWithWidthHeightLength = objc.RegisterName("pyramidWithWidth:height:length:")
-	_sCNPyramidSelWidth = objc.RegisterName("width")
-	_sCNPyramidSelSetWidth = objc.RegisterName("setWidth:")
-	_sCNPyramidSelHeight = objc.RegisterName("height")
-	_sCNPyramidSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNPyramidSelLength = objc.RegisterName("length")
-	_sCNPyramidSelSetLength = objc.RegisterName("setLength:")
-	_sCNPyramidSelWidthSegmentCount = objc.RegisterName("widthSegmentCount")
-	_sCNPyramidSelSetWidthSegmentCount = objc.RegisterName("setWidthSegmentCount:")
-	_sCNPyramidSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNPyramidSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
-	_sCNPyramidSelLengthSegmentCount = objc.RegisterName("lengthSegmentCount")
-	_sCNPyramidSelSetLengthSegmentCount = objc.RegisterName("setLengthSegmentCount:")
+	_sCNPyramidSelWidth                        = objc.RegisterName("width")
+	_sCNPyramidSelSetWidth                     = objc.RegisterName("setWidth:")
+	_sCNPyramidSelHeight                       = objc.RegisterName("height")
+	_sCNPyramidSelSetHeight                    = objc.RegisterName("setHeight:")
+	_sCNPyramidSelLength                       = objc.RegisterName("length")
+	_sCNPyramidSelSetLength                    = objc.RegisterName("setLength:")
+	_sCNPyramidSelWidthSegmentCount            = objc.RegisterName("widthSegmentCount")
+	_sCNPyramidSelSetWidthSegmentCount         = objc.RegisterName("setWidthSegmentCount:")
+	_sCNPyramidSelHeightSegmentCount           = objc.RegisterName("heightSegmentCount")
+	_sCNPyramidSelSetHeightSegmentCount        = objc.RegisterName("setHeightSegmentCount:")
+	_sCNPyramidSelLengthSegmentCount           = objc.RegisterName("lengthSegmentCount")
+	_sCNPyramidSelSetLengthSegmentCount        = objc.RegisterName("setLengthSegmentCount:")
 )
 
 func SCNPyramidFromID(id objc.ID) *SCNPyramid {
@@ -44,7 +44,9 @@ func SCNPyramidFromID(id objc.ID) *SCNPyramid {
 // @method pyramidWithWidth:height:length: @abstract Creates and returns a pyramid with given width, height, and length. @param width The width of the pyramid. @param height The height of the pyramid. @param length The length of the pyramid.
 func SCNPyramidPyramidWithWidthHeightLength(width float64, height float64, length float64) *SCNPyramid {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPyramid), _sCNPyramidSelPyramidWithWidthHeightLength, width, height, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPyramidFromID(_ret)
 }
 
@@ -107,4 +109,3 @@ func (o *SCNPyramid) LengthSegmentCount() int {
 func (o *SCNPyramid) SetLengthSegmentCount(lengthSegmentCount int) {
 	o.Ptr().Send(_sCNPyramidSelSetLengthSegmentCount, lengthSegmentCount)
 }
-

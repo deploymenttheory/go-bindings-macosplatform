@@ -60,4 +60,3 @@ type FileAccessIntentable interface {
 }
 
 var _ FileAccessIntentable = (*FileAccessIntent)(nil)
-

@@ -55,4 +55,3 @@ type SharedEventListenerable interface {
 }
 
 var _ SharedEventListenerable = (*SharedEventListener)(nil)
-

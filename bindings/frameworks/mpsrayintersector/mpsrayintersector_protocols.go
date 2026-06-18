@@ -12,4 +12,3 @@ type MPSSVGFTextureAllocator interface {
 	TextureWithPixelFormatWidthHeight(pixelFormat metal.MTLPixelFormat, width uint, height uint) metal.MTLTexture
 	ReturnTexture(texture metal.MTLTexture)
 }
-

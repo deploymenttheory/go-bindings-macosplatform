@@ -43,4 +43,3 @@ type MathExpressionable interface {
 }
 
 var _ MathExpressionable = (*MathExpression)(nil)
-

@@ -15,10 +15,10 @@ type AVMetricPlayerItemRateChangeEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemRateChangeEvent = _objcClass("AVMetricPlayerItemRateChangeEvent")
-	_aVMetricPlayerItemRateChangeEventSelRate = objc.RegisterName("rate")
+	_clsAVMetricPlayerItemRateChangeEvent             = _objcClass("AVMetricPlayerItemRateChangeEvent")
+	_aVMetricPlayerItemRateChangeEventSelRate         = objc.RegisterName("rate")
 	_aVMetricPlayerItemRateChangeEventSelPreviousRate = objc.RegisterName("previousRate")
-	_aVMetricPlayerItemRateChangeEventSelVariant = objc.RegisterName("variant")
+	_aVMetricPlayerItemRateChangeEventSelVariant      = objc.RegisterName("variant")
 )
 
 func AVMetricPlayerItemRateChangeEventFromID(id objc.ID) *AVMetricPlayerItemRateChangeEvent {
@@ -46,7 +46,8 @@ func (o *AVMetricPlayerItemRateChangeEvent) PreviousRate() float64 {
 // Returns the variant being played at the time of rate change. If no value is present, returns nil.
 func (o *AVMetricPlayerItemRateChangeEvent) Variant() *AVAssetVariant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemRateChangeEventSelVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type VSAppleSubscription struct {
 }
 
 var (
-	_clsVSAppleSubscription = _objcClass("VSAppleSubscription")
+	_clsVSAppleSubscription                               = _objcClass("VSAppleSubscription")
 	_vSAppleSubscriptionSelInitWithCustomerIDProductCodes = objc.RegisterName("initWithCustomerID:productCodes:")
-	_vSAppleSubscriptionSelCustomerID = objc.RegisterName("customerID")
-	_vSAppleSubscriptionSelSetCustomerID = objc.RegisterName("setCustomerID:")
-	_vSAppleSubscriptionSelProductCodes = objc.RegisterName("productCodes")
-	_vSAppleSubscriptionSelSetProductCodes = objc.RegisterName("setProductCodes:")
+	_vSAppleSubscriptionSelCustomerID                     = objc.RegisterName("customerID")
+	_vSAppleSubscriptionSelSetCustomerID                  = objc.RegisterName("setCustomerID:")
+	_vSAppleSubscriptionSelProductCodes                   = objc.RegisterName("productCodes")
+	_vSAppleSubscriptionSelSetProductCodes                = objc.RegisterName("setProductCodes:")
 )
 
 func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
@@ -36,13 +36,17 @@ func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
 
 func (o *VSAppleSubscription) InitWithCustomerIDProductCodes(customerID *foundation.NSString, productCodes *foundation.NSArray[*foundation.NSString]) *VSAppleSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAppleSubscriptionSelInitWithCustomerIDProductCodes, customerID.Ptr(), productCodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSAppleSubscriptionFromID(_ret)
 }
 
 func (o *VSAppleSubscription) CustomerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAppleSubscriptionSelCustomerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *VSAppleSubscription) ProductCodes() *foundation.NSArray[*foundation.NSS
 func (o *VSAppleSubscription) SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_vSAppleSubscriptionSelSetProductCodes, productCodes)
 }
-

@@ -3253,7 +3253,9 @@ func KDRRecordingDate() uintptr {
 
 func KDRRefConCFTypeCallbacks() DRRefConCallbacks {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRRefConCFTypeCallbacks")
-	if ptr == 0 { return DRRefConCallbacks{} }
+	if ptr == 0 {
+		return DRRefConCallbacks{}
+	}
 	return *(*DRRefConCallbacks)(unsafe.Pointer(ptr))
 }
 
@@ -3718,4 +3720,3 @@ func KDRVolumeSet() uintptr {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "kDRVolumeSet")
 	return ptr
 }
-

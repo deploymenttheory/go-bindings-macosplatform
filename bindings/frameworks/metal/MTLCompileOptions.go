@@ -16,37 +16,37 @@ type MTLCompileOptions struct {
 }
 
 var (
-	_clsMTLCompileOptions = _objcClass("MTLCompileOptions")
-	_mTLCompileOptionsSelPreprocessorMacros = objc.RegisterName("preprocessorMacros")
-	_mTLCompileOptionsSelSetPreprocessorMacros = objc.RegisterName("setPreprocessorMacros:")
-	_mTLCompileOptionsSelFastMathEnabled = objc.RegisterName("fastMathEnabled")
-	_mTLCompileOptionsSelSetFastMathEnabled = objc.RegisterName("setFastMathEnabled:")
-	_mTLCompileOptionsSelMathMode = objc.RegisterName("mathMode")
-	_mTLCompileOptionsSelSetMathMode = objc.RegisterName("setMathMode:")
-	_mTLCompileOptionsSelMathFloatingPointFunctions = objc.RegisterName("mathFloatingPointFunctions")
-	_mTLCompileOptionsSelSetMathFloatingPointFunctions = objc.RegisterName("setMathFloatingPointFunctions:")
-	_mTLCompileOptionsSelLanguageVersion = objc.RegisterName("languageVersion")
-	_mTLCompileOptionsSelSetLanguageVersion = objc.RegisterName("setLanguageVersion:")
-	_mTLCompileOptionsSelLibraryType = objc.RegisterName("libraryType")
-	_mTLCompileOptionsSelSetLibraryType = objc.RegisterName("setLibraryType:")
-	_mTLCompileOptionsSelInstallName = objc.RegisterName("installName")
-	_mTLCompileOptionsSelSetInstallName = objc.RegisterName("setInstallName:")
-	_mTLCompileOptionsSelLibraries = objc.RegisterName("libraries")
-	_mTLCompileOptionsSelSetLibraries = objc.RegisterName("setLibraries:")
-	_mTLCompileOptionsSelPreserveInvariance = objc.RegisterName("preserveInvariance")
-	_mTLCompileOptionsSelSetPreserveInvariance = objc.RegisterName("setPreserveInvariance:")
-	_mTLCompileOptionsSelOptimizationLevel = objc.RegisterName("optimizationLevel")
-	_mTLCompileOptionsSelSetOptimizationLevel = objc.RegisterName("setOptimizationLevel:")
-	_mTLCompileOptionsSelCompileSymbolVisibility = objc.RegisterName("compileSymbolVisibility")
-	_mTLCompileOptionsSelSetCompileSymbolVisibility = objc.RegisterName("setCompileSymbolVisibility:")
-	_mTLCompileOptionsSelAllowReferencingUndefinedSymbols = objc.RegisterName("allowReferencingUndefinedSymbols")
+	_clsMTLCompileOptions                                    = _objcClass("MTLCompileOptions")
+	_mTLCompileOptionsSelPreprocessorMacros                  = objc.RegisterName("preprocessorMacros")
+	_mTLCompileOptionsSelSetPreprocessorMacros               = objc.RegisterName("setPreprocessorMacros:")
+	_mTLCompileOptionsSelFastMathEnabled                     = objc.RegisterName("fastMathEnabled")
+	_mTLCompileOptionsSelSetFastMathEnabled                  = objc.RegisterName("setFastMathEnabled:")
+	_mTLCompileOptionsSelMathMode                            = objc.RegisterName("mathMode")
+	_mTLCompileOptionsSelSetMathMode                         = objc.RegisterName("setMathMode:")
+	_mTLCompileOptionsSelMathFloatingPointFunctions          = objc.RegisterName("mathFloatingPointFunctions")
+	_mTLCompileOptionsSelSetMathFloatingPointFunctions       = objc.RegisterName("setMathFloatingPointFunctions:")
+	_mTLCompileOptionsSelLanguageVersion                     = objc.RegisterName("languageVersion")
+	_mTLCompileOptionsSelSetLanguageVersion                  = objc.RegisterName("setLanguageVersion:")
+	_mTLCompileOptionsSelLibraryType                         = objc.RegisterName("libraryType")
+	_mTLCompileOptionsSelSetLibraryType                      = objc.RegisterName("setLibraryType:")
+	_mTLCompileOptionsSelInstallName                         = objc.RegisterName("installName")
+	_mTLCompileOptionsSelSetInstallName                      = objc.RegisterName("setInstallName:")
+	_mTLCompileOptionsSelLibraries                           = objc.RegisterName("libraries")
+	_mTLCompileOptionsSelSetLibraries                        = objc.RegisterName("setLibraries:")
+	_mTLCompileOptionsSelPreserveInvariance                  = objc.RegisterName("preserveInvariance")
+	_mTLCompileOptionsSelSetPreserveInvariance               = objc.RegisterName("setPreserveInvariance:")
+	_mTLCompileOptionsSelOptimizationLevel                   = objc.RegisterName("optimizationLevel")
+	_mTLCompileOptionsSelSetOptimizationLevel                = objc.RegisterName("setOptimizationLevel:")
+	_mTLCompileOptionsSelCompileSymbolVisibility             = objc.RegisterName("compileSymbolVisibility")
+	_mTLCompileOptionsSelSetCompileSymbolVisibility          = objc.RegisterName("setCompileSymbolVisibility:")
+	_mTLCompileOptionsSelAllowReferencingUndefinedSymbols    = objc.RegisterName("allowReferencingUndefinedSymbols")
 	_mTLCompileOptionsSelSetAllowReferencingUndefinedSymbols = objc.RegisterName("setAllowReferencingUndefinedSymbols:")
-	_mTLCompileOptionsSelMaxTotalThreadsPerThreadgroup = objc.RegisterName("maxTotalThreadsPerThreadgroup")
-	_mTLCompileOptionsSelSetMaxTotalThreadsPerThreadgroup = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
-	_mTLCompileOptionsSelRequiredThreadsPerThreadgroup = objc.RegisterName("requiredThreadsPerThreadgroup")
-	_mTLCompileOptionsSelSetRequiredThreadsPerThreadgroup = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
-	_mTLCompileOptionsSelEnableLogging = objc.RegisterName("enableLogging")
-	_mTLCompileOptionsSelSetEnableLogging = objc.RegisterName("setEnableLogging:")
+	_mTLCompileOptionsSelMaxTotalThreadsPerThreadgroup       = objc.RegisterName("maxTotalThreadsPerThreadgroup")
+	_mTLCompileOptionsSelSetMaxTotalThreadsPerThreadgroup    = objc.RegisterName("setMaxTotalThreadsPerThreadgroup:")
+	_mTLCompileOptionsSelRequiredThreadsPerThreadgroup       = objc.RegisterName("requiredThreadsPerThreadgroup")
+	_mTLCompileOptionsSelSetRequiredThreadsPerThreadgroup    = objc.RegisterName("setRequiredThreadsPerThreadgroup:")
+	_mTLCompileOptionsSelEnableLogging                       = objc.RegisterName("enableLogging")
+	_mTLCompileOptionsSelSetEnableLogging                    = objc.RegisterName("setEnableLogging:")
 )
 
 func MTLCompileOptionsFromID(id objc.ID) *MTLCompileOptions {
@@ -124,7 +124,9 @@ func (o *MTLCompileOptions) SetLibraryType(libraryType MTLLibraryType) {
 // @property installName @abstract The install name of this dynamic library. @discussion The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \@executable_path, where \@executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or - a path relative to \@loader_path, where \@loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded. The first is appropriate for MTLDynamicLibrary written to the file-system using its serializeToURL:error: method on the current device. The others are appropriate when the MTLDynamicLibrary is installed as part of a bundle or app, where the absolute path is not known. This property is ignored when the type property is not set to MTLLibraryTypeDynamic. This propery should not be null if the property type is set to MTLLibraryTypeDynamic: the compilation will fail in that scenario.
 func (o *MTLCompileOptions) InstallName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLCompileOptionsSelInstallName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -135,7 +137,9 @@ func (o *MTLCompileOptions) SetInstallName(installName *foundation.NSString) {
 // @property libraries @abstract A set of MTLDynamicLibrary instances to link against. The installName of the provided MTLDynamicLibrary is embedded into the compilation result. When a function from the resulting MTLLibrary is used (either as an MTLFunction, or as an to create a pipeline state, the embedded install names are used to automatically load the MTLDynamicLibrary instances. This property can be null if no libraries should be automatically loaded, either because the MTLLibrary has no external dependencies, or because you will use preloadedLibraries to specify the libraries to use at pipeline creation time.
 func (o *MTLCompileOptions) Libraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLCompileOptionsSelLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -212,4 +216,3 @@ func (o *MTLCompileOptions) EnableLogging() bool {
 func (o *MTLCompileOptions) SetEnableLogging(enableLogging bool) {
 	o.Ptr().Send(_mTLCompileOptionsSelSetEnableLogging, enableLogging)
 }
-

@@ -18,12 +18,12 @@ type MTRGroupKeyManagementClusterKeySetReadResponseParams struct {
 }
 
 var (
-	_clsMTRGroupKeyManagementClusterKeySetReadResponseParams = _objcClass("MTRGroupKeyManagementClusterKeySetReadResponseParams")
+	_clsMTRGroupKeyManagementClusterKeySetReadResponseParams                           = _objcClass("MTRGroupKeyManagementClusterKeySetReadResponseParams")
 	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelGroupKeySet = objc.RegisterName("groupKeySet")
-	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelSetGroupKeySet = objc.RegisterName("setGroupKeySet:")
-	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelGroupKeySet                = objc.RegisterName("groupKeySet")
+	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelSetGroupKeySet             = objc.RegisterName("setGroupKeySet:")
+	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id objc.ID) *MTRGroupKeyManagementClusterKeySetReadResponseParams {
@@ -40,7 +40,9 @@ func MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id objc.ID) *MTR
 func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) InitWithResponseV
 
 func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadResponseParamsSelGroupKeySet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRGroupKeyManagementClusterGroupKeySetStructFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetGroupKeySet(gr
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupKeyManagementClusterKeySetReadResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupKeyManagementClusterKeySetReadResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupKeyManagementClusterKeySetReadResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

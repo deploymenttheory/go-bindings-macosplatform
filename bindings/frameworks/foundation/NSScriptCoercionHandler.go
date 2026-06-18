@@ -15,9 +15,9 @@ type NSScriptCoercionHandler struct {
 }
 
 var (
-	_clsNSScriptCoercionHandler = _objcClass("NSScriptCoercionHandler")
-	_nSScriptCoercionHandlerSelSharedCoercionHandler = objc.RegisterName("sharedCoercionHandler")
-	_nSScriptCoercionHandlerSelCoerceValueToClass = objc.RegisterName("coerceValue:toClass:")
+	_clsNSScriptCoercionHandler                                                 = _objcClass("NSScriptCoercionHandler")
+	_nSScriptCoercionHandlerSelSharedCoercionHandler                            = objc.RegisterName("sharedCoercionHandler")
+	_nSScriptCoercionHandlerSelCoerceValueToClass                               = objc.RegisterName("coerceValue:toClass:")
 	_nSScriptCoercionHandlerSelRegisterCoercerSelectorToConvertFromClassToClass = objc.RegisterName("registerCoercer:selector:toConvertFromClass:toClass:")
 )
 
@@ -33,7 +33,9 @@ func NSScriptCoercionHandlerFromID(id objc.ID) *NSScriptCoercionHandler {
 
 func NSScriptCoercionHandlerSharedCoercionHandler() *NSScriptCoercionHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptCoercionHandler), _nSScriptCoercionHandlerSelSharedCoercionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCoercionHandlerFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *NSScriptCoercionHandler) CoerceValueToClass(value objc.ID, toClass objc
 func (o *NSScriptCoercionHandler) RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class) {
 	o.Ptr().Send(_nSScriptCoercionHandlerSelRegisterCoercerSelectorToConvertFromClassToClass, coercer, selector, fromClass, toClass)
 }
-

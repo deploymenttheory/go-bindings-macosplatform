@@ -16,19 +16,19 @@ type ODModuleEntry struct {
 }
 
 var (
-	_clsODModuleEntry = _objcClass("ODModuleEntry")
+	_clsODModuleEntry                                  = _objcClass("ODModuleEntry")
 	_oDModuleEntrySelModuleEntryWithNameXpcServiceName = objc.RegisterName("moduleEntryWithName:xpcServiceName:")
-	_oDModuleEntrySelSetOptionValue = objc.RegisterName("setOption:value:")
-	_oDModuleEntrySelOption = objc.RegisterName("option:")
-	_oDModuleEntrySelMappings = objc.RegisterName("mappings")
-	_oDModuleEntrySelSetMappings = objc.RegisterName("setMappings:")
-	_oDModuleEntrySelSupportedOptions = objc.RegisterName("supportedOptions")
-	_oDModuleEntrySelName = objc.RegisterName("name")
-	_oDModuleEntrySelSetName = objc.RegisterName("setName:")
-	_oDModuleEntrySelXpcServiceName = objc.RegisterName("xpcServiceName")
-	_oDModuleEntrySelSetXpcServiceName = objc.RegisterName("setXpcServiceName:")
-	_oDModuleEntrySelUuidString = objc.RegisterName("uuidString")
-	_oDModuleEntrySelSetUuidString = objc.RegisterName("setUuidString:")
+	_oDModuleEntrySelSetOptionValue                    = objc.RegisterName("setOption:value:")
+	_oDModuleEntrySelOption                            = objc.RegisterName("option:")
+	_oDModuleEntrySelMappings                          = objc.RegisterName("mappings")
+	_oDModuleEntrySelSetMappings                       = objc.RegisterName("setMappings:")
+	_oDModuleEntrySelSupportedOptions                  = objc.RegisterName("supportedOptions")
+	_oDModuleEntrySelName                              = objc.RegisterName("name")
+	_oDModuleEntrySelSetName                           = objc.RegisterName("setName:")
+	_oDModuleEntrySelXpcServiceName                    = objc.RegisterName("xpcServiceName")
+	_oDModuleEntrySelSetXpcServiceName                 = objc.RegisterName("setXpcServiceName:")
+	_oDModuleEntrySelUuidString                        = objc.RegisterName("uuidString")
+	_oDModuleEntrySelSetUuidString                     = objc.RegisterName("setUuidString:")
 )
 
 func ODModuleEntryFromID(id objc.ID) *ODModuleEntry {
@@ -44,7 +44,9 @@ func ODModuleEntryFromID(id objc.ID) *ODModuleEntry {
 // @method moduleEntryWithName:xpcServiceName: @abstract Creates a new module entry with a given name and service. @discussion Creates a new module entry with a given name and service.
 func ODModuleEntryModuleEntryWithNameXpcServiceName(name *foundation.NSString, xpcServiceName *foundation.NSString) *ODModuleEntry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODModuleEntry), _oDModuleEntrySelModuleEntryWithNameXpcServiceName, name.Ptr(), xpcServiceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODModuleEntryFromID(_ret)
 }
 
@@ -61,7 +63,9 @@ func (o *ODModuleEntry) Option(optionName *foundation.NSString) objc.ID {
 
 func (o *ODModuleEntry) Mappings() *ODMappings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDModuleEntrySelMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODMappingsFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *ODModuleEntry) SupportedOptions() *foundation.NSArray[objc.ID] {
 
 func (o *ODModuleEntry) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDModuleEntrySelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -86,7 +92,9 @@ func (o *ODModuleEntry) SetName(name *foundation.NSString) {
 
 func (o *ODModuleEntry) XpcServiceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDModuleEntrySelXpcServiceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,11 +104,12 @@ func (o *ODModuleEntry) SetXpcServiceName(xpcServiceName *foundation.NSString) {
 
 func (o *ODModuleEntry) UuidString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDModuleEntrySelUuidString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ODModuleEntry) SetUuidString(uuidString *foundation.NSString) {
 	o.Ptr().Send(_oDModuleEntrySelSetUuidString, uuidString.Ptr())
 }
-

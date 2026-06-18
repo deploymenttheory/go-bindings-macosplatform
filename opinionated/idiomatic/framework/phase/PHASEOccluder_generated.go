@@ -58,4 +58,3 @@ type Occluderable interface {
 }
 
 var _ Occluderable = (*Occluder)(nil)
-

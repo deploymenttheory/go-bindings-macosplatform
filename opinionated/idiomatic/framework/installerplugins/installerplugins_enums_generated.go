@@ -11,8 +11,8 @@ import (
 type InstallerSectionDirection int64
 
 const (
-	InstallerDirectionForward InstallerSectionDirection = 0
-	InstallerDirectionBackward InstallerSectionDirection = 1
+	InstallerDirectionForward   InstallerSectionDirection = 0
+	InstallerDirectionBackward  InstallerSectionDirection = 1
 	InstallerDirectionUndefined InstallerSectionDirection = 2
 )
 
@@ -28,4 +28,3 @@ func (e InstallerSectionDirection) String() string {
 		return fmt.Sprintf("InstallerSectionDirection(%d)", int64(e))
 	}
 }
-

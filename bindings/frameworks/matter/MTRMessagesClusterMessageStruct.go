@@ -16,21 +16,21 @@ type MTRMessagesClusterMessageStruct struct {
 }
 
 var (
-	_clsMTRMessagesClusterMessageStruct = _objcClass("MTRMessagesClusterMessageStruct")
-	_mTRMessagesClusterMessageStructSelMessageID = objc.RegisterName("messageID")
-	_mTRMessagesClusterMessageStructSelSetMessageID = objc.RegisterName("setMessageID:")
-	_mTRMessagesClusterMessageStructSelPriority = objc.RegisterName("priority")
-	_mTRMessagesClusterMessageStructSelSetPriority = objc.RegisterName("setPriority:")
-	_mTRMessagesClusterMessageStructSelMessageControl = objc.RegisterName("messageControl")
+	_clsMTRMessagesClusterMessageStruct                  = _objcClass("MTRMessagesClusterMessageStruct")
+	_mTRMessagesClusterMessageStructSelMessageID         = objc.RegisterName("messageID")
+	_mTRMessagesClusterMessageStructSelSetMessageID      = objc.RegisterName("setMessageID:")
+	_mTRMessagesClusterMessageStructSelPriority          = objc.RegisterName("priority")
+	_mTRMessagesClusterMessageStructSelSetPriority       = objc.RegisterName("setPriority:")
+	_mTRMessagesClusterMessageStructSelMessageControl    = objc.RegisterName("messageControl")
 	_mTRMessagesClusterMessageStructSelSetMessageControl = objc.RegisterName("setMessageControl:")
-	_mTRMessagesClusterMessageStructSelStartTime = objc.RegisterName("startTime")
-	_mTRMessagesClusterMessageStructSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRMessagesClusterMessageStructSelDuration = objc.RegisterName("duration")
-	_mTRMessagesClusterMessageStructSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRMessagesClusterMessageStructSelMessageText = objc.RegisterName("messageText")
-	_mTRMessagesClusterMessageStructSelSetMessageText = objc.RegisterName("setMessageText:")
-	_mTRMessagesClusterMessageStructSelResponses = objc.RegisterName("responses")
-	_mTRMessagesClusterMessageStructSelSetResponses = objc.RegisterName("setResponses:")
+	_mTRMessagesClusterMessageStructSelStartTime         = objc.RegisterName("startTime")
+	_mTRMessagesClusterMessageStructSelSetStartTime      = objc.RegisterName("setStartTime:")
+	_mTRMessagesClusterMessageStructSelDuration          = objc.RegisterName("duration")
+	_mTRMessagesClusterMessageStructSelSetDuration       = objc.RegisterName("setDuration:")
+	_mTRMessagesClusterMessageStructSelMessageText       = objc.RegisterName("messageText")
+	_mTRMessagesClusterMessageStructSelSetMessageText    = objc.RegisterName("setMessageText:")
+	_mTRMessagesClusterMessageStructSelResponses         = objc.RegisterName("responses")
+	_mTRMessagesClusterMessageStructSelSetResponses      = objc.RegisterName("setResponses:")
 )
 
 func MTRMessagesClusterMessageStructFromID(id objc.ID) *MTRMessagesClusterMessageStruct {
@@ -45,7 +45,9 @@ func MTRMessagesClusterMessageStructFromID(id objc.ID) *MTRMessagesClusterMessag
 
 func (o *MTRMessagesClusterMessageStruct) MessageID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelMessageID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRMessagesClusterMessageStruct) SetMessageID(messageID *foundation.NSD
 
 func (o *MTRMessagesClusterMessageStruct) Priority() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelPriority)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRMessagesClusterMessageStruct) SetPriority(priority *foundation.NSNum
 
 func (o *MTRMessagesClusterMessageStruct) MessageControl() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelMessageControl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRMessagesClusterMessageStruct) SetMessageControl(messageControl *foun
 
 func (o *MTRMessagesClusterMessageStruct) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRMessagesClusterMessageStruct) SetStartTime(startTime *foundation.NSN
 
 func (o *MTRMessagesClusterMessageStruct) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTRMessagesClusterMessageStruct) SetDuration(duration *foundation.NSNum
 
 func (o *MTRMessagesClusterMessageStruct) MessageText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessageStructSelMessageText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +123,3 @@ func (o *MTRMessagesClusterMessageStruct) Responses() *foundation.NSArray[objc.I
 func (o *MTRMessagesClusterMessageStruct) SetResponses(responses *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRMessagesClusterMessageStructSelSetResponses, responses)
 }
-

@@ -26,4 +26,3 @@ func AVMusicEventFromID(id objc.ID) *AVMusicEvent {
 	purego.Track(o)
 	return o
 }
-

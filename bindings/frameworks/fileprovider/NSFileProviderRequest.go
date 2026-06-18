@@ -16,11 +16,11 @@ type NSFileProviderRequest struct {
 }
 
 var (
-	_clsNSFileProviderRequest = _objcClass("NSFileProviderRequest")
-	_nSFileProviderRequestSelIsSystemRequest = objc.RegisterName("isSystemRequest")
-	_nSFileProviderRequestSelIsFileViewerRequest = objc.RegisterName("isFileViewerRequest")
+	_clsNSFileProviderRequest                     = _objcClass("NSFileProviderRequest")
+	_nSFileProviderRequestSelIsSystemRequest      = objc.RegisterName("isSystemRequest")
+	_nSFileProviderRequestSelIsFileViewerRequest  = objc.RegisterName("isFileViewerRequest")
 	_nSFileProviderRequestSelRequestingExecutable = objc.RegisterName("requestingExecutable")
-	_nSFileProviderRequestSelDomainVersion = objc.RegisterName("domainVersion")
+	_nSFileProviderRequestSelDomainVersion        = objc.RegisterName("domainVersion")
 )
 
 func NSFileProviderRequestFromID(id objc.ID) *NSFileProviderRequest {
@@ -48,14 +48,17 @@ func (o *NSFileProviderRequest) IsFileViewerRequest() bool {
 // The URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
 func (o *NSFileProviderRequest) RequestingExecutable() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderRequestSelRequestingExecutable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
 func (o *NSFileProviderRequest) DomainVersion() *NSFileProviderDomainVersion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderRequestSelDomainVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderDomainVersionFromID(_ret)
 }
-

@@ -74,4 +74,3 @@ type WorkoutEffortRelationshipable interface {
 }
 
 var _ WorkoutEffortRelationshipable = (*WorkoutEffortRelationship)(nil)
-

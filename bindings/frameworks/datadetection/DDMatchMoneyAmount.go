@@ -18,9 +18,9 @@ type DDMatchMoneyAmount struct {
 }
 
 var (
-	_clsDDMatchMoneyAmount = _objcClass("DDMatchMoneyAmount")
+	_clsDDMatchMoneyAmount         = _objcClass("DDMatchMoneyAmount")
 	_dDMatchMoneyAmountSelCurrency = objc.RegisterName("currency")
-	_dDMatchMoneyAmountSelAmount = objc.RegisterName("amount")
+	_dDMatchMoneyAmountSelAmount   = objc.RegisterName("amount")
 )
 
 func DDMatchMoneyAmountFromID(id objc.ID) *DDMatchMoneyAmount {
@@ -36,7 +36,9 @@ func DDMatchMoneyAmountFromID(id objc.ID) *DDMatchMoneyAmount {
 // A string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
 func (o *DDMatchMoneyAmount) Currency() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchMoneyAmountSelCurrency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *DDMatchMoneyAmount) Amount() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _dDMatchMoneyAmountSelAmount)
 	return _ret
 }
-

@@ -16,7 +16,9 @@ type CollectionLayoutDecorationItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionLayoutDecorationItem].
-func (x *CollectionLayoutDecorationItem) Unwrap() *raw.NSCollectionLayoutDecorationItem { return x.inner }
+func (x *CollectionLayoutDecorationItem) Unwrap() *raw.NSCollectionLayoutDecorationItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -73,7 +75,9 @@ func (x *CollectionLayoutDecorationItem) ElementKind() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *CollectionLayoutDecorationItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+func (x *CollectionLayoutDecorationItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
+	return &x.inner.NSCollectionLayoutItem
+}
 
 // CollectionLayoutDecorationItemable is the interface implemented by [CollectionLayoutDecorationItem], for mocking and DI.
 type CollectionLayoutDecorationItemable interface {
@@ -87,4 +91,3 @@ type CollectionLayoutDecorationItemable interface {
 }
 
 var _ CollectionLayoutDecorationItemable = (*CollectionLayoutDecorationItem)(nil)
-

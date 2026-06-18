@@ -61,4 +61,3 @@ type MonitoringRecordable interface {
 }
 
 var _ MonitoringRecordable = (*MonitoringRecord)(nil)
-

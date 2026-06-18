@@ -171,7 +171,9 @@ func (x *NNGridSample) SetUseGridValueAsInputCoordinate(useGridValueAsInputCoord
 	x.inner.SetUseGridValueAsInputCoordinate(useGridValueAsInputCoordinate)
 }
 
-func (x *NNGridSample) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *NNGridSample) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 func (x *NNGridSample) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
 
@@ -202,4 +204,3 @@ type NNGridSampleable interface {
 }
 
 var _ NNGridSampleable = (*NNGridSample)(nil)
-

@@ -17,17 +17,17 @@ type IKSaveOptions struct {
 }
 
 var (
-	_clsIKSaveOptions = _objcClass("IKSaveOptions")
-	_iKSaveOptionsSelInitWithImagePropertiesImageUTType = objc.RegisterName("initWithImageProperties:imageUTType:")
+	_clsIKSaveOptions                                       = _objcClass("IKSaveOptions")
+	_iKSaveOptionsSelInitWithImagePropertiesImageUTType     = objc.RegisterName("initWithImageProperties:imageUTType:")
 	_iKSaveOptionsSelAddSaveOptionsAccessoryViewToSavePanel = objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:")
-	_iKSaveOptionsSelAddSaveOptionsToView = objc.RegisterName("addSaveOptionsToView:")
-	_iKSaveOptionsSelDelegate = objc.RegisterName("delegate")
-	_iKSaveOptionsSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKSaveOptionsSelImageProperties = objc.RegisterName("imageProperties")
-	_iKSaveOptionsSelImageUTType = objc.RegisterName("imageUTType")
-	_iKSaveOptionsSelUserSelection = objc.RegisterName("userSelection")
-	_iKSaveOptionsSelRememberLastSetting = objc.RegisterName("rememberLastSetting")
-	_iKSaveOptionsSelSetRememberLastSetting = objc.RegisterName("setRememberLastSetting:")
+	_iKSaveOptionsSelAddSaveOptionsToView                   = objc.RegisterName("addSaveOptionsToView:")
+	_iKSaveOptionsSelDelegate                               = objc.RegisterName("delegate")
+	_iKSaveOptionsSelSetDelegate                            = objc.RegisterName("setDelegate:")
+	_iKSaveOptionsSelImageProperties                        = objc.RegisterName("imageProperties")
+	_iKSaveOptionsSelImageUTType                            = objc.RegisterName("imageUTType")
+	_iKSaveOptionsSelUserSelection                          = objc.RegisterName("userSelection")
+	_iKSaveOptionsSelRememberLastSetting                    = objc.RegisterName("rememberLastSetting")
+	_iKSaveOptionsSelSetRememberLastSetting                 = objc.RegisterName("setRememberLastSetting:")
 )
 
 func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
@@ -43,7 +43,9 @@ func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
 // @method initWithImageProperties:imageUTType: @abstract Initializes IKSaveOptions with metadata and UTType.
 func (o *IKSaveOptions) InitWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType *foundation.NSString) *IKSaveOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelInitWithImagePropertiesImageUTType, imageProperties, imageUTType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IKSaveOptionsFromID(_ret)
 }
 
@@ -76,7 +78,9 @@ func (o *IKSaveOptions) ImageProperties() *foundation.NSDictionary[objc.ID, objc
 // @property imageUTType @abstract current imageUTType (respecting user UI selection).
 func (o *IKSaveOptions) ImageUTType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKSaveOptionsSelImageUTType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,4 +99,3 @@ func (o *IKSaveOptions) RememberLastSetting() bool {
 func (o *IKSaveOptions) SetRememberLastSetting(rememberLastSetting bool) {
 	o.Ptr().Send(_iKSaveOptionsSelSetRememberLastSetting, rememberLastSetting)
 }
-

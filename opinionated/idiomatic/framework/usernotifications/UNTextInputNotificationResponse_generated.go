@@ -45,7 +45,9 @@ func (x *TextInputNotificationResponse) UserText() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *TextInputNotificationResponse) asNotificationResponse() *raw.UNNotificationResponse { return &x.inner.UNNotificationResponse }
+func (x *TextInputNotificationResponse) asNotificationResponse() *raw.UNNotificationResponse {
+	return &x.inner.UNNotificationResponse
+}
 
 // TextInputNotificationResponseable is the interface implemented by [TextInputNotificationResponse], for mocking and DI.
 type TextInputNotificationResponseable interface {
@@ -54,4 +56,3 @@ type TextInputNotificationResponseable interface {
 }
 
 var _ TextInputNotificationResponseable = (*TextInputNotificationResponse)(nil)
-

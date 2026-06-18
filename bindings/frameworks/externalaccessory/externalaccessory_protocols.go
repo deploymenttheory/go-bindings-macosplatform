@@ -10,4 +10,3 @@ type EAAccessoryDelegate interface {
 // EAWiFiUnconfiguredAccessoryBrowserDelegate wraps the ObjC protocol EAWiFiUnconfiguredAccessoryBrowserDelegate.
 type EAWiFiUnconfiguredAccessoryBrowserDelegate interface {
 }
-

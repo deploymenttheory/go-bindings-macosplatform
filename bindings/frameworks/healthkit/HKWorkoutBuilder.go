@@ -18,29 +18,29 @@ type HKWorkoutBuilder struct {
 }
 
 var (
-	_clsHKWorkoutBuilder = _objcClass("HKWorkoutBuilder")
-	_hKWorkoutBuilderSelInitWithHealthStoreConfigurationDevice = objc.RegisterName("initWithHealthStore:configuration:device:")
-	_hKWorkoutBuilderSelBeginCollectionWithStartDateCompletion = objc.RegisterName("beginCollectionWithStartDate:completion:")
-	_hKWorkoutBuilderSelAddSamplesCompletion = objc.RegisterName("addSamples:completion:")
-	_hKWorkoutBuilderSelAddWorkoutEventsCompletion = objc.RegisterName("addWorkoutEvents:completion:")
-	_hKWorkoutBuilderSelAddMetadataCompletion = objc.RegisterName("addMetadata:completion:")
-	_hKWorkoutBuilderSelAddWorkoutActivityCompletion = objc.RegisterName("addWorkoutActivity:completion:")
-	_hKWorkoutBuilderSelUpdateActivityWithUUIDEndDateCompletion = objc.RegisterName("updateActivityWithUUID:endDate:completion:")
+	_clsHKWorkoutBuilder                                            = _objcClass("HKWorkoutBuilder")
+	_hKWorkoutBuilderSelInitWithHealthStoreConfigurationDevice      = objc.RegisterName("initWithHealthStore:configuration:device:")
+	_hKWorkoutBuilderSelBeginCollectionWithStartDateCompletion      = objc.RegisterName("beginCollectionWithStartDate:completion:")
+	_hKWorkoutBuilderSelAddSamplesCompletion                        = objc.RegisterName("addSamples:completion:")
+	_hKWorkoutBuilderSelAddWorkoutEventsCompletion                  = objc.RegisterName("addWorkoutEvents:completion:")
+	_hKWorkoutBuilderSelAddMetadataCompletion                       = objc.RegisterName("addMetadata:completion:")
+	_hKWorkoutBuilderSelAddWorkoutActivityCompletion                = objc.RegisterName("addWorkoutActivity:completion:")
+	_hKWorkoutBuilderSelUpdateActivityWithUUIDEndDateCompletion     = objc.RegisterName("updateActivityWithUUID:endDate:completion:")
 	_hKWorkoutBuilderSelUpdateActivityWithUUIDAddMedatataCompletion = objc.RegisterName("updateActivityWithUUID:addMedatata:completion:")
-	_hKWorkoutBuilderSelEndCollectionWithEndDateCompletion = objc.RegisterName("endCollectionWithEndDate:completion:")
-	_hKWorkoutBuilderSelFinishWorkoutWithCompletion = objc.RegisterName("finishWorkoutWithCompletion:")
-	_hKWorkoutBuilderSelDiscardWorkout = objc.RegisterName("discardWorkout")
-	_hKWorkoutBuilderSelElapsedTimeAtDate = objc.RegisterName("elapsedTimeAtDate:")
-	_hKWorkoutBuilderSelStatisticsForType = objc.RegisterName("statisticsForType:")
-	_hKWorkoutBuilderSelSeriesBuilderForType = objc.RegisterName("seriesBuilderForType:")
-	_hKWorkoutBuilderSelDevice = objc.RegisterName("device")
-	_hKWorkoutBuilderSelStartDate = objc.RegisterName("startDate")
-	_hKWorkoutBuilderSelEndDate = objc.RegisterName("endDate")
-	_hKWorkoutBuilderSelWorkoutConfiguration = objc.RegisterName("workoutConfiguration")
-	_hKWorkoutBuilderSelMetadata = objc.RegisterName("metadata")
-	_hKWorkoutBuilderSelWorkoutEvents = objc.RegisterName("workoutEvents")
-	_hKWorkoutBuilderSelWorkoutActivities = objc.RegisterName("workoutActivities")
-	_hKWorkoutBuilderSelAllStatistics = objc.RegisterName("allStatistics")
+	_hKWorkoutBuilderSelEndCollectionWithEndDateCompletion          = objc.RegisterName("endCollectionWithEndDate:completion:")
+	_hKWorkoutBuilderSelFinishWorkoutWithCompletion                 = objc.RegisterName("finishWorkoutWithCompletion:")
+	_hKWorkoutBuilderSelDiscardWorkout                              = objc.RegisterName("discardWorkout")
+	_hKWorkoutBuilderSelElapsedTimeAtDate                           = objc.RegisterName("elapsedTimeAtDate:")
+	_hKWorkoutBuilderSelStatisticsForType                           = objc.RegisterName("statisticsForType:")
+	_hKWorkoutBuilderSelSeriesBuilderForType                        = objc.RegisterName("seriesBuilderForType:")
+	_hKWorkoutBuilderSelDevice                                      = objc.RegisterName("device")
+	_hKWorkoutBuilderSelStartDate                                   = objc.RegisterName("startDate")
+	_hKWorkoutBuilderSelEndDate                                     = objc.RegisterName("endDate")
+	_hKWorkoutBuilderSelWorkoutConfiguration                        = objc.RegisterName("workoutConfiguration")
+	_hKWorkoutBuilderSelMetadata                                    = objc.RegisterName("metadata")
+	_hKWorkoutBuilderSelWorkoutEvents                               = objc.RegisterName("workoutEvents")
+	_hKWorkoutBuilderSelWorkoutActivities                           = objc.RegisterName("workoutActivities")
+	_hKWorkoutBuilderSelAllStatistics                               = objc.RegisterName("allStatistics")
 )
 
 func HKWorkoutBuilderFromID(id objc.ID) *HKWorkoutBuilder {
@@ -56,7 +56,9 @@ func HKWorkoutBuilderFromID(id objc.ID) *HKWorkoutBuilder {
 // @method        initWithHealthStore:configuration:device: @abstract      The designated initializer to create an HKWorkoutBuilder. @discussion    Creates a new HKWorkoutBuilder unconnected to any HKWorkoutSession or any sources of data. @param         healthStore     Specifies the HKHealthStore object to use for building the workout. The store is retained until the builder is finished and a workout has been saved or discarded. @param         configuration   The workout configuration to be used. @param         device          The HKDevice to attach to the resulting HKWorkout.
 func (o *HKWorkoutBuilder) InitWithHealthStoreConfigurationDevice(healthStore *HKHealthStore, configuration *HKWorkoutConfiguration, device *HKDevice) *HKWorkoutBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelInitWithHealthStoreConfigurationDevice, healthStore.Ptr(), configuration.Ptr(), device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutBuilderFromID(_ret)
 }
 
@@ -182,42 +184,54 @@ func (o *HKWorkoutBuilder) ElapsedTimeAtDate(date *foundation.NSDate) float64 {
 // @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the receiver. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
 func (o *HKWorkoutBuilder) StatisticsForType(quantityType *HKQuantityType) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelStatisticsForType, quantityType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStatisticsFromID(_ret)
 }
 
 // @method        seriesBuilderForType: @abstract      Retrieves the associated series builder for the specified type. @discussion    Retrieves, and creates if it does not already exist, the series builder for the specified type. The series constructed with the returned builder will be associated with the workout when it is finished. @param         seriesType  The series type for which the builder should be retrieved.
 func (o *HKWorkoutBuilder) SeriesBuilderForType(seriesType *HKSeriesType) *HKSeriesBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelSeriesBuilderForType, seriesType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSeriesBuilderFromID(_ret)
 }
 
 // @property      device @abstract      The HKDevice to be associated with the workout.
 func (o *HKWorkoutBuilder) Device() *HKDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDeviceFromID(_ret)
 }
 
 // @property      startDate @abstract      The start date for the workout, as provided by beginCollectionWithStartDate:completion:
 func (o *HKWorkoutBuilder) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      endDate @abstract      The end date for the workout, as provided by endCollectionWithEndDate:completion:
 func (o *HKWorkoutBuilder) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      workoutConfiguration @abstract      The configuration for the workout being built.
 func (o *HKWorkoutBuilder) WorkoutConfiguration() *HKWorkoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelWorkoutConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutConfigurationFromID(_ret)
 }
 
@@ -230,21 +244,26 @@ func (o *HKWorkoutBuilder) Metadata() *foundation.NSDictionary[*foundation.NSStr
 // @property      workoutEvents @abstract      Workout events that have been added to the builder. @discussion    New events that are added using addWorkoutEvents:completion: will be appended to this array once the completion is called.
 func (o *HKWorkoutBuilder) WorkoutEvents() *foundation.NSArray[*HKWorkoutEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelWorkoutEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKWorkoutEvent](_ret)
 }
 
 // @property      workoutActivities @abstract      Workout activities that have been added to the builder. @discussion    New activities that are added using addWorkoutActivity:completion: will be appended to this array once the completion is called.
 func (o *HKWorkoutBuilder) WorkoutActivities() *foundation.NSArray[*HKWorkoutActivity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelWorkoutActivities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKWorkoutActivity](_ret)
 }
 
 // @property      allStatistics @abstract      A dictionary of statistics per quantity type added to the builder @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the builder.
 func (o *HKWorkoutBuilder) AllStatistics() *foundation.NSDictionary[*HKQuantityType, *HKStatistics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutBuilderSelAllStatistics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*HKQuantityType, *HKStatistics](_ret)
 }
-

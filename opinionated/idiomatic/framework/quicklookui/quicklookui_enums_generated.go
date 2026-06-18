@@ -28,4 +28,3 @@ func (e QLPreviewViewStyle) String() string {
 		return fmt.Sprintf("QLPreviewViewStyle(%d)", int64(e))
 	}
 }
-

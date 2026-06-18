@@ -15,8 +15,8 @@ type VNDetectTextRectanglesRequest struct {
 }
 
 var (
-	_clsVNDetectTextRectanglesRequest = _objcClass("VNDetectTextRectanglesRequest")
-	_vNDetectTextRectanglesRequestSelReportCharacterBoxes = objc.RegisterName("reportCharacterBoxes")
+	_clsVNDetectTextRectanglesRequest                        = _objcClass("VNDetectTextRectanglesRequest")
+	_vNDetectTextRectanglesRequestSelReportCharacterBoxes    = objc.RegisterName("reportCharacterBoxes")
 	_vNDetectTextRectanglesRequestSelSetReportCharacterBoxes = objc.RegisterName("setReportCharacterBoxes:")
 )
 
@@ -39,4 +39,3 @@ func (o *VNDetectTextRectanglesRequest) ReportCharacterBoxes() bool {
 func (o *VNDetectTextRectanglesRequest) SetReportCharacterBoxes(reportCharacterBoxes bool) {
 	o.Ptr().Send(_vNDetectTextRectanglesRequestSelSetReportCharacterBoxes, reportCharacterBoxes)
 }
-

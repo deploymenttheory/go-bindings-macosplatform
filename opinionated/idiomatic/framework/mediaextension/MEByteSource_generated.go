@@ -136,4 +136,3 @@ type ByteSourceable interface {
 }
 
 var _ ByteSourceable = (*ByteSource)(nil)
-

@@ -11,4 +11,3 @@ func Ar_error_domain() uintptr {
 	ptr, _ := purego.Dlsym(_arkitLib, "ar_error_domain")
 	return ptr
 }
-

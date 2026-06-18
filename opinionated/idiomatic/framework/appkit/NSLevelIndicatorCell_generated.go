@@ -527,4 +527,3 @@ type LevelIndicatorCellable interface {
 }
 
 var _ LevelIndicatorCellable = (*LevelIndicatorCell)(nil)
-

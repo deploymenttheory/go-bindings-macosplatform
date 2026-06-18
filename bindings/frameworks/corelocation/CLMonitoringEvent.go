@@ -16,20 +16,20 @@ type CLMonitoringEvent struct {
 }
 
 var (
-	_clsCLMonitoringEvent = _objcClass("CLMonitoringEvent")
-	_cLMonitoringEventSelIdentifier = objc.RegisterName("identifier")
-	_cLMonitoringEventSelRefinement = objc.RegisterName("refinement")
-	_cLMonitoringEventSelState = objc.RegisterName("state")
-	_cLMonitoringEventSelDate = objc.RegisterName("date")
-	_cLMonitoringEventSelAuthorizationDenied = objc.RegisterName("authorizationDenied")
-	_cLMonitoringEventSelAuthorizationDeniedGlobally = objc.RegisterName("authorizationDeniedGlobally")
-	_cLMonitoringEventSelAuthorizationRestricted = objc.RegisterName("authorizationRestricted")
-	_cLMonitoringEventSelInsufficientlyInUse = objc.RegisterName("insufficientlyInUse")
-	_cLMonitoringEventSelAccuracyLimited = objc.RegisterName("accuracyLimited")
-	_cLMonitoringEventSelConditionUnsupported = objc.RegisterName("conditionUnsupported")
-	_cLMonitoringEventSelConditionLimitExceeded = objc.RegisterName("conditionLimitExceeded")
-	_cLMonitoringEventSelPersistenceUnavailable = objc.RegisterName("persistenceUnavailable")
-	_cLMonitoringEventSelServiceSessionRequired = objc.RegisterName("serviceSessionRequired")
+	_clsCLMonitoringEvent                               = _objcClass("CLMonitoringEvent")
+	_cLMonitoringEventSelIdentifier                     = objc.RegisterName("identifier")
+	_cLMonitoringEventSelRefinement                     = objc.RegisterName("refinement")
+	_cLMonitoringEventSelState                          = objc.RegisterName("state")
+	_cLMonitoringEventSelDate                           = objc.RegisterName("date")
+	_cLMonitoringEventSelAuthorizationDenied            = objc.RegisterName("authorizationDenied")
+	_cLMonitoringEventSelAuthorizationDeniedGlobally    = objc.RegisterName("authorizationDeniedGlobally")
+	_cLMonitoringEventSelAuthorizationRestricted        = objc.RegisterName("authorizationRestricted")
+	_cLMonitoringEventSelInsufficientlyInUse            = objc.RegisterName("insufficientlyInUse")
+	_cLMonitoringEventSelAccuracyLimited                = objc.RegisterName("accuracyLimited")
+	_cLMonitoringEventSelConditionUnsupported           = objc.RegisterName("conditionUnsupported")
+	_cLMonitoringEventSelConditionLimitExceeded         = objc.RegisterName("conditionLimitExceeded")
+	_cLMonitoringEventSelPersistenceUnavailable         = objc.RegisterName("persistenceUnavailable")
+	_cLMonitoringEventSelServiceSessionRequired         = objc.RegisterName("serviceSessionRequired")
 	_cLMonitoringEventSelAuthorizationRequestInProgress = objc.RegisterName("authorizationRequestInProgress")
 )
 
@@ -45,13 +45,17 @@ func CLMonitoringEventFromID(id objc.ID) *CLMonitoringEvent {
 
 func (o *CLMonitoringEvent) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitoringEventSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CLMonitoringEvent) Refinement() *CLCondition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitoringEventSelRefinement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLConditionFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *CLMonitoringEvent) State() CLMonitoringState {
 
 func (o *CLMonitoringEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitoringEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -115,4 +121,3 @@ func (o *CLMonitoringEvent) AuthorizationRequestInProgress() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cLMonitoringEventSelAuthorizationRequestInProgress)
 	return _ret
 }
-

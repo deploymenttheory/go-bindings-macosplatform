@@ -359,4 +359,3 @@ func SKSummaryGetSentenceSummaryInfo(summary unsafe.Pointer, numSentencesInSumma
 func SKSummaryGetTypeID() uint {
 	return raw.SKSummaryGetTypeID()
 }
-

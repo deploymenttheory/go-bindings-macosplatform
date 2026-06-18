@@ -89,4 +89,3 @@ type StateOfMindable interface {
 }
 
 var _ StateOfMindable = (*StateOfMind)(nil)
-

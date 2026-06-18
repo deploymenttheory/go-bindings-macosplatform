@@ -15,11 +15,15 @@ type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent].
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent (nil for 0).
 func MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
@@ -41,4 +45,3 @@ type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable interfac
 }
 
 var _ MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent)(nil)
-

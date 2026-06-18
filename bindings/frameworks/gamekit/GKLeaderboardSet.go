@@ -19,15 +19,15 @@ type GKLeaderboardSet struct {
 }
 
 var (
-	_clsGKLeaderboardSet = _objcClass("GKLeaderboardSet")
+	_clsGKLeaderboardSet                                         = _objcClass("GKLeaderboardSet")
 	_gKLeaderboardSetSelLoadLeaderboardSetsWithCompletionHandler = objc.RegisterName("loadLeaderboardSetsWithCompletionHandler:")
-	_gKLeaderboardSetSelLoadLeaderboardsWithHandler = objc.RegisterName("loadLeaderboardsWithHandler:")
-	_gKLeaderboardSetSelTitle = objc.RegisterName("title")
-	_gKLeaderboardSetSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_gKLeaderboardSetSelIdentifier = objc.RegisterName("identifier")
-	_gKLeaderboardSetSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_gKLeaderboardSetSelLoadLeaderboardsWithCompletionHandler = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
-	_gKLeaderboardSetSelLoadImageWithCompletionHandler = objc.RegisterName("loadImageWithCompletionHandler:")
+	_gKLeaderboardSetSelLoadLeaderboardsWithHandler              = objc.RegisterName("loadLeaderboardsWithHandler:")
+	_gKLeaderboardSetSelTitle                                    = objc.RegisterName("title")
+	_gKLeaderboardSetSelGroupIdentifier                          = objc.RegisterName("groupIdentifier")
+	_gKLeaderboardSetSelIdentifier                               = objc.RegisterName("identifier")
+	_gKLeaderboardSetSelSetIdentifier                            = objc.RegisterName("setIdentifier:")
+	_gKLeaderboardSetSelLoadLeaderboardsWithCompletionHandler    = objc.RegisterName("loadLeaderboardsWithCompletionHandler:")
+	_gKLeaderboardSetSelLoadImageWithCompletionHandler           = objc.RegisterName("loadImageWithCompletionHandler:")
 )
 
 func GKLeaderboardSetFromID(id objc.ID) *GKLeaderboardSet {
@@ -73,21 +73,27 @@ func (o *GKLeaderboardSet) LoadLeaderboardsWithHandler(handler func(*foundation.
 // Localized set title.
 func (o *GKLeaderboardSet) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSetSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // set when leaderboardSets have been designated a game group; set when loadLeaderboardSetsWithCompletionHandler has been called for leaderboards that support game groups
 func (o *GKLeaderboardSet) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSetSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // leaderboard set.
 func (o *GKLeaderboardSet) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardSetSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,4 +131,3 @@ func (o *GKLeaderboardSet) LoadImageWithCompletionHandler(completionHandler func
 	}
 	o.Ptr().Send(_gKLeaderboardSetSelLoadImageWithCompletionHandler, __block_completionHandler)
 }
-

@@ -16,7 +16,9 @@ type MutableAssetDownloadStorageManagementPolicy struct {
 }
 
 // Unwrap returns the underlying [raw.AVMutableAssetDownloadStorageManagementPolicy].
-func (x *MutableAssetDownloadStorageManagementPolicy) Unwrap() *raw.AVMutableAssetDownloadStorageManagementPolicy { return x.inner }
+func (x *MutableAssetDownloadStorageManagementPolicy) Unwrap() *raw.AVMutableAssetDownloadStorageManagementPolicy {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirati
 	x.inner.SetExpirationDate(expirationDate)
 }
 
-func (x *MutableAssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy { return &x.inner.AVAssetDownloadStorageManagementPolicy }
+func (x *MutableAssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy {
+	return &x.inner.AVAssetDownloadStorageManagementPolicy
+}
 
 // MutableAssetDownloadStorageManagementPolicyable is the interface implemented by [MutableAssetDownloadStorageManagementPolicy], for mocking and DI.
 type MutableAssetDownloadStorageManagementPolicyable interface {
@@ -70,4 +74,3 @@ type MutableAssetDownloadStorageManagementPolicyable interface {
 }
 
 var _ MutableAssetDownloadStorageManagementPolicyable = (*MutableAssetDownloadStorageManagementPolicy)(nil)
-

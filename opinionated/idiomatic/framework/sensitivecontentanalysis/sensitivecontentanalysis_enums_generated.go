@@ -31,4 +31,3 @@ func (e SCSensitivityAnalysisPolicy) String() string {
 		return fmt.Sprintf("SCSensitivityAnalysisPolicy(%d)", int64(e))
 	}
 }
-

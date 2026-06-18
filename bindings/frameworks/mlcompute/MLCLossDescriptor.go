@@ -16,18 +16,18 @@ type MLCLossDescriptor struct {
 }
 
 var (
-	_clsMLCLossDescriptor = _objcClass("MLCLossDescriptor")
-	_mLCLossDescriptorSelDescriptorWithTypeReductionType = objc.RegisterName("descriptorWithType:reductionType:")
-	_mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeight = objc.RegisterName("descriptorWithType:reductionType:weight:")
-	_mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount = objc.RegisterName("descriptorWithType:reductionType:weight:labelSmoothing:classCount:")
+	_clsMLCLossDescriptor                                                                          = _objcClass("MLCLossDescriptor")
+	_mLCLossDescriptorSelDescriptorWithTypeReductionType                                           = objc.RegisterName("descriptorWithType:reductionType:")
+	_mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeight                                     = objc.RegisterName("descriptorWithType:reductionType:weight:")
+	_mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount             = objc.RegisterName("descriptorWithType:reductionType:weight:labelSmoothing:classCount:")
 	_mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta = objc.RegisterName("descriptorWithType:reductionType:weight:labelSmoothing:classCount:epsilon:delta:")
-	_mLCLossDescriptorSelLossType = objc.RegisterName("lossType")
-	_mLCLossDescriptorSelReductionType = objc.RegisterName("reductionType")
-	_mLCLossDescriptorSelWeight = objc.RegisterName("weight")
-	_mLCLossDescriptorSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mLCLossDescriptorSelClassCount = objc.RegisterName("classCount")
-	_mLCLossDescriptorSelEpsilon = objc.RegisterName("epsilon")
-	_mLCLossDescriptorSelDelta = objc.RegisterName("delta")
+	_mLCLossDescriptorSelLossType                                                                  = objc.RegisterName("lossType")
+	_mLCLossDescriptorSelReductionType                                                             = objc.RegisterName("reductionType")
+	_mLCLossDescriptorSelWeight                                                                    = objc.RegisterName("weight")
+	_mLCLossDescriptorSelLabelSmoothing                                                            = objc.RegisterName("labelSmoothing")
+	_mLCLossDescriptorSelClassCount                                                                = objc.RegisterName("classCount")
+	_mLCLossDescriptorSelEpsilon                                                                   = objc.RegisterName("epsilon")
+	_mLCLossDescriptorSelDelta                                                                     = objc.RegisterName("delta")
 )
 
 func MLCLossDescriptorFromID(id objc.ID) *MLCLossDescriptor {
@@ -43,28 +43,36 @@ func MLCLossDescriptorFromID(id objc.ID) *MLCLossDescriptor {
 // @abstract   Create a loss descriptor object @param      lossType        The loss function. @param      reductionType   The reduction operation @return     A new MLCLossDescriptor object
 func MLCLossDescriptorDescriptorWithTypeReductionType(lossType MLCLossType, reductionType MLCReductionType) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionType, lossType, reductionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossDescriptorFromID(_ret)
 }
 
 // @abstract   Create a loss descriptor object @param      lossType        The loss function. @param      reductionType   The reduction operation @param      weight          The scale factor to apply to each element of a result. @return     A new MLCLossDescriptor object
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(lossType MLCLossType, reductionType MLCReductionType, weight float32) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeight, lossType, reductionType, weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossDescriptorFromID(_ret)
 }
 
 // @abstract   Create a loss descriptor object @param      lossType           The loss function. @param      reductionType         The reduction operation @param      weight             The scale factor to apply to each element of a result. @param      labelSmoothing     The label smoothing parameter. @param      classCount         The number of classes parameter. @return     A new MLCLossDescriptor object
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount, lossType, reductionType, weight, labelSmoothing, classCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossDescriptorFromID(_ret)
 }
 
 // @abstract   Create a loss descriptor object @param      lossType            The loss function. @param      reductionType          The reduction operation @param      weight              The scale factor to apply to each element of a result. @param      labelSmoothing      The label smoothing parameter. @param      classCount          The number of classes parameter. @param      epsilon             The epsilon used by LogLoss @param      delta               The delta parameter used by Huber loss @return     A new MLCLossDescriptor object
 func MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint, epsilon float32, delta float32) *MLCLossDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLossDescriptor), _mLCLossDescriptorSelDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta, lossType, reductionType, weight, labelSmoothing, classCount, epsilon, delta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLossDescriptorFromID(_ret)
 }
 
@@ -109,4 +117,3 @@ func (o *MLCLossDescriptor) Delta() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCLossDescriptorSelDelta)
 	return _ret
 }
-

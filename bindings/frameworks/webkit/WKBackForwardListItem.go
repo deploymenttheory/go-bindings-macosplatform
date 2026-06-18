@@ -16,9 +16,9 @@ type WKBackForwardListItem struct {
 }
 
 var (
-	_clsWKBackForwardListItem = _objcClass("WKBackForwardListItem")
-	_wKBackForwardListItemSelURL = objc.RegisterName("URL")
-	_wKBackForwardListItemSelTitle = objc.RegisterName("title")
+	_clsWKBackForwardListItem           = _objcClass("WKBackForwardListItem")
+	_wKBackForwardListItemSelURL        = objc.RegisterName("URL")
+	_wKBackForwardListItemSelTitle      = objc.RegisterName("title")
 	_wKBackForwardListItemSelInitialURL = objc.RegisterName("initialURL")
 )
 
@@ -35,21 +35,26 @@ func WKBackForwardListItemFromID(id objc.ID) *WKBackForwardListItem {
 // @abstract The URL of the webpage represented by this item.
 func (o *WKBackForwardListItem) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @abstract The title of the webpage represented by this item.
 func (o *WKBackForwardListItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The URL of the initial request that created this item.
 func (o *WKBackForwardListItem) InitialURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListItemSelInitialURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

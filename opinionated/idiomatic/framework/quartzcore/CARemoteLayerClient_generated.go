@@ -77,4 +77,3 @@ type RemoteLayerClientable interface {
 }
 
 var _ RemoteLayerClientable = (*RemoteLayerClient)(nil)
-

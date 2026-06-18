@@ -16,11 +16,11 @@ type MPSCNNCrossChannelNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNCrossChannelNormalizationNode = _objcClass("MPSCNNCrossChannelNormalizationNode")
-	_mPSCNNCrossChannelNormalizationNodeSelNodeWithSourceKernelSize = objc.RegisterName("nodeWithSource:kernelSize:")
-	_mPSCNNCrossChannelNormalizationNodeSelInitWithSourceKernelSize = objc.RegisterName("initWithSource:kernelSize:")
-	_mPSCNNCrossChannelNormalizationNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSCNNCrossChannelNormalizationNodeSelKernelSizeInFeatureChannels = objc.RegisterName("kernelSizeInFeatureChannels")
+	_clsMPSCNNCrossChannelNormalizationNode                               = _objcClass("MPSCNNCrossChannelNormalizationNode")
+	_mPSCNNCrossChannelNormalizationNodeSelNodeWithSourceKernelSize       = objc.RegisterName("nodeWithSource:kernelSize:")
+	_mPSCNNCrossChannelNormalizationNodeSelInitWithSourceKernelSize       = objc.RegisterName("initWithSource:kernelSize:")
+	_mPSCNNCrossChannelNormalizationNodeSelInitWithSource                 = objc.RegisterName("initWithSource:")
+	_mPSCNNCrossChannelNormalizationNodeSelKernelSizeInFeatureChannels    = objc.RegisterName("kernelSizeInFeatureChannels")
 	_mPSCNNCrossChannelNormalizationNodeSelSetKernelSizeInFeatureChannels = objc.RegisterName("setKernelSizeInFeatureChannels:")
 )
 
@@ -36,19 +36,25 @@ func MPSCNNCrossChannelNormalizationNodeFromID(id objc.ID) *MPSCNNCrossChannelNo
 
 func MPSCNNCrossChannelNormalizationNodeNodeWithSourceKernelSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, kernelSize uint) *MPSCNNCrossChannelNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNCrossChannelNormalizationNode), _mPSCNNCrossChannelNormalizationNodeSelNodeWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNCrossChannelNormalizationNode) InitWithSourceKernelSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, kernelSize uint) *MPSCNNCrossChannelNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationNodeSelInitWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNCrossChannelNormalizationNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNCrossChannelNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationNodeFromID(_ret)
 }
 
@@ -60,4 +66,3 @@ func (o *MPSCNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() uint
 func (o *MPSCNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) {
 	o.Ptr().Send(_mPSCNNCrossChannelNormalizationNodeSelSetKernelSizeInFeatureChannels, kernelSizeInFeatureChannels)
 }
-

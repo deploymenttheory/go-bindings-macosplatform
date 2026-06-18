@@ -20,25 +20,25 @@ type SKTransition struct {
 }
 
 var (
-	_clsSKTransition = _objcClass("SKTransition")
-	_sKTransitionSelCrossFadeWithDuration = objc.RegisterName("crossFadeWithDuration:")
-	_sKTransitionSelFadeWithDuration = objc.RegisterName("fadeWithDuration:")
-	_sKTransitionSelFadeWithColorDuration = objc.RegisterName("fadeWithColor:duration:")
-	_sKTransitionSelFlipHorizontalWithDuration = objc.RegisterName("flipHorizontalWithDuration:")
-	_sKTransitionSelFlipVerticalWithDuration = objc.RegisterName("flipVerticalWithDuration:")
-	_sKTransitionSelRevealWithDirectionDuration = objc.RegisterName("revealWithDirection:duration:")
-	_sKTransitionSelMoveInWithDirectionDuration = objc.RegisterName("moveInWithDirection:duration:")
-	_sKTransitionSelPushWithDirectionDuration = objc.RegisterName("pushWithDirection:duration:")
-	_sKTransitionSelDoorsOpenHorizontalWithDuration = objc.RegisterName("doorsOpenHorizontalWithDuration:")
-	_sKTransitionSelDoorsOpenVerticalWithDuration = objc.RegisterName("doorsOpenVerticalWithDuration:")
+	_clsSKTransition                                 = _objcClass("SKTransition")
+	_sKTransitionSelCrossFadeWithDuration            = objc.RegisterName("crossFadeWithDuration:")
+	_sKTransitionSelFadeWithDuration                 = objc.RegisterName("fadeWithDuration:")
+	_sKTransitionSelFadeWithColorDuration            = objc.RegisterName("fadeWithColor:duration:")
+	_sKTransitionSelFlipHorizontalWithDuration       = objc.RegisterName("flipHorizontalWithDuration:")
+	_sKTransitionSelFlipVerticalWithDuration         = objc.RegisterName("flipVerticalWithDuration:")
+	_sKTransitionSelRevealWithDirectionDuration      = objc.RegisterName("revealWithDirection:duration:")
+	_sKTransitionSelMoveInWithDirectionDuration      = objc.RegisterName("moveInWithDirection:duration:")
+	_sKTransitionSelPushWithDirectionDuration        = objc.RegisterName("pushWithDirection:duration:")
+	_sKTransitionSelDoorsOpenHorizontalWithDuration  = objc.RegisterName("doorsOpenHorizontalWithDuration:")
+	_sKTransitionSelDoorsOpenVerticalWithDuration    = objc.RegisterName("doorsOpenVerticalWithDuration:")
 	_sKTransitionSelDoorsCloseHorizontalWithDuration = objc.RegisterName("doorsCloseHorizontalWithDuration:")
-	_sKTransitionSelDoorsCloseVerticalWithDuration = objc.RegisterName("doorsCloseVerticalWithDuration:")
-	_sKTransitionSelDoorwayWithDuration = objc.RegisterName("doorwayWithDuration:")
-	_sKTransitionSelTransitionWithCIFilterDuration = objc.RegisterName("transitionWithCIFilter:duration:")
-	_sKTransitionSelPausesIncomingScene = objc.RegisterName("pausesIncomingScene")
-	_sKTransitionSelSetPausesIncomingScene = objc.RegisterName("setPausesIncomingScene:")
-	_sKTransitionSelPausesOutgoingScene = objc.RegisterName("pausesOutgoingScene")
-	_sKTransitionSelSetPausesOutgoingScene = objc.RegisterName("setPausesOutgoingScene:")
+	_sKTransitionSelDoorsCloseVerticalWithDuration   = objc.RegisterName("doorsCloseVerticalWithDuration:")
+	_sKTransitionSelDoorwayWithDuration              = objc.RegisterName("doorwayWithDuration:")
+	_sKTransitionSelTransitionWithCIFilterDuration   = objc.RegisterName("transitionWithCIFilter:duration:")
+	_sKTransitionSelPausesIncomingScene              = objc.RegisterName("pausesIncomingScene")
+	_sKTransitionSelSetPausesIncomingScene           = objc.RegisterName("setPausesIncomingScene:")
+	_sKTransitionSelPausesOutgoingScene              = objc.RegisterName("pausesOutgoingScene")
+	_sKTransitionSelSetPausesOutgoingScene           = objc.RegisterName("setPausesOutgoingScene:")
 )
 
 func SKTransitionFromID(id objc.ID) *SKTransition {
@@ -53,85 +53,113 @@ func SKTransitionFromID(id objc.ID) *SKTransition {
 
 func SKTransitionCrossFadeWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelCrossFadeWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionFadeWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFadeWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionFadeWithColorDuration(color *appkit.NSColor, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFadeWithColorDuration, color.Ptr(), sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionFlipHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFlipHorizontalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionFlipVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelFlipVerticalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionRevealWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelRevealWithDirectionDuration, direction, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionMoveInWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelMoveInWithDirectionDuration, direction, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionPushWithDirectionDuration(direction SKTransitionDirection, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelPushWithDirectionDuration, direction, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionDoorsOpenHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsOpenHorizontalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionDoorsOpenVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsOpenVerticalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionDoorsCloseHorizontalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsCloseHorizontalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionDoorsCloseVerticalWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorsCloseVerticalWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionDoorwayWithDuration(sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelDoorwayWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
 func SKTransitionTransitionWithCIFilterDuration(filter *coreimage.CIFilter, sec float64) *SKTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTransition), _sKTransitionSelTransitionWithCIFilterDuration, filter.Ptr(), sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTransitionFromID(_ret)
 }
 
@@ -154,4 +182,3 @@ func (o *SKTransition) PausesOutgoingScene() bool {
 func (o *SKTransition) SetPausesOutgoingScene(pausesOutgoingScene bool) {
 	o.Ptr().Send(_sKTransitionSelSetPausesOutgoingScene, pausesOutgoingScene)
 }
-

@@ -16,7 +16,9 @@ type MTROnOffClusterOnWithRecallGlobalSceneParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROnOffClusterOnWithRecallGlobalSceneParams].
-func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) Unwrap() *raw.MTROnOffClusterOnWithRecallGlobalSceneParams { return x.inner }
+func (x *MTROnOffClusterOnWithRecallGlobalSceneParams) Unwrap() *raw.MTROnOffClusterOnWithRecallGlobalSceneParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTROnOffClusterOnWithRecallGlobalSceneParamsable interface {
 }
 
 var _ MTROnOffClusterOnWithRecallGlobalSceneParamsable = (*MTROnOffClusterOnWithRecallGlobalSceneParams)(nil)
-

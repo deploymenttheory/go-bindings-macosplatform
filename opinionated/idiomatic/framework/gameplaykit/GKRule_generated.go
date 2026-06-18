@@ -74,4 +74,3 @@ type Ruleable interface {
 }
 
 var _ Ruleable = (*Rule)(nil)
-

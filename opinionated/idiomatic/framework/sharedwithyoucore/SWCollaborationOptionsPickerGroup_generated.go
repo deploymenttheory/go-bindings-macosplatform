@@ -18,7 +18,9 @@ type CollaborationOptionsPickerGroup struct {
 }
 
 // Unwrap returns the underlying [raw.SWCollaborationOptionsPickerGroup].
-func (x *CollaborationOptionsPickerGroup) Unwrap() *raw.SWCollaborationOptionsPickerGroup { return x.inner }
+func (x *CollaborationOptionsPickerGroup) Unwrap() *raw.SWCollaborationOptionsPickerGroup {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -63,7 +65,9 @@ func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*raw.SWCollaborat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOption](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -86,7 +90,9 @@ func (x *CollaborationOptionsPickerGroup) SetSelectedOptionIdentifier(selectedOp
 	x.inner.SetSelectedOptionIdentifier(foundation.NSStringStringWithUTF8String(selectedOptionIdentifier))
 }
 
-func (x *CollaborationOptionsPickerGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup { return &x.inner.SWCollaborationOptionsGroup }
+func (x *CollaborationOptionsPickerGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup {
+	return &x.inner.SWCollaborationOptionsGroup
+}
 
 // CollaborationOptionsPickerGroupable is the interface implemented by [CollaborationOptionsPickerGroup], for mocking and DI.
 type CollaborationOptionsPickerGroupable interface {
@@ -100,4 +106,3 @@ type CollaborationOptionsPickerGroupable interface {
 }
 
 var _ CollaborationOptionsPickerGroupable = (*CollaborationOptionsPickerGroup)(nil)
-

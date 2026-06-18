@@ -18,41 +18,41 @@ type NSManagedObject struct {
 }
 
 var (
-	_clsNSManagedObject = _objcClass("NSManagedObject")
-	_nSManagedObjectSelEntity = objc.RegisterName("entity")
-	_nSManagedObjectSelFetchRequest = objc.RegisterName("fetchRequest")
+	_clsNSManagedObject                                             = _objcClass("NSManagedObject")
+	_nSManagedObjectSelEntity                                       = objc.RegisterName("entity")
+	_nSManagedObjectSelFetchRequest                                 = objc.RegisterName("fetchRequest")
 	_nSManagedObjectSelInitWithEntityInsertIntoManagedObjectContext = objc.RegisterName("initWithEntity:insertIntoManagedObjectContext:")
-	_nSManagedObjectSelInitWithContext = objc.RegisterName("initWithContext:")
-	_nSManagedObjectSelHasFaultForRelationshipNamed = objc.RegisterName("hasFaultForRelationshipNamed:")
-	_nSManagedObjectSelObjectIDsForRelationshipNamed = objc.RegisterName("objectIDsForRelationshipNamed:")
-	_nSManagedObjectSelWillAccessValueForKey = objc.RegisterName("willAccessValueForKey:")
-	_nSManagedObjectSelDidAccessValueForKey = objc.RegisterName("didAccessValueForKey:")
-	_nSManagedObjectSelAwakeFromFetch = objc.RegisterName("awakeFromFetch")
-	_nSManagedObjectSelAwakeFromInsert = objc.RegisterName("awakeFromInsert")
-	_nSManagedObjectSelAwakeFromSnapshotEvents = objc.RegisterName("awakeFromSnapshotEvents:")
-	_nSManagedObjectSelPrepareForDeletion = objc.RegisterName("prepareForDeletion")
-	_nSManagedObjectSelWillSave = objc.RegisterName("willSave")
-	_nSManagedObjectSelDidSave = objc.RegisterName("didSave")
-	_nSManagedObjectSelWillTurnIntoFault = objc.RegisterName("willTurnIntoFault")
-	_nSManagedObjectSelDidTurnIntoFault = objc.RegisterName("didTurnIntoFault")
-	_nSManagedObjectSelPrimitiveValueForKey = objc.RegisterName("primitiveValueForKey:")
-	_nSManagedObjectSelSetPrimitiveValueForKey = objc.RegisterName("setPrimitiveValue:forKey:")
-	_nSManagedObjectSelCommittedValuesForKeys = objc.RegisterName("committedValuesForKeys:")
-	_nSManagedObjectSelChangedValues = objc.RegisterName("changedValues")
-	_nSManagedObjectSelChangedValuesForCurrentEvent = objc.RegisterName("changedValuesForCurrentEvent")
-	_nSManagedObjectSelValidateForDelete = objc.RegisterName("validateForDelete:")
-	_nSManagedObjectSelValidateForInsert = objc.RegisterName("validateForInsert:")
-	_nSManagedObjectSelValidateForUpdate = objc.RegisterName("validateForUpdate:")
-	_nSManagedObjectSelContextShouldIgnoreUnmodeledPropertyChanges = objc.RegisterName("contextShouldIgnoreUnmodeledPropertyChanges")
-	_nSManagedObjectSelManagedObjectContext = objc.RegisterName("managedObjectContext")
-	_nSManagedObjectSelObjectID = objc.RegisterName("objectID")
-	_nSManagedObjectSelIsInserted = objc.RegisterName("isInserted")
-	_nSManagedObjectSelIsUpdated = objc.RegisterName("isUpdated")
-	_nSManagedObjectSelIsDeleted = objc.RegisterName("isDeleted")
-	_nSManagedObjectSelHasChanges = objc.RegisterName("hasChanges")
-	_nSManagedObjectSelHasPersistentChangedValues = objc.RegisterName("hasPersistentChangedValues")
-	_nSManagedObjectSelIsFault = objc.RegisterName("isFault")
-	_nSManagedObjectSelFaultingState = objc.RegisterName("faultingState")
+	_nSManagedObjectSelInitWithContext                              = objc.RegisterName("initWithContext:")
+	_nSManagedObjectSelHasFaultForRelationshipNamed                 = objc.RegisterName("hasFaultForRelationshipNamed:")
+	_nSManagedObjectSelObjectIDsForRelationshipNamed                = objc.RegisterName("objectIDsForRelationshipNamed:")
+	_nSManagedObjectSelWillAccessValueForKey                        = objc.RegisterName("willAccessValueForKey:")
+	_nSManagedObjectSelDidAccessValueForKey                         = objc.RegisterName("didAccessValueForKey:")
+	_nSManagedObjectSelAwakeFromFetch                               = objc.RegisterName("awakeFromFetch")
+	_nSManagedObjectSelAwakeFromInsert                              = objc.RegisterName("awakeFromInsert")
+	_nSManagedObjectSelAwakeFromSnapshotEvents                      = objc.RegisterName("awakeFromSnapshotEvents:")
+	_nSManagedObjectSelPrepareForDeletion                           = objc.RegisterName("prepareForDeletion")
+	_nSManagedObjectSelWillSave                                     = objc.RegisterName("willSave")
+	_nSManagedObjectSelDidSave                                      = objc.RegisterName("didSave")
+	_nSManagedObjectSelWillTurnIntoFault                            = objc.RegisterName("willTurnIntoFault")
+	_nSManagedObjectSelDidTurnIntoFault                             = objc.RegisterName("didTurnIntoFault")
+	_nSManagedObjectSelPrimitiveValueForKey                         = objc.RegisterName("primitiveValueForKey:")
+	_nSManagedObjectSelSetPrimitiveValueForKey                      = objc.RegisterName("setPrimitiveValue:forKey:")
+	_nSManagedObjectSelCommittedValuesForKeys                       = objc.RegisterName("committedValuesForKeys:")
+	_nSManagedObjectSelChangedValues                                = objc.RegisterName("changedValues")
+	_nSManagedObjectSelChangedValuesForCurrentEvent                 = objc.RegisterName("changedValuesForCurrentEvent")
+	_nSManagedObjectSelValidateForDelete                            = objc.RegisterName("validateForDelete:")
+	_nSManagedObjectSelValidateForInsert                            = objc.RegisterName("validateForInsert:")
+	_nSManagedObjectSelValidateForUpdate                            = objc.RegisterName("validateForUpdate:")
+	_nSManagedObjectSelContextShouldIgnoreUnmodeledPropertyChanges  = objc.RegisterName("contextShouldIgnoreUnmodeledPropertyChanges")
+	_nSManagedObjectSelManagedObjectContext                         = objc.RegisterName("managedObjectContext")
+	_nSManagedObjectSelObjectID                                     = objc.RegisterName("objectID")
+	_nSManagedObjectSelIsInserted                                   = objc.RegisterName("isInserted")
+	_nSManagedObjectSelIsUpdated                                    = objc.RegisterName("isUpdated")
+	_nSManagedObjectSelIsDeleted                                    = objc.RegisterName("isDeleted")
+	_nSManagedObjectSelHasChanges                                   = objc.RegisterName("hasChanges")
+	_nSManagedObjectSelHasPersistentChangedValues                   = objc.RegisterName("hasPersistentChangedValues")
+	_nSManagedObjectSelIsFault                                      = objc.RegisterName("isFault")
+	_nSManagedObjectSelFaultingState                                = objc.RegisterName("faultingState")
 )
 
 func NSManagedObjectFromID(id objc.ID) *NSManagedObject {
@@ -67,7 +67,9 @@ func NSManagedObjectFromID(id objc.ID) *NSManagedObject {
 
 func NSManagedObjectEntity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSManagedObject), _nSManagedObjectSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -78,13 +80,17 @@ func NSManagedObjectFetchRequest() *NSFetchRequest[objc.ID] {
 
 func (o *NSManagedObject) InitWithEntityInsertIntoManagedObjectContext(entity *NSEntityDescription, context_ *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelInitWithEntityInsertIntoManagedObjectContext, entity.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
 func (o *NSManagedObject) InitWithContext(moc *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelInitWithContext, moc.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *NSManagedObject) HasFaultForRelationshipNamed(key *foundation.NSString)
 
 func (o *NSManagedObject) ObjectIDsForRelationshipNamed(key *foundation.NSString) *foundation.NSArray[*NSManagedObjectID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelObjectIDsForRelationshipNamed, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSManagedObjectID](_ret)
 }
 
@@ -197,19 +205,25 @@ func NSManagedObjectContextShouldIgnoreUnmodeledPropertyChanges() bool {
 
 func (o *NSManagedObject) ManagedObjectContext() *NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelManagedObjectContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectContextFromID(_ret)
 }
 
 func (o *NSManagedObject) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSManagedObject) ObjectID() *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectSelObjectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -247,4 +261,3 @@ func (o *NSManagedObject) FaultingState() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSManagedObjectSelFaultingState)
 	return _ret
 }
-

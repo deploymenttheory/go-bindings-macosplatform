@@ -16,10 +16,10 @@ type HKQueryDescriptor struct {
 }
 
 var (
-	_clsHKQueryDescriptor = _objcClass("HKQueryDescriptor")
+	_clsHKQueryDescriptor                            = _objcClass("HKQueryDescriptor")
 	_hKQueryDescriptorSelInitWithSampleTypePredicate = objc.RegisterName("initWithSampleType:predicate:")
-	_hKQueryDescriptorSelSampleType = objc.RegisterName("sampleType")
-	_hKQueryDescriptorSelPredicate = objc.RegisterName("predicate")
+	_hKQueryDescriptorSelSampleType                  = objc.RegisterName("sampleType")
+	_hKQueryDescriptorSelPredicate                   = objc.RegisterName("predicate")
 )
 
 func HKQueryDescriptorFromID(id objc.ID) *HKQueryDescriptor {
@@ -35,21 +35,26 @@ func HKQueryDescriptorFromID(id objc.ID) *HKQueryDescriptor {
 // @method        initWithSampleType:predicate: @abstract      Returns a query descriptor that describes a data type and predicate to be used in an HKQuery. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match.
 func (o *HKQueryDescriptor) InitWithSampleTypePredicate(sampleType *HKSampleType, predicate *foundation.NSPredicate) *HKQueryDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQueryDescriptorSelInitWithSampleTypePredicate, sampleType.Ptr(), predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQueryDescriptorFromID(_ret)
 }
 
 // @property      sampleType @abstract      The type of sample to retrieve in an HKQuery.
 func (o *HKQueryDescriptor) SampleType() *HKSampleType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQueryDescriptorSelSampleType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSampleTypeFromID(_ret)
 }
 
 // @property      predicate @abstract      The predicate which samples should match.
 func (o *HKQueryDescriptor) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQueryDescriptorSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

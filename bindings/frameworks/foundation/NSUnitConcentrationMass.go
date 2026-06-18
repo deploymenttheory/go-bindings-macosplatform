@@ -15,10 +15,10 @@ type NSUnitConcentrationMass struct {
 }
 
 var (
-	_clsNSUnitConcentrationMass = _objcClass("NSUnitConcentrationMass")
+	_clsNSUnitConcentrationMass                                   = _objcClass("NSUnitConcentrationMass")
 	_nSUnitConcentrationMassSelMillimolesPerLiterWithGramsPerMole = objc.RegisterName("millimolesPerLiterWithGramsPerMole:")
-	_nSUnitConcentrationMassSelGramsPerLiter = objc.RegisterName("gramsPerLiter")
-	_nSUnitConcentrationMassSelMilligramsPerDeciliter = objc.RegisterName("milligramsPerDeciliter")
+	_nSUnitConcentrationMassSelGramsPerLiter                      = objc.RegisterName("gramsPerLiter")
+	_nSUnitConcentrationMassSelMilligramsPerDeciliter             = objc.RegisterName("milligramsPerDeciliter")
 )
 
 func NSUnitConcentrationMassFromID(id objc.ID) *NSUnitConcentrationMass {
@@ -33,19 +33,24 @@ func NSUnitConcentrationMassFromID(id objc.ID) *NSUnitConcentrationMass {
 
 func NSUnitConcentrationMassMillimolesPerLiterWithGramsPerMole(gramsPerMole float64) *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelMillimolesPerLiterWithGramsPerMole, gramsPerMole)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConcentrationMassFromID(_ret)
 }
 
 func NSUnitConcentrationMassGramsPerLiter() *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelGramsPerLiter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConcentrationMassFromID(_ret)
 }
 
 func NSUnitConcentrationMassMilligramsPerDeciliter() *NSUnitConcentrationMass {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitConcentrationMass), _nSUnitConcentrationMassSelMilligramsPerDeciliter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitConcentrationMassFromID(_ret)
 }
-

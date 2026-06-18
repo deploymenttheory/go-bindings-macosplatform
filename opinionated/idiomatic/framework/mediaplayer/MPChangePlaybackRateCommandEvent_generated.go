@@ -15,7 +15,9 @@ type ChangePlaybackRateCommandEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MPChangePlaybackRateCommandEvent].
-func (x *ChangePlaybackRateCommandEvent) Unwrap() *raw.MPChangePlaybackRateCommandEvent { return x.inner }
+func (x *ChangePlaybackRateCommandEvent) Unwrap() *raw.MPChangePlaybackRateCommandEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -40,7 +42,9 @@ func (x *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
 	return x.inner.PlaybackRate()
 }
 
-func (x *ChangePlaybackRateCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+func (x *ChangePlaybackRateCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
+	return &x.inner.MPRemoteCommandEvent
+}
 
 // ChangePlaybackRateCommandEventable is the interface implemented by [ChangePlaybackRateCommandEvent], for mocking and DI.
 type ChangePlaybackRateCommandEventable interface {
@@ -49,4 +53,3 @@ type ChangePlaybackRateCommandEventable interface {
 }
 
 var _ ChangePlaybackRateCommandEventable = (*ChangePlaybackRateCommandEvent)(nil)
-

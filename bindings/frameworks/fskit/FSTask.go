@@ -18,10 +18,10 @@ type FSTask struct {
 }
 
 var (
-	_clsFSTask = _objcClass("FSTask")
-	_fSTaskSelLogMessage = objc.RegisterName("logMessage:")
-	_fSTaskSelDidCompleteWithError = objc.RegisterName("didCompleteWithError:")
-	_fSTaskSelCancellationHandler = objc.RegisterName("cancellationHandler")
+	_clsFSTask                       = _objcClass("FSTask")
+	_fSTaskSelLogMessage             = objc.RegisterName("logMessage:")
+	_fSTaskSelDidCompleteWithError   = objc.RegisterName("didCompleteWithError:")
+	_fSTaskSelCancellationHandler    = objc.RegisterName("cancellationHandler")
 	_fSTaskSelSetCancellationHandler = objc.RegisterName("setCancellationHandler:")
 )
 
@@ -60,4 +60,3 @@ func (o *FSTask) SetCancellationHandler(cancellationHandler func() unsafe.Pointe
 	}
 	o.Ptr().Send(_fSTaskSelSetCancellationHandler, __block_cancellationHandler)
 }
-

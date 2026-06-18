@@ -16,44 +16,44 @@ type SCNAction struct {
 }
 
 var (
-	_clsSCNAction = _objcClass("SCNAction")
-	_sCNActionSelReversedAction = objc.RegisterName("reversedAction")
-	_sCNActionSelMoveByXYZDuration = objc.RegisterName("moveByX:y:z:duration:")
-	_sCNActionSelMoveByDuration = objc.RegisterName("moveBy:duration:")
-	_sCNActionSelMoveToDuration = objc.RegisterName("moveTo:duration:")
-	_sCNActionSelRotateByXYZDuration = objc.RegisterName("rotateByX:y:z:duration:")
-	_sCNActionSelRotateToXYZDuration = objc.RegisterName("rotateToX:y:z:duration:")
-	_sCNActionSelRotateToXYZDurationShortestUnitArc = objc.RegisterName("rotateToX:y:z:duration:shortestUnitArc:")
-	_sCNActionSelRotateByAngleAroundAxisDuration = objc.RegisterName("rotateByAngle:aroundAxis:duration:")
-	_sCNActionSelRotateToAxisAngleDuration = objc.RegisterName("rotateToAxisAngle:duration:")
-	_sCNActionSelScaleByDuration = objc.RegisterName("scaleBy:duration:")
-	_sCNActionSelScaleToDuration = objc.RegisterName("scaleTo:duration:")
-	_sCNActionSelSequence = objc.RegisterName("sequence:")
-	_sCNActionSelGroup = objc.RegisterName("group:")
-	_sCNActionSelRepeatActionCount = objc.RegisterName("repeatAction:count:")
-	_sCNActionSelRepeatActionForever = objc.RegisterName("repeatActionForever:")
-	_sCNActionSelFadeInWithDuration = objc.RegisterName("fadeInWithDuration:")
-	_sCNActionSelFadeOutWithDuration = objc.RegisterName("fadeOutWithDuration:")
-	_sCNActionSelFadeOpacityByDuration = objc.RegisterName("fadeOpacityBy:duration:")
-	_sCNActionSelFadeOpacityToDuration = objc.RegisterName("fadeOpacityTo:duration:")
-	_sCNActionSelHide = objc.RegisterName("hide")
-	_sCNActionSelUnhide = objc.RegisterName("unhide")
-	_sCNActionSelWaitForDuration = objc.RegisterName("waitForDuration:")
-	_sCNActionSelWaitForDurationWithRange = objc.RegisterName("waitForDuration:withRange:")
-	_sCNActionSelRemoveFromParentNode = objc.RegisterName("removeFromParentNode")
-	_sCNActionSelRunBlock = objc.RegisterName("runBlock:")
-	_sCNActionSelRunBlockQueue = objc.RegisterName("runBlock:queue:")
-	_sCNActionSelJavaScriptActionWithScriptDuration = objc.RegisterName("javaScriptActionWithScript:duration:")
+	_clsSCNAction                                    = _objcClass("SCNAction")
+	_sCNActionSelReversedAction                      = objc.RegisterName("reversedAction")
+	_sCNActionSelMoveByXYZDuration                   = objc.RegisterName("moveByX:y:z:duration:")
+	_sCNActionSelMoveByDuration                      = objc.RegisterName("moveBy:duration:")
+	_sCNActionSelMoveToDuration                      = objc.RegisterName("moveTo:duration:")
+	_sCNActionSelRotateByXYZDuration                 = objc.RegisterName("rotateByX:y:z:duration:")
+	_sCNActionSelRotateToXYZDuration                 = objc.RegisterName("rotateToX:y:z:duration:")
+	_sCNActionSelRotateToXYZDurationShortestUnitArc  = objc.RegisterName("rotateToX:y:z:duration:shortestUnitArc:")
+	_sCNActionSelRotateByAngleAroundAxisDuration     = objc.RegisterName("rotateByAngle:aroundAxis:duration:")
+	_sCNActionSelRotateToAxisAngleDuration           = objc.RegisterName("rotateToAxisAngle:duration:")
+	_sCNActionSelScaleByDuration                     = objc.RegisterName("scaleBy:duration:")
+	_sCNActionSelScaleToDuration                     = objc.RegisterName("scaleTo:duration:")
+	_sCNActionSelSequence                            = objc.RegisterName("sequence:")
+	_sCNActionSelGroup                               = objc.RegisterName("group:")
+	_sCNActionSelRepeatActionCount                   = objc.RegisterName("repeatAction:count:")
+	_sCNActionSelRepeatActionForever                 = objc.RegisterName("repeatActionForever:")
+	_sCNActionSelFadeInWithDuration                  = objc.RegisterName("fadeInWithDuration:")
+	_sCNActionSelFadeOutWithDuration                 = objc.RegisterName("fadeOutWithDuration:")
+	_sCNActionSelFadeOpacityByDuration               = objc.RegisterName("fadeOpacityBy:duration:")
+	_sCNActionSelFadeOpacityToDuration               = objc.RegisterName("fadeOpacityTo:duration:")
+	_sCNActionSelHide                                = objc.RegisterName("hide")
+	_sCNActionSelUnhide                              = objc.RegisterName("unhide")
+	_sCNActionSelWaitForDuration                     = objc.RegisterName("waitForDuration:")
+	_sCNActionSelWaitForDurationWithRange            = objc.RegisterName("waitForDuration:withRange:")
+	_sCNActionSelRemoveFromParentNode                = objc.RegisterName("removeFromParentNode")
+	_sCNActionSelRunBlock                            = objc.RegisterName("runBlock:")
+	_sCNActionSelRunBlockQueue                       = objc.RegisterName("runBlock:queue:")
+	_sCNActionSelJavaScriptActionWithScriptDuration  = objc.RegisterName("javaScriptActionWithScript:duration:")
 	_sCNActionSelCustomActionWithDurationActionBlock = objc.RegisterName("customActionWithDuration:actionBlock:")
-	_sCNActionSelPlayAudioSourceWaitForCompletion = objc.RegisterName("playAudioSource:waitForCompletion:")
-	_sCNActionSelDuration = objc.RegisterName("duration")
-	_sCNActionSelSetDuration = objc.RegisterName("setDuration:")
-	_sCNActionSelTimingMode = objc.RegisterName("timingMode")
-	_sCNActionSelSetTimingMode = objc.RegisterName("setTimingMode:")
-	_sCNActionSelTimingFunction = objc.RegisterName("timingFunction")
-	_sCNActionSelSetTimingFunction = objc.RegisterName("setTimingFunction:")
-	_sCNActionSelSpeed = objc.RegisterName("speed")
-	_sCNActionSelSetSpeed = objc.RegisterName("setSpeed:")
+	_sCNActionSelPlayAudioSourceWaitForCompletion    = objc.RegisterName("playAudioSource:waitForCompletion:")
+	_sCNActionSelDuration                            = objc.RegisterName("duration")
+	_sCNActionSelSetDuration                         = objc.RegisterName("setDuration:")
+	_sCNActionSelTimingMode                          = objc.RegisterName("timingMode")
+	_sCNActionSelSetTimingMode                       = objc.RegisterName("setTimingMode:")
+	_sCNActionSelTimingFunction                      = objc.RegisterName("timingFunction")
+	_sCNActionSelSetTimingFunction                   = objc.RegisterName("setTimingFunction:")
+	_sCNActionSelSpeed                               = objc.RegisterName("speed")
+	_sCNActionSelSetSpeed                            = objc.RegisterName("setSpeed:")
 )
 
 func SCNActionFromID(id objc.ID) *SCNAction {
@@ -69,145 +69,193 @@ func SCNActionFromID(id objc.ID) *SCNAction {
 // @method reversedAction @abstract Creates an action that reverses the behavior of another action.
 func (o *SCNAction) ReversedAction() *SCNAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNActionSelReversedAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionMoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveByXYZDuration, deltaX, deltaY, deltaZ, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionMoveByDuration(delta SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveByDuration, delta, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionMoveToDuration(location SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelMoveToDuration, location, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateByXYZDuration, xAngle, yAngle, zAngle, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToXYZDuration, xAngle, yAngle, zAngle, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64, zAngle float64, duration float64, shortestUnitArc bool) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToXYZDurationShortestUnitArc, xAngle, yAngle, zAngle, duration, shortestUnitArc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRotateByAngleAroundAxisDuration(angle float64, axis SCNVector3, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateByAngleAroundAxisDuration, angle, axis, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRotateToAxisAngleDuration(axisAngle SCNVector4, duration float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRotateToAxisAngleDuration, axisAngle, duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionScaleByDuration(scale float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelScaleByDuration, scale, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionScaleToDuration(scale float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelScaleToDuration, scale, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionSequence(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelSequence, actions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionGroup(actions *foundation.NSArray[*SCNAction]) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelGroup, actions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRepeatActionCount(action *SCNAction, count uint) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRepeatActionCount, action.Ptr(), count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRepeatActionForever(action *SCNAction) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRepeatActionForever, action.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionFadeInWithDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeInWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionFadeOutWithDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOutWithDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionFadeOpacityByDuration(factor float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOpacityByDuration, factor, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionFadeOpacityToDuration(opacity float64, sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelFadeOpacityToDuration, opacity, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionHide() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelHide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionUnhide() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelUnhide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionWaitForDuration(sec float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelWaitForDuration, sec)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionWaitForDurationWithRange(sec float64, durationRange float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelWaitForDurationWithRange, sec, durationRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionRemoveFromParentNode() *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRemoveFromParentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
@@ -223,7 +271,9 @@ func SCNActionRunBlock(block func(*SCNNode)) *SCNAction {
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRunBlock, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
@@ -239,13 +289,17 @@ func SCNActionRunBlockQueue(block func(*SCNNode), queue *foundation.NSObject) *S
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelRunBlockQueue, __block_block, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 func SCNActionJavaScriptActionWithScriptDuration(script *foundation.NSString, seconds float64) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelJavaScriptActionWithScriptDuration, script.Ptr(), seconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
@@ -261,14 +315,18 @@ func SCNActionCustomActionWithDurationActionBlock(seconds float64, block func(*S
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelCustomActionWithDurationActionBlock, seconds, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
 // Creates an action that plays a sound @param source The audio source to play (see SCNAudioSource.h) @param wait If YES, then the duration of this action is the same as the length of the audio playback. If NO, the action is considered to have completed immediately.
 func SCNActionPlayAudioSourceWaitForCompletion(source *SCNAudioSource, wait bool) *SCNAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAction), _sCNActionSelPlayAudioSourceWaitForCompletion, source.Ptr(), wait)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNActionFromID(_ret)
 }
 
@@ -311,4 +369,3 @@ func (o *SCNAction) Speed() float64 {
 func (o *SCNAction) SetSpeed(speed float64) {
 	o.Ptr().Send(_sCNActionSelSetSpeed, speed)
 }
-

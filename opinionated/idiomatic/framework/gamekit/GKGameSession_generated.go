@@ -278,4 +278,3 @@ type GameSessionable interface {
 }
 
 var _ GameSessionable = (*GameSession)(nil)
-

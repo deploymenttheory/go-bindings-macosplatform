@@ -134,4 +134,3 @@ type CNNPoolingable interface {
 }
 
 var _ CNNPoolingable = (*CNNPooling)(nil)
-

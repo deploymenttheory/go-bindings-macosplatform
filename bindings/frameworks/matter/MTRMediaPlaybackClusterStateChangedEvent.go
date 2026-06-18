@@ -16,24 +16,24 @@ type MTRMediaPlaybackClusterStateChangedEvent struct {
 }
 
 var (
-	_clsMTRMediaPlaybackClusterStateChangedEvent = _objcClass("MTRMediaPlaybackClusterStateChangedEvent")
-	_mTRMediaPlaybackClusterStateChangedEventSelCurrentState = objc.RegisterName("currentState")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetCurrentState = objc.RegisterName("setCurrentState:")
-	_mTRMediaPlaybackClusterStateChangedEventSelStartTime = objc.RegisterName("startTime")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRMediaPlaybackClusterStateChangedEventSelDuration = objc.RegisterName("duration")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRMediaPlaybackClusterStateChangedEventSelSampledPosition = objc.RegisterName("sampledPosition")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetSampledPosition = objc.RegisterName("setSampledPosition:")
-	_mTRMediaPlaybackClusterStateChangedEventSelPlaybackSpeed = objc.RegisterName("playbackSpeed")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetPlaybackSpeed = objc.RegisterName("setPlaybackSpeed:")
-	_mTRMediaPlaybackClusterStateChangedEventSelSeekRangeEnd = objc.RegisterName("seekRangeEnd")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetSeekRangeEnd = objc.RegisterName("setSeekRangeEnd:")
-	_mTRMediaPlaybackClusterStateChangedEventSelSeekRangeStart = objc.RegisterName("seekRangeStart")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetSeekRangeStart = objc.RegisterName("setSeekRangeStart:")
-	_mTRMediaPlaybackClusterStateChangedEventSelData = objc.RegisterName("data")
-	_mTRMediaPlaybackClusterStateChangedEventSelSetData = objc.RegisterName("setData:")
-	_mTRMediaPlaybackClusterStateChangedEventSelAudioAdvanceUnmuted = objc.RegisterName("audioAdvanceUnmuted")
+	_clsMTRMediaPlaybackClusterStateChangedEvent                       = _objcClass("MTRMediaPlaybackClusterStateChangedEvent")
+	_mTRMediaPlaybackClusterStateChangedEventSelCurrentState           = objc.RegisterName("currentState")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetCurrentState        = objc.RegisterName("setCurrentState:")
+	_mTRMediaPlaybackClusterStateChangedEventSelStartTime              = objc.RegisterName("startTime")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetStartTime           = objc.RegisterName("setStartTime:")
+	_mTRMediaPlaybackClusterStateChangedEventSelDuration               = objc.RegisterName("duration")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetDuration            = objc.RegisterName("setDuration:")
+	_mTRMediaPlaybackClusterStateChangedEventSelSampledPosition        = objc.RegisterName("sampledPosition")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetSampledPosition     = objc.RegisterName("setSampledPosition:")
+	_mTRMediaPlaybackClusterStateChangedEventSelPlaybackSpeed          = objc.RegisterName("playbackSpeed")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetPlaybackSpeed       = objc.RegisterName("setPlaybackSpeed:")
+	_mTRMediaPlaybackClusterStateChangedEventSelSeekRangeEnd           = objc.RegisterName("seekRangeEnd")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetSeekRangeEnd        = objc.RegisterName("setSeekRangeEnd:")
+	_mTRMediaPlaybackClusterStateChangedEventSelSeekRangeStart         = objc.RegisterName("seekRangeStart")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetSeekRangeStart      = objc.RegisterName("setSeekRangeStart:")
+	_mTRMediaPlaybackClusterStateChangedEventSelData                   = objc.RegisterName("data")
+	_mTRMediaPlaybackClusterStateChangedEventSelSetData                = objc.RegisterName("setData:")
+	_mTRMediaPlaybackClusterStateChangedEventSelAudioAdvanceUnmuted    = objc.RegisterName("audioAdvanceUnmuted")
 	_mTRMediaPlaybackClusterStateChangedEventSelSetAudioAdvanceUnmuted = objc.RegisterName("setAudioAdvanceUnmuted:")
 )
 
@@ -49,7 +49,9 @@ func MTRMediaPlaybackClusterStateChangedEventFromID(id objc.ID) *MTRMediaPlaybac
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelCurrentState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetCurrentState(currentState 
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetStartTime(startTime *found
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetDuration(duration *foundat
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelSampledPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRMediaPlaybackClusterPlaybackPositionStructFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetSampledPosition(sampledPos
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelPlaybackSpeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetPlaybackSpeed(playbackSpee
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelSeekRangeEnd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeEnd(seekRangeEnd 
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelSeekRangeStart)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -119,7 +133,9 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeStart(seekRangeSt
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -129,11 +145,12 @@ func (o *MTRMediaPlaybackClusterStateChangedEvent) SetData(data *foundation.NSDa
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterStateChangedEventSelAudioAdvanceUnmuted)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMediaPlaybackClusterStateChangedEvent) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMediaPlaybackClusterStateChangedEventSelSetAudioAdvanceUnmuted, audioAdvanceUnmuted.Ptr())
 }
-

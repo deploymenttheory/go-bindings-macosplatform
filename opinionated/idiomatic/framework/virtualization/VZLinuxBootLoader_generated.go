@@ -107,4 +107,3 @@ type LinuxBootLoaderable interface {
 }
 
 var _ LinuxBootLoaderable = (*LinuxBootLoader)(nil)
-

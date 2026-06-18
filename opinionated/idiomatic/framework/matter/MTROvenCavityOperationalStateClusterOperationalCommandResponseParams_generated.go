@@ -18,11 +18,15 @@ type MTROvenCavityOperationalStateClusterOperationalCommandResponseParams struct
 }
 
 // Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterOperationalCommandResponseParams].
-func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalCommandResponseParams { return x.inner }
+func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalCommandResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing object pointer as a MTROvenCavityOperationalStateClusterOperationalCommandResponseParams (nil for 0).
 func MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams {
@@ -72,4 +76,3 @@ type MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsable in
 }
 
 var _ MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsable = (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams)(nil)
-

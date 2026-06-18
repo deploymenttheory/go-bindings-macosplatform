@@ -18,7 +18,7 @@ type QLThumbnailProvider struct {
 }
 
 var (
-	_clsQLThumbnailProvider = _objcClass("QLThumbnailProvider")
+	_clsQLThumbnailProvider                                                = _objcClass("QLThumbnailProvider")
 	_qLThumbnailProviderSelProvideThumbnailForFileRequestCompletionHandler = objc.RegisterName("provideThumbnailForFileRequest:completionHandler:")
 )
 
@@ -46,4 +46,3 @@ func (o *QLThumbnailProvider) ProvideThumbnailForFileRequestCompletionHandler(re
 	}
 	o.Ptr().Send(_qLThumbnailProviderSelProvideThumbnailForFileRequestCompletionHandler, request.Ptr(), __block_handler)
 }
-

@@ -17,12 +17,12 @@ type PHASEPushStreamNodeDefinition struct {
 }
 
 var (
-	_clsPHASEPushStreamNodeDefinition = _objcClass("PHASEPushStreamNodeDefinition")
+	_clsPHASEPushStreamNodeDefinition                                        = _objcClass("PHASEPushStreamNodeDefinition")
 	_pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormatIdentifier = objc.RegisterName("initWithMixerDefinition:format:identifier:")
-	_pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormat = objc.RegisterName("initWithMixerDefinition:format:")
-	_pHASEPushStreamNodeDefinitionSelFormat = objc.RegisterName("format")
-	_pHASEPushStreamNodeDefinitionSelNormalize = objc.RegisterName("normalize")
-	_pHASEPushStreamNodeDefinitionSelSetNormalize = objc.RegisterName("setNormalize:")
+	_pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormat           = objc.RegisterName("initWithMixerDefinition:format:")
+	_pHASEPushStreamNodeDefinitionSelFormat                                  = objc.RegisterName("format")
+	_pHASEPushStreamNodeDefinitionSelNormalize                               = objc.RegisterName("normalize")
+	_pHASEPushStreamNodeDefinitionSelSetNormalize                            = objc.RegisterName("setNormalize:")
 )
 
 func PHASEPushStreamNodeDefinitionFromID(id objc.ID) *PHASEPushStreamNodeDefinition {
@@ -38,21 +38,27 @@ func PHASEPushStreamNodeDefinitionFromID(id objc.ID) *PHASEPushStreamNodeDefinit
 // @method initWithMixerDefinition:format:identifier @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @param identifier An optional custom identifier to give to this object @return A new PHASEPushStreamNodeDefinition object
 func (o *PHASEPushStreamNodeDefinition) InitWithMixerDefinitionFormatIdentifier(mixerDefinition *PHASEMixerDefinition, format *avfaudio.AVAudioFormat, identifier *foundation.NSString) *PHASEPushStreamNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormatIdentifier, mixerDefinition.Ptr(), format.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEPushStreamNodeDefinitionFromID(_ret)
 }
 
 // @method initWithMixerDefinition:format @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @return A new PHASEPushStreamNodeDefinition object
 func (o *PHASEPushStreamNodeDefinition) InitWithMixerDefinitionFormat(mixerDefinition *PHASEMixerDefinition, format *avfaudio.AVAudioFormat) *PHASEPushStreamNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEPushStreamNodeDefinitionSelInitWithMixerDefinitionFormat, mixerDefinition.Ptr(), format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEPushStreamNodeDefinitionFromID(_ret)
 }
 
 // @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with
 func (o *PHASEPushStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEPushStreamNodeDefinitionSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioFormatFromID(_ret)
 }
 
@@ -65,4 +71,3 @@ func (o *PHASEPushStreamNodeDefinition) Normalize() bool {
 func (o *PHASEPushStreamNodeDefinition) SetNormalize(normalize bool) {
 	o.Ptr().Send(_pHASEPushStreamNodeDefinitionSelSetNormalize, normalize)
 }
-

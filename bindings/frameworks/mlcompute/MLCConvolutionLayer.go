@@ -15,13 +15,13 @@ type MLCConvolutionLayer struct {
 }
 
 var (
-	_clsMLCConvolutionLayer = _objcClass("MLCConvolutionLayer")
+	_clsMLCConvolutionLayer                                 = _objcClass("MLCConvolutionLayer")
 	_mLCConvolutionLayerSelLayerWithWeightsBiasesDescriptor = objc.RegisterName("layerWithWeights:biases:descriptor:")
-	_mLCConvolutionLayerSelDescriptor = objc.RegisterName("descriptor")
-	_mLCConvolutionLayerSelWeights = objc.RegisterName("weights")
-	_mLCConvolutionLayerSelBiases = objc.RegisterName("biases")
-	_mLCConvolutionLayerSelWeightsParameter = objc.RegisterName("weightsParameter")
-	_mLCConvolutionLayerSelBiasesParameter = objc.RegisterName("biasesParameter")
+	_mLCConvolutionLayerSelDescriptor                       = objc.RegisterName("descriptor")
+	_mLCConvolutionLayerSelWeights                          = objc.RegisterName("weights")
+	_mLCConvolutionLayerSelBiases                           = objc.RegisterName("biases")
+	_mLCConvolutionLayerSelWeightsParameter                 = objc.RegisterName("weightsParameter")
+	_mLCConvolutionLayerSelBiasesParameter                  = objc.RegisterName("biasesParameter")
 )
 
 func MLCConvolutionLayerFromID(id objc.ID) *MLCConvolutionLayer {
@@ -37,42 +37,53 @@ func MLCConvolutionLayerFromID(id objc.ID) *MLCConvolutionLayer {
 // @abstract   Create a convolution layer @param      weights        The weights tensor @param      biases         The bias tensor @param      descriptor     The convolution descriptor @return     A new convolution layer.
 func MLCConvolutionLayerLayerWithWeightsBiasesDescriptor(weights *MLCTensor, biases *MLCTensor, descriptor *MLCConvolutionDescriptor) *MLCConvolutionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionLayer), _mLCConvolutionLayerSelLayerWithWeightsBiasesDescriptor, weights.Ptr(), biases.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The convolution descriptor
 func (o *MLCConvolutionLayer) Descriptor() *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCConvolutionLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @property   weights @abstract   The weights tensor used by the convolution layer
 func (o *MLCConvolutionLayer) Weights() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCConvolutionLayerSelWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   biases @abstract   The bias tensor used by the convolution layer
 func (o *MLCConvolutionLayer) Biases() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCConvolutionLayerSelBiases)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
 func (o *MLCConvolutionLayer) WeightsParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCConvolutionLayerSelWeightsParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   biasesParameter @abstract   The bias tensor parameter used for optimizer update
 func (o *MLCConvolutionLayer) BiasesParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCConvolutionLayerSelBiasesParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
-

@@ -17,14 +17,14 @@ type MPSCNNUpsamplingBilinearNode struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingBilinearNode = _objcClass("MPSCNNUpsamplingBilinearNode")
-	_mPSCNNUpsamplingBilinearNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:")
+	_clsMPSCNNUpsamplingBilinearNode                                                                 = _objcClass("MPSCNNUpsamplingBilinearNode")
+	_mPSCNNUpsamplingBilinearNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY             = objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:")
 	_mPSCNNUpsamplingBilinearNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners = objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:")
-	_mPSCNNUpsamplingBilinearNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:")
+	_mPSCNNUpsamplingBilinearNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorY             = objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:")
 	_mPSCNNUpsamplingBilinearNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners = objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:")
-	_mPSCNNUpsamplingBilinearNodeSelScaleFactorX = objc.RegisterName("scaleFactorX")
-	_mPSCNNUpsamplingBilinearNodeSelScaleFactorY = objc.RegisterName("scaleFactorY")
-	_mPSCNNUpsamplingBilinearNodeSelAlignCorners = objc.RegisterName("alignCorners")
+	_mPSCNNUpsamplingBilinearNodeSelScaleFactorX                                                     = objc.RegisterName("scaleFactorX")
+	_mPSCNNUpsamplingBilinearNodeSelScaleFactorY                                                     = objc.RegisterName("scaleFactorY")
+	_mPSCNNUpsamplingBilinearNodeSelAlignCorners                                                     = objc.RegisterName("alignCorners")
 )
 
 func MPSCNNUpsamplingBilinearNodeFromID(id objc.ID) *MPSCNNUpsamplingBilinearNode {
@@ -40,28 +40,36 @@ func MPSCNNUpsamplingBilinearNodeFromID(id objc.ID) *MPSCNNUpsamplingBilinearNod
 // @abstract   Init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @return     A new MPSNNFilter node for a MPSCNNUpsamplingBilinear kernel.
 func MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingBilinearNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNUpsamplingBilinearNode), _mPSCNNUpsamplingBilinearNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearNodeFromID(_ret)
 }
 
 // @abstract   Init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @param      alignCorners            Specifier whether the centers of the 4 corner pixels of the input and output regions are aligned, @return     A new MPSNNFilter node for a MPSCNNUpsamplingBilinear kernel.
 func MPSCNNUpsamplingBilinearNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode *MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint, alignCorners bool) *MPSCNNUpsamplingBilinearNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNUpsamplingBilinearNode), _mPSCNNUpsamplingBilinearNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY, alignCorners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNUpsamplingBilinear kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @return     A new MPSNNFilter node for a MPSCNNUpsamplingBilinear kernel.
 func (o *MPSCNNUpsamplingBilinearNode) InitWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingBilinearNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorY, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNUpsamplingBilinear kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @param      alignCorners            Specifier whether the centers of the 4 corner pixels of the input and output regions are aligned, @return     A new MPSNNFilter node for a MPSCNNUpsamplingBilinear kernel.
 func (o *MPSCNNUpsamplingBilinearNode) InitWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode *MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint, alignCorners bool) *MPSCNNUpsamplingBilinearNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY, alignCorners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearNodeFromID(_ret)
 }
 
@@ -79,4 +87,3 @@ func (o *MPSCNNUpsamplingBilinearNode) AlignCorners() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSCNNUpsamplingBilinearNodeSelAlignCorners)
 	return _ret
 }
-

@@ -143,4 +143,3 @@ func MAImageCaptioningCopyMetadataTagPath() unsafe.Pointer {
 func MAImageCaptioningSetCaption(url unsafe.Pointer, string_ unsafe.Pointer, error_ unsafe.Pointer) bool {
 	return raw.MAImageCaptioningSetCaption(url, string_, error_)
 }
-

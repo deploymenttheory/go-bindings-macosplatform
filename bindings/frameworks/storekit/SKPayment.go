@@ -17,13 +17,13 @@ type SKPayment struct {
 }
 
 var (
-	_clsSKPayment = _objcClass("SKPayment")
-	_sKPaymentSelPaymentWithProduct = objc.RegisterName("paymentWithProduct:")
-	_sKPaymentSelRequestData = objc.RegisterName("requestData")
-	_sKPaymentSelQuantity = objc.RegisterName("quantity")
-	_sKPaymentSelApplicationUsername = objc.RegisterName("applicationUsername")
+	_clsSKPayment                           = _objcClass("SKPayment")
+	_sKPaymentSelPaymentWithProduct         = objc.RegisterName("paymentWithProduct:")
+	_sKPaymentSelRequestData                = objc.RegisterName("requestData")
+	_sKPaymentSelQuantity                   = objc.RegisterName("quantity")
+	_sKPaymentSelApplicationUsername        = objc.RegisterName("applicationUsername")
 	_sKPaymentSelSimulatesAskToBuyInSandbox = objc.RegisterName("simulatesAskToBuyInSandbox")
-	_sKPaymentSelPaymentDiscount = objc.RegisterName("paymentDiscount")
+	_sKPaymentSelPaymentDiscount            = objc.RegisterName("paymentDiscount")
 )
 
 func SKPaymentFromID(id objc.ID) *SKPayment {
@@ -38,14 +38,18 @@ func SKPaymentFromID(id objc.ID) *SKPayment {
 
 func SKPaymentPaymentWithProduct(product *SKProduct) *SKPayment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPayment), _sKPaymentSelPaymentWithProduct, product.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentFromID(_ret)
 }
 
 // Deprecated: Create Product.PurchaseOption.custom values to use in Product.purchase(confirmIn:options:).
 func (o *SKPayment) RequestData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentSelRequestData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *SKPayment) Quantity() int {
 // Deprecated: Create a Product.PurchaseOption.appAccountToken to use in Product.purchase(confirmIn:options:).
 func (o *SKPayment) ApplicationUsername() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentSelApplicationUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +77,8 @@ func (o *SKPayment) SimulatesAskToBuyInSandbox() bool {
 // Deprecated: Create a Product.PurchaseOption.promotionalOffer to use in Product.purchase(confirmIn:options:).
 func (o *SKPayment) PaymentDiscount() *SKPaymentDiscount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentSelPaymentDiscount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentDiscountFromID(_ret)
 }
-

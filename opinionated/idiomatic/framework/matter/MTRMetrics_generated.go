@@ -71,4 +71,3 @@ type MTRMetricsable interface {
 }
 
 var _ MTRMetricsable = (*MTRMetrics)(nil)
-

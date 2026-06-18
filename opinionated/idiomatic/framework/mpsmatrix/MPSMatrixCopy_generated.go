@@ -88,4 +88,3 @@ type MatrixCopyable interface {
 }
 
 var _ MatrixCopyable = (*MatrixCopy)(nil)
-

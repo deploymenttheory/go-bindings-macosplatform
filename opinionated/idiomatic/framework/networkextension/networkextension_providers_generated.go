@@ -92,4 +92,3 @@ type NEVPNProtocolProvider interface {
 type NEVPNProtocolIPSecProvider interface {
 	asNEVPNProtocolIPSec() *raw.NEVPNProtocolIPSec
 }
-

@@ -16,13 +16,13 @@ type MTL4SpecializedFunctionDescriptor struct {
 }
 
 var (
-	_clsMTL4SpecializedFunctionDescriptor = _objcClass("MTL4SpecializedFunctionDescriptor")
-	_mTL4SpecializedFunctionDescriptorSelFunctionDescriptor = objc.RegisterName("functionDescriptor")
+	_clsMTL4SpecializedFunctionDescriptor                      = _objcClass("MTL4SpecializedFunctionDescriptor")
+	_mTL4SpecializedFunctionDescriptorSelFunctionDescriptor    = objc.RegisterName("functionDescriptor")
 	_mTL4SpecializedFunctionDescriptorSelSetFunctionDescriptor = objc.RegisterName("setFunctionDescriptor:")
-	_mTL4SpecializedFunctionDescriptorSelSpecializedName = objc.RegisterName("specializedName")
-	_mTL4SpecializedFunctionDescriptorSelSetSpecializedName = objc.RegisterName("setSpecializedName:")
-	_mTL4SpecializedFunctionDescriptorSelConstantValues = objc.RegisterName("constantValues")
-	_mTL4SpecializedFunctionDescriptorSelSetConstantValues = objc.RegisterName("setConstantValues:")
+	_mTL4SpecializedFunctionDescriptorSelSpecializedName       = objc.RegisterName("specializedName")
+	_mTL4SpecializedFunctionDescriptorSelSetSpecializedName    = objc.RegisterName("setSpecializedName:")
+	_mTL4SpecializedFunctionDescriptorSelConstantValues        = objc.RegisterName("constantValues")
+	_mTL4SpecializedFunctionDescriptorSelSetConstantValues     = objc.RegisterName("setConstantValues:")
 )
 
 func MTL4SpecializedFunctionDescriptorFromID(id objc.ID) *MTL4SpecializedFunctionDescriptor {
@@ -38,7 +38,9 @@ func MTL4SpecializedFunctionDescriptorFromID(id objc.ID) *MTL4SpecializedFunctio
 // Provides a descriptor that corresponds to a base function that the specialization applies to.
 func (o *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4SpecializedFunctionDescriptorSelFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4FunctionDescriptorFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTL4SpecializedFunctionDescriptor) SetFunctionDescriptor(functionDescri
 // Assigns an optional name to the specialized function.
 func (o *MTL4SpecializedFunctionDescriptor) SpecializedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4SpecializedFunctionDescriptorSelSpecializedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTL4SpecializedFunctionDescriptor) SetSpecializedName(specializedName *
 // Configures optional function constant values to associate with the function.
 func (o *MTL4SpecializedFunctionDescriptor) ConstantValues() *MTLFunctionConstantValues {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4SpecializedFunctionDescriptorSelConstantValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionConstantValuesFromID(_ret)
 }
 
 func (o *MTL4SpecializedFunctionDescriptor) SetConstantValues(constantValues *MTLFunctionConstantValues) {
 	o.Ptr().Send(_mTL4SpecializedFunctionDescriptorSelSetConstantValues, constantValues.Ptr())
 }
-

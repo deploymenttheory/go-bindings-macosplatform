@@ -15,7 +15,9 @@ type TurnBasedMatchmakerViewController struct {
 }
 
 // Unwrap returns the underlying [raw.GKTurnBasedMatchmakerViewController].
-func (x *TurnBasedMatchmakerViewController) Unwrap() *raw.GKTurnBasedMatchmakerViewController { return x.inner }
+func (x *TurnBasedMatchmakerViewController) Unwrap() *raw.GKTurnBasedMatchmakerViewController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type TurnBasedMatchmakerViewControllerable interface {
 }
 
 var _ TurnBasedMatchmakerViewControllerable = (*TurnBasedMatchmakerViewController)(nil)
-

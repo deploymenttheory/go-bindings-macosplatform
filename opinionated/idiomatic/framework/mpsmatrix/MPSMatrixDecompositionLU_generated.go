@@ -67,7 +67,9 @@ func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPiv
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)
 }
 
-func (x *MatrixDecompositionLU) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixDecompositionLU) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
 // MatrixDecompositionLUable is the interface implemented by [MatrixDecompositionLU], for mocking and DI.
 type MatrixDecompositionLUable interface {
@@ -80,4 +82,3 @@ type MatrixDecompositionLUable interface {
 }
 
 var _ MatrixDecompositionLUable = (*MatrixDecompositionLU)(nil)
-

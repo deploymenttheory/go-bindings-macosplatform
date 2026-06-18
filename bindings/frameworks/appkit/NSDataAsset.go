@@ -16,12 +16,12 @@ type NSDataAsset struct {
 }
 
 var (
-	_clsNSDataAsset = _objcClass("NSDataAsset")
-	_nSDataAssetSelInitWithName = objc.RegisterName("initWithName:")
+	_clsNSDataAsset                   = _objcClass("NSDataAsset")
+	_nSDataAssetSelInitWithName       = objc.RegisterName("initWithName:")
 	_nSDataAssetSelInitWithNameBundle = objc.RegisterName("initWithName:bundle:")
-	_nSDataAssetSelName = objc.RegisterName("name")
-	_nSDataAssetSelData = objc.RegisterName("data")
-	_nSDataAssetSelTypeIdentifier = objc.RegisterName("typeIdentifier")
+	_nSDataAssetSelName               = objc.RegisterName("name")
+	_nSDataAssetSelData               = objc.RegisterName("data")
+	_nSDataAssetSelTypeIdentifier     = objc.RegisterName("typeIdentifier")
 )
 
 func NSDataAssetFromID(id objc.ID) *NSDataAsset {
@@ -37,35 +37,44 @@ func NSDataAssetFromID(id objc.ID) *NSDataAsset {
 // Equivalent to -initWithName:name bundle:[NSBundle mainBundle];
 func (o *NSDataAsset) InitWithName(name *foundation.NSString) *NSDataAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelInitWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataAssetFromID(_ret)
 }
 
 // Create a data asset with the given name from the given bundle. Returns nil if the asset was not found.
 func (o *NSDataAsset) InitWithNameBundle(name *foundation.NSString, bundle *foundation.NSBundle) *NSDataAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelInitWithNameBundle, name.Ptr(), bundle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataAssetFromID(_ret)
 }
 
 // The name used to reference the data asset
 func (o *NSDataAsset) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The data for this asset, as stored in the asset catalog
 func (o *NSDataAsset) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The Uniform Type Identifier for this data object.
 func (o *NSDataAsset) TypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataAssetSelTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

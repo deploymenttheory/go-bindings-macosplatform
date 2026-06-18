@@ -16,37 +16,37 @@ type AVMusicTrack struct {
 }
 
 var (
-	_clsAVMusicTrack = _objcClass("AVMusicTrack")
-	_aVMusicTrackSelDestinationAudioUnit = objc.RegisterName("destinationAudioUnit")
-	_aVMusicTrackSelSetDestinationAudioUnit = objc.RegisterName("setDestinationAudioUnit:")
-	_aVMusicTrackSelDestinationMIDIEndpoint = objc.RegisterName("destinationMIDIEndpoint")
-	_aVMusicTrackSelSetDestinationMIDIEndpoint = objc.RegisterName("setDestinationMIDIEndpoint:")
-	_aVMusicTrackSelLoopRange = objc.RegisterName("loopRange")
-	_aVMusicTrackSelSetLoopRange = objc.RegisterName("setLoopRange:")
-	_aVMusicTrackSelIsLoopingEnabled = objc.RegisterName("isLoopingEnabled")
-	_aVMusicTrackSelSetLoopingEnabled = objc.RegisterName("setLoopingEnabled:")
-	_aVMusicTrackSelNumberOfLoops = objc.RegisterName("numberOfLoops")
-	_aVMusicTrackSelSetNumberOfLoops = objc.RegisterName("setNumberOfLoops:")
-	_aVMusicTrackSelOffsetTime = objc.RegisterName("offsetTime")
-	_aVMusicTrackSelSetOffsetTime = objc.RegisterName("setOffsetTime:")
-	_aVMusicTrackSelIsMuted = objc.RegisterName("isMuted")
-	_aVMusicTrackSelSetMuted = objc.RegisterName("setMuted:")
-	_aVMusicTrackSelIsSoloed = objc.RegisterName("isSoloed")
-	_aVMusicTrackSelSetSoloed = objc.RegisterName("setSoloed:")
-	_aVMusicTrackSelLengthInBeats = objc.RegisterName("lengthInBeats")
-	_aVMusicTrackSelSetLengthInBeats = objc.RegisterName("setLengthInBeats:")
-	_aVMusicTrackSelLengthInSeconds = objc.RegisterName("lengthInSeconds")
-	_aVMusicTrackSelSetLengthInSeconds = objc.RegisterName("setLengthInSeconds:")
-	_aVMusicTrackSelTimeResolution = objc.RegisterName("timeResolution")
-	_aVMusicTrackSelAddEventAtBeat = objc.RegisterName("addEvent:atBeat:")
-	_aVMusicTrackSelMoveEventsInRangeByAmount = objc.RegisterName("moveEventsInRange:byAmount:")
-	_aVMusicTrackSelClearEventsInRange = objc.RegisterName("clearEventsInRange:")
-	_aVMusicTrackSelCutEventsInRange = objc.RegisterName("cutEventsInRange:")
-	_aVMusicTrackSelCopyEventsInRangeFromTrackInsertAtBeat = objc.RegisterName("copyEventsInRange:fromTrack:insertAtBeat:")
+	_clsAVMusicTrack                                              = _objcClass("AVMusicTrack")
+	_aVMusicTrackSelDestinationAudioUnit                          = objc.RegisterName("destinationAudioUnit")
+	_aVMusicTrackSelSetDestinationAudioUnit                       = objc.RegisterName("setDestinationAudioUnit:")
+	_aVMusicTrackSelDestinationMIDIEndpoint                       = objc.RegisterName("destinationMIDIEndpoint")
+	_aVMusicTrackSelSetDestinationMIDIEndpoint                    = objc.RegisterName("setDestinationMIDIEndpoint:")
+	_aVMusicTrackSelLoopRange                                     = objc.RegisterName("loopRange")
+	_aVMusicTrackSelSetLoopRange                                  = objc.RegisterName("setLoopRange:")
+	_aVMusicTrackSelIsLoopingEnabled                              = objc.RegisterName("isLoopingEnabled")
+	_aVMusicTrackSelSetLoopingEnabled                             = objc.RegisterName("setLoopingEnabled:")
+	_aVMusicTrackSelNumberOfLoops                                 = objc.RegisterName("numberOfLoops")
+	_aVMusicTrackSelSetNumberOfLoops                              = objc.RegisterName("setNumberOfLoops:")
+	_aVMusicTrackSelOffsetTime                                    = objc.RegisterName("offsetTime")
+	_aVMusicTrackSelSetOffsetTime                                 = objc.RegisterName("setOffsetTime:")
+	_aVMusicTrackSelIsMuted                                       = objc.RegisterName("isMuted")
+	_aVMusicTrackSelSetMuted                                      = objc.RegisterName("setMuted:")
+	_aVMusicTrackSelIsSoloed                                      = objc.RegisterName("isSoloed")
+	_aVMusicTrackSelSetSoloed                                     = objc.RegisterName("setSoloed:")
+	_aVMusicTrackSelLengthInBeats                                 = objc.RegisterName("lengthInBeats")
+	_aVMusicTrackSelSetLengthInBeats                              = objc.RegisterName("setLengthInBeats:")
+	_aVMusicTrackSelLengthInSeconds                               = objc.RegisterName("lengthInSeconds")
+	_aVMusicTrackSelSetLengthInSeconds                            = objc.RegisterName("setLengthInSeconds:")
+	_aVMusicTrackSelTimeResolution                                = objc.RegisterName("timeResolution")
+	_aVMusicTrackSelAddEventAtBeat                                = objc.RegisterName("addEvent:atBeat:")
+	_aVMusicTrackSelMoveEventsInRangeByAmount                     = objc.RegisterName("moveEventsInRange:byAmount:")
+	_aVMusicTrackSelClearEventsInRange                            = objc.RegisterName("clearEventsInRange:")
+	_aVMusicTrackSelCutEventsInRange                              = objc.RegisterName("cutEventsInRange:")
+	_aVMusicTrackSelCopyEventsInRangeFromTrackInsertAtBeat        = objc.RegisterName("copyEventsInRange:fromTrack:insertAtBeat:")
 	_aVMusicTrackSelCopyAndMergeEventsInRangeFromTrackMergeAtBeat = objc.RegisterName("copyAndMergeEventsInRange:fromTrack:mergeAtBeat:")
-	_aVMusicTrackSelEnumerateEventsInRangeUsing = objc.RegisterName("enumerateEventsInRange:usingBlock:")
-	_aVMusicTrackSelUsesAutomatedParameters = objc.RegisterName("usesAutomatedParameters")
-	_aVMusicTrackSelSetUsesAutomatedParameters = objc.RegisterName("setUsesAutomatedParameters:")
+	_aVMusicTrackSelEnumerateEventsInRangeUsing                   = objc.RegisterName("enumerateEventsInRange:usingBlock:")
+	_aVMusicTrackSelUsesAutomatedParameters                       = objc.RegisterName("usesAutomatedParameters")
+	_aVMusicTrackSelSetUsesAutomatedParameters                    = objc.RegisterName("setUsesAutomatedParameters:")
 )
 
 func AVMusicTrackFromID(id objc.ID) *AVMusicTrack {
@@ -62,7 +62,9 @@ func AVMusicTrackFromID(id objc.ID) *AVMusicTrack {
 // @property destinationAudioUnit @abstract The AVAudioUnit which will receive the track's events @discussion This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
 func (o *AVMusicTrack) DestinationAudioUnit() *AVAudioUnit {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMusicTrackSelDestinationAudioUnit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitFromID(_ret)
 }
 
@@ -218,4 +220,3 @@ func (o *AVMusicTrack) UsesAutomatedParameters() bool {
 func (o *AVMusicTrack) SetUsesAutomatedParameters(usesAutomatedParameters bool) {
 	o.Ptr().Send(_aVMusicTrackSelSetUsesAutomatedParameters, usesAutomatedParameters)
 }
-

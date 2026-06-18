@@ -15,7 +15,7 @@ type VZUSBMassStorageDevice struct {
 }
 
 var (
-	_clsVZUSBMassStorageDevice = _objcClass("VZUSBMassStorageDevice")
+	_clsVZUSBMassStorageDevice                      = _objcClass("VZUSBMassStorageDevice")
 	_vZUSBMassStorageDeviceSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
 )
 
@@ -32,7 +32,8 @@ func VZUSBMassStorageDeviceFromID(id objc.ID) *VZUSBMassStorageDevice {
 // @abstract Initialize the runtime USB Mass Storage device object. @param configuration The configuration of the USB Mass Storage device. @see VZUSBMassStorageDeviceConfiguration
 func (o *VZUSBMassStorageDevice) InitWithConfiguration(configuration *VZUSBMassStorageDeviceConfiguration) *VZUSBMassStorageDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBMassStorageDeviceSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZUSBMassStorageDeviceFromID(_ret)
 }
-

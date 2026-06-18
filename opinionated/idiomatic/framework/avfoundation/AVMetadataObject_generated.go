@@ -98,4 +98,3 @@ type MetadataObjectable interface {
 }
 
 var _ MetadataObjectable = (*MetadataObject)(nil)
-

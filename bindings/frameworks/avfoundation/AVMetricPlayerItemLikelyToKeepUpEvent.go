@@ -16,9 +16,9 @@ type AVMetricPlayerItemLikelyToKeepUpEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemLikelyToKeepUpEvent = _objcClass("AVMetricPlayerItemLikelyToKeepUpEvent")
-	_aVMetricPlayerItemLikelyToKeepUpEventSelVariant = objc.RegisterName("variant")
-	_aVMetricPlayerItemLikelyToKeepUpEventSelTimeTaken = objc.RegisterName("timeTaken")
+	_clsAVMetricPlayerItemLikelyToKeepUpEvent                 = _objcClass("AVMetricPlayerItemLikelyToKeepUpEvent")
+	_aVMetricPlayerItemLikelyToKeepUpEventSelVariant          = objc.RegisterName("variant")
+	_aVMetricPlayerItemLikelyToKeepUpEventSelTimeTaken        = objc.RegisterName("timeTaken")
 	_aVMetricPlayerItemLikelyToKeepUpEventSelLoadedTimeRanges = objc.RegisterName("loadedTimeRanges")
 )
 
@@ -35,7 +35,9 @@ func AVMetricPlayerItemLikelyToKeepUpEventFromID(id objc.ID) *AVMetricPlayerItem
 // Returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
 func (o *AVMetricPlayerItemLikelyToKeepUpEvent) Variant() *AVAssetVariant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricPlayerItemLikelyToKeepUpEventSelVariant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetVariantFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *AVMetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() *foundation.N
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVMetricPlayerItemLikelyToKeepUpEventSelLoadedTimeRanges)
 	return _ret
 }
-

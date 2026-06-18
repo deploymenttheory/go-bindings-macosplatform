@@ -15,7 +15,9 @@ type MTRChannelClusterChannelPagingStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterChannelPagingStruct].
-func (x *MTRChannelClusterChannelPagingStruct) Unwrap() *raw.MTRChannelClusterChannelPagingStruct { return x.inner }
+func (x *MTRChannelClusterChannelPagingStruct) Unwrap() *raw.MTRChannelClusterChannelPagingStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -87,4 +89,3 @@ type MTRChannelClusterChannelPagingStructable interface {
 }
 
 var _ MTRChannelClusterChannelPagingStructable = (*MTRChannelClusterChannelPagingStruct)(nil)
-

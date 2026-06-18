@@ -12,7 +12,7 @@ type RPCameraPosition int64
 
 const (
 	RPCameraPositionFront RPCameraPosition = 1
-	RPCameraPositionBack RPCameraPosition = 2
+	RPCameraPositionBack  RPCameraPosition = 2
 )
 
 func (e RPCameraPosition) String() string {
@@ -29,7 +29,7 @@ func (e RPCameraPosition) String() string {
 type RPSampleBufferType int64
 
 const (
-	RPSampleBufferTypeVideo RPSampleBufferType = 1
+	RPSampleBufferTypeVideo    RPSampleBufferType = 1
 	RPSampleBufferTypeAudioApp RPSampleBufferType = 2
 	RPSampleBufferTypeAudioMic RPSampleBufferType = 3
 )
@@ -46,4 +46,3 @@ func (e RPSampleBufferType) String() string {
 		return fmt.Sprintf("RPSampleBufferType(%d)", int64(e))
 	}
 }
-

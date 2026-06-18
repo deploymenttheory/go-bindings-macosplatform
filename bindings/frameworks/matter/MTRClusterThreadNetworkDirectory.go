@@ -18,21 +18,21 @@ type MTRClusterThreadNetworkDirectory struct {
 }
 
 var (
-	_clsMTRClusterThreadNetworkDirectory = _objcClass("MTRClusterThreadNetworkDirectory")
-	_mTRClusterThreadNetworkDirectorySelAddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addNetworkWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadNetworkDirectorySelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterThreadNetworkDirectory                                                                             = _objcClass("MTRClusterThreadNetworkDirectory")
+	_mTRClusterThreadNetworkDirectorySelAddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion            = objc.RegisterName("addNetworkWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterThreadNetworkDirectorySelRemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion         = objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterThreadNetworkDirectorySelGetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getOperationalDatasetWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributePreferredExtendedPanIDWithParams = objc.RegisterName("readAttributePreferredExtendedPanIDWithParams:")
-	_mTRClusterThreadNetworkDirectorySelWriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval = objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:")
-	_mTRClusterThreadNetworkDirectorySelWriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeThreadNetworksWithParams = objc.RegisterName("readAttributeThreadNetworksWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeThreadNetworkTableSizeWithParams = objc.RegisterName("readAttributeThreadNetworkTableSizeWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterThreadNetworkDirectorySelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterThreadNetworkDirectorySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributePreferredExtendedPanIDWithParams                                = objc.RegisterName("readAttributePreferredExtendedPanIDWithParams:")
+	_mTRClusterThreadNetworkDirectorySelWriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval           = objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:")
+	_mTRClusterThreadNetworkDirectorySelWriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams     = objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeThreadNetworksWithParams                                        = objc.RegisterName("readAttributeThreadNetworksWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeThreadNetworkTableSizeWithParams                                = objc.RegisterName("readAttributeThreadNetworkTableSizeWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeGeneratedCommandListWithParams                                  = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeAcceptedCommandListWithParams                                   = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeAttributeListWithParams                                         = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeFeatureMapWithParams                                            = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterThreadNetworkDirectorySelReadAttributeClusterRevisionWithParams                                       = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterThreadNetworkDirectorySelInitWithDeviceEndpointIDQueue                                                = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRClusterThreadNetworkDirectory {
@@ -132,7 +132,8 @@ func (o *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParam
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterThreadNetworkDirectory) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadNetworkDirectory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterThreadNetworkDirectorySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterThreadNetworkDirectoryFromID(_ret)
 }
-

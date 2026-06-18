@@ -154,4 +154,3 @@ func KAXVisibleNameKey() uintptr {
 	ptr, _ := purego.Dlsym(_hiservicesLib, "kAXVisibleNameKey")
 	return ptr
 }
-

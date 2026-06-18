@@ -25,4 +25,3 @@ func MTROperationalCredentialsClusterFabricDescriptorFromID(id objc.ID) *MTROper
 	purego.Track(o)
 	return o
 }
-

@@ -17,13 +17,13 @@ type INLodgingReservation struct {
 }
 
 var (
-	_clsINLodgingReservation = _objcClass("INLodgingReservation")
+	_clsINLodgingReservation                                                                                                                                                                          = _objcClass("INLodgingReservation")
 	_iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:")
-	_iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:")
-	_iNLodgingReservationSelLodgingBusinessLocation = objc.RegisterName("lodgingBusinessLocation")
-	_iNLodgingReservationSelReservationDuration = objc.RegisterName("reservationDuration")
-	_iNLodgingReservationSelNumberOfAdults = objc.RegisterName("numberOfAdults")
-	_iNLodgingReservationSelNumberOfChildren = objc.RegisterName("numberOfChildren")
+	_iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren    = objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:")
+	_iNLodgingReservationSelLodgingBusinessLocation                                                                                                                                                   = objc.RegisterName("lodgingBusinessLocation")
+	_iNLodgingReservationSelReservationDuration                                                                                                                                                       = objc.RegisterName("reservationDuration")
+	_iNLodgingReservationSelNumberOfAdults                                                                                                                                                            = objc.RegisterName("numberOfAdults")
+	_iNLodgingReservationSelNumberOfChildren                                                                                                                                                          = objc.RegisterName("numberOfChildren")
 )
 
 func INLodgingReservationFromID(id objc.ID) *INLodgingReservation {
@@ -38,37 +38,48 @@ func INLodgingReservationFromID(id objc.ID) *INLodgingReservation {
 
 func (o *INLodgingReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *INLodgingReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INLodgingReservationFromID(_ret)
 }
 
 func (o *INLodgingReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *INLodgingReservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INLodgingReservationFromID(_ret)
 }
 
 func (o *INLodgingReservation) LodgingBusinessLocation() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelLodgingBusinessLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
 
 func (o *INLodgingReservation) ReservationDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelReservationDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INLodgingReservation) NumberOfAdults() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelNumberOfAdults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *INLodgingReservation) NumberOfChildren() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNLodgingReservationSelNumberOfChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

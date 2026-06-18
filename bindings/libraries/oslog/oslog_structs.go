@@ -8,4 +8,3 @@ package oslog
 // Introduced: macOS 10.13
 type Os_log_s struct {
 }
-

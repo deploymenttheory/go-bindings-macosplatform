@@ -16,7 +16,9 @@ type AssetReaderOutputCaptionAdaptor struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetReaderOutputCaptionAdaptor].
-func (x *AssetReaderOutputCaptionAdaptor) Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor { return x.inner }
+func (x *AssetReaderOutputCaptionAdaptor) Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -88,4 +90,3 @@ type AssetReaderOutputCaptionAdaptorable interface {
 }
 
 var _ AssetReaderOutputCaptionAdaptorable = (*AssetReaderOutputCaptionAdaptor)(nil)
-

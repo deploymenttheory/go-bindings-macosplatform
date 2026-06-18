@@ -83,4 +83,3 @@ type Subscriptionable interface {
 }
 
 var _ Subscriptionable = (*Subscription)(nil)
-

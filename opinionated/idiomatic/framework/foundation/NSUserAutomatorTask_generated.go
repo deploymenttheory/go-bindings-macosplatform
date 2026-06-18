@@ -63,7 +63,9 @@ func (x *UserAutomatorTask) SetVariables(variables *raw.NSDictionary[*raw.NSStri
 	x.inner.SetVariables(variables)
 }
 
-func (x *UserAutomatorTask) asUserScriptTask() *raw.NSUserScriptTask { return &x.inner.NSUserScriptTask }
+func (x *UserAutomatorTask) asUserScriptTask() *raw.NSUserScriptTask {
+	return &x.inner.NSUserScriptTask
+}
 
 func (x *UserAutomatorTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
 
@@ -78,4 +80,3 @@ type UserAutomatorTaskable interface {
 }
 
 var _ UserAutomatorTaskable = (*UserAutomatorTask)(nil)
-

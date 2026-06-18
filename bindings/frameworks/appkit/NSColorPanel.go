@@ -15,29 +15,29 @@ type NSColorPanel struct {
 }
 
 var (
-	_clsNSColorPanel = _objcClass("NSColorPanel")
+	_clsNSColorPanel                           = _objcClass("NSColorPanel")
 	_nSColorPanelSelDragColorWithEventFromView = objc.RegisterName("dragColor:withEvent:fromView:")
-	_nSColorPanelSelSetPickerMask = objc.RegisterName("setPickerMask:")
-	_nSColorPanelSelSetPickerMode = objc.RegisterName("setPickerMode:")
-	_nSColorPanelSelSetAction = objc.RegisterName("setAction:")
-	_nSColorPanelSelSetTarget = objc.RegisterName("setTarget:")
-	_nSColorPanelSelAttachColorList = objc.RegisterName("attachColorList:")
-	_nSColorPanelSelDetachColorList = objc.RegisterName("detachColorList:")
-	_nSColorPanelSelSharedColorPanel = objc.RegisterName("sharedColorPanel")
-	_nSColorPanelSelSharedColorPanelExists = objc.RegisterName("sharedColorPanelExists")
-	_nSColorPanelSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSColorPanelSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSColorPanelSelIsContinuous = objc.RegisterName("isContinuous")
-	_nSColorPanelSelSetContinuous = objc.RegisterName("setContinuous:")
-	_nSColorPanelSelShowsAlpha = objc.RegisterName("showsAlpha")
-	_nSColorPanelSelSetShowsAlpha = objc.RegisterName("setShowsAlpha:")
-	_nSColorPanelSelMode = objc.RegisterName("mode")
-	_nSColorPanelSelSetMode = objc.RegisterName("setMode:")
-	_nSColorPanelSelColor = objc.RegisterName("color")
-	_nSColorPanelSelSetColor = objc.RegisterName("setColor:")
-	_nSColorPanelSelAlpha = objc.RegisterName("alpha")
-	_nSColorPanelSelMaximumLinearExposure = objc.RegisterName("maximumLinearExposure")
-	_nSColorPanelSelSetMaximumLinearExposure = objc.RegisterName("setMaximumLinearExposure:")
+	_nSColorPanelSelSetPickerMask              = objc.RegisterName("setPickerMask:")
+	_nSColorPanelSelSetPickerMode              = objc.RegisterName("setPickerMode:")
+	_nSColorPanelSelSetAction                  = objc.RegisterName("setAction:")
+	_nSColorPanelSelSetTarget                  = objc.RegisterName("setTarget:")
+	_nSColorPanelSelAttachColorList            = objc.RegisterName("attachColorList:")
+	_nSColorPanelSelDetachColorList            = objc.RegisterName("detachColorList:")
+	_nSColorPanelSelSharedColorPanel           = objc.RegisterName("sharedColorPanel")
+	_nSColorPanelSelSharedColorPanelExists     = objc.RegisterName("sharedColorPanelExists")
+	_nSColorPanelSelAccessoryView              = objc.RegisterName("accessoryView")
+	_nSColorPanelSelSetAccessoryView           = objc.RegisterName("setAccessoryView:")
+	_nSColorPanelSelIsContinuous               = objc.RegisterName("isContinuous")
+	_nSColorPanelSelSetContinuous              = objc.RegisterName("setContinuous:")
+	_nSColorPanelSelShowsAlpha                 = objc.RegisterName("showsAlpha")
+	_nSColorPanelSelSetShowsAlpha              = objc.RegisterName("setShowsAlpha:")
+	_nSColorPanelSelMode                       = objc.RegisterName("mode")
+	_nSColorPanelSelSetMode                    = objc.RegisterName("setMode:")
+	_nSColorPanelSelColor                      = objc.RegisterName("color")
+	_nSColorPanelSelSetColor                   = objc.RegisterName("setColor:")
+	_nSColorPanelSelAlpha                      = objc.RegisterName("alpha")
+	_nSColorPanelSelMaximumLinearExposure      = objc.RegisterName("maximumLinearExposure")
+	_nSColorPanelSelSetMaximumLinearExposure   = objc.RegisterName("setMaximumLinearExposure:")
 )
 
 func NSColorPanelFromID(id objc.ID) *NSColorPanel {
@@ -81,7 +81,9 @@ func (o *NSColorPanel) DetachColorList(colorList *NSColorList) {
 
 func NSColorPanelSharedColorPanel() *NSColorPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPanel), _nSColorPanelSelSharedColorPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPanelFromID(_ret)
 }
 
@@ -92,7 +94,9 @@ func NSColorPanelSharedColorPanelExists() bool {
 
 func (o *NSColorPanel) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -129,7 +133,9 @@ func (o *NSColorPanel) SetMode(mode NSColorPanelMode) {
 
 func (o *NSColorPanel) Color() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPanelSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -152,4 +158,3 @@ func (o *NSColorPanel) MaximumLinearExposure() float64 {
 func (o *NSColorPanel) SetMaximumLinearExposure(maximumLinearExposure float64) {
 	o.Ptr().Send(_nSColorPanelSelSetMaximumLinearExposure, maximumLinearExposure)
 }
-

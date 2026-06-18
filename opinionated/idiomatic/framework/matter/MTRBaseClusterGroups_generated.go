@@ -633,9 +633,13 @@ func (x *MTRBaseClusterGroups) SubscribeAttributeClusterRevisionWithMinIntervalM
 	}
 }
 
-func (x *MTRBaseClusterGroups) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterGroups) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterGroups) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterGroups) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterGroupsable is the interface implemented by [MTRBaseClusterGroups], for mocking and DI.
 type MTRBaseClusterGroupsable interface {
@@ -681,4 +685,3 @@ type MTRBaseClusterGroupsable interface {
 }
 
 var _ MTRBaseClusterGroupsable = (*MTRBaseClusterGroups)(nil)
-

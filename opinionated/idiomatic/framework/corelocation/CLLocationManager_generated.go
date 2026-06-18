@@ -420,4 +420,3 @@ type LocationManagerable interface {
 }
 
 var _ LocationManagerable = (*LocationManager)(nil)
-

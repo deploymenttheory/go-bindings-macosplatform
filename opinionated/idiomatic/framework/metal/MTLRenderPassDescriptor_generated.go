@@ -347,4 +347,3 @@ type RenderPassDescriptorable interface {
 }
 
 var _ RenderPassDescriptorable = (*RenderPassDescriptor)(nil)
-

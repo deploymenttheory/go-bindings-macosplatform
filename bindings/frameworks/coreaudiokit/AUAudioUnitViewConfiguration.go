@@ -16,11 +16,11 @@ type AUAudioUnitViewConfiguration struct {
 }
 
 var (
-	_clsAUAudioUnitViewConfiguration = _objcClass("AUAudioUnitViewConfiguration")
+	_clsAUAudioUnitViewConfiguration                                     = _objcClass("AUAudioUnitViewConfiguration")
 	_aUAudioUnitViewConfigurationSelInitWithWidthHeightHostHasController = objc.RegisterName("initWithWidth:height:hostHasController:")
-	_aUAudioUnitViewConfigurationSelWidth = objc.RegisterName("width")
-	_aUAudioUnitViewConfigurationSelHeight = objc.RegisterName("height")
-	_aUAudioUnitViewConfigurationSelHostHasController = objc.RegisterName("hostHasController")
+	_aUAudioUnitViewConfigurationSelWidth                                = objc.RegisterName("width")
+	_aUAudioUnitViewConfigurationSelHeight                               = objc.RegisterName("height")
+	_aUAudioUnitViewConfigurationSelHostHasController                    = objc.RegisterName("hostHasController")
 )
 
 func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguration {
@@ -36,7 +36,9 @@ func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguratio
 // @method		initWithWidth @brief		Designated initializer. @param		width The width associated with this view configuration. @param		height The height associated with this view configuration. @param		hostHasController This property controls whether the host shows its own control surface in this view configuration. @return		Returns the newly created view configuration object.
 func (o *AUAudioUnitViewConfiguration) InitWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aUAudioUnitViewConfigurationSelInitWithWidthHeightHostHasController, width, height, hostHasController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AUAudioUnitViewConfigurationFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *AUAudioUnitViewConfiguration) HostHasController() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aUAudioUnitViewConfigurationSelHostHasController)
 	return _ret
 }
-

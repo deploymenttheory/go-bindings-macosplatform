@@ -285,4 +285,3 @@ type Matchmakerable interface {
 }
 
 var _ Matchmakerable = (*Matchmaker)(nil)
-

@@ -17,36 +17,36 @@ type NSXPCConnection struct {
 }
 
 var (
-	_clsNSXPCConnection = _objcClass("NSXPCConnection")
-	_nSXPCConnectionSelInitWithServiceName = objc.RegisterName("initWithServiceName:")
-	_nSXPCConnectionSelInitWithMachServiceNameOptions = objc.RegisterName("initWithMachServiceName:options:")
-	_nSXPCConnectionSelInitWithListenerEndpoint = objc.RegisterName("initWithListenerEndpoint:")
-	_nSXPCConnectionSelRemoteObjectProxyWithErrorHandler = objc.RegisterName("remoteObjectProxyWithErrorHandler:")
+	_clsNSXPCConnection                                             = _objcClass("NSXPCConnection")
+	_nSXPCConnectionSelInitWithServiceName                          = objc.RegisterName("initWithServiceName:")
+	_nSXPCConnectionSelInitWithMachServiceNameOptions               = objc.RegisterName("initWithMachServiceName:options:")
+	_nSXPCConnectionSelInitWithListenerEndpoint                     = objc.RegisterName("initWithListenerEndpoint:")
+	_nSXPCConnectionSelRemoteObjectProxyWithErrorHandler            = objc.RegisterName("remoteObjectProxyWithErrorHandler:")
 	_nSXPCConnectionSelSynchronousRemoteObjectProxyWithErrorHandler = objc.RegisterName("synchronousRemoteObjectProxyWithErrorHandler:")
-	_nSXPCConnectionSelResume = objc.RegisterName("resume")
-	_nSXPCConnectionSelSuspend = objc.RegisterName("suspend")
-	_nSXPCConnectionSelActivate = objc.RegisterName("activate")
-	_nSXPCConnectionSelInvalidate = objc.RegisterName("invalidate")
-	_nSXPCConnectionSelCurrentConnection = objc.RegisterName("currentConnection")
-	_nSXPCConnectionSelScheduleSendBarrierBlock = objc.RegisterName("scheduleSendBarrierBlock:")
-	_nSXPCConnectionSelSetCodeSigningRequirement = objc.RegisterName("setCodeSigningRequirement:")
-	_nSXPCConnectionSelServiceName = objc.RegisterName("serviceName")
-	_nSXPCConnectionSelEndpoint = objc.RegisterName("endpoint")
-	_nSXPCConnectionSelExportedInterface = objc.RegisterName("exportedInterface")
-	_nSXPCConnectionSelSetExportedInterface = objc.RegisterName("setExportedInterface:")
-	_nSXPCConnectionSelExportedObject = objc.RegisterName("exportedObject")
-	_nSXPCConnectionSelSetExportedObject = objc.RegisterName("setExportedObject:")
-	_nSXPCConnectionSelRemoteObjectInterface = objc.RegisterName("remoteObjectInterface")
-	_nSXPCConnectionSelSetRemoteObjectInterface = objc.RegisterName("setRemoteObjectInterface:")
-	_nSXPCConnectionSelRemoteObjectProxy = objc.RegisterName("remoteObjectProxy")
-	_nSXPCConnectionSelInterruptionHandler = objc.RegisterName("interruptionHandler")
-	_nSXPCConnectionSelSetInterruptionHandler = objc.RegisterName("setInterruptionHandler:")
-	_nSXPCConnectionSelInvalidationHandler = objc.RegisterName("invalidationHandler")
-	_nSXPCConnectionSelSetInvalidationHandler = objc.RegisterName("setInvalidationHandler:")
-	_nSXPCConnectionSelAuditSessionIdentifier = objc.RegisterName("auditSessionIdentifier")
-	_nSXPCConnectionSelProcessIdentifier = objc.RegisterName("processIdentifier")
-	_nSXPCConnectionSelEffectiveUserIdentifier = objc.RegisterName("effectiveUserIdentifier")
-	_nSXPCConnectionSelEffectiveGroupIdentifier = objc.RegisterName("effectiveGroupIdentifier")
+	_nSXPCConnectionSelResume                                       = objc.RegisterName("resume")
+	_nSXPCConnectionSelSuspend                                      = objc.RegisterName("suspend")
+	_nSXPCConnectionSelActivate                                     = objc.RegisterName("activate")
+	_nSXPCConnectionSelInvalidate                                   = objc.RegisterName("invalidate")
+	_nSXPCConnectionSelCurrentConnection                            = objc.RegisterName("currentConnection")
+	_nSXPCConnectionSelScheduleSendBarrierBlock                     = objc.RegisterName("scheduleSendBarrierBlock:")
+	_nSXPCConnectionSelSetCodeSigningRequirement                    = objc.RegisterName("setCodeSigningRequirement:")
+	_nSXPCConnectionSelServiceName                                  = objc.RegisterName("serviceName")
+	_nSXPCConnectionSelEndpoint                                     = objc.RegisterName("endpoint")
+	_nSXPCConnectionSelExportedInterface                            = objc.RegisterName("exportedInterface")
+	_nSXPCConnectionSelSetExportedInterface                         = objc.RegisterName("setExportedInterface:")
+	_nSXPCConnectionSelExportedObject                               = objc.RegisterName("exportedObject")
+	_nSXPCConnectionSelSetExportedObject                            = objc.RegisterName("setExportedObject:")
+	_nSXPCConnectionSelRemoteObjectInterface                        = objc.RegisterName("remoteObjectInterface")
+	_nSXPCConnectionSelSetRemoteObjectInterface                     = objc.RegisterName("setRemoteObjectInterface:")
+	_nSXPCConnectionSelRemoteObjectProxy                            = objc.RegisterName("remoteObjectProxy")
+	_nSXPCConnectionSelInterruptionHandler                          = objc.RegisterName("interruptionHandler")
+	_nSXPCConnectionSelSetInterruptionHandler                       = objc.RegisterName("setInterruptionHandler:")
+	_nSXPCConnectionSelInvalidationHandler                          = objc.RegisterName("invalidationHandler")
+	_nSXPCConnectionSelSetInvalidationHandler                       = objc.RegisterName("setInvalidationHandler:")
+	_nSXPCConnectionSelAuditSessionIdentifier                       = objc.RegisterName("auditSessionIdentifier")
+	_nSXPCConnectionSelProcessIdentifier                            = objc.RegisterName("processIdentifier")
+	_nSXPCConnectionSelEffectiveUserIdentifier                      = objc.RegisterName("effectiveUserIdentifier")
+	_nSXPCConnectionSelEffectiveGroupIdentifier                     = objc.RegisterName("effectiveGroupIdentifier")
 )
 
 func NSXPCConnectionFromID(id objc.ID) *NSXPCConnection {
@@ -61,19 +61,25 @@ func NSXPCConnectionFromID(id objc.ID) *NSXPCConnection {
 
 func (o *NSXPCConnection) InitWithServiceName(serviceName *NSString) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithServiceName, serviceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCConnectionFromID(_ret)
 }
 
 func (o *NSXPCConnection) InitWithMachServiceNameOptions(name *NSString, options NSXPCConnectionOptions) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithMachServiceNameOptions, name.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCConnectionFromID(_ret)
 }
 
 func (o *NSXPCConnection) InitWithListenerEndpoint(endpoint *NSXPCListenerEndpoint) *NSXPCConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelInitWithListenerEndpoint, endpoint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCConnectionFromID(_ret)
 }
 
@@ -119,7 +125,9 @@ func (o *NSXPCConnection) Invalidate() {
 
 func NSXPCConnectionCurrentConnection() *NSXPCConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSXPCConnection), _nSXPCConnectionSelCurrentConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCConnectionFromID(_ret)
 }
 
@@ -141,19 +149,25 @@ func (o *NSXPCConnection) SetCodeSigningRequirement(requirement *NSString) {
 
 func (o *NSXPCConnection) ServiceName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelServiceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSXPCConnection) Endpoint() *NSXPCListenerEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCListenerEndpointFromID(_ret)
 }
 
 func (o *NSXPCConnection) ExportedInterface() *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelExportedInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCInterfaceFromID(_ret)
 }
 
@@ -172,7 +186,9 @@ func (o *NSXPCConnection) SetExportedObject(exportedObject objc.ID) {
 
 func (o *NSXPCConnection) RemoteObjectInterface() *NSXPCInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXPCConnectionSelRemoteObjectInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXPCInterfaceFromID(_ret)
 }
 
@@ -236,4 +252,3 @@ func (o *NSXPCConnection) EffectiveGroupIdentifier() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSXPCConnectionSelEffectiveGroupIdentifier)
 	return _ret
 }
-

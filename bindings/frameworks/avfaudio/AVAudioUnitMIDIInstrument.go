@@ -17,20 +17,20 @@ type AVAudioUnitMIDIInstrument struct {
 }
 
 var (
-	_clsAVAudioUnitMIDIInstrument = _objcClass("AVAudioUnitMIDIInstrument")
-	_aVAudioUnitMIDIInstrumentSelInitWithAudioComponentDescription = objc.RegisterName("initWithAudioComponentDescription:")
-	_aVAudioUnitMIDIInstrumentSelStartNoteWithVelocityOnChannel = objc.RegisterName("startNote:withVelocity:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelStopNoteOnChannel = objc.RegisterName("stopNote:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendControllerWithValueOnChannel = objc.RegisterName("sendController:withValue:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendPitchBendOnChannel = objc.RegisterName("sendPitchBend:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendPressureOnChannel = objc.RegisterName("sendPressure:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendPressureForKeyWithValueOnChannel = objc.RegisterName("sendPressureForKey:withValue:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendProgramChangeOnChannel = objc.RegisterName("sendProgramChange:onChannel:")
+	_clsAVAudioUnitMIDIInstrument                                         = _objcClass("AVAudioUnitMIDIInstrument")
+	_aVAudioUnitMIDIInstrumentSelInitWithAudioComponentDescription        = objc.RegisterName("initWithAudioComponentDescription:")
+	_aVAudioUnitMIDIInstrumentSelStartNoteWithVelocityOnChannel           = objc.RegisterName("startNote:withVelocity:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelStopNoteOnChannel                        = objc.RegisterName("stopNote:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelSendControllerWithValueOnChannel         = objc.RegisterName("sendController:withValue:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelSendPitchBendOnChannel                   = objc.RegisterName("sendPitchBend:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelSendPressureOnChannel                    = objc.RegisterName("sendPressure:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelSendPressureForKeyWithValueOnChannel     = objc.RegisterName("sendPressureForKey:withValue:onChannel:")
+	_aVAudioUnitMIDIInstrumentSelSendProgramChangeOnChannel               = objc.RegisterName("sendProgramChange:onChannel:")
 	_aVAudioUnitMIDIInstrumentSelSendProgramChangeBankMSBBankLSBOnChannel = objc.RegisterName("sendProgramChange:bankMSB:bankLSB:onChannel:")
-	_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1Data2 = objc.RegisterName("sendMIDIEvent:data1:data2:")
-	_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1 = objc.RegisterName("sendMIDIEvent:data1:")
-	_aVAudioUnitMIDIInstrumentSelSendMIDISysExEvent = objc.RegisterName("sendMIDISysExEvent:")
-	_aVAudioUnitMIDIInstrumentSelSendMIDIEventList = objc.RegisterName("sendMIDIEventList:")
+	_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1Data2                  = objc.RegisterName("sendMIDIEvent:data1:data2:")
+	_aVAudioUnitMIDIInstrumentSelSendMIDIEventData1                       = objc.RegisterName("sendMIDIEvent:data1:")
+	_aVAudioUnitMIDIInstrumentSelSendMIDISysExEvent                       = objc.RegisterName("sendMIDISysExEvent:")
+	_aVAudioUnitMIDIInstrumentSelSendMIDIEventList                        = objc.RegisterName("sendMIDIEventList:")
 )
 
 func AVAudioUnitMIDIInstrumentFromID(id objc.ID) *AVAudioUnitMIDIInstrument {
@@ -43,10 +43,12 @@ func AVAudioUnitMIDIInstrumentFromID(id objc.ID) *AVAudioUnitMIDIInstrument {
 	return o
 }
 
-// Initialize the node with the component description for an AUv2 Audio Unit. - Parameter description: audio component description structure that describes the audio component of type kAudioUnitType_MusicDevice or kAudioUnitType_RemoteInstrument. - note: To load AUv3 audio units (or any audio unit asynchronously), use the class method ``AVAudioUnit/instantiateWithComponentDescription:options:completionHandler:`` instead.
+// Initialize the node with the component description for an AUv2 Audio Unit. - Parameter description: audio component description structure that describes the audio component of type kAudioUnitType_MusicDevice or kAudioUnitType_RemoteInstrument. - note: To load AUv3 audio units (or any audio unit asynchronously), use the class method “AVAudioUnit/instantiateWithComponentDescription:options:completionHandler:“ instead.
 func (o *AVAudioUnitMIDIInstrument) InitWithAudioComponentDescription(description objc.ID) *AVAudioUnitMIDIInstrument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitMIDIInstrumentSelInitWithAudioComponentDescription, description)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitMIDIInstrumentFromID(_ret)
 }
 
@@ -109,4 +111,3 @@ func (o *AVAudioUnitMIDIInstrument) SendMIDISysExEvent(midiData *foundation.NSDa
 func (o *AVAudioUnitMIDIInstrument) SendMIDIEventList(eventList *coremidi.MIDIEventList) {
 	o.Ptr().Send(_aVAudioUnitMIDIInstrumentSelSendMIDIEventList, eventList)
 }
-

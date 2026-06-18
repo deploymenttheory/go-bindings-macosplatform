@@ -7,4 +7,3 @@ package dictionaryservices
 // C struct: __DCSDictionary
 // DCSDictionary is an opaque type.
 type DCSDictionary struct{}
-

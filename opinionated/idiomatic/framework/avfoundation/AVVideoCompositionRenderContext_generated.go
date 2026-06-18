@@ -95,4 +95,3 @@ type VideoCompositionRenderContextable interface {
 }
 
 var _ VideoCompositionRenderContextable = (*VideoCompositionRenderContext)(nil)
-

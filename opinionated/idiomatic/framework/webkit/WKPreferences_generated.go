@@ -269,4 +269,3 @@ type WKPreferencesable interface {
 }
 
 var _ WKPreferencesable = (*WKPreferences)(nil)
-

@@ -20,15 +20,15 @@ type IOUSBHostCIDeviceStateMachine struct {
 }
 
 var (
-	_clsIOUSBHostCIDeviceStateMachine = _objcClass("IOUSBHostCIDeviceStateMachine")
-	_iOUSBHostCIDeviceStateMachineSelInitWithInterfaceCommandError = objc.RegisterName("initWithInterface:command:error:")
-	_iOUSBHostCIDeviceStateMachineSelInspectCommandError = objc.RegisterName("inspectCommand:error:")
-	_iOUSBHostCIDeviceStateMachineSelRespondToCommandStatusError = objc.RegisterName("respondToCommand:status:error:")
+	_clsIOUSBHostCIDeviceStateMachine                                         = _objcClass("IOUSBHostCIDeviceStateMachine")
+	_iOUSBHostCIDeviceStateMachineSelInitWithInterfaceCommandError            = objc.RegisterName("initWithInterface:command:error:")
+	_iOUSBHostCIDeviceStateMachineSelInspectCommandError                      = objc.RegisterName("inspectCommand:error:")
+	_iOUSBHostCIDeviceStateMachineSelRespondToCommandStatusError              = objc.RegisterName("respondToCommand:status:error:")
 	_iOUSBHostCIDeviceStateMachineSelRespondToCommandStatusDeviceAddressError = objc.RegisterName("respondToCommand:status:deviceAddress:error:")
-	_iOUSBHostCIDeviceStateMachineSelDeviceState = objc.RegisterName("deviceState")
-	_iOUSBHostCIDeviceStateMachineSelCompleteRoute = objc.RegisterName("completeRoute")
-	_iOUSBHostCIDeviceStateMachineSelDeviceAddress = objc.RegisterName("deviceAddress")
-	_iOUSBHostCIDeviceStateMachineSelControllerInterface = objc.RegisterName("controllerInterface")
+	_iOUSBHostCIDeviceStateMachineSelDeviceState                              = objc.RegisterName("deviceState")
+	_iOUSBHostCIDeviceStateMachineSelCompleteRoute                            = objc.RegisterName("completeRoute")
+	_iOUSBHostCIDeviceStateMachineSelDeviceAddress                            = objc.RegisterName("deviceAddress")
+	_iOUSBHostCIDeviceStateMachineSelControllerInterface                      = objc.RegisterName("controllerInterface")
 )
 
 func IOUSBHostCIDeviceStateMachineFromID(id objc.ID) *IOUSBHostCIDeviceStateMachine {
@@ -45,7 +45,9 @@ func IOUSBHostCIDeviceStateMachineFromID(id objc.ID) *IOUSBHostCIDeviceStateMach
 func (o *IOUSBHostCIDeviceStateMachine) InitWithInterfaceCommandError(interface_ *IOUSBHostControllerInterface, command *IOUSBHostCIMessage) (*IOUSBHostCIDeviceStateMachine, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelInitWithInterfaceCommandError, interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,7 +100,8 @@ func (o *IOUSBHostCIDeviceStateMachine) DeviceAddress() uint {
 
 func (o *IOUSBHostCIDeviceStateMachine) ControllerInterface() *IOUSBHostControllerInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostCIDeviceStateMachineSelControllerInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostControllerInterfaceFromID(_ret)
 }
-

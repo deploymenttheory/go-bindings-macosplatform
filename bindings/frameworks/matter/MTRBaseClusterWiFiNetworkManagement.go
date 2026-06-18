@@ -18,31 +18,31 @@ type MTRBaseClusterWiFiNetworkManagement struct {
 }
 
 var (
-	_clsMTRBaseClusterWiFiNetworkManagement = _objcClass("MTRBaseClusterWiFiNetworkManagement")
-	_mTRBaseClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithParamsCompletion = objc.RegisterName("networkPassphraseRequestWithParams:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithCompletion = objc.RegisterName("networkPassphraseRequestWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeSSIDWithCompletion = objc.RegisterName("readAttributeSSIDWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSSIDWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeSSIDWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSSIDWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithCompletion = objc.RegisterName("readAttributePassphraseSurrogateWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributePassphraseSurrogateWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributePassphraseSurrogateWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterWiFiNetworkManagement                                                                                     = _objcClass("MTRBaseClusterWiFiNetworkManagement")
+	_mTRBaseClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithParamsCompletion                                         = objc.RegisterName("networkPassphraseRequestWithParams:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelNetworkPassphraseRequestWithCompletion                                               = objc.RegisterName("networkPassphraseRequestWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeSSIDWithCompletion                                                      = objc.RegisterName("readAttributeSSIDWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeSSIDWithParamsSubscriptionEstablishedReportHandler                 = objc.RegisterName("subscribeAttributeSSIDWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeSSIDWithClusterStateCacheEndpointQueueCompletion                        = objc.RegisterName("readAttributeSSIDWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithCompletion                                       = objc.RegisterName("readAttributePassphraseSurrogateWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributePassphraseSurrogateWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributePassphraseSurrogateWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributePassphraseSurrogateWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributePassphraseSurrogateWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterWiFiNetworkManagementSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterWiFiNetworkManagementSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterWiFiNetworkManagementFromID(id objc.ID) *MTRBaseClusterWiFiNetworkManagement {
@@ -340,7 +340,8 @@ func MTRBaseClusterWiFiNetworkManagementReadAttributeClusterRevisionWithClusterS
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterWiFiNetworkManagement) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWiFiNetworkManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterWiFiNetworkManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterWiFiNetworkManagementFromID(_ret)
 }
-

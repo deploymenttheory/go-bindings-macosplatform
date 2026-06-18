@@ -18,14 +18,14 @@ type NETunnelProvider struct {
 }
 
 var (
-	_clsNETunnelProvider = _objcClass("NETunnelProvider")
-	_nETunnelProviderSelHandleAppMessageCompletionHandler = objc.RegisterName("handleAppMessage:completionHandler:")
+	_clsNETunnelProvider                                          = _objcClass("NETunnelProvider")
+	_nETunnelProviderSelHandleAppMessageCompletionHandler         = objc.RegisterName("handleAppMessage:completionHandler:")
 	_nETunnelProviderSelSetTunnelNetworkSettingsCompletionHandler = objc.RegisterName("setTunnelNetworkSettings:completionHandler:")
-	_nETunnelProviderSelProtocolConfiguration = objc.RegisterName("protocolConfiguration")
-	_nETunnelProviderSelAppRules = objc.RegisterName("appRules")
-	_nETunnelProviderSelRoutingMethod = objc.RegisterName("routingMethod")
-	_nETunnelProviderSelReasserting = objc.RegisterName("reasserting")
-	_nETunnelProviderSelSetReasserting = objc.RegisterName("setReasserting:")
+	_nETunnelProviderSelProtocolConfiguration                     = objc.RegisterName("protocolConfiguration")
+	_nETunnelProviderSelAppRules                                  = objc.RegisterName("appRules")
+	_nETunnelProviderSelRoutingMethod                             = objc.RegisterName("routingMethod")
+	_nETunnelProviderSelReasserting                               = objc.RegisterName("reasserting")
+	_nETunnelProviderSelSetReasserting                            = objc.RegisterName("setReasserting:")
 )
 
 func NETunnelProviderFromID(id objc.ID) *NETunnelProvider {
@@ -68,14 +68,18 @@ func (o *NETunnelProvider) SetTunnelNetworkSettingsCompletionHandler(tunnelNetwo
 // @property protocolConfiguration @discussion An NEVPNProtocol object containing the provider's current configuration. The value of this property may change during the lifetime of the tunnel provided by this NETunnelProvider, KVO can be used to detect when changes occur.  For different protocol types, this property will contain the corresponding subclass.   For NEVPNProtocolTypePlugin protocol type, this property will contain the NETunnelProviderProtocol subclass.  For NEVPNProtocolTypeIKEv2 protocol type, this property will contain the NEVPNProtocolIKEv2 subclass.
 func (o *NETunnelProvider) ProtocolConfiguration() *NEVPNProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderSelProtocolConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNProtocolFromID(_ret)
 }
 
 // @property appRules @discussion An array of NEAppRule objects specifying which applications are currently being routed through the tunnel provided by this NETunnelProvider. If application-based routing is not enabled for the tunnel, then this property is set to nil.
 func (o *NETunnelProvider) AppRules() *foundation.NSArray[*NEAppRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderSelAppRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEAppRule](_ret)
 }
 
@@ -94,4 +98,3 @@ func (o *NETunnelProvider) Reasserting() bool {
 func (o *NETunnelProvider) SetReasserting(reasserting bool) {
 	o.Ptr().Send(_nETunnelProviderSelSetReasserting, reasserting)
 }
-

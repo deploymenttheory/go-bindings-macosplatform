@@ -18,7 +18,7 @@ type GKQuadtreeNode struct {
 }
 
 var (
-	_clsGKQuadtreeNode = _objcClass("GKQuadtreeNode")
+	_clsGKQuadtreeNode     = _objcClass("GKQuadtreeNode")
 	_gKQuadtreeNodeSelQuad = objc.RegisterName("quad")
 )
 
@@ -36,4 +36,3 @@ func (o *GKQuadtreeNode) Quad() GKQuad {
 	_ret := objc.Send[GKQuad](o.Ptr(), _gKQuadtreeNodeSelQuad)
 	return _ret
 }
-

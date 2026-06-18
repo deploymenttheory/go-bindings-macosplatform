@@ -25,4 +25,3 @@ func DOMCDATASectionFromID(id objc.ID) *DOMCDATASection {
 	purego.Track(o)
 	return o
 }
-

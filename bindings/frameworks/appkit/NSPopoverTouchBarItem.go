@@ -16,23 +16,23 @@ type NSPopoverTouchBarItem struct {
 }
 
 var (
-	_clsNSPopoverTouchBarItem = _objcClass("NSPopoverTouchBarItem")
-	_nSPopoverTouchBarItemSelShowPopover = objc.RegisterName("showPopover:")
-	_nSPopoverTouchBarItemSelDismissPopover = objc.RegisterName("dismissPopover:")
+	_clsNSPopoverTouchBarItem                                             = _objcClass("NSPopoverTouchBarItem")
+	_nSPopoverTouchBarItemSelShowPopover                                  = objc.RegisterName("showPopover:")
+	_nSPopoverTouchBarItemSelDismissPopover                               = objc.RegisterName("dismissPopover:")
 	_nSPopoverTouchBarItemSelMakeStandardActivatePopoverGestureRecognizer = objc.RegisterName("makeStandardActivatePopoverGestureRecognizer")
-	_nSPopoverTouchBarItemSelPopoverTouchBar = objc.RegisterName("popoverTouchBar")
-	_nSPopoverTouchBarItemSelSetPopoverTouchBar = objc.RegisterName("setPopoverTouchBar:")
-	_nSPopoverTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
-	_nSPopoverTouchBarItemSelCollapsedRepresentation = objc.RegisterName("collapsedRepresentation")
-	_nSPopoverTouchBarItemSelSetCollapsedRepresentation = objc.RegisterName("setCollapsedRepresentation:")
-	_nSPopoverTouchBarItemSelCollapsedRepresentationImage = objc.RegisterName("collapsedRepresentationImage")
-	_nSPopoverTouchBarItemSelSetCollapsedRepresentationImage = objc.RegisterName("setCollapsedRepresentationImage:")
-	_nSPopoverTouchBarItemSelCollapsedRepresentationLabel = objc.RegisterName("collapsedRepresentationLabel")
-	_nSPopoverTouchBarItemSelSetCollapsedRepresentationLabel = objc.RegisterName("setCollapsedRepresentationLabel:")
-	_nSPopoverTouchBarItemSelPressAndHoldTouchBar = objc.RegisterName("pressAndHoldTouchBar")
-	_nSPopoverTouchBarItemSelSetPressAndHoldTouchBar = objc.RegisterName("setPressAndHoldTouchBar:")
-	_nSPopoverTouchBarItemSelShowsCloseButton = objc.RegisterName("showsCloseButton")
-	_nSPopoverTouchBarItemSelSetShowsCloseButton = objc.RegisterName("setShowsCloseButton:")
+	_nSPopoverTouchBarItemSelPopoverTouchBar                              = objc.RegisterName("popoverTouchBar")
+	_nSPopoverTouchBarItemSelSetPopoverTouchBar                           = objc.RegisterName("setPopoverTouchBar:")
+	_nSPopoverTouchBarItemSelSetCustomizationLabel                        = objc.RegisterName("setCustomizationLabel:")
+	_nSPopoverTouchBarItemSelCollapsedRepresentation                      = objc.RegisterName("collapsedRepresentation")
+	_nSPopoverTouchBarItemSelSetCollapsedRepresentation                   = objc.RegisterName("setCollapsedRepresentation:")
+	_nSPopoverTouchBarItemSelCollapsedRepresentationImage                 = objc.RegisterName("collapsedRepresentationImage")
+	_nSPopoverTouchBarItemSelSetCollapsedRepresentationImage              = objc.RegisterName("setCollapsedRepresentationImage:")
+	_nSPopoverTouchBarItemSelCollapsedRepresentationLabel                 = objc.RegisterName("collapsedRepresentationLabel")
+	_nSPopoverTouchBarItemSelSetCollapsedRepresentationLabel              = objc.RegisterName("setCollapsedRepresentationLabel:")
+	_nSPopoverTouchBarItemSelPressAndHoldTouchBar                         = objc.RegisterName("pressAndHoldTouchBar")
+	_nSPopoverTouchBarItemSelSetPressAndHoldTouchBar                      = objc.RegisterName("setPressAndHoldTouchBar:")
+	_nSPopoverTouchBarItemSelShowsCloseButton                             = objc.RegisterName("showsCloseButton")
+	_nSPopoverTouchBarItemSelSetShowsCloseButton                          = objc.RegisterName("setShowsCloseButton:")
 )
 
 func NSPopoverTouchBarItemFromID(id objc.ID) *NSPopoverTouchBarItem {
@@ -55,13 +55,17 @@ func (o *NSPopoverTouchBarItem) DismissPopover(sender objc.ID) {
 
 func (o *NSPopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *NSGestureRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelMakeStandardActivatePopoverGestureRecognizer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGestureRecognizerFromID(_ret)
 }
 
 func (o *NSPopoverTouchBarItem) PopoverTouchBar() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPopoverTouchBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *NSPopoverTouchBarItem) SetCustomizationLabel(customizationLabel *founda
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentation() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -85,7 +91,9 @@ func (o *NSPopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentati
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentationImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func (o *NSPopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedReprese
 
 func (o *NSPopoverTouchBarItem) CollapsedRepresentationLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelCollapsedRepresentationLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +115,9 @@ func (o *NSPopoverTouchBarItem) SetCollapsedRepresentationLabel(collapsedReprese
 
 func (o *NSPopoverTouchBarItem) PressAndHoldTouchBar() *NSTouchBar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopoverTouchBarItemSelPressAndHoldTouchBar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTouchBarFromID(_ret)
 }
 
@@ -121,4 +133,3 @@ func (o *NSPopoverTouchBarItem) ShowsCloseButton() bool {
 func (o *NSPopoverTouchBarItem) SetShowsCloseButton(showsCloseButton bool) {
 	o.Ptr().Send(_nSPopoverTouchBarItemSelSetShowsCloseButton, showsCloseButton)
 }
-

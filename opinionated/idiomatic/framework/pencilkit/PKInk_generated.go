@@ -67,4 +67,3 @@ type Inkable interface {
 }
 
 var _ Inkable = (*Ink)(nil)
-

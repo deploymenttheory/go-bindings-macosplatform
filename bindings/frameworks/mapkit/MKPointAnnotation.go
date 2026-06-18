@@ -18,12 +18,12 @@ type MKPointAnnotation struct {
 }
 
 var (
-	_clsMKPointAnnotation = _objcClass("MKPointAnnotation")
-	_mKPointAnnotationSelInit = objc.RegisterName("init")
-	_mKPointAnnotationSelInitWithCoordinate = objc.RegisterName("initWithCoordinate:")
+	_clsMKPointAnnotation                                = _objcClass("MKPointAnnotation")
+	_mKPointAnnotationSelInit                            = objc.RegisterName("init")
+	_mKPointAnnotationSelInitWithCoordinate              = objc.RegisterName("initWithCoordinate:")
 	_mKPointAnnotationSelInitWithCoordinateTitleSubtitle = objc.RegisterName("initWithCoordinate:title:subtitle:")
-	_mKPointAnnotationSelCoordinate = objc.RegisterName("coordinate")
-	_mKPointAnnotationSelSetCoordinate = objc.RegisterName("setCoordinate:")
+	_mKPointAnnotationSelCoordinate                      = objc.RegisterName("coordinate")
+	_mKPointAnnotationSelSetCoordinate                   = objc.RegisterName("setCoordinate:")
 )
 
 func MKPointAnnotationFromID(id objc.ID) *MKPointAnnotation {
@@ -38,19 +38,25 @@ func MKPointAnnotationFromID(id objc.ID) *MKPointAnnotation {
 
 func (o *MKPointAnnotation) Init() *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointAnnotationFromID(_ret)
 }
 
 func (o *MKPointAnnotation) InitWithCoordinate(coordinate unsafe.Pointer) *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInitWithCoordinate, coordinate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointAnnotationFromID(_ret)
 }
 
 func (o *MKPointAnnotation) InitWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, title *foundation.NSString, subtitle *foundation.NSString) *MKPointAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPointAnnotationSelInitWithCoordinateTitleSubtitle, coordinate, title.Ptr(), subtitle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointAnnotationFromID(_ret)
 }
 
@@ -62,4 +68,3 @@ func (o *MKPointAnnotation) Coordinate() unsafe.Pointer {
 func (o *MKPointAnnotation) SetCoordinate(coordinate unsafe.Pointer) {
 	o.Ptr().Send(_mKPointAnnotationSelSetCoordinate, coordinate)
 }
-

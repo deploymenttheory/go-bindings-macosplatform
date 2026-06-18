@@ -45,7 +45,9 @@ func (x *UnitElectricResistance) asDimension() *raw.NSDimension { return &x.inne
 
 func (x *UnitElectricResistance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
-func (x *UnitElectricResistance) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+func (x *UnitElectricResistance) asObject() *raw.NSObject {
+	return &x.inner.NSDimension.NSUnit.NSObject
+}
 
 // UnitElectricResistanceable is the interface implemented by [UnitElectricResistance], for mocking and DI.
 type UnitElectricResistanceable interface {
@@ -54,4 +56,3 @@ type UnitElectricResistanceable interface {
 }
 
 var _ UnitElectricResistanceable = (*UnitElectricResistance)(nil)
-

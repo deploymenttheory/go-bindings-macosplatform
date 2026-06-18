@@ -18,10 +18,10 @@ type GKRandomSource struct {
 }
 
 var (
-	_clsGKRandomSource = _objcClass("GKRandomSource")
-	_gKRandomSourceSelInit = objc.RegisterName("init")
-	_gKRandomSourceSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_gKRandomSourceSelSharedRandom = objc.RegisterName("sharedRandom")
+	_clsGKRandomSource                               = _objcClass("GKRandomSource")
+	_gKRandomSourceSelInit                           = objc.RegisterName("init")
+	_gKRandomSourceSelInitWithCoder                  = objc.RegisterName("initWithCoder:")
+	_gKRandomSourceSelSharedRandom                   = objc.RegisterName("sharedRandom")
 	_gKRandomSourceSelArrayByShufflingObjectsInArray = objc.RegisterName("arrayByShufflingObjectsInArray:")
 )
 
@@ -38,21 +38,27 @@ func GKRandomSourceFromID(id objc.ID) *GKRandomSource {
 // Creates a new random source initialized using bits from an entropy source like SecRandomCopyBytes. When used directly from the base class; this source is deterministic and performant but the underlying implementation details are not specified. Use a subclass with a specific algorithm implementation guaranteed if your application requires very stringent random source charateristics. @see GKARC4RandomSource @see GKLinearCongruentialRandomSource @see GKMersenneTwisterRandomSource
 func (o *GKRandomSource) Init() *GKRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomSourceSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomSourceFromID(_ret)
 }
 
 // Deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
 func (o *GKRandomSource) InitWithCoder(aDecoder *foundation.NSCoder) *GKRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRandomSourceSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomSourceFromID(_ret)
 }
 
 // Returns a shared instance of a random source that uses the system's underlying random source. Using this instance modifies the outcome of future calls to the arc4random family of C calls. It is also affected by calls to the C apis and should not be used for sources that are intended to be deterministic. @discussion Note that while it may seem semantically similar to a GKARC4RandomSource, this is not a drop in replacement.
 func GKRandomSourceSharedRandom() *GKRandomSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRandomSource), _gKRandomSourceSelSharedRandom)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRandomSourceFromID(_ret)
 }
 
@@ -61,4 +67,3 @@ func (o *GKRandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArra
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _gKRandomSourceSelArrayByShufflingObjectsInArray, array)
 	return _ret
 }
-

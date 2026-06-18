@@ -17,7 +17,9 @@ type PersistentCloudKitContainerEventRequest struct {
 }
 
 // Unwrap returns the underlying [raw.NSPersistentCloudKitContainerEventRequest].
-func (x *PersistentCloudKitContainerEventRequest) Unwrap() *raw.NSPersistentCloudKitContainerEventRequest { return x.inner }
+func (x *PersistentCloudKitContainerEventRequest) Unwrap() *raw.NSPersistentCloudKitContainerEventRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -50,7 +52,9 @@ func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...Pe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -69,7 +73,9 @@ func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType raw.N
 	x.inner.SetResultType(resultType)
 }
 
-func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // PersistentCloudKitContainerEventRequestable is the interface implemented by [PersistentCloudKitContainerEventRequest], for mocking and DI.
 type PersistentCloudKitContainerEventRequestable interface {
@@ -81,4 +87,3 @@ type PersistentCloudKitContainerEventRequestable interface {
 }
 
 var _ PersistentCloudKitContainerEventRequestable = (*PersistentCloudKitContainerEventRequest)(nil)
-

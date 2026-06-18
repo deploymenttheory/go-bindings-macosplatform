@@ -20,10 +20,10 @@ type SHSignatureGenerator struct {
 }
 
 var (
-	_clsSHSignatureGenerator = _objcClass("SHSignatureGenerator")
+	_clsSHSignatureGenerator                                            = _objcClass("SHSignatureGenerator")
 	_sHSignatureGeneratorSelGenerateSignatureFromAssetCompletionHandler = objc.RegisterName("generateSignatureFromAsset:completionHandler:")
-	_sHSignatureGeneratorSelAppendBufferAtTimeError = objc.RegisterName("appendBuffer:atTime:error:")
-	_sHSignatureGeneratorSelSignature = objc.RegisterName("signature")
+	_sHSignatureGeneratorSelAppendBufferAtTimeError                     = objc.RegisterName("appendBuffer:atTime:error:")
+	_sHSignatureGeneratorSelSignature                                   = objc.RegisterName("signature")
 )
 
 func SHSignatureGeneratorFromID(id objc.ID) *SHSignatureGenerator {
@@ -36,7 +36,7 @@ func SHSignatureGeneratorFromID(id objc.ID) *SHSignatureGenerator {
 	return o
 }
 
-// Creates a signature with the asset you specify. > Important: > You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: > > ```swift > class func signature(from asset: AVAsset) async throws -> SHSignature > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. The asset you specify can be any type of media that contains audio tracks. If the asset has multiple tracks, the system mixes them into one ``SHSignature``. - Parameters: - asset: An asset that contains the audio to convert. - completionHandler: The system calls this completion block after creating the signature, or an error if the system couldn't create it. This block takes the following parameters: - term `signature`: A new signature instance. - term error: An error object if a problem occurs when creating thesignature; otherwise, `nil`.
+// Creates a signature with the asset you specify. > Important: > You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: > > ```swift > class func signature(from asset: AVAsset) async throws -> SHSignature > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. The asset you specify can be any type of media that contains audio tracks. If the asset has multiple tracks, the system mixes them into one “SHSignature“. - Parameters: - asset: An asset that contains the audio to convert. - completionHandler: The system calls this completion block after creating the signature, or an error if the system couldn't create it. This block takes the following parameters: - term `signature`: A new signature instance. - term error: An error object if a problem occurs when creating thesignature; otherwise, `nil`.
 func SHSignatureGeneratorGenerateSignatureFromAssetCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(*SHSignature, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -64,7 +64,8 @@ func (o *SHSignatureGenerator) AppendBufferAtTimeError(buffer *avfaudio.AVAudioP
 // Converts the audio buffer into a signature. - Returns: A signature that ShazamKit generates from the audio buffer.
 func (o *SHSignatureGenerator) Signature() *SHSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sHSignatureGeneratorSelSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SHSignatureFromID(_ret)
 }
-

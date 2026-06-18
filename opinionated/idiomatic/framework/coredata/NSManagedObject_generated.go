@@ -245,4 +245,3 @@ type ManagedObjectable interface {
 }
 
 var _ ManagedObjectable = (*ManagedObject)(nil)
-

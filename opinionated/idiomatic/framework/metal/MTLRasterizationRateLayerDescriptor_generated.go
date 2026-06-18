@@ -15,7 +15,9 @@ type RasterizationRateLayerDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLRasterizationRateLayerDescriptor].
-func (x *RasterizationRateLayerDescriptor) Unwrap() *raw.MTLRasterizationRateLayerDescriptor { return x.inner }
+func (x *RasterizationRateLayerDescriptor) Unwrap() *raw.MTLRasterizationRateLayerDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -106,4 +108,3 @@ type RasterizationRateLayerDescriptorable interface {
 }
 
 var _ RasterizationRateLayerDescriptorable = (*RasterizationRateLayerDescriptor)(nil)
-

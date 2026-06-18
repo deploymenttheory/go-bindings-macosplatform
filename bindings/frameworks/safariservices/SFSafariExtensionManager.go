@@ -18,7 +18,7 @@ type SFSafariExtensionManager struct {
 }
 
 var (
-	_clsSFSafariExtensionManager = _objcClass("SFSafariExtensionManager")
+	_clsSFSafariExtensionManager                                                         = _objcClass("SFSafariExtensionManager")
 	_sFSafariExtensionManagerSelGetStateOfSafariExtensionWithIdentifierCompletionHandler = objc.RegisterName("getStateOfSafariExtensionWithIdentifier:completionHandler:")
 )
 
@@ -45,4 +45,3 @@ func SFSafariExtensionManagerGetStateOfSafariExtensionWithIdentifierCompletionHa
 	}
 	objc.ID(_clsSFSafariExtensionManager).Send(_sFSafariExtensionManagerSelGetStateOfSafariExtensionWithIdentifierCompletionHandler, identifier.Ptr(), __block_completionHandler)
 }
-

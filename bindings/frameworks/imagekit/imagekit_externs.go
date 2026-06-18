@@ -402,42 +402,54 @@ func IKToolModeSelectRect() uintptr {
 // @const      IKUIFlavorAllowFallback @abstract   IKUIFlavorAllowFallback @discussion Allow the filter to provide a view with controls of a different size and set than requested, if it cannot provide a view for the requested flavor.
 func IKUIFlavorAllowFallback() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUIFlavorAllowFallback")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const      IKUISizeFlavor @abstract   IKUISizeFlavor @discussion Key to request the desired size of controls in a filter UIView - defined values are IKUISizeMini, IKUISizeSmall and IKUISizeRegular.
 func IKUISizeFlavor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUISizeFlavor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const      IKUISizeMini @abstract   IKUISizeMini @discussion Constant for requesting controls in mini size.
 func IKUISizeMini() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUISizeMini")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const      IKUISizeRegular @abstract   IKUISizeRegular @discussion Constant for requesting controls in regular or normal size.
 func IKUISizeRegular() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUISizeRegular")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const      IKUISizeSmall @abstract   IKUISizeSmall @discussion Constant for requesting controls in small size.
 func IKUISizeSmall() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUISizeSmall")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @const      IKUImaxSize @abstract   IKUImaxSize @discussion Maximum allowed dimensions of the view for the filter UI. If width or height is zero it means that that dimension of the view is not restricted.
 func IKUImaxSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKUImaxSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -460,4 +472,3 @@ func IK_iPhotoBundleIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IK_iPhotoBundleIdentifier")
 	return ptr
 }
-

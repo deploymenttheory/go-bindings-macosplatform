@@ -60,4 +60,3 @@ type HangDiagnosticable interface {
 }
 
 var _ HangDiagnosticable = (*HangDiagnostic)(nil)
-

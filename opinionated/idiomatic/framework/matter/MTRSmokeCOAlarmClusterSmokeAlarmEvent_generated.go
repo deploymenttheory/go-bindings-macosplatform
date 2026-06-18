@@ -16,7 +16,9 @@ type MTRSmokeCOAlarmClusterSmokeAlarmEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent].
-func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent { return x.inner }
+func (x *MTRSmokeCOAlarmClusterSmokeAlarmEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterSmokeAlarmEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRSmokeCOAlarmClusterSmokeAlarmEventable interface {
 }
 
 var _ MTRSmokeCOAlarmClusterSmokeAlarmEventable = (*MTRSmokeCOAlarmClusterSmokeAlarmEvent)(nil)
-

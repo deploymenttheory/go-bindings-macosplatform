@@ -181,4 +181,3 @@ type HighlightCenterable interface {
 }
 
 var _ HighlightCenterable = (*HighlightCenter)(nil)
-

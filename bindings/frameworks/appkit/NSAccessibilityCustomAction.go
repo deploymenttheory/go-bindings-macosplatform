@@ -16,17 +16,17 @@ type NSAccessibilityCustomAction struct {
 }
 
 var (
-	_clsNSAccessibilityCustomAction = _objcClass("NSAccessibilityCustomAction")
-	_nSAccessibilityCustomActionSelInitWithNameHandler = objc.RegisterName("initWithName:handler:")
+	_clsNSAccessibilityCustomAction                           = _objcClass("NSAccessibilityCustomAction")
+	_nSAccessibilityCustomActionSelInitWithNameHandler        = objc.RegisterName("initWithName:handler:")
 	_nSAccessibilityCustomActionSelInitWithNameTargetSelector = objc.RegisterName("initWithName:target:selector:")
-	_nSAccessibilityCustomActionSelName = objc.RegisterName("name")
-	_nSAccessibilityCustomActionSelSetName = objc.RegisterName("setName:")
-	_nSAccessibilityCustomActionSelHandler = objc.RegisterName("handler")
-	_nSAccessibilityCustomActionSelSetHandler = objc.RegisterName("setHandler:")
-	_nSAccessibilityCustomActionSelTarget = objc.RegisterName("target")
-	_nSAccessibilityCustomActionSelSetTarget = objc.RegisterName("setTarget:")
-	_nSAccessibilityCustomActionSelSelector = objc.RegisterName("selector")
-	_nSAccessibilityCustomActionSelSetSelector = objc.RegisterName("setSelector:")
+	_nSAccessibilityCustomActionSelName                       = objc.RegisterName("name")
+	_nSAccessibilityCustomActionSelSetName                    = objc.RegisterName("setName:")
+	_nSAccessibilityCustomActionSelHandler                    = objc.RegisterName("handler")
+	_nSAccessibilityCustomActionSelSetHandler                 = objc.RegisterName("setHandler:")
+	_nSAccessibilityCustomActionSelTarget                     = objc.RegisterName("target")
+	_nSAccessibilityCustomActionSelSetTarget                  = objc.RegisterName("setTarget:")
+	_nSAccessibilityCustomActionSelSelector                   = objc.RegisterName("selector")
+	_nSAccessibilityCustomActionSelSetSelector                = objc.RegisterName("setSelector:")
 )
 
 func NSAccessibilityCustomActionFromID(id objc.ID) *NSAccessibilityCustomAction {
@@ -48,19 +48,25 @@ func (o *NSAccessibilityCustomAction) InitWithNameHandler(name *foundation.NSStr
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomActionSelInitWithNameHandler, name.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomActionFromID(_ret)
 }
 
 func (o *NSAccessibilityCustomAction) InitWithNameTargetSelector(name *foundation.NSString, target foundation.NSObjectProtocol, selector objc.SEL) *NSAccessibilityCustomAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomActionSelInitWithNameTargetSelector, name.Ptr(), target, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAccessibilityCustomActionFromID(_ret)
 }
 
 func (o *NSAccessibilityCustomAction) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAccessibilityCustomActionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -101,4 +107,3 @@ func (o *NSAccessibilityCustomAction) Selector() objc.SEL {
 func (o *NSAccessibilityCustomAction) SetSelector(selector objc.SEL) {
 	o.Ptr().Send(_nSAccessibilityCustomActionSelSetSelector, selector)
 }
-

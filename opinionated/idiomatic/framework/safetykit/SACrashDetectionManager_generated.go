@@ -73,4 +73,3 @@ type CrashDetectionManagerable interface {
 }
 
 var _ CrashDetectionManagerable = (*CrashDetectionManager)(nil)
-

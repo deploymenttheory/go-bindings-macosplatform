@@ -18,12 +18,12 @@ type MLModelStructure struct {
 }
 
 var (
-	_clsMLModelStructure = _objcClass("MLModelStructure")
+	_clsMLModelStructure                                   = _objcClass("MLModelStructure")
 	_mLModelStructureSelLoadContentsOfURLCompletionHandler = objc.RegisterName("loadContentsOfURL:completionHandler:")
-	_mLModelStructureSelLoadModelAssetCompletionHandler = objc.RegisterName("loadModelAsset:completionHandler:")
-	_mLModelStructureSelNeuralNetwork = objc.RegisterName("neuralNetwork")
-	_mLModelStructureSelProgram = objc.RegisterName("program")
-	_mLModelStructureSelPipeline = objc.RegisterName("pipeline")
+	_mLModelStructureSelLoadModelAssetCompletionHandler    = objc.RegisterName("loadModelAsset:completionHandler:")
+	_mLModelStructureSelNeuralNetwork                      = objc.RegisterName("neuralNetwork")
+	_mLModelStructureSelProgram                            = objc.RegisterName("program")
+	_mLModelStructureSelPipeline                           = objc.RegisterName("pipeline")
 )
 
 func MLModelStructureFromID(id objc.ID) *MLModelStructure {
@@ -69,21 +69,26 @@ func MLModelStructureLoadModelAssetCompletionHandler(asset *MLModelAsset, handle
 // If the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
 func (o *MLModelStructure) NeuralNetwork() *MLModelStructureNeuralNetwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureSelNeuralNetwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureNeuralNetworkFromID(_ret)
 }
 
 // If the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
 func (o *MLModelStructure) Program() *MLModelStructureProgram {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureSelProgram)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureProgramFromID(_ret)
 }
 
 // If the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
 func (o *MLModelStructure) Pipeline() *MLModelStructurePipeline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureSelPipeline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructurePipelineFromID(_ret)
 }
-

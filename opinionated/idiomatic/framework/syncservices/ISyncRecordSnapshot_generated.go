@@ -84,4 +84,3 @@ type ISyncRecordSnapshotable interface {
 }
 
 var _ ISyncRecordSnapshotable = (*ISyncRecordSnapshot)(nil)
-

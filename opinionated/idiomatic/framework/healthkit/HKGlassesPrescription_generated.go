@@ -53,11 +53,15 @@ func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
 	return &GlassesLensSpecification{inner: _r}
 }
 
-func (x *GlassesPrescription) asVisionPrescription() *raw.HKVisionPrescription { return &x.inner.HKVisionPrescription }
+func (x *GlassesPrescription) asVisionPrescription() *raw.HKVisionPrescription {
+	return &x.inner.HKVisionPrescription
+}
 
 func (x *GlassesPrescription) asSample() *raw.HKSample { return &x.inner.HKVisionPrescription.HKSample }
 
-func (x *GlassesPrescription) asObject() *raw.HKObject { return &x.inner.HKVisionPrescription.HKSample.HKObject }
+func (x *GlassesPrescription) asObject() *raw.HKObject {
+	return &x.inner.HKVisionPrescription.HKSample.HKObject
+}
 
 // GlassesPrescriptionable is the interface implemented by [GlassesPrescription], for mocking and DI.
 type GlassesPrescriptionable interface {
@@ -67,4 +71,3 @@ type GlassesPrescriptionable interface {
 }
 
 var _ GlassesPrescriptionable = (*GlassesPrescription)(nil)
-

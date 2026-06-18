@@ -19,34 +19,34 @@ type QCCompositionPickerView struct {
 }
 
 var (
-	_clsQCCompositionPickerView = _objcClass("QCCompositionPickerView")
+	_clsQCCompositionPickerView                                                       = _objcClass("QCCompositionPickerView")
 	_qCCompositionPickerViewSelSetCompositionsFromRepositoryWithProtocolAndAttributes = objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:")
-	_qCCompositionPickerViewSelCompositions = objc.RegisterName("compositions")
-	_qCCompositionPickerViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_qCCompositionPickerViewSelDelegate = objc.RegisterName("delegate")
-	_qCCompositionPickerViewSelSetShowsCompositionNames = objc.RegisterName("setShowsCompositionNames:")
-	_qCCompositionPickerViewSelShowsCompositionNames = objc.RegisterName("showsCompositionNames")
-	_qCCompositionPickerViewSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_qCCompositionPickerViewSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_qCCompositionPickerViewSelSetCompositionAspectRatio = objc.RegisterName("setCompositionAspectRatio:")
-	_qCCompositionPickerViewSelCompositionAspectRatio = objc.RegisterName("compositionAspectRatio")
-	_qCCompositionPickerViewSelSetDefaultValueForInputKey = objc.RegisterName("setDefaultValue:forInputKey:")
-	_qCCompositionPickerViewSelResetDefaultInputValues = objc.RegisterName("resetDefaultInputValues")
-	_qCCompositionPickerViewSelSetSelectedComposition = objc.RegisterName("setSelectedComposition:")
-	_qCCompositionPickerViewSelSelectedComposition = objc.RegisterName("selectedComposition")
-	_qCCompositionPickerViewSelStartAnimation = objc.RegisterName("startAnimation:")
-	_qCCompositionPickerViewSelStopAnimation = objc.RegisterName("stopAnimation:")
-	_qCCompositionPickerViewSelIsAnimating = objc.RegisterName("isAnimating")
-	_qCCompositionPickerViewSelSetMaxAnimationFrameRate = objc.RegisterName("setMaxAnimationFrameRate:")
-	_qCCompositionPickerViewSelMaxAnimationFrameRate = objc.RegisterName("maxAnimationFrameRate")
-	_qCCompositionPickerViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_qCCompositionPickerViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_qCCompositionPickerViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_qCCompositionPickerViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_qCCompositionPickerViewSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_qCCompositionPickerViewSelSetNumberOfColumns = objc.RegisterName("setNumberOfColumns:")
-	_qCCompositionPickerViewSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_qCCompositionPickerViewSelSetNumberOfRows = objc.RegisterName("setNumberOfRows:")
+	_qCCompositionPickerViewSelCompositions                                           = objc.RegisterName("compositions")
+	_qCCompositionPickerViewSelSetDelegate                                            = objc.RegisterName("setDelegate:")
+	_qCCompositionPickerViewSelDelegate                                               = objc.RegisterName("delegate")
+	_qCCompositionPickerViewSelSetShowsCompositionNames                               = objc.RegisterName("setShowsCompositionNames:")
+	_qCCompositionPickerViewSelShowsCompositionNames                                  = objc.RegisterName("showsCompositionNames")
+	_qCCompositionPickerViewSelSetAllowsEmptySelection                                = objc.RegisterName("setAllowsEmptySelection:")
+	_qCCompositionPickerViewSelAllowsEmptySelection                                   = objc.RegisterName("allowsEmptySelection")
+	_qCCompositionPickerViewSelSetCompositionAspectRatio                              = objc.RegisterName("setCompositionAspectRatio:")
+	_qCCompositionPickerViewSelCompositionAspectRatio                                 = objc.RegisterName("compositionAspectRatio")
+	_qCCompositionPickerViewSelSetDefaultValueForInputKey                             = objc.RegisterName("setDefaultValue:forInputKey:")
+	_qCCompositionPickerViewSelResetDefaultInputValues                                = objc.RegisterName("resetDefaultInputValues")
+	_qCCompositionPickerViewSelSetSelectedComposition                                 = objc.RegisterName("setSelectedComposition:")
+	_qCCompositionPickerViewSelSelectedComposition                                    = objc.RegisterName("selectedComposition")
+	_qCCompositionPickerViewSelStartAnimation                                         = objc.RegisterName("startAnimation:")
+	_qCCompositionPickerViewSelStopAnimation                                          = objc.RegisterName("stopAnimation:")
+	_qCCompositionPickerViewSelIsAnimating                                            = objc.RegisterName("isAnimating")
+	_qCCompositionPickerViewSelSetMaxAnimationFrameRate                               = objc.RegisterName("setMaxAnimationFrameRate:")
+	_qCCompositionPickerViewSelMaxAnimationFrameRate                                  = objc.RegisterName("maxAnimationFrameRate")
+	_qCCompositionPickerViewSelSetBackgroundColor                                     = objc.RegisterName("setBackgroundColor:")
+	_qCCompositionPickerViewSelBackgroundColor                                        = objc.RegisterName("backgroundColor")
+	_qCCompositionPickerViewSelSetDrawsBackground                                     = objc.RegisterName("setDrawsBackground:")
+	_qCCompositionPickerViewSelDrawsBackground                                        = objc.RegisterName("drawsBackground")
+	_qCCompositionPickerViewSelNumberOfColumns                                        = objc.RegisterName("numberOfColumns")
+	_qCCompositionPickerViewSelSetNumberOfColumns                                     = objc.RegisterName("setNumberOfColumns:")
+	_qCCompositionPickerViewSelNumberOfRows                                           = objc.RegisterName("numberOfRows")
+	_qCCompositionPickerViewSelSetNumberOfRows                                        = objc.RegisterName("setNumberOfRows:")
 )
 
 func QCCompositionPickerViewFromID(id objc.ID) *QCCompositionPickerView {
@@ -118,7 +118,9 @@ func (o *QCCompositionPickerView) SetSelectedComposition(composition *quartz.QCC
 
 func (o *QCCompositionPickerView) SelectedComposition() *quartz.QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerViewSelSelectedComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartz.QCCompositionFromID(_ret)
 }
 
@@ -150,7 +152,9 @@ func (o *QCCompositionPickerView) SetBackgroundColor(color *appkit.NSColor) {
 
 func (o *QCCompositionPickerView) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionPickerViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -180,4 +184,3 @@ func (o *QCCompositionPickerView) NumberOfRows() uint {
 func (o *QCCompositionPickerView) SetNumberOfRows(rows uint) {
 	o.Ptr().Send(_qCCompositionPickerViewSelSetNumberOfRows, rows)
 }
-

@@ -17,4 +17,3 @@ type SymbolContentTransitionProvider interface {
 type SymbolEffectProvider interface {
 	asSymbolEffect() *raw.NSSymbolEffect
 }
-

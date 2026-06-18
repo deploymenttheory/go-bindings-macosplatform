@@ -17,11 +17,11 @@ type MPSNNReduceFeatureChannelsAndWeightsSum struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsAndWeightsSum = _objcClass("MPSNNReduceFeatureChannelsAndWeightsSum")
-	_mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsAndWeightsSum                                            = _objcClass("MPSNNReduceFeatureChannelsAndWeightsSum")
+	_mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithDevice                              = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithDeviceDoWeightedSumByNonZeroWeights = objc.RegisterName("initWithDevice:doWeightedSumByNonZeroWeights:")
-	_mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNReduceFeatureChannelsAndWeightsSumSelDoWeightedSumByNonZeroWeights = objc.RegisterName("doWeightedSumByNonZeroWeights")
+	_mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithCoderDevice                         = objc.RegisterName("initWithCoder:device:")
+	_mPSNNReduceFeatureChannelsAndWeightsSumSelDoWeightedSumByNonZeroWeights               = objc.RegisterName("doWeightedSumByNonZeroWeights")
 )
 
 func MPSNNReduceFeatureChannelsAndWeightsSumFromID(id objc.ID) *MPSNNReduceFeatureChannelsAndWeightsSum {
@@ -37,21 +37,27 @@ func MPSNNReduceFeatureChannelsAndWeightsSumFromID(id objc.ID) *MPSNNReduceFeatu
 // @abstract Specifies information to apply the reduction operation on an image. @param    device            The device the filter will run on @return   A valid MPSNNReduceFeatureChannelsAndWeightsMean object or nil, if failure.
 func (o *MPSNNReduceFeatureChannelsAndWeightsSum) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsAndWeightsSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsAndWeightsSumFromID(_ret)
 }
 
 // @abstract Specifies information to apply the reduction operation on an image. @param    device                         The device the filter will run on @param    doWeightedSumByNonZeroWeights  A boolean to indicate whether to compute a weighted sum or weighted sum divided by the number of non-zero weights @return   A valid MPSNNReduceFeatureChannelsAndWeightsSum object or nil, if failure.
 func (o *MPSNNReduceFeatureChannelsAndWeightsSum) InitWithDeviceDoWeightedSumByNonZeroWeights(device metal.MTLDevice, doWeightedSumByNonZeroWeights bool) *MPSNNReduceFeatureChannelsAndWeightsSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithDeviceDoWeightedSumByNonZeroWeights, device, doWeightedSumByNonZeroWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsAndWeightsSumFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsAndWeightsSum) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsAndWeightsSum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsSumSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsAndWeightsSumFromID(_ret)
 }
 
@@ -60,4 +66,3 @@ func (o *MPSNNReduceFeatureChannelsAndWeightsSum) DoWeightedSumByNonZeroWeights(
 	_ret := objc.Send[bool](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsSumSelDoWeightedSumByNonZeroWeights)
 	return _ret
 }
-

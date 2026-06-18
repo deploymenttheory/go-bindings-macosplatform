@@ -53,7 +53,9 @@ func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecor
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKRecordZone](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -69,7 +71,9 @@ func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*raw.CKR
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -233,9 +237,13 @@ func (x *ModifyRecordZonesOperation) SetModifyRecordZonesCompletionBlock(modifyR
 	x.inner.SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock)
 }
 
-func (x *ModifyRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *ModifyRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *ModifyRecordZonesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *ModifyRecordZonesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // ModifyRecordZonesOperationable is the interface implemented by [ModifyRecordZonesOperation], for mocking and DI.
 type ModifyRecordZonesOperationable interface {
@@ -267,4 +275,3 @@ type ModifyRecordZonesOperationable interface {
 }
 
 var _ ModifyRecordZonesOperationable = (*ModifyRecordZonesOperation)(nil)
-

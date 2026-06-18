@@ -15,8 +15,8 @@ type DOMHTMLDListElement struct {
 }
 
 var (
-	_clsDOMHTMLDListElement = _objcClass("DOMHTMLDListElement")
-	_dOMHTMLDListElementSelCompact = objc.RegisterName("compact")
+	_clsDOMHTMLDListElement           = _objcClass("DOMHTMLDListElement")
+	_dOMHTMLDListElementSelCompact    = objc.RegisterName("compact")
 	_dOMHTMLDListElementSelSetCompact = objc.RegisterName("setCompact:")
 )
 
@@ -38,4 +38,3 @@ func (o *DOMHTMLDListElement) Compact() bool {
 func (o *DOMHTMLDListElement) SetCompact(compact bool) {
 	o.Ptr().Send(_dOMHTMLDListElementSelSetCompact, compact)
 }
-

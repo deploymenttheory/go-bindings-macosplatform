@@ -18,7 +18,9 @@ type NNReductionFeatureChannelsMeanNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsMeanNode].
-func (x *NNReductionFeatureChannelsMeanNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMeanNode { return x.inner }
+func (x *NNReductionFeatureChannelsMeanNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMeanNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,9 +58,13 @@ func (x *NNReductionFeatureChannelsMeanNode) WithLabel(label string) *NNReductio
 	return x
 }
 
-func (x *NNReductionFeatureChannelsMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionFeatureChannelsMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionFeatureChannelsMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionFeatureChannelsMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionFeatureChannelsMeanNodeable is the interface implemented by [NNReductionFeatureChannelsMeanNode], for mocking and DI.
 type NNReductionFeatureChannelsMeanNodeable interface {
@@ -69,4 +75,3 @@ type NNReductionFeatureChannelsMeanNodeable interface {
 }
 
 var _ NNReductionFeatureChannelsMeanNodeable = (*NNReductionFeatureChannelsMeanNode)(nil)
-

@@ -16,14 +16,14 @@ type ASPasswordCredentialIdentity struct {
 }
 
 var (
-	_clsASPasswordCredentialIdentity = _objcClass("ASPasswordCredentialIdentity")
-	_aSPasswordCredentialIdentitySelInitWithServiceIdentifierUserRecordIdentifier = objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:")
+	_clsASPasswordCredentialIdentity                                                  = _objcClass("ASPasswordCredentialIdentity")
+	_aSPasswordCredentialIdentitySelInitWithServiceIdentifierUserRecordIdentifier     = objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:")
 	_aSPasswordCredentialIdentitySelIdentityWithServiceIdentifierUserRecordIdentifier = objc.RegisterName("identityWithServiceIdentifier:user:recordIdentifier:")
-	_aSPasswordCredentialIdentitySelServiceIdentifier = objc.RegisterName("serviceIdentifier")
-	_aSPasswordCredentialIdentitySelUser = objc.RegisterName("user")
-	_aSPasswordCredentialIdentitySelRecordIdentifier = objc.RegisterName("recordIdentifier")
-	_aSPasswordCredentialIdentitySelRank = objc.RegisterName("rank")
-	_aSPasswordCredentialIdentitySelSetRank = objc.RegisterName("setRank:")
+	_aSPasswordCredentialIdentitySelServiceIdentifier                                 = objc.RegisterName("serviceIdentifier")
+	_aSPasswordCredentialIdentitySelUser                                              = objc.RegisterName("user")
+	_aSPasswordCredentialIdentitySelRecordIdentifier                                  = objc.RegisterName("recordIdentifier")
+	_aSPasswordCredentialIdentitySelRank                                              = objc.RegisterName("rank")
+	_aSPasswordCredentialIdentitySelSetRank                                           = objc.RegisterName("setRank:")
 )
 
 func ASPasswordCredentialIdentityFromID(id objc.ID) *ASPasswordCredentialIdentity {
@@ -39,35 +39,45 @@ func ASPasswordCredentialIdentityFromID(id objc.ID) *ASPasswordCredentialIdentit
 // @abstract Initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
 func (o *ASPasswordCredentialIdentity) InitWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *ASCredentialServiceIdentifier, user *foundation.NSString, recordIdentifier *foundation.NSString) *ASPasswordCredentialIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialIdentitySelInitWithServiceIdentifierUserRecordIdentifier, serviceIdentifier.Ptr(), user.Ptr(), recordIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialIdentityFromID(_ret)
 }
 
 // @abstract Creates and initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
 func ASPasswordCredentialIdentityIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *ASCredentialServiceIdentifier, user *foundation.NSString, recordIdentifier *foundation.NSString) *ASPasswordCredentialIdentity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredentialIdentity), _aSPasswordCredentialIdentitySelIdentityWithServiceIdentifierUserRecordIdentifier, serviceIdentifier.Ptr(), user.Ptr(), recordIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialIdentityFromID(_ret)
 }
 
 // @abstract Get the service identifier. @result The service identifier for this credential identity.
 func (o *ASPasswordCredentialIdentity) ServiceIdentifier() *ASCredentialServiceIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialIdentitySelServiceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASCredentialServiceIdentifierFromID(_ret)
 }
 
 // @abstract Get the user. @result The user string.
 func (o *ASPasswordCredentialIdentity) User() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialIdentitySelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (o *ASPasswordCredentialIdentity) RecordIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialIdentitySelRecordIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,4 +90,3 @@ func (o *ASPasswordCredentialIdentity) Rank() int {
 func (o *ASPasswordCredentialIdentity) SetRank(rank int) {
 	o.Ptr().Send(_aSPasswordCredentialIdentitySelSetRank, rank)
 }
-

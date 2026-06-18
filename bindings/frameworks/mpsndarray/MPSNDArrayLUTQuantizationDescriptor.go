@@ -16,8 +16,8 @@ type MPSNDArrayLUTQuantizationDescriptor struct {
 }
 
 var (
-	_clsMPSNDArrayLUTQuantizationDescriptor = _objcClass("MPSNDArrayLUTQuantizationDescriptor")
-	_mPSNDArrayLUTQuantizationDescriptorSelInitWithDataType = objc.RegisterName("initWithDataType:")
+	_clsMPSNDArrayLUTQuantizationDescriptor                           = _objcClass("MPSNDArrayLUTQuantizationDescriptor")
+	_mPSNDArrayLUTQuantizationDescriptorSelInitWithDataType           = objc.RegisterName("initWithDataType:")
 	_mPSNDArrayLUTQuantizationDescriptorSelInitWithDataTypeVectorAxis = objc.RegisterName("initWithDataType:vectorAxis:")
 )
 
@@ -34,14 +34,17 @@ func MPSNDArrayLUTQuantizationDescriptorFromID(id objc.ID) *MPSNDArrayLUTQuantiz
 // @abstract   Initializes a scalar lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @result     A new quantization descriptor.
 func (o *MPSNDArrayLUTQuantizationDescriptor) InitWithDataType(quantizationDataType mpscore.MPSDataType) *MPSNDArrayLUTQuantizationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayLUTQuantizationDescriptorSelInitWithDataType, quantizationDataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayLUTQuantizationDescriptorFromID(_ret)
 }
 
 // @abstract   Initializes a vector lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      vectorAxis        The quantization vector axis - this axis will receive the vector component in the destination. @result     A new quantization descriptor.
 func (o *MPSNDArrayLUTQuantizationDescriptor) InitWithDataTypeVectorAxis(quantizationDataType mpscore.MPSDataType, vectorAxis uint) *MPSNDArrayLUTQuantizationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayLUTQuantizationDescriptorSelInitWithDataTypeVectorAxis, quantizationDataType, vectorAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayLUTQuantizationDescriptorFromID(_ret)
 }
-

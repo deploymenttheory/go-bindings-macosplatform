@@ -17,7 +17,7 @@ type VNImageHomographicAlignmentObservation struct {
 }
 
 var (
-	_clsVNImageHomographicAlignmentObservation = _objcClass("VNImageHomographicAlignmentObservation")
+	_clsVNImageHomographicAlignmentObservation              = _objcClass("VNImageHomographicAlignmentObservation")
 	_vNImageHomographicAlignmentObservationSelWarpTransform = objc.RegisterName("warpTransform")
 )
 
@@ -35,4 +35,3 @@ func (o *VNImageHomographicAlignmentObservation) WarpTransform() unsafe.Pointer 
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _vNImageHomographicAlignmentObservationSelWarpTransform)
 	return _ret
 }
-

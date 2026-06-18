@@ -20,52 +20,52 @@ type AVAssetWriterInput struct {
 }
 
 var (
-	_clsAVAssetWriterInput = _objcClass("AVAssetWriterInput")
-	_aVAssetWriterInputSelAssetWriterInputWithMediaTypeOutputSettings = objc.RegisterName("assetWriterInputWithMediaType:outputSettings:")
+	_clsAVAssetWriterInput                                                            = _objcClass("AVAssetWriterInput")
+	_aVAssetWriterInputSelAssetWriterInputWithMediaTypeOutputSettings                 = objc.RegisterName("assetWriterInputWithMediaType:outputSettings:")
 	_aVAssetWriterInputSelAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint = objc.RegisterName("assetWriterInputWithMediaType:outputSettings:sourceFormatHint:")
-	_aVAssetWriterInputSelInitWithMediaTypeOutputSettings = objc.RegisterName("initWithMediaType:outputSettings:")
-	_aVAssetWriterInputSelInitWithMediaTypeOutputSettingsSourceFormatHint = objc.RegisterName("initWithMediaType:outputSettings:sourceFormatHint:")
-	_aVAssetWriterInputSelRequestMediaDataWhenReadyOnQueueUsing = objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:")
-	_aVAssetWriterInputSelAppendSampleBuffer = objc.RegisterName("appendSampleBuffer:")
-	_aVAssetWriterInputSelMarkAsFinished = objc.RegisterName("markAsFinished")
-	_aVAssetWriterInputSelMediaType = objc.RegisterName("mediaType")
-	_aVAssetWriterInputSelOutputSettings = objc.RegisterName("outputSettings")
-	_aVAssetWriterInputSelSourceFormatHint = objc.RegisterName("sourceFormatHint")
-	_aVAssetWriterInputSelMetadata = objc.RegisterName("metadata")
-	_aVAssetWriterInputSelSetMetadata = objc.RegisterName("setMetadata:")
-	_aVAssetWriterInputSelIsReadyForMoreMediaData = objc.RegisterName("isReadyForMoreMediaData")
-	_aVAssetWriterInputSelExpectsMediaDataInRealTime = objc.RegisterName("expectsMediaDataInRealTime")
-	_aVAssetWriterInputSelSetExpectsMediaDataInRealTime = objc.RegisterName("setExpectsMediaDataInRealTime:")
-	_aVAssetWriterInputSelLanguageCode = objc.RegisterName("languageCode")
-	_aVAssetWriterInputSelSetLanguageCode = objc.RegisterName("setLanguageCode:")
-	_aVAssetWriterInputSelExtendedLanguageTag = objc.RegisterName("extendedLanguageTag")
-	_aVAssetWriterInputSelSetExtendedLanguageTag = objc.RegisterName("setExtendedLanguageTag:")
-	_aVAssetWriterInputSelNaturalSize = objc.RegisterName("naturalSize")
-	_aVAssetWriterInputSelSetNaturalSize = objc.RegisterName("setNaturalSize:")
-	_aVAssetWriterInputSelTransform = objc.RegisterName("transform")
-	_aVAssetWriterInputSelSetTransform = objc.RegisterName("setTransform:")
-	_aVAssetWriterInputSelPreferredVolume = objc.RegisterName("preferredVolume")
-	_aVAssetWriterInputSelSetPreferredVolume = objc.RegisterName("setPreferredVolume:")
-	_aVAssetWriterInputSelMarksOutputTrackAsEnabled = objc.RegisterName("marksOutputTrackAsEnabled")
-	_aVAssetWriterInputSelSetMarksOutputTrackAsEnabled = objc.RegisterName("setMarksOutputTrackAsEnabled:")
-	_aVAssetWriterInputSelMediaTimeScale = objc.RegisterName("mediaTimeScale")
-	_aVAssetWriterInputSelSetMediaTimeScale = objc.RegisterName("setMediaTimeScale:")
-	_aVAssetWriterInputSelPreferredMediaChunkDuration = objc.RegisterName("preferredMediaChunkDuration")
-	_aVAssetWriterInputSelSetPreferredMediaChunkDuration = objc.RegisterName("setPreferredMediaChunkDuration:")
-	_aVAssetWriterInputSelPreferredMediaChunkAlignment = objc.RegisterName("preferredMediaChunkAlignment")
-	_aVAssetWriterInputSelSetPreferredMediaChunkAlignment = objc.RegisterName("setPreferredMediaChunkAlignment:")
-	_aVAssetWriterInputSelSampleReferenceBaseURL = objc.RegisterName("sampleReferenceBaseURL")
-	_aVAssetWriterInputSelSetSampleReferenceBaseURL = objc.RegisterName("setSampleReferenceBaseURL:")
-	_aVAssetWriterInputSelMediaDataLocation = objc.RegisterName("mediaDataLocation")
-	_aVAssetWriterInputSelSetMediaDataLocation = objc.RegisterName("setMediaDataLocation:")
-	_aVAssetWriterInputSelCanAddTrackAssociationWithTrackOfInputType = objc.RegisterName("canAddTrackAssociationWithTrackOfInput:type:")
-	_aVAssetWriterInputSelAddTrackAssociationWithTrackOfInputType = objc.RegisterName("addTrackAssociationWithTrackOfInput:type:")
-	_aVAssetWriterInputSelRespondToEachPassDescriptionOnQueueUsing = objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:")
-	_aVAssetWriterInputSelMarkCurrentPassAsFinished = objc.RegisterName("markCurrentPassAsFinished")
-	_aVAssetWriterInputSelPerformsMultiPassEncodingIfSupported = objc.RegisterName("performsMultiPassEncodingIfSupported")
-	_aVAssetWriterInputSelSetPerformsMultiPassEncodingIfSupported = objc.RegisterName("setPerformsMultiPassEncodingIfSupported:")
-	_aVAssetWriterInputSelCanPerformMultiplePasses = objc.RegisterName("canPerformMultiplePasses")
-	_aVAssetWriterInputSelCurrentPassDescription = objc.RegisterName("currentPassDescription")
+	_aVAssetWriterInputSelInitWithMediaTypeOutputSettings                             = objc.RegisterName("initWithMediaType:outputSettings:")
+	_aVAssetWriterInputSelInitWithMediaTypeOutputSettingsSourceFormatHint             = objc.RegisterName("initWithMediaType:outputSettings:sourceFormatHint:")
+	_aVAssetWriterInputSelRequestMediaDataWhenReadyOnQueueUsing                       = objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:")
+	_aVAssetWriterInputSelAppendSampleBuffer                                          = objc.RegisterName("appendSampleBuffer:")
+	_aVAssetWriterInputSelMarkAsFinished                                              = objc.RegisterName("markAsFinished")
+	_aVAssetWriterInputSelMediaType                                                   = objc.RegisterName("mediaType")
+	_aVAssetWriterInputSelOutputSettings                                              = objc.RegisterName("outputSettings")
+	_aVAssetWriterInputSelSourceFormatHint                                            = objc.RegisterName("sourceFormatHint")
+	_aVAssetWriterInputSelMetadata                                                    = objc.RegisterName("metadata")
+	_aVAssetWriterInputSelSetMetadata                                                 = objc.RegisterName("setMetadata:")
+	_aVAssetWriterInputSelIsReadyForMoreMediaData                                     = objc.RegisterName("isReadyForMoreMediaData")
+	_aVAssetWriterInputSelExpectsMediaDataInRealTime                                  = objc.RegisterName("expectsMediaDataInRealTime")
+	_aVAssetWriterInputSelSetExpectsMediaDataInRealTime                               = objc.RegisterName("setExpectsMediaDataInRealTime:")
+	_aVAssetWriterInputSelLanguageCode                                                = objc.RegisterName("languageCode")
+	_aVAssetWriterInputSelSetLanguageCode                                             = objc.RegisterName("setLanguageCode:")
+	_aVAssetWriterInputSelExtendedLanguageTag                                         = objc.RegisterName("extendedLanguageTag")
+	_aVAssetWriterInputSelSetExtendedLanguageTag                                      = objc.RegisterName("setExtendedLanguageTag:")
+	_aVAssetWriterInputSelNaturalSize                                                 = objc.RegisterName("naturalSize")
+	_aVAssetWriterInputSelSetNaturalSize                                              = objc.RegisterName("setNaturalSize:")
+	_aVAssetWriterInputSelTransform                                                   = objc.RegisterName("transform")
+	_aVAssetWriterInputSelSetTransform                                                = objc.RegisterName("setTransform:")
+	_aVAssetWriterInputSelPreferredVolume                                             = objc.RegisterName("preferredVolume")
+	_aVAssetWriterInputSelSetPreferredVolume                                          = objc.RegisterName("setPreferredVolume:")
+	_aVAssetWriterInputSelMarksOutputTrackAsEnabled                                   = objc.RegisterName("marksOutputTrackAsEnabled")
+	_aVAssetWriterInputSelSetMarksOutputTrackAsEnabled                                = objc.RegisterName("setMarksOutputTrackAsEnabled:")
+	_aVAssetWriterInputSelMediaTimeScale                                              = objc.RegisterName("mediaTimeScale")
+	_aVAssetWriterInputSelSetMediaTimeScale                                           = objc.RegisterName("setMediaTimeScale:")
+	_aVAssetWriterInputSelPreferredMediaChunkDuration                                 = objc.RegisterName("preferredMediaChunkDuration")
+	_aVAssetWriterInputSelSetPreferredMediaChunkDuration                              = objc.RegisterName("setPreferredMediaChunkDuration:")
+	_aVAssetWriterInputSelPreferredMediaChunkAlignment                                = objc.RegisterName("preferredMediaChunkAlignment")
+	_aVAssetWriterInputSelSetPreferredMediaChunkAlignment                             = objc.RegisterName("setPreferredMediaChunkAlignment:")
+	_aVAssetWriterInputSelSampleReferenceBaseURL                                      = objc.RegisterName("sampleReferenceBaseURL")
+	_aVAssetWriterInputSelSetSampleReferenceBaseURL                                   = objc.RegisterName("setSampleReferenceBaseURL:")
+	_aVAssetWriterInputSelMediaDataLocation                                           = objc.RegisterName("mediaDataLocation")
+	_aVAssetWriterInputSelSetMediaDataLocation                                        = objc.RegisterName("setMediaDataLocation:")
+	_aVAssetWriterInputSelCanAddTrackAssociationWithTrackOfInputType                  = objc.RegisterName("canAddTrackAssociationWithTrackOfInput:type:")
+	_aVAssetWriterInputSelAddTrackAssociationWithTrackOfInputType                     = objc.RegisterName("addTrackAssociationWithTrackOfInput:type:")
+	_aVAssetWriterInputSelRespondToEachPassDescriptionOnQueueUsing                    = objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:")
+	_aVAssetWriterInputSelMarkCurrentPassAsFinished                                   = objc.RegisterName("markCurrentPassAsFinished")
+	_aVAssetWriterInputSelPerformsMultiPassEncodingIfSupported                        = objc.RegisterName("performsMultiPassEncodingIfSupported")
+	_aVAssetWriterInputSelSetPerformsMultiPassEncodingIfSupported                     = objc.RegisterName("setPerformsMultiPassEncodingIfSupported:")
+	_aVAssetWriterInputSelCanPerformMultiplePasses                                    = objc.RegisterName("canPerformMultiplePasses")
+	_aVAssetWriterInputSelCurrentPassDescription                                      = objc.RegisterName("currentPassDescription")
 )
 
 func AVAssetWriterInputFromID(id objc.ID) *AVAssetWriterInput {
@@ -81,28 +81,36 @@ func AVAssetWriterInputFromID(id objc.ID) *AVAssetWriterInput {
 // Creates a new input of the specified media type to receive sample buffers for writing to the output file. Each new input accepts data for a new track of the AVAssetWriter's output file. Inputs are added to an asset writer using -[AVAssetWriter addInput:]. Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file. This is useful if, for example, you are appending buffers that are already in a desirable compressed format. However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes. In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: instead of this method. For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVSampleRateConverterAudioQualityKey. When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey. If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output. If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey. For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included. See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys. For AVMediaTypeVideo, any output settings dictionary must request a compressed video format. This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h. When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey. See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys. On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecTypeH264 and AVVideoCodecTypeJPEG. AVVideoCodecTypeH264 is not supported on iPhone 3G. For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported. - Parameter mediaType: The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h. - Parameter outputSettings: The settings used for encoding the media appended to the output. See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary. If you only require simple preset-based output settings, see AVOutputSettingsAssistant. - Returns: An instance of AVAssetWriterInput.
 func AVAssetWriterInputAssetWriterInputWithMediaTypeOutputSettings(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInput), _aVAssetWriterInputSelAssetWriterInputWithMediaTypeOutputSettings, mediaType.Ptr(), outputSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
 // Creates a new input of the specified media type to receive sample buffers for writing to the output file. A version of +assetWriterInputWithMediaType:outputSettings: that includes the ability to hint at the format of media data that will be appended to the new instance of AVAssetWriterInput. When a source format hint is provided, the outputSettings dictionary is not required to be fully specified. For AVMediaTypeAudio, this means that AVFormatIDKey is the only required key. For AVMediaTypeVideo, this means that AVVideoCodecKey is the only required key. Values for the remaining keys will be chosen by the asset writer input, with consideration given to the attributes of the source format. To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended buffers are of the specified format. This method throws an exception for any of the following reasons: - the media type of the format description does not match the media type passed into this method - the width and height of video format hint are not positive - the output settings do not match the supplied media type - for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey) - the output scaling mode is AVVideoScalingModeFit - the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey - Parameter mediaType: The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h. - Parameter outputSettings: The settings used for encoding the media appended to the output. See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary. If you only require simple preset-based output settings, see AVOutputSettingsAssistant. - Parameter sourceFormatHint: A hint about the format of media data that will be appended to the new input. - Returns: An instance of AVAssetWriterInput.
 func AVAssetWriterInputAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], sourceFormatHint unsafe.Pointer) *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInput), _aVAssetWriterInputSelAssetWriterInputWithMediaTypeOutputSettingsSourceFormatHint, mediaType.Ptr(), outputSettings, sourceFormatHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
 // Creates a new input of the specified media type to receive sample buffers for writing to the output file. Each new input accepts data for a new track of the AVAssetWriter's output file. Inputs are added to an asset writer using -[AVAssetWriter addInput:]. Passing nil for output settings instructs the input to pass through appended samples, doing no processing before they are written to the output file. This is useful if, for example, you are appending buffers that are already in a desirable compressed format. However, if not writing to a QuickTime Movie file (i.e. the AVAssetWriter was initialized with a file type other than AVFileTypeQuickTimeMovie), AVAssetWriter only supports passing through a restricted set of media types and subtypes. In order to pass through media data to files other than AVFileTypeQuickTimeMovie, a non-NULL format hint must be provided using -initWithMediaType:outputSettings:sourceFormatHint: instead of this method. For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVSampleRateConverterAudioQualityKey. When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey. If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output. If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey. For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included. See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys. For AVMediaTypeVideo, any output settings dictionary must request a compressed video format. This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h. When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey. See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys. On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecTypeH264 and AVVideoCodecTypeJPEG. AVVideoCodecTypeH264 is not supported on iPhone 3G. For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported. This method throws an exception for any of the following reasons: - the media type of the format description does not match the media type passed into this method - the output settings do not match the supplied media type - for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey) - the output scaling mode is AVVideoScalingModeFit - the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey - Parameter mediaType: The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h. - Parameter outputSettings: The settings used for encoding the media appended to the output. See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary. If you only require simple preset-based output settings, see AVOutputSettingsAssistant. - Returns: An instance of AVAssetWriterInput.
 func (o *AVAssetWriterInput) InitWithMediaTypeOutputSettings(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelInitWithMediaTypeOutputSettings, mediaType.Ptr(), outputSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
 // Creates a new input of the specified media type to receive sample buffers for writing to the output file. This is the designated initializer of AVAssetWriterInput. A version of -initWithMediaType:outputSettings: that includes the ability to hint at the format of media data that will be appended to the new instance of AVAssetWriterInput. When a source format hint is provided, the outputSettings dictionary is not required to be fully specified. For AVMediaTypeAudio, this means that AVFormatIDKey is the only required key. For AVMediaTypeVideo, this means that AVVideoCodecKey is the only required key. Values for the remaining keys will be chosen by the asset writer input, with consideration given to the attributes of the source format. To guarantee successful file writing, clients who specify a format hint should ensure that subsequently-appended buffers are of the specified format. This method throws an exception for any of the following reasons: - the media type of the format description does not match the media type passed into this method - the width and height of video format hint are not positive - the output settings do not match the supplied media type - for video inputs, the output settings do not contain a required key (AVVideoCodecKey, AVVideoWidthKey, AVVideoHeightKey) - the output scaling mode is AVVideoScalingModeFit - the output settings contain AVSampleRateConverterAudioQualityKey or AVVideoDecompressionPropertiesKey - Parameter mediaType: The media type of samples that will be accepted by the input. Media types are defined in AVMediaFormat.h. - Parameter outputSettings: The settings used for encoding the media appended to the output. See AVAudioSettings.h for AVMediaTypeAudio or AVVideoSettings.h for AVMediaTypeVideo and for more information on how to construct an output settings dictionary. If you only require simple preset-based output settings, see AVOutputSettingsAssistant. - Parameter sourceFormatHint: A hint about the format of media data that will be appended to the new input. - Returns: An instance of AVAssetWriterInput.
 func (o *AVAssetWriterInput) InitWithMediaTypeOutputSettingsSourceFormatHint(mediaType *foundation.NSString, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], sourceFormatHint unsafe.Pointer) *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelInitWithMediaTypeOutputSettingsSourceFormatHint, mediaType.Ptr(), outputSettings, sourceFormatHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
 
@@ -132,7 +140,9 @@ func (o *AVAssetWriterInput) MarkAsFinished() {
 // The media type of the samples that can be appended to the receiver. The value of this property is one of the media types defined in AVMediaFormat.h.
 func (o *AVAssetWriterInput) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,7 +161,9 @@ func (o *AVAssetWriterInput) SourceFormatHint() unsafe.Pointer {
 // A collection of metadata to be written to the track corresponding to the receiver. The value of this property is an array of AVMetadataItem objects representing the collection of track-level metadata to be written in the output file. This property cannot be set after writing on the receiver's AVAssetWriter has started.
 func (o *AVAssetWriterInput) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -179,7 +191,9 @@ func (o *AVAssetWriterInput) SetExpectsMediaDataInRealTime(expectsMediaDataInRea
 // Indicates the language to associate with the track corresponding to the receiver, as an ISO 639-2/T language code; can be nil. Also see extendedLanguageTag below. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if a language code is set which does not conform to the ISO 639-2/T language codes.
 func (o *AVAssetWriterInput) LanguageCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelLanguageCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -190,7 +204,9 @@ func (o *AVAssetWriterInput) SetLanguageCode(languageCode *foundation.NSString) 
 // Indicates the language tag to associate with the track corresponding to the receiver, as an IETF BCP 47 (RFC 4646) language identifier; can be nil. Extended language tags are normally set only when an ISO 639-2/T language code by itself is ambiguous, as in cases in which media data should be distinguished not only by language but also by the regional dialect in use or the writing system employed. This property cannot be set after writing on the receiver's AVAssetWriter has started. This property throws an exception if an extended language tag is set which does not conform to the IETF BCP 47 (RFC 4646) language identifiers.
 func (o *AVAssetWriterInput) ExtendedLanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelExtendedLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -270,7 +286,9 @@ func (o *AVAssetWriterInput) SetPreferredMediaChunkAlignment(preferredMediaChunk
 // For file types that support writing sample references, such as QuickTime Movie files, specifies the base URL sample references are relative to. If the value of this property can be resolved as an absolute URL, the sample locations written to the file when appending sample references will be relative to this URL. The URL must point to a location that is in a directory that is a parent of the sample reference location. Usage example: Setting the sampleReferenceBaseURL property to "file:///User/johnappleseed/Movies/" and appending sample buffers with the kCMSampleBufferAttachmentKey_SampleReferenceURL attachment set to "file:///User/johnappleseed/Movies/data/movie1.mov" will cause the sample reference "data/movie1.mov" to be written to the movie. If the value of the property cannot be resolved as an absolute URL or if it points to a location that is not in a parent directory of the sample reference location, the location referenced in the sample buffer will be written unmodified. The default value is nil, which means that the location referenced in the sample buffer will be written unmodified. This property cannot be set after -startWriting has been called on the receiver.
 func (o *AVAssetWriterInput) SampleReferenceBaseURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelSampleReferenceBaseURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -281,7 +299,9 @@ func (o *AVAssetWriterInput) SetSampleReferenceBaseURL(sampleReferenceBaseURL *f
 // Specifies where the media data will be laid out and whether the media data will be interleaved as the main media data. If this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter tries to write the media data for this track before all the media data for AVAssetWriterInputs with this property set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData. Use of this property is recommended for optimizing tracks that contain a small amount of data that is needed all at once, independent of playback time, such as chapter name tracks and chapter image tracks. Keep it set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData for tracks whose media data that's needed only as its presentation time is approaching and, when multiple inputs are present that supply media data that will be played concurrently, should be interleaved for optimal access. For file types that support preloading media data such as QuickTime movie file, if this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter will write an indication such as 'load' atom that the whole media data should be preloaded. The default value is AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, which means that the receiver will not write the indication and that the media data will be interleaved. This property cannot be set after -startWriting has been called on the receiver.
 func (o *AVAssetWriterInput) MediaDataLocation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelMediaDataLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -336,7 +356,8 @@ func (o *AVAssetWriterInput) CanPerformMultiplePasses() bool {
 // Provides an object that describes the requirements, such as source time ranges to append or re-append, for the current pass. If the value of this property is nil, it means there is no request to be fulfilled and -markAsFinished should be called on the asset writer input. During the first pass, the request will contain a single time range from zero to positive infinity, indicating that all media from the source should be appended. This will also be true when canPerformMultiplePasses is NO, in which case only one pass will be performed. The value of this property will be nil before -startWriting is called on the attached asset writer. It will transition to an initial non-nil value during the call to -startWriting. After that, the value of this property will change only after a call to -markCurrentPassAsFinished. For an easy way to be notified at the beginning of each pass, see -respondToEachPassDescriptionOnQueue:usingBlock:. This property is key-value observable. Observers should not assume that they will be notified of changes on a specific thread.
 func (o *AVAssetWriterInput) CurrentPassDescription() *AVAssetWriterInputPassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputSelCurrentPassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputPassDescriptionFromID(_ret)
 }
-

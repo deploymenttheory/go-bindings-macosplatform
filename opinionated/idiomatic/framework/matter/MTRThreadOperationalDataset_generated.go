@@ -123,4 +123,3 @@ type MTRThreadOperationalDatasetable interface {
 }
 
 var _ MTRThreadOperationalDatasetable = (*MTRThreadOperationalDataset)(nil)
-

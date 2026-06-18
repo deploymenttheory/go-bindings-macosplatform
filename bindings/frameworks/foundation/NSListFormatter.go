@@ -15,13 +15,13 @@ type NSListFormatter struct {
 }
 
 var (
-	_clsNSListFormatter = _objcClass("NSListFormatter")
+	_clsNSListFormatter                                = _objcClass("NSListFormatter")
 	_nSListFormatterSelLocalizedStringByJoiningStrings = objc.RegisterName("localizedStringByJoiningStrings:")
-	_nSListFormatterSelStringFromItems = objc.RegisterName("stringFromItems:")
-	_nSListFormatterSelLocale = objc.RegisterName("locale")
-	_nSListFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_nSListFormatterSelItemFormatter = objc.RegisterName("itemFormatter")
-	_nSListFormatterSelSetItemFormatter = objc.RegisterName("setItemFormatter:")
+	_nSListFormatterSelStringFromItems                 = objc.RegisterName("stringFromItems:")
+	_nSListFormatterSelLocale                          = objc.RegisterName("locale")
+	_nSListFormatterSelSetLocale                       = objc.RegisterName("setLocale:")
+	_nSListFormatterSelItemFormatter                   = objc.RegisterName("itemFormatter")
+	_nSListFormatterSelSetItemFormatter                = objc.RegisterName("setItemFormatter:")
 )
 
 func NSListFormatterFromID(id objc.ID) *NSListFormatter {
@@ -36,19 +36,25 @@ func NSListFormatterFromID(id objc.ID) *NSListFormatter {
 
 func NSListFormatterLocalizedStringByJoiningStrings(strings_ *NSArray[*NSString]) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSListFormatter), _nSListFormatterSelLocalizedStringByJoiningStrings, strings_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSListFormatter) StringFromItems(items *NSArray[objc.ID]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelStringFromItems, items)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSListFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -58,11 +64,12 @@ func (o *NSListFormatter) SetLocale(locale *NSLocale) {
 
 func (o *NSListFormatter) ItemFormatter() *NSFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSListFormatterSelItemFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFormatterFromID(_ret)
 }
 
 func (o *NSListFormatter) SetItemFormatter(itemFormatter *NSFormatter) {
 	o.Ptr().Send(_nSListFormatterSelSetItemFormatter, itemFormatter.Ptr())
 }
-

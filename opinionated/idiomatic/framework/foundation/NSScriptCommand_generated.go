@@ -272,4 +272,3 @@ type ScriptCommandable interface {
 }
 
 var _ ScriptCommandable = (*ScriptCommand)(nil)
-

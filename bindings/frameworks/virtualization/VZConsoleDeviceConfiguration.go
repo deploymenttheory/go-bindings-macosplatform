@@ -26,4 +26,3 @@ func VZConsoleDeviceConfigurationFromID(id objc.ID) *VZConsoleDeviceConfiguratio
 	purego.Track(o)
 	return o
 }
-

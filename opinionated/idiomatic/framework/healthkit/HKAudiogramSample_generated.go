@@ -58,4 +58,3 @@ type AudiogramSampleable interface {
 }
 
 var _ AudiogramSampleable = (*AudiogramSample)(nil)
-

@@ -17,4 +17,3 @@ type LSMResult struct{}
 // C struct: __LSMText
 // LSMText is an opaque type.
 type LSMText struct{}
-

@@ -17,11 +17,11 @@ type NSProtocolChecker struct {
 }
 
 var (
-	_clsNSProtocolChecker = _objcClass("NSProtocolChecker")
-	_nSProtocolCheckerSelProtocol = objc.RegisterName("protocol")
-	_nSProtocolCheckerSelTarget = objc.RegisterName("target")
+	_clsNSProtocolChecker                                  = _objcClass("NSProtocolChecker")
+	_nSProtocolCheckerSelProtocol                          = objc.RegisterName("protocol")
+	_nSProtocolCheckerSelTarget                            = objc.RegisterName("target")
 	_nSProtocolCheckerSelProtocolCheckerWithTargetProtocol = objc.RegisterName("protocolCheckerWithTarget:protocol:")
-	_nSProtocolCheckerSelInitWithTargetProtocol = objc.RegisterName("initWithTarget:protocol:")
+	_nSProtocolCheckerSelInitWithTargetProtocol            = objc.RegisterName("initWithTarget:protocol:")
 )
 
 func NSProtocolCheckerFromID(id objc.ID) *NSProtocolChecker {
@@ -41,19 +41,24 @@ func (o *NSProtocolChecker) Protocol() unsafe.Pointer {
 
 func (o *NSProtocolChecker) Target() *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProtocolCheckerSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectFromID(_ret)
 }
 
 func NSProtocolCheckerProtocolCheckerWithTargetProtocol(anObject *NSObject, aProtocol unsafe.Pointer) *NSProtocolChecker {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSProtocolChecker), _nSProtocolCheckerSelProtocolCheckerWithTargetProtocol, anObject.Ptr(), aProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProtocolCheckerFromID(_ret)
 }
 
 func (o *NSProtocolChecker) InitWithTargetProtocol(anObject *NSObject, aProtocol unsafe.Pointer) *NSProtocolChecker {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProtocolCheckerSelInitWithTargetProtocol, anObject.Ptr(), aProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProtocolCheckerFromID(_ret)
 }
-

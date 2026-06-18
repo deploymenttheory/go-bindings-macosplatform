@@ -16,8 +16,8 @@ type AVDelegatingPlaybackCoordinatorPlaybackControlCommand struct {
 }
 
 var (
-	_clsAVDelegatingPlaybackCoordinatorPlaybackControlCommand = _objcClass("AVDelegatingPlaybackCoordinatorPlaybackControlCommand")
-	_aVDelegatingPlaybackCoordinatorPlaybackControlCommandSelOriginator = objc.RegisterName("originator")
+	_clsAVDelegatingPlaybackCoordinatorPlaybackControlCommand                              = _objcClass("AVDelegatingPlaybackCoordinatorPlaybackControlCommand")
+	_aVDelegatingPlaybackCoordinatorPlaybackControlCommandSelOriginator                    = objc.RegisterName("originator")
 	_aVDelegatingPlaybackCoordinatorPlaybackControlCommandSelExpectedCurrentItemIdentifier = objc.RegisterName("expectedCurrentItemIdentifier")
 )
 
@@ -34,14 +34,17 @@ func AVDelegatingPlaybackCoordinatorPlaybackControlCommandFromID(id objc.ID) *AV
 // The participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
 func (o *AVDelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *AVCoordinatedPlaybackParticipant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDelegatingPlaybackCoordinatorPlaybackControlCommandSelOriginator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCoordinatedPlaybackParticipantFromID(_ret)
 }
 
 // Indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
 func (o *AVDelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDelegatingPlaybackCoordinatorPlaybackControlCommandSelExpectedCurrentItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

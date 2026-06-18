@@ -12,4 +12,3 @@ import (
 func IsAvailable() bool {
 	return raw.SACrashDetectionManagerIsAvailable()
 }
-

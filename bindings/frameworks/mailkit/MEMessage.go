@@ -16,20 +16,20 @@ type MEMessage struct {
 }
 
 var (
-	_clsMEMessage = _objcClass("MEMessage")
-	_mEMessageSelState = objc.RegisterName("state")
-	_mEMessageSelEncryptionState = objc.RegisterName("encryptionState")
-	_mEMessageSelSubject = objc.RegisterName("subject")
-	_mEMessageSelFromAddress = objc.RegisterName("fromAddress")
-	_mEMessageSelToAddresses = objc.RegisterName("toAddresses")
-	_mEMessageSelCcAddresses = objc.RegisterName("ccAddresses")
-	_mEMessageSelBccAddresses = objc.RegisterName("bccAddresses")
-	_mEMessageSelReplyToAddresses = objc.RegisterName("replyToAddresses")
+	_clsMEMessage                      = _objcClass("MEMessage")
+	_mEMessageSelState                 = objc.RegisterName("state")
+	_mEMessageSelEncryptionState       = objc.RegisterName("encryptionState")
+	_mEMessageSelSubject               = objc.RegisterName("subject")
+	_mEMessageSelFromAddress           = objc.RegisterName("fromAddress")
+	_mEMessageSelToAddresses           = objc.RegisterName("toAddresses")
+	_mEMessageSelCcAddresses           = objc.RegisterName("ccAddresses")
+	_mEMessageSelBccAddresses          = objc.RegisterName("bccAddresses")
+	_mEMessageSelReplyToAddresses      = objc.RegisterName("replyToAddresses")
 	_mEMessageSelAllRecipientAddresses = objc.RegisterName("allRecipientAddresses")
-	_mEMessageSelDateSent = objc.RegisterName("dateSent")
-	_mEMessageSelDateReceived = objc.RegisterName("dateReceived")
-	_mEMessageSelHeaders = objc.RegisterName("headers")
-	_mEMessageSelRawData = objc.RegisterName("rawData")
+	_mEMessageSelDateSent              = objc.RegisterName("dateSent")
+	_mEMessageSelDateReceived          = objc.RegisterName("dateReceived")
+	_mEMessageSelHeaders               = objc.RegisterName("headers")
+	_mEMessageSelRawData               = objc.RegisterName("rawData")
 )
 
 func MEMessageFromID(id objc.ID) *MEMessage {
@@ -57,63 +57,81 @@ func (o *MEMessage) EncryptionState() MEMessageEncryptionState {
 // @brief The subject of the mail message.
 func (o *MEMessage) Subject() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief Message sender's email address.
 func (o *MEMessage) FromAddress() *MEEmailAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelFromAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEEmailAddressFromID(_ret)
 }
 
 // @brief Recipient email addresses in the "To" address field of the message.
 func (o *MEMessage) ToAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelToAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief Recipient email addresses in the "Cc" address field of the message.
 func (o *MEMessage) CcAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelCcAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief Recipient email addresses in the "Bcc" address field of the message.
 func (o *MEMessage) BccAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelBccAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief Recipient email addresses in the "Reply-To" field of the message.
 func (o *MEMessage) ReplyToAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelReplyToAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief An array containing all recipients of the message.
 func (o *MEMessage) AllRecipientAddresses() *foundation.NSArray[*MEEmailAddress] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelAllRecipientAddresses)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MEEmailAddress](_ret)
 }
 
 // @brief The date the mail message was sent. Optionally set by the by the sender.
 func (o *MEMessage) DateSent() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelDateSent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @brief The date the mail message was received. Only present if the message has been received.
 func (o *MEMessage) DateReceived() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelDateReceived)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -126,7 +144,8 @@ func (o *MEMessage) Headers() *foundation.NSDictionary[*foundation.NSString, obj
 // @brief The full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
 func (o *MEMessage) RawData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEMessageSelRawData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

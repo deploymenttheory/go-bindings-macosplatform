@@ -16,14 +16,14 @@ type MTLCounterSampleBufferDescriptor struct {
 }
 
 var (
-	_clsMTLCounterSampleBufferDescriptor = _objcClass("MTLCounterSampleBufferDescriptor")
-	_mTLCounterSampleBufferDescriptorSelCounterSet = objc.RegisterName("counterSet")
-	_mTLCounterSampleBufferDescriptorSelSetCounterSet = objc.RegisterName("setCounterSet:")
-	_mTLCounterSampleBufferDescriptorSelLabel = objc.RegisterName("label")
-	_mTLCounterSampleBufferDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLCounterSampleBufferDescriptorSelStorageMode = objc.RegisterName("storageMode")
+	_clsMTLCounterSampleBufferDescriptor               = _objcClass("MTLCounterSampleBufferDescriptor")
+	_mTLCounterSampleBufferDescriptorSelCounterSet     = objc.RegisterName("counterSet")
+	_mTLCounterSampleBufferDescriptorSelSetCounterSet  = objc.RegisterName("setCounterSet:")
+	_mTLCounterSampleBufferDescriptorSelLabel          = objc.RegisterName("label")
+	_mTLCounterSampleBufferDescriptorSelSetLabel       = objc.RegisterName("setLabel:")
+	_mTLCounterSampleBufferDescriptorSelStorageMode    = objc.RegisterName("storageMode")
 	_mTLCounterSampleBufferDescriptorSelSetStorageMode = objc.RegisterName("setStorageMode:")
-	_mTLCounterSampleBufferDescriptorSelSampleCount = objc.RegisterName("sampleCount")
+	_mTLCounterSampleBufferDescriptorSelSampleCount    = objc.RegisterName("sampleCount")
 	_mTLCounterSampleBufferDescriptorSelSetSampleCount = objc.RegisterName("setSampleCount:")
 )
 
@@ -50,7 +50,9 @@ func (o *MTLCounterSampleBufferDescriptor) SetCounterSet(counterSet MTLCounterSe
 // @property label A label to identify the sample buffer in debugging tools.
 func (o *MTLCounterSampleBufferDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLCounterSampleBufferDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *MTLCounterSampleBufferDescriptor) SampleCount() uint {
 func (o *MTLCounterSampleBufferDescriptor) SetSampleCount(sampleCount uint) {
 	o.Ptr().Send(_mTLCounterSampleBufferDescriptorSelSetSampleCount, sampleCount)
 }
-

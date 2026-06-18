@@ -16,7 +16,7 @@ type MLImageSize struct {
 }
 
 var (
-	_clsMLImageSize = _objcClass("MLImageSize")
+	_clsMLImageSize           = _objcClass("MLImageSize")
 	_mLImageSizeSelPixelsWide = objc.RegisterName("pixelsWide")
 	_mLImageSizeSelPixelsHigh = objc.RegisterName("pixelsHigh")
 )
@@ -40,4 +40,3 @@ func (o *MLImageSize) PixelsHigh() int {
 	_ret := objc.Send[int](o.Ptr(), _mLImageSizeSelPixelsHigh)
 	return _ret
 }
-

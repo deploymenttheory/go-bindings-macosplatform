@@ -35,7 +35,9 @@ func NewLengthResolutionResult() *LengthResolutionResult {
 	return &LengthResolutionResult{inner: raw.INLengthResolutionResultFromID(_id)}
 }
 
-func (x *LengthResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *LengthResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // LengthResolutionResultable is the interface implemented by [LengthResolutionResult], for mocking and DI.
 type LengthResolutionResultable interface {
@@ -43,4 +45,3 @@ type LengthResolutionResultable interface {
 }
 
 var _ LengthResolutionResultable = (*LengthResolutionResult)(nil)
-

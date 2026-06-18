@@ -46,7 +46,9 @@ func (x *CalendarNotificationTrigger) DateComponents() *foundation.NSDateCompone
 	return x.inner.DateComponents()
 }
 
-func (x *CalendarNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
+func (x *CalendarNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
+	return &x.inner.UNNotificationTrigger
+}
 
 // CalendarNotificationTriggerable is the interface implemented by [CalendarNotificationTrigger], for mocking and DI.
 type CalendarNotificationTriggerable interface {
@@ -56,4 +58,3 @@ type CalendarNotificationTriggerable interface {
 }
 
 var _ CalendarNotificationTriggerable = (*CalendarNotificationTrigger)(nil)
-

@@ -71,4 +71,3 @@ type SyncedDirectoryVersionable interface {
 }
 
 var _ SyncedDirectoryVersionable = (*SyncedDirectoryVersion)(nil)
-

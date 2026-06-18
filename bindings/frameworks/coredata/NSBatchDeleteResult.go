@@ -15,8 +15,8 @@ type NSBatchDeleteResult struct {
 }
 
 var (
-	_clsNSBatchDeleteResult = _objcClass("NSBatchDeleteResult")
-	_nSBatchDeleteResultSelResult = objc.RegisterName("result")
+	_clsNSBatchDeleteResult           = _objcClass("NSBatchDeleteResult")
+	_nSBatchDeleteResultSelResult     = objc.RegisterName("result")
 	_nSBatchDeleteResultSelResultType = objc.RegisterName("resultType")
 )
 
@@ -39,4 +39,3 @@ func (o *NSBatchDeleteResult) ResultType() NSBatchDeleteRequestResultType {
 	_ret := objc.Send[NSBatchDeleteRequestResultType](o.Ptr(), _nSBatchDeleteResultSelResultType)
 	return _ret
 }
-

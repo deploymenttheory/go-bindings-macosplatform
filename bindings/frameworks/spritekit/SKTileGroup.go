@@ -18,16 +18,16 @@ type SKTileGroup struct {
 }
 
 var (
-	_clsSKTileGroup = _objcClass("SKTileGroup")
+	_clsSKTileGroup                            = _objcClass("SKTileGroup")
 	_sKTileGroupSelTileGroupWithTileDefinition = objc.RegisterName("tileGroupWithTileDefinition:")
-	_sKTileGroupSelTileGroupWithRules = objc.RegisterName("tileGroupWithRules:")
-	_sKTileGroupSelEmptyTileGroup = objc.RegisterName("emptyTileGroup")
-	_sKTileGroupSelInitWithTileDefinition = objc.RegisterName("initWithTileDefinition:")
-	_sKTileGroupSelInitWithRules = objc.RegisterName("initWithRules:")
-	_sKTileGroupSelRules = objc.RegisterName("rules")
-	_sKTileGroupSelSetRules = objc.RegisterName("setRules:")
-	_sKTileGroupSelName = objc.RegisterName("name")
-	_sKTileGroupSelSetName = objc.RegisterName("setName:")
+	_sKTileGroupSelTileGroupWithRules          = objc.RegisterName("tileGroupWithRules:")
+	_sKTileGroupSelEmptyTileGroup              = objc.RegisterName("emptyTileGroup")
+	_sKTileGroupSelInitWithTileDefinition      = objc.RegisterName("initWithTileDefinition:")
+	_sKTileGroupSelInitWithRules               = objc.RegisterName("initWithRules:")
+	_sKTileGroupSelRules                       = objc.RegisterName("rules")
+	_sKTileGroupSelSetRules                    = objc.RegisterName("setRules:")
+	_sKTileGroupSelName                        = objc.RegisterName("name")
+	_sKTileGroupSelSetName                     = objc.RegisterName("setName:")
 )
 
 func SKTileGroupFromID(id objc.ID) *SKTileGroup {
@@ -43,42 +43,54 @@ func SKTileGroupFromID(id objc.ID) *SKTileGroup {
 // Create a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map. @param tileDefinition the tile definition we wish to place in a tile map
 func SKTileGroupTileGroupWithTileDefinition(tileDefinition *SKTileDefinition) *SKTileGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileGroup), _sKTileGroupSelTileGroupWithTileDefinition, tileDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
 // Create a tile group with the specified rules. @param rules the rules the group will use to determine tile placement
 func SKTileGroupTileGroupWithRules(rules *foundation.NSArray[*SKTileGroupRule]) *SKTileGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileGroup), _sKTileGroupSelTileGroupWithRules, rules.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
 // Create an empty tile group. Placing this in a tile map will erase the existing tile at that location.
 func SKTileGroupEmptyTileGroup() *SKTileGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileGroup), _sKTileGroupSelEmptyTileGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
 // Initilize a simple tile group for a single tile definition. This creates and initializes the SKTileGroupRule necessary to place the provided tile definition in a tile map. @param tileDefinition tile definition we wish to place in a tile map
 func (o *SKTileGroup) InitWithTileDefinition(tileDefinition *SKTileDefinition) *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelInitWithTileDefinition, tileDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
 // Initilize a tile group with the specified rules. @param rules the rules the group will use to determine tile placement
 func (o *SKTileGroup) InitWithRules(rules *foundation.NSArray[*SKTileGroupRule]) *SKTileGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelInitWithRules, rules.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupFromID(_ret)
 }
 
 // The rules that govern which tiles are placed when this group is used, and where in the map they'll be placed.
 func (o *SKTileGroup) Rules() *foundation.NSArray[*SKTileGroupRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKTileGroupRule](_ret)
 }
 
@@ -89,11 +101,12 @@ func (o *SKTileGroup) SetRules(rules *foundation.NSArray[*SKTileGroupRule]) {
 // Client-assignable name for the tile group. Defaults to nil.
 func (o *SKTileGroup) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SKTileGroup) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_sKTileGroupSelSetName, name.Ptr())
 }
-

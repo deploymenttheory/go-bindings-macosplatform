@@ -49,4 +49,3 @@ type NotificationTriggerable interface {
 }
 
 var _ NotificationTriggerable = (*NotificationTrigger)(nil)
-

@@ -62,4 +62,3 @@ type BarcodeEventMetadataRequestable interface {
 }
 
 var _ BarcodeEventMetadataRequestable = (*BarcodeEventMetadataRequest)(nil)
-

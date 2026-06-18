@@ -104,4 +104,3 @@ type PropertyMappingable interface {
 }
 
 var _ PropertyMappingable = (*PropertyMapping)(nil)
-

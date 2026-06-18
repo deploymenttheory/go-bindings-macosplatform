@@ -16,11 +16,11 @@ type EKRecurrenceEnd struct {
 }
 
 var (
-	_clsEKRecurrenceEnd = _objcClass("EKRecurrenceEnd")
-	_eKRecurrenceEndSelRecurrenceEndWithEndDate = objc.RegisterName("recurrenceEndWithEndDate:")
+	_clsEKRecurrenceEnd                                 = _objcClass("EKRecurrenceEnd")
+	_eKRecurrenceEndSelRecurrenceEndWithEndDate         = objc.RegisterName("recurrenceEndWithEndDate:")
 	_eKRecurrenceEndSelRecurrenceEndWithOccurrenceCount = objc.RegisterName("recurrenceEndWithOccurrenceCount:")
-	_eKRecurrenceEndSelEndDate = objc.RegisterName("endDate")
-	_eKRecurrenceEndSelOccurrenceCount = objc.RegisterName("occurrenceCount")
+	_eKRecurrenceEndSelEndDate                          = objc.RegisterName("endDate")
+	_eKRecurrenceEndSelOccurrenceCount                  = objc.RegisterName("occurrenceCount")
 )
 
 func EKRecurrenceEndFromID(id objc.ID) *EKRecurrenceEnd {
@@ -36,21 +36,27 @@ func EKRecurrenceEndFromID(id objc.ID) *EKRecurrenceEnd {
 // @method     recurrenceEndWithEndDate: @abstract   Creates an autoreleased recurrence end with a specific end date.
 func EKRecurrenceEndRecurrenceEndWithEndDate(endDate *foundation.NSDate) *EKRecurrenceEnd {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceEnd), _eKRecurrenceEndSelRecurrenceEndWithEndDate, endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceEndFromID(_ret)
 }
 
 // @method     recurrenceEndWithOccurrenceCount: @abstract   Creates an autoreleased recurrence end with a maximum occurrence count.
 func EKRecurrenceEndRecurrenceEndWithOccurrenceCount(occurrenceCount uint) *EKRecurrenceEnd {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceEnd), _eKRecurrenceEndSelRecurrenceEndWithOccurrenceCount, occurrenceCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceEndFromID(_ret)
 }
 
 // @property   endDate @abstract   The end date of this recurrence, or nil if it's count-based.
 func (o *EKRecurrenceEnd) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceEndSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -59,4 +65,3 @@ func (o *EKRecurrenceEnd) OccurrenceCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _eKRecurrenceEndSelOccurrenceCount)
 	return _ret
 }
-

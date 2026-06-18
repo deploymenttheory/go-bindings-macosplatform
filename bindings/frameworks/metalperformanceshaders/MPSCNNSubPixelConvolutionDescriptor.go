@@ -16,8 +16,8 @@ type MPSCNNSubPixelConvolutionDescriptor struct {
 }
 
 var (
-	_clsMPSCNNSubPixelConvolutionDescriptor = _objcClass("MPSCNNSubPixelConvolutionDescriptor")
-	_mPSCNNSubPixelConvolutionDescriptorSelSubPixelScaleFactor = objc.RegisterName("subPixelScaleFactor")
+	_clsMPSCNNSubPixelConvolutionDescriptor                       = _objcClass("MPSCNNSubPixelConvolutionDescriptor")
+	_mPSCNNSubPixelConvolutionDescriptorSelSubPixelScaleFactor    = objc.RegisterName("subPixelScaleFactor")
 	_mPSCNNSubPixelConvolutionDescriptorSelSetSubPixelScaleFactor = objc.RegisterName("setSubPixelScaleFactor:")
 )
 
@@ -40,4 +40,3 @@ func (o *MPSCNNSubPixelConvolutionDescriptor) SubPixelScaleFactor() uint {
 func (o *MPSCNNSubPixelConvolutionDescriptor) SetSubPixelScaleFactor(subPixelScaleFactor uint) {
 	o.Ptr().Send(_mPSCNNSubPixelConvolutionDescriptorSelSetSubPixelScaleFactor, subPixelScaleFactor)
 }
-

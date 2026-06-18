@@ -72,4 +72,3 @@ type CoordinatedPlaybackSuspensionable interface {
 }
 
 var _ CoordinatedPlaybackSuspensionable = (*CoordinatedPlaybackSuspension)(nil)
-

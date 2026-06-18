@@ -166,4 +166,3 @@ type CaptureScreenInputable interface {
 }
 
 var _ CaptureScreenInputable = (*CaptureScreenInput)(nil)
-

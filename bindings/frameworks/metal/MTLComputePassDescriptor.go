@@ -16,10 +16,10 @@ type MTLComputePassDescriptor struct {
 }
 
 var (
-	_clsMTLComputePassDescriptor = _objcClass("MTLComputePassDescriptor")
-	_mTLComputePassDescriptorSelComputePassDescriptor = objc.RegisterName("computePassDescriptor")
-	_mTLComputePassDescriptorSelDispatchType = objc.RegisterName("dispatchType")
-	_mTLComputePassDescriptorSelSetDispatchType = objc.RegisterName("setDispatchType:")
+	_clsMTLComputePassDescriptor                        = _objcClass("MTLComputePassDescriptor")
+	_mTLComputePassDescriptorSelComputePassDescriptor   = objc.RegisterName("computePassDescriptor")
+	_mTLComputePassDescriptorSelDispatchType            = objc.RegisterName("dispatchType")
+	_mTLComputePassDescriptorSelSetDispatchType         = objc.RegisterName("setDispatchType:")
 	_mTLComputePassDescriptorSelSampleBufferAttachments = objc.RegisterName("sampleBufferAttachments")
 )
 
@@ -36,7 +36,9 @@ func MTLComputePassDescriptorFromID(id objc.ID) *MTLComputePassDescriptor {
 // @method computePassDescriptor @abstract Create an autoreleased default frame buffer descriptor
 func MTLComputePassDescriptorComputePassDescriptor() *MTLComputePassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLComputePassDescriptor), _mTLComputePassDescriptorSelComputePassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLComputePassDescriptorFromID(_ret)
 }
 
@@ -53,7 +55,8 @@ func (o *MTLComputePassDescriptor) SetDispatchType(dispatchType MTLDispatchType)
 // @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
 func (o *MTLComputePassDescriptor) SampleBufferAttachments() *MTLComputePassSampleBufferAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePassDescriptorSelSampleBufferAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(_ret)
 }
-

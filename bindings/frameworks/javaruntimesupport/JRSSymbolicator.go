@@ -16,9 +16,9 @@ type JRSSymbolicator struct {
 }
 
 var (
-	_clsJRSSymbolicator = _objcClass("JRSSymbolicator")
+	_clsJRSSymbolicator                   = _objcClass("JRSSymbolicator")
 	_jRSSymbolicatorSelSymbolicatorForPid = objc.RegisterName("symbolicatorForPid:")
-	_jRSSymbolicatorSelAddressForSymbol = objc.RegisterName("addressForSymbol:")
+	_jRSSymbolicatorSelAddressForSymbol   = objc.RegisterName("addressForSymbol:")
 )
 
 func JRSSymbolicatorFromID(id objc.ID) *JRSSymbolicator {
@@ -33,7 +33,9 @@ func JRSSymbolicatorFromID(id objc.ID) *JRSSymbolicator {
 
 func JRSSymbolicatorSymbolicatorForPid(pid int) *JRSSymbolicator {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJRSSymbolicator), _jRSSymbolicatorSelSymbolicatorForPid, pid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JRSSymbolicatorFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *JRSSymbolicator) AddressForSymbol(symbolName *foundation.NSString) uint
 	_ret := objc.Send[uint64](o.Ptr(), _jRSSymbolicatorSelAddressForSymbol, symbolName.Ptr())
 	return _ret
 }
-

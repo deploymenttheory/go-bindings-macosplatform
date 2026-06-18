@@ -15,7 +15,9 @@ type OutgoingMessageTypeResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INOutgoingMessageTypeResolutionResult].
-func (x *OutgoingMessageTypeResolutionResult) Unwrap() *raw.INOutgoingMessageTypeResolutionResult { return x.inner }
+func (x *OutgoingMessageTypeResolutionResult) Unwrap() *raw.INOutgoingMessageTypeResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewOutgoingMessageTypeResolutionResult() *OutgoingMessageTypeResolutionResu
 	return &OutgoingMessageTypeResolutionResult{inner: raw.INOutgoingMessageTypeResolutionResultFromID(_id)}
 }
 
-func (x *OutgoingMessageTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *OutgoingMessageTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // OutgoingMessageTypeResolutionResultable is the interface implemented by [OutgoingMessageTypeResolutionResult], for mocking and DI.
 type OutgoingMessageTypeResolutionResultable interface {
@@ -43,4 +47,3 @@ type OutgoingMessageTypeResolutionResultable interface {
 }
 
 var _ OutgoingMessageTypeResolutionResultable = (*OutgoingMessageTypeResolutionResult)(nil)
-

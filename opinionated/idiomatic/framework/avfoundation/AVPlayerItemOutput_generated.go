@@ -82,4 +82,3 @@ type PlayerItemOutputable interface {
 }
 
 var _ PlayerItemOutputable = (*PlayerItemOutput)(nil)
-

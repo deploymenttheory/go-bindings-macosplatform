@@ -15,15 +15,15 @@ type NSOrderedCollectionChange[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSOrderedCollectionChange = _objcClass("NSOrderedCollectionChange")
-	_nSOrderedCollectionChangeSelChangeWithObjectTypeIndex = objc.RegisterName("changeWithObject:type:index:")
+	_clsNSOrderedCollectionChange                                         = _objcClass("NSOrderedCollectionChange")
+	_nSOrderedCollectionChangeSelChangeWithObjectTypeIndex                = objc.RegisterName("changeWithObject:type:index:")
 	_nSOrderedCollectionChangeSelChangeWithObjectTypeIndexAssociatedIndex = objc.RegisterName("changeWithObject:type:index:associatedIndex:")
-	_nSOrderedCollectionChangeSelInitWithObjectTypeIndex = objc.RegisterName("initWithObject:type:index:")
-	_nSOrderedCollectionChangeSelInitWithObjectTypeIndexAssociatedIndex = objc.RegisterName("initWithObject:type:index:associatedIndex:")
-	_nSOrderedCollectionChangeSelObject = objc.RegisterName("object")
-	_nSOrderedCollectionChangeSelChangeType = objc.RegisterName("changeType")
-	_nSOrderedCollectionChangeSelIndex = objc.RegisterName("index")
-	_nSOrderedCollectionChangeSelAssociatedIndex = objc.RegisterName("associatedIndex")
+	_nSOrderedCollectionChangeSelInitWithObjectTypeIndex                  = objc.RegisterName("initWithObject:type:index:")
+	_nSOrderedCollectionChangeSelInitWithObjectTypeIndexAssociatedIndex   = objc.RegisterName("initWithObject:type:index:associatedIndex:")
+	_nSOrderedCollectionChangeSelObject                                   = objc.RegisterName("object")
+	_nSOrderedCollectionChangeSelChangeType                               = objc.RegisterName("changeType")
+	_nSOrderedCollectionChangeSelIndex                                    = objc.RegisterName("index")
+	_nSOrderedCollectionChangeSelAssociatedIndex                          = objc.RegisterName("associatedIndex")
 )
 
 func NSOrderedCollectionChangeFromID[ObjectType purego.AnyObject](id objc.ID) *NSOrderedCollectionChange[ObjectType] {
@@ -38,25 +38,33 @@ func NSOrderedCollectionChangeFromID[ObjectType purego.AnyObject](id objc.ID) *N
 
 func NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *NSOrderedCollectionChange[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedCollectionChange), _nSOrderedCollectionChangeSelChangeWithObjectTypeIndex, anObject, type_, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionChangeFromID[objc.ID](_ret)
 }
 
 func NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *NSOrderedCollectionChange[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOrderedCollectionChange), _nSOrderedCollectionChangeSelChangeWithObjectTypeIndexAssociatedIndex, anObject, type_, index, associatedIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionChangeFromID[objc.ID](_ret)
 }
 
 func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndex(anObject ObjectType, type_ NSCollectionChangeType, index uint) *NSOrderedCollectionChange[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionChangeSelInitWithObjectTypeIndex, anObject, type_, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionChangeFromID[ObjectType](_ret)
 }
 
 func (o *NSOrderedCollectionChange[ObjectType]) InitWithObjectTypeIndexAssociatedIndex(anObject ObjectType, type_ NSCollectionChangeType, index uint, associatedIndex uint) *NSOrderedCollectionChange[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOrderedCollectionChangeSelInitWithObjectTypeIndexAssociatedIndex, anObject, type_, index, associatedIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOrderedCollectionChangeFromID[ObjectType](_ret)
 }
 
@@ -79,4 +87,3 @@ func (o *NSOrderedCollectionChange[ObjectType]) AssociatedIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOrderedCollectionChangeSelAssociatedIndex)
 	return _ret
 }
-

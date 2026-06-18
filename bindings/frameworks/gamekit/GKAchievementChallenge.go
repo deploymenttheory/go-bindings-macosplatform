@@ -16,7 +16,7 @@ type GKAchievementChallenge struct {
 }
 
 var (
-	_clsGKAchievementChallenge = _objcClass("GKAchievementChallenge")
+	_clsGKAchievementChallenge            = _objcClass("GKAchievementChallenge")
 	_gKAchievementChallengeSelAchievement = objc.RegisterName("achievement")
 )
 
@@ -32,7 +32,8 @@ func GKAchievementChallengeFromID(id objc.ID) *GKAchievementChallenge {
 
 func (o *GKAchievementChallenge) Achievement() *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementChallengeSelAchievement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKAchievementFromID(_ret)
 }
-

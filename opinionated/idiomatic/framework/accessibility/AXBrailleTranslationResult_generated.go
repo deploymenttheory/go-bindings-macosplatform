@@ -65,4 +65,3 @@ type BrailleTranslationResultable interface {
 }
 
 var _ BrailleTranslationResultable = (*BrailleTranslationResult)(nil)
-

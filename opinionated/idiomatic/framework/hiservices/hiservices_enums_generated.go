@@ -109,8 +109,8 @@ type AXValueType int64
 
 const (
 	KAXValueTypeCGPoint AXValueType = 1
-	KAXValueTypeCGSize AXValueType = 2
-	KAXValueTypeCGRect AXValueType = 3
+	KAXValueTypeCGSize  AXValueType = 2
+	KAXValueTypeCGRect  AXValueType = 3
 	KAXValueTypeCFRange AXValueType = 4
 	KAXValueTypeAXError AXValueType = 5
 	KAXValueTypeIllegal AXValueType = 0
@@ -139,13 +139,13 @@ func (e AXValueType) String() string {
 type PasteboardFlavorFlags int64
 
 const (
-	KPasteboardFlavorNoFlags PasteboardFlavorFlags = 0
-	KPasteboardFlavorSenderOnly PasteboardFlavorFlags = 1
+	KPasteboardFlavorNoFlags          PasteboardFlavorFlags = 0
+	KPasteboardFlavorSenderOnly       PasteboardFlavorFlags = 1
 	KPasteboardFlavorSenderTranslated PasteboardFlavorFlags = 2
-	KPasteboardFlavorNotSaved PasteboardFlavorFlags = 4
-	KPasteboardFlavorRequestOnly PasteboardFlavorFlags = 8
+	KPasteboardFlavorNotSaved         PasteboardFlavorFlags = 4
+	KPasteboardFlavorRequestOnly      PasteboardFlavorFlags = 8
 	KPasteboardFlavorSystemTranslated PasteboardFlavorFlags = 256
-	KPasteboardFlavorPromised PasteboardFlavorFlags = 512
+	KPasteboardFlavorPromised         PasteboardFlavorFlags = 512
 )
 
 func (e PasteboardFlavorFlags) String() string {
@@ -178,7 +178,7 @@ func (e PasteboardFlavorFlags) String() string {
 type PasteboardSyncFlags int64
 
 const (
-	KPasteboardModified PasteboardSyncFlags = 1
+	KPasteboardModified      PasteboardSyncFlags = 1
 	KPasteboardClientIsOwner PasteboardSyncFlags = 2
 )
 
@@ -195,4 +195,3 @@ func (e PasteboardSyncFlags) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

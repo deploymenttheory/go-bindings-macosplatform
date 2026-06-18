@@ -16,9 +16,9 @@ type PKAddIdentityDocumentMetadata struct {
 }
 
 var (
-	_clsPKAddIdentityDocumentMetadata = _objcClass("PKAddIdentityDocumentMetadata")
+	_clsPKAddIdentityDocumentMetadata                                                                                                                             = _objcClass("PKAddIdentityDocumentMetadata")
 	_pKAddIdentityDocumentMetadataSelInitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview = objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:")
-	_pKAddIdentityDocumentMetadataSelPreview = objc.RegisterName("preview")
+	_pKAddIdentityDocumentMetadataSelPreview                                                                                                                      = objc.RegisterName("preview")
 )
 
 func PKAddIdentityDocumentMetadataFromID(id objc.ID) *PKAddIdentityDocumentMetadata {
@@ -34,13 +34,16 @@ func PKAddIdentityDocumentMetadataFromID(id objc.ID) *PKAddIdentityDocumentMetad
 // Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI. - issuingCountryCode:  identifies the issuing country of the identity document - identityDocumentType: identifies the type of the identity document - preview: Object containing information to represent the pass to provision in our UI.
 func (o *PKAddIdentityDocumentMetadata) InitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier *foundation.NSString, sharingInstanceIdentifier *foundation.NSString, templateIdentifier *foundation.NSString, issuingCountryCode *foundation.NSString, documentType PKAddIdentityDocumentType, preview *PKAddPassMetadataPreview) *PKAddIdentityDocumentMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddIdentityDocumentMetadataSelInitWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview, credentialIdentifier.Ptr(), sharingInstanceIdentifier.Ptr(), templateIdentifier.Ptr(), issuingCountryCode.Ptr(), documentType, preview.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddIdentityDocumentMetadataFromID(_ret)
 }
 
 func (o *PKAddIdentityDocumentMetadata) Preview() *PKAddPassMetadataPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddIdentityDocumentMetadataSelPreview)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPassMetadataPreviewFromID(_ret)
 }
-

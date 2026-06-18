@@ -18,20 +18,20 @@ type PHAssetCollection struct {
 }
 
 var (
-	_clsPHAssetCollection = _objcClass("PHAssetCollection")
-	_pHAssetCollectionSelFetchAssetCollectionsWithLocalIdentifiersOptions = objc.RegisterName("fetchAssetCollectionsWithLocalIdentifiers:options:")
-	_pHAssetCollectionSelFetchAssetCollectionsWithTypeSubtypeOptions = objc.RegisterName("fetchAssetCollectionsWithType:subtype:options:")
+	_clsPHAssetCollection                                                    = _objcClass("PHAssetCollection")
+	_pHAssetCollectionSelFetchAssetCollectionsWithLocalIdentifiersOptions    = objc.RegisterName("fetchAssetCollectionsWithLocalIdentifiers:options:")
+	_pHAssetCollectionSelFetchAssetCollectionsWithTypeSubtypeOptions         = objc.RegisterName("fetchAssetCollectionsWithType:subtype:options:")
 	_pHAssetCollectionSelFetchAssetCollectionsContainingAssetWithTypeOptions = objc.RegisterName("fetchAssetCollectionsContainingAsset:withType:options:")
-	_pHAssetCollectionSelFetchAssetCollectionsWithALAssetGroupURLsOptions = objc.RegisterName("fetchAssetCollectionsWithALAssetGroupURLs:options:")
-	_pHAssetCollectionSelTransientAssetCollectionWithAssetsTitle = objc.RegisterName("transientAssetCollectionWithAssets:title:")
-	_pHAssetCollectionSelTransientAssetCollectionWithAssetFetchResultTitle = objc.RegisterName("transientAssetCollectionWithAssetFetchResult:title:")
-	_pHAssetCollectionSelAssetCollectionType = objc.RegisterName("assetCollectionType")
-	_pHAssetCollectionSelAssetCollectionSubtype = objc.RegisterName("assetCollectionSubtype")
-	_pHAssetCollectionSelEstimatedAssetCount = objc.RegisterName("estimatedAssetCount")
-	_pHAssetCollectionSelStartDate = objc.RegisterName("startDate")
-	_pHAssetCollectionSelEndDate = objc.RegisterName("endDate")
-	_pHAssetCollectionSelApproximateLocation = objc.RegisterName("approximateLocation")
-	_pHAssetCollectionSelLocalizedLocationNames = objc.RegisterName("localizedLocationNames")
+	_pHAssetCollectionSelFetchAssetCollectionsWithALAssetGroupURLsOptions    = objc.RegisterName("fetchAssetCollectionsWithALAssetGroupURLs:options:")
+	_pHAssetCollectionSelTransientAssetCollectionWithAssetsTitle             = objc.RegisterName("transientAssetCollectionWithAssets:title:")
+	_pHAssetCollectionSelTransientAssetCollectionWithAssetFetchResultTitle   = objc.RegisterName("transientAssetCollectionWithAssetFetchResult:title:")
+	_pHAssetCollectionSelAssetCollectionType                                 = objc.RegisterName("assetCollectionType")
+	_pHAssetCollectionSelAssetCollectionSubtype                              = objc.RegisterName("assetCollectionSubtype")
+	_pHAssetCollectionSelEstimatedAssetCount                                 = objc.RegisterName("estimatedAssetCount")
+	_pHAssetCollectionSelStartDate                                           = objc.RegisterName("startDate")
+	_pHAssetCollectionSelEndDate                                             = objc.RegisterName("endDate")
+	_pHAssetCollectionSelApproximateLocation                                 = objc.RegisterName("approximateLocation")
+	_pHAssetCollectionSelLocalizedLocationNames                              = objc.RegisterName("localizedLocationNames")
 )
 
 func PHAssetCollectionFromID(id objc.ID) *PHAssetCollection {
@@ -46,38 +46,50 @@ func PHAssetCollectionFromID(id objc.ID) *PHAssetCollection {
 
 func PHAssetCollectionFetchAssetCollectionsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithLocalIdentifiersOptions, identifiers, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
 func PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(type_ PHAssetCollectionType, subtype unsafe.Pointer, options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithTypeSubtypeOptions, type_, subtype, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
 func PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset *PHAsset, type_ PHAssetCollectionType, options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsContainingAssetWithTypeOptions, asset.Ptr(), type_, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
 // Deprecated: Will be removed in a future release
 func PHAssetCollectionFetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs *foundation.NSArray[*foundation.NSURL], options *PHFetchOptions) *PHFetchResult[*PHAssetCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelFetchAssetCollectionsWithALAssetGroupURLsOptions, assetGroupURLs, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHAssetCollection](_ret)
 }
 
 func PHAssetCollectionTransientAssetCollectionWithAssetsTitle(assets *foundation.NSArray[*PHAsset], title *foundation.NSString) *PHAssetCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelTransientAssetCollectionWithAssetsTitle, assets.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCollectionFromID(_ret)
 }
 
 func PHAssetCollectionTransientAssetCollectionWithAssetFetchResultTitle(fetchResult *PHFetchResult[*PHAsset], title *foundation.NSString) *PHAssetCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetCollection), _pHAssetCollectionSelTransientAssetCollectionWithAssetFetchResultTitle, fetchResult.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetCollectionFromID(_ret)
 }
 
@@ -98,13 +110,17 @@ func (o *PHAssetCollection) EstimatedAssetCount() uint {
 
 func (o *PHAssetCollection) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetCollectionSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PHAssetCollection) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHAssetCollectionSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -117,4 +133,3 @@ func (o *PHAssetCollection) LocalizedLocationNames() *foundation.NSArray[*founda
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHAssetCollectionSelLocalizedLocationNames)
 	return _ret
 }
-

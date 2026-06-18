@@ -18,22 +18,22 @@ type CATextLayer struct {
 }
 
 var (
-	_clsCATextLayer = _objcClass("CATextLayer")
-	_cATextLayerSelString = objc.RegisterName("string")
-	_cATextLayerSelSetString = objc.RegisterName("setString:")
-	_cATextLayerSelFont = objc.RegisterName("font")
-	_cATextLayerSelSetFont = objc.RegisterName("setFont:")
-	_cATextLayerSelFontSize = objc.RegisterName("fontSize")
-	_cATextLayerSelSetFontSize = objc.RegisterName("setFontSize:")
-	_cATextLayerSelForegroundColor = objc.RegisterName("foregroundColor")
-	_cATextLayerSelSetForegroundColor = objc.RegisterName("setForegroundColor:")
-	_cATextLayerSelIsWrapped = objc.RegisterName("isWrapped")
-	_cATextLayerSelSetWrapped = objc.RegisterName("setWrapped:")
-	_cATextLayerSelTruncationMode = objc.RegisterName("truncationMode")
-	_cATextLayerSelSetTruncationMode = objc.RegisterName("setTruncationMode:")
-	_cATextLayerSelAlignmentMode = objc.RegisterName("alignmentMode")
-	_cATextLayerSelSetAlignmentMode = objc.RegisterName("setAlignmentMode:")
-	_cATextLayerSelAllowsFontSubpixelQuantization = objc.RegisterName("allowsFontSubpixelQuantization")
+	_clsCATextLayer                                  = _objcClass("CATextLayer")
+	_cATextLayerSelString                            = objc.RegisterName("string")
+	_cATextLayerSelSetString                         = objc.RegisterName("setString:")
+	_cATextLayerSelFont                              = objc.RegisterName("font")
+	_cATextLayerSelSetFont                           = objc.RegisterName("setFont:")
+	_cATextLayerSelFontSize                          = objc.RegisterName("fontSize")
+	_cATextLayerSelSetFontSize                       = objc.RegisterName("setFontSize:")
+	_cATextLayerSelForegroundColor                   = objc.RegisterName("foregroundColor")
+	_cATextLayerSelSetForegroundColor                = objc.RegisterName("setForegroundColor:")
+	_cATextLayerSelIsWrapped                         = objc.RegisterName("isWrapped")
+	_cATextLayerSelSetWrapped                        = objc.RegisterName("setWrapped:")
+	_cATextLayerSelTruncationMode                    = objc.RegisterName("truncationMode")
+	_cATextLayerSelSetTruncationMode                 = objc.RegisterName("setTruncationMode:")
+	_cATextLayerSelAlignmentMode                     = objc.RegisterName("alignmentMode")
+	_cATextLayerSelSetAlignmentMode                  = objc.RegisterName("setAlignmentMode:")
+	_cATextLayerSelAllowsFontSubpixelQuantization    = objc.RegisterName("allowsFontSubpixelQuantization")
 	_cATextLayerSelSetAllowsFontSubpixelQuantization = objc.RegisterName("setAllowsFontSubpixelQuantization:")
 )
 
@@ -94,7 +94,9 @@ func (o *CATextLayer) SetWrapped(wrapped bool) {
 
 func (o *CATextLayer) TruncationMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cATextLayerSelTruncationMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,7 +106,9 @@ func (o *CATextLayer) SetTruncationMode(truncationMode *foundation.NSString) {
 
 func (o *CATextLayer) AlignmentMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cATextLayerSelAlignmentMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,4 +124,3 @@ func (o *CATextLayer) AllowsFontSubpixelQuantization() bool {
 func (o *CATextLayer) SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) {
 	o.Ptr().Send(_cATextLayerSelSetAllowsFontSubpixelQuantization, allowsFontSubpixelQuantization)
 }
-

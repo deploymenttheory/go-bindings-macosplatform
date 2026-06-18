@@ -16,25 +16,25 @@ type MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams = _objcClass("MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeID = objc.RegisterName("providerNodeID")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetProviderNodeID = objc.RegisterName("setProviderNodeID:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorID = objc.RegisterName("vendorID")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelAnnouncementReason = objc.RegisterName("announcementReason")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetAnnouncementReason = objc.RegisterName("setAnnouncementReason:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelMetadataForNode = objc.RegisterName("metadataForNode")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetMetadataForNode = objc.RegisterName("setMetadataForNode:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelEndpoint = objc.RegisterName("endpoint")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetEndpoint = objc.RegisterName("setEndpoint:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams                               = _objcClass("MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeID                 = objc.RegisterName("providerNodeID")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetProviderNodeID              = objc.RegisterName("setProviderNodeID:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorID                       = objc.RegisterName("vendorID")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetVendorID                    = objc.RegisterName("setVendorID:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelAnnouncementReason             = objc.RegisterName("announcementReason")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetAnnouncementReason          = objc.RegisterName("setAnnouncementReason:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelMetadataForNode                = objc.RegisterName("metadataForNode")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetMetadataForNode             = objc.RegisterName("setMetadataForNode:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelEndpoint                       = objc.RegisterName("endpoint")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetEndpoint                    = objc.RegisterName("setEndpoint:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeId = objc.RegisterName("providerNodeId")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetProviderNodeId = objc.RegisterName("setProviderNodeId:")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorId = objc.RegisterName("vendorId")
-	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetVendorId = objc.RegisterName("setVendorId:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeId                 = objc.RegisterName("providerNodeId")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetProviderNodeId              = objc.RegisterName("setProviderNodeId:")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorId                       = objc.RegisterName("vendorId")
+	_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetVendorId                    = objc.RegisterName("setVendorId:")
 )
 
 func MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
@@ -49,7 +49,9 @@ func MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsFromID(id objc
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ProviderNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetProvi
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetVendo
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) AnnouncementReason() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelAnnouncementReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetAnnou
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) MetadataForNode() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelMetadataForNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetMetad
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -100,7 +110,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetEndpo
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -111,7 +123,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetTimed
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -121,7 +135,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetServe
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ProviderNodeId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelProviderNodeId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -131,11 +147,12 @@ func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetProvi
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) VendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) SetVendorId(vendorId *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsSelSetVendorId, vendorId.Ptr())
 }
-

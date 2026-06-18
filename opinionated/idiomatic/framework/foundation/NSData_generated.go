@@ -286,4 +286,3 @@ type Dataable interface {
 }
 
 var _ Dataable = (*Data)(nil)
-

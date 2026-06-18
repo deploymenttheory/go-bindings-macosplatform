@@ -598,4 +598,3 @@ func WireTetrahedron() {
 func WireTorus(innerRadius float64, outerRadius float64, sides int32, rings int32) {
 	raw.GlutWireTorus(innerRadius, outerRadius, sides, rings)
 }
-

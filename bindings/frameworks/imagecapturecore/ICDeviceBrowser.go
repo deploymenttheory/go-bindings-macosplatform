@@ -18,17 +18,17 @@ type ICDeviceBrowser struct {
 }
 
 var (
-	_clsICDeviceBrowser = _objcClass("ICDeviceBrowser")
-	_iCDeviceBrowserSelInit = objc.RegisterName("init")
-	_iCDeviceBrowserSelStart = objc.RegisterName("start")
-	_iCDeviceBrowserSelStop = objc.RegisterName("stop")
-	_iCDeviceBrowserSelDelegate = objc.RegisterName("delegate")
-	_iCDeviceBrowserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iCDeviceBrowserSelIsBrowsing = objc.RegisterName("isBrowsing")
-	_iCDeviceBrowserSelBrowsedDeviceTypeMask = objc.RegisterName("browsedDeviceTypeMask")
+	_clsICDeviceBrowser                         = _objcClass("ICDeviceBrowser")
+	_iCDeviceBrowserSelInit                     = objc.RegisterName("init")
+	_iCDeviceBrowserSelStart                    = objc.RegisterName("start")
+	_iCDeviceBrowserSelStop                     = objc.RegisterName("stop")
+	_iCDeviceBrowserSelDelegate                 = objc.RegisterName("delegate")
+	_iCDeviceBrowserSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_iCDeviceBrowserSelIsBrowsing               = objc.RegisterName("isBrowsing")
+	_iCDeviceBrowserSelBrowsedDeviceTypeMask    = objc.RegisterName("browsedDeviceTypeMask")
 	_iCDeviceBrowserSelSetBrowsedDeviceTypeMask = objc.RegisterName("setBrowsedDeviceTypeMask:")
-	_iCDeviceBrowserSelDevices = objc.RegisterName("devices")
-	_iCDeviceBrowserSelPreferredDevice = objc.RegisterName("preferredDevice")
+	_iCDeviceBrowserSelDevices                  = objc.RegisterName("devices")
+	_iCDeviceBrowserSelPreferredDevice          = objc.RegisterName("preferredDevice")
 )
 
 func ICDeviceBrowserFromID(id objc.ID) *ICDeviceBrowser {
@@ -44,7 +44,9 @@ func ICDeviceBrowserFromID(id objc.ID) *ICDeviceBrowser {
 // @method init @abstract This is the designated initializer.
 func (o *ICDeviceBrowser) Init() *ICDeviceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceBrowserSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ICDeviceBrowserFromID(_ret)
 }
 
@@ -87,7 +89,9 @@ func (o *ICDeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDevic
 // @property devices @abstract All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
 func (o *ICDeviceBrowser) Devices() *foundation.NSArray[*ICDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCDeviceBrowserSelDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICDevice](_ret)
 }
 
@@ -96,4 +100,3 @@ func (o *ICDeviceBrowser) PreferredDevice() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iCDeviceBrowserSelPreferredDevice)
 	return _ret
 }
-

@@ -112,4 +112,3 @@ type CaptionConversionValidatorable interface {
 }
 
 var _ CaptionConversionValidatorable = (*CaptionConversionValidator)(nil)
-

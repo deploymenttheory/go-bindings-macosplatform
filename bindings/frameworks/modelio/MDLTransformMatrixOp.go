@@ -16,8 +16,8 @@ type MDLTransformMatrixOp struct {
 }
 
 var (
-	_clsMDLTransformMatrixOp = _objcClass("MDLTransformMatrixOp")
-	_mDLTransformMatrixOpSelName = objc.RegisterName("name")
+	_clsMDLTransformMatrixOp              = _objcClass("MDLTransformMatrixOp")
+	_mDLTransformMatrixOpSelName          = objc.RegisterName("name")
 	_mDLTransformMatrixOpSelAnimatedValue = objc.RegisterName("animatedValue")
 )
 
@@ -33,13 +33,16 @@ func MDLTransformMatrixOpFromID(id objc.ID) *MDLTransformMatrixOp {
 
 func (o *MDLTransformMatrixOp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformMatrixOpSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLTransformMatrixOp) AnimatedValue() *MDLAnimatedMatrix4x4 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformMatrixOpSelAnimatedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedMatrix4x4FromID(_ret)
 }
-

@@ -16,13 +16,13 @@ type PHASENumberMetaParameterDefinition struct {
 }
 
 var (
-	_clsPHASENumberMetaParameterDefinition = _objcClass("PHASENumberMetaParameterDefinition")
-	_pHASENumberMetaParameterDefinitionSelInitWithValueIdentifier = objc.RegisterName("initWithValue:identifier:")
-	_pHASENumberMetaParameterDefinitionSelInitWithValue = objc.RegisterName("initWithValue:")
+	_clsPHASENumberMetaParameterDefinition                                      = _objcClass("PHASENumberMetaParameterDefinition")
+	_pHASENumberMetaParameterDefinitionSelInitWithValueIdentifier               = objc.RegisterName("initWithValue:identifier:")
+	_pHASENumberMetaParameterDefinitionSelInitWithValue                         = objc.RegisterName("initWithValue:")
 	_pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximumIdentifier = objc.RegisterName("initWithValue:minimum:maximum:identifier:")
-	_pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximum = objc.RegisterName("initWithValue:minimum:maximum:")
-	_pHASENumberMetaParameterDefinitionSelMinimum = objc.RegisterName("minimum")
-	_pHASENumberMetaParameterDefinitionSelMaximum = objc.RegisterName("maximum")
+	_pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximum           = objc.RegisterName("initWithValue:minimum:maximum:")
+	_pHASENumberMetaParameterDefinitionSelMinimum                               = objc.RegisterName("minimum")
+	_pHASENumberMetaParameterDefinitionSelMaximum                               = objc.RegisterName("maximum")
 )
 
 func PHASENumberMetaParameterDefinitionFromID(id objc.ID) *PHASENumberMetaParameterDefinition {
@@ -38,28 +38,36 @@ func PHASENumberMetaParameterDefinitionFromID(id objc.ID) *PHASENumberMetaParame
 // @method initWithValue:identifier @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
 func (o *PHASENumberMetaParameterDefinition) InitWithValueIdentifier(value float64, identifier *foundation.NSString) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueIdentifier, value, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 // @method initWithValue @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @return The new PHASENumberMetaParameterDefinition object
 func (o *PHASENumberMetaParameterDefinition) InitWithValue(value float64) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 // @method initWithValue:minimum:maximum:identifier @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
 func (o *PHASENumberMetaParameterDefinition) InitWithValueMinimumMaximumIdentifier(value float64, minimum float64, maximum float64, identifier *foundation.NSString) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximumIdentifier, value, minimum, maximum, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 // @method initWithValue:minimum:maximum @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @return The new PHASENumberMetaParameterDefinition object
 func (o *PHASENumberMetaParameterDefinition) InitWithValueMinimumMaximum(value float64, minimum float64, maximum float64) *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASENumberMetaParameterDefinitionSelInitWithValueMinimumMaximum, value, minimum, maximum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
@@ -74,4 +82,3 @@ func (o *PHASENumberMetaParameterDefinition) Maximum() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pHASENumberMetaParameterDefinitionSelMaximum)
 	return _ret
 }
-

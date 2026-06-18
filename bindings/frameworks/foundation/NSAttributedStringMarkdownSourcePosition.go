@@ -15,13 +15,13 @@ type NSAttributedStringMarkdownSourcePosition struct {
 }
 
 var (
-	_clsNSAttributedStringMarkdownSourcePosition = _objcClass("NSAttributedStringMarkdownSourcePosition")
+	_clsNSAttributedStringMarkdownSourcePosition                                             = _objcClass("NSAttributedStringMarkdownSourcePosition")
 	_nSAttributedStringMarkdownSourcePositionSelInitWithStartLineStartColumnEndLineEndColumn = objc.RegisterName("initWithStartLine:startColumn:endLine:endColumn:")
-	_nSAttributedStringMarkdownSourcePositionSelRangeInString = objc.RegisterName("rangeInString:")
-	_nSAttributedStringMarkdownSourcePositionSelStartLine = objc.RegisterName("startLine")
-	_nSAttributedStringMarkdownSourcePositionSelStartColumn = objc.RegisterName("startColumn")
-	_nSAttributedStringMarkdownSourcePositionSelEndLine = objc.RegisterName("endLine")
-	_nSAttributedStringMarkdownSourcePositionSelEndColumn = objc.RegisterName("endColumn")
+	_nSAttributedStringMarkdownSourcePositionSelRangeInString                                = objc.RegisterName("rangeInString:")
+	_nSAttributedStringMarkdownSourcePositionSelStartLine                                    = objc.RegisterName("startLine")
+	_nSAttributedStringMarkdownSourcePositionSelStartColumn                                  = objc.RegisterName("startColumn")
+	_nSAttributedStringMarkdownSourcePositionSelEndLine                                      = objc.RegisterName("endLine")
+	_nSAttributedStringMarkdownSourcePositionSelEndColumn                                    = objc.RegisterName("endColumn")
 )
 
 func NSAttributedStringMarkdownSourcePositionFromID(id objc.ID) *NSAttributedStringMarkdownSourcePosition {
@@ -36,7 +36,9 @@ func NSAttributedStringMarkdownSourcePositionFromID(id objc.ID) *NSAttributedStr
 
 func (o *NSAttributedStringMarkdownSourcePosition) InitWithStartLineStartColumnEndLineEndColumn(startLine int, startColumn int, endLine int, endColumn int) *NSAttributedStringMarkdownSourcePosition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelInitWithStartLineStartColumnEndLineEndColumn, startLine, startColumn, endLine, endColumn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringMarkdownSourcePositionFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *NSAttributedStringMarkdownSourcePosition) EndColumn() int {
 	_ret := objc.Send[int](o.Ptr(), _nSAttributedStringMarkdownSourcePositionSelEndColumn)
 	return _ret
 }
-

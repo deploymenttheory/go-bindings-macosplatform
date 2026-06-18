@@ -16,10 +16,10 @@ type DOMCounter struct {
 }
 
 var (
-	_clsDOMCounter = _objcClass("DOMCounter")
+	_clsDOMCounter           = _objcClass("DOMCounter")
 	_dOMCounterSelIdentifier = objc.RegisterName("identifier")
-	_dOMCounterSelListStyle = objc.RegisterName("listStyle")
-	_dOMCounterSelSeparator = objc.RegisterName("separator")
+	_dOMCounterSelListStyle  = objc.RegisterName("listStyle")
+	_dOMCounterSelSeparator  = objc.RegisterName("separator")
 )
 
 func DOMCounterFromID(id objc.ID) *DOMCounter {
@@ -34,19 +34,24 @@ func DOMCounterFromID(id objc.ID) *DOMCounter {
 
 func (o *DOMCounter) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCounterSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCounter) ListStyle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCounterSelListStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCounter) Separator() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCounterSelSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

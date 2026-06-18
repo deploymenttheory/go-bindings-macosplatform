@@ -16,9 +16,9 @@ type NSFileProviderKnownFolderLocation struct {
 }
 
 var (
-	_clsNSFileProviderKnownFolderLocation = _objcClass("NSFileProviderKnownFolderLocation")
+	_clsNSFileProviderKnownFolderLocation                                     = _objcClass("NSFileProviderKnownFolderLocation")
 	_nSFileProviderKnownFolderLocationSelInitWithParentItemIdentifierFilename = objc.RegisterName("initWithParentItemIdentifier:filename:")
-	_nSFileProviderKnownFolderLocationSelInitWithExistingItemIdentifier = objc.RegisterName("initWithExistingItemIdentifier:")
+	_nSFileProviderKnownFolderLocationSelInitWithExistingItemIdentifier       = objc.RegisterName("initWithExistingItemIdentifier:")
 )
 
 func NSFileProviderKnownFolderLocationFromID(id objc.ID) *NSFileProviderKnownFolderLocation {
@@ -34,14 +34,17 @@ func NSFileProviderKnownFolderLocationFromID(id objc.ID) *NSFileProviderKnownFol
 // Initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
 func (o *NSFileProviderKnownFolderLocation) InitWithParentItemIdentifierFilename(parentItemIdentifier *foundation.NSString, filename *foundation.NSString) *NSFileProviderKnownFolderLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderKnownFolderLocationSelInitWithParentItemIdentifierFilename, parentItemIdentifier.Ptr(), filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderKnownFolderLocationFromID(_ret)
 }
 
 // Initialize a location with the item identifier of a folder that already exists on the server. If the known folder already exists on the server, the provider can specify the exact identifier of the item that needs to be used to back the known folder.
 func (o *NSFileProviderKnownFolderLocation) InitWithExistingItemIdentifier(existingItemIdentifier *foundation.NSString) *NSFileProviderKnownFolderLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderKnownFolderLocationSelInitWithExistingItemIdentifier, existingItemIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderKnownFolderLocationFromID(_ret)
 }
-

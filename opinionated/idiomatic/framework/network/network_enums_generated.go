@@ -27,4 +27,3 @@ func (e Nw_parameters_attribution_t) String() string {
 		return fmt.Sprintf("Nw_parameters_attribution_t(%d)", int64(e))
 	}
 }
-

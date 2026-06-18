@@ -191,4 +191,3 @@ type AttributionViewable interface {
 }
 
 var _ AttributionViewable = (*AttributionView)(nil)
-

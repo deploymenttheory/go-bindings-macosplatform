@@ -306,4 +306,3 @@ type SkyCubeTextureable interface {
 }
 
 var _ SkyCubeTextureable = (*SkyCubeTexture)(nil)
-

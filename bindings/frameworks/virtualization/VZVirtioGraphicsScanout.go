@@ -25,4 +25,3 @@ func VZVirtioGraphicsScanoutFromID(id objc.ID) *VZVirtioGraphicsScanout {
 	purego.Track(o)
 	return o
 }
-

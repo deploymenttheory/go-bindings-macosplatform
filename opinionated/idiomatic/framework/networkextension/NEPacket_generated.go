@@ -71,4 +71,3 @@ type NEPacketable interface {
 }
 
 var _ NEPacketable = (*NEPacket)(nil)
-

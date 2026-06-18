@@ -17,11 +17,11 @@ type PHASEStreamNode struct {
 }
 
 var (
-	_clsPHASEStreamNode = _objcClass("PHASEStreamNode")
+	_clsPHASEStreamNode                  = _objcClass("PHASEStreamNode")
 	_pHASEStreamNodeSelGainMetaParameter = objc.RegisterName("gainMetaParameter")
 	_pHASEStreamNodeSelRateMetaParameter = objc.RegisterName("rateMetaParameter")
-	_pHASEStreamNodeSelMixer = objc.RegisterName("mixer")
-	_pHASEStreamNodeSelFormat = objc.RegisterName("format")
+	_pHASEStreamNodeSelMixer             = objc.RegisterName("mixer")
+	_pHASEStreamNodeSelFormat            = objc.RegisterName("format")
 )
 
 func PHASEStreamNodeFromID(id objc.ID) *PHASEStreamNode {
@@ -37,28 +37,35 @@ func PHASEStreamNodeFromID(id objc.ID) *PHASEStreamNode {
 // @property gainMetaParameter @abstract If specified during construction, the metaparameter for controlling gain will be available here
 func (o *PHASEStreamNode) GainMetaParameter() *PHASENumberMetaParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStreamNodeSelGainMetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterFromID(_ret)
 }
 
 // @property rateMetaParameter @abstract If specified during construction, the metaparameter for controlling rate/pitch will be available here
 func (o *PHASEStreamNode) RateMetaParameter() *PHASENumberMetaParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStreamNodeSelRateMetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterFromID(_ret)
 }
 
 // @property mixer @abstract The readonly property that returns the PHASEMixer this stream was created with and assigned to.
 func (o *PHASEStreamNode) Mixer() *PHASEMixer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStreamNodeSelMixer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMixerFromID(_ret)
 }
 
 // @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with.
 func (o *PHASEStreamNode) Format() *avfaudio.AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStreamNodeSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioFormatFromID(_ret)
 }
-

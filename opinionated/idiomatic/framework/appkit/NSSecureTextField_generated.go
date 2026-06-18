@@ -149,7 +149,9 @@ func (x *SecureTextField) WithPlaceholderStrings(items ...*foundation.NSString) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -165,7 +167,9 @@ func (x *SecureTextField) WithPlaceholderAttributedStrings(items ...*foundation.
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -355,7 +359,9 @@ func (x *SecureTextField) WithSubviews(items ...ViewProvider) *SecureTextField {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -497,7 +503,9 @@ func (x *SecureTextField) WithBackgroundFilters(items ...*coreimage.CIFilter) *S
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -519,7 +527,9 @@ func (x *SecureTextField) WithContentFilters(items ...*coreimage.CIFilter) *Secu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -583,7 +593,9 @@ func (x *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerProvi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -688,7 +700,9 @@ func (x *SecureTextField) asControl() *raw.NSControl { return &x.inner.NSTextFie
 
 func (x *SecureTextField) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
 
-func (x *SecureTextField) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
+func (x *SecureTextField) asResponder() *raw.NSResponder {
+	return &x.inner.NSTextField.NSControl.NSView.NSResponder
+}
 
 // SecureTextFieldable is the interface implemented by [SecureTextField], for mocking and DI.
 type SecureTextFieldable interface {
@@ -793,4 +807,3 @@ type SecureTextFieldable interface {
 }
 
 var _ SecureTextFieldable = (*SecureTextField)(nil)
-

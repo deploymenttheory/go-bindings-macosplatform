@@ -16,7 +16,7 @@ type MPSCNNDivide struct {
 }
 
 var (
-	_clsMPSCNNDivide = _objcClass("MPSCNNDivide")
+	_clsMPSCNNDivide               = _objcClass("MPSCNNDivide")
 	_mPSCNNDivideSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNDivideFromID(id objc.ID) *MPSCNNDivide {
 // @abstract  Initialize the division operator @param     device           The device the filter will run on. @return    A valid MPSCNNDivide object or nil, if failure.
 func (o *MPSCNNDivide) InitWithDevice(device metal.MTLDevice) *MPSCNNDivide {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDivideSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDivideFromID(_ret)
 }
-

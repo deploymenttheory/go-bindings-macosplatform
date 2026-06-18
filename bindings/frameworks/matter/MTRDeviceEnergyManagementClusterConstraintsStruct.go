@@ -16,17 +16,17 @@ type MTRDeviceEnergyManagementClusterConstraintsStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterConstraintsStruct = _objcClass("MTRDeviceEnergyManagementClusterConstraintsStruct")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelStartTime = objc.RegisterName("startTime")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelDuration = objc.RegisterName("duration")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetDuration = objc.RegisterName("setDuration:")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelNominalPower = objc.RegisterName("nominalPower")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetNominalPower = objc.RegisterName("setNominalPower:")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelMaximumEnergy = objc.RegisterName("maximumEnergy")
+	_clsMTRDeviceEnergyManagementClusterConstraintsStruct                 = _objcClass("MTRDeviceEnergyManagementClusterConstraintsStruct")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelStartTime        = objc.RegisterName("startTime")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetStartTime     = objc.RegisterName("setStartTime:")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelDuration         = objc.RegisterName("duration")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetDuration      = objc.RegisterName("setDuration:")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelNominalPower     = objc.RegisterName("nominalPower")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetNominalPower  = objc.RegisterName("setNominalPower:")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelMaximumEnergy    = objc.RegisterName("maximumEnergy")
 	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetMaximumEnergy = objc.RegisterName("setMaximumEnergy:")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelLoadControl = objc.RegisterName("loadControl")
-	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetLoadControl = objc.RegisterName("setLoadControl:")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelLoadControl      = objc.RegisterName("loadControl")
+	_mTRDeviceEnergyManagementClusterConstraintsStructSelSetLoadControl   = objc.RegisterName("setLoadControl:")
 )
 
 func MTRDeviceEnergyManagementClusterConstraintsStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterConstraintsStruct {
@@ -41,7 +41,9 @@ func MTRDeviceEnergyManagementClusterConstraintsStructFromID(id objc.ID) *MTRDev
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterConstraintsStructSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) SetStartTime(startTi
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterConstraintsStructSelDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) SetDuration(duration
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterConstraintsStructSelNominalPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) SetNominalPower(nomi
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterConstraintsStructSelMaximumEnergy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -81,11 +89,12 @@ func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) SetMaximumEnergy(max
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterConstraintsStructSelLoadControl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterConstraintsStruct) SetLoadControl(loadControl *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterConstraintsStructSelSetLoadControl, loadControl.Ptr())
 }
-

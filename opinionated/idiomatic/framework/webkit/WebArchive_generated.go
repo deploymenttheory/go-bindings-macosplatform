@@ -78,4 +78,3 @@ type WebArchiveable interface {
 }
 
 var _ WebArchiveable = (*WebArchive)(nil)
-

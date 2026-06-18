@@ -64,4 +64,3 @@ type UnitConverterable interface {
 }
 
 var _ UnitConverterable = (*UnitConverter)(nil)
-

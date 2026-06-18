@@ -16,15 +16,15 @@ type MTRGroupsClusterViewGroupParams struct {
 }
 
 var (
-	_clsMTRGroupsClusterViewGroupParams = _objcClass("MTRGroupsClusterViewGroupParams")
-	_mTRGroupsClusterViewGroupParamsSelGroupID = objc.RegisterName("groupID")
-	_mTRGroupsClusterViewGroupParamsSelSetGroupID = objc.RegisterName("setGroupID:")
-	_mTRGroupsClusterViewGroupParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupsClusterViewGroupParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGroupsClusterViewGroupParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRGroupsClusterViewGroupParams                               = _objcClass("MTRGroupsClusterViewGroupParams")
+	_mTRGroupsClusterViewGroupParamsSelGroupID                        = objc.RegisterName("groupID")
+	_mTRGroupsClusterViewGroupParamsSelSetGroupID                     = objc.RegisterName("setGroupID:")
+	_mTRGroupsClusterViewGroupParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupsClusterViewGroupParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupsClusterViewGroupParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRGroupsClusterViewGroupParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTRGroupsClusterViewGroupParamsSelGroupId = objc.RegisterName("groupId")
-	_mTRGroupsClusterViewGroupParamsSelSetGroupId = objc.RegisterName("setGroupId:")
+	_mTRGroupsClusterViewGroupParamsSelGroupId                        = objc.RegisterName("groupId")
+	_mTRGroupsClusterViewGroupParamsSelSetGroupId                     = objc.RegisterName("setGroupId:")
 )
 
 func MTRGroupsClusterViewGroupParamsFromID(id objc.ID) *MTRGroupsClusterViewGroupParams {
@@ -39,7 +39,9 @@ func MTRGroupsClusterViewGroupParamsFromID(id objc.ID) *MTRGroupsClusterViewGrou
 
 func (o *MTRGroupsClusterViewGroupParams) GroupID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupParamsSelGroupID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -50,7 +52,9 @@ func (o *MTRGroupsClusterViewGroupParams) SetGroupID(groupID *foundation.NSNumbe
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupsClusterViewGroupParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRGroupsClusterViewGroupParams) SetTimedInvokeTimeoutMs(timedInvokeTim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRGroupsClusterViewGroupParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRGroupsClusterViewGroupParams) SetServerSideProcessingTimeout(serverS
 
 func (o *MTRGroupsClusterViewGroupParams) GroupId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterViewGroupParamsSelGroupId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupsClusterViewGroupParams) SetGroupId(groupId *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupsClusterViewGroupParamsSelSetGroupId, groupId.Ptr())
 }
-

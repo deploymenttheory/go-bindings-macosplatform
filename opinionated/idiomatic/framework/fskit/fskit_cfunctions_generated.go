@@ -23,4 +23,3 @@ func FsErrorForMachError(errorCode int) unsafe.Pointer {
 func FsErrorForPOSIXError(arg int) unsafe.Pointer {
 	return raw.FsErrorForPOSIXError(arg)
 }
-

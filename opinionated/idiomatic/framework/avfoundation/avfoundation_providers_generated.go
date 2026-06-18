@@ -217,4 +217,3 @@ type VideoCompositionInstructionProvider interface {
 type VideoCompositionLayerInstructionProvider interface {
 	asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction
 }
-

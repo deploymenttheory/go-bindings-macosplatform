@@ -154,4 +154,3 @@ type WebpageControllerable interface {
 }
 
 var _ WebpageControllerable = (*WebpageController)(nil)
-

@@ -53,4 +53,3 @@ func ShareOptionsWithOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWColl
 	}
 	return &CollaborationShareOptions{inner: _r}
 }
-

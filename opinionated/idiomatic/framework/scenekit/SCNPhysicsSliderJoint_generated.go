@@ -245,7 +245,9 @@ func (x *PhysicsSliderJoint) SetMotorMaximumTorque(motorMaximumTorque float64) {
 	x.inner.SetMotorMaximumTorque(motorMaximumTorque)
 }
 
-func (x *PhysicsSliderJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+func (x *PhysicsSliderJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
+	return &x.inner.SCNPhysicsBehavior
+}
 
 // PhysicsSliderJointable is the interface implemented by [PhysicsSliderJoint], for mocking and DI.
 type PhysicsSliderJointable interface {
@@ -291,4 +293,3 @@ type PhysicsSliderJointable interface {
 }
 
 var _ PhysicsSliderJointable = (*PhysicsSliderJoint)(nil)
-

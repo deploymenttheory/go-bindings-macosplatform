@@ -31,4 +31,3 @@ func EABluetoothAccessoryPickerErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_externalaccessoryLib, "EABluetoothAccessoryPickerErrorDomain")
 	return ptr
 }
-

@@ -16,10 +16,10 @@ type MDLRelativeAssetResolver struct {
 }
 
 var (
-	_clsMDLRelativeAssetResolver = _objcClass("MDLRelativeAssetResolver")
+	_clsMDLRelativeAssetResolver              = _objcClass("MDLRelativeAssetResolver")
 	_mDLRelativeAssetResolverSelInitWithAsset = objc.RegisterName("initWithAsset:")
-	_mDLRelativeAssetResolverSelAsset = objc.RegisterName("asset")
-	_mDLRelativeAssetResolverSelSetAsset = objc.RegisterName("setAsset:")
+	_mDLRelativeAssetResolverSelAsset         = objc.RegisterName("asset")
+	_mDLRelativeAssetResolverSelSetAsset      = objc.RegisterName("setAsset:")
 )
 
 func MDLRelativeAssetResolverFromID(id objc.ID) *MDLRelativeAssetResolver {
@@ -34,17 +34,20 @@ func MDLRelativeAssetResolverFromID(id objc.ID) *MDLRelativeAssetResolver {
 
 func (o *MDLRelativeAssetResolver) InitWithAsset(asset *MDLAsset) *MDLRelativeAssetResolver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLRelativeAssetResolverSelInitWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLRelativeAssetResolverFromID(_ret)
 }
 
 func (o *MDLRelativeAssetResolver) Asset() *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLRelativeAssetResolverSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAssetFromID(_ret)
 }
 
 func (o *MDLRelativeAssetResolver) SetAsset(asset *MDLAsset) {
 	o.Ptr().Send(_mDLRelativeAssetResolverSelSetAsset, asset.Ptr())
 }
-

@@ -84,4 +84,3 @@ type AudiogramSensitivityPointable interface {
 }
 
 var _ AudiogramSensitivityPointable = (*AudiogramSensitivityPoint)(nil)
-

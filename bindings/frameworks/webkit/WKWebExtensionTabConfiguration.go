@@ -16,15 +16,15 @@ type WKWebExtensionTabConfiguration struct {
 }
 
 var (
-	_clsWKWebExtensionTabConfiguration = _objcClass("WKWebExtensionTabConfiguration")
-	_wKWebExtensionTabConfigurationSelWindow = objc.RegisterName("window")
-	_wKWebExtensionTabConfigurationSelIndex = objc.RegisterName("index")
-	_wKWebExtensionTabConfigurationSelParentTab = objc.RegisterName("parentTab")
-	_wKWebExtensionTabConfigurationSelUrl = objc.RegisterName("url")
-	_wKWebExtensionTabConfigurationSelShouldBeActive = objc.RegisterName("shouldBeActive")
-	_wKWebExtensionTabConfigurationSelShouldAddToSelection = objc.RegisterName("shouldAddToSelection")
-	_wKWebExtensionTabConfigurationSelShouldBePinned = objc.RegisterName("shouldBePinned")
-	_wKWebExtensionTabConfigurationSelShouldBeMuted = objc.RegisterName("shouldBeMuted")
+	_clsWKWebExtensionTabConfiguration                         = _objcClass("WKWebExtensionTabConfiguration")
+	_wKWebExtensionTabConfigurationSelWindow                   = objc.RegisterName("window")
+	_wKWebExtensionTabConfigurationSelIndex                    = objc.RegisterName("index")
+	_wKWebExtensionTabConfigurationSelParentTab                = objc.RegisterName("parentTab")
+	_wKWebExtensionTabConfigurationSelUrl                      = objc.RegisterName("url")
+	_wKWebExtensionTabConfigurationSelShouldBeActive           = objc.RegisterName("shouldBeActive")
+	_wKWebExtensionTabConfigurationSelShouldAddToSelection     = objc.RegisterName("shouldAddToSelection")
+	_wKWebExtensionTabConfigurationSelShouldBePinned           = objc.RegisterName("shouldBePinned")
+	_wKWebExtensionTabConfigurationSelShouldBeMuted            = objc.RegisterName("shouldBeMuted")
 	_wKWebExtensionTabConfigurationSelShouldReaderModeBeActive = objc.RegisterName("shouldReaderModeBeActive")
 )
 
@@ -59,7 +59,9 @@ func (o *WKWebExtensionTabConfiguration) ParentTab() WKWebExtensionTab {
 // @abstract Indicates the initial URL for the tab. @discussion If this property is `nil`, the app's default "start page" should appear in the tab.
 func (o *WKWebExtensionTabConfiguration) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionTabConfigurationSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -69,7 +71,7 @@ func (o *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
 	return _ret
 }
 
-// @abstract Indicates whether the tab should be added to the current tab selection. @discussion If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless ``shouldBeActive`` is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
+// @abstract Indicates whether the tab should be added to the current tab selection. @discussion If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
 func (o *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldAddToSelection)
 	return _ret
@@ -92,4 +94,3 @@ func (o *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionTabConfigurationSelShouldReaderModeBeActive)
 	return _ret
 }
-

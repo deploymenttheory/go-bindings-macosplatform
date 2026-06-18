@@ -19,11 +19,11 @@ type AXBrailleMap struct {
 }
 
 var (
-	_clsAXBrailleMap = _objcClass("AXBrailleMap")
+	_clsAXBrailleMap                 = _objcClass("AXBrailleMap")
 	_aXBrailleMapSelSetHeightAtPoint = objc.RegisterName("setHeight:atPoint:")
-	_aXBrailleMapSelHeightAtPoint = objc.RegisterName("heightAtPoint:")
-	_aXBrailleMapSelPresentImage = objc.RegisterName("presentImage:")
-	_aXBrailleMapSelDimensions = objc.RegisterName("dimensions")
+	_aXBrailleMapSelHeightAtPoint    = objc.RegisterName("heightAtPoint:")
+	_aXBrailleMapSelPresentImage     = objc.RegisterName("presentImage:")
+	_aXBrailleMapSelDimensions       = objc.RegisterName("dimensions")
 )
 
 func AXBrailleMapFromID(id objc.ID) *AXBrailleMap {
@@ -53,4 +53,3 @@ func (o *AXBrailleMap) Dimensions() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _aXBrailleMapSelDimensions)
 	return _ret
 }
-

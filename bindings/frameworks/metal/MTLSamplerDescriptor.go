@@ -16,41 +16,41 @@ type MTLSamplerDescriptor struct {
 }
 
 var (
-	_clsMTLSamplerDescriptor = _objcClass("MTLSamplerDescriptor")
-	_mTLSamplerDescriptorSelMinFilter = objc.RegisterName("minFilter")
-	_mTLSamplerDescriptorSelSetMinFilter = objc.RegisterName("setMinFilter:")
-	_mTLSamplerDescriptorSelMagFilter = objc.RegisterName("magFilter")
-	_mTLSamplerDescriptorSelSetMagFilter = objc.RegisterName("setMagFilter:")
-	_mTLSamplerDescriptorSelMipFilter = objc.RegisterName("mipFilter")
-	_mTLSamplerDescriptorSelSetMipFilter = objc.RegisterName("setMipFilter:")
-	_mTLSamplerDescriptorSelMaxAnisotropy = objc.RegisterName("maxAnisotropy")
-	_mTLSamplerDescriptorSelSetMaxAnisotropy = objc.RegisterName("setMaxAnisotropy:")
-	_mTLSamplerDescriptorSelSAddressMode = objc.RegisterName("sAddressMode")
-	_mTLSamplerDescriptorSelSetSAddressMode = objc.RegisterName("setSAddressMode:")
-	_mTLSamplerDescriptorSelTAddressMode = objc.RegisterName("tAddressMode")
-	_mTLSamplerDescriptorSelSetTAddressMode = objc.RegisterName("setTAddressMode:")
-	_mTLSamplerDescriptorSelRAddressMode = objc.RegisterName("rAddressMode")
-	_mTLSamplerDescriptorSelSetRAddressMode = objc.RegisterName("setRAddressMode:")
-	_mTLSamplerDescriptorSelBorderColor = objc.RegisterName("borderColor")
-	_mTLSamplerDescriptorSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_mTLSamplerDescriptorSelReductionMode = objc.RegisterName("reductionMode")
-	_mTLSamplerDescriptorSelSetReductionMode = objc.RegisterName("setReductionMode:")
-	_mTLSamplerDescriptorSelNormalizedCoordinates = objc.RegisterName("normalizedCoordinates")
-	_mTLSamplerDescriptorSelSetNormalizedCoordinates = objc.RegisterName("setNormalizedCoordinates:")
-	_mTLSamplerDescriptorSelLodMinClamp = objc.RegisterName("lodMinClamp")
-	_mTLSamplerDescriptorSelSetLodMinClamp = objc.RegisterName("setLodMinClamp:")
-	_mTLSamplerDescriptorSelLodMaxClamp = objc.RegisterName("lodMaxClamp")
-	_mTLSamplerDescriptorSelSetLodMaxClamp = objc.RegisterName("setLodMaxClamp:")
-	_mTLSamplerDescriptorSelLodAverage = objc.RegisterName("lodAverage")
-	_mTLSamplerDescriptorSelSetLodAverage = objc.RegisterName("setLodAverage:")
-	_mTLSamplerDescriptorSelLodBias = objc.RegisterName("lodBias")
-	_mTLSamplerDescriptorSelSetLodBias = objc.RegisterName("setLodBias:")
-	_mTLSamplerDescriptorSelCompareFunction = objc.RegisterName("compareFunction")
-	_mTLSamplerDescriptorSelSetCompareFunction = objc.RegisterName("setCompareFunction:")
-	_mTLSamplerDescriptorSelSupportArgumentBuffers = objc.RegisterName("supportArgumentBuffers")
+	_clsMTLSamplerDescriptor                          = _objcClass("MTLSamplerDescriptor")
+	_mTLSamplerDescriptorSelMinFilter                 = objc.RegisterName("minFilter")
+	_mTLSamplerDescriptorSelSetMinFilter              = objc.RegisterName("setMinFilter:")
+	_mTLSamplerDescriptorSelMagFilter                 = objc.RegisterName("magFilter")
+	_mTLSamplerDescriptorSelSetMagFilter              = objc.RegisterName("setMagFilter:")
+	_mTLSamplerDescriptorSelMipFilter                 = objc.RegisterName("mipFilter")
+	_mTLSamplerDescriptorSelSetMipFilter              = objc.RegisterName("setMipFilter:")
+	_mTLSamplerDescriptorSelMaxAnisotropy             = objc.RegisterName("maxAnisotropy")
+	_mTLSamplerDescriptorSelSetMaxAnisotropy          = objc.RegisterName("setMaxAnisotropy:")
+	_mTLSamplerDescriptorSelSAddressMode              = objc.RegisterName("sAddressMode")
+	_mTLSamplerDescriptorSelSetSAddressMode           = objc.RegisterName("setSAddressMode:")
+	_mTLSamplerDescriptorSelTAddressMode              = objc.RegisterName("tAddressMode")
+	_mTLSamplerDescriptorSelSetTAddressMode           = objc.RegisterName("setTAddressMode:")
+	_mTLSamplerDescriptorSelRAddressMode              = objc.RegisterName("rAddressMode")
+	_mTLSamplerDescriptorSelSetRAddressMode           = objc.RegisterName("setRAddressMode:")
+	_mTLSamplerDescriptorSelBorderColor               = objc.RegisterName("borderColor")
+	_mTLSamplerDescriptorSelSetBorderColor            = objc.RegisterName("setBorderColor:")
+	_mTLSamplerDescriptorSelReductionMode             = objc.RegisterName("reductionMode")
+	_mTLSamplerDescriptorSelSetReductionMode          = objc.RegisterName("setReductionMode:")
+	_mTLSamplerDescriptorSelNormalizedCoordinates     = objc.RegisterName("normalizedCoordinates")
+	_mTLSamplerDescriptorSelSetNormalizedCoordinates  = objc.RegisterName("setNormalizedCoordinates:")
+	_mTLSamplerDescriptorSelLodMinClamp               = objc.RegisterName("lodMinClamp")
+	_mTLSamplerDescriptorSelSetLodMinClamp            = objc.RegisterName("setLodMinClamp:")
+	_mTLSamplerDescriptorSelLodMaxClamp               = objc.RegisterName("lodMaxClamp")
+	_mTLSamplerDescriptorSelSetLodMaxClamp            = objc.RegisterName("setLodMaxClamp:")
+	_mTLSamplerDescriptorSelLodAverage                = objc.RegisterName("lodAverage")
+	_mTLSamplerDescriptorSelSetLodAverage             = objc.RegisterName("setLodAverage:")
+	_mTLSamplerDescriptorSelLodBias                   = objc.RegisterName("lodBias")
+	_mTLSamplerDescriptorSelSetLodBias                = objc.RegisterName("setLodBias:")
+	_mTLSamplerDescriptorSelCompareFunction           = objc.RegisterName("compareFunction")
+	_mTLSamplerDescriptorSelSetCompareFunction        = objc.RegisterName("setCompareFunction:")
+	_mTLSamplerDescriptorSelSupportArgumentBuffers    = objc.RegisterName("supportArgumentBuffers")
 	_mTLSamplerDescriptorSelSetSupportArgumentBuffers = objc.RegisterName("setSupportArgumentBuffers:")
-	_mTLSamplerDescriptorSelLabel = objc.RegisterName("label")
-	_mTLSamplerDescriptorSelSetLabel = objc.RegisterName("setLabel:")
+	_mTLSamplerDescriptorSelLabel                     = objc.RegisterName("label")
+	_mTLSamplerDescriptorSelSetLabel                  = objc.RegisterName("setLabel:")
 )
 
 func MTLSamplerDescriptorFromID(id objc.ID) *MTLSamplerDescriptor {
@@ -143,7 +143,7 @@ func (o *MTLSamplerDescriptor) SetBorderColor(borderColor MTLSamplerBorderColor)
 	o.Ptr().Send(_mTLSamplerDescriptorSelSetBorderColor, borderColor)
 }
 
-// Sets the reduction mode for filtering contributing samples. The property's default value is ``MTLSamplerReductionModeWeightedAverage``. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's ``mipFilter`` property is equal to ``MTLSamplerMipFilterNotMipmapped``. - The sampler's ``mipFilter`` property is equal to ``MTLSamplerMipFilterNearest``. - The sampler's ``minFilter`` property is equal to ``MTLSamplerMinMagFilterNearest``. - The sampler's ``magFilter`` property is equal to ``MTLSamplerMinMagFilterNearest``.
+// Sets the reduction mode for filtering contributing samples. The property's default value is “MTLSamplerReductionModeWeightedAverage“. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNotMipmapped“. - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNearest“. - The sampler's “minFilter“ property is equal to “MTLSamplerMinMagFilterNearest“. - The sampler's “magFilter“ property is equal to “MTLSamplerMinMagFilterNearest“.
 func (o *MTLSamplerDescriptor) ReductionMode() MTLSamplerReductionMode {
 	_ret := objc.Send[MTLSamplerReductionMode](o.Ptr(), _mTLSamplerDescriptorSelReductionMode)
 	return _ret
@@ -226,11 +226,12 @@ func (o *MTLSamplerDescriptor) SetSupportArgumentBuffers(supportArgumentBuffers 
 // @property label @abstract A string to help identify the created object.
 func (o *MTLSamplerDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSamplerDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTLSamplerDescriptor) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTLSamplerDescriptorSelSetLabel, label.Ptr())
 }
-

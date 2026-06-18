@@ -18,7 +18,7 @@ type HKUserAnnotatedMedicationQuery struct {
 }
 
 var (
-	_clsHKUserAnnotatedMedicationQuery = _objcClass("HKUserAnnotatedMedicationQuery")
+	_clsHKUserAnnotatedMedicationQuery                                     = _objcClass("HKUserAnnotatedMedicationQuery")
 	_hKUserAnnotatedMedicationQuerySelInitWithPredicateLimitResultsHandler = objc.RegisterName("initWithPredicate:limit:resultsHandler:")
 )
 
@@ -48,7 +48,8 @@ func (o *HKUserAnnotatedMedicationQuery) InitWithPredicateLimitResultsHandler(pr
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKUserAnnotatedMedicationQuerySelInitWithPredicateLimitResultsHandler, predicate.Ptr(), limit, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKUserAnnotatedMedicationQueryFromID(_ret)
 }
-

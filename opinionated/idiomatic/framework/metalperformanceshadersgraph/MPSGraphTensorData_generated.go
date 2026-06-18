@@ -139,4 +139,3 @@ type GraphTensorDataable interface {
 }
 
 var _ GraphTensorDataable = (*GraphTensorData)(nil)
-

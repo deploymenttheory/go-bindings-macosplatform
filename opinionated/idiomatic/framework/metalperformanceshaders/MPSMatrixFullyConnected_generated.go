@@ -194,9 +194,13 @@ func (x *MatrixFullyConnected) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *MatrixFullyConnected) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixFullyConnected) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixFullyConnected) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixFullyConnectedable is the interface implemented by [MatrixFullyConnected], for mocking and DI.
 type MatrixFullyConnectedable interface {
@@ -230,4 +234,3 @@ type MatrixFullyConnectedable interface {
 }
 
 var _ MatrixFullyConnectedable = (*MatrixFullyConnected)(nil)
-

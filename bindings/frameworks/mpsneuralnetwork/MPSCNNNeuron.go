@@ -17,14 +17,14 @@ type MPSCNNNeuron struct {
 }
 
 var (
-	_clsMPSCNNNeuron = _objcClass("MPSCNNNeuron")
+	_clsMPSCNNNeuron                               = _objcClass("MPSCNNNeuron")
 	_mPSCNNNeuronSelInitWithDeviceNeuronDescriptor = objc.RegisterName("initWithDevice:neuronDescriptor:")
-	_mPSCNNNeuronSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNNeuronSelNeuronType = objc.RegisterName("neuronType")
-	_mPSCNNNeuronSelA = objc.RegisterName("a")
-	_mPSCNNNeuronSelB = objc.RegisterName("b")
-	_mPSCNNNeuronSelC = objc.RegisterName("c")
-	_mPSCNNNeuronSelData = objc.RegisterName("data")
+	_mPSCNNNeuronSelInitWithCoderDevice            = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNNeuronSelNeuronType                     = objc.RegisterName("neuronType")
+	_mPSCNNNeuronSelA                              = objc.RegisterName("a")
+	_mPSCNNNeuronSelB                              = objc.RegisterName("b")
+	_mPSCNNNeuronSelC                              = objc.RegisterName("c")
+	_mPSCNNNeuronSelData                           = objc.RegisterName("data")
 )
 
 func MPSCNNNeuronFromID(id objc.ID) *MPSCNNNeuron {
@@ -40,14 +40,18 @@ func MPSCNNNeuronFromID(id objc.ID) *MPSCNNNeuron {
 // @abstract  Initialize the neuron filter with a neuron descriptor. @param     device                   The device the filter will run on. @param     neuronDescriptor         The neuron descriptor. For the neuron of type MPSCNNNeuronTypePReLU, the neuron descriptor references an NSData object containing a float array with the per feature channel value of PReLu parameter and, in this case, the MPSCNNNeuron retains the NSData object. @return    A valid MPSCNNNeuron object or nil, if failure.
 func (o *MPSCNNNeuron) InitWithDeviceNeuronDescriptor(device metal.MTLDevice, neuronDescriptor *MPSNNNeuronDescriptor) *MPSCNNNeuron {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSelInitWithDeviceNeuronDescriptor, device, neuronDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNNeuron) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNNeuron {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronFromID(_ret)
 }
 
@@ -73,7 +77,8 @@ func (o *MPSCNNNeuron) C() float32 {
 
 func (o *MPSCNNNeuron) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

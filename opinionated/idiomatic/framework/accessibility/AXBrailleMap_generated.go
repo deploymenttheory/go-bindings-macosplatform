@@ -67,4 +67,3 @@ type BrailleMapable interface {
 }
 
 var _ BrailleMapable = (*BrailleMap)(nil)
-

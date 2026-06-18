@@ -421,9 +421,13 @@ func (x *NEVPNProtocolIKEv2) SetPpkConfiguration(ppkConfiguration *raw.NEVPNIKEv
 	x.inner.SetPpkConfiguration(ppkConfiguration)
 }
 
-func (x *NEVPNProtocolIKEv2) asNEVPNProtocolIPSec() *raw.NEVPNProtocolIPSec { return &x.inner.NEVPNProtocolIPSec }
+func (x *NEVPNProtocolIKEv2) asNEVPNProtocolIPSec() *raw.NEVPNProtocolIPSec {
+	return &x.inner.NEVPNProtocolIPSec
+}
 
-func (x *NEVPNProtocolIKEv2) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocolIPSec.NEVPNProtocol }
+func (x *NEVPNProtocolIKEv2) asNEVPNProtocol() *raw.NEVPNProtocol {
+	return &x.inner.NEVPNProtocolIPSec.NEVPNProtocol
+}
 
 // NEVPNProtocolIKEv2able is the interface implemented by [NEVPNProtocolIKEv2], for mocking and DI.
 type NEVPNProtocolIKEv2able interface {
@@ -497,4 +501,3 @@ type NEVPNProtocolIKEv2able interface {
 }
 
 var _ NEVPNProtocolIKEv2able = (*NEVPNProtocolIKEv2)(nil)
-

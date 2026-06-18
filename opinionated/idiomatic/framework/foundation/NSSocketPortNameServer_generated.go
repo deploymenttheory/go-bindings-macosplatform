@@ -72,7 +72,9 @@ func (x *SocketPortNameServer) SetDefaultNameServerPortNumber(defaultNameServerP
 	x.inner.SetDefaultNameServerPortNumber(defaultNameServerPortNumber)
 }
 
-func (x *SocketPortNameServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
+func (x *SocketPortNameServer) asPortNameServer() *raw.NSPortNameServer {
+	return &x.inner.NSPortNameServer
+}
 
 func (x *SocketPortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
 
@@ -88,4 +90,3 @@ type SocketPortNameServerable interface {
 }
 
 var _ SocketPortNameServerable = (*SocketPortNameServer)(nil)
-

@@ -16,15 +16,15 @@ type DOMHTMLOptionsCollection struct {
 }
 
 var (
-	_clsDOMHTMLOptionsCollection = _objcClass("DOMHTMLOptionsCollection")
-	_dOMHTMLOptionsCollectionSelNamedItem = objc.RegisterName("namedItem:")
-	_dOMHTMLOptionsCollectionSelAddIndex = objc.RegisterName("add:index:")
-	_dOMHTMLOptionsCollectionSelRemove = objc.RegisterName("remove:")
-	_dOMHTMLOptionsCollectionSelItem = objc.RegisterName("item:")
-	_dOMHTMLOptionsCollectionSelSelectedIndex = objc.RegisterName("selectedIndex")
+	_clsDOMHTMLOptionsCollection                 = _objcClass("DOMHTMLOptionsCollection")
+	_dOMHTMLOptionsCollectionSelNamedItem        = objc.RegisterName("namedItem:")
+	_dOMHTMLOptionsCollectionSelAddIndex         = objc.RegisterName("add:index:")
+	_dOMHTMLOptionsCollectionSelRemove           = objc.RegisterName("remove:")
+	_dOMHTMLOptionsCollectionSelItem             = objc.RegisterName("item:")
+	_dOMHTMLOptionsCollectionSelSelectedIndex    = objc.RegisterName("selectedIndex")
 	_dOMHTMLOptionsCollectionSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
-	_dOMHTMLOptionsCollectionSelLength = objc.RegisterName("length")
-	_dOMHTMLOptionsCollectionSelSetLength = objc.RegisterName("setLength:")
+	_dOMHTMLOptionsCollectionSelLength           = objc.RegisterName("length")
+	_dOMHTMLOptionsCollectionSelSetLength        = objc.RegisterName("setLength:")
 )
 
 func DOMHTMLOptionsCollectionFromID(id objc.ID) *DOMHTMLOptionsCollection {
@@ -39,7 +39,9 @@ func DOMHTMLOptionsCollectionFromID(id objc.ID) *DOMHTMLOptionsCollection {
 
 func (o *DOMHTMLOptionsCollection) NamedItem(name *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionsCollectionSelNamedItem, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *DOMHTMLOptionsCollection) Remove(index uint) {
 
 func (o *DOMHTMLOptionsCollection) Item(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionsCollectionSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -74,4 +78,3 @@ func (o *DOMHTMLOptionsCollection) Length() uint {
 func (o *DOMHTMLOptionsCollection) SetLength(length uint) {
 	o.Ptr().Send(_dOMHTMLOptionsCollectionSelSetLength, length)
 }
-

@@ -181,4 +181,3 @@ type TextFinderable interface {
 }
 
 var _ TextFinderable = (*TextFinder)(nil)
-

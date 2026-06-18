@@ -18,26 +18,26 @@ type ICScannerDevice struct {
 }
 
 var (
-	_clsICScannerDevice = _objcClass("ICScannerDevice")
+	_clsICScannerDevice                                          = _objcClass("ICScannerDevice")
 	_iCScannerDeviceSelRequestOpenSessionWithCredentialsPassword = objc.RegisterName("requestOpenSessionWithCredentials:password:")
-	_iCScannerDeviceSelRequestSelectFunctionalUnit = objc.RegisterName("requestSelectFunctionalUnit:")
-	_iCScannerDeviceSelRequestOverviewScan = objc.RegisterName("requestOverviewScan")
-	_iCScannerDeviceSelRequestScan = objc.RegisterName("requestScan")
-	_iCScannerDeviceSelCancelScan = objc.RegisterName("cancelScan")
-	_iCScannerDeviceSelAvailableFunctionalUnitTypes = objc.RegisterName("availableFunctionalUnitTypes")
-	_iCScannerDeviceSelSelectedFunctionalUnit = objc.RegisterName("selectedFunctionalUnit")
-	_iCScannerDeviceSelTransferMode = objc.RegisterName("transferMode")
-	_iCScannerDeviceSelSetTransferMode = objc.RegisterName("setTransferMode:")
-	_iCScannerDeviceSelMaxMemoryBandSize = objc.RegisterName("maxMemoryBandSize")
-	_iCScannerDeviceSelSetMaxMemoryBandSize = objc.RegisterName("setMaxMemoryBandSize:")
-	_iCScannerDeviceSelDownloadsDirectory = objc.RegisterName("downloadsDirectory")
-	_iCScannerDeviceSelSetDownloadsDirectory = objc.RegisterName("setDownloadsDirectory:")
-	_iCScannerDeviceSelDocumentName = objc.RegisterName("documentName")
-	_iCScannerDeviceSelSetDocumentName = objc.RegisterName("setDocumentName:")
-	_iCScannerDeviceSelDocumentUTI = objc.RegisterName("documentUTI")
-	_iCScannerDeviceSelSetDocumentUTI = objc.RegisterName("setDocumentUTI:")
-	_iCScannerDeviceSelDefaultUsername = objc.RegisterName("defaultUsername")
-	_iCScannerDeviceSelSetDefaultUsername = objc.RegisterName("setDefaultUsername:")
+	_iCScannerDeviceSelRequestSelectFunctionalUnit               = objc.RegisterName("requestSelectFunctionalUnit:")
+	_iCScannerDeviceSelRequestOverviewScan                       = objc.RegisterName("requestOverviewScan")
+	_iCScannerDeviceSelRequestScan                               = objc.RegisterName("requestScan")
+	_iCScannerDeviceSelCancelScan                                = objc.RegisterName("cancelScan")
+	_iCScannerDeviceSelAvailableFunctionalUnitTypes              = objc.RegisterName("availableFunctionalUnitTypes")
+	_iCScannerDeviceSelSelectedFunctionalUnit                    = objc.RegisterName("selectedFunctionalUnit")
+	_iCScannerDeviceSelTransferMode                              = objc.RegisterName("transferMode")
+	_iCScannerDeviceSelSetTransferMode                           = objc.RegisterName("setTransferMode:")
+	_iCScannerDeviceSelMaxMemoryBandSize                         = objc.RegisterName("maxMemoryBandSize")
+	_iCScannerDeviceSelSetMaxMemoryBandSize                      = objc.RegisterName("setMaxMemoryBandSize:")
+	_iCScannerDeviceSelDownloadsDirectory                        = objc.RegisterName("downloadsDirectory")
+	_iCScannerDeviceSelSetDownloadsDirectory                     = objc.RegisterName("setDownloadsDirectory:")
+	_iCScannerDeviceSelDocumentName                              = objc.RegisterName("documentName")
+	_iCScannerDeviceSelSetDocumentName                           = objc.RegisterName("setDocumentName:")
+	_iCScannerDeviceSelDocumentUTI                               = objc.RegisterName("documentUTI")
+	_iCScannerDeviceSelSetDocumentUTI                            = objc.RegisterName("setDocumentUTI:")
+	_iCScannerDeviceSelDefaultUsername                           = objc.RegisterName("defaultUsername")
+	_iCScannerDeviceSelSetDefaultUsername                        = objc.RegisterName("setDefaultUsername:")
 )
 
 func ICScannerDeviceFromID(id objc.ID) *ICScannerDevice {
@@ -146,4 +146,3 @@ func (o *ICScannerDevice) DefaultUsername() unsafe.Pointer {
 func (o *ICScannerDevice) SetDefaultUsername(defaultUsername unsafe.Pointer) {
 	o.Ptr().Send(_iCScannerDeviceSelSetDefaultUsername, defaultUsername)
 }
-

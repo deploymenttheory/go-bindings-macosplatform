@@ -10,20 +10,20 @@ import (
 )
 
 type AppParameters struct {
-	TheMsgEvent unsafe.Pointer
-	EventRefCon uint
+	TheMsgEvent   unsafe.Pointer
+	EventRefCon   uint
 	MessageLength uint
 }
 
 // ********************************************************************************************** types and constants for use with kICHelper, et. al. **********************************************************************************************
 type ICAppSpec struct {
 	FCreator uint
-	Name [64]uint8
+	Name     [64]uint8
 }
 
 type ICAppSpecList struct {
 	NumberOfItems int16
-	AppSpecs [1]ICAppSpec
+	AppSpecs      [1]ICAppSpec
 }
 
 // ********************************************************************************************** types and constants for use with kICCharacterSet, et. al. **********************************************************************************************
@@ -34,57 +34,57 @@ type ICCharTable struct {
 
 // ********************************************************************************************** types and constants for use with kICDownloadFolder, et. al. **********************************************************************************************
 type ICFileSpec struct {
-	VolName [32]uint8
+	VolName         [32]uint8
 	VolCreationDate int
-	Fss carboncore.FSSpec
-	Alias carboncore.AliasRecord
+	Fss             carboncore.FSSpec
+	Alias           carboncore.AliasRecord
 }
 
 // ********************************************************************************************** types and constants for use with kICDocumentFont, et. al. **********************************************************************************************
 type ICFontRecord struct {
 	Size int16
 	Face uint8
-	Pad int8
+	Pad  int8
 	Font [256]uint8
 }
 
 type ICMapEntry struct {
-	TotalLength int16
-	FixedLength int16
-	Version int16
-	FileType uint
-	FileCreator uint
-	PostCreator uint
-	Flags int
-	Extension [256]uint8
+	TotalLength    int16
+	FixedLength    int16
+	Version        int16
+	FileType       uint
+	FileCreator    uint
+	PostCreator    uint
+	Flags          int
+	Extension      [256]uint8
 	CreatorAppName [256]uint8
-	PostAppName [256]uint8
-	MIMEType [256]uint8
-	EntryName [256]uint8
+	PostAppName    [256]uint8
+	MIMEType       [256]uint8
+	EntryName      [256]uint8
 }
 
 type ICServiceEntry struct {
-	Name [256]uint8
-	Port int16
+	Name  [256]uint8
+	Port  int16
 	Flags int16
 }
 
 type ICServices struct {
-	Count int16
+	Count    int16
 	Services [1]ICServiceEntry
 }
 
 type LaunchParamBlockRec struct {
-	Reserved1 uint
-	Reserved2 uint16
-	LaunchBlockID uint16
-	LaunchEPBLength uint
-	LaunchFileFlags uint16
-	LaunchControlFlags uint16
-	LaunchAppRef *carboncore.FSRef
-	LaunchProcessSN unsafe.Pointer
+	Reserved1           uint
+	Reserved2           uint16
+	LaunchBlockID       uint16
+	LaunchEPBLength     uint
+	LaunchFileFlags     uint16
+	LaunchControlFlags  uint16
+	LaunchAppRef        *carboncore.FSRef
+	LaunchProcessSN     unsafe.Pointer
 	LaunchPreferredSize uint
-	LaunchMinimumSize uint
+	LaunchMinimumSize   uint
 	LaunchAvailableSize uint
 	LaunchAppParameters *AppParameters
 }
@@ -99,43 +99,43 @@ type OpaquePasteboardRef struct{}
 type OpaqueTranslationRef struct{}
 
 type ProcessInfoExtendedRec struct {
-	ProcessInfoLength uint
-	ProcessName *uint8
-	ProcessNumber unsafe.Pointer
-	ProcessType uint
-	ProcessSignature uint
-	ProcessMode uint
-	ProcessLocation string
-	ProcessSize uint
-	ProcessFreeMem uint
-	ProcessLauncher unsafe.Pointer
-	ProcessLaunchDate uint
-	ProcessActiveTime uint
-	ProcessAppRef *carboncore.FSRef
-	ProcessTempMemTotal uint
+	ProcessInfoLength            uint
+	ProcessName                  *uint8
+	ProcessNumber                unsafe.Pointer
+	ProcessType                  uint
+	ProcessSignature             uint
+	ProcessMode                  uint
+	ProcessLocation              string
+	ProcessSize                  uint
+	ProcessFreeMem               uint
+	ProcessLauncher              unsafe.Pointer
+	ProcessLaunchDate            uint
+	ProcessActiveTime            uint
+	ProcessAppRef                *carboncore.FSRef
+	ProcessTempMemTotal          uint
 	ProcessPurgeableTempMemTotal uint
 }
 
 type ProcessInfoRec struct {
 	ProcessInfoLength uint
-	ProcessName *uint8
-	ProcessNumber unsafe.Pointer
-	ProcessType uint
-	ProcessSignature uint
-	ProcessMode uint
-	ProcessLocation string
-	ProcessSize uint
-	ProcessFreeMem uint
-	ProcessLauncher unsafe.Pointer
+	ProcessName       *uint8
+	ProcessNumber     unsafe.Pointer
+	ProcessType       uint
+	ProcessSignature  uint
+	ProcessMode       uint
+	ProcessLocation   string
+	ProcessSize       uint
+	ProcessFreeMem    uint
+	ProcessLauncher   unsafe.Pointer
 	ProcessLaunchDate uint
 	ProcessActiveTime uint
-	ProcessAppRef *carboncore.FSRef
+	ProcessAppRef     *carboncore.FSRef
 }
 
 type SizeResourceRec struct {
-	Flags uint16
+	Flags             uint16
 	PreferredHeapSize uint
-	MinimumHeapSize uint
+	MinimumHeapSize   uint
 }
 
 // @typedef AXObserverRef @discussion An AXObserverRef is a CFType. Like all CFTypes, they are reference counted (@link //apple_ref/c/func/CFRetain CFRetain@/link, @link //apple_ref/c/func/CFRelease CFRelease@/link).
@@ -166,4 +166,3 @@ type AXValue struct{}
 // C struct: __HIShape
 // HIShape is an opaque type.
 type HIShape struct{}
-

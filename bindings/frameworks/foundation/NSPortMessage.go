@@ -15,14 +15,14 @@ type NSPortMessage struct {
 }
 
 var (
-	_clsNSPortMessage = _objcClass("NSPortMessage")
+	_clsNSPortMessage                                      = _objcClass("NSPortMessage")
 	_nSPortMessageSelInitWithSendPortReceivePortComponents = objc.RegisterName("initWithSendPort:receivePort:components:")
-	_nSPortMessageSelSendBeforeDate = objc.RegisterName("sendBeforeDate:")
-	_nSPortMessageSelComponents = objc.RegisterName("components")
-	_nSPortMessageSelReceivePort = objc.RegisterName("receivePort")
-	_nSPortMessageSelSendPort = objc.RegisterName("sendPort")
-	_nSPortMessageSelMsgid = objc.RegisterName("msgid")
-	_nSPortMessageSelSetMsgid = objc.RegisterName("setMsgid:")
+	_nSPortMessageSelSendBeforeDate                        = objc.RegisterName("sendBeforeDate:")
+	_nSPortMessageSelComponents                            = objc.RegisterName("components")
+	_nSPortMessageSelReceivePort                           = objc.RegisterName("receivePort")
+	_nSPortMessageSelSendPort                              = objc.RegisterName("sendPort")
+	_nSPortMessageSelMsgid                                 = objc.RegisterName("msgid")
+	_nSPortMessageSelSetMsgid                              = objc.RegisterName("setMsgid:")
 )
 
 func NSPortMessageFromID(id objc.ID) *NSPortMessage {
@@ -37,7 +37,9 @@ func NSPortMessageFromID(id objc.ID) *NSPortMessage {
 
 func (o *NSPortMessage) InitWithSendPortReceivePortComponents(sendPort *NSPort, replyPort *NSPort, components *NSArray[objc.ID]) *NSPortMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelInitWithSendPortReceivePortComponents, sendPort.Ptr(), replyPort.Ptr(), components)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortMessageFromID(_ret)
 }
 
@@ -53,13 +55,17 @@ func (o *NSPortMessage) Components() *NSArray[objc.ID] {
 
 func (o *NSPortMessage) ReceivePort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelReceivePort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 func (o *NSPortMessage) SendPort() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortMessageSelSendPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
@@ -71,4 +77,3 @@ func (o *NSPortMessage) Msgid() uint32 {
 func (o *NSPortMessage) SetMsgid(msgid uint32) {
 	o.Ptr().Send(_nSPortMessageSelSetMsgid, msgid)
 }
-

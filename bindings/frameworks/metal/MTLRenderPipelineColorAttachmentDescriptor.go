@@ -16,25 +16,25 @@ type MTLRenderPipelineColorAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPipelineColorAttachmentDescriptor = _objcClass("MTLRenderPipelineColorAttachmentDescriptor")
-	_mTLRenderPipelineColorAttachmentDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelIsBlendingEnabled = objc.RegisterName("isBlendingEnabled")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetBlendingEnabled = objc.RegisterName("setBlendingEnabled:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSourceRGBBlendFactor = objc.RegisterName("sourceRGBBlendFactor")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetSourceRGBBlendFactor = objc.RegisterName("setSourceRGBBlendFactor:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelDestinationRGBBlendFactor = objc.RegisterName("destinationRGBBlendFactor")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetDestinationRGBBlendFactor = objc.RegisterName("setDestinationRGBBlendFactor:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelRgbBlendOperation = objc.RegisterName("rgbBlendOperation")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetRgbBlendOperation = objc.RegisterName("setRgbBlendOperation:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSourceAlphaBlendFactor = objc.RegisterName("sourceAlphaBlendFactor")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetSourceAlphaBlendFactor = objc.RegisterName("setSourceAlphaBlendFactor:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelDestinationAlphaBlendFactor = objc.RegisterName("destinationAlphaBlendFactor")
+	_clsMTLRenderPipelineColorAttachmentDescriptor                               = _objcClass("MTLRenderPipelineColorAttachmentDescriptor")
+	_mTLRenderPipelineColorAttachmentDescriptorSelPixelFormat                    = objc.RegisterName("pixelFormat")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetPixelFormat                 = objc.RegisterName("setPixelFormat:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelIsBlendingEnabled              = objc.RegisterName("isBlendingEnabled")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetBlendingEnabled             = objc.RegisterName("setBlendingEnabled:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSourceRGBBlendFactor           = objc.RegisterName("sourceRGBBlendFactor")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetSourceRGBBlendFactor        = objc.RegisterName("setSourceRGBBlendFactor:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelDestinationRGBBlendFactor      = objc.RegisterName("destinationRGBBlendFactor")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetDestinationRGBBlendFactor   = objc.RegisterName("setDestinationRGBBlendFactor:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelRgbBlendOperation              = objc.RegisterName("rgbBlendOperation")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetRgbBlendOperation           = objc.RegisterName("setRgbBlendOperation:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSourceAlphaBlendFactor         = objc.RegisterName("sourceAlphaBlendFactor")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetSourceAlphaBlendFactor      = objc.RegisterName("setSourceAlphaBlendFactor:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelDestinationAlphaBlendFactor    = objc.RegisterName("destinationAlphaBlendFactor")
 	_mTLRenderPipelineColorAttachmentDescriptorSelSetDestinationAlphaBlendFactor = objc.RegisterName("setDestinationAlphaBlendFactor:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelAlphaBlendOperation = objc.RegisterName("alphaBlendOperation")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetAlphaBlendOperation = objc.RegisterName("setAlphaBlendOperation:")
-	_mTLRenderPipelineColorAttachmentDescriptorSelWriteMask = objc.RegisterName("writeMask")
-	_mTLRenderPipelineColorAttachmentDescriptorSelSetWriteMask = objc.RegisterName("setWriteMask:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelAlphaBlendOperation            = objc.RegisterName("alphaBlendOperation")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetAlphaBlendOperation         = objc.RegisterName("setAlphaBlendOperation:")
+	_mTLRenderPipelineColorAttachmentDescriptorSelWriteMask                      = objc.RegisterName("writeMask")
+	_mTLRenderPipelineColorAttachmentDescriptorSelSetWriteMask                   = objc.RegisterName("setWriteMask:")
 )
 
 func MTLRenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *MTLRenderPipelineColorAttachmentDescriptor {
@@ -136,4 +136,3 @@ func (o *MTLRenderPipelineColorAttachmentDescriptor) WriteMask() MTLColorWriteMa
 func (o *MTLRenderPipelineColorAttachmentDescriptor) SetWriteMask(writeMask MTLColorWriteMask) {
 	o.Ptr().Send(_mTLRenderPipelineColorAttachmentDescriptorSelSetWriteMask, writeMask)
 }
-

@@ -54,4 +54,3 @@ type UnitIlluminanceable interface {
 }
 
 var _ UnitIlluminanceable = (*UnitIlluminance)(nil)
-

@@ -35,7 +35,9 @@ func NewPersistentStoreResult() *PersistentStoreResult {
 	return &PersistentStoreResult{inner: raw.NSPersistentStoreResultFromID(_id)}
 }
 
-func (x *PersistentStoreResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return x.inner }
+func (x *PersistentStoreResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return x.inner
+}
 
 // PersistentStoreResultable is the interface implemented by [PersistentStoreResult], for mocking and DI.
 type PersistentStoreResultable interface {
@@ -43,4 +45,3 @@ type PersistentStoreResultable interface {
 }
 
 var _ PersistentStoreResultable = (*PersistentStoreResult)(nil)
-

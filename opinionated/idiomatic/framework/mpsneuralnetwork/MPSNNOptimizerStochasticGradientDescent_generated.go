@@ -18,7 +18,9 @@ type NNOptimizerStochasticGradientDescent struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNOptimizerStochasticGradientDescent].
-func (x *NNOptimizerStochasticGradientDescent) Unwrap() *raw.MPSNNOptimizerStochasticGradientDescent { return x.inner }
+func (x *NNOptimizerStochasticGradientDescent) Unwrap() *raw.MPSNNOptimizerStochasticGradientDescent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -105,7 +107,9 @@ func (x *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
 	return x.inner.UseNestrovMomentum()
 }
 
-func (x *NNOptimizerStochasticGradientDescent) asNNOptimizer() *raw.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
+func (x *NNOptimizerStochasticGradientDescent) asNNOptimizer() *raw.MPSNNOptimizer {
+	return &x.inner.MPSNNOptimizer
+}
 
 // NNOptimizerStochasticGradientDescentable is the interface implemented by [NNOptimizerStochasticGradientDescent], for mocking and DI.
 type NNOptimizerStochasticGradientDescentable interface {
@@ -123,4 +127,3 @@ type NNOptimizerStochasticGradientDescentable interface {
 }
 
 var _ NNOptimizerStochasticGradientDescentable = (*NNOptimizerStochasticGradientDescent)(nil)
-

@@ -90,9 +90,13 @@ func (x *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation
 	}), nil
 }
 
-func (x *DetectAnimalBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectAnimalBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectAnimalBodyPoseRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectAnimalBodyPoseRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectAnimalBodyPoseRequestable is the interface implemented by [DetectAnimalBodyPoseRequest], for mocking and DI.
 type DetectAnimalBodyPoseRequestable interface {
@@ -106,4 +110,3 @@ type DetectAnimalBodyPoseRequestable interface {
 }
 
 var _ DetectAnimalBodyPoseRequestable = (*DetectAnimalBodyPoseRequest)(nil)
-

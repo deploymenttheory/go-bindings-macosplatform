@@ -98,4 +98,3 @@ type AssetResourceLoaderable interface {
 }
 
 var _ AssetResourceLoaderable = (*AssetResourceLoader)(nil)
-

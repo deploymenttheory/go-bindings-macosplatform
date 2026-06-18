@@ -16,10 +16,10 @@ type AVContentKeyResponse struct {
 }
 
 var (
-	_clsAVContentKeyResponse = _objcClass("AVContentKeyResponse")
+	_clsAVContentKeyResponse                                                       = _objcClass("AVContentKeyResponse")
 	_aVContentKeyResponseSelContentKeyResponseWithFairPlayStreamingKeyResponseData = objc.RegisterName("contentKeyResponseWithFairPlayStreamingKeyResponseData:")
 	_aVContentKeyResponseSelContentKeyResponseWithClearKeyDataInitializationVector = objc.RegisterName("contentKeyResponseWithClearKeyData:initializationVector:")
-	_aVContentKeyResponseSelContentKeyResponseWithAuthorizationTokenData = objc.RegisterName("contentKeyResponseWithAuthorizationTokenData:")
+	_aVContentKeyResponseSelContentKeyResponseWithAuthorizationTokenData           = objc.RegisterName("contentKeyResponseWithAuthorizationTokenData:")
 )
 
 func AVContentKeyResponseFromID(id objc.ID) *AVContentKeyResponse {
@@ -35,21 +35,26 @@ func AVContentKeyResponseFromID(id objc.ID) *AVContentKeyResponse {
 // Create an AVContentKeyResponse from the server response to a key request made when using FairPlayStreaming (FPS) as the method of key delivery. The object created by this method is typically used with an AVContentKeyRequest created by an AVContentKeySession using keySystem AVContentKeySystemFairPlayStreaming. It is passed to AVContentKeyRequest -processContentKeyResponse: in order to supply the decryptor with key data - Parameter keyResponseData: The response from the FairPlayStreaming key server - Returns: A new AVContentKeyResponse holding data from a FairPlayStreaming key server that is used to decrypt the content
 func AVContentKeyResponseContentKeyResponseWithFairPlayStreamingKeyResponseData(keyResponseData *foundation.NSData) *AVContentKeyResponse {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeyResponse), _aVContentKeyResponseSelContentKeyResponseWithFairPlayStreamingKeyResponseData, keyResponseData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeyResponseFromID(_ret)
 }
 
 // Create an AVContentKeyResponse from the key and IV when using AVContentKeySystemClearKey as the key system The object created by this method is typically used with an AVContentKeyRequest created by an AVContentKeySession using keySystem AVContentKeySystemClearKey. It is passed to AVContentKeyRequest -processContentKeyResponse: in order to supply the decryptor with key data. - Parameter keyData: The key used for decrypting content. - Parameter initializationVector: The initialization vector used for decrypting content, or nil if initialization vector is available in the media to be decrypted - Returns: A new AVContentKeyResponse holding Clear Key data.
 func AVContentKeyResponseContentKeyResponseWithClearKeyDataInitializationVector(keyData *foundation.NSData, initializationVector *foundation.NSData) *AVContentKeyResponse {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeyResponse), _aVContentKeyResponseSelContentKeyResponseWithClearKeyDataInitializationVector, keyData.Ptr(), initializationVector.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeyResponseFromID(_ret)
 }
 
 // Create an AVContentKeyResponse from authorization token data when using AVContentKeySystemAuthorizationToken key system. The object created by this method is typically used with an AVContentKeyRequest created by an AVContentKeySession using keySystem AVContentKeySystemAuthorizationToken. It is passed to AVContentKeyRequest -processContentKeyResponse: in order to supply the authorization token data. - Parameter authorizationTokenData: Data blob containing the authorization token. - Returns: A new AVContentKeyResponse holding the authorization token data.
 func AVContentKeyResponseContentKeyResponseWithAuthorizationTokenData(authorizationTokenData *foundation.NSData) *AVContentKeyResponse {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVContentKeyResponse), _aVContentKeyResponseSelContentKeyResponseWithAuthorizationTokenData, authorizationTokenData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeyResponseFromID(_ret)
 }
-

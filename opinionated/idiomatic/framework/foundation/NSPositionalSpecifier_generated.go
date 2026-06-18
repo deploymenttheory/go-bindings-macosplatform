@@ -97,4 +97,3 @@ type PositionalSpecifierable interface {
 }
 
 var _ PositionalSpecifierable = (*PositionalSpecifier)(nil)
-

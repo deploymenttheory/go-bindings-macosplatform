@@ -16,14 +16,14 @@ type NSFileProviderKnownFolderLocations struct {
 }
 
 var (
-	_clsNSFileProviderKnownFolderLocations = _objcClass("NSFileProviderKnownFolderLocations")
-	_nSFileProviderKnownFolderLocationsSelInit = objc.RegisterName("init")
-	_nSFileProviderKnownFolderLocationsSelShouldCreateBinaryCompatibilitySymlink = objc.RegisterName("shouldCreateBinaryCompatibilitySymlink")
+	_clsNSFileProviderKnownFolderLocations                                          = _objcClass("NSFileProviderKnownFolderLocations")
+	_nSFileProviderKnownFolderLocationsSelInit                                      = objc.RegisterName("init")
+	_nSFileProviderKnownFolderLocationsSelShouldCreateBinaryCompatibilitySymlink    = objc.RegisterName("shouldCreateBinaryCompatibilitySymlink")
 	_nSFileProviderKnownFolderLocationsSelSetShouldCreateBinaryCompatibilitySymlink = objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:")
-	_nSFileProviderKnownFolderLocationsSelDesktopLocation = objc.RegisterName("desktopLocation")
-	_nSFileProviderKnownFolderLocationsSelSetDesktopLocation = objc.RegisterName("setDesktopLocation:")
-	_nSFileProviderKnownFolderLocationsSelDocumentsLocation = objc.RegisterName("documentsLocation")
-	_nSFileProviderKnownFolderLocationsSelSetDocumentsLocation = objc.RegisterName("setDocumentsLocation:")
+	_nSFileProviderKnownFolderLocationsSelDesktopLocation                           = objc.RegisterName("desktopLocation")
+	_nSFileProviderKnownFolderLocationsSelSetDesktopLocation                        = objc.RegisterName("setDesktopLocation:")
+	_nSFileProviderKnownFolderLocationsSelDocumentsLocation                         = objc.RegisterName("documentsLocation")
+	_nSFileProviderKnownFolderLocationsSelSetDocumentsLocation                      = objc.RegisterName("setDocumentsLocation:")
 )
 
 func NSFileProviderKnownFolderLocationsFromID(id objc.ID) *NSFileProviderKnownFolderLocations {
@@ -38,7 +38,9 @@ func NSFileProviderKnownFolderLocationsFromID(id objc.ID) *NSFileProviderKnownFo
 
 func (o *NSFileProviderKnownFolderLocations) Init() *NSFileProviderKnownFolderLocations {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderKnownFolderLocationsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderKnownFolderLocationsFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *NSFileProviderKnownFolderLocations) SetShouldCreateBinaryCompatibilityS
 // Candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
 func (o *NSFileProviderKnownFolderLocations) DesktopLocation() *NSFileProviderKnownFolderLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderKnownFolderLocationsSelDesktopLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderKnownFolderLocationFromID(_ret)
 }
 
@@ -66,11 +70,12 @@ func (o *NSFileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation 
 // Candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
 func (o *NSFileProviderKnownFolderLocations) DocumentsLocation() *NSFileProviderKnownFolderLocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileProviderKnownFolderLocationsSelDocumentsLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileProviderKnownFolderLocationFromID(_ret)
 }
 
 func (o *NSFileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocation *NSFileProviderKnownFolderLocation) {
 	o.Ptr().Send(_nSFileProviderKnownFolderLocationsSelSetDocumentsLocation, documentsLocation.Ptr())
 }
-

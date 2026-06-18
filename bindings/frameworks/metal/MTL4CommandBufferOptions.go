@@ -16,8 +16,8 @@ type MTL4CommandBufferOptions struct {
 }
 
 var (
-	_clsMTL4CommandBufferOptions = _objcClass("MTL4CommandBufferOptions")
-	_mTL4CommandBufferOptionsSelLogState = objc.RegisterName("logState")
+	_clsMTL4CommandBufferOptions            = _objcClass("MTL4CommandBufferOptions")
+	_mTL4CommandBufferOptionsSelLogState    = objc.RegisterName("logState")
 	_mTL4CommandBufferOptionsSelSetLogState = objc.RegisterName("setLogState:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTL4CommandBufferOptions) LogState() MTLLogState {
 func (o *MTL4CommandBufferOptions) SetLogState(logState MTLLogState) {
 	o.Ptr().Send(_mTL4CommandBufferOptionsSelSetLogState, logState)
 }
-

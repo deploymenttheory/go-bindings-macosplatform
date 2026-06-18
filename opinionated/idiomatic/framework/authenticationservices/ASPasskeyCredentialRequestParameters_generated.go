@@ -17,7 +17,9 @@ type PasskeyCredentialRequestParameters struct {
 }
 
 // Unwrap returns the underlying [raw.ASPasskeyCredentialRequestParameters].
-func (x *PasskeyCredentialRequestParameters) Unwrap() *raw.ASPasskeyCredentialRequestParameters { return x.inner }
+func (x *PasskeyCredentialRequestParameters) Unwrap() *raw.ASPasskeyCredentialRequestParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type PasskeyCredentialRequestParametersable interface {
 }
 
 var _ PasskeyCredentialRequestParametersable = (*PasskeyCredentialRequestParameters)(nil)
-

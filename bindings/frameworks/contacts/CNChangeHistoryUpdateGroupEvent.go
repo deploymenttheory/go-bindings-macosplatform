@@ -15,7 +15,7 @@ type CNChangeHistoryUpdateGroupEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryUpdateGroupEvent = _objcClass("CNChangeHistoryUpdateGroupEvent")
+	_clsCNChangeHistoryUpdateGroupEvent      = _objcClass("CNChangeHistoryUpdateGroupEvent")
 	_cNChangeHistoryUpdateGroupEventSelGroup = objc.RegisterName("group")
 )
 
@@ -31,7 +31,8 @@ func CNChangeHistoryUpdateGroupEventFromID(id objc.ID) *CNChangeHistoryUpdateGro
 
 func (o *CNChangeHistoryUpdateGroupEvent) Group() *CNGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryUpdateGroupEventSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNGroupFromID(_ret)
 }
-

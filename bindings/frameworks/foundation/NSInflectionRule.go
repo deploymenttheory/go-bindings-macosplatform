@@ -15,9 +15,9 @@ type NSInflectionRule struct {
 }
 
 var (
-	_clsNSInflectionRule = _objcClass("NSInflectionRule")
-	_nSInflectionRuleSelAutomaticRule = objc.RegisterName("automaticRule")
-	_nSInflectionRuleSelCanInflectLanguage = objc.RegisterName("canInflectLanguage:")
+	_clsNSInflectionRule                                = _objcClass("NSInflectionRule")
+	_nSInflectionRuleSelAutomaticRule                   = objc.RegisterName("automaticRule")
+	_nSInflectionRuleSelCanInflectLanguage              = objc.RegisterName("canInflectLanguage:")
 	_nSInflectionRuleSelCanInflectPreferredLocalization = objc.RegisterName("canInflectPreferredLocalization")
 )
 
@@ -33,7 +33,9 @@ func NSInflectionRuleFromID(id objc.ID) *NSInflectionRule {
 
 func NSInflectionRuleAutomaticRule() *NSInflectionRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInflectionRule), _nSInflectionRuleSelAutomaticRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInflectionRuleFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func NSInflectionRuleCanInflectPreferredLocalization() bool {
 	_ret := objc.Send[bool](objc.ID(_clsNSInflectionRule), _nSInflectionRuleSelCanInflectPreferredLocalization)
 	return _ret
 }
-

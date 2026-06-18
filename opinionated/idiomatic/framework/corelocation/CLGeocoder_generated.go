@@ -104,4 +104,3 @@ type Geocoderable interface {
 }
 
 var _ Geocoderable = (*Geocoder)(nil)
-

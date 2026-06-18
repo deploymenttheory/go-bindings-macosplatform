@@ -19,7 +19,9 @@ type CNNBatchNormalizationStatisticsGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNBatchNormalizationStatisticsGradient].
-func (x *CNNBatchNormalizationStatisticsGradient) Unwrap() *raw.MPSCNNBatchNormalizationStatisticsGradient { return x.inner }
+func (x *CNNBatchNormalizationStatisticsGradient) Unwrap() *raw.MPSCNNBatchNormalizationStatisticsGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -160,9 +162,13 @@ func (x *CNNBatchNormalizationStatisticsGradient) EncodeBatchToCommandBufferSour
 	x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState(commandBuffer, sourceGradients, sourceImages, batchNormalizationState)
 }
 
-func (x *CNNBatchNormalizationStatisticsGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNBatchNormalizationStatisticsGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNBatchNormalizationStatisticsGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNBatchNormalizationStatisticsGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNBatchNormalizationStatisticsGradientable is the interface implemented by [CNNBatchNormalizationStatisticsGradient], for mocking and DI.
 type CNNBatchNormalizationStatisticsGradientable interface {
@@ -189,4 +195,3 @@ type CNNBatchNormalizationStatisticsGradientable interface {
 }
 
 var _ CNNBatchNormalizationStatisticsGradientable = (*CNNBatchNormalizationStatisticsGradient)(nil)
-

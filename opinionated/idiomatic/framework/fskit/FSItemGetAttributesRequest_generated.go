@@ -66,4 +66,3 @@ type ItemGetAttributesRequestable interface {
 }
 
 var _ ItemGetAttributesRequestable = (*ItemGetAttributesRequest)(nil)
-

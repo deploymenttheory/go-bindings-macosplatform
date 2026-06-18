@@ -16,13 +16,13 @@ type MXLocationActivityMetric struct {
 }
 
 var (
-	_clsMXLocationActivityMetric = _objcClass("MXLocationActivityMetric")
-	_mXLocationActivityMetricSelCumulativeBestAccuracyTime = objc.RegisterName("cumulativeBestAccuracyTime")
+	_clsMXLocationActivityMetric                                        = _objcClass("MXLocationActivityMetric")
+	_mXLocationActivityMetricSelCumulativeBestAccuracyTime              = objc.RegisterName("cumulativeBestAccuracyTime")
 	_mXLocationActivityMetricSelCumulativeBestAccuracyForNavigationTime = objc.RegisterName("cumulativeBestAccuracyForNavigationTime")
-	_mXLocationActivityMetricSelCumulativeNearestTenMetersAccuracyTime = objc.RegisterName("cumulativeNearestTenMetersAccuracyTime")
-	_mXLocationActivityMetricSelCumulativeHundredMetersAccuracyTime = objc.RegisterName("cumulativeHundredMetersAccuracyTime")
-	_mXLocationActivityMetricSelCumulativeKilometerAccuracyTime = objc.RegisterName("cumulativeKilometerAccuracyTime")
-	_mXLocationActivityMetricSelCumulativeThreeKilometersAccuracyTime = objc.RegisterName("cumulativeThreeKilometersAccuracyTime")
+	_mXLocationActivityMetricSelCumulativeNearestTenMetersAccuracyTime  = objc.RegisterName("cumulativeNearestTenMetersAccuracyTime")
+	_mXLocationActivityMetricSelCumulativeHundredMetersAccuracyTime     = objc.RegisterName("cumulativeHundredMetersAccuracyTime")
+	_mXLocationActivityMetricSelCumulativeKilometerAccuracyTime         = objc.RegisterName("cumulativeKilometerAccuracyTime")
+	_mXLocationActivityMetricSelCumulativeThreeKilometersAccuracyTime   = objc.RegisterName("cumulativeThreeKilometersAccuracyTime")
 )
 
 func MXLocationActivityMetricFromID(id objc.ID) *MXLocationActivityMetric {
@@ -70,4 +70,3 @@ func (o *MXLocationActivityMetric) CumulativeThreeKilometersAccuracyTime() *foun
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXLocationActivityMetricSelCumulativeThreeKilometersAccuracyTime)
 	return _ret
 }
-

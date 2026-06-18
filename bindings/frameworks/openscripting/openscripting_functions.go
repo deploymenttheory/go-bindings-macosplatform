@@ -12,75 +12,75 @@ import (
 )
 
 var (
-	_fnASCopySourceAttributes func(*carboncore.ComponentInstanceRecord, unsafe.Pointer) int
-	_fnASGetSourceStyleNames func(*carboncore.ComponentInstanceRecord, int, *ae.AEDesc) int
-	_fnASGetSourceStyles func(*carboncore.ComponentInstanceRecord, ***hitoolbox.STElement) int
-	_fnASInit func(*carboncore.ComponentInstanceRecord, int, uint, uint, uint, uint, uint, uint) int
-	_fnASSetSourceAttributes func(*carboncore.ComponentInstanceRecord, unsafe.Pointer) int
-	_fnASSetSourceStyles func(*carboncore.ComponentInstanceRecord, **hitoolbox.STElement) int
-	_fnOSAAddStorageType func(unsafe.Pointer, uint) int16
-	_fnOSAAvailableDialectCodeList func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
-	_fnOSAAvailableDialects func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
-	_fnOSACoerceFromDesc func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
-	_fnOSACoerceToDesc func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
-	_fnOSACompile func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
-	_fnOSACompileExecute func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
-	_fnOSACopyDisplayString func(*carboncore.ComponentInstanceRecord, uint, int, unsafe.Pointer) int
-	_fnOSACopyID func(*carboncore.ComponentInstanceRecord, uint, *uint) int
-	_fnOSACopyScript func(*carboncore.ComponentInstanceRecord, uint, *uint) int
-	_fnOSACopyScriptingDefinition func(*carboncore.FSRef, int, unsafe.Pointer) int
-	_fnOSACopyScriptingDefinitionFromURL func(unsafe.Pointer, int, unsafe.Pointer) int
-	_fnOSACopySourceString func(*carboncore.ComponentInstanceRecord, uint, int, unsafe.Pointer) int
-	_fnOSADisplay func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
-	_fnOSADispose func(*carboncore.ComponentInstanceRecord, uint) int
-	_fnOSADoEvent func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *ae.AEDesc) int
-	_fnOSADoScript func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, uint, int, *ae.AEDesc) int
-	_fnOSADoScriptFile func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, uint, uint, int, *ae.AEDesc) int
-	_fnOSAExecute func(*carboncore.ComponentInstanceRecord, uint, uint, int, *uint) int
-	_fnOSAExecuteEvent func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
-	_fnOSAGenericToRealID func(*carboncore.ComponentInstanceRecord, *uint, **carboncore.ComponentInstanceRecord) int
-	_fnOSAGetActiveProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSAGetCreateProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSAGetCurrentDialect func(*carboncore.ComponentInstanceRecord, *int16) int
-	_fnOSAGetDefaultScriptingComponent func(*carboncore.ComponentInstanceRecord, *uint) int
-	_fnOSAGetDialectInfo func(*carboncore.ComponentInstanceRecord, int16, uint, *ae.AEDesc) int
-	_fnOSAGetHandler func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, *uint) int
-	_fnOSAGetHandlerNames func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc) int
-	_fnOSAGetProperty func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, *uint) int
-	_fnOSAGetPropertyNames func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc) int
-	_fnOSAGetResumeDispatchProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSAGetScriptDataFromURL func(unsafe.Pointer, *uint8, int, *ae.AEDesc) int
-	_fnOSAGetScriptInfo func(*carboncore.ComponentInstanceRecord, uint, uint, *int64) int
-	_fnOSAGetScriptingComponent func(*carboncore.ComponentInstanceRecord, uint, **carboncore.ComponentInstanceRecord) int
+	_fnASCopySourceAttributes             func(*carboncore.ComponentInstanceRecord, unsafe.Pointer) int
+	_fnASGetSourceStyleNames              func(*carboncore.ComponentInstanceRecord, int, *ae.AEDesc) int
+	_fnASGetSourceStyles                  func(*carboncore.ComponentInstanceRecord, ***hitoolbox.STElement) int
+	_fnASInit                             func(*carboncore.ComponentInstanceRecord, int, uint, uint, uint, uint, uint, uint) int
+	_fnASSetSourceAttributes              func(*carboncore.ComponentInstanceRecord, unsafe.Pointer) int
+	_fnASSetSourceStyles                  func(*carboncore.ComponentInstanceRecord, **hitoolbox.STElement) int
+	_fnOSAAddStorageType                  func(unsafe.Pointer, uint) int16
+	_fnOSAAvailableDialectCodeList        func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
+	_fnOSAAvailableDialects               func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
+	_fnOSACoerceFromDesc                  func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
+	_fnOSACoerceToDesc                    func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
+	_fnOSACompile                         func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
+	_fnOSACompileExecute                  func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
+	_fnOSACopyDisplayString               func(*carboncore.ComponentInstanceRecord, uint, int, unsafe.Pointer) int
+	_fnOSACopyID                          func(*carboncore.ComponentInstanceRecord, uint, *uint) int
+	_fnOSACopyScript                      func(*carboncore.ComponentInstanceRecord, uint, *uint) int
+	_fnOSACopyScriptingDefinition         func(*carboncore.FSRef, int, unsafe.Pointer) int
+	_fnOSACopyScriptingDefinitionFromURL  func(unsafe.Pointer, int, unsafe.Pointer) int
+	_fnOSACopySourceString                func(*carboncore.ComponentInstanceRecord, uint, int, unsafe.Pointer) int
+	_fnOSADisplay                         func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
+	_fnOSADispose                         func(*carboncore.ComponentInstanceRecord, uint) int
+	_fnOSADoEvent                         func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *ae.AEDesc) int
+	_fnOSADoScript                        func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, uint, int, *ae.AEDesc) int
+	_fnOSADoScriptFile                    func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, uint, uint, int, *ae.AEDesc) int
+	_fnOSAExecute                         func(*carboncore.ComponentInstanceRecord, uint, uint, int, *uint) int
+	_fnOSAExecuteEvent                    func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
+	_fnOSAGenericToRealID                 func(*carboncore.ComponentInstanceRecord, *uint, **carboncore.ComponentInstanceRecord) int
+	_fnOSAGetActiveProc                   func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSAGetCreateProc                   func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSAGetCurrentDialect               func(*carboncore.ComponentInstanceRecord, *int16) int
+	_fnOSAGetDefaultScriptingComponent    func(*carboncore.ComponentInstanceRecord, *uint) int
+	_fnOSAGetDialectInfo                  func(*carboncore.ComponentInstanceRecord, int16, uint, *ae.AEDesc) int
+	_fnOSAGetHandler                      func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, *uint) int
+	_fnOSAGetHandlerNames                 func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc) int
+	_fnOSAGetProperty                     func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, *uint) int
+	_fnOSAGetPropertyNames                func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc) int
+	_fnOSAGetResumeDispatchProc           func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSAGetScriptDataFromURL            func(unsafe.Pointer, *uint8, int, *ae.AEDesc) int
+	_fnOSAGetScriptInfo                   func(*carboncore.ComponentInstanceRecord, uint, uint, *int64) int
+	_fnOSAGetScriptingComponent           func(*carboncore.ComponentInstanceRecord, uint, **carboncore.ComponentInstanceRecord) int
 	_fnOSAGetScriptingComponentFromStored func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, *uint) int
-	_fnOSAGetSendProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSAGetSource func(*carboncore.ComponentInstanceRecord, uint, uint, *ae.AEDesc) int
-	_fnOSAGetStorageType func(unsafe.Pointer, *uint) int16
-	_fnOSAGetSysTerminology func(*carboncore.ComponentInstanceRecord, int, int16, *ae.AEDesc) int
-	_fnOSALoad func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
-	_fnOSALoadExecute func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
-	_fnOSALoadExecuteFile func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, uint, int, *uint) int
-	_fnOSALoadFile func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, *uint8, int, *uint) int
-	_fnOSALoadScriptData func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, unsafe.Pointer, int, *uint) int
-	_fnOSAMakeContext func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, *uint) int
-	_fnOSARealToGenericID func(*carboncore.ComponentInstanceRecord, *uint, *carboncore.ComponentInstanceRecord) int
-	_fnOSARemoveStorageType func(unsafe.Pointer) int16
-	_fnOSAScriptError func(*carboncore.ComponentInstanceRecord, uint, uint, *ae.AEDesc) int
-	_fnOSAScriptingComponentName func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
-	_fnOSASetActiveProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSASetCreateProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSASetCurrentDialect func(*carboncore.ComponentInstanceRecord, int16) int
-	_fnOSASetDefaultScriptingComponent func(*carboncore.ComponentInstanceRecord, uint) int
-	_fnOSASetDefaultTarget func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
-	_fnOSASetHandler func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, uint) int
-	_fnOSASetProperty func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, uint) int
-	_fnOSASetResumeDispatchProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSASetScriptInfo func(*carboncore.ComponentInstanceRecord, uint, uint, int) int
-	_fnOSASetSendProc func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
-	_fnOSAStartRecording func(*carboncore.ComponentInstanceRecord, *uint) int
-	_fnOSAStopRecording func(*carboncore.ComponentInstanceRecord, uint) int
-	_fnOSAStore func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
-	_fnOSAStoreFile func(*carboncore.ComponentInstanceRecord, uint, uint, int, *carboncore.FSRef) int
+	_fnOSAGetSendProc                     func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSAGetSource                       func(*carboncore.ComponentInstanceRecord, uint, uint, *ae.AEDesc) int
+	_fnOSAGetStorageType                  func(unsafe.Pointer, *uint) int16
+	_fnOSAGetSysTerminology               func(*carboncore.ComponentInstanceRecord, int, int16, *ae.AEDesc) int
+	_fnOSALoad                            func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, int, *uint) int
+	_fnOSALoadExecute                     func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, int, *uint) int
+	_fnOSALoadExecuteFile                 func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, uint, int, *uint) int
+	_fnOSALoadFile                        func(*carboncore.ComponentInstanceRecord, *carboncore.FSRef, *uint8, int, *uint) int
+	_fnOSALoadScriptData                  func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, unsafe.Pointer, int, *uint) int
+	_fnOSAMakeContext                     func(*carboncore.ComponentInstanceRecord, *ae.AEDesc, uint, *uint) int
+	_fnOSARealToGenericID                 func(*carboncore.ComponentInstanceRecord, *uint, *carboncore.ComponentInstanceRecord) int
+	_fnOSARemoveStorageType               func(unsafe.Pointer) int16
+	_fnOSAScriptError                     func(*carboncore.ComponentInstanceRecord, uint, uint, *ae.AEDesc) int
+	_fnOSAScriptingComponentName          func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
+	_fnOSASetActiveProc                   func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSASetCreateProc                   func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSASetCurrentDialect               func(*carboncore.ComponentInstanceRecord, int16) int
+	_fnOSASetDefaultScriptingComponent    func(*carboncore.ComponentInstanceRecord, uint) int
+	_fnOSASetDefaultTarget                func(*carboncore.ComponentInstanceRecord, *ae.AEDesc) int
+	_fnOSASetHandler                      func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, uint) int
+	_fnOSASetProperty                     func(*carboncore.ComponentInstanceRecord, int, uint, *ae.AEDesc, uint) int
+	_fnOSASetResumeDispatchProc           func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSASetScriptInfo                   func(*carboncore.ComponentInstanceRecord, uint, uint, int) int
+	_fnOSASetSendProc                     func(*carboncore.ComponentInstanceRecord, unsafe.Pointer, unsafe.Pointer) int
+	_fnOSAStartRecording                  func(*carboncore.ComponentInstanceRecord, *uint) int
+	_fnOSAStopRecording                   func(*carboncore.ComponentInstanceRecord, uint) int
+	_fnOSAStore                           func(*carboncore.ComponentInstanceRecord, uint, uint, int, *ae.AEDesc) int
+	_fnOSAStoreFile                       func(*carboncore.ComponentInstanceRecord, uint, uint, int, *carboncore.FSRef) int
 )
 
 func ASCopySourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, resultingSourceAttributes unsafe.Pointer) int {
@@ -358,4 +358,3 @@ func OSAStore(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID u
 func OSAStoreFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID uint, desiredType uint, modeFlags int, scriptFile *carboncore.FSRef) int {
 	return _fnOSAStoreFile(scriptingComponent, scriptID, desiredType, modeFlags, scriptFile)
 }
-

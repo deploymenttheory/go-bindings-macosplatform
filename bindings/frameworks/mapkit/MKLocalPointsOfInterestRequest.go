@@ -18,14 +18,14 @@ type MKLocalPointsOfInterestRequest struct {
 }
 
 var (
-	_clsMKLocalPointsOfInterestRequest = _objcClass("MKLocalPointsOfInterestRequest")
+	_clsMKLocalPointsOfInterestRequest                               = _objcClass("MKLocalPointsOfInterestRequest")
 	_mKLocalPointsOfInterestRequestSelInitWithCenterCoordinateRadius = objc.RegisterName("initWithCenterCoordinate:radius:")
-	_mKLocalPointsOfInterestRequestSelInitWithCoordinateRegion = objc.RegisterName("initWithCoordinateRegion:")
-	_mKLocalPointsOfInterestRequestSelCoordinate = objc.RegisterName("coordinate")
-	_mKLocalPointsOfInterestRequestSelRadius = objc.RegisterName("radius")
-	_mKLocalPointsOfInterestRequestSelRegion = objc.RegisterName("region")
-	_mKLocalPointsOfInterestRequestSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
-	_mKLocalPointsOfInterestRequestSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
+	_mKLocalPointsOfInterestRequestSelInitWithCoordinateRegion       = objc.RegisterName("initWithCoordinateRegion:")
+	_mKLocalPointsOfInterestRequestSelCoordinate                     = objc.RegisterName("coordinate")
+	_mKLocalPointsOfInterestRequestSelRadius                         = objc.RegisterName("radius")
+	_mKLocalPointsOfInterestRequestSelRegion                         = objc.RegisterName("region")
+	_mKLocalPointsOfInterestRequestSelPointOfInterestFilter          = objc.RegisterName("pointOfInterestFilter")
+	_mKLocalPointsOfInterestRequestSelSetPointOfInterestFilter       = objc.RegisterName("setPointOfInterestFilter:")
 )
 
 func MKLocalPointsOfInterestRequestFromID(id objc.ID) *MKLocalPointsOfInterestRequest {
@@ -40,13 +40,17 @@ func MKLocalPointsOfInterestRequestFromID(id objc.ID) *MKLocalPointsOfInterestRe
 
 func (o *MKLocalPointsOfInterestRequest) InitWithCenterCoordinateRadius(coordinate unsafe.Pointer, radius unsafe.Pointer) *MKLocalPointsOfInterestRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalPointsOfInterestRequestSelInitWithCenterCoordinateRadius, coordinate, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalPointsOfInterestRequestFromID(_ret)
 }
 
 func (o *MKLocalPointsOfInterestRequest) InitWithCoordinateRegion(region MKCoordinateRegion) *MKLocalPointsOfInterestRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalPointsOfInterestRequestSelInitWithCoordinateRegion, region)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalPointsOfInterestRequestFromID(_ret)
 }
 
@@ -67,11 +71,12 @@ func (o *MKLocalPointsOfInterestRequest) Region() MKCoordinateRegion {
 
 func (o *MKLocalPointsOfInterestRequest) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalPointsOfInterestRequestSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
 func (o *MKLocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *MKPointOfInterestFilter) {
 	o.Ptr().Send(_mKLocalPointsOfInterestRequestSelSetPointOfInterestFilter, pointOfInterestFilter.Ptr())
 }
-

@@ -72,4 +72,3 @@ type MessageSignerable interface {
 }
 
 var _ MessageSignerable = (*MessageSigner)(nil)
-

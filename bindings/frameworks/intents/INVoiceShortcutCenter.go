@@ -18,11 +18,11 @@ type INVoiceShortcutCenter struct {
 }
 
 var (
-	_clsINVoiceShortcutCenter = _objcClass("INVoiceShortcutCenter")
-	_iNVoiceShortcutCenterSelGetAllVoiceShortcutsWithCompletion = objc.RegisterName("getAllVoiceShortcutsWithCompletion:")
+	_clsINVoiceShortcutCenter                                         = _objcClass("INVoiceShortcutCenter")
+	_iNVoiceShortcutCenterSelGetAllVoiceShortcutsWithCompletion       = objc.RegisterName("getAllVoiceShortcutsWithCompletion:")
 	_iNVoiceShortcutCenterSelGetVoiceShortcutWithIdentifierCompletion = objc.RegisterName("getVoiceShortcutWithIdentifier:completion:")
-	_iNVoiceShortcutCenterSelSetShortcutSuggestions = objc.RegisterName("setShortcutSuggestions:")
-	_iNVoiceShortcutCenterSelSharedCenter = objc.RegisterName("sharedCenter")
+	_iNVoiceShortcutCenterSelSetShortcutSuggestions                   = objc.RegisterName("setShortcutSuggestions:")
+	_iNVoiceShortcutCenterSelSharedCenter                             = objc.RegisterName("sharedCenter")
 )
 
 func INVoiceShortcutCenterFromID(id objc.ID) *INVoiceShortcutCenter {
@@ -72,7 +72,8 @@ func (o *INVoiceShortcutCenter) SetShortcutSuggestions(suggestions *foundation.N
 
 func INVoiceShortcutCenterSharedCenter() *INVoiceShortcutCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINVoiceShortcutCenter), _iNVoiceShortcutCenterSelSharedCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INVoiceShortcutCenterFromID(_ret)
 }
-

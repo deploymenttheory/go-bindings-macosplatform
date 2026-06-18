@@ -16,10 +16,10 @@ type MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct struct {
 }
 
 var (
-	_clsMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct = _objcClass("MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct")
-	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelFinish = objc.RegisterName("finish")
-	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelSetFinish = objc.RegisterName("setFinish:")
-	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelPrimaryColor = objc.RegisterName("primaryColor")
+	_clsMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct                = _objcClass("MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct")
+	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelFinish          = objc.RegisterName("finish")
+	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelSetFinish       = objc.RegisterName("setFinish:")
+	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelPrimaryColor    = objc.RegisterName("primaryColor")
 	_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelSetPrimaryColor = objc.RegisterName("setPrimaryColor:")
 )
 
@@ -35,7 +35,9 @@ func MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(id obj
 
 func (o *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Finish() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelFinish)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetFini
 
 func (o *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) PrimaryColor() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelPrimaryColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBridgedDeviceBasicInformationClusterProductAppearanceStructSelSetPrimaryColor, primaryColor.Ptr())
 }
-

@@ -16,9 +16,9 @@ type CalNthWeekDay struct {
 }
 
 var (
-	_clsCalNthWeekDay = _objcClass("CalNthWeekDay")
+	_clsCalNthWeekDay             = _objcClass("CalNthWeekDay")
 	_calNthWeekDaySelDayOfTheWeek = objc.RegisterName("dayOfTheWeek")
-	_calNthWeekDaySelWeekNumber = objc.RegisterName("weekNumber")
+	_calNthWeekDaySelWeekNumber   = objc.RegisterName("weekNumber")
 )
 
 func CalNthWeekDayFromID(id objc.ID) *CalNthWeekDay {
@@ -42,4 +42,3 @@ func (o *CalNthWeekDay) WeekNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _calNthWeekDaySelWeekNumber)
 	return _ret
 }
-

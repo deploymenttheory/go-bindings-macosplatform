@@ -60,4 +60,3 @@ type LocalSearchResponseable interface {
 }
 
 var _ LocalSearchResponseable = (*LocalSearchResponse)(nil)
-

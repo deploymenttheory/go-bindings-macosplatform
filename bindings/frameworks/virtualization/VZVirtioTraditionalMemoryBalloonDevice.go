@@ -15,8 +15,8 @@ type VZVirtioTraditionalMemoryBalloonDevice struct {
 }
 
 var (
-	_clsVZVirtioTraditionalMemoryBalloonDevice = _objcClass("VZVirtioTraditionalMemoryBalloonDevice")
-	_vZVirtioTraditionalMemoryBalloonDeviceSelTargetVirtualMachineMemorySize = objc.RegisterName("targetVirtualMachineMemorySize")
+	_clsVZVirtioTraditionalMemoryBalloonDevice                                  = _objcClass("VZVirtioTraditionalMemoryBalloonDevice")
+	_vZVirtioTraditionalMemoryBalloonDeviceSelTargetVirtualMachineMemorySize    = objc.RegisterName("targetVirtualMachineMemorySize")
 	_vZVirtioTraditionalMemoryBalloonDeviceSelSetTargetVirtualMachineMemorySize = objc.RegisterName("setTargetVirtualMachineMemorySize:")
 )
 
@@ -38,4 +38,3 @@ func (o *VZVirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize(
 func (o *VZVirtioTraditionalMemoryBalloonDevice) SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) {
 	o.Ptr().Send(_vZVirtioTraditionalMemoryBalloonDeviceSelSetTargetVirtualMachineMemorySize, targetVirtualMachineMemorySize)
 }
-

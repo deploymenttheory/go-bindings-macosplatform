@@ -63,7 +63,9 @@ func (x *AVB1722ControlInterface) Interface() *Interface {
 	return &Interface{inner: _r}
 }
 
-func (x *AVB1722ControlInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return x.inner }
+func (x *AVB1722ControlInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
+	return x.inner
+}
 
 // AVB1722ControlInterfaceable is the interface implemented by [AVB1722ControlInterface], for mocking and DI.
 type AVB1722ControlInterfaceable interface {
@@ -73,4 +75,3 @@ type AVB1722ControlInterfaceable interface {
 }
 
 var _ AVB1722ControlInterfaceable = (*AVB1722ControlInterface)(nil)
-

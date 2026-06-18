@@ -54,4 +54,3 @@ type UnitFuelEfficiencyable interface {
 }
 
 var _ UnitFuelEfficiencyable = (*UnitFuelEfficiency)(nil)
-

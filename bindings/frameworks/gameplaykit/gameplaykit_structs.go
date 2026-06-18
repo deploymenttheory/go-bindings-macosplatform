@@ -22,4 +22,3 @@ type GKQuad struct {
 type GKTriangle struct {
 	Points [3]unsafe.Pointer
 }
-

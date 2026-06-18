@@ -221,4 +221,3 @@ type PlayerItemAccessLogEventable interface {
 }
 
 var _ PlayerItemAccessLogEventable = (*PlayerItemAccessLogEvent)(nil)
-

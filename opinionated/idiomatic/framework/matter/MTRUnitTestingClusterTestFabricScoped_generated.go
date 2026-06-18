@@ -17,7 +17,9 @@ type MTRUnitTestingClusterTestFabricScoped struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestFabricScoped].
-func (x *MTRUnitTestingClusterTestFabricScoped) Unwrap() *raw.MTRUnitTestingClusterTestFabricScoped { return x.inner }
+func (x *MTRUnitTestingClusterTestFabricScoped) Unwrap() *raw.MTRUnitTestingClusterTestFabricScoped {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -167,7 +169,9 @@ func (x *MTRUnitTestingClusterTestFabricScoped) SetFabricIndex(fabricIndex *foun
 	x.inner.SetFabricIndex(fabricIndex)
 }
 
-func (x *MTRUnitTestingClusterTestFabricScoped) asMTRUnitTestingClusterTestFabricScoped() *raw.MTRUnitTestingClusterTestFabricScoped { return x.inner }
+func (x *MTRUnitTestingClusterTestFabricScoped) asMTRUnitTestingClusterTestFabricScoped() *raw.MTRUnitTestingClusterTestFabricScoped {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestFabricScopedable is the interface implemented by [MTRUnitTestingClusterTestFabricScoped], for mocking and DI.
 type MTRUnitTestingClusterTestFabricScopedable interface {
@@ -198,4 +202,3 @@ type MTRUnitTestingClusterTestFabricScopedable interface {
 }
 
 var _ MTRUnitTestingClusterTestFabricScopedable = (*MTRUnitTestingClusterTestFabricScoped)(nil)
-

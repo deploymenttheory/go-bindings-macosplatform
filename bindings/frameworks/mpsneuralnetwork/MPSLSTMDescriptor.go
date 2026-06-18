@@ -15,42 +15,42 @@ type MPSLSTMDescriptor struct {
 }
 
 var (
-	_clsMPSLSTMDescriptor = _objcClass("MPSLSTMDescriptor")
+	_clsMPSLSTMDescriptor                                                                  = _objcClass("MPSLSTMDescriptor")
 	_mPSLSTMDescriptorSelCreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels = objc.RegisterName("createLSTMDescriptorWithInputFeatureChannels:outputFeatureChannels:")
-	_mPSLSTMDescriptorSelMemoryWeightsAreDiagonal = objc.RegisterName("memoryWeightsAreDiagonal")
-	_mPSLSTMDescriptorSelSetMemoryWeightsAreDiagonal = objc.RegisterName("setMemoryWeightsAreDiagonal:")
-	_mPSLSTMDescriptorSelInputGateInputWeights = objc.RegisterName("inputGateInputWeights")
-	_mPSLSTMDescriptorSelSetInputGateInputWeights = objc.RegisterName("setInputGateInputWeights:")
-	_mPSLSTMDescriptorSelInputGateRecurrentWeights = objc.RegisterName("inputGateRecurrentWeights")
-	_mPSLSTMDescriptorSelSetInputGateRecurrentWeights = objc.RegisterName("setInputGateRecurrentWeights:")
-	_mPSLSTMDescriptorSelInputGateMemoryWeights = objc.RegisterName("inputGateMemoryWeights")
-	_mPSLSTMDescriptorSelSetInputGateMemoryWeights = objc.RegisterName("setInputGateMemoryWeights:")
-	_mPSLSTMDescriptorSelForgetGateInputWeights = objc.RegisterName("forgetGateInputWeights")
-	_mPSLSTMDescriptorSelSetForgetGateInputWeights = objc.RegisterName("setForgetGateInputWeights:")
-	_mPSLSTMDescriptorSelForgetGateRecurrentWeights = objc.RegisterName("forgetGateRecurrentWeights")
-	_mPSLSTMDescriptorSelSetForgetGateRecurrentWeights = objc.RegisterName("setForgetGateRecurrentWeights:")
-	_mPSLSTMDescriptorSelForgetGateMemoryWeights = objc.RegisterName("forgetGateMemoryWeights")
-	_mPSLSTMDescriptorSelSetForgetGateMemoryWeights = objc.RegisterName("setForgetGateMemoryWeights:")
-	_mPSLSTMDescriptorSelOutputGateInputWeights = objc.RegisterName("outputGateInputWeights")
-	_mPSLSTMDescriptorSelSetOutputGateInputWeights = objc.RegisterName("setOutputGateInputWeights:")
-	_mPSLSTMDescriptorSelOutputGateRecurrentWeights = objc.RegisterName("outputGateRecurrentWeights")
-	_mPSLSTMDescriptorSelSetOutputGateRecurrentWeights = objc.RegisterName("setOutputGateRecurrentWeights:")
-	_mPSLSTMDescriptorSelOutputGateMemoryWeights = objc.RegisterName("outputGateMemoryWeights")
-	_mPSLSTMDescriptorSelSetOutputGateMemoryWeights = objc.RegisterName("setOutputGateMemoryWeights:")
-	_mPSLSTMDescriptorSelCellGateInputWeights = objc.RegisterName("cellGateInputWeights")
-	_mPSLSTMDescriptorSelSetCellGateInputWeights = objc.RegisterName("setCellGateInputWeights:")
-	_mPSLSTMDescriptorSelCellGateRecurrentWeights = objc.RegisterName("cellGateRecurrentWeights")
-	_mPSLSTMDescriptorSelSetCellGateRecurrentWeights = objc.RegisterName("setCellGateRecurrentWeights:")
-	_mPSLSTMDescriptorSelCellGateMemoryWeights = objc.RegisterName("cellGateMemoryWeights")
-	_mPSLSTMDescriptorSelSetCellGateMemoryWeights = objc.RegisterName("setCellGateMemoryWeights:")
-	_mPSLSTMDescriptorSelCellToOutputNeuronType = objc.RegisterName("cellToOutputNeuronType")
-	_mPSLSTMDescriptorSelSetCellToOutputNeuronType = objc.RegisterName("setCellToOutputNeuronType:")
-	_mPSLSTMDescriptorSelCellToOutputNeuronParamA = objc.RegisterName("cellToOutputNeuronParamA")
-	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamA = objc.RegisterName("setCellToOutputNeuronParamA:")
-	_mPSLSTMDescriptorSelCellToOutputNeuronParamB = objc.RegisterName("cellToOutputNeuronParamB")
-	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamB = objc.RegisterName("setCellToOutputNeuronParamB:")
-	_mPSLSTMDescriptorSelCellToOutputNeuronParamC = objc.RegisterName("cellToOutputNeuronParamC")
-	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamC = objc.RegisterName("setCellToOutputNeuronParamC:")
+	_mPSLSTMDescriptorSelMemoryWeightsAreDiagonal                                          = objc.RegisterName("memoryWeightsAreDiagonal")
+	_mPSLSTMDescriptorSelSetMemoryWeightsAreDiagonal                                       = objc.RegisterName("setMemoryWeightsAreDiagonal:")
+	_mPSLSTMDescriptorSelInputGateInputWeights                                             = objc.RegisterName("inputGateInputWeights")
+	_mPSLSTMDescriptorSelSetInputGateInputWeights                                          = objc.RegisterName("setInputGateInputWeights:")
+	_mPSLSTMDescriptorSelInputGateRecurrentWeights                                         = objc.RegisterName("inputGateRecurrentWeights")
+	_mPSLSTMDescriptorSelSetInputGateRecurrentWeights                                      = objc.RegisterName("setInputGateRecurrentWeights:")
+	_mPSLSTMDescriptorSelInputGateMemoryWeights                                            = objc.RegisterName("inputGateMemoryWeights")
+	_mPSLSTMDescriptorSelSetInputGateMemoryWeights                                         = objc.RegisterName("setInputGateMemoryWeights:")
+	_mPSLSTMDescriptorSelForgetGateInputWeights                                            = objc.RegisterName("forgetGateInputWeights")
+	_mPSLSTMDescriptorSelSetForgetGateInputWeights                                         = objc.RegisterName("setForgetGateInputWeights:")
+	_mPSLSTMDescriptorSelForgetGateRecurrentWeights                                        = objc.RegisterName("forgetGateRecurrentWeights")
+	_mPSLSTMDescriptorSelSetForgetGateRecurrentWeights                                     = objc.RegisterName("setForgetGateRecurrentWeights:")
+	_mPSLSTMDescriptorSelForgetGateMemoryWeights                                           = objc.RegisterName("forgetGateMemoryWeights")
+	_mPSLSTMDescriptorSelSetForgetGateMemoryWeights                                        = objc.RegisterName("setForgetGateMemoryWeights:")
+	_mPSLSTMDescriptorSelOutputGateInputWeights                                            = objc.RegisterName("outputGateInputWeights")
+	_mPSLSTMDescriptorSelSetOutputGateInputWeights                                         = objc.RegisterName("setOutputGateInputWeights:")
+	_mPSLSTMDescriptorSelOutputGateRecurrentWeights                                        = objc.RegisterName("outputGateRecurrentWeights")
+	_mPSLSTMDescriptorSelSetOutputGateRecurrentWeights                                     = objc.RegisterName("setOutputGateRecurrentWeights:")
+	_mPSLSTMDescriptorSelOutputGateMemoryWeights                                           = objc.RegisterName("outputGateMemoryWeights")
+	_mPSLSTMDescriptorSelSetOutputGateMemoryWeights                                        = objc.RegisterName("setOutputGateMemoryWeights:")
+	_mPSLSTMDescriptorSelCellGateInputWeights                                              = objc.RegisterName("cellGateInputWeights")
+	_mPSLSTMDescriptorSelSetCellGateInputWeights                                           = objc.RegisterName("setCellGateInputWeights:")
+	_mPSLSTMDescriptorSelCellGateRecurrentWeights                                          = objc.RegisterName("cellGateRecurrentWeights")
+	_mPSLSTMDescriptorSelSetCellGateRecurrentWeights                                       = objc.RegisterName("setCellGateRecurrentWeights:")
+	_mPSLSTMDescriptorSelCellGateMemoryWeights                                             = objc.RegisterName("cellGateMemoryWeights")
+	_mPSLSTMDescriptorSelSetCellGateMemoryWeights                                          = objc.RegisterName("setCellGateMemoryWeights:")
+	_mPSLSTMDescriptorSelCellToOutputNeuronType                                            = objc.RegisterName("cellToOutputNeuronType")
+	_mPSLSTMDescriptorSelSetCellToOutputNeuronType                                         = objc.RegisterName("setCellToOutputNeuronType:")
+	_mPSLSTMDescriptorSelCellToOutputNeuronParamA                                          = objc.RegisterName("cellToOutputNeuronParamA")
+	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamA                                       = objc.RegisterName("setCellToOutputNeuronParamA:")
+	_mPSLSTMDescriptorSelCellToOutputNeuronParamB                                          = objc.RegisterName("cellToOutputNeuronParamB")
+	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamB                                       = objc.RegisterName("setCellToOutputNeuronParamB:")
+	_mPSLSTMDescriptorSelCellToOutputNeuronParamC                                          = objc.RegisterName("cellToOutputNeuronParamC")
+	_mPSLSTMDescriptorSelSetCellToOutputNeuronParamC                                       = objc.RegisterName("setCellToOutputNeuronParamC:")
 )
 
 func MPSLSTMDescriptorFromID(id objc.ID) *MPSLSTMDescriptor {
@@ -66,7 +66,9 @@ func MPSLSTMDescriptorFromID(id objc.ID) *MPSLSTMDescriptor {
 // @abstract   Creates a LSTM descriptor. @param      inputFeatureChannels    The number of feature channels in the input image/matrix. Must be >= 1. @param      outputFeatureChannels   The number of feature channels in the output image/matrix. Must be >= 1. @return     A valid MPSNNLSTMDescriptor object or nil, if failure.
 func MPSLSTMDescriptorCreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeatureChannels uint, outputFeatureChannels uint) *MPSLSTMDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSLSTMDescriptor), _mPSLSTMDescriptorSelCreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels, inputFeatureChannels, outputFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSLSTMDescriptorFromID(_ret)
 }
 
@@ -239,4 +241,3 @@ func (o *MPSLSTMDescriptor) CellToOutputNeuronParamC() float32 {
 func (o *MPSLSTMDescriptor) SetCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) {
 	o.Ptr().Send(_mPSLSTMDescriptorSelSetCellToOutputNeuronParamC, cellToOutputNeuronParamC)
 }
-

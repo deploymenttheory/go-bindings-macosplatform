@@ -18,8 +18,8 @@ type VNDetectAnimalBodyPoseRequest struct {
 }
 
 var (
-	_clsVNDetectAnimalBodyPoseRequest = _objcClass("VNDetectAnimalBodyPoseRequest")
-	_vNDetectAnimalBodyPoseRequestSelSupportedJointNamesAndReturnError = objc.RegisterName("supportedJointNamesAndReturnError:")
+	_clsVNDetectAnimalBodyPoseRequest                                        = _objcClass("VNDetectAnimalBodyPoseRequest")
+	_vNDetectAnimalBodyPoseRequestSelSupportedJointNamesAndReturnError       = objc.RegisterName("supportedJointNamesAndReturnError:")
 	_vNDetectAnimalBodyPoseRequestSelSupportedJointsGroupNamesAndReturnError = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
 )
 
@@ -52,4 +52,3 @@ func (o *VNDetectAnimalBodyPoseRequest) SupportedJointsGroupNamesAndReturnError(
 	}
 	return _ret, nil
 }
-

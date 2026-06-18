@@ -16,8 +16,8 @@ type MKLocalSearchResponse struct {
 }
 
 var (
-	_clsMKLocalSearchResponse = _objcClass("MKLocalSearchResponse")
-	_mKLocalSearchResponseSelMapItems = objc.RegisterName("mapItems")
+	_clsMKLocalSearchResponse               = _objcClass("MKLocalSearchResponse")
+	_mKLocalSearchResponseSelMapItems       = objc.RegisterName("mapItems")
 	_mKLocalSearchResponseSelBoundingRegion = objc.RegisterName("boundingRegion")
 )
 
@@ -33,7 +33,9 @@ func MKLocalSearchResponseFromID(id objc.ID) *MKLocalSearchResponse {
 
 func (o *MKLocalSearchResponse) MapItems() *foundation.NSArray[*MKMapItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchResponseSelMapItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKMapItem](_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *MKLocalSearchResponse) BoundingRegion() MKCoordinateRegion {
 	_ret := objc.Send[MKCoordinateRegion](o.Ptr(), _mKLocalSearchResponseSelBoundingRegion)
 	return _ret
 }
-

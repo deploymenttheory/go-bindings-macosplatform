@@ -16,16 +16,16 @@ type NSPersistentHistoryChange struct {
 }
 
 var (
-	_clsNSPersistentHistoryChange = _objcClass("NSPersistentHistoryChange")
+	_clsNSPersistentHistoryChange                             = _objcClass("NSPersistentHistoryChange")
 	_nSPersistentHistoryChangeSelEntityDescriptionWithContext = objc.RegisterName("entityDescriptionWithContext:")
-	_nSPersistentHistoryChangeSelEntityDescription = objc.RegisterName("entityDescription")
-	_nSPersistentHistoryChangeSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSPersistentHistoryChangeSelChangeID = objc.RegisterName("changeID")
-	_nSPersistentHistoryChangeSelChangedObjectID = objc.RegisterName("changedObjectID")
-	_nSPersistentHistoryChangeSelChangeType = objc.RegisterName("changeType")
-	_nSPersistentHistoryChangeSelTombstone = objc.RegisterName("tombstone")
-	_nSPersistentHistoryChangeSelTransaction = objc.RegisterName("transaction")
-	_nSPersistentHistoryChangeSelUpdatedProperties = objc.RegisterName("updatedProperties")
+	_nSPersistentHistoryChangeSelEntityDescription            = objc.RegisterName("entityDescription")
+	_nSPersistentHistoryChangeSelFetchRequest                 = objc.RegisterName("fetchRequest")
+	_nSPersistentHistoryChangeSelChangeID                     = objc.RegisterName("changeID")
+	_nSPersistentHistoryChangeSelChangedObjectID              = objc.RegisterName("changedObjectID")
+	_nSPersistentHistoryChangeSelChangeType                   = objc.RegisterName("changeType")
+	_nSPersistentHistoryChangeSelTombstone                    = objc.RegisterName("tombstone")
+	_nSPersistentHistoryChangeSelTransaction                  = objc.RegisterName("transaction")
+	_nSPersistentHistoryChangeSelUpdatedProperties            = objc.RegisterName("updatedProperties")
 )
 
 func NSPersistentHistoryChangeFromID(id objc.ID) *NSPersistentHistoryChange {
@@ -40,13 +40,17 @@ func NSPersistentHistoryChangeFromID(id objc.ID) *NSPersistentHistoryChange {
 
 func NSPersistentHistoryChangeEntityDescriptionWithContext(context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChange), _nSPersistentHistoryChangeSelEntityDescriptionWithContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func NSPersistentHistoryChangeEntityDescription() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChange), _nSPersistentHistoryChangeSelEntityDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *NSPersistentHistoryChange) ChangeID() int64 {
 
 func (o *NSPersistentHistoryChange) ChangedObjectID() *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeSelChangedObjectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -78,13 +84,16 @@ func (o *NSPersistentHistoryChange) Tombstone() *foundation.NSDictionary[objc.ID
 
 func (o *NSPersistentHistoryChange) Transaction() *NSPersistentHistoryTransaction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeSelTransaction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryTransactionFromID(_ret)
 }
 
 func (o *NSPersistentHistoryChange) UpdatedProperties() *foundation.NSSet[*NSPropertyDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeSelUpdatedProperties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSPropertyDescription](_ret)
 }
-

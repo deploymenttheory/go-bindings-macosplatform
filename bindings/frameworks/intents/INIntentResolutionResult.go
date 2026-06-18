@@ -16,11 +16,11 @@ type INIntentResolutionResult struct {
 }
 
 var (
-	_clsINIntentResolutionResult = _objcClass("INIntentResolutionResult")
-	_iNIntentResolutionResultSelNeedsValue = objc.RegisterName("needsValue")
-	_iNIntentResolutionResultSelNotRequired = objc.RegisterName("notRequired")
-	_iNIntentResolutionResultSelUnsupported = objc.RegisterName("unsupported")
-	_iNIntentResolutionResultSelUnsupportedWithReason = objc.RegisterName("unsupportedWithReason:")
+	_clsINIntentResolutionResult                                               = _objcClass("INIntentResolutionResult")
+	_iNIntentResolutionResultSelNeedsValue                                     = objc.RegisterName("needsValue")
+	_iNIntentResolutionResultSelNotRequired                                    = objc.RegisterName("notRequired")
+	_iNIntentResolutionResultSelUnsupported                                    = objc.RegisterName("unsupported")
+	_iNIntentResolutionResultSelUnsupportedWithReason                          = objc.RegisterName("unsupportedWithReason:")
 	_iNIntentResolutionResultSelConfirmationRequiredWithItemToConfirmForReason = objc.RegisterName("confirmationRequiredWithItemToConfirm:forReason:")
 )
 
@@ -36,31 +36,40 @@ func INIntentResolutionResultFromID(id objc.ID) *INIntentResolutionResult {
 
 func INIntentResolutionResultNeedsValue() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelNeedsValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResolutionResultFromID(_ret)
 }
 
 func INIntentResolutionResultNotRequired() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelNotRequired)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResolutionResultFromID(_ret)
 }
 
 func INIntentResolutionResultUnsupported() *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelUnsupported)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResolutionResultFromID(_ret)
 }
 
 func INIntentResolutionResultUnsupportedWithReason(reason int) *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelUnsupportedWithReason, reason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResolutionResultFromID(_ret)
 }
 
 func INIntentResolutionResultConfirmationRequiredWithItemToConfirmForReason(itemToConfirm objc.ID, reason int) *INIntentResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINIntentResolutionResult), _iNIntentResolutionResultSelConfirmationRequiredWithItemToConfirmForReason, itemToConfirm, reason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INIntentResolutionResultFromID(_ret)
 }
-

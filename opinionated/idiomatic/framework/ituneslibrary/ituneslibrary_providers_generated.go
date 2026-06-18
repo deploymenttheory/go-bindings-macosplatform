@@ -12,4 +12,3 @@ import (
 type LibMediaEntityProvider interface {
 	asLibMediaEntity() *raw.ITLibMediaEntity
 }
-

@@ -15,8 +15,8 @@ type VNDetectHumanRectanglesRequest struct {
 }
 
 var (
-	_clsVNDetectHumanRectanglesRequest = _objcClass("VNDetectHumanRectanglesRequest")
-	_vNDetectHumanRectanglesRequestSelUpperBodyOnly = objc.RegisterName("upperBodyOnly")
+	_clsVNDetectHumanRectanglesRequest                 = _objcClass("VNDetectHumanRectanglesRequest")
+	_vNDetectHumanRectanglesRequestSelUpperBodyOnly    = objc.RegisterName("upperBodyOnly")
 	_vNDetectHumanRectanglesRequestSelSetUpperBodyOnly = objc.RegisterName("setUpperBodyOnly:")
 )
 
@@ -39,4 +39,3 @@ func (o *VNDetectHumanRectanglesRequest) UpperBodyOnly() bool {
 func (o *VNDetectHumanRectanglesRequest) SetUpperBodyOnly(upperBodyOnly bool) {
 	o.Ptr().Send(_vNDetectHumanRectanglesRequestSelSetUpperBodyOnly, upperBodyOnly)
 }
-

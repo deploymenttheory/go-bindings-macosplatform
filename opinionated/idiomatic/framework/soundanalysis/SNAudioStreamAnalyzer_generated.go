@@ -73,4 +73,3 @@ type AudioStreamAnalyzerable interface {
 }
 
 var _ AudioStreamAnalyzerable = (*AudioStreamAnalyzer)(nil)
-

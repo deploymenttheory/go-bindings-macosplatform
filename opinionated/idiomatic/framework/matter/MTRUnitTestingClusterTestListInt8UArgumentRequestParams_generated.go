@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestListInt8UArgumentRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams].
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -78,7 +80,9 @@ func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetServerSideP
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestListInt8UArgumentRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable interface {
@@ -94,4 +98,3 @@ type MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable = (*MTRUnitTestingClusterTestListInt8UArgumentRequestParams)(nil)
-

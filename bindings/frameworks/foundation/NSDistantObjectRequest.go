@@ -16,11 +16,11 @@ type NSDistantObjectRequest struct {
 }
 
 var (
-	_clsNSDistantObjectRequest = _objcClass("NSDistantObjectRequest")
+	_clsNSDistantObjectRequest                   = _objcClass("NSDistantObjectRequest")
 	_nSDistantObjectRequestSelReplyWithException = objc.RegisterName("replyWithException:")
-	_nSDistantObjectRequestSelInvocation = objc.RegisterName("invocation")
-	_nSDistantObjectRequestSelConnection = objc.RegisterName("connection")
-	_nSDistantObjectRequestSelConversation = objc.RegisterName("conversation")
+	_nSDistantObjectRequestSelInvocation         = objc.RegisterName("invocation")
+	_nSDistantObjectRequestSelConnection         = objc.RegisterName("connection")
+	_nSDistantObjectRequestSelConversation       = objc.RegisterName("conversation")
 )
 
 func NSDistantObjectRequestFromID(id objc.ID) *NSDistantObjectRequest {
@@ -40,13 +40,17 @@ func (o *NSDistantObjectRequest) ReplyWithException(exception *NSException) {
 // Deprecated: Use NSXPCConnection instead
 func (o *NSDistantObjectRequest) Invocation() *NSInvocation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelInvocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInvocationFromID(_ret)
 }
 
 func (o *NSDistantObjectRequest) Connection() *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *NSDistantObjectRequest) Conversation() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistantObjectRequestSelConversation)
 	return _ret
 }
-

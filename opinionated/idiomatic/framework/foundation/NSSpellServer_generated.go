@@ -88,4 +88,3 @@ type SpellServerable interface {
 }
 
 var _ SpellServerable = (*SpellServer)(nil)
-

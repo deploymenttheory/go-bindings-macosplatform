@@ -15,8 +15,8 @@ type MTLRenderPassColorAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPassColorAttachmentDescriptor = _objcClass("MTLRenderPassColorAttachmentDescriptor")
-	_mTLRenderPassColorAttachmentDescriptorSelClearColor = objc.RegisterName("clearColor")
+	_clsMTLRenderPassColorAttachmentDescriptor              = _objcClass("MTLRenderPassColorAttachmentDescriptor")
+	_mTLRenderPassColorAttachmentDescriptorSelClearColor    = objc.RegisterName("clearColor")
 	_mTLRenderPassColorAttachmentDescriptorSelSetClearColor = objc.RegisterName("setClearColor:")
 )
 
@@ -38,4 +38,3 @@ func (o *MTLRenderPassColorAttachmentDescriptor) ClearColor() MTLClearColor {
 func (o *MTLRenderPassColorAttachmentDescriptor) SetClearColor(clearColor MTLClearColor) {
 	o.Ptr().Send(_mTLRenderPassColorAttachmentDescriptorSelSetClearColor, clearColor)
 }
-

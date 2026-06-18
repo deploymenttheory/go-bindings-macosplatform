@@ -16,10 +16,10 @@ type MAFlashingLightsProcessorResult struct {
 }
 
 var (
-	_clsMAFlashingLightsProcessorResult = _objcClass("MAFlashingLightsProcessorResult")
+	_clsMAFlashingLightsProcessorResult                 = _objcClass("MAFlashingLightsProcessorResult")
 	_mAFlashingLightsProcessorResultSelSurfaceProcessed = objc.RegisterName("surfaceProcessed")
-	_mAFlashingLightsProcessorResultSelMitigationLevel = objc.RegisterName("mitigationLevel")
-	_mAFlashingLightsProcessorResultSelIntensityLevel = objc.RegisterName("intensityLevel")
+	_mAFlashingLightsProcessorResultSelMitigationLevel  = objc.RegisterName("mitigationLevel")
+	_mAFlashingLightsProcessorResultSelIntensityLevel   = objc.RegisterName("intensityLevel")
 )
 
 func MAFlashingLightsProcessorResultFromID(id objc.ID) *MAFlashingLightsProcessorResult {
@@ -46,4 +46,3 @@ func (o *MAFlashingLightsProcessorResult) IntensityLevel() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mAFlashingLightsProcessorResultSelIntensityLevel)
 	return _ret
 }
-

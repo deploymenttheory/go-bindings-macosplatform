@@ -120,9 +120,13 @@ func (x *NEPacketTunnelNetworkSettings) SetMTU(mTU *foundation.NSNumber) {
 	x.inner.SetMTU(mTU)
 }
 
-func (x *NEPacketTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings { return x.inner }
+func (x *NEPacketTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings {
+	return x.inner
+}
 
-func (x *NEPacketTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NETunnelNetworkSettings }
+func (x *NEPacketTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
+	return &x.inner.NETunnelNetworkSettings
+}
 
 // NEPacketTunnelNetworkSettingsable is the interface implemented by [NEPacketTunnelNetworkSettings], for mocking and DI.
 type NEPacketTunnelNetworkSettingsable interface {
@@ -144,4 +148,3 @@ type NEPacketTunnelNetworkSettingsable interface {
 }
 
 var _ NEPacketTunnelNetworkSettingsable = (*NEPacketTunnelNetworkSettings)(nil)
-

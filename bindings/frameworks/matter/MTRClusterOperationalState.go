@@ -18,27 +18,27 @@ type MTRClusterOperationalState struct {
 }
 
 var (
-	_clsMTRClusterOperationalState = _objcClass("MTRClusterOperationalState")
-	_mTRClusterOperationalStateSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("pauseWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelPauseWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("pauseWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelStopWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelStartWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelStartWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterOperationalState                                                              = _objcClass("MTRClusterOperationalState")
+	_mTRClusterOperationalStateSelPauseWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("pauseWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelPauseWithExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("pauseWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion   = objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelStopWithExpectedValuesExpectedValueIntervalCompletion         = objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelStartWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelStartWithExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:")
 	_mTRClusterOperationalStateSelResumeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resumeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelResumeWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resumeWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOperationalStateSelReadAttributePhaseListWithParams = objc.RegisterName("readAttributePhaseListWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeCurrentPhaseWithParams = objc.RegisterName("readAttributeCurrentPhaseWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeCountdownTimeWithParams = objc.RegisterName("readAttributeCountdownTimeWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeOperationalStateListWithParams = objc.RegisterName("readAttributeOperationalStateListWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeOperationalStateWithParams = objc.RegisterName("readAttributeOperationalStateWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeOperationalErrorWithParams = objc.RegisterName("readAttributeOperationalErrorWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOperationalStateSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOperationalStateSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOperationalStateSelResumeWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("resumeWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOperationalStateSelReadAttributePhaseListWithParams                              = objc.RegisterName("readAttributePhaseListWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeCurrentPhaseWithParams                           = objc.RegisterName("readAttributeCurrentPhaseWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeCountdownTimeWithParams                          = objc.RegisterName("readAttributeCountdownTimeWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeOperationalStateListWithParams                   = objc.RegisterName("readAttributeOperationalStateListWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeOperationalStateWithParams                       = objc.RegisterName("readAttributeOperationalStateWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeOperationalErrorWithParams                       = objc.RegisterName("readAttributeOperationalErrorWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeGeneratedCommandListWithParams                   = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeAcceptedCommandListWithParams                    = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeAttributeListWithParams                          = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeFeatureMapWithParams                             = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOperationalStateSelReadAttributeClusterRevisionWithParams                        = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOperationalStateSelInitWithDeviceEndpointIDQueue                                 = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterOperationalStateFromID(id objc.ID) *MTRClusterOperationalState {
@@ -221,7 +221,8 @@ func (o *MTRClusterOperationalState) ReadAttributeClusterRevisionWithParams(para
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOperationalState) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOperationalState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOperationalStateSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOperationalStateFromID(_ret)
 }
-

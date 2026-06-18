@@ -96,11 +96,17 @@ func (x *NNSubtractionGradientNode) WithLabel(label string) *NNSubtractionGradie
 	return x
 }
 
-func (x *NNSubtractionGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
+func (x *NNSubtractionGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode {
+	return &x.inner.MPSNNArithmeticGradientNode
+}
 
-func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
+func (x *NNSubtractionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *NNSubtractionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNSubtractionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNSubtractionGradientNodeable is the interface implemented by [NNSubtractionGradientNode], for mocking and DI.
 type NNSubtractionGradientNodeable interface {
@@ -118,4 +124,3 @@ type NNSubtractionGradientNodeable interface {
 }
 
 var _ NNSubtractionGradientNodeable = (*NNSubtractionGradientNode)(nil)
-

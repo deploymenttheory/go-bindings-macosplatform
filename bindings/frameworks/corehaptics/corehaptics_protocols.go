@@ -50,4 +50,3 @@ type CHHapticPatternPlayer interface {
 	IsMuted() bool
 	SetIsMuted(isMuted bool)
 }
-

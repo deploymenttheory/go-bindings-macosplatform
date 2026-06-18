@@ -17,11 +17,11 @@ type GKGaussianDistribution struct {
 }
 
 var (
-	_clsGKGaussianDistribution = _objcClass("GKGaussianDistribution")
+	_clsGKGaussianDistribution                                            = _objcClass("GKGaussianDistribution")
 	_gKGaussianDistributionSelInitWithRandomSourceLowestValueHighestValue = objc.RegisterName("initWithRandomSource:lowestValue:highestValue:")
-	_gKGaussianDistributionSelInitWithRandomSourceMeanDeviation = objc.RegisterName("initWithRandomSource:mean:deviation:")
-	_gKGaussianDistributionSelMean = objc.RegisterName("mean")
-	_gKGaussianDistributionSelDeviation = objc.RegisterName("deviation")
+	_gKGaussianDistributionSelInitWithRandomSourceMeanDeviation           = objc.RegisterName("initWithRandomSource:mean:deviation:")
+	_gKGaussianDistributionSelMean                                        = objc.RegisterName("mean")
+	_gKGaussianDistributionSelDeviation                                   = objc.RegisterName("deviation")
 )
 
 func GKGaussianDistributionFromID(id objc.ID) *GKGaussianDistribution {
@@ -37,14 +37,18 @@ func GKGaussianDistributionFromID(id objc.ID) *GKGaussianDistribution {
 // Initializes a Gaussian random distribution within the range [lowest, highest] using a source to grab input values from. This sets the gaussian parameters to: mean = (highest + lowest) / 2 deviation = (highest - lowest) / 6 The mean and deviation will be floating point numbers even if the distribution is meant to produce integer values. @see mean @see deviation
 func (o *GKGaussianDistribution) InitWithRandomSourceLowestValueHighestValue(source GKRandom, lowestInclusive int, highestInclusive int) *GKGaussianDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGaussianDistributionSelInitWithRandomSourceLowestValueHighestValue, source, lowestInclusive, highestInclusive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGaussianDistributionFromID(_ret)
 }
 
 // Initializes a Gaussian random distribution within the range [mean - 3 * deviation, mean + 3 * deviation] using a source to grab input values from.
 func (o *GKGaussianDistribution) InitWithRandomSourceMeanDeviation(source GKRandom, mean float32, deviation float32) *GKGaussianDistribution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGaussianDistributionSelInitWithRandomSourceMeanDeviation, source, mean, deviation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGaussianDistributionFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *GKGaussianDistribution) Deviation() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gKGaussianDistributionSelDeviation)
 	return _ret
 }
-

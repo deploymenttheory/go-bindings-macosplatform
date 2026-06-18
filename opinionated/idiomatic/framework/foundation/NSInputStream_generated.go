@@ -93,4 +93,3 @@ type InputStreamable interface {
 }
 
 var _ InputStreamable = (*InputStream)(nil)
-

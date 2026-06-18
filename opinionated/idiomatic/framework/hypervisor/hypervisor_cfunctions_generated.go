@@ -454,4 +454,3 @@ func HvVmProtect(ipa uint64, size uint, flags uint64) int {
 func HvVmUnmap(ipa uint64, size uint) int {
 	return raw.HvVmUnmap(ipa, size)
 }
-

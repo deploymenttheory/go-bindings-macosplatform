@@ -18,30 +18,30 @@ type MTRClusterSmokeCOAlarm struct {
 }
 
 var (
-	_clsMTRClusterSmokeCOAlarm = _objcClass("MTRClusterSmokeCOAlarm")
-	_mTRClusterSmokeCOAlarmSelSelfTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("selfTestRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterSmokeCOAlarmSelSelfTestRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("selfTestRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeExpressedStateWithParams = objc.RegisterName("readAttributeExpressedStateWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeSmokeStateWithParams = objc.RegisterName("readAttributeSmokeStateWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeCOStateWithParams = objc.RegisterName("readAttributeCOStateWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeBatteryAlertWithParams = objc.RegisterName("readAttributeBatteryAlertWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeDeviceMutedWithParams = objc.RegisterName("readAttributeDeviceMutedWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeTestInProgressWithParams = objc.RegisterName("readAttributeTestInProgressWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeHardwareFaultAlertWithParams = objc.RegisterName("readAttributeHardwareFaultAlertWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeEndOfServiceAlertWithParams = objc.RegisterName("readAttributeEndOfServiceAlertWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeInterconnectSmokeAlarmWithParams = objc.RegisterName("readAttributeInterconnectSmokeAlarmWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeInterconnectCOAlarmWithParams = objc.RegisterName("readAttributeInterconnectCOAlarmWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeContaminationStateWithParams = objc.RegisterName("readAttributeContaminationStateWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeSmokeSensitivityLevelWithParams = objc.RegisterName("readAttributeSmokeSensitivityLevelWithParams:")
-	_mTRClusterSmokeCOAlarmSelWriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:")
+	_clsMTRClusterSmokeCOAlarm                                                                        = _objcClass("MTRClusterSmokeCOAlarm")
+	_mTRClusterSmokeCOAlarmSelSelfTestRequestWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("selfTestRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterSmokeCOAlarmSelSelfTestRequestWithExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("selfTestRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeExpressedStateWithParams                                   = objc.RegisterName("readAttributeExpressedStateWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeSmokeStateWithParams                                       = objc.RegisterName("readAttributeSmokeStateWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeCOStateWithParams                                          = objc.RegisterName("readAttributeCOStateWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeBatteryAlertWithParams                                     = objc.RegisterName("readAttributeBatteryAlertWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeDeviceMutedWithParams                                      = objc.RegisterName("readAttributeDeviceMutedWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeTestInProgressWithParams                                   = objc.RegisterName("readAttributeTestInProgressWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeHardwareFaultAlertWithParams                               = objc.RegisterName("readAttributeHardwareFaultAlertWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeEndOfServiceAlertWithParams                                = objc.RegisterName("readAttributeEndOfServiceAlertWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeInterconnectSmokeAlarmWithParams                           = objc.RegisterName("readAttributeInterconnectSmokeAlarmWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeInterconnectCOAlarmWithParams                              = objc.RegisterName("readAttributeInterconnectCOAlarmWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeContaminationStateWithParams                               = objc.RegisterName("readAttributeContaminationStateWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeSmokeSensitivityLevelWithParams                            = objc.RegisterName("readAttributeSmokeSensitivityLevelWithParams:")
+	_mTRClusterSmokeCOAlarmSelWriteAttributeSmokeSensitivityLevelWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:")
 	_mTRClusterSmokeCOAlarmSelWriteAttributeSmokeSensitivityLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeSmokeSensitivityLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeExpiryDateWithParams = objc.RegisterName("readAttributeExpiryDateWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterSmokeCOAlarmSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterSmokeCOAlarmSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeExpiryDateWithParams                                       = objc.RegisterName("readAttributeExpiryDateWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeGeneratedCommandListWithParams                             = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeAcceptedCommandListWithParams                              = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeAttributeListWithParams                                    = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeFeatureMapWithParams                                       = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterSmokeCOAlarmSelReadAttributeClusterRevisionWithParams                                  = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterSmokeCOAlarmSelInitWithDeviceEndpointIDQueue                                           = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterSmokeCOAlarmFromID(id objc.ID) *MTRClusterSmokeCOAlarm {
@@ -177,7 +177,8 @@ func (o *MTRClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithParams(params *
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterSmokeCOAlarm) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterSmokeCOAlarm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSmokeCOAlarmSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterSmokeCOAlarmFromID(_ret)
 }
-

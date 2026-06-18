@@ -17,19 +17,19 @@ type GLKEffectPropertyFog struct {
 }
 
 var (
-	_clsGLKEffectPropertyFog = _objcClass("GLKEffectPropertyFog")
-	_gLKEffectPropertyFogSelEnabled = objc.RegisterName("enabled")
+	_clsGLKEffectPropertyFog           = _objcClass("GLKEffectPropertyFog")
+	_gLKEffectPropertyFogSelEnabled    = objc.RegisterName("enabled")
 	_gLKEffectPropertyFogSelSetEnabled = objc.RegisterName("setEnabled:")
-	_gLKEffectPropertyFogSelMode = objc.RegisterName("mode")
-	_gLKEffectPropertyFogSelSetMode = objc.RegisterName("setMode:")
-	_gLKEffectPropertyFogSelColor = objc.RegisterName("color")
-	_gLKEffectPropertyFogSelSetColor = objc.RegisterName("setColor:")
-	_gLKEffectPropertyFogSelDensity = objc.RegisterName("density")
+	_gLKEffectPropertyFogSelMode       = objc.RegisterName("mode")
+	_gLKEffectPropertyFogSelSetMode    = objc.RegisterName("setMode:")
+	_gLKEffectPropertyFogSelColor      = objc.RegisterName("color")
+	_gLKEffectPropertyFogSelSetColor   = objc.RegisterName("setColor:")
+	_gLKEffectPropertyFogSelDensity    = objc.RegisterName("density")
 	_gLKEffectPropertyFogSelSetDensity = objc.RegisterName("setDensity:")
-	_gLKEffectPropertyFogSelStart = objc.RegisterName("start")
-	_gLKEffectPropertyFogSelSetStart = objc.RegisterName("setStart:")
-	_gLKEffectPropertyFogSelEnd = objc.RegisterName("end")
-	_gLKEffectPropertyFogSelSetEnd = objc.RegisterName("setEnd:")
+	_gLKEffectPropertyFogSelStart      = objc.RegisterName("start")
+	_gLKEffectPropertyFogSelSetStart   = objc.RegisterName("setStart:")
+	_gLKEffectPropertyFogSelEnd        = objc.RegisterName("end")
+	_gLKEffectPropertyFogSelSetEnd     = objc.RegisterName("setEnd:")
 )
 
 func GLKEffectPropertyFogFromID(id objc.ID) *GLKEffectPropertyFog {
@@ -95,4 +95,3 @@ func (o *GLKEffectPropertyFog) End() float32 {
 func (o *GLKEffectPropertyFog) SetEnd(end float32) {
 	o.Ptr().Send(_gLKEffectPropertyFogSelSetEnd, end)
 }
-

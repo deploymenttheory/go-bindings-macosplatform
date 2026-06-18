@@ -16,10 +16,10 @@ type PHASEMetaParameter struct {
 }
 
 var (
-	_clsPHASEMetaParameter = _objcClass("PHASEMetaParameter")
+	_clsPHASEMetaParameter           = _objcClass("PHASEMetaParameter")
 	_pHASEMetaParameterSelIdentifier = objc.RegisterName("identifier")
-	_pHASEMetaParameterSelValue = objc.RegisterName("value")
-	_pHASEMetaParameterSelSetValue = objc.RegisterName("setValue:")
+	_pHASEMetaParameterSelValue      = objc.RegisterName("value")
+	_pHASEMetaParameterSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func PHASEMetaParameterFromID(id objc.ID) *PHASEMetaParameter {
@@ -35,7 +35,9 @@ func PHASEMetaParameterFromID(id objc.ID) *PHASEMetaParameter {
 // @property identifier @abstract The identifier that uniquely represents this metaparameter.
 func (o *PHASEMetaParameter) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMetaParameterSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *PHASEMetaParameter) Value() objc.ID {
 func (o *PHASEMetaParameter) SetValue(value objc.ID) {
 	o.Ptr().Send(_pHASEMetaParameterSelSetValue, value)
 }
-

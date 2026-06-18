@@ -15,9 +15,9 @@ type VNVideoProcessorTimeIntervalCadence struct {
 }
 
 var (
-	_clsVNVideoProcessorTimeIntervalCadence = _objcClass("VNVideoProcessorTimeIntervalCadence")
+	_clsVNVideoProcessorTimeIntervalCadence                     = _objcClass("VNVideoProcessorTimeIntervalCadence")
 	_vNVideoProcessorTimeIntervalCadenceSelInitWithTimeInterval = objc.RegisterName("initWithTimeInterval:")
-	_vNVideoProcessorTimeIntervalCadenceSelTimeInterval = objc.RegisterName("timeInterval")
+	_vNVideoProcessorTimeIntervalCadenceSelTimeInterval         = objc.RegisterName("timeInterval")
 )
 
 func VNVideoProcessorTimeIntervalCadenceFromID(id objc.ID) *VNVideoProcessorTimeIntervalCadence {
@@ -32,7 +32,9 @@ func VNVideoProcessorTimeIntervalCadenceFromID(id objc.ID) *VNVideoProcessorTime
 
 func (o *VNVideoProcessorTimeIntervalCadence) InitWithTimeInterval(timeInterval float64) *VNVideoProcessorTimeIntervalCadence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVideoProcessorTimeIntervalCadenceSelInitWithTimeInterval, timeInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVideoProcessorTimeIntervalCadenceFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *VNVideoProcessorTimeIntervalCadence) TimeInterval() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNVideoProcessorTimeIntervalCadenceSelTimeInterval)
 	return _ret
 }
-

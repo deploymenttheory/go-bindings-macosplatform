@@ -16,21 +16,21 @@ type ODMappings struct {
 }
 
 var (
-	_clsODMappings = _objcClass("ODMappings")
-	_oDMappingsSelMappings = objc.RegisterName("mappings")
-	_oDMappingsSelRecordMapForStandardRecordType = objc.RegisterName("recordMapForStandardRecordType:")
+	_clsODMappings                                  = _objcClass("ODMappings")
+	_oDMappingsSelMappings                          = objc.RegisterName("mappings")
+	_oDMappingsSelRecordMapForStandardRecordType    = objc.RegisterName("recordMapForStandardRecordType:")
 	_oDMappingsSelSetRecordMapForStandardRecordType = objc.RegisterName("setRecordMap:forStandardRecordType:")
-	_oDMappingsSelComment = objc.RegisterName("comment")
-	_oDMappingsSelSetComment = objc.RegisterName("setComment:")
-	_oDMappingsSelTemplateName = objc.RegisterName("templateName")
-	_oDMappingsSelSetTemplateName = objc.RegisterName("setTemplateName:")
-	_oDMappingsSelIdentifier = objc.RegisterName("identifier")
-	_oDMappingsSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_oDMappingsSelRecordTypes = objc.RegisterName("recordTypes")
-	_oDMappingsSelFunction = objc.RegisterName("function")
-	_oDMappingsSelSetFunction = objc.RegisterName("setFunction:")
-	_oDMappingsSelFunctionAttributes = objc.RegisterName("functionAttributes")
-	_oDMappingsSelSetFunctionAttributes = objc.RegisterName("setFunctionAttributes:")
+	_oDMappingsSelComment                           = objc.RegisterName("comment")
+	_oDMappingsSelSetComment                        = objc.RegisterName("setComment:")
+	_oDMappingsSelTemplateName                      = objc.RegisterName("templateName")
+	_oDMappingsSelSetTemplateName                   = objc.RegisterName("setTemplateName:")
+	_oDMappingsSelIdentifier                        = objc.RegisterName("identifier")
+	_oDMappingsSelSetIdentifier                     = objc.RegisterName("setIdentifier:")
+	_oDMappingsSelRecordTypes                       = objc.RegisterName("recordTypes")
+	_oDMappingsSelFunction                          = objc.RegisterName("function")
+	_oDMappingsSelSetFunction                       = objc.RegisterName("setFunction:")
+	_oDMappingsSelFunctionAttributes                = objc.RegisterName("functionAttributes")
+	_oDMappingsSelSetFunctionAttributes             = objc.RegisterName("setFunctionAttributes:")
 )
 
 func ODMappingsFromID(id objc.ID) *ODMappings {
@@ -46,14 +46,18 @@ func ODMappingsFromID(id objc.ID) *ODMappings {
 // @method mappings @abstract Returns an initialized and autoreleased ODMappings object. @discussion Returns an initialized and autoreleased ODMappings object.
 func ODMappingsMappings() *ODMappings {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODMappings), _oDMappingsSelMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODMappingsFromID(_ret)
 }
 
 // @method recordType: @abstract Returns an ODRecordMap associated with the provided recordtype. @discussion Returns an ODRecordMap associated with the provided recordtype.
 func (o *ODMappings) RecordMapForStandardRecordType(stdType *foundation.NSString) *ODRecordMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelRecordMapForStandardRecordType, stdType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODRecordMapFromID(_ret)
 }
 
@@ -64,7 +68,9 @@ func (o *ODMappings) SetRecordMapForStandardRecordType(map_ *ODRecordMap, stdTyp
 
 func (o *ODMappings) Comment() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelComment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *ODMappings) SetComment(comment *foundation.NSString) {
 
 func (o *ODMappings) TemplateName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelTemplateName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *ODMappings) SetTemplateName(templateName *foundation.NSString) {
 
 func (o *ODMappings) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *ODMappings) RecordTypes() *foundation.NSArray[objc.ID] {
 
 func (o *ODMappings) Function() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDMappingsSelFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -115,4 +127,3 @@ func (o *ODMappings) FunctionAttributes() *foundation.NSArray[objc.ID] {
 func (o *ODMappings) SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_oDMappingsSelSetFunctionAttributes, functionAttributes)
 }
-

@@ -18,34 +18,34 @@ type IOBluetoothL2CAPChannel struct {
 }
 
 var (
-	_clsIOBluetoothL2CAPChannel = _objcClass("IOBluetoothL2CAPChannel")
-	_iOBluetoothL2CAPChannelSelRegisterForChannelOpenNotificationsSelector = objc.RegisterName("registerForChannelOpenNotifications:selector:")
+	_clsIOBluetoothL2CAPChannel                                                            = _objcClass("IOBluetoothL2CAPChannel")
+	_iOBluetoothL2CAPChannelSelRegisterForChannelOpenNotificationsSelector                 = objc.RegisterName("registerForChannelOpenNotifications:selector:")
 	_iOBluetoothL2CAPChannelSelRegisterForChannelOpenNotificationsSelectorWithPSMDirection = objc.RegisterName("registerForChannelOpenNotifications:selector:withPSM:direction:")
-	_iOBluetoothL2CAPChannelSelWithObjectID = objc.RegisterName("withObjectID:")
-	_iOBluetoothL2CAPChannelSelCloseChannel = objc.RegisterName("closeChannel")
-	_iOBluetoothL2CAPChannelSelGetOutgoingMTU = objc.RegisterName("getOutgoingMTU")
-	_iOBluetoothL2CAPChannelSelGetIncomingMTU = objc.RegisterName("getIncomingMTU")
-	_iOBluetoothL2CAPChannelSelRequestRemoteMTU = objc.RegisterName("requestRemoteMTU:")
-	_iOBluetoothL2CAPChannelSelWriteAsyncTrapLengthRefcon = objc.RegisterName("writeAsyncTrap:length:refcon:")
-	_iOBluetoothL2CAPChannelSelWriteAsyncLengthRefcon = objc.RegisterName("writeAsync:length:refcon:")
-	_iOBluetoothL2CAPChannelSelWriteSyncLength = objc.RegisterName("writeSync:length:")
-	_iOBluetoothL2CAPChannelSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iOBluetoothL2CAPChannelSelSetDelegateWithConfiguration = objc.RegisterName("setDelegate:withConfiguration:")
-	_iOBluetoothL2CAPChannelSelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothL2CAPChannelSelGetDevice = objc.RegisterName("getDevice")
-	_iOBluetoothL2CAPChannelSelGetObjectID = objc.RegisterName("getObjectID")
-	_iOBluetoothL2CAPChannelSelGetPSM = objc.RegisterName("getPSM")
-	_iOBluetoothL2CAPChannelSelGetLocalChannelID = objc.RegisterName("getLocalChannelID")
-	_iOBluetoothL2CAPChannelSelGetRemoteChannelID = objc.RegisterName("getRemoteChannelID")
-	_iOBluetoothL2CAPChannelSelIsIncoming = objc.RegisterName("isIncoming")
-	_iOBluetoothL2CAPChannelSelRegisterForChannelCloseNotificationSelector = objc.RegisterName("registerForChannelCloseNotification:selector:")
-	_iOBluetoothL2CAPChannelSelOutgoingMTU = objc.RegisterName("outgoingMTU")
-	_iOBluetoothL2CAPChannelSelIncomingMTU = objc.RegisterName("incomingMTU")
-	_iOBluetoothL2CAPChannelSelDevice = objc.RegisterName("device")
-	_iOBluetoothL2CAPChannelSelObjectID = objc.RegisterName("objectID")
-	_iOBluetoothL2CAPChannelSelPSM = objc.RegisterName("PSM")
-	_iOBluetoothL2CAPChannelSelLocalChannelID = objc.RegisterName("localChannelID")
-	_iOBluetoothL2CAPChannelSelRemoteChannelID = objc.RegisterName("remoteChannelID")
+	_iOBluetoothL2CAPChannelSelWithObjectID                                                = objc.RegisterName("withObjectID:")
+	_iOBluetoothL2CAPChannelSelCloseChannel                                                = objc.RegisterName("closeChannel")
+	_iOBluetoothL2CAPChannelSelGetOutgoingMTU                                              = objc.RegisterName("getOutgoingMTU")
+	_iOBluetoothL2CAPChannelSelGetIncomingMTU                                              = objc.RegisterName("getIncomingMTU")
+	_iOBluetoothL2CAPChannelSelRequestRemoteMTU                                            = objc.RegisterName("requestRemoteMTU:")
+	_iOBluetoothL2CAPChannelSelWriteAsyncTrapLengthRefcon                                  = objc.RegisterName("writeAsyncTrap:length:refcon:")
+	_iOBluetoothL2CAPChannelSelWriteAsyncLengthRefcon                                      = objc.RegisterName("writeAsync:length:refcon:")
+	_iOBluetoothL2CAPChannelSelWriteSyncLength                                             = objc.RegisterName("writeSync:length:")
+	_iOBluetoothL2CAPChannelSelSetDelegate                                                 = objc.RegisterName("setDelegate:")
+	_iOBluetoothL2CAPChannelSelSetDelegateWithConfiguration                                = objc.RegisterName("setDelegate:withConfiguration:")
+	_iOBluetoothL2CAPChannelSelDelegate                                                    = objc.RegisterName("delegate")
+	_iOBluetoothL2CAPChannelSelGetDevice                                                   = objc.RegisterName("getDevice")
+	_iOBluetoothL2CAPChannelSelGetObjectID                                                 = objc.RegisterName("getObjectID")
+	_iOBluetoothL2CAPChannelSelGetPSM                                                      = objc.RegisterName("getPSM")
+	_iOBluetoothL2CAPChannelSelGetLocalChannelID                                           = objc.RegisterName("getLocalChannelID")
+	_iOBluetoothL2CAPChannelSelGetRemoteChannelID                                          = objc.RegisterName("getRemoteChannelID")
+	_iOBluetoothL2CAPChannelSelIsIncoming                                                  = objc.RegisterName("isIncoming")
+	_iOBluetoothL2CAPChannelSelRegisterForChannelCloseNotificationSelector                 = objc.RegisterName("registerForChannelCloseNotification:selector:")
+	_iOBluetoothL2CAPChannelSelOutgoingMTU                                                 = objc.RegisterName("outgoingMTU")
+	_iOBluetoothL2CAPChannelSelIncomingMTU                                                 = objc.RegisterName("incomingMTU")
+	_iOBluetoothL2CAPChannelSelDevice                                                      = objc.RegisterName("device")
+	_iOBluetoothL2CAPChannelSelObjectID                                                    = objc.RegisterName("objectID")
+	_iOBluetoothL2CAPChannelSelPSM                                                         = objc.RegisterName("PSM")
+	_iOBluetoothL2CAPChannelSelLocalChannelID                                              = objc.RegisterName("localChannelID")
+	_iOBluetoothL2CAPChannelSelRemoteChannelID                                             = objc.RegisterName("remoteChannelID")
 )
 
 func IOBluetoothL2CAPChannelFromID(id objc.ID) *IOBluetoothL2CAPChannel {
@@ -60,19 +60,25 @@ func IOBluetoothL2CAPChannelFromID(id objc.ID) *IOBluetoothL2CAPChannel {
 
 func IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothL2CAPChannel), _iOBluetoothL2CAPChannelSelRegisterForChannelOpenNotificationsSelector, object, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 func IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection(object objc.ID, selector objc.SEL, psm uint16, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothL2CAPChannel), _iOBluetoothL2CAPChannelSelRegisterForChannelOpenNotificationsSelectorWithPSMDirection, object, selector, psm, inDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 func IOBluetoothL2CAPChannelWithObjectID(objectID uint) *IOBluetoothL2CAPChannel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothL2CAPChannel), _iOBluetoothL2CAPChannelSelWithObjectID, objectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothL2CAPChannelFromID(_ret)
 }
 
@@ -129,7 +135,9 @@ func (o *IOBluetoothL2CAPChannel) Delegate() objc.ID {
 
 func (o *IOBluetoothL2CAPChannel) GetDevice() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothL2CAPChannelSelGetDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -160,7 +168,9 @@ func (o *IOBluetoothL2CAPChannel) IsIncoming() bool {
 
 func (o *IOBluetoothL2CAPChannel) RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothL2CAPChannelSelRegisterForChannelCloseNotificationSelector, observer, inSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
@@ -176,7 +186,9 @@ func (o *IOBluetoothL2CAPChannel) IncomingMTU() uint16 {
 
 func (o *IOBluetoothL2CAPChannel) Device() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothL2CAPChannelSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -199,4 +211,3 @@ func (o *IOBluetoothL2CAPChannel) RemoteChannelID() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _iOBluetoothL2CAPChannelSelRemoteChannelID)
 	return _ret
 }
-

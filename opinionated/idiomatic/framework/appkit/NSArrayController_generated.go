@@ -52,7 +52,9 @@ func (x *ArrayController) WithSortDescriptors(items ...*foundation.NSSortDescrip
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -381,9 +383,13 @@ func (x *ArrayController) CanSelectPrevious() bool {
 
 func (x *ArrayController) asArrayController() *raw.NSArrayController { return x.inner }
 
-func (x *ArrayController) asObjectController() *raw.NSObjectController { return &x.inner.NSObjectController }
+func (x *ArrayController) asObjectController() *raw.NSObjectController {
+	return &x.inner.NSObjectController
+}
 
-func (x *ArrayController) asController() *raw.NSController { return &x.inner.NSObjectController.NSController }
+func (x *ArrayController) asController() *raw.NSController {
+	return &x.inner.NSObjectController.NSController
+}
 
 // ArrayControllerable is the interface implemented by [ArrayController], for mocking and DI.
 type ArrayControllerable interface {
@@ -451,4 +457,3 @@ type ArrayControllerable interface {
 }
 
 var _ ArrayControllerable = (*ArrayController)(nil)
-

@@ -15,7 +15,9 @@ type MTL4IndirectInstanceAccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4IndirectInstanceAccelerationStructureDescriptor].
-func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) Unwrap() *raw.MTL4IndirectInstanceAccelerationStructureDescriptor { return x.inner }
+func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) Unwrap() *raw.MTL4IndirectInstanceAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -217,9 +219,13 @@ func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) SetMotionTransform
 	x.inner.SetMotionTransformStride(motionTransformStride)
 }
 
-func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor }
+func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor
+}
 
-func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor }
+func (x *MTL4IndirectInstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor
+}
 
 // MTL4IndirectInstanceAccelerationStructureDescriptorable is the interface implemented by [MTL4IndirectInstanceAccelerationStructureDescriptor], for mocking and DI.
 type MTL4IndirectInstanceAccelerationStructureDescriptorable interface {
@@ -261,4 +267,3 @@ type MTL4IndirectInstanceAccelerationStructureDescriptorable interface {
 }
 
 var _ MTL4IndirectInstanceAccelerationStructureDescriptorable = (*MTL4IndirectInstanceAccelerationStructureDescriptor)(nil)
-

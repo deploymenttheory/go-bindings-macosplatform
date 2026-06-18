@@ -16,12 +16,12 @@ type EKRecurrenceDayOfWeek struct {
 }
 
 var (
-	_clsEKRecurrenceDayOfWeek = _objcClass("EKRecurrenceDayOfWeek")
-	_eKRecurrenceDayOfWeekSelDayOfWeek = objc.RegisterName("dayOfWeek:")
-	_eKRecurrenceDayOfWeekSelDayOfWeekWeekNumber = objc.RegisterName("dayOfWeek:weekNumber:")
+	_clsEKRecurrenceDayOfWeek                               = _objcClass("EKRecurrenceDayOfWeek")
+	_eKRecurrenceDayOfWeekSelDayOfWeek                      = objc.RegisterName("dayOfWeek:")
+	_eKRecurrenceDayOfWeekSelDayOfWeekWeekNumber            = objc.RegisterName("dayOfWeek:weekNumber:")
 	_eKRecurrenceDayOfWeekSelInitWithDayOfTheWeekWeekNumber = objc.RegisterName("initWithDayOfTheWeek:weekNumber:")
-	_eKRecurrenceDayOfWeekSelDayOfTheWeek = objc.RegisterName("dayOfTheWeek")
-	_eKRecurrenceDayOfWeekSelWeekNumber = objc.RegisterName("weekNumber")
+	_eKRecurrenceDayOfWeekSelDayOfTheWeek                   = objc.RegisterName("dayOfTheWeek")
+	_eKRecurrenceDayOfWeekSelWeekNumber                     = objc.RegisterName("weekNumber")
 )
 
 func EKRecurrenceDayOfWeekFromID(id objc.ID) *EKRecurrenceDayOfWeek {
@@ -37,14 +37,18 @@ func EKRecurrenceDayOfWeekFromID(id objc.ID) *EKRecurrenceDayOfWeek {
 // @method     dayOfWeek: @abstract   Creates an autoreleased object with a day of the week and week number of zero.
 func EKRecurrenceDayOfWeekDayOfWeek(dayOfTheWeek EKWeekday) *EKRecurrenceDayOfWeek {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceDayOfWeek), _eKRecurrenceDayOfWeekSelDayOfWeek, dayOfTheWeek)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceDayOfWeekFromID(_ret)
 }
 
 // @method     dayOfWeek:weekNumber: @abstract   Creates an autoreleased object with a specific day of week and week number.
 func EKRecurrenceDayOfWeekDayOfWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *EKRecurrenceDayOfWeek {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKRecurrenceDayOfWeek), _eKRecurrenceDayOfWeekSelDayOfWeekWeekNumber, dayOfTheWeek, weekNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceDayOfWeekFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *EKRecurrenceDayOfWeek) WeekNumber() int {
 	_ret := objc.Send[int](o.Ptr(), _eKRecurrenceDayOfWeekSelWeekNumber)
 	return _ret
 }
-

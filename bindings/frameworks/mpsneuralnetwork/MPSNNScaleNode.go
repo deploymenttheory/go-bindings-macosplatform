@@ -16,10 +16,10 @@ type MPSNNScaleNode struct {
 }
 
 var (
-	_clsMPSNNScaleNode = _objcClass("MPSNNScaleNode")
-	_mPSNNScaleNodeSelNodeWithSourceOutputSize = objc.RegisterName("nodeWithSource:outputSize:")
+	_clsMPSNNScaleNode                                          = _objcClass("MPSNNScaleNode")
+	_mPSNNScaleNodeSelNodeWithSourceOutputSize                  = objc.RegisterName("nodeWithSource:outputSize:")
 	_mPSNNScaleNodeSelNodeWithSourceTransformProviderOutputSize = objc.RegisterName("nodeWithSource:transformProvider:outputSize:")
-	_mPSNNScaleNodeSelInitWithSourceOutputSize = objc.RegisterName("initWithSource:outputSize:")
+	_mPSNNScaleNodeSelInitWithSourceOutputSize                  = objc.RegisterName("initWithSource:outputSize:")
 	_mPSNNScaleNodeSelInitWithSourceTransformProviderOutputSize = objc.RegisterName("initWithSource:transformProvider:outputSize:")
 )
 
@@ -36,28 +36,35 @@ func MPSNNScaleNodeFromID(id objc.ID) *MPSNNScaleNode {
 // @abstract create an autoreleased node to convert a MPSImage to the desired size @param  sourceNode    A valid MPSNNImageNode @param  size          The size of the output image {width, height, depth}
 func MPSNNScaleNodeNodeWithSourceOutputSize(sourceNode *MPSNNImageNode, size metal.MTLSize) *MPSNNScaleNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNScaleNode), _mPSNNScaleNodeSelNodeWithSourceOutputSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNScaleNodeFromID(_ret)
 }
 
 // @abstract create an autoreleased node to convert a MPSImage to the desired size for a region of interest @param  sourceNode            A valid MPSNNImageNode @param  transformProvider    If non-nil, a valid MPSImageTransformProvider that provides the region of interest @param  size              The size of the output image {width, height, depth}
 func MPSNNScaleNodeNodeWithSourceTransformProviderOutputSize(sourceNode *MPSNNImageNode, transformProvider MPSImageTransformProvider, size metal.MTLSize) *MPSNNScaleNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNScaleNode), _mPSNNScaleNodeSelNodeWithSourceTransformProviderOutputSize, sourceNode.Ptr(), transformProvider, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNScaleNodeFromID(_ret)
 }
 
 // @abstract init a node to convert a MPSImage to the desired size @param  sourceNode    A valid MPSNNImageNode @param  size          The size of the output image {width, height, depth}
 func (o *MPSNNScaleNode) InitWithSourceOutputSize(sourceNode *MPSNNImageNode, size metal.MTLSize) *MPSNNScaleNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNScaleNodeSelInitWithSourceOutputSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNScaleNodeFromID(_ret)
 }
 
 // @abstract init a node to convert a MPSImage to the desired size for a region of interest @param  sourceNode           A valid MPSNNImageNode @param  transformProvider    If non-nil, a valid MPSImageTransformProvider that provides the region of interest @param  size                 The size of the output image {width, height, depth}
 func (o *MPSNNScaleNode) InitWithSourceTransformProviderOutputSize(sourceNode *MPSNNImageNode, transformProvider MPSImageTransformProvider, size metal.MTLSize) *MPSNNScaleNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNScaleNodeSelInitWithSourceTransformProviderOutputSize, sourceNode.Ptr(), transformProvider, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNScaleNodeFromID(_ret)
 }
-

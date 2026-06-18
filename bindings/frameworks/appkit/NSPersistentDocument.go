@@ -19,13 +19,13 @@ type NSPersistentDocument struct {
 }
 
 var (
-	_clsNSPersistentDocument = _objcClass("NSPersistentDocument")
+	_clsNSPersistentDocument                                                                                   = _objcClass("NSPersistentDocument")
 	_nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError = objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error:")
-	_nSPersistentDocumentSelPersistentStoreTypeForFileType = objc.RegisterName("persistentStoreTypeForFileType:")
-	_nSPersistentDocumentSelManagedObjectContext = objc.RegisterName("managedObjectContext")
-	_nSPersistentDocumentSelSetManagedObjectContext = objc.RegisterName("setManagedObjectContext:")
-	_nSPersistentDocumentSelManagedObjectModel = objc.RegisterName("managedObjectModel")
-	_nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeError = objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:error:")
+	_nSPersistentDocumentSelPersistentStoreTypeForFileType                                                     = objc.RegisterName("persistentStoreTypeForFileType:")
+	_nSPersistentDocumentSelManagedObjectContext                                                               = objc.RegisterName("managedObjectContext")
+	_nSPersistentDocumentSelSetManagedObjectContext                                                            = objc.RegisterName("setManagedObjectContext:")
+	_nSPersistentDocumentSelManagedObjectModel                                                                 = objc.RegisterName("managedObjectModel")
+	_nSPersistentDocumentSelConfigurePersistentStoreCoordinatorForURLOfTypeError                               = objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:error:")
 )
 
 func NSPersistentDocumentFromID(id objc.ID) *NSPersistentDocument {
@@ -49,13 +49,17 @@ func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeMo
 
 func (o *NSPersistentDocument) PersistentStoreTypeForFileType(fileType *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelPersistentStoreTypeForFileType, fileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentDocument) ManagedObjectContext() *coredata.NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coredata.NSManagedObjectContextFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *NSPersistentDocument) SetManagedObjectContext(managedObjectContext *cor
 
 func (o *NSPersistentDocument) ManagedObjectModel() *coredata.NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentDocumentSelManagedObjectModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coredata.NSManagedObjectModelFromID(_ret)
 }
 
@@ -78,4 +84,3 @@ func (o *NSPersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeEr
 	}
 	return _ret, nil
 }
-

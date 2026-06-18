@@ -16,18 +16,18 @@ type ASPasskeyAssertionCredential struct {
 }
 
 var (
-	_clsASPasskeyAssertionCredential = _objcClass("ASPasskeyAssertionCredential")
-	_aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID = objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:")
+	_clsASPasskeyAssertionCredential                                                                                                  = _objcClass("ASPasskeyAssertionCredential")
+	_aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID                = objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:")
 	_aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput = objc.RegisterName("initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:")
-	_aSPasskeyAssertionCredentialSelCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID = objc.RegisterName("credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:")
-	_aSPasskeyAssertionCredentialSelUserHandle = objc.RegisterName("userHandle")
-	_aSPasskeyAssertionCredentialSelRelyingParty = objc.RegisterName("relyingParty")
-	_aSPasskeyAssertionCredentialSelSignature = objc.RegisterName("signature")
-	_aSPasskeyAssertionCredentialSelClientDataHash = objc.RegisterName("clientDataHash")
-	_aSPasskeyAssertionCredentialSelAuthenticatorData = objc.RegisterName("authenticatorData")
-	_aSPasskeyAssertionCredentialSelCredentialID = objc.RegisterName("credentialID")
-	_aSPasskeyAssertionCredentialSelExtensionOutput = objc.RegisterName("extensionOutput")
-	_aSPasskeyAssertionCredentialSelSetExtensionOutput = objc.RegisterName("setExtensionOutput:")
+	_aSPasskeyAssertionCredentialSelCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID          = objc.RegisterName("credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:")
+	_aSPasskeyAssertionCredentialSelUserHandle                                                                                        = objc.RegisterName("userHandle")
+	_aSPasskeyAssertionCredentialSelRelyingParty                                                                                      = objc.RegisterName("relyingParty")
+	_aSPasskeyAssertionCredentialSelSignature                                                                                         = objc.RegisterName("signature")
+	_aSPasskeyAssertionCredentialSelClientDataHash                                                                                    = objc.RegisterName("clientDataHash")
+	_aSPasskeyAssertionCredentialSelAuthenticatorData                                                                                 = objc.RegisterName("authenticatorData")
+	_aSPasskeyAssertionCredentialSelCredentialID                                                                                      = objc.RegisterName("credentialID")
+	_aSPasskeyAssertionCredentialSelExtensionOutput                                                                                   = objc.RegisterName("extensionOutput")
+	_aSPasskeyAssertionCredentialSelSetExtensionOutput                                                                                = objc.RegisterName("setExtensionOutput:")
 )
 
 func ASPasskeyAssertionCredentialFromID(id objc.ID) *ASPasskeyAssertionCredential {
@@ -43,74 +43,93 @@ func ASPasskeyAssertionCredentialFromID(id objc.ID) *ASPasskeyAssertionCredentia
 // @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
 func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialFromID(_ret)
 }
 
 // @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty The relying party. @param signature The signature for the assertion challenge. @param extensionOutput The outputs of WebAuthn extensions processed by the credential provider.
 func (o *ASPasskeyAssertionCredential) InitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData, extensionOutput *ASPasskeyAssertionCredentialExtensionOutput) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelInitWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr(), extensionOutput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialFromID(_ret)
 }
 
 // @abstract Creates and initializes a new ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
 func ASPasskeyAssertionCredentialCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty *foundation.NSString, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *ASPasskeyAssertionCredential {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasskeyAssertionCredential), _aSPasskeyAssertionCredentialSelCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID, userHandle.Ptr(), relyingParty.Ptr(), signature.Ptr(), clientDataHash.Ptr(), authenticatorData.Ptr(), credentialID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialFromID(_ret)
 }
 
 // @abstract The user handle of this passkey.
 func (o *ASPasskeyAssertionCredential) UserHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelUserHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The relying party of this credential.
 func (o *ASPasskeyAssertionCredential) RelyingParty() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelRelyingParty)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The signature of this credential.
 func (o *ASPasskeyAssertionCredential) Signature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The hash of the client data for this assertion result.
 func (o *ASPasskeyAssertionCredential) ClientDataHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelClientDataHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The authenticator data of the application that created this credential.
 func (o *ASPasskeyAssertionCredential) AuthenticatorData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelAuthenticatorData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The raw credential ID for this passkey credential.
 func (o *ASPasskeyAssertionCredential) CredentialID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelCredentialID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract The outputs of WebAuthn extensions processed by the credential provider.
 func (o *ASPasskeyAssertionCredential) ExtensionOutput() *ASPasskeyAssertionCredentialExtensionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialSelExtensionOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialExtensionOutputFromID(_ret)
 }
 
 func (o *ASPasskeyAssertionCredential) SetExtensionOutput(extensionOutput *ASPasskeyAssertionCredentialExtensionOutput) {
 	o.Ptr().Send(_aSPasskeyAssertionCredentialSelSetExtensionOutput, extensionOutput.Ptr())
 }
-

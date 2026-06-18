@@ -58,7 +58,9 @@ func (x *SendMessageIntentResponse) SetSentMessages(sentMessages *foundation.NSA
 	x.inner.SetSentMessages(sentMessages)
 }
 
-func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // SendMessageIntentResponseable is the interface implemented by [SendMessageIntentResponse], for mocking and DI.
 type SendMessageIntentResponseable interface {
@@ -70,4 +72,3 @@ type SendMessageIntentResponseable interface {
 }
 
 var _ SendMessageIntentResponseable = (*SendMessageIntentResponse)(nil)
-

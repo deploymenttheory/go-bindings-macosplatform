@@ -21,25 +21,25 @@ type MTKTextureLoader struct {
 }
 
 var (
-	_clsMTKTextureLoader = _objcClass("MTKTextureLoader")
-	_mTKTextureLoaderSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler = objc.RegisterName("newTextureWithContentsOfURL:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsCompletionHandler = objc.RegisterName("newTextureWithName:scaleFactor:bundle:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler = objc.RegisterName("newTextureWithName:scaleFactor:displayGamut:bundle:options:completionHandler:")
-	_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler = objc.RegisterName("newTexturesWithContentsOfURLs:options:completionHandler:")
-	_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler = objc.RegisterName("newTexturesWithNames:scaleFactor:bundle:options:completionHandler:")
+	_clsMTKTextureLoader                                                                          = _objcClass("MTKTextureLoader")
+	_mTKTextureLoaderSelInitWithDevice                                                            = objc.RegisterName("initWithDevice:")
+	_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsCompletionHandler                       = objc.RegisterName("newTextureWithContentsOfURL:options:completionHandler:")
+	_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsCompletionHandler               = objc.RegisterName("newTextureWithName:scaleFactor:bundle:options:completionHandler:")
+	_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler   = objc.RegisterName("newTextureWithName:scaleFactor:displayGamut:bundle:options:completionHandler:")
+	_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsCompletionHandler                     = objc.RegisterName("newTexturesWithContentsOfURLs:options:completionHandler:")
+	_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler             = objc.RegisterName("newTexturesWithNames:scaleFactor:bundle:options:completionHandler:")
 	_mTKTextureLoaderSelNewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler = objc.RegisterName("newTexturesWithNames:scaleFactor:displayGamut:bundle:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithDataOptionsCompletionHandler = objc.RegisterName("newTextureWithData:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithCGImageOptionsCompletionHandler = objc.RegisterName("newTextureWithCGImage:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsCompletionHandler = objc.RegisterName("newTextureWithMDLTexture:options:completionHandler:")
-	_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError = objc.RegisterName("newTextureWithContentsOfURL:options:error:")
-	_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError = objc.RegisterName("newTexturesWithContentsOfURLs:options:error:")
-	_mTKTextureLoaderSelNewTextureWithDataOptionsError = objc.RegisterName("newTextureWithData:options:error:")
-	_mTKTextureLoaderSelNewTextureWithCGImageOptionsError = objc.RegisterName("newTextureWithCGImage:options:error:")
-	_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsError = objc.RegisterName("newTextureWithMDLTexture:options:error:")
-	_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsError = objc.RegisterName("newTextureWithName:scaleFactor:bundle:options:error:")
-	_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsError = objc.RegisterName("newTextureWithName:scaleFactor:displayGamut:bundle:options:error:")
-	_mTKTextureLoaderSelDevice = objc.RegisterName("device")
+	_mTKTextureLoaderSelNewTextureWithDataOptionsCompletionHandler                                = objc.RegisterName("newTextureWithData:options:completionHandler:")
+	_mTKTextureLoaderSelNewTextureWithCGImageOptionsCompletionHandler                             = objc.RegisterName("newTextureWithCGImage:options:completionHandler:")
+	_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsCompletionHandler                          = objc.RegisterName("newTextureWithMDLTexture:options:completionHandler:")
+	_mTKTextureLoaderSelNewTextureWithContentsOfURLOptionsError                                   = objc.RegisterName("newTextureWithContentsOfURL:options:error:")
+	_mTKTextureLoaderSelNewTexturesWithContentsOfURLsOptionsError                                 = objc.RegisterName("newTexturesWithContentsOfURLs:options:error:")
+	_mTKTextureLoaderSelNewTextureWithDataOptionsError                                            = objc.RegisterName("newTextureWithData:options:error:")
+	_mTKTextureLoaderSelNewTextureWithCGImageOptionsError                                         = objc.RegisterName("newTextureWithCGImage:options:error:")
+	_mTKTextureLoaderSelNewTextureWithMDLTextureOptionsError                                      = objc.RegisterName("newTextureWithMDLTexture:options:error:")
+	_mTKTextureLoaderSelNewTextureWithNameScaleFactorBundleOptionsError                           = objc.RegisterName("newTextureWithName:scaleFactor:bundle:options:error:")
+	_mTKTextureLoaderSelNewTextureWithNameScaleFactorDisplayGamutBundleOptionsError               = objc.RegisterName("newTextureWithName:scaleFactor:displayGamut:bundle:options:error:")
+	_mTKTextureLoaderSelDevice                                                                    = objc.RegisterName("device")
 )
 
 func MTKTextureLoaderFromID(id objc.ID) *MTKTextureLoader {
@@ -55,7 +55,9 @@ func MTKTextureLoaderFromID(id objc.ID) *MTKTextureLoader {
 // @method initWithDevice: @abstract Initialize the loader @param device Metal device with which to create Metal textures
 func (o *MTKTextureLoader) InitWithDevice(device metal.MTLDevice) *MTKTextureLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKTextureLoaderSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKTextureLoaderFromID(_ret)
 }
 
@@ -221,4 +223,3 @@ func (o *MTKTextureLoader) Device() metal.MTLDevice {
 	_ret := objc.Send[metal.MTLDevice](o.Ptr(), _mTKTextureLoaderSelDevice)
 	return _ret
 }
-

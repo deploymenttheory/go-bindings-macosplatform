@@ -19,19 +19,19 @@ type ISyncSessionDriver struct {
 }
 
 var (
-	_clsISyncSessionDriver = _objcClass("ISyncSessionDriver")
+	_clsISyncSessionDriver                            = _objcClass("ISyncSessionDriver")
 	_iSyncSessionDriverSelSessionDriverWithDataSource = objc.RegisterName("sessionDriverWithDataSource:")
-	_iSyncSessionDriverSelSync = objc.RegisterName("sync")
-	_iSyncSessionDriverSelStartAsynchronousSync = objc.RegisterName("startAsynchronousSync:")
-	_iSyncSessionDriverSelLastError = objc.RegisterName("lastError")
-	_iSyncSessionDriverSelDataSource = objc.RegisterName("dataSource")
-	_iSyncSessionDriverSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iSyncSessionDriverSelDelegate = objc.RegisterName("delegate")
-	_iSyncSessionDriverSelSetHandlesSyncAlerts = objc.RegisterName("setHandlesSyncAlerts:")
-	_iSyncSessionDriverSelHandlesSyncAlerts = objc.RegisterName("handlesSyncAlerts")
-	_iSyncSessionDriverSelClient = objc.RegisterName("client")
-	_iSyncSessionDriverSelSession = objc.RegisterName("session")
-	_iSyncSessionDriverSelFinishSyncing = objc.RegisterName("finishSyncing")
+	_iSyncSessionDriverSelSync                        = objc.RegisterName("sync")
+	_iSyncSessionDriverSelStartAsynchronousSync       = objc.RegisterName("startAsynchronousSync:")
+	_iSyncSessionDriverSelLastError                   = objc.RegisterName("lastError")
+	_iSyncSessionDriverSelDataSource                  = objc.RegisterName("dataSource")
+	_iSyncSessionDriverSelSetDelegate                 = objc.RegisterName("setDelegate:")
+	_iSyncSessionDriverSelDelegate                    = objc.RegisterName("delegate")
+	_iSyncSessionDriverSelSetHandlesSyncAlerts        = objc.RegisterName("setHandlesSyncAlerts:")
+	_iSyncSessionDriverSelHandlesSyncAlerts           = objc.RegisterName("handlesSyncAlerts")
+	_iSyncSessionDriverSelClient                      = objc.RegisterName("client")
+	_iSyncSessionDriverSelSession                     = objc.RegisterName("session")
+	_iSyncSessionDriverSelFinishSyncing               = objc.RegisterName("finishSyncing")
 )
 
 func ISyncSessionDriverFromID(id objc.ID) *ISyncSessionDriver {
@@ -47,7 +47,9 @@ func ISyncSessionDriverFromID(id objc.ID) *ISyncSessionDriver {
 // Deprecated: since macOS 10.7.
 func ISyncSessionDriverSessionDriverWithDataSource(dataSource ISyncSessionDriverDataSource) *ISyncSessionDriver {
 	_ret := objc.Send[objc.ID](objc.ID(_clsISyncSessionDriver), _iSyncSessionDriverSelSessionDriverWithDataSource, dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncSessionDriverFromID(_ret)
 }
 
@@ -104,14 +106,18 @@ func (o *ISyncSessionDriver) HandlesSyncAlerts() bool {
 // Deprecated: since macOS 10.7.
 func (o *ISyncSessionDriver) Client() *ISyncClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncSessionDriverSelClient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncClientFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *ISyncSessionDriver) Session() *ISyncSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncSessionDriverSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ISyncSessionFromID(_ret)
 }
 
@@ -119,4 +125,3 @@ func (o *ISyncSessionDriver) Session() *ISyncSession {
 func (o *ISyncSessionDriver) FinishSyncing() {
 	o.Ptr().Send(_iSyncSessionDriverSelFinishSyncing)
 }
-

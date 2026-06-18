@@ -16,27 +16,27 @@ type GCPhysicalInputProfile struct {
 }
 
 var (
-	_clsGCPhysicalInputProfile = _objcClass("GCPhysicalInputProfile")
-	_gCPhysicalInputProfileSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_gCPhysicalInputProfileSelCapture = objc.RegisterName("capture")
-	_gCPhysicalInputProfileSelSetStateFromPhysicalInput = objc.RegisterName("setStateFromPhysicalInput:")
-	_gCPhysicalInputProfileSelMappedElementAliasForPhysicalInputName = objc.RegisterName("mappedElementAliasForPhysicalInputName:")
+	_clsGCPhysicalInputProfile                                        = _objcClass("GCPhysicalInputProfile")
+	_gCPhysicalInputProfileSelObjectForKeyedSubscript                 = objc.RegisterName("objectForKeyedSubscript:")
+	_gCPhysicalInputProfileSelCapture                                 = objc.RegisterName("capture")
+	_gCPhysicalInputProfileSelSetStateFromPhysicalInput               = objc.RegisterName("setStateFromPhysicalInput:")
+	_gCPhysicalInputProfileSelMappedElementAliasForPhysicalInputName  = objc.RegisterName("mappedElementAliasForPhysicalInputName:")
 	_gCPhysicalInputProfileSelMappedPhysicalInputNamesForElementAlias = objc.RegisterName("mappedPhysicalInputNamesForElementAlias:")
-	_gCPhysicalInputProfileSelDevice = objc.RegisterName("device")
-	_gCPhysicalInputProfileSelLastEventTimestamp = objc.RegisterName("lastEventTimestamp")
-	_gCPhysicalInputProfileSelHasRemappedElements = objc.RegisterName("hasRemappedElements")
-	_gCPhysicalInputProfileSelValueDidChangeHandler = objc.RegisterName("valueDidChangeHandler")
-	_gCPhysicalInputProfileSelSetValueDidChangeHandler = objc.RegisterName("setValueDidChangeHandler:")
-	_gCPhysicalInputProfileSelElements = objc.RegisterName("elements")
-	_gCPhysicalInputProfileSelButtons = objc.RegisterName("buttons")
-	_gCPhysicalInputProfileSelAxes = objc.RegisterName("axes")
-	_gCPhysicalInputProfileSelDpads = objc.RegisterName("dpads")
-	_gCPhysicalInputProfileSelTouchpads = objc.RegisterName("touchpads")
-	_gCPhysicalInputProfileSelAllElements = objc.RegisterName("allElements")
-	_gCPhysicalInputProfileSelAllButtons = objc.RegisterName("allButtons")
-	_gCPhysicalInputProfileSelAllAxes = objc.RegisterName("allAxes")
-	_gCPhysicalInputProfileSelAllDpads = objc.RegisterName("allDpads")
-	_gCPhysicalInputProfileSelAllTouchpads = objc.RegisterName("allTouchpads")
+	_gCPhysicalInputProfileSelDevice                                  = objc.RegisterName("device")
+	_gCPhysicalInputProfileSelLastEventTimestamp                      = objc.RegisterName("lastEventTimestamp")
+	_gCPhysicalInputProfileSelHasRemappedElements                     = objc.RegisterName("hasRemappedElements")
+	_gCPhysicalInputProfileSelValueDidChangeHandler                   = objc.RegisterName("valueDidChangeHandler")
+	_gCPhysicalInputProfileSelSetValueDidChangeHandler                = objc.RegisterName("setValueDidChangeHandler:")
+	_gCPhysicalInputProfileSelElements                                = objc.RegisterName("elements")
+	_gCPhysicalInputProfileSelButtons                                 = objc.RegisterName("buttons")
+	_gCPhysicalInputProfileSelAxes                                    = objc.RegisterName("axes")
+	_gCPhysicalInputProfileSelDpads                                   = objc.RegisterName("dpads")
+	_gCPhysicalInputProfileSelTouchpads                               = objc.RegisterName("touchpads")
+	_gCPhysicalInputProfileSelAllElements                             = objc.RegisterName("allElements")
+	_gCPhysicalInputProfileSelAllButtons                              = objc.RegisterName("allButtons")
+	_gCPhysicalInputProfileSelAllAxes                                 = objc.RegisterName("allAxes")
+	_gCPhysicalInputProfileSelAllDpads                                = objc.RegisterName("allDpads")
+	_gCPhysicalInputProfileSelAllTouchpads                            = objc.RegisterName("allTouchpads")
 )
 
 func GCPhysicalInputProfileFromID(id objc.ID) *GCPhysicalInputProfile {
@@ -52,14 +52,18 @@ func GCPhysicalInputProfileFromID(id objc.ID) *GCPhysicalInputProfile {
 // Profile elements can be accessed using keyed subscript notation, with a valid alias of its inputs. @example extendedGamepad["Button A"] == extendedGamepad.buttonA // YES @example microGamepad["Button X"] == microGamepad.buttonX // YES @note Equivalent to -elements
 func (o *GCPhysicalInputProfile) ObjectForKeyedSubscript(key *foundation.NSString) *GCControllerElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelObjectForKeyedSubscript, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerElementFromID(_ret)
 }
 
 // Polls the state vector of the physical input input and saves it to a new and writable instance of GCPhysicalInputProfile. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new physical input profile with the duplicated state vector of the current physical input
 func (o *GCPhysicalInputProfile) Capture() *GCPhysicalInputProfile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelCapture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCPhysicalInputProfileFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *GCPhysicalInputProfile) SetStateFromPhysicalInput(physicalInput *GCPhys
 // Returns the primary alias of the GCControllerElement that a given physical input maps to. @discussion If the user were to map a physical press of the A button of their game controller to the B button, then -[GCPhysicalInputProfile  mappedElementAliasForPhysicalInputName: GCInputButtonA] would return GCInputButtonB. Note that mappings can change anytime your app is backgrounded, so make sure you update any relevant visuals when returning to foreground. @param inputName A GCInput string corresponding to the physical button you want the mapped element alias for. @returns A GCInput string corresponding to the primary alias of the GCControllerElement that a given physical button maps to, or nil if there is no mapping.
 func (o *GCPhysicalInputProfile) MappedElementAliasForPhysicalInputName(inputName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelMappedElementAliasForPhysicalInputName, inputName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,31 +157,40 @@ func (o *GCPhysicalInputProfile) Touchpads() *foundation.NSDictionary[*foundatio
 // The following properties allow for dynamic querying of the input elements available on a profile.
 func (o *GCPhysicalInputProfile) AllElements() *foundation.NSSet[*GCControllerElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAllElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCControllerElement](_ret)
 }
 
 func (o *GCPhysicalInputProfile) AllButtons() *foundation.NSSet[*GCControllerButtonInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAllButtons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCControllerButtonInput](_ret)
 }
 
 func (o *GCPhysicalInputProfile) AllAxes() *foundation.NSSet[*GCControllerAxisInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAllAxes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCControllerAxisInput](_ret)
 }
 
 func (o *GCPhysicalInputProfile) AllDpads() *foundation.NSSet[*GCControllerDirectionPad] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAllDpads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCControllerDirectionPad](_ret)
 }
 
 func (o *GCPhysicalInputProfile) AllTouchpads() *foundation.NSSet[*GCControllerTouchpad] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCPhysicalInputProfileSelAllTouchpads)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCControllerTouchpad](_ret)
 }
-

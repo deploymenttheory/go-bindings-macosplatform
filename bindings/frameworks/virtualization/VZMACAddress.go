@@ -18,16 +18,16 @@ type VZMACAddress struct {
 }
 
 var (
-	_clsVZMACAddress = _objcClass("VZMACAddress")
-	_vZMACAddressSelInitWithEthernetAddress = objc.RegisterName("initWithEthernetAddress:")
-	_vZMACAddressSelInitWithString = objc.RegisterName("initWithString:")
+	_clsVZMACAddress                                 = _objcClass("VZMACAddress")
+	_vZMACAddressSelInitWithEthernetAddress          = objc.RegisterName("initWithEthernetAddress:")
+	_vZMACAddressSelInitWithString                   = objc.RegisterName("initWithString:")
 	_vZMACAddressSelRandomLocallyAdministeredAddress = objc.RegisterName("randomLocallyAdministeredAddress")
-	_vZMACAddressSelEthernetAddress = objc.RegisterName("ethernetAddress")
-	_vZMACAddressSelString = objc.RegisterName("string")
-	_vZMACAddressSelIsBroadcastAddress = objc.RegisterName("isBroadcastAddress")
-	_vZMACAddressSelIsMulticastAddress = objc.RegisterName("isMulticastAddress")
-	_vZMACAddressSelIsUnicastAddress = objc.RegisterName("isUnicastAddress")
-	_vZMACAddressSelIsLocallyAdministeredAddress = objc.RegisterName("isLocallyAdministeredAddress")
+	_vZMACAddressSelEthernetAddress                  = objc.RegisterName("ethernetAddress")
+	_vZMACAddressSelString                           = objc.RegisterName("string")
+	_vZMACAddressSelIsBroadcastAddress               = objc.RegisterName("isBroadcastAddress")
+	_vZMACAddressSelIsMulticastAddress               = objc.RegisterName("isMulticastAddress")
+	_vZMACAddressSelIsUnicastAddress                 = objc.RegisterName("isUnicastAddress")
+	_vZMACAddressSelIsLocallyAdministeredAddress     = objc.RegisterName("isLocallyAdministeredAddress")
 	_vZMACAddressSelIsUniversallyAdministeredAddress = objc.RegisterName("isUniversallyAdministeredAddress")
 )
 
@@ -44,21 +44,27 @@ func VZMACAddressFromID(id objc.ID) *VZMACAddress {
 // @abstract Initialize the VZMACAddress from a 48-bit ethernet address. @param ethernetAddress A 48-bit ethernet address.
 func (o *VZMACAddress) InitWithEthernetAddress(ethernetAddress unsafe.Pointer) *VZMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMACAddressSelInitWithEthernetAddress, ethernetAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMACAddressFromID(_ret)
 }
 
 // @abstract Initialize the VZMACAddress from a string representation of a MAC address. @param string The string should be formatted representing the 6 bytes in hexadecimal separated by a colon character. e.g. "01:23:45:ab:cd:ef" The alphabetical characters can appear lowercase or uppercase. @return A VZMACAddress or nil if the string is not formatted correctly.
 func (o *VZMACAddress) InitWithString(string_ *foundation.NSString) *VZMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMACAddressSelInitWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMACAddressFromID(_ret)
 }
 
 // @abstract Create a valid, random, unicast, locally administered address. @discussion The generated address is not guaranteed to be unique.
 func VZMACAddressRandomLocallyAdministeredAddress() *VZMACAddress {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZMACAddress), _vZMACAddressSelRandomLocallyAdministeredAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMACAddressFromID(_ret)
 }
 
@@ -71,7 +77,9 @@ func (o *VZMACAddress) EthernetAddress() unsafe.Pointer {
 // @abstract The address represented as a string. @discussion The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
 func (o *VZMACAddress) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMACAddressSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -104,4 +112,3 @@ func (o *VZMACAddress) IsUniversallyAdministeredAddress() bool {
 	_ret := objc.Send[bool](o.Ptr(), _vZMACAddressSelIsUniversallyAdministeredAddress)
 	return _ret
 }
-

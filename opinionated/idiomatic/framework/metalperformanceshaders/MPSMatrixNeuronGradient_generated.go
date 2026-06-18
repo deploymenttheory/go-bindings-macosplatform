@@ -183,9 +183,13 @@ func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *MatrixNeuronGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixNeuronGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
-func (x *MatrixNeuronGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+func (x *MatrixNeuronGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+}
 
 // MatrixNeuronGradientable is the interface implemented by [MatrixNeuronGradient], for mocking and DI.
 type MatrixNeuronGradientable interface {
@@ -217,4 +221,3 @@ type MatrixNeuronGradientable interface {
 }
 
 var _ MatrixNeuronGradientable = (*MatrixNeuronGradient)(nil)
-

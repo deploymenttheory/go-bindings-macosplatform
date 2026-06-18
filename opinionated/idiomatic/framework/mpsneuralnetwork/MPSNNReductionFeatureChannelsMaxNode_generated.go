@@ -17,7 +17,9 @@ type NNReductionFeatureChannelsMaxNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsMaxNode].
-func (x *NNReductionFeatureChannelsMaxNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMaxNode { return x.inner }
+func (x *NNReductionFeatureChannelsMaxNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMaxNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -55,9 +57,13 @@ func (x *NNReductionFeatureChannelsMaxNode) WithLabel(label string) *NNReduction
 	return x
 }
 
-func (x *NNReductionFeatureChannelsMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionFeatureChannelsMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionFeatureChannelsMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionFeatureChannelsMaxNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionFeatureChannelsMaxNodeable is the interface implemented by [NNReductionFeatureChannelsMaxNode], for mocking and DI.
 type NNReductionFeatureChannelsMaxNodeable interface {
@@ -68,4 +74,3 @@ type NNReductionFeatureChannelsMaxNodeable interface {
 }
 
 var _ NNReductionFeatureChannelsMaxNodeable = (*NNReductionFeatureChannelsMaxNode)(nil)
-

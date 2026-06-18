@@ -16,9 +16,9 @@ type MLNumericConstraint struct {
 }
 
 var (
-	_clsMLNumericConstraint = _objcClass("MLNumericConstraint")
-	_mLNumericConstraintSelMinNumber = objc.RegisterName("minNumber")
-	_mLNumericConstraintSelMaxNumber = objc.RegisterName("maxNumber")
+	_clsMLNumericConstraint                  = _objcClass("MLNumericConstraint")
+	_mLNumericConstraintSelMinNumber         = objc.RegisterName("minNumber")
+	_mLNumericConstraintSelMaxNumber         = objc.RegisterName("maxNumber")
 	_mLNumericConstraintSelEnumeratedNumbers = objc.RegisterName("enumeratedNumbers")
 )
 
@@ -34,13 +34,17 @@ func MLNumericConstraintFromID(id objc.ID) *MLNumericConstraint {
 
 func (o *MLNumericConstraint) MinNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLNumericConstraintSelMinNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MLNumericConstraint) MaxNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLNumericConstraintSelMaxNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,4 +52,3 @@ func (o *MLNumericConstraint) EnumeratedNumbers() *foundation.NSSet[*foundation.
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSNumber]](o.Ptr(), _mLNumericConstraintSelEnumeratedNumbers)
 	return _ret
 }
-

@@ -16,12 +16,12 @@ type MTREnergyEVSEModeClusterChangeToModeParams struct {
 }
 
 var (
-	_clsMTREnergyEVSEModeClusterChangeToModeParams = _objcClass("MTREnergyEVSEModeClusterChangeToModeParams")
-	_mTREnergyEVSEModeClusterChangeToModeParamsSelGetNewMode = objc.RegisterName("getNewMode")
-	_mTREnergyEVSEModeClusterChangeToModeParamsSelSetNewMode = objc.RegisterName("setNewMode:")
-	_mTREnergyEVSEModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTREnergyEVSEModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTREnergyEVSEModeClusterChangeToModeParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTREnergyEVSEModeClusterChangeToModeParams                               = _objcClass("MTREnergyEVSEModeClusterChangeToModeParams")
+	_mTREnergyEVSEModeClusterChangeToModeParamsSelGetNewMode                     = objc.RegisterName("getNewMode")
+	_mTREnergyEVSEModeClusterChangeToModeParamsSelSetNewMode                     = objc.RegisterName("setNewMode:")
+	_mTREnergyEVSEModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTREnergyEVSEModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTREnergyEVSEModeClusterChangeToModeParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTREnergyEVSEModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTREnergyEVSEModeClusterChangeToModeParamsFromID(id objc.ID) *MTREnergyEVSE
 
 func (o *MTREnergyEVSEModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeParamsSelGetNewMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTREnergyEVSEModeClusterChangeToModeParams) SetNewMode(newMode *foundat
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTREnergyEVSEModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTREnergyEVSEModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTREnergyEVSEModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterChangeToModeParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

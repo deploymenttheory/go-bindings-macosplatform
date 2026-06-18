@@ -16,7 +16,7 @@ type DDDiscoverySession struct {
 }
 
 var (
-	_clsDDDiscoverySession = _objcClass("DDDiscoverySession")
+	_clsDDDiscoverySession            = _objcClass("DDDiscoverySession")
 	_dDDiscoverySessionSelReportEvent = objc.RegisterName("reportEvent:")
 )
 
@@ -34,4 +34,3 @@ func DDDiscoverySessionFromID(id objc.ID) *DDDiscoverySession {
 func (o *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
 	o.Ptr().Send(_dDDiscoverySessionSelReportEvent, inEvent.Ptr())
 }
-

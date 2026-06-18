@@ -17,28 +17,28 @@ type NSClipView struct {
 }
 
 var (
-	_clsNSClipView = _objcClass("NSClipView")
-	_nSClipViewSelViewFrameChanged = objc.RegisterName("viewFrameChanged:")
-	_nSClipViewSelViewBoundsChanged = objc.RegisterName("viewBoundsChanged:")
-	_nSClipViewSelScrollToPoint = objc.RegisterName("scrollToPoint:")
-	_nSClipViewSelConstrainBoundsRect = objc.RegisterName("constrainBoundsRect:")
-	_nSClipViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSClipViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSClipViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSClipViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSClipViewSelDocumentView = objc.RegisterName("documentView")
-	_nSClipViewSelSetDocumentView = objc.RegisterName("setDocumentView:")
-	_nSClipViewSelDocumentRect = objc.RegisterName("documentRect")
-	_nSClipViewSelDocumentCursor = objc.RegisterName("documentCursor")
-	_nSClipViewSelSetDocumentCursor = objc.RegisterName("setDocumentCursor:")
-	_nSClipViewSelDocumentVisibleRect = objc.RegisterName("documentVisibleRect")
-	_nSClipViewSelContentInsets = objc.RegisterName("contentInsets")
-	_nSClipViewSelSetContentInsets = objc.RegisterName("setContentInsets:")
-	_nSClipViewSelAutomaticallyAdjustsContentInsets = objc.RegisterName("automaticallyAdjustsContentInsets")
+	_clsNSClipView                                     = _objcClass("NSClipView")
+	_nSClipViewSelViewFrameChanged                     = objc.RegisterName("viewFrameChanged:")
+	_nSClipViewSelViewBoundsChanged                    = objc.RegisterName("viewBoundsChanged:")
+	_nSClipViewSelScrollToPoint                        = objc.RegisterName("scrollToPoint:")
+	_nSClipViewSelConstrainBoundsRect                  = objc.RegisterName("constrainBoundsRect:")
+	_nSClipViewSelBackgroundColor                      = objc.RegisterName("backgroundColor")
+	_nSClipViewSelSetBackgroundColor                   = objc.RegisterName("setBackgroundColor:")
+	_nSClipViewSelDrawsBackground                      = objc.RegisterName("drawsBackground")
+	_nSClipViewSelSetDrawsBackground                   = objc.RegisterName("setDrawsBackground:")
+	_nSClipViewSelDocumentView                         = objc.RegisterName("documentView")
+	_nSClipViewSelSetDocumentView                      = objc.RegisterName("setDocumentView:")
+	_nSClipViewSelDocumentRect                         = objc.RegisterName("documentRect")
+	_nSClipViewSelDocumentCursor                       = objc.RegisterName("documentCursor")
+	_nSClipViewSelSetDocumentCursor                    = objc.RegisterName("setDocumentCursor:")
+	_nSClipViewSelDocumentVisibleRect                  = objc.RegisterName("documentVisibleRect")
+	_nSClipViewSelContentInsets                        = objc.RegisterName("contentInsets")
+	_nSClipViewSelSetContentInsets                     = objc.RegisterName("setContentInsets:")
+	_nSClipViewSelAutomaticallyAdjustsContentInsets    = objc.RegisterName("automaticallyAdjustsContentInsets")
 	_nSClipViewSelSetAutomaticallyAdjustsContentInsets = objc.RegisterName("setAutomaticallyAdjustsContentInsets:")
-	_nSClipViewSelConstrainScrollPoint = objc.RegisterName("constrainScrollPoint:")
-	_nSClipViewSelCopiesOnScroll = objc.RegisterName("copiesOnScroll")
-	_nSClipViewSelSetCopiesOnScroll = objc.RegisterName("setCopiesOnScroll:")
+	_nSClipViewSelConstrainScrollPoint                 = objc.RegisterName("constrainScrollPoint:")
+	_nSClipViewSelCopiesOnScroll                       = objc.RegisterName("copiesOnScroll")
+	_nSClipViewSelSetCopiesOnScroll                    = objc.RegisterName("setCopiesOnScroll:")
 )
 
 func NSClipViewFromID(id objc.ID) *NSClipView {
@@ -70,7 +70,9 @@ func (o *NSClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) c
 
 func (o *NSClipView) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -89,7 +91,9 @@ func (o *NSClipView) SetDrawsBackground(drawsBackground bool) {
 
 func (o *NSClipView) DocumentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -104,7 +108,9 @@ func (o *NSClipView) DocumentRect() corefoundation.CGRect {
 
 func (o *NSClipView) DocumentCursor() *NSCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSClipViewSelDocumentCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCursorFromID(_ret)
 }
 
@@ -151,4 +157,3 @@ func (o *NSClipView) CopiesOnScroll() bool {
 func (o *NSClipView) SetCopiesOnScroll(copiesOnScroll bool) {
 	o.Ptr().Send(_nSClipViewSelSetCopiesOnScroll, copiesOnScroll)
 }
-

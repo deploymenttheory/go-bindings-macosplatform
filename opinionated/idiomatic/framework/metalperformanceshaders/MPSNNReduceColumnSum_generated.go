@@ -113,11 +113,17 @@ func (x *NNReduceColumnSum) WithLabel(label string) *NNReduceColumnSum {
 	return x
 }
 
-func (x *NNReduceColumnSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceColumnSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceColumnSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceColumnSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceColumnSum) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceColumnSumable is the interface implemented by [NNReduceColumnSum], for mocking and DI.
 type NNReduceColumnSumable interface {
@@ -136,4 +142,3 @@ type NNReduceColumnSumable interface {
 }
 
 var _ NNReduceColumnSumable = (*NNReduceColumnSum)(nil)
-

@@ -18,13 +18,13 @@ type PHASEEnvelope struct {
 }
 
 var (
-	_clsPHASEEnvelope = _objcClass("PHASEEnvelope")
+	_clsPHASEEnvelope                           = _objcClass("PHASEEnvelope")
 	_pHASEEnvelopeSelInitWithStartPointSegments = objc.RegisterName("initWithStartPoint:segments:")
-	_pHASEEnvelopeSelEvaluateForValue = objc.RegisterName("evaluateForValue:")
-	_pHASEEnvelopeSelStartPoint = objc.RegisterName("startPoint")
-	_pHASEEnvelopeSelSegments = objc.RegisterName("segments")
-	_pHASEEnvelopeSelDomain = objc.RegisterName("domain")
-	_pHASEEnvelopeSelRange = objc.RegisterName("range")
+	_pHASEEnvelopeSelEvaluateForValue           = objc.RegisterName("evaluateForValue:")
+	_pHASEEnvelopeSelStartPoint                 = objc.RegisterName("startPoint")
+	_pHASEEnvelopeSelSegments                   = objc.RegisterName("segments")
+	_pHASEEnvelopeSelDomain                     = objc.RegisterName("domain")
+	_pHASEEnvelopeSelRange                      = objc.RegisterName("range")
 )
 
 func PHASEEnvelopeFromID(id objc.ID) *PHASEEnvelope {
@@ -40,7 +40,9 @@ func PHASEEnvelopeFromID(id objc.ID) *PHASEEnvelope {
 // @method initWithStartPoint:segments @abstract Initialize an envelope from a start point and an array of segments. @discussion If the segment array is empty (i.e., count == 0), the envelope will internally create a single segment with an end point matching the start point. If the segment array has more than one segment, segments will be sorted internally in ascending order of x value. Note that the startPoint.x value must be <= the segment with the lowest x value provided in segments. Failure to do so will cause this function to return nil. @param startPoint The start point of the envelope. @param segments An array of segments. @return A new envelope.
 func (o *PHASEEnvelope) InitWithStartPointSegments(startPoint unsafe.Pointer, segments *foundation.NSArray[*PHASEEnvelopeSegment]) *PHASEEnvelope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSelInitWithStartPointSegments, startPoint, segments.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEnvelopeFromID(_ret)
 }
 
@@ -59,21 +61,26 @@ func (o *PHASEEnvelope) StartPoint() unsafe.Pointer {
 // @property segments @abstract The segments of the envelope.
 func (o *PHASEEnvelope) Segments() *foundation.NSArray[*PHASEEnvelopeSegment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSelSegments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEEnvelopeSegment](_ret)
 }
 
 // @property domain @abstract The domain (along the x-axis). @discussion The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
 func (o *PHASEEnvelope) Domain() *PHASENumericPair {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSelDomain)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumericPairFromID(_ret)
 }
 
 // @property range @abstract The range (along the y-axis). @discussion The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
 func (o *PHASEEnvelope) Range() *PHASENumericPair {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeSelRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumericPairFromID(_ret)
 }
-

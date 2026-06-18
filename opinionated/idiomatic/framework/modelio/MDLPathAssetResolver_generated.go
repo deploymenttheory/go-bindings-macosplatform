@@ -67,4 +67,3 @@ type PathAssetResolverable interface {
 }
 
 var _ PathAssetResolverable = (*PathAssetResolver)(nil)
-

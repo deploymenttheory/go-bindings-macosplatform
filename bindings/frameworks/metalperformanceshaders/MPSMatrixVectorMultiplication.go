@@ -18,9 +18,9 @@ type MPSMatrixVectorMultiplication struct {
 }
 
 var (
-	_clsMPSMatrixVectorMultiplication = _objcClass("MPSMatrixVectorMultiplication")
-	_mPSMatrixVectorMultiplicationSelInitWithDeviceTransposeRowsColumnsAlphaBeta = objc.RegisterName("initWithDevice:transpose:rows:columns:alpha:beta:")
-	_mPSMatrixVectorMultiplicationSelInitWithDeviceRowsColumns = objc.RegisterName("initWithDevice:rows:columns:")
+	_clsMPSMatrixVectorMultiplication                                                        = _objcClass("MPSMatrixVectorMultiplication")
+	_mPSMatrixVectorMultiplicationSelInitWithDeviceTransposeRowsColumnsAlphaBeta             = objc.RegisterName("initWithDevice:transpose:rows:columns:alpha:beta:")
+	_mPSMatrixVectorMultiplicationSelInitWithDeviceRowsColumns                               = objc.RegisterName("initWithDevice:rows:columns:")
 	_mPSMatrixVectorMultiplicationSelEncodeToCommandBufferInputMatrixInputVectorResultVector = objc.RegisterName("encodeToCommandBuffer:inputMatrix:inputVector:resultVector:")
 )
 
@@ -37,14 +37,18 @@ func MPSMatrixVectorMultiplicationFromID(id objc.ID) *MPSMatrixVectorMultiplicat
 // @abstract   Initialize an MPSMatrixVectorMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the input matrix should be used in transposed form.  if 'YES' then op(A) == A**T, otherwise op(A) == A. @param      rows            The number of rows in the input matrix op(A), and the number of elements in the vector y. @param      columns         The number of columns in the input matrix op(A), and the number of elements in the input vector x. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of y.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
 func (o *MPSMatrixVectorMultiplication) InitWithDeviceTransposeRowsColumnsAlphaBeta(device metal.MTLDevice, transpose bool, rows uint, columns uint, alpha float64, beta float64) *MPSMatrixVectorMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixVectorMultiplicationSelInitWithDeviceTransposeRowsColumnsAlphaBeta, device, transpose, rows, columns, alpha, beta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixVectorMultiplicationFromID(_ret)
 }
 
 // @abstract   Convenience initialization for a matrix-vector multiplication with no transposition, unit scaling of the product, and no accumulation of the result.  The scaling factors alpha and beta are taken to be 1.0 and 0.0 respectively. @param      device          The device on which the kernel will execute. @param      rows            The number of rows in the input matrix A, and the number of elements in the vector y. @param      columns         The number of columns in the input matrix A, and the number of elements in the input vector x. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
 func (o *MPSMatrixVectorMultiplication) InitWithDeviceRowsColumns(device metal.MTLDevice, rows uint, columns uint) *MPSMatrixVectorMultiplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixVectorMultiplicationSelInitWithDeviceRowsColumns, device, rows, columns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixVectorMultiplicationFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *MPSMatrixVectorMultiplication) InitWithDeviceRowsColumns(device metal.M
 func (o *MPSMatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector) {
 	o.Ptr().Send(_mPSMatrixVectorMultiplicationSelEncodeToCommandBufferInputMatrixInputVectorResultVector, commandBuffer, inputMatrix.Ptr(), inputVector.Ptr(), resultVector.Ptr())
 }
-

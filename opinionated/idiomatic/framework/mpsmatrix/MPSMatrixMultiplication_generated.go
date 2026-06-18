@@ -152,4 +152,3 @@ type MatrixMultiplicationable interface {
 }
 
 var _ MatrixMultiplicationable = (*MatrixMultiplication)(nil)
-

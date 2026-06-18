@@ -54,4 +54,3 @@ type MixerParametersable interface {
 }
 
 var _ MixerParametersable = (*MixerParameters)(nil)
-

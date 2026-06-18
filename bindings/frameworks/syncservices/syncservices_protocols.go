@@ -31,4 +31,3 @@ type ISyncSessionDriverDataSource interface {
 // NSPersistentStoreCoordinatorSyncing wraps the ObjC protocol NSPersistentStoreCoordinatorSyncing.
 type NSPersistentStoreCoordinatorSyncing interface {
 }
-

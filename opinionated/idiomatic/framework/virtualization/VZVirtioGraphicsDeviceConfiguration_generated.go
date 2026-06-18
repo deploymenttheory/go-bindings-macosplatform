@@ -18,7 +18,9 @@ type VirtioGraphicsDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioGraphicsDeviceConfiguration].
-func (x *VirtioGraphicsDeviceConfiguration) Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration { return x.inner }
+func (x *VirtioGraphicsDeviceConfiguration) Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*raw.VZVirtioG
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZVirtioGraphicsScanoutConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -70,7 +74,9 @@ func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts *foundation.NSA
 	x.inner.SetScanouts(scanouts)
 }
 
-func (x *VirtioGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration { return &x.inner.VZGraphicsDeviceConfiguration }
+func (x *VirtioGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration {
+	return &x.inner.VZGraphicsDeviceConfiguration
+}
 
 // VirtioGraphicsDeviceConfigurationable is the interface implemented by [VirtioGraphicsDeviceConfiguration], for mocking and DI.
 type VirtioGraphicsDeviceConfigurationable interface {
@@ -81,4 +87,3 @@ type VirtioGraphicsDeviceConfigurationable interface {
 }
 
 var _ VirtioGraphicsDeviceConfigurationable = (*VirtioGraphicsDeviceConfiguration)(nil)
-

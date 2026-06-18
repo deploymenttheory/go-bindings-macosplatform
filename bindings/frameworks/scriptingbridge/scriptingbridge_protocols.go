@@ -15,4 +15,3 @@ import (
 type SBApplicationDelegate interface {
 	EventDidFailWithError(event *ae.AEDesc, error_ unsafe.Pointer) objc.ID
 }
-

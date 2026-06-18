@@ -16,8 +16,8 @@ type INIntentResponse struct {
 }
 
 var (
-	_clsINIntentResponse = _objcClass("INIntentResponse")
-	_iNIntentResponseSelUserActivity = objc.RegisterName("userActivity")
+	_clsINIntentResponse                = _objcClass("INIntentResponse")
+	_iNIntentResponseSelUserActivity    = objc.RegisterName("userActivity")
 	_iNIntentResponseSelSetUserActivity = objc.RegisterName("setUserActivity:")
 )
 
@@ -33,11 +33,12 @@ func INIntentResponseFromID(id objc.ID) *INIntentResponse {
 
 func (o *INIntentResponse) UserActivity() *foundation.NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNIntentResponseSelUserActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserActivityFromID(_ret)
 }
 
 func (o *INIntentResponse) SetUserActivity(userActivity *foundation.NSUserActivity) {
 	o.Ptr().Send(_iNIntentResponseSelSetUserActivity, userActivity.Ptr())
 }
-

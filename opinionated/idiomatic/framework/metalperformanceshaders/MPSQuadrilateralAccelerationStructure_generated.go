@@ -20,7 +20,9 @@ type QuadrilateralAccelerationStructure struct {
 }
 
 // Unwrap returns the underlying [raw.MPSQuadrilateralAccelerationStructure].
-func (x *QuadrilateralAccelerationStructure) Unwrap() *raw.MPSQuadrilateralAccelerationStructure { return x.inner }
+func (x *QuadrilateralAccelerationStructure) Unwrap() *raw.MPSQuadrilateralAccelerationStructure {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,7 +115,9 @@ func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...*mpsray
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*mpsrayintersector.MPSPolygonBuffer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -150,11 +154,17 @@ func (x *QuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateral
 	x.inner.SetQuadrilateralCount(quadrilateralCount)
 }
 
-func (x *QuadrilateralAccelerationStructure) asPolygonAccelerationStructure() *mpsrayintersector.MPSPolygonAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure }
+func (x *QuadrilateralAccelerationStructure) asPolygonAccelerationStructure() *mpsrayintersector.MPSPolygonAccelerationStructure {
+	return &x.inner.MPSPolygonAccelerationStructure
+}
 
-func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure }
+func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure {
+	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure
+}
 
-func (x *QuadrilateralAccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.MPSKernel }
+func (x *QuadrilateralAccelerationStructure) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.MPSKernel
+}
 
 // QuadrilateralAccelerationStructureable is the interface implemented by [QuadrilateralAccelerationStructure], for mocking and DI.
 type QuadrilateralAccelerationStructureable interface {
@@ -179,4 +189,3 @@ type QuadrilateralAccelerationStructureable interface {
 }
 
 var _ QuadrilateralAccelerationStructureable = (*QuadrilateralAccelerationStructure)(nil)
-

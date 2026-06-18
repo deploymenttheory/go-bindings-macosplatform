@@ -64,4 +64,3 @@ type ValueTransformerable interface {
 }
 
 var _ ValueTransformerable = (*ValueTransformer)(nil)
-

@@ -67,4 +67,3 @@ type ParameterDescriptionable interface {
 }
 
 var _ ParameterDescriptionable = (*ParameterDescription)(nil)
-

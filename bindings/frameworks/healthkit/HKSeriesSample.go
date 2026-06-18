@@ -15,7 +15,7 @@ type HKSeriesSample struct {
 }
 
 var (
-	_clsHKSeriesSample = _objcClass("HKSeriesSample")
+	_clsHKSeriesSample      = _objcClass("HKSeriesSample")
 	_hKSeriesSampleSelCount = objc.RegisterName("count")
 )
 
@@ -33,4 +33,3 @@ func (o *HKSeriesSample) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _hKSeriesSampleSelCount)
 	return _ret
 }
-

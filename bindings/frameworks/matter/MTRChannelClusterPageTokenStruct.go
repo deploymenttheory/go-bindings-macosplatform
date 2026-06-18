@@ -16,12 +16,12 @@ type MTRChannelClusterPageTokenStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterPageTokenStruct = _objcClass("MTRChannelClusterPageTokenStruct")
-	_mTRChannelClusterPageTokenStructSelLimit = objc.RegisterName("limit")
-	_mTRChannelClusterPageTokenStructSelSetLimit = objc.RegisterName("setLimit:")
-	_mTRChannelClusterPageTokenStructSelAfter = objc.RegisterName("after")
-	_mTRChannelClusterPageTokenStructSelSetAfter = objc.RegisterName("setAfter:")
-	_mTRChannelClusterPageTokenStructSelBefore = objc.RegisterName("before")
+	_clsMTRChannelClusterPageTokenStruct          = _objcClass("MTRChannelClusterPageTokenStruct")
+	_mTRChannelClusterPageTokenStructSelLimit     = objc.RegisterName("limit")
+	_mTRChannelClusterPageTokenStructSelSetLimit  = objc.RegisterName("setLimit:")
+	_mTRChannelClusterPageTokenStructSelAfter     = objc.RegisterName("after")
+	_mTRChannelClusterPageTokenStructSelSetAfter  = objc.RegisterName("setAfter:")
+	_mTRChannelClusterPageTokenStructSelBefore    = objc.RegisterName("before")
 	_mTRChannelClusterPageTokenStructSelSetBefore = objc.RegisterName("setBefore:")
 )
 
@@ -37,7 +37,9 @@ func MTRChannelClusterPageTokenStructFromID(id objc.ID) *MTRChannelClusterPageTo
 
 func (o *MTRChannelClusterPageTokenStruct) Limit() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterPageTokenStructSelLimit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRChannelClusterPageTokenStruct) SetLimit(limit *foundation.NSNumber) 
 
 func (o *MTRChannelClusterPageTokenStruct) After() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterPageTokenStructSelAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRChannelClusterPageTokenStruct) SetAfter(after *foundation.NSString) 
 
 func (o *MTRChannelClusterPageTokenStruct) Before() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterPageTokenStructSelBefore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRChannelClusterPageTokenStruct) SetBefore(before *foundation.NSString) {
 	o.Ptr().Send(_mTRChannelClusterPageTokenStructSelSetBefore, before.Ptr())
 }
-

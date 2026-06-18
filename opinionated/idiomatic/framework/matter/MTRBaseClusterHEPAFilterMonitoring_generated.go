@@ -19,7 +19,9 @@ type MTRBaseClusterHEPAFilterMonitoring struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterHEPAFilterMonitoring].
-func (x *MTRBaseClusterHEPAFilterMonitoring) Unwrap() *raw.MTRBaseClusterHEPAFilterMonitoring { return x.inner }
+func (x *MTRBaseClusterHEPAFilterMonitoring) Unwrap() *raw.MTRBaseClusterHEPAFilterMonitoring {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -436,9 +438,13 @@ func (x *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-func (x *MTRBaseClusterHEPAFilterMonitoring) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterHEPAFilterMonitoring) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterHEPAFilterMonitoring) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterHEPAFilterMonitoring) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterHEPAFilterMonitoringable is the interface implemented by [MTRBaseClusterHEPAFilterMonitoring], for mocking and DI.
 type MTRBaseClusterHEPAFilterMonitoringable interface {
@@ -472,4 +478,3 @@ type MTRBaseClusterHEPAFilterMonitoringable interface {
 }
 
 var _ MTRBaseClusterHEPAFilterMonitoringable = (*MTRBaseClusterHEPAFilterMonitoring)(nil)
-

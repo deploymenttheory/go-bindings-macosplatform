@@ -368,9 +368,13 @@ func (x *MTRBaseClusterDishwasherAlarm) SubscribeAttributeClusterRevisionWithPar
 	}
 }
 
-func (x *MTRBaseClusterDishwasherAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterDishwasherAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterDishwasherAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterDishwasherAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterDishwasherAlarmable is the interface implemented by [MTRBaseClusterDishwasherAlarm], for mocking and DI.
 type MTRBaseClusterDishwasherAlarmable interface {
@@ -398,4 +402,3 @@ type MTRBaseClusterDishwasherAlarmable interface {
 }
 
 var _ MTRBaseClusterDishwasherAlarmable = (*MTRBaseClusterDishwasherAlarm)(nil)
-

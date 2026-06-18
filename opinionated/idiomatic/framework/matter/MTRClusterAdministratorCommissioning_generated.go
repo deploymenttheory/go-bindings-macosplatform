@@ -17,7 +17,9 @@ type MTRClusterAdministratorCommissioning struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterAdministratorCommissioning].
-func (x *MTRClusterAdministratorCommissioning) Unwrap() *raw.MTRClusterAdministratorCommissioning { return x.inner }
+func (x *MTRClusterAdministratorCommissioning) Unwrap() *raw.MTRClusterAdministratorCommissioning {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -125,9 +127,13 @@ func (x *MTRClusterAdministratorCommissioning) RevokeCommissioningWithExpectedVa
 	x.inner.RevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterAdministratorCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterAdministratorCommissioning) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterAdministratorCommissioning) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterAdministratorCommissioning) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterAdministratorCommissioningable is the interface implemented by [MTRClusterAdministratorCommissioning], for mocking and DI.
 type MTRClusterAdministratorCommissioningable interface {
@@ -151,4 +157,3 @@ type MTRClusterAdministratorCommissioningable interface {
 }
 
 var _ MTRClusterAdministratorCommissioningable = (*MTRClusterAdministratorCommissioning)(nil)
-

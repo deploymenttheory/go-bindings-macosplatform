@@ -132,4 +132,3 @@ type AVB17221EntityDiscoveryable interface {
 }
 
 var _ AVB17221EntityDiscoveryable = (*AVB17221EntityDiscovery)(nil)
-

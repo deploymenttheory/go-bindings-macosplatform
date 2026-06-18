@@ -15,7 +15,7 @@ type AVMetricPlayerItemSeekDidCompleteEvent struct {
 }
 
 var (
-	_clsAVMetricPlayerItemSeekDidCompleteEvent = _objcClass("AVMetricPlayerItemSeekDidCompleteEvent")
+	_clsAVMetricPlayerItemSeekDidCompleteEvent                = _objcClass("AVMetricPlayerItemSeekDidCompleteEvent")
 	_aVMetricPlayerItemSeekDidCompleteEventSelDidSeekInBuffer = objc.RegisterName("didSeekInBuffer")
 )
 
@@ -33,4 +33,3 @@ func (o *AVMetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVMetricPlayerItemSeekDidCompleteEventSelDidSeekInBuffer)
 	return _ret
 }
-

@@ -107,4 +107,3 @@ type VisionPrismable interface {
 }
 
 var _ VisionPrismable = (*VisionPrism)(nil)
-

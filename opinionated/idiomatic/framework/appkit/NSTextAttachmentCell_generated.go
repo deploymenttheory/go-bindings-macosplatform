@@ -359,4 +359,3 @@ type TextAttachmentCellable interface {
 }
 
 var _ TextAttachmentCellable = (*TextAttachmentCell)(nil)
-

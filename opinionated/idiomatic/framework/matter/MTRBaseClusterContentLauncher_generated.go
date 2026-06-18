@@ -539,9 +539,13 @@ func (x *MTRBaseClusterContentLauncher) SubscribeAttributeClusterRevisionWithMin
 	}
 }
 
-func (x *MTRBaseClusterContentLauncher) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterContentLauncher) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterContentLauncher) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterContentLauncher) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterContentLauncherable is the interface implemented by [MTRBaseClusterContentLauncher], for mocking and DI.
 type MTRBaseClusterContentLauncherable interface {
@@ -585,4 +589,3 @@ type MTRBaseClusterContentLauncherable interface {
 }
 
 var _ MTRBaseClusterContentLauncherable = (*MTRBaseClusterContentLauncher)(nil)
-

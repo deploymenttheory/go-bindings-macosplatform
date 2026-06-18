@@ -18,45 +18,45 @@ type MTRClusterOnOff struct {
 }
 
 var (
-	_clsMTRClusterOnOff = _objcClass("MTRClusterOnOff")
-	_mTRClusterOnOffSelOffWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("offWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOffWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("offWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOnWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("onWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOnWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("onWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelToggleWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("toggleWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelToggleWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("toggleWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("offWithEffectWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("onWithRecallGlobalSceneWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("onWithRecallGlobalSceneWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelOnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("onWithTimedOffWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOnOffSelReadAttributeOnOffWithParams = objc.RegisterName("readAttributeOnOffWithParams:")
-	_mTRClusterOnOffSelReadAttributeGlobalSceneControlWithParams = objc.RegisterName("readAttributeGlobalSceneControlWithParams:")
-	_mTRClusterOnOffSelReadAttributeOnTimeWithParams = objc.RegisterName("readAttributeOnTimeWithParams:")
-	_mTRClusterOnOffSelWriteAttributeOnTimeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:")
-	_mTRClusterOnOffSelWriteAttributeOnTimeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:params:")
-	_mTRClusterOnOffSelReadAttributeOffWaitTimeWithParams = objc.RegisterName("readAttributeOffWaitTimeWithParams:")
-	_mTRClusterOnOffSelWriteAttributeOffWaitTimeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:")
-	_mTRClusterOnOffSelWriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:params:")
-	_mTRClusterOnOffSelReadAttributeStartUpOnOffWithParams = objc.RegisterName("readAttributeStartUpOnOffWithParams:")
-	_mTRClusterOnOffSelWriteAttributeStartUpOnOffWithValueExpectedValueInterval = objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:")
-	_mTRClusterOnOffSelWriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:params:")
-	_mTRClusterOnOffSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOnOffSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOnOffSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOnOffSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOnOffSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOnOffSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterOnOffSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterOnOffSelOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("offWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOffWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("offWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("onWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOnWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("onWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("toggleWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelToggleWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("toggleWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("offWithEffectWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterOnOff                                                                                      = _objcClass("MTRClusterOnOff")
+	_mTRClusterOnOffSelOffWithParamsExpectedValuesExpectedValueIntervalCompletion                            = objc.RegisterName("offWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOffWithExpectedValuesExpectedValueIntervalCompletion                                  = objc.RegisterName("offWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOnWithParamsExpectedValuesExpectedValueIntervalCompletion                             = objc.RegisterName("onWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOnWithExpectedValuesExpectedValueIntervalCompletion                                   = objc.RegisterName("onWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelToggleWithParamsExpectedValuesExpectedValueIntervalCompletion                         = objc.RegisterName("toggleWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelToggleWithExpectedValuesExpectedValueIntervalCompletion                               = objc.RegisterName("toggleWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("offWithEffectWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("onWithRecallGlobalSceneWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("onWithRecallGlobalSceneWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelOnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion                 = objc.RegisterName("onWithTimedOffWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOnOffSelReadAttributeOnOffWithParams                                                          = objc.RegisterName("readAttributeOnOffWithParams:")
+	_mTRClusterOnOffSelReadAttributeGlobalSceneControlWithParams                                             = objc.RegisterName("readAttributeGlobalSceneControlWithParams:")
+	_mTRClusterOnOffSelReadAttributeOnTimeWithParams                                                         = objc.RegisterName("readAttributeOnTimeWithParams:")
+	_mTRClusterOnOffSelWriteAttributeOnTimeWithValueExpectedValueInterval                                    = objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:")
+	_mTRClusterOnOffSelWriteAttributeOnTimeWithValueExpectedValueIntervalParams                              = objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:params:")
+	_mTRClusterOnOffSelReadAttributeOffWaitTimeWithParams                                                    = objc.RegisterName("readAttributeOffWaitTimeWithParams:")
+	_mTRClusterOnOffSelWriteAttributeOffWaitTimeWithValueExpectedValueInterval                               = objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:")
+	_mTRClusterOnOffSelWriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams                         = objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:params:")
+	_mTRClusterOnOffSelReadAttributeStartUpOnOffWithParams                                                   = objc.RegisterName("readAttributeStartUpOnOffWithParams:")
+	_mTRClusterOnOffSelWriteAttributeStartUpOnOffWithValueExpectedValueInterval                              = objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:")
+	_mTRClusterOnOffSelWriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams                        = objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:params:")
+	_mTRClusterOnOffSelReadAttributeGeneratedCommandListWithParams                                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOnOffSelReadAttributeAcceptedCommandListWithParams                                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOnOffSelReadAttributeAttributeListWithParams                                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOnOffSelReadAttributeFeatureMapWithParams                                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOnOffSelReadAttributeClusterRevisionWithParams                                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOnOffSelInitWithDeviceEndpointIDQueue                                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOnOffSelInitWithDeviceEndpointQueue                                                           = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterOnOffSelOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                     = objc.RegisterName("offWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOffWithExpectedValuesExpectedValueIntervalCompletionHandler                           = objc.RegisterName("offWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                      = objc.RegisterName("onWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOnWithExpectedValuesExpectedValueIntervalCompletionHandler                            = objc.RegisterName("onWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler                  = objc.RegisterName("toggleWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelToggleWithExpectedValuesExpectedValueIntervalCompletionHandler                        = objc.RegisterName("toggleWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("offWithEffectWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("onWithRecallGlobalSceneWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("onWithRecallGlobalSceneWithExpectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterOnOffSelOnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("onWithTimedOffWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("onWithRecallGlobalSceneWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterOnOffSelOnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler          = objc.RegisterName("onWithTimedOffWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterOnOffFromID(id objc.ID) *MTRClusterOnOff {
@@ -256,13 +256,17 @@ func (o *MTRClusterOnOff) ReadAttributeClusterRevisionWithParams(params *MTRRead
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOnOff) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOnOff {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOnOffSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOnOffFromID(_ret)
 }
 
 func (o *MTRClusterOnOff) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOnOff {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOnOffSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOnOffFromID(_ret)
 }
 
@@ -375,4 +379,3 @@ func (o *MTRClusterOnOff) OnWithTimedOffWithParamsExpectedValuesExpectedValueInt
 	}
 	o.Ptr().Send(_mTRClusterOnOffSelOnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

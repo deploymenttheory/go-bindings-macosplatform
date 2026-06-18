@@ -17,16 +17,16 @@ type PKToolPickerInkingItem struct {
 }
 
 var (
-	_clsPKToolPickerInkingItem = _objcClass("PKToolPickerInkingItem")
-	_pKToolPickerInkingItemSelInitWithInkType = objc.RegisterName("initWithInkType:")
-	_pKToolPickerInkingItemSelInitWithInkTypeColor = objc.RegisterName("initWithInkType:color:")
-	_pKToolPickerInkingItemSelInitWithInkTypeWidth = objc.RegisterName("initWithInkType:width:")
-	_pKToolPickerInkingItemSelInitWithInkTypeColorWidth = objc.RegisterName("initWithInkType:color:width:")
-	_pKToolPickerInkingItemSelInitWithInkTypeColorWidthIdentifier = objc.RegisterName("initWithInkType:color:width:identifier:")
+	_clsPKToolPickerInkingItem                                           = _objcClass("PKToolPickerInkingItem")
+	_pKToolPickerInkingItemSelInitWithInkType                            = objc.RegisterName("initWithInkType:")
+	_pKToolPickerInkingItemSelInitWithInkTypeColor                       = objc.RegisterName("initWithInkType:color:")
+	_pKToolPickerInkingItemSelInitWithInkTypeWidth                       = objc.RegisterName("initWithInkType:width:")
+	_pKToolPickerInkingItemSelInitWithInkTypeColorWidth                  = objc.RegisterName("initWithInkType:color:width:")
+	_pKToolPickerInkingItemSelInitWithInkTypeColorWidthIdentifier        = objc.RegisterName("initWithInkType:color:width:identifier:")
 	_pKToolPickerInkingItemSelInitWithInkTypeColorWidthAzimuthIdentifier = objc.RegisterName("initWithInkType:color:width:azimuth:identifier:")
-	_pKToolPickerInkingItemSelInkingTool = objc.RegisterName("inkingTool")
-	_pKToolPickerInkingItemSelAllowsColorSelection = objc.RegisterName("allowsColorSelection")
-	_pKToolPickerInkingItemSelSetAllowsColorSelection = objc.RegisterName("setAllowsColorSelection:")
+	_pKToolPickerInkingItemSelInkingTool                                 = objc.RegisterName("inkingTool")
+	_pKToolPickerInkingItemSelAllowsColorSelection                       = objc.RegisterName("allowsColorSelection")
+	_pKToolPickerInkingItemSelSetAllowsColorSelection                    = objc.RegisterName("setAllowsColorSelection:")
 )
 
 func PKToolPickerInkingItemFromID(id objc.ID) *PKToolPickerInkingItem {
@@ -42,45 +42,59 @@ func PKToolPickerInkingItemFromID(id objc.ID) *PKToolPickerInkingItem {
 // Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool.
 func (o *PKToolPickerInkingItem) InitWithInkType(inkType *foundation.NSString) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkType, inkType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 func (o *PKToolPickerInkingItem) InitWithInkTypeColor(inkType *foundation.NSString, color *appkit.NSColor) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColor, inkType.Ptr(), color.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 // Create a new tool picker item with a `PKInkType`. @param inkType The ink type for the tool. @param width The width for the tool.
 func (o *PKToolPickerInkingItem) InitWithInkTypeWidth(inkType *foundation.NSString, width float64) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeWidth, inkType.Ptr(), width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidth(inkType *foundation.NSString, color *appkit.NSColor, width float64) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColorWidth, inkType.Ptr(), color.Ptr(), width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidthIdentifier(inkType *foundation.NSString, color *appkit.NSColor, width float64, identifier *foundation.NSString) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColorWidthIdentifier, inkType.Ptr(), color.Ptr(), width, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 func (o *PKToolPickerInkingItem) InitWithInkTypeColorWidthAzimuthIdentifier(inkType *foundation.NSString, color *appkit.NSColor, width float64, azimuth float64, identifier *foundation.NSString) *PKToolPickerInkingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInitWithInkTypeColorWidthAzimuthIdentifier, inkType.Ptr(), color.Ptr(), width, azimuth, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolPickerInkingItemFromID(_ret)
 }
 
 // A tool for drawing on a `PKCanvasView`.
 func (o *PKToolPickerInkingItem) InkingTool() *PKInkingTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerInkingItemSelInkingTool)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkingToolFromID(_ret)
 }
 
@@ -93,4 +107,3 @@ func (o *PKToolPickerInkingItem) AllowsColorSelection() bool {
 func (o *PKToolPickerInkingItem) SetAllowsColorSelection(allowsColorSelection bool) {
 	o.Ptr().Send(_pKToolPickerInkingItemSelSetAllowsColorSelection, allowsColorSelection)
 }
-

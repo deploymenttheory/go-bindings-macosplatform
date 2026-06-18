@@ -15,58 +15,58 @@ type NSNumber struct {
 }
 
 var (
-	_clsNSNumber = _objcClass("NSNumber")
-	_nSNumberSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSNumberSelInitWithChar = objc.RegisterName("initWithChar:")
-	_nSNumberSelInitWithUnsignedChar = objc.RegisterName("initWithUnsignedChar:")
-	_nSNumberSelInitWithShort = objc.RegisterName("initWithShort:")
-	_nSNumberSelInitWithUnsignedShort = objc.RegisterName("initWithUnsignedShort:")
-	_nSNumberSelInitWithInt = objc.RegisterName("initWithInt:")
-	_nSNumberSelInitWithUnsignedInt = objc.RegisterName("initWithUnsignedInt:")
-	_nSNumberSelInitWithLong = objc.RegisterName("initWithLong:")
-	_nSNumberSelInitWithUnsignedLong = objc.RegisterName("initWithUnsignedLong:")
-	_nSNumberSelInitWithLongLong = objc.RegisterName("initWithLongLong:")
-	_nSNumberSelInitWithUnsignedLongLong = objc.RegisterName("initWithUnsignedLongLong:")
-	_nSNumberSelInitWithFloat = objc.RegisterName("initWithFloat:")
-	_nSNumberSelInitWithDouble = objc.RegisterName("initWithDouble:")
-	_nSNumberSelInitWithBool = objc.RegisterName("initWithBool:")
-	_nSNumberSelInitWithInteger = objc.RegisterName("initWithInteger:")
-	_nSNumberSelInitWithUnsignedInteger = objc.RegisterName("initWithUnsignedInteger:")
-	_nSNumberSelCompare = objc.RegisterName("compare:")
-	_nSNumberSelIsEqualToNumber = objc.RegisterName("isEqualToNumber:")
-	_nSNumberSelDescriptionWithLocale = objc.RegisterName("descriptionWithLocale:")
-	_nSNumberSelCharValue = objc.RegisterName("charValue")
-	_nSNumberSelUnsignedCharValue = objc.RegisterName("unsignedCharValue")
-	_nSNumberSelShortValue = objc.RegisterName("shortValue")
-	_nSNumberSelUnsignedShortValue = objc.RegisterName("unsignedShortValue")
-	_nSNumberSelIntValue = objc.RegisterName("intValue")
-	_nSNumberSelUnsignedIntValue = objc.RegisterName("unsignedIntValue")
-	_nSNumberSelLongValue = objc.RegisterName("longValue")
-	_nSNumberSelUnsignedLongValue = objc.RegisterName("unsignedLongValue")
-	_nSNumberSelLongLongValue = objc.RegisterName("longLongValue")
-	_nSNumberSelUnsignedLongLongValue = objc.RegisterName("unsignedLongLongValue")
-	_nSNumberSelFloatValue = objc.RegisterName("floatValue")
-	_nSNumberSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSNumberSelBoolValue = objc.RegisterName("boolValue")
-	_nSNumberSelIntegerValue = objc.RegisterName("integerValue")
-	_nSNumberSelUnsignedIntegerValue = objc.RegisterName("unsignedIntegerValue")
-	_nSNumberSelStringValue = objc.RegisterName("stringValue")
-	_nSNumberSelNumberWithChar = objc.RegisterName("numberWithChar:")
-	_nSNumberSelNumberWithUnsignedChar = objc.RegisterName("numberWithUnsignedChar:")
-	_nSNumberSelNumberWithShort = objc.RegisterName("numberWithShort:")
-	_nSNumberSelNumberWithUnsignedShort = objc.RegisterName("numberWithUnsignedShort:")
-	_nSNumberSelNumberWithInt = objc.RegisterName("numberWithInt:")
-	_nSNumberSelNumberWithUnsignedInt = objc.RegisterName("numberWithUnsignedInt:")
-	_nSNumberSelNumberWithLong = objc.RegisterName("numberWithLong:")
-	_nSNumberSelNumberWithUnsignedLong = objc.RegisterName("numberWithUnsignedLong:")
-	_nSNumberSelNumberWithLongLong = objc.RegisterName("numberWithLongLong:")
+	_clsNSNumber                           = _objcClass("NSNumber")
+	_nSNumberSelInitWithCoder              = objc.RegisterName("initWithCoder:")
+	_nSNumberSelInitWithChar               = objc.RegisterName("initWithChar:")
+	_nSNumberSelInitWithUnsignedChar       = objc.RegisterName("initWithUnsignedChar:")
+	_nSNumberSelInitWithShort              = objc.RegisterName("initWithShort:")
+	_nSNumberSelInitWithUnsignedShort      = objc.RegisterName("initWithUnsignedShort:")
+	_nSNumberSelInitWithInt                = objc.RegisterName("initWithInt:")
+	_nSNumberSelInitWithUnsignedInt        = objc.RegisterName("initWithUnsignedInt:")
+	_nSNumberSelInitWithLong               = objc.RegisterName("initWithLong:")
+	_nSNumberSelInitWithUnsignedLong       = objc.RegisterName("initWithUnsignedLong:")
+	_nSNumberSelInitWithLongLong           = objc.RegisterName("initWithLongLong:")
+	_nSNumberSelInitWithUnsignedLongLong   = objc.RegisterName("initWithUnsignedLongLong:")
+	_nSNumberSelInitWithFloat              = objc.RegisterName("initWithFloat:")
+	_nSNumberSelInitWithDouble             = objc.RegisterName("initWithDouble:")
+	_nSNumberSelInitWithBool               = objc.RegisterName("initWithBool:")
+	_nSNumberSelInitWithInteger            = objc.RegisterName("initWithInteger:")
+	_nSNumberSelInitWithUnsignedInteger    = objc.RegisterName("initWithUnsignedInteger:")
+	_nSNumberSelCompare                    = objc.RegisterName("compare:")
+	_nSNumberSelIsEqualToNumber            = objc.RegisterName("isEqualToNumber:")
+	_nSNumberSelDescriptionWithLocale      = objc.RegisterName("descriptionWithLocale:")
+	_nSNumberSelCharValue                  = objc.RegisterName("charValue")
+	_nSNumberSelUnsignedCharValue          = objc.RegisterName("unsignedCharValue")
+	_nSNumberSelShortValue                 = objc.RegisterName("shortValue")
+	_nSNumberSelUnsignedShortValue         = objc.RegisterName("unsignedShortValue")
+	_nSNumberSelIntValue                   = objc.RegisterName("intValue")
+	_nSNumberSelUnsignedIntValue           = objc.RegisterName("unsignedIntValue")
+	_nSNumberSelLongValue                  = objc.RegisterName("longValue")
+	_nSNumberSelUnsignedLongValue          = objc.RegisterName("unsignedLongValue")
+	_nSNumberSelLongLongValue              = objc.RegisterName("longLongValue")
+	_nSNumberSelUnsignedLongLongValue      = objc.RegisterName("unsignedLongLongValue")
+	_nSNumberSelFloatValue                 = objc.RegisterName("floatValue")
+	_nSNumberSelDoubleValue                = objc.RegisterName("doubleValue")
+	_nSNumberSelBoolValue                  = objc.RegisterName("boolValue")
+	_nSNumberSelIntegerValue               = objc.RegisterName("integerValue")
+	_nSNumberSelUnsignedIntegerValue       = objc.RegisterName("unsignedIntegerValue")
+	_nSNumberSelStringValue                = objc.RegisterName("stringValue")
+	_nSNumberSelNumberWithChar             = objc.RegisterName("numberWithChar:")
+	_nSNumberSelNumberWithUnsignedChar     = objc.RegisterName("numberWithUnsignedChar:")
+	_nSNumberSelNumberWithShort            = objc.RegisterName("numberWithShort:")
+	_nSNumberSelNumberWithUnsignedShort    = objc.RegisterName("numberWithUnsignedShort:")
+	_nSNumberSelNumberWithInt              = objc.RegisterName("numberWithInt:")
+	_nSNumberSelNumberWithUnsignedInt      = objc.RegisterName("numberWithUnsignedInt:")
+	_nSNumberSelNumberWithLong             = objc.RegisterName("numberWithLong:")
+	_nSNumberSelNumberWithUnsignedLong     = objc.RegisterName("numberWithUnsignedLong:")
+	_nSNumberSelNumberWithLongLong         = objc.RegisterName("numberWithLongLong:")
 	_nSNumberSelNumberWithUnsignedLongLong = objc.RegisterName("numberWithUnsignedLongLong:")
-	_nSNumberSelNumberWithFloat = objc.RegisterName("numberWithFloat:")
-	_nSNumberSelNumberWithDouble = objc.RegisterName("numberWithDouble:")
-	_nSNumberSelNumberWithBool = objc.RegisterName("numberWithBool:")
-	_nSNumberSelNumberWithInteger = objc.RegisterName("numberWithInteger:")
-	_nSNumberSelNumberWithUnsignedInteger = objc.RegisterName("numberWithUnsignedInteger:")
-	_nSNumberSelDecimalValue = objc.RegisterName("decimalValue")
+	_nSNumberSelNumberWithFloat            = objc.RegisterName("numberWithFloat:")
+	_nSNumberSelNumberWithDouble           = objc.RegisterName("numberWithDouble:")
+	_nSNumberSelNumberWithBool             = objc.RegisterName("numberWithBool:")
+	_nSNumberSelNumberWithInteger          = objc.RegisterName("numberWithInteger:")
+	_nSNumberSelNumberWithUnsignedInteger  = objc.RegisterName("numberWithUnsignedInteger:")
+	_nSNumberSelDecimalValue               = objc.RegisterName("decimalValue")
 )
 
 func NSNumberFromID(id objc.ID) *NSNumber {
@@ -81,97 +81,129 @@ func NSNumberFromID(id objc.ID) *NSNumber {
 
 func (o *NSNumber) InitWithCoder(coder *NSCoder) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithChar(value int8) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithChar, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedChar(value uint8) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedChar, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithShort(value int16) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithShort, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedShort(value uint16) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedShort, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithInt(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithInt, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedInt(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedInt, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithLong(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedLong(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithLongLong(value int64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithLongLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedLongLong(value uint64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedLongLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithFloat(value float32) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithFloat, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithDouble(value float64) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithDouble, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithBool(value bool) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithBool, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithInteger(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithInteger, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSNumber) InitWithUnsignedInteger(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelInitWithUnsignedInteger, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -187,7 +219,9 @@ func (o *NSNumber) IsEqualToNumber(number *NSNumber) bool {
 
 func (o *NSNumber) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelDescriptionWithLocale, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -268,97 +302,129 @@ func (o *NSNumber) UnsignedIntegerValue() uint {
 
 func (o *NSNumber) StringValue() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSNumberNumberWithChar(value int8) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithChar, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedChar(value uint8) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedChar, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithShort(value int16) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithShort, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedShort(value uint16) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedShort, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithInt(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithInt, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedInt(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedInt, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithLong(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedLong(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithLongLong(value int64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithLongLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedLongLong(value uint64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedLongLong, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithFloat(value float32) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithFloat, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithDouble(value float64) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithDouble, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithBool(value bool) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithBool, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithInteger(value int) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithInteger, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberNumberWithUnsignedInteger(value uint) *NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumber), _nSNumberSelNumberWithUnsignedInteger, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -366,4 +432,3 @@ func (o *NSNumber) DecimalValue() NSDecimal {
 	_ret := objc.Send[NSDecimal](o.Ptr(), _nSNumberSelDecimalValue)
 	return _ret
 }
-

@@ -16,7 +16,9 @@ type MTRActionsClusterStateChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterStateChangedEvent].
-func (x *MTRActionsClusterStateChangedEvent) Unwrap() *raw.MTRActionsClusterStateChangedEvent { return x.inner }
+func (x *MTRActionsClusterStateChangedEvent) Unwrap() *raw.MTRActionsClusterStateChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRActionsClusterStateChangedEventable interface {
 }
 
 var _ MTRActionsClusterStateChangedEventable = (*MTRActionsClusterStateChangedEvent)(nil)
-

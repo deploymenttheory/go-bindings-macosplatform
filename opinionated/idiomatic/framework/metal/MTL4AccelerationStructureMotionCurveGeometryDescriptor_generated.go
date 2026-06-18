@@ -16,7 +16,9 @@ type MTL4AccelerationStructureMotionCurveGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4AccelerationStructureMotionCurveGeometryDescriptor].
-func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureMotionCurveGeometryDescriptor { return x.inner }
+func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) Unwrap() *raw.MTL4AccelerationStructureMotionCurveGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -302,7 +304,9 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetCurveEndCaps
 	x.inner.SetCurveEndCaps(curveEndCaps)
 }
 
-func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor { return &x.inner.MTL4AccelerationStructureGeometryDescriptor }
+func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor {
+	return &x.inner.MTL4AccelerationStructureGeometryDescriptor
+}
 
 // MTL4AccelerationStructureMotionCurveGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureMotionCurveGeometryDescriptor], for mocking and DI.
 type MTL4AccelerationStructureMotionCurveGeometryDescriptorable interface {
@@ -359,4 +363,3 @@ type MTL4AccelerationStructureMotionCurveGeometryDescriptorable interface {
 }
 
 var _ MTL4AccelerationStructureMotionCurveGeometryDescriptorable = (*MTL4AccelerationStructureMotionCurveGeometryDescriptor)(nil)
-

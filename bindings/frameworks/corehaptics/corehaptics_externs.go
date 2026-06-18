@@ -221,4 +221,3 @@ func CHHapticPatternKeyVersion() uintptr {
 	ptr, _ := purego.Dlsym(_corehapticsLib, "CHHapticPatternKeyVersion")
 	return ptr
 }
-

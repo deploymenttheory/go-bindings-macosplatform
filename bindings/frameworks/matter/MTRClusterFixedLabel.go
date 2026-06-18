@@ -16,15 +16,15 @@ type MTRClusterFixedLabel struct {
 }
 
 var (
-	_clsMTRClusterFixedLabel = _objcClass("MTRClusterFixedLabel")
-	_mTRClusterFixedLabelSelReadAttributeLabelListWithParams = objc.RegisterName("readAttributeLabelListWithParams:")
+	_clsMTRClusterFixedLabel                                            = _objcClass("MTRClusterFixedLabel")
+	_mTRClusterFixedLabelSelReadAttributeLabelListWithParams            = objc.RegisterName("readAttributeLabelListWithParams:")
 	_mTRClusterFixedLabelSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterFixedLabelSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterFixedLabelSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterFixedLabelSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterFixedLabelSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterFixedLabelSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterFixedLabelSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterFixedLabelSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterFixedLabelSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterFixedLabelSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterFixedLabelSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterFixedLabelSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterFixedLabelSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterFixedLabelFromID(id objc.ID) *MTRClusterFixedLabel {
@@ -70,13 +70,16 @@ func (o *MTRClusterFixedLabel) ReadAttributeClusterRevisionWithParams(params *MT
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterFixedLabel) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterFixedLabel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFixedLabelSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFixedLabelFromID(_ret)
 }
 
 func (o *MTRClusterFixedLabel) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterFixedLabel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterFixedLabelSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterFixedLabelFromID(_ret)
 }
-

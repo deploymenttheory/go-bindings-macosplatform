@@ -18,16 +18,16 @@ type HKQuantitySeriesSampleBuilder struct {
 }
 
 var (
-	_clsHKQuantitySeriesSampleBuilder = _objcClass("HKQuantitySeriesSampleBuilder")
+	_clsHKQuantitySeriesSampleBuilder                                               = _objcClass("HKQuantitySeriesSampleBuilder")
 	_hKQuantitySeriesSampleBuilderSelInitWithHealthStoreQuantityTypeStartDateDevice = objc.RegisterName("initWithHealthStore:quantityType:startDate:device:")
-	_hKQuantitySeriesSampleBuilderSelInsertQuantityDateIntervalError = objc.RegisterName("insertQuantity:dateInterval:error:")
-	_hKQuantitySeriesSampleBuilderSelInsertQuantityDateError = objc.RegisterName("insertQuantity:date:error:")
-	_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataEndDateCompletion = objc.RegisterName("finishSeriesWithMetadata:endDate:completion:")
-	_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataCompletion = objc.RegisterName("finishSeriesWithMetadata:completion:")
-	_hKQuantitySeriesSampleBuilderSelDiscard = objc.RegisterName("discard")
-	_hKQuantitySeriesSampleBuilderSelQuantityType = objc.RegisterName("quantityType")
-	_hKQuantitySeriesSampleBuilderSelStartDate = objc.RegisterName("startDate")
-	_hKQuantitySeriesSampleBuilderSelDevice = objc.RegisterName("device")
+	_hKQuantitySeriesSampleBuilderSelInsertQuantityDateIntervalError                = objc.RegisterName("insertQuantity:dateInterval:error:")
+	_hKQuantitySeriesSampleBuilderSelInsertQuantityDateError                        = objc.RegisterName("insertQuantity:date:error:")
+	_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataEndDateCompletion      = objc.RegisterName("finishSeriesWithMetadata:endDate:completion:")
+	_hKQuantitySeriesSampleBuilderSelFinishSeriesWithMetadataCompletion             = objc.RegisterName("finishSeriesWithMetadata:completion:")
+	_hKQuantitySeriesSampleBuilderSelDiscard                                        = objc.RegisterName("discard")
+	_hKQuantitySeriesSampleBuilderSelQuantityType                                   = objc.RegisterName("quantityType")
+	_hKQuantitySeriesSampleBuilderSelStartDate                                      = objc.RegisterName("startDate")
+	_hKQuantitySeriesSampleBuilderSelDevice                                         = objc.RegisterName("device")
 )
 
 func HKQuantitySeriesSampleBuilderFromID(id objc.ID) *HKQuantitySeriesSampleBuilder {
@@ -43,7 +43,9 @@ func HKQuantitySeriesSampleBuilderFromID(id objc.ID) *HKQuantitySeriesSampleBuil
 // @method        initWithHealthStore:quantityType:device: @abstract      The designated initializer to create an HKQuantitySeriesSampleBuilder. @discussion    The HKHealthStore is retained during the life of the object for the saving of the series data and final return of the series sample. @param         healthStore     Specifies the HKHealthStore object to use for building the series. @param         quantityType    Specifies the quantity type for which to build the series. @param         startDate       The date from which the produced sample(s) start. @param         device          The optional device represents the HKDevice from which the data is provided.
 func (o *HKQuantitySeriesSampleBuilder) InitWithHealthStoreQuantityTypeStartDateDevice(healthStore *HKHealthStore, quantityType *HKQuantityType, startDate *foundation.NSDate, device *HKDevice) *HKQuantitySeriesSampleBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleBuilderSelInitWithHealthStoreQuantityTypeStartDateDevice, healthStore.Ptr(), quantityType.Ptr(), startDate.Ptr(), device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantitySeriesSampleBuilderFromID(_ret)
 }
 
@@ -105,21 +107,26 @@ func (o *HKQuantitySeriesSampleBuilder) Discard() {
 // @property      quantityType
 func (o *HKQuantitySeriesSampleBuilder) QuantityType() *HKQuantityType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleBuilderSelQuantityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityTypeFromID(_ret)
 }
 
 // @property      startDate
 func (o *HKQuantitySeriesSampleBuilder) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleBuilderSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      device
 func (o *HKQuantitySeriesSampleBuilder) Device() *HKDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKQuantitySeriesSampleBuilderSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKDeviceFromID(_ret)
 }
-

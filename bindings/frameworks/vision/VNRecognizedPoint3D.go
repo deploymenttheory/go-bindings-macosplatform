@@ -16,7 +16,7 @@ type VNRecognizedPoint3D struct {
 }
 
 var (
-	_clsVNRecognizedPoint3D = _objcClass("VNRecognizedPoint3D")
+	_clsVNRecognizedPoint3D           = _objcClass("VNRecognizedPoint3D")
 	_vNRecognizedPoint3DSelIdentifier = objc.RegisterName("identifier")
 )
 
@@ -32,7 +32,8 @@ func VNRecognizedPoint3DFromID(id objc.ID) *VNRecognizedPoint3D {
 
 func (o *VNRecognizedPoint3D) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoint3DSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -172,9 +172,13 @@ func (x *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params 
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterICDManagement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterICDManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterICDManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterICDManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterICDManagementable is the interface implemented by [MTRClusterICDManagement], for mocking and DI.
 type MTRClusterICDManagementable interface {
@@ -200,4 +204,3 @@ type MTRClusterICDManagementable interface {
 }
 
 var _ MTRClusterICDManagementable = (*MTRClusterICDManagement)(nil)
-

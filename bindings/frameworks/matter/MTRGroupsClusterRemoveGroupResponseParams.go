@@ -18,16 +18,16 @@ type MTRGroupsClusterRemoveGroupResponseParams struct {
 }
 
 var (
-	_clsMTRGroupsClusterRemoveGroupResponseParams = _objcClass("MTRGroupsClusterRemoveGroupResponseParams")
+	_clsMTRGroupsClusterRemoveGroupResponseParams                           = _objcClass("MTRGroupsClusterRemoveGroupResponseParams")
 	_mTRGroupsClusterRemoveGroupResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelGroupID = objc.RegisterName("groupID")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelSetGroupID = objc.RegisterName("setGroupID:")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelGroupId = objc.RegisterName("groupId")
-	_mTRGroupsClusterRemoveGroupResponseParamsSelSetGroupId = objc.RegisterName("setGroupId:")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelGroupID                    = objc.RegisterName("groupID")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelSetGroupID                 = objc.RegisterName("setGroupID:")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelGroupId                    = objc.RegisterName("groupId")
+	_mTRGroupsClusterRemoveGroupResponseParamsSelSetGroupId                 = objc.RegisterName("setGroupId:")
 )
 
 func MTRGroupsClusterRemoveGroupResponseParamsFromID(id objc.ID) *MTRGroupsClusterRemoveGroupResponseParams {
@@ -44,7 +44,9 @@ func MTRGroupsClusterRemoveGroupResponseParamsFromID(id objc.ID) *MTRGroupsClust
 func (o *MTRGroupsClusterRemoveGroupResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterRemoveGroupResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *MTRGroupsClusterRemoveGroupResponseParams) InitWithResponseValueError(r
 
 func (o *MTRGroupsClusterRemoveGroupResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterRemoveGroupResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRGroupsClusterRemoveGroupResponseParams) SetStatus(status *foundation
 
 func (o *MTRGroupsClusterRemoveGroupResponseParams) GroupID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterRemoveGroupResponseParamsSelGroupID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *MTRGroupsClusterRemoveGroupResponseParams) SetGroupID(groupID *foundati
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupsClusterRemoveGroupResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterRemoveGroupResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,11 +92,12 @@ func (o *MTRGroupsClusterRemoveGroupResponseParams) SetTimedInvokeTimeoutMs(time
 
 func (o *MTRGroupsClusterRemoveGroupResponseParams) GroupId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterRemoveGroupResponseParamsSelGroupId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupsClusterRemoveGroupResponseParams) SetGroupId(groupId *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupsClusterRemoveGroupResponseParamsSelSetGroupId, groupId.Ptr())
 }
-

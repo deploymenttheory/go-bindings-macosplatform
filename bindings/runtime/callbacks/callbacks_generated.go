@@ -7,4 +7,3 @@ package callbacks
 // #include "callbacks_abi.h"
 // #include "method_trampolines_generated.h"
 import "C"
-

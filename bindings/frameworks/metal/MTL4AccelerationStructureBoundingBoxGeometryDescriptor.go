@@ -15,13 +15,13 @@ type MTL4AccelerationStructureBoundingBoxGeometryDescriptor struct {
 }
 
 var (
-	_clsMTL4AccelerationStructureBoundingBoxGeometryDescriptor = _objcClass("MTL4AccelerationStructureBoundingBoxGeometryDescriptor")
-	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBuffer = objc.RegisterName("boundingBoxBuffer")
+	_clsMTL4AccelerationStructureBoundingBoxGeometryDescriptor                     = _objcClass("MTL4AccelerationStructureBoundingBoxGeometryDescriptor")
+	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBuffer    = objc.RegisterName("boundingBoxBuffer")
 	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxBuffer = objc.RegisterName("setBoundingBoxBuffer:")
-	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxStride = objc.RegisterName("boundingBoxStride")
+	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxStride    = objc.RegisterName("boundingBoxStride")
 	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxStride = objc.RegisterName("setBoundingBoxStride:")
-	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxCount = objc.RegisterName("boundingBoxCount")
-	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount = objc.RegisterName("setBoundingBoxCount:")
+	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxCount     = objc.RegisterName("boundingBoxCount")
+	_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount  = objc.RegisterName("setBoundingBoxCount:")
 )
 
 func MTL4AccelerationStructureBoundingBoxGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -63,4 +63,3 @@ func (o *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCoun
 func (o *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
 	o.Ptr().Send(_mTL4AccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount, boundingBoxCount)
 }
-

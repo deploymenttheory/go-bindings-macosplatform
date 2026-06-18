@@ -56,4 +56,3 @@ type MetricErrorEventable interface {
 }
 
 var _ MetricErrorEventable = (*MetricErrorEvent)(nil)
-

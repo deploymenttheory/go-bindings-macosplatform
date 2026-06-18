@@ -49,11 +49,17 @@ func (x *CNNConvolutionGradientNode) WithLabel(label string) *CNNConvolutionGrad
 	return x
 }
 
-func (x *CNNConvolutionGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode { return x.inner }
+func (x *CNNConvolutionGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode {
+	return x.inner
+}
 
-func (x *CNNConvolutionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNConvolutionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNConvolutionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNConvolutionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNConvolutionGradientNodeable is the interface implemented by [CNNConvolutionGradientNode], for mocking and DI.
 type CNNConvolutionGradientNodeable interface {
@@ -63,4 +69,3 @@ type CNNConvolutionGradientNodeable interface {
 }
 
 var _ CNNConvolutionGradientNodeable = (*CNNConvolutionGradientNode)(nil)
-

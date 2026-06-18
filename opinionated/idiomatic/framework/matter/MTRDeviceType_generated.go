@@ -65,4 +65,3 @@ type MTRDeviceTypeable interface {
 }
 
 var _ MTRDeviceTypeable = (*MTRDeviceType)(nil)
-

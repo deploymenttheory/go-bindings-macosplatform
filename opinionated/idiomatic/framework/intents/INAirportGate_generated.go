@@ -74,4 +74,3 @@ type AirportGateable interface {
 }
 
 var _ AirportGateable = (*AirportGate)(nil)
-

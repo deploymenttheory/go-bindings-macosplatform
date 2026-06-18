@@ -18,9 +18,9 @@ type MDLColorSwatchTexture struct {
 }
 
 var (
-	_clsMDLColorSwatchTexture = _objcClass("MDLColorSwatchTexture")
+	_clsMDLColorSwatchTexture                                                                            = _objcClass("MDLColorSwatchTexture")
 	_mDLColorSwatchTextureSelInitWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions = objc.RegisterName("initWithColorTemperatureGradientFrom:toColorTemperature:name:textureDimensions:")
-	_mDLColorSwatchTextureSelInitWithColorGradientFromToColorNameTextureDimensions = objc.RegisterName("initWithColorGradientFrom:toColor:name:textureDimensions:")
+	_mDLColorSwatchTextureSelInitWithColorGradientFromToColorNameTextureDimensions                       = objc.RegisterName("initWithColorGradientFrom:toColor:name:textureDimensions:")
 )
 
 func MDLColorSwatchTextureFromID(id objc.ID) *MDLColorSwatchTexture {
@@ -35,13 +35,16 @@ func MDLColorSwatchTextureFromID(id objc.ID) *MDLColorSwatchTexture {
 
 func (o *MDLColorSwatchTexture) InitWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions(colorTemperature1 float32, colorTemperature2 float32, name *foundation.NSString, textureDimensions unsafe.Pointer) *MDLColorSwatchTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLColorSwatchTextureSelInitWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions, colorTemperature1, colorTemperature2, name.Ptr(), textureDimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLColorSwatchTextureFromID(_ret)
 }
 
 func (o *MDLColorSwatchTexture) InitWithColorGradientFromToColorNameTextureDimensions(color1 unsafe.Pointer, color2 unsafe.Pointer, name *foundation.NSString, textureDimensions unsafe.Pointer) *MDLColorSwatchTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLColorSwatchTextureSelInitWithColorGradientFromToColorNameTextureDimensions, color1, color2, name.Ptr(), textureDimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLColorSwatchTextureFromID(_ret)
 }
-

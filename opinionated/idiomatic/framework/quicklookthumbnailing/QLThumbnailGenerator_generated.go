@@ -123,4 +123,3 @@ type ThumbnailGeneratorable interface {
 }
 
 var _ ThumbnailGeneratorable = (*ThumbnailGenerator)(nil)
-

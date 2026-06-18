@@ -18,33 +18,33 @@ type MLCTrainingGraph struct {
 }
 
 var (
-	_clsMLCTrainingGraph = _objcClass("MLCTrainingGraph")
-	_mLCTrainingGraphSelGraphWithGraphObjectsLossLayerOptimizer = objc.RegisterName("graphWithGraphObjects:lossLayer:optimizer:")
-	_mLCTrainingGraphSelAddInputsLossLabels = objc.RegisterName("addInputs:lossLabels:")
-	_mLCTrainingGraphSelAddInputsLossLabelsLossLabelWeights = objc.RegisterName("addInputs:lossLabels:lossLabelWeights:")
-	_mLCTrainingGraphSelAddOutputs = objc.RegisterName("addOutputs:")
-	_mLCTrainingGraphSelStopGradientForTensors = objc.RegisterName("stopGradientForTensors:")
-	_mLCTrainingGraphSelCompileWithOptionsDevice = objc.RegisterName("compileWithOptions:device:")
-	_mLCTrainingGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData = objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:")
-	_mLCTrainingGraphSelCompileOptimizer = objc.RegisterName("compileOptimizer:")
-	_mLCTrainingGraphSelLinkWithGraphs = objc.RegisterName("linkWithGraphs:")
-	_mLCTrainingGraphSelGradientTensorForInput = objc.RegisterName("gradientTensorForInput:")
-	_mLCTrainingGraphSelSourceGradientTensorsForLayer = objc.RegisterName("sourceGradientTensorsForLayer:")
-	_mLCTrainingGraphSelResultGradientTensorsForLayer = objc.RegisterName("resultGradientTensorsForLayer:")
-	_mLCTrainingGraphSelGradientDataForParameterLayer = objc.RegisterName("gradientDataForParameter:layer:")
-	_mLCTrainingGraphSelAllocateUserGradientForTensor = objc.RegisterName("allocateUserGradientForTensor:")
-	_mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:")
+	_clsMLCTrainingGraph                                                                                                    = _objcClass("MLCTrainingGraph")
+	_mLCTrainingGraphSelGraphWithGraphObjectsLossLayerOptimizer                                                             = objc.RegisterName("graphWithGraphObjects:lossLayer:optimizer:")
+	_mLCTrainingGraphSelAddInputsLossLabels                                                                                 = objc.RegisterName("addInputs:lossLabels:")
+	_mLCTrainingGraphSelAddInputsLossLabelsLossLabelWeights                                                                 = objc.RegisterName("addInputs:lossLabels:lossLabelWeights:")
+	_mLCTrainingGraphSelAddOutputs                                                                                          = objc.RegisterName("addOutputs:")
+	_mLCTrainingGraphSelStopGradientForTensors                                                                              = objc.RegisterName("stopGradientForTensors:")
+	_mLCTrainingGraphSelCompileWithOptionsDevice                                                                            = objc.RegisterName("compileWithOptions:device:")
+	_mLCTrainingGraphSelCompileWithOptionsDeviceInputTensorsInputTensorsData                                                = objc.RegisterName("compileWithOptions:device:inputTensors:inputTensorsData:")
+	_mLCTrainingGraphSelCompileOptimizer                                                                                    = objc.RegisterName("compileOptimizer:")
+	_mLCTrainingGraphSelLinkWithGraphs                                                                                      = objc.RegisterName("linkWithGraphs:")
+	_mLCTrainingGraphSelGradientTensorForInput                                                                              = objc.RegisterName("gradientTensorForInput:")
+	_mLCTrainingGraphSelSourceGradientTensorsForLayer                                                                       = objc.RegisterName("sourceGradientTensorsForLayer:")
+	_mLCTrainingGraphSelResultGradientTensorsForLayer                                                                       = objc.RegisterName("resultGradientTensorsForLayer:")
+	_mLCTrainingGraphSelGradientDataForParameterLayer                                                                       = objc.RegisterName("gradientDataForParameter:layer:")
+	_mLCTrainingGraphSelAllocateUserGradientForTensor                                                                       = objc.RegisterName("allocateUserGradientForTensor:")
+	_mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler            = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:batchSize:options:completionHandler:")
 	_mLCTrainingGraphSelExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler = objc.RegisterName("executeWithInputsData:lossLabelsData:lossLabelWeightsData:outputsData:batchSize:options:completionHandler:")
-	_mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsCompletionHandler = objc.RegisterName("executeForwardWithBatchSize:options:completionHandler:")
-	_mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler = objc.RegisterName("executeForwardWithBatchSize:options:outputsData:completionHandler:")
-	_mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsCompletionHandler = objc.RegisterName("executeGradientWithBatchSize:options:completionHandler:")
-	_mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler = objc.RegisterName("executeGradientWithBatchSize:options:outputsData:completionHandler:")
-	_mLCTrainingGraphSelExecuteOptimizerUpdateWithOptionsCompletionHandler = objc.RegisterName("executeOptimizerUpdateWithOptions:completionHandler:")
-	_mLCTrainingGraphSelSynchronizeUpdates = objc.RegisterName("synchronizeUpdates")
-	_mLCTrainingGraphSelSetTrainingTensorParameters = objc.RegisterName("setTrainingTensorParameters:")
-	_mLCTrainingGraphSelBindOptimizerDataDeviceDataWithTensor = objc.RegisterName("bindOptimizerData:deviceData:withTensor:")
-	_mLCTrainingGraphSelOptimizer = objc.RegisterName("optimizer")
-	_mLCTrainingGraphSelDeviceMemorySize = objc.RegisterName("deviceMemorySize")
+	_mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsCompletionHandler                                                 = objc.RegisterName("executeForwardWithBatchSize:options:completionHandler:")
+	_mLCTrainingGraphSelExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler                                      = objc.RegisterName("executeForwardWithBatchSize:options:outputsData:completionHandler:")
+	_mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsCompletionHandler                                                = objc.RegisterName("executeGradientWithBatchSize:options:completionHandler:")
+	_mLCTrainingGraphSelExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler                                     = objc.RegisterName("executeGradientWithBatchSize:options:outputsData:completionHandler:")
+	_mLCTrainingGraphSelExecuteOptimizerUpdateWithOptionsCompletionHandler                                                  = objc.RegisterName("executeOptimizerUpdateWithOptions:completionHandler:")
+	_mLCTrainingGraphSelSynchronizeUpdates                                                                                  = objc.RegisterName("synchronizeUpdates")
+	_mLCTrainingGraphSelSetTrainingTensorParameters                                                                         = objc.RegisterName("setTrainingTensorParameters:")
+	_mLCTrainingGraphSelBindOptimizerDataDeviceDataWithTensor                                                               = objc.RegisterName("bindOptimizerData:deviceData:withTensor:")
+	_mLCTrainingGraphSelOptimizer                                                                                           = objc.RegisterName("optimizer")
+	_mLCTrainingGraphSelDeviceMemorySize                                                                                    = objc.RegisterName("deviceMemorySize")
 )
 
 func MLCTrainingGraphFromID(id objc.ID) *MLCTrainingGraph {
@@ -60,7 +60,9 @@ func MLCTrainingGraphFromID(id objc.ID) *MLCTrainingGraph {
 // @abstract   Create a training graph @param      graphObjects    The layers from these graph objects will be added to the training graph @param      lossLayer           The loss layer to use.  The loss layer can also be added to the training graph using nodeWithLayer:sources:lossLabels @param      optimizer           The optimizer to use @return     A new training graph object
 func MLCTrainingGraphGraphWithGraphObjectsLossLayerOptimizer(graphObjects *foundation.NSArray[*MLCGraph], lossLayer *MLCLayer, optimizer *MLCOptimizer) *MLCTrainingGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTrainingGraph), _mLCTrainingGraphSelGraphWithGraphObjectsLossLayerOptimizer, graphObjects.Ptr(), lossLayer.Ptr(), optimizer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTrainingGraphFromID(_ret)
 }
 
@@ -115,35 +117,45 @@ func (o *MLCTrainingGraph) LinkWithGraphs(graphs *foundation.NSArray[*MLCTrainin
 // @abstract   Get the gradient tensor for an input tensor @param      input   The input tensor @return     The gradient tensor
 func (o *MLCTrainingGraph) GradientTensorForInput(input *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelGradientTensorForInput, input.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @abstract   Get the source gradient tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
 func (o *MLCTrainingGraph) SourceGradientTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelSourceGradientTensorsForLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   Get the result gradient tensors for a layer in the training graph @param      layer   A layer in the training graph @return     A list of tensors
 func (o *MLCTrainingGraph) ResultGradientTensorsForLayer(layer *MLCLayer) *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelResultGradientTensorsForLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @abstract   Get the gradient data for a trainable parameter associated with a layer @discussion This can be used to get the gradient data for weights or biases parameters associated with a convolution, fully connected or convolution transpose layer @param      parameter   The updatable parameter associated with the layer @param      layer   A layer in the training graph.  Must be one of the following: - MLCConvolutionLayer - MLCFullyConnectedLayer - MLCBatchNormalizationLayer - MLCInstanceNormalizationLayer - MLCGroupNormalizationLayer - MLCLayerNormalizationLayer - MLCEmbeddingLayer - MLCMultiheadAttentionLayer @return     The gradient data.  Will return nil if the layer is marked as not trainable or if training graph is not executed with separate calls to forward and gradient passes.
 func (o *MLCTrainingGraph) GradientDataForParameterLayer(parameter *MLCTensor, layer *MLCLayer) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelGradientDataForParameterLayer, parameter.Ptr(), layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract   Allocate an entry for a user specified gradient for a tensor @param      tensor   A result tensor produced by a layer in the training graph that is input to some user specified code and will need to provide a user gradient during the gradient pass. @return     A gradient tensor
 func (o *MLCTrainingGraph) AllocateUserGradientForTensor(tensor *MLCTensor) *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelAllocateUserGradientForTensor, tensor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
@@ -279,7 +291,9 @@ func (o *MLCTrainingGraph) BindOptimizerDataDeviceDataWithTensor(data *foundatio
 // @property   optimizer @abstract   The optimizer to be used with the training graph
 func (o *MLCTrainingGraph) Optimizer() *MLCOptimizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCTrainingGraphSelOptimizer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCOptimizerFromID(_ret)
 }
 
@@ -288,4 +302,3 @@ func (o *MLCTrainingGraph) DeviceMemorySize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCTrainingGraphSelDeviceMemorySize)
 	return _ret
 }
-

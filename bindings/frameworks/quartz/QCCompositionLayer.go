@@ -17,12 +17,12 @@ type QCCompositionLayer struct {
 }
 
 var (
-	_clsQCCompositionLayer = _objcClass("QCCompositionLayer")
-	_qCCompositionLayerSelCompositionLayerWithFile = objc.RegisterName("compositionLayerWithFile:")
+	_clsQCCompositionLayer                                = _objcClass("QCCompositionLayer")
+	_qCCompositionLayerSelCompositionLayerWithFile        = objc.RegisterName("compositionLayerWithFile:")
 	_qCCompositionLayerSelCompositionLayerWithComposition = objc.RegisterName("compositionLayerWithComposition:")
-	_qCCompositionLayerSelInitWithFile = objc.RegisterName("initWithFile:")
-	_qCCompositionLayerSelInitWithComposition = objc.RegisterName("initWithComposition:")
-	_qCCompositionLayerSelComposition = objc.RegisterName("composition")
+	_qCCompositionLayerSelInitWithFile                    = objc.RegisterName("initWithFile:")
+	_qCCompositionLayerSelInitWithComposition             = objc.RegisterName("initWithComposition:")
+	_qCCompositionLayerSelComposition                     = objc.RegisterName("composition")
 )
 
 func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
@@ -37,13 +37,17 @@ func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
 
 func QCCompositionLayerCompositionLayerWithFile(path *foundation.NSString) *QCCompositionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionLayer), _qCCompositionLayerSelCompositionLayerWithFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionLayerFromID(_ret)
 }
 
 func QCCompositionLayerCompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionLayer), _qCCompositionLayerSelCompositionLayerWithComposition, composition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionLayerFromID(_ret)
 }
 
@@ -59,7 +63,8 @@ func (o *QCCompositionLayer) InitWithComposition(composition *QCComposition) obj
 
 func (o *QCCompositionLayer) Composition() *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionLayerSelComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionFromID(_ret)
 }
-

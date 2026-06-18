@@ -18,7 +18,9 @@ type SplitViewItemAccessoryViewController struct {
 }
 
 // Unwrap returns the underlying [raw.NSSplitViewItemAccessoryViewController].
-func (x *SplitViewItemAccessoryViewController) Unwrap() *raw.NSSplitViewItemAccessoryViewController { return x.inner }
+func (x *SplitViewItemAccessoryViewController) Unwrap() *raw.NSSplitViewItemAccessoryViewController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -87,7 +89,9 @@ func (x *SplitViewItemAccessoryViewController) WithChildViewControllers(items ..
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -166,9 +170,13 @@ func (x *SplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
 }
 
-func (x *SplitViewItemAccessoryViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
+func (x *SplitViewItemAccessoryViewController) asViewController() *raw.NSViewController {
+	return &x.inner.NSViewController
+}
 
-func (x *SplitViewItemAccessoryViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+func (x *SplitViewItemAccessoryViewController) asResponder() *raw.NSResponder {
+	return &x.inner.NSViewController.NSResponder
+}
 
 // SplitViewItemAccessoryViewControllerable is the interface implemented by [SplitViewItemAccessoryViewController], for mocking and DI.
 type SplitViewItemAccessoryViewControllerable interface {
@@ -196,4 +204,3 @@ type SplitViewItemAccessoryViewControllerable interface {
 }
 
 var _ SplitViewItemAccessoryViewControllerable = (*SplitViewItemAccessoryViewController)(nil)
-

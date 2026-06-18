@@ -14,8 +14,8 @@ import (
 
 var (
 	_dvdplaybackLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce       sync.Once
+	_failedSymbols  = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DVDClearLastPlayBookmark", func() { purego.RegisterLibFunc(&_fnDVDClearLastPlayBookmark, _dvdplaybackLib, "DVDClearLastPlayBookmark") })
+	_register("DVDClearLastPlayBookmark", func() {
+		purego.RegisterLibFunc(&_fnDVDClearLastPlayBookmark, _dvdplaybackLib, "DVDClearLastPlayBookmark")
+	})
 	_register("DVDCloseMediaFile", func() { purego.RegisterLibFunc(&_fnDVDCloseMediaFile, _dvdplaybackLib, "DVDCloseMediaFile") })
 	_register("DVDCloseMediaVolume", func() { purego.RegisterLibFunc(&_fnDVDCloseMediaVolume, _dvdplaybackLib, "DVDCloseMediaVolume") })
 	_register("DVDDisplaySubPicture", func() { purego.RegisterLibFunc(&_fnDVDDisplaySubPicture, _dvdplaybackLib, "DVDDisplaySubPicture") })
@@ -60,13 +62,23 @@ func _loadLibrary() {
 	_register("DVDEnableWebAccess", func() { purego.RegisterLibFunc(&_fnDVDEnableWebAccess, _dvdplaybackLib, "DVDEnableWebAccess") })
 	_register("DVDGetAngle", func() { purego.RegisterLibFunc(&_fnDVDGetAngle, _dvdplaybackLib, "DVDGetAngle") })
 	_register("DVDGetAspectRatio", func() { purego.RegisterLibFunc(&_fnDVDGetAspectRatio, _dvdplaybackLib, "DVDGetAspectRatio") })
-	_register("DVDGetAudioLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDGetAudioLanguageCode, _dvdplaybackLib, "DVDGetAudioLanguageCode") })
-	_register("DVDGetAudioLanguageCodeByStream", func() { purego.RegisterLibFunc(&_fnDVDGetAudioLanguageCodeByStream, _dvdplaybackLib, "DVDGetAudioLanguageCodeByStream") })
+	_register("DVDGetAudioLanguageCode", func() {
+		purego.RegisterLibFunc(&_fnDVDGetAudioLanguageCode, _dvdplaybackLib, "DVDGetAudioLanguageCode")
+	})
+	_register("DVDGetAudioLanguageCodeByStream", func() {
+		purego.RegisterLibFunc(&_fnDVDGetAudioLanguageCodeByStream, _dvdplaybackLib, "DVDGetAudioLanguageCodeByStream")
+	})
 	_register("DVDGetAudioOutputMode", func() { purego.RegisterLibFunc(&_fnDVDGetAudioOutputMode, _dvdplaybackLib, "DVDGetAudioOutputMode") })
-	_register("DVDGetAudioOutputModeCapabilities", func() { purego.RegisterLibFunc(&_fnDVDGetAudioOutputModeCapabilities, _dvdplaybackLib, "DVDGetAudioOutputModeCapabilities") })
+	_register("DVDGetAudioOutputModeCapabilities", func() {
+		purego.RegisterLibFunc(&_fnDVDGetAudioOutputModeCapabilities, _dvdplaybackLib, "DVDGetAudioOutputModeCapabilities")
+	})
 	_register("DVDGetAudioStream", func() { purego.RegisterLibFunc(&_fnDVDGetAudioStream, _dvdplaybackLib, "DVDGetAudioStream") })
-	_register("DVDGetAudioStreamFormat", func() { purego.RegisterLibFunc(&_fnDVDGetAudioStreamFormat, _dvdplaybackLib, "DVDGetAudioStreamFormat") })
-	_register("DVDGetAudioStreamFormatByStream", func() { purego.RegisterLibFunc(&_fnDVDGetAudioStreamFormatByStream, _dvdplaybackLib, "DVDGetAudioStreamFormatByStream") })
+	_register("DVDGetAudioStreamFormat", func() {
+		purego.RegisterLibFunc(&_fnDVDGetAudioStreamFormat, _dvdplaybackLib, "DVDGetAudioStreamFormat")
+	})
+	_register("DVDGetAudioStreamFormatByStream", func() {
+		purego.RegisterLibFunc(&_fnDVDGetAudioStreamFormatByStream, _dvdplaybackLib, "DVDGetAudioStreamFormatByStream")
+	})
 	_register("DVDGetAudioVolume", func() { purego.RegisterLibFunc(&_fnDVDGetAudioVolume, _dvdplaybackLib, "DVDGetAudioVolume") })
 	_register("DVDGetAudioVolumeInfo", func() { purego.RegisterLibFunc(&_fnDVDGetAudioVolumeInfo, _dvdplaybackLib, "DVDGetAudioVolumeInfo") })
 	_register("DVDGetBookmark", func() { purego.RegisterLibFunc(&_fnDVDGetBookmark, _dvdplaybackLib, "DVDGetBookmark") })
@@ -79,22 +91,36 @@ func _loadLibrary() {
 	_register("DVDGetGPRMValue", func() { purego.RegisterLibFunc(&_fnDVDGetGPRMValue, _dvdplaybackLib, "DVDGetGPRMValue") })
 	_register("DVDGetLastPlayBookmark", func() { purego.RegisterLibFunc(&_fnDVDGetLastPlayBookmark, _dvdplaybackLib, "DVDGetLastPlayBookmark") })
 	_register("DVDGetMediaUniqueID", func() { purego.RegisterLibFunc(&_fnDVDGetMediaUniqueID, _dvdplaybackLib, "DVDGetMediaUniqueID") })
-	_register("DVDGetMediaVolumeCFName", func() { purego.RegisterLibFunc(&_fnDVDGetMediaVolumeCFName, _dvdplaybackLib, "DVDGetMediaVolumeCFName") })
+	_register("DVDGetMediaVolumeCFName", func() {
+		purego.RegisterLibFunc(&_fnDVDGetMediaVolumeCFName, _dvdplaybackLib, "DVDGetMediaVolumeCFName")
+	})
 	_register("DVDGetMediaVolumeName", func() { purego.RegisterLibFunc(&_fnDVDGetMediaVolumeName, _dvdplaybackLib, "DVDGetMediaVolumeName") })
 	_register("DVDGetMenuLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDGetMenuLanguageCode, _dvdplaybackLib, "DVDGetMenuLanguageCode") })
 	_register("DVDGetNativeVideoSize", func() { purego.RegisterLibFunc(&_fnDVDGetNativeVideoSize, _dvdplaybackLib, "DVDGetNativeVideoSize") })
 	_register("DVDGetNumAngles", func() { purego.RegisterLibFunc(&_fnDVDGetNumAngles, _dvdplaybackLib, "DVDGetNumAngles") })
 	_register("DVDGetNumAudioStreams", func() { purego.RegisterLibFunc(&_fnDVDGetNumAudioStreams, _dvdplaybackLib, "DVDGetNumAudioStreams") })
 	_register("DVDGetNumChapters", func() { purego.RegisterLibFunc(&_fnDVDGetNumChapters, _dvdplaybackLib, "DVDGetNumChapters") })
-	_register("DVDGetNumSubPictureStreams", func() { purego.RegisterLibFunc(&_fnDVDGetNumSubPictureStreams, _dvdplaybackLib, "DVDGetNumSubPictureStreams") })
+	_register("DVDGetNumSubPictureStreams", func() {
+		purego.RegisterLibFunc(&_fnDVDGetNumSubPictureStreams, _dvdplaybackLib, "DVDGetNumSubPictureStreams")
+	})
 	_register("DVDGetNumTitles", func() { purego.RegisterLibFunc(&_fnDVDGetNumTitles, _dvdplaybackLib, "DVDGetNumTitles") })
-	_register("DVDGetSPDIFDataOutDevice", func() { purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDevice, _dvdplaybackLib, "DVDGetSPDIFDataOutDevice") })
-	_register("DVDGetSPDIFDataOutDeviceCFName", func() { purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCFName, _dvdplaybackLib, "DVDGetSPDIFDataOutDeviceCFName") })
-	_register("DVDGetSPDIFDataOutDeviceCount", func() { purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCount, _dvdplaybackLib, "DVDGetSPDIFDataOutDeviceCount") })
+	_register("DVDGetSPDIFDataOutDevice", func() {
+		purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDevice, _dvdplaybackLib, "DVDGetSPDIFDataOutDevice")
+	})
+	_register("DVDGetSPDIFDataOutDeviceCFName", func() {
+		purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCFName, _dvdplaybackLib, "DVDGetSPDIFDataOutDeviceCFName")
+	})
+	_register("DVDGetSPDIFDataOutDeviceCount", func() {
+		purego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCount, _dvdplaybackLib, "DVDGetSPDIFDataOutDeviceCount")
+	})
 	_register("DVDGetScanRate", func() { purego.RegisterLibFunc(&_fnDVDGetScanRate, _dvdplaybackLib, "DVDGetScanRate") })
 	_register("DVDGetState", func() { purego.RegisterLibFunc(&_fnDVDGetState, _dvdplaybackLib, "DVDGetState") })
-	_register("DVDGetSubPictureLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDGetSubPictureLanguageCode, _dvdplaybackLib, "DVDGetSubPictureLanguageCode") })
-	_register("DVDGetSubPictureLanguageCodeByStream", func() { purego.RegisterLibFunc(&_fnDVDGetSubPictureLanguageCodeByStream, _dvdplaybackLib, "DVDGetSubPictureLanguageCodeByStream") })
+	_register("DVDGetSubPictureLanguageCode", func() {
+		purego.RegisterLibFunc(&_fnDVDGetSubPictureLanguageCode, _dvdplaybackLib, "DVDGetSubPictureLanguageCode")
+	})
+	_register("DVDGetSubPictureLanguageCodeByStream", func() {
+		purego.RegisterLibFunc(&_fnDVDGetSubPictureLanguageCodeByStream, _dvdplaybackLib, "DVDGetSubPictureLanguageCodeByStream")
+	})
 	_register("DVDGetSubPictureStream", func() { purego.RegisterLibFunc(&_fnDVDGetSubPictureStream, _dvdplaybackLib, "DVDGetSubPictureStream") })
 	_register("DVDGetTime", func() { purego.RegisterLibFunc(&_fnDVDGetTime, _dvdplaybackLib, "DVDGetTime") })
 	_register("DVDGetTimeEventRate", func() { purego.RegisterLibFunc(&_fnDVDGetTimeEventRate, _dvdplaybackLib, "DVDGetTimeEventRate") })
@@ -112,25 +138,35 @@ func _loadLibrary() {
 	_register("DVDHasPreviousChapter", func() { purego.RegisterLibFunc(&_fnDVDHasPreviousChapter, _dvdplaybackLib, "DVDHasPreviousChapter") })
 	_register("DVDIdle", func() { purego.RegisterLibFunc(&_fnDVDIdle, _dvdplaybackLib, "DVDIdle") })
 	_register("DVDInitialize", func() { purego.RegisterLibFunc(&_fnDVDInitialize, _dvdplaybackLib, "DVDInitialize") })
-	_register("DVDIsDisplayingSubPicture", func() { purego.RegisterLibFunc(&_fnDVDIsDisplayingSubPicture, _dvdplaybackLib, "DVDIsDisplayingSubPicture") })
+	_register("DVDIsDisplayingSubPicture", func() {
+		purego.RegisterLibFunc(&_fnDVDIsDisplayingSubPicture, _dvdplaybackLib, "DVDIsDisplayingSubPicture")
+	})
 	_register("DVDIsMuted", func() { purego.RegisterLibFunc(&_fnDVDIsMuted, _dvdplaybackLib, "DVDIsMuted") })
 	_register("DVDIsOnMenu", func() { purego.RegisterLibFunc(&_fnDVDIsOnMenu, _dvdplaybackLib, "DVDIsOnMenu") })
 	_register("DVDIsPaused", func() { purego.RegisterLibFunc(&_fnDVDIsPaused, _dvdplaybackLib, "DVDIsPaused") })
 	_register("DVDIsPlaying", func() { purego.RegisterLibFunc(&_fnDVDIsPlaying, _dvdplaybackLib, "DVDIsPlaying") })
-	_register("DVDIsRegisteredEventCallBack", func() { purego.RegisterLibFunc(&_fnDVDIsRegisteredEventCallBack, _dvdplaybackLib, "DVDIsRegisteredEventCallBack") })
+	_register("DVDIsRegisteredEventCallBack", func() {
+		purego.RegisterLibFunc(&_fnDVDIsRegisteredEventCallBack, _dvdplaybackLib, "DVDIsRegisteredEventCallBack")
+	})
 	_register("DVDIsSupportedDisplay", func() { purego.RegisterLibFunc(&_fnDVDIsSupportedDisplay, _dvdplaybackLib, "DVDIsSupportedDisplay") })
 	_register("DVDIsValidMediaRef", func() { purego.RegisterLibFunc(&_fnDVDIsValidMediaRef, _dvdplaybackLib, "DVDIsValidMediaRef") })
 	_register("DVDIsValidMediaURL", func() { purego.RegisterLibFunc(&_fnDVDIsValidMediaURL, _dvdplaybackLib, "DVDIsValidMediaURL") })
 	_register("DVDMute", func() { purego.RegisterLibFunc(&_fnDVDMute, _dvdplaybackLib, "DVDMute") })
 	_register("DVDNextChapter", func() { purego.RegisterLibFunc(&_fnDVDNextChapter, _dvdplaybackLib, "DVDNextChapter") })
 	_register("DVDOpenMediaFile", func() { purego.RegisterLibFunc(&_fnDVDOpenMediaFile, _dvdplaybackLib, "DVDOpenMediaFile") })
-	_register("DVDOpenMediaFileWithURL", func() { purego.RegisterLibFunc(&_fnDVDOpenMediaFileWithURL, _dvdplaybackLib, "DVDOpenMediaFileWithURL") })
+	_register("DVDOpenMediaFileWithURL", func() {
+		purego.RegisterLibFunc(&_fnDVDOpenMediaFileWithURL, _dvdplaybackLib, "DVDOpenMediaFileWithURL")
+	})
 	_register("DVDOpenMediaVolume", func() { purego.RegisterLibFunc(&_fnDVDOpenMediaVolume, _dvdplaybackLib, "DVDOpenMediaVolume") })
-	_register("DVDOpenMediaVolumeWithURL", func() { purego.RegisterLibFunc(&_fnDVDOpenMediaVolumeWithURL, _dvdplaybackLib, "DVDOpenMediaVolumeWithURL") })
+	_register("DVDOpenMediaVolumeWithURL", func() {
+		purego.RegisterLibFunc(&_fnDVDOpenMediaVolumeWithURL, _dvdplaybackLib, "DVDOpenMediaVolumeWithURL")
+	})
 	_register("DVDPause", func() { purego.RegisterLibFunc(&_fnDVDPause, _dvdplaybackLib, "DVDPause") })
 	_register("DVDPlay", func() { purego.RegisterLibFunc(&_fnDVDPlay, _dvdplaybackLib, "DVDPlay") })
 	_register("DVDPreviousChapter", func() { purego.RegisterLibFunc(&_fnDVDPreviousChapter, _dvdplaybackLib, "DVDPreviousChapter") })
-	_register("DVDRegisterEventCallBack", func() { purego.RegisterLibFunc(&_fnDVDRegisterEventCallBack, _dvdplaybackLib, "DVDRegisterEventCallBack") })
+	_register("DVDRegisterEventCallBack", func() {
+		purego.RegisterLibFunc(&_fnDVDRegisterEventCallBack, _dvdplaybackLib, "DVDRegisterEventCallBack")
+	})
 	_register("DVDResume", func() { purego.RegisterLibFunc(&_fnDVDResume, _dvdplaybackLib, "DVDResume") })
 	_register("DVDReturnToTitle", func() { purego.RegisterLibFunc(&_fnDVDReturnToTitle, _dvdplaybackLib, "DVDReturnToTitle") })
 	_register("DVDScan", func() { purego.RegisterLibFunc(&_fnDVDScan, _dvdplaybackLib, "DVDScan") })
@@ -140,13 +176,23 @@ func _loadLibrary() {
 	_register("DVDSetAudioStream", func() { purego.RegisterLibFunc(&_fnDVDSetAudioStream, _dvdplaybackLib, "DVDSetAudioStream") })
 	_register("DVDSetAudioVolume", func() { purego.RegisterLibFunc(&_fnDVDSetAudioVolume, _dvdplaybackLib, "DVDSetAudioVolume") })
 	_register("DVDSetChapter", func() { purego.RegisterLibFunc(&_fnDVDSetChapter, _dvdplaybackLib, "DVDSetChapter") })
-	_register("DVDSetDefaultAudioLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDSetDefaultAudioLanguageCode, _dvdplaybackLib, "DVDSetDefaultAudioLanguageCode") })
-	_register("DVDSetDefaultMenuLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDSetDefaultMenuLanguageCode, _dvdplaybackLib, "DVDSetDefaultMenuLanguageCode") })
-	_register("DVDSetDefaultSubPictureLanguageCode", func() { purego.RegisterLibFunc(&_fnDVDSetDefaultSubPictureLanguageCode, _dvdplaybackLib, "DVDSetDefaultSubPictureLanguageCode") })
+	_register("DVDSetDefaultAudioLanguageCode", func() {
+		purego.RegisterLibFunc(&_fnDVDSetDefaultAudioLanguageCode, _dvdplaybackLib, "DVDSetDefaultAudioLanguageCode")
+	})
+	_register("DVDSetDefaultMenuLanguageCode", func() {
+		purego.RegisterLibFunc(&_fnDVDSetDefaultMenuLanguageCode, _dvdplaybackLib, "DVDSetDefaultMenuLanguageCode")
+	})
+	_register("DVDSetDefaultSubPictureLanguageCode", func() {
+		purego.RegisterLibFunc(&_fnDVDSetDefaultSubPictureLanguageCode, _dvdplaybackLib, "DVDSetDefaultSubPictureLanguageCode")
+	})
 	_register("DVDSetDriveRegionCode", func() { purego.RegisterLibFunc(&_fnDVDSetDriveRegionCode, _dvdplaybackLib, "DVDSetDriveRegionCode") })
-	_register("DVDSetFatalErrorCallBack", func() { purego.RegisterLibFunc(&_fnDVDSetFatalErrorCallBack, _dvdplaybackLib, "DVDSetFatalErrorCallBack") })
+	_register("DVDSetFatalErrorCallBack", func() {
+		purego.RegisterLibFunc(&_fnDVDSetFatalErrorCallBack, _dvdplaybackLib, "DVDSetFatalErrorCallBack")
+	})
 	_register("DVDSetLastPlayBookmark", func() { purego.RegisterLibFunc(&_fnDVDSetLastPlayBookmark, _dvdplaybackLib, "DVDSetLastPlayBookmark") })
-	_register("DVDSetSPDIFDataOutDevice", func() { purego.RegisterLibFunc(&_fnDVDSetSPDIFDataOutDevice, _dvdplaybackLib, "DVDSetSPDIFDataOutDevice") })
+	_register("DVDSetSPDIFDataOutDevice", func() {
+		purego.RegisterLibFunc(&_fnDVDSetSPDIFDataOutDevice, _dvdplaybackLib, "DVDSetSPDIFDataOutDevice")
+	})
 	_register("DVDSetSubPictureStream", func() { purego.RegisterLibFunc(&_fnDVDSetSubPictureStream, _dvdplaybackLib, "DVDSetSubPictureStream") })
 	_register("DVDSetTime", func() { purego.RegisterLibFunc(&_fnDVDSetTime, _dvdplaybackLib, "DVDSetTime") })
 	_register("DVDSetTimeEventRate", func() { purego.RegisterLibFunc(&_fnDVDSetTimeEventRate, _dvdplaybackLib, "DVDSetTimeEventRate") })
@@ -159,7 +205,9 @@ func _loadLibrary() {
 	_register("DVDStepFrame", func() { purego.RegisterLibFunc(&_fnDVDStepFrame, _dvdplaybackLib, "DVDStepFrame") })
 	_register("DVDStop", func() { purego.RegisterLibFunc(&_fnDVDStop, _dvdplaybackLib, "DVDStop") })
 	_register("DVDSwitchToDisplay", func() { purego.RegisterLibFunc(&_fnDVDSwitchToDisplay, _dvdplaybackLib, "DVDSwitchToDisplay") })
-	_register("DVDUnregisterEventCallBack", func() { purego.RegisterLibFunc(&_fnDVDUnregisterEventCallBack, _dvdplaybackLib, "DVDUnregisterEventCallBack") })
+	_register("DVDUnregisterEventCallBack", func() {
+		purego.RegisterLibFunc(&_fnDVDUnregisterEventCallBack, _dvdplaybackLib, "DVDUnregisterEventCallBack")
+	})
 	_register("DVDUpdateVideo", func() { purego.RegisterLibFunc(&_fnDVDUpdateVideo, _dvdplaybackLib, "DVDUpdateVideo") })
 	_register("DVDWakeUp", func() { purego.RegisterLibFunc(&_fnDVDWakeUp, _dvdplaybackLib, "DVDWakeUp") })
 }

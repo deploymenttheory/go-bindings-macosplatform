@@ -16,7 +16,9 @@ type MTRLevelControlClusterMoveToClosestFrequencyParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRLevelControlClusterMoveToClosestFrequencyParams].
-func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) Unwrap() *raw.MTRLevelControlClusterMoveToClosestFrequencyParams { return x.inner }
+func (x *MTRLevelControlClusterMoveToClosestFrequencyParams) Unwrap() *raw.MTRLevelControlClusterMoveToClosestFrequencyParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRLevelControlClusterMoveToClosestFrequencyParamsable interface {
 }
 
 var _ MTRLevelControlClusterMoveToClosestFrequencyParamsable = (*MTRLevelControlClusterMoveToClosestFrequencyParams)(nil)
-

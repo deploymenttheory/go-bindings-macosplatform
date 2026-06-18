@@ -17,15 +17,15 @@ type MPSCNNConvolutionWeightsAndBiasesState struct {
 }
 
 var (
-	_clsMPSCNNConvolutionWeightsAndBiasesState = _objcClass("MPSCNNConvolutionWeightsAndBiasesState")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsBiases = objc.RegisterName("initWithWeights:biases:")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithDeviceCnnConvolutionDescriptor = objc.RegisterName("initWithDevice:cnnConvolutionDescriptor:")
+	_clsMPSCNNConvolutionWeightsAndBiasesState                                                                                      = _objcClass("MPSCNNConvolutionWeightsAndBiasesState")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsBiases                                                                 = objc.RegisterName("initWithWeights:biases:")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithDeviceCnnConvolutionDescriptor                                                = objc.RegisterName("initWithDevice:cnnConvolutionDescriptor:")
 	_mPSCNNConvolutionWeightsAndBiasesStateSelTemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor = objc.RegisterName("temporaryCNNConvolutionWeightsAndBiasesStateWithCommandBuffer:cnnConvolutionDescriptor:")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor = objc.RegisterName("initWithWeights:weightsOffset:biases:biasesOffset:cnnConvolutionDescriptor:")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelWeights = objc.RegisterName("weights")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelBiases = objc.RegisterName("biases")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelWeightsOffset = objc.RegisterName("weightsOffset")
-	_mPSCNNConvolutionWeightsAndBiasesStateSelBiasesOffset = objc.RegisterName("biasesOffset")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor                = objc.RegisterName("initWithWeights:weightsOffset:biases:biasesOffset:cnnConvolutionDescriptor:")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelWeights                                                                               = objc.RegisterName("weights")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelBiases                                                                                = objc.RegisterName("biases")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelWeightsOffset                                                                         = objc.RegisterName("weightsOffset")
+	_mPSCNNConvolutionWeightsAndBiasesStateSelBiasesOffset                                                                          = objc.RegisterName("biasesOffset")
 )
 
 func MPSCNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *MPSCNNConvolutionWeightsAndBiasesState {
@@ -41,27 +41,35 @@ func MPSCNNConvolutionWeightsAndBiasesStateFromID(id objc.ID) *MPSCNNConvolution
 // @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  This is the convinience API when buffers of exact size i.e. [weights length] =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise and [biases length]  =  outputFeatureChannels*sizeof(float)
 func (o *MPSCNNConvolutionWeightsAndBiasesState) InitWithWeightsBiases(weights metal.MTLBuffer, biases metal.MTLBuffer) *MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsBiases, weights, biases)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
 // @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided convolution descriptor @discussion  Create weights and biases buffers of appropriate size
 func (o *MPSCNNConvolutionWeightsAndBiasesState) InitWithDeviceCnnConvolutionDescriptor(device metal.MTLDevice, descriptor *MPSCNNConvolutionDescriptor) *MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionWeightsAndBiasesStateSelInitWithDeviceCnnConvolutionDescriptor, device, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
 func MPSCNNConvolutionWeightsAndBiasesStateTemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *MPSCNNConvolutionDescriptor) *MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNConvolutionWeightsAndBiasesState), _mPSCNNConvolutionWeightsAndBiasesStateSelTemporaryCNNConvolutionWeightsAndBiasesStateWithCommandBufferCnnConvolutionDescriptor, commandBuffer, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
 // @abstract    Create and initialize MPSCNNConvolutionWeightsAndBiasesState with application provided weights and biases buffers. @discussion  It gives finer allocation control to application e.g. application can pass same buffer for weights and biases with appropriate offsets. Or offset into some larger buffer from application managed heap etc. Number of weights and biases or the length of weights and biases buffer this object owns (will read or write to), starting at offset is determined by MPSCNNConvolutionDescriptor passed in. weightsLength =  inputFeatureChannels*kernelWidth*kernelHeight*channelMultiplier*sizeof(float)                   // for depthwise convolution outputFeatureChannels*kernelWidth*kernelHeight*(inputChannels/groups)*sizeof(float)      // for regular otherwise biasesLength  =  outputFeatureChannels*sizeof(float) Thus filters operating on this object will read or write to NSRange(weightsOffset, weightsLength) of weights buffer and NSRange(biasesOffset, biasesLength) of biases buffer. Thus sizes of buffers provided must be such that weightsOffset + weightsLength <= [weights length] and     biasesOffset + biasesLength <= [biases length] Offsets must of sizeof(float) aligned i.e. multiple of 4.
 func (o *MPSCNNConvolutionWeightsAndBiasesState) InitWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor(weights metal.MTLBuffer, weightsOffset uint, biases metal.MTLBuffer, biasesOffset uint, descriptor *MPSCNNConvolutionDescriptor) *MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionWeightsAndBiasesStateSelInitWithWeightsWeightsOffsetBiasesBiasesOffsetCnnConvolutionDescriptor, weights, weightsOffset, biases, biasesOffset, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *MPSCNNConvolutionWeightsAndBiasesState) BiasesOffset() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNConvolutionWeightsAndBiasesStateSelBiasesOffset)
 	return _ret
 }
-

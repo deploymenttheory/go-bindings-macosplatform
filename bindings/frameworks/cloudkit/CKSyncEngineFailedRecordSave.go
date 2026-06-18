@@ -18,9 +18,9 @@ type CKSyncEngineFailedRecordSave struct {
 }
 
 var (
-	_clsCKSyncEngineFailedRecordSave = _objcClass("CKSyncEngineFailedRecordSave")
+	_clsCKSyncEngineFailedRecordSave       = _objcClass("CKSyncEngineFailedRecordSave")
 	_cKSyncEngineFailedRecordSaveSelRecord = objc.RegisterName("record")
-	_cKSyncEngineFailedRecordSaveSelError = objc.RegisterName("error")
+	_cKSyncEngineFailedRecordSaveSelError  = objc.RegisterName("error")
 )
 
 func CKSyncEngineFailedRecordSaveFromID(id objc.ID) *CKSyncEngineFailedRecordSave {
@@ -36,7 +36,9 @@ func CKSyncEngineFailedRecordSaveFromID(id objc.ID) *CKSyncEngineFailedRecordSav
 // The record that CloudKit is unable to modify.
 func (o *CKSyncEngineFailedRecordSave) Record() *CKRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFailedRecordSaveSelRecord)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *CKSyncEngineFailedRecordSave) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKSyncEngineFailedRecordSaveSelError)
 	return _ret
 }
-

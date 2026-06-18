@@ -595,4 +595,3 @@ func CpViewTextureMapGetTextureIndex(view_texture_map unsafe.Pointer) uint {
 func CpViewTextureMapGetViewport(view_texture_map unsafe.Pointer) metal.MTLViewport {
 	return raw.CpViewTextureMapGetViewport(view_texture_map)
 }
-

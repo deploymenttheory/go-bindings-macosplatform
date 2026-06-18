@@ -16,10 +16,10 @@ type AXLiveAudioGraph struct {
 }
 
 var (
-	_clsAXLiveAudioGraph = _objcClass("AXLiveAudioGraph")
-	_aXLiveAudioGraphSelStart = objc.RegisterName("start")
+	_clsAXLiveAudioGraph            = _objcClass("AXLiveAudioGraph")
+	_aXLiveAudioGraphSelStart       = objc.RegisterName("start")
 	_aXLiveAudioGraphSelUpdateValue = objc.RegisterName("updateValue:")
-	_aXLiveAudioGraphSelStop = objc.RegisterName("stop")
+	_aXLiveAudioGraphSelStop        = objc.RegisterName("stop")
 )
 
 func AXLiveAudioGraphFromID(id objc.ID) *AXLiveAudioGraph {
@@ -46,4 +46,3 @@ func AXLiveAudioGraphUpdateValue(value float64) {
 func AXLiveAudioGraphStop() {
 	objc.ID(_clsAXLiveAudioGraph).Send(_aXLiveAudioGraphSelStop)
 }
-

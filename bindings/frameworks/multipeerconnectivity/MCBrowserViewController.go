@@ -17,17 +17,17 @@ type MCBrowserViewController struct {
 }
 
 var (
-	_clsMCBrowserViewController = _objcClass("MCBrowserViewController")
+	_clsMCBrowserViewController                           = _objcClass("MCBrowserViewController")
 	_mCBrowserViewControllerSelInitWithServiceTypeSession = objc.RegisterName("initWithServiceType:session:")
-	_mCBrowserViewControllerSelInitWithBrowserSession = objc.RegisterName("initWithBrowser:session:")
-	_mCBrowserViewControllerSelDelegate = objc.RegisterName("delegate")
-	_mCBrowserViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mCBrowserViewControllerSelBrowser = objc.RegisterName("browser")
-	_mCBrowserViewControllerSelSession = objc.RegisterName("session")
-	_mCBrowserViewControllerSelMinimumNumberOfPeers = objc.RegisterName("minimumNumberOfPeers")
-	_mCBrowserViewControllerSelSetMinimumNumberOfPeers = objc.RegisterName("setMinimumNumberOfPeers:")
-	_mCBrowserViewControllerSelMaximumNumberOfPeers = objc.RegisterName("maximumNumberOfPeers")
-	_mCBrowserViewControllerSelSetMaximumNumberOfPeers = objc.RegisterName("setMaximumNumberOfPeers:")
+	_mCBrowserViewControllerSelInitWithBrowserSession     = objc.RegisterName("initWithBrowser:session:")
+	_mCBrowserViewControllerSelDelegate                   = objc.RegisterName("delegate")
+	_mCBrowserViewControllerSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_mCBrowserViewControllerSelBrowser                    = objc.RegisterName("browser")
+	_mCBrowserViewControllerSelSession                    = objc.RegisterName("session")
+	_mCBrowserViewControllerSelMinimumNumberOfPeers       = objc.RegisterName("minimumNumberOfPeers")
+	_mCBrowserViewControllerSelSetMinimumNumberOfPeers    = objc.RegisterName("setMinimumNumberOfPeers:")
+	_mCBrowserViewControllerSelMaximumNumberOfPeers       = objc.RegisterName("maximumNumberOfPeers")
+	_mCBrowserViewControllerSelSetMaximumNumberOfPeers    = objc.RegisterName("setMaximumNumberOfPeers:")
 )
 
 func MCBrowserViewControllerFromID(id objc.ID) *MCBrowserViewController {
@@ -42,13 +42,17 @@ func MCBrowserViewControllerFromID(id objc.ID) *MCBrowserViewController {
 
 func (o *MCBrowserViewController) InitWithServiceTypeSession(serviceType *foundation.NSString, session *MCSession) *MCBrowserViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithServiceTypeSession, serviceType.Ptr(), session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCBrowserViewControllerFromID(_ret)
 }
 
 func (o *MCBrowserViewController) InitWithBrowserSession(browser *MCNearbyServiceBrowser, session *MCSession) *MCBrowserViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelInitWithBrowserSession, browser.Ptr(), session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCBrowserViewControllerFromID(_ret)
 }
 
@@ -63,13 +67,17 @@ func (o *MCBrowserViewController) SetDelegate(delegate MCBrowserViewControllerDe
 
 func (o *MCBrowserViewController) Browser() *MCNearbyServiceBrowser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelBrowser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCNearbyServiceBrowserFromID(_ret)
 }
 
 func (o *MCBrowserViewController) Session() *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCBrowserViewControllerSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCSessionFromID(_ret)
 }
 
@@ -90,4 +98,3 @@ func (o *MCBrowserViewController) MaximumNumberOfPeers() uint {
 func (o *MCBrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers uint) {
 	o.Ptr().Send(_mCBrowserViewControllerSelSetMaximumNumberOfPeers, maximumNumberOfPeers)
 }
-

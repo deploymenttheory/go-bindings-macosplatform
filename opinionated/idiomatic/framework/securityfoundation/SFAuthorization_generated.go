@@ -86,4 +86,3 @@ type Authorizationable interface {
 }
 
 var _ Authorizationable = (*Authorization)(nil)
-

@@ -73,4 +73,3 @@ type WKUserScriptable interface {
 }
 
 var _ WKUserScriptable = (*WKUserScript)(nil)
-

@@ -18,9 +18,9 @@ type ASSettingsHelper struct {
 }
 
 var (
-	_clsASSettingsHelper = _objcClass("ASSettingsHelper")
-	_aSSettingsHelperSelOpenCredentialProviderAppSettingsWithCompletionHandler = objc.RegisterName("openCredentialProviderAppSettingsWithCompletionHandler:")
-	_aSSettingsHelperSelOpenVerificationCodeAppSettingsWithCompletionHandler = objc.RegisterName("openVerificationCodeAppSettingsWithCompletionHandler:")
+	_clsASSettingsHelper                                                                = _objcClass("ASSettingsHelper")
+	_aSSettingsHelperSelOpenCredentialProviderAppSettingsWithCompletionHandler          = objc.RegisterName("openCredentialProviderAppSettingsWithCompletionHandler:")
+	_aSSettingsHelperSelOpenVerificationCodeAppSettingsWithCompletionHandler            = objc.RegisterName("openVerificationCodeAppSettingsWithCompletionHandler:")
 	_aSSettingsHelperSelRequestToTurnOnCredentialProviderExtensionWithCompletionHandler = objc.RegisterName("requestToTurnOnCredentialProviderExtensionWithCompletionHandler:")
 )
 
@@ -69,4 +69,3 @@ func ASSettingsHelperRequestToTurnOnCredentialProviderExtensionWithCompletionHan
 	}
 	objc.ID(_clsASSettingsHelper).Send(_aSSettingsHelperSelRequestToTurnOnCredentialProviderExtensionWithCompletionHandler, __block_completionHandler)
 }
-

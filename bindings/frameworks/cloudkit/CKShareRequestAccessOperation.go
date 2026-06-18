@@ -18,15 +18,15 @@ type CKShareRequestAccessOperation struct {
 }
 
 var (
-	_clsCKShareRequestAccessOperation = _objcClass("CKShareRequestAccessOperation")
-	_cKShareRequestAccessOperationSelInit = objc.RegisterName("init")
-	_cKShareRequestAccessOperationSelInitWithShareURLs = objc.RegisterName("initWithShareURLs:")
-	_cKShareRequestAccessOperationSelShareURLs = objc.RegisterName("shareURLs")
-	_cKShareRequestAccessOperationSelSetShareURLs = objc.RegisterName("setShareURLs:")
-	_cKShareRequestAccessOperationSelPerShareAccessRequestCompletionBlock = objc.RegisterName("perShareAccessRequestCompletionBlock")
+	_clsCKShareRequestAccessOperation                                        = _objcClass("CKShareRequestAccessOperation")
+	_cKShareRequestAccessOperationSelInit                                    = objc.RegisterName("init")
+	_cKShareRequestAccessOperationSelInitWithShareURLs                       = objc.RegisterName("initWithShareURLs:")
+	_cKShareRequestAccessOperationSelShareURLs                               = objc.RegisterName("shareURLs")
+	_cKShareRequestAccessOperationSelSetShareURLs                            = objc.RegisterName("setShareURLs:")
+	_cKShareRequestAccessOperationSelPerShareAccessRequestCompletionBlock    = objc.RegisterName("perShareAccessRequestCompletionBlock")
 	_cKShareRequestAccessOperationSelSetPerShareAccessRequestCompletionBlock = objc.RegisterName("setPerShareAccessRequestCompletionBlock:")
-	_cKShareRequestAccessOperationSelShareRequestAccessCompletionBlock = objc.RegisterName("shareRequestAccessCompletionBlock")
-	_cKShareRequestAccessOperationSelSetShareRequestAccessCompletionBlock = objc.RegisterName("setShareRequestAccessCompletionBlock:")
+	_cKShareRequestAccessOperationSelShareRequestAccessCompletionBlock       = objc.RegisterName("shareRequestAccessCompletionBlock")
+	_cKShareRequestAccessOperationSelSetShareRequestAccessCompletionBlock    = objc.RegisterName("setShareRequestAccessCompletionBlock:")
 )
 
 func CKShareRequestAccessOperationFromID(id objc.ID) *CKShareRequestAccessOperation {
@@ -42,14 +42,18 @@ func CKShareRequestAccessOperationFromID(id objc.ID) *CKShareRequestAccessOperat
 // Creates a new, empty share request access operation.
 func (o *CKShareRequestAccessOperation) Init() *CKShareRequestAccessOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareRequestAccessOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKShareRequestAccessOperationFromID(_ret)
 }
 
-// Creates a share request access operation configured with specified share URLs. - Parameter shareURLs: An array of `NSURL` objects representing the shares to request access to. - Returns: A configured ``CKShareRequestAccessOperation`` instance.
+// Creates a share request access operation configured with specified share URLs. - Parameter shareURLs: An array of `NSURL` objects representing the shares to request access to. - Returns: A configured “CKShareRequestAccessOperation“ instance.
 func (o *CKShareRequestAccessOperation) InitWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *CKShareRequestAccessOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareRequestAccessOperationSelInitWithShareURLs, shareURLs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKShareRequestAccessOperationFromID(_ret)
 }
 
@@ -63,7 +67,7 @@ func (o *CKShareRequestAccessOperation) SetShareURLs(shareURLs *foundation.NSArr
 	o.Ptr().Send(_cKShareRequestAccessOperationSelSetShareURLs, shareURLs)
 }
 
-// The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the ``CKShareRequestAccessOperation/shareURLs`` property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the “CKShareRequestAccessOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKShareRequestAccessOperation) PerShareAccessRequestCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKShareRequestAccessOperationSelPerShareAccessRequestCompletionBlock)
 	return _ret
@@ -83,7 +87,7 @@ func (o *CKShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(
 	o.Ptr().Send(_cKShareRequestAccessOperationSelSetPerShareAccessRequestCompletionBlock, __block_perShareAccessRequestCompletionBlock)
 }
 
-// The closure to execute after CloudKit processes all share access requests. This property is a closure that returns no value and has the following parameter: - An error that contains information about a problem, or `nil` if the system successfully processes the share access requests. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all share access request completion closures finish. The closure executes serially with respect to the other closures of the operation. The closure reports an error of type ``CKError/Code/partialFailure`` when it processes only some of the share access requests successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary are the URLs of the shares whose access requests can't be processed by the operation. The corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute after CloudKit processes all share access requests. This property is a closure that returns no value and has the following parameter: - An error that contains information about a problem, or `nil` if the system successfully processes the share access requests. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all share access request completion closures finish. The closure executes serially with respect to the other closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it processes only some of the share access requests successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the URLs of the shares whose access requests can't be processed by the operation. The corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKShareRequestAccessOperation) ShareRequestAccessCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKShareRequestAccessOperationSelShareRequestAccessCompletionBlock)
 	return _ret
@@ -99,4 +103,3 @@ func (o *CKShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(sha
 	}
 	o.Ptr().Send(_cKShareRequestAccessOperationSelSetShareRequestAccessCompletionBlock, __block_shareRequestAccessCompletionBlock)
 }
-

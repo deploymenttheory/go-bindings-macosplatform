@@ -93,4 +93,3 @@ type ProductDiscountable interface {
 }
 
 var _ ProductDiscountable = (*ProductDiscount)(nil)
-

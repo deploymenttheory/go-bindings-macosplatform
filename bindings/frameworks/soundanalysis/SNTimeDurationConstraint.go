@@ -17,12 +17,12 @@ type SNTimeDurationConstraint struct {
 }
 
 var (
-	_clsSNTimeDurationConstraint = _objcClass("SNTimeDurationConstraint")
+	_clsSNTimeDurationConstraint                            = _objcClass("SNTimeDurationConstraint")
 	_sNTimeDurationConstraintSelInitWithEnumeratedDurations = objc.RegisterName("initWithEnumeratedDurations:")
-	_sNTimeDurationConstraintSelInitWithDurationRange = objc.RegisterName("initWithDurationRange:")
-	_sNTimeDurationConstraintSelType = objc.RegisterName("type")
-	_sNTimeDurationConstraintSelEnumeratedDurations = objc.RegisterName("enumeratedDurations")
-	_sNTimeDurationConstraintSelDurationRange = objc.RegisterName("durationRange")
+	_sNTimeDurationConstraintSelInitWithDurationRange       = objc.RegisterName("initWithDurationRange:")
+	_sNTimeDurationConstraintSelType                        = objc.RegisterName("type")
+	_sNTimeDurationConstraintSelEnumeratedDurations         = objc.RegisterName("enumeratedDurations")
+	_sNTimeDurationConstraintSelDurationRange               = objc.RegisterName("durationRange")
 )
 
 func SNTimeDurationConstraintFromID(id objc.ID) *SNTimeDurationConstraint {
@@ -38,14 +38,18 @@ func SNTimeDurationConstraintFromID(id objc.ID) *SNTimeDurationConstraint {
 // Initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
 func (o *SNTimeDurationConstraint) InitWithEnumeratedDurations(enumeratedDurations *foundation.NSArray[*foundation.NSValue]) *SNTimeDurationConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNTimeDurationConstraintSelInitWithEnumeratedDurations, enumeratedDurations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SNTimeDurationConstraintFromID(_ret)
 }
 
 // Initializes a range-type constraint. - Parameter durationRange: A continuous range of duration values (represented as CMTime values) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeRange`, and which constrains durations values to the provided range.
 func (o *SNTimeDurationConstraint) InitWithDurationRange(durationRange coremedia.CMTimeRange) *SNTimeDurationConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNTimeDurationConstraintSelInitWithDurationRange, durationRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SNTimeDurationConstraintFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *SNTimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
 	_ret := objc.Send[coremedia.CMTimeRange](o.Ptr(), _sNTimeDurationConstraintSelDurationRange)
 	return _ret
 }
-

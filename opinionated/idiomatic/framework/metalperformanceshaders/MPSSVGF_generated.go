@@ -407,4 +407,3 @@ type SVGFable interface {
 }
 
 var _ SVGFable = (*SVGF)(nil)
-

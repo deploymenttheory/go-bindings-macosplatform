@@ -18,7 +18,7 @@ type SWRemoveParticipantAlert struct {
 }
 
 var (
-	_clsSWRemoveParticipantAlert = _objcClass("SWRemoveParticipantAlert")
+	_clsSWRemoveParticipantAlert                                          = _objcClass("SWRemoveParticipantAlert")
 	_sWRemoveParticipantAlertSelShowAlertWithParticipantHighlightInWindow = objc.RegisterName("showAlertWithParticipant:highlight:inWindow:")
 )
 
@@ -35,4 +35,3 @@ func SWRemoveParticipantAlertFromID(id objc.ID) *SWRemoveParticipantAlert {
 func SWRemoveParticipantAlertShowAlertWithParticipantHighlightInWindow(participant *sharedwithyoucore.SWPerson, highlight *SWCollaborationHighlight, window *appkit.NSWindow) {
 	objc.ID(_clsSWRemoveParticipantAlert).Send(_sWRemoveParticipantAlertSelShowAlertWithParticipantHighlightInWindow, participant.Ptr(), highlight.Ptr(), window.Ptr())
 }
-

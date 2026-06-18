@@ -76,7 +76,9 @@ func (x *DOMCSSStyleRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCS
 
 func (x *DOMCSSStyleRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSStyleRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSStyleRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSStyleRuleable is the interface implemented by [DOMCSSStyleRule], for mocking and DI.
 type DOMCSSStyleRuleable interface {
@@ -89,4 +91,3 @@ type DOMCSSStyleRuleable interface {
 }
 
 var _ DOMCSSStyleRuleable = (*DOMCSSStyleRule)(nil)
-

@@ -18,11 +18,11 @@ type NSFontAssetRequest struct {
 }
 
 var (
-	_clsNSFontAssetRequest = _objcClass("NSFontAssetRequest")
-	_nSFontAssetRequestSelInitWithFontDescriptorsOptions = objc.RegisterName("initWithFontDescriptors:options:")
+	_clsNSFontAssetRequest                                        = _objcClass("NSFontAssetRequest")
+	_nSFontAssetRequestSelInitWithFontDescriptorsOptions          = objc.RegisterName("initWithFontDescriptors:options:")
 	_nSFontAssetRequestSelDownloadFontAssetsWithCompletionHandler = objc.RegisterName("downloadFontAssetsWithCompletionHandler:")
-	_nSFontAssetRequestSelDownloadedFontDescriptors = objc.RegisterName("downloadedFontDescriptors")
-	_nSFontAssetRequestSelProgress = objc.RegisterName("progress")
+	_nSFontAssetRequestSelDownloadedFontDescriptors               = objc.RegisterName("downloadedFontDescriptors")
+	_nSFontAssetRequestSelProgress                                = objc.RegisterName("progress")
 )
 
 func NSFontAssetRequestFromID(id objc.ID) *NSFontAssetRequest {
@@ -37,7 +37,9 @@ func NSFontAssetRequestFromID(id objc.ID) *NSFontAssetRequest {
 
 func (o *NSFontAssetRequest) InitWithFontDescriptorsOptions(fontDescriptors *foundation.NSArray[*NSFontDescriptor], options NSFontAssetRequestOptions) *NSFontAssetRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontAssetRequestSelInitWithFontDescriptorsOptions, fontDescriptors.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontAssetRequestFromID(_ret)
 }
 
@@ -54,13 +56,16 @@ func (o *NSFontAssetRequest) DownloadFontAssetsWithCompletionHandler(completionH
 
 func (o *NSFontAssetRequest) DownloadedFontDescriptors() *foundation.NSArray[*NSFontDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontAssetRequestSelDownloadedFontDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSFontDescriptor](_ret)
 }
 
 func (o *NSFontAssetRequest) Progress() *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFontAssetRequestSelProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
-

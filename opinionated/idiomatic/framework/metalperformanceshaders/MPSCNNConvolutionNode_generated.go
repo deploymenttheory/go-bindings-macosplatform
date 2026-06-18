@@ -87,7 +87,9 @@ func (x *CNNConvolutionNode) ConvolutionGradientState() *mpsneuralnetwork.MPSCNN
 	return x.inner.ConvolutionGradientState()
 }
 
-func (x *CNNConvolutionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNConvolutionNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
 type CNNConvolutionNodeable interface {
@@ -104,4 +106,3 @@ type CNNConvolutionNodeable interface {
 }
 
 var _ CNNConvolutionNodeable = (*CNNConvolutionNode)(nil)
-

@@ -49,4 +49,3 @@ type Centralable interface {
 }
 
 var _ Centralable = (*Central)(nil)
-

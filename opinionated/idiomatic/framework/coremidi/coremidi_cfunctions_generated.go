@@ -448,4 +448,3 @@ func BuiltinMemcpyChk(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 uint, arg4 u
 func BuiltinObjectSize(arg unsafe.Pointer, arg2 int) uint {
 	return raw.BuiltinObjectSize(arg, arg2)
 }
-

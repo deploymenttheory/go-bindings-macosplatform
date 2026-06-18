@@ -18,9 +18,9 @@ type PHCloudIdentifierMapping struct {
 }
 
 var (
-	_clsPHCloudIdentifierMapping = _objcClass("PHCloudIdentifierMapping")
+	_clsPHCloudIdentifierMapping                = _objcClass("PHCloudIdentifierMapping")
 	_pHCloudIdentifierMappingSelCloudIdentifier = objc.RegisterName("cloudIdentifier")
-	_pHCloudIdentifierMappingSelError = objc.RegisterName("error")
+	_pHCloudIdentifierMappingSelError           = objc.RegisterName("error")
 )
 
 func PHCloudIdentifierMappingFromID(id objc.ID) *PHCloudIdentifierMapping {
@@ -36,7 +36,9 @@ func PHCloudIdentifierMappingFromID(id objc.ID) *PHCloudIdentifierMapping {
 // The cloud identifier of the resource found for this local identifier
 func (o *PHCloudIdentifierMapping) CloudIdentifier() *PHCloudIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCloudIdentifierMappingSelCloudIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCloudIdentifierFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *PHCloudIdentifierMapping) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _pHCloudIdentifierMappingSelError)
 	return _ret
 }
-

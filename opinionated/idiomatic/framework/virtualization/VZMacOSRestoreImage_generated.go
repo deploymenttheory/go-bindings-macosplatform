@@ -81,4 +81,3 @@ type MacOSRestoreImageable interface {
 }
 
 var _ MacOSRestoreImageable = (*MacOSRestoreImage)(nil)
-

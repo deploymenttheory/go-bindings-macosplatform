@@ -79,7 +79,9 @@ func (x *RAWProcessingParameter) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
-func (x *RAWProcessingParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return x.inner }
+func (x *RAWProcessingParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return x.inner
+}
 
 // RAWProcessingParameterable is the interface implemented by [RAWProcessingParameter], for mocking and DI.
 type RAWProcessingParameterable interface {
@@ -93,4 +95,3 @@ type RAWProcessingParameterable interface {
 }
 
 var _ RAWProcessingParameterable = (*RAWProcessingParameter)(nil)
-

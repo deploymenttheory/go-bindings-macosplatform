@@ -25,4 +25,3 @@ func MTRBridgedDeviceBasicClusterLeaveEventFromID(id objc.ID) *MTRBridgedDeviceB
 	purego.Track(o)
 	return o
 }
-

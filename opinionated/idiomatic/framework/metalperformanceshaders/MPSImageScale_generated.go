@@ -93,7 +93,9 @@ func (x *ImageScale) SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform
 	x.inner.SetScaleTransform(scaleTransform)
 }
 
-func (x *ImageScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -111,4 +113,3 @@ type ImageScaleable interface {
 }
 
 var _ ImageScaleable = (*ImageScale)(nil)
-

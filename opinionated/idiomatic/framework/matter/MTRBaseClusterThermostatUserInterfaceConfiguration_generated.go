@@ -19,7 +19,9 @@ type MTRBaseClusterThermostatUserInterfaceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterThermostatUserInterfaceConfiguration].
-func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) Unwrap() *raw.MTRBaseClusterThermostatUserInterfaceConfiguration { return x.inner }
+func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) Unwrap() *raw.MTRBaseClusterThermostatUserInterfaceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -647,9 +649,13 @@ func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeC
 	}
 }
 
-func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterThermostatUserInterfaceConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterThermostatUserInterfaceConfigurationable is the interface implemented by [MTRBaseClusterThermostatUserInterfaceConfiguration], for mocking and DI.
 type MTRBaseClusterThermostatUserInterfaceConfigurationable interface {
@@ -701,4 +707,3 @@ type MTRBaseClusterThermostatUserInterfaceConfigurationable interface {
 }
 
 var _ MTRBaseClusterThermostatUserInterfaceConfigurationable = (*MTRBaseClusterThermostatUserInterfaceConfiguration)(nil)
-

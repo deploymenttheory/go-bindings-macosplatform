@@ -56,4 +56,3 @@ type MTRClusterPathable interface {
 }
 
 var _ MTRClusterPathable = (*MTRClusterPath)(nil)
-

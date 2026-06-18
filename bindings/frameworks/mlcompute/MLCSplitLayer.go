@@ -16,12 +16,12 @@ type MLCSplitLayer struct {
 }
 
 var (
-	_clsMLCSplitLayer = _objcClass("MLCSplitLayer")
-	_mLCSplitLayerSelLayerWithSplitCountDimension = objc.RegisterName("layerWithSplitCount:dimension:")
+	_clsMLCSplitLayer                                      = _objcClass("MLCSplitLayer")
+	_mLCSplitLayerSelLayerWithSplitCountDimension          = objc.RegisterName("layerWithSplitCount:dimension:")
 	_mLCSplitLayerSelLayerWithSplitSectionLengthsDimension = objc.RegisterName("layerWithSplitSectionLengths:dimension:")
-	_mLCSplitLayerSelDimension = objc.RegisterName("dimension")
-	_mLCSplitLayerSelSplitCount = objc.RegisterName("splitCount")
-	_mLCSplitLayerSelSplitSectionLengths = objc.RegisterName("splitSectionLengths")
+	_mLCSplitLayerSelDimension                             = objc.RegisterName("dimension")
+	_mLCSplitLayerSelSplitCount                            = objc.RegisterName("splitCount")
+	_mLCSplitLayerSelSplitSectionLengths                   = objc.RegisterName("splitSectionLengths")
 )
 
 func MLCSplitLayerFromID(id objc.ID) *MLCSplitLayer {
@@ -37,14 +37,18 @@ func MLCSplitLayerFromID(id objc.ID) *MLCSplitLayer {
 // @abstract   Create a split layer @param      splitCount  The number of splits. @param      dimension   The dimension along which the tensor should be split. @return     A new split layer
 func MLCSplitLayerLayerWithSplitCountDimension(splitCount uint, dimension uint) *MLCSplitLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSplitLayer), _mLCSplitLayerSelLayerWithSplitCountDimension, splitCount, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSplitLayerFromID(_ret)
 }
 
 // @abstract   Create a split layer @param      splitSectionLengths   Lengths of each split section. @param      dimension             The dimension along which the tensor should be split. @return     A new split layer
 func MLCSplitLayerLayerWithSplitSectionLengthsDimension(splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *MLCSplitLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSplitLayer), _mLCSplitLayerSelLayerWithSplitSectionLengthsDimension, splitSectionLengths, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSplitLayerFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *MLCSplitLayer) SplitSectionLengths() *foundation.NSArray[*foundation.NS
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCSplitLayerSelSplitSectionLengths)
 	return _ret
 }
-

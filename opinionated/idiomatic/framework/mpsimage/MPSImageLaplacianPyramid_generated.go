@@ -87,11 +87,17 @@ func (x *ImageLaplacianPyramid) SetLaplacianScale(laplacianScale float32) {
 	x.inner.SetLaplacianScale(laplacianScale)
 }
 
-func (x *ImageLaplacianPyramid) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid { return x.inner }
+func (x *ImageLaplacianPyramid) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid {
+	return x.inner
+}
 
-func (x *ImageLaplacianPyramid) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImagePyramid }
+func (x *ImageLaplacianPyramid) asImagePyramid() *raw.MPSImagePyramid {
+	return &x.inner.MPSImagePyramid
+}
 
-func (x *ImageLaplacianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageLaplacianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
+}
 
 // ImageLaplacianPyramidable is the interface implemented by [ImageLaplacianPyramid], for mocking and DI.
 type ImageLaplacianPyramidable interface {
@@ -108,4 +114,3 @@ type ImageLaplacianPyramidable interface {
 }
 
 var _ ImageLaplacianPyramidable = (*ImageLaplacianPyramid)(nil)
-

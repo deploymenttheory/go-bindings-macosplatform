@@ -18,13 +18,13 @@ type VNDetectHumanHandPoseRequest struct {
 }
 
 var (
-	_clsVNDetectHumanHandPoseRequest = _objcClass("VNDetectHumanHandPoseRequest")
-	_vNDetectHumanHandPoseRequestSelSupportedJointNamesForRevisionError = objc.RegisterName("supportedJointNamesForRevision:error:")
-	_vNDetectHumanHandPoseRequestSelSupportedJointNamesAndReturnError = objc.RegisterName("supportedJointNamesAndReturnError:")
+	_clsVNDetectHumanHandPoseRequest                                          = _objcClass("VNDetectHumanHandPoseRequest")
+	_vNDetectHumanHandPoseRequestSelSupportedJointNamesForRevisionError       = objc.RegisterName("supportedJointNamesForRevision:error:")
+	_vNDetectHumanHandPoseRequestSelSupportedJointNamesAndReturnError         = objc.RegisterName("supportedJointNamesAndReturnError:")
 	_vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesForRevisionError = objc.RegisterName("supportedJointsGroupNamesForRevision:error:")
-	_vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesAndReturnError = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
-	_vNDetectHumanHandPoseRequestSelMaximumHandCount = objc.RegisterName("maximumHandCount")
-	_vNDetectHumanHandPoseRequestSelSetMaximumHandCount = objc.RegisterName("setMaximumHandCount:")
+	_vNDetectHumanHandPoseRequestSelSupportedJointsGroupNamesAndReturnError   = objc.RegisterName("supportedJointsGroupNamesAndReturnError:")
+	_vNDetectHumanHandPoseRequestSelMaximumHandCount                          = objc.RegisterName("maximumHandCount")
+	_vNDetectHumanHandPoseRequestSelSetMaximumHandCount                       = objc.RegisterName("setMaximumHandCount:")
 )
 
 func VNDetectHumanHandPoseRequestFromID(id objc.ID) *VNDetectHumanHandPoseRequest {
@@ -88,4 +88,3 @@ func (o *VNDetectHumanHandPoseRequest) MaximumHandCount() uint {
 func (o *VNDetectHumanHandPoseRequest) SetMaximumHandCount(maximumHandCount uint) {
 	o.Ptr().Send(_vNDetectHumanHandPoseRequestSelSetMaximumHandCount, maximumHandCount)
 }
-

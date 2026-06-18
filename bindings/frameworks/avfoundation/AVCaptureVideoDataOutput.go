@@ -16,26 +16,26 @@ type AVCaptureVideoDataOutput struct {
 }
 
 var (
-	_clsAVCaptureVideoDataOutput = _objcClass("AVCaptureVideoDataOutput")
-	_aVCaptureVideoDataOutputSelInit = objc.RegisterName("init")
-	_aVCaptureVideoDataOutputSelNew = objc.RegisterName("new")
-	_aVCaptureVideoDataOutputSelSetSampleBufferDelegateQueue = objc.RegisterName("setSampleBufferDelegate:queue:")
-	_aVCaptureVideoDataOutputSelRecommendedVideoSettingsForAssetWriterWithOutputFileType = objc.RegisterName("recommendedVideoSettingsForAssetWriterWithOutputFileType:")
-	_aVCaptureVideoDataOutputSelAvailableVideoCodecTypesForAssetWriterWithOutputFileType = objc.RegisterName("availableVideoCodecTypesForAssetWriterWithOutputFileType:")
-	_aVCaptureVideoDataOutputSelRecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType = objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:")
+	_clsAVCaptureVideoDataOutput                                                                                = _objcClass("AVCaptureVideoDataOutput")
+	_aVCaptureVideoDataOutputSelInit                                                                            = objc.RegisterName("init")
+	_aVCaptureVideoDataOutputSelNew                                                                             = objc.RegisterName("new")
+	_aVCaptureVideoDataOutputSelSetSampleBufferDelegateQueue                                                    = objc.RegisterName("setSampleBufferDelegate:queue:")
+	_aVCaptureVideoDataOutputSelRecommendedVideoSettingsForAssetWriterWithOutputFileType                        = objc.RegisterName("recommendedVideoSettingsForAssetWriterWithOutputFileType:")
+	_aVCaptureVideoDataOutputSelAvailableVideoCodecTypesForAssetWriterWithOutputFileType                        = objc.RegisterName("availableVideoCodecTypesForAssetWriterWithOutputFileType:")
+	_aVCaptureVideoDataOutputSelRecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileType              = objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:")
 	_aVCaptureVideoDataOutputSelRecommendedVideoSettingsForVideoCodecTypeAssetWriterOutputFileTypeOutputFileURL = objc.RegisterName("recommendedVideoSettingsForVideoCodecType:assetWriterOutputFileType:outputFileURL:")
-	_aVCaptureVideoDataOutputSelRecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType = objc.RegisterName("recommendedMovieMetadataForVideoCodecType:assetWriterOutputFileType:")
-	_aVCaptureVideoDataOutputSelSampleBufferDelegate = objc.RegisterName("sampleBufferDelegate")
-	_aVCaptureVideoDataOutputSelSampleBufferCallbackQueue = objc.RegisterName("sampleBufferCallbackQueue")
-	_aVCaptureVideoDataOutputSelVideoSettings = objc.RegisterName("videoSettings")
-	_aVCaptureVideoDataOutputSelSetVideoSettings = objc.RegisterName("setVideoSettings:")
-	_aVCaptureVideoDataOutputSelRecommendedMediaTimeScaleForAssetWriter = objc.RegisterName("recommendedMediaTimeScaleForAssetWriter")
-	_aVCaptureVideoDataOutputSelAvailableVideoCVPixelFormatTypes = objc.RegisterName("availableVideoCVPixelFormatTypes")
-	_aVCaptureVideoDataOutputSelAvailableVideoCodecTypes = objc.RegisterName("availableVideoCodecTypes")
-	_aVCaptureVideoDataOutputSelAlwaysDiscardsLateVideoFrames = objc.RegisterName("alwaysDiscardsLateVideoFrames")
-	_aVCaptureVideoDataOutputSelSetAlwaysDiscardsLateVideoFrames = objc.RegisterName("setAlwaysDiscardsLateVideoFrames:")
-	_aVCaptureVideoDataOutputSelPreservesDynamicHDRMetadata = objc.RegisterName("preservesDynamicHDRMetadata")
-	_aVCaptureVideoDataOutputSelSetPreservesDynamicHDRMetadata = objc.RegisterName("setPreservesDynamicHDRMetadata:")
+	_aVCaptureVideoDataOutputSelRecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType              = objc.RegisterName("recommendedMovieMetadataForVideoCodecType:assetWriterOutputFileType:")
+	_aVCaptureVideoDataOutputSelSampleBufferDelegate                                                            = objc.RegisterName("sampleBufferDelegate")
+	_aVCaptureVideoDataOutputSelSampleBufferCallbackQueue                                                       = objc.RegisterName("sampleBufferCallbackQueue")
+	_aVCaptureVideoDataOutputSelVideoSettings                                                                   = objc.RegisterName("videoSettings")
+	_aVCaptureVideoDataOutputSelSetVideoSettings                                                                = objc.RegisterName("setVideoSettings:")
+	_aVCaptureVideoDataOutputSelRecommendedMediaTimeScaleForAssetWriter                                         = objc.RegisterName("recommendedMediaTimeScaleForAssetWriter")
+	_aVCaptureVideoDataOutputSelAvailableVideoCVPixelFormatTypes                                                = objc.RegisterName("availableVideoCVPixelFormatTypes")
+	_aVCaptureVideoDataOutputSelAvailableVideoCodecTypes                                                        = objc.RegisterName("availableVideoCodecTypes")
+	_aVCaptureVideoDataOutputSelAlwaysDiscardsLateVideoFrames                                                   = objc.RegisterName("alwaysDiscardsLateVideoFrames")
+	_aVCaptureVideoDataOutputSelSetAlwaysDiscardsLateVideoFrames                                                = objc.RegisterName("setAlwaysDiscardsLateVideoFrames:")
+	_aVCaptureVideoDataOutputSelPreservesDynamicHDRMetadata                                                     = objc.RegisterName("preservesDynamicHDRMetadata")
+	_aVCaptureVideoDataOutputSelSetPreservesDynamicHDRMetadata                                                  = objc.RegisterName("setPreservesDynamicHDRMetadata:")
 )
 
 func AVCaptureVideoDataOutputFromID(id objc.ID) *AVCaptureVideoDataOutput {
@@ -50,7 +50,9 @@ func AVCaptureVideoDataOutputFromID(id objc.ID) *AVCaptureVideoDataOutput {
 
 func (o *AVCaptureVideoDataOutput) Init() *AVCaptureVideoDataOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoDataOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoDataOutputFromID(_ret)
 }
 
@@ -88,10 +90,12 @@ func (o *AVCaptureVideoDataOutput) RecommendedVideoSettingsForVideoCodecTypeAsse
 	return _ret
 }
 
-// Recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input. - Parameter videoCodecType: The desired ``AVVideoCodecKey`` to be used for compression (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). - Parameter outputFileType: Specifies the UTI of the file type to be written (see <doc://com.apple.documentation/documentation/avfoundation/avfiletype>). - Returns: A fully populated array of ``AVMetadataItem`` objects compatible with ``AVAssetWriter``. The value of this property is an array of ``AVMetadataItem`` objects representing the collection of top-level metadata to be written in each output file. This array is suitable to use as the ``AVAssetWriter/metadata`` property before you have called ``AVAssetWriter/startWriting``. For more details see <doc://com.apple.documentation/documentation/avfoundation/avassetwriter/startwriting()>. The ``videoCodecType`` string you provide must be present in ``availableVideoCodecTypesForAssetWriterWithOutputFileType:`` array, or an `NSInvalidArgumentException` is thrown. For clients writing files using a ProRes Raw codec type, white balance must be locked (call ``AVCaptureDevice/setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:``) before querying this property, or an `NSIvalidArgumentException` is thrown. - Note: The array of metadata is dependent on the current configuration of the receiver's ``AVCaptureSession`` and its inputs. The array may change when the session's configuration changes. As such, you should configure and start your session first, then query this method.
+// Recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input. - Parameter videoCodecType: The desired “AVVideoCodecKey“ to be used for compression (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). - Parameter outputFileType: Specifies the UTI of the file type to be written (see <doc://com.apple.documentation/documentation/avfoundation/avfiletype>). - Returns: A fully populated array of “AVMetadataItem“ objects compatible with “AVAssetWriter“. The value of this property is an array of “AVMetadataItem“ objects representing the collection of top-level metadata to be written in each output file. This array is suitable to use as the “AVAssetWriter/metadata“ property before you have called “AVAssetWriter/startWriting“. For more details see <doc://com.apple.documentation/documentation/avfoundation/avassetwriter/startwriting()>. The “videoCodecType“ string you provide must be present in “availableVideoCodecTypesForAssetWriterWithOutputFileType:“ array, or an `NSInvalidArgumentException` is thrown. For clients writing files using a ProRes Raw codec type, white balance must be locked (call “AVCaptureDevice/setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:“) before querying this property, or an `NSIvalidArgumentException` is thrown. - Note: The array of metadata is dependent on the current configuration of the receiver's “AVCaptureSession“ and its inputs. The array may change when the session's configuration changes. As such, you should configure and start your session first, then query this method.
 func (o *AVCaptureVideoDataOutput) RecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType(videoCodecType *foundation.NSString, outputFileType *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoDataOutputSelRecommendedMovieMetadataForVideoCodecTypeAssetWriterOutputFileType, videoCodecType.Ptr(), outputFileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -104,7 +108,9 @@ func (o *AVCaptureVideoDataOutput) SampleBufferDelegate() AVCaptureVideoDataOutp
 // @property sampleBufferCallbackQueue @abstract The dispatch queue on which all sample buffer delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
 func (o *AVCaptureVideoDataOutput) SampleBufferCallbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureVideoDataOutputSelSampleBufferCallbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -146,7 +152,7 @@ func (o *AVCaptureVideoDataOutput) SetAlwaysDiscardsLateVideoFrames(alwaysDiscar
 	o.Ptr().Send(_aVCaptureVideoDataOutputSelSetAlwaysDiscardsLateVideoFrames, alwaysDiscardsLateVideoFrames)
 }
 
-// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use ``AVCaptureVideoDataOutput`` with ``AVAssetWriter`` to record HDR movies. You must also set ``kVTCompressionPropertyKey_PreserveDynamicHDRMetadata`` to `true` in the compression settings you pass to your ``AVAssetWriterInput``. These compression settings are represented under the ``AVVideoCompressionPropertiesKey`` sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
+// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer. Set this property to `true` if you wish to use “AVCaptureVideoDataOutput“ with “AVAssetWriter“ to record HDR movies. You must also set “kVTCompressionPropertyKey_PreserveDynamicHDRMetadata“ to `true` in the compression settings you pass to your “AVAssetWriterInput“. These compression settings are represented under the “AVVideoCompressionPropertiesKey“ sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
 func (o *AVCaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureVideoDataOutputSelPreservesDynamicHDRMetadata)
 	return _ret
@@ -155,4 +161,3 @@ func (o *AVCaptureVideoDataOutput) PreservesDynamicHDRMetadata() bool {
 func (o *AVCaptureVideoDataOutput) SetPreservesDynamicHDRMetadata(preservesDynamicHDRMetadata bool) {
 	o.Ptr().Send(_aVCaptureVideoDataOutputSelSetPreservesDynamicHDRMetadata, preservesDynamicHDRMetadata)
 }
-

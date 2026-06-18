@@ -16,11 +16,11 @@ type INMessageReaction struct {
 }
 
 var (
-	_clsINMessageReaction = _objcClass("INMessageReaction")
+	_clsINMessageReaction                                             = _objcClass("INMessageReaction")
 	_iNMessageReactionSelInitWithReactionTypeReactionDescriptionEmoji = objc.RegisterName("initWithReactionType:reactionDescription:emoji:")
-	_iNMessageReactionSelReactionType = objc.RegisterName("reactionType")
-	_iNMessageReactionSelReactionDescription = objc.RegisterName("reactionDescription")
-	_iNMessageReactionSelEmoji = objc.RegisterName("emoji")
+	_iNMessageReactionSelReactionType                                 = objc.RegisterName("reactionType")
+	_iNMessageReactionSelReactionDescription                          = objc.RegisterName("reactionDescription")
+	_iNMessageReactionSelEmoji                                        = objc.RegisterName("emoji")
 )
 
 func INMessageReactionFromID(id objc.ID) *INMessageReaction {
@@ -35,7 +35,9 @@ func INMessageReactionFromID(id objc.ID) *INMessageReaction {
 
 func (o *INMessageReaction) InitWithReactionTypeReactionDescriptionEmoji(reactionType INMessageReactionType, reactionDescription *foundation.NSString, emoji *foundation.NSString) *INMessageReaction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageReactionSelInitWithReactionTypeReactionDescriptionEmoji, reactionType, reactionDescription.Ptr(), emoji.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INMessageReactionFromID(_ret)
 }
 
@@ -46,13 +48,16 @@ func (o *INMessageReaction) ReactionType() INMessageReactionType {
 
 func (o *INMessageReaction) ReactionDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageReactionSelReactionDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INMessageReaction) Emoji() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNMessageReactionSelEmoji)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

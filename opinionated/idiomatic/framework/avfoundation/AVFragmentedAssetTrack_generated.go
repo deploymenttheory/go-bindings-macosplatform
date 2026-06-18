@@ -43,4 +43,3 @@ type FragmentedAssetTrackable interface {
 }
 
 var _ FragmentedAssetTrackable = (*FragmentedAssetTrack)(nil)
-

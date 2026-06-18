@@ -81,4 +81,3 @@ type CollectionLayoutEdgeSpacingable interface {
 }
 
 var _ CollectionLayoutEdgeSpacingable = (*CollectionLayoutEdgeSpacing)(nil)
-

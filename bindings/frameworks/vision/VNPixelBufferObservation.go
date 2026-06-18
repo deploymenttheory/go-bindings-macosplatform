@@ -18,7 +18,7 @@ type VNPixelBufferObservation struct {
 }
 
 var (
-	_clsVNPixelBufferObservation = _objcClass("VNPixelBufferObservation")
+	_clsVNPixelBufferObservation            = _objcClass("VNPixelBufferObservation")
 	_vNPixelBufferObservationSelPixelBuffer = objc.RegisterName("pixelBuffer")
 	_vNPixelBufferObservationSelFeatureName = objc.RegisterName("featureName")
 )
@@ -42,7 +42,8 @@ func (o *VNPixelBufferObservation) PixelBuffer() unsafe.Pointer {
 // @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
 func (o *VNPixelBufferObservation) FeatureName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNPixelBufferObservationSelFeatureName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

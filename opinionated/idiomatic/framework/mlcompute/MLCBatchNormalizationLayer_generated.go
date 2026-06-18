@@ -136,4 +136,3 @@ type BatchNormalizationLayerable interface {
 }
 
 var _ BatchNormalizationLayerable = (*BatchNormalizationLayer)(nil)
-

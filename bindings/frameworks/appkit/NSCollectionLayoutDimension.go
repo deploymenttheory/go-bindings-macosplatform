@@ -16,16 +16,16 @@ type NSCollectionLayoutDimension struct {
 }
 
 var (
-	_clsNSCollectionLayoutDimension = _objcClass("NSCollectionLayoutDimension")
-	_nSCollectionLayoutDimensionSelFractionalWidthDimension = objc.RegisterName("fractionalWidthDimension:")
+	_clsNSCollectionLayoutDimension                          = _objcClass("NSCollectionLayoutDimension")
+	_nSCollectionLayoutDimensionSelFractionalWidthDimension  = objc.RegisterName("fractionalWidthDimension:")
 	_nSCollectionLayoutDimensionSelFractionalHeightDimension = objc.RegisterName("fractionalHeightDimension:")
-	_nSCollectionLayoutDimensionSelAbsoluteDimension = objc.RegisterName("absoluteDimension:")
-	_nSCollectionLayoutDimensionSelEstimatedDimension = objc.RegisterName("estimatedDimension:")
-	_nSCollectionLayoutDimensionSelIsFractionalWidth = objc.RegisterName("isFractionalWidth")
-	_nSCollectionLayoutDimensionSelIsFractionalHeight = objc.RegisterName("isFractionalHeight")
-	_nSCollectionLayoutDimensionSelIsAbsolute = objc.RegisterName("isAbsolute")
-	_nSCollectionLayoutDimensionSelIsEstimated = objc.RegisterName("isEstimated")
-	_nSCollectionLayoutDimensionSelDimension = objc.RegisterName("dimension")
+	_nSCollectionLayoutDimensionSelAbsoluteDimension         = objc.RegisterName("absoluteDimension:")
+	_nSCollectionLayoutDimensionSelEstimatedDimension        = objc.RegisterName("estimatedDimension:")
+	_nSCollectionLayoutDimensionSelIsFractionalWidth         = objc.RegisterName("isFractionalWidth")
+	_nSCollectionLayoutDimensionSelIsFractionalHeight        = objc.RegisterName("isFractionalHeight")
+	_nSCollectionLayoutDimensionSelIsAbsolute                = objc.RegisterName("isAbsolute")
+	_nSCollectionLayoutDimensionSelIsEstimated               = objc.RegisterName("isEstimated")
+	_nSCollectionLayoutDimensionSelDimension                 = objc.RegisterName("dimension")
 )
 
 func NSCollectionLayoutDimensionFromID(id objc.ID) *NSCollectionLayoutDimension {
@@ -40,25 +40,33 @@ func NSCollectionLayoutDimensionFromID(id objc.ID) *NSCollectionLayoutDimension 
 
 func NSCollectionLayoutDimensionFractionalWidthDimension(fractionalWidth float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalWidthDimension, fractionalWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
 func NSCollectionLayoutDimensionFractionalHeightDimension(fractionalHeight float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelFractionalHeightDimension, fractionalHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
 func NSCollectionLayoutDimensionAbsoluteDimension(absoluteDimension float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelAbsoluteDimension, absoluteDimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
 func NSCollectionLayoutDimensionEstimatedDimension(estimatedDimension float64) *NSCollectionLayoutDimension {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutDimension), _nSCollectionLayoutDimensionSelEstimatedDimension, estimatedDimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutDimensionFromID(_ret)
 }
 
@@ -86,4 +94,3 @@ func (o *NSCollectionLayoutDimension) Dimension() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSCollectionLayoutDimensionSelDimension)
 	return _ret
 }
-

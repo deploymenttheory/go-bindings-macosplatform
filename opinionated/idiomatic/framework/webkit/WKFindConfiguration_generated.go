@@ -98,4 +98,3 @@ type WKFindConfigurationable interface {
 }
 
 var _ WKFindConfigurationable = (*WKFindConfiguration)(nil)
-

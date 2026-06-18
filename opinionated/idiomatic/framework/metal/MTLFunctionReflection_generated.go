@@ -59,4 +59,3 @@ type FunctionReflectionable interface {
 }
 
 var _ FunctionReflectionable = (*FunctionReflection)(nil)
-

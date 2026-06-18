@@ -18,12 +18,12 @@ type MPSNNGramMatrixCalculationGradientNode struct {
 }
 
 var (
-	_clsMPSNNGramMatrixCalculationGradientNode = _objcClass("MPSNNGramMatrixCalculationGradientNode")
-	_mPSNNGramMatrixCalculationGradientNodeSelNodeWithSourceGradientSourceImageGradientState = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
-	_mPSNNGramMatrixCalculationGradientNodeSelInitWithSourceGradientSourceImageGradientState = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
+	_clsMPSNNGramMatrixCalculationGradientNode                                                    = _objcClass("MPSNNGramMatrixCalculationGradientNode")
+	_mPSNNGramMatrixCalculationGradientNodeSelNodeWithSourceGradientSourceImageGradientState      = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:")
+	_mPSNNGramMatrixCalculationGradientNodeSelInitWithSourceGradientSourceImageGradientState      = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:")
 	_mPSNNGramMatrixCalculationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateAlpha = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:alpha:")
 	_mPSNNGramMatrixCalculationGradientNodeSelInitWithSourceGradientSourceImageGradientStateAlpha = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:alpha:")
-	_mPSNNGramMatrixCalculationGradientNodeSelAlpha = objc.RegisterName("alpha")
+	_mPSNNGramMatrixCalculationGradientNodeSelAlpha                                               = objc.RegisterName("alpha")
 )
 
 func MPSNNGramMatrixCalculationGradientNodeFromID(id objc.ID) *MPSNNGramMatrixCalculationGradientNode {
@@ -38,25 +38,33 @@ func MPSNNGramMatrixCalculationGradientNodeFromID(id objc.ID) *MPSNNGramMatrixCa
 
 func MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNGramMatrixCalculationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGramMatrixCalculationGradientNode), _mPSNNGramMatrixCalculationGradientNodeSelNodeWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientNodeFromID(_ret)
 }
 
 func (o *MPSNNGramMatrixCalculationGradientNode) InitWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *MPSNNGramMatrixCalculationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationGradientNodeSelInitWithSourceGradientSourceImageGradientState, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientNodeFromID(_ret)
 }
 
 func MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, alpha float32) *MPSNNGramMatrixCalculationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGramMatrixCalculationGradientNode), _mPSNNGramMatrixCalculationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateAlpha, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientNodeFromID(_ret)
 }
 
 func (o *MPSNNGramMatrixCalculationGradientNode) InitWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, alpha float32) *MPSNNGramMatrixCalculationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationGradientNodeSelInitWithSourceGradientSourceImageGradientStateAlpha, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationGradientNodeFromID(_ret)
 }
 
@@ -65,4 +73,3 @@ func (o *MPSNNGramMatrixCalculationGradientNode) Alpha() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPSNNGramMatrixCalculationGradientNodeSelAlpha)
 	return _ret
 }
-

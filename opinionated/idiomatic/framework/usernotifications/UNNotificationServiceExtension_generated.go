@@ -72,4 +72,3 @@ type NotificationServiceExtensionable interface {
 }
 
 var _ NotificationServiceExtensionable = (*NotificationServiceExtension)(nil)
-

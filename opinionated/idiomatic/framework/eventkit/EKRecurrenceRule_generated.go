@@ -176,4 +176,3 @@ type RecurrenceRuleable interface {
 }
 
 var _ RecurrenceRuleable = (*RecurrenceRule)(nil)
-

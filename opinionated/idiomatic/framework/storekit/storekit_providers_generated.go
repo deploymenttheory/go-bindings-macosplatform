@@ -17,4 +17,3 @@ type PaymentProvider interface {
 type RequestProvider interface {
 	asRequest() *raw.SKRequest
 }
-

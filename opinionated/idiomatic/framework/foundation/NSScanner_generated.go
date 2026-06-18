@@ -238,4 +238,3 @@ type Scannerable interface {
 }
 
 var _ Scannerable = (*Scanner)(nil)
-

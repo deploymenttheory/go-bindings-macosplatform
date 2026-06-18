@@ -114,4 +114,3 @@ type PathControlItemable interface {
 }
 
 var _ PathControlItemable = (*PathControlItem)(nil)
-

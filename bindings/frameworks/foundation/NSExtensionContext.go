@@ -17,11 +17,11 @@ type NSExtensionContext struct {
 }
 
 var (
-	_clsNSExtensionContext = _objcClass("NSExtensionContext")
+	_clsNSExtensionContext                                               = _objcClass("NSExtensionContext")
 	_nSExtensionContextSelCompleteRequestReturningItemsCompletionHandler = objc.RegisterName("completeRequestReturningItems:completionHandler:")
-	_nSExtensionContextSelCancelRequestWithError = objc.RegisterName("cancelRequestWithError:")
-	_nSExtensionContextSelOpenURLCompletionHandler = objc.RegisterName("openURL:completionHandler:")
-	_nSExtensionContextSelInputItems = objc.RegisterName("inputItems")
+	_nSExtensionContextSelCancelRequestWithError                         = objc.RegisterName("cancelRequestWithError:")
+	_nSExtensionContextSelOpenURLCompletionHandler                       = objc.RegisterName("openURL:completionHandler:")
+	_nSExtensionContextSelInputItems                                     = objc.RegisterName("inputItems")
 )
 
 func NSExtensionContextFromID(id objc.ID) *NSExtensionContext {
@@ -64,4 +64,3 @@ func (o *NSExtensionContext) InputItems() *NSArray[objc.ID] {
 	_ret := objc.Send[*NSArray[objc.ID]](o.Ptr(), _nSExtensionContextSelInputItems)
 	return _ret
 }
-

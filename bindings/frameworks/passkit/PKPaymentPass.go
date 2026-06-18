@@ -15,7 +15,7 @@ type PKPaymentPass struct {
 }
 
 var (
-	_clsPKPaymentPass = _objcClass("PKPaymentPass")
+	_clsPKPaymentPass                = _objcClass("PKPaymentPass")
 	_pKPaymentPassSelActivationState = objc.RegisterName("activationState")
 )
 
@@ -34,4 +34,3 @@ func (o *PKPaymentPass) ActivationState() PKPaymentPassActivationState {
 	_ret := objc.Send[PKPaymentPassActivationState](o.Ptr(), _pKPaymentPassSelActivationState)
 	return _ret
 }
-

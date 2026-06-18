@@ -77,4 +77,3 @@ type Circleable interface {
 }
 
 var _ Circleable = (*Circle)(nil)
-

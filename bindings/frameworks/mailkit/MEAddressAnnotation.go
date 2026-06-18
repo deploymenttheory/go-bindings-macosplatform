@@ -16,8 +16,8 @@ type MEAddressAnnotation struct {
 }
 
 var (
-	_clsMEAddressAnnotation = _objcClass("MEAddressAnnotation")
-	_mEAddressAnnotationSelErrorWithLocalizedDescription = objc.RegisterName("errorWithLocalizedDescription:")
+	_clsMEAddressAnnotation                                = _objcClass("MEAddressAnnotation")
+	_mEAddressAnnotationSelErrorWithLocalizedDescription   = objc.RegisterName("errorWithLocalizedDescription:")
 	_mEAddressAnnotationSelWarningWithLocalizedDescription = objc.RegisterName("warningWithLocalizedDescription:")
 	_mEAddressAnnotationSelSuccessWithLocalizedDescription = objc.RegisterName("successWithLocalizedDescription:")
 )
@@ -35,21 +35,26 @@ func MEAddressAnnotationFromID(id objc.ID) *MEAddressAnnotation {
 // @brief An annotation to denote a recipeint email address has an error when composing a mail message. @param localizedDescription - A localized string with a brief description of the error that may be presented to the user.
 func MEAddressAnnotationErrorWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelErrorWithLocalizedDescription, localizedDescription.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEAddressAnnotationFromID(_ret)
 }
 
 // @brief An annotation to warn about a recipeint email address when composing a mail message. @param localizedDescription - A localized string with a brief description of the warning may be presented to the user. .
 func MEAddressAnnotationWarningWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelWarningWithLocalizedDescription, localizedDescription.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEAddressAnnotationFromID(_ret)
 }
 
 // @brief An annotation to  denote a valid recipeint email address when composing a mail message. @param localizedDescription - A localized string with a brief description that may be presented to the user. .
 func MEAddressAnnotationSuccessWithLocalizedDescription(localizedDescription *foundation.NSString) *MEAddressAnnotation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEAddressAnnotation), _mEAddressAnnotationSelSuccessWithLocalizedDescription, localizedDescription.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEAddressAnnotationFromID(_ret)
 }
-

@@ -18,13 +18,13 @@ type BENetworkingProcess struct {
 }
 
 var (
-	_clsBENetworkingProcess = _objcClass("BENetworkingProcess")
-	_bENetworkingProcessSelNetworkProcessWithInterruptionHandlerCompletion = objc.RegisterName("networkProcessWithInterruptionHandler:completion:")
+	_clsBENetworkingProcess                                                        = _objcClass("BENetworkingProcess")
+	_bENetworkingProcessSelNetworkProcessWithInterruptionHandlerCompletion         = objc.RegisterName("networkProcessWithInterruptionHandler:completion:")
 	_bENetworkingProcessSelNetworkProcessWithBundleIDInterruptionHandlerCompletion = objc.RegisterName("networkProcessWithBundleID:interruptionHandler:completion:")
-	_bENetworkingProcessSelInvalidate = objc.RegisterName("invalidate")
-	_bENetworkingProcessSelMakeLibXPCConnectionError = objc.RegisterName("makeLibXPCConnectionError:")
-	_bENetworkingProcessSelGrantCapabilityError = objc.RegisterName("grantCapability:error:")
-	_bENetworkingProcessSelGrantCapabilityErrorInvalidationHandler = objc.RegisterName("grantCapability:error:invalidationHandler:")
+	_bENetworkingProcessSelInvalidate                                              = objc.RegisterName("invalidate")
+	_bENetworkingProcessSelMakeLibXPCConnectionError                               = objc.RegisterName("makeLibXPCConnectionError:")
+	_bENetworkingProcessSelGrantCapabilityError                                    = objc.RegisterName("grantCapability:error:")
+	_bENetworkingProcessSelGrantCapabilityErrorInvalidationHandler                 = objc.RegisterName("grantCapability:error:invalidationHandler:")
 )
 
 func BENetworkingProcessFromID(id objc.ID) *BENetworkingProcess {
@@ -37,7 +37,7 @@ func BENetworkingProcessFromID(id objc.ID) *BENetworkingProcess {
 	return o
 }
 
-// Asynchronously finds an existing network extension process or launches a one. This initializer finds an existing networking extension process. If it’s unable to find an existing process, it launches a new extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BENetworkingProcess`` when the extension process has launched or with an error.
+// Asynchronously finds an existing network extension process or launches a one. This initializer finds an existing networking extension process. If it’s unable to find an existing process, it launches a new extension process. - Parameters: - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BENetworkingProcess“ when the extension process has launched or with an error.
 func BENetworkingProcessNetworkProcessWithInterruptionHandlerCompletion(interruptionHandler func(), completion func(*BENetworkingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -59,7 +59,7 @@ func BENetworkingProcessNetworkProcessWithInterruptionHandlerCompletion(interrup
 	objc.ID(_clsBENetworkingProcess).Send(_bENetworkingProcessSelNetworkProcessWithInterruptionHandlerCompletion, __block_interruptionHandler, __block_completion)
 }
 
-// Asynchronously launches a network extension process. This initializer launches a new network extension process with the provided bundle identifier. - Parameters: - `bundleID` : The bundle identifier of the network extension process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new ``BENetworkingProcess`` when the extension process has launched or with an error.
+// Asynchronously launches a network extension process. This initializer launches a new network extension process with the provided bundle identifier. - Parameters: - `bundleID` : The bundle identifier of the network extension process to launch. - `interruptionHandler` : A block that is called if the extension process terminates. - `completion` : A block called with a new “BENetworkingProcess“ when the extension process has launched or with an error.
 func BENetworkingProcessNetworkProcessWithBundleIDInterruptionHandlerCompletion(bundleID *foundation.NSString, interruptionHandler func(), completion func(*BENetworkingProcess, unsafe.Pointer)) {
 	var __block_interruptionHandler objc.Block
 	if interruptionHandler != nil {
@@ -90,7 +90,9 @@ func (o *BENetworkingProcess) Invalidate() {
 func (o *BENetworkingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bENetworkingProcessSelMakeLibXPCConnectionError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -119,4 +121,3 @@ func (o *BENetworkingProcess) GrantCapabilityErrorInvalidationHandler(capability
 	_ret := objc.Send[BEProcessCapabilityGrant](o.Ptr(), _bENetworkingProcessSelGrantCapabilityErrorInvalidationHandler, capability.Ptr(), error_, __block_invalidationHandler)
 	return _ret
 }
-

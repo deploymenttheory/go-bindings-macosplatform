@@ -43,4 +43,3 @@ type ConsoleDeviceable interface {
 }
 
 var _ ConsoleDeviceable = (*ConsoleDevice)(nil)
-

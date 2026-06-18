@@ -17,7 +17,9 @@ type PaymentRequestCouponCodeUpdate struct {
 }
 
 // Unwrap returns the underlying [raw.PKPaymentRequestCouponCodeUpdate].
-func (x *PaymentRequestCouponCodeUpdate) Unwrap() *raw.PKPaymentRequestCouponCodeUpdate { return x.inner }
+func (x *PaymentRequestCouponCodeUpdate) Unwrap() *raw.PKPaymentRequestCouponCodeUpdate {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *PaymentRequestCouponCodeUpdate) WithPaymentSummaryItems(items ...Paymen
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -67,7 +71,9 @@ func (x *PaymentRequestCouponCodeUpdate) WithShippingMethods(items ...*raw.PKShi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -83,7 +89,9 @@ func (x *PaymentRequestCouponCodeUpdate) WithMultiTokenContexts(items ...*raw.PK
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -120,7 +128,9 @@ func (x *PaymentRequestCouponCodeUpdate) SetErrors() error {
 	return x.inner.SetErrors()
 }
 
-func (x *PaymentRequestCouponCodeUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+func (x *PaymentRequestCouponCodeUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate {
+	return &x.inner.PKPaymentRequestUpdate
+}
 
 // PaymentRequestCouponCodeUpdateable is the interface implemented by [PaymentRequestCouponCodeUpdate], for mocking and DI.
 type PaymentRequestCouponCodeUpdateable interface {
@@ -137,4 +147,3 @@ type PaymentRequestCouponCodeUpdateable interface {
 }
 
 var _ PaymentRequestCouponCodeUpdateable = (*PaymentRequestCouponCodeUpdate)(nil)
-

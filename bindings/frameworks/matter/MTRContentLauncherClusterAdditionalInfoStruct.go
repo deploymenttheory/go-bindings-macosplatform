@@ -16,10 +16,10 @@ type MTRContentLauncherClusterAdditionalInfoStruct struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterAdditionalInfoStruct = _objcClass("MTRContentLauncherClusterAdditionalInfoStruct")
-	_mTRContentLauncherClusterAdditionalInfoStructSelName = objc.RegisterName("name")
-	_mTRContentLauncherClusterAdditionalInfoStructSelSetName = objc.RegisterName("setName:")
-	_mTRContentLauncherClusterAdditionalInfoStructSelValue = objc.RegisterName("value")
+	_clsMTRContentLauncherClusterAdditionalInfoStruct         = _objcClass("MTRContentLauncherClusterAdditionalInfoStruct")
+	_mTRContentLauncherClusterAdditionalInfoStructSelName     = objc.RegisterName("name")
+	_mTRContentLauncherClusterAdditionalInfoStructSelSetName  = objc.RegisterName("setName:")
+	_mTRContentLauncherClusterAdditionalInfoStructSelValue    = objc.RegisterName("value")
 	_mTRContentLauncherClusterAdditionalInfoStructSelSetValue = objc.RegisterName("setValue:")
 )
 
@@ -35,7 +35,9 @@ func MTRContentLauncherClusterAdditionalInfoStructFromID(id objc.ID) *MTRContent
 
 func (o *MTRContentLauncherClusterAdditionalInfoStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterAdditionalInfoStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRContentLauncherClusterAdditionalInfoStruct) SetName(name *foundation
 
 func (o *MTRContentLauncherClusterAdditionalInfoStruct) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterAdditionalInfoStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterAdditionalInfoStruct) SetValue(value *foundation.NSString) {
 	o.Ptr().Send(_mTRContentLauncherClusterAdditionalInfoStructSelSetValue, value.Ptr())
 }
-

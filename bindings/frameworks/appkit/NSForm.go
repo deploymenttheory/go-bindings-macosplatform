@@ -17,27 +17,27 @@ type NSForm struct {
 }
 
 var (
-	_clsNSForm = _objcClass("NSForm")
-	_nSFormSelIndexOfSelectedItem = objc.RegisterName("indexOfSelectedItem")
-	_nSFormSelSetEntryWidth = objc.RegisterName("setEntryWidth:")
-	_nSFormSelSetInterlineSpacing = objc.RegisterName("setInterlineSpacing:")
-	_nSFormSelSetBordered = objc.RegisterName("setBordered:")
-	_nSFormSelSetBezeled = objc.RegisterName("setBezeled:")
-	_nSFormSelSetTitleAlignment = objc.RegisterName("setTitleAlignment:")
-	_nSFormSelSetTextAlignment = objc.RegisterName("setTextAlignment:")
-	_nSFormSelSetTitleFont = objc.RegisterName("setTitleFont:")
-	_nSFormSelSetTextFont = objc.RegisterName("setTextFont:")
-	_nSFormSelCellAtIndex = objc.RegisterName("cellAtIndex:")
-	_nSFormSelDrawCellAtIndex = objc.RegisterName("drawCellAtIndex:")
-	_nSFormSelAddEntry = objc.RegisterName("addEntry:")
-	_nSFormSelInsertEntryAtIndex = objc.RegisterName("insertEntry:atIndex:")
-	_nSFormSelRemoveEntryAtIndex = objc.RegisterName("removeEntryAtIndex:")
-	_nSFormSelIndexOfCellWithTag = objc.RegisterName("indexOfCellWithTag:")
-	_nSFormSelSelectTextAtIndex = objc.RegisterName("selectTextAtIndex:")
+	_clsNSForm                             = _objcClass("NSForm")
+	_nSFormSelIndexOfSelectedItem          = objc.RegisterName("indexOfSelectedItem")
+	_nSFormSelSetEntryWidth                = objc.RegisterName("setEntryWidth:")
+	_nSFormSelSetInterlineSpacing          = objc.RegisterName("setInterlineSpacing:")
+	_nSFormSelSetBordered                  = objc.RegisterName("setBordered:")
+	_nSFormSelSetBezeled                   = objc.RegisterName("setBezeled:")
+	_nSFormSelSetTitleAlignment            = objc.RegisterName("setTitleAlignment:")
+	_nSFormSelSetTextAlignment             = objc.RegisterName("setTextAlignment:")
+	_nSFormSelSetTitleFont                 = objc.RegisterName("setTitleFont:")
+	_nSFormSelSetTextFont                  = objc.RegisterName("setTextFont:")
+	_nSFormSelCellAtIndex                  = objc.RegisterName("cellAtIndex:")
+	_nSFormSelDrawCellAtIndex              = objc.RegisterName("drawCellAtIndex:")
+	_nSFormSelAddEntry                     = objc.RegisterName("addEntry:")
+	_nSFormSelInsertEntryAtIndex           = objc.RegisterName("insertEntry:atIndex:")
+	_nSFormSelRemoveEntryAtIndex           = objc.RegisterName("removeEntryAtIndex:")
+	_nSFormSelIndexOfCellWithTag           = objc.RegisterName("indexOfCellWithTag:")
+	_nSFormSelSelectTextAtIndex            = objc.RegisterName("selectTextAtIndex:")
 	_nSFormSelSetTitleBaseWritingDirection = objc.RegisterName("setTitleBaseWritingDirection:")
-	_nSFormSelSetTextBaseWritingDirection = objc.RegisterName("setTextBaseWritingDirection:")
-	_nSFormSelSetPreferredTextFieldWidth = objc.RegisterName("setPreferredTextFieldWidth:")
-	_nSFormSelPreferredTextFieldWidth = objc.RegisterName("preferredTextFieldWidth")
+	_nSFormSelSetTextBaseWritingDirection  = objc.RegisterName("setTextBaseWritingDirection:")
+	_nSFormSelSetPreferredTextFieldWidth   = objc.RegisterName("setPreferredTextFieldWidth:")
+	_nSFormSelPreferredTextFieldWidth      = objc.RegisterName("preferredTextFieldWidth")
 )
 
 func NSFormFromID(id objc.ID) *NSForm {
@@ -100,13 +100,17 @@ func (o *NSForm) DrawCellAtIndex(index int) {
 
 func (o *NSForm) AddEntry(title *foundation.NSString) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormSelAddEntry, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFormCellFromID(_ret)
 }
 
 func (o *NSForm) InsertEntryAtIndex(title *foundation.NSString, index int) *NSFormCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFormSelInsertEntryAtIndex, title.Ptr(), index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFormCellFromID(_ret)
 }
 
@@ -139,4 +143,3 @@ func (o *NSForm) PreferredTextFieldWidth() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSFormSelPreferredTextFieldWidth)
 	return _ret
 }
-

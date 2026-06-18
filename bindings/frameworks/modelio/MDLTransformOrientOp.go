@@ -16,8 +16,8 @@ type MDLTransformOrientOp struct {
 }
 
 var (
-	_clsMDLTransformOrientOp = _objcClass("MDLTransformOrientOp")
-	_mDLTransformOrientOpSelName = objc.RegisterName("name")
+	_clsMDLTransformOrientOp              = _objcClass("MDLTransformOrientOp")
+	_mDLTransformOrientOpSelName          = objc.RegisterName("name")
 	_mDLTransformOrientOpSelAnimatedValue = objc.RegisterName("animatedValue")
 )
 
@@ -33,13 +33,16 @@ func MDLTransformOrientOpFromID(id objc.ID) *MDLTransformOrientOp {
 
 func (o *MDLTransformOrientOp) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformOrientOpSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLTransformOrientOp) AnimatedValue() *MDLAnimatedQuaternion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformOrientOpSelAnimatedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedQuaternionFromID(_ret)
 }
-

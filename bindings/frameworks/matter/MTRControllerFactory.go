@@ -16,13 +16,13 @@ type MTRControllerFactory struct {
 }
 
 var (
-	_clsMTRControllerFactory = _objcClass("MTRControllerFactory")
-	_mTRControllerFactorySelSharedInstance = objc.RegisterName("sharedInstance")
-	_mTRControllerFactorySelStartup = objc.RegisterName("startup:")
-	_mTRControllerFactorySelShutdown = objc.RegisterName("shutdown")
+	_clsMTRControllerFactory                                = _objcClass("MTRControllerFactory")
+	_mTRControllerFactorySelSharedInstance                  = objc.RegisterName("sharedInstance")
+	_mTRControllerFactorySelStartup                         = objc.RegisterName("startup:")
+	_mTRControllerFactorySelShutdown                        = objc.RegisterName("shutdown")
 	_mTRControllerFactorySelStartControllerOnExistingFabric = objc.RegisterName("startControllerOnExistingFabric:")
-	_mTRControllerFactorySelStartControllerOnNewFabric = objc.RegisterName("startControllerOnNewFabric:")
-	_mTRControllerFactorySelIsRunning = objc.RegisterName("isRunning")
+	_mTRControllerFactorySelStartControllerOnNewFabric      = objc.RegisterName("startControllerOnNewFabric:")
+	_mTRControllerFactorySelIsRunning                       = objc.RegisterName("isRunning")
 )
 
 func MTRControllerFactoryFromID(id objc.ID) *MTRControllerFactory {
@@ -37,7 +37,9 @@ func MTRControllerFactoryFromID(id objc.ID) *MTRControllerFactory {
 
 func MTRControllerFactorySharedInstance() *MTRControllerFactory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRControllerFactory), _mTRControllerFactorySelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRControllerFactoryFromID(_ret)
 }
 
@@ -52,13 +54,17 @@ func (o *MTRControllerFactory) Shutdown() {
 
 func (o *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRControllerFactorySelStartControllerOnExistingFabric, startupParams.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFromID(_ret)
 }
 
 func (o *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRControllerFactorySelStartControllerOnNewFabric, startupParams.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *MTRControllerFactory) IsRunning() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTRControllerFactorySelIsRunning)
 	return _ret
 }
-

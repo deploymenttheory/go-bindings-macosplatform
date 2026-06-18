@@ -166,4 +166,3 @@ type MorphologyCustomPronounable interface {
 }
 
 var _ MorphologyCustomPronounable = (*MorphologyCustomPronoun)(nil)
-

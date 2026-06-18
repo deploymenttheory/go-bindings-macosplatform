@@ -19,14 +19,14 @@ type AVExternalSyncDevice struct {
 }
 
 var (
-	_clsAVExternalSyncDevice = _objcClass("AVExternalSyncDevice")
-	_aVExternalSyncDeviceSelStatus = objc.RegisterName("status")
-	_aVExternalSyncDeviceSelClock = objc.RegisterName("clock")
-	_aVExternalSyncDeviceSelSignalCompensationDelay = objc.RegisterName("signalCompensationDelay")
+	_clsAVExternalSyncDevice                           = _objcClass("AVExternalSyncDevice")
+	_aVExternalSyncDeviceSelStatus                     = objc.RegisterName("status")
+	_aVExternalSyncDeviceSelClock                      = objc.RegisterName("clock")
+	_aVExternalSyncDeviceSelSignalCompensationDelay    = objc.RegisterName("signalCompensationDelay")
 	_aVExternalSyncDeviceSelSetSignalCompensationDelay = objc.RegisterName("setSignalCompensationDelay:")
-	_aVExternalSyncDeviceSelUuid = objc.RegisterName("uuid")
-	_aVExternalSyncDeviceSelVendorID = objc.RegisterName("vendorID")
-	_aVExternalSyncDeviceSelProductID = objc.RegisterName("productID")
+	_aVExternalSyncDeviceSelUuid                       = objc.RegisterName("uuid")
+	_aVExternalSyncDeviceSelVendorID                   = objc.RegisterName("vendorID")
+	_aVExternalSyncDeviceSelProductID                  = objc.RegisterName("productID")
 )
 
 func AVExternalSyncDeviceFromID(id objc.ID) *AVExternalSyncDevice {
@@ -45,7 +45,7 @@ func (o *AVExternalSyncDevice) Status() AVExternalSyncDeviceStatus {
 	return _ret
 }
 
-// A clock representing the source of time from the external sync device. This property returns `NULL` until the ``status`` reaches ``AVExternalSyncDeviceStatusActiveSync``.
+// A clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
 func (o *AVExternalSyncDevice) Clock() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVExternalSyncDeviceSelClock)
 	return _ret
@@ -64,7 +64,9 @@ func (o *AVExternalSyncDevice) SetSignalCompensationDelay(signalCompensationDela
 // A unique identifier for an external sync device. Use this property to select a specific external sync device.
 func (o *AVExternalSyncDevice) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalSyncDeviceSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -74,9 +76,8 @@ func (o *AVExternalSyncDevice) VendorID() uint {
 	return _ret
 }
 
-// The USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the ``vendorID`` to determine a specific product.
+// The USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
 func (o *AVExternalSyncDevice) ProductID() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVExternalSyncDeviceSelProductID)
 	return _ret
 }
-

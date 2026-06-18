@@ -17,4 +17,3 @@ type HostIOSourceProvider interface {
 type HostObjectProvider interface {
 	asHostObject() *raw.IOUSBHostObject
 }
-

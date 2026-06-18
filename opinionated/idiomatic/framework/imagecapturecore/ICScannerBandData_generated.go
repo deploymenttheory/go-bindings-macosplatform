@@ -120,4 +120,3 @@ type ScannerBandDataable interface {
 }
 
 var _ ScannerBandDataable = (*ScannerBandData)(nil)
-

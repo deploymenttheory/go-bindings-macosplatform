@@ -156,4 +156,3 @@ type MeasurementFormatterable interface {
 }
 
 var _ MeasurementFormatterable = (*MeasurementFormatter)(nil)
-

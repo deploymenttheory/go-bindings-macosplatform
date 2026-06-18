@@ -11,12 +11,12 @@ import "fmt"
 type Compression_algorithm int64
 
 const (
-	COMPRESSION_LZ4 Compression_algorithm = 256
-	COMPRESSION_ZLIB Compression_algorithm = 517
-	COMPRESSION_LZMA Compression_algorithm = 774
-	COMPRESSION_LZ4_RAW Compression_algorithm = 257
-	COMPRESSION_BROTLI Compression_algorithm = 2818
-	COMPRESSION_LZFSE Compression_algorithm = 2049
+	COMPRESSION_LZ4      Compression_algorithm = 256
+	COMPRESSION_ZLIB     Compression_algorithm = 517
+	COMPRESSION_LZMA     Compression_algorithm = 774
+	COMPRESSION_LZ4_RAW  Compression_algorithm = 257
+	COMPRESSION_BROTLI   Compression_algorithm = 2818
+	COMPRESSION_LZFSE    Compression_algorithm = 2049
 	COMPRESSION_LZBITMAP Compression_algorithm = 1794
 )
 
@@ -80,9 +80,9 @@ func (i Compression_algorithm) isMultiValue() bool {
 type Compression_status int64
 
 const (
-	COMPRESSION_STATUS_OK Compression_status = 0
+	COMPRESSION_STATUS_OK    Compression_status = 0
 	COMPRESSION_STATUS_ERROR Compression_status = -1
-	COMPRESSION_STATUS_END Compression_status = 1
+	COMPRESSION_STATUS_END   Compression_status = 1
 )
 
 func (i Compression_status) String() string {
@@ -207,4 +207,3 @@ func SerializeCompression_stream_operation(values []Compression_stream_operation
 func (i Compression_stream_operation) isMultiValue() bool {
 	return false
 }
-

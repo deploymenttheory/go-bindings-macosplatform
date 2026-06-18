@@ -57,4 +57,3 @@ type SyncEngineSendChangesContextable interface {
 }
 
 var _ SyncEngineSendChangesContextable = (*SyncEngineSendChangesContext)(nil)
-

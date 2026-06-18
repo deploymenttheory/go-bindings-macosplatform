@@ -18,7 +18,7 @@ type CIRenderTask struct {
 }
 
 var (
-	_clsCIRenderTask = _objcClass("CIRenderTask")
+	_clsCIRenderTask                                 = _objcClass("CIRenderTask")
 	_cIRenderTaskSelWaitUntilCompletedAndReturnError = objc.RegisterName("waitUntilCompletedAndReturnError:")
 )
 
@@ -35,10 +35,11 @@ func CIRenderTaskFromID(id objc.ID) *CIRenderTask {
 func (o *CIRenderTask) WaitUntilCompletedAndReturnError() (*CIRenderInfo, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderTaskSelWaitUntilCompletedAndReturnError, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return CIRenderInfoFromID(_ret), nil
 }
-

@@ -57,7 +57,9 @@ func (x *ImageErode) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode
 
 func (x *ImageErode) asImageDilate() *raw.MPSImageDilate { return &x.inner.MPSImageDilate }
 
-func (x *ImageErode) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel }
+func (x *ImageErode) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageDilate.MPSUnaryImageKernel
+}
 
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
@@ -68,4 +70,3 @@ type ImageErodeable interface {
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)
-

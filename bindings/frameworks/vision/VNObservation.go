@@ -17,10 +17,10 @@ type VNObservation struct {
 }
 
 var (
-	_clsVNObservation = _objcClass("VNObservation")
-	_vNObservationSelUuid = objc.RegisterName("uuid")
+	_clsVNObservation           = _objcClass("VNObservation")
+	_vNObservationSelUuid       = objc.RegisterName("uuid")
 	_vNObservationSelConfidence = objc.RegisterName("confidence")
-	_vNObservationSelTimeRange = objc.RegisterName("timeRange")
+	_vNObservationSelTimeRange  = objc.RegisterName("timeRange")
 )
 
 func VNObservationFromID(id objc.ID) *VNObservation {
@@ -36,7 +36,9 @@ func VNObservationFromID(id objc.ID) *VNObservation {
 // @brief The unique identifier assigned to an observation.
 func (o *VNObservation) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNObservationSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *VNObservation) TimeRange() coremedia.CMTimeRange {
 	_ret := objc.Send[coremedia.CMTimeRange](o.Ptr(), _vNObservationSelTimeRange)
 	return _ret
 }
-

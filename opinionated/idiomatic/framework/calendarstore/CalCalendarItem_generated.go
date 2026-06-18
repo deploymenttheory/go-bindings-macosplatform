@@ -197,4 +197,3 @@ type CalCalendarItemable interface {
 }
 
 var _ CalCalendarItemable = (*CalCalendarItem)(nil)
-

@@ -16,14 +16,14 @@ type DOMHTMLParamElement struct {
 }
 
 var (
-	_clsDOMHTMLParamElement = _objcClass("DOMHTMLParamElement")
-	_dOMHTMLParamElementSelName = objc.RegisterName("name")
-	_dOMHTMLParamElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLParamElementSelType = objc.RegisterName("type")
-	_dOMHTMLParamElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLParamElementSelValue = objc.RegisterName("value")
-	_dOMHTMLParamElementSelSetValue = objc.RegisterName("setValue:")
-	_dOMHTMLParamElementSelValueType = objc.RegisterName("valueType")
+	_clsDOMHTMLParamElement             = _objcClass("DOMHTMLParamElement")
+	_dOMHTMLParamElementSelName         = objc.RegisterName("name")
+	_dOMHTMLParamElementSelSetName      = objc.RegisterName("setName:")
+	_dOMHTMLParamElementSelType         = objc.RegisterName("type")
+	_dOMHTMLParamElementSelSetType      = objc.RegisterName("setType:")
+	_dOMHTMLParamElementSelValue        = objc.RegisterName("value")
+	_dOMHTMLParamElementSelSetValue     = objc.RegisterName("setValue:")
+	_dOMHTMLParamElementSelValueType    = objc.RegisterName("valueType")
 	_dOMHTMLParamElementSelSetValueType = objc.RegisterName("setValueType:")
 )
 
@@ -39,7 +39,9 @@ func DOMHTMLParamElementFromID(id objc.ID) *DOMHTMLParamElement {
 
 func (o *DOMHTMLParamElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLParamElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *DOMHTMLParamElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLParamElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLParamElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *DOMHTMLParamElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLParamElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLParamElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *DOMHTMLParamElement) SetValue(value *foundation.NSString) {
 
 func (o *DOMHTMLParamElement) ValueType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLParamElementSelValueType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLParamElement) SetValueType(valueType *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLParamElementSelSetValueType, valueType.Ptr())
 }
-

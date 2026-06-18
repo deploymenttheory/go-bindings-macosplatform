@@ -229,4 +229,3 @@ func TISRegisterInputSource(location objc.ID) error {
 	}
 	return nil
 }
-

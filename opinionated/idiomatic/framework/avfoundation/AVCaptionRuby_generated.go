@@ -73,4 +73,3 @@ type CaptionRubyable interface {
 }
 
 var _ CaptionRubyable = (*CaptionRuby)(nil)
-

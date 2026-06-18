@@ -16,22 +16,22 @@ type IOBluetoothDeviceInquiry struct {
 }
 
 var (
-	_clsIOBluetoothDeviceInquiry = _objcClass("IOBluetoothDeviceInquiry")
-	_iOBluetoothDeviceInquirySelInquiryWithDelegate = objc.RegisterName("inquiryWithDelegate:")
-	_iOBluetoothDeviceInquirySelInitWithDelegate = objc.RegisterName("initWithDelegate:")
-	_iOBluetoothDeviceInquirySelStart = objc.RegisterName("start")
-	_iOBluetoothDeviceInquirySelStop = objc.RegisterName("stop")
-	_iOBluetoothDeviceInquirySelFoundDevices = objc.RegisterName("foundDevices")
-	_iOBluetoothDeviceInquirySelClearFoundDevices = objc.RegisterName("clearFoundDevices")
+	_clsIOBluetoothDeviceInquiry                                                  = _objcClass("IOBluetoothDeviceInquiry")
+	_iOBluetoothDeviceInquirySelInquiryWithDelegate                               = objc.RegisterName("inquiryWithDelegate:")
+	_iOBluetoothDeviceInquirySelInitWithDelegate                                  = objc.RegisterName("initWithDelegate:")
+	_iOBluetoothDeviceInquirySelStart                                             = objc.RegisterName("start")
+	_iOBluetoothDeviceInquirySelStop                                              = objc.RegisterName("stop")
+	_iOBluetoothDeviceInquirySelFoundDevices                                      = objc.RegisterName("foundDevices")
+	_iOBluetoothDeviceInquirySelClearFoundDevices                                 = objc.RegisterName("clearFoundDevices")
 	_iOBluetoothDeviceInquirySelSetSearchCriteriaMajorDeviceClassMinorDeviceClass = objc.RegisterName("setSearchCriteria:majorDeviceClass:minorDeviceClass:")
-	_iOBluetoothDeviceInquirySelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothDeviceInquirySelSetDelegate = objc.RegisterName("setDelegate:")
-	_iOBluetoothDeviceInquirySelInquiryLength = objc.RegisterName("inquiryLength")
-	_iOBluetoothDeviceInquirySelSetInquiryLength = objc.RegisterName("setInquiryLength:")
-	_iOBluetoothDeviceInquirySelSearchType = objc.RegisterName("searchType")
-	_iOBluetoothDeviceInquirySelSetSearchType = objc.RegisterName("setSearchType:")
-	_iOBluetoothDeviceInquirySelUpdateNewDeviceNames = objc.RegisterName("updateNewDeviceNames")
-	_iOBluetoothDeviceInquirySelSetUpdateNewDeviceNames = objc.RegisterName("setUpdateNewDeviceNames:")
+	_iOBluetoothDeviceInquirySelDelegate                                          = objc.RegisterName("delegate")
+	_iOBluetoothDeviceInquirySelSetDelegate                                       = objc.RegisterName("setDelegate:")
+	_iOBluetoothDeviceInquirySelInquiryLength                                     = objc.RegisterName("inquiryLength")
+	_iOBluetoothDeviceInquirySelSetInquiryLength                                  = objc.RegisterName("setInquiryLength:")
+	_iOBluetoothDeviceInquirySelSearchType                                        = objc.RegisterName("searchType")
+	_iOBluetoothDeviceInquirySelSetSearchType                                     = objc.RegisterName("setSearchType:")
+	_iOBluetoothDeviceInquirySelUpdateNewDeviceNames                              = objc.RegisterName("updateNewDeviceNames")
+	_iOBluetoothDeviceInquirySelSetUpdateNewDeviceNames                           = objc.RegisterName("setUpdateNewDeviceNames:")
 )
 
 func IOBluetoothDeviceInquiryFromID(id objc.ID) *IOBluetoothDeviceInquiry {
@@ -46,13 +46,17 @@ func IOBluetoothDeviceInquiryFromID(id objc.ID) *IOBluetoothDeviceInquiry {
 
 func IOBluetoothDeviceInquiryInquiryWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothDeviceInquiry), _iOBluetoothDeviceInquirySelInquiryWithDelegate, delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceInquiryFromID(_ret)
 }
 
 func (o *IOBluetoothDeviceInquiry) InitWithDelegate(delegate objc.ID) *IOBluetoothDeviceInquiry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothDeviceInquirySelInitWithDelegate, delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceInquiryFromID(_ret)
 }
 
@@ -114,4 +118,3 @@ func (o *IOBluetoothDeviceInquiry) UpdateNewDeviceNames() bool {
 func (o *IOBluetoothDeviceInquiry) SetUpdateNewDeviceNames(updateNewDeviceNames bool) {
 	o.Ptr().Send(_iOBluetoothDeviceInquirySelSetUpdateNewDeviceNames, updateNewDeviceNames)
 }
-

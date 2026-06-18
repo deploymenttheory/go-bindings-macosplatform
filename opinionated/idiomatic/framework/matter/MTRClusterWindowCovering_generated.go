@@ -290,9 +290,13 @@ func (x *MTRClusterWindowCovering) GoToTiltPercentageWithParamsExpectedValuesExp
 	x.inner.GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterWindowCovering) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterWindowCovering) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterWindowCovering) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterWindowCovering) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterWindowCoveringable is the interface implemented by [MTRClusterWindowCovering], for mocking and DI.
 type MTRClusterWindowCoveringable interface {
@@ -349,4 +353,3 @@ type MTRClusterWindowCoveringable interface {
 }
 
 var _ MTRClusterWindowCoveringable = (*MTRClusterWindowCovering)(nil)
-

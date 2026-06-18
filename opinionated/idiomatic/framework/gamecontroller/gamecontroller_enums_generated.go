@@ -12,10 +12,10 @@ type GCControllerPlayerIndex int64
 
 const (
 	GCControllerPlayerIndexUnset GCControllerPlayerIndex = -1
-	GCControllerPlayerIndex1 GCControllerPlayerIndex = 0
-	GCControllerPlayerIndex2 GCControllerPlayerIndex = 1
-	GCControllerPlayerIndex3 GCControllerPlayerIndex = 2
-	GCControllerPlayerIndex4 GCControllerPlayerIndex = 3
+	GCControllerPlayerIndex1     GCControllerPlayerIndex = 0
+	GCControllerPlayerIndex2     GCControllerPlayerIndex = 1
+	GCControllerPlayerIndex3     GCControllerPlayerIndex = 2
+	GCControllerPlayerIndex4     GCControllerPlayerIndex = 3
 )
 
 func (e GCControllerPlayerIndex) String() string {
@@ -38,10 +38,10 @@ func (e GCControllerPlayerIndex) String() string {
 type GCDeviceBatteryState int64
 
 const (
-	GCDeviceBatteryStateUnknown GCDeviceBatteryState = -1
+	GCDeviceBatteryStateUnknown     GCDeviceBatteryState = -1
 	GCDeviceBatteryStateDischarging GCDeviceBatteryState = 0
-	GCDeviceBatteryStateCharging GCDeviceBatteryState = 1
-	GCDeviceBatteryStateFull GCDeviceBatteryState = 2
+	GCDeviceBatteryStateCharging    GCDeviceBatteryState = 1
+	GCDeviceBatteryStateFull        GCDeviceBatteryState = 2
 )
 
 func (e GCDeviceBatteryState) String() string {
@@ -174,8 +174,8 @@ func (e GCSystemGestureState) String() string {
 type GCTouchState int64
 
 const (
-	GCTouchStateUp GCTouchState = 0
-	GCTouchStateDown GCTouchState = 1
+	GCTouchStateUp     GCTouchState = 0
+	GCTouchStateDown   GCTouchState = 1
 	GCTouchStateMoving GCTouchState = 2
 )
 
@@ -191,4 +191,3 @@ func (e GCTouchState) String() string {
 		return fmt.Sprintf("GCTouchState(%d)", int64(e))
 	}
 }
-

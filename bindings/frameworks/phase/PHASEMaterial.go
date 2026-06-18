@@ -16,7 +16,7 @@ type PHASEMaterial struct {
 }
 
 var (
-	_clsPHASEMaterial = _objcClass("PHASEMaterial")
+	_clsPHASEMaterial                     = _objcClass("PHASEMaterial")
 	_pHASEMaterialSelInitWithEnginePreset = objc.RegisterName("initWithEngine:preset:")
 )
 
@@ -33,7 +33,8 @@ func PHASEMaterialFromID(id objc.ID) *PHASEMaterial {
 // @method initWithEngine:preset @abstract Initialize a new material from a preset.
 func (o *PHASEMaterial) InitWithEnginePreset(engine *PHASEEngine, preset PHASEMaterialPreset) *PHASEMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMaterialSelInitWithEnginePreset, engine.Ptr(), preset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMaterialFromID(_ret)
 }
-

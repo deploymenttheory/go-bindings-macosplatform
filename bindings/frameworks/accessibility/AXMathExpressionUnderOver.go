@@ -15,11 +15,11 @@ type AXMathExpressionUnderOver struct {
 }
 
 var (
-	_clsAXMathExpressionUnderOver = _objcClass("AXMathExpressionUnderOver")
+	_clsAXMathExpressionUnderOver                                                    = _objcClass("AXMathExpressionUnderOver")
 	_aXMathExpressionUnderOverSelInitWithBaseExpressionUnderExpressionOverExpression = objc.RegisterName("initWithBaseExpression:underExpression:overExpression:")
-	_aXMathExpressionUnderOverSelBaseExpression = objc.RegisterName("baseExpression")
-	_aXMathExpressionUnderOverSelUnderExpression = objc.RegisterName("underExpression")
-	_aXMathExpressionUnderOverSelOverExpression = objc.RegisterName("overExpression")
+	_aXMathExpressionUnderOverSelBaseExpression                                      = objc.RegisterName("baseExpression")
+	_aXMathExpressionUnderOverSelUnderExpression                                     = objc.RegisterName("underExpression")
+	_aXMathExpressionUnderOverSelOverExpression                                      = objc.RegisterName("overExpression")
 )
 
 func AXMathExpressionUnderOverFromID(id objc.ID) *AXMathExpressionUnderOver {
@@ -34,25 +34,32 @@ func AXMathExpressionUnderOverFromID(id objc.ID) *AXMathExpressionUnderOver {
 
 func (o *AXMathExpressionUnderOver) InitWithBaseExpressionUnderExpressionOverExpression(baseExpression *AXMathExpression, underExpression *AXMathExpression, overExpression *AXMathExpression) *AXMathExpressionUnderOver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionUnderOverSelInitWithBaseExpressionUnderExpressionOverExpression, baseExpression.Ptr(), underExpression.Ptr(), overExpression.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionUnderOverFromID(_ret)
 }
 
 func (o *AXMathExpressionUnderOver) BaseExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionUnderOverSelBaseExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
 
 func (o *AXMathExpressionUnderOver) UnderExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionUnderOverSelUnderExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
 
 func (o *AXMathExpressionUnderOver) OverExpression() *AXMathExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionUnderOverSelOverExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionFromID(_ret)
 }
-

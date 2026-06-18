@@ -134,4 +134,3 @@ func Kccreatekeychain(password string, keychain unsafe.Pointer) int {
 func Kcunlock(keychain unsafe.Pointer, password string) int {
 	return raw.Kcunlock(keychain, password)
 }
-

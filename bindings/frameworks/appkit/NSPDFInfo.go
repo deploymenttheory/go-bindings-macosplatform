@@ -17,18 +17,18 @@ type NSPDFInfo struct {
 }
 
 var (
-	_clsNSPDFInfo = _objcClass("NSPDFInfo")
-	_nSPDFInfoSelURL = objc.RegisterName("URL")
-	_nSPDFInfoSelSetURL = objc.RegisterName("setURL:")
-	_nSPDFInfoSelIsFileExtensionHidden = objc.RegisterName("isFileExtensionHidden")
+	_clsNSPDFInfo                       = _objcClass("NSPDFInfo")
+	_nSPDFInfoSelURL                    = objc.RegisterName("URL")
+	_nSPDFInfoSelSetURL                 = objc.RegisterName("setURL:")
+	_nSPDFInfoSelIsFileExtensionHidden  = objc.RegisterName("isFileExtensionHidden")
 	_nSPDFInfoSelSetFileExtensionHidden = objc.RegisterName("setFileExtensionHidden:")
-	_nSPDFInfoSelTagNames = objc.RegisterName("tagNames")
-	_nSPDFInfoSelSetTagNames = objc.RegisterName("setTagNames:")
-	_nSPDFInfoSelOrientation = objc.RegisterName("orientation")
-	_nSPDFInfoSelSetOrientation = objc.RegisterName("setOrientation:")
-	_nSPDFInfoSelPaperSize = objc.RegisterName("paperSize")
-	_nSPDFInfoSelSetPaperSize = objc.RegisterName("setPaperSize:")
-	_nSPDFInfoSelAttributes = objc.RegisterName("attributes")
+	_nSPDFInfoSelTagNames               = objc.RegisterName("tagNames")
+	_nSPDFInfoSelSetTagNames            = objc.RegisterName("setTagNames:")
+	_nSPDFInfoSelOrientation            = objc.RegisterName("orientation")
+	_nSPDFInfoSelSetOrientation         = objc.RegisterName("setOrientation:")
+	_nSPDFInfoSelPaperSize              = objc.RegisterName("paperSize")
+	_nSPDFInfoSelSetPaperSize           = objc.RegisterName("setPaperSize:")
+	_nSPDFInfoSelAttributes             = objc.RegisterName("attributes")
 )
 
 func NSPDFInfoFromID(id objc.ID) *NSPDFInfo {
@@ -43,7 +43,9 @@ func NSPDFInfoFromID(id objc.ID) *NSPDFInfo {
 
 func (o *NSPDFInfo) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFInfoSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -91,4 +93,3 @@ func (o *NSPDFInfo) Attributes() *foundation.NSMutableDictionary[*foundation.NSS
 	_ret := objc.Send[*foundation.NSMutableDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _nSPDFInfoSelAttributes)
 	return _ret
 }
-

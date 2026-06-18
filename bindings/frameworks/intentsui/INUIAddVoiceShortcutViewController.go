@@ -17,10 +17,10 @@ type INUIAddVoiceShortcutViewController struct {
 }
 
 var (
-	_clsINUIAddVoiceShortcutViewController = _objcClass("INUIAddVoiceShortcutViewController")
+	_clsINUIAddVoiceShortcutViewController                 = _objcClass("INUIAddVoiceShortcutViewController")
 	_iNUIAddVoiceShortcutViewControllerSelInitWithShortcut = objc.RegisterName("initWithShortcut:")
-	_iNUIAddVoiceShortcutViewControllerSelDelegate = objc.RegisterName("delegate")
-	_iNUIAddVoiceShortcutViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_iNUIAddVoiceShortcutViewControllerSelDelegate         = objc.RegisterName("delegate")
+	_iNUIAddVoiceShortcutViewControllerSelSetDelegate      = objc.RegisterName("setDelegate:")
 )
 
 func INUIAddVoiceShortcutViewControllerFromID(id objc.ID) *INUIAddVoiceShortcutViewController {
@@ -36,7 +36,9 @@ func INUIAddVoiceShortcutViewControllerFromID(id objc.ID) *INUIAddVoiceShortcutV
 // @param shortcut The shortcut is what will be run when the resulting voice shortcut is invoked. It also provides the suggested invocation phrase, via the @c suggestedInvocationPhrase property on the intent or user activity.
 func (o *INUIAddVoiceShortcutViewController) InitWithShortcut(shortcut *intents.INShortcut) *INUIAddVoiceShortcutViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUIAddVoiceShortcutViewControllerSelInitWithShortcut, shortcut.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INUIAddVoiceShortcutViewControllerFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *INUIAddVoiceShortcutViewController) Delegate() INUIAddVoiceShortcutView
 func (o *INUIAddVoiceShortcutViewController) SetDelegate(delegate INUIAddVoiceShortcutViewControllerDelegate) {
 	o.Ptr().Send(_iNUIAddVoiceShortcutViewControllerSelSetDelegate, delegate)
 }
-

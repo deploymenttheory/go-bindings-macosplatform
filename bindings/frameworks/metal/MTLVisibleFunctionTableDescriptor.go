@@ -16,10 +16,10 @@ type MTLVisibleFunctionTableDescriptor struct {
 }
 
 var (
-	_clsMTLVisibleFunctionTableDescriptor = _objcClass("MTLVisibleFunctionTableDescriptor")
+	_clsMTLVisibleFunctionTableDescriptor                               = _objcClass("MTLVisibleFunctionTableDescriptor")
 	_mTLVisibleFunctionTableDescriptorSelVisibleFunctionTableDescriptor = objc.RegisterName("visibleFunctionTableDescriptor")
-	_mTLVisibleFunctionTableDescriptorSelFunctionCount = objc.RegisterName("functionCount")
-	_mTLVisibleFunctionTableDescriptorSelSetFunctionCount = objc.RegisterName("setFunctionCount:")
+	_mTLVisibleFunctionTableDescriptorSelFunctionCount                  = objc.RegisterName("functionCount")
+	_mTLVisibleFunctionTableDescriptorSelSetFunctionCount               = objc.RegisterName("setFunctionCount:")
 )
 
 func MTLVisibleFunctionTableDescriptorFromID(id objc.ID) *MTLVisibleFunctionTableDescriptor {
@@ -35,7 +35,9 @@ func MTLVisibleFunctionTableDescriptorFromID(id objc.ID) *MTLVisibleFunctionTabl
 // @method visibleFunctionTableDescriptor @abstract Create an autoreleased visible function table descriptor
 func MTLVisibleFunctionTableDescriptorVisibleFunctionTableDescriptor() *MTLVisibleFunctionTableDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLVisibleFunctionTableDescriptor), _mTLVisibleFunctionTableDescriptorSelVisibleFunctionTableDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVisibleFunctionTableDescriptorFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *MTLVisibleFunctionTableDescriptor) FunctionCount() uint {
 func (o *MTLVisibleFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
 	o.Ptr().Send(_mTLVisibleFunctionTableDescriptorSelSetFunctionCount, functionCount)
 }
-

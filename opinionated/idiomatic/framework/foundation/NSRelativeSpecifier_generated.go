@@ -128,9 +128,13 @@ func (x *RelativeSpecifier) SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSp
 	x.inner.SetBaseSpecifier(baseSpecifier)
 }
 
-func (x *RelativeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *RelativeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
-func (x *RelativeSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+func (x *RelativeSpecifier) asObject() *raw.NSObject {
+	return &x.inner.NSScriptObjectSpecifier.NSObject
+}
 
 // RelativeSpecifierable is the interface implemented by [RelativeSpecifier], for mocking and DI.
 type RelativeSpecifierable interface {
@@ -152,4 +156,3 @@ type RelativeSpecifierable interface {
 }
 
 var _ RelativeSpecifierable = (*RelativeSpecifier)(nil)
-

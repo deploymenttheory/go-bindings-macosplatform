@@ -26,4 +26,3 @@ func VZKeyboardConfigurationFromID(id objc.ID) *VZKeyboardConfiguration {
 	purego.Track(o)
 	return o
 }
-

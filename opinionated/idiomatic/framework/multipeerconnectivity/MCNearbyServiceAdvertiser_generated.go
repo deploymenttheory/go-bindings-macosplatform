@@ -101,4 +101,3 @@ type NearbyServiceAdvertiserable interface {
 }
 
 var _ NearbyServiceAdvertiserable = (*NearbyServiceAdvertiser)(nil)
-

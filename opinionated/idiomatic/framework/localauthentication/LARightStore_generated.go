@@ -183,4 +183,3 @@ type RightStoreable interface {
 }
 
 var _ RightStoreable = (*RightStore)(nil)
-

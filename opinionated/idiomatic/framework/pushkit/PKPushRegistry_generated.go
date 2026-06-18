@@ -87,4 +87,3 @@ type PushRegistryable interface {
 }
 
 var _ PushRegistryable = (*PushRegistry)(nil)
-

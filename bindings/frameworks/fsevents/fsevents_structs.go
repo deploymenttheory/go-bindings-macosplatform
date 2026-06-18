@@ -8,14 +8,13 @@ import (
 )
 
 type FSEventStreamContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 // C struct: __FSEventStream
 // FSEventStream is an opaque type.
 type FSEventStream struct{}
-

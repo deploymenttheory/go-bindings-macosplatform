@@ -17,8 +17,8 @@ type MPSNNReduceFeatureChannelsMax struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsMax = _objcClass("MPSNNReduceFeatureChannelsMax")
-	_mPSNNReduceFeatureChannelsMaxSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsMax                    = _objcClass("MPSNNReduceFeatureChannelsMax")
+	_mPSNNReduceFeatureChannelsMaxSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsMaxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceFeatureChannelsMaxFromID(id objc.ID) *MPSNNReduceFeatureChannels
 
 func (o *MPSNNReduceFeatureChannelsMax) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsMaxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsMaxFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceFeatureChannelsMax object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsMaxFromID(_ret)
 }
-

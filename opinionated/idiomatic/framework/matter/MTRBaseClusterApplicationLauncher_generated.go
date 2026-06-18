@@ -19,7 +19,9 @@ type MTRBaseClusterApplicationLauncher struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterApplicationLauncher].
-func (x *MTRBaseClusterApplicationLauncher) Unwrap() *raw.MTRBaseClusterApplicationLauncher { return x.inner }
+func (x *MTRBaseClusterApplicationLauncher) Unwrap() *raw.MTRBaseClusterApplicationLauncher {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -677,9 +679,13 @@ func (x *MTRBaseClusterApplicationLauncher) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterApplicationLauncher) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterApplicationLauncher) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterApplicationLauncher) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterApplicationLauncher) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterApplicationLauncherable is the interface implemented by [MTRBaseClusterApplicationLauncher], for mocking and DI.
 type MTRBaseClusterApplicationLauncherable interface {
@@ -728,4 +734,3 @@ type MTRBaseClusterApplicationLauncherable interface {
 }
 
 var _ MTRBaseClusterApplicationLauncherable = (*MTRBaseClusterApplicationLauncher)(nil)
-

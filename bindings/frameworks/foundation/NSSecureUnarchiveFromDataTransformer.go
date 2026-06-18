@@ -15,7 +15,7 @@ type NSSecureUnarchiveFromDataTransformer struct {
 }
 
 var (
-	_clsNSSecureUnarchiveFromDataTransformer = _objcClass("NSSecureUnarchiveFromDataTransformer")
+	_clsNSSecureUnarchiveFromDataTransformer                       = _objcClass("NSSecureUnarchiveFromDataTransformer")
 	_nSSecureUnarchiveFromDataTransformerSelAllowedTopLevelClasses = objc.RegisterName("allowedTopLevelClasses")
 )
 
@@ -33,4 +33,3 @@ func NSSecureUnarchiveFromDataTransformerAllowedTopLevelClasses() *NSArray[objc.
 	_ret := objc.Send[*NSArray[objc.Class]](objc.ID(_clsNSSecureUnarchiveFromDataTransformer), _nSSecureUnarchiveFromDataTransformerSelAllowedTopLevelClasses)
 	return _ret
 }
-

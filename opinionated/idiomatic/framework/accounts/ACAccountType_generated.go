@@ -68,4 +68,3 @@ type AccountTypeable interface {
 }
 
 var _ AccountTypeable = (*AccountType)(nil)
-

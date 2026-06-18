@@ -18,25 +18,25 @@ type MTRClusterThreadBorderRouterManagement struct {
 }
 
 var (
-	_clsMTRClusterThreadBorderRouterManagement = _objcClass("MTRClusterThreadBorderRouterManagement")
-	_mTRClusterThreadBorderRouterManagementSelGetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getActiveDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadBorderRouterManagementSelGetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getActiveDatasetRequestWithExpectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterThreadBorderRouterManagement                                                                                = _objcClass("MTRClusterThreadBorderRouterManagement")
+	_mTRClusterThreadBorderRouterManagementSelGetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("getActiveDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterThreadBorderRouterManagementSelGetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("getActiveDatasetRequestWithExpectedValues:expectedValueInterval:completion:")
 	_mTRClusterThreadBorderRouterManagementSelGetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getPendingDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadBorderRouterManagementSelGetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getPendingDatasetRequestWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadBorderRouterManagementSelSetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setActiveDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterThreadBorderRouterManagementSelGetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("getPendingDatasetRequestWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterThreadBorderRouterManagementSelSetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("setActiveDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterThreadBorderRouterManagementSelSetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setPendingDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeBorderRouterNameWithParams = objc.RegisterName("readAttributeBorderRouterNameWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeBorderAgentIDWithParams = objc.RegisterName("readAttributeBorderAgentIDWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeThreadVersionWithParams = objc.RegisterName("readAttributeThreadVersionWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeInterfaceEnabledWithParams = objc.RegisterName("readAttributeInterfaceEnabledWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeActiveDatasetTimestampWithParams = objc.RegisterName("readAttributeActiveDatasetTimestampWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributePendingDatasetTimestampWithParams = objc.RegisterName("readAttributePendingDatasetTimestampWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterThreadBorderRouterManagementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeBorderRouterNameWithParams                                         = objc.RegisterName("readAttributeBorderRouterNameWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeBorderAgentIDWithParams                                            = objc.RegisterName("readAttributeBorderAgentIDWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeThreadVersionWithParams                                            = objc.RegisterName("readAttributeThreadVersionWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeInterfaceEnabledWithParams                                         = objc.RegisterName("readAttributeInterfaceEnabledWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeActiveDatasetTimestampWithParams                                   = objc.RegisterName("readAttributeActiveDatasetTimestampWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributePendingDatasetTimestampWithParams                                  = objc.RegisterName("readAttributePendingDatasetTimestampWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeGeneratedCommandListWithParams                                     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeAcceptedCommandListWithParams                                      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeAttributeListWithParams                                            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeFeatureMapWithParams                                               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelReadAttributeClusterRevisionWithParams                                          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterThreadBorderRouterManagementSelInitWithDeviceEndpointIDQueue                                                   = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRClusterThreadBorderRouterManagement {
@@ -185,7 +185,8 @@ func (o *MTRClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWit
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterThreadBorderRouterManagement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadBorderRouterManagement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterThreadBorderRouterManagementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterThreadBorderRouterManagementFromID(_ret)
 }
-

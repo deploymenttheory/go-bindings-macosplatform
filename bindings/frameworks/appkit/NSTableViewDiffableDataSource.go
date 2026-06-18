@@ -16,21 +16,21 @@ type NSTableViewDiffableDataSource[SectionIdentifierType purego.AnyObject, ItemI
 }
 
 var (
-	_clsNSTableViewDiffableDataSource = _objcClass("NSTableViewDiffableDataSource")
-	_nSTableViewDiffableDataSourceSelInitWithTableViewCellProvider = objc.RegisterName("initWithTableView:cellProvider:")
-	_nSTableViewDiffableDataSourceSelSnapshot = objc.RegisterName("snapshot")
-	_nSTableViewDiffableDataSourceSelApplySnapshotAnimatingDifferences = objc.RegisterName("applySnapshot:animatingDifferences:")
+	_clsNSTableViewDiffableDataSource                                            = _objcClass("NSTableViewDiffableDataSource")
+	_nSTableViewDiffableDataSourceSelInitWithTableViewCellProvider               = objc.RegisterName("initWithTableView:cellProvider:")
+	_nSTableViewDiffableDataSourceSelSnapshot                                    = objc.RegisterName("snapshot")
+	_nSTableViewDiffableDataSourceSelApplySnapshotAnimatingDifferences           = objc.RegisterName("applySnapshot:animatingDifferences:")
 	_nSTableViewDiffableDataSourceSelApplySnapshotAnimatingDifferencesCompletion = objc.RegisterName("applySnapshot:animatingDifferences:completion:")
-	_nSTableViewDiffableDataSourceSelItemIdentifierForRow = objc.RegisterName("itemIdentifierForRow:")
-	_nSTableViewDiffableDataSourceSelRowForItemIdentifier = objc.RegisterName("rowForItemIdentifier:")
-	_nSTableViewDiffableDataSourceSelSectionIdentifierForRow = objc.RegisterName("sectionIdentifierForRow:")
-	_nSTableViewDiffableDataSourceSelRowForSectionIdentifier = objc.RegisterName("rowForSectionIdentifier:")
-	_nSTableViewDiffableDataSourceSelRowViewProvider = objc.RegisterName("rowViewProvider")
-	_nSTableViewDiffableDataSourceSelSetRowViewProvider = objc.RegisterName("setRowViewProvider:")
-	_nSTableViewDiffableDataSourceSelSectionHeaderViewProvider = objc.RegisterName("sectionHeaderViewProvider")
-	_nSTableViewDiffableDataSourceSelSetSectionHeaderViewProvider = objc.RegisterName("setSectionHeaderViewProvider:")
-	_nSTableViewDiffableDataSourceSelDefaultRowAnimation = objc.RegisterName("defaultRowAnimation")
-	_nSTableViewDiffableDataSourceSelSetDefaultRowAnimation = objc.RegisterName("setDefaultRowAnimation:")
+	_nSTableViewDiffableDataSourceSelItemIdentifierForRow                        = objc.RegisterName("itemIdentifierForRow:")
+	_nSTableViewDiffableDataSourceSelRowForItemIdentifier                        = objc.RegisterName("rowForItemIdentifier:")
+	_nSTableViewDiffableDataSourceSelSectionIdentifierForRow                     = objc.RegisterName("sectionIdentifierForRow:")
+	_nSTableViewDiffableDataSourceSelRowForSectionIdentifier                     = objc.RegisterName("rowForSectionIdentifier:")
+	_nSTableViewDiffableDataSourceSelRowViewProvider                             = objc.RegisterName("rowViewProvider")
+	_nSTableViewDiffableDataSourceSelSetRowViewProvider                          = objc.RegisterName("setRowViewProvider:")
+	_nSTableViewDiffableDataSourceSelSectionHeaderViewProvider                   = objc.RegisterName("sectionHeaderViewProvider")
+	_nSTableViewDiffableDataSourceSelSetSectionHeaderViewProvider                = objc.RegisterName("setSectionHeaderViewProvider:")
+	_nSTableViewDiffableDataSourceSelDefaultRowAnimation                         = objc.RegisterName("defaultRowAnimation")
+	_nSTableViewDiffableDataSourceSelSetDefaultRowAnimation                      = objc.RegisterName("setDefaultRowAnimation:")
 )
 
 func NSTableViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
@@ -45,13 +45,17 @@ func NSTableViewDiffableDataSourceFromID[SectionIdentifierType purego.AnyObject,
 
 func (o *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) InitWithTableViewCellProvider(tableView *NSTableView, cellProvider objc.Block) *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewDiffableDataSourceSelInitWithTableViewCellProvider, tableView.Ptr(), cellProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewDiffableDataSourceFromID[SectionIdentifierType, ItemIdentifierType](_ret)
 }
 
 func (o *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) Snapshot() *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewDiffableDataSourceSelSnapshot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDiffableDataSourceSnapshotFromID[SectionIdentifierType, ItemIdentifierType](_ret)
 }
 
@@ -116,4 +120,3 @@ func (o *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType
 func (o *NSTableViewDiffableDataSource[SectionIdentifierType, ItemIdentifierType]) SetDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) {
 	o.Ptr().Send(_nSTableViewDiffableDataSourceSelSetDefaultRowAnimation, defaultRowAnimation)
 }
-

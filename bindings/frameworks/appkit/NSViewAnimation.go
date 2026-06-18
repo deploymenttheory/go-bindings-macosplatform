@@ -16,10 +16,10 @@ type NSViewAnimation struct {
 }
 
 var (
-	_clsNSViewAnimation = _objcClass("NSViewAnimation")
+	_clsNSViewAnimation                       = _objcClass("NSViewAnimation")
 	_nSViewAnimationSelInitWithViewAnimations = objc.RegisterName("initWithViewAnimations:")
-	_nSViewAnimationSelViewAnimations = objc.RegisterName("viewAnimations")
-	_nSViewAnimationSelSetViewAnimations = objc.RegisterName("setViewAnimations:")
+	_nSViewAnimationSelViewAnimations         = objc.RegisterName("viewAnimations")
+	_nSViewAnimationSelSetViewAnimations      = objc.RegisterName("setViewAnimations:")
 )
 
 func NSViewAnimationFromID(id objc.ID) *NSViewAnimation {
@@ -34,7 +34,9 @@ func NSViewAnimationFromID(id objc.ID) *NSViewAnimation {
 
 func (o *NSViewAnimation) InitWithViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) *NSViewAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewAnimationSelInitWithViewAnimations, viewAnimations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewAnimationFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *NSViewAnimation) ViewAnimations() *foundation.NSArray[objc.ID] {
 func (o *NSViewAnimation) SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_nSViewAnimationSelSetViewAnimations, viewAnimations)
 }
-

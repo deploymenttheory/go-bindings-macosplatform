@@ -17,11 +17,11 @@ type ACAccountCredential struct {
 }
 
 var (
-	_clsACAccountCredential = _objcClass("ACAccountCredential")
-	_aCAccountCredentialSelInitWithOAuthTokenTokenSecret = objc.RegisterName("initWithOAuthToken:tokenSecret:")
+	_clsACAccountCredential                                          = _objcClass("ACAccountCredential")
+	_aCAccountCredentialSelInitWithOAuthTokenTokenSecret             = objc.RegisterName("initWithOAuthToken:tokenSecret:")
 	_aCAccountCredentialSelInitWithOAuth2TokenRefreshTokenExpiryDate = objc.RegisterName("initWithOAuth2Token:refreshToken:expiryDate:")
-	_aCAccountCredentialSelOauthToken = objc.RegisterName("oauthToken")
-	_aCAccountCredentialSelSetOauthToken = objc.RegisterName("setOauthToken:")
+	_aCAccountCredentialSelOauthToken                                = objc.RegisterName("oauthToken")
+	_aCAccountCredentialSelSetOauthToken                             = objc.RegisterName("setOauthToken:")
 )
 
 func ACAccountCredentialFromID(id objc.ID) *ACAccountCredential {
@@ -37,23 +37,28 @@ func ACAccountCredentialFromID(id objc.ID) *ACAccountCredential {
 // Deprecated: Use appropriate non-Apple SDK corresponding to the type of account you want to reference instead
 func (o *ACAccountCredential) InitWithOAuthTokenTokenSecret(token *foundation.NSString, secret *foundation.NSString) *ACAccountCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountCredentialSelInitWithOAuthTokenTokenSecret, token.Ptr(), secret.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountCredentialFromID(_ret)
 }
 
 func (o *ACAccountCredential) InitWithOAuth2TokenRefreshTokenExpiryDate(token *foundation.NSString, refreshToken *foundation.NSString, expiryDate *foundation.NSDate) *ACAccountCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountCredentialSelInitWithOAuth2TokenRefreshTokenExpiryDate, token.Ptr(), refreshToken.Ptr(), expiryDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountCredentialFromID(_ret)
 }
 
 func (o *ACAccountCredential) OauthToken() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountCredentialSelOauthToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ACAccountCredential) SetOauthToken(oauthToken *foundation.NSString) {
 	o.Ptr().Send(_aCAccountCredentialSelSetOauthToken, oauthToken.Ptr())
 }
-

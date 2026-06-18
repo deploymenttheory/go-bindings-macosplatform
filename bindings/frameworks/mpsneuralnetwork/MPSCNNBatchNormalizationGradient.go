@@ -20,13 +20,13 @@ type MPSCNNBatchNormalizationGradient struct {
 }
 
 var (
-	_clsMPSCNNBatchNormalizationGradient = _objcClass("MPSCNNBatchNormalizationGradient")
-	_mPSCNNBatchNormalizationGradientSelInitWithDeviceFusedNeuronDescriptor = objc.RegisterName("initWithDevice:fusedNeuronDescriptor:")
-	_mPSCNNBatchNormalizationGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNBatchNormalizationGradientSelEncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:batchNormalizationState:destinationGradient:")
+	_clsMPSCNNBatchNormalizationGradient                                                                                                 = _objcClass("MPSCNNBatchNormalizationGradient")
+	_mPSCNNBatchNormalizationGradientSelInitWithDeviceFusedNeuronDescriptor                                                              = objc.RegisterName("initWithDevice:fusedNeuronDescriptor:")
+	_mPSCNNBatchNormalizationGradientSelInitWithCoderDevice                                                                              = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNBatchNormalizationGradientSelEncodeToCommandBufferSourceGradientSourceImageBatchNormalizationStateDestinationGradient         = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:batchNormalizationState:destinationGradient:")
 	_mPSCNNBatchNormalizationGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationStateDestinationGradients = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:batchNormalizationState:destinationGradients:")
-	_mPSCNNBatchNormalizationGradientSelEncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:batchNormalizationState:")
-	_mPSCNNBatchNormalizationGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:batchNormalizationState:")
+	_mPSCNNBatchNormalizationGradientSelEncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState                            = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:batchNormalizationState:")
+	_mPSCNNBatchNormalizationGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState                     = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:batchNormalizationState:")
 )
 
 func MPSCNNBatchNormalizationGradientFromID(id objc.ID) *MPSCNNBatchNormalizationGradient {
@@ -42,14 +42,18 @@ func MPSCNNBatchNormalizationGradientFromID(id objc.ID) *MPSCNNBatchNormalizatio
 // @abstract   Initializes a batch normalization gradient kernel using a device and neuron descriptor. @param      device                          The MTLDevice on which this filter will be used @param      fusedNeuronDescriptor           A MPSNNNeuronDescriptor object which specifies a neuron activation function whose gradient should be applied prior to computing the resulting gradient. This neuron descriptor should match that used in the corresponding forward batch normalization kernel as well as the preceeding batch normalization statistics gradient kernel. @return     A valid MPSCNNBatchNormalizationGradient object or nil, if failure.
 func (o *MPSCNNBatchNormalizationGradient) InitWithDeviceFusedNeuronDescriptor(device metal.MTLDevice, fusedNeuronDescriptor *MPSNNNeuronDescriptor) *MPSCNNBatchNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationGradientSelInitWithDeviceFusedNeuronDescriptor, device, fusedNeuronDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use a subclass of NSCoder that implements the <MPSDeviceProvider> protocol  to tell MPS the MTLDevice to use. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSCNNBatchNormalizationGradient object, or nil if failure.
 func (o *MPSCNNBatchNormalizationGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNBatchNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationGradientFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *MPSCNNBatchNormalizationGradient) EncodeBatchToCommandBufferSourceGradi
 // @abstract       Encode this operation to a command buffer.  Create an MPSImage to contain the result and return it. See encodeToCommandBuffer:sourceImage:sourceGradient:sourceImage:batchNormalizationState:destinationGradient for further details.
 func (o *MPSCNNBatchNormalizationGradient) EncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, batchNormalizationState *MPSCNNBatchNormalizationState) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationGradientSelEncodeToCommandBufferSourceGradientSourceImageBatchNormalizationState, commandBuffer, sourceGradient.Ptr(), sourceImage.Ptr(), batchNormalizationState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -75,4 +81,3 @@ func (o *MPSCNNBatchNormalizationGradient) EncodeBatchToCommandBufferSourceGradi
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mPSCNNBatchNormalizationGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesBatchNormalizationState, commandBuffer, sourceGradients, sourceImages, batchNormalizationState.Ptr())
 	return _ret
 }
-

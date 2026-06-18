@@ -16,11 +16,11 @@ type MTRCommissioningOperation struct {
 }
 
 var (
-	_clsMTRCommissioningOperation = _objcClass("MTRCommissioningOperation")
+	_clsMTRCommissioningOperation                                            = _objcClass("MTRCommissioningOperation")
 	_mTRCommissioningOperationSelInitWithParametersSetupPayloadDelegateQueue = objc.RegisterName("initWithParameters:setupPayload:delegate:queue:")
-	_mTRCommissioningOperationSelStartWithController = objc.RegisterName("startWithController:")
-	_mTRCommissioningOperationSelStop = objc.RegisterName("stop")
-	_mTRCommissioningOperationSelMatchedPayload = objc.RegisterName("matchedPayload")
+	_mTRCommissioningOperationSelStartWithController                         = objc.RegisterName("startWithController:")
+	_mTRCommissioningOperationSelStop                                        = objc.RegisterName("stop")
+	_mTRCommissioningOperationSelMatchedPayload                              = objc.RegisterName("matchedPayload")
 )
 
 func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
@@ -36,7 +36,9 @@ func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
 // Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc).  Returns nil if the payload is not valid. The deviceAttestationDelegate property of MTRCommissioningParameters will be ignored. Device attestation notifications will be delivered to the MTRCommissioningDelegate instead.  The failSafeTimeout property of MTRCommissioningParameters will be respected. The provided delegate will be notified about various things as commissioning proceeds.  The calls into the delegate will happen on the provided queue. Modifying the parameters after this call will have no effect on the behavior of the MTRCommissioningOperation.
 func (o *MTRCommissioningOperation) InitWithParametersSetupPayloadDelegateQueue(parameters *MTRCommissioningParameters, payload *foundation.NSString, delegate MTRCommissioningDelegate, queue *foundation.NSObject) *MTRCommissioningOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningOperationSelInitWithParametersSetupPayloadDelegateQueue, parameters.Ptr(), payload.Ptr(), delegate, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCommissioningOperationFromID(_ret)
 }
 
@@ -53,7 +55,8 @@ func (o *MTRCommissioningOperation) Stop() bool {
 
 func (o *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissioningOperationSelMatchedPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSetupPayloadFromID(_ret)
 }
-

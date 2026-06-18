@@ -390,4 +390,3 @@ func VTSessionSetProperties(session unsafe.Pointer, propertyDictionary unsafe.Po
 func VTSessionSetProperty(session unsafe.Pointer, propertyKey unsafe.Pointer, propertyValue unsafe.Pointer) int {
 	return raw.VTSessionSetProperty(session, propertyKey, propertyValue)
 }
-

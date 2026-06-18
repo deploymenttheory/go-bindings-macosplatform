@@ -168,4 +168,3 @@ type HTTPCookieable interface {
 }
 
 var _ HTTPCookieable = (*HTTPCookie)(nil)
-

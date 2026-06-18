@@ -16,11 +16,11 @@ type NSTextAlternatives struct {
 }
 
 var (
-	_clsNSTextAlternatives = _objcClass("NSTextAlternatives")
+	_clsNSTextAlternatives                                        = _objcClass("NSTextAlternatives")
 	_nSTextAlternativesSelInitWithPrimaryStringAlternativeStrings = objc.RegisterName("initWithPrimaryString:alternativeStrings:")
-	_nSTextAlternativesSelNoteSelectedAlternativeString = objc.RegisterName("noteSelectedAlternativeString:")
-	_nSTextAlternativesSelPrimaryString = objc.RegisterName("primaryString")
-	_nSTextAlternativesSelAlternativeStrings = objc.RegisterName("alternativeStrings")
+	_nSTextAlternativesSelNoteSelectedAlternativeString           = objc.RegisterName("noteSelectedAlternativeString:")
+	_nSTextAlternativesSelPrimaryString                           = objc.RegisterName("primaryString")
+	_nSTextAlternativesSelAlternativeStrings                      = objc.RegisterName("alternativeStrings")
 )
 
 func NSTextAlternativesFromID(id objc.ID) *NSTextAlternatives {
@@ -35,7 +35,9 @@ func NSTextAlternativesFromID(id objc.ID) *NSTextAlternatives {
 
 func (o *NSTextAlternatives) InitWithPrimaryStringAlternativeStrings(primaryString *foundation.NSString, alternativeStrings *foundation.NSArray[*foundation.NSString]) *NSTextAlternatives {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAlternativesSelInitWithPrimaryStringAlternativeStrings, primaryString.Ptr(), alternativeStrings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextAlternativesFromID(_ret)
 }
 
@@ -45,7 +47,9 @@ func (o *NSTextAlternatives) NoteSelectedAlternativeString(alternativeString *fo
 
 func (o *NSTextAlternatives) PrimaryString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAlternativesSelPrimaryString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,4 +57,3 @@ func (o *NSTextAlternatives) AlternativeStrings() *foundation.NSArray[*foundatio
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSTextAlternativesSelAlternativeStrings)
 	return _ret
 }
-

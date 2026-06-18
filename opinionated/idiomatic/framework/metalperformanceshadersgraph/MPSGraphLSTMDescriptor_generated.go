@@ -233,4 +233,3 @@ type GraphLSTMDescriptorable interface {
 }
 
 var _ GraphLSTMDescriptorable = (*GraphLSTMDescriptor)(nil)
-

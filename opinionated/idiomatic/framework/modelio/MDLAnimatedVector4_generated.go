@@ -99,4 +99,3 @@ type AnimatedVector4able interface {
 }
 
 var _ AnimatedVector4able = (*AnimatedVector4)(nil)
-

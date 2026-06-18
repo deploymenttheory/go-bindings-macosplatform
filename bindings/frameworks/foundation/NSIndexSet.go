@@ -15,39 +15,39 @@ type NSIndexSet struct {
 }
 
 var (
-	_clsNSIndexSet = _objcClass("NSIndexSet")
-	_nSIndexSetSelIndexSet = objc.RegisterName("indexSet")
-	_nSIndexSetSelIndexSetWithIndex = objc.RegisterName("indexSetWithIndex:")
-	_nSIndexSetSelIndexSetWithIndexesInRange = objc.RegisterName("indexSetWithIndexesInRange:")
-	_nSIndexSetSelInitWithIndexesInRange = objc.RegisterName("initWithIndexesInRange:")
-	_nSIndexSetSelInitWithIndexSet = objc.RegisterName("initWithIndexSet:")
-	_nSIndexSetSelInitWithIndex = objc.RegisterName("initWithIndex:")
-	_nSIndexSetSelIsEqualToIndexSet = objc.RegisterName("isEqualToIndexSet:")
-	_nSIndexSetSelIndexGreaterThanIndex = objc.RegisterName("indexGreaterThanIndex:")
-	_nSIndexSetSelIndexLessThanIndex = objc.RegisterName("indexLessThanIndex:")
-	_nSIndexSetSelIndexGreaterThanOrEqualToIndex = objc.RegisterName("indexGreaterThanOrEqualToIndex:")
-	_nSIndexSetSelIndexLessThanOrEqualToIndex = objc.RegisterName("indexLessThanOrEqualToIndex:")
-	_nSIndexSetSelGetIndexesMaxCountInIndexRange = objc.RegisterName("getIndexes:maxCount:inIndexRange:")
-	_nSIndexSetSelCountOfIndexesInRange = objc.RegisterName("countOfIndexesInRange:")
-	_nSIndexSetSelContainsIndex = objc.RegisterName("containsIndex:")
-	_nSIndexSetSelContainsIndexesInRange = objc.RegisterName("containsIndexesInRange:")
-	_nSIndexSetSelContainsIndexes = objc.RegisterName("containsIndexes:")
-	_nSIndexSetSelIntersectsIndexesInRange = objc.RegisterName("intersectsIndexesInRange:")
-	_nSIndexSetSelEnumerateIndexesUsing = objc.RegisterName("enumerateIndexesUsingBlock:")
-	_nSIndexSetSelEnumerateIndexesWithOptionsUsing = objc.RegisterName("enumerateIndexesWithOptions:usingBlock:")
+	_clsNSIndexSet                                    = _objcClass("NSIndexSet")
+	_nSIndexSetSelIndexSet                            = objc.RegisterName("indexSet")
+	_nSIndexSetSelIndexSetWithIndex                   = objc.RegisterName("indexSetWithIndex:")
+	_nSIndexSetSelIndexSetWithIndexesInRange          = objc.RegisterName("indexSetWithIndexesInRange:")
+	_nSIndexSetSelInitWithIndexesInRange              = objc.RegisterName("initWithIndexesInRange:")
+	_nSIndexSetSelInitWithIndexSet                    = objc.RegisterName("initWithIndexSet:")
+	_nSIndexSetSelInitWithIndex                       = objc.RegisterName("initWithIndex:")
+	_nSIndexSetSelIsEqualToIndexSet                   = objc.RegisterName("isEqualToIndexSet:")
+	_nSIndexSetSelIndexGreaterThanIndex               = objc.RegisterName("indexGreaterThanIndex:")
+	_nSIndexSetSelIndexLessThanIndex                  = objc.RegisterName("indexLessThanIndex:")
+	_nSIndexSetSelIndexGreaterThanOrEqualToIndex      = objc.RegisterName("indexGreaterThanOrEqualToIndex:")
+	_nSIndexSetSelIndexLessThanOrEqualToIndex         = objc.RegisterName("indexLessThanOrEqualToIndex:")
+	_nSIndexSetSelGetIndexesMaxCountInIndexRange      = objc.RegisterName("getIndexes:maxCount:inIndexRange:")
+	_nSIndexSetSelCountOfIndexesInRange               = objc.RegisterName("countOfIndexesInRange:")
+	_nSIndexSetSelContainsIndex                       = objc.RegisterName("containsIndex:")
+	_nSIndexSetSelContainsIndexesInRange              = objc.RegisterName("containsIndexesInRange:")
+	_nSIndexSetSelContainsIndexes                     = objc.RegisterName("containsIndexes:")
+	_nSIndexSetSelIntersectsIndexesInRange            = objc.RegisterName("intersectsIndexesInRange:")
+	_nSIndexSetSelEnumerateIndexesUsing               = objc.RegisterName("enumerateIndexesUsingBlock:")
+	_nSIndexSetSelEnumerateIndexesWithOptionsUsing    = objc.RegisterName("enumerateIndexesWithOptions:usingBlock:")
 	_nSIndexSetSelEnumerateIndexesInRangeOptionsUsing = objc.RegisterName("enumerateIndexesInRange:options:usingBlock:")
-	_nSIndexSetSelIndexPassingTest = objc.RegisterName("indexPassingTest:")
-	_nSIndexSetSelIndexWithOptionsPassingTest = objc.RegisterName("indexWithOptions:passingTest:")
-	_nSIndexSetSelIndexInRangeOptionsPassingTest = objc.RegisterName("indexInRange:options:passingTest:")
-	_nSIndexSetSelIndexesPassingTest = objc.RegisterName("indexesPassingTest:")
-	_nSIndexSetSelIndexesWithOptionsPassingTest = objc.RegisterName("indexesWithOptions:passingTest:")
-	_nSIndexSetSelIndexesInRangeOptionsPassingTest = objc.RegisterName("indexesInRange:options:passingTest:")
-	_nSIndexSetSelEnumerateRangesUsing = objc.RegisterName("enumerateRangesUsingBlock:")
-	_nSIndexSetSelEnumerateRangesWithOptionsUsing = objc.RegisterName("enumerateRangesWithOptions:usingBlock:")
-	_nSIndexSetSelEnumerateRangesInRangeOptionsUsing = objc.RegisterName("enumerateRangesInRange:options:usingBlock:")
-	_nSIndexSetSelCount = objc.RegisterName("count")
-	_nSIndexSetSelFirstIndex = objc.RegisterName("firstIndex")
-	_nSIndexSetSelLastIndex = objc.RegisterName("lastIndex")
+	_nSIndexSetSelIndexPassingTest                    = objc.RegisterName("indexPassingTest:")
+	_nSIndexSetSelIndexWithOptionsPassingTest         = objc.RegisterName("indexWithOptions:passingTest:")
+	_nSIndexSetSelIndexInRangeOptionsPassingTest      = objc.RegisterName("indexInRange:options:passingTest:")
+	_nSIndexSetSelIndexesPassingTest                  = objc.RegisterName("indexesPassingTest:")
+	_nSIndexSetSelIndexesWithOptionsPassingTest       = objc.RegisterName("indexesWithOptions:passingTest:")
+	_nSIndexSetSelIndexesInRangeOptionsPassingTest    = objc.RegisterName("indexesInRange:options:passingTest:")
+	_nSIndexSetSelEnumerateRangesUsing                = objc.RegisterName("enumerateRangesUsingBlock:")
+	_nSIndexSetSelEnumerateRangesWithOptionsUsing     = objc.RegisterName("enumerateRangesWithOptions:usingBlock:")
+	_nSIndexSetSelEnumerateRangesInRangeOptionsUsing  = objc.RegisterName("enumerateRangesInRange:options:usingBlock:")
+	_nSIndexSetSelCount                               = objc.RegisterName("count")
+	_nSIndexSetSelFirstIndex                          = objc.RegisterName("firstIndex")
+	_nSIndexSetSelLastIndex                           = objc.RegisterName("lastIndex")
 )
 
 func NSIndexSetFromID(id objc.ID) *NSIndexSet {
@@ -62,37 +62,49 @@ func NSIndexSetFromID(id objc.ID) *NSIndexSet {
 
 func NSIndexSetIndexSet() *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func NSIndexSetIndexSetWithIndex(value uint) *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSetWithIndex, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func NSIndexSetIndexSetWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSIndexSet), _nSIndexSetSelIndexSetWithIndexesInRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSIndexSet) InitWithIndexesInRange(range_ NSRange) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndexesInRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSIndexSet) InitWithIndexSet(indexSet *NSIndexSet) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndexSet, indexSet.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
 func (o *NSIndexSet) InitWithIndex(value uint) *NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelInitWithIndex, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -229,7 +241,9 @@ func (o *NSIndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *NSInd
 		defer __block_predicate.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelIndexesPassingTest, __block_predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -242,7 +256,9 @@ func (o *NSIndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, pr
 		defer __block_predicate.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelIndexesWithOptionsPassingTest, opts, __block_predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -255,7 +271,9 @@ func (o *NSIndexSet) IndexesInRangeOptionsPassingTest(range_ NSRange, opts NSEnu
 		defer __block_predicate.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSetSelIndexesInRangeOptionsPassingTest, range_, opts, __block_predicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSetFromID(_ret)
 }
 
@@ -285,4 +303,3 @@ func (o *NSIndexSet) LastIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSIndexSetSelLastIndex)
 	return _ret
 }
-

@@ -16,7 +16,9 @@ type MTRLevelControlClusterMoveParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRLevelControlClusterMoveParams].
-func (x *MTRLevelControlClusterMoveParams) Unwrap() *raw.MTRLevelControlClusterMoveParams { return x.inner }
+func (x *MTRLevelControlClusterMoveParams) Unwrap() *raw.MTRLevelControlClusterMoveParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -156,4 +158,3 @@ type MTRLevelControlClusterMoveParamsable interface {
 }
 
 var _ MTRLevelControlClusterMoveParamsable = (*MTRLevelControlClusterMoveParams)(nil)
-

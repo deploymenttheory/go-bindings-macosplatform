@@ -17,89 +17,89 @@ type NSURL struct {
 }
 
 var (
-	_clsNSURL = _objcClass("NSURL")
-	_nSURLSelInitWithSchemeHostPath = objc.RegisterName("initWithScheme:host:path:")
-	_nSURLSelInitFileURLWithPathIsDirectoryRelativeToURL = objc.RegisterName("initFileURLWithPath:isDirectory:relativeToURL:")
-	_nSURLSelInitFileURLWithPathRelativeToURL = objc.RegisterName("initFileURLWithPath:relativeToURL:")
-	_nSURLSelInitFileURLWithPathIsDirectory = objc.RegisterName("initFileURLWithPath:isDirectory:")
-	_nSURLSelInitFileURLWithPath = objc.RegisterName("initFileURLWithPath:")
-	_nSURLSelFileURLWithPathIsDirectoryRelativeToURL = objc.RegisterName("fileURLWithPath:isDirectory:relativeToURL:")
-	_nSURLSelFileURLWithPathRelativeToURL = objc.RegisterName("fileURLWithPath:relativeToURL:")
-	_nSURLSelFileURLWithPathIsDirectory = objc.RegisterName("fileURLWithPath:isDirectory:")
-	_nSURLSelFileURLWithPath = objc.RegisterName("fileURLWithPath:")
-	_nSURLSelInitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL = objc.RegisterName("initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:")
-	_nSURLSelFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL = objc.RegisterName("fileURLWithFileSystemRepresentation:isDirectory:relativeToURL:")
-	_nSURLSelInitWithString = objc.RegisterName("initWithString:")
-	_nSURLSelInitWithStringRelativeToURL = objc.RegisterName("initWithString:relativeToURL:")
-	_nSURLSelURLWithString = objc.RegisterName("URLWithString:")
-	_nSURLSelURLWithStringRelativeToURL = objc.RegisterName("URLWithString:relativeToURL:")
-	_nSURLSelInitWithStringEncodingInvalidCharacters = objc.RegisterName("initWithString:encodingInvalidCharacters:")
-	_nSURLSelURLWithStringEncodingInvalidCharacters = objc.RegisterName("URLWithString:encodingInvalidCharacters:")
-	_nSURLSelInitWithDataRepresentationRelativeToURL = objc.RegisterName("initWithDataRepresentation:relativeToURL:")
-	_nSURLSelURLWithDataRepresentationRelativeToURL = objc.RegisterName("URLWithDataRepresentation:relativeToURL:")
-	_nSURLSelInitAbsoluteURLWithDataRepresentationRelativeToURL = objc.RegisterName("initAbsoluteURLWithDataRepresentation:relativeToURL:")
-	_nSURLSelAbsoluteURLWithDataRepresentationRelativeToURL = objc.RegisterName("absoluteURLWithDataRepresentation:relativeToURL:")
-	_nSURLSelGetFileSystemRepresentationMaxLength = objc.RegisterName("getFileSystemRepresentation:maxLength:")
-	_nSURLSelIsFileReferenceURL = objc.RegisterName("isFileReferenceURL")
-	_nSURLSelFileReferenceURL = objc.RegisterName("fileReferenceURL")
-	_nSURLSelGetResourceValueForKeyError = objc.RegisterName("getResourceValue:forKey:error:")
-	_nSURLSelResourceValuesForKeysError = objc.RegisterName("resourceValuesForKeys:error:")
-	_nSURLSelSetResourceValueForKeyError = objc.RegisterName("setResourceValue:forKey:error:")
-	_nSURLSelSetResourceValuesError = objc.RegisterName("setResourceValues:error:")
-	_nSURLSelRemoveCachedResourceValueForKey = objc.RegisterName("removeCachedResourceValueForKey:")
-	_nSURLSelRemoveAllCachedResourceValues = objc.RegisterName("removeAllCachedResourceValues")
-	_nSURLSelSetTemporaryResourceValueForKey = objc.RegisterName("setTemporaryResourceValue:forKey:")
+	_clsNSURL                                                                        = _objcClass("NSURL")
+	_nSURLSelInitWithSchemeHostPath                                                  = objc.RegisterName("initWithScheme:host:path:")
+	_nSURLSelInitFileURLWithPathIsDirectoryRelativeToURL                             = objc.RegisterName("initFileURLWithPath:isDirectory:relativeToURL:")
+	_nSURLSelInitFileURLWithPathRelativeToURL                                        = objc.RegisterName("initFileURLWithPath:relativeToURL:")
+	_nSURLSelInitFileURLWithPathIsDirectory                                          = objc.RegisterName("initFileURLWithPath:isDirectory:")
+	_nSURLSelInitFileURLWithPath                                                     = objc.RegisterName("initFileURLWithPath:")
+	_nSURLSelFileURLWithPathIsDirectoryRelativeToURL                                 = objc.RegisterName("fileURLWithPath:isDirectory:relativeToURL:")
+	_nSURLSelFileURLWithPathRelativeToURL                                            = objc.RegisterName("fileURLWithPath:relativeToURL:")
+	_nSURLSelFileURLWithPathIsDirectory                                              = objc.RegisterName("fileURLWithPath:isDirectory:")
+	_nSURLSelFileURLWithPath                                                         = objc.RegisterName("fileURLWithPath:")
+	_nSURLSelInitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL         = objc.RegisterName("initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:")
+	_nSURLSelFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL             = objc.RegisterName("fileURLWithFileSystemRepresentation:isDirectory:relativeToURL:")
+	_nSURLSelInitWithString                                                          = objc.RegisterName("initWithString:")
+	_nSURLSelInitWithStringRelativeToURL                                             = objc.RegisterName("initWithString:relativeToURL:")
+	_nSURLSelURLWithString                                                           = objc.RegisterName("URLWithString:")
+	_nSURLSelURLWithStringRelativeToURL                                              = objc.RegisterName("URLWithString:relativeToURL:")
+	_nSURLSelInitWithStringEncodingInvalidCharacters                                 = objc.RegisterName("initWithString:encodingInvalidCharacters:")
+	_nSURLSelURLWithStringEncodingInvalidCharacters                                  = objc.RegisterName("URLWithString:encodingInvalidCharacters:")
+	_nSURLSelInitWithDataRepresentationRelativeToURL                                 = objc.RegisterName("initWithDataRepresentation:relativeToURL:")
+	_nSURLSelURLWithDataRepresentationRelativeToURL                                  = objc.RegisterName("URLWithDataRepresentation:relativeToURL:")
+	_nSURLSelInitAbsoluteURLWithDataRepresentationRelativeToURL                      = objc.RegisterName("initAbsoluteURLWithDataRepresentation:relativeToURL:")
+	_nSURLSelAbsoluteURLWithDataRepresentationRelativeToURL                          = objc.RegisterName("absoluteURLWithDataRepresentation:relativeToURL:")
+	_nSURLSelGetFileSystemRepresentationMaxLength                                    = objc.RegisterName("getFileSystemRepresentation:maxLength:")
+	_nSURLSelIsFileReferenceURL                                                      = objc.RegisterName("isFileReferenceURL")
+	_nSURLSelFileReferenceURL                                                        = objc.RegisterName("fileReferenceURL")
+	_nSURLSelGetResourceValueForKeyError                                             = objc.RegisterName("getResourceValue:forKey:error:")
+	_nSURLSelResourceValuesForKeysError                                              = objc.RegisterName("resourceValuesForKeys:error:")
+	_nSURLSelSetResourceValueForKeyError                                             = objc.RegisterName("setResourceValue:forKey:error:")
+	_nSURLSelSetResourceValuesError                                                  = objc.RegisterName("setResourceValues:error:")
+	_nSURLSelRemoveCachedResourceValueForKey                                         = objc.RegisterName("removeCachedResourceValueForKey:")
+	_nSURLSelRemoveAllCachedResourceValues                                           = objc.RegisterName("removeAllCachedResourceValues")
+	_nSURLSelSetTemporaryResourceValueForKey                                         = objc.RegisterName("setTemporaryResourceValue:forKey:")
 	_nSURLSelBookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError = objc.RegisterName("bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:")
 	_nSURLSelInitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError = objc.RegisterName("initByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:")
-	_nSURLSelURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError = objc.RegisterName("URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:")
-	_nSURLSelResourceValuesForKeysFromBookmarkData = objc.RegisterName("resourceValuesForKeys:fromBookmarkData:")
-	_nSURLSelWriteBookmarkDataToURLOptionsError = objc.RegisterName("writeBookmarkData:toURL:options:error:")
-	_nSURLSelBookmarkDataWithContentsOfURLError = objc.RegisterName("bookmarkDataWithContentsOfURL:error:")
-	_nSURLSelURLByResolvingAliasFileAtURLOptionsError = objc.RegisterName("URLByResolvingAliasFileAtURL:options:error:")
-	_nSURLSelStartAccessingSecurityScopedResource = objc.RegisterName("startAccessingSecurityScopedResource")
-	_nSURLSelStopAccessingSecurityScopedResource = objc.RegisterName("stopAccessingSecurityScopedResource")
-	_nSURLSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_nSURLSelAbsoluteString = objc.RegisterName("absoluteString")
-	_nSURLSelRelativeString = objc.RegisterName("relativeString")
-	_nSURLSelBaseURL = objc.RegisterName("baseURL")
-	_nSURLSelAbsoluteURL = objc.RegisterName("absoluteURL")
-	_nSURLSelScheme = objc.RegisterName("scheme")
-	_nSURLSelResourceSpecifier = objc.RegisterName("resourceSpecifier")
-	_nSURLSelHost = objc.RegisterName("host")
-	_nSURLSelPort = objc.RegisterName("port")
-	_nSURLSelUser = objc.RegisterName("user")
-	_nSURLSelPassword = objc.RegisterName("password")
-	_nSURLSelPath = objc.RegisterName("path")
-	_nSURLSelFragment = objc.RegisterName("fragment")
-	_nSURLSelParameterString = objc.RegisterName("parameterString")
-	_nSURLSelQuery = objc.RegisterName("query")
-	_nSURLSelRelativePath = objc.RegisterName("relativePath")
-	_nSURLSelHasDirectoryPath = objc.RegisterName("hasDirectoryPath")
-	_nSURLSelFileSystemRepresentation = objc.RegisterName("fileSystemRepresentation")
-	_nSURLSelIsFileURL = objc.RegisterName("isFileURL")
-	_nSURLSelStandardizedURL = objc.RegisterName("standardizedURL")
-	_nSURLSelFilePathURL = objc.RegisterName("filePathURL")
-	_nSURLSelGetPromisedItemResourceValueForKeyError = objc.RegisterName("getPromisedItemResourceValue:forKey:error:")
-	_nSURLSelPromisedItemResourceValuesForKeysError = objc.RegisterName("promisedItemResourceValuesForKeys:error:")
-	_nSURLSelCheckPromisedItemIsReachableAndReturnError = objc.RegisterName("checkPromisedItemIsReachableAndReturnError:")
-	_nSURLSelFileURLWithPathComponents = objc.RegisterName("fileURLWithPathComponents:")
-	_nSURLSelURLByAppendingPathComponent = objc.RegisterName("URLByAppendingPathComponent:")
-	_nSURLSelURLByAppendingPathComponentIsDirectory = objc.RegisterName("URLByAppendingPathComponent:isDirectory:")
-	_nSURLSelURLByAppendingPathExtension = objc.RegisterName("URLByAppendingPathExtension:")
-	_nSURLSelCheckResourceIsReachableAndReturnError = objc.RegisterName("checkResourceIsReachableAndReturnError:")
-	_nSURLSelPathComponents = objc.RegisterName("pathComponents")
-	_nSURLSelLastPathComponent = objc.RegisterName("lastPathComponent")
-	_nSURLSelPathExtension = objc.RegisterName("pathExtension")
-	_nSURLSelURLByDeletingLastPathComponent = objc.RegisterName("URLByDeletingLastPathComponent")
-	_nSURLSelURLByDeletingPathExtension = objc.RegisterName("URLByDeletingPathExtension")
-	_nSURLSelURLByStandardizingPath = objc.RegisterName("URLByStandardizingPath")
-	_nSURLSelURLByResolvingSymlinksInPath = objc.RegisterName("URLByResolvingSymlinksInPath")
-	_nSURLSelResourceDataUsingCache = objc.RegisterName("resourceDataUsingCache:")
-	_nSURLSelLoadResourceDataNotifyingClientUsingCache = objc.RegisterName("loadResourceDataNotifyingClient:usingCache:")
-	_nSURLSelPropertyForKey = objc.RegisterName("propertyForKey:")
-	_nSURLSelSetResourceData = objc.RegisterName("setResourceData:")
-	_nSURLSelSetPropertyForKey = objc.RegisterName("setProperty:forKey:")
-	_nSURLSelURLHandleUsingCache = objc.RegisterName("URLHandleUsingCache:")
+	_nSURLSelURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError  = objc.RegisterName("URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:")
+	_nSURLSelResourceValuesForKeysFromBookmarkData                                   = objc.RegisterName("resourceValuesForKeys:fromBookmarkData:")
+	_nSURLSelWriteBookmarkDataToURLOptionsError                                      = objc.RegisterName("writeBookmarkData:toURL:options:error:")
+	_nSURLSelBookmarkDataWithContentsOfURLError                                      = objc.RegisterName("bookmarkDataWithContentsOfURL:error:")
+	_nSURLSelURLByResolvingAliasFileAtURLOptionsError                                = objc.RegisterName("URLByResolvingAliasFileAtURL:options:error:")
+	_nSURLSelStartAccessingSecurityScopedResource                                    = objc.RegisterName("startAccessingSecurityScopedResource")
+	_nSURLSelStopAccessingSecurityScopedResource                                     = objc.RegisterName("stopAccessingSecurityScopedResource")
+	_nSURLSelDataRepresentation                                                      = objc.RegisterName("dataRepresentation")
+	_nSURLSelAbsoluteString                                                          = objc.RegisterName("absoluteString")
+	_nSURLSelRelativeString                                                          = objc.RegisterName("relativeString")
+	_nSURLSelBaseURL                                                                 = objc.RegisterName("baseURL")
+	_nSURLSelAbsoluteURL                                                             = objc.RegisterName("absoluteURL")
+	_nSURLSelScheme                                                                  = objc.RegisterName("scheme")
+	_nSURLSelResourceSpecifier                                                       = objc.RegisterName("resourceSpecifier")
+	_nSURLSelHost                                                                    = objc.RegisterName("host")
+	_nSURLSelPort                                                                    = objc.RegisterName("port")
+	_nSURLSelUser                                                                    = objc.RegisterName("user")
+	_nSURLSelPassword                                                                = objc.RegisterName("password")
+	_nSURLSelPath                                                                    = objc.RegisterName("path")
+	_nSURLSelFragment                                                                = objc.RegisterName("fragment")
+	_nSURLSelParameterString                                                         = objc.RegisterName("parameterString")
+	_nSURLSelQuery                                                                   = objc.RegisterName("query")
+	_nSURLSelRelativePath                                                            = objc.RegisterName("relativePath")
+	_nSURLSelHasDirectoryPath                                                        = objc.RegisterName("hasDirectoryPath")
+	_nSURLSelFileSystemRepresentation                                                = objc.RegisterName("fileSystemRepresentation")
+	_nSURLSelIsFileURL                                                               = objc.RegisterName("isFileURL")
+	_nSURLSelStandardizedURL                                                         = objc.RegisterName("standardizedURL")
+	_nSURLSelFilePathURL                                                             = objc.RegisterName("filePathURL")
+	_nSURLSelGetPromisedItemResourceValueForKeyError                                 = objc.RegisterName("getPromisedItemResourceValue:forKey:error:")
+	_nSURLSelPromisedItemResourceValuesForKeysError                                  = objc.RegisterName("promisedItemResourceValuesForKeys:error:")
+	_nSURLSelCheckPromisedItemIsReachableAndReturnError                              = objc.RegisterName("checkPromisedItemIsReachableAndReturnError:")
+	_nSURLSelFileURLWithPathComponents                                               = objc.RegisterName("fileURLWithPathComponents:")
+	_nSURLSelURLByAppendingPathComponent                                             = objc.RegisterName("URLByAppendingPathComponent:")
+	_nSURLSelURLByAppendingPathComponentIsDirectory                                  = objc.RegisterName("URLByAppendingPathComponent:isDirectory:")
+	_nSURLSelURLByAppendingPathExtension                                             = objc.RegisterName("URLByAppendingPathExtension:")
+	_nSURLSelCheckResourceIsReachableAndReturnError                                  = objc.RegisterName("checkResourceIsReachableAndReturnError:")
+	_nSURLSelPathComponents                                                          = objc.RegisterName("pathComponents")
+	_nSURLSelLastPathComponent                                                       = objc.RegisterName("lastPathComponent")
+	_nSURLSelPathExtension                                                           = objc.RegisterName("pathExtension")
+	_nSURLSelURLByDeletingLastPathComponent                                          = objc.RegisterName("URLByDeletingLastPathComponent")
+	_nSURLSelURLByDeletingPathExtension                                              = objc.RegisterName("URLByDeletingPathExtension")
+	_nSURLSelURLByStandardizingPath                                                  = objc.RegisterName("URLByStandardizingPath")
+	_nSURLSelURLByResolvingSymlinksInPath                                            = objc.RegisterName("URLByResolvingSymlinksInPath")
+	_nSURLSelResourceDataUsingCache                                                  = objc.RegisterName("resourceDataUsingCache:")
+	_nSURLSelLoadResourceDataNotifyingClientUsingCache                               = objc.RegisterName("loadResourceDataNotifyingClient:usingCache:")
+	_nSURLSelPropertyForKey                                                          = objc.RegisterName("propertyForKey:")
+	_nSURLSelSetResourceData                                                         = objc.RegisterName("setResourceData:")
+	_nSURLSelSetPropertyForKey                                                       = objc.RegisterName("setProperty:forKey:")
+	_nSURLSelURLHandleUsingCache                                                     = objc.RegisterName("URLHandleUsingCache:")
 )
 
 func NSURLFromID(id objc.ID) *NSURL {
@@ -115,129 +115,171 @@ func NSURLFromID(id objc.ID) *NSURL {
 // Deprecated: Use NSURLComponents instead, which lets you create a valid URL with any valid combination of URL components and subcomponents (not just scheme, host and path), and lets you set components and subcomponents with either percent-encoded or un-percent-encoded strings.
 func (o *NSURL) InitWithSchemeHostPath(scheme *NSString, host *NSString, path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithSchemeHostPath, scheme.Ptr(), host.Ptr(), path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathIsDirectoryRelativeToURL, path.Ptr(), isDir, baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathRelativeToURL, path.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPathIsDirectory, path.Ptr(), isDir)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitFileURLWithPath(path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLFileURLWithPathIsDirectoryRelativeToURL(path *NSString, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathIsDirectoryRelativeToURL, path.Ptr(), isDir, baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLFileURLWithPathRelativeToURL(path *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathRelativeToURL, path.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLFileURLWithPathIsDirectory(path *NSString, isDir bool) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathIsDirectory, path.Ptr(), isDir)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLFileURLWithPath(path *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL, path, isDir, baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL, path, isDir, baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitWithString(uRLString *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithString, uRLString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLURLWithString(uRLString *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithString, uRLString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLURLWithStringRelativeToURL(uRLString *NSString, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringRelativeToURL, uRLString.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 // Initializes an `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
 func (o *NSURL) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 // Initializes and returns a newly created `NSURL` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURL` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURL` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURL` instance for a valid URL, or `nil` if the URL is invalid.
 func NSURLURLWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) InitAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitAbsoluteURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func NSURLAbsoluteURLWithDataRepresentationRelativeToURL(data *NSData, baseURL *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelAbsoluteURLWithDataRepresentationRelativeToURL, data.Ptr(), baseURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -253,7 +295,9 @@ func (o *NSURL) IsFileReferenceURL() bool {
 
 func (o *NSURL) FileReferenceURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFileReferenceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -308,7 +352,9 @@ func (o *NSURL) SetTemporaryResourceValueForKey(value objc.ID, key *NSString) {
 func (o *NSURL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *NSArray[*NSString], relativeURL *NSURL) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelBookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError, options, keys.Ptr(), relativeURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -318,7 +364,9 @@ func (o *NSURL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToU
 func (o *NSURL) InitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *NSData, options NSURLBookmarkResolutionOptions, relativeURL *NSURL, isStale *bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelInitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -328,7 +376,9 @@ func (o *NSURL) InitByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsSta
 func NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *NSData, options NSURLBookmarkResolutionOptions, relativeURL *NSURL, isStale *bool) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError, bookmarkData.Ptr(), options, relativeURL.Ptr(), isStale, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -352,7 +402,9 @@ func NSURLWriteBookmarkDataToURLOptionsError(bookmarkData *NSData, bookmarkFileU
 func NSURLBookmarkDataWithContentsOfURLError(bookmarkFileURL *NSURL) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelBookmarkDataWithContentsOfURLError, bookmarkFileURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -362,7 +414,9 @@ func NSURLBookmarkDataWithContentsOfURLError(bookmarkFileURL *NSURL) (*NSData, e
 func NSURLURLByResolvingAliasFileAtURLOptionsError(url *NSURL, options NSURLBookmarkResolutionOptions) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelURLByResolvingAliasFileAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -380,100 +434,132 @@ func (o *NSURL) StopAccessingSecurityScopedResource() {
 
 func (o *NSURL) DataRepresentation() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSURL) AbsoluteString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelAbsoluteString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) RelativeString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelRelativeString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) BaseURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelBaseURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) AbsoluteURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelAbsoluteURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) Scheme() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) ResourceSpecifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelResourceSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) Host() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) Port() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSURL) User() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) Password() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) Path() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) Fragment() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFragment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) ParameterString() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelParameterString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) Query() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // Deprecated: The parameterString method is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, parameterString will always return nil, and the path method will return the complete path including the semicolon separator and params component if the URL string contains them.
 func (o *NSURL) RelativePath() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelRelativePath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -494,13 +580,17 @@ func (o *NSURL) IsFileURL() bool {
 
 func (o *NSURL) StandardizedURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelStandardizedURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) FilePathURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelFilePathURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -533,25 +623,33 @@ func (o *NSURL) CheckPromisedItemIsReachableAndReturnError() (bool, error) {
 
 func NSURLFileURLWithPathComponents(components *NSArray[*NSString]) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURL), _nSURLSelFileURLWithPathComponents, components.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByAppendingPathComponent(pathComponent *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathComponent, pathComponent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByAppendingPathComponentIsDirectory(pathComponent *NSString, isDirectory bool) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathComponentIsDirectory, pathComponent.Ptr(), isDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByAppendingPathExtension(pathExtension *NSString) *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByAppendingPathExtension, pathExtension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -566,50 +664,66 @@ func (o *NSURL) CheckResourceIsReachableAndReturnError() (bool, error) {
 
 func (o *NSURL) PathComponents() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPathComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSURL) LastPathComponent() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelLastPathComponent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) PathExtension() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelPathExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURL) URLByDeletingLastPathComponent() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByDeletingLastPathComponent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByDeletingPathExtension() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByDeletingPathExtension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByStandardizingPath() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByStandardizingPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSURL) URLByResolvingSymlinksInPath() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLByResolvingSymlinksInPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) ResourceDataUsingCache(shouldUseCache bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelResourceDataUsingCache, shouldUseCache)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -639,7 +753,8 @@ func (o *NSURL) SetPropertyForKey(property objc.ID, propertyKey *NSString) bool 
 // Deprecated: Use NSURLConnection instead
 func (o *NSURL) URLHandleUsingCache(shouldUseCache bool) *NSURLHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSelURLHandleUsingCache, shouldUseCache)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLHandleFromID(_ret)
 }
-

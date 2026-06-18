@@ -18,7 +18,7 @@ type CSImportExtension struct {
 }
 
 var (
-	_clsCSImportExtension = _objcClass("CSImportExtension")
+	_clsCSImportExtension                                  = _objcClass("CSImportExtension")
 	_cSImportExtensionSelUpdateAttributesForFileAtURLError = objc.RegisterName("updateAttributes:forFileAtURL:error:")
 )
 
@@ -40,4 +40,3 @@ func (o *CSImportExtension) UpdateAttributesForFileAtURLError(attributes *CSSear
 	}
 	return _ret, nil
 }
-

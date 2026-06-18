@@ -140,4 +140,3 @@ type MTRXPCServerProtocol_MTRDevice interface {
 // MTRXPCServerProtocol_MTRDeviceController wraps the ObjC protocol MTRXPCServerProtocol_MTRDeviceController.
 type MTRXPCServerProtocol_MTRDeviceController interface {
 }
-

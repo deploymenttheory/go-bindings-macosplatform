@@ -16,10 +16,10 @@ type NSScrollEdgeEffectStyle struct {
 }
 
 var (
-	_clsNSScrollEdgeEffectStyle = _objcClass("NSScrollEdgeEffectStyle")
+	_clsNSScrollEdgeEffectStyle               = _objcClass("NSScrollEdgeEffectStyle")
 	_nSScrollEdgeEffectStyleSelAutomaticStyle = objc.RegisterName("automaticStyle")
-	_nSScrollEdgeEffectStyleSelSoftStyle = objc.RegisterName("softStyle")
-	_nSScrollEdgeEffectStyleSelHardStyle = objc.RegisterName("hardStyle")
+	_nSScrollEdgeEffectStyleSelSoftStyle      = objc.RegisterName("softStyle")
+	_nSScrollEdgeEffectStyleSelHardStyle      = objc.RegisterName("hardStyle")
 )
 
 func NSScrollEdgeEffectStyleFromID(id objc.ID) *NSScrollEdgeEffectStyle {
@@ -35,21 +35,26 @@ func NSScrollEdgeEffectStyleFromID(id objc.ID) *NSScrollEdgeEffectStyle {
 // The automatic scroll edge effect style.
 func NSScrollEdgeEffectStyleAutomaticStyle() *NSScrollEdgeEffectStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelAutomaticStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollEdgeEffectStyleFromID(_ret)
 }
 
 // A scroll edge effect with a soft edge.
 func NSScrollEdgeEffectStyleSoftStyle() *NSScrollEdgeEffectStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelSoftStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollEdgeEffectStyleFromID(_ret)
 }
 
 // A scroll edge effect with a hard cutoff.
 func NSScrollEdgeEffectStyleHardStyle() *NSScrollEdgeEffectStyle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScrollEdgeEffectStyle), _nSScrollEdgeEffectStyleSelHardStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollEdgeEffectStyleFromID(_ret)
 }
-

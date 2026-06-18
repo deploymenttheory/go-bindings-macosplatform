@@ -25,4 +25,3 @@ func HKCorrelationTypeFromID(id objc.ID) *HKCorrelationType {
 	purego.Track(o)
 	return o
 }
-

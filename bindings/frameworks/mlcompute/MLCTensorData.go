@@ -18,12 +18,12 @@ type MLCTensorData struct {
 }
 
 var (
-	_clsMLCTensorData = _objcClass("MLCTensorData")
-	_mLCTensorDataSelDataWithBytesNoCopyLength = objc.RegisterName("dataWithBytesNoCopy:length:")
-	_mLCTensorDataSelDataWithImmutableBytesNoCopyLength = objc.RegisterName("dataWithImmutableBytesNoCopy:length:")
+	_clsMLCTensorData                                     = _objcClass("MLCTensorData")
+	_mLCTensorDataSelDataWithBytesNoCopyLength            = objc.RegisterName("dataWithBytesNoCopy:length:")
+	_mLCTensorDataSelDataWithImmutableBytesNoCopyLength   = objc.RegisterName("dataWithImmutableBytesNoCopy:length:")
 	_mLCTensorDataSelDataWithBytesNoCopyLengthDeallocator = objc.RegisterName("dataWithBytesNoCopy:length:deallocator:")
-	_mLCTensorDataSelBytes = objc.RegisterName("bytes")
-	_mLCTensorDataSelLength = objc.RegisterName("length")
+	_mLCTensorDataSelBytes                                = objc.RegisterName("bytes")
+	_mLCTensorDataSelLength                               = objc.RegisterName("length")
 )
 
 func MLCTensorDataFromID(id objc.ID) *MLCTensorData {
@@ -39,14 +39,18 @@ func MLCTensorDataFromID(id objc.ID) *MLCTensorData {
 // @abstract   Creates a data object that holds a given number of bytes from a given buffer. @note       The returned object will not take ownership of the \p bytes pointer and thus will not free it on deallocation. @param      bytes   A buffer containing data for the new object. @param      length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes. @return     A new \p MLCTensorData object.
 func MLCTensorDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *MLCTensorData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorData), _mLCTensorDataSelDataWithBytesNoCopyLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDataFromID(_ret)
 }
 
 // @abstract   Creates a data object that holds a given number of bytes from a given buffer. @note       The returned object will not take ownership of the \p bytes pointer and thus will not free it on deallocation. The underlying bytes in the return object should not be mutated. @param      bytes   A buffer containing data for the new object. @param      length  The number of bytes to hold from \p bytes. This value must not exceed the length of \p bytes. @return     A new \p MLCTensorData object.
 func MLCTensorDataDataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *MLCTensorData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorData), _mLCTensorDataSelDataWithImmutableBytesNoCopyLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDataFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func MLCTensorDataDataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, le
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCTensorData), _mLCTensorDataSelDataWithBytesNoCopyLengthDeallocator, bytes_, length, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorDataFromID(_ret)
 }
 
@@ -75,4 +81,3 @@ func (o *MLCTensorData) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCTensorDataSelLength)
 	return _ret
 }
-

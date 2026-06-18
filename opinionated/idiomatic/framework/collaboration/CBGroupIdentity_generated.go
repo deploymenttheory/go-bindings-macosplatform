@@ -69,4 +69,3 @@ type GroupIdentityable interface {
 }
 
 var _ GroupIdentityable = (*GroupIdentity)(nil)
-

@@ -771,4 +771,3 @@ type MTLThreadgroupBinding interface {
 type MTLVisibleFunctionTable interface {
 	MTLResource
 }
-

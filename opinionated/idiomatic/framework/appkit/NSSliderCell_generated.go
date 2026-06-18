@@ -643,4 +643,3 @@ type SliderCellable interface {
 }
 
 var _ SliderCellable = (*SliderCell)(nil)
-

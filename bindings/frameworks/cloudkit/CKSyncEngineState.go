@@ -16,15 +16,15 @@ type CKSyncEngineState struct {
 }
 
 var (
-	_clsCKSyncEngineState = _objcClass("CKSyncEngineState")
-	_cKSyncEngineStateSelAddPendingRecordZoneChanges = objc.RegisterName("addPendingRecordZoneChanges:")
-	_cKSyncEngineStateSelRemovePendingRecordZoneChanges = objc.RegisterName("removePendingRecordZoneChanges:")
-	_cKSyncEngineStateSelAddPendingDatabaseChanges = objc.RegisterName("addPendingDatabaseChanges:")
-	_cKSyncEngineStateSelRemovePendingDatabaseChanges = objc.RegisterName("removePendingDatabaseChanges:")
-	_cKSyncEngineStateSelPendingRecordZoneChanges = objc.RegisterName("pendingRecordZoneChanges")
-	_cKSyncEngineStateSelPendingDatabaseChanges = objc.RegisterName("pendingDatabaseChanges")
-	_cKSyncEngineStateSelHasPendingUntrackedChanges = objc.RegisterName("hasPendingUntrackedChanges")
-	_cKSyncEngineStateSelSetHasPendingUntrackedChanges = objc.RegisterName("setHasPendingUntrackedChanges:")
+	_clsCKSyncEngineState                                  = _objcClass("CKSyncEngineState")
+	_cKSyncEngineStateSelAddPendingRecordZoneChanges       = objc.RegisterName("addPendingRecordZoneChanges:")
+	_cKSyncEngineStateSelRemovePendingRecordZoneChanges    = objc.RegisterName("removePendingRecordZoneChanges:")
+	_cKSyncEngineStateSelAddPendingDatabaseChanges         = objc.RegisterName("addPendingDatabaseChanges:")
+	_cKSyncEngineStateSelRemovePendingDatabaseChanges      = objc.RegisterName("removePendingDatabaseChanges:")
+	_cKSyncEngineStateSelPendingRecordZoneChanges          = objc.RegisterName("pendingRecordZoneChanges")
+	_cKSyncEngineStateSelPendingDatabaseChanges            = objc.RegisterName("pendingDatabaseChanges")
+	_cKSyncEngineStateSelHasPendingUntrackedChanges        = objc.RegisterName("hasPendingUntrackedChanges")
+	_cKSyncEngineStateSelSetHasPendingUntrackedChanges     = objc.RegisterName("setHasPendingUntrackedChanges:")
 	_cKSyncEngineStateSelZoneIDsWithUnfetchedServerChanges = objc.RegisterName("zoneIDsWithUnfetchedServerChanges")
 )
 
@@ -38,7 +38,7 @@ func CKSyncEngineStateFromID(id objc.ID) *CKSyncEngineState {
 	return o
 }
 
-// Adds the specified record zone changes to the state. - Parameters: - changes: An array of record zone changes. Use this method to enable the sync engine to manage your pending record zone changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. Then, when creating the change batch for the next send operation, retrieve the pending changes from the ``CKSyncEngineState/pendingRecordZoneChanges`` property. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type ``CKSyncEngineSentRecordZoneChangesEvent``. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue or exceeding the rate limit. - Note: The order in which you apply record zone changes is important. For example: - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord`, the sync engine discards the delete and sends only the save change.
+// Adds the specified record zone changes to the state. - Parameters: - changes: An array of record zone changes. Use this method to enable the sync engine to manage your pending record zone changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. Then, when creating the change batch for the next send operation, retrieve the pending changes from the “CKSyncEngineState/pendingRecordZoneChanges“ property. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentRecordZoneChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue or exceeding the rate limit. - Note: The order in which you apply record zone changes is important. For example: - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingRecordZoneChange` with type `CKSyncEnginePendingRecordZoneChangeTypeDeleteRecord` for recordA then another with type `CKSyncEnginePendingRecordZoneChangeTypeSaveRecord`, the sync engine discards the delete and sends only the save change.
 func (o *CKSyncEngineState) AddPendingRecordZoneChanges(changes *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelAddPendingRecordZoneChanges, changes.Ptr())
 }
@@ -48,7 +48,7 @@ func (o *CKSyncEngineState) RemovePendingRecordZoneChanges(changes *foundation.N
 	o.Ptr().Send(_cKSyncEngineStateSelRemovePendingRecordZoneChanges, changes.Ptr())
 }
 
-// Adds the specified database changes to the state. - Parameters: - changes: An array of database changes. Use this method to enable the sync engine to manage your pending database changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type ``CKSyncEngineSentDatabaseChangesEvent``. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue, or exceeding the rate limit. - Note: The order in which you apply database changes is important. For example: - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone`, the sync engine discards the delete and sends only the save change.
+// Adds the specified database changes to the state. - Parameters: - changes: An array of database changes. Use this method to enable the sync engine to manage your pending database changes. For example, when someone makes a change that your app needs to send to the server, use this method to record the change. If there are no scheduled sync operations when you invoke this method, the sync engine automatically schedules one to send the changes. After the engine sends those changes, it notifies your app's sync delegate with an event of type “CKSyncEngineSentDatabaseChangesEvent“. The sync engine maintains a consistent collection of tracked pending changes, deduplicating them as necessary. The engine removes changes from the list as it sends them, but retains any that fail due to a recoverable error, such as a network issue, or exceeding the rate limit. - Note: The order in which you apply database changes is important. For example: - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone`, the sync engine discards the save and sends only the delete change. - If you add a `CKSyncEnginePendingDatabaseChange` with type `CKSyncEnginePendingDatabaseChangeTypeDeleteZone` for zoneA then another with type `CKSyncEnginePendingDatabaseChangeTypeSaveZone`, the sync engine discards the delete and sends only the save change.
 func (o *CKSyncEngineState) AddPendingDatabaseChanges(changes *foundation.NSArray[*CKSyncEnginePendingDatabaseChange]) {
 	o.Ptr().Send(_cKSyncEngineStateSelAddPendingDatabaseChanges, changes.Ptr())
 }
@@ -58,21 +58,25 @@ func (o *CKSyncEngineState) RemovePendingDatabaseChanges(changes *foundation.NSA
 	o.Ptr().Send(_cKSyncEngineStateSelRemovePendingDatabaseChanges, changes.Ptr())
 }
 
-// A list of record zone changes that the sync engine has yet to send to the iCloud servers. This array contains any pending record zone changes to send to the iCloud servers. After the sync engine sends those changes, your app's sync delegate receives an event of type ``CKSyncEngineSentRecordZoneChangesEvent``. The sync engine keeps this list up-to-date while sending changes to the server. For example, when it successfully saves a record, it removes that change from this list. If it fails to send a change due to some retryable error (e.g. a network failure), it keeps that change in this list. Use the ``CKSyncEngineState/addPendingRecordZoneChanges:`` and ``CKSyncEngineState/removePendingRecordZoneChanges:`` methods to modify the array's contents.
+// A list of record zone changes that the sync engine has yet to send to the iCloud servers. This array contains any pending record zone changes to send to the iCloud servers. After the sync engine sends those changes, your app's sync delegate receives an event of type “CKSyncEngineSentRecordZoneChangesEvent“. The sync engine keeps this list up-to-date while sending changes to the server. For example, when it successfully saves a record, it removes that change from this list. If it fails to send a change due to some retryable error (e.g. a network failure), it keeps that change in this list. Use the “CKSyncEngineState/addPendingRecordZoneChanges:“ and “CKSyncEngineState/removePendingRecordZoneChanges:“ methods to modify the array's contents.
 func (o *CKSyncEngineState) PendingRecordZoneChanges() *foundation.NSArray[*CKSyncEnginePendingRecordZoneChange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineStateSelPendingRecordZoneChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKSyncEnginePendingRecordZoneChange](_ret)
 }
 
-// A list of database changes that the sync engine has yet to send to the iCloud servers. This array contains any pending database changes to send to the iCloud servers. After the sync engine sends those changes, your app's sync delegate receives an event of type ``CKSyncEngineSentDatabaseChangesEvent``. The sync engine keeps this list up-to-date while sending changes to the server. For example, when it successfully saves a zone, it will remove that change from this list. If it fails to send a change due to some retryable error (e.g. a network failure), it will keep that change in this list. Use the ``CKSyncEngineState/addPendingDatabaseChanges:`` and ``CKSyncEngineState/removePendingDatabaseChanges:`` methods to modify the array's contents.
+// A list of database changes that the sync engine has yet to send to the iCloud servers. This array contains any pending database changes to send to the iCloud servers. After the sync engine sends those changes, your app's sync delegate receives an event of type “CKSyncEngineSentDatabaseChangesEvent“. The sync engine keeps this list up-to-date while sending changes to the server. For example, when it successfully saves a zone, it will remove that change from this list. If it fails to send a change due to some retryable error (e.g. a network failure), it will keep that change in this list. Use the “CKSyncEngineState/addPendingDatabaseChanges:“ and “CKSyncEngineState/removePendingDatabaseChanges:“ methods to modify the array's contents.
 func (o *CKSyncEngineState) PendingDatabaseChanges() *foundation.NSArray[*CKSyncEnginePendingDatabaseChange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineStateSelPendingDatabaseChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKSyncEnginePendingDatabaseChange](_ret)
 }
 
-// A Boolean value that indicates whether there are pending changes that the sync engine is unaware of. Use this property to inform the sync engine that there are pending changes other than those available in ``CKSyncEngineState/pendingRecordZoneChanges``. After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the ``CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:`` method. Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
+// A Boolean value that indicates whether there are pending changes that the sync engine is unaware of. Use this property to inform the sync engine that there are pending changes other than those available in “CKSyncEngineState/pendingRecordZoneChanges“. After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the “CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:“ method. Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
 func (o *CKSyncEngineState) HasPendingUntrackedChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKSyncEngineStateSelHasPendingUntrackedChanges)
 	return _ret
@@ -85,7 +89,8 @@ func (o *CKSyncEngineState) SetHasPendingUntrackedChanges(hasPendingUntrackedCha
 // The identifiers of zones with changes on the server that have not yet been fetched. The sync engine populates this list automatically, for example when receiving a push notification indicating new changes.
 func (o *CKSyncEngineState) ZoneIDsWithUnfetchedServerChanges() *foundation.NSArray[*CKRecordZoneID] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineStateSelZoneIDsWithUnfetchedServerChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecordZoneID](_ret)
 }
-

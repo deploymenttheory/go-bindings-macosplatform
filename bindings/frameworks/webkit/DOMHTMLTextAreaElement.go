@@ -16,32 +16,32 @@ type DOMHTMLTextAreaElement struct {
 }
 
 var (
-	_clsDOMHTMLTextAreaElement = _objcClass("DOMHTMLTextAreaElement")
-	_dOMHTMLTextAreaElementSelSelect = objc.RegisterName("select")
+	_clsDOMHTMLTextAreaElement                     = _objcClass("DOMHTMLTextAreaElement")
+	_dOMHTMLTextAreaElementSelSelect               = objc.RegisterName("select")
 	_dOMHTMLTextAreaElementSelSetSelectionRangeEnd = objc.RegisterName("setSelectionRange:end:")
-	_dOMHTMLTextAreaElementSelAutofocus = objc.RegisterName("autofocus")
-	_dOMHTMLTextAreaElementSelSetAutofocus = objc.RegisterName("setAutofocus:")
-	_dOMHTMLTextAreaElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLTextAreaElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLTextAreaElementSelForm = objc.RegisterName("form")
-	_dOMHTMLTextAreaElementSelName = objc.RegisterName("name")
-	_dOMHTMLTextAreaElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLTextAreaElementSelReadOnly = objc.RegisterName("readOnly")
-	_dOMHTMLTextAreaElementSelSetReadOnly = objc.RegisterName("setReadOnly:")
-	_dOMHTMLTextAreaElementSelRows = objc.RegisterName("rows")
-	_dOMHTMLTextAreaElementSelSetRows = objc.RegisterName("setRows:")
-	_dOMHTMLTextAreaElementSelCols = objc.RegisterName("cols")
-	_dOMHTMLTextAreaElementSelSetCols = objc.RegisterName("setCols:")
-	_dOMHTMLTextAreaElementSelType = objc.RegisterName("type")
-	_dOMHTMLTextAreaElementSelDefaultValue = objc.RegisterName("defaultValue")
-	_dOMHTMLTextAreaElementSelSetDefaultValue = objc.RegisterName("setDefaultValue:")
-	_dOMHTMLTextAreaElementSelValue = objc.RegisterName("value")
-	_dOMHTMLTextAreaElementSelSetValue = objc.RegisterName("setValue:")
-	_dOMHTMLTextAreaElementSelWillValidate = objc.RegisterName("willValidate")
-	_dOMHTMLTextAreaElementSelSelectionStart = objc.RegisterName("selectionStart")
-	_dOMHTMLTextAreaElementSelSetSelectionStart = objc.RegisterName("setSelectionStart:")
-	_dOMHTMLTextAreaElementSelSelectionEnd = objc.RegisterName("selectionEnd")
-	_dOMHTMLTextAreaElementSelSetSelectionEnd = objc.RegisterName("setSelectionEnd:")
+	_dOMHTMLTextAreaElementSelAutofocus            = objc.RegisterName("autofocus")
+	_dOMHTMLTextAreaElementSelSetAutofocus         = objc.RegisterName("setAutofocus:")
+	_dOMHTMLTextAreaElementSelDisabled             = objc.RegisterName("disabled")
+	_dOMHTMLTextAreaElementSelSetDisabled          = objc.RegisterName("setDisabled:")
+	_dOMHTMLTextAreaElementSelForm                 = objc.RegisterName("form")
+	_dOMHTMLTextAreaElementSelName                 = objc.RegisterName("name")
+	_dOMHTMLTextAreaElementSelSetName              = objc.RegisterName("setName:")
+	_dOMHTMLTextAreaElementSelReadOnly             = objc.RegisterName("readOnly")
+	_dOMHTMLTextAreaElementSelSetReadOnly          = objc.RegisterName("setReadOnly:")
+	_dOMHTMLTextAreaElementSelRows                 = objc.RegisterName("rows")
+	_dOMHTMLTextAreaElementSelSetRows              = objc.RegisterName("setRows:")
+	_dOMHTMLTextAreaElementSelCols                 = objc.RegisterName("cols")
+	_dOMHTMLTextAreaElementSelSetCols              = objc.RegisterName("setCols:")
+	_dOMHTMLTextAreaElementSelType                 = objc.RegisterName("type")
+	_dOMHTMLTextAreaElementSelDefaultValue         = objc.RegisterName("defaultValue")
+	_dOMHTMLTextAreaElementSelSetDefaultValue      = objc.RegisterName("setDefaultValue:")
+	_dOMHTMLTextAreaElementSelValue                = objc.RegisterName("value")
+	_dOMHTMLTextAreaElementSelSetValue             = objc.RegisterName("setValue:")
+	_dOMHTMLTextAreaElementSelWillValidate         = objc.RegisterName("willValidate")
+	_dOMHTMLTextAreaElementSelSelectionStart       = objc.RegisterName("selectionStart")
+	_dOMHTMLTextAreaElementSelSetSelectionStart    = objc.RegisterName("setSelectionStart:")
+	_dOMHTMLTextAreaElementSelSelectionEnd         = objc.RegisterName("selectionEnd")
+	_dOMHTMLTextAreaElementSelSetSelectionEnd      = objc.RegisterName("setSelectionEnd:")
 )
 
 func DOMHTMLTextAreaElementFromID(id objc.ID) *DOMHTMLTextAreaElement {
@@ -82,13 +82,17 @@ func (o *DOMHTMLTextAreaElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLTextAreaElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTextAreaElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLTextAreaElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTextAreaElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,13 +129,17 @@ func (o *DOMHTMLTextAreaElement) SetCols(cols int) {
 
 func (o *DOMHTMLTextAreaElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTextAreaElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLTextAreaElement) DefaultValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTextAreaElementSelDefaultValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -141,7 +149,9 @@ func (o *DOMHTMLTextAreaElement) SetDefaultValue(defaultValue *foundation.NSStri
 
 func (o *DOMHTMLTextAreaElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTextAreaElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -171,4 +181,3 @@ func (o *DOMHTMLTextAreaElement) SelectionEnd() int {
 func (o *DOMHTMLTextAreaElement) SetSelectionEnd(selectionEnd int) {
 	o.Ptr().Send(_dOMHTMLTextAreaElementSelSetSelectionEnd, selectionEnd)
 }
-

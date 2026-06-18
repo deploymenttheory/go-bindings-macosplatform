@@ -72,4 +72,3 @@ type ClassificationObservationable interface {
 }
 
 var _ ClassificationObservationable = (*ClassificationObservation)(nil)
-

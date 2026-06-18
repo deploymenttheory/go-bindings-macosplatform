@@ -57,4 +57,3 @@ type PhysicsJointFixedable interface {
 }
 
 var _ PhysicsJointFixedable = (*PhysicsJointFixed)(nil)
-

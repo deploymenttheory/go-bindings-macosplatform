@@ -85,4 +85,3 @@ type PointAnnotationable interface {
 }
 
 var _ PointAnnotationable = (*PointAnnotation)(nil)
-

@@ -49,7 +49,9 @@ func (x *MathExpressionTableCell) Expressions() []*MathExpression {
 	})
 }
 
-func (x *MathExpressionTableCell) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionTableCell) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionTableCellable is the interface implemented by [MathExpressionTableCell], for mocking and DI.
 type MathExpressionTableCellable interface {
@@ -58,4 +60,3 @@ type MathExpressionTableCellable interface {
 }
 
 var _ MathExpressionTableCellable = (*MathExpressionTableCell)(nil)
-

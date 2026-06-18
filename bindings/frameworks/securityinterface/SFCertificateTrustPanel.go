@@ -21,12 +21,12 @@ type SFCertificateTrustPanel struct {
 }
 
 var (
-	_clsSFCertificateTrustPanel = _objcClass("SFCertificateTrustPanel")
-	_sFCertificateTrustPanelSelSharedCertificateTrustPanel = objc.RegisterName("sharedCertificateTrustPanel")
-	_sFCertificateTrustPanelSelRunModalForTrustMessage = objc.RegisterName("runModalForTrust:message:")
+	_clsSFCertificateTrustPanel                                                                      = _objcClass("SFCertificateTrustPanel")
+	_sFCertificateTrustPanelSelSharedCertificateTrustPanel                                           = objc.RegisterName("sharedCertificateTrustPanel")
+	_sFCertificateTrustPanelSelRunModalForTrustMessage                                               = objc.RegisterName("runModalForTrust:message:")
 	_sFCertificateTrustPanelSelBeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage = objc.RegisterName("beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:trust:message:")
-	_sFCertificateTrustPanelSelSetInformativeText = objc.RegisterName("setInformativeText:")
-	_sFCertificateTrustPanelSelInformativeText = objc.RegisterName("informativeText")
+	_sFCertificateTrustPanelSelSetInformativeText                                                    = objc.RegisterName("setInformativeText:")
+	_sFCertificateTrustPanelSelInformativeText                                                       = objc.RegisterName("informativeText")
 )
 
 func SFCertificateTrustPanelFromID(id objc.ID) *SFCertificateTrustPanel {
@@ -42,7 +42,9 @@ func SFCertificateTrustPanelFromID(id objc.ID) *SFCertificateTrustPanel {
 // @method sharedCertificateTrustPanel @abstract Returns a shared instance of SFCertificateTrustPanel. @discussion If your application can display multiple SFCertificateTrustPanels at once, you should allocate (alloc) and initialize (init) separate object instances instead of using this class method.
 func SFCertificateTrustPanelSharedCertificateTrustPanel() *SFCertificateTrustPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFCertificateTrustPanel), _sFCertificateTrustPanelSelSharedCertificateTrustPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFCertificateTrustPanelFromID(_ret)
 }
 
@@ -65,7 +67,8 @@ func (o *SFCertificateTrustPanel) SetInformativeText(informativeText *foundation
 // @method informativeText @abstract Returns the informative text currently displayed in the SFCertificateTrustPanel.
 func (o *SFCertificateTrustPanel) InformativeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFCertificateTrustPanelSelInformativeText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

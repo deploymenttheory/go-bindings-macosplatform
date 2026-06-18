@@ -16,8 +16,8 @@ type ASAuthorization struct {
 }
 
 var (
-	_clsASAuthorization = _objcClass("ASAuthorization")
-	_aSAuthorizationSelProvider = objc.RegisterName("provider")
+	_clsASAuthorization           = _objcClass("ASAuthorization")
+	_aSAuthorizationSelProvider   = objc.RegisterName("provider")
 	_aSAuthorizationSelCredential = objc.RegisterName("credential")
 )
 
@@ -42,4 +42,3 @@ func (o *ASAuthorization) Credential() ASAuthorizationCredential {
 	_ret := objc.Send[ASAuthorizationCredential](o.Ptr(), _aSAuthorizationSelCredential)
 	return _ret
 }
-

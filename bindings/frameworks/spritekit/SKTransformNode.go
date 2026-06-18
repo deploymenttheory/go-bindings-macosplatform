@@ -19,17 +19,17 @@ type SKTransformNode struct {
 }
 
 var (
-	_clsSKTransformNode = _objcClass("SKTransformNode")
-	_sKTransformNodeSelSetEulerAngles = objc.RegisterName("setEulerAngles:")
-	_sKTransformNodeSelEulerAngles = objc.RegisterName("eulerAngles")
+	_clsSKTransformNode                  = _objcClass("SKTransformNode")
+	_sKTransformNodeSelSetEulerAngles    = objc.RegisterName("setEulerAngles:")
+	_sKTransformNodeSelEulerAngles       = objc.RegisterName("eulerAngles")
 	_sKTransformNodeSelSetRotationMatrix = objc.RegisterName("setRotationMatrix:")
-	_sKTransformNodeSelRotationMatrix = objc.RegisterName("rotationMatrix")
-	_sKTransformNodeSelSetQuaternion = objc.RegisterName("setQuaternion:")
-	_sKTransformNodeSelQuaternion = objc.RegisterName("quaternion")
-	_sKTransformNodeSelXRotation = objc.RegisterName("xRotation")
-	_sKTransformNodeSelSetXRotation = objc.RegisterName("setXRotation:")
-	_sKTransformNodeSelYRotation = objc.RegisterName("yRotation")
-	_sKTransformNodeSelSetYRotation = objc.RegisterName("setYRotation:")
+	_sKTransformNodeSelRotationMatrix    = objc.RegisterName("rotationMatrix")
+	_sKTransformNodeSelSetQuaternion     = objc.RegisterName("setQuaternion:")
+	_sKTransformNodeSelQuaternion        = objc.RegisterName("quaternion")
+	_sKTransformNodeSelXRotation         = objc.RegisterName("xRotation")
+	_sKTransformNodeSelSetXRotation      = objc.RegisterName("setXRotation:")
+	_sKTransformNodeSelYRotation         = objc.RegisterName("yRotation")
+	_sKTransformNodeSelSetYRotation      = objc.RegisterName("setYRotation:")
 )
 
 func SKTransformNodeFromID(id objc.ID) *SKTransformNode {
@@ -86,4 +86,3 @@ func (o *SKTransformNode) YRotation() float64 {
 func (o *SKTransformNode) SetYRotation(yRotation float64) {
 	o.Ptr().Send(_sKTransformNodeSelSetYRotation, yRotation)
 }
-

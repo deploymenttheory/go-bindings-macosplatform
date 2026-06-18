@@ -18,11 +18,11 @@ type MPSCNNUpsamplingBilinearGradientNode struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingBilinearGradientNode = _objcClass("MPSCNNUpsamplingBilinearGradientNode")
+	_clsMPSCNNUpsamplingBilinearGradientNode                                                                       = _objcClass("MPSCNNUpsamplingBilinearGradientNode")
 	_mPSCNNUpsamplingBilinearGradientNodeSelNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:")
 	_mPSCNNUpsamplingBilinearGradientNodeSelInitWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:")
-	_mPSCNNUpsamplingBilinearGradientNodeSelScaleFactorX = objc.RegisterName("scaleFactorX")
-	_mPSCNNUpsamplingBilinearGradientNodeSelScaleFactorY = objc.RegisterName("scaleFactorY")
+	_mPSCNNUpsamplingBilinearGradientNodeSelScaleFactorX                                                           = objc.RegisterName("scaleFactorX")
+	_mPSCNNUpsamplingBilinearGradientNodeSelScaleFactorY                                                           = objc.RegisterName("scaleFactorY")
 )
 
 func MPSCNNUpsamplingBilinearGradientNodeFromID(id objc.ID) *MPSCNNUpsamplingBilinearGradientNode {
@@ -38,14 +38,18 @@ func MPSCNNUpsamplingBilinearGradientNodeFromID(id objc.ID) *MPSCNNUpsamplingBil
 // @abstract   A node to represent the gradient calculation for nearest upsampling training. @discussion [forwardFilter gradientFilterWithSources:] is a more convient way to do this. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward filter node @param gradientState    The gradient state from the forward filter @param scaleFactorX     The X scale factor from the forward pass @param scaleFactorY     The Y scale factor from the forward pass @return  A MPSCNNUpsamplingBilinearGradientNode
 func MPSCNNUpsamplingBilinearGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *MPSCNNUpsamplingBilinearGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNUpsamplingBilinearGradientNode), _mPSCNNUpsamplingBilinearGradientNodeSelNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), scaleFactorX, scaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearGradientNodeFromID(_ret)
 }
 
 // @abstract   A node to represent the gradient calculation for nearest upsampling training. @discussion [forwardFilter gradientFilterWithSources:] is a more convient way to do this. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward filter node @param gradientState    The gradient state from the forward filter @param scaleFactorX     The X scale factor from the forward pass @param scaleFactorY     The Y scale factor from the forward pass @return  A MPSCNNUpsamplingBilinearGradientNode
 func (o *MPSCNNUpsamplingBilinearGradientNode) InitWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *MPSCNNUpsamplingBilinearGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearGradientNodeSelInitWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), scaleFactorX, scaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearGradientNodeFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSCNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPSCNNUpsamplingBilinearGradientNodeSelScaleFactorY)
 	return _ret
 }
-

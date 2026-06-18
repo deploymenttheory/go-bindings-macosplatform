@@ -195,4 +195,3 @@ type AttestationInfoable interface {
 }
 
 var _ AttestationInfoable = (*AttestationInfo)(nil)
-

@@ -15,18 +15,18 @@ type SCNLookAtConstraint struct {
 }
 
 var (
-	_clsSCNLookAtConstraint = _objcClass("SCNLookAtConstraint")
+	_clsSCNLookAtConstraint                           = _objcClass("SCNLookAtConstraint")
 	_sCNLookAtConstraintSelLookAtConstraintWithTarget = objc.RegisterName("lookAtConstraintWithTarget:")
-	_sCNLookAtConstraintSelTarget = objc.RegisterName("target")
-	_sCNLookAtConstraintSelSetTarget = objc.RegisterName("setTarget:")
-	_sCNLookAtConstraintSelTargetOffset = objc.RegisterName("targetOffset")
-	_sCNLookAtConstraintSelSetTargetOffset = objc.RegisterName("setTargetOffset:")
-	_sCNLookAtConstraintSelLocalFront = objc.RegisterName("localFront")
-	_sCNLookAtConstraintSelSetLocalFront = objc.RegisterName("setLocalFront:")
-	_sCNLookAtConstraintSelWorldUp = objc.RegisterName("worldUp")
-	_sCNLookAtConstraintSelSetWorldUp = objc.RegisterName("setWorldUp:")
-	_sCNLookAtConstraintSelGimbalLockEnabled = objc.RegisterName("gimbalLockEnabled")
-	_sCNLookAtConstraintSelSetGimbalLockEnabled = objc.RegisterName("setGimbalLockEnabled:")
+	_sCNLookAtConstraintSelTarget                     = objc.RegisterName("target")
+	_sCNLookAtConstraintSelSetTarget                  = objc.RegisterName("setTarget:")
+	_sCNLookAtConstraintSelTargetOffset               = objc.RegisterName("targetOffset")
+	_sCNLookAtConstraintSelSetTargetOffset            = objc.RegisterName("setTargetOffset:")
+	_sCNLookAtConstraintSelLocalFront                 = objc.RegisterName("localFront")
+	_sCNLookAtConstraintSelSetLocalFront              = objc.RegisterName("setLocalFront:")
+	_sCNLookAtConstraintSelWorldUp                    = objc.RegisterName("worldUp")
+	_sCNLookAtConstraintSelSetWorldUp                 = objc.RegisterName("setWorldUp:")
+	_sCNLookAtConstraintSelGimbalLockEnabled          = objc.RegisterName("gimbalLockEnabled")
+	_sCNLookAtConstraintSelSetGimbalLockEnabled       = objc.RegisterName("setGimbalLockEnabled:")
 )
 
 func SCNLookAtConstraintFromID(id objc.ID) *SCNLookAtConstraint {
@@ -42,13 +42,17 @@ func SCNLookAtConstraintFromID(id objc.ID) *SCNLookAtConstraint {
 // @method lookAtConstraintWithTarget: @abstract Creates and returns a SCNLookAtConstraint object with the specified target. @param target The target node to look at.
 func SCNLookAtConstraintLookAtConstraintWithTarget(target *SCNNode) *SCNLookAtConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNLookAtConstraint), _sCNLookAtConstraintSelLookAtConstraintWithTarget, target.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNLookAtConstraintFromID(_ret)
 }
 
 func (o *SCNLookAtConstraint) Target() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNLookAtConstraintSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -95,4 +99,3 @@ func (o *SCNLookAtConstraint) GimbalLockEnabled() bool {
 func (o *SCNLookAtConstraint) SetGimbalLockEnabled(gimbalLockEnabled bool) {
 	o.Ptr().Send(_sCNLookAtConstraintSelSetGimbalLockEnabled, gimbalLockEnabled)
 }
-

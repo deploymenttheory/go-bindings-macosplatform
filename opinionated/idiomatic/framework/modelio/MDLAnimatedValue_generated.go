@@ -118,4 +118,3 @@ type AnimatedValueable interface {
 }
 
 var _ AnimatedValueable = (*AnimatedValue)(nil)
-

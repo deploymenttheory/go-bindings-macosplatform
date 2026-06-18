@@ -15,9 +15,9 @@ type GCDualShockGamepad struct {
 }
 
 var (
-	_clsGCDualShockGamepad = _objcClass("GCDualShockGamepad")
-	_gCDualShockGamepadSelTouchpadButton = objc.RegisterName("touchpadButton")
-	_gCDualShockGamepadSelTouchpadPrimary = objc.RegisterName("touchpadPrimary")
+	_clsGCDualShockGamepad                  = _objcClass("GCDualShockGamepad")
+	_gCDualShockGamepadSelTouchpadButton    = objc.RegisterName("touchpadButton")
+	_gCDualShockGamepadSelTouchpadPrimary   = objc.RegisterName("touchpadPrimary")
 	_gCDualShockGamepadSelTouchpadSecondary = objc.RegisterName("touchpadSecondary")
 )
 
@@ -34,19 +34,24 @@ func GCDualShockGamepadFromID(id objc.ID) *GCDualShockGamepad {
 // DualShock controllers have a touchpad with a button and two-finger tracking.
 func (o *GCDualShockGamepad) TouchpadButton() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDualShockGamepadSelTouchpadButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCDualShockGamepad) TouchpadPrimary() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDualShockGamepadSelTouchpadPrimary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
 
 func (o *GCDualShockGamepad) TouchpadSecondary() *GCControllerDirectionPad {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDualShockGamepadSelTouchpadSecondary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerDirectionPadFromID(_ret)
 }
-

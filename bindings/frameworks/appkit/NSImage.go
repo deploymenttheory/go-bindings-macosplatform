@@ -19,103 +19,103 @@ type NSImage struct {
 }
 
 var (
-	_clsNSImage = _objcClass("NSImage")
-	_nSImageSelImageNamed = objc.RegisterName("imageNamed:")
-	_nSImageSelImageWithSystemSymbolNameAccessibilityDescription = objc.RegisterName("imageWithSystemSymbolName:accessibilityDescription:")
+	_clsNSImage                                                               = _objcClass("NSImage")
+	_nSImageSelImageNamed                                                     = objc.RegisterName("imageNamed:")
+	_nSImageSelImageWithSystemSymbolNameAccessibilityDescription              = objc.RegisterName("imageWithSystemSymbolName:accessibilityDescription:")
 	_nSImageSelImageWithSystemSymbolNameVariableValueAccessibilityDescription = objc.RegisterName("imageWithSystemSymbolName:variableValue:accessibilityDescription:")
-	_nSImageSelImageWithSymbolNameVariableValue = objc.RegisterName("imageWithSymbolName:variableValue:")
-	_nSImageSelImageWithSymbolNameBundleVariableValue = objc.RegisterName("imageWithSymbolName:bundle:variableValue:")
-	_nSImageSelInitWithSize = objc.RegisterName("initWithSize:")
-	_nSImageSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSImageSelInitWithData = objc.RegisterName("initWithData:")
-	_nSImageSelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSImageSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSImageSelInitByReferencingFile = objc.RegisterName("initByReferencingFile:")
-	_nSImageSelInitByReferencingURL = objc.RegisterName("initByReferencingURL:")
-	_nSImageSelInitWithPasteboard = objc.RegisterName("initWithPasteboard:")
-	_nSImageSelInitWithDataIgnoringOrientation = objc.RegisterName("initWithDataIgnoringOrientation:")
-	_nSImageSelImageWithSizeFlippedDrawingHandler = objc.RegisterName("imageWithSize:flipped:drawingHandler:")
-	_nSImageSelSetName = objc.RegisterName("setName:")
-	_nSImageSelName = objc.RegisterName("name")
-	_nSImageSelDrawAtPointFromRectOperationFraction = objc.RegisterName("drawAtPoint:fromRect:operation:fraction:")
-	_nSImageSelDrawInRectFromRectOperationFraction = objc.RegisterName("drawInRect:fromRect:operation:fraction:")
-	_nSImageSelDrawInRectFromRectOperationFractionRespectFlippedHints = objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:")
-	_nSImageSelDrawRepresentationInRect = objc.RegisterName("drawRepresentation:inRect:")
-	_nSImageSelDrawInRect = objc.RegisterName("drawInRect:")
-	_nSImageSelRecache = objc.RegisterName("recache")
-	_nSImageSelTIFFRepresentationUsingCompressionFactor = objc.RegisterName("TIFFRepresentationUsingCompression:factor:")
-	_nSImageSelAddRepresentations = objc.RegisterName("addRepresentations:")
-	_nSImageSelAddRepresentation = objc.RegisterName("addRepresentation:")
-	_nSImageSelRemoveRepresentation = objc.RegisterName("removeRepresentation:")
-	_nSImageSelCanInitWithPasteboard = objc.RegisterName("canInitWithPasteboard:")
-	_nSImageSelInitWithCGImageSize = objc.RegisterName("initWithCGImage:size:")
-	_nSImageSelCGImageForProposedRectContextHints = objc.RegisterName("CGImageForProposedRect:context:hints:")
-	_nSImageSelBestRepresentationForRectContextHints = objc.RegisterName("bestRepresentationForRect:context:hints:")
-	_nSImageSelHitTestRectWithImageDestinationRectContextHintsFlipped = objc.RegisterName("hitTestRect:withImageDestinationRect:context:hints:flipped:")
-	_nSImageSelRecommendedLayerContentsScale = objc.RegisterName("recommendedLayerContentsScale:")
-	_nSImageSelLayerContentsForContentsScale = objc.RegisterName("layerContentsForContentsScale:")
-	_nSImageSelImageWithSymbolConfiguration = objc.RegisterName("imageWithSymbolConfiguration:")
-	_nSImageSelImageWithLocale = objc.RegisterName("imageWithLocale:")
-	_nSImageSelSize = objc.RegisterName("size")
-	_nSImageSelSetSize = objc.RegisterName("setSize:")
-	_nSImageSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSImageSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSImageSelUsesEPSOnResolutionMismatch = objc.RegisterName("usesEPSOnResolutionMismatch")
-	_nSImageSelSetUsesEPSOnResolutionMismatch = objc.RegisterName("setUsesEPSOnResolutionMismatch:")
-	_nSImageSelPrefersColorMatch = objc.RegisterName("prefersColorMatch")
-	_nSImageSelSetPrefersColorMatch = objc.RegisterName("setPrefersColorMatch:")
-	_nSImageSelMatchesOnMultipleResolution = objc.RegisterName("matchesOnMultipleResolution")
-	_nSImageSelSetMatchesOnMultipleResolution = objc.RegisterName("setMatchesOnMultipleResolution:")
-	_nSImageSelMatchesOnlyOnBestFittingAxis = objc.RegisterName("matchesOnlyOnBestFittingAxis")
-	_nSImageSelSetMatchesOnlyOnBestFittingAxis = objc.RegisterName("setMatchesOnlyOnBestFittingAxis:")
-	_nSImageSelTIFFRepresentation = objc.RegisterName("TIFFRepresentation")
-	_nSImageSelRepresentations = objc.RegisterName("representations")
-	_nSImageSelIsValid = objc.RegisterName("isValid")
-	_nSImageSelDelegate = objc.RegisterName("delegate")
-	_nSImageSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSImageSelImageTypes = objc.RegisterName("imageTypes")
-	_nSImageSelImageUnfilteredTypes = objc.RegisterName("imageUnfilteredTypes")
-	_nSImageSelCacheMode = objc.RegisterName("cacheMode")
-	_nSImageSelSetCacheMode = objc.RegisterName("setCacheMode:")
-	_nSImageSelAlignmentRect = objc.RegisterName("alignmentRect")
-	_nSImageSelSetAlignmentRect = objc.RegisterName("setAlignmentRect:")
-	_nSImageSelIsTemplate = objc.RegisterName("isTemplate")
-	_nSImageSelSetTemplate = objc.RegisterName("setTemplate:")
-	_nSImageSelAccessibilityDescription = objc.RegisterName("accessibilityDescription")
-	_nSImageSelSetAccessibilityDescription = objc.RegisterName("setAccessibilityDescription:")
-	_nSImageSelCapInsets = objc.RegisterName("capInsets")
-	_nSImageSelSetCapInsets = objc.RegisterName("setCapInsets:")
-	_nSImageSelResizingMode = objc.RegisterName("resizingMode")
-	_nSImageSelSetResizingMode = objc.RegisterName("setResizingMode:")
-	_nSImageSelSymbolConfiguration = objc.RegisterName("symbolConfiguration")
-	_nSImageSelLocale = objc.RegisterName("locale")
-	_nSImageSelImageUnfilteredFileTypes = objc.RegisterName("imageUnfilteredFileTypes")
-	_nSImageSelImageUnfilteredPasteboardTypes = objc.RegisterName("imageUnfilteredPasteboardTypes")
-	_nSImageSelImageFileTypes = objc.RegisterName("imageFileTypes")
-	_nSImageSelImagePasteboardTypes = objc.RegisterName("imagePasteboardTypes")
-	_nSImageSelInitWithIconRef = objc.RegisterName("initWithIconRef:")
-	_nSImageSelBestRepresentationForDevice = objc.RegisterName("bestRepresentationForDevice:")
-	_nSImageSelLockFocus = objc.RegisterName("lockFocus")
-	_nSImageSelLockFocusFlipped = objc.RegisterName("lockFocusFlipped:")
-	_nSImageSelUnlockFocus = objc.RegisterName("unlockFocus")
-	_nSImageSelSetFlipped = objc.RegisterName("setFlipped:")
-	_nSImageSelIsFlipped = objc.RegisterName("isFlipped")
-	_nSImageSelSetScalesWhenResized = objc.RegisterName("setScalesWhenResized:")
-	_nSImageSelScalesWhenResized = objc.RegisterName("scalesWhenResized")
-	_nSImageSelSetDataRetained = objc.RegisterName("setDataRetained:")
-	_nSImageSelIsDataRetained = objc.RegisterName("isDataRetained")
-	_nSImageSelSetCachedSeparately = objc.RegisterName("setCachedSeparately:")
-	_nSImageSelIsCachedSeparately = objc.RegisterName("isCachedSeparately")
-	_nSImageSelSetCacheDepthMatchesImageDepth = objc.RegisterName("setCacheDepthMatchesImageDepth:")
-	_nSImageSelCacheDepthMatchesImageDepth = objc.RegisterName("cacheDepthMatchesImageDepth")
-	_nSImageSelDissolveToPointFraction = objc.RegisterName("dissolveToPoint:fraction:")
-	_nSImageSelDissolveToPointFromRectFraction = objc.RegisterName("dissolveToPoint:fromRect:fraction:")
-	_nSImageSelCompositeToPointOperation = objc.RegisterName("compositeToPoint:operation:")
-	_nSImageSelCompositeToPointFromRectOperation = objc.RegisterName("compositeToPoint:fromRect:operation:")
-	_nSImageSelCompositeToPointOperationFraction = objc.RegisterName("compositeToPoint:operation:fraction:")
-	_nSImageSelCompositeToPointFromRectOperationFraction = objc.RegisterName("compositeToPoint:fromRect:operation:fraction:")
-	_nSImageSelLockFocusOnRepresentation = objc.RegisterName("lockFocusOnRepresentation:")
-	_nSImageSelCancelIncrementalLoad = objc.RegisterName("cancelIncrementalLoad")
+	_nSImageSelImageWithSymbolNameVariableValue                               = objc.RegisterName("imageWithSymbolName:variableValue:")
+	_nSImageSelImageWithSymbolNameBundleVariableValue                         = objc.RegisterName("imageWithSymbolName:bundle:variableValue:")
+	_nSImageSelInitWithSize                                                   = objc.RegisterName("initWithSize:")
+	_nSImageSelInitWithCoder                                                  = objc.RegisterName("initWithCoder:")
+	_nSImageSelInitWithData                                                   = objc.RegisterName("initWithData:")
+	_nSImageSelInitWithContentsOfFile                                         = objc.RegisterName("initWithContentsOfFile:")
+	_nSImageSelInitWithContentsOfURL                                          = objc.RegisterName("initWithContentsOfURL:")
+	_nSImageSelInitByReferencingFile                                          = objc.RegisterName("initByReferencingFile:")
+	_nSImageSelInitByReferencingURL                                           = objc.RegisterName("initByReferencingURL:")
+	_nSImageSelInitWithPasteboard                                             = objc.RegisterName("initWithPasteboard:")
+	_nSImageSelInitWithDataIgnoringOrientation                                = objc.RegisterName("initWithDataIgnoringOrientation:")
+	_nSImageSelImageWithSizeFlippedDrawingHandler                             = objc.RegisterName("imageWithSize:flipped:drawingHandler:")
+	_nSImageSelSetName                                                        = objc.RegisterName("setName:")
+	_nSImageSelName                                                           = objc.RegisterName("name")
+	_nSImageSelDrawAtPointFromRectOperationFraction                           = objc.RegisterName("drawAtPoint:fromRect:operation:fraction:")
+	_nSImageSelDrawInRectFromRectOperationFraction                            = objc.RegisterName("drawInRect:fromRect:operation:fraction:")
+	_nSImageSelDrawInRectFromRectOperationFractionRespectFlippedHints         = objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:")
+	_nSImageSelDrawRepresentationInRect                                       = objc.RegisterName("drawRepresentation:inRect:")
+	_nSImageSelDrawInRect                                                     = objc.RegisterName("drawInRect:")
+	_nSImageSelRecache                                                        = objc.RegisterName("recache")
+	_nSImageSelTIFFRepresentationUsingCompressionFactor                       = objc.RegisterName("TIFFRepresentationUsingCompression:factor:")
+	_nSImageSelAddRepresentations                                             = objc.RegisterName("addRepresentations:")
+	_nSImageSelAddRepresentation                                              = objc.RegisterName("addRepresentation:")
+	_nSImageSelRemoveRepresentation                                           = objc.RegisterName("removeRepresentation:")
+	_nSImageSelCanInitWithPasteboard                                          = objc.RegisterName("canInitWithPasteboard:")
+	_nSImageSelInitWithCGImageSize                                            = objc.RegisterName("initWithCGImage:size:")
+	_nSImageSelCGImageForProposedRectContextHints                             = objc.RegisterName("CGImageForProposedRect:context:hints:")
+	_nSImageSelBestRepresentationForRectContextHints                          = objc.RegisterName("bestRepresentationForRect:context:hints:")
+	_nSImageSelHitTestRectWithImageDestinationRectContextHintsFlipped         = objc.RegisterName("hitTestRect:withImageDestinationRect:context:hints:flipped:")
+	_nSImageSelRecommendedLayerContentsScale                                  = objc.RegisterName("recommendedLayerContentsScale:")
+	_nSImageSelLayerContentsForContentsScale                                  = objc.RegisterName("layerContentsForContentsScale:")
+	_nSImageSelImageWithSymbolConfiguration                                   = objc.RegisterName("imageWithSymbolConfiguration:")
+	_nSImageSelImageWithLocale                                                = objc.RegisterName("imageWithLocale:")
+	_nSImageSelSize                                                           = objc.RegisterName("size")
+	_nSImageSelSetSize                                                        = objc.RegisterName("setSize:")
+	_nSImageSelBackgroundColor                                                = objc.RegisterName("backgroundColor")
+	_nSImageSelSetBackgroundColor                                             = objc.RegisterName("setBackgroundColor:")
+	_nSImageSelUsesEPSOnResolutionMismatch                                    = objc.RegisterName("usesEPSOnResolutionMismatch")
+	_nSImageSelSetUsesEPSOnResolutionMismatch                                 = objc.RegisterName("setUsesEPSOnResolutionMismatch:")
+	_nSImageSelPrefersColorMatch                                              = objc.RegisterName("prefersColorMatch")
+	_nSImageSelSetPrefersColorMatch                                           = objc.RegisterName("setPrefersColorMatch:")
+	_nSImageSelMatchesOnMultipleResolution                                    = objc.RegisterName("matchesOnMultipleResolution")
+	_nSImageSelSetMatchesOnMultipleResolution                                 = objc.RegisterName("setMatchesOnMultipleResolution:")
+	_nSImageSelMatchesOnlyOnBestFittingAxis                                   = objc.RegisterName("matchesOnlyOnBestFittingAxis")
+	_nSImageSelSetMatchesOnlyOnBestFittingAxis                                = objc.RegisterName("setMatchesOnlyOnBestFittingAxis:")
+	_nSImageSelTIFFRepresentation                                             = objc.RegisterName("TIFFRepresentation")
+	_nSImageSelRepresentations                                                = objc.RegisterName("representations")
+	_nSImageSelIsValid                                                        = objc.RegisterName("isValid")
+	_nSImageSelDelegate                                                       = objc.RegisterName("delegate")
+	_nSImageSelSetDelegate                                                    = objc.RegisterName("setDelegate:")
+	_nSImageSelImageTypes                                                     = objc.RegisterName("imageTypes")
+	_nSImageSelImageUnfilteredTypes                                           = objc.RegisterName("imageUnfilteredTypes")
+	_nSImageSelCacheMode                                                      = objc.RegisterName("cacheMode")
+	_nSImageSelSetCacheMode                                                   = objc.RegisterName("setCacheMode:")
+	_nSImageSelAlignmentRect                                                  = objc.RegisterName("alignmentRect")
+	_nSImageSelSetAlignmentRect                                               = objc.RegisterName("setAlignmentRect:")
+	_nSImageSelIsTemplate                                                     = objc.RegisterName("isTemplate")
+	_nSImageSelSetTemplate                                                    = objc.RegisterName("setTemplate:")
+	_nSImageSelAccessibilityDescription                                       = objc.RegisterName("accessibilityDescription")
+	_nSImageSelSetAccessibilityDescription                                    = objc.RegisterName("setAccessibilityDescription:")
+	_nSImageSelCapInsets                                                      = objc.RegisterName("capInsets")
+	_nSImageSelSetCapInsets                                                   = objc.RegisterName("setCapInsets:")
+	_nSImageSelResizingMode                                                   = objc.RegisterName("resizingMode")
+	_nSImageSelSetResizingMode                                                = objc.RegisterName("setResizingMode:")
+	_nSImageSelSymbolConfiguration                                            = objc.RegisterName("symbolConfiguration")
+	_nSImageSelLocale                                                         = objc.RegisterName("locale")
+	_nSImageSelImageUnfilteredFileTypes                                       = objc.RegisterName("imageUnfilteredFileTypes")
+	_nSImageSelImageUnfilteredPasteboardTypes                                 = objc.RegisterName("imageUnfilteredPasteboardTypes")
+	_nSImageSelImageFileTypes                                                 = objc.RegisterName("imageFileTypes")
+	_nSImageSelImagePasteboardTypes                                           = objc.RegisterName("imagePasteboardTypes")
+	_nSImageSelInitWithIconRef                                                = objc.RegisterName("initWithIconRef:")
+	_nSImageSelBestRepresentationForDevice                                    = objc.RegisterName("bestRepresentationForDevice:")
+	_nSImageSelLockFocus                                                      = objc.RegisterName("lockFocus")
+	_nSImageSelLockFocusFlipped                                               = objc.RegisterName("lockFocusFlipped:")
+	_nSImageSelUnlockFocus                                                    = objc.RegisterName("unlockFocus")
+	_nSImageSelSetFlipped                                                     = objc.RegisterName("setFlipped:")
+	_nSImageSelIsFlipped                                                      = objc.RegisterName("isFlipped")
+	_nSImageSelSetScalesWhenResized                                           = objc.RegisterName("setScalesWhenResized:")
+	_nSImageSelScalesWhenResized                                              = objc.RegisterName("scalesWhenResized")
+	_nSImageSelSetDataRetained                                                = objc.RegisterName("setDataRetained:")
+	_nSImageSelIsDataRetained                                                 = objc.RegisterName("isDataRetained")
+	_nSImageSelSetCachedSeparately                                            = objc.RegisterName("setCachedSeparately:")
+	_nSImageSelIsCachedSeparately                                             = objc.RegisterName("isCachedSeparately")
+	_nSImageSelSetCacheDepthMatchesImageDepth                                 = objc.RegisterName("setCacheDepthMatchesImageDepth:")
+	_nSImageSelCacheDepthMatchesImageDepth                                    = objc.RegisterName("cacheDepthMatchesImageDepth")
+	_nSImageSelDissolveToPointFraction                                        = objc.RegisterName("dissolveToPoint:fraction:")
+	_nSImageSelDissolveToPointFromRectFraction                                = objc.RegisterName("dissolveToPoint:fromRect:fraction:")
+	_nSImageSelCompositeToPointOperation                                      = objc.RegisterName("compositeToPoint:operation:")
+	_nSImageSelCompositeToPointFromRectOperation                              = objc.RegisterName("compositeToPoint:fromRect:operation:")
+	_nSImageSelCompositeToPointOperationFraction                              = objc.RegisterName("compositeToPoint:operation:fraction:")
+	_nSImageSelCompositeToPointFromRectOperationFraction                      = objc.RegisterName("compositeToPoint:fromRect:operation:fraction:")
+	_nSImageSelLockFocusOnRepresentation                                      = objc.RegisterName("lockFocusOnRepresentation:")
+	_nSImageSelCancelIncrementalLoad                                          = objc.RegisterName("cancelIncrementalLoad")
 )
 
 func NSImageFromID(id objc.ID) *NSImage {
@@ -130,95 +130,125 @@ func NSImageFromID(id objc.ID) *NSImage {
 
 func NSImageImageNamed(name *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Creates a system symbol image with the specified name and value @param name A name from the system’s SF Symbols catalog @param description The image’s accessibility description. This description is used automatically by interface elements that display images. Like all accessibility descriptions, use a short localized string that does not include the name of the interface element. For instance, “delete” rather than “delete button”.
 func NSImageImageWithSystemSymbolNameAccessibilityDescription(name *foundation.NSString, description *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSystemSymbolNameAccessibilityDescription, name.Ptr(), description.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Creates a system symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name from the system’s SF Symbols catalog @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @param description The image’s accessibility description. This description is used automatically by interface elements that display images. Like all accessibility descriptions, use a short localized string that does not include the name of the interface element. For instance, “delete” rather than “delete button”. @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
 func NSImageImageWithSystemSymbolNameVariableValueAccessibilityDescription(name *foundation.NSString, value float64, description *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSystemSymbolNameVariableValueAccessibilityDescription, name.Ptr(), value, description.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Creates a symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name of a symbol image file in the main bundle’s catalog @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
 func NSImageImageWithSymbolNameVariableValue(name *foundation.NSString, value float64) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSymbolNameVariableValue, name.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Creates a symbol image with the specified name and value. The `value` argument is only accommodated if the symbol supports variable rendering. @param name A name of a symbol image file in the main bundle’s catalog @param bundle The bundle containing the image file or asset catalog. Specify `nil` to search the app’s main bundle. @param value The value represented by the symbol. The value should be between 0 and 1 inclusive ([0,1]). @note Values less than 0 or greater than 1 will be clamped to 0 and 1, respectively.
 func NSImageImageWithSymbolNameBundleVariableValue(name *foundation.NSString, bundle *foundation.NSBundle, value float64) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSymbolNameBundleVariableValue, name.Ptr(), bundle.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithSize(size corefoundation.CGSize) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithCoder(coder *foundation.NSCoder) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithData(data *foundation.NSData) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithContentsOfFile(fileName *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithContentsOfFile, fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithContentsOfURL(url *foundation.NSURL) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitByReferencingFile(fileName *foundation.NSString) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitByReferencingFile, fileName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitByReferencingURL(url *foundation.NSURL) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitByReferencingURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithPasteboard(pasteboard *NSPasteboard) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSImage) InitWithDataIgnoringOrientation(data *foundation.NSData) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithDataIgnoringOrientation, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func NSImageImageWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImage), _nSImageSelImageWithSizeFlippedDrawingHandler, size, drawingHandlerShouldBeCalledWithFlippedContext, drawingHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -229,7 +259,9 @@ func (o *NSImage) SetName(string_ *foundation.NSString) bool {
 
 func (o *NSImage) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -260,7 +292,9 @@ func (o *NSImage) Recache() {
 
 func (o *NSImage) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelTIFFRepresentationUsingCompressionFactor, comp, factor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -283,7 +317,9 @@ func NSImageCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 
 func (o *NSImage) InitWithCGImageSize(cgImage unsafe.Pointer, size corefoundation.CGSize) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithCGImageSize, cgImage, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -294,7 +330,9 @@ func (o *NSImage) CGImageForProposedRectContextHints(proposedDestRect *corefound
 
 func (o *NSImage) BestRepresentationForRectContextHints(rect corefoundation.CGRect, referenceContext *NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForRectContextHints, rect, referenceContext.Ptr(), hints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
@@ -315,14 +353,18 @@ func (o *NSImage) LayerContentsForContentsScale(layerContentsScale float64) objc
 
 func (o *NSImage) ImageWithSymbolConfiguration(configuration *NSImageSymbolConfiguration) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelImageWithSymbolConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Creates and returns a new image with the specified locale. If the receiver contains locale-sensitive representations, the returned image will prefer to draw using representations appropriate for the specified locale. If locale is `nil`, the returned image uses the default behavior of choosing representations appropriate for the system’s currently-configured locale.
 func (o *NSImage) ImageWithLocale(locale *foundation.NSLocale) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelImageWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -337,7 +379,9 @@ func (o *NSImage) SetSize(size corefoundation.CGSize) {
 
 func (o *NSImage) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -383,13 +427,17 @@ func (o *NSImage) SetMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis b
 
 func (o *NSImage) TIFFRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelTIFFRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSImage) Representations() *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelRepresentations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
@@ -446,7 +494,9 @@ func (o *NSImage) SetTemplate(template bool) {
 
 func (o *NSImage) AccessibilityDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelAccessibilityDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -474,14 +524,18 @@ func (o *NSImage) SetResizingMode(resizingMode NSImageResizingMode) {
 
 func (o *NSImage) SymbolConfiguration() *NSImageSymbolConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelSymbolConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageSymbolConfigurationFromID(_ret)
 }
 
 // The image’s preferred locale for resolving representations, if one has been specified using `-imageWithLocale:`. Otherwise, `nil`.
 func (o *NSImage) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
@@ -512,14 +566,18 @@ func NSImageImagePasteboardTypes() *foundation.NSArray[*foundation.NSString] {
 // Deprecated: Use -[NSWorkspace iconForFile:], -[NSWorkspace iconForFiles:], -[NSWorkspace iconForFileType:], or +[NSImage imageNamed:] instead.
 func (o *NSImage) InitWithIconRef(iconRef unsafe.Pointer) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelInitWithIconRef, iconRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Deprecated: Use -[NSImage bestRepresentationForRect:context:hints:] instead.  Any deviceDescription dictionary is also a valid hints dictionary.
 func (o *NSImage) BestRepresentationForDevice(deviceDescription *foundation.NSDictionary[objc.ID, objc.ID]) *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageSelBestRepresentationForDevice, deviceDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
@@ -632,4 +690,3 @@ func (o *NSImage) LockFocusOnRepresentation(imageRepresentation *NSImageRep) {
 func (o *NSImage) CancelIncrementalLoad() {
 	o.Ptr().Send(_nSImageSelCancelIncrementalLoad)
 }
-

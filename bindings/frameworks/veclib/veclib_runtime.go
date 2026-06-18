@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_veclibLib uintptr
-	_loadOnce sync.Once
+	_veclibLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -50,158 +50,340 @@ func _loadLibrary() {
 	}
 	_register("BLASGetThreading", func() { purego.RegisterLibFunc(&_fnBLASGetThreading, _veclibLib, "BLASGetThreading") })
 	_register("BLASSetThreading", func() { purego.RegisterLibFunc(&_fnBLASSetThreading, _veclibLib, "BLASSetThreading") })
-	_register("BNNSApplyMultiheadAttention", func() { purego.RegisterLibFunc(&_fnBNNSApplyMultiheadAttention, _veclibLib, "BNNSApplyMultiheadAttention") })
-	_register("BNNSApplyMultiheadAttentionBackward", func() { purego.RegisterLibFunc(&_fnBNNSApplyMultiheadAttentionBackward, _veclibLib, "BNNSApplyMultiheadAttentionBackward") })
-	_register("BNNSArithmeticFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBackwardBatch, _veclibLib, "BNNSArithmeticFilterApplyBackwardBatch") })
-	_register("BNNSArithmeticFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBatch, _veclibLib, "BNNSArithmeticFilterApplyBatch") })
+	_register("BNNSApplyMultiheadAttention", func() {
+		purego.RegisterLibFunc(&_fnBNNSApplyMultiheadAttention, _veclibLib, "BNNSApplyMultiheadAttention")
+	})
+	_register("BNNSApplyMultiheadAttentionBackward", func() {
+		purego.RegisterLibFunc(&_fnBNNSApplyMultiheadAttentionBackward, _veclibLib, "BNNSApplyMultiheadAttentionBackward")
+	})
+	_register("BNNSArithmeticFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBackwardBatch, _veclibLib, "BNNSArithmeticFilterApplyBackwardBatch")
+	})
+	_register("BNNSArithmeticFilterApplyBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBatch, _veclibLib, "BNNSArithmeticFilterApplyBatch")
+	})
 	_register("BNNSBandPart", func() { purego.RegisterLibFunc(&_fnBNNSBandPart, _veclibLib, "BNNSBandPart") })
 	_register("BNNSClipByGlobalNorm", func() { purego.RegisterLibFunc(&_fnBNNSClipByGlobalNorm, _veclibLib, "BNNSClipByGlobalNorm") })
 	_register("BNNSClipByNorm", func() { purego.RegisterLibFunc(&_fnBNNSClipByNorm, _veclibLib, "BNNSClipByNorm") })
 	_register("BNNSClipByValue", func() { purego.RegisterLibFunc(&_fnBNNSClipByValue, _veclibLib, "BNNSClipByValue") })
 	_register("BNNSCompareTensor", func() { purego.RegisterLibFunc(&_fnBNNSCompareTensor, _veclibLib, "BNNSCompareTensor") })
-	_register("BNNSComputeLSTMTrainingCacheCapacity", func() { purego.RegisterLibFunc(&_fnBNNSComputeLSTMTrainingCacheCapacity, _veclibLib, "BNNSComputeLSTMTrainingCacheCapacity") })
+	_register("BNNSComputeLSTMTrainingCacheCapacity", func() {
+		purego.RegisterLibFunc(&_fnBNNSComputeLSTMTrainingCacheCapacity, _veclibLib, "BNNSComputeLSTMTrainingCacheCapacity")
+	})
 	_register("BNNSComputeNorm", func() { purego.RegisterLibFunc(&_fnBNNSComputeNorm, _veclibLib, "BNNSComputeNorm") })
 	_register("BNNSComputeNormBackward", func() { purego.RegisterLibFunc(&_fnBNNSComputeNormBackward, _veclibLib, "BNNSComputeNormBackward") })
 	_register("BNNSCopy", func() { purego.RegisterLibFunc(&_fnBNNSCopy, _veclibLib, "BNNSCopy") })
-	_register("BNNSCreateNearestNeighbors", func() { purego.RegisterLibFunc(&_fnBNNSCreateNearestNeighbors, _veclibLib, "BNNSCreateNearestNeighbors") })
+	_register("BNNSCreateNearestNeighbors", func() {
+		purego.RegisterLibFunc(&_fnBNNSCreateNearestNeighbors, _veclibLib, "BNNSCreateNearestNeighbors")
+	})
 	_register("BNNSCreateRandomGenerator", func() { purego.RegisterLibFunc(&_fnBNNSCreateRandomGenerator, _veclibLib, "BNNSCreateRandomGenerator") })
-	_register("BNNSCreateRandomGeneratorWithSeed", func() { purego.RegisterLibFunc(&_fnBNNSCreateRandomGeneratorWithSeed, _veclibLib, "BNNSCreateRandomGeneratorWithSeed") })
+	_register("BNNSCreateRandomGeneratorWithSeed", func() {
+		purego.RegisterLibFunc(&_fnBNNSCreateRandomGeneratorWithSeed, _veclibLib, "BNNSCreateRandomGeneratorWithSeed")
+	})
 	_register("BNNSCropResize", func() { purego.RegisterLibFunc(&_fnBNNSCropResize, _veclibLib, "BNNSCropResize") })
 	_register("BNNSCropResizeBackward", func() { purego.RegisterLibFunc(&_fnBNNSCropResizeBackward, _veclibLib, "BNNSCropResizeBackward") })
 	_register("BNNSDataLayoutGetRank", func() { purego.RegisterLibFunc(&_fnBNNSDataLayoutGetRank, _veclibLib, "BNNSDataLayoutGetRank") })
-	_register("BNNSDestroyNearestNeighbors", func() { purego.RegisterLibFunc(&_fnBNNSDestroyNearestNeighbors, _veclibLib, "BNNSDestroyNearestNeighbors") })
-	_register("BNNSDestroyRandomGenerator", func() { purego.RegisterLibFunc(&_fnBNNSDestroyRandomGenerator, _veclibLib, "BNNSDestroyRandomGenerator") })
-	_register("BNNSDirectApplyActivationBatch", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyActivationBatch, _veclibLib, "BNNSDirectApplyActivationBatch") })
-	_register("BNNSDirectApplyBroadcastMatMul", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyBroadcastMatMul, _veclibLib, "BNNSDirectApplyBroadcastMatMul") })
+	_register("BNNSDestroyNearestNeighbors", func() {
+		purego.RegisterLibFunc(&_fnBNNSDestroyNearestNeighbors, _veclibLib, "BNNSDestroyNearestNeighbors")
+	})
+	_register("BNNSDestroyRandomGenerator", func() {
+		purego.RegisterLibFunc(&_fnBNNSDestroyRandomGenerator, _veclibLib, "BNNSDestroyRandomGenerator")
+	})
+	_register("BNNSDirectApplyActivationBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSDirectApplyActivationBatch, _veclibLib, "BNNSDirectApplyActivationBatch")
+	})
+	_register("BNNSDirectApplyBroadcastMatMul", func() {
+		purego.RegisterLibFunc(&_fnBNNSDirectApplyBroadcastMatMul, _veclibLib, "BNNSDirectApplyBroadcastMatMul")
+	})
 	_register("BNNSDirectApplyInTopK", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyInTopK, _veclibLib, "BNNSDirectApplyInTopK") })
-	_register("BNNSDirectApplyLSTMBatchBackward", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyLSTMBatchBackward, _veclibLib, "BNNSDirectApplyLSTMBatchBackward") })
-	_register("BNNSDirectApplyLSTMBatchTrainingCaching", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyLSTMBatchTrainingCaching, _veclibLib, "BNNSDirectApplyLSTMBatchTrainingCaching") })
+	_register("BNNSDirectApplyLSTMBatchBackward", func() {
+		purego.RegisterLibFunc(&_fnBNNSDirectApplyLSTMBatchBackward, _veclibLib, "BNNSDirectApplyLSTMBatchBackward")
+	})
+	_register("BNNSDirectApplyLSTMBatchTrainingCaching", func() {
+		purego.RegisterLibFunc(&_fnBNNSDirectApplyLSTMBatchTrainingCaching, _veclibLib, "BNNSDirectApplyLSTMBatchTrainingCaching")
+	})
 	_register("BNNSDirectApplyQuantizer", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyQuantizer, _veclibLib, "BNNSDirectApplyQuantizer") })
 	_register("BNNSDirectApplyReduction", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyReduction, _veclibLib, "BNNSDirectApplyReduction") })
 	_register("BNNSDirectApplyTopK", func() { purego.RegisterLibFunc(&_fnBNNSDirectApplyTopK, _veclibLib, "BNNSDirectApplyTopK") })
 	_register("BNNSFilterApply", func() { purego.RegisterLibFunc(&_fnBNNSFilterApply, _veclibLib, "BNNSFilterApply") })
-	_register("BNNSFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSFilterApplyBackwardBatch, _veclibLib, "BNNSFilterApplyBackwardBatch") })
-	_register("BNNSFilterApplyBackwardTwoInputBatch", func() { purego.RegisterLibFunc(&_fnBNNSFilterApplyBackwardTwoInputBatch, _veclibLib, "BNNSFilterApplyBackwardTwoInputBatch") })
+	_register("BNNSFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterApplyBackwardBatch, _veclibLib, "BNNSFilterApplyBackwardBatch")
+	})
+	_register("BNNSFilterApplyBackwardTwoInputBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterApplyBackwardTwoInputBatch, _veclibLib, "BNNSFilterApplyBackwardTwoInputBatch")
+	})
 	_register("BNNSFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSFilterApplyBatch, _veclibLib, "BNNSFilterApplyBatch") })
 	_register("BNNSFilterApplyTwoInput", func() { purego.RegisterLibFunc(&_fnBNNSFilterApplyTwoInput, _veclibLib, "BNNSFilterApplyTwoInput") })
-	_register("BNNSFilterApplyTwoInputBatch", func() { purego.RegisterLibFunc(&_fnBNNSFilterApplyTwoInputBatch, _veclibLib, "BNNSFilterApplyTwoInputBatch") })
-	_register("BNNSFilterCreateConvolutionLayer", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateConvolutionLayer, _veclibLib, "BNNSFilterCreateConvolutionLayer") })
-	_register("BNNSFilterCreateFullyConnectedLayer", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateFullyConnectedLayer, _veclibLib, "BNNSFilterCreateFullyConnectedLayer") })
-	_register("BNNSFilterCreateFusedLayer", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateFusedLayer, _veclibLib, "BNNSFilterCreateFusedLayer") })
-	_register("BNNSFilterCreateLayerActivation", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerActivation, _veclibLib, "BNNSFilterCreateLayerActivation") })
-	_register("BNNSFilterCreateLayerArithmetic", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerArithmetic, _veclibLib, "BNNSFilterCreateLayerArithmetic") })
-	_register("BNNSFilterCreateLayerBroadcastMatMul", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerBroadcastMatMul, _veclibLib, "BNNSFilterCreateLayerBroadcastMatMul") })
-	_register("BNNSFilterCreateLayerConvolution", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerConvolution, _veclibLib, "BNNSFilterCreateLayerConvolution") })
-	_register("BNNSFilterCreateLayerDropout", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerDropout, _veclibLib, "BNNSFilterCreateLayerDropout") })
-	_register("BNNSFilterCreateLayerEmbedding", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerEmbedding, _veclibLib, "BNNSFilterCreateLayerEmbedding") })
-	_register("BNNSFilterCreateLayerFullyConnected", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerFullyConnected, _veclibLib, "BNNSFilterCreateLayerFullyConnected") })
+	_register("BNNSFilterApplyTwoInputBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterApplyTwoInputBatch, _veclibLib, "BNNSFilterApplyTwoInputBatch")
+	})
+	_register("BNNSFilterCreateConvolutionLayer", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateConvolutionLayer, _veclibLib, "BNNSFilterCreateConvolutionLayer")
+	})
+	_register("BNNSFilterCreateFullyConnectedLayer", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateFullyConnectedLayer, _veclibLib, "BNNSFilterCreateFullyConnectedLayer")
+	})
+	_register("BNNSFilterCreateFusedLayer", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateFusedLayer, _veclibLib, "BNNSFilterCreateFusedLayer")
+	})
+	_register("BNNSFilterCreateLayerActivation", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerActivation, _veclibLib, "BNNSFilterCreateLayerActivation")
+	})
+	_register("BNNSFilterCreateLayerArithmetic", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerArithmetic, _veclibLib, "BNNSFilterCreateLayerArithmetic")
+	})
+	_register("BNNSFilterCreateLayerBroadcastMatMul", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerBroadcastMatMul, _veclibLib, "BNNSFilterCreateLayerBroadcastMatMul")
+	})
+	_register("BNNSFilterCreateLayerConvolution", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerConvolution, _veclibLib, "BNNSFilterCreateLayerConvolution")
+	})
+	_register("BNNSFilterCreateLayerDropout", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerDropout, _veclibLib, "BNNSFilterCreateLayerDropout")
+	})
+	_register("BNNSFilterCreateLayerEmbedding", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerEmbedding, _veclibLib, "BNNSFilterCreateLayerEmbedding")
+	})
+	_register("BNNSFilterCreateLayerFullyConnected", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerFullyConnected, _veclibLib, "BNNSFilterCreateLayerFullyConnected")
+	})
 	_register("BNNSFilterCreateLayerGram", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerGram, _veclibLib, "BNNSFilterCreateLayerGram") })
 	_register("BNNSFilterCreateLayerLoss", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerLoss, _veclibLib, "BNNSFilterCreateLayerLoss") })
-	_register("BNNSFilterCreateLayerMultiheadAttention", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerMultiheadAttention, _veclibLib, "BNNSFilterCreateLayerMultiheadAttention") })
-	_register("BNNSFilterCreateLayerNormalization", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerNormalization, _veclibLib, "BNNSFilterCreateLayerNormalization") })
-	_register("BNNSFilterCreateLayerPadding", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPadding, _veclibLib, "BNNSFilterCreateLayerPadding") })
-	_register("BNNSFilterCreateLayerPermute", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPermute, _veclibLib, "BNNSFilterCreateLayerPermute") })
-	_register("BNNSFilterCreateLayerPooling", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPooling, _veclibLib, "BNNSFilterCreateLayerPooling") })
-	_register("BNNSFilterCreateLayerReduction", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerReduction, _veclibLib, "BNNSFilterCreateLayerReduction") })
-	_register("BNNSFilterCreateLayerResize", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerResize, _veclibLib, "BNNSFilterCreateLayerResize") })
-	_register("BNNSFilterCreateLayerTensorContraction", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTensorContraction, _veclibLib, "BNNSFilterCreateLayerTensorContraction") })
-	_register("BNNSFilterCreateLayerTransposedConvolution", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTransposedConvolution, _veclibLib, "BNNSFilterCreateLayerTransposedConvolution") })
-	_register("BNNSFilterCreatePoolingLayer", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreatePoolingLayer, _veclibLib, "BNNSFilterCreatePoolingLayer") })
-	_register("BNNSFilterCreateVectorActivationLayer", func() { purego.RegisterLibFunc(&_fnBNNSFilterCreateVectorActivationLayer, _veclibLib, "BNNSFilterCreateVectorActivationLayer") })
+	_register("BNNSFilterCreateLayerMultiheadAttention", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerMultiheadAttention, _veclibLib, "BNNSFilterCreateLayerMultiheadAttention")
+	})
+	_register("BNNSFilterCreateLayerNormalization", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerNormalization, _veclibLib, "BNNSFilterCreateLayerNormalization")
+	})
+	_register("BNNSFilterCreateLayerPadding", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPadding, _veclibLib, "BNNSFilterCreateLayerPadding")
+	})
+	_register("BNNSFilterCreateLayerPermute", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPermute, _veclibLib, "BNNSFilterCreateLayerPermute")
+	})
+	_register("BNNSFilterCreateLayerPooling", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPooling, _veclibLib, "BNNSFilterCreateLayerPooling")
+	})
+	_register("BNNSFilterCreateLayerReduction", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerReduction, _veclibLib, "BNNSFilterCreateLayerReduction")
+	})
+	_register("BNNSFilterCreateLayerResize", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerResize, _veclibLib, "BNNSFilterCreateLayerResize")
+	})
+	_register("BNNSFilterCreateLayerTensorContraction", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTensorContraction, _veclibLib, "BNNSFilterCreateLayerTensorContraction")
+	})
+	_register("BNNSFilterCreateLayerTransposedConvolution", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTransposedConvolution, _veclibLib, "BNNSFilterCreateLayerTransposedConvolution")
+	})
+	_register("BNNSFilterCreatePoolingLayer", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreatePoolingLayer, _veclibLib, "BNNSFilterCreatePoolingLayer")
+	})
+	_register("BNNSFilterCreateVectorActivationLayer", func() {
+		purego.RegisterLibFunc(&_fnBNNSFilterCreateVectorActivationLayer, _veclibLib, "BNNSFilterCreateVectorActivationLayer")
+	})
 	_register("BNNSFilterDestroy", func() { purego.RegisterLibFunc(&_fnBNNSFilterDestroy, _veclibLib, "BNNSFilterDestroy") })
-	_register("BNNSFusedFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBackwardBatch, _veclibLib, "BNNSFusedFilterApplyBackwardBatch") })
-	_register("BNNSFusedFilterApplyBackwardMultiInputBatch", func() { purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBackwardMultiInputBatch, _veclibLib, "BNNSFusedFilterApplyBackwardMultiInputBatch") })
+	_register("BNNSFusedFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBackwardBatch, _veclibLib, "BNNSFusedFilterApplyBackwardBatch")
+	})
+	_register("BNNSFusedFilterApplyBackwardMultiInputBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBackwardMultiInputBatch, _veclibLib, "BNNSFusedFilterApplyBackwardMultiInputBatch")
+	})
 	_register("BNNSFusedFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBatch, _veclibLib, "BNNSFusedFilterApplyBatch") })
-	_register("BNNSFusedFilterApplyMultiInputBatch", func() { purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyMultiInputBatch, _veclibLib, "BNNSFusedFilterApplyMultiInputBatch") })
+	_register("BNNSFusedFilterApplyMultiInputBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSFusedFilterApplyMultiInputBatch, _veclibLib, "BNNSFusedFilterApplyMultiInputBatch")
+	})
 	_register("BNNSGather", func() { purego.RegisterLibFunc(&_fnBNNSGather, _veclibLib, "BNNSGather") })
 	_register("BNNSGatherND", func() { purego.RegisterLibFunc(&_fnBNNSGatherND, _veclibLib, "BNNSGatherND") })
 	_register("BNNSGetPointer", func() { purego.RegisterLibFunc(&_fnBNNSGetPointer, _veclibLib, "BNNSGetPointer") })
 	_register("BNNSGraphCompileFromFile", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _veclibLib, "BNNSGraphCompileFromFile") })
-	_register("BNNSGraphCompileOptionsDestroy", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsDestroy, _veclibLib, "BNNSGraphCompileOptionsDestroy") })
-	_register("BNNSGraphCompileOptionsGetGenerateDebugInfo", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetGenerateDebugInfo, _veclibLib, "BNNSGraphCompileOptionsGetGenerateDebugInfo") })
-	_register("BNNSGraphCompileOptionsGetOptimizationPreference", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOptimizationPreference, _veclibLib, "BNNSGraphCompileOptionsGetOptimizationPreference") })
-	_register("BNNSGraphCompileOptionsGetOutputFD", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOutputFD, _veclibLib, "BNNSGraphCompileOptionsGetOutputFD") })
-	_register("BNNSGraphCompileOptionsGetOutputPath", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOutputPath, _veclibLib, "BNNSGraphCompileOptionsGetOutputPath") })
-	_register("BNNSGraphCompileOptionsGetTargetSingleThread", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetTargetSingleThread, _veclibLib, "BNNSGraphCompileOptionsGetTargetSingleThread") })
-	_register("BNNSGraphCompileOptionsMakeDefault", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsMakeDefault, _veclibLib, "BNNSGraphCompileOptionsMakeDefault") })
-	_register("BNNSGraphCompileOptionsSetGenerateDebugInfo", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetGenerateDebugInfo, _veclibLib, "BNNSGraphCompileOptionsSetGenerateDebugInfo") })
-	_register("BNNSGraphCompileOptionsSetMessageLogCallback", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetMessageLogCallback, _veclibLib, "BNNSGraphCompileOptionsSetMessageLogCallback") })
-	_register("BNNSGraphCompileOptionsSetMessageLogMask", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetMessageLogMask, _veclibLib, "BNNSGraphCompileOptionsSetMessageLogMask") })
-	_register("BNNSGraphCompileOptionsSetOptimizationPreference", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOptimizationPreference, _veclibLib, "BNNSGraphCompileOptionsSetOptimizationPreference") })
-	_register("BNNSGraphCompileOptionsSetOutputFD", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOutputFD, _veclibLib, "BNNSGraphCompileOptionsSetOutputFD") })
-	_register("BNNSGraphCompileOptionsSetOutputPath", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOutputPath, _veclibLib, "BNNSGraphCompileOptionsSetOutputPath") })
-	_register("BNNSGraphCompileOptionsSetTargetSingleThread", func() { purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetTargetSingleThread, _veclibLib, "BNNSGraphCompileOptionsSetTargetSingleThread") })
+	_register("BNNSGraphCompileOptionsDestroy", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsDestroy, _veclibLib, "BNNSGraphCompileOptionsDestroy")
+	})
+	_register("BNNSGraphCompileOptionsGetGenerateDebugInfo", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetGenerateDebugInfo, _veclibLib, "BNNSGraphCompileOptionsGetGenerateDebugInfo")
+	})
+	_register("BNNSGraphCompileOptionsGetOptimizationPreference", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOptimizationPreference, _veclibLib, "BNNSGraphCompileOptionsGetOptimizationPreference")
+	})
+	_register("BNNSGraphCompileOptionsGetOutputFD", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOutputFD, _veclibLib, "BNNSGraphCompileOptionsGetOutputFD")
+	})
+	_register("BNNSGraphCompileOptionsGetOutputPath", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOutputPath, _veclibLib, "BNNSGraphCompileOptionsGetOutputPath")
+	})
+	_register("BNNSGraphCompileOptionsGetTargetSingleThread", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetTargetSingleThread, _veclibLib, "BNNSGraphCompileOptionsGetTargetSingleThread")
+	})
+	_register("BNNSGraphCompileOptionsMakeDefault", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsMakeDefault, _veclibLib, "BNNSGraphCompileOptionsMakeDefault")
+	})
+	_register("BNNSGraphCompileOptionsSetGenerateDebugInfo", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetGenerateDebugInfo, _veclibLib, "BNNSGraphCompileOptionsSetGenerateDebugInfo")
+	})
+	_register("BNNSGraphCompileOptionsSetMessageLogCallback", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetMessageLogCallback, _veclibLib, "BNNSGraphCompileOptionsSetMessageLogCallback")
+	})
+	_register("BNNSGraphCompileOptionsSetMessageLogMask", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetMessageLogMask, _veclibLib, "BNNSGraphCompileOptionsSetMessageLogMask")
+	})
+	_register("BNNSGraphCompileOptionsSetOptimizationPreference", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOptimizationPreference, _veclibLib, "BNNSGraphCompileOptionsSetOptimizationPreference")
+	})
+	_register("BNNSGraphCompileOptionsSetOutputFD", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOutputFD, _veclibLib, "BNNSGraphCompileOptionsSetOutputFD")
+	})
+	_register("BNNSGraphCompileOptionsSetOutputPath", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetOutputPath, _veclibLib, "BNNSGraphCompileOptionsSetOutputPath")
+	})
+	_register("BNNSGraphCompileOptionsSetTargetSingleThread", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsSetTargetSingleThread, _veclibLib, "BNNSGraphCompileOptionsSetTargetSingleThread")
+	})
 	_register("BNNSGraphContextDestroy", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextDestroy, _veclibLib, "BNNSGraphContextDestroy") })
-	_register("BNNSGraphContextEnableNanAndInfChecks", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextEnableNanAndInfChecks, _veclibLib, "BNNSGraphContextEnableNanAndInfChecks") })
+	_register("BNNSGraphContextEnableNanAndInfChecks", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextEnableNanAndInfChecks, _veclibLib, "BNNSGraphContextEnableNanAndInfChecks")
+	})
 	_register("BNNSGraphContextExecute", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextExecute, _veclibLib, "BNNSGraphContextExecute") })
 	_register("BNNSGraphContextGetTensor", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextGetTensor, _veclibLib, "BNNSGraphContextGetTensor") })
-	_register("BNNSGraphContextGetWorkspaceSize", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _veclibLib, "BNNSGraphContextGetWorkspaceSize") })
+	_register("BNNSGraphContextGetWorkspaceSize", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _veclibLib, "BNNSGraphContextGetWorkspaceSize")
+	})
 	_register("BNNSGraphContextMake", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextMake, _veclibLib, "BNNSGraphContextMake") })
-	_register("BNNSGraphContextMakeStreaming", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextMakeStreaming, _veclibLib, "BNNSGraphContextMakeStreaming") })
-	_register("BNNSGraphContextSetArgumentType", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetArgumentType, _veclibLib, "BNNSGraphContextSetArgumentType") })
-	_register("BNNSGraphContextSetBatchSize", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _veclibLib, "BNNSGraphContextSetBatchSize") })
-	_register("BNNSGraphContextSetDynamicShapes", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _veclibLib, "BNNSGraphContextSetDynamicShapes") })
-	_register("BNNSGraphContextSetMessageLogCallback", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogCallback, _veclibLib, "BNNSGraphContextSetMessageLogCallback") })
-	_register("BNNSGraphContextSetMessageLogMask", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogMask, _veclibLib, "BNNSGraphContextSetMessageLogMask") })
-	_register("BNNSGraphContextSetOutputAllocationCallback", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _veclibLib, "BNNSGraphContextSetOutputAllocationCallback") })
-	_register("BNNSGraphContextSetStreamingAdvanceCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetStreamingAdvanceCount, _veclibLib, "BNNSGraphContextSetStreamingAdvanceCount") })
-	_register("BNNSGraphContextSetWorkspaceAllocationCallback", func() { purego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _veclibLib, "BNNSGraphContextSetWorkspaceAllocationCallback") })
+	_register("BNNSGraphContextMakeStreaming", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextMakeStreaming, _veclibLib, "BNNSGraphContextMakeStreaming")
+	})
+	_register("BNNSGraphContextSetArgumentType", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetArgumentType, _veclibLib, "BNNSGraphContextSetArgumentType")
+	})
+	_register("BNNSGraphContextSetBatchSize", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetBatchSize, _veclibLib, "BNNSGraphContextSetBatchSize")
+	})
+	_register("BNNSGraphContextSetDynamicShapes", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetDynamicShapes, _veclibLib, "BNNSGraphContextSetDynamicShapes")
+	})
+	_register("BNNSGraphContextSetMessageLogCallback", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogCallback, _veclibLib, "BNNSGraphContextSetMessageLogCallback")
+	})
+	_register("BNNSGraphContextSetMessageLogMask", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetMessageLogMask, _veclibLib, "BNNSGraphContextSetMessageLogMask")
+	})
+	_register("BNNSGraphContextSetOutputAllocationCallback", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetOutputAllocationCallback, _veclibLib, "BNNSGraphContextSetOutputAllocationCallback")
+	})
+	_register("BNNSGraphContextSetStreamingAdvanceCount", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetStreamingAdvanceCount, _veclibLib, "BNNSGraphContextSetStreamingAdvanceCount")
+	})
+	_register("BNNSGraphContextSetWorkspaceAllocationCallback", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphContextSetWorkspaceAllocationCallback, _veclibLib, "BNNSGraphContextSetWorkspaceAllocationCallback")
+	})
 	_register("BNNSGraphGetArgumentCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentCount, _veclibLib, "BNNSGraphGetArgumentCount") })
-	_register("BNNSGraphGetArgumentIntents", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentIntents, _veclibLib, "BNNSGraphGetArgumentIntents") })
-	_register("BNNSGraphGetArgumentInterleaveFactors", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentInterleaveFactors, _veclibLib, "BNNSGraphGetArgumentInterleaveFactors") })
+	_register("BNNSGraphGetArgumentIntents", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentIntents, _veclibLib, "BNNSGraphGetArgumentIntents")
+	})
+	_register("BNNSGraphGetArgumentInterleaveFactors", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentInterleaveFactors, _veclibLib, "BNNSGraphGetArgumentInterleaveFactors")
+	})
 	_register("BNNSGraphGetArgumentNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentNames, _veclibLib, "BNNSGraphGetArgumentNames") })
-	_register("BNNSGraphGetArgumentPosition", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentPosition, _veclibLib, "BNNSGraphGetArgumentPosition") })
+	_register("BNNSGraphGetArgumentPosition", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphGetArgumentPosition, _veclibLib, "BNNSGraphGetArgumentPosition")
+	})
 	_register("BNNSGraphGetFunctionCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetFunctionCount, _veclibLib, "BNNSGraphGetFunctionCount") })
 	_register("BNNSGraphGetFunctionNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetFunctionNames, _veclibLib, "BNNSGraphGetFunctionNames") })
 	_register("BNNSGraphGetInputCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetInputCount, _veclibLib, "BNNSGraphGetInputCount") })
 	_register("BNNSGraphGetInputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetInputNames, _veclibLib, "BNNSGraphGetInputNames") })
 	_register("BNNSGraphGetOutputCount", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetOutputCount, _veclibLib, "BNNSGraphGetOutputCount") })
 	_register("BNNSGraphGetOutputNames", func() { purego.RegisterLibFunc(&_fnBNNSGraphGetOutputNames, _veclibLib, "BNNSGraphGetOutputNames") })
-	_register("BNNSGraphTensorFillStrides", func() { purego.RegisterLibFunc(&_fnBNNSGraphTensorFillStrides, _veclibLib, "BNNSGraphTensorFillStrides") })
-	_register("BNNSLossFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSLossFilterApplyBackwardBatch, _veclibLib, "BNNSLossFilterApplyBackwardBatch") })
+	_register("BNNSGraphTensorFillStrides", func() {
+		purego.RegisterLibFunc(&_fnBNNSGraphTensorFillStrides, _veclibLib, "BNNSGraphTensorFillStrides")
+	})
+	_register("BNNSLossFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSLossFilterApplyBackwardBatch, _veclibLib, "BNNSLossFilterApplyBackwardBatch")
+	})
 	_register("BNNSLossFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSLossFilterApplyBatch, _veclibLib, "BNNSLossFilterApplyBatch") })
 	_register("BNNSMatMul", func() { purego.RegisterLibFunc(&_fnBNNSMatMul, _veclibLib, "BNNSMatMul") })
 	_register("BNNSMatMulWorkspaceSize", func() { purego.RegisterLibFunc(&_fnBNNSMatMulWorkspaceSize, _veclibLib, "BNNSMatMulWorkspaceSize") })
-	_register("BNNSNDArrayFullyConnectedSparsifySparseCOO", func() { purego.RegisterLibFunc(&_fnBNNSNDArrayFullyConnectedSparsifySparseCOO, _veclibLib, "BNNSNDArrayFullyConnectedSparsifySparseCOO") })
-	_register("BNNSNDArrayFullyConnectedSparsifySparseCSR", func() { purego.RegisterLibFunc(&_fnBNNSNDArrayFullyConnectedSparsifySparseCSR, _veclibLib, "BNNSNDArrayFullyConnectedSparsifySparseCSR") })
+	_register("BNNSNDArrayFullyConnectedSparsifySparseCOO", func() {
+		purego.RegisterLibFunc(&_fnBNNSNDArrayFullyConnectedSparsifySparseCOO, _veclibLib, "BNNSNDArrayFullyConnectedSparsifySparseCOO")
+	})
+	_register("BNNSNDArrayFullyConnectedSparsifySparseCSR", func() {
+		purego.RegisterLibFunc(&_fnBNNSNDArrayFullyConnectedSparsifySparseCSR, _veclibLib, "BNNSNDArrayFullyConnectedSparsifySparseCSR")
+	})
 	_register("BNNSNDArrayGetDataSize", func() { purego.RegisterLibFunc(&_fnBNNSNDArrayGetDataSize, _veclibLib, "BNNSNDArrayGetDataSize") })
-	_register("BNNSNearestNeighborsGetInfo", func() { purego.RegisterLibFunc(&_fnBNNSNearestNeighborsGetInfo, _veclibLib, "BNNSNearestNeighborsGetInfo") })
+	_register("BNNSNearestNeighborsGetInfo", func() {
+		purego.RegisterLibFunc(&_fnBNNSNearestNeighborsGetInfo, _veclibLib, "BNNSNearestNeighborsGetInfo")
+	})
 	_register("BNNSNearestNeighborsLoad", func() { purego.RegisterLibFunc(&_fnBNNSNearestNeighborsLoad, _veclibLib, "BNNSNearestNeighborsLoad") })
-	_register("BNNSNormalizationFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSNormalizationFilterApplyBackwardBatch, _veclibLib, "BNNSNormalizationFilterApplyBackwardBatch") })
-	_register("BNNSNormalizationFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSNormalizationFilterApplyBatch, _veclibLib, "BNNSNormalizationFilterApplyBatch") })
+	_register("BNNSNormalizationFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSNormalizationFilterApplyBackwardBatch, _veclibLib, "BNNSNormalizationFilterApplyBackwardBatch")
+	})
+	_register("BNNSNormalizationFilterApplyBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSNormalizationFilterApplyBatch, _veclibLib, "BNNSNormalizationFilterApplyBatch")
+	})
 	_register("BNNSOptimizerStep", func() { purego.RegisterLibFunc(&_fnBNNSOptimizerStep, _veclibLib, "BNNSOptimizerStep") })
-	_register("BNNSPermuteFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSPermuteFilterApplyBackwardBatch, _veclibLib, "BNNSPermuteFilterApplyBackwardBatch") })
-	_register("BNNSPoolingFilterApplyBackwardBatch", func() { purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBackwardBatch, _veclibLib, "BNNSPoolingFilterApplyBackwardBatch") })
-	_register("BNNSPoolingFilterApplyBackwardBatchEx", func() { purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBackwardBatchEx, _veclibLib, "BNNSPoolingFilterApplyBackwardBatchEx") })
-	_register("BNNSPoolingFilterApplyBatch", func() { purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBatch, _veclibLib, "BNNSPoolingFilterApplyBatch") })
-	_register("BNNSPoolingFilterApplyBatchEx", func() { purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBatchEx, _veclibLib, "BNNSPoolingFilterApplyBatchEx") })
-	_register("BNNSRandomFillCategoricalFloat", func() { purego.RegisterLibFunc(&_fnBNNSRandomFillCategoricalFloat, _veclibLib, "BNNSRandomFillCategoricalFloat") })
+	_register("BNNSPermuteFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSPermuteFilterApplyBackwardBatch, _veclibLib, "BNNSPermuteFilterApplyBackwardBatch")
+	})
+	_register("BNNSPoolingFilterApplyBackwardBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBackwardBatch, _veclibLib, "BNNSPoolingFilterApplyBackwardBatch")
+	})
+	_register("BNNSPoolingFilterApplyBackwardBatchEx", func() {
+		purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBackwardBatchEx, _veclibLib, "BNNSPoolingFilterApplyBackwardBatchEx")
+	})
+	_register("BNNSPoolingFilterApplyBatch", func() {
+		purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBatch, _veclibLib, "BNNSPoolingFilterApplyBatch")
+	})
+	_register("BNNSPoolingFilterApplyBatchEx", func() {
+		purego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBatchEx, _veclibLib, "BNNSPoolingFilterApplyBatchEx")
+	})
+	_register("BNNSRandomFillCategoricalFloat", func() {
+		purego.RegisterLibFunc(&_fnBNNSRandomFillCategoricalFloat, _veclibLib, "BNNSRandomFillCategoricalFloat")
+	})
 	_register("BNNSRandomFillNormalFloat", func() { purego.RegisterLibFunc(&_fnBNNSRandomFillNormalFloat, _veclibLib, "BNNSRandomFillNormalFloat") })
-	_register("BNNSRandomFillUniformFloat", func() { purego.RegisterLibFunc(&_fnBNNSRandomFillUniformFloat, _veclibLib, "BNNSRandomFillUniformFloat") })
+	_register("BNNSRandomFillUniformFloat", func() {
+		purego.RegisterLibFunc(&_fnBNNSRandomFillUniformFloat, _veclibLib, "BNNSRandomFillUniformFloat")
+	})
 	_register("BNNSRandomFillUniformInt", func() { purego.RegisterLibFunc(&_fnBNNSRandomFillUniformInt, _veclibLib, "BNNSRandomFillUniformInt") })
-	_register("BNNSRandomGeneratorGetState", func() { purego.RegisterLibFunc(&_fnBNNSRandomGeneratorGetState, _veclibLib, "BNNSRandomGeneratorGetState") })
-	_register("BNNSRandomGeneratorSetState", func() { purego.RegisterLibFunc(&_fnBNNSRandomGeneratorSetState, _veclibLib, "BNNSRandomGeneratorSetState") })
-	_register("BNNSRandomGeneratorStateSize", func() { purego.RegisterLibFunc(&_fnBNNSRandomGeneratorStateSize, _veclibLib, "BNNSRandomGeneratorStateSize") })
+	_register("BNNSRandomGeneratorGetState", func() {
+		purego.RegisterLibFunc(&_fnBNNSRandomGeneratorGetState, _veclibLib, "BNNSRandomGeneratorGetState")
+	})
+	_register("BNNSRandomGeneratorSetState", func() {
+		purego.RegisterLibFunc(&_fnBNNSRandomGeneratorSetState, _veclibLib, "BNNSRandomGeneratorSetState")
+	})
+	_register("BNNSRandomGeneratorStateSize", func() {
+		purego.RegisterLibFunc(&_fnBNNSRandomGeneratorStateSize, _veclibLib, "BNNSRandomGeneratorStateSize")
+	})
 	_register("BNNSScatter", func() { purego.RegisterLibFunc(&_fnBNNSScatter, _veclibLib, "BNNSScatter") })
 	_register("BNNSScatterND", func() { purego.RegisterLibFunc(&_fnBNNSScatterND, _veclibLib, "BNNSScatterND") })
 	_register("BNNSShuffle", func() { purego.RegisterLibFunc(&_fnBNNSShuffle, _veclibLib, "BNNSShuffle") })
-	_register("BNNSTensorGetAllocationSize", func() { purego.RegisterLibFunc(&_fnBNNSTensorGetAllocationSize, _veclibLib, "BNNSTensorGetAllocationSize") })
+	_register("BNNSTensorGetAllocationSize", func() {
+		purego.RegisterLibFunc(&_fnBNNSTensorGetAllocationSize, _veclibLib, "BNNSTensorGetAllocationSize")
+	})
 	_register("BNNSTile", func() { purego.RegisterLibFunc(&_fnBNNSTile, _veclibLib, "BNNSTile") })
 	_register("BNNSTileBackward", func() { purego.RegisterLibFunc(&_fnBNNSTileBackward, _veclibLib, "BNNSTileBackward") })
 	_register("BNNSTranspose", func() { purego.RegisterLibFunc(&_fnBNNSTranspose, _veclibLib, "BNNSTranspose") })
 	_register("SetBLASParamErrorProc", func() { purego.RegisterLibFunc(&_fnSetBLASParamErrorProc, _veclibLib, "SetBLASParamErrorProc") })
 	_register("SparseCleanup", func() { purego.RegisterLibFunc(&_fnSparseCleanup, _veclibLib, "SparseCleanup") })
 	_register("SparseConjugateGradient", func() { purego.RegisterLibFunc(&_fnSparseConjugateGradient, _veclibLib, "SparseConjugateGradient") })
-	_register("SparseConvertFromCoordinate", func() { purego.RegisterLibFunc(&_fnSparseConvertFromCoordinate, _veclibLib, "SparseConvertFromCoordinate") })
+	_register("SparseConvertFromCoordinate", func() {
+		purego.RegisterLibFunc(&_fnSparseConvertFromCoordinate, _veclibLib, "SparseConvertFromCoordinate")
+	})
 	_register("SparseConvertFromOpaque", func() { purego.RegisterLibFunc(&_fnSparseConvertFromOpaque, _veclibLib, "SparseConvertFromOpaque") })
-	_register("SparseCreatePreconditioner", func() { purego.RegisterLibFunc(&_fnSparseCreatePreconditioner, _veclibLib, "SparseCreatePreconditioner") })
+	_register("SparseCreatePreconditioner", func() {
+		purego.RegisterLibFunc(&_fnSparseCreatePreconditioner, _veclibLib, "SparseCreatePreconditioner")
+	})
 	_register("SparseCreateSubfactor", func() { purego.RegisterLibFunc(&_fnSparseCreateSubfactor, _veclibLib, "SparseCreateSubfactor") })
 	_register("SparseFactor", func() { purego.RegisterLibFunc(&_fnSparseFactor, _veclibLib, "SparseFactor") })
 	_register("SparseGMRES", func() { purego.RegisterLibFunc(&_fnSparseGMRES, _veclibLib, "SparseGMRES") })
-	_register("SparseGetConjugateTranspose", func() { purego.RegisterLibFunc(&_fnSparseGetConjugateTranspose, _veclibLib, "SparseGetConjugateTranspose") })
+	_register("SparseGetConjugateTranspose", func() {
+		purego.RegisterLibFunc(&_fnSparseGetConjugateTranspose, _veclibLib, "SparseGetConjugateTranspose")
+	})
 	_register("SparseGetInertia", func() { purego.RegisterLibFunc(&_fnSparseGetInertia, _veclibLib, "SparseGetInertia") })
-	_register("SparseGetStateSize_Complex_Double", func() { purego.RegisterLibFunc(&_fnSparseGetStateSize_Complex_Double, _veclibLib, "SparseGetStateSize_Complex_Double") })
-	_register("SparseGetStateSize_Complex_Float", func() { purego.RegisterLibFunc(&_fnSparseGetStateSize_Complex_Float, _veclibLib, "SparseGetStateSize_Complex_Float") })
+	_register("SparseGetStateSize_Complex_Double", func() {
+		purego.RegisterLibFunc(&_fnSparseGetStateSize_Complex_Double, _veclibLib, "SparseGetStateSize_Complex_Double")
+	})
+	_register("SparseGetStateSize_Complex_Float", func() {
+		purego.RegisterLibFunc(&_fnSparseGetStateSize_Complex_Float, _veclibLib, "SparseGetStateSize_Complex_Float")
+	})
 	_register("SparseGetStateSize_Double", func() { purego.RegisterLibFunc(&_fnSparseGetStateSize_Double, _veclibLib, "SparseGetStateSize_Double") })
 	_register("SparseGetStateSize_Float", func() { purego.RegisterLibFunc(&_fnSparseGetStateSize_Float, _veclibLib, "SparseGetStateSize_Float") })
 	_register("SparseGetTranspose", func() { purego.RegisterLibFunc(&_fnSparseGetTranspose, _veclibLib, "SparseGetTranspose") })
@@ -213,161 +395,391 @@ func _loadLibrary() {
 	_register("SparseRetain", func() { purego.RegisterLibFunc(&_fnSparseRetain, _veclibLib, "SparseRetain") })
 	_register("SparseSolve", func() { purego.RegisterLibFunc(&_fnSparseSolve, _veclibLib, "SparseSolve") })
 	_register("SparseUpdateFactor", func() { purego.RegisterLibFunc(&_fnSparseUpdateFactor, _veclibLib, "SparseUpdateFactor") })
-	_register("_DenseMatrixFromVector_Complex_Double", func() { purego.RegisterLibFunc(&__DenseMatrixFromVector_Complex_Double, _veclibLib, "_DenseMatrixFromVector_Complex_Double") })
-	_register("_DenseMatrixFromVector_Complex_Float", func() { purego.RegisterLibFunc(&__DenseMatrixFromVector_Complex_Float, _veclibLib, "_DenseMatrixFromVector_Complex_Float") })
-	_register("_DenseMatrixFromVector_Double", func() { purego.RegisterLibFunc(&__DenseMatrixFromVector_Double, _veclibLib, "_DenseMatrixFromVector_Double") })
-	_register("_DenseMatrixFromVector_Float", func() { purego.RegisterLibFunc(&__DenseMatrixFromVector_Float, _veclibLib, "_DenseMatrixFromVector_Float") })
-	_register("_SparseCGIterate_Complex_Double", func() { purego.RegisterLibFunc(&__SparseCGIterate_Complex_Double, _veclibLib, "_SparseCGIterate_Complex_Double") })
-	_register("_SparseCGIterate_Complex_Float", func() { purego.RegisterLibFunc(&__SparseCGIterate_Complex_Float, _veclibLib, "_SparseCGIterate_Complex_Float") })
+	_register("_DenseMatrixFromVector_Complex_Double", func() {
+		purego.RegisterLibFunc(&__DenseMatrixFromVector_Complex_Double, _veclibLib, "_DenseMatrixFromVector_Complex_Double")
+	})
+	_register("_DenseMatrixFromVector_Complex_Float", func() {
+		purego.RegisterLibFunc(&__DenseMatrixFromVector_Complex_Float, _veclibLib, "_DenseMatrixFromVector_Complex_Float")
+	})
+	_register("_DenseMatrixFromVector_Double", func() {
+		purego.RegisterLibFunc(&__DenseMatrixFromVector_Double, _veclibLib, "_DenseMatrixFromVector_Double")
+	})
+	_register("_DenseMatrixFromVector_Float", func() {
+		purego.RegisterLibFunc(&__DenseMatrixFromVector_Float, _veclibLib, "_DenseMatrixFromVector_Float")
+	})
+	_register("_SparseCGIterate_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseCGIterate_Complex_Double, _veclibLib, "_SparseCGIterate_Complex_Double")
+	})
+	_register("_SparseCGIterate_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseCGIterate_Complex_Float, _veclibLib, "_SparseCGIterate_Complex_Float")
+	})
 	_register("_SparseCGIterate_Double", func() { purego.RegisterLibFunc(&__SparseCGIterate_Double, _veclibLib, "_SparseCGIterate_Double") })
 	_register("_SparseCGIterate_Float", func() { purego.RegisterLibFunc(&__SparseCGIterate_Float, _veclibLib, "_SparseCGIterate_Float") })
-	_register("_SparseCGSolve_Complex_Double", func() { purego.RegisterLibFunc(&__SparseCGSolve_Complex_Double, _veclibLib, "_SparseCGSolve_Complex_Double") })
-	_register("_SparseCGSolve_Complex_Float", func() { purego.RegisterLibFunc(&__SparseCGSolve_Complex_Float, _veclibLib, "_SparseCGSolve_Complex_Float") })
+	_register("_SparseCGSolve_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseCGSolve_Complex_Double, _veclibLib, "_SparseCGSolve_Complex_Double")
+	})
+	_register("_SparseCGSolve_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseCGSolve_Complex_Float, _veclibLib, "_SparseCGSolve_Complex_Float")
+	})
 	_register("_SparseCGSolve_Double", func() { purego.RegisterLibFunc(&__SparseCGSolve_Double, _veclibLib, "_SparseCGSolve_Double") })
 	_register("_SparseCGSolve_Float", func() { purego.RegisterLibFunc(&__SparseCGSolve_Float, _veclibLib, "_SparseCGSolve_Float") })
-	_register("_SparseConvertFromCoordinate_Complex_Double", func() { purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Complex_Double, _veclibLib, "_SparseConvertFromCoordinate_Complex_Double") })
-	_register("_SparseConvertFromCoordinate_Complex_Float", func() { purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Complex_Float, _veclibLib, "_SparseConvertFromCoordinate_Complex_Float") })
-	_register("_SparseConvertFromCoordinate_Double", func() { purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Double, _veclibLib, "_SparseConvertFromCoordinate_Double") })
-	_register("_SparseConvertFromCoordinate_Float", func() { purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Float, _veclibLib, "_SparseConvertFromCoordinate_Float") })
-	_register("_SparseConvertFromOpaque_Complex_Double", func() { purego.RegisterLibFunc(&__SparseConvertFromOpaque_Complex_Double, _veclibLib, "_SparseConvertFromOpaque_Complex_Double") })
-	_register("_SparseConvertFromOpaque_Complex_Float", func() { purego.RegisterLibFunc(&__SparseConvertFromOpaque_Complex_Float, _veclibLib, "_SparseConvertFromOpaque_Complex_Float") })
-	_register("_SparseConvertFromOpaque_Double", func() { purego.RegisterLibFunc(&__SparseConvertFromOpaque_Double, _veclibLib, "_SparseConvertFromOpaque_Double") })
-	_register("_SparseConvertFromOpaque_Float", func() { purego.RegisterLibFunc(&__SparseConvertFromOpaque_Float, _veclibLib, "_SparseConvertFromOpaque_Float") })
-	_register("_SparseCreatePreconditioner_Complex_Double", func() { purego.RegisterLibFunc(&__SparseCreatePreconditioner_Complex_Double, _veclibLib, "_SparseCreatePreconditioner_Complex_Double") })
-	_register("_SparseCreatePreconditioner_Complex_Float", func() { purego.RegisterLibFunc(&__SparseCreatePreconditioner_Complex_Float, _veclibLib, "_SparseCreatePreconditioner_Complex_Float") })
-	_register("_SparseCreatePreconditioner_Double", func() { purego.RegisterLibFunc(&__SparseCreatePreconditioner_Double, _veclibLib, "_SparseCreatePreconditioner_Double") })
-	_register("_SparseCreatePreconditioner_Float", func() { purego.RegisterLibFunc(&__SparseCreatePreconditioner_Float, _veclibLib, "_SparseCreatePreconditioner_Float") })
-	_register("_SparseDestroyOpaqueNumeric_Complex_Double", func() { purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Complex_Double, _veclibLib, "_SparseDestroyOpaqueNumeric_Complex_Double") })
-	_register("_SparseDestroyOpaqueNumeric_Complex_Float", func() { purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Complex_Float, _veclibLib, "_SparseDestroyOpaqueNumeric_Complex_Float") })
-	_register("_SparseDestroyOpaqueNumeric_Double", func() { purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Double, _veclibLib, "_SparseDestroyOpaqueNumeric_Double") })
-	_register("_SparseDestroyOpaqueNumeric_Float", func() { purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Float, _veclibLib, "_SparseDestroyOpaqueNumeric_Float") })
-	_register("_SparseDestroyOpaqueSymbolic", func() { purego.RegisterLibFunc(&__SparseDestroyOpaqueSymbolic, _veclibLib, "_SparseDestroyOpaqueSymbolic") })
-	_register("_SparseFactorHermitian_Complex_Double", func() { purego.RegisterLibFunc(&__SparseFactorHermitian_Complex_Double, _veclibLib, "_SparseFactorHermitian_Complex_Double") })
-	_register("_SparseFactorHermitian_Complex_Float", func() { purego.RegisterLibFunc(&__SparseFactorHermitian_Complex_Float, _veclibLib, "_SparseFactorHermitian_Complex_Float") })
-	_register("_SparseFactorLU_Complex_Double", func() { purego.RegisterLibFunc(&__SparseFactorLU_Complex_Double, _veclibLib, "_SparseFactorLU_Complex_Double") })
-	_register("_SparseFactorLU_Complex_Float", func() { purego.RegisterLibFunc(&__SparseFactorLU_Complex_Float, _veclibLib, "_SparseFactorLU_Complex_Float") })
+	_register("_SparseConvertFromCoordinate_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Complex_Double, _veclibLib, "_SparseConvertFromCoordinate_Complex_Double")
+	})
+	_register("_SparseConvertFromCoordinate_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Complex_Float, _veclibLib, "_SparseConvertFromCoordinate_Complex_Float")
+	})
+	_register("_SparseConvertFromCoordinate_Double", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Double, _veclibLib, "_SparseConvertFromCoordinate_Double")
+	})
+	_register("_SparseConvertFromCoordinate_Float", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromCoordinate_Float, _veclibLib, "_SparseConvertFromCoordinate_Float")
+	})
+	_register("_SparseConvertFromOpaque_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromOpaque_Complex_Double, _veclibLib, "_SparseConvertFromOpaque_Complex_Double")
+	})
+	_register("_SparseConvertFromOpaque_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromOpaque_Complex_Float, _veclibLib, "_SparseConvertFromOpaque_Complex_Float")
+	})
+	_register("_SparseConvertFromOpaque_Double", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromOpaque_Double, _veclibLib, "_SparseConvertFromOpaque_Double")
+	})
+	_register("_SparseConvertFromOpaque_Float", func() {
+		purego.RegisterLibFunc(&__SparseConvertFromOpaque_Float, _veclibLib, "_SparseConvertFromOpaque_Float")
+	})
+	_register("_SparseCreatePreconditioner_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseCreatePreconditioner_Complex_Double, _veclibLib, "_SparseCreatePreconditioner_Complex_Double")
+	})
+	_register("_SparseCreatePreconditioner_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseCreatePreconditioner_Complex_Float, _veclibLib, "_SparseCreatePreconditioner_Complex_Float")
+	})
+	_register("_SparseCreatePreconditioner_Double", func() {
+		purego.RegisterLibFunc(&__SparseCreatePreconditioner_Double, _veclibLib, "_SparseCreatePreconditioner_Double")
+	})
+	_register("_SparseCreatePreconditioner_Float", func() {
+		purego.RegisterLibFunc(&__SparseCreatePreconditioner_Float, _veclibLib, "_SparseCreatePreconditioner_Float")
+	})
+	_register("_SparseDestroyOpaqueNumeric_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Complex_Double, _veclibLib, "_SparseDestroyOpaqueNumeric_Complex_Double")
+	})
+	_register("_SparseDestroyOpaqueNumeric_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Complex_Float, _veclibLib, "_SparseDestroyOpaqueNumeric_Complex_Float")
+	})
+	_register("_SparseDestroyOpaqueNumeric_Double", func() {
+		purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Double, _veclibLib, "_SparseDestroyOpaqueNumeric_Double")
+	})
+	_register("_SparseDestroyOpaqueNumeric_Float", func() {
+		purego.RegisterLibFunc(&__SparseDestroyOpaqueNumeric_Float, _veclibLib, "_SparseDestroyOpaqueNumeric_Float")
+	})
+	_register("_SparseDestroyOpaqueSymbolic", func() {
+		purego.RegisterLibFunc(&__SparseDestroyOpaqueSymbolic, _veclibLib, "_SparseDestroyOpaqueSymbolic")
+	})
+	_register("_SparseFactorHermitian_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseFactorHermitian_Complex_Double, _veclibLib, "_SparseFactorHermitian_Complex_Double")
+	})
+	_register("_SparseFactorHermitian_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseFactorHermitian_Complex_Float, _veclibLib, "_SparseFactorHermitian_Complex_Float")
+	})
+	_register("_SparseFactorLU_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseFactorLU_Complex_Double, _veclibLib, "_SparseFactorLU_Complex_Double")
+	})
+	_register("_SparseFactorLU_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseFactorLU_Complex_Float, _veclibLib, "_SparseFactorLU_Complex_Float")
+	})
 	_register("_SparseFactorLU_Double", func() { purego.RegisterLibFunc(&__SparseFactorLU_Double, _veclibLib, "_SparseFactorLU_Double") })
 	_register("_SparseFactorLU_Float", func() { purego.RegisterLibFunc(&__SparseFactorLU_Float, _veclibLib, "_SparseFactorLU_Float") })
-	_register("_SparseFactorQR_Complex_Double", func() { purego.RegisterLibFunc(&__SparseFactorQR_Complex_Double, _veclibLib, "_SparseFactorQR_Complex_Double") })
-	_register("_SparseFactorQR_Complex_Float", func() { purego.RegisterLibFunc(&__SparseFactorQR_Complex_Float, _veclibLib, "_SparseFactorQR_Complex_Float") })
+	_register("_SparseFactorQR_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseFactorQR_Complex_Double, _veclibLib, "_SparseFactorQR_Complex_Double")
+	})
+	_register("_SparseFactorQR_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseFactorQR_Complex_Float, _veclibLib, "_SparseFactorQR_Complex_Float")
+	})
 	_register("_SparseFactorQR_Double", func() { purego.RegisterLibFunc(&__SparseFactorQR_Double, _veclibLib, "_SparseFactorQR_Double") })
 	_register("_SparseFactorQR_Float", func() { purego.RegisterLibFunc(&__SparseFactorQR_Float, _veclibLib, "_SparseFactorQR_Float") })
-	_register("_SparseFactorSymmetric_Complex_Double", func() { purego.RegisterLibFunc(&__SparseFactorSymmetric_Complex_Double, _veclibLib, "_SparseFactorSymmetric_Complex_Double") })
-	_register("_SparseFactorSymmetric_Complex_Float", func() { purego.RegisterLibFunc(&__SparseFactorSymmetric_Complex_Float, _veclibLib, "_SparseFactorSymmetric_Complex_Float") })
-	_register("_SparseFactorSymmetric_Double", func() { purego.RegisterLibFunc(&__SparseFactorSymmetric_Double, _veclibLib, "_SparseFactorSymmetric_Double") })
-	_register("_SparseFactorSymmetric_Float", func() { purego.RegisterLibFunc(&__SparseFactorSymmetric_Float, _veclibLib, "_SparseFactorSymmetric_Float") })
-	_register("_SparseFailedFactor_Complex_Double", func() { purego.RegisterLibFunc(&__SparseFailedFactor_Complex_Double, _veclibLib, "_SparseFailedFactor_Complex_Double") })
-	_register("_SparseFailedFactor_Complex_Float", func() { purego.RegisterLibFunc(&__SparseFailedFactor_Complex_Float, _veclibLib, "_SparseFailedFactor_Complex_Float") })
+	_register("_SparseFactorSymmetric_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseFactorSymmetric_Complex_Double, _veclibLib, "_SparseFactorSymmetric_Complex_Double")
+	})
+	_register("_SparseFactorSymmetric_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseFactorSymmetric_Complex_Float, _veclibLib, "_SparseFactorSymmetric_Complex_Float")
+	})
+	_register("_SparseFactorSymmetric_Double", func() {
+		purego.RegisterLibFunc(&__SparseFactorSymmetric_Double, _veclibLib, "_SparseFactorSymmetric_Double")
+	})
+	_register("_SparseFactorSymmetric_Float", func() {
+		purego.RegisterLibFunc(&__SparseFactorSymmetric_Float, _veclibLib, "_SparseFactorSymmetric_Float")
+	})
+	_register("_SparseFailedFactor_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseFailedFactor_Complex_Double, _veclibLib, "_SparseFailedFactor_Complex_Double")
+	})
+	_register("_SparseFailedFactor_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseFailedFactor_Complex_Float, _veclibLib, "_SparseFailedFactor_Complex_Float")
+	})
 	_register("_SparseFailedFactor_Double", func() { purego.RegisterLibFunc(&__SparseFailedFactor_Double, _veclibLib, "_SparseFailedFactor_Double") })
 	_register("_SparseFailedFactor_Float", func() { purego.RegisterLibFunc(&__SparseFailedFactor_Float, _veclibLib, "_SparseFailedFactor_Float") })
-	_register("_SparseFromAttributeComplex", func() { purego.RegisterLibFunc(&__SparseFromAttributeComplex, _veclibLib, "_SparseFromAttributeComplex") })
+	_register("_SparseFromAttributeComplex", func() {
+		purego.RegisterLibFunc(&__SparseFromAttributeComplex, _veclibLib, "_SparseFromAttributeComplex")
+	})
 	_register("_SparseFromKindComplex", func() { purego.RegisterLibFunc(&__SparseFromKindComplex, _veclibLib, "_SparseFromKindComplex") })
-	_register("_SparseFromStructureComplex", func() { purego.RegisterLibFunc(&__SparseFromStructureComplex, _veclibLib, "_SparseFromStructureComplex") })
-	_register("_SparseGMRESIterate_Complex_Double", func() { purego.RegisterLibFunc(&__SparseGMRESIterate_Complex_Double, _veclibLib, "_SparseGMRESIterate_Complex_Double") })
-	_register("_SparseGMRESIterate_Complex_Float", func() { purego.RegisterLibFunc(&__SparseGMRESIterate_Complex_Float, _veclibLib, "_SparseGMRESIterate_Complex_Float") })
+	_register("_SparseFromStructureComplex", func() {
+		purego.RegisterLibFunc(&__SparseFromStructureComplex, _veclibLib, "_SparseFromStructureComplex")
+	})
+	_register("_SparseGMRESIterate_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseGMRESIterate_Complex_Double, _veclibLib, "_SparseGMRESIterate_Complex_Double")
+	})
+	_register("_SparseGMRESIterate_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseGMRESIterate_Complex_Float, _veclibLib, "_SparseGMRESIterate_Complex_Float")
+	})
 	_register("_SparseGMRESIterate_Double", func() { purego.RegisterLibFunc(&__SparseGMRESIterate_Double, _veclibLib, "_SparseGMRESIterate_Double") })
 	_register("_SparseGMRESIterate_Float", func() { purego.RegisterLibFunc(&__SparseGMRESIterate_Float, _veclibLib, "_SparseGMRESIterate_Float") })
-	_register("_SparseGMRESSolve_Complex_Double", func() { purego.RegisterLibFunc(&__SparseGMRESSolve_Complex_Double, _veclibLib, "_SparseGMRESSolve_Complex_Double") })
-	_register("_SparseGMRESSolve_Complex_Float", func() { purego.RegisterLibFunc(&__SparseGMRESSolve_Complex_Float, _veclibLib, "_SparseGMRESSolve_Complex_Float") })
+	_register("_SparseGMRESSolve_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseGMRESSolve_Complex_Double, _veclibLib, "_SparseGMRESSolve_Complex_Double")
+	})
+	_register("_SparseGMRESSolve_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseGMRESSolve_Complex_Float, _veclibLib, "_SparseGMRESSolve_Complex_Float")
+	})
 	_register("_SparseGMRESSolve_Double", func() { purego.RegisterLibFunc(&__SparseGMRESSolve_Double, _veclibLib, "_SparseGMRESSolve_Double") })
 	_register("_SparseGMRESSolve_Float", func() { purego.RegisterLibFunc(&__SparseGMRESSolve_Float, _veclibLib, "_SparseGMRESSolve_Float") })
-	_register("_SparseGetIterativeStateSize_Complex_Double", func() { purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Complex_Double, _veclibLib, "_SparseGetIterativeStateSize_Complex_Double") })
-	_register("_SparseGetIterativeStateSize_Complex_Float", func() { purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Complex_Float, _veclibLib, "_SparseGetIterativeStateSize_Complex_Float") })
-	_register("_SparseGetIterativeStateSize_Double", func() { purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Double, _veclibLib, "_SparseGetIterativeStateSize_Double") })
-	_register("_SparseGetIterativeStateSize_Float", func() { purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Float, _veclibLib, "_SparseGetIterativeStateSize_Float") })
-	_register("_SparseGetOptionsFromNumericFactor_Complex_Double", func() { purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Complex_Double, _veclibLib, "_SparseGetOptionsFromNumericFactor_Complex_Double") })
-	_register("_SparseGetOptionsFromNumericFactor_Complex_Float", func() { purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Complex_Float, _veclibLib, "_SparseGetOptionsFromNumericFactor_Complex_Float") })
-	_register("_SparseGetOptionsFromNumericFactor_Double", func() { purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Double, _veclibLib, "_SparseGetOptionsFromNumericFactor_Double") })
-	_register("_SparseGetOptionsFromNumericFactor_Float", func() { purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Float, _veclibLib, "_SparseGetOptionsFromNumericFactor_Float") })
-	_register("_SparseGetOptionsFromSymbolicFactor", func() { purego.RegisterLibFunc(&__SparseGetOptionsFromSymbolicFactor, _veclibLib, "_SparseGetOptionsFromSymbolicFactor") })
-	_register("_SparseGetWorkspaceRequired_Complex_Double", func() { purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Complex_Double, _veclibLib, "_SparseGetWorkspaceRequired_Complex_Double") })
-	_register("_SparseGetWorkspaceRequired_Complex_Float", func() { purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Complex_Float, _veclibLib, "_SparseGetWorkspaceRequired_Complex_Float") })
-	_register("_SparseGetWorkspaceRequired_Double", func() { purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Double, _veclibLib, "_SparseGetWorkspaceRequired_Double") })
-	_register("_SparseGetWorkspaceRequired_Float", func() { purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Float, _veclibLib, "_SparseGetWorkspaceRequired_Float") })
-	_register("_SparseInvalidSubfactor_Complex_Double", func() { purego.RegisterLibFunc(&__SparseInvalidSubfactor_Complex_Double, _veclibLib, "_SparseInvalidSubfactor_Complex_Double") })
-	_register("_SparseInvalidSubfactor_Complex_Float", func() { purego.RegisterLibFunc(&__SparseInvalidSubfactor_Complex_Float, _veclibLib, "_SparseInvalidSubfactor_Complex_Float") })
-	_register("_SparseInvalidSubfactor_Double", func() { purego.RegisterLibFunc(&__SparseInvalidSubfactor_Double, _veclibLib, "_SparseInvalidSubfactor_Double") })
-	_register("_SparseInvalidSubfactor_Float", func() { purego.RegisterLibFunc(&__SparseInvalidSubfactor_Float, _veclibLib, "_SparseInvalidSubfactor_Float") })
-	_register("_SparseLSMRIterate_Complex_Double", func() { purego.RegisterLibFunc(&__SparseLSMRIterate_Complex_Double, _veclibLib, "_SparseLSMRIterate_Complex_Double") })
-	_register("_SparseLSMRIterate_Complex_Float", func() { purego.RegisterLibFunc(&__SparseLSMRIterate_Complex_Float, _veclibLib, "_SparseLSMRIterate_Complex_Float") })
+	_register("_SparseGetIterativeStateSize_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Complex_Double, _veclibLib, "_SparseGetIterativeStateSize_Complex_Double")
+	})
+	_register("_SparseGetIterativeStateSize_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Complex_Float, _veclibLib, "_SparseGetIterativeStateSize_Complex_Float")
+	})
+	_register("_SparseGetIterativeStateSize_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Double, _veclibLib, "_SparseGetIterativeStateSize_Double")
+	})
+	_register("_SparseGetIterativeStateSize_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetIterativeStateSize_Float, _veclibLib, "_SparseGetIterativeStateSize_Float")
+	})
+	_register("_SparseGetOptionsFromNumericFactor_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Complex_Double, _veclibLib, "_SparseGetOptionsFromNumericFactor_Complex_Double")
+	})
+	_register("_SparseGetOptionsFromNumericFactor_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Complex_Float, _veclibLib, "_SparseGetOptionsFromNumericFactor_Complex_Float")
+	})
+	_register("_SparseGetOptionsFromNumericFactor_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Double, _veclibLib, "_SparseGetOptionsFromNumericFactor_Double")
+	})
+	_register("_SparseGetOptionsFromNumericFactor_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetOptionsFromNumericFactor_Float, _veclibLib, "_SparseGetOptionsFromNumericFactor_Float")
+	})
+	_register("_SparseGetOptionsFromSymbolicFactor", func() {
+		purego.RegisterLibFunc(&__SparseGetOptionsFromSymbolicFactor, _veclibLib, "_SparseGetOptionsFromSymbolicFactor")
+	})
+	_register("_SparseGetWorkspaceRequired_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Complex_Double, _veclibLib, "_SparseGetWorkspaceRequired_Complex_Double")
+	})
+	_register("_SparseGetWorkspaceRequired_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Complex_Float, _veclibLib, "_SparseGetWorkspaceRequired_Complex_Float")
+	})
+	_register("_SparseGetWorkspaceRequired_Double", func() {
+		purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Double, _veclibLib, "_SparseGetWorkspaceRequired_Double")
+	})
+	_register("_SparseGetWorkspaceRequired_Float", func() {
+		purego.RegisterLibFunc(&__SparseGetWorkspaceRequired_Float, _veclibLib, "_SparseGetWorkspaceRequired_Float")
+	})
+	_register("_SparseInvalidSubfactor_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseInvalidSubfactor_Complex_Double, _veclibLib, "_SparseInvalidSubfactor_Complex_Double")
+	})
+	_register("_SparseInvalidSubfactor_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseInvalidSubfactor_Complex_Float, _veclibLib, "_SparseInvalidSubfactor_Complex_Float")
+	})
+	_register("_SparseInvalidSubfactor_Double", func() {
+		purego.RegisterLibFunc(&__SparseInvalidSubfactor_Double, _veclibLib, "_SparseInvalidSubfactor_Double")
+	})
+	_register("_SparseInvalidSubfactor_Float", func() {
+		purego.RegisterLibFunc(&__SparseInvalidSubfactor_Float, _veclibLib, "_SparseInvalidSubfactor_Float")
+	})
+	_register("_SparseLSMRIterate_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseLSMRIterate_Complex_Double, _veclibLib, "_SparseLSMRIterate_Complex_Double")
+	})
+	_register("_SparseLSMRIterate_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseLSMRIterate_Complex_Float, _veclibLib, "_SparseLSMRIterate_Complex_Float")
+	})
 	_register("_SparseLSMRIterate_Double", func() { purego.RegisterLibFunc(&__SparseLSMRIterate_Double, _veclibLib, "_SparseLSMRIterate_Double") })
 	_register("_SparseLSMRIterate_Float", func() { purego.RegisterLibFunc(&__SparseLSMRIterate_Float, _veclibLib, "_SparseLSMRIterate_Float") })
-	_register("_SparseLSMRSolve_Complex_Double", func() { purego.RegisterLibFunc(&__SparseLSMRSolve_Complex_Double, _veclibLib, "_SparseLSMRSolve_Complex_Double") })
-	_register("_SparseLSMRSolve_Complex_Float", func() { purego.RegisterLibFunc(&__SparseLSMRSolve_Complex_Float, _veclibLib, "_SparseLSMRSolve_Complex_Float") })
+	_register("_SparseLSMRSolve_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseLSMRSolve_Complex_Double, _veclibLib, "_SparseLSMRSolve_Complex_Double")
+	})
+	_register("_SparseLSMRSolve_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseLSMRSolve_Complex_Float, _veclibLib, "_SparseLSMRSolve_Complex_Float")
+	})
 	_register("_SparseLSMRSolve_Double", func() { purego.RegisterLibFunc(&__SparseLSMRSolve_Double, _veclibLib, "_SparseLSMRSolve_Double") })
 	_register("_SparseLSMRSolve_Float", func() { purego.RegisterLibFunc(&__SparseLSMRSolve_Float, _veclibLib, "_SparseLSMRSolve_Float") })
-	_register("_SparseMultiplySubfactor_Complex_Double", func() { purego.RegisterLibFunc(&__SparseMultiplySubfactor_Complex_Double, _veclibLib, "_SparseMultiplySubfactor_Complex_Double") })
-	_register("_SparseMultiplySubfactor_Complex_Float", func() { purego.RegisterLibFunc(&__SparseMultiplySubfactor_Complex_Float, _veclibLib, "_SparseMultiplySubfactor_Complex_Float") })
-	_register("_SparseMultiplySubfactor_Double", func() { purego.RegisterLibFunc(&__SparseMultiplySubfactor_Double, _veclibLib, "_SparseMultiplySubfactor_Double") })
-	_register("_SparseMultiplySubfactor_Float", func() { purego.RegisterLibFunc(&__SparseMultiplySubfactor_Float, _veclibLib, "_SparseMultiplySubfactor_Float") })
-	_register("_SparseNumericFactorHermitian_Complex_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorHermitian_Complex_Double, _veclibLib, "_SparseNumericFactorHermitian_Complex_Double") })
-	_register("_SparseNumericFactorHermitian_Complex_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorHermitian_Complex_Float, _veclibLib, "_SparseNumericFactorHermitian_Complex_Float") })
-	_register("_SparseNumericFactorLU_Complex_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorLU_Complex_Double, _veclibLib, "_SparseNumericFactorLU_Complex_Double") })
-	_register("_SparseNumericFactorLU_Complex_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorLU_Complex_Float, _veclibLib, "_SparseNumericFactorLU_Complex_Float") })
-	_register("_SparseNumericFactorLU_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorLU_Double, _veclibLib, "_SparseNumericFactorLU_Double") })
-	_register("_SparseNumericFactorLU_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorLU_Float, _veclibLib, "_SparseNumericFactorLU_Float") })
-	_register("_SparseNumericFactorQR_Complex_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorQR_Complex_Double, _veclibLib, "_SparseNumericFactorQR_Complex_Double") })
-	_register("_SparseNumericFactorQR_Complex_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorQR_Complex_Float, _veclibLib, "_SparseNumericFactorQR_Complex_Float") })
-	_register("_SparseNumericFactorQR_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorQR_Double, _veclibLib, "_SparseNumericFactorQR_Double") })
-	_register("_SparseNumericFactorQR_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorQR_Float, _veclibLib, "_SparseNumericFactorQR_Float") })
-	_register("_SparseNumericFactorSymmetric_Complex_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Complex_Double, _veclibLib, "_SparseNumericFactorSymmetric_Complex_Double") })
-	_register("_SparseNumericFactorSymmetric_Complex_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Complex_Float, _veclibLib, "_SparseNumericFactorSymmetric_Complex_Float") })
-	_register("_SparseNumericFactorSymmetric_Double", func() { purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Double, _veclibLib, "_SparseNumericFactorSymmetric_Double") })
-	_register("_SparseNumericFactorSymmetric_Float", func() { purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Float, _veclibLib, "_SparseNumericFactorSymmetric_Float") })
-	_register("_SparseRefactorHermitian_Complex_Double", func() { purego.RegisterLibFunc(&__SparseRefactorHermitian_Complex_Double, _veclibLib, "_SparseRefactorHermitian_Complex_Double") })
-	_register("_SparseRefactorHermitian_Complex_Float", func() { purego.RegisterLibFunc(&__SparseRefactorHermitian_Complex_Float, _veclibLib, "_SparseRefactorHermitian_Complex_Float") })
-	_register("_SparseRefactorLU_Complex_Double", func() { purego.RegisterLibFunc(&__SparseRefactorLU_Complex_Double, _veclibLib, "_SparseRefactorLU_Complex_Double") })
-	_register("_SparseRefactorLU_Complex_Float", func() { purego.RegisterLibFunc(&__SparseRefactorLU_Complex_Float, _veclibLib, "_SparseRefactorLU_Complex_Float") })
+	_register("_SparseMultiplySubfactor_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseMultiplySubfactor_Complex_Double, _veclibLib, "_SparseMultiplySubfactor_Complex_Double")
+	})
+	_register("_SparseMultiplySubfactor_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseMultiplySubfactor_Complex_Float, _veclibLib, "_SparseMultiplySubfactor_Complex_Float")
+	})
+	_register("_SparseMultiplySubfactor_Double", func() {
+		purego.RegisterLibFunc(&__SparseMultiplySubfactor_Double, _veclibLib, "_SparseMultiplySubfactor_Double")
+	})
+	_register("_SparseMultiplySubfactor_Float", func() {
+		purego.RegisterLibFunc(&__SparseMultiplySubfactor_Float, _veclibLib, "_SparseMultiplySubfactor_Float")
+	})
+	_register("_SparseNumericFactorHermitian_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorHermitian_Complex_Double, _veclibLib, "_SparseNumericFactorHermitian_Complex_Double")
+	})
+	_register("_SparseNumericFactorHermitian_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorHermitian_Complex_Float, _veclibLib, "_SparseNumericFactorHermitian_Complex_Float")
+	})
+	_register("_SparseNumericFactorLU_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorLU_Complex_Double, _veclibLib, "_SparseNumericFactorLU_Complex_Double")
+	})
+	_register("_SparseNumericFactorLU_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorLU_Complex_Float, _veclibLib, "_SparseNumericFactorLU_Complex_Float")
+	})
+	_register("_SparseNumericFactorLU_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorLU_Double, _veclibLib, "_SparseNumericFactorLU_Double")
+	})
+	_register("_SparseNumericFactorLU_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorLU_Float, _veclibLib, "_SparseNumericFactorLU_Float")
+	})
+	_register("_SparseNumericFactorQR_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorQR_Complex_Double, _veclibLib, "_SparseNumericFactorQR_Complex_Double")
+	})
+	_register("_SparseNumericFactorQR_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorQR_Complex_Float, _veclibLib, "_SparseNumericFactorQR_Complex_Float")
+	})
+	_register("_SparseNumericFactorQR_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorQR_Double, _veclibLib, "_SparseNumericFactorQR_Double")
+	})
+	_register("_SparseNumericFactorQR_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorQR_Float, _veclibLib, "_SparseNumericFactorQR_Float")
+	})
+	_register("_SparseNumericFactorSymmetric_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Complex_Double, _veclibLib, "_SparseNumericFactorSymmetric_Complex_Double")
+	})
+	_register("_SparseNumericFactorSymmetric_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Complex_Float, _veclibLib, "_SparseNumericFactorSymmetric_Complex_Float")
+	})
+	_register("_SparseNumericFactorSymmetric_Double", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Double, _veclibLib, "_SparseNumericFactorSymmetric_Double")
+	})
+	_register("_SparseNumericFactorSymmetric_Float", func() {
+		purego.RegisterLibFunc(&__SparseNumericFactorSymmetric_Float, _veclibLib, "_SparseNumericFactorSymmetric_Float")
+	})
+	_register("_SparseRefactorHermitian_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseRefactorHermitian_Complex_Double, _veclibLib, "_SparseRefactorHermitian_Complex_Double")
+	})
+	_register("_SparseRefactorHermitian_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseRefactorHermitian_Complex_Float, _veclibLib, "_SparseRefactorHermitian_Complex_Float")
+	})
+	_register("_SparseRefactorLU_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseRefactorLU_Complex_Double, _veclibLib, "_SparseRefactorLU_Complex_Double")
+	})
+	_register("_SparseRefactorLU_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseRefactorLU_Complex_Float, _veclibLib, "_SparseRefactorLU_Complex_Float")
+	})
 	_register("_SparseRefactorLU_Double", func() { purego.RegisterLibFunc(&__SparseRefactorLU_Double, _veclibLib, "_SparseRefactorLU_Double") })
 	_register("_SparseRefactorLU_Float", func() { purego.RegisterLibFunc(&__SparseRefactorLU_Float, _veclibLib, "_SparseRefactorLU_Float") })
-	_register("_SparseRefactorQR_Complex_Double", func() { purego.RegisterLibFunc(&__SparseRefactorQR_Complex_Double, _veclibLib, "_SparseRefactorQR_Complex_Double") })
-	_register("_SparseRefactorQR_Complex_Float", func() { purego.RegisterLibFunc(&__SparseRefactorQR_Complex_Float, _veclibLib, "_SparseRefactorQR_Complex_Float") })
+	_register("_SparseRefactorQR_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseRefactorQR_Complex_Double, _veclibLib, "_SparseRefactorQR_Complex_Double")
+	})
+	_register("_SparseRefactorQR_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseRefactorQR_Complex_Float, _veclibLib, "_SparseRefactorQR_Complex_Float")
+	})
 	_register("_SparseRefactorQR_Double", func() { purego.RegisterLibFunc(&__SparseRefactorQR_Double, _veclibLib, "_SparseRefactorQR_Double") })
 	_register("_SparseRefactorQR_Float", func() { purego.RegisterLibFunc(&__SparseRefactorQR_Float, _veclibLib, "_SparseRefactorQR_Float") })
-	_register("_SparseRefactorSymmetric_Complex_Double", func() { purego.RegisterLibFunc(&__SparseRefactorSymmetric_Complex_Double, _veclibLib, "_SparseRefactorSymmetric_Complex_Double") })
-	_register("_SparseRefactorSymmetric_Complex_Float", func() { purego.RegisterLibFunc(&__SparseRefactorSymmetric_Complex_Float, _veclibLib, "_SparseRefactorSymmetric_Complex_Float") })
-	_register("_SparseRefactorSymmetric_Double", func() { purego.RegisterLibFunc(&__SparseRefactorSymmetric_Double, _veclibLib, "_SparseRefactorSymmetric_Double") })
-	_register("_SparseRefactorSymmetric_Float", func() { purego.RegisterLibFunc(&__SparseRefactorSymmetric_Float, _veclibLib, "_SparseRefactorSymmetric_Float") })
-	_register("_SparseReleaseOpaquePreconditioner_Complex_Double", func() { purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Complex_Double, _veclibLib, "_SparseReleaseOpaquePreconditioner_Complex_Double") })
-	_register("_SparseReleaseOpaquePreconditioner_Complex_Float", func() { purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Complex_Float, _veclibLib, "_SparseReleaseOpaquePreconditioner_Complex_Float") })
-	_register("_SparseReleaseOpaquePreconditioner_Double", func() { purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Double, _veclibLib, "_SparseReleaseOpaquePreconditioner_Double") })
-	_register("_SparseReleaseOpaquePreconditioner_Float", func() { purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Float, _veclibLib, "_SparseReleaseOpaquePreconditioner_Float") })
-	_register("_SparseRetainNumeric_Complex_Double", func() { purego.RegisterLibFunc(&__SparseRetainNumeric_Complex_Double, _veclibLib, "_SparseRetainNumeric_Complex_Double") })
-	_register("_SparseRetainNumeric_Complex_Float", func() { purego.RegisterLibFunc(&__SparseRetainNumeric_Complex_Float, _veclibLib, "_SparseRetainNumeric_Complex_Float") })
-	_register("_SparseRetainNumeric_Double", func() { purego.RegisterLibFunc(&__SparseRetainNumeric_Double, _veclibLib, "_SparseRetainNumeric_Double") })
+	_register("_SparseRefactorSymmetric_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseRefactorSymmetric_Complex_Double, _veclibLib, "_SparseRefactorSymmetric_Complex_Double")
+	})
+	_register("_SparseRefactorSymmetric_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseRefactorSymmetric_Complex_Float, _veclibLib, "_SparseRefactorSymmetric_Complex_Float")
+	})
+	_register("_SparseRefactorSymmetric_Double", func() {
+		purego.RegisterLibFunc(&__SparseRefactorSymmetric_Double, _veclibLib, "_SparseRefactorSymmetric_Double")
+	})
+	_register("_SparseRefactorSymmetric_Float", func() {
+		purego.RegisterLibFunc(&__SparseRefactorSymmetric_Float, _veclibLib, "_SparseRefactorSymmetric_Float")
+	})
+	_register("_SparseReleaseOpaquePreconditioner_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Complex_Double, _veclibLib, "_SparseReleaseOpaquePreconditioner_Complex_Double")
+	})
+	_register("_SparseReleaseOpaquePreconditioner_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Complex_Float, _veclibLib, "_SparseReleaseOpaquePreconditioner_Complex_Float")
+	})
+	_register("_SparseReleaseOpaquePreconditioner_Double", func() {
+		purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Double, _veclibLib, "_SparseReleaseOpaquePreconditioner_Double")
+	})
+	_register("_SparseReleaseOpaquePreconditioner_Float", func() {
+		purego.RegisterLibFunc(&__SparseReleaseOpaquePreconditioner_Float, _veclibLib, "_SparseReleaseOpaquePreconditioner_Float")
+	})
+	_register("_SparseRetainNumeric_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseRetainNumeric_Complex_Double, _veclibLib, "_SparseRetainNumeric_Complex_Double")
+	})
+	_register("_SparseRetainNumeric_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseRetainNumeric_Complex_Float, _veclibLib, "_SparseRetainNumeric_Complex_Float")
+	})
+	_register("_SparseRetainNumeric_Double", func() {
+		purego.RegisterLibFunc(&__SparseRetainNumeric_Double, _veclibLib, "_SparseRetainNumeric_Double")
+	})
 	_register("_SparseRetainNumeric_Float", func() { purego.RegisterLibFunc(&__SparseRetainNumeric_Float, _veclibLib, "_SparseRetainNumeric_Float") })
 	_register("_SparseRetainSymbolic", func() { purego.RegisterLibFunc(&__SparseRetainSymbolic, _veclibLib, "_SparseRetainSymbolic") })
-	_register("_SparseSolveOpaque_Complex_Double", func() { purego.RegisterLibFunc(&__SparseSolveOpaque_Complex_Double, _veclibLib, "_SparseSolveOpaque_Complex_Double") })
-	_register("_SparseSolveOpaque_Complex_Float", func() { purego.RegisterLibFunc(&__SparseSolveOpaque_Complex_Float, _veclibLib, "_SparseSolveOpaque_Complex_Float") })
+	_register("_SparseSolveOpaque_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseSolveOpaque_Complex_Double, _veclibLib, "_SparseSolveOpaque_Complex_Double")
+	})
+	_register("_SparseSolveOpaque_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseSolveOpaque_Complex_Float, _veclibLib, "_SparseSolveOpaque_Complex_Float")
+	})
 	_register("_SparseSolveOpaque_Double", func() { purego.RegisterLibFunc(&__SparseSolveOpaque_Double, _veclibLib, "_SparseSolveOpaque_Double") })
 	_register("_SparseSolveOpaque_Float", func() { purego.RegisterLibFunc(&__SparseSolveOpaque_Float, _veclibLib, "_SparseSolveOpaque_Float") })
-	_register("_SparseSolveSubfactor_Complex_Double", func() { purego.RegisterLibFunc(&__SparseSolveSubfactor_Complex_Double, _veclibLib, "_SparseSolveSubfactor_Complex_Double") })
-	_register("_SparseSolveSubfactor_Complex_Float", func() { purego.RegisterLibFunc(&__SparseSolveSubfactor_Complex_Float, _veclibLib, "_SparseSolveSubfactor_Complex_Float") })
-	_register("_SparseSolveSubfactor_Double", func() { purego.RegisterLibFunc(&__SparseSolveSubfactor_Double, _veclibLib, "_SparseSolveSubfactor_Double") })
-	_register("_SparseSolveSubfactor_Float", func() { purego.RegisterLibFunc(&__SparseSolveSubfactor_Float, _veclibLib, "_SparseSolveSubfactor_Float") })
+	_register("_SparseSolveSubfactor_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseSolveSubfactor_Complex_Double, _veclibLib, "_SparseSolveSubfactor_Complex_Double")
+	})
+	_register("_SparseSolveSubfactor_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseSolveSubfactor_Complex_Float, _veclibLib, "_SparseSolveSubfactor_Complex_Float")
+	})
+	_register("_SparseSolveSubfactor_Double", func() {
+		purego.RegisterLibFunc(&__SparseSolveSubfactor_Double, _veclibLib, "_SparseSolveSubfactor_Double")
+	})
+	_register("_SparseSolveSubfactor_Float", func() {
+		purego.RegisterLibFunc(&__SparseSolveSubfactor_Float, _veclibLib, "_SparseSolveSubfactor_Float")
+	})
 	_register("_SparseSpMV_Complex_Double", func() { purego.RegisterLibFunc(&__SparseSpMV_Complex_Double, _veclibLib, "_SparseSpMV_Complex_Double") })
 	_register("_SparseSpMV_Complex_Float", func() { purego.RegisterLibFunc(&__SparseSpMV_Complex_Float, _veclibLib, "_SparseSpMV_Complex_Float") })
 	_register("_SparseSpMV_Double", func() { purego.RegisterLibFunc(&__SparseSpMV_Double, _veclibLib, "_SparseSpMV_Double") })
 	_register("_SparseSpMV_Float", func() { purego.RegisterLibFunc(&__SparseSpMV_Float, _veclibLib, "_SparseSpMV_Float") })
-	_register("_SparseSubFactorGetDimn_Complex_Double", func() { purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Complex_Double, _veclibLib, "_SparseSubFactorGetDimn_Complex_Double") })
-	_register("_SparseSubFactorGetDimn_Complex_Float", func() { purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Complex_Float, _veclibLib, "_SparseSubFactorGetDimn_Complex_Float") })
-	_register("_SparseSubFactorGetDimn_Double", func() { purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Double, _veclibLib, "_SparseSubFactorGetDimn_Double") })
-	_register("_SparseSubFactorGetDimn_Float", func() { purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Float, _veclibLib, "_SparseSubFactorGetDimn_Float") })
+	_register("_SparseSubFactorGetDimn_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Complex_Double, _veclibLib, "_SparseSubFactorGetDimn_Complex_Double")
+	})
+	_register("_SparseSubFactorGetDimn_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Complex_Float, _veclibLib, "_SparseSubFactorGetDimn_Complex_Float")
+	})
+	_register("_SparseSubFactorGetDimn_Double", func() {
+		purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Double, _veclibLib, "_SparseSubFactorGetDimn_Double")
+	})
+	_register("_SparseSubFactorGetDimn_Float", func() {
+		purego.RegisterLibFunc(&__SparseSubFactorGetDimn_Float, _veclibLib, "_SparseSubFactorGetDimn_Float")
+	})
 	_register("_SparseSymbolicFactorLU", func() { purego.RegisterLibFunc(&__SparseSymbolicFactorLU, _veclibLib, "_SparseSymbolicFactorLU") })
 	_register("_SparseSymbolicFactorQR", func() { purego.RegisterLibFunc(&__SparseSymbolicFactorQR, _veclibLib, "_SparseSymbolicFactorQR") })
-	_register("_SparseSymbolicFactorSymmetric", func() { purego.RegisterLibFunc(&__SparseSymbolicFactorSymmetric, _veclibLib, "_SparseSymbolicFactorSymmetric") })
+	_register("_SparseSymbolicFactorSymmetric", func() {
+		purego.RegisterLibFunc(&__SparseSymbolicFactorSymmetric, _veclibLib, "_SparseSymbolicFactorSymmetric")
+	})
 	_register("_SparseToAttributeComplex", func() { purego.RegisterLibFunc(&__SparseToAttributeComplex, _veclibLib, "_SparseToAttributeComplex") })
 	_register("_SparseToKindComplex", func() { purego.RegisterLibFunc(&__SparseToKindComplex, _veclibLib, "_SparseToKindComplex") })
 	_register("_SparseToStructureComplex", func() { purego.RegisterLibFunc(&__SparseToStructureComplex, _veclibLib, "_SparseToStructureComplex") })
 	_register("_SparseTrap", func() { purego.RegisterLibFunc(&__SparseTrap, _veclibLib, "_SparseTrap") })
-	_register("_SparseUpdatePartialRefactorLU_Complex_Double", func() { purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Complex_Double, _veclibLib, "_SparseUpdatePartialRefactorLU_Complex_Double") })
-	_register("_SparseUpdatePartialRefactorLU_Complex_Float", func() { purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Complex_Float, _veclibLib, "_SparseUpdatePartialRefactorLU_Complex_Float") })
-	_register("_SparseUpdatePartialRefactorLU_Double", func() { purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Double, _veclibLib, "_SparseUpdatePartialRefactorLU_Double") })
-	_register("_SparseUpdatePartialRefactorLU_Float", func() { purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Float, _veclibLib, "_SparseUpdatePartialRefactorLU_Float") })
+	_register("_SparseUpdatePartialRefactorLU_Complex_Double", func() {
+		purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Complex_Double, _veclibLib, "_SparseUpdatePartialRefactorLU_Complex_Double")
+	})
+	_register("_SparseUpdatePartialRefactorLU_Complex_Float", func() {
+		purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Complex_Float, _veclibLib, "_SparseUpdatePartialRefactorLU_Complex_Float")
+	})
+	_register("_SparseUpdatePartialRefactorLU_Double", func() {
+		purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Double, _veclibLib, "_SparseUpdatePartialRefactorLU_Double")
+	})
+	_register("_SparseUpdatePartialRefactorLU_Float", func() {
+		purego.RegisterLibFunc(&__SparseUpdatePartialRefactorLU_Float, _veclibLib, "_SparseUpdatePartialRefactorLU_Float")
+	})
 	_register("__builtin___snprintf_chk", func() { purego.RegisterLibFunc(&___builtin___snprintf_chk, _veclibLib, "__builtin___snprintf_chk") })
 	_register("__builtin_object_size", func() { purego.RegisterLibFunc(&___builtin_object_size, _veclibLib, "__builtin_object_size") })
 	_register("__builtin_os_log_format", func() { purego.RegisterLibFunc(&___builtin_os_log_format, _veclibLib, "__builtin_os_log_format") })
-	_register("__builtin_os_log_format_buffer_size", func() { purego.RegisterLibFunc(&___builtin_os_log_format_buffer_size, _veclibLib, "__builtin_os_log_format_buffer_size") })
+	_register("__builtin_os_log_format_buffer_size", func() {
+		purego.RegisterLibFunc(&___builtin_os_log_format_buffer_size, _veclibLib, "__builtin_os_log_format_buffer_size")
+	})
 	_register("__builtin_unreachable", func() { purego.RegisterLibFunc(&___builtin_unreachable, _veclibLib, "__builtin_unreachable") })
 	_register("__builtin_verbose_trap", func() { purego.RegisterLibFunc(&___builtin_verbose_trap, _veclibLib, "__builtin_verbose_trap") })
 	_register("appleblas_dgeadd", func() { purego.RegisterLibFunc(&_appleblas_dgeadd, _veclibLib, "appleblas_dgeadd") })
@@ -1346,16 +1758,26 @@ func _loadLibrary() {
 	_register("izamax_", func() { purego.RegisterLibFunc(&_izamax_, _veclibLib, "izamax_") })
 	_register("izmax1_", func() { purego.RegisterLibFunc(&_izmax1_, _veclibLib, "izmax1_") })
 	_register("la_add_attributes", func() { purego.RegisterLibFunc(&_la_add_attributes, _veclibLib, "la_add_attributes") })
-	_register("la_diagonal_matrix_from_vector", func() { purego.RegisterLibFunc(&_la_diagonal_matrix_from_vector, _veclibLib, "la_diagonal_matrix_from_vector") })
+	_register("la_diagonal_matrix_from_vector", func() {
+		purego.RegisterLibFunc(&_la_diagonal_matrix_from_vector, _veclibLib, "la_diagonal_matrix_from_vector")
+	})
 	_register("la_difference", func() { purego.RegisterLibFunc(&_la_difference, _veclibLib, "la_difference") })
 	_register("la_elementwise_product", func() { purego.RegisterLibFunc(&_la_elementwise_product, _veclibLib, "la_elementwise_product") })
 	_register("la_identity_matrix", func() { purego.RegisterLibFunc(&_la_identity_matrix, _veclibLib, "la_identity_matrix") })
 	_register("la_inner_product", func() { purego.RegisterLibFunc(&_la_inner_product, _veclibLib, "la_inner_product") })
 	_register("la_matrix_cols", func() { purego.RegisterLibFunc(&_la_matrix_cols, _veclibLib, "la_matrix_cols") })
-	_register("la_matrix_from_double_buffer", func() { purego.RegisterLibFunc(&_la_matrix_from_double_buffer, _veclibLib, "la_matrix_from_double_buffer") })
-	_register("la_matrix_from_double_buffer_nocopy", func() { purego.RegisterLibFunc(&_la_matrix_from_double_buffer_nocopy, _veclibLib, "la_matrix_from_double_buffer_nocopy") })
-	_register("la_matrix_from_float_buffer", func() { purego.RegisterLibFunc(&_la_matrix_from_float_buffer, _veclibLib, "la_matrix_from_float_buffer") })
-	_register("la_matrix_from_float_buffer_nocopy", func() { purego.RegisterLibFunc(&_la_matrix_from_float_buffer_nocopy, _veclibLib, "la_matrix_from_float_buffer_nocopy") })
+	_register("la_matrix_from_double_buffer", func() {
+		purego.RegisterLibFunc(&_la_matrix_from_double_buffer, _veclibLib, "la_matrix_from_double_buffer")
+	})
+	_register("la_matrix_from_double_buffer_nocopy", func() {
+		purego.RegisterLibFunc(&_la_matrix_from_double_buffer_nocopy, _veclibLib, "la_matrix_from_double_buffer_nocopy")
+	})
+	_register("la_matrix_from_float_buffer", func() {
+		purego.RegisterLibFunc(&_la_matrix_from_float_buffer, _veclibLib, "la_matrix_from_float_buffer")
+	})
+	_register("la_matrix_from_float_buffer_nocopy", func() {
+		purego.RegisterLibFunc(&_la_matrix_from_float_buffer_nocopy, _veclibLib, "la_matrix_from_float_buffer_nocopy")
+	})
 	_register("la_matrix_from_splat", func() { purego.RegisterLibFunc(&_la_matrix_from_splat, _veclibLib, "la_matrix_from_splat") })
 	_register("la_matrix_product", func() { purego.RegisterLibFunc(&_la_matrix_product, _veclibLib, "la_matrix_product") })
 	_register("la_matrix_rows", func() { purego.RegisterLibFunc(&_la_matrix_rows, _veclibLib, "la_matrix_rows") })
@@ -1374,13 +1796,19 @@ func _loadLibrary() {
 	_register("la_solve", func() { purego.RegisterLibFunc(&_la_solve, _veclibLib, "la_solve") })
 	_register("la_splat_from_double", func() { purego.RegisterLibFunc(&_la_splat_from_double, _veclibLib, "la_splat_from_double") })
 	_register("la_splat_from_float", func() { purego.RegisterLibFunc(&_la_splat_from_float, _veclibLib, "la_splat_from_float") })
-	_register("la_splat_from_matrix_element", func() { purego.RegisterLibFunc(&_la_splat_from_matrix_element, _veclibLib, "la_splat_from_matrix_element") })
-	_register("la_splat_from_vector_element", func() { purego.RegisterLibFunc(&_la_splat_from_vector_element, _veclibLib, "la_splat_from_vector_element") })
+	_register("la_splat_from_matrix_element", func() {
+		purego.RegisterLibFunc(&_la_splat_from_matrix_element, _veclibLib, "la_splat_from_matrix_element")
+	})
+	_register("la_splat_from_vector_element", func() {
+		purego.RegisterLibFunc(&_la_splat_from_vector_element, _veclibLib, "la_splat_from_vector_element")
+	})
 	_register("la_status", func() { purego.RegisterLibFunc(&_la_status, _veclibLib, "la_status") })
 	_register("la_sum", func() { purego.RegisterLibFunc(&_la_sum, _veclibLib, "la_sum") })
 	_register("la_transpose", func() { purego.RegisterLibFunc(&_la_transpose, _veclibLib, "la_transpose") })
 	_register("la_vector_from_matrix_col", func() { purego.RegisterLibFunc(&_la_vector_from_matrix_col, _veclibLib, "la_vector_from_matrix_col") })
-	_register("la_vector_from_matrix_diagonal", func() { purego.RegisterLibFunc(&_la_vector_from_matrix_diagonal, _veclibLib, "la_vector_from_matrix_diagonal") })
+	_register("la_vector_from_matrix_diagonal", func() {
+		purego.RegisterLibFunc(&_la_vector_from_matrix_diagonal, _veclibLib, "la_vector_from_matrix_diagonal")
+	})
 	_register("la_vector_from_matrix_row", func() { purego.RegisterLibFunc(&_la_vector_from_matrix_row, _veclibLib, "la_vector_from_matrix_row") })
 	_register("la_vector_from_splat", func() { purego.RegisterLibFunc(&_la_vector_from_splat, _veclibLib, "la_vector_from_splat") })
 	_register("la_vector_length", func() { purego.RegisterLibFunc(&_la_vector_length, _veclibLib, "la_vector_length") })
@@ -1654,132 +2082,334 @@ func _loadLibrary() {
 	_register("sormrz_", func() { purego.RegisterLibFunc(&_sormrz_, _veclibLib, "sormrz_") })
 	_register("sormtr_", func() { purego.RegisterLibFunc(&_sormtr_, _veclibLib, "sormtr_") })
 	_register("sparse_commit", func() { purego.RegisterLibFunc(&_sparse_commit, _veclibLib, "sparse_commit") })
-	_register("sparse_elementwise_norm_double", func() { purego.RegisterLibFunc(&_sparse_elementwise_norm_double, _veclibLib, "sparse_elementwise_norm_double") })
-	_register("sparse_elementwise_norm_double_complex", func() { purego.RegisterLibFunc(&_sparse_elementwise_norm_double_complex, _veclibLib, "sparse_elementwise_norm_double_complex") })
-	_register("sparse_elementwise_norm_float", func() { purego.RegisterLibFunc(&_sparse_elementwise_norm_float, _veclibLib, "sparse_elementwise_norm_float") })
-	_register("sparse_elementwise_norm_float_complex", func() { purego.RegisterLibFunc(&_sparse_elementwise_norm_float_complex, _veclibLib, "sparse_elementwise_norm_float_complex") })
-	_register("sparse_extract_block_double", func() { purego.RegisterLibFunc(&_sparse_extract_block_double, _veclibLib, "sparse_extract_block_double") })
-	_register("sparse_extract_block_double_complex", func() { purego.RegisterLibFunc(&_sparse_extract_block_double_complex, _veclibLib, "sparse_extract_block_double_complex") })
+	_register("sparse_elementwise_norm_double", func() {
+		purego.RegisterLibFunc(&_sparse_elementwise_norm_double, _veclibLib, "sparse_elementwise_norm_double")
+	})
+	_register("sparse_elementwise_norm_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_elementwise_norm_double_complex, _veclibLib, "sparse_elementwise_norm_double_complex")
+	})
+	_register("sparse_elementwise_norm_float", func() {
+		purego.RegisterLibFunc(&_sparse_elementwise_norm_float, _veclibLib, "sparse_elementwise_norm_float")
+	})
+	_register("sparse_elementwise_norm_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_elementwise_norm_float_complex, _veclibLib, "sparse_elementwise_norm_float_complex")
+	})
+	_register("sparse_extract_block_double", func() {
+		purego.RegisterLibFunc(&_sparse_extract_block_double, _veclibLib, "sparse_extract_block_double")
+	})
+	_register("sparse_extract_block_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_block_double_complex, _veclibLib, "sparse_extract_block_double_complex")
+	})
 	_register("sparse_extract_block_float", func() { purego.RegisterLibFunc(&_sparse_extract_block_float, _veclibLib, "sparse_extract_block_float") })
-	_register("sparse_extract_block_float_complex", func() { purego.RegisterLibFunc(&_sparse_extract_block_float_complex, _veclibLib, "sparse_extract_block_float_complex") })
-	_register("sparse_extract_sparse_column_double", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_column_double, _veclibLib, "sparse_extract_sparse_column_double") })
-	_register("sparse_extract_sparse_column_double_complex", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_column_double_complex, _veclibLib, "sparse_extract_sparse_column_double_complex") })
-	_register("sparse_extract_sparse_column_float", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_column_float, _veclibLib, "sparse_extract_sparse_column_float") })
-	_register("sparse_extract_sparse_column_float_complex", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_column_float_complex, _veclibLib, "sparse_extract_sparse_column_float_complex") })
-	_register("sparse_extract_sparse_row_double", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_row_double, _veclibLib, "sparse_extract_sparse_row_double") })
-	_register("sparse_extract_sparse_row_double_complex", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_row_double_complex, _veclibLib, "sparse_extract_sparse_row_double_complex") })
-	_register("sparse_extract_sparse_row_float", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_row_float, _veclibLib, "sparse_extract_sparse_row_float") })
-	_register("sparse_extract_sparse_row_float_complex", func() { purego.RegisterLibFunc(&_sparse_extract_sparse_row_float_complex, _veclibLib, "sparse_extract_sparse_row_float_complex") })
-	_register("sparse_get_block_dimension_for_col", func() { purego.RegisterLibFunc(&_sparse_get_block_dimension_for_col, _veclibLib, "sparse_get_block_dimension_for_col") })
-	_register("sparse_get_block_dimension_for_row", func() { purego.RegisterLibFunc(&_sparse_get_block_dimension_for_row, _veclibLib, "sparse_get_block_dimension_for_row") })
-	_register("sparse_get_matrix_nonzero_count", func() { purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count, _veclibLib, "sparse_get_matrix_nonzero_count") })
-	_register("sparse_get_matrix_nonzero_count_for_column", func() { purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count_for_column, _veclibLib, "sparse_get_matrix_nonzero_count_for_column") })
-	_register("sparse_get_matrix_nonzero_count_for_row", func() { purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count_for_row, _veclibLib, "sparse_get_matrix_nonzero_count_for_row") })
-	_register("sparse_get_matrix_number_of_columns", func() { purego.RegisterLibFunc(&_sparse_get_matrix_number_of_columns, _veclibLib, "sparse_get_matrix_number_of_columns") })
-	_register("sparse_get_matrix_number_of_rows", func() { purego.RegisterLibFunc(&_sparse_get_matrix_number_of_rows, _veclibLib, "sparse_get_matrix_number_of_rows") })
+	_register("sparse_extract_block_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_block_float_complex, _veclibLib, "sparse_extract_block_float_complex")
+	})
+	_register("sparse_extract_sparse_column_double", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_column_double, _veclibLib, "sparse_extract_sparse_column_double")
+	})
+	_register("sparse_extract_sparse_column_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_column_double_complex, _veclibLib, "sparse_extract_sparse_column_double_complex")
+	})
+	_register("sparse_extract_sparse_column_float", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_column_float, _veclibLib, "sparse_extract_sparse_column_float")
+	})
+	_register("sparse_extract_sparse_column_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_column_float_complex, _veclibLib, "sparse_extract_sparse_column_float_complex")
+	})
+	_register("sparse_extract_sparse_row_double", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_row_double, _veclibLib, "sparse_extract_sparse_row_double")
+	})
+	_register("sparse_extract_sparse_row_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_row_double_complex, _veclibLib, "sparse_extract_sparse_row_double_complex")
+	})
+	_register("sparse_extract_sparse_row_float", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_row_float, _veclibLib, "sparse_extract_sparse_row_float")
+	})
+	_register("sparse_extract_sparse_row_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_extract_sparse_row_float_complex, _veclibLib, "sparse_extract_sparse_row_float_complex")
+	})
+	_register("sparse_get_block_dimension_for_col", func() {
+		purego.RegisterLibFunc(&_sparse_get_block_dimension_for_col, _veclibLib, "sparse_get_block_dimension_for_col")
+	})
+	_register("sparse_get_block_dimension_for_row", func() {
+		purego.RegisterLibFunc(&_sparse_get_block_dimension_for_row, _veclibLib, "sparse_get_block_dimension_for_row")
+	})
+	_register("sparse_get_matrix_nonzero_count", func() {
+		purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count, _veclibLib, "sparse_get_matrix_nonzero_count")
+	})
+	_register("sparse_get_matrix_nonzero_count_for_column", func() {
+		purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count_for_column, _veclibLib, "sparse_get_matrix_nonzero_count_for_column")
+	})
+	_register("sparse_get_matrix_nonzero_count_for_row", func() {
+		purego.RegisterLibFunc(&_sparse_get_matrix_nonzero_count_for_row, _veclibLib, "sparse_get_matrix_nonzero_count_for_row")
+	})
+	_register("sparse_get_matrix_number_of_columns", func() {
+		purego.RegisterLibFunc(&_sparse_get_matrix_number_of_columns, _veclibLib, "sparse_get_matrix_number_of_columns")
+	})
+	_register("sparse_get_matrix_number_of_rows", func() {
+		purego.RegisterLibFunc(&_sparse_get_matrix_number_of_rows, _veclibLib, "sparse_get_matrix_number_of_rows")
+	})
 	_register("sparse_get_matrix_property", func() { purego.RegisterLibFunc(&_sparse_get_matrix_property, _veclibLib, "sparse_get_matrix_property") })
-	_register("sparse_get_vector_nonzero_count_double", func() { purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_double, _veclibLib, "sparse_get_vector_nonzero_count_double") })
-	_register("sparse_get_vector_nonzero_count_double_complex", func() { purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_double_complex, _veclibLib, "sparse_get_vector_nonzero_count_double_complex") })
-	_register("sparse_get_vector_nonzero_count_float", func() { purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_float, _veclibLib, "sparse_get_vector_nonzero_count_float") })
-	_register("sparse_get_vector_nonzero_count_float_complex", func() { purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_float_complex, _veclibLib, "sparse_get_vector_nonzero_count_float_complex") })
-	_register("sparse_inner_product_dense_double", func() { purego.RegisterLibFunc(&_sparse_inner_product_dense_double, _veclibLib, "sparse_inner_product_dense_double") })
-	_register("sparse_inner_product_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_inner_product_dense_double_complex, _veclibLib, "sparse_inner_product_dense_double_complex") })
-	_register("sparse_inner_product_dense_float", func() { purego.RegisterLibFunc(&_sparse_inner_product_dense_float, _veclibLib, "sparse_inner_product_dense_float") })
-	_register("sparse_inner_product_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_inner_product_dense_float_complex, _veclibLib, "sparse_inner_product_dense_float_complex") })
-	_register("sparse_inner_product_sparse_double", func() { purego.RegisterLibFunc(&_sparse_inner_product_sparse_double, _veclibLib, "sparse_inner_product_sparse_double") })
-	_register("sparse_inner_product_sparse_double_complex", func() { purego.RegisterLibFunc(&_sparse_inner_product_sparse_double_complex, _veclibLib, "sparse_inner_product_sparse_double_complex") })
-	_register("sparse_inner_product_sparse_float", func() { purego.RegisterLibFunc(&_sparse_inner_product_sparse_float, _veclibLib, "sparse_inner_product_sparse_float") })
-	_register("sparse_inner_product_sparse_float_complex", func() { purego.RegisterLibFunc(&_sparse_inner_product_sparse_float_complex, _veclibLib, "sparse_inner_product_sparse_float_complex") })
+	_register("sparse_get_vector_nonzero_count_double", func() {
+		purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_double, _veclibLib, "sparse_get_vector_nonzero_count_double")
+	})
+	_register("sparse_get_vector_nonzero_count_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_double_complex, _veclibLib, "sparse_get_vector_nonzero_count_double_complex")
+	})
+	_register("sparse_get_vector_nonzero_count_float", func() {
+		purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_float, _veclibLib, "sparse_get_vector_nonzero_count_float")
+	})
+	_register("sparse_get_vector_nonzero_count_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_get_vector_nonzero_count_float_complex, _veclibLib, "sparse_get_vector_nonzero_count_float_complex")
+	})
+	_register("sparse_inner_product_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_dense_double, _veclibLib, "sparse_inner_product_dense_double")
+	})
+	_register("sparse_inner_product_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_dense_double_complex, _veclibLib, "sparse_inner_product_dense_double_complex")
+	})
+	_register("sparse_inner_product_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_dense_float, _veclibLib, "sparse_inner_product_dense_float")
+	})
+	_register("sparse_inner_product_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_dense_float_complex, _veclibLib, "sparse_inner_product_dense_float_complex")
+	})
+	_register("sparse_inner_product_sparse_double", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_sparse_double, _veclibLib, "sparse_inner_product_sparse_double")
+	})
+	_register("sparse_inner_product_sparse_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_sparse_double_complex, _veclibLib, "sparse_inner_product_sparse_double_complex")
+	})
+	_register("sparse_inner_product_sparse_float", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_sparse_float, _veclibLib, "sparse_inner_product_sparse_float")
+	})
+	_register("sparse_inner_product_sparse_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_inner_product_sparse_float_complex, _veclibLib, "sparse_inner_product_sparse_float_complex")
+	})
 	_register("sparse_insert_block_double", func() { purego.RegisterLibFunc(&_sparse_insert_block_double, _veclibLib, "sparse_insert_block_double") })
-	_register("sparse_insert_block_double_complex", func() { purego.RegisterLibFunc(&_sparse_insert_block_double_complex, _veclibLib, "sparse_insert_block_double_complex") })
+	_register("sparse_insert_block_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_block_double_complex, _veclibLib, "sparse_insert_block_double_complex")
+	})
 	_register("sparse_insert_block_float", func() { purego.RegisterLibFunc(&_sparse_insert_block_float, _veclibLib, "sparse_insert_block_float") })
-	_register("sparse_insert_block_float_complex", func() { purego.RegisterLibFunc(&_sparse_insert_block_float_complex, _veclibLib, "sparse_insert_block_float_complex") })
+	_register("sparse_insert_block_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_block_float_complex, _veclibLib, "sparse_insert_block_float_complex")
+	})
 	_register("sparse_insert_col_double", func() { purego.RegisterLibFunc(&_sparse_insert_col_double, _veclibLib, "sparse_insert_col_double") })
-	_register("sparse_insert_col_double_complex", func() { purego.RegisterLibFunc(&_sparse_insert_col_double_complex, _veclibLib, "sparse_insert_col_double_complex") })
+	_register("sparse_insert_col_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_col_double_complex, _veclibLib, "sparse_insert_col_double_complex")
+	})
 	_register("sparse_insert_col_float", func() { purego.RegisterLibFunc(&_sparse_insert_col_float, _veclibLib, "sparse_insert_col_float") })
-	_register("sparse_insert_col_float_complex", func() { purego.RegisterLibFunc(&_sparse_insert_col_float_complex, _veclibLib, "sparse_insert_col_float_complex") })
-	_register("sparse_insert_entries_double", func() { purego.RegisterLibFunc(&_sparse_insert_entries_double, _veclibLib, "sparse_insert_entries_double") })
-	_register("sparse_insert_entries_double_complex", func() { purego.RegisterLibFunc(&_sparse_insert_entries_double_complex, _veclibLib, "sparse_insert_entries_double_complex") })
-	_register("sparse_insert_entries_float", func() { purego.RegisterLibFunc(&_sparse_insert_entries_float, _veclibLib, "sparse_insert_entries_float") })
-	_register("sparse_insert_entries_float_complex", func() { purego.RegisterLibFunc(&_sparse_insert_entries_float_complex, _veclibLib, "sparse_insert_entries_float_complex") })
+	_register("sparse_insert_col_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_col_float_complex, _veclibLib, "sparse_insert_col_float_complex")
+	})
+	_register("sparse_insert_entries_double", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entries_double, _veclibLib, "sparse_insert_entries_double")
+	})
+	_register("sparse_insert_entries_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entries_double_complex, _veclibLib, "sparse_insert_entries_double_complex")
+	})
+	_register("sparse_insert_entries_float", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entries_float, _veclibLib, "sparse_insert_entries_float")
+	})
+	_register("sparse_insert_entries_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entries_float_complex, _veclibLib, "sparse_insert_entries_float_complex")
+	})
 	_register("sparse_insert_entry_double", func() { purego.RegisterLibFunc(&_sparse_insert_entry_double, _veclibLib, "sparse_insert_entry_double") })
-	_register("sparse_insert_entry_double_complex", func() { purego.RegisterLibFunc(&_sparse_insert_entry_double_complex, _veclibLib, "sparse_insert_entry_double_complex") })
+	_register("sparse_insert_entry_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entry_double_complex, _veclibLib, "sparse_insert_entry_double_complex")
+	})
 	_register("sparse_insert_entry_float", func() { purego.RegisterLibFunc(&_sparse_insert_entry_float, _veclibLib, "sparse_insert_entry_float") })
-	_register("sparse_insert_entry_float_complex", func() { purego.RegisterLibFunc(&_sparse_insert_entry_float_complex, _veclibLib, "sparse_insert_entry_float_complex") })
+	_register("sparse_insert_entry_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_entry_float_complex, _veclibLib, "sparse_insert_entry_float_complex")
+	})
 	_register("sparse_insert_row_double", func() { purego.RegisterLibFunc(&_sparse_insert_row_double, _veclibLib, "sparse_insert_row_double") })
-	_register("sparse_insert_row_double_complex", func() { purego.RegisterLibFunc(&_sparse_insert_row_double_complex, _veclibLib, "sparse_insert_row_double_complex") })
+	_register("sparse_insert_row_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_row_double_complex, _veclibLib, "sparse_insert_row_double_complex")
+	})
 	_register("sparse_insert_row_float", func() { purego.RegisterLibFunc(&_sparse_insert_row_float, _veclibLib, "sparse_insert_row_float") })
-	_register("sparse_insert_row_float_complex", func() { purego.RegisterLibFunc(&_sparse_insert_row_float_complex, _veclibLib, "sparse_insert_row_float_complex") })
-	_register("sparse_matrix_block_create_double", func() { purego.RegisterLibFunc(&_sparse_matrix_block_create_double, _veclibLib, "sparse_matrix_block_create_double") })
-	_register("sparse_matrix_block_create_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_block_create_double_complex, _veclibLib, "sparse_matrix_block_create_double_complex") })
-	_register("sparse_matrix_block_create_float", func() { purego.RegisterLibFunc(&_sparse_matrix_block_create_float, _veclibLib, "sparse_matrix_block_create_float") })
-	_register("sparse_matrix_block_create_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_block_create_float_complex, _veclibLib, "sparse_matrix_block_create_float_complex") })
-	_register("sparse_matrix_create_double", func() { purego.RegisterLibFunc(&_sparse_matrix_create_double, _veclibLib, "sparse_matrix_create_double") })
-	_register("sparse_matrix_create_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_create_double_complex, _veclibLib, "sparse_matrix_create_double_complex") })
+	_register("sparse_insert_row_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_insert_row_float_complex, _veclibLib, "sparse_insert_row_float_complex")
+	})
+	_register("sparse_matrix_block_create_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_block_create_double, _veclibLib, "sparse_matrix_block_create_double")
+	})
+	_register("sparse_matrix_block_create_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_block_create_double_complex, _veclibLib, "sparse_matrix_block_create_double_complex")
+	})
+	_register("sparse_matrix_block_create_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_block_create_float, _veclibLib, "sparse_matrix_block_create_float")
+	})
+	_register("sparse_matrix_block_create_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_block_create_float_complex, _veclibLib, "sparse_matrix_block_create_float_complex")
+	})
+	_register("sparse_matrix_create_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_create_double, _veclibLib, "sparse_matrix_create_double")
+	})
+	_register("sparse_matrix_create_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_create_double_complex, _veclibLib, "sparse_matrix_create_double_complex")
+	})
 	_register("sparse_matrix_create_float", func() { purego.RegisterLibFunc(&_sparse_matrix_create_float, _veclibLib, "sparse_matrix_create_float") })
-	_register("sparse_matrix_create_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_create_float_complex, _veclibLib, "sparse_matrix_create_float_complex") })
+	_register("sparse_matrix_create_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_create_float_complex, _veclibLib, "sparse_matrix_create_float_complex")
+	})
 	_register("sparse_matrix_destroy", func() { purego.RegisterLibFunc(&_sparse_matrix_destroy, _veclibLib, "sparse_matrix_destroy") })
-	_register("sparse_matrix_product_dense_double", func() { purego.RegisterLibFunc(&_sparse_matrix_product_dense_double, _veclibLib, "sparse_matrix_product_dense_double") })
-	_register("sparse_matrix_product_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_product_dense_double_complex, _veclibLib, "sparse_matrix_product_dense_double_complex") })
-	_register("sparse_matrix_product_dense_float", func() { purego.RegisterLibFunc(&_sparse_matrix_product_dense_float, _veclibLib, "sparse_matrix_product_dense_float") })
-	_register("sparse_matrix_product_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_product_dense_float_complex, _veclibLib, "sparse_matrix_product_dense_float_complex") })
-	_register("sparse_matrix_product_sparse_double", func() { purego.RegisterLibFunc(&_sparse_matrix_product_sparse_double, _veclibLib, "sparse_matrix_product_sparse_double") })
-	_register("sparse_matrix_product_sparse_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_product_sparse_double_complex, _veclibLib, "sparse_matrix_product_sparse_double_complex") })
-	_register("sparse_matrix_product_sparse_float", func() { purego.RegisterLibFunc(&_sparse_matrix_product_sparse_float, _veclibLib, "sparse_matrix_product_sparse_float") })
-	_register("sparse_matrix_product_sparse_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_product_sparse_float_complex, _veclibLib, "sparse_matrix_product_sparse_float_complex") })
+	_register("sparse_matrix_product_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_dense_double, _veclibLib, "sparse_matrix_product_dense_double")
+	})
+	_register("sparse_matrix_product_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_dense_double_complex, _veclibLib, "sparse_matrix_product_dense_double_complex")
+	})
+	_register("sparse_matrix_product_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_dense_float, _veclibLib, "sparse_matrix_product_dense_float")
+	})
+	_register("sparse_matrix_product_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_dense_float_complex, _veclibLib, "sparse_matrix_product_dense_float_complex")
+	})
+	_register("sparse_matrix_product_sparse_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_sparse_double, _veclibLib, "sparse_matrix_product_sparse_double")
+	})
+	_register("sparse_matrix_product_sparse_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_sparse_double_complex, _veclibLib, "sparse_matrix_product_sparse_double_complex")
+	})
+	_register("sparse_matrix_product_sparse_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_sparse_float, _veclibLib, "sparse_matrix_product_sparse_float")
+	})
+	_register("sparse_matrix_product_sparse_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_product_sparse_float_complex, _veclibLib, "sparse_matrix_product_sparse_float_complex")
+	})
 	_register("sparse_matrix_trace_double", func() { purego.RegisterLibFunc(&_sparse_matrix_trace_double, _veclibLib, "sparse_matrix_trace_double") })
-	_register("sparse_matrix_trace_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_trace_double_complex, _veclibLib, "sparse_matrix_trace_double_complex") })
+	_register("sparse_matrix_trace_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_trace_double_complex, _veclibLib, "sparse_matrix_trace_double_complex")
+	})
 	_register("sparse_matrix_trace_float", func() { purego.RegisterLibFunc(&_sparse_matrix_trace_float, _veclibLib, "sparse_matrix_trace_float") })
-	_register("sparse_matrix_trace_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_trace_float_complex, _veclibLib, "sparse_matrix_trace_float_complex") })
-	_register("sparse_matrix_triangular_solve_dense_double", func() { purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_double, _veclibLib, "sparse_matrix_triangular_solve_dense_double") })
-	_register("sparse_matrix_triangular_solve_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_double_complex, _veclibLib, "sparse_matrix_triangular_solve_dense_double_complex") })
-	_register("sparse_matrix_triangular_solve_dense_float", func() { purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_float, _veclibLib, "sparse_matrix_triangular_solve_dense_float") })
-	_register("sparse_matrix_triangular_solve_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_float_complex, _veclibLib, "sparse_matrix_triangular_solve_dense_float_complex") })
-	_register("sparse_matrix_variable_block_create_double", func() { purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_double, _veclibLib, "sparse_matrix_variable_block_create_double") })
-	_register("sparse_matrix_variable_block_create_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_double_complex, _veclibLib, "sparse_matrix_variable_block_create_double_complex") })
-	_register("sparse_matrix_variable_block_create_float", func() { purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_float, _veclibLib, "sparse_matrix_variable_block_create_float") })
-	_register("sparse_matrix_variable_block_create_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_float_complex, _veclibLib, "sparse_matrix_variable_block_create_float_complex") })
-	_register("sparse_matrix_vector_product_dense_double", func() { purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_double, _veclibLib, "sparse_matrix_vector_product_dense_double") })
-	_register("sparse_matrix_vector_product_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_double_complex, _veclibLib, "sparse_matrix_vector_product_dense_double_complex") })
-	_register("sparse_matrix_vector_product_dense_float", func() { purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_float, _veclibLib, "sparse_matrix_vector_product_dense_float") })
-	_register("sparse_matrix_vector_product_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_float_complex, _veclibLib, "sparse_matrix_vector_product_dense_float_complex") })
-	_register("sparse_operator_norm_double", func() { purego.RegisterLibFunc(&_sparse_operator_norm_double, _veclibLib, "sparse_operator_norm_double") })
-	_register("sparse_operator_norm_double_complex", func() { purego.RegisterLibFunc(&_sparse_operator_norm_double_complex, _veclibLib, "sparse_operator_norm_double_complex") })
+	_register("sparse_matrix_trace_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_trace_float_complex, _veclibLib, "sparse_matrix_trace_float_complex")
+	})
+	_register("sparse_matrix_triangular_solve_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_double, _veclibLib, "sparse_matrix_triangular_solve_dense_double")
+	})
+	_register("sparse_matrix_triangular_solve_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_double_complex, _veclibLib, "sparse_matrix_triangular_solve_dense_double_complex")
+	})
+	_register("sparse_matrix_triangular_solve_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_float, _veclibLib, "sparse_matrix_triangular_solve_dense_float")
+	})
+	_register("sparse_matrix_triangular_solve_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_triangular_solve_dense_float_complex, _veclibLib, "sparse_matrix_triangular_solve_dense_float_complex")
+	})
+	_register("sparse_matrix_variable_block_create_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_double, _veclibLib, "sparse_matrix_variable_block_create_double")
+	})
+	_register("sparse_matrix_variable_block_create_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_double_complex, _veclibLib, "sparse_matrix_variable_block_create_double_complex")
+	})
+	_register("sparse_matrix_variable_block_create_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_float, _veclibLib, "sparse_matrix_variable_block_create_float")
+	})
+	_register("sparse_matrix_variable_block_create_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_variable_block_create_float_complex, _veclibLib, "sparse_matrix_variable_block_create_float_complex")
+	})
+	_register("sparse_matrix_vector_product_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_double, _veclibLib, "sparse_matrix_vector_product_dense_double")
+	})
+	_register("sparse_matrix_vector_product_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_double_complex, _veclibLib, "sparse_matrix_vector_product_dense_double_complex")
+	})
+	_register("sparse_matrix_vector_product_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_float, _veclibLib, "sparse_matrix_vector_product_dense_float")
+	})
+	_register("sparse_matrix_vector_product_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_matrix_vector_product_dense_float_complex, _veclibLib, "sparse_matrix_vector_product_dense_float_complex")
+	})
+	_register("sparse_operator_norm_double", func() {
+		purego.RegisterLibFunc(&_sparse_operator_norm_double, _veclibLib, "sparse_operator_norm_double")
+	})
+	_register("sparse_operator_norm_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_operator_norm_double_complex, _veclibLib, "sparse_operator_norm_double_complex")
+	})
 	_register("sparse_operator_norm_float", func() { purego.RegisterLibFunc(&_sparse_operator_norm_float, _veclibLib, "sparse_operator_norm_float") })
-	_register("sparse_operator_norm_float_complex", func() { purego.RegisterLibFunc(&_sparse_operator_norm_float_complex, _veclibLib, "sparse_operator_norm_float_complex") })
-	_register("sparse_outer_product_dense_double", func() { purego.RegisterLibFunc(&_sparse_outer_product_dense_double, _veclibLib, "sparse_outer_product_dense_double") })
-	_register("sparse_outer_product_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_outer_product_dense_double_complex, _veclibLib, "sparse_outer_product_dense_double_complex") })
-	_register("sparse_outer_product_dense_float", func() { purego.RegisterLibFunc(&_sparse_outer_product_dense_float, _veclibLib, "sparse_outer_product_dense_float") })
-	_register("sparse_outer_product_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_outer_product_dense_float_complex, _veclibLib, "sparse_outer_product_dense_float_complex") })
+	_register("sparse_operator_norm_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_operator_norm_float_complex, _veclibLib, "sparse_operator_norm_float_complex")
+	})
+	_register("sparse_outer_product_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_outer_product_dense_double, _veclibLib, "sparse_outer_product_dense_double")
+	})
+	_register("sparse_outer_product_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_outer_product_dense_double_complex, _veclibLib, "sparse_outer_product_dense_double_complex")
+	})
+	_register("sparse_outer_product_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_outer_product_dense_float, _veclibLib, "sparse_outer_product_dense_float")
+	})
+	_register("sparse_outer_product_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_outer_product_dense_float_complex, _veclibLib, "sparse_outer_product_dense_float_complex")
+	})
 	_register("sparse_pack_vector_double", func() { purego.RegisterLibFunc(&_sparse_pack_vector_double, _veclibLib, "sparse_pack_vector_double") })
-	_register("sparse_pack_vector_double_complex", func() { purego.RegisterLibFunc(&_sparse_pack_vector_double_complex, _veclibLib, "sparse_pack_vector_double_complex") })
+	_register("sparse_pack_vector_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_pack_vector_double_complex, _veclibLib, "sparse_pack_vector_double_complex")
+	})
 	_register("sparse_pack_vector_float", func() { purego.RegisterLibFunc(&_sparse_pack_vector_float, _veclibLib, "sparse_pack_vector_float") })
-	_register("sparse_pack_vector_float_complex", func() { purego.RegisterLibFunc(&_sparse_pack_vector_float_complex, _veclibLib, "sparse_pack_vector_float_complex") })
+	_register("sparse_pack_vector_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_pack_vector_float_complex, _veclibLib, "sparse_pack_vector_float_complex")
+	})
 	_register("sparse_permute_cols_double", func() { purego.RegisterLibFunc(&_sparse_permute_cols_double, _veclibLib, "sparse_permute_cols_double") })
-	_register("sparse_permute_cols_double_complex", func() { purego.RegisterLibFunc(&_sparse_permute_cols_double_complex, _veclibLib, "sparse_permute_cols_double_complex") })
+	_register("sparse_permute_cols_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_permute_cols_double_complex, _veclibLib, "sparse_permute_cols_double_complex")
+	})
 	_register("sparse_permute_cols_float", func() { purego.RegisterLibFunc(&_sparse_permute_cols_float, _veclibLib, "sparse_permute_cols_float") })
-	_register("sparse_permute_cols_float_complex", func() { purego.RegisterLibFunc(&_sparse_permute_cols_float_complex, _veclibLib, "sparse_permute_cols_float_complex") })
+	_register("sparse_permute_cols_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_permute_cols_float_complex, _veclibLib, "sparse_permute_cols_float_complex")
+	})
 	_register("sparse_permute_rows_double", func() { purego.RegisterLibFunc(&_sparse_permute_rows_double, _veclibLib, "sparse_permute_rows_double") })
-	_register("sparse_permute_rows_double_complex", func() { purego.RegisterLibFunc(&_sparse_permute_rows_double_complex, _veclibLib, "sparse_permute_rows_double_complex") })
+	_register("sparse_permute_rows_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_permute_rows_double_complex, _veclibLib, "sparse_permute_rows_double_complex")
+	})
 	_register("sparse_permute_rows_float", func() { purego.RegisterLibFunc(&_sparse_permute_rows_float, _veclibLib, "sparse_permute_rows_float") })
-	_register("sparse_permute_rows_float_complex", func() { purego.RegisterLibFunc(&_sparse_permute_rows_float_complex, _veclibLib, "sparse_permute_rows_float_complex") })
+	_register("sparse_permute_rows_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_permute_rows_float_complex, _veclibLib, "sparse_permute_rows_float_complex")
+	})
 	_register("sparse_set_matrix_property", func() { purego.RegisterLibFunc(&_sparse_set_matrix_property, _veclibLib, "sparse_set_matrix_property") })
-	_register("sparse_unpack_vector_double", func() { purego.RegisterLibFunc(&_sparse_unpack_vector_double, _veclibLib, "sparse_unpack_vector_double") })
-	_register("sparse_unpack_vector_double_complex", func() { purego.RegisterLibFunc(&_sparse_unpack_vector_double_complex, _veclibLib, "sparse_unpack_vector_double_complex") })
+	_register("sparse_unpack_vector_double", func() {
+		purego.RegisterLibFunc(&_sparse_unpack_vector_double, _veclibLib, "sparse_unpack_vector_double")
+	})
+	_register("sparse_unpack_vector_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_unpack_vector_double_complex, _veclibLib, "sparse_unpack_vector_double_complex")
+	})
 	_register("sparse_unpack_vector_float", func() { purego.RegisterLibFunc(&_sparse_unpack_vector_float, _veclibLib, "sparse_unpack_vector_float") })
-	_register("sparse_unpack_vector_float_complex", func() { purego.RegisterLibFunc(&_sparse_unpack_vector_float_complex, _veclibLib, "sparse_unpack_vector_float_complex") })
-	_register("sparse_vector_add_with_scale_dense_double", func() { purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_double, _veclibLib, "sparse_vector_add_with_scale_dense_double") })
-	_register("sparse_vector_add_with_scale_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_double_complex, _veclibLib, "sparse_vector_add_with_scale_dense_double_complex") })
-	_register("sparse_vector_add_with_scale_dense_float", func() { purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_float, _veclibLib, "sparse_vector_add_with_scale_dense_float") })
-	_register("sparse_vector_add_with_scale_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_float_complex, _veclibLib, "sparse_vector_add_with_scale_dense_float_complex") })
+	_register("sparse_unpack_vector_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_unpack_vector_float_complex, _veclibLib, "sparse_unpack_vector_float_complex")
+	})
+	_register("sparse_vector_add_with_scale_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_double, _veclibLib, "sparse_vector_add_with_scale_dense_double")
+	})
+	_register("sparse_vector_add_with_scale_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_double_complex, _veclibLib, "sparse_vector_add_with_scale_dense_double_complex")
+	})
+	_register("sparse_vector_add_with_scale_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_float, _veclibLib, "sparse_vector_add_with_scale_dense_float")
+	})
+	_register("sparse_vector_add_with_scale_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_add_with_scale_dense_float_complex, _veclibLib, "sparse_vector_add_with_scale_dense_float_complex")
+	})
 	_register("sparse_vector_norm_double", func() { purego.RegisterLibFunc(&_sparse_vector_norm_double, _veclibLib, "sparse_vector_norm_double") })
-	_register("sparse_vector_norm_double_complex", func() { purego.RegisterLibFunc(&_sparse_vector_norm_double_complex, _veclibLib, "sparse_vector_norm_double_complex") })
+	_register("sparse_vector_norm_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_norm_double_complex, _veclibLib, "sparse_vector_norm_double_complex")
+	})
 	_register("sparse_vector_norm_float", func() { purego.RegisterLibFunc(&_sparse_vector_norm_float, _veclibLib, "sparse_vector_norm_float") })
-	_register("sparse_vector_norm_float_complex", func() { purego.RegisterLibFunc(&_sparse_vector_norm_float_complex, _veclibLib, "sparse_vector_norm_float_complex") })
-	_register("sparse_vector_triangular_solve_dense_double", func() { purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_double, _veclibLib, "sparse_vector_triangular_solve_dense_double") })
-	_register("sparse_vector_triangular_solve_dense_double_complex", func() { purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_double_complex, _veclibLib, "sparse_vector_triangular_solve_dense_double_complex") })
-	_register("sparse_vector_triangular_solve_dense_float", func() { purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_float, _veclibLib, "sparse_vector_triangular_solve_dense_float") })
-	_register("sparse_vector_triangular_solve_dense_float_complex", func() { purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_float_complex, _veclibLib, "sparse_vector_triangular_solve_dense_float_complex") })
+	_register("sparse_vector_norm_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_norm_float_complex, _veclibLib, "sparse_vector_norm_float_complex")
+	})
+	_register("sparse_vector_triangular_solve_dense_double", func() {
+		purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_double, _veclibLib, "sparse_vector_triangular_solve_dense_double")
+	})
+	_register("sparse_vector_triangular_solve_dense_double_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_double_complex, _veclibLib, "sparse_vector_triangular_solve_dense_double_complex")
+	})
+	_register("sparse_vector_triangular_solve_dense_float", func() {
+		purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_float, _veclibLib, "sparse_vector_triangular_solve_dense_float")
+	})
+	_register("sparse_vector_triangular_solve_dense_float_complex", func() {
+		purego.RegisterLibFunc(&_sparse_vector_triangular_solve_dense_float_complex, _veclibLib, "sparse_vector_triangular_solve_dense_float_complex")
+	})
 	_register("spbcon_", func() { purego.RegisterLibFunc(&_spbcon_, _veclibLib, "spbcon_") })
 	_register("spbequ_", func() { purego.RegisterLibFunc(&_spbequ_, _veclibLib, "spbequ_") })
 	_register("spbrfs_", func() { purego.RegisterLibFunc(&_spbrfs_, _veclibLib, "spbrfs_") })
@@ -1948,12 +2578,24 @@ func _loadLibrary() {
 	_register("vDSP_DFT_DestroySetupD", func() { purego.RegisterLibFunc(&_vDSP_DFT_DestroySetupD, _veclibLib, "vDSP_DFT_DestroySetupD") })
 	_register("vDSP_DFT_Execute", func() { purego.RegisterLibFunc(&_vDSP_DFT_Execute, _veclibLib, "vDSP_DFT_Execute") })
 	_register("vDSP_DFT_ExecuteD", func() { purego.RegisterLibFunc(&_vDSP_DFT_ExecuteD, _veclibLib, "vDSP_DFT_ExecuteD") })
-	_register("vDSP_DFT_Interleaved_CreateSetup", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_CreateSetup, _veclibLib, "vDSP_DFT_Interleaved_CreateSetup") })
-	_register("vDSP_DFT_Interleaved_CreateSetupD", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_CreateSetupD, _veclibLib, "vDSP_DFT_Interleaved_CreateSetupD") })
-	_register("vDSP_DFT_Interleaved_DestroySetup", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_DestroySetup, _veclibLib, "vDSP_DFT_Interleaved_DestroySetup") })
-	_register("vDSP_DFT_Interleaved_DestroySetupD", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_DestroySetupD, _veclibLib, "vDSP_DFT_Interleaved_DestroySetupD") })
-	_register("vDSP_DFT_Interleaved_Execute", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_Execute, _veclibLib, "vDSP_DFT_Interleaved_Execute") })
-	_register("vDSP_DFT_Interleaved_ExecuteD", func() { purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_ExecuteD, _veclibLib, "vDSP_DFT_Interleaved_ExecuteD") })
+	_register("vDSP_DFT_Interleaved_CreateSetup", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_CreateSetup, _veclibLib, "vDSP_DFT_Interleaved_CreateSetup")
+	})
+	_register("vDSP_DFT_Interleaved_CreateSetupD", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_CreateSetupD, _veclibLib, "vDSP_DFT_Interleaved_CreateSetupD")
+	})
+	_register("vDSP_DFT_Interleaved_DestroySetup", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_DestroySetup, _veclibLib, "vDSP_DFT_Interleaved_DestroySetup")
+	})
+	_register("vDSP_DFT_Interleaved_DestroySetupD", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_DestroySetupD, _veclibLib, "vDSP_DFT_Interleaved_DestroySetupD")
+	})
+	_register("vDSP_DFT_Interleaved_Execute", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_Execute, _veclibLib, "vDSP_DFT_Interleaved_Execute")
+	})
+	_register("vDSP_DFT_Interleaved_ExecuteD", func() {
+		purego.RegisterLibFunc(&_vDSP_DFT_Interleaved_ExecuteD, _veclibLib, "vDSP_DFT_Interleaved_ExecuteD")
+	})
 	_register("vDSP_DFT_zop", func() { purego.RegisterLibFunc(&_vDSP_DFT_zop, _veclibLib, "vDSP_DFT_zop") })
 	_register("vDSP_DFT_zop_CreateSetup", func() { purego.RegisterLibFunc(&_vDSP_DFT_zop_CreateSetup, _veclibLib, "vDSP_DFT_zop_CreateSetup") })
 	_register("vDSP_DFT_zop_CreateSetupD", func() { purego.RegisterLibFunc(&_vDSP_DFT_zop_CreateSetupD, _veclibLib, "vDSP_DFT_zop_CreateSetupD") })
@@ -1969,8 +2611,12 @@ func _loadLibrary() {
 	_register("vDSP_biquad_CreateSetupD", func() { purego.RegisterLibFunc(&_vDSP_biquad_CreateSetupD, _veclibLib, "vDSP_biquad_CreateSetupD") })
 	_register("vDSP_biquad_DestroySetup", func() { purego.RegisterLibFunc(&_vDSP_biquad_DestroySetup, _veclibLib, "vDSP_biquad_DestroySetup") })
 	_register("vDSP_biquad_DestroySetupD", func() { purego.RegisterLibFunc(&_vDSP_biquad_DestroySetupD, _veclibLib, "vDSP_biquad_DestroySetupD") })
-	_register("vDSP_biquad_SetCoefficientsDouble", func() { purego.RegisterLibFunc(&_vDSP_biquad_SetCoefficientsDouble, _veclibLib, "vDSP_biquad_SetCoefficientsDouble") })
-	_register("vDSP_biquad_SetCoefficientsSingle", func() { purego.RegisterLibFunc(&_vDSP_biquad_SetCoefficientsSingle, _veclibLib, "vDSP_biquad_SetCoefficientsSingle") })
+	_register("vDSP_biquad_SetCoefficientsDouble", func() {
+		purego.RegisterLibFunc(&_vDSP_biquad_SetCoefficientsDouble, _veclibLib, "vDSP_biquad_SetCoefficientsDouble")
+	})
+	_register("vDSP_biquad_SetCoefficientsSingle", func() {
+		purego.RegisterLibFunc(&_vDSP_biquad_SetCoefficientsSingle, _veclibLib, "vDSP_biquad_SetCoefficientsSingle")
+	})
 	_register("vDSP_biquadm", func() { purego.RegisterLibFunc(&_vDSP_biquadm, _veclibLib, "vDSP_biquadm") })
 	_register("vDSP_biquadmD", func() { purego.RegisterLibFunc(&_vDSP_biquadmD, _veclibLib, "vDSP_biquadmD") })
 	_register("vDSP_biquadm_CopyState", func() { purego.RegisterLibFunc(&_vDSP_biquadm_CopyState, _veclibLib, "vDSP_biquadm_CopyState") })
@@ -1981,16 +2627,36 @@ func _loadLibrary() {
 	_register("vDSP_biquadm_DestroySetupD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_DestroySetupD, _veclibLib, "vDSP_biquadm_DestroySetupD") })
 	_register("vDSP_biquadm_ResetState", func() { purego.RegisterLibFunc(&_vDSP_biquadm_ResetState, _veclibLib, "vDSP_biquadm_ResetState") })
 	_register("vDSP_biquadm_ResetStateD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_ResetStateD, _veclibLib, "vDSP_biquadm_ResetStateD") })
-	_register("vDSP_biquadm_SetActiveFilters", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetActiveFilters, _veclibLib, "vDSP_biquadm_SetActiveFilters") })
-	_register("vDSP_biquadm_SetActiveFiltersD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetActiveFiltersD, _veclibLib, "vDSP_biquadm_SetActiveFiltersD") })
-	_register("vDSP_biquadm_SetCoefficientsDouble", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsDouble, _veclibLib, "vDSP_biquadm_SetCoefficientsDouble") })
-	_register("vDSP_biquadm_SetCoefficientsDoubleD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsDoubleD, _veclibLib, "vDSP_biquadm_SetCoefficientsDoubleD") })
-	_register("vDSP_biquadm_SetCoefficientsSingle", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsSingle, _veclibLib, "vDSP_biquadm_SetCoefficientsSingle") })
-	_register("vDSP_biquadm_SetCoefficientsSingleD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsSingleD, _veclibLib, "vDSP_biquadm_SetCoefficientsSingleD") })
-	_register("vDSP_biquadm_SetTargetsDouble", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsDouble, _veclibLib, "vDSP_biquadm_SetTargetsDouble") })
-	_register("vDSP_biquadm_SetTargetsDoubleD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsDoubleD, _veclibLib, "vDSP_biquadm_SetTargetsDoubleD") })
-	_register("vDSP_biquadm_SetTargetsSingle", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsSingle, _veclibLib, "vDSP_biquadm_SetTargetsSingle") })
-	_register("vDSP_biquadm_SetTargetsSingleD", func() { purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsSingleD, _veclibLib, "vDSP_biquadm_SetTargetsSingleD") })
+	_register("vDSP_biquadm_SetActiveFilters", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetActiveFilters, _veclibLib, "vDSP_biquadm_SetActiveFilters")
+	})
+	_register("vDSP_biquadm_SetActiveFiltersD", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetActiveFiltersD, _veclibLib, "vDSP_biquadm_SetActiveFiltersD")
+	})
+	_register("vDSP_biquadm_SetCoefficientsDouble", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsDouble, _veclibLib, "vDSP_biquadm_SetCoefficientsDouble")
+	})
+	_register("vDSP_biquadm_SetCoefficientsDoubleD", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsDoubleD, _veclibLib, "vDSP_biquadm_SetCoefficientsDoubleD")
+	})
+	_register("vDSP_biquadm_SetCoefficientsSingle", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsSingle, _veclibLib, "vDSP_biquadm_SetCoefficientsSingle")
+	})
+	_register("vDSP_biquadm_SetCoefficientsSingleD", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetCoefficientsSingleD, _veclibLib, "vDSP_biquadm_SetCoefficientsSingleD")
+	})
+	_register("vDSP_biquadm_SetTargetsDouble", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsDouble, _veclibLib, "vDSP_biquadm_SetTargetsDouble")
+	})
+	_register("vDSP_biquadm_SetTargetsDoubleD", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsDoubleD, _veclibLib, "vDSP_biquadm_SetTargetsDoubleD")
+	})
+	_register("vDSP_biquadm_SetTargetsSingle", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsSingle, _veclibLib, "vDSP_biquadm_SetTargetsSingle")
+	})
+	_register("vDSP_biquadm_SetTargetsSingleD", func() {
+		purego.RegisterLibFunc(&_vDSP_biquadm_SetTargetsSingleD, _veclibLib, "vDSP_biquadm_SetTargetsSingleD")
+	})
 	_register("vDSP_blkman_window", func() { purego.RegisterLibFunc(&_vDSP_blkman_window, _veclibLib, "vDSP_blkman_window") })
 	_register("vDSP_blkman_windowD", func() { purego.RegisterLibFunc(&_vDSP_blkman_windowD, _veclibLib, "vDSP_blkman_windowD") })
 	_register("vDSP_conv", func() { purego.RegisterLibFunc(&_vDSP_conv, _veclibLib, "vDSP_conv") })

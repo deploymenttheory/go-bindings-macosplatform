@@ -18,32 +18,32 @@ type GLKBaseEffect struct {
 }
 
 var (
-	_clsGLKBaseEffect = _objcClass("GLKBaseEffect")
-	_gLKBaseEffectSelPrepareToDraw = objc.RegisterName("prepareToDraw")
-	_gLKBaseEffectSelColorMaterialEnabled = objc.RegisterName("colorMaterialEnabled")
-	_gLKBaseEffectSelSetColorMaterialEnabled = objc.RegisterName("setColorMaterialEnabled:")
-	_gLKBaseEffectSelLightModelTwoSided = objc.RegisterName("lightModelTwoSided")
-	_gLKBaseEffectSelSetLightModelTwoSided = objc.RegisterName("setLightModelTwoSided:")
-	_gLKBaseEffectSelUseConstantColor = objc.RegisterName("useConstantColor")
-	_gLKBaseEffectSelSetUseConstantColor = objc.RegisterName("setUseConstantColor:")
-	_gLKBaseEffectSelTransform = objc.RegisterName("transform")
-	_gLKBaseEffectSelLight0 = objc.RegisterName("light0")
-	_gLKBaseEffectSelLight1 = objc.RegisterName("light1")
-	_gLKBaseEffectSelLight2 = objc.RegisterName("light2")
-	_gLKBaseEffectSelLightingType = objc.RegisterName("lightingType")
-	_gLKBaseEffectSelSetLightingType = objc.RegisterName("setLightingType:")
-	_gLKBaseEffectSelLightModelAmbientColor = objc.RegisterName("lightModelAmbientColor")
+	_clsGLKBaseEffect                          = _objcClass("GLKBaseEffect")
+	_gLKBaseEffectSelPrepareToDraw             = objc.RegisterName("prepareToDraw")
+	_gLKBaseEffectSelColorMaterialEnabled      = objc.RegisterName("colorMaterialEnabled")
+	_gLKBaseEffectSelSetColorMaterialEnabled   = objc.RegisterName("setColorMaterialEnabled:")
+	_gLKBaseEffectSelLightModelTwoSided        = objc.RegisterName("lightModelTwoSided")
+	_gLKBaseEffectSelSetLightModelTwoSided     = objc.RegisterName("setLightModelTwoSided:")
+	_gLKBaseEffectSelUseConstantColor          = objc.RegisterName("useConstantColor")
+	_gLKBaseEffectSelSetUseConstantColor       = objc.RegisterName("setUseConstantColor:")
+	_gLKBaseEffectSelTransform                 = objc.RegisterName("transform")
+	_gLKBaseEffectSelLight0                    = objc.RegisterName("light0")
+	_gLKBaseEffectSelLight1                    = objc.RegisterName("light1")
+	_gLKBaseEffectSelLight2                    = objc.RegisterName("light2")
+	_gLKBaseEffectSelLightingType              = objc.RegisterName("lightingType")
+	_gLKBaseEffectSelSetLightingType           = objc.RegisterName("setLightingType:")
+	_gLKBaseEffectSelLightModelAmbientColor    = objc.RegisterName("lightModelAmbientColor")
 	_gLKBaseEffectSelSetLightModelAmbientColor = objc.RegisterName("setLightModelAmbientColor:")
-	_gLKBaseEffectSelMaterial = objc.RegisterName("material")
-	_gLKBaseEffectSelTexture2d0 = objc.RegisterName("texture2d0")
-	_gLKBaseEffectSelTexture2d1 = objc.RegisterName("texture2d1")
-	_gLKBaseEffectSelTextureOrder = objc.RegisterName("textureOrder")
-	_gLKBaseEffectSelSetTextureOrder = objc.RegisterName("setTextureOrder:")
-	_gLKBaseEffectSelConstantColor = objc.RegisterName("constantColor")
-	_gLKBaseEffectSelSetConstantColor = objc.RegisterName("setConstantColor:")
-	_gLKBaseEffectSelFog = objc.RegisterName("fog")
-	_gLKBaseEffectSelLabel = objc.RegisterName("label")
-	_gLKBaseEffectSelSetLabel = objc.RegisterName("setLabel:")
+	_gLKBaseEffectSelMaterial                  = objc.RegisterName("material")
+	_gLKBaseEffectSelTexture2d0                = objc.RegisterName("texture2d0")
+	_gLKBaseEffectSelTexture2d1                = objc.RegisterName("texture2d1")
+	_gLKBaseEffectSelTextureOrder              = objc.RegisterName("textureOrder")
+	_gLKBaseEffectSelSetTextureOrder           = objc.RegisterName("setTextureOrder:")
+	_gLKBaseEffectSelConstantColor             = objc.RegisterName("constantColor")
+	_gLKBaseEffectSelSetConstantColor          = objc.RegisterName("setConstantColor:")
+	_gLKBaseEffectSelFog                       = objc.RegisterName("fog")
+	_gLKBaseEffectSelLabel                     = objc.RegisterName("label")
+	_gLKBaseEffectSelSetLabel                  = objc.RegisterName("setLabel:")
 )
 
 func GLKBaseEffectFromID(id objc.ID) *GLKBaseEffect {
@@ -89,25 +89,33 @@ func (o *GLKBaseEffect) SetUseConstantColor(useConstantColor uint8) {
 
 func (o *GLKBaseEffect) Transform() *GLKEffectPropertyTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTransformFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Light0() *GLKEffectPropertyLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelLight0)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyLightFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Light1() *GLKEffectPropertyLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelLight1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyLightFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Light2() *GLKEffectPropertyLight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelLight2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyLightFromID(_ret)
 }
 
@@ -131,25 +139,33 @@ func (o *GLKBaseEffect) SetLightModelAmbientColor(lightModelAmbientColor unsafe.
 
 func (o *GLKBaseEffect) Material() *GLKEffectPropertyMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelMaterial)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyMaterialFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Texture2d0() *GLKEffectPropertyTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelTexture2d0)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTextureFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Texture2d1() *GLKEffectPropertyTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelTexture2d1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTextureFromID(_ret)
 }
 
 func (o *GLKBaseEffect) TextureOrder() *foundation.NSArray[*GLKEffectPropertyTexture] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelTextureOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GLKEffectPropertyTexture](_ret)
 }
 
@@ -168,17 +184,20 @@ func (o *GLKBaseEffect) SetConstantColor(constantColor unsafe.Pointer) {
 
 func (o *GLKBaseEffect) Fog() *GLKEffectPropertyFog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelFog)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyFogFromID(_ret)
 }
 
 func (o *GLKBaseEffect) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKBaseEffectSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *GLKBaseEffect) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_gLKBaseEffectSelSetLabel, label.Ptr())
 }
-

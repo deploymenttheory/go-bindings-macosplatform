@@ -94,4 +94,3 @@ type CaptureInputPortable interface {
 }
 
 var _ CaptureInputPortable = (*CaptureInputPort)(nil)
-

@@ -83,4 +83,3 @@ type MergeConflictable interface {
 }
 
 var _ MergeConflictable = (*MergeConflict)(nil)
-

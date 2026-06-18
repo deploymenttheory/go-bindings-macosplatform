@@ -190,9 +190,13 @@ func (x *NNArithmeticGradientNode) IsSecondarySourceFilter() bool {
 	return x.inner.IsSecondarySourceFilter()
 }
 
-func (x *NNArithmeticGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNArithmeticGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNArithmeticGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNArithmeticGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNArithmeticGradientNodeable is the interface implemented by [NNArithmeticGradientNode], for mocking and DI.
 type NNArithmeticGradientNodeable interface {
@@ -227,4 +231,3 @@ type NNArithmeticGradientNodeable interface {
 }
 
 var _ NNArithmeticGradientNodeable = (*NNArithmeticGradientNode)(nil)
-

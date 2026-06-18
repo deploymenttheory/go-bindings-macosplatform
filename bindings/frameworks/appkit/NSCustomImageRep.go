@@ -16,12 +16,12 @@ type NSCustomImageRep struct {
 }
 
 var (
-	_clsNSCustomImageRep = _objcClass("NSCustomImageRep")
+	_clsNSCustomImageRep                                  = _objcClass("NSCustomImageRep")
 	_nSCustomImageRepSelInitWithSizeFlippedDrawingHandler = objc.RegisterName("initWithSize:flipped:drawingHandler:")
-	_nSCustomImageRepSelInitWithDrawSelectorDelegate = objc.RegisterName("initWithDrawSelector:delegate:")
-	_nSCustomImageRepSelDrawingHandler = objc.RegisterName("drawingHandler")
-	_nSCustomImageRepSelDrawSelector = objc.RegisterName("drawSelector")
-	_nSCustomImageRepSelDelegate = objc.RegisterName("delegate")
+	_nSCustomImageRepSelInitWithDrawSelectorDelegate      = objc.RegisterName("initWithDrawSelector:delegate:")
+	_nSCustomImageRepSelDrawingHandler                    = objc.RegisterName("drawingHandler")
+	_nSCustomImageRepSelDrawSelector                      = objc.RegisterName("drawSelector")
+	_nSCustomImageRepSelDelegate                          = objc.RegisterName("delegate")
 )
 
 func NSCustomImageRepFromID(id objc.ID) *NSCustomImageRep {
@@ -36,13 +36,17 @@ func NSCustomImageRepFromID(id objc.ID) *NSCustomImageRep {
 
 func (o *NSCustomImageRep) InitWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *NSCustomImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomImageRepSelInitWithSizeFlippedDrawingHandler, size, drawingHandlerShouldBeCalledWithFlippedContext, drawingHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCustomImageRepFromID(_ret)
 }
 
 func (o *NSCustomImageRep) InitWithDrawSelectorDelegate(selector objc.SEL, delegate objc.ID) *NSCustomImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomImageRepSelInitWithDrawSelectorDelegate, selector, delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCustomImageRepFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *NSCustomImageRep) Delegate() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCustomImageRepSelDelegate)
 	return _ret
 }
-

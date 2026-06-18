@@ -18,8 +18,8 @@ type MPSNNReduceRowMax struct {
 }
 
 var (
-	_clsMPSNNReduceRowMax = _objcClass("MPSNNReduceRowMax")
-	_mPSNNReduceRowMaxSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceRowMax                    = _objcClass("MPSNNReduceRowMax")
+	_mPSNNReduceRowMaxSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceRowMaxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -35,14 +35,17 @@ func MPSNNReduceRowMaxFromID(id objc.ID) *MPSNNReduceRowMax {
 
 func (o *MPSNNReduceRowMax) InitWithDevice(device metal.MTLDevice) *MPSNNReduceRowMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceRowMaxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceRowMaxFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceRowMax object, or nil if failure.
 func (o *MPSNNReduceRowMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceRowMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceRowMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceRowMaxFromID(_ret)
 }
-

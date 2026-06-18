@@ -76,4 +76,3 @@ type VirtualConferenceDescriptorable interface {
 }
 
 var _ VirtualConferenceDescriptorable = (*VirtualConferenceDescriptor)(nil)
-

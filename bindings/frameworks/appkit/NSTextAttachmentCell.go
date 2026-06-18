@@ -25,4 +25,3 @@ func NSTextAttachmentCellFromID(id objc.ID) *NSTextAttachmentCell {
 	purego.Track(o)
 	return o
 }
-

@@ -65,4 +65,3 @@ type VirtioSocketConnectionable interface {
 }
 
 var _ VirtioSocketConnectionable = (*VirtioSocketConnection)(nil)
-

@@ -149,4 +149,3 @@ type TextureLoaderable interface {
 }
 
 var _ TextureLoaderable = (*TextureLoader)(nil)
-

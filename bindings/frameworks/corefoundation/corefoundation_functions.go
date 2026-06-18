@@ -10,55 +10,55 @@ import (
 )
 
 var (
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFAbsoluteTimeAddGregorianUnits func(float64, unsafe.Pointer, CFGregorianUnits) float64
-	_fnCFAbsoluteTimeGetCurrent func() float64
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	_fnCFAbsoluteTimeGetCurrent        func() float64
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFAbsoluteTimeGetDayOfWeek func(float64, unsafe.Pointer) int
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFAbsoluteTimeGetDayOfYear func(float64, unsafe.Pointer) int
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFAbsoluteTimeGetDifferenceAsGregorianUnits func(float64, float64, unsafe.Pointer, uint) CFGregorianUnits
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFAbsoluteTimeGetGregorianDate func(float64, unsafe.Pointer) CFGregorianDate
-// Deprecated: Use CFCalendar or NSCalendar API instead
-	_fnCFAbsoluteTimeGetWeekOfYear func(float64, unsafe.Pointer) int
-	_fnCFAllocatorAllocate func(unsafe.Pointer, int, uint) unsafe.Pointer
-	_fnCFAllocatorAllocateBytes func(unsafe.Pointer, int, uint) unsafe.Pointer
-	_fnCFAllocatorAllocateTyped func(unsafe.Pointer, int, uint64, uint) unsafe.Pointer
-	_fnCFAllocatorCreate func(unsafe.Pointer, *CFAllocatorContext) unsafe.Pointer
-	_fnCFAllocatorDeallocate func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFAllocatorGetContext func(unsafe.Pointer, *CFAllocatorContext)
-	_fnCFAllocatorGetDefault func() unsafe.Pointer
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	_fnCFAbsoluteTimeGetWeekOfYear        func(float64, unsafe.Pointer) int
+	_fnCFAllocatorAllocate                func(unsafe.Pointer, int, uint) unsafe.Pointer
+	_fnCFAllocatorAllocateBytes           func(unsafe.Pointer, int, uint) unsafe.Pointer
+	_fnCFAllocatorAllocateTyped           func(unsafe.Pointer, int, uint64, uint) unsafe.Pointer
+	_fnCFAllocatorCreate                  func(unsafe.Pointer, *CFAllocatorContext) unsafe.Pointer
+	_fnCFAllocatorDeallocate              func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFAllocatorGetContext              func(unsafe.Pointer, *CFAllocatorContext)
+	_fnCFAllocatorGetDefault              func() unsafe.Pointer
 	_fnCFAllocatorGetPreferredSizeForSize func(unsafe.Pointer, int, uint) int
-	_fnCFAllocatorGetTypeID func() uint
-	_fnCFAllocatorReallocate func(unsafe.Pointer, unsafe.Pointer, int, uint) unsafe.Pointer
-	_fnCFAllocatorReallocateBytes func(unsafe.Pointer, unsafe.Pointer, int, uint) unsafe.Pointer
-	_fnCFAllocatorReallocateTyped func(unsafe.Pointer, unsafe.Pointer, int, uint64, uint) unsafe.Pointer
-	_fnCFAllocatorSetDefault func(unsafe.Pointer)
-	_fnCFArrayAppendArray func(unsafe.Pointer, unsafe.Pointer, CFRange)
-	_fnCFArrayAppendValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFArrayApplyFunction func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer)
-	_fnCFArrayBSearchValues func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCFArrayContainsValue func(unsafe.Pointer, CFRange, unsafe.Pointer) uint8
-	_fnCFArrayCreate func(unsafe.Pointer, unsafe.Pointer, int, *CFArrayCallBacks) unsafe.Pointer
-	_fnCFArrayCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFArrayCreateMutable func(unsafe.Pointer, int, *CFArrayCallBacks) unsafe.Pointer
-	_fnCFArrayCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFArrayExchangeValuesAtIndices func(unsafe.Pointer, int, int)
-	_fnCFArrayGetCount func(unsafe.Pointer) int
-	_fnCFArrayGetCountOfValue func(unsafe.Pointer, CFRange, unsafe.Pointer) int
-	_fnCFArrayGetFirstIndexOfValue func(unsafe.Pointer, CFRange, unsafe.Pointer) int
-	_fnCFArrayGetLastIndexOfValue func(unsafe.Pointer, CFRange, unsafe.Pointer) int
-	_fnCFArrayGetTypeID func() uint
-	_fnCFArrayGetValueAtIndex func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCFArrayGetValues func(unsafe.Pointer, CFRange, unsafe.Pointer)
-	_fnCFArrayInsertValueAtIndex func(unsafe.Pointer, int, unsafe.Pointer)
-	_fnCFArrayRemoveAllValues func(unsafe.Pointer)
-	_fnCFArrayRemoveValueAtIndex func(unsafe.Pointer, int)
-	_fnCFArrayReplaceValues func(unsafe.Pointer, CFRange, unsafe.Pointer, int)
-	_fnCFArraySetValueAtIndex func(unsafe.Pointer, int, unsafe.Pointer)
-	_fnCFArraySortValues func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer)
+	_fnCFAllocatorGetTypeID               func() uint
+	_fnCFAllocatorReallocate              func(unsafe.Pointer, unsafe.Pointer, int, uint) unsafe.Pointer
+	_fnCFAllocatorReallocateBytes         func(unsafe.Pointer, unsafe.Pointer, int, uint) unsafe.Pointer
+	_fnCFAllocatorReallocateTyped         func(unsafe.Pointer, unsafe.Pointer, int, uint64, uint) unsafe.Pointer
+	_fnCFAllocatorSetDefault              func(unsafe.Pointer)
+	_fnCFArrayAppendArray                 func(unsafe.Pointer, unsafe.Pointer, CFRange)
+	_fnCFArrayAppendValue                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFArrayApplyFunction               func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer)
+	_fnCFArrayBSearchValues               func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCFArrayContainsValue               func(unsafe.Pointer, CFRange, unsafe.Pointer) uint8
+	_fnCFArrayCreate                      func(unsafe.Pointer, unsafe.Pointer, int, *CFArrayCallBacks) unsafe.Pointer
+	_fnCFArrayCreateCopy                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFArrayCreateMutable               func(unsafe.Pointer, int, *CFArrayCallBacks) unsafe.Pointer
+	_fnCFArrayCreateMutableCopy           func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFArrayExchangeValuesAtIndices     func(unsafe.Pointer, int, int)
+	_fnCFArrayGetCount                    func(unsafe.Pointer) int
+	_fnCFArrayGetCountOfValue             func(unsafe.Pointer, CFRange, unsafe.Pointer) int
+	_fnCFArrayGetFirstIndexOfValue        func(unsafe.Pointer, CFRange, unsafe.Pointer) int
+	_fnCFArrayGetLastIndexOfValue         func(unsafe.Pointer, CFRange, unsafe.Pointer) int
+	_fnCFArrayGetTypeID                   func() uint
+	_fnCFArrayGetValueAtIndex             func(unsafe.Pointer, int) unsafe.Pointer
+	_fnCFArrayGetValues                   func(unsafe.Pointer, CFRange, unsafe.Pointer)
+	_fnCFArrayInsertValueAtIndex          func(unsafe.Pointer, int, unsafe.Pointer)
+	_fnCFArrayRemoveAllValues             func(unsafe.Pointer)
+	_fnCFArrayRemoveValueAtIndex          func(unsafe.Pointer, int)
+	_fnCFArrayReplaceValues               func(unsafe.Pointer, CFRange, unsafe.Pointer, int)
+	_fnCFArraySetValueAtIndex             func(unsafe.Pointer, int, unsafe.Pointer)
+	_fnCFArraySortValues                  func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer)
 	// @function CFAttributedStringBeginEditing In cases where attributed string might do a bunch of work to assure self-consistency, CFAttributedStringBeginEditing/CFAttributedStringEndEditing allow disabling that to allow deferring and coalescing any work. It's a good idea to call these around a set of related mutation calls which don't require the string to be in consistent state in between. These calls can be nested.
 	_fnCFAttributedStringBeginEditing func(unsafe.Pointer)
 	// @function CFAttributedStringCreate Creates an attributed string with the specified string and attributes (both copied).
@@ -103,24 +103,24 @@ var (
 	_fnCFAttributedStringSetAttribute func(unsafe.Pointer, CFRange, unsafe.Pointer, unsafe.Pointer)
 	// @function CFAttributedStringSetAttributes Sets the value of multiple attributes over the specified range, which should be valid. If clearOtherAttributes is false, existing attributes (which aren't being replaced) are left alone; otherwise they are cleared. The dictionary should be setup for "usual" CF type usage --- CFString keys, and arbitrary CFType values. Note that after this call, further mutations to the replacement dictionary argument by the caller will not affect the contents of the attributed string.
 	_fnCFAttributedStringSetAttributes func(unsafe.Pointer, CFRange, unsafe.Pointer, uint8)
-	_fnCFAutorelease func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBagAddValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFBagApplyFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFBagContainsValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFBagCreate func(unsafe.Pointer, unsafe.Pointer, int, *CFBagCallBacks) unsafe.Pointer
-	_fnCFBagCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBagCreateMutable func(unsafe.Pointer, int, *CFBagCallBacks) unsafe.Pointer
-	_fnCFBagCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFBagGetCount func(unsafe.Pointer) int
-	_fnCFBagGetCountOfValue func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCFBagGetTypeID func() uint
-	_fnCFBagGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBagGetValueIfPresent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFBagGetValues func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFBagRemoveAllValues func(unsafe.Pointer)
-	_fnCFBagRemoveValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFBagReplaceValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFBagSetValue func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFAutorelease                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBagAddValue                   func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFBagApplyFunction              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFBagContainsValue              func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFBagCreate                     func(unsafe.Pointer, unsafe.Pointer, int, *CFBagCallBacks) unsafe.Pointer
+	_fnCFBagCreateCopy                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBagCreateMutable              func(unsafe.Pointer, int, *CFBagCallBacks) unsafe.Pointer
+	_fnCFBagCreateMutableCopy          func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFBagGetCount                   func(unsafe.Pointer) int
+	_fnCFBagGetCountOfValue            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCFBagGetTypeID                  func() uint
+	_fnCFBagGetValue                   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBagGetValueIfPresent          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFBagGetValues                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFBagRemoveAllValues            func(unsafe.Pointer)
+	_fnCFBagRemoveValue                func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFBagReplaceValue               func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFBagSetValue                   func(unsafe.Pointer, unsafe.Pointer)
 	// @function CFBinaryHeapAddValue Adds the value to the binary heap. @param heap The binary heap to which the value is to be added. If this parameter is not a valid mutable CFBinaryHeap, the behavior is undefined. @param value The value to add to the binary heap. The value is retained by the binary heap using the retain callback provided when the binary heap was created. If the value is not of the sort expected by the retain callback, the behavior is undefined.
 	_fnCFBinaryHeapAddValue func(unsafe.Pointer, unsafe.Pointer)
 	// @function CFBinaryHeapApplyFunction Calls a function once for each value in the binary heap. @param heap The binary heap to be operated upon. If this parameter is not a valid CFBinaryHeap, the behavior is undefined. @param applier The callback function to call once for each value in the given binary heap. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. If there are values in the binary heap which the applier function does not expect or cannot properly apply to, the behavior is undefined. @param context A pointer-sized user-defined value, which is passed as the second parameter to the applier function, but is otherwise unused by this function. If the context is not what is expected by the applier function, the behavior is undefined.
@@ -147,822 +147,822 @@ var (
 	_fnCFBinaryHeapRemoveAllValues func(unsafe.Pointer)
 	// @function CFBinaryHeapRemoveMinimumValue Removes the minimum value from the binary heap. @param heap The binary heap from which the minimum value is to be removed. If this parameter is not a valid mutable CFBinaryHeap, the behavior is undefined.
 	_fnCFBinaryHeapRemoveMinimumValue func(unsafe.Pointer)
-	_fnCFBitVectorContainsBit func(unsafe.Pointer, CFRange, uint) uint8
-	_fnCFBitVectorCreate func(unsafe.Pointer, *uint8, int) unsafe.Pointer
-	_fnCFBitVectorCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBitVectorCreateMutable func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCFBitVectorCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFBitVectorFlipBitAtIndex func(unsafe.Pointer, int)
-	_fnCFBitVectorFlipBits func(unsafe.Pointer, CFRange)
-	_fnCFBitVectorGetBitAtIndex func(unsafe.Pointer, int) uint
-	_fnCFBitVectorGetBits func(unsafe.Pointer, CFRange, *uint8)
-	_fnCFBitVectorGetCount func(unsafe.Pointer) int
-	_fnCFBitVectorGetCountOfBit func(unsafe.Pointer, CFRange, uint) int
-	_fnCFBitVectorGetFirstIndexOfBit func(unsafe.Pointer, CFRange, uint) int
-	_fnCFBitVectorGetLastIndexOfBit func(unsafe.Pointer, CFRange, uint) int
-	_fnCFBitVectorGetTypeID func() uint
-	_fnCFBitVectorSetAllBits func(unsafe.Pointer, uint)
-	_fnCFBitVectorSetBitAtIndex func(unsafe.Pointer, int, uint)
-	_fnCFBitVectorSetBits func(unsafe.Pointer, CFRange, uint)
-	_fnCFBitVectorSetCount func(unsafe.Pointer, int)
-	_fnCFBooleanGetTypeID func() uint
-	_fnCFBooleanGetValue func(unsafe.Pointer) uint8
-// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
-	_fnCFBundleCloseBundleResourceMap func(unsafe.Pointer, int)
-	_fnCFBundleCopyAuxiliaryExecutableURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyBuiltInPlugInsURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyBundleLocalizations func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyBundleURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyExecutableArchitectures func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyExecutableArchitecturesForURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyExecutableURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyInfoDictionaryForURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyInfoDictionaryInDirectory func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyLocalizationsForPreferences func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyLocalizationsForURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyLocalizedString func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyLocalizedStringForLocalizations func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyPreferredLocalizationsFromArray func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyPrivateFrameworksURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourceURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourceURLForLocalization func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourceURLInDirectory func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourceURLsOfType func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBitVectorContainsBit         func(unsafe.Pointer, CFRange, uint) uint8
+	_fnCFBitVectorCreate              func(unsafe.Pointer, *uint8, int) unsafe.Pointer
+	_fnCFBitVectorCreateCopy          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBitVectorCreateMutable       func(unsafe.Pointer, int) unsafe.Pointer
+	_fnCFBitVectorCreateMutableCopy   func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFBitVectorFlipBitAtIndex      func(unsafe.Pointer, int)
+	_fnCFBitVectorFlipBits            func(unsafe.Pointer, CFRange)
+	_fnCFBitVectorGetBitAtIndex       func(unsafe.Pointer, int) uint
+	_fnCFBitVectorGetBits             func(unsafe.Pointer, CFRange, *uint8)
+	_fnCFBitVectorGetCount            func(unsafe.Pointer) int
+	_fnCFBitVectorGetCountOfBit       func(unsafe.Pointer, CFRange, uint) int
+	_fnCFBitVectorGetFirstIndexOfBit  func(unsafe.Pointer, CFRange, uint) int
+	_fnCFBitVectorGetLastIndexOfBit   func(unsafe.Pointer, CFRange, uint) int
+	_fnCFBitVectorGetTypeID           func() uint
+	_fnCFBitVectorSetAllBits          func(unsafe.Pointer, uint)
+	_fnCFBitVectorSetBitAtIndex       func(unsafe.Pointer, int, uint)
+	_fnCFBitVectorSetBits             func(unsafe.Pointer, CFRange, uint)
+	_fnCFBitVectorSetCount            func(unsafe.Pointer, int)
+	_fnCFBooleanGetTypeID             func() uint
+	_fnCFBooleanGetValue              func(unsafe.Pointer) uint8
+	// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
+	_fnCFBundleCloseBundleResourceMap                func(unsafe.Pointer, int)
+	_fnCFBundleCopyAuxiliaryExecutableURL            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyBuiltInPlugInsURL                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyBundleLocalizations               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyBundleURL                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyExecutableArchitectures           func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyExecutableArchitecturesForURL     func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyExecutableURL                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyInfoDictionaryForURL              func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyInfoDictionaryInDirectory         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyLocalizationsForPreferences       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyLocalizationsForURL               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyLocalizedString                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyLocalizedStringForLocalizations   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyPreferredLocalizationsFromArray   func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyPrivateFrameworksURL              func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyResourceURL                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyResourceURLForLocalization        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyResourceURLInDirectory            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyResourceURLsOfType                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFBundleCopyResourceURLsOfTypeForLocalization func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourceURLsOfTypeInDirectory func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopyResourcesDirectoryURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopySharedFrameworksURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopySharedSupportURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCopySupportFilesDirectoryURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleCreateBundlesFromDirectory func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetAllBundles func() unsafe.Pointer
-	_fnCFBundleGetBundleWithIdentifier func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetDataPointerForName func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetDataPointersForNames func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFBundleGetDevelopmentRegion func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetFunctionPointerForName func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetFunctionPointersForNames func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFBundleGetIdentifier func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetInfoDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetLocalInfoDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetMainBundle func() unsafe.Pointer
-	_fnCFBundleGetPackageInfo func(unsafe.Pointer, *uint, *uint)
-	_fnCFBundleGetPackageInfoInDirectory func(unsafe.Pointer, *uint, *uint) uint8
-	_fnCFBundleGetPlugIn func(unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetTypeID func() uint
-	_fnCFBundleGetValueForInfoDictionaryKey func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFBundleGetVersionNumber func(unsafe.Pointer) uint
-	_fnCFBundleIsArchitectureLoadable func(int) uint8
-	_fnCFBundleIsExecutableLoadable func(unsafe.Pointer) uint8
-	_fnCFBundleIsExecutableLoadableForURL func(unsafe.Pointer) uint8
-	_fnCFBundleIsExecutableLoaded func(unsafe.Pointer) uint8
-	_fnCFBundleLoadExecutable func(unsafe.Pointer) uint8
-	_fnCFBundleLoadExecutableAndReturnError func(unsafe.Pointer, unsafe.Pointer) uint8
-// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
+	_fnCFBundleCopyResourceURLsOfTypeInDirectory     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopyResourcesDirectoryURL             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopySharedFrameworksURL               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopySharedSupportURL                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCopySupportFilesDirectoryURL          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCreate                                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleCreateBundlesFromDirectory            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetAllBundles                         func() unsafe.Pointer
+	_fnCFBundleGetBundleWithIdentifier               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetDataPointerForName                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetDataPointersForNames               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFBundleGetDevelopmentRegion                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetFunctionPointerForName             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetFunctionPointersForNames           func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFBundleGetIdentifier                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetInfoDictionary                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetLocalInfoDictionary                func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetMainBundle                         func() unsafe.Pointer
+	_fnCFBundleGetPackageInfo                        func(unsafe.Pointer, *uint, *uint)
+	_fnCFBundleGetPackageInfoInDirectory             func(unsafe.Pointer, *uint, *uint) uint8
+	_fnCFBundleGetPlugIn                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetTypeID                             func() uint
+	_fnCFBundleGetValueForInfoDictionaryKey          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFBundleGetVersionNumber                      func(unsafe.Pointer) uint
+	_fnCFBundleIsArchitectureLoadable                func(int) uint8
+	_fnCFBundleIsExecutableLoadable                  func(unsafe.Pointer) uint8
+	_fnCFBundleIsExecutableLoadableForURL            func(unsafe.Pointer) uint8
+	_fnCFBundleIsExecutableLoaded                    func(unsafe.Pointer) uint8
+	_fnCFBundleLoadExecutable                        func(unsafe.Pointer) uint8
+	_fnCFBundleLoadExecutableAndReturnError          func(unsafe.Pointer, unsafe.Pointer) uint8
+	// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
 	_fnCFBundleOpenBundleResourceFiles func(unsafe.Pointer, *int, *int) int
-// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
-	_fnCFBundleOpenBundleResourceMap func(unsafe.Pointer) int
-	_fnCFBundlePreflightExecutable func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFBundleUnloadExecutable func(unsafe.Pointer)
-	_fnCFByteOrderGetCurrent func() int
-	_fnCFCalendarCopyCurrent func() unsafe.Pointer
-	_fnCFCalendarCopyLocale func(unsafe.Pointer) unsafe.Pointer
-	_fnCFCalendarCopyTimeZone func(unsafe.Pointer) unsafe.Pointer
-	_fnCFCalendarCreateWithIdentifier func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFCalendarGetFirstWeekday func(unsafe.Pointer) int
-	_fnCFCalendarGetIdentifier func(unsafe.Pointer) unsafe.Pointer
-	_fnCFCalendarGetMaximumRangeOfUnit func(unsafe.Pointer, CFCalendarUnit) CFRange
-	_fnCFCalendarGetMinimumDaysInFirstWeek func(unsafe.Pointer) int
-	_fnCFCalendarGetMinimumRangeOfUnit func(unsafe.Pointer, CFCalendarUnit) CFRange
-	_fnCFCalendarGetOrdinalityOfUnit func(unsafe.Pointer, CFCalendarUnit, CFCalendarUnit, float64) int
-	_fnCFCalendarGetRangeOfUnit func(unsafe.Pointer, CFCalendarUnit, CFCalendarUnit, float64) CFRange
-	_fnCFCalendarGetTimeRangeOfUnit func(unsafe.Pointer, CFCalendarUnit, float64, *float64, *float64) uint8
-	_fnCFCalendarGetTypeID func() uint
-	_fnCFCalendarSetFirstWeekday func(unsafe.Pointer, int)
-	_fnCFCalendarSetLocale func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFCalendarSetMinimumDaysInFirstWeek func(unsafe.Pointer, int)
-	_fnCFCalendarSetTimeZone func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFCharacterSetAddCharactersInRange func(unsafe.Pointer, CFRange)
-	_fnCFCharacterSetAddCharactersInString func(unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: The Carbon Resource Manager is deprecated. This should only be used to access Resource Manager-style resources in old bundles.
+	_fnCFBundleOpenBundleResourceMap            func(unsafe.Pointer) int
+	_fnCFBundlePreflightExecutable              func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFBundleUnloadExecutable                 func(unsafe.Pointer)
+	_fnCFByteOrderGetCurrent                    func() int
+	_fnCFCalendarCopyCurrent                    func() unsafe.Pointer
+	_fnCFCalendarCopyLocale                     func(unsafe.Pointer) unsafe.Pointer
+	_fnCFCalendarCopyTimeZone                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCFCalendarCreateWithIdentifier           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFCalendarGetFirstWeekday                func(unsafe.Pointer) int
+	_fnCFCalendarGetIdentifier                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFCalendarGetMaximumRangeOfUnit          func(unsafe.Pointer, CFCalendarUnit) CFRange
+	_fnCFCalendarGetMinimumDaysInFirstWeek      func(unsafe.Pointer) int
+	_fnCFCalendarGetMinimumRangeOfUnit          func(unsafe.Pointer, CFCalendarUnit) CFRange
+	_fnCFCalendarGetOrdinalityOfUnit            func(unsafe.Pointer, CFCalendarUnit, CFCalendarUnit, float64) int
+	_fnCFCalendarGetRangeOfUnit                 func(unsafe.Pointer, CFCalendarUnit, CFCalendarUnit, float64) CFRange
+	_fnCFCalendarGetTimeRangeOfUnit             func(unsafe.Pointer, CFCalendarUnit, float64, *float64, *float64) uint8
+	_fnCFCalendarGetTypeID                      func() uint
+	_fnCFCalendarSetFirstWeekday                func(unsafe.Pointer, int)
+	_fnCFCalendarSetLocale                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFCalendarSetMinimumDaysInFirstWeek      func(unsafe.Pointer, int)
+	_fnCFCalendarSetTimeZone                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFCharacterSetAddCharactersInRange       func(unsafe.Pointer, CFRange)
+	_fnCFCharacterSetAddCharactersInString      func(unsafe.Pointer, unsafe.Pointer)
 	_fnCFCharacterSetCreateBitmapRepresentation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFCharacterSetCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFCharacterSetCreateCopy                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	// @function CFCharacterSetCreateInvertedSet Creates a new immutable character set that is the invert of the specified character set. @param alloc The CFAllocator which should be used to allocate memory for the array and its storage for values. This parameter may be NULL in which case the current default CFAllocator is used. If this reference is not a valid CFAllocator, the behavior is undefined. @param theSet The CFCharacterSet which is to be inverted.  If this parameter is not a valid CFCharacterSet, the behavior is undefined. @result A reference to the new immutable CFCharacterSet.
-	_fnCFCharacterSetCreateInvertedSet func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFCharacterSetCreateMutable func(unsafe.Pointer) unsafe.Pointer
-	_fnCFCharacterSetCreateMutableCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFCharacterSetCreateInvertedSet              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFCharacterSetCreateMutable                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFCharacterSetCreateMutableCopy              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFCharacterSetCreateWithBitmapRepresentation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFCharacterSetCreateWithCharactersInRange func(unsafe.Pointer, CFRange) unsafe.Pointer
-	_fnCFCharacterSetCreateWithCharactersInString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFCharacterSetGetPredefined func(CFCharacterSetPredefinedSet) unsafe.Pointer
-	_fnCFCharacterSetGetTypeID func() uint
+	_fnCFCharacterSetCreateWithCharactersInRange    func(unsafe.Pointer, CFRange) unsafe.Pointer
+	_fnCFCharacterSetCreateWithCharactersInString   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFCharacterSetGetPredefined                  func(CFCharacterSetPredefinedSet) unsafe.Pointer
+	_fnCFCharacterSetGetTypeID                      func() uint
 	// @function CFCharacterSetHasMemberInPlane Reports whether or not the character set contains at least one member character in the specified plane. @param theSet  The character set to be checked for the membership.  If this parameter is not a valid CFCharacterSet, the behavior is undefined. @param thePlane  The plane number to be checked for the membership. The valid value range is from 0 to 16.  If the value is outside of the valid plane number range, the behavior is undefined.
-	_fnCFCharacterSetHasMemberInPlane func(unsafe.Pointer, int) uint8
-	_fnCFCharacterSetIntersect func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFCharacterSetInvert func(unsafe.Pointer)
+	_fnCFCharacterSetHasMemberInPlane  func(unsafe.Pointer, int) uint8
+	_fnCFCharacterSetIntersect         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFCharacterSetInvert            func(unsafe.Pointer)
 	_fnCFCharacterSetIsCharacterMember func(unsafe.Pointer, uint16) uint8
 	// @function CFCharacterSetIsLongCharacterMember Reports whether or not the UTF-32 character is in the character set. @param theSet The character set to be searched. If this parameter is not a valid CFCharacterSet, the behavior is undefined. @param theChar The UTF-32 character for which to test against the character set. @result true, if the value is in the character set, otherwise false.
 	_fnCFCharacterSetIsLongCharacterMember func(unsafe.Pointer, uint) uint8
 	// @function CFCharacterSetIsSupersetOfSet Reports whether or not the character set is a superset of the character set specified as the second parameter. @param theSet  The character set to be checked for the membership of theOtherSet. If this parameter is not a valid CFCharacterSet, the behavior is undefined. @param theOtherset  The character set to be checked whether or not it is a subset of theSet. If this parameter is not a valid CFCharacterSet, the behavior is undefined.
-	_fnCFCharacterSetIsSupersetOfSet func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFCharacterSetRemoveCharactersInRange func(unsafe.Pointer, CFRange)
-	_fnCFCharacterSetRemoveCharactersInString func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFCharacterSetUnion func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFConvertDoubleHostToSwapped func(float64) CFSwappedFloat64
-	_fnCFConvertDoubleSwappedToHost func(CFSwappedFloat64) float64
-	_fnCFConvertFloat32HostToSwapped func(float32) CFSwappedFloat32
-	_fnCFConvertFloat32SwappedToHost func(CFSwappedFloat32) float32
-	_fnCFConvertFloat64HostToSwapped func(float64) CFSwappedFloat64
-	_fnCFConvertFloat64SwappedToHost func(CFSwappedFloat64) float64
-	_fnCFConvertFloatHostToSwapped func(float32) CFSwappedFloat32
-	_fnCFConvertFloatSwappedToHost func(CFSwappedFloat32) float32
-	_fnCFCopyDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnCFCopyTypeIDDescription func(uint) unsafe.Pointer
-	_fnCFDataAppendBytes func(unsafe.Pointer, *uint8, int)
-	_fnCFDataCreate func(unsafe.Pointer, *uint8, int) unsafe.Pointer
-	_fnCFDataCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFDataCreateMutable func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCFDataCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFDataCreateWithBytesNoCopy func(unsafe.Pointer, *uint8, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFDataDeleteBytes func(unsafe.Pointer, CFRange)
-	_fnCFDataFind func(unsafe.Pointer, unsafe.Pointer, CFRange, CFDataSearchFlags) CFRange
-	_fnCFDataGetBytePtr func(unsafe.Pointer) *uint8
-	_fnCFDataGetBytes func(unsafe.Pointer, CFRange, *uint8)
-	_fnCFDataGetLength func(unsafe.Pointer) int
-	_fnCFDataGetMutableBytePtr func(unsafe.Pointer) *uint8
-	_fnCFDataGetTypeID func() uint
-	_fnCFDataIncreaseLength func(unsafe.Pointer, int)
-	_fnCFDataReplaceBytes func(unsafe.Pointer, CFRange, *uint8, int)
-	_fnCFDataSetLength func(unsafe.Pointer, int)
-	_fnCFDateCompare func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFComparisonResult
-	_fnCFDateCreate func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCFDateFormatterCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFDateFormatterCreate func(unsafe.Pointer, unsafe.Pointer, CFDateFormatterStyle, CFDateFormatterStyle) unsafe.Pointer
+	_fnCFCharacterSetIsSupersetOfSet               func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFCharacterSetRemoveCharactersInRange       func(unsafe.Pointer, CFRange)
+	_fnCFCharacterSetRemoveCharactersInString      func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFCharacterSetUnion                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFConvertDoubleHostToSwapped                func(float64) CFSwappedFloat64
+	_fnCFConvertDoubleSwappedToHost                func(CFSwappedFloat64) float64
+	_fnCFConvertFloat32HostToSwapped               func(float32) CFSwappedFloat32
+	_fnCFConvertFloat32SwappedToHost               func(CFSwappedFloat32) float32
+	_fnCFConvertFloat64HostToSwapped               func(float64) CFSwappedFloat64
+	_fnCFConvertFloat64SwappedToHost               func(CFSwappedFloat64) float64
+	_fnCFConvertFloatHostToSwapped                 func(float32) CFSwappedFloat32
+	_fnCFConvertFloatSwappedToHost                 func(CFSwappedFloat32) float32
+	_fnCFCopyDescription                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCFCopyTypeIDDescription                     func(uint) unsafe.Pointer
+	_fnCFDataAppendBytes                           func(unsafe.Pointer, *uint8, int)
+	_fnCFDataCreate                                func(unsafe.Pointer, *uint8, int) unsafe.Pointer
+	_fnCFDataCreateCopy                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFDataCreateMutable                         func(unsafe.Pointer, int) unsafe.Pointer
+	_fnCFDataCreateMutableCopy                     func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFDataCreateWithBytesNoCopy                 func(unsafe.Pointer, *uint8, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFDataDeleteBytes                           func(unsafe.Pointer, CFRange)
+	_fnCFDataFind                                  func(unsafe.Pointer, unsafe.Pointer, CFRange, CFDataSearchFlags) CFRange
+	_fnCFDataGetBytePtr                            func(unsafe.Pointer) *uint8
+	_fnCFDataGetBytes                              func(unsafe.Pointer, CFRange, *uint8)
+	_fnCFDataGetLength                             func(unsafe.Pointer) int
+	_fnCFDataGetMutableBytePtr                     func(unsafe.Pointer) *uint8
+	_fnCFDataGetTypeID                             func() uint
+	_fnCFDataIncreaseLength                        func(unsafe.Pointer, int)
+	_fnCFDataReplaceBytes                          func(unsafe.Pointer, CFRange, *uint8, int)
+	_fnCFDataSetLength                             func(unsafe.Pointer, int)
+	_fnCFDateCompare                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFComparisonResult
+	_fnCFDateCreate                                func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCFDateFormatterCopyProperty                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFDateFormatterCreate                       func(unsafe.Pointer, unsafe.Pointer, CFDateFormatterStyle, CFDateFormatterStyle) unsafe.Pointer
 	_fnCFDateFormatterCreateDateFormatFromTemplate func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFDateFormatterCreateDateFromString func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFRange) unsafe.Pointer
-	_fnCFDateFormatterCreateISO8601Formatter func(unsafe.Pointer, CFISO8601DateFormatOptions) unsafe.Pointer
+	_fnCFDateFormatterCreateDateFromString         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFRange) unsafe.Pointer
+	_fnCFDateFormatterCreateISO8601Formatter       func(unsafe.Pointer, CFISO8601DateFormatOptions) unsafe.Pointer
 	_fnCFDateFormatterCreateStringWithAbsoluteTime func(unsafe.Pointer, unsafe.Pointer, float64) unsafe.Pointer
-	_fnCFDateFormatterCreateStringWithDate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFDateFormatterGetAbsoluteTimeFromString func(unsafe.Pointer, unsafe.Pointer, *CFRange, *float64) uint8
-	_fnCFDateFormatterGetDateStyle func(unsafe.Pointer) CFDateFormatterStyle
-	_fnCFDateFormatterGetFormat func(unsafe.Pointer) unsafe.Pointer
-	_fnCFDateFormatterGetLocale func(unsafe.Pointer) unsafe.Pointer
-	_fnCFDateFormatterGetTimeStyle func(unsafe.Pointer) CFDateFormatterStyle
-	_fnCFDateFormatterGetTypeID func() uint
-	_fnCFDateFormatterSetFormat func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFDateFormatterSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFDateGetAbsoluteTime func(unsafe.Pointer) float64
-	_fnCFDateGetTimeIntervalSinceDate func(unsafe.Pointer, unsafe.Pointer) float64
-	_fnCFDateGetTypeID func() uint
-	_fnCFDictionaryAddValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFDictionaryApplyFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFDictionaryContainsKey func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFDictionaryContainsValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFDictionaryCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, *CFDictionaryKeyCallBacks, *CFDictionaryValueCallBacks) unsafe.Pointer
-	_fnCFDictionaryCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFDictionaryCreateMutable func(unsafe.Pointer, int, *CFDictionaryKeyCallBacks, *CFDictionaryValueCallBacks) unsafe.Pointer
-	_fnCFDictionaryCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFDictionaryGetCount func(unsafe.Pointer) int
-	_fnCFDictionaryGetCountOfKey func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCFDictionaryGetCountOfValue func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCFDictionaryGetKeysAndValues func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFDictionaryGetTypeID func() uint
-	_fnCFDictionaryGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFDictionaryGetValueIfPresent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFDictionaryRemoveAllValues func(unsafe.Pointer)
-	_fnCFDictionaryRemoveValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFDictionaryReplaceValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFDictionarySetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFEqual func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFErrorCopyDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorCopyFailureReason func(unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorCopyRecoverySuggestion func(unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorCopyUserInfo func(unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorCreate func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorCreateWithUserInfoKeysAndValues func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFErrorGetCode func(unsafe.Pointer) int
-	_fnCFErrorGetDomain func(unsafe.Pointer) unsafe.Pointer
-	_fnCFErrorGetTypeID func() uint
-	_fnCFFileDescriptorCreate func(unsafe.Pointer, int, uint8, unsafe.Pointer, *CFFileDescriptorContext) unsafe.Pointer
-	_fnCFFileDescriptorCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFFileDescriptorDisableCallBacks func(unsafe.Pointer, uint)
-	_fnCFFileDescriptorEnableCallBacks func(unsafe.Pointer, uint)
-	_fnCFFileDescriptorGetContext func(unsafe.Pointer, *CFFileDescriptorContext)
-	_fnCFFileDescriptorGetNativeDescriptor func(unsafe.Pointer) int
-	_fnCFFileDescriptorGetTypeID func() uint
-	_fnCFFileDescriptorInvalidate func(unsafe.Pointer)
-	_fnCFFileDescriptorIsValid func(unsafe.Pointer) uint8
-	_fnCFFileSecurityClearProperties func(unsafe.Pointer, CFFileSecurityClearOptions) uint8
-	_fnCFFileSecurityCopyAccessControlList func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFFileSecurityCopyGroupUUID func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFFileSecurityCopyOwnerUUID func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFFileSecurityCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnCFFileSecurityCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFFileSecurityGetGroup func(unsafe.Pointer, *uint) uint8
-	_fnCFFileSecurityGetMode func(unsafe.Pointer, *uint16) uint8
-	_fnCFFileSecurityGetOwner func(unsafe.Pointer, *uint) uint8
-	_fnCFFileSecurityGetTypeID func() uint
-	_fnCFFileSecuritySetAccessControlList func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFFileSecuritySetGroup func(unsafe.Pointer, uint) uint8
-	_fnCFFileSecuritySetGroupUUID func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFFileSecuritySetMode func(unsafe.Pointer, uint16) uint8
-	_fnCFFileSecuritySetOwner func(unsafe.Pointer, uint) uint8
-	_fnCFFileSecuritySetOwnerUUID func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFGetAllocator func(unsafe.Pointer) unsafe.Pointer
-	_fnCFGetRetainCount func(unsafe.Pointer) int
-	_fnCFGetTypeID func(unsafe.Pointer) uint
-// Deprecated: Use CFCalendar or NSCalendar API instead
+	_fnCFDateFormatterCreateStringWithDate         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFDateFormatterGetAbsoluteTimeFromString    func(unsafe.Pointer, unsafe.Pointer, *CFRange, *float64) uint8
+	_fnCFDateFormatterGetDateStyle                 func(unsafe.Pointer) CFDateFormatterStyle
+	_fnCFDateFormatterGetFormat                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFDateFormatterGetLocale                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFDateFormatterGetTimeStyle                 func(unsafe.Pointer) CFDateFormatterStyle
+	_fnCFDateFormatterGetTypeID                    func() uint
+	_fnCFDateFormatterSetFormat                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFDateFormatterSetProperty                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFDateGetAbsoluteTime                       func(unsafe.Pointer) float64
+	_fnCFDateGetTimeIntervalSinceDate              func(unsafe.Pointer, unsafe.Pointer) float64
+	_fnCFDateGetTypeID                             func() uint
+	_fnCFDictionaryAddValue                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFDictionaryApplyFunction                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFDictionaryContainsKey                     func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFDictionaryContainsValue                   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFDictionaryCreate                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, *CFDictionaryKeyCallBacks, *CFDictionaryValueCallBacks) unsafe.Pointer
+	_fnCFDictionaryCreateCopy                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFDictionaryCreateMutable                   func(unsafe.Pointer, int, *CFDictionaryKeyCallBacks, *CFDictionaryValueCallBacks) unsafe.Pointer
+	_fnCFDictionaryCreateMutableCopy               func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFDictionaryGetCount                        func(unsafe.Pointer) int
+	_fnCFDictionaryGetCountOfKey                   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCFDictionaryGetCountOfValue                 func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCFDictionaryGetKeysAndValues                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFDictionaryGetTypeID                       func() uint
+	_fnCFDictionaryGetValue                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFDictionaryGetValueIfPresent               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFDictionaryRemoveAllValues                 func(unsafe.Pointer)
+	_fnCFDictionaryRemoveValue                     func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFDictionaryReplaceValue                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFDictionarySetValue                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFEqual                                     func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFErrorCopyDescription                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorCopyFailureReason                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorCopyRecoverySuggestion               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorCopyUserInfo                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorCreate                               func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorCreateWithUserInfoKeysAndValues      func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFErrorGetCode                              func(unsafe.Pointer) int
+	_fnCFErrorGetDomain                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFErrorGetTypeID                            func() uint
+	_fnCFFileDescriptorCreate                      func(unsafe.Pointer, int, uint8, unsafe.Pointer, *CFFileDescriptorContext) unsafe.Pointer
+	_fnCFFileDescriptorCreateRunLoopSource         func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFFileDescriptorDisableCallBacks            func(unsafe.Pointer, uint)
+	_fnCFFileDescriptorEnableCallBacks             func(unsafe.Pointer, uint)
+	_fnCFFileDescriptorGetContext                  func(unsafe.Pointer, *CFFileDescriptorContext)
+	_fnCFFileDescriptorGetNativeDescriptor         func(unsafe.Pointer) int
+	_fnCFFileDescriptorGetTypeID                   func() uint
+	_fnCFFileDescriptorInvalidate                  func(unsafe.Pointer)
+	_fnCFFileDescriptorIsValid                     func(unsafe.Pointer) uint8
+	_fnCFFileSecurityClearProperties               func(unsafe.Pointer, CFFileSecurityClearOptions) uint8
+	_fnCFFileSecurityCopyAccessControlList         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFFileSecurityCopyGroupUUID                 func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFFileSecurityCopyOwnerUUID                 func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFFileSecurityCreate                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCFFileSecurityCreateCopy                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFFileSecurityGetGroup                      func(unsafe.Pointer, *uint) uint8
+	_fnCFFileSecurityGetMode                       func(unsafe.Pointer, *uint16) uint8
+	_fnCFFileSecurityGetOwner                      func(unsafe.Pointer, *uint) uint8
+	_fnCFFileSecurityGetTypeID                     func() uint
+	_fnCFFileSecuritySetAccessControlList          func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFFileSecuritySetGroup                      func(unsafe.Pointer, uint) uint8
+	_fnCFFileSecuritySetGroupUUID                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFFileSecuritySetMode                       func(unsafe.Pointer, uint16) uint8
+	_fnCFFileSecuritySetOwner                      func(unsafe.Pointer, uint) uint8
+	_fnCFFileSecuritySetOwnerUUID                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFGetAllocator                              func(unsafe.Pointer) unsafe.Pointer
+	_fnCFGetRetainCount                            func(unsafe.Pointer) int
+	_fnCFGetTypeID                                 func(unsafe.Pointer) uint
+	// Deprecated: Use CFCalendar or NSCalendar API instead
 	_fnCFGregorianDateGetAbsoluteTime func(CFGregorianDate, unsafe.Pointer) float64
-// Deprecated: Use CFCalendar or NSCalendar API instead
-	_fnCFGregorianDateIsValid func(CFGregorianDate, uint) uint8
-	_fnCFHash func(unsafe.Pointer) uint
-	_fnCFLocaleCopyAvailableLocaleIdentifiers func() unsafe.Pointer
-	_fnCFLocaleCopyCommonISOCurrencyCodes func() unsafe.Pointer
-	_fnCFLocaleCopyCurrent func() unsafe.Pointer
-	_fnCFLocaleCopyDisplayNameForPropertyValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCopyISOCountryCodes func() unsafe.Pointer
-	_fnCFLocaleCopyISOCurrencyCodes func() unsafe.Pointer
-	_fnCFLocaleCopyISOLanguageCodes func() unsafe.Pointer
-	_fnCFLocaleCopyPreferredLanguages func() unsafe.Pointer
-	_fnCFLocaleCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCreateCanonicalLanguageIdentifierFromString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	_fnCFGregorianDateIsValid                                        func(CFGregorianDate, uint) uint8
+	_fnCFHash                                                        func(unsafe.Pointer) uint
+	_fnCFLocaleCopyAvailableLocaleIdentifiers                        func() unsafe.Pointer
+	_fnCFLocaleCopyCommonISOCurrencyCodes                            func() unsafe.Pointer
+	_fnCFLocaleCopyCurrent                                           func() unsafe.Pointer
+	_fnCFLocaleCopyDisplayNameForPropertyValue                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCopyISOCountryCodes                                   func() unsafe.Pointer
+	_fnCFLocaleCopyISOCurrencyCodes                                  func() unsafe.Pointer
+	_fnCFLocaleCopyISOLanguageCodes                                  func() unsafe.Pointer
+	_fnCFLocaleCopyPreferredLanguages                                func() unsafe.Pointer
+	_fnCFLocaleCreate                                                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCreateCanonicalLanguageIdentifierFromString           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes func(unsafe.Pointer, int16, int16) unsafe.Pointer
-	_fnCFLocaleCreateCanonicalLocaleIdentifierFromString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCreateComponentsFromLocaleIdentifier func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCreateLocaleIdentifierFromComponents func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleCreateLocaleIdentifierFromWindowsLocaleCode func(unsafe.Pointer, uint32) unsafe.Pointer
-	_fnCFLocaleGetIdentifier func(unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleGetLanguageCharacterDirection func(unsafe.Pointer) CFLocaleLanguageDirection
-	_fnCFLocaleGetLanguageLineDirection func(unsafe.Pointer) CFLocaleLanguageDirection
-	_fnCFLocaleGetSystem func() unsafe.Pointer
-	_fnCFLocaleGetTypeID func() uint
-	_fnCFLocaleGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFLocaleGetWindowsLocaleCodeFromLocaleIdentifier func(unsafe.Pointer) uint32
-	_fnCFMachPortCreate func(unsafe.Pointer, unsafe.Pointer, *CFMachPortContext, *uint8) unsafe.Pointer
-	_fnCFMachPortCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFMachPortCreateWithPort func(unsafe.Pointer, uint, unsafe.Pointer, *CFMachPortContext, *uint8) unsafe.Pointer
-	_fnCFMachPortGetContext func(unsafe.Pointer, *CFMachPortContext)
-	_fnCFMachPortGetInvalidationCallBack func(unsafe.Pointer) unsafe.Pointer
-	_fnCFMachPortGetPort func(unsafe.Pointer) uint
-	_fnCFMachPortGetTypeID func() uint
-	_fnCFMachPortInvalidate func(unsafe.Pointer)
-	_fnCFMachPortIsValid func(unsafe.Pointer) uint8
-	_fnCFMachPortSetInvalidationCallBack func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFMakeCollectable func(unsafe.Pointer) unsafe.Pointer
-	_fnCFMessagePortCreateLocal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFMessagePortContext, *uint8) unsafe.Pointer
-	_fnCFMessagePortCreateRemote func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFMessagePortCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFMessagePortGetContext func(unsafe.Pointer, *CFMessagePortContext)
-	_fnCFMessagePortGetInvalidationCallBack func(unsafe.Pointer) unsafe.Pointer
-	_fnCFMessagePortGetName func(unsafe.Pointer) unsafe.Pointer
-	_fnCFMessagePortGetTypeID func() uint
-	_fnCFMessagePortInvalidate func(unsafe.Pointer)
-	_fnCFMessagePortIsRemote func(unsafe.Pointer) uint8
-	_fnCFMessagePortIsValid func(unsafe.Pointer) uint8
-	_fnCFMessagePortSendRequest func(unsafe.Pointer, int, unsafe.Pointer, float64, float64, unsafe.Pointer, unsafe.Pointer) int
-	_fnCFMessagePortSetDispatchQueue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFMessagePortSetInvalidationCallBack func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFMessagePortSetName func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFNotificationCenterAddObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFNotificationSuspensionBehavior)
-	_fnCFNotificationCenterGetDarwinNotifyCenter func() unsafe.Pointer
-	_fnCFNotificationCenterGetDistributedCenter func() unsafe.Pointer
-	_fnCFNotificationCenterGetLocalCenter func() unsafe.Pointer
-	_fnCFNotificationCenterGetTypeID func() uint
-	_fnCFNotificationCenterPostNotification func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8)
-	_fnCFNotificationCenterPostNotificationWithOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint)
-	_fnCFNotificationCenterRemoveEveryObserver func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFNotificationCenterRemoveObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFNullGetTypeID func() uint
-	_fnCFNumberCompare func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFComparisonResult
-	_fnCFNumberCreate func(unsafe.Pointer, CFNumberType, unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterCreate func(unsafe.Pointer, unsafe.Pointer, CFNumberFormatterStyle) unsafe.Pointer
-	_fnCFNumberFormatterCreateNumberFromString func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFRange, uint) unsafe.Pointer
-	_fnCFNumberFormatterCreateStringWithNumber func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterCreateStringWithValue func(unsafe.Pointer, unsafe.Pointer, CFNumberType, unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterGetDecimalInfoForCurrencyCode func(unsafe.Pointer, *int32, *float64) uint8
-	_fnCFNumberFormatterGetFormat func(unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterGetLocale func(unsafe.Pointer) unsafe.Pointer
-	_fnCFNumberFormatterGetStyle func(unsafe.Pointer) CFNumberFormatterStyle
-	_fnCFNumberFormatterGetTypeID func() uint
-	_fnCFNumberFormatterGetValueFromString func(unsafe.Pointer, unsafe.Pointer, *CFRange, CFNumberType, unsafe.Pointer) uint8
-	_fnCFNumberFormatterSetFormat func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFNumberFormatterSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFNumberGetByteSize func(unsafe.Pointer) int
-	_fnCFNumberGetType func(unsafe.Pointer) CFNumberType
-	_fnCFNumberGetTypeID func() uint
-	_fnCFNumberGetValue func(unsafe.Pointer, CFNumberType, unsafe.Pointer) uint8
-	_fnCFNumberIsFloatType func(unsafe.Pointer) uint8
-	_fnCFPlugInAddInstanceForFactory func(unsafe.Pointer)
-	_fnCFPlugInCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInFindFactoriesForPlugInType func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInGetBundle func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInGetTypeID func() uint
-	_fnCFPlugInInstanceCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceCreateWithInstanceDataSize func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetFactoryName func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetInstanceData func(unsafe.Pointer) unsafe.Pointer
-	_fnCFPlugInInstanceGetInterfaceFunctionTable func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInInstanceGetTypeID func() uint
-	_fnCFPlugInIsLoadOnDemand func(unsafe.Pointer) uint8
-	_fnCFPlugInRegisterFactoryFunction func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRegisterFactoryFunctionByName func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRegisterPlugInType func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPlugInRemoveInstanceForFactory func(unsafe.Pointer)
-	_fnCFPlugInSetLoadOnDemand func(unsafe.Pointer, uint8)
-	_fnCFPlugInUnregisterFactory func(unsafe.Pointer) uint8
-	_fnCFPlugInUnregisterPlugInType func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPreferencesAddSuitePreferencesToApp func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesAppSynchronize func(unsafe.Pointer) uint8
-	_fnCFPreferencesAppValueIsForced func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPreferencesCopyAppValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Unsupported API
-	_fnCFPreferencesCopyApplicationList func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPreferencesCopyKeyList func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPreferencesCopyMultiple func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPreferencesCopyValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPreferencesGetAppBooleanValue func(unsafe.Pointer, unsafe.Pointer, *uint8) uint8
-	_fnCFPreferencesGetAppIntegerValue func(unsafe.Pointer, unsafe.Pointer, *uint8) int
+	_fnCFLocaleCreateCanonicalLocaleIdentifierFromString             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCreateComponentsFromLocaleIdentifier                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCreateCopy                                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCreateLocaleIdentifierFromComponents                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleCreateLocaleIdentifierFromWindowsLocaleCode           func(unsafe.Pointer, uint32) unsafe.Pointer
+	_fnCFLocaleGetIdentifier                                         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleGetLanguageCharacterDirection                         func(unsafe.Pointer) CFLocaleLanguageDirection
+	_fnCFLocaleGetLanguageLineDirection                              func(unsafe.Pointer) CFLocaleLanguageDirection
+	_fnCFLocaleGetSystem                                             func() unsafe.Pointer
+	_fnCFLocaleGetTypeID                                             func() uint
+	_fnCFLocaleGetValue                                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFLocaleGetWindowsLocaleCodeFromLocaleIdentifier              func(unsafe.Pointer) uint32
+	_fnCFMachPortCreate                                              func(unsafe.Pointer, unsafe.Pointer, *CFMachPortContext, *uint8) unsafe.Pointer
+	_fnCFMachPortCreateRunLoopSource                                 func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFMachPortCreateWithPort                                      func(unsafe.Pointer, uint, unsafe.Pointer, *CFMachPortContext, *uint8) unsafe.Pointer
+	_fnCFMachPortGetContext                                          func(unsafe.Pointer, *CFMachPortContext)
+	_fnCFMachPortGetInvalidationCallBack                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFMachPortGetPort                                             func(unsafe.Pointer) uint
+	_fnCFMachPortGetTypeID                                           func() uint
+	_fnCFMachPortInvalidate                                          func(unsafe.Pointer)
+	_fnCFMachPortIsValid                                             func(unsafe.Pointer) uint8
+	_fnCFMachPortSetInvalidationCallBack                             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFMakeCollectable                                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFMessagePortCreateLocal                                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFMessagePortContext, *uint8) unsafe.Pointer
+	_fnCFMessagePortCreateRemote                                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFMessagePortCreateRunLoopSource                              func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFMessagePortGetContext                                       func(unsafe.Pointer, *CFMessagePortContext)
+	_fnCFMessagePortGetInvalidationCallBack                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFMessagePortGetName                                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFMessagePortGetTypeID                                        func() uint
+	_fnCFMessagePortInvalidate                                       func(unsafe.Pointer)
+	_fnCFMessagePortIsRemote                                         func(unsafe.Pointer) uint8
+	_fnCFMessagePortIsValid                                          func(unsafe.Pointer) uint8
+	_fnCFMessagePortSendRequest                                      func(unsafe.Pointer, int, unsafe.Pointer, float64, float64, unsafe.Pointer, unsafe.Pointer) int
+	_fnCFMessagePortSetDispatchQueue                                 func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFMessagePortSetInvalidationCallBack                          func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFMessagePortSetName                                          func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFNotificationCenterAddObserver                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFNotificationSuspensionBehavior)
+	_fnCFNotificationCenterGetDarwinNotifyCenter                     func() unsafe.Pointer
+	_fnCFNotificationCenterGetDistributedCenter                      func() unsafe.Pointer
+	_fnCFNotificationCenterGetLocalCenter                            func() unsafe.Pointer
+	_fnCFNotificationCenterGetTypeID                                 func() uint
+	_fnCFNotificationCenterPostNotification                          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8)
+	_fnCFNotificationCenterPostNotificationWithOptions               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint)
+	_fnCFNotificationCenterRemoveEveryObserver                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFNotificationCenterRemoveObserver                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFNullGetTypeID                                               func() uint
+	_fnCFNumberCompare                                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFComparisonResult
+	_fnCFNumberCreate                                                func(unsafe.Pointer, CFNumberType, unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterCopyProperty                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterCreate                                       func(unsafe.Pointer, unsafe.Pointer, CFNumberFormatterStyle) unsafe.Pointer
+	_fnCFNumberFormatterCreateNumberFromString                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CFRange, uint) unsafe.Pointer
+	_fnCFNumberFormatterCreateStringWithNumber                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterCreateStringWithValue                        func(unsafe.Pointer, unsafe.Pointer, CFNumberType, unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterGetDecimalInfoForCurrencyCode                func(unsafe.Pointer, *int32, *float64) uint8
+	_fnCFNumberFormatterGetFormat                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterGetLocale                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFNumberFormatterGetStyle                                     func(unsafe.Pointer) CFNumberFormatterStyle
+	_fnCFNumberFormatterGetTypeID                                    func() uint
+	_fnCFNumberFormatterGetValueFromString                           func(unsafe.Pointer, unsafe.Pointer, *CFRange, CFNumberType, unsafe.Pointer) uint8
+	_fnCFNumberFormatterSetFormat                                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFNumberFormatterSetProperty                                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFNumberGetByteSize                                           func(unsafe.Pointer) int
+	_fnCFNumberGetType                                               func(unsafe.Pointer) CFNumberType
+	_fnCFNumberGetTypeID                                             func() uint
+	_fnCFNumberGetValue                                              func(unsafe.Pointer, CFNumberType, unsafe.Pointer) uint8
+	_fnCFNumberIsFloatType                                           func(unsafe.Pointer) uint8
+	_fnCFPlugInAddInstanceForFactory                                 func(unsafe.Pointer)
+	_fnCFPlugInCreate                                                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInFindFactoriesForPlugInType                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn                    func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInGetBundle                                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInGetTypeID                                             func() uint
+	_fnCFPlugInInstanceCreate                                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInInstanceCreateWithInstanceDataSize                    func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInInstanceGetFactoryName                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInInstanceGetInstanceData                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFPlugInInstanceGetInterfaceFunctionTable                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInInstanceGetTypeID                                     func() uint
+	_fnCFPlugInIsLoadOnDemand                                        func(unsafe.Pointer) uint8
+	_fnCFPlugInRegisterFactoryFunction                               func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRegisterFactoryFunctionByName                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRegisterPlugInType                                    func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPlugInRemoveInstanceForFactory                              func(unsafe.Pointer)
+	_fnCFPlugInSetLoadOnDemand                                       func(unsafe.Pointer, uint8)
+	_fnCFPlugInUnregisterFactory                                     func(unsafe.Pointer) uint8
+	_fnCFPlugInUnregisterPlugInType                                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPreferencesAddSuitePreferencesToApp                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFPreferencesAppSynchronize                                   func(unsafe.Pointer) uint8
+	_fnCFPreferencesAppValueIsForced                                 func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPreferencesCopyAppValue                                     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Unsupported API
+	_fnCFPreferencesCopyApplicationList           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPreferencesCopyKeyList                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPreferencesCopyMultiple                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPreferencesCopyValue                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFPreferencesGetAppBooleanValue            func(unsafe.Pointer, unsafe.Pointer, *uint8) uint8
+	_fnCFPreferencesGetAppIntegerValue            func(unsafe.Pointer, unsafe.Pointer, *uint8) int
 	_fnCFPreferencesRemoveSuitePreferencesFromApp func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesSetAppValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesSetMultiple func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesSetValue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFPreferencesSynchronize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFPropertyListCreateData func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFPropertyListCreateDeepCopy func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-// Deprecated: Use CFPropertyListCreateWithStream instead.
+	_fnCFPreferencesSetAppValue                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFPreferencesSetMultiple                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFPreferencesSetValue                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFPreferencesSynchronize                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFPropertyListCreateData                   func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCFPropertyListCreateDeepCopy               func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	// Deprecated: Use CFPropertyListCreateWithStream instead.
 	_fnCFPropertyListCreateFromStream func(unsafe.Pointer, unsafe.Pointer, int, uint, *CFPropertyListFormat, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use CFPropertyListCreateWithData instead.
+	// Deprecated: Use CFPropertyListCreateWithData instead.
 	_fnCFPropertyListCreateFromXMLData func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFPropertyListCreateWithData func(unsafe.Pointer, unsafe.Pointer, uint, *CFPropertyListFormat, unsafe.Pointer) unsafe.Pointer
-	_fnCFPropertyListCreateWithStream func(unsafe.Pointer, unsafe.Pointer, int, uint, *CFPropertyListFormat, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use CFPropertyListCreateData instead.
+	_fnCFPropertyListCreateWithData    func(unsafe.Pointer, unsafe.Pointer, uint, *CFPropertyListFormat, unsafe.Pointer) unsafe.Pointer
+	_fnCFPropertyListCreateWithStream  func(unsafe.Pointer, unsafe.Pointer, int, uint, *CFPropertyListFormat, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use CFPropertyListCreateData instead.
 	_fnCFPropertyListCreateXMLData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFPropertyListIsValid func(unsafe.Pointer, CFPropertyListFormat) uint8
-	_fnCFPropertyListWrite func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, uint, unsafe.Pointer) int
-// Deprecated: Use CFPropertyListWrite instead.
-	_fnCFPropertyListWriteToStream func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, unsafe.Pointer) int
-	_fnCFRangeMake func(int, int) CFRange
-	_fnCFReadStreamClose func(unsafe.Pointer)
-	_fnCFReadStreamCopyDispatchQueue func(unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCopyError func(unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCreateWithBytesNoCopy func(unsafe.Pointer, *uint8, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamCreateWithFile func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFReadStreamGetBuffer func(unsafe.Pointer, int, *int) *uint8
-	_fnCFReadStreamGetError func(unsafe.Pointer) CFStreamError
-	_fnCFReadStreamGetStatus func(unsafe.Pointer) CFStreamStatus
-	_fnCFReadStreamGetTypeID func() uint
-	_fnCFReadStreamHasBytesAvailable func(unsafe.Pointer) uint8
-	_fnCFReadStreamOpen func(unsafe.Pointer) uint8
-	_fnCFReadStreamRead func(unsafe.Pointer, *uint8, int) int
-	_fnCFReadStreamScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFReadStreamSetClient func(unsafe.Pointer, uint, unsafe.Pointer, *CFStreamClientContext) uint8
-	_fnCFReadStreamSetDispatchQueue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFReadStreamSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFReadStreamUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRelease func(unsafe.Pointer)
-	_fnCFRetain func(unsafe.Pointer) unsafe.Pointer
-	_fnCFRunLoopAddCommonMode func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopAddObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopAddSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopAddTimer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopContainsObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFRunLoopContainsSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFRunLoopContainsTimer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFRunLoopCopyAllModes func(unsafe.Pointer) unsafe.Pointer
-	_fnCFRunLoopCopyCurrentMode func(unsafe.Pointer) unsafe.Pointer
-	_fnCFRunLoopGetCurrent func() unsafe.Pointer
-	_fnCFRunLoopGetMain func() unsafe.Pointer
-	_fnCFRunLoopGetNextTimerFireDate func(unsafe.Pointer, unsafe.Pointer) float64
-	_fnCFRunLoopGetTypeID func() uint
-	_fnCFRunLoopIsWaiting func(unsafe.Pointer) uint8
-	_fnCFRunLoopObserverCreate func(unsafe.Pointer, uint, uint8, int, unsafe.Pointer, *CFRunLoopObserverContext) unsafe.Pointer
-	_fnCFRunLoopObserverCreateWithHandler func(unsafe.Pointer, uint, uint8, int, objc.Block) unsafe.Pointer
-	_fnCFRunLoopObserverDoesRepeat func(unsafe.Pointer) uint8
-	_fnCFRunLoopObserverGetActivities func(unsafe.Pointer) uint
-	_fnCFRunLoopObserverGetContext func(unsafe.Pointer, *CFRunLoopObserverContext)
-	_fnCFRunLoopObserverGetOrder func(unsafe.Pointer) int
-	_fnCFRunLoopObserverGetTypeID func() uint
-	_fnCFRunLoopObserverInvalidate func(unsafe.Pointer)
-	_fnCFRunLoopObserverIsValid func(unsafe.Pointer) uint8
-	_fnCFRunLoopPerformBlock func(unsafe.Pointer, unsafe.Pointer, objc.Block)
-	_fnCFRunLoopRemoveObserver func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopRemoveSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopRemoveTimer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFRunLoopRun func()
-	_fnCFRunLoopRunInMode func(unsafe.Pointer, float64, uint8) CFRunLoopRunResult
-	_fnCFRunLoopSourceCreate func(unsafe.Pointer, int, *CFRunLoopSourceContext) unsafe.Pointer
-	_fnCFRunLoopSourceGetContext func(unsafe.Pointer, *CFRunLoopSourceContext)
-	_fnCFRunLoopSourceGetOrder func(unsafe.Pointer) int
-	_fnCFRunLoopSourceGetTypeID func() uint
-	_fnCFRunLoopSourceInvalidate func(unsafe.Pointer)
-	_fnCFRunLoopSourceIsValid func(unsafe.Pointer) uint8
-	_fnCFRunLoopSourceSignal func(unsafe.Pointer)
-	_fnCFRunLoopStop func(unsafe.Pointer)
-	_fnCFRunLoopTimerCreate func(unsafe.Pointer, float64, float64, uint, int, unsafe.Pointer, *CFRunLoopTimerContext) unsafe.Pointer
-	_fnCFRunLoopTimerCreateWithHandler func(unsafe.Pointer, float64, float64, uint, int, objc.Block) unsafe.Pointer
-	_fnCFRunLoopTimerDoesRepeat func(unsafe.Pointer) uint8
-	_fnCFRunLoopTimerGetContext func(unsafe.Pointer, *CFRunLoopTimerContext)
-	_fnCFRunLoopTimerGetInterval func(unsafe.Pointer) float64
-	_fnCFRunLoopTimerGetNextFireDate func(unsafe.Pointer) float64
-	_fnCFRunLoopTimerGetOrder func(unsafe.Pointer) int
-	_fnCFRunLoopTimerGetTolerance func(unsafe.Pointer) float64
-	_fnCFRunLoopTimerGetTypeID func() uint
-	_fnCFRunLoopTimerInvalidate func(unsafe.Pointer)
-	_fnCFRunLoopTimerIsValid func(unsafe.Pointer) uint8
-	_fnCFRunLoopTimerSetNextFireDate func(unsafe.Pointer, float64)
-	_fnCFRunLoopTimerSetTolerance func(unsafe.Pointer, float64)
-	_fnCFRunLoopWakeUp func(unsafe.Pointer)
-	_fnCFSetAddValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFSetApplyFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFSetContainsValue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFSetCreate func(unsafe.Pointer, unsafe.Pointer, int, *CFSetCallBacks) unsafe.Pointer
-	_fnCFSetCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFSetCreateMutable func(unsafe.Pointer, int, *CFSetCallBacks) unsafe.Pointer
-	_fnCFSetCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFSetGetCount func(unsafe.Pointer) int
-	_fnCFSetGetCountOfValue func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCFSetGetTypeID func() uint
-	_fnCFSetGetValue func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFSetGetValueIfPresent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFSetGetValues func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFSetRemoveAllValues func(unsafe.Pointer)
-	_fnCFSetRemoveValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFSetReplaceValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFSetSetValue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFShow func(unsafe.Pointer)
-	_fnCFShowStr func(unsafe.Pointer)
-	_fnCFSocketConnectToAddress func(unsafe.Pointer, unsafe.Pointer, float64) CFSocketError
-	_fnCFSocketCopyAddress func(unsafe.Pointer) unsafe.Pointer
-	_fnCFSocketCopyPeerAddress func(unsafe.Pointer) unsafe.Pointer
-	_fnCFSocketCopyRegisteredSocketSignature func(*CFSocketSignature, float64, unsafe.Pointer, *CFSocketSignature, unsafe.Pointer) CFSocketError
-	_fnCFSocketCopyRegisteredValue func(*CFSocketSignature, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFSocketError
-	_fnCFSocketCreate func(unsafe.Pointer, int, int, int, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
+	_fnCFPropertyListIsValid       func(unsafe.Pointer, CFPropertyListFormat) uint8
+	_fnCFPropertyListWrite         func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, uint, unsafe.Pointer) int
+	// Deprecated: Use CFPropertyListWrite instead.
+	_fnCFPropertyListWriteToStream              func(unsafe.Pointer, unsafe.Pointer, CFPropertyListFormat, unsafe.Pointer) int
+	_fnCFRangeMake                              func(int, int) CFRange
+	_fnCFReadStreamClose                        func(unsafe.Pointer)
+	_fnCFReadStreamCopyDispatchQueue            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCopyError                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCopyProperty                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCreateWithBytesNoCopy        func(unsafe.Pointer, *uint8, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamCreateWithFile               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFReadStreamGetBuffer                    func(unsafe.Pointer, int, *int) *uint8
+	_fnCFReadStreamGetError                     func(unsafe.Pointer) CFStreamError
+	_fnCFReadStreamGetStatus                    func(unsafe.Pointer) CFStreamStatus
+	_fnCFReadStreamGetTypeID                    func() uint
+	_fnCFReadStreamHasBytesAvailable            func(unsafe.Pointer) uint8
+	_fnCFReadStreamOpen                         func(unsafe.Pointer) uint8
+	_fnCFReadStreamRead                         func(unsafe.Pointer, *uint8, int) int
+	_fnCFReadStreamScheduleWithRunLoop          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFReadStreamSetClient                    func(unsafe.Pointer, uint, unsafe.Pointer, *CFStreamClientContext) uint8
+	_fnCFReadStreamSetDispatchQueue             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFReadStreamSetProperty                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFReadStreamUnscheduleFromRunLoop        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRelease                                func(unsafe.Pointer)
+	_fnCFRetain                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCFRunLoopAddCommonMode                   func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopAddObserver                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopAddSource                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopAddTimer                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopContainsObserver                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFRunLoopContainsSource                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFRunLoopContainsTimer                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFRunLoopCopyAllModes                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFRunLoopCopyCurrentMode                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCFRunLoopGetCurrent                      func() unsafe.Pointer
+	_fnCFRunLoopGetMain                         func() unsafe.Pointer
+	_fnCFRunLoopGetNextTimerFireDate            func(unsafe.Pointer, unsafe.Pointer) float64
+	_fnCFRunLoopGetTypeID                       func() uint
+	_fnCFRunLoopIsWaiting                       func(unsafe.Pointer) uint8
+	_fnCFRunLoopObserverCreate                  func(unsafe.Pointer, uint, uint8, int, unsafe.Pointer, *CFRunLoopObserverContext) unsafe.Pointer
+	_fnCFRunLoopObserverCreateWithHandler       func(unsafe.Pointer, uint, uint8, int, objc.Block) unsafe.Pointer
+	_fnCFRunLoopObserverDoesRepeat              func(unsafe.Pointer) uint8
+	_fnCFRunLoopObserverGetActivities           func(unsafe.Pointer) uint
+	_fnCFRunLoopObserverGetContext              func(unsafe.Pointer, *CFRunLoopObserverContext)
+	_fnCFRunLoopObserverGetOrder                func(unsafe.Pointer) int
+	_fnCFRunLoopObserverGetTypeID               func() uint
+	_fnCFRunLoopObserverInvalidate              func(unsafe.Pointer)
+	_fnCFRunLoopObserverIsValid                 func(unsafe.Pointer) uint8
+	_fnCFRunLoopPerformBlock                    func(unsafe.Pointer, unsafe.Pointer, objc.Block)
+	_fnCFRunLoopRemoveObserver                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopRemoveSource                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopRemoveTimer                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFRunLoopRun                             func()
+	_fnCFRunLoopRunInMode                       func(unsafe.Pointer, float64, uint8) CFRunLoopRunResult
+	_fnCFRunLoopSourceCreate                    func(unsafe.Pointer, int, *CFRunLoopSourceContext) unsafe.Pointer
+	_fnCFRunLoopSourceGetContext                func(unsafe.Pointer, *CFRunLoopSourceContext)
+	_fnCFRunLoopSourceGetOrder                  func(unsafe.Pointer) int
+	_fnCFRunLoopSourceGetTypeID                 func() uint
+	_fnCFRunLoopSourceInvalidate                func(unsafe.Pointer)
+	_fnCFRunLoopSourceIsValid                   func(unsafe.Pointer) uint8
+	_fnCFRunLoopSourceSignal                    func(unsafe.Pointer)
+	_fnCFRunLoopStop                            func(unsafe.Pointer)
+	_fnCFRunLoopTimerCreate                     func(unsafe.Pointer, float64, float64, uint, int, unsafe.Pointer, *CFRunLoopTimerContext) unsafe.Pointer
+	_fnCFRunLoopTimerCreateWithHandler          func(unsafe.Pointer, float64, float64, uint, int, objc.Block) unsafe.Pointer
+	_fnCFRunLoopTimerDoesRepeat                 func(unsafe.Pointer) uint8
+	_fnCFRunLoopTimerGetContext                 func(unsafe.Pointer, *CFRunLoopTimerContext)
+	_fnCFRunLoopTimerGetInterval                func(unsafe.Pointer) float64
+	_fnCFRunLoopTimerGetNextFireDate            func(unsafe.Pointer) float64
+	_fnCFRunLoopTimerGetOrder                   func(unsafe.Pointer) int
+	_fnCFRunLoopTimerGetTolerance               func(unsafe.Pointer) float64
+	_fnCFRunLoopTimerGetTypeID                  func() uint
+	_fnCFRunLoopTimerInvalidate                 func(unsafe.Pointer)
+	_fnCFRunLoopTimerIsValid                    func(unsafe.Pointer) uint8
+	_fnCFRunLoopTimerSetNextFireDate            func(unsafe.Pointer, float64)
+	_fnCFRunLoopTimerSetTolerance               func(unsafe.Pointer, float64)
+	_fnCFRunLoopWakeUp                          func(unsafe.Pointer)
+	_fnCFSetAddValue                            func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFSetApplyFunction                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFSetContainsValue                       func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFSetCreate                              func(unsafe.Pointer, unsafe.Pointer, int, *CFSetCallBacks) unsafe.Pointer
+	_fnCFSetCreateCopy                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFSetCreateMutable                       func(unsafe.Pointer, int, *CFSetCallBacks) unsafe.Pointer
+	_fnCFSetCreateMutableCopy                   func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFSetGetCount                            func(unsafe.Pointer) int
+	_fnCFSetGetCountOfValue                     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCFSetGetTypeID                           func() uint
+	_fnCFSetGetValue                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFSetGetValueIfPresent                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFSetGetValues                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFSetRemoveAllValues                     func(unsafe.Pointer)
+	_fnCFSetRemoveValue                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFSetReplaceValue                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFSetSetValue                            func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFShow                                   func(unsafe.Pointer)
+	_fnCFShowStr                                func(unsafe.Pointer)
+	_fnCFSocketConnectToAddress                 func(unsafe.Pointer, unsafe.Pointer, float64) CFSocketError
+	_fnCFSocketCopyAddress                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCFSocketCopyPeerAddress                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFSocketCopyRegisteredSocketSignature    func(*CFSocketSignature, float64, unsafe.Pointer, *CFSocketSignature, unsafe.Pointer) CFSocketError
+	_fnCFSocketCopyRegisteredValue              func(*CFSocketSignature, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFSocketError
+	_fnCFSocketCreate                           func(unsafe.Pointer, int, int, int, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
 	_fnCFSocketCreateConnectedToSocketSignature func(unsafe.Pointer, *CFSocketSignature, uint, unsafe.Pointer, *CFSocketContext, float64) unsafe.Pointer
-	_fnCFSocketCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFSocketCreateWithNative func(unsafe.Pointer, int, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
-	_fnCFSocketCreateWithSocketSignature func(unsafe.Pointer, *CFSocketSignature, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
-	_fnCFSocketDisableCallBacks func(unsafe.Pointer, uint)
-	_fnCFSocketEnableCallBacks func(unsafe.Pointer, uint)
-	_fnCFSocketGetContext func(unsafe.Pointer, *CFSocketContext)
+	_fnCFSocketCreateRunLoopSource              func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFSocketCreateWithNative                 func(unsafe.Pointer, int, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
+	_fnCFSocketCreateWithSocketSignature        func(unsafe.Pointer, *CFSocketSignature, uint, unsafe.Pointer, *CFSocketContext) unsafe.Pointer
+	_fnCFSocketDisableCallBacks                 func(unsafe.Pointer, uint)
+	_fnCFSocketEnableCallBacks                  func(unsafe.Pointer, uint)
+	_fnCFSocketGetContext                       func(unsafe.Pointer, *CFSocketContext)
 	_fnCFSocketGetDefaultNameRegistryPortNumber func() uint16
-	_fnCFSocketGetNative func(unsafe.Pointer) int
-	_fnCFSocketGetSocketFlags func(unsafe.Pointer) uint
-	_fnCFSocketGetTypeID func() uint
-	_fnCFSocketInvalidate func(unsafe.Pointer)
-	_fnCFSocketIsValid func(unsafe.Pointer) uint8
-	_fnCFSocketRegisterSocketSignature func(*CFSocketSignature, float64, unsafe.Pointer, *CFSocketSignature) CFSocketError
-	_fnCFSocketRegisterValue func(*CFSocketSignature, float64, unsafe.Pointer, unsafe.Pointer) CFSocketError
-	_fnCFSocketSendData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64) CFSocketError
-	_fnCFSocketSetAddress func(unsafe.Pointer, unsafe.Pointer) CFSocketError
+	_fnCFSocketGetNative                        func(unsafe.Pointer) int
+	_fnCFSocketGetSocketFlags                   func(unsafe.Pointer) uint
+	_fnCFSocketGetTypeID                        func() uint
+	_fnCFSocketInvalidate                       func(unsafe.Pointer)
+	_fnCFSocketIsValid                          func(unsafe.Pointer) uint8
+	_fnCFSocketRegisterSocketSignature          func(*CFSocketSignature, float64, unsafe.Pointer, *CFSocketSignature) CFSocketError
+	_fnCFSocketRegisterValue                    func(*CFSocketSignature, float64, unsafe.Pointer, unsafe.Pointer) CFSocketError
+	_fnCFSocketSendData                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64) CFSocketError
+	_fnCFSocketSetAddress                       func(unsafe.Pointer, unsafe.Pointer) CFSocketError
 	_fnCFSocketSetDefaultNameRegistryPortNumber func(uint16)
-	_fnCFSocketSetSocketFlags func(unsafe.Pointer, uint)
-	_fnCFSocketUnregister func(*CFSocketSignature, float64, unsafe.Pointer) CFSocketError
-	_fnCFStreamCreateBoundPair func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
-// Deprecated: Use nw_connection_t in Network framework instead
+	_fnCFSocketSetSocketFlags                   func(unsafe.Pointer, uint)
+	_fnCFSocketUnregister                       func(*CFSocketSignature, float64, unsafe.Pointer) CFSocketError
+	_fnCFStreamCreateBoundPair                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
+	// Deprecated: Use nw_connection_t in Network framework instead
 	_fnCFStreamCreatePairWithPeerSocketSignature func(unsafe.Pointer, *CFSocketSignature, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_connection_t in Network framework instead
+	// Deprecated: Use nw_connection_t in Network framework instead
 	_fnCFStreamCreatePairWithSocket func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: Use nw_connection_t in Network framework instead
-	_fnCFStreamCreatePairWithSocketToHost func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringAppend func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringAppendCString func(unsafe.Pointer, string, uint)
-	_fnCFStringAppendCharacters func(unsafe.Pointer, *uint16, int)
-	_fnCFStringAppendFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringAppendFormatAndArguments func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string)
-	_fnCFStringAppendPascalString func(unsafe.Pointer, *uint8, uint)
-	_fnCFStringCapitalize func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringCompare func(unsafe.Pointer, unsafe.Pointer, CFStringCompareFlags) CFComparisonResult
-	_fnCFStringCompareWithOptions func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) CFComparisonResult
-	_fnCFStringCompareWithOptionsAndLocale func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, unsafe.Pointer) CFComparisonResult
-	_fnCFStringConvertEncodingToIANACharSetName func(uint) unsafe.Pointer
-	_fnCFStringConvertEncodingToNSStringEncoding func(uint) uint
-	_fnCFStringConvertEncodingToWindowsCodepage func(uint) uint
-	_fnCFStringConvertIANACharSetNameToEncoding func(unsafe.Pointer) uint
-	_fnCFStringConvertNSStringEncodingToEncoding func(uint) uint
-	_fnCFStringConvertWindowsCodepageToEncoding func(uint) uint
-	_fnCFStringCreateArrayBySeparatingStrings func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateArrayWithFindResults func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) unsafe.Pointer
-	_fnCFStringCreateByCombiningStrings func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateExternalRepresentation func(unsafe.Pointer, unsafe.Pointer, uint, uint8) unsafe.Pointer
-	_fnCFStringCreateFromExternalRepresentation func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-	_fnCFStringCreateMutable func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCFStringCreateMutableCopy func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateMutableWithExternalCharactersNoCopy func(unsafe.Pointer, *uint16, int, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateStringWithValidatedFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use nw_connection_t in Network framework instead
+	_fnCFStreamCreatePairWithSocketToHost                  func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringAppend                                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringAppendCString                               func(unsafe.Pointer, string, uint)
+	_fnCFStringAppendCharacters                            func(unsafe.Pointer, *uint16, int)
+	_fnCFStringAppendFormat                                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringAppendFormatAndArguments                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string)
+	_fnCFStringAppendPascalString                          func(unsafe.Pointer, *uint8, uint)
+	_fnCFStringCapitalize                                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringCompare                                     func(unsafe.Pointer, unsafe.Pointer, CFStringCompareFlags) CFComparisonResult
+	_fnCFStringCompareWithOptions                          func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) CFComparisonResult
+	_fnCFStringCompareWithOptionsAndLocale                 func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, unsafe.Pointer) CFComparisonResult
+	_fnCFStringConvertEncodingToIANACharSetName            func(uint) unsafe.Pointer
+	_fnCFStringConvertEncodingToNSStringEncoding           func(uint) uint
+	_fnCFStringConvertEncodingToWindowsCodepage            func(uint) uint
+	_fnCFStringConvertIANACharSetNameToEncoding            func(unsafe.Pointer) uint
+	_fnCFStringConvertNSStringEncodingToEncoding           func(uint) uint
+	_fnCFStringConvertWindowsCodepageToEncoding            func(uint) uint
+	_fnCFStringCreateArrayBySeparatingStrings              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateArrayWithFindResults                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) unsafe.Pointer
+	_fnCFStringCreateByCombiningStrings                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateCopy                                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateExternalRepresentation                func(unsafe.Pointer, unsafe.Pointer, uint, uint8) unsafe.Pointer
+	_fnCFStringCreateFromExternalRepresentation            func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	_fnCFStringCreateMutable                               func(unsafe.Pointer, int) unsafe.Pointer
+	_fnCFStringCreateMutableCopy                           func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateMutableWithExternalCharactersNoCopy   func(unsafe.Pointer, *uint16, int, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateStringWithValidatedFormat             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFStringCreateStringWithValidatedFormatAndArguments func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithBytes func(unsafe.Pointer, *uint8, int, uint, uint8) unsafe.Pointer
-	_fnCFStringCreateWithBytesNoCopy func(unsafe.Pointer, *uint8, int, uint, uint8, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithCString func(unsafe.Pointer, string, uint) unsafe.Pointer
-	_fnCFStringCreateWithCStringNoCopy func(unsafe.Pointer, string, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithCharacters func(unsafe.Pointer, *uint16, int) unsafe.Pointer
-	_fnCFStringCreateWithCharactersNoCopy func(unsafe.Pointer, *uint16, int, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithFileSystemRepresentation func(unsafe.Pointer, string) unsafe.Pointer
-	_fnCFStringCreateWithFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithFormatAndArguments func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
-	_fnCFStringCreateWithPascalString func(unsafe.Pointer, *uint8, uint) unsafe.Pointer
-	_fnCFStringCreateWithPascalStringNoCopy func(unsafe.Pointer, *uint8, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringCreateWithSubstring func(unsafe.Pointer, unsafe.Pointer, CFRange) unsafe.Pointer
-	_fnCFStringDelete func(unsafe.Pointer, CFRange)
-	_fnCFStringFind func(unsafe.Pointer, unsafe.Pointer, CFStringCompareFlags) CFRange
-	_fnCFStringFindAndReplace func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) int
+	_fnCFStringCreateWithBytes                             func(unsafe.Pointer, *uint8, int, uint, uint8) unsafe.Pointer
+	_fnCFStringCreateWithBytesNoCopy                       func(unsafe.Pointer, *uint8, int, uint, uint8, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateWithCString                           func(unsafe.Pointer, string, uint) unsafe.Pointer
+	_fnCFStringCreateWithCStringNoCopy                     func(unsafe.Pointer, string, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateWithCharacters                        func(unsafe.Pointer, *uint16, int) unsafe.Pointer
+	_fnCFStringCreateWithCharactersNoCopy                  func(unsafe.Pointer, *uint16, int, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateWithFileSystemRepresentation          func(unsafe.Pointer, string) unsafe.Pointer
+	_fnCFStringCreateWithFormat                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateWithFormatAndArguments                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
+	_fnCFStringCreateWithPascalString                      func(unsafe.Pointer, *uint8, uint) unsafe.Pointer
+	_fnCFStringCreateWithPascalStringNoCopy                func(unsafe.Pointer, *uint8, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringCreateWithSubstring                         func(unsafe.Pointer, unsafe.Pointer, CFRange) unsafe.Pointer
+	_fnCFStringDelete                                      func(unsafe.Pointer, CFRange)
+	_fnCFStringFind                                        func(unsafe.Pointer, unsafe.Pointer, CFStringCompareFlags) CFRange
+	_fnCFStringFindAndReplace                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags) int
 	// @function CFStringFindCharacterFromSet Query the range of the first character contained in the specified character set. @param theString The CFString which is to be searched.  If this parameter is not a valid CFString, the behavior is undefined. @param theSet The CFCharacterSet against which the membership of characters is checked.  If this parameter is not a valid CFCharacterSet, the behavior is undefined. @param rangeToSearch The range of characters within the string to search. If the range location or end point (defined by the location plus length minus 1) are outside the index space of the string (0 to N-1 inclusive, where N is the length of the string), the behavior is undefined. If the range length is negative, the behavior is undefined. The range may be empty (length 0), in which case no search is performed. @param searchOptions The bitwise-or'ed option flags to control the search behavior.  The supported options are kCFCompareBackwards andkCFCompareAnchored. If other option flags are specified, the behavior is undefined. @param result The pointer to a CFRange supplied by the caller in which the search result is stored.  Note that the length of this range can be more than 1, if for instance the result is a composed character. If a pointer to an invalid memory is specified, the behavior is undefined. @result true, if at least a character which is a member of the character set is found and result is filled, otherwise, false.
-	_fnCFStringFindCharacterFromSet func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, *CFRange) uint8
-	_fnCFStringFindWithOptions func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, *CFRange) uint8
-	_fnCFStringFindWithOptionsAndLocale func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, unsafe.Pointer, *CFRange) uint8
-	_fnCFStringFold func(unsafe.Pointer, CFStringCompareFlags, unsafe.Pointer)
-	_fnCFStringGetBytes func(unsafe.Pointer, CFRange, uint, uint8, uint8, *uint8, int, *int) int
-	_fnCFStringGetCString func(unsafe.Pointer, string, int, uint) uint8
-	_fnCFStringGetCStringPtr func(unsafe.Pointer, uint) string
-	_fnCFStringGetCharacterAtIndex func(unsafe.Pointer, int) uint16
-	_fnCFStringGetCharacterFromInlineBuffer func(*CFStringInlineBuffer, int) uint16
-	_fnCFStringGetCharacters func(unsafe.Pointer, CFRange, *uint16)
-	_fnCFStringGetCharactersPtr func(unsafe.Pointer) *uint16
-	_fnCFStringGetDoubleValue func(unsafe.Pointer) float64
-	_fnCFStringGetFastestEncoding func(unsafe.Pointer) uint
-	_fnCFStringGetFileSystemRepresentation func(unsafe.Pointer, string, int) uint8
-	_fnCFStringGetHyphenationLocationBeforeIndex func(unsafe.Pointer, int, CFRange, uint, unsafe.Pointer, *uint) int
-	_fnCFStringGetIntValue func(unsafe.Pointer) int
-	_fnCFStringGetLength func(unsafe.Pointer) int
-	_fnCFStringGetLineBounds func(unsafe.Pointer, CFRange, *int, *int, *int)
-	_fnCFStringGetListOfAvailableEncodings func() *uint
-	_fnCFStringGetLongCharacterForSurrogatePair func(uint16, uint16) uint
-	_fnCFStringGetMaximumSizeForEncoding func(int, uint) int
+	_fnCFStringFindCharacterFromSet                     func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, *CFRange) uint8
+	_fnCFStringFindWithOptions                          func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, *CFRange) uint8
+	_fnCFStringFindWithOptionsAndLocale                 func(unsafe.Pointer, unsafe.Pointer, CFRange, CFStringCompareFlags, unsafe.Pointer, *CFRange) uint8
+	_fnCFStringFold                                     func(unsafe.Pointer, CFStringCompareFlags, unsafe.Pointer)
+	_fnCFStringGetBytes                                 func(unsafe.Pointer, CFRange, uint, uint8, uint8, *uint8, int, *int) int
+	_fnCFStringGetCString                               func(unsafe.Pointer, string, int, uint) uint8
+	_fnCFStringGetCStringPtr                            func(unsafe.Pointer, uint) string
+	_fnCFStringGetCharacterAtIndex                      func(unsafe.Pointer, int) uint16
+	_fnCFStringGetCharacterFromInlineBuffer             func(*CFStringInlineBuffer, int) uint16
+	_fnCFStringGetCharacters                            func(unsafe.Pointer, CFRange, *uint16)
+	_fnCFStringGetCharactersPtr                         func(unsafe.Pointer) *uint16
+	_fnCFStringGetDoubleValue                           func(unsafe.Pointer) float64
+	_fnCFStringGetFastestEncoding                       func(unsafe.Pointer) uint
+	_fnCFStringGetFileSystemRepresentation              func(unsafe.Pointer, string, int) uint8
+	_fnCFStringGetHyphenationLocationBeforeIndex        func(unsafe.Pointer, int, CFRange, uint, unsafe.Pointer, *uint) int
+	_fnCFStringGetIntValue                              func(unsafe.Pointer) int
+	_fnCFStringGetLength                                func(unsafe.Pointer) int
+	_fnCFStringGetLineBounds                            func(unsafe.Pointer, CFRange, *int, *int, *int)
+	_fnCFStringGetListOfAvailableEncodings              func() *uint
+	_fnCFStringGetLongCharacterForSurrogatePair         func(uint16, uint16) uint
+	_fnCFStringGetMaximumSizeForEncoding                func(int, uint) int
 	_fnCFStringGetMaximumSizeOfFileSystemRepresentation func(unsafe.Pointer) int
-	_fnCFStringGetMostCompatibleMacStringEncoding func(uint) uint
-	_fnCFStringGetNameOfEncoding func(uint) unsafe.Pointer
-	_fnCFStringGetParagraphBounds func(unsafe.Pointer, CFRange, *int, *int, *int)
-	_fnCFStringGetPascalString func(unsafe.Pointer, *uint8, int, uint) uint8
-	_fnCFStringGetPascalStringPtr func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnCFStringGetMostCompatibleMacStringEncoding       func(uint) uint
+	_fnCFStringGetNameOfEncoding                        func(uint) unsafe.Pointer
+	_fnCFStringGetParagraphBounds                       func(unsafe.Pointer, CFRange, *int, *int, *int)
+	_fnCFStringGetPascalString                          func(unsafe.Pointer, *uint8, int, uint) uint8
+	_fnCFStringGetPascalStringPtr                       func(unsafe.Pointer, uint) unsafe.Pointer
 	// @function CFStringGetRangeOfComposedCharactersAtIndex Returns the range of the composed character sequence at the specified index. @param theString The CFString which is to be searched.  If this parameter is not a valid CFString, the behavior is undefined. @param theIndex The index of the character contained in the composed character sequence.  If the index is outside the index space of the string (0 to N-1 inclusive, where N is the length of the string), the behavior is undefined. @result The range of the composed character sequence.
 	_fnCFStringGetRangeOfComposedCharactersAtIndex func(unsafe.Pointer, int) CFRange
-	_fnCFStringGetSmallestEncoding func(unsafe.Pointer) uint
-	_fnCFStringGetSurrogatePairForLongCharacter func(uint, *uint16) uint8
-	_fnCFStringGetSystemEncoding func() uint
-	_fnCFStringGetTypeID func() uint
-	_fnCFStringHasPrefix func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFStringHasSuffix func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFStringInitInlineBuffer func(unsafe.Pointer, *CFStringInlineBuffer, CFRange)
-	_fnCFStringInsert func(unsafe.Pointer, int, unsafe.Pointer)
-	_fnCFStringIsEncodingAvailable func(uint) uint8
-	_fnCFStringIsHyphenationAvailableForLocale func(unsafe.Pointer) uint8
-	_fnCFStringIsSurrogateHighCharacter func(uint16) uint8
-	_fnCFStringIsSurrogateLowCharacter func(uint16) uint8
-	_fnCFStringLowercase func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringGetSmallestEncoding                 func(unsafe.Pointer) uint
+	_fnCFStringGetSurrogatePairForLongCharacter    func(uint, *uint16) uint8
+	_fnCFStringGetSystemEncoding                   func() uint
+	_fnCFStringGetTypeID                           func() uint
+	_fnCFStringHasPrefix                           func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFStringHasSuffix                           func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFStringInitInlineBuffer                    func(unsafe.Pointer, *CFStringInlineBuffer, CFRange)
+	_fnCFStringInsert                              func(unsafe.Pointer, int, unsafe.Pointer)
+	_fnCFStringIsEncodingAvailable                 func(uint) uint8
+	_fnCFStringIsHyphenationAvailableForLocale     func(unsafe.Pointer) uint8
+	_fnCFStringIsSurrogateHighCharacter            func(uint16) uint8
+	_fnCFStringIsSurrogateLowCharacter             func(uint16) uint8
+	_fnCFStringLowercase                           func(unsafe.Pointer, unsafe.Pointer)
 	// @function CFStringNormalize Normalizes the string into the specified form as described in Unicode Technical Report #15. @param theString  The string which is to be normalized.  If this parameter is not a valid mutable CFString, the behavior is undefined. @param theForm  The form into which the string is to be normalized. If this parameter is not a valid CFStringNormalizationForm value, the behavior is undefined.
-	_fnCFStringNormalize func(unsafe.Pointer, CFStringNormalizationForm)
-	_fnCFStringPad func(unsafe.Pointer, unsafe.Pointer, int, int)
-	_fnCFStringReplace func(unsafe.Pointer, CFRange, unsafe.Pointer)
-	_fnCFStringReplaceAll func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringSetExternalCharactersNoCopy func(unsafe.Pointer, *uint16, int, int)
-	_fnCFStringTokenizerAdvanceToNextToken func(unsafe.Pointer) CFStringTokenizerTokenType
-	_fnCFStringTokenizerCopyBestStringLanguage func(unsafe.Pointer, CFRange) unsafe.Pointer
-	_fnCFStringTokenizerCopyCurrentTokenAttribute func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnCFStringTokenizerCreate func(unsafe.Pointer, unsafe.Pointer, CFRange, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFStringTokenizerGetCurrentSubTokens func(unsafe.Pointer, *CFRange, int, unsafe.Pointer) int
-	_fnCFStringTokenizerGetCurrentTokenRange func(unsafe.Pointer) CFRange
-	_fnCFStringTokenizerGetTypeID func() uint
-	_fnCFStringTokenizerGoToTokenAtIndex func(unsafe.Pointer, int) CFStringTokenizerTokenType
-	_fnCFStringTokenizerSetString func(unsafe.Pointer, unsafe.Pointer, CFRange)
-	_fnCFStringTransform func(unsafe.Pointer, *CFRange, unsafe.Pointer, uint8) uint8
-	_fnCFStringTrim func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFStringTrimWhitespace func(unsafe.Pointer)
-	_fnCFStringUppercase func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFSwapInt16 func(uint16) uint16
-	_fnCFSwapInt16BigToHost func(uint16) uint16
-	_fnCFSwapInt16HostToBig func(uint16) uint16
-	_fnCFSwapInt16HostToLittle func(uint16) uint16
-	_fnCFSwapInt16LittleToHost func(uint16) uint16
-	_fnCFSwapInt32 func(uint32) uint32
-	_fnCFSwapInt32BigToHost func(uint32) uint32
-	_fnCFSwapInt32HostToBig func(uint32) uint32
-	_fnCFSwapInt32HostToLittle func(uint32) uint32
-	_fnCFSwapInt32LittleToHost func(uint32) uint32
-	_fnCFSwapInt64 func(uint64) uint64
-	_fnCFSwapInt64BigToHost func(uint64) uint64
-	_fnCFSwapInt64HostToBig func(uint64) uint64
-	_fnCFSwapInt64HostToLittle func(uint64) uint64
-	_fnCFSwapInt64LittleToHost func(uint64) uint64
-	_fnCFTimeZoneCopyAbbreviation func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCFTimeZoneCopyAbbreviationDictionary func() unsafe.Pointer
-	_fnCFTimeZoneCopyDefault func() unsafe.Pointer
-	_fnCFTimeZoneCopyKnownNames func() unsafe.Pointer
-	_fnCFTimeZoneCopyLocalizedName func(unsafe.Pointer, CFTimeZoneNameStyle, unsafe.Pointer) unsafe.Pointer
-	_fnCFTimeZoneCopySystem func() unsafe.Pointer
-	_fnCFTimeZoneCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFTimeZoneCreateWithName func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
-	_fnCFTimeZoneCreateWithTimeIntervalFromGMT func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnCFTimeZoneGetData func(unsafe.Pointer) unsafe.Pointer
-	_fnCFTimeZoneGetDaylightSavingTimeOffset func(unsafe.Pointer, float64) float64
-	_fnCFTimeZoneGetName func(unsafe.Pointer) unsafe.Pointer
+	_fnCFStringNormalize                             func(unsafe.Pointer, CFStringNormalizationForm)
+	_fnCFStringPad                                   func(unsafe.Pointer, unsafe.Pointer, int, int)
+	_fnCFStringReplace                               func(unsafe.Pointer, CFRange, unsafe.Pointer)
+	_fnCFStringReplaceAll                            func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringSetExternalCharactersNoCopy           func(unsafe.Pointer, *uint16, int, int)
+	_fnCFStringTokenizerAdvanceToNextToken           func(unsafe.Pointer) CFStringTokenizerTokenType
+	_fnCFStringTokenizerCopyBestStringLanguage       func(unsafe.Pointer, CFRange) unsafe.Pointer
+	_fnCFStringTokenizerCopyCurrentTokenAttribute    func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnCFStringTokenizerCreate                       func(unsafe.Pointer, unsafe.Pointer, CFRange, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCFStringTokenizerGetCurrentSubTokens          func(unsafe.Pointer, *CFRange, int, unsafe.Pointer) int
+	_fnCFStringTokenizerGetCurrentTokenRange         func(unsafe.Pointer) CFRange
+	_fnCFStringTokenizerGetTypeID                    func() uint
+	_fnCFStringTokenizerGoToTokenAtIndex             func(unsafe.Pointer, int) CFStringTokenizerTokenType
+	_fnCFStringTokenizerSetString                    func(unsafe.Pointer, unsafe.Pointer, CFRange)
+	_fnCFStringTransform                             func(unsafe.Pointer, *CFRange, unsafe.Pointer, uint8) uint8
+	_fnCFStringTrim                                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFStringTrimWhitespace                        func(unsafe.Pointer)
+	_fnCFStringUppercase                             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFSwapInt16                                   func(uint16) uint16
+	_fnCFSwapInt16BigToHost                          func(uint16) uint16
+	_fnCFSwapInt16HostToBig                          func(uint16) uint16
+	_fnCFSwapInt16HostToLittle                       func(uint16) uint16
+	_fnCFSwapInt16LittleToHost                       func(uint16) uint16
+	_fnCFSwapInt32                                   func(uint32) uint32
+	_fnCFSwapInt32BigToHost                          func(uint32) uint32
+	_fnCFSwapInt32HostToBig                          func(uint32) uint32
+	_fnCFSwapInt32HostToLittle                       func(uint32) uint32
+	_fnCFSwapInt32LittleToHost                       func(uint32) uint32
+	_fnCFSwapInt64                                   func(uint64) uint64
+	_fnCFSwapInt64BigToHost                          func(uint64) uint64
+	_fnCFSwapInt64HostToBig                          func(uint64) uint64
+	_fnCFSwapInt64HostToLittle                       func(uint64) uint64
+	_fnCFSwapInt64LittleToHost                       func(uint64) uint64
+	_fnCFTimeZoneCopyAbbreviation                    func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCFTimeZoneCopyAbbreviationDictionary          func() unsafe.Pointer
+	_fnCFTimeZoneCopyDefault                         func() unsafe.Pointer
+	_fnCFTimeZoneCopyKnownNames                      func() unsafe.Pointer
+	_fnCFTimeZoneCopyLocalizedName                   func(unsafe.Pointer, CFTimeZoneNameStyle, unsafe.Pointer) unsafe.Pointer
+	_fnCFTimeZoneCopySystem                          func() unsafe.Pointer
+	_fnCFTimeZoneCreate                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFTimeZoneCreateWithName                      func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnCFTimeZoneCreateWithTimeIntervalFromGMT       func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnCFTimeZoneGetData                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFTimeZoneGetDaylightSavingTimeOffset         func(unsafe.Pointer, float64) float64
+	_fnCFTimeZoneGetName                             func(unsafe.Pointer) unsafe.Pointer
 	_fnCFTimeZoneGetNextDaylightSavingTimeTransition func(unsafe.Pointer, float64) float64
-	_fnCFTimeZoneGetSecondsFromGMT func(unsafe.Pointer, float64) float64
-	_fnCFTimeZoneGetTypeID func() uint
-	_fnCFTimeZoneIsDaylightSavingTime func(unsafe.Pointer, float64) uint8
-	_fnCFTimeZoneResetSystem func()
-	_fnCFTimeZoneSetAbbreviationDictionary func(unsafe.Pointer)
-	_fnCFTimeZoneSetDefault func(unsafe.Pointer)
-	_fnCFTreeAppendChild func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFTreeApplyFunctionToChildren func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFTreeCreate func(unsafe.Pointer, *CFTreeContext) unsafe.Pointer
-	_fnCFTreeFindRoot func(unsafe.Pointer) unsafe.Pointer
-	_fnCFTreeGetChildAtIndex func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCFTreeGetChildCount func(unsafe.Pointer) int
-	_fnCFTreeGetChildren func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFTreeGetContext func(unsafe.Pointer, *CFTreeContext)
-	_fnCFTreeGetFirstChild func(unsafe.Pointer) unsafe.Pointer
-	_fnCFTreeGetNextSibling func(unsafe.Pointer) unsafe.Pointer
-	_fnCFTreeGetParent func(unsafe.Pointer) unsafe.Pointer
-	_fnCFTreeGetTypeID func() uint
-	_fnCFTreeInsertSibling func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFTreePrependChild func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFTreeRemove func(unsafe.Pointer)
-	_fnCFTreeRemoveAllChildren func(unsafe.Pointer)
-	_fnCFTreeSetContext func(unsafe.Pointer, *CFTreeContext)
-	_fnCFTreeSortChildren func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFURLCanBeDecomposed func(unsafe.Pointer) uint8
-	_fnCFURLClearResourcePropertyCache func(unsafe.Pointer)
-	_fnCFURLClearResourcePropertyCacheForKey func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFURLCopyAbsoluteURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyFileSystemPath func(unsafe.Pointer, CFURLPathStyle) unsafe.Pointer
-	_fnCFURLCopyFragment func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyHostName func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyLastPathComponent func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyNetLocation func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: The CFURLCopyParameterString function is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, CFURLCopyParameterString will always return NULL, and the CFURLCopyPath(), CFURLCopyStrictPath(), and CFURLCopyFileSystemPath() functions will return the complete path including the semicolon separator and params component if the URL string contains them.
+	_fnCFTimeZoneGetSecondsFromGMT                   func(unsafe.Pointer, float64) float64
+	_fnCFTimeZoneGetTypeID                           func() uint
+	_fnCFTimeZoneIsDaylightSavingTime                func(unsafe.Pointer, float64) uint8
+	_fnCFTimeZoneResetSystem                         func()
+	_fnCFTimeZoneSetAbbreviationDictionary           func(unsafe.Pointer)
+	_fnCFTimeZoneSetDefault                          func(unsafe.Pointer)
+	_fnCFTreeAppendChild                             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFTreeApplyFunctionToChildren                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFTreeCreate                                  func(unsafe.Pointer, *CFTreeContext) unsafe.Pointer
+	_fnCFTreeFindRoot                                func(unsafe.Pointer) unsafe.Pointer
+	_fnCFTreeGetChildAtIndex                         func(unsafe.Pointer, int) unsafe.Pointer
+	_fnCFTreeGetChildCount                           func(unsafe.Pointer) int
+	_fnCFTreeGetChildren                             func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFTreeGetContext                              func(unsafe.Pointer, *CFTreeContext)
+	_fnCFTreeGetFirstChild                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCFTreeGetNextSibling                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFTreeGetParent                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCFTreeGetTypeID                               func() uint
+	_fnCFTreeInsertSibling                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFTreePrependChild                            func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFTreeRemove                                  func(unsafe.Pointer)
+	_fnCFTreeRemoveAllChildren                       func(unsafe.Pointer)
+	_fnCFTreeSetContext                              func(unsafe.Pointer, *CFTreeContext)
+	_fnCFTreeSortChildren                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFURLCanBeDecomposed                          func(unsafe.Pointer) uint8
+	_fnCFURLClearResourcePropertyCache               func(unsafe.Pointer)
+	_fnCFURLClearResourcePropertyCacheForKey         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFURLCopyAbsoluteURL                          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyFileSystemPath                       func(unsafe.Pointer, CFURLPathStyle) unsafe.Pointer
+	_fnCFURLCopyFragment                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyHostName                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyLastPathComponent                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyNetLocation                          func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: The CFURLCopyParameterString function is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, CFURLCopyParameterString will always return NULL, and the CFURLCopyPath(), CFURLCopyStrictPath(), and CFURLCopyFileSystemPath() functions will return the complete path including the semicolon separator and params component if the URL string contains them.
 	_fnCFURLCopyParameterString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyPassword func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyPath func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyPathExtension func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: The CFURLCopyParameterString function is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, CFURLCopyParameterString will always return NULL, and the CFURLCopyPath(), CFURLCopyStrictPath(), and CFURLCopyFileSystemPath() functions will return the complete path including the semicolon separator and params component if the URL string contains them.
-	_fnCFURLCopyQueryString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyPassword        func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyPath            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyPathExtension   func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: The CFURLCopyParameterString function is deprecated. Post deprecation for applications linked with or after the macOS 10.15, and for all iOS, watchOS, and tvOS applications, CFURLCopyParameterString will always return NULL, and the CFURLCopyPath(), CFURLCopyStrictPath(), and CFURLCopyFileSystemPath() functions will return the complete path including the semicolon separator and params component if the URL string contains them.
+	_fnCFURLCopyQueryString               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFURLCopyResourcePropertiesForKeys func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyResourcePropertyForKey func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFURLCopyResourceSpecifier func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyScheme func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCopyStrictPath func(unsafe.Pointer, *uint8) unsafe.Pointer
-	_fnCFURLCopyUserName func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateAbsoluteURLWithBytes func(unsafe.Pointer, *uint8, int, uint, unsafe.Pointer, uint8) unsafe.Pointer
-	_fnCFURLCreateBookmarkData func(unsafe.Pointer, unsafe.Pointer, CFURLBookmarkCreationOptions, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: The Carbon Alias Manager is deprecated. This function should only be used to convert Carbon AliasRecords to bookmark data.
-	_fnCFURLCreateBookmarkDataFromAliasRecord func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateBookmarkDataFromFile func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateByResolvingBookmarkData func(unsafe.Pointer, unsafe.Pointer, CFURLBookmarkResolutionOptions, unsafe.Pointer, unsafe.Pointer, *uint8, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateCopyAppendingPathComponent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
-	_fnCFURLCreateCopyAppendingPathExtension func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyResourcePropertyForKey    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFURLCopyResourceSpecifier         func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyScheme                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCopyStrictPath                func(unsafe.Pointer, *uint8) unsafe.Pointer
+	_fnCFURLCopyUserName                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateAbsoluteURLWithBytes    func(unsafe.Pointer, *uint8, int, uint, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnCFURLCreateBookmarkData            func(unsafe.Pointer, unsafe.Pointer, CFURLBookmarkCreationOptions, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: The Carbon Alias Manager is deprecated. This function should only be used to convert Carbon AliasRecords to bookmark data.
+	_fnCFURLCreateBookmarkDataFromAliasRecord   func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateBookmarkDataFromFile          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateByResolvingBookmarkData       func(unsafe.Pointer, unsafe.Pointer, CFURLBookmarkResolutionOptions, unsafe.Pointer, unsafe.Pointer, *uint8, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateCopyAppendingPathComponent    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnCFURLCreateCopyAppendingPathExtension    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFURLCreateCopyDeletingLastPathComponent func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateCopyDeletingPathExtension func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateData func(unsafe.Pointer, unsafe.Pointer, uint, uint8) unsafe.Pointer
-// Deprecated: For resource data, use the CFReadStream API. For file resource properties, use CFURLCopyResourcePropertiesForKeys.
+	_fnCFURLCreateCopyDeletingPathExtension     func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateData                          func(unsafe.Pointer, unsafe.Pointer, uint, uint8) unsafe.Pointer
+	// Deprecated: For resource data, use the CFReadStream API. For file resource properties, use CFURLCopyResourcePropertiesForKeys.
 	_fnCFURLCreateDataAndPropertiesFromResource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int) uint8
-	_fnCFURLCreateFilePathURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateFileReferenceURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Not supported
-	_fnCFURLCreateFromFSRef func(unsafe.Pointer, objc.ID) unsafe.Pointer
-	_fnCFURLCreateFromFileSystemRepresentation func(unsafe.Pointer, *uint8, int, uint8) unsafe.Pointer
+	_fnCFURLCreateFilePathURL                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateFileReferenceURL              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Not supported
+	_fnCFURLCreateFromFSRef                                  func(unsafe.Pointer, objc.ID) unsafe.Pointer
+	_fnCFURLCreateFromFileSystemRepresentation               func(unsafe.Pointer, *uint8, int, uint8) unsafe.Pointer
 	_fnCFURLCreateFromFileSystemRepresentationRelativeToBase func(unsafe.Pointer, *uint8, int, uint8, unsafe.Pointer) unsafe.Pointer
-// Deprecated: For file resource properties, use CFURLCopyResourcePropertyForKey.
-	_fnCFURLCreatePropertyFromResource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int) unsafe.Pointer
+	// Deprecated: For file resource properties, use CFURLCopyResourcePropertyForKey.
+	_fnCFURLCreatePropertyFromResource                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int) unsafe.Pointer
 	_fnCFURLCreateResourcePropertiesForKeysFromBookmarkData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateResourcePropertyForKeyFromBookmarkData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use [NSString stringByAddingPercentEncodingWithAllowedCharacters:] instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent (since each URL component or subcomponent has different rules for what characters are valid).
-	_fnCFURLCreateStringByAddingPercentEscapes func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	_fnCFURLCreateResourcePropertyForKeyFromBookmarkData    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use [NSString stringByAddingPercentEncodingWithAllowedCharacters:] instead, which always uses the recommended UTF-8 encoding, and which encodes for a specific URL component or subcomponent (since each URL component or subcomponent has different rules for what characters are valid).
+	_fnCFURLCreateStringByAddingPercentEscapes    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
 	_fnCFURLCreateStringByReplacingPercentEscapes func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use [NSString stringByRemovingPercentEncoding] or CFURLCreateStringByReplacingPercentEscapes() instead, which always uses the recommended UTF-8 encoding.
+	// Deprecated: Use [NSString stringByRemovingPercentEncoding] or CFURLCreateStringByReplacingPercentEscapes() instead, which always uses the recommended UTF-8 encoding.
 	_fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-	_fnCFURLCreateWithBytes func(unsafe.Pointer, *uint8, int, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateWithFileSystemPath func(unsafe.Pointer, unsafe.Pointer, CFURLPathStyle, uint8) unsafe.Pointer
-	_fnCFURLCreateWithFileSystemPathRelativeToBase func(unsafe.Pointer, unsafe.Pointer, CFURLPathStyle, uint8, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLCreateWithString func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: Use CFURLGetFileSystemRepresentation and removefile(3) instead.
-	_fnCFURLDestroyResource func(unsafe.Pointer, *int) uint8
-	_fnCFURLEnumeratorCreateForDirectoryURL func(unsafe.Pointer, unsafe.Pointer, CFURLEnumeratorOptions, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateWithBytes                                    func(unsafe.Pointer, *uint8, int, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateWithFileSystemPath                           func(unsafe.Pointer, unsafe.Pointer, CFURLPathStyle, uint8) unsafe.Pointer
+	_fnCFURLCreateWithFileSystemPathRelativeToBase             func(unsafe.Pointer, unsafe.Pointer, CFURLPathStyle, uint8, unsafe.Pointer) unsafe.Pointer
+	_fnCFURLCreateWithString                                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: Use CFURLGetFileSystemRepresentation and removefile(3) instead.
+	_fnCFURLDestroyResource                   func(unsafe.Pointer, *int) uint8
+	_fnCFURLEnumeratorCreateForDirectoryURL   func(unsafe.Pointer, unsafe.Pointer, CFURLEnumeratorOptions, unsafe.Pointer) unsafe.Pointer
 	_fnCFURLEnumeratorCreateForMountedVolumes func(unsafe.Pointer, CFURLEnumeratorOptions, unsafe.Pointer) unsafe.Pointer
-	_fnCFURLEnumeratorGetDescendentLevel func(unsafe.Pointer) int
-	_fnCFURLEnumeratorGetNextURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFURLEnumeratorResult
-// Deprecated: Use File System Events API instead
+	_fnCFURLEnumeratorGetDescendentLevel      func(unsafe.Pointer) int
+	_fnCFURLEnumeratorGetNextURL              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) CFURLEnumeratorResult
+	// Deprecated: Use File System Events API instead
 	_fnCFURLEnumeratorGetSourceDidChange func(unsafe.Pointer) uint8
-	_fnCFURLEnumeratorGetTypeID func() uint
-	_fnCFURLEnumeratorSkipDescendents func(unsafe.Pointer)
-	_fnCFURLGetBaseURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLGetByteRangeForComponent func(unsafe.Pointer, CFURLComponentType, *CFRange) CFRange
-	_fnCFURLGetBytes func(unsafe.Pointer, *uint8, int) int
-// Deprecated: Not supported
-	_fnCFURLGetFSRef func(unsafe.Pointer, objc.ID) uint8
-	_fnCFURLGetFileSystemRepresentation func(unsafe.Pointer, uint8, *uint8, int) uint8
-	_fnCFURLGetPortNumber func(unsafe.Pointer) int
-	_fnCFURLGetString func(unsafe.Pointer) unsafe.Pointer
-	_fnCFURLGetTypeID func() uint
-	_fnCFURLHasDirectoryPath func(unsafe.Pointer) uint8
-	_fnCFURLIsFileReferenceURL func(unsafe.Pointer) uint8
-	_fnCFURLResourceIsReachable func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFURLSetResourcePropertiesForKeys func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFURLSetResourcePropertyForKey func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFURLSetTemporaryResourcePropertyForKey func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFURLEnumeratorGetTypeID          func() uint
+	_fnCFURLEnumeratorSkipDescendents    func(unsafe.Pointer)
+	_fnCFURLGetBaseURL                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLGetByteRangeForComponent     func(unsafe.Pointer, CFURLComponentType, *CFRange) CFRange
+	_fnCFURLGetBytes                     func(unsafe.Pointer, *uint8, int) int
+	// Deprecated: Not supported
+	_fnCFURLGetFSRef                             func(unsafe.Pointer, objc.ID) uint8
+	_fnCFURLGetFileSystemRepresentation          func(unsafe.Pointer, uint8, *uint8, int) uint8
+	_fnCFURLGetPortNumber                        func(unsafe.Pointer) int
+	_fnCFURLGetString                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFURLGetTypeID                            func() uint
+	_fnCFURLHasDirectoryPath                     func(unsafe.Pointer) uint8
+	_fnCFURLIsFileReferenceURL                   func(unsafe.Pointer) uint8
+	_fnCFURLResourceIsReachable                  func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFURLSetResourcePropertiesForKeys         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFURLSetResourcePropertyForKey            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFURLSetTemporaryResourcePropertyForKey   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnCFURLStartAccessingSecurityScopedResource func(unsafe.Pointer) uint8
-	_fnCFURLStopAccessingSecurityScopedResource func(unsafe.Pointer)
-	_fnCFURLWriteBookmarkDataToFile func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
-// Deprecated: For resource data, use the CFWriteStream API. For file resource properties, use CFURLSetResourcePropertiesForKeys.
-	_fnCFURLWriteDataAndPropertiesToResource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int) uint8
-	_fnCFUUIDCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnCFUUIDCreateFromString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFUUIDCreateFromUUIDBytes func(unsafe.Pointer, CFUUIDBytes) unsafe.Pointer
-	_fnCFUUIDCreateString func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFUUIDCreateWithBytes func(unsafe.Pointer, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) unsafe.Pointer
-	_fnCFUUIDGetConstantUUIDWithBytes func(unsafe.Pointer, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) unsafe.Pointer
-	_fnCFUUIDGetTypeID func() uint
-	_fnCFUUIDGetUUIDBytes func(unsafe.Pointer) CFUUIDBytes
-	_fnCFUserNotificationCancel func(unsafe.Pointer) int
-	_fnCFUserNotificationCheckBoxChecked func(int) uint
-	_fnCFUserNotificationCreate func(unsafe.Pointer, float64, uint, *int, unsafe.Pointer) unsafe.Pointer
-	_fnCFUserNotificationCreateRunLoopSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFUserNotificationDisplayAlert func(float64, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
-	_fnCFUserNotificationDisplayNotice func(float64, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCFURLStopAccessingSecurityScopedResource  func(unsafe.Pointer)
+	_fnCFURLWriteBookmarkDataToFile              func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
+	// Deprecated: For resource data, use the CFWriteStream API. For file resource properties, use CFURLSetResourcePropertiesForKeys.
+	_fnCFURLWriteDataAndPropertiesToResource   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int) uint8
+	_fnCFUUIDCreate                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCFUUIDCreateFromString                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFUUIDCreateFromUUIDBytes               func(unsafe.Pointer, CFUUIDBytes) unsafe.Pointer
+	_fnCFUUIDCreateString                      func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFUUIDCreateWithBytes                   func(unsafe.Pointer, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) unsafe.Pointer
+	_fnCFUUIDGetConstantUUIDWithBytes          func(unsafe.Pointer, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) unsafe.Pointer
+	_fnCFUUIDGetTypeID                         func() uint
+	_fnCFUUIDGetUUIDBytes                      func(unsafe.Pointer) CFUUIDBytes
+	_fnCFUserNotificationCancel                func(unsafe.Pointer) int
+	_fnCFUserNotificationCheckBoxChecked       func(int) uint
+	_fnCFUserNotificationCreate                func(unsafe.Pointer, float64, uint, *int, unsafe.Pointer) unsafe.Pointer
+	_fnCFUserNotificationCreateRunLoopSource   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFUserNotificationDisplayAlert          func(float64, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint) int
+	_fnCFUserNotificationDisplayNotice         func(float64, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCFUserNotificationGetResponseDictionary func(unsafe.Pointer) unsafe.Pointer
-	_fnCFUserNotificationGetResponseValue func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnCFUserNotificationGetTypeID func() uint
-	_fnCFUserNotificationPopUpSelection func(int) uint
-	_fnCFUserNotificationReceiveResponse func(unsafe.Pointer, float64, *uint) int
-	_fnCFUserNotificationSecureTextField func(int) uint
-	_fnCFUserNotificationUpdate func(unsafe.Pointer, float64, uint, unsafe.Pointer) int
-	_fnCFWriteStreamCanAcceptBytes func(unsafe.Pointer) uint8
-	_fnCFWriteStreamClose func(unsafe.Pointer)
-	_fnCFWriteStreamCopyDispatchQueue func(unsafe.Pointer) unsafe.Pointer
-	_fnCFWriteStreamCopyError func(unsafe.Pointer) unsafe.Pointer
-	_fnCFWriteStreamCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFUserNotificationGetResponseValue      func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnCFUserNotificationGetTypeID             func() uint
+	_fnCFUserNotificationPopUpSelection        func(int) uint
+	_fnCFUserNotificationReceiveResponse       func(unsafe.Pointer, float64, *uint) int
+	_fnCFUserNotificationSecureTextField       func(int) uint
+	_fnCFUserNotificationUpdate                func(unsafe.Pointer, float64, uint, unsafe.Pointer) int
+	_fnCFWriteStreamCanAcceptBytes             func(unsafe.Pointer) uint8
+	_fnCFWriteStreamClose                      func(unsafe.Pointer)
+	_fnCFWriteStreamCopyDispatchQueue          func(unsafe.Pointer) unsafe.Pointer
+	_fnCFWriteStreamCopyError                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCFWriteStreamCopyProperty               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnCFWriteStreamCreateWithAllocatedBuffers func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFWriteStreamCreateWithBuffer func(unsafe.Pointer, *uint8, int) unsafe.Pointer
-	_fnCFWriteStreamCreateWithFile func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFWriteStreamGetError func(unsafe.Pointer) CFStreamError
-	_fnCFWriteStreamGetStatus func(unsafe.Pointer) CFStreamStatus
-	_fnCFWriteStreamGetTypeID func() uint
-	_fnCFWriteStreamOpen func(unsafe.Pointer) uint8
-	_fnCFWriteStreamScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFWriteStreamSetClient func(unsafe.Pointer, uint, unsafe.Pointer, *CFStreamClientContext) uint8
-	_fnCFWriteStreamSetDispatchQueue func(unsafe.Pointer, unsafe.Pointer)
-	_fnCFWriteStreamSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCFWriteStreamUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCFWriteStreamWrite func(unsafe.Pointer, *uint8, int) int
-	_fnCFXMLCreateStringByEscapingEntities func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCFXMLCreateStringByUnescapingEntities func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	_fnCFWriteStreamCreateWithBuffer           func(unsafe.Pointer, *uint8, int) unsafe.Pointer
+	_fnCFWriteStreamCreateWithFile             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFWriteStreamGetError                   func(unsafe.Pointer) CFStreamError
+	_fnCFWriteStreamGetStatus                  func(unsafe.Pointer) CFStreamStatus
+	_fnCFWriteStreamGetTypeID                  func() uint
+	_fnCFWriteStreamOpen                       func(unsafe.Pointer) uint8
+	_fnCFWriteStreamScheduleWithRunLoop        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFWriteStreamSetClient                  func(unsafe.Pointer, uint, unsafe.Pointer, *CFStreamClientContext) uint8
+	_fnCFWriteStreamSetDispatchQueue           func(unsafe.Pointer, unsafe.Pointer)
+	_fnCFWriteStreamSetProperty                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCFWriteStreamUnscheduleFromRunLoop      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCFWriteStreamWrite                      func(unsafe.Pointer, *uint8, int) int
+	_fnCFXMLCreateStringByEscapingEntities     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCFXMLCreateStringByUnescapingEntities   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeCreate func(unsafe.Pointer, CFXMLNodeTypeCode, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeGetInfoPtr func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeGetString func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeGetTypeCode func(unsafe.Pointer) CFXMLNodeTypeCode
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeGetTypeID func() uint
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLNodeGetVersion func(unsafe.Pointer) int
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserAbort func(unsafe.Pointer, CFXMLParserStatusCode, unsafe.Pointer)
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserCopyErrorDescription func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, int, *CFXMLParserCallBacks, *CFXMLParserContext) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserCreateWithDataFromURL func(unsafe.Pointer, unsafe.Pointer, uint, int, *CFXMLParserCallBacks, *CFXMLParserContext) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetCallBacks func(unsafe.Pointer, *CFXMLParserCallBacks)
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetContext func(unsafe.Pointer, *CFXMLParserContext)
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetDocument func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetLineNumber func(unsafe.Pointer) int
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetLocation func(unsafe.Pointer) int
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetSourceURL func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetStatusCode func(unsafe.Pointer) CFXMLParserStatusCode
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserGetTypeID func() uint
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLParserParse func(unsafe.Pointer) uint8
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLTreeCreateFromData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, int) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLTreeCreateFromDataWithError func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, int, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLTreeCreateWithDataFromURL func(unsafe.Pointer, unsafe.Pointer, uint, int) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLTreeCreateWithNode func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnCFXMLTreeCreateXMLData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.8.
-	_fnCFXMLTreeGetNode func(unsafe.Pointer) unsafe.Pointer
+	// Deprecated: since macOS 10.8.
+	_fnCFXMLTreeGetNode           func(unsafe.Pointer) unsafe.Pointer
 	___CFStringMakeConstantString func(string) unsafe.Pointer
-	___builtin_constant_p func() int
+	___builtin_constant_p         func() int
 )
 
 // Deprecated: Use CFCalendar or NSCalendar API instead
@@ -4502,4 +4502,3 @@ func CFStringMakeConstantString(cStr string) unsafe.Pointer {
 func BuiltinConstantP() int {
 	return ___builtin_constant_p()
 }
-

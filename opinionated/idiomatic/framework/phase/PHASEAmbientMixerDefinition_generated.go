@@ -68,9 +68,13 @@ func (x *AmbientMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLa
 	return x.inner.InputChannelLayout()
 }
 
-func (x *AmbientMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition { return &x.inner.PHASEMixerDefinition }
+func (x *AmbientMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition {
+	return &x.inner.PHASEMixerDefinition
+}
 
-func (x *AmbientMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEMixerDefinition.PHASEDefinition }
+func (x *AmbientMixerDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEMixerDefinition.PHASEDefinition
+}
 
 // AmbientMixerDefinitionable is the interface implemented by [AmbientMixerDefinition], for mocking and DI.
 type AmbientMixerDefinitionable interface {
@@ -82,4 +86,3 @@ type AmbientMixerDefinitionable interface {
 }
 
 var _ AmbientMixerDefinitionable = (*AmbientMixerDefinition)(nil)
-

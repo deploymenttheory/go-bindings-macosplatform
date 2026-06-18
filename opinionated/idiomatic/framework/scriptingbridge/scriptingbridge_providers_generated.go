@@ -12,4 +12,3 @@ import (
 type ObjectProvider interface {
 	asObject() *raw.SBObject
 }
-

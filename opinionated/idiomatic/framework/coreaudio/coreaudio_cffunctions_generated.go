@@ -114,4 +114,3 @@ func AudioStreamGetPropertyInfo(inStream uint, inChannel uint, inPropertyID uint
 	}
 	return nil
 }
-

@@ -62,4 +62,3 @@ type MapConfigurationable interface {
 }
 
 var _ MapConfigurationable = (*MapConfiguration)(nil)
-

@@ -93,4 +93,3 @@ type CNNLossDataDescriptorable interface {
 }
 
 var _ CNNLossDataDescriptorable = (*CNNLossDataDescriptor)(nil)
-

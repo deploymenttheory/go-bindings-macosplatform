@@ -16,9 +16,9 @@ type PKPassRelevantDate struct {
 }
 
 var (
-	_clsPKPassRelevantDate = _objcClass("PKPassRelevantDate")
+	_clsPKPassRelevantDate         = _objcClass("PKPassRelevantDate")
 	_pKPassRelevantDateSelInterval = objc.RegisterName("interval")
-	_pKPassRelevantDateSelDate = objc.RegisterName("date")
+	_pKPassRelevantDateSelDate     = objc.RegisterName("date")
 )
 
 func PKPassRelevantDateFromID(id objc.ID) *PKPassRelevantDate {
@@ -33,13 +33,16 @@ func PKPassRelevantDateFromID(id objc.ID) *PKPassRelevantDate {
 
 func (o *PKPassRelevantDate) Interval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassRelevantDateSelInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
 
 func (o *PKPassRelevantDate) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPassRelevantDateSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

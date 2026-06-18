@@ -124,11 +124,17 @@ func (x *ImageMultiply) WithLabel(label string) *ImageMultiply {
 	return x
 }
 
-func (x *ImageMultiply) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
+func (x *ImageMultiply) asImageArithmetic() *mpsimage.MPSImageArithmetic {
+	return &x.inner.MPSImageArithmetic
+}
 
-func (x *ImageMultiply) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageMultiply) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
-func (x *ImageMultiply) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel }
+func (x *ImageMultiply) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel
+}
 
 // ImageMultiplyable is the interface implemented by [ImageMultiply], for mocking and DI.
 type ImageMultiplyable interface {
@@ -150,4 +156,3 @@ type ImageMultiplyable interface {
 }
 
 var _ ImageMultiplyable = (*ImageMultiply)(nil)
-

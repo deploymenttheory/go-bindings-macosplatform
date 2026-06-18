@@ -14,7 +14,7 @@ import (
 
 var (
 	_securityhiLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,13 +49,17 @@ func _loadLibrary() {
 		return
 	}
 	_register("DisposeURLNotifyUPP", func() { purego.RegisterLibFunc(&_fnDisposeURLNotifyUPP, _securityhiLib, "DisposeURLNotifyUPP") })
-	_register("DisposeURLSystemEventUPP", func() { purego.RegisterLibFunc(&_fnDisposeURLSystemEventUPP, _securityhiLib, "DisposeURLSystemEventUPP") })
+	_register("DisposeURLSystemEventUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeURLSystemEventUPP, _securityhiLib, "DisposeURLSystemEventUPP")
+	})
 	_register("InvokeURLNotifyUPP", func() { purego.RegisterLibFunc(&_fnInvokeURLNotifyUPP, _securityhiLib, "InvokeURLNotifyUPP") })
 	_register("InvokeURLSystemEventUPP", func() { purego.RegisterLibFunc(&_fnInvokeURLSystemEventUPP, _securityhiLib, "InvokeURLSystemEventUPP") })
 	_register("KCAddAppleSharePassword", func() { purego.RegisterLibFunc(&_fnKCAddAppleSharePassword, _securityhiLib, "KCAddAppleSharePassword") })
 	_register("KCAddGenericPassword", func() { purego.RegisterLibFunc(&_fnKCAddGenericPassword, _securityhiLib, "KCAddGenericPassword") })
 	_register("KCAddInternetPassword", func() { purego.RegisterLibFunc(&_fnKCAddInternetPassword, _securityhiLib, "KCAddInternetPassword") })
-	_register("KCAddInternetPasswordWithPath", func() { purego.RegisterLibFunc(&_fnKCAddInternetPasswordWithPath, _securityhiLib, "KCAddInternetPasswordWithPath") })
+	_register("KCAddInternetPasswordWithPath", func() {
+		purego.RegisterLibFunc(&_fnKCAddInternetPasswordWithPath, _securityhiLib, "KCAddInternetPasswordWithPath")
+	})
 	_register("KCAddItem", func() { purego.RegisterLibFunc(&_fnKCAddItem, _securityhiLib, "KCAddItem") })
 	_register("KCChangeSettings", func() { purego.RegisterLibFunc(&_fnKCChangeSettings, _securityhiLib, "KCChangeSettings") })
 	_register("KCCreateKeychain", func() { purego.RegisterLibFunc(&_fnKCCreateKeychain, _securityhiLib, "KCCreateKeychain") })
@@ -63,15 +67,21 @@ func _loadLibrary() {
 	_register("NewURLNotifyUPP", func() { purego.RegisterLibFunc(&_fnNewURLNotifyUPP, _securityhiLib, "NewURLNotifyUPP") })
 	_register("NewURLSystemEventUPP", func() { purego.RegisterLibFunc(&_fnNewURLSystemEventUPP, _securityhiLib, "NewURLSystemEventUPP") })
 	_register("SecChooseIdentity", func() { purego.RegisterLibFunc(&_fnSecChooseIdentity, _securityhiLib, "SecChooseIdentity") })
-	_register("SecChooseIdentityAsSheet", func() { purego.RegisterLibFunc(&_fnSecChooseIdentityAsSheet, _securityhiLib, "SecChooseIdentityAsSheet") })
+	_register("SecChooseIdentityAsSheet", func() {
+		purego.RegisterLibFunc(&_fnSecChooseIdentityAsSheet, _securityhiLib, "SecChooseIdentityAsSheet")
+	})
 	_register("SecDisplayCertificate", func() { purego.RegisterLibFunc(&_fnSecDisplayCertificate, _securityhiLib, "SecDisplayCertificate") })
-	_register("SecDisplayCertificateGroup", func() { purego.RegisterLibFunc(&_fnSecDisplayCertificateGroup, _securityhiLib, "SecDisplayCertificateGroup") })
+	_register("SecDisplayCertificateGroup", func() {
+		purego.RegisterLibFunc(&_fnSecDisplayCertificateGroup, _securityhiLib, "SecDisplayCertificateGroup")
+	})
 	_register("SecEditTrust", func() { purego.RegisterLibFunc(&_fnSecEditTrust, _securityhiLib, "SecEditTrust") })
 	_register("SecEditTrustAsSheet", func() { purego.RegisterLibFunc(&_fnSecEditTrustAsSheet, _securityhiLib, "SecEditTrustAsSheet") })
 	_register("kcaddapplesharepassword", func() { purego.RegisterLibFunc(&_kcaddapplesharepassword, _securityhiLib, "kcaddapplesharepassword") })
 	_register("kcaddgenericpassword", func() { purego.RegisterLibFunc(&_kcaddgenericpassword, _securityhiLib, "kcaddgenericpassword") })
 	_register("kcaddinternetpassword", func() { purego.RegisterLibFunc(&_kcaddinternetpassword, _securityhiLib, "kcaddinternetpassword") })
-	_register("kcaddinternetpasswordwithpath", func() { purego.RegisterLibFunc(&_kcaddinternetpasswordwithpath, _securityhiLib, "kcaddinternetpasswordwithpath") })
+	_register("kcaddinternetpasswordwithpath", func() {
+		purego.RegisterLibFunc(&_kcaddinternetpasswordwithpath, _securityhiLib, "kcaddinternetpasswordwithpath")
+	})
 	_register("kccreatekeychain", func() { purego.RegisterLibFunc(&_kccreatekeychain, _securityhiLib, "kccreatekeychain") })
 	_register("kcunlock", func() { purego.RegisterLibFunc(&_kcunlock, _securityhiLib, "kcunlock") })
 }

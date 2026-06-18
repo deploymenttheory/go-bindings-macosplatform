@@ -39,7 +39,9 @@ func PHImageErrorKey() uintptr {
 
 func PHImageManagerMaximumSize() corefoundation.CGSize {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageManagerMaximumSize")
-	if ptr == 0 { return corefoundation.CGSize{} }
+	if ptr == 0 {
+		return corefoundation.CGSize{}
+	}
 	return *(*corefoundation.CGSize)(unsafe.Pointer(ptr))
 }
 
@@ -97,13 +99,16 @@ func PHLocalIdentifierNotFound() uintptr {
 // Array of NSString values representing local identifiers related to the specific error
 func PHLocalIdentifiersErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLocalIdentifiersErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PHPhotosErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHPhotosErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

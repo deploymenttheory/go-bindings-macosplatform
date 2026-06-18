@@ -18,19 +18,19 @@ type GKBehavior struct {
 }
 
 var (
-	_clsGKBehavior = _objcClass("GKBehavior")
-	_gKBehaviorSelBehaviorWithGoalWeight = objc.RegisterName("behaviorWithGoal:weight:")
-	_gKBehaviorSelBehaviorWithGoals = objc.RegisterName("behaviorWithGoals:")
+	_clsGKBehavior                            = _objcClass("GKBehavior")
+	_gKBehaviorSelBehaviorWithGoalWeight      = objc.RegisterName("behaviorWithGoal:weight:")
+	_gKBehaviorSelBehaviorWithGoals           = objc.RegisterName("behaviorWithGoals:")
 	_gKBehaviorSelBehaviorWithGoalsAndWeights = objc.RegisterName("behaviorWithGoals:andWeights:")
-	_gKBehaviorSelBehaviorWithWeightedGoals = objc.RegisterName("behaviorWithWeightedGoals:")
-	_gKBehaviorSelSetWeightForGoal = objc.RegisterName("setWeight:forGoal:")
-	_gKBehaviorSelWeightForGoal = objc.RegisterName("weightForGoal:")
-	_gKBehaviorSelRemoveGoal = objc.RegisterName("removeGoal:")
-	_gKBehaviorSelRemoveAllGoals = objc.RegisterName("removeAllGoals")
-	_gKBehaviorSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_gKBehaviorSelSetObjectForKeyedSubscript = objc.RegisterName("setObject:forKeyedSubscript:")
-	_gKBehaviorSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_gKBehaviorSelGoalCount = objc.RegisterName("goalCount")
+	_gKBehaviorSelBehaviorWithWeightedGoals   = objc.RegisterName("behaviorWithWeightedGoals:")
+	_gKBehaviorSelSetWeightForGoal            = objc.RegisterName("setWeight:forGoal:")
+	_gKBehaviorSelWeightForGoal               = objc.RegisterName("weightForGoal:")
+	_gKBehaviorSelRemoveGoal                  = objc.RegisterName("removeGoal:")
+	_gKBehaviorSelRemoveAllGoals              = objc.RegisterName("removeAllGoals")
+	_gKBehaviorSelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
+	_gKBehaviorSelSetObjectForKeyedSubscript  = objc.RegisterName("setObject:forKeyedSubscript:")
+	_gKBehaviorSelObjectForKeyedSubscript     = objc.RegisterName("objectForKeyedSubscript:")
+	_gKBehaviorSelGoalCount                   = objc.RegisterName("goalCount")
 )
 
 func GKBehaviorFromID(id objc.ID) *GKBehavior {
@@ -46,28 +46,36 @@ func GKBehaviorFromID(id objc.ID) *GKBehavior {
 // Creates a behavior with a single goal and weight
 func GKBehaviorBehaviorWithGoalWeight(goal *GKGoal, weight float32) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoalWeight, goal.Ptr(), weight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBehaviorFromID(_ret)
 }
 
 // Creates a behavior with an array of goals.  All weights are set to 1.0f
 func GKBehaviorBehaviorWithGoals(goals *foundation.NSArray[*GKGoal]) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoals, goals.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBehaviorFromID(_ret)
 }
 
 // Creates a behavior with two associated arrays of goals and weights
 func GKBehaviorBehaviorWithGoalsAndWeights(goals *foundation.NSArray[*GKGoal], weights *foundation.NSArray[*foundation.NSNumber]) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithGoalsAndWeights, goals.Ptr(), weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBehaviorFromID(_ret)
 }
 
 // Creates a behavior with a dictionary of goal/weight pairs
 func GKBehaviorBehaviorWithWeightedGoals(weightedGoals *foundation.NSDictionary[*GKGoal, *foundation.NSNumber]) *GKBehavior {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKBehavior), _gKBehaviorSelBehaviorWithWeightedGoals, weightedGoals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKBehaviorFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func (o *GKBehavior) RemoveAllGoals() {
 // Supports getting goals via a [int] subscript.
 func (o *GKBehavior) ObjectAtIndexedSubscript(idx uint) *GKGoal {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBehaviorSelObjectAtIndexedSubscript, idx)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGoalFromID(_ret)
 }
 
@@ -107,7 +117,9 @@ func (o *GKBehavior) SetObjectForKeyedSubscript(weight *foundation.NSNumber, goa
 // Supports getting a weight via a [goal] subscript.
 func (o *GKBehavior) ObjectForKeyedSubscript(goal *GKGoal) *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKBehaviorSelObjectForKeyedSubscript, goal.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -115,4 +127,3 @@ func (o *GKBehavior) GoalCount() int {
 	_ret := objc.Send[int](o.Ptr(), _gKBehaviorSelGoalCount)
 	return _ret
 }
-

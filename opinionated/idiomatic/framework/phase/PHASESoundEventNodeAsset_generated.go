@@ -43,4 +43,3 @@ type SoundEventNodeAssetable interface {
 }
 
 var _ SoundEventNodeAssetable = (*SoundEventNodeAsset)(nil)
-

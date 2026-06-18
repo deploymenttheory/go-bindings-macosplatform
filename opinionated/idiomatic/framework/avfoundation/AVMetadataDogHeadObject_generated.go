@@ -35,7 +35,9 @@ func NewMetadataDogHeadObject() *MetadataDogHeadObject {
 	return &MetadataDogHeadObject{inner: raw.AVMetadataDogHeadObjectFromID(_id)}
 }
 
-func (x *MetadataDogHeadObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+func (x *MetadataDogHeadObject) asMetadataObject() *raw.AVMetadataObject {
+	return &x.inner.AVMetadataObject
+}
 
 // MetadataDogHeadObjectable is the interface implemented by [MetadataDogHeadObject], for mocking and DI.
 type MetadataDogHeadObjectable interface {
@@ -43,4 +45,3 @@ type MetadataDogHeadObjectable interface {
 }
 
 var _ MetadataDogHeadObjectable = (*MetadataDogHeadObject)(nil)
-

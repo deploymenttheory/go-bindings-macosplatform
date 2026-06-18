@@ -15,10 +15,10 @@ type AVAssetReaderSampleReferenceOutput struct {
 }
 
 var (
-	_clsAVAssetReaderSampleReferenceOutput = _objcClass("AVAssetReaderSampleReferenceOutput")
+	_clsAVAssetReaderSampleReferenceOutput                                          = _objcClass("AVAssetReaderSampleReferenceOutput")
 	_aVAssetReaderSampleReferenceOutputSelAssetReaderSampleReferenceOutputWithTrack = objc.RegisterName("assetReaderSampleReferenceOutputWithTrack:")
-	_aVAssetReaderSampleReferenceOutputSelInitWithTrack = objc.RegisterName("initWithTrack:")
-	_aVAssetReaderSampleReferenceOutputSelTrack = objc.RegisterName("track")
+	_aVAssetReaderSampleReferenceOutputSelInitWithTrack                             = objc.RegisterName("initWithTrack:")
+	_aVAssetReaderSampleReferenceOutputSelTrack                                     = objc.RegisterName("track")
 )
 
 func AVAssetReaderSampleReferenceOutputFromID(id objc.ID) *AVAssetReaderSampleReferenceOutput {
@@ -34,20 +34,25 @@ func AVAssetReaderSampleReferenceOutputFromID(id objc.ID) *AVAssetReaderSampleRe
 // @method assetReaderSampleReferenceOutputWithTrack: @abstract Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references. @param track The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references. @result An instance of AVAssetReaderSampleReferenceOutput. @discussion The track must be one of the tracks contained by the target AVAssetReader's asset.
 func AVAssetReaderSampleReferenceOutputAssetReaderSampleReferenceOutputWithTrack(track *AVAssetTrack) *AVAssetReaderSampleReferenceOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetReaderSampleReferenceOutput), _aVAssetReaderSampleReferenceOutputSelAssetReaderSampleReferenceOutputWithTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderSampleReferenceOutputFromID(_ret)
 }
 
 // @method initWithTrack: @abstract Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references. @param track The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references. @result An instance of AVAssetReaderTrackOutput. @discussion The track must be one of the tracks contained by the target AVAssetReader's asset.
 func (o *AVAssetReaderSampleReferenceOutput) InitWithTrack(track *AVAssetTrack) *AVAssetReaderSampleReferenceOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSampleReferenceOutputSelInitWithTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetReaderSampleReferenceOutputFromID(_ret)
 }
 
 func (o *AVAssetReaderSampleReferenceOutput) Track() *AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderSampleReferenceOutputSelTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetTrackFromID(_ret)
 }
-

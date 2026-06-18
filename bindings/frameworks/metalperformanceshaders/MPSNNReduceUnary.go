@@ -18,11 +18,11 @@ type MPSNNReduceUnary struct {
 }
 
 var (
-	_clsMPSNNReduceUnary = _objcClass("MPSNNReduceUnary")
-	_mPSNNReduceUnarySelClipRectSource = objc.RegisterName("clipRectSource")
+	_clsMPSNNReduceUnary                  = _objcClass("MPSNNReduceUnary")
+	_mPSNNReduceUnarySelClipRectSource    = objc.RegisterName("clipRectSource")
 	_mPSNNReduceUnarySelSetClipRectSource = objc.RegisterName("setClipRectSource:")
-	_mPSNNReduceUnarySelOffset = objc.RegisterName("offset")
-	_mPSNNReduceUnarySelSetOffset = objc.RegisterName("setOffset:")
+	_mPSNNReduceUnarySelOffset            = objc.RegisterName("offset")
+	_mPSNNReduceUnarySelSetOffset         = objc.RegisterName("setOffset:")
 )
 
 func MPSNNReduceUnaryFromID(id objc.ID) *MPSNNReduceUnary {
@@ -55,4 +55,3 @@ func (o *MPSNNReduceUnary) Offset() mpscore.MPSOffset {
 func (o *MPSNNReduceUnary) SetOffset(offset mpscore.MPSOffset) {
 	o.Ptr().Send(_mPSNNReduceUnarySelSetOffset, offset)
 }
-

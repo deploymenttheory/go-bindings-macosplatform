@@ -60,4 +60,3 @@ type SpecifierTestable interface {
 }
 
 var _ SpecifierTestable = (*SpecifierTest)(nil)
-

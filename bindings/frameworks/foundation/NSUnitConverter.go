@@ -15,7 +15,7 @@ type NSUnitConverter struct {
 }
 
 var (
-	_clsNSUnitConverter = _objcClass("NSUnitConverter")
+	_clsNSUnitConverter                       = _objcClass("NSUnitConverter")
 	_nSUnitConverterSelBaseUnitValueFromValue = objc.RegisterName("baseUnitValueFromValue:")
 	_nSUnitConverterSelValueFromBaseUnitValue = objc.RegisterName("valueFromBaseUnitValue:")
 )
@@ -39,4 +39,3 @@ func (o *NSUnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 
 	_ret := objc.Send[float64](o.Ptr(), _nSUnitConverterSelValueFromBaseUnitValue, baseUnitValue)
 	return _ret
 }
-

@@ -16,10 +16,10 @@ type OSLogEntry struct {
 }
 
 var (
-	_clsOSLogEntry = _objcClass("OSLogEntry")
+	_clsOSLogEntry                = _objcClass("OSLogEntry")
 	_oSLogEntrySelComposedMessage = objc.RegisterName("composedMessage")
-	_oSLogEntrySelDate = objc.RegisterName("date")
-	_oSLogEntrySelStoreCategory = objc.RegisterName("storeCategory")
+	_oSLogEntrySelDate            = objc.RegisterName("date")
+	_oSLogEntrySelStoreCategory   = objc.RegisterName("storeCategory")
 )
 
 func OSLogEntryFromID(id objc.ID) *OSLogEntry {
@@ -35,14 +35,18 @@ func OSLogEntryFromID(id objc.ID) *OSLogEntry {
 // @property composedMessage @abstract The fully formatted message for the entry.
 func (o *OSLogEntry) ComposedMessage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogEntrySelComposedMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property date @abstract The timestamp of the entry.
 func (o *OSLogEntry) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSLogEntrySelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *OSLogEntry) StoreCategory() OSLogEntryStoreCategory {
 	_ret := objc.Send[OSLogEntryStoreCategory](o.Ptr(), _oSLogEntrySelStoreCategory)
 	return _ret
 }
-

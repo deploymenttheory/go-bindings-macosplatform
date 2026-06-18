@@ -19,7 +19,9 @@ type MTRClusterDeviceEnergyManagementMode struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterDeviceEnergyManagementMode].
-func (x *MTRClusterDeviceEnergyManagementMode) Unwrap() *raw.MTRClusterDeviceEnergyManagementMode { return x.inner }
+func (x *MTRClusterDeviceEnergyManagementMode) Unwrap() *raw.MTRClusterDeviceEnergyManagementMode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -101,9 +103,13 @@ func (x *MTRClusterDeviceEnergyManagementMode) ReadAttributeClusterRevisionWithP
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterDeviceEnergyManagementMode) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterDeviceEnergyManagementMode) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterDeviceEnergyManagementMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterDeviceEnergyManagementMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterDeviceEnergyManagementModeable is the interface implemented by [MTRClusterDeviceEnergyManagementMode], for mocking and DI.
 type MTRClusterDeviceEnergyManagementModeable interface {
@@ -119,4 +125,3 @@ type MTRClusterDeviceEnergyManagementModeable interface {
 }
 
 var _ MTRClusterDeviceEnergyManagementModeable = (*MTRClusterDeviceEnergyManagementMode)(nil)
-

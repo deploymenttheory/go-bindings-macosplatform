@@ -17,7 +17,9 @@ type MTRTimeSynchronizationClusterTimeZoneStatusEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent].
-func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent { return x.inner }
+func (x *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -85,4 +87,3 @@ type MTRTimeSynchronizationClusterTimeZoneStatusEventable interface {
 }
 
 var _ MTRTimeSynchronizationClusterTimeZoneStatusEventable = (*MTRTimeSynchronizationClusterTimeZoneStatusEvent)(nil)
-

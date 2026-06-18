@@ -43,4 +43,3 @@ type BootLoaderable interface {
 }
 
 var _ BootLoaderable = (*BootLoader)(nil)
-

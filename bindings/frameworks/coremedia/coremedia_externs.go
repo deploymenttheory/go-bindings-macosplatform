@@ -1411,126 +1411,162 @@ func KCMTagDataTypeKey() uintptr {
 // @constant   kCMTagInvalid @abstract	CMTag with an unspecified or "null" value.
 func KCMTagInvalid() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagInvalid")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagMediaSubTypeMebx @abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMetadataFormatType_Boxed (OSType).
 func KCMTagMediaSubTypeMebx() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagMediaSubTypeMebx")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagMediaTypeAudio @abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Audio (OSType).
 func KCMTagMediaTypeAudio() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagMediaTypeAudio")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagMediaTypeMetadata @abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Metadata (OSType).
 func KCMTagMediaTypeMetadata() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagMediaTypeMetadata")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagMediaTypeVideo @abstract A CMTag of category kCMTagCategory_MediaType and the value kCMMediaType_Video (OSType).
 func KCMTagMediaTypeVideo() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagMediaTypeVideo")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagPackingTypeNone @abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_None (OStype).
 func KCMTagPackingTypeNone() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagPackingTypeNone")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagPackingTypeOverUnder @abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_OverUnder (OStype).
 func KCMTagPackingTypeOverUnder() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagPackingTypeOverUnder")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagPackingTypeSideBySide @abstract A CMTag of category kCMTagCategory_PackingType and the value kCMTagPackingType_SideBySide (OStype).
 func KCMTagPackingTypeSideBySide() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagPackingTypeSideBySide")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagProjectionTypeEquirectangular @abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Equirectangular (OSType).
 func KCMTagProjectionTypeEquirectangular() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagProjectionTypeEquirectangular")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagProjectionTypeFisheye @abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Fisheye (OSType).
 func KCMTagProjectionTypeFisheye() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagProjectionTypeFisheye")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagProjectionTypeHalfEquirectangular @abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMProjectionType_HalfEquirectangular (OSType).
 func KCMTagProjectionTypeHalfEquirectangular() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagProjectionTypeHalfEquirectangular")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagProjectionTypeParametricImmersive @abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_ParametricImmersive (OSType).
 func KCMTagProjectionTypeParametricImmersive() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagProjectionTypeParametricImmersive")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagProjectionTypeRectangular @abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_Rectangular (OSType).
 func KCMTagProjectionTypeRectangular() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagProjectionTypeRectangular")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagStereoInterpretationOrderReversed @abstract A CMTag of category kCMTagCategory_StereoViewInterpretation and the value of kCMStereoViewInterpretation_StereoOrderReversed (Flags).
 func KCMTagStereoInterpretationOrderReversed() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagStereoInterpretationOrderReversed")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagStereoLeftAndRightEye @abstract A CMTag of category kCMTagCategory_StereoView and the value of the bitwise OR of kCMTagStereoViewComponent_LeftEye and kCMTagStereoViewComponent_RightEye (Flags).
 func KCMTagStereoLeftAndRightEye() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagStereoLeftAndRightEye")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagStereoLeftEye @abstract A CMTag of category kCMTagCategory_StereoView and the value kCMTagStereoViewComponent_LeftEye (Flags).
 func KCMTagStereoLeftEye() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagStereoLeftEye")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagStereoNone @abstract A CMTag of category kCMTagCategory_StereoView and the value of kCMTagStereoViewComponent_None. (Flags)
 func KCMTagStereoNone() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagStereoNone")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
 // @constant kCMTagStereoRightEye @abstract A CMTag of category kCMTagCategory_StereoView and the value kCMTagStereoViewComponent_RightEye (Flags).
 func KCMTagStereoRightEye() CMTag {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTagStereoRightEye")
-	if ptr == 0 { return CMTag{} }
+	if ptr == 0 {
+		return CMTag{}
+	}
 	return *(*CMTag)(unsafe.Pointer(ptr))
 }
 
@@ -1920,19 +1956,25 @@ func KCMTimeFlagsKey() uintptr {
 
 func KCMTimeIndefinite() CMTime {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeIndefinite")
-	if ptr == 0 { return CMTime{} }
+	if ptr == 0 {
+		return CMTime{}
+	}
 	return *(*CMTime)(unsafe.Pointer(ptr))
 }
 
 func KCMTimeInvalid() CMTime {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeInvalid")
-	if ptr == 0 { return CMTime{} }
+	if ptr == 0 {
+		return CMTime{}
+	}
 	return *(*CMTime)(unsafe.Pointer(ptr))
 }
 
 func KCMTimeMappingInvalid() CMTimeMapping {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeMappingInvalid")
-	if ptr == 0 { return CMTimeMapping{} }
+	if ptr == 0 {
+		return CMTimeMapping{}
+	}
 	return *(*CMTimeMapping)(unsafe.Pointer(ptr))
 }
 
@@ -1950,13 +1992,17 @@ func KCMTimeMappingTargetKey() uintptr {
 
 func KCMTimeNegativeInfinity() CMTime {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeNegativeInfinity")
-	if ptr == 0 { return CMTime{} }
+	if ptr == 0 {
+		return CMTime{}
+	}
 	return *(*CMTime)(unsafe.Pointer(ptr))
 }
 
 func KCMTimePositiveInfinity() CMTime {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimePositiveInfinity")
-	if ptr == 0 { return CMTime{} }
+	if ptr == 0 {
+		return CMTime{}
+	}
 	return *(*CMTime)(unsafe.Pointer(ptr))
 }
 
@@ -1968,7 +2014,9 @@ func KCMTimeRangeDurationKey() uintptr {
 
 func KCMTimeRangeInvalid() CMTimeRange {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeRangeInvalid")
-	if ptr == 0 { return CMTimeRange{} }
+	if ptr == 0 {
+		return CMTimeRange{}
+	}
 	return *(*CMTimeRange)(unsafe.Pointer(ptr))
 }
 
@@ -1980,7 +2028,9 @@ func KCMTimeRangeStartKey() uintptr {
 
 func KCMTimeRangeZero() CMTimeRange {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeRangeZero")
-	if ptr == 0 { return CMTimeRange{} }
+	if ptr == 0 {
+		return CMTimeRange{}
+	}
 	return *(*CMTimeRange)(unsafe.Pointer(ptr))
 }
 
@@ -1998,7 +2048,9 @@ func KCMTimeValueKey() uintptr {
 
 func KCMTimeZero() CMTime {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimeZero")
-	if ptr == 0 { return CMTime{} }
+	if ptr == 0 {
+		return CMTime{}
+	}
 	return *(*CMTime)(unsafe.Pointer(ptr))
 }
 
@@ -2019,7 +2071,8 @@ func KCMTimebaseNotification_TimeJumped() uintptr {
 
 func KCMTimingInfoInvalid() CMSampleTimingInfo {
 	ptr, _ := purego.Dlsym(_coremediaLib, "kCMTimingInfoInvalid")
-	if ptr == 0 { return CMSampleTimingInfo{} }
+	if ptr == 0 {
+		return CMSampleTimingInfo{}
+	}
 	return *(*CMSampleTimingInfo)(unsafe.Pointer(ptr))
 }
-

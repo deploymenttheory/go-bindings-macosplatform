@@ -26,4 +26,3 @@ func IOBluetoothAccessibilityIgnoredImageCellFromID(id objc.ID) *IOBluetoothAcce
 	purego.Track(o)
 	return o
 }
-

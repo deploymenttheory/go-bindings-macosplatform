@@ -18,10 +18,10 @@ type VZEFIVariableStore struct {
 }
 
 var (
-	_clsVZEFIVariableStore = _objcClass("VZEFIVariableStore")
-	_vZEFIVariableStoreSelInitWithURL = objc.RegisterName("initWithURL:")
+	_clsVZEFIVariableStore                                           = _objcClass("VZEFIVariableStore")
+	_vZEFIVariableStoreSelInitWithURL                                = objc.RegisterName("initWithURL:")
 	_vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError = objc.RegisterName("initCreatingVariableStoreAtURL:options:error:")
-	_vZEFIVariableStoreSelURL = objc.RegisterName("URL")
+	_vZEFIVariableStoreSelURL                                        = objc.RegisterName("URL")
 )
 
 func VZEFIVariableStoreFromID(id objc.ID) *VZEFIVariableStore {
@@ -37,7 +37,9 @@ func VZEFIVariableStoreFromID(id objc.ID) *VZEFIVariableStore {
 // @abstract Initialize the variable store from the URL of an existing file. @param URL The URL of the variable store on the local file system. @discussion To create a new variable store, use -[VZEFIVariableStore initCreatingVariableStoreAtURL:options:error].
 func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZEFIVariableStoreFromID(_ret)
 }
 
@@ -45,7 +47,9 @@ func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableSt
 func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(uRL *foundation.NSURL, options VZEFIVariableStoreInitializationOptions) (*VZEFIVariableStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -54,7 +58,8 @@ func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(uRL *fou
 
 func (o *VZEFIVariableStore) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

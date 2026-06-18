@@ -16,39 +16,39 @@ type MTLRenderPassDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPassDescriptor = _objcClass("MTLRenderPassDescriptor")
-	_mTLRenderPassDescriptorSelRenderPassDescriptor = objc.RegisterName("renderPassDescriptor")
-	_mTLRenderPassDescriptorSelSetSamplePositionsCount = objc.RegisterName("setSamplePositions:count:")
-	_mTLRenderPassDescriptorSelGetSamplePositionsCount = objc.RegisterName("getSamplePositions:count:")
-	_mTLRenderPassDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTLRenderPassDescriptorSelDepthAttachment = objc.RegisterName("depthAttachment")
-	_mTLRenderPassDescriptorSelSetDepthAttachment = objc.RegisterName("setDepthAttachment:")
-	_mTLRenderPassDescriptorSelStencilAttachment = objc.RegisterName("stencilAttachment")
-	_mTLRenderPassDescriptorSelSetStencilAttachment = objc.RegisterName("setStencilAttachment:")
-	_mTLRenderPassDescriptorSelVisibilityResultBuffer = objc.RegisterName("visibilityResultBuffer")
-	_mTLRenderPassDescriptorSelSetVisibilityResultBuffer = objc.RegisterName("setVisibilityResultBuffer:")
-	_mTLRenderPassDescriptorSelRenderTargetArrayLength = objc.RegisterName("renderTargetArrayLength")
-	_mTLRenderPassDescriptorSelSetRenderTargetArrayLength = objc.RegisterName("setRenderTargetArrayLength:")
-	_mTLRenderPassDescriptorSelImageblockSampleLength = objc.RegisterName("imageblockSampleLength")
-	_mTLRenderPassDescriptorSelSetImageblockSampleLength = objc.RegisterName("setImageblockSampleLength:")
-	_mTLRenderPassDescriptorSelThreadgroupMemoryLength = objc.RegisterName("threadgroupMemoryLength")
-	_mTLRenderPassDescriptorSelSetThreadgroupMemoryLength = objc.RegisterName("setThreadgroupMemoryLength:")
-	_mTLRenderPassDescriptorSelTileWidth = objc.RegisterName("tileWidth")
-	_mTLRenderPassDescriptorSelSetTileWidth = objc.RegisterName("setTileWidth:")
-	_mTLRenderPassDescriptorSelTileHeight = objc.RegisterName("tileHeight")
-	_mTLRenderPassDescriptorSelSetTileHeight = objc.RegisterName("setTileHeight:")
-	_mTLRenderPassDescriptorSelDefaultRasterSampleCount = objc.RegisterName("defaultRasterSampleCount")
-	_mTLRenderPassDescriptorSelSetDefaultRasterSampleCount = objc.RegisterName("setDefaultRasterSampleCount:")
-	_mTLRenderPassDescriptorSelRenderTargetWidth = objc.RegisterName("renderTargetWidth")
-	_mTLRenderPassDescriptorSelSetRenderTargetWidth = objc.RegisterName("setRenderTargetWidth:")
-	_mTLRenderPassDescriptorSelRenderTargetHeight = objc.RegisterName("renderTargetHeight")
-	_mTLRenderPassDescriptorSelSetRenderTargetHeight = objc.RegisterName("setRenderTargetHeight:")
-	_mTLRenderPassDescriptorSelRasterizationRateMap = objc.RegisterName("rasterizationRateMap")
-	_mTLRenderPassDescriptorSelSetRasterizationRateMap = objc.RegisterName("setRasterizationRateMap:")
-	_mTLRenderPassDescriptorSelSampleBufferAttachments = objc.RegisterName("sampleBufferAttachments")
-	_mTLRenderPassDescriptorSelVisibilityResultType = objc.RegisterName("visibilityResultType")
-	_mTLRenderPassDescriptorSelSetVisibilityResultType = objc.RegisterName("setVisibilityResultType:")
-	_mTLRenderPassDescriptorSelSupportColorAttachmentMapping = objc.RegisterName("supportColorAttachmentMapping")
+	_clsMTLRenderPassDescriptor                                 = _objcClass("MTLRenderPassDescriptor")
+	_mTLRenderPassDescriptorSelRenderPassDescriptor             = objc.RegisterName("renderPassDescriptor")
+	_mTLRenderPassDescriptorSelSetSamplePositionsCount          = objc.RegisterName("setSamplePositions:count:")
+	_mTLRenderPassDescriptorSelGetSamplePositionsCount          = objc.RegisterName("getSamplePositions:count:")
+	_mTLRenderPassDescriptorSelColorAttachments                 = objc.RegisterName("colorAttachments")
+	_mTLRenderPassDescriptorSelDepthAttachment                  = objc.RegisterName("depthAttachment")
+	_mTLRenderPassDescriptorSelSetDepthAttachment               = objc.RegisterName("setDepthAttachment:")
+	_mTLRenderPassDescriptorSelStencilAttachment                = objc.RegisterName("stencilAttachment")
+	_mTLRenderPassDescriptorSelSetStencilAttachment             = objc.RegisterName("setStencilAttachment:")
+	_mTLRenderPassDescriptorSelVisibilityResultBuffer           = objc.RegisterName("visibilityResultBuffer")
+	_mTLRenderPassDescriptorSelSetVisibilityResultBuffer        = objc.RegisterName("setVisibilityResultBuffer:")
+	_mTLRenderPassDescriptorSelRenderTargetArrayLength          = objc.RegisterName("renderTargetArrayLength")
+	_mTLRenderPassDescriptorSelSetRenderTargetArrayLength       = objc.RegisterName("setRenderTargetArrayLength:")
+	_mTLRenderPassDescriptorSelImageblockSampleLength           = objc.RegisterName("imageblockSampleLength")
+	_mTLRenderPassDescriptorSelSetImageblockSampleLength        = objc.RegisterName("setImageblockSampleLength:")
+	_mTLRenderPassDescriptorSelThreadgroupMemoryLength          = objc.RegisterName("threadgroupMemoryLength")
+	_mTLRenderPassDescriptorSelSetThreadgroupMemoryLength       = objc.RegisterName("setThreadgroupMemoryLength:")
+	_mTLRenderPassDescriptorSelTileWidth                        = objc.RegisterName("tileWidth")
+	_mTLRenderPassDescriptorSelSetTileWidth                     = objc.RegisterName("setTileWidth:")
+	_mTLRenderPassDescriptorSelTileHeight                       = objc.RegisterName("tileHeight")
+	_mTLRenderPassDescriptorSelSetTileHeight                    = objc.RegisterName("setTileHeight:")
+	_mTLRenderPassDescriptorSelDefaultRasterSampleCount         = objc.RegisterName("defaultRasterSampleCount")
+	_mTLRenderPassDescriptorSelSetDefaultRasterSampleCount      = objc.RegisterName("setDefaultRasterSampleCount:")
+	_mTLRenderPassDescriptorSelRenderTargetWidth                = objc.RegisterName("renderTargetWidth")
+	_mTLRenderPassDescriptorSelSetRenderTargetWidth             = objc.RegisterName("setRenderTargetWidth:")
+	_mTLRenderPassDescriptorSelRenderTargetHeight               = objc.RegisterName("renderTargetHeight")
+	_mTLRenderPassDescriptorSelSetRenderTargetHeight            = objc.RegisterName("setRenderTargetHeight:")
+	_mTLRenderPassDescriptorSelRasterizationRateMap             = objc.RegisterName("rasterizationRateMap")
+	_mTLRenderPassDescriptorSelSetRasterizationRateMap          = objc.RegisterName("setRasterizationRateMap:")
+	_mTLRenderPassDescriptorSelSampleBufferAttachments          = objc.RegisterName("sampleBufferAttachments")
+	_mTLRenderPassDescriptorSelVisibilityResultType             = objc.RegisterName("visibilityResultType")
+	_mTLRenderPassDescriptorSelSetVisibilityResultType          = objc.RegisterName("setVisibilityResultType:")
+	_mTLRenderPassDescriptorSelSupportColorAttachmentMapping    = objc.RegisterName("supportColorAttachmentMapping")
 	_mTLRenderPassDescriptorSelSetSupportColorAttachmentMapping = objc.RegisterName("setSupportColorAttachmentMapping:")
 )
 
@@ -65,7 +65,9 @@ func MTLRenderPassDescriptorFromID(id objc.ID) *MTLRenderPassDescriptor {
 // @method renderPassDescriptor @abstract Create an autoreleased default frame buffer descriptor
 func MTLRenderPassDescriptorRenderPassDescriptor() *MTLRenderPassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRenderPassDescriptor), _mTLRenderPassDescriptorSelRenderPassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassDescriptorFromID(_ret)
 }
 
@@ -82,13 +84,17 @@ func (o *MTLRenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePo
 
 func (o *MTLRenderPassDescriptor) ColorAttachments() *MTLRenderPassColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassColorAttachmentDescriptorArrayFromID(_ret)
 }
 
 func (o *MTLRenderPassDescriptor) DepthAttachment() *MTLRenderPassDepthAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassDescriptorSelDepthAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassDepthAttachmentDescriptorFromID(_ret)
 }
 
@@ -98,7 +104,9 @@ func (o *MTLRenderPassDescriptor) SetDepthAttachment(depthAttachment *MTLRenderP
 
 func (o *MTLRenderPassDescriptor) StencilAttachment() *MTLRenderPassStencilAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassDescriptorSelStencilAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassStencilAttachmentDescriptorFromID(_ret)
 }
 
@@ -209,7 +217,9 @@ func (o *MTLRenderPassDescriptor) SetRasterizationRateMap(rasterizationRateMap M
 // @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
 func (o *MTLRenderPassDescriptor) SampleBufferAttachments() *MTLRenderPassSampleBufferAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassDescriptorSelSampleBufferAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(_ret)
 }
 
@@ -232,4 +242,3 @@ func (o *MTLRenderPassDescriptor) SupportColorAttachmentMapping() bool {
 func (o *MTLRenderPassDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
 	o.Ptr().Send(_mTLRenderPassDescriptorSelSetSupportColorAttachmentMapping, supportColorAttachmentMapping)
 }
-

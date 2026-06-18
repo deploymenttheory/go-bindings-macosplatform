@@ -16,11 +16,11 @@ type MXAppLaunchMetric struct {
 }
 
 var (
-	_clsMXAppLaunchMetric = _objcClass("MXAppLaunchMetric")
-	_mXAppLaunchMetricSelHistogrammedTimeToFirstDraw = objc.RegisterName("histogrammedTimeToFirstDraw")
-	_mXAppLaunchMetricSelHistogrammedApplicationResumeTime = objc.RegisterName("histogrammedApplicationResumeTime")
+	_clsMXAppLaunchMetric                                     = _objcClass("MXAppLaunchMetric")
+	_mXAppLaunchMetricSelHistogrammedTimeToFirstDraw          = objc.RegisterName("histogrammedTimeToFirstDraw")
+	_mXAppLaunchMetricSelHistogrammedApplicationResumeTime    = objc.RegisterName("histogrammedApplicationResumeTime")
 	_mXAppLaunchMetricSelHistogrammedOptimizedTimeToFirstDraw = objc.RegisterName("histogrammedOptimizedTimeToFirstDraw")
-	_mXAppLaunchMetricSelHistogrammedExtendedLaunch = objc.RegisterName("histogrammedExtendedLaunch")
+	_mXAppLaunchMetricSelHistogrammedExtendedLaunch           = objc.RegisterName("histogrammedExtendedLaunch")
 )
 
 func MXAppLaunchMetricFromID(id objc.ID) *MXAppLaunchMetric {
@@ -56,4 +56,3 @@ func (o *MXAppLaunchMetric) HistogrammedExtendedLaunch() *MXHistogram[*foundatio
 	_ret := objc.Send[*MXHistogram[*foundation.NSUnitDuration]](o.Ptr(), _mXAppLaunchMetricSelHistogrammedExtendedLaunch)
 	return _ret
 }
-

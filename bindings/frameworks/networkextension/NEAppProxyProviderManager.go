@@ -18,7 +18,7 @@ type NEAppProxyProviderManager struct {
 }
 
 var (
-	_clsNEAppProxyProviderManager = _objcClass("NEAppProxyProviderManager")
+	_clsNEAppProxyProviderManager                                            = _objcClass("NEAppProxyProviderManager")
 	_nEAppProxyProviderManagerSelLoadAllFromPreferencesWithCompletionHandler = objc.RegisterName("loadAllFromPreferencesWithCompletionHandler:")
 )
 
@@ -46,4 +46,3 @@ func NEAppProxyProviderManagerLoadAllFromPreferencesWithCompletionHandler(comple
 	}
 	objc.ID(_clsNEAppProxyProviderManager).Send(_nEAppProxyProviderManagerSelLoadAllFromPreferencesWithCompletionHandler, __block_completionHandler)
 }
-

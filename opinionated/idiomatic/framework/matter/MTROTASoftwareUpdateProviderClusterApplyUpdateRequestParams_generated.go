@@ -16,11 +16,15 @@ type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams].
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams { return x.inner }
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0).
 func MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
@@ -60,7 +64,9 @@ func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServer
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams { return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams }
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+}
 
 // MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
@@ -72,4 +78,3 @@ type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)
-

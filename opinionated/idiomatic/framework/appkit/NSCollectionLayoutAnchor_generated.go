@@ -66,4 +66,3 @@ type CollectionLayoutAnchorable interface {
 }
 
 var _ CollectionLayoutAnchorable = (*CollectionLayoutAnchor)(nil)
-

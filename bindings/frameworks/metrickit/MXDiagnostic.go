@@ -16,12 +16,12 @@ type MXDiagnostic struct {
 }
 
 var (
-	_clsMXDiagnostic = _objcClass("MXDiagnostic")
-	_mXDiagnosticSelJSONRepresentation = objc.RegisterName("JSONRepresentation")
+	_clsMXDiagnostic                         = _objcClass("MXDiagnostic")
+	_mXDiagnosticSelJSONRepresentation       = objc.RegisterName("JSONRepresentation")
 	_mXDiagnosticSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_mXDiagnosticSelMetaData = objc.RegisterName("metaData")
-	_mXDiagnosticSelApplicationVersion = objc.RegisterName("applicationVersion")
-	_mXDiagnosticSelSignpostData = objc.RegisterName("signpostData")
+	_mXDiagnosticSelMetaData                 = objc.RegisterName("metaData")
+	_mXDiagnosticSelApplicationVersion       = objc.RegisterName("applicationVersion")
+	_mXDiagnosticSelSignpostData             = objc.RegisterName("signpostData")
 )
 
 func MXDiagnosticFromID(id objc.ID) *MXDiagnostic {
@@ -37,7 +37,9 @@ func MXDiagnosticFromID(id objc.ID) *MXDiagnostic {
 // @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic. @result        An NSData object containing the JSON representation
 func (o *MXDiagnostic) JSONRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelJSONRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,20 +51,25 @@ func (o *MXDiagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.
 
 func (o *MXDiagnostic) MetaData() *MXMetaData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelMetaData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXMetaDataFromID(_ret)
 }
 
 // @property      applicationVersion @abstract      An NSString representation of the application version from which this diagnostic was generated.
 func (o *MXDiagnostic) ApplicationVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelApplicationVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MXDiagnostic) SignpostData() *foundation.NSArray[*MXSignpostRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDiagnosticSelSignpostData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MXSignpostRecord](_ret)
 }
-

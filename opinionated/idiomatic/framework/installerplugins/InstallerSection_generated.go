@@ -119,4 +119,3 @@ type InstallerSectionable interface {
 }
 
 var _ InstallerSectionable = (*InstallerSection)(nil)
-

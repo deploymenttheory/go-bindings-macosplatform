@@ -46,7 +46,9 @@ func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -68,7 +70,9 @@ func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -196,4 +200,3 @@ type NEDNSSettingsable interface {
 }
 
 var _ NEDNSSettingsable = (*NEDNSSettings)(nil)
-

@@ -16,13 +16,13 @@ type WebArchive struct {
 }
 
 var (
-	_clsWebArchive = _objcClass("WebArchive")
+	_clsWebArchive                                                 = _objcClass("WebArchive")
 	_webArchiveSelInitWithMainResourceSubresourcesSubframeArchives = objc.RegisterName("initWithMainResource:subresources:subframeArchives:")
-	_webArchiveSelInitWithData = objc.RegisterName("initWithData:")
-	_webArchiveSelMainResource = objc.RegisterName("mainResource")
-	_webArchiveSelSubresources = objc.RegisterName("subresources")
-	_webArchiveSelSubframeArchives = objc.RegisterName("subframeArchives")
-	_webArchiveSelData = objc.RegisterName("data")
+	_webArchiveSelInitWithData                                     = objc.RegisterName("initWithData:")
+	_webArchiveSelMainResource                                     = objc.RegisterName("mainResource")
+	_webArchiveSelSubresources                                     = objc.RegisterName("subresources")
+	_webArchiveSelSubframeArchives                                 = objc.RegisterName("subframeArchives")
+	_webArchiveSelData                                             = objc.RegisterName("data")
 )
 
 func WebArchiveFromID(id objc.ID) *WebArchive {
@@ -38,21 +38,27 @@ func WebArchiveFromID(id objc.ID) *WebArchive {
 // @method initWithMainResource:subresources:subframeArchives: @abstract The initializer for WebArchive. @param mainResource The main resource of the archive. @param subresources The subresources of the archive (can be nil). @param subframeArchives The archives representing the subframes of the archive (can be nil). @result An initialized WebArchive.
 func (o *WebArchive) InitWithMainResourceSubresourcesSubframeArchives(mainResource *WebResource, subresources *foundation.NSArray[objc.ID], subframeArchives *foundation.NSArray[objc.ID]) *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelInitWithMainResourceSubresourcesSubframeArchives, mainResource.Ptr(), subresources, subframeArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebArchiveFromID(_ret)
 }
 
 // @method initWithData: @abstract The initializer for creating a WebArchive from data. @param data The data representing the archive. This can be obtained using WebArchive's data method. @result An initialized WebArchive.
 func (o *WebArchive) InitWithData(data *foundation.NSData) *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebArchiveFromID(_ret)
 }
 
 // @property mainResource @abstract The main resource of the archive.
 func (o *WebArchive) MainResource() *WebResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelMainResource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebResourceFromID(_ret)
 }
 
@@ -71,7 +77,8 @@ func (o *WebArchive) SubframeArchives() *foundation.NSArray[objc.ID] {
 // @property data @abstract The data representation of the archive. @discussion The data returned by this method can be used to save a web archive to a file or to place a web archive on the pasteboard using WebArchivePboardType. To create a WebArchive using the returned data, call initWithData:.
 func (o *WebArchive) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webArchiveSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

@@ -15,16 +15,16 @@ type NSLayoutDimension struct {
 }
 
 var (
-	_clsNSLayoutDimension = _objcClass("NSLayoutDimension")
-	_nSLayoutDimensionSelConstraintEqualToConstant = objc.RegisterName("constraintEqualToConstant:")
-	_nSLayoutDimensionSelConstraintGreaterThanOrEqualToConstant = objc.RegisterName("constraintGreaterThanOrEqualToConstant:")
-	_nSLayoutDimensionSelConstraintLessThanOrEqualToConstant = objc.RegisterName("constraintLessThanOrEqualToConstant:")
-	_nSLayoutDimensionSelConstraintEqualToAnchorMultiplier = objc.RegisterName("constraintEqualToAnchor:multiplier:")
-	_nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplier = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:")
-	_nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplier = objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:")
-	_nSLayoutDimensionSelConstraintEqualToAnchorMultiplierConstant = objc.RegisterName("constraintEqualToAnchor:multiplier:constant:")
+	_clsNSLayoutDimension                                                       = _objcClass("NSLayoutDimension")
+	_nSLayoutDimensionSelConstraintEqualToConstant                              = objc.RegisterName("constraintEqualToConstant:")
+	_nSLayoutDimensionSelConstraintGreaterThanOrEqualToConstant                 = objc.RegisterName("constraintGreaterThanOrEqualToConstant:")
+	_nSLayoutDimensionSelConstraintLessThanOrEqualToConstant                    = objc.RegisterName("constraintLessThanOrEqualToConstant:")
+	_nSLayoutDimensionSelConstraintEqualToAnchorMultiplier                      = objc.RegisterName("constraintEqualToAnchor:multiplier:")
+	_nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplier         = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:")
+	_nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplier            = objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:")
+	_nSLayoutDimensionSelConstraintEqualToAnchorMultiplierConstant              = objc.RegisterName("constraintEqualToAnchor:multiplier:constant:")
 	_nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplierConstant = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:multiplier:constant:")
-	_nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplierConstant = objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:constant:")
+	_nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplierConstant    = objc.RegisterName("constraintLessThanOrEqualToAnchor:multiplier:constant:")
 )
 
 func NSLayoutDimensionFromID(id objc.ID) *NSLayoutDimension {
@@ -39,55 +39,72 @@ func NSLayoutDimensionFromID(id objc.ID) *NSLayoutDimension {
 
 func (o *NSLayoutDimension) ConstraintEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToConstant, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToConstant, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToConstant(c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToConstant, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToAnchorMultiplier, anchor.Ptr(), m)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplier, anchor.Ptr(), m)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplier(anchor *NSLayoutDimension, m float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplier, anchor.Ptr(), m)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintGreaterThanOrEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintGreaterThanOrEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutDimension) ConstraintLessThanOrEqualToAnchorMultiplierConstant(anchor *NSLayoutDimension, m float64, c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutDimensionSelConstraintLessThanOrEqualToAnchorMultiplierConstant, anchor.Ptr(), m, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
-

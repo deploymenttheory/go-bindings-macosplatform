@@ -142,4 +142,3 @@ type MTRGroupsClusterAddGroupParamsable interface {
 }
 
 var _ MTRGroupsClusterAddGroupParamsable = (*MTRGroupsClusterAddGroupParams)(nil)
-

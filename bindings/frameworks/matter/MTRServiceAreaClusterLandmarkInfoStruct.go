@@ -16,10 +16,10 @@ type MTRServiceAreaClusterLandmarkInfoStruct struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterLandmarkInfoStruct = _objcClass("MTRServiceAreaClusterLandmarkInfoStruct")
-	_mTRServiceAreaClusterLandmarkInfoStructSelLandmarkTag = objc.RegisterName("landmarkTag")
-	_mTRServiceAreaClusterLandmarkInfoStructSelSetLandmarkTag = objc.RegisterName("setLandmarkTag:")
-	_mTRServiceAreaClusterLandmarkInfoStructSelRelativePositionTag = objc.RegisterName("relativePositionTag")
+	_clsMTRServiceAreaClusterLandmarkInfoStruct                       = _objcClass("MTRServiceAreaClusterLandmarkInfoStruct")
+	_mTRServiceAreaClusterLandmarkInfoStructSelLandmarkTag            = objc.RegisterName("landmarkTag")
+	_mTRServiceAreaClusterLandmarkInfoStructSelSetLandmarkTag         = objc.RegisterName("setLandmarkTag:")
+	_mTRServiceAreaClusterLandmarkInfoStructSelRelativePositionTag    = objc.RegisterName("relativePositionTag")
 	_mTRServiceAreaClusterLandmarkInfoStructSelSetRelativePositionTag = objc.RegisterName("setRelativePositionTag:")
 )
 
@@ -35,7 +35,9 @@ func MTRServiceAreaClusterLandmarkInfoStructFromID(id objc.ID) *MTRServiceAreaCl
 
 func (o *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterLandmarkInfoStructSelLandmarkTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag *fo
 
 func (o *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterLandmarkInfoStructSelRelativePositionTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag *foundation.NSNumber) {
 	o.Ptr().Send(_mTRServiceAreaClusterLandmarkInfoStructSelSetRelativePositionTag, relativePositionTag.Ptr())
 }
-

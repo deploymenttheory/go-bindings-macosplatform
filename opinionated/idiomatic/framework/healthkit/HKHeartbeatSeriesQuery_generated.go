@@ -45,4 +45,3 @@ type HeartbeatSeriesQueryable interface {
 }
 
 var _ HeartbeatSeriesQueryable = (*HeartbeatSeriesQuery)(nil)
-

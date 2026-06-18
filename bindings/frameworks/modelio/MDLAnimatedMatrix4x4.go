@@ -17,15 +17,15 @@ type MDLAnimatedMatrix4x4 struct {
 }
 
 var (
-	_clsMDLAnimatedMatrix4x4 = _objcClass("MDLAnimatedMatrix4x4")
-	_mDLAnimatedMatrix4x4SelSetFloat4x4AtTime = objc.RegisterName("setFloat4x4:atTime:")
-	_mDLAnimatedMatrix4x4SelSetDouble4x4AtTime = objc.RegisterName("setDouble4x4:atTime:")
-	_mDLAnimatedMatrix4x4SelFloat4x4AtTime = objc.RegisterName("float4x4AtTime:")
-	_mDLAnimatedMatrix4x4SelDouble4x4AtTime = objc.RegisterName("double4x4AtTime:")
-	_mDLAnimatedMatrix4x4SelResetWithFloat4x4ArrayAtTimesCount = objc.RegisterName("resetWithFloat4x4Array:atTimes:count:")
+	_clsMDLAnimatedMatrix4x4                                    = _objcClass("MDLAnimatedMatrix4x4")
+	_mDLAnimatedMatrix4x4SelSetFloat4x4AtTime                   = objc.RegisterName("setFloat4x4:atTime:")
+	_mDLAnimatedMatrix4x4SelSetDouble4x4AtTime                  = objc.RegisterName("setDouble4x4:atTime:")
+	_mDLAnimatedMatrix4x4SelFloat4x4AtTime                      = objc.RegisterName("float4x4AtTime:")
+	_mDLAnimatedMatrix4x4SelDouble4x4AtTime                     = objc.RegisterName("double4x4AtTime:")
+	_mDLAnimatedMatrix4x4SelResetWithFloat4x4ArrayAtTimesCount  = objc.RegisterName("resetWithFloat4x4Array:atTimes:count:")
 	_mDLAnimatedMatrix4x4SelResetWithDouble4x4ArrayAtTimesCount = objc.RegisterName("resetWithDouble4x4Array:atTimes:count:")
-	_mDLAnimatedMatrix4x4SelGetFloat4x4ArrayMaxCount = objc.RegisterName("getFloat4x4Array:maxCount:")
-	_mDLAnimatedMatrix4x4SelGetDouble4x4ArrayMaxCount = objc.RegisterName("getDouble4x4Array:maxCount:")
+	_mDLAnimatedMatrix4x4SelGetFloat4x4ArrayMaxCount            = objc.RegisterName("getFloat4x4Array:maxCount:")
+	_mDLAnimatedMatrix4x4SelGetDouble4x4ArrayMaxCount           = objc.RegisterName("getDouble4x4Array:maxCount:")
 )
 
 func MDLAnimatedMatrix4x4FromID(id objc.ID) *MDLAnimatedMatrix4x4 {
@@ -73,4 +73,3 @@ func (o *MDLAnimatedMatrix4x4) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Poin
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedMatrix4x4SelGetDouble4x4ArrayMaxCount, valuesArray, maxCount)
 	return _ret
 }
-

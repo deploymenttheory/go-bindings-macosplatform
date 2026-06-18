@@ -49,7 +49,9 @@ func (x *CustomDetectionTrack) AllDetections() []*Detection {
 	})
 }
 
-func (x *CustomDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return &x.inner.CNDetectionTrack }
+func (x *CustomDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack {
+	return &x.inner.CNDetectionTrack
+}
 
 // CustomDetectionTrackable is the interface implemented by [CustomDetectionTrack], for mocking and DI.
 type CustomDetectionTrackable interface {
@@ -58,4 +60,3 @@ type CustomDetectionTrackable interface {
 }
 
 var _ CustomDetectionTrackable = (*CustomDetectionTrack)(nil)
-

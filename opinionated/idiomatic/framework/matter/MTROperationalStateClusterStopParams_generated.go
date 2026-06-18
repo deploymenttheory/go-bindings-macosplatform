@@ -16,7 +16,9 @@ type MTROperationalStateClusterStopParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalStateClusterStopParams].
-func (x *MTROperationalStateClusterStopParams) Unwrap() *raw.MTROperationalStateClusterStopParams { return x.inner }
+func (x *MTROperationalStateClusterStopParams) Unwrap() *raw.MTROperationalStateClusterStopParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTROperationalStateClusterStopParamsable interface {
 }
 
 var _ MTROperationalStateClusterStopParamsable = (*MTROperationalStateClusterStopParams)(nil)
-

@@ -16,11 +16,11 @@ type PHASEMappedMetaParameterDefinition struct {
 }
 
 var (
-	_clsPHASEMappedMetaParameterDefinition = _objcClass("PHASEMappedMetaParameterDefinition")
+	_clsPHASEMappedMetaParameterDefinition                                                       = _objcClass("PHASEMappedMetaParameterDefinition")
 	_pHASEMappedMetaParameterDefinitionSelInitWithInputMetaParameterDefinitionEnvelopeIdentifier = objc.RegisterName("initWithInputMetaParameterDefinition:envelope:identifier:")
-	_pHASEMappedMetaParameterDefinitionSelInitWithInputMetaParameterDefinitionEnvelope = objc.RegisterName("initWithInputMetaParameterDefinition:envelope:")
-	_pHASEMappedMetaParameterDefinitionSelEnvelope = objc.RegisterName("envelope")
-	_pHASEMappedMetaParameterDefinitionSelInputMetaParameterDefinition = objc.RegisterName("inputMetaParameterDefinition")
+	_pHASEMappedMetaParameterDefinitionSelInitWithInputMetaParameterDefinitionEnvelope           = objc.RegisterName("initWithInputMetaParameterDefinition:envelope:")
+	_pHASEMappedMetaParameterDefinitionSelEnvelope                                               = objc.RegisterName("envelope")
+	_pHASEMappedMetaParameterDefinitionSelInputMetaParameterDefinition                           = objc.RegisterName("inputMetaParameterDefinition")
 )
 
 func PHASEMappedMetaParameterDefinitionFromID(id objc.ID) *PHASEMappedMetaParameterDefinition {
@@ -36,28 +36,35 @@ func PHASEMappedMetaParameterDefinitionFromID(id objc.ID) *PHASEMappedMetaParame
 // @method initWithInputMetaParameterDefinition:identifier @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @param identifier An optional custom identifier to give to this object @return The new PHASEMappedMetaParameterDefinition object
 func (o *PHASEMappedMetaParameterDefinition) InitWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *PHASENumberMetaParameterDefinition, envelope *PHASEEnvelope, identifier *foundation.NSString) *PHASEMappedMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMappedMetaParameterDefinitionSelInitWithInputMetaParameterDefinitionEnvelopeIdentifier, inputMetaParameterDefinition.Ptr(), envelope.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMappedMetaParameterDefinitionFromID(_ret)
 }
 
 // @method initWithInputMetaParameterDefinition @abstract Create a new mapped range metaparameter definition @param inputMetaParameterDefinition The metaparameter that will provide an input for this mapped metaparameter @param envelope The envelope to use. @return The new PHASEMappedMetaParameterDefinition object
 func (o *PHASEMappedMetaParameterDefinition) InitWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *PHASENumberMetaParameterDefinition, envelope *PHASEEnvelope) *PHASEMappedMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMappedMetaParameterDefinitionSelInitWithInputMetaParameterDefinitionEnvelope, inputMetaParameterDefinition.Ptr(), envelope.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMappedMetaParameterDefinitionFromID(_ret)
 }
 
 // @property envelope @abstract An Envelope to define segments of curves
 func (o *PHASEMappedMetaParameterDefinition) Envelope() *PHASEEnvelope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMappedMetaParameterDefinitionSelEnvelope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEnvelopeFromID(_ret)
 }
 
 // @property inputMetaParameterDefinition @abstract The readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
 func (o *PHASEMappedMetaParameterDefinition) InputMetaParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMappedMetaParameterDefinitionSelInputMetaParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
-

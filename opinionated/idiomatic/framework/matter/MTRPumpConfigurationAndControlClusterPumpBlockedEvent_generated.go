@@ -15,7 +15,9 @@ type MTRPumpConfigurationAndControlClusterPumpBlockedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent].
-func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRPumpConfigurationAndControlClusterPumpBlockedEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterPumpBlockedEventable = (*MTRPumpConfigurationAndControlClusterPumpBlockedEvent)(nil)
-

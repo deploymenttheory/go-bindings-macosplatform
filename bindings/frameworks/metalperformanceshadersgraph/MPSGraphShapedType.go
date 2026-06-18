@@ -18,12 +18,12 @@ type MPSGraphShapedType struct {
 }
 
 var (
-	_clsMPSGraphShapedType = _objcClass("MPSGraphShapedType")
+	_clsMPSGraphShapedType                      = _objcClass("MPSGraphShapedType")
 	_mPSGraphShapedTypeSelInitWithShapeDataType = objc.RegisterName("initWithShape:dataType:")
-	_mPSGraphShapedTypeSelShape = objc.RegisterName("shape")
-	_mPSGraphShapedTypeSelSetShape = objc.RegisterName("setShape:")
-	_mPSGraphShapedTypeSelDataType = objc.RegisterName("dataType")
-	_mPSGraphShapedTypeSelSetDataType = objc.RegisterName("setDataType:")
+	_mPSGraphShapedTypeSelShape                 = objc.RegisterName("shape")
+	_mPSGraphShapedTypeSelSetShape              = objc.RegisterName("setShape:")
+	_mPSGraphShapedTypeSelDataType              = objc.RegisterName("dataType")
+	_mPSGraphShapedTypeSelSetDataType           = objc.RegisterName("setDataType:")
 )
 
 func MPSGraphShapedTypeFromID(id objc.ID) *MPSGraphShapedType {
@@ -39,7 +39,9 @@ func MPSGraphShapedTypeFromID(id objc.ID) *MPSGraphShapedType {
 // Initializes a shaped type. - Parameters: - shape: The shape of the shaped type. - dataType: The dataType of the shaped type. - Returns: A valid MPSGraphShapedType, or nil if allocation failure.
 func (o *MPSGraphShapedType) InitWithShapeDataType(shape unsafe.Pointer, dataType mpscore.MPSDataType) *MPSGraphShapedType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphShapedTypeSelInitWithShapeDataType, shape, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphShapedTypeFromID(_ret)
 }
 
@@ -62,4 +64,3 @@ func (o *MPSGraphShapedType) DataType() mpscore.MPSDataType {
 func (o *MPSGraphShapedType) SetDataType(dataType mpscore.MPSDataType) {
 	o.Ptr().Send(_mPSGraphShapedTypeSelSetDataType, dataType)
 }
-

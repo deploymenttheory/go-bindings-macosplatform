@@ -74,7 +74,9 @@ func (x *ScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
 	x.inner.SetItemSize(itemSize)
 }
 
-func (x *ScrubberFlowLayout) asScrubberLayout() *raw.NSScrubberLayout { return &x.inner.NSScrubberLayout }
+func (x *ScrubberFlowLayout) asScrubberLayout() *raw.NSScrubberLayout {
+	return &x.inner.NSScrubberLayout
+}
 
 // ScrubberFlowLayoutable is the interface implemented by [ScrubberFlowLayout], for mocking and DI.
 type ScrubberFlowLayoutable interface {
@@ -89,4 +91,3 @@ type ScrubberFlowLayoutable interface {
 }
 
 var _ ScrubberFlowLayoutable = (*ScrubberFlowLayout)(nil)
-

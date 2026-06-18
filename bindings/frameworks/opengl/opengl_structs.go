@@ -33,4 +33,3 @@ type IOSurface struct{}
 // C struct: _cl_device_id
 // ClDeviceId is an opaque type.
 type ClDeviceId struct{}
-

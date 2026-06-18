@@ -41,4 +41,3 @@ type Utilityable interface {
 }
 
 var _ Utilityable = (*Utility)(nil)
-

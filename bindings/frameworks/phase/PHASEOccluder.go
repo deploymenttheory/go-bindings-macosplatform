@@ -16,9 +16,9 @@ type PHASEOccluder struct {
 }
 
 var (
-	_clsPHASEOccluder = _objcClass("PHASEOccluder")
+	_clsPHASEOccluder                     = _objcClass("PHASEOccluder")
 	_pHASEOccluderSelInitWithEngineShapes = objc.RegisterName("initWithEngine:shapes:")
-	_pHASEOccluderSelShapes = objc.RegisterName("shapes")
+	_pHASEOccluderSelShapes               = objc.RegisterName("shapes")
 )
 
 func PHASEOccluderFromID(id objc.ID) *PHASEOccluder {
@@ -34,13 +34,16 @@ func PHASEOccluderFromID(id objc.ID) *PHASEOccluder {
 // @method initWithEngine:shapes: @abstract Initialize a new occluder with shapes. @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple occluders from multiple threads, if required.
 func (o *PHASEOccluder) InitWithEngineShapes(engine *PHASEEngine, shapes *foundation.NSArray[*PHASEShape]) *PHASEOccluder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEOccluderSelInitWithEngineShapes, engine.Ptr(), shapes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEOccluderFromID(_ret)
 }
 
 func (o *PHASEOccluder) Shapes() *foundation.NSArray[*PHASEShape] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEOccluderSelShapes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEShape](_ret)
 }
-

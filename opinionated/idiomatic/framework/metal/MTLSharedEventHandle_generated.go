@@ -52,4 +52,3 @@ type SharedEventHandleable interface {
 }
 
 var _ SharedEventHandleable = (*SharedEventHandle)(nil)
-

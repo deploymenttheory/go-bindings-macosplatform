@@ -101,4 +101,3 @@ func ACTencentWeiboAppIdKey() uintptr {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACTencentWeiboAppIdKey")
 	return ptr
 }
-

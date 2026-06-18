@@ -244,4 +244,3 @@ type Candidatesable interface {
 }
 
 var _ Candidatesable = (*Candidates)(nil)
-

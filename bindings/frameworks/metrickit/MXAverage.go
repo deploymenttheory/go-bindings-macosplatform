@@ -16,10 +16,10 @@ type MXAverage[UnitType purego.AnyObject] struct {
 }
 
 var (
-	_clsMXAverage = _objcClass("MXAverage")
+	_clsMXAverage                   = _objcClass("MXAverage")
 	_mXAverageSelAverageMeasurement = objc.RegisterName("averageMeasurement")
-	_mXAverageSelSampleCount = objc.RegisterName("sampleCount")
-	_mXAverageSelStandardDeviation = objc.RegisterName("standardDeviation")
+	_mXAverageSelSampleCount        = objc.RegisterName("sampleCount")
+	_mXAverageSelStandardDeviation  = objc.RegisterName("standardDeviation")
 )
 
 func MXAverageFromID[UnitType purego.AnyObject](id objc.ID) *MXAverage[UnitType] {
@@ -35,7 +35,9 @@ func MXAverageFromID[UnitType purego.AnyObject](id objc.ID) *MXAverage[UnitType]
 // @property      averageMeasurement @abstract      An NSMeasurement that contains the average measurement.
 func (o *MXAverage[UnitType]) AverageMeasurement() *foundation.NSMeasurement[UnitType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXAverageSelAverageMeasurement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSMeasurementFromID[UnitType](_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *MXAverage[UnitType]) StandardDeviation() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mXAverageSelStandardDeviation)
 	return _ret
 }
-

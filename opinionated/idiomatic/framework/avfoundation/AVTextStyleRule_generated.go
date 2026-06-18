@@ -67,4 +67,3 @@ type TextStyleRuleable interface {
 }
 
 var _ TextStyleRuleable = (*TextStyleRule)(nil)
-

@@ -16,17 +16,17 @@ type AVAssetResourceLoadingContentInformationRequest struct {
 }
 
 var (
-	_clsAVAssetResourceLoadingContentInformationRequest = _objcClass("AVAssetResourceLoadingContentInformationRequest")
-	_aVAssetResourceLoadingContentInformationRequestSelContentType = objc.RegisterName("contentType")
-	_aVAssetResourceLoadingContentInformationRequestSelSetContentType = objc.RegisterName("setContentType:")
-	_aVAssetResourceLoadingContentInformationRequestSelAllowedContentTypes = objc.RegisterName("allowedContentTypes")
-	_aVAssetResourceLoadingContentInformationRequestSelContentLength = objc.RegisterName("contentLength")
-	_aVAssetResourceLoadingContentInformationRequestSelSetContentLength = objc.RegisterName("setContentLength:")
-	_aVAssetResourceLoadingContentInformationRequestSelIsByteRangeAccessSupported = objc.RegisterName("isByteRangeAccessSupported")
-	_aVAssetResourceLoadingContentInformationRequestSelSetByteRangeAccessSupported = objc.RegisterName("setByteRangeAccessSupported:")
-	_aVAssetResourceLoadingContentInformationRequestSelRenewalDate = objc.RegisterName("renewalDate")
-	_aVAssetResourceLoadingContentInformationRequestSelSetRenewalDate = objc.RegisterName("setRenewalDate:")
-	_aVAssetResourceLoadingContentInformationRequestSelIsEntireLengthAvailableOnDemand = objc.RegisterName("isEntireLengthAvailableOnDemand")
+	_clsAVAssetResourceLoadingContentInformationRequest                                 = _objcClass("AVAssetResourceLoadingContentInformationRequest")
+	_aVAssetResourceLoadingContentInformationRequestSelContentType                      = objc.RegisterName("contentType")
+	_aVAssetResourceLoadingContentInformationRequestSelSetContentType                   = objc.RegisterName("setContentType:")
+	_aVAssetResourceLoadingContentInformationRequestSelAllowedContentTypes              = objc.RegisterName("allowedContentTypes")
+	_aVAssetResourceLoadingContentInformationRequestSelContentLength                    = objc.RegisterName("contentLength")
+	_aVAssetResourceLoadingContentInformationRequestSelSetContentLength                 = objc.RegisterName("setContentLength:")
+	_aVAssetResourceLoadingContentInformationRequestSelIsByteRangeAccessSupported       = objc.RegisterName("isByteRangeAccessSupported")
+	_aVAssetResourceLoadingContentInformationRequestSelSetByteRangeAccessSupported      = objc.RegisterName("setByteRangeAccessSupported:")
+	_aVAssetResourceLoadingContentInformationRequestSelRenewalDate                      = objc.RegisterName("renewalDate")
+	_aVAssetResourceLoadingContentInformationRequestSelSetRenewalDate                   = objc.RegisterName("setRenewalDate:")
+	_aVAssetResourceLoadingContentInformationRequestSelIsEntireLengthAvailableOnDemand  = objc.RegisterName("isEntireLengthAvailableOnDemand")
 	_aVAssetResourceLoadingContentInformationRequestSelSetEntireLengthAvailableOnDemand = objc.RegisterName("setEntireLengthAvailableOnDemand:")
 )
 
@@ -43,7 +43,9 @@ func AVAssetResourceLoadingContentInformationRequestFromID(id objc.ID) *AVAssetR
 // @property 		contentType @abstract		A UTI that indicates the type of data contained by the requested resource. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if its contentInformationRequest is not nil, you should set the value of this property to a UTI indicating the type of data contained by the requested resource.
 func (o *AVAssetResourceLoadingContentInformationRequest) ContentType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingContentInformationRequestSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,7 +82,9 @@ func (o *AVAssetResourceLoadingContentInformationRequest) SetByteRangeAccessSupp
 // @property		renewalDate @abstract		For resources that expire, the date at which a new AVAssetResourceLoadingRequest will be issued for a renewal of this resource, if the media system still requires it. @discussion	Before you finish loading an AVAssetResourceLoadingRequest, if the resource is prone to expiry you should set the value of this property to the date at which a renewal should be triggered. This value should be set sufficiently early enough to allow an AVAssetResourceRenewalRequest, delivered to your delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to finish before the actual expiry time. Otherwise media playback may fail.
 func (o *AVAssetResourceLoadingContentInformationRequest) RenewalDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoadingContentInformationRequestSelRenewalDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -97,4 +101,3 @@ func (o *AVAssetResourceLoadingContentInformationRequest) IsEntireLengthAvailabl
 func (o *AVAssetResourceLoadingContentInformationRequest) SetEntireLengthAvailableOnDemand(entireLengthAvailableOnDemand bool) {
 	o.Ptr().Send(_aVAssetResourceLoadingContentInformationRequestSelSetEntireLengthAvailableOnDemand, entireLengthAvailableOnDemand)
 }
-

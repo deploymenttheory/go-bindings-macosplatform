@@ -805,4 +805,3 @@ func ConfirmationRequiredWithVolumeToConfirm(volumeToConfirm *foundation.NSMeasu
 	}
 	return &VolumeResolutionResult{inner: _r}
 }
-

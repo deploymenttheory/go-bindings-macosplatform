@@ -16,10 +16,10 @@ type BEWebAppManifest struct {
 }
 
 var (
-	_clsBEWebAppManifest = _objcClass("BEWebAppManifest")
+	_clsBEWebAppManifest                            = _objcClass("BEWebAppManifest")
 	_bEWebAppManifestSelInitWithJSONDataManifestURL = objc.RegisterName("initWithJSONData:manifestURL:")
-	_bEWebAppManifestSelJsonData = objc.RegisterName("jsonData")
-	_bEWebAppManifestSelManifestURL = objc.RegisterName("manifestURL")
+	_bEWebAppManifestSelJsonData                    = objc.RegisterName("jsonData")
+	_bEWebAppManifestSelManifestURL                 = objc.RegisterName("manifestURL")
 )
 
 func BEWebAppManifestFromID(id objc.ID) *BEWebAppManifest {
@@ -35,19 +35,24 @@ func BEWebAppManifestFromID(id objc.ID) *BEWebAppManifest {
 // Returns nil if manifestURL is invalid or jsonData cannot be parsed.
 func (o *BEWebAppManifest) InitWithJSONDataManifestURL(jsonData *foundation.NSData, manifestURL *foundation.NSURL) *BEWebAppManifest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebAppManifestSelInitWithJSONDataManifestURL, jsonData.Ptr(), manifestURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BEWebAppManifestFromID(_ret)
 }
 
 func (o *BEWebAppManifest) JsonData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebAppManifestSelJsonData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *BEWebAppManifest) ManifestURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bEWebAppManifestSelManifestURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

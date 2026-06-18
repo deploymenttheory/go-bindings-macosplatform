@@ -73,4 +73,3 @@ type HapticEventParameterable interface {
 }
 
 var _ HapticEventParameterable = (*HapticEventParameter)(nil)
-

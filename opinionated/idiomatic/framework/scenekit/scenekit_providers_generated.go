@@ -27,4 +27,3 @@ type NodeProvider interface {
 type PhysicsBehaviorProvider interface {
 	asPhysicsBehavior() *raw.SCNPhysicsBehavior
 }
-

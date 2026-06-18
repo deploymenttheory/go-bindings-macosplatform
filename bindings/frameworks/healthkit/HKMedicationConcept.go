@@ -16,10 +16,10 @@ type HKMedicationConcept struct {
 }
 
 var (
-	_clsHKMedicationConcept = _objcClass("HKMedicationConcept")
-	_hKMedicationConceptSelIdentifier = objc.RegisterName("identifier")
-	_hKMedicationConceptSelDisplayText = objc.RegisterName("displayText")
-	_hKMedicationConceptSelGeneralForm = objc.RegisterName("generalForm")
+	_clsHKMedicationConcept               = _objcClass("HKMedicationConcept")
+	_hKMedicationConceptSelIdentifier     = objc.RegisterName("identifier")
+	_hKMedicationConceptSelDisplayText    = objc.RegisterName("displayText")
+	_hKMedicationConceptSelGeneralForm    = objc.RegisterName("generalForm")
 	_hKMedicationConceptSelRelatedCodings = objc.RegisterName("relatedCodings")
 )
 
@@ -36,28 +36,35 @@ func HKMedicationConceptFromID(id objc.ID) *HKMedicationConcept {
 // The unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
 func (o *HKMedicationConcept) Identifier() *HKHealthConceptIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKMedicationConceptSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKHealthConceptIdentifierFromID(_ret)
 }
 
 // The display name for this medication. The name of the medication a person enters or selects during medication onboarding.
 func (o *HKMedicationConcept) DisplayText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKMedicationConceptSelDisplayText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
 func (o *HKMedicationConcept) GeneralForm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKMedicationConceptSelGeneralForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
 func (o *HKMedicationConcept) RelatedCodings() *foundation.NSSet[*HKClinicalCoding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKMedicationConceptSelRelatedCodings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*HKClinicalCoding](_ret)
 }
-

@@ -16,25 +16,25 @@ type CalCalendarItem struct {
 }
 
 var (
-	_clsCalCalendarItem = _objcClass("CalCalendarItem")
-	_calCalendarItemSelHasAlarm = objc.RegisterName("hasAlarm")
+	_clsCalCalendarItem              = _objcClass("CalCalendarItem")
+	_calCalendarItemSelHasAlarm      = objc.RegisterName("hasAlarm")
 	_calCalendarItemSelNextAlarmDate = objc.RegisterName("nextAlarmDate")
-	_calCalendarItemSelAddAlarm = objc.RegisterName("addAlarm:")
-	_calCalendarItemSelAddAlarms = objc.RegisterName("addAlarms:")
-	_calCalendarItemSelRemoveAlarm = objc.RegisterName("removeAlarm:")
-	_calCalendarItemSelRemoveAlarms = objc.RegisterName("removeAlarms:")
-	_calCalendarItemSelCalendar = objc.RegisterName("calendar")
-	_calCalendarItemSelSetCalendar = objc.RegisterName("setCalendar:")
-	_calCalendarItemSelNotes = objc.RegisterName("notes")
-	_calCalendarItemSelSetNotes = objc.RegisterName("setNotes:")
-	_calCalendarItemSelUrl = objc.RegisterName("url")
-	_calCalendarItemSelSetUrl = objc.RegisterName("setUrl:")
-	_calCalendarItemSelTitle = objc.RegisterName("title")
-	_calCalendarItemSelSetTitle = objc.RegisterName("setTitle:")
-	_calCalendarItemSelUid = objc.RegisterName("uid")
-	_calCalendarItemSelDateStamp = objc.RegisterName("dateStamp")
-	_calCalendarItemSelAlarms = objc.RegisterName("alarms")
-	_calCalendarItemSelSetAlarms = objc.RegisterName("setAlarms:")
+	_calCalendarItemSelAddAlarm      = objc.RegisterName("addAlarm:")
+	_calCalendarItemSelAddAlarms     = objc.RegisterName("addAlarms:")
+	_calCalendarItemSelRemoveAlarm   = objc.RegisterName("removeAlarm:")
+	_calCalendarItemSelRemoveAlarms  = objc.RegisterName("removeAlarms:")
+	_calCalendarItemSelCalendar      = objc.RegisterName("calendar")
+	_calCalendarItemSelSetCalendar   = objc.RegisterName("setCalendar:")
+	_calCalendarItemSelNotes         = objc.RegisterName("notes")
+	_calCalendarItemSelSetNotes      = objc.RegisterName("setNotes:")
+	_calCalendarItemSelUrl           = objc.RegisterName("url")
+	_calCalendarItemSelSetUrl        = objc.RegisterName("setUrl:")
+	_calCalendarItemSelTitle         = objc.RegisterName("title")
+	_calCalendarItemSelSetTitle      = objc.RegisterName("setTitle:")
+	_calCalendarItemSelUid           = objc.RegisterName("uid")
+	_calCalendarItemSelDateStamp     = objc.RegisterName("dateStamp")
+	_calCalendarItemSelAlarms        = objc.RegisterName("alarms")
+	_calCalendarItemSelSetAlarms     = objc.RegisterName("setAlarms:")
 )
 
 func CalCalendarItemFromID(id objc.ID) *CalCalendarItem {
@@ -56,7 +56,9 @@ func (o *CalCalendarItem) HasAlarm() bool {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) NextAlarmDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelNextAlarmDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -83,7 +85,9 @@ func (o *CalCalendarItem) RemoveAlarms(alarms *foundation.NSArray[objc.ID]) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Calendar() *CalCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalCalendarFromID(_ret)
 }
 
@@ -95,7 +99,9 @@ func (o *CalCalendarItem) SetCalendar(calendar *CalCalendar) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Notes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelNotes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +113,9 @@ func (o *CalCalendarItem) SetNotes(notes *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -119,7 +127,9 @@ func (o *CalCalendarItem) SetUrl(url *foundation.NSURL) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -131,14 +141,18 @@ func (o *CalCalendarItem) SetTitle(title *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) Uid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelUid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarItem) DateStamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarItemSelDateStamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -152,4 +166,3 @@ func (o *CalCalendarItem) Alarms() *foundation.NSArray[objc.ID] {
 func (o *CalCalendarItem) SetAlarms(alarms *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_calCalendarItemSelSetAlarms, alarms)
 }
-

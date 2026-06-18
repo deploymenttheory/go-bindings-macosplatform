@@ -15,31 +15,31 @@ type NSScriptObjectSpecifier struct {
 }
 
 var (
-	_clsNSScriptObjectSpecifier = _objcClass("NSScriptObjectSpecifier")
-	_nSScriptObjectSpecifierSelObjectSpecifierWithDescriptor = objc.RegisterName("objectSpecifierWithDescriptor:")
-	_nSScriptObjectSpecifierSelInitWithContainerSpecifierKey = objc.RegisterName("initWithContainerSpecifier:key:")
+	_clsNSScriptObjectSpecifier                                                       = _objcClass("NSScriptObjectSpecifier")
+	_nSScriptObjectSpecifierSelObjectSpecifierWithDescriptor                          = objc.RegisterName("objectSpecifierWithDescriptor:")
+	_nSScriptObjectSpecifierSelInitWithContainerSpecifierKey                          = objc.RegisterName("initWithContainerSpecifier:key:")
 	_nSScriptObjectSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKey = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:")
-	_nSScriptObjectSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScriptObjectSpecifierSelIndicesOfObjectsByEvaluatingWithContainerCount = objc.RegisterName("indicesOfObjectsByEvaluatingWithContainer:count:")
-	_nSScriptObjectSpecifierSelObjectsByEvaluatingWithContainers = objc.RegisterName("objectsByEvaluatingWithContainers:")
-	_nSScriptObjectSpecifierSelChildSpecifier = objc.RegisterName("childSpecifier")
-	_nSScriptObjectSpecifierSelSetChildSpecifier = objc.RegisterName("setChildSpecifier:")
-	_nSScriptObjectSpecifierSelContainerSpecifier = objc.RegisterName("containerSpecifier")
-	_nSScriptObjectSpecifierSelSetContainerSpecifier = objc.RegisterName("setContainerSpecifier:")
-	_nSScriptObjectSpecifierSelContainerIsObjectBeingTested = objc.RegisterName("containerIsObjectBeingTested")
-	_nSScriptObjectSpecifierSelSetContainerIsObjectBeingTested = objc.RegisterName("setContainerIsObjectBeingTested:")
-	_nSScriptObjectSpecifierSelContainerIsRangeContainerObject = objc.RegisterName("containerIsRangeContainerObject")
-	_nSScriptObjectSpecifierSelSetContainerIsRangeContainerObject = objc.RegisterName("setContainerIsRangeContainerObject:")
-	_nSScriptObjectSpecifierSelKey = objc.RegisterName("key")
-	_nSScriptObjectSpecifierSelSetKey = objc.RegisterName("setKey:")
-	_nSScriptObjectSpecifierSelContainerClassDescription = objc.RegisterName("containerClassDescription")
-	_nSScriptObjectSpecifierSelSetContainerClassDescription = objc.RegisterName("setContainerClassDescription:")
-	_nSScriptObjectSpecifierSelKeyClassDescription = objc.RegisterName("keyClassDescription")
-	_nSScriptObjectSpecifierSelObjectsByEvaluatingSpecifier = objc.RegisterName("objectsByEvaluatingSpecifier")
-	_nSScriptObjectSpecifierSelEvaluationErrorNumber = objc.RegisterName("evaluationErrorNumber")
-	_nSScriptObjectSpecifierSelSetEvaluationErrorNumber = objc.RegisterName("setEvaluationErrorNumber:")
-	_nSScriptObjectSpecifierSelEvaluationErrorSpecifier = objc.RegisterName("evaluationErrorSpecifier")
-	_nSScriptObjectSpecifierSelDescriptor = objc.RegisterName("descriptor")
+	_nSScriptObjectSpecifierSelInitWithCoder                                          = objc.RegisterName("initWithCoder:")
+	_nSScriptObjectSpecifierSelIndicesOfObjectsByEvaluatingWithContainerCount         = objc.RegisterName("indicesOfObjectsByEvaluatingWithContainer:count:")
+	_nSScriptObjectSpecifierSelObjectsByEvaluatingWithContainers                      = objc.RegisterName("objectsByEvaluatingWithContainers:")
+	_nSScriptObjectSpecifierSelChildSpecifier                                         = objc.RegisterName("childSpecifier")
+	_nSScriptObjectSpecifierSelSetChildSpecifier                                      = objc.RegisterName("setChildSpecifier:")
+	_nSScriptObjectSpecifierSelContainerSpecifier                                     = objc.RegisterName("containerSpecifier")
+	_nSScriptObjectSpecifierSelSetContainerSpecifier                                  = objc.RegisterName("setContainerSpecifier:")
+	_nSScriptObjectSpecifierSelContainerIsObjectBeingTested                           = objc.RegisterName("containerIsObjectBeingTested")
+	_nSScriptObjectSpecifierSelSetContainerIsObjectBeingTested                        = objc.RegisterName("setContainerIsObjectBeingTested:")
+	_nSScriptObjectSpecifierSelContainerIsRangeContainerObject                        = objc.RegisterName("containerIsRangeContainerObject")
+	_nSScriptObjectSpecifierSelSetContainerIsRangeContainerObject                     = objc.RegisterName("setContainerIsRangeContainerObject:")
+	_nSScriptObjectSpecifierSelKey                                                    = objc.RegisterName("key")
+	_nSScriptObjectSpecifierSelSetKey                                                 = objc.RegisterName("setKey:")
+	_nSScriptObjectSpecifierSelContainerClassDescription                              = objc.RegisterName("containerClassDescription")
+	_nSScriptObjectSpecifierSelSetContainerClassDescription                           = objc.RegisterName("setContainerClassDescription:")
+	_nSScriptObjectSpecifierSelKeyClassDescription                                    = objc.RegisterName("keyClassDescription")
+	_nSScriptObjectSpecifierSelObjectsByEvaluatingSpecifier                           = objc.RegisterName("objectsByEvaluatingSpecifier")
+	_nSScriptObjectSpecifierSelEvaluationErrorNumber                                  = objc.RegisterName("evaluationErrorNumber")
+	_nSScriptObjectSpecifierSelSetEvaluationErrorNumber                               = objc.RegisterName("setEvaluationErrorNumber:")
+	_nSScriptObjectSpecifierSelEvaluationErrorSpecifier                               = objc.RegisterName("evaluationErrorSpecifier")
+	_nSScriptObjectSpecifierSelDescriptor                                             = objc.RegisterName("descriptor")
 )
 
 func NSScriptObjectSpecifierFromID(id objc.ID) *NSScriptObjectSpecifier {
@@ -54,25 +54,33 @@ func NSScriptObjectSpecifierFromID(id objc.ID) *NSScriptObjectSpecifier {
 
 func NSScriptObjectSpecifierObjectSpecifierWithDescriptor(descriptor *NSAppleEventDescriptor) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptObjectSpecifier), _nSScriptObjectSpecifierSelObjectSpecifierWithDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSScriptObjectSpecifier) InitWithContainerSpecifierKey(container *NSScriptObjectSpecifier, property *NSString) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelInitWithContainerSpecifierKey, container.Ptr(), property.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSScriptObjectSpecifier) InitWithContainerClassDescriptionContainerSpecifierKey(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKey, classDesc.Ptr(), container.Ptr(), property.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSScriptObjectSpecifier) InitWithCoder(inCoder *NSCoder) *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -88,7 +96,9 @@ func (o *NSScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers o
 
 func (o *NSScriptObjectSpecifier) ChildSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelChildSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -98,7 +108,9 @@ func (o *NSScriptObjectSpecifier) SetChildSpecifier(childSpecifier *NSScriptObje
 
 func (o *NSScriptObjectSpecifier) ContainerSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelContainerSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -126,7 +138,9 @@ func (o *NSScriptObjectSpecifier) SetContainerIsRangeContainerObject(containerIs
 
 func (o *NSScriptObjectSpecifier) Key() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -136,7 +150,9 @@ func (o *NSScriptObjectSpecifier) SetKey(key *NSString) {
 
 func (o *NSScriptObjectSpecifier) ContainerClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelContainerClassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -146,7 +162,9 @@ func (o *NSScriptObjectSpecifier) SetContainerClassDescription(containerClassDes
 
 func (o *NSScriptObjectSpecifier) KeyClassDescription() *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelKeyClassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
@@ -166,13 +184,16 @@ func (o *NSScriptObjectSpecifier) SetEvaluationErrorNumber(evaluationErrorNumber
 
 func (o *NSScriptObjectSpecifier) EvaluationErrorSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelEvaluationErrorSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
 func (o *NSScriptObjectSpecifier) Descriptor() *NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptObjectSpecifierSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppleEventDescriptorFromID(_ret)
 }
-

@@ -16,11 +16,11 @@ type NSManagedObjectID struct {
 }
 
 var (
-	_clsNSManagedObjectID = _objcClass("NSManagedObjectID")
+	_clsNSManagedObjectID                  = _objcClass("NSManagedObjectID")
 	_nSManagedObjectIDSelURIRepresentation = objc.RegisterName("URIRepresentation")
-	_nSManagedObjectIDSelEntity = objc.RegisterName("entity")
-	_nSManagedObjectIDSelPersistentStore = objc.RegisterName("persistentStore")
-	_nSManagedObjectIDSelIsTemporaryID = objc.RegisterName("isTemporaryID")
+	_nSManagedObjectIDSelEntity            = objc.RegisterName("entity")
+	_nSManagedObjectIDSelPersistentStore   = objc.RegisterName("persistentStore")
+	_nSManagedObjectIDSelIsTemporaryID     = objc.RegisterName("isTemporaryID")
 )
 
 func NSManagedObjectIDFromID(id objc.ID) *NSManagedObjectID {
@@ -35,19 +35,25 @@ func NSManagedObjectIDFromID(id objc.ID) *NSManagedObjectID {
 
 func (o *NSManagedObjectID) URIRepresentation() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectIDSelURIRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *NSManagedObjectID) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectIDSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSManagedObjectID) PersistentStore() *NSPersistentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSManagedObjectIDSelPersistentStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreFromID(_ret)
 }
 
@@ -55,4 +61,3 @@ func (o *NSManagedObjectID) IsTemporaryID() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSManagedObjectIDSelIsTemporaryID)
 	return _ret
 }
-

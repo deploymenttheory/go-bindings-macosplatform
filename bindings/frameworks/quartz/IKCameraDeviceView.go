@@ -18,50 +18,50 @@ type IKCameraDeviceView struct {
 }
 
 var (
-	_clsIKCameraDeviceView = _objcClass("IKCameraDeviceView")
-	_iKCameraDeviceViewSelSelectedIndexes = objc.RegisterName("selectedIndexes")
-	_iKCameraDeviceViewSelSelectIndexesByExtendingSelection = objc.RegisterName("selectIndexes:byExtendingSelection:")
-	_iKCameraDeviceViewSelRotateLeft = objc.RegisterName("rotateLeft:")
-	_iKCameraDeviceViewSelRotateRight = objc.RegisterName("rotateRight:")
-	_iKCameraDeviceViewSelDeleteSelectedItems = objc.RegisterName("deleteSelectedItems:")
-	_iKCameraDeviceViewSelDownloadSelectedItems = objc.RegisterName("downloadSelectedItems:")
-	_iKCameraDeviceViewSelDownloadAllItems = objc.RegisterName("downloadAllItems:")
-	_iKCameraDeviceViewSelSetCustomIconSizeSlider = objc.RegisterName("setCustomIconSizeSlider:")
-	_iKCameraDeviceViewSelSetCustomModeControl = objc.RegisterName("setCustomModeControl:")
-	_iKCameraDeviceViewSelSetCustomActionControl = objc.RegisterName("setCustomActionControl:")
-	_iKCameraDeviceViewSelSetCustomRotateControl = objc.RegisterName("setCustomRotateControl:")
-	_iKCameraDeviceViewSelSetCustomDeleteControl = objc.RegisterName("setCustomDeleteControl:")
-	_iKCameraDeviceViewSelSetShowStatusInfoAsWindowSubtitle = objc.RegisterName("setShowStatusInfoAsWindowSubtitle:")
-	_iKCameraDeviceViewSelDelegate = objc.RegisterName("delegate")
-	_iKCameraDeviceViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iKCameraDeviceViewSelCameraDevice = objc.RegisterName("cameraDevice")
-	_iKCameraDeviceViewSelSetCameraDevice = objc.RegisterName("setCameraDevice:")
-	_iKCameraDeviceViewSelMode = objc.RegisterName("mode")
-	_iKCameraDeviceViewSelSetMode = objc.RegisterName("setMode:")
-	_iKCameraDeviceViewSelHasDisplayModeTable = objc.RegisterName("hasDisplayModeTable")
-	_iKCameraDeviceViewSelSetHasDisplayModeTable = objc.RegisterName("setHasDisplayModeTable:")
-	_iKCameraDeviceViewSelHasDisplayModeIcon = objc.RegisterName("hasDisplayModeIcon")
-	_iKCameraDeviceViewSelSetHasDisplayModeIcon = objc.RegisterName("setHasDisplayModeIcon:")
-	_iKCameraDeviceViewSelDownloadAllControlLabel = objc.RegisterName("downloadAllControlLabel")
-	_iKCameraDeviceViewSelSetDownloadAllControlLabel = objc.RegisterName("setDownloadAllControlLabel:")
-	_iKCameraDeviceViewSelDownloadSelectedControlLabel = objc.RegisterName("downloadSelectedControlLabel")
-	_iKCameraDeviceViewSelSetDownloadSelectedControlLabel = objc.RegisterName("setDownloadSelectedControlLabel:")
-	_iKCameraDeviceViewSelIconSize = objc.RegisterName("iconSize")
-	_iKCameraDeviceViewSelSetIconSize = objc.RegisterName("setIconSize:")
-	_iKCameraDeviceViewSelTransferMode = objc.RegisterName("transferMode")
-	_iKCameraDeviceViewSelSetTransferMode = objc.RegisterName("setTransferMode:")
-	_iKCameraDeviceViewSelDisplaysDownloadsDirectoryControl = objc.RegisterName("displaysDownloadsDirectoryControl")
-	_iKCameraDeviceViewSelSetDisplaysDownloadsDirectoryControl = objc.RegisterName("setDisplaysDownloadsDirectoryControl:")
-	_iKCameraDeviceViewSelDownloadsDirectory = objc.RegisterName("downloadsDirectory")
-	_iKCameraDeviceViewSelSetDownloadsDirectory = objc.RegisterName("setDownloadsDirectory:")
-	_iKCameraDeviceViewSelDisplaysPostProcessApplicationControl = objc.RegisterName("displaysPostProcessApplicationControl")
+	_clsIKCameraDeviceView                                         = _objcClass("IKCameraDeviceView")
+	_iKCameraDeviceViewSelSelectedIndexes                          = objc.RegisterName("selectedIndexes")
+	_iKCameraDeviceViewSelSelectIndexesByExtendingSelection        = objc.RegisterName("selectIndexes:byExtendingSelection:")
+	_iKCameraDeviceViewSelRotateLeft                               = objc.RegisterName("rotateLeft:")
+	_iKCameraDeviceViewSelRotateRight                              = objc.RegisterName("rotateRight:")
+	_iKCameraDeviceViewSelDeleteSelectedItems                      = objc.RegisterName("deleteSelectedItems:")
+	_iKCameraDeviceViewSelDownloadSelectedItems                    = objc.RegisterName("downloadSelectedItems:")
+	_iKCameraDeviceViewSelDownloadAllItems                         = objc.RegisterName("downloadAllItems:")
+	_iKCameraDeviceViewSelSetCustomIconSizeSlider                  = objc.RegisterName("setCustomIconSizeSlider:")
+	_iKCameraDeviceViewSelSetCustomModeControl                     = objc.RegisterName("setCustomModeControl:")
+	_iKCameraDeviceViewSelSetCustomActionControl                   = objc.RegisterName("setCustomActionControl:")
+	_iKCameraDeviceViewSelSetCustomRotateControl                   = objc.RegisterName("setCustomRotateControl:")
+	_iKCameraDeviceViewSelSetCustomDeleteControl                   = objc.RegisterName("setCustomDeleteControl:")
+	_iKCameraDeviceViewSelSetShowStatusInfoAsWindowSubtitle        = objc.RegisterName("setShowStatusInfoAsWindowSubtitle:")
+	_iKCameraDeviceViewSelDelegate                                 = objc.RegisterName("delegate")
+	_iKCameraDeviceViewSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_iKCameraDeviceViewSelCameraDevice                             = objc.RegisterName("cameraDevice")
+	_iKCameraDeviceViewSelSetCameraDevice                          = objc.RegisterName("setCameraDevice:")
+	_iKCameraDeviceViewSelMode                                     = objc.RegisterName("mode")
+	_iKCameraDeviceViewSelSetMode                                  = objc.RegisterName("setMode:")
+	_iKCameraDeviceViewSelHasDisplayModeTable                      = objc.RegisterName("hasDisplayModeTable")
+	_iKCameraDeviceViewSelSetHasDisplayModeTable                   = objc.RegisterName("setHasDisplayModeTable:")
+	_iKCameraDeviceViewSelHasDisplayModeIcon                       = objc.RegisterName("hasDisplayModeIcon")
+	_iKCameraDeviceViewSelSetHasDisplayModeIcon                    = objc.RegisterName("setHasDisplayModeIcon:")
+	_iKCameraDeviceViewSelDownloadAllControlLabel                  = objc.RegisterName("downloadAllControlLabel")
+	_iKCameraDeviceViewSelSetDownloadAllControlLabel               = objc.RegisterName("setDownloadAllControlLabel:")
+	_iKCameraDeviceViewSelDownloadSelectedControlLabel             = objc.RegisterName("downloadSelectedControlLabel")
+	_iKCameraDeviceViewSelSetDownloadSelectedControlLabel          = objc.RegisterName("setDownloadSelectedControlLabel:")
+	_iKCameraDeviceViewSelIconSize                                 = objc.RegisterName("iconSize")
+	_iKCameraDeviceViewSelSetIconSize                              = objc.RegisterName("setIconSize:")
+	_iKCameraDeviceViewSelTransferMode                             = objc.RegisterName("transferMode")
+	_iKCameraDeviceViewSelSetTransferMode                          = objc.RegisterName("setTransferMode:")
+	_iKCameraDeviceViewSelDisplaysDownloadsDirectoryControl        = objc.RegisterName("displaysDownloadsDirectoryControl")
+	_iKCameraDeviceViewSelSetDisplaysDownloadsDirectoryControl     = objc.RegisterName("setDisplaysDownloadsDirectoryControl:")
+	_iKCameraDeviceViewSelDownloadsDirectory                       = objc.RegisterName("downloadsDirectory")
+	_iKCameraDeviceViewSelSetDownloadsDirectory                    = objc.RegisterName("setDownloadsDirectory:")
+	_iKCameraDeviceViewSelDisplaysPostProcessApplicationControl    = objc.RegisterName("displaysPostProcessApplicationControl")
 	_iKCameraDeviceViewSelSetDisplaysPostProcessApplicationControl = objc.RegisterName("setDisplaysPostProcessApplicationControl:")
-	_iKCameraDeviceViewSelPostProcessApplication = objc.RegisterName("postProcessApplication")
-	_iKCameraDeviceViewSelSetPostProcessApplication = objc.RegisterName("setPostProcessApplication:")
-	_iKCameraDeviceViewSelCanRotateSelectedItemsLeft = objc.RegisterName("canRotateSelectedItemsLeft")
-	_iKCameraDeviceViewSelCanRotateSelectedItemsRight = objc.RegisterName("canRotateSelectedItemsRight")
-	_iKCameraDeviceViewSelCanDeleteSelectedItems = objc.RegisterName("canDeleteSelectedItems")
-	_iKCameraDeviceViewSelCanDownloadSelectedItems = objc.RegisterName("canDownloadSelectedItems")
+	_iKCameraDeviceViewSelPostProcessApplication                   = objc.RegisterName("postProcessApplication")
+	_iKCameraDeviceViewSelSetPostProcessApplication                = objc.RegisterName("setPostProcessApplication:")
+	_iKCameraDeviceViewSelCanRotateSelectedItemsLeft               = objc.RegisterName("canRotateSelectedItemsLeft")
+	_iKCameraDeviceViewSelCanRotateSelectedItemsRight              = objc.RegisterName("canRotateSelectedItemsRight")
+	_iKCameraDeviceViewSelCanDeleteSelectedItems                   = objc.RegisterName("canDeleteSelectedItems")
+	_iKCameraDeviceViewSelCanDownloadSelectedItems                 = objc.RegisterName("canDownloadSelectedItems")
 )
 
 func IKCameraDeviceViewFromID(id objc.ID) *IKCameraDeviceView {
@@ -77,7 +77,9 @@ func IKCameraDeviceViewFromID(id objc.ID) *IKCameraDeviceView {
 // @method selectedIndexes @abstract current user selection.
 func (o *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelSelectedIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -154,7 +156,9 @@ func (o *IKCameraDeviceView) SetDelegate(delegate objc.ID) {
 // @property cameraDevice @abstract the camera device.
 func (o *IKCameraDeviceView) CameraDevice() *imagecapturecore.ICCameraDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelCameraDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return imagecapturecore.ICCameraDeviceFromID(_ret)
 }
 
@@ -195,7 +199,9 @@ func (o *IKCameraDeviceView) SetHasDisplayModeIcon(hasDisplayModeIcon bool) {
 // @property downloadAllControlLabel @abstract label for the 'Download All' control - allows for example renaming to 'Import All'.
 func (o *IKCameraDeviceView) DownloadAllControlLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadAllControlLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -206,7 +212,9 @@ func (o *IKCameraDeviceView) SetDownloadAllControlLabel(downloadAllControlLabel 
 // @property downloadSelectedControlLabel @abstract label for the 'Download Selected' control.
 func (o *IKCameraDeviceView) DownloadSelectedControlLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadSelectedControlLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -247,7 +255,9 @@ func (o *IKCameraDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownlo
 // @property downloadsDirectory @abstract downloads directory.
 func (o *IKCameraDeviceView) DownloadsDirectory() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelDownloadsDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -268,7 +278,9 @@ func (o *IKCameraDeviceView) SetDisplaysPostProcessApplicationControl(displaysPo
 // @property postProcessApplication @abstract postprocessing application.
 func (o *IKCameraDeviceView) PostProcessApplication() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iKCameraDeviceViewSelPostProcessApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -299,4 +311,3 @@ func (o *IKCameraDeviceView) CanDownloadSelectedItems() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iKCameraDeviceViewSelCanDownloadSelectedItems)
 	return _ret
 }
-

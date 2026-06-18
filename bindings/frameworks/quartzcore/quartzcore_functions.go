@@ -8,22 +8,22 @@ import (
 )
 
 var (
-	_fnCACurrentMediaTime func() float64
-	_fnCAFrameRateRangeIsEqualToRange func(CAFrameRateRange, CAFrameRateRange) bool
-	_fnCAFrameRateRangeMake func(float32, float32, float32) CAFrameRateRange
-	_fnCATransform3DConcat func(CATransform3D, CATransform3D) CATransform3D
-	_fnCATransform3DEqualToTransform func(CATransform3D, CATransform3D) bool
-	_fnCATransform3DGetAffineTransform func(CATransform3D) corefoundation.CGAffineTransform
-	_fnCATransform3DInvert func(CATransform3D) CATransform3D
-	_fnCATransform3DIsAffine func(CATransform3D) bool
-	_fnCATransform3DIsIdentity func(CATransform3D) bool
+	_fnCACurrentMediaTime               func() float64
+	_fnCAFrameRateRangeIsEqualToRange   func(CAFrameRateRange, CAFrameRateRange) bool
+	_fnCAFrameRateRangeMake             func(float32, float32, float32) CAFrameRateRange
+	_fnCATransform3DConcat              func(CATransform3D, CATransform3D) CATransform3D
+	_fnCATransform3DEqualToTransform    func(CATransform3D, CATransform3D) bool
+	_fnCATransform3DGetAffineTransform  func(CATransform3D) corefoundation.CGAffineTransform
+	_fnCATransform3DInvert              func(CATransform3D) CATransform3D
+	_fnCATransform3DIsAffine            func(CATransform3D) bool
+	_fnCATransform3DIsIdentity          func(CATransform3D) bool
 	_fnCATransform3DMakeAffineTransform func(corefoundation.CGAffineTransform) CATransform3D
-	_fnCATransform3DMakeRotation func(float64, float64, float64, float64) CATransform3D
-	_fnCATransform3DMakeScale func(float64, float64, float64) CATransform3D
-	_fnCATransform3DMakeTranslation func(float64, float64, float64) CATransform3D
-	_fnCATransform3DRotate func(CATransform3D, float64, float64, float64, float64) CATransform3D
-	_fnCATransform3DScale func(CATransform3D, float64, float64, float64) CATransform3D
-	_fnCATransform3DTranslate func(CATransform3D, float64, float64, float64) CATransform3D
+	_fnCATransform3DMakeRotation        func(float64, float64, float64, float64) CATransform3D
+	_fnCATransform3DMakeScale           func(float64, float64, float64) CATransform3D
+	_fnCATransform3DMakeTranslation     func(float64, float64, float64) CATransform3D
+	_fnCATransform3DRotate              func(CATransform3D, float64, float64, float64, float64) CATransform3D
+	_fnCATransform3DScale               func(CATransform3D, float64, float64, float64) CATransform3D
+	_fnCATransform3DTranslate           func(CATransform3D, float64, float64, float64) CATransform3D
 )
 
 func CACurrentMediaTime() float64 {
@@ -89,4 +89,3 @@ func CATransform3DScale(t CATransform3D, sx float64, sy float64, sz float64) CAT
 func CATransform3DTranslate(t CATransform3D, tx float64, ty float64, tz float64) CATransform3D {
 	return _fnCATransform3DTranslate(t, tx, ty, tz)
 }
-

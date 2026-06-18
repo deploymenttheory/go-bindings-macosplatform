@@ -20,9 +20,9 @@ type VNHumanBodyRecognizedPoint3D struct {
 }
 
 var (
-	_clsVNHumanBodyRecognizedPoint3D = _objcClass("VNHumanBodyRecognizedPoint3D")
+	_clsVNHumanBodyRecognizedPoint3D              = _objcClass("VNHumanBodyRecognizedPoint3D")
 	_vNHumanBodyRecognizedPoint3DSelLocalPosition = objc.RegisterName("localPosition")
-	_vNHumanBodyRecognizedPoint3DSelParentJoint = objc.RegisterName("parentJoint")
+	_vNHumanBodyRecognizedPoint3DSelParentJoint   = objc.RegisterName("parentJoint")
 )
 
 func VNHumanBodyRecognizedPoint3DFromID(id objc.ID) *VNHumanBodyRecognizedPoint3D {
@@ -42,7 +42,8 @@ func (o *VNHumanBodyRecognizedPoint3D) LocalPosition() unsafe.Pointer {
 
 func (o *VNHumanBodyRecognizedPoint3D) ParentJoint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNHumanBodyRecognizedPoint3DSelParentJoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

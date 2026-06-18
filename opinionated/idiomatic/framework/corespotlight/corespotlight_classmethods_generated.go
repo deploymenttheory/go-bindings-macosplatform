@@ -50,4 +50,3 @@ func UserQueryContextWithCurrentSuggestion(currentSuggestion *raw.CSSuggestion) 
 	}
 	return &UserQueryContext{inner: _r}
 }
-

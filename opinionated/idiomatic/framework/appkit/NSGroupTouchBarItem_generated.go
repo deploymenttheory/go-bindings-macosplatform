@@ -75,7 +75,9 @@ func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUs
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSUserInterfaceCompressionOptions](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -191,4 +193,3 @@ type GroupTouchBarItemable interface {
 }
 
 var _ GroupTouchBarItemable = (*GroupTouchBarItem)(nil)
-

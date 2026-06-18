@@ -17,7 +17,9 @@ type AccessibilityCustomRotorItemResult struct {
 }
 
 // Unwrap returns the underlying [raw.NSAccessibilityCustomRotorItemResult].
-func (x *AccessibilityCustomRotorItemResult) Unwrap() *raw.NSAccessibilityCustomRotorItemResult { return x.inner }
+func (x *AccessibilityCustomRotorItemResult) Unwrap() *raw.NSAccessibilityCustomRotorItemResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -105,4 +107,3 @@ type AccessibilityCustomRotorItemResultable interface {
 }
 
 var _ AccessibilityCustomRotorItemResultable = (*AccessibilityCustomRotorItemResult)(nil)
-

@@ -111,4 +111,3 @@ type Queryable interface {
 }
 
 var _ Queryable = (*Query)(nil)
-

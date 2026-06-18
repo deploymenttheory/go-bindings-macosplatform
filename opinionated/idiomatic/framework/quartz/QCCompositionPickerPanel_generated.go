@@ -51,4 +51,3 @@ type QCCompositionPickerPanelable interface {
 }
 
 var _ QCCompositionPickerPanelable = (*QCCompositionPickerPanel)(nil)
-

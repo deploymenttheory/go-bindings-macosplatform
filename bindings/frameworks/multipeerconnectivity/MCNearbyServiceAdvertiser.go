@@ -16,15 +16,15 @@ type MCNearbyServiceAdvertiser struct {
 }
 
 var (
-	_clsMCNearbyServiceAdvertiser = _objcClass("MCNearbyServiceAdvertiser")
+	_clsMCNearbyServiceAdvertiser                                     = _objcClass("MCNearbyServiceAdvertiser")
 	_mCNearbyServiceAdvertiserSelInitWithPeerDiscoveryInfoServiceType = objc.RegisterName("initWithPeer:discoveryInfo:serviceType:")
-	_mCNearbyServiceAdvertiserSelStartAdvertisingPeer = objc.RegisterName("startAdvertisingPeer")
-	_mCNearbyServiceAdvertiserSelStopAdvertisingPeer = objc.RegisterName("stopAdvertisingPeer")
-	_mCNearbyServiceAdvertiserSelDelegate = objc.RegisterName("delegate")
-	_mCNearbyServiceAdvertiserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mCNearbyServiceAdvertiserSelMyPeerID = objc.RegisterName("myPeerID")
-	_mCNearbyServiceAdvertiserSelDiscoveryInfo = objc.RegisterName("discoveryInfo")
-	_mCNearbyServiceAdvertiserSelServiceType = objc.RegisterName("serviceType")
+	_mCNearbyServiceAdvertiserSelStartAdvertisingPeer                 = objc.RegisterName("startAdvertisingPeer")
+	_mCNearbyServiceAdvertiserSelStopAdvertisingPeer                  = objc.RegisterName("stopAdvertisingPeer")
+	_mCNearbyServiceAdvertiserSelDelegate                             = objc.RegisterName("delegate")
+	_mCNearbyServiceAdvertiserSelSetDelegate                          = objc.RegisterName("setDelegate:")
+	_mCNearbyServiceAdvertiserSelMyPeerID                             = objc.RegisterName("myPeerID")
+	_mCNearbyServiceAdvertiserSelDiscoveryInfo                        = objc.RegisterName("discoveryInfo")
+	_mCNearbyServiceAdvertiserSelServiceType                          = objc.RegisterName("serviceType")
 )
 
 func MCNearbyServiceAdvertiserFromID(id objc.ID) *MCNearbyServiceAdvertiser {
@@ -39,7 +39,9 @@ func MCNearbyServiceAdvertiserFromID(id objc.ID) *MCNearbyServiceAdvertiser {
 
 func (o *MCNearbyServiceAdvertiser) InitWithPeerDiscoveryInfoServiceType(myPeerID *MCPeerID, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], serviceType *foundation.NSString) *MCNearbyServiceAdvertiser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelInitWithPeerDiscoveryInfoServiceType, myPeerID.Ptr(), info, serviceType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCNearbyServiceAdvertiserFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *MCNearbyServiceAdvertiser) SetDelegate(delegate MCNearbyServiceAdvertis
 
 func (o *MCNearbyServiceAdvertiser) MyPeerID() *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelMyPeerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCPeerIDFromID(_ret)
 }
 
@@ -73,7 +77,8 @@ func (o *MCNearbyServiceAdvertiser) DiscoveryInfo() *foundation.NSDictionary[*fo
 
 func (o *MCNearbyServiceAdvertiser) ServiceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCNearbyServiceAdvertiserSelServiceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

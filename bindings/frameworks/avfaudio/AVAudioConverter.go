@@ -18,45 +18,45 @@ type AVAudioConverter struct {
 }
 
 var (
-	_clsAVAudioConverter = _objcClass("AVAudioConverter")
-	_aVAudioConverterSelInitFromFormatToFormat = objc.RegisterName("initFromFormat:toFormat:")
-	_aVAudioConverterSelReset = objc.RegisterName("reset")
-	_aVAudioConverterSelConvertToBufferFromBufferError = objc.RegisterName("convertToBuffer:fromBuffer:error:")
+	_clsAVAudioConverter                                       = _objcClass("AVAudioConverter")
+	_aVAudioConverterSelInitFromFormatToFormat                 = objc.RegisterName("initFromFormat:toFormat:")
+	_aVAudioConverterSelReset                                  = objc.RegisterName("reset")
+	_aVAudioConverterSelConvertToBufferFromBufferError         = objc.RegisterName("convertToBuffer:fromBuffer:error:")
 	_aVAudioConverterSelConvertToBufferErrorWithInputFromBlock = objc.RegisterName("convertToBuffer:error:withInputFromBlock:")
-	_aVAudioConverterSelInputFormat = objc.RegisterName("inputFormat")
-	_aVAudioConverterSelOutputFormat = objc.RegisterName("outputFormat")
-	_aVAudioConverterSelChannelMap = objc.RegisterName("channelMap")
-	_aVAudioConverterSelSetChannelMap = objc.RegisterName("setChannelMap:")
-	_aVAudioConverterSelMagicCookie = objc.RegisterName("magicCookie")
-	_aVAudioConverterSelSetMagicCookie = objc.RegisterName("setMagicCookie:")
-	_aVAudioConverterSelDownmix = objc.RegisterName("downmix")
-	_aVAudioConverterSelSetDownmix = objc.RegisterName("setDownmix:")
-	_aVAudioConverterSelDither = objc.RegisterName("dither")
-	_aVAudioConverterSelSetDither = objc.RegisterName("setDither:")
-	_aVAudioConverterSelSampleRateConverterQuality = objc.RegisterName("sampleRateConverterQuality")
-	_aVAudioConverterSelSetSampleRateConverterQuality = objc.RegisterName("setSampleRateConverterQuality:")
-	_aVAudioConverterSelSampleRateConverterAlgorithm = objc.RegisterName("sampleRateConverterAlgorithm")
-	_aVAudioConverterSelSetSampleRateConverterAlgorithm = objc.RegisterName("setSampleRateConverterAlgorithm:")
-	_aVAudioConverterSelPrimeMethod = objc.RegisterName("primeMethod")
-	_aVAudioConverterSelSetPrimeMethod = objc.RegisterName("setPrimeMethod:")
-	_aVAudioConverterSelPrimeInfo = objc.RegisterName("primeInfo")
-	_aVAudioConverterSelSetPrimeInfo = objc.RegisterName("setPrimeInfo:")
-	_aVAudioConverterSelAudioSyncPacketFrequency = objc.RegisterName("audioSyncPacketFrequency")
-	_aVAudioConverterSelSetAudioSyncPacketFrequency = objc.RegisterName("setAudioSyncPacketFrequency:")
-	_aVAudioConverterSelContentSource = objc.RegisterName("contentSource")
-	_aVAudioConverterSelSetContentSource = objc.RegisterName("setContentSource:")
-	_aVAudioConverterSelDynamicRangeControlConfiguration = objc.RegisterName("dynamicRangeControlConfiguration")
-	_aVAudioConverterSelSetDynamicRangeControlConfiguration = objc.RegisterName("setDynamicRangeControlConfiguration:")
-	_aVAudioConverterSelBitRate = objc.RegisterName("bitRate")
-	_aVAudioConverterSelSetBitRate = objc.RegisterName("setBitRate:")
-	_aVAudioConverterSelBitRateStrategy = objc.RegisterName("bitRateStrategy")
-	_aVAudioConverterSelSetBitRateStrategy = objc.RegisterName("setBitRateStrategy:")
-	_aVAudioConverterSelMaximumOutputPacketSize = objc.RegisterName("maximumOutputPacketSize")
-	_aVAudioConverterSelAvailableEncodeBitRates = objc.RegisterName("availableEncodeBitRates")
-	_aVAudioConverterSelApplicableEncodeBitRates = objc.RegisterName("applicableEncodeBitRates")
-	_aVAudioConverterSelAvailableEncodeSampleRates = objc.RegisterName("availableEncodeSampleRates")
-	_aVAudioConverterSelApplicableEncodeSampleRates = objc.RegisterName("applicableEncodeSampleRates")
-	_aVAudioConverterSelAvailableEncodeChannelLayoutTags = objc.RegisterName("availableEncodeChannelLayoutTags")
+	_aVAudioConverterSelInputFormat                            = objc.RegisterName("inputFormat")
+	_aVAudioConverterSelOutputFormat                           = objc.RegisterName("outputFormat")
+	_aVAudioConverterSelChannelMap                             = objc.RegisterName("channelMap")
+	_aVAudioConverterSelSetChannelMap                          = objc.RegisterName("setChannelMap:")
+	_aVAudioConverterSelMagicCookie                            = objc.RegisterName("magicCookie")
+	_aVAudioConverterSelSetMagicCookie                         = objc.RegisterName("setMagicCookie:")
+	_aVAudioConverterSelDownmix                                = objc.RegisterName("downmix")
+	_aVAudioConverterSelSetDownmix                             = objc.RegisterName("setDownmix:")
+	_aVAudioConverterSelDither                                 = objc.RegisterName("dither")
+	_aVAudioConverterSelSetDither                              = objc.RegisterName("setDither:")
+	_aVAudioConverterSelSampleRateConverterQuality             = objc.RegisterName("sampleRateConverterQuality")
+	_aVAudioConverterSelSetSampleRateConverterQuality          = objc.RegisterName("setSampleRateConverterQuality:")
+	_aVAudioConverterSelSampleRateConverterAlgorithm           = objc.RegisterName("sampleRateConverterAlgorithm")
+	_aVAudioConverterSelSetSampleRateConverterAlgorithm        = objc.RegisterName("setSampleRateConverterAlgorithm:")
+	_aVAudioConverterSelPrimeMethod                            = objc.RegisterName("primeMethod")
+	_aVAudioConverterSelSetPrimeMethod                         = objc.RegisterName("setPrimeMethod:")
+	_aVAudioConverterSelPrimeInfo                              = objc.RegisterName("primeInfo")
+	_aVAudioConverterSelSetPrimeInfo                           = objc.RegisterName("setPrimeInfo:")
+	_aVAudioConverterSelAudioSyncPacketFrequency               = objc.RegisterName("audioSyncPacketFrequency")
+	_aVAudioConverterSelSetAudioSyncPacketFrequency            = objc.RegisterName("setAudioSyncPacketFrequency:")
+	_aVAudioConverterSelContentSource                          = objc.RegisterName("contentSource")
+	_aVAudioConverterSelSetContentSource                       = objc.RegisterName("setContentSource:")
+	_aVAudioConverterSelDynamicRangeControlConfiguration       = objc.RegisterName("dynamicRangeControlConfiguration")
+	_aVAudioConverterSelSetDynamicRangeControlConfiguration    = objc.RegisterName("setDynamicRangeControlConfiguration:")
+	_aVAudioConverterSelBitRate                                = objc.RegisterName("bitRate")
+	_aVAudioConverterSelSetBitRate                             = objc.RegisterName("setBitRate:")
+	_aVAudioConverterSelBitRateStrategy                        = objc.RegisterName("bitRateStrategy")
+	_aVAudioConverterSelSetBitRateStrategy                     = objc.RegisterName("setBitRateStrategy:")
+	_aVAudioConverterSelMaximumOutputPacketSize                = objc.RegisterName("maximumOutputPacketSize")
+	_aVAudioConverterSelAvailableEncodeBitRates                = objc.RegisterName("availableEncodeBitRates")
+	_aVAudioConverterSelApplicableEncodeBitRates               = objc.RegisterName("applicableEncodeBitRates")
+	_aVAudioConverterSelAvailableEncodeSampleRates             = objc.RegisterName("availableEncodeSampleRates")
+	_aVAudioConverterSelApplicableEncodeSampleRates            = objc.RegisterName("applicableEncodeSampleRates")
+	_aVAudioConverterSelAvailableEncodeChannelLayoutTags       = objc.RegisterName("availableEncodeChannelLayoutTags")
 )
 
 func AVAudioConverterFromID(id objc.ID) *AVAudioConverter {
@@ -72,7 +72,9 @@ func AVAudioConverterFromID(id objc.ID) *AVAudioConverter {
 // @method initFromFormat:toFormat: @abstract Initialize from input and output formats. @param fromFormat The input format. @param toFormat The output format. @discussion Returns nil if the format conversion is not possible.
 func (o *AVAudioConverter) InitFromFormatToFormat(fromFormat *AVAudioFormat, toFormat *AVAudioFormat) *AVAudioConverter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelInitFromFormatToFormat, fromFormat.Ptr(), toFormat.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioConverterFromID(_ret)
 }
 
@@ -100,14 +102,18 @@ func (o *AVAudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *
 // @property inputFormat @abstract The format of the input audio stream. (NB. AVAudioFormat includes the channel layout)
 func (o *AVAudioConverter) InputFormat() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelInputFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @property outputFormat @abstract The format of the output audio stream. (NB. AVAudioFormat includes the channel layout)
 func (o *AVAudioConverter) OutputFormat() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelOutputFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -124,7 +130,9 @@ func (o *AVAudioConverter) SetChannelMap(channelMap *foundation.NSArray[*foundat
 // @property	magicCookie @abstract	Decoders require some data in the form of a magicCookie in order to decode properly. Encoders will produce a magicCookie.
 func (o *AVAudioConverter) MagicCookie() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelMagicCookie)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -165,7 +173,9 @@ func (o *AVAudioConverter) SetSampleRateConverterQuality(sampleRateConverterQual
 // @property	sampleRateConverterAlgorithm @abstract	An AVSampleRateConverterAlgorithmKey value as defined in AVAudioSettings.h.
 func (o *AVAudioConverter) SampleRateConverterAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelSampleRateConverterAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -236,7 +246,9 @@ func (o *AVAudioConverter) SetBitRate(bitRate int) {
 // @property bitRateStrategy @abstract When encoding, an AVEncoderBitRateStrategyKey value constant as defined in AVAudioSettings.h. Returns nil if not encoding.
 func (o *AVAudioConverter) BitRateStrategy() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioConverterSelBitRateStrategy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -279,4 +291,3 @@ func (o *AVAudioConverter) AvailableEncodeChannelLayoutTags() *foundation.NSArra
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _aVAudioConverterSelAvailableEncodeChannelLayoutTags)
 	return _ret
 }
-

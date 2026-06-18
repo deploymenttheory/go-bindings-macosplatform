@@ -19,22 +19,22 @@ type NWTCPConnection struct {
 }
 
 var (
-	_clsNWTCPConnection = _objcClass("NWTCPConnection")
-	_nWTCPConnectionSelInitWithUpgradeForConnection = objc.RegisterName("initWithUpgradeForConnection:")
-	_nWTCPConnectionSelCancel = objc.RegisterName("cancel")
-	_nWTCPConnectionSelReadLengthCompletionHandler = objc.RegisterName("readLength:completionHandler:")
+	_clsNWTCPConnection                                                = _objcClass("NWTCPConnection")
+	_nWTCPConnectionSelInitWithUpgradeForConnection                    = objc.RegisterName("initWithUpgradeForConnection:")
+	_nWTCPConnectionSelCancel                                          = objc.RegisterName("cancel")
+	_nWTCPConnectionSelReadLengthCompletionHandler                     = objc.RegisterName("readLength:completionHandler:")
 	_nWTCPConnectionSelReadMinimumLengthMaximumLengthCompletionHandler = objc.RegisterName("readMinimumLength:maximumLength:completionHandler:")
-	_nWTCPConnectionSelWriteCompletionHandler = objc.RegisterName("write:completionHandler:")
-	_nWTCPConnectionSelWriteClose = objc.RegisterName("writeClose")
-	_nWTCPConnectionSelState = objc.RegisterName("state")
-	_nWTCPConnectionSelIsViable = objc.RegisterName("isViable")
-	_nWTCPConnectionSelHasBetterPath = objc.RegisterName("hasBetterPath")
-	_nWTCPConnectionSelEndpoint = objc.RegisterName("endpoint")
-	_nWTCPConnectionSelConnectedPath = objc.RegisterName("connectedPath")
-	_nWTCPConnectionSelLocalAddress = objc.RegisterName("localAddress")
-	_nWTCPConnectionSelRemoteAddress = objc.RegisterName("remoteAddress")
-	_nWTCPConnectionSelTxtRecord = objc.RegisterName("txtRecord")
-	_nWTCPConnectionSelError = objc.RegisterName("error")
+	_nWTCPConnectionSelWriteCompletionHandler                          = objc.RegisterName("write:completionHandler:")
+	_nWTCPConnectionSelWriteClose                                      = objc.RegisterName("writeClose")
+	_nWTCPConnectionSelState                                           = objc.RegisterName("state")
+	_nWTCPConnectionSelIsViable                                        = objc.RegisterName("isViable")
+	_nWTCPConnectionSelHasBetterPath                                   = objc.RegisterName("hasBetterPath")
+	_nWTCPConnectionSelEndpoint                                        = objc.RegisterName("endpoint")
+	_nWTCPConnectionSelConnectedPath                                   = objc.RegisterName("connectedPath")
+	_nWTCPConnectionSelLocalAddress                                    = objc.RegisterName("localAddress")
+	_nWTCPConnectionSelRemoteAddress                                   = objc.RegisterName("remoteAddress")
+	_nWTCPConnectionSelTxtRecord                                       = objc.RegisterName("txtRecord")
+	_nWTCPConnectionSelError                                           = objc.RegisterName("error")
 )
 
 func NWTCPConnectionFromID(id objc.ID) *NWTCPConnection {
@@ -51,7 +51,9 @@ func NWTCPConnectionFromID(id objc.ID) *NWTCPConnection {
 // Deprecated: Use `nw_connection_create` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) InitWithUpgradeForConnection(connection *NWTCPConnection) *NWTCPConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWTCPConnectionSelInitWithUpgradeForConnection, connection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWTCPConnectionFromID(_ret)
 }
 
@@ -144,7 +146,9 @@ func (o *NWTCPConnection) Endpoint() unsafe.Pointer {
 // Deprecated: Use `nw_connection_copy_current_path` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) ConnectedPath() *NWPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWTCPConnectionSelConnectedPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWPathFromID(_ret)
 }
 
@@ -166,7 +170,9 @@ func (o *NWTCPConnection) RemoteAddress() unsafe.Pointer {
 // Deprecated: Use `nw_endpoint_copy_txt_record` in Network framework instead, see deprecation notice in <NetworkExtension/NWTCPConnection.h>
 func (o *NWTCPConnection) TxtRecord() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWTCPConnectionSelTxtRecord)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -176,4 +182,3 @@ func (o *NWTCPConnection) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nWTCPConnectionSelError)
 	return _ret
 }
-

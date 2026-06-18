@@ -67,4 +67,3 @@ type TextureReferenceTypeable interface {
 }
 
 var _ TextureReferenceTypeable = (*TextureReferenceType)(nil)
-

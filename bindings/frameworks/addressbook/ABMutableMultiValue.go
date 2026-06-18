@@ -16,13 +16,13 @@ type ABMutableMultiValue struct {
 }
 
 var (
-	_clsABMutableMultiValue = _objcClass("ABMutableMultiValue")
-	_aBMutableMultiValueSelAddValueWithLabel = objc.RegisterName("addValue:withLabel:")
-	_aBMutableMultiValueSelInsertValueWithLabelAtIndex = objc.RegisterName("insertValue:withLabel:atIndex:")
-	_aBMutableMultiValueSelRemoveValueAndLabelAtIndex = objc.RegisterName("removeValueAndLabelAtIndex:")
+	_clsABMutableMultiValue                             = _objcClass("ABMutableMultiValue")
+	_aBMutableMultiValueSelAddValueWithLabel            = objc.RegisterName("addValue:withLabel:")
+	_aBMutableMultiValueSelInsertValueWithLabelAtIndex  = objc.RegisterName("insertValue:withLabel:atIndex:")
+	_aBMutableMultiValueSelRemoveValueAndLabelAtIndex   = objc.RegisterName("removeValueAndLabelAtIndex:")
 	_aBMutableMultiValueSelReplaceValueAtIndexWithValue = objc.RegisterName("replaceValueAtIndex:withValue:")
 	_aBMutableMultiValueSelReplaceLabelAtIndexWithLabel = objc.RegisterName("replaceLabelAtIndex:withLabel:")
-	_aBMutableMultiValueSelSetPrimaryIdentifier = objc.RegisterName("setPrimaryIdentifier:")
+	_aBMutableMultiValueSelSetPrimaryIdentifier         = objc.RegisterName("setPrimaryIdentifier:")
 )
 
 func ABMutableMultiValueFromID(id objc.ID) *ABMutableMultiValue {
@@ -37,13 +37,17 @@ func ABMutableMultiValueFromID(id objc.ID) *ABMutableMultiValue {
 
 func (o *ABMutableMultiValue) AddValueWithLabel(value objc.ID, label *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMutableMultiValueSelAddValueWithLabel, value, label.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ABMutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label *foundation.NSString, index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aBMutableMultiValueSelInsertValueWithLabelAtIndex, value, label.Ptr(), index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *ABMutableMultiValue) SetPrimaryIdentifier(identifier *foundation.NSStri
 	_ret := objc.Send[bool](o.Ptr(), _aBMutableMultiValueSelSetPrimaryIdentifier, identifier.Ptr())
 	return _ret
 }
-

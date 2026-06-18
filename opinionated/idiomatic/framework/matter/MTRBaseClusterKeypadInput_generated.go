@@ -351,9 +351,13 @@ func (x *MTRBaseClusterKeypadInput) SubscribeAttributeClusterRevisionWithMinInte
 	}
 }
 
-func (x *MTRBaseClusterKeypadInput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterKeypadInput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterKeypadInput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterKeypadInput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterKeypadInputable is the interface implemented by [MTRBaseClusterKeypadInput], for mocking and DI.
 type MTRBaseClusterKeypadInputable interface {
@@ -383,4 +387,3 @@ type MTRBaseClusterKeypadInputable interface {
 }
 
 var _ MTRBaseClusterKeypadInputable = (*MTRBaseClusterKeypadInput)(nil)
-

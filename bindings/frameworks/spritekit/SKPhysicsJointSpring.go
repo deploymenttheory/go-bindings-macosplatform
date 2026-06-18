@@ -16,12 +16,12 @@ type SKPhysicsJointSpring struct {
 }
 
 var (
-	_clsSKPhysicsJointSpring = _objcClass("SKPhysicsJointSpring")
+	_clsSKPhysicsJointSpring                                  = _objcClass("SKPhysicsJointSpring")
 	_sKPhysicsJointSpringSelJointWithBodyABodyBAnchorAAnchorB = objc.RegisterName("jointWithBodyA:bodyB:anchorA:anchorB:")
-	_sKPhysicsJointSpringSelDamping = objc.RegisterName("damping")
-	_sKPhysicsJointSpringSelSetDamping = objc.RegisterName("setDamping:")
-	_sKPhysicsJointSpringSelFrequency = objc.RegisterName("frequency")
-	_sKPhysicsJointSpringSelSetFrequency = objc.RegisterName("setFrequency:")
+	_sKPhysicsJointSpringSelDamping                           = objc.RegisterName("damping")
+	_sKPhysicsJointSpringSelSetDamping                        = objc.RegisterName("setDamping:")
+	_sKPhysicsJointSpringSelFrequency                         = objc.RegisterName("frequency")
+	_sKPhysicsJointSpringSelSetFrequency                      = objc.RegisterName("setFrequency:")
 )
 
 func SKPhysicsJointSpringFromID(id objc.ID) *SKPhysicsJointSpring {
@@ -36,7 +36,9 @@ func SKPhysicsJointSpringFromID(id objc.ID) *SKPhysicsJointSpring {
 
 func SKPhysicsJointSpringJointWithBodyABodyBAnchorAAnchorB(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchorA corefoundation.CGPoint, anchorB corefoundation.CGPoint) *SKPhysicsJointSpring {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointSpring), _sKPhysicsJointSpringSelJointWithBodyABodyBAnchorAAnchorB, bodyA.Ptr(), bodyB.Ptr(), anchorA, anchorB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsJointSpringFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *SKPhysicsJointSpring) Frequency() float64 {
 func (o *SKPhysicsJointSpring) SetFrequency(frequency float64) {
 	o.Ptr().Send(_sKPhysicsJointSpringSelSetFrequency, frequency)
 }
-

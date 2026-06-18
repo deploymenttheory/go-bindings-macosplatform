@@ -18,14 +18,14 @@ type CKAcceptSharesOperation struct {
 }
 
 var (
-	_clsCKAcceptSharesOperation = _objcClass("CKAcceptSharesOperation")
-	_cKAcceptSharesOperationSelInit = objc.RegisterName("init")
-	_cKAcceptSharesOperationSelInitWithShareMetadatas = objc.RegisterName("initWithShareMetadatas:")
-	_cKAcceptSharesOperationSelShareMetadatas = objc.RegisterName("shareMetadatas")
-	_cKAcceptSharesOperationSelSetShareMetadatas = objc.RegisterName("setShareMetadatas:")
-	_cKAcceptSharesOperationSelPerShareCompletionBlock = objc.RegisterName("perShareCompletionBlock")
-	_cKAcceptSharesOperationSelSetPerShareCompletionBlock = objc.RegisterName("setPerShareCompletionBlock:")
-	_cKAcceptSharesOperationSelAcceptSharesCompletionBlock = objc.RegisterName("acceptSharesCompletionBlock")
+	_clsCKAcceptSharesOperation                               = _objcClass("CKAcceptSharesOperation")
+	_cKAcceptSharesOperationSelInit                           = objc.RegisterName("init")
+	_cKAcceptSharesOperationSelInitWithShareMetadatas         = objc.RegisterName("initWithShareMetadatas:")
+	_cKAcceptSharesOperationSelShareMetadatas                 = objc.RegisterName("shareMetadatas")
+	_cKAcceptSharesOperationSelSetShareMetadatas              = objc.RegisterName("setShareMetadatas:")
+	_cKAcceptSharesOperationSelPerShareCompletionBlock        = objc.RegisterName("perShareCompletionBlock")
+	_cKAcceptSharesOperationSelSetPerShareCompletionBlock     = objc.RegisterName("setPerShareCompletionBlock:")
+	_cKAcceptSharesOperationSelAcceptSharesCompletionBlock    = objc.RegisterName("acceptSharesCompletionBlock")
 	_cKAcceptSharesOperationSelSetAcceptSharesCompletionBlock = objc.RegisterName("setAcceptSharesCompletionBlock:")
 )
 
@@ -42,21 +42,27 @@ func CKAcceptSharesOperationFromID(id objc.ID) *CKAcceptSharesOperation {
 // Creates an operation for accepting shares. You can use this operation only once.
 func (o *CKAcceptSharesOperation) Init() *CKAcceptSharesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAcceptSharesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKAcceptSharesOperationFromID(_ret)
 }
 
-// Creates an operation for accepting the specified shares. - Parameters: - shareMetadatas: The share metadatas to accept. If you specify `nil`, you must assign a value to the ``CKAcceptSharesOperation/shareMetadatas`` property before you execute the operation. After initializing the operation, assign a handler to the ``CKAcceptSharesOperation/acceptSharesCompletionBlock`` property to process the results.
+// Creates an operation for accepting the specified shares. - Parameters: - shareMetadatas: The share metadatas to accept. If you specify `nil`, you must assign a value to the “CKAcceptSharesOperation/shareMetadatas“ property before you execute the operation. After initializing the operation, assign a handler to the “CKAcceptSharesOperation/acceptSharesCompletionBlock“ property to process the results.
 func (o *CKAcceptSharesOperation) InitWithShareMetadatas(shareMetadatas *foundation.NSArray[*CKShareMetadata]) *CKAcceptSharesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAcceptSharesOperationSelInitWithShareMetadatas, shareMetadatas.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKAcceptSharesOperationFromID(_ret)
 }
 
 // The share metadatas to process. Use this property to view or change the metadata of the shares you want to process. If you intend to specify or change the value of this property, do so before you execute the operation or submit it to a queue.
 func (o *CKAcceptSharesOperation) ShareMetadatas() *foundation.NSArray[*CKShareMetadata] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKAcceptSharesOperationSelShareMetadatas)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKShareMetadata](_ret)
 }
 
@@ -64,7 +70,7 @@ func (o *CKAcceptSharesOperation) SetShareMetadatas(shareMetadatas *foundation.N
 	o.Ptr().Send(_cKAcceptSharesOperationSelSetShareMetadatas, shareMetadatas.Ptr())
 }
 
-// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the ``CKAcceptSharesOperation/shareMetadatas`` property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The block to execute as CloudKit processes individual shares. The closure returns no value and takes the following parameters: - The share metadata to process. - The share, or `nil` if CloudKit can't process the share metadata. - If CloudKit can't process the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each element in the “CKAcceptSharesOperation/shareMetadatas“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKAcceptSharesOperation) PerShareCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKAcceptSharesOperationSelPerShareCompletionBlock)
 	return _ret
@@ -87,7 +93,7 @@ func (o *CKAcceptSharesOperation) SetPerShareCompletionBlock(perShareCompletionB
 	o.Ptr().Send(_cKAcceptSharesOperationSelSetPerShareCompletionBlock, __block_perShareCompletionBlock)
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type ``CKError/Code/partialFailure`` when it can't process some of the shares. The `userInfo` dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully processes the shares. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't process some of the shares. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are share URLs that CloudKit can't process, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
 func (o *CKAcceptSharesOperation) AcceptSharesCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKAcceptSharesOperationSelAcceptSharesCompletionBlock)
 	return _ret
@@ -103,4 +109,3 @@ func (o *CKAcceptSharesOperation) SetAcceptSharesCompletionBlock(acceptSharesCom
 	}
 	o.Ptr().Send(_cKAcceptSharesOperationSelSetAcceptSharesCompletionBlock, __block_acceptSharesCompletionBlock)
 }
-

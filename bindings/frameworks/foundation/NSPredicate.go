@@ -17,19 +17,19 @@ type NSPredicate struct {
 }
 
 var (
-	_clsNSPredicate = _objcClass("NSPredicate")
-	_nSPredicateSelPredicateWithFormatArgumentArray = objc.RegisterName("predicateWithFormat:argumentArray:")
-	_nSPredicateSelPredicateWithFormat = objc.RegisterName("predicateWithFormat:")
-	_nSPredicateSelPredicateWithFormatArguments = objc.RegisterName("predicateWithFormat:arguments:")
-	_nSPredicateSelPredicateFromMetadataQueryString = objc.RegisterName("predicateFromMetadataQueryString:")
-	_nSPredicateSelPredicateWithValue = objc.RegisterName("predicateWithValue:")
-	_nSPredicateSelPredicateWith = objc.RegisterName("predicateWithBlock:")
-	_nSPredicateSelPredicateWithSubstitutionVariables = objc.RegisterName("predicateWithSubstitutionVariables:")
-	_nSPredicateSelEvaluateWithObject = objc.RegisterName("evaluateWithObject:")
+	_clsNSPredicate                                        = _objcClass("NSPredicate")
+	_nSPredicateSelPredicateWithFormatArgumentArray        = objc.RegisterName("predicateWithFormat:argumentArray:")
+	_nSPredicateSelPredicateWithFormat                     = objc.RegisterName("predicateWithFormat:")
+	_nSPredicateSelPredicateWithFormatArguments            = objc.RegisterName("predicateWithFormat:arguments:")
+	_nSPredicateSelPredicateFromMetadataQueryString        = objc.RegisterName("predicateFromMetadataQueryString:")
+	_nSPredicateSelPredicateWithValue                      = objc.RegisterName("predicateWithValue:")
+	_nSPredicateSelPredicateWith                           = objc.RegisterName("predicateWithBlock:")
+	_nSPredicateSelPredicateWithSubstitutionVariables      = objc.RegisterName("predicateWithSubstitutionVariables:")
+	_nSPredicateSelEvaluateWithObject                      = objc.RegisterName("evaluateWithObject:")
 	_nSPredicateSelEvaluateWithObjectSubstitutionVariables = objc.RegisterName("evaluateWithObject:substitutionVariables:")
-	_nSPredicateSelAllowEvaluation = objc.RegisterName("allowEvaluation")
-	_nSPredicateSelAllowEvaluationWithValidatorError = objc.RegisterName("allowEvaluationWithValidator:error:")
-	_nSPredicateSelPredicateFormat = objc.RegisterName("predicateFormat")
+	_nSPredicateSelAllowEvaluation                         = objc.RegisterName("allowEvaluation")
+	_nSPredicateSelAllowEvaluationWithValidatorError       = objc.RegisterName("allowEvaluationWithValidator:error:")
+	_nSPredicateSelPredicateFormat                         = objc.RegisterName("predicateFormat")
 )
 
 func NSPredicateFromID(id objc.ID) *NSPredicate {
@@ -44,43 +44,57 @@ func NSPredicateFromID(id objc.ID) *NSPredicate {
 
 func NSPredicatePredicateWithFormatArgumentArray(predicateFormat *NSString, arguments *NSArray[objc.ID]) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormatArgumentArray, predicateFormat.Ptr(), arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func NSPredicatePredicateWithFormat(predicateFormat *NSString) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormat, predicateFormat.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func NSPredicatePredicateWithFormatArguments(predicateFormat *NSString, argList string) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithFormatArguments, predicateFormat.Ptr(), argList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func NSPredicatePredicateFromMetadataQueryString(queryString *NSString) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateFromMetadataQueryString, queryString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func NSPredicatePredicateWithValue(value bool) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func NSPredicatePredicateWith(block objc.Block) *NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPredicate), _nSPredicateSelPredicateWith, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
 func (o *NSPredicate) PredicateWithSubstitutionVariables(variables *NSDictionary[*NSString, objc.ID]) *NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateSelPredicateWithSubstitutionVariables, variables)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPredicateFromID(_ret)
 }
 
@@ -109,7 +123,8 @@ func (o *NSPredicate) AllowEvaluationWithValidatorError(validator NSPredicateVal
 
 func (o *NSPredicate) PredicateFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPredicateSelPredicateFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

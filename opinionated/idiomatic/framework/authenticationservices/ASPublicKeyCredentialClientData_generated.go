@@ -128,4 +128,3 @@ type PublicKeyCredentialClientDataable interface {
 }
 
 var _ PublicKeyCredentialClientDataable = (*PublicKeyCredentialClientData)(nil)
-

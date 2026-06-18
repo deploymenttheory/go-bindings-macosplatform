@@ -16,28 +16,28 @@ type GCMotion struct {
 }
 
 var (
-	_clsGCMotion = _objcClass("GCMotion")
-	_gCMotionSelSetGravity = objc.RegisterName("setGravity:")
-	_gCMotionSelSetUserAcceleration = objc.RegisterName("setUserAcceleration:")
-	_gCMotionSelSetAcceleration = objc.RegisterName("setAcceleration:")
-	_gCMotionSelSetAttitude = objc.RegisterName("setAttitude:")
-	_gCMotionSelSetRotationRate = objc.RegisterName("setRotationRate:")
-	_gCMotionSelSetStateFromMotion = objc.RegisterName("setStateFromMotion:")
-	_gCMotionSelController = objc.RegisterName("controller")
-	_gCMotionSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
-	_gCMotionSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
+	_clsGCMotion                               = _objcClass("GCMotion")
+	_gCMotionSelSetGravity                     = objc.RegisterName("setGravity:")
+	_gCMotionSelSetUserAcceleration            = objc.RegisterName("setUserAcceleration:")
+	_gCMotionSelSetAcceleration                = objc.RegisterName("setAcceleration:")
+	_gCMotionSelSetAttitude                    = objc.RegisterName("setAttitude:")
+	_gCMotionSelSetRotationRate                = objc.RegisterName("setRotationRate:")
+	_gCMotionSelSetStateFromMotion             = objc.RegisterName("setStateFromMotion:")
+	_gCMotionSelController                     = objc.RegisterName("controller")
+	_gCMotionSelValueChangedHandler            = objc.RegisterName("valueChangedHandler")
+	_gCMotionSelSetValueChangedHandler         = objc.RegisterName("setValueChangedHandler:")
 	_gCMotionSelSensorsRequireManualActivation = objc.RegisterName("sensorsRequireManualActivation")
-	_gCMotionSelSensorsActive = objc.RegisterName("sensorsActive")
-	_gCMotionSelSetSensorsActive = objc.RegisterName("setSensorsActive:")
-	_gCMotionSelHasGravityAndUserAcceleration = objc.RegisterName("hasGravityAndUserAcceleration")
-	_gCMotionSelGravity = objc.RegisterName("gravity")
-	_gCMotionSelUserAcceleration = objc.RegisterName("userAcceleration")
-	_gCMotionSelAcceleration = objc.RegisterName("acceleration")
-	_gCMotionSelHasAttitudeAndRotationRate = objc.RegisterName("hasAttitudeAndRotationRate")
-	_gCMotionSelHasAttitude = objc.RegisterName("hasAttitude")
-	_gCMotionSelHasRotationRate = objc.RegisterName("hasRotationRate")
-	_gCMotionSelAttitude = objc.RegisterName("attitude")
-	_gCMotionSelRotationRate = objc.RegisterName("rotationRate")
+	_gCMotionSelSensorsActive                  = objc.RegisterName("sensorsActive")
+	_gCMotionSelSetSensorsActive               = objc.RegisterName("setSensorsActive:")
+	_gCMotionSelHasGravityAndUserAcceleration  = objc.RegisterName("hasGravityAndUserAcceleration")
+	_gCMotionSelGravity                        = objc.RegisterName("gravity")
+	_gCMotionSelUserAcceleration               = objc.RegisterName("userAcceleration")
+	_gCMotionSelAcceleration                   = objc.RegisterName("acceleration")
+	_gCMotionSelHasAttitudeAndRotationRate     = objc.RegisterName("hasAttitudeAndRotationRate")
+	_gCMotionSelHasAttitude                    = objc.RegisterName("hasAttitude")
+	_gCMotionSelHasRotationRate                = objc.RegisterName("hasRotationRate")
+	_gCMotionSelAttitude                       = objc.RegisterName("attitude")
+	_gCMotionSelRotationRate                   = objc.RegisterName("rotationRate")
 )
 
 func GCMotionFromID(id objc.ID) *GCMotion {
@@ -83,7 +83,9 @@ func (o *GCMotion) SetStateFromMotion(motion *GCMotion) {
 // A profile keeps a reference to the controller that it is mapping input from. @see GCController
 func (o *GCMotion) Controller() *GCController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMotionSelController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerFromID(_ret)
 }
 
@@ -176,4 +178,3 @@ func (o *GCMotion) RotationRate() GCRotationRate {
 	_ret := objc.Send[GCRotationRate](o.Ptr(), _gCMotionSelRotationRate)
 	return _ret
 }
-

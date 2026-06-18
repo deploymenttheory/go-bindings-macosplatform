@@ -18,10 +18,10 @@ type MTROvenCavityOperationalStateClusterOperationalCommandResponseParams struct
 }
 
 var (
-	_clsMTROvenCavityOperationalStateClusterOperationalCommandResponseParams = _objcClass("MTROvenCavityOperationalStateClusterOperationalCommandResponseParams")
+	_clsMTROvenCavityOperationalStateClusterOperationalCommandResponseParams                           = _objcClass("MTROvenCavityOperationalStateClusterOperationalCommandResponseParams")
 	_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState = objc.RegisterName("commandResponseState")
-	_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState = objc.RegisterName("setCommandResponseState:")
+	_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState       = objc.RegisterName("commandResponseState")
+	_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState    = objc.RegisterName("setCommandResponseState:")
 )
 
 func MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams {
@@ -38,7 +38,9 @@ func MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(
 func (o *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) I
 
 func (o *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_ret)
 }
 
 func (o *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTROvenCavityOperationalStateClusterErrorStateStruct) {
 	o.Ptr().Send(_mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState, commandResponseState.Ptr())
 }
-

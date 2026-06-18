@@ -43,4 +43,3 @@ type Conditionable interface {
 }
 
 var _ Conditionable = (*Condition)(nil)
-

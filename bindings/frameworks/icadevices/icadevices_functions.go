@@ -8,76 +8,76 @@ import (
 )
 
 var (
-	_fnICACloseSession func(*ICACloseSessionPB, unsafe.Pointer) int16
-	_fnICACopyObjectData func(*ICACopyObjectDataPB, unsafe.Pointer) int16
-	_fnICACopyObjectPropertyDictionary func(*ICACopyObjectPropertyDictionaryPB, unsafe.Pointer) int16
-	_fnICACopyObjectThumbnail func(*ICACopyObjectThumbnailPB, unsafe.Pointer) int16
-	_fnICADownloadFile func(*ICADownloadFilePB, unsafe.Pointer) int16
-	_fnICAGetDeviceList func(*ICAGetDeviceListPB, unsafe.Pointer) int16
-	_fnICAImportImage func(*ICAImportImagePB, unsafe.Pointer) int16
-	_fnICALoadDeviceModule func(*ICALoadDeviceModulePB, unsafe.Pointer) int16
-	_fnICAObjectSendMessage func(*ICAObjectSendMessagePB, unsafe.Pointer) int16
-	_fnICAOpenSession func(*ICAOpenSessionPB, unsafe.Pointer) int16
-	_fnICARegisterForEventNotification func(*ICARegisterForEventNotificationPB, unsafe.Pointer) int16
-	_fnICAScannerCloseSession func(*ICAScannerCloseSessionPB, unsafe.Pointer) int16
-	_fnICAScannerGetParameters func(*ICAScannerGetParametersPB, unsafe.Pointer) int16
-	_fnICAScannerInitialize func(*ICAScannerInitializePB, unsafe.Pointer) int16
-	_fnICAScannerOpenSession func(*ICAScannerOpenSessionPB, unsafe.Pointer) int16
-	_fnICAScannerSetParameters func(*ICAScannerSetParametersPB, unsafe.Pointer) int16
-	_fnICAScannerStart func(*ICAScannerStartPB, unsafe.Pointer) int16
-	_fnICAScannerStatus func(*ICAScannerStatusPB, unsafe.Pointer) int16
-	_fnICASendNotification func(*ICASendNotificationPB) int16
-	_fnICASendNotificationAndWaitForReply func(*ICASendNotificationPB) int16
-	_fnICAShowDeviceBrowser func(unsafe.Pointer) int16
-	_fnICAUnloadDeviceModule func(*ICAUnloadDeviceModulePB, unsafe.Pointer) int16
-	_fnICAUploadFile func(*ICAUploadFilePB, unsafe.Pointer) int16
-	_fnICDAddBandInfoToNotificationDictionary func(unsafe.Pointer, uint, uint, uint, uint, uint, uint, uint, uint, uint, uint, uint, unsafe.Pointer) int16
-	_fnICDAddImageInfoToNotificationDictionary func(unsafe.Pointer, uint, uint, uint, uint, uint, uint, unsafe.Pointer) int16
-	_fnICDConnectBluetoothDevice func(unsafe.Pointer) int16
-	_fnICDConnectFWDevice func(uint64) int16
-	_fnICDConnectFWDeviceWithIORegPath func(uint64, string) int16
-	_fnICDConnectTCPIPDevice func(unsafe.Pointer) int16
-	_fnICDConnectUSBDevice func(uint) int16
-	_fnICDConnectUSBDeviceWithIORegPath func(uint, string) int16
-	_fnICDCopyDeviceInfoDictionary func(string, unsafe.Pointer) int16
-	_fnICDCreateColorSpace func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
-	_fnICDCreateEventDataCookie func(uint, *uint) int16
-	_fnICDCreateICAThumbnailFromICNS func(string, unsafe.Pointer) int16
-	_fnICDCreateICAThumbnailFromIconRef func(unsafe.Pointer, unsafe.Pointer) int16
-	_fnICDDisconnectBluetoothDevice func(unsafe.Pointer) int16
-	_fnICDDisconnectFWDevice func(uint64) int16
-	_fnICDDisconnectFWDeviceWithIORegPath func(uint64, string) int16
-	_fnICDDisconnectTCPIPDevice func(unsafe.Pointer) int16
-	_fnICDDisconnectUSBDevice func(uint) int16
-	_fnICDDisconnectUSBDeviceWithIORegPath func(uint, string) int16
-	_fnICDDisposeObject func(*ICD_DisposeObjectPB, unsafe.Pointer) int16
-	_fnICDGetStandardPropertyData func(*ObjectInfo, unsafe.Pointer) int16
-	_fnICDInitiateNotificationCallback func(unsafe.Pointer) int16
-	_fnICDNewObject func(*ICD_NewObjectPB, unsafe.Pointer) int16
-	_fnICDNewObjectCreated func(*ObjectInfo, *ObjectInfo, unsafe.Pointer) int16
-	_fnICDNewObjectInfoCreated func(*ObjectInfo, uint, *uint) int16
-	_fnICDScannerConnectBluetoothDevice func(unsafe.Pointer) int16
-	_fnICDScannerConnectFWDevice func(uint64) int16
-	_fnICDScannerConnectFWDeviceWithIORegPath func(uint64, string) int16
-	_fnICDScannerConnectTCPIPDevice func(unsafe.Pointer) int16
-	_fnICDScannerConnectUSBDevice func(uint) int16
-	_fnICDScannerConnectUSBDeviceWithIORegPath func(uint, string) int16
-	_fnICDScannerCopyDeviceInfoDictionary func(string, unsafe.Pointer) int16
-	_fnICDScannerCreateEventDataCookie func(uint, *uint) int16
-	_fnICDScannerCreateICAThumbnailFromICNS func(string, unsafe.Pointer) int16
-	_fnICDScannerDisconnectBluetoothDevice func(unsafe.Pointer) int16
-	_fnICDScannerDisconnectFWDevice func(uint64) int16
-	_fnICDScannerDisconnectFWDeviceWithIORegPath func(uint64, string) int16
-	_fnICDScannerDisconnectTCPIPDevice func(unsafe.Pointer) int16
-	_fnICDScannerDisconnectUSBDevice func(uint) int16
+	_fnICACloseSession                            func(*ICACloseSessionPB, unsafe.Pointer) int16
+	_fnICACopyObjectData                          func(*ICACopyObjectDataPB, unsafe.Pointer) int16
+	_fnICACopyObjectPropertyDictionary            func(*ICACopyObjectPropertyDictionaryPB, unsafe.Pointer) int16
+	_fnICACopyObjectThumbnail                     func(*ICACopyObjectThumbnailPB, unsafe.Pointer) int16
+	_fnICADownloadFile                            func(*ICADownloadFilePB, unsafe.Pointer) int16
+	_fnICAGetDeviceList                           func(*ICAGetDeviceListPB, unsafe.Pointer) int16
+	_fnICAImportImage                             func(*ICAImportImagePB, unsafe.Pointer) int16
+	_fnICALoadDeviceModule                        func(*ICALoadDeviceModulePB, unsafe.Pointer) int16
+	_fnICAObjectSendMessage                       func(*ICAObjectSendMessagePB, unsafe.Pointer) int16
+	_fnICAOpenSession                             func(*ICAOpenSessionPB, unsafe.Pointer) int16
+	_fnICARegisterForEventNotification            func(*ICARegisterForEventNotificationPB, unsafe.Pointer) int16
+	_fnICAScannerCloseSession                     func(*ICAScannerCloseSessionPB, unsafe.Pointer) int16
+	_fnICAScannerGetParameters                    func(*ICAScannerGetParametersPB, unsafe.Pointer) int16
+	_fnICAScannerInitialize                       func(*ICAScannerInitializePB, unsafe.Pointer) int16
+	_fnICAScannerOpenSession                      func(*ICAScannerOpenSessionPB, unsafe.Pointer) int16
+	_fnICAScannerSetParameters                    func(*ICAScannerSetParametersPB, unsafe.Pointer) int16
+	_fnICAScannerStart                            func(*ICAScannerStartPB, unsafe.Pointer) int16
+	_fnICAScannerStatus                           func(*ICAScannerStatusPB, unsafe.Pointer) int16
+	_fnICASendNotification                        func(*ICASendNotificationPB) int16
+	_fnICASendNotificationAndWaitForReply         func(*ICASendNotificationPB) int16
+	_fnICAShowDeviceBrowser                       func(unsafe.Pointer) int16
+	_fnICAUnloadDeviceModule                      func(*ICAUnloadDeviceModulePB, unsafe.Pointer) int16
+	_fnICAUploadFile                              func(*ICAUploadFilePB, unsafe.Pointer) int16
+	_fnICDAddBandInfoToNotificationDictionary     func(unsafe.Pointer, uint, uint, uint, uint, uint, uint, uint, uint, uint, uint, uint, unsafe.Pointer) int16
+	_fnICDAddImageInfoToNotificationDictionary    func(unsafe.Pointer, uint, uint, uint, uint, uint, uint, unsafe.Pointer) int16
+	_fnICDConnectBluetoothDevice                  func(unsafe.Pointer) int16
+	_fnICDConnectFWDevice                         func(uint64) int16
+	_fnICDConnectFWDeviceWithIORegPath            func(uint64, string) int16
+	_fnICDConnectTCPIPDevice                      func(unsafe.Pointer) int16
+	_fnICDConnectUSBDevice                        func(uint) int16
+	_fnICDConnectUSBDeviceWithIORegPath           func(uint, string) int16
+	_fnICDCopyDeviceInfoDictionary                func(string, unsafe.Pointer) int16
+	_fnICDCreateColorSpace                        func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer, string) unsafe.Pointer
+	_fnICDCreateEventDataCookie                   func(uint, *uint) int16
+	_fnICDCreateICAThumbnailFromICNS              func(string, unsafe.Pointer) int16
+	_fnICDCreateICAThumbnailFromIconRef           func(unsafe.Pointer, unsafe.Pointer) int16
+	_fnICDDisconnectBluetoothDevice               func(unsafe.Pointer) int16
+	_fnICDDisconnectFWDevice                      func(uint64) int16
+	_fnICDDisconnectFWDeviceWithIORegPath         func(uint64, string) int16
+	_fnICDDisconnectTCPIPDevice                   func(unsafe.Pointer) int16
+	_fnICDDisconnectUSBDevice                     func(uint) int16
+	_fnICDDisconnectUSBDeviceWithIORegPath        func(uint, string) int16
+	_fnICDDisposeObject                           func(*ICD_DisposeObjectPB, unsafe.Pointer) int16
+	_fnICDGetStandardPropertyData                 func(*ObjectInfo, unsafe.Pointer) int16
+	_fnICDInitiateNotificationCallback            func(unsafe.Pointer) int16
+	_fnICDNewObject                               func(*ICD_NewObjectPB, unsafe.Pointer) int16
+	_fnICDNewObjectCreated                        func(*ObjectInfo, *ObjectInfo, unsafe.Pointer) int16
+	_fnICDNewObjectInfoCreated                    func(*ObjectInfo, uint, *uint) int16
+	_fnICDScannerConnectBluetoothDevice           func(unsafe.Pointer) int16
+	_fnICDScannerConnectFWDevice                  func(uint64) int16
+	_fnICDScannerConnectFWDeviceWithIORegPath     func(uint64, string) int16
+	_fnICDScannerConnectTCPIPDevice               func(unsafe.Pointer) int16
+	_fnICDScannerConnectUSBDevice                 func(uint) int16
+	_fnICDScannerConnectUSBDeviceWithIORegPath    func(uint, string) int16
+	_fnICDScannerCopyDeviceInfoDictionary         func(string, unsafe.Pointer) int16
+	_fnICDScannerCreateEventDataCookie            func(uint, *uint) int16
+	_fnICDScannerCreateICAThumbnailFromICNS       func(string, unsafe.Pointer) int16
+	_fnICDScannerDisconnectBluetoothDevice        func(unsafe.Pointer) int16
+	_fnICDScannerDisconnectFWDevice               func(uint64) int16
+	_fnICDScannerDisconnectFWDeviceWithIORegPath  func(uint64, string) int16
+	_fnICDScannerDisconnectTCPIPDevice            func(unsafe.Pointer) int16
+	_fnICDScannerDisconnectUSBDevice              func(uint) int16
 	_fnICDScannerDisconnectUSBDeviceWithIORegPath func(uint, string) int16
-	_fnICDScannerGetStandardPropertyData func(*ScannerObjectInfo, unsafe.Pointer) int16
-	_fnICDScannerInitiateNotificationCallback func(unsafe.Pointer) int16
-	_fnICDScannerNewObjectInfoCreated func(*ScannerObjectInfo, uint, *uint) int16
-	_fnICDSendNotification func(*ICASendNotificationPB) int16
-	_fnICDSendNotificationAndWaitForReply func(*ICASendNotificationPB) int16
-	_fnICD_ScannerMain func(int, string) int
-	_fnICD_main func(int, string) int
+	_fnICDScannerGetStandardPropertyData          func(*ScannerObjectInfo, unsafe.Pointer) int16
+	_fnICDScannerInitiateNotificationCallback     func(unsafe.Pointer) int16
+	_fnICDScannerNewObjectInfoCreated             func(*ScannerObjectInfo, uint, *uint) int16
+	_fnICDSendNotification                        func(*ICASendNotificationPB) int16
+	_fnICDSendNotificationAndWaitForReply         func(*ICASendNotificationPB) int16
+	_fnICD_ScannerMain                            func(int, string) int
+	_fnICD_main                                   func(int, string) int
 )
 
 func ICACloseSession(pb *ICACloseSessionPB, completion unsafe.Pointer) int16 {
@@ -359,4 +359,3 @@ func ICD_ScannerMain(argc int, argv string) int {
 func ICD_main(argc int, argv string) int {
 	return _fnICD_main(argc, argv)
 }
-

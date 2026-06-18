@@ -65,4 +65,3 @@ type DictionaryFeatureProviderable interface {
 }
 
 var _ DictionaryFeatureProviderable = (*DictionaryFeatureProvider)(nil)
-

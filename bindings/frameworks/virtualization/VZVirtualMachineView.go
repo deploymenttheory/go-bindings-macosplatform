@@ -16,12 +16,12 @@ type VZVirtualMachineView struct {
 }
 
 var (
-	_clsVZVirtualMachineView = _objcClass("VZVirtualMachineView")
-	_vZVirtualMachineViewSelVirtualMachine = objc.RegisterName("virtualMachine")
-	_vZVirtualMachineViewSelSetVirtualMachine = objc.RegisterName("setVirtualMachine:")
-	_vZVirtualMachineViewSelCapturesSystemKeys = objc.RegisterName("capturesSystemKeys")
-	_vZVirtualMachineViewSelSetCapturesSystemKeys = objc.RegisterName("setCapturesSystemKeys:")
-	_vZVirtualMachineViewSelAutomaticallyReconfiguresDisplay = objc.RegisterName("automaticallyReconfiguresDisplay")
+	_clsVZVirtualMachineView                                    = _objcClass("VZVirtualMachineView")
+	_vZVirtualMachineViewSelVirtualMachine                      = objc.RegisterName("virtualMachine")
+	_vZVirtualMachineViewSelSetVirtualMachine                   = objc.RegisterName("setVirtualMachine:")
+	_vZVirtualMachineViewSelCapturesSystemKeys                  = objc.RegisterName("capturesSystemKeys")
+	_vZVirtualMachineViewSelSetCapturesSystemKeys               = objc.RegisterName("setCapturesSystemKeys:")
+	_vZVirtualMachineViewSelAutomaticallyReconfiguresDisplay    = objc.RegisterName("automaticallyReconfiguresDisplay")
 	_vZVirtualMachineViewSelSetAutomaticallyReconfiguresDisplay = objc.RegisterName("setAutomaticallyReconfiguresDisplay:")
 )
 
@@ -38,7 +38,9 @@ func VZVirtualMachineViewFromID(id objc.ID) *VZVirtualMachineView {
 // @abstract The virtual machine to display in the view.
 func (o *VZVirtualMachineView) VirtualMachine() *VZVirtualMachine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineViewSelVirtualMachine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtualMachineFromID(_ret)
 }
 
@@ -65,4 +67,3 @@ func (o *VZVirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
 func (o *VZVirtualMachineView) SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) {
 	o.Ptr().Send(_vZVirtualMachineViewSelSetAutomaticallyReconfiguresDisplay, automaticallyReconfiguresDisplay)
 }
-

@@ -15,7 +15,7 @@ type MLCSelectionLayer struct {
 }
 
 var (
-	_clsMLCSelectionLayer = _objcClass("MLCSelectionLayer")
+	_clsMLCSelectionLayer      = _objcClass("MLCSelectionLayer")
 	_mLCSelectionLayerSelLayer = objc.RegisterName("layer")
 )
 
@@ -32,7 +32,8 @@ func MLCSelectionLayerFromID(id objc.ID) *MLCSelectionLayer {
 // @abstract Create a select layer @return   A new layer for selecting elements between two tensors.
 func MLCSelectionLayerLayer() *MLCSelectionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCSelectionLayer), _mLCSelectionLayerSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCSelectionLayerFromID(_ret)
 }
-

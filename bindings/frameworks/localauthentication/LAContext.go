@@ -18,28 +18,28 @@ type LAContext struct {
 }
 
 var (
-	_clsLAContext = _objcClass("LAContext")
-	_lAContextSelCanEvaluatePolicyError = objc.RegisterName("canEvaluatePolicy:error:")
-	_lAContextSelEvaluatePolicyLocalizedReasonReply = objc.RegisterName("evaluatePolicy:localizedReason:reply:")
-	_lAContextSelInvalidate = objc.RegisterName("invalidate")
-	_lAContextSelSetCredentialType = objc.RegisterName("setCredential:type:")
-	_lAContextSelIsCredentialSet = objc.RegisterName("isCredentialSet:")
+	_clsLAContext                                                   = _objcClass("LAContext")
+	_lAContextSelCanEvaluatePolicyError                             = objc.RegisterName("canEvaluatePolicy:error:")
+	_lAContextSelEvaluatePolicyLocalizedReasonReply                 = objc.RegisterName("evaluatePolicy:localizedReason:reply:")
+	_lAContextSelInvalidate                                         = objc.RegisterName("invalidate")
+	_lAContextSelSetCredentialType                                  = objc.RegisterName("setCredential:type:")
+	_lAContextSelIsCredentialSet                                    = objc.RegisterName("isCredentialSet:")
 	_lAContextSelEvaluateAccessControlOperationLocalizedReasonReply = objc.RegisterName("evaluateAccessControl:operation:localizedReason:reply:")
-	_lAContextSelLocalizedFallbackTitle = objc.RegisterName("localizedFallbackTitle")
-	_lAContextSelSetLocalizedFallbackTitle = objc.RegisterName("setLocalizedFallbackTitle:")
-	_lAContextSelMaxBiometryFailures = objc.RegisterName("maxBiometryFailures")
-	_lAContextSelSetMaxBiometryFailures = objc.RegisterName("setMaxBiometryFailures:")
-	_lAContextSelLocalizedCancelTitle = objc.RegisterName("localizedCancelTitle")
-	_lAContextSelSetLocalizedCancelTitle = objc.RegisterName("setLocalizedCancelTitle:")
-	_lAContextSelTouchIDAuthenticationAllowableReuseDuration = objc.RegisterName("touchIDAuthenticationAllowableReuseDuration")
-	_lAContextSelSetTouchIDAuthenticationAllowableReuseDuration = objc.RegisterName("setTouchIDAuthenticationAllowableReuseDuration:")
-	_lAContextSelLocalizedReason = objc.RegisterName("localizedReason")
-	_lAContextSelSetLocalizedReason = objc.RegisterName("setLocalizedReason:")
-	_lAContextSelInteractionNotAllowed = objc.RegisterName("interactionNotAllowed")
-	_lAContextSelSetInteractionNotAllowed = objc.RegisterName("setInteractionNotAllowed:")
-	_lAContextSelBiometryType = objc.RegisterName("biometryType")
-	_lAContextSelEvaluatedPolicyDomainState = objc.RegisterName("evaluatedPolicyDomainState")
-	_lAContextSelDomainState = objc.RegisterName("domainState")
+	_lAContextSelLocalizedFallbackTitle                             = objc.RegisterName("localizedFallbackTitle")
+	_lAContextSelSetLocalizedFallbackTitle                          = objc.RegisterName("setLocalizedFallbackTitle:")
+	_lAContextSelMaxBiometryFailures                                = objc.RegisterName("maxBiometryFailures")
+	_lAContextSelSetMaxBiometryFailures                             = objc.RegisterName("setMaxBiometryFailures:")
+	_lAContextSelLocalizedCancelTitle                               = objc.RegisterName("localizedCancelTitle")
+	_lAContextSelSetLocalizedCancelTitle                            = objc.RegisterName("setLocalizedCancelTitle:")
+	_lAContextSelTouchIDAuthenticationAllowableReuseDuration        = objc.RegisterName("touchIDAuthenticationAllowableReuseDuration")
+	_lAContextSelSetTouchIDAuthenticationAllowableReuseDuration     = objc.RegisterName("setTouchIDAuthenticationAllowableReuseDuration:")
+	_lAContextSelLocalizedReason                                    = objc.RegisterName("localizedReason")
+	_lAContextSelSetLocalizedReason                                 = objc.RegisterName("setLocalizedReason:")
+	_lAContextSelInteractionNotAllowed                              = objc.RegisterName("interactionNotAllowed")
+	_lAContextSelSetInteractionNotAllowed                           = objc.RegisterName("setInteractionNotAllowed:")
+	_lAContextSelBiometryType                                       = objc.RegisterName("biometryType")
+	_lAContextSelEvaluatedPolicyDomainState                         = objc.RegisterName("evaluatedPolicyDomainState")
+	_lAContextSelDomainState                                        = objc.RegisterName("domainState")
 )
 
 func LAContextFromID(id objc.ID) *LAContext {
@@ -106,7 +106,9 @@ func (o *LAContext) EvaluateAccessControlOperationLocalizedReasonReply(accessCon
 // Fallback button title. @discussion Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
 func (o *LAContext) LocalizedFallbackTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelLocalizedFallbackTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -118,7 +120,9 @@ func (o *LAContext) SetLocalizedFallbackTitle(localizedFallbackTitle *foundation
 // Deprecated: No longer supported
 func (o *LAContext) MaxBiometryFailures() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelMaxBiometryFailures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -130,7 +134,9 @@ func (o *LAContext) SetMaxBiometryFailures(maxBiometryFailures *foundation.NSNum
 // Cancel button title. @discussion Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
 func (o *LAContext) LocalizedCancelTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelLocalizedCancelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,7 +157,9 @@ func (o *LAContext) SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthen
 // Allows setting the default localized authentication reason on context. @discussion A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
 func (o *LAContext) LocalizedReason() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelLocalizedReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -179,14 +187,17 @@ func (o *LAContext) BiometryType() LABiometryType {
 // Deprecated: since macOS 15.0.
 func (o *LAContext) EvaluatedPolicyDomainState() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelEvaluatedPolicyDomainState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Contains authentication domain state.
 func (o *LAContext) DomainState() *LADomainState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAContextSelDomainState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LADomainStateFromID(_ret)
 }
-

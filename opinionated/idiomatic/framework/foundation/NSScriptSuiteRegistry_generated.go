@@ -156,4 +156,3 @@ type ScriptSuiteRegistryable interface {
 }
 
 var _ ScriptSuiteRegistryable = (*ScriptSuiteRegistry)(nil)
-

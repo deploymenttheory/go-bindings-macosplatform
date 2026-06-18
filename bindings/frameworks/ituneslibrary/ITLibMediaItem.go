@@ -18,55 +18,55 @@ type ITLibMediaItem struct {
 }
 
 var (
-	_clsITLibMediaItem = _objcClass("ITLibMediaItem")
-	_iTLibMediaItemSelTitle = objc.RegisterName("title")
-	_iTLibMediaItemSelSortTitle = objc.RegisterName("sortTitle")
-	_iTLibMediaItemSelArtist = objc.RegisterName("artist")
-	_iTLibMediaItemSelComposer = objc.RegisterName("composer")
-	_iTLibMediaItemSelSortComposer = objc.RegisterName("sortComposer")
-	_iTLibMediaItemSelRating = objc.RegisterName("rating")
-	_iTLibMediaItemSelIsRatingComputed = objc.RegisterName("isRatingComputed")
-	_iTLibMediaItemSelStartTime = objc.RegisterName("startTime")
-	_iTLibMediaItemSelStopTime = objc.RegisterName("stopTime")
-	_iTLibMediaItemSelAlbum = objc.RegisterName("album")
-	_iTLibMediaItemSelGenre = objc.RegisterName("genre")
-	_iTLibMediaItemSelKind = objc.RegisterName("kind")
-	_iTLibMediaItemSelMediaKind = objc.RegisterName("mediaKind")
-	_iTLibMediaItemSelFileSize = objc.RegisterName("fileSize")
-	_iTLibMediaItemSelSize = objc.RegisterName("size")
-	_iTLibMediaItemSelTotalTime = objc.RegisterName("totalTime")
-	_iTLibMediaItemSelTrackNumber = objc.RegisterName("trackNumber")
-	_iTLibMediaItemSelCategory = objc.RegisterName("category")
-	_iTLibMediaItemSelLyricsContentRating = objc.RegisterName("lyricsContentRating")
-	_iTLibMediaItemSelContentRating = objc.RegisterName("contentRating")
-	_iTLibMediaItemSelModifiedDate = objc.RegisterName("modifiedDate")
-	_iTLibMediaItemSelAddedDate = objc.RegisterName("addedDate")
-	_iTLibMediaItemSelBitrate = objc.RegisterName("bitrate")
-	_iTLibMediaItemSelSampleRate = objc.RegisterName("sampleRate")
-	_iTLibMediaItemSelBeatsPerMinute = objc.RegisterName("beatsPerMinute")
-	_iTLibMediaItemSelPlayCount = objc.RegisterName("playCount")
-	_iTLibMediaItemSelLastPlayedDate = objc.RegisterName("lastPlayedDate")
-	_iTLibMediaItemSelPlayStatus = objc.RegisterName("playStatus")
-	_iTLibMediaItemSelLocation = objc.RegisterName("location")
-	_iTLibMediaItemSelHasArtworkAvailable = objc.RegisterName("hasArtworkAvailable")
-	_iTLibMediaItemSelArtwork = objc.RegisterName("artwork")
-	_iTLibMediaItemSelComments = objc.RegisterName("comments")
-	_iTLibMediaItemSelIsPurchased = objc.RegisterName("isPurchased")
-	_iTLibMediaItemSelIsCloud = objc.RegisterName("isCloud")
-	_iTLibMediaItemSelIsDRMProtected = objc.RegisterName("isDRMProtected")
-	_iTLibMediaItemSelIsVideo = objc.RegisterName("isVideo")
-	_iTLibMediaItemSelVideoInfo = objc.RegisterName("videoInfo")
-	_iTLibMediaItemSelReleaseDate = objc.RegisterName("releaseDate")
-	_iTLibMediaItemSelYear = objc.RegisterName("year")
-	_iTLibMediaItemSelFileType = objc.RegisterName("fileType")
-	_iTLibMediaItemSelSkipCount = objc.RegisterName("skipCount")
-	_iTLibMediaItemSelSkipDate = objc.RegisterName("skipDate")
-	_iTLibMediaItemSelVoiceOverLanguage = objc.RegisterName("voiceOverLanguage")
-	_iTLibMediaItemSelVolumeAdjustment = objc.RegisterName("volumeAdjustment")
+	_clsITLibMediaItem                          = _objcClass("ITLibMediaItem")
+	_iTLibMediaItemSelTitle                     = objc.RegisterName("title")
+	_iTLibMediaItemSelSortTitle                 = objc.RegisterName("sortTitle")
+	_iTLibMediaItemSelArtist                    = objc.RegisterName("artist")
+	_iTLibMediaItemSelComposer                  = objc.RegisterName("composer")
+	_iTLibMediaItemSelSortComposer              = objc.RegisterName("sortComposer")
+	_iTLibMediaItemSelRating                    = objc.RegisterName("rating")
+	_iTLibMediaItemSelIsRatingComputed          = objc.RegisterName("isRatingComputed")
+	_iTLibMediaItemSelStartTime                 = objc.RegisterName("startTime")
+	_iTLibMediaItemSelStopTime                  = objc.RegisterName("stopTime")
+	_iTLibMediaItemSelAlbum                     = objc.RegisterName("album")
+	_iTLibMediaItemSelGenre                     = objc.RegisterName("genre")
+	_iTLibMediaItemSelKind                      = objc.RegisterName("kind")
+	_iTLibMediaItemSelMediaKind                 = objc.RegisterName("mediaKind")
+	_iTLibMediaItemSelFileSize                  = objc.RegisterName("fileSize")
+	_iTLibMediaItemSelSize                      = objc.RegisterName("size")
+	_iTLibMediaItemSelTotalTime                 = objc.RegisterName("totalTime")
+	_iTLibMediaItemSelTrackNumber               = objc.RegisterName("trackNumber")
+	_iTLibMediaItemSelCategory                  = objc.RegisterName("category")
+	_iTLibMediaItemSelLyricsContentRating       = objc.RegisterName("lyricsContentRating")
+	_iTLibMediaItemSelContentRating             = objc.RegisterName("contentRating")
+	_iTLibMediaItemSelModifiedDate              = objc.RegisterName("modifiedDate")
+	_iTLibMediaItemSelAddedDate                 = objc.RegisterName("addedDate")
+	_iTLibMediaItemSelBitrate                   = objc.RegisterName("bitrate")
+	_iTLibMediaItemSelSampleRate                = objc.RegisterName("sampleRate")
+	_iTLibMediaItemSelBeatsPerMinute            = objc.RegisterName("beatsPerMinute")
+	_iTLibMediaItemSelPlayCount                 = objc.RegisterName("playCount")
+	_iTLibMediaItemSelLastPlayedDate            = objc.RegisterName("lastPlayedDate")
+	_iTLibMediaItemSelPlayStatus                = objc.RegisterName("playStatus")
+	_iTLibMediaItemSelLocation                  = objc.RegisterName("location")
+	_iTLibMediaItemSelHasArtworkAvailable       = objc.RegisterName("hasArtworkAvailable")
+	_iTLibMediaItemSelArtwork                   = objc.RegisterName("artwork")
+	_iTLibMediaItemSelComments                  = objc.RegisterName("comments")
+	_iTLibMediaItemSelIsPurchased               = objc.RegisterName("isPurchased")
+	_iTLibMediaItemSelIsCloud                   = objc.RegisterName("isCloud")
+	_iTLibMediaItemSelIsDRMProtected            = objc.RegisterName("isDRMProtected")
+	_iTLibMediaItemSelIsVideo                   = objc.RegisterName("isVideo")
+	_iTLibMediaItemSelVideoInfo                 = objc.RegisterName("videoInfo")
+	_iTLibMediaItemSelReleaseDate               = objc.RegisterName("releaseDate")
+	_iTLibMediaItemSelYear                      = objc.RegisterName("year")
+	_iTLibMediaItemSelFileType                  = objc.RegisterName("fileType")
+	_iTLibMediaItemSelSkipCount                 = objc.RegisterName("skipCount")
+	_iTLibMediaItemSelSkipDate                  = objc.RegisterName("skipDate")
+	_iTLibMediaItemSelVoiceOverLanguage         = objc.RegisterName("voiceOverLanguage")
+	_iTLibMediaItemSelVolumeAdjustment          = objc.RegisterName("volumeAdjustment")
 	_iTLibMediaItemSelVolumeNormalizationEnergy = objc.RegisterName("volumeNormalizationEnergy")
-	_iTLibMediaItemSelIsUserDisabled = objc.RegisterName("isUserDisabled")
-	_iTLibMediaItemSelGrouping = objc.RegisterName("grouping")
-	_iTLibMediaItemSelLocationType = objc.RegisterName("locationType")
+	_iTLibMediaItemSelIsUserDisabled            = objc.RegisterName("isUserDisabled")
+	_iTLibMediaItemSelGrouping                  = objc.RegisterName("grouping")
+	_iTLibMediaItemSelLocationType              = objc.RegisterName("locationType")
 )
 
 func ITLibMediaItemFromID(id objc.ID) *ITLibMediaItem {
@@ -82,35 +82,45 @@ func ITLibMediaItemFromID(id objc.ID) *ITLibMediaItem {
 // @abstract The title of this media item. May be empty.
 func (o *ITLibMediaItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The title of this media item that should be used for sorting purposes.  If nil, use the title field.
 func (o *ITLibMediaItem) SortTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelSortTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The artist associated with this media item.
 func (o *ITLibMediaItem) Artist() *ITLibArtist {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelArtist)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ITLibArtistFromID(_ret)
 }
 
 // @abstract The name of the composer associated with this media item.  May be empty.
 func (o *ITLibMediaItem) Composer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelComposer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The name of the composer associated with this media item that should be used for sorting purposes. If nil, use the composer field.
 func (o *ITLibMediaItem) SortComposer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelSortComposer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -141,21 +151,27 @@ func (o *ITLibMediaItem) StopTime() uint {
 // @abstract The album where this media item belongs.
 func (o *ITLibMediaItem) Album() *ITLibAlbum {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelAlbum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ITLibAlbumFromID(_ret)
 }
 
 // @abstract The genre associated with this media item. May be empty.
 func (o *ITLibMediaItem) Genre() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelGenre)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract This media item's file kind (ex. MPEG audio file).
 func (o *ITLibMediaItem) Kind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -192,7 +208,9 @@ func (o *ITLibMediaItem) TrackNumber() uint {
 // @abstract The podcast category of this media item (implies this media item is a podcast).
 func (o *ITLibMediaItem) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -205,21 +223,27 @@ func (o *ITLibMediaItem) LyricsContentRating() ITLibMediaItemLyricsContentRating
 // @abstract The extended content rating of this media item.
 func (o *ITLibMediaItem) ContentRating() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelContentRating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The date and time this media item was last modified.
 func (o *ITLibMediaItem) ModifiedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelModifiedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @abstract The date and media item this media item was added to the iTunes database.
 func (o *ITLibMediaItem) AddedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelAddedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -250,7 +274,9 @@ func (o *ITLibMediaItem) PlayCount() uint {
 // @abstract The date and time this media item was last played in iTunes, or nil if this media item has not been played.
 func (o *ITLibMediaItem) LastPlayedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelLastPlayedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -263,7 +289,9 @@ func (o *ITLibMediaItem) PlayStatus() ITLibMediaItemPlayStatus {
 // @abstract The location of this media item on disk.
 func (o *ITLibMediaItem) Location() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -276,14 +304,18 @@ func (o *ITLibMediaItem) HasArtworkAvailable() bool {
 // @abstract Whether this media item has artwork.
 func (o *ITLibMediaItem) Artwork() *ITLibArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelArtwork)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ITLibArtworkFromID(_ret)
 }
 
 // @abstract Any comments associated with this media item.
 func (o *ITLibMediaItem) Comments() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelComments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -314,14 +346,18 @@ func (o *ITLibMediaItem) IsVideo() bool {
 // @abstract The video information of this media item (implies this media item is a video media item).
 func (o *ITLibMediaItem) VideoInfo() *ITLibMediaItemVideoInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelVideoInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ITLibMediaItemVideoInfoFromID(_ret)
 }
 
 // @abstract The date this media item was released.
 func (o *ITLibMediaItem) ReleaseDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelReleaseDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -346,7 +382,9 @@ func (o *ITLibMediaItem) SkipCount() uint {
 // @abstract The date and time when this media item was last skipped.
 func (o *ITLibMediaItem) SkipDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelSkipDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -377,7 +415,9 @@ func (o *ITLibMediaItem) IsUserDisabled() bool {
 // @abstract The grouping of this media item.
 func (o *ITLibMediaItem) Grouping() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iTLibMediaItemSelGrouping)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -386,4 +426,3 @@ func (o *ITLibMediaItem) LocationType() ITLibMediaItemLocationType {
 	_ret := objc.Send[ITLibMediaItemLocationType](o.Ptr(), _iTLibMediaItemSelLocationType)
 	return _ret
 }
-

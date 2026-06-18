@@ -124,9 +124,13 @@ func (x *NNLossGradientNode) SetPropertyCallBack(propertyCallBack raw.MPSNNLossC
 	x.inner.SetPropertyCallBack(propertyCallBack)
 }
 
-func (x *NNLossGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNLossGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNLossGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNLossGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNLossGradientNodeable is the interface implemented by [NNLossGradientNode], for mocking and DI.
 type NNLossGradientNodeable interface {
@@ -148,4 +152,3 @@ type NNLossGradientNodeable interface {
 }
 
 var _ NNLossGradientNodeable = (*NNLossGradientNode)(nil)
-

@@ -16,7 +16,7 @@ type PHASEMedium struct {
 }
 
 var (
-	_clsPHASEMedium = _objcClass("PHASEMedium")
+	_clsPHASEMedium                     = _objcClass("PHASEMedium")
 	_pHASEMediumSelInitWithEnginePreset = objc.RegisterName("initWithEngine:preset:")
 )
 
@@ -33,7 +33,8 @@ func PHASEMediumFromID(id objc.ID) *PHASEMedium {
 // @method initWithEngine:preset @abstract Initialize a new medium from a preset.
 func (o *PHASEMedium) InitWithEnginePreset(engine *PHASEEngine, preset PHASEMediumPreset) *PHASEMedium {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEMediumSelInitWithEnginePreset, engine.Ptr(), preset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMediumFromID(_ret)
 }
-

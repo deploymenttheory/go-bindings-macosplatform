@@ -18,28 +18,28 @@ type NSOpenPanel struct {
 }
 
 var (
-	_clsNSOpenPanel = _objcClass("NSOpenPanel")
-	_nSOpenPanelSelOpenPanel = objc.RegisterName("openPanel")
-	_nSOpenPanelSelURLs = objc.RegisterName("URLs")
-	_nSOpenPanelSelResolvesAliases = objc.RegisterName("resolvesAliases")
-	_nSOpenPanelSelSetResolvesAliases = objc.RegisterName("setResolvesAliases:")
-	_nSOpenPanelSelCanChooseDirectories = objc.RegisterName("canChooseDirectories")
-	_nSOpenPanelSelSetCanChooseDirectories = objc.RegisterName("setCanChooseDirectories:")
-	_nSOpenPanelSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_nSOpenPanelSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_nSOpenPanelSelCanChooseFiles = objc.RegisterName("canChooseFiles")
-	_nSOpenPanelSelSetCanChooseFiles = objc.RegisterName("setCanChooseFiles:")
-	_nSOpenPanelSelCanResolveUbiquitousConflicts = objc.RegisterName("canResolveUbiquitousConflicts")
-	_nSOpenPanelSelSetCanResolveUbiquitousConflicts = objc.RegisterName("setCanResolveUbiquitousConflicts:")
-	_nSOpenPanelSelCanDownloadUbiquitousContents = objc.RegisterName("canDownloadUbiquitousContents")
-	_nSOpenPanelSelSetCanDownloadUbiquitousContents = objc.RegisterName("setCanDownloadUbiquitousContents:")
-	_nSOpenPanelSelIsAccessoryViewDisclosed = objc.RegisterName("isAccessoryViewDisclosed")
-	_nSOpenPanelSelSetAccessoryViewDisclosed = objc.RegisterName("setAccessoryViewDisclosed:")
-	_nSOpenPanelSelFilenames = objc.RegisterName("filenames")
+	_clsNSOpenPanel                                                                                    = _objcClass("NSOpenPanel")
+	_nSOpenPanelSelOpenPanel                                                                           = objc.RegisterName("openPanel")
+	_nSOpenPanelSelURLs                                                                                = objc.RegisterName("URLs")
+	_nSOpenPanelSelResolvesAliases                                                                     = objc.RegisterName("resolvesAliases")
+	_nSOpenPanelSelSetResolvesAliases                                                                  = objc.RegisterName("setResolvesAliases:")
+	_nSOpenPanelSelCanChooseDirectories                                                                = objc.RegisterName("canChooseDirectories")
+	_nSOpenPanelSelSetCanChooseDirectories                                                             = objc.RegisterName("setCanChooseDirectories:")
+	_nSOpenPanelSelAllowsMultipleSelection                                                             = objc.RegisterName("allowsMultipleSelection")
+	_nSOpenPanelSelSetAllowsMultipleSelection                                                          = objc.RegisterName("setAllowsMultipleSelection:")
+	_nSOpenPanelSelCanChooseFiles                                                                      = objc.RegisterName("canChooseFiles")
+	_nSOpenPanelSelSetCanChooseFiles                                                                   = objc.RegisterName("setCanChooseFiles:")
+	_nSOpenPanelSelCanResolveUbiquitousConflicts                                                       = objc.RegisterName("canResolveUbiquitousConflicts")
+	_nSOpenPanelSelSetCanResolveUbiquitousConflicts                                                    = objc.RegisterName("setCanResolveUbiquitousConflicts:")
+	_nSOpenPanelSelCanDownloadUbiquitousContents                                                       = objc.RegisterName("canDownloadUbiquitousContents")
+	_nSOpenPanelSelSetCanDownloadUbiquitousContents                                                    = objc.RegisterName("setCanDownloadUbiquitousContents:")
+	_nSOpenPanelSelIsAccessoryViewDisclosed                                                            = objc.RegisterName("isAccessoryViewDisclosed")
+	_nSOpenPanelSelSetAccessoryViewDisclosed                                                           = objc.RegisterName("setAccessoryViewDisclosed:")
+	_nSOpenPanelSelFilenames                                                                           = objc.RegisterName("filenames")
 	_nSOpenPanelSelBeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetForDirectory:file:types:modalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo = objc.RegisterName("beginForDirectory:file:types:modelessDelegate:didEndSelector:contextInfo:")
-	_nSOpenPanelSelRunModalForDirectoryFileTypes = objc.RegisterName("runModalForDirectory:file:types:")
-	_nSOpenPanelSelRunModalForTypes = objc.RegisterName("runModalForTypes:")
+	_nSOpenPanelSelBeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo                 = objc.RegisterName("beginForDirectory:file:types:modelessDelegate:didEndSelector:contextInfo:")
+	_nSOpenPanelSelRunModalForDirectoryFileTypes                                                       = objc.RegisterName("runModalForDirectory:file:types:")
+	_nSOpenPanelSelRunModalForTypes                                                                    = objc.RegisterName("runModalForTypes:")
 )
 
 func NSOpenPanelFromID(id objc.ID) *NSOpenPanel {
@@ -54,7 +54,9 @@ func NSOpenPanelFromID(id objc.ID) *NSOpenPanel {
 
 func NSOpenPanelOpenPanel() *NSOpenPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOpenPanel), _nSOpenPanelSelOpenPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenPanelFromID(_ret)
 }
 
@@ -153,4 +155,3 @@ func (o *NSOpenPanel) RunModalForTypes(fileTypes *foundation.NSArray[objc.ID]) i
 	_ret := objc.Send[int](o.Ptr(), _nSOpenPanelSelRunModalForTypes, fileTypes)
 	return _ret
 }
-

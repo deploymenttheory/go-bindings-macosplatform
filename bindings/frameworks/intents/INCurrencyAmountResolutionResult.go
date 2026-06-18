@@ -16,8 +16,8 @@ type INCurrencyAmountResolutionResult struct {
 }
 
 var (
-	_clsINCurrencyAmountResolutionResult = _objcClass("INCurrencyAmountResolutionResult")
-	_iNCurrencyAmountResolutionResultSelSuccessWithResolvedCurrencyAmount = objc.RegisterName("successWithResolvedCurrencyAmount:")
+	_clsINCurrencyAmountResolutionResult                                                = _objcClass("INCurrencyAmountResolutionResult")
+	_iNCurrencyAmountResolutionResultSelSuccessWithResolvedCurrencyAmount               = objc.RegisterName("successWithResolvedCurrencyAmount:")
 	_iNCurrencyAmountResolutionResultSelDisambiguationWithCurrencyAmountsToDisambiguate = objc.RegisterName("disambiguationWithCurrencyAmountsToDisambiguate:")
 	_iNCurrencyAmountResolutionResultSelConfirmationRequiredWithCurrencyAmountToConfirm = objc.RegisterName("confirmationRequiredWithCurrencyAmountToConfirm:")
 )
@@ -34,19 +34,24 @@ func INCurrencyAmountResolutionResultFromID(id objc.ID) *INCurrencyAmountResolut
 
 func INCurrencyAmountResolutionResultSuccessWithResolvedCurrencyAmount(resolvedCurrencyAmount *INCurrencyAmount) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelSuccessWithResolvedCurrencyAmount, resolvedCurrencyAmount.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCurrencyAmountResolutionResultFromID(_ret)
 }
 
 func INCurrencyAmountResolutionResultDisambiguationWithCurrencyAmountsToDisambiguate(currencyAmountsToDisambiguate *foundation.NSArray[*INCurrencyAmount]) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelDisambiguationWithCurrencyAmountsToDisambiguate, currencyAmountsToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCurrencyAmountResolutionResultFromID(_ret)
 }
 
 func INCurrencyAmountResolutionResultConfirmationRequiredWithCurrencyAmountToConfirm(currencyAmountToConfirm *INCurrencyAmount) *INCurrencyAmountResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCurrencyAmountResolutionResult), _iNCurrencyAmountResolutionResultSelConfirmationRequiredWithCurrencyAmountToConfirm, currencyAmountToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCurrencyAmountResolutionResultFromID(_ret)
 }
-

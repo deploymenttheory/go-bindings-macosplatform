@@ -18,13 +18,13 @@ type MPSCNNPoolingAverageGradient struct {
 }
 
 var (
-	_clsMPSCNNPoolingAverageGradient = _objcClass("MPSCNNPoolingAverageGradient")
+	_clsMPSCNNPoolingAverageGradient                                                                    = _objcClass("MPSCNNPoolingAverageGradient")
 	_mPSCNNPoolingAverageGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingAverageGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNPoolingAverageGradientSelZeroPadSizeX = objc.RegisterName("zeroPadSizeX")
-	_mPSCNNPoolingAverageGradientSelSetZeroPadSizeX = objc.RegisterName("setZeroPadSizeX:")
-	_mPSCNNPoolingAverageGradientSelZeroPadSizeY = objc.RegisterName("zeroPadSizeY")
-	_mPSCNNPoolingAverageGradientSelSetZeroPadSizeY = objc.RegisterName("setZeroPadSizeY:")
+	_mPSCNNPoolingAverageGradientSelInitWithCoderDevice                                                 = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNPoolingAverageGradientSelZeroPadSizeX                                                        = objc.RegisterName("zeroPadSizeX")
+	_mPSCNNPoolingAverageGradientSelSetZeroPadSizeX                                                     = objc.RegisterName("setZeroPadSizeX:")
+	_mPSCNNPoolingAverageGradientSelZeroPadSizeY                                                        = objc.RegisterName("zeroPadSizeY")
+	_mPSCNNPoolingAverageGradientSelSetZeroPadSizeY                                                     = objc.RegisterName("setZeroPadSizeY:")
 )
 
 func MPSCNNPoolingAverageGradientFromID(id objc.ID) *MPSCNNPoolingAverageGradient {
@@ -40,14 +40,18 @@ func MPSCNNPoolingAverageGradientFromID(id objc.ID) *MPSCNNPoolingAverageGradien
 // @abstract  Initialize a gradient average pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The input stride (upsampling factor) in the x dimension. @param      strideInPixelsY     The input stride (upsampling factor) in the y dimension. @return     A valid MPSCNNPoolingGradient object or nil, if failure.
 func (o *MPSCNNPoolingAverageGradient) InitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingAverageGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingAverageGradientSelInitWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingAverageGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPoolingAverageGradient @param      device      The MTLDevice on which to make the MPSCNNPoolingAverageGradient @return     A new MPSCNNPoolingAverageGradient object, or nil if failure.
 func (o *MPSCNNPoolingAverageGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNPoolingAverageGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingAverageGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingAverageGradientFromID(_ret)
 }
 
@@ -70,4 +74,3 @@ func (o *MPSCNNPoolingAverageGradient) ZeroPadSizeY() uint {
 func (o *MPSCNNPoolingAverageGradient) SetZeroPadSizeY(zeroPadSizeY uint) {
 	o.Ptr().Send(_mPSCNNPoolingAverageGradientSelSetZeroPadSizeY, zeroPadSizeY)
 }
-

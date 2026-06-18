@@ -18,13 +18,13 @@ type MTKMeshBuffer struct {
 }
 
 var (
-	_clsMTKMeshBuffer = _objcClass("MTKMeshBuffer")
-	_mTKMeshBufferSelLength = objc.RegisterName("length")
+	_clsMTKMeshBuffer          = _objcClass("MTKMeshBuffer")
+	_mTKMeshBufferSelLength    = objc.RegisterName("length")
 	_mTKMeshBufferSelAllocator = objc.RegisterName("allocator")
-	_mTKMeshBufferSelZone = objc.RegisterName("zone")
-	_mTKMeshBufferSelBuffer = objc.RegisterName("buffer")
-	_mTKMeshBufferSelOffset = objc.RegisterName("offset")
-	_mTKMeshBufferSelType = objc.RegisterName("type")
+	_mTKMeshBufferSelZone      = objc.RegisterName("zone")
+	_mTKMeshBufferSelBuffer    = objc.RegisterName("buffer")
+	_mTKMeshBufferSelOffset    = objc.RegisterName("offset")
+	_mTKMeshBufferSelType      = objc.RegisterName("type")
 )
 
 func MTKMeshBufferFromID(id objc.ID) *MTKMeshBuffer {
@@ -46,7 +46,9 @@ func (o *MTKMeshBuffer) Length() uint {
 // @property allocator @abstract Allocator object used to create this buffer. @discussion This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
 func (o *MTKMeshBuffer) Allocator() *MTKMeshBufferAllocator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTKMeshBufferSelAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTKMeshBufferAllocatorFromID(_ret)
 }
 
@@ -73,4 +75,3 @@ func (o *MTKMeshBuffer) Type() modelio.MDLMeshBufferType {
 	_ret := objc.Send[modelio.MDLMeshBufferType](o.Ptr(), _mTKMeshBufferSelType)
 	return _ret
 }
-

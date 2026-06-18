@@ -21,21 +21,21 @@ type MPSCNNLoss struct {
 }
 
 var (
-	_clsMPSCNNLoss = _objcClass("MPSCNNLoss")
-	_mPSCNNLossSelInitWithDeviceLossDescriptor = objc.RegisterName("initWithDevice:lossDescriptor:")
-	_mPSCNNLossSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNLossSelEncodeToCommandBufferSourceImageLabelsDestinationImage = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:destinationImage:")
-	_mPSCNNLossSelEncodeToCommandBufferSourceImageLabels = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:")
+	_clsMPSCNNLoss                                                              = _objcClass("MPSCNNLoss")
+	_mPSCNNLossSelInitWithDeviceLossDescriptor                                  = objc.RegisterName("initWithDevice:lossDescriptor:")
+	_mPSCNNLossSelInitWithCoderDevice                                           = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNLossSelEncodeToCommandBufferSourceImageLabelsDestinationImage        = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:destinationImage:")
+	_mPSCNNLossSelEncodeToCommandBufferSourceImageLabels                        = objc.RegisterName("encodeToCommandBuffer:sourceImage:labels:")
 	_mPSCNNLossSelEncodeBatchToCommandBufferSourceImagesLabelsDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:destinationImages:")
-	_mPSCNNLossSelEncodeBatchToCommandBufferSourceImagesLabels = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:")
-	_mPSCNNLossSelLossType = objc.RegisterName("lossType")
-	_mPSCNNLossSelReductionType = objc.RegisterName("reductionType")
-	_mPSCNNLossSelWeight = objc.RegisterName("weight")
-	_mPSCNNLossSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mPSCNNLossSelNumberOfClasses = objc.RegisterName("numberOfClasses")
-	_mPSCNNLossSelEpsilon = objc.RegisterName("epsilon")
-	_mPSCNNLossSelDelta = objc.RegisterName("delta")
-	_mPSCNNLossSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
+	_mPSCNNLossSelEncodeBatchToCommandBufferSourceImagesLabels                  = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:")
+	_mPSCNNLossSelLossType                                                      = objc.RegisterName("lossType")
+	_mPSCNNLossSelReductionType                                                 = objc.RegisterName("reductionType")
+	_mPSCNNLossSelWeight                                                        = objc.RegisterName("weight")
+	_mPSCNNLossSelLabelSmoothing                                                = objc.RegisterName("labelSmoothing")
+	_mPSCNNLossSelNumberOfClasses                                               = objc.RegisterName("numberOfClasses")
+	_mPSCNNLossSelEpsilon                                                       = objc.RegisterName("epsilon")
+	_mPSCNNLossSelDelta                                                         = objc.RegisterName("delta")
+	_mPSCNNLossSelReduceAcrossBatch                                             = objc.RegisterName("reduceAcrossBatch")
 )
 
 func MPSCNNLossFromID(id objc.ID) *MPSCNNLoss {
@@ -51,14 +51,18 @@ func MPSCNNLossFromID(id objc.ID) *MPSCNNLoss {
 // @abstract   Initialize the loss filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSCNNLoss object or nil, if failure.
 func (o *MPSCNNLoss) InitWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLossSelInitWithDeviceLossDescriptor, device, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
 // @abstract <NSSecureCoding> support
 func (o *MPSCNNLoss) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLossSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLossFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *MPSCNNLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(comm
 // @abstract   Encode a MPSCNNLoss filter and return a gradient. @discussion This -encode call is similar to the encodeToCommandBuffer:sourceImage:labels:destinationImage: above, except that it creates and returns the MPSImage with the loss gradient result. @param      commandBuffer       The MTLCommandBuffer on which to encode. @param      sourceImage         The source image from the previous filter in the graph (in the inference direction). @param      labels              The object containing the target data (labels) and optionally, weights for the labels. @return     The MPSImage containing the gradient result.
 func (o *MPSCNNLoss) EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *mpsneuralnetwork.MPSCNNLossLabels) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLossSelEncodeToCommandBufferSourceImageLabels, commandBuffer, sourceImage.Ptr(), labels.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -123,4 +129,3 @@ func (o *MPSCNNLoss) ReduceAcrossBatch() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSCNNLossSelReduceAcrossBatch)
 	return _ret
 }
-

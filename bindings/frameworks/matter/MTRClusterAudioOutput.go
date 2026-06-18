@@ -18,18 +18,18 @@ type MTRClusterAudioOutput struct {
 }
 
 var (
-	_clsMTRClusterAudioOutput = _objcClass("MTRClusterAudioOutput")
-	_mTRClusterAudioOutputSelSelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("selectOutputWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAudioOutputSelRenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("renameOutputWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAudioOutputSelReadAttributeOutputListWithParams = objc.RegisterName("readAttributeOutputListWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeCurrentOutputWithParams = objc.RegisterName("readAttributeCurrentOutputWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterAudioOutputSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterAudioOutputSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterAudioOutputSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterAudioOutput                                                                           = _objcClass("MTRClusterAudioOutput")
+	_mTRClusterAudioOutputSelSelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("selectOutputWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAudioOutputSelRenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("renameOutputWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAudioOutputSelReadAttributeOutputListWithParams                                          = objc.RegisterName("readAttributeOutputListWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeCurrentOutputWithParams                                       = objc.RegisterName("readAttributeCurrentOutputWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeGeneratedCommandListWithParams                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeAcceptedCommandListWithParams                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeAttributeListWithParams                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeFeatureMapWithParams                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterAudioOutputSelReadAttributeClusterRevisionWithParams                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterAudioOutputSelInitWithDeviceEndpointIDQueue                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterAudioOutputSelInitWithDeviceEndpointQueue                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterAudioOutputSelSelectOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("selectOutputWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterAudioOutputSelRenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("renameOutputWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
@@ -104,13 +104,17 @@ func (o *MTRClusterAudioOutput) ReadAttributeClusterRevisionWithParams(params *M
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterAudioOutput) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAudioOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAudioOutputSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAudioOutputFromID(_ret)
 }
 
 func (o *MTRClusterAudioOutput) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterAudioOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAudioOutputSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAudioOutputFromID(_ret)
 }
 
@@ -135,4 +139,3 @@ func (o *MTRClusterAudioOutput) RenameOutputWithParamsExpectedValuesExpectedValu
 	}
 	o.Ptr().Send(_mTRClusterAudioOutputSelRenameOutputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

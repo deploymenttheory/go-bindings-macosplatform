@@ -18,18 +18,18 @@ type MTRNetworkCommissioningClusterScanNetworksResponseParams struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterScanNetworksResponseParams = _objcClass("MTRNetworkCommissioningClusterScanNetworksResponseParams")
+	_clsMTRNetworkCommissioningClusterScanNetworksResponseParams                           = _objcClass("MTRNetworkCommissioningClusterScanNetworksResponseParams")
 	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelNetworkingStatus = objc.RegisterName("networkingStatus")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetNetworkingStatus = objc.RegisterName("setNetworkingStatus:")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelDebugText = objc.RegisterName("debugText")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetDebugText = objc.RegisterName("setDebugText:")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelWiFiScanResults = objc.RegisterName("wiFiScanResults")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetWiFiScanResults = objc.RegisterName("setWiFiScanResults:")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelThreadScanResults = objc.RegisterName("threadScanResults")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetThreadScanResults = objc.RegisterName("setThreadScanResults:")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelNetworkingStatus           = objc.RegisterName("networkingStatus")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetNetworkingStatus        = objc.RegisterName("setNetworkingStatus:")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelDebugText                  = objc.RegisterName("debugText")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetDebugText               = objc.RegisterName("setDebugText:")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelWiFiScanResults            = objc.RegisterName("wiFiScanResults")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetWiFiScanResults         = objc.RegisterName("setWiFiScanResults:")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelThreadScanResults          = objc.RegisterName("threadScanResults")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetThreadScanResults       = objc.RegisterName("setThreadScanResults:")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
@@ -46,7 +46,9 @@ func MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(id objc.ID) 
 func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) InitWithRespo
 
 func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksResponseParamsSelNetworkingStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetNetworking
 
 func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksResponseParamsSelDebugText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,11 +100,12 @@ func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetThreadScan
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterScanNetworksResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterScanNetworksResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

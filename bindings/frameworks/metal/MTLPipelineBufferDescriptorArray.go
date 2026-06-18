@@ -16,8 +16,8 @@ type MTLPipelineBufferDescriptorArray struct {
 }
 
 var (
-	_clsMTLPipelineBufferDescriptorArray = _objcClass("MTLPipelineBufferDescriptorArray")
-	_mTLPipelineBufferDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLPipelineBufferDescriptorArray                            = _objcClass("MTLPipelineBufferDescriptorArray")
+	_mTLPipelineBufferDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLPipelineBufferDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLPipelineBufferDescriptorArrayFromID(id objc.ID) *MTLPipelineBufferDescri
 
 func (o *MTLPipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex uint) *MTLPipelineBufferDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLPipelineBufferDescriptorArraySelObjectAtIndexedSubscript, bufferIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorFromID(_ret)
 }
 
 func (o *MTLPipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *MTLPipelineBufferDescriptor, bufferIndex uint) {
 	o.Ptr().Send(_mTLPipelineBufferDescriptorArraySelSetObjectAtIndexedSubscript, buffer.Ptr(), bufferIndex)
 }
-

@@ -51,4 +51,3 @@ type SendMessageAttachmentable interface {
 }
 
 var _ SendMessageAttachmentable = (*SendMessageAttachment)(nil)
-

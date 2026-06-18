@@ -41,4 +41,3 @@ type SafariApplicationable interface {
 }
 
 var _ SafariApplicationable = (*SafariApplication)(nil)
-

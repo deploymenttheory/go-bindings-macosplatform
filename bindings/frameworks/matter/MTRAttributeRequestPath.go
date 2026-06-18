@@ -16,11 +16,11 @@ type MTRAttributeRequestPath struct {
 }
 
 var (
-	_clsMTRAttributeRequestPath = _objcClass("MTRAttributeRequestPath")
+	_clsMTRAttributeRequestPath                                              = _objcClass("MTRAttributeRequestPath")
 	_mTRAttributeRequestPathSelRequestPathWithEndpointIDClusterIDAttributeID = objc.RegisterName("requestPathWithEndpointID:clusterID:attributeID:")
-	_mTRAttributeRequestPathSelEndpoint = objc.RegisterName("endpoint")
-	_mTRAttributeRequestPathSelCluster = objc.RegisterName("cluster")
-	_mTRAttributeRequestPathSelAttribute = objc.RegisterName("attribute")
+	_mTRAttributeRequestPathSelEndpoint                                      = objc.RegisterName("endpoint")
+	_mTRAttributeRequestPathSelCluster                                       = objc.RegisterName("cluster")
+	_mTRAttributeRequestPathSelAttribute                                     = objc.RegisterName("attribute")
 )
 
 func MTRAttributeRequestPathFromID(id objc.ID) *MTRAttributeRequestPath {
@@ -35,25 +35,32 @@ func MTRAttributeRequestPathFromID(id objc.ID) *MTRAttributeRequestPath {
 
 func MTRAttributeRequestPathRequestPathWithEndpointIDClusterIDAttributeID(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber) *MTRAttributeRequestPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRAttributeRequestPath), _mTRAttributeRequestPathSelRequestPathWithEndpointIDClusterIDAttributeID, endpointID.Ptr(), clusterID.Ptr(), attributeID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAttributeRequestPathFromID(_ret)
 }
 
 func (o *MTRAttributeRequestPath) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeRequestPathSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAttributeRequestPath) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeRequestPathSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAttributeRequestPath) Attribute() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeRequestPathSelAttribute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

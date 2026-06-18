@@ -16,7 +16,9 @@ type MTRBridgedDeviceBasicClusterReachableChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicClusterReachableChangedEvent].
-func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterReachableChangedEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterReachableChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -42,7 +44,9 @@ func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) WithReachableNewValu
 	return x
 }
 
-func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) asMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent }
+func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) asMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
+	return &x.inner.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
+}
 
 // MTRBridgedDeviceBasicClusterReachableChangedEventable is the interface implemented by [MTRBridgedDeviceBasicClusterReachableChangedEvent], for mocking and DI.
 type MTRBridgedDeviceBasicClusterReachableChangedEventable interface {
@@ -51,4 +55,3 @@ type MTRBridgedDeviceBasicClusterReachableChangedEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterReachableChangedEventable = (*MTRBridgedDeviceBasicClusterReachableChangedEvent)(nil)
-

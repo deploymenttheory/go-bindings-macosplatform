@@ -16,9 +16,9 @@ type AVCaptionConversionTimeRangeAdjustment struct {
 }
 
 var (
-	_clsAVCaptionConversionTimeRangeAdjustment = _objcClass("AVCaptionConversionTimeRangeAdjustment")
+	_clsAVCaptionConversionTimeRangeAdjustment                = _objcClass("AVCaptionConversionTimeRangeAdjustment")
 	_aVCaptionConversionTimeRangeAdjustmentSelStartTimeOffset = objc.RegisterName("startTimeOffset")
-	_aVCaptionConversionTimeRangeAdjustmentSelDurationOffset = objc.RegisterName("durationOffset")
+	_aVCaptionConversionTimeRangeAdjustmentSelDurationOffset  = objc.RegisterName("durationOffset")
 )
 
 func AVCaptionConversionTimeRangeAdjustmentFromID(id objc.ID) *AVCaptionConversionTimeRangeAdjustment {
@@ -42,4 +42,3 @@ func (o *AVCaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTi
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVCaptionConversionTimeRangeAdjustmentSelDurationOffset)
 	return _ret
 }
-

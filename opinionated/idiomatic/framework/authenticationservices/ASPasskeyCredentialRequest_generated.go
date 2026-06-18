@@ -131,4 +131,3 @@ type PasskeyCredentialRequestable interface {
 }
 
 var _ PasskeyCredentialRequestable = (*PasskeyCredentialRequest)(nil)
-

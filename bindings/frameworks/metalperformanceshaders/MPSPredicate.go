@@ -17,12 +17,12 @@ type MPSPredicate struct {
 }
 
 var (
-	_clsMPSPredicate = _objcClass("MPSPredicate")
+	_clsMPSPredicate                          = _objcClass("MPSPredicate")
 	_mPSPredicateSelPredicateWithBufferOffset = objc.RegisterName("predicateWithBuffer:offset:")
-	_mPSPredicateSelInitWithBufferOffset = objc.RegisterName("initWithBuffer:offset:")
-	_mPSPredicateSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSPredicateSelPredicateBuffer = objc.RegisterName("predicateBuffer")
-	_mPSPredicateSelPredicateOffset = objc.RegisterName("predicateOffset")
+	_mPSPredicateSelInitWithBufferOffset      = objc.RegisterName("initWithBuffer:offset:")
+	_mPSPredicateSelInitWithDevice            = objc.RegisterName("initWithDevice:")
+	_mPSPredicateSelPredicateBuffer           = objc.RegisterName("predicateBuffer")
+	_mPSPredicateSelPredicateOffset           = objc.RegisterName("predicateOffset")
 )
 
 func MPSPredicateFromID(id objc.ID) *MPSPredicate {
@@ -38,21 +38,27 @@ func MPSPredicateFromID(id objc.ID) *MPSPredicate {
 // @abstract   Initializes a MPSPredicate object with a buffer and given offset. @param      buffer      The buffer to use as a predicate. @param      offset      Byteoffset to the predicate buffer where the predicate is stored. @result     A pointer to the newly initialized MPSPredicate object.
 func MPSPredicatePredicateWithBufferOffset(buffer metal.MTLBuffer, offset uint) *MPSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSPredicate), _mPSPredicateSelPredicateWithBufferOffset, buffer, offset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPredicateFromID(_ret)
 }
 
 // @abstract   Initializes a MPSPredicate object with a buffer and given offset. @param      buffer      The buffer to use as a predicate. @param      offset      Byteoffset to the predicate buffer where the predicate is stored. @result     A pointer to the newly initialized MPSPredicate object.
 func (o *MPSPredicate) InitWithBufferOffset(buffer metal.MTLBuffer, offset uint) *MPSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSPredicateSelInitWithBufferOffset, buffer, offset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPredicateFromID(_ret)
 }
 
 // @abstract   Initializes a MPSPredicate object for a given device. @discussion NOTE: The metal buffer used by the resulting MPSPredicate object may be shared among many MPSPredicate objects and therefore care must be used when writing to this buffer: writing to any other location in this buffer than the four bytes at the offset @ref predicateOffset results in undefined behavior. @param      device      The device the predicate is used with @result     A pointer to the newly initialized MPSPredicate object.
 func (o *MPSPredicate) InitWithDevice(device metal.MTLDevice) *MPSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSPredicateSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSPredicateFromID(_ret)
 }
 
@@ -67,4 +73,3 @@ func (o *MPSPredicate) PredicateOffset() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSPredicateSelPredicateOffset)
 	return _ret
 }
-

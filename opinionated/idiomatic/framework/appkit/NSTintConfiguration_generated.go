@@ -67,4 +67,3 @@ type TintConfigurationable interface {
 }
 
 var _ TintConfigurationable = (*TintConfiguration)(nil)
-

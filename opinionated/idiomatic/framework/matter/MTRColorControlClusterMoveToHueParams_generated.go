@@ -16,7 +16,9 @@ type MTRColorControlClusterMoveToHueParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRColorControlClusterMoveToHueParams].
-func (x *MTRColorControlClusterMoveToHueParams) Unwrap() *raw.MTRColorControlClusterMoveToHueParams { return x.inner }
+func (x *MTRColorControlClusterMoveToHueParams) Unwrap() *raw.MTRColorControlClusterMoveToHueParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -175,4 +177,3 @@ type MTRColorControlClusterMoveToHueParamsable interface {
 }
 
 var _ MTRColorControlClusterMoveToHueParamsable = (*MTRColorControlClusterMoveToHueParams)(nil)
-

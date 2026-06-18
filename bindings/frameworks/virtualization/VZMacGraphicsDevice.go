@@ -25,4 +25,3 @@ func VZMacGraphicsDeviceFromID(id objc.ID) *VZMacGraphicsDevice {
 	purego.Track(o)
 	return o
 }
-

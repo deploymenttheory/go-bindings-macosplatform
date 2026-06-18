@@ -15,7 +15,9 @@ type GraphDepthwiseConvolution2DOpDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphDepthwiseConvolution2DOpDescriptor].
-func (x *GraphDepthwiseConvolution2DOpDescriptor) Unwrap() *raw.MPSGraphDepthwiseConvolution2DOpDescriptor { return x.inner }
+func (x *GraphDepthwiseConvolution2DOpDescriptor) Unwrap() *raw.MPSGraphDepthwiseConvolution2DOpDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -216,7 +218,9 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout
 	x.inner.SetWeightsLayout(weightsLayout)
 }
 
-func (x *GraphDepthwiseConvolution2DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphDepthwiseConvolution2DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphDepthwiseConvolution2DOpDescriptorable is the interface implemented by [GraphDepthwiseConvolution2DOpDescriptor], for mocking and DI.
 type GraphDepthwiseConvolution2DOpDescriptorable interface {
@@ -258,4 +262,3 @@ type GraphDepthwiseConvolution2DOpDescriptorable interface {
 }
 
 var _ GraphDepthwiseConvolution2DOpDescriptorable = (*GraphDepthwiseConvolution2DOpDescriptor)(nil)
-

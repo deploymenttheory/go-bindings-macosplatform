@@ -16,11 +16,11 @@ type CIRenderInfo struct {
 }
 
 var (
-	_clsCIRenderInfo = _objcClass("CIRenderInfo")
+	_clsCIRenderInfo                    = _objcClass("CIRenderInfo")
 	_cIRenderInfoSelKernelExecutionTime = objc.RegisterName("kernelExecutionTime")
-	_cIRenderInfoSelKernelCompileTime = objc.RegisterName("kernelCompileTime")
-	_cIRenderInfoSelPassCount = objc.RegisterName("passCount")
-	_cIRenderInfoSelPixelsProcessed = objc.RegisterName("pixelsProcessed")
+	_cIRenderInfoSelKernelCompileTime   = objc.RegisterName("kernelCompileTime")
+	_cIRenderInfoSelPassCount           = objc.RegisterName("passCount")
+	_cIRenderInfoSelPixelsProcessed     = objc.RegisterName("pixelsProcessed")
 )
 
 func CIRenderInfoFromID(id objc.ID) *CIRenderInfo {
@@ -52,4 +52,3 @@ func (o *CIRenderInfo) PixelsProcessed() int {
 	_ret := objc.Send[int](o.Ptr(), _cIRenderInfoSelPixelsProcessed)
 	return _ret
 }
-

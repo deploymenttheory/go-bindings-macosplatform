@@ -16,12 +16,12 @@ type NSBatchDeleteRequest struct {
 }
 
 var (
-	_clsNSBatchDeleteRequest = _objcClass("NSBatchDeleteRequest")
+	_clsNSBatchDeleteRequest                     = _objcClass("NSBatchDeleteRequest")
 	_nSBatchDeleteRequestSelInitWithFetchRequest = objc.RegisterName("initWithFetchRequest:")
-	_nSBatchDeleteRequestSelInitWithObjectIDs = objc.RegisterName("initWithObjectIDs:")
-	_nSBatchDeleteRequestSelResultType = objc.RegisterName("resultType")
-	_nSBatchDeleteRequestSelSetResultType = objc.RegisterName("setResultType:")
-	_nSBatchDeleteRequestSelFetchRequest = objc.RegisterName("fetchRequest")
+	_nSBatchDeleteRequestSelInitWithObjectIDs    = objc.RegisterName("initWithObjectIDs:")
+	_nSBatchDeleteRequestSelResultType           = objc.RegisterName("resultType")
+	_nSBatchDeleteRequestSelSetResultType        = objc.RegisterName("setResultType:")
+	_nSBatchDeleteRequestSelFetchRequest         = objc.RegisterName("fetchRequest")
 )
 
 func NSBatchDeleteRequestFromID(id objc.ID) *NSBatchDeleteRequest {
@@ -36,13 +36,17 @@ func NSBatchDeleteRequestFromID(id objc.ID) *NSBatchDeleteRequest {
 
 func (o *NSBatchDeleteRequest) InitWithFetchRequest(fetch *NSFetchRequest[objc.ID]) *NSBatchDeleteRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelInitWithFetchRequest, fetch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchDeleteRequestFromID(_ret)
 }
 
 func (o *NSBatchDeleteRequest) InitWithObjectIDs(objects *foundation.NSArray[*NSManagedObjectID]) *NSBatchDeleteRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchDeleteRequestSelInitWithObjectIDs, objects.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchDeleteRequestFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *NSBatchDeleteRequest) FetchRequest() *NSFetchRequest[objc.ID] {
 	_ret := objc.Send[*NSFetchRequest[objc.ID]](o.Ptr(), _nSBatchDeleteRequestSelFetchRequest)
 	return _ret
 }
-

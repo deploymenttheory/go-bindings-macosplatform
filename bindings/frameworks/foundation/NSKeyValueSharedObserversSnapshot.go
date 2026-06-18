@@ -25,4 +25,3 @@ func NSKeyValueSharedObserversSnapshotFromID(id objc.ID) *NSKeyValueSharedObserv
 	purego.Track(o)
 	return o
 }
-

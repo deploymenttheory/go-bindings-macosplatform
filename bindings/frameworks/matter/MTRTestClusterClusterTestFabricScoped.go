@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestFabricScopedFromID(id objc.ID) *MTRTestClusterClus
 	purego.Track(o)
 	return o
 }
-

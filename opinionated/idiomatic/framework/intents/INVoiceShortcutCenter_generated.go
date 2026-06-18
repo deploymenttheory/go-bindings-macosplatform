@@ -103,4 +103,3 @@ type VoiceShortcutCenterable interface {
 }
 
 var _ VoiceShortcutCenterable = (*VoiceShortcutCenter)(nil)
-

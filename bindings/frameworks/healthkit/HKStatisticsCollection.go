@@ -16,11 +16,11 @@ type HKStatisticsCollection struct {
 }
 
 var (
-	_clsHKStatisticsCollection = _objcClass("HKStatisticsCollection")
-	_hKStatisticsCollectionSelStatisticsForDate = objc.RegisterName("statisticsForDate:")
+	_clsHKStatisticsCollection                                      = _objcClass("HKStatisticsCollection")
+	_hKStatisticsCollectionSelStatisticsForDate                     = objc.RegisterName("statisticsForDate:")
 	_hKStatisticsCollectionSelEnumerateStatisticsFromDateToDateWith = objc.RegisterName("enumerateStatisticsFromDate:toDate:withBlock:")
-	_hKStatisticsCollectionSelStatistics = objc.RegisterName("statistics")
-	_hKStatisticsCollectionSelSources = objc.RegisterName("sources")
+	_hKStatisticsCollectionSelStatistics                            = objc.RegisterName("statistics")
+	_hKStatisticsCollectionSelSources                               = objc.RegisterName("sources")
 )
 
 func HKStatisticsCollectionFromID(id objc.ID) *HKStatisticsCollection {
@@ -36,7 +36,9 @@ func HKStatisticsCollectionFromID(id objc.ID) *HKStatisticsCollection {
 // @method        statisticsForDate: @abstract      Returns the statistics object that this date is inside of @discussion    If there are no samples for the given date, an HKStatistics instance with nil quantities will be returned.
 func (o *HKStatisticsCollection) StatisticsForDate(date *foundation.NSDate) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelStatisticsForDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStatisticsFromID(_ret)
 }
 
@@ -58,14 +60,17 @@ func (o *HKStatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate
 // @method        statistics @abstract      Returns a copy of the populated statistics objects. @discussion    The statistics objects are ordered chronologically.
 func (o *HKStatisticsCollection) Statistics() *foundation.NSArray[*HKStatistics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelStatistics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKStatistics](_ret)
 }
 
 // @method        sources @abstract      Returns all HKSources found in the contained HKStatistics objects. @discussion    Sources will be empty unless HKStatisticsOptionSeparateBySource is specified in the HKStatisticsCollectionQuery options.
 func (o *HKStatisticsCollection) Sources() *foundation.NSSet[*HKSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionSelSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*HKSource](_ret)
 }
-

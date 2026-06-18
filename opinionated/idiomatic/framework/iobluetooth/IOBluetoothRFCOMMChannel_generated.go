@@ -134,7 +134,9 @@ func (x *IOBluetoothRFCOMMChannel) RegisterForChannelCloseNotificationSelector(o
 	return &IOBluetoothUserNotification{inner: _r}
 }
 
-func (x *IOBluetoothRFCOMMChannel) asIOBluetoothObject() *raw.IOBluetoothObject { return &x.inner.IOBluetoothObject }
+func (x *IOBluetoothRFCOMMChannel) asIOBluetoothObject() *raw.IOBluetoothObject {
+	return &x.inner.IOBluetoothObject
+}
 
 // IOBluetoothRFCOMMChannelable is the interface implemented by [IOBluetoothRFCOMMChannel], for mocking and DI.
 type IOBluetoothRFCOMMChannelable interface {
@@ -160,4 +162,3 @@ type IOBluetoothRFCOMMChannelable interface {
 }
 
 var _ IOBluetoothRFCOMMChannelable = (*IOBluetoothRFCOMMChannel)(nil)
-

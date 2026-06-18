@@ -367,4 +367,3 @@ type UnaryImageKernelProvider interface {
 type VectorProvider interface {
 	asVector() *mpscore.MPSVector
 }
-

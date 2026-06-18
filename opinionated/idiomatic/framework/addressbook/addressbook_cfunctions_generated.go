@@ -13,4 +13,3 @@ import (
 func ABLocalizedPropertyOrLabel(propertyOrLabel *foundation.NSString) *foundation.NSString {
 	return raw.ABLocalizedPropertyOrLabel(propertyOrLabel)
 }
-

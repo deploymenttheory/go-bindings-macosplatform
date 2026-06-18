@@ -11,14 +11,14 @@ import (
 type CGImageMetadataType int64
 
 const (
-	KCGImageMetadataTypeInvalid CGImageMetadataType = -1
-	KCGImageMetadataTypeDefault CGImageMetadataType = 0
-	KCGImageMetadataTypeString CGImageMetadataType = 1
+	KCGImageMetadataTypeInvalid        CGImageMetadataType = -1
+	KCGImageMetadataTypeDefault        CGImageMetadataType = 0
+	KCGImageMetadataTypeString         CGImageMetadataType = 1
 	KCGImageMetadataTypeArrayUnordered CGImageMetadataType = 2
-	KCGImageMetadataTypeArrayOrdered CGImageMetadataType = 3
+	KCGImageMetadataTypeArrayOrdered   CGImageMetadataType = 3
 	KCGImageMetadataTypeAlternateArray CGImageMetadataType = 4
-	KCGImageMetadataTypeAlternateText CGImageMetadataType = 5
-	KCGImageMetadataTypeStructure CGImageMetadataType = 6
+	KCGImageMetadataTypeAlternateText  CGImageMetadataType = 5
+	KCGImageMetadataTypeStructure      CGImageMetadataType = 6
 )
 
 func (e CGImageMetadataType) String() string {
@@ -48,11 +48,11 @@ type CGImageSourceStatus int64
 
 const (
 	KCGImageStatusUnexpectedEOF CGImageSourceStatus = -5
-	KCGImageStatusInvalidData CGImageSourceStatus = -4
-	KCGImageStatusUnknownType CGImageSourceStatus = -3
+	KCGImageStatusInvalidData   CGImageSourceStatus = -4
+	KCGImageStatusUnknownType   CGImageSourceStatus = -3
 	KCGImageStatusReadingHeader CGImageSourceStatus = -2
-	KCGImageStatusIncomplete CGImageSourceStatus = -1
-	KCGImageStatusComplete CGImageSourceStatus = 0
+	KCGImageStatusIncomplete    CGImageSourceStatus = -1
+	KCGImageStatusComplete      CGImageSourceStatus = 0
 )
 
 func (e CGImageSourceStatus) String() string {
@@ -73,4 +73,3 @@ func (e CGImageSourceStatus) String() string {
 		return fmt.Sprintf("CGImageSourceStatus(%d)", int64(e))
 	}
 }
-

@@ -20,86 +20,86 @@ type NSBezierPath struct {
 }
 
 var (
-	_clsNSBezierPath = _objcClass("NSBezierPath")
-	_nSBezierPathSelBezierPath = objc.RegisterName("bezierPath")
-	_nSBezierPathSelBezierPathWithRect = objc.RegisterName("bezierPathWithRect:")
-	_nSBezierPathSelBezierPathWithOvalInRect = objc.RegisterName("bezierPathWithOvalInRect:")
-	_nSBezierPathSelBezierPathWithRoundedRectXRadiusYRadius = objc.RegisterName("bezierPathWithRoundedRect:xRadius:yRadius:")
-	_nSBezierPathSelBezierPathWithCGPath = objc.RegisterName("bezierPathWithCGPath:")
-	_nSBezierPathSelFillRect = objc.RegisterName("fillRect:")
-	_nSBezierPathSelStrokeRect = objc.RegisterName("strokeRect:")
-	_nSBezierPathSelClipRect = objc.RegisterName("clipRect:")
-	_nSBezierPathSelStrokeLineFromPointToPoint = objc.RegisterName("strokeLineFromPoint:toPoint:")
-	_nSBezierPathSelDrawPackedGlyphsAtPoint = objc.RegisterName("drawPackedGlyphs:atPoint:")
-	_nSBezierPathSelMoveToPoint = objc.RegisterName("moveToPoint:")
-	_nSBezierPathSelLineToPoint = objc.RegisterName("lineToPoint:")
-	_nSBezierPathSelCurveToPointControlPoint1ControlPoint2 = objc.RegisterName("curveToPoint:controlPoint1:controlPoint2:")
-	_nSBezierPathSelCurveToPointControlPoint = objc.RegisterName("curveToPoint:controlPoint:")
-	_nSBezierPathSelClosePath = objc.RegisterName("closePath")
-	_nSBezierPathSelRemoveAllPoints = objc.RegisterName("removeAllPoints")
-	_nSBezierPathSelRelativeMoveToPoint = objc.RegisterName("relativeMoveToPoint:")
-	_nSBezierPathSelRelativeLineToPoint = objc.RegisterName("relativeLineToPoint:")
-	_nSBezierPathSelRelativeCurveToPointControlPoint1ControlPoint2 = objc.RegisterName("relativeCurveToPoint:controlPoint1:controlPoint2:")
-	_nSBezierPathSelRelativeCurveToPointControlPoint = objc.RegisterName("relativeCurveToPoint:controlPoint:")
-	_nSBezierPathSelGetLineDashCountPhase = objc.RegisterName("getLineDash:count:phase:")
-	_nSBezierPathSelSetLineDashCountPhase = objc.RegisterName("setLineDash:count:phase:")
-	_nSBezierPathSelStroke = objc.RegisterName("stroke")
-	_nSBezierPathSelFill = objc.RegisterName("fill")
-	_nSBezierPathSelAddClip = objc.RegisterName("addClip")
-	_nSBezierPathSelSetClip = objc.RegisterName("setClip")
-	_nSBezierPathSelTransformUsingAffineTransform = objc.RegisterName("transformUsingAffineTransform:")
-	_nSBezierPathSelElementAtIndexAssociatedPoints = objc.RegisterName("elementAtIndex:associatedPoints:")
-	_nSBezierPathSelElementAtIndex = objc.RegisterName("elementAtIndex:")
-	_nSBezierPathSelSetAssociatedPointsAtIndex = objc.RegisterName("setAssociatedPoints:atIndex:")
-	_nSBezierPathSelAppendBezierPath = objc.RegisterName("appendBezierPath:")
-	_nSBezierPathSelAppendBezierPathWithRect = objc.RegisterName("appendBezierPathWithRect:")
-	_nSBezierPathSelAppendBezierPathWithPointsCount = objc.RegisterName("appendBezierPathWithPoints:count:")
-	_nSBezierPathSelAppendBezierPathWithOvalInRect = objc.RegisterName("appendBezierPathWithOvalInRect:")
+	_clsNSBezierPath                                                                   = _objcClass("NSBezierPath")
+	_nSBezierPathSelBezierPath                                                         = objc.RegisterName("bezierPath")
+	_nSBezierPathSelBezierPathWithRect                                                 = objc.RegisterName("bezierPathWithRect:")
+	_nSBezierPathSelBezierPathWithOvalInRect                                           = objc.RegisterName("bezierPathWithOvalInRect:")
+	_nSBezierPathSelBezierPathWithRoundedRectXRadiusYRadius                            = objc.RegisterName("bezierPathWithRoundedRect:xRadius:yRadius:")
+	_nSBezierPathSelBezierPathWithCGPath                                               = objc.RegisterName("bezierPathWithCGPath:")
+	_nSBezierPathSelFillRect                                                           = objc.RegisterName("fillRect:")
+	_nSBezierPathSelStrokeRect                                                         = objc.RegisterName("strokeRect:")
+	_nSBezierPathSelClipRect                                                           = objc.RegisterName("clipRect:")
+	_nSBezierPathSelStrokeLineFromPointToPoint                                         = objc.RegisterName("strokeLineFromPoint:toPoint:")
+	_nSBezierPathSelDrawPackedGlyphsAtPoint                                            = objc.RegisterName("drawPackedGlyphs:atPoint:")
+	_nSBezierPathSelMoveToPoint                                                        = objc.RegisterName("moveToPoint:")
+	_nSBezierPathSelLineToPoint                                                        = objc.RegisterName("lineToPoint:")
+	_nSBezierPathSelCurveToPointControlPoint1ControlPoint2                             = objc.RegisterName("curveToPoint:controlPoint1:controlPoint2:")
+	_nSBezierPathSelCurveToPointControlPoint                                           = objc.RegisterName("curveToPoint:controlPoint:")
+	_nSBezierPathSelClosePath                                                          = objc.RegisterName("closePath")
+	_nSBezierPathSelRemoveAllPoints                                                    = objc.RegisterName("removeAllPoints")
+	_nSBezierPathSelRelativeMoveToPoint                                                = objc.RegisterName("relativeMoveToPoint:")
+	_nSBezierPathSelRelativeLineToPoint                                                = objc.RegisterName("relativeLineToPoint:")
+	_nSBezierPathSelRelativeCurveToPointControlPoint1ControlPoint2                     = objc.RegisterName("relativeCurveToPoint:controlPoint1:controlPoint2:")
+	_nSBezierPathSelRelativeCurveToPointControlPoint                                   = objc.RegisterName("relativeCurveToPoint:controlPoint:")
+	_nSBezierPathSelGetLineDashCountPhase                                              = objc.RegisterName("getLineDash:count:phase:")
+	_nSBezierPathSelSetLineDashCountPhase                                              = objc.RegisterName("setLineDash:count:phase:")
+	_nSBezierPathSelStroke                                                             = objc.RegisterName("stroke")
+	_nSBezierPathSelFill                                                               = objc.RegisterName("fill")
+	_nSBezierPathSelAddClip                                                            = objc.RegisterName("addClip")
+	_nSBezierPathSelSetClip                                                            = objc.RegisterName("setClip")
+	_nSBezierPathSelTransformUsingAffineTransform                                      = objc.RegisterName("transformUsingAffineTransform:")
+	_nSBezierPathSelElementAtIndexAssociatedPoints                                     = objc.RegisterName("elementAtIndex:associatedPoints:")
+	_nSBezierPathSelElementAtIndex                                                     = objc.RegisterName("elementAtIndex:")
+	_nSBezierPathSelSetAssociatedPointsAtIndex                                         = objc.RegisterName("setAssociatedPoints:atIndex:")
+	_nSBezierPathSelAppendBezierPath                                                   = objc.RegisterName("appendBezierPath:")
+	_nSBezierPathSelAppendBezierPathWithRect                                           = objc.RegisterName("appendBezierPathWithRect:")
+	_nSBezierPathSelAppendBezierPathWithPointsCount                                    = objc.RegisterName("appendBezierPathWithPoints:count:")
+	_nSBezierPathSelAppendBezierPathWithOvalInRect                                     = objc.RegisterName("appendBezierPathWithOvalInRect:")
 	_nSBezierPathSelAppendBezierPathWithArcWithCenterRadiusStartAngleEndAngleClockwise = objc.RegisterName("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:clockwise:")
-	_nSBezierPathSelAppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle = objc.RegisterName("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:")
-	_nSBezierPathSelAppendBezierPathWithArcFromPointToPointRadius = objc.RegisterName("appendBezierPathWithArcFromPoint:toPoint:radius:")
-	_nSBezierPathSelAppendBezierPathWithCGGlyphInFont = objc.RegisterName("appendBezierPathWithCGGlyph:inFont:")
-	_nSBezierPathSelAppendBezierPathWithCGGlyphsCountInFont = objc.RegisterName("appendBezierPathWithCGGlyphs:count:inFont:")
-	_nSBezierPathSelAppendBezierPathWithRoundedRectXRadiusYRadius = objc.RegisterName("appendBezierPathWithRoundedRect:xRadius:yRadius:")
-	_nSBezierPathSelContainsPoint = objc.RegisterName("containsPoint:")
-	_nSBezierPathSelCGPath = objc.RegisterName("CGPath")
-	_nSBezierPathSelSetCGPath = objc.RegisterName("setCGPath:")
-	_nSBezierPathSelDefaultMiterLimit = objc.RegisterName("defaultMiterLimit")
-	_nSBezierPathSelSetDefaultMiterLimit = objc.RegisterName("setDefaultMiterLimit:")
-	_nSBezierPathSelDefaultFlatness = objc.RegisterName("defaultFlatness")
-	_nSBezierPathSelSetDefaultFlatness = objc.RegisterName("setDefaultFlatness:")
-	_nSBezierPathSelDefaultWindingRule = objc.RegisterName("defaultWindingRule")
-	_nSBezierPathSelSetDefaultWindingRule = objc.RegisterName("setDefaultWindingRule:")
-	_nSBezierPathSelDefaultLineCapStyle = objc.RegisterName("defaultLineCapStyle")
-	_nSBezierPathSelSetDefaultLineCapStyle = objc.RegisterName("setDefaultLineCapStyle:")
-	_nSBezierPathSelDefaultLineJoinStyle = objc.RegisterName("defaultLineJoinStyle")
-	_nSBezierPathSelSetDefaultLineJoinStyle = objc.RegisterName("setDefaultLineJoinStyle:")
-	_nSBezierPathSelDefaultLineWidth = objc.RegisterName("defaultLineWidth")
-	_nSBezierPathSelSetDefaultLineWidth = objc.RegisterName("setDefaultLineWidth:")
-	_nSBezierPathSelLineWidth = objc.RegisterName("lineWidth")
-	_nSBezierPathSelSetLineWidth = objc.RegisterName("setLineWidth:")
-	_nSBezierPathSelLineCapStyle = objc.RegisterName("lineCapStyle")
-	_nSBezierPathSelSetLineCapStyle = objc.RegisterName("setLineCapStyle:")
-	_nSBezierPathSelLineJoinStyle = objc.RegisterName("lineJoinStyle")
-	_nSBezierPathSelSetLineJoinStyle = objc.RegisterName("setLineJoinStyle:")
-	_nSBezierPathSelWindingRule = objc.RegisterName("windingRule")
-	_nSBezierPathSelSetWindingRule = objc.RegisterName("setWindingRule:")
-	_nSBezierPathSelMiterLimit = objc.RegisterName("miterLimit")
-	_nSBezierPathSelSetMiterLimit = objc.RegisterName("setMiterLimit:")
-	_nSBezierPathSelFlatness = objc.RegisterName("flatness")
-	_nSBezierPathSelSetFlatness = objc.RegisterName("setFlatness:")
-	_nSBezierPathSelBezierPathByFlatteningPath = objc.RegisterName("bezierPathByFlatteningPath")
-	_nSBezierPathSelBezierPathByReversingPath = objc.RegisterName("bezierPathByReversingPath")
-	_nSBezierPathSelIsEmpty = objc.RegisterName("isEmpty")
-	_nSBezierPathSelCurrentPoint = objc.RegisterName("currentPoint")
-	_nSBezierPathSelControlPointBounds = objc.RegisterName("controlPointBounds")
-	_nSBezierPathSelBounds = objc.RegisterName("bounds")
-	_nSBezierPathSelElementCount = objc.RegisterName("elementCount")
-	_nSBezierPathSelCachesBezierPath = objc.RegisterName("cachesBezierPath")
-	_nSBezierPathSelSetCachesBezierPath = objc.RegisterName("setCachesBezierPath:")
-	_nSBezierPathSelAppendBezierPathWithGlyphInFont = objc.RegisterName("appendBezierPathWithGlyph:inFont:")
-	_nSBezierPathSelAppendBezierPathWithGlyphsCountInFont = objc.RegisterName("appendBezierPathWithGlyphs:count:inFont:")
-	_nSBezierPathSelAppendBezierPathWithPackedGlyphs = objc.RegisterName("appendBezierPathWithPackedGlyphs:")
+	_nSBezierPathSelAppendBezierPathWithArcWithCenterRadiusStartAngleEndAngle          = objc.RegisterName("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:")
+	_nSBezierPathSelAppendBezierPathWithArcFromPointToPointRadius                      = objc.RegisterName("appendBezierPathWithArcFromPoint:toPoint:radius:")
+	_nSBezierPathSelAppendBezierPathWithCGGlyphInFont                                  = objc.RegisterName("appendBezierPathWithCGGlyph:inFont:")
+	_nSBezierPathSelAppendBezierPathWithCGGlyphsCountInFont                            = objc.RegisterName("appendBezierPathWithCGGlyphs:count:inFont:")
+	_nSBezierPathSelAppendBezierPathWithRoundedRectXRadiusYRadius                      = objc.RegisterName("appendBezierPathWithRoundedRect:xRadius:yRadius:")
+	_nSBezierPathSelContainsPoint                                                      = objc.RegisterName("containsPoint:")
+	_nSBezierPathSelCGPath                                                             = objc.RegisterName("CGPath")
+	_nSBezierPathSelSetCGPath                                                          = objc.RegisterName("setCGPath:")
+	_nSBezierPathSelDefaultMiterLimit                                                  = objc.RegisterName("defaultMiterLimit")
+	_nSBezierPathSelSetDefaultMiterLimit                                               = objc.RegisterName("setDefaultMiterLimit:")
+	_nSBezierPathSelDefaultFlatness                                                    = objc.RegisterName("defaultFlatness")
+	_nSBezierPathSelSetDefaultFlatness                                                 = objc.RegisterName("setDefaultFlatness:")
+	_nSBezierPathSelDefaultWindingRule                                                 = objc.RegisterName("defaultWindingRule")
+	_nSBezierPathSelSetDefaultWindingRule                                              = objc.RegisterName("setDefaultWindingRule:")
+	_nSBezierPathSelDefaultLineCapStyle                                                = objc.RegisterName("defaultLineCapStyle")
+	_nSBezierPathSelSetDefaultLineCapStyle                                             = objc.RegisterName("setDefaultLineCapStyle:")
+	_nSBezierPathSelDefaultLineJoinStyle                                               = objc.RegisterName("defaultLineJoinStyle")
+	_nSBezierPathSelSetDefaultLineJoinStyle                                            = objc.RegisterName("setDefaultLineJoinStyle:")
+	_nSBezierPathSelDefaultLineWidth                                                   = objc.RegisterName("defaultLineWidth")
+	_nSBezierPathSelSetDefaultLineWidth                                                = objc.RegisterName("setDefaultLineWidth:")
+	_nSBezierPathSelLineWidth                                                          = objc.RegisterName("lineWidth")
+	_nSBezierPathSelSetLineWidth                                                       = objc.RegisterName("setLineWidth:")
+	_nSBezierPathSelLineCapStyle                                                       = objc.RegisterName("lineCapStyle")
+	_nSBezierPathSelSetLineCapStyle                                                    = objc.RegisterName("setLineCapStyle:")
+	_nSBezierPathSelLineJoinStyle                                                      = objc.RegisterName("lineJoinStyle")
+	_nSBezierPathSelSetLineJoinStyle                                                   = objc.RegisterName("setLineJoinStyle:")
+	_nSBezierPathSelWindingRule                                                        = objc.RegisterName("windingRule")
+	_nSBezierPathSelSetWindingRule                                                     = objc.RegisterName("setWindingRule:")
+	_nSBezierPathSelMiterLimit                                                         = objc.RegisterName("miterLimit")
+	_nSBezierPathSelSetMiterLimit                                                      = objc.RegisterName("setMiterLimit:")
+	_nSBezierPathSelFlatness                                                           = objc.RegisterName("flatness")
+	_nSBezierPathSelSetFlatness                                                        = objc.RegisterName("setFlatness:")
+	_nSBezierPathSelBezierPathByFlatteningPath                                         = objc.RegisterName("bezierPathByFlatteningPath")
+	_nSBezierPathSelBezierPathByReversingPath                                          = objc.RegisterName("bezierPathByReversingPath")
+	_nSBezierPathSelIsEmpty                                                            = objc.RegisterName("isEmpty")
+	_nSBezierPathSelCurrentPoint                                                       = objc.RegisterName("currentPoint")
+	_nSBezierPathSelControlPointBounds                                                 = objc.RegisterName("controlPointBounds")
+	_nSBezierPathSelBounds                                                             = objc.RegisterName("bounds")
+	_nSBezierPathSelElementCount                                                       = objc.RegisterName("elementCount")
+	_nSBezierPathSelCachesBezierPath                                                   = objc.RegisterName("cachesBezierPath")
+	_nSBezierPathSelSetCachesBezierPath                                                = objc.RegisterName("setCachesBezierPath:")
+	_nSBezierPathSelAppendBezierPathWithGlyphInFont                                    = objc.RegisterName("appendBezierPathWithGlyph:inFont:")
+	_nSBezierPathSelAppendBezierPathWithGlyphsCountInFont                              = objc.RegisterName("appendBezierPathWithGlyphs:count:inFont:")
+	_nSBezierPathSelAppendBezierPathWithPackedGlyphs                                   = objc.RegisterName("appendBezierPathWithPackedGlyphs:")
 )
 
 func NSBezierPathFromID(id objc.ID) *NSBezierPath {
@@ -114,31 +114,41 @@ func NSBezierPathFromID(id objc.ID) *NSBezierPath {
 
 func NSBezierPathBezierPath() *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
 func NSBezierPathBezierPathWithRect(rect corefoundation.CGRect) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
 func NSBezierPathBezierPathWithOvalInRect(rect corefoundation.CGRect) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithOvalInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
 func NSBezierPathBezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius float64, yRadius float64) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithRoundedRectXRadiusYRadius, rect, xRadius, yRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
 func NSBezierPathBezierPathWithCGPath(cgPath unsafe.Pointer) *NSBezierPath {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBezierPath), _nSBezierPathSelBezierPathWithCGPath, cgPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
@@ -408,13 +418,17 @@ func (o *NSBezierPath) SetFlatness(flatness float64) {
 
 func (o *NSBezierPath) BezierPathByFlatteningPath() *NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBezierPathSelBezierPathByFlatteningPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
 func (o *NSBezierPath) BezierPathByReversingPath() *NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBezierPathSelBezierPathByReversingPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBezierPathFromID(_ret)
 }
 
@@ -468,4 +482,3 @@ func (o *NSBezierPath) AppendBezierPathWithGlyphsCountInFont(glyphs *uint, count
 func (o *NSBezierPath) AppendBezierPathWithPackedGlyphs(packedGlyphs string) {
 	o.Ptr().Send(_nSBezierPathSelAppendBezierPathWithPackedGlyphs, packedGlyphs)
 }
-

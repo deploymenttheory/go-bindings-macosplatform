@@ -16,8 +16,8 @@ type MPSImageLaplacian struct {
 }
 
 var (
-	_clsMPSImageLaplacian = _objcClass("MPSImageLaplacian")
-	_mPSImageLaplacianSelBias = objc.RegisterName("bias")
+	_clsMPSImageLaplacian        = _objcClass("MPSImageLaplacian")
+	_mPSImageLaplacianSelBias    = objc.RegisterName("bias")
 	_mPSImageLaplacianSelSetBias = objc.RegisterName("setBias:")
 )
 
@@ -40,4 +40,3 @@ func (o *MPSImageLaplacian) Bias() float32 {
 func (o *MPSImageLaplacian) SetBias(bias float32) {
 	o.Ptr().Send(_mPSImageLaplacianSelSetBias, bias)
 }
-

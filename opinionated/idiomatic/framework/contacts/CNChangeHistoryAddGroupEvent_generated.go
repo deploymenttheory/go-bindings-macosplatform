@@ -54,7 +54,9 @@ func (x *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ChangeHistoryAddGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryAddGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryAddGroupEventable is the interface implemented by [ChangeHistoryAddGroupEvent], for mocking and DI.
 type ChangeHistoryAddGroupEventable interface {
@@ -64,4 +66,3 @@ type ChangeHistoryAddGroupEventable interface {
 }
 
 var _ ChangeHistoryAddGroupEventable = (*ChangeHistoryAddGroupEvent)(nil)
-

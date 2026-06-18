@@ -111,4 +111,3 @@ type SensitivityAnalyzerable interface {
 }
 
 var _ SensitivityAnalyzerable = (*SensitivityAnalyzer)(nil)
-

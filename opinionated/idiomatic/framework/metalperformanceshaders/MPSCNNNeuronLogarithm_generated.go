@@ -100,11 +100,17 @@ func (x *CNNNeuronLogarithm) WithLabel(label string) *CNNNeuronLogarithm {
 	return x
 }
 
-func (x *CNNNeuronLogarithm) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronLogarithm) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronLogarithm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronLogarithm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronLogarithm) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronLogarithm) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronLogarithmable is the interface implemented by [CNNNeuronLogarithm], for mocking and DI.
 type CNNNeuronLogarithmable interface {
@@ -122,4 +128,3 @@ type CNNNeuronLogarithmable interface {
 }
 
 var _ CNNNeuronLogarithmable = (*CNNNeuronLogarithm)(nil)
-

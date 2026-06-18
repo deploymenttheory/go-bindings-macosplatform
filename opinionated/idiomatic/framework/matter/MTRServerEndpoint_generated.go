@@ -104,4 +104,3 @@ type MTRServerEndpointable interface {
 }
 
 var _ MTRServerEndpointable = (*MTRServerEndpoint)(nil)
-

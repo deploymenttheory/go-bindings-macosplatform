@@ -18,14 +18,14 @@ type NEProvider struct {
 }
 
 var (
-	_clsNEProvider = _objcClass("NEProvider")
-	_nEProviderSelSleepWithCompletionHandler = objc.RegisterName("sleepWithCompletionHandler:")
-	_nEProviderSelWake = objc.RegisterName("wake")
+	_clsNEProvider                                                            = _objcClass("NEProvider")
+	_nEProviderSelSleepWithCompletionHandler                                  = objc.RegisterName("sleepWithCompletionHandler:")
+	_nEProviderSelWake                                                        = objc.RegisterName("wake")
 	_nEProviderSelCreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate = objc.RegisterName("createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:")
-	_nEProviderSelCreateUDPSessionToEndpointFromEndpoint = objc.RegisterName("createUDPSessionToEndpoint:fromEndpoint:")
-	_nEProviderSelDisplayMessageCompletionHandler = objc.RegisterName("displayMessage:completionHandler:")
-	_nEProviderSelStartSystemExtensionMode = objc.RegisterName("startSystemExtensionMode")
-	_nEProviderSelDefaultPath = objc.RegisterName("defaultPath")
+	_nEProviderSelCreateUDPSessionToEndpointFromEndpoint                      = objc.RegisterName("createUDPSessionToEndpoint:fromEndpoint:")
+	_nEProviderSelDisplayMessageCompletionHandler                             = objc.RegisterName("displayMessage:completionHandler:")
+	_nEProviderSelStartSystemExtensionMode                                    = objc.RegisterName("startSystemExtensionMode")
+	_nEProviderSelDefaultPath                                                 = objc.RegisterName("defaultPath")
 )
 
 func NEProviderFromID(id objc.ID) *NEProvider {
@@ -59,7 +59,9 @@ func (o *NEProvider) Wake() {
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tLSParameters.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWTCPConnectionFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func (o *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelCreateUDPSessionToEndpointFromEndpoint, remoteEndpoint, localEndpoint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWUDPSessionFromID(_ret)
 }
 
@@ -92,7 +96,8 @@ func NEProviderStartSystemExtensionMode() {
 // Deprecated: Use nw_path_monitor_t in Network framework instead
 func (o *NEProvider) DefaultPath() *NWPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEProviderSelDefaultPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWPathFromID(_ret)
 }
-

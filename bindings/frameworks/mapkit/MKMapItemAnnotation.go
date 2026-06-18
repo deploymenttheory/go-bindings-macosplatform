@@ -16,9 +16,9 @@ type MKMapItemAnnotation struct {
 }
 
 var (
-	_clsMKMapItemAnnotation = _objcClass("MKMapItemAnnotation")
+	_clsMKMapItemAnnotation                = _objcClass("MKMapItemAnnotation")
 	_mKMapItemAnnotationSelInitWithMapItem = objc.RegisterName("initWithMapItem:")
-	_mKMapItemAnnotationSelMapItem = objc.RegisterName("mapItem")
+	_mKMapItemAnnotationSelMapItem         = objc.RegisterName("mapItem")
 )
 
 func MKMapItemAnnotationFromID(id objc.ID) *MKMapItemAnnotation {
@@ -33,13 +33,16 @@ func MKMapItemAnnotationFromID(id objc.ID) *MKMapItemAnnotation {
 
 func (o *MKMapItemAnnotation) InitWithMapItem(mapItem *MKMapItem) *MKMapItemAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemAnnotationSelInitWithMapItem, mapItem.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemAnnotationFromID(_ret)
 }
 
 func (o *MKMapItemAnnotation) MapItem() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemAnnotationSelMapItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
-

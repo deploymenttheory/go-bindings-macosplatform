@@ -12,7 +12,7 @@ import (
 type HKActivityMoveMode int64
 
 const (
-	HKActivityMoveModeActiveEnergy HKActivityMoveMode = 1
+	HKActivityMoveModeActiveEnergy  HKActivityMoveMode = 1
 	HKActivityMoveModeAppleMoveTime HKActivityMoveMode = 2
 )
 
@@ -31,7 +31,7 @@ type HKAppleSleepingBreathingDisturbancesClassification int64
 
 const (
 	HKAppleSleepingBreathingDisturbancesClassificationNotElevated HKAppleSleepingBreathingDisturbancesClassification = 0
-	HKAppleSleepingBreathingDisturbancesClassificationElevated HKAppleSleepingBreathingDisturbancesClassification = 1
+	HKAppleSleepingBreathingDisturbancesClassificationElevated    HKAppleSleepingBreathingDisturbancesClassification = 1
 )
 
 func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
@@ -48,8 +48,8 @@ func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
 type HKAppleWalkingSteadinessClassification int64
 
 const (
-	HKAppleWalkingSteadinessClassificationOK HKAppleWalkingSteadinessClassification = 1
-	HKAppleWalkingSteadinessClassificationLow HKAppleWalkingSteadinessClassification = 2
+	HKAppleWalkingSteadinessClassificationOK      HKAppleWalkingSteadinessClassification = 1
+	HKAppleWalkingSteadinessClassificationLow     HKAppleWalkingSteadinessClassification = 2
 	HKAppleWalkingSteadinessClassificationVeryLow HKAppleWalkingSteadinessClassification = 3
 )
 
@@ -84,7 +84,7 @@ func (e HKAudiogramConductionType) String() string {
 type HKAudiogramSensitivityTestSide int64
 
 const (
-	HKAudiogramSensitivityTestSideLeft HKAudiogramSensitivityTestSide = 0
+	HKAudiogramSensitivityTestSideLeft  HKAudiogramSensitivityTestSide = 0
 	HKAudiogramSensitivityTestSideRight HKAudiogramSensitivityTestSide = 1
 )
 
@@ -102,9 +102,9 @@ func (e HKAudiogramSensitivityTestSide) String() string {
 type HKAuthorizationRequestStatus int64
 
 const (
-	HKAuthorizationRequestStatusUnknown HKAuthorizationRequestStatus = 0
+	HKAuthorizationRequestStatusUnknown       HKAuthorizationRequestStatus = 0
 	HKAuthorizationRequestStatusShouldRequest HKAuthorizationRequestStatus = 1
-	HKAuthorizationRequestStatusUnnecessary HKAuthorizationRequestStatus = 2
+	HKAuthorizationRequestStatusUnnecessary   HKAuthorizationRequestStatus = 2
 )
 
 func (e HKAuthorizationRequestStatus) String() string {
@@ -123,8 +123,8 @@ func (e HKAuthorizationRequestStatus) String() string {
 type HKAuthorizationStatus int64
 
 const (
-	HKAuthorizationStatusNotDetermined HKAuthorizationStatus = 0
-	HKAuthorizationStatusSharingDenied HKAuthorizationStatus = 1
+	HKAuthorizationStatusNotDetermined     HKAuthorizationStatus = 0
+	HKAuthorizationStatusSharingDenied     HKAuthorizationStatus = 1
 	HKAuthorizationStatusSharingAuthorized HKAuthorizationStatus = 2
 )
 
@@ -146,8 +146,8 @@ type HKBiologicalSex int64
 const (
 	HKBiologicalSexNotSet HKBiologicalSex = 0
 	HKBiologicalSexFemale HKBiologicalSex = 1
-	HKBiologicalSexMale HKBiologicalSex = 2
-	HKBiologicalSexOther HKBiologicalSex = 3
+	HKBiologicalSexMale   HKBiologicalSex = 2
+	HKBiologicalSexOther  HKBiologicalSex = 3
 )
 
 func (e HKBiologicalSex) String() string {
@@ -168,15 +168,15 @@ func (e HKBiologicalSex) String() string {
 type HKBloodType int64
 
 const (
-	HKBloodTypeNotSet HKBloodType = 0
-	HKBloodTypeAPositive HKBloodType = 1
-	HKBloodTypeANegative HKBloodType = 2
-	HKBloodTypeBPositive HKBloodType = 3
-	HKBloodTypeBNegative HKBloodType = 4
+	HKBloodTypeNotSet     HKBloodType = 0
+	HKBloodTypeAPositive  HKBloodType = 1
+	HKBloodTypeANegative  HKBloodType = 2
+	HKBloodTypeBPositive  HKBloodType = 3
+	HKBloodTypeBNegative  HKBloodType = 4
 	HKBloodTypeABPositive HKBloodType = 5
 	HKBloodTypeABNegative HKBloodType = 6
-	HKBloodTypeOPositive HKBloodType = 7
-	HKBloodTypeONegative HKBloodType = 8
+	HKBloodTypeOPositive  HKBloodType = 7
+	HKBloodTypeONegative  HKBloodType = 8
 )
 
 func (e HKBloodType) String() string {
@@ -207,14 +207,14 @@ func (e HKBloodType) String() string {
 type HKElectrocardiogramClassification int64
 
 const (
-	HKElectrocardiogramClassificationNotSet HKElectrocardiogramClassification = 0
-	HKElectrocardiogramClassificationSinusRhythm HKElectrocardiogramClassification = 1
-	HKElectrocardiogramClassificationAtrialFibrillation HKElectrocardiogramClassification = 2
-	HKElectrocardiogramClassificationInconclusiveLowHeartRate HKElectrocardiogramClassification = 3
+	HKElectrocardiogramClassificationNotSet                    HKElectrocardiogramClassification = 0
+	HKElectrocardiogramClassificationSinusRhythm               HKElectrocardiogramClassification = 1
+	HKElectrocardiogramClassificationAtrialFibrillation        HKElectrocardiogramClassification = 2
+	HKElectrocardiogramClassificationInconclusiveLowHeartRate  HKElectrocardiogramClassification = 3
 	HKElectrocardiogramClassificationInconclusiveHighHeartRate HKElectrocardiogramClassification = 4
-	HKElectrocardiogramClassificationInconclusivePoorReading HKElectrocardiogramClassification = 5
-	HKElectrocardiogramClassificationInconclusiveOther HKElectrocardiogramClassification = 6
-	HKElectrocardiogramClassificationUnrecognized HKElectrocardiogramClassification = 100
+	HKElectrocardiogramClassificationInconclusivePoorReading   HKElectrocardiogramClassification = 5
+	HKElectrocardiogramClassificationInconclusiveOther         HKElectrocardiogramClassification = 6
+	HKElectrocardiogramClassificationUnrecognized              HKElectrocardiogramClassification = 100
 )
 
 func (e HKElectrocardiogramClassification) String() string {
@@ -258,8 +258,8 @@ func (e HKElectrocardiogramLead) String() string {
 type HKElectrocardiogramSymptomsStatus int64
 
 const (
-	HKElectrocardiogramSymptomsStatusNotSet HKElectrocardiogramSymptomsStatus = 0
-	HKElectrocardiogramSymptomsStatusNone HKElectrocardiogramSymptomsStatus = 1
+	HKElectrocardiogramSymptomsStatusNotSet  HKElectrocardiogramSymptomsStatus = 0
+	HKElectrocardiogramSymptomsStatusNone    HKElectrocardiogramSymptomsStatus = 1
 	HKElectrocardiogramSymptomsStatusPresent HKElectrocardiogramSymptomsStatus = 2
 )
 
@@ -280,12 +280,12 @@ type HKFitzpatrickSkinType int64
 
 const (
 	HKFitzpatrickSkinTypeNotSet HKFitzpatrickSkinType = 0
-	HKFitzpatrickSkinTypeI HKFitzpatrickSkinType = 1
-	HKFitzpatrickSkinTypeII HKFitzpatrickSkinType = 2
-	HKFitzpatrickSkinTypeIII HKFitzpatrickSkinType = 3
-	HKFitzpatrickSkinTypeIV HKFitzpatrickSkinType = 4
-	HKFitzpatrickSkinTypeV HKFitzpatrickSkinType = 5
-	HKFitzpatrickSkinTypeVI HKFitzpatrickSkinType = 6
+	HKFitzpatrickSkinTypeI      HKFitzpatrickSkinType = 1
+	HKFitzpatrickSkinTypeII     HKFitzpatrickSkinType = 2
+	HKFitzpatrickSkinTypeIII    HKFitzpatrickSkinType = 3
+	HKFitzpatrickSkinTypeIV     HKFitzpatrickSkinType = 4
+	HKFitzpatrickSkinTypeV      HKFitzpatrickSkinType = 5
+	HKFitzpatrickSkinTypeVI     HKFitzpatrickSkinType = 6
 )
 
 func (e HKFitzpatrickSkinType) String() string {
@@ -313,9 +313,9 @@ type HKGAD7AssessmentRisk int64
 
 const (
 	HKGAD7AssessmentRiskNoneToMinimal HKGAD7AssessmentRisk = 1
-	HKGAD7AssessmentRiskMild HKGAD7AssessmentRisk = 2
-	HKGAD7AssessmentRiskModerate HKGAD7AssessmentRisk = 3
-	HKGAD7AssessmentRiskSevere HKGAD7AssessmentRisk = 4
+	HKGAD7AssessmentRiskMild          HKGAD7AssessmentRisk = 2
+	HKGAD7AssessmentRiskModerate      HKGAD7AssessmentRisk = 3
+	HKGAD7AssessmentRiskSevere        HKGAD7AssessmentRisk = 4
 )
 
 func (e HKGAD7AssessmentRisk) String() string {
@@ -392,20 +392,20 @@ func (e HKMedicationDoseEventScheduleType) String() string {
 type HKMetricPrefix int64
 
 const (
-	HKMetricPrefixNone HKMetricPrefix = 0
+	HKMetricPrefixNone  HKMetricPrefix = 0
 	HKMetricPrefixFemto HKMetricPrefix = 13
-	HKMetricPrefixPico HKMetricPrefix = 1
-	HKMetricPrefixNano HKMetricPrefix = 2
+	HKMetricPrefixPico  HKMetricPrefix = 1
+	HKMetricPrefixNano  HKMetricPrefix = 2
 	HKMetricPrefixMicro HKMetricPrefix = 3
 	HKMetricPrefixMilli HKMetricPrefix = 4
 	HKMetricPrefixCenti HKMetricPrefix = 5
-	HKMetricPrefixDeci HKMetricPrefix = 6
-	HKMetricPrefixDeca HKMetricPrefix = 7
+	HKMetricPrefixDeci  HKMetricPrefix = 6
+	HKMetricPrefixDeca  HKMetricPrefix = 7
 	HKMetricPrefixHecto HKMetricPrefix = 8
-	HKMetricPrefixKilo HKMetricPrefix = 9
-	HKMetricPrefixMega HKMetricPrefix = 10
-	HKMetricPrefixGiga HKMetricPrefix = 11
-	HKMetricPrefixTera HKMetricPrefix = 12
+	HKMetricPrefixKilo  HKMetricPrefix = 9
+	HKMetricPrefixMega  HKMetricPrefix = 10
+	HKMetricPrefixGiga  HKMetricPrefix = 11
+	HKMetricPrefixTera  HKMetricPrefix = 12
 )
 
 func (e HKMetricPrefix) String() string {
@@ -446,11 +446,11 @@ func (e HKMetricPrefix) String() string {
 type HKPHQ9AssessmentRisk int64
 
 const (
-	HKPHQ9AssessmentRiskNoneToMinimal HKPHQ9AssessmentRisk = 1
-	HKPHQ9AssessmentRiskMild HKPHQ9AssessmentRisk = 2
-	HKPHQ9AssessmentRiskModerate HKPHQ9AssessmentRisk = 3
+	HKPHQ9AssessmentRiskNoneToMinimal    HKPHQ9AssessmentRisk = 1
+	HKPHQ9AssessmentRiskMild             HKPHQ9AssessmentRisk = 2
+	HKPHQ9AssessmentRiskModerate         HKPHQ9AssessmentRisk = 3
 	HKPHQ9AssessmentRiskModeratelySevere HKPHQ9AssessmentRisk = 4
-	HKPHQ9AssessmentRiskSevere HKPHQ9AssessmentRisk = 5
+	HKPHQ9AssessmentRiskSevere           HKPHQ9AssessmentRisk = 5
 )
 
 func (e HKPHQ9AssessmentRisk) String() string {
@@ -474,10 +474,10 @@ type HKPrismBase int64
 
 const (
 	HKPrismBaseNone HKPrismBase = 0
-	HKPrismBaseUp HKPrismBase = 1
+	HKPrismBaseUp   HKPrismBase = 1
 	HKPrismBaseDown HKPrismBase = 2
-	HKPrismBaseIn HKPrismBase = 3
-	HKPrismBaseOut HKPrismBase = 4
+	HKPrismBaseIn   HKPrismBase = 3
+	HKPrismBaseOut  HKPrismBase = 4
 )
 
 func (e HKPrismBase) String() string {
@@ -500,10 +500,10 @@ func (e HKPrismBase) String() string {
 type HKQuantityAggregationStyle int64
 
 const (
-	HKQuantityAggregationStyleCumulative HKQuantityAggregationStyle = 0
-	HKQuantityAggregationStyleDiscreteArithmetic HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscrete HKQuantityAggregationStyle = 1
-	HKQuantityAggregationStyleDiscreteTemporallyWeighted HKQuantityAggregationStyle = 2
+	HKQuantityAggregationStyleCumulative                        HKQuantityAggregationStyle = 0
+	HKQuantityAggregationStyleDiscreteArithmetic                HKQuantityAggregationStyle = 1
+	HKQuantityAggregationStyleDiscrete                          HKQuantityAggregationStyle = 1
+	HKQuantityAggregationStyleDiscreteTemporallyWeighted        HKQuantityAggregationStyle = 2
 	HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel HKQuantityAggregationStyle = 3
 )
 
@@ -526,9 +526,9 @@ func (e HKQuantityAggregationStyle) String() string {
 type HKQueryOptions uint64
 
 const (
-	HKQueryOptionNone HKQueryOptions = 0
+	HKQueryOptionNone            HKQueryOptions = 0
 	HKQueryOptionStrictStartDate HKQueryOptions = 1
-	HKQueryOptionStrictEndDate HKQueryOptions = 2
+	HKQueryOptionStrictEndDate   HKQueryOptions = 2
 )
 
 func (e HKQueryOptions) String() string {
@@ -548,24 +548,24 @@ func (e HKQueryOptions) String() string {
 type HKStateOfMindAssociation int64
 
 const (
-	HKStateOfMindAssociationCommunity HKStateOfMindAssociation = 1
+	HKStateOfMindAssociationCommunity     HKStateOfMindAssociation = 1
 	HKStateOfMindAssociationCurrentEvents HKStateOfMindAssociation = 2
-	HKStateOfMindAssociationDating HKStateOfMindAssociation = 3
-	HKStateOfMindAssociationEducation HKStateOfMindAssociation = 4
-	HKStateOfMindAssociationFamily HKStateOfMindAssociation = 5
-	HKStateOfMindAssociationFitness HKStateOfMindAssociation = 6
-	HKStateOfMindAssociationFriends HKStateOfMindAssociation = 7
-	HKStateOfMindAssociationHealth HKStateOfMindAssociation = 8
-	HKStateOfMindAssociationHobbies HKStateOfMindAssociation = 9
-	HKStateOfMindAssociationIdentity HKStateOfMindAssociation = 10
-	HKStateOfMindAssociationMoney HKStateOfMindAssociation = 11
-	HKStateOfMindAssociationPartner HKStateOfMindAssociation = 12
-	HKStateOfMindAssociationSelfCare HKStateOfMindAssociation = 13
-	HKStateOfMindAssociationSpirituality HKStateOfMindAssociation = 14
-	HKStateOfMindAssociationTasks HKStateOfMindAssociation = 15
-	HKStateOfMindAssociationTravel HKStateOfMindAssociation = 16
-	HKStateOfMindAssociationWork HKStateOfMindAssociation = 17
-	HKStateOfMindAssociationWeather HKStateOfMindAssociation = 18
+	HKStateOfMindAssociationDating        HKStateOfMindAssociation = 3
+	HKStateOfMindAssociationEducation     HKStateOfMindAssociation = 4
+	HKStateOfMindAssociationFamily        HKStateOfMindAssociation = 5
+	HKStateOfMindAssociationFitness       HKStateOfMindAssociation = 6
+	HKStateOfMindAssociationFriends       HKStateOfMindAssociation = 7
+	HKStateOfMindAssociationHealth        HKStateOfMindAssociation = 8
+	HKStateOfMindAssociationHobbies       HKStateOfMindAssociation = 9
+	HKStateOfMindAssociationIdentity      HKStateOfMindAssociation = 10
+	HKStateOfMindAssociationMoney         HKStateOfMindAssociation = 11
+	HKStateOfMindAssociationPartner       HKStateOfMindAssociation = 12
+	HKStateOfMindAssociationSelfCare      HKStateOfMindAssociation = 13
+	HKStateOfMindAssociationSpirituality  HKStateOfMindAssociation = 14
+	HKStateOfMindAssociationTasks         HKStateOfMindAssociation = 15
+	HKStateOfMindAssociationTravel        HKStateOfMindAssociation = 16
+	HKStateOfMindAssociationWork          HKStateOfMindAssociation = 17
+	HKStateOfMindAssociationWeather       HKStateOfMindAssociation = 18
 )
 
 func (e HKStateOfMindAssociation) String() string {
@@ -615,7 +615,7 @@ type HKStateOfMindKind int64
 
 const (
 	HKStateOfMindKindMomentaryEmotion HKStateOfMindKind = 1
-	HKStateOfMindKindDailyMood HKStateOfMindKind = 2
+	HKStateOfMindKindDailyMood        HKStateOfMindKind = 2
 )
 
 func (e HKStateOfMindKind) String() string {
@@ -632,44 +632,44 @@ func (e HKStateOfMindKind) String() string {
 type HKStateOfMindLabel int64
 
 const (
-	HKStateOfMindLabelAmazed HKStateOfMindLabel = 1
-	HKStateOfMindLabelAmused HKStateOfMindLabel = 2
-	HKStateOfMindLabelAngry HKStateOfMindLabel = 3
-	HKStateOfMindLabelAnxious HKStateOfMindLabel = 4
-	HKStateOfMindLabelAshamed HKStateOfMindLabel = 5
-	HKStateOfMindLabelBrave HKStateOfMindLabel = 6
-	HKStateOfMindLabelCalm HKStateOfMindLabel = 7
-	HKStateOfMindLabelContent HKStateOfMindLabel = 8
+	HKStateOfMindLabelAmazed       HKStateOfMindLabel = 1
+	HKStateOfMindLabelAmused       HKStateOfMindLabel = 2
+	HKStateOfMindLabelAngry        HKStateOfMindLabel = 3
+	HKStateOfMindLabelAnxious      HKStateOfMindLabel = 4
+	HKStateOfMindLabelAshamed      HKStateOfMindLabel = 5
+	HKStateOfMindLabelBrave        HKStateOfMindLabel = 6
+	HKStateOfMindLabelCalm         HKStateOfMindLabel = 7
+	HKStateOfMindLabelContent      HKStateOfMindLabel = 8
 	HKStateOfMindLabelDisappointed HKStateOfMindLabel = 9
-	HKStateOfMindLabelDiscouraged HKStateOfMindLabel = 10
-	HKStateOfMindLabelDisgusted HKStateOfMindLabel = 11
-	HKStateOfMindLabelEmbarrassed HKStateOfMindLabel = 12
-	HKStateOfMindLabelExcited HKStateOfMindLabel = 13
-	HKStateOfMindLabelFrustrated HKStateOfMindLabel = 14
-	HKStateOfMindLabelGrateful HKStateOfMindLabel = 15
-	HKStateOfMindLabelGuilty HKStateOfMindLabel = 16
-	HKStateOfMindLabelHappy HKStateOfMindLabel = 17
-	HKStateOfMindLabelHopeless HKStateOfMindLabel = 18
-	HKStateOfMindLabelIrritated HKStateOfMindLabel = 19
-	HKStateOfMindLabelJealous HKStateOfMindLabel = 20
-	HKStateOfMindLabelJoyful HKStateOfMindLabel = 21
-	HKStateOfMindLabelLonely HKStateOfMindLabel = 22
-	HKStateOfMindLabelPassionate HKStateOfMindLabel = 23
-	HKStateOfMindLabelPeaceful HKStateOfMindLabel = 24
-	HKStateOfMindLabelProud HKStateOfMindLabel = 25
-	HKStateOfMindLabelRelieved HKStateOfMindLabel = 26
-	HKStateOfMindLabelSad HKStateOfMindLabel = 27
-	HKStateOfMindLabelScared HKStateOfMindLabel = 28
-	HKStateOfMindLabelStressed HKStateOfMindLabel = 29
-	HKStateOfMindLabelSurprised HKStateOfMindLabel = 30
-	HKStateOfMindLabelWorried HKStateOfMindLabel = 31
-	HKStateOfMindLabelAnnoyed HKStateOfMindLabel = 32
-	HKStateOfMindLabelConfident HKStateOfMindLabel = 33
-	HKStateOfMindLabelDrained HKStateOfMindLabel = 34
-	HKStateOfMindLabelHopeful HKStateOfMindLabel = 35
-	HKStateOfMindLabelIndifferent HKStateOfMindLabel = 36
-	HKStateOfMindLabelOverwhelmed HKStateOfMindLabel = 37
-	HKStateOfMindLabelSatisfied HKStateOfMindLabel = 38
+	HKStateOfMindLabelDiscouraged  HKStateOfMindLabel = 10
+	HKStateOfMindLabelDisgusted    HKStateOfMindLabel = 11
+	HKStateOfMindLabelEmbarrassed  HKStateOfMindLabel = 12
+	HKStateOfMindLabelExcited      HKStateOfMindLabel = 13
+	HKStateOfMindLabelFrustrated   HKStateOfMindLabel = 14
+	HKStateOfMindLabelGrateful     HKStateOfMindLabel = 15
+	HKStateOfMindLabelGuilty       HKStateOfMindLabel = 16
+	HKStateOfMindLabelHappy        HKStateOfMindLabel = 17
+	HKStateOfMindLabelHopeless     HKStateOfMindLabel = 18
+	HKStateOfMindLabelIrritated    HKStateOfMindLabel = 19
+	HKStateOfMindLabelJealous      HKStateOfMindLabel = 20
+	HKStateOfMindLabelJoyful       HKStateOfMindLabel = 21
+	HKStateOfMindLabelLonely       HKStateOfMindLabel = 22
+	HKStateOfMindLabelPassionate   HKStateOfMindLabel = 23
+	HKStateOfMindLabelPeaceful     HKStateOfMindLabel = 24
+	HKStateOfMindLabelProud        HKStateOfMindLabel = 25
+	HKStateOfMindLabelRelieved     HKStateOfMindLabel = 26
+	HKStateOfMindLabelSad          HKStateOfMindLabel = 27
+	HKStateOfMindLabelScared       HKStateOfMindLabel = 28
+	HKStateOfMindLabelStressed     HKStateOfMindLabel = 29
+	HKStateOfMindLabelSurprised    HKStateOfMindLabel = 30
+	HKStateOfMindLabelWorried      HKStateOfMindLabel = 31
+	HKStateOfMindLabelAnnoyed      HKStateOfMindLabel = 32
+	HKStateOfMindLabelConfident    HKStateOfMindLabel = 33
+	HKStateOfMindLabelDrained      HKStateOfMindLabel = 34
+	HKStateOfMindLabelHopeful      HKStateOfMindLabel = 35
+	HKStateOfMindLabelIndifferent  HKStateOfMindLabel = 36
+	HKStateOfMindLabelOverwhelmed  HKStateOfMindLabel = 37
+	HKStateOfMindLabelSatisfied    HKStateOfMindLabel = 38
 )
 
 func (e HKStateOfMindLabel) String() string {
@@ -758,13 +758,13 @@ func (e HKStateOfMindLabel) String() string {
 type HKStateOfMindValenceClassification int64
 
 const (
-	HKStateOfMindValenceClassificationVeryUnpleasant HKStateOfMindValenceClassification = 1
-	HKStateOfMindValenceClassificationUnpleasant HKStateOfMindValenceClassification = 2
+	HKStateOfMindValenceClassificationVeryUnpleasant     HKStateOfMindValenceClassification = 1
+	HKStateOfMindValenceClassificationUnpleasant         HKStateOfMindValenceClassification = 2
 	HKStateOfMindValenceClassificationSlightlyUnpleasant HKStateOfMindValenceClassification = 3
-	HKStateOfMindValenceClassificationNeutral HKStateOfMindValenceClassification = 4
-	HKStateOfMindValenceClassificationSlightlyPleasant HKStateOfMindValenceClassification = 5
-	HKStateOfMindValenceClassificationPleasant HKStateOfMindValenceClassification = 6
-	HKStateOfMindValenceClassificationVeryPleasant HKStateOfMindValenceClassification = 7
+	HKStateOfMindValenceClassificationNeutral            HKStateOfMindValenceClassification = 4
+	HKStateOfMindValenceClassificationSlightlyPleasant   HKStateOfMindValenceClassification = 5
+	HKStateOfMindValenceClassificationPleasant           HKStateOfMindValenceClassification = 6
+	HKStateOfMindValenceClassificationVeryPleasant       HKStateOfMindValenceClassification = 7
 )
 
 func (e HKStateOfMindValenceClassification) String() string {
@@ -792,15 +792,15 @@ func (e HKStateOfMindValenceClassification) String() string {
 type HKStatisticsOptions uint64
 
 const (
-	HKStatisticsOptionNone HKStatisticsOptions = 0
-	HKStatisticsOptionSeparateBySource HKStatisticsOptions = 1
-	HKStatisticsOptionDiscreteAverage HKStatisticsOptions = 2
-	HKStatisticsOptionDiscreteMin HKStatisticsOptions = 4
-	HKStatisticsOptionDiscreteMax HKStatisticsOptions = 8
-	HKStatisticsOptionCumulativeSum HKStatisticsOptions = 16
-	HKStatisticsOptionMostRecent HKStatisticsOptions = 32
+	HKStatisticsOptionNone               HKStatisticsOptions = 0
+	HKStatisticsOptionSeparateBySource   HKStatisticsOptions = 1
+	HKStatisticsOptionDiscreteAverage    HKStatisticsOptions = 2
+	HKStatisticsOptionDiscreteMin        HKStatisticsOptions = 4
+	HKStatisticsOptionDiscreteMax        HKStatisticsOptions = 8
+	HKStatisticsOptionCumulativeSum      HKStatisticsOptions = 16
+	HKStatisticsOptionMostRecent         HKStatisticsOptions = 32
 	HKStatisticsOptionDiscreteMostRecent HKStatisticsOptions = 32
-	HKStatisticsOptionDuration HKStatisticsOptions = 64
+	HKStatisticsOptionDuration           HKStatisticsOptions = 64
 )
 
 func (e HKStatisticsOptions) String() string {
@@ -839,9 +839,9 @@ type HKUpdateFrequency int64
 
 const (
 	HKUpdateFrequencyImmediate HKUpdateFrequency = 1
-	HKUpdateFrequencyHourly HKUpdateFrequency = 2
-	HKUpdateFrequencyDaily HKUpdateFrequency = 3
-	HKUpdateFrequencyWeekly HKUpdateFrequency = 4
+	HKUpdateFrequencyHourly    HKUpdateFrequency = 2
+	HKUpdateFrequencyDaily     HKUpdateFrequency = 3
+	HKUpdateFrequencyWeekly    HKUpdateFrequency = 4
 )
 
 func (e HKUpdateFrequency) String() string {
@@ -862,7 +862,7 @@ func (e HKUpdateFrequency) String() string {
 type HKVisionEye int64
 
 const (
-	HKVisionEyeLeft HKVisionEye = 1
+	HKVisionEyeLeft  HKVisionEye = 1
 	HKVisionEyeRight HKVisionEye = 2
 )
 
@@ -880,7 +880,7 @@ func (e HKVisionEye) String() string {
 type HKVisionPrescriptionType uint64
 
 const (
-	HKVisionPrescriptionTypeGlasses HKVisionPrescriptionType = 1
+	HKVisionPrescriptionTypeGlasses  HKVisionPrescriptionType = 1
 	HKVisionPrescriptionTypeContacts HKVisionPrescriptionType = 2
 )
 
@@ -899,8 +899,8 @@ type HKWheelchairUse int64
 
 const (
 	HKWheelchairUseNotSet HKWheelchairUse = 0
-	HKWheelchairUseNo HKWheelchairUse = 1
-	HKWheelchairUseYes HKWheelchairUse = 2
+	HKWheelchairUseNo     HKWheelchairUse = 1
+	HKWheelchairUseYes    HKWheelchairUse = 2
 )
 
 func (e HKWheelchairUse) String() string {
@@ -919,90 +919,90 @@ func (e HKWheelchairUse) String() string {
 type HKWorkoutActivityType uint64
 
 const (
-	HKWorkoutActivityTypeAmericanFootball HKWorkoutActivityType = 1
-	HKWorkoutActivityTypeArchery HKWorkoutActivityType = 2
-	HKWorkoutActivityTypeAustralianFootball HKWorkoutActivityType = 3
-	HKWorkoutActivityTypeBadminton HKWorkoutActivityType = 4
-	HKWorkoutActivityTypeBaseball HKWorkoutActivityType = 5
-	HKWorkoutActivityTypeBasketball HKWorkoutActivityType = 6
-	HKWorkoutActivityTypeBowling HKWorkoutActivityType = 7
-	HKWorkoutActivityTypeBoxing HKWorkoutActivityType = 8
-	HKWorkoutActivityTypeClimbing HKWorkoutActivityType = 9
-	HKWorkoutActivityTypeCricket HKWorkoutActivityType = 10
-	HKWorkoutActivityTypeCrossTraining HKWorkoutActivityType = 11
-	HKWorkoutActivityTypeCurling HKWorkoutActivityType = 12
-	HKWorkoutActivityTypeCycling HKWorkoutActivityType = 13
-	HKWorkoutActivityTypeDance HKWorkoutActivityType = 14
-	HKWorkoutActivityTypeDanceInspiredTraining HKWorkoutActivityType = 15
-	HKWorkoutActivityTypeElliptical HKWorkoutActivityType = 16
-	HKWorkoutActivityTypeEquestrianSports HKWorkoutActivityType = 17
-	HKWorkoutActivityTypeFencing HKWorkoutActivityType = 18
-	HKWorkoutActivityTypeFishing HKWorkoutActivityType = 19
-	HKWorkoutActivityTypeFunctionalStrengthTraining HKWorkoutActivityType = 20
-	HKWorkoutActivityTypeGolf HKWorkoutActivityType = 21
-	HKWorkoutActivityTypeGymnastics HKWorkoutActivityType = 22
-	HKWorkoutActivityTypeHandball HKWorkoutActivityType = 23
-	HKWorkoutActivityTypeHiking HKWorkoutActivityType = 24
-	HKWorkoutActivityTypeHockey HKWorkoutActivityType = 25
-	HKWorkoutActivityTypeHunting HKWorkoutActivityType = 26
-	HKWorkoutActivityTypeLacrosse HKWorkoutActivityType = 27
-	HKWorkoutActivityTypeMartialArts HKWorkoutActivityType = 28
-	HKWorkoutActivityTypeMindAndBody HKWorkoutActivityType = 29
-	HKWorkoutActivityTypeMixedMetabolicCardioTraining HKWorkoutActivityType = 30
-	HKWorkoutActivityTypePaddleSports HKWorkoutActivityType = 31
-	HKWorkoutActivityTypePlay HKWorkoutActivityType = 32
-	HKWorkoutActivityTypePreparationAndRecovery HKWorkoutActivityType = 33
-	HKWorkoutActivityTypeRacquetball HKWorkoutActivityType = 34
-	HKWorkoutActivityTypeRowing HKWorkoutActivityType = 35
-	HKWorkoutActivityTypeRugby HKWorkoutActivityType = 36
-	HKWorkoutActivityTypeRunning HKWorkoutActivityType = 37
-	HKWorkoutActivityTypeSailing HKWorkoutActivityType = 38
-	HKWorkoutActivityTypeSkatingSports HKWorkoutActivityType = 39
-	HKWorkoutActivityTypeSnowSports HKWorkoutActivityType = 40
-	HKWorkoutActivityTypeSoccer HKWorkoutActivityType = 41
-	HKWorkoutActivityTypeSoftball HKWorkoutActivityType = 42
-	HKWorkoutActivityTypeSquash HKWorkoutActivityType = 43
-	HKWorkoutActivityTypeStairClimbing HKWorkoutActivityType = 44
-	HKWorkoutActivityTypeSurfingSports HKWorkoutActivityType = 45
-	HKWorkoutActivityTypeSwimming HKWorkoutActivityType = 46
-	HKWorkoutActivityTypeTableTennis HKWorkoutActivityType = 47
-	HKWorkoutActivityTypeTennis HKWorkoutActivityType = 48
-	HKWorkoutActivityTypeTrackAndField HKWorkoutActivityType = 49
-	HKWorkoutActivityTypeTraditionalStrengthTraining HKWorkoutActivityType = 50
-	HKWorkoutActivityTypeVolleyball HKWorkoutActivityType = 51
-	HKWorkoutActivityTypeWalking HKWorkoutActivityType = 52
-	HKWorkoutActivityTypeWaterFitness HKWorkoutActivityType = 53
-	HKWorkoutActivityTypeWaterPolo HKWorkoutActivityType = 54
-	HKWorkoutActivityTypeWaterSports HKWorkoutActivityType = 55
-	HKWorkoutActivityTypeWrestling HKWorkoutActivityType = 56
-	HKWorkoutActivityTypeYoga HKWorkoutActivityType = 57
-	HKWorkoutActivityTypeBarre HKWorkoutActivityType = 58
-	HKWorkoutActivityTypeCoreTraining HKWorkoutActivityType = 59
-	HKWorkoutActivityTypeCrossCountrySkiing HKWorkoutActivityType = 60
-	HKWorkoutActivityTypeDownhillSkiing HKWorkoutActivityType = 61
-	HKWorkoutActivityTypeFlexibility HKWorkoutActivityType = 62
+	HKWorkoutActivityTypeAmericanFootball              HKWorkoutActivityType = 1
+	HKWorkoutActivityTypeArchery                       HKWorkoutActivityType = 2
+	HKWorkoutActivityTypeAustralianFootball            HKWorkoutActivityType = 3
+	HKWorkoutActivityTypeBadminton                     HKWorkoutActivityType = 4
+	HKWorkoutActivityTypeBaseball                      HKWorkoutActivityType = 5
+	HKWorkoutActivityTypeBasketball                    HKWorkoutActivityType = 6
+	HKWorkoutActivityTypeBowling                       HKWorkoutActivityType = 7
+	HKWorkoutActivityTypeBoxing                        HKWorkoutActivityType = 8
+	HKWorkoutActivityTypeClimbing                      HKWorkoutActivityType = 9
+	HKWorkoutActivityTypeCricket                       HKWorkoutActivityType = 10
+	HKWorkoutActivityTypeCrossTraining                 HKWorkoutActivityType = 11
+	HKWorkoutActivityTypeCurling                       HKWorkoutActivityType = 12
+	HKWorkoutActivityTypeCycling                       HKWorkoutActivityType = 13
+	HKWorkoutActivityTypeDance                         HKWorkoutActivityType = 14
+	HKWorkoutActivityTypeDanceInspiredTraining         HKWorkoutActivityType = 15
+	HKWorkoutActivityTypeElliptical                    HKWorkoutActivityType = 16
+	HKWorkoutActivityTypeEquestrianSports              HKWorkoutActivityType = 17
+	HKWorkoutActivityTypeFencing                       HKWorkoutActivityType = 18
+	HKWorkoutActivityTypeFishing                       HKWorkoutActivityType = 19
+	HKWorkoutActivityTypeFunctionalStrengthTraining    HKWorkoutActivityType = 20
+	HKWorkoutActivityTypeGolf                          HKWorkoutActivityType = 21
+	HKWorkoutActivityTypeGymnastics                    HKWorkoutActivityType = 22
+	HKWorkoutActivityTypeHandball                      HKWorkoutActivityType = 23
+	HKWorkoutActivityTypeHiking                        HKWorkoutActivityType = 24
+	HKWorkoutActivityTypeHockey                        HKWorkoutActivityType = 25
+	HKWorkoutActivityTypeHunting                       HKWorkoutActivityType = 26
+	HKWorkoutActivityTypeLacrosse                      HKWorkoutActivityType = 27
+	HKWorkoutActivityTypeMartialArts                   HKWorkoutActivityType = 28
+	HKWorkoutActivityTypeMindAndBody                   HKWorkoutActivityType = 29
+	HKWorkoutActivityTypeMixedMetabolicCardioTraining  HKWorkoutActivityType = 30
+	HKWorkoutActivityTypePaddleSports                  HKWorkoutActivityType = 31
+	HKWorkoutActivityTypePlay                          HKWorkoutActivityType = 32
+	HKWorkoutActivityTypePreparationAndRecovery        HKWorkoutActivityType = 33
+	HKWorkoutActivityTypeRacquetball                   HKWorkoutActivityType = 34
+	HKWorkoutActivityTypeRowing                        HKWorkoutActivityType = 35
+	HKWorkoutActivityTypeRugby                         HKWorkoutActivityType = 36
+	HKWorkoutActivityTypeRunning                       HKWorkoutActivityType = 37
+	HKWorkoutActivityTypeSailing                       HKWorkoutActivityType = 38
+	HKWorkoutActivityTypeSkatingSports                 HKWorkoutActivityType = 39
+	HKWorkoutActivityTypeSnowSports                    HKWorkoutActivityType = 40
+	HKWorkoutActivityTypeSoccer                        HKWorkoutActivityType = 41
+	HKWorkoutActivityTypeSoftball                      HKWorkoutActivityType = 42
+	HKWorkoutActivityTypeSquash                        HKWorkoutActivityType = 43
+	HKWorkoutActivityTypeStairClimbing                 HKWorkoutActivityType = 44
+	HKWorkoutActivityTypeSurfingSports                 HKWorkoutActivityType = 45
+	HKWorkoutActivityTypeSwimming                      HKWorkoutActivityType = 46
+	HKWorkoutActivityTypeTableTennis                   HKWorkoutActivityType = 47
+	HKWorkoutActivityTypeTennis                        HKWorkoutActivityType = 48
+	HKWorkoutActivityTypeTrackAndField                 HKWorkoutActivityType = 49
+	HKWorkoutActivityTypeTraditionalStrengthTraining   HKWorkoutActivityType = 50
+	HKWorkoutActivityTypeVolleyball                    HKWorkoutActivityType = 51
+	HKWorkoutActivityTypeWalking                       HKWorkoutActivityType = 52
+	HKWorkoutActivityTypeWaterFitness                  HKWorkoutActivityType = 53
+	HKWorkoutActivityTypeWaterPolo                     HKWorkoutActivityType = 54
+	HKWorkoutActivityTypeWaterSports                   HKWorkoutActivityType = 55
+	HKWorkoutActivityTypeWrestling                     HKWorkoutActivityType = 56
+	HKWorkoutActivityTypeYoga                          HKWorkoutActivityType = 57
+	HKWorkoutActivityTypeBarre                         HKWorkoutActivityType = 58
+	HKWorkoutActivityTypeCoreTraining                  HKWorkoutActivityType = 59
+	HKWorkoutActivityTypeCrossCountrySkiing            HKWorkoutActivityType = 60
+	HKWorkoutActivityTypeDownhillSkiing                HKWorkoutActivityType = 61
+	HKWorkoutActivityTypeFlexibility                   HKWorkoutActivityType = 62
 	HKWorkoutActivityTypeHighIntensityIntervalTraining HKWorkoutActivityType = 63
-	HKWorkoutActivityTypeJumpRope HKWorkoutActivityType = 64
-	HKWorkoutActivityTypeKickboxing HKWorkoutActivityType = 65
-	HKWorkoutActivityTypePilates HKWorkoutActivityType = 66
-	HKWorkoutActivityTypeSnowboarding HKWorkoutActivityType = 67
-	HKWorkoutActivityTypeStairs HKWorkoutActivityType = 68
-	HKWorkoutActivityTypeStepTraining HKWorkoutActivityType = 69
-	HKWorkoutActivityTypeWheelchairWalkPace HKWorkoutActivityType = 70
-	HKWorkoutActivityTypeWheelchairRunPace HKWorkoutActivityType = 71
-	HKWorkoutActivityTypeTaiChi HKWorkoutActivityType = 72
-	HKWorkoutActivityTypeMixedCardio HKWorkoutActivityType = 73
-	HKWorkoutActivityTypeHandCycling HKWorkoutActivityType = 74
-	HKWorkoutActivityTypeDiscSports HKWorkoutActivityType = 75
-	HKWorkoutActivityTypeFitnessGaming HKWorkoutActivityType = 76
-	HKWorkoutActivityTypeCardioDance HKWorkoutActivityType = 77
-	HKWorkoutActivityTypeSocialDance HKWorkoutActivityType = 78
-	HKWorkoutActivityTypePickleball HKWorkoutActivityType = 79
-	HKWorkoutActivityTypeCooldown HKWorkoutActivityType = 80
-	HKWorkoutActivityTypeSwimBikeRun HKWorkoutActivityType = 82
-	HKWorkoutActivityTypeTransition HKWorkoutActivityType = 83
-	HKWorkoutActivityTypeUnderwaterDiving HKWorkoutActivityType = 84
-	HKWorkoutActivityTypeOther HKWorkoutActivityType = 3000
+	HKWorkoutActivityTypeJumpRope                      HKWorkoutActivityType = 64
+	HKWorkoutActivityTypeKickboxing                    HKWorkoutActivityType = 65
+	HKWorkoutActivityTypePilates                       HKWorkoutActivityType = 66
+	HKWorkoutActivityTypeSnowboarding                  HKWorkoutActivityType = 67
+	HKWorkoutActivityTypeStairs                        HKWorkoutActivityType = 68
+	HKWorkoutActivityTypeStepTraining                  HKWorkoutActivityType = 69
+	HKWorkoutActivityTypeWheelchairWalkPace            HKWorkoutActivityType = 70
+	HKWorkoutActivityTypeWheelchairRunPace             HKWorkoutActivityType = 71
+	HKWorkoutActivityTypeTaiChi                        HKWorkoutActivityType = 72
+	HKWorkoutActivityTypeMixedCardio                   HKWorkoutActivityType = 73
+	HKWorkoutActivityTypeHandCycling                   HKWorkoutActivityType = 74
+	HKWorkoutActivityTypeDiscSports                    HKWorkoutActivityType = 75
+	HKWorkoutActivityTypeFitnessGaming                 HKWorkoutActivityType = 76
+	HKWorkoutActivityTypeCardioDance                   HKWorkoutActivityType = 77
+	HKWorkoutActivityTypeSocialDance                   HKWorkoutActivityType = 78
+	HKWorkoutActivityTypePickleball                    HKWorkoutActivityType = 79
+	HKWorkoutActivityTypeCooldown                      HKWorkoutActivityType = 80
+	HKWorkoutActivityTypeSwimBikeRun                   HKWorkoutActivityType = 82
+	HKWorkoutActivityTypeTransition                    HKWorkoutActivityType = 83
+	HKWorkoutActivityTypeUnderwaterDiving              HKWorkoutActivityType = 84
+	HKWorkoutActivityTypeOther                         HKWorkoutActivityType = 3000
 )
 
 func (e HKWorkoutActivityType) String() string {
@@ -1183,7 +1183,7 @@ func (e HKWorkoutActivityType) String() string {
 type HKWorkoutEffortRelationshipQueryOptions int64
 
 const (
-	HKWorkoutEffortRelationshipQueryOptionsDefault HKWorkoutEffortRelationshipQueryOptions = 0
+	HKWorkoutEffortRelationshipQueryOptionsDefault      HKWorkoutEffortRelationshipQueryOptions = 0
 	HKWorkoutEffortRelationshipQueryOptionsMostRelevant HKWorkoutEffortRelationshipQueryOptions = 1
 )
 
@@ -1201,13 +1201,13 @@ func (e HKWorkoutEffortRelationshipQueryOptions) String() string {
 type HKWorkoutEventType int64
 
 const (
-	HKWorkoutEventTypePause HKWorkoutEventType = 1
-	HKWorkoutEventTypeResume HKWorkoutEventType = 2
-	HKWorkoutEventTypeLap HKWorkoutEventType = 3
-	HKWorkoutEventTypeMarker HKWorkoutEventType = 4
-	HKWorkoutEventTypeMotionPaused HKWorkoutEventType = 5
-	HKWorkoutEventTypeMotionResumed HKWorkoutEventType = 6
-	HKWorkoutEventTypeSegment HKWorkoutEventType = 7
+	HKWorkoutEventTypePause                HKWorkoutEventType = 1
+	HKWorkoutEventTypeResume               HKWorkoutEventType = 2
+	HKWorkoutEventTypeLap                  HKWorkoutEventType = 3
+	HKWorkoutEventTypeMarker               HKWorkoutEventType = 4
+	HKWorkoutEventTypeMotionPaused         HKWorkoutEventType = 5
+	HKWorkoutEventTypeMotionResumed        HKWorkoutEventType = 6
+	HKWorkoutEventTypeSegment              HKWorkoutEventType = 7
 	HKWorkoutEventTypePauseOrResumeRequest HKWorkoutEventType = 8
 )
 
@@ -1238,7 +1238,7 @@ type HKWorkoutSessionLocationType int64
 
 const (
 	HKWorkoutSessionLocationTypeUnknown HKWorkoutSessionLocationType = 1
-	HKWorkoutSessionLocationTypeIndoor HKWorkoutSessionLocationType = 2
+	HKWorkoutSessionLocationTypeIndoor  HKWorkoutSessionLocationType = 2
 	HKWorkoutSessionLocationTypeOutdoor HKWorkoutSessionLocationType = 3
 )
 
@@ -1259,11 +1259,11 @@ type HKWorkoutSessionState int64
 
 const (
 	HKWorkoutSessionStateNotStarted HKWorkoutSessionState = 1
-	HKWorkoutSessionStateRunning HKWorkoutSessionState = 2
-	HKWorkoutSessionStateEnded HKWorkoutSessionState = 3
-	HKWorkoutSessionStatePaused HKWorkoutSessionState = 4
-	HKWorkoutSessionStatePrepared HKWorkoutSessionState = 5
-	HKWorkoutSessionStateStopped HKWorkoutSessionState = 6
+	HKWorkoutSessionStateRunning    HKWorkoutSessionState = 2
+	HKWorkoutSessionStateEnded      HKWorkoutSessionState = 3
+	HKWorkoutSessionStatePaused     HKWorkoutSessionState = 4
+	HKWorkoutSessionStatePrepared   HKWorkoutSessionState = 5
+	HKWorkoutSessionStateStopped    HKWorkoutSessionState = 6
 )
 
 func (e HKWorkoutSessionState) String() string {
@@ -1288,7 +1288,7 @@ func (e HKWorkoutSessionState) String() string {
 type HKWorkoutSessionType int64
 
 const (
-	HKWorkoutSessionTypePrimary HKWorkoutSessionType = 0
+	HKWorkoutSessionTypePrimary  HKWorkoutSessionType = 0
 	HKWorkoutSessionTypeMirrored HKWorkoutSessionType = 1
 )
 
@@ -1306,8 +1306,8 @@ func (e HKWorkoutSessionType) String() string {
 type HKWorkoutSwimmingLocationType int64
 
 const (
-	HKWorkoutSwimmingLocationTypeUnknown HKWorkoutSwimmingLocationType = 0
-	HKWorkoutSwimmingLocationTypePool HKWorkoutSwimmingLocationType = 1
+	HKWorkoutSwimmingLocationTypeUnknown   HKWorkoutSwimmingLocationType = 0
+	HKWorkoutSwimmingLocationTypePool      HKWorkoutSwimmingLocationType = 1
 	HKWorkoutSwimmingLocationTypeOpenWater HKWorkoutSwimmingLocationType = 2
 )
 
@@ -1323,4 +1323,3 @@ func (e HKWorkoutSwimmingLocationType) String() string {
 		return fmt.Sprintf("HKWorkoutSwimmingLocationType(%d)", int64(e))
 	}
 }
-

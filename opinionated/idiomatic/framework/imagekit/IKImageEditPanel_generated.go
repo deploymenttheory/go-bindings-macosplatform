@@ -73,4 +73,3 @@ type ImageEditPanelable interface {
 }
 
 var _ ImageEditPanelable = (*ImageEditPanel)(nil)
-

@@ -14,30 +14,30 @@ import (
 )
 
 var (
-	_fnCMAudioDeviceClockCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMAudioDeviceClockCreate                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMAudioDeviceClockCreateFromAudioDeviceID func(unsafe.Pointer, uint, unsafe.Pointer) int
 	// @function	CMAudioDeviceClockGetAudioDevice @abstract	Queries which CoreAudio device the clock is tracking. @discussion If a non-NULL deviceUID has been set, CMAudioDeviceClockGetAudioDevice returns the set UID, its associated ID, and *trackingDefaultDeviceOut == false. If a deviceID has been set directly, CMAudioDeviceClockGetAudioDevice returns NULL UID, the set device ID, and *trackingDefaultDeviceOut == false. If a NULL deviceUID has been set (which means "track the default device"), CMAudioDeviceClockGetAudioDevice returns NULL UID, the ID of the current default device, and *trackingDefaultDeviceOut == true.
-	_fnCMAudioDeviceClockGetAudioDevice func(unsafe.Pointer, unsafe.Pointer, *uint, *uint8) int
-	_fnCMAudioDeviceClockSetAudioDeviceID func(unsafe.Pointer, uint) int
+	_fnCMAudioDeviceClockGetAudioDevice    func(unsafe.Pointer, unsafe.Pointer, *uint, *uint8) int
+	_fnCMAudioDeviceClockSetAudioDeviceID  func(unsafe.Pointer, uint) int
 	_fnCMAudioDeviceClockSetAudioDeviceUID func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer @abstract	Copies the contents of a CMAudioFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator						Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	audioFormatDescription			CMAudioFormatDescription to be copied. @param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	blockBufferOut					Receives new CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering.
 	_fnCMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMAudioFormatDescriptionCreate func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, *coreaudiotypes.AudioChannelLayout, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMAudioFormatDescriptionCreate                                     func(unsafe.Pointer, *coreaudiotypes.AudioStreamBasicDescription, uint, *coreaudiotypes.AudioChannelLayout, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer @abstract	Creates a CMAudioFormatDescription from a big-endian SoundDescription data structure in a CMBlockBuffer. @param	allocator						Allocator to use for allocating the CMAudioFormatDescription object. May be NULL. @param	soundDescriptionBlockBuffer		CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering. @param	flavor			kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	formatDescriptionOut		Receives new CMAudioFormatDescription.
 	_fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData @abstract	Creates a CMAudioFormatDescription from a big-endian SoundDescription data structure. @param	allocator						Allocator to use for allocating the CMAudioFormatDescription object. May be NULL. @param	soundDescriptionData			SoundDescription data structure in big-endian byte ordering. @param	size							Size of SoundDescription data structure. @param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	formatDescriptionOut			Receives new CMAudioFormatDescription.
 	_fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMAudioFormatDescriptionCreateSummary @abstract	Creates a summary audio format description from an array of audio format descriptions. @discussion The summary format description will be canonical LPCM and deep enough in sample rate, channel layout and channel count to sensibly contain the result of decoding and mixing the constituent format descriptions.
-	_fnCMAudioFormatDescriptionCreateSummary func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int
-	_fnCMAudioFormatDescriptionEqual func(unsafe.Pointer, unsafe.Pointer, uint32, *uint32) uint8
-	_fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, *uint) *coreaudiotypes.AudioChannelLayout
-	_fnCMAudioFormatDescriptionGetFormatList func(unsafe.Pointer, *uint) *coreaudiotypes.AudioFormatListItem
-	_fnCMAudioFormatDescriptionGetMagicCookie func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnCMAudioFormatDescriptionGetMostCompatibleFormat func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
-	_fnCMAudioFormatDescriptionGetRichestDecodableFormat func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
-	_fnCMAudioFormatDescriptionGetStreamBasicDescription func(unsafe.Pointer) *coreaudiotypes.AudioStreamBasicDescription
-	_fnCMAudioSampleBufferCreateReadyWithPacketDescriptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, CMTime, *coreaudiotypes.AudioStreamPacketDescription, unsafe.Pointer) int
-	_fnCMAudioSampleBufferCreateWithPacketDescriptions func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, CMTime, *coreaudiotypes.AudioStreamPacketDescription, unsafe.Pointer) int
+	_fnCMAudioFormatDescriptionCreateSummary                                  func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int
+	_fnCMAudioFormatDescriptionEqual                                          func(unsafe.Pointer, unsafe.Pointer, uint32, *uint32) uint8
+	_fnCMAudioFormatDescriptionGetChannelLayout                               func(unsafe.Pointer, *uint) *coreaudiotypes.AudioChannelLayout
+	_fnCMAudioFormatDescriptionGetFormatList                                  func(unsafe.Pointer, *uint) *coreaudiotypes.AudioFormatListItem
+	_fnCMAudioFormatDescriptionGetMagicCookie                                 func(unsafe.Pointer, *uint) unsafe.Pointer
+	_fnCMAudioFormatDescriptionGetMostCompatibleFormat                        func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
+	_fnCMAudioFormatDescriptionGetRichestDecodableFormat                      func(unsafe.Pointer) *coreaudiotypes.AudioFormatListItem
+	_fnCMAudioFormatDescriptionGetStreamBasicDescription                      func(unsafe.Pointer) *coreaudiotypes.AudioStreamBasicDescription
+	_fnCMAudioSampleBufferCreateReadyWithPacketDescriptions                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, CMTime, *coreaudiotypes.AudioStreamPacketDescription, unsafe.Pointer) int
+	_fnCMAudioSampleBufferCreateWithPacketDescriptions                        func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, CMTime, *coreaudiotypes.AudioStreamPacketDescription, unsafe.Pointer) int
 	_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, int, CMTime, *coreaudiotypes.AudioStreamPacketDescription, unsafe.Pointer, objc.Block) int
 	// @function	CMBlockBufferAccessDataBytes @abstract	Accesses potentially noncontiguous data in a CMBlockBuffer. @discussion	Used for accessing potentially noncontiguous data, this routine will return a pointer directly into the given CMBlockBuffer if possible, otherwise the data will be assembled and copied into the given temporary block and its pointer will be returned. @param	theBuffer			CMBlockBuffer to operate on. Must not be NULL @param	offset				Offset within the CMBlockBuffer's offset range. @param	length				Desired number of bytes to access at offset @param	temporaryBlock		A piece of memory, assumed to be at least length bytes in size. Must not be NULL @param	returnedPointerOut	Receives NULL if the desired amount of data could not be accessed at the given offset. Receives non-NULL if it could. The value returned will either be a direct pointer into the CMBlockBuffer or temporaryBlock Must not be NULL. @result	Returns kCMBlockBufferNoErr if the desired amount of data could be accessed at the given offset.
 	_fnCMBlockBufferAccessDataBytes func(unsafe.Pointer, uint, uint, unsafe.Pointer, string) int
@@ -70,7 +70,7 @@ var (
 	// @function	CMBlockBufferIsRangeContiguous @abstract	Determines whether the specified range within the given CMBlockBuffer is contiguous. @discussion	Determines whether the specified range within the given CMBlockBuffer is contiguous. if CMBlockBufferGetDataPointer() were to be called with the same parameters, the returned pointer would address the desired number of bytes. @param	theBuffer		CMBlockBuffer to examine. Must not be NULL @param	offset			Offset within the buffer's offset range. @param	length			Desired number of bytes to access at offset. If zero, the number of bytes available at offset (dataLength – offset), contiguous or not, is used. @result	Returns true if the specified range is contiguous within the CMBlockBuffer, false otherwise. Also returns false if the CMBlockBuffer is NULL or empty.
 	_fnCMBlockBufferIsRangeContiguous func(unsafe.Pointer, uint, uint) uint8
 	// @function	CMBlockBufferReplaceDataBytes @abstract	Copies bytes from a given memory block into a CMBlockBuffer, replacing bytes in the underlying data blocks @discussion	This function is used to replace bytes in a CMBlockBuffer's memory blocks with those from a provided piece of memory. It deals with the possibility of the destination range of data being noncontiguous. CMBlockBufferAssureBlockMemory() is called on the given CMBlockBuffer. If desired range is subsequently not accessible in the CMBlockBuffer, an error is returned and the contents of the CMBlockBuffer are untouched. @param	sourceBytes				Memory block from which bytes are copied into the CMBlockBuffer @param	destinationBuffer		CMBlockBuffer whose range of bytes will be replaced by the sourceBytes. @param	offsetIntoDestination	Offset within the destination CMBlockBuffer at which replacement should begin. @param	dataLength				Number of bytes to be replaced, starting at offsetIntoDestination, in the destinationBuffer. @result	Returns kCMBlockBufferNoErr if the replacement succeeded, returns an error otherwise.
-	_fnCMBlockBufferReplaceDataBytes func(unsafe.Pointer, unsafe.Pointer, uint, uint) int
+	_fnCMBlockBufferReplaceDataBytes  func(unsafe.Pointer, unsafe.Pointer, uint, uint) int
 	_fnCMBufferQueueCallForEachBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMBufferQueueContainsEndOfData @abstract	Returns whether or not a CMBufferQueue has been marked with EOD. @result		Whether or not the CMBufferQueue has been marked with EOD. If queue is NULL, true is returned (a NULL queue is considered to be empty, and permanently at EOD).
 	_fnCMBufferQueueContainsEndOfData func(unsafe.Pointer) uint8
@@ -101,7 +101,7 @@ var (
 	// @function	CMBufferQueueGetFirstPresentationTimeStamp @abstract	Gets the presentation timestamp of the first buffer in a CMBufferQueue. @discussion	This API is is a faster alternative to GetMinPresentationTimeStamp, but only works if you know your queue is sorted by presentation timestamp. If the getPresentationTimeStamp callback is NULL, kCMTimeInvalid will be returned.
 	_fnCMBufferQueueGetFirstPresentationTimeStamp func(unsafe.Pointer) CMTime
 	// @function   CMBufferQueueGetHead @abstract   Retrieves the next-to-dequeue buffer from a CMBufferQueue but leaves it in the queue. @discussion This follows CF "Get" semantics -- it does not retain the returned buffer. Note that with non-FIFO queues it's not guaranteed that the next dequeue will return this particular buffer (if an intervening Enqueue adds a buffer that will dequeue next). This function is deprecated in favor of CMBufferQueueCopyHead() which returns a retained buffer. When adopting CMBufferQueueCopyHead(), existing CFRetain() call on the buffer returned from this function must be removed. @result		The buffer.  Will be NULL if the queue is empty.
-// Deprecated: since macOS 15.0.
+	// Deprecated: since macOS 15.0.
 	_fnCMBufferQueueGetHead func(unsafe.Pointer) unsafe.Pointer
 	// @function	CMBufferQueueGetMaxPresentationTimeStamp @abstract	Gets the greatest presentation timestamp of a CMBufferQueue. @discussion	If the getPresentationTimeStamp callback is NULL, kCMTimeInvalid will be returned.
 	_fnCMBufferQueueGetMaxPresentationTimeStamp func(unsafe.Pointer) CMTime
@@ -130,22 +130,22 @@ var (
 	// @function	CMBufferQueueRemoveTrigger @abstract	Removes a previously installed trigger from a CMBufferQueue. @discussion	Triggers will automatically be removed when a queue is finalized.  However, if more than one module has access to a queue, it may be hard for an individual module to know when the queue is finalized since other modules may retain it.  To address this concern, modules should remove their triggers before they themselves are finalized.
 	_fnCMBufferQueueRemoveTrigger func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMBufferQueueReset @abstract	Resets a CMBufferQueue. Empties the queue, and clears any EOD mark. @discussion	All buffers in the queue are released.  Triggers are not removed, however, and will be called appropriately as the queue duration goes to zero.
-	_fnCMBufferQueueReset func(unsafe.Pointer) int
+	_fnCMBufferQueueReset             func(unsafe.Pointer) int
 	_fnCMBufferQueueResetWithCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMBufferQueueSetValidationCallback @abstract	Sets a function that CMBufferQueueEnqueue will call to validate buffers before adding them to the queue.
 	_fnCMBufferQueueSetValidationCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMBufferQueueSetValidationHandler @abstract	Sets a block that CMBufferQueueEnqueue will call to validate buffers before adding them to the queue. @discussion Both a validation callback and a validation handler can be set at the same time, in which case they will both be called when enqueueing buffers. They both need to return noErr for the buffer to be enqueued.
 	_fnCMBufferQueueSetValidationHandler func(unsafe.Pointer, objc.Block) int
 	// @function	CMBufferQueueTestTrigger @abstract	Tests whether the trigger condition is true. @discussion	Whereas the trigger callback will only be called when the condition goes from false to true, CMBufferQueueTestTrigger always returns the condition's current status. The triggerToken must be one that has been installed on this queue.
-	_fnCMBufferQueueTestTrigger func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMBufferQueueTestTrigger            func(unsafe.Pointer, unsafe.Pointer) uint8
 	_fnCMClockConvertHostTimeToSystemUnits func(CMTime) uint64
-	_fnCMClockGetAnchorTime func(unsafe.Pointer, *CMTime, *CMTime) int
-	_fnCMClockGetHostTimeClock func() unsafe.Pointer
-	_fnCMClockGetTime func(unsafe.Pointer) CMTime
-	_fnCMClockGetTypeID func() uint
-	_fnCMClockInvalidate func(unsafe.Pointer)
-	_fnCMClockMakeHostTimeFromSystemUnits func(uint64) CMTime
-	_fnCMClockMightDrift func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMClockGetAnchorTime                func(unsafe.Pointer, *CMTime, *CMTime) int
+	_fnCMClockGetHostTimeClock             func() unsafe.Pointer
+	_fnCMClockGetTime                      func(unsafe.Pointer) CMTime
+	_fnCMClockGetTypeID                    func() uint
+	_fnCMClockInvalidate                   func(unsafe.Pointer)
+	_fnCMClockMakeHostTimeFromSystemUnits  func(uint64) CMTime
+	_fnCMClockMightDrift                   func(unsafe.Pointer, unsafe.Pointer) uint8
 	// @function	CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer @abstract	Copies the contents of a CMClosedCaptionFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator							Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	closedCaptionFormatDescription		CMClosedCaptionFormatDescription to be copied. @param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	blockBufferOut						Receives new CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering.
 	_fnCMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer @abstract	Creates a CMClosedCaptionFormatDescription from a big-endian ClosedCaptionDescription data structure in a CMBlockBuffer. @param	allocator							Allocator to use for allocating the CMClosedCaptionFormatDescription object. May be NULL. @param	closedCaptionDescriptionBlockBuffer	CMBlockBuffer containing ClosedCaptionDescription data structure in big-endian byte ordering. @param	flavor								Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut				Receives new CMClosedCaptionFormatDescription.
@@ -156,14 +156,14 @@ var (
 	_fnCMCopyDictionaryOfAttachments func(unsafe.Pointer, unsafe.Pointer, uint32) unsafe.Pointer
 	// @function	CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout @abstract	Examine a big-endian SoundDescription data structure in a CMBlockBuffer, and report whether the sample tables will need to use the legacy CBR layout. @param	soundDescriptionBlockBuffer		CMBlockBuffer containing SoundDescription data structure in big-endian byte ordering. @param	flavor							kCMSoundDescriptionFlavor constant or NULL for QuickTimeMovie flavor.
 	_fnCMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCMFormatDescriptionCreate func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMFormatDescriptionEqual func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCMFormatDescriptionEqualIgnoringExtensionKeys func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCMFormatDescriptionGetExtension func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCMFormatDescriptionGetExtensions func(unsafe.Pointer) unsafe.Pointer
-	_fnCMFormatDescriptionGetMediaSubType func(unsafe.Pointer) uint
-	_fnCMFormatDescriptionGetMediaType func(unsafe.Pointer) uint
-	_fnCMFormatDescriptionGetTypeID func() uint
+	_fnCMFormatDescriptionCreate                                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMFormatDescriptionEqual                                         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMFormatDescriptionEqualIgnoringExtensionKeys                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMFormatDescriptionGetExtension                                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCMFormatDescriptionGetExtensions                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnCMFormatDescriptionGetMediaSubType                               func(unsafe.Pointer) uint
+	_fnCMFormatDescriptionGetMediaType                                  func(unsafe.Pointer) uint
+	_fnCMFormatDescriptionGetTypeID                                     func() uint
 	// @function   CMGetAttachment @abstract   Returns a specific attachment of a CMAttachmentBearer @discussion You can attach any CF object to a CMAttachmentBearer to store additional information. CMGetAttachment retrieves an attachment identified by a key.  Given a CVBufferRef, CMGetAttachment is equivalent to CVBufferGetAttachment. @param      target  Target CMAttachmentBearer. @param      key	Key in form of a CFString identifying the desired attachment. @param      attachmentModeOut  Returns the mode of the attachment, if desired.  May be NULL. @result     If found the attachment object; else NULL.
 	_fnCMGetAttachment func(unsafe.Pointer, unsafe.Pointer, *uint32) unsafe.Pointer
 	// @function	CMMemoryPoolCreate @abstract	Creates a new CMMemoryPool.
@@ -172,102 +172,102 @@ var (
 	_fnCMMemoryPoolFlush func(unsafe.Pointer)
 	// @function	CMMemoryPoolGetAllocator @abstract	Returns the pool's CFAllocator.
 	_fnCMMemoryPoolGetAllocator func(unsafe.Pointer) unsafe.Pointer
-	_fnCMMemoryPoolGetTypeID func() uint
+	_fnCMMemoryPoolGetTypeID    func() uint
 	// @function	CMMemoryPoolInvalidate @abstract	Stops the pool from recycling. @discussion When CMMemoryPoolInvalidate is called the pool's allocator stops recycling memory. The pool deallocates any memory it was holding for recycling. This also happens when the retain count of the CMMemoryPool drops to zero, except that under GC it may be delayed.
-	_fnCMMemoryPoolInvalidate func(unsafe.Pointer)
-	_fnCMMetadataCreateIdentifierForKeyAndKeySpace func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataCreateKeyFromIdentifier func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataCreateKeyFromIdentifierAsCFData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataCreateKeySpaceFromIdentifier func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataDataTypeRegistryDataTypeConformsToDataType func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType func(unsafe.Pointer) uint8
-	_fnCMMetadataDataTypeRegistryDataTypeIsRegistered func(unsafe.Pointer) uint8
+	_fnCMMemoryPoolInvalidate                                         func(unsafe.Pointer)
+	_fnCMMetadataCreateIdentifierForKeyAndKeySpace                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataCreateKeyFromIdentifier                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataCreateKeyFromIdentifierAsCFData                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataCreateKeySpaceFromIdentifier                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataDataTypeRegistryDataTypeConformsToDataType           func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType               func(unsafe.Pointer) uint8
+	_fnCMMetadataDataTypeRegistryDataTypeIsRegistered                 func(unsafe.Pointer) uint8
 	_fnCMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType func(unsafe.Pointer) unsafe.Pointer
-	_fnCMMetadataDataTypeRegistryGetBaseDataTypes func() unsafe.Pointer
-	_fnCMMetadataDataTypeRegistryGetConformingDataTypes func(unsafe.Pointer) unsafe.Pointer
-	_fnCMMetadataDataTypeRegistryGetDataTypeDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnCMMetadataDataTypeRegistryRegisterDataType func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataDataTypeRegistryGetBaseDataTypes                     func() unsafe.Pointer
+	_fnCMMetadataDataTypeRegistryGetConformingDataTypes               func(unsafe.Pointer) unsafe.Pointer
+	_fnCMMetadataDataTypeRegistryGetDataTypeDescription               func(unsafe.Pointer) unsafe.Pointer
+	_fnCMMetadataDataTypeRegistryRegisterDataType                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer @abstract	Copies the contents of a CMMetadataFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator					Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	metadataFormatDescription	CMMetadataFormatDescriptionRef to be copied. @param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	blockBufferOut				Receives new CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering.
 	_fnCMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer @abstract	Creates a CMMetadataFormatDescription from a big-endian MetadataDescription data structure in a CMBlockBuffer. @param	allocator						Allocator to use for allocating the CMMetadataFormatDescription object. May be NULL. @param	metadataDescriptionBlockBuffer	CMBlockBuffer containing MetadataDescription data structure in big-endian byte ordering. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut			Receives new CMMetadataFormatDescriptionRef.
 	_fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData @abstract	Creates a CMMetadataFormatDescription from a big-endian MetadataDescription data structure. @param	allocator					Allocator to use for allocating the CMMetadataFormatDescription object. May be NULL. @param	metadataDescriptionData		MetadataDescription data structure in big-endian byte ordering. @param	size						Size of MetadataDescription data structure. @param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut		Receives new CMMetadataFormatDescriptionRef.
-	_fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataFormatDescriptionCreateWithKeys func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData                   func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataFormatDescriptionCreateWithKeys                                               func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataFormatDescriptionCreateWithMetadataSpecifications func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMMetadataFormatDescriptionGetIdentifiers func(unsafe.Pointer) unsafe.Pointer
-	_fnCMMetadataFormatDescriptionGetKeyWithLocalID func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnCMMuxedFormatDescriptionCreate func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataFormatDescriptionCreateWithMetadataSpecifications                             func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMMetadataFormatDescriptionGetIdentifiers                                               func(unsafe.Pointer) unsafe.Pointer
+	_fnCMMetadataFormatDescriptionGetKeyWithLocalID                                            func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnCMMuxedFormatDescriptionCreate                                                          func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function   CMPropagateAttachments @abstract   Copy all propagatable attachments from one buffer to another. @discussion CMPropagateAttachments is a convenience call that copies all attachments with a mode of kCMAttachmentMode_ShouldPropagate from one buffer to another.  Given a CVBufferRef, CMPropagateAttachments is equivalent to CVBufferPropagateAttachments. @param      source  CMAttachmentBearer to copy attachments from. @param      destination  CMAttachmentBearer to copy attachments to.
 	_fnCMPropagateAttachments func(unsafe.Pointer, unsafe.Pointer)
 	// @function   CMRemoveAllAttachments @abstract   Removes all attachments of a CMAttachmentBearer @discussion While CMRemoveAttachment removes a specific attachment identified by a key CMRemoveAllAttachments removes all attachments of a buffer and decrements their retain counts.  Given a CVBufferRef, CMRemoveAllAttachments is equivalent to CVBufferRemoveAllAttachments. @param      target  Target CMAttachmentBearer.
 	_fnCMRemoveAllAttachments func(unsafe.Pointer)
 	// @function   CMRemoveAttachment @abstract   Removes a specific attachment of a CMAttachmentBearer @discussion CMRemoveAttachment removes an attachment identified by a key. If found the attachment is removed and the retain count decremented.  Given a CVBufferRef, CMRemoveAttachment is equivalent to CVBufferRemoveAttachment. @param      target  Target CMAttachmentBearer. @param      key	Key in form of a CFString identifying the desired attachment.
-	_fnCMRemoveAttachment func(unsafe.Pointer, unsafe.Pointer)
-	_fnCMSampleBufferCallBlockForEachSample func(unsafe.Pointer, objc.Block) int
-	_fnCMSampleBufferCallForEachSample func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSampleBufferCopyPCMDataIntoAudioBufferList func(unsafe.Pointer, int32, int32, *coreaudiotypes.AudioBufferList) int
-	_fnCMSampleBufferCopySampleBufferForRange func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer) int
-	_fnCMSampleBufferCreate func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer) int
-	_fnCMSampleBufferCreateCopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSampleBufferCreateCopyWithNewTiming func(unsafe.Pointer, unsafe.Pointer, int, *CMSampleTimingInfo, unsafe.Pointer) int
-	_fnCMSampleBufferCreateForImageBuffer func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CMSampleTimingInfo, unsafe.Pointer) int
+	_fnCMRemoveAttachment                                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCMSampleBufferCallBlockForEachSample                       func(unsafe.Pointer, objc.Block) int
+	_fnCMSampleBufferCallForEachSample                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSampleBufferCopyPCMDataIntoAudioBufferList               func(unsafe.Pointer, int32, int32, *coreaudiotypes.AudioBufferList) int
+	_fnCMSampleBufferCopySampleBufferForRange                     func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer) int
+	_fnCMSampleBufferCreate                                       func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer) int
+	_fnCMSampleBufferCreateCopy                                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSampleBufferCreateCopyWithNewTiming                      func(unsafe.Pointer, unsafe.Pointer, int, *CMSampleTimingInfo, unsafe.Pointer) int
+	_fnCMSampleBufferCreateForImageBuffer                         func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CMSampleTimingInfo, unsafe.Pointer) int
 	_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, *CMSampleTimingInfo, unsafe.Pointer, objc.Block) int
 	// @function    CMSampleBufferCreateForTaggedBufferGroup @abstract    Creates a new CMSampleBuffer object with the specified CMTaggedBufferGroup. @param	allocator CFAllocator with which to create the CMSampleBuffer object. Pass kCFAllocatorDefault to use the default allocator. @param	taggedBufferGroup The CMTaggedBufferGroup to be stored in the sample buffer. The CMSampleBuffer will retain the CMTaggedBufferGroup internally. @param	sbufPTS Media time PTS of the sample buffer. @param	sbufDuration Media time duration of the sample buffer. Can be kCMTimeInvalid if not known or not defined. @param	formatDescription A CMTaggedBufferGroupFormatDescription describing the CMTaggedBufferGroup. You may create this with CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup. If you are creating a lot of CMSampleBuffers containing matching CMTaggedBufferGroups, it is more efficient to create the CMTaggedBufferGroupFormatDescription once and use it for all of the CMSampleBuffers. You may call CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup to confirm that a reused CMTaggedBufferGroupFormatDescription matches a new CMTaggedBufferGroup. @param	sBufOut Returned newly created CMSampleBuffer. @result	OSStatus with error or noErr if successful.
-	_fnCMSampleBufferCreateForTaggedBufferGroup func(unsafe.Pointer, unsafe.Pointer, CMTime, CMTime, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMSampleBufferCreateReady func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer) int
-	_fnCMSampleBufferCreateReadyWithImageBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CMSampleTimingInfo, unsafe.Pointer) int
-	_fnCMSampleBufferCreateWithMakeDataReadyHandler func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer, objc.Block) int
-	_fnCMSampleBufferDataIsReady func(unsafe.Pointer) uint8
+	_fnCMSampleBufferCreateForTaggedBufferGroup                func(unsafe.Pointer, unsafe.Pointer, CMTime, CMTime, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSampleBufferCreateReady                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer) int
+	_fnCMSampleBufferCreateReadyWithImageBuffer                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *CMSampleTimingInfo, unsafe.Pointer) int
+	_fnCMSampleBufferCreateWithMakeDataReadyHandler            func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, int, int, *CMSampleTimingInfo, int, *uint, unsafe.Pointer, objc.Block) int
+	_fnCMSampleBufferDataIsReady                               func(unsafe.Pointer) uint8
 	_fnCMSampleBufferGetAudioBufferListWithRetainedBlockBuffer func(unsafe.Pointer, *uint, *coreaudiotypes.AudioBufferList, uint, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int
-	_fnCMSampleBufferGetAudioStreamPacketDescriptions func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
-	_fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr func(unsafe.Pointer, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
-	_fnCMSampleBufferGetDataBuffer func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSampleBufferGetDecodeTimeStamp func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetDuration func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetFormatDescription func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSampleBufferGetImageBuffer func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSampleBufferGetNumSamples func(unsafe.Pointer) int
-	_fnCMSampleBufferGetOutputDecodeTimeStamp func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetOutputDuration func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetOutputPresentationTimeStamp func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetOutputSampleTimingInfoArray func(unsafe.Pointer, int, *CMSampleTimingInfo, *int) int
-	_fnCMSampleBufferGetPresentationTimeStamp func(unsafe.Pointer) CMTime
-	_fnCMSampleBufferGetSampleAttachmentsArray func(unsafe.Pointer, uint8) unsafe.Pointer
-	_fnCMSampleBufferGetSampleSize func(unsafe.Pointer, int) uint
-	_fnCMSampleBufferGetSampleSizeArray func(unsafe.Pointer, int, *uint, *int) int
-	_fnCMSampleBufferGetSampleTimingInfo func(unsafe.Pointer, int, *CMSampleTimingInfo) int
-	_fnCMSampleBufferGetSampleTimingInfoArray func(unsafe.Pointer, int, *CMSampleTimingInfo, *int) int
+	_fnCMSampleBufferGetAudioStreamPacketDescriptions          func(unsafe.Pointer, uint, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
+	_fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr       func(unsafe.Pointer, *coreaudiotypes.AudioStreamPacketDescription, *uint) int
+	_fnCMSampleBufferGetDataBuffer                             func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSampleBufferGetDecodeTimeStamp                        func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetDuration                               func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetFormatDescription                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSampleBufferGetImageBuffer                            func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSampleBufferGetNumSamples                             func(unsafe.Pointer) int
+	_fnCMSampleBufferGetOutputDecodeTimeStamp                  func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetOutputDuration                         func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetOutputPresentationTimeStamp            func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetOutputSampleTimingInfoArray            func(unsafe.Pointer, int, *CMSampleTimingInfo, *int) int
+	_fnCMSampleBufferGetPresentationTimeStamp                  func(unsafe.Pointer) CMTime
+	_fnCMSampleBufferGetSampleAttachmentsArray                 func(unsafe.Pointer, uint8) unsafe.Pointer
+	_fnCMSampleBufferGetSampleSize                             func(unsafe.Pointer, int) uint
+	_fnCMSampleBufferGetSampleSizeArray                        func(unsafe.Pointer, int, *uint, *int) int
+	_fnCMSampleBufferGetSampleTimingInfo                       func(unsafe.Pointer, int, *CMSampleTimingInfo) int
+	_fnCMSampleBufferGetSampleTimingInfoArray                  func(unsafe.Pointer, int, *CMSampleTimingInfo, *int) int
 	// @function    CMSampleBufferGetTaggedBufferGroup @abstract    Returns a CMSampleBuffer's TaggedBufferGroup of media data. @param sbuf    CMSampleBuffer being interrogated. @discussion  The caller does not own the returned CMTaggedBufferGroup, and must retain it explicitly if the caller needs to maintain a reference to it. @result      CMTaggedBufferGroup of media data. The result will be NULL if the CMSampleBuffer does not contain a CMTaggedBufferGroup, or if there is some other error.
-	_fnCMSampleBufferGetTaggedBufferGroup func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSampleBufferGetTotalSampleSize func(unsafe.Pointer) uint
-	_fnCMSampleBufferGetTypeID func() uint
-	_fnCMSampleBufferHasDataFailed func(unsafe.Pointer, *int) uint8
-	_fnCMSampleBufferInvalidate func(unsafe.Pointer) int
-	_fnCMSampleBufferIsValid func(unsafe.Pointer) uint8
-	_fnCMSampleBufferMakeDataReady func(unsafe.Pointer) int
-	_fnCMSampleBufferSetDataBuffer func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSampleBufferGetTaggedBufferGroup             func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSampleBufferGetTotalSampleSize               func(unsafe.Pointer) uint
+	_fnCMSampleBufferGetTypeID                        func() uint
+	_fnCMSampleBufferHasDataFailed                    func(unsafe.Pointer, *int) uint8
+	_fnCMSampleBufferInvalidate                       func(unsafe.Pointer) int
+	_fnCMSampleBufferIsValid                          func(unsafe.Pointer) uint8
+	_fnCMSampleBufferMakeDataReady                    func(unsafe.Pointer) int
+	_fnCMSampleBufferSetDataBuffer                    func(unsafe.Pointer, unsafe.Pointer) int
 	_fnCMSampleBufferSetDataBufferFromAudioBufferList func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *coreaudiotypes.AudioBufferList) int
-	_fnCMSampleBufferSetDataFailed func(unsafe.Pointer, int) int
-	_fnCMSampleBufferSetDataReady func(unsafe.Pointer) int
-	_fnCMSampleBufferSetInvalidateCallback func(unsafe.Pointer, unsafe.Pointer, uint64) int
-	_fnCMSampleBufferSetInvalidateHandler func(unsafe.Pointer, objc.Block) int
-	_fnCMSampleBufferSetOutputPresentationTimeStamp func(unsafe.Pointer, CMTime) int
-	_fnCMSampleBufferTrackDataReadiness func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSampleBufferSetDataFailed                    func(unsafe.Pointer, int) int
+	_fnCMSampleBufferSetDataReady                     func(unsafe.Pointer) int
+	_fnCMSampleBufferSetInvalidateCallback            func(unsafe.Pointer, unsafe.Pointer, uint64) int
+	_fnCMSampleBufferSetInvalidateHandler             func(unsafe.Pointer, objc.Block) int
+	_fnCMSampleBufferSetOutputPresentationTimeStamp   func(unsafe.Pointer, CMTime) int
+	_fnCMSampleBufferTrackDataReadiness               func(unsafe.Pointer, unsafe.Pointer) int
 	// @function   CMSetAttachment @abstract   Sets or adds a attachment of a CMAttachmentBearer @discussion You can attach any CF object to a CMAttachmentBearer object to store additional information. CMSetAttachment stores an attachment identified by a key. If the key doesn't exist, the attachment will be added. If the key does exist, the existing attachment will be replaced. In both cases the retain count of the attachment will be incremented. The value can be any CFType but nil has no defined behavior.  Given a CVBufferRef, CMSetAttachment is equivalent to CVBufferSetAttachment. @param      target  Target CMAttachmentBearer. @param      key     Key in form of a CFString identifying the desired attachment. @param      value	Attachment in form af a CF object. @param      attachmentMode	Specifies which attachment mode is desired for this attachment.   A particular attachment key may only exist in a single mode at a time.
 	_fnCMSetAttachment func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32)
 	// @function   CMSetAttachments @abstract   Sets a set of attachments for a CMAttachmentBearer @discussion CMSetAttachments is a convenience call that in turn calls CMSetAttachment for each key and value in the given dictionary. All key value pairs must be in the root level of the dictionary.  Given a CVBufferRef, CMSetAttachments is equivalent to CVBufferSetAttachments. @param      target  Target CMAttachmentBearer.
-	_fnCMSetAttachments func(unsafe.Pointer, unsafe.Pointer, uint32)
-	_fnCMSimpleQueueCreate func(unsafe.Pointer, int32, unsafe.Pointer) int
-	_fnCMSimpleQueueDequeue func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSimpleQueueEnqueue func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMSetAttachments         func(unsafe.Pointer, unsafe.Pointer, uint32)
+	_fnCMSimpleQueueCreate      func(unsafe.Pointer, int32, unsafe.Pointer) int
+	_fnCMSimpleQueueDequeue     func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSimpleQueueEnqueue     func(unsafe.Pointer, unsafe.Pointer) int
 	_fnCMSimpleQueueGetCapacity func(unsafe.Pointer) int32
-	_fnCMSimpleQueueGetCount func(unsafe.Pointer) int32
-	_fnCMSimpleQueueGetHead func(unsafe.Pointer) unsafe.Pointer
-	_fnCMSimpleQueueGetTypeID func() uint
-	_fnCMSimpleQueueReset func(unsafe.Pointer) int
+	_fnCMSimpleQueueGetCount    func(unsafe.Pointer) int32
+	_fnCMSimpleQueueGetHead     func(unsafe.Pointer) unsafe.Pointer
+	_fnCMSimpleQueueGetTypeID   func() uint
+	_fnCMSimpleQueueReset       func(unsafe.Pointer) int
 	// @function	CMSwapBigEndianClosedCaptionDescriptionToHost @abstract	Converts a ClosedCaptionDescription data structure from big-endian to host-endian in place. @param	closedCaptionDescriptionData	ClosedCaptionDescription data structure in big-endian byte ordering to be converted to host-endian byte ordering. @param	closedCaptionDescriptionSize	Size of ClosedCaptionDescription data structure.
 	_fnCMSwapBigEndianClosedCaptionDescriptionToHost func(*uint8, uint) int
 	// @function	CMSwapBigEndianImageDescriptionToHost @abstract	Converts an ImageDescription data structure from big-endian to host-endian in place. @param	imageDescriptionData			ImageDescription data structure in big-endian byte ordering to be converted to host-endian byte ordering. @param	imageDescriptionSize			Size of ImageDescription data structure.
@@ -292,11 +292,11 @@ var (
 	_fnCMSwapHostEndianTextDescriptionToBig func(*uint8, uint) int
 	// @function	CMSwapHostEndianTimeCodeDescriptionToBig @abstract	Converts a TimeCodeDescription data structure from host-endian to big-endian in place. @param	timeCodeDescriptionData			TimeCodeDescription data structure in host-endian byte ordering to be converted to big-endian byte ordering. @param	timeCodeDescriptionSize			Size of TimeCodeDescription data structure.
 	_fnCMSwapHostEndianTimeCodeDescriptionToBig func(*uint8, uint) int
-	_fnCMSyncConvertTime func(CMTime, unsafe.Pointer, unsafe.Pointer) CMTime
-	_fnCMSyncGetRelativeRate func(unsafe.Pointer, unsafe.Pointer) float64
-	_fnCMSyncGetRelativeRateAndAnchorTime func(unsafe.Pointer, unsafe.Pointer, *float64, *CMTime, *CMTime) int
-	_fnCMSyncGetTime func(unsafe.Pointer) CMTime
-	_fnCMSyncMightDrift func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMSyncConvertTime                        func(CMTime, unsafe.Pointer, unsafe.Pointer) CMTime
+	_fnCMSyncGetRelativeRate                    func(unsafe.Pointer, unsafe.Pointer) float64
+	_fnCMSyncGetRelativeRateAndAnchorTime       func(unsafe.Pointer, unsafe.Pointer, *float64, *CMTime, *CMTime) int
+	_fnCMSyncGetTime                            func(unsafe.Pointer) CMTime
+	_fnCMSyncMightDrift                         func(unsafe.Pointer, unsafe.Pointer) uint8
 	// @function	CMTagCategoryEqualToTagCategory @abstract   Tests if the CMTagCategory fields of two CMTags are equal. @discussion Function evaluates if two tag categories are structurally equivalent. This can also be performed using the == operator with the fields but this inline can be useful if one wants to catch invocations. @param	 	tag1 First CMTag to test. @param 		tag2 Second CMTag to test. @result		Boolean indicating if the tag categories are equal.
 	_fnCMTagCategoryEqualToTagCategory func(CMTag, CMTag) uint8
 	// @function	CMTagCategoryValueEqualToValue @abstract   Compares two CMTagCategory values for equality. @discussion Equality can also be tested by comparing the values with == but this is provided for consistency with other tests here. @param tag1 First CMTag to test for equality. @param tag2 Second CMTag to test for equality. @result		Boolean indicating if the tag values are equal.
@@ -332,7 +332,7 @@ var (
 	// @function	CMTagCollectionCreate @abstract   Creates a CMTagCollectionRef described by a number of parameters. @discussion This can be used to construct a CMTagCollectionRef from zero or more CMTags. @param allocator	CFAllocator to use to create the collection and internal data structures. @param tags			Zero or more CMTag structs to copy into the collection. May pass NULL if tagCount is also zero (0). @param tagCount		Number of tags in the 'tags' array. @param newCollectionOut		Address of a location to return the newly created CMTagCollectionRef.  The client is responsible for releasing the returned CMTagCollection. @result     OSStatus with error or noErr if successful.
 	_fnCMTagCollectionCreate func(unsafe.Pointer, *CMTag, int, unsafe.Pointer) int
 	// @function	CMTagCollectionCreateCopy @abstract   Creates a duplicate CMTagCollectionRef. @discussion This can be used to construct a CMTagCollectionRef that contains all the same tags as another collection. @param tagCollection	CMTagCollectionRef used to create the copy. @param allocator	CFAllocator used to create the copy. @param newCollectionCopyOut		Address of a location to return the newly created CMTagCollectionRef.  The client is responsible for releasing the returned CMTagCollection. @result     OSStatus with error or noErr if successful.
-	_fnCMTagCollectionCreateCopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTagCollectionCreateCopy       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMTagCollectionCreateDifference func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function CMTagCollectionCreateExclusiveOr @abstract Calculates the exclusive OR of two tag collections to produce a new tag collection. @discussion This routine determines tags that are in only one of two source tag collections and adds only those to produce a new tag collection. If both source tag collections have no tags in common, the produced tag collection will contain a union of both source tag collections. If both source tag collections have the same tags, the produced tag collection will be empty. @param tagCollection1 CMTagCollectionRef to use in the xor operation. @param tagCollection2 CMTagCollectionRef to use in the xor operation. @param tagCollectionOut The address of a CMTagCollectionRef that contains the xor of the tags from the two tag collections.  The client is responsible for releasing the returned CMTagCollection. @result OSStatus indicating if the operation succeeded.
 	_fnCMTagCollectionCreateExclusiveOr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -417,10 +417,10 @@ var (
 	// @function   CMTaggedBufferGroupCreate @abstract   Creates a new tagged buffer group. @param      allocator       The CFAllocator to use for allocating this buffer group.  May be NULL. @param      tagCollections  A CFArray of CMTagCollections for the buffers. @param      buffers         A CFArray of buffers, each of type CMSampleBuffer or CVPixelBuffer.  The group will retain these sample buffers and pixel buffers. The number of tagCollections must match the number of buffers. @param      groupOut        The newly created group will be placed here.  The caller has a responsibility to call CFRelease on it. @result     Returns noErr on success.
 	_fnCMTaggedBufferGroupCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function   CMTaggedBufferGroupCreateCombined @abstract   Creates a new tagged buffer group by combining all the tagged buffer groups in an array. @param      allocator       The CFAllocator to use for allocating this buffer group.  May be NULL. @param      taggedBufferGroups  A CFArray of CMTaggedBufferGroups. @param      groupOut        The newly created group will be placed here.  The caller has a responsibility to call CFRelease on it. @result     Returns noErr on success.
-	_fnCMTaggedBufferGroupCreateCombined func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTaggedBufferGroupCreateCombined                                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup                 func(unsafe.Pointer, unsafe.Pointer) uint8
 	// @function   CMTaggedBufferGroupGetCMSampleBufferAtIndex @abstract   Returns a CMSampleBuffer from a CMTaggedBufferGroup by sequential indexing. @param      group   The CMTaggedBufferGroupRef to retrieve the CMSampleBuffer from. @param      index   An index from 0 to count-1. @result     Returns the CMSampleBuffer, or NULL on failure (including if the buffer at this index is not a CMSampleBuffer).
 	_fnCMTaggedBufferGroupGetCMSampleBufferAtIndex func(unsafe.Pointer, int) unsafe.Pointer
 	// @function   CMTaggedBufferGroupGetCMSampleBufferForTag @abstract   Returns a CMSampleBuffer from a CMTaggedBufferGroup by looking for a unique match for the provided tag. @param      group   	The CMTaggedBufferGroupRef to retrieve the CMSampleBuffer from. @param      tag     	The tag to look up.  If more than one buffer's tag collection includes this tag, the lookup will fail. @param		indexOut 	On success, index of the returned CMSampleBuffer.  May be NULL. @result     Returns the CMSampleBuffer, or NULL on failure (including if the buffer at this index is not a CMSampleBuffer).
@@ -439,42 +439,42 @@ var (
 	_fnCMTaggedBufferGroupGetNumberOfMatchesForTagCollection func(unsafe.Pointer, unsafe.Pointer) int
 	// @function   CMTaggedBufferGroupGetTagCollectionAtIndex @abstract   Returns a CMTagCollection from a CMTaggedBufferGroup by sequential indexing. @param      group   The CMTaggedBufferGroupRef to retrieve the tag collection from. @param      index   An index from 0 to count-1. @result     Returns the tag collection, or NULL on failure.
 	_fnCMTaggedBufferGroupGetTagCollectionAtIndex func(unsafe.Pointer, int) unsafe.Pointer
-	_fnCMTaggedBufferGroupGetTypeID func() uint
+	_fnCMTaggedBufferGroupGetTypeID               func() uint
 	// @function	CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer @abstract	Copies the contents of a CMTextFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator						Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	textFormatDescription			CMTextFormatDescription to be copied. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	blockBufferOut					Receives new CMBlockBuffer containing TextDescription data structure in big-endian byte ordering.
 	_fnCMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer @abstract	Creates a CMTextFormatDescription from a big-endian TextDescription data structure in a CMBlockBuffer. @param	allocator						Allocator to use for allocating the CMTextFormatDescription object. May be NULL. @param	textDescriptionBlockBuffer		CMBlockBuffer containing TextDescription data structure in big-endian byte ordering. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	mediaType						Pass kCMMediaType_Text or kCMMediaType_Subtitle. @param	formatDescriptionOut			Receives new CMTextFormatDescription.
 	_fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
 	// @function	CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData @abstract	Creates a CMTextFormatDescription from a big-endian TextDescription data structure. @param	allocator						Allocator to use for allocating the CMTextFormatDescription object. May be NULL. @param	textDescriptionData				TextDescription data structure in big-endian byte ordering. @param	size							Size of TextDescription data structure. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	mediaType						Pass kCMMediaType_Text or kCMMediaType_Subtitle. @param	formatDescriptionOut			Receives new CMTextFormatDescription.
 	_fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnCMTextFormatDescriptionGetDefaultStyle func(unsafe.Pointer, *uint16, *uint8, *uint8, *uint8, *float64, *float64) int
-	_fnCMTextFormatDescriptionGetDefaultTextBox func(unsafe.Pointer, uint8, float64, *corefoundation.CGRect) int
-	_fnCMTextFormatDescriptionGetDisplayFlags func(unsafe.Pointer, *uint32) int
-	_fnCMTextFormatDescriptionGetFontName func(unsafe.Pointer, uint16, unsafe.Pointer) int
-	_fnCMTextFormatDescriptionGetJustification func(unsafe.Pointer, *int8, *int8) int
-	_fnCMTimeAbsoluteValue func(CMTime) CMTime
-	_fnCMTimeAdd func(CMTime, CMTime) CMTime
+	_fnCMTextFormatDescriptionGetDefaultStyle                        func(unsafe.Pointer, *uint16, *uint8, *uint8, *uint8, *float64, *float64) int
+	_fnCMTextFormatDescriptionGetDefaultTextBox                      func(unsafe.Pointer, uint8, float64, *corefoundation.CGRect) int
+	_fnCMTextFormatDescriptionGetDisplayFlags                        func(unsafe.Pointer, *uint32) int
+	_fnCMTextFormatDescriptionGetFontName                            func(unsafe.Pointer, uint16, unsafe.Pointer) int
+	_fnCMTextFormatDescriptionGetJustification                       func(unsafe.Pointer, *int8, *int8) int
+	_fnCMTimeAbsoluteValue                                           func(CMTime) CMTime
+	_fnCMTimeAdd                                                     func(CMTime, CMTime) CMTime
 	// @function	CMTimeClampToRange @abstract	For a given CMTime and CMTimeRange, returns the nearest CMTime inside that time range. @result		A CMTime structure inside the given time range. @discussion	Times inside the given time range will be returned unmodified. Times before the start and after the end time of the time range will return the start and end time of the range respectively. If the CMTimeRange argument is empty, an invalid CMTime will be returned. If the given CMTime is invalid, the returned CMTime will be invalid,
 	_fnCMTimeClampToRange func(CMTime, CMTimeRange) CMTime
 	// @function	CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer @abstract	Copies the contents of a CMTimeCodeFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator					Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	timeCodeFormatDescription	CMTimeCodeFormatDescription to be copied. @param	flavor						Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	blockBufferOut				Receives new CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering.
 	_fnCMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimeCodeFormatDescriptionCreate func(unsafe.Pointer, uint, CMTime, uint32, uint32, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimeCodeFormatDescriptionCreate                                        func(unsafe.Pointer, uint, CMTime, uint32, uint32, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer @abstract	Creates a CMTimeCodeFormatDescription from a big-endian TimeCodeDescription data structure in a CMBlockBuffer. @param	allocator						Allocator to use for allocating the CMTimeCodeFormatDescription object. May be NULL. @param	timeCodeDescriptionBlockBuffer	CMBlockBuffer containing TimeCodeDescription data structure in big-endian byte ordering. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut			Receives new CMTimeCodeFormatDescription.
 	_fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData @abstract	Creates a CMTimeCodeFormatDescription from a big-endian TimeCodeDescription data structure. @param	allocator						Allocator to use for allocating the CMTimeCodeFormatDescription object. May be NULL. @param	timeCodeDescriptionData			TimeCodeDescription data structure in big-endian byte ordering. @param	size							Size of TimeCodeDescription data structure. @param	flavor							Reserved for future use. Pass NULL for QuickTime Movie or ISO flavor. @param	formatDescriptionOut			Receives new CMTimeCodeFormatDescription.
 	_fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimeCodeFormatDescriptionGetFrameDuration func(unsafe.Pointer) CMTime
-	_fnCMTimeCodeFormatDescriptionGetFrameQuanta func(unsafe.Pointer) uint32
-	_fnCMTimeCodeFormatDescriptionGetTimeCodeFlags func(unsafe.Pointer) uint32
-	_fnCMTimeCompare func(CMTime, CMTime) int32
-	_fnCMTimeConvertScale func(CMTime, int32, CMTimeRoundingMethod) CMTime
-	_fnCMTimeCopyAsDictionary func(CMTime, unsafe.Pointer) unsafe.Pointer
-	_fnCMTimeCopyDescription func(unsafe.Pointer, CMTime) unsafe.Pointer
-	_fnCMTimeFoldIntoRange func(CMTime, CMTimeRange) CMTime
-	_fnCMTimeGetSeconds func(CMTime) float64
-	_fnCMTimeMake func(int64, int32) CMTime
-	_fnCMTimeMakeFromDictionary func(unsafe.Pointer) CMTime
-	_fnCMTimeMakeWithEpoch func(int64, int32, int64) CMTime
-	_fnCMTimeMakeWithSeconds func(float64, int32) CMTime
+	_fnCMTimeCodeFormatDescriptionGetFrameDuration                           func(unsafe.Pointer) CMTime
+	_fnCMTimeCodeFormatDescriptionGetFrameQuanta                             func(unsafe.Pointer) uint32
+	_fnCMTimeCodeFormatDescriptionGetTimeCodeFlags                           func(unsafe.Pointer) uint32
+	_fnCMTimeCompare                                                         func(CMTime, CMTime) int32
+	_fnCMTimeConvertScale                                                    func(CMTime, int32, CMTimeRoundingMethod) CMTime
+	_fnCMTimeCopyAsDictionary                                                func(CMTime, unsafe.Pointer) unsafe.Pointer
+	_fnCMTimeCopyDescription                                                 func(unsafe.Pointer, CMTime) unsafe.Pointer
+	_fnCMTimeFoldIntoRange                                                   func(CMTime, CMTimeRange) CMTime
+	_fnCMTimeGetSeconds                                                      func(CMTime) float64
+	_fnCMTimeMake                                                            func(int64, int32) CMTime
+	_fnCMTimeMakeFromDictionary                                              func(unsafe.Pointer) CMTime
+	_fnCMTimeMakeWithEpoch                                                   func(int64, int32, int64) CMTime
+	_fnCMTimeMakeWithSeconds                                                 func(float64, int32) CMTime
 	// @function	CMTimeMapDurationFromRangeToRange @abstract	Translates a duration through a mapping from CMTimeRange to CMTimeRange. @result		A CMTime structure representing the translated duration. @discussion	The duration will be scaled in proportion to the ratio between the ranges' durations: result = dur*(toRange.duration/fromRange.duration) If dur does not have the epoch zero, an invalid CMTime will be returned.
 	_fnCMTimeMapDurationFromRangeToRange func(CMTime, CMTimeRange, CMTimeRange) CMTime
 	// @function	CMTimeMapTimeFromRangeToRange @abstract	Translates a time through a mapping from CMTimeRange to CMTimeRange. @result		A CMTime structure representing the translated time. @discussion	The start and end time of fromRange will be mapped to the start and end time of toRange respectively. Other times will be mapped linearly, using the formula: result = (t-fromRange.start)*(toRange.duration/fromRange.duration)+toRange.start If either CMTimeRange argument is empty, an invalid CMTime will be returned. If t does not have the same epoch as fromRange.start, an invalid CMTime will be returned. If both fromRange and toRange have duration kCMTimePositiveInfinity, t will be offset relative to the differences between their starts, but not scaled.
@@ -490,12 +490,12 @@ var (
 	// @function	CMTimeMappingMakeFromDictionary @abstract   Reconstitutes a CMTimeMapping struct from a CFDictionary previously created by CMTimeMappingCopyAsDictionary. @discussion This is useful when getting CMTimeMappings from CF container types.  If the CFDictionary does not have the requisite keyed values, an invalid time mapping is returned. @result		The created CMTimeMapping.
 	_fnCMTimeMappingMakeFromDictionary func(unsafe.Pointer) CMTimeMapping
 	// @function	CMTimeMappingShow @abstract   Prints a description of a CMTimeMapping (just like CFShow). @discussion This is most useful from within gdb.
-	_fnCMTimeMappingShow func(CMTimeMapping)
-	_fnCMTimeMaximum func(CMTime, CMTime) CMTime
-	_fnCMTimeMinimum func(CMTime, CMTime) CMTime
-	_fnCMTimeMultiply func(CMTime, int32) CMTime
+	_fnCMTimeMappingShow       func(CMTimeMapping)
+	_fnCMTimeMaximum           func(CMTime, CMTime) CMTime
+	_fnCMTimeMinimum           func(CMTime, CMTime) CMTime
+	_fnCMTimeMultiply          func(CMTime, int32) CMTime
 	_fnCMTimeMultiplyByFloat64 func(CMTime, float64) CMTime
-	_fnCMTimeMultiplyByRatio func(CMTime, int32, int32) CMTime
+	_fnCMTimeMultiplyByRatio   func(CMTime, int32, int32) CMTime
 	// @function	CMTimeRangeContainsTime @abstract	Indicates whether a time is contained within a time range. @discussion	This function returns a Boolean value that indicates whether the time specified by the <i>time</i> parameter is contained within the range specified by the <i>range</i> parameter. @result     Returns true if the specified time is contained within the specified time range, false if it is not.
 	_fnCMTimeRangeContainsTime func(CMTimeRange, CMTime) uint8
 	// @function	CMTimeRangeContainsTimeRange @abstract	Indicates whether a time range is contained within a time range. @discussion	This function returns a Boolean value that indicates whether the time range specified by the <i>range</i> parameter contains the range specified by the <i>otherRange</i> parameter. @result     Returns true if the second time range is contained within the first time range, false if it is not.
@@ -519,80 +519,80 @@ var (
 	// @function	CMTimeRangeMakeFromDictionary @abstract   Reconstitutes a CMTimeRange struct from a CFDictionary previously created by CMTimeRangeCopyAsDictionary. @discussion This is useful when getting CMTimeRanges from CF container types.  If the CFDictionary does not have the requisite keyed values, an invalid time range is returned. @result		The created CMTimeRange.
 	_fnCMTimeRangeMakeFromDictionary func(unsafe.Pointer) CMTimeRange
 	// @function	CMTimeRangeShow @abstract   Prints a description of the CMTimeRange (just like CFShow). @discussion This is most useful from within gdb.
-	_fnCMTimeRangeShow func(CMTimeRange)
-	_fnCMTimeShow func(CMTime)
-	_fnCMTimeSubtract func(CMTime, CMTime) CMTime
-	_fnCMTimebaseAddTimer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimeRangeShow                  func(CMTimeRange)
+	_fnCMTimeShow                       func(CMTime)
+	_fnCMTimeSubtract                   func(CMTime, CMTime) CMTime
+	_fnCMTimebaseAddTimer               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMTimebaseAddTimerDispatchSource func(unsafe.Pointer, objc.ID) int
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseCopyMaster func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseCopyMasterClock func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseCopyMasterTimebase func(unsafe.Pointer) unsafe.Pointer
-	_fnCMTimebaseCopySource func(unsafe.Pointer) unsafe.Pointer
-	_fnCMTimebaseCopySourceClock func(unsafe.Pointer) unsafe.Pointer
+	_fnCMTimebaseCopySource         func(unsafe.Pointer) unsafe.Pointer
+	_fnCMTimebaseCopySourceClock    func(unsafe.Pointer) unsafe.Pointer
 	_fnCMTimebaseCopySourceTimebase func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseCopyUltimateMasterClock func(unsafe.Pointer) unsafe.Pointer
 	_fnCMTimebaseCopyUltimateSourceClock func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnCMTimebaseCreateWithMasterClock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnCMTimebaseCreateWithMasterTimebase func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimebaseCreateWithSourceClock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseCreateWithSourceClock    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMTimebaseCreateWithSourceTimebase func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimebaseGetEffectiveRate func(unsafe.Pointer) float64
-// Deprecated: since macOS 10.11.
+	_fnCMTimebaseGetEffectiveRate         func(unsafe.Pointer) float64
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseGetMaster func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.11.
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseGetMasterClock func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: since macOS 10.11.
-	_fnCMTimebaseGetMasterTimebase func(unsafe.Pointer) unsafe.Pointer
-	_fnCMTimebaseGetRate func(unsafe.Pointer) float64
-	_fnCMTimebaseGetTime func(unsafe.Pointer) CMTime
-	_fnCMTimebaseGetTimeAndRate func(unsafe.Pointer, *CMTime, *float64) int
+	// Deprecated: since macOS 10.11.
+	_fnCMTimebaseGetMasterTimebase    func(unsafe.Pointer) unsafe.Pointer
+	_fnCMTimebaseGetRate              func(unsafe.Pointer) float64
+	_fnCMTimebaseGetTime              func(unsafe.Pointer) CMTime
+	_fnCMTimebaseGetTimeAndRate       func(unsafe.Pointer, *CMTime, *float64) int
 	_fnCMTimebaseGetTimeWithTimeScale func(unsafe.Pointer, int32, CMTimeRoundingMethod) CMTime
-	_fnCMTimebaseGetTypeID func() uint
-// Deprecated: since macOS 10.11.
+	_fnCMTimebaseGetTypeID            func() uint
+	// Deprecated: since macOS 10.11.
 	_fnCMTimebaseGetUltimateMasterClock func(unsafe.Pointer) unsafe.Pointer
 	// @function	CMTimebaseNotificationBarrier @abstract	Requests that the timebase wait until it is not posting any notifications.
-	_fnCMTimebaseNotificationBarrier func(unsafe.Pointer) int
-	_fnCMTimebaseRemoveTimer func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseNotificationBarrier       func(unsafe.Pointer) int
+	_fnCMTimebaseRemoveTimer               func(unsafe.Pointer, unsafe.Pointer) int
 	_fnCMTimebaseRemoveTimerDispatchSource func(unsafe.Pointer, objc.ID) int
-	_fnCMTimebaseSetAnchorTime func(unsafe.Pointer, CMTime, CMTime) int
-// Deprecated: since macOS 10.10.
+	_fnCMTimebaseSetAnchorTime             func(unsafe.Pointer, CMTime, CMTime) int
+	// Deprecated: since macOS 10.10.
 	_fnCMTimebaseSetMasterClock func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: since macOS 10.10.
-	_fnCMTimebaseSetMasterTimebase func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimebaseSetRate func(unsafe.Pointer, float64) int
-	_fnCMTimebaseSetRateAndAnchorTime func(unsafe.Pointer, float64, CMTime, CMTime) int
-	_fnCMTimebaseSetSourceClock func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimebaseSetSourceTimebase func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMTimebaseSetTime func(unsafe.Pointer, CMTime) int
-	_fnCMTimebaseSetTimerDispatchSourceNextFireTime func(unsafe.Pointer, objc.ID, CMTime, uint32) int
+	// Deprecated: since macOS 10.10.
+	_fnCMTimebaseSetMasterTimebase                       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseSetRate                                 func(unsafe.Pointer, float64) int
+	_fnCMTimebaseSetRateAndAnchorTime                    func(unsafe.Pointer, float64, CMTime, CMTime) int
+	_fnCMTimebaseSetSourceClock                          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseSetSourceTimebase                       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseSetTime                                 func(unsafe.Pointer, CMTime) int
+	_fnCMTimebaseSetTimerDispatchSourceNextFireTime      func(unsafe.Pointer, objc.ID, CMTime, uint32) int
 	_fnCMTimebaseSetTimerDispatchSourceToFireImmediately func(unsafe.Pointer, objc.ID) int
-	_fnCMTimebaseSetTimerNextFireTime func(unsafe.Pointer, unsafe.Pointer, CMTime, uint32) int
-	_fnCMTimebaseSetTimerToFireImmediately func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCMTimebaseSetTimerNextFireTime                    func(unsafe.Pointer, unsafe.Pointer, CMTime, uint32) int
+	_fnCMTimebaseSetTimerToFireImmediately               func(unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer @abstract	Copies the contents of a CMVideoFormatDescription to a CMBlockBuffer in big-endian byte ordering. @discussion	On return, the caller owns the returned CMBlockBuffer, and must release it when done with it. Note that the dataRefIndex field of the SampleDescription is intentionally filled with garbage values (0xFFFF).  The caller must overwrite these values with a valid dataRefIndex if writing the SampleDescription to a QuickTime/ISO file. @param	allocator						Allocator to use for allocating the CMBlockBuffer object. May be NULL. @param	videoFormatDescription			CMVideoFormatDescription to be copied. @param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding(). @param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	blockBufferOut					Receives new CMBlockBuffer containing ImageDescription data structure in big-endian byte ordering.
 	_fnCMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function    CMVideoFormatDescriptionCopyTagCollectionArray @abstract    Copies the multi-image encoding properties as an array of CMTagCollections. @param formatDescription    CMVideoFormatDescription being interrogated. @param tagCollectionsOut    Returned TagCollections with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType. @discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it. This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription. The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs. It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups. @result      Array of CMTagCollections. The result will be NULL if the CMVideoFormatDescription does not contain multi-image encoding parameters, or if there is some other error.
 	_fnCMVideoFormatDescriptionCopyTagCollectionArray func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreate func(unsafe.Pointer, uint, int32, int32, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreateForImageBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionCreate                 func(unsafe.Pointer, uint, int32, int32, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionCreateForImageBuffer   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer @abstract	Creates a CMVideoFormatDescription from a big-endian ImageDescription data structure in a CMBlockBuffer. @param	allocator						Allocator to use for allocating the CMVideoFormatDescription object. May be NULL. @param	imageDescriptionBlockBuffer		CMBlockBuffer containing ImageDescription data structure in big-endian byte ordering. @param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding(). @param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	formatDescriptionOut			Receives new CMVideoFormatDescription.
 	_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData @abstract	Creates a CMVideoFormatDescription from a big-endian ImageDescription data structure. @param	allocator						Allocator to use for allocating the CMVideoFormatDescription object. May be NULL. @param	imageDescriptionData			ImageDescription data structure in big-endian byte ordering. @param	size							Size of ImageDescription data structure. @param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding(). @param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	formatDescriptionOut			Receives new CMVideoFormatDescription.
 	_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData func(unsafe.Pointer, *uint8, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreateFromH264ParameterSets func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionGetCleanAperture func(unsafe.Pointer, uint8) corefoundation.CGRect
-	_fnCMVideoFormatDescriptionGetDimensions func(unsafe.Pointer) CMVideoDimensions
-	_fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers func() unsafe.Pointer
-	_fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
-	_fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
-	_fnCMVideoFormatDescriptionGetPresentationDimensions func(unsafe.Pointer, uint8, uint8) corefoundation.CGSize
-	_fnCMVideoFormatDescriptionMatchesImageBuffer func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCMVideoFormatDescriptionCreateFromH264ParameterSets             func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets             func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionGetCleanAperture                        func(unsafe.Pointer, uint8) corefoundation.CGRect
+	_fnCMVideoFormatDescriptionGetDimensions                           func(unsafe.Pointer) CMVideoDimensions
+	_fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers  func() unsafe.Pointer
+	_fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex              func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
+	_fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex              func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
+	_fnCMVideoFormatDescriptionGetPresentationDimensions               func(unsafe.Pointer, uint8, uint8) corefoundation.CGSize
+	_fnCMVideoFormatDescriptionMatchesImageBuffer                      func(unsafe.Pointer, unsafe.Pointer) uint8
 )
 
 func CMAudioDeviceClockCreate(allocator unsafe.Pointer, deviceUID unsafe.Pointer, clockOut unsafe.Pointer) int {
@@ -2369,4 +2369,3 @@ func CMVideoFormatDescriptionGetPresentationDimensions(videoDesc unsafe.Pointer,
 func CMVideoFormatDescriptionMatchesImageBuffer(desc unsafe.Pointer, imageBuffer unsafe.Pointer) uint8 {
 	return _fnCMVideoFormatDescriptionMatchesImageBuffer(desc, imageBuffer)
 }
-

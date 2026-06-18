@@ -219,4 +219,3 @@ func SharedManager() *WebAuthenticationSessionWebBrowserSessionManager {
 	}
 	return &WebAuthenticationSessionWebBrowserSessionManager{inner: _r}
 }
-

@@ -221,9 +221,13 @@ func (x *MTRClusterChannel) SkipChannelWithParamsExpectedValuesExpectedValueInte
 	x.inner.SkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterChannel) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterChannel) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterChannel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterChannel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterChannelable is the interface implemented by [MTRClusterChannel], for mocking and DI.
 type MTRClusterChannelable interface {
@@ -249,4 +253,3 @@ type MTRClusterChannelable interface {
 }
 
 var _ MTRClusterChannelable = (*MTRClusterChannel)(nil)
-

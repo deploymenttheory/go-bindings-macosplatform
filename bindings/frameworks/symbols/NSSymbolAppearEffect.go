@@ -15,11 +15,11 @@ type NSSymbolAppearEffect struct {
 }
 
 var (
-	_clsNSSymbolAppearEffect = _objcClass("NSSymbolAppearEffect")
-	_nSSymbolAppearEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolAppearEffectSelAppearUpEffect = objc.RegisterName("appearUpEffect")
-	_nSSymbolAppearEffectSelAppearDownEffect = objc.RegisterName("appearDownEffect")
-	_nSSymbolAppearEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
+	_clsNSSymbolAppearEffect                      = _objcClass("NSSymbolAppearEffect")
+	_nSSymbolAppearEffectSelEffect                = objc.RegisterName("effect")
+	_nSSymbolAppearEffectSelAppearUpEffect        = objc.RegisterName("appearUpEffect")
+	_nSSymbolAppearEffectSelAppearDownEffect      = objc.RegisterName("appearDownEffect")
+	_nSSymbolAppearEffectSelEffectWithByLayer     = objc.RegisterName("effectWithByLayer")
 	_nSSymbolAppearEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
 )
 
@@ -36,35 +36,44 @@ func NSSymbolAppearEffectFromID(id objc.ID) *NSSymbolAppearEffect {
 // The default appear effect, determined by the system.
 func NSSymbolAppearEffectEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
 // Convenience initializer for an appear effect that appears scaling up.
 func NSSymbolAppearEffectAppearUpEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelAppearUpEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
 // Convenience initializer for an appear effect that appears scaling down.
 func NSSymbolAppearEffectAppearDownEffect() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolAppearEffect), _nSSymbolAppearEffectSelAppearDownEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
 func (o *NSSymbolAppearEffect) EffectWithByLayer() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolAppearEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAppearEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolAppearEffect) EffectWithWholeSymbol() *NSSymbolAppearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolAppearEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolAppearEffectFromID(_ret)
 }
-

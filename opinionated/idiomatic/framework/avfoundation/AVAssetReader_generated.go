@@ -126,4 +126,3 @@ type AssetReaderable interface {
 }
 
 var _ AssetReaderable = (*AssetReader)(nil)
-

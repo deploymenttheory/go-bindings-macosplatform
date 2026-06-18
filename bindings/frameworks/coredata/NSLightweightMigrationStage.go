@@ -16,9 +16,9 @@ type NSLightweightMigrationStage struct {
 }
 
 var (
-	_clsNSLightweightMigrationStage = _objcClass("NSLightweightMigrationStage")
+	_clsNSLightweightMigrationStage                         = _objcClass("NSLightweightMigrationStage")
 	_nSLightweightMigrationStageSelInitWithVersionChecksums = objc.RegisterName("initWithVersionChecksums:")
-	_nSLightweightMigrationStageSelVersionChecksums = objc.RegisterName("versionChecksums")
+	_nSLightweightMigrationStageSelVersionChecksums         = objc.RegisterName("versionChecksums")
 )
 
 func NSLightweightMigrationStageFromID(id objc.ID) *NSLightweightMigrationStage {
@@ -33,7 +33,9 @@ func NSLightweightMigrationStageFromID(id objc.ID) *NSLightweightMigrationStage 
 
 func (o *NSLightweightMigrationStage) InitWithVersionChecksums(versionChecksums *foundation.NSArray[*foundation.NSString]) *NSLightweightMigrationStage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLightweightMigrationStageSelInitWithVersionChecksums, versionChecksums)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLightweightMigrationStageFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *NSLightweightMigrationStage) VersionChecksums() *foundation.NSArray[*fo
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSLightweightMigrationStageSelVersionChecksums)
 	return _ret
 }
-

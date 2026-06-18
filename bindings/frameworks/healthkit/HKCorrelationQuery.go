@@ -18,10 +18,10 @@ type HKCorrelationQuery struct {
 }
 
 var (
-	_clsHKCorrelationQuery = _objcClass("HKCorrelationQuery")
+	_clsHKCorrelationQuery                                                = _objcClass("HKCorrelationQuery")
 	_hKCorrelationQuerySelInitWithTypePredicateSamplePredicatesCompletion = objc.RegisterName("initWithType:predicate:samplePredicates:completion:")
-	_hKCorrelationQuerySelCorrelationType = objc.RegisterName("correlationType")
-	_hKCorrelationQuerySelSamplePredicates = objc.RegisterName("samplePredicates")
+	_hKCorrelationQuerySelCorrelationType                                 = objc.RegisterName("correlationType")
+	_hKCorrelationQuerySelSamplePredicates                                = objc.RegisterName("samplePredicates")
 )
 
 func HKCorrelationQueryFromID(id objc.ID) *HKCorrelationQuery {
@@ -50,13 +50,17 @@ func (o *HKCorrelationQuery) InitWithTypePredicateSamplePredicatesCompletion(cor
 		defer __block_completion.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationQuerySelInitWithTypePredicateSamplePredicatesCompletion, correlationType.Ptr(), predicate.Ptr(), samplePredicates, __block_completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCorrelationQueryFromID(_ret)
 }
 
 func (o *HKCorrelationQuery) CorrelationType() *HKCorrelationType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCorrelationQuerySelCorrelationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCorrelationTypeFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *HKCorrelationQuery) SamplePredicates() *foundation.NSDictionary[*HKSamp
 	_ret := objc.Send[*foundation.NSDictionary[*HKSampleType, *foundation.NSPredicate]](o.Ptr(), _hKCorrelationQuerySelSamplePredicates)
 	return _ret
 }
-

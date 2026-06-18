@@ -76,4 +76,3 @@ type CircleObstacleable interface {
 }
 
 var _ CircleObstacleable = (*CircleObstacle)(nil)
-

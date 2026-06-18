@@ -129,4 +129,3 @@ type PasteboardItemable interface {
 }
 
 var _ PasteboardItemable = (*PasteboardItem)(nil)
-

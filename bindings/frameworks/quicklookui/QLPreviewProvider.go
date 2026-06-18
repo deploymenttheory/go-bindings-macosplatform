@@ -26,4 +26,3 @@ func QLPreviewProviderFromID(id objc.ID) *QLPreviewProvider {
 	purego.Track(o)
 	return o
 }
-

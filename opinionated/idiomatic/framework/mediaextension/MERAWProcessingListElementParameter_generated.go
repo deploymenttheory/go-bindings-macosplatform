@@ -16,7 +16,9 @@ type RAWProcessingListElementParameter struct {
 }
 
 // Unwrap returns the underlying [raw.MERAWProcessingListElementParameter].
-func (x *RAWProcessingListElementParameter) Unwrap() *raw.MERAWProcessingListElementParameter { return x.inner }
+func (x *RAWProcessingListElementParameter) Unwrap() *raw.MERAWProcessingListElementParameter {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *RAWProcessingListElementParameter) ListElementID() int {
 	return x.inner.ListElementID()
 }
 
-func (x *RAWProcessingListElementParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingListElementParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingListElementParameterable is the interface implemented by [RAWProcessingListElementParameter], for mocking and DI.
 type RAWProcessingListElementParameterable interface {
@@ -58,4 +62,3 @@ type RAWProcessingListElementParameterable interface {
 }
 
 var _ RAWProcessingListElementParameterable = (*RAWProcessingListElementParameter)(nil)
-

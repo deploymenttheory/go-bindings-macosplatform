@@ -16,17 +16,17 @@ type SCNReferenceNode struct {
 }
 
 var (
-	_clsSCNReferenceNode = _objcClass("SCNReferenceNode")
-	_sCNReferenceNodeSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sCNReferenceNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsSCNReferenceNode                     = _objcClass("SCNReferenceNode")
+	_sCNReferenceNodeSelInitWithURL          = objc.RegisterName("initWithURL:")
+	_sCNReferenceNodeSelInitWithCoder        = objc.RegisterName("initWithCoder:")
 	_sCNReferenceNodeSelReferenceNodeWithURL = objc.RegisterName("referenceNodeWithURL:")
-	_sCNReferenceNodeSelLoad = objc.RegisterName("load")
-	_sCNReferenceNodeSelUnload = objc.RegisterName("unload")
-	_sCNReferenceNodeSelReferenceURL = objc.RegisterName("referenceURL")
-	_sCNReferenceNodeSelSetReferenceURL = objc.RegisterName("setReferenceURL:")
-	_sCNReferenceNodeSelLoadingPolicy = objc.RegisterName("loadingPolicy")
-	_sCNReferenceNodeSelSetLoadingPolicy = objc.RegisterName("setLoadingPolicy:")
-	_sCNReferenceNodeSelIsLoaded = objc.RegisterName("isLoaded")
+	_sCNReferenceNodeSelLoad                 = objc.RegisterName("load")
+	_sCNReferenceNodeSelUnload               = objc.RegisterName("unload")
+	_sCNReferenceNodeSelReferenceURL         = objc.RegisterName("referenceURL")
+	_sCNReferenceNodeSelSetReferenceURL      = objc.RegisterName("setReferenceURL:")
+	_sCNReferenceNodeSelLoadingPolicy        = objc.RegisterName("loadingPolicy")
+	_sCNReferenceNodeSelSetLoadingPolicy     = objc.RegisterName("setLoadingPolicy:")
+	_sCNReferenceNodeSelIsLoaded             = objc.RegisterName("isLoaded")
 )
 
 func SCNReferenceNodeFromID(id objc.ID) *SCNReferenceNode {
@@ -42,21 +42,27 @@ func SCNReferenceNodeFromID(id objc.ID) *SCNReferenceNode {
 // @method initWithURL: @abstract Creates a reference node with a url.
 func (o *SCNReferenceNode) InitWithURL(referenceURL *foundation.NSURL) *SCNReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNReferenceNodeSelInitWithURL, referenceURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNReferenceNodeFromID(_ret)
 }
 
 // @method initWithCoder: @abstract Support coding and decoding via NSKeyedArchiver.
 func (o *SCNReferenceNode) InitWithCoder(aDecoder *foundation.NSCoder) *SCNReferenceNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNReferenceNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNReferenceNodeFromID(_ret)
 }
 
 // @method referenceNodeWithURL: @abstract Creates a reference node with a url.
 func SCNReferenceNodeReferenceNodeWithURL(referenceURL *foundation.NSURL) *SCNReferenceNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNReferenceNode), _sCNReferenceNodeSelReferenceNodeWithURL, referenceURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNReferenceNodeFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *SCNReferenceNode) Unload() {
 // @property referenceURL @abstract Specifies the url to resolve.
 func (o *SCNReferenceNode) ReferenceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNReferenceNodeSelReferenceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -96,4 +104,3 @@ func (o *SCNReferenceNode) IsLoaded() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCNReferenceNodeSelIsLoaded)
 	return _ret
 }
-

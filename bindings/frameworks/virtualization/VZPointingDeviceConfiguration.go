@@ -26,4 +26,3 @@ func VZPointingDeviceConfigurationFromID(id objc.ID) *VZPointingDeviceConfigurat
 	purego.Track(o)
 	return o
 }
-

@@ -56,4 +56,3 @@ type GraphDeviceable interface {
 }
 
 var _ GraphDeviceable = (*GraphDevice)(nil)
-

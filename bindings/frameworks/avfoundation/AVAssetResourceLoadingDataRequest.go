@@ -16,12 +16,12 @@ type AVAssetResourceLoadingDataRequest struct {
 }
 
 var (
-	_clsAVAssetResourceLoadingDataRequest = _objcClass("AVAssetResourceLoadingDataRequest")
-	_aVAssetResourceLoadingDataRequestSelRespondWithData = objc.RegisterName("respondWithData:")
-	_aVAssetResourceLoadingDataRequestSelRequestedOffset = objc.RegisterName("requestedOffset")
-	_aVAssetResourceLoadingDataRequestSelRequestedLength = objc.RegisterName("requestedLength")
+	_clsAVAssetResourceLoadingDataRequest                               = _objcClass("AVAssetResourceLoadingDataRequest")
+	_aVAssetResourceLoadingDataRequestSelRespondWithData                = objc.RegisterName("respondWithData:")
+	_aVAssetResourceLoadingDataRequestSelRequestedOffset                = objc.RegisterName("requestedOffset")
+	_aVAssetResourceLoadingDataRequestSelRequestedLength                = objc.RegisterName("requestedLength")
 	_aVAssetResourceLoadingDataRequestSelRequestsAllDataToEndOfResource = objc.RegisterName("requestsAllDataToEndOfResource")
-	_aVAssetResourceLoadingDataRequestSelCurrentOffset = objc.RegisterName("currentOffset")
+	_aVAssetResourceLoadingDataRequestSelCurrentOffset                  = objc.RegisterName("currentOffset")
 )
 
 func AVAssetResourceLoadingDataRequestFromID(id objc.ID) *AVAssetResourceLoadingDataRequest {
@@ -62,4 +62,3 @@ func (o *AVAssetResourceLoadingDataRequest) CurrentOffset() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _aVAssetResourceLoadingDataRequestSelCurrentOffset)
 	return _ret
 }
-

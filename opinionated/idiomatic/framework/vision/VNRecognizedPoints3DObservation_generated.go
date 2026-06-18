@@ -76,9 +76,13 @@ func (x *RecognizedPoints3DObservation) AvailableGroupKeys() []*foundation.NSStr
 	})
 }
 
-func (x *RecognizedPoints3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation { return x.inner }
+func (x *RecognizedPoints3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation {
+	return x.inner
+}
 
-func (x *RecognizedPoints3DObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+func (x *RecognizedPoints3DObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNObservation
+}
 
 // RecognizedPoints3DObservationable is the interface implemented by [RecognizedPoints3DObservation], for mocking and DI.
 type RecognizedPoints3DObservationable interface {
@@ -90,4 +94,3 @@ type RecognizedPoints3DObservationable interface {
 }
 
 var _ RecognizedPoints3DObservationable = (*RecognizedPoints3DObservation)(nil)
-

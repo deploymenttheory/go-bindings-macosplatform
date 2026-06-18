@@ -16,7 +16,9 @@ type MTRGroupKeyManagementClusterKeySetWriteParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterKeySetWriteParams].
-func (x *MTRGroupKeyManagementClusterKeySetWriteParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetWriteParams { return x.inner }
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) Unwrap() *raw.MTRGroupKeyManagementClusterKeySetWriteParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -103,4 +105,3 @@ type MTRGroupKeyManagementClusterKeySetWriteParamsable interface {
 }
 
 var _ MTRGroupKeyManagementClusterKeySetWriteParamsable = (*MTRGroupKeyManagementClusterKeySetWriteParams)(nil)
-

@@ -15,7 +15,7 @@ type VZXHCIControllerConfiguration struct {
 }
 
 var (
-	_clsVZXHCIControllerConfiguration = _objcClass("VZXHCIControllerConfiguration")
+	_clsVZXHCIControllerConfiguration     = _objcClass("VZXHCIControllerConfiguration")
 	_vZXHCIControllerConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZXHCIControllerConfigurationFromID(id objc.ID) *VZXHCIControllerConfigurat
 
 func (o *VZXHCIControllerConfiguration) Init() *VZXHCIControllerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZXHCIControllerConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZXHCIControllerConfigurationFromID(_ret)
 }
-

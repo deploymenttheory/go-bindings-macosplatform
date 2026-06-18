@@ -45,4 +45,3 @@ type CorrelationTypeable interface {
 }
 
 var _ CorrelationTypeable = (*CorrelationType)(nil)
-

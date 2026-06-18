@@ -16,19 +16,19 @@ type MPSGraphDepthwiseConvolution3DOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphDepthwiseConvolution3DOpDescriptor = _objcClass("MPSGraphDepthwiseConvolution3DOpDescriptor")
+	_clsMPSGraphDepthwiseConvolution3DOpDescriptor                                                            = _objcClass("MPSGraphDepthwiseConvolution3DOpDescriptor")
 	_mPSGraphDepthwiseConvolution3DOpDescriptorSelDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle = objc.RegisterName("descriptorWithStrides:dilationRates:paddingValues:paddingStyle:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelDescriptorWithPaddingStyle = objc.RegisterName("descriptorWithPaddingStyle:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelStrides = objc.RegisterName("strides")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetStrides = objc.RegisterName("setStrides:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelDilationRates = objc.RegisterName("dilationRates")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetDilationRates = objc.RegisterName("setDilationRates:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelPaddingValues = objc.RegisterName("paddingValues")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetPaddingValues = objc.RegisterName("setPaddingValues:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelPaddingStyle = objc.RegisterName("paddingStyle")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetPaddingStyle = objc.RegisterName("setPaddingStyle:")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelChannelDimensionIndex = objc.RegisterName("channelDimensionIndex")
-	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetChannelDimensionIndex = objc.RegisterName("setChannelDimensionIndex:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelDescriptorWithPaddingStyle                                  = objc.RegisterName("descriptorWithPaddingStyle:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelStrides                                                     = objc.RegisterName("strides")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetStrides                                                  = objc.RegisterName("setStrides:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelDilationRates                                               = objc.RegisterName("dilationRates")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetDilationRates                                            = objc.RegisterName("setDilationRates:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelPaddingValues                                               = objc.RegisterName("paddingValues")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetPaddingValues                                            = objc.RegisterName("setPaddingValues:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelPaddingStyle                                                = objc.RegisterName("paddingStyle")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetPaddingStyle                                             = objc.RegisterName("setPaddingStyle:")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelChannelDimensionIndex                                       = objc.RegisterName("channelDimensionIndex")
+	_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetChannelDimensionIndex                                    = objc.RegisterName("setChannelDimensionIndex:")
 )
 
 func MPSGraphDepthwiseConvolution3DOpDescriptorFromID(id objc.ID) *MPSGraphDepthwiseConvolution3DOpDescriptor {
@@ -44,14 +44,18 @@ func MPSGraphDepthwiseConvolution3DOpDescriptorFromID(id objc.ID) *MPSGraphDepth
 // Creates a 3D depthwise convolution descriptor with given values. - Parameters: - strides: See `strides` property. - dilationRates: See `dilationRates` property. - paddingValues: See `paddingValues` property. - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *MPSGraphDepthwiseConvolution3DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution3DOpDescriptor), _mPSGraphDepthwiseConvolution3DOpDescriptorSelDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle, strides, dilationRates, paddingValues, paddingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphDepthwiseConvolution3DOpDescriptorFromID(_ret)
 }
 
 // Creates a 3D depthwise convolution descriptor with default values. - Parameters: - paddingStyle: See `paddingStyle` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *MPSGraphDepthwiseConvolution3DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphDepthwiseConvolution3DOpDescriptor), _mPSGraphDepthwiseConvolution3DOpDescriptorSelDescriptorWithPaddingStyle, paddingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphDepthwiseConvolution3DOpDescriptorFromID(_ret)
 }
 
@@ -104,4 +108,3 @@ func (o *MPSGraphDepthwiseConvolution3DOpDescriptor) ChannelDimensionIndex() int
 func (o *MPSGraphDepthwiseConvolution3DOpDescriptor) SetChannelDimensionIndex(channelDimensionIndex int) {
 	o.Ptr().Send(_mPSGraphDepthwiseConvolution3DOpDescriptorSelSetChannelDimensionIndex, channelDimensionIndex)
 }
-

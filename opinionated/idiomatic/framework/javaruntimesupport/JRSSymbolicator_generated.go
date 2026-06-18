@@ -48,4 +48,3 @@ type Symbolicatorable interface {
 }
 
 var _ Symbolicatorable = (*Symbolicator)(nil)
-

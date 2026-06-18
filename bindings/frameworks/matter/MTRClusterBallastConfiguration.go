@@ -16,51 +16,51 @@ type MTRClusterBallastConfiguration struct {
 }
 
 var (
-	_clsMTRClusterBallastConfiguration = _objcClass("MTRClusterBallastConfiguration")
-	_mTRClusterBallastConfigurationSelReadAttributePhysicalMinLevelWithParams = objc.RegisterName("readAttributePhysicalMinLevelWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributePhysicalMaxLevelWithParams = objc.RegisterName("readAttributePhysicalMaxLevelWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeBallastStatusWithParams = objc.RegisterName("readAttributeBallastStatusWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeMinLevelWithParams = objc.RegisterName("readAttributeMinLevelWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeMinLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeMinLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeMaxLevelWithParams = objc.RegisterName("readAttributeMaxLevelWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeMaxLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeMaxLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeIntrinsicBallastFactorWithParams = objc.RegisterName("readAttributeIntrinsicBallastFactorWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval = objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeBallastFactorAdjustmentWithParams = objc.RegisterName("readAttributeBallastFactorAdjustmentWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval = objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:")
+	_clsMTRClusterBallastConfiguration                                                                          = _objcClass("MTRClusterBallastConfiguration")
+	_mTRClusterBallastConfigurationSelReadAttributePhysicalMinLevelWithParams                                   = objc.RegisterName("readAttributePhysicalMinLevelWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributePhysicalMaxLevelWithParams                                   = objc.RegisterName("readAttributePhysicalMaxLevelWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeBallastStatusWithParams                                      = objc.RegisterName("readAttributeBallastStatusWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeMinLevelWithParams                                           = objc.RegisterName("readAttributeMinLevelWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeMinLevelWithValueExpectedValueInterval                      = objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeMinLevelWithValueExpectedValueIntervalParams                = objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeMaxLevelWithParams                                           = objc.RegisterName("readAttributeMaxLevelWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeMaxLevelWithValueExpectedValueInterval                      = objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeMaxLevelWithValueExpectedValueIntervalParams                = objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeIntrinsicBallastFactorWithParams                             = objc.RegisterName("readAttributeIntrinsicBallastFactorWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeBallastFactorAdjustmentWithParams                            = objc.RegisterName("readAttributeBallastFactorAdjustmentWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:")
 	_mTRClusterBallastConfigurationSelWriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampQuantityWithParams = objc.RegisterName("readAttributeLampQuantityWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampTypeWithParams = objc.RegisterName("readAttributeLampTypeWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampTypeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampTypeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampManufacturerWithParams = objc.RegisterName("readAttributeLampManufacturerWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampManufacturerWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampManufacturerWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampRatedHoursWithParams = objc.RegisterName("readAttributeLampRatedHoursWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampRatedHoursWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampBurnHoursWithParams = objc.RegisterName("readAttributeLampBurnHoursWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampAlarmModeWithParams = objc.RegisterName("readAttributeLampAlarmModeWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampAlarmModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeLampBurnHoursTripPointWithParams = objc.RegisterName("readAttributeLampBurnHoursTripPointWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval = objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:params:")
-	_mTRClusterBallastConfigurationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBallastConfigurationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBallastConfigurationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterBallastConfigurationSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterBallastConfigurationSelReadAttributeIntrinsicBalanceFactorWithParams = objc.RegisterName("readAttributeIntrinsicBalanceFactorWithParams:")
-	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval = objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:")
-	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampQuantityWithParams                                       = objc.RegisterName("readAttributeLampQuantityWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampTypeWithParams                                           = objc.RegisterName("readAttributeLampTypeWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampTypeWithValueExpectedValueInterval                      = objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampTypeWithValueExpectedValueIntervalParams                = objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampManufacturerWithParams                                   = objc.RegisterName("readAttributeLampManufacturerWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampManufacturerWithValueExpectedValueInterval              = objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampManufacturerWithValueExpectedValueIntervalParams        = objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampRatedHoursWithParams                                     = objc.RegisterName("readAttributeLampRatedHoursWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampRatedHoursWithValueExpectedValueInterval                = objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams          = objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampBurnHoursWithParams                                      = objc.RegisterName("readAttributeLampBurnHoursWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursWithValueExpectedValueInterval                 = objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams           = objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampAlarmModeWithParams                                      = objc.RegisterName("readAttributeLampAlarmModeWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampAlarmModeWithValueExpectedValueInterval                 = objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams           = objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeLampBurnHoursTripPointWithParams                             = objc.RegisterName("readAttributeLampBurnHoursTripPointWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:params:")
+	_mTRClusterBallastConfigurationSelReadAttributeGeneratedCommandListWithParams                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeAcceptedCommandListWithParams                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeAttributeListWithParams                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeFeatureMapWithParams                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBallastConfigurationSelReadAttributeClusterRevisionWithParams                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBallastConfigurationSelInitWithDeviceEndpointIDQueue                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBallastConfigurationSelInitWithDeviceEndpointQueue                                               = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterBallastConfigurationSelReadAttributeIntrinsicBalanceFactorWithParams                             = objc.RegisterName("readAttributeIntrinsicBalanceFactorWithParams:")
+	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval        = objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:")
+	_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams  = objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:params:")
 )
 
 func MTRClusterBallastConfigurationFromID(id objc.ID) *MTRClusterBallastConfiguration {
@@ -251,13 +251,17 @@ func (o *MTRClusterBallastConfiguration) ReadAttributeClusterRevisionWithParams(
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterBallastConfiguration) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBallastConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBallastConfigurationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBallastConfigurationFromID(_ret)
 }
 
 func (o *MTRClusterBallastConfiguration) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBallastConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBallastConfigurationSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBallastConfigurationFromID(_ret)
 }
 
@@ -273,4 +277,3 @@ func (o *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWit
 func (o *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *MTRWriteParams) {
 	o.Ptr().Send(_mTRClusterBallastConfigurationSelWriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams, dataValueDictionary, expectedValueIntervalMs.Ptr(), params.Ptr())
 }
-

@@ -18,32 +18,32 @@ type MDLTransform struct {
 }
 
 var (
-	_clsMDLTransform = _objcClass("MDLTransform")
-	_mDLTransformSelInit = objc.RegisterName("init")
-	_mDLTransformSelInitWithIdentity = objc.RegisterName("initWithIdentity")
-	_mDLTransformSelInitWithTransformComponent = objc.RegisterName("initWithTransformComponent:")
+	_clsMDLTransform                                          = _objcClass("MDLTransform")
+	_mDLTransformSelInit                                      = objc.RegisterName("init")
+	_mDLTransformSelInitWithIdentity                          = objc.RegisterName("initWithIdentity")
+	_mDLTransformSelInitWithTransformComponent                = objc.RegisterName("initWithTransformComponent:")
 	_mDLTransformSelInitWithTransformComponentResetsTransform = objc.RegisterName("initWithTransformComponent:resetsTransform:")
-	_mDLTransformSelInitWithMatrix = objc.RegisterName("initWithMatrix:")
-	_mDLTransformSelInitWithMatrixResetsTransform = objc.RegisterName("initWithMatrix:resetsTransform:")
-	_mDLTransformSelSetIdentity = objc.RegisterName("setIdentity")
-	_mDLTransformSelTranslationAtTime = objc.RegisterName("translationAtTime:")
-	_mDLTransformSelRotationAtTime = objc.RegisterName("rotationAtTime:")
-	_mDLTransformSelShearAtTime = objc.RegisterName("shearAtTime:")
-	_mDLTransformSelScaleAtTime = objc.RegisterName("scaleAtTime:")
-	_mDLTransformSelSetMatrixForTime = objc.RegisterName("setMatrix:forTime:")
-	_mDLTransformSelSetTranslationForTime = objc.RegisterName("setTranslation:forTime:")
-	_mDLTransformSelSetRotationForTime = objc.RegisterName("setRotation:forTime:")
-	_mDLTransformSelSetShearForTime = objc.RegisterName("setShear:forTime:")
-	_mDLTransformSelSetScaleForTime = objc.RegisterName("setScale:forTime:")
-	_mDLTransformSelRotationMatrixAtTime = objc.RegisterName("rotationMatrixAtTime:")
-	_mDLTransformSelTranslation = objc.RegisterName("translation")
-	_mDLTransformSelSetTranslation = objc.RegisterName("setTranslation:")
-	_mDLTransformSelRotation = objc.RegisterName("rotation")
-	_mDLTransformSelSetRotation = objc.RegisterName("setRotation:")
-	_mDLTransformSelShear = objc.RegisterName("shear")
-	_mDLTransformSelSetShear = objc.RegisterName("setShear:")
-	_mDLTransformSelScale = objc.RegisterName("scale")
-	_mDLTransformSelSetScale = objc.RegisterName("setScale:")
+	_mDLTransformSelInitWithMatrix                            = objc.RegisterName("initWithMatrix:")
+	_mDLTransformSelInitWithMatrixResetsTransform             = objc.RegisterName("initWithMatrix:resetsTransform:")
+	_mDLTransformSelSetIdentity                               = objc.RegisterName("setIdentity")
+	_mDLTransformSelTranslationAtTime                         = objc.RegisterName("translationAtTime:")
+	_mDLTransformSelRotationAtTime                            = objc.RegisterName("rotationAtTime:")
+	_mDLTransformSelShearAtTime                               = objc.RegisterName("shearAtTime:")
+	_mDLTransformSelScaleAtTime                               = objc.RegisterName("scaleAtTime:")
+	_mDLTransformSelSetMatrixForTime                          = objc.RegisterName("setMatrix:forTime:")
+	_mDLTransformSelSetTranslationForTime                     = objc.RegisterName("setTranslation:forTime:")
+	_mDLTransformSelSetRotationForTime                        = objc.RegisterName("setRotation:forTime:")
+	_mDLTransformSelSetShearForTime                           = objc.RegisterName("setShear:forTime:")
+	_mDLTransformSelSetScaleForTime                           = objc.RegisterName("setScale:forTime:")
+	_mDLTransformSelRotationMatrixAtTime                      = objc.RegisterName("rotationMatrixAtTime:")
+	_mDLTransformSelTranslation                               = objc.RegisterName("translation")
+	_mDLTransformSelSetTranslation                            = objc.RegisterName("setTranslation:")
+	_mDLTransformSelRotation                                  = objc.RegisterName("rotation")
+	_mDLTransformSelSetRotation                               = objc.RegisterName("setRotation:")
+	_mDLTransformSelShear                                     = objc.RegisterName("shear")
+	_mDLTransformSelSetShear                                  = objc.RegisterName("setShear:")
+	_mDLTransformSelScale                                     = objc.RegisterName("scale")
+	_mDLTransformSelSetScale                                  = objc.RegisterName("setScale:")
 )
 
 func MDLTransformFromID(id objc.ID) *MDLTransform {
@@ -59,41 +59,53 @@ func MDLTransformFromID(id objc.ID) *MDLTransform {
 // @method init @discussion Initialize an MDLTransform's matrices with identity
 func (o *MDLTransform) Init() *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.13.
 func (o *MDLTransform) InitWithIdentity() *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.13.
 func (o *MDLTransform) InitWithTransformComponent(component MDLTransformComponent) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithTransformComponent, component)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 // Deprecated: since macOS 10.13.
 func (o *MDLTransform) InitWithTransformComponentResetsTransform(component MDLTransformComponent, resetsTransform bool) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithTransformComponentResetsTransform, component, resetsTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 // Initialization with a matrix assumes the matrix is an invertible, homogeneous affine transform matrix. Retrieving transform components after initialization with a non-affine matrix will yield those of the identity transform.
 func (o *MDLTransform) InitWithMatrix(matrix unsafe.Pointer) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithMatrix, matrix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
 func (o *MDLTransform) InitWithMatrixResetsTransform(matrix unsafe.Pointer, resetsTransform bool) *MDLTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLTransformSelInitWithMatrixResetsTransform, matrix, resetsTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLTransformFromID(_ret)
 }
 
@@ -184,4 +196,3 @@ func (o *MDLTransform) Scale() unsafe.Pointer {
 func (o *MDLTransform) SetScale(scale unsafe.Pointer) {
 	o.Ptr().Send(_mDLTransformSelSetScale, scale)
 }
-

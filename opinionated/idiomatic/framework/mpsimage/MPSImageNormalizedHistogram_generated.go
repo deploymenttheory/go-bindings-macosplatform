@@ -107,4 +107,3 @@ type ImageNormalizedHistogramable interface {
 }
 
 var _ ImageNormalizedHistogramable = (*ImageNormalizedHistogram)(nil)
-

@@ -37,7 +37,9 @@ func NewMedicationDoseEventType() *MedicationDoseEventType {
 
 func (x *MedicationDoseEventType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
 
-func (x *MedicationDoseEventType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
+func (x *MedicationDoseEventType) asObjectType() *raw.HKObjectType {
+	return &x.inner.HKSampleType.HKObjectType
+}
 
 // MedicationDoseEventTypeable is the interface implemented by [MedicationDoseEventType], for mocking and DI.
 type MedicationDoseEventTypeable interface {
@@ -45,4 +47,3 @@ type MedicationDoseEventTypeable interface {
 }
 
 var _ MedicationDoseEventTypeable = (*MedicationDoseEventType)(nil)
-

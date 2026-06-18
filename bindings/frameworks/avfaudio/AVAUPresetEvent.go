@@ -16,13 +16,13 @@ type AVAUPresetEvent struct {
 }
 
 var (
-	_clsAVAUPresetEvent = _objcClass("AVAUPresetEvent")
+	_clsAVAUPresetEvent                               = _objcClass("AVAUPresetEvent")
 	_aVAUPresetEventSelInitWithScopeElementDictionary = objc.RegisterName("initWithScope:element:dictionary:")
-	_aVAUPresetEventSelScope = objc.RegisterName("scope")
-	_aVAUPresetEventSelSetScope = objc.RegisterName("setScope:")
-	_aVAUPresetEventSelElement = objc.RegisterName("element")
-	_aVAUPresetEventSelSetElement = objc.RegisterName("setElement:")
-	_aVAUPresetEventSelPresetDictionary = objc.RegisterName("presetDictionary")
+	_aVAUPresetEventSelScope                          = objc.RegisterName("scope")
+	_aVAUPresetEventSelSetScope                       = objc.RegisterName("setScope:")
+	_aVAUPresetEventSelElement                        = objc.RegisterName("element")
+	_aVAUPresetEventSelSetElement                     = objc.RegisterName("setElement:")
+	_aVAUPresetEventSelPresetDictionary               = objc.RegisterName("presetDictionary")
 )
 
 func AVAUPresetEventFromID(id objc.ID) *AVAUPresetEvent {
@@ -38,7 +38,9 @@ func AVAUPresetEventFromID(id objc.ID) *AVAUPresetEvent {
 // @method initWithScope:element:dictionary @abstract Initialize the event with the scope, element, and dictionary for the preset. @param scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global. @param element The element index within the scope (see AudioUnitElement).  This should usually be set to 0. @param presetDictionary An NSDictionary containing the preset.  The audio unit will expect this to be a dictionary structured as an appropriate audio unit preset. @discussion The dictionary passed to this initializer will be copied and is not editable once the event is created.
 func (o *AVAUPresetEvent) InitWithScopeElementDictionary(scope uint, element uint, presetDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *AVAUPresetEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAUPresetEventSelInitWithScopeElementDictionary, scope, element, presetDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAUPresetEventFromID(_ret)
 }
 
@@ -67,4 +69,3 @@ func (o *AVAUPresetEvent) PresetDictionary() *foundation.NSDictionary[objc.ID, o
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _aVAUPresetEventSelPresetDictionary)
 	return _ret
 }
-

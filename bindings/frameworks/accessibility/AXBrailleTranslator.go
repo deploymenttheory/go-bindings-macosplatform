@@ -16,9 +16,9 @@ type AXBrailleTranslator struct {
 }
 
 var (
-	_clsAXBrailleTranslator = _objcClass("AXBrailleTranslator")
+	_clsAXBrailleTranslator                     = _objcClass("AXBrailleTranslator")
 	_aXBrailleTranslatorSelInitWithBrailleTable = objc.RegisterName("initWithBrailleTable:")
-	_aXBrailleTranslatorSelTranslatePrintText = objc.RegisterName("translatePrintText:")
+	_aXBrailleTranslatorSelTranslatePrintText   = objc.RegisterName("translatePrintText:")
 	_aXBrailleTranslatorSelBackTranslateBraille = objc.RegisterName("backTranslateBraille:")
 )
 
@@ -34,21 +34,26 @@ func AXBrailleTranslatorFromID(id objc.ID) *AXBrailleTranslator {
 
 func (o *AXBrailleTranslator) InitWithBrailleTable(brailleTable *AXBrailleTable) *AXBrailleTranslator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTranslatorSelInitWithBrailleTable, brailleTable.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXBrailleTranslatorFromID(_ret)
 }
 
 // Output Braille uses the unicode Braille characters (0x2800-0x28FF).
 func (o *AXBrailleTranslator) TranslatePrintText(printText *foundation.NSString) *AXBrailleTranslationResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTranslatorSelTranslatePrintText, printText.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXBrailleTranslationResultFromID(_ret)
 }
 
 // Input Braille should use the unicode Braille characters (0x2800-0x28FF).
 func (o *AXBrailleTranslator) BackTranslateBraille(braille *foundation.NSString) *AXBrailleTranslationResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTranslatorSelBackTranslateBraille, braille.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXBrailleTranslationResultFromID(_ret)
 }
-

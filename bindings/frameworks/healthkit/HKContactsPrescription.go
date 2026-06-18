@@ -16,11 +16,11 @@ type HKContactsPrescription struct {
 }
 
 var (
-	_clsHKContactsPrescription = _objcClass("HKContactsPrescription")
+	_clsHKContactsPrescription                                                                                                     = _objcClass("HKContactsPrescription")
 	_hKContactsPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata = objc.RegisterName("prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata:")
-	_hKContactsPrescriptionSelRightEye = objc.RegisterName("rightEye")
-	_hKContactsPrescriptionSelLeftEye = objc.RegisterName("leftEye")
-	_hKContactsPrescriptionSelBrand = objc.RegisterName("brand")
+	_hKContactsPrescriptionSelRightEye                                                                                             = objc.RegisterName("rightEye")
+	_hKContactsPrescriptionSelLeftEye                                                                                              = objc.RegisterName("leftEye")
+	_hKContactsPrescriptionSelBrand                                                                                                = objc.RegisterName("brand")
 )
 
 func HKContactsPrescriptionFromID(id objc.ID) *HKContactsPrescription {
@@ -36,28 +36,35 @@ func HKContactsPrescriptionFromID(id objc.ID) *HKContactsPrescription {
 // @method        prescriptionWithRightEyeSpecification:leftEyeSpecification:brand:dateIssued:expirationDate:device:metadata @param         rightEyeSpecification  The right eye specification @param         leftEyeSpecification   The left eye specification @param         brand                  The prescribed brand after contact lens fitting @param         dateIssued             The date the prescription was issued @param         expirationDate         The date the prescription expires @param         device                 The device that generated the sample @param         metadata               The metadata for the sample
 func HKContactsPrescriptionPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata(rightEyeSpecification *HKContactsLensSpecification, leftEyeSpecification *HKContactsLensSpecification, brand *foundation.NSString, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKContactsPrescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKContactsPrescription), _hKContactsPrescriptionSelPrescriptionWithRightEyeSpecificationLeftEyeSpecificationBrandDateIssuedExpirationDateDeviceMetadata, rightEyeSpecification.Ptr(), leftEyeSpecification.Ptr(), brand.Ptr(), dateIssued.Ptr(), expirationDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKContactsPrescriptionFromID(_ret)
 }
 
 // @property      rightEye @abstract      The right eye lens specification
 func (o *HKContactsPrescription) RightEye() *HKContactsLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsPrescriptionSelRightEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKContactsLensSpecificationFromID(_ret)
 }
 
 // @property      leftEye @abstract      The left eye lens specification
 func (o *HKContactsPrescription) LeftEye() *HKContactsLensSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsPrescriptionSelLeftEye)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKContactsLensSpecificationFromID(_ret)
 }
 
 // @property      brand @abstract      The prescribed brand after contact lens fitting
 func (o *HKContactsPrescription) Brand() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKContactsPrescriptionSelBrand)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

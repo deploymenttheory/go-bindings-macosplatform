@@ -58,4 +58,3 @@ type CloudIdentifierMappingable interface {
 }
 
 var _ CloudIdentifierMappingable = (*CloudIdentifierMapping)(nil)
-

@@ -17,15 +17,15 @@ type IOBluetoothHostController struct {
 }
 
 var (
-	_clsIOBluetoothHostController = _objcClass("IOBluetoothHostController")
-	_iOBluetoothHostControllerSelDefaultController = objc.RegisterName("defaultController")
-	_iOBluetoothHostControllerSelClassOfDevice = objc.RegisterName("classOfDevice")
+	_clsIOBluetoothHostController                                = _objcClass("IOBluetoothHostController")
+	_iOBluetoothHostControllerSelDefaultController               = objc.RegisterName("defaultController")
+	_iOBluetoothHostControllerSelClassOfDevice                   = objc.RegisterName("classOfDevice")
 	_iOBluetoothHostControllerSelSetClassOfDeviceForTimeInterval = objc.RegisterName("setClassOfDevice:forTimeInterval:")
-	_iOBluetoothHostControllerSelAddressAsString = objc.RegisterName("addressAsString")
-	_iOBluetoothHostControllerSelNameAsString = objc.RegisterName("nameAsString")
-	_iOBluetoothHostControllerSelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothHostControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iOBluetoothHostControllerSelPowerState = objc.RegisterName("powerState")
+	_iOBluetoothHostControllerSelAddressAsString                 = objc.RegisterName("addressAsString")
+	_iOBluetoothHostControllerSelNameAsString                    = objc.RegisterName("nameAsString")
+	_iOBluetoothHostControllerSelDelegate                        = objc.RegisterName("delegate")
+	_iOBluetoothHostControllerSelSetDelegate                     = objc.RegisterName("setDelegate:")
+	_iOBluetoothHostControllerSelPowerState                      = objc.RegisterName("powerState")
 )
 
 func IOBluetoothHostControllerFromID(id objc.ID) *IOBluetoothHostController {
@@ -40,7 +40,9 @@ func IOBluetoothHostControllerFromID(id objc.ID) *IOBluetoothHostController {
 
 func IOBluetoothHostControllerDefaultController() *IOBluetoothHostController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothHostController), _iOBluetoothHostControllerSelDefaultController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothHostControllerFromID(_ret)
 }
 
@@ -56,13 +58,17 @@ func (o *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevic
 
 func (o *IOBluetoothHostController) AddressAsString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHostControllerSelAddressAsString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *IOBluetoothHostController) NameAsString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHostControllerSelNameAsString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,4 +86,3 @@ func (o *IOBluetoothHostController) PowerState() icadevices.BluetoothHCIPowerSta
 	_ret := objc.Send[icadevices.BluetoothHCIPowerState](o.Ptr(), _iOBluetoothHostControllerSelPowerState)
 	return _ret
 }
-

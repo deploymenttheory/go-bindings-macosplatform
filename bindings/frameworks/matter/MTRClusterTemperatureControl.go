@@ -18,21 +18,21 @@ type MTRClusterTemperatureControl struct {
 }
 
 var (
-	_clsMTRClusterTemperatureControl = _objcClass("MTRClusterTemperatureControl")
+	_clsMTRClusterTemperatureControl                                                                      = _objcClass("MTRClusterTemperatureControl")
 	_mTRClusterTemperatureControlSelSetTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setTemperatureWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTemperatureControlSelSetTemperatureWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setTemperatureWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterTemperatureControlSelReadAttributeTemperatureSetpointWithParams = objc.RegisterName("readAttributeTemperatureSetpointWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeMinTemperatureWithParams = objc.RegisterName("readAttributeMinTemperatureWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeMaxTemperatureWithParams = objc.RegisterName("readAttributeMaxTemperatureWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeStepWithParams = objc.RegisterName("readAttributeStepWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeSelectedTemperatureLevelWithParams = objc.RegisterName("readAttributeSelectedTemperatureLevelWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithParams = objc.RegisterName("readAttributeSupportedTemperatureLevelsWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTemperatureControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTemperatureControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTemperatureControlSelSetTemperatureWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("setTemperatureWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterTemperatureControlSelReadAttributeTemperatureSetpointWithParams                            = objc.RegisterName("readAttributeTemperatureSetpointWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeMinTemperatureWithParams                                 = objc.RegisterName("readAttributeMinTemperatureWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeMaxTemperatureWithParams                                 = objc.RegisterName("readAttributeMaxTemperatureWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeStepWithParams                                           = objc.RegisterName("readAttributeStepWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeSelectedTemperatureLevelWithParams                       = objc.RegisterName("readAttributeSelectedTemperatureLevelWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeSupportedTemperatureLevelsWithParams                     = objc.RegisterName("readAttributeSupportedTemperatureLevelsWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeGeneratedCommandListWithParams                           = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeAcceptedCommandListWithParams                            = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeAttributeListWithParams                                  = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeFeatureMapWithParams                                     = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTemperatureControlSelReadAttributeClusterRevisionWithParams                                = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTemperatureControlSelInitWithDeviceEndpointIDQueue                                         = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterTemperatureControlFromID(id objc.ID) *MTRClusterTemperatureControl {
@@ -125,7 +125,8 @@ func (o *MTRClusterTemperatureControl) ReadAttributeClusterRevisionWithParams(pa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterTemperatureControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTemperatureControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTemperatureControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTemperatureControlFromID(_ret)
 }
-

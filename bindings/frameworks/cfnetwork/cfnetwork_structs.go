@@ -8,18 +8,18 @@ import (
 )
 
 type CFHostClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFNetServiceClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
@@ -50,4 +50,3 @@ type CFNetServiceBrowser struct{}
 // C struct: __CFNetServiceMonitor
 // CFNetServiceMonitor is an opaque type.
 type CFNetServiceMonitor struct{}
-

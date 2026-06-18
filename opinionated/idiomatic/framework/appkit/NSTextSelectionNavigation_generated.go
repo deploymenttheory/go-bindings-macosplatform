@@ -142,4 +142,3 @@ type TextSelectionNavigationable interface {
 }
 
 var _ TextSelectionNavigationable = (*TextSelectionNavigation)(nil)
-

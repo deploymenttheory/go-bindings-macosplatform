@@ -49,4 +49,3 @@ type AccelerometerDataable interface {
 }
 
 var _ AccelerometerDataable = (*AccelerometerData)(nil)
-

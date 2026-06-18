@@ -12,7 +12,7 @@ import (
 type LSAcceptanceFlags int64
 
 const (
-	KLSAcceptDefault LSAcceptanceFlags = 1
+	KLSAcceptDefault      LSAcceptanceFlags = 1
 	KLSAcceptAllowLoginUI LSAcceptanceFlags = 2
 )
 
@@ -55,14 +55,14 @@ func (e LSHandlerOptions) String() string {
 type LSRequestedInfo int64
 
 const (
-	KLSRequestExtension LSRequestedInfo = 1
-	KLSRequestTypeCreator LSRequestedInfo = 2
-	KLSRequestBasicFlagsOnly LSRequestedInfo = 4
-	KLSRequestAppTypeFlags LSRequestedInfo = 8
-	KLSRequestAllFlags LSRequestedInfo = 16
-	KLSRequestIconAndKind LSRequestedInfo = 32
+	KLSRequestExtension          LSRequestedInfo = 1
+	KLSRequestTypeCreator        LSRequestedInfo = 2
+	KLSRequestBasicFlagsOnly     LSRequestedInfo = 4
+	KLSRequestAppTypeFlags       LSRequestedInfo = 8
+	KLSRequestAllFlags           LSRequestedInfo = 16
+	KLSRequestIconAndKind        LSRequestedInfo = 32
 	KLSRequestExtensionFlagsOnly LSRequestedInfo = 64
-	KLSRequestAllInfo LSRequestedInfo = 4294967295
+	KLSRequestAllInfo            LSRequestedInfo = 4294967295
 )
 
 func (e LSRequestedInfo) String() string {
@@ -101,11 +101,11 @@ func (e LSRequestedInfo) String() string {
 type LSRolesMask int64
 
 const (
-	KLSRolesNone LSRolesMask = 1
+	KLSRolesNone   LSRolesMask = 1
 	KLSRolesViewer LSRolesMask = 2
 	KLSRolesEditor LSRolesMask = 4
-	KLSRolesShell LSRolesMask = 8
-	KLSRolesAll LSRolesMask = 4294967295
+	KLSRolesShell  LSRolesMask = 8
+	KLSRolesAll    LSRolesMask = 4294967295
 )
 
 func (e LSRolesMask) String() string {
@@ -130,4 +130,3 @@ func (e LSRolesMask) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

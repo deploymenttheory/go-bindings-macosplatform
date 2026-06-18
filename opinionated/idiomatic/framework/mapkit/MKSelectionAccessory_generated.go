@@ -41,4 +41,3 @@ type SelectionAccessoryable interface {
 }
 
 var _ SelectionAccessoryable = (*SelectionAccessory)(nil)
-

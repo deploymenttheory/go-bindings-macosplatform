@@ -82,7 +82,9 @@ func (x *AnimatedQuaternion) GetDoubleQuaternionArrayMaxCount(valuesArray unsafe
 	return x.inner.GetDoubleQuaternionArrayMaxCount(valuesArray, maxCount)
 }
 
-func (x *AnimatedQuaternion) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+func (x *AnimatedQuaternion) asAnimatedValue() *raw.MDLAnimatedValue {
+	return &x.inner.MDLAnimatedValue
+}
 
 // AnimatedQuaternionable is the interface implemented by [AnimatedQuaternion], for mocking and DI.
 type AnimatedQuaternionable interface {
@@ -99,4 +101,3 @@ type AnimatedQuaternionable interface {
 }
 
 var _ AnimatedQuaternionable = (*AnimatedQuaternion)(nil)
-

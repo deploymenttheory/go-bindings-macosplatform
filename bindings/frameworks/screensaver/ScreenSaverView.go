@@ -11,7 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
-// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure. ``ScreenSaverView`` provides the interface for your screen saver, including the content you animate onscreen and an optional configuration sheet. Create your own custom subclass and add it to your screen saver bundle. Use your subclass to create the animations that you want to appear onscreen, and to specify additional animation details. - Note: When someone previews your screen saver in System Preferences, the system instantiates your ``ScreenSaverView`` subclass. You can draw from your view’s ``ScreenSaverView/drawRect:`` method, or you can draw directly from the ``ScreenSaverView/animateOneFrame`` method. If you prefer to use the ``ScreenSaverView/drawRect:`` method, use the ``ScreenSaverView/animateOneFrame`` method to call the <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> method and specify the portions of your view that require updates.
+// An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure. “ScreenSaverView“ provides the interface for your screen saver, including the content you animate onscreen and an optional configuration sheet. Create your own custom subclass and add it to your screen saver bundle. Use your subclass to create the animations that you want to appear onscreen, and to specify additional animation details. - Note: When someone previews your screen saver in System Preferences, the system instantiates your “ScreenSaverView“ subclass. You can draw from your view’s “ScreenSaverView/drawRect:“ method, or you can draw directly from the “ScreenSaverView/animateOneFrame“ method. If you prefer to use the “ScreenSaverView/drawRect:“ method, use the “ScreenSaverView/animateOneFrame“ method to call the <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> method and specify the portions of your view that require updates.
 //
 // Apple documentation: https://developer.apple.com/documentation/screensaver/screensaverview
 type ScreenSaverView struct {
@@ -19,19 +19,19 @@ type ScreenSaverView struct {
 }
 
 var (
-	_clsScreenSaverView = _objcClass("ScreenSaverView")
-	_screenSaverViewSelBackingStoreType = objc.RegisterName("backingStoreType")
-	_screenSaverViewSelPerformGammaFade = objc.RegisterName("performGammaFade")
-	_screenSaverViewSelInitWithFrameIsPreview = objc.RegisterName("initWithFrame:isPreview:")
-	_screenSaverViewSelStartAnimation = objc.RegisterName("startAnimation")
-	_screenSaverViewSelStopAnimation = objc.RegisterName("stopAnimation")
-	_screenSaverViewSelAnimateOneFrame = objc.RegisterName("animateOneFrame")
-	_screenSaverViewSelAnimationTimeInterval = objc.RegisterName("animationTimeInterval")
+	_clsScreenSaverView                         = _objcClass("ScreenSaverView")
+	_screenSaverViewSelBackingStoreType         = objc.RegisterName("backingStoreType")
+	_screenSaverViewSelPerformGammaFade         = objc.RegisterName("performGammaFade")
+	_screenSaverViewSelInitWithFrameIsPreview   = objc.RegisterName("initWithFrame:isPreview:")
+	_screenSaverViewSelStartAnimation           = objc.RegisterName("startAnimation")
+	_screenSaverViewSelStopAnimation            = objc.RegisterName("stopAnimation")
+	_screenSaverViewSelAnimateOneFrame          = objc.RegisterName("animateOneFrame")
+	_screenSaverViewSelAnimationTimeInterval    = objc.RegisterName("animationTimeInterval")
 	_screenSaverViewSelSetAnimationTimeInterval = objc.RegisterName("setAnimationTimeInterval:")
-	_screenSaverViewSelIsAnimating = objc.RegisterName("isAnimating")
-	_screenSaverViewSelHasConfigureSheet = objc.RegisterName("hasConfigureSheet")
-	_screenSaverViewSelConfigureSheet = objc.RegisterName("configureSheet")
-	_screenSaverViewSelIsPreview = objc.RegisterName("isPreview")
+	_screenSaverViewSelIsAnimating              = objc.RegisterName("isAnimating")
+	_screenSaverViewSelHasConfigureSheet        = objc.RegisterName("hasConfigureSheet")
+	_screenSaverViewSelConfigureSheet           = objc.RegisterName("configureSheet")
+	_screenSaverViewSelIsPreview                = objc.RegisterName("isPreview")
 )
 
 func ScreenSaverViewFromID(id objc.ID) *ScreenSaverView {
@@ -56,24 +56,26 @@ func ScreenSaverViewPerformGammaFade() bool {
 	return _ret
 }
 
-// Creates a newly allocated screen saver view with the specified frame rectangle and preview information. ## Overview The screen saver application installs the new view object into the view hierarchy of an <doc://com.apple.documentation/documentation/appkit/nswindow> before the animation begins. This method is the designated initializer for the ``ScreenSaver/ScreenSaverView`` class. Returns `self`. - Parameters: - frame: The frame rectangle for the view. - isPreview: <doc://com.apple.documentation/documentation/objectivec/yes> if this view provides a preview for system settings, or <doc://com.apple.documentation/documentation/objectivec/no> if the system fills the screen with your view’s contents.
+// Creates a newly allocated screen saver view with the specified frame rectangle and preview information. ## Overview The screen saver application installs the new view object into the view hierarchy of an <doc://com.apple.documentation/documentation/appkit/nswindow> before the animation begins. This method is the designated initializer for the “ScreenSaver/ScreenSaverView“ class. Returns `self`. - Parameters: - frame: The frame rectangle for the view. - isPreview: <doc://com.apple.documentation/documentation/objectivec/yes> if this view provides a preview for system settings, or <doc://com.apple.documentation/documentation/objectivec/no> if the system fills the screen with your view’s contents.
 func (o *ScreenSaverView) InitWithFrameIsPreview(frame corefoundation.CGRect, isPreview bool) *ScreenSaverView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelInitWithFrameIsPreview, frame, isPreview)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ScreenSaverViewFromID(_ret)
 }
 
-// Activates the periodic timer that animates the screen saver. ## Overview The system calls this method when it’s time for you to start animating your screen saver’s content. The system calls this method only once at the start of animations. Use this method to set up any initial state information you require or to allocate expensive resources. If you override this method, you must call the inherited implementation at some point. ## See also - ``ScreenSaver/ScreenSaverView/stopAnimation``
+// Activates the periodic timer that animates the screen saver. ## Overview The system calls this method when it’s time for you to start animating your screen saver’s content. The system calls this method only once at the start of animations. Use this method to set up any initial state information you require or to allocate expensive resources. If you override this method, you must call the inherited implementation at some point. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“
 func (o *ScreenSaverView) StartAnimation() {
 	o.Ptr().Send(_screenSaverViewSelStartAnimation)
 }
 
-// Deactivates the timer that advances the animation. ## Overview The system calls this method when it’s time for you to stop animating your screen saver’s content. The system calls this method only once at the end of animations. Use this method to unload expensive resources or to reset your screen saver to a known state. If you override this method, you must call the inherited implementation at some point. ## See also - ``ScreenSaver/ScreenSaverView/startAnimation``
+// Deactivates the timer that advances the animation. ## Overview The system calls this method when it’s time for you to stop animating your screen saver’s content. The system calls this method only once at the end of animations. Use this method to unload expensive resources or to reset your screen saver to a known state. If you override this method, you must call the inherited implementation at some point. ## See also - “ScreenSaver/ScreenSaverView/startAnimation“
 func (o *ScreenSaverView) StopAnimation() {
 	o.Ptr().Send(_screenSaverViewSelStopAnimation)
 }
 
-// Advances the screen saver’s animation by a single frame. ## Overview The system calls this method each time the timer animating the screen saver fires. The time between calls to this method is always at least ``ScreenSaver/ScreenSaverView/animationTimeInterval``. The system locks focus on your view before it calls this method, so you can use this method to draw content. You can also let ``ScreenSaver/ScreenSaverView/drawRect:`` perform the drawing, in which case you use this method to call <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> to mark your view as dirty. The default implementation of this method does nothing. ## See also - ``ScreenSaver/ScreenSaverView/drawRect:``
+// Advances the screen saver’s animation by a single frame. ## Overview The system calls this method each time the timer animating the screen saver fires. The time between calls to this method is always at least “ScreenSaver/ScreenSaverView/animationTimeInterval“. The system locks focus on your view before it calls this method, so you can use this method to draw content. You can also let “ScreenSaver/ScreenSaverView/drawRect:“ perform the drawing, in which case you use this method to call <doc://com.apple.documentation/documentation/appkit/nsview/1483475-setneedsdisplayinrect> to mark your view as dirty. The default implementation of this method does nothing. ## See also - “ScreenSaver/ScreenSaverView/drawRect:“
 func (o *ScreenSaverView) AnimateOneFrame() {
 	o.Ptr().Send(_screenSaverViewSelAnimateOneFrame)
 }
@@ -89,22 +91,24 @@ func (o *ScreenSaverView) SetAnimationTimeInterval(animationTimeInterval float64
 	o.Ptr().Send(_screenSaverViewSelSetAnimationTimeInterval, animationTimeInterval)
 }
 
-// A Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - ``ScreenSaver/ScreenSaverView/stopAnimation`` - ``ScreenSaver/ScreenSaverView/startAnimation``
+// A Boolean value that indicates whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (o *ScreenSaverView) IsAnimating() bool {
 	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsAnimating)
 	return _ret
 }
 
-// A Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - ``ScreenSaver/ScreenSaverView/configureSheet``
+// A Boolean value that indicates whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (o *ScreenSaverView) HasConfigureSheet() bool {
 	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelHasConfigureSheet)
 	return _ret
 }
 
-// The window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - ``ScreenSaver/ScreenSaverView/hasConfigureSheet``
+// The window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
 func (o *ScreenSaverView) ConfigureSheet() *appkit.NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _screenSaverViewSelConfigureSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSWindowFromID(_ret)
 }
 
@@ -113,4 +117,3 @@ func (o *ScreenSaverView) IsPreview() bool {
 	_ret := objc.Send[bool](o.Ptr(), _screenSaverViewSelIsPreview)
 	return _ret
 }
-

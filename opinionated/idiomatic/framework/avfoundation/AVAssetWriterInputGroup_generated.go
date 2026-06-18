@@ -58,7 +58,9 @@ func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
 	return &AssetWriterInput{inner: _r}
 }
 
-func (x *AssetWriterInputGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup { return &x.inner.AVMediaSelectionGroup }
+func (x *AssetWriterInputGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup {
+	return &x.inner.AVMediaSelectionGroup
+}
 
 // AssetWriterInputGroupable is the interface implemented by [AssetWriterInputGroup], for mocking and DI.
 type AssetWriterInputGroupable interface {
@@ -68,4 +70,3 @@ type AssetWriterInputGroupable interface {
 }
 
 var _ AssetWriterInputGroupable = (*AssetWriterInputGroup)(nil)
-

@@ -16,9 +16,9 @@ type FSGenericURLResource struct {
 }
 
 var (
-	_clsFSGenericURLResource = _objcClass("FSGenericURLResource")
+	_clsFSGenericURLResource            = _objcClass("FSGenericURLResource")
 	_fSGenericURLResourceSelInitWithURL = objc.RegisterName("initWithURL:")
-	_fSGenericURLResourceSelUrl = objc.RegisterName("url")
+	_fSGenericURLResourceSelUrl         = objc.RegisterName("url")
 )
 
 func FSGenericURLResourceFromID(id objc.ID) *FSGenericURLResource {
@@ -31,17 +31,20 @@ func FSGenericURLResourceFromID(id objc.ID) *FSGenericURLResource {
 	return o
 }
 
-// Creates a generic URL resource with the given URL. - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an ``FSVolume`` that FSKit can load.
+// Creates a generic URL resource with the given URL. - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an “FSVolume“ that FSKit can load.
 func (o *FSGenericURLResource) InitWithURL(url *foundation.NSURL) *FSGenericURLResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSGenericURLResourceSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSGenericURLResourceFromID(_ret)
 }
 
 // The URL represented by the resource.
 func (o *FSGenericURLResource) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSGenericURLResourceSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

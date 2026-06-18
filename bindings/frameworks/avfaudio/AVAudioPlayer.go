@@ -18,46 +18,46 @@ type AVAudioPlayer struct {
 }
 
 var (
-	_clsAVAudioPlayer = _objcClass("AVAudioPlayer")
-	_aVAudioPlayerSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_aVAudioPlayerSelInitWithDataError = objc.RegisterName("initWithData:error:")
+	_clsAVAudioPlayer                                       = _objcClass("AVAudioPlayer")
+	_aVAudioPlayerSelInitWithContentsOfURLError             = objc.RegisterName("initWithContentsOfURL:error:")
+	_aVAudioPlayerSelInitWithDataError                      = objc.RegisterName("initWithData:error:")
 	_aVAudioPlayerSelInitWithContentsOfURLFileTypeHintError = objc.RegisterName("initWithContentsOfURL:fileTypeHint:error:")
-	_aVAudioPlayerSelInitWithDataFileTypeHintError = objc.RegisterName("initWithData:fileTypeHint:error:")
-	_aVAudioPlayerSelPrepareToPlay = objc.RegisterName("prepareToPlay")
-	_aVAudioPlayerSelPlay = objc.RegisterName("play")
-	_aVAudioPlayerSelPlayAtTime = objc.RegisterName("playAtTime:")
-	_aVAudioPlayerSelPause = objc.RegisterName("pause")
-	_aVAudioPlayerSelStop = objc.RegisterName("stop")
-	_aVAudioPlayerSelSetVolumeFadeDuration = objc.RegisterName("setVolume:fadeDuration:")
-	_aVAudioPlayerSelUpdateMeters = objc.RegisterName("updateMeters")
-	_aVAudioPlayerSelPeakPowerForChannel = objc.RegisterName("peakPowerForChannel:")
-	_aVAudioPlayerSelAveragePowerForChannel = objc.RegisterName("averagePowerForChannel:")
-	_aVAudioPlayerSelIsPlaying = objc.RegisterName("isPlaying")
-	_aVAudioPlayerSelNumberOfChannels = objc.RegisterName("numberOfChannels")
-	_aVAudioPlayerSelDuration = objc.RegisterName("duration")
-	_aVAudioPlayerSelCurrentDevice = objc.RegisterName("currentDevice")
-	_aVAudioPlayerSelSetCurrentDevice = objc.RegisterName("setCurrentDevice:")
-	_aVAudioPlayerSelDelegate = objc.RegisterName("delegate")
-	_aVAudioPlayerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVAudioPlayerSelUrl = objc.RegisterName("url")
-	_aVAudioPlayerSelData = objc.RegisterName("data")
-	_aVAudioPlayerSelPan = objc.RegisterName("pan")
-	_aVAudioPlayerSelSetPan = objc.RegisterName("setPan:")
-	_aVAudioPlayerSelVolume = objc.RegisterName("volume")
-	_aVAudioPlayerSelSetVolume = objc.RegisterName("setVolume:")
-	_aVAudioPlayerSelEnableRate = objc.RegisterName("enableRate")
-	_aVAudioPlayerSelSetEnableRate = objc.RegisterName("setEnableRate:")
-	_aVAudioPlayerSelRate = objc.RegisterName("rate")
-	_aVAudioPlayerSelSetRate = objc.RegisterName("setRate:")
-	_aVAudioPlayerSelCurrentTime = objc.RegisterName("currentTime")
-	_aVAudioPlayerSelSetCurrentTime = objc.RegisterName("setCurrentTime:")
-	_aVAudioPlayerSelDeviceCurrentTime = objc.RegisterName("deviceCurrentTime")
-	_aVAudioPlayerSelNumberOfLoops = objc.RegisterName("numberOfLoops")
-	_aVAudioPlayerSelSetNumberOfLoops = objc.RegisterName("setNumberOfLoops:")
-	_aVAudioPlayerSelSettings = objc.RegisterName("settings")
-	_aVAudioPlayerSelFormat = objc.RegisterName("format")
-	_aVAudioPlayerSelIsMeteringEnabled = objc.RegisterName("isMeteringEnabled")
-	_aVAudioPlayerSelSetMeteringEnabled = objc.RegisterName("setMeteringEnabled:")
+	_aVAudioPlayerSelInitWithDataFileTypeHintError          = objc.RegisterName("initWithData:fileTypeHint:error:")
+	_aVAudioPlayerSelPrepareToPlay                          = objc.RegisterName("prepareToPlay")
+	_aVAudioPlayerSelPlay                                   = objc.RegisterName("play")
+	_aVAudioPlayerSelPlayAtTime                             = objc.RegisterName("playAtTime:")
+	_aVAudioPlayerSelPause                                  = objc.RegisterName("pause")
+	_aVAudioPlayerSelStop                                   = objc.RegisterName("stop")
+	_aVAudioPlayerSelSetVolumeFadeDuration                  = objc.RegisterName("setVolume:fadeDuration:")
+	_aVAudioPlayerSelUpdateMeters                           = objc.RegisterName("updateMeters")
+	_aVAudioPlayerSelPeakPowerForChannel                    = objc.RegisterName("peakPowerForChannel:")
+	_aVAudioPlayerSelAveragePowerForChannel                 = objc.RegisterName("averagePowerForChannel:")
+	_aVAudioPlayerSelIsPlaying                              = objc.RegisterName("isPlaying")
+	_aVAudioPlayerSelNumberOfChannels                       = objc.RegisterName("numberOfChannels")
+	_aVAudioPlayerSelDuration                               = objc.RegisterName("duration")
+	_aVAudioPlayerSelCurrentDevice                          = objc.RegisterName("currentDevice")
+	_aVAudioPlayerSelSetCurrentDevice                       = objc.RegisterName("setCurrentDevice:")
+	_aVAudioPlayerSelDelegate                               = objc.RegisterName("delegate")
+	_aVAudioPlayerSelSetDelegate                            = objc.RegisterName("setDelegate:")
+	_aVAudioPlayerSelUrl                                    = objc.RegisterName("url")
+	_aVAudioPlayerSelData                                   = objc.RegisterName("data")
+	_aVAudioPlayerSelPan                                    = objc.RegisterName("pan")
+	_aVAudioPlayerSelSetPan                                 = objc.RegisterName("setPan:")
+	_aVAudioPlayerSelVolume                                 = objc.RegisterName("volume")
+	_aVAudioPlayerSelSetVolume                              = objc.RegisterName("setVolume:")
+	_aVAudioPlayerSelEnableRate                             = objc.RegisterName("enableRate")
+	_aVAudioPlayerSelSetEnableRate                          = objc.RegisterName("setEnableRate:")
+	_aVAudioPlayerSelRate                                   = objc.RegisterName("rate")
+	_aVAudioPlayerSelSetRate                                = objc.RegisterName("setRate:")
+	_aVAudioPlayerSelCurrentTime                            = objc.RegisterName("currentTime")
+	_aVAudioPlayerSelSetCurrentTime                         = objc.RegisterName("setCurrentTime:")
+	_aVAudioPlayerSelDeviceCurrentTime                      = objc.RegisterName("deviceCurrentTime")
+	_aVAudioPlayerSelNumberOfLoops                          = objc.RegisterName("numberOfLoops")
+	_aVAudioPlayerSelSetNumberOfLoops                       = objc.RegisterName("setNumberOfLoops:")
+	_aVAudioPlayerSelSettings                               = objc.RegisterName("settings")
+	_aVAudioPlayerSelFormat                                 = objc.RegisterName("format")
+	_aVAudioPlayerSelIsMeteringEnabled                      = objc.RegisterName("isMeteringEnabled")
+	_aVAudioPlayerSelSetMeteringEnabled                     = objc.RegisterName("setMeteringEnabled:")
 )
 
 func AVAudioPlayerFromID(id objc.ID) *AVAudioPlayer {
@@ -73,7 +73,9 @@ func AVAudioPlayerFromID(id objc.ID) *AVAudioPlayer {
 func (o *AVAudioPlayer) InitWithContentsOfURLError(url *foundation.NSURL) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -83,7 +85,9 @@ func (o *AVAudioPlayer) InitWithContentsOfURLError(url *foundation.NSURL) (*AVAu
 func (o *AVAudioPlayer) InitWithDataError(data *foundation.NSData) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -93,7 +97,9 @@ func (o *AVAudioPlayer) InitWithDataError(data *foundation.NSData) (*AVAudioPlay
 func (o *AVAudioPlayer) InitWithContentsOfURLFileTypeHintError(url *foundation.NSURL, utiString *foundation.NSString) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithContentsOfURLFileTypeHintError, url.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -103,7 +109,9 @@ func (o *AVAudioPlayer) InitWithContentsOfURLFileTypeHintError(url *foundation.N
 func (o *AVAudioPlayer) InitWithDataFileTypeHintError(data *foundation.NSData, utiString *foundation.NSString) (*AVAudioPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelInitWithDataFileTypeHintError, data.Ptr(), utiString.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -168,7 +176,9 @@ func (o *AVAudioPlayer) Duration() float64 {
 
 func (o *AVAudioPlayer) CurrentDevice() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelCurrentDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -187,13 +197,17 @@ func (o *AVAudioPlayer) SetDelegate(delegate AVAudioPlayerDelegate) {
 
 func (o *AVAudioPlayer) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *AVAudioPlayer) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -263,7 +277,9 @@ func (o *AVAudioPlayer) Settings() *foundation.NSDictionary[*foundation.NSString
 
 func (o *AVAudioPlayer) Format() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -275,4 +291,3 @@ func (o *AVAudioPlayer) IsMeteringEnabled() bool {
 func (o *AVAudioPlayer) SetMeteringEnabled(meteringEnabled bool) {
 	o.Ptr().Send(_aVAudioPlayerSelSetMeteringEnabled, meteringEnabled)
 }
-

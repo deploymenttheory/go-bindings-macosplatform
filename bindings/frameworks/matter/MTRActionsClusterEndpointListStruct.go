@@ -16,15 +16,15 @@ type MTRActionsClusterEndpointListStruct struct {
 }
 
 var (
-	_clsMTRActionsClusterEndpointListStruct = _objcClass("MTRActionsClusterEndpointListStruct")
-	_mTRActionsClusterEndpointListStructSelEndpointListID = objc.RegisterName("endpointListID")
+	_clsMTRActionsClusterEndpointListStruct                  = _objcClass("MTRActionsClusterEndpointListStruct")
+	_mTRActionsClusterEndpointListStructSelEndpointListID    = objc.RegisterName("endpointListID")
 	_mTRActionsClusterEndpointListStructSelSetEndpointListID = objc.RegisterName("setEndpointListID:")
-	_mTRActionsClusterEndpointListStructSelName = objc.RegisterName("name")
-	_mTRActionsClusterEndpointListStructSelSetName = objc.RegisterName("setName:")
-	_mTRActionsClusterEndpointListStructSelType = objc.RegisterName("type")
-	_mTRActionsClusterEndpointListStructSelSetType = objc.RegisterName("setType:")
-	_mTRActionsClusterEndpointListStructSelEndpoints = objc.RegisterName("endpoints")
-	_mTRActionsClusterEndpointListStructSelSetEndpoints = objc.RegisterName("setEndpoints:")
+	_mTRActionsClusterEndpointListStructSelName              = objc.RegisterName("name")
+	_mTRActionsClusterEndpointListStructSelSetName           = objc.RegisterName("setName:")
+	_mTRActionsClusterEndpointListStructSelType              = objc.RegisterName("type")
+	_mTRActionsClusterEndpointListStructSelSetType           = objc.RegisterName("setType:")
+	_mTRActionsClusterEndpointListStructSelEndpoints         = objc.RegisterName("endpoints")
+	_mTRActionsClusterEndpointListStructSelSetEndpoints      = objc.RegisterName("setEndpoints:")
 )
 
 func MTRActionsClusterEndpointListStructFromID(id objc.ID) *MTRActionsClusterEndpointListStruct {
@@ -39,7 +39,9 @@ func MTRActionsClusterEndpointListStructFromID(id objc.ID) *MTRActionsClusterEnd
 
 func (o *MTRActionsClusterEndpointListStruct) EndpointListID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterEndpointListStructSelEndpointListID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRActionsClusterEndpointListStruct) SetEndpointListID(endpointListID *
 
 func (o *MTRActionsClusterEndpointListStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterEndpointListStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRActionsClusterEndpointListStruct) SetName(name *foundation.NSString)
 
 func (o *MTRActionsClusterEndpointListStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterEndpointListStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,4 +81,3 @@ func (o *MTRActionsClusterEndpointListStruct) Endpoints() *foundation.NSArray[ob
 func (o *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRActionsClusterEndpointListStructSelSetEndpoints, endpoints)
 }
-

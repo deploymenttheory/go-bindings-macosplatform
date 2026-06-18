@@ -16,13 +16,13 @@ type NSStoryboardSegue struct {
 }
 
 var (
-	_clsNSStoryboardSegue = _objcClass("NSStoryboardSegue")
+	_clsNSStoryboardSegue                                                   = _objcClass("NSStoryboardSegue")
 	_nSStoryboardSegueSelSegueWithIdentifierSourceDestinationPerformHandler = objc.RegisterName("segueWithIdentifier:source:destination:performHandler:")
-	_nSStoryboardSegueSelInitWithIdentifierSourceDestination = objc.RegisterName("initWithIdentifier:source:destination:")
-	_nSStoryboardSegueSelPerform = objc.RegisterName("perform")
-	_nSStoryboardSegueSelIdentifier = objc.RegisterName("identifier")
-	_nSStoryboardSegueSelSourceController = objc.RegisterName("sourceController")
-	_nSStoryboardSegueSelDestinationController = objc.RegisterName("destinationController")
+	_nSStoryboardSegueSelInitWithIdentifierSourceDestination                = objc.RegisterName("initWithIdentifier:source:destination:")
+	_nSStoryboardSegueSelPerform                                            = objc.RegisterName("perform")
+	_nSStoryboardSegueSelIdentifier                                         = objc.RegisterName("identifier")
+	_nSStoryboardSegueSelSourceController                                   = objc.RegisterName("sourceController")
+	_nSStoryboardSegueSelDestinationController                              = objc.RegisterName("destinationController")
 )
 
 func NSStoryboardSegueFromID(id objc.ID) *NSStoryboardSegue {
@@ -44,13 +44,17 @@ func NSStoryboardSegueSegueWithIdentifierSourceDestinationPerformHandler(identif
 		defer __block_performHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStoryboardSegue), _nSStoryboardSegueSelSegueWithIdentifierSourceDestinationPerformHandler, identifier.Ptr(), sourceController, destinationController, __block_performHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardSegueFromID(_ret)
 }
 
 func (o *NSStoryboardSegue) InitWithIdentifierSourceDestination(identifier *foundation.NSString, sourceController objc.ID, destinationController objc.ID) *NSStoryboardSegue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSegueSelInitWithIdentifierSourceDestination, identifier.Ptr(), sourceController, destinationController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardSegueFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *NSStoryboardSegue) Perform() {
 
 func (o *NSStoryboardSegue) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSegueSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *NSStoryboardSegue) DestinationController() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSStoryboardSegueSelDestinationController)
 	return _ret
 }
-

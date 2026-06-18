@@ -18,8 +18,8 @@ type TKTokenKeyAlgorithm struct {
 }
 
 var (
-	_clsTKTokenKeyAlgorithm = _objcClass("TKTokenKeyAlgorithm")
-	_tKTokenKeyAlgorithmSelIsAlgorithm = objc.RegisterName("isAlgorithm:")
+	_clsTKTokenKeyAlgorithm                  = _objcClass("TKTokenKeyAlgorithm")
+	_tKTokenKeyAlgorithmSelIsAlgorithm       = objc.RegisterName("isAlgorithm:")
 	_tKTokenKeyAlgorithmSelSupportsAlgorithm = objc.RegisterName("supportsAlgorithm:")
 )
 
@@ -44,4 +44,3 @@ func (o *TKTokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
 	_ret := objc.Send[bool](o.Ptr(), _tKTokenKeyAlgorithmSelSupportsAlgorithm, algorithm)
 	return _ret
 }
-

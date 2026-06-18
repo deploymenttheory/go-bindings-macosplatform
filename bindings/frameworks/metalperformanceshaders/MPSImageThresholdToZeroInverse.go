@@ -18,11 +18,11 @@ type MPSImageThresholdToZeroInverse struct {
 }
 
 var (
-	_clsMPSImageThresholdToZeroInverse = _objcClass("MPSImageThresholdToZeroInverse")
+	_clsMPSImageThresholdToZeroInverse                                                     = _objcClass("MPSImageThresholdToZeroInverse")
 	_mPSImageThresholdToZeroInverseSelInitWithDeviceThresholdValueLinearGrayColorTransform = objc.RegisterName("initWithDevice:thresholdValue:linearGrayColorTransform:")
-	_mPSImageThresholdToZeroInverseSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageThresholdToZeroInverseSelThresholdValue = objc.RegisterName("thresholdValue")
-	_mPSImageThresholdToZeroInverseSelTransform = objc.RegisterName("transform")
+	_mPSImageThresholdToZeroInverseSelInitWithCoderDevice                                  = objc.RegisterName("initWithCoder:device:")
+	_mPSImageThresholdToZeroInverseSelThresholdValue                                       = objc.RegisterName("thresholdValue")
+	_mPSImageThresholdToZeroInverseSelTransform                                            = objc.RegisterName("transform")
 )
 
 func MPSImageThresholdToZeroInverseFromID(id objc.ID) *MPSImageThresholdToZeroInverse {
@@ -38,14 +38,18 @@ func MPSImageThresholdToZeroInverseFromID(id objc.ID) *MPSImageThresholdToZeroIn
 // @abstract  initialize a MPSImageThresholdToZeroInverse filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
 func (o *MPSImageThresholdToZeroInverse) InitWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *MPSImageThresholdToZeroInverse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdToZeroInverseSelInitWithDeviceThresholdValueLinearGrayColorTransform, device, thresholdValue, transform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdToZeroInverseFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageThresholdToZeroInverse) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageThresholdToZeroInverse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageThresholdToZeroInverseSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageThresholdToZeroInverseFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *MPSImageThresholdToZeroInverse) Transform() *float32 {
 	_ret := objc.Send[*float32](o.Ptr(), _mPSImageThresholdToZeroInverseSelTransform)
 	return _ret
 }
-

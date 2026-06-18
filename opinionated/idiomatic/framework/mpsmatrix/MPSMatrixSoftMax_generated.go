@@ -109,7 +109,9 @@ func (x *MatrixSoftMax) SetSourceColumns(sourceColumns uint) {
 
 func (x *MatrixSoftMax) asMatrixSoftMax() *raw.MPSMatrixSoftMax { return x.inner }
 
-func (x *MatrixSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
 // MatrixSoftMaxable is the interface implemented by [MatrixSoftMax], for mocking and DI.
 type MatrixSoftMaxable interface {
@@ -128,4 +130,3 @@ type MatrixSoftMaxable interface {
 }
 
 var _ MatrixSoftMaxable = (*MatrixSoftMax)(nil)
-

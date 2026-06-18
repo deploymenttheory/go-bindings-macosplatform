@@ -78,4 +78,3 @@ type EmbeddingDescriptorable interface {
 }
 
 var _ EmbeddingDescriptorable = (*EmbeddingDescriptor)(nil)
-

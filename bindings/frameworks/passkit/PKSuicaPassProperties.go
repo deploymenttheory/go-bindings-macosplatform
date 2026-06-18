@@ -15,12 +15,12 @@ type PKSuicaPassProperties struct {
 }
 
 var (
-	_clsPKSuicaPassProperties = _objcClass("PKSuicaPassProperties")
-	_pKSuicaPassPropertiesSelPassPropertiesForPass = objc.RegisterName("passPropertiesForPass:")
-	_pKSuicaPassPropertiesSelIsInShinkansenStation = objc.RegisterName("isInShinkansenStation")
-	_pKSuicaPassPropertiesSelIsBalanceAllowedForCommute = objc.RegisterName("isBalanceAllowedForCommute")
+	_clsPKSuicaPassProperties                                    = _objcClass("PKSuicaPassProperties")
+	_pKSuicaPassPropertiesSelPassPropertiesForPass               = objc.RegisterName("passPropertiesForPass:")
+	_pKSuicaPassPropertiesSelIsInShinkansenStation               = objc.RegisterName("isInShinkansenStation")
+	_pKSuicaPassPropertiesSelIsBalanceAllowedForCommute          = objc.RegisterName("isBalanceAllowedForCommute")
 	_pKSuicaPassPropertiesSelIsLowBalanceGateNotificationEnabled = objc.RegisterName("isLowBalanceGateNotificationEnabled")
-	_pKSuicaPassPropertiesSelIsGreenCarTicketUsed = objc.RegisterName("isGreenCarTicketUsed")
+	_pKSuicaPassPropertiesSelIsGreenCarTicketUsed                = objc.RegisterName("isGreenCarTicketUsed")
 )
 
 func PKSuicaPassPropertiesFromID(id objc.ID) *PKSuicaPassProperties {
@@ -36,7 +36,9 @@ func PKSuicaPassPropertiesFromID(id objc.ID) *PKSuicaPassProperties {
 // Properties for a given pass, or nil if the pass doesn’t support the set of properties being requested
 func PKSuicaPassPropertiesPassPropertiesForPass(pass *PKPass) *PKSuicaPassProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKSuicaPassProperties), _pKSuicaPassPropertiesSelPassPropertiesForPass, pass.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKSuicaPassPropertiesFromID(_ret)
 }
 
@@ -60,4 +62,3 @@ func (o *PKSuicaPassProperties) IsGreenCarTicketUsed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKSuicaPassPropertiesSelIsGreenCarTicketUsed)
 	return _ret
 }
-

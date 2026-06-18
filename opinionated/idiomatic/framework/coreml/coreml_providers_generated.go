@@ -17,4 +17,3 @@ type KeyProvider interface {
 type TaskProvider interface {
 	asTask() *raw.MLTask
 }
-

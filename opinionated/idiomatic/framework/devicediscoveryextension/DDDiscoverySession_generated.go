@@ -47,4 +47,3 @@ type DDDiscoverySessionable interface {
 }
 
 var _ DDDiscoverySessionable = (*DDDiscoverySession)(nil)
-

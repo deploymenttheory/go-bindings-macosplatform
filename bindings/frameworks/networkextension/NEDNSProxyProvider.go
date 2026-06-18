@@ -18,14 +18,14 @@ type NEDNSProxyProvider struct {
 }
 
 var (
-	_clsNEDNSProxyProvider = _objcClass("NEDNSProxyProvider")
-	_nEDNSProxyProviderSelStartProxyWithOptionsCompletionHandler = objc.RegisterName("startProxyWithOptions:completionHandler:")
-	_nEDNSProxyProviderSelStopProxyWithReasonCompletionHandler = objc.RegisterName("stopProxyWithReason:completionHandler:")
-	_nEDNSProxyProviderSelCancelProxyWithError = objc.RegisterName("cancelProxyWithError:")
-	_nEDNSProxyProviderSelHandleNewFlow = objc.RegisterName("handleNewFlow:")
+	_clsNEDNSProxyProvider                                          = _objcClass("NEDNSProxyProvider")
+	_nEDNSProxyProviderSelStartProxyWithOptionsCompletionHandler    = objc.RegisterName("startProxyWithOptions:completionHandler:")
+	_nEDNSProxyProviderSelStopProxyWithReasonCompletionHandler      = objc.RegisterName("stopProxyWithReason:completionHandler:")
+	_nEDNSProxyProviderSelCancelProxyWithError                      = objc.RegisterName("cancelProxyWithError:")
+	_nEDNSProxyProviderSelHandleNewFlow                             = objc.RegisterName("handleNewFlow:")
 	_nEDNSProxyProviderSelHandleNewUDPFlowInitialRemoteFlowEndpoint = objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:")
-	_nEDNSProxyProviderSelHandleNewUDPFlowInitialRemoteEndpoint = objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:")
-	_nEDNSProxyProviderSelSystemDNSSettings = objc.RegisterName("systemDNSSettings")
+	_nEDNSProxyProviderSelHandleNewUDPFlowInitialRemoteEndpoint     = objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:")
+	_nEDNSProxyProviderSelSystemDNSSettings                         = objc.RegisterName("systemDNSSettings")
 )
 
 func NEDNSProxyProviderFromID(id objc.ID) *NEDNSProxyProvider {
@@ -88,7 +88,8 @@ func (o *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *NEAppPr
 
 func (o *NEDNSProxyProvider) SystemDNSSettings() *foundation.NSArray[*NEDNSSettings] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSProxyProviderSelSystemDNSSettings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEDNSSettings](_ret)
 }
-

@@ -19,25 +19,25 @@ type PHASESoundEvent struct {
 }
 
 var (
-	_clsPHASESoundEvent = _objcClass("PHASESoundEvent")
+	_clsPHASESoundEvent                                                  = _objcClass("PHASESoundEvent")
 	_pHASESoundEventSelInitWithEngineAssetIdentifierMixerParametersError = objc.RegisterName("initWithEngine:assetIdentifier:mixerParameters:error:")
-	_pHASESoundEventSelInitWithEngineAssetIdentifierError = objc.RegisterName("initWithEngine:assetIdentifier:error:")
-	_pHASESoundEventSelPrepareWithCompletion = objc.RegisterName("prepareWithCompletion:")
-	_pHASESoundEventSelStartWithCompletion = objc.RegisterName("startWithCompletion:")
-	_pHASESoundEventSelStartAtTimeCompletion = objc.RegisterName("startAtTime:completion:")
-	_pHASESoundEventSelSeekToTimeCompletion = objc.RegisterName("seekToTime:completion:")
-	_pHASESoundEventSelSeekToTimeResumeAtEngineTimeCompletion = objc.RegisterName("seekToTime:resumeAtEngineTime:completion:")
-	_pHASESoundEventSelPause = objc.RegisterName("pause")
-	_pHASESoundEventSelResume = objc.RegisterName("resume")
-	_pHASESoundEventSelResumeAtTime = objc.RegisterName("resumeAtTime:")
-	_pHASESoundEventSelStopAndInvalidate = objc.RegisterName("stopAndInvalidate")
-	_pHASESoundEventSelRenderingState = objc.RegisterName("renderingState")
-	_pHASESoundEventSelPrepareState = objc.RegisterName("prepareState")
-	_pHASESoundEventSelMetaParameters = objc.RegisterName("metaParameters")
-	_pHASESoundEventSelMixers = objc.RegisterName("mixers")
-	_pHASESoundEventSelPushStreamNodes = objc.RegisterName("pushStreamNodes")
-	_pHASESoundEventSelPullStreamNodes = objc.RegisterName("pullStreamNodes")
-	_pHASESoundEventSelIsIndefinite = objc.RegisterName("isIndefinite")
+	_pHASESoundEventSelInitWithEngineAssetIdentifierError                = objc.RegisterName("initWithEngine:assetIdentifier:error:")
+	_pHASESoundEventSelPrepareWithCompletion                             = objc.RegisterName("prepareWithCompletion:")
+	_pHASESoundEventSelStartWithCompletion                               = objc.RegisterName("startWithCompletion:")
+	_pHASESoundEventSelStartAtTimeCompletion                             = objc.RegisterName("startAtTime:completion:")
+	_pHASESoundEventSelSeekToTimeCompletion                              = objc.RegisterName("seekToTime:completion:")
+	_pHASESoundEventSelSeekToTimeResumeAtEngineTimeCompletion            = objc.RegisterName("seekToTime:resumeAtEngineTime:completion:")
+	_pHASESoundEventSelPause                                             = objc.RegisterName("pause")
+	_pHASESoundEventSelResume                                            = objc.RegisterName("resume")
+	_pHASESoundEventSelResumeAtTime                                      = objc.RegisterName("resumeAtTime:")
+	_pHASESoundEventSelStopAndInvalidate                                 = objc.RegisterName("stopAndInvalidate")
+	_pHASESoundEventSelRenderingState                                    = objc.RegisterName("renderingState")
+	_pHASESoundEventSelPrepareState                                      = objc.RegisterName("prepareState")
+	_pHASESoundEventSelMetaParameters                                    = objc.RegisterName("metaParameters")
+	_pHASESoundEventSelMixers                                            = objc.RegisterName("mixers")
+	_pHASESoundEventSelPushStreamNodes                                   = objc.RegisterName("pushStreamNodes")
+	_pHASESoundEventSelPullStreamNodes                                   = objc.RegisterName("pullStreamNodes")
+	_pHASESoundEventSelIsIndefinite                                      = objc.RegisterName("isIndefinite")
 )
 
 func PHASESoundEventFromID(id objc.ID) *PHASESoundEvent {
@@ -54,7 +54,9 @@ func PHASESoundEventFromID(id objc.ID) *PHASESoundEvent {
 func (o *PHASESoundEvent) InitWithEngineAssetIdentifierMixerParametersError(engine *PHASEEngine, assetIdentifier *foundation.NSString, mixerParameters *PHASEMixerParameters) (*PHASESoundEvent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelInitWithEngineAssetIdentifierMixerParametersError, engine.Ptr(), assetIdentifier.Ptr(), mixerParameters.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,7 +67,9 @@ func (o *PHASESoundEvent) InitWithEngineAssetIdentifierMixerParametersError(engi
 func (o *PHASESoundEvent) InitWithEngineAssetIdentifierError(engine *PHASEEngine, assetIdentifier *foundation.NSString) (*PHASESoundEvent, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundEventSelInitWithEngineAssetIdentifierError, engine.Ptr(), assetIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -193,4 +197,3 @@ func (o *PHASESoundEvent) IsIndefinite() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pHASESoundEventSelIsIndefinite)
 	return _ret
 }
-

@@ -45,7 +45,9 @@ func (x *ChangeHistoryDeleteGroupEvent) GroupIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ChangeHistoryDeleteGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryDeleteGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryDeleteGroupEventable is the interface implemented by [ChangeHistoryDeleteGroupEvent], for mocking and DI.
 type ChangeHistoryDeleteGroupEventable interface {
@@ -54,4 +56,3 @@ type ChangeHistoryDeleteGroupEventable interface {
 }
 
 var _ ChangeHistoryDeleteGroupEventable = (*ChangeHistoryDeleteGroupEvent)(nil)
-

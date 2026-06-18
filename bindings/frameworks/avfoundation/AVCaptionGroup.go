@@ -17,11 +17,11 @@ type AVCaptionGroup struct {
 }
 
 var (
-	_clsAVCaptionGroup = _objcClass("AVCaptionGroup")
+	_clsAVCaptionGroup                          = _objcClass("AVCaptionGroup")
 	_aVCaptionGroupSelInitWithCaptionsTimeRange = objc.RegisterName("initWithCaptions:timeRange:")
-	_aVCaptionGroupSelInitWithTimeRange = objc.RegisterName("initWithTimeRange:")
-	_aVCaptionGroupSelTimeRange = objc.RegisterName("timeRange")
-	_aVCaptionGroupSelCaptions = objc.RegisterName("captions")
+	_aVCaptionGroupSelInitWithTimeRange         = objc.RegisterName("initWithTimeRange:")
+	_aVCaptionGroupSelTimeRange                 = objc.RegisterName("timeRange")
+	_aVCaptionGroupSelCaptions                  = objc.RegisterName("captions")
 )
 
 func AVCaptionGroupFromID(id objc.ID) *AVCaptionGroup {
@@ -37,14 +37,18 @@ func AVCaptionGroupFromID(id objc.ID) *AVCaptionGroup {
 // @method initWithCaptions:timeRange: @abstract Initializes a caption group with the given set of captions and the time range. @discussion Every caption in the array must be equal or sub range of the time range, otherwise an exception is raised. @param captions The captions that will be included in the group. The array is coped. @result A newly-initialized caption group.
 func (o *AVCaptionGroup) InitWithCaptionsTimeRange(captions *foundation.NSArray[*AVCaption], timeRange coremedia.CMTimeRange) *AVCaptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGroupSelInitWithCaptionsTimeRange, captions.Ptr(), timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionGroupFromID(_ret)
 }
 
 // @method initWithTimeRange: @abstract Initializes an empty caption group with the given time range. @discussion This is a convenient initializer to create an empty caption group time range. @param timeRange The time range for which there are no captions. @result A newly-initialized empty caption group.
 func (o *AVCaptionGroup) InitWithTimeRange(timeRange coremedia.CMTimeRange) *AVCaptionGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGroupSelInitWithTimeRange, timeRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionGroupFromID(_ret)
 }
 
@@ -57,7 +61,8 @@ func (o *AVCaptionGroup) TimeRange() coremedia.CMTimeRange {
 // @property captions @abstract An array of AVCaption objects. @discussion If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
 func (o *AVCaptionGroup) Captions() *foundation.NSArray[*AVCaption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGroupSelCaptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaption](_ret)
 }
-

@@ -88,7 +88,9 @@ func (x *Toolbar) WithItemIdentifiers(items ...*foundation.NSString) *Toolbar {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -465,4 +467,3 @@ type Toolbarable interface {
 }
 
 var _ Toolbarable = (*Toolbar)(nil)
-

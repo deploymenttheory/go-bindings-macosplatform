@@ -90,7 +90,9 @@ func (x *MatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer metal
 	x.inner.SynchronizeStateOnCommandBuffer(commandBuffer)
 }
 
-func (x *MatrixRandomMTGP32) asMatrixRandom() *mpsmatrix.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
+func (x *MatrixRandomMTGP32) asMatrixRandom() *mpsmatrix.MPSMatrixRandom {
+	return &x.inner.MPSMatrixRandom
+}
 
 func (x *MatrixRandomMTGP32) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
 
@@ -105,4 +107,3 @@ type MatrixRandomMTGP32able interface {
 }
 
 var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)
-

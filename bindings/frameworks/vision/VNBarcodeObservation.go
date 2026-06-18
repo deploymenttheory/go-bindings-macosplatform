@@ -17,16 +17,16 @@ type VNBarcodeObservation struct {
 }
 
 var (
-	_clsVNBarcodeObservation = _objcClass("VNBarcodeObservation")
-	_vNBarcodeObservationSelSymbology = objc.RegisterName("symbology")
-	_vNBarcodeObservationSelBarcodeDescriptor = objc.RegisterName("barcodeDescriptor")
-	_vNBarcodeObservationSelPayloadStringValue = objc.RegisterName("payloadStringValue")
-	_vNBarcodeObservationSelPayloadData = objc.RegisterName("payloadData")
-	_vNBarcodeObservationSelIsGS1DataCarrier = objc.RegisterName("isGS1DataCarrier")
-	_vNBarcodeObservationSelIsColorInverted = objc.RegisterName("isColorInverted")
+	_clsVNBarcodeObservation                          = _objcClass("VNBarcodeObservation")
+	_vNBarcodeObservationSelSymbology                 = objc.RegisterName("symbology")
+	_vNBarcodeObservationSelBarcodeDescriptor         = objc.RegisterName("barcodeDescriptor")
+	_vNBarcodeObservationSelPayloadStringValue        = objc.RegisterName("payloadStringValue")
+	_vNBarcodeObservationSelPayloadData               = objc.RegisterName("payloadData")
+	_vNBarcodeObservationSelIsGS1DataCarrier          = objc.RegisterName("isGS1DataCarrier")
+	_vNBarcodeObservationSelIsColorInverted           = objc.RegisterName("isColorInverted")
 	_vNBarcodeObservationSelSupplementalCompositeType = objc.RegisterName("supplementalCompositeType")
 	_vNBarcodeObservationSelSupplementalPayloadString = objc.RegisterName("supplementalPayloadString")
-	_vNBarcodeObservationSelSupplementalPayloadData = objc.RegisterName("supplementalPayloadData")
+	_vNBarcodeObservationSelSupplementalPayloadData   = objc.RegisterName("supplementalPayloadData")
 )
 
 func VNBarcodeObservationFromID(id objc.ID) *VNBarcodeObservation {
@@ -42,28 +42,36 @@ func VNBarcodeObservationFromID(id objc.ID) *VNBarcodeObservation {
 // @brief The symbology of the detected barcode.
 func (o *VNBarcodeObservation) Symbology() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelSymbology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief An object that provides symbology-specific data for the barcode.
 func (o *VNBarcodeObservation) BarcodeDescriptor() *coreimage.CIBarcodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelBarcodeDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIBarcodeDescriptorFromID(_ret)
 }
 
 // @brief The string representation of the barcode's payload.  Depending on the symbology of the barcode and/or the payload data itself, a string representation of the payload may not be available.
 func (o *VNBarcodeObservation) PayloadStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelPayloadStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The raw data representation of the barcode's payload if available.
 func (o *VNBarcodeObservation) PayloadData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelPayloadData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -88,14 +96,17 @@ func (o *VNBarcodeObservation) SupplementalCompositeType() VNBarcodeCompositeTyp
 // @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload string value.
 func (o *VNBarcodeObservation) SupplementalPayloadString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelSupplementalPayloadString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload raw data value.
 func (o *VNBarcodeObservation) SupplementalPayloadData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNBarcodeObservationSelSupplementalPayloadData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

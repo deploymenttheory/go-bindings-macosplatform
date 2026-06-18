@@ -74,7 +74,9 @@ func (x *ImageThresholdTruncate) Transform() *float32 {
 	return x.inner.Transform()
 }
 
-func (x *ImageThresholdTruncate) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageThresholdTruncate) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
 type ImageThresholdTruncateable interface {
@@ -87,4 +89,3 @@ type ImageThresholdTruncateable interface {
 }
 
 var _ ImageThresholdTruncateable = (*ImageThresholdTruncate)(nil)
-

@@ -17,12 +17,12 @@ type SKPhysicsJoint struct {
 }
 
 var (
-	_clsSKPhysicsJoint = _objcClass("SKPhysicsJoint")
-	_sKPhysicsJointSelBodyA = objc.RegisterName("bodyA")
-	_sKPhysicsJointSelSetBodyA = objc.RegisterName("setBodyA:")
-	_sKPhysicsJointSelBodyB = objc.RegisterName("bodyB")
-	_sKPhysicsJointSelSetBodyB = objc.RegisterName("setBodyB:")
-	_sKPhysicsJointSelReactionForce = objc.RegisterName("reactionForce")
+	_clsSKPhysicsJoint               = _objcClass("SKPhysicsJoint")
+	_sKPhysicsJointSelBodyA          = objc.RegisterName("bodyA")
+	_sKPhysicsJointSelSetBodyA       = objc.RegisterName("setBodyA:")
+	_sKPhysicsJointSelBodyB          = objc.RegisterName("bodyB")
+	_sKPhysicsJointSelSetBodyB       = objc.RegisterName("setBodyB:")
+	_sKPhysicsJointSelReactionForce  = objc.RegisterName("reactionForce")
 	_sKPhysicsJointSelReactionTorque = objc.RegisterName("reactionTorque")
 )
 
@@ -38,7 +38,9 @@ func SKPhysicsJointFromID(id objc.ID) *SKPhysicsJoint {
 
 func (o *SKPhysicsJoint) BodyA() *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsJointSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *SKPhysicsJoint) SetBodyA(bodyA *SKPhysicsBody) {
 
 func (o *SKPhysicsJoint) BodyB() *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsJointSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *SKPhysicsJoint) ReactionTorque() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sKPhysicsJointSelReactionTorque)
 	return _ret
 }
-

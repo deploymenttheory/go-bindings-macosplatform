@@ -60,4 +60,3 @@ type MSFFormatterable interface {
 }
 
 var _ MSFFormatterable = (*MSFFormatter)(nil)
-

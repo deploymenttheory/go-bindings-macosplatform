@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"os"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -70,8 +69,8 @@ func EmitClasses(
 			return fmt.Errorf("emit class %s: %w", name, err)
 		}
 		fname := filepath.Join(outDir, baseName+".go")
-		if err := os.WriteFile(fname, buf.Bytes(), 0o600); err != nil {
-			return fmt.Errorf("write %s: %w", fname, err)
+		if err := WriteGoFile(fname, buf.Bytes()); err != nil {
+			return err
 		}
 	}
 	return nil

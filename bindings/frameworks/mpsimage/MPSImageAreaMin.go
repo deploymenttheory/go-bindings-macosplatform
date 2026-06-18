@@ -25,4 +25,3 @@ func MPSImageAreaMinFromID(id objc.ID) *MPSImageAreaMin {
 	purego.Track(o)
 	return o
 }
-

@@ -15,14 +15,14 @@ type GLKEffectPropertyTexture struct {
 }
 
 var (
-	_clsGLKEffectPropertyTexture = _objcClass("GLKEffectPropertyTexture")
-	_gLKEffectPropertyTextureSelEnabled = objc.RegisterName("enabled")
+	_clsGLKEffectPropertyTexture           = _objcClass("GLKEffectPropertyTexture")
+	_gLKEffectPropertyTextureSelEnabled    = objc.RegisterName("enabled")
 	_gLKEffectPropertyTextureSelSetEnabled = objc.RegisterName("setEnabled:")
-	_gLKEffectPropertyTextureSelName = objc.RegisterName("name")
-	_gLKEffectPropertyTextureSelSetName = objc.RegisterName("setName:")
-	_gLKEffectPropertyTextureSelTarget = objc.RegisterName("target")
-	_gLKEffectPropertyTextureSelSetTarget = objc.RegisterName("setTarget:")
-	_gLKEffectPropertyTextureSelEnvMode = objc.RegisterName("envMode")
+	_gLKEffectPropertyTextureSelName       = objc.RegisterName("name")
+	_gLKEffectPropertyTextureSelSetName    = objc.RegisterName("setName:")
+	_gLKEffectPropertyTextureSelTarget     = objc.RegisterName("target")
+	_gLKEffectPropertyTextureSelSetTarget  = objc.RegisterName("setTarget:")
+	_gLKEffectPropertyTextureSelEnvMode    = objc.RegisterName("envMode")
 	_gLKEffectPropertyTextureSelSetEnvMode = objc.RegisterName("setEnvMode:")
 )
 
@@ -71,4 +71,3 @@ func (o *GLKEffectPropertyTexture) EnvMode() GLKTextureEnvMode {
 func (o *GLKEffectPropertyTexture) SetEnvMode(envMode GLKTextureEnvMode) {
 	o.Ptr().Send(_gLKEffectPropertyTextureSelSetEnvMode, envMode)
 }
-

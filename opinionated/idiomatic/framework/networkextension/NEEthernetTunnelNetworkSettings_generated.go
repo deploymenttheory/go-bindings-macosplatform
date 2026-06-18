@@ -17,7 +17,9 @@ type NEEthernetTunnelNetworkSettings struct {
 }
 
 // Unwrap returns the underlying [raw.NEEthernetTunnelNetworkSettings].
-func (x *NEEthernetTunnelNetworkSettings) Unwrap() *raw.NEEthernetTunnelNetworkSettings { return x.inner }
+func (x *NEEthernetTunnelNetworkSettings) Unwrap() *raw.NEEthernetTunnelNetworkSettings {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -83,9 +85,13 @@ func (x *NEEthernetTunnelNetworkSettings) EthernetAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *NEEthernetTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings { return &x.inner.NEPacketTunnelNetworkSettings }
+func (x *NEEthernetTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings {
+	return &x.inner.NEPacketTunnelNetworkSettings
+}
 
-func (x *NEEthernetTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings }
+func (x *NEEthernetTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
+	return &x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings
+}
 
 // NEEthernetTunnelNetworkSettingsable is the interface implemented by [NEEthernetTunnelNetworkSettings], for mocking and DI.
 type NEEthernetTunnelNetworkSettingsable interface {
@@ -100,4 +106,3 @@ type NEEthernetTunnelNetworkSettingsable interface {
 }
 
 var _ NEEthernetTunnelNetworkSettingsable = (*NEEthernetTunnelNetworkSettings)(nil)
-

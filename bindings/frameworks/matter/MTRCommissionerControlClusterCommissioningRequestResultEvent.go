@@ -16,15 +16,15 @@ type MTRCommissionerControlClusterCommissioningRequestResultEvent struct {
 }
 
 var (
-	_clsMTRCommissionerControlClusterCommissioningRequestResultEvent = _objcClass("MTRCommissionerControlClusterCommissioningRequestResultEvent")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelRequestID = objc.RegisterName("requestID")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetRequestID = objc.RegisterName("setRequestID:")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelClientNodeID = objc.RegisterName("clientNodeID")
+	_clsMTRCommissionerControlClusterCommissioningRequestResultEvent                = _objcClass("MTRCommissionerControlClusterCommissioningRequestResultEvent")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelRequestID       = objc.RegisterName("requestID")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetRequestID    = objc.RegisterName("setRequestID:")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelClientNodeID    = objc.RegisterName("clientNodeID")
 	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetClientNodeID = objc.RegisterName("setClientNodeID:")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelStatusCode = objc.RegisterName("statusCode")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetStatusCode = objc.RegisterName("setStatusCode:")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelStatusCode      = objc.RegisterName("statusCode")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetStatusCode   = objc.RegisterName("setStatusCode:")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelFabricIndex     = objc.RegisterName("fabricIndex")
+	_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetFabricIndex  = objc.RegisterName("setFabricIndex:")
 )
 
 func MTRCommissionerControlClusterCommissioningRequestResultEventFromID(id objc.ID) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
@@ -39,7 +39,9 @@ func MTRCommissionerControlClusterCommissioningRequestResultEventFromID(id objc.
 
 func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterCommissioningRequestResultEventSelRequestID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetReques
 
 func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterCommissioningRequestResultEventSelClientNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetClient
 
 func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterCommissioningRequestResultEventSelStatusCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetStatus
 
 func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterCommissioningRequestResultEventSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRCommissionerControlClusterCommissioningRequestResultEventSelSetFabricIndex, fabricIndex.Ptr())
 }
-

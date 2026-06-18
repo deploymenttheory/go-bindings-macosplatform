@@ -19,15 +19,15 @@ type ACAccountStore struct {
 }
 
 var (
-	_clsACAccountStore = _objcClass("ACAccountStore")
-	_aCAccountStoreSelAccountWithIdentifier = objc.RegisterName("accountWithIdentifier:")
-	_aCAccountStoreSelAccountTypeWithAccountTypeIdentifier = objc.RegisterName("accountTypeWithAccountTypeIdentifier:")
-	_aCAccountStoreSelAccountsWithAccountType = objc.RegisterName("accountsWithAccountType:")
-	_aCAccountStoreSelSaveAccountWithCompletionHandler = objc.RegisterName("saveAccount:withCompletionHandler:")
+	_clsACAccountStore                                                 = _objcClass("ACAccountStore")
+	_aCAccountStoreSelAccountWithIdentifier                            = objc.RegisterName("accountWithIdentifier:")
+	_aCAccountStoreSelAccountTypeWithAccountTypeIdentifier             = objc.RegisterName("accountTypeWithAccountTypeIdentifier:")
+	_aCAccountStoreSelAccountsWithAccountType                          = objc.RegisterName("accountsWithAccountType:")
+	_aCAccountStoreSelSaveAccountWithCompletionHandler                 = objc.RegisterName("saveAccount:withCompletionHandler:")
 	_aCAccountStoreSelRequestAccessToAccountsWithTypeOptionsCompletion = objc.RegisterName("requestAccessToAccountsWithType:options:completion:")
-	_aCAccountStoreSelRenewCredentialsForAccountCompletion = objc.RegisterName("renewCredentialsForAccount:completion:")
-	_aCAccountStoreSelRemoveAccountWithCompletionHandler = objc.RegisterName("removeAccount:withCompletionHandler:")
-	_aCAccountStoreSelAccounts = objc.RegisterName("accounts")
+	_aCAccountStoreSelRenewCredentialsForAccountCompletion             = objc.RegisterName("renewCredentialsForAccount:completion:")
+	_aCAccountStoreSelRemoveAccountWithCompletionHandler               = objc.RegisterName("removeAccount:withCompletionHandler:")
+	_aCAccountStoreSelAccounts                                         = objc.RegisterName("accounts")
 )
 
 func ACAccountStoreFromID(id objc.ID) *ACAccountStore {
@@ -42,13 +42,17 @@ func ACAccountStoreFromID(id objc.ID) *ACAccountStore {
 
 func (o *ACAccountStore) AccountWithIdentifier(identifier *foundation.NSString) *ACAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccountWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountFromID(_ret)
 }
 
 func (o *ACAccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier *foundation.NSString) *ACAccountType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aCAccountStoreSelAccountTypeWithAccountTypeIdentifier, typeIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ACAccountTypeFromID(_ret)
 }
 
@@ -105,4 +109,3 @@ func (o *ACAccountStore) Accounts() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _aCAccountStoreSelAccounts)
 	return _ret
 }
-

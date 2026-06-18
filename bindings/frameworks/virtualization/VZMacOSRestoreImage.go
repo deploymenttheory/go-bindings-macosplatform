@@ -18,14 +18,14 @@ type VZMacOSRestoreImage struct {
 }
 
 var (
-	_clsVZMacOSRestoreImage = _objcClass("VZMacOSRestoreImage")
-	_vZMacOSRestoreImageSelLoadFileURLCompletionHandler = objc.RegisterName("loadFileURL:completionHandler:")
+	_clsVZMacOSRestoreImage                                          = _objcClass("VZMacOSRestoreImage")
+	_vZMacOSRestoreImageSelLoadFileURLCompletionHandler              = objc.RegisterName("loadFileURL:completionHandler:")
 	_vZMacOSRestoreImageSelFetchLatestSupportedWithCompletionHandler = objc.RegisterName("fetchLatestSupportedWithCompletionHandler:")
-	_vZMacOSRestoreImageSelIsSupported = objc.RegisterName("isSupported")
-	_vZMacOSRestoreImageSelURL = objc.RegisterName("URL")
-	_vZMacOSRestoreImageSelBuildVersion = objc.RegisterName("buildVersion")
-	_vZMacOSRestoreImageSelOperatingSystemVersion = objc.RegisterName("operatingSystemVersion")
-	_vZMacOSRestoreImageSelMostFeaturefulSupportedConfiguration = objc.RegisterName("mostFeaturefulSupportedConfiguration")
+	_vZMacOSRestoreImageSelIsSupported                               = objc.RegisterName("isSupported")
+	_vZMacOSRestoreImageSelURL                                       = objc.RegisterName("URL")
+	_vZMacOSRestoreImageSelBuildVersion                              = objc.RegisterName("buildVersion")
+	_vZMacOSRestoreImageSelOperatingSystemVersion                    = objc.RegisterName("operatingSystemVersion")
+	_vZMacOSRestoreImageSelMostFeaturefulSupportedConfiguration      = objc.RegisterName("mostFeaturefulSupportedConfiguration")
 )
 
 func VZMacOSRestoreImageFromID(id objc.ID) *VZMacOSRestoreImage {
@@ -77,14 +77,18 @@ func (o *VZMacOSRestoreImage) IsSupported() bool {
 // @abstract The URL of this restore image. @discussion If the restore image was loaded using +[VZMacOSRestoreImage loadFileURL:completionHandler:], the value of this property will be a file URL. If the restore image was fetched using +[VZMacOSRestoreImage fetchLatestSupportedWithCompletionHandler:], the value of this property will be a network URL referring to an installation media file.
 func (o *VZMacOSRestoreImage) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSRestoreImageSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @abstract The build version this restore image contains.
 func (o *VZMacOSRestoreImage) BuildVersion() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSRestoreImageSelBuildVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +101,8 @@ func (o *VZMacOSRestoreImage) OperatingSystemVersion() foundation.NSOperatingSys
 // @abstract The configuration requirements for the most featureful configuration supported by the current host and by this restore image. @discussion A VZMacOSRestoreImage can contain installation media for multiple Mac hardware models (VZMacHardwareModel). Some of these hardware models may not be supported by the current host. The mostFeaturefulSupportedConfiguration property can be used to determine the hardware model and configuration requirements that will provide the most complete feature set on the current host. If none of the hardware models are supported on the current host, this property is nil.
 func (o *VZMacOSRestoreImage) MostFeaturefulSupportedConfiguration() *VZMacOSConfigurationRequirements {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSRestoreImageSelMostFeaturefulSupportedConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacOSConfigurationRequirementsFromID(_ret)
 }
-

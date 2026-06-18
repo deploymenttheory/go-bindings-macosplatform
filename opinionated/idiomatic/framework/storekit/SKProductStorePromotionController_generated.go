@@ -19,7 +19,9 @@ type ProductStorePromotionController struct {
 }
 
 // Unwrap returns the underlying [raw.SKProductStorePromotionController].
-func (x *ProductStorePromotionController) Unwrap() *raw.SKProductStorePromotionController { return x.inner }
+func (x *ProductStorePromotionController) Unwrap() *raw.SKProductStorePromotionController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -114,4 +116,3 @@ type ProductStorePromotionControllerable interface {
 }
 
 var _ ProductStorePromotionControllerable = (*ProductStorePromotionController)(nil)
-

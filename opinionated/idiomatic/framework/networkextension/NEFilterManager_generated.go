@@ -205,4 +205,3 @@ type NEFilterManagerable interface {
 }
 
 var _ NEFilterManagerable = (*NEFilterManager)(nil)
-

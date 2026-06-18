@@ -97,136 +97,136 @@ var (
 	// @function AXValueGetTypeID @result @availability Mac OS X version 10.3 or later
 	_fnAXValueGetTypeID func() uint
 	// @function AXValueGetValue @discussion Decodes the structure stored in value and copies it into valuePtr. If the structure stored in value is not the same as requested by theType, the function returns false. @param value @result
-	_fnAXValueGetValue func(unsafe.Pointer, AXValueType, unsafe.Pointer) uint8
-	_fnCopyProcessName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnDisposeIconActionUPP func(unsafe.Pointer)
-	_fnDisposeIconGetterUPP func(unsafe.Pointer)
-	_fnExitToShell func()
-	_fnGetCurrentProcess func(unsafe.Pointer) int16
-	_fnGetFrontProcess func(unsafe.Pointer) int16
-	_fnGetIconFamilyData func(**osservices.IconFamilyResource, uint, *string) int16
-	_fnGetIconRefVariant func(unsafe.Pointer, uint, *int16) unsafe.Pointer
-	_fnGetNextProcess func(unsafe.Pointer) int16
-	_fnGetProcessBundleLocation func(unsafe.Pointer, *carboncore.FSRef) int
-	_fnGetProcessForPID func(int, unsafe.Pointer) int
-	_fnGetProcessInformation func(unsafe.Pointer, *ProcessInfoRec) int16
-	_fnGetProcessPID func(unsafe.Pointer, *int) int
-	_fnHIShapeContainsPoint func(unsafe.Pointer, *corefoundation.CGPoint) uint8
-	_fnHIShapeCreateCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateDifference func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateEmpty func() unsafe.Pointer
-	_fnHIShapeCreateIntersection func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateMutable func() unsafe.Pointer
-	_fnHIShapeCreateMutableCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateMutableWithRect func(*corefoundation.CGRect) unsafe.Pointer
-	_fnHIShapeCreateUnion func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateWithQDRgn func(unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeCreateWithRect func(*corefoundation.CGRect) unsafe.Pointer
-	_fnHIShapeCreateXor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnHIShapeDifference func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeEnumerate func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeGetAsQDRgn func(unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeGetBounds func(unsafe.Pointer, *corefoundation.CGRect) *corefoundation.CGRect
-	_fnHIShapeGetTypeID func() uint
-	_fnHIShapeInset func(unsafe.Pointer, float64, float64) int
-	_fnHIShapeIntersect func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeIntersectsRect func(unsafe.Pointer, *corefoundation.CGRect) uint8
-	_fnHIShapeIsEmpty func(unsafe.Pointer) uint8
-	_fnHIShapeIsRectangular func(unsafe.Pointer) uint8
-	_fnHIShapeOffset func(unsafe.Pointer, float64, float64) int
-	_fnHIShapeReplacePathInCGContext func(unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeSetEmpty func(unsafe.Pointer) int
-	_fnHIShapeSetWithShape func(unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeUnion func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIShapeUnionWithRect func(unsafe.Pointer, *corefoundation.CGRect) int
-	_fnHIShapeXor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnICAddMapEntry func(unsafe.Pointer, *string, *ICMapEntry) int
-	_fnICAddProfile func(unsafe.Pointer, int, *int) int
-	_fnICBegin func(unsafe.Pointer, uint8) int
-	_fnICCountMapEntries func(unsafe.Pointer, *string, *int64) int
-	_fnICCountPref func(unsafe.Pointer, *int64) int
-	_fnICCountProfiles func(unsafe.Pointer, *int64) int
-	_fnICCreateGURLEvent func(unsafe.Pointer, uint, *string, *ae.AEDesc) int
-	_fnICDeleteMapEntry func(unsafe.Pointer, *string, int) int
-	_fnICDeletePref func(unsafe.Pointer, *uint8) int
-	_fnICDeleteProfile func(unsafe.Pointer, int) int
-	_fnICEditPreferences func(unsafe.Pointer, *uint8) int
-	_fnICEnd func(unsafe.Pointer) int
-	_fnICFindPrefHandle func(unsafe.Pointer, *uint8, *uint, *string) int
-	_fnICGetConfigName func(unsafe.Pointer, uint8, *uint8) int
-	_fnICGetCurrentProfile func(unsafe.Pointer, *int) int
-	_fnICGetDefaultPref func(unsafe.Pointer, *uint8, *string) int
-	_fnICGetIndMapEntry func(unsafe.Pointer, *string, int, *int64, *ICMapEntry) int
-	_fnICGetIndPref func(unsafe.Pointer, int, *uint8) int
-	_fnICGetIndProfile func(unsafe.Pointer, int, *int) int
-	_fnICGetMapEntry func(unsafe.Pointer, *string, int, *ICMapEntry) int
-	_fnICGetPerm func(unsafe.Pointer, *uint8) int
-	_fnICGetPref func(unsafe.Pointer, *uint8, *uint, unsafe.Pointer, *int64) int
-	_fnICGetPrefHandle func(unsafe.Pointer, *uint8, *uint, **string) int
-	_fnICGetProfileName func(unsafe.Pointer, int, *uint8) int
-	_fnICGetSeed func(unsafe.Pointer, *int64) int
-	_fnICGetVersion func(unsafe.Pointer, int, *uint) int
-	_fnICLaunchURL func(unsafe.Pointer, *uint8, unsafe.Pointer, int, *int64, *int64) int
-	_fnICMapEntriesFilename func(unsafe.Pointer, *string, *uint8, *ICMapEntry) int
-	_fnICMapEntriesTypeCreator func(unsafe.Pointer, *string, uint, uint, *uint8, *ICMapEntry) int
-	_fnICMapFilename func(unsafe.Pointer, *uint8, *ICMapEntry) int
-	_fnICMapTypeCreator func(unsafe.Pointer, uint, uint, *uint8, *ICMapEntry) int
-	_fnICParseURL func(unsafe.Pointer, *uint8, unsafe.Pointer, int, *int64, *int64, *string) int
-	_fnICSendGURLEvent func(unsafe.Pointer, *ae.AEDesc) int
-	_fnICSetCurrentProfile func(unsafe.Pointer, int) int
-	_fnICSetMapEntry func(unsafe.Pointer, *string, int, *ICMapEntry) int
-	_fnICSetPref func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, int) int
-	_fnICSetPrefHandle func(unsafe.Pointer, *uint8, uint, *string) int
-	_fnICSetProfileName func(unsafe.Pointer, int, *uint8) int
-	_fnICStart func(unsafe.Pointer, uint) int
-	_fnICStop func(unsafe.Pointer) int
-	_fnIconRefContainsCGPoint func(*corefoundation.CGPoint, *corefoundation.CGRect, int16, uint, unsafe.Pointer) uint8
-	_fnIconRefIntersectsCGRect func(*corefoundation.CGRect, *corefoundation.CGRect, int16, uint, unsafe.Pointer) uint8
-	_fnIconRefToHIShape func(*corefoundation.CGRect, int16, uint, unsafe.Pointer) unsafe.Pointer
-	_fnIconRefToIconFamily func(unsafe.Pointer, uint, ***osservices.IconFamilyResource) int16
-	_fnInvokeIconActionUPP func(uint, **string, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeIconGetterUPP func(uint, unsafe.Pointer, unsafe.Pointer) *string
-	_fnIsIconRefMaskEmpty func(unsafe.Pointer) uint8
-	_fnIsProcessVisible func(unsafe.Pointer) uint8
-	_fnKillProcess func(unsafe.Pointer) int16
-	_fnLaunchApplication func(*LaunchParamBlockRec) int16
-	_fnNewIconActionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewIconGetterUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnPasteboardClear func(unsafe.Pointer) int
-	_fnPasteboardCopyItemFlavorData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardCopyItemFlavors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardCopyName func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardCopyPasteLocation func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardCreate func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardGetItemCount func(unsafe.Pointer, *uint) int
-	_fnPasteboardGetItemFlavorFlags func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *PasteboardFlavorFlags) int
-	_fnPasteboardGetItemIdentifier func(unsafe.Pointer, int, unsafe.Pointer) int
-	_fnPasteboardGetTypeID func() uint
-	_fnPasteboardPutItemFlavor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, PasteboardFlavorFlags) int
-	_fnPasteboardResolvePromises func(unsafe.Pointer) int
-	_fnPasteboardSetPasteLocation func(unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardSetPromiseKeeper func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnPasteboardSynchronize func(unsafe.Pointer) PasteboardSyncFlags
-	_fnPlotIconRefInContext func(unsafe.Pointer, *corefoundation.CGRect, int16, int16, *qd.RGBColor, uint, unsafe.Pointer) int
+	_fnAXValueGetValue                  func(unsafe.Pointer, AXValueType, unsafe.Pointer) uint8
+	_fnCopyProcessName                  func(unsafe.Pointer, unsafe.Pointer) int
+	_fnDisposeIconActionUPP             func(unsafe.Pointer)
+	_fnDisposeIconGetterUPP             func(unsafe.Pointer)
+	_fnExitToShell                      func()
+	_fnGetCurrentProcess                func(unsafe.Pointer) int16
+	_fnGetFrontProcess                  func(unsafe.Pointer) int16
+	_fnGetIconFamilyData                func(**osservices.IconFamilyResource, uint, *string) int16
+	_fnGetIconRefVariant                func(unsafe.Pointer, uint, *int16) unsafe.Pointer
+	_fnGetNextProcess                   func(unsafe.Pointer) int16
+	_fnGetProcessBundleLocation         func(unsafe.Pointer, *carboncore.FSRef) int
+	_fnGetProcessForPID                 func(int, unsafe.Pointer) int
+	_fnGetProcessInformation            func(unsafe.Pointer, *ProcessInfoRec) int16
+	_fnGetProcessPID                    func(unsafe.Pointer, *int) int
+	_fnHIShapeContainsPoint             func(unsafe.Pointer, *corefoundation.CGPoint) uint8
+	_fnHIShapeCreateCopy                func(unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateDifference          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateEmpty               func() unsafe.Pointer
+	_fnHIShapeCreateIntersection        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateMutable             func() unsafe.Pointer
+	_fnHIShapeCreateMutableCopy         func(unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateMutableWithRect     func(*corefoundation.CGRect) unsafe.Pointer
+	_fnHIShapeCreateUnion               func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateWithQDRgn           func(unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeCreateWithRect            func(*corefoundation.CGRect) unsafe.Pointer
+	_fnHIShapeCreateXor                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnHIShapeDifference                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeEnumerate                 func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeGetAsQDRgn                func(unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeGetBounds                 func(unsafe.Pointer, *corefoundation.CGRect) *corefoundation.CGRect
+	_fnHIShapeGetTypeID                 func() uint
+	_fnHIShapeInset                     func(unsafe.Pointer, float64, float64) int
+	_fnHIShapeIntersect                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeIntersectsRect            func(unsafe.Pointer, *corefoundation.CGRect) uint8
+	_fnHIShapeIsEmpty                   func(unsafe.Pointer) uint8
+	_fnHIShapeIsRectangular             func(unsafe.Pointer) uint8
+	_fnHIShapeOffset                    func(unsafe.Pointer, float64, float64) int
+	_fnHIShapeReplacePathInCGContext    func(unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeSetEmpty                  func(unsafe.Pointer) int
+	_fnHIShapeSetWithShape              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeUnion                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIShapeUnionWithRect             func(unsafe.Pointer, *corefoundation.CGRect) int
+	_fnHIShapeXor                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnICAddMapEntry                    func(unsafe.Pointer, *string, *ICMapEntry) int
+	_fnICAddProfile                     func(unsafe.Pointer, int, *int) int
+	_fnICBegin                          func(unsafe.Pointer, uint8) int
+	_fnICCountMapEntries                func(unsafe.Pointer, *string, *int64) int
+	_fnICCountPref                      func(unsafe.Pointer, *int64) int
+	_fnICCountProfiles                  func(unsafe.Pointer, *int64) int
+	_fnICCreateGURLEvent                func(unsafe.Pointer, uint, *string, *ae.AEDesc) int
+	_fnICDeleteMapEntry                 func(unsafe.Pointer, *string, int) int
+	_fnICDeletePref                     func(unsafe.Pointer, *uint8) int
+	_fnICDeleteProfile                  func(unsafe.Pointer, int) int
+	_fnICEditPreferences                func(unsafe.Pointer, *uint8) int
+	_fnICEnd                            func(unsafe.Pointer) int
+	_fnICFindPrefHandle                 func(unsafe.Pointer, *uint8, *uint, *string) int
+	_fnICGetConfigName                  func(unsafe.Pointer, uint8, *uint8) int
+	_fnICGetCurrentProfile              func(unsafe.Pointer, *int) int
+	_fnICGetDefaultPref                 func(unsafe.Pointer, *uint8, *string) int
+	_fnICGetIndMapEntry                 func(unsafe.Pointer, *string, int, *int64, *ICMapEntry) int
+	_fnICGetIndPref                     func(unsafe.Pointer, int, *uint8) int
+	_fnICGetIndProfile                  func(unsafe.Pointer, int, *int) int
+	_fnICGetMapEntry                    func(unsafe.Pointer, *string, int, *ICMapEntry) int
+	_fnICGetPerm                        func(unsafe.Pointer, *uint8) int
+	_fnICGetPref                        func(unsafe.Pointer, *uint8, *uint, unsafe.Pointer, *int64) int
+	_fnICGetPrefHandle                  func(unsafe.Pointer, *uint8, *uint, **string) int
+	_fnICGetProfileName                 func(unsafe.Pointer, int, *uint8) int
+	_fnICGetSeed                        func(unsafe.Pointer, *int64) int
+	_fnICGetVersion                     func(unsafe.Pointer, int, *uint) int
+	_fnICLaunchURL                      func(unsafe.Pointer, *uint8, unsafe.Pointer, int, *int64, *int64) int
+	_fnICMapEntriesFilename             func(unsafe.Pointer, *string, *uint8, *ICMapEntry) int
+	_fnICMapEntriesTypeCreator          func(unsafe.Pointer, *string, uint, uint, *uint8, *ICMapEntry) int
+	_fnICMapFilename                    func(unsafe.Pointer, *uint8, *ICMapEntry) int
+	_fnICMapTypeCreator                 func(unsafe.Pointer, uint, uint, *uint8, *ICMapEntry) int
+	_fnICParseURL                       func(unsafe.Pointer, *uint8, unsafe.Pointer, int, *int64, *int64, *string) int
+	_fnICSendGURLEvent                  func(unsafe.Pointer, *ae.AEDesc) int
+	_fnICSetCurrentProfile              func(unsafe.Pointer, int) int
+	_fnICSetMapEntry                    func(unsafe.Pointer, *string, int, *ICMapEntry) int
+	_fnICSetPref                        func(unsafe.Pointer, *uint8, uint, unsafe.Pointer, int) int
+	_fnICSetPrefHandle                  func(unsafe.Pointer, *uint8, uint, *string) int
+	_fnICSetProfileName                 func(unsafe.Pointer, int, *uint8) int
+	_fnICStart                          func(unsafe.Pointer, uint) int
+	_fnICStop                           func(unsafe.Pointer) int
+	_fnIconRefContainsCGPoint           func(*corefoundation.CGPoint, *corefoundation.CGRect, int16, uint, unsafe.Pointer) uint8
+	_fnIconRefIntersectsCGRect          func(*corefoundation.CGRect, *corefoundation.CGRect, int16, uint, unsafe.Pointer) uint8
+	_fnIconRefToHIShape                 func(*corefoundation.CGRect, int16, uint, unsafe.Pointer) unsafe.Pointer
+	_fnIconRefToIconFamily              func(unsafe.Pointer, uint, ***osservices.IconFamilyResource) int16
+	_fnInvokeIconActionUPP              func(uint, **string, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeIconGetterUPP              func(uint, unsafe.Pointer, unsafe.Pointer) *string
+	_fnIsIconRefMaskEmpty               func(unsafe.Pointer) uint8
+	_fnIsProcessVisible                 func(unsafe.Pointer) uint8
+	_fnKillProcess                      func(unsafe.Pointer) int16
+	_fnLaunchApplication                func(*LaunchParamBlockRec) int16
+	_fnNewIconActionUPP                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewIconGetterUPP                 func(unsafe.Pointer) unsafe.Pointer
+	_fnPasteboardClear                  func(unsafe.Pointer) int
+	_fnPasteboardCopyItemFlavorData     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardCopyItemFlavors        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardCopyName               func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardCopyPasteLocation      func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardCreate                 func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardGetItemCount           func(unsafe.Pointer, *uint) int
+	_fnPasteboardGetItemFlavorFlags     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *PasteboardFlavorFlags) int
+	_fnPasteboardGetItemIdentifier      func(unsafe.Pointer, int, unsafe.Pointer) int
+	_fnPasteboardGetTypeID              func() uint
+	_fnPasteboardPutItemFlavor          func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, PasteboardFlavorFlags) int
+	_fnPasteboardResolvePromises        func(unsafe.Pointer) int
+	_fnPasteboardSetPasteLocation       func(unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardSetPromiseKeeper       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnPasteboardSynchronize            func(unsafe.Pointer) PasteboardSyncFlags
+	_fnPlotIconRefInContext             func(unsafe.Pointer, *corefoundation.CGRect, int16, int16, *qd.RGBColor, uint, unsafe.Pointer) int
 	_fnProcessInformationCopyDictionary func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnSameProcess func(unsafe.Pointer, unsafe.Pointer, *uint8) int16
-	_fnSetFrontProcess func(unsafe.Pointer) int16
-	_fnSetFrontProcessWithOptions func(unsafe.Pointer, uint) int
-	_fnSetIconFamilyData func(**osservices.IconFamilyResource, uint, *string) int16
-	_fnShowHideProcess func(unsafe.Pointer, uint8) int16
-	_fnTransformProcessType func(unsafe.Pointer, uint) int
-	_fnTranslationCopyDestinationType func(unsafe.Pointer, unsafe.Pointer) int
-	_fnTranslationCopySourceType func(unsafe.Pointer, unsafe.Pointer) int
-	_fnTranslationCreate func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnSameProcess                      func(unsafe.Pointer, unsafe.Pointer, *uint8) int16
+	_fnSetFrontProcess                  func(unsafe.Pointer) int16
+	_fnSetFrontProcessWithOptions       func(unsafe.Pointer, uint) int
+	_fnSetIconFamilyData                func(**osservices.IconFamilyResource, uint, *string) int16
+	_fnShowHideProcess                  func(unsafe.Pointer, uint8) int16
+	_fnTransformProcessType             func(unsafe.Pointer, uint) int
+	_fnTranslationCopyDestinationType   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnTranslationCopySourceType        func(unsafe.Pointer, unsafe.Pointer) int
+	_fnTranslationCreate                func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
 	_fnTranslationCreateWithSourceArray func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnTranslationGetTranslationFlags func(unsafe.Pointer, *uint) int
-	_fnTranslationGetTypeID func() uint
-	_fnTranslationPerformForData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTranslationPerformForFile func(unsafe.Pointer, *carboncore.FSRef, *carboncore.FSRef, unsafe.Pointer, *carboncore.FSRef) int
-	_fnTranslationPerformForURL func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnUAZoomChangeFocus func(*corefoundation.CGRect, *corefoundation.CGRect, uint) int
-	_fnUAZoomEnabled func() uint8
-	_fnWakeUpProcess func(unsafe.Pointer) int16
+	_fnTranslationGetTranslationFlags   func(unsafe.Pointer, *uint) int
+	_fnTranslationGetTypeID             func() uint
+	_fnTranslationPerformForData        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTranslationPerformForFile        func(unsafe.Pointer, *carboncore.FSRef, *carboncore.FSRef, unsafe.Pointer, *carboncore.FSRef) int
+	_fnTranslationPerformForURL         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnUAZoomChangeFocus                func(*corefoundation.CGRect, *corefoundation.CGRect, uint) int
+	_fnUAZoomEnabled                    func() uint8
+	_fnWakeUpProcess                    func(unsafe.Pointer) int16
 )
 
 // @function AXAPIEnabled @abstract Returns whether the accessibility API is enabled. @deprecated  In OS X 10.9 and later. Use AXIsProcessTrustedWithOptions instead. @result Returns TRUE if the accessibility API is currently enabled, otherwise FALSE.
@@ -954,4 +954,3 @@ func UAZoomEnabled() uint8 {
 func WakeUpProcess(pSN unsafe.Pointer) int16 {
 	return _fnWakeUpProcess(pSN)
 }
-

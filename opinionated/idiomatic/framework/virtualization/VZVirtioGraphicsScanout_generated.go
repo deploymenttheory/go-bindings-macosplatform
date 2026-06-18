@@ -35,7 +35,9 @@ func NewVirtioGraphicsScanout() *VirtioGraphicsScanout {
 	return &VirtioGraphicsScanout{inner: raw.VZVirtioGraphicsScanoutFromID(_id)}
 }
 
-func (x *VirtioGraphicsScanout) asGraphicsDisplay() *raw.VZGraphicsDisplay { return &x.inner.VZGraphicsDisplay }
+func (x *VirtioGraphicsScanout) asGraphicsDisplay() *raw.VZGraphicsDisplay {
+	return &x.inner.VZGraphicsDisplay
+}
 
 // VirtioGraphicsScanoutable is the interface implemented by [VirtioGraphicsScanout], for mocking and DI.
 type VirtioGraphicsScanoutable interface {
@@ -43,4 +45,3 @@ type VirtioGraphicsScanoutable interface {
 }
 
 var _ VirtioGraphicsScanoutable = (*VirtioGraphicsScanout)(nil)
-

@@ -68,11 +68,17 @@ func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradi
 	x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf, sourceArray, gradient, state, destination)
 }
 
-func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel }
+func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayUnaryGradientKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayUnaryGradientKernel) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayUnaryGradientKernelable is the interface implemented by [NDArrayUnaryGradientKernel], for mocking and DI.
 type NDArrayUnaryGradientKernelable interface {
@@ -85,4 +91,3 @@ type NDArrayUnaryGradientKernelable interface {
 }
 
 var _ NDArrayUnaryGradientKernelable = (*NDArrayUnaryGradientKernel)(nil)
-

@@ -72,4 +72,3 @@ type SystemExtensionInfoable interface {
 }
 
 var _ SystemExtensionInfoable = (*SystemExtensionInfo)(nil)
-

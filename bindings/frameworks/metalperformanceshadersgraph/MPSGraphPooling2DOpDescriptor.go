@@ -16,42 +16,42 @@ type MPSGraphPooling2DOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphPooling2DOpDescriptor = _objcClass("MPSGraphPooling2DOpDescriptor")
+	_clsMPSGraphPooling2DOpDescriptor                                                                                                                                                          = _objcClass("MPSGraphPooling2DOpDescriptor")
 	_mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:paddingStyle:dataLayout:")
-	_mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:paddingStyle:dataLayout:")
-	_mPSGraphPooling2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
-	_mPSGraphPooling2DOpDescriptorSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSGraphPooling2DOpDescriptorSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSGraphPooling2DOpDescriptorSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSGraphPooling2DOpDescriptorSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
-	_mPSGraphPooling2DOpDescriptorSelStrideInX = objc.RegisterName("strideInX")
-	_mPSGraphPooling2DOpDescriptorSelSetStrideInX = objc.RegisterName("setStrideInX:")
-	_mPSGraphPooling2DOpDescriptorSelStrideInY = objc.RegisterName("strideInY")
-	_mPSGraphPooling2DOpDescriptorSelSetStrideInY = objc.RegisterName("setStrideInY:")
-	_mPSGraphPooling2DOpDescriptorSelDilationRateInX = objc.RegisterName("dilationRateInX")
-	_mPSGraphPooling2DOpDescriptorSelSetDilationRateInX = objc.RegisterName("setDilationRateInX:")
-	_mPSGraphPooling2DOpDescriptorSelDilationRateInY = objc.RegisterName("dilationRateInY")
-	_mPSGraphPooling2DOpDescriptorSelSetDilationRateInY = objc.RegisterName("setDilationRateInY:")
-	_mPSGraphPooling2DOpDescriptorSelPaddingLeft = objc.RegisterName("paddingLeft")
-	_mPSGraphPooling2DOpDescriptorSelSetPaddingLeft = objc.RegisterName("setPaddingLeft:")
-	_mPSGraphPooling2DOpDescriptorSelPaddingRight = objc.RegisterName("paddingRight")
-	_mPSGraphPooling2DOpDescriptorSelSetPaddingRight = objc.RegisterName("setPaddingRight:")
-	_mPSGraphPooling2DOpDescriptorSelPaddingTop = objc.RegisterName("paddingTop")
-	_mPSGraphPooling2DOpDescriptorSelSetPaddingTop = objc.RegisterName("setPaddingTop:")
-	_mPSGraphPooling2DOpDescriptorSelPaddingBottom = objc.RegisterName("paddingBottom")
-	_mPSGraphPooling2DOpDescriptorSelSetPaddingBottom = objc.RegisterName("setPaddingBottom:")
-	_mPSGraphPooling2DOpDescriptorSelPaddingStyle = objc.RegisterName("paddingStyle")
-	_mPSGraphPooling2DOpDescriptorSelSetPaddingStyle = objc.RegisterName("setPaddingStyle:")
-	_mPSGraphPooling2DOpDescriptorSelDataLayout = objc.RegisterName("dataLayout")
-	_mPSGraphPooling2DOpDescriptorSelSetDataLayout = objc.RegisterName("setDataLayout:")
-	_mPSGraphPooling2DOpDescriptorSelReturnIndicesMode = objc.RegisterName("returnIndicesMode")
-	_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesMode = objc.RegisterName("setReturnIndicesMode:")
-	_mPSGraphPooling2DOpDescriptorSelReturnIndicesDataType = objc.RegisterName("returnIndicesDataType")
-	_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesDataType = objc.RegisterName("setReturnIndicesDataType:")
-	_mPSGraphPooling2DOpDescriptorSelCeilMode = objc.RegisterName("ceilMode")
-	_mPSGraphPooling2DOpDescriptorSelSetCeilMode = objc.RegisterName("setCeilMode:")
-	_mPSGraphPooling2DOpDescriptorSelIncludeZeroPadToAverage = objc.RegisterName("includeZeroPadToAverage")
-	_mPSGraphPooling2DOpDescriptorSelSetIncludeZeroPadToAverage = objc.RegisterName("setIncludeZeroPadToAverage:")
+	_mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout                                                                             = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:paddingStyle:dataLayout:")
+	_mPSGraphPooling2DOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom                                                                                      = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
+	_mPSGraphPooling2DOpDescriptorSelKernelWidth                                                                                                                                               = objc.RegisterName("kernelWidth")
+	_mPSGraphPooling2DOpDescriptorSelSetKernelWidth                                                                                                                                            = objc.RegisterName("setKernelWidth:")
+	_mPSGraphPooling2DOpDescriptorSelKernelHeight                                                                                                                                              = objc.RegisterName("kernelHeight")
+	_mPSGraphPooling2DOpDescriptorSelSetKernelHeight                                                                                                                                           = objc.RegisterName("setKernelHeight:")
+	_mPSGraphPooling2DOpDescriptorSelStrideInX                                                                                                                                                 = objc.RegisterName("strideInX")
+	_mPSGraphPooling2DOpDescriptorSelSetStrideInX                                                                                                                                              = objc.RegisterName("setStrideInX:")
+	_mPSGraphPooling2DOpDescriptorSelStrideInY                                                                                                                                                 = objc.RegisterName("strideInY")
+	_mPSGraphPooling2DOpDescriptorSelSetStrideInY                                                                                                                                              = objc.RegisterName("setStrideInY:")
+	_mPSGraphPooling2DOpDescriptorSelDilationRateInX                                                                                                                                           = objc.RegisterName("dilationRateInX")
+	_mPSGraphPooling2DOpDescriptorSelSetDilationRateInX                                                                                                                                        = objc.RegisterName("setDilationRateInX:")
+	_mPSGraphPooling2DOpDescriptorSelDilationRateInY                                                                                                                                           = objc.RegisterName("dilationRateInY")
+	_mPSGraphPooling2DOpDescriptorSelSetDilationRateInY                                                                                                                                        = objc.RegisterName("setDilationRateInY:")
+	_mPSGraphPooling2DOpDescriptorSelPaddingLeft                                                                                                                                               = objc.RegisterName("paddingLeft")
+	_mPSGraphPooling2DOpDescriptorSelSetPaddingLeft                                                                                                                                            = objc.RegisterName("setPaddingLeft:")
+	_mPSGraphPooling2DOpDescriptorSelPaddingRight                                                                                                                                              = objc.RegisterName("paddingRight")
+	_mPSGraphPooling2DOpDescriptorSelSetPaddingRight                                                                                                                                           = objc.RegisterName("setPaddingRight:")
+	_mPSGraphPooling2DOpDescriptorSelPaddingTop                                                                                                                                                = objc.RegisterName("paddingTop")
+	_mPSGraphPooling2DOpDescriptorSelSetPaddingTop                                                                                                                                             = objc.RegisterName("setPaddingTop:")
+	_mPSGraphPooling2DOpDescriptorSelPaddingBottom                                                                                                                                             = objc.RegisterName("paddingBottom")
+	_mPSGraphPooling2DOpDescriptorSelSetPaddingBottom                                                                                                                                          = objc.RegisterName("setPaddingBottom:")
+	_mPSGraphPooling2DOpDescriptorSelPaddingStyle                                                                                                                                              = objc.RegisterName("paddingStyle")
+	_mPSGraphPooling2DOpDescriptorSelSetPaddingStyle                                                                                                                                           = objc.RegisterName("setPaddingStyle:")
+	_mPSGraphPooling2DOpDescriptorSelDataLayout                                                                                                                                                = objc.RegisterName("dataLayout")
+	_mPSGraphPooling2DOpDescriptorSelSetDataLayout                                                                                                                                             = objc.RegisterName("setDataLayout:")
+	_mPSGraphPooling2DOpDescriptorSelReturnIndicesMode                                                                                                                                         = objc.RegisterName("returnIndicesMode")
+	_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesMode                                                                                                                                      = objc.RegisterName("setReturnIndicesMode:")
+	_mPSGraphPooling2DOpDescriptorSelReturnIndicesDataType                                                                                                                                     = objc.RegisterName("returnIndicesDataType")
+	_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesDataType                                                                                                                                  = objc.RegisterName("setReturnIndicesDataType:")
+	_mPSGraphPooling2DOpDescriptorSelCeilMode                                                                                                                                                  = objc.RegisterName("ceilMode")
+	_mPSGraphPooling2DOpDescriptorSelSetCeilMode                                                                                                                                               = objc.RegisterName("setCeilMode:")
+	_mPSGraphPooling2DOpDescriptorSelIncludeZeroPadToAverage                                                                                                                                   = objc.RegisterName("includeZeroPadToAverage")
+	_mPSGraphPooling2DOpDescriptorSelSetIncludeZeroPadToAverage                                                                                                                                = objc.RegisterName("setIncludeZeroPadToAverage:")
 )
 
 func MPSGraphPooling2DOpDescriptorFromID(id objc.ID) *MPSGraphPooling2DOpDescriptor {
@@ -67,14 +67,18 @@ func MPSGraphPooling2DOpDescriptorFromID(id objc.ID) *MPSGraphPooling2DOpDescrip
 // Creates a 2D pooling descriptor with given values. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphPooling2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling2DOpDescriptor), _mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphPooling2DOpDescriptorFromID(_ret)
 }
 
-// Creates a 2D pooling descriptor with given values. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight`` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - Returns: The descriptor on autoreleasepool.
+// Creates a 2D pooling descriptor with given values. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight“ property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - paddingStyle: See `paddingStyle` property. - dataLayout: See `dataLayout` property. - Returns: The descriptor on autoreleasepool.
 func MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphPooling2DOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphPooling2DOpDescriptor), _mPSGraphPooling2DOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, paddingStyle, dataLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphPooling2DOpDescriptorFromID(_ret)
 }
 
@@ -193,7 +197,7 @@ func (o *MPSGraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPad
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetPaddingStyle, paddingStyle)
 }
 
-// Defines the data layout of the input data in the forward pass. See: ``MPSGraphTensorNamedDataLayout``.
+// Defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (o *MPSGraphPooling2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
 	_ret := objc.Send[MPSGraphTensorNamedDataLayout](o.Ptr(), _mPSGraphPooling2DOpDescriptorSelDataLayout)
 	return _ret
@@ -203,24 +207,24 @@ func (o *MPSGraphPooling2DOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorN
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetDataLayout, dataLayout)
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (o *MPSGraphPooling2DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
 	_ret := objc.Send[MPSGraphPoolingReturnIndicesMode](o.Ptr(), _mPSGraphPooling2DOpDescriptorSelReturnIndicesMode)
 	return _ret
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
 func (o *MPSGraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesMode, returnIndicesMode)
 }
 
-// Defines the data type for returned indices. Use this in conjunction with ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
 func (o *MPSGraphPooling2DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
 	_ret := objc.Send[mpscore.MPSDataType](o.Ptr(), _mPSGraphPooling2DOpDescriptorSelReturnIndicesDataType)
 	return _ret
 }
 
-// Defines the data type for returned indices. Use this in conjunction with ``MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:`` API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
 func (o *MPSGraphPooling2DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetReturnIndicesDataType, returnIndicesDataType)
 }
@@ -244,4 +248,3 @@ func (o *MPSGraphPooling2DOpDescriptor) IncludeZeroPadToAverage() bool {
 func (o *MPSGraphPooling2DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
 	o.Ptr().Send(_mPSGraphPooling2DOpDescriptorSelSetIncludeZeroPadToAverage, includeZeroPadToAverage)
 }
-

@@ -140,4 +140,3 @@ type SafariTabable interface {
 }
 
 var _ SafariTabable = (*SafariTab)(nil)
-

@@ -15,11 +15,11 @@ type NSCountedSet[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSCountedSet = _objcClass("NSCountedSet")
+	_clsNSCountedSet                 = _objcClass("NSCountedSet")
 	_nSCountedSetSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSCountedSetSelInitWithArray = objc.RegisterName("initWithArray:")
-	_nSCountedSetSelInitWithSet = objc.RegisterName("initWithSet:")
-	_nSCountedSetSelCountForObject = objc.RegisterName("countForObject:")
+	_nSCountedSetSelInitWithArray    = objc.RegisterName("initWithArray:")
+	_nSCountedSetSelInitWithSet      = objc.RegisterName("initWithSet:")
+	_nSCountedSetSelCountForObject   = objc.RegisterName("countForObject:")
 )
 
 func NSCountedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSCountedSet[ObjectType] {
@@ -34,19 +34,25 @@ func NSCountedSetFromID[ObjectType purego.AnyObject](id objc.ID) *NSCountedSet[O
 
 func (o *NSCountedSet[ObjectType]) InitWithCapacity(numItems uint) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSCountedSet[ObjectType]) InitWithArray(array *NSArray[ObjectType]) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithArray, array.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
 func (o *NSCountedSet[ObjectType]) InitWithSet(set *NSSet[ObjectType]) *NSCountedSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCountedSetSelInitWithSet, set.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCountedSetFromID[ObjectType](_ret)
 }
 
@@ -54,4 +60,3 @@ func (o *NSCountedSet[ObjectType]) CountForObject(object ObjectType) uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSCountedSetSelCountForObject, object)
 	return _ret
 }
-

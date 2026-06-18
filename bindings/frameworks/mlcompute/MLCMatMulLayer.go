@@ -15,9 +15,9 @@ type MLCMatMulLayer struct {
 }
 
 var (
-	_clsMLCMatMulLayer = _objcClass("MLCMatMulLayer")
+	_clsMLCMatMulLayer                    = _objcClass("MLCMatMulLayer")
 	_mLCMatMulLayerSelLayerWithDescriptor = objc.RegisterName("layerWithDescriptor:")
-	_mLCMatMulLayerSelDescriptor = objc.RegisterName("descriptor")
+	_mLCMatMulLayerSelDescriptor          = objc.RegisterName("descriptor")
 )
 
 func MLCMatMulLayerFromID(id objc.ID) *MLCMatMulLayer {
@@ -33,14 +33,17 @@ func MLCMatMulLayerFromID(id objc.ID) *MLCMatMulLayer {
 // @abstract Create a matrix multiply layer @param    descriptor A matrix multiply descriptor @return   A new layer for matrix multiplication.
 func MLCMatMulLayerLayerWithDescriptor(descriptor *MLCMatMulDescriptor) *MLCMatMulLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulLayer), _mLCMatMulLayerSelLayerWithDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMatMulLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The matrix multiplication descriptor
 func (o *MLCMatMulLayer) Descriptor() *MLCMatMulDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCMatMulLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMatMulDescriptorFromID(_ret)
 }
-

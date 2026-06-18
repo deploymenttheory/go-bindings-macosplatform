@@ -57,4 +57,3 @@ type StoredValuePassPropertiesProvider interface {
 type TransitPassPropertiesProvider interface {
 	asTransitPassProperties() *raw.PKTransitPassProperties
 }
-

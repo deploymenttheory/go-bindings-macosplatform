@@ -18,14 +18,14 @@ type GCRacingWheel struct {
 }
 
 var (
-	_clsGCRacingWheel = _objcClass("GCRacingWheel")
+	_clsGCRacingWheel                       = _objcClass("GCRacingWheel")
 	_gCRacingWheelSelAcquireDeviceWithError = objc.RegisterName("acquireDeviceWithError:")
-	_gCRacingWheelSelRelinquishDevice = objc.RegisterName("relinquishDevice")
-	_gCRacingWheelSelCapture = objc.RegisterName("capture")
-	_gCRacingWheelSelConnectedRacingWheels = objc.RegisterName("connectedRacingWheels")
-	_gCRacingWheelSelIsAcquired = objc.RegisterName("isAcquired")
-	_gCRacingWheelSelWheelInput = objc.RegisterName("wheelInput")
-	_gCRacingWheelSelIsSnapshot = objc.RegisterName("isSnapshot")
+	_gCRacingWheelSelRelinquishDevice       = objc.RegisterName("relinquishDevice")
+	_gCRacingWheelSelCapture                = objc.RegisterName("capture")
+	_gCRacingWheelSelConnectedRacingWheels  = objc.RegisterName("connectedRacingWheels")
+	_gCRacingWheelSelIsAcquired             = objc.RegisterName("isAcquired")
+	_gCRacingWheelSelWheelInput             = objc.RegisterName("wheelInput")
+	_gCRacingWheelSelIsSnapshot             = objc.RegisterName("isSnapshot")
 )
 
 func GCRacingWheelFromID(id objc.ID) *GCRacingWheel {
@@ -56,14 +56,18 @@ func (o *GCRacingWheel) RelinquishDevice() {
 // Polls the state vector of the racing wheel and saves it to a new instance of GCRacingWheel. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new racing wheel with the duplicated state vector of the receiver.
 func (o *GCRacingWheel) Capture() *GCRacingWheel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelSelCapture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCRacingWheelFromID(_ret)
 }
 
 // Get the collection of racing wheels currently attached to the system. @see GCRacingWheelDidConnectNotification @see GCRacingWheelDidDisconnectNotification
 func GCRacingWheelConnectedRacingWheels() *foundation.NSSet[*GCRacingWheel] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCRacingWheel), _gCRacingWheelSelConnectedRacingWheels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*GCRacingWheel](_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *GCRacingWheel) IsAcquired() bool {
 // Get the physical input profile for the racing wheel.
 func (o *GCRacingWheel) WheelInput() *GCRacingWheelInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelSelWheelInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCRacingWheelInputFromID(_ret)
 }
 
@@ -85,4 +91,3 @@ func (o *GCRacingWheel) IsSnapshot() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gCRacingWheelSelIsSnapshot)
 	return _ret
 }
-

@@ -64,4 +64,3 @@ type Addressable interface {
 }
 
 var _ Addressable = (*Address)(nil)
-

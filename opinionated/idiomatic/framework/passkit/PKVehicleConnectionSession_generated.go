@@ -66,4 +66,3 @@ type VehicleConnectionSessionable interface {
 }
 
 var _ VehicleConnectionSessionable = (*VehicleConnectionSession)(nil)
-

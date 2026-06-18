@@ -102,4 +102,3 @@ type CDTextBlockable interface {
 }
 
 var _ CDTextBlockable = (*CDTextBlock)(nil)
-

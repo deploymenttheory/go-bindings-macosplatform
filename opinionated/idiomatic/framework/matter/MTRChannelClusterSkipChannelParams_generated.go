@@ -16,7 +16,9 @@ type MTRChannelClusterSkipChannelParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterSkipChannelParams].
-func (x *MTRChannelClusterSkipChannelParams) Unwrap() *raw.MTRChannelClusterSkipChannelParams { return x.inner }
+func (x *MTRChannelClusterSkipChannelParams) Unwrap() *raw.MTRChannelClusterSkipChannelParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRChannelClusterSkipChannelParamsable interface {
 }
 
 var _ MTRChannelClusterSkipChannelParamsable = (*MTRChannelClusterSkipChannelParams)(nil)
-

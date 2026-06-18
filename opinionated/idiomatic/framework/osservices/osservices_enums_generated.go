@@ -11,15 +11,15 @@ import (
 type WSTypeID int64
 
 const (
-	EWSUnknownType WSTypeID = 0
-	EWSNullType WSTypeID = 1
-	EWSBooleanType WSTypeID = 2
-	EWSIntegerType WSTypeID = 3
-	EWSDoubleType WSTypeID = 4
-	EWSStringType WSTypeID = 5
-	EWSDateType WSTypeID = 6
-	EWSDataType WSTypeID = 7
-	EWSArrayType WSTypeID = 8
+	EWSUnknownType    WSTypeID = 0
+	EWSNullType       WSTypeID = 1
+	EWSBooleanType    WSTypeID = 2
+	EWSIntegerType    WSTypeID = 3
+	EWSDoubleType     WSTypeID = 4
+	EWSStringType     WSTypeID = 5
+	EWSDateType       WSTypeID = 6
+	EWSDataType       WSTypeID = 7
+	EWSArrayType      WSTypeID = 8
 	EWSDictionaryType WSTypeID = 9
 )
 
@@ -49,4 +49,3 @@ func (e WSTypeID) String() string {
 		return fmt.Sprintf("WSTypeID(%d)", int64(e))
 	}
 }
-

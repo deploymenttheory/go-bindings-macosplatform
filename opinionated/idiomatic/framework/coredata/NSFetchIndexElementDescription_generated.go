@@ -111,4 +111,3 @@ type FetchIndexElementDescriptionable interface {
 }
 
 var _ FetchIndexElementDescriptionable = (*FetchIndexElementDescription)(nil)
-

@@ -18,18 +18,18 @@ type AVAudioUnitSampler struct {
 }
 
 var (
-	_clsAVAudioUnitSampler = _objcClass("AVAudioUnitSampler")
+	_clsAVAudioUnitSampler                                                       = _objcClass("AVAudioUnitSampler")
 	_aVAudioUnitSamplerSelLoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError = objc.RegisterName("loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:")
-	_aVAudioUnitSamplerSelLoadInstrumentAtURLError = objc.RegisterName("loadInstrumentAtURL:error:")
-	_aVAudioUnitSamplerSelLoadAudioFilesAtURLsError = objc.RegisterName("loadAudioFilesAtURLs:error:")
-	_aVAudioUnitSamplerSelStereoPan = objc.RegisterName("stereoPan")
-	_aVAudioUnitSamplerSelSetStereoPan = objc.RegisterName("setStereoPan:")
-	_aVAudioUnitSamplerSelOverallGain = objc.RegisterName("overallGain")
-	_aVAudioUnitSamplerSelSetOverallGain = objc.RegisterName("setOverallGain:")
-	_aVAudioUnitSamplerSelMasterGain = objc.RegisterName("masterGain")
-	_aVAudioUnitSamplerSelSetMasterGain = objc.RegisterName("setMasterGain:")
-	_aVAudioUnitSamplerSelGlobalTuning = objc.RegisterName("globalTuning")
-	_aVAudioUnitSamplerSelSetGlobalTuning = objc.RegisterName("setGlobalTuning:")
+	_aVAudioUnitSamplerSelLoadInstrumentAtURLError                               = objc.RegisterName("loadInstrumentAtURL:error:")
+	_aVAudioUnitSamplerSelLoadAudioFilesAtURLsError                              = objc.RegisterName("loadAudioFilesAtURLs:error:")
+	_aVAudioUnitSamplerSelStereoPan                                              = objc.RegisterName("stereoPan")
+	_aVAudioUnitSamplerSelSetStereoPan                                           = objc.RegisterName("setStereoPan:")
+	_aVAudioUnitSamplerSelOverallGain                                            = objc.RegisterName("overallGain")
+	_aVAudioUnitSamplerSelSetOverallGain                                         = objc.RegisterName("setOverallGain:")
+	_aVAudioUnitSamplerSelMasterGain                                             = objc.RegisterName("masterGain")
+	_aVAudioUnitSamplerSelSetMasterGain                                          = objc.RegisterName("setMasterGain:")
+	_aVAudioUnitSamplerSelGlobalTuning                                           = objc.RegisterName("globalTuning")
+	_aVAudioUnitSamplerSelSetGlobalTuning                                        = objc.RegisterName("setGlobalTuning:")
 )
 
 func AVAudioUnitSamplerFromID(id objc.ID) *AVAudioUnitSampler {
@@ -113,4 +113,3 @@ func (o *AVAudioUnitSampler) GlobalTuning() float32 {
 func (o *AVAudioUnitSampler) SetGlobalTuning(globalTuning float32) {
 	o.Ptr().Send(_aVAudioUnitSamplerSelSetGlobalTuning, globalTuning)
 }
-

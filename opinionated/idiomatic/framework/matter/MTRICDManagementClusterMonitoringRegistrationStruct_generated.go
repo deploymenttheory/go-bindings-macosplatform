@@ -16,7 +16,9 @@ type MTRICDManagementClusterMonitoringRegistrationStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRICDManagementClusterMonitoringRegistrationStruct].
-func (x *MTRICDManagementClusterMonitoringRegistrationStruct) Unwrap() *raw.MTRICDManagementClusterMonitoringRegistrationStruct { return x.inner }
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) Unwrap() *raw.MTRICDManagementClusterMonitoringRegistrationStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRICDManagementClusterMonitoringRegistrationStructable interface {
 }
 
 var _ MTRICDManagementClusterMonitoringRegistrationStructable = (*MTRICDManagementClusterMonitoringRegistrationStruct)(nil)
-

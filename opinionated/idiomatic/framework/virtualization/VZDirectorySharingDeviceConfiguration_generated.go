@@ -15,7 +15,9 @@ type DirectorySharingDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZDirectorySharingDeviceConfiguration].
-func (x *DirectorySharingDeviceConfiguration) Unwrap() *raw.VZDirectorySharingDeviceConfiguration { return x.inner }
+func (x *DirectorySharingDeviceConfiguration) Unwrap() *raw.VZDirectorySharingDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewDirectorySharingDeviceConfiguration() *DirectorySharingDeviceConfigurati
 	return &DirectorySharingDeviceConfiguration{inner: raw.VZDirectorySharingDeviceConfigurationFromID(_id)}
 }
 
-func (x *DirectorySharingDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration { return x.inner }
+func (x *DirectorySharingDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration {
+	return x.inner
+}
 
 // DirectorySharingDeviceConfigurationable is the interface implemented by [DirectorySharingDeviceConfiguration], for mocking and DI.
 type DirectorySharingDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type DirectorySharingDeviceConfigurationable interface {
 }
 
 var _ DirectorySharingDeviceConfigurationable = (*DirectorySharingDeviceConfiguration)(nil)
-

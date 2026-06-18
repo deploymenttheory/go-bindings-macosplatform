@@ -1369,4 +1369,3 @@ func Tk_UnsetGrid(tkwin unsafe.Pointer) {
 func Tk_UpdatePointer(tkwin unsafe.Pointer, x int, y int, state int) {
 	raw.Tk_UpdatePointer(tkwin, x, y, state)
 }
-

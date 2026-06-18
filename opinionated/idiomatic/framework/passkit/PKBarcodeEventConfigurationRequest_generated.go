@@ -17,7 +17,9 @@ type BarcodeEventConfigurationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.PKBarcodeEventConfigurationRequest].
-func (x *BarcodeEventConfigurationRequest) Unwrap() *raw.PKBarcodeEventConfigurationRequest { return x.inner }
+func (x *BarcodeEventConfigurationRequest) Unwrap() *raw.PKBarcodeEventConfigurationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -65,4 +67,3 @@ type BarcodeEventConfigurationRequestable interface {
 }
 
 var _ BarcodeEventConfigurationRequestable = (*BarcodeEventConfigurationRequest)(nil)
-

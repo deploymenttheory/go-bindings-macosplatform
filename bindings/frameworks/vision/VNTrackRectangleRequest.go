@@ -17,8 +17,8 @@ type VNTrackRectangleRequest struct {
 }
 
 var (
-	_clsVNTrackRectangleRequest = _objcClass("VNTrackRectangleRequest")
-	_vNTrackRectangleRequestSelInitWithRectangleObservation = objc.RegisterName("initWithRectangleObservation:")
+	_clsVNTrackRectangleRequest                                              = _objcClass("VNTrackRectangleRequest")
+	_vNTrackRectangleRequestSelInitWithRectangleObservation                  = objc.RegisterName("initWithRectangleObservation:")
 	_vNTrackRectangleRequestSelInitWithRectangleObservationCompletionHandler = objc.RegisterName("initWithRectangleObservation:completionHandler:")
 )
 
@@ -35,7 +35,9 @@ func VNTrackRectangleRequestFromID(id objc.ID) *VNTrackRectangleRequest {
 // @brief Create a new rectangle tracking request with rectangle observation. @param    observation          Rectangle observation with bounding box and rectangle corners location info.
 func (o *VNTrackRectangleRequest) InitWithRectangleObservation(observation *VNRectangleObservation) *VNTrackRectangleRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackRectangleRequestSelInitWithRectangleObservation, observation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackRectangleRequestFromID(_ret)
 }
 
@@ -52,7 +54,8 @@ func (o *VNTrackRectangleRequest) InitWithRectangleObservationCompletionHandler(
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrackRectangleRequestSelInitWithRectangleObservationCompletionHandler, observation.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNTrackRectangleRequestFromID(_ret)
 }
-

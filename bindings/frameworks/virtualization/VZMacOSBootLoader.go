@@ -15,7 +15,7 @@ type VZMacOSBootLoader struct {
 }
 
 var (
-	_clsVZMacOSBootLoader = _objcClass("VZMacOSBootLoader")
+	_clsVZMacOSBootLoader     = _objcClass("VZMacOSBootLoader")
 	_vZMacOSBootLoaderSelInit = objc.RegisterName("init")
 )
 
@@ -32,7 +32,8 @@ func VZMacOSBootLoaderFromID(id objc.ID) *VZMacOSBootLoader {
 // @abstract Create a VZMacOSBootLoader.
 func (o *VZMacOSBootLoader) Init() *VZMacOSBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacOSBootLoaderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacOSBootLoaderFromID(_ret)
 }
-

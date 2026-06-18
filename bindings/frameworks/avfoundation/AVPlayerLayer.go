@@ -20,19 +20,19 @@ type AVPlayerLayer struct {
 }
 
 var (
-	_clsAVPlayerLayer = _objcClass("AVPlayerLayer")
-	_aVPlayerLayerSelPlayerLayerWithPlayer = objc.RegisterName("playerLayerWithPlayer:")
-	_aVPlayerLayerSelCopyDisplayedPixelBuffer = objc.RegisterName("copyDisplayedPixelBuffer")
+	_clsAVPlayerLayer                                       = _objcClass("AVPlayerLayer")
+	_aVPlayerLayerSelPlayerLayerWithPlayer                  = objc.RegisterName("playerLayerWithPlayer:")
+	_aVPlayerLayerSelCopyDisplayedPixelBuffer               = objc.RegisterName("copyDisplayedPixelBuffer")
 	_aVPlayerLayerSelSetCaptionPreviewProfileIDPositionText = objc.RegisterName("setCaptionPreviewProfileID:position:text:")
-	_aVPlayerLayerSelStopShowingCaptionPreview = objc.RegisterName("stopShowingCaptionPreview")
-	_aVPlayerLayerSelPlayer = objc.RegisterName("player")
-	_aVPlayerLayerSelSetPlayer = objc.RegisterName("setPlayer:")
-	_aVPlayerLayerSelVideoGravity = objc.RegisterName("videoGravity")
-	_aVPlayerLayerSelSetVideoGravity = objc.RegisterName("setVideoGravity:")
-	_aVPlayerLayerSelIsReadyForDisplay = objc.RegisterName("isReadyForDisplay")
-	_aVPlayerLayerSelVideoRect = objc.RegisterName("videoRect")
-	_aVPlayerLayerSelPixelBufferAttributes = objc.RegisterName("pixelBufferAttributes")
-	_aVPlayerLayerSelSetPixelBufferAttributes = objc.RegisterName("setPixelBufferAttributes:")
+	_aVPlayerLayerSelStopShowingCaptionPreview              = objc.RegisterName("stopShowingCaptionPreview")
+	_aVPlayerLayerSelPlayer                                 = objc.RegisterName("player")
+	_aVPlayerLayerSelSetPlayer                              = objc.RegisterName("setPlayer:")
+	_aVPlayerLayerSelVideoGravity                           = objc.RegisterName("videoGravity")
+	_aVPlayerLayerSelSetVideoGravity                        = objc.RegisterName("setVideoGravity:")
+	_aVPlayerLayerSelIsReadyForDisplay                      = objc.RegisterName("isReadyForDisplay")
+	_aVPlayerLayerSelVideoRect                              = objc.RegisterName("videoRect")
+	_aVPlayerLayerSelPixelBufferAttributes                  = objc.RegisterName("pixelBufferAttributes")
+	_aVPlayerLayerSelSetPixelBufferAttributes               = objc.RegisterName("setPixelBufferAttributes:")
 )
 
 func AVPlayerLayerFromID(id objc.ID) *AVPlayerLayer {
@@ -48,7 +48,9 @@ func AVPlayerLayerFromID(id objc.ID) *AVPlayerLayer {
 // @method		layerWithPlayer: @abstract		Returns an instance of AVPlayerLayer to display the visual output of the specified AVPlayer. @result		An instance of AVPlayerLayer.
 func AVPlayerLayerPlayerLayerWithPlayer(player *AVPlayer) *AVPlayerLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerLayer), _aVPlayerLayerSelPlayerLayerWithPlayer, player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerLayerFromID(_ret)
 }
 
@@ -58,7 +60,7 @@ func (o *AVPlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
 	return _ret
 }
 
-// Starts displaying a caption preview with the specified accessibility profile. This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls. - Parameters: - profileID: The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`. This determines font, color, background, and other visual characteristics. - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning. - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown. - Note: You must call ``stopShowingCaptionPreview`` to exit the preview.
+// Starts displaying a caption preview with the specified accessibility profile. This method enables a preview mode that displays sample caption text using the visual appearance settings from the specified accessibility profile. The preview replaces any currently active subtitles and/or closed captions while active. The sample caption text position can be specified to avoid UI controls. - Parameters: - profileID: The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from `MACaptionAppearanceCopyProfileIDs()`. This determines font, color, background, and other visual characteristics. - position: A CGPoint that defines the position (in points) of the caption preview relative to the default positioning of content captions (centered near the bottom of the video). Position values can be negative. (0, 0) represents the default positioning. - text: Optional custom text to display in the preview. If `nil`, a standard localized preview message will be shown. - Note: You must call “stopShowingCaptionPreview“ to exit the preview.
 func (o *AVPlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID *foundation.NSString, position corefoundation.CGPoint, text *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerLayerSelSetCaptionPreviewProfileIDPositionText, profileID.Ptr(), position, text.Ptr())
 }
@@ -71,7 +73,9 @@ func (o *AVPlayerLayer) StopShowingCaptionPreview() {
 // @property		player @abstract		Indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
 func (o *AVPlayerLayer) Player() *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerFromID(_ret)
 }
 
@@ -82,7 +86,9 @@ func (o *AVPlayerLayer) SetPlayer(player *AVPlayer) {
 // @property		videoGravity @abstract		A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
 func (o *AVPlayerLayer) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerLayerSelVideoGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +117,3 @@ func (o *AVPlayerLayer) PixelBufferAttributes() *foundation.NSDictionary[*founda
 func (o *AVPlayerLayer) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aVPlayerLayerSelSetPixelBufferAttributes, pixelBufferAttributes)
 }
-

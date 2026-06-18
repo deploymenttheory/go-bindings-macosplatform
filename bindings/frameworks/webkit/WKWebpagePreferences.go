@@ -16,17 +16,17 @@ type WKWebpagePreferences struct {
 }
 
 var (
-	_clsWKWebpagePreferences = _objcClass("WKWebpagePreferences")
-	_wKWebpagePreferencesSelPreferredContentMode = objc.RegisterName("preferredContentMode")
-	_wKWebpagePreferencesSelSetPreferredContentMode = objc.RegisterName("setPreferredContentMode:")
-	_wKWebpagePreferencesSelAllowsContentJavaScript = objc.RegisterName("allowsContentJavaScript")
-	_wKWebpagePreferencesSelSetAllowsContentJavaScript = objc.RegisterName("setAllowsContentJavaScript:")
-	_wKWebpagePreferencesSelIsLockdownModeEnabled = objc.RegisterName("isLockdownModeEnabled")
-	_wKWebpagePreferencesSelSetLockdownModeEnabled = objc.RegisterName("setLockdownModeEnabled:")
-	_wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy = objc.RegisterName("preferredHTTPSNavigationPolicy")
+	_clsWKWebpagePreferences                                  = _objcClass("WKWebpagePreferences")
+	_wKWebpagePreferencesSelPreferredContentMode              = objc.RegisterName("preferredContentMode")
+	_wKWebpagePreferencesSelSetPreferredContentMode           = objc.RegisterName("setPreferredContentMode:")
+	_wKWebpagePreferencesSelAllowsContentJavaScript           = objc.RegisterName("allowsContentJavaScript")
+	_wKWebpagePreferencesSelSetAllowsContentJavaScript        = objc.RegisterName("setAllowsContentJavaScript:")
+	_wKWebpagePreferencesSelIsLockdownModeEnabled             = objc.RegisterName("isLockdownModeEnabled")
+	_wKWebpagePreferencesSelSetLockdownModeEnabled            = objc.RegisterName("setLockdownModeEnabled:")
+	_wKWebpagePreferencesSelPreferredHTTPSNavigationPolicy    = objc.RegisterName("preferredHTTPSNavigationPolicy")
 	_wKWebpagePreferencesSelSetPreferredHTTPSNavigationPolicy = objc.RegisterName("setPreferredHTTPSNavigationPolicy:")
-	_wKWebpagePreferencesSelSecurityRestrictionMode = objc.RegisterName("securityRestrictionMode")
-	_wKWebpagePreferencesSelSetSecurityRestrictionMode = objc.RegisterName("setSecurityRestrictionMode:")
+	_wKWebpagePreferencesSelSecurityRestrictionMode           = objc.RegisterName("securityRestrictionMode")
+	_wKWebpagePreferencesSelSetSecurityRestrictionMode        = objc.RegisterName("setSecurityRestrictionMode:")
 )
 
 func WKWebpagePreferencesFromID(id objc.ID) *WKWebpagePreferences {
@@ -87,4 +87,3 @@ func (o *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestrictionMo
 func (o *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) {
 	o.Ptr().Send(_wKWebpagePreferencesSelSetSecurityRestrictionMode, securityRestrictionMode)
 }
-

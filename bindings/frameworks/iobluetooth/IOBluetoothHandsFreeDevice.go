@@ -16,28 +16,28 @@ type IOBluetoothHandsFreeDevice struct {
 }
 
 var (
-	_clsIOBluetoothHandsFreeDevice = _objcClass("IOBluetoothHandsFreeDevice")
-	_iOBluetoothHandsFreeDeviceSelInitWithDeviceDelegate = objc.RegisterName("initWithDevice:delegate:")
-	_iOBluetoothHandsFreeDeviceSelDialNumber = objc.RegisterName("dialNumber:")
-	_iOBluetoothHandsFreeDeviceSelMemoryDial = objc.RegisterName("memoryDial:")
-	_iOBluetoothHandsFreeDeviceSelRedial = objc.RegisterName("redial")
-	_iOBluetoothHandsFreeDeviceSelEndCall = objc.RegisterName("endCall")
-	_iOBluetoothHandsFreeDeviceSelAcceptCall = objc.RegisterName("acceptCall")
-	_iOBluetoothHandsFreeDeviceSelAcceptCallOnPhone = objc.RegisterName("acceptCallOnPhone")
-	_iOBluetoothHandsFreeDeviceSelSendDTMF = objc.RegisterName("sendDTMF:")
-	_iOBluetoothHandsFreeDeviceSelSubscriberNumber = objc.RegisterName("subscriberNumber")
-	_iOBluetoothHandsFreeDeviceSelCurrentCallList = objc.RegisterName("currentCallList")
-	_iOBluetoothHandsFreeDeviceSelReleaseHeldCalls = objc.RegisterName("releaseHeldCalls")
-	_iOBluetoothHandsFreeDeviceSelReleaseActiveCalls = objc.RegisterName("releaseActiveCalls")
-	_iOBluetoothHandsFreeDeviceSelReleaseCall = objc.RegisterName("releaseCall:")
-	_iOBluetoothHandsFreeDeviceSelHoldCall = objc.RegisterName("holdCall")
-	_iOBluetoothHandsFreeDeviceSelPlaceAllOthersOnHold = objc.RegisterName("placeAllOthersOnHold:")
-	_iOBluetoothHandsFreeDeviceSelAddHeldCall = objc.RegisterName("addHeldCall")
-	_iOBluetoothHandsFreeDeviceSelCallTransfer = objc.RegisterName("callTransfer")
-	_iOBluetoothHandsFreeDeviceSelTransferAudioToComputer = objc.RegisterName("transferAudioToComputer")
-	_iOBluetoothHandsFreeDeviceSelTransferAudioToPhone = objc.RegisterName("transferAudioToPhone")
-	_iOBluetoothHandsFreeDeviceSelSendSMSMessage = objc.RegisterName("sendSMS:message:")
-	_iOBluetoothHandsFreeDeviceSelSendATCommand = objc.RegisterName("sendATCommand:")
+	_clsIOBluetoothHandsFreeDevice                                   = _objcClass("IOBluetoothHandsFreeDevice")
+	_iOBluetoothHandsFreeDeviceSelInitWithDeviceDelegate             = objc.RegisterName("initWithDevice:delegate:")
+	_iOBluetoothHandsFreeDeviceSelDialNumber                         = objc.RegisterName("dialNumber:")
+	_iOBluetoothHandsFreeDeviceSelMemoryDial                         = objc.RegisterName("memoryDial:")
+	_iOBluetoothHandsFreeDeviceSelRedial                             = objc.RegisterName("redial")
+	_iOBluetoothHandsFreeDeviceSelEndCall                            = objc.RegisterName("endCall")
+	_iOBluetoothHandsFreeDeviceSelAcceptCall                         = objc.RegisterName("acceptCall")
+	_iOBluetoothHandsFreeDeviceSelAcceptCallOnPhone                  = objc.RegisterName("acceptCallOnPhone")
+	_iOBluetoothHandsFreeDeviceSelSendDTMF                           = objc.RegisterName("sendDTMF:")
+	_iOBluetoothHandsFreeDeviceSelSubscriberNumber                   = objc.RegisterName("subscriberNumber")
+	_iOBluetoothHandsFreeDeviceSelCurrentCallList                    = objc.RegisterName("currentCallList")
+	_iOBluetoothHandsFreeDeviceSelReleaseHeldCalls                   = objc.RegisterName("releaseHeldCalls")
+	_iOBluetoothHandsFreeDeviceSelReleaseActiveCalls                 = objc.RegisterName("releaseActiveCalls")
+	_iOBluetoothHandsFreeDeviceSelReleaseCall                        = objc.RegisterName("releaseCall:")
+	_iOBluetoothHandsFreeDeviceSelHoldCall                           = objc.RegisterName("holdCall")
+	_iOBluetoothHandsFreeDeviceSelPlaceAllOthersOnHold               = objc.RegisterName("placeAllOthersOnHold:")
+	_iOBluetoothHandsFreeDeviceSelAddHeldCall                        = objc.RegisterName("addHeldCall")
+	_iOBluetoothHandsFreeDeviceSelCallTransfer                       = objc.RegisterName("callTransfer")
+	_iOBluetoothHandsFreeDeviceSelTransferAudioToComputer            = objc.RegisterName("transferAudioToComputer")
+	_iOBluetoothHandsFreeDeviceSelTransferAudioToPhone               = objc.RegisterName("transferAudioToPhone")
+	_iOBluetoothHandsFreeDeviceSelSendSMSMessage                     = objc.RegisterName("sendSMS:message:")
+	_iOBluetoothHandsFreeDeviceSelSendATCommand                      = objc.RegisterName("sendATCommand:")
 	_iOBluetoothHandsFreeDeviceSelSendATCommandTimeoutSelectorTarget = objc.RegisterName("sendATCommand:timeout:selector:target:")
 )
 
@@ -54,7 +54,9 @@ func IOBluetoothHandsFreeDeviceFromID(id objc.ID) *IOBluetoothHandsFreeDevice {
 // @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFreeDevice to act as a hands free device @discussion	This will register a listener for incoming connections. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate @result		A newly created IOBluetoothHandsFreeDevice object on success, nil on failure
 func (o *IOBluetoothHandsFreeDevice) InitWithDeviceDelegate(device *IOBluetoothDevice, delegate objc.ID) *IOBluetoothHandsFreeDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeDeviceSelInitWithDeviceDelegate, device.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothHandsFreeDeviceFromID(_ret)
 }
 
@@ -162,4 +164,3 @@ func (o *IOBluetoothHandsFreeDevice) SendATCommand(atCommand *foundation.NSStrin
 func (o *IOBluetoothHandsFreeDevice) SendATCommandTimeoutSelectorTarget(atCommand *foundation.NSString, timeout float32, selector objc.SEL, target objc.ID) {
 	o.Ptr().Send(_iOBluetoothHandsFreeDeviceSelSendATCommandTimeoutSelectorTarget, atCommand.Ptr(), timeout, selector, target)
 }
-

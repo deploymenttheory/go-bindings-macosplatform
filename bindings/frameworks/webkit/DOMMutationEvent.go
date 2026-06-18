@@ -16,14 +16,14 @@ type DOMMutationEvent struct {
 }
 
 var (
-	_clsDOMMutationEvent = _objcClass("DOMMutationEvent")
-	_dOMMutationEventSelNewValue = objc.RegisterName("newValue")
+	_clsDOMMutationEvent                                                                                   = _objcClass("DOMMutationEvent")
+	_dOMMutationEventSelNewValue                                                                           = objc.RegisterName("newValue")
 	_dOMMutationEventSelInitMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange = objc.RegisterName("initMutationEvent:canBubble:cancelable:relatedNode:prevValue:newValue:attrName:attrChange:")
-	_dOMMutationEventSelRelatedNode = objc.RegisterName("relatedNode")
-	_dOMMutationEventSelPrevValue = objc.RegisterName("prevValue")
-	_dOMMutationEventSelAttrName = objc.RegisterName("attrName")
-	_dOMMutationEventSelAttrChange = objc.RegisterName("attrChange")
-	_dOMMutationEventSelInitMutationEvent = objc.RegisterName("initMutationEvent::::::::")
+	_dOMMutationEventSelRelatedNode                                                                        = objc.RegisterName("relatedNode")
+	_dOMMutationEventSelPrevValue                                                                          = objc.RegisterName("prevValue")
+	_dOMMutationEventSelAttrName                                                                           = objc.RegisterName("attrName")
+	_dOMMutationEventSelAttrChange                                                                         = objc.RegisterName("attrChange")
+	_dOMMutationEventSelInitMutationEvent                                                                  = objc.RegisterName("initMutationEvent::::::::")
 )
 
 func DOMMutationEventFromID(id objc.ID) *DOMMutationEvent {
@@ -47,19 +47,25 @@ func (o *DOMMutationEvent) InitMutationEventCanBubbleCancelableRelatedNodePrevVa
 
 func (o *DOMMutationEvent) RelatedNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMutationEventSelRelatedNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMMutationEvent) PrevValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMutationEventSelPrevValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMMutationEvent) AttrName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMutationEventSelAttrName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,4 +77,3 @@ func (o *DOMMutationEvent) AttrChange() uint16 {
 func (o *DOMMutationEvent) InitMutationEvent(type_ *foundation.NSString, canBubble bool, cancelable bool, relatedNode *DOMNode, prevValue *foundation.NSString, newValue *foundation.NSString, attrName *foundation.NSString, attrChange uint16) {
 	o.Ptr().Send(_dOMMutationEventSelInitMutationEvent, type_.Ptr(), canBubble, cancelable, relatedNode.Ptr(), prevValue.Ptr(), newValue.Ptr(), attrName.Ptr(), attrChange)
 }
-

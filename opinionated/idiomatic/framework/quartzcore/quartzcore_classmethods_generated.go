@@ -311,4 +311,3 @@ func CAValueFunctionFunctionWithName(name *foundation.NSString) *ValueFunction {
 	}
 	return &ValueFunction{inner: _r}
 }
-

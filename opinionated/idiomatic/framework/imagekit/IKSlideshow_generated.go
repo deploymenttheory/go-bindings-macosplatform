@@ -91,4 +91,3 @@ type Slideshowable interface {
 }
 
 var _ Slideshowable = (*Slideshow)(nil)
-

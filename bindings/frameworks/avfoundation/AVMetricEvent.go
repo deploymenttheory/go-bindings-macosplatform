@@ -17,8 +17,8 @@ type AVMetricEvent struct {
 }
 
 var (
-	_clsAVMetricEvent = _objcClass("AVMetricEvent")
-	_aVMetricEventSelDate = objc.RegisterName("date")
+	_clsAVMetricEvent          = _objcClass("AVMetricEvent")
+	_aVMetricEventSelDate      = objc.RegisterName("date")
 	_aVMetricEventSelMediaTime = objc.RegisterName("mediaTime")
 	_aVMetricEventSelSessionID = objc.RegisterName("sessionID")
 )
@@ -36,7 +36,9 @@ func AVMetricEventFromID(id objc.ID) *AVMetricEvent {
 // Returns the date when the event occurred.
 func (o *AVMetricEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -49,7 +51,8 @@ func (o *AVMetricEvent) MediaTime() coremedia.CMTime {
 // A GUID that identifies the media session. If not available, value is nil.
 func (o *AVMetricEvent) SessionID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricEventSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

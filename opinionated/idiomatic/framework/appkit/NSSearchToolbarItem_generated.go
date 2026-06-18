@@ -272,4 +272,3 @@ type SearchToolbarItemable interface {
 }
 
 var _ SearchToolbarItemable = (*SearchToolbarItem)(nil)
-

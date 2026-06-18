@@ -16,13 +16,13 @@ type CKFetchRecordZoneChangesConfiguration struct {
 }
 
 var (
-	_clsCKFetchRecordZoneChangesConfiguration = _objcClass("CKFetchRecordZoneChangesConfiguration")
-	_cKFetchRecordZoneChangesConfigurationSelPreviousServerChangeToken = objc.RegisterName("previousServerChangeToken")
+	_clsCKFetchRecordZoneChangesConfiguration                             = _objcClass("CKFetchRecordZoneChangesConfiguration")
+	_cKFetchRecordZoneChangesConfigurationSelPreviousServerChangeToken    = objc.RegisterName("previousServerChangeToken")
 	_cKFetchRecordZoneChangesConfigurationSelSetPreviousServerChangeToken = objc.RegisterName("setPreviousServerChangeToken:")
-	_cKFetchRecordZoneChangesConfigurationSelResultsLimit = objc.RegisterName("resultsLimit")
-	_cKFetchRecordZoneChangesConfigurationSelSetResultsLimit = objc.RegisterName("setResultsLimit:")
-	_cKFetchRecordZoneChangesConfigurationSelDesiredKeys = objc.RegisterName("desiredKeys")
-	_cKFetchRecordZoneChangesConfigurationSelSetDesiredKeys = objc.RegisterName("setDesiredKeys:")
+	_cKFetchRecordZoneChangesConfigurationSelResultsLimit                 = objc.RegisterName("resultsLimit")
+	_cKFetchRecordZoneChangesConfigurationSelSetResultsLimit              = objc.RegisterName("setResultsLimit:")
+	_cKFetchRecordZoneChangesConfigurationSelDesiredKeys                  = objc.RegisterName("desiredKeys")
+	_cKFetchRecordZoneChangesConfigurationSelSetDesiredKeys               = objc.RegisterName("setDesiredKeys:")
 )
 
 func CKFetchRecordZoneChangesConfigurationFromID(id objc.ID) *CKFetchRecordZoneChangesConfiguration {
@@ -35,10 +35,12 @@ func CKFetchRecordZoneChangesConfigurationFromID(id objc.ID) *CKFetchRecordZoneC
 	return o
 }
 
-// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your ``CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock`` handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
+// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
 func (o *CKFetchRecordZoneChangesConfiguration) PreviousServerChangeToken() *CKServerChangeToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordZoneChangesConfigurationSelPreviousServerChangeToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKServerChangeTokenFromID(_ret)
 }
 
@@ -46,7 +48,7 @@ func (o *CKFetchRecordZoneChangesConfiguration) SetPreviousServerChangeToken(pre
 	o.Ptr().Send(_cKFetchRecordZoneChangesConfigurationSelSetPreviousServerChangeToken, previousServerChangeToken.Ptr())
 }
 
-// The maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the ``CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock`` handler.
+// The maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler.
 func (o *CKFetchRecordZoneChangesConfiguration) ResultsLimit() uint {
 	_ret := objc.Send[uint](o.Ptr(), _cKFetchRecordZoneChangesConfigurationSelResultsLimit)
 	return _ret
@@ -65,4 +67,3 @@ func (o *CKFetchRecordZoneChangesConfiguration) DesiredKeys() *foundation.NSArra
 func (o *CKFetchRecordZoneChangesConfiguration) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
 	o.Ptr().Send(_cKFetchRecordZoneChangesConfigurationSelSetDesiredKeys, desiredKeys)
 }
-

@@ -18,7 +18,9 @@ func SKCloudServiceCapabilitiesDidChangeNotification() uintptr {
 // Deprecated: Hosted content is no longer supported.
 func SKDownloadTimeRemainingUnknown() float64 {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKDownloadTimeRemainingUnknown")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
@@ -91,4 +93,3 @@ func SKStorefrontIdentifierDidChangeNotification() uintptr {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKStorefrontIdentifierDidChangeNotification")
 	return ptr
 }
-

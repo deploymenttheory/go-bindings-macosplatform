@@ -18,29 +18,29 @@ type ASAuthorizationProviderExtensionAuthorizationRequest struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionAuthorizationRequest = _objcClass("ASAuthorizationProviderExtensionAuthorizationRequest")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelDoNotHandle = objc.RegisterName("doNotHandle")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCancel = objc.RegisterName("cancel")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelComplete = objc.RegisterName("complete")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPAuthorizationHeaders = objc.RegisterName("completeWithHTTPAuthorizationHeaders:")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPResponseHttpBody = objc.RegisterName("completeWithHTTPResponse:httpBody:")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithAuthorizationResult = objc.RegisterName("completeWithAuthorizationResult:")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithError = objc.RegisterName("completeWithError:")
+	_clsASAuthorizationProviderExtensionAuthorizationRequest                                                 = _objcClass("ASAuthorizationProviderExtensionAuthorizationRequest")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelDoNotHandle                                      = objc.RegisterName("doNotHandle")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCancel                                           = objc.RegisterName("cancel")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelComplete                                         = objc.RegisterName("complete")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPAuthorizationHeaders             = objc.RegisterName("completeWithHTTPAuthorizationHeaders:")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithHTTPResponseHttpBody                 = objc.RegisterName("completeWithHTTPResponse:httpBody:")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithAuthorizationResult                  = objc.RegisterName("completeWithAuthorizationResult:")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCompleteWithError                                = objc.RegisterName("completeWithError:")
 	_aSAuthorizationProviderExtensionAuthorizationRequestSelPresentAuthorizationViewControllerWithCompletion = objc.RegisterName("presentAuthorizationViewControllerWithCompletion:")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelUrl = objc.RegisterName("url")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelRequestedOperation = objc.RegisterName("requestedOperation")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelHttpHeaders = objc.RegisterName("httpHeaders")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelHttpBody = objc.RegisterName("httpBody")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelRealm = objc.RegisterName("realm")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelExtensionData = objc.RegisterName("extensionData")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerBundleIdentifier = objc.RegisterName("callerBundleIdentifier")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelAuthorizationOptions = objc.RegisterName("authorizationOptions")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelIsCallerManaged = objc.RegisterName("isCallerManaged")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerTeamIdentifier = objc.RegisterName("callerTeamIdentifier")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelLocalizedCallerDisplayName = objc.RegisterName("localizedCallerDisplayName")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerAuditToken = objc.RegisterName("callerAuditToken")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelIsUserInterfaceEnabled = objc.RegisterName("isUserInterfaceEnabled")
-	_aSAuthorizationProviderExtensionAuthorizationRequestSelLoginManager = objc.RegisterName("loginManager")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelUrl                                              = objc.RegisterName("url")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelRequestedOperation                               = objc.RegisterName("requestedOperation")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelHttpHeaders                                      = objc.RegisterName("httpHeaders")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelHttpBody                                         = objc.RegisterName("httpBody")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelRealm                                            = objc.RegisterName("realm")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelExtensionData                                    = objc.RegisterName("extensionData")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerBundleIdentifier                           = objc.RegisterName("callerBundleIdentifier")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelAuthorizationOptions                             = objc.RegisterName("authorizationOptions")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelIsCallerManaged                                  = objc.RegisterName("isCallerManaged")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerTeamIdentifier                             = objc.RegisterName("callerTeamIdentifier")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelLocalizedCallerDisplayName                       = objc.RegisterName("localizedCallerDisplayName")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelCallerAuditToken                                 = objc.RegisterName("callerAuditToken")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelIsUserInterfaceEnabled                           = objc.RegisterName("isUserInterfaceEnabled")
+	_aSAuthorizationProviderExtensionAuthorizationRequestSelLoginManager                                     = objc.RegisterName("loginManager")
 )
 
 func ASAuthorizationProviderExtensionAuthorizationRequestFromID(id objc.ID) *ASAuthorizationProviderExtensionAuthorizationRequest {
@@ -103,14 +103,18 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizat
 // @abstract Request URL with all components.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @abstract Operation to be executed by the extension.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelRequestedOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,14 +127,18 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() *fo
 // @abstract Request body.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) HttpBody() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelHttpBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @abstract Realm.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) Realm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelRealm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -143,7 +151,9 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) ExtensionData() *
 // @abstract Identification of the calling application.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelCallerBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -162,21 +172,27 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged()
 // @abstract Team identifier of the calling application.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelCallerTeamIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Localized display name of the calling application.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelLocalizedCallerDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Audit token of the calling application.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelCallerAuditToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -189,7 +205,8 @@ func (o *ASAuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEn
 // @abstract The login manager to interface with the Platform SSO configuration.
 func (o *ASAuthorizationProviderExtensionAuthorizationRequest) LoginManager() *ASAuthorizationProviderExtensionLoginManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationRequestSelLoginManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionLoginManagerFromID(_ret)
 }
-

@@ -16,11 +16,11 @@ type MTRThreadNetworkDiagnosticsClusterSecurityPolicy struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterSecurityPolicy = _objcClass("MTRThreadNetworkDiagnosticsClusterSecurityPolicy")
-	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelRotationTime = objc.RegisterName("rotationTime")
+	_clsMTRThreadNetworkDiagnosticsClusterSecurityPolicy                = _objcClass("MTRThreadNetworkDiagnosticsClusterSecurityPolicy")
+	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelRotationTime    = objc.RegisterName("rotationTime")
 	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelSetRotationTime = objc.RegisterName("setRotationTime:")
-	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelFlags = objc.RegisterName("flags")
-	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelSetFlags = objc.RegisterName("setFlags:")
+	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelFlags           = objc.RegisterName("flags")
+	_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelSetFlags        = objc.RegisterName("setFlags:")
 )
 
 func MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
@@ -35,7 +35,9 @@ func MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(id objc.ID) *MTRThre
 
 func (o *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterSecurityPolicySelRotationTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotat
 
 func (o *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterSecurityPolicySelFlags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterSecurityPolicySelSetFlags, flags.Ptr())
 }
-

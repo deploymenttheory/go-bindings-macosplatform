@@ -16,9 +16,9 @@ type INShareFocusStatusIntentResponse struct {
 }
 
 var (
-	_clsINShareFocusStatusIntentResponse = _objcClass("INShareFocusStatusIntentResponse")
+	_clsINShareFocusStatusIntentResponse                         = _objcClass("INShareFocusStatusIntentResponse")
 	_iNShareFocusStatusIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNShareFocusStatusIntentResponseSelCode = objc.RegisterName("code")
+	_iNShareFocusStatusIntentResponseSelCode                     = objc.RegisterName("code")
 )
 
 func INShareFocusStatusIntentResponseFromID(id objc.ID) *INShareFocusStatusIntentResponse {
@@ -33,7 +33,9 @@ func INShareFocusStatusIntentResponseFromID(id objc.ID) *INShareFocusStatusInten
 
 func (o *INShareFocusStatusIntentResponse) InitWithCodeUserActivity(code INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *INShareFocusStatusIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNShareFocusStatusIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INShareFocusStatusIntentResponseFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *INShareFocusStatusIntentResponse) Code() INShareFocusStatusIntentRespon
 	_ret := objc.Send[INShareFocusStatusIntentResponseCode](o.Ptr(), _iNShareFocusStatusIntentResponseSelCode)
 	return _ret
 }
-

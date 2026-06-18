@@ -102,7 +102,9 @@ func (x *NNReduceRowSum) WithDestinationImageAllocator(destinationImageAllocator
 
 func (x *NNReduceRowSum) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
-func (x *NNReduceRowSum) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowSum) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceRowSumable is the interface implemented by [NNReduceRowSum], for mocking and DI.
 type NNReduceRowSumable interface {
@@ -119,4 +121,3 @@ type NNReduceRowSumable interface {
 }
 
 var _ NNReduceRowSumable = (*NNReduceRowSum)(nil)
-

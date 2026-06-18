@@ -16,10 +16,10 @@ type DDDeviceEvent struct {
 }
 
 var (
-	_clsDDDeviceEvent = _objcClass("DDDeviceEvent")
+	_clsDDDeviceEvent                        = _objcClass("DDDeviceEvent")
 	_dDDeviceEventSelInitWithEventTypeDevice = objc.RegisterName("initWithEventType:device:")
-	_dDDeviceEventSelDevice = objc.RegisterName("device")
-	_dDDeviceEventSelEventType = objc.RegisterName("eventType")
+	_dDDeviceEventSelDevice                  = objc.RegisterName("device")
+	_dDDeviceEventSelEventType               = objc.RegisterName("eventType")
 )
 
 func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
@@ -35,14 +35,18 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 // Initializes a device event.
 func (o *DDDeviceEvent) InitWithEventTypeDevice(type_ DDEventType, device *DDDevice) *DDDeviceEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceEventSelInitWithEventTypeDevice, type_, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DDDeviceEventFromID(_ret)
 }
 
 // Device found or lost.
 func (o *DDDeviceEvent) Device() *DDDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceEventSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DDDeviceFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *DDDeviceEvent) EventType() DDEventType {
 	_ret := objc.Send[DDEventType](o.Ptr(), _dDDeviceEventSelEventType)
 	return _ret
 }
-

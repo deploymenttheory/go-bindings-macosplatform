@@ -16,10 +16,10 @@ type MEMessageActionDecision struct {
 }
 
 var (
-	_clsMEMessageActionDecision = _objcClass("MEMessageActionDecision")
-	_mEMessageActionDecisionSelDecisionApplyingAction = objc.RegisterName("decisionApplyingAction:")
+	_clsMEMessageActionDecision                        = _objcClass("MEMessageActionDecision")
+	_mEMessageActionDecisionSelDecisionApplyingAction  = objc.RegisterName("decisionApplyingAction:")
 	_mEMessageActionDecisionSelDecisionApplyingActions = objc.RegisterName("decisionApplyingActions:")
-	_mEMessageActionDecisionSelInvokeAgainWithBody = objc.RegisterName("invokeAgainWithBody")
+	_mEMessageActionDecisionSelInvokeAgainWithBody     = objc.RegisterName("invokeAgainWithBody")
 )
 
 func MEMessageActionDecisionFromID(id objc.ID) *MEMessageActionDecision {
@@ -34,20 +34,25 @@ func MEMessageActionDecisionFromID(id objc.ID) *MEMessageActionDecision {
 
 func MEMessageActionDecisionDecisionApplyingAction(action *MEMessageAction) *MEMessageActionDecision {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageActionDecision), _mEMessageActionDecisionSelDecisionApplyingAction, action.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionDecisionFromID(_ret)
 }
 
 // @brief Creates an @c MEMessageActionDecision with multiple actions. Conflicting actions will be ignored.
 func MEMessageActionDecisionDecisionApplyingActions(actions *foundation.NSArray[*MEMessageAction]) *MEMessageActionDecision {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageActionDecision), _mEMessageActionDecisionSelDecisionApplyingActions, actions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionDecisionFromID(_ret)
 }
 
 func MEMessageActionDecisionInvokeAgainWithBody() *MEMessageActionDecision {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMEMessageActionDecision), _mEMessageActionDecisionSelInvokeAgainWithBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageActionDecisionFromID(_ret)
 }
-

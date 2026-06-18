@@ -146,11 +146,17 @@ func (x *CNNUpsamplingNearestGradient) WithDestinationImageAllocator(destination
 	return x
 }
 
-func (x *CNNUpsamplingNearestGradient) asCNNUpsamplingGradient() *raw.MPSCNNUpsamplingGradient { return &x.inner.MPSCNNUpsamplingGradient }
+func (x *CNNUpsamplingNearestGradient) asCNNUpsamplingGradient() *raw.MPSCNNUpsamplingGradient {
+	return &x.inner.MPSCNNUpsamplingGradient
+}
 
-func (x *CNNUpsamplingNearestGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel }
+func (x *CNNUpsamplingNearestGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNUpsamplingNearestGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNUpsamplingNearestGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNUpsamplingNearestGradientable is the interface implemented by [CNNUpsamplingNearestGradient], for mocking and DI.
 type CNNUpsamplingNearestGradientable interface {
@@ -176,4 +182,3 @@ type CNNUpsamplingNearestGradientable interface {
 }
 
 var _ CNNUpsamplingNearestGradientable = (*CNNUpsamplingNearestGradient)(nil)
-

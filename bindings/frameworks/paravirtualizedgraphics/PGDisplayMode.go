@@ -16,10 +16,10 @@ type PGDisplayMode struct {
 }
 
 var (
-	_clsPGDisplayMode = _objcClass("PGDisplayMode")
+	_clsPGDisplayMode                                    = _objcClass("PGDisplayMode")
 	_pGDisplayModeSelInitWithSizeInPixelsRefreshRateInHz = objc.RegisterName("initWithSizeInPixels:refreshRateInHz:")
-	_pGDisplayModeSelSizeInPixels = objc.RegisterName("sizeInPixels")
-	_pGDisplayModeSelRefreshRate = objc.RegisterName("refreshRate")
+	_pGDisplayModeSelSizeInPixels                        = objc.RegisterName("sizeInPixels")
+	_pGDisplayModeSelRefreshRate                         = objc.RegisterName("refreshRate")
 )
 
 func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
@@ -35,7 +35,9 @@ func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 // @method initWithSizeInPixels:refreshRateInHz @abstract Used to conjure up display mode objects (to be arranged into NSArrays for modeList). @param sizeInPixels Width/height of supported display mode. @param refreshRateInHz Refresh rate of supported display mode.
 func (o *PGDisplayMode) InitWithSizeInPixelsRefreshRateInHz(sizeInPixels PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pGDisplayModeSelInitWithSizeInPixelsRefreshRateInHz, sizeInPixels, refreshRateInHz)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PGDisplayModeFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *PGDisplayMode) RefreshRate() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pGDisplayModeSelRefreshRate)
 	return _ret
 }
-

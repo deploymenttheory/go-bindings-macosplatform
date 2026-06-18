@@ -16,15 +16,15 @@ type MTLLinkedFunctions struct {
 }
 
 var (
-	_clsMTLLinkedFunctions = _objcClass("MTLLinkedFunctions")
-	_mTLLinkedFunctionsSelLinkedFunctions = objc.RegisterName("linkedFunctions")
-	_mTLLinkedFunctionsSelFunctions = objc.RegisterName("functions")
-	_mTLLinkedFunctionsSelSetFunctions = objc.RegisterName("setFunctions:")
-	_mTLLinkedFunctionsSelBinaryFunctions = objc.RegisterName("binaryFunctions")
-	_mTLLinkedFunctionsSelSetBinaryFunctions = objc.RegisterName("setBinaryFunctions:")
-	_mTLLinkedFunctionsSelGroups = objc.RegisterName("groups")
-	_mTLLinkedFunctionsSelSetGroups = objc.RegisterName("setGroups:")
-	_mTLLinkedFunctionsSelPrivateFunctions = objc.RegisterName("privateFunctions")
+	_clsMTLLinkedFunctions                    = _objcClass("MTLLinkedFunctions")
+	_mTLLinkedFunctionsSelLinkedFunctions     = objc.RegisterName("linkedFunctions")
+	_mTLLinkedFunctionsSelFunctions           = objc.RegisterName("functions")
+	_mTLLinkedFunctionsSelSetFunctions        = objc.RegisterName("setFunctions:")
+	_mTLLinkedFunctionsSelBinaryFunctions     = objc.RegisterName("binaryFunctions")
+	_mTLLinkedFunctionsSelSetBinaryFunctions  = objc.RegisterName("setBinaryFunctions:")
+	_mTLLinkedFunctionsSelGroups              = objc.RegisterName("groups")
+	_mTLLinkedFunctionsSelSetGroups           = objc.RegisterName("setGroups:")
+	_mTLLinkedFunctionsSelPrivateFunctions    = objc.RegisterName("privateFunctions")
 	_mTLLinkedFunctionsSelSetPrivateFunctions = objc.RegisterName("setPrivateFunctions:")
 )
 
@@ -41,14 +41,18 @@ func MTLLinkedFunctionsFromID(id objc.ID) *MTLLinkedFunctions {
 // @method linkedFunctions @abstract Create an autoreleased MTLLinkedFunctions object.
 func MTLLinkedFunctionsLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLLinkedFunctions), _mTLLinkedFunctionsSelLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
 // @property functions @abstract The array of functions to be AIR linked.
 func (o *MTLLinkedFunctions) Functions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLLinkedFunctionsSelFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTLLinkedFunctions) SetFunctions(functions *foundation.NSArray[MTLFunct
 // @property binaryFunctions @abstract The array of functions compiled to binary to be linked.
 func (o *MTLLinkedFunctions) BinaryFunctions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLLinkedFunctionsSelBinaryFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
@@ -80,11 +86,12 @@ func (o *MTLLinkedFunctions) SetGroups(groups *foundation.NSDictionary[*foundati
 // @property privateFunctions @abstract The array of functions to be AIR linked. @discussion These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
 func (o *MTLLinkedFunctions) PrivateFunctions() *foundation.NSArray[MTLFunction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLLinkedFunctionsSelPrivateFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLFunction](_ret)
 }
 
 func (o *MTLLinkedFunctions) SetPrivateFunctions(privateFunctions *foundation.NSArray[MTLFunction]) {
 	o.Ptr().Send(_mTLLinkedFunctionsSelSetPrivateFunctions, privateFunctions.Ptr())
 }
-

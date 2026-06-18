@@ -122,4 +122,3 @@ type NNReduceUnaryable interface {
 }
 
 var _ NNReduceUnaryable = (*NNReduceUnary)(nil)
-

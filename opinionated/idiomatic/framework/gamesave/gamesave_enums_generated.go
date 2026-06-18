@@ -47,4 +47,3 @@ func (e GSSyncState) String() string {
 		return fmt.Sprintf("GSSyncState(%d)", int64(e))
 	}
 }
-

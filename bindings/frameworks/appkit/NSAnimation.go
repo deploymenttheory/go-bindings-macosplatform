@@ -16,34 +16,34 @@ type NSAnimation struct {
 }
 
 var (
-	_clsNSAnimation = _objcClass("NSAnimation")
-	_nSAnimationSelInitWithDurationAnimationCurve = objc.RegisterName("initWithDuration:animationCurve:")
-	_nSAnimationSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSAnimationSelStartAnimation = objc.RegisterName("startAnimation")
-	_nSAnimationSelStopAnimation = objc.RegisterName("stopAnimation")
-	_nSAnimationSelAddProgressMark = objc.RegisterName("addProgressMark:")
-	_nSAnimationSelRemoveProgressMark = objc.RegisterName("removeProgressMark:")
+	_clsNSAnimation                                  = _objcClass("NSAnimation")
+	_nSAnimationSelInitWithDurationAnimationCurve    = objc.RegisterName("initWithDuration:animationCurve:")
+	_nSAnimationSelInitWithCoder                     = objc.RegisterName("initWithCoder:")
+	_nSAnimationSelStartAnimation                    = objc.RegisterName("startAnimation")
+	_nSAnimationSelStopAnimation                     = objc.RegisterName("stopAnimation")
+	_nSAnimationSelAddProgressMark                   = objc.RegisterName("addProgressMark:")
+	_nSAnimationSelRemoveProgressMark                = objc.RegisterName("removeProgressMark:")
 	_nSAnimationSelStartWhenAnimationReachesProgress = objc.RegisterName("startWhenAnimation:reachesProgress:")
-	_nSAnimationSelStopWhenAnimationReachesProgress = objc.RegisterName("stopWhenAnimation:reachesProgress:")
-	_nSAnimationSelClearStartAnimation = objc.RegisterName("clearStartAnimation")
-	_nSAnimationSelClearStopAnimation = objc.RegisterName("clearStopAnimation")
-	_nSAnimationSelIsAnimating = objc.RegisterName("isAnimating")
-	_nSAnimationSelCurrentProgress = objc.RegisterName("currentProgress")
-	_nSAnimationSelSetCurrentProgress = objc.RegisterName("setCurrentProgress:")
-	_nSAnimationSelDuration = objc.RegisterName("duration")
-	_nSAnimationSelSetDuration = objc.RegisterName("setDuration:")
-	_nSAnimationSelAnimationBlockingMode = objc.RegisterName("animationBlockingMode")
-	_nSAnimationSelSetAnimationBlockingMode = objc.RegisterName("setAnimationBlockingMode:")
-	_nSAnimationSelFrameRate = objc.RegisterName("frameRate")
-	_nSAnimationSelSetFrameRate = objc.RegisterName("setFrameRate:")
-	_nSAnimationSelAnimationCurve = objc.RegisterName("animationCurve")
-	_nSAnimationSelSetAnimationCurve = objc.RegisterName("setAnimationCurve:")
-	_nSAnimationSelCurrentValue = objc.RegisterName("currentValue")
-	_nSAnimationSelDelegate = objc.RegisterName("delegate")
-	_nSAnimationSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSAnimationSelProgressMarks = objc.RegisterName("progressMarks")
-	_nSAnimationSelSetProgressMarks = objc.RegisterName("setProgressMarks:")
-	_nSAnimationSelRunLoopModesForAnimating = objc.RegisterName("runLoopModesForAnimating")
+	_nSAnimationSelStopWhenAnimationReachesProgress  = objc.RegisterName("stopWhenAnimation:reachesProgress:")
+	_nSAnimationSelClearStartAnimation               = objc.RegisterName("clearStartAnimation")
+	_nSAnimationSelClearStopAnimation                = objc.RegisterName("clearStopAnimation")
+	_nSAnimationSelIsAnimating                       = objc.RegisterName("isAnimating")
+	_nSAnimationSelCurrentProgress                   = objc.RegisterName("currentProgress")
+	_nSAnimationSelSetCurrentProgress                = objc.RegisterName("setCurrentProgress:")
+	_nSAnimationSelDuration                          = objc.RegisterName("duration")
+	_nSAnimationSelSetDuration                       = objc.RegisterName("setDuration:")
+	_nSAnimationSelAnimationBlockingMode             = objc.RegisterName("animationBlockingMode")
+	_nSAnimationSelSetAnimationBlockingMode          = objc.RegisterName("setAnimationBlockingMode:")
+	_nSAnimationSelFrameRate                         = objc.RegisterName("frameRate")
+	_nSAnimationSelSetFrameRate                      = objc.RegisterName("setFrameRate:")
+	_nSAnimationSelAnimationCurve                    = objc.RegisterName("animationCurve")
+	_nSAnimationSelSetAnimationCurve                 = objc.RegisterName("setAnimationCurve:")
+	_nSAnimationSelCurrentValue                      = objc.RegisterName("currentValue")
+	_nSAnimationSelDelegate                          = objc.RegisterName("delegate")
+	_nSAnimationSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_nSAnimationSelProgressMarks                     = objc.RegisterName("progressMarks")
+	_nSAnimationSelSetProgressMarks                  = objc.RegisterName("setProgressMarks:")
+	_nSAnimationSelRunLoopModesForAnimating          = objc.RegisterName("runLoopModesForAnimating")
 )
 
 func NSAnimationFromID(id objc.ID) *NSAnimation {
@@ -58,13 +58,17 @@ func NSAnimationFromID(id objc.ID) *NSAnimation {
 
 func (o *NSAnimation) InitWithDurationAnimationCurve(duration float64, animationCurve NSAnimationCurve) *NSAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationSelInitWithDurationAnimationCurve, duration, animationCurve)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAnimationFromID(_ret)
 }
 
 func (o *NSAnimation) InitWithCoder(coder *foundation.NSCoder) *NSAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAnimationSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAnimationFromID(_ret)
 }
 
@@ -177,4 +181,3 @@ func (o *NSAnimation) RunLoopModesForAnimating() *foundation.NSArray[*foundation
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSAnimationSelRunLoopModesForAnimating)
 	return _ret
 }
-

@@ -18,14 +18,14 @@ type LAPrivateKey struct {
 }
 
 var (
-	_clsLAPrivateKey = _objcClass("LAPrivateKey")
-	_lAPrivateKeySelSignDataSecKeyAlgorithmCompletion = objc.RegisterName("signData:secKeyAlgorithm:completion:")
-	_lAPrivateKeySelCanSignUsingSecKeyAlgorithm = objc.RegisterName("canSignUsingSecKeyAlgorithm:")
-	_lAPrivateKeySelDecryptDataSecKeyAlgorithmCompletion = objc.RegisterName("decryptData:secKeyAlgorithm:completion:")
-	_lAPrivateKeySelCanDecryptUsingSecKeyAlgorithm = objc.RegisterName("canDecryptUsingSecKeyAlgorithm:")
+	_clsLAPrivateKey                                                                   = _objcClass("LAPrivateKey")
+	_lAPrivateKeySelSignDataSecKeyAlgorithmCompletion                                  = objc.RegisterName("signData:secKeyAlgorithm:completion:")
+	_lAPrivateKeySelCanSignUsingSecKeyAlgorithm                                        = objc.RegisterName("canSignUsingSecKeyAlgorithm:")
+	_lAPrivateKeySelDecryptDataSecKeyAlgorithmCompletion                               = objc.RegisterName("decryptData:secKeyAlgorithm:completion:")
+	_lAPrivateKeySelCanDecryptUsingSecKeyAlgorithm                                     = objc.RegisterName("canDecryptUsingSecKeyAlgorithm:")
 	_lAPrivateKeySelExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion = objc.RegisterName("exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:")
-	_lAPrivateKeySelCanExchangeKeysUsingSecKeyAlgorithm = objc.RegisterName("canExchangeKeysUsingSecKeyAlgorithm:")
-	_lAPrivateKeySelPublicKey = objc.RegisterName("publicKey")
+	_lAPrivateKeySelCanExchangeKeysUsingSecKeyAlgorithm                                = objc.RegisterName("canExchangeKeysUsingSecKeyAlgorithm:")
+	_lAPrivateKeySelPublicKey                                                          = objc.RegisterName("publicKey")
 )
 
 func LAPrivateKeyFromID(id objc.ID) *LAPrivateKey {
@@ -104,7 +104,8 @@ func (o *LAPrivateKey) CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Poin
 // @brief Offers the public key counterpart of a @c LAPrivateKey instance
 func (o *LAPrivateKey) PublicKey() *LAPublicKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAPrivateKeySelPublicKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAPublicKeyFromID(_ret)
 }
-

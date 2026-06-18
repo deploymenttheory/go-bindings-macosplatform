@@ -15,8 +15,8 @@ type TKSmartCardUserInteractionForSecurePINChange struct {
 }
 
 var (
-	_clsTKSmartCardUserInteractionForSecurePINChange = _objcClass("TKSmartCardUserInteractionForSecurePINChange")
-	_tKSmartCardUserInteractionForSecurePINChangeSelPINConfirmation = objc.RegisterName("PINConfirmation")
+	_clsTKSmartCardUserInteractionForSecurePINChange                   = _objcClass("TKSmartCardUserInteractionForSecurePINChange")
+	_tKSmartCardUserInteractionForSecurePINChangeSelPINConfirmation    = objc.RegisterName("PINConfirmation")
 	_tKSmartCardUserInteractionForSecurePINChangeSelSetPINConfirmation = objc.RegisterName("setPINConfirmation:")
 )
 
@@ -38,4 +38,3 @@ func (o *TKSmartCardUserInteractionForSecurePINChange) PINConfirmation() TKSmart
 func (o *TKSmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) {
 	o.Ptr().Send(_tKSmartCardUserInteractionForSecurePINChangeSelSetPINConfirmation, pINConfirmation)
 }
-

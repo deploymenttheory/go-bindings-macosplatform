@@ -16,9 +16,9 @@ type UNNotificationActionIcon struct {
 }
 
 var (
-	_clsUNNotificationActionIcon = _objcClass("UNNotificationActionIcon")
+	_clsUNNotificationActionIcon                          = _objcClass("UNNotificationActionIcon")
 	_uNNotificationActionIconSelIconWithTemplateImageName = objc.RegisterName("iconWithTemplateImageName:")
-	_uNNotificationActionIconSelIconWithSystemImageName = objc.RegisterName("iconWithSystemImageName:")
+	_uNNotificationActionIconSelIconWithSystemImageName   = objc.RegisterName("iconWithSystemImageName:")
 )
 
 func UNNotificationActionIconFromID(id objc.ID) *UNNotificationActionIcon {
@@ -33,13 +33,16 @@ func UNNotificationActionIconFromID(id objc.ID) *UNNotificationActionIcon {
 
 func UNNotificationActionIconIconWithTemplateImageName(templateImageName *foundation.NSString) *UNNotificationActionIcon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationActionIcon), _uNNotificationActionIconSelIconWithTemplateImageName, templateImageName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationActionIconFromID(_ret)
 }
 
 func UNNotificationActionIconIconWithSystemImageName(systemImageName *foundation.NSString) *UNNotificationActionIcon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationActionIcon), _uNNotificationActionIconSelIconWithSystemImageName, systemImageName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationActionIconFromID(_ret)
 }
-

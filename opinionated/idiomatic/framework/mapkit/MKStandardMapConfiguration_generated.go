@@ -114,7 +114,9 @@ func (x *StandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
 	x.inner.SetShowsTraffic(showsTraffic)
 }
 
-func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
+func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
+	return &x.inner.MKMapConfiguration
+}
 
 // StandardMapConfigurationable is the interface implemented by [StandardMapConfiguration], for mocking and DI.
 type StandardMapConfigurationable interface {
@@ -132,4 +134,3 @@ type StandardMapConfigurationable interface {
 }
 
 var _ StandardMapConfigurationable = (*StandardMapConfiguration)(nil)
-

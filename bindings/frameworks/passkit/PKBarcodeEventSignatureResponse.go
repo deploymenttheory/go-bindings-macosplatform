@@ -16,10 +16,10 @@ type PKBarcodeEventSignatureResponse struct {
 }
 
 var (
-	_clsPKBarcodeEventSignatureResponse = _objcClass("PKBarcodeEventSignatureResponse")
+	_clsPKBarcodeEventSignatureResponse                   = _objcClass("PKBarcodeEventSignatureResponse")
 	_pKBarcodeEventSignatureResponseSelInitWithSignedData = objc.RegisterName("initWithSignedData:")
-	_pKBarcodeEventSignatureResponseSelSignedData = objc.RegisterName("signedData")
-	_pKBarcodeEventSignatureResponseSelSetSignedData = objc.RegisterName("setSignedData:")
+	_pKBarcodeEventSignatureResponseSelSignedData         = objc.RegisterName("signedData")
+	_pKBarcodeEventSignatureResponseSelSetSignedData      = objc.RegisterName("setSignedData:")
 )
 
 func PKBarcodeEventSignatureResponseFromID(id objc.ID) *PKBarcodeEventSignatureResponse {
@@ -34,17 +34,20 @@ func PKBarcodeEventSignatureResponseFromID(id objc.ID) *PKBarcodeEventSignatureR
 
 func (o *PKBarcodeEventSignatureResponse) InitWithSignedData(signedData *foundation.NSData) *PKBarcodeEventSignatureResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureResponseSelInitWithSignedData, signedData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKBarcodeEventSignatureResponseFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureResponse) SignedData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventSignatureResponseSelSignedData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *PKBarcodeEventSignatureResponse) SetSignedData(signedData *foundation.NSData) {
 	o.Ptr().Send(_pKBarcodeEventSignatureResponseSelSetSignedData, signedData.Ptr())
 }
-

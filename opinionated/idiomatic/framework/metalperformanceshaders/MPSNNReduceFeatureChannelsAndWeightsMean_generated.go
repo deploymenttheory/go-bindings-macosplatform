@@ -19,7 +19,9 @@ type NNReduceFeatureChannelsAndWeightsMean struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsAndWeightsMean].
-func (x *NNReduceFeatureChannelsAndWeightsMean) Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsMean { return x.inner }
+func (x *NNReduceFeatureChannelsAndWeightsMean) Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsMean {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -167,11 +169,17 @@ func (x *NNReduceFeatureChannelsAndWeightsMean) WithLabel(label string) *NNReduc
 	return x
 }
 
-func (x *NNReduceFeatureChannelsAndWeightsMean) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
+func (x *NNReduceFeatureChannelsAndWeightsMean) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary {
+	return &x.inner.MPSNNReduceBinary
+}
 
-func (x *NNReduceFeatureChannelsAndWeightsMean) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
+func (x *NNReduceFeatureChannelsAndWeightsMean) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel
+}
 
-func (x *NNReduceFeatureChannelsAndWeightsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsAndWeightsMean) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsAndWeightsMeanable is the interface implemented by [NNReduceFeatureChannelsAndWeightsMean], for mocking and DI.
 type NNReduceFeatureChannelsAndWeightsMeanable interface {
@@ -199,4 +207,3 @@ type NNReduceFeatureChannelsAndWeightsMeanable interface {
 }
 
 var _ NNReduceFeatureChannelsAndWeightsMeanable = (*NNReduceFeatureChannelsAndWeightsMean)(nil)
-

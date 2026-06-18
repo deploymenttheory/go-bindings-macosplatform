@@ -18,25 +18,25 @@ type PHPickerConfiguration struct {
 }
 
 var (
-	_clsPHPickerConfiguration = _objcClass("PHPickerConfiguration")
-	_pHPickerConfigurationSelInitWithPhotoLibrary = objc.RegisterName("initWithPhotoLibrary:")
-	_pHPickerConfigurationSelInit = objc.RegisterName("init")
-	_pHPickerConfigurationSelPreferredAssetRepresentationMode = objc.RegisterName("preferredAssetRepresentationMode")
+	_clsPHPickerConfiguration                                    = _objcClass("PHPickerConfiguration")
+	_pHPickerConfigurationSelInitWithPhotoLibrary                = objc.RegisterName("initWithPhotoLibrary:")
+	_pHPickerConfigurationSelInit                                = objc.RegisterName("init")
+	_pHPickerConfigurationSelPreferredAssetRepresentationMode    = objc.RegisterName("preferredAssetRepresentationMode")
 	_pHPickerConfigurationSelSetPreferredAssetRepresentationMode = objc.RegisterName("setPreferredAssetRepresentationMode:")
-	_pHPickerConfigurationSelSelection = objc.RegisterName("selection")
-	_pHPickerConfigurationSelSetSelection = objc.RegisterName("setSelection:")
-	_pHPickerConfigurationSelSelectionLimit = objc.RegisterName("selectionLimit")
-	_pHPickerConfigurationSelSetSelectionLimit = objc.RegisterName("setSelectionLimit:")
-	_pHPickerConfigurationSelFilter = objc.RegisterName("filter")
-	_pHPickerConfigurationSelSetFilter = objc.RegisterName("setFilter:")
-	_pHPickerConfigurationSelPreselectedAssetIdentifiers = objc.RegisterName("preselectedAssetIdentifiers")
-	_pHPickerConfigurationSelSetPreselectedAssetIdentifiers = objc.RegisterName("setPreselectedAssetIdentifiers:")
-	_pHPickerConfigurationSelMode = objc.RegisterName("mode")
-	_pHPickerConfigurationSelSetMode = objc.RegisterName("setMode:")
-	_pHPickerConfigurationSelEdgesWithoutContentMargins = objc.RegisterName("edgesWithoutContentMargins")
-	_pHPickerConfigurationSelSetEdgesWithoutContentMargins = objc.RegisterName("setEdgesWithoutContentMargins:")
-	_pHPickerConfigurationSelDisabledCapabilities = objc.RegisterName("disabledCapabilities")
-	_pHPickerConfigurationSelSetDisabledCapabilities = objc.RegisterName("setDisabledCapabilities:")
+	_pHPickerConfigurationSelSelection                           = objc.RegisterName("selection")
+	_pHPickerConfigurationSelSetSelection                        = objc.RegisterName("setSelection:")
+	_pHPickerConfigurationSelSelectionLimit                      = objc.RegisterName("selectionLimit")
+	_pHPickerConfigurationSelSetSelectionLimit                   = objc.RegisterName("setSelectionLimit:")
+	_pHPickerConfigurationSelFilter                              = objc.RegisterName("filter")
+	_pHPickerConfigurationSelSetFilter                           = objc.RegisterName("setFilter:")
+	_pHPickerConfigurationSelPreselectedAssetIdentifiers         = objc.RegisterName("preselectedAssetIdentifiers")
+	_pHPickerConfigurationSelSetPreselectedAssetIdentifiers      = objc.RegisterName("setPreselectedAssetIdentifiers:")
+	_pHPickerConfigurationSelMode                                = objc.RegisterName("mode")
+	_pHPickerConfigurationSelSetMode                             = objc.RegisterName("setMode:")
+	_pHPickerConfigurationSelEdgesWithoutContentMargins          = objc.RegisterName("edgesWithoutContentMargins")
+	_pHPickerConfigurationSelSetEdgesWithoutContentMargins       = objc.RegisterName("setEdgesWithoutContentMargins:")
+	_pHPickerConfigurationSelDisabledCapabilities                = objc.RegisterName("disabledCapabilities")
+	_pHPickerConfigurationSelSetDisabledCapabilities             = objc.RegisterName("setDisabledCapabilities:")
 )
 
 func PHPickerConfigurationFromID(id objc.ID) *PHPickerConfiguration {
@@ -52,14 +52,18 @@ func PHPickerConfigurationFromID(id objc.ID) *PHPickerConfiguration {
 // Initializes a new configuration with the \c photoLibrary the picker should use.
 func (o *PHPickerConfiguration) InitWithPhotoLibrary(photoLibrary *photos.PHPhotoLibrary) *PHPickerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerConfigurationSelInitWithPhotoLibrary, photoLibrary.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPickerConfigurationFromID(_ret)
 }
 
 // Initializes a new configuration with the system photo library. This configuration never returns asset identifiers.
 func (o *PHPickerConfiguration) Init() *PHPickerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPickerConfigurationFromID(_ret)
 }
 
@@ -99,7 +103,9 @@ func (o *PHPickerConfiguration) SetSelectionLimit(selectionLimit int) {
 // Types of assets that can be shown. Default is \c nil. @discussion Setting \c filter to \c nil means all asset types can be shown.
 func (o *PHPickerConfiguration) Filter() *PHPickerFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerConfigurationSelFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPickerFilterFromID(_ret)
 }
 
@@ -151,4 +157,3 @@ func (o *PHPickerConfiguration) DisabledCapabilities() PHPickerCapabilities {
 func (o *PHPickerConfiguration) SetDisabledCapabilities(disabledCapabilities PHPickerCapabilities) {
 	o.Ptr().Send(_pHPickerConfigurationSelSetDisabledCapabilities, disabledCapabilities)
 }
-

@@ -185,4 +185,3 @@ type RelativeDateTimeFormatterable interface {
 }
 
 var _ RelativeDateTimeFormatterable = (*RelativeDateTimeFormatter)(nil)
-

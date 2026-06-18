@@ -25,4 +25,3 @@ func VZVirtioGraphicsDeviceFromID(id objc.ID) *VZVirtioGraphicsDevice {
 	purego.Track(o)
 	return o
 }
-

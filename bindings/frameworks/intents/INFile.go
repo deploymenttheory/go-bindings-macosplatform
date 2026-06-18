@@ -16,16 +16,16 @@ type INFile struct {
 }
 
 var (
-	_clsINFile = _objcClass("INFile")
-	_iNFileSelFileWithDataFilenameTypeIdentifier = objc.RegisterName("fileWithData:filename:typeIdentifier:")
+	_clsINFile                                      = _objcClass("INFile")
+	_iNFileSelFileWithDataFilenameTypeIdentifier    = objc.RegisterName("fileWithData:filename:typeIdentifier:")
 	_iNFileSelFileWithFileURLFilenameTypeIdentifier = objc.RegisterName("fileWithFileURL:filename:typeIdentifier:")
-	_iNFileSelData = objc.RegisterName("data")
-	_iNFileSelFilename = objc.RegisterName("filename")
-	_iNFileSelSetFilename = objc.RegisterName("setFilename:")
-	_iNFileSelTypeIdentifier = objc.RegisterName("typeIdentifier")
-	_iNFileSelFileURL = objc.RegisterName("fileURL")
-	_iNFileSelRemovedOnCompletion = objc.RegisterName("removedOnCompletion")
-	_iNFileSelSetRemovedOnCompletion = objc.RegisterName("setRemovedOnCompletion:")
+	_iNFileSelData                                  = objc.RegisterName("data")
+	_iNFileSelFilename                              = objc.RegisterName("filename")
+	_iNFileSelSetFilename                           = objc.RegisterName("setFilename:")
+	_iNFileSelTypeIdentifier                        = objc.RegisterName("typeIdentifier")
+	_iNFileSelFileURL                               = objc.RegisterName("fileURL")
+	_iNFileSelRemovedOnCompletion                   = objc.RegisterName("removedOnCompletion")
+	_iNFileSelSetRemovedOnCompletion                = objc.RegisterName("setRemovedOnCompletion:")
 )
 
 func INFileFromID(id objc.ID) *INFile {
@@ -40,27 +40,35 @@ func INFileFromID(id objc.ID) *INFile {
 
 func INFileFileWithDataFilenameTypeIdentifier(data *foundation.NSData, filename *foundation.NSString, typeIdentifier *foundation.NSString) *INFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFile), _iNFileSelFileWithDataFilenameTypeIdentifier, data.Ptr(), filename.Ptr(), typeIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileFromID(_ret)
 }
 
 func INFileFileWithFileURLFilenameTypeIdentifier(fileURL *foundation.NSURL, filename *foundation.NSString, typeIdentifier *foundation.NSString) *INFile {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINFile), _iNFileSelFileWithFileURLFilenameTypeIdentifier, fileURL.Ptr(), filename.Ptr(), typeIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INFileFromID(_ret)
 }
 
 // The contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
 func (o *INFile) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFileSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The human-readable name of the file, which will be displayed to the user.
 func (o *INFile) Filename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFileSelFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,14 +79,18 @@ func (o *INFile) SetFilename(filename *foundation.NSString) {
 // The uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
 func (o *INFile) TypeIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFileSelTypeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
 func (o *INFile) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNFileSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -91,4 +103,3 @@ func (o *INFile) RemovedOnCompletion() bool {
 func (o *INFile) SetRemovedOnCompletion(removedOnCompletion bool) {
 	o.Ptr().Send(_iNFileSelSetRemovedOnCompletion, removedOnCompletion)
 }
-

@@ -98,7 +98,9 @@ func (x *CNNNormalizationNode) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
-func (x *CNNNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNNormalizationNodeable is the interface implemented by [CNNNormalizationNode], for mocking and DI.
 type CNNNormalizationNodeable interface {
@@ -117,4 +119,3 @@ type CNNNormalizationNodeable interface {
 }
 
 var _ CNNNormalizationNodeable = (*CNNNormalizationNode)(nil)
-

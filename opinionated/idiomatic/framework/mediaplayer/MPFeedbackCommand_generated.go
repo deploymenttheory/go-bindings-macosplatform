@@ -117,4 +117,3 @@ type FeedbackCommandable interface {
 }
 
 var _ FeedbackCommandable = (*FeedbackCommand)(nil)
-

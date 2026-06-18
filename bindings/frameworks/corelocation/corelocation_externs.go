@@ -21,4 +21,3 @@ func KCLHeadingFilterNone() uintptr {
 	ptr, _ := purego.Dlsym(_corelocationLib, "kCLHeadingFilterNone")
 	return ptr
 }
-

@@ -17,7 +17,7 @@ type MPSCNNNeuronAbsoluteNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronAbsoluteNode = _objcClass("MPSCNNNeuronAbsoluteNode")
+	_clsMPSCNNNeuronAbsoluteNode               = _objcClass("MPSCNNNeuronAbsoluteNode")
 	_mPSCNNNeuronAbsoluteNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 	_mPSCNNNeuronAbsoluteNodeSelInitWithSource = objc.RegisterName("initWithSource:")
 )
@@ -35,14 +35,17 @@ func MPSCNNNeuronAbsoluteNodeFromID(id objc.ID) *MPSCNNNeuronAbsoluteNode {
 // @abstract Create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronAbsoluteNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronAbsoluteNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronAbsoluteNode), _mPSCNNNeuronAbsoluteNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronAbsoluteNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a & b
 func (o *MPSCNNNeuronAbsoluteNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronAbsoluteNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronAbsoluteNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronAbsoluteNodeFromID(_ret)
 }
-

@@ -26,4 +26,3 @@ func ShowExtensionManagementInterface() {
 func IsExtensionEnabled() bool {
 	return raw.FIFinderSyncControllerIsExtensionEnabled()
 }
-

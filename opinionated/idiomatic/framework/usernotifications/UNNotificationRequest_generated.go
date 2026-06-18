@@ -72,4 +72,3 @@ type NotificationRequestable interface {
 }
 
 var _ NotificationRequestable = (*NotificationRequest)(nil)
-

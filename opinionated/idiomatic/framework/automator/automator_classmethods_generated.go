@@ -23,4 +23,3 @@ func SharedWorkspace() *Workspace {
 	}
 	return &Workspace{inner: _r}
 }
-

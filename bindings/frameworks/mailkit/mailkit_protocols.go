@@ -48,4 +48,3 @@ type MEMessageSecurityHandler interface {
 	ExtensionViewControllerForMessageContext(context_ *foundation.NSData) *MEExtensionViewController
 	PrimaryActionClickedForMessageContextCompletionHandler(context_ *foundation.NSData, completionHandler func(*MEExtensionViewController))
 }
-

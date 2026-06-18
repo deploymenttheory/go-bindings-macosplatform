@@ -15,13 +15,13 @@ type VZGenericPlatformConfiguration struct {
 }
 
 var (
-	_clsVZGenericPlatformConfiguration = _objcClass("VZGenericPlatformConfiguration")
-	_vZGenericPlatformConfigurationSelInit = objc.RegisterName("init")
-	_vZGenericPlatformConfigurationSelMachineIdentifier = objc.RegisterName("machineIdentifier")
-	_vZGenericPlatformConfigurationSelSetMachineIdentifier = objc.RegisterName("setMachineIdentifier:")
+	_clsVZGenericPlatformConfiguration                                = _objcClass("VZGenericPlatformConfiguration")
+	_vZGenericPlatformConfigurationSelInit                            = objc.RegisterName("init")
+	_vZGenericPlatformConfigurationSelMachineIdentifier               = objc.RegisterName("machineIdentifier")
+	_vZGenericPlatformConfigurationSelSetMachineIdentifier            = objc.RegisterName("setMachineIdentifier:")
 	_vZGenericPlatformConfigurationSelIsNestedVirtualizationSupported = objc.RegisterName("isNestedVirtualizationSupported")
-	_vZGenericPlatformConfigurationSelIsNestedVirtualizationEnabled = objc.RegisterName("isNestedVirtualizationEnabled")
-	_vZGenericPlatformConfigurationSelSetNestedVirtualizationEnabled = objc.RegisterName("setNestedVirtualizationEnabled:")
+	_vZGenericPlatformConfigurationSelIsNestedVirtualizationEnabled   = objc.RegisterName("isNestedVirtualizationEnabled")
+	_vZGenericPlatformConfigurationSelSetNestedVirtualizationEnabled  = objc.RegisterName("setNestedVirtualizationEnabled:")
 )
 
 func VZGenericPlatformConfigurationFromID(id objc.ID) *VZGenericPlatformConfiguration {
@@ -36,14 +36,18 @@ func VZGenericPlatformConfigurationFromID(id objc.ID) *VZGenericPlatformConfigur
 
 func (o *VZGenericPlatformConfiguration) Init() *VZGenericPlatformConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericPlatformConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZGenericPlatformConfigurationFromID(_ret)
 }
 
 // @abstract The unique machine identifier. @discussion Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
 func (o *VZGenericPlatformConfiguration) MachineIdentifier() *VZGenericMachineIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericPlatformConfigurationSelMachineIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZGenericMachineIdentifierFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *VZGenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
 func (o *VZGenericPlatformConfiguration) SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) {
 	o.Ptr().Send(_vZGenericPlatformConfigurationSelSetNestedVirtualizationEnabled, nestedVirtualizationEnabled)
 }
-

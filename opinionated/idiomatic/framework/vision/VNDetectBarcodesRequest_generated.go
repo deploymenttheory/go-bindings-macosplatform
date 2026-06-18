@@ -46,7 +46,9 @@ func (x *DetectBarcodesRequest) WithSymbologies(items ...*foundation.NSString) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -125,9 +127,13 @@ func (x *DetectBarcodesRequest) SetCoalesceCompositeSymbologies(coalesceComposit
 	x.inner.SetCoalesceCompositeSymbologies(coalesceCompositeSymbologies)
 }
 
-func (x *DetectBarcodesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectBarcodesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectBarcodesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectBarcodesRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectBarcodesRequestable is the interface implemented by [DetectBarcodesRequest], for mocking and DI.
 type DetectBarcodesRequestable interface {
@@ -146,4 +152,3 @@ type DetectBarcodesRequestable interface {
 }
 
 var _ DetectBarcodesRequestable = (*DetectBarcodesRequest)(nil)
-

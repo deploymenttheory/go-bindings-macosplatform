@@ -19,40 +19,40 @@ type SCNScene struct {
 }
 
 var (
-	_clsSCNScene = _objcClass("SCNScene")
-	_sCNSceneSelScene = objc.RegisterName("scene")
-	_sCNSceneSelAttributeForKey = objc.RegisterName("attributeForKey:")
-	_sCNSceneSelSetAttributeForKey = objc.RegisterName("setAttribute:forKey:")
-	_sCNSceneSelSceneNamed = objc.RegisterName("sceneNamed:")
-	_sCNSceneSelSceneNamedInDirectoryOptions = objc.RegisterName("sceneNamed:inDirectory:options:")
-	_sCNSceneSelSceneWithURLOptionsError = objc.RegisterName("sceneWithURL:options:error:")
+	_clsSCNScene                                         = _objcClass("SCNScene")
+	_sCNSceneSelScene                                    = objc.RegisterName("scene")
+	_sCNSceneSelAttributeForKey                          = objc.RegisterName("attributeForKey:")
+	_sCNSceneSelSetAttributeForKey                       = objc.RegisterName("setAttribute:forKey:")
+	_sCNSceneSelSceneNamed                               = objc.RegisterName("sceneNamed:")
+	_sCNSceneSelSceneNamedInDirectoryOptions             = objc.RegisterName("sceneNamed:inDirectory:options:")
+	_sCNSceneSelSceneWithURLOptionsError                 = objc.RegisterName("sceneWithURL:options:error:")
 	_sCNSceneSelWriteToURLOptionsDelegateProgressHandler = objc.RegisterName("writeToURL:options:delegate:progressHandler:")
-	_sCNSceneSelRootNode = objc.RegisterName("rootNode")
-	_sCNSceneSelPhysicsWorld = objc.RegisterName("physicsWorld")
-	_sCNSceneSelBackground = objc.RegisterName("background")
-	_sCNSceneSelLightingEnvironment = objc.RegisterName("lightingEnvironment")
-	_sCNSceneSelFogStartDistance = objc.RegisterName("fogStartDistance")
-	_sCNSceneSelSetFogStartDistance = objc.RegisterName("setFogStartDistance:")
-	_sCNSceneSelFogEndDistance = objc.RegisterName("fogEndDistance")
-	_sCNSceneSelSetFogEndDistance = objc.RegisterName("setFogEndDistance:")
-	_sCNSceneSelFogDensityExponent = objc.RegisterName("fogDensityExponent")
-	_sCNSceneSelSetFogDensityExponent = objc.RegisterName("setFogDensityExponent:")
-	_sCNSceneSelFogColor = objc.RegisterName("fogColor")
-	_sCNSceneSelSetFogColor = objc.RegisterName("setFogColor:")
-	_sCNSceneSelWantsScreenSpaceReflection = objc.RegisterName("wantsScreenSpaceReflection")
-	_sCNSceneSelSetWantsScreenSpaceReflection = objc.RegisterName("setWantsScreenSpaceReflection:")
-	_sCNSceneSelScreenSpaceReflectionSampleCount = objc.RegisterName("screenSpaceReflectionSampleCount")
-	_sCNSceneSelSetScreenSpaceReflectionSampleCount = objc.RegisterName("setScreenSpaceReflectionSampleCount:")
-	_sCNSceneSelScreenSpaceReflectionMaximumDistance = objc.RegisterName("screenSpaceReflectionMaximumDistance")
-	_sCNSceneSelSetScreenSpaceReflectionMaximumDistance = objc.RegisterName("setScreenSpaceReflectionMaximumDistance:")
-	_sCNSceneSelScreenSpaceReflectionStride = objc.RegisterName("screenSpaceReflectionStride")
-	_sCNSceneSelSetScreenSpaceReflectionStride = objc.RegisterName("setScreenSpaceReflectionStride:")
-	_sCNSceneSelIsPaused = objc.RegisterName("isPaused")
-	_sCNSceneSelSetPaused = objc.RegisterName("setPaused:")
-	_sCNSceneSelAddParticleSystemWithTransform = objc.RegisterName("addParticleSystem:withTransform:")
-	_sCNSceneSelRemoveAllParticleSystems = objc.RegisterName("removeAllParticleSystems")
-	_sCNSceneSelRemoveParticleSystem = objc.RegisterName("removeParticleSystem:")
-	_sCNSceneSelParticleSystems = objc.RegisterName("particleSystems")
+	_sCNSceneSelRootNode                                 = objc.RegisterName("rootNode")
+	_sCNSceneSelPhysicsWorld                             = objc.RegisterName("physicsWorld")
+	_sCNSceneSelBackground                               = objc.RegisterName("background")
+	_sCNSceneSelLightingEnvironment                      = objc.RegisterName("lightingEnvironment")
+	_sCNSceneSelFogStartDistance                         = objc.RegisterName("fogStartDistance")
+	_sCNSceneSelSetFogStartDistance                      = objc.RegisterName("setFogStartDistance:")
+	_sCNSceneSelFogEndDistance                           = objc.RegisterName("fogEndDistance")
+	_sCNSceneSelSetFogEndDistance                        = objc.RegisterName("setFogEndDistance:")
+	_sCNSceneSelFogDensityExponent                       = objc.RegisterName("fogDensityExponent")
+	_sCNSceneSelSetFogDensityExponent                    = objc.RegisterName("setFogDensityExponent:")
+	_sCNSceneSelFogColor                                 = objc.RegisterName("fogColor")
+	_sCNSceneSelSetFogColor                              = objc.RegisterName("setFogColor:")
+	_sCNSceneSelWantsScreenSpaceReflection               = objc.RegisterName("wantsScreenSpaceReflection")
+	_sCNSceneSelSetWantsScreenSpaceReflection            = objc.RegisterName("setWantsScreenSpaceReflection:")
+	_sCNSceneSelScreenSpaceReflectionSampleCount         = objc.RegisterName("screenSpaceReflectionSampleCount")
+	_sCNSceneSelSetScreenSpaceReflectionSampleCount      = objc.RegisterName("setScreenSpaceReflectionSampleCount:")
+	_sCNSceneSelScreenSpaceReflectionMaximumDistance     = objc.RegisterName("screenSpaceReflectionMaximumDistance")
+	_sCNSceneSelSetScreenSpaceReflectionMaximumDistance  = objc.RegisterName("setScreenSpaceReflectionMaximumDistance:")
+	_sCNSceneSelScreenSpaceReflectionStride              = objc.RegisterName("screenSpaceReflectionStride")
+	_sCNSceneSelSetScreenSpaceReflectionStride           = objc.RegisterName("setScreenSpaceReflectionStride:")
+	_sCNSceneSelIsPaused                                 = objc.RegisterName("isPaused")
+	_sCNSceneSelSetPaused                                = objc.RegisterName("setPaused:")
+	_sCNSceneSelAddParticleSystemWithTransform           = objc.RegisterName("addParticleSystem:withTransform:")
+	_sCNSceneSelRemoveAllParticleSystems                 = objc.RegisterName("removeAllParticleSystems")
+	_sCNSceneSelRemoveParticleSystem                     = objc.RegisterName("removeParticleSystem:")
+	_sCNSceneSelParticleSystems                          = objc.RegisterName("particleSystems")
 )
 
 func SCNSceneFromID(id objc.ID) *SCNScene {
@@ -67,7 +67,9 @@ func SCNSceneFromID(id objc.ID) *SCNScene {
 
 func SCNSceneScene() *SCNScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelScene)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
@@ -85,14 +87,18 @@ func (o *SCNScene) SetAttributeForKey(attribute objc.ID, key *foundation.NSStrin
 // @method sceneNamed: @abstract Creates and returns a scene associated with the specified filename. @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle. @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
 func SCNSceneSceneNamed(name *foundation.NSString) *SCNScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
 // @method sceneNamed:options: @abstract Creates and returns a scene associated with the specified filename. @param name The name of the file. The method looks for a file with the specified name in the application’s main bundle. @param directory The name of the bundle sub-directory to search into. @param options An options dictionary. The relevant keys are documented in the SCNSceneSource class. @discussion This method initializes with no options and does not check for errors. The resulting object is not cached.
 func SCNSceneSceneNamedInDirectoryOptions(name *foundation.NSString, directory *foundation.NSString, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SCNScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneNamedInDirectoryOptions, name.Ptr(), directory.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSceneFromID(_ret)
 }
 
@@ -100,7 +106,9 @@ func SCNSceneSceneNamedInDirectoryOptions(name *foundation.NSString, directory *
 func SCNSceneSceneWithURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*SCNScene, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNScene), _sCNSceneSelSceneWithURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -123,28 +131,36 @@ func (o *SCNScene) WriteToURLOptionsDelegateProgressHandler(url *foundation.NSUR
 // @property root @abstract Specifies the root node of the node hierarchy. @discussion Note that we have only one root node, whereas some file formats might have many nodes at the root of their hierarchies. The root node(s) of the imported files will therefore be children of the SCNScene's root node.
 func (o *SCNScene) RootNode() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelRootNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
 // @property physicsWorld @abstract Specifies the physics world of the receiver. @discussion Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
 func (o *SCNScene) PhysicsWorld() *SCNPhysicsWorld {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelPhysicsWorld)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsWorldFromID(_ret)
 }
 
 // @property background @abstract Specifies the background of the receiver. @discussion The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h Colors are supported starting in macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor. MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
 func (o *SCNScene) Background() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelBackground)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
 // @property lightingEnvironment @abstract Specifies the receiver's environment for image-based lighting (IBL). @discussion The environment can be - a cube map (as described in SCNMaterialProperty.h) - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11) - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
 func (o *SCNScene) LightingEnvironment() *SCNMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelLightingEnvironment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNMaterialPropertyFromID(_ret)
 }
 
@@ -252,7 +268,8 @@ func (o *SCNScene) RemoveParticleSystem(system *SCNParticleSystem) {
 
 func (o *SCNScene) ParticleSystems() *foundation.NSArray[*SCNParticleSystem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSceneSelParticleSystems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNParticleSystem](_ret)
 }
-

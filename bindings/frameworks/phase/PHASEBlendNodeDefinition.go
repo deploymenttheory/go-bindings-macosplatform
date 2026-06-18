@@ -16,17 +16,17 @@ type PHASEBlendNodeDefinition struct {
 }
 
 var (
-	_clsPHASEBlendNodeDefinition = _objcClass("PHASEBlendNodeDefinition")
-	_pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinitionIdentifier = objc.RegisterName("initWithBlendMetaParameterDefinition:identifier:")
-	_pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinition = objc.RegisterName("initWithBlendMetaParameterDefinition:")
-	_pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinitionIdentifier = objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:identifier:")
-	_pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinition = objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:")
-	_pHASEBlendNodeDefinitionSelAddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree = objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:")
+	_clsPHASEBlendNodeDefinition                                                                                                                    = _objcClass("PHASEBlendNodeDefinition")
+	_pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinitionIdentifier                                                                      = objc.RegisterName("initWithBlendMetaParameterDefinition:identifier:")
+	_pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinition                                                                                = objc.RegisterName("initWithBlendMetaParameterDefinition:")
+	_pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinitionIdentifier                                                               = objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:identifier:")
+	_pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinition                                                                         = objc.RegisterName("initDistanceBlendWithSpatialMixerDefinition:")
+	_pHASEBlendNodeDefinitionSelAddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree                                                      = objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:")
 	_pHASEBlendNodeDefinitionSelAddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree = objc.RegisterName("addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:")
-	_pHASEBlendNodeDefinitionSelAddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree = objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:")
-	_pHASEBlendNodeDefinitionSelAddRangeWithEnvelopeSubtree = objc.RegisterName("addRangeWithEnvelope:subtree:")
-	_pHASEBlendNodeDefinitionSelBlendParameterDefinition = objc.RegisterName("blendParameterDefinition")
-	_pHASEBlendNodeDefinitionSelSpatialMixerDefinitionForDistance = objc.RegisterName("spatialMixerDefinitionForDistance")
+	_pHASEBlendNodeDefinitionSelAddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree                                                      = objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:")
+	_pHASEBlendNodeDefinitionSelAddRangeWithEnvelopeSubtree                                                                                         = objc.RegisterName("addRangeWithEnvelope:subtree:")
+	_pHASEBlendNodeDefinitionSelBlendParameterDefinition                                                                                            = objc.RegisterName("blendParameterDefinition")
+	_pHASEBlendNodeDefinitionSelSpatialMixerDefinitionForDistance                                                                                   = objc.RegisterName("spatialMixerDefinitionForDistance")
 )
 
 func PHASEBlendNodeDefinitionFromID(id objc.ID) *PHASEBlendNodeDefinition {
@@ -42,28 +42,36 @@ func PHASEBlendNodeDefinitionFromID(id objc.ID) *PHASEBlendNodeDefinition {
 // @method initWithBlendMetaParameterDefinition:identifier @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
 func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinitionIdentifier(blendMetaParameterDefinition *PHASENumberMetaParameterDefinition, identifier *foundation.NSString) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinitionIdentifier, blendMetaParameterDefinition.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
 // @method initWithBlendMetaParameterDefinition @abstract Create a blend node definition @param blendMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the blend node at runtime. @return A new PHASEBlendNodeDefinition object
 func (o *PHASEBlendNodeDefinition) InitWithBlendMetaParameterDefinition(blendMetaParameterDefinition *PHASENumberMetaParameterDefinition) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitWithBlendMetaParameterDefinition, blendMetaParameterDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
 // @method initDistanceBlendWithSpatialMixerDefinition:identifier @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @param identifier An optional custom identifier to give to this object @return A new PHASEBlendNodeDefinition object
 func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinitionIdentifier(spatialMixerDefinition *PHASESpatialMixerDefinition, identifier *foundation.NSString) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinitionIdentifier, spatialMixerDefinition.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
 // @method initDistanceBlendWithSpatialMixerDefinition @abstract Create a blend node definition @param spatialMixerDefinition A PHASESpatialMixerDefinition that will bind the blend parameter to the distance between the source and listener. @return A new PHASEBlendNodeDefinition object
 func (o *PHASEBlendNodeDefinition) InitDistanceBlendWithSpatialMixerDefinition(spatialMixerDefinition *PHASESpatialMixerDefinition) *PHASEBlendNodeDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelInitDistanceBlendWithSpatialMixerDefinition, spatialMixerDefinition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEBlendNodeDefinitionFromID(_ret)
 }
 
@@ -89,13 +97,16 @@ func (o *PHASEBlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *PHASEEn
 
 func (o *PHASEBlendNodeDefinition) BlendParameterDefinition() *PHASENumberMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelBlendParameterDefinition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASENumberMetaParameterDefinitionFromID(_ret)
 }
 
 func (o *PHASEBlendNodeDefinition) SpatialMixerDefinitionForDistance() *PHASESpatialMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEBlendNodeDefinitionSelSpatialMixerDefinitionForDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESpatialMixerDefinitionFromID(_ret)
 }
-

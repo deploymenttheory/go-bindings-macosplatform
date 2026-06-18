@@ -19,15 +19,15 @@ type NSOpenGLPixelBuffer struct {
 }
 
 var (
-	_clsNSOpenGLPixelBuffer = _objcClass("NSOpenGLPixelBuffer")
+	_clsNSOpenGLPixelBuffer                                                                                    = _objcClass("NSOpenGLPixelBuffer")
 	_nSOpenGLPixelBufferSelInitWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh = objc.RegisterName("initWithTextureTarget:textureInternalFormat:textureMaxMipMapLevel:pixelsWide:pixelsHigh:")
-	_nSOpenGLPixelBufferSelInitWithCGLPBufferObj = objc.RegisterName("initWithCGLPBufferObj:")
-	_nSOpenGLPixelBufferSelCGLPBufferObj = objc.RegisterName("CGLPBufferObj")
-	_nSOpenGLPixelBufferSelPixelsWide = objc.RegisterName("pixelsWide")
-	_nSOpenGLPixelBufferSelPixelsHigh = objc.RegisterName("pixelsHigh")
-	_nSOpenGLPixelBufferSelTextureTarget = objc.RegisterName("textureTarget")
-	_nSOpenGLPixelBufferSelTextureInternalFormat = objc.RegisterName("textureInternalFormat")
-	_nSOpenGLPixelBufferSelTextureMaxMipMapLevel = objc.RegisterName("textureMaxMipMapLevel")
+	_nSOpenGLPixelBufferSelInitWithCGLPBufferObj                                                               = objc.RegisterName("initWithCGLPBufferObj:")
+	_nSOpenGLPixelBufferSelCGLPBufferObj                                                                       = objc.RegisterName("CGLPBufferObj")
+	_nSOpenGLPixelBufferSelPixelsWide                                                                          = objc.RegisterName("pixelsWide")
+	_nSOpenGLPixelBufferSelPixelsHigh                                                                          = objc.RegisterName("pixelsHigh")
+	_nSOpenGLPixelBufferSelTextureTarget                                                                       = objc.RegisterName("textureTarget")
+	_nSOpenGLPixelBufferSelTextureInternalFormat                                                               = objc.RegisterName("textureInternalFormat")
+	_nSOpenGLPixelBufferSelTextureMaxMipMapLevel                                                               = objc.RegisterName("textureMaxMipMapLevel")
 )
 
 func NSOpenGLPixelBufferFromID(id objc.ID) *NSOpenGLPixelBuffer {
@@ -43,14 +43,18 @@ func NSOpenGLPixelBufferFromID(id objc.ID) *NSOpenGLPixelBuffer {
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLPixelBuffer) InitWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh(target uint32, format uint32, maxLevel int32, pixelsWide int32, pixelsHigh int32) *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelBufferSelInitWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh, target, format, maxLevel, pixelsWide, pixelsHigh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelBufferFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSOpenGLPixelBuffer) InitWithCGLPBufferObj(pbuffer unsafe.Pointer) *NSOpenGLPixelBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelBufferSelInitWithCGLPBufferObj, pbuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelBufferFromID(_ret)
 }
 
@@ -89,4 +93,3 @@ func (o *NSOpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
 	_ret := objc.Send[int32](o.Ptr(), _nSOpenGLPixelBufferSelTextureMaxMipMapLevel)
 	return _ret
 }
-

@@ -15,28 +15,28 @@ type NSMapTable[KeyType purego.AnyObject, ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSMapTable = _objcClass("NSMapTable")
-	_nSMapTableSelInitWithKeyOptionsValueOptionsCapacity = objc.RegisterName("initWithKeyOptions:valueOptions:capacity:")
+	_clsNSMapTable                                                         = _objcClass("NSMapTable")
+	_nSMapTableSelInitWithKeyOptionsValueOptionsCapacity                   = objc.RegisterName("initWithKeyOptions:valueOptions:capacity:")
 	_nSMapTableSelInitWithKeyPointerFunctionsValuePointerFunctionsCapacity = objc.RegisterName("initWithKeyPointerFunctions:valuePointerFunctions:capacity:")
-	_nSMapTableSelMapTableWithKeyOptionsValueOptions = objc.RegisterName("mapTableWithKeyOptions:valueOptions:")
-	_nSMapTableSelMapTableWithStrongToStrongObjects = objc.RegisterName("mapTableWithStrongToStrongObjects")
-	_nSMapTableSelMapTableWithWeakToStrongObjects = objc.RegisterName("mapTableWithWeakToStrongObjects")
-	_nSMapTableSelMapTableWithStrongToWeakObjects = objc.RegisterName("mapTableWithStrongToWeakObjects")
-	_nSMapTableSelMapTableWithWeakToWeakObjects = objc.RegisterName("mapTableWithWeakToWeakObjects")
-	_nSMapTableSelStrongToStrongObjectsMapTable = objc.RegisterName("strongToStrongObjectsMapTable")
-	_nSMapTableSelWeakToStrongObjectsMapTable = objc.RegisterName("weakToStrongObjectsMapTable")
-	_nSMapTableSelStrongToWeakObjectsMapTable = objc.RegisterName("strongToWeakObjectsMapTable")
-	_nSMapTableSelWeakToWeakObjectsMapTable = objc.RegisterName("weakToWeakObjectsMapTable")
-	_nSMapTableSelObjectForKey = objc.RegisterName("objectForKey:")
-	_nSMapTableSelRemoveObjectForKey = objc.RegisterName("removeObjectForKey:")
-	_nSMapTableSelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_nSMapTableSelKeyEnumerator = objc.RegisterName("keyEnumerator")
-	_nSMapTableSelObjectEnumerator = objc.RegisterName("objectEnumerator")
-	_nSMapTableSelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSMapTableSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
-	_nSMapTableSelKeyPointerFunctions = objc.RegisterName("keyPointerFunctions")
-	_nSMapTableSelValuePointerFunctions = objc.RegisterName("valuePointerFunctions")
-	_nSMapTableSelCount = objc.RegisterName("count")
+	_nSMapTableSelMapTableWithKeyOptionsValueOptions                       = objc.RegisterName("mapTableWithKeyOptions:valueOptions:")
+	_nSMapTableSelMapTableWithStrongToStrongObjects                        = objc.RegisterName("mapTableWithStrongToStrongObjects")
+	_nSMapTableSelMapTableWithWeakToStrongObjects                          = objc.RegisterName("mapTableWithWeakToStrongObjects")
+	_nSMapTableSelMapTableWithStrongToWeakObjects                          = objc.RegisterName("mapTableWithStrongToWeakObjects")
+	_nSMapTableSelMapTableWithWeakToWeakObjects                            = objc.RegisterName("mapTableWithWeakToWeakObjects")
+	_nSMapTableSelStrongToStrongObjectsMapTable                            = objc.RegisterName("strongToStrongObjectsMapTable")
+	_nSMapTableSelWeakToStrongObjectsMapTable                              = objc.RegisterName("weakToStrongObjectsMapTable")
+	_nSMapTableSelStrongToWeakObjectsMapTable                              = objc.RegisterName("strongToWeakObjectsMapTable")
+	_nSMapTableSelWeakToWeakObjectsMapTable                                = objc.RegisterName("weakToWeakObjectsMapTable")
+	_nSMapTableSelObjectForKey                                             = objc.RegisterName("objectForKey:")
+	_nSMapTableSelRemoveObjectForKey                                       = objc.RegisterName("removeObjectForKey:")
+	_nSMapTableSelSetObjectForKey                                          = objc.RegisterName("setObject:forKey:")
+	_nSMapTableSelKeyEnumerator                                            = objc.RegisterName("keyEnumerator")
+	_nSMapTableSelObjectEnumerator                                         = objc.RegisterName("objectEnumerator")
+	_nSMapTableSelRemoveAllObjects                                         = objc.RegisterName("removeAllObjects")
+	_nSMapTableSelDictionaryRepresentation                                 = objc.RegisterName("dictionaryRepresentation")
+	_nSMapTableSelKeyPointerFunctions                                      = objc.RegisterName("keyPointerFunctions")
+	_nSMapTableSelValuePointerFunctions                                    = objc.RegisterName("valuePointerFunctions")
+	_nSMapTableSelCount                                                    = objc.RegisterName("count")
 )
 
 func NSMapTableFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id objc.ID) *NSMapTable[KeyType, ObjectType] {
@@ -51,19 +51,25 @@ func NSMapTableFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id 
 
 func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions, initialCapacity uint) *NSMapTable[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelInitWithKeyOptionsValueOptionsCapacity, keyOptions, valueOptions, initialCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[KeyType, ObjectType](_ret)
 }
 
 func (o *NSMapTable[KeyType, ObjectType]) InitWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunctions *NSPointerFunctions, valueFunctions *NSPointerFunctions, initialCapacity uint) *NSMapTable[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelInitWithKeyPointerFunctionsValuePointerFunctionsCapacity, keyFunctions.Ptr(), valueFunctions.Ptr(), initialCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[KeyType, ObjectType](_ret)
 }
 
 func NSMapTableMapTableWithKeyOptionsValueOptions(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions) *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelMapTableWithKeyOptionsValueOptions, keyOptions, valueOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
@@ -93,25 +99,33 @@ func NSMapTableMapTableWithWeakToWeakObjects() objc.ID {
 
 func NSMapTableStrongToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelStrongToStrongObjectsMapTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
 func NSMapTableWeakToStrongObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelWeakToStrongObjectsMapTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
 func NSMapTableStrongToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelStrongToWeakObjectsMapTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
 func NSMapTableWeakToWeakObjectsMapTable() *NSMapTable[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMapTable), _nSMapTableSelWeakToWeakObjectsMapTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMapTableFromID[objc.ID, objc.ID](_ret)
 }
 
@@ -130,13 +144,17 @@ func (o *NSMapTable[KeyType, ObjectType]) SetObjectForKey(anObject ObjectType, a
 
 func (o *NSMapTable[KeyType, ObjectType]) KeyEnumerator() *NSEnumerator[KeyType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelKeyEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[KeyType](_ret)
 }
 
 func (o *NSMapTable[KeyType, ObjectType]) ObjectEnumerator() *NSEnumerator[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelObjectEnumerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEnumeratorFromID[ObjectType](_ret)
 }
 
@@ -146,19 +164,25 @@ func (o *NSMapTable[KeyType, ObjectType]) RemoveAllObjects() {
 
 func (o *NSMapTable[KeyType, ObjectType]) DictionaryRepresentation() *NSDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelDictionaryRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
 func (o *NSMapTable[KeyType, ObjectType]) KeyPointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelKeyPointerFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
 func (o *NSMapTable[KeyType, ObjectType]) ValuePointerFunctions() *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMapTableSelValuePointerFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
@@ -166,4 +190,3 @@ func (o *NSMapTable[KeyType, ObjectType]) Count() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSMapTableSelCount)
 	return _ret
 }
-

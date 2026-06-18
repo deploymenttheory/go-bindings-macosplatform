@@ -15,11 +15,11 @@ type MLCEmbeddingLayer struct {
 }
 
 var (
-	_clsMLCEmbeddingLayer = _objcClass("MLCEmbeddingLayer")
+	_clsMLCEmbeddingLayer                           = _objcClass("MLCEmbeddingLayer")
 	_mLCEmbeddingLayerSelLayerWithDescriptorWeights = objc.RegisterName("layerWithDescriptor:weights:")
-	_mLCEmbeddingLayerSelDescriptor = objc.RegisterName("descriptor")
-	_mLCEmbeddingLayerSelWeights = objc.RegisterName("weights")
-	_mLCEmbeddingLayerSelWeightsParameter = objc.RegisterName("weightsParameter")
+	_mLCEmbeddingLayerSelDescriptor                 = objc.RegisterName("descriptor")
+	_mLCEmbeddingLayerSelWeights                    = objc.RegisterName("weights")
+	_mLCEmbeddingLayerSelWeightsParameter           = objc.RegisterName("weightsParameter")
 )
 
 func MLCEmbeddingLayerFromID(id objc.ID) *MLCEmbeddingLayer {
@@ -34,27 +34,34 @@ func MLCEmbeddingLayerFromID(id objc.ID) *MLCEmbeddingLayer {
 
 func MLCEmbeddingLayerLayerWithDescriptorWeights(descriptor *MLCEmbeddingDescriptor, weights *MLCTensor) *MLCEmbeddingLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingLayer), _mLCEmbeddingLayerSelLayerWithDescriptorWeights, descriptor.Ptr(), weights.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCEmbeddingLayerFromID(_ret)
 }
 
 func (o *MLCEmbeddingLayer) Descriptor() *MLCEmbeddingDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCEmbeddingDescriptorFromID(_ret)
 }
 
 // @property   weights @abstract   The array of word embeddings
 func (o *MLCEmbeddingLayer) Weights() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingLayerSelWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
 func (o *MLCEmbeddingLayer) WeightsParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingLayerSelWeightsParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
-

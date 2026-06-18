@@ -60,4 +60,3 @@ type StartCollaborationActionable interface {
 }
 
 var _ StartCollaborationActionable = (*StartCollaborationAction)(nil)
-

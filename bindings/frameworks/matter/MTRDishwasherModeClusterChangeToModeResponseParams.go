@@ -18,12 +18,12 @@ type MTRDishwasherModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTRDishwasherModeClusterChangeToModeResponseParams = _objcClass("MTRDishwasherModeClusterChangeToModeResponseParams")
+	_clsMTRDishwasherModeClusterChangeToModeResponseParams                           = _objcClass("MTRDishwasherModeClusterChangeToModeResponseParams")
 	_mTRDishwasherModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDishwasherModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDishwasherModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDishwasherModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRDishwasherModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRDishwasherModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDishwasherModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDishwasherModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRDishwasherModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRDishwasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDishwasherModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRDishwasherModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDi
 func (o *MTRDishwasherModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDishwasherModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRDishwasherModeClusterChangeToModeResponseParams) InitWithResponseVal
 
 func (o *MTRDishwasherModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRDishwasherModeClusterChangeToModeResponseParams) SetStatus(status *f
 
 func (o *MTRDishwasherModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRDishwasherModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRDishwasherModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

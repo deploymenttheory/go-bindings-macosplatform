@@ -25,4 +25,3 @@ func MTROtaSoftwareUpdateRequestorClusterStateTransitionEventFromID(id objc.ID) 
 	purego.Track(o)
 	return o
 }
-

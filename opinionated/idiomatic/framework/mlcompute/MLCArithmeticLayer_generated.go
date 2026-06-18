@@ -64,4 +64,3 @@ type ArithmeticLayerable interface {
 }
 
 var _ ArithmeticLayerable = (*ArithmeticLayer)(nil)
-

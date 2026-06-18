@@ -16,12 +16,12 @@ type GKInvite struct {
 }
 
 var (
-	_clsGKInvite = _objcClass("GKInvite")
-	_gKInviteSelSender = objc.RegisterName("sender")
-	_gKInviteSelIsHosted = objc.RegisterName("isHosted")
-	_gKInviteSelPlayerGroup = objc.RegisterName("playerGroup")
+	_clsGKInvite                 = _objcClass("GKInvite")
+	_gKInviteSelSender           = objc.RegisterName("sender")
+	_gKInviteSelIsHosted         = objc.RegisterName("isHosted")
+	_gKInviteSelPlayerGroup      = objc.RegisterName("playerGroup")
 	_gKInviteSelPlayerAttributes = objc.RegisterName("playerAttributes")
-	_gKInviteSelInviter = objc.RegisterName("inviter")
+	_gKInviteSelInviter          = objc.RegisterName("inviter")
 )
 
 func GKInviteFromID(id objc.ID) *GKInvite {
@@ -36,7 +36,9 @@ func GKInviteFromID(id objc.ID) *GKInvite {
 
 func (o *GKInvite) Sender() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKInviteSelSender)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -61,7 +63,8 @@ func (o *GKInvite) PlayerAttributes() uint32 {
 // Deprecated: since macOS 10.10.
 func (o *GKInvite) Inviter() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKInviteSelInviter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

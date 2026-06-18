@@ -243,4 +243,3 @@ type InstallerPaneable interface {
 }
 
 var _ InstallerPaneable = (*InstallerPane)(nil)
-

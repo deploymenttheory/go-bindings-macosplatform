@@ -17,11 +17,11 @@ type NSCollectionLayoutGroupCustomItem struct {
 }
 
 var (
-	_clsNSCollectionLayoutGroupCustomItem = _objcClass("NSCollectionLayoutGroupCustomItem")
-	_nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame = objc.RegisterName("customItemWithFrame:")
+	_clsNSCollectionLayoutGroupCustomItem                          = _objcClass("NSCollectionLayoutGroupCustomItem")
+	_nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame       = objc.RegisterName("customItemWithFrame:")
 	_nSCollectionLayoutGroupCustomItemSelCustomItemWithFrameZIndex = objc.RegisterName("customItemWithFrame:zIndex:")
-	_nSCollectionLayoutGroupCustomItemSelFrame = objc.RegisterName("frame")
-	_nSCollectionLayoutGroupCustomItemSelZIndex = objc.RegisterName("zIndex")
+	_nSCollectionLayoutGroupCustomItemSelFrame                     = objc.RegisterName("frame")
+	_nSCollectionLayoutGroupCustomItemSelZIndex                    = objc.RegisterName("zIndex")
 )
 
 func NSCollectionLayoutGroupCustomItemFromID(id objc.ID) *NSCollectionLayoutGroupCustomItem {
@@ -36,13 +36,17 @@ func NSCollectionLayoutGroupCustomItemFromID(id objc.ID) *NSCollectionLayoutGrou
 
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrame(frame corefoundation.CGRect) *NSCollectionLayoutGroupCustomItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrame, frame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupCustomItemFromID(_ret)
 }
 
 func NSCollectionLayoutGroupCustomItemCustomItemWithFrameZIndex(frame corefoundation.CGRect, zIndex int) *NSCollectionLayoutGroupCustomItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroupCustomItem), _nSCollectionLayoutGroupCustomItemSelCustomItemWithFrameZIndex, frame, zIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupCustomItemFromID(_ret)
 }
 
@@ -55,4 +59,3 @@ func (o *NSCollectionLayoutGroupCustomItem) ZIndex() int {
 	_ret := objc.Send[int](o.Ptr(), _nSCollectionLayoutGroupCustomItemSelZIndex)
 	return _ret
 }
-

@@ -17,31 +17,31 @@ type GLKEffectPropertyLight struct {
 }
 
 var (
-	_clsGLKEffectPropertyLight = _objcClass("GLKEffectPropertyLight")
-	_gLKEffectPropertyLightSelEnabled = objc.RegisterName("enabled")
-	_gLKEffectPropertyLightSelSetEnabled = objc.RegisterName("setEnabled:")
-	_gLKEffectPropertyLightSelPosition = objc.RegisterName("position")
-	_gLKEffectPropertyLightSelSetPosition = objc.RegisterName("setPosition:")
-	_gLKEffectPropertyLightSelAmbientColor = objc.RegisterName("ambientColor")
-	_gLKEffectPropertyLightSelSetAmbientColor = objc.RegisterName("setAmbientColor:")
-	_gLKEffectPropertyLightSelDiffuseColor = objc.RegisterName("diffuseColor")
-	_gLKEffectPropertyLightSelSetDiffuseColor = objc.RegisterName("setDiffuseColor:")
-	_gLKEffectPropertyLightSelSpecularColor = objc.RegisterName("specularColor")
-	_gLKEffectPropertyLightSelSetSpecularColor = objc.RegisterName("setSpecularColor:")
-	_gLKEffectPropertyLightSelSpotDirection = objc.RegisterName("spotDirection")
-	_gLKEffectPropertyLightSelSetSpotDirection = objc.RegisterName("setSpotDirection:")
-	_gLKEffectPropertyLightSelSpotExponent = objc.RegisterName("spotExponent")
-	_gLKEffectPropertyLightSelSetSpotExponent = objc.RegisterName("setSpotExponent:")
-	_gLKEffectPropertyLightSelSpotCutoff = objc.RegisterName("spotCutoff")
-	_gLKEffectPropertyLightSelSetSpotCutoff = objc.RegisterName("setSpotCutoff:")
-	_gLKEffectPropertyLightSelConstantAttenuation = objc.RegisterName("constantAttenuation")
-	_gLKEffectPropertyLightSelSetConstantAttenuation = objc.RegisterName("setConstantAttenuation:")
-	_gLKEffectPropertyLightSelLinearAttenuation = objc.RegisterName("linearAttenuation")
-	_gLKEffectPropertyLightSelSetLinearAttenuation = objc.RegisterName("setLinearAttenuation:")
-	_gLKEffectPropertyLightSelQuadraticAttenuation = objc.RegisterName("quadraticAttenuation")
+	_clsGLKEffectPropertyLight                        = _objcClass("GLKEffectPropertyLight")
+	_gLKEffectPropertyLightSelEnabled                 = objc.RegisterName("enabled")
+	_gLKEffectPropertyLightSelSetEnabled              = objc.RegisterName("setEnabled:")
+	_gLKEffectPropertyLightSelPosition                = objc.RegisterName("position")
+	_gLKEffectPropertyLightSelSetPosition             = objc.RegisterName("setPosition:")
+	_gLKEffectPropertyLightSelAmbientColor            = objc.RegisterName("ambientColor")
+	_gLKEffectPropertyLightSelSetAmbientColor         = objc.RegisterName("setAmbientColor:")
+	_gLKEffectPropertyLightSelDiffuseColor            = objc.RegisterName("diffuseColor")
+	_gLKEffectPropertyLightSelSetDiffuseColor         = objc.RegisterName("setDiffuseColor:")
+	_gLKEffectPropertyLightSelSpecularColor           = objc.RegisterName("specularColor")
+	_gLKEffectPropertyLightSelSetSpecularColor        = objc.RegisterName("setSpecularColor:")
+	_gLKEffectPropertyLightSelSpotDirection           = objc.RegisterName("spotDirection")
+	_gLKEffectPropertyLightSelSetSpotDirection        = objc.RegisterName("setSpotDirection:")
+	_gLKEffectPropertyLightSelSpotExponent            = objc.RegisterName("spotExponent")
+	_gLKEffectPropertyLightSelSetSpotExponent         = objc.RegisterName("setSpotExponent:")
+	_gLKEffectPropertyLightSelSpotCutoff              = objc.RegisterName("spotCutoff")
+	_gLKEffectPropertyLightSelSetSpotCutoff           = objc.RegisterName("setSpotCutoff:")
+	_gLKEffectPropertyLightSelConstantAttenuation     = objc.RegisterName("constantAttenuation")
+	_gLKEffectPropertyLightSelSetConstantAttenuation  = objc.RegisterName("setConstantAttenuation:")
+	_gLKEffectPropertyLightSelLinearAttenuation       = objc.RegisterName("linearAttenuation")
+	_gLKEffectPropertyLightSelSetLinearAttenuation    = objc.RegisterName("setLinearAttenuation:")
+	_gLKEffectPropertyLightSelQuadraticAttenuation    = objc.RegisterName("quadraticAttenuation")
 	_gLKEffectPropertyLightSelSetQuadraticAttenuation = objc.RegisterName("setQuadraticAttenuation:")
-	_gLKEffectPropertyLightSelTransform = objc.RegisterName("transform")
-	_gLKEffectPropertyLightSelSetTransform = objc.RegisterName("setTransform:")
+	_gLKEffectPropertyLightSelTransform               = objc.RegisterName("transform")
+	_gLKEffectPropertyLightSelSetTransform            = objc.RegisterName("setTransform:")
 )
 
 func GLKEffectPropertyLightFromID(id objc.ID) *GLKEffectPropertyLight {
@@ -155,11 +155,12 @@ func (o *GLKEffectPropertyLight) SetQuadraticAttenuation(quadraticAttenuation fl
 
 func (o *GLKEffectPropertyLight) Transform() *GLKEffectPropertyTransform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKEffectPropertyLightSelTransform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTransformFromID(_ret)
 }
 
 func (o *GLKEffectPropertyLight) SetTransform(transform *GLKEffectPropertyTransform) {
 	o.Ptr().Send(_gLKEffectPropertyLightSelSetTransform, transform.Ptr())
 }
-

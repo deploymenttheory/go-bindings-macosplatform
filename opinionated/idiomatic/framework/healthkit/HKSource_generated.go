@@ -62,4 +62,3 @@ type Sourceable interface {
 }
 
 var _ Sourceable = (*Source)(nil)
-

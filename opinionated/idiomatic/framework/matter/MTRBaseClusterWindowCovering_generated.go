@@ -2531,9 +2531,13 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinI
 	}
 }
 
-func (x *MTRBaseClusterWindowCovering) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterWindowCovering) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterWindowCovering) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterWindowCovering) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterWindowCoveringable is the interface implemented by [MTRBaseClusterWindowCovering], for mocking and DI.
 type MTRBaseClusterWindowCoveringable interface {
@@ -2673,4 +2677,3 @@ type MTRBaseClusterWindowCoveringable interface {
 }
 
 var _ MTRBaseClusterWindowCoveringable = (*MTRBaseClusterWindowCovering)(nil)
-

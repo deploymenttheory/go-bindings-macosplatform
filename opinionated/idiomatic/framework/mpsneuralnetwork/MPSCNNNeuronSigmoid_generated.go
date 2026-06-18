@@ -104,4 +104,3 @@ type CNNNeuronSigmoidable interface {
 }
 
 var _ CNNNeuronSigmoidable = (*CNNNeuronSigmoid)(nil)
-

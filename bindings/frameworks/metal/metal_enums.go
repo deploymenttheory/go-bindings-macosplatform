@@ -12,7 +12,7 @@ import (
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -30,8 +30,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -115,8 +115,12 @@ const (
 
 func (e MTL4BinaryFunctionOptions) String() string {
 	var parts []string
-	if e&MTL4BinaryFunctionOptionPipelineIndependent != 0 { parts = append(parts, "MTL4BinaryFunctionOptionPipelineIndependent") }
-	if len(parts) == 0 { return "0" }
+	if e&MTL4BinaryFunctionOptionPipelineIndependent != 0 {
+		parts = append(parts, "MTL4BinaryFunctionOptionPipelineIndependent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -283,9 +287,15 @@ const (
 
 func (e MTL4PipelineDataSetSerializerConfiguration) String() string {
 	var parts []string
-	if e&MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors != 0 { parts = append(parts, "MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors") }
-	if e&MTL4PipelineDataSetSerializerConfigurationCaptureBinaries != 0 { parts = append(parts, "MTL4PipelineDataSetSerializerConfigurationCaptureBinaries") }
-	if len(parts) == 0 { return "0" }
+	if e&MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors != 0 {
+		parts = append(parts, "MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors")
+	}
+	if e&MTL4PipelineDataSetSerializerConfigurationCaptureBinaries != 0 {
+		parts = append(parts, "MTL4PipelineDataSetSerializerConfigurationCaptureBinaries")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -302,9 +312,15 @@ const (
 
 func (e MTL4RenderEncoderOptions) String() string {
 	var parts []string
-	if e&MTL4RenderEncoderOptionSuspending != 0 { parts = append(parts, "MTL4RenderEncoderOptionSuspending") }
-	if e&MTL4RenderEncoderOptionResuming != 0 { parts = append(parts, "MTL4RenderEncoderOptionResuming") }
-	if len(parts) == 0 { return "0" }
+	if e&MTL4RenderEncoderOptionSuspending != 0 {
+		parts = append(parts, "MTL4RenderEncoderOptionSuspending")
+	}
+	if e&MTL4RenderEncoderOptionResuming != 0 {
+		parts = append(parts, "MTL4RenderEncoderOptionResuming")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -321,9 +337,15 @@ const (
 
 func (e MTL4ShaderReflection) String() string {
 	var parts []string
-	if e&MTL4ShaderReflectionBindingInfo != 0 { parts = append(parts, "MTL4ShaderReflectionBindingInfo") }
-	if e&MTL4ShaderReflectionBufferTypeInfo != 0 { parts = append(parts, "MTL4ShaderReflectionBufferTypeInfo") }
-	if len(parts) == 0 { return "0" }
+	if e&MTL4ShaderReflectionBindingInfo != 0 {
+		parts = append(parts, "MTL4ShaderReflectionBindingInfo")
+	}
+	if e&MTL4ShaderReflectionBufferTypeInfo != 0 {
+		parts = append(parts, "MTL4ShaderReflectionBufferTypeInfo")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -360,9 +382,15 @@ const (
 
 func (e MTL4VisibilityOptions) String() string {
 	var parts []string
-	if e&MTL4VisibilityOptionDevice != 0 { parts = append(parts, "MTL4VisibilityOptionDevice") }
-	if e&MTL4VisibilityOptionResourceAlias != 0 { parts = append(parts, "MTL4VisibilityOptionResourceAlias") }
-	if len(parts) == 0 { return "0" }
+	if e&MTL4VisibilityOptionDevice != 0 {
+		parts = append(parts, "MTL4VisibilityOptionDevice")
+	}
+	if e&MTL4VisibilityOptionResourceAlias != 0 {
+		parts = append(parts, "MTL4VisibilityOptionResourceAlias")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -415,11 +443,21 @@ const (
 
 func (e MTLAccelerationStructureInstanceOptions) String() string {
 	var parts []string
-	if e&MTLAccelerationStructureInstanceOptionDisableTriangleCulling != 0 { parts = append(parts, "MTLAccelerationStructureInstanceOptionDisableTriangleCulling") }
-	if e&MTLAccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise != 0 { parts = append(parts, "MTLAccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise") }
-	if e&MTLAccelerationStructureInstanceOptionOpaque != 0 { parts = append(parts, "MTLAccelerationStructureInstanceOptionOpaque") }
-	if e&MTLAccelerationStructureInstanceOptionNonOpaque != 0 { parts = append(parts, "MTLAccelerationStructureInstanceOptionNonOpaque") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLAccelerationStructureInstanceOptionDisableTriangleCulling != 0 {
+		parts = append(parts, "MTLAccelerationStructureInstanceOptionDisableTriangleCulling")
+	}
+	if e&MTLAccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise != 0 {
+		parts = append(parts, "MTLAccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise")
+	}
+	if e&MTLAccelerationStructureInstanceOptionOpaque != 0 {
+		parts = append(parts, "MTLAccelerationStructureInstanceOptionOpaque")
+	}
+	if e&MTLAccelerationStructureInstanceOptionNonOpaque != 0 {
+		parts = append(parts, "MTLAccelerationStructureInstanceOptionNonOpaque")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -434,9 +472,15 @@ const (
 
 func (e MTLAccelerationStructureRefitOptions) String() string {
 	var parts []string
-	if e&MTLAccelerationStructureRefitOptionVertexData != 0 { parts = append(parts, "MTLAccelerationStructureRefitOptionVertexData") }
-	if e&MTLAccelerationStructureRefitOptionPerPrimitiveData != 0 { parts = append(parts, "MTLAccelerationStructureRefitOptionPerPrimitiveData") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLAccelerationStructureRefitOptionVertexData != 0 {
+		parts = append(parts, "MTLAccelerationStructureRefitOptionVertexData")
+	}
+	if e&MTLAccelerationStructureRefitOptionPerPrimitiveData != 0 {
+		parts = append(parts, "MTLAccelerationStructureRefitOptionPerPrimitiveData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -459,12 +503,24 @@ const (
 
 func (e MTLAccelerationStructureUsage) String() string {
 	var parts []string
-	if e&MTLAccelerationStructureUsageRefit != 0 { parts = append(parts, "MTLAccelerationStructureUsageRefit") }
-	if e&MTLAccelerationStructureUsagePreferFastBuild != 0 { parts = append(parts, "MTLAccelerationStructureUsagePreferFastBuild") }
-	if e&MTLAccelerationStructureUsageExtendedLimits != 0 { parts = append(parts, "MTLAccelerationStructureUsageExtendedLimits") }
-	if e&MTLAccelerationStructureUsagePreferFastIntersection != 0 { parts = append(parts, "MTLAccelerationStructureUsagePreferFastIntersection") }
-	if e&MTLAccelerationStructureUsageMinimizeMemory != 0 { parts = append(parts, "MTLAccelerationStructureUsageMinimizeMemory") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLAccelerationStructureUsageRefit != 0 {
+		parts = append(parts, "MTLAccelerationStructureUsageRefit")
+	}
+	if e&MTLAccelerationStructureUsagePreferFastBuild != 0 {
+		parts = append(parts, "MTLAccelerationStructureUsagePreferFastBuild")
+	}
+	if e&MTLAccelerationStructureUsageExtendedLimits != 0 {
+		parts = append(parts, "MTLAccelerationStructureUsageExtendedLimits")
+	}
+	if e&MTLAccelerationStructureUsagePreferFastIntersection != 0 {
+		parts = append(parts, "MTLAccelerationStructureUsagePreferFastIntersection")
+	}
+	if e&MTLAccelerationStructureUsageMinimizeMemory != 0 {
+		parts = append(parts, "MTLAccelerationStructureUsageMinimizeMemory")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -490,16 +546,16 @@ func (e MTLArgumentBuffersTier) String() string {
 type MTLArgumentType uint64
 
 const (
-	MTLArgumentTypeBuffer MTLArgumentType = 0
-	MTLArgumentTypeThreadgroupMemory MTLArgumentType = 1
-	MTLArgumentTypeTexture MTLArgumentType = 2
-	MTLArgumentTypeSampler MTLArgumentType = 3
-	MTLArgumentTypeImageblockData MTLArgumentType = 16
-	MTLArgumentTypeImageblock MTLArgumentType = 17
-	MTLArgumentTypeVisibleFunctionTable MTLArgumentType = 24
+	MTLArgumentTypeBuffer                         MTLArgumentType = 0
+	MTLArgumentTypeThreadgroupMemory              MTLArgumentType = 1
+	MTLArgumentTypeTexture                        MTLArgumentType = 2
+	MTLArgumentTypeSampler                        MTLArgumentType = 3
+	MTLArgumentTypeImageblockData                 MTLArgumentType = 16
+	MTLArgumentTypeImageblock                     MTLArgumentType = 17
+	MTLArgumentTypeVisibleFunctionTable           MTLArgumentType = 24
 	MTLArgumentTypePrimitiveAccelerationStructure MTLArgumentType = 25
-	MTLArgumentTypeInstanceAccelerationStructure MTLArgumentType = 26
-	MTLArgumentTypeIntersectionFunctionTable MTLArgumentType = 27
+	MTLArgumentTypeInstanceAccelerationStructure  MTLArgumentType = 26
+	MTLArgumentTypeIntersectionFunctionTable      MTLArgumentType = 27
 )
 
 func (e MTLArgumentType) String() string {
@@ -532,60 +588,60 @@ func (e MTLArgumentType) String() string {
 type MTLAttributeFormat uint64
 
 const (
-	MTLAttributeFormatInvalid MTLAttributeFormat = 0
-	MTLAttributeFormatUChar2 MTLAttributeFormat = 1
-	MTLAttributeFormatUChar3 MTLAttributeFormat = 2
-	MTLAttributeFormatUChar4 MTLAttributeFormat = 3
-	MTLAttributeFormatChar2 MTLAttributeFormat = 4
-	MTLAttributeFormatChar3 MTLAttributeFormat = 5
-	MTLAttributeFormatChar4 MTLAttributeFormat = 6
-	MTLAttributeFormatUChar2Normalized MTLAttributeFormat = 7
-	MTLAttributeFormatUChar3Normalized MTLAttributeFormat = 8
-	MTLAttributeFormatUChar4Normalized MTLAttributeFormat = 9
-	MTLAttributeFormatChar2Normalized MTLAttributeFormat = 10
-	MTLAttributeFormatChar3Normalized MTLAttributeFormat = 11
-	MTLAttributeFormatChar4Normalized MTLAttributeFormat = 12
-	MTLAttributeFormatUShort2 MTLAttributeFormat = 13
-	MTLAttributeFormatUShort3 MTLAttributeFormat = 14
-	MTLAttributeFormatUShort4 MTLAttributeFormat = 15
-	MTLAttributeFormatShort2 MTLAttributeFormat = 16
-	MTLAttributeFormatShort3 MTLAttributeFormat = 17
-	MTLAttributeFormatShort4 MTLAttributeFormat = 18
-	MTLAttributeFormatUShort2Normalized MTLAttributeFormat = 19
-	MTLAttributeFormatUShort3Normalized MTLAttributeFormat = 20
-	MTLAttributeFormatUShort4Normalized MTLAttributeFormat = 21
-	MTLAttributeFormatShort2Normalized MTLAttributeFormat = 22
-	MTLAttributeFormatShort3Normalized MTLAttributeFormat = 23
-	MTLAttributeFormatShort4Normalized MTLAttributeFormat = 24
-	MTLAttributeFormatHalf2 MTLAttributeFormat = 25
-	MTLAttributeFormatHalf3 MTLAttributeFormat = 26
-	MTLAttributeFormatHalf4 MTLAttributeFormat = 27
-	MTLAttributeFormatFloat MTLAttributeFormat = 28
-	MTLAttributeFormatFloat2 MTLAttributeFormat = 29
-	MTLAttributeFormatFloat3 MTLAttributeFormat = 30
-	MTLAttributeFormatFloat4 MTLAttributeFormat = 31
-	MTLAttributeFormatInt MTLAttributeFormat = 32
-	MTLAttributeFormatInt2 MTLAttributeFormat = 33
-	MTLAttributeFormatInt3 MTLAttributeFormat = 34
-	MTLAttributeFormatInt4 MTLAttributeFormat = 35
-	MTLAttributeFormatUInt MTLAttributeFormat = 36
-	MTLAttributeFormatUInt2 MTLAttributeFormat = 37
-	MTLAttributeFormatUInt3 MTLAttributeFormat = 38
-	MTLAttributeFormatUInt4 MTLAttributeFormat = 39
-	MTLAttributeFormatInt1010102Normalized MTLAttributeFormat = 40
+	MTLAttributeFormatInvalid               MTLAttributeFormat = 0
+	MTLAttributeFormatUChar2                MTLAttributeFormat = 1
+	MTLAttributeFormatUChar3                MTLAttributeFormat = 2
+	MTLAttributeFormatUChar4                MTLAttributeFormat = 3
+	MTLAttributeFormatChar2                 MTLAttributeFormat = 4
+	MTLAttributeFormatChar3                 MTLAttributeFormat = 5
+	MTLAttributeFormatChar4                 MTLAttributeFormat = 6
+	MTLAttributeFormatUChar2Normalized      MTLAttributeFormat = 7
+	MTLAttributeFormatUChar3Normalized      MTLAttributeFormat = 8
+	MTLAttributeFormatUChar4Normalized      MTLAttributeFormat = 9
+	MTLAttributeFormatChar2Normalized       MTLAttributeFormat = 10
+	MTLAttributeFormatChar3Normalized       MTLAttributeFormat = 11
+	MTLAttributeFormatChar4Normalized       MTLAttributeFormat = 12
+	MTLAttributeFormatUShort2               MTLAttributeFormat = 13
+	MTLAttributeFormatUShort3               MTLAttributeFormat = 14
+	MTLAttributeFormatUShort4               MTLAttributeFormat = 15
+	MTLAttributeFormatShort2                MTLAttributeFormat = 16
+	MTLAttributeFormatShort3                MTLAttributeFormat = 17
+	MTLAttributeFormatShort4                MTLAttributeFormat = 18
+	MTLAttributeFormatUShort2Normalized     MTLAttributeFormat = 19
+	MTLAttributeFormatUShort3Normalized     MTLAttributeFormat = 20
+	MTLAttributeFormatUShort4Normalized     MTLAttributeFormat = 21
+	MTLAttributeFormatShort2Normalized      MTLAttributeFormat = 22
+	MTLAttributeFormatShort3Normalized      MTLAttributeFormat = 23
+	MTLAttributeFormatShort4Normalized      MTLAttributeFormat = 24
+	MTLAttributeFormatHalf2                 MTLAttributeFormat = 25
+	MTLAttributeFormatHalf3                 MTLAttributeFormat = 26
+	MTLAttributeFormatHalf4                 MTLAttributeFormat = 27
+	MTLAttributeFormatFloat                 MTLAttributeFormat = 28
+	MTLAttributeFormatFloat2                MTLAttributeFormat = 29
+	MTLAttributeFormatFloat3                MTLAttributeFormat = 30
+	MTLAttributeFormatFloat4                MTLAttributeFormat = 31
+	MTLAttributeFormatInt                   MTLAttributeFormat = 32
+	MTLAttributeFormatInt2                  MTLAttributeFormat = 33
+	MTLAttributeFormatInt3                  MTLAttributeFormat = 34
+	MTLAttributeFormatInt4                  MTLAttributeFormat = 35
+	MTLAttributeFormatUInt                  MTLAttributeFormat = 36
+	MTLAttributeFormatUInt2                 MTLAttributeFormat = 37
+	MTLAttributeFormatUInt3                 MTLAttributeFormat = 38
+	MTLAttributeFormatUInt4                 MTLAttributeFormat = 39
+	MTLAttributeFormatInt1010102Normalized  MTLAttributeFormat = 40
 	MTLAttributeFormatUInt1010102Normalized MTLAttributeFormat = 41
 	MTLAttributeFormatUChar4Normalized_BGRA MTLAttributeFormat = 42
-	MTLAttributeFormatUChar MTLAttributeFormat = 45
-	MTLAttributeFormatChar MTLAttributeFormat = 46
-	MTLAttributeFormatUCharNormalized MTLAttributeFormat = 47
-	MTLAttributeFormatCharNormalized MTLAttributeFormat = 48
-	MTLAttributeFormatUShort MTLAttributeFormat = 49
-	MTLAttributeFormatShort MTLAttributeFormat = 50
-	MTLAttributeFormatUShortNormalized MTLAttributeFormat = 51
-	MTLAttributeFormatShortNormalized MTLAttributeFormat = 52
-	MTLAttributeFormatHalf MTLAttributeFormat = 53
-	MTLAttributeFormatFloatRG11B10 MTLAttributeFormat = 54
-	MTLAttributeFormatFloatRGB9E5 MTLAttributeFormat = 55
+	MTLAttributeFormatUChar                 MTLAttributeFormat = 45
+	MTLAttributeFormatChar                  MTLAttributeFormat = 46
+	MTLAttributeFormatUCharNormalized       MTLAttributeFormat = 47
+	MTLAttributeFormatCharNormalized        MTLAttributeFormat = 48
+	MTLAttributeFormatUShort                MTLAttributeFormat = 49
+	MTLAttributeFormatShort                 MTLAttributeFormat = 50
+	MTLAttributeFormatUShortNormalized      MTLAttributeFormat = 51
+	MTLAttributeFormatShortNormalized       MTLAttributeFormat = 52
+	MTLAttributeFormatHalf                  MTLAttributeFormat = 53
+	MTLAttributeFormatFloatRG11B10          MTLAttributeFormat = 54
+	MTLAttributeFormatFloatRGB9E5           MTLAttributeFormat = 55
 )
 
 func (e MTLAttributeFormat) String() string {
@@ -706,28 +762,36 @@ func (e MTLAttributeFormat) String() string {
 type MTLBarrierScope uint64
 
 const (
-	MTLBarrierScopeBuffers MTLBarrierScope = 1
-	MTLBarrierScopeTextures MTLBarrierScope = 2
+	MTLBarrierScopeBuffers       MTLBarrierScope = 1
+	MTLBarrierScopeTextures      MTLBarrierScope = 2
 	MTLBarrierScopeRenderTargets MTLBarrierScope = 4
 )
 
 func (e MTLBarrierScope) String() string {
 	var parts []string
-	if e&MTLBarrierScopeBuffers != 0 { parts = append(parts, "MTLBarrierScopeBuffers") }
-	if e&MTLBarrierScopeTextures != 0 { parts = append(parts, "MTLBarrierScopeTextures") }
-	if e&MTLBarrierScopeRenderTargets != 0 { parts = append(parts, "MTLBarrierScopeRenderTargets") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLBarrierScopeBuffers != 0 {
+		parts = append(parts, "MTLBarrierScopeBuffers")
+	}
+	if e&MTLBarrierScopeTextures != 0 {
+		parts = append(parts, "MTLBarrierScopeTextures")
+	}
+	if e&MTLBarrierScopeRenderTargets != 0 {
+		parts = append(parts, "MTLBarrierScopeRenderTargets")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLBinaryArchiveError uint64
 
 const (
-	MTLBinaryArchiveErrorNone MTLBinaryArchiveError = 0
-	MTLBinaryArchiveErrorInvalidFile MTLBinaryArchiveError = 1
-	MTLBinaryArchiveErrorUnexpectedElement MTLBinaryArchiveError = 2
+	MTLBinaryArchiveErrorNone               MTLBinaryArchiveError = 0
+	MTLBinaryArchiveErrorInvalidFile        MTLBinaryArchiveError = 1
+	MTLBinaryArchiveErrorUnexpectedElement  MTLBinaryArchiveError = 2
 	MTLBinaryArchiveErrorCompilationFailure MTLBinaryArchiveError = 3
-	MTLBinaryArchiveErrorInternalError MTLBinaryArchiveError = 4
+	MTLBinaryArchiveErrorInternalError      MTLBinaryArchiveError = 4
 )
 
 func (e MTLBinaryArchiveError) String() string {
@@ -750,10 +814,10 @@ func (e MTLBinaryArchiveError) String() string {
 type MTLBindingAccess uint64
 
 const (
-	MTLBindingAccessReadOnly MTLBindingAccess = 0
-	MTLBindingAccessReadWrite MTLBindingAccess = 1
-	MTLBindingAccessWriteOnly MTLBindingAccess = 2
-	MTLArgumentAccessReadOnly MTLBindingAccess = 0
+	MTLBindingAccessReadOnly   MTLBindingAccess = 0
+	MTLBindingAccessReadWrite  MTLBindingAccess = 1
+	MTLBindingAccessWriteOnly  MTLBindingAccess = 2
+	MTLArgumentAccessReadOnly  MTLBindingAccess = 0
 	MTLArgumentAccessReadWrite MTLBindingAccess = 1
 	MTLArgumentAccessWriteOnly MTLBindingAccess = 2
 )
@@ -774,18 +838,18 @@ func (e MTLBindingAccess) String() string {
 type MTLBindingType int64
 
 const (
-	MTLBindingTypeBuffer MTLBindingType = 0
-	MTLBindingTypeThreadgroupMemory MTLBindingType = 1
-	MTLBindingTypeTexture MTLBindingType = 2
-	MTLBindingTypeSampler MTLBindingType = 3
-	MTLBindingTypeImageblockData MTLBindingType = 16
-	MTLBindingTypeImageblock MTLBindingType = 17
-	MTLBindingTypeVisibleFunctionTable MTLBindingType = 24
+	MTLBindingTypeBuffer                         MTLBindingType = 0
+	MTLBindingTypeThreadgroupMemory              MTLBindingType = 1
+	MTLBindingTypeTexture                        MTLBindingType = 2
+	MTLBindingTypeSampler                        MTLBindingType = 3
+	MTLBindingTypeImageblockData                 MTLBindingType = 16
+	MTLBindingTypeImageblock                     MTLBindingType = 17
+	MTLBindingTypeVisibleFunctionTable           MTLBindingType = 24
 	MTLBindingTypePrimitiveAccelerationStructure MTLBindingType = 25
-	MTLBindingTypeInstanceAccelerationStructure MTLBindingType = 26
-	MTLBindingTypeIntersectionFunctionTable MTLBindingType = 27
-	MTLBindingTypeObjectPayload MTLBindingType = 34
-	MTLBindingTypeTensor MTLBindingType = 37
+	MTLBindingTypeInstanceAccelerationStructure  MTLBindingType = 26
+	MTLBindingTypeIntersectionFunctionTable      MTLBindingType = 27
+	MTLBindingTypeObjectPayload                  MTLBindingType = 34
+	MTLBindingTypeTensor                         MTLBindingType = 37
 )
 
 func (e MTLBindingType) String() string {
@@ -822,25 +886,25 @@ func (e MTLBindingType) String() string {
 type MTLBlendFactor uint64
 
 const (
-	MTLBlendFactorZero MTLBlendFactor = 0
-	MTLBlendFactorOne MTLBlendFactor = 1
-	MTLBlendFactorSourceColor MTLBlendFactor = 2
-	MTLBlendFactorOneMinusSourceColor MTLBlendFactor = 3
-	MTLBlendFactorSourceAlpha MTLBlendFactor = 4
-	MTLBlendFactorOneMinusSourceAlpha MTLBlendFactor = 5
-	MTLBlendFactorDestinationColor MTLBlendFactor = 6
+	MTLBlendFactorZero                     MTLBlendFactor = 0
+	MTLBlendFactorOne                      MTLBlendFactor = 1
+	MTLBlendFactorSourceColor              MTLBlendFactor = 2
+	MTLBlendFactorOneMinusSourceColor      MTLBlendFactor = 3
+	MTLBlendFactorSourceAlpha              MTLBlendFactor = 4
+	MTLBlendFactorOneMinusSourceAlpha      MTLBlendFactor = 5
+	MTLBlendFactorDestinationColor         MTLBlendFactor = 6
 	MTLBlendFactorOneMinusDestinationColor MTLBlendFactor = 7
-	MTLBlendFactorDestinationAlpha MTLBlendFactor = 8
+	MTLBlendFactorDestinationAlpha         MTLBlendFactor = 8
 	MTLBlendFactorOneMinusDestinationAlpha MTLBlendFactor = 9
-	MTLBlendFactorSourceAlphaSaturated MTLBlendFactor = 10
-	MTLBlendFactorBlendColor MTLBlendFactor = 11
-	MTLBlendFactorOneMinusBlendColor MTLBlendFactor = 12
-	MTLBlendFactorBlendAlpha MTLBlendFactor = 13
-	MTLBlendFactorOneMinusBlendAlpha MTLBlendFactor = 14
-	MTLBlendFactorSource1Color MTLBlendFactor = 15
-	MTLBlendFactorOneMinusSource1Color MTLBlendFactor = 16
-	MTLBlendFactorSource1Alpha MTLBlendFactor = 17
-	MTLBlendFactorOneMinusSource1Alpha MTLBlendFactor = 18
+	MTLBlendFactorSourceAlphaSaturated     MTLBlendFactor = 10
+	MTLBlendFactorBlendColor               MTLBlendFactor = 11
+	MTLBlendFactorOneMinusBlendColor       MTLBlendFactor = 12
+	MTLBlendFactorBlendAlpha               MTLBlendFactor = 13
+	MTLBlendFactorOneMinusBlendAlpha       MTLBlendFactor = 14
+	MTLBlendFactorSource1Color             MTLBlendFactor = 15
+	MTLBlendFactorOneMinusSource1Color     MTLBlendFactor = 16
+	MTLBlendFactorSource1Alpha             MTLBlendFactor = 17
+	MTLBlendFactorOneMinusSource1Alpha     MTLBlendFactor = 18
 	// Defers assigning the blend factor. Until you specialize this value in the pipeline state, it: * behaves as `MTLBlendFactorOne` for `sourceRGBBlendFactor` and `sourceAlphaBlendFactor` * behaves as `MTLBlendFactorZero` for `destinationRGBBlendFactor` and `destinationAlphaBlendFactor`
 	MTLBlendFactorUnspecialized MTLBlendFactor = 19
 )
@@ -895,12 +959,12 @@ func (e MTLBlendFactor) String() string {
 type MTLBlendOperation uint64
 
 const (
-	MTLBlendOperationAdd MTLBlendOperation = 0
-	MTLBlendOperationSubtract MTLBlendOperation = 1
+	MTLBlendOperationAdd             MTLBlendOperation = 0
+	MTLBlendOperationSubtract        MTLBlendOperation = 1
 	MTLBlendOperationReverseSubtract MTLBlendOperation = 2
-	MTLBlendOperationMin MTLBlendOperation = 3
-	MTLBlendOperationMax MTLBlendOperation = 4
-	MTLBlendOperationUnspecialized MTLBlendOperation = 5
+	MTLBlendOperationMin             MTLBlendOperation = 3
+	MTLBlendOperationMax             MTLBlendOperation = 4
+	MTLBlendOperationUnspecialized   MTLBlendOperation = 5
 )
 
 func (e MTLBlendOperation) String() string {
@@ -925,18 +989,26 @@ func (e MTLBlendOperation) String() string {
 type MTLBlitOption uint64
 
 const (
-	MTLBlitOptionNone MTLBlitOption = 0
-	MTLBlitOptionDepthFromDepthStencil MTLBlitOption = 1
+	MTLBlitOptionNone                    MTLBlitOption = 0
+	MTLBlitOptionDepthFromDepthStencil   MTLBlitOption = 1
 	MTLBlitOptionStencilFromDepthStencil MTLBlitOption = 2
-	MTLBlitOptionRowLinearPVRTC MTLBlitOption = 4
+	MTLBlitOptionRowLinearPVRTC          MTLBlitOption = 4
 )
 
 func (e MTLBlitOption) String() string {
 	var parts []string
-	if e&MTLBlitOptionDepthFromDepthStencil != 0 { parts = append(parts, "MTLBlitOptionDepthFromDepthStencil") }
-	if e&MTLBlitOptionStencilFromDepthStencil != 0 { parts = append(parts, "MTLBlitOptionStencilFromDepthStencil") }
-	if e&MTLBlitOptionRowLinearPVRTC != 0 { parts = append(parts, "MTLBlitOptionRowLinearPVRTC") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLBlitOptionDepthFromDepthStencil != 0 {
+		parts = append(parts, "MTLBlitOptionDepthFromDepthStencil")
+	}
+	if e&MTLBlitOptionStencilFromDepthStencil != 0 {
+		parts = append(parts, "MTLBlitOptionStencilFromDepthStencil")
+	}
+	if e&MTLBlitOptionRowLinearPVRTC != 0 {
+		parts = append(parts, "MTLBlitOptionRowLinearPVRTC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -963,7 +1035,7 @@ func (e MTLBufferSparseTier) String() string {
 type MTLCPUCacheMode uint64
 
 const (
-	MTLCPUCacheModeDefaultCache MTLCPUCacheMode = 0
+	MTLCPUCacheModeDefaultCache  MTLCPUCacheMode = 0
 	MTLCPUCacheModeWriteCombined MTLCPUCacheMode = 1
 )
 
@@ -1025,43 +1097,57 @@ func (e MTLCaptureError) String() string {
 type MTLColorWriteMask uint64
 
 const (
-	MTLColorWriteMaskNone MTLColorWriteMask = 0
-	MTLColorWriteMaskRed MTLColorWriteMask = 8
+	MTLColorWriteMaskNone  MTLColorWriteMask = 0
+	MTLColorWriteMaskRed   MTLColorWriteMask = 8
 	MTLColorWriteMaskGreen MTLColorWriteMask = 4
-	MTLColorWriteMaskBlue MTLColorWriteMask = 2
+	MTLColorWriteMaskBlue  MTLColorWriteMask = 2
 	MTLColorWriteMaskAlpha MTLColorWriteMask = 1
-	MTLColorWriteMaskAll MTLColorWriteMask = 15
+	MTLColorWriteMaskAll   MTLColorWriteMask = 15
 	// Defers assigning the color write mask. Until you specialize this value in the pipeline state, it behaves as `MTLColorWriteMaskAll`.
 	MTLColorWriteMaskUnspecialized MTLColorWriteMask = 16
 )
 
 func (e MTLColorWriteMask) String() string {
 	var parts []string
-	if e&MTLColorWriteMaskRed != 0 { parts = append(parts, "MTLColorWriteMaskRed") }
-	if e&MTLColorWriteMaskGreen != 0 { parts = append(parts, "MTLColorWriteMaskGreen") }
-	if e&MTLColorWriteMaskBlue != 0 { parts = append(parts, "MTLColorWriteMaskBlue") }
-	if e&MTLColorWriteMaskAlpha != 0 { parts = append(parts, "MTLColorWriteMaskAlpha") }
-	if e&MTLColorWriteMaskAll != 0 { parts = append(parts, "MTLColorWriteMaskAll") }
-	if e&MTLColorWriteMaskUnspecialized != 0 { parts = append(parts, "MTLColorWriteMaskUnspecialized") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLColorWriteMaskRed != 0 {
+		parts = append(parts, "MTLColorWriteMaskRed")
+	}
+	if e&MTLColorWriteMaskGreen != 0 {
+		parts = append(parts, "MTLColorWriteMaskGreen")
+	}
+	if e&MTLColorWriteMaskBlue != 0 {
+		parts = append(parts, "MTLColorWriteMaskBlue")
+	}
+	if e&MTLColorWriteMaskAlpha != 0 {
+		parts = append(parts, "MTLColorWriteMaskAlpha")
+	}
+	if e&MTLColorWriteMaskAll != 0 {
+		parts = append(parts, "MTLColorWriteMaskAll")
+	}
+	if e&MTLColorWriteMaskUnspecialized != 0 {
+		parts = append(parts, "MTLColorWriteMaskUnspecialized")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLCommandBufferError uint64
 
 const (
-	MTLCommandBufferErrorNone MTLCommandBufferError = 0
-	MTLCommandBufferErrorInternal MTLCommandBufferError = 1
-	MTLCommandBufferErrorTimeout MTLCommandBufferError = 2
-	MTLCommandBufferErrorPageFault MTLCommandBufferError = 3
-	MTLCommandBufferErrorBlacklisted MTLCommandBufferError = 4
-	MTLCommandBufferErrorAccessRevoked MTLCommandBufferError = 4
-	MTLCommandBufferErrorNotPermitted MTLCommandBufferError = 7
-	MTLCommandBufferErrorOutOfMemory MTLCommandBufferError = 8
+	MTLCommandBufferErrorNone            MTLCommandBufferError = 0
+	MTLCommandBufferErrorInternal        MTLCommandBufferError = 1
+	MTLCommandBufferErrorTimeout         MTLCommandBufferError = 2
+	MTLCommandBufferErrorPageFault       MTLCommandBufferError = 3
+	MTLCommandBufferErrorBlacklisted     MTLCommandBufferError = 4
+	MTLCommandBufferErrorAccessRevoked   MTLCommandBufferError = 4
+	MTLCommandBufferErrorNotPermitted    MTLCommandBufferError = 7
+	MTLCommandBufferErrorOutOfMemory     MTLCommandBufferError = 8
 	MTLCommandBufferErrorInvalidResource MTLCommandBufferError = 9
-	MTLCommandBufferErrorMemoryless MTLCommandBufferError = 10
-	MTLCommandBufferErrorDeviceRemoved MTLCommandBufferError = 11
-	MTLCommandBufferErrorStackOverflow MTLCommandBufferError = 12
+	MTLCommandBufferErrorMemoryless      MTLCommandBufferError = 10
+	MTLCommandBufferErrorDeviceRemoved   MTLCommandBufferError = 11
+	MTLCommandBufferErrorStackOverflow   MTLCommandBufferError = 12
 )
 
 func (e MTLCommandBufferError) String() string {
@@ -1096,14 +1182,18 @@ func (e MTLCommandBufferError) String() string {
 type MTLCommandBufferErrorOption uint64
 
 const (
-	MTLCommandBufferErrorOptionNone MTLCommandBufferErrorOption = 0
+	MTLCommandBufferErrorOptionNone                   MTLCommandBufferErrorOption = 0
 	MTLCommandBufferErrorOptionEncoderExecutionStatus MTLCommandBufferErrorOption = 1
 )
 
 func (e MTLCommandBufferErrorOption) String() string {
 	var parts []string
-	if e&MTLCommandBufferErrorOptionEncoderExecutionStatus != 0 { parts = append(parts, "MTLCommandBufferErrorOptionEncoderExecutionStatus") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLCommandBufferErrorOptionEncoderExecutionStatus != 0 {
+		parts = append(parts, "MTLCommandBufferErrorOptionEncoderExecutionStatus")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1111,11 +1201,11 @@ type MTLCommandBufferStatus uint64
 
 const (
 	MTLCommandBufferStatusNotEnqueued MTLCommandBufferStatus = 0
-	MTLCommandBufferStatusEnqueued MTLCommandBufferStatus = 1
-	MTLCommandBufferStatusCommitted MTLCommandBufferStatus = 2
-	MTLCommandBufferStatusScheduled MTLCommandBufferStatus = 3
-	MTLCommandBufferStatusCompleted MTLCommandBufferStatus = 4
-	MTLCommandBufferStatusError MTLCommandBufferStatus = 5
+	MTLCommandBufferStatusEnqueued    MTLCommandBufferStatus = 1
+	MTLCommandBufferStatusCommitted   MTLCommandBufferStatus = 2
+	MTLCommandBufferStatusScheduled   MTLCommandBufferStatus = 3
+	MTLCommandBufferStatusCompleted   MTLCommandBufferStatus = 4
+	MTLCommandBufferStatusError       MTLCommandBufferStatus = 5
 )
 
 func (e MTLCommandBufferStatus) String() string {
@@ -1140,11 +1230,11 @@ func (e MTLCommandBufferStatus) String() string {
 type MTLCommandEncoderErrorState int64
 
 const (
-	MTLCommandEncoderErrorStateUnknown MTLCommandEncoderErrorState = 0
+	MTLCommandEncoderErrorStateUnknown   MTLCommandEncoderErrorState = 0
 	MTLCommandEncoderErrorStateCompleted MTLCommandEncoderErrorState = 1
-	MTLCommandEncoderErrorStateAffected MTLCommandEncoderErrorState = 2
-	MTLCommandEncoderErrorStatePending MTLCommandEncoderErrorState = 3
-	MTLCommandEncoderErrorStateFaulted MTLCommandEncoderErrorState = 4
+	MTLCommandEncoderErrorStateAffected  MTLCommandEncoderErrorState = 2
+	MTLCommandEncoderErrorStatePending   MTLCommandEncoderErrorState = 3
+	MTLCommandEncoderErrorStateFaulted   MTLCommandEncoderErrorState = 4
 )
 
 func (e MTLCommandEncoderErrorState) String() string {
@@ -1167,14 +1257,14 @@ func (e MTLCommandEncoderErrorState) String() string {
 type MTLCompareFunction uint64
 
 const (
-	MTLCompareFunctionNever MTLCompareFunction = 0
-	MTLCompareFunctionLess MTLCompareFunction = 1
-	MTLCompareFunctionEqual MTLCompareFunction = 2
-	MTLCompareFunctionLessEqual MTLCompareFunction = 3
-	MTLCompareFunctionGreater MTLCompareFunction = 4
-	MTLCompareFunctionNotEqual MTLCompareFunction = 5
+	MTLCompareFunctionNever        MTLCompareFunction = 0
+	MTLCompareFunctionLess         MTLCompareFunction = 1
+	MTLCompareFunctionEqual        MTLCompareFunction = 2
+	MTLCompareFunctionLessEqual    MTLCompareFunction = 3
+	MTLCompareFunctionGreater      MTLCompareFunction = 4
+	MTLCompareFunctionNotEqual     MTLCompareFunction = 5
 	MTLCompareFunctionGreaterEqual MTLCompareFunction = 6
-	MTLCompareFunctionAlways MTLCompareFunction = 7
+	MTLCompareFunctionAlways       MTLCompareFunction = 7
 )
 
 func (e MTLCompareFunction) String() string {
@@ -1204,7 +1294,7 @@ type MTLCompileSymbolVisibility int64
 
 const (
 	MTLCompileSymbolVisibilityDefault MTLCompileSymbolVisibility = 0
-	MTLCompileSymbolVisibilityHidden MTLCompileSymbolVisibility = 1
+	MTLCompileSymbolVisibilityHidden  MTLCompileSymbolVisibility = 1
 )
 
 func (e MTLCompileSymbolVisibility) String() string {
@@ -1222,8 +1312,8 @@ type MTLCounterSampleBufferError int64
 
 const (
 	MTLCounterSampleBufferErrorOutOfMemory MTLCounterSampleBufferError = 0
-	MTLCounterSampleBufferErrorInvalid MTLCounterSampleBufferError = 1
-	MTLCounterSampleBufferErrorInternal MTLCounterSampleBufferError = 2
+	MTLCounterSampleBufferErrorInvalid     MTLCounterSampleBufferError = 1
+	MTLCounterSampleBufferErrorInternal    MTLCounterSampleBufferError = 2
 )
 
 func (e MTLCounterSampleBufferError) String() string {
@@ -1242,11 +1332,11 @@ func (e MTLCounterSampleBufferError) String() string {
 type MTLCounterSamplingPoint uint64
 
 const (
-	MTLCounterSamplingPointAtStageBoundary MTLCounterSamplingPoint = 0
-	MTLCounterSamplingPointAtDrawBoundary MTLCounterSamplingPoint = 1
-	MTLCounterSamplingPointAtDispatchBoundary MTLCounterSamplingPoint = 2
+	MTLCounterSamplingPointAtStageBoundary        MTLCounterSamplingPoint = 0
+	MTLCounterSamplingPointAtDrawBoundary         MTLCounterSamplingPoint = 1
+	MTLCounterSamplingPointAtDispatchBoundary     MTLCounterSamplingPoint = 2
 	MTLCounterSamplingPointAtTileDispatchBoundary MTLCounterSamplingPoint = 3
-	MTLCounterSamplingPointAtBlitBoundary MTLCounterSamplingPoint = 4
+	MTLCounterSamplingPointAtBlitBoundary         MTLCounterSamplingPoint = 4
 )
 
 func (e MTLCounterSamplingPoint) String() string {
@@ -1269,9 +1359,9 @@ func (e MTLCounterSamplingPoint) String() string {
 type MTLCullMode uint64
 
 const (
-	MTLCullModeNone MTLCullMode = 0
+	MTLCullModeNone  MTLCullMode = 0
 	MTLCullModeFront MTLCullMode = 1
-	MTLCullModeBack MTLCullMode = 2
+	MTLCullModeBack  MTLCullMode = 2
 )
 
 func (e MTLCullMode) String() string {
@@ -1762,7 +1852,7 @@ func (e MTLDataType) String() string {
 type MTLDepthClipMode uint64
 
 const (
-	MTLDepthClipModeClip MTLDepthClipMode = 0
+	MTLDepthClipModeClip  MTLDepthClipMode = 0
 	MTLDepthClipModeClamp MTLDepthClipMode = 1
 )
 
@@ -1800,9 +1890,9 @@ func (e MTLDeviceError) String() string {
 type MTLDeviceLocation uint64
 
 const (
-	MTLDeviceLocationBuiltIn MTLDeviceLocation = 0
-	MTLDeviceLocationSlot MTLDeviceLocation = 1
-	MTLDeviceLocationExternal MTLDeviceLocation = 2
+	MTLDeviceLocationBuiltIn     MTLDeviceLocation = 0
+	MTLDeviceLocationSlot        MTLDeviceLocation = 1
+	MTLDeviceLocationExternal    MTLDeviceLocation = 2
 	MTLDeviceLocationUnspecified MTLDeviceLocation = 18446744073709551615
 )
 
@@ -1824,7 +1914,7 @@ func (e MTLDeviceLocation) String() string {
 type MTLDispatchType uint64
 
 const (
-	MTLDispatchTypeSerial MTLDispatchType = 0
+	MTLDispatchTypeSerial     MTLDispatchType = 0
 	MTLDispatchTypeConcurrent MTLDispatchType = 1
 )
 
@@ -1842,12 +1932,12 @@ func (e MTLDispatchType) String() string {
 type MTLDynamicLibraryError uint64
 
 const (
-	MTLDynamicLibraryErrorNone MTLDynamicLibraryError = 0
-	MTLDynamicLibraryErrorInvalidFile MTLDynamicLibraryError = 1
-	MTLDynamicLibraryErrorCompilationFailure MTLDynamicLibraryError = 2
+	MTLDynamicLibraryErrorNone                  MTLDynamicLibraryError = 0
+	MTLDynamicLibraryErrorInvalidFile           MTLDynamicLibraryError = 1
+	MTLDynamicLibraryErrorCompilationFailure    MTLDynamicLibraryError = 2
 	MTLDynamicLibraryErrorUnresolvedInstallName MTLDynamicLibraryError = 3
 	MTLDynamicLibraryErrorDependencyLoadFailure MTLDynamicLibraryError = 4
-	MTLDynamicLibraryErrorUnsupported MTLDynamicLibraryError = 5
+	MTLDynamicLibraryErrorUnsupported           MTLDynamicLibraryError = 5
 )
 
 func (e MTLDynamicLibraryError) String() string {
@@ -1873,15 +1963,15 @@ func (e MTLDynamicLibraryError) String() string {
 type MTLFeatureSet uint64
 
 const (
-	MTLFeatureSet_macOS_GPUFamily1_v1 MTLFeatureSet = 10000
-	MTLFeatureSet_OSX_GPUFamily1_v1 MTLFeatureSet = 10000
-	MTLFeatureSet_macOS_GPUFamily1_v2 MTLFeatureSet = 10001
-	MTLFeatureSet_OSX_GPUFamily1_v2 MTLFeatureSet = 10001
+	MTLFeatureSet_macOS_GPUFamily1_v1         MTLFeatureSet = 10000
+	MTLFeatureSet_OSX_GPUFamily1_v1           MTLFeatureSet = 10000
+	MTLFeatureSet_macOS_GPUFamily1_v2         MTLFeatureSet = 10001
+	MTLFeatureSet_OSX_GPUFamily1_v2           MTLFeatureSet = 10001
 	MTLFeatureSet_macOS_ReadWriteTextureTier2 MTLFeatureSet = 10002
-	MTLFeatureSet_OSX_ReadWriteTextureTier2 MTLFeatureSet = 10002
-	MTLFeatureSet_macOS_GPUFamily1_v3 MTLFeatureSet = 10003
-	MTLFeatureSet_macOS_GPUFamily1_v4 MTLFeatureSet = 10004
-	MTLFeatureSet_macOS_GPUFamily2_v1 MTLFeatureSet = 10005
+	MTLFeatureSet_OSX_ReadWriteTextureTier2   MTLFeatureSet = 10002
+	MTLFeatureSet_macOS_GPUFamily1_v3         MTLFeatureSet = 10003
+	MTLFeatureSet_macOS_GPUFamily1_v4         MTLFeatureSet = 10004
+	MTLFeatureSet_macOS_GPUFamily2_v1         MTLFeatureSet = 10005
 )
 
 func (e MTLFeatureSet) String() string {
@@ -1927,7 +2017,7 @@ const (
 	MTLFunctionOptionCompileToBinary MTLFunctionOptions = 1
 	// @brief stores and tracks this function in a Metal Pipelines Script This flag is optional and only supported in the context of binary archives. @discussion This flag is required for inspecting and consuming binary archives with specialized MTLFunctions via the metal-source tool. It is not required for recompilation, nor for storing functions in binary archives. Set this flag only if you intend to use metal-source on a serialized binary archive.
 	MTLFunctionOptionStoreFunctionInMetalPipelinesScript MTLFunctionOptions = 2
-	MTLFunctionOptionStoreFunctionInMetalScript MTLFunctionOptions = 2
+	MTLFunctionOptionStoreFunctionInMetalScript          MTLFunctionOptions = 2
 	// @brief Function creation fails (i.e nil is returned) if: - A lookup binary archive has been specified - The function has not been found in the archive
 	MTLFunctionOptionFailOnBinaryArchiveMiss MTLFunctionOptions = 4
 	// @brief Compiles the function to have its function handles return a constant MTLResourceID across all pipeline states. The function needs to be linked to the pipeline that will use this function. This function option can only be used for functions that are compiled with `MTLFunctionOptionCompileToBinary`.
@@ -1936,25 +2026,37 @@ const (
 
 func (e MTLFunctionOptions) String() string {
 	var parts []string
-	if e&MTLFunctionOptionCompileToBinary != 0 { parts = append(parts, "MTLFunctionOptionCompileToBinary") }
-	if e&MTLFunctionOptionStoreFunctionInMetalPipelinesScript != 0 { parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalPipelinesScript") }
-	if e&MTLFunctionOptionStoreFunctionInMetalScript != 0 { parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalScript") }
-	if e&MTLFunctionOptionFailOnBinaryArchiveMiss != 0 { parts = append(parts, "MTLFunctionOptionFailOnBinaryArchiveMiss") }
-	if e&MTLFunctionOptionPipelineIndependent != 0 { parts = append(parts, "MTLFunctionOptionPipelineIndependent") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLFunctionOptionCompileToBinary != 0 {
+		parts = append(parts, "MTLFunctionOptionCompileToBinary")
+	}
+	if e&MTLFunctionOptionStoreFunctionInMetalPipelinesScript != 0 {
+		parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalPipelinesScript")
+	}
+	if e&MTLFunctionOptionStoreFunctionInMetalScript != 0 {
+		parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalScript")
+	}
+	if e&MTLFunctionOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "MTLFunctionOptionFailOnBinaryArchiveMiss")
+	}
+	if e&MTLFunctionOptionPipelineIndependent != 0 {
+		parts = append(parts, "MTLFunctionOptionPipelineIndependent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLFunctionType uint64
 
 const (
-	MTLFunctionTypeVertex MTLFunctionType = 1
-	MTLFunctionTypeFragment MTLFunctionType = 2
-	MTLFunctionTypeKernel MTLFunctionType = 3
-	MTLFunctionTypeVisible MTLFunctionType = 5
+	MTLFunctionTypeVertex       MTLFunctionType = 1
+	MTLFunctionTypeFragment     MTLFunctionType = 2
+	MTLFunctionTypeKernel       MTLFunctionType = 3
+	MTLFunctionTypeVisible      MTLFunctionType = 5
 	MTLFunctionTypeIntersection MTLFunctionType = 6
-	MTLFunctionTypeMesh MTLFunctionType = 7
-	MTLFunctionTypeObject MTLFunctionType = 8
+	MTLFunctionTypeMesh         MTLFunctionType = 7
+	MTLFunctionTypeObject       MTLFunctionType = 8
 )
 
 func (e MTLFunctionType) String() string {
@@ -1981,25 +2083,25 @@ func (e MTLFunctionType) String() string {
 type MTLGPUFamily int64
 
 const (
-	MTLGPUFamilyApple1 MTLGPUFamily = 1001
-	MTLGPUFamilyApple2 MTLGPUFamily = 1002
-	MTLGPUFamilyApple3 MTLGPUFamily = 1003
-	MTLGPUFamilyApple4 MTLGPUFamily = 1004
-	MTLGPUFamilyApple5 MTLGPUFamily = 1005
-	MTLGPUFamilyApple6 MTLGPUFamily = 1006
-	MTLGPUFamilyApple7 MTLGPUFamily = 1007
-	MTLGPUFamilyApple8 MTLGPUFamily = 1008
-	MTLGPUFamilyApple9 MTLGPUFamily = 1009
-	MTLGPUFamilyApple10 MTLGPUFamily = 1010
-	MTLGPUFamilyMac1 MTLGPUFamily = 2001
-	MTLGPUFamilyMac2 MTLGPUFamily = 2002
-	MTLGPUFamilyCommon1 MTLGPUFamily = 3001
-	MTLGPUFamilyCommon2 MTLGPUFamily = 3002
-	MTLGPUFamilyCommon3 MTLGPUFamily = 3003
+	MTLGPUFamilyApple1       MTLGPUFamily = 1001
+	MTLGPUFamilyApple2       MTLGPUFamily = 1002
+	MTLGPUFamilyApple3       MTLGPUFamily = 1003
+	MTLGPUFamilyApple4       MTLGPUFamily = 1004
+	MTLGPUFamilyApple5       MTLGPUFamily = 1005
+	MTLGPUFamilyApple6       MTLGPUFamily = 1006
+	MTLGPUFamilyApple7       MTLGPUFamily = 1007
+	MTLGPUFamilyApple8       MTLGPUFamily = 1008
+	MTLGPUFamilyApple9       MTLGPUFamily = 1009
+	MTLGPUFamilyApple10      MTLGPUFamily = 1010
+	MTLGPUFamilyMac1         MTLGPUFamily = 2001
+	MTLGPUFamilyMac2         MTLGPUFamily = 2002
+	MTLGPUFamilyCommon1      MTLGPUFamily = 3001
+	MTLGPUFamilyCommon2      MTLGPUFamily = 3002
+	MTLGPUFamilyCommon3      MTLGPUFamily = 3003
 	MTLGPUFamilyMacCatalyst1 MTLGPUFamily = 4001
 	MTLGPUFamilyMacCatalyst2 MTLGPUFamily = 4002
-	MTLGPUFamilyMetal3 MTLGPUFamily = 5001
-	MTLGPUFamilyMetal4 MTLGPUFamily = 5002
+	MTLGPUFamilyMetal3       MTLGPUFamily = 5001
+	MTLGPUFamilyMetal4       MTLGPUFamily = 5002
 )
 
 func (e MTLGPUFamily) String() string {
@@ -2050,9 +2152,9 @@ func (e MTLGPUFamily) String() string {
 type MTLHazardTrackingMode uint64
 
 const (
-	MTLHazardTrackingModeDefault MTLHazardTrackingMode = 0
+	MTLHazardTrackingModeDefault   MTLHazardTrackingMode = 0
 	MTLHazardTrackingModeUntracked MTLHazardTrackingMode = 1
-	MTLHazardTrackingModeTracked MTLHazardTrackingMode = 2
+	MTLHazardTrackingModeTracked   MTLHazardTrackingMode = 2
 )
 
 func (e MTLHazardTrackingMode) String() string {
@@ -2073,7 +2175,7 @@ type MTLHeapType int64
 const (
 	MTLHeapTypeAutomatic MTLHeapType = 0
 	MTLHeapTypePlacement MTLHeapType = 1
-	MTLHeapTypeSparse MTLHeapType = 2
+	MTLHeapTypeSparse    MTLHeapType = 2
 )
 
 func (e MTLHeapType) String() string {
@@ -2093,7 +2195,7 @@ type MTLIOCommandQueueType int64
 
 const (
 	MTLIOCommandQueueTypeConcurrent MTLIOCommandQueueType = 0
-	MTLIOCommandQueueTypeSerial MTLIOCommandQueueType = 1
+	MTLIOCommandQueueTypeSerial     MTLIOCommandQueueType = 1
 )
 
 func (e MTLIOCommandQueueType) String() string {
@@ -2110,10 +2212,10 @@ func (e MTLIOCommandQueueType) String() string {
 type MTLIOCompressionMethod int64
 
 const (
-	MTLIOCompressionMethodZlib MTLIOCompressionMethod = 0
-	MTLIOCompressionMethodLZFSE MTLIOCompressionMethod = 1
-	MTLIOCompressionMethodLZ4 MTLIOCompressionMethod = 2
-	MTLIOCompressionMethodLZMA MTLIOCompressionMethod = 3
+	MTLIOCompressionMethodZlib     MTLIOCompressionMethod = 0
+	MTLIOCompressionMethodLZFSE    MTLIOCompressionMethod = 1
+	MTLIOCompressionMethodLZ4      MTLIOCompressionMethod = 2
+	MTLIOCompressionMethodLZMA     MTLIOCompressionMethod = 3
 	MTLIOCompressionMethodLZBitmap MTLIOCompressionMethod = 4
 )
 
@@ -2138,7 +2240,7 @@ type MTLIOCompressionStatus int64
 
 const (
 	MTLIOCompressionStatusComplete MTLIOCompressionStatus = 0
-	MTLIOCompressionStatusError MTLIOCompressionStatus = 1
+	MTLIOCompressionStatusError    MTLIOCompressionStatus = 1
 )
 
 func (e MTLIOCompressionStatus) String() string {
@@ -2156,7 +2258,7 @@ type MTLIOError int64
 
 const (
 	MTLIOErrorURLInvalid MTLIOError = 1
-	MTLIOErrorInternal MTLIOError = 2
+	MTLIOErrorInternal   MTLIOError = 2
 )
 
 func (e MTLIOError) String() string {
@@ -2173,9 +2275,9 @@ func (e MTLIOError) String() string {
 type MTLIOPriority int64
 
 const (
-	MTLIOPriorityHigh MTLIOPriority = 0
+	MTLIOPriorityHigh   MTLIOPriority = 0
 	MTLIOPriorityNormal MTLIOPriority = 1
-	MTLIOPriorityLow MTLIOPriority = 2
+	MTLIOPriorityLow    MTLIOPriority = 2
 )
 
 func (e MTLIOPriority) String() string {
@@ -2194,10 +2296,10 @@ func (e MTLIOPriority) String() string {
 type MTLIOStatus int64
 
 const (
-	MTLIOStatusPending MTLIOStatus = 0
+	MTLIOStatusPending   MTLIOStatus = 0
 	MTLIOStatusCancelled MTLIOStatus = 1
-	MTLIOStatusError MTLIOStatus = 2
-	MTLIOStatusComplete MTLIOStatus = 3
+	MTLIOStatusError     MTLIOStatus = 2
+	MTLIOStatusComplete  MTLIOStatus = 3
 )
 
 func (e MTLIOStatus) String() string {
@@ -2236,27 +2338,45 @@ func (e MTLIndexType) String() string {
 type MTLIndirectCommandType uint64
 
 const (
-	MTLIndirectCommandTypeDraw MTLIndirectCommandType = 1
-	MTLIndirectCommandTypeDrawIndexed MTLIndirectCommandType = 2
-	MTLIndirectCommandTypeDrawPatches MTLIndirectCommandType = 4
-	MTLIndirectCommandTypeDrawIndexedPatches MTLIndirectCommandType = 8
-	MTLIndirectCommandTypeConcurrentDispatch MTLIndirectCommandType = 32
+	MTLIndirectCommandTypeDraw                      MTLIndirectCommandType = 1
+	MTLIndirectCommandTypeDrawIndexed               MTLIndirectCommandType = 2
+	MTLIndirectCommandTypeDrawPatches               MTLIndirectCommandType = 4
+	MTLIndirectCommandTypeDrawIndexedPatches        MTLIndirectCommandType = 8
+	MTLIndirectCommandTypeConcurrentDispatch        MTLIndirectCommandType = 32
 	MTLIndirectCommandTypeConcurrentDispatchThreads MTLIndirectCommandType = 64
-	MTLIndirectCommandTypeDrawMeshThreadgroups MTLIndirectCommandType = 128
-	MTLIndirectCommandTypeDrawMeshThreads MTLIndirectCommandType = 256
+	MTLIndirectCommandTypeDrawMeshThreadgroups      MTLIndirectCommandType = 128
+	MTLIndirectCommandTypeDrawMeshThreads           MTLIndirectCommandType = 256
 )
 
 func (e MTLIndirectCommandType) String() string {
 	var parts []string
-	if e&MTLIndirectCommandTypeDraw != 0 { parts = append(parts, "MTLIndirectCommandTypeDraw") }
-	if e&MTLIndirectCommandTypeDrawIndexed != 0 { parts = append(parts, "MTLIndirectCommandTypeDrawIndexed") }
-	if e&MTLIndirectCommandTypeDrawPatches != 0 { parts = append(parts, "MTLIndirectCommandTypeDrawPatches") }
-	if e&MTLIndirectCommandTypeDrawIndexedPatches != 0 { parts = append(parts, "MTLIndirectCommandTypeDrawIndexedPatches") }
-	if e&MTLIndirectCommandTypeConcurrentDispatch != 0 { parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatch") }
-	if e&MTLIndirectCommandTypeConcurrentDispatchThreads != 0 { parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatchThreads") }
-	if e&MTLIndirectCommandTypeDrawMeshThreadgroups != 0 { parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreadgroups") }
-	if e&MTLIndirectCommandTypeDrawMeshThreads != 0 { parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreads") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLIndirectCommandTypeDraw != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDraw")
+	}
+	if e&MTLIndirectCommandTypeDrawIndexed != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDrawIndexed")
+	}
+	if e&MTLIndirectCommandTypeDrawPatches != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDrawPatches")
+	}
+	if e&MTLIndirectCommandTypeDrawIndexedPatches != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDrawIndexedPatches")
+	}
+	if e&MTLIndirectCommandTypeConcurrentDispatch != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatch")
+	}
+	if e&MTLIndirectCommandTypeConcurrentDispatchThreads != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatchThreads")
+	}
+	if e&MTLIndirectCommandTypeDrawMeshThreadgroups != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreadgroups")
+	}
+	if e&MTLIndirectCommandTypeDrawMeshThreads != 0 {
+		parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreads")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2289,17 +2409,39 @@ const (
 
 func (e MTLIntersectionFunctionSignature) String() string {
 	var parts []string
-	if e&MTLIntersectionFunctionSignatureInstancing != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureInstancing") }
-	if e&MTLIntersectionFunctionSignatureTriangleData != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureTriangleData") }
-	if e&MTLIntersectionFunctionSignatureWorldSpaceData != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureWorldSpaceData") }
-	if e&MTLIntersectionFunctionSignatureInstanceMotion != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureInstanceMotion") }
-	if e&MTLIntersectionFunctionSignaturePrimitiveMotion != 0 { parts = append(parts, "MTLIntersectionFunctionSignaturePrimitiveMotion") }
-	if e&MTLIntersectionFunctionSignatureExtendedLimits != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureExtendedLimits") }
-	if e&MTLIntersectionFunctionSignatureMaxLevels != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureMaxLevels") }
-	if e&MTLIntersectionFunctionSignatureCurveData != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureCurveData") }
-	if e&MTLIntersectionFunctionSignatureIntersectionFunctionBuffer != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureIntersectionFunctionBuffer") }
-	if e&MTLIntersectionFunctionSignatureUserData != 0 { parts = append(parts, "MTLIntersectionFunctionSignatureUserData") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLIntersectionFunctionSignatureInstancing != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureInstancing")
+	}
+	if e&MTLIntersectionFunctionSignatureTriangleData != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureTriangleData")
+	}
+	if e&MTLIntersectionFunctionSignatureWorldSpaceData != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureWorldSpaceData")
+	}
+	if e&MTLIntersectionFunctionSignatureInstanceMotion != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureInstanceMotion")
+	}
+	if e&MTLIntersectionFunctionSignaturePrimitiveMotion != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignaturePrimitiveMotion")
+	}
+	if e&MTLIntersectionFunctionSignatureExtendedLimits != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureExtendedLimits")
+	}
+	if e&MTLIntersectionFunctionSignatureMaxLevels != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureMaxLevels")
+	}
+	if e&MTLIntersectionFunctionSignatureCurveData != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureCurveData")
+	}
+	if e&MTLIntersectionFunctionSignatureIntersectionFunctionBuffer != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureIntersectionFunctionBuffer")
+	}
+	if e&MTLIntersectionFunctionSignatureUserData != 0 {
+		parts = append(parts, "MTLIntersectionFunctionSignatureUserData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2351,12 +2493,12 @@ func (e MTLLanguageVersion) String() string {
 type MTLLibraryError uint64
 
 const (
-	MTLLibraryErrorUnsupported MTLLibraryError = 1
-	MTLLibraryErrorInternal MTLLibraryError = 2
-	MTLLibraryErrorCompileFailure MTLLibraryError = 3
-	MTLLibraryErrorCompileWarning MTLLibraryError = 4
+	MTLLibraryErrorUnsupported      MTLLibraryError = 1
+	MTLLibraryErrorInternal         MTLLibraryError = 2
+	MTLLibraryErrorCompileFailure   MTLLibraryError = 3
+	MTLLibraryErrorCompileWarning   MTLLibraryError = 4
 	MTLLibraryErrorFunctionNotFound MTLLibraryError = 5
-	MTLLibraryErrorFileNotFound MTLLibraryError = 6
+	MTLLibraryErrorFileNotFound     MTLLibraryError = 6
 )
 
 func (e MTLLibraryError) String() string {
@@ -2382,7 +2524,7 @@ type MTLLibraryOptimizationLevel int64
 
 const (
 	MTLLibraryOptimizationLevelDefault MTLLibraryOptimizationLevel = 0
-	MTLLibraryOptimizationLevelSize MTLLibraryOptimizationLevel = 1
+	MTLLibraryOptimizationLevelSize    MTLLibraryOptimizationLevel = 1
 )
 
 func (e MTLLibraryOptimizationLevel) String() string {
@@ -2400,7 +2542,7 @@ type MTLLibraryType int64
 
 const (
 	MTLLibraryTypeExecutable MTLLibraryType = 0
-	MTLLibraryTypeDynamic MTLLibraryType = 1
+	MTLLibraryTypeDynamic    MTLLibraryType = 1
 )
 
 func (e MTLLibraryType) String() string {
@@ -2418,8 +2560,8 @@ type MTLLoadAction uint64
 
 const (
 	MTLLoadActionDontCare MTLLoadAction = 0
-	MTLLoadActionLoad MTLLoadAction = 1
-	MTLLoadActionClear MTLLoadAction = 2
+	MTLLoadActionLoad     MTLLoadAction = 1
+	MTLLoadActionClear    MTLLoadAction = 2
 )
 
 func (e MTLLoadAction) String() string {
@@ -2439,11 +2581,11 @@ type MTLLogLevel int64
 
 const (
 	MTLLogLevelUndefined MTLLogLevel = 0
-	MTLLogLevelDebug MTLLogLevel = 1
-	MTLLogLevelInfo MTLLogLevel = 2
-	MTLLogLevelNotice MTLLogLevel = 3
-	MTLLogLevelError MTLLogLevel = 4
-	MTLLogLevelFault MTLLogLevel = 5
+	MTLLogLevelDebug     MTLLogLevel = 1
+	MTLLogLevelInfo      MTLLogLevel = 2
+	MTLLogLevelNotice    MTLLogLevel = 3
+	MTLLogLevelError     MTLLogLevel = 4
+	MTLLogLevelFault     MTLLogLevel = 5
 )
 
 func (e MTLLogLevel) String() string {
@@ -2469,7 +2611,7 @@ type MTLLogStateError uint64
 
 const (
 	MTLLogStateErrorInvalidSize MTLLogStateError = 1
-	MTLLogStateErrorInvalid MTLLogStateError = 2
+	MTLLogStateErrorInvalid     MTLLogStateError = 2
 )
 
 func (e MTLLogStateError) String() string {
@@ -2486,7 +2628,7 @@ func (e MTLLogStateError) String() string {
 type MTLMathFloatingPointFunctions int64
 
 const (
-	MTLMathFloatingPointFunctionsFast MTLMathFloatingPointFunctions = 0
+	MTLMathFloatingPointFunctionsFast    MTLMathFloatingPointFunctions = 0
 	MTLMathFloatingPointFunctionsPrecise MTLMathFloatingPointFunctions = 1
 )
 
@@ -2504,9 +2646,9 @@ func (e MTLMathFloatingPointFunctions) String() string {
 type MTLMathMode int64
 
 const (
-	MTLMathModeSafe MTLMathMode = 0
+	MTLMathModeSafe    MTLMathMode = 0
 	MTLMathModeRelaxed MTLMathMode = 1
-	MTLMathModeFast MTLMathMode = 2
+	MTLMathModeFast    MTLMathMode = 2
 )
 
 func (e MTLMathMode) String() string {
@@ -2566,8 +2708,8 @@ type MTLMultisampleDepthResolveFilter uint64
 
 const (
 	MTLMultisampleDepthResolveFilterSample0 MTLMultisampleDepthResolveFilter = 0
-	MTLMultisampleDepthResolveFilterMin MTLMultisampleDepthResolveFilter = 1
-	MTLMultisampleDepthResolveFilterMax MTLMultisampleDepthResolveFilter = 2
+	MTLMultisampleDepthResolveFilterMin     MTLMultisampleDepthResolveFilter = 1
+	MTLMultisampleDepthResolveFilterMax     MTLMultisampleDepthResolveFilter = 2
 )
 
 func (e MTLMultisampleDepthResolveFilter) String() string {
@@ -2606,8 +2748,8 @@ func (e MTLMultisampleStencilResolveFilter) String() string {
 type MTLMutability uint64
 
 const (
-	MTLMutabilityDefault MTLMutability = 0
-	MTLMutabilityMutable MTLMutability = 1
+	MTLMutabilityDefault   MTLMutability = 0
+	MTLMutabilityMutable   MTLMutability = 1
 	MTLMutabilityImmutable MTLMutability = 2
 )
 
@@ -2627,9 +2769,9 @@ func (e MTLMutability) String() string {
 type MTLPatchType uint64
 
 const (
-	MTLPatchTypeNone MTLPatchType = 0
+	MTLPatchTypeNone     MTLPatchType = 0
 	MTLPatchTypeTriangle MTLPatchType = 1
-	MTLPatchTypeQuad MTLPatchType = 2
+	MTLPatchTypeQuad     MTLPatchType = 2
 )
 
 func (e MTLPatchType) String() string {
@@ -2648,168 +2790,178 @@ func (e MTLPatchType) String() string {
 type MTLPipelineOption uint64
 
 const (
-	MTLPipelineOptionNone MTLPipelineOption = 0
-	MTLPipelineOptionArgumentInfo MTLPipelineOption = 1
-	MTLPipelineOptionBindingInfo MTLPipelineOption = 1
-	MTLPipelineOptionBufferTypeInfo MTLPipelineOption = 2
+	MTLPipelineOptionNone                    MTLPipelineOption = 0
+	MTLPipelineOptionArgumentInfo            MTLPipelineOption = 1
+	MTLPipelineOptionBindingInfo             MTLPipelineOption = 1
+	MTLPipelineOptionBufferTypeInfo          MTLPipelineOption = 2
 	MTLPipelineOptionFailOnBinaryArchiveMiss MTLPipelineOption = 4
 )
 
 func (e MTLPipelineOption) String() string {
 	var parts []string
-	if e&MTLPipelineOptionArgumentInfo != 0 { parts = append(parts, "MTLPipelineOptionArgumentInfo") }
-	if e&MTLPipelineOptionBindingInfo != 0 { parts = append(parts, "MTLPipelineOptionBindingInfo") }
-	if e&MTLPipelineOptionBufferTypeInfo != 0 { parts = append(parts, "MTLPipelineOptionBufferTypeInfo") }
-	if e&MTLPipelineOptionFailOnBinaryArchiveMiss != 0 { parts = append(parts, "MTLPipelineOptionFailOnBinaryArchiveMiss") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLPipelineOptionArgumentInfo != 0 {
+		parts = append(parts, "MTLPipelineOptionArgumentInfo")
+	}
+	if e&MTLPipelineOptionBindingInfo != 0 {
+		parts = append(parts, "MTLPipelineOptionBindingInfo")
+	}
+	if e&MTLPipelineOptionBufferTypeInfo != 0 {
+		parts = append(parts, "MTLPipelineOptionBufferTypeInfo")
+	}
+	if e&MTLPipelineOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "MTLPipelineOptionFailOnBinaryArchiveMiss")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLPixelFormat uint64
 
 const (
-	MTLPixelFormatInvalid MTLPixelFormat = 0
-	MTLPixelFormatA8Unorm MTLPixelFormat = 1
-	MTLPixelFormatR8Unorm MTLPixelFormat = 10
-	MTLPixelFormatR8Unorm_sRGB MTLPixelFormat = 11
-	MTLPixelFormatR8Snorm MTLPixelFormat = 12
-	MTLPixelFormatR8Uint MTLPixelFormat = 13
-	MTLPixelFormatR8Sint MTLPixelFormat = 14
-	MTLPixelFormatR16Unorm MTLPixelFormat = 20
-	MTLPixelFormatR16Snorm MTLPixelFormat = 22
-	MTLPixelFormatR16Uint MTLPixelFormat = 23
-	MTLPixelFormatR16Sint MTLPixelFormat = 24
-	MTLPixelFormatR16Float MTLPixelFormat = 25
-	MTLPixelFormatRG8Unorm MTLPixelFormat = 30
-	MTLPixelFormatRG8Unorm_sRGB MTLPixelFormat = 31
-	MTLPixelFormatRG8Snorm MTLPixelFormat = 32
-	MTLPixelFormatRG8Uint MTLPixelFormat = 33
-	MTLPixelFormatRG8Sint MTLPixelFormat = 34
-	MTLPixelFormatB5G6R5Unorm MTLPixelFormat = 40
-	MTLPixelFormatA1BGR5Unorm MTLPixelFormat = 41
-	MTLPixelFormatABGR4Unorm MTLPixelFormat = 42
-	MTLPixelFormatBGR5A1Unorm MTLPixelFormat = 43
-	MTLPixelFormatR32Uint MTLPixelFormat = 53
-	MTLPixelFormatR32Sint MTLPixelFormat = 54
-	MTLPixelFormatR32Float MTLPixelFormat = 55
-	MTLPixelFormatRG16Unorm MTLPixelFormat = 60
-	MTLPixelFormatRG16Snorm MTLPixelFormat = 62
-	MTLPixelFormatRG16Uint MTLPixelFormat = 63
-	MTLPixelFormatRG16Sint MTLPixelFormat = 64
-	MTLPixelFormatRG16Float MTLPixelFormat = 65
-	MTLPixelFormatRGBA8Unorm MTLPixelFormat = 70
-	MTLPixelFormatRGBA8Unorm_sRGB MTLPixelFormat = 71
-	MTLPixelFormatRGBA8Snorm MTLPixelFormat = 72
-	MTLPixelFormatRGBA8Uint MTLPixelFormat = 73
-	MTLPixelFormatRGBA8Sint MTLPixelFormat = 74
-	MTLPixelFormatBGRA8Unorm MTLPixelFormat = 80
-	MTLPixelFormatBGRA8Unorm_sRGB MTLPixelFormat = 81
-	MTLPixelFormatRGB10A2Unorm MTLPixelFormat = 90
-	MTLPixelFormatRGB10A2Uint MTLPixelFormat = 91
-	MTLPixelFormatRG11B10Float MTLPixelFormat = 92
-	MTLPixelFormatRGB9E5Float MTLPixelFormat = 93
-	MTLPixelFormatBGR10A2Unorm MTLPixelFormat = 94
-	MTLPixelFormatBGR10_XR MTLPixelFormat = 554
-	MTLPixelFormatBGR10_XR_sRGB MTLPixelFormat = 555
-	MTLPixelFormatRG32Uint MTLPixelFormat = 103
-	MTLPixelFormatRG32Sint MTLPixelFormat = 104
-	MTLPixelFormatRG32Float MTLPixelFormat = 105
-	MTLPixelFormatRGBA16Unorm MTLPixelFormat = 110
-	MTLPixelFormatRGBA16Snorm MTLPixelFormat = 112
-	MTLPixelFormatRGBA16Uint MTLPixelFormat = 113
-	MTLPixelFormatRGBA16Sint MTLPixelFormat = 114
-	MTLPixelFormatRGBA16Float MTLPixelFormat = 115
-	MTLPixelFormatBGRA10_XR MTLPixelFormat = 552
-	MTLPixelFormatBGRA10_XR_sRGB MTLPixelFormat = 553
-	MTLPixelFormatRGBA32Uint MTLPixelFormat = 123
-	MTLPixelFormatRGBA32Sint MTLPixelFormat = 124
-	MTLPixelFormatRGBA32Float MTLPixelFormat = 125
-	MTLPixelFormatBC1_RGBA MTLPixelFormat = 130
-	MTLPixelFormatBC1_RGBA_sRGB MTLPixelFormat = 131
-	MTLPixelFormatBC2_RGBA MTLPixelFormat = 132
-	MTLPixelFormatBC2_RGBA_sRGB MTLPixelFormat = 133
-	MTLPixelFormatBC3_RGBA MTLPixelFormat = 134
-	MTLPixelFormatBC3_RGBA_sRGB MTLPixelFormat = 135
-	MTLPixelFormatBC4_RUnorm MTLPixelFormat = 140
-	MTLPixelFormatBC4_RSnorm MTLPixelFormat = 141
-	MTLPixelFormatBC5_RGUnorm MTLPixelFormat = 142
-	MTLPixelFormatBC5_RGSnorm MTLPixelFormat = 143
-	MTLPixelFormatBC6H_RGBFloat MTLPixelFormat = 150
-	MTLPixelFormatBC6H_RGBUfloat MTLPixelFormat = 151
-	MTLPixelFormatBC7_RGBAUnorm MTLPixelFormat = 152
-	MTLPixelFormatBC7_RGBAUnorm_sRGB MTLPixelFormat = 153
-	MTLPixelFormatPVRTC_RGB_2BPP MTLPixelFormat = 160
-	MTLPixelFormatPVRTC_RGB_2BPP_sRGB MTLPixelFormat = 161
-	MTLPixelFormatPVRTC_RGB_4BPP MTLPixelFormat = 162
-	MTLPixelFormatPVRTC_RGB_4BPP_sRGB MTLPixelFormat = 163
-	MTLPixelFormatPVRTC_RGBA_2BPP MTLPixelFormat = 164
+	MTLPixelFormatInvalid              MTLPixelFormat = 0
+	MTLPixelFormatA8Unorm              MTLPixelFormat = 1
+	MTLPixelFormatR8Unorm              MTLPixelFormat = 10
+	MTLPixelFormatR8Unorm_sRGB         MTLPixelFormat = 11
+	MTLPixelFormatR8Snorm              MTLPixelFormat = 12
+	MTLPixelFormatR8Uint               MTLPixelFormat = 13
+	MTLPixelFormatR8Sint               MTLPixelFormat = 14
+	MTLPixelFormatR16Unorm             MTLPixelFormat = 20
+	MTLPixelFormatR16Snorm             MTLPixelFormat = 22
+	MTLPixelFormatR16Uint              MTLPixelFormat = 23
+	MTLPixelFormatR16Sint              MTLPixelFormat = 24
+	MTLPixelFormatR16Float             MTLPixelFormat = 25
+	MTLPixelFormatRG8Unorm             MTLPixelFormat = 30
+	MTLPixelFormatRG8Unorm_sRGB        MTLPixelFormat = 31
+	MTLPixelFormatRG8Snorm             MTLPixelFormat = 32
+	MTLPixelFormatRG8Uint              MTLPixelFormat = 33
+	MTLPixelFormatRG8Sint              MTLPixelFormat = 34
+	MTLPixelFormatB5G6R5Unorm          MTLPixelFormat = 40
+	MTLPixelFormatA1BGR5Unorm          MTLPixelFormat = 41
+	MTLPixelFormatABGR4Unorm           MTLPixelFormat = 42
+	MTLPixelFormatBGR5A1Unorm          MTLPixelFormat = 43
+	MTLPixelFormatR32Uint              MTLPixelFormat = 53
+	MTLPixelFormatR32Sint              MTLPixelFormat = 54
+	MTLPixelFormatR32Float             MTLPixelFormat = 55
+	MTLPixelFormatRG16Unorm            MTLPixelFormat = 60
+	MTLPixelFormatRG16Snorm            MTLPixelFormat = 62
+	MTLPixelFormatRG16Uint             MTLPixelFormat = 63
+	MTLPixelFormatRG16Sint             MTLPixelFormat = 64
+	MTLPixelFormatRG16Float            MTLPixelFormat = 65
+	MTLPixelFormatRGBA8Unorm           MTLPixelFormat = 70
+	MTLPixelFormatRGBA8Unorm_sRGB      MTLPixelFormat = 71
+	MTLPixelFormatRGBA8Snorm           MTLPixelFormat = 72
+	MTLPixelFormatRGBA8Uint            MTLPixelFormat = 73
+	MTLPixelFormatRGBA8Sint            MTLPixelFormat = 74
+	MTLPixelFormatBGRA8Unorm           MTLPixelFormat = 80
+	MTLPixelFormatBGRA8Unorm_sRGB      MTLPixelFormat = 81
+	MTLPixelFormatRGB10A2Unorm         MTLPixelFormat = 90
+	MTLPixelFormatRGB10A2Uint          MTLPixelFormat = 91
+	MTLPixelFormatRG11B10Float         MTLPixelFormat = 92
+	MTLPixelFormatRGB9E5Float          MTLPixelFormat = 93
+	MTLPixelFormatBGR10A2Unorm         MTLPixelFormat = 94
+	MTLPixelFormatBGR10_XR             MTLPixelFormat = 554
+	MTLPixelFormatBGR10_XR_sRGB        MTLPixelFormat = 555
+	MTLPixelFormatRG32Uint             MTLPixelFormat = 103
+	MTLPixelFormatRG32Sint             MTLPixelFormat = 104
+	MTLPixelFormatRG32Float            MTLPixelFormat = 105
+	MTLPixelFormatRGBA16Unorm          MTLPixelFormat = 110
+	MTLPixelFormatRGBA16Snorm          MTLPixelFormat = 112
+	MTLPixelFormatRGBA16Uint           MTLPixelFormat = 113
+	MTLPixelFormatRGBA16Sint           MTLPixelFormat = 114
+	MTLPixelFormatRGBA16Float          MTLPixelFormat = 115
+	MTLPixelFormatBGRA10_XR            MTLPixelFormat = 552
+	MTLPixelFormatBGRA10_XR_sRGB       MTLPixelFormat = 553
+	MTLPixelFormatRGBA32Uint           MTLPixelFormat = 123
+	MTLPixelFormatRGBA32Sint           MTLPixelFormat = 124
+	MTLPixelFormatRGBA32Float          MTLPixelFormat = 125
+	MTLPixelFormatBC1_RGBA             MTLPixelFormat = 130
+	MTLPixelFormatBC1_RGBA_sRGB        MTLPixelFormat = 131
+	MTLPixelFormatBC2_RGBA             MTLPixelFormat = 132
+	MTLPixelFormatBC2_RGBA_sRGB        MTLPixelFormat = 133
+	MTLPixelFormatBC3_RGBA             MTLPixelFormat = 134
+	MTLPixelFormatBC3_RGBA_sRGB        MTLPixelFormat = 135
+	MTLPixelFormatBC4_RUnorm           MTLPixelFormat = 140
+	MTLPixelFormatBC4_RSnorm           MTLPixelFormat = 141
+	MTLPixelFormatBC5_RGUnorm          MTLPixelFormat = 142
+	MTLPixelFormatBC5_RGSnorm          MTLPixelFormat = 143
+	MTLPixelFormatBC6H_RGBFloat        MTLPixelFormat = 150
+	MTLPixelFormatBC6H_RGBUfloat       MTLPixelFormat = 151
+	MTLPixelFormatBC7_RGBAUnorm        MTLPixelFormat = 152
+	MTLPixelFormatBC7_RGBAUnorm_sRGB   MTLPixelFormat = 153
+	MTLPixelFormatPVRTC_RGB_2BPP       MTLPixelFormat = 160
+	MTLPixelFormatPVRTC_RGB_2BPP_sRGB  MTLPixelFormat = 161
+	MTLPixelFormatPVRTC_RGB_4BPP       MTLPixelFormat = 162
+	MTLPixelFormatPVRTC_RGB_4BPP_sRGB  MTLPixelFormat = 163
+	MTLPixelFormatPVRTC_RGBA_2BPP      MTLPixelFormat = 164
 	MTLPixelFormatPVRTC_RGBA_2BPP_sRGB MTLPixelFormat = 165
-	MTLPixelFormatPVRTC_RGBA_4BPP MTLPixelFormat = 166
+	MTLPixelFormatPVRTC_RGBA_4BPP      MTLPixelFormat = 166
 	MTLPixelFormatPVRTC_RGBA_4BPP_sRGB MTLPixelFormat = 167
-	MTLPixelFormatEAC_R11Unorm MTLPixelFormat = 170
-	MTLPixelFormatEAC_R11Snorm MTLPixelFormat = 172
-	MTLPixelFormatEAC_RG11Unorm MTLPixelFormat = 174
-	MTLPixelFormatEAC_RG11Snorm MTLPixelFormat = 176
-	MTLPixelFormatEAC_RGBA8 MTLPixelFormat = 178
-	MTLPixelFormatEAC_RGBA8_sRGB MTLPixelFormat = 179
-	MTLPixelFormatETC2_RGB8 MTLPixelFormat = 180
-	MTLPixelFormatETC2_RGB8_sRGB MTLPixelFormat = 181
-	MTLPixelFormatETC2_RGB8A1 MTLPixelFormat = 182
-	MTLPixelFormatETC2_RGB8A1_sRGB MTLPixelFormat = 183
-	MTLPixelFormatASTC_4x4_sRGB MTLPixelFormat = 186
-	MTLPixelFormatASTC_5x4_sRGB MTLPixelFormat = 187
-	MTLPixelFormatASTC_5x5_sRGB MTLPixelFormat = 188
-	MTLPixelFormatASTC_6x5_sRGB MTLPixelFormat = 189
-	MTLPixelFormatASTC_6x6_sRGB MTLPixelFormat = 190
-	MTLPixelFormatASTC_8x5_sRGB MTLPixelFormat = 192
-	MTLPixelFormatASTC_8x6_sRGB MTLPixelFormat = 193
-	MTLPixelFormatASTC_8x8_sRGB MTLPixelFormat = 194
-	MTLPixelFormatASTC_10x5_sRGB MTLPixelFormat = 195
-	MTLPixelFormatASTC_10x6_sRGB MTLPixelFormat = 196
-	MTLPixelFormatASTC_10x8_sRGB MTLPixelFormat = 197
-	MTLPixelFormatASTC_10x10_sRGB MTLPixelFormat = 198
-	MTLPixelFormatASTC_12x10_sRGB MTLPixelFormat = 199
-	MTLPixelFormatASTC_12x12_sRGB MTLPixelFormat = 200
-	MTLPixelFormatASTC_4x4_LDR MTLPixelFormat = 204
-	MTLPixelFormatASTC_5x4_LDR MTLPixelFormat = 205
-	MTLPixelFormatASTC_5x5_LDR MTLPixelFormat = 206
-	MTLPixelFormatASTC_6x5_LDR MTLPixelFormat = 207
-	MTLPixelFormatASTC_6x6_LDR MTLPixelFormat = 208
-	MTLPixelFormatASTC_8x5_LDR MTLPixelFormat = 210
-	MTLPixelFormatASTC_8x6_LDR MTLPixelFormat = 211
-	MTLPixelFormatASTC_8x8_LDR MTLPixelFormat = 212
-	MTLPixelFormatASTC_10x5_LDR MTLPixelFormat = 213
-	MTLPixelFormatASTC_10x6_LDR MTLPixelFormat = 214
-	MTLPixelFormatASTC_10x8_LDR MTLPixelFormat = 215
-	MTLPixelFormatASTC_10x10_LDR MTLPixelFormat = 216
-	MTLPixelFormatASTC_12x10_LDR MTLPixelFormat = 217
-	MTLPixelFormatASTC_12x12_LDR MTLPixelFormat = 218
-	MTLPixelFormatASTC_4x4_HDR MTLPixelFormat = 222
-	MTLPixelFormatASTC_5x4_HDR MTLPixelFormat = 223
-	MTLPixelFormatASTC_5x5_HDR MTLPixelFormat = 224
-	MTLPixelFormatASTC_6x5_HDR MTLPixelFormat = 225
-	MTLPixelFormatASTC_6x6_HDR MTLPixelFormat = 226
-	MTLPixelFormatASTC_8x5_HDR MTLPixelFormat = 228
-	MTLPixelFormatASTC_8x6_HDR MTLPixelFormat = 229
-	MTLPixelFormatASTC_8x8_HDR MTLPixelFormat = 230
-	MTLPixelFormatASTC_10x5_HDR MTLPixelFormat = 231
-	MTLPixelFormatASTC_10x6_HDR MTLPixelFormat = 232
-	MTLPixelFormatASTC_10x8_HDR MTLPixelFormat = 233
-	MTLPixelFormatASTC_10x10_HDR MTLPixelFormat = 234
-	MTLPixelFormatASTC_12x10_HDR MTLPixelFormat = 235
-	MTLPixelFormatASTC_12x12_HDR MTLPixelFormat = 236
+	MTLPixelFormatEAC_R11Unorm         MTLPixelFormat = 170
+	MTLPixelFormatEAC_R11Snorm         MTLPixelFormat = 172
+	MTLPixelFormatEAC_RG11Unorm        MTLPixelFormat = 174
+	MTLPixelFormatEAC_RG11Snorm        MTLPixelFormat = 176
+	MTLPixelFormatEAC_RGBA8            MTLPixelFormat = 178
+	MTLPixelFormatEAC_RGBA8_sRGB       MTLPixelFormat = 179
+	MTLPixelFormatETC2_RGB8            MTLPixelFormat = 180
+	MTLPixelFormatETC2_RGB8_sRGB       MTLPixelFormat = 181
+	MTLPixelFormatETC2_RGB8A1          MTLPixelFormat = 182
+	MTLPixelFormatETC2_RGB8A1_sRGB     MTLPixelFormat = 183
+	MTLPixelFormatASTC_4x4_sRGB        MTLPixelFormat = 186
+	MTLPixelFormatASTC_5x4_sRGB        MTLPixelFormat = 187
+	MTLPixelFormatASTC_5x5_sRGB        MTLPixelFormat = 188
+	MTLPixelFormatASTC_6x5_sRGB        MTLPixelFormat = 189
+	MTLPixelFormatASTC_6x6_sRGB        MTLPixelFormat = 190
+	MTLPixelFormatASTC_8x5_sRGB        MTLPixelFormat = 192
+	MTLPixelFormatASTC_8x6_sRGB        MTLPixelFormat = 193
+	MTLPixelFormatASTC_8x8_sRGB        MTLPixelFormat = 194
+	MTLPixelFormatASTC_10x5_sRGB       MTLPixelFormat = 195
+	MTLPixelFormatASTC_10x6_sRGB       MTLPixelFormat = 196
+	MTLPixelFormatASTC_10x8_sRGB       MTLPixelFormat = 197
+	MTLPixelFormatASTC_10x10_sRGB      MTLPixelFormat = 198
+	MTLPixelFormatASTC_12x10_sRGB      MTLPixelFormat = 199
+	MTLPixelFormatASTC_12x12_sRGB      MTLPixelFormat = 200
+	MTLPixelFormatASTC_4x4_LDR         MTLPixelFormat = 204
+	MTLPixelFormatASTC_5x4_LDR         MTLPixelFormat = 205
+	MTLPixelFormatASTC_5x5_LDR         MTLPixelFormat = 206
+	MTLPixelFormatASTC_6x5_LDR         MTLPixelFormat = 207
+	MTLPixelFormatASTC_6x6_LDR         MTLPixelFormat = 208
+	MTLPixelFormatASTC_8x5_LDR         MTLPixelFormat = 210
+	MTLPixelFormatASTC_8x6_LDR         MTLPixelFormat = 211
+	MTLPixelFormatASTC_8x8_LDR         MTLPixelFormat = 212
+	MTLPixelFormatASTC_10x5_LDR        MTLPixelFormat = 213
+	MTLPixelFormatASTC_10x6_LDR        MTLPixelFormat = 214
+	MTLPixelFormatASTC_10x8_LDR        MTLPixelFormat = 215
+	MTLPixelFormatASTC_10x10_LDR       MTLPixelFormat = 216
+	MTLPixelFormatASTC_12x10_LDR       MTLPixelFormat = 217
+	MTLPixelFormatASTC_12x12_LDR       MTLPixelFormat = 218
+	MTLPixelFormatASTC_4x4_HDR         MTLPixelFormat = 222
+	MTLPixelFormatASTC_5x4_HDR         MTLPixelFormat = 223
+	MTLPixelFormatASTC_5x5_HDR         MTLPixelFormat = 224
+	MTLPixelFormatASTC_6x5_HDR         MTLPixelFormat = 225
+	MTLPixelFormatASTC_6x6_HDR         MTLPixelFormat = 226
+	MTLPixelFormatASTC_8x5_HDR         MTLPixelFormat = 228
+	MTLPixelFormatASTC_8x6_HDR         MTLPixelFormat = 229
+	MTLPixelFormatASTC_8x8_HDR         MTLPixelFormat = 230
+	MTLPixelFormatASTC_10x5_HDR        MTLPixelFormat = 231
+	MTLPixelFormatASTC_10x6_HDR        MTLPixelFormat = 232
+	MTLPixelFormatASTC_10x8_HDR        MTLPixelFormat = 233
+	MTLPixelFormatASTC_10x10_HDR       MTLPixelFormat = 234
+	MTLPixelFormatASTC_12x10_HDR       MTLPixelFormat = 235
+	MTLPixelFormatASTC_12x12_HDR       MTLPixelFormat = 236
 	// @constant MTLPixelFormatGBGR422 @abstract A pixel format where the red and green channels are subsampled horizontally.  Two pixels are stored in 32 bits, with shared red and blue values, and unique green values. @discussion This format is equivalent to YUY2, YUYV, yuvs, or GL_RGB_422_APPLE/GL_UNSIGNED_SHORT_8_8_REV_APPLE.   The component order, from lowest addressed byte to highest, is Y0, Cb, Y1, Cr.  There is no implicit colorspace conversion from YUV to RGB, the shader will receive (Cr, Y, Cb, 1).  422 textures must have a width that is a multiple of 2, and can only be used for 2D non-mipmap textures.  When sampling, ClampToEdge is the only usable wrap mode.
 	MTLPixelFormatGBGR422 MTLPixelFormat = 240
 	// @constant MTLPixelFormatBGRG422 @abstract A pixel format where the red and green channels are subsampled horizontally.  Two pixels are stored in 32 bits, with shared red and blue values, and unique green values. @discussion This format is equivalent to UYVY, 2vuy, or GL_RGB_422_APPLE/GL_UNSIGNED_SHORT_8_8_APPLE. The component order, from lowest addressed byte to highest, is Cb, Y0, Cr, Y1.  There is no implicit colorspace conversion from YUV to RGB, the shader will receive (Cr, Y, Cb, 1).  422 textures must have a width that is a multiple of 2, and can only be used for 2D non-mipmap textures.  When sampling, ClampToEdge is the only usable wrap mode.
-	MTLPixelFormatBGRG422 MTLPixelFormat = 241
-	MTLPixelFormatDepth16Unorm MTLPixelFormat = 250
-	MTLPixelFormatDepth32Float MTLPixelFormat = 252
-	MTLPixelFormatStencil8 MTLPixelFormat = 253
+	MTLPixelFormatBGRG422               MTLPixelFormat = 241
+	MTLPixelFormatDepth16Unorm          MTLPixelFormat = 250
+	MTLPixelFormatDepth32Float          MTLPixelFormat = 252
+	MTLPixelFormatStencil8              MTLPixelFormat = 253
 	MTLPixelFormatDepth24Unorm_Stencil8 MTLPixelFormat = 255
 	MTLPixelFormatDepth32Float_Stencil8 MTLPixelFormat = 260
-	MTLPixelFormatX32_Stencil8 MTLPixelFormat = 261
-	MTLPixelFormatX24_Stencil8 MTLPixelFormat = 262
-	MTLPixelFormatUnspecialized MTLPixelFormat = 263
+	MTLPixelFormatX32_Stencil8          MTLPixelFormat = 261
+	MTLPixelFormatX24_Stencil8          MTLPixelFormat = 262
+	MTLPixelFormatUnspecialized         MTLPixelFormat = 263
 )
 
 func (e MTLPixelFormat) String() string {
@@ -3103,9 +3255,9 @@ type MTLPrimitiveTopologyClass uint64
 
 const (
 	MTLPrimitiveTopologyClassUnspecified MTLPrimitiveTopologyClass = 0
-	MTLPrimitiveTopologyClassPoint MTLPrimitiveTopologyClass = 1
-	MTLPrimitiveTopologyClassLine MTLPrimitiveTopologyClass = 2
-	MTLPrimitiveTopologyClassTriangle MTLPrimitiveTopologyClass = 3
+	MTLPrimitiveTopologyClassPoint       MTLPrimitiveTopologyClass = 1
+	MTLPrimitiveTopologyClassLine        MTLPrimitiveTopologyClass = 2
+	MTLPrimitiveTopologyClassTriangle    MTLPrimitiveTopologyClass = 3
 )
 
 func (e MTLPrimitiveTopologyClass) String() string {
@@ -3126,10 +3278,10 @@ func (e MTLPrimitiveTopologyClass) String() string {
 type MTLPrimitiveType uint64
 
 const (
-	MTLPrimitiveTypePoint MTLPrimitiveType = 0
-	MTLPrimitiveTypeLine MTLPrimitiveType = 1
-	MTLPrimitiveTypeLineStrip MTLPrimitiveType = 2
-	MTLPrimitiveTypeTriangle MTLPrimitiveType = 3
+	MTLPrimitiveTypePoint         MTLPrimitiveType = 0
+	MTLPrimitiveTypeLine          MTLPrimitiveType = 1
+	MTLPrimitiveTypeLineStrip     MTLPrimitiveType = 2
+	MTLPrimitiveTypeTriangle      MTLPrimitiveType = 3
 	MTLPrimitiveTypeTriangleStrip MTLPrimitiveType = 4
 )
 
@@ -3155,8 +3307,8 @@ type MTLPurgeableState uint64
 const (
 	MTLPurgeableStateKeepCurrent MTLPurgeableState = 1
 	MTLPurgeableStateNonVolatile MTLPurgeableState = 2
-	MTLPurgeableStateVolatile MTLPurgeableState = 3
-	MTLPurgeableStateEmpty MTLPurgeableState = 4
+	MTLPurgeableStateVolatile    MTLPurgeableState = 3
+	MTLPurgeableStateEmpty       MTLPurgeableState = 4
 )
 
 func (e MTLPurgeableState) String() string {
@@ -3178,8 +3330,8 @@ type MTLReadWriteTextureTier uint64
 
 const (
 	MTLReadWriteTextureTierNone MTLReadWriteTextureTier = 0
-	MTLReadWriteTextureTier1 MTLReadWriteTextureTier = 1
-	MTLReadWriteTextureTier2 MTLReadWriteTextureTier = 2
+	MTLReadWriteTextureTier1    MTLReadWriteTextureTier = 1
+	MTLReadWriteTextureTier2    MTLReadWriteTextureTier = 2
 )
 
 func (e MTLReadWriteTextureTier) String() string {
@@ -3198,78 +3350,114 @@ func (e MTLReadWriteTextureTier) String() string {
 type MTLRenderStages uint64
 
 const (
-	MTLRenderStageVertex MTLRenderStages = 1
+	MTLRenderStageVertex   MTLRenderStages = 1
 	MTLRenderStageFragment MTLRenderStages = 2
-	MTLRenderStageTile MTLRenderStages = 4
-	MTLRenderStageObject MTLRenderStages = 8
-	MTLRenderStageMesh MTLRenderStages = 16
+	MTLRenderStageTile     MTLRenderStages = 4
+	MTLRenderStageObject   MTLRenderStages = 8
+	MTLRenderStageMesh     MTLRenderStages = 16
 )
 
 func (e MTLRenderStages) String() string {
 	var parts []string
-	if e&MTLRenderStageVertex != 0 { parts = append(parts, "MTLRenderStageVertex") }
-	if e&MTLRenderStageFragment != 0 { parts = append(parts, "MTLRenderStageFragment") }
-	if e&MTLRenderStageTile != 0 { parts = append(parts, "MTLRenderStageTile") }
-	if e&MTLRenderStageObject != 0 { parts = append(parts, "MTLRenderStageObject") }
-	if e&MTLRenderStageMesh != 0 { parts = append(parts, "MTLRenderStageMesh") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLRenderStageVertex != 0 {
+		parts = append(parts, "MTLRenderStageVertex")
+	}
+	if e&MTLRenderStageFragment != 0 {
+		parts = append(parts, "MTLRenderStageFragment")
+	}
+	if e&MTLRenderStageTile != 0 {
+		parts = append(parts, "MTLRenderStageTile")
+	}
+	if e&MTLRenderStageObject != 0 {
+		parts = append(parts, "MTLRenderStageObject")
+	}
+	if e&MTLRenderStageMesh != 0 {
+		parts = append(parts, "MTLRenderStageMesh")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLResourceOptions uint64
 
 const (
-	MTLResourceCPUCacheModeDefaultCache MTLResourceOptions = 0
-	MTLResourceCPUCacheModeWriteCombined MTLResourceOptions = 1
-	MTLResourceStorageModeShared MTLResourceOptions = 0
-	MTLResourceStorageModeManaged MTLResourceOptions = 16
-	MTLResourceStorageModePrivate MTLResourceOptions = 32
-	MTLResourceStorageModeMemoryless MTLResourceOptions = 48
-	MTLResourceHazardTrackingModeDefault MTLResourceOptions = 0
-	MTLResourceHazardTrackingModeUntracked MTLResourceOptions = 256
-	MTLResourceHazardTrackingModeTracked MTLResourceOptions = 512
-	MTLResourceOptionCPUCacheModeDefault MTLResourceOptions = 0
+	MTLResourceCPUCacheModeDefaultCache        MTLResourceOptions = 0
+	MTLResourceCPUCacheModeWriteCombined       MTLResourceOptions = 1
+	MTLResourceStorageModeShared               MTLResourceOptions = 0
+	MTLResourceStorageModeManaged              MTLResourceOptions = 16
+	MTLResourceStorageModePrivate              MTLResourceOptions = 32
+	MTLResourceStorageModeMemoryless           MTLResourceOptions = 48
+	MTLResourceHazardTrackingModeDefault       MTLResourceOptions = 0
+	MTLResourceHazardTrackingModeUntracked     MTLResourceOptions = 256
+	MTLResourceHazardTrackingModeTracked       MTLResourceOptions = 512
+	MTLResourceOptionCPUCacheModeDefault       MTLResourceOptions = 0
 	MTLResourceOptionCPUCacheModeWriteCombined MTLResourceOptions = 1
 )
 
 func (e MTLResourceOptions) String() string {
 	var parts []string
-	if e&MTLResourceCPUCacheModeWriteCombined != 0 { parts = append(parts, "MTLResourceCPUCacheModeWriteCombined") }
-	if e&MTLResourceStorageModeManaged != 0 { parts = append(parts, "MTLResourceStorageModeManaged") }
-	if e&MTLResourceStorageModePrivate != 0 { parts = append(parts, "MTLResourceStorageModePrivate") }
-	if e&MTLResourceStorageModeMemoryless != 0 { parts = append(parts, "MTLResourceStorageModeMemoryless") }
-	if e&MTLResourceHazardTrackingModeUntracked != 0 { parts = append(parts, "MTLResourceHazardTrackingModeUntracked") }
-	if e&MTLResourceHazardTrackingModeTracked != 0 { parts = append(parts, "MTLResourceHazardTrackingModeTracked") }
-	if e&MTLResourceOptionCPUCacheModeWriteCombined != 0 { parts = append(parts, "MTLResourceOptionCPUCacheModeWriteCombined") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLResourceCPUCacheModeWriteCombined != 0 {
+		parts = append(parts, "MTLResourceCPUCacheModeWriteCombined")
+	}
+	if e&MTLResourceStorageModeManaged != 0 {
+		parts = append(parts, "MTLResourceStorageModeManaged")
+	}
+	if e&MTLResourceStorageModePrivate != 0 {
+		parts = append(parts, "MTLResourceStorageModePrivate")
+	}
+	if e&MTLResourceStorageModeMemoryless != 0 {
+		parts = append(parts, "MTLResourceStorageModeMemoryless")
+	}
+	if e&MTLResourceHazardTrackingModeUntracked != 0 {
+		parts = append(parts, "MTLResourceHazardTrackingModeUntracked")
+	}
+	if e&MTLResourceHazardTrackingModeTracked != 0 {
+		parts = append(parts, "MTLResourceHazardTrackingModeTracked")
+	}
+	if e&MTLResourceOptionCPUCacheModeWriteCombined != 0 {
+		parts = append(parts, "MTLResourceOptionCPUCacheModeWriteCombined")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLResourceUsage uint64
 
 const (
-	MTLResourceUsageRead MTLResourceUsage = 1
-	MTLResourceUsageWrite MTLResourceUsage = 2
+	MTLResourceUsageRead   MTLResourceUsage = 1
+	MTLResourceUsageWrite  MTLResourceUsage = 2
 	MTLResourceUsageSample MTLResourceUsage = 4
 )
 
 func (e MTLResourceUsage) String() string {
 	var parts []string
-	if e&MTLResourceUsageRead != 0 { parts = append(parts, "MTLResourceUsageRead") }
-	if e&MTLResourceUsageWrite != 0 { parts = append(parts, "MTLResourceUsageWrite") }
-	if e&MTLResourceUsageSample != 0 { parts = append(parts, "MTLResourceUsageSample") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLResourceUsageRead != 0 {
+		parts = append(parts, "MTLResourceUsageRead")
+	}
+	if e&MTLResourceUsageWrite != 0 {
+		parts = append(parts, "MTLResourceUsageWrite")
+	}
+	if e&MTLResourceUsageSample != 0 {
+		parts = append(parts, "MTLResourceUsageSample")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLSamplerAddressMode uint64
 
 const (
-	MTLSamplerAddressModeClampToEdge MTLSamplerAddressMode = 0
-	MTLSamplerAddressModeMirrorClampToEdge MTLSamplerAddressMode = 1
-	MTLSamplerAddressModeRepeat MTLSamplerAddressMode = 2
-	MTLSamplerAddressModeMirrorRepeat MTLSamplerAddressMode = 3
-	MTLSamplerAddressModeClampToZero MTLSamplerAddressMode = 4
+	MTLSamplerAddressModeClampToEdge        MTLSamplerAddressMode = 0
+	MTLSamplerAddressModeMirrorClampToEdge  MTLSamplerAddressMode = 1
+	MTLSamplerAddressModeRepeat             MTLSamplerAddressMode = 2
+	MTLSamplerAddressModeMirrorRepeat       MTLSamplerAddressMode = 3
+	MTLSamplerAddressModeClampToZero        MTLSamplerAddressMode = 4
 	MTLSamplerAddressModeClampToBorderColor MTLSamplerAddressMode = 5
 )
 
@@ -3296,8 +3484,8 @@ type MTLSamplerBorderColor uint64
 
 const (
 	MTLSamplerBorderColorTransparentBlack MTLSamplerBorderColor = 0
-	MTLSamplerBorderColorOpaqueBlack MTLSamplerBorderColor = 1
-	MTLSamplerBorderColorOpaqueWhite MTLSamplerBorderColor = 2
+	MTLSamplerBorderColorOpaqueBlack      MTLSamplerBorderColor = 1
+	MTLSamplerBorderColorOpaqueWhite      MTLSamplerBorderColor = 2
 )
 
 func (e MTLSamplerBorderColor) String() string {
@@ -3317,7 +3505,7 @@ type MTLSamplerMinMagFilter uint64
 
 const (
 	MTLSamplerMinMagFilterNearest MTLSamplerMinMagFilter = 0
-	MTLSamplerMinMagFilterLinear MTLSamplerMinMagFilter = 1
+	MTLSamplerMinMagFilterLinear  MTLSamplerMinMagFilter = 1
 )
 
 func (e MTLSamplerMinMagFilter) String() string {
@@ -3335,8 +3523,8 @@ type MTLSamplerMipFilter uint64
 
 const (
 	MTLSamplerMipFilterNotMipmapped MTLSamplerMipFilter = 0
-	MTLSamplerMipFilterNearest MTLSamplerMipFilter = 1
-	MTLSamplerMipFilterLinear MTLSamplerMipFilter = 2
+	MTLSamplerMipFilterNearest      MTLSamplerMipFilter = 1
+	MTLSamplerMipFilterLinear       MTLSamplerMipFilter = 2
 )
 
 func (e MTLSamplerMipFilter) String() string {
@@ -3379,8 +3567,8 @@ func (e MTLSamplerReductionMode) String() string {
 type MTLShaderValidation int64
 
 const (
-	MTLShaderValidationDefault MTLShaderValidation = 0
-	MTLShaderValidationEnabled MTLShaderValidation = 1
+	MTLShaderValidationDefault  MTLShaderValidation = 0
+	MTLShaderValidationEnabled  MTLShaderValidation = 1
 	MTLShaderValidationDisabled MTLShaderValidation = 2
 )
 
@@ -3400,8 +3588,8 @@ func (e MTLShaderValidation) String() string {
 type MTLSparsePageSize int64
 
 const (
-	MTLSparsePageSize16 MTLSparsePageSize = 101
-	MTLSparsePageSize64 MTLSparsePageSize = 102
+	MTLSparsePageSize16  MTLSparsePageSize = 101
+	MTLSparsePageSize64  MTLSparsePageSize = 102
 	MTLSparsePageSize256 MTLSparsePageSize = 103
 )
 
@@ -3421,7 +3609,7 @@ func (e MTLSparsePageSize) String() string {
 type MTLSparseTextureMappingMode uint64
 
 const (
-	MTLSparseTextureMappingModeMap MTLSparseTextureMappingMode = 0
+	MTLSparseTextureMappingModeMap   MTLSparseTextureMappingMode = 0
 	MTLSparseTextureMappingModeUnmap MTLSparseTextureMappingMode = 1
 )
 
@@ -3440,7 +3628,7 @@ type MTLSparseTextureRegionAlignmentMode uint64
 
 const (
 	MTLSparseTextureRegionAlignmentModeOutward MTLSparseTextureRegionAlignmentMode = 0
-	MTLSparseTextureRegionAlignmentModeInward MTLSparseTextureRegionAlignmentMode = 1
+	MTLSparseTextureRegionAlignmentModeInward  MTLSparseTextureRegionAlignmentMode = 1
 )
 
 func (e MTLSparseTextureRegionAlignmentMode) String() string {
@@ -3483,32 +3671,56 @@ const (
 
 func (e MTLStages) String() string {
 	var parts []string
-	if e&MTLStageVertex != 0 { parts = append(parts, "MTLStageVertex") }
-	if e&MTLStageFragment != 0 { parts = append(parts, "MTLStageFragment") }
-	if e&MTLStageTile != 0 { parts = append(parts, "MTLStageTile") }
-	if e&MTLStageObject != 0 { parts = append(parts, "MTLStageObject") }
-	if e&MTLStageMesh != 0 { parts = append(parts, "MTLStageMesh") }
-	if e&MTLStageResourceState != 0 { parts = append(parts, "MTLStageResourceState") }
-	if e&MTLStageDispatch != 0 { parts = append(parts, "MTLStageDispatch") }
-	if e&MTLStageBlit != 0 { parts = append(parts, "MTLStageBlit") }
-	if e&MTLStageAccelerationStructure != 0 { parts = append(parts, "MTLStageAccelerationStructure") }
-	if e&MTLStageMachineLearning != 0 { parts = append(parts, "MTLStageMachineLearning") }
-	if e&MTLStageAll != 0 { parts = append(parts, "MTLStageAll") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLStageVertex != 0 {
+		parts = append(parts, "MTLStageVertex")
+	}
+	if e&MTLStageFragment != 0 {
+		parts = append(parts, "MTLStageFragment")
+	}
+	if e&MTLStageTile != 0 {
+		parts = append(parts, "MTLStageTile")
+	}
+	if e&MTLStageObject != 0 {
+		parts = append(parts, "MTLStageObject")
+	}
+	if e&MTLStageMesh != 0 {
+		parts = append(parts, "MTLStageMesh")
+	}
+	if e&MTLStageResourceState != 0 {
+		parts = append(parts, "MTLStageResourceState")
+	}
+	if e&MTLStageDispatch != 0 {
+		parts = append(parts, "MTLStageDispatch")
+	}
+	if e&MTLStageBlit != 0 {
+		parts = append(parts, "MTLStageBlit")
+	}
+	if e&MTLStageAccelerationStructure != 0 {
+		parts = append(parts, "MTLStageAccelerationStructure")
+	}
+	if e&MTLStageMachineLearning != 0 {
+		parts = append(parts, "MTLStageMachineLearning")
+	}
+	if e&MTLStageAll != 0 {
+		parts = append(parts, "MTLStageAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLStencilOperation uint64
 
 const (
-	MTLStencilOperationKeep MTLStencilOperation = 0
-	MTLStencilOperationZero MTLStencilOperation = 1
-	MTLStencilOperationReplace MTLStencilOperation = 2
+	MTLStencilOperationKeep           MTLStencilOperation = 0
+	MTLStencilOperationZero           MTLStencilOperation = 1
+	MTLStencilOperationReplace        MTLStencilOperation = 2
 	MTLStencilOperationIncrementClamp MTLStencilOperation = 3
 	MTLStencilOperationDecrementClamp MTLStencilOperation = 4
-	MTLStencilOperationInvert MTLStencilOperation = 5
-	MTLStencilOperationIncrementWrap MTLStencilOperation = 6
-	MTLStencilOperationDecrementWrap MTLStencilOperation = 7
+	MTLStencilOperationInvert         MTLStencilOperation = 5
+	MTLStencilOperationIncrementWrap  MTLStencilOperation = 6
+	MTLStencilOperationDecrementWrap  MTLStencilOperation = 7
 )
 
 func (e MTLStencilOperation) String() string {
@@ -3537,13 +3749,13 @@ func (e MTLStencilOperation) String() string {
 type MTLStepFunction uint64
 
 const (
-	MTLStepFunctionConstant MTLStepFunction = 0
-	MTLStepFunctionPerVertex MTLStepFunction = 1
-	MTLStepFunctionPerInstance MTLStepFunction = 2
-	MTLStepFunctionPerPatch MTLStepFunction = 3
-	MTLStepFunctionPerPatchControlPoint MTLStepFunction = 4
-	MTLStepFunctionThreadPositionInGridX MTLStepFunction = 5
-	MTLStepFunctionThreadPositionInGridY MTLStepFunction = 6
+	MTLStepFunctionConstant                     MTLStepFunction = 0
+	MTLStepFunctionPerVertex                    MTLStepFunction = 1
+	MTLStepFunctionPerInstance                  MTLStepFunction = 2
+	MTLStepFunctionPerPatch                     MTLStepFunction = 3
+	MTLStepFunctionPerPatchControlPoint         MTLStepFunction = 4
+	MTLStepFunctionThreadPositionInGridX        MTLStepFunction = 5
+	MTLStepFunctionThreadPositionInGridY        MTLStepFunction = 6
 	MTLStepFunctionThreadPositionInGridXIndexed MTLStepFunction = 7
 	MTLStepFunctionThreadPositionInGridYIndexed MTLStepFunction = 8
 )
@@ -3585,18 +3797,24 @@ const (
 
 func (e MTLStitchedLibraryOptions) String() string {
 	var parts []string
-	if e&MTLStitchedLibraryOptionFailOnBinaryArchiveMiss != 0 { parts = append(parts, "MTLStitchedLibraryOptionFailOnBinaryArchiveMiss") }
-	if e&MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript != 0 { parts = append(parts, "MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLStitchedLibraryOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "MTLStitchedLibraryOptionFailOnBinaryArchiveMiss")
+	}
+	if e&MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript != 0 {
+		parts = append(parts, "MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLStorageMode uint64
 
 const (
-	MTLStorageModeShared MTLStorageMode = 0
-	MTLStorageModeManaged MTLStorageMode = 1
-	MTLStorageModePrivate MTLStorageMode = 2
+	MTLStorageModeShared     MTLStorageMode = 0
+	MTLStorageModeManaged    MTLStorageMode = 1
+	MTLStorageModePrivate    MTLStorageMode = 2
 	MTLStorageModeMemoryless MTLStorageMode = 3
 )
 
@@ -3618,12 +3836,12 @@ func (e MTLStorageMode) String() string {
 type MTLStoreAction uint64
 
 const (
-	MTLStoreActionDontCare MTLStoreAction = 0
-	MTLStoreActionStore MTLStoreAction = 1
-	MTLStoreActionMultisampleResolve MTLStoreAction = 2
+	MTLStoreActionDontCare                   MTLStoreAction = 0
+	MTLStoreActionStore                      MTLStoreAction = 1
+	MTLStoreActionMultisampleResolve         MTLStoreAction = 2
 	MTLStoreActionStoreAndMultisampleResolve MTLStoreAction = 3
-	MTLStoreActionUnknown MTLStoreAction = 4
-	MTLStoreActionCustomSampleDepthStore MTLStoreAction = 5
+	MTLStoreActionUnknown                    MTLStoreAction = 4
+	MTLStoreActionCustomSampleDepthStore     MTLStoreAction = 5
 )
 
 func (e MTLStoreAction) String() string {
@@ -3648,32 +3866,36 @@ func (e MTLStoreAction) String() string {
 type MTLStoreActionOptions uint64
 
 const (
-	MTLStoreActionOptionNone MTLStoreActionOptions = 0
+	MTLStoreActionOptionNone                  MTLStoreActionOptions = 0
 	MTLStoreActionOptionCustomSamplePositions MTLStoreActionOptions = 1
 )
 
 func (e MTLStoreActionOptions) String() string {
 	var parts []string
-	if e&MTLStoreActionOptionCustomSamplePositions != 0 { parts = append(parts, "MTLStoreActionOptionCustomSamplePositions") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLStoreActionOptionCustomSamplePositions != 0 {
+		parts = append(parts, "MTLStoreActionOptionCustomSamplePositions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLTensorDataType int64
 
 const (
-	MTLTensorDataTypeNone MTLTensorDataType = 0
-	MTLTensorDataTypeFloat32 MTLTensorDataType = 3
-	MTLTensorDataTypeFloat16 MTLTensorDataType = 16
+	MTLTensorDataTypeNone     MTLTensorDataType = 0
+	MTLTensorDataTypeFloat32  MTLTensorDataType = 3
+	MTLTensorDataTypeFloat16  MTLTensorDataType = 16
 	MTLTensorDataTypeBFloat16 MTLTensorDataType = 121
-	MTLTensorDataTypeInt8 MTLTensorDataType = 45
-	MTLTensorDataTypeUInt8 MTLTensorDataType = 49
-	MTLTensorDataTypeInt16 MTLTensorDataType = 37
-	MTLTensorDataTypeUInt16 MTLTensorDataType = 41
-	MTLTensorDataTypeInt32 MTLTensorDataType = 29
-	MTLTensorDataTypeUInt32 MTLTensorDataType = 33
-	MTLTensorDataTypeInt4 MTLTensorDataType = 143
-	MTLTensorDataTypeUInt4 MTLTensorDataType = 144
+	MTLTensorDataTypeInt8     MTLTensorDataType = 45
+	MTLTensorDataTypeUInt8    MTLTensorDataType = 49
+	MTLTensorDataTypeInt16    MTLTensorDataType = 37
+	MTLTensorDataTypeUInt16   MTLTensorDataType = 41
+	MTLTensorDataTypeInt32    MTLTensorDataType = 29
+	MTLTensorDataTypeUInt32   MTLTensorDataType = 33
+	MTLTensorDataTypeInt4     MTLTensorDataType = 143
+	MTLTensorDataTypeUInt4    MTLTensorDataType = 144
 )
 
 func (e MTLTensorDataType) String() string {
@@ -3710,8 +3932,8 @@ func (e MTLTensorDataType) String() string {
 type MTLTensorError int64
 
 const (
-	MTLTensorErrorNone MTLTensorError = 0
-	MTLTensorErrorInternalError MTLTensorError = 1
+	MTLTensorErrorNone              MTLTensorError = 0
+	MTLTensorErrorInternalError     MTLTensorError = 1
 	MTLTensorErrorInvalidDescriptor MTLTensorError = 2
 )
 
@@ -3741,17 +3963,25 @@ const (
 
 func (e MTLTensorUsage) String() string {
 	var parts []string
-	if e&MTLTensorUsageCompute != 0 { parts = append(parts, "MTLTensorUsageCompute") }
-	if e&MTLTensorUsageRender != 0 { parts = append(parts, "MTLTensorUsageRender") }
-	if e&MTLTensorUsageMachineLearning != 0 { parts = append(parts, "MTLTensorUsageMachineLearning") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLTensorUsageCompute != 0 {
+		parts = append(parts, "MTLTensorUsageCompute")
+	}
+	if e&MTLTensorUsageRender != 0 {
+		parts = append(parts, "MTLTensorUsageRender")
+	}
+	if e&MTLTensorUsageMachineLearning != 0 {
+		parts = append(parts, "MTLTensorUsageMachineLearning")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MTLTessellationControlPointIndexType uint64
 
 const (
-	MTLTessellationControlPointIndexTypeNone MTLTessellationControlPointIndexType = 0
+	MTLTessellationControlPointIndexTypeNone   MTLTessellationControlPointIndexType = 0
 	MTLTessellationControlPointIndexTypeUInt16 MTLTessellationControlPointIndexType = 1
 	MTLTessellationControlPointIndexTypeUInt32 MTLTessellationControlPointIndexType = 2
 )
@@ -3787,9 +4017,9 @@ func (e MTLTessellationFactorFormat) String() string {
 type MTLTessellationFactorStepFunction uint64
 
 const (
-	MTLTessellationFactorStepFunctionConstant MTLTessellationFactorStepFunction = 0
-	MTLTessellationFactorStepFunctionPerPatch MTLTessellationFactorStepFunction = 1
-	MTLTessellationFactorStepFunctionPerInstance MTLTessellationFactorStepFunction = 2
+	MTLTessellationFactorStepFunctionConstant               MTLTessellationFactorStepFunction = 0
+	MTLTessellationFactorStepFunctionPerPatch               MTLTessellationFactorStepFunction = 1
+	MTLTessellationFactorStepFunctionPerInstance            MTLTessellationFactorStepFunction = 2
 	MTLTessellationFactorStepFunctionPerPatchAndPerInstance MTLTessellationFactorStepFunction = 3
 )
 
@@ -3811,9 +4041,9 @@ func (e MTLTessellationFactorStepFunction) String() string {
 type MTLTessellationPartitionMode uint64
 
 const (
-	MTLTessellationPartitionModePow2 MTLTessellationPartitionMode = 0
-	MTLTessellationPartitionModeInteger MTLTessellationPartitionMode = 1
-	MTLTessellationPartitionModeFractionalOdd MTLTessellationPartitionMode = 2
+	MTLTessellationPartitionModePow2           MTLTessellationPartitionMode = 0
+	MTLTessellationPartitionModeInteger        MTLTessellationPartitionMode = 1
+	MTLTessellationPartitionModeFractionalOdd  MTLTessellationPartitionMode = 2
 	MTLTessellationPartitionModeFractionalEven MTLTessellationPartitionMode = 3
 )
 
@@ -3836,7 +4066,7 @@ type MTLTextureCompressionType int64
 
 const (
 	MTLTextureCompressionTypeLossless MTLTextureCompressionType = 0
-	MTLTextureCompressionTypeLossy MTLTextureCompressionType = 1
+	MTLTextureCompressionTypeLossy    MTLTextureCompressionType = 1
 )
 
 func (e MTLTextureCompressionType) String() string {
@@ -3877,11 +4107,11 @@ func (e MTLTextureSparseTier) String() string {
 type MTLTextureSwizzle int64
 
 const (
-	MTLTextureSwizzleZero MTLTextureSwizzle = 0
-	MTLTextureSwizzleOne MTLTextureSwizzle = 1
-	MTLTextureSwizzleRed MTLTextureSwizzle = 2
+	MTLTextureSwizzleZero  MTLTextureSwizzle = 0
+	MTLTextureSwizzleOne   MTLTextureSwizzle = 1
+	MTLTextureSwizzleRed   MTLTextureSwizzle = 2
 	MTLTextureSwizzleGreen MTLTextureSwizzle = 3
-	MTLTextureSwizzleBlue MTLTextureSwizzle = 4
+	MTLTextureSwizzleBlue  MTLTextureSwizzle = 4
 	MTLTextureSwizzleAlpha MTLTextureSwizzle = 5
 )
 
@@ -3907,16 +4137,16 @@ func (e MTLTextureSwizzle) String() string {
 type MTLTextureType uint64
 
 const (
-	MTLTextureType1D MTLTextureType = 0
-	MTLTextureType1DArray MTLTextureType = 1
-	MTLTextureType2D MTLTextureType = 2
-	MTLTextureType2DArray MTLTextureType = 3
-	MTLTextureType2DMultisample MTLTextureType = 4
-	MTLTextureTypeCube MTLTextureType = 5
-	MTLTextureTypeCubeArray MTLTextureType = 6
-	MTLTextureType3D MTLTextureType = 7
+	MTLTextureType1D                 MTLTextureType = 0
+	MTLTextureType1DArray            MTLTextureType = 1
+	MTLTextureType2D                 MTLTextureType = 2
+	MTLTextureType2DArray            MTLTextureType = 3
+	MTLTextureType2DMultisample      MTLTextureType = 4
+	MTLTextureTypeCube               MTLTextureType = 5
+	MTLTextureTypeCubeArray          MTLTextureType = 6
+	MTLTextureType3D                 MTLTextureType = 7
 	MTLTextureType2DMultisampleArray MTLTextureType = 8
-	MTLTextureTypeTextureBuffer MTLTextureType = 9
+	MTLTextureTypeTextureBuffer      MTLTextureType = 9
 )
 
 func (e MTLTextureType) String() string {
@@ -3949,22 +4179,34 @@ func (e MTLTextureType) String() string {
 type MTLTextureUsage uint64
 
 const (
-	MTLTextureUsageUnknown MTLTextureUsage = 0
-	MTLTextureUsageShaderRead MTLTextureUsage = 1
-	MTLTextureUsageShaderWrite MTLTextureUsage = 2
-	MTLTextureUsageRenderTarget MTLTextureUsage = 4
+	MTLTextureUsageUnknown         MTLTextureUsage = 0
+	MTLTextureUsageShaderRead      MTLTextureUsage = 1
+	MTLTextureUsageShaderWrite     MTLTextureUsage = 2
+	MTLTextureUsageRenderTarget    MTLTextureUsage = 4
 	MTLTextureUsagePixelFormatView MTLTextureUsage = 16
-	MTLTextureUsageShaderAtomic MTLTextureUsage = 32
+	MTLTextureUsageShaderAtomic    MTLTextureUsage = 32
 )
 
 func (e MTLTextureUsage) String() string {
 	var parts []string
-	if e&MTLTextureUsageShaderRead != 0 { parts = append(parts, "MTLTextureUsageShaderRead") }
-	if e&MTLTextureUsageShaderWrite != 0 { parts = append(parts, "MTLTextureUsageShaderWrite") }
-	if e&MTLTextureUsageRenderTarget != 0 { parts = append(parts, "MTLTextureUsageRenderTarget") }
-	if e&MTLTextureUsagePixelFormatView != 0 { parts = append(parts, "MTLTextureUsagePixelFormatView") }
-	if e&MTLTextureUsageShaderAtomic != 0 { parts = append(parts, "MTLTextureUsageShaderAtomic") }
-	if len(parts) == 0 { return "0" }
+	if e&MTLTextureUsageShaderRead != 0 {
+		parts = append(parts, "MTLTextureUsageShaderRead")
+	}
+	if e&MTLTextureUsageShaderWrite != 0 {
+		parts = append(parts, "MTLTextureUsageShaderWrite")
+	}
+	if e&MTLTextureUsageRenderTarget != 0 {
+		parts = append(parts, "MTLTextureUsageRenderTarget")
+	}
+	if e&MTLTextureUsagePixelFormatView != 0 {
+		parts = append(parts, "MTLTextureUsagePixelFormatView")
+	}
+	if e&MTLTextureUsageShaderAtomic != 0 {
+		parts = append(parts, "MTLTextureUsageShaderAtomic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -3991,7 +4233,7 @@ func (e MTLTransformType) String() string {
 type MTLTriangleFillMode uint64
 
 const (
-	MTLTriangleFillModeFill MTLTriangleFillMode = 0
+	MTLTriangleFillModeFill  MTLTriangleFillMode = 0
 	MTLTriangleFillModeLines MTLTriangleFillMode = 1
 )
 
@@ -4009,60 +4251,60 @@ func (e MTLTriangleFillMode) String() string {
 type MTLVertexFormat uint64
 
 const (
-	MTLVertexFormatInvalid MTLVertexFormat = 0
-	MTLVertexFormatUChar2 MTLVertexFormat = 1
-	MTLVertexFormatUChar3 MTLVertexFormat = 2
-	MTLVertexFormatUChar4 MTLVertexFormat = 3
-	MTLVertexFormatChar2 MTLVertexFormat = 4
-	MTLVertexFormatChar3 MTLVertexFormat = 5
-	MTLVertexFormatChar4 MTLVertexFormat = 6
-	MTLVertexFormatUChar2Normalized MTLVertexFormat = 7
-	MTLVertexFormatUChar3Normalized MTLVertexFormat = 8
-	MTLVertexFormatUChar4Normalized MTLVertexFormat = 9
-	MTLVertexFormatChar2Normalized MTLVertexFormat = 10
-	MTLVertexFormatChar3Normalized MTLVertexFormat = 11
-	MTLVertexFormatChar4Normalized MTLVertexFormat = 12
-	MTLVertexFormatUShort2 MTLVertexFormat = 13
-	MTLVertexFormatUShort3 MTLVertexFormat = 14
-	MTLVertexFormatUShort4 MTLVertexFormat = 15
-	MTLVertexFormatShort2 MTLVertexFormat = 16
-	MTLVertexFormatShort3 MTLVertexFormat = 17
-	MTLVertexFormatShort4 MTLVertexFormat = 18
-	MTLVertexFormatUShort2Normalized MTLVertexFormat = 19
-	MTLVertexFormatUShort3Normalized MTLVertexFormat = 20
-	MTLVertexFormatUShort4Normalized MTLVertexFormat = 21
-	MTLVertexFormatShort2Normalized MTLVertexFormat = 22
-	MTLVertexFormatShort3Normalized MTLVertexFormat = 23
-	MTLVertexFormatShort4Normalized MTLVertexFormat = 24
-	MTLVertexFormatHalf2 MTLVertexFormat = 25
-	MTLVertexFormatHalf3 MTLVertexFormat = 26
-	MTLVertexFormatHalf4 MTLVertexFormat = 27
-	MTLVertexFormatFloat MTLVertexFormat = 28
-	MTLVertexFormatFloat2 MTLVertexFormat = 29
-	MTLVertexFormatFloat3 MTLVertexFormat = 30
-	MTLVertexFormatFloat4 MTLVertexFormat = 31
-	MTLVertexFormatInt MTLVertexFormat = 32
-	MTLVertexFormatInt2 MTLVertexFormat = 33
-	MTLVertexFormatInt3 MTLVertexFormat = 34
-	MTLVertexFormatInt4 MTLVertexFormat = 35
-	MTLVertexFormatUInt MTLVertexFormat = 36
-	MTLVertexFormatUInt2 MTLVertexFormat = 37
-	MTLVertexFormatUInt3 MTLVertexFormat = 38
-	MTLVertexFormatUInt4 MTLVertexFormat = 39
-	MTLVertexFormatInt1010102Normalized MTLVertexFormat = 40
+	MTLVertexFormatInvalid               MTLVertexFormat = 0
+	MTLVertexFormatUChar2                MTLVertexFormat = 1
+	MTLVertexFormatUChar3                MTLVertexFormat = 2
+	MTLVertexFormatUChar4                MTLVertexFormat = 3
+	MTLVertexFormatChar2                 MTLVertexFormat = 4
+	MTLVertexFormatChar3                 MTLVertexFormat = 5
+	MTLVertexFormatChar4                 MTLVertexFormat = 6
+	MTLVertexFormatUChar2Normalized      MTLVertexFormat = 7
+	MTLVertexFormatUChar3Normalized      MTLVertexFormat = 8
+	MTLVertexFormatUChar4Normalized      MTLVertexFormat = 9
+	MTLVertexFormatChar2Normalized       MTLVertexFormat = 10
+	MTLVertexFormatChar3Normalized       MTLVertexFormat = 11
+	MTLVertexFormatChar4Normalized       MTLVertexFormat = 12
+	MTLVertexFormatUShort2               MTLVertexFormat = 13
+	MTLVertexFormatUShort3               MTLVertexFormat = 14
+	MTLVertexFormatUShort4               MTLVertexFormat = 15
+	MTLVertexFormatShort2                MTLVertexFormat = 16
+	MTLVertexFormatShort3                MTLVertexFormat = 17
+	MTLVertexFormatShort4                MTLVertexFormat = 18
+	MTLVertexFormatUShort2Normalized     MTLVertexFormat = 19
+	MTLVertexFormatUShort3Normalized     MTLVertexFormat = 20
+	MTLVertexFormatUShort4Normalized     MTLVertexFormat = 21
+	MTLVertexFormatShort2Normalized      MTLVertexFormat = 22
+	MTLVertexFormatShort3Normalized      MTLVertexFormat = 23
+	MTLVertexFormatShort4Normalized      MTLVertexFormat = 24
+	MTLVertexFormatHalf2                 MTLVertexFormat = 25
+	MTLVertexFormatHalf3                 MTLVertexFormat = 26
+	MTLVertexFormatHalf4                 MTLVertexFormat = 27
+	MTLVertexFormatFloat                 MTLVertexFormat = 28
+	MTLVertexFormatFloat2                MTLVertexFormat = 29
+	MTLVertexFormatFloat3                MTLVertexFormat = 30
+	MTLVertexFormatFloat4                MTLVertexFormat = 31
+	MTLVertexFormatInt                   MTLVertexFormat = 32
+	MTLVertexFormatInt2                  MTLVertexFormat = 33
+	MTLVertexFormatInt3                  MTLVertexFormat = 34
+	MTLVertexFormatInt4                  MTLVertexFormat = 35
+	MTLVertexFormatUInt                  MTLVertexFormat = 36
+	MTLVertexFormatUInt2                 MTLVertexFormat = 37
+	MTLVertexFormatUInt3                 MTLVertexFormat = 38
+	MTLVertexFormatUInt4                 MTLVertexFormat = 39
+	MTLVertexFormatInt1010102Normalized  MTLVertexFormat = 40
 	MTLVertexFormatUInt1010102Normalized MTLVertexFormat = 41
 	MTLVertexFormatUChar4Normalized_BGRA MTLVertexFormat = 42
-	MTLVertexFormatUChar MTLVertexFormat = 45
-	MTLVertexFormatChar MTLVertexFormat = 46
-	MTLVertexFormatUCharNormalized MTLVertexFormat = 47
-	MTLVertexFormatCharNormalized MTLVertexFormat = 48
-	MTLVertexFormatUShort MTLVertexFormat = 49
-	MTLVertexFormatShort MTLVertexFormat = 50
-	MTLVertexFormatUShortNormalized MTLVertexFormat = 51
-	MTLVertexFormatShortNormalized MTLVertexFormat = 52
-	MTLVertexFormatHalf MTLVertexFormat = 53
-	MTLVertexFormatFloatRG11B10 MTLVertexFormat = 54
-	MTLVertexFormatFloatRGB9E5 MTLVertexFormat = 55
+	MTLVertexFormatUChar                 MTLVertexFormat = 45
+	MTLVertexFormatChar                  MTLVertexFormat = 46
+	MTLVertexFormatUCharNormalized       MTLVertexFormat = 47
+	MTLVertexFormatCharNormalized        MTLVertexFormat = 48
+	MTLVertexFormatUShort                MTLVertexFormat = 49
+	MTLVertexFormatShort                 MTLVertexFormat = 50
+	MTLVertexFormatUShortNormalized      MTLVertexFormat = 51
+	MTLVertexFormatShortNormalized       MTLVertexFormat = 52
+	MTLVertexFormatHalf                  MTLVertexFormat = 53
+	MTLVertexFormatFloatRG11B10          MTLVertexFormat = 54
+	MTLVertexFormatFloatRGB9E5           MTLVertexFormat = 55
 )
 
 func (e MTLVertexFormat) String() string {
@@ -4183,10 +4425,10 @@ func (e MTLVertexFormat) String() string {
 type MTLVertexStepFunction uint64
 
 const (
-	MTLVertexStepFunctionConstant MTLVertexStepFunction = 0
-	MTLVertexStepFunctionPerVertex MTLVertexStepFunction = 1
-	MTLVertexStepFunctionPerInstance MTLVertexStepFunction = 2
-	MTLVertexStepFunctionPerPatch MTLVertexStepFunction = 3
+	MTLVertexStepFunctionConstant             MTLVertexStepFunction = 0
+	MTLVertexStepFunctionPerVertex            MTLVertexStepFunction = 1
+	MTLVertexStepFunctionPerInstance          MTLVertexStepFunction = 2
+	MTLVertexStepFunctionPerPatch             MTLVertexStepFunction = 3
 	MTLVertexStepFunctionPerPatchControlPoint MTLVertexStepFunction = 4
 )
 
@@ -4211,7 +4453,7 @@ type MTLVisibilityResultMode uint64
 
 const (
 	MTLVisibilityResultModeDisabled MTLVisibilityResultMode = 0
-	MTLVisibilityResultModeBoolean MTLVisibilityResultMode = 1
+	MTLVisibilityResultModeBoolean  MTLVisibilityResultMode = 1
 	MTLVisibilityResultModeCounting MTLVisibilityResultMode = 2
 )
 
@@ -4251,7 +4493,7 @@ func (e MTLVisibilityResultType) String() string {
 type MTLWinding uint64
 
 const (
-	MTLWindingClockwise MTLWinding = 0
+	MTLWindingClockwise        MTLWinding = 0
 	MTLWindingCounterClockwise MTLWinding = 1
 )
 
@@ -4270,8 +4512,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -4290,13 +4532,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -4323,24 +4565,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -4381,9 +4623,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -4403,12 +4645,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -4435,14 +4677,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -4471,9 +4713,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -4492,36 +4734,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -4551,8 +4807,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -4572,62 +4828,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -4753,15 +5009,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -4799,7 +5055,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4807,7 +5065,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -4825,8 +5083,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -4845,26 +5103,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4886,27 +5160,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -4930,11 +5204,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -4959,22 +5233,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -5025,34 +5299,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

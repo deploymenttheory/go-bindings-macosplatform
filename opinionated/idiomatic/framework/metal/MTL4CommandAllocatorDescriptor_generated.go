@@ -66,4 +66,3 @@ type MTL4CommandAllocatorDescriptorable interface {
 }
 
 var _ MTL4CommandAllocatorDescriptorable = (*MTL4CommandAllocatorDescriptor)(nil)
-

@@ -11,218 +11,218 @@ import (
 )
 
 var (
-// Deprecated: No longer supported
-	_fnBatteryCount func() int16
-	_fnCSGetDefaultIdentityAuthority func() unsafe.Pointer
-	_fnCSGetLocalIdentityAuthority func() unsafe.Pointer
-	_fnCSGetManagedIdentityAuthority func() unsafe.Pointer
-	_fnCSIdentityAddAlias func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentityAddMember func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentityAuthenticateUsingPassword func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCSIdentityAuthorityCopyLocalizedName func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityAuthorityGetTypeID func() uint
-	_fnCSIdentityCommit func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCSIdentityCommitAsynchronously func(unsafe.Pointer, *CSIdentityClientContext, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCSIdentityCreate func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityCreateCopy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityCreateGroupMembershipQuery func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityCreatePersistentReference func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityDelete func(unsafe.Pointer)
-	_fnCSIdentityGetAliases func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetAuthority func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetCertificate func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetClass func(unsafe.Pointer) int
-	_fnCSIdentityGetEmailAddress func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetFullName func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetImageData func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetImageDataType func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetImageURL func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetPosixID func(unsafe.Pointer) uint
-	_fnCSIdentityGetPosixName func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityGetTypeID func() uint
-	_fnCSIdentityGetUUID func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityIsCommitting func(unsafe.Pointer) uint8
-	_fnCSIdentityIsEnabled func(unsafe.Pointer) uint8
-	_fnCSIdentityIsHidden func(unsafe.Pointer) uint8
-	_fnCSIdentityIsMemberOfGroup func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCSIdentityQueryCopyResults func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryCreate func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryCreateForCurrentUser func(unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryCreateForName func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) unsafe.Pointer
+	// Deprecated: No longer supported
+	_fnBatteryCount                                func() int16
+	_fnCSGetDefaultIdentityAuthority               func() unsafe.Pointer
+	_fnCSGetLocalIdentityAuthority                 func() unsafe.Pointer
+	_fnCSGetManagedIdentityAuthority               func() unsafe.Pointer
+	_fnCSIdentityAddAlias                          func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentityAddMember                         func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentityAuthenticateUsingPassword         func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCSIdentityAuthorityCopyLocalizedName        func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityAuthorityGetTypeID                func() uint
+	_fnCSIdentityCommit                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCSIdentityCommitAsynchronously              func(unsafe.Pointer, *CSIdentityClientContext, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCSIdentityCreate                            func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityCreateCopy                        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityCreateGroupMembershipQuery        func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityCreatePersistentReference         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityDelete                            func(unsafe.Pointer)
+	_fnCSIdentityGetAliases                        func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetAuthority                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetCertificate                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetClass                          func(unsafe.Pointer) int
+	_fnCSIdentityGetEmailAddress                   func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetFullName                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetImageData                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetImageDataType                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetImageURL                       func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetPosixID                        func(unsafe.Pointer) uint
+	_fnCSIdentityGetPosixName                      func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityGetTypeID                         func() uint
+	_fnCSIdentityGetUUID                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityIsCommitting                      func(unsafe.Pointer) uint8
+	_fnCSIdentityIsEnabled                         func(unsafe.Pointer) uint8
+	_fnCSIdentityIsHidden                          func(unsafe.Pointer) uint8
+	_fnCSIdentityIsMemberOfGroup                   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCSIdentityQueryCopyResults                  func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityQueryCreate                       func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityQueryCreateForCurrentUser         func(unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityQueryCreateForName                func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) unsafe.Pointer
 	_fnCSIdentityQueryCreateForPersistentReference func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryCreateForPosixID func(unsafe.Pointer, uint, int, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryCreateForUUID func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnCSIdentityQueryExecute func(unsafe.Pointer, uint, unsafe.Pointer) uint8
-	_fnCSIdentityQueryExecuteAsynchronously func(unsafe.Pointer, uint, *CSIdentityQueryClientContext, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnCSIdentityQueryGetTypeID func() uint
-	_fnCSIdentityQueryStop func(unsafe.Pointer)
-	_fnCSIdentityRemoveAlias func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentityRemoveClient func(unsafe.Pointer)
-	_fnCSIdentityRemoveMember func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetCertificate func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetEmailAddress func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetFullName func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetImageData func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetImageURL func(unsafe.Pointer, unsafe.Pointer)
-	_fnCSIdentitySetIsEnabled func(unsafe.Pointer, uint8)
-	_fnCSIdentitySetPassword func(unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	_fnCSIdentityQueryCreateForPosixID             func(unsafe.Pointer, uint, int, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityQueryCreateForUUID                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCSIdentityQueryExecute                      func(unsafe.Pointer, uint, unsafe.Pointer) uint8
+	_fnCSIdentityQueryExecuteAsynchronously        func(unsafe.Pointer, uint, *CSIdentityQueryClientContext, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnCSIdentityQueryGetTypeID                    func() uint
+	_fnCSIdentityQueryStop                         func(unsafe.Pointer)
+	_fnCSIdentityRemoveAlias                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentityRemoveClient                      func(unsafe.Pointer)
+	_fnCSIdentityRemoveMember                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetCertificate                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetEmailAddress                   func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetFullName                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetImageData                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetImageURL                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnCSIdentitySetIsEnabled                      func(unsafe.Pointer, uint8)
+	_fnCSIdentitySetPassword                       func(unsafe.Pointer, unsafe.Pointer)
+	// Deprecated: No longer supported
 	_fnCurrentProcessorSpeed func() int16
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDisposeKCCallbackUPP func(unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnDisposeSleepQUPP func(unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnGetCPUSpeed func() int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnInvokeKCCallbackUPP func(uint16, *KCCallbackInfo, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnInvokeSleepQUPP func(int, *SleepQRec, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCAddCallback func(unsafe.Pointer, uint16, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCCopyItem func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCCountKeychains func() uint16
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCDeleteItem func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindAppleSharePassword func(*[16]uint8, *uint8, *uint8, *uint8, *uint8, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindFirstItem func(unsafe.Pointer, *security.SecKeychainAttributeList, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindGenericPassword func(*uint8, *uint8, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindInternetPassword func(*uint8, *uint8, *uint8, uint16, uint, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindInternetPasswordWithPath func(*uint8, *uint8, *uint8, *uint8, uint16, uint, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCFindNextItem func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetAttribute func(unsafe.Pointer, *security.SecKeychainAttribute, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetData func(unsafe.Pointer, uint, unsafe.Pointer, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetDefaultKeychain func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetIndKeychain func(uint16, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetKeychain func(unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetKeychainManagerVersion func(*uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetKeychainName func(unsafe.Pointer, *uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCGetStatus func(unsafe.Pointer, *uint) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCIsInteractionAllowed func() uint8
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCLock func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCMakeAliasFromKCRef func(unsafe.Pointer, ***carboncore.AliasRecord) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCMakeKCRefFromAlias func(**carboncore.AliasRecord, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCMakeKCRefFromFSRef func(*carboncore.FSRef, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCNewItem func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCReleaseItem func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCReleaseKeychain func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCReleaseSearch func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCRemoveCallback func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCSetAttribute func(unsafe.Pointer, *security.SecKeychainAttribute) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCSetData func(unsafe.Pointer, uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCSetDefaultKeychain func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCSetInteractionAllowed func(uint8) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnKCUpdateItem func(unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMaximumProcessorSpeed func() int16
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnMinimumProcessorSpeed func() int16
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnNewKCCallbackUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnNewSleepQUPP func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSleepQInstall func(*SleepQRec)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnSleepQRemove func(*SleepQRec)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnUpdateSystemActivity func(uint8) int16
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSGetCFTypeIDFromWSTypeID func(WSTypeID) uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSGetWSTypeIDFromCFType func(unsafe.Pointer) WSTypeID
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationAddDeserializationOverride func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *WSClientContext)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationAddSerializationOverride func(unsafe.Pointer, uint, unsafe.Pointer, *WSClientContext)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationCopyParameters func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationCopySerialization func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationCreateFromSerialization func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationGetTypeID func() uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationInvoke func(unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationScheduleWithRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationSetCallBack func(unsafe.Pointer, unsafe.Pointer, *WSClientContext)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationSetParameters func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodInvocationUnscheduleFromRunLoop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSMethodResultIsFault func(unsafe.Pointer) uint8
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyFaultDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyReplyDictionary func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyReplyDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyRequestDictionary func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCopyRequestDocument func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerGetTypeID func() uint
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerSetDeserializationOverride func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *WSClientContext)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_fnWSProtocolHandlerSetSerializationOverride func(unsafe.Pointer, uint, unsafe.Pointer, *WSClientContext)
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_kcfindapplesharepassword func(*[16]uint8, string, string, string, string, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_kcfindgenericpassword func(string, string, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_kcfindinternetpassword func(string, string, string, uint16, uint, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_kcfindinternetpasswordwithpath func(string, string, string, string, uint16, uint, uint, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-// Deprecated: No longer supported
+	// Deprecated: No longer supported
 	_kcgetkeychainname func(unsafe.Pointer, string) int
 )
 
@@ -842,4 +842,3 @@ func Kcfindinternetpasswordwithpath(serverName string, securityDomain string, ac
 func Kcgetkeychainname(keychain unsafe.Pointer, keychainName string) int {
 	return _kcgetkeychainname(keychain, keychainName)
 }
-

@@ -80,4 +80,3 @@ type ScriptChangesable interface {
 }
 
 var _ ScriptChangesable = (*ScriptChanges)(nil)
-

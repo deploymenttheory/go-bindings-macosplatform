@@ -15,11 +15,11 @@ type NSGlassEffectContainerView struct {
 }
 
 var (
-	_clsNSGlassEffectContainerView = _objcClass("NSGlassEffectContainerView")
-	_nSGlassEffectContainerViewSelContentView = objc.RegisterName("contentView")
+	_clsNSGlassEffectContainerView               = _objcClass("NSGlassEffectContainerView")
+	_nSGlassEffectContainerViewSelContentView    = objc.RegisterName("contentView")
 	_nSGlassEffectContainerViewSelSetContentView = objc.RegisterName("setContentView:")
-	_nSGlassEffectContainerViewSelSpacing = objc.RegisterName("spacing")
-	_nSGlassEffectContainerViewSelSetSpacing = objc.RegisterName("setSpacing:")
+	_nSGlassEffectContainerViewSelSpacing        = objc.RegisterName("spacing")
+	_nSGlassEffectContainerViewSelSetSpacing     = objc.RegisterName("setSpacing:")
 )
 
 func NSGlassEffectContainerViewFromID(id objc.ID) *NSGlassEffectContainerView {
@@ -32,14 +32,16 @@ func NSGlassEffectContainerViewFromID(id objc.ID) *NSGlassEffectContainerView {
 	return o
 }
 
-// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in ``spacing``. 3. Processes similar glass effect views as a batch to improve performance.
+// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
 func (o *NSGlassEffectContainerView) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGlassEffectContainerViewSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
-// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in ``spacing``. 3. Processes similar glass effect views as a batch to improve performance.
+// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
 func (o *NSGlassEffectContainerView) SetContentView(contentView *NSView) {
 	o.Ptr().Send(_nSGlassEffectContainerViewSelSetContentView, contentView.Ptr())
 }
@@ -54,4 +56,3 @@ func (o *NSGlassEffectContainerView) Spacing() float64 {
 func (o *NSGlassEffectContainerView) SetSpacing(spacing float64) {
 	o.Ptr().Send(_nSGlassEffectContainerViewSelSetSpacing, spacing)
 }
-

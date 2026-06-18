@@ -17,7 +17,9 @@ type FrameRateConversionConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VTFrameRateConversionConfiguration].
-func (x *FrameRateConversionConfiguration) Unwrap() *raw.VTFrameRateConversionConfiguration { return x.inner }
+func (x *FrameRateConversionConfiguration) Unwrap() *raw.VTFrameRateConversionConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -98,4 +100,3 @@ type FrameRateConversionConfigurationable interface {
 }
 
 var _ FrameRateConversionConfigurationable = (*FrameRateConversionConfiguration)(nil)
-

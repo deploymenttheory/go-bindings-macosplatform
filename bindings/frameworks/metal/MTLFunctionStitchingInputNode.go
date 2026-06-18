@@ -16,10 +16,10 @@ type MTLFunctionStitchingInputNode struct {
 }
 
 var (
-	_clsMTLFunctionStitchingInputNode = _objcClass("MTLFunctionStitchingInputNode")
+	_clsMTLFunctionStitchingInputNode                      = _objcClass("MTLFunctionStitchingInputNode")
 	_mTLFunctionStitchingInputNodeSelInitWithArgumentIndex = objc.RegisterName("initWithArgumentIndex:")
-	_mTLFunctionStitchingInputNodeSelArgumentIndex = objc.RegisterName("argumentIndex")
-	_mTLFunctionStitchingInputNodeSelSetArgumentIndex = objc.RegisterName("setArgumentIndex:")
+	_mTLFunctionStitchingInputNodeSelArgumentIndex         = objc.RegisterName("argumentIndex")
+	_mTLFunctionStitchingInputNodeSelSetArgumentIndex      = objc.RegisterName("setArgumentIndex:")
 )
 
 func MTLFunctionStitchingInputNodeFromID(id objc.ID) *MTLFunctionStitchingInputNode {
@@ -34,7 +34,9 @@ func MTLFunctionStitchingInputNodeFromID(id objc.ID) *MTLFunctionStitchingInputN
 
 func (o *MTLFunctionStitchingInputNode) InitWithArgumentIndex(argument uint) *MTLFunctionStitchingInputNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionStitchingInputNodeSelInitWithArgumentIndex, argument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLFunctionStitchingInputNodeFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *MTLFunctionStitchingInputNode) ArgumentIndex() uint {
 func (o *MTLFunctionStitchingInputNode) SetArgumentIndex(argumentIndex uint) {
 	o.Ptr().Send(_mTLFunctionStitchingInputNodeSelSetArgumentIndex, argumentIndex)
 }
-

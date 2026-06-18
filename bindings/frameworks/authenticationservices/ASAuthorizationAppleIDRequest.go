@@ -16,8 +16,8 @@ type ASAuthorizationAppleIDRequest struct {
 }
 
 var (
-	_clsASAuthorizationAppleIDRequest = _objcClass("ASAuthorizationAppleIDRequest")
-	_aSAuthorizationAppleIDRequestSelUser = objc.RegisterName("user")
+	_clsASAuthorizationAppleIDRequest        = _objcClass("ASAuthorizationAppleIDRequest")
+	_aSAuthorizationAppleIDRequestSelUser    = objc.RegisterName("user")
 	_aSAuthorizationAppleIDRequestSelSetUser = objc.RegisterName("setUser:")
 )
 
@@ -33,11 +33,12 @@ func ASAuthorizationAppleIDRequestFromID(id objc.ID) *ASAuthorizationAppleIDRequ
 
 func (o *ASAuthorizationAppleIDRequest) User() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationAppleIDRequestSelUser)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ASAuthorizationAppleIDRequest) SetUser(user *foundation.NSString) {
 	o.Ptr().Send(_aSAuthorizationAppleIDRequestSelSetUser, user.Ptr())
 }
-

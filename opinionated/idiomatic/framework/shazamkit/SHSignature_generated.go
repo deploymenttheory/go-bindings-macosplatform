@@ -61,4 +61,3 @@ type Signatureable interface {
 }
 
 var _ Signatureable = (*Signature)(nil)
-

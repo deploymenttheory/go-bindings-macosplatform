@@ -45,4 +45,3 @@ type DocumentTypeable interface {
 }
 
 var _ DocumentTypeable = (*DocumentType)(nil)
-

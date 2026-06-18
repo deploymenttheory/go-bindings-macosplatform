@@ -100,11 +100,17 @@ func (x *CNNUpsamplingNearest) WithLabel(label string) *CNNUpsamplingNearest {
 	return x
 }
 
-func (x *CNNUpsamplingNearest) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
+func (x *CNNUpsamplingNearest) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling {
+	return &x.inner.MPSCNNUpsampling
+}
 
-func (x *CNNUpsamplingNearest) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
+func (x *CNNUpsamplingNearest) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNUpsampling.MPSCNNKernel
+}
 
-func (x *CNNUpsamplingNearest) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel }
+func (x *CNNUpsamplingNearest) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel
+}
 
 // CNNUpsamplingNearestable is the interface implemented by [CNNUpsamplingNearest], for mocking and DI.
 type CNNUpsamplingNearestable interface {
@@ -122,4 +128,3 @@ type CNNUpsamplingNearestable interface {
 }
 
 var _ CNNUpsamplingNearestable = (*CNNUpsamplingNearest)(nil)
-

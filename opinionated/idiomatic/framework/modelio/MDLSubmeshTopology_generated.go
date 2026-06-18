@@ -232,4 +232,3 @@ type SubmeshTopologyable interface {
 }
 
 var _ SubmeshTopologyable = (*SubmeshTopology)(nil)
-

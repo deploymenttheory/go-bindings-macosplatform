@@ -16,7 +16,9 @@ type MTRActionsClusterInstantActionWithTransitionParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterInstantActionWithTransitionParams].
-func (x *MTRActionsClusterInstantActionWithTransitionParams) Unwrap() *raw.MTRActionsClusterInstantActionWithTransitionParams { return x.inner }
+func (x *MTRActionsClusterInstantActionWithTransitionParams) Unwrap() *raw.MTRActionsClusterInstantActionWithTransitionParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTRActionsClusterInstantActionWithTransitionParamsable interface {
 }
 
 var _ MTRActionsClusterInstantActionWithTransitionParamsable = (*MTRActionsClusterInstantActionWithTransitionParams)(nil)
-

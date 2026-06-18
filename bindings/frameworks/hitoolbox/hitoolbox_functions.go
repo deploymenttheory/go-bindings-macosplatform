@@ -14,449 +14,449 @@ import (
 )
 
 var (
-	_fnAEGetInteractionAllowed func(*int8) int16
-	_fnAEGetTheCurrentEvent func(*ae.AEDesc) int16
-	_fnAEInteractWithUser func(int, *NMRec, unsafe.Pointer) int16
-	_fnAEProcessAppleEvent func(*EventRecord) int16
-	_fnAEProcessEvent func(unsafe.Pointer) int
-	_fnAEResetTimer func(*ae.AEDesc) int16
-	_fnAEResumeTheCurrentEvent func(*ae.AEDesc, *ae.AEDesc, unsafe.Pointer, unsafe.Pointer) int16
-	_fnAESend func(*ae.AEDesc, *ae.AEDesc, int, int16, int, unsafe.Pointer, unsafe.Pointer) int16
-	_fnAESetInteractionAllowed func(int8) int16
-	_fnAESetTheCurrentEvent func(*ae.AEDesc) int16
-	_fnAESuspendTheCurrentEvent func(*ae.AEDesc) int16
-	_fnAcquireFirstMatchingEventInQueue func(unsafe.Pointer, uint, *EventTypeSpec, uint) unsafe.Pointer
-	_fnAddEventTypesToHandler func(unsafe.Pointer, uint, *EventTypeSpec) int
-	_fnButton func() uint8
-	_fnCMPluginExamineContext func(unsafe.Pointer, *ae.AEDesc, *ae.AEDesc) int
-	_fnCMPluginHandleSelection func(unsafe.Pointer, *ae.AEDesc, int) int
-	_fnCMPluginPostMenuCleanup func(unsafe.Pointer)
-	_fnCallNextEventHandler func(unsafe.Pointer, unsafe.Pointer) int
-	_fnCheckEventQueueForUserCancel func() uint8
-	_fnCopyEvent func(unsafe.Pointer) unsafe.Pointer
-	_fnCopyEventAs func(unsafe.Pointer, unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnCopyEventCGEvent func(unsafe.Pointer) unsafe.Pointer
-	_fnCopySymbolicHotKeys func(unsafe.Pointer) int
-	_fnCopyThemeIdentifier func(unsafe.Pointer) int
-	_fnCreateEvent func(unsafe.Pointer, uint, uint, float64, uint, unsafe.Pointer) int
-	_fnCreateEventWithCGEvent func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnDebugPrintEvent func(unsafe.Pointer)
-	_fnDebugPrintMainEventQueue func()
-	_fnDisableSecureEventInput func() int
-	_fnDisposeAEFilterUPP func(unsafe.Pointer)
-	_fnDisposeAEIdleUPP func(unsafe.Pointer)
-	_fnDisposeCaretHookUPP func(unsafe.Pointer)
-	_fnDisposeControlActionUPP func(unsafe.Pointer)
-	_fnDisposeControlEditTextValidationUPP func(unsafe.Pointer)
-	_fnDisposeControlKeyFilterUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneActivateUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneDrawUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneFocusUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneHitTestUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneIdleUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneKeyDownUPP func(unsafe.Pointer)
-	_fnDisposeControlUserPaneTrackingUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserAcceptDragUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserAddDragItemUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserDrawItemUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserEditItemUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserGetContextualMenuUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserHitTestUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemAcceptDragUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemCompareUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemDataUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemDragRgnUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemHelpContentUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemNotificationUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemNotificationWithItemUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemReceiveDragUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserItemUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserPostProcessDragUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserReceiveDragUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserSelectContextualMenuUPP func(unsafe.Pointer)
-	_fnDisposeDataBrowserTrackingUPP func(unsafe.Pointer)
-	_fnDisposeDragDrawingUPP func(unsafe.Pointer)
-	_fnDisposeDragInputUPP func(unsafe.Pointer)
-	_fnDisposeDragReceiveHandlerUPP func(unsafe.Pointer)
-	_fnDisposeDragSendDataUPP func(unsafe.Pointer)
-	_fnDisposeDragTrackingHandlerUPP func(unsafe.Pointer)
-	_fnDisposeDrawHookUPP func(unsafe.Pointer)
-	_fnDisposeEOLHookUPP func(unsafe.Pointer)
-	_fnDisposeEditUnicodePostUpdateUPP func(unsafe.Pointer)
-	_fnDisposeEventComparatorUPP func(unsafe.Pointer)
-	_fnDisposeEventHandlerUPP func(unsafe.Pointer)
-	_fnDisposeEventLoopIdleTimerUPP func(unsafe.Pointer)
-	_fnDisposeEventLoopTimerUPP func(unsafe.Pointer)
-	_fnDisposeGetScrapDataUPP func(unsafe.Pointer)
-	_fnDisposeHMControlContentUPP func(unsafe.Pointer)
-	_fnDisposeHMMenuItemContentUPP func(unsafe.Pointer)
-	_fnDisposeHMMenuTitleContentUPP func(unsafe.Pointer)
-	_fnDisposeHMWindowContentUPP func(unsafe.Pointer)
-	_fnDisposeHighHookUPP func(unsafe.Pointer)
-	_fnDisposeHitTestHookUPP func(unsafe.Pointer)
-	_fnDisposeListClickLoopUPP func(unsafe.Pointer)
-	_fnDisposeListDefUPP func(unsafe.Pointer)
-	_fnDisposeListSearchUPP func(unsafe.Pointer)
-	_fnDisposeMenuItemDrawingUPP func(unsafe.Pointer)
-	_fnDisposeMenuTitleDrawingUPP func(unsafe.Pointer)
-	_fnDisposeModalFilterUPP func(unsafe.Pointer)
-	_fnDisposeModalFilterYDUPP func(unsafe.Pointer)
-	_fnDisposeNMUPP func(unsafe.Pointer)
-	_fnDisposeNWidthHookUPP func(unsafe.Pointer)
-	_fnDisposeScrapPromiseKeeperUPP func(unsafe.Pointer)
-	_fnDisposeTEClickLoopUPP func(unsafe.Pointer)
-	_fnDisposeTEDoTextUPP func(unsafe.Pointer)
-	_fnDisposeTEFindWordUPP func(unsafe.Pointer)
-	_fnDisposeTERecalcUPP func(unsafe.Pointer)
-	_fnDisposeTSMTEPostUpdateUPP func(unsafe.Pointer)
-	_fnDisposeTSMTEPreUpdateUPP func(unsafe.Pointer)
-	_fnDisposeTXNActionKeyMapperUPP func(unsafe.Pointer)
-	_fnDisposeTXNActionNameMapperUPP func(unsafe.Pointer)
-	_fnDisposeTXNContextualMenuSetupUPP func(unsafe.Pointer)
-	_fnDisposeTXNFindUPP func(unsafe.Pointer)
-	_fnDisposeTXNScrollInfoUPP func(unsafe.Pointer)
-	_fnDisposeTextWidthHookUPP func(unsafe.Pointer)
-	_fnDisposeThemeButtonDrawUPP func(unsafe.Pointer)
-	_fnDisposeThemeEraseUPP func(unsafe.Pointer)
-	_fnDisposeThemeIteratorUPP func(unsafe.Pointer)
-	_fnDisposeThemeTabTitleDrawUPP func(unsafe.Pointer)
-	_fnDisposeUserItemUPP func(unsafe.Pointer)
-	_fnDisposeWidthHookUPP func(unsafe.Pointer)
-	_fnDisposeWindowPaintUPP func(unsafe.Pointer)
-	_fnDisposeWindowTitleDrawingUPP func(unsafe.Pointer)
-	_fnEnableSecureEventInput func() int
-	_fnFindSpecificEventInQueue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnFlushEventQueue func(unsafe.Pointer) int
-	_fnFlushEvents func(uint16, uint16)
-	_fnFlushEventsMatchingListFromQueue func(unsafe.Pointer, uint, *EventTypeSpec) int
-	_fnFlushSpecificEventsFromQueue func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnGetApplicationEventTarget func() unsafe.Pointer
-	_fnGetApplicationTextEncoding func() uint
-	_fnGetCFRunLoopFromEventLoop func(unsafe.Pointer) unsafe.Pointer
-	_fnGetCurrentButtonState func() uint
-	_fnGetCurrentEvent func() unsafe.Pointer
-	_fnGetCurrentEventButtonState func() uint
-	_fnGetCurrentEventKeyModifiers func() uint
-	_fnGetCurrentEventLoop func() unsafe.Pointer
-	_fnGetCurrentEventQueue func() unsafe.Pointer
-	_fnGetCurrentEventTime func() float64
-	_fnGetCurrentKeyModifiers func() uint
-	_fnGetEventClass func(unsafe.Pointer) uint
-	_fnGetEventDispatcherTarget func() unsafe.Pointer
-	_fnGetEventKind func(unsafe.Pointer) uint
-	_fnGetEventMonitorTarget func() unsafe.Pointer
-	_fnGetEventParameter func(unsafe.Pointer, uint, uint, *uint, uint, *uint, unsafe.Pointer) int
-	_fnGetEventRetainCount func(unsafe.Pointer) uint
-	_fnGetEventTime func(unsafe.Pointer) float64
-	_fnGetKeys func(*carboncore.BigEndianUInt32)
-	_fnGetMainEventLoop func() unsafe.Pointer
-	_fnGetMainEventQueue func() unsafe.Pointer
-	_fnGetMenuTrackingData func(unsafe.Pointer, *MenuTrackingData) int
-	_fnGetNumEventsInQueue func(unsafe.Pointer) uint
-	_fnGetSymbolicHotKeyMode func() uint
-	_fnGetSystemUIMode func(*uint, *uint)
-	_fnGetThemeMenuItemExtra func(uint16, *int16, *int16) int
-	_fnGetThemeMenuSeparatorHeight func(*int16) int
-	_fnGetThemeMenuTitleExtra func(*int16, uint8) int
-	_fnGetThemeMetric func(uint, *int) int
-	_fnHIDictionaryWindowShow func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, corefoundation.CGPoint, uint8, *corefoundation.CGAffineTransform)
-	_fnHIGetMousePosition func(uint, unsafe.Pointer, *corefoundation.CGPoint) *corefoundation.CGPoint
-	_fnHIMouseTrackingGetParameters func(uint, *float64, *corefoundation.CGSize) int
-	_fnHIObjectAddDelegate func(unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnHIObjectCopyClassID func(unsafe.Pointer) unsafe.Pointer
-	_fnHIObjectCopyDelegates func(unsafe.Pointer, unsafe.Pointer) int
-	_fnHIObjectCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIObjectCreateFromBundle func(unsafe.Pointer, unsafe.Pointer) int
-	_fnHIObjectDynamicCast func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnHIObjectFromEventTarget func(unsafe.Pointer) unsafe.Pointer
-	_fnHIObjectGetEventHandlerObject func(unsafe.Pointer) unsafe.Pointer
-	_fnHIObjectGetEventTarget func(unsafe.Pointer) unsafe.Pointer
-	_fnHIObjectIsArchivingIgnored func(unsafe.Pointer) uint8
-	_fnHIObjectIsOfClass func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnHIObjectPrintDebugInfo func(unsafe.Pointer)
-	_fnHIObjectRegisterSubclass func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, uint, *EventTypeSpec, unsafe.Pointer, unsafe.Pointer) int
-	_fnHIObjectRemoveDelegate func(unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnHIObjectUnregisterClass func(unsafe.Pointer) int
-	_fnHIPointConvert func(*corefoundation.CGPoint, uint, unsafe.Pointer, uint, unsafe.Pointer)
-	_fnHIRectConvert func(*corefoundation.CGRect, uint, unsafe.Pointer, uint, unsafe.Pointer)
-	_fnHISearchWindowShow func(unsafe.Pointer, uint) int
-	_fnHISizeConvert func(*corefoundation.CGSize, uint, unsafe.Pointer, uint, unsafe.Pointer)
-	_fnHIThemeApplyBackground func(*corefoundation.CGRect, *HIThemeBackgroundDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeBeginFocus func(unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnHIThemeBrushCreateCGColor func(int16, unsafe.Pointer) int
-	_fnHIThemeDrawBackground func(*corefoundation.CGRect, *HIThemeBackgroundDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawButton func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
-	_fnHIThemeDrawChasingArrows func(*corefoundation.CGRect, *HIThemeChasingArrowsDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawFocusRect func(*corefoundation.CGRect, uint8, unsafe.Pointer, uint) int
-	_fnHIThemeDrawFrame func(*corefoundation.CGRect, *HIThemeFrameDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawGenericWell func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawGrabber func(*corefoundation.CGRect, *HIThemeGrabberDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawGroupBox func(*corefoundation.CGRect, *HIThemeGroupBoxDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawGrowBox func(*corefoundation.CGPoint, *HIThemeGrowBoxDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawHeader func(*corefoundation.CGRect, *HIThemeHeaderDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawMenuBackground func(*corefoundation.CGRect, *HIThemeMenuDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawMenuBarBackground func(*corefoundation.CGRect, *HIThemeMenuBarDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawMenuItem func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuItemDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
-	_fnHIThemeDrawMenuSeparator func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuItemDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawMenuTitle func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuTitleDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
-	_fnHIThemeDrawPaneSplitter func(*corefoundation.CGRect, *HIThemeSplitterDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawPlacard func(*corefoundation.CGRect, *HIThemePlacardDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawPopupArrow func(*corefoundation.CGRect, *HIThemePopupArrowDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawScrollBarDelimiters func(*corefoundation.CGRect, *HIThemeScrollBarDelimitersDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawSegment func(*corefoundation.CGRect, *HIThemeSegmentDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawSeparator func(*corefoundation.CGRect, *HIThemeSeparatorDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTab func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
-	_fnHIThemeDrawTabPane func(*corefoundation.CGRect, *HIThemeTabPaneDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTextBox func(unsafe.Pointer, *corefoundation.CGRect, *HIThemeTextInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTickMark func(*corefoundation.CGRect, *HIThemeTickMarkDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTitleBarWidget func(*corefoundation.CGRect, *HIThemeWindowWidgetDrawInfo, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTrack func(*HIThemeTrackDrawInfo, *corefoundation.CGRect, unsafe.Pointer, uint) int
-	_fnHIThemeDrawTrackTickMarks func(*HIThemeTrackDrawInfo, uint, unsafe.Pointer, uint) int
-	_fnHIThemeDrawWindowFrame func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
-	_fnHIThemeEndFocus func(unsafe.Pointer) int
-	_fnHIThemeGetButtonBackgroundBounds func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, *corefoundation.CGRect) int
-	_fnHIThemeGetButtonContentBounds func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, *corefoundation.CGRect) int
-	_fnHIThemeGetButtonShape func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer) int
-	_fnHIThemeGetGrowBoxBounds func(*corefoundation.CGPoint, *HIThemeGrowBoxDrawInfo, *corefoundation.CGRect) int
-	_fnHIThemeGetMenuBackgroundShape func(*corefoundation.CGRect, *HIThemeMenuDrawInfo, unsafe.Pointer) int
-	_fnHIThemeGetScrollBarTrackRect func(*corefoundation.CGRect, *HIScrollBarTrackInfo, uint8, *corefoundation.CGRect) int
-	_fnHIThemeGetTabDrawShape func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer) int
-	_fnHIThemeGetTabPaneContentShape func(*corefoundation.CGRect, uint16, uint, unsafe.Pointer) int
-	_fnHIThemeGetTabPaneDrawShape func(*corefoundation.CGRect, uint16, uint, unsafe.Pointer) int
-	_fnHIThemeGetTabShape func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer) int
-	_fnHIThemeGetTextColorForThemeBrush func(int16, uint8, *int16) int
-	_fnHIThemeGetTextDimensions func(unsafe.Pointer, float64, *HIThemeTextInfo, *float64, *float64, *float64) int
-	_fnHIThemeGetTrackBounds func(*HIThemeTrackDrawInfo, *corefoundation.CGRect) int
-	_fnHIThemeGetTrackDragRect func(*HIThemeTrackDrawInfo, *corefoundation.CGRect) int
-	_fnHIThemeGetTrackLiveValue func(*HIThemeTrackDrawInfo, float64, *int) int
-	_fnHIThemeGetTrackPartBounds func(*HIThemeTrackDrawInfo, int16, *corefoundation.CGRect) int
-	_fnHIThemeGetTrackParts func(*HIThemeTrackDrawInfo, *uint, uint, *int16) int
-	_fnHIThemeGetTrackThumbPositionFromBounds func(*HIThemeTrackDrawInfo, *corefoundation.CGRect, *float64) int
-	_fnHIThemeGetTrackThumbPositionFromOffset func(*HIThemeTrackDrawInfo, *corefoundation.CGPoint, *float64) int
-	_fnHIThemeGetTrackThumbShape func(*HIThemeTrackDrawInfo, unsafe.Pointer) int
-	_fnHIThemeGetUIFontType func(uint16) coretext.CTFontUIFontType
-	_fnHIThemeGetWindowRegionHit func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, *corefoundation.CGPoint, *uint16) uint8
-	_fnHIThemeGetWindowShape func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, uint16, unsafe.Pointer) int
-	_fnHIThemeHitTestScrollBarArrows func(*corefoundation.CGRect, *HIScrollBarTrackInfo, uint8, *corefoundation.CGPoint, *corefoundation.CGRect, *int16) uint8
-	_fnHIThemeHitTestTrack func(*HIThemeTrackDrawInfo, *corefoundation.CGPoint, *int16) uint8
-	_fnHIThemeSetFill func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnHIThemeSetStroke func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnHIThemeSetTextFill func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnInstallEventHandler func(unsafe.Pointer, unsafe.Pointer, uint, *EventTypeSpec, unsafe.Pointer, unsafe.Pointer) int
-	_fnInstallEventLoopTimer func(unsafe.Pointer, float64, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeAEFilterUPP func(*EventRecord, int, int, *ae.AEDesc, unsafe.Pointer) uint8
-	_fnInvokeAEIdleUPP func(*EventRecord, *int, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeCaretHookUPP func(unsafe.Pointer, *TERec, unsafe.Pointer)
-	_fnInvokeControlActionUPP func(unsafe.Pointer, int16, unsafe.Pointer)
-	_fnInvokeControlEditTextValidationUPP func(unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeControlKeyFilterUPP func(unsafe.Pointer, *int16, *int16, *uint16, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneActivateUPP func(unsafe.Pointer, uint8, unsafe.Pointer)
-	_fnInvokeControlUserPaneDrawUPP func(unsafe.Pointer, int16, unsafe.Pointer)
-	_fnInvokeControlUserPaneFocusUPP func(unsafe.Pointer, int16, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneHitTestUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneIdleUPP func(unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeControlUserPaneKeyDownUPP func(unsafe.Pointer, int16, int16, int16, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneTrackingUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDataBrowserAcceptDragUPP func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserAddDragItemUPP func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserDrawItemUPP func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer, int16, uint8, unsafe.Pointer)
-	_fnInvokeDataBrowserEditItemUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserGetContextualMenuUPP func(unsafe.Pointer, unsafe.Pointer, *uint, unsafe.Pointer, *ae.AEDesc, unsafe.Pointer)
-	_fnInvokeDataBrowserHitTestUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserItemAcceptDragUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
-	_fnInvokeDataBrowserItemCompareUPP func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserItemDataUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, uint8, unsafe.Pointer) int
-	_fnInvokeDataBrowserItemDragRgnUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeDataBrowserItemHelpContentUPP func(unsafe.Pointer, uint, uint, int16, *int16, *HMHelpContentRec, unsafe.Pointer)
-	_fnInvokeDataBrowserItemNotificationUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer)
-	_fnInvokeDataBrowserItemNotificationWithItemUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeDataBrowserItemReceiveDragUPP func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserItemUPP func(uint, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeDataBrowserPostProcessDragUPP func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
-	_fnInvokeDataBrowserReceiveDragUPP func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserSelectContextualMenuUPP func(unsafe.Pointer, unsafe.Pointer, uint, int16, uint16, unsafe.Pointer)
-	_fnInvokeDataBrowserTrackingUPP func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer) int16
-	_fnInvokeDragDrawingUPP func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDragInputUPP func(unsafe.Pointer, *int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDragReceiveHandlerUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDragSendDataUPP func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDragTrackingHandlerUPP func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDrawHookUPP func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer)
-	_fnInvokeEOLHookUPP func(int8, *TERec, **TERec, unsafe.Pointer) uint8
-	_fnInvokeEditUnicodePostUpdateUPP func(**uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeEventComparatorUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeEventHandlerUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeEventLoopIdleTimerUPP func(unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeEventLoopTimerUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeGetScrapDataUPP func(uint, *string, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeHMControlContentUPP func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHMMenuItemContentUPP func(*MenuTrackingData, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHMMenuTitleContentUPP func(unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHMWindowContentUPP func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHighHookUPP func(unsafe.Pointer, *TERec, unsafe.Pointer)
-	_fnInvokeHitTestHookUPP func(uint16, uint16, uint16, unsafe.Pointer, *TERec, **TERec, *uint16, *uint16, *uint8, unsafe.Pointer) uint8
-	_fnInvokeListClickLoopUPP func(unsafe.Pointer) uint8
-	_fnInvokeListDefUPP func(int16, uint8, unsafe.Pointer, unsafe.Pointer, int16, int16, **ListRec, unsafe.Pointer)
-	_fnInvokeListSearchUPP func(string, string, int16, int16, unsafe.Pointer) int16
-	_fnInvokeMenuItemDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeMenuTitleDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeModalFilterUPP func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer) uint8
-	_fnInvokeModalFilterYDUPP func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeNMUPP func(*NMRec, unsafe.Pointer)
-	_fnInvokeNWidthHookUPP func(uint16, uint16, int16, int16, unsafe.Pointer, *int16, *TERec, **TERec, unsafe.Pointer) uint16
-	_fnInvokeScrapPromiseKeeperUPP func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeTEClickLoopUPP func(*TERec, unsafe.Pointer) uint8
-	_fnInvokeTEDoTextUPP func(*TERec, uint16, uint16, int16, unsafe.Pointer, *int16, unsafe.Pointer)
-	_fnInvokeTEFindWordUPP func(uint16, int16, *TERec, **TERec, *uint16, *uint16, unsafe.Pointer)
-	_fnInvokeTERecalcUPP func(*TERec, uint16, *uint16, *uint16, *uint16, unsafe.Pointer)
-	_fnInvokeTSMTEPostUpdateUPP func(**TERec, int, int, int, int, int, int, unsafe.Pointer)
-	_fnInvokeTSMTEPreUpdateUPP func(**TERec, int, unsafe.Pointer)
-	_fnInvokeTXNActionKeyMapperUPP func(uint, uint, unsafe.Pointer) unsafe.Pointer
-	_fnInvokeTXNActionNameMapperUPP func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnInvokeTXNContextualMenuSetupUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeTXNFindUPP func(*TXNMatchTextRecord, uint, uint, unsafe.Pointer, uint, uint, uint, *uint, *uint, *uint8, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeTXNScrollInfoUPP func(int, int, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeTextWidthHookUPP func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
-	_fnInvokeThemeButtonDrawUPP func(unsafe.Pointer, uint16, *ThemeButtonDrawInfo, unsafe.Pointer, int16, uint8, unsafe.Pointer)
-	_fnInvokeThemeEraseUPP func(unsafe.Pointer, unsafe.Pointer, int16, uint8, unsafe.Pointer)
-	_fnInvokeThemeIteratorUPP func(*uint8, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeThemeTabTitleDrawUPP func(unsafe.Pointer, uint16, uint16, int16, uint8, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeUserItemUPP func(unsafe.Pointer, int16, unsafe.Pointer)
-	_fnInvokeWidthHookUPP func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
-	_fnInvokeWindowPaintUPP func(**qd.GDevice, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeWindowTitleDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
-	_fnIsCmdChar func(*EventRecord, int16) uint8
-	_fnIsEventInQueue func(unsafe.Pointer, unsafe.Pointer) uint8
-	_fnIsSecureEventInputEnabled func() uint8
-	_fnIsUserCancelEventRef func(unsafe.Pointer) uint8
-	_fnKBGetLayoutType func(int16) uint
-	_fnLMGetKbdLast func() uint8
-	_fnLMGetKbdType func() uint8
-	_fnLMGetKeyRepThresh func() int16
-	_fnLMGetKeyThresh func() int16
-	_fnNewAEFilterUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewAEIdleUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewCaretHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlActionUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlEditTextValidationUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlKeyFilterUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneActivateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneDrawUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneFocusUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneHitTestUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneIdleUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneKeyDownUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewControlUserPaneTrackingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserAcceptDragUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserAddDragItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserDrawItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserEditItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserGetContextualMenuUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserHitTestUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemAcceptDragUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemCompareUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemDataUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemDragRgnUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemHelpContentUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemNotificationUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemNotificationWithItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemReceiveDragUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserPostProcessDragUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserReceiveDragUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserSelectContextualMenuUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDataBrowserTrackingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDragDrawingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDragInputUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDragReceiveHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDragSendDataUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDragTrackingHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewDrawHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEOLHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEditUnicodePostUpdateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEventComparatorUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEventHandlerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEventLoopIdleTimerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewEventLoopTimerUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewGetScrapDataUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHMControlContentUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHMMenuItemContentUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHMMenuTitleContentUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHMWindowContentUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHighHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewHitTestHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewListClickLoopUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewListDefUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewListSearchUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewMenuItemDrawingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewMenuTitleDrawingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewModalFilterUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewModalFilterYDUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewNMUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewNWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewScrapPromiseKeeperUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTEClickLoopUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTEDoTextUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTEFindWordUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTERecalcUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTSMTEPostUpdateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTSMTEPreUpdateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTXNActionKeyMapperUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTXNActionNameMapperUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTXNContextualMenuSetupUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTXNFindUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTXNScrollInfoUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewTextWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThemeButtonDrawUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThemeEraseUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThemeIteratorUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewThemeTabTitleDrawUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewUserItemUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewWindowPaintUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewWindowTitleDrawingUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnPopSymbolicHotKeyMode func(unsafe.Pointer)
-	_fnPostEventToQueue func(unsafe.Pointer, unsafe.Pointer, int16) int
-	_fnProcessHICommand func(*HICommand) int
-	_fnPushSymbolicHotKeyMode func(uint) unsafe.Pointer
-	_fnQuitEventLoop func(unsafe.Pointer) int
-	_fnReceiveNextEvent func(uint, *EventTypeSpec, float64, uint8, unsafe.Pointer) int
-	_fnRegisterEventHotKey func(uint, uint, EventHotKeyID, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnReleaseEvent func(unsafe.Pointer)
-	_fnRemoveEventFromQueue func(unsafe.Pointer, unsafe.Pointer) int
-	_fnRemoveEventHandler func(unsafe.Pointer) int
-	_fnRemoveEventLoopTimer func(unsafe.Pointer) int
-	_fnRemoveEventParameter func(unsafe.Pointer, uint) int
-	_fnRemoveEventTypesFromHandler func(unsafe.Pointer, uint, *EventTypeSpec) int
-	_fnRetainEvent func(unsafe.Pointer) unsafe.Pointer
-	_fnRunCurrentEventLoop func(float64) int
-	_fnSendEventToEventTarget func(unsafe.Pointer, unsafe.Pointer) int
-	_fnSendEventToEventTargetWithOptions func(unsafe.Pointer, unsafe.Pointer, uint) int
-	_fnSetEventLoopTimerNextFireTime func(unsafe.Pointer, float64) int
-	_fnSetEventParameter func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) int
-	_fnSetEventTime func(unsafe.Pointer, float64) int
-	_fnSetSystemUIMode func(uint, uint) int
-	_fnTISCopyCurrentASCIICapableKeyboardInputSource func() unsafe.Pointer
+	_fnAEGetInteractionAllowed                             func(*int8) int16
+	_fnAEGetTheCurrentEvent                                func(*ae.AEDesc) int16
+	_fnAEInteractWithUser                                  func(int, *NMRec, unsafe.Pointer) int16
+	_fnAEProcessAppleEvent                                 func(*EventRecord) int16
+	_fnAEProcessEvent                                      func(unsafe.Pointer) int
+	_fnAEResetTimer                                        func(*ae.AEDesc) int16
+	_fnAEResumeTheCurrentEvent                             func(*ae.AEDesc, *ae.AEDesc, unsafe.Pointer, unsafe.Pointer) int16
+	_fnAESend                                              func(*ae.AEDesc, *ae.AEDesc, int, int16, int, unsafe.Pointer, unsafe.Pointer) int16
+	_fnAESetInteractionAllowed                             func(int8) int16
+	_fnAESetTheCurrentEvent                                func(*ae.AEDesc) int16
+	_fnAESuspendTheCurrentEvent                            func(*ae.AEDesc) int16
+	_fnAcquireFirstMatchingEventInQueue                    func(unsafe.Pointer, uint, *EventTypeSpec, uint) unsafe.Pointer
+	_fnAddEventTypesToHandler                              func(unsafe.Pointer, uint, *EventTypeSpec) int
+	_fnButton                                              func() uint8
+	_fnCMPluginExamineContext                              func(unsafe.Pointer, *ae.AEDesc, *ae.AEDesc) int
+	_fnCMPluginHandleSelection                             func(unsafe.Pointer, *ae.AEDesc, int) int
+	_fnCMPluginPostMenuCleanup                             func(unsafe.Pointer)
+	_fnCallNextEventHandler                                func(unsafe.Pointer, unsafe.Pointer) int
+	_fnCheckEventQueueForUserCancel                        func() uint8
+	_fnCopyEvent                                           func(unsafe.Pointer) unsafe.Pointer
+	_fnCopyEventAs                                         func(unsafe.Pointer, unsafe.Pointer, uint, uint) unsafe.Pointer
+	_fnCopyEventCGEvent                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnCopySymbolicHotKeys                                 func(unsafe.Pointer) int
+	_fnCopyThemeIdentifier                                 func(unsafe.Pointer) int
+	_fnCreateEvent                                         func(unsafe.Pointer, uint, uint, float64, uint, unsafe.Pointer) int
+	_fnCreateEventWithCGEvent                              func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnDebugPrintEvent                                     func(unsafe.Pointer)
+	_fnDebugPrintMainEventQueue                            func()
+	_fnDisableSecureEventInput                             func() int
+	_fnDisposeAEFilterUPP                                  func(unsafe.Pointer)
+	_fnDisposeAEIdleUPP                                    func(unsafe.Pointer)
+	_fnDisposeCaretHookUPP                                 func(unsafe.Pointer)
+	_fnDisposeControlActionUPP                             func(unsafe.Pointer)
+	_fnDisposeControlEditTextValidationUPP                 func(unsafe.Pointer)
+	_fnDisposeControlKeyFilterUPP                          func(unsafe.Pointer)
+	_fnDisposeControlUserPaneActivateUPP                   func(unsafe.Pointer)
+	_fnDisposeControlUserPaneDrawUPP                       func(unsafe.Pointer)
+	_fnDisposeControlUserPaneFocusUPP                      func(unsafe.Pointer)
+	_fnDisposeControlUserPaneHitTestUPP                    func(unsafe.Pointer)
+	_fnDisposeControlUserPaneIdleUPP                       func(unsafe.Pointer)
+	_fnDisposeControlUserPaneKeyDownUPP                    func(unsafe.Pointer)
+	_fnDisposeControlUserPaneTrackingUPP                   func(unsafe.Pointer)
+	_fnDisposeDataBrowserAcceptDragUPP                     func(unsafe.Pointer)
+	_fnDisposeDataBrowserAddDragItemUPP                    func(unsafe.Pointer)
+	_fnDisposeDataBrowserDrawItemUPP                       func(unsafe.Pointer)
+	_fnDisposeDataBrowserEditItemUPP                       func(unsafe.Pointer)
+	_fnDisposeDataBrowserGetContextualMenuUPP              func(unsafe.Pointer)
+	_fnDisposeDataBrowserHitTestUPP                        func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemAcceptDragUPP                 func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemCompareUPP                    func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemDataUPP                       func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemDragRgnUPP                    func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemHelpContentUPP                func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemNotificationUPP               func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemNotificationWithItemUPP       func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemReceiveDragUPP                func(unsafe.Pointer)
+	_fnDisposeDataBrowserItemUPP                           func(unsafe.Pointer)
+	_fnDisposeDataBrowserPostProcessDragUPP                func(unsafe.Pointer)
+	_fnDisposeDataBrowserReceiveDragUPP                    func(unsafe.Pointer)
+	_fnDisposeDataBrowserSelectContextualMenuUPP           func(unsafe.Pointer)
+	_fnDisposeDataBrowserTrackingUPP                       func(unsafe.Pointer)
+	_fnDisposeDragDrawingUPP                               func(unsafe.Pointer)
+	_fnDisposeDragInputUPP                                 func(unsafe.Pointer)
+	_fnDisposeDragReceiveHandlerUPP                        func(unsafe.Pointer)
+	_fnDisposeDragSendDataUPP                              func(unsafe.Pointer)
+	_fnDisposeDragTrackingHandlerUPP                       func(unsafe.Pointer)
+	_fnDisposeDrawHookUPP                                  func(unsafe.Pointer)
+	_fnDisposeEOLHookUPP                                   func(unsafe.Pointer)
+	_fnDisposeEditUnicodePostUpdateUPP                     func(unsafe.Pointer)
+	_fnDisposeEventComparatorUPP                           func(unsafe.Pointer)
+	_fnDisposeEventHandlerUPP                              func(unsafe.Pointer)
+	_fnDisposeEventLoopIdleTimerUPP                        func(unsafe.Pointer)
+	_fnDisposeEventLoopTimerUPP                            func(unsafe.Pointer)
+	_fnDisposeGetScrapDataUPP                              func(unsafe.Pointer)
+	_fnDisposeHMControlContentUPP                          func(unsafe.Pointer)
+	_fnDisposeHMMenuItemContentUPP                         func(unsafe.Pointer)
+	_fnDisposeHMMenuTitleContentUPP                        func(unsafe.Pointer)
+	_fnDisposeHMWindowContentUPP                           func(unsafe.Pointer)
+	_fnDisposeHighHookUPP                                  func(unsafe.Pointer)
+	_fnDisposeHitTestHookUPP                               func(unsafe.Pointer)
+	_fnDisposeListClickLoopUPP                             func(unsafe.Pointer)
+	_fnDisposeListDefUPP                                   func(unsafe.Pointer)
+	_fnDisposeListSearchUPP                                func(unsafe.Pointer)
+	_fnDisposeMenuItemDrawingUPP                           func(unsafe.Pointer)
+	_fnDisposeMenuTitleDrawingUPP                          func(unsafe.Pointer)
+	_fnDisposeModalFilterUPP                               func(unsafe.Pointer)
+	_fnDisposeModalFilterYDUPP                             func(unsafe.Pointer)
+	_fnDisposeNMUPP                                        func(unsafe.Pointer)
+	_fnDisposeNWidthHookUPP                                func(unsafe.Pointer)
+	_fnDisposeScrapPromiseKeeperUPP                        func(unsafe.Pointer)
+	_fnDisposeTEClickLoopUPP                               func(unsafe.Pointer)
+	_fnDisposeTEDoTextUPP                                  func(unsafe.Pointer)
+	_fnDisposeTEFindWordUPP                                func(unsafe.Pointer)
+	_fnDisposeTERecalcUPP                                  func(unsafe.Pointer)
+	_fnDisposeTSMTEPostUpdateUPP                           func(unsafe.Pointer)
+	_fnDisposeTSMTEPreUpdateUPP                            func(unsafe.Pointer)
+	_fnDisposeTXNActionKeyMapperUPP                        func(unsafe.Pointer)
+	_fnDisposeTXNActionNameMapperUPP                       func(unsafe.Pointer)
+	_fnDisposeTXNContextualMenuSetupUPP                    func(unsafe.Pointer)
+	_fnDisposeTXNFindUPP                                   func(unsafe.Pointer)
+	_fnDisposeTXNScrollInfoUPP                             func(unsafe.Pointer)
+	_fnDisposeTextWidthHookUPP                             func(unsafe.Pointer)
+	_fnDisposeThemeButtonDrawUPP                           func(unsafe.Pointer)
+	_fnDisposeThemeEraseUPP                                func(unsafe.Pointer)
+	_fnDisposeThemeIteratorUPP                             func(unsafe.Pointer)
+	_fnDisposeThemeTabTitleDrawUPP                         func(unsafe.Pointer)
+	_fnDisposeUserItemUPP                                  func(unsafe.Pointer)
+	_fnDisposeWidthHookUPP                                 func(unsafe.Pointer)
+	_fnDisposeWindowPaintUPP                               func(unsafe.Pointer)
+	_fnDisposeWindowTitleDrawingUPP                        func(unsafe.Pointer)
+	_fnEnableSecureEventInput                              func() int
+	_fnFindSpecificEventInQueue                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnFlushEventQueue                                     func(unsafe.Pointer) int
+	_fnFlushEvents                                         func(uint16, uint16)
+	_fnFlushEventsMatchingListFromQueue                    func(unsafe.Pointer, uint, *EventTypeSpec) int
+	_fnFlushSpecificEventsFromQueue                        func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnGetApplicationEventTarget                           func() unsafe.Pointer
+	_fnGetApplicationTextEncoding                          func() uint
+	_fnGetCFRunLoopFromEventLoop                           func(unsafe.Pointer) unsafe.Pointer
+	_fnGetCurrentButtonState                               func() uint
+	_fnGetCurrentEvent                                     func() unsafe.Pointer
+	_fnGetCurrentEventButtonState                          func() uint
+	_fnGetCurrentEventKeyModifiers                         func() uint
+	_fnGetCurrentEventLoop                                 func() unsafe.Pointer
+	_fnGetCurrentEventQueue                                func() unsafe.Pointer
+	_fnGetCurrentEventTime                                 func() float64
+	_fnGetCurrentKeyModifiers                              func() uint
+	_fnGetEventClass                                       func(unsafe.Pointer) uint
+	_fnGetEventDispatcherTarget                            func() unsafe.Pointer
+	_fnGetEventKind                                        func(unsafe.Pointer) uint
+	_fnGetEventMonitorTarget                               func() unsafe.Pointer
+	_fnGetEventParameter                                   func(unsafe.Pointer, uint, uint, *uint, uint, *uint, unsafe.Pointer) int
+	_fnGetEventRetainCount                                 func(unsafe.Pointer) uint
+	_fnGetEventTime                                        func(unsafe.Pointer) float64
+	_fnGetKeys                                             func(*carboncore.BigEndianUInt32)
+	_fnGetMainEventLoop                                    func() unsafe.Pointer
+	_fnGetMainEventQueue                                   func() unsafe.Pointer
+	_fnGetMenuTrackingData                                 func(unsafe.Pointer, *MenuTrackingData) int
+	_fnGetNumEventsInQueue                                 func(unsafe.Pointer) uint
+	_fnGetSymbolicHotKeyMode                               func() uint
+	_fnGetSystemUIMode                                     func(*uint, *uint)
+	_fnGetThemeMenuItemExtra                               func(uint16, *int16, *int16) int
+	_fnGetThemeMenuSeparatorHeight                         func(*int16) int
+	_fnGetThemeMenuTitleExtra                              func(*int16, uint8) int
+	_fnGetThemeMetric                                      func(uint, *int) int
+	_fnHIDictionaryWindowShow                              func(unsafe.Pointer, unsafe.Pointer, corefoundation.CFRange, unsafe.Pointer, corefoundation.CGPoint, uint8, *corefoundation.CGAffineTransform)
+	_fnHIGetMousePosition                                  func(uint, unsafe.Pointer, *corefoundation.CGPoint) *corefoundation.CGPoint
+	_fnHIMouseTrackingGetParameters                        func(uint, *float64, *corefoundation.CGSize) int
+	_fnHIObjectAddDelegate                                 func(unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnHIObjectCopyClassID                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnHIObjectCopyDelegates                               func(unsafe.Pointer, unsafe.Pointer) int
+	_fnHIObjectCreate                                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIObjectCreateFromBundle                            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnHIObjectDynamicCast                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnHIObjectFromEventTarget                             func(unsafe.Pointer) unsafe.Pointer
+	_fnHIObjectGetEventHandlerObject                       func(unsafe.Pointer) unsafe.Pointer
+	_fnHIObjectGetEventTarget                              func(unsafe.Pointer) unsafe.Pointer
+	_fnHIObjectIsArchivingIgnored                          func(unsafe.Pointer) uint8
+	_fnHIObjectIsOfClass                                   func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnHIObjectPrintDebugInfo                              func(unsafe.Pointer)
+	_fnHIObjectRegisterSubclass                            func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, uint, *EventTypeSpec, unsafe.Pointer, unsafe.Pointer) int
+	_fnHIObjectRemoveDelegate                              func(unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnHIObjectUnregisterClass                             func(unsafe.Pointer) int
+	_fnHIPointConvert                                      func(*corefoundation.CGPoint, uint, unsafe.Pointer, uint, unsafe.Pointer)
+	_fnHIRectConvert                                       func(*corefoundation.CGRect, uint, unsafe.Pointer, uint, unsafe.Pointer)
+	_fnHISearchWindowShow                                  func(unsafe.Pointer, uint) int
+	_fnHISizeConvert                                       func(*corefoundation.CGSize, uint, unsafe.Pointer, uint, unsafe.Pointer)
+	_fnHIThemeApplyBackground                              func(*corefoundation.CGRect, *HIThemeBackgroundDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeBeginFocus                                   func(unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnHIThemeBrushCreateCGColor                           func(int16, unsafe.Pointer) int
+	_fnHIThemeDrawBackground                               func(*corefoundation.CGRect, *HIThemeBackgroundDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawButton                                   func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
+	_fnHIThemeDrawChasingArrows                            func(*corefoundation.CGRect, *HIThemeChasingArrowsDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawFocusRect                                func(*corefoundation.CGRect, uint8, unsafe.Pointer, uint) int
+	_fnHIThemeDrawFrame                                    func(*corefoundation.CGRect, *HIThemeFrameDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawGenericWell                              func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawGrabber                                  func(*corefoundation.CGRect, *HIThemeGrabberDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawGroupBox                                 func(*corefoundation.CGRect, *HIThemeGroupBoxDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawGrowBox                                  func(*corefoundation.CGPoint, *HIThemeGrowBoxDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawHeader                                   func(*corefoundation.CGRect, *HIThemeHeaderDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawMenuBackground                           func(*corefoundation.CGRect, *HIThemeMenuDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawMenuBarBackground                        func(*corefoundation.CGRect, *HIThemeMenuBarDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawMenuItem                                 func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuItemDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
+	_fnHIThemeDrawMenuSeparator                            func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuItemDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawMenuTitle                                func(*corefoundation.CGRect, *corefoundation.CGRect, *HIThemeMenuTitleDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
+	_fnHIThemeDrawPaneSplitter                             func(*corefoundation.CGRect, *HIThemeSplitterDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawPlacard                                  func(*corefoundation.CGRect, *HIThemePlacardDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawPopupArrow                               func(*corefoundation.CGRect, *HIThemePopupArrowDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawScrollBarDelimiters                      func(*corefoundation.CGRect, *HIThemeScrollBarDelimitersDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawSegment                                  func(*corefoundation.CGRect, *HIThemeSegmentDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawSeparator                                func(*corefoundation.CGRect, *HIThemeSeparatorDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTab                                      func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
+	_fnHIThemeDrawTabPane                                  func(*corefoundation.CGRect, *HIThemeTabPaneDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTextBox                                  func(unsafe.Pointer, *corefoundation.CGRect, *HIThemeTextInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTickMark                                 func(*corefoundation.CGRect, *HIThemeTickMarkDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTitleBarWidget                           func(*corefoundation.CGRect, *HIThemeWindowWidgetDrawInfo, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTrack                                    func(*HIThemeTrackDrawInfo, *corefoundation.CGRect, unsafe.Pointer, uint) int
+	_fnHIThemeDrawTrackTickMarks                           func(*HIThemeTrackDrawInfo, uint, unsafe.Pointer, uint) int
+	_fnHIThemeDrawWindowFrame                              func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, unsafe.Pointer, uint, *corefoundation.CGRect) int
+	_fnHIThemeEndFocus                                     func(unsafe.Pointer) int
+	_fnHIThemeGetButtonBackgroundBounds                    func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, *corefoundation.CGRect) int
+	_fnHIThemeGetButtonContentBounds                       func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, *corefoundation.CGRect) int
+	_fnHIThemeGetButtonShape                               func(*corefoundation.CGRect, *HIThemeButtonDrawInfo, unsafe.Pointer) int
+	_fnHIThemeGetGrowBoxBounds                             func(*corefoundation.CGPoint, *HIThemeGrowBoxDrawInfo, *corefoundation.CGRect) int
+	_fnHIThemeGetMenuBackgroundShape                       func(*corefoundation.CGRect, *HIThemeMenuDrawInfo, unsafe.Pointer) int
+	_fnHIThemeGetScrollBarTrackRect                        func(*corefoundation.CGRect, *HIScrollBarTrackInfo, uint8, *corefoundation.CGRect) int
+	_fnHIThemeGetTabDrawShape                              func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer) int
+	_fnHIThemeGetTabPaneContentShape                       func(*corefoundation.CGRect, uint16, uint, unsafe.Pointer) int
+	_fnHIThemeGetTabPaneDrawShape                          func(*corefoundation.CGRect, uint16, uint, unsafe.Pointer) int
+	_fnHIThemeGetTabShape                                  func(*corefoundation.CGRect, *HIThemeTabDrawInfo, unsafe.Pointer) int
+	_fnHIThemeGetTextColorForThemeBrush                    func(int16, uint8, *int16) int
+	_fnHIThemeGetTextDimensions                            func(unsafe.Pointer, float64, *HIThemeTextInfo, *float64, *float64, *float64) int
+	_fnHIThemeGetTrackBounds                               func(*HIThemeTrackDrawInfo, *corefoundation.CGRect) int
+	_fnHIThemeGetTrackDragRect                             func(*HIThemeTrackDrawInfo, *corefoundation.CGRect) int
+	_fnHIThemeGetTrackLiveValue                            func(*HIThemeTrackDrawInfo, float64, *int) int
+	_fnHIThemeGetTrackPartBounds                           func(*HIThemeTrackDrawInfo, int16, *corefoundation.CGRect) int
+	_fnHIThemeGetTrackParts                                func(*HIThemeTrackDrawInfo, *uint, uint, *int16) int
+	_fnHIThemeGetTrackThumbPositionFromBounds              func(*HIThemeTrackDrawInfo, *corefoundation.CGRect, *float64) int
+	_fnHIThemeGetTrackThumbPositionFromOffset              func(*HIThemeTrackDrawInfo, *corefoundation.CGPoint, *float64) int
+	_fnHIThemeGetTrackThumbShape                           func(*HIThemeTrackDrawInfo, unsafe.Pointer) int
+	_fnHIThemeGetUIFontType                                func(uint16) coretext.CTFontUIFontType
+	_fnHIThemeGetWindowRegionHit                           func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, *corefoundation.CGPoint, *uint16) uint8
+	_fnHIThemeGetWindowShape                               func(*corefoundation.CGRect, *HIThemeWindowDrawInfo, uint16, unsafe.Pointer) int
+	_fnHIThemeHitTestScrollBarArrows                       func(*corefoundation.CGRect, *HIScrollBarTrackInfo, uint8, *corefoundation.CGPoint, *corefoundation.CGRect, *int16) uint8
+	_fnHIThemeHitTestTrack                                 func(*HIThemeTrackDrawInfo, *corefoundation.CGPoint, *int16) uint8
+	_fnHIThemeSetFill                                      func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnHIThemeSetStroke                                    func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnHIThemeSetTextFill                                  func(int16, unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnInstallEventHandler                                 func(unsafe.Pointer, unsafe.Pointer, uint, *EventTypeSpec, unsafe.Pointer, unsafe.Pointer) int
+	_fnInstallEventLoopTimer                               func(unsafe.Pointer, float64, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeAEFilterUPP                                   func(*EventRecord, int, int, *ae.AEDesc, unsafe.Pointer) uint8
+	_fnInvokeAEIdleUPP                                     func(*EventRecord, *int, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeCaretHookUPP                                  func(unsafe.Pointer, *TERec, unsafe.Pointer)
+	_fnInvokeControlActionUPP                              func(unsafe.Pointer, int16, unsafe.Pointer)
+	_fnInvokeControlEditTextValidationUPP                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeControlKeyFilterUPP                           func(unsafe.Pointer, *int16, *int16, *uint16, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneActivateUPP                    func(unsafe.Pointer, uint8, unsafe.Pointer)
+	_fnInvokeControlUserPaneDrawUPP                        func(unsafe.Pointer, int16, unsafe.Pointer)
+	_fnInvokeControlUserPaneFocusUPP                       func(unsafe.Pointer, int16, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneHitTestUPP                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneIdleUPP                        func(unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeControlUserPaneKeyDownUPP                     func(unsafe.Pointer, int16, int16, int16, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneTrackingUPP                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDataBrowserAcceptDragUPP                      func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserAddDragItemUPP                     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserDrawItemUPP                        func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer, int16, uint8, unsafe.Pointer)
+	_fnInvokeDataBrowserEditItemUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserGetContextualMenuUPP               func(unsafe.Pointer, unsafe.Pointer, *uint, unsafe.Pointer, *ae.AEDesc, unsafe.Pointer)
+	_fnInvokeDataBrowserHitTestUPP                         func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserItemAcceptDragUPP                  func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
+	_fnInvokeDataBrowserItemCompareUPP                     func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserItemDataUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, uint8, unsafe.Pointer) int
+	_fnInvokeDataBrowserItemDragRgnUPP                     func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeDataBrowserItemHelpContentUPP                 func(unsafe.Pointer, uint, uint, int16, *int16, *HMHelpContentRec, unsafe.Pointer)
+	_fnInvokeDataBrowserItemNotificationUPP                func(unsafe.Pointer, uint, uint, unsafe.Pointer)
+	_fnInvokeDataBrowserItemNotificationWithItemUPP        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeDataBrowserItemReceiveDragUPP                 func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserItemUPP                            func(uint, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeDataBrowserPostProcessDragUPP                 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
+	_fnInvokeDataBrowserReceiveDragUPP                     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserSelectContextualMenuUPP            func(unsafe.Pointer, unsafe.Pointer, uint, int16, uint16, unsafe.Pointer)
+	_fnInvokeDataBrowserTrackingUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer) int16
+	_fnInvokeDragDrawingUPP                                func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDragInputUPP                                  func(unsafe.Pointer, *int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDragReceiveHandlerUPP                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDragSendDataUPP                               func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDragTrackingHandlerUPP                        func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDrawHookUPP                                   func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer)
+	_fnInvokeEOLHookUPP                                    func(int8, *TERec, **TERec, unsafe.Pointer) uint8
+	_fnInvokeEditUnicodePostUpdateUPP                      func(**uint16, uint, uint, uint, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeEventComparatorUPP                            func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeEventHandlerUPP                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeEventLoopIdleTimerUPP                         func(unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeEventLoopTimerUPP                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeGetScrapDataUPP                               func(uint, *string, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeHMControlContentUPP                           func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHMMenuItemContentUPP                          func(*MenuTrackingData, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHMMenuTitleContentUPP                         func(unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHMWindowContentUPP                            func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHighHookUPP                                   func(unsafe.Pointer, *TERec, unsafe.Pointer)
+	_fnInvokeHitTestHookUPP                                func(uint16, uint16, uint16, unsafe.Pointer, *TERec, **TERec, *uint16, *uint16, *uint8, unsafe.Pointer) uint8
+	_fnInvokeListClickLoopUPP                              func(unsafe.Pointer) uint8
+	_fnInvokeListDefUPP                                    func(int16, uint8, unsafe.Pointer, unsafe.Pointer, int16, int16, **ListRec, unsafe.Pointer)
+	_fnInvokeListSearchUPP                                 func(string, string, int16, int16, unsafe.Pointer) int16
+	_fnInvokeMenuItemDrawingUPP                            func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeMenuTitleDrawingUPP                           func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeModalFilterUPP                                func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer) uint8
+	_fnInvokeModalFilterYDUPP                              func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeNMUPP                                         func(*NMRec, unsafe.Pointer)
+	_fnInvokeNWidthHookUPP                                 func(uint16, uint16, int16, int16, unsafe.Pointer, *int16, *TERec, **TERec, unsafe.Pointer) uint16
+	_fnInvokeScrapPromiseKeeperUPP                         func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeTEClickLoopUPP                                func(*TERec, unsafe.Pointer) uint8
+	_fnInvokeTEDoTextUPP                                   func(*TERec, uint16, uint16, int16, unsafe.Pointer, *int16, unsafe.Pointer)
+	_fnInvokeTEFindWordUPP                                 func(uint16, int16, *TERec, **TERec, *uint16, *uint16, unsafe.Pointer)
+	_fnInvokeTERecalcUPP                                   func(*TERec, uint16, *uint16, *uint16, *uint16, unsafe.Pointer)
+	_fnInvokeTSMTEPostUpdateUPP                            func(**TERec, int, int, int, int, int, int, unsafe.Pointer)
+	_fnInvokeTSMTEPreUpdateUPP                             func(**TERec, int, unsafe.Pointer)
+	_fnInvokeTXNActionKeyMapperUPP                         func(uint, uint, unsafe.Pointer) unsafe.Pointer
+	_fnInvokeTXNActionNameMapperUPP                        func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnInvokeTXNContextualMenuSetupUPP                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeTXNFindUPP                                    func(*TXNMatchTextRecord, uint, uint, unsafe.Pointer, uint, uint, uint, *uint, *uint, *uint8, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeTXNScrollInfoUPP                              func(int, int, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeTextWidthHookUPP                              func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
+	_fnInvokeThemeButtonDrawUPP                            func(unsafe.Pointer, uint16, *ThemeButtonDrawInfo, unsafe.Pointer, int16, uint8, unsafe.Pointer)
+	_fnInvokeThemeEraseUPP                                 func(unsafe.Pointer, unsafe.Pointer, int16, uint8, unsafe.Pointer)
+	_fnInvokeThemeIteratorUPP                              func(*uint8, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnInvokeThemeTabTitleDrawUPP                          func(unsafe.Pointer, uint16, uint16, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeUserItemUPP                                   func(unsafe.Pointer, int16, unsafe.Pointer)
+	_fnInvokeWidthHookUPP                                  func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
+	_fnInvokeWindowPaintUPP                                func(**qd.GDevice, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnInvokeWindowTitleDrawingUPP                         func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnIsCmdChar                                           func(*EventRecord, int16) uint8
+	_fnIsEventInQueue                                      func(unsafe.Pointer, unsafe.Pointer) uint8
+	_fnIsSecureEventInputEnabled                           func() uint8
+	_fnIsUserCancelEventRef                                func(unsafe.Pointer) uint8
+	_fnKBGetLayoutType                                     func(int16) uint
+	_fnLMGetKbdLast                                        func() uint8
+	_fnLMGetKbdType                                        func() uint8
+	_fnLMGetKeyRepThresh                                   func() int16
+	_fnLMGetKeyThresh                                      func() int16
+	_fnNewAEFilterUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewAEIdleUPP                                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewCaretHookUPP                                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlActionUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlEditTextValidationUPP                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlKeyFilterUPP                              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneActivateUPP                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneDrawUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneFocusUPP                          func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneHitTestUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneIdleUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneKeyDownUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewControlUserPaneTrackingUPP                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserAcceptDragUPP                         func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserAddDragItemUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserDrawItemUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserEditItemUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserGetContextualMenuUPP                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserHitTestUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemAcceptDragUPP                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemCompareUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemDataUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemDragRgnUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemHelpContentUPP                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemNotificationUPP                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemNotificationWithItemUPP           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemReceiveDragUPP                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserItemUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserPostProcessDragUPP                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserReceiveDragUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserSelectContextualMenuUPP               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDataBrowserTrackingUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDragDrawingUPP                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDragInputUPP                                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDragReceiveHandlerUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDragSendDataUPP                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDragTrackingHandlerUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewDrawHookUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEOLHookUPP                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEditUnicodePostUpdateUPP                         func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEventComparatorUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEventHandlerUPP                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEventLoopIdleTimerUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewEventLoopTimerUPP                                func(unsafe.Pointer) unsafe.Pointer
+	_fnNewGetScrapDataUPP                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHMControlContentUPP                              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHMMenuItemContentUPP                             func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHMMenuTitleContentUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHMWindowContentUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHighHookUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewHitTestHookUPP                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewListClickLoopUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewListDefUPP                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewListSearchUPP                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewMenuItemDrawingUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewMenuTitleDrawingUPP                              func(unsafe.Pointer) unsafe.Pointer
+	_fnNewModalFilterUPP                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewModalFilterYDUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewNMUPP                                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewNWidthHookUPP                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewScrapPromiseKeeperUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTEClickLoopUPP                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTEDoTextUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTEFindWordUPP                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTERecalcUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTSMTEPostUpdateUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTSMTEPreUpdateUPP                                func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTXNActionKeyMapperUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTXNActionNameMapperUPP                           func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTXNContextualMenuSetupUPP                        func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTXNFindUPP                                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTXNScrollInfoUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewTextWidthHookUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThemeButtonDrawUPP                               func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThemeEraseUPP                                    func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThemeIteratorUPP                                 func(unsafe.Pointer) unsafe.Pointer
+	_fnNewThemeTabTitleDrawUPP                             func(unsafe.Pointer) unsafe.Pointer
+	_fnNewUserItemUPP                                      func(unsafe.Pointer) unsafe.Pointer
+	_fnNewWidthHookUPP                                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewWindowPaintUPP                                   func(unsafe.Pointer) unsafe.Pointer
+	_fnNewWindowTitleDrawingUPP                            func(unsafe.Pointer) unsafe.Pointer
+	_fnPopSymbolicHotKeyMode                               func(unsafe.Pointer)
+	_fnPostEventToQueue                                    func(unsafe.Pointer, unsafe.Pointer, int16) int
+	_fnProcessHICommand                                    func(*HICommand) int
+	_fnPushSymbolicHotKeyMode                              func(uint) unsafe.Pointer
+	_fnQuitEventLoop                                       func(unsafe.Pointer) int
+	_fnReceiveNextEvent                                    func(uint, *EventTypeSpec, float64, uint8, unsafe.Pointer) int
+	_fnRegisterEventHotKey                                 func(uint, uint, EventHotKeyID, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnReleaseEvent                                        func(unsafe.Pointer)
+	_fnRemoveEventFromQueue                                func(unsafe.Pointer, unsafe.Pointer) int
+	_fnRemoveEventHandler                                  func(unsafe.Pointer) int
+	_fnRemoveEventLoopTimer                                func(unsafe.Pointer) int
+	_fnRemoveEventParameter                                func(unsafe.Pointer, uint) int
+	_fnRemoveEventTypesFromHandler                         func(unsafe.Pointer, uint, *EventTypeSpec) int
+	_fnRetainEvent                                         func(unsafe.Pointer) unsafe.Pointer
+	_fnRunCurrentEventLoop                                 func(float64) int
+	_fnSendEventToEventTarget                              func(unsafe.Pointer, unsafe.Pointer) int
+	_fnSendEventToEventTargetWithOptions                   func(unsafe.Pointer, unsafe.Pointer, uint) int
+	_fnSetEventLoopTimerNextFireTime                       func(unsafe.Pointer, float64) int
+	_fnSetEventParameter                                   func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) int
+	_fnSetEventTime                                        func(unsafe.Pointer, float64) int
+	_fnSetSystemUIMode                                     func(uint, uint) int
+	_fnTISCopyCurrentASCIICapableKeyboardInputSource       func() unsafe.Pointer
 	_fnTISCopyCurrentASCIICapableKeyboardLayoutInputSource func() unsafe.Pointer
-	_fnTISCopyCurrentKeyboardInputSource func() unsafe.Pointer
-	_fnTISCopyCurrentKeyboardLayoutInputSource func() unsafe.Pointer
-	_fnTISCopyInputMethodKeyboardLayoutOverride func() unsafe.Pointer
-	_fnTISCopyInputSourceForLanguage func(unsafe.Pointer) unsafe.Pointer
-	_fnTISCreateASCIICapableInputSourceList func() unsafe.Pointer
-	_fnTISCreateInputSourceList func(unsafe.Pointer, uint8) unsafe.Pointer
-	_fnTISDeselectInputSource func(unsafe.Pointer) int
-	_fnTISDisableInputSource func(unsafe.Pointer) int
-	_fnTISEnableInputSource func(unsafe.Pointer) int
-	_fnTISGetInputSourceProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTISInputSourceGetTypeID func() uint
-	_fnTISRegisterInputSource func(unsafe.Pointer) int
-	_fnTISSelectInputSource func(unsafe.Pointer) int
-	_fnTISSetInputMethodKeyboardLayoutOverride func(unsafe.Pointer) int
-	_fnTSMGetActiveDocument func() unsafe.Pointer
-	_fnTSMGetDocumentProperty func(unsafe.Pointer, uint, uint, *uint, unsafe.Pointer) int
-	_fnTSMRemoveDocumentProperty func(unsafe.Pointer, uint) int
-	_fnTSMSetDocumentProperty func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
-	_fnUnregisterEventHotKey func(unsafe.Pointer) int
+	_fnTISCopyCurrentKeyboardInputSource                   func() unsafe.Pointer
+	_fnTISCopyCurrentKeyboardLayoutInputSource             func() unsafe.Pointer
+	_fnTISCopyInputMethodKeyboardLayoutOverride            func() unsafe.Pointer
+	_fnTISCopyInputSourceForLanguage                       func(unsafe.Pointer) unsafe.Pointer
+	_fnTISCreateASCIICapableInputSourceList                func() unsafe.Pointer
+	_fnTISCreateInputSourceList                            func(unsafe.Pointer, uint8) unsafe.Pointer
+	_fnTISDeselectInputSource                              func(unsafe.Pointer) int
+	_fnTISDisableInputSource                               func(unsafe.Pointer) int
+	_fnTISEnableInputSource                                func(unsafe.Pointer) int
+	_fnTISGetInputSourceProperty                           func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTISInputSourceGetTypeID                             func() uint
+	_fnTISRegisterInputSource                              func(unsafe.Pointer) int
+	_fnTISSelectInputSource                                func(unsafe.Pointer) int
+	_fnTISSetInputMethodKeyboardLayoutOverride             func(unsafe.Pointer) int
+	_fnTSMGetActiveDocument                                func() unsafe.Pointer
+	_fnTSMGetDocumentProperty                              func(unsafe.Pointer, uint, uint, *uint, unsafe.Pointer) int
+	_fnTSMRemoveDocumentProperty                           func(unsafe.Pointer, uint) int
+	_fnTSMSetDocumentProperty                              func(unsafe.Pointer, uint, uint, unsafe.Pointer) int
+	_fnUnregisterEventHotKey                               func(unsafe.Pointer) int
 )
 
 func AEGetInteractionAllowed(level *int8) int16 {
@@ -2230,4 +2230,3 @@ func TSMSetDocumentProperty(docID unsafe.Pointer, propertyTag uint, propertySize
 func UnregisterEventHotKey(inHotKey unsafe.Pointer) int {
 	return _fnUnregisterEventHotKey(inHotKey)
 }
-

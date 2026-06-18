@@ -17,33 +17,33 @@ type NSSplitView struct {
 }
 
 var (
-	_clsNSSplitView = _objcClass("NSSplitView")
-	_nSSplitViewSelDrawDividerInRect = objc.RegisterName("drawDividerInRect:")
-	_nSSplitViewSelAdjustSubviews = objc.RegisterName("adjustSubviews")
-	_nSSplitViewSelIsSubviewCollapsed = objc.RegisterName("isSubviewCollapsed:")
+	_clsNSSplitView                                    = _objcClass("NSSplitView")
+	_nSSplitViewSelDrawDividerInRect                   = objc.RegisterName("drawDividerInRect:")
+	_nSSplitViewSelAdjustSubviews                      = objc.RegisterName("adjustSubviews")
+	_nSSplitViewSelIsSubviewCollapsed                  = objc.RegisterName("isSubviewCollapsed:")
 	_nSSplitViewSelMinPossiblePositionOfDividerAtIndex = objc.RegisterName("minPossiblePositionOfDividerAtIndex:")
 	_nSSplitViewSelMaxPossiblePositionOfDividerAtIndex = objc.RegisterName("maxPossiblePositionOfDividerAtIndex:")
-	_nSSplitViewSelSetPositionOfDividerAtIndex = objc.RegisterName("setPosition:ofDividerAtIndex:")
-	_nSSplitViewSelHoldingPriorityForSubviewAtIndex = objc.RegisterName("holdingPriorityForSubviewAtIndex:")
+	_nSSplitViewSelSetPositionOfDividerAtIndex         = objc.RegisterName("setPosition:ofDividerAtIndex:")
+	_nSSplitViewSelHoldingPriorityForSubviewAtIndex    = objc.RegisterName("holdingPriorityForSubviewAtIndex:")
 	_nSSplitViewSelSetHoldingPriorityForSubviewAtIndex = objc.RegisterName("setHoldingPriority:forSubviewAtIndex:")
-	_nSSplitViewSelIsVertical = objc.RegisterName("isVertical")
-	_nSSplitViewSelSetVertical = objc.RegisterName("setVertical:")
-	_nSSplitViewSelDividerStyle = objc.RegisterName("dividerStyle")
-	_nSSplitViewSelSetDividerStyle = objc.RegisterName("setDividerStyle:")
-	_nSSplitViewSelAutosaveName = objc.RegisterName("autosaveName")
-	_nSSplitViewSelSetAutosaveName = objc.RegisterName("setAutosaveName:")
-	_nSSplitViewSelDelegate = objc.RegisterName("delegate")
-	_nSSplitViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSplitViewSelDividerColor = objc.RegisterName("dividerColor")
-	_nSSplitViewSelDividerThickness = objc.RegisterName("dividerThickness")
-	_nSSplitViewSelAddArrangedSubview = objc.RegisterName("addArrangedSubview:")
-	_nSSplitViewSelInsertArrangedSubviewAtIndex = objc.RegisterName("insertArrangedSubview:atIndex:")
-	_nSSplitViewSelRemoveArrangedSubview = objc.RegisterName("removeArrangedSubview:")
-	_nSSplitViewSelArrangesAllSubviews = objc.RegisterName("arrangesAllSubviews")
-	_nSSplitViewSelSetArrangesAllSubviews = objc.RegisterName("setArrangesAllSubviews:")
-	_nSSplitViewSelArrangedSubviews = objc.RegisterName("arrangedSubviews")
-	_nSSplitViewSelSetIsPaneSplitter = objc.RegisterName("setIsPaneSplitter:")
-	_nSSplitViewSelIsPaneSplitter = objc.RegisterName("isPaneSplitter")
+	_nSSplitViewSelIsVertical                          = objc.RegisterName("isVertical")
+	_nSSplitViewSelSetVertical                         = objc.RegisterName("setVertical:")
+	_nSSplitViewSelDividerStyle                        = objc.RegisterName("dividerStyle")
+	_nSSplitViewSelSetDividerStyle                     = objc.RegisterName("setDividerStyle:")
+	_nSSplitViewSelAutosaveName                        = objc.RegisterName("autosaveName")
+	_nSSplitViewSelSetAutosaveName                     = objc.RegisterName("setAutosaveName:")
+	_nSSplitViewSelDelegate                            = objc.RegisterName("delegate")
+	_nSSplitViewSelSetDelegate                         = objc.RegisterName("setDelegate:")
+	_nSSplitViewSelDividerColor                        = objc.RegisterName("dividerColor")
+	_nSSplitViewSelDividerThickness                    = objc.RegisterName("dividerThickness")
+	_nSSplitViewSelAddArrangedSubview                  = objc.RegisterName("addArrangedSubview:")
+	_nSSplitViewSelInsertArrangedSubviewAtIndex        = objc.RegisterName("insertArrangedSubview:atIndex:")
+	_nSSplitViewSelRemoveArrangedSubview               = objc.RegisterName("removeArrangedSubview:")
+	_nSSplitViewSelArrangesAllSubviews                 = objc.RegisterName("arrangesAllSubviews")
+	_nSSplitViewSelSetArrangesAllSubviews              = objc.RegisterName("setArrangesAllSubviews:")
+	_nSSplitViewSelArrangedSubviews                    = objc.RegisterName("arrangedSubviews")
+	_nSSplitViewSelSetIsPaneSplitter                   = objc.RegisterName("setIsPaneSplitter:")
+	_nSSplitViewSelIsPaneSplitter                      = objc.RegisterName("isPaneSplitter")
 )
 
 func NSSplitViewFromID(id objc.ID) *NSSplitView {
@@ -112,7 +112,9 @@ func (o *NSSplitView) SetDividerStyle(dividerStyle NSSplitViewDividerStyle) {
 
 func (o *NSSplitView) AutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -131,7 +133,9 @@ func (o *NSSplitView) SetDelegate(delegate NSSplitViewDelegate) {
 
 func (o *NSSplitView) DividerColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelDividerColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -169,7 +173,9 @@ func (o *NSSplitView) SetArrangesAllSubviews(arrangesAllSubviews bool) {
 // The list of views that are arranged as split panes in the receiver. They are a subset of \c -subviews, with potential difference in ordering. If \c -arrangesAllSubviews is YES, then \c -arrangedSubviews is identical to \c -subviews.
 func (o *NSSplitView) ArrangedSubviews() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewSelArrangedSubviews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -183,4 +189,3 @@ func (o *NSSplitView) IsPaneSplitter() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSSplitViewSelIsPaneSplitter)
 	return _ret
 }
-

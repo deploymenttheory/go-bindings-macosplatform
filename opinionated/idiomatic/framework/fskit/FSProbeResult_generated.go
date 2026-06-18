@@ -68,4 +68,3 @@ type ProbeResultable interface {
 }
 
 var _ ProbeResultable = (*ProbeResult)(nil)
-

@@ -20,37 +20,37 @@ type SKScene struct {
 }
 
 var (
-	_clsSKScene = _objcClass("SKScene")
-	_sKSceneSelInitWithSize = objc.RegisterName("initWithSize:")
-	_sKSceneSelSceneWithSize = objc.RegisterName("sceneWithSize:")
-	_sKSceneSelSceneDidLoad = objc.RegisterName("sceneDidLoad")
+	_clsSKScene                     = _objcClass("SKScene")
+	_sKSceneSelInitWithSize         = objc.RegisterName("initWithSize:")
+	_sKSceneSelSceneWithSize        = objc.RegisterName("sceneWithSize:")
+	_sKSceneSelSceneDidLoad         = objc.RegisterName("sceneDidLoad")
 	_sKSceneSelConvertPointFromView = objc.RegisterName("convertPointFromView:")
-	_sKSceneSelConvertPointToView = objc.RegisterName("convertPointToView:")
-	_sKSceneSelUpdate = objc.RegisterName("update:")
-	_sKSceneSelDidEvaluateActions = objc.RegisterName("didEvaluateActions")
-	_sKSceneSelDidSimulatePhysics = objc.RegisterName("didSimulatePhysics")
-	_sKSceneSelDidApplyConstraints = objc.RegisterName("didApplyConstraints")
-	_sKSceneSelDidFinishUpdate = objc.RegisterName("didFinishUpdate")
-	_sKSceneSelDidMoveToView = objc.RegisterName("didMoveToView:")
-	_sKSceneSelWillMoveFromView = objc.RegisterName("willMoveFromView:")
-	_sKSceneSelDidChangeSize = objc.RegisterName("didChangeSize:")
-	_sKSceneSelSize = objc.RegisterName("size")
-	_sKSceneSelSetSize = objc.RegisterName("setSize:")
-	_sKSceneSelScaleMode = objc.RegisterName("scaleMode")
-	_sKSceneSelSetScaleMode = objc.RegisterName("setScaleMode:")
-	_sKSceneSelCamera = objc.RegisterName("camera")
-	_sKSceneSelSetCamera = objc.RegisterName("setCamera:")
-	_sKSceneSelListener = objc.RegisterName("listener")
-	_sKSceneSelSetListener = objc.RegisterName("setListener:")
-	_sKSceneSelAudioEngine = objc.RegisterName("audioEngine")
-	_sKSceneSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_sKSceneSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_sKSceneSelDelegate = objc.RegisterName("delegate")
-	_sKSceneSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sKSceneSelAnchorPoint = objc.RegisterName("anchorPoint")
-	_sKSceneSelSetAnchorPoint = objc.RegisterName("setAnchorPoint:")
-	_sKSceneSelPhysicsWorld = objc.RegisterName("physicsWorld")
-	_sKSceneSelView = objc.RegisterName("view")
+	_sKSceneSelConvertPointToView   = objc.RegisterName("convertPointToView:")
+	_sKSceneSelUpdate               = objc.RegisterName("update:")
+	_sKSceneSelDidEvaluateActions   = objc.RegisterName("didEvaluateActions")
+	_sKSceneSelDidSimulatePhysics   = objc.RegisterName("didSimulatePhysics")
+	_sKSceneSelDidApplyConstraints  = objc.RegisterName("didApplyConstraints")
+	_sKSceneSelDidFinishUpdate      = objc.RegisterName("didFinishUpdate")
+	_sKSceneSelDidMoveToView        = objc.RegisterName("didMoveToView:")
+	_sKSceneSelWillMoveFromView     = objc.RegisterName("willMoveFromView:")
+	_sKSceneSelDidChangeSize        = objc.RegisterName("didChangeSize:")
+	_sKSceneSelSize                 = objc.RegisterName("size")
+	_sKSceneSelSetSize              = objc.RegisterName("setSize:")
+	_sKSceneSelScaleMode            = objc.RegisterName("scaleMode")
+	_sKSceneSelSetScaleMode         = objc.RegisterName("setScaleMode:")
+	_sKSceneSelCamera               = objc.RegisterName("camera")
+	_sKSceneSelSetCamera            = objc.RegisterName("setCamera:")
+	_sKSceneSelListener             = objc.RegisterName("listener")
+	_sKSceneSelSetListener          = objc.RegisterName("setListener:")
+	_sKSceneSelAudioEngine          = objc.RegisterName("audioEngine")
+	_sKSceneSelBackgroundColor      = objc.RegisterName("backgroundColor")
+	_sKSceneSelSetBackgroundColor   = objc.RegisterName("setBackgroundColor:")
+	_sKSceneSelDelegate             = objc.RegisterName("delegate")
+	_sKSceneSelSetDelegate          = objc.RegisterName("setDelegate:")
+	_sKSceneSelAnchorPoint          = objc.RegisterName("anchorPoint")
+	_sKSceneSelSetAnchorPoint       = objc.RegisterName("setAnchorPoint:")
+	_sKSceneSelPhysicsWorld         = objc.RegisterName("physicsWorld")
+	_sKSceneSelView                 = objc.RegisterName("view")
 )
 
 func SKSceneFromID(id objc.ID) *SKScene {
@@ -66,13 +66,17 @@ func SKSceneFromID(id objc.ID) *SKScene {
 // A scene is infinitely large, but it has a viewport that is the frame through which you present the content of the scene. The passed in size defines the size of this viewport that you use to present the scene. @param size a size in points that signifies the viewport into the scene that defines your framing of the scene.
 func (o *SKScene) InitWithSize(size corefoundation.CGSize) *SKScene {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelInitWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSceneFromID(_ret)
 }
 
 func SKSceneSceneWithSize(size corefoundation.CGSize) *SKScene {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKScene), _sKSceneSelSceneWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKSceneFromID(_ret)
 }
 
@@ -149,7 +153,9 @@ func (o *SKScene) SetScaleMode(scaleMode SKSceneScaleMode) {
 // The camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
 func (o *SKScene) Camera() *SKCameraNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKCameraNodeFromID(_ret)
 }
 
@@ -160,7 +166,9 @@ func (o *SKScene) SetCamera(camera *SKCameraNode) {
 // The node that is currently the listener for positional audio coming from SKAudioNodes @see SKAudioNode
 func (o *SKScene) Listener() *SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelListener)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKNodeFromID(_ret)
 }
 
@@ -170,14 +178,18 @@ func (o *SKScene) SetListener(listener *SKNode) {
 
 func (o *SKScene) AudioEngine() *avfaudio.AVAudioEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelAudioEngine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioEngineFromID(_ret)
 }
 
 // Background color, defaults to gray
 func (o *SKScene) BackgroundColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -207,14 +219,17 @@ func (o *SKScene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
 // Physics simulation functionality
 func (o *SKScene) PhysicsWorld() *SKPhysicsWorld {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelPhysicsWorld)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsWorldFromID(_ret)
 }
 
 // The SKView this scene is currently presented in, or nil if it is not being presented.
 func (o *SKScene) View() *SKView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKSceneSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKViewFromID(_ret)
 }
-

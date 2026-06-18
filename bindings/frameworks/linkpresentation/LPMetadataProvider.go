@@ -18,14 +18,14 @@ type LPMetadataProvider struct {
 }
 
 var (
-	_clsLPMetadataProvider = _objcClass("LPMetadataProvider")
-	_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler = objc.RegisterName("startFetchingMetadataForURL:completionHandler:")
+	_clsLPMetadataProvider                                                 = _objcClass("LPMetadataProvider")
+	_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler     = objc.RegisterName("startFetchingMetadataForURL:completionHandler:")
 	_lPMetadataProviderSelStartFetchingMetadataForRequestCompletionHandler = objc.RegisterName("startFetchingMetadataForRequest:completionHandler:")
-	_lPMetadataProviderSelCancel = objc.RegisterName("cancel")
-	_lPMetadataProviderSelShouldFetchSubresources = objc.RegisterName("shouldFetchSubresources")
-	_lPMetadataProviderSelSetShouldFetchSubresources = objc.RegisterName("setShouldFetchSubresources:")
-	_lPMetadataProviderSelTimeout = objc.RegisterName("timeout")
-	_lPMetadataProviderSelSetTimeout = objc.RegisterName("setTimeout:")
+	_lPMetadataProviderSelCancel                                           = objc.RegisterName("cancel")
+	_lPMetadataProviderSelShouldFetchSubresources                          = objc.RegisterName("shouldFetchSubresources")
+	_lPMetadataProviderSelSetShouldFetchSubresources                       = objc.RegisterName("setShouldFetchSubresources:")
+	_lPMetadataProviderSelTimeout                                          = objc.RegisterName("timeout")
+	_lPMetadataProviderSelSetTimeout                                       = objc.RegisterName("setTimeout:")
 )
 
 func LPMetadataProviderFromID(id objc.ID) *LPMetadataProvider {
@@ -38,7 +38,7 @@ func LPMetadataProviderFromID(id objc.ID) *LPMetadataProvider {
 	return o
 }
 
-// Fetches metadata for the given URL. Call this method once per ``LPMetadataProvider`` instance. If you attempt to fetch metadata multiple times on a single ``LPMetadataProvider`` instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting ``LPLinkMetadata``. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for url: URL) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+// Fetches metadata for the given URL. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for url: URL) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +53,7 @@ func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *f
 	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
 }
 
-// Fetches metadata for the given ``NSURLRequest``. Call this method once per ``LPMetadataProvider`` instance. If you attempt to fetch metadata multiple times on a single ``LPMetadataProvider`` instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting ``LPLinkMetadata``. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for request: URLRequest) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+// Fetches metadata for the given “NSURLRequest“. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for request: URLRequest) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 func (o *LPMetadataProvider) StartFetchingMetadataForRequestCompletionHandler(request *foundation.NSURLRequest, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -68,12 +68,12 @@ func (o *LPMetadataProvider) StartFetchingMetadataForRequestCompletionHandler(re
 	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForRequestCompletionHandler, request.Ptr(), __block_completionHandler)
 }
 
-// Cancels a metadata request. This method invokes the completion handler with the error code ``LPErrorCode/LPErrorMetadataFetchCancelled`` if the request hasn’t already completed.
+// Cancels a metadata request. This method invokes the completion handler with the error code “LPErrorCode/LPErrorMetadataFetchCancelled“ if the request hasn’t already completed.
 func (o *LPMetadataProvider) Cancel() {
 	o.Ptr().Send(_lPMetadataProviderSelCancel)
 }
 
-// A Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned ``LPLinkMetadata`` object consists only of metadata retrieved from the main resource identified by the url passed to ``LPMetadataProvider/startFetchingMetadataForURL:completionHandler:``. The default value is `true`.
+// A Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
 func (o *LPMetadataProvider) ShouldFetchSubresources() bool {
 	_ret := objc.Send[bool](o.Ptr(), _lPMetadataProviderSelShouldFetchSubresources)
 	return _ret
@@ -83,7 +83,7 @@ func (o *LPMetadataProvider) SetShouldFetchSubresources(shouldFetchSubresources 
 	o.Ptr().Send(_lPMetadataProviderSelSetShouldFetchSubresources, shouldFetchSubresources)
 }
 
-// The time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code ``LPErrorCode/LPErrorMetadataFetchTimedOut``.
+// The time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
 func (o *LPMetadataProvider) Timeout() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _lPMetadataProviderSelTimeout)
 	return _ret
@@ -92,4 +92,3 @@ func (o *LPMetadataProvider) Timeout() float64 {
 func (o *LPMetadataProvider) SetTimeout(timeout float64) {
 	o.Ptr().Send(_lPMetadataProviderSelSetTimeout, timeout)
 }
-

@@ -16,8 +16,8 @@ type SWCollaborationOptionsPickerGroup struct {
 }
 
 var (
-	_clsSWCollaborationOptionsPickerGroup = _objcClass("SWCollaborationOptionsPickerGroup")
-	_sWCollaborationOptionsPickerGroupSelSelectedOptionIdentifier = objc.RegisterName("selectedOptionIdentifier")
+	_clsSWCollaborationOptionsPickerGroup                            = _objcClass("SWCollaborationOptionsPickerGroup")
+	_sWCollaborationOptionsPickerGroupSelSelectedOptionIdentifier    = objc.RegisterName("selectedOptionIdentifier")
 	_sWCollaborationOptionsPickerGroupSelSetSelectedOptionIdentifier = objc.RegisterName("setSelectedOptionIdentifier:")
 )
 
@@ -33,11 +33,12 @@ func SWCollaborationOptionsPickerGroupFromID(id objc.ID) *SWCollaborationOptions
 
 func (o *SWCollaborationOptionsPickerGroup) SelectedOptionIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsPickerGroupSelSelectedOptionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SWCollaborationOptionsPickerGroup) SetSelectedOptionIdentifier(selectedOptionIdentifier *foundation.NSString) {
 	o.Ptr().Send(_sWCollaborationOptionsPickerGroupSelSetSelectedOptionIdentifier, selectedOptionIdentifier.Ptr())
 }
-

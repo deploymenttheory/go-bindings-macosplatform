@@ -64,7 +64,9 @@ func (x *TreeController) WithSortDescriptors(items ...*foundation.NSSortDescript
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -104,7 +106,9 @@ func (x *TreeController) WithSelectionIndexPaths(items ...*foundation.NSIndexPat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSIndexPath](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -413,9 +417,13 @@ func (x *TreeController) SelectedNodes() []*TreeNode {
 	})
 }
 
-func (x *TreeController) asObjectController() *raw.NSObjectController { return &x.inner.NSObjectController }
+func (x *TreeController) asObjectController() *raw.NSObjectController {
+	return &x.inner.NSObjectController
+}
 
-func (x *TreeController) asController() *raw.NSController { return &x.inner.NSObjectController.NSController }
+func (x *TreeController) asController() *raw.NSController {
+	return &x.inner.NSObjectController.NSController
+}
 
 // TreeControllerable is the interface implemented by [TreeController], for mocking and DI.
 type TreeControllerable interface {
@@ -481,4 +489,3 @@ type TreeControllerable interface {
 }
 
 var _ TreeControllerable = (*TreeController)(nil)
-

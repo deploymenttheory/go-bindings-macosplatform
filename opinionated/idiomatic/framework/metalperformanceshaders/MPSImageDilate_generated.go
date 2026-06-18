@@ -87,7 +87,9 @@ func (x *ImageDilate) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
-func (x *ImageDilate) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageDilate) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageDilate) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -104,4 +106,3 @@ type ImageDilateable interface {
 }
 
 var _ ImageDilateable = (*ImageDilate)(nil)
-

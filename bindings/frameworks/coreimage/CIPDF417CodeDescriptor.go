@@ -16,13 +16,13 @@ type CIPDF417CodeDescriptor struct {
 }
 
 var (
-	_clsCIPDF417CodeDescriptor = _objcClass("CIPDF417CodeDescriptor")
-	_cIPDF417CodeDescriptorSelInitWithPayloadIsCompactRowCountColumnCount = objc.RegisterName("initWithPayload:isCompact:rowCount:columnCount:")
+	_clsCIPDF417CodeDescriptor                                                  = _objcClass("CIPDF417CodeDescriptor")
+	_cIPDF417CodeDescriptorSelInitWithPayloadIsCompactRowCountColumnCount       = objc.RegisterName("initWithPayload:isCompact:rowCount:columnCount:")
 	_cIPDF417CodeDescriptorSelDescriptorWithPayloadIsCompactRowCountColumnCount = objc.RegisterName("descriptorWithPayload:isCompact:rowCount:columnCount:")
-	_cIPDF417CodeDescriptorSelErrorCorrectedPayload = objc.RegisterName("errorCorrectedPayload")
-	_cIPDF417CodeDescriptorSelIsCompact = objc.RegisterName("isCompact")
-	_cIPDF417CodeDescriptorSelRowCount = objc.RegisterName("rowCount")
-	_cIPDF417CodeDescriptorSelColumnCount = objc.RegisterName("columnCount")
+	_cIPDF417CodeDescriptorSelErrorCorrectedPayload                             = objc.RegisterName("errorCorrectedPayload")
+	_cIPDF417CodeDescriptorSelIsCompact                                         = objc.RegisterName("isCompact")
+	_cIPDF417CodeDescriptorSelRowCount                                          = objc.RegisterName("rowCount")
+	_cIPDF417CodeDescriptorSelColumnCount                                       = objc.RegisterName("columnCount")
 )
 
 func CIPDF417CodeDescriptorFromID(id objc.ID) *CIPDF417CodeDescriptor {
@@ -35,24 +35,30 @@ func CIPDF417CodeDescriptorFromID(id objc.ID) *CIPDF417CodeDescriptor {
 	return o
 }
 
-// Initializes an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An initialized ``CIPDF417CodeDescriptor`` instance or `nil` if the parameters are invalid
+// Initializes an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An initialized “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
 func (o *CIPDF417CodeDescriptor) InitWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *CIPDF417CodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIPDF417CodeDescriptorSelInitWithPayloadIsCompactRowCountColumnCount, errorCorrectedPayload.Ptr(), isCompact, rowCount, columnCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIPDF417CodeDescriptorFromID(_ret)
 }
 
-// Creates an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An autoreleased ``CIPDF417CodeDescriptor`` instance or `nil` if the parameters are invalid
+// Creates an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An autoreleased “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
 func CIPDF417CodeDescriptorDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *CIPDF417CodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIPDF417CodeDescriptor), _cIPDF417CodeDescriptorSelDescriptorWithPayloadIsCompactRowCountColumnCount, errorCorrectedPayload.Ptr(), isCompact, rowCount, columnCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIPDF417CodeDescriptorFromID(_ret)
 }
 
 // The error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
 func (o *CIPDF417CodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIPDF417CodeDescriptorSelErrorCorrectedPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *CIPDF417CodeDescriptor) ColumnCount() int {
 	_ret := objc.Send[int](o.Ptr(), _cIPDF417CodeDescriptorSelColumnCount)
 	return _ret
 }
-

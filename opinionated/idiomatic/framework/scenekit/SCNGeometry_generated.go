@@ -51,7 +51,9 @@ func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -73,7 +75,9 @@ func (x *Geometry) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -355,4 +359,3 @@ type Geometryable interface {
 }
 
 var _ Geometryable = (*Geometry)(nil)
-

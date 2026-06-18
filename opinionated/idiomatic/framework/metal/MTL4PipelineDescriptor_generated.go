@@ -77,7 +77,9 @@ func (x *MTL4PipelineDescriptor) SetOptions(options *raw.MTL4PipelineOptions) {
 	x.inner.SetOptions(options)
 }
 
-func (x *MTL4PipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return x.inner }
+func (x *MTL4PipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
+	return x.inner
+}
 
 // MTL4PipelineDescriptorable is the interface implemented by [MTL4PipelineDescriptor], for mocking and DI.
 type MTL4PipelineDescriptorable interface {
@@ -91,4 +93,3 @@ type MTL4PipelineDescriptorable interface {
 }
 
 var _ MTL4PipelineDescriptorable = (*MTL4PipelineDescriptor)(nil)
-

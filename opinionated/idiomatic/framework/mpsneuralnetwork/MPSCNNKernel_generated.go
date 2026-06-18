@@ -357,4 +357,3 @@ type CNNKernelable interface {
 }
 
 var _ CNNKernelable = (*CNNKernel)(nil)
-

@@ -15,16 +15,16 @@ type NSStepperCell struct {
 }
 
 var (
-	_clsNSStepperCell = _objcClass("NSStepperCell")
-	_nSStepperCellSelMinValue = objc.RegisterName("minValue")
-	_nSStepperCellSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSStepperCellSelMaxValue = objc.RegisterName("maxValue")
-	_nSStepperCellSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSStepperCellSelIncrement = objc.RegisterName("increment")
-	_nSStepperCellSelSetIncrement = objc.RegisterName("setIncrement:")
-	_nSStepperCellSelValueWraps = objc.RegisterName("valueWraps")
+	_clsNSStepperCell              = _objcClass("NSStepperCell")
+	_nSStepperCellSelMinValue      = objc.RegisterName("minValue")
+	_nSStepperCellSelSetMinValue   = objc.RegisterName("setMinValue:")
+	_nSStepperCellSelMaxValue      = objc.RegisterName("maxValue")
+	_nSStepperCellSelSetMaxValue   = objc.RegisterName("setMaxValue:")
+	_nSStepperCellSelIncrement     = objc.RegisterName("increment")
+	_nSStepperCellSelSetIncrement  = objc.RegisterName("setIncrement:")
+	_nSStepperCellSelValueWraps    = objc.RegisterName("valueWraps")
 	_nSStepperCellSelSetValueWraps = objc.RegisterName("setValueWraps:")
-	_nSStepperCellSelAutorepeat = objc.RegisterName("autorepeat")
+	_nSStepperCellSelAutorepeat    = objc.RegisterName("autorepeat")
 	_nSStepperCellSelSetAutorepeat = objc.RegisterName("setAutorepeat:")
 )
 
@@ -82,4 +82,3 @@ func (o *NSStepperCell) Autorepeat() bool {
 func (o *NSStepperCell) SetAutorepeat(autorepeat bool) {
 	o.Ptr().Send(_nSStepperCellSelSetAutorepeat, autorepeat)
 }
-

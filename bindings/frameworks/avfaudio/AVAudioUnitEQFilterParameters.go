@@ -16,17 +16,17 @@ type AVAudioUnitEQFilterParameters struct {
 }
 
 var (
-	_clsAVAudioUnitEQFilterParameters = _objcClass("AVAudioUnitEQFilterParameters")
-	_aVAudioUnitEQFilterParametersSelFilterType = objc.RegisterName("filterType")
+	_clsAVAudioUnitEQFilterParameters              = _objcClass("AVAudioUnitEQFilterParameters")
+	_aVAudioUnitEQFilterParametersSelFilterType    = objc.RegisterName("filterType")
 	_aVAudioUnitEQFilterParametersSelSetFilterType = objc.RegisterName("setFilterType:")
-	_aVAudioUnitEQFilterParametersSelFrequency = objc.RegisterName("frequency")
-	_aVAudioUnitEQFilterParametersSelSetFrequency = objc.RegisterName("setFrequency:")
-	_aVAudioUnitEQFilterParametersSelBandwidth = objc.RegisterName("bandwidth")
-	_aVAudioUnitEQFilterParametersSelSetBandwidth = objc.RegisterName("setBandwidth:")
-	_aVAudioUnitEQFilterParametersSelGain = objc.RegisterName("gain")
-	_aVAudioUnitEQFilterParametersSelSetGain = objc.RegisterName("setGain:")
-	_aVAudioUnitEQFilterParametersSelBypass = objc.RegisterName("bypass")
-	_aVAudioUnitEQFilterParametersSelSetBypass = objc.RegisterName("setBypass:")
+	_aVAudioUnitEQFilterParametersSelFrequency     = objc.RegisterName("frequency")
+	_aVAudioUnitEQFilterParametersSelSetFrequency  = objc.RegisterName("setFrequency:")
+	_aVAudioUnitEQFilterParametersSelBandwidth     = objc.RegisterName("bandwidth")
+	_aVAudioUnitEQFilterParametersSelSetBandwidth  = objc.RegisterName("setBandwidth:")
+	_aVAudioUnitEQFilterParametersSelGain          = objc.RegisterName("gain")
+	_aVAudioUnitEQFilterParametersSelSetGain       = objc.RegisterName("setGain:")
+	_aVAudioUnitEQFilterParametersSelBypass        = objc.RegisterName("bypass")
+	_aVAudioUnitEQFilterParametersSelSetBypass     = objc.RegisterName("setBypass:")
 )
 
 func AVAudioUnitEQFilterParametersFromID(id objc.ID) *AVAudioUnitEQFilterParameters {
@@ -88,4 +88,3 @@ func (o *AVAudioUnitEQFilterParameters) Bypass() bool {
 func (o *AVAudioUnitEQFilterParameters) SetBypass(bypass bool) {
 	o.Ptr().Send(_aVAudioUnitEQFilterParametersSelSetBypass, bypass)
 }
-

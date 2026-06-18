@@ -18,12 +18,12 @@ type MKMapCameraZoomRange struct {
 }
 
 var (
-	_clsMKMapCameraZoomRange = _objcClass("MKMapCameraZoomRange")
+	_clsMKMapCameraZoomRange                                                               = _objcClass("MKMapCameraZoomRange")
 	_mKMapCameraZoomRangeSelInitWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance = objc.RegisterName("initWithMinCenterCoordinateDistance:maxCenterCoordinateDistance:")
-	_mKMapCameraZoomRangeSelInitWithMinCenterCoordinateDistance = objc.RegisterName("initWithMinCenterCoordinateDistance:")
-	_mKMapCameraZoomRangeSelInitWithMaxCenterCoordinateDistance = objc.RegisterName("initWithMaxCenterCoordinateDistance:")
-	_mKMapCameraZoomRangeSelMinCenterCoordinateDistance = objc.RegisterName("minCenterCoordinateDistance")
-	_mKMapCameraZoomRangeSelMaxCenterCoordinateDistance = objc.RegisterName("maxCenterCoordinateDistance")
+	_mKMapCameraZoomRangeSelInitWithMinCenterCoordinateDistance                            = objc.RegisterName("initWithMinCenterCoordinateDistance:")
+	_mKMapCameraZoomRangeSelInitWithMaxCenterCoordinateDistance                            = objc.RegisterName("initWithMaxCenterCoordinateDistance:")
+	_mKMapCameraZoomRangeSelMinCenterCoordinateDistance                                    = objc.RegisterName("minCenterCoordinateDistance")
+	_mKMapCameraZoomRangeSelMaxCenterCoordinateDistance                                    = objc.RegisterName("maxCenterCoordinateDistance")
 )
 
 func MKMapCameraZoomRangeFromID(id objc.ID) *MKMapCameraZoomRange {
@@ -38,19 +38,25 @@ func MKMapCameraZoomRangeFromID(id objc.ID) *MKMapCameraZoomRange {
 
 func (o *MKMapCameraZoomRange) InitWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance(minDistance unsafe.Pointer, maxDistance unsafe.Pointer) *MKMapCameraZoomRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraZoomRangeSelInitWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance, minDistance, maxDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraZoomRangeFromID(_ret)
 }
 
 func (o *MKMapCameraZoomRange) InitWithMinCenterCoordinateDistance(minDistance unsafe.Pointer) *MKMapCameraZoomRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraZoomRangeSelInitWithMinCenterCoordinateDistance, minDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraZoomRangeFromID(_ret)
 }
 
 func (o *MKMapCameraZoomRange) InitWithMaxCenterCoordinateDistance(maxDistance unsafe.Pointer) *MKMapCameraZoomRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapCameraZoomRangeSelInitWithMaxCenterCoordinateDistance, maxDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapCameraZoomRangeFromID(_ret)
 }
 
@@ -63,4 +69,3 @@ func (o *MKMapCameraZoomRange) MaxCenterCoordinateDistance() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mKMapCameraZoomRangeSelMaxCenterCoordinateDistance)
 	return _ret
 }
-

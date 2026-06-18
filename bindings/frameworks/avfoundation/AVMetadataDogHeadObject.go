@@ -25,4 +25,3 @@ func AVMetadataDogHeadObjectFromID(id objc.ID) *AVMetadataDogHeadObject {
 	purego.Track(o)
 	return o
 }
-

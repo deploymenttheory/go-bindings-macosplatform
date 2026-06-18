@@ -19,11 +19,15 @@ type MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode].
-func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) Unwrap() *raw.MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode { return x.inner }
+func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) Unwrap() *raw.MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID adopts an existing object pointer as a MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode (nil for 0).
 func MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID) *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode {
@@ -250,9 +254,13 @@ func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) Subscrib
 	}
 }
 
-func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeable is the interface implemented by [MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode], for mocking and DI.
 type MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeable interface {
@@ -275,4 +283,3 @@ type MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeable interface
 }
 
 var _ MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetModeable = (*MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
-

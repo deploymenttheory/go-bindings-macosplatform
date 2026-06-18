@@ -16,12 +16,12 @@ type NSPortNameServer struct {
 }
 
 var (
-	_clsNSPortNameServer = _objcClass("NSPortNameServer")
+	_clsNSPortNameServer                            = _objcClass("NSPortNameServer")
 	_nSPortNameServerSelSystemDefaultPortNameServer = objc.RegisterName("systemDefaultPortNameServer")
-	_nSPortNameServerSelPortForName = objc.RegisterName("portForName:")
-	_nSPortNameServerSelPortForNameHost = objc.RegisterName("portForName:host:")
-	_nSPortNameServerSelRegisterPortName = objc.RegisterName("registerPort:name:")
-	_nSPortNameServerSelRemovePortForName = objc.RegisterName("removePortForName:")
+	_nSPortNameServerSelPortForName                 = objc.RegisterName("portForName:")
+	_nSPortNameServerSelPortForNameHost             = objc.RegisterName("portForName:host:")
+	_nSPortNameServerSelRegisterPortName            = objc.RegisterName("registerPort:name:")
+	_nSPortNameServerSelRemovePortForName           = objc.RegisterName("removePortForName:")
 )
 
 func NSPortNameServerFromID(id objc.ID) *NSPortNameServer {
@@ -37,19 +37,25 @@ func NSPortNameServerFromID(id objc.ID) *NSPortNameServer {
 // Deprecated: Use NSXPCConnection instead
 func NSPortNameServerSystemDefaultPortNameServer() *NSPortNameServer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPortNameServer), _nSPortNameServerSelSystemDefaultPortNameServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortNameServerFromID(_ret)
 }
 
 func (o *NSPortNameServer) PortForName(name *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortNameServerSelPortForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 func (o *NSPortNameServer) PortForNameHost(name *NSString, host *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortNameServerSelPortForNameHost, name.Ptr(), host.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
@@ -62,4 +68,3 @@ func (o *NSPortNameServer) RemovePortForName(name *NSString) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPortNameServerSelRemovePortForName, name.Ptr())
 	return _ret
 }
-

@@ -66,4 +66,3 @@ type CaptureResolvedPhotoSettingsable interface {
 }
 
 var _ CaptureResolvedPhotoSettingsable = (*CaptureResolvedPhotoSettings)(nil)
-

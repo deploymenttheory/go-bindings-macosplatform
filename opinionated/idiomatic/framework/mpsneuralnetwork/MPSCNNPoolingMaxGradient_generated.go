@@ -160,11 +160,17 @@ func (x *CNNPoolingMaxGradient) WithDestinationImageAllocator(destinationImageAl
 	return x
 }
 
-func (x *CNNPoolingMaxGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
+func (x *CNNPoolingMaxGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient {
+	return &x.inner.MPSCNNPoolingGradient
+}
 
-func (x *CNNPoolingMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
+func (x *CNNPoolingMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNPoolingMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNPoolingMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNPoolingMaxGradientable is the interface implemented by [CNNPoolingMaxGradient], for mocking and DI.
 type CNNPoolingMaxGradientable interface {
@@ -191,4 +197,3 @@ type CNNPoolingMaxGradientable interface {
 }
 
 var _ CNNPoolingMaxGradientable = (*CNNPoolingMaxGradient)(nil)
-

@@ -92,4 +92,3 @@ type OpticalFlowConfigurationable interface {
 }
 
 var _ OpticalFlowConfigurationable = (*OpticalFlowConfiguration)(nil)
-

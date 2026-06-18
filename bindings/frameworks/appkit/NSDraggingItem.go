@@ -17,15 +17,15 @@ type NSDraggingItem struct {
 }
 
 var (
-	_clsNSDraggingItem = _objcClass("NSDraggingItem")
-	_nSDraggingItemSelInitWithPasteboardWriter = objc.RegisterName("initWithPasteboardWriter:")
-	_nSDraggingItemSelSetDraggingFrameContents = objc.RegisterName("setDraggingFrame:contents:")
-	_nSDraggingItemSelItem = objc.RegisterName("item")
-	_nSDraggingItemSelDraggingFrame = objc.RegisterName("draggingFrame")
-	_nSDraggingItemSelSetDraggingFrame = objc.RegisterName("setDraggingFrame:")
-	_nSDraggingItemSelImageComponentsProvider = objc.RegisterName("imageComponentsProvider")
+	_clsNSDraggingItem                           = _objcClass("NSDraggingItem")
+	_nSDraggingItemSelInitWithPasteboardWriter   = objc.RegisterName("initWithPasteboardWriter:")
+	_nSDraggingItemSelSetDraggingFrameContents   = objc.RegisterName("setDraggingFrame:contents:")
+	_nSDraggingItemSelItem                       = objc.RegisterName("item")
+	_nSDraggingItemSelDraggingFrame              = objc.RegisterName("draggingFrame")
+	_nSDraggingItemSelSetDraggingFrame           = objc.RegisterName("setDraggingFrame:")
+	_nSDraggingItemSelImageComponentsProvider    = objc.RegisterName("imageComponentsProvider")
 	_nSDraggingItemSelSetImageComponentsProvider = objc.RegisterName("setImageComponentsProvider:")
-	_nSDraggingItemSelImageComponents = objc.RegisterName("imageComponents")
+	_nSDraggingItemSelImageComponents            = objc.RegisterName("imageComponents")
 )
 
 func NSDraggingItemFromID(id objc.ID) *NSDraggingItem {
@@ -40,7 +40,9 @@ func NSDraggingItemFromID(id objc.ID) *NSDraggingItem {
 
 func (o *NSDraggingItem) InitWithPasteboardWriter(pasteboardWriter NSPasteboardWriting) *NSDraggingItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingItemSelInitWithPasteboardWriter, pasteboardWriter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDraggingItemFromID(_ret)
 }
 
@@ -73,7 +75,8 @@ func (o *NSDraggingItem) SetImageComponentsProvider(imageComponentsProvider objc
 
 func (o *NSDraggingItem) ImageComponents() *foundation.NSArray[*NSDraggingImageComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDraggingItemSelImageComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
 }
-

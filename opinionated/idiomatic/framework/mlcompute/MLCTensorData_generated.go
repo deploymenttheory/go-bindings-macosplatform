@@ -54,4 +54,3 @@ type TensorDataable interface {
 }
 
 var _ TensorDataable = (*TensorData)(nil)
-

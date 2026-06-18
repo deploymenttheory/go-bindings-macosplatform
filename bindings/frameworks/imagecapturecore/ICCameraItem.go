@@ -18,29 +18,29 @@ type ICCameraItem struct {
 }
 
 var (
-	_clsICCameraItem = _objcClass("ICCameraItem")
-	_iCCameraItemSelRequestThumbnail = objc.RegisterName("requestThumbnail")
-	_iCCameraItemSelRequestMetadata = objc.RegisterName("requestMetadata")
-	_iCCameraItemSelFlushThumbnailCache = objc.RegisterName("flushThumbnailCache")
-	_iCCameraItemSelFlushMetadataCache = objc.RegisterName("flushMetadataCache")
-	_iCCameraItemSelDevice = objc.RegisterName("device")
-	_iCCameraItemSelParentFolder = objc.RegisterName("parentFolder")
-	_iCCameraItemSelName = objc.RegisterName("name")
-	_iCCameraItemSelUTI = objc.RegisterName("UTI")
-	_iCCameraItemSelFileSystemPath = objc.RegisterName("fileSystemPath")
-	_iCCameraItemSelIsLocked = objc.RegisterName("isLocked")
-	_iCCameraItemSelIsRaw = objc.RegisterName("isRaw")
-	_iCCameraItemSelIsInTemporaryStore = objc.RegisterName("isInTemporaryStore")
-	_iCCameraItemSelCreationDate = objc.RegisterName("creationDate")
-	_iCCameraItemSelModificationDate = objc.RegisterName("modificationDate")
-	_iCCameraItemSelThumbnail = objc.RegisterName("thumbnail")
-	_iCCameraItemSelMetadata = objc.RegisterName("metadata")
-	_iCCameraItemSelUserData = objc.RegisterName("userData")
-	_iCCameraItemSelPtpObjectHandle = objc.RegisterName("ptpObjectHandle")
+	_clsICCameraItem                                     = _objcClass("ICCameraItem")
+	_iCCameraItemSelRequestThumbnail                     = objc.RegisterName("requestThumbnail")
+	_iCCameraItemSelRequestMetadata                      = objc.RegisterName("requestMetadata")
+	_iCCameraItemSelFlushThumbnailCache                  = objc.RegisterName("flushThumbnailCache")
+	_iCCameraItemSelFlushMetadataCache                   = objc.RegisterName("flushMetadataCache")
+	_iCCameraItemSelDevice                               = objc.RegisterName("device")
+	_iCCameraItemSelParentFolder                         = objc.RegisterName("parentFolder")
+	_iCCameraItemSelName                                 = objc.RegisterName("name")
+	_iCCameraItemSelUTI                                  = objc.RegisterName("UTI")
+	_iCCameraItemSelFileSystemPath                       = objc.RegisterName("fileSystemPath")
+	_iCCameraItemSelIsLocked                             = objc.RegisterName("isLocked")
+	_iCCameraItemSelIsRaw                                = objc.RegisterName("isRaw")
+	_iCCameraItemSelIsInTemporaryStore                   = objc.RegisterName("isInTemporaryStore")
+	_iCCameraItemSelCreationDate                         = objc.RegisterName("creationDate")
+	_iCCameraItemSelModificationDate                     = objc.RegisterName("modificationDate")
+	_iCCameraItemSelThumbnail                            = objc.RegisterName("thumbnail")
+	_iCCameraItemSelMetadata                             = objc.RegisterName("metadata")
+	_iCCameraItemSelUserData                             = objc.RegisterName("userData")
+	_iCCameraItemSelPtpObjectHandle                      = objc.RegisterName("ptpObjectHandle")
 	_iCCameraItemSelWasAddedAfterContentCatalogCompleted = objc.RegisterName("wasAddedAfterContentCatalogCompleted")
-	_iCCameraItemSelThumbnailIfAvailable = objc.RegisterName("thumbnailIfAvailable")
-	_iCCameraItemSelLargeThumbnailIfAvailable = objc.RegisterName("largeThumbnailIfAvailable")
-	_iCCameraItemSelMetadataIfAvailable = objc.RegisterName("metadataIfAvailable")
+	_iCCameraItemSelThumbnailIfAvailable                 = objc.RegisterName("thumbnailIfAvailable")
+	_iCCameraItemSelLargeThumbnailIfAvailable            = objc.RegisterName("largeThumbnailIfAvailable")
+	_iCCameraItemSelMetadataIfAvailable                  = objc.RegisterName("metadataIfAvailable")
 )
 
 func ICCameraItemFromID(id objc.ID) *ICCameraItem {
@@ -76,28 +76,36 @@ func (o *ICCameraItem) FlushMetadataCache() {
 // @property device @abstract ￼Parent device of this item.
 func (o *ICCameraItem) Device() *ICCameraDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ICCameraDeviceFromID(_ret)
 }
 
 // @property parentFolder @abstract ￼Parent folder of this folder. The root folder's parentFolder is nil.
 func (o *ICCameraItem) ParentFolder() *ICCameraFolder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelParentFolder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ICCameraFolderFromID(_ret)
 }
 
 // @property name @abstract ￼Name of this item.
 func (o *ICCameraItem) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property UTI @abstract ￼Item UTI. This is an Uniform Type Identifier string. It is one of: kUTTypeFolder, kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
 func (o *ICCameraItem) UTI() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelUTI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -128,14 +136,18 @@ func (o *ICCameraItem) IsInTemporaryStore() bool {
 // @property creationDate @abstract ￼Creation date of this file. This information is usually the same as the EXIF creation date.
 func (o *ICCameraItem) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property modificationDate @abstract ￼Modification date of this file. This information is usually the same as the EXIF modification date.
 func (o *ICCameraItem) ModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraItemSelModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -186,4 +198,3 @@ func (o *ICCameraItem) MetadataIfAvailable() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iCCameraItemSelMetadataIfAvailable)
 	return _ret
 }
-

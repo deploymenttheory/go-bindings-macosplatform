@@ -17,10 +17,10 @@ type GLKReflectionMapEffect struct {
 }
 
 var (
-	_clsGLKReflectionMapEffect = _objcClass("GLKReflectionMapEffect")
+	_clsGLKReflectionMapEffect               = _objcClass("GLKReflectionMapEffect")
 	_gLKReflectionMapEffectSelTextureCubeMap = objc.RegisterName("textureCubeMap")
-	_gLKReflectionMapEffectSelMatrix = objc.RegisterName("matrix")
-	_gLKReflectionMapEffectSelSetMatrix = objc.RegisterName("setMatrix:")
+	_gLKReflectionMapEffectSelMatrix         = objc.RegisterName("matrix")
+	_gLKReflectionMapEffectSelSetMatrix      = objc.RegisterName("setMatrix:")
 )
 
 func GLKReflectionMapEffectFromID(id objc.ID) *GLKReflectionMapEffect {
@@ -35,7 +35,9 @@ func GLKReflectionMapEffectFromID(id objc.ID) *GLKReflectionMapEffect {
 
 func (o *GLKReflectionMapEffect) TextureCubeMap() *GLKEffectPropertyTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKReflectionMapEffectSelTextureCubeMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKEffectPropertyTextureFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *GLKReflectionMapEffect) Matrix() unsafe.Pointer {
 func (o *GLKReflectionMapEffect) SetMatrix(matrix unsafe.Pointer) {
 	o.Ptr().Send(_gLKReflectionMapEffectSelSetMatrix, matrix)
 }
-

@@ -134,9 +134,13 @@ func (x *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpect
 	}
 }
 
-func (x *MTRClusterTargetNavigator) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterTargetNavigator) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterTargetNavigator) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterTargetNavigator) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterTargetNavigatorable is the interface implemented by [MTRClusterTargetNavigator], for mocking and DI.
 type MTRClusterTargetNavigatorable interface {
@@ -153,4 +157,3 @@ type MTRClusterTargetNavigatorable interface {
 }
 
 var _ MTRClusterTargetNavigatorable = (*MTRClusterTargetNavigator)(nil)
-

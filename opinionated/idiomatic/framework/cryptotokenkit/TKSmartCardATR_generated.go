@@ -107,4 +107,3 @@ type SmartCardATRable interface {
 }
 
 var _ SmartCardATRable = (*SmartCardATR)(nil)
-

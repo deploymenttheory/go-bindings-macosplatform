@@ -18,12 +18,12 @@ type GKARC4RandomSource struct {
 }
 
 var (
-	_clsGKARC4RandomSource = _objcClass("GKARC4RandomSource")
-	_gKARC4RandomSourceSelInit = objc.RegisterName("init")
-	_gKARC4RandomSourceSelInitWithSeed = objc.RegisterName("initWithSeed:")
+	_clsGKARC4RandomSource                    = _objcClass("GKARC4RandomSource")
+	_gKARC4RandomSourceSelInit                = objc.RegisterName("init")
+	_gKARC4RandomSourceSelInitWithSeed        = objc.RegisterName("initWithSeed:")
 	_gKARC4RandomSourceSelDropValuesWithCount = objc.RegisterName("dropValuesWithCount:")
-	_gKARC4RandomSourceSelSeed = objc.RegisterName("seed")
-	_gKARC4RandomSourceSelSetSeed = objc.RegisterName("setSeed:")
+	_gKARC4RandomSourceSelSeed                = objc.RegisterName("seed")
+	_gKARC4RandomSourceSelSetSeed             = objc.RegisterName("setSeed:")
 )
 
 func GKARC4RandomSourceFromID(id objc.ID) *GKARC4RandomSource {
@@ -39,14 +39,18 @@ func GKARC4RandomSourceFromID(id objc.ID) *GKARC4RandomSource {
 // Initializes an arc4 random source with bits from high entropy system resource like SecRandomCopyBytes.
 func (o *GKARC4RandomSource) Init() *GKARC4RandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKARC4RandomSourceSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKARC4RandomSourceFromID(_ret)
 }
 
 // Initializes an arc4 random source with bits from the seed.
 func (o *GKARC4RandomSource) InitWithSeed(seed *foundation.NSData) *GKARC4RandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKARC4RandomSourceSelInitWithSeed, seed.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKARC4RandomSourceFromID(_ret)
 }
 
@@ -58,11 +62,12 @@ func (o *GKARC4RandomSource) DropValuesWithCount(count uint) {
 // The seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
 func (o *GKARC4RandomSource) Seed() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKARC4RandomSourceSelSeed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *GKARC4RandomSource) SetSeed(seed *foundation.NSData) {
 	o.Ptr().Send(_gKARC4RandomSourceSelSetSeed, seed.Ptr())
 }
-

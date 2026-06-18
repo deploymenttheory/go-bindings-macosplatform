@@ -17,16 +17,16 @@ type MPSNNOptimizer struct {
 }
 
 var (
-	_clsMPSNNOptimizer = _objcClass("MPSNNOptimizer")
-	_mPSNNOptimizerSelSetLearningRate = objc.RegisterName("setLearningRate:")
-	_mPSNNOptimizerSelLearningRate = objc.RegisterName("learningRate")
-	_mPSNNOptimizerSelGradientRescale = objc.RegisterName("gradientRescale")
-	_mPSNNOptimizerSelApplyGradientClipping = objc.RegisterName("applyGradientClipping")
+	_clsMPSNNOptimizer                         = _objcClass("MPSNNOptimizer")
+	_mPSNNOptimizerSelSetLearningRate          = objc.RegisterName("setLearningRate:")
+	_mPSNNOptimizerSelLearningRate             = objc.RegisterName("learningRate")
+	_mPSNNOptimizerSelGradientRescale          = objc.RegisterName("gradientRescale")
+	_mPSNNOptimizerSelApplyGradientClipping    = objc.RegisterName("applyGradientClipping")
 	_mPSNNOptimizerSelSetApplyGradientClipping = objc.RegisterName("setApplyGradientClipping:")
-	_mPSNNOptimizerSelGradientClipMax = objc.RegisterName("gradientClipMax")
-	_mPSNNOptimizerSelGradientClipMin = objc.RegisterName("gradientClipMin")
-	_mPSNNOptimizerSelRegularizationScale = objc.RegisterName("regularizationScale")
-	_mPSNNOptimizerSelRegularizationType = objc.RegisterName("regularizationType")
+	_mPSNNOptimizerSelGradientClipMax          = objc.RegisterName("gradientClipMax")
+	_mPSNNOptimizerSelGradientClipMin          = objc.RegisterName("gradientClipMin")
+	_mPSNNOptimizerSelRegularizationScale      = objc.RegisterName("regularizationScale")
+	_mPSNNOptimizerSelRegularizationType       = objc.RegisterName("regularizationType")
 )
 
 func MPSNNOptimizerFromID(id objc.ID) *MPSNNOptimizer {
@@ -88,4 +88,3 @@ func (o *MPSNNOptimizer) RegularizationType() mpsneuralnetwork.MPSNNRegularizati
 	_ret := objc.Send[mpsneuralnetwork.MPSNNRegularizationType](o.Ptr(), _mPSNNOptimizerSelRegularizationType)
 	return _ret
 }
-

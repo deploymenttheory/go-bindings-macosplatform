@@ -18,17 +18,17 @@ type BADownloadManager struct {
 }
 
 var (
-	_clsBADownloadManager = _objcClass("BADownloadManager")
-	_bADownloadManagerSelFetchCurrentDownloads = objc.RegisterName("fetchCurrentDownloads:")
-	_bADownloadManagerSelFetchCurrentDownloadsWithCompletionHandler = objc.RegisterName("fetchCurrentDownloadsWithCompletionHandler:")
-	_bADownloadManagerSelScheduleDownloadError = objc.RegisterName("scheduleDownload:error:")
-	_bADownloadManagerSelPerformWithExclusiveControl = objc.RegisterName("performWithExclusiveControl:")
+	_clsBADownloadManager                                                    = _objcClass("BADownloadManager")
+	_bADownloadManagerSelFetchCurrentDownloads                               = objc.RegisterName("fetchCurrentDownloads:")
+	_bADownloadManagerSelFetchCurrentDownloadsWithCompletionHandler          = objc.RegisterName("fetchCurrentDownloadsWithCompletionHandler:")
+	_bADownloadManagerSelScheduleDownloadError                               = objc.RegisterName("scheduleDownload:error:")
+	_bADownloadManagerSelPerformWithExclusiveControl                         = objc.RegisterName("performWithExclusiveControl:")
 	_bADownloadManagerSelPerformWithExclusiveControlBeforeDatePerformHandler = objc.RegisterName("performWithExclusiveControlBeforeDate:performHandler:")
-	_bADownloadManagerSelStartForegroundDownloadError = objc.RegisterName("startForegroundDownload:error:")
-	_bADownloadManagerSelCancelDownloadError = objc.RegisterName("cancelDownload:error:")
-	_bADownloadManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_bADownloadManagerSelDelegate = objc.RegisterName("delegate")
-	_bADownloadManagerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_bADownloadManagerSelStartForegroundDownloadError                        = objc.RegisterName("startForegroundDownload:error:")
+	_bADownloadManagerSelCancelDownloadError                                 = objc.RegisterName("cancelDownload:error:")
+	_bADownloadManagerSelSharedManager                                       = objc.RegisterName("sharedManager")
+	_bADownloadManagerSelDelegate                                            = objc.RegisterName("delegate")
+	_bADownloadManagerSelSetDelegate                                         = objc.RegisterName("setDelegate:")
 )
 
 func BADownloadManagerFromID(id objc.ID) *BADownloadManager {
@@ -45,7 +45,9 @@ func BADownloadManagerFromID(id objc.ID) *BADownloadManager {
 func (o *BADownloadManager) FetchCurrentDownloads() (*foundation.NSArray[*BADownload], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _bADownloadManagerSelFetchCurrentDownloads, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -124,7 +126,9 @@ func (o *BADownloadManager) CancelDownloadError(download *BADownload) (bool, err
 // @brief Gets the singleton downloader object.
 func BADownloadManagerSharedManager() *BADownloadManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsBADownloadManager), _bADownloadManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return BADownloadManagerFromID(_ret)
 }
 
@@ -138,4 +142,3 @@ func (o *BADownloadManager) Delegate() BADownloadManagerDelegate {
 func (o *BADownloadManager) SetDelegate(delegate BADownloadManagerDelegate) {
 	o.Ptr().Send(_bADownloadManagerSelSetDelegate, delegate)
 }
-

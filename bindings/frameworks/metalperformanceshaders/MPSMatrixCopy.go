@@ -19,15 +19,15 @@ type MPSMatrixCopy struct {
 }
 
 var (
-	_clsMPSMatrixCopy = _objcClass("MPSMatrixCopy")
-	_mPSMatrixCopySelInitWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed = objc.RegisterName("initWithDevice:copyRows:copyColumns:sourcesAreTransposed:destinationsAreTransposed:")
-	_mPSMatrixCopySelEncodeToCommandBufferCopyDescriptor = objc.RegisterName("encodeToCommandBuffer:copyDescriptor:")
+	_clsMPSMatrixCopy                                                                                                            = _objcClass("MPSMatrixCopy")
+	_mPSMatrixCopySelInitWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed                              = objc.RegisterName("initWithDevice:copyRows:copyColumns:sourcesAreTransposed:destinationsAreTransposed:")
+	_mPSMatrixCopySelEncodeToCommandBufferCopyDescriptor                                                                         = objc.RegisterName("encodeToCommandBuffer:copyDescriptor:")
 	_mPSMatrixCopySelEncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset = objc.RegisterName("encodeToCommandBuffer:copyDescriptor:rowPermuteIndices:rowPermuteOffset:columnPermuteIndices:columnPermuteOffset:")
-	_mPSMatrixCopySelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixCopySelCopyRows = objc.RegisterName("copyRows")
-	_mPSMatrixCopySelCopyColumns = objc.RegisterName("copyColumns")
-	_mPSMatrixCopySelSourcesAreTransposed = objc.RegisterName("sourcesAreTransposed")
-	_mPSMatrixCopySelDestinationsAreTransposed = objc.RegisterName("destinationsAreTransposed")
+	_mPSMatrixCopySelInitWithCoderDevice                                                                                         = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixCopySelCopyRows                                                                                                    = objc.RegisterName("copyRows")
+	_mPSMatrixCopySelCopyColumns                                                                                                 = objc.RegisterName("copyColumns")
+	_mPSMatrixCopySelSourcesAreTransposed                                                                                        = objc.RegisterName("sourcesAreTransposed")
+	_mPSMatrixCopySelDestinationsAreTransposed                                                                                   = objc.RegisterName("destinationsAreTransposed")
 )
 
 func MPSMatrixCopyFromID(id objc.ID) *MPSMatrixCopy {
@@ -43,7 +43,9 @@ func MPSMatrixCopyFromID(id objc.ID) *MPSMatrixCopy {
 // @abstract   Initialize a copy operator @param      copyRows        The number of rows to copy for each copy operation @param      copyColumns     The number of matrix columns to copy in each copy operation @param      sourcesAreTransposed       If YES, the sources are in column major storage order @param      destinationsAreTransposed  If YES, the destinations are in column major storage order
 func (o *MPSMatrixCopy) InitWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed(device metal.MTLDevice, copyRows uint, copyColumns uint, sourcesAreTransposed bool, destinationsAreTransposed bool) *MPSMatrixCopy {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopySelInitWithDeviceCopyRowsCopyColumnsSourcesAreTransposedDestinationsAreTransposed, device, copyRows, copyColumns, sourcesAreTransposed, destinationsAreTransposed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixCopyFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *MPSMatrixCopy) EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowP
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixLookUpAndCopy @param      device      The MTLDevice on which to make the MPSMatrixLookUpAndCopy @return     A new MPSMatrixLookUpAndCopy object, or nil if failure.
 func (o *MPSMatrixCopy) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixCopy {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopySelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixCopyFromID(_ret)
 }
 
@@ -87,4 +91,3 @@ func (o *MPSMatrixCopy) DestinationsAreTransposed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSMatrixCopySelDestinationsAreTransposed)
 	return _ret
 }
-

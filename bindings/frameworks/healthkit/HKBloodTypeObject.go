@@ -16,7 +16,7 @@ type HKBloodTypeObject struct {
 }
 
 var (
-	_clsHKBloodTypeObject = _objcClass("HKBloodTypeObject")
+	_clsHKBloodTypeObject          = _objcClass("HKBloodTypeObject")
 	_hKBloodTypeObjectSelBloodType = objc.RegisterName("bloodType")
 )
 
@@ -34,4 +34,3 @@ func (o *HKBloodTypeObject) BloodType() HKBloodType {
 	_ret := objc.Send[HKBloodType](o.Ptr(), _hKBloodTypeObjectSelBloodType)
 	return _ret
 }
-

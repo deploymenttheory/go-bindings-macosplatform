@@ -157,4 +157,3 @@ type NNFilterNodeable interface {
 }
 
 var _ NNFilterNodeable = (*NNFilterNode)(nil)
-

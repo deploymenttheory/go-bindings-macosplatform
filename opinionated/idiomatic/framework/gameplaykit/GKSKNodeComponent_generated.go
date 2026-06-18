@@ -64,4 +64,3 @@ type SKNodeComponentable interface {
 }
 
 var _ SKNodeComponentable = (*SKNodeComponent)(nil)
-

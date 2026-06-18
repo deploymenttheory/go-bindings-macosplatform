@@ -17,56 +17,56 @@ type NSToolbarItem struct {
 }
 
 var (
-	_clsNSToolbarItem = _objcClass("NSToolbarItem")
-	_nSToolbarItemSelInitWithItemIdentifier = objc.RegisterName("initWithItemIdentifier:")
-	_nSToolbarItemSelValidate = objc.RegisterName("validate")
-	_nSToolbarItemSelItemIdentifier = objc.RegisterName("itemIdentifier")
-	_nSToolbarItemSelToolbar = objc.RegisterName("toolbar")
-	_nSToolbarItemSelLabel = objc.RegisterName("label")
-	_nSToolbarItemSelSetLabel = objc.RegisterName("setLabel:")
-	_nSToolbarItemSelPaletteLabel = objc.RegisterName("paletteLabel")
-	_nSToolbarItemSelSetPaletteLabel = objc.RegisterName("setPaletteLabel:")
-	_nSToolbarItemSelPossibleLabels = objc.RegisterName("possibleLabels")
-	_nSToolbarItemSelSetPossibleLabels = objc.RegisterName("setPossibleLabels:")
-	_nSToolbarItemSelToolTip = objc.RegisterName("toolTip")
-	_nSToolbarItemSelSetToolTip = objc.RegisterName("setToolTip:")
-	_nSToolbarItemSelMenuFormRepresentation = objc.RegisterName("menuFormRepresentation")
+	_clsNSToolbarItem                          = _objcClass("NSToolbarItem")
+	_nSToolbarItemSelInitWithItemIdentifier    = objc.RegisterName("initWithItemIdentifier:")
+	_nSToolbarItemSelValidate                  = objc.RegisterName("validate")
+	_nSToolbarItemSelItemIdentifier            = objc.RegisterName("itemIdentifier")
+	_nSToolbarItemSelToolbar                   = objc.RegisterName("toolbar")
+	_nSToolbarItemSelLabel                     = objc.RegisterName("label")
+	_nSToolbarItemSelSetLabel                  = objc.RegisterName("setLabel:")
+	_nSToolbarItemSelPaletteLabel              = objc.RegisterName("paletteLabel")
+	_nSToolbarItemSelSetPaletteLabel           = objc.RegisterName("setPaletteLabel:")
+	_nSToolbarItemSelPossibleLabels            = objc.RegisterName("possibleLabels")
+	_nSToolbarItemSelSetPossibleLabels         = objc.RegisterName("setPossibleLabels:")
+	_nSToolbarItemSelToolTip                   = objc.RegisterName("toolTip")
+	_nSToolbarItemSelSetToolTip                = objc.RegisterName("setToolTip:")
+	_nSToolbarItemSelMenuFormRepresentation    = objc.RegisterName("menuFormRepresentation")
 	_nSToolbarItemSelSetMenuFormRepresentation = objc.RegisterName("setMenuFormRepresentation:")
-	_nSToolbarItemSelTag = objc.RegisterName("tag")
-	_nSToolbarItemSelSetTag = objc.RegisterName("setTag:")
-	_nSToolbarItemSelTarget = objc.RegisterName("target")
-	_nSToolbarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSToolbarItemSelAction = objc.RegisterName("action")
-	_nSToolbarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSToolbarItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSToolbarItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSToolbarItemSelImage = objc.RegisterName("image")
-	_nSToolbarItemSelSetImage = objc.RegisterName("setImage:")
-	_nSToolbarItemSelTitle = objc.RegisterName("title")
-	_nSToolbarItemSelSetTitle = objc.RegisterName("setTitle:")
-	_nSToolbarItemSelIsBordered = objc.RegisterName("isBordered")
-	_nSToolbarItemSelSetBordered = objc.RegisterName("setBordered:")
-	_nSToolbarItemSelBackgroundTintColor = objc.RegisterName("backgroundTintColor")
-	_nSToolbarItemSelSetBackgroundTintColor = objc.RegisterName("setBackgroundTintColor:")
-	_nSToolbarItemSelStyle = objc.RegisterName("style")
-	_nSToolbarItemSelSetStyle = objc.RegisterName("setStyle:")
-	_nSToolbarItemSelIsNavigational = objc.RegisterName("isNavigational")
-	_nSToolbarItemSelSetNavigational = objc.RegisterName("setNavigational:")
-	_nSToolbarItemSelView = objc.RegisterName("view")
-	_nSToolbarItemSelSetView = objc.RegisterName("setView:")
-	_nSToolbarItemSelIsVisible = objc.RegisterName("isVisible")
-	_nSToolbarItemSelIsHidden = objc.RegisterName("isHidden")
-	_nSToolbarItemSelSetHidden = objc.RegisterName("setHidden:")
-	_nSToolbarItemSelMinSize = objc.RegisterName("minSize")
-	_nSToolbarItemSelSetMinSize = objc.RegisterName("setMinSize:")
-	_nSToolbarItemSelMaxSize = objc.RegisterName("maxSize")
-	_nSToolbarItemSelSetMaxSize = objc.RegisterName("setMaxSize:")
-	_nSToolbarItemSelVisibilityPriority = objc.RegisterName("visibilityPriority")
-	_nSToolbarItemSelSetVisibilityPriority = objc.RegisterName("setVisibilityPriority:")
-	_nSToolbarItemSelBadge = objc.RegisterName("badge")
-	_nSToolbarItemSelSetBadge = objc.RegisterName("setBadge:")
-	_nSToolbarItemSelAutovalidates = objc.RegisterName("autovalidates")
-	_nSToolbarItemSelSetAutovalidates = objc.RegisterName("setAutovalidates:")
+	_nSToolbarItemSelTag                       = objc.RegisterName("tag")
+	_nSToolbarItemSelSetTag                    = objc.RegisterName("setTag:")
+	_nSToolbarItemSelTarget                    = objc.RegisterName("target")
+	_nSToolbarItemSelSetTarget                 = objc.RegisterName("setTarget:")
+	_nSToolbarItemSelAction                    = objc.RegisterName("action")
+	_nSToolbarItemSelSetAction                 = objc.RegisterName("setAction:")
+	_nSToolbarItemSelIsEnabled                 = objc.RegisterName("isEnabled")
+	_nSToolbarItemSelSetEnabled                = objc.RegisterName("setEnabled:")
+	_nSToolbarItemSelImage                     = objc.RegisterName("image")
+	_nSToolbarItemSelSetImage                  = objc.RegisterName("setImage:")
+	_nSToolbarItemSelTitle                     = objc.RegisterName("title")
+	_nSToolbarItemSelSetTitle                  = objc.RegisterName("setTitle:")
+	_nSToolbarItemSelIsBordered                = objc.RegisterName("isBordered")
+	_nSToolbarItemSelSetBordered               = objc.RegisterName("setBordered:")
+	_nSToolbarItemSelBackgroundTintColor       = objc.RegisterName("backgroundTintColor")
+	_nSToolbarItemSelSetBackgroundTintColor    = objc.RegisterName("setBackgroundTintColor:")
+	_nSToolbarItemSelStyle                     = objc.RegisterName("style")
+	_nSToolbarItemSelSetStyle                  = objc.RegisterName("setStyle:")
+	_nSToolbarItemSelIsNavigational            = objc.RegisterName("isNavigational")
+	_nSToolbarItemSelSetNavigational           = objc.RegisterName("setNavigational:")
+	_nSToolbarItemSelView                      = objc.RegisterName("view")
+	_nSToolbarItemSelSetView                   = objc.RegisterName("setView:")
+	_nSToolbarItemSelIsVisible                 = objc.RegisterName("isVisible")
+	_nSToolbarItemSelIsHidden                  = objc.RegisterName("isHidden")
+	_nSToolbarItemSelSetHidden                 = objc.RegisterName("setHidden:")
+	_nSToolbarItemSelMinSize                   = objc.RegisterName("minSize")
+	_nSToolbarItemSelSetMinSize                = objc.RegisterName("setMinSize:")
+	_nSToolbarItemSelMaxSize                   = objc.RegisterName("maxSize")
+	_nSToolbarItemSelSetMaxSize                = objc.RegisterName("setMaxSize:")
+	_nSToolbarItemSelVisibilityPriority        = objc.RegisterName("visibilityPriority")
+	_nSToolbarItemSelSetVisibilityPriority     = objc.RegisterName("setVisibilityPriority:")
+	_nSToolbarItemSelBadge                     = objc.RegisterName("badge")
+	_nSToolbarItemSelSetBadge                  = objc.RegisterName("setBadge:")
+	_nSToolbarItemSelAutovalidates             = objc.RegisterName("autovalidates")
+	_nSToolbarItemSelSetAutovalidates          = objc.RegisterName("setAutovalidates:")
 	_nSToolbarItemSelAllowsDuplicatesInToolbar = objc.RegisterName("allowsDuplicatesInToolbar")
 )
 
@@ -83,7 +83,9 @@ func NSToolbarItemFromID(id objc.ID) *NSToolbarItem {
 // Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.
 func (o *NSToolbarItem) InitWithItemIdentifier(itemIdentifier *foundation.NSString) *NSToolbarItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelInitWithItemIdentifier, itemIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarItemFromID(_ret)
 }
 
@@ -94,21 +96,27 @@ func (o *NSToolbarItem) Validate() {
 
 func (o *NSToolbarItem) ItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Use this to determine the toolbar in which an item is currently displayed.
 func (o *NSToolbarItem) Toolbar() *NSToolbar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolbar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSToolbarFromID(_ret)
 }
 
 // Use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
 func (o *NSToolbarItem) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +127,9 @@ func (o *NSToolbarItem) SetLabel(label *foundation.NSString) {
 // Use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
 func (o *NSToolbarItem) PaletteLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelPaletteLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -140,7 +150,9 @@ func (o *NSToolbarItem) SetPossibleLabels(possibleLabels *foundation.NSSet[*foun
 // Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -151,7 +163,9 @@ func (o *NSToolbarItem) SetToolTip(toolTip *foundation.NSString) {
 // The menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
 func (o *NSToolbarItem) MenuFormRepresentation() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelMenuFormRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -201,7 +215,9 @@ func (o *NSToolbarItem) SetEnabled(enabled bool) {
 
 func (o *NSToolbarItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -212,7 +228,9 @@ func (o *NSToolbarItem) SetImage(image *NSImage) {
 // Set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
 func (o *NSToolbarItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -232,7 +250,9 @@ func (o *NSToolbarItem) SetBordered(bordered bool) {
 
 func (o *NSToolbarItem) BackgroundTintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBackgroundTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -263,7 +283,9 @@ func (o *NSToolbarItem) SetNavigational(navigational bool) {
 // Items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
 func (o *NSToolbarItem) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -323,7 +345,9 @@ func (o *NSToolbarItem) SetVisibilityPriority(visibilityPriority int) {
 // A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (o *NSToolbarItem) Badge() *NSItemBadge {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSToolbarItemSelBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemBadgeFromID(_ret)
 }
 
@@ -347,4 +371,3 @@ func (o *NSToolbarItem) AllowsDuplicatesInToolbar() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSToolbarItemSelAllowsDuplicatesInToolbar)
 	return _ret
 }
-

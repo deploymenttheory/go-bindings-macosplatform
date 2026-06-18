@@ -49,7 +49,9 @@ func (x *MathExpressionTableRow) Expressions() []*MathExpression {
 	})
 }
 
-func (x *MathExpressionTableRow) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionTableRow) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionTableRowable is the interface implemented by [MathExpressionTableRow], for mocking and DI.
 type MathExpressionTableRowable interface {
@@ -58,4 +60,3 @@ type MathExpressionTableRowable interface {
 }
 
 var _ MathExpressionTableRowable = (*MathExpressionTableRow)(nil)
-

@@ -17,125 +17,125 @@ type NSBrowser struct {
 }
 
 var (
-	_clsNSBrowser = _objcClass("NSBrowser")
-	_nSBrowserSelLoadColumnZero = objc.RegisterName("loadColumnZero")
-	_nSBrowserSelItemAtIndexPath = objc.RegisterName("itemAtIndexPath:")
-	_nSBrowserSelItemAtRowInColumn = objc.RegisterName("itemAtRow:inColumn:")
-	_nSBrowserSelIndexPathForColumn = objc.RegisterName("indexPathForColumn:")
-	_nSBrowserSelIsLeafItem = objc.RegisterName("isLeafItem:")
-	_nSBrowserSelReloadDataForRowIndexesInColumn = objc.RegisterName("reloadDataForRowIndexes:inColumn:")
-	_nSBrowserSelParentForItemsInColumn = objc.RegisterName("parentForItemsInColumn:")
-	_nSBrowserSelScrollRowToVisibleInColumn = objc.RegisterName("scrollRowToVisible:inColumn:")
-	_nSBrowserSelSetTitleOfColumn = objc.RegisterName("setTitle:ofColumn:")
-	_nSBrowserSelTitleOfColumn = objc.RegisterName("titleOfColumn:")
-	_nSBrowserSelSetPath = objc.RegisterName("setPath:")
-	_nSBrowserSelPath = objc.RegisterName("path")
-	_nSBrowserSelPathToColumn = objc.RegisterName("pathToColumn:")
-	_nSBrowserSelSelectedCellInColumn = objc.RegisterName("selectedCellInColumn:")
-	_nSBrowserSelSelectRowInColumn = objc.RegisterName("selectRow:inColumn:")
-	_nSBrowserSelSelectedRowInColumn = objc.RegisterName("selectedRowInColumn:")
-	_nSBrowserSelSelectRowIndexesInColumn = objc.RegisterName("selectRowIndexes:inColumn:")
-	_nSBrowserSelSelectedRowIndexesInColumn = objc.RegisterName("selectedRowIndexesInColumn:")
-	_nSBrowserSelReloadColumn = objc.RegisterName("reloadColumn:")
-	_nSBrowserSelValidateVisibleColumns = objc.RegisterName("validateVisibleColumns")
-	_nSBrowserSelScrollColumnsRightBy = objc.RegisterName("scrollColumnsRightBy:")
-	_nSBrowserSelScrollColumnsLeftBy = objc.RegisterName("scrollColumnsLeftBy:")
-	_nSBrowserSelScrollColumnToVisible = objc.RegisterName("scrollColumnToVisible:")
-	_nSBrowserSelAddColumn = objc.RegisterName("addColumn")
-	_nSBrowserSelLoadedCellAtRowColumn = objc.RegisterName("loadedCellAtRow:column:")
-	_nSBrowserSelSelectAll = objc.RegisterName("selectAll:")
-	_nSBrowserSelTile = objc.RegisterName("tile")
-	_nSBrowserSelDoClick = objc.RegisterName("doClick:")
-	_nSBrowserSelDoDoubleClick = objc.RegisterName("doDoubleClick:")
-	_nSBrowserSelSendAction = objc.RegisterName("sendAction")
-	_nSBrowserSelTitleFrameOfColumn = objc.RegisterName("titleFrameOfColumn:")
-	_nSBrowserSelDrawTitleOfColumnInRect = objc.RegisterName("drawTitleOfColumn:inRect:")
-	_nSBrowserSelFrameOfColumn = objc.RegisterName("frameOfColumn:")
-	_nSBrowserSelFrameOfInsideOfColumn = objc.RegisterName("frameOfInsideOfColumn:")
-	_nSBrowserSelFrameOfRowInColumn = objc.RegisterName("frameOfRow:inColumn:")
-	_nSBrowserSelGetRowColumnForPoint = objc.RegisterName("getRow:column:forPoint:")
-	_nSBrowserSelColumnWidthForColumnContentWidth = objc.RegisterName("columnWidthForColumnContentWidth:")
-	_nSBrowserSelColumnContentWidthForColumnWidth = objc.RegisterName("columnContentWidthForColumnWidth:")
-	_nSBrowserSelSetWidthOfColumn = objc.RegisterName("setWidth:ofColumn:")
-	_nSBrowserSelWidthOfColumn = objc.RegisterName("widthOfColumn:")
-	_nSBrowserSelNoteHeightOfRowsWithIndexesChangedInColumn = objc.RegisterName("noteHeightOfRowsWithIndexesChanged:inColumn:")
-	_nSBrowserSelSetDefaultColumnWidth = objc.RegisterName("setDefaultColumnWidth:")
-	_nSBrowserSelDefaultColumnWidth = objc.RegisterName("defaultColumnWidth")
-	_nSBrowserSelRemoveSavedColumnsWithAutosaveName = objc.RegisterName("removeSavedColumnsWithAutosaveName:")
-	_nSBrowserSelCanDragRowsWithIndexesInColumnWithEvent = objc.RegisterName("canDragRowsWithIndexes:inColumn:withEvent:")
+	_clsNSBrowser                                                       = _objcClass("NSBrowser")
+	_nSBrowserSelLoadColumnZero                                         = objc.RegisterName("loadColumnZero")
+	_nSBrowserSelItemAtIndexPath                                        = objc.RegisterName("itemAtIndexPath:")
+	_nSBrowserSelItemAtRowInColumn                                      = objc.RegisterName("itemAtRow:inColumn:")
+	_nSBrowserSelIndexPathForColumn                                     = objc.RegisterName("indexPathForColumn:")
+	_nSBrowserSelIsLeafItem                                             = objc.RegisterName("isLeafItem:")
+	_nSBrowserSelReloadDataForRowIndexesInColumn                        = objc.RegisterName("reloadDataForRowIndexes:inColumn:")
+	_nSBrowserSelParentForItemsInColumn                                 = objc.RegisterName("parentForItemsInColumn:")
+	_nSBrowserSelScrollRowToVisibleInColumn                             = objc.RegisterName("scrollRowToVisible:inColumn:")
+	_nSBrowserSelSetTitleOfColumn                                       = objc.RegisterName("setTitle:ofColumn:")
+	_nSBrowserSelTitleOfColumn                                          = objc.RegisterName("titleOfColumn:")
+	_nSBrowserSelSetPath                                                = objc.RegisterName("setPath:")
+	_nSBrowserSelPath                                                   = objc.RegisterName("path")
+	_nSBrowserSelPathToColumn                                           = objc.RegisterName("pathToColumn:")
+	_nSBrowserSelSelectedCellInColumn                                   = objc.RegisterName("selectedCellInColumn:")
+	_nSBrowserSelSelectRowInColumn                                      = objc.RegisterName("selectRow:inColumn:")
+	_nSBrowserSelSelectedRowInColumn                                    = objc.RegisterName("selectedRowInColumn:")
+	_nSBrowserSelSelectRowIndexesInColumn                               = objc.RegisterName("selectRowIndexes:inColumn:")
+	_nSBrowserSelSelectedRowIndexesInColumn                             = objc.RegisterName("selectedRowIndexesInColumn:")
+	_nSBrowserSelReloadColumn                                           = objc.RegisterName("reloadColumn:")
+	_nSBrowserSelValidateVisibleColumns                                 = objc.RegisterName("validateVisibleColumns")
+	_nSBrowserSelScrollColumnsRightBy                                   = objc.RegisterName("scrollColumnsRightBy:")
+	_nSBrowserSelScrollColumnsLeftBy                                    = objc.RegisterName("scrollColumnsLeftBy:")
+	_nSBrowserSelScrollColumnToVisible                                  = objc.RegisterName("scrollColumnToVisible:")
+	_nSBrowserSelAddColumn                                              = objc.RegisterName("addColumn")
+	_nSBrowserSelLoadedCellAtRowColumn                                  = objc.RegisterName("loadedCellAtRow:column:")
+	_nSBrowserSelSelectAll                                              = objc.RegisterName("selectAll:")
+	_nSBrowserSelTile                                                   = objc.RegisterName("tile")
+	_nSBrowserSelDoClick                                                = objc.RegisterName("doClick:")
+	_nSBrowserSelDoDoubleClick                                          = objc.RegisterName("doDoubleClick:")
+	_nSBrowserSelSendAction                                             = objc.RegisterName("sendAction")
+	_nSBrowserSelTitleFrameOfColumn                                     = objc.RegisterName("titleFrameOfColumn:")
+	_nSBrowserSelDrawTitleOfColumnInRect                                = objc.RegisterName("drawTitleOfColumn:inRect:")
+	_nSBrowserSelFrameOfColumn                                          = objc.RegisterName("frameOfColumn:")
+	_nSBrowserSelFrameOfInsideOfColumn                                  = objc.RegisterName("frameOfInsideOfColumn:")
+	_nSBrowserSelFrameOfRowInColumn                                     = objc.RegisterName("frameOfRow:inColumn:")
+	_nSBrowserSelGetRowColumnForPoint                                   = objc.RegisterName("getRow:column:forPoint:")
+	_nSBrowserSelColumnWidthForColumnContentWidth                       = objc.RegisterName("columnWidthForColumnContentWidth:")
+	_nSBrowserSelColumnContentWidthForColumnWidth                       = objc.RegisterName("columnContentWidthForColumnWidth:")
+	_nSBrowserSelSetWidthOfColumn                                       = objc.RegisterName("setWidth:ofColumn:")
+	_nSBrowserSelWidthOfColumn                                          = objc.RegisterName("widthOfColumn:")
+	_nSBrowserSelNoteHeightOfRowsWithIndexesChangedInColumn             = objc.RegisterName("noteHeightOfRowsWithIndexesChanged:inColumn:")
+	_nSBrowserSelSetDefaultColumnWidth                                  = objc.RegisterName("setDefaultColumnWidth:")
+	_nSBrowserSelDefaultColumnWidth                                     = objc.RegisterName("defaultColumnWidth")
+	_nSBrowserSelRemoveSavedColumnsWithAutosaveName                     = objc.RegisterName("removeSavedColumnsWithAutosaveName:")
+	_nSBrowserSelCanDragRowsWithIndexesInColumnWithEvent                = objc.RegisterName("canDragRowsWithIndexes:inColumn:withEvent:")
 	_nSBrowserSelDraggingImageForRowsWithIndexesInColumnWithEventOffset = objc.RegisterName("draggingImageForRowsWithIndexes:inColumn:withEvent:offset:")
-	_nSBrowserSelSetDraggingSourceOperationMaskForLocal = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
-	_nSBrowserSelEditItemAtIndexPathWithEventSelect = objc.RegisterName("editItemAtIndexPath:withEvent:select:")
-	_nSBrowserSelCellClass = objc.RegisterName("cellClass")
-	_nSBrowserSelIsLoaded = objc.RegisterName("isLoaded")
-	_nSBrowserSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSBrowserSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSBrowserSelCellPrototype = objc.RegisterName("cellPrototype")
-	_nSBrowserSelSetCellPrototype = objc.RegisterName("setCellPrototype:")
-	_nSBrowserSelDelegate = objc.RegisterName("delegate")
-	_nSBrowserSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSBrowserSelReusesColumns = objc.RegisterName("reusesColumns")
-	_nSBrowserSelSetReusesColumns = objc.RegisterName("setReusesColumns:")
-	_nSBrowserSelHasHorizontalScroller = objc.RegisterName("hasHorizontalScroller")
-	_nSBrowserSelSetHasHorizontalScroller = objc.RegisterName("setHasHorizontalScroller:")
-	_nSBrowserSelAutohidesScroller = objc.RegisterName("autohidesScroller")
-	_nSBrowserSelSetAutohidesScroller = objc.RegisterName("setAutohidesScroller:")
-	_nSBrowserSelSeparatesColumns = objc.RegisterName("separatesColumns")
-	_nSBrowserSelSetSeparatesColumns = objc.RegisterName("setSeparatesColumns:")
-	_nSBrowserSelIsTitled = objc.RegisterName("isTitled")
-	_nSBrowserSelSetTitled = objc.RegisterName("setTitled:")
-	_nSBrowserSelMinColumnWidth = objc.RegisterName("minColumnWidth")
-	_nSBrowserSelSetMinColumnWidth = objc.RegisterName("setMinColumnWidth:")
-	_nSBrowserSelMaxVisibleColumns = objc.RegisterName("maxVisibleColumns")
-	_nSBrowserSelSetMaxVisibleColumns = objc.RegisterName("setMaxVisibleColumns:")
-	_nSBrowserSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_nSBrowserSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_nSBrowserSelAllowsBranchSelection = objc.RegisterName("allowsBranchSelection")
-	_nSBrowserSelSetAllowsBranchSelection = objc.RegisterName("setAllowsBranchSelection:")
-	_nSBrowserSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_nSBrowserSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_nSBrowserSelTakesTitleFromPreviousColumn = objc.RegisterName("takesTitleFromPreviousColumn")
-	_nSBrowserSelSetTakesTitleFromPreviousColumn = objc.RegisterName("setTakesTitleFromPreviousColumn:")
-	_nSBrowserSelSendsActionOnArrowKeys = objc.RegisterName("sendsActionOnArrowKeys")
-	_nSBrowserSelSetSendsActionOnArrowKeys = objc.RegisterName("setSendsActionOnArrowKeys:")
-	_nSBrowserSelPathSeparator = objc.RegisterName("pathSeparator")
-	_nSBrowserSelSetPathSeparator = objc.RegisterName("setPathSeparator:")
-	_nSBrowserSelClickedColumn = objc.RegisterName("clickedColumn")
-	_nSBrowserSelClickedRow = objc.RegisterName("clickedRow")
-	_nSBrowserSelSelectedColumn = objc.RegisterName("selectedColumn")
-	_nSBrowserSelSelectedCells = objc.RegisterName("selectedCells")
-	_nSBrowserSelSelectionIndexPath = objc.RegisterName("selectionIndexPath")
-	_nSBrowserSelSetSelectionIndexPath = objc.RegisterName("setSelectionIndexPath:")
-	_nSBrowserSelSelectionIndexPaths = objc.RegisterName("selectionIndexPaths")
-	_nSBrowserSelSetSelectionIndexPaths = objc.RegisterName("setSelectionIndexPaths:")
-	_nSBrowserSelLastColumn = objc.RegisterName("lastColumn")
-	_nSBrowserSelSetLastColumn = objc.RegisterName("setLastColumn:")
-	_nSBrowserSelNumberOfVisibleColumns = objc.RegisterName("numberOfVisibleColumns")
-	_nSBrowserSelFirstVisibleColumn = objc.RegisterName("firstVisibleColumn")
-	_nSBrowserSelLastVisibleColumn = objc.RegisterName("lastVisibleColumn")
-	_nSBrowserSelTitleHeight = objc.RegisterName("titleHeight")
-	_nSBrowserSelColumnResizingType = objc.RegisterName("columnResizingType")
-	_nSBrowserSelSetColumnResizingType = objc.RegisterName("setColumnResizingType:")
-	_nSBrowserSelPrefersAllColumnUserResizing = objc.RegisterName("prefersAllColumnUserResizing")
-	_nSBrowserSelSetPrefersAllColumnUserResizing = objc.RegisterName("setPrefersAllColumnUserResizing:")
-	_nSBrowserSelRowHeight = objc.RegisterName("rowHeight")
-	_nSBrowserSelSetRowHeight = objc.RegisterName("setRowHeight:")
-	_nSBrowserSelColumnsAutosaveName = objc.RegisterName("columnsAutosaveName")
-	_nSBrowserSelSetColumnsAutosaveName = objc.RegisterName("setColumnsAutosaveName:")
-	_nSBrowserSelAllowsTypeSelect = objc.RegisterName("allowsTypeSelect")
-	_nSBrowserSelSetAllowsTypeSelect = objc.RegisterName("setAllowsTypeSelect:")
-	_nSBrowserSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSBrowserSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSBrowserSelSetAcceptsArrowKeys = objc.RegisterName("setAcceptsArrowKeys:")
-	_nSBrowserSelAcceptsArrowKeys = objc.RegisterName("acceptsArrowKeys")
-	_nSBrowserSelDisplayColumn = objc.RegisterName("displayColumn:")
-	_nSBrowserSelDisplayAllColumns = objc.RegisterName("displayAllColumns")
-	_nSBrowserSelScrollViaScroller = objc.RegisterName("scrollViaScroller:")
-	_nSBrowserSelUpdateScroller = objc.RegisterName("updateScroller")
-	_nSBrowserSelSetMatrixClass = objc.RegisterName("setMatrixClass:")
-	_nSBrowserSelMatrixClass = objc.RegisterName("matrixClass")
-	_nSBrowserSelColumnOfMatrix = objc.RegisterName("columnOfMatrix:")
-	_nSBrowserSelMatrixInColumn = objc.RegisterName("matrixInColumn:")
+	_nSBrowserSelSetDraggingSourceOperationMaskForLocal                 = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
+	_nSBrowserSelEditItemAtIndexPathWithEventSelect                     = objc.RegisterName("editItemAtIndexPath:withEvent:select:")
+	_nSBrowserSelCellClass                                              = objc.RegisterName("cellClass")
+	_nSBrowserSelIsLoaded                                               = objc.RegisterName("isLoaded")
+	_nSBrowserSelDoubleAction                                           = objc.RegisterName("doubleAction")
+	_nSBrowserSelSetDoubleAction                                        = objc.RegisterName("setDoubleAction:")
+	_nSBrowserSelCellPrototype                                          = objc.RegisterName("cellPrototype")
+	_nSBrowserSelSetCellPrototype                                       = objc.RegisterName("setCellPrototype:")
+	_nSBrowserSelDelegate                                               = objc.RegisterName("delegate")
+	_nSBrowserSelSetDelegate                                            = objc.RegisterName("setDelegate:")
+	_nSBrowserSelReusesColumns                                          = objc.RegisterName("reusesColumns")
+	_nSBrowserSelSetReusesColumns                                       = objc.RegisterName("setReusesColumns:")
+	_nSBrowserSelHasHorizontalScroller                                  = objc.RegisterName("hasHorizontalScroller")
+	_nSBrowserSelSetHasHorizontalScroller                               = objc.RegisterName("setHasHorizontalScroller:")
+	_nSBrowserSelAutohidesScroller                                      = objc.RegisterName("autohidesScroller")
+	_nSBrowserSelSetAutohidesScroller                                   = objc.RegisterName("setAutohidesScroller:")
+	_nSBrowserSelSeparatesColumns                                       = objc.RegisterName("separatesColumns")
+	_nSBrowserSelSetSeparatesColumns                                    = objc.RegisterName("setSeparatesColumns:")
+	_nSBrowserSelIsTitled                                               = objc.RegisterName("isTitled")
+	_nSBrowserSelSetTitled                                              = objc.RegisterName("setTitled:")
+	_nSBrowserSelMinColumnWidth                                         = objc.RegisterName("minColumnWidth")
+	_nSBrowserSelSetMinColumnWidth                                      = objc.RegisterName("setMinColumnWidth:")
+	_nSBrowserSelMaxVisibleColumns                                      = objc.RegisterName("maxVisibleColumns")
+	_nSBrowserSelSetMaxVisibleColumns                                   = objc.RegisterName("setMaxVisibleColumns:")
+	_nSBrowserSelAllowsMultipleSelection                                = objc.RegisterName("allowsMultipleSelection")
+	_nSBrowserSelSetAllowsMultipleSelection                             = objc.RegisterName("setAllowsMultipleSelection:")
+	_nSBrowserSelAllowsBranchSelection                                  = objc.RegisterName("allowsBranchSelection")
+	_nSBrowserSelSetAllowsBranchSelection                               = objc.RegisterName("setAllowsBranchSelection:")
+	_nSBrowserSelAllowsEmptySelection                                   = objc.RegisterName("allowsEmptySelection")
+	_nSBrowserSelSetAllowsEmptySelection                                = objc.RegisterName("setAllowsEmptySelection:")
+	_nSBrowserSelTakesTitleFromPreviousColumn                           = objc.RegisterName("takesTitleFromPreviousColumn")
+	_nSBrowserSelSetTakesTitleFromPreviousColumn                        = objc.RegisterName("setTakesTitleFromPreviousColumn:")
+	_nSBrowserSelSendsActionOnArrowKeys                                 = objc.RegisterName("sendsActionOnArrowKeys")
+	_nSBrowserSelSetSendsActionOnArrowKeys                              = objc.RegisterName("setSendsActionOnArrowKeys:")
+	_nSBrowserSelPathSeparator                                          = objc.RegisterName("pathSeparator")
+	_nSBrowserSelSetPathSeparator                                       = objc.RegisterName("setPathSeparator:")
+	_nSBrowserSelClickedColumn                                          = objc.RegisterName("clickedColumn")
+	_nSBrowserSelClickedRow                                             = objc.RegisterName("clickedRow")
+	_nSBrowserSelSelectedColumn                                         = objc.RegisterName("selectedColumn")
+	_nSBrowserSelSelectedCells                                          = objc.RegisterName("selectedCells")
+	_nSBrowserSelSelectionIndexPath                                     = objc.RegisterName("selectionIndexPath")
+	_nSBrowserSelSetSelectionIndexPath                                  = objc.RegisterName("setSelectionIndexPath:")
+	_nSBrowserSelSelectionIndexPaths                                    = objc.RegisterName("selectionIndexPaths")
+	_nSBrowserSelSetSelectionIndexPaths                                 = objc.RegisterName("setSelectionIndexPaths:")
+	_nSBrowserSelLastColumn                                             = objc.RegisterName("lastColumn")
+	_nSBrowserSelSetLastColumn                                          = objc.RegisterName("setLastColumn:")
+	_nSBrowserSelNumberOfVisibleColumns                                 = objc.RegisterName("numberOfVisibleColumns")
+	_nSBrowserSelFirstVisibleColumn                                     = objc.RegisterName("firstVisibleColumn")
+	_nSBrowserSelLastVisibleColumn                                      = objc.RegisterName("lastVisibleColumn")
+	_nSBrowserSelTitleHeight                                            = objc.RegisterName("titleHeight")
+	_nSBrowserSelColumnResizingType                                     = objc.RegisterName("columnResizingType")
+	_nSBrowserSelSetColumnResizingType                                  = objc.RegisterName("setColumnResizingType:")
+	_nSBrowserSelPrefersAllColumnUserResizing                           = objc.RegisterName("prefersAllColumnUserResizing")
+	_nSBrowserSelSetPrefersAllColumnUserResizing                        = objc.RegisterName("setPrefersAllColumnUserResizing:")
+	_nSBrowserSelRowHeight                                              = objc.RegisterName("rowHeight")
+	_nSBrowserSelSetRowHeight                                           = objc.RegisterName("setRowHeight:")
+	_nSBrowserSelColumnsAutosaveName                                    = objc.RegisterName("columnsAutosaveName")
+	_nSBrowserSelSetColumnsAutosaveName                                 = objc.RegisterName("setColumnsAutosaveName:")
+	_nSBrowserSelAllowsTypeSelect                                       = objc.RegisterName("allowsTypeSelect")
+	_nSBrowserSelSetAllowsTypeSelect                                    = objc.RegisterName("setAllowsTypeSelect:")
+	_nSBrowserSelBackgroundColor                                        = objc.RegisterName("backgroundColor")
+	_nSBrowserSelSetBackgroundColor                                     = objc.RegisterName("setBackgroundColor:")
+	_nSBrowserSelSetAcceptsArrowKeys                                    = objc.RegisterName("setAcceptsArrowKeys:")
+	_nSBrowserSelAcceptsArrowKeys                                       = objc.RegisterName("acceptsArrowKeys")
+	_nSBrowserSelDisplayColumn                                          = objc.RegisterName("displayColumn:")
+	_nSBrowserSelDisplayAllColumns                                      = objc.RegisterName("displayAllColumns")
+	_nSBrowserSelScrollViaScroller                                      = objc.RegisterName("scrollViaScroller:")
+	_nSBrowserSelUpdateScroller                                         = objc.RegisterName("updateScroller")
+	_nSBrowserSelSetMatrixClass                                         = objc.RegisterName("setMatrixClass:")
+	_nSBrowserSelMatrixClass                                            = objc.RegisterName("matrixClass")
+	_nSBrowserSelColumnOfMatrix                                         = objc.RegisterName("columnOfMatrix:")
+	_nSBrowserSelMatrixInColumn                                         = objc.RegisterName("matrixInColumn:")
 )
 
 func NSBrowserFromID(id objc.ID) *NSBrowser {
@@ -164,7 +164,9 @@ func (o *NSBrowser) ItemAtRowInColumn(row int, column int) objc.ID {
 
 func (o *NSBrowser) IndexPathForColumn(column int) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelIndexPathForColumn, column)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -192,7 +194,9 @@ func (o *NSBrowser) SetTitleOfColumn(string_ *foundation.NSString, column int) {
 
 func (o *NSBrowser) TitleOfColumn(column int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelTitleOfColumn, column)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -203,13 +207,17 @@ func (o *NSBrowser) SetPath(path *foundation.NSString) bool {
 
 func (o *NSBrowser) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSBrowser) PathToColumn(column int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathToColumn, column)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -233,7 +241,9 @@ func (o *NSBrowser) SelectRowIndexesInColumn(indexes *foundation.NSIndexSet, col
 
 func (o *NSBrowser) SelectedRowIndexesInColumn(column int) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedRowIndexesInColumn, column)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -359,7 +369,9 @@ func (o *NSBrowser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes *foundati
 
 func (o *NSBrowser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIndexes *foundation.NSIndexSet, column int, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelDraggingImageForRowsWithIndexesInColumnWithEventOffset, rowIndexes.Ptr(), column, event.Ptr(), dragImageOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -518,7 +530,9 @@ func (o *NSBrowser) SetSendsActionOnArrowKeys(sendsActionOnArrowKeys bool) {
 
 func (o *NSBrowser) PathSeparator() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelPathSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -543,13 +557,17 @@ func (o *NSBrowser) SelectedColumn() int {
 
 func (o *NSBrowser) SelectedCells() *foundation.NSArray[*NSCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectedCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCell](_ret)
 }
 
 func (o *NSBrowser) SelectionIndexPath() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelSelectionIndexPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -624,7 +642,9 @@ func (o *NSBrowser) SetRowHeight(rowHeight float64) {
 
 func (o *NSBrowser) ColumnsAutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelColumnsAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -643,7 +663,9 @@ func (o *NSBrowser) SetAllowsTypeSelect(allowsTypeSelect bool) {
 
 func (o *NSBrowser) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -702,7 +724,8 @@ func (o *NSBrowser) ColumnOfMatrix(matrix *NSMatrix) int {
 // Deprecated: Use the item based NSBrowser instead
 func (o *NSBrowser) MatrixInColumn(column int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBrowserSelMatrixInColumn, column)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMatrixFromID(_ret)
 }
-

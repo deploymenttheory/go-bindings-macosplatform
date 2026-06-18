@@ -88,11 +88,17 @@ func (x *NDArrayMatrixMultiplication) SetBeta(beta float64) {
 	x.inner.SetBeta(beta)
 }
 
-func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
-func (x *NDArrayMatrixMultiplication) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+func (x *NDArrayMatrixMultiplication) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+}
 
 // NDArrayMatrixMultiplicationable is the interface implemented by [NDArrayMatrixMultiplication], for mocking and DI.
 type NDArrayMatrixMultiplicationable interface {
@@ -109,4 +115,3 @@ type NDArrayMatrixMultiplicationable interface {
 }
 
 var _ NDArrayMatrixMultiplicationable = (*NDArrayMatrixMultiplication)(nil)
-

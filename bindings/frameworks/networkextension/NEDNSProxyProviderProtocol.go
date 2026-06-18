@@ -16,10 +16,10 @@ type NEDNSProxyProviderProtocol struct {
 }
 
 var (
-	_clsNEDNSProxyProviderProtocol = _objcClass("NEDNSProxyProviderProtocol")
-	_nEDNSProxyProviderProtocolSelProviderConfiguration = objc.RegisterName("providerConfiguration")
-	_nEDNSProxyProviderProtocolSelSetProviderConfiguration = objc.RegisterName("setProviderConfiguration:")
-	_nEDNSProxyProviderProtocolSelProviderBundleIdentifier = objc.RegisterName("providerBundleIdentifier")
+	_clsNEDNSProxyProviderProtocol                            = _objcClass("NEDNSProxyProviderProtocol")
+	_nEDNSProxyProviderProtocolSelProviderConfiguration       = objc.RegisterName("providerConfiguration")
+	_nEDNSProxyProviderProtocolSelSetProviderConfiguration    = objc.RegisterName("setProviderConfiguration:")
+	_nEDNSProxyProviderProtocolSelProviderBundleIdentifier    = objc.RegisterName("providerBundleIdentifier")
 	_nEDNSProxyProviderProtocolSelSetProviderBundleIdentifier = objc.RegisterName("setProviderBundleIdentifier:")
 )
 
@@ -46,11 +46,12 @@ func (o *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfigurat
 // @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
 func (o *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSProxyProviderProtocolSelProviderBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEDNSProxyProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nEDNSProxyProviderProtocolSelSetProviderBundleIdentifier, providerBundleIdentifier.Ptr())
 }
-

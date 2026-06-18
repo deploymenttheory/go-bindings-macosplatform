@@ -16,8 +16,8 @@ type DOMHTMLParagraphElement struct {
 }
 
 var (
-	_clsDOMHTMLParagraphElement = _objcClass("DOMHTMLParagraphElement")
-	_dOMHTMLParagraphElementSelAlign = objc.RegisterName("align")
+	_clsDOMHTMLParagraphElement         = _objcClass("DOMHTMLParagraphElement")
+	_dOMHTMLParagraphElementSelAlign    = objc.RegisterName("align")
 	_dOMHTMLParagraphElementSelSetAlign = objc.RegisterName("setAlign:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLParagraphElementFromID(id objc.ID) *DOMHTMLParagraphElement {
 
 func (o *DOMHTMLParagraphElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLParagraphElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLParagraphElement) SetAlign(align *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLParagraphElementSelSetAlign, align.Ptr())
 }
-

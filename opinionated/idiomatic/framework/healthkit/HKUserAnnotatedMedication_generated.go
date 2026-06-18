@@ -74,4 +74,3 @@ type UserAnnotatedMedicationable interface {
 }
 
 var _ UserAnnotatedMedicationable = (*UserAnnotatedMedication)(nil)
-

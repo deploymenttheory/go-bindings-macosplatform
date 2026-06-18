@@ -132,4 +132,3 @@ type IOBluetoothSDPDataElementable interface {
 }
 
 var _ IOBluetoothSDPDataElementable = (*IOBluetoothSDPDataElement)(nil)
-

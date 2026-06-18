@@ -88,4 +88,3 @@ type ContactPropertyable interface {
 }
 
 var _ ContactPropertyable = (*ContactProperty)(nil)
-

@@ -16,11 +16,11 @@ type CWChannel struct {
 }
 
 var (
-	_clsCWChannel = _objcClass("CWChannel")
+	_clsCWChannel                 = _objcClass("CWChannel")
 	_cWChannelSelIsEqualToChannel = objc.RegisterName("isEqualToChannel:")
-	_cWChannelSelChannelNumber = objc.RegisterName("channelNumber")
-	_cWChannelSelChannelWidth = objc.RegisterName("channelWidth")
-	_cWChannelSelChannelBand = objc.RegisterName("channelBand")
+	_cWChannelSelChannelNumber    = objc.RegisterName("channelNumber")
+	_cWChannelSelChannelWidth     = objc.RegisterName("channelWidth")
+	_cWChannelSelChannelBand      = objc.RegisterName("channelBand")
 )
 
 func CWChannelFromID(id objc.ID) *CWChannel {
@@ -56,4 +56,3 @@ func (o *CWChannel) ChannelBand() CWChannelBand {
 	_ret := objc.Send[CWChannelBand](o.Ptr(), _cWChannelSelChannelBand)
 	return _ret
 }
-

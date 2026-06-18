@@ -52,4 +52,3 @@ type BERTLVRecordable interface {
 }
 
 var _ BERTLVRecordable = (*BERTLVRecord)(nil)
-

@@ -53,4 +53,3 @@ type CredentialIdentityStoreStateable interface {
 }
 
 var _ CredentialIdentityStoreStateable = (*CredentialIdentityStoreState)(nil)
-

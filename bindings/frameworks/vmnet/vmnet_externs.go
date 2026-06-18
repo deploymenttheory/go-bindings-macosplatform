@@ -122,4 +122,3 @@ func Vmnet_write_max_packets_key() uintptr {
 	ptr, _ := purego.Dlsym(_vmnetLib, "vmnet_write_max_packets_key")
 	return ptr
 }
-

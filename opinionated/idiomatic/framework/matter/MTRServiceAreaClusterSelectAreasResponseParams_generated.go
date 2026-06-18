@@ -18,7 +18,9 @@ type MTRServiceAreaClusterSelectAreasResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterSelectAreasResponseParams].
-func (x *MTRServiceAreaClusterSelectAreasResponseParams) Unwrap() *raw.MTRServiceAreaClusterSelectAreasResponseParams { return x.inner }
+func (x *MTRServiceAreaClusterSelectAreasResponseParams) Unwrap() *raw.MTRServiceAreaClusterSelectAreasResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type MTRServiceAreaClusterSelectAreasResponseParamsable interface {
 }
 
 var _ MTRServiceAreaClusterSelectAreasResponseParamsable = (*MTRServiceAreaClusterSelectAreasResponseParams)(nil)
-

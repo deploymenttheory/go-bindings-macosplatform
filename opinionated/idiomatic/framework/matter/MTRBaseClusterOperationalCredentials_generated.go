@@ -19,7 +19,9 @@ type MTRBaseClusterOperationalCredentials struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterOperationalCredentials].
-func (x *MTRBaseClusterOperationalCredentials) Unwrap() *raw.MTRBaseClusterOperationalCredentials { return x.inner }
+func (x *MTRBaseClusterOperationalCredentials) Unwrap() *raw.MTRBaseClusterOperationalCredentials {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -1021,9 +1023,13 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 	}
 }
 
-func (x *MTRBaseClusterOperationalCredentials) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOperationalCredentials) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOperationalCredentials) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOperationalCredentials) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOperationalCredentialsable is the interface implemented by [MTRBaseClusterOperationalCredentials], for mocking and DI.
 type MTRBaseClusterOperationalCredentialsable interface {
@@ -1091,4 +1097,3 @@ type MTRBaseClusterOperationalCredentialsable interface {
 }
 
 var _ MTRBaseClusterOperationalCredentialsable = (*MTRBaseClusterOperationalCredentials)(nil)
-

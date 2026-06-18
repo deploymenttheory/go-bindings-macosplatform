@@ -16,12 +16,12 @@ type EKObject struct {
 }
 
 var (
-	_clsEKObject = _objcClass("EKObject")
-	_eKObjectSelReset = objc.RegisterName("reset")
-	_eKObjectSelRollback = objc.RegisterName("rollback")
-	_eKObjectSelRefresh = objc.RegisterName("refresh")
+	_clsEKObject           = _objcClass("EKObject")
+	_eKObjectSelReset      = objc.RegisterName("reset")
+	_eKObjectSelRollback   = objc.RegisterName("rollback")
+	_eKObjectSelRefresh    = objc.RegisterName("refresh")
 	_eKObjectSelHasChanges = objc.RegisterName("hasChanges")
-	_eKObjectSelIsNew = objc.RegisterName("isNew")
+	_eKObjectSelIsNew      = objc.RegisterName("isNew")
 )
 
 func EKObjectFromID(id objc.ID) *EKObject {
@@ -56,4 +56,3 @@ func (o *EKObject) IsNew() bool {
 	_ret := objc.Send[bool](o.Ptr(), _eKObjectSelIsNew)
 	return _ret
 }
-

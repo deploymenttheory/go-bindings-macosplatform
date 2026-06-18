@@ -10,12 +10,12 @@ import (
 )
 
 var (
-	_fnAHGotoMainTOC func(int16) int
-	_fnAHGotoPage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAHLookupAnchor func(unsafe.Pointer, unsafe.Pointer) int
-	_fnAHRegisterHelpBook func(*carboncore.FSRef) int
+	_fnAHGotoMainTOC             func(int16) int
+	_fnAHGotoPage                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnAHLookupAnchor            func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAHRegisterHelpBook        func(*carboncore.FSRef) int
 	_fnAHRegisterHelpBookWithURL func(unsafe.Pointer) int
-	_fnAHSearch func(unsafe.Pointer, unsafe.Pointer) int
+	_fnAHSearch                  func(unsafe.Pointer, unsafe.Pointer) int
 )
 
 func AHGotoMainTOC(toctype int16) int {
@@ -41,4 +41,3 @@ func AHRegisterHelpBookWithURL(applicationURL unsafe.Pointer) int {
 func AHSearch(bookname unsafe.Pointer, query unsafe.Pointer) int {
 	return _fnAHSearch(bookname, query)
 }
-

@@ -16,10 +16,10 @@ type MTRPowerSourceClusterBatChargeFaultChangeType struct {
 }
 
 var (
-	_clsMTRPowerSourceClusterBatChargeFaultChangeType = _objcClass("MTRPowerSourceClusterBatChargeFaultChangeType")
-	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelCurrent = objc.RegisterName("current")
-	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetCurrent = objc.RegisterName("setCurrent:")
-	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelPrevious = objc.RegisterName("previous")
+	_clsMTRPowerSourceClusterBatChargeFaultChangeType            = _objcClass("MTRPowerSourceClusterBatChargeFaultChangeType")
+	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelCurrent     = objc.RegisterName("current")
+	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetCurrent  = objc.RegisterName("setCurrent:")
+	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelPrevious    = objc.RegisterName("previous")
 	_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetPrevious = objc.RegisterName("setPrevious:")
 )
 
@@ -50,4 +50,3 @@ func (o *MTRPowerSourceClusterBatChargeFaultChangeType) Previous() *foundation.N
 func (o *MTRPowerSourceClusterBatChargeFaultChangeType) SetPrevious(previous *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRPowerSourceClusterBatChargeFaultChangeTypeSelSetPrevious, previous)
 }
-

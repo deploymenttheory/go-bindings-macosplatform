@@ -19,10 +19,10 @@ type SKStoreProductViewController struct {
 }
 
 var (
-	_clsSKStoreProductViewController = _objcClass("SKStoreProductViewController")
+	_clsSKStoreProductViewController                                         = _objcClass("SKStoreProductViewController")
 	_sKStoreProductViewControllerSelLoadProductWithParametersCompletionBlock = objc.RegisterName("loadProductWithParameters:completionBlock:")
-	_sKStoreProductViewControllerSelDelegate = objc.RegisterName("delegate")
-	_sKStoreProductViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_sKStoreProductViewControllerSelDelegate                                 = objc.RegisterName("delegate")
+	_sKStoreProductViewControllerSelSetDelegate                              = objc.RegisterName("setDelegate:")
 )
 
 func SKStoreProductViewControllerFromID(id objc.ID) *SKStoreProductViewController {
@@ -54,4 +54,3 @@ func (o *SKStoreProductViewController) Delegate() SKStoreProductViewControllerDe
 func (o *SKStoreProductViewController) SetDelegate(delegate SKStoreProductViewControllerDelegate) {
 	o.Ptr().Send(_sKStoreProductViewControllerSelSetDelegate, delegate)
 }
-

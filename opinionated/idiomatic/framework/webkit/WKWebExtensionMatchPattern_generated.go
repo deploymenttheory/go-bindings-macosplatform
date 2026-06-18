@@ -136,4 +136,3 @@ type WKWebExtensionMatchPatternable interface {
 }
 
 var _ WKWebExtensionMatchPatternable = (*WKWebExtensionMatchPattern)(nil)
-

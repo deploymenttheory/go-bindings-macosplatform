@@ -17,10 +17,10 @@ type CITextFeature struct {
 }
 
 var (
-	_clsCITextFeature = _objcClass("CITextFeature")
-	_cITextFeatureSelTopLeft = objc.RegisterName("topLeft")
-	_cITextFeatureSelTopRight = objc.RegisterName("topRight")
-	_cITextFeatureSelBottomLeft = objc.RegisterName("bottomLeft")
+	_clsCITextFeature            = _objcClass("CITextFeature")
+	_cITextFeatureSelTopLeft     = objc.RegisterName("topLeft")
+	_cITextFeatureSelTopRight    = objc.RegisterName("topRight")
+	_cITextFeatureSelBottomLeft  = objc.RegisterName("bottomLeft")
 	_cITextFeatureSelBottomRight = objc.RegisterName("bottomRight")
 	_cITextFeatureSelSubFeatures = objc.RegisterName("subFeatures")
 )
@@ -59,9 +59,8 @@ func (o *CITextFeature) BottomRight() corefoundation.CGPoint {
 	return _ret
 }
 
-// An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, ``/CIDetector/featuresInImage:options:`` needs to be called with the ``CIDetectorReturnSubFeatures`` option set to true.
+// An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
 func (o *CITextFeature) SubFeatures() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _cITextFeatureSelSubFeatures)
 	return _ret
 }
-

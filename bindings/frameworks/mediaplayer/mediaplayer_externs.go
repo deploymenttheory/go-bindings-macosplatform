@@ -423,4 +423,3 @@ func MPNowPlayingInfoPropertyServiceIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyServiceIdentifier")
 	return ptr
 }
-

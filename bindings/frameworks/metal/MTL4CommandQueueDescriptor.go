@@ -16,10 +16,10 @@ type MTL4CommandQueueDescriptor struct {
 }
 
 var (
-	_clsMTL4CommandQueueDescriptor = _objcClass("MTL4CommandQueueDescriptor")
-	_mTL4CommandQueueDescriptorSelLabel = objc.RegisterName("label")
-	_mTL4CommandQueueDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTL4CommandQueueDescriptorSelFeedbackQueue = objc.RegisterName("feedbackQueue")
+	_clsMTL4CommandQueueDescriptor                 = _objcClass("MTL4CommandQueueDescriptor")
+	_mTL4CommandQueueDescriptorSelLabel            = objc.RegisterName("label")
+	_mTL4CommandQueueDescriptorSelSetLabel         = objc.RegisterName("setLabel:")
+	_mTL4CommandQueueDescriptorSelFeedbackQueue    = objc.RegisterName("feedbackQueue")
 	_mTL4CommandQueueDescriptorSelSetFeedbackQueue = objc.RegisterName("setFeedbackQueue:")
 )
 
@@ -36,7 +36,9 @@ func MTL4CommandQueueDescriptorFromID(id objc.ID) *MTL4CommandQueueDescriptor {
 // Assigns an optional label to the command queue instance for debugging purposes.
 func (o *MTL4CommandQueueDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4CommandQueueDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *MTL4CommandQueueDescriptor) SetLabel(label *foundation.NSString) {
 // Assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
 func (o *MTL4CommandQueueDescriptor) FeedbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4CommandQueueDescriptorSelFeedbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
 func (o *MTL4CommandQueueDescriptor) SetFeedbackQueue(feedbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_mTL4CommandQueueDescriptorSelSetFeedbackQueue, feedbackQueue.Ptr())
 }
-

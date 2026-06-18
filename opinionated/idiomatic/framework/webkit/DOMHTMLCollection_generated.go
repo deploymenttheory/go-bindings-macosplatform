@@ -70,7 +70,9 @@ func (x *DOMHTMLCollection) Length() uint {
 
 func (x *DOMHTMLCollection) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMHTMLCollection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMHTMLCollection) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMHTMLCollectionable is the interface implemented by [DOMHTMLCollection], for mocking and DI.
 type DOMHTMLCollectionable interface {
@@ -82,4 +84,3 @@ type DOMHTMLCollectionable interface {
 }
 
 var _ DOMHTMLCollectionable = (*DOMHTMLCollection)(nil)
-

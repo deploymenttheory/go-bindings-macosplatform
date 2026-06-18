@@ -16,18 +16,18 @@ type NEOnDemandRule struct {
 }
 
 var (
-	_clsNEOnDemandRule = _objcClass("NEOnDemandRule")
-	_nEOnDemandRuleSelAction = objc.RegisterName("action")
-	_nEOnDemandRuleSelDNSSearchDomainMatch = objc.RegisterName("DNSSearchDomainMatch")
-	_nEOnDemandRuleSelSetDNSSearchDomainMatch = objc.RegisterName("setDNSSearchDomainMatch:")
-	_nEOnDemandRuleSelDNSServerAddressMatch = objc.RegisterName("DNSServerAddressMatch")
+	_clsNEOnDemandRule                         = _objcClass("NEOnDemandRule")
+	_nEOnDemandRuleSelAction                   = objc.RegisterName("action")
+	_nEOnDemandRuleSelDNSSearchDomainMatch     = objc.RegisterName("DNSSearchDomainMatch")
+	_nEOnDemandRuleSelSetDNSSearchDomainMatch  = objc.RegisterName("setDNSSearchDomainMatch:")
+	_nEOnDemandRuleSelDNSServerAddressMatch    = objc.RegisterName("DNSServerAddressMatch")
 	_nEOnDemandRuleSelSetDNSServerAddressMatch = objc.RegisterName("setDNSServerAddressMatch:")
-	_nEOnDemandRuleSelInterfaceTypeMatch = objc.RegisterName("interfaceTypeMatch")
-	_nEOnDemandRuleSelSetInterfaceTypeMatch = objc.RegisterName("setInterfaceTypeMatch:")
-	_nEOnDemandRuleSelSSIDMatch = objc.RegisterName("SSIDMatch")
-	_nEOnDemandRuleSelSetSSIDMatch = objc.RegisterName("setSSIDMatch:")
-	_nEOnDemandRuleSelProbeURL = objc.RegisterName("probeURL")
-	_nEOnDemandRuleSelSetProbeURL = objc.RegisterName("setProbeURL:")
+	_nEOnDemandRuleSelInterfaceTypeMatch       = objc.RegisterName("interfaceTypeMatch")
+	_nEOnDemandRuleSelSetInterfaceTypeMatch    = objc.RegisterName("setInterfaceTypeMatch:")
+	_nEOnDemandRuleSelSSIDMatch                = objc.RegisterName("SSIDMatch")
+	_nEOnDemandRuleSelSetSSIDMatch             = objc.RegisterName("setSSIDMatch:")
+	_nEOnDemandRuleSelProbeURL                 = objc.RegisterName("probeURL")
+	_nEOnDemandRuleSelSetProbeURL              = objc.RegisterName("setProbeURL:")
 )
 
 func NEOnDemandRuleFromID(id objc.ID) *NEOnDemandRule {
@@ -89,11 +89,12 @@ func (o *NEOnDemandRule) SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.
 // @property probeURL @discussion An HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
 func (o *NEOnDemandRule) ProbeURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEOnDemandRuleSelProbeURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *NEOnDemandRule) SetProbeURL(probeURL *foundation.NSURL) {
 	o.Ptr().Send(_nEOnDemandRuleSelSetProbeURL, probeURL.Ptr())
 }
-

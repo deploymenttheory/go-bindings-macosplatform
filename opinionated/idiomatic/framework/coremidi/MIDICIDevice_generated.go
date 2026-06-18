@@ -112,4 +112,3 @@ type CIDeviceable interface {
 }
 
 var _ CIDeviceable = (*CIDevice)(nil)
-

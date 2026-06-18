@@ -17,7 +17,7 @@ type MPSImageDivide struct {
 }
 
 var (
-	_clsMPSImageDivide = _objcClass("MPSImageDivide")
+	_clsMPSImageDivide               = _objcClass("MPSImageDivide")
 	_mPSImageDivideSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSImageDivideFromID(id objc.ID) *MPSImageDivide {
 // @abstract  Initialize the division operator @param     device           The device the filter will run on. @return    A valid MPSImageDivide object or nil, if failure.
 func (o *MPSImageDivide) InitWithDevice(device metal.MTLDevice) *MPSImageDivide {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageDivideSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageDivideFromID(_ret)
 }
-

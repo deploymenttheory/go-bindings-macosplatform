@@ -82,9 +82,13 @@ func (x *MTRClusterLaundryDryerControls) ReadAttributeClusterRevisionWithParams(
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterLaundryDryerControls) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterLaundryDryerControls) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterLaundryDryerControls) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterLaundryDryerControls) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterLaundryDryerControlsable is the interface implemented by [MTRClusterLaundryDryerControls], for mocking and DI.
 type MTRClusterLaundryDryerControlsable interface {
@@ -101,4 +105,3 @@ type MTRClusterLaundryDryerControlsable interface {
 }
 
 var _ MTRClusterLaundryDryerControlsable = (*MTRClusterLaundryDryerControls)(nil)
-

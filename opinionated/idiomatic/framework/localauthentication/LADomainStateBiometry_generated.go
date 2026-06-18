@@ -54,4 +54,3 @@ type DomainStateBiometryable interface {
 }
 
 var _ DomainStateBiometryable = (*DomainStateBiometry)(nil)
-

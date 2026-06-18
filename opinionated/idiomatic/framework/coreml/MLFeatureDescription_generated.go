@@ -120,4 +120,3 @@ type FeatureDescriptionable interface {
 }
 
 var _ FeatureDescriptionable = (*FeatureDescription)(nil)
-

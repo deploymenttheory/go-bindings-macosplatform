@@ -17,19 +17,19 @@ type PKStrokePath struct {
 }
 
 var (
-	_clsPKStrokePath = _objcClass("PKStrokePath")
-	_pKStrokePathSelInitWithControlPointsCreationDate = objc.RegisterName("initWithControlPoints:creationDate:")
-	_pKStrokePathSelPointAtIndex = objc.RegisterName("pointAtIndex:")
-	_pKStrokePathSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_pKStrokePathSelInterpolatedLocationAt = objc.RegisterName("interpolatedLocationAt:")
-	_pKStrokePathSelInterpolatedPointAt = objc.RegisterName("interpolatedPointAt:")
-	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByDistanceUsing = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByDistance:usingBlock:")
-	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByTimeUsing = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByTime:usingBlock:")
+	_clsPKStrokePath                                                              = _objcClass("PKStrokePath")
+	_pKStrokePathSelInitWithControlPointsCreationDate                             = objc.RegisterName("initWithControlPoints:creationDate:")
+	_pKStrokePathSelPointAtIndex                                                  = objc.RegisterName("pointAtIndex:")
+	_pKStrokePathSelObjectAtIndexedSubscript                                      = objc.RegisterName("objectAtIndexedSubscript:")
+	_pKStrokePathSelInterpolatedLocationAt                                        = objc.RegisterName("interpolatedLocationAt:")
+	_pKStrokePathSelInterpolatedPointAt                                           = objc.RegisterName("interpolatedPointAt:")
+	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByDistanceUsing       = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByDistance:usingBlock:")
+	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByTimeUsing           = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByTime:usingBlock:")
 	_pKStrokePathSelEnumerateInterpolatedPointsInRangeStrideByParametricStepUsing = objc.RegisterName("enumerateInterpolatedPointsInRange:strideByParametricStep:usingBlock:")
-	_pKStrokePathSelParametricValueOffsetByDistance = objc.RegisterName("parametricValue:offsetByDistance:")
-	_pKStrokePathSelParametricValueOffsetByTime = objc.RegisterName("parametricValue:offsetByTime:")
-	_pKStrokePathSelCount = objc.RegisterName("count")
-	_pKStrokePathSelCreationDate = objc.RegisterName("creationDate")
+	_pKStrokePathSelParametricValueOffsetByDistance                               = objc.RegisterName("parametricValue:offsetByDistance:")
+	_pKStrokePathSelParametricValueOffsetByTime                                   = objc.RegisterName("parametricValue:offsetByTime:")
+	_pKStrokePathSelCount                                                         = objc.RegisterName("count")
+	_pKStrokePathSelCreationDate                                                  = objc.RegisterName("creationDate")
 )
 
 func PKStrokePathFromID(id objc.ID) *PKStrokePath {
@@ -45,21 +45,27 @@ func PKStrokePathFromID(id objc.ID) *PKStrokePath {
 // Create a stroke path value with the given cubic B-spline control points. @param controlPoints An array of control points for a cubic B-spline. @param creationDate The start time of this path.
 func (o *PKStrokePath) InitWithControlPointsCreationDate(controlPoints *foundation.NSArray[*PKStrokePoint], creationDate *foundation.NSDate) *PKStrokePath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInitWithControlPointsCreationDate, controlPoints.Ptr(), creationDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePathFromID(_ret)
 }
 
 // Returns B-spline control point at index `i`.
 func (o *PKStrokePath) PointAtIndex(i uint) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelPointAtIndex, i)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
 // Returns B-spline control point at index `i`.
 func (o *PKStrokePath) ObjectAtIndexedSubscript(i uint) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelObjectAtIndexedSubscript, i)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *PKStrokePath) InterpolatedLocationAt(parametricValue float64) corefound
 // The on-curve point for the floating point [0, count-1] `parametricValue` parameter.
 func (o *PKStrokePath) InterpolatedPointAt(parametricValue float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelInterpolatedPointAt, parametricValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
@@ -142,7 +150,8 @@ func (o *PKStrokePath) Count() uint {
 // The time at which this stroke path was started. The `timeOffset` of contained PKStrokePoints is relative to this date.
 func (o *PKStrokePath) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePathSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

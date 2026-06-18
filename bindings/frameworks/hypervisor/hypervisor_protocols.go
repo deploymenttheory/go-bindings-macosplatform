@@ -18,4 +18,3 @@ type OS_hv_vcpu_config interface {
 // OS_hv_vm_config wraps the ObjC protocol OS_hv_vm_config.
 type OS_hv_vm_config interface {
 }
-

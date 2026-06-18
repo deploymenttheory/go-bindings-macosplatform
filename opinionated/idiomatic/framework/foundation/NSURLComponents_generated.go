@@ -156,7 +156,9 @@ func (x *URLComponents) WithQueryItems(items ...*raw.NSURLQueryItem) *URLCompone
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -172,7 +174,9 @@ func (x *URLComponents) WithPercentEncodedQueryItems(items ...*raw.NSURLQueryIte
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSURLQueryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -567,4 +571,3 @@ type URLComponentsable interface {
 }
 
 var _ URLComponentsable = (*URLComponents)(nil)
-

@@ -27,4 +27,3 @@ func MPSNNMultiplicationNodeFromID(id objc.ID) *MPSNNMultiplicationNode {
 	purego.Track(o)
 	return o
 }
-

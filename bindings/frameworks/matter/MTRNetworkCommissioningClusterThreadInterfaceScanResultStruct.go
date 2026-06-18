@@ -16,21 +16,21 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct = _objcClass("MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelPanId = objc.RegisterName("panId")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetPanId = objc.RegisterName("setPanId:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedPanId = objc.RegisterName("extendedPanId")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetExtendedPanId = objc.RegisterName("setExtendedPanId:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelNetworkName = objc.RegisterName("networkName")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetNetworkName = objc.RegisterName("setNetworkName:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelChannel = objc.RegisterName("channel")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetChannel = objc.RegisterName("setChannel:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedAddress = objc.RegisterName("extendedAddress")
+	_clsMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct                   = _objcClass("MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelPanId              = objc.RegisterName("panId")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetPanId           = objc.RegisterName("setPanId:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedPanId      = objc.RegisterName("extendedPanId")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetExtendedPanId   = objc.RegisterName("setExtendedPanId:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelNetworkName        = objc.RegisterName("networkName")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetNetworkName     = objc.RegisterName("setNetworkName:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelChannel            = objc.RegisterName("channel")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetChannel         = objc.RegisterName("setChannel:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedAddress    = objc.RegisterName("extendedAddress")
 	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetExtendedAddress = objc.RegisterName("setExtendedAddress:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelRssi = objc.RegisterName("rssi")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetRssi = objc.RegisterName("setRssi:")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelLqi = objc.RegisterName("lqi")
-	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetLqi = objc.RegisterName("setLqi:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelRssi               = objc.RegisterName("rssi")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetRssi            = objc.RegisterName("setRssi:")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelLqi                = objc.RegisterName("lqi")
+	_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetLqi             = objc.RegisterName("setLqi:")
 )
 
 func MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(id objc.ID) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
@@ -45,7 +45,9 @@ func MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(id objc
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelPanId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetPanId
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedPanId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExten
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) NetworkName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelNetworkName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetNetwo
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetChann
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelExtendedAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExten
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelRssi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -105,11 +117,12 @@ func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetRssi(
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelLqi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetLqi(lqi *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterThreadInterfaceScanResultStructSelSetLqi, lqi.Ptr())
 }
-

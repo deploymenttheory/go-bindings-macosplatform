@@ -18,10 +18,10 @@ type MTRICDManagementClusterStayActiveResponseParams struct {
 }
 
 var (
-	_clsMTRICDManagementClusterStayActiveResponseParams = _objcClass("MTRICDManagementClusterStayActiveResponseParams")
+	_clsMTRICDManagementClusterStayActiveResponseParams                           = _objcClass("MTRICDManagementClusterStayActiveResponseParams")
 	_mTRICDManagementClusterStayActiveResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRICDManagementClusterStayActiveResponseParamsSelPromisedActiveDuration = objc.RegisterName("promisedActiveDuration")
-	_mTRICDManagementClusterStayActiveResponseParamsSelSetPromisedActiveDuration = objc.RegisterName("setPromisedActiveDuration:")
+	_mTRICDManagementClusterStayActiveResponseParamsSelPromisedActiveDuration     = objc.RegisterName("promisedActiveDuration")
+	_mTRICDManagementClusterStayActiveResponseParamsSelSetPromisedActiveDuration  = objc.RegisterName("setPromisedActiveDuration:")
 )
 
 func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDManagementClusterStayActiveResponseParams {
@@ -38,7 +38,9 @@ func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDMa
 func (o *MTRICDManagementClusterStayActiveResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRICDManagementClusterStayActiveResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterStayActiveResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRICDManagementClusterStayActiveResponseParams) InitWithResponseValueE
 
 func (o *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterStayActiveResponseParamsSelPromisedActiveDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
 	o.Ptr().Send(_mTRICDManagementClusterStayActiveResponseParamsSelSetPromisedActiveDuration, promisedActiveDuration.Ptr())
 }
-

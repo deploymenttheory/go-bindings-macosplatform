@@ -17,16 +17,16 @@ type NSTouch struct {
 }
 
 var (
-	_clsNSTouch = _objcClass("NSTouch")
-	_nSTouchSelIdentity = objc.RegisterName("identity")
-	_nSTouchSelPhase = objc.RegisterName("phase")
-	_nSTouchSelNormalizedPosition = objc.RegisterName("normalizedPosition")
-	_nSTouchSelIsResting = objc.RegisterName("isResting")
-	_nSTouchSelDevice = objc.RegisterName("device")
-	_nSTouchSelDeviceSize = objc.RegisterName("deviceSize")
-	_nSTouchSelLocationInView = objc.RegisterName("locationInView:")
+	_clsNSTouch                       = _objcClass("NSTouch")
+	_nSTouchSelIdentity               = objc.RegisterName("identity")
+	_nSTouchSelPhase                  = objc.RegisterName("phase")
+	_nSTouchSelNormalizedPosition     = objc.RegisterName("normalizedPosition")
+	_nSTouchSelIsResting              = objc.RegisterName("isResting")
+	_nSTouchSelDevice                 = objc.RegisterName("device")
+	_nSTouchSelDeviceSize             = objc.RegisterName("deviceSize")
+	_nSTouchSelLocationInView         = objc.RegisterName("locationInView:")
 	_nSTouchSelPreviousLocationInView = objc.RegisterName("previousLocationInView:")
-	_nSTouchSelType = objc.RegisterName("type")
+	_nSTouchSelType                   = objc.RegisterName("type")
 )
 
 func NSTouchFromID(id objc.ID) *NSTouch {
@@ -83,4 +83,3 @@ func (o *NSTouch) Type() NSTouchType {
 	_ret := objc.Send[NSTouchType](o.Ptr(), _nSTouchSelType)
 	return _ret
 }
-

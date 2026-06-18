@@ -72,4 +72,3 @@ type StoryboardSegueable interface {
 }
 
 var _ StoryboardSegueable = (*StoryboardSegue)(nil)
-

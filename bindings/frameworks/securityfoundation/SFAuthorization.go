@@ -21,17 +21,17 @@ type SFAuthorization struct {
 }
 
 var (
-	_clsSFAuthorization = _objcClass("SFAuthorization")
-	_sFAuthorizationSelAuthorization = objc.RegisterName("authorization")
-	_sFAuthorizationSelAuthorizationRef = objc.RegisterName("authorizationRef")
-	_sFAuthorizationSelAuthorizationWithFlagsRightsEnvironment = objc.RegisterName("authorizationWithFlags:rights:environment:")
-	_sFAuthorizationSelInitWithFlagsRightsEnvironment = objc.RegisterName("initWithFlags:rights:environment:")
-	_sFAuthorizationSelInit = objc.RegisterName("init")
-	_sFAuthorizationSelInvalidateCredentials = objc.RegisterName("invalidateCredentials")
-	_sFAuthorizationSelObtainWithRightFlagsError = objc.RegisterName("obtainWithRight:flags:error:")
+	_clsSFAuthorization                                                      = _objcClass("SFAuthorization")
+	_sFAuthorizationSelAuthorization                                         = objc.RegisterName("authorization")
+	_sFAuthorizationSelAuthorizationRef                                      = objc.RegisterName("authorizationRef")
+	_sFAuthorizationSelAuthorizationWithFlagsRightsEnvironment               = objc.RegisterName("authorizationWithFlags:rights:environment:")
+	_sFAuthorizationSelInitWithFlagsRightsEnvironment                        = objc.RegisterName("initWithFlags:rights:environment:")
+	_sFAuthorizationSelInit                                                  = objc.RegisterName("init")
+	_sFAuthorizationSelInvalidateCredentials                                 = objc.RegisterName("invalidateCredentials")
+	_sFAuthorizationSelObtainWithRightFlagsError                             = objc.RegisterName("obtainWithRight:flags:error:")
 	_sFAuthorizationSelObtainWithRightsFlagsEnvironmentAuthorizedRightsError = objc.RegisterName("obtainWithRights:flags:environment:authorizedRights:error:")
-	_sFAuthorizationSelPermitWithRightsFlagsEnvironmentAuthorizedRights = objc.RegisterName("permitWithRights:flags:environment:authorizedRights:")
-	_sFAuthorizationSelPermitWithRightFlags = objc.RegisterName("permitWithRight:flags:")
+	_sFAuthorizationSelPermitWithRightsFlagsEnvironmentAuthorizedRights      = objc.RegisterName("permitWithRights:flags:environment:authorizedRights:")
+	_sFAuthorizationSelPermitWithRightFlags                                  = objc.RegisterName("permitWithRight:flags:")
 )
 
 func SFAuthorizationFromID(id objc.ID) *SFAuthorization {
@@ -112,4 +112,3 @@ func (o *SFAuthorization) PermitWithRightFlags(rightName string, flags security.
 	_ret := objc.Send[int](o.Ptr(), _sFAuthorizationSelPermitWithRightFlags, rightName, flags)
 	return _ret
 }
-

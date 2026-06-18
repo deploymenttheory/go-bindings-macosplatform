@@ -18,17 +18,17 @@ type ASWebAuthenticationSessionRequest struct {
 }
 
 var (
-	_clsASWebAuthenticationSessionRequest = _objcClass("ASWebAuthenticationSessionRequest")
-	_aSWebAuthenticationSessionRequestSelCancelWithError = objc.RegisterName("cancelWithError:")
-	_aSWebAuthenticationSessionRequestSelCompleteWithCallbackURL = objc.RegisterName("completeWithCallbackURL:")
-	_aSWebAuthenticationSessionRequestSelUUID = objc.RegisterName("UUID")
-	_aSWebAuthenticationSessionRequestSelURL = objc.RegisterName("URL")
-	_aSWebAuthenticationSessionRequestSelCallbackURLScheme = objc.RegisterName("callbackURLScheme")
+	_clsASWebAuthenticationSessionRequest                          = _objcClass("ASWebAuthenticationSessionRequest")
+	_aSWebAuthenticationSessionRequestSelCancelWithError           = objc.RegisterName("cancelWithError:")
+	_aSWebAuthenticationSessionRequestSelCompleteWithCallbackURL   = objc.RegisterName("completeWithCallbackURL:")
+	_aSWebAuthenticationSessionRequestSelUUID                      = objc.RegisterName("UUID")
+	_aSWebAuthenticationSessionRequestSelURL                       = objc.RegisterName("URL")
+	_aSWebAuthenticationSessionRequestSelCallbackURLScheme         = objc.RegisterName("callbackURLScheme")
 	_aSWebAuthenticationSessionRequestSelShouldUseEphemeralSession = objc.RegisterName("shouldUseEphemeralSession")
-	_aSWebAuthenticationSessionRequestSelDelegate = objc.RegisterName("delegate")
-	_aSWebAuthenticationSessionRequestSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aSWebAuthenticationSessionRequestSelAdditionalHeaderFields = objc.RegisterName("additionalHeaderFields")
-	_aSWebAuthenticationSessionRequestSelCallback = objc.RegisterName("callback")
+	_aSWebAuthenticationSessionRequestSelDelegate                  = objc.RegisterName("delegate")
+	_aSWebAuthenticationSessionRequestSelSetDelegate               = objc.RegisterName("setDelegate:")
+	_aSWebAuthenticationSessionRequestSelAdditionalHeaderFields    = objc.RegisterName("additionalHeaderFields")
+	_aSWebAuthenticationSessionRequestSelCallback                  = objc.RegisterName("callback")
 )
 
 func ASWebAuthenticationSessionRequestFromID(id objc.ID) *ASWebAuthenticationSessionRequest {
@@ -51,20 +51,26 @@ func (o *ASWebAuthenticationSessionRequest) CompleteWithCallbackURL(url *foundat
 
 func (o *ASWebAuthenticationSessionRequest) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionRequestSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *ASWebAuthenticationSessionRequest) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionRequestSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Deprecated: Use `callback` to match all callback types.
 func (o *ASWebAuthenticationSessionRequest) CallbackURLScheme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionRequestSelCallbackURLScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,7 +99,8 @@ func (o *ASWebAuthenticationSessionRequest) AdditionalHeaderFields() *foundation
 // The callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
 func (o *ASWebAuthenticationSessionRequest) Callback() *ASWebAuthenticationSessionCallback {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionRequestSelCallback)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionCallbackFromID(_ret)
 }
-

@@ -218,4 +218,3 @@ func SRStopListening(recognizer unsafe.Pointer) int16 {
 func SRStopSpeech(recognizer unsafe.Pointer) int16 {
 	return raw.SRStopSpeech(recognizer)
 }
-

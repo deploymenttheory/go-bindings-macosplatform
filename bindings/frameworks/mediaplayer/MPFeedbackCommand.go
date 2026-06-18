@@ -16,12 +16,12 @@ type MPFeedbackCommand struct {
 }
 
 var (
-	_clsMPFeedbackCommand = _objcClass("MPFeedbackCommand")
-	_mPFeedbackCommandSelIsActive = objc.RegisterName("isActive")
-	_mPFeedbackCommandSelSetActive = objc.RegisterName("setActive:")
-	_mPFeedbackCommandSelLocalizedTitle = objc.RegisterName("localizedTitle")
-	_mPFeedbackCommandSelSetLocalizedTitle = objc.RegisterName("setLocalizedTitle:")
-	_mPFeedbackCommandSelLocalizedShortTitle = objc.RegisterName("localizedShortTitle")
+	_clsMPFeedbackCommand                       = _objcClass("MPFeedbackCommand")
+	_mPFeedbackCommandSelIsActive               = objc.RegisterName("isActive")
+	_mPFeedbackCommandSelSetActive              = objc.RegisterName("setActive:")
+	_mPFeedbackCommandSelLocalizedTitle         = objc.RegisterName("localizedTitle")
+	_mPFeedbackCommandSelSetLocalizedTitle      = objc.RegisterName("setLocalizedTitle:")
+	_mPFeedbackCommandSelLocalizedShortTitle    = objc.RegisterName("localizedShortTitle")
 	_mPFeedbackCommandSelSetLocalizedShortTitle = objc.RegisterName("setLocalizedShortTitle:")
 )
 
@@ -48,7 +48,9 @@ func (o *MPFeedbackCommand) SetActive(active bool) {
 // A localized string briefly describing the context of the command.
 func (o *MPFeedbackCommand) LocalizedTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPFeedbackCommandSelLocalizedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,11 +61,12 @@ func (o *MPFeedbackCommand) SetLocalizedTitle(localizedTitle *foundation.NSStrin
 // An optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
 func (o *MPFeedbackCommand) LocalizedShortTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPFeedbackCommandSelLocalizedShortTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MPFeedbackCommand) SetLocalizedShortTitle(localizedShortTitle *foundation.NSString) {
 	o.Ptr().Send(_mPFeedbackCommandSelSetLocalizedShortTitle, localizedShortTitle.Ptr())
 }
-

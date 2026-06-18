@@ -15,7 +15,7 @@ type DOMCSSFontFaceRule struct {
 }
 
 var (
-	_clsDOMCSSFontFaceRule = _objcClass("DOMCSSFontFaceRule")
+	_clsDOMCSSFontFaceRule      = _objcClass("DOMCSSFontFaceRule")
 	_dOMCSSFontFaceRuleSelStyle = objc.RegisterName("style")
 )
 
@@ -31,7 +31,8 @@ func DOMCSSFontFaceRuleFromID(id objc.ID) *DOMCSSFontFaceRule {
 
 func (o *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSFontFaceRuleSelStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
-

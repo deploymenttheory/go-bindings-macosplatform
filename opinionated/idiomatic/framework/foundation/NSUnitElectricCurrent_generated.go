@@ -54,4 +54,3 @@ type UnitElectricCurrentable interface {
 }
 
 var _ UnitElectricCurrentable = (*UnitElectricCurrent)(nil)
-

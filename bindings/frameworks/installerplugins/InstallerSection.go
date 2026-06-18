@@ -16,17 +16,17 @@ type InstallerSection struct {
 }
 
 var (
-	_clsInstallerSection = _objcClass("InstallerSection")
-	_installerSectionSelWillLoadMainNib = objc.RegisterName("willLoadMainNib")
-	_installerSectionSelDidLoadMainNib = objc.RegisterName("didLoadMainNib")
+	_clsInstallerSection                 = _objcClass("InstallerSection")
+	_installerSectionSelWillLoadMainNib  = objc.RegisterName("willLoadMainNib")
+	_installerSectionSelDidLoadMainNib   = objc.RegisterName("didLoadMainNib")
 	_installerSectionSelSharedDictionary = objc.RegisterName("sharedDictionary")
-	_installerSectionSelGotoPane = objc.RegisterName("gotoPane:")
-	_installerSectionSelBundle = objc.RegisterName("bundle")
-	_installerSectionSelTitle = objc.RegisterName("title")
-	_installerSectionSelFirstPane = objc.RegisterName("firstPane")
-	_installerSectionSelShouldLoad = objc.RegisterName("shouldLoad")
-	_installerSectionSelInstallerState = objc.RegisterName("installerState")
-	_installerSectionSelActivePane = objc.RegisterName("activePane")
+	_installerSectionSelGotoPane         = objc.RegisterName("gotoPane:")
+	_installerSectionSelBundle           = objc.RegisterName("bundle")
+	_installerSectionSelTitle            = objc.RegisterName("title")
+	_installerSectionSelFirstPane        = objc.RegisterName("firstPane")
+	_installerSectionSelShouldLoad       = objc.RegisterName("shouldLoad")
+	_installerSectionSelInstallerState   = objc.RegisterName("installerState")
+	_installerSectionSelActivePane       = objc.RegisterName("activePane")
 )
 
 func InstallerSectionFromID(id objc.ID) *InstallerSection {
@@ -64,21 +64,27 @@ func (o *InstallerSection) GotoPane(pane *InstallerPane) bool {
 // @method     bundle @discussion This method returns the NSBundle in which the InstallerSection is located.  Since InstallerSection is not typically overriden, the bundle returned may not necessarily be the same bundle as the InstallerSection class. Use this method to gain access to bundle resources.
 func (o *InstallerSection) Bundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
 // @method		title @discussion Returns the title for the section defined in the Info.plist file for the section's bundle.  The title retrieved using the "InstallerSectionTitle" key in the Info.plist for the section's bundle and that key must be present in the InfoPlist.strings file for title to be localized. Although subclasses can override this method and return a dynamic title at runtime, the title is only retrieved for display once (immediatly following the shouldLoad method, if shouldLoad returns YES).
 func (o *InstallerSection) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method     firstPane @discussion Returns the first pane specified by the firstPane outlet.  This pane is the first pane entered when the section first becomes active.
 func (o *InstallerSection) FirstPane() *InstallerPane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelFirstPane)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerPaneFromID(_ret)
 }
 
@@ -91,14 +97,17 @@ func (o *InstallerSection) ShouldLoad() bool {
 // @method     installerState @abstract   Returns the Installer State object for the current install session. @discussion Returns an object which describes the Installer choices and status at the given time.  Plugins cannot influence this state, it should only be used for informational purposes.  See InstallerState.h for more details.
 func (o *InstallerSection) InstallerState() *InstallerState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelInstallerState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerStateFromID(_ret)
 }
 
 // @method     activePane @abstract   Returns the current active page for this section. @discussion If the section is active, it will return the current active page.  If the section is not active, nil will be returned.
 func (o *InstallerSection) ActivePane() *InstallerPane {
 	_ret := objc.Send[objc.ID](o.Ptr(), _installerSectionSelActivePane)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return InstallerPaneFromID(_ret)
 }
-

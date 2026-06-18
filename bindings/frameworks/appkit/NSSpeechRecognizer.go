@@ -16,20 +16,20 @@ type NSSpeechRecognizer struct {
 }
 
 var (
-	_clsNSSpeechRecognizer = _objcClass("NSSpeechRecognizer")
-	_nSSpeechRecognizerSelInit = objc.RegisterName("init")
-	_nSSpeechRecognizerSelStartListening = objc.RegisterName("startListening")
-	_nSSpeechRecognizerSelStopListening = objc.RegisterName("stopListening")
-	_nSSpeechRecognizerSelDelegate = objc.RegisterName("delegate")
-	_nSSpeechRecognizerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSpeechRecognizerSelCommands = objc.RegisterName("commands")
-	_nSSpeechRecognizerSelSetCommands = objc.RegisterName("setCommands:")
-	_nSSpeechRecognizerSelDisplayedCommandsTitle = objc.RegisterName("displayedCommandsTitle")
-	_nSSpeechRecognizerSelSetDisplayedCommandsTitle = objc.RegisterName("setDisplayedCommandsTitle:")
-	_nSSpeechRecognizerSelListensInForegroundOnly = objc.RegisterName("listensInForegroundOnly")
+	_clsNSSpeechRecognizer                           = _objcClass("NSSpeechRecognizer")
+	_nSSpeechRecognizerSelInit                       = objc.RegisterName("init")
+	_nSSpeechRecognizerSelStartListening             = objc.RegisterName("startListening")
+	_nSSpeechRecognizerSelStopListening              = objc.RegisterName("stopListening")
+	_nSSpeechRecognizerSelDelegate                   = objc.RegisterName("delegate")
+	_nSSpeechRecognizerSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_nSSpeechRecognizerSelCommands                   = objc.RegisterName("commands")
+	_nSSpeechRecognizerSelSetCommands                = objc.RegisterName("setCommands:")
+	_nSSpeechRecognizerSelDisplayedCommandsTitle     = objc.RegisterName("displayedCommandsTitle")
+	_nSSpeechRecognizerSelSetDisplayedCommandsTitle  = objc.RegisterName("setDisplayedCommandsTitle:")
+	_nSSpeechRecognizerSelListensInForegroundOnly    = objc.RegisterName("listensInForegroundOnly")
 	_nSSpeechRecognizerSelSetListensInForegroundOnly = objc.RegisterName("setListensInForegroundOnly:")
-	_nSSpeechRecognizerSelBlocksOtherRecognizers = objc.RegisterName("blocksOtherRecognizers")
-	_nSSpeechRecognizerSelSetBlocksOtherRecognizers = objc.RegisterName("setBlocksOtherRecognizers:")
+	_nSSpeechRecognizerSelBlocksOtherRecognizers     = objc.RegisterName("blocksOtherRecognizers")
+	_nSSpeechRecognizerSelSetBlocksOtherRecognizers  = objc.RegisterName("setBlocksOtherRecognizers:")
 )
 
 func NSSpeechRecognizerFromID(id objc.ID) *NSSpeechRecognizer {
@@ -44,7 +44,9 @@ func NSSpeechRecognizerFromID(id objc.ID) *NSSpeechRecognizer {
 
 func (o *NSSpeechRecognizer) Init() *NSSpeechRecognizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechRecognizerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSpeechRecognizerFromID(_ret)
 }
 
@@ -76,7 +78,9 @@ func (o *NSSpeechRecognizer) SetCommands(commands *foundation.NSArray[*foundatio
 
 func (o *NSSpeechRecognizer) DisplayedCommandsTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSpeechRecognizerSelDisplayedCommandsTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -101,4 +105,3 @@ func (o *NSSpeechRecognizer) BlocksOtherRecognizers() bool {
 func (o *NSSpeechRecognizer) SetBlocksOtherRecognizers(blocksOtherRecognizers bool) {
 	o.Ptr().Send(_nSSpeechRecognizerSelSetBlocksOtherRecognizers, blocksOtherRecognizers)
 }
-

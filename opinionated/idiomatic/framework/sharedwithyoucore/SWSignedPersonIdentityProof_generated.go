@@ -42,7 +42,9 @@ func (x *SignedPersonIdentityProof) SignatureData() *foundation.NSData {
 	return x.inner.SignatureData()
 }
 
-func (x *SignedPersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof { return &x.inner.SWPersonIdentityProof }
+func (x *SignedPersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof {
+	return &x.inner.SWPersonIdentityProof
+}
 
 // SignedPersonIdentityProofable is the interface implemented by [SignedPersonIdentityProof], for mocking and DI.
 type SignedPersonIdentityProofable interface {
@@ -51,4 +53,3 @@ type SignedPersonIdentityProofable interface {
 }
 
 var _ SignedPersonIdentityProofable = (*SignedPersonIdentityProof)(nil)
-

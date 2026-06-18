@@ -55,4 +55,3 @@ type RenderedCaptionImageable interface {
 }
 
 var _ RenderedCaptionImageable = (*RenderedCaptionImage)(nil)
-

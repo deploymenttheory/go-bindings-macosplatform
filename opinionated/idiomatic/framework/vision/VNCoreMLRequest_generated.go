@@ -94,7 +94,9 @@ func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption raw.V
 	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
 }
 
-func (x *CoreMLRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *CoreMLRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
 func (x *CoreMLRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
@@ -112,4 +114,3 @@ type CoreMLRequestable interface {
 }
 
 var _ CoreMLRequestable = (*CoreMLRequest)(nil)
-

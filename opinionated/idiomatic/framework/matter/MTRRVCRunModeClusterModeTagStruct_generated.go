@@ -16,7 +16,9 @@ type MTRRVCRunModeClusterModeTagStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRRVCRunModeClusterModeTagStruct].
-func (x *MTRRVCRunModeClusterModeTagStruct) Unwrap() *raw.MTRRVCRunModeClusterModeTagStruct { return x.inner }
+func (x *MTRRVCRunModeClusterModeTagStruct) Unwrap() *raw.MTRRVCRunModeClusterModeTagStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRRVCRunModeClusterModeTagStructable interface {
 }
 
 var _ MTRRVCRunModeClusterModeTagStructable = (*MTRRVCRunModeClusterModeTagStruct)(nil)
-

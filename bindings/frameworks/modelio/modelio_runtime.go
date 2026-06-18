@@ -13,7 +13,7 @@ import (
 
 var (
 	_modelioLib uintptr
-	_loadOnce sync.Once
+	_loadOnce   sync.Once
 )
 
 func _loadLibrary() {

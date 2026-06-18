@@ -16,34 +16,34 @@ type IOBluetoothHandsFree struct {
 }
 
 var (
-	_clsIOBluetoothHandsFree = _objcClass("IOBluetoothHandsFree")
-	_iOBluetoothHandsFreeSelIndicator = objc.RegisterName("indicator:")
-	_iOBluetoothHandsFreeSelSetIndicatorValue = objc.RegisterName("setIndicator:value:")
-	_iOBluetoothHandsFreeSelInitWithDeviceDelegate = objc.RegisterName("initWithDevice:delegate:")
-	_iOBluetoothHandsFreeSelConnect = objc.RegisterName("connect")
-	_iOBluetoothHandsFreeSelDisconnect = objc.RegisterName("disconnect")
-	_iOBluetoothHandsFreeSelConnectSCO = objc.RegisterName("connectSCO")
-	_iOBluetoothHandsFreeSelDisconnectSCO = objc.RegisterName("disconnectSCO")
-	_iOBluetoothHandsFreeSelIsSCOConnected = objc.RegisterName("isSCOConnected")
-	_iOBluetoothHandsFreeSelSupportedFeatures = objc.RegisterName("supportedFeatures")
-	_iOBluetoothHandsFreeSelSetSupportedFeatures = objc.RegisterName("setSupportedFeatures:")
-	_iOBluetoothHandsFreeSelInputVolume = objc.RegisterName("inputVolume")
-	_iOBluetoothHandsFreeSelSetInputVolume = objc.RegisterName("setInputVolume:")
-	_iOBluetoothHandsFreeSelIsInputMuted = objc.RegisterName("isInputMuted")
-	_iOBluetoothHandsFreeSelSetInputMuted = objc.RegisterName("setInputMuted:")
-	_iOBluetoothHandsFreeSelOutputVolume = objc.RegisterName("outputVolume")
-	_iOBluetoothHandsFreeSelSetOutputVolume = objc.RegisterName("setOutputVolume:")
-	_iOBluetoothHandsFreeSelIsOutputMuted = objc.RegisterName("isOutputMuted")
-	_iOBluetoothHandsFreeSelSetOutputMuted = objc.RegisterName("setOutputMuted:")
-	_iOBluetoothHandsFreeSelDevice = objc.RegisterName("device")
-	_iOBluetoothHandsFreeSelDeviceSupportedFeatures = objc.RegisterName("deviceSupportedFeatures")
+	_clsIOBluetoothHandsFree                           = _objcClass("IOBluetoothHandsFree")
+	_iOBluetoothHandsFreeSelIndicator                  = objc.RegisterName("indicator:")
+	_iOBluetoothHandsFreeSelSetIndicatorValue          = objc.RegisterName("setIndicator:value:")
+	_iOBluetoothHandsFreeSelInitWithDeviceDelegate     = objc.RegisterName("initWithDevice:delegate:")
+	_iOBluetoothHandsFreeSelConnect                    = objc.RegisterName("connect")
+	_iOBluetoothHandsFreeSelDisconnect                 = objc.RegisterName("disconnect")
+	_iOBluetoothHandsFreeSelConnectSCO                 = objc.RegisterName("connectSCO")
+	_iOBluetoothHandsFreeSelDisconnectSCO              = objc.RegisterName("disconnectSCO")
+	_iOBluetoothHandsFreeSelIsSCOConnected             = objc.RegisterName("isSCOConnected")
+	_iOBluetoothHandsFreeSelSupportedFeatures          = objc.RegisterName("supportedFeatures")
+	_iOBluetoothHandsFreeSelSetSupportedFeatures       = objc.RegisterName("setSupportedFeatures:")
+	_iOBluetoothHandsFreeSelInputVolume                = objc.RegisterName("inputVolume")
+	_iOBluetoothHandsFreeSelSetInputVolume             = objc.RegisterName("setInputVolume:")
+	_iOBluetoothHandsFreeSelIsInputMuted               = objc.RegisterName("isInputMuted")
+	_iOBluetoothHandsFreeSelSetInputMuted              = objc.RegisterName("setInputMuted:")
+	_iOBluetoothHandsFreeSelOutputVolume               = objc.RegisterName("outputVolume")
+	_iOBluetoothHandsFreeSelSetOutputVolume            = objc.RegisterName("setOutputVolume:")
+	_iOBluetoothHandsFreeSelIsOutputMuted              = objc.RegisterName("isOutputMuted")
+	_iOBluetoothHandsFreeSelSetOutputMuted             = objc.RegisterName("setOutputMuted:")
+	_iOBluetoothHandsFreeSelDevice                     = objc.RegisterName("device")
+	_iOBluetoothHandsFreeSelDeviceSupportedFeatures    = objc.RegisterName("deviceSupportedFeatures")
 	_iOBluetoothHandsFreeSelDeviceSupportedSMSServices = objc.RegisterName("deviceSupportedSMSServices")
-	_iOBluetoothHandsFreeSelDeviceCallHoldModes = objc.RegisterName("deviceCallHoldModes")
-	_iOBluetoothHandsFreeSelSMSMode = objc.RegisterName("SMSMode")
-	_iOBluetoothHandsFreeSelIsSMSEnabled = objc.RegisterName("isSMSEnabled")
-	_iOBluetoothHandsFreeSelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothHandsFreeSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iOBluetoothHandsFreeSelIsConnected = objc.RegisterName("isConnected")
+	_iOBluetoothHandsFreeSelDeviceCallHoldModes        = objc.RegisterName("deviceCallHoldModes")
+	_iOBluetoothHandsFreeSelSMSMode                    = objc.RegisterName("SMSMode")
+	_iOBluetoothHandsFreeSelIsSMSEnabled               = objc.RegisterName("isSMSEnabled")
+	_iOBluetoothHandsFreeSelDelegate                   = objc.RegisterName("delegate")
+	_iOBluetoothHandsFreeSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_iOBluetoothHandsFreeSelIsConnected                = objc.RegisterName("isConnected")
 )
 
 func IOBluetoothHandsFreeFromID(id objc.ID) *IOBluetoothHandsFree {
@@ -70,7 +70,9 @@ func (o *IOBluetoothHandsFree) SetIndicatorValue(indicatorName *foundation.NSStr
 // @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFree object @discussion	This method should be called on a subclass (IOBluetoothHandsFreeDevice or IOBluetoothHandsFreeAudioGateway) to get full functionality. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate that implements the IOBluetoothHandsFreeDelegate protocol. @result		A newly created IOBluetoothHandsFreeAudioGateway object on success, nil on failure
 func (o *IOBluetoothHandsFree) InitWithDeviceDelegate(device *IOBluetoothDevice, inDelegate IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeSelInitWithDeviceDelegate, device.Ptr(), inDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothHandsFreeFromID(_ret)
 }
 
@@ -153,7 +155,9 @@ func (o *IOBluetoothHandsFree) SetOutputMuted(outputMuted bool) {
 // @method		device @abstract		Return the IOBluetoothDevice. @discussion	Returns the IOBluetoothDevice to connect with. @result		The IOBluetoothDevice object
 func (o *IOBluetoothHandsFree) Device() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothHandsFreeSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -202,4 +206,3 @@ func (o *IOBluetoothHandsFree) IsConnected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _iOBluetoothHandsFreeSelIsConnected)
 	return _ret
 }
-

@@ -18,11 +18,11 @@ type VNTrajectoryObservation struct {
 }
 
 var (
-	_clsVNTrajectoryObservation = _objcClass("VNTrajectoryObservation")
-	_vNTrajectoryObservationSelDetectedPoints = objc.RegisterName("detectedPoints")
-	_vNTrajectoryObservationSelProjectedPoints = objc.RegisterName("projectedPoints")
+	_clsVNTrajectoryObservation                     = _objcClass("VNTrajectoryObservation")
+	_vNTrajectoryObservationSelDetectedPoints       = objc.RegisterName("detectedPoints")
+	_vNTrajectoryObservationSelProjectedPoints      = objc.RegisterName("projectedPoints")
 	_vNTrajectoryObservationSelEquationCoefficients = objc.RegisterName("equationCoefficients")
-	_vNTrajectoryObservationSelMovingAverageRadius = objc.RegisterName("movingAverageRadius")
+	_vNTrajectoryObservationSelMovingAverageRadius  = objc.RegisterName("movingAverageRadius")
 )
 
 func VNTrajectoryObservationFromID(id objc.ID) *VNTrajectoryObservation {
@@ -38,14 +38,18 @@ func VNTrajectoryObservationFromID(id objc.ID) *VNTrajectoryObservation {
 // @brief The centroids of the contour being detected along the trajectory. @details These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
 func (o *VNTrajectoryObservation) DetectedPoints() *foundation.NSArray[*VNPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrajectoryObservationSelDetectedPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNPoint](_ret)
 }
 
 // @brief The centroids of  the calculated trajectory from the detected points. @details These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
 func (o *VNTrajectoryObservation) ProjectedPoints() *foundation.NSArray[*VNPoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNTrajectoryObservationSelProjectedPoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VNPoint](_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *VNTrajectoryObservation) MovingAverageRadius() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNTrajectoryObservationSelMovingAverageRadius)
 	return _ret
 }
-

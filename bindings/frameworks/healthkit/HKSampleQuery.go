@@ -18,12 +18,12 @@ type HKSampleQuery struct {
 }
 
 var (
-	_clsHKSampleQuery = _objcClass("HKSampleQuery")
+	_clsHKSampleQuery                                                              = _objcClass("HKSampleQuery")
 	_hKSampleQuerySelInitWithSampleTypePredicateLimitSortDescriptorsResultsHandler = objc.RegisterName("initWithSampleType:predicate:limit:sortDescriptors:resultsHandler:")
-	_hKSampleQuerySelInitWithQueryDescriptorsLimitResultsHandler = objc.RegisterName("initWithQueryDescriptors:limit:resultsHandler:")
-	_hKSampleQuerySelInitWithQueryDescriptorsLimitSortDescriptorsResultsHandler = objc.RegisterName("initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:")
-	_hKSampleQuerySelLimit = objc.RegisterName("limit")
-	_hKSampleQuerySelSortDescriptors = objc.RegisterName("sortDescriptors")
+	_hKSampleQuerySelInitWithQueryDescriptorsLimitResultsHandler                   = objc.RegisterName("initWithQueryDescriptors:limit:resultsHandler:")
+	_hKSampleQuerySelInitWithQueryDescriptorsLimitSortDescriptorsResultsHandler    = objc.RegisterName("initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:")
+	_hKSampleQuerySelLimit                                                         = objc.RegisterName("limit")
+	_hKSampleQuerySelSortDescriptors                                               = objc.RegisterName("sortDescriptors")
 )
 
 func HKSampleQueryFromID(id objc.ID) *HKSampleQuery {
@@ -52,7 +52,9 @@ func (o *HKSampleQuery) InitWithSampleTypePredicateLimitSortDescriptorsResultsHa
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithSampleTypePredicateLimitSortDescriptorsResultsHandler, sampleType.Ptr(), predicate.Ptr(), limit, sortDescriptors, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSampleQueryFromID(_ret)
 }
 
@@ -72,7 +74,9 @@ func (o *HKSampleQuery) InitWithQueryDescriptorsLimitResultsHandler(queryDescrip
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithQueryDescriptorsLimitResultsHandler, queryDescriptors.Ptr(), limit, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSampleQueryFromID(_ret)
 }
 
@@ -92,7 +96,9 @@ func (o *HKSampleQuery) InitWithQueryDescriptorsLimitSortDescriptorsResultsHandl
 		defer __block_resultsHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSampleQuerySelInitWithQueryDescriptorsLimitSortDescriptorsResultsHandler, queryDescriptors.Ptr(), limit, sortDescriptors, __block_resultsHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSampleQueryFromID(_ret)
 }
 
@@ -107,4 +113,3 @@ func (o *HKSampleQuery) SortDescriptors() *foundation.NSArray[*foundation.NSSort
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSSortDescriptor]](o.Ptr(), _hKSampleQuerySelSortDescriptors)
 	return _ret
 }
-

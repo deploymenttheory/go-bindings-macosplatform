@@ -16,21 +16,21 @@ type AMWorkflowController struct {
 }
 
 var (
-	_clsAMWorkflowController = _objcClass("AMWorkflowController")
-	_aMWorkflowControllerSelRun = objc.RegisterName("run:")
-	_aMWorkflowControllerSelStop = objc.RegisterName("stop:")
-	_aMWorkflowControllerSelPause = objc.RegisterName("pause:")
-	_aMWorkflowControllerSelStep = objc.RegisterName("step:")
-	_aMWorkflowControllerSelReset = objc.RegisterName("reset:")
-	_aMWorkflowControllerSelWorkflow = objc.RegisterName("workflow")
-	_aMWorkflowControllerSelSetWorkflow = objc.RegisterName("setWorkflow:")
-	_aMWorkflowControllerSelWorkflowView = objc.RegisterName("workflowView")
+	_clsAMWorkflowController                = _objcClass("AMWorkflowController")
+	_aMWorkflowControllerSelRun             = objc.RegisterName("run:")
+	_aMWorkflowControllerSelStop            = objc.RegisterName("stop:")
+	_aMWorkflowControllerSelPause           = objc.RegisterName("pause:")
+	_aMWorkflowControllerSelStep            = objc.RegisterName("step:")
+	_aMWorkflowControllerSelReset           = objc.RegisterName("reset:")
+	_aMWorkflowControllerSelWorkflow        = objc.RegisterName("workflow")
+	_aMWorkflowControllerSelSetWorkflow     = objc.RegisterName("setWorkflow:")
+	_aMWorkflowControllerSelWorkflowView    = objc.RegisterName("workflowView")
 	_aMWorkflowControllerSelSetWorkflowView = objc.RegisterName("setWorkflowView:")
-	_aMWorkflowControllerSelDelegate = objc.RegisterName("delegate")
-	_aMWorkflowControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aMWorkflowControllerSelCanRun = objc.RegisterName("canRun")
-	_aMWorkflowControllerSelIsRunning = objc.RegisterName("isRunning")
-	_aMWorkflowControllerSelIsPaused = objc.RegisterName("isPaused")
+	_aMWorkflowControllerSelDelegate        = objc.RegisterName("delegate")
+	_aMWorkflowControllerSelSetDelegate     = objc.RegisterName("setDelegate:")
+	_aMWorkflowControllerSelCanRun          = objc.RegisterName("canRun")
+	_aMWorkflowControllerSelIsRunning       = objc.RegisterName("isRunning")
+	_aMWorkflowControllerSelIsPaused        = objc.RegisterName("isPaused")
 )
 
 func AMWorkflowControllerFromID(id objc.ID) *AMWorkflowController {
@@ -65,7 +65,9 @@ func (o *AMWorkflowController) Reset(sender objc.ID) {
 
 func (o *AMWorkflowController) Workflow() *AMWorkflow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowControllerSelWorkflow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMWorkflowFromID(_ret)
 }
 
@@ -75,7 +77,9 @@ func (o *AMWorkflowController) SetWorkflow(workflow *AMWorkflow) {
 
 func (o *AMWorkflowController) WorkflowView() *AMWorkflowView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMWorkflowControllerSelWorkflowView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMWorkflowViewFromID(_ret)
 }
 
@@ -106,4 +110,3 @@ func (o *AMWorkflowController) IsPaused() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aMWorkflowControllerSelIsPaused)
 	return _ret
 }
-

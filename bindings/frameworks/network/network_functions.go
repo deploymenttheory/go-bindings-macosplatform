@@ -14,441 +14,441 @@ import (
 )
 
 var (
-	_nw_advertise_descriptor_copy_txt_record_object func(objc.ID) unsafe.Pointer
-	_nw_advertise_descriptor_create_application_service func(string) unsafe.Pointer
-	_nw_advertise_descriptor_create_bonjour_service func(string, string, string) unsafe.Pointer
-	_nw_advertise_descriptor_get_application_service_name func(objc.ID) string
-	_nw_advertise_descriptor_get_no_auto_rename func(objc.ID) bool
-	_nw_advertise_descriptor_set_no_auto_rename func(objc.ID, bool)
-	_nw_advertise_descriptor_set_txt_record func(objc.ID, unsafe.Pointer, uint)
-	_nw_advertise_descriptor_set_txt_record_object func(objc.ID, objc.ID)
-	_nw_browse_descriptor_create_application_service func(string) unsafe.Pointer
-	_nw_browse_descriptor_create_bonjour_service func(string, string) unsafe.Pointer
-	_nw_browse_descriptor_get_application_service_name func(objc.ID) string
-	_nw_browse_descriptor_get_bonjour_service_domain func(objc.ID) string
-	_nw_browse_descriptor_get_bonjour_service_type func(objc.ID) string
-	_nw_browse_descriptor_get_include_txt_record func(objc.ID) bool
-	_nw_browse_descriptor_set_include_txt_record func(objc.ID, bool)
-	_nw_browse_result_copy_endpoint func(objc.ID) unsafe.Pointer
-	_nw_browse_result_copy_txt_record_object func(objc.ID) unsafe.Pointer
-	_nw_browse_result_enumerate_interfaces func(objc.ID, objc.Block)
-	_nw_browse_result_get_changes func(objc.ID, objc.ID) uint64
-	_nw_browse_result_get_interfaces_count func(objc.ID) uint
-	_nw_browser_cancel func(objc.ID)
-	_nw_browser_copy_browse_descriptor func(objc.ID) unsafe.Pointer
-	_nw_browser_copy_parameters func(objc.ID) unsafe.Pointer
-	_nw_browser_create func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_browser_set_browse_results_changed_handler func(objc.ID, objc.Block)
-	_nw_browser_set_queue func(objc.ID, objc.ID)
-	_nw_browser_set_state_changed_handler func(objc.ID, objc.Block)
-	_nw_browser_start func(objc.ID)
-	_nw_connection_access_establishment_report func(objc.ID, objc.ID, objc.Block)
-	_nw_connection_batch func(objc.ID, objc.Block)
-	_nw_connection_cancel func(objc.ID)
-	_nw_connection_cancel_current_endpoint func(objc.ID)
-	_nw_connection_copy_current_path func(objc.ID) unsafe.Pointer
-	_nw_connection_copy_description func(objc.ID) string
-	_nw_connection_copy_endpoint func(objc.ID) unsafe.Pointer
-	_nw_connection_copy_parameters func(objc.ID) unsafe.Pointer
-	_nw_connection_copy_protocol_metadata func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_create func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_create_new_data_transfer_report func(objc.ID) unsafe.Pointer
-	_nw_connection_force_cancel func(objc.ID)
-	_nw_connection_get_maximum_datagram_size func(objc.ID) uint32
-	_nw_connection_group_cancel func(objc.ID)
-	_nw_connection_group_copy_descriptor func(objc.ID) unsafe.Pointer
-	_nw_connection_group_copy_local_endpoint_for_message func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_copy_parameters func(objc.ID) unsafe.Pointer
-	_nw_connection_group_copy_path_for_message func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_copy_protocol_metadata func(objc.ID, objc.ID) objc.ID
-	_nw_connection_group_copy_protocol_metadata_for_message func(objc.ID, objc.ID, objc.ID) objc.ID
-	_nw_connection_group_copy_remote_endpoint_for_message func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_create func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_extract_connection func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_extract_connection_for_message func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_connection_group_reinsert_extracted_connection func(objc.ID, objc.ID) bool
-	_nw_connection_group_reply func(objc.ID, objc.ID, objc.ID, objc.ID)
-	_nw_connection_group_send_message func(objc.ID, objc.ID, objc.ID, objc.ID, objc.Block)
-	_nw_connection_group_set_new_connection_handler func(objc.ID, objc.Block)
-	_nw_connection_group_set_queue func(objc.ID, objc.ID)
-	_nw_connection_group_set_receive_handler func(objc.ID, uint32, bool, objc.Block)
-	_nw_connection_group_set_state_changed_handler func(objc.ID, objc.Block)
-	_nw_connection_group_start func(objc.ID)
-	_nw_connection_receive func(objc.ID, uint32, uint32, objc.Block)
-	_nw_connection_receive_message func(objc.ID, objc.Block)
-	_nw_connection_restart func(objc.ID)
-	_nw_connection_send func(objc.ID, objc.ID, objc.ID, bool, objc.Block)
-	_nw_connection_set_better_path_available_handler func(objc.ID, objc.Block)
-	_nw_connection_set_path_changed_handler func(objc.ID, objc.Block)
-	_nw_connection_set_queue func(objc.ID, objc.ID)
-	_nw_connection_set_state_changed_handler func(objc.ID, objc.Block)
-	_nw_connection_set_viability_changed_handler func(objc.ID, objc.Block)
-	_nw_connection_start func(objc.ID)
-	_nw_content_context_copy_antecedent func(objc.ID) unsafe.Pointer
-	_nw_content_context_copy_protocol_metadata func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_content_context_create func(string) unsafe.Pointer
-	_nw_content_context_foreach_protocol_metadata func(objc.ID, objc.Block)
-	_nw_content_context_get_expiration_milliseconds func(objc.ID) uint64
-	_nw_content_context_get_identifier func(objc.ID) string
-	_nw_content_context_get_is_final func(objc.ID) bool
-	_nw_content_context_get_relative_priority func(objc.ID) float64
-	_nw_content_context_set_antecedent func(objc.ID, objc.ID)
-	_nw_content_context_set_expiration_milliseconds func(objc.ID, uint64)
-	_nw_content_context_set_is_final func(objc.ID, bool)
-	_nw_content_context_set_metadata_for_protocol func(objc.ID, objc.ID)
-	_nw_content_context_set_relative_priority func(objc.ID, float64)
-	_nw_data_transfer_report_collect func(objc.ID, objc.ID, objc.Block)
-	_nw_data_transfer_report_copy_path_interface func(objc.ID, uint32) unsafe.Pointer
-	_nw_data_transfer_report_get_duration_milliseconds func(objc.ID) uint64
-	_nw_data_transfer_report_get_path_count func(objc.ID) uint32
-	_nw_data_transfer_report_get_path_radio_type func(objc.ID, uint32) avrouting.Nw_interface_radio_type_t
-	_nw_data_transfer_report_get_received_application_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_received_ip_packet_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_received_transport_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_received_transport_duplicate_byte_count func(objc.ID, uint32) uint64
+	_nw_advertise_descriptor_copy_txt_record_object                         func(objc.ID) unsafe.Pointer
+	_nw_advertise_descriptor_create_application_service                     func(string) unsafe.Pointer
+	_nw_advertise_descriptor_create_bonjour_service                         func(string, string, string) unsafe.Pointer
+	_nw_advertise_descriptor_get_application_service_name                   func(objc.ID) string
+	_nw_advertise_descriptor_get_no_auto_rename                             func(objc.ID) bool
+	_nw_advertise_descriptor_set_no_auto_rename                             func(objc.ID, bool)
+	_nw_advertise_descriptor_set_txt_record                                 func(objc.ID, unsafe.Pointer, uint)
+	_nw_advertise_descriptor_set_txt_record_object                          func(objc.ID, objc.ID)
+	_nw_browse_descriptor_create_application_service                        func(string) unsafe.Pointer
+	_nw_browse_descriptor_create_bonjour_service                            func(string, string) unsafe.Pointer
+	_nw_browse_descriptor_get_application_service_name                      func(objc.ID) string
+	_nw_browse_descriptor_get_bonjour_service_domain                        func(objc.ID) string
+	_nw_browse_descriptor_get_bonjour_service_type                          func(objc.ID) string
+	_nw_browse_descriptor_get_include_txt_record                            func(objc.ID) bool
+	_nw_browse_descriptor_set_include_txt_record                            func(objc.ID, bool)
+	_nw_browse_result_copy_endpoint                                         func(objc.ID) unsafe.Pointer
+	_nw_browse_result_copy_txt_record_object                                func(objc.ID) unsafe.Pointer
+	_nw_browse_result_enumerate_interfaces                                  func(objc.ID, objc.Block)
+	_nw_browse_result_get_changes                                           func(objc.ID, objc.ID) uint64
+	_nw_browse_result_get_interfaces_count                                  func(objc.ID) uint
+	_nw_browser_cancel                                                      func(objc.ID)
+	_nw_browser_copy_browse_descriptor                                      func(objc.ID) unsafe.Pointer
+	_nw_browser_copy_parameters                                             func(objc.ID) unsafe.Pointer
+	_nw_browser_create                                                      func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_browser_set_browse_results_changed_handler                          func(objc.ID, objc.Block)
+	_nw_browser_set_queue                                                   func(objc.ID, objc.ID)
+	_nw_browser_set_state_changed_handler                                   func(objc.ID, objc.Block)
+	_nw_browser_start                                                       func(objc.ID)
+	_nw_connection_access_establishment_report                              func(objc.ID, objc.ID, objc.Block)
+	_nw_connection_batch                                                    func(objc.ID, objc.Block)
+	_nw_connection_cancel                                                   func(objc.ID)
+	_nw_connection_cancel_current_endpoint                                  func(objc.ID)
+	_nw_connection_copy_current_path                                        func(objc.ID) unsafe.Pointer
+	_nw_connection_copy_description                                         func(objc.ID) string
+	_nw_connection_copy_endpoint                                            func(objc.ID) unsafe.Pointer
+	_nw_connection_copy_parameters                                          func(objc.ID) unsafe.Pointer
+	_nw_connection_copy_protocol_metadata                                   func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_create                                                   func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_create_new_data_transfer_report                          func(objc.ID) unsafe.Pointer
+	_nw_connection_force_cancel                                             func(objc.ID)
+	_nw_connection_get_maximum_datagram_size                                func(objc.ID) uint32
+	_nw_connection_group_cancel                                             func(objc.ID)
+	_nw_connection_group_copy_descriptor                                    func(objc.ID) unsafe.Pointer
+	_nw_connection_group_copy_local_endpoint_for_message                    func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_copy_parameters                                    func(objc.ID) unsafe.Pointer
+	_nw_connection_group_copy_path_for_message                              func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_copy_protocol_metadata                             func(objc.ID, objc.ID) objc.ID
+	_nw_connection_group_copy_protocol_metadata_for_message                 func(objc.ID, objc.ID, objc.ID) objc.ID
+	_nw_connection_group_copy_remote_endpoint_for_message                   func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_create                                             func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_extract_connection                                 func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_extract_connection_for_message                     func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_connection_group_reinsert_extracted_connection                      func(objc.ID, objc.ID) bool
+	_nw_connection_group_reply                                              func(objc.ID, objc.ID, objc.ID, objc.ID)
+	_nw_connection_group_send_message                                       func(objc.ID, objc.ID, objc.ID, objc.ID, objc.Block)
+	_nw_connection_group_set_new_connection_handler                         func(objc.ID, objc.Block)
+	_nw_connection_group_set_queue                                          func(objc.ID, objc.ID)
+	_nw_connection_group_set_receive_handler                                func(objc.ID, uint32, bool, objc.Block)
+	_nw_connection_group_set_state_changed_handler                          func(objc.ID, objc.Block)
+	_nw_connection_group_start                                              func(objc.ID)
+	_nw_connection_receive                                                  func(objc.ID, uint32, uint32, objc.Block)
+	_nw_connection_receive_message                                          func(objc.ID, objc.Block)
+	_nw_connection_restart                                                  func(objc.ID)
+	_nw_connection_send                                                     func(objc.ID, objc.ID, objc.ID, bool, objc.Block)
+	_nw_connection_set_better_path_available_handler                        func(objc.ID, objc.Block)
+	_nw_connection_set_path_changed_handler                                 func(objc.ID, objc.Block)
+	_nw_connection_set_queue                                                func(objc.ID, objc.ID)
+	_nw_connection_set_state_changed_handler                                func(objc.ID, objc.Block)
+	_nw_connection_set_viability_changed_handler                            func(objc.ID, objc.Block)
+	_nw_connection_start                                                    func(objc.ID)
+	_nw_content_context_copy_antecedent                                     func(objc.ID) unsafe.Pointer
+	_nw_content_context_copy_protocol_metadata                              func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_content_context_create                                              func(string) unsafe.Pointer
+	_nw_content_context_foreach_protocol_metadata                           func(objc.ID, objc.Block)
+	_nw_content_context_get_expiration_milliseconds                         func(objc.ID) uint64
+	_nw_content_context_get_identifier                                      func(objc.ID) string
+	_nw_content_context_get_is_final                                        func(objc.ID) bool
+	_nw_content_context_get_relative_priority                               func(objc.ID) float64
+	_nw_content_context_set_antecedent                                      func(objc.ID, objc.ID)
+	_nw_content_context_set_expiration_milliseconds                         func(objc.ID, uint64)
+	_nw_content_context_set_is_final                                        func(objc.ID, bool)
+	_nw_content_context_set_metadata_for_protocol                           func(objc.ID, objc.ID)
+	_nw_content_context_set_relative_priority                               func(objc.ID, float64)
+	_nw_data_transfer_report_collect                                        func(objc.ID, objc.ID, objc.Block)
+	_nw_data_transfer_report_copy_path_interface                            func(objc.ID, uint32) unsafe.Pointer
+	_nw_data_transfer_report_get_duration_milliseconds                      func(objc.ID) uint64
+	_nw_data_transfer_report_get_path_count                                 func(objc.ID) uint32
+	_nw_data_transfer_report_get_path_radio_type                            func(objc.ID, uint32) avrouting.Nw_interface_radio_type_t
+	_nw_data_transfer_report_get_received_application_byte_count            func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_received_ip_packet_count                   func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_received_transport_byte_count              func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_received_transport_duplicate_byte_count    func(objc.ID, uint32) uint64
 	_nw_data_transfer_report_get_received_transport_out_of_order_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_sent_application_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_sent_ip_packet_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_sent_transport_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_sent_transport_retransmitted_byte_count func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_state func(objc.ID) avrouting.Nw_data_transfer_report_state_t
-	_nw_data_transfer_report_get_transport_minimum_rtt_milliseconds func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_transport_rtt_variance func(objc.ID, uint32) uint64
-	_nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds func(objc.ID, uint32) uint64
-	_nw_endpoint_copy_address_string func(objc.ID) string
-	_nw_endpoint_copy_port_string func(objc.ID) string
-	_nw_endpoint_copy_txt_record func(objc.ID) unsafe.Pointer
-	_nw_endpoint_create_address func(unsafe.Pointer) unsafe.Pointer
-	_nw_endpoint_create_bonjour_service func(string, string, string) unsafe.Pointer
-	_nw_endpoint_create_host func(string, string) unsafe.Pointer
-	_nw_endpoint_create_url func(string) unsafe.Pointer
-	_nw_endpoint_get_address func(objc.ID) unsafe.Pointer
-	_nw_endpoint_get_bonjour_service_domain func(objc.ID) string
-	_nw_endpoint_get_bonjour_service_name func(objc.ID) string
-	_nw_endpoint_get_bonjour_service_type func(objc.ID) string
-	_nw_endpoint_get_hostname func(objc.ID) string
-	_nw_endpoint_get_port func(objc.ID) uint16
-	_nw_endpoint_get_signature func(objc.ID, *uint) unsafe.Pointer
-	_nw_endpoint_get_type func(objc.ID) avrouting.Nw_endpoint_type_t
-	_nw_endpoint_get_url func(objc.ID) string
-	_nw_error_copy_cf_error func(objc.ID) unsafe.Pointer
-	_nw_error_get_error_code func(objc.ID) int
-	_nw_error_get_error_domain func(objc.ID) avrouting.Nw_error_domain_t
-	_nw_establishment_report_copy_proxy_endpoint func(objc.ID) unsafe.Pointer
-	_nw_establishment_report_enumerate_protocols func(objc.ID, objc.Block)
-	_nw_establishment_report_enumerate_resolution_reports func(objc.ID, objc.Block)
-	_nw_establishment_report_enumerate_resolutions func(objc.ID, objc.Block)
-	_nw_establishment_report_get_attempt_started_after_milliseconds func(objc.ID) uint64
-	_nw_establishment_report_get_duration_milliseconds func(objc.ID) uint64
-	_nw_establishment_report_get_previous_attempt_count func(objc.ID) uint32
-	_nw_establishment_report_get_proxy_configured func(objc.ID) bool
-	_nw_establishment_report_get_used_proxy func(objc.ID) bool
-	_nw_ethernet_channel_cancel func(objc.ID)
-	_nw_ethernet_channel_create func(uint16, objc.ID) unsafe.Pointer
-	_nw_ethernet_channel_create_with_parameters func(uint16, objc.ID, objc.ID) unsafe.Pointer
-	_nw_ethernet_channel_get_maximum_payload_size func(objc.ID) uint32
-	_nw_ethernet_channel_send func(objc.ID, objc.ID, uint16, *uint8, objc.Block)
-	_nw_ethernet_channel_set_queue func(objc.ID, objc.ID)
-	_nw_ethernet_channel_set_receive_handler func(objc.ID, objc.Block)
-	_nw_ethernet_channel_set_state_changed_handler func(objc.ID, objc.Block)
-	_nw_ethernet_channel_start func(objc.ID)
-	_nw_framer_async func(objc.ID, objc.Block)
-	_nw_framer_copy_local_endpoint func(objc.ID) unsafe.Pointer
-	_nw_framer_copy_options func(objc.ID) unsafe.Pointer
-	_nw_framer_copy_parameters func(objc.ID) unsafe.Pointer
-	_nw_framer_copy_remote_endpoint func(objc.ID) unsafe.Pointer
-	_nw_framer_create_definition func(string, uint32, objc.Block) unsafe.Pointer
-	_nw_framer_create_options func(objc.ID) unsafe.Pointer
-	_nw_framer_deliver_input func(objc.ID, *uint8, uint, objc.ID, bool)
-	_nw_framer_deliver_input_no_copy func(objc.ID, uint, objc.ID, bool) bool
-	_nw_framer_mark_failed_with_error func(objc.ID, int)
-	_nw_framer_mark_ready func(objc.ID)
-	_nw_framer_message_access_value func(objc.ID, string, objc.Block) bool
-	_nw_framer_message_copy_object_value func(objc.ID, string) unsafe.Pointer
-	_nw_framer_message_create func(objc.ID) unsafe.Pointer
-	_nw_framer_message_set_object_value func(objc.ID, string, objc.ID)
-	_nw_framer_message_set_value func(objc.ID, string, unsafe.Pointer, objc.Block)
-	_nw_framer_options_copy_object_value func(objc.ID, string) unsafe.Pointer
-	_nw_framer_options_set_object_value func(objc.ID, string, objc.ID)
-	_nw_framer_parse_input func(objc.ID, uint, uint, *uint8, objc.Block) bool
-	_nw_framer_parse_output func(objc.ID, uint, uint, *uint8, objc.Block) bool
-	_nw_framer_pass_through_input func(objc.ID)
-	_nw_framer_pass_through_output func(objc.ID)
-	_nw_framer_prepend_application_protocol func(objc.ID, objc.ID) bool
-	_nw_framer_protocol_create_message func(objc.ID) unsafe.Pointer
-	_nw_framer_schedule_wakeup func(objc.ID, uint64)
-	_nw_framer_set_cleanup_handler func(objc.ID, objc.Block)
-	_nw_framer_set_input_handler func(objc.ID, objc.Block)
-	_nw_framer_set_output_handler func(objc.ID, objc.Block)
-	_nw_framer_set_stop_handler func(objc.ID, objc.Block)
-	_nw_framer_set_wakeup_handler func(objc.ID, objc.Block)
-	_nw_framer_write_output func(objc.ID, *uint8, uint)
-	_nw_framer_write_output_data func(objc.ID, objc.ID)
-	_nw_framer_write_output_no_copy func(objc.ID, uint) bool
-	_nw_group_descriptor_add_endpoint func(objc.ID, objc.ID) bool
-	_nw_group_descriptor_create_multicast func(objc.ID) unsafe.Pointer
-	_nw_group_descriptor_create_multiplex func(objc.ID) unsafe.Pointer
-	_nw_group_descriptor_enumerate_endpoints func(objc.ID, objc.Block)
-	_nw_interface_get_index func(objc.ID) uint32
-	_nw_interface_get_name func(objc.ID) string
-	_nw_interface_get_type func(objc.ID) avrouting.Nw_interface_type_t
-	_nw_ip_create_metadata func() unsafe.Pointer
-	_nw_ip_metadata_get_ecn_flag func(objc.ID) avrouting.Nw_ip_ecn_flag_t
-	_nw_ip_metadata_get_receive_time func(objc.ID) uint64
-	_nw_ip_metadata_get_service_class func(objc.ID) avrouting.Nw_service_class_t
-	_nw_ip_metadata_set_ecn_flag func(objc.ID, avrouting.Nw_ip_ecn_flag_t)
-	_nw_ip_metadata_set_service_class func(objc.ID, avrouting.Nw_service_class_t)
-	_nw_ip_options_set_calculate_receive_time func(objc.ID, bool)
-	_nw_ip_options_set_disable_fragmentation func(objc.ID, bool)
-	_nw_ip_options_set_disable_multicast_loopback func(objc.ID, bool)
-	_nw_ip_options_set_hop_limit func(objc.ID, uint8)
-	_nw_ip_options_set_local_address_preference func(objc.ID, avrouting.Nw_ip_local_address_preference_t)
-	_nw_ip_options_set_use_minimum_mtu func(objc.ID, bool)
-	_nw_ip_options_set_version func(objc.ID, avrouting.Nw_ip_version_t)
-	_nw_listener_cancel func(objc.ID)
-	_nw_listener_create func(objc.ID) unsafe.Pointer
-	_nw_listener_create_with_connection func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_listener_create_with_launchd_key func(objc.ID, string) unsafe.Pointer
-	_nw_listener_create_with_port func(string, objc.ID) unsafe.Pointer
-	_nw_listener_get_new_connection_limit func(objc.ID) uint32
-	_nw_listener_get_port func(objc.ID) uint16
-	_nw_listener_set_advertise_descriptor func(objc.ID, objc.ID)
-	_nw_listener_set_advertised_endpoint_changed_handler func(objc.ID, objc.Block)
-	_nw_listener_set_new_connection_group_handler func(objc.ID, objc.Block)
-	_nw_listener_set_new_connection_handler func(objc.ID, objc.Block)
-	_nw_listener_set_new_connection_limit func(objc.ID, uint32)
-	_nw_listener_set_queue func(objc.ID, objc.ID)
-	_nw_listener_set_state_changed_handler func(objc.ID, objc.Block)
-	_nw_listener_start func(objc.ID)
-	_nw_multicast_group_descriptor_get_disable_unicast_traffic func(objc.ID) bool
-	_nw_multicast_group_descriptor_set_disable_unicast_traffic func(objc.ID, bool)
-	_nw_multicast_group_descriptor_set_specific_source func(objc.ID, objc.ID)
-	_nw_parameters_clear_prohibited_interface_types func(objc.ID)
-	_nw_parameters_clear_prohibited_interfaces func(objc.ID)
-	_nw_parameters_copy func(objc.ID) unsafe.Pointer
-	_nw_parameters_copy_default_protocol_stack func(objc.ID) unsafe.Pointer
-	_nw_parameters_copy_local_endpoint func(objc.ID) unsafe.Pointer
-	_nw_parameters_copy_required_interface func(objc.ID) unsafe.Pointer
-	_nw_parameters_create func() unsafe.Pointer
-	_nw_parameters_create_application_service func() unsafe.Pointer
-	_nw_parameters_create_custom_ip func(uint8, objc.Block) unsafe.Pointer
-	_nw_parameters_create_quic func(objc.Block) unsafe.Pointer
-	_nw_parameters_create_secure_tcp func(objc.Block, objc.Block) unsafe.Pointer
-	_nw_parameters_create_secure_udp func(objc.Block, objc.Block) unsafe.Pointer
-	_nw_parameters_get_allow_ultra_constrained func(objc.ID) bool
-	_nw_parameters_get_attribution func(objc.ID) Nw_parameters_attribution_t
-	_nw_parameters_get_expired_dns_behavior func(objc.ID) avrouting.Nw_parameters_expired_dns_behavior_t
-	_nw_parameters_get_fast_open_enabled func(objc.ID) bool
-	_nw_parameters_get_include_peer_to_peer func(objc.ID) bool
-	_nw_parameters_get_local_only func(objc.ID) bool
-	_nw_parameters_get_multipath_service func(objc.ID) avrouting.Nw_multipath_service_t
-	_nw_parameters_get_prefer_no_proxy func(objc.ID) bool
-	_nw_parameters_get_prohibit_constrained func(objc.ID) bool
-	_nw_parameters_get_prohibit_expensive func(objc.ID) bool
-	_nw_parameters_get_required_interface_type func(objc.ID) avrouting.Nw_interface_type_t
-	_nw_parameters_get_reuse_local_address func(objc.ID) bool
-	_nw_parameters_get_service_class func(objc.ID) avrouting.Nw_service_class_t
-	_nw_parameters_iterate_prohibited_interface_types func(objc.ID, objc.Block)
-	_nw_parameters_iterate_prohibited_interfaces func(objc.ID, objc.Block)
-	_nw_parameters_prohibit_interface func(objc.ID, objc.ID)
-	_nw_parameters_prohibit_interface_type func(objc.ID, avrouting.Nw_interface_type_t)
-	_nw_parameters_require_interface func(objc.ID, objc.ID)
-	_nw_parameters_requires_dnssec_validation func(objc.ID) bool
-	_nw_parameters_set_allow_ultra_constrained func(objc.ID, bool)
-	_nw_parameters_set_attribution func(objc.ID, Nw_parameters_attribution_t)
-	_nw_parameters_set_expired_dns_behavior func(objc.ID, avrouting.Nw_parameters_expired_dns_behavior_t)
-	_nw_parameters_set_fast_open_enabled func(objc.ID, bool)
-	_nw_parameters_set_include_peer_to_peer func(objc.ID, bool)
-	_nw_parameters_set_local_endpoint func(objc.ID, objc.ID)
-	_nw_parameters_set_local_only func(objc.ID, bool)
-	_nw_parameters_set_multipath_service func(objc.ID, avrouting.Nw_multipath_service_t)
-	_nw_parameters_set_prefer_no_proxy func(objc.ID, bool)
-	_nw_parameters_set_privacy_context func(objc.ID, objc.ID)
-	_nw_parameters_set_prohibit_constrained func(objc.ID, bool)
-	_nw_parameters_set_prohibit_expensive func(objc.ID, bool)
-	_nw_parameters_set_required_interface_type func(objc.ID, avrouting.Nw_interface_type_t)
-	_nw_parameters_set_requires_dnssec_validation func(objc.ID, bool)
-	_nw_parameters_set_reuse_local_address func(objc.ID, bool)
-	_nw_parameters_set_service_class func(objc.ID, avrouting.Nw_service_class_t)
-	_nw_path_copy_effective_local_endpoint func(objc.ID) unsafe.Pointer
-	_nw_path_copy_effective_remote_endpoint func(objc.ID) unsafe.Pointer
-	_nw_path_enumerate_gateways func(objc.ID, objc.Block)
-	_nw_path_enumerate_interfaces func(objc.ID, objc.Block)
-	_nw_path_get_link_quality func(objc.ID) avrouting.Nw_link_quality_t
-	_nw_path_get_status func(objc.ID) avrouting.Nw_path_status_t
-	_nw_path_get_unsatisfied_reason func(objc.ID) avrouting.Nw_path_unsatisfied_reason_t
-	_nw_path_has_dns func(objc.ID) bool
-	_nw_path_has_ipv4 func(objc.ID) bool
-	_nw_path_has_ipv6 func(objc.ID) bool
-	_nw_path_is_constrained func(objc.ID) bool
-	_nw_path_is_equal func(objc.ID, objc.ID) bool
-	_nw_path_is_expensive func(objc.ID) bool
-	_nw_path_is_ultra_constrained func(objc.ID) bool
-	_nw_path_monitor_cancel func(objc.ID)
-	_nw_path_monitor_create func() unsafe.Pointer
-	_nw_path_monitor_create_for_ethernet_channel func() unsafe.Pointer
-	_nw_path_monitor_create_with_type func(avrouting.Nw_interface_type_t) unsafe.Pointer
-	_nw_path_monitor_prohibit_interface_type func(objc.ID, avrouting.Nw_interface_type_t)
-	_nw_path_monitor_set_cancel_handler func(objc.ID, objc.Block)
-	_nw_path_monitor_set_queue func(objc.ID, objc.ID)
-	_nw_path_monitor_set_update_handler func(objc.ID, objc.Block)
-	_nw_path_monitor_start func(objc.ID)
-	_nw_path_uses_interface_type func(objc.ID, avrouting.Nw_interface_type_t) bool
-	_nw_privacy_context_add_proxy func(objc.ID, objc.ID)
-	_nw_privacy_context_clear_proxies func(objc.ID)
-	_nw_privacy_context_create func(string) unsafe.Pointer
-	_nw_privacy_context_disable_logging func(objc.ID)
-	_nw_privacy_context_flush_cache func(objc.ID)
-	_nw_privacy_context_require_encrypted_name_resolution func(objc.ID, bool, objc.ID)
-	_nw_protocol_copy_ip_definition func() unsafe.Pointer
-	_nw_protocol_copy_quic_definition func() unsafe.Pointer
-	_nw_protocol_copy_tcp_definition func() unsafe.Pointer
-	_nw_protocol_copy_tls_definition func() unsafe.Pointer
-	_nw_protocol_copy_udp_definition func() unsafe.Pointer
-	_nw_protocol_copy_ws_definition func() unsafe.Pointer
-	_nw_protocol_definition_is_equal func(objc.ID, objc.ID) bool
-	_nw_protocol_metadata_copy_definition func(objc.ID) unsafe.Pointer
-	_nw_protocol_metadata_is_framer_message func(objc.ID) bool
-	_nw_protocol_metadata_is_ip func(objc.ID) bool
-	_nw_protocol_metadata_is_quic func(objc.ID) bool
-	_nw_protocol_metadata_is_tcp func(objc.ID) bool
-	_nw_protocol_metadata_is_tls func(objc.ID) bool
-	_nw_protocol_metadata_is_udp func(objc.ID) bool
-	_nw_protocol_metadata_is_ws func(objc.ID) bool
-	_nw_protocol_options_copy_definition func(objc.ID) unsafe.Pointer
-	_nw_protocol_options_is_quic func(objc.ID) bool
-	_nw_protocol_stack_clear_application_protocols func(objc.ID)
-	_nw_protocol_stack_copy_internet_protocol func(objc.ID) unsafe.Pointer
-	_nw_protocol_stack_copy_transport_protocol func(objc.ID) unsafe.Pointer
-	_nw_protocol_stack_iterate_application_protocols func(objc.ID, objc.Block)
-	_nw_protocol_stack_prepend_application_protocol func(objc.ID, objc.ID)
-	_nw_protocol_stack_set_transport_protocol func(objc.ID, objc.ID)
-	_nw_proxy_config_add_excluded_domain func(objc.ID, string)
-	_nw_proxy_config_add_match_domain func(objc.ID, string)
-	_nw_proxy_config_clear_excluded_domains func(objc.ID)
-	_nw_proxy_config_clear_match_domains func(objc.ID)
-	_nw_proxy_config_create_http_connect func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_proxy_config_create_oblivious_http func(objc.ID, string, *uint8, uint) unsafe.Pointer
-	_nw_proxy_config_create_relay func(objc.ID, objc.ID) unsafe.Pointer
-	_nw_proxy_config_create_socksv5 func(objc.ID) unsafe.Pointer
-	_nw_proxy_config_enumerate_excluded_domains func(objc.ID, objc.Block)
-	_nw_proxy_config_enumerate_match_domains func(objc.ID, objc.Block)
-	_nw_proxy_config_get_failover_allowed func(objc.ID) bool
-	_nw_proxy_config_set_failover_allowed func(objc.ID, bool)
-	_nw_proxy_config_set_username_and_password func(objc.ID, string, string)
-	_nw_quic_add_tls_application_protocol func(objc.ID, string)
-	_nw_quic_copy_sec_protocol_metadata func(objc.ID) unsafe.Pointer
-	_nw_quic_copy_sec_protocol_options func(objc.ID) unsafe.Pointer
-	_nw_quic_create_options func() unsafe.Pointer
-	_nw_quic_get_application_error func(objc.ID) uint64
-	_nw_quic_get_application_error_reason func(objc.ID) string
-	_nw_quic_get_idle_timeout func(objc.ID) uint32
-	_nw_quic_get_initial_max_data func(objc.ID) uint64
-	_nw_quic_get_initial_max_stream_data_bidirectional_local func(objc.ID) uint64
-	_nw_quic_get_initial_max_stream_data_bidirectional_remote func(objc.ID) uint64
-	_nw_quic_get_initial_max_stream_data_unidirectional func(objc.ID) uint64
-	_nw_quic_get_initial_max_streams_bidirectional func(objc.ID) uint64
-	_nw_quic_get_initial_max_streams_unidirectional func(objc.ID) uint64
-	_nw_quic_get_keepalive_interval func(objc.ID) uint16
-	_nw_quic_get_local_max_streams_bidirectional func(objc.ID) uint64
-	_nw_quic_get_local_max_streams_unidirectional func(objc.ID) uint64
-	_nw_quic_get_max_datagram_frame_size func(objc.ID) uint16
-	_nw_quic_get_max_udp_payload_size func(objc.ID) uint16
-	_nw_quic_get_remote_idle_timeout func(objc.ID) uint64
-	_nw_quic_get_remote_max_streams_bidirectional func(objc.ID) uint64
-	_nw_quic_get_remote_max_streams_unidirectional func(objc.ID) uint64
-	_nw_quic_get_stream_application_error func(objc.ID) uint64
-	_nw_quic_get_stream_id func(objc.ID) uint64
-	_nw_quic_get_stream_is_datagram func(objc.ID) bool
-	_nw_quic_get_stream_is_unidirectional func(objc.ID) bool
-	_nw_quic_get_stream_type func(objc.ID) uint8
-	_nw_quic_get_stream_usable_datagram_frame_size func(objc.ID) uint16
-	_nw_quic_set_application_error func(objc.ID, uint64, string)
-	_nw_quic_set_idle_timeout func(objc.ID, uint32)
-	_nw_quic_set_initial_max_data func(objc.ID, uint64)
-	_nw_quic_set_initial_max_stream_data_bidirectional_local func(objc.ID, uint64)
-	_nw_quic_set_initial_max_stream_data_bidirectional_remote func(objc.ID, uint64)
-	_nw_quic_set_initial_max_stream_data_unidirectional func(objc.ID, uint64)
-	_nw_quic_set_initial_max_streams_bidirectional func(objc.ID, uint64)
-	_nw_quic_set_initial_max_streams_unidirectional func(objc.ID, uint64)
-	_nw_quic_set_keepalive_interval func(objc.ID, uint16)
-	_nw_quic_set_local_max_streams_bidirectional func(objc.ID, uint64)
-	_nw_quic_set_local_max_streams_unidirectional func(objc.ID, uint64)
-	_nw_quic_set_max_datagram_frame_size func(objc.ID, uint16)
-	_nw_quic_set_max_udp_payload_size func(objc.ID, uint16)
-	_nw_quic_set_stream_application_error func(objc.ID, uint64)
-	_nw_quic_set_stream_is_datagram func(objc.ID, bool)
-	_nw_quic_set_stream_is_unidirectional func(objc.ID, bool)
-	_nw_relay_hop_add_additional_http_header_field func(objc.ID, string, string)
-	_nw_relay_hop_create func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
-	_nw_release func(unsafe.Pointer)
-	_nw_resolution_report_copy_preferred_endpoint func(objc.ID) unsafe.Pointer
-	_nw_resolution_report_copy_successful_endpoint func(objc.ID) unsafe.Pointer
-	_nw_resolution_report_get_endpoint_count func(objc.ID) uint32
-	_nw_resolution_report_get_milliseconds func(objc.ID) uint64
-	_nw_resolution_report_get_protocol func(objc.ID) avrouting.Nw_report_resolution_protocol_t
-	_nw_resolution_report_get_source func(objc.ID) avrouting.Nw_report_resolution_source_t
-	_nw_resolver_config_add_server_address func(objc.ID, objc.ID)
-	_nw_resolver_config_create_https func(objc.ID) unsafe.Pointer
-	_nw_resolver_config_create_tls func(objc.ID) unsafe.Pointer
-	_nw_retain func(unsafe.Pointer) unsafe.Pointer
-	_nw_tcp_create_options func() unsafe.Pointer
-	_nw_tcp_get_available_receive_buffer func(objc.ID) uint32
-	_nw_tcp_get_available_send_buffer func(objc.ID) uint32
-	_nw_tcp_options_set_connection_timeout func(objc.ID, uint32)
-	_nw_tcp_options_set_disable_ack_stretching func(objc.ID, bool)
-	_nw_tcp_options_set_disable_ecn func(objc.ID, bool)
-	_nw_tcp_options_set_enable_fast_open func(objc.ID, bool)
-	_nw_tcp_options_set_enable_keepalive func(objc.ID, bool)
-	_nw_tcp_options_set_keepalive_count func(objc.ID, uint32)
-	_nw_tcp_options_set_keepalive_idle_time func(objc.ID, uint32)
-	_nw_tcp_options_set_keepalive_interval func(objc.ID, uint32)
-	_nw_tcp_options_set_maximum_segment_size func(objc.ID, uint32)
-	_nw_tcp_options_set_multipath_force_version func(objc.ID, avrouting.Nw_multipath_version_t)
-	_nw_tcp_options_set_no_delay func(objc.ID, bool)
-	_nw_tcp_options_set_no_options func(objc.ID, bool)
-	_nw_tcp_options_set_no_push func(objc.ID, bool)
-	_nw_tcp_options_set_persist_timeout func(objc.ID, uint32)
-	_nw_tcp_options_set_retransmit_connection_drop_time func(objc.ID, uint32)
-	_nw_tcp_options_set_retransmit_fin_drop func(objc.ID, bool)
-	_nw_tls_copy_sec_protocol_metadata func(objc.ID) unsafe.Pointer
-	_nw_tls_copy_sec_protocol_options func(objc.ID) unsafe.Pointer
-	_nw_tls_create_options func() unsafe.Pointer
-	_nw_txt_record_access_bytes func(objc.ID, objc.Block) bool
-	_nw_txt_record_access_key func(objc.ID, string, objc.Block) bool
-	_nw_txt_record_apply func(objc.ID, objc.Block) bool
-	_nw_txt_record_copy func(objc.ID) unsafe.Pointer
-	_nw_txt_record_create_dictionary func() unsafe.Pointer
-	_nw_txt_record_create_with_bytes func(*uint8, uint) unsafe.Pointer
-	_nw_txt_record_find_key func(objc.ID, string) avrouting.Nw_txt_record_find_key_t
-	_nw_txt_record_get_key_count func(objc.ID) uint
-	_nw_txt_record_is_dictionary func(objc.ID) bool
-	_nw_txt_record_is_equal func(objc.ID, objc.ID) bool
-	_nw_txt_record_remove_key func(objc.ID, string) bool
-	_nw_txt_record_set_key func(objc.ID, string, *uint8, uint) bool
-	_nw_udp_create_metadata func() unsafe.Pointer
-	_nw_udp_create_options func() unsafe.Pointer
-	_nw_udp_options_set_prefer_no_checksum func(objc.ID, bool)
-	_nw_ws_create_metadata func(avrouting.Nw_ws_opcode_t) unsafe.Pointer
-	_nw_ws_create_options func(avrouting.Nw_ws_version_t) unsafe.Pointer
-	_nw_ws_metadata_copy_server_response func(objc.ID) unsafe.Pointer
-	_nw_ws_metadata_get_close_code func(objc.ID) avrouting.Nw_ws_close_code_t
-	_nw_ws_metadata_get_opcode func(objc.ID) avrouting.Nw_ws_opcode_t
-	_nw_ws_metadata_set_close_code func(objc.ID, avrouting.Nw_ws_close_code_t)
-	_nw_ws_metadata_set_pong_handler func(objc.ID, objc.ID, objc.Block)
-	_nw_ws_options_add_additional_header func(objc.ID, string, string)
-	_nw_ws_options_add_subprotocol func(objc.ID, string)
-	_nw_ws_options_set_auto_reply_ping func(objc.ID, bool)
-	_nw_ws_options_set_client_request_handler func(objc.ID, objc.ID, objc.Block)
-	_nw_ws_options_set_maximum_message_size func(objc.ID, uint)
-	_nw_ws_options_set_skip_handshake func(objc.ID, bool)
-	_nw_ws_request_enumerate_additional_headers func(objc.ID, objc.Block) bool
-	_nw_ws_request_enumerate_subprotocols func(objc.ID, objc.Block) bool
-	_nw_ws_response_add_additional_header func(objc.ID, string, string)
-	_nw_ws_response_create func(avrouting.Nw_ws_response_status_t, string) unsafe.Pointer
-	_nw_ws_response_enumerate_additional_headers func(objc.ID, objc.Block) bool
-	_nw_ws_response_get_selected_subprotocol func(objc.ID) string
-	_nw_ws_response_get_status func(objc.ID) avrouting.Nw_ws_response_status_t
+	_nw_data_transfer_report_get_sent_application_byte_count                func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_sent_ip_packet_count                       func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_sent_transport_byte_count                  func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_sent_transport_retransmitted_byte_count    func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_state                                      func(objc.ID) avrouting.Nw_data_transfer_report_state_t
+	_nw_data_transfer_report_get_transport_minimum_rtt_milliseconds         func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_transport_rtt_variance                     func(objc.ID, uint32) uint64
+	_nw_data_transfer_report_get_transport_smoothed_rtt_milliseconds        func(objc.ID, uint32) uint64
+	_nw_endpoint_copy_address_string                                        func(objc.ID) string
+	_nw_endpoint_copy_port_string                                           func(objc.ID) string
+	_nw_endpoint_copy_txt_record                                            func(objc.ID) unsafe.Pointer
+	_nw_endpoint_create_address                                             func(unsafe.Pointer) unsafe.Pointer
+	_nw_endpoint_create_bonjour_service                                     func(string, string, string) unsafe.Pointer
+	_nw_endpoint_create_host                                                func(string, string) unsafe.Pointer
+	_nw_endpoint_create_url                                                 func(string) unsafe.Pointer
+	_nw_endpoint_get_address                                                func(objc.ID) unsafe.Pointer
+	_nw_endpoint_get_bonjour_service_domain                                 func(objc.ID) string
+	_nw_endpoint_get_bonjour_service_name                                   func(objc.ID) string
+	_nw_endpoint_get_bonjour_service_type                                   func(objc.ID) string
+	_nw_endpoint_get_hostname                                               func(objc.ID) string
+	_nw_endpoint_get_port                                                   func(objc.ID) uint16
+	_nw_endpoint_get_signature                                              func(objc.ID, *uint) unsafe.Pointer
+	_nw_endpoint_get_type                                                   func(objc.ID) avrouting.Nw_endpoint_type_t
+	_nw_endpoint_get_url                                                    func(objc.ID) string
+	_nw_error_copy_cf_error                                                 func(objc.ID) unsafe.Pointer
+	_nw_error_get_error_code                                                func(objc.ID) int
+	_nw_error_get_error_domain                                              func(objc.ID) avrouting.Nw_error_domain_t
+	_nw_establishment_report_copy_proxy_endpoint                            func(objc.ID) unsafe.Pointer
+	_nw_establishment_report_enumerate_protocols                            func(objc.ID, objc.Block)
+	_nw_establishment_report_enumerate_resolution_reports                   func(objc.ID, objc.Block)
+	_nw_establishment_report_enumerate_resolutions                          func(objc.ID, objc.Block)
+	_nw_establishment_report_get_attempt_started_after_milliseconds         func(objc.ID) uint64
+	_nw_establishment_report_get_duration_milliseconds                      func(objc.ID) uint64
+	_nw_establishment_report_get_previous_attempt_count                     func(objc.ID) uint32
+	_nw_establishment_report_get_proxy_configured                           func(objc.ID) bool
+	_nw_establishment_report_get_used_proxy                                 func(objc.ID) bool
+	_nw_ethernet_channel_cancel                                             func(objc.ID)
+	_nw_ethernet_channel_create                                             func(uint16, objc.ID) unsafe.Pointer
+	_nw_ethernet_channel_create_with_parameters                             func(uint16, objc.ID, objc.ID) unsafe.Pointer
+	_nw_ethernet_channel_get_maximum_payload_size                           func(objc.ID) uint32
+	_nw_ethernet_channel_send                                               func(objc.ID, objc.ID, uint16, *uint8, objc.Block)
+	_nw_ethernet_channel_set_queue                                          func(objc.ID, objc.ID)
+	_nw_ethernet_channel_set_receive_handler                                func(objc.ID, objc.Block)
+	_nw_ethernet_channel_set_state_changed_handler                          func(objc.ID, objc.Block)
+	_nw_ethernet_channel_start                                              func(objc.ID)
+	_nw_framer_async                                                        func(objc.ID, objc.Block)
+	_nw_framer_copy_local_endpoint                                          func(objc.ID) unsafe.Pointer
+	_nw_framer_copy_options                                                 func(objc.ID) unsafe.Pointer
+	_nw_framer_copy_parameters                                              func(objc.ID) unsafe.Pointer
+	_nw_framer_copy_remote_endpoint                                         func(objc.ID) unsafe.Pointer
+	_nw_framer_create_definition                                            func(string, uint32, objc.Block) unsafe.Pointer
+	_nw_framer_create_options                                               func(objc.ID) unsafe.Pointer
+	_nw_framer_deliver_input                                                func(objc.ID, *uint8, uint, objc.ID, bool)
+	_nw_framer_deliver_input_no_copy                                        func(objc.ID, uint, objc.ID, bool) bool
+	_nw_framer_mark_failed_with_error                                       func(objc.ID, int)
+	_nw_framer_mark_ready                                                   func(objc.ID)
+	_nw_framer_message_access_value                                         func(objc.ID, string, objc.Block) bool
+	_nw_framer_message_copy_object_value                                    func(objc.ID, string) unsafe.Pointer
+	_nw_framer_message_create                                               func(objc.ID) unsafe.Pointer
+	_nw_framer_message_set_object_value                                     func(objc.ID, string, objc.ID)
+	_nw_framer_message_set_value                                            func(objc.ID, string, unsafe.Pointer, objc.Block)
+	_nw_framer_options_copy_object_value                                    func(objc.ID, string) unsafe.Pointer
+	_nw_framer_options_set_object_value                                     func(objc.ID, string, objc.ID)
+	_nw_framer_parse_input                                                  func(objc.ID, uint, uint, *uint8, objc.Block) bool
+	_nw_framer_parse_output                                                 func(objc.ID, uint, uint, *uint8, objc.Block) bool
+	_nw_framer_pass_through_input                                           func(objc.ID)
+	_nw_framer_pass_through_output                                          func(objc.ID)
+	_nw_framer_prepend_application_protocol                                 func(objc.ID, objc.ID) bool
+	_nw_framer_protocol_create_message                                      func(objc.ID) unsafe.Pointer
+	_nw_framer_schedule_wakeup                                              func(objc.ID, uint64)
+	_nw_framer_set_cleanup_handler                                          func(objc.ID, objc.Block)
+	_nw_framer_set_input_handler                                            func(objc.ID, objc.Block)
+	_nw_framer_set_output_handler                                           func(objc.ID, objc.Block)
+	_nw_framer_set_stop_handler                                             func(objc.ID, objc.Block)
+	_nw_framer_set_wakeup_handler                                           func(objc.ID, objc.Block)
+	_nw_framer_write_output                                                 func(objc.ID, *uint8, uint)
+	_nw_framer_write_output_data                                            func(objc.ID, objc.ID)
+	_nw_framer_write_output_no_copy                                         func(objc.ID, uint) bool
+	_nw_group_descriptor_add_endpoint                                       func(objc.ID, objc.ID) bool
+	_nw_group_descriptor_create_multicast                                   func(objc.ID) unsafe.Pointer
+	_nw_group_descriptor_create_multiplex                                   func(objc.ID) unsafe.Pointer
+	_nw_group_descriptor_enumerate_endpoints                                func(objc.ID, objc.Block)
+	_nw_interface_get_index                                                 func(objc.ID) uint32
+	_nw_interface_get_name                                                  func(objc.ID) string
+	_nw_interface_get_type                                                  func(objc.ID) avrouting.Nw_interface_type_t
+	_nw_ip_create_metadata                                                  func() unsafe.Pointer
+	_nw_ip_metadata_get_ecn_flag                                            func(objc.ID) avrouting.Nw_ip_ecn_flag_t
+	_nw_ip_metadata_get_receive_time                                        func(objc.ID) uint64
+	_nw_ip_metadata_get_service_class                                       func(objc.ID) avrouting.Nw_service_class_t
+	_nw_ip_metadata_set_ecn_flag                                            func(objc.ID, avrouting.Nw_ip_ecn_flag_t)
+	_nw_ip_metadata_set_service_class                                       func(objc.ID, avrouting.Nw_service_class_t)
+	_nw_ip_options_set_calculate_receive_time                               func(objc.ID, bool)
+	_nw_ip_options_set_disable_fragmentation                                func(objc.ID, bool)
+	_nw_ip_options_set_disable_multicast_loopback                           func(objc.ID, bool)
+	_nw_ip_options_set_hop_limit                                            func(objc.ID, uint8)
+	_nw_ip_options_set_local_address_preference                             func(objc.ID, avrouting.Nw_ip_local_address_preference_t)
+	_nw_ip_options_set_use_minimum_mtu                                      func(objc.ID, bool)
+	_nw_ip_options_set_version                                              func(objc.ID, avrouting.Nw_ip_version_t)
+	_nw_listener_cancel                                                     func(objc.ID)
+	_nw_listener_create                                                     func(objc.ID) unsafe.Pointer
+	_nw_listener_create_with_connection                                     func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_listener_create_with_launchd_key                                    func(objc.ID, string) unsafe.Pointer
+	_nw_listener_create_with_port                                           func(string, objc.ID) unsafe.Pointer
+	_nw_listener_get_new_connection_limit                                   func(objc.ID) uint32
+	_nw_listener_get_port                                                   func(objc.ID) uint16
+	_nw_listener_set_advertise_descriptor                                   func(objc.ID, objc.ID)
+	_nw_listener_set_advertised_endpoint_changed_handler                    func(objc.ID, objc.Block)
+	_nw_listener_set_new_connection_group_handler                           func(objc.ID, objc.Block)
+	_nw_listener_set_new_connection_handler                                 func(objc.ID, objc.Block)
+	_nw_listener_set_new_connection_limit                                   func(objc.ID, uint32)
+	_nw_listener_set_queue                                                  func(objc.ID, objc.ID)
+	_nw_listener_set_state_changed_handler                                  func(objc.ID, objc.Block)
+	_nw_listener_start                                                      func(objc.ID)
+	_nw_multicast_group_descriptor_get_disable_unicast_traffic              func(objc.ID) bool
+	_nw_multicast_group_descriptor_set_disable_unicast_traffic              func(objc.ID, bool)
+	_nw_multicast_group_descriptor_set_specific_source                      func(objc.ID, objc.ID)
+	_nw_parameters_clear_prohibited_interface_types                         func(objc.ID)
+	_nw_parameters_clear_prohibited_interfaces                              func(objc.ID)
+	_nw_parameters_copy                                                     func(objc.ID) unsafe.Pointer
+	_nw_parameters_copy_default_protocol_stack                              func(objc.ID) unsafe.Pointer
+	_nw_parameters_copy_local_endpoint                                      func(objc.ID) unsafe.Pointer
+	_nw_parameters_copy_required_interface                                  func(objc.ID) unsafe.Pointer
+	_nw_parameters_create                                                   func() unsafe.Pointer
+	_nw_parameters_create_application_service                               func() unsafe.Pointer
+	_nw_parameters_create_custom_ip                                         func(uint8, objc.Block) unsafe.Pointer
+	_nw_parameters_create_quic                                              func(objc.Block) unsafe.Pointer
+	_nw_parameters_create_secure_tcp                                        func(objc.Block, objc.Block) unsafe.Pointer
+	_nw_parameters_create_secure_udp                                        func(objc.Block, objc.Block) unsafe.Pointer
+	_nw_parameters_get_allow_ultra_constrained                              func(objc.ID) bool
+	_nw_parameters_get_attribution                                          func(objc.ID) Nw_parameters_attribution_t
+	_nw_parameters_get_expired_dns_behavior                                 func(objc.ID) avrouting.Nw_parameters_expired_dns_behavior_t
+	_nw_parameters_get_fast_open_enabled                                    func(objc.ID) bool
+	_nw_parameters_get_include_peer_to_peer                                 func(objc.ID) bool
+	_nw_parameters_get_local_only                                           func(objc.ID) bool
+	_nw_parameters_get_multipath_service                                    func(objc.ID) avrouting.Nw_multipath_service_t
+	_nw_parameters_get_prefer_no_proxy                                      func(objc.ID) bool
+	_nw_parameters_get_prohibit_constrained                                 func(objc.ID) bool
+	_nw_parameters_get_prohibit_expensive                                   func(objc.ID) bool
+	_nw_parameters_get_required_interface_type                              func(objc.ID) avrouting.Nw_interface_type_t
+	_nw_parameters_get_reuse_local_address                                  func(objc.ID) bool
+	_nw_parameters_get_service_class                                        func(objc.ID) avrouting.Nw_service_class_t
+	_nw_parameters_iterate_prohibited_interface_types                       func(objc.ID, objc.Block)
+	_nw_parameters_iterate_prohibited_interfaces                            func(objc.ID, objc.Block)
+	_nw_parameters_prohibit_interface                                       func(objc.ID, objc.ID)
+	_nw_parameters_prohibit_interface_type                                  func(objc.ID, avrouting.Nw_interface_type_t)
+	_nw_parameters_require_interface                                        func(objc.ID, objc.ID)
+	_nw_parameters_requires_dnssec_validation                               func(objc.ID) bool
+	_nw_parameters_set_allow_ultra_constrained                              func(objc.ID, bool)
+	_nw_parameters_set_attribution                                          func(objc.ID, Nw_parameters_attribution_t)
+	_nw_parameters_set_expired_dns_behavior                                 func(objc.ID, avrouting.Nw_parameters_expired_dns_behavior_t)
+	_nw_parameters_set_fast_open_enabled                                    func(objc.ID, bool)
+	_nw_parameters_set_include_peer_to_peer                                 func(objc.ID, bool)
+	_nw_parameters_set_local_endpoint                                       func(objc.ID, objc.ID)
+	_nw_parameters_set_local_only                                           func(objc.ID, bool)
+	_nw_parameters_set_multipath_service                                    func(objc.ID, avrouting.Nw_multipath_service_t)
+	_nw_parameters_set_prefer_no_proxy                                      func(objc.ID, bool)
+	_nw_parameters_set_privacy_context                                      func(objc.ID, objc.ID)
+	_nw_parameters_set_prohibit_constrained                                 func(objc.ID, bool)
+	_nw_parameters_set_prohibit_expensive                                   func(objc.ID, bool)
+	_nw_parameters_set_required_interface_type                              func(objc.ID, avrouting.Nw_interface_type_t)
+	_nw_parameters_set_requires_dnssec_validation                           func(objc.ID, bool)
+	_nw_parameters_set_reuse_local_address                                  func(objc.ID, bool)
+	_nw_parameters_set_service_class                                        func(objc.ID, avrouting.Nw_service_class_t)
+	_nw_path_copy_effective_local_endpoint                                  func(objc.ID) unsafe.Pointer
+	_nw_path_copy_effective_remote_endpoint                                 func(objc.ID) unsafe.Pointer
+	_nw_path_enumerate_gateways                                             func(objc.ID, objc.Block)
+	_nw_path_enumerate_interfaces                                           func(objc.ID, objc.Block)
+	_nw_path_get_link_quality                                               func(objc.ID) avrouting.Nw_link_quality_t
+	_nw_path_get_status                                                     func(objc.ID) avrouting.Nw_path_status_t
+	_nw_path_get_unsatisfied_reason                                         func(objc.ID) avrouting.Nw_path_unsatisfied_reason_t
+	_nw_path_has_dns                                                        func(objc.ID) bool
+	_nw_path_has_ipv4                                                       func(objc.ID) bool
+	_nw_path_has_ipv6                                                       func(objc.ID) bool
+	_nw_path_is_constrained                                                 func(objc.ID) bool
+	_nw_path_is_equal                                                       func(objc.ID, objc.ID) bool
+	_nw_path_is_expensive                                                   func(objc.ID) bool
+	_nw_path_is_ultra_constrained                                           func(objc.ID) bool
+	_nw_path_monitor_cancel                                                 func(objc.ID)
+	_nw_path_monitor_create                                                 func() unsafe.Pointer
+	_nw_path_monitor_create_for_ethernet_channel                            func() unsafe.Pointer
+	_nw_path_monitor_create_with_type                                       func(avrouting.Nw_interface_type_t) unsafe.Pointer
+	_nw_path_monitor_prohibit_interface_type                                func(objc.ID, avrouting.Nw_interface_type_t)
+	_nw_path_monitor_set_cancel_handler                                     func(objc.ID, objc.Block)
+	_nw_path_monitor_set_queue                                              func(objc.ID, objc.ID)
+	_nw_path_monitor_set_update_handler                                     func(objc.ID, objc.Block)
+	_nw_path_monitor_start                                                  func(objc.ID)
+	_nw_path_uses_interface_type                                            func(objc.ID, avrouting.Nw_interface_type_t) bool
+	_nw_privacy_context_add_proxy                                           func(objc.ID, objc.ID)
+	_nw_privacy_context_clear_proxies                                       func(objc.ID)
+	_nw_privacy_context_create                                              func(string) unsafe.Pointer
+	_nw_privacy_context_disable_logging                                     func(objc.ID)
+	_nw_privacy_context_flush_cache                                         func(objc.ID)
+	_nw_privacy_context_require_encrypted_name_resolution                   func(objc.ID, bool, objc.ID)
+	_nw_protocol_copy_ip_definition                                         func() unsafe.Pointer
+	_nw_protocol_copy_quic_definition                                       func() unsafe.Pointer
+	_nw_protocol_copy_tcp_definition                                        func() unsafe.Pointer
+	_nw_protocol_copy_tls_definition                                        func() unsafe.Pointer
+	_nw_protocol_copy_udp_definition                                        func() unsafe.Pointer
+	_nw_protocol_copy_ws_definition                                         func() unsafe.Pointer
+	_nw_protocol_definition_is_equal                                        func(objc.ID, objc.ID) bool
+	_nw_protocol_metadata_copy_definition                                   func(objc.ID) unsafe.Pointer
+	_nw_protocol_metadata_is_framer_message                                 func(objc.ID) bool
+	_nw_protocol_metadata_is_ip                                             func(objc.ID) bool
+	_nw_protocol_metadata_is_quic                                           func(objc.ID) bool
+	_nw_protocol_metadata_is_tcp                                            func(objc.ID) bool
+	_nw_protocol_metadata_is_tls                                            func(objc.ID) bool
+	_nw_protocol_metadata_is_udp                                            func(objc.ID) bool
+	_nw_protocol_metadata_is_ws                                             func(objc.ID) bool
+	_nw_protocol_options_copy_definition                                    func(objc.ID) unsafe.Pointer
+	_nw_protocol_options_is_quic                                            func(objc.ID) bool
+	_nw_protocol_stack_clear_application_protocols                          func(objc.ID)
+	_nw_protocol_stack_copy_internet_protocol                               func(objc.ID) unsafe.Pointer
+	_nw_protocol_stack_copy_transport_protocol                              func(objc.ID) unsafe.Pointer
+	_nw_protocol_stack_iterate_application_protocols                        func(objc.ID, objc.Block)
+	_nw_protocol_stack_prepend_application_protocol                         func(objc.ID, objc.ID)
+	_nw_protocol_stack_set_transport_protocol                               func(objc.ID, objc.ID)
+	_nw_proxy_config_add_excluded_domain                                    func(objc.ID, string)
+	_nw_proxy_config_add_match_domain                                       func(objc.ID, string)
+	_nw_proxy_config_clear_excluded_domains                                 func(objc.ID)
+	_nw_proxy_config_clear_match_domains                                    func(objc.ID)
+	_nw_proxy_config_create_http_connect                                    func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_proxy_config_create_oblivious_http                                  func(objc.ID, string, *uint8, uint) unsafe.Pointer
+	_nw_proxy_config_create_relay                                           func(objc.ID, objc.ID) unsafe.Pointer
+	_nw_proxy_config_create_socksv5                                         func(objc.ID) unsafe.Pointer
+	_nw_proxy_config_enumerate_excluded_domains                             func(objc.ID, objc.Block)
+	_nw_proxy_config_enumerate_match_domains                                func(objc.ID, objc.Block)
+	_nw_proxy_config_get_failover_allowed                                   func(objc.ID) bool
+	_nw_proxy_config_set_failover_allowed                                   func(objc.ID, bool)
+	_nw_proxy_config_set_username_and_password                              func(objc.ID, string, string)
+	_nw_quic_add_tls_application_protocol                                   func(objc.ID, string)
+	_nw_quic_copy_sec_protocol_metadata                                     func(objc.ID) unsafe.Pointer
+	_nw_quic_copy_sec_protocol_options                                      func(objc.ID) unsafe.Pointer
+	_nw_quic_create_options                                                 func() unsafe.Pointer
+	_nw_quic_get_application_error                                          func(objc.ID) uint64
+	_nw_quic_get_application_error_reason                                   func(objc.ID) string
+	_nw_quic_get_idle_timeout                                               func(objc.ID) uint32
+	_nw_quic_get_initial_max_data                                           func(objc.ID) uint64
+	_nw_quic_get_initial_max_stream_data_bidirectional_local                func(objc.ID) uint64
+	_nw_quic_get_initial_max_stream_data_bidirectional_remote               func(objc.ID) uint64
+	_nw_quic_get_initial_max_stream_data_unidirectional                     func(objc.ID) uint64
+	_nw_quic_get_initial_max_streams_bidirectional                          func(objc.ID) uint64
+	_nw_quic_get_initial_max_streams_unidirectional                         func(objc.ID) uint64
+	_nw_quic_get_keepalive_interval                                         func(objc.ID) uint16
+	_nw_quic_get_local_max_streams_bidirectional                            func(objc.ID) uint64
+	_nw_quic_get_local_max_streams_unidirectional                           func(objc.ID) uint64
+	_nw_quic_get_max_datagram_frame_size                                    func(objc.ID) uint16
+	_nw_quic_get_max_udp_payload_size                                       func(objc.ID) uint16
+	_nw_quic_get_remote_idle_timeout                                        func(objc.ID) uint64
+	_nw_quic_get_remote_max_streams_bidirectional                           func(objc.ID) uint64
+	_nw_quic_get_remote_max_streams_unidirectional                          func(objc.ID) uint64
+	_nw_quic_get_stream_application_error                                   func(objc.ID) uint64
+	_nw_quic_get_stream_id                                                  func(objc.ID) uint64
+	_nw_quic_get_stream_is_datagram                                         func(objc.ID) bool
+	_nw_quic_get_stream_is_unidirectional                                   func(objc.ID) bool
+	_nw_quic_get_stream_type                                                func(objc.ID) uint8
+	_nw_quic_get_stream_usable_datagram_frame_size                          func(objc.ID) uint16
+	_nw_quic_set_application_error                                          func(objc.ID, uint64, string)
+	_nw_quic_set_idle_timeout                                               func(objc.ID, uint32)
+	_nw_quic_set_initial_max_data                                           func(objc.ID, uint64)
+	_nw_quic_set_initial_max_stream_data_bidirectional_local                func(objc.ID, uint64)
+	_nw_quic_set_initial_max_stream_data_bidirectional_remote               func(objc.ID, uint64)
+	_nw_quic_set_initial_max_stream_data_unidirectional                     func(objc.ID, uint64)
+	_nw_quic_set_initial_max_streams_bidirectional                          func(objc.ID, uint64)
+	_nw_quic_set_initial_max_streams_unidirectional                         func(objc.ID, uint64)
+	_nw_quic_set_keepalive_interval                                         func(objc.ID, uint16)
+	_nw_quic_set_local_max_streams_bidirectional                            func(objc.ID, uint64)
+	_nw_quic_set_local_max_streams_unidirectional                           func(objc.ID, uint64)
+	_nw_quic_set_max_datagram_frame_size                                    func(objc.ID, uint16)
+	_nw_quic_set_max_udp_payload_size                                       func(objc.ID, uint16)
+	_nw_quic_set_stream_application_error                                   func(objc.ID, uint64)
+	_nw_quic_set_stream_is_datagram                                         func(objc.ID, bool)
+	_nw_quic_set_stream_is_unidirectional                                   func(objc.ID, bool)
+	_nw_relay_hop_add_additional_http_header_field                          func(objc.ID, string, string)
+	_nw_relay_hop_create                                                    func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
+	_nw_release                                                             func(unsafe.Pointer)
+	_nw_resolution_report_copy_preferred_endpoint                           func(objc.ID) unsafe.Pointer
+	_nw_resolution_report_copy_successful_endpoint                          func(objc.ID) unsafe.Pointer
+	_nw_resolution_report_get_endpoint_count                                func(objc.ID) uint32
+	_nw_resolution_report_get_milliseconds                                  func(objc.ID) uint64
+	_nw_resolution_report_get_protocol                                      func(objc.ID) avrouting.Nw_report_resolution_protocol_t
+	_nw_resolution_report_get_source                                        func(objc.ID) avrouting.Nw_report_resolution_source_t
+	_nw_resolver_config_add_server_address                                  func(objc.ID, objc.ID)
+	_nw_resolver_config_create_https                                        func(objc.ID) unsafe.Pointer
+	_nw_resolver_config_create_tls                                          func(objc.ID) unsafe.Pointer
+	_nw_retain                                                              func(unsafe.Pointer) unsafe.Pointer
+	_nw_tcp_create_options                                                  func() unsafe.Pointer
+	_nw_tcp_get_available_receive_buffer                                    func(objc.ID) uint32
+	_nw_tcp_get_available_send_buffer                                       func(objc.ID) uint32
+	_nw_tcp_options_set_connection_timeout                                  func(objc.ID, uint32)
+	_nw_tcp_options_set_disable_ack_stretching                              func(objc.ID, bool)
+	_nw_tcp_options_set_disable_ecn                                         func(objc.ID, bool)
+	_nw_tcp_options_set_enable_fast_open                                    func(objc.ID, bool)
+	_nw_tcp_options_set_enable_keepalive                                    func(objc.ID, bool)
+	_nw_tcp_options_set_keepalive_count                                     func(objc.ID, uint32)
+	_nw_tcp_options_set_keepalive_idle_time                                 func(objc.ID, uint32)
+	_nw_tcp_options_set_keepalive_interval                                  func(objc.ID, uint32)
+	_nw_tcp_options_set_maximum_segment_size                                func(objc.ID, uint32)
+	_nw_tcp_options_set_multipath_force_version                             func(objc.ID, avrouting.Nw_multipath_version_t)
+	_nw_tcp_options_set_no_delay                                            func(objc.ID, bool)
+	_nw_tcp_options_set_no_options                                          func(objc.ID, bool)
+	_nw_tcp_options_set_no_push                                             func(objc.ID, bool)
+	_nw_tcp_options_set_persist_timeout                                     func(objc.ID, uint32)
+	_nw_tcp_options_set_retransmit_connection_drop_time                     func(objc.ID, uint32)
+	_nw_tcp_options_set_retransmit_fin_drop                                 func(objc.ID, bool)
+	_nw_tls_copy_sec_protocol_metadata                                      func(objc.ID) unsafe.Pointer
+	_nw_tls_copy_sec_protocol_options                                       func(objc.ID) unsafe.Pointer
+	_nw_tls_create_options                                                  func() unsafe.Pointer
+	_nw_txt_record_access_bytes                                             func(objc.ID, objc.Block) bool
+	_nw_txt_record_access_key                                               func(objc.ID, string, objc.Block) bool
+	_nw_txt_record_apply                                                    func(objc.ID, objc.Block) bool
+	_nw_txt_record_copy                                                     func(objc.ID) unsafe.Pointer
+	_nw_txt_record_create_dictionary                                        func() unsafe.Pointer
+	_nw_txt_record_create_with_bytes                                        func(*uint8, uint) unsafe.Pointer
+	_nw_txt_record_find_key                                                 func(objc.ID, string) avrouting.Nw_txt_record_find_key_t
+	_nw_txt_record_get_key_count                                            func(objc.ID) uint
+	_nw_txt_record_is_dictionary                                            func(objc.ID) bool
+	_nw_txt_record_is_equal                                                 func(objc.ID, objc.ID) bool
+	_nw_txt_record_remove_key                                               func(objc.ID, string) bool
+	_nw_txt_record_set_key                                                  func(objc.ID, string, *uint8, uint) bool
+	_nw_udp_create_metadata                                                 func() unsafe.Pointer
+	_nw_udp_create_options                                                  func() unsafe.Pointer
+	_nw_udp_options_set_prefer_no_checksum                                  func(objc.ID, bool)
+	_nw_ws_create_metadata                                                  func(avrouting.Nw_ws_opcode_t) unsafe.Pointer
+	_nw_ws_create_options                                                   func(avrouting.Nw_ws_version_t) unsafe.Pointer
+	_nw_ws_metadata_copy_server_response                                    func(objc.ID) unsafe.Pointer
+	_nw_ws_metadata_get_close_code                                          func(objc.ID) avrouting.Nw_ws_close_code_t
+	_nw_ws_metadata_get_opcode                                              func(objc.ID) avrouting.Nw_ws_opcode_t
+	_nw_ws_metadata_set_close_code                                          func(objc.ID, avrouting.Nw_ws_close_code_t)
+	_nw_ws_metadata_set_pong_handler                                        func(objc.ID, objc.ID, objc.Block)
+	_nw_ws_options_add_additional_header                                    func(objc.ID, string, string)
+	_nw_ws_options_add_subprotocol                                          func(objc.ID, string)
+	_nw_ws_options_set_auto_reply_ping                                      func(objc.ID, bool)
+	_nw_ws_options_set_client_request_handler                               func(objc.ID, objc.ID, objc.Block)
+	_nw_ws_options_set_maximum_message_size                                 func(objc.ID, uint)
+	_nw_ws_options_set_skip_handshake                                       func(objc.ID, bool)
+	_nw_ws_request_enumerate_additional_headers                             func(objc.ID, objc.Block) bool
+	_nw_ws_request_enumerate_subprotocols                                   func(objc.ID, objc.Block) bool
+	_nw_ws_response_add_additional_header                                   func(objc.ID, string, string)
+	_nw_ws_response_create                                                  func(avrouting.Nw_ws_response_status_t, string) unsafe.Pointer
+	_nw_ws_response_enumerate_additional_headers                            func(objc.ID, objc.Block) bool
+	_nw_ws_response_get_selected_subprotocol                                func(objc.ID) string
+	_nw_ws_response_get_status                                              func(objc.ID) avrouting.Nw_ws_response_status_t
 )
 
 // C function: nw_advertise_descriptor_copy_txt_record_object
@@ -734,14 +734,18 @@ func NwConnectionGroupCopyPathForMessage(group *foundation.NSObject, context_ *f
 // C function: nw_connection_group_copy_protocol_metadata
 func NwConnectionGroupCopyProtocolMetadata(group *foundation.NSObject, definition *foundation.NSObject) *foundation.NSObject {
 	_ret := _nw_connection_group_copy_protocol_metadata(group.Ptr(), definition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
 // C function: nw_connection_group_copy_protocol_metadata_for_message
 func NwConnectionGroupCopyProtocolMetadataForMessage(group *foundation.NSObject, context_ *foundation.NSObject, definition *foundation.NSObject) *foundation.NSObject {
 	_ret := _nw_connection_group_copy_protocol_metadata_for_message(group.Ptr(), context_.Ptr(), definition.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -3222,4 +3226,3 @@ func NwWsResponseGetSelectedSubprotocol(response *foundation.NSObject) string {
 func NwWsResponseGetStatus(response *foundation.NSObject) avrouting.Nw_ws_response_status_t {
 	return _nw_ws_response_get_status(response.Ptr())
 }
-

@@ -16,13 +16,13 @@ type SFSpeechLanguageModelConfiguration struct {
 }
 
 var (
-	_clsSFSpeechLanguageModelConfiguration = _objcClass("SFSpeechLanguageModelConfiguration")
-	_sFSpeechLanguageModelConfigurationSelInitWithLanguageModel = objc.RegisterName("initWithLanguageModel:")
-	_sFSpeechLanguageModelConfigurationSelInitWithLanguageModelVocabulary = objc.RegisterName("initWithLanguageModel:vocabulary:")
+	_clsSFSpeechLanguageModelConfiguration                                      = _objcClass("SFSpeechLanguageModelConfiguration")
+	_sFSpeechLanguageModelConfigurationSelInitWithLanguageModel                 = objc.RegisterName("initWithLanguageModel:")
+	_sFSpeechLanguageModelConfigurationSelInitWithLanguageModelVocabulary       = objc.RegisterName("initWithLanguageModel:vocabulary:")
 	_sFSpeechLanguageModelConfigurationSelInitWithLanguageModelVocabularyWeight = objc.RegisterName("initWithLanguageModel:vocabulary:weight:")
-	_sFSpeechLanguageModelConfigurationSelLanguageModel = objc.RegisterName("languageModel")
-	_sFSpeechLanguageModelConfigurationSelVocabulary = objc.RegisterName("vocabulary")
-	_sFSpeechLanguageModelConfigurationSelWeight = objc.RegisterName("weight")
+	_sFSpeechLanguageModelConfigurationSelLanguageModel                         = objc.RegisterName("languageModel")
+	_sFSpeechLanguageModelConfigurationSelVocabulary                            = objc.RegisterName("vocabulary")
+	_sFSpeechLanguageModelConfigurationSelWeight                                = objc.RegisterName("weight")
 )
 
 func SFSpeechLanguageModelConfigurationFromID(id objc.ID) *SFSpeechLanguageModelConfiguration {
@@ -38,42 +38,53 @@ func SFSpeechLanguageModelConfigurationFromID(id objc.ID) *SFSpeechLanguageModel
 // Creates a configuration with the location of a language model file.
 func (o *SFSpeechLanguageModelConfiguration) InitWithLanguageModel(languageModel *foundation.NSURL) *SFSpeechLanguageModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelInitWithLanguageModel, languageModel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechLanguageModelConfigurationFromID(_ret)
 }
 
 // Creates a configuration with the locations of language model and vocabulary files.
 func (o *SFSpeechLanguageModelConfiguration) InitWithLanguageModelVocabulary(languageModel *foundation.NSURL, vocabulary *foundation.NSURL) *SFSpeechLanguageModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelInitWithLanguageModelVocabulary, languageModel.Ptr(), vocabulary.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechLanguageModelConfigurationFromID(_ret)
 }
 
 // Creates a configuration with the locations of language model and vocabulary files, and custom weight.
 func (o *SFSpeechLanguageModelConfiguration) InitWithLanguageModelVocabularyWeight(languageModel *foundation.NSURL, vocabulary *foundation.NSURL, weight *foundation.NSNumber) *SFSpeechLanguageModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelInitWithLanguageModelVocabularyWeight, languageModel.Ptr(), vocabulary.Ptr(), weight.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechLanguageModelConfigurationFromID(_ret)
 }
 
 // The location of a compiled language model file.
 func (o *SFSpeechLanguageModelConfiguration) LanguageModel() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelLanguageModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The location of a compiled vocabulary file.
 func (o *SFSpeechLanguageModelConfiguration) Vocabulary() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelVocabulary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // The relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
 func (o *SFSpeechLanguageModelConfiguration) Weight() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechLanguageModelConfigurationSelWeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

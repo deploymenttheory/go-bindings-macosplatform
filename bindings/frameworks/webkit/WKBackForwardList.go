@@ -16,12 +16,12 @@ type WKBackForwardList struct {
 }
 
 var (
-	_clsWKBackForwardList = _objcClass("WKBackForwardList")
+	_clsWKBackForwardList            = _objcClass("WKBackForwardList")
 	_wKBackForwardListSelItemAtIndex = objc.RegisterName("itemAtIndex:")
 	_wKBackForwardListSelCurrentItem = objc.RegisterName("currentItem")
-	_wKBackForwardListSelBackItem = objc.RegisterName("backItem")
+	_wKBackForwardListSelBackItem    = objc.RegisterName("backItem")
 	_wKBackForwardListSelForwardItem = objc.RegisterName("forwardItem")
-	_wKBackForwardListSelBackList = objc.RegisterName("backList")
+	_wKBackForwardListSelBackList    = objc.RegisterName("backList")
 	_wKBackForwardListSelForwardList = objc.RegisterName("forwardList")
 )
 
@@ -38,42 +38,53 @@ func WKBackForwardListFromID(id objc.ID) *WKBackForwardList {
 // @abstract Returns the item at a specified distance from the current item. @param index Index of the desired list item relative to the current item: 0 for the current item, -1 for the immediately preceding item, 1 for the immediately following item, and so on. @result The item at the specified distance from the current item, or nil if the index parameter exceeds the limits of the list.
 func (o *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKBackForwardListItemFromID(_ret)
 }
 
 // @abstract The current item.
 func (o *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelCurrentItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKBackForwardListItemFromID(_ret)
 }
 
 // @abstract The item immediately preceding the current item, or nil if there isn't one.
 func (o *WKBackForwardList) BackItem() *WKBackForwardListItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKBackForwardListItemFromID(_ret)
 }
 
 // @abstract The item immediately following the current item, or nil if there isn't one.
 func (o *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKBackForwardListItemFromID(_ret)
 }
 
 // @abstract The portion of the list preceding the current item. @discussion The items are in the order in which they were originally visited.
 func (o *WKBackForwardList) BackList() *foundation.NSArray[*WKBackForwardListItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelBackList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
 }
 
 // @abstract The portion of the list following the current item. @discussion The items are in the order in which they were originally visited.
 func (o *WKBackForwardList) ForwardList() *foundation.NSArray[*WKBackForwardListItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKBackForwardListSelForwardList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*WKBackForwardListItem](_ret)
 }
-

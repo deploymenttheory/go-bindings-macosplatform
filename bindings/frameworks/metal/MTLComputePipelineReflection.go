@@ -16,8 +16,8 @@ type MTLComputePipelineReflection struct {
 }
 
 var (
-	_clsMTLComputePipelineReflection = _objcClass("MTLComputePipelineReflection")
-	_mTLComputePipelineReflectionSelBindings = objc.RegisterName("bindings")
+	_clsMTLComputePipelineReflection          = _objcClass("MTLComputePipelineReflection")
+	_mTLComputePipelineReflectionSelBindings  = objc.RegisterName("bindings")
 	_mTLComputePipelineReflectionSelArguments = objc.RegisterName("arguments")
 )
 
@@ -33,14 +33,17 @@ func MTLComputePipelineReflectionFromID(id objc.ID) *MTLComputePipelineReflectio
 
 func (o *MTLComputePipelineReflection) Bindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineReflectionSelBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 // Deprecated: since macOS 13.0.
 func (o *MTLComputePipelineReflection) Arguments() *foundation.NSArray[*MTLArgument] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePipelineReflectionSelArguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLArgument](_ret)
 }
-

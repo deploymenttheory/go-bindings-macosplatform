@@ -17,24 +17,24 @@ type NSPointerFunctions struct {
 }
 
 var (
-	_clsNSPointerFunctions = _objcClass("NSPointerFunctions")
-	_nSPointerFunctionsSelInitWithOptions = objc.RegisterName("initWithOptions:")
-	_nSPointerFunctionsSelPointerFunctionsWithOptions = objc.RegisterName("pointerFunctionsWithOptions:")
-	_nSPointerFunctionsSelHashFunction = objc.RegisterName("hashFunction")
-	_nSPointerFunctionsSelSetHashFunction = objc.RegisterName("setHashFunction:")
-	_nSPointerFunctionsSelIsEqualFunction = objc.RegisterName("isEqualFunction")
-	_nSPointerFunctionsSelSetIsEqualFunction = objc.RegisterName("setIsEqualFunction:")
-	_nSPointerFunctionsSelSizeFunction = objc.RegisterName("sizeFunction")
-	_nSPointerFunctionsSelSetSizeFunction = objc.RegisterName("setSizeFunction:")
-	_nSPointerFunctionsSelDescriptionFunction = objc.RegisterName("descriptionFunction")
-	_nSPointerFunctionsSelSetDescriptionFunction = objc.RegisterName("setDescriptionFunction:")
-	_nSPointerFunctionsSelRelinquishFunction = objc.RegisterName("relinquishFunction")
-	_nSPointerFunctionsSelSetRelinquishFunction = objc.RegisterName("setRelinquishFunction:")
-	_nSPointerFunctionsSelAcquireFunction = objc.RegisterName("acquireFunction")
-	_nSPointerFunctionsSelSetAcquireFunction = objc.RegisterName("setAcquireFunction:")
-	_nSPointerFunctionsSelUsesStrongWriteBarrier = objc.RegisterName("usesStrongWriteBarrier")
-	_nSPointerFunctionsSelSetUsesStrongWriteBarrier = objc.RegisterName("setUsesStrongWriteBarrier:")
-	_nSPointerFunctionsSelUsesWeakReadAndWriteBarriers = objc.RegisterName("usesWeakReadAndWriteBarriers")
+	_clsNSPointerFunctions                                = _objcClass("NSPointerFunctions")
+	_nSPointerFunctionsSelInitWithOptions                 = objc.RegisterName("initWithOptions:")
+	_nSPointerFunctionsSelPointerFunctionsWithOptions     = objc.RegisterName("pointerFunctionsWithOptions:")
+	_nSPointerFunctionsSelHashFunction                    = objc.RegisterName("hashFunction")
+	_nSPointerFunctionsSelSetHashFunction                 = objc.RegisterName("setHashFunction:")
+	_nSPointerFunctionsSelIsEqualFunction                 = objc.RegisterName("isEqualFunction")
+	_nSPointerFunctionsSelSetIsEqualFunction              = objc.RegisterName("setIsEqualFunction:")
+	_nSPointerFunctionsSelSizeFunction                    = objc.RegisterName("sizeFunction")
+	_nSPointerFunctionsSelSetSizeFunction                 = objc.RegisterName("setSizeFunction:")
+	_nSPointerFunctionsSelDescriptionFunction             = objc.RegisterName("descriptionFunction")
+	_nSPointerFunctionsSelSetDescriptionFunction          = objc.RegisterName("setDescriptionFunction:")
+	_nSPointerFunctionsSelRelinquishFunction              = objc.RegisterName("relinquishFunction")
+	_nSPointerFunctionsSelSetRelinquishFunction           = objc.RegisterName("setRelinquishFunction:")
+	_nSPointerFunctionsSelAcquireFunction                 = objc.RegisterName("acquireFunction")
+	_nSPointerFunctionsSelSetAcquireFunction              = objc.RegisterName("setAcquireFunction:")
+	_nSPointerFunctionsSelUsesStrongWriteBarrier          = objc.RegisterName("usesStrongWriteBarrier")
+	_nSPointerFunctionsSelSetUsesStrongWriteBarrier       = objc.RegisterName("setUsesStrongWriteBarrier:")
+	_nSPointerFunctionsSelUsesWeakReadAndWriteBarriers    = objc.RegisterName("usesWeakReadAndWriteBarriers")
 	_nSPointerFunctionsSelSetUsesWeakReadAndWriteBarriers = objc.RegisterName("setUsesWeakReadAndWriteBarriers:")
 )
 
@@ -50,13 +50,17 @@ func NSPointerFunctionsFromID(id objc.ID) *NSPointerFunctions {
 
 func (o *NSPointerFunctions) InitWithOptions(options NSPointerFunctionsOptions) *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPointerFunctionsSelInitWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
 func NSPointerFunctionsPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *NSPointerFunctions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPointerFunctions), _nSPointerFunctionsSelPointerFunctionsWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPointerFunctionsFromID(_ret)
 }
 
@@ -135,4 +139,3 @@ func (o *NSPointerFunctions) UsesWeakReadAndWriteBarriers() bool {
 func (o *NSPointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
 	o.Ptr().Send(_nSPointerFunctionsSelSetUsesWeakReadAndWriteBarriers, usesWeakReadAndWriteBarriers)
 }
-

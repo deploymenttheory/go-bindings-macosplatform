@@ -15,14 +15,14 @@ type MPSCNNSpatialNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNSpatialNormalizationNode = _objcClass("MPSCNNSpatialNormalizationNode")
+	_clsMPSCNNSpatialNormalizationNode                         = _objcClass("MPSCNNSpatialNormalizationNode")
 	_mPSCNNSpatialNormalizationNodeSelNodeWithSourceKernelSize = objc.RegisterName("nodeWithSource:kernelSize:")
 	_mPSCNNSpatialNormalizationNodeSelInitWithSourceKernelSize = objc.RegisterName("initWithSource:kernelSize:")
-	_mPSCNNSpatialNormalizationNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSCNNSpatialNormalizationNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNSpatialNormalizationNodeSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSCNNSpatialNormalizationNodeSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNSpatialNormalizationNodeSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
+	_mPSCNNSpatialNormalizationNodeSelInitWithSource           = objc.RegisterName("initWithSource:")
+	_mPSCNNSpatialNormalizationNodeSelKernelWidth              = objc.RegisterName("kernelWidth")
+	_mPSCNNSpatialNormalizationNodeSelSetKernelWidth           = objc.RegisterName("setKernelWidth:")
+	_mPSCNNSpatialNormalizationNodeSelKernelHeight             = objc.RegisterName("kernelHeight")
+	_mPSCNNSpatialNormalizationNodeSelSetKernelHeight          = objc.RegisterName("setKernelHeight:")
 )
 
 func MPSCNNSpatialNormalizationNodeFromID(id objc.ID) *MPSCNNSpatialNormalizationNode {
@@ -37,19 +37,25 @@ func MPSCNNSpatialNormalizationNodeFromID(id objc.ID) *MPSCNNSpatialNormalizatio
 
 func MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize(sourceNode *MPSNNImageNode, kernelSize uint) *MPSCNNSpatialNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNSpatialNormalizationNode), _mPSCNNSpatialNormalizationNodeSelNodeWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNSpatialNormalizationNode) InitWithSourceKernelSize(sourceNode *MPSNNImageNode, kernelSize uint) *MPSCNNSpatialNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSpatialNormalizationNodeSelInitWithSourceKernelSize, sourceNode.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNSpatialNormalizationNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNSpatialNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSpatialNormalizationNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationNodeFromID(_ret)
 }
 
@@ -70,4 +76,3 @@ func (o *MPSCNNSpatialNormalizationNode) KernelHeight() uint {
 func (o *MPSCNNSpatialNormalizationNode) SetKernelHeight(kernelHeight uint) {
 	o.Ptr().Send(_mPSCNNSpatialNormalizationNodeSelSetKernelHeight, kernelHeight)
 }
-

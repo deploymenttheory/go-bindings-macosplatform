@@ -16,9 +16,9 @@ type AVMIDIMetaEvent struct {
 }
 
 var (
-	_clsAVMIDIMetaEvent = _objcClass("AVMIDIMetaEvent")
+	_clsAVMIDIMetaEvent                 = _objcClass("AVMIDIMetaEvent")
 	_aVMIDIMetaEventSelInitWithTypeData = objc.RegisterName("initWithType:data:")
-	_aVMIDIMetaEventSelType = objc.RegisterName("type")
+	_aVMIDIMetaEventSelType             = objc.RegisterName("type")
 )
 
 func AVMIDIMetaEventFromID(id objc.ID) *AVMIDIMetaEvent {
@@ -34,7 +34,9 @@ func AVMIDIMetaEventFromID(id objc.ID) *AVMIDIMetaEvent {
 // @method initWithType:data @abstract Initialize the event with a MIDI Meta-Event type and an NSData. @param type A AVMIDIMetaEventType indicating which type of Meta-Event. @param data An NSData object containing the raw contents of the Meta-Event.
 func (o *AVMIDIMetaEvent) InitWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *AVMIDIMetaEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIMetaEventSelInitWithTypeData, type_, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIMetaEventFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *AVMIDIMetaEvent) Type() AVMIDIMetaEventType {
 	_ret := objc.Send[AVMIDIMetaEventType](o.Ptr(), _aVMIDIMetaEventSelType)
 	return _ret
 }
-

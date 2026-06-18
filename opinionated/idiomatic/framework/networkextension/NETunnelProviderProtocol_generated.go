@@ -157,7 +157,9 @@ func (x *NETunnelProviderProtocol) SetProviderBundleIdentifier(providerBundleIde
 	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
 }
 
-func (x *NETunnelProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.inner.NEVPNProtocol }
+func (x *NETunnelProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol {
+	return &x.inner.NEVPNProtocol
+}
 
 // NETunnelProviderProtocolable is the interface implemented by [NETunnelProviderProtocol], for mocking and DI.
 type NETunnelProviderProtocolable interface {
@@ -185,4 +187,3 @@ type NETunnelProviderProtocolable interface {
 }
 
 var _ NETunnelProviderProtocolable = (*NETunnelProviderProtocol)(nil)
-

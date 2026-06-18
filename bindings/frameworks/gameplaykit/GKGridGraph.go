@@ -17,18 +17,18 @@ type GKGridGraph[NodeType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKGridGraph = _objcClass("GKGridGraph")
-	_gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowed = objc.RegisterName("graphFromGridStartingAt:width:height:diagonalsAllowed:")
-	_gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowed = objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:")
+	_clsGKGridGraph                                                            = _objcClass("GKGridGraph")
+	_gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowed          = objc.RegisterName("graphFromGridStartingAt:width:height:diagonalsAllowed:")
+	_gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowed           = objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:")
 	_gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass = objc.RegisterName("graphFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:")
-	_gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass = objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:")
-	_gKGridGraphSelNodeAtGridPosition = objc.RegisterName("nodeAtGridPosition:")
-	_gKGridGraphSelConnectNodeToAdjacentNodes = objc.RegisterName("connectNodeToAdjacentNodes:")
-	_gKGridGraphSelClassForGenericArgumentAtIndex = objc.RegisterName("classForGenericArgumentAtIndex:")
-	_gKGridGraphSelGridOrigin = objc.RegisterName("gridOrigin")
-	_gKGridGraphSelGridWidth = objc.RegisterName("gridWidth")
-	_gKGridGraphSelGridHeight = objc.RegisterName("gridHeight")
-	_gKGridGraphSelDiagonalsAllowed = objc.RegisterName("diagonalsAllowed")
+	_gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass  = objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:")
+	_gKGridGraphSelNodeAtGridPosition                                          = objc.RegisterName("nodeAtGridPosition:")
+	_gKGridGraphSelConnectNodeToAdjacentNodes                                  = objc.RegisterName("connectNodeToAdjacentNodes:")
+	_gKGridGraphSelClassForGenericArgumentAtIndex                              = objc.RegisterName("classForGenericArgumentAtIndex:")
+	_gKGridGraphSelGridOrigin                                                  = objc.RegisterName("gridOrigin")
+	_gKGridGraphSelGridWidth                                                   = objc.RegisterName("gridWidth")
+	_gKGridGraphSelGridHeight                                                  = objc.RegisterName("gridHeight")
+	_gKGridGraphSelDiagonalsAllowed                                            = objc.RegisterName("diagonalsAllowed")
 )
 
 func GKGridGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKGridGraph[NodeType] {
@@ -44,26 +44,34 @@ func GKGridGraphFromID[NodeType purego.AnyObject](id objc.ID) *GKGridGraph[NodeT
 // Creates a bidirectional graph connecting all of the points on a 2D grid @param position starting position in the grid @param width how wide the grid will be; the grid will continue along the positive X axis from the starting x value @param height how high the grid will be; the grid will continue along the positive Y axis from the starting y value @param diagonalsAllowed should diagonal connections between nodes be made?  If not, only cardinal directions will be connected.
 func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GKGridGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraph), _gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowed, position, width, height, diagonalsAllowed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GKGridGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowed, position, width, height, diagonalsAllowed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphFromID[NodeType](_ret)
 }
 
 // Creates a bidirectional graph connecting all of the points on a 2D grid @param position starting position in the grid @param width how wide the grid will be; the grid will continue along the positive X axis from the starting x value @param height how high the grid will be; the grid will continue along the positive Y axis from the starting y value @param diagonalsAllowed should diagonal connections between nodes be made?  If not, only cardinal directions will be connected. @param nodeClass the class of the nodes that this graph should create.  Must descend from GKGridGraphNode
 func GKGridGraphGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GKGridGraph[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGridGraph), _gKGridGraphSelGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass, position, width, height, diagonalsAllowed, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphFromID[objc.ID](_ret)
 }
 
 func (o *GKGridGraph[NodeType]) InitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position unsafe.Pointer, width int, height int, diagonalsAllowed bool, nodeClass objc.Class) *GKGridGraph[NodeType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGridGraphSelInitFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass, position, width, height, diagonalsAllowed, nodeClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGridGraphFromID[NodeType](_ret)
 }
 
@@ -103,4 +111,3 @@ func (o *GKGridGraph[NodeType]) DiagonalsAllowed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _gKGridGraphSelDiagonalsAllowed)
 	return _ret
 }
-

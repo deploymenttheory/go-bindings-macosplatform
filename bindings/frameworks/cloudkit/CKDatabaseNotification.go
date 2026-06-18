@@ -15,7 +15,7 @@ type CKDatabaseNotification struct {
 }
 
 var (
-	_clsCKDatabaseNotification = _objcClass("CKDatabaseNotification")
+	_clsCKDatabaseNotification              = _objcClass("CKDatabaseNotification")
 	_cKDatabaseNotificationSelDatabaseScope = objc.RegisterName("databaseScope")
 )
 
@@ -33,4 +33,3 @@ func (o *CKDatabaseNotification) DatabaseScope() CKDatabaseScope {
 	_ret := objc.Send[CKDatabaseScope](o.Ptr(), _cKDatabaseNotificationSelDatabaseScope)
 	return _ret
 }
-

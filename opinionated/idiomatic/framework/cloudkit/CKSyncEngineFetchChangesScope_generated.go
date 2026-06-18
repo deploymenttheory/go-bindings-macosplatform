@@ -68,4 +68,3 @@ type SyncEngineFetchChangesScopeable interface {
 }
 
 var _ SyncEngineFetchChangesScopeable = (*SyncEngineFetchChangesScope)(nil)
-

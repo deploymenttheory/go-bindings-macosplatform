@@ -13,13 +13,17 @@ import (
 
 func ABAddressBookErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "ABAddressBookErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func ABMultiValueIdentifiersErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "ABMultiValueIdentifiersErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -597,4 +601,3 @@ func KABYahooWorkLabel() uintptr {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABYahooWorkLabel")
 	return ptr
 }
-

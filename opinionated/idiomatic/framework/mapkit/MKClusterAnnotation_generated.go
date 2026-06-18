@@ -96,4 +96,3 @@ type ClusterAnnotationable interface {
 }
 
 var _ ClusterAnnotationable = (*ClusterAnnotation)(nil)
-

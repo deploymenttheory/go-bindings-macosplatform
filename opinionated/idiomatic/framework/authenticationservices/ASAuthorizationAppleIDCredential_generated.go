@@ -17,7 +17,9 @@ type AuthorizationAppleIDCredential struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationAppleIDCredential].
-func (x *AuthorizationAppleIDCredential) Unwrap() *raw.ASAuthorizationAppleIDCredential { return x.inner }
+func (x *AuthorizationAppleIDCredential) Unwrap() *raw.ASAuthorizationAppleIDCredential {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -115,4 +117,3 @@ type AuthorizationAppleIDCredentialable interface {
 }
 
 var _ AuthorizationAppleIDCredentialable = (*AuthorizationAppleIDCredential)(nil)
-

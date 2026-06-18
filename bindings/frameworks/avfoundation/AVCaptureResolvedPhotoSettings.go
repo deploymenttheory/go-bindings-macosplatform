@@ -17,10 +17,10 @@ type AVCaptureResolvedPhotoSettings struct {
 }
 
 var (
-	_clsAVCaptureResolvedPhotoSettings = _objcClass("AVCaptureResolvedPhotoSettings")
-	_aVCaptureResolvedPhotoSettingsSelUniqueID = objc.RegisterName("uniqueID")
-	_aVCaptureResolvedPhotoSettingsSelPhotoDimensions = objc.RegisterName("photoDimensions")
-	_aVCaptureResolvedPhotoSettingsSelExpectedPhotoCount = objc.RegisterName("expectedPhotoCount")
+	_clsAVCaptureResolvedPhotoSettings                                   = _objcClass("AVCaptureResolvedPhotoSettings")
+	_aVCaptureResolvedPhotoSettingsSelUniqueID                           = objc.RegisterName("uniqueID")
+	_aVCaptureResolvedPhotoSettingsSelPhotoDimensions                    = objc.RegisterName("photoDimensions")
+	_aVCaptureResolvedPhotoSettingsSelExpectedPhotoCount                 = objc.RegisterName("expectedPhotoCount")
 	_aVCaptureResolvedPhotoSettingsSelIsFastCapturePrioritizationEnabled = objc.RegisterName("isFastCapturePrioritizationEnabled")
 )
 
@@ -57,4 +57,3 @@ func (o *AVCaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bo
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureResolvedPhotoSettingsSelIsFastCapturePrioritizationEnabled)
 	return _ret
 }
-

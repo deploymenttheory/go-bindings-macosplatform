@@ -18,47 +18,47 @@ type VZVirtualMachineConfiguration struct {
 }
 
 var (
-	_clsVZVirtualMachineConfiguration = _objcClass("VZVirtualMachineConfiguration")
-	_vZVirtualMachineConfigurationSelBootLoader = objc.RegisterName("bootLoader")
-	_vZVirtualMachineConfigurationSelSetBootLoader = objc.RegisterName("setBootLoader:")
-	_vZVirtualMachineConfigurationSelMemorySize = objc.RegisterName("memorySize")
-	_vZVirtualMachineConfigurationSelSetMemorySize = objc.RegisterName("setMemorySize:")
-	_vZVirtualMachineConfigurationSelCPUCount = objc.RegisterName("CPUCount")
-	_vZVirtualMachineConfigurationSelSetCPUCount = objc.RegisterName("setCPUCount:")
-	_vZVirtualMachineConfigurationSelPlatform = objc.RegisterName("platform")
-	_vZVirtualMachineConfigurationSelSetPlatform = objc.RegisterName("setPlatform:")
-	_vZVirtualMachineConfigurationSelAudioDevices = objc.RegisterName("audioDevices")
-	_vZVirtualMachineConfigurationSelSetAudioDevices = objc.RegisterName("setAudioDevices:")
-	_vZVirtualMachineConfigurationSelConsoleDevices = objc.RegisterName("consoleDevices")
-	_vZVirtualMachineConfigurationSelSetConsoleDevices = objc.RegisterName("setConsoleDevices:")
-	_vZVirtualMachineConfigurationSelDirectorySharingDevices = objc.RegisterName("directorySharingDevices")
-	_vZVirtualMachineConfigurationSelSetDirectorySharingDevices = objc.RegisterName("setDirectorySharingDevices:")
-	_vZVirtualMachineConfigurationSelEntropyDevices = objc.RegisterName("entropyDevices")
-	_vZVirtualMachineConfigurationSelSetEntropyDevices = objc.RegisterName("setEntropyDevices:")
-	_vZVirtualMachineConfigurationSelMemoryBalloonDevices = objc.RegisterName("memoryBalloonDevices")
-	_vZVirtualMachineConfigurationSelSetMemoryBalloonDevices = objc.RegisterName("setMemoryBalloonDevices:")
-	_vZVirtualMachineConfigurationSelNetworkDevices = objc.RegisterName("networkDevices")
-	_vZVirtualMachineConfigurationSelSetNetworkDevices = objc.RegisterName("setNetworkDevices:")
-	_vZVirtualMachineConfigurationSelSerialPorts = objc.RegisterName("serialPorts")
-	_vZVirtualMachineConfigurationSelSetSerialPorts = objc.RegisterName("setSerialPorts:")
-	_vZVirtualMachineConfigurationSelSocketDevices = objc.RegisterName("socketDevices")
-	_vZVirtualMachineConfigurationSelSetSocketDevices = objc.RegisterName("setSocketDevices:")
-	_vZVirtualMachineConfigurationSelStorageDevices = objc.RegisterName("storageDevices")
-	_vZVirtualMachineConfigurationSelSetStorageDevices = objc.RegisterName("setStorageDevices:")
-	_vZVirtualMachineConfigurationSelKeyboards = objc.RegisterName("keyboards")
-	_vZVirtualMachineConfigurationSelSetKeyboards = objc.RegisterName("setKeyboards:")
-	_vZVirtualMachineConfigurationSelPointingDevices = objc.RegisterName("pointingDevices")
-	_vZVirtualMachineConfigurationSelSetPointingDevices = objc.RegisterName("setPointingDevices:")
-	_vZVirtualMachineConfigurationSelGraphicsDevices = objc.RegisterName("graphicsDevices")
-	_vZVirtualMachineConfigurationSelSetGraphicsDevices = objc.RegisterName("setGraphicsDevices:")
-	_vZVirtualMachineConfigurationSelUsbControllers = objc.RegisterName("usbControllers")
-	_vZVirtualMachineConfigurationSelSetUsbControllers = objc.RegisterName("setUsbControllers:")
-	_vZVirtualMachineConfigurationSelValidateWithError = objc.RegisterName("validateWithError:")
+	_clsVZVirtualMachineConfiguration                                    = _objcClass("VZVirtualMachineConfiguration")
+	_vZVirtualMachineConfigurationSelBootLoader                          = objc.RegisterName("bootLoader")
+	_vZVirtualMachineConfigurationSelSetBootLoader                       = objc.RegisterName("setBootLoader:")
+	_vZVirtualMachineConfigurationSelMemorySize                          = objc.RegisterName("memorySize")
+	_vZVirtualMachineConfigurationSelSetMemorySize                       = objc.RegisterName("setMemorySize:")
+	_vZVirtualMachineConfigurationSelCPUCount                            = objc.RegisterName("CPUCount")
+	_vZVirtualMachineConfigurationSelSetCPUCount                         = objc.RegisterName("setCPUCount:")
+	_vZVirtualMachineConfigurationSelPlatform                            = objc.RegisterName("platform")
+	_vZVirtualMachineConfigurationSelSetPlatform                         = objc.RegisterName("setPlatform:")
+	_vZVirtualMachineConfigurationSelAudioDevices                        = objc.RegisterName("audioDevices")
+	_vZVirtualMachineConfigurationSelSetAudioDevices                     = objc.RegisterName("setAudioDevices:")
+	_vZVirtualMachineConfigurationSelConsoleDevices                      = objc.RegisterName("consoleDevices")
+	_vZVirtualMachineConfigurationSelSetConsoleDevices                   = objc.RegisterName("setConsoleDevices:")
+	_vZVirtualMachineConfigurationSelDirectorySharingDevices             = objc.RegisterName("directorySharingDevices")
+	_vZVirtualMachineConfigurationSelSetDirectorySharingDevices          = objc.RegisterName("setDirectorySharingDevices:")
+	_vZVirtualMachineConfigurationSelEntropyDevices                      = objc.RegisterName("entropyDevices")
+	_vZVirtualMachineConfigurationSelSetEntropyDevices                   = objc.RegisterName("setEntropyDevices:")
+	_vZVirtualMachineConfigurationSelMemoryBalloonDevices                = objc.RegisterName("memoryBalloonDevices")
+	_vZVirtualMachineConfigurationSelSetMemoryBalloonDevices             = objc.RegisterName("setMemoryBalloonDevices:")
+	_vZVirtualMachineConfigurationSelNetworkDevices                      = objc.RegisterName("networkDevices")
+	_vZVirtualMachineConfigurationSelSetNetworkDevices                   = objc.RegisterName("setNetworkDevices:")
+	_vZVirtualMachineConfigurationSelSerialPorts                         = objc.RegisterName("serialPorts")
+	_vZVirtualMachineConfigurationSelSetSerialPorts                      = objc.RegisterName("setSerialPorts:")
+	_vZVirtualMachineConfigurationSelSocketDevices                       = objc.RegisterName("socketDevices")
+	_vZVirtualMachineConfigurationSelSetSocketDevices                    = objc.RegisterName("setSocketDevices:")
+	_vZVirtualMachineConfigurationSelStorageDevices                      = objc.RegisterName("storageDevices")
+	_vZVirtualMachineConfigurationSelSetStorageDevices                   = objc.RegisterName("setStorageDevices:")
+	_vZVirtualMachineConfigurationSelKeyboards                           = objc.RegisterName("keyboards")
+	_vZVirtualMachineConfigurationSelSetKeyboards                        = objc.RegisterName("setKeyboards:")
+	_vZVirtualMachineConfigurationSelPointingDevices                     = objc.RegisterName("pointingDevices")
+	_vZVirtualMachineConfigurationSelSetPointingDevices                  = objc.RegisterName("setPointingDevices:")
+	_vZVirtualMachineConfigurationSelGraphicsDevices                     = objc.RegisterName("graphicsDevices")
+	_vZVirtualMachineConfigurationSelSetGraphicsDevices                  = objc.RegisterName("setGraphicsDevices:")
+	_vZVirtualMachineConfigurationSelUsbControllers                      = objc.RegisterName("usbControllers")
+	_vZVirtualMachineConfigurationSelSetUsbControllers                   = objc.RegisterName("setUsbControllers:")
+	_vZVirtualMachineConfigurationSelValidateWithError                   = objc.RegisterName("validateWithError:")
 	_vZVirtualMachineConfigurationSelValidateSaveRestoreSupportWithError = objc.RegisterName("validateSaveRestoreSupportWithError:")
-	_vZVirtualMachineConfigurationSelMinimumAllowedMemorySize = objc.RegisterName("minimumAllowedMemorySize")
-	_vZVirtualMachineConfigurationSelMaximumAllowedMemorySize = objc.RegisterName("maximumAllowedMemorySize")
-	_vZVirtualMachineConfigurationSelMinimumAllowedCPUCount = objc.RegisterName("minimumAllowedCPUCount")
-	_vZVirtualMachineConfigurationSelMaximumAllowedCPUCount = objc.RegisterName("maximumAllowedCPUCount")
+	_vZVirtualMachineConfigurationSelMinimumAllowedMemorySize            = objc.RegisterName("minimumAllowedMemorySize")
+	_vZVirtualMachineConfigurationSelMaximumAllowedMemorySize            = objc.RegisterName("maximumAllowedMemorySize")
+	_vZVirtualMachineConfigurationSelMinimumAllowedCPUCount              = objc.RegisterName("minimumAllowedCPUCount")
+	_vZVirtualMachineConfigurationSelMaximumAllowedCPUCount              = objc.RegisterName("maximumAllowedCPUCount")
 )
 
 func VZVirtualMachineConfigurationFromID(id objc.ID) *VZVirtualMachineConfiguration {
@@ -74,7 +74,9 @@ func VZVirtualMachineConfigurationFromID(id objc.ID) *VZVirtualMachineConfigurat
 // @abstract Boot loader used when the virtual machine starts. @see VZLinuxBootLoader @see VZMacOSBootLoader
 func (o *VZVirtualMachineConfiguration) BootLoader() *VZBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelBootLoader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZBootLoaderFromID(_ret)
 }
 
@@ -105,7 +107,9 @@ func (o *VZVirtualMachineConfiguration) SetCPUCount(cPUCount uint) {
 // @abstract The hardware platform to use. @discussion Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine. @see VZGenericPlatformConfiguration @see VZMacPlatformConfiguration
 func (o *VZVirtualMachineConfiguration) Platform() *VZPlatformConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelPlatform)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZPlatformConfigurationFromID(_ret)
 }
 
@@ -116,7 +120,9 @@ func (o *VZVirtualMachineConfiguration) SetPlatform(platform *VZPlatformConfigur
 // @abstract List of audio devices. Empty by default. @see VZVirtioSoundDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) AudioDevices() *foundation.NSArray[*VZAudioDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelAudioDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZAudioDeviceConfiguration](_ret)
 }
 
@@ -127,7 +133,9 @@ func (o *VZVirtualMachineConfiguration) SetAudioDevices(audioDevices *foundation
 // @abstract List of console devices. Empty by default. @see VZVirtioConsoleDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) ConsoleDevices() *foundation.NSArray[*VZConsoleDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelConsoleDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZConsoleDeviceConfiguration](_ret)
 }
 
@@ -138,7 +146,9 @@ func (o *VZVirtualMachineConfiguration) SetConsoleDevices(consoleDevices *founda
 // @abstract List of directory sharing devices. Empty by default. @see VZVirtioFileSystemDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) DirectorySharingDevices() *foundation.NSArray[*VZDirectorySharingDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelDirectorySharingDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZDirectorySharingDeviceConfiguration](_ret)
 }
 
@@ -149,7 +159,9 @@ func (o *VZVirtualMachineConfiguration) SetDirectorySharingDevices(directoryShar
 // @abstract List of entropy devices. Empty by default. @see VZVirtioEntropyDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) EntropyDevices() *foundation.NSArray[*VZEntropyDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelEntropyDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZEntropyDeviceConfiguration](_ret)
 }
 
@@ -160,7 +172,9 @@ func (o *VZVirtualMachineConfiguration) SetEntropyDevices(entropyDevices *founda
 // @abstract List of memory balloon devices. Empty by default. @see VZVirtioTraditionalMemoryBalloonDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) MemoryBalloonDevices() *foundation.NSArray[*VZMemoryBalloonDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelMemoryBalloonDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZMemoryBalloonDeviceConfiguration](_ret)
 }
 
@@ -171,7 +185,9 @@ func (o *VZVirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDev
 // @abstract List of network adapters. Empty by default. @see VZVirtioNetworkDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) NetworkDevices() *foundation.NSArray[*VZNetworkDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelNetworkDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZNetworkDeviceConfiguration](_ret)
 }
 
@@ -182,7 +198,9 @@ func (o *VZVirtualMachineConfiguration) SetNetworkDevices(networkDevices *founda
 // @abstract List of serial ports. Empty by default. @see VZVirtioConsoleDeviceSerialPortConfiguration
 func (o *VZVirtualMachineConfiguration) SerialPorts() *foundation.NSArray[*VZSerialPortConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelSerialPorts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZSerialPortConfiguration](_ret)
 }
 
@@ -193,7 +211,9 @@ func (o *VZVirtualMachineConfiguration) SetSerialPorts(serialPorts *foundation.N
 // @abstract List of socket devices. Empty by default. @see VZVirtioSocketDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) SocketDevices() *foundation.NSArray[*VZSocketDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelSocketDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZSocketDeviceConfiguration](_ret)
 }
 
@@ -204,7 +224,9 @@ func (o *VZVirtualMachineConfiguration) SetSocketDevices(socketDevices *foundati
 // @abstract List of disk devices. Empty by default. @see VZNVMExpressControllerDeviceConfiguration @see VZUSBMassStorageDeviceConfiguration @see VZVirtioBlockDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) StorageDevices() *foundation.NSArray[*VZStorageDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelStorageDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZStorageDeviceConfiguration](_ret)
 }
 
@@ -215,7 +237,9 @@ func (o *VZVirtualMachineConfiguration) SetStorageDevices(storageDevices *founda
 // @abstract List of keyboards. Empty by default. @see VZUSBKeyboardConfiguration @see VZMacKeyboardConfiguration
 func (o *VZVirtualMachineConfiguration) Keyboards() *foundation.NSArray[*VZKeyboardConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelKeyboards)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZKeyboardConfiguration](_ret)
 }
 
@@ -226,7 +250,9 @@ func (o *VZVirtualMachineConfiguration) SetKeyboards(keyboards *foundation.NSArr
 // @abstract List of pointing devices. Empty by default. @see VZUSBScreenCoordinatePointingDeviceConfiguration @see VZMacTrackpadConfiguration
 func (o *VZVirtualMachineConfiguration) PointingDevices() *foundation.NSArray[*VZPointingDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelPointingDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZPointingDeviceConfiguration](_ret)
 }
 
@@ -237,7 +263,9 @@ func (o *VZVirtualMachineConfiguration) SetPointingDevices(pointingDevices *foun
 // @abstract List of graphics devices. Empty by default. @see VZMacGraphicsDeviceConfiguration
 func (o *VZVirtualMachineConfiguration) GraphicsDevices() *foundation.NSArray[*VZGraphicsDeviceConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelGraphicsDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZGraphicsDeviceConfiguration](_ret)
 }
 
@@ -248,7 +276,9 @@ func (o *VZVirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices *foun
 // @abstract List of USB Controllers. Empty by default. @discussion This list represents a set of USB controllers that the virtual machine will start with. For each entry in this list, there will be a corresponding runtime object created in VZVirtualMachine.usbControllers property. @see VZUSBControllerConfiguration
 func (o *VZVirtualMachineConfiguration) UsbControllers() *foundation.NSArray[*VZUSBControllerConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtualMachineConfigurationSelUsbControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZUSBControllerConfiguration](_ret)
 }
 
@@ -299,4 +329,3 @@ func VZVirtualMachineConfigurationMaximumAllowedCPUCount() uint {
 	_ret := objc.Send[uint](objc.ID(_clsVZVirtualMachineConfiguration), _vZVirtualMachineConfigurationSelMaximumAllowedCPUCount)
 	return _ret
 }
-

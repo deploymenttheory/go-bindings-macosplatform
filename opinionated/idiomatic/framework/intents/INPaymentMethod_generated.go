@@ -80,4 +80,3 @@ type PaymentMethodable interface {
 }
 
 var _ PaymentMethodable = (*PaymentMethod)(nil)
-

@@ -16,7 +16,9 @@ type MTRDishwasherModeClusterChangeToModeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDishwasherModeClusterChangeToModeParams].
-func (x *MTRDishwasherModeClusterChangeToModeParams) Unwrap() *raw.MTRDishwasherModeClusterChangeToModeParams { return x.inner }
+func (x *MTRDishwasherModeClusterChangeToModeParams) Unwrap() *raw.MTRDishwasherModeClusterChangeToModeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRDishwasherModeClusterChangeToModeParamsable interface {
 }
 
 var _ MTRDishwasherModeClusterChangeToModeParamsable = (*MTRDishwasherModeClusterChangeToModeParams)(nil)
-

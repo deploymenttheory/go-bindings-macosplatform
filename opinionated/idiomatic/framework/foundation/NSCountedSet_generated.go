@@ -75,4 +75,3 @@ type CountedSetable interface {
 }
 
 var _ CountedSetable = (*CountedSet)(nil)
-

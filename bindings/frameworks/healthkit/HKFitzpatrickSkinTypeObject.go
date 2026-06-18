@@ -16,7 +16,7 @@ type HKFitzpatrickSkinTypeObject struct {
 }
 
 var (
-	_clsHKFitzpatrickSkinTypeObject = _objcClass("HKFitzpatrickSkinTypeObject")
+	_clsHKFitzpatrickSkinTypeObject         = _objcClass("HKFitzpatrickSkinTypeObject")
 	_hKFitzpatrickSkinTypeObjectSelSkinType = objc.RegisterName("skinType")
 )
 
@@ -34,4 +34,3 @@ func (o *HKFitzpatrickSkinTypeObject) SkinType() HKFitzpatrickSkinType {
 	_ret := objc.Send[HKFitzpatrickSkinType](o.Ptr(), _hKFitzpatrickSkinTypeObjectSelSkinType)
 	return _ret
 }
-

@@ -17,9 +17,9 @@ type CKSyncEngineDidFetchRecordZoneChangesEvent struct {
 }
 
 var (
-	_clsCKSyncEngineDidFetchRecordZoneChangesEvent = _objcClass("CKSyncEngineDidFetchRecordZoneChangesEvent")
+	_clsCKSyncEngineDidFetchRecordZoneChangesEvent       = _objcClass("CKSyncEngineDidFetchRecordZoneChangesEvent")
 	_cKSyncEngineDidFetchRecordZoneChangesEventSelZoneID = objc.RegisterName("zoneID")
-	_cKSyncEngineDidFetchRecordZoneChangesEventSelError = objc.RegisterName("error")
+	_cKSyncEngineDidFetchRecordZoneChangesEventSelError  = objc.RegisterName("error")
 )
 
 func CKSyncEngineDidFetchRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngineDidFetchRecordZoneChangesEvent {
@@ -35,7 +35,9 @@ func CKSyncEngineDidFetchRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngineD
 // The associated record zone's unique identifier.
 func (o *CKSyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineDidFetchRecordZoneChangesEventSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
@@ -44,4 +46,3 @@ func (o *CKSyncEngineDidFetchRecordZoneChangesEvent) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKSyncEngineDidFetchRecordZoneChangesEventSelError)
 	return _ret
 }
-

@@ -16,16 +16,16 @@ type VTTemporalNoiseFilterParameters struct {
 }
 
 var (
-	_clsVTTemporalNoiseFilterParameters = _objcClass("VTTemporalNoiseFilterParameters")
+	_clsVTTemporalNoiseFilterParameters                                                                                          = _objcClass("VTTemporalNoiseFilterParameters")
 	_vTTemporalNoiseFilterParametersSelInitWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity = objc.RegisterName("initWithSourceFrame:nextFrames:previousFrames:destinationFrame:filterStrength:hasDiscontinuity:")
-	_vTTemporalNoiseFilterParametersSelSourceFrame = objc.RegisterName("sourceFrame")
-	_vTTemporalNoiseFilterParametersSelNextFrames = objc.RegisterName("nextFrames")
-	_vTTemporalNoiseFilterParametersSelPreviousFrames = objc.RegisterName("previousFrames")
-	_vTTemporalNoiseFilterParametersSelFilterStrength = objc.RegisterName("filterStrength")
-	_vTTemporalNoiseFilterParametersSelSetFilterStrength = objc.RegisterName("setFilterStrength:")
-	_vTTemporalNoiseFilterParametersSelHasDiscontinuity = objc.RegisterName("hasDiscontinuity")
-	_vTTemporalNoiseFilterParametersSelSetHasDiscontinuity = objc.RegisterName("setHasDiscontinuity:")
-	_vTTemporalNoiseFilterParametersSelDestinationFrame = objc.RegisterName("destinationFrame")
+	_vTTemporalNoiseFilterParametersSelSourceFrame                                                                               = objc.RegisterName("sourceFrame")
+	_vTTemporalNoiseFilterParametersSelNextFrames                                                                                = objc.RegisterName("nextFrames")
+	_vTTemporalNoiseFilterParametersSelPreviousFrames                                                                            = objc.RegisterName("previousFrames")
+	_vTTemporalNoiseFilterParametersSelFilterStrength                                                                            = objc.RegisterName("filterStrength")
+	_vTTemporalNoiseFilterParametersSelSetFilterStrength                                                                         = objc.RegisterName("setFilterStrength:")
+	_vTTemporalNoiseFilterParametersSelHasDiscontinuity                                                                          = objc.RegisterName("hasDiscontinuity")
+	_vTTemporalNoiseFilterParametersSelSetHasDiscontinuity                                                                       = objc.RegisterName("setHasDiscontinuity:")
+	_vTTemporalNoiseFilterParametersSelDestinationFrame                                                                          = objc.RegisterName("destinationFrame")
 )
 
 func VTTemporalNoiseFilterParametersFromID(id objc.ID) *VTTemporalNoiseFilterParameters {
@@ -38,31 +38,39 @@ func VTTemporalNoiseFilterParametersFromID(id objc.ID) *VTTemporalNoiseFilterPar
 	return o
 }
 
-// Creates a new `VTTemporalNoiseFilterParameters` object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrames: Future reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by ``VTTemporalNoiseFilterConfiguration/nextFrameCount`` property. - previousFrames: Past reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by ``VTTemporalNoiseFilterConfiguration/previousFrameCount`` property. - destinationFrame: User-allocated pixel buffer that receives the output frame. The pixel format of `destinationFrame` must match with that of the `sourceFrame`. - filterStrength: Strength of the noise-filtering to use. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame. - hasDiscontinuity: Marks sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+// Creates a new `VTTemporalNoiseFilterParameters` object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrames: Future reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/nextFrameCount“ property. - previousFrames: Past reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/previousFrameCount“ property. - destinationFrame: User-allocated pixel buffer that receives the output frame. The pixel format of `destinationFrame` must match with that of the `sourceFrame`. - filterStrength: Strength of the noise-filtering to use. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame. - hasDiscontinuity: Marks sequence discontinuity, forcing the processor to reset prior to processing the source frame.
 func (o *VTTemporalNoiseFilterParameters) InitWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity(sourceFrame *VTFrameProcessorFrame, nextFrames *foundation.NSArray[*VTFrameProcessorFrame], previousFrames *foundation.NSArray[*VTFrameProcessorFrame], destinationFrame *VTFrameProcessorFrame, filterStrength float32, hasDiscontinuity uint8) *VTTemporalNoiseFilterParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelInitWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity, sourceFrame.Ptr(), nextFrames.Ptr(), previousFrames.Ptr(), destinationFrame.Ptr(), filterStrength, hasDiscontinuity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTTemporalNoiseFilterParametersFromID(_ret)
 }
 
 // Current source frame; must be non `nil`.
 func (o *VTTemporalNoiseFilterParameters) SourceFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // Future reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `nextFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
 func (o *VTTemporalNoiseFilterParameters) NextFrames() *foundation.NSArray[*VTFrameProcessorFrame] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelNextFrames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VTFrameProcessorFrame](_ret)
 }
 
 // Past reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `previousFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
 func (o *VTTemporalNoiseFilterParameters) PreviousFrames() *foundation.NSArray[*VTFrameProcessorFrame] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelPreviousFrames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VTFrameProcessorFrame](_ret)
 }
 
@@ -89,7 +97,8 @@ func (o *VTTemporalNoiseFilterParameters) SetHasDiscontinuity(hasDiscontinuity b
 // Destination frame that contains a user-allocated pixel buffer that receives the output frame.
 func (o *VTTemporalNoiseFilterParameters) DestinationFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTTemporalNoiseFilterParametersSelDestinationFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
-

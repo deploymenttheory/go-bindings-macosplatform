@@ -8,204 +8,204 @@ import (
 )
 
 type CFAllocatorContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Allocate unsafe.Pointer
-	Reallocate unsafe.Pointer
-	Deallocate unsafe.Pointer
-	PreferredSize unsafe.Pointer
+	Allocate        unsafe.Pointer
+	Reallocate      unsafe.Pointer
+	Deallocate      unsafe.Pointer
+	PreferredSize   unsafe.Pointer
 }
 
 type CFArrayCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
+	Equal           unsafe.Pointer
 }
 
 type CFBagCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
-	Hash unsafe.Pointer
+	Equal           unsafe.Pointer
+	Hash            unsafe.Pointer
 }
 
 // @typedef CFBinaryHeapCallBacks Structure containing the callbacks for values of a CFBinaryHeap. @field version The version number of the structure type being passed in as a parameter to the CFBinaryHeap creation functions. This structure is version 0. @field retain The callback used to add a retain for the binary heap on values as they are put into the binary heap. This callback returns the value to use as the value in the binary heap, which is usually the value parameter passed to this callback, but may be a different value if a different value should be added to the binary heap. The binary heap's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the binary heap from values as they are removed from the binary heap. The binary heap's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the binary heap. This is used by the CFCopyDescription() function. @field compare The callback used to compare values in the binary heap for equality in some operations.
 type CFBinaryHeapCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Compare unsafe.Pointer
+	Compare         unsafe.Pointer
 }
 
 type CFBinaryHeapCompareContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFDictionaryKeyCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
-	Hash unsafe.Pointer
+	Equal           unsafe.Pointer
+	Hash            unsafe.Pointer
 }
 
 // @typedef CFDictionaryValueCallBacks Structure containing the callbacks for values of a CFDictionary. @field version The version number of the structure type being passed in as a parameter to the CFDictionary creation functions. This structure is version 0. @field retain The callback used to add a retain for the dictionary on values as they are put into the dictionary. This callback returns the value to use as the value in the dictionary, which is usually the value parameter passed to this callback, but may be a different value if a different value should be added to the dictionary. The dictionary's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the dictionary from values as they are removed from the dictionary. The dictionary's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the dictionary. This is used by the CFCopyDescription() function. @field equal The callback used to compare values in the dictionary for equality in some operations.
 type CFDictionaryValueCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
+	Equal           unsafe.Pointer
 }
 
 type CFFileDescriptorContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFGregorianDate struct {
-	Year int
-	Month int8
-	Day int8
-	Hour int8
+	Year   int
+	Month  int8
+	Day    int8
+	Hour   int8
 	Minute int8
 	Second float64
 }
 
 // Deprecated: Use CFCalendar or NSCalendar API instead
 type CFGregorianUnits struct {
-	Years int
-	Months int
-	Days int
-	Hours int
+	Years   int
+	Months  int
+	Days    int
+	Hours   int
 	Minutes int
 	Seconds float64
 }
 
 type CFMachPortContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFMessagePortContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFRange struct {
 	Location int
-	Length int
+	Length   int
 }
 
 type CFRunLoopObserverContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFRunLoopSourceContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
-	Hash unsafe.Pointer
-	Schedule unsafe.Pointer
-	Cancel unsafe.Pointer
-	Perform unsafe.Pointer
+	Equal           unsafe.Pointer
+	Hash            unsafe.Pointer
+	Schedule        unsafe.Pointer
+	Cancel          unsafe.Pointer
+	Perform         unsafe.Pointer
 }
 
 type CFRunLoopSourceContext1 struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
-	Hash unsafe.Pointer
-	GetPort unsafe.Pointer
-	Perform unsafe.Pointer
+	Equal           unsafe.Pointer
+	Hash            unsafe.Pointer
+	GetPort         unsafe.Pointer
+	Perform         unsafe.Pointer
 }
 
 type CFRunLoopTimerContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 // @typedef CFSetCallBacks Structure containing the callbacks of a CFSet. @field version The version number of the structure type being passed in as a parameter to the CFSet creation functions. This structure is version 0. @field retain The callback used to add a retain for the set on values as they are put into the set. This callback returns the value to store in the set, which is usually the value parameter passed to this callback, but may be a different value if a different value should be stored in the set. The set's allocator is passed as the first argument. @field release The callback used to remove a retain previously added for the set from values as they are removed from the set. The set's allocator is passed as the first argument. @field copyDescription The callback used to create a descriptive string representation of each value in the set. This is used by the CFCopyDescription() function. @field equal The callback used to compare values in the set for equality for some operations. @field hash The callback used to compare values in the set for uniqueness for some operations.
 type CFSetCallBacks struct {
-	Version int
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
-	Equal unsafe.Pointer
-	Hash unsafe.Pointer
+	Equal           unsafe.Pointer
+	Hash            unsafe.Pointer
 }
 
 type CFSocketContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFSocketSignature struct {
 	ProtocolFamily int
-	SocketType int
-	Protocol int
-	Address unsafe.Pointer
+	SocketType     int
+	Protocol       int
+	Address        unsafe.Pointer
 }
 
 type CFStreamClientContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFStreamError struct {
 	Domain int
-	Error int
+	Error  int
 }
 
 type CFStringInlineBuffer struct {
-	Buffer [64]uint16
-	TheString unsafe.Pointer
+	Buffer              [64]uint16
+	TheString           unsafe.Pointer
 	DirectUniCharBuffer *uint16
 	DirectCStringBuffer string
-	RangeToBuffer CFRange
-	BufferedRangeStart int
-	BufferedRangeEnd int
+	RangeToBuffer       CFRange
+	BufferedRangeStart  int
+	BufferedRangeEnd    int
 }
 
 type CFSwappedFloat32 struct {
@@ -218,24 +218,24 @@ type CFSwappedFloat64 struct {
 
 // @typedef CFTreeContext Structure containing user-specified data and callbacks for a CFTree. @field version The version number of the structure type being passed in as a parameter to the CFTree creation function. This structure is version 0. @field info A C pointer to a user-specified block of data. @field retain The callback used to add a retain for the info field. If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined.  The value may be NULL. @field release The calllback used to remove a retain previously added for the info field.  If this parameter is not a pointer to a function of the correct prototype, the behavior is undefined. The value may be NULL. @field copyDescription The callback used to provide a description of the info field.
 type CFTreeContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type CFUUIDBytes struct {
-	Byte0 uint8
-	Byte1 uint8
-	Byte2 uint8
-	Byte3 uint8
-	Byte4 uint8
-	Byte5 uint8
-	Byte6 uint8
-	Byte7 uint8
-	Byte8 uint8
-	Byte9 uint8
+	Byte0  uint8
+	Byte1  uint8
+	Byte2  uint8
+	Byte3  uint8
+	Byte4  uint8
+	Byte5  uint8
+	Byte6  uint8
+	Byte7  uint8
+	Byte8  uint8
+	Byte9  uint8
 	Byte10 uint8
 	Byte11 uint8
 	Byte12 uint8
@@ -246,18 +246,18 @@ type CFUUIDBytes struct {
 
 type CFXMLAttributeDeclarationInfo struct {
 	AttributeName unsafe.Pointer
-	TypeString unsafe.Pointer
+	TypeString    unsafe.Pointer
 	DefaultString unsafe.Pointer
 }
 
 type CFXMLAttributeListDeclarationInfo struct {
 	NumberOfAttributes int
-	Attributes *CFXMLAttributeDeclarationInfo
+	Attributes         *CFXMLAttributeDeclarationInfo
 }
 
 type CFXMLDocumentInfo struct {
 	SourceURL unsafe.Pointer
-	Encoding uint
+	Encoding  uint
 }
 
 type CFXMLDocumentTypeInfo struct {
@@ -265,9 +265,9 @@ type CFXMLDocumentTypeInfo struct {
 }
 
 type CFXMLElementInfo struct {
-	Attributes unsafe.Pointer
+	Attributes     unsafe.Pointer
 	AttributeOrder unsafe.Pointer
-	IsEmpty uint8
+	IsEmpty        uint8
 }
 
 type CFXMLElementTypeDeclarationInfo struct {
@@ -275,10 +275,10 @@ type CFXMLElementTypeDeclarationInfo struct {
 }
 
 type CFXMLEntityInfo struct {
-	EntityType CFXMLEntityTypeCode
+	EntityType      CFXMLEntityTypeCode
 	ReplacementText unsafe.Pointer
-	EntityID CFXMLExternalID
-	NotationName unsafe.Pointer
+	EntityID        CFXMLExternalID
+	NotationName    unsafe.Pointer
 }
 
 type CFXMLEntityReferenceInfo struct {
@@ -295,19 +295,19 @@ type CFXMLNotationInfo struct {
 }
 
 type CFXMLParserCallBacks struct {
-	Version int
-	CreateXMLStructure unsafe.Pointer
-	AddChild unsafe.Pointer
-	EndXMLStructure unsafe.Pointer
+	Version               int
+	CreateXMLStructure    unsafe.Pointer
+	AddChild              unsafe.Pointer
+	EndXMLStructure       unsafe.Pointer
 	ResolveExternalEntity unsafe.Pointer
-	HandleError unsafe.Pointer
+	HandleError           unsafe.Pointer
 }
 
 type CFXMLParserContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
@@ -316,19 +316,19 @@ type CFXMLProcessingInstructionInfo struct {
 }
 
 type CGAffineTransform struct {
-	A float64
-	B float64
-	C float64
-	D float64
+	A  float64
+	B  float64
+	C  float64
+	D  float64
 	Tx float64
 	Ty float64
 }
 
 type CGAffineTransformComponents struct {
-	Scale CGSize
+	Scale           CGSize
 	HorizontalShear float64
-	Rotation float64
-	Translation CGVector
+	Rotation        float64
+	Translation     CGVector
 }
 
 type CGPoint struct {
@@ -338,11 +338,11 @@ type CGPoint struct {
 
 type CGRect struct {
 	Origin CGPoint
-	Size CGSize
+	Size   CGSize
 }
 
 type CGSize struct {
-	Width float64
+	Width  float64
 	Height float64
 }
 
@@ -537,4 +537,3 @@ type CFXMLParser struct{}
 // C struct: _malloc_zone_t
 // MallocZoneT is an opaque type.
 type MallocZoneT struct{}
-

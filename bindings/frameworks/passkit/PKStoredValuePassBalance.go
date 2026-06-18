@@ -16,12 +16,12 @@ type PKStoredValuePassBalance struct {
 }
 
 var (
-	_clsPKStoredValuePassBalance = _objcClass("PKStoredValuePassBalance")
+	_clsPKStoredValuePassBalance                 = _objcClass("PKStoredValuePassBalance")
 	_pKStoredValuePassBalanceSelIsEqualToBalance = objc.RegisterName("isEqualToBalance:")
-	_pKStoredValuePassBalanceSelAmount = objc.RegisterName("amount")
-	_pKStoredValuePassBalanceSelCurrencyCode = objc.RegisterName("currencyCode")
-	_pKStoredValuePassBalanceSelBalanceType = objc.RegisterName("balanceType")
-	_pKStoredValuePassBalanceSelExpiryDate = objc.RegisterName("expiryDate")
+	_pKStoredValuePassBalanceSelAmount           = objc.RegisterName("amount")
+	_pKStoredValuePassBalanceSelCurrencyCode     = objc.RegisterName("currencyCode")
+	_pKStoredValuePassBalanceSelBalanceType      = objc.RegisterName("balanceType")
+	_pKStoredValuePassBalanceSelExpiryDate       = objc.RegisterName("expiryDate")
 )
 
 func PKStoredValuePassBalanceFromID(id objc.ID) *PKStoredValuePassBalance {
@@ -41,25 +41,32 @@ func (o *PKStoredValuePassBalance) IsEqualToBalance(balance *PKStoredValuePassBa
 
 func (o *PKStoredValuePassBalance) Amount() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassBalanceSelAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 func (o *PKStoredValuePassBalance) CurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassBalanceSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKStoredValuePassBalance) BalanceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassBalanceSelBalanceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKStoredValuePassBalance) ExpiryDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassBalanceSelExpiryDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

@@ -18,26 +18,26 @@ type CalCalendarStore struct {
 }
 
 var (
-	_clsCalCalendarStore = _objcClass("CalCalendarStore")
-	_calCalendarStoreSelDefaultCalendarStore = objc.RegisterName("defaultCalendarStore")
-	_calCalendarStoreSelCalendars = objc.RegisterName("calendars")
-	_calCalendarStoreSelCalendarWithUID = objc.RegisterName("calendarWithUID:")
-	_calCalendarStoreSelSaveCalendarError = objc.RegisterName("saveCalendar:error:")
-	_calCalendarStoreSelRemoveCalendarError = objc.RegisterName("removeCalendar:error:")
-	_calCalendarStoreSelEventsWithPredicate = objc.RegisterName("eventsWithPredicate:")
-	_calCalendarStoreSelEventWithUIDOccurrence = objc.RegisterName("eventWithUID:occurrence:")
-	_calCalendarStoreSelTasksWithPredicate = objc.RegisterName("tasksWithPredicate:")
-	_calCalendarStoreSelTaskWithUID = objc.RegisterName("taskWithUID:")
-	_calCalendarStoreSelSaveEventSpanError = objc.RegisterName("saveEvent:span:error:")
-	_calCalendarStoreSelRemoveEventSpanError = objc.RegisterName("removeEvent:span:error:")
-	_calCalendarStoreSelSaveTaskError = objc.RegisterName("saveTask:error:")
-	_calCalendarStoreSelRemoveTaskError = objc.RegisterName("removeTask:error:")
-	_calCalendarStoreSelEventPredicateWithStartDateEndDateCalendars = objc.RegisterName("eventPredicateWithStartDate:endDate:calendars:")
-	_calCalendarStoreSelEventPredicateWithStartDateEndDateUIDCalendars = objc.RegisterName("eventPredicateWithStartDate:endDate:UID:calendars:")
-	_calCalendarStoreSelTaskPredicateWithCalendars = objc.RegisterName("taskPredicateWithCalendars:")
-	_calCalendarStoreSelTaskPredicateWithUncompletedTasks = objc.RegisterName("taskPredicateWithUncompletedTasks:")
+	_clsCalCalendarStore                                                    = _objcClass("CalCalendarStore")
+	_calCalendarStoreSelDefaultCalendarStore                                = objc.RegisterName("defaultCalendarStore")
+	_calCalendarStoreSelCalendars                                           = objc.RegisterName("calendars")
+	_calCalendarStoreSelCalendarWithUID                                     = objc.RegisterName("calendarWithUID:")
+	_calCalendarStoreSelSaveCalendarError                                   = objc.RegisterName("saveCalendar:error:")
+	_calCalendarStoreSelRemoveCalendarError                                 = objc.RegisterName("removeCalendar:error:")
+	_calCalendarStoreSelEventsWithPredicate                                 = objc.RegisterName("eventsWithPredicate:")
+	_calCalendarStoreSelEventWithUIDOccurrence                              = objc.RegisterName("eventWithUID:occurrence:")
+	_calCalendarStoreSelTasksWithPredicate                                  = objc.RegisterName("tasksWithPredicate:")
+	_calCalendarStoreSelTaskWithUID                                         = objc.RegisterName("taskWithUID:")
+	_calCalendarStoreSelSaveEventSpanError                                  = objc.RegisterName("saveEvent:span:error:")
+	_calCalendarStoreSelRemoveEventSpanError                                = objc.RegisterName("removeEvent:span:error:")
+	_calCalendarStoreSelSaveTaskError                                       = objc.RegisterName("saveTask:error:")
+	_calCalendarStoreSelRemoveTaskError                                     = objc.RegisterName("removeTask:error:")
+	_calCalendarStoreSelEventPredicateWithStartDateEndDateCalendars         = objc.RegisterName("eventPredicateWithStartDate:endDate:calendars:")
+	_calCalendarStoreSelEventPredicateWithStartDateEndDateUIDCalendars      = objc.RegisterName("eventPredicateWithStartDate:endDate:UID:calendars:")
+	_calCalendarStoreSelTaskPredicateWithCalendars                          = objc.RegisterName("taskPredicateWithCalendars:")
+	_calCalendarStoreSelTaskPredicateWithUncompletedTasks                   = objc.RegisterName("taskPredicateWithUncompletedTasks:")
 	_calCalendarStoreSelTaskPredicateWithUncompletedTasksDueBeforeCalendars = objc.RegisterName("taskPredicateWithUncompletedTasksDueBefore:calendars:")
-	_calCalendarStoreSelTaskPredicateWithTasksCompletedSinceCalendars = objc.RegisterName("taskPredicateWithTasksCompletedSince:calendars:")
+	_calCalendarStoreSelTaskPredicateWithTasksCompletedSinceCalendars       = objc.RegisterName("taskPredicateWithTasksCompletedSince:calendars:")
 )
 
 func CalCalendarStoreFromID(id objc.ID) *CalCalendarStore {
@@ -53,7 +53,9 @@ func CalCalendarStoreFromID(id objc.ID) *CalCalendarStore {
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreDefaultCalendarStore() *CalCalendarStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelDefaultCalendarStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalCalendarStoreFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *CalCalendarStore) Calendars() *foundation.NSArray[objc.ID] {
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarStore) CalendarWithUID(uID *foundation.NSString) *CalCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarStoreSelCalendarWithUID, uID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalCalendarFromID(_ret)
 }
 
@@ -99,7 +103,9 @@ func (o *CalCalendarStore) EventsWithPredicate(predicate *foundation.NSPredicate
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarStore) EventWithUIDOccurrence(uid *foundation.NSString, date *foundation.NSDate) *CalEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarStoreSelEventWithUIDOccurrence, uid.Ptr(), date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalEventFromID(_ret)
 }
 
@@ -112,7 +118,9 @@ func (o *CalCalendarStore) TasksWithPredicate(predicate *foundation.NSPredicate)
 // Deprecated: since macOS 10.8.
 func (o *CalCalendarStore) TaskWithUID(uid *foundation.NSString) *CalTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calCalendarStoreSelTaskWithUID, uid.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalTaskFromID(_ret)
 }
 
@@ -159,42 +167,53 @@ func (o *CalCalendarStore) RemoveTaskError(task *CalTask) (bool, error) {
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreEventPredicateWithStartDateEndDateCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelEventPredicateWithStartDateEndDateCalendars, startDate.Ptr(), endDate.Ptr(), calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreEventPredicateWithStartDateEndDateUIDCalendars(startDate *foundation.NSDate, endDate *foundation.NSDate, uID *foundation.NSString, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelEventPredicateWithStartDateEndDateUIDCalendars, startDate.Ptr(), endDate.Ptr(), uID.Ptr(), calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreTaskPredicateWithCalendars(calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelTaskPredicateWithCalendars, calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreTaskPredicateWithUncompletedTasks(calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelTaskPredicateWithUncompletedTasks, calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreTaskPredicateWithUncompletedTasksDueBeforeCalendars(dueDate *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelTaskPredicateWithUncompletedTasksDueBeforeCalendars, dueDate.Ptr(), calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func CalCalendarStoreTaskPredicateWithTasksCompletedSinceCalendars(completedSince *foundation.NSDate, calendars *foundation.NSArray[objc.ID]) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCalCalendarStore), _calCalendarStoreSelTaskPredicateWithTasksCompletedSinceCalendars, completedSince.Ptr(), calendars)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
-

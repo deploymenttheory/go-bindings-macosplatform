@@ -16,9 +16,9 @@ type MERAWProcessingSubGroupParameter struct {
 }
 
 var (
-	_clsMERAWProcessingSubGroupParameter = _objcClass("MERAWProcessingSubGroupParameter")
+	_clsMERAWProcessingSubGroupParameter                                  = _objcClass("MERAWProcessingSubGroupParameter")
 	_mERAWProcessingSubGroupParameterSelInitWithNameDescriptionParameters = objc.RegisterName("initWithName:description:parameters:")
-	_mERAWProcessingSubGroupParameterSelSubGroupParameters = objc.RegisterName("subGroupParameters")
+	_mERAWProcessingSubGroupParameterSelSubGroupParameters                = objc.RegisterName("subGroupParameters")
 )
 
 func MERAWProcessingSubGroupParameterFromID(id objc.ID) *MERAWProcessingSubGroupParameter {
@@ -33,13 +33,16 @@ func MERAWProcessingSubGroupParameterFromID(id objc.ID) *MERAWProcessingSubGroup
 
 func (o *MERAWProcessingSubGroupParameter) InitWithNameDescriptionParameters(name *foundation.NSString, description *foundation.NSString, parameters *foundation.NSArray[*MERAWProcessingParameter]) *MERAWProcessingSubGroupParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingSubGroupParameterSelInitWithNameDescriptionParameters, name.Ptr(), description.Ptr(), parameters.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MERAWProcessingSubGroupParameterFromID(_ret)
 }
 
 func (o *MERAWProcessingSubGroupParameter) SubGroupParameters() *foundation.NSArray[*MERAWProcessingParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingSubGroupParameterSelSubGroupParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MERAWProcessingParameter](_ret)
 }
-

@@ -16,15 +16,15 @@ type PKIdentityDocumentMetadata struct {
 }
 
 var (
-	_clsPKIdentityDocumentMetadata = _objcClass("PKIdentityDocumentMetadata")
-	_pKIdentityDocumentMetadataSelCredentialIdentifier = objc.RegisterName("credentialIdentifier")
-	_pKIdentityDocumentMetadataSelSharingInstanceIdentifier = objc.RegisterName("sharingInstanceIdentifier")
-	_pKIdentityDocumentMetadataSelCardTemplateIdentifier = objc.RegisterName("cardTemplateIdentifier")
-	_pKIdentityDocumentMetadataSelCardConfigurationIdentifier = objc.RegisterName("cardConfigurationIdentifier")
-	_pKIdentityDocumentMetadataSelServerEnvironmentIdentifier = objc.RegisterName("serverEnvironmentIdentifier")
+	_clsPKIdentityDocumentMetadata                               = _objcClass("PKIdentityDocumentMetadata")
+	_pKIdentityDocumentMetadataSelCredentialIdentifier           = objc.RegisterName("credentialIdentifier")
+	_pKIdentityDocumentMetadataSelSharingInstanceIdentifier      = objc.RegisterName("sharingInstanceIdentifier")
+	_pKIdentityDocumentMetadataSelCardTemplateIdentifier         = objc.RegisterName("cardTemplateIdentifier")
+	_pKIdentityDocumentMetadataSelCardConfigurationIdentifier    = objc.RegisterName("cardConfigurationIdentifier")
+	_pKIdentityDocumentMetadataSelServerEnvironmentIdentifier    = objc.RegisterName("serverEnvironmentIdentifier")
 	_pKIdentityDocumentMetadataSelSetServerEnvironmentIdentifier = objc.RegisterName("setServerEnvironmentIdentifier:")
-	_pKIdentityDocumentMetadataSelIssuingCountryCode = objc.RegisterName("issuingCountryCode")
-	_pKIdentityDocumentMetadataSelDocumentType = objc.RegisterName("documentType")
+	_pKIdentityDocumentMetadataSelIssuingCountryCode             = objc.RegisterName("issuingCountryCode")
+	_pKIdentityDocumentMetadataSelDocumentType                   = objc.RegisterName("documentType")
 )
 
 func PKIdentityDocumentMetadataFromID(id objc.ID) *PKIdentityDocumentMetadata {
@@ -40,35 +40,45 @@ func PKIdentityDocumentMetadataFromID(id objc.ID) *PKIdentityDocumentMetadata {
 // credentialIdentifier: A unique identifier for provisioning credential data.
 func (o *PKIdentityDocumentMetadata) CredentialIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelCredentialIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // sharingInstanceIdentifier: A unique identifier that refers to an instance of sharing of credentials to a user's device initiated from another user, device, or web.
 func (o *PKIdentityDocumentMetadata) SharingInstanceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelSharingInstanceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // cardTemplateIdentifier: Identifier referencing a card template registered by developers in web portal - identifies a combination of cardProfileIdentifier, cardConfigurationIdentifier, and cardArtBundleName. Returns empty string if no identifier is set.
 func (o *PKIdentityDocumentMetadata) CardTemplateIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelCardTemplateIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // cardConfigurationIdentifier: Identifier referencing a card configuration registered by developers. Returns empty string if no identifier is set.
 func (o *PKIdentityDocumentMetadata) CardConfigurationIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelCardConfigurationIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
 func (o *PKIdentityDocumentMetadata) ServerEnvironmentIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelServerEnvironmentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -79,7 +89,9 @@ func (o *PKIdentityDocumentMetadata) SetServerEnvironmentIdentifier(serverEnviro
 // issuingCountryCode: identifies the issuing country of the identity document
 func (o *PKIdentityDocumentMetadata) IssuingCountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIdentityDocumentMetadataSelIssuingCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,4 +100,3 @@ func (o *PKIdentityDocumentMetadata) DocumentType() PKAddIdentityDocumentType {
 	_ret := objc.Send[PKAddIdentityDocumentType](o.Ptr(), _pKIdentityDocumentMetadataSelDocumentType)
 	return _ret
 }
-

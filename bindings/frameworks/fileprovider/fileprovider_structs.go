@@ -4,7 +4,6 @@
 package fileprovider
 
 type NSFileProviderTypeAndCreator struct {
-	Type uint
+	Type    uint
 	Creator uint
 }
-

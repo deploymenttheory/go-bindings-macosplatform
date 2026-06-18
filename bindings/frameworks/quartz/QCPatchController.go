@@ -26,4 +26,3 @@ func QCPatchControllerFromID(id objc.ID) *QCPatchController {
 	purego.Track(o)
 	return o
 }
-

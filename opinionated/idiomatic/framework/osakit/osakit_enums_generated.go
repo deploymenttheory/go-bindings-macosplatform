@@ -13,13 +13,13 @@ import (
 type OSALanguageFeatures uint64
 
 const (
-	OSASupportsCompiling OSALanguageFeatures = 2
-	OSASupportsGetSource OSALanguageFeatures = 4
-	OSASupportsAECoercion OSALanguageFeatures = 8
-	OSASupportsAESending OSALanguageFeatures = 16
-	OSASupportsRecording OSALanguageFeatures = 32
-	OSASupportsConvenience OSALanguageFeatures = 64
-	OSASupportsDialects OSALanguageFeatures = 128
+	OSASupportsCompiling     OSALanguageFeatures = 2
+	OSASupportsGetSource     OSALanguageFeatures = 4
+	OSASupportsAECoercion    OSALanguageFeatures = 8
+	OSASupportsAESending     OSALanguageFeatures = 16
+	OSASupportsRecording     OSALanguageFeatures = 32
+	OSASupportsConvenience   OSALanguageFeatures = 64
+	OSASupportsDialects      OSALanguageFeatures = 128
 	OSASupportsEventHandling OSALanguageFeatures = 256
 )
 
@@ -58,8 +58,8 @@ func (e OSALanguageFeatures) String() string {
 type OSAScriptState int64
 
 const (
-	OSAScriptStopped OSAScriptState = 0
-	OSAScriptRunning OSAScriptState = 1
+	OSAScriptStopped   OSAScriptState = 0
+	OSAScriptRunning   OSAScriptState = 1
 	OSAScriptRecording OSAScriptState = 2
 )
 
@@ -80,12 +80,12 @@ func (e OSAScriptState) String() string {
 type OSAStorageOptions uint64
 
 const (
-	OSANull OSAStorageOptions = 0
-	OSAPreventGetSource OSAStorageOptions = 1
-	OSACompileIntoContext OSAStorageOptions = 2
+	OSANull                  OSAStorageOptions = 0
+	OSAPreventGetSource      OSAStorageOptions = 1
+	OSACompileIntoContext    OSAStorageOptions = 2
 	OSADontSetScriptLocation OSAStorageOptions = 16777216
-	OSAStayOpenApplet OSAStorageOptions = 268435456
-	OSAShowStartupScreen OSAStorageOptions = 536870912
+	OSAStayOpenApplet        OSAStorageOptions = 268435456
+	OSAShowStartupScreen     OSAStorageOptions = 536870912
 )
 
 func (e OSAStorageOptions) String() string {
@@ -110,4 +110,3 @@ func (e OSAStorageOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

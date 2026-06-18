@@ -79,7 +79,9 @@ func (x *DOMRGBColor) Color() *appkit.NSColor {
 
 func (x *DOMRGBColor) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMRGBColor) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMRGBColor) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMRGBColorable is the interface implemented by [DOMRGBColor], for mocking and DI.
 type DOMRGBColorable interface {
@@ -92,4 +94,3 @@ type DOMRGBColorable interface {
 }
 
 var _ DOMRGBColorable = (*DOMRGBColor)(nil)
-

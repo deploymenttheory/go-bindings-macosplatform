@@ -19,22 +19,22 @@ type SFCertificateView struct {
 }
 
 var (
-	_clsSFCertificateView = _objcClass("SFCertificateView")
-	_sFCertificateViewSelSetCertificate = objc.RegisterName("setCertificate:")
-	_sFCertificateViewSelCertificate = objc.RegisterName("certificate")
-	_sFCertificateViewSelSetPolicies = objc.RegisterName("setPolicies:")
-	_sFCertificateViewSelPolicies = objc.RegisterName("policies")
-	_sFCertificateViewSelSetEditableTrust = objc.RegisterName("setEditableTrust:")
-	_sFCertificateViewSelIsEditable = objc.RegisterName("isEditable")
-	_sFCertificateViewSelSetDisplayTrust = objc.RegisterName("setDisplayTrust:")
-	_sFCertificateViewSelIsTrustDisplayed = objc.RegisterName("isTrustDisplayed")
-	_sFCertificateViewSelSaveTrustSettings = objc.RegisterName("saveTrustSettings")
-	_sFCertificateViewSelSetDisplayDetails = objc.RegisterName("setDisplayDetails:")
-	_sFCertificateViewSelDetailsDisplayed = objc.RegisterName("detailsDisplayed")
-	_sFCertificateViewSelSetDetailsDisclosed = objc.RegisterName("setDetailsDisclosed:")
-	_sFCertificateViewSelDetailsDisclosed = objc.RegisterName("detailsDisclosed")
+	_clsSFCertificateView                     = _objcClass("SFCertificateView")
+	_sFCertificateViewSelSetCertificate       = objc.RegisterName("setCertificate:")
+	_sFCertificateViewSelCertificate          = objc.RegisterName("certificate")
+	_sFCertificateViewSelSetPolicies          = objc.RegisterName("setPolicies:")
+	_sFCertificateViewSelPolicies             = objc.RegisterName("policies")
+	_sFCertificateViewSelSetEditableTrust     = objc.RegisterName("setEditableTrust:")
+	_sFCertificateViewSelIsEditable           = objc.RegisterName("isEditable")
+	_sFCertificateViewSelSetDisplayTrust      = objc.RegisterName("setDisplayTrust:")
+	_sFCertificateViewSelIsTrustDisplayed     = objc.RegisterName("isTrustDisplayed")
+	_sFCertificateViewSelSaveTrustSettings    = objc.RegisterName("saveTrustSettings")
+	_sFCertificateViewSelSetDisplayDetails    = objc.RegisterName("setDisplayDetails:")
+	_sFCertificateViewSelDetailsDisplayed     = objc.RegisterName("detailsDisplayed")
+	_sFCertificateViewSelSetDetailsDisclosed  = objc.RegisterName("setDetailsDisclosed:")
+	_sFCertificateViewSelDetailsDisclosed     = objc.RegisterName("detailsDisclosed")
 	_sFCertificateViewSelSetPoliciesDisclosed = objc.RegisterName("setPoliciesDisclosed:")
-	_sFCertificateViewSelPoliciesDisclosed = objc.RegisterName("policiesDisclosed")
+	_sFCertificateViewSelPoliciesDisclosed    = objc.RegisterName("policiesDisclosed")
 )
 
 func SFCertificateViewFromID(id objc.ID) *SFCertificateView {
@@ -128,4 +128,3 @@ func (o *SFCertificateView) PoliciesDisclosed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFCertificateViewSelPoliciesDisclosed)
 	return _ret
 }
-

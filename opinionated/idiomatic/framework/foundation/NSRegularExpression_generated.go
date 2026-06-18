@@ -142,4 +142,3 @@ type RegularExpressionable interface {
 }
 
 var _ RegularExpressionable = (*RegularExpression)(nil)
-

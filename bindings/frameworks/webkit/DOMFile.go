@@ -16,7 +16,7 @@ type DOMFile struct {
 }
 
 var (
-	_clsDOMFile = _objcClass("DOMFile")
+	_clsDOMFile     = _objcClass("DOMFile")
 	_dOMFileSelName = objc.RegisterName("name")
 )
 
@@ -32,7 +32,8 @@ func DOMFileFromID(id objc.ID) *DOMFile {
 
 func (o *DOMFile) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMFileSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

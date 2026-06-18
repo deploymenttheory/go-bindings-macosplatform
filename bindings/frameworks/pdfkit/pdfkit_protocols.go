@@ -19,4 +19,3 @@ type PDFPageOverlayViewProvider interface {
 // PDFViewDelegate wraps the ObjC protocol PDFViewDelegate.
 type PDFViewDelegate interface {
 }
-

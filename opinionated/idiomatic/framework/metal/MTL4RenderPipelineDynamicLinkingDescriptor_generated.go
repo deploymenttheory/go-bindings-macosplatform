@@ -15,7 +15,9 @@ type MTL4RenderPipelineDynamicLinkingDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4RenderPipelineDynamicLinkingDescriptor].
-func (x *MTL4RenderPipelineDynamicLinkingDescriptor) Unwrap() *raw.MTL4RenderPipelineDynamicLinkingDescriptor { return x.inner }
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) Unwrap() *raw.MTL4RenderPipelineDynamicLinkingDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type MTL4RenderPipelineDynamicLinkingDescriptorable interface {
 }
 
 var _ MTL4RenderPipelineDynamicLinkingDescriptorable = (*MTL4RenderPipelineDynamicLinkingDescriptor)(nil)
-

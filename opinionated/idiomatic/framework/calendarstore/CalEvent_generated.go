@@ -194,4 +194,3 @@ type CalEventable interface {
 }
 
 var _ CalEventable = (*CalEvent)(nil)
-

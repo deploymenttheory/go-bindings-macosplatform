@@ -16,8 +16,8 @@ type GCKeyboard struct {
 }
 
 var (
-	_clsGCKeyboard = _objcClass("GCKeyboard")
-	_gCKeyboardSelKeyboardInput = objc.RegisterName("keyboardInput")
+	_clsGCKeyboard                  = _objcClass("GCKeyboard")
+	_gCKeyboardSelKeyboardInput     = objc.RegisterName("keyboardInput")
 	_gCKeyboardSelCoalescedKeyboard = objc.RegisterName("coalescedKeyboard")
 )
 
@@ -34,14 +34,17 @@ func GCKeyboardFromID(id objc.ID) *GCKeyboard {
 // Unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
 func (o *GCKeyboard) KeyboardInput() *GCKeyboardInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCKeyboardSelKeyboardInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCKeyboardInputFromID(_ret)
 }
 
 // Keyboard object that represents all keyboards connected to the device Should be used to query key states every time input needs to be handled
 func GCKeyboardCoalescedKeyboard() *GCKeyboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCKeyboard), _gCKeyboardSelCoalescedKeyboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCKeyboardFromID(_ret)
 }
-

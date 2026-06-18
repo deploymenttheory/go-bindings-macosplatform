@@ -99,4 +99,3 @@ type Trackable interface {
 }
 
 var _ Trackable = (*Track)(nil)
-

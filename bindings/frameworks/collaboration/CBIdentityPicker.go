@@ -19,15 +19,15 @@ type CBIdentityPicker struct {
 }
 
 var (
-	_clsCBIdentityPicker = _objcClass("CBIdentityPicker")
-	_cBIdentityPickerSelRunModal = objc.RegisterName("runModal")
+	_clsCBIdentityPicker                                                        = _objcClass("CBIdentityPicker")
+	_cBIdentityPickerSelRunModal                                                = objc.RegisterName("runModal")
 	_cBIdentityPickerSelRunModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("runModalForWindow:modalDelegate:didEndSelector:contextInfo:")
-	_cBIdentityPickerSelRunModalForWindowCompletionHandler = objc.RegisterName("runModalForWindow:completionHandler:")
-	_cBIdentityPickerSelTitle = objc.RegisterName("title")
-	_cBIdentityPickerSelSetTitle = objc.RegisterName("setTitle:")
-	_cBIdentityPickerSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_cBIdentityPickerSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_cBIdentityPickerSelIdentities = objc.RegisterName("identities")
+	_cBIdentityPickerSelRunModalForWindowCompletionHandler                      = objc.RegisterName("runModalForWindow:completionHandler:")
+	_cBIdentityPickerSelTitle                                                   = objc.RegisterName("title")
+	_cBIdentityPickerSelSetTitle                                                = objc.RegisterName("setTitle:")
+	_cBIdentityPickerSelAllowsMultipleSelection                                 = objc.RegisterName("allowsMultipleSelection")
+	_cBIdentityPickerSelSetAllowsMultipleSelection                              = objc.RegisterName("setAllowsMultipleSelection:")
+	_cBIdentityPickerSelIdentities                                              = objc.RegisterName("identities")
 )
 
 func CBIdentityPickerFromID(id objc.ID) *CBIdentityPicker {
@@ -67,7 +67,9 @@ func (o *CBIdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSW
 // The title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
 func (o *CBIdentityPicker) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBIdentityPickerSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -88,7 +90,8 @@ func (o *CBIdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bo
 // The array of identities (represented by `CBIdentity` objects) selected using the identity picker.
 func (o *CBIdentityPicker) Identities() *foundation.NSArray[*CBIdentity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBIdentityPickerSelIdentities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBIdentity](_ret)
 }
-

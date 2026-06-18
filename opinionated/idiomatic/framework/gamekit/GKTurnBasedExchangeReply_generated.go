@@ -75,4 +75,3 @@ type TurnBasedExchangeReplyable interface {
 }
 
 var _ TurnBasedExchangeReplyable = (*TurnBasedExchangeReply)(nil)
-

@@ -16,7 +16,9 @@ type PictureInPictureControllerContentSource struct {
 }
 
 // Unwrap returns the underlying [raw.AVPictureInPictureControllerContentSource].
-func (x *PictureInPictureControllerContentSource) Unwrap() *raw.AVPictureInPictureControllerContentSource { return x.inner }
+func (x *PictureInPictureControllerContentSource) Unwrap() *raw.AVPictureInPictureControllerContentSource {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,4 +70,3 @@ type PictureInPictureControllerContentSourceable interface {
 }
 
 var _ PictureInPictureControllerContentSourceable = (*PictureInPictureControllerContentSource)(nil)
-

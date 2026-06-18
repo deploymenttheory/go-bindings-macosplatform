@@ -25,4 +25,3 @@ func NSSymbolMagicReplaceContentTransitionFromID(id objc.ID) *NSSymbolMagicRepla
 	purego.Track(o)
 	return o
 }
-

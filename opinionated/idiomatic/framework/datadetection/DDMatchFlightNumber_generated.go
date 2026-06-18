@@ -64,4 +64,3 @@ type MatchFlightNumberable interface {
 }
 
 var _ MatchFlightNumberable = (*MatchFlightNumber)(nil)
-

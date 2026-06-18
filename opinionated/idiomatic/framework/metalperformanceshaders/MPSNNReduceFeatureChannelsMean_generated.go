@@ -113,11 +113,17 @@ func (x *NNReduceFeatureChannelsMean) WithLabel(label string) *NNReduceFeatureCh
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMean) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMean) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsMean) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsMeanable is the interface implemented by [NNReduceFeatureChannelsMean], for mocking and DI.
 type NNReduceFeatureChannelsMeanable interface {
@@ -136,4 +142,3 @@ type NNReduceFeatureChannelsMeanable interface {
 }
 
 var _ NNReduceFeatureChannelsMeanable = (*NNReduceFeatureChannelsMean)(nil)
-

@@ -16,10 +16,10 @@ type UNCalendarNotificationTrigger struct {
 }
 
 var (
-	_clsUNCalendarNotificationTrigger = _objcClass("UNCalendarNotificationTrigger")
+	_clsUNCalendarNotificationTrigger                                         = _objcClass("UNCalendarNotificationTrigger")
 	_uNCalendarNotificationTriggerSelTriggerWithDateMatchingComponentsRepeats = objc.RegisterName("triggerWithDateMatchingComponents:repeats:")
-	_uNCalendarNotificationTriggerSelNextTriggerDate = objc.RegisterName("nextTriggerDate")
-	_uNCalendarNotificationTriggerSelDateComponents = objc.RegisterName("dateComponents")
+	_uNCalendarNotificationTriggerSelNextTriggerDate                          = objc.RegisterName("nextTriggerDate")
+	_uNCalendarNotificationTriggerSelDateComponents                           = objc.RegisterName("dateComponents")
 )
 
 func UNCalendarNotificationTriggerFromID(id objc.ID) *UNCalendarNotificationTrigger {
@@ -34,19 +34,24 @@ func UNCalendarNotificationTriggerFromID(id objc.ID) *UNCalendarNotificationTrig
 
 func UNCalendarNotificationTriggerTriggerWithDateMatchingComponentsRepeats(dateComponents *foundation.NSDateComponents, repeats bool) *UNCalendarNotificationTrigger {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNCalendarNotificationTrigger), _uNCalendarNotificationTriggerSelTriggerWithDateMatchingComponentsRepeats, dateComponents.Ptr(), repeats)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNCalendarNotificationTriggerFromID(_ret)
 }
 
 func (o *UNCalendarNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNCalendarNotificationTriggerSelNextTriggerDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *UNCalendarNotificationTrigger) DateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNCalendarNotificationTriggerSelDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
-

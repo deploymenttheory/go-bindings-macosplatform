@@ -17,14 +17,14 @@ type PDFBorder struct {
 }
 
 var (
-	_clsPDFBorder = _objcClass("PDFBorder")
-	_pDFBorderSelDrawInRect = objc.RegisterName("drawInRect:")
-	_pDFBorderSelStyle = objc.RegisterName("style")
-	_pDFBorderSelSetStyle = objc.RegisterName("setStyle:")
-	_pDFBorderSelLineWidth = objc.RegisterName("lineWidth")
-	_pDFBorderSelSetLineWidth = objc.RegisterName("setLineWidth:")
-	_pDFBorderSelDashPattern = objc.RegisterName("dashPattern")
-	_pDFBorderSelSetDashPattern = objc.RegisterName("setDashPattern:")
+	_clsPDFBorder                = _objcClass("PDFBorder")
+	_pDFBorderSelDrawInRect      = objc.RegisterName("drawInRect:")
+	_pDFBorderSelStyle           = objc.RegisterName("style")
+	_pDFBorderSelSetStyle        = objc.RegisterName("setStyle:")
+	_pDFBorderSelLineWidth       = objc.RegisterName("lineWidth")
+	_pDFBorderSelSetLineWidth    = objc.RegisterName("setLineWidth:")
+	_pDFBorderSelDashPattern     = objc.RegisterName("dashPattern")
+	_pDFBorderSelSetDashPattern  = objc.RegisterName("setDashPattern:")
 	_pDFBorderSelBorderKeyValues = objc.RegisterName("borderKeyValues")
 )
 
@@ -73,4 +73,3 @@ func (o *PDFBorder) BorderKeyValues() *foundation.NSDictionary[objc.ID, objc.ID]
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _pDFBorderSelBorderKeyValues)
 	return _ret
 }
-

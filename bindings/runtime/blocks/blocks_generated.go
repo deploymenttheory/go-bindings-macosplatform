@@ -217,4 +217,3 @@ func MakeBlock_void_uint64(fn func(uint64)) unsafe.Pointer {
 	key := BlockRegister(fn)
 	return unsafe.Pointer(C.goMakeBlock_void_uint64(C.uint64_t(key)))
 }
-

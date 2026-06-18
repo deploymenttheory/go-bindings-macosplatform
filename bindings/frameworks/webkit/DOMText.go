@@ -16,10 +16,10 @@ type DOMText struct {
 }
 
 var (
-	_clsDOMText = _objcClass("DOMText")
-	_dOMTextSelSplitText = objc.RegisterName("splitText:")
+	_clsDOMText                 = _objcClass("DOMText")
+	_dOMTextSelSplitText        = objc.RegisterName("splitText:")
 	_dOMTextSelReplaceWholeText = objc.RegisterName("replaceWholeText:")
-	_dOMTextSelWholeText = objc.RegisterName("wholeText")
+	_dOMTextSelWholeText        = objc.RegisterName("wholeText")
 )
 
 func DOMTextFromID(id objc.ID) *DOMText {
@@ -34,19 +34,24 @@ func DOMTextFromID(id objc.ID) *DOMText {
 
 func (o *DOMText) SplitText(offset uint) *DOMText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTextSelSplitText, offset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMTextFromID(_ret)
 }
 
 func (o *DOMText) ReplaceWholeText(content *foundation.NSString) *DOMText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTextSelReplaceWholeText, content.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMTextFromID(_ret)
 }
 
 func (o *DOMText) WholeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMTextSelWholeText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

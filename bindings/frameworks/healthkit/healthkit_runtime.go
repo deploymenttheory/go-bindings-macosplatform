@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_healthkitLib uintptr
-	_loadOnce sync.Once
+	_healthkitLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,13 +48,27 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("HKAppleSleepingBreathingDisturbancesClassificationForQuantity", func() { purego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity, _healthkitLib, "HKAppleSleepingBreathingDisturbancesClassificationForQuantity") })
-	_register("HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification", func() { purego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification, _healthkitLib, "HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification") })
-	_register("HKAppleWalkingSteadinessClassificationForQuantity", func() { purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessClassificationForQuantity, _healthkitLib, "HKAppleWalkingSteadinessClassificationForQuantity") })
-	_register("HKAppleWalkingSteadinessMaximumQuantityForClassification", func() { purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMaximumQuantityForClassification, _healthkitLib, "HKAppleWalkingSteadinessMaximumQuantityForClassification") })
-	_register("HKAppleWalkingSteadinessMinimumQuantityForClassification", func() { purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMinimumQuantityForClassification, _healthkitLib, "HKAppleWalkingSteadinessMinimumQuantityForClassification") })
-	_register("HKCategoryValueSleepAnalysisAsleepValues", func() { purego.RegisterLibFunc(&_fnHKCategoryValueSleepAnalysisAsleepValues, _healthkitLib, "HKCategoryValueSleepAnalysisAsleepValues") })
-	_register("HKStateOfMindValenceClassificationForValence", func() { purego.RegisterLibFunc(&_fnHKStateOfMindValenceClassificationForValence, _healthkitLib, "HKStateOfMindValenceClassificationForValence") })
+	_register("HKAppleSleepingBreathingDisturbancesClassificationForQuantity", func() {
+		purego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity, _healthkitLib, "HKAppleSleepingBreathingDisturbancesClassificationForQuantity")
+	})
+	_register("HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification", func() {
+		purego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification, _healthkitLib, "HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification")
+	})
+	_register("HKAppleWalkingSteadinessClassificationForQuantity", func() {
+		purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessClassificationForQuantity, _healthkitLib, "HKAppleWalkingSteadinessClassificationForQuantity")
+	})
+	_register("HKAppleWalkingSteadinessMaximumQuantityForClassification", func() {
+		purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMaximumQuantityForClassification, _healthkitLib, "HKAppleWalkingSteadinessMaximumQuantityForClassification")
+	})
+	_register("HKAppleWalkingSteadinessMinimumQuantityForClassification", func() {
+		purego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMinimumQuantityForClassification, _healthkitLib, "HKAppleWalkingSteadinessMinimumQuantityForClassification")
+	})
+	_register("HKCategoryValueSleepAnalysisAsleepValues", func() {
+		purego.RegisterLibFunc(&_fnHKCategoryValueSleepAnalysisAsleepValues, _healthkitLib, "HKCategoryValueSleepAnalysisAsleepValues")
+	})
+	_register("HKStateOfMindValenceClassificationForValence", func() {
+		purego.RegisterLibFunc(&_fnHKStateOfMindValenceClassificationForValence, _healthkitLib, "HKStateOfMindValenceClassificationForValence")
+	})
 }
 
 func init() {

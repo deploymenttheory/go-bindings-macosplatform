@@ -25,4 +25,3 @@ func UNPushNotificationTriggerFromID(id objc.ID) *UNPushNotificationTrigger {
 	purego.Track(o)
 	return o
 }
-

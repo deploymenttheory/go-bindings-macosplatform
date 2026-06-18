@@ -55,7 +55,9 @@ func (x *CNNLossNode) InputLabels() *mpsneuralnetwork.MPSNNLabelsNode {
 	return x.inner.InputLabels()
 }
 
-func (x *CNNLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNLossNodeable is the interface implemented by [CNNLossNode], for mocking and DI.
 type CNNLossNodeable interface {
@@ -66,4 +68,3 @@ type CNNLossNodeable interface {
 }
 
 var _ CNNLossNodeable = (*CNNLossNode)(nil)
-

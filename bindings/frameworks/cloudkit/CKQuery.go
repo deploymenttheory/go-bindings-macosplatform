@@ -16,13 +16,13 @@ type CKQuery struct {
 }
 
 var (
-	_clsCKQuery = _objcClass("CKQuery")
-	_cKQuerySelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsCKQuery                            = _objcClass("CKQuery")
+	_cKQuerySelInitWithCoder               = objc.RegisterName("initWithCoder:")
 	_cKQuerySelInitWithRecordTypePredicate = objc.RegisterName("initWithRecordType:predicate:")
-	_cKQuerySelRecordType = objc.RegisterName("recordType")
-	_cKQuerySelPredicate = objc.RegisterName("predicate")
-	_cKQuerySelSortDescriptors = objc.RegisterName("sortDescriptors")
-	_cKQuerySelSetSortDescriptors = objc.RegisterName("setSortDescriptors:")
+	_cKQuerySelRecordType                  = objc.RegisterName("recordType")
+	_cKQuerySelPredicate                   = objc.RegisterName("predicate")
+	_cKQuerySelSortDescriptors             = objc.RegisterName("sortDescriptors")
+	_cKQuerySelSetSortDescriptors          = objc.RegisterName("setSortDescriptors:")
 )
 
 func CKQueryFromID(id objc.ID) *CKQuery {
@@ -38,28 +38,36 @@ func CKQueryFromID(id objc.ID) *CKQuery {
 // Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
 func (o *CKQuery) InitWithCoder(aDecoder *foundation.NSCoder) *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryFromID(_ret)
 }
 
-// Creates a query with the specified record type and predicate. - Parameters: - recordType: The type of record to search. Specify the name of one of your app's supported record types. The method throws an exception if this parameter is `nil` or contains an empty string. - predicate: The search predicate to apply to the prospective records. Only records that match the predicate criteria appear in the search results. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>. This parameter must not be `nil`. - Returns: An initialized query object. You can't change the record type and predicate of a query after you create it. If you want to search for a different set of records using a different set of search criteria, create a new query. You can add sort descriptors to the query and change them later as necessary. You can't query for user records, and executing a query where the record type is ``CKRecordTypeUserRecord-49k30`` results in an error. You must fetch user records directly using their IDs.
+// Creates a query with the specified record type and predicate. - Parameters: - recordType: The type of record to search. Specify the name of one of your app's supported record types. The method throws an exception if this parameter is `nil` or contains an empty string. - predicate: The search predicate to apply to the prospective records. Only records that match the predicate criteria appear in the search results. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>. This parameter must not be `nil`. - Returns: An initialized query object. You can't change the record type and predicate of a query after you create it. If you want to search for a different set of records using a different set of search criteria, create a new query. You can add sort descriptors to the query and change them later as necessary. You can't query for user records, and executing a query where the record type is “CKRecordTypeUserRecord-49k30“ results in an error. You must fetch user records directly using their IDs.
 func (o *CKQuery) InitWithRecordTypePredicate(recordType *foundation.NSString, predicate *foundation.NSPredicate) *CKQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelInitWithRecordTypePredicate, recordType.Ptr(), predicate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKQueryFromID(_ret)
 }
 
 // The record type to search. A query's results include only records of the specified type. The record type is an app-specific string that you use to distinguish among the records of your app. The records of a particular type all represent different instances of the same information. For example, an employee record type might store the employee's name, phone number, and a reference to the employee's manager.
 func (o *CKQuery) RecordType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The predicate to use for matching records. A predicate contains one or more expressions that evaluate to <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>. Expressions are often value-based comparisons, but predicates support other types of operators, including string comparisons and aggregate operations. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>.
 func (o *CKQuery) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKQuerySelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -72,4 +80,3 @@ func (o *CKQuery) SortDescriptors() *foundation.NSArray[*foundation.NSSortDescri
 func (o *CKQuery) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
 	o.Ptr().Send(_cKQuerySelSetSortDescriptors, sortDescriptors)
 }
-

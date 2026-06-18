@@ -17,14 +17,14 @@ type NSCollectionLayoutAnchor struct {
 }
 
 var (
-	_clsNSCollectionLayoutAnchor = _objcClass("NSCollectionLayoutAnchor")
-	_nSCollectionLayoutAnchorSelLayoutAnchorWithEdges = objc.RegisterName("layoutAnchorWithEdges:")
-	_nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset = objc.RegisterName("layoutAnchorWithEdges:absoluteOffset:")
+	_clsNSCollectionLayoutAnchor                                      = _objcClass("NSCollectionLayoutAnchor")
+	_nSCollectionLayoutAnchorSelLayoutAnchorWithEdges                 = objc.RegisterName("layoutAnchorWithEdges:")
+	_nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset   = objc.RegisterName("layoutAnchorWithEdges:absoluteOffset:")
 	_nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesFractionalOffset = objc.RegisterName("layoutAnchorWithEdges:fractionalOffset:")
-	_nSCollectionLayoutAnchorSelEdges = objc.RegisterName("edges")
-	_nSCollectionLayoutAnchorSelOffset = objc.RegisterName("offset")
-	_nSCollectionLayoutAnchorSelIsAbsoluteOffset = objc.RegisterName("isAbsoluteOffset")
-	_nSCollectionLayoutAnchorSelIsFractionalOffset = objc.RegisterName("isFractionalOffset")
+	_nSCollectionLayoutAnchorSelEdges                                 = objc.RegisterName("edges")
+	_nSCollectionLayoutAnchorSelOffset                                = objc.RegisterName("offset")
+	_nSCollectionLayoutAnchorSelIsAbsoluteOffset                      = objc.RegisterName("isAbsoluteOffset")
+	_nSCollectionLayoutAnchorSelIsFractionalOffset                    = objc.RegisterName("isFractionalOffset")
 )
 
 func NSCollectionLayoutAnchorFromID(id objc.ID) *NSCollectionLayoutAnchor {
@@ -39,19 +39,25 @@ func NSCollectionLayoutAnchorFromID(id objc.ID) *NSCollectionLayoutAnchor {
 
 func NSCollectionLayoutAnchorLayoutAnchorWithEdges(edges NSDirectionalRectEdge) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdges, edges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(edges NSDirectionalRectEdge, absoluteOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesAbsoluteOffset, edges, absoluteOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
 func NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset(edges NSDirectionalRectEdge, fractionalOffset corefoundation.CGPoint) *NSCollectionLayoutAnchor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutAnchor), _nSCollectionLayoutAnchorSelLayoutAnchorWithEdgesFractionalOffset, edges, fractionalOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutAnchorFromID(_ret)
 }
 
@@ -74,4 +80,3 @@ func (o *NSCollectionLayoutAnchor) IsFractionalOffset() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSCollectionLayoutAnchorSelIsFractionalOffset)
 	return _ret
 }
-

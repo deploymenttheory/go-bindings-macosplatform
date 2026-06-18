@@ -26,4 +26,3 @@ func BEAccessibilityTextMarkerFromID(id objc.ID) *BEAccessibilityTextMarker {
 	purego.Track(o)
 	return o
 }
-

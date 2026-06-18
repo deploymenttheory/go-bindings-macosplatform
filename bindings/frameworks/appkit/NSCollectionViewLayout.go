@@ -17,45 +17,45 @@ type NSCollectionViewLayout struct {
 }
 
 var (
-	_clsNSCollectionViewLayout = _objcClass("NSCollectionViewLayout")
-	_nSCollectionViewLayoutSelInvalidateLayout = objc.RegisterName("invalidateLayout")
-	_nSCollectionViewLayoutSelInvalidateLayoutWithContext = objc.RegisterName("invalidateLayoutWithContext:")
-	_nSCollectionViewLayoutSelRegisterClassForDecorationViewOfKind = objc.RegisterName("registerClass:forDecorationViewOfKind:")
-	_nSCollectionViewLayoutSelRegisterNibForDecorationViewOfKind = objc.RegisterName("registerNib:forDecorationViewOfKind:")
-	_nSCollectionViewLayoutSelCollectionView = objc.RegisterName("collectionView")
-	_nSCollectionViewLayoutSelPrepareLayout = objc.RegisterName("prepareLayout")
-	_nSCollectionViewLayoutSelLayoutAttributesForElementsInRect = objc.RegisterName("layoutAttributesForElementsInRect:")
-	_nSCollectionViewLayoutSelLayoutAttributesForItemAtIndexPath = objc.RegisterName("layoutAttributesForItemAtIndexPath:")
-	_nSCollectionViewLayoutSelLayoutAttributesForSupplementaryViewOfKindAtIndexPath = objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:")
-	_nSCollectionViewLayoutSelLayoutAttributesForDecorationViewOfKindAtIndexPath = objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:")
-	_nSCollectionViewLayoutSelLayoutAttributesForDropTargetAtPoint = objc.RegisterName("layoutAttributesForDropTargetAtPoint:")
-	_nSCollectionViewLayoutSelLayoutAttributesForInterItemGapBeforeIndexPath = objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:")
-	_nSCollectionViewLayoutSelShouldInvalidateLayoutForBoundsChange = objc.RegisterName("shouldInvalidateLayoutForBoundsChange:")
-	_nSCollectionViewLayoutSelInvalidationContextForBoundsChange = objc.RegisterName("invalidationContextForBoundsChange:")
-	_nSCollectionViewLayoutSelShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes = objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:")
-	_nSCollectionViewLayoutSelInvalidationContextForPreferredLayoutAttributesWithOriginalAttributes = objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:")
-	_nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffsetWithScrollingVelocity = objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:")
-	_nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffset = objc.RegisterName("targetContentOffsetForProposedContentOffset:")
-	_nSCollectionViewLayoutSelLayoutAttributesClass = objc.RegisterName("layoutAttributesClass")
-	_nSCollectionViewLayoutSelInvalidationContextClass = objc.RegisterName("invalidationContextClass")
-	_nSCollectionViewLayoutSelCollectionViewContentSize = objc.RegisterName("collectionViewContentSize")
-	_nSCollectionViewLayoutSelPrepareForCollectionViewUpdates = objc.RegisterName("prepareForCollectionViewUpdates:")
-	_nSCollectionViewLayoutSelFinalizeCollectionViewUpdates = objc.RegisterName("finalizeCollectionViewUpdates")
-	_nSCollectionViewLayoutSelPrepareForAnimatedBoundsChange = objc.RegisterName("prepareForAnimatedBoundsChange:")
-	_nSCollectionViewLayoutSelFinalizeAnimatedBoundsChange = objc.RegisterName("finalizeAnimatedBoundsChange")
-	_nSCollectionViewLayoutSelPrepareForTransitionToLayout = objc.RegisterName("prepareForTransitionToLayout:")
-	_nSCollectionViewLayoutSelPrepareForTransitionFromLayout = objc.RegisterName("prepareForTransitionFromLayout:")
-	_nSCollectionViewLayoutSelFinalizeLayoutTransition = objc.RegisterName("finalizeLayoutTransition")
-	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingItemAtIndexPath = objc.RegisterName("initialLayoutAttributesForAppearingItemAtIndexPath:")
-	_nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingItemAtIndexPath = objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:")
-	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath = objc.RegisterName("initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:")
+	_clsNSCollectionViewLayout                                                                          = _objcClass("NSCollectionViewLayout")
+	_nSCollectionViewLayoutSelInvalidateLayout                                                          = objc.RegisterName("invalidateLayout")
+	_nSCollectionViewLayoutSelInvalidateLayoutWithContext                                               = objc.RegisterName("invalidateLayoutWithContext:")
+	_nSCollectionViewLayoutSelRegisterClassForDecorationViewOfKind                                      = objc.RegisterName("registerClass:forDecorationViewOfKind:")
+	_nSCollectionViewLayoutSelRegisterNibForDecorationViewOfKind                                        = objc.RegisterName("registerNib:forDecorationViewOfKind:")
+	_nSCollectionViewLayoutSelCollectionView                                                            = objc.RegisterName("collectionView")
+	_nSCollectionViewLayoutSelPrepareLayout                                                             = objc.RegisterName("prepareLayout")
+	_nSCollectionViewLayoutSelLayoutAttributesForElementsInRect                                         = objc.RegisterName("layoutAttributesForElementsInRect:")
+	_nSCollectionViewLayoutSelLayoutAttributesForItemAtIndexPath                                        = objc.RegisterName("layoutAttributesForItemAtIndexPath:")
+	_nSCollectionViewLayoutSelLayoutAttributesForSupplementaryViewOfKindAtIndexPath                     = objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:atIndexPath:")
+	_nSCollectionViewLayoutSelLayoutAttributesForDecorationViewOfKindAtIndexPath                        = objc.RegisterName("layoutAttributesForDecorationViewOfKind:atIndexPath:")
+	_nSCollectionViewLayoutSelLayoutAttributesForDropTargetAtPoint                                      = objc.RegisterName("layoutAttributesForDropTargetAtPoint:")
+	_nSCollectionViewLayoutSelLayoutAttributesForInterItemGapBeforeIndexPath                            = objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:")
+	_nSCollectionViewLayoutSelShouldInvalidateLayoutForBoundsChange                                     = objc.RegisterName("shouldInvalidateLayoutForBoundsChange:")
+	_nSCollectionViewLayoutSelInvalidationContextForBoundsChange                                        = objc.RegisterName("invalidationContextForBoundsChange:")
+	_nSCollectionViewLayoutSelShouldInvalidateLayoutForPreferredLayoutAttributesWithOriginalAttributes  = objc.RegisterName("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:")
+	_nSCollectionViewLayoutSelInvalidationContextForPreferredLayoutAttributesWithOriginalAttributes     = objc.RegisterName("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:")
+	_nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffsetWithScrollingVelocity          = objc.RegisterName("targetContentOffsetForProposedContentOffset:withScrollingVelocity:")
+	_nSCollectionViewLayoutSelTargetContentOffsetForProposedContentOffset                               = objc.RegisterName("targetContentOffsetForProposedContentOffset:")
+	_nSCollectionViewLayoutSelLayoutAttributesClass                                                     = objc.RegisterName("layoutAttributesClass")
+	_nSCollectionViewLayoutSelInvalidationContextClass                                                  = objc.RegisterName("invalidationContextClass")
+	_nSCollectionViewLayoutSelCollectionViewContentSize                                                 = objc.RegisterName("collectionViewContentSize")
+	_nSCollectionViewLayoutSelPrepareForCollectionViewUpdates                                           = objc.RegisterName("prepareForCollectionViewUpdates:")
+	_nSCollectionViewLayoutSelFinalizeCollectionViewUpdates                                             = objc.RegisterName("finalizeCollectionViewUpdates")
+	_nSCollectionViewLayoutSelPrepareForAnimatedBoundsChange                                            = objc.RegisterName("prepareForAnimatedBoundsChange:")
+	_nSCollectionViewLayoutSelFinalizeAnimatedBoundsChange                                              = objc.RegisterName("finalizeAnimatedBoundsChange")
+	_nSCollectionViewLayoutSelPrepareForTransitionToLayout                                              = objc.RegisterName("prepareForTransitionToLayout:")
+	_nSCollectionViewLayoutSelPrepareForTransitionFromLayout                                            = objc.RegisterName("prepareForTransitionFromLayout:")
+	_nSCollectionViewLayoutSelFinalizeLayoutTransition                                                  = objc.RegisterName("finalizeLayoutTransition")
+	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingItemAtIndexPath                        = objc.RegisterName("initialLayoutAttributesForAppearingItemAtIndexPath:")
+	_nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingItemAtIndexPath                       = objc.RegisterName("finalLayoutAttributesForDisappearingItemAtIndexPath:")
+	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath  = objc.RegisterName("initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:")
 	_nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath = objc.RegisterName("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:")
-	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath = objc.RegisterName("initialLayoutAttributesForAppearingDecorationElementOfKind:atIndexPath:")
-	_nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath = objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:")
-	_nSCollectionViewLayoutSelIndexPathsToDeleteForSupplementaryViewOfKind = objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:")
-	_nSCollectionViewLayoutSelIndexPathsToDeleteForDecorationViewOfKind = objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:")
-	_nSCollectionViewLayoutSelIndexPathsToInsertForSupplementaryViewOfKind = objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:")
-	_nSCollectionViewLayoutSelIndexPathsToInsertForDecorationViewOfKind = objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:")
+	_nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath     = objc.RegisterName("initialLayoutAttributesForAppearingDecorationElementOfKind:atIndexPath:")
+	_nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath    = objc.RegisterName("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:")
+	_nSCollectionViewLayoutSelIndexPathsToDeleteForSupplementaryViewOfKind                              = objc.RegisterName("indexPathsToDeleteForSupplementaryViewOfKind:")
+	_nSCollectionViewLayoutSelIndexPathsToDeleteForDecorationViewOfKind                                 = objc.RegisterName("indexPathsToDeleteForDecorationViewOfKind:")
+	_nSCollectionViewLayoutSelIndexPathsToInsertForSupplementaryViewOfKind                              = objc.RegisterName("indexPathsToInsertForSupplementaryViewOfKind:")
+	_nSCollectionViewLayoutSelIndexPathsToInsertForDecorationViewOfKind                                 = objc.RegisterName("indexPathsToInsertForDecorationViewOfKind:")
 )
 
 func NSCollectionViewLayoutFromID(id objc.ID) *NSCollectionViewLayout {
@@ -86,7 +86,9 @@ func (o *NSCollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *NSNib, 
 
 func (o *NSCollectionViewLayout) CollectionView() *NSCollectionView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelCollectionView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewFromID(_ret)
 }
 
@@ -96,37 +98,49 @@ func (o *NSCollectionViewLayout) PrepareLayout() {
 
 func (o *NSCollectionViewLayout) LayoutAttributesForElementsInRect(rect corefoundation.CGRect) *foundation.NSArray[*NSCollectionViewLayoutAttributes] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForElementsInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionViewLayoutAttributes](_ret)
 }
 
 func (o *NSCollectionViewLayout) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) LayoutAttributesForSupplementaryViewOfKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForSupplementaryViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) LayoutAttributesForDecorationViewOfKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDecorationViewOfKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) LayoutAttributesForDropTargetAtPoint(pointInCollectionView corefoundation.CGPoint) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForDropTargetAtPoint, pointInCollectionView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) LayoutAttributesForInterItemGapBeforeIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
@@ -137,7 +151,9 @@ func (o *NSCollectionViewLayout) ShouldInvalidateLayoutForBoundsChange(newBounds
 
 func (o *NSCollectionViewLayout) InvalidationContextForBoundsChange(newBounds corefoundation.CGRect) *NSCollectionViewLayoutInvalidationContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForBoundsChange, newBounds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutInvalidationContextFromID(_ret)
 }
 
@@ -148,7 +164,9 @@ func (o *NSCollectionViewLayout) ShouldInvalidateLayoutForPreferredLayoutAttribu
 
 func (o *NSCollectionViewLayout) InvalidationContextForPreferredLayoutAttributesWithOriginalAttributes(preferredAttributes *NSCollectionViewLayoutAttributes, originalAttributes *NSCollectionViewLayoutAttributes) *NSCollectionViewLayoutInvalidationContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInvalidationContextForPreferredLayoutAttributesWithOriginalAttributes, preferredAttributes.Ptr(), originalAttributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutInvalidationContextFromID(_ret)
 }
 
@@ -207,37 +225,49 @@ func (o *NSCollectionViewLayout) FinalizeLayoutTransition() {
 
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingItemAtIndexPath, itemIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingItemAtIndexPath, itemIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath(elementKind *foundation.NSString, elementIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath(elementKind *foundation.NSString, elementIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingSupplementaryElementOfKindAtIndexPath, elementKind.Ptr(), elementIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) InitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath(elementKind *foundation.NSString, decorationIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelInitialLayoutAttributesForAppearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionViewLayout) FinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath(elementKind *foundation.NSString, decorationIndexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutSelFinalLayoutAttributesForDisappearingDecorationElementOfKindAtIndexPath, elementKind.Ptr(), decorationIndexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
@@ -260,4 +290,3 @@ func (o *NSCollectionViewLayout) IndexPathsToInsertForDecorationViewOfKind(eleme
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSIndexPath]](o.Ptr(), _nSCollectionViewLayoutSelIndexPathsToInsertForDecorationViewOfKind, elementKind.Ptr())
 	return _ret
 }
-

@@ -52,4 +52,3 @@ type MessagePortable interface {
 }
 
 var _ MessagePortable = (*MessagePort)(nil)
-

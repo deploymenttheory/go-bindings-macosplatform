@@ -18,9 +18,9 @@ type AMWorkspace struct {
 }
 
 var (
-	_clsAMWorkspace = _objcClass("AMWorkspace")
+	_clsAMWorkspace                                = _objcClass("AMWorkspace")
 	_aMWorkspaceSelRunWorkflowAtPathWithInputError = objc.RegisterName("runWorkflowAtPath:withInput:error:")
-	_aMWorkspaceSelSharedWorkspace = objc.RegisterName("sharedWorkspace")
+	_aMWorkspaceSelSharedWorkspace                 = objc.RegisterName("sharedWorkspace")
 )
 
 func AMWorkspaceFromID(id objc.ID) *AMWorkspace {
@@ -44,7 +44,8 @@ func (o *AMWorkspace) RunWorkflowAtPathWithInputError(path *foundation.NSString,
 
 func AMWorkspaceSharedWorkspace() *AMWorkspace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAMWorkspace), _aMWorkspaceSelSharedWorkspace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMWorkspaceFromID(_ret)
 }
-

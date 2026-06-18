@@ -182,4 +182,3 @@ type VideoCompositionable interface {
 }
 
 var _ VideoCompositionable = (*VideoComposition)(nil)
-

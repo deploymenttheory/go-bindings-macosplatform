@@ -153,4 +153,3 @@ type CaptureTimecodeGeneratorable interface {
 }
 
 var _ CaptureTimecodeGeneratorable = (*CaptureTimecodeGenerator)(nil)
-

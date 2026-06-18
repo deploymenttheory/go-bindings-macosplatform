@@ -41,4 +41,3 @@ type SpeechLanguageModelable interface {
 }
 
 var _ SpeechLanguageModelable = (*SpeechLanguageModel)(nil)
-

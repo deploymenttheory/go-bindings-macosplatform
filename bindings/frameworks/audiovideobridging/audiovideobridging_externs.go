@@ -18,7 +18,8 @@ func AVBErrorDomain() uintptr {
 // @abstract	This NULL EUI-64. The IEEE defines this as FF-FF-FF-FF-FF-FF-FF-FF.
 func AVBNullEUI64() uint64 {
 	ptr, _ := purego.Dlsym(_audiovideobridgingLib, "AVBNullEUI64")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint64)(unsafe.Pointer(ptr))
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_gssLib uintptr
-	_loadOnce sync.Once
+	_gssLib        uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("GSSCreateCredentialFromUUID", func() { purego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _gssLib, "GSSCreateCredentialFromUUID") })
+	_register("GSSCreateCredentialFromUUID", func() {
+		purego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _gssLib, "GSSCreateCredentialFromUUID")
+	})
 	_register("GSSCreateError", func() { purego.RegisterLibFunc(&_fnGSSCreateError, _gssLib, "GSSCreateError") })
 	_register("GSSCreateName", func() { purego.RegisterLibFunc(&_fnGSSCreateName, _gssLib, "GSSCreateName") })
 	_register("GSSCredentialCopyName", func() { purego.RegisterLibFunc(&_fnGSSCredentialCopyName, _gssLib, "GSSCredentialCopyName") })
@@ -59,7 +61,9 @@ func _loadLibrary() {
 	_register("gss_aapl_initial_cred", func() { purego.RegisterLibFunc(&_gss_aapl_initial_cred, _gssLib, "gss_aapl_initial_cred") })
 	_register("gss_accept_sec_context", func() { purego.RegisterLibFunc(&_gss_accept_sec_context, _gssLib, "gss_accept_sec_context") })
 	_register("gss_acquire_cred", func() { purego.RegisterLibFunc(&_gss_acquire_cred, _gssLib, "gss_acquire_cred") })
-	_register("gss_acquire_cred_with_password", func() { purego.RegisterLibFunc(&_gss_acquire_cred_with_password, _gssLib, "gss_acquire_cred_with_password") })
+	_register("gss_acquire_cred_with_password", func() {
+		purego.RegisterLibFunc(&_gss_acquire_cred_with_password, _gssLib, "gss_acquire_cred_with_password")
+	})
 	_register("gss_add_buffer_set_member", func() { purego.RegisterLibFunc(&_gss_add_buffer_set_member, _gssLib, "gss_add_buffer_set_member") })
 	_register("gss_add_cred", func() { purego.RegisterLibFunc(&_gss_add_cred, _gssLib, "gss_add_cred") })
 	_register("gss_add_oid_set_member", func() { purego.RegisterLibFunc(&_gss_add_oid_set_member, _gssLib, "gss_add_oid_set_member") })
@@ -92,19 +96,31 @@ func _loadLibrary() {
 	_register("gss_inquire_cred", func() { purego.RegisterLibFunc(&_gss_inquire_cred, _gssLib, "gss_inquire_cred") })
 	_register("gss_inquire_cred_by_mech", func() { purego.RegisterLibFunc(&_gss_inquire_cred_by_mech, _gssLib, "gss_inquire_cred_by_mech") })
 	_register("gss_inquire_cred_by_oid", func() { purego.RegisterLibFunc(&_gss_inquire_cred_by_oid, _gssLib, "gss_inquire_cred_by_oid") })
-	_register("gss_inquire_mech_for_saslname", func() { purego.RegisterLibFunc(&_gss_inquire_mech_for_saslname, _gssLib, "gss_inquire_mech_for_saslname") })
+	_register("gss_inquire_mech_for_saslname", func() {
+		purego.RegisterLibFunc(&_gss_inquire_mech_for_saslname, _gssLib, "gss_inquire_mech_for_saslname")
+	})
 	_register("gss_inquire_mechs_for_name", func() { purego.RegisterLibFunc(&_gss_inquire_mechs_for_name, _gssLib, "gss_inquire_mechs_for_name") })
 	_register("gss_inquire_name", func() { purego.RegisterLibFunc(&_gss_inquire_name, _gssLib, "gss_inquire_name") })
 	_register("gss_inquire_names_for_mech", func() { purego.RegisterLibFunc(&_gss_inquire_names_for_mech, _gssLib, "gss_inquire_names_for_mech") })
-	_register("gss_inquire_saslname_for_mech", func() { purego.RegisterLibFunc(&_gss_inquire_saslname_for_mech, _gssLib, "gss_inquire_saslname_for_mech") })
-	_register("gss_inquire_sec_context_by_oid", func() { purego.RegisterLibFunc(&_gss_inquire_sec_context_by_oid, _gssLib, "gss_inquire_sec_context_by_oid") })
+	_register("gss_inquire_saslname_for_mech", func() {
+		purego.RegisterLibFunc(&_gss_inquire_saslname_for_mech, _gssLib, "gss_inquire_saslname_for_mech")
+	})
+	_register("gss_inquire_sec_context_by_oid", func() {
+		purego.RegisterLibFunc(&_gss_inquire_sec_context_by_oid, _gssLib, "gss_inquire_sec_context_by_oid")
+	})
 	_register("gss_iter_creds", func() { purego.RegisterLibFunc(&_gss_iter_creds, _gssLib, "gss_iter_creds") })
 	_register("gss_iter_creds_f", func() { purego.RegisterLibFunc(&_gss_iter_creds_f, _gssLib, "gss_iter_creds_f") })
 	_register("gss_krb5_ccache_name", func() { purego.RegisterLibFunc(&_gss_krb5_ccache_name, _gssLib, "gss_krb5_ccache_name") })
 	_register("gss_krb5_copy_ccache", func() { purego.RegisterLibFunc(&_gss_krb5_copy_ccache, _gssLib, "gss_krb5_copy_ccache") })
-	_register("gss_krb5_export_lucid_sec_context", func() { purego.RegisterLibFunc(&_gss_krb5_export_lucid_sec_context, _gssLib, "gss_krb5_export_lucid_sec_context") })
-	_register("gss_krb5_free_lucid_sec_context", func() { purego.RegisterLibFunc(&_gss_krb5_free_lucid_sec_context, _gssLib, "gss_krb5_free_lucid_sec_context") })
-	_register("gss_krb5_set_allowable_enctypes", func() { purego.RegisterLibFunc(&_gss_krb5_set_allowable_enctypes, _gssLib, "gss_krb5_set_allowable_enctypes") })
+	_register("gss_krb5_export_lucid_sec_context", func() {
+		purego.RegisterLibFunc(&_gss_krb5_export_lucid_sec_context, _gssLib, "gss_krb5_export_lucid_sec_context")
+	})
+	_register("gss_krb5_free_lucid_sec_context", func() {
+		purego.RegisterLibFunc(&_gss_krb5_free_lucid_sec_context, _gssLib, "gss_krb5_free_lucid_sec_context")
+	})
+	_register("gss_krb5_set_allowable_enctypes", func() {
+		purego.RegisterLibFunc(&_gss_krb5_set_allowable_enctypes, _gssLib, "gss_krb5_set_allowable_enctypes")
+	})
 	_register("gss_oid_equal", func() { purego.RegisterLibFunc(&_gss_oid_equal, _gssLib, "gss_oid_equal") })
 	_register("gss_oid_to_str", func() { purego.RegisterLibFunc(&_gss_oid_to_str, _gssLib, "gss_oid_to_str") })
 	_register("gss_process_context_token", func() { purego.RegisterLibFunc(&_gss_process_context_token, _gssLib, "gss_process_context_token") })
@@ -127,9 +143,15 @@ func _loadLibrary() {
 	_register("gss_verify_mic", func() { purego.RegisterLibFunc(&_gss_verify_mic, _gssLib, "gss_verify_mic") })
 	_register("gss_wrap", func() { purego.RegisterLibFunc(&_gss_wrap, _gssLib, "gss_wrap") })
 	_register("gss_wrap_size_limit", func() { purego.RegisterLibFunc(&_gss_wrap_size_limit, _gssLib, "gss_wrap_size_limit") })
-	_register("gsskrb5_extract_authz_data_from_sec_context", func() { purego.RegisterLibFunc(&_gsskrb5_extract_authz_data_from_sec_context, _gssLib, "gsskrb5_extract_authz_data_from_sec_context") })
-	_register("gsskrb5_register_acceptor_identity", func() { purego.RegisterLibFunc(&_gsskrb5_register_acceptor_identity, _gssLib, "gsskrb5_register_acceptor_identity") })
-	_register("krb5_gss_register_acceptor_identity", func() { purego.RegisterLibFunc(&_krb5_gss_register_acceptor_identity, _gssLib, "krb5_gss_register_acceptor_identity") })
+	_register("gsskrb5_extract_authz_data_from_sec_context", func() {
+		purego.RegisterLibFunc(&_gsskrb5_extract_authz_data_from_sec_context, _gssLib, "gsskrb5_extract_authz_data_from_sec_context")
+	})
+	_register("gsskrb5_register_acceptor_identity", func() {
+		purego.RegisterLibFunc(&_gsskrb5_register_acceptor_identity, _gssLib, "gsskrb5_register_acceptor_identity")
+	})
+	_register("krb5_gss_register_acceptor_identity", func() {
+		purego.RegisterLibFunc(&_krb5_gss_register_acceptor_identity, _gssLib, "krb5_gss_register_acceptor_identity")
+	})
 }
 
 func init() {

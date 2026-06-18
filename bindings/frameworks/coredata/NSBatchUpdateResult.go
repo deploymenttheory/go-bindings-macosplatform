@@ -15,8 +15,8 @@ type NSBatchUpdateResult struct {
 }
 
 var (
-	_clsNSBatchUpdateResult = _objcClass("NSBatchUpdateResult")
-	_nSBatchUpdateResultSelResult = objc.RegisterName("result")
+	_clsNSBatchUpdateResult           = _objcClass("NSBatchUpdateResult")
+	_nSBatchUpdateResultSelResult     = objc.RegisterName("result")
 	_nSBatchUpdateResultSelResultType = objc.RegisterName("resultType")
 )
 
@@ -39,4 +39,3 @@ func (o *NSBatchUpdateResult) ResultType() NSBatchUpdateRequestResultType {
 	_ret := objc.Send[NSBatchUpdateRequestResultType](o.Ptr(), _nSBatchUpdateResultSelResultType)
 	return _ret
 }
-

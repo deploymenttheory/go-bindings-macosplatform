@@ -16,10 +16,10 @@ type AVCaptionConversionWarning struct {
 }
 
 var (
-	_clsAVCaptionConversionWarning = _objcClass("AVCaptionConversionWarning")
-	_aVCaptionConversionWarningSelWarningType = objc.RegisterName("warningType")
+	_clsAVCaptionConversionWarning                = _objcClass("AVCaptionConversionWarning")
+	_aVCaptionConversionWarningSelWarningType     = objc.RegisterName("warningType")
 	_aVCaptionConversionWarningSelRangeOfCaptions = objc.RegisterName("rangeOfCaptions")
-	_aVCaptionConversionWarningSelAdjustment = objc.RegisterName("adjustment")
+	_aVCaptionConversionWarningSelAdjustment      = objc.RegisterName("adjustment")
 )
 
 func AVCaptionConversionWarningFromID(id objc.ID) *AVCaptionConversionWarning {
@@ -35,7 +35,9 @@ func AVCaptionConversionWarningFromID(id objc.ID) *AVCaptionConversionWarning {
 // @property      warningType @abstract      Indicates the type of warning provided by the receiver.
 func (o *AVCaptionConversionWarning) WarningType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionWarningSelWarningType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *AVCaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
 // @property      adjustment @abstract      Indicates an adjustment to the indicated captions that can be applied in order to correct the problem. @discussion    If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
 func (o *AVCaptionConversionWarning) Adjustment() *AVCaptionConversionAdjustment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionWarningSelAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionConversionAdjustmentFromID(_ret)
 }
-

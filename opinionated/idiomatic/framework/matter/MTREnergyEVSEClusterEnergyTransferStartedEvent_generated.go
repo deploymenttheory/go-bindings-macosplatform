@@ -16,7 +16,9 @@ type MTREnergyEVSEClusterEnergyTransferStartedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterEnergyTransferStartedEvent].
-func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent { return x.inner }
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTREnergyEVSEClusterEnergyTransferStartedEventable interface {
 }
 
 var _ MTREnergyEVSEClusterEnergyTransferStartedEventable = (*MTREnergyEVSEClusterEnergyTransferStartedEvent)(nil)
-

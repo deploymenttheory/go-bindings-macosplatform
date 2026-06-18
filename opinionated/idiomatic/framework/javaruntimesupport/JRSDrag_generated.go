@@ -41,4 +41,3 @@ type Dragable interface {
 }
 
 var _ Dragable = (*Drag)(nil)
-

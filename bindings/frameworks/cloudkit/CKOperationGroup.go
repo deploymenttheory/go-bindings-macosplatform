@@ -16,20 +16,20 @@ type CKOperationGroup struct {
 }
 
 var (
-	_clsCKOperationGroup = _objcClass("CKOperationGroup")
-	_cKOperationGroupSelInit = objc.RegisterName("init")
-	_cKOperationGroupSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_cKOperationGroupSelOperationGroupID = objc.RegisterName("operationGroupID")
-	_cKOperationGroupSelDefaultConfiguration = objc.RegisterName("defaultConfiguration")
+	_clsCKOperationGroup                        = _objcClass("CKOperationGroup")
+	_cKOperationGroupSelInit                    = objc.RegisterName("init")
+	_cKOperationGroupSelInitWithCoder           = objc.RegisterName("initWithCoder:")
+	_cKOperationGroupSelOperationGroupID        = objc.RegisterName("operationGroupID")
+	_cKOperationGroupSelDefaultConfiguration    = objc.RegisterName("defaultConfiguration")
 	_cKOperationGroupSelSetDefaultConfiguration = objc.RegisterName("setDefaultConfiguration:")
-	_cKOperationGroupSelName = objc.RegisterName("name")
-	_cKOperationGroupSelSetName = objc.RegisterName("setName:")
-	_cKOperationGroupSelQuantity = objc.RegisterName("quantity")
-	_cKOperationGroupSelSetQuantity = objc.RegisterName("setQuantity:")
-	_cKOperationGroupSelExpectedSendSize = objc.RegisterName("expectedSendSize")
-	_cKOperationGroupSelSetExpectedSendSize = objc.RegisterName("setExpectedSendSize:")
-	_cKOperationGroupSelExpectedReceiveSize = objc.RegisterName("expectedReceiveSize")
-	_cKOperationGroupSelSetExpectedReceiveSize = objc.RegisterName("setExpectedReceiveSize:")
+	_cKOperationGroupSelName                    = objc.RegisterName("name")
+	_cKOperationGroupSelSetName                 = objc.RegisterName("setName:")
+	_cKOperationGroupSelQuantity                = objc.RegisterName("quantity")
+	_cKOperationGroupSelSetQuantity             = objc.RegisterName("setQuantity:")
+	_cKOperationGroupSelExpectedSendSize        = objc.RegisterName("expectedSendSize")
+	_cKOperationGroupSelSetExpectedSendSize     = objc.RegisterName("setExpectedSendSize:")
+	_cKOperationGroupSelExpectedReceiveSize     = objc.RegisterName("expectedReceiveSize")
+	_cKOperationGroupSelSetExpectedReceiveSize  = objc.RegisterName("setExpectedReceiveSize:")
 )
 
 func CKOperationGroupFromID(id objc.ID) *CKOperationGroup {
@@ -45,28 +45,36 @@ func CKOperationGroupFromID(id objc.ID) *CKOperationGroup {
 // Creates an operation group.
 func (o *CKOperationGroup) Init() *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationGroupFromID(_ret)
 }
 
 // Creates an operation group from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the group.
 func (o *CKOperationGroup) InitWithCoder(aDecoder *foundation.NSCoder) *CKOperationGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationGroupFromID(_ret)
 }
 
-// The operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for ``CKOperationGroup``.
+// The operation group's unique identifier. The framework generates this value and it's unique to this operation group. The system sends this identifier to CloudKit, which can use it to identify server-side logs for “CKOperationGroup“.
 func (o *CKOperationGroup) OperationGroupID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelOperationGroupID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see ``CKOperation/Configuration``.
+// The default configuration for operations in the group. If an operation in the group has its own configuration, that configuration's values override the default configuration's values. For more information, see “CKOperation/Configuration“.
 func (o *CKOperationGroup) DefaultConfiguration() *CKOperationConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelDefaultConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKOperationConfigurationFromID(_ret)
 }
 
@@ -74,10 +82,12 @@ func (o *CKOperationGroup) SetDefaultConfiguration(defaultConfiguration *CKOpera
 	o.Ptr().Send(_cKOperationGroupSelSetDefaultConfiguration, defaultConfiguration.Ptr())
 }
 
-// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for ``CKOperationGroup``. The name must not include any personal data.
+// The operation group's name. The system sends the name of the operation group to CloudKit to provide aggregate reporting for “CKOperationGroup“. The name must not include any personal data.
 func (o *CKOperationGroup) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKOperationGroupSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,4 +124,3 @@ func (o *CKOperationGroup) ExpectedReceiveSize() CKOperationGroupTransferSize {
 func (o *CKOperationGroup) SetExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) {
 	o.Ptr().Send(_cKOperationGroupSelSetExpectedReceiveSize, expectedReceiveSize)
 }
-

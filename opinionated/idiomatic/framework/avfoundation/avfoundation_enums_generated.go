@@ -12,11 +12,11 @@ import (
 type AVAssetExportSessionStatus int64
 
 const (
-	AVAssetExportSessionStatusUnknown AVAssetExportSessionStatus = 0
-	AVAssetExportSessionStatusWaiting AVAssetExportSessionStatus = 1
+	AVAssetExportSessionStatusUnknown   AVAssetExportSessionStatus = 0
+	AVAssetExportSessionStatusWaiting   AVAssetExportSessionStatus = 1
 	AVAssetExportSessionStatusExporting AVAssetExportSessionStatus = 2
 	AVAssetExportSessionStatusCompleted AVAssetExportSessionStatus = 3
-	AVAssetExportSessionStatusFailed AVAssetExportSessionStatus = 4
+	AVAssetExportSessionStatusFailed    AVAssetExportSessionStatus = 4
 	AVAssetExportSessionStatusCancelled AVAssetExportSessionStatus = 5
 )
 
@@ -42,10 +42,10 @@ func (e AVAssetExportSessionStatus) String() string {
 type AVAssetReaderStatus int64
 
 const (
-	AVAssetReaderStatusUnknown AVAssetReaderStatus = 0
-	AVAssetReaderStatusReading AVAssetReaderStatus = 1
+	AVAssetReaderStatusUnknown   AVAssetReaderStatus = 0
+	AVAssetReaderStatusReading   AVAssetReaderStatus = 1
 	AVAssetReaderStatusCompleted AVAssetReaderStatus = 2
-	AVAssetReaderStatusFailed AVAssetReaderStatus = 3
+	AVAssetReaderStatusFailed    AVAssetReaderStatus = 3
 	AVAssetReaderStatusCancelled AVAssetReaderStatus = 4
 )
 
@@ -81,7 +81,7 @@ const (
 	// Indicates that references from a local asset to local media data stored outside the asset's container file should not be followed.
 	AVAssetReferenceRestrictionForbidLocalReferenceToLocal AVAssetReferenceRestrictions = 8
 	// Indicates that only references to media data stored within the asset's container file should be allowed.
-	AVAssetReferenceRestrictionForbidAll AVAssetReferenceRestrictions = 65535
+	AVAssetReferenceRestrictionForbidAll     AVAssetReferenceRestrictions = 65535
 	AVAssetReferenceRestrictionDefaultPolicy AVAssetReferenceRestrictions = 2
 )
 
@@ -115,7 +115,7 @@ type AVAssetSegmentType int64
 
 const (
 	AVAssetSegmentTypeInitialization AVAssetSegmentType = 1
-	AVAssetSegmentTypeSeparable AVAssetSegmentType = 2
+	AVAssetSegmentTypeSeparable      AVAssetSegmentType = 2
 )
 
 func (e AVAssetSegmentType) String() string {
@@ -133,9 +133,9 @@ func (e AVAssetSegmentType) String() string {
 type AVAssetTrackGroupOutputHandling uint64
 
 const (
-	AVAssetTrackGroupOutputHandlingNone AVAssetTrackGroupOutputHandling = 0
+	AVAssetTrackGroupOutputHandlingNone                    AVAssetTrackGroupOutputHandling = 0
 	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks AVAssetTrackGroupOutputHandling = 1
-	AVAssetTrackGroupOutputHandlingDefaultPolicy AVAssetTrackGroupOutputHandling = 0
+	AVAssetTrackGroupOutputHandlingDefaultPolicy           AVAssetTrackGroupOutputHandling = 0
 )
 
 func (e AVAssetTrackGroupOutputHandling) String() string {
@@ -152,10 +152,10 @@ func (e AVAssetTrackGroupOutputHandling) String() string {
 type AVAssetWriterStatus int64
 
 const (
-	AVAssetWriterStatusUnknown AVAssetWriterStatus = 0
-	AVAssetWriterStatusWriting AVAssetWriterStatus = 1
+	AVAssetWriterStatusUnknown   AVAssetWriterStatus = 0
+	AVAssetWriterStatusWriting   AVAssetWriterStatus = 1
 	AVAssetWriterStatusCompleted AVAssetWriterStatus = 2
-	AVAssetWriterStatusFailed AVAssetWriterStatus = 3
+	AVAssetWriterStatusFailed    AVAssetWriterStatus = 3
 	AVAssetWriterStatusCancelled AVAssetWriterStatus = 4
 )
 
@@ -180,9 +180,9 @@ func (e AVAssetWriterStatus) String() string {
 type AVAudioSpatializationFormats uint64
 
 const (
-	AVAudioSpatializationFormatNone AVAudioSpatializationFormats = 0
-	AVAudioSpatializationFormatMonoAndStereo AVAudioSpatializationFormats = 3
-	AVAudioSpatializationFormatMultichannel AVAudioSpatializationFormats = 4
+	AVAudioSpatializationFormatNone                      AVAudioSpatializationFormats = 0
+	AVAudioSpatializationFormatMonoAndStereo             AVAudioSpatializationFormats = 3
+	AVAudioSpatializationFormatMultichannel              AVAudioSpatializationFormats = 4
 	AVAudioSpatializationFormatMonoStereoAndMultichannel AVAudioSpatializationFormats = 7
 )
 
@@ -207,9 +207,9 @@ type AVAuthorizationStatus int64
 
 const (
 	AVAuthorizationStatusNotDetermined AVAuthorizationStatus = 0
-	AVAuthorizationStatusRestricted AVAuthorizationStatus = 1
-	AVAuthorizationStatusDenied AVAuthorizationStatus = 2
-	AVAuthorizationStatusAuthorized AVAuthorizationStatus = 3
+	AVAuthorizationStatusRestricted    AVAuthorizationStatus = 1
+	AVAuthorizationStatusDenied        AVAuthorizationStatus = 2
+	AVAuthorizationStatusAuthorized    AVAuthorizationStatus = 3
 )
 
 func (e AVAuthorizationStatus) String() string {
@@ -230,7 +230,7 @@ func (e AVAuthorizationStatus) String() string {
 type AVCaptionAnimation int64
 
 const (
-	AVCaptionAnimationNone AVCaptionAnimation = 0
+	AVCaptionAnimationNone            AVCaptionAnimation = 0
 	AVCaptionAnimationCharacterReveal AVCaptionAnimation = 1
 )
 
@@ -248,10 +248,10 @@ func (e AVCaptionAnimation) String() string {
 type AVCaptionConversionValidatorStatus int64
 
 const (
-	AVCaptionConversionValidatorStatusUnknown AVCaptionConversionValidatorStatus = 0
+	AVCaptionConversionValidatorStatusUnknown    AVCaptionConversionValidatorStatus = 0
 	AVCaptionConversionValidatorStatusValidating AVCaptionConversionValidatorStatus = 1
-	AVCaptionConversionValidatorStatusCompleted AVCaptionConversionValidatorStatus = 2
-	AVCaptionConversionValidatorStatusStopped AVCaptionConversionValidatorStatus = 3
+	AVCaptionConversionValidatorStatusCompleted  AVCaptionConversionValidatorStatus = 2
+	AVCaptionConversionValidatorStatusStopped    AVCaptionConversionValidatorStatus = 3
 )
 
 func (e AVCaptionConversionValidatorStatus) String() string {
@@ -273,10 +273,10 @@ func (e AVCaptionConversionValidatorStatus) String() string {
 type AVCaptionDecoration uint64
 
 const (
-	AVCaptionDecorationNone AVCaptionDecoration = 0
-	AVCaptionDecorationUnderline AVCaptionDecoration = 1
+	AVCaptionDecorationNone        AVCaptionDecoration = 0
+	AVCaptionDecorationUnderline   AVCaptionDecoration = 1
 	AVCaptionDecorationLineThrough AVCaptionDecoration = 2
-	AVCaptionDecorationOverline AVCaptionDecoration = 4
+	AVCaptionDecorationOverline    AVCaptionDecoration = 4
 )
 
 func (e AVCaptionDecoration) String() string {
@@ -300,8 +300,8 @@ type AVCaptionFontStyle int64
 
 const (
 	AVCaptionFontStyleUnknown AVCaptionFontStyle = 0
-	AVCaptionFontStyleNormal AVCaptionFontStyle = 1
-	AVCaptionFontStyleItalic AVCaptionFontStyle = 2
+	AVCaptionFontStyleNormal  AVCaptionFontStyle = 1
+	AVCaptionFontStyleItalic  AVCaptionFontStyle = 2
 )
 
 func (e AVCaptionFontStyle) String() string {
@@ -321,8 +321,8 @@ type AVCaptionFontWeight int64
 
 const (
 	AVCaptionFontWeightUnknown AVCaptionFontWeight = 0
-	AVCaptionFontWeightNormal AVCaptionFontWeight = 1
-	AVCaptionFontWeightBold AVCaptionFontWeight = 2
+	AVCaptionFontWeightNormal  AVCaptionFontWeight = 1
+	AVCaptionFontWeightBold    AVCaptionFontWeight = 2
 )
 
 func (e AVCaptionFontWeight) String() string {
@@ -343,7 +343,7 @@ type AVCaptionRegionDisplayAlignment int64
 const (
 	AVCaptionRegionDisplayAlignmentBefore AVCaptionRegionDisplayAlignment = 0
 	AVCaptionRegionDisplayAlignmentCenter AVCaptionRegionDisplayAlignment = 1
-	AVCaptionRegionDisplayAlignmentAfter AVCaptionRegionDisplayAlignment = 2
+	AVCaptionRegionDisplayAlignmentAfter  AVCaptionRegionDisplayAlignment = 2
 )
 
 func (e AVCaptionRegionDisplayAlignment) String() string {
@@ -362,7 +362,7 @@ func (e AVCaptionRegionDisplayAlignment) String() string {
 type AVCaptionRegionScroll int64
 
 const (
-	AVCaptionRegionScrollNone AVCaptionRegionScroll = 0
+	AVCaptionRegionScrollNone   AVCaptionRegionScroll = 0
 	AVCaptionRegionScrollRollUp AVCaptionRegionScroll = 1
 )
 
@@ -398,10 +398,10 @@ func (e AVCaptionRegionWritingMode) String() string {
 type AVCaptionRubyAlignment int64
 
 const (
-	AVCaptionRubyAlignmentStart AVCaptionRubyAlignment = 0
-	AVCaptionRubyAlignmentCenter AVCaptionRubyAlignment = 1
+	AVCaptionRubyAlignmentStart                  AVCaptionRubyAlignment = 0
+	AVCaptionRubyAlignmentCenter                 AVCaptionRubyAlignment = 1
 	AVCaptionRubyAlignmentDistributeSpaceBetween AVCaptionRubyAlignment = 2
-	AVCaptionRubyAlignmentDistributeSpaceAround AVCaptionRubyAlignment = 3
+	AVCaptionRubyAlignmentDistributeSpaceAround  AVCaptionRubyAlignment = 3
 )
 
 func (e AVCaptionRubyAlignment) String() string {
@@ -423,7 +423,7 @@ type AVCaptionRubyPosition int64
 
 const (
 	AVCaptionRubyPositionBefore AVCaptionRubyPosition = 0
-	AVCaptionRubyPositionAfter AVCaptionRubyPosition = 1
+	AVCaptionRubyPositionAfter  AVCaptionRubyPosition = 1
 )
 
 func (e AVCaptionRubyPosition) String() string {
@@ -440,11 +440,11 @@ func (e AVCaptionRubyPosition) String() string {
 type AVCaptionTextAlignment int64
 
 const (
-	AVCaptionTextAlignmentStart AVCaptionTextAlignment = 0
-	AVCaptionTextAlignmentEnd AVCaptionTextAlignment = 1
+	AVCaptionTextAlignmentStart  AVCaptionTextAlignment = 0
+	AVCaptionTextAlignmentEnd    AVCaptionTextAlignment = 1
 	AVCaptionTextAlignmentCenter AVCaptionTextAlignment = 2
-	AVCaptionTextAlignmentLeft AVCaptionTextAlignment = 3
-	AVCaptionTextAlignmentRight AVCaptionTextAlignment = 4
+	AVCaptionTextAlignmentLeft   AVCaptionTextAlignment = 3
+	AVCaptionTextAlignmentRight  AVCaptionTextAlignment = 4
 )
 
 func (e AVCaptionTextAlignment) String() string {
@@ -467,12 +467,12 @@ func (e AVCaptionTextAlignment) String() string {
 type AVCaptionTextCombine int64
 
 const (
-	AVCaptionTextCombineAll AVCaptionTextCombine = -1
-	AVCaptionTextCombineNone AVCaptionTextCombine = 0
-	AVCaptionTextCombineOneDigit AVCaptionTextCombine = 1
-	AVCaptionTextCombineTwoDigits AVCaptionTextCombine = 2
+	AVCaptionTextCombineAll         AVCaptionTextCombine = -1
+	AVCaptionTextCombineNone        AVCaptionTextCombine = 0
+	AVCaptionTextCombineOneDigit    AVCaptionTextCombine = 1
+	AVCaptionTextCombineTwoDigits   AVCaptionTextCombine = 2
 	AVCaptionTextCombineThreeDigits AVCaptionTextCombine = 3
-	AVCaptionTextCombineFourDigits AVCaptionTextCombine = 4
+	AVCaptionTextCombineFourDigits  AVCaptionTextCombine = 4
 )
 
 func (e AVCaptionTextCombine) String() string {
@@ -498,8 +498,8 @@ type AVCaptionUnitsType int64
 
 const (
 	AVCaptionUnitsTypeUnspecified AVCaptionUnitsType = 0
-	AVCaptionUnitsTypeCells AVCaptionUnitsType = 1
-	AVCaptionUnitsTypePercent AVCaptionUnitsType = 2
+	AVCaptionUnitsTypeCells       AVCaptionUnitsType = 1
+	AVCaptionUnitsTypePercent     AVCaptionUnitsType = 2
 )
 
 func (e AVCaptionUnitsType) String() string {
@@ -518,9 +518,9 @@ func (e AVCaptionUnitsType) String() string {
 type AVCaptureAutoFocusSystem int64
 
 const (
-	AVCaptureAutoFocusSystemNone AVCaptureAutoFocusSystem = 0
+	AVCaptureAutoFocusSystemNone              AVCaptureAutoFocusSystem = 0
 	AVCaptureAutoFocusSystemContrastDetection AVCaptureAutoFocusSystem = 1
-	AVCaptureAutoFocusSystemPhaseDetection AVCaptureAutoFocusSystem = 2
+	AVCaptureAutoFocusSystemPhaseDetection    AVCaptureAutoFocusSystem = 2
 )
 
 func (e AVCaptureAutoFocusSystem) String() string {
@@ -567,8 +567,8 @@ func (e AVCaptureCameraLensSmudgeDetectionStatus) String() string {
 type AVCaptureCenterStageControlMode int64
 
 const (
-	AVCaptureCenterStageControlModeUser AVCaptureCenterStageControlMode = 0
-	AVCaptureCenterStageControlModeApp AVCaptureCenterStageControlMode = 1
+	AVCaptureCenterStageControlModeUser        AVCaptureCenterStageControlMode = 0
+	AVCaptureCenterStageControlModeApp         AVCaptureCenterStageControlMode = 1
 	AVCaptureCenterStageControlModeCooperative AVCaptureCenterStageControlMode = 2
 )
 
@@ -633,8 +633,8 @@ type AVCaptureDevicePosition int64
 
 const (
 	AVCaptureDevicePositionUnspecified AVCaptureDevicePosition = 0
-	AVCaptureDevicePositionBack AVCaptureDevicePosition = 1
-	AVCaptureDevicePositionFront AVCaptureDevicePosition = 2
+	AVCaptureDevicePositionBack        AVCaptureDevicePosition = 1
+	AVCaptureDevicePositionFront       AVCaptureDevicePosition = 2
 )
 
 func (e AVCaptureDevicePosition) String() string {
@@ -654,7 +654,7 @@ type AVCaptureDeviceTransportControlsPlaybackMode int64
 
 const (
 	AVCaptureDeviceTransportControlsNotPlayingMode AVCaptureDeviceTransportControlsPlaybackMode = 0
-	AVCaptureDeviceTransportControlsPlayingMode AVCaptureDeviceTransportControlsPlaybackMode = 1
+	AVCaptureDeviceTransportControlsPlayingMode    AVCaptureDeviceTransportControlsPlaybackMode = 1
 )
 
 func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
@@ -671,10 +671,10 @@ func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
 type AVCaptureExposureMode int64
 
 const (
-	AVCaptureExposureModeLocked AVCaptureExposureMode = 0
-	AVCaptureExposureModeAutoExpose AVCaptureExposureMode = 1
+	AVCaptureExposureModeLocked                 AVCaptureExposureMode = 0
+	AVCaptureExposureModeAutoExpose             AVCaptureExposureMode = 1
 	AVCaptureExposureModeContinuousAutoExposure AVCaptureExposureMode = 2
-	AVCaptureExposureModeCustom AVCaptureExposureMode = 3
+	AVCaptureExposureModeCustom                 AVCaptureExposureMode = 3
 )
 
 func (e AVCaptureExposureMode) String() string {
@@ -695,8 +695,8 @@ func (e AVCaptureExposureMode) String() string {
 type AVCaptureFlashMode int64
 
 const (
-	AVCaptureFlashModeOff AVCaptureFlashMode = 0
-	AVCaptureFlashModeOn AVCaptureFlashMode = 1
+	AVCaptureFlashModeOff  AVCaptureFlashMode = 0
+	AVCaptureFlashModeOn   AVCaptureFlashMode = 1
 	AVCaptureFlashModeAuto AVCaptureFlashMode = 2
 )
 
@@ -716,8 +716,8 @@ func (e AVCaptureFlashMode) String() string {
 type AVCaptureFocusMode int64
 
 const (
-	AVCaptureFocusModeLocked AVCaptureFocusMode = 0
-	AVCaptureFocusModeAutoFocus AVCaptureFocusMode = 1
+	AVCaptureFocusModeLocked              AVCaptureFocusMode = 0
+	AVCaptureFocusModeAutoFocus           AVCaptureFocusMode = 1
 	AVCaptureFocusModeContinuousAutoFocus AVCaptureFocusMode = 2
 )
 
@@ -737,8 +737,8 @@ func (e AVCaptureFocusMode) String() string {
 type AVCaptureMicrophoneMode int64
 
 const (
-	AVCaptureMicrophoneModeStandard AVCaptureMicrophoneMode = 0
-	AVCaptureMicrophoneModeWideSpectrum AVCaptureMicrophoneMode = 1
+	AVCaptureMicrophoneModeStandard       AVCaptureMicrophoneMode = 0
+	AVCaptureMicrophoneModeWideSpectrum   AVCaptureMicrophoneMode = 1
 	AVCaptureMicrophoneModeVoiceIsolation AVCaptureMicrophoneMode = 2
 )
 
@@ -758,8 +758,8 @@ func (e AVCaptureMicrophoneMode) String() string {
 type AVCaptureMultichannelAudioMode int64
 
 const (
-	AVCaptureMultichannelAudioModeNone AVCaptureMultichannelAudioMode = 0
-	AVCaptureMultichannelAudioModeStereo AVCaptureMultichannelAudioMode = 1
+	AVCaptureMultichannelAudioModeNone                 AVCaptureMultichannelAudioMode = 0
+	AVCaptureMultichannelAudioModeStereo               AVCaptureMultichannelAudioMode = 1
 	AVCaptureMultichannelAudioModeFirstOrderAmbisonics AVCaptureMultichannelAudioMode = 2
 )
 
@@ -779,10 +779,10 @@ func (e AVCaptureMultichannelAudioMode) String() string {
 type AVCapturePhotoOutputCaptureReadiness int64
 
 const (
-	AVCapturePhotoOutputCaptureReadinessSessionNotRunning AVCapturePhotoOutputCaptureReadiness = 0
-	AVCapturePhotoOutputCaptureReadinessReady AVCapturePhotoOutputCaptureReadiness = 1
-	AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily AVCapturePhotoOutputCaptureReadiness = 2
-	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture AVCapturePhotoOutputCaptureReadiness = 3
+	AVCapturePhotoOutputCaptureReadinessSessionNotRunning            AVCapturePhotoOutputCaptureReadiness = 0
+	AVCapturePhotoOutputCaptureReadinessReady                        AVCapturePhotoOutputCaptureReadiness = 1
+	AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily          AVCapturePhotoOutputCaptureReadiness = 2
+	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture    AVCapturePhotoOutputCaptureReadiness = 3
 	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing AVCapturePhotoOutputCaptureReadiness = 4
 )
 
@@ -806,9 +806,9 @@ func (e AVCapturePhotoOutputCaptureReadiness) String() string {
 type AVCapturePhotoQualityPrioritization int64
 
 const (
-	AVCapturePhotoQualityPrioritizationSpeed AVCapturePhotoQualityPrioritization = 1
+	AVCapturePhotoQualityPrioritizationSpeed    AVCapturePhotoQualityPrioritization = 1
 	AVCapturePhotoQualityPrioritizationBalanced AVCapturePhotoQualityPrioritization = 2
-	AVCapturePhotoQualityPrioritizationQuality AVCapturePhotoQualityPrioritization = 3
+	AVCapturePhotoQualityPrioritizationQuality  AVCapturePhotoQualityPrioritization = 3
 )
 
 func (e AVCapturePhotoQualityPrioritization) String() string {
@@ -828,9 +828,9 @@ func (e AVCapturePhotoQualityPrioritization) String() string {
 type AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 4
 )
 
@@ -855,9 +855,9 @@ type AVCapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
 	AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported AVCapturePrimaryConstituentDeviceSwitchingBehavior = 0
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto AVCapturePrimaryConstituentDeviceSwitchingBehavior = 1
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted AVCapturePrimaryConstituentDeviceSwitchingBehavior = 2
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked AVCapturePrimaryConstituentDeviceSwitchingBehavior = 3
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto        AVCapturePrimaryConstituentDeviceSwitchingBehavior = 1
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted  AVCapturePrimaryConstituentDeviceSwitchingBehavior = 2
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked      AVCapturePrimaryConstituentDeviceSwitchingBehavior = 3
 )
 
 func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
@@ -878,7 +878,7 @@ func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 type AVCaptureSystemUserInterface int64
 
 const (
-	AVCaptureSystemUserInterfaceVideoEffects AVCaptureSystemUserInterface = 1
+	AVCaptureSystemUserInterfaceVideoEffects    AVCaptureSystemUserInterface = 1
 	AVCaptureSystemUserInterfaceMicrophoneModes AVCaptureSystemUserInterface = 2
 )
 
@@ -920,8 +920,8 @@ func (e AVCaptureTimecodeSourceType) String() string {
 type AVCaptureTorchMode int64
 
 const (
-	AVCaptureTorchModeOff AVCaptureTorchMode = 0
-	AVCaptureTorchModeOn AVCaptureTorchMode = 1
+	AVCaptureTorchModeOff  AVCaptureTorchMode = 0
+	AVCaptureTorchModeOn   AVCaptureTorchMode = 1
 	AVCaptureTorchModeAuto AVCaptureTorchMode = 2
 )
 
@@ -942,10 +942,10 @@ func (e AVCaptureTorchMode) String() string {
 type AVCaptureVideoOrientation int64
 
 const (
-	AVCaptureVideoOrientationPortrait AVCaptureVideoOrientation = 1
+	AVCaptureVideoOrientationPortrait           AVCaptureVideoOrientation = 1
 	AVCaptureVideoOrientationPortraitUpsideDown AVCaptureVideoOrientation = 2
-	AVCaptureVideoOrientationLandscapeRight AVCaptureVideoOrientation = 3
-	AVCaptureVideoOrientationLandscapeLeft AVCaptureVideoOrientation = 4
+	AVCaptureVideoOrientationLandscapeRight     AVCaptureVideoOrientation = 3
+	AVCaptureVideoOrientationLandscapeLeft      AVCaptureVideoOrientation = 4
 )
 
 func (e AVCaptureVideoOrientation) String() string {
@@ -966,8 +966,8 @@ func (e AVCaptureVideoOrientation) String() string {
 type AVCaptureWhiteBalanceMode int64
 
 const (
-	AVCaptureWhiteBalanceModeLocked AVCaptureWhiteBalanceMode = 0
-	AVCaptureWhiteBalanceModeAutoWhiteBalance AVCaptureWhiteBalanceMode = 1
+	AVCaptureWhiteBalanceModeLocked                     AVCaptureWhiteBalanceMode = 0
+	AVCaptureWhiteBalanceModeAutoWhiteBalance           AVCaptureWhiteBalanceMode = 1
 	AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance AVCaptureWhiteBalanceMode = 2
 )
 
@@ -987,13 +987,13 @@ func (e AVCaptureWhiteBalanceMode) String() string {
 type AVContentAuthorizationStatus int64
 
 const (
-	AVContentAuthorizationUnknown AVContentAuthorizationStatus = 0
-	AVContentAuthorizationCompleted AVContentAuthorizationStatus = 1
-	AVContentAuthorizationCancelled AVContentAuthorizationStatus = 2
-	AVContentAuthorizationTimedOut AVContentAuthorizationStatus = 3
-	AVContentAuthorizationBusy AVContentAuthorizationStatus = 4
+	AVContentAuthorizationUnknown      AVContentAuthorizationStatus = 0
+	AVContentAuthorizationCompleted    AVContentAuthorizationStatus = 1
+	AVContentAuthorizationCancelled    AVContentAuthorizationStatus = 2
+	AVContentAuthorizationTimedOut     AVContentAuthorizationStatus = 3
+	AVContentAuthorizationBusy         AVContentAuthorizationStatus = 4
 	AVContentAuthorizationNotAvailable AVContentAuthorizationStatus = 5
-	AVContentAuthorizationNotPossible AVContentAuthorizationStatus = 6
+	AVContentAuthorizationNotPossible  AVContentAuthorizationStatus = 6
 )
 
 func (e AVContentAuthorizationStatus) String() string {
@@ -1112,7 +1112,7 @@ func (e AVDepthDataAccuracy) String() string {
 type AVDepthDataQuality int64
 
 const (
-	AVDepthDataQualityLow AVDepthDataQuality = 0
+	AVDepthDataQualityLow  AVDepthDataQuality = 0
 	AVDepthDataQualityHigh AVDepthDataQuality = 1
 )
 
@@ -1186,10 +1186,10 @@ func (e AVExternalSyncDeviceStatus) String() string {
 type AVKeyValueStatus int64
 
 const (
-	AVKeyValueStatusUnknown AVKeyValueStatus = 0
-	AVKeyValueStatusLoading AVKeyValueStatus = 1
-	AVKeyValueStatusLoaded AVKeyValueStatus = 2
-	AVKeyValueStatusFailed AVKeyValueStatus = 3
+	AVKeyValueStatusUnknown   AVKeyValueStatus = 0
+	AVKeyValueStatusLoading   AVKeyValueStatus = 1
+	AVKeyValueStatusLoaded    AVKeyValueStatus = 2
+	AVKeyValueStatusFailed    AVKeyValueStatus = 3
 	AVKeyValueStatusCancelled AVKeyValueStatus = 4
 )
 
@@ -1214,7 +1214,7 @@ func (e AVKeyValueStatus) String() string {
 type AVMovieWritingOptions uint64
 
 const (
-	AVMovieWritingAddMovieHeaderToDestination AVMovieWritingOptions = 0
+	AVMovieWritingAddMovieHeaderToDestination          AVMovieWritingOptions = 0
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly AVMovieWritingOptions = 1
 )
 
@@ -1287,7 +1287,7 @@ const (
 	AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent AVPlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement AVPlayerInterstitialEventRestrictions = 4
-	AVPlayerInterstitialEventRestrictionDefaultPolicy AVPlayerInterstitialEventRestrictions = 0
+	AVPlayerInterstitialEventRestrictionDefaultPolicy                                 AVPlayerInterstitialEventRestrictions = 0
 )
 
 func (e AVPlayerInterstitialEventRestrictions) String() string {
@@ -1355,7 +1355,7 @@ func (e AVPlayerInterstitialEventTimelineOccupancy) String() string {
 type AVPlayerItemSegmentType int64
 
 const (
-	AVPlayerItemSegmentTypePrimary AVPlayerItemSegmentType = 0
+	AVPlayerItemSegmentTypePrimary      AVPlayerItemSegmentType = 0
 	AVPlayerItemSegmentTypeInterstitial AVPlayerItemSegmentType = 1
 )
 
@@ -1398,7 +1398,7 @@ type AVPlayerLooperItemOrdering int64
 
 const (
 	AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems AVPlayerLooperItemOrdering = 0
-	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems AVPlayerLooperItemOrdering = 1
+	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems  AVPlayerLooperItemOrdering = 1
 )
 
 func (e AVPlayerLooperItemOrdering) String() string {
@@ -1415,9 +1415,9 @@ func (e AVPlayerLooperItemOrdering) String() string {
 type AVPlayerLooperStatus int64
 
 const (
-	AVPlayerLooperStatusUnknown AVPlayerLooperStatus = 0
-	AVPlayerLooperStatusReady AVPlayerLooperStatus = 1
-	AVPlayerLooperStatusFailed AVPlayerLooperStatus = 2
+	AVPlayerLooperStatusUnknown   AVPlayerLooperStatus = 0
+	AVPlayerLooperStatusReady     AVPlayerLooperStatus = 1
+	AVPlayerLooperStatusFailed    AVPlayerLooperStatus = 2
 	AVPlayerLooperStatusCancelled AVPlayerLooperStatus = 3
 )
 
@@ -1511,9 +1511,9 @@ func (e AVPlayerTimeControlStatus) String() string {
 type AVQueuedSampleBufferRenderingStatus int64
 
 const (
-	AVQueuedSampleBufferRenderingStatusUnknown AVQueuedSampleBufferRenderingStatus = 0
+	AVQueuedSampleBufferRenderingStatusUnknown   AVQueuedSampleBufferRenderingStatus = 0
 	AVQueuedSampleBufferRenderingStatusRendering AVQueuedSampleBufferRenderingStatus = 1
-	AVQueuedSampleBufferRenderingStatusFailed AVQueuedSampleBufferRenderingStatus = 2
+	AVQueuedSampleBufferRenderingStatusFailed    AVQueuedSampleBufferRenderingStatus = 2
 )
 
 func (e AVQueuedSampleBufferRenderingStatus) String() string {
@@ -1533,7 +1533,7 @@ type AVSampleBufferRequestDirection int64
 
 const (
 	AVSampleBufferRequestDirectionForward AVSampleBufferRequestDirection = 1
-	AVSampleBufferRequestDirectionNone AVSampleBufferRequestDirection = 0
+	AVSampleBufferRequestDirectionNone    AVSampleBufferRequestDirection = 0
 	AVSampleBufferRequestDirectionReverse AVSampleBufferRequestDirection = -1
 )
 
@@ -1553,8 +1553,8 @@ func (e AVSampleBufferRequestDirection) String() string {
 type AVSampleBufferRequestMode int64
 
 const (
-	AVSampleBufferRequestModeImmediate AVSampleBufferRequestMode = 0
-	AVSampleBufferRequestModeScheduled AVSampleBufferRequestMode = 1
+	AVSampleBufferRequestModeImmediate     AVSampleBufferRequestMode = 0
+	AVSampleBufferRequestModeScheduled     AVSampleBufferRequestMode = 1
 	AVSampleBufferRequestModeOpportunistic AVSampleBufferRequestMode = 2
 )
 
@@ -1595,9 +1595,9 @@ func (e AVVariantPreferences) String() string {
 type AVVideoFieldMode int64
 
 const (
-	AVVideoFieldModeBoth AVVideoFieldMode = 0
-	AVVideoFieldModeTopOnly AVVideoFieldMode = 1
-	AVVideoFieldModeBottomOnly AVVideoFieldMode = 2
+	AVVideoFieldModeBoth        AVVideoFieldMode = 0
+	AVVideoFieldModeTopOnly     AVVideoFieldMode = 1
+	AVVideoFieldModeBottomOnly  AVVideoFieldMode = 2
 	AVVideoFieldModeDeinterlace AVVideoFieldMode = 3
 )
 
@@ -1619,7 +1619,7 @@ func (e AVVideoFieldMode) String() string {
 type CMTagCollectionVideoOutputPreset int64
 
 const (
-	KCMTagCollectionVideoOutputPreset_Monoscopic CMTagCollectionVideoOutputPreset = 0
+	KCMTagCollectionVideoOutputPreset_Monoscopic   CMTagCollectionVideoOutputPreset = 0
 	KCMTagCollectionVideoOutputPreset_Stereoscopic CMTagCollectionVideoOutputPreset = 1
 )
 
@@ -1633,4 +1633,3 @@ func (e CMTagCollectionVideoOutputPreset) String() string {
 		return fmt.Sprintf("CMTagCollectionVideoOutputPreset(%d)", int64(e))
 	}
 }
-

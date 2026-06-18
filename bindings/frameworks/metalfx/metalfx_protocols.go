@@ -271,4 +271,3 @@ type MTLFXTemporalScalerBase interface {
 	Fence() metal.MTLFence
 	SetFence(fence metal.MTLFence)
 }
-

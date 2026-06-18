@@ -125,4 +125,3 @@ type CachedImageRepable interface {
 }
 
 var _ CachedImageRepable = (*CachedImageRep)(nil)
-

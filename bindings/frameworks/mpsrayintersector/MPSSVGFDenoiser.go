@@ -17,17 +17,17 @@ type MPSSVGFDenoiser struct {
 }
 
 var (
-	_clsMPSSVGFDenoiser = _objcClass("MPSSVGFDenoiser")
-	_mPSSVGFDenoiserSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSSVGFDenoiserSelInitWithSVGFTextureAllocator = objc.RegisterName("initWithSVGF:textureAllocator:")
-	_mPSSVGFDenoiserSelClearTemporalHistory = objc.RegisterName("clearTemporalHistory")
-	_mPSSVGFDenoiserSelReleaseTemporaryTextures = objc.RegisterName("releaseTemporaryTextures")
-	_mPSSVGFDenoiserSelEncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture = objc.RegisterName("encodeToCommandBuffer:sourceTexture:motionVectorTexture:depthNormalTexture:previousDepthNormalTexture:")
+	_clsMPSSVGFDenoiser                                                                                                                                                     = _objcClass("MPSSVGFDenoiser")
+	_mPSSVGFDenoiserSelInitWithDevice                                                                                                                                       = objc.RegisterName("initWithDevice:")
+	_mPSSVGFDenoiserSelInitWithSVGFTextureAllocator                                                                                                                         = objc.RegisterName("initWithSVGF:textureAllocator:")
+	_mPSSVGFDenoiserSelClearTemporalHistory                                                                                                                                 = objc.RegisterName("clearTemporalHistory")
+	_mPSSVGFDenoiserSelReleaseTemporaryTextures                                                                                                                             = objc.RegisterName("releaseTemporaryTextures")
+	_mPSSVGFDenoiserSelEncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture                                                    = objc.RegisterName("encodeToCommandBuffer:sourceTexture:motionVectorTexture:depthNormalTexture:previousDepthNormalTexture:")
 	_mPSSVGFDenoiserSelEncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture = objc.RegisterName("encodeToCommandBuffer:sourceTexture:destinationTexture:sourceTexture2:destinationTexture2:motionVectorTexture:depthNormalTexture:previousDepthNormalTexture:")
-	_mPSSVGFDenoiserSelSvgf = objc.RegisterName("svgf")
-	_mPSSVGFDenoiserSelTextureAllocator = objc.RegisterName("textureAllocator")
-	_mPSSVGFDenoiserSelBilateralFilterIterations = objc.RegisterName("bilateralFilterIterations")
-	_mPSSVGFDenoiserSelSetBilateralFilterIterations = objc.RegisterName("setBilateralFilterIterations:")
+	_mPSSVGFDenoiserSelSvgf                                                                                                                                                 = objc.RegisterName("svgf")
+	_mPSSVGFDenoiserSelTextureAllocator                                                                                                                                     = objc.RegisterName("textureAllocator")
+	_mPSSVGFDenoiserSelBilateralFilterIterations                                                                                                                            = objc.RegisterName("bilateralFilterIterations")
+	_mPSSVGFDenoiserSelSetBilateralFilterIterations                                                                                                                         = objc.RegisterName("setBilateralFilterIterations:")
 )
 
 func MPSSVGFDenoiserFromID(id objc.ID) *MPSSVGFDenoiser {
@@ -43,14 +43,18 @@ func MPSSVGFDenoiserFromID(id objc.ID) *MPSSVGFDenoiser {
 // @brief Initialize the MPSSVGFDenoiser object @parameter device The Metal device to use for denoising
 func (o *MPSSVGFDenoiser) InitWithDevice(device metal.MTLDevice) *MPSSVGFDenoiser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSSVGFDenoiserSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSSVGFDenoiserFromID(_ret)
 }
 
 // @brief Initialize the MPSSVGFDenoiser object @parameter svgf             MPSSVGF kernels to use for denoising. This object can be used to configure temporal reprojection, bilateral blur settings, etc. @parameter textureAllocator An object conforming to the MPSSVGFTextureAllocator protocol. This object will be used to allocate temporary intermediate and output textures. This can be a custom object or an instance of the MPSSVGFDefaultTextureAllocator class.
 func (o *MPSSVGFDenoiser) InitWithSVGFTextureAllocator(svgf *MPSSVGF, textureAllocator MPSSVGFTextureAllocator) *MPSSVGFDenoiser {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSSVGFDenoiserSelInitWithSVGFTextureAllocator, svgf.Ptr(), textureAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSSVGFDenoiserFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *MPSSVGFDenoiser) EncodeToCommandBufferSourceTextureDestinationTextureSo
 // @brief The underlying MPSSVGF kernels object which will be used for denoising. Use this object to customize the denoising process.
 func (o *MPSSVGFDenoiser) Svgf() *MPSSVGF {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSSVGFDenoiserSelSvgf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSSVGFFromID(_ret)
 }
 
@@ -97,4 +103,3 @@ func (o *MPSSVGFDenoiser) BilateralFilterIterations() uint {
 func (o *MPSSVGFDenoiser) SetBilateralFilterIterations(bilateralFilterIterations uint) {
 	o.Ptr().Send(_mPSSVGFDenoiserSelSetBilateralFilterIterations, bilateralFilterIterations)
 }
-

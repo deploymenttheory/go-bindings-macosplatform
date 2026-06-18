@@ -48,4 +48,3 @@ type GPUComputeDeviceable interface {
 }
 
 var _ GPUComputeDeviceable = (*GPUComputeDevice)(nil)
-

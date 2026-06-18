@@ -76,11 +76,17 @@ func (x *ImageReduceColumnMean) WithLabel(label string) *ImageReduceColumnMean {
 	return x
 }
 
-func (x *ImageReduceColumnMean) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceColumnMean) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceColumnMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceColumnMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceColumnMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceColumnMean) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceColumnMeanable is the interface implemented by [ImageReduceColumnMean], for mocking and DI.
 type ImageReduceColumnMeanable interface {
@@ -94,4 +100,3 @@ type ImageReduceColumnMeanable interface {
 }
 
 var _ ImageReduceColumnMeanable = (*ImageReduceColumnMean)(nil)
-

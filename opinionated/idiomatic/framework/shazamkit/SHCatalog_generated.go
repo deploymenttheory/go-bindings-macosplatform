@@ -55,4 +55,3 @@ type Catalogable interface {
 }
 
 var _ Catalogable = (*Catalog)(nil)
-

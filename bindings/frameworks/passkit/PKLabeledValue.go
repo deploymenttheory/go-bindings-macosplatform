@@ -16,10 +16,10 @@ type PKLabeledValue struct {
 }
 
 var (
-	_clsPKLabeledValue = _objcClass("PKLabeledValue")
+	_clsPKLabeledValue                   = _objcClass("PKLabeledValue")
 	_pKLabeledValueSelInitWithLabelValue = objc.RegisterName("initWithLabel:value:")
-	_pKLabeledValueSelLabel = objc.RegisterName("label")
-	_pKLabeledValueSelValue = objc.RegisterName("value")
+	_pKLabeledValueSelLabel              = objc.RegisterName("label")
+	_pKLabeledValueSelValue              = objc.RegisterName("value")
 )
 
 func PKLabeledValueFromID(id objc.ID) *PKLabeledValue {
@@ -34,19 +34,24 @@ func PKLabeledValueFromID(id objc.ID) *PKLabeledValue {
 
 func (o *PKLabeledValue) InitWithLabelValue(label *foundation.NSString, value *foundation.NSString) *PKLabeledValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKLabeledValueSelInitWithLabelValue, label.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKLabeledValueFromID(_ret)
 }
 
 func (o *PKLabeledValue) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKLabeledValueSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKLabeledValue) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKLabeledValueSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

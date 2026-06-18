@@ -17,7 +17,7 @@ type SKProductsRequest struct {
 }
 
 var (
-	_clsSKProductsRequest = _objcClass("SKProductsRequest")
+	_clsSKProductsRequest                           = _objcClass("SKProductsRequest")
 	_sKProductsRequestSelInitWithProductIdentifiers = objc.RegisterName("initWithProductIdentifiers:")
 )
 
@@ -33,7 +33,8 @@ func SKProductsRequestFromID(id objc.ID) *SKProductsRequest {
 
 func (o *SKProductsRequest) InitWithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *SKProductsRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKProductsRequestSelInitWithProductIdentifiers, productIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKProductsRequestFromID(_ret)
 }
-

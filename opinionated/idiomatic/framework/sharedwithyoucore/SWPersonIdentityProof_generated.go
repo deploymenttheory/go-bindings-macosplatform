@@ -69,4 +69,3 @@ type PersonIdentityProofable interface {
 }
 
 var _ PersonIdentityProofable = (*PersonIdentityProof)(nil)
-

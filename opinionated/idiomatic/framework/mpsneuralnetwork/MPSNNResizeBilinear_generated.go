@@ -128,4 +128,3 @@ type NNResizeBilinearable interface {
 }
 
 var _ NNResizeBilinearable = (*NNResizeBilinear)(nil)
-

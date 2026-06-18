@@ -16,10 +16,10 @@ type CLSQuantityItem struct {
 }
 
 var (
-	_clsCLSQuantityItem = _objcClass("CLSQuantityItem")
+	_clsCLSQuantityItem                        = _objcClass("CLSQuantityItem")
 	_cLSQuantityItemSelInitWithIdentifierTitle = objc.RegisterName("initWithIdentifier:title:")
-	_cLSQuantityItemSelQuantity = objc.RegisterName("quantity")
-	_cLSQuantityItemSelSetQuantity = objc.RegisterName("setQuantity:")
+	_cLSQuantityItemSelQuantity                = objc.RegisterName("quantity")
+	_cLSQuantityItemSelSetQuantity             = objc.RegisterName("setQuantity:")
 )
 
 func CLSQuantityItemFromID(id objc.ID) *CLSQuantityItem {
@@ -35,7 +35,9 @@ func CLSQuantityItemFromID(id objc.ID) *CLSQuantityItem {
 // @abstract      Create a quantity item with an identifier and title. @param         identifier      An identifier that is unique within activity. @param         title           Title of the quantity. Ex @em Hints
 func (o *CLSQuantityItem) InitWithIdentifierTitle(identifier *foundation.NSString, title *foundation.NSString) *CLSQuantityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSQuantityItemSelInitWithIdentifierTitle, identifier.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSQuantityItemFromID(_ret)
 }
 
@@ -48,4 +50,3 @@ func (o *CLSQuantityItem) Quantity() float64 {
 func (o *CLSQuantityItem) SetQuantity(quantity float64) {
 	o.Ptr().Send(_cLSQuantityItemSelSetQuantity, quantity)
 }
-

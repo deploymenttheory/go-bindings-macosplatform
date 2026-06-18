@@ -16,12 +16,12 @@ type DOMCSSMediaRule struct {
 }
 
 var (
-	_clsDOMCSSMediaRule = _objcClass("DOMCSSMediaRule")
+	_clsDOMCSSMediaRule                = _objcClass("DOMCSSMediaRule")
 	_dOMCSSMediaRuleSelInsertRuleIndex = objc.RegisterName("insertRule:index:")
-	_dOMCSSMediaRuleSelDeleteRule = objc.RegisterName("deleteRule:")
-	_dOMCSSMediaRuleSelMedia = objc.RegisterName("media")
-	_dOMCSSMediaRuleSelCssRules = objc.RegisterName("cssRules")
-	_dOMCSSMediaRuleSelInsertRule = objc.RegisterName("insertRule::")
+	_dOMCSSMediaRuleSelDeleteRule      = objc.RegisterName("deleteRule:")
+	_dOMCSSMediaRuleSelMedia           = objc.RegisterName("media")
+	_dOMCSSMediaRuleSelCssRules        = objc.RegisterName("cssRules")
+	_dOMCSSMediaRuleSelInsertRule      = objc.RegisterName("insertRule::")
 )
 
 func DOMCSSMediaRuleFromID(id objc.ID) *DOMCSSMediaRule {
@@ -45,13 +45,17 @@ func (o *DOMCSSMediaRule) DeleteRule(index uint) {
 
 func (o *DOMCSSMediaRule) Media() *DOMMediaList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSMediaRuleSelMedia)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMMediaListFromID(_ret)
 }
 
 func (o *DOMCSSMediaRule) CssRules() *DOMCSSRuleList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSMediaRuleSelCssRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSRuleListFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *DOMCSSMediaRule) InsertRule(rule *foundation.NSString, index uint) uint
 	_ret := objc.Send[uint](o.Ptr(), _dOMCSSMediaRuleSelInsertRule, rule.Ptr(), index)
 	return _ret
 }
-

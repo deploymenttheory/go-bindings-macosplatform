@@ -11,7 +11,8 @@ import (
 
 func TkStubsPtr() *TkStubs {
 	ptr, _ := purego.Dlsym(_tkLib, "tkStubsPtr")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**TkStubs)(unsafe.Pointer(ptr))
 }
-

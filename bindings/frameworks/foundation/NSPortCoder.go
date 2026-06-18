@@ -16,15 +16,15 @@ type NSPortCoder struct {
 }
 
 var (
-	_clsNSPortCoder = _objcClass("NSPortCoder")
-	_nSPortCoderSelIsBycopy = objc.RegisterName("isBycopy")
-	_nSPortCoderSelIsByref = objc.RegisterName("isByref")
-	_nSPortCoderSelEncodePortObject = objc.RegisterName("encodePortObject:")
-	_nSPortCoderSelDecodePortObject = objc.RegisterName("decodePortObject")
-	_nSPortCoderSelConnection = objc.RegisterName("connection")
+	_clsNSPortCoder                                           = _objcClass("NSPortCoder")
+	_nSPortCoderSelIsBycopy                                   = objc.RegisterName("isBycopy")
+	_nSPortCoderSelIsByref                                    = objc.RegisterName("isByref")
+	_nSPortCoderSelEncodePortObject                           = objc.RegisterName("encodePortObject:")
+	_nSPortCoderSelDecodePortObject                           = objc.RegisterName("decodePortObject")
+	_nSPortCoderSelConnection                                 = objc.RegisterName("connection")
 	_nSPortCoderSelPortCoderWithReceivePortSendPortComponents = objc.RegisterName("portCoderWithReceivePort:sendPort:components:")
-	_nSPortCoderSelInitWithReceivePortSendPortComponents = objc.RegisterName("initWithReceivePort:sendPort:components:")
-	_nSPortCoderSelDispatch = objc.RegisterName("dispatch")
+	_nSPortCoderSelInitWithReceivePortSendPortComponents      = objc.RegisterName("initWithReceivePort:sendPort:components:")
+	_nSPortCoderSelDispatch                                   = objc.RegisterName("dispatch")
 )
 
 func NSPortCoderFromID(id objc.ID) *NSPortCoder {
@@ -54,14 +54,18 @@ func (o *NSPortCoder) EncodePortObject(aport *NSPort) {
 
 func (o *NSPortCoder) DecodePortObject() *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelDecodePortObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 // Deprecated: since macOS 10.7.
 func (o *NSPortCoder) Connection() *NSConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPortCoderSelConnection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConnectionFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *NSPortCoder) InitWithReceivePortSendPortComponents(rcvPort *NSPort, snd
 func (o *NSPortCoder) Dispatch() {
 	o.Ptr().Send(_nSPortCoderSelDispatch)
 }
-

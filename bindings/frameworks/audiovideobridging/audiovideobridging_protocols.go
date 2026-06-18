@@ -34,4 +34,3 @@ type AVB17221EntityPublisher interface {
 // AVBInterfaceDelegate wraps the ObjC protocol AVBInterfaceDelegate.
 type AVBInterfaceDelegate interface {
 }
-

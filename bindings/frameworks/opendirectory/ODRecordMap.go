@@ -16,16 +16,16 @@ type ODRecordMap struct {
 }
 
 var (
-	_clsODRecordMap = _objcClass("ODRecordMap")
-	_oDRecordMapSelRecordMap = objc.RegisterName("recordMap")
-	_oDRecordMapSelAttributeMapForStandardAttribute = objc.RegisterName("attributeMapForStandardAttribute:")
+	_clsODRecordMap                                    = _objcClass("ODRecordMap")
+	_oDRecordMapSelRecordMap                           = objc.RegisterName("recordMap")
+	_oDRecordMapSelAttributeMapForStandardAttribute    = objc.RegisterName("attributeMapForStandardAttribute:")
 	_oDRecordMapSelSetAttributeMapForStandardAttribute = objc.RegisterName("setAttributeMap:forStandardAttribute:")
-	_oDRecordMapSelNative = objc.RegisterName("native")
-	_oDRecordMapSelSetNative = objc.RegisterName("setNative:")
-	_oDRecordMapSelOdPredicate = objc.RegisterName("odPredicate")
-	_oDRecordMapSelSetOdPredicate = objc.RegisterName("setOdPredicate:")
-	_oDRecordMapSelAttributes = objc.RegisterName("attributes")
-	_oDRecordMapSelStandardAttributeTypes = objc.RegisterName("standardAttributeTypes")
+	_oDRecordMapSelNative                              = objc.RegisterName("native")
+	_oDRecordMapSelSetNative                           = objc.RegisterName("setNative:")
+	_oDRecordMapSelOdPredicate                         = objc.RegisterName("odPredicate")
+	_oDRecordMapSelSetOdPredicate                      = objc.RegisterName("setOdPredicate:")
+	_oDRecordMapSelAttributes                          = objc.RegisterName("attributes")
+	_oDRecordMapSelStandardAttributeTypes              = objc.RegisterName("standardAttributeTypes")
 )
 
 func ODRecordMapFromID(id objc.ID) *ODRecordMap {
@@ -41,14 +41,18 @@ func ODRecordMapFromID(id objc.ID) *ODRecordMap {
 // @method recordMap @abstract Returns an initialized and autoreleased ODRecordMap object. @discussion Returns an initialized and autoreleased ODRecordMap object.
 func ODRecordMapRecordMap() *ODRecordMap {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODRecordMap), _oDRecordMapSelRecordMap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODRecordMapFromID(_ret)
 }
 
 // @method attributeMapForStandardAttribute: @abstract Returns an ODAttributeMap object for the given OD standard attribute. @discussion Returns an ODAttributeMap object for the given OD standard attribute.
 func (o *ODRecordMap) AttributeMapForStandardAttribute(standardAttribute *foundation.NSString) *ODAttributeMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordMapSelAttributeMapForStandardAttribute, standardAttribute.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODAttributeMapFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *ODRecordMap) SetAttributeMapForStandardAttribute(attributeMap *ODAttrib
 
 func (o *ODRecordMap) Native() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordMapSelNative)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,4 +91,3 @@ func (o *ODRecordMap) StandardAttributeTypes() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDRecordMapSelStandardAttributeTypes)
 	return _ret
 }
-

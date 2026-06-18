@@ -17,45 +17,45 @@ type NSURLSession struct {
 }
 
 var (
-	_clsNSURLSession = _objcClass("NSURLSession")
-	_nSURLSessionSelSessionWithConfiguration = objc.RegisterName("sessionWithConfiguration:")
-	_nSURLSessionSelSessionWithConfigurationDelegateDelegateQueue = objc.RegisterName("sessionWithConfiguration:delegate:delegateQueue:")
-	_nSURLSessionSelFinishTasksAndInvalidate = objc.RegisterName("finishTasksAndInvalidate")
-	_nSURLSessionSelInvalidateAndCancel = objc.RegisterName("invalidateAndCancel")
-	_nSURLSessionSelResetWithCompletionHandler = objc.RegisterName("resetWithCompletionHandler:")
-	_nSURLSessionSelFlushWithCompletionHandler = objc.RegisterName("flushWithCompletionHandler:")
-	_nSURLSessionSelGetTasksWithCompletionHandler = objc.RegisterName("getTasksWithCompletionHandler:")
-	_nSURLSessionSelGetAllTasksWithCompletionHandler = objc.RegisterName("getAllTasksWithCompletionHandler:")
-	_nSURLSessionSelDataTaskWithRequest = objc.RegisterName("dataTaskWithRequest:")
-	_nSURLSessionSelDataTaskWithURL = objc.RegisterName("dataTaskWithURL:")
-	_nSURLSessionSelUploadTaskWithRequestFromFile = objc.RegisterName("uploadTaskWithRequest:fromFile:")
-	_nSURLSessionSelUploadTaskWithRequestFromData = objc.RegisterName("uploadTaskWithRequest:fromData:")
-	_nSURLSessionSelUploadTaskWithResumeData = objc.RegisterName("uploadTaskWithResumeData:")
-	_nSURLSessionSelUploadTaskWithStreamedRequest = objc.RegisterName("uploadTaskWithStreamedRequest:")
-	_nSURLSessionSelDownloadTaskWithRequest = objc.RegisterName("downloadTaskWithRequest:")
-	_nSURLSessionSelDownloadTaskWithURL = objc.RegisterName("downloadTaskWithURL:")
-	_nSURLSessionSelDownloadTaskWithResumeData = objc.RegisterName("downloadTaskWithResumeData:")
-	_nSURLSessionSelStreamTaskWithHostNamePort = objc.RegisterName("streamTaskWithHostName:port:")
-	_nSURLSessionSelStreamTaskWithNetService = objc.RegisterName("streamTaskWithNetService:")
-	_nSURLSessionSelWebSocketTaskWithURL = objc.RegisterName("webSocketTaskWithURL:")
-	_nSURLSessionSelWebSocketTaskWithURLProtocols = objc.RegisterName("webSocketTaskWithURL:protocols:")
-	_nSURLSessionSelWebSocketTaskWithRequest = objc.RegisterName("webSocketTaskWithRequest:")
-	_nSURLSessionSelInit = objc.RegisterName("init")
-	_nSURLSessionSelNew = objc.RegisterName("new")
-	_nSURLSessionSelSharedSession = objc.RegisterName("sharedSession")
-	_nSURLSessionSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_nSURLSessionSelDelegate = objc.RegisterName("delegate")
-	_nSURLSessionSelConfiguration = objc.RegisterName("configuration")
-	_nSURLSessionSelSessionDescription = objc.RegisterName("sessionDescription")
-	_nSURLSessionSelSetSessionDescription = objc.RegisterName("setSessionDescription:")
-	_nSURLSessionSelDataTaskWithRequestCompletionHandler = objc.RegisterName("dataTaskWithRequest:completionHandler:")
-	_nSURLSessionSelDataTaskWithURLCompletionHandler = objc.RegisterName("dataTaskWithURL:completionHandler:")
+	_clsNSURLSession                                               = _objcClass("NSURLSession")
+	_nSURLSessionSelSessionWithConfiguration                       = objc.RegisterName("sessionWithConfiguration:")
+	_nSURLSessionSelSessionWithConfigurationDelegateDelegateQueue  = objc.RegisterName("sessionWithConfiguration:delegate:delegateQueue:")
+	_nSURLSessionSelFinishTasksAndInvalidate                       = objc.RegisterName("finishTasksAndInvalidate")
+	_nSURLSessionSelInvalidateAndCancel                            = objc.RegisterName("invalidateAndCancel")
+	_nSURLSessionSelResetWithCompletionHandler                     = objc.RegisterName("resetWithCompletionHandler:")
+	_nSURLSessionSelFlushWithCompletionHandler                     = objc.RegisterName("flushWithCompletionHandler:")
+	_nSURLSessionSelGetTasksWithCompletionHandler                  = objc.RegisterName("getTasksWithCompletionHandler:")
+	_nSURLSessionSelGetAllTasksWithCompletionHandler               = objc.RegisterName("getAllTasksWithCompletionHandler:")
+	_nSURLSessionSelDataTaskWithRequest                            = objc.RegisterName("dataTaskWithRequest:")
+	_nSURLSessionSelDataTaskWithURL                                = objc.RegisterName("dataTaskWithURL:")
+	_nSURLSessionSelUploadTaskWithRequestFromFile                  = objc.RegisterName("uploadTaskWithRequest:fromFile:")
+	_nSURLSessionSelUploadTaskWithRequestFromData                  = objc.RegisterName("uploadTaskWithRequest:fromData:")
+	_nSURLSessionSelUploadTaskWithResumeData                       = objc.RegisterName("uploadTaskWithResumeData:")
+	_nSURLSessionSelUploadTaskWithStreamedRequest                  = objc.RegisterName("uploadTaskWithStreamedRequest:")
+	_nSURLSessionSelDownloadTaskWithRequest                        = objc.RegisterName("downloadTaskWithRequest:")
+	_nSURLSessionSelDownloadTaskWithURL                            = objc.RegisterName("downloadTaskWithURL:")
+	_nSURLSessionSelDownloadTaskWithResumeData                     = objc.RegisterName("downloadTaskWithResumeData:")
+	_nSURLSessionSelStreamTaskWithHostNamePort                     = objc.RegisterName("streamTaskWithHostName:port:")
+	_nSURLSessionSelStreamTaskWithNetService                       = objc.RegisterName("streamTaskWithNetService:")
+	_nSURLSessionSelWebSocketTaskWithURL                           = objc.RegisterName("webSocketTaskWithURL:")
+	_nSURLSessionSelWebSocketTaskWithURLProtocols                  = objc.RegisterName("webSocketTaskWithURL:protocols:")
+	_nSURLSessionSelWebSocketTaskWithRequest                       = objc.RegisterName("webSocketTaskWithRequest:")
+	_nSURLSessionSelInit                                           = objc.RegisterName("init")
+	_nSURLSessionSelNew                                            = objc.RegisterName("new")
+	_nSURLSessionSelSharedSession                                  = objc.RegisterName("sharedSession")
+	_nSURLSessionSelDelegateQueue                                  = objc.RegisterName("delegateQueue")
+	_nSURLSessionSelDelegate                                       = objc.RegisterName("delegate")
+	_nSURLSessionSelConfiguration                                  = objc.RegisterName("configuration")
+	_nSURLSessionSelSessionDescription                             = objc.RegisterName("sessionDescription")
+	_nSURLSessionSelSetSessionDescription                          = objc.RegisterName("setSessionDescription:")
+	_nSURLSessionSelDataTaskWithRequestCompletionHandler           = objc.RegisterName("dataTaskWithRequest:completionHandler:")
+	_nSURLSessionSelDataTaskWithURLCompletionHandler               = objc.RegisterName("dataTaskWithURL:completionHandler:")
 	_nSURLSessionSelUploadTaskWithRequestFromFileCompletionHandler = objc.RegisterName("uploadTaskWithRequest:fromFile:completionHandler:")
 	_nSURLSessionSelUploadTaskWithRequestFromDataCompletionHandler = objc.RegisterName("uploadTaskWithRequest:fromData:completionHandler:")
-	_nSURLSessionSelUploadTaskWithResumeDataCompletionHandler = objc.RegisterName("uploadTaskWithResumeData:completionHandler:")
-	_nSURLSessionSelDownloadTaskWithRequestCompletionHandler = objc.RegisterName("downloadTaskWithRequest:completionHandler:")
-	_nSURLSessionSelDownloadTaskWithURLCompletionHandler = objc.RegisterName("downloadTaskWithURL:completionHandler:")
-	_nSURLSessionSelDownloadTaskWithResumeDataCompletionHandler = objc.RegisterName("downloadTaskWithResumeData:completionHandler:")
+	_nSURLSessionSelUploadTaskWithResumeDataCompletionHandler      = objc.RegisterName("uploadTaskWithResumeData:completionHandler:")
+	_nSURLSessionSelDownloadTaskWithRequestCompletionHandler       = objc.RegisterName("downloadTaskWithRequest:completionHandler:")
+	_nSURLSessionSelDownloadTaskWithURLCompletionHandler           = objc.RegisterName("downloadTaskWithURL:completionHandler:")
+	_nSURLSessionSelDownloadTaskWithResumeDataCompletionHandler    = objc.RegisterName("downloadTaskWithResumeData:completionHandler:")
 )
 
 func NSURLSessionFromID(id objc.ID) *NSURLSession {
@@ -70,13 +70,17 @@ func NSURLSessionFromID(id objc.ID) *NSURLSession {
 
 func NSURLSessionSessionWithConfiguration(configuration *NSURLSessionConfiguration) *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSessionWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionFromID(_ret)
 }
 
 func NSURLSessionSessionWithConfigurationDelegateDelegateQueue(configuration *NSURLSessionConfiguration, delegate NSURLSessionDelegate, queue *NSOperationQueue) *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSessionWithConfigurationDelegateDelegateQueue, configuration.Ptr(), delegate, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionFromID(_ret)
 }
 
@@ -146,94 +150,124 @@ func (o *NSURLSession) GetAllTasksWithCompletionHandler(completionHandler func(*
 
 func (o *NSURLSession) DataTaskWithRequest(request *NSURLRequest) *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
 func (o *NSURLSession) DataTaskWithURL(url *NSURL) *NSURLSessionDataTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
 func (o *NSURLSession) UploadTaskWithRequestFromFile(request *NSURLRequest, fileURL *NSURL) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromFile, request.Ptr(), fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) UploadTaskWithRequestFromData(request *NSURLRequest, bodyData *NSData) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromData, request.Ptr(), bodyData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
 // Creates an upload task from a resume data blob. Requires the server to support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ If resuming from an upload file, the file must still exist and be unmodified. If the upload cannot be successfully resumed, URLSession:task:didCompleteWithError: will be called. - Parameter resumeData: Resume data blob from an incomplete upload, such as data returned by the cancelByProducingResumeData: method. - Returns: A new session upload task, or nil if the resumeData is invalid.
 func (o *NSURLSession) UploadTaskWithResumeData(resumeData *NSData) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithResumeData, resumeData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) UploadTaskWithStreamedRequest(request *NSURLRequest) *NSURLSessionUploadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithStreamedRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) DownloadTaskWithRequest(request *NSURLRequest) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) DownloadTaskWithURL(url *NSURL) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) DownloadTaskWithResumeData(resumeData *NSData) *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithResumeData, resumeData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
 func (o *NSURLSession) StreamTaskWithHostNamePort(hostname *NSString, port int) *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelStreamTaskWithHostNamePort, hostname.Ptr(), port)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionStreamTaskFromID(_ret)
 }
 
 // Deprecated: Use nw_connection_t in Network framework instead
 func (o *NSURLSession) StreamTaskWithNetService(service *NSNetService) *NSURLSessionStreamTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelStreamTaskWithNetService, service.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionStreamTaskFromID(_ret)
 }
 
 func (o *NSURLSession) WebSocketTaskWithURL(url *NSURL) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionWebSocketTaskFromID(_ret)
 }
 
 func (o *NSURLSession) WebSocketTaskWithURLProtocols(url *NSURL, protocols *NSArray[*NSString]) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithURLProtocols, url.Ptr(), protocols.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionWebSocketTaskFromID(_ret)
 }
 
 func (o *NSURLSession) WebSocketTaskWithRequest(request *NSURLRequest) *NSURLSessionWebSocketTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelWebSocketTaskWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionWebSocketTaskFromID(_ret)
 }
 
 // Deprecated: Please use +[NSURLSession sessionWithConfiguration:] or other class methods to create instances
 func (o *NSURLSession) Init() *NSURLSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionFromID(_ret)
 }
 
@@ -245,13 +279,17 @@ func NSURLSessionNew() *NSURLSession {
 
 func NSURLSessionSharedSession() *NSURLSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSession), _nSURLSessionSelSharedSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionFromID(_ret)
 }
 
 func (o *NSURLSession) DelegateQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOperationQueueFromID(_ret)
 }
 
@@ -262,13 +300,17 @@ func (o *NSURLSession) Delegate() NSURLSessionDelegate {
 
 func (o *NSURLSession) Configuration() *NSURLSessionConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionConfigurationFromID(_ret)
 }
 
 func (o *NSURLSession) SessionDescription() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelSessionDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -291,7 +333,9 @@ func (o *NSURLSession) DataTaskWithRequestCompletionHandler(request *NSURLReques
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithRequestCompletionHandler, request.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
@@ -310,7 +354,9 @@ func (o *NSURLSession) DataTaskWithURLCompletionHandler(url *NSURL, completionHa
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDataTaskWithURLCompletionHandler, url.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDataTaskFromID(_ret)
 }
 
@@ -329,7 +375,9 @@ func (o *NSURLSession) UploadTaskWithRequestFromFileCompletionHandler(request *N
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromFileCompletionHandler, request.Ptr(), fileURL.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
@@ -348,7 +396,9 @@ func (o *NSURLSession) UploadTaskWithRequestFromDataCompletionHandler(request *N
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithRequestFromDataCompletionHandler, request.Ptr(), bodyData.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
@@ -368,7 +418,9 @@ func (o *NSURLSession) UploadTaskWithResumeDataCompletionHandler(resumeData *NSD
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelUploadTaskWithResumeDataCompletionHandler, resumeData.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionUploadTaskFromID(_ret)
 }
 
@@ -387,7 +439,9 @@ func (o *NSURLSession) DownloadTaskWithRequestCompletionHandler(request *NSURLRe
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithRequestCompletionHandler, request.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
@@ -406,7 +460,9 @@ func (o *NSURLSession) DownloadTaskWithURLCompletionHandler(url *NSURL, completi
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithURLCompletionHandler, url.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
@@ -425,7 +481,8 @@ func (o *NSURLSession) DownloadTaskWithResumeDataCompletionHandler(resumeData *N
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionSelDownloadTaskWithResumeDataCompletionHandler, resumeData.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
-

@@ -18,12 +18,12 @@ type MPSImageMedian struct {
 }
 
 var (
-	_clsMPSImageMedian = _objcClass("MPSImageMedian")
+	_clsMPSImageMedian                             = _objcClass("MPSImageMedian")
 	_mPSImageMedianSelInitWithDeviceKernelDiameter = objc.RegisterName("initWithDevice:kernelDiameter:")
-	_mPSImageMedianSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageMedianSelMaxKernelDiameter = objc.RegisterName("maxKernelDiameter")
-	_mPSImageMedianSelMinKernelDiameter = objc.RegisterName("minKernelDiameter")
-	_mPSImageMedianSelKernelDiameter = objc.RegisterName("kernelDiameter")
+	_mPSImageMedianSelInitWithCoderDevice          = objc.RegisterName("initWithCoder:device:")
+	_mPSImageMedianSelMaxKernelDiameter            = objc.RegisterName("maxKernelDiameter")
+	_mPSImageMedianSelMinKernelDiameter            = objc.RegisterName("minKernelDiameter")
+	_mPSImageMedianSelKernelDiameter               = objc.RegisterName("kernelDiameter")
 )
 
 func MPSImageMedianFromID(id objc.ID) *MPSImageMedian {
@@ -38,14 +38,18 @@ func MPSImageMedianFromID(id objc.ID) *MPSImageMedian {
 
 func (o *MPSImageMedian) InitWithDeviceKernelDiameter(device metal.MTLDevice, kernelDiameter uint) *MPSImageMedian {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageMedianSelInitWithDeviceKernelDiameter, device, kernelDiameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageMedianFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageMedian) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageMedian {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageMedianSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageMedianFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MPSImageMedian) KernelDiameter() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSImageMedianSelKernelDiameter)
 	return _ret
 }
-

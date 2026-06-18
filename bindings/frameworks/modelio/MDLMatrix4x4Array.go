@@ -18,15 +18,15 @@ type MDLMatrix4x4Array struct {
 }
 
 var (
-	_clsMDLMatrix4x4Array = _objcClass("MDLMatrix4x4Array")
-	_mDLMatrix4x4ArraySelClear = objc.RegisterName("clear")
-	_mDLMatrix4x4ArraySelInitWithElementCount = objc.RegisterName("initWithElementCount:")
-	_mDLMatrix4x4ArraySelSetFloat4x4ArrayCount = objc.RegisterName("setFloat4x4Array:count:")
-	_mDLMatrix4x4ArraySelSetDouble4x4ArrayCount = objc.RegisterName("setDouble4x4Array:count:")
-	_mDLMatrix4x4ArraySelGetFloat4x4ArrayMaxCount = objc.RegisterName("getFloat4x4Array:maxCount:")
+	_clsMDLMatrix4x4Array                          = _objcClass("MDLMatrix4x4Array")
+	_mDLMatrix4x4ArraySelClear                     = objc.RegisterName("clear")
+	_mDLMatrix4x4ArraySelInitWithElementCount      = objc.RegisterName("initWithElementCount:")
+	_mDLMatrix4x4ArraySelSetFloat4x4ArrayCount     = objc.RegisterName("setFloat4x4Array:count:")
+	_mDLMatrix4x4ArraySelSetDouble4x4ArrayCount    = objc.RegisterName("setDouble4x4Array:count:")
+	_mDLMatrix4x4ArraySelGetFloat4x4ArrayMaxCount  = objc.RegisterName("getFloat4x4Array:maxCount:")
 	_mDLMatrix4x4ArraySelGetDouble4x4ArrayMaxCount = objc.RegisterName("getDouble4x4Array:maxCount:")
-	_mDLMatrix4x4ArraySelElementCount = objc.RegisterName("elementCount")
-	_mDLMatrix4x4ArraySelPrecision = objc.RegisterName("precision")
+	_mDLMatrix4x4ArraySelElementCount              = objc.RegisterName("elementCount")
+	_mDLMatrix4x4ArraySelPrecision                 = objc.RegisterName("precision")
 )
 
 func MDLMatrix4x4ArrayFromID(id objc.ID) *MDLMatrix4x4Array {
@@ -45,7 +45,9 @@ func (o *MDLMatrix4x4Array) Clear() {
 
 func (o *MDLMatrix4x4Array) InitWithElementCount(arrayElementCount uint) *MDLMatrix4x4Array {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMatrix4x4ArraySelInitWithElementCount, arrayElementCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMatrix4x4ArrayFromID(_ret)
 }
 
@@ -76,4 +78,3 @@ func (o *MDLMatrix4x4Array) Precision() MDLDataPrecision {
 	_ret := objc.Send[MDLDataPrecision](o.Ptr(), _mDLMatrix4x4ArraySelPrecision)
 	return _ret
 }
-

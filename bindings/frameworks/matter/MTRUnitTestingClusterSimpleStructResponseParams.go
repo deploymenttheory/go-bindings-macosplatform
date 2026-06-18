@@ -18,12 +18,12 @@ type MTRUnitTestingClusterSimpleStructResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterSimpleStructResponseParams = _objcClass("MTRUnitTestingClusterSimpleStructResponseParams")
+	_clsMTRUnitTestingClusterSimpleStructResponseParams                           = _objcClass("MTRUnitTestingClusterSimpleStructResponseParams")
 	_mTRUnitTestingClusterSimpleStructResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterSimpleStructResponseParamsSelArg1 = objc.RegisterName("arg1")
-	_mTRUnitTestingClusterSimpleStructResponseParamsSelSetArg1 = objc.RegisterName("setArg1:")
-	_mTRUnitTestingClusterSimpleStructResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterSimpleStructResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterSimpleStructResponseParamsSelArg1                       = objc.RegisterName("arg1")
+	_mTRUnitTestingClusterSimpleStructResponseParamsSelSetArg1                    = objc.RegisterName("setArg1:")
+	_mTRUnitTestingClusterSimpleStructResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterSimpleStructResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterSimpleStructResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterSimpleStructResponseParams {
@@ -40,7 +40,9 @@ func MTRUnitTestingClusterSimpleStructResponseParamsFromID(id objc.ID) *MTRUnitT
 func (o *MTRUnitTestingClusterSimpleStructResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterSimpleStructResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRUnitTestingClusterSimpleStructResponseParams) InitWithResponseValueE
 
 func (o *MTRUnitTestingClusterSimpleStructResponseParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructResponseParamsSelArg1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRUnitTestingClusterSimpleStructResponseParams) SetArg1(arg1 *MTRUnitT
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterSimpleStructResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterSimpleStructResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterSimpleStructResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterSimpleStructResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

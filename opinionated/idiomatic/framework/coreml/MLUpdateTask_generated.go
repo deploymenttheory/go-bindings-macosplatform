@@ -50,4 +50,3 @@ type UpdateTaskable interface {
 }
 
 var _ UpdateTaskable = (*UpdateTask)(nil)
-

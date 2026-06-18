@@ -17,15 +17,15 @@ type MPSCNNSpatialNormalization struct {
 }
 
 var (
-	_clsMPSCNNSpatialNormalization = _objcClass("MPSCNNSpatialNormalization")
+	_clsMPSCNNSpatialNormalization                                      = _objcClass("MPSCNNSpatialNormalization")
 	_mPSCNNSpatialNormalizationSelInitWithDeviceKernelWidthKernelHeight = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
-	_mPSCNNSpatialNormalizationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNSpatialNormalizationSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNSpatialNormalizationSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNSpatialNormalizationSelBeta = objc.RegisterName("beta")
-	_mPSCNNSpatialNormalizationSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNSpatialNormalizationSelDelta = objc.RegisterName("delta")
-	_mPSCNNSpatialNormalizationSelSetDelta = objc.RegisterName("setDelta:")
+	_mPSCNNSpatialNormalizationSelInitWithCoderDevice                   = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNSpatialNormalizationSelAlpha                                 = objc.RegisterName("alpha")
+	_mPSCNNSpatialNormalizationSelSetAlpha                              = objc.RegisterName("setAlpha:")
+	_mPSCNNSpatialNormalizationSelBeta                                  = objc.RegisterName("beta")
+	_mPSCNNSpatialNormalizationSelSetBeta                               = objc.RegisterName("setBeta:")
+	_mPSCNNSpatialNormalizationSelDelta                                 = objc.RegisterName("delta")
+	_mPSCNNSpatialNormalizationSelSetDelta                              = objc.RegisterName("setDelta:")
 )
 
 func MPSCNNSpatialNormalizationFromID(id objc.ID) *MPSCNNSpatialNormalization {
@@ -41,14 +41,18 @@ func MPSCNNSpatialNormalizationFromID(id objc.ID) *MPSCNNSpatialNormalization {
 // @abstract  Initialize a spatial normalization filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel @param      kernelHeight        The height of the kernel @return     A valid MPSCNNSpatialNormalization object or nil, if failure. NOTE:  For now, kernelWidth must be equal to kernelHeight
 func (o *MPSCNNSpatialNormalization) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSCNNSpatialNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSpatialNormalizationSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNSpatialNormalization) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNSpatialNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSpatialNormalizationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationFromID(_ret)
 }
 
@@ -81,4 +85,3 @@ func (o *MPSCNNSpatialNormalization) Delta() float32 {
 func (o *MPSCNNSpatialNormalization) SetDelta(delta float32) {
 	o.Ptr().Send(_mPSCNNSpatialNormalizationSelSetDelta, delta)
 }
-

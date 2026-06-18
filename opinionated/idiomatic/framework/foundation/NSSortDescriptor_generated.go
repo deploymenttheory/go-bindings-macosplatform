@@ -119,4 +119,3 @@ type SortDescriptorable interface {
 }
 
 var _ SortDescriptorable = (*SortDescriptor)(nil)
-

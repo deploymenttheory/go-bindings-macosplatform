@@ -16,8 +16,8 @@ type MXMemoryMetric struct {
 }
 
 var (
-	_clsMXMemoryMetric = _objcClass("MXMemoryMetric")
-	_mXMemoryMetricSelPeakMemoryUsage = objc.RegisterName("peakMemoryUsage")
+	_clsMXMemoryMetric                       = _objcClass("MXMemoryMetric")
+	_mXMemoryMetricSelPeakMemoryUsage        = objc.RegisterName("peakMemoryUsage")
 	_mXMemoryMetricSelAverageSuspendedMemory = objc.RegisterName("averageSuspendedMemory")
 )
 
@@ -42,4 +42,3 @@ func (o *MXMemoryMetric) AverageSuspendedMemory() *MXAverage[*foundation.NSUnitI
 	_ret := objc.Send[*MXAverage[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXMemoryMetricSelAverageSuspendedMemory)
 	return _ret
 }
-

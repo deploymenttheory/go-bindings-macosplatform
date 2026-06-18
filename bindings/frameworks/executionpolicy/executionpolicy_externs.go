@@ -13,7 +13,8 @@ import (
 
 func EPErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_executionpolicyLib, "EPErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

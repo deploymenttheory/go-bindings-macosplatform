@@ -15,18 +15,18 @@ type SCNCapsule struct {
 }
 
 var (
-	_clsSCNCapsule = _objcClass("SCNCapsule")
+	_clsSCNCapsule                           = _objcClass("SCNCapsule")
 	_sCNCapsuleSelCapsuleWithCapRadiusHeight = objc.RegisterName("capsuleWithCapRadius:height:")
-	_sCNCapsuleSelCapRadius = objc.RegisterName("capRadius")
-	_sCNCapsuleSelSetCapRadius = objc.RegisterName("setCapRadius:")
-	_sCNCapsuleSelHeight = objc.RegisterName("height")
-	_sCNCapsuleSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNCapsuleSelRadialSegmentCount = objc.RegisterName("radialSegmentCount")
-	_sCNCapsuleSelSetRadialSegmentCount = objc.RegisterName("setRadialSegmentCount:")
-	_sCNCapsuleSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNCapsuleSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
-	_sCNCapsuleSelCapSegmentCount = objc.RegisterName("capSegmentCount")
-	_sCNCapsuleSelSetCapSegmentCount = objc.RegisterName("setCapSegmentCount:")
+	_sCNCapsuleSelCapRadius                  = objc.RegisterName("capRadius")
+	_sCNCapsuleSelSetCapRadius               = objc.RegisterName("setCapRadius:")
+	_sCNCapsuleSelHeight                     = objc.RegisterName("height")
+	_sCNCapsuleSelSetHeight                  = objc.RegisterName("setHeight:")
+	_sCNCapsuleSelRadialSegmentCount         = objc.RegisterName("radialSegmentCount")
+	_sCNCapsuleSelSetRadialSegmentCount      = objc.RegisterName("setRadialSegmentCount:")
+	_sCNCapsuleSelHeightSegmentCount         = objc.RegisterName("heightSegmentCount")
+	_sCNCapsuleSelSetHeightSegmentCount      = objc.RegisterName("setHeightSegmentCount:")
+	_sCNCapsuleSelCapSegmentCount            = objc.RegisterName("capSegmentCount")
+	_sCNCapsuleSelSetCapSegmentCount         = objc.RegisterName("setCapSegmentCount:")
 )
 
 func SCNCapsuleFromID(id objc.ID) *SCNCapsule {
@@ -42,7 +42,9 @@ func SCNCapsuleFromID(id objc.ID) *SCNCapsule {
 // @method capsuleWithCapRadius:height: @abstract Creates and returns a capsule with given radius and height. @param capRadius The radius of the capsule. @param height The height of the capsule.
 func SCNCapsuleCapsuleWithCapRadiusHeight(capRadius float64, height float64) *SCNCapsule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCapsule), _sCNCapsuleSelCapsuleWithCapRadiusHeight, capRadius, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNCapsuleFromID(_ret)
 }
 
@@ -95,4 +97,3 @@ func (o *SCNCapsule) CapSegmentCount() int {
 func (o *SCNCapsule) SetCapSegmentCount(capSegmentCount int) {
 	o.Ptr().Send(_sCNCapsuleSelSetCapSegmentCount, capSegmentCount)
 }
-

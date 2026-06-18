@@ -41,4 +41,3 @@ type ScrollEdgeEffectStyleable interface {
 }
 
 var _ ScrollEdgeEffectStyleable = (*ScrollEdgeEffectStyle)(nil)
-

@@ -173,4 +173,3 @@ type FaceLandmarks2Dable interface {
 }
 
 var _ FaceLandmarks2Dable = (*FaceLandmarks2D)(nil)
-

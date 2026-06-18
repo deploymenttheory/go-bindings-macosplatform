@@ -54,4 +54,3 @@ type UnitDurationable interface {
 }
 
 var _ UnitDurationable = (*UnitDuration)(nil)
-

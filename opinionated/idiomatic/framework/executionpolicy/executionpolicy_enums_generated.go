@@ -12,9 +12,9 @@ type EPDeveloperToolStatus int64
 
 const (
 	EPDeveloperToolStatusNotDetermined EPDeveloperToolStatus = 0
-	EPDeveloperToolStatusRestricted EPDeveloperToolStatus = 1
-	EPDeveloperToolStatusDenied EPDeveloperToolStatus = 2
-	EPDeveloperToolStatusAuthorized EPDeveloperToolStatus = 3
+	EPDeveloperToolStatusRestricted    EPDeveloperToolStatus = 1
+	EPDeveloperToolStatusDenied        EPDeveloperToolStatus = 2
+	EPDeveloperToolStatusAuthorized    EPDeveloperToolStatus = 3
 )
 
 func (e EPDeveloperToolStatus) String() string {
@@ -31,4 +31,3 @@ func (e EPDeveloperToolStatus) String() string {
 		return fmt.Sprintf("EPDeveloperToolStatus(%d)", int64(e))
 	}
 }
-

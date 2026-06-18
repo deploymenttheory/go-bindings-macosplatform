@@ -154,9 +154,13 @@ func (x *MTRClusterAccountLogin) LogoutWithExpectedValuesExpectedValueIntervalCo
 	x.inner.LogoutWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterAccountLogin) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterAccountLogin) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterAccountLogin) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterAccountLogin) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterAccountLoginable is the interface implemented by [MTRClusterAccountLogin], for mocking and DI.
 type MTRClusterAccountLoginable interface {
@@ -177,4 +181,3 @@ type MTRClusterAccountLoginable interface {
 }
 
 var _ MTRClusterAccountLoginable = (*MTRClusterAccountLogin)(nil)
-

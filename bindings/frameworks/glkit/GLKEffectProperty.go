@@ -26,4 +26,3 @@ func GLKEffectPropertyFromID(id objc.ID) *GLKEffectProperty {
 	purego.Track(o)
 	return o
 }
-

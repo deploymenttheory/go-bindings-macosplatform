@@ -88,4 +88,3 @@ type PlayerLooperable interface {
 }
 
 var _ PlayerLooperable = (*PlayerLooper)(nil)
-

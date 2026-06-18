@@ -14,8 +14,8 @@ import (
 
 var (
 	_mediatoolboxLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce        sync.Once
+	_failedSymbols   = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,13 +48,27 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("MTAudioProcessingTapCreate", func() { purego.RegisterLibFunc(&_fnMTAudioProcessingTapCreate, _mediatoolboxLib, "MTAudioProcessingTapCreate") })
-	_register("MTAudioProcessingTapGetSourceAudio", func() { purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _mediatoolboxLib, "MTAudioProcessingTapGetSourceAudio") })
-	_register("MTAudioProcessingTapGetStorage", func() { purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetStorage, _mediatoolboxLib, "MTAudioProcessingTapGetStorage") })
-	_register("MTAudioProcessingTapGetTypeID", func() { purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetTypeID, _mediatoolboxLib, "MTAudioProcessingTapGetTypeID") })
-	_register("MTCopyLocalizedNameForMediaSubType", func() { purego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaSubType, _mediatoolboxLib, "MTCopyLocalizedNameForMediaSubType") })
-	_register("MTCopyLocalizedNameForMediaType", func() { purego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaType, _mediatoolboxLib, "MTCopyLocalizedNameForMediaType") })
-	_register("MTRegisterProfessionalVideoWorkflowFormatReaders", func() { purego.RegisterLibFunc(&_fnMTRegisterProfessionalVideoWorkflowFormatReaders, _mediatoolboxLib, "MTRegisterProfessionalVideoWorkflowFormatReaders") })
+	_register("MTAudioProcessingTapCreate", func() {
+		purego.RegisterLibFunc(&_fnMTAudioProcessingTapCreate, _mediatoolboxLib, "MTAudioProcessingTapCreate")
+	})
+	_register("MTAudioProcessingTapGetSourceAudio", func() {
+		purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _mediatoolboxLib, "MTAudioProcessingTapGetSourceAudio")
+	})
+	_register("MTAudioProcessingTapGetStorage", func() {
+		purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetStorage, _mediatoolboxLib, "MTAudioProcessingTapGetStorage")
+	})
+	_register("MTAudioProcessingTapGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnMTAudioProcessingTapGetTypeID, _mediatoolboxLib, "MTAudioProcessingTapGetTypeID")
+	})
+	_register("MTCopyLocalizedNameForMediaSubType", func() {
+		purego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaSubType, _mediatoolboxLib, "MTCopyLocalizedNameForMediaSubType")
+	})
+	_register("MTCopyLocalizedNameForMediaType", func() {
+		purego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaType, _mediatoolboxLib, "MTCopyLocalizedNameForMediaType")
+	})
+	_register("MTRegisterProfessionalVideoWorkflowFormatReaders", func() {
+		purego.RegisterLibFunc(&_fnMTRegisterProfessionalVideoWorkflowFormatReaders, _mediatoolboxLib, "MTRegisterProfessionalVideoWorkflowFormatReaders")
+	})
 }
 
 func init() {

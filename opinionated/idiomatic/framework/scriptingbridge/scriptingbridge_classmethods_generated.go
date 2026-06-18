@@ -35,4 +35,3 @@ func ApplicationWithProcessIdentifier(pid int) *Application {
 	}
 	return &Application{inner: _r}
 }
-

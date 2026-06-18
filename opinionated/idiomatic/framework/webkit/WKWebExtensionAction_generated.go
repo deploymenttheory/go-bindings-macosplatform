@@ -175,4 +175,3 @@ type WKWebExtensionActionable interface {
 }
 
 var _ WKWebExtensionActionable = (*WKWebExtensionAction)(nil)
-

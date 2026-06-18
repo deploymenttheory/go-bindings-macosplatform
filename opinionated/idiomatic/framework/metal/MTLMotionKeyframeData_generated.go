@@ -79,4 +79,3 @@ type MotionKeyframeDataable interface {
 }
 
 var _ MotionKeyframeDataable = (*MotionKeyframeData)(nil)
-

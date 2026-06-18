@@ -18,14 +18,14 @@ type MKETAResponse struct {
 }
 
 var (
-	_clsMKETAResponse = _objcClass("MKETAResponse")
-	_mKETAResponseSelSource = objc.RegisterName("source")
-	_mKETAResponseSelDestination = objc.RegisterName("destination")
-	_mKETAResponseSelExpectedTravelTime = objc.RegisterName("expectedTravelTime")
-	_mKETAResponseSelDistance = objc.RegisterName("distance")
-	_mKETAResponseSelExpectedArrivalDate = objc.RegisterName("expectedArrivalDate")
+	_clsMKETAResponse                      = _objcClass("MKETAResponse")
+	_mKETAResponseSelSource                = objc.RegisterName("source")
+	_mKETAResponseSelDestination           = objc.RegisterName("destination")
+	_mKETAResponseSelExpectedTravelTime    = objc.RegisterName("expectedTravelTime")
+	_mKETAResponseSelDistance              = objc.RegisterName("distance")
+	_mKETAResponseSelExpectedArrivalDate   = objc.RegisterName("expectedArrivalDate")
 	_mKETAResponseSelExpectedDepartureDate = objc.RegisterName("expectedDepartureDate")
-	_mKETAResponseSelTransportType = objc.RegisterName("transportType")
+	_mKETAResponseSelTransportType         = objc.RegisterName("transportType")
 )
 
 func MKETAResponseFromID(id objc.ID) *MKETAResponse {
@@ -40,13 +40,17 @@ func MKETAResponseFromID(id objc.ID) *MKETAResponse {
 
 func (o *MKETAResponse) Source() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKETAResponseSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
 func (o *MKETAResponse) Destination() *MKMapItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKETAResponseSelDestination)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemFromID(_ret)
 }
 
@@ -62,13 +66,17 @@ func (o *MKETAResponse) Distance() unsafe.Pointer {
 
 func (o *MKETAResponse) ExpectedArrivalDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKETAResponseSelExpectedArrivalDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *MKETAResponse) ExpectedDepartureDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKETAResponseSelExpectedDepartureDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -76,4 +84,3 @@ func (o *MKETAResponse) TransportType() MKDirectionsTransportType {
 	_ret := objc.Send[MKDirectionsTransportType](o.Ptr(), _mKETAResponseSelTransportType)
 	return _ret
 }
-

@@ -15,8 +15,8 @@ type INCallDestinationTypeResolutionResult struct {
 }
 
 var (
-	_clsINCallDestinationTypeResolutionResult = _objcClass("INCallDestinationTypeResolutionResult")
-	_iNCallDestinationTypeResolutionResultSelSuccessWithResolvedCallDestinationType = objc.RegisterName("successWithResolvedCallDestinationType:")
+	_clsINCallDestinationTypeResolutionResult                                                     = _objcClass("INCallDestinationTypeResolutionResult")
+	_iNCallDestinationTypeResolutionResultSelSuccessWithResolvedCallDestinationType               = objc.RegisterName("successWithResolvedCallDestinationType:")
 	_iNCallDestinationTypeResolutionResultSelConfirmationRequiredWithCallDestinationTypeToConfirm = objc.RegisterName("confirmationRequiredWithCallDestinationTypeToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INCallDestinationTypeResolutionResultFromID(id objc.ID) *INCallDestinationT
 
 func INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType(resolvedCallDestinationType INCallDestinationType) *INCallDestinationTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallDestinationTypeResolutionResult), _iNCallDestinationTypeResolutionResultSelSuccessWithResolvedCallDestinationType, resolvedCallDestinationType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallDestinationTypeResolutionResultFromID(_ret)
 }
 
 func INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm INCallDestinationType) *INCallDestinationTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallDestinationTypeResolutionResult), _iNCallDestinationTypeResolutionResultSelConfirmationRequiredWithCallDestinationTypeToConfirm, callDestinationTypeToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallDestinationTypeResolutionResultFromID(_ret)
 }
-

@@ -15,11 +15,11 @@ type NSCollectionViewFlowLayoutInvalidationContext struct {
 }
 
 var (
-	_clsNSCollectionViewFlowLayoutInvalidationContext = _objcClass("NSCollectionViewFlowLayoutInvalidationContext")
-	_nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutDelegateMetrics = objc.RegisterName("invalidateFlowLayoutDelegateMetrics")
+	_clsNSCollectionViewFlowLayoutInvalidationContext                                       = _objcClass("NSCollectionViewFlowLayoutInvalidationContext")
+	_nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutDelegateMetrics    = objc.RegisterName("invalidateFlowLayoutDelegateMetrics")
 	_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutDelegateMetrics = objc.RegisterName("setInvalidateFlowLayoutDelegateMetrics:")
-	_nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutAttributes = objc.RegisterName("invalidateFlowLayoutAttributes")
-	_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutAttributes = objc.RegisterName("setInvalidateFlowLayoutAttributes:")
+	_nSCollectionViewFlowLayoutInvalidationContextSelInvalidateFlowLayoutAttributes         = objc.RegisterName("invalidateFlowLayoutAttributes")
+	_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutAttributes      = objc.RegisterName("setInvalidateFlowLayoutAttributes:")
 )
 
 func NSCollectionViewFlowLayoutInvalidationContextFromID(id objc.ID) *NSCollectionViewFlowLayoutInvalidationContext {
@@ -49,4 +49,3 @@ func (o *NSCollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttr
 func (o *NSCollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) {
 	o.Ptr().Send(_nSCollectionViewFlowLayoutInvalidationContextSelSetInvalidateFlowLayoutAttributes, invalidateFlowLayoutAttributes)
 }
-

@@ -47,7 +47,9 @@ func (x *TileOverlayRenderer) ReloadData() {
 	x.inner.ReloadData()
 }
 
-func (x *TileOverlayRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayRenderer }
+func (x *TileOverlayRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayRenderer
+}
 
 // TileOverlayRendererable is the interface implemented by [TileOverlayRenderer], for mocking and DI.
 type TileOverlayRendererable interface {
@@ -57,4 +59,3 @@ type TileOverlayRendererable interface {
 }
 
 var _ TileOverlayRendererable = (*TileOverlayRenderer)(nil)
-

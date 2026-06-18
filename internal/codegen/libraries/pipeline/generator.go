@@ -3,6 +3,7 @@ package pipeline
 import (
 	"bytes"
 	"fmt"
+	"go/format"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -844,7 +845,16 @@ func writeFile(path string, fn func(*bytes.Buffer) error) error {
 		// we don't leave an empty .go file that the compiler rejects.
 		return nil
 	}
-	if err := os.WriteFile(path, buf.Bytes(), 0o644); err != nil {
+	out := buf.Bytes()
+	// Canonicalise Go output through gofmt; C sources (.h/.m) are written as-is.
+	if strings.HasSuffix(path, ".go") {
+		formatted, err := format.Source(out)
+		if err != nil {
+			return fmt.Errorf("format %s: %w", path, err)
+		}
+		out = formatted
+	}
+	if err := os.WriteFile(path, out, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", path, err)
 	}
 	return nil

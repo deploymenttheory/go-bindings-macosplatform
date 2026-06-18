@@ -48,7 +48,8 @@ func JSPropertyDescriptorWritableKey() uintptr {
 // @const kJSClassDefinitionEmpty @abstract A JSClassDefinition structure of the current version, filled with NULL pointers and having no attributes. @discussion Use this constant as a convenience when creating class definitions. For example, to create a class definition with only a finalize method: JSClassDefinition definition = kJSClassDefinitionEmpty; definition.finalize = Finalize;
 func KJSClassDefinitionEmpty() JSClassDefinition {
 	ptr, _ := purego.Dlsym(_javascriptcoreLib, "kJSClassDefinitionEmpty")
-	if ptr == 0 { return JSClassDefinition{} }
+	if ptr == 0 {
+		return JSClassDefinition{}
+	}
 	return *(*JSClassDefinition)(unsafe.Pointer(ptr))
 }
-

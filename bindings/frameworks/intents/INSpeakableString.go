@@ -16,7 +16,7 @@ type INSpeakableString struct {
 }
 
 var (
-	_clsINSpeakableString = _objcClass("INSpeakableString")
+	_clsINSpeakableString                                                          = _objcClass("INSpeakableString")
 	_iNSpeakableStringSelInitWithVocabularyIdentifierSpokenPhrasePronunciationHint = objc.RegisterName("initWithVocabularyIdentifier:spokenPhrase:pronunciationHint:")
 )
 
@@ -32,7 +32,8 @@ func INSpeakableStringFromID(id objc.ID) *INSpeakableString {
 
 func (o *INSpeakableString) InitWithVocabularyIdentifierSpokenPhrasePronunciationHint(vocabularyIdentifier *foundation.NSString, spokenPhrase *foundation.NSString, pronunciationHint *foundation.NSString) *INSpeakableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSpeakableStringSelInitWithVocabularyIdentifierSpokenPhrasePronunciationHint, vocabularyIdentifier.Ptr(), spokenPhrase.Ptr(), pronunciationHint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSpeakableStringFromID(_ret)
 }
-

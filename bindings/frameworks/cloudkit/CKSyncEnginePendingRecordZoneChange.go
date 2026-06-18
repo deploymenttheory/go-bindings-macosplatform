@@ -16,10 +16,10 @@ type CKSyncEnginePendingRecordZoneChange struct {
 }
 
 var (
-	_clsCKSyncEnginePendingRecordZoneChange = _objcClass("CKSyncEnginePendingRecordZoneChange")
+	_clsCKSyncEnginePendingRecordZoneChange                     = _objcClass("CKSyncEnginePendingRecordZoneChange")
 	_cKSyncEnginePendingRecordZoneChangeSelInitWithRecordIDType = objc.RegisterName("initWithRecordID:type:")
-	_cKSyncEnginePendingRecordZoneChangeSelRecordID = objc.RegisterName("recordID")
-	_cKSyncEnginePendingRecordZoneChangeSelType = objc.RegisterName("type")
+	_cKSyncEnginePendingRecordZoneChangeSelRecordID             = objc.RegisterName("recordID")
+	_cKSyncEnginePendingRecordZoneChangeSelType                 = objc.RegisterName("type")
 )
 
 func CKSyncEnginePendingRecordZoneChangeFromID(id objc.ID) *CKSyncEnginePendingRecordZoneChange {
@@ -35,14 +35,18 @@ func CKSyncEnginePendingRecordZoneChangeFromID(id objc.ID) *CKSyncEnginePendingR
 // Creates a record zone change of the specified type for the given record. - Parameters: - recordID: The identifier of the record to change. - type: The type of change to make. - Returns: An initialized record zone change.
 func (o *CKSyncEnginePendingRecordZoneChange) InitWithRecordIDType(recordID *CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *CKSyncEnginePendingRecordZoneChange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingRecordZoneChangeSelInitWithRecordIDType, recordID.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEnginePendingRecordZoneChangeFromID(_ret)
 }
 
 // The identifier of the modified record.
 func (o *CKSyncEnginePendingRecordZoneChange) RecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingRecordZoneChangeSelRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *CKSyncEnginePendingRecordZoneChange) Type() CKSyncEnginePendingRecordZo
 	_ret := objc.Send[CKSyncEnginePendingRecordZoneChangeType](o.Ptr(), _cKSyncEnginePendingRecordZoneChangeSelType)
 	return _ret
 }
-

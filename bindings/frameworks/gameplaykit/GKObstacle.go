@@ -28,4 +28,3 @@ func GKObstacleFromID(id objc.ID) *GKObstacle {
 	purego.Track(o)
 	return o
 }
-

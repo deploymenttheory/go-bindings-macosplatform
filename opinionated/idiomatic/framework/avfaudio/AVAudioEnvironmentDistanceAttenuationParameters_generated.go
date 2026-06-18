@@ -15,7 +15,9 @@ type AudioEnvironmentDistanceAttenuationParameters struct {
 }
 
 // Unwrap returns the underlying [raw.AVAudioEnvironmentDistanceAttenuationParameters].
-func (x *AudioEnvironmentDistanceAttenuationParameters) Unwrap() *raw.AVAudioEnvironmentDistanceAttenuationParameters { return x.inner }
+func (x *AudioEnvironmentDistanceAttenuationParameters) Unwrap() *raw.AVAudioEnvironmentDistanceAttenuationParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -117,4 +119,3 @@ type AudioEnvironmentDistanceAttenuationParametersable interface {
 }
 
 var _ AudioEnvironmentDistanceAttenuationParametersable = (*AudioEnvironmentDistanceAttenuationParameters)(nil)
-

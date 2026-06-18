@@ -18,35 +18,35 @@ type AMAction struct {
 }
 
 var (
-	_clsAMAction = _objcClass("AMAction")
+	_clsAMAction                              = _objcClass("AMAction")
 	_aMActionSelInitWithDefinitionFromArchive = objc.RegisterName("initWithDefinition:fromArchive:")
-	_aMActionSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_aMActionSelRunWithInputFromActionError = objc.RegisterName("runWithInput:fromAction:error:")
-	_aMActionSelRunWithInputError = objc.RegisterName("runWithInput:error:")
-	_aMActionSelRunAsynchronouslyWithInput = objc.RegisterName("runAsynchronouslyWithInput:")
-	_aMActionSelWillFinishRunning = objc.RegisterName("willFinishRunning")
-	_aMActionSelDidFinishRunningWithError = objc.RegisterName("didFinishRunningWithError:")
-	_aMActionSelFinishRunningWithError = objc.RegisterName("finishRunningWithError:")
-	_aMActionSelStop = objc.RegisterName("stop")
-	_aMActionSelReset = objc.RegisterName("reset")
-	_aMActionSelWriteToDictionary = objc.RegisterName("writeToDictionary:")
-	_aMActionSelOpened = objc.RegisterName("opened")
-	_aMActionSelActivated = objc.RegisterName("activated")
-	_aMActionSelClosed = objc.RegisterName("closed")
-	_aMActionSelUpdateParameters = objc.RegisterName("updateParameters")
-	_aMActionSelParametersUpdated = objc.RegisterName("parametersUpdated")
-	_aMActionSelLogMessageWithLevelFormat = objc.RegisterName("logMessageWithLevel:format:")
-	_aMActionSelName = objc.RegisterName("name")
-	_aMActionSelIgnoresInput = objc.RegisterName("ignoresInput")
-	_aMActionSelSelectedInputType = objc.RegisterName("selectedInputType")
-	_aMActionSelSetSelectedInputType = objc.RegisterName("setSelectedInputType:")
-	_aMActionSelSelectedOutputType = objc.RegisterName("selectedOutputType")
-	_aMActionSelSetSelectedOutputType = objc.RegisterName("setSelectedOutputType:")
-	_aMActionSelProgressValue = objc.RegisterName("progressValue")
-	_aMActionSelSetProgressValue = objc.RegisterName("setProgressValue:")
-	_aMActionSelOutput = objc.RegisterName("output")
-	_aMActionSelSetOutput = objc.RegisterName("setOutput:")
-	_aMActionSelIsStopped = objc.RegisterName("isStopped")
+	_aMActionSelInitWithContentsOfURLError    = objc.RegisterName("initWithContentsOfURL:error:")
+	_aMActionSelRunWithInputFromActionError   = objc.RegisterName("runWithInput:fromAction:error:")
+	_aMActionSelRunWithInputError             = objc.RegisterName("runWithInput:error:")
+	_aMActionSelRunAsynchronouslyWithInput    = objc.RegisterName("runAsynchronouslyWithInput:")
+	_aMActionSelWillFinishRunning             = objc.RegisterName("willFinishRunning")
+	_aMActionSelDidFinishRunningWithError     = objc.RegisterName("didFinishRunningWithError:")
+	_aMActionSelFinishRunningWithError        = objc.RegisterName("finishRunningWithError:")
+	_aMActionSelStop                          = objc.RegisterName("stop")
+	_aMActionSelReset                         = objc.RegisterName("reset")
+	_aMActionSelWriteToDictionary             = objc.RegisterName("writeToDictionary:")
+	_aMActionSelOpened                        = objc.RegisterName("opened")
+	_aMActionSelActivated                     = objc.RegisterName("activated")
+	_aMActionSelClosed                        = objc.RegisterName("closed")
+	_aMActionSelUpdateParameters              = objc.RegisterName("updateParameters")
+	_aMActionSelParametersUpdated             = objc.RegisterName("parametersUpdated")
+	_aMActionSelLogMessageWithLevelFormat     = objc.RegisterName("logMessageWithLevel:format:")
+	_aMActionSelName                          = objc.RegisterName("name")
+	_aMActionSelIgnoresInput                  = objc.RegisterName("ignoresInput")
+	_aMActionSelSelectedInputType             = objc.RegisterName("selectedInputType")
+	_aMActionSelSetSelectedInputType          = objc.RegisterName("setSelectedInputType:")
+	_aMActionSelSelectedOutputType            = objc.RegisterName("selectedOutputType")
+	_aMActionSelSetSelectedOutputType         = objc.RegisterName("setSelectedOutputType:")
+	_aMActionSelProgressValue                 = objc.RegisterName("progressValue")
+	_aMActionSelSetProgressValue              = objc.RegisterName("setProgressValue:")
+	_aMActionSelOutput                        = objc.RegisterName("output")
+	_aMActionSelSetOutput                     = objc.RegisterName("setOutput:")
+	_aMActionSelIsStopped                     = objc.RegisterName("isStopped")
 )
 
 func AMActionFromID(id objc.ID) *AMAction {
@@ -61,14 +61,18 @@ func AMActionFromID(id objc.ID) *AMAction {
 
 func (o *AMAction) InitWithDefinitionFromArchive(dict *foundation.NSDictionary[*foundation.NSString, objc.ID], archived bool) *AMAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithDefinitionFromArchive, dict, archived)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AMActionFromID(_ret)
 }
 
 func (o *AMAction) InitWithContentsOfURLError(fileURL *foundation.NSURL) (*AMAction, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMActionSelInitWithContentsOfURLError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -191,4 +195,3 @@ func (o *AMAction) IsStopped() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aMActionSelIsStopped)
 	return _ret
 }
-

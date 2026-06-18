@@ -17,11 +17,11 @@ type NSStringDrawingContext struct {
 }
 
 var (
-	_clsNSStringDrawingContext = _objcClass("NSStringDrawingContext")
-	_nSStringDrawingContextSelMinimumScaleFactor = objc.RegisterName("minimumScaleFactor")
+	_clsNSStringDrawingContext                      = _objcClass("NSStringDrawingContext")
+	_nSStringDrawingContextSelMinimumScaleFactor    = objc.RegisterName("minimumScaleFactor")
 	_nSStringDrawingContextSelSetMinimumScaleFactor = objc.RegisterName("setMinimumScaleFactor:")
-	_nSStringDrawingContextSelActualScaleFactor = objc.RegisterName("actualScaleFactor")
-	_nSStringDrawingContextSelTotalBounds = objc.RegisterName("totalBounds")
+	_nSStringDrawingContextSelActualScaleFactor     = objc.RegisterName("actualScaleFactor")
+	_nSStringDrawingContextSelTotalBounds           = objc.RegisterName("totalBounds")
 )
 
 func NSStringDrawingContextFromID(id objc.ID) *NSStringDrawingContext {
@@ -52,4 +52,3 @@ func (o *NSStringDrawingContext) TotalBounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _nSStringDrawingContextSelTotalBounds)
 	return _ret
 }
-

@@ -136,7 +136,9 @@ func (x *AudioUnitV2Bridge) WithChannelMap(items ...*foundation.NSNumber) *Audio
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -210,4 +212,3 @@ type AudioUnitV2Bridgeable interface {
 }
 
 var _ AudioUnitV2Bridgeable = (*AudioUnitV2Bridge)(nil)
-

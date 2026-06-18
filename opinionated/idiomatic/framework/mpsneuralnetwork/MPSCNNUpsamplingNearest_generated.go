@@ -86,9 +86,13 @@ func (x *CNNUpsamplingNearest) WithDestinationImageAllocator(destinationImageAll
 	return x
 }
 
-func (x *CNNUpsamplingNearest) asCNNUpsampling() *raw.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
+func (x *CNNUpsamplingNearest) asCNNUpsampling() *raw.MPSCNNUpsampling {
+	return &x.inner.MPSCNNUpsampling
+}
 
-func (x *CNNUpsamplingNearest) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
+func (x *CNNUpsamplingNearest) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNUpsampling.MPSCNNKernel
+}
 
 // CNNUpsamplingNearestable is the interface implemented by [CNNUpsamplingNearest], for mocking and DI.
 type CNNUpsamplingNearestable interface {
@@ -104,4 +108,3 @@ type CNNUpsamplingNearestable interface {
 }
 
 var _ CNNUpsamplingNearestable = (*CNNUpsamplingNearest)(nil)
-

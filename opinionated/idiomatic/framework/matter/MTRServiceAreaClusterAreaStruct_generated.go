@@ -16,7 +16,9 @@ type MTRServiceAreaClusterAreaStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRServiceAreaClusterAreaStruct].
-func (x *MTRServiceAreaClusterAreaStruct) Unwrap() *raw.MTRServiceAreaClusterAreaStruct { return x.inner }
+func (x *MTRServiceAreaClusterAreaStruct) Unwrap() *raw.MTRServiceAreaClusterAreaStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -103,4 +105,3 @@ type MTRServiceAreaClusterAreaStructable interface {
 }
 
 var _ MTRServiceAreaClusterAreaStructable = (*MTRServiceAreaClusterAreaStruct)(nil)
-

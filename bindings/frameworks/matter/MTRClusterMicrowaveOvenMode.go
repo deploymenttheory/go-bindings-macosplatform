@@ -16,15 +16,15 @@ type MTRClusterMicrowaveOvenMode struct {
 }
 
 var (
-	_clsMTRClusterMicrowaveOvenMode = _objcClass("MTRClusterMicrowaveOvenMode")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_clsMTRClusterMicrowaveOvenMode                                            = _objcClass("MTRClusterMicrowaveOvenMode")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeSupportedModesWithParams       = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeCurrentModeWithParams          = objc.RegisterName("readAttributeCurrentModeWithParams:")
 	_mTRClusterMicrowaveOvenModeSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterMicrowaveOvenModeSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterMicrowaveOvenModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterMicrowaveOvenModeSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterMicrowaveOvenModeSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterMicrowaveOvenModeFromID(id objc.ID) *MTRClusterMicrowaveOvenMode {
@@ -75,7 +75,8 @@ func (o *MTRClusterMicrowaveOvenMode) ReadAttributeClusterRevisionWithParams(par
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterMicrowaveOvenMode) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMicrowaveOvenMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMicrowaveOvenModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterMicrowaveOvenModeFromID(_ret)
 }
-

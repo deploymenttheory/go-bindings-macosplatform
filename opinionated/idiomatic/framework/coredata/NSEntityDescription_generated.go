@@ -63,7 +63,9 @@ func (x *EntityDescription) WithSubentities(items ...*raw.NSEntityDescription) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSEntityDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -79,7 +81,9 @@ func (x *EntityDescription) WithProperties(items ...PropertyDescriptionProvider)
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPropertyDescription().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPropertyDescription().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPropertyDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -113,7 +117,9 @@ func (x *EntityDescription) WithIndexes(items ...*raw.NSFetchIndexDescription) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSFetchIndexDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -129,7 +135,9 @@ func (x *EntityDescription) WithUniquenessConstraints(items ...*foundation.NSArr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[objc.ID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -145,7 +153,9 @@ func (x *EntityDescription) WithCompoundIndexes(items ...*foundation.NSArray[obj
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[objc.ID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -418,4 +428,3 @@ type EntityDescriptionable interface {
 }
 
 var _ EntityDescriptionable = (*EntityDescription)(nil)
-

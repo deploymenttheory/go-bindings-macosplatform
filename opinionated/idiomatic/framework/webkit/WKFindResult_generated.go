@@ -47,4 +47,3 @@ type WKFindResultable interface {
 }
 
 var _ WKFindResultable = (*WKFindResult)(nil)
-

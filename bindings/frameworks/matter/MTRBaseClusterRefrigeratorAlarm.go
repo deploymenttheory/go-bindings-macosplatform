@@ -18,32 +18,32 @@ type MTRBaseClusterRefrigeratorAlarm struct {
 }
 
 var (
-	_clsMTRBaseClusterRefrigeratorAlarm = _objcClass("MTRBaseClusterRefrigeratorAlarm")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeMaskWithCompletion = objc.RegisterName("readAttributeMaskWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeMaskWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeMaskWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeMaskWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeMaskWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeStateWithCompletion = objc.RegisterName("readAttributeStateWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeStateWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeStateWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeStateWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeSupportedWithCompletion = objc.RegisterName("readAttributeSupportedWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeSupportedWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeSupportedWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeSupportedWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeSupportedWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeGeneratedCommandListWithCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
+	_clsMTRBaseClusterRefrigeratorAlarm                                                                                     = _objcClass("MTRBaseClusterRefrigeratorAlarm")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeMaskWithCompletion                                                      = objc.RegisterName("readAttributeMaskWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeMaskWithParamsSubscriptionEstablishedReportHandler                 = objc.RegisterName("subscribeAttributeMaskWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeMaskWithClusterStateCacheEndpointQueueCompletion                        = objc.RegisterName("readAttributeMaskWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeStateWithCompletion                                                     = objc.RegisterName("readAttributeStateWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler                = objc.RegisterName("subscribeAttributeStateWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeStateWithClusterStateCacheEndpointQueueCompletion                       = objc.RegisterName("readAttributeStateWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeSupportedWithCompletion                                                 = objc.RegisterName("readAttributeSupportedWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeSupportedWithParamsSubscriptionEstablishedReportHandler            = objc.RegisterName("subscribeAttributeSupportedWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeSupportedWithClusterStateCacheEndpointQueueCompletion                   = objc.RegisterName("readAttributeSupportedWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeGeneratedCommandListWithCompletion                                      = objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:")
 	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAttributeListWithCompletion = objc.RegisterName("readAttributeAttributeListWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithCompletion = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithCompletion = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
-	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
-	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
-	_mTRBaseClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeGeneratedCommandListWithClusterStateCacheEndpointQueueCompletion        = objc.RegisterName("readAttributeGeneratedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithCompletion                                       = objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler  = objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAcceptedCommandListWithClusterStateCacheEndpointQueueCompletion         = objc.RegisterName("readAttributeAcceptedCommandListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAttributeListWithCompletion                                             = objc.RegisterName("readAttributeAttributeListWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler        = objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeAttributeListWithClusterStateCacheEndpointQueueCompletion               = objc.RegisterName("readAttributeAttributeListWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithCompletion                                                = objc.RegisterName("readAttributeFeatureMapWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler           = objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeFeatureMapWithClusterStateCacheEndpointQueueCompletion                  = objc.RegisterName("readAttributeFeatureMapWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithCompletion                                           = objc.RegisterName("readAttributeClusterRevisionWithCompletion:")
+	_mTRBaseClusterRefrigeratorAlarmSelSubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler      = objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:")
+	_mTRBaseClusterRefrigeratorAlarmSelReadAttributeClusterRevisionWithClusterStateCacheEndpointQueueCompletion             = objc.RegisterName("readAttributeClusterRevisionWithClusterStateCache:endpoint:queue:completion:")
+	_mTRBaseClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue                                                        = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRBaseClusterRefrigeratorAlarmFromID(id objc.ID) *MTRBaseClusterRefrigeratorAlarm {
@@ -361,7 +361,8 @@ func MTRBaseClusterRefrigeratorAlarmReadAttributeClusterRevisionWithClusterState
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func (o *MTRBaseClusterRefrigeratorAlarm) InitWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRefrigeratorAlarm {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBaseClusterRefrigeratorAlarmSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRBaseClusterRefrigeratorAlarmFromID(_ret)
 }
-

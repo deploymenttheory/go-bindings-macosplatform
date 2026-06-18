@@ -17,7 +17,9 @@ type MutableVideoCompositionLayerInstruction struct {
 }
 
 // Unwrap returns the underlying [raw.AVMutableVideoCompositionLayerInstruction].
-func (x *MutableVideoCompositionLayerInstruction) Unwrap() *raw.AVMutableVideoCompositionLayerInstruction { return x.inner }
+func (x *MutableVideoCompositionLayerInstruction) Unwrap() *raw.AVMutableVideoCompositionLayerInstruction {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -83,7 +85,9 @@ func (x *MutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
 	x.inner.SetTrackID(trackID)
 }
 
-func (x *MutableVideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction { return &x.inner.AVVideoCompositionLayerInstruction }
+func (x *MutableVideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction {
+	return &x.inner.AVVideoCompositionLayerInstruction
+}
 
 // MutableVideoCompositionLayerInstructionable is the interface implemented by [MutableVideoCompositionLayerInstruction], for mocking and DI.
 type MutableVideoCompositionLayerInstructionable interface {
@@ -100,4 +104,3 @@ type MutableVideoCompositionLayerInstructionable interface {
 }
 
 var _ MutableVideoCompositionLayerInstructionable = (*MutableVideoCompositionLayerInstruction)(nil)
-

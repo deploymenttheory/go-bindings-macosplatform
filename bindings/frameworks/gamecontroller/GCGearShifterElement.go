@@ -16,8 +16,8 @@ type GCGearShifterElement struct {
 }
 
 var (
-	_clsGCGearShifterElement = _objcClass("GCGearShifterElement")
-	_gCGearShifterElementSelPatternInput = objc.RegisterName("patternInput")
+	_clsGCGearShifterElement                = _objcClass("GCGearShifterElement")
+	_gCGearShifterElementSelPatternInput    = objc.RegisterName("patternInput")
 	_gCGearShifterElementSelSequentialInput = objc.RegisterName("sequentialInput")
 )
 
@@ -42,4 +42,3 @@ func (o *GCGearShifterElement) SequentialInput() GCRelativeInput {
 	_ret := objc.Send[GCRelativeInput](o.Ptr(), _gCGearShifterElementSelSequentialInput)
 	return _ret
 }
-

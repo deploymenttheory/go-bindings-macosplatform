@@ -16,9 +16,9 @@ type ASIdentifierManager struct {
 }
 
 var (
-	_clsASIdentifierManager = _objcClass("ASIdentifierManager")
-	_aSIdentifierManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_aSIdentifierManagerSelAdvertisingIdentifier = objc.RegisterName("advertisingIdentifier")
+	_clsASIdentifierManager                             = _objcClass("ASIdentifierManager")
+	_aSIdentifierManagerSelSharedManager                = objc.RegisterName("sharedManager")
+	_aSIdentifierManagerSelAdvertisingIdentifier        = objc.RegisterName("advertisingIdentifier")
 	_aSIdentifierManagerSelIsAdvertisingTrackingEnabled = objc.RegisterName("isAdvertisingTrackingEnabled")
 )
 
@@ -35,14 +35,18 @@ func ASIdentifierManagerFromID(id objc.ID) *ASIdentifierManager {
 // The shared instance of the identifier manager class. - Returns: Returns the shared instance of the AdSupport identifier manager class.
 func ASIdentifierManagerSharedManager() *ASIdentifierManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASIdentifierManager), _aSIdentifierManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASIdentifierManagerFromID(_ret)
 }
 
-// The UUID that is specific to a device. The ``ASIdentifierManager/advertisingIdentifier`` is an alphanumeric string that’s unique to each device, and which you only use for advertising. Use this string for frequency capping, attribution, conversion events, estimating the number of unique users, advertising fraud detection, and debugging. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your app must request tracking authorization before it can get the advertising identifier. For more information on getting the advertising identifier, see ``AdSupport``. The advertising identifier returns either a unique UUID, or all zeros. It returns a unique UUID in the following cases: - If Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track is On, you’ve requested tracking authorization from the user by calling the <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs, and received authorization, indicated by <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>. - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track to Off after authorizing your app, and leaves the permissions On for your app. The advertising identifier returns all zeros (`00000000-0000-0000-0000-000000000000`) in the following cases: - In Simulator, regardless of any settings. - When you call this API on a device running macOS. - When you call this API in a compatible iPad or iPhone app running in visionOS. - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>. As a best practice, don’t store the advertising identifier value; access ``ASIdentifierManager/advertisingIdentifier`` instead. Users can change their authorization for tracking at any time in Settings &gt; Privacy &gt; Tracking. Check your app’s authorization using the App Tracking Transparency API <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus> to determine the user’s intent. For more information about asking users for permission to track, see [User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
+// The UUID that is specific to a device. The “ASIdentifierManager/advertisingIdentifier“ is an alphanumeric string that’s unique to each device, and which you only use for advertising. Use this string for frequency capping, attribution, conversion events, estimating the number of unique users, advertising fraud detection, and debugging. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your app must request tracking authorization before it can get the advertising identifier. For more information on getting the advertising identifier, see “AdSupport“. The advertising identifier returns either a unique UUID, or all zeros. It returns a unique UUID in the following cases: - If Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track is On, you’ve requested tracking authorization from the user by calling the <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs, and received authorization, indicated by <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>. - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track to Off after authorizing your app, and leaves the permissions On for your app. The advertising identifier returns all zeros (`00000000-0000-0000-0000-000000000000`) in the following cases: - In Simulator, regardless of any settings. - When you call this API on a device running macOS. - When you call this API in a compatible iPad or iPhone app running in visionOS. - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>. As a best practice, don’t store the advertising identifier value; access “ASIdentifierManager/advertisingIdentifier“ instead. Users can change their authorization for tracking at any time in Settings &gt; Privacy &gt; Tracking. Check your app’s authorization using the App Tracking Transparency API <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus> to determine the user’s intent. For more information about asking users for permission to track, see [User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
 func (o *ASIdentifierManager) AdvertisingIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSIdentifierManagerSelAdvertisingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *ASIdentifierManager) IsAdvertisingTrackingEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aSIdentifierManagerSelIsAdvertisingTrackingEnabled)
 	return _ret
 }
-

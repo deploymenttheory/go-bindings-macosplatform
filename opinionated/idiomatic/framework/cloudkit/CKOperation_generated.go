@@ -228,4 +228,3 @@ type Operationable interface {
 }
 
 var _ Operationable = (*Operation)(nil)
-

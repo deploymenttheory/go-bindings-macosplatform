@@ -16,13 +16,13 @@ type PKIssuerProvisioningExtensionStatus struct {
 }
 
 var (
-	_clsPKIssuerProvisioningExtensionStatus = _objcClass("PKIssuerProvisioningExtensionStatus")
-	_pKIssuerProvisioningExtensionStatusSelInit = objc.RegisterName("init")
-	_pKIssuerProvisioningExtensionStatusSelRequiresAuthentication = objc.RegisterName("requiresAuthentication")
-	_pKIssuerProvisioningExtensionStatusSelSetRequiresAuthentication = objc.RegisterName("setRequiresAuthentication:")
-	_pKIssuerProvisioningExtensionStatusSelPassEntriesAvailable = objc.RegisterName("passEntriesAvailable")
-	_pKIssuerProvisioningExtensionStatusSelSetPassEntriesAvailable = objc.RegisterName("setPassEntriesAvailable:")
-	_pKIssuerProvisioningExtensionStatusSelRemotePassEntriesAvailable = objc.RegisterName("remotePassEntriesAvailable")
+	_clsPKIssuerProvisioningExtensionStatus                              = _objcClass("PKIssuerProvisioningExtensionStatus")
+	_pKIssuerProvisioningExtensionStatusSelInit                          = objc.RegisterName("init")
+	_pKIssuerProvisioningExtensionStatusSelRequiresAuthentication        = objc.RegisterName("requiresAuthentication")
+	_pKIssuerProvisioningExtensionStatusSelSetRequiresAuthentication     = objc.RegisterName("setRequiresAuthentication:")
+	_pKIssuerProvisioningExtensionStatusSelPassEntriesAvailable          = objc.RegisterName("passEntriesAvailable")
+	_pKIssuerProvisioningExtensionStatusSelSetPassEntriesAvailable       = objc.RegisterName("setPassEntriesAvailable:")
+	_pKIssuerProvisioningExtensionStatusSelRemotePassEntriesAvailable    = objc.RegisterName("remotePassEntriesAvailable")
 	_pKIssuerProvisioningExtensionStatusSelSetRemotePassEntriesAvailable = objc.RegisterName("setRemotePassEntriesAvailable:")
 )
 
@@ -38,7 +38,9 @@ func PKIssuerProvisioningExtensionStatusFromID(id objc.ID) *PKIssuerProvisioning
 
 func (o *PKIssuerProvisioningExtensionStatus) Init() *PKIssuerProvisioningExtensionStatus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKIssuerProvisioningExtensionStatusSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKIssuerProvisioningExtensionStatusFromID(_ret)
 }
 
@@ -68,4 +70,3 @@ func (o *PKIssuerProvisioningExtensionStatus) RemotePassEntriesAvailable() bool 
 func (o *PKIssuerProvisioningExtensionStatus) SetRemotePassEntriesAvailable(remotePassEntriesAvailable bool) {
 	o.Ptr().Send(_pKIssuerProvisioningExtensionStatusSelSetRemotePassEntriesAvailable, remotePassEntriesAvailable)
 }
-

@@ -109,4 +109,3 @@ type UserLocationable interface {
 }
 
 var _ UserLocationable = (*UserLocation)(nil)
-

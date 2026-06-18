@@ -56,4 +56,3 @@ type CaptureInputable interface {
 }
 
 var _ CaptureInputable = (*CaptureInput)(nil)
-

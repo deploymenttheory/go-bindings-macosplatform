@@ -26,4 +26,3 @@ func VZStorageDeviceFromID(id objc.ID) *VZStorageDevice {
 	purego.Track(o)
 	return o
 }
-

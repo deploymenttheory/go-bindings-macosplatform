@@ -12,4 +12,3 @@ import (
 type LogEntryProvider interface {
 	asLogEntry() *raw.OSLogEntry
 }
-

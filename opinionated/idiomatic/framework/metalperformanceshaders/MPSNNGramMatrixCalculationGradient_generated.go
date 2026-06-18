@@ -19,7 +19,9 @@ type NNGramMatrixCalculationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationGradient].
-func (x *NNGramMatrixCalculationGradient) Unwrap() *raw.MPSNNGramMatrixCalculationGradient { return x.inner }
+func (x *NNGramMatrixCalculationGradient) Unwrap() *raw.MPSNNGramMatrixCalculationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -190,11 +192,17 @@ func (x *NNGramMatrixCalculationGradient) SetAlpha(alpha float32) {
 	x.inner.SetAlpha(alpha)
 }
 
-func (x *NNGramMatrixCalculationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *NNGramMatrixCalculationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *NNGramMatrixCalculationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *NNGramMatrixCalculationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *NNGramMatrixCalculationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNGramMatrixCalculationGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNGramMatrixCalculationGradientable is the interface implemented by [NNGramMatrixCalculationGradient], for mocking and DI.
 type NNGramMatrixCalculationGradientable interface {
@@ -225,4 +233,3 @@ type NNGramMatrixCalculationGradientable interface {
 }
 
 var _ NNGramMatrixCalculationGradientable = (*NNGramMatrixCalculationGradient)(nil)
-

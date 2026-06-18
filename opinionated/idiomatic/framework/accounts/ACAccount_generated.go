@@ -146,4 +146,3 @@ type Accountable interface {
 }
 
 var _ Accountable = (*Account)(nil)
-

@@ -17,9 +17,9 @@ type PKAddIdentityDocumentConfiguration struct {
 }
 
 var (
-	_clsPKAddIdentityDocumentConfiguration = _objcClass("PKAddIdentityDocumentConfiguration")
+	_clsPKAddIdentityDocumentConfiguration                                   = _objcClass("PKAddIdentityDocumentConfiguration")
 	_pKAddIdentityDocumentConfigurationSelConfigurationForMetadataCompletion = objc.RegisterName("configurationForMetadata:completion:")
-	_pKAddIdentityDocumentConfigurationSelMetadata = objc.RegisterName("metadata")
+	_pKAddIdentityDocumentConfigurationSelMetadata                           = objc.RegisterName("metadata")
 )
 
 func PKAddIdentityDocumentConfigurationFromID(id objc.ID) *PKAddIdentityDocumentConfiguration {
@@ -49,7 +49,8 @@ func PKAddIdentityDocumentConfigurationConfigurationForMetadataCompletion(metada
 
 func (o *PKAddIdentityDocumentConfiguration) Metadata() *PKIdentityDocumentMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddIdentityDocumentConfigurationSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKIdentityDocumentMetadataFromID(_ret)
 }
-

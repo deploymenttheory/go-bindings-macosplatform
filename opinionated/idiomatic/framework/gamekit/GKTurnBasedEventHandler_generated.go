@@ -61,4 +61,3 @@ type TurnBasedEventHandlerable interface {
 }
 
 var _ TurnBasedEventHandlerable = (*TurnBasedEventHandler)(nil)
-

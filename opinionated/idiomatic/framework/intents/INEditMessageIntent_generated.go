@@ -80,4 +80,3 @@ type EditMessageIntentable interface {
 }
 
 var _ EditMessageIntentable = (*EditMessageIntent)(nil)
-

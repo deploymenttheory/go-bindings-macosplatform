@@ -16,10 +16,10 @@ type MTRNetworkCommissioningClusterNetworkInfoStruct struct {
 }
 
 var (
-	_clsMTRNetworkCommissioningClusterNetworkInfoStruct = _objcClass("MTRNetworkCommissioningClusterNetworkInfoStruct")
-	_mTRNetworkCommissioningClusterNetworkInfoStructSelNetworkID = objc.RegisterName("networkID")
+	_clsMTRNetworkCommissioningClusterNetworkInfoStruct             = _objcClass("MTRNetworkCommissioningClusterNetworkInfoStruct")
+	_mTRNetworkCommissioningClusterNetworkInfoStructSelNetworkID    = objc.RegisterName("networkID")
 	_mTRNetworkCommissioningClusterNetworkInfoStructSelSetNetworkID = objc.RegisterName("setNetworkID:")
-	_mTRNetworkCommissioningClusterNetworkInfoStructSelConnected = objc.RegisterName("connected")
+	_mTRNetworkCommissioningClusterNetworkInfoStructSelConnected    = objc.RegisterName("connected")
 	_mTRNetworkCommissioningClusterNetworkInfoStructSelSetConnected = objc.RegisterName("setConnected:")
 )
 
@@ -35,7 +35,9 @@ func MTRNetworkCommissioningClusterNetworkInfoStructFromID(id objc.ID) *MTRNetwo
 
 func (o *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkInfoStructSelNetworkID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRNetworkCommissioningClusterNetworkInfoStruct) SetNetworkID(networkID
 
 func (o *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRNetworkCommissioningClusterNetworkInfoStructSelConnected)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRNetworkCommissioningClusterNetworkInfoStruct) SetConnected(connected *foundation.NSNumber) {
 	o.Ptr().Send(_mTRNetworkCommissioningClusterNetworkInfoStructSelSetConnected, connected.Ptr())
 }
-

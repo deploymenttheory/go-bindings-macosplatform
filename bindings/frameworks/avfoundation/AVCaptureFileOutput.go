@@ -17,24 +17,24 @@ type AVCaptureFileOutput struct {
 }
 
 var (
-	_clsAVCaptureFileOutput = _objcClass("AVCaptureFileOutput")
+	_clsAVCaptureFileOutput                                               = _objcClass("AVCaptureFileOutput")
 	_aVCaptureFileOutputSelStartRecordingToOutputFileURLRecordingDelegate = objc.RegisterName("startRecordingToOutputFileURL:recordingDelegate:")
-	_aVCaptureFileOutputSelStopRecording = objc.RegisterName("stopRecording")
-	_aVCaptureFileOutputSelPauseRecording = objc.RegisterName("pauseRecording")
-	_aVCaptureFileOutputSelResumeRecording = objc.RegisterName("resumeRecording")
-	_aVCaptureFileOutputSelDelegate = objc.RegisterName("delegate")
-	_aVCaptureFileOutputSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVCaptureFileOutputSelOutputFileURL = objc.RegisterName("outputFileURL")
-	_aVCaptureFileOutputSelIsRecording = objc.RegisterName("isRecording")
-	_aVCaptureFileOutputSelIsRecordingPaused = objc.RegisterName("isRecordingPaused")
-	_aVCaptureFileOutputSelRecordedDuration = objc.RegisterName("recordedDuration")
-	_aVCaptureFileOutputSelRecordedFileSize = objc.RegisterName("recordedFileSize")
-	_aVCaptureFileOutputSelMaxRecordedDuration = objc.RegisterName("maxRecordedDuration")
-	_aVCaptureFileOutputSelSetMaxRecordedDuration = objc.RegisterName("setMaxRecordedDuration:")
-	_aVCaptureFileOutputSelMaxRecordedFileSize = objc.RegisterName("maxRecordedFileSize")
-	_aVCaptureFileOutputSelSetMaxRecordedFileSize = objc.RegisterName("setMaxRecordedFileSize:")
-	_aVCaptureFileOutputSelMinFreeDiskSpaceLimit = objc.RegisterName("minFreeDiskSpaceLimit")
-	_aVCaptureFileOutputSelSetMinFreeDiskSpaceLimit = objc.RegisterName("setMinFreeDiskSpaceLimit:")
+	_aVCaptureFileOutputSelStopRecording                                  = objc.RegisterName("stopRecording")
+	_aVCaptureFileOutputSelPauseRecording                                 = objc.RegisterName("pauseRecording")
+	_aVCaptureFileOutputSelResumeRecording                                = objc.RegisterName("resumeRecording")
+	_aVCaptureFileOutputSelDelegate                                       = objc.RegisterName("delegate")
+	_aVCaptureFileOutputSelSetDelegate                                    = objc.RegisterName("setDelegate:")
+	_aVCaptureFileOutputSelOutputFileURL                                  = objc.RegisterName("outputFileURL")
+	_aVCaptureFileOutputSelIsRecording                                    = objc.RegisterName("isRecording")
+	_aVCaptureFileOutputSelIsRecordingPaused                              = objc.RegisterName("isRecordingPaused")
+	_aVCaptureFileOutputSelRecordedDuration                               = objc.RegisterName("recordedDuration")
+	_aVCaptureFileOutputSelRecordedFileSize                               = objc.RegisterName("recordedFileSize")
+	_aVCaptureFileOutputSelMaxRecordedDuration                            = objc.RegisterName("maxRecordedDuration")
+	_aVCaptureFileOutputSelSetMaxRecordedDuration                         = objc.RegisterName("setMaxRecordedDuration:")
+	_aVCaptureFileOutputSelMaxRecordedFileSize                            = objc.RegisterName("maxRecordedFileSize")
+	_aVCaptureFileOutputSelSetMaxRecordedFileSize                         = objc.RegisterName("setMaxRecordedFileSize:")
+	_aVCaptureFileOutputSelMinFreeDiskSpaceLimit                          = objc.RegisterName("minFreeDiskSpaceLimit")
+	_aVCaptureFileOutputSelSetMinFreeDiskSpaceLimit                       = objc.RegisterName("setMinFreeDiskSpaceLimit:")
 )
 
 func AVCaptureFileOutputFromID(id objc.ID) *AVCaptureFileOutput {
@@ -80,7 +80,9 @@ func (o *AVCaptureFileOutput) SetDelegate(delegate AVCaptureFileOutputDelegate) 
 // @property outputFileURL @abstract The file URL of the file to which the receiver is currently recording incoming buffers. @discussion The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
 func (o *AVCaptureFileOutput) OutputFileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureFileOutputSelOutputFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -137,4 +139,3 @@ func (o *AVCaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
 func (o *AVCaptureFileOutput) SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) {
 	o.Ptr().Send(_aVCaptureFileOutputSelSetMinFreeDiskSpaceLimit, minFreeDiskSpaceLimit)
 }
-

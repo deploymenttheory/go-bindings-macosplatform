@@ -15,7 +15,9 @@ type AudioEnvironmentReverbParameters struct {
 }
 
 // Unwrap returns the underlying [raw.AVAudioEnvironmentReverbParameters].
-func (x *AudioEnvironmentReverbParameters) Unwrap() *raw.AVAudioEnvironmentReverbParameters { return x.inner }
+func (x *AudioEnvironmentReverbParameters) Unwrap() *raw.AVAudioEnvironmentReverbParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -95,4 +97,3 @@ type AudioEnvironmentReverbParametersable interface {
 }
 
 var _ AudioEnvironmentReverbParametersable = (*AudioEnvironmentReverbParameters)(nil)
-

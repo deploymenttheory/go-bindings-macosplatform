@@ -165,4 +165,3 @@ type AccelerationStructureable interface {
 }
 
 var _ AccelerationStructureable = (*AccelerationStructure)(nil)
-

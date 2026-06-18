@@ -16,7 +16,7 @@ type AVAudioSinkNode struct {
 }
 
 var (
-	_clsAVAudioSinkNode = _objcClass("AVAudioSinkNode")
+	_clsAVAudioSinkNode                      = _objcClass("AVAudioSinkNode")
 	_aVAudioSinkNodeSelInitWithReceiverBlock = objc.RegisterName("initWithReceiverBlock:")
 )
 
@@ -40,7 +40,8 @@ func (o *AVAudioSinkNode) InitWithReceiverBlock(block func(*coreaudiotypes.Audio
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioSinkNodeSelInitWithReceiverBlock, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioSinkNodeFromID(_ret)
 }
-

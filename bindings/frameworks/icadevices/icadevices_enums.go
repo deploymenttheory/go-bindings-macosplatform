@@ -26,13 +26,13 @@ func (e BluetoothAMPCommandRejectReason) String() string {
 type BluetoothAMPCreatePhysicalLinkResponseStatus int64
 
 const (
-	KBluetoothAMPManagerCreatePhysicalLinkResponseSuccess BluetoothAMPCreatePhysicalLinkResponseStatus = 0
-	KBluetoothAMPManagerCreatePhysicalLinkResponseInvalidControllerID BluetoothAMPCreatePhysicalLinkResponseStatus = 1
-	KBluetoothAMPManagerCreatePhysicalLinkResponseUnableToStartLinkCreation BluetoothAMPCreatePhysicalLinkResponseStatus = 2
-	KBluetoothAMPManagerCreatePhysicalLinkResponseCollisionOccurred BluetoothAMPCreatePhysicalLinkResponseStatus = 3
+	KBluetoothAMPManagerCreatePhysicalLinkResponseSuccess                                    BluetoothAMPCreatePhysicalLinkResponseStatus = 0
+	KBluetoothAMPManagerCreatePhysicalLinkResponseInvalidControllerID                        BluetoothAMPCreatePhysicalLinkResponseStatus = 1
+	KBluetoothAMPManagerCreatePhysicalLinkResponseUnableToStartLinkCreation                  BluetoothAMPCreatePhysicalLinkResponseStatus = 2
+	KBluetoothAMPManagerCreatePhysicalLinkResponseCollisionOccurred                          BluetoothAMPCreatePhysicalLinkResponseStatus = 3
 	KBluetoothAMPManagerCreatePhysicalLinkResponseAMPDisconnectedPhysicalLinkRequestReceived BluetoothAMPCreatePhysicalLinkResponseStatus = 4
-	KBluetoothAMPManagerCreatePhysicalLinkResponsePhysicalLinkAlreadyExists BluetoothAMPCreatePhysicalLinkResponseStatus = 5
-	KBluetoothAMPManagerCreatePhysicalLinkResponseSecurityViolation BluetoothAMPCreatePhysicalLinkResponseStatus = 6
+	KBluetoothAMPManagerCreatePhysicalLinkResponsePhysicalLinkAlreadyExists                  BluetoothAMPCreatePhysicalLinkResponseStatus = 5
+	KBluetoothAMPManagerCreatePhysicalLinkResponseSecurityViolation                          BluetoothAMPCreatePhysicalLinkResponseStatus = 6
 )
 
 func (e BluetoothAMPCreatePhysicalLinkResponseStatus) String() string {
@@ -59,9 +59,9 @@ func (e BluetoothAMPCreatePhysicalLinkResponseStatus) String() string {
 type BluetoothAMPDisconnectPhysicalLinkResponseStatus int64
 
 const (
-	KBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess BluetoothAMPDisconnectPhysicalLinkResponseStatus = 0
+	KBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess             BluetoothAMPDisconnectPhysicalLinkResponseStatus = 0
 	KBluetoothAMPManagerDisconnectPhysicalLinkResponseInvalidControllerID BluetoothAMPDisconnectPhysicalLinkResponseStatus = 1
-	KBluetoothAMPManagerDisconnectPhysicalLinkResponseNoPhysicalLink BluetoothAMPDisconnectPhysicalLinkResponseStatus = 2
+	KBluetoothAMPManagerDisconnectPhysicalLinkResponseNoPhysicalLink      BluetoothAMPDisconnectPhysicalLinkResponseStatus = 2
 )
 
 func (e BluetoothAMPDisconnectPhysicalLinkResponseStatus) String() string {
@@ -80,13 +80,13 @@ func (e BluetoothAMPDisconnectPhysicalLinkResponseStatus) String() string {
 type BluetoothAMPDiscoverResponseControllerStatus int64
 
 const (
-	KBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown BluetoothAMPDiscoverResponseControllerStatus = 0
-	KBluetoothAMPManagerDiscoverResponseControllerStatusBluetoothOnly BluetoothAMPDiscoverResponseControllerStatus = 1
-	KBluetoothAMPManagerDiscoverResponseControllerStatusNoCapacity BluetoothAMPDiscoverResponseControllerStatus = 2
-	KBluetoothAMPManagerDiscoverResponseControllerStatusLowCapacity BluetoothAMPDiscoverResponseControllerStatus = 3
+	KBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown    BluetoothAMPDiscoverResponseControllerStatus = 0
+	KBluetoothAMPManagerDiscoverResponseControllerStatusBluetoothOnly  BluetoothAMPDiscoverResponseControllerStatus = 1
+	KBluetoothAMPManagerDiscoverResponseControllerStatusNoCapacity     BluetoothAMPDiscoverResponseControllerStatus = 2
+	KBluetoothAMPManagerDiscoverResponseControllerStatusLowCapacity    BluetoothAMPDiscoverResponseControllerStatus = 3
 	KBluetoothAMPManagerDiscoverResponseControllerStatusMediumCapacity BluetoothAMPDiscoverResponseControllerStatus = 4
-	KBluetoothAMPManagerDiscoverResponseControllerStatusHighCapacity BluetoothAMPDiscoverResponseControllerStatus = 5
-	KBluetoothAMPManagerDiscoverResponseControllerStatusFullCapacity BluetoothAMPDiscoverResponseControllerStatus = 6
+	KBluetoothAMPManagerDiscoverResponseControllerStatusHighCapacity   BluetoothAMPDiscoverResponseControllerStatus = 5
+	KBluetoothAMPManagerDiscoverResponseControllerStatusFullCapacity   BluetoothAMPDiscoverResponseControllerStatus = 6
 )
 
 func (e BluetoothAMPDiscoverResponseControllerStatus) String() string {
@@ -113,7 +113,7 @@ func (e BluetoothAMPDiscoverResponseControllerStatus) String() string {
 type BluetoothAMPGetAssocResponseStatus int64
 
 const (
-	KBluetoothAMPManagerGetAssocResponseSuccess BluetoothAMPGetAssocResponseStatus = 0
+	KBluetoothAMPManagerGetAssocResponseSuccess             BluetoothAMPGetAssocResponseStatus = 0
 	KBluetoothAMPManagerGetAssocResponseInvalidControllerID BluetoothAMPGetAssocResponseStatus = 1
 )
 
@@ -131,7 +131,7 @@ func (e BluetoothAMPGetAssocResponseStatus) String() string {
 type BluetoothAMPGetInfoResponseStatus int64
 
 const (
-	KBluetoothAMPManagerGetInfoResponseSuccess BluetoothAMPGetInfoResponseStatus = 0
+	KBluetoothAMPManagerGetInfoResponseSuccess             BluetoothAMPGetInfoResponseStatus = 0
 	KBluetoothAMPManagerGetInfoResponseInvalidControllerID BluetoothAMPGetInfoResponseStatus = 1
 )
 
@@ -149,19 +149,19 @@ func (e BluetoothAMPGetInfoResponseStatus) String() string {
 type BluetoothAMPManagerCode int64
 
 const (
-	KBluetoothAMPManagerCodeReserved BluetoothAMPManagerCode = 0
-	KBluetoothAMPManagerCodeAMPCommandReject BluetoothAMPManagerCode = 1
-	KBluetoothAMPManagerCodeAMPDiscoverRequest BluetoothAMPManagerCode = 2
-	KBluetoothAMPManagerCodeAMPDiscoverResponse BluetoothAMPManagerCode = 3
-	KBluetoothAMPManagerCodeAMPChangeNotify BluetoothAMPManagerCode = 4
-	KBluetoothAMPManagerCodeAMPChangeResponse BluetoothAMPManagerCode = 5
-	KBluetoothAMPManagerCodeAMPGetInfoRequest BluetoothAMPManagerCode = 6
-	KBluetoothAMPManagerCodeAMPGetInfoResponse BluetoothAMPManagerCode = 7
-	KBluetoothAMPManagerCodeAMPGetAssocRequest BluetoothAMPManagerCode = 8
-	KBluetoothAMPManagerCodeAMPGetAssocResponse BluetoothAMPManagerCode = 9
-	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkRequest BluetoothAMPManagerCode = 10
-	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkResponse BluetoothAMPManagerCode = 11
-	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkRequest BluetoothAMPManagerCode = 12
+	KBluetoothAMPManagerCodeReserved                          BluetoothAMPManagerCode = 0
+	KBluetoothAMPManagerCodeAMPCommandReject                  BluetoothAMPManagerCode = 1
+	KBluetoothAMPManagerCodeAMPDiscoverRequest                BluetoothAMPManagerCode = 2
+	KBluetoothAMPManagerCodeAMPDiscoverResponse               BluetoothAMPManagerCode = 3
+	KBluetoothAMPManagerCodeAMPChangeNotify                   BluetoothAMPManagerCode = 4
+	KBluetoothAMPManagerCodeAMPChangeResponse                 BluetoothAMPManagerCode = 5
+	KBluetoothAMPManagerCodeAMPGetInfoRequest                 BluetoothAMPManagerCode = 6
+	KBluetoothAMPManagerCodeAMPGetInfoResponse                BluetoothAMPManagerCode = 7
+	KBluetoothAMPManagerCodeAMPGetAssocRequest                BluetoothAMPManagerCode = 8
+	KBluetoothAMPManagerCodeAMPGetAssocResponse               BluetoothAMPManagerCode = 9
+	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkRequest      BluetoothAMPManagerCode = 10
+	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkResponse     BluetoothAMPManagerCode = 11
+	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkRequest  BluetoothAMPManagerCode = 12
 	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkResponse BluetoothAMPManagerCode = 13
 )
 
@@ -203,8 +203,8 @@ func (e BluetoothAMPManagerCode) String() string {
 type BluetoothHCIPowerState int64
 
 const (
-	KBluetoothHCIPowerStateON BluetoothHCIPowerState = 1
-	KBluetoothHCIPowerStateOFF BluetoothHCIPowerState = 0
+	KBluetoothHCIPowerStateON           BluetoothHCIPowerState = 1
+	KBluetoothHCIPowerStateOFF          BluetoothHCIPowerState = 0
 	KBluetoothHCIPowerStateUnintialized BluetoothHCIPowerState = 255
 )
 
@@ -224,29 +224,29 @@ func (e BluetoothHCIPowerState) String() string {
 type BluetoothL2CAPCommandCode int64
 
 const (
-	KBluetoothL2CAPCommandCodeReserved BluetoothL2CAPCommandCode = 0
-	KBluetoothL2CAPCommandCodeCommandReject BluetoothL2CAPCommandCode = 1
-	KBluetoothL2CAPCommandCodeConnectionRequest BluetoothL2CAPCommandCode = 2
-	KBluetoothL2CAPCommandCodeConnectionResponse BluetoothL2CAPCommandCode = 3
-	KBluetoothL2CAPCommandCodeConfigureRequest BluetoothL2CAPCommandCode = 4
-	KBluetoothL2CAPCommandCodeConfigureResponse BluetoothL2CAPCommandCode = 5
-	KBluetoothL2CAPCommandCodeDisconnectionRequest BluetoothL2CAPCommandCode = 6
-	KBluetoothL2CAPCommandCodeDisconnectionResponse BluetoothL2CAPCommandCode = 7
-	KBluetoothL2CAPCommandCodeEchoRequest BluetoothL2CAPCommandCode = 8
-	KBluetoothL2CAPCommandCodeEchoResponse BluetoothL2CAPCommandCode = 9
-	KBluetoothL2CAPCommandCodeInformationRequest BluetoothL2CAPCommandCode = 10
-	KBluetoothL2CAPCommandCodeInformationResponse BluetoothL2CAPCommandCode = 11
-	KBluetoothL2CAPCommandCodeCreateChannelRequest BluetoothL2CAPCommandCode = 12
-	KBluetoothL2CAPCommandCodeCreateChannelResponse BluetoothL2CAPCommandCode = 13
-	KBluetoothL2CAPCommandCodeMoveChannelRequest BluetoothL2CAPCommandCode = 14
-	KBluetoothL2CAPCommandCodeMoveChannelResponse BluetoothL2CAPCommandCode = 15
-	KBluetoothL2CAPCommandCodeMoveChannelConfirmation BluetoothL2CAPCommandCode = 16
-	KBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse BluetoothL2CAPCommandCode = 17
-	KBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest BluetoothL2CAPCommandCode = 18
+	KBluetoothL2CAPCommandCodeReserved                          BluetoothL2CAPCommandCode = 0
+	KBluetoothL2CAPCommandCodeCommandReject                     BluetoothL2CAPCommandCode = 1
+	KBluetoothL2CAPCommandCodeConnectionRequest                 BluetoothL2CAPCommandCode = 2
+	KBluetoothL2CAPCommandCodeConnectionResponse                BluetoothL2CAPCommandCode = 3
+	KBluetoothL2CAPCommandCodeConfigureRequest                  BluetoothL2CAPCommandCode = 4
+	KBluetoothL2CAPCommandCodeConfigureResponse                 BluetoothL2CAPCommandCode = 5
+	KBluetoothL2CAPCommandCodeDisconnectionRequest              BluetoothL2CAPCommandCode = 6
+	KBluetoothL2CAPCommandCodeDisconnectionResponse             BluetoothL2CAPCommandCode = 7
+	KBluetoothL2CAPCommandCodeEchoRequest                       BluetoothL2CAPCommandCode = 8
+	KBluetoothL2CAPCommandCodeEchoResponse                      BluetoothL2CAPCommandCode = 9
+	KBluetoothL2CAPCommandCodeInformationRequest                BluetoothL2CAPCommandCode = 10
+	KBluetoothL2CAPCommandCodeInformationResponse               BluetoothL2CAPCommandCode = 11
+	KBluetoothL2CAPCommandCodeCreateChannelRequest              BluetoothL2CAPCommandCode = 12
+	KBluetoothL2CAPCommandCodeCreateChannelResponse             BluetoothL2CAPCommandCode = 13
+	KBluetoothL2CAPCommandCodeMoveChannelRequest                BluetoothL2CAPCommandCode = 14
+	KBluetoothL2CAPCommandCodeMoveChannelResponse               BluetoothL2CAPCommandCode = 15
+	KBluetoothL2CAPCommandCodeMoveChannelConfirmation           BluetoothL2CAPCommandCode = 16
+	KBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse   BluetoothL2CAPCommandCode = 17
+	KBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest  BluetoothL2CAPCommandCode = 18
 	KBluetoothL2CAPCommandCodeConnectionParameterUpdateResponse BluetoothL2CAPCommandCode = 19
-	KBluetoothL2CAPCommandCodeLECreditBasedConnectionRequest BluetoothL2CAPCommandCode = 20
-	KBluetoothL2CAPCommandCodeLECreditBasedConnectionResponse BluetoothL2CAPCommandCode = 21
-	KBluetoothL2CAPCommandCodeLEFlowControlCredit BluetoothL2CAPCommandCode = 22
+	KBluetoothL2CAPCommandCodeLECreditBasedConnectionRequest    BluetoothL2CAPCommandCode = 20
+	KBluetoothL2CAPCommandCodeLECreditBasedConnectionResponse   BluetoothL2CAPCommandCode = 21
+	KBluetoothL2CAPCommandCodeLEFlowControlCredit               BluetoothL2CAPCommandCode = 22
 )
 
 func (e BluetoothL2CAPCommandCode) String() string {
@@ -305,9 +305,9 @@ func (e BluetoothL2CAPCommandCode) String() string {
 type BluetoothL2CAPCommandRejectReason int64
 
 const (
-	KBluetoothL2CAPCommandRejectReasonCommandNotUnderstood BluetoothL2CAPCommandRejectReason = 0
+	KBluetoothL2CAPCommandRejectReasonCommandNotUnderstood  BluetoothL2CAPCommandRejectReason = 0
 	KBluetoothL2CAPCommandRejectReasonSignallingMTUExceeded BluetoothL2CAPCommandRejectReason = 1
-	KBluetoothL2CAPCommandRejectReasonInvalidCIDInRequest BluetoothL2CAPCommandRejectReason = 2
+	KBluetoothL2CAPCommandRejectReasonInvalidCIDInRequest   BluetoothL2CAPCommandRejectReason = 2
 )
 
 func (e BluetoothL2CAPCommandRejectReason) String() string {
@@ -326,13 +326,13 @@ func (e BluetoothL2CAPCommandRejectReason) String() string {
 type BluetoothL2CAPConfigurationOption int64
 
 const (
-	KBluetoothL2CAPConfigurationOptionMTU BluetoothL2CAPConfigurationOption = 1
-	KBluetoothL2CAPConfigurationOptionFlushTimeout BluetoothL2CAPConfigurationOption = 2
-	KBluetoothL2CAPConfigurationOptionQoS BluetoothL2CAPConfigurationOption = 3
+	KBluetoothL2CAPConfigurationOptionMTU                          BluetoothL2CAPConfigurationOption = 1
+	KBluetoothL2CAPConfigurationOptionFlushTimeout                 BluetoothL2CAPConfigurationOption = 2
+	KBluetoothL2CAPConfigurationOptionQoS                          BluetoothL2CAPConfigurationOption = 3
 	KBluetoothL2CAPConfigurationOptionRetransmissionAndFlowControl BluetoothL2CAPConfigurationOption = 4
-	KBluetoothL2CAPConfigurationOptionFrameCheckSequence BluetoothL2CAPConfigurationOption = 5
-	KBluetoothL2CAPConfigurationOptionExtendedFlowSpecification BluetoothL2CAPConfigurationOption = 6
-	KBluetoothL2CAPConfigurationOptionExtendedWindowSize BluetoothL2CAPConfigurationOption = 7
+	KBluetoothL2CAPConfigurationOptionFrameCheckSequence           BluetoothL2CAPConfigurationOption = 5
+	KBluetoothL2CAPConfigurationOptionExtendedFlowSpecification    BluetoothL2CAPConfigurationOption = 6
+	KBluetoothL2CAPConfigurationOptionExtendedWindowSize           BluetoothL2CAPConfigurationOption = 7
 )
 
 func (e BluetoothL2CAPConfigurationOption) String() string {
@@ -359,10 +359,10 @@ func (e BluetoothL2CAPConfigurationOption) String() string {
 type BluetoothL2CAPConfigurationResult int64
 
 const (
-	KBluetoothL2CAPConfigurationResultSuccess BluetoothL2CAPConfigurationResult = 0
+	KBluetoothL2CAPConfigurationResultSuccess            BluetoothL2CAPConfigurationResult = 0
 	KBluetoothL2CAPConfigurationResultUnacceptableParams BluetoothL2CAPConfigurationResult = 1
-	KBluetoothL2CAPConfigurationResultRejected BluetoothL2CAPConfigurationResult = 2
-	KBluetoothL2CAPConfigurationResultUnknownOptions BluetoothL2CAPConfigurationResult = 3
+	KBluetoothL2CAPConfigurationResultRejected           BluetoothL2CAPConfigurationResult = 2
+	KBluetoothL2CAPConfigurationResultUnknownOptions     BluetoothL2CAPConfigurationResult = 3
 )
 
 func (e BluetoothL2CAPConfigurationResult) String() string {
@@ -383,11 +383,11 @@ func (e BluetoothL2CAPConfigurationResult) String() string {
 type BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags int64
 
 const (
-	KBluetoothL2CAPConfigurationBasicL2CAPModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 0
-	KBluetoothL2CAPConfigurationRetransmissionModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 1
-	KBluetoothL2CAPConfigurationFlowControlModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 2
+	KBluetoothL2CAPConfigurationBasicL2CAPModeFlag         BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 0
+	KBluetoothL2CAPConfigurationRetransmissionModeFlag     BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 1
+	KBluetoothL2CAPConfigurationFlowControlModeFlag        BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 2
 	KBluetoothL2CAPConfigurationEnhancedRetransmissionMode BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 3
-	KBluetoothL2CAPConfigurationStreamingMode BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 4
+	KBluetoothL2CAPConfigurationStreamingMode              BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 4
 )
 
 func (e BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags) String() string {
@@ -410,13 +410,13 @@ func (e BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags) String() s
 type BluetoothL2CAPConnectionResult int64
 
 const (
-	KBluetoothL2CAPConnectionResultSuccessful BluetoothL2CAPConnectionResult = 0
-	KBluetoothL2CAPConnectionResultPending BluetoothL2CAPConnectionResult = 1
-	KBluetoothL2CAPConnectionResultRefusedPSMNotSupported BluetoothL2CAPConnectionResult = 2
-	KBluetoothL2CAPConnectionResultRefusedSecurityBlock BluetoothL2CAPConnectionResult = 3
-	KBluetoothL2CAPConnectionResultRefusedNoResources BluetoothL2CAPConnectionResult = 4
-	KBluetoothL2CAPConnectionResultRefusedReserved BluetoothL2CAPConnectionResult = 5
-	KBluetoothL2CAPConnectionResultRefusedInvalidSourceCID BluetoothL2CAPConnectionResult = 6
+	KBluetoothL2CAPConnectionResultSuccessful                       BluetoothL2CAPConnectionResult = 0
+	KBluetoothL2CAPConnectionResultPending                          BluetoothL2CAPConnectionResult = 1
+	KBluetoothL2CAPConnectionResultRefusedPSMNotSupported           BluetoothL2CAPConnectionResult = 2
+	KBluetoothL2CAPConnectionResultRefusedSecurityBlock             BluetoothL2CAPConnectionResult = 3
+	KBluetoothL2CAPConnectionResultRefusedNoResources               BluetoothL2CAPConnectionResult = 4
+	KBluetoothL2CAPConnectionResultRefusedReserved                  BluetoothL2CAPConnectionResult = 5
+	KBluetoothL2CAPConnectionResultRefusedInvalidSourceCID          BluetoothL2CAPConnectionResult = 6
 	KBluetoothL2CAPConnectionResultRefusedSourceCIDAlreadyAllocated BluetoothL2CAPConnectionResult = 7
 )
 
@@ -446,9 +446,9 @@ func (e BluetoothL2CAPConnectionResult) String() string {
 type BluetoothL2CAPConnectionStatus int64
 
 const (
-	KBluetoothL2CAPConnectionStatusNoInfoAvailable BluetoothL2CAPConnectionStatus = 0
+	KBluetoothL2CAPConnectionStatusNoInfoAvailable       BluetoothL2CAPConnectionStatus = 0
 	KBluetoothL2CAPConnectionStatusAuthenticationPending BluetoothL2CAPConnectionStatus = 1
-	KBluetoothL2CAPConnectionStatusAuthorizationPending BluetoothL2CAPConnectionStatus = 2
+	KBluetoothL2CAPConnectionStatusAuthorizationPending  BluetoothL2CAPConnectionStatus = 2
 )
 
 func (e BluetoothL2CAPConnectionStatus) String() string {
@@ -467,17 +467,17 @@ func (e BluetoothL2CAPConnectionStatus) String() string {
 type BluetoothL2CAPInformationExtendedFeaturesMask int64
 
 const (
-	KBluetoothL2CAPInformationNoExtendedFeatures BluetoothL2CAPInformationExtendedFeaturesMask = 0
-	KBluetoothL2CAPInformationFlowControlMode BluetoothL2CAPInformationExtendedFeaturesMask = 1
-	KBluetoothL2CAPInformationRetransmissionMode BluetoothL2CAPInformationExtendedFeaturesMask = 2
-	KBluetoothL2CAPInformationBidirectionalQoS BluetoothL2CAPInformationExtendedFeaturesMask = 4
+	KBluetoothL2CAPInformationNoExtendedFeatures         BluetoothL2CAPInformationExtendedFeaturesMask = 0
+	KBluetoothL2CAPInformationFlowControlMode            BluetoothL2CAPInformationExtendedFeaturesMask = 1
+	KBluetoothL2CAPInformationRetransmissionMode         BluetoothL2CAPInformationExtendedFeaturesMask = 2
+	KBluetoothL2CAPInformationBidirectionalQoS           BluetoothL2CAPInformationExtendedFeaturesMask = 4
 	KBluetoothL2CAPInformationEnhancedRetransmissionMode BluetoothL2CAPInformationExtendedFeaturesMask = 8
-	KBluetoothL2CAPInformationStreamingMode BluetoothL2CAPInformationExtendedFeaturesMask = 16
-	KBluetoothL2CAPInformationFCSOption BluetoothL2CAPInformationExtendedFeaturesMask = 32
-	KBluetoothL2CAPInformationExtendedFlowSpecification BluetoothL2CAPInformationExtendedFeaturesMask = 64
-	KBluetoothL2CAPInformationFixedChannels BluetoothL2CAPInformationExtendedFeaturesMask = 128
-	KBluetoothL2CAPInformationExtendedWindowSize BluetoothL2CAPInformationExtendedFeaturesMask = 256
-	KBluetoothL2CAPUnicastConnectionlessDataReception BluetoothL2CAPInformationExtendedFeaturesMask = 512
+	KBluetoothL2CAPInformationStreamingMode              BluetoothL2CAPInformationExtendedFeaturesMask = 16
+	KBluetoothL2CAPInformationFCSOption                  BluetoothL2CAPInformationExtendedFeaturesMask = 32
+	KBluetoothL2CAPInformationExtendedFlowSpecification  BluetoothL2CAPInformationExtendedFeaturesMask = 64
+	KBluetoothL2CAPInformationFixedChannels              BluetoothL2CAPInformationExtendedFeaturesMask = 128
+	KBluetoothL2CAPInformationExtendedWindowSize         BluetoothL2CAPInformationExtendedFeaturesMask = 256
+	KBluetoothL2CAPUnicastConnectionlessDataReception    BluetoothL2CAPInformationExtendedFeaturesMask = 512
 )
 
 func (e BluetoothL2CAPInformationExtendedFeaturesMask) String() string {
@@ -512,7 +512,7 @@ func (e BluetoothL2CAPInformationExtendedFeaturesMask) String() string {
 type BluetoothL2CAPInformationResult int64
 
 const (
-	KBluetoothL2CAPInformationResultSuccess BluetoothL2CAPInformationResult = 0
+	KBluetoothL2CAPInformationResultSuccess      BluetoothL2CAPInformationResult = 0
 	KBluetoothL2CAPInformationResultNotSupported BluetoothL2CAPInformationResult = 1
 )
 
@@ -530,8 +530,8 @@ func (e BluetoothL2CAPInformationResult) String() string {
 type BluetoothL2CAPInformationType int64
 
 const (
-	KBluetoothL2CAPInformationTypeConnectionlessMTU BluetoothL2CAPInformationType = 1
-	KBluetoothL2CAPInformationTypeExtendedFeatures BluetoothL2CAPInformationType = 2
+	KBluetoothL2CAPInformationTypeConnectionlessMTU      BluetoothL2CAPInformationType = 1
+	KBluetoothL2CAPInformationTypeExtendedFeatures       BluetoothL2CAPInformationType = 2
 	KBluetoothL2CAPInformationTypeFixedChannelsSupported BluetoothL2CAPInformationType = 3
 )
 
@@ -551,7 +551,7 @@ func (e BluetoothL2CAPInformationType) String() string {
 type BluetoothL2CAPQoSType int64
 
 const (
-	KBluetoothL2CAPQoSTypeNoTraffic BluetoothL2CAPQoSType = 0
+	KBluetoothL2CAPQoSTypeNoTraffic  BluetoothL2CAPQoSType = 0
 	KBluetoothL2CAPQoSTypeBestEffort BluetoothL2CAPQoSType = 1
 	KBluetoothL2CAPQoSTypeGuaranteed BluetoothL2CAPQoSType = 2
 )
@@ -572,10 +572,10 @@ func (e BluetoothL2CAPQoSType) String() string {
 type BluetoothL2CAPSupervisoryFuctionType int64
 
 const (
-	KBluetoothL2CAPSupervisoryFuctionTypeReceiverReady BluetoothL2CAPSupervisoryFuctionType = 0
-	KBluetoothL2CAPSupervisoryFuctionTypeReject BluetoothL2CAPSupervisoryFuctionType = 1
+	KBluetoothL2CAPSupervisoryFuctionTypeReceiverReady    BluetoothL2CAPSupervisoryFuctionType = 0
+	KBluetoothL2CAPSupervisoryFuctionTypeReject           BluetoothL2CAPSupervisoryFuctionType = 1
 	KBluetoothL2CAPSupervisoryFuctionTypeReceiverNotReady BluetoothL2CAPSupervisoryFuctionType = 2
-	KBluetoothL2CAPSupervisoryFuctionTypeSelectiveReject BluetoothL2CAPSupervisoryFuctionType = 3
+	KBluetoothL2CAPSupervisoryFuctionTypeSelectiveReject  BluetoothL2CAPSupervisoryFuctionType = 3
 )
 
 func (e BluetoothL2CAPSupervisoryFuctionType) String() string {
@@ -614,11 +614,11 @@ func (e BluetoothLEAddressType) String() string {
 type BluetoothLEAdvertisingType int64
 
 const (
-	BluetoothLEAdvertisingTypeConnectableUndirected BluetoothLEAdvertisingType = 0
-	BluetoothLEAdvertisingTypeConnectableDirected BluetoothLEAdvertisingType = 1
-	BluetoothLEAdvertisingTypeDiscoverableUndirected BluetoothLEAdvertisingType = 2
+	BluetoothLEAdvertisingTypeConnectableUndirected    BluetoothLEAdvertisingType = 0
+	BluetoothLEAdvertisingTypeConnectableDirected      BluetoothLEAdvertisingType = 1
+	BluetoothLEAdvertisingTypeDiscoverableUndirected   BluetoothLEAdvertisingType = 2
 	BluetoothLEAdvertisingTypeNonConnectableUndirected BluetoothLEAdvertisingType = 3
-	BluetoothLEAdvertisingTypeScanResponse BluetoothLEAdvertisingType = 4
+	BluetoothLEAdvertisingTypeScanResponse             BluetoothLEAdvertisingType = 4
 )
 
 func (e BluetoothLEAdvertisingType) String() string {
@@ -660,7 +660,7 @@ type BluetoothLEScan int64
 
 const (
 	BluetoothLEScanDisable BluetoothLEScan = 0
-	BluetoothLEScanEnable BluetoothLEScan = 1
+	BluetoothLEScanEnable  BluetoothLEScan = 1
 )
 
 func (e BluetoothLEScan) String() string {
@@ -678,7 +678,7 @@ type BluetoothLEScanDuplicateFilter int64
 
 const (
 	BluetoothLEScanDuplicateFilterDisable BluetoothLEScanDuplicateFilter = 0
-	BluetoothLEScanDuplicateFilterEnable BluetoothLEScanDuplicateFilter = 1
+	BluetoothLEScanDuplicateFilterEnable  BluetoothLEScanDuplicateFilter = 1
 )
 
 func (e BluetoothLEScanDuplicateFilter) String() string {
@@ -695,8 +695,8 @@ func (e BluetoothLEScanDuplicateFilter) String() string {
 type BluetoothLEScanFilter int64
 
 const (
-	BluetoothLEScanFilterNone BluetoothLEScanFilter = 0
-	BluetoothLEScanFilterSafelist BluetoothLEScanFilter = 1
+	BluetoothLEScanFilterNone      BluetoothLEScanFilter = 0
+	BluetoothLEScanFilterSafelist  BluetoothLEScanFilter = 1
 	BluetoothLEScanFilterWhitelist BluetoothLEScanFilter = 1
 )
 
@@ -715,7 +715,7 @@ type BluetoothLEScanType int64
 
 const (
 	BluetoothLEScanTypePassive BluetoothLEScanType = 0
-	BluetoothLEScanTypeActive BluetoothLEScanType = 1
+	BluetoothLEScanTypeActive  BluetoothLEScanType = 1
 )
 
 func (e BluetoothLEScanType) String() string {
@@ -732,23 +732,23 @@ func (e BluetoothLEScanType) String() string {
 type BluetoothLESecurityManagerCommandCode int64
 
 const (
-	KBluetoothLESecurityManagerCommandCodeReserved BluetoothLESecurityManagerCommandCode = 0
-	KBluetoothLESecurityManagerCommandCodePairingRequest BluetoothLESecurityManagerCommandCode = 1
-	KBluetoothLESecurityManagerCommandCodePairingResponse BluetoothLESecurityManagerCommandCode = 2
-	KBluetoothLESecurityManagerCommandCodePairingConfirm BluetoothLESecurityManagerCommandCode = 3
-	KBluetoothLESecurityManagerCommandCodePairingRandom BluetoothLESecurityManagerCommandCode = 4
-	KBluetoothLESecurityManagerCommandCodePairingFailed BluetoothLESecurityManagerCommandCode = 5
-	KBluetoothLESecurityManagerCommandCodeEncryptionInfo BluetoothLESecurityManagerCommandCode = 6
-	KBluetoothLESecurityManagerCommandCodeMasterIdentification BluetoothLESecurityManagerCommandCode = 7
-	KBluetoothLESecurityManagerCommandCodeIdentityInfo BluetoothLESecurityManagerCommandCode = 8
-	KBluetoothLESecurityManagerCommandCodeIdentityAddressInfo BluetoothLESecurityManagerCommandCode = 9
-	KBluetoothLESecurityManagerCommandCodeSigningInfo BluetoothLESecurityManagerCommandCode = 10
-	KBluetoothLESecurityManagerCommandCodeSecurityRequest BluetoothLESecurityManagerCommandCode = 11
-	KBluetoothLESecurityManagerCommandCodePairingPublicKey BluetoothLESecurityManagerCommandCode = 12
-	KBluetoothLESecurityManagerCommandCodePairingDHKeyCheck BluetoothLESecurityManagerCommandCode = 13
+	KBluetoothLESecurityManagerCommandCodeReserved                    BluetoothLESecurityManagerCommandCode = 0
+	KBluetoothLESecurityManagerCommandCodePairingRequest              BluetoothLESecurityManagerCommandCode = 1
+	KBluetoothLESecurityManagerCommandCodePairingResponse             BluetoothLESecurityManagerCommandCode = 2
+	KBluetoothLESecurityManagerCommandCodePairingConfirm              BluetoothLESecurityManagerCommandCode = 3
+	KBluetoothLESecurityManagerCommandCodePairingRandom               BluetoothLESecurityManagerCommandCode = 4
+	KBluetoothLESecurityManagerCommandCodePairingFailed               BluetoothLESecurityManagerCommandCode = 5
+	KBluetoothLESecurityManagerCommandCodeEncryptionInfo              BluetoothLESecurityManagerCommandCode = 6
+	KBluetoothLESecurityManagerCommandCodeMasterIdentification        BluetoothLESecurityManagerCommandCode = 7
+	KBluetoothLESecurityManagerCommandCodeIdentityInfo                BluetoothLESecurityManagerCommandCode = 8
+	KBluetoothLESecurityManagerCommandCodeIdentityAddressInfo         BluetoothLESecurityManagerCommandCode = 9
+	KBluetoothLESecurityManagerCommandCodeSigningInfo                 BluetoothLESecurityManagerCommandCode = 10
+	KBluetoothLESecurityManagerCommandCodeSecurityRequest             BluetoothLESecurityManagerCommandCode = 11
+	KBluetoothLESecurityManagerCommandCodePairingPublicKey            BluetoothLESecurityManagerCommandCode = 12
+	KBluetoothLESecurityManagerCommandCodePairingDHKeyCheck           BluetoothLESecurityManagerCommandCode = 13
 	KBluetoothLESecurityManagerCommandCodePairingKeypressNotification BluetoothLESecurityManagerCommandCode = 14
-	KBluetoothLESecurityManagerCommandCodeReservedStart BluetoothLESecurityManagerCommandCode = 15
-	KBluetoothLESecurityManagerCommandCodeReservedEnd BluetoothLESecurityManagerCommandCode = 255
+	KBluetoothLESecurityManagerCommandCodeReservedStart               BluetoothLESecurityManagerCommandCode = 15
+	KBluetoothLESecurityManagerCommandCodeReservedEnd                 BluetoothLESecurityManagerCommandCode = 255
 )
 
 func (e BluetoothLESecurityManagerCommandCode) String() string {
@@ -795,13 +795,13 @@ func (e BluetoothLESecurityManagerCommandCode) String() string {
 type BluetoothLESecurityManagerIOCapability int64
 
 const (
-	KBluetoothLESecurityManagerIOCapabilityDisplayOnly BluetoothLESecurityManagerIOCapability = 0
-	KBluetoothLESecurityManagerIOCapabilityDisplayYesNo BluetoothLESecurityManagerIOCapability = 1
-	KBluetoothLESecurityManagerIOCapabilityKeyboardOnly BluetoothLESecurityManagerIOCapability = 2
+	KBluetoothLESecurityManagerIOCapabilityDisplayOnly     BluetoothLESecurityManagerIOCapability = 0
+	KBluetoothLESecurityManagerIOCapabilityDisplayYesNo    BluetoothLESecurityManagerIOCapability = 1
+	KBluetoothLESecurityManagerIOCapabilityKeyboardOnly    BluetoothLESecurityManagerIOCapability = 2
 	KBluetoothLESecurityManagerIOCapabilityNoInputNoOutput BluetoothLESecurityManagerIOCapability = 3
 	KBluetoothLESecurityManagerIOCapabilityKeyboardDisplay BluetoothLESecurityManagerIOCapability = 4
-	KBluetoothLESecurityManagerIOCapabilityReservedStart BluetoothLESecurityManagerIOCapability = 5
-	KBluetoothLESecurityManagerIOCapabilityReservedEnd BluetoothLESecurityManagerIOCapability = 255
+	KBluetoothLESecurityManagerIOCapabilityReservedStart   BluetoothLESecurityManagerIOCapability = 5
+	KBluetoothLESecurityManagerIOCapabilityReservedEnd     BluetoothLESecurityManagerIOCapability = 255
 )
 
 func (e BluetoothLESecurityManagerIOCapability) String() string {
@@ -828,13 +828,13 @@ func (e BluetoothLESecurityManagerIOCapability) String() string {
 type BluetoothLESecurityManagerKeypressNotificationType int64
 
 const (
-	KBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted BluetoothLESecurityManagerKeypressNotificationType = 0
-	KBluetoothLESecurityManagerNotificationTypePasskeyDigitEntered BluetoothLESecurityManagerKeypressNotificationType = 1
-	KBluetoothLESecurityManagerNotificationTypePasskeyDigitErased BluetoothLESecurityManagerKeypressNotificationType = 2
-	KBluetoothLESecurityManagerNotificationTypePasskeyCleared BluetoothLESecurityManagerKeypressNotificationType = 3
+	KBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted   BluetoothLESecurityManagerKeypressNotificationType = 0
+	KBluetoothLESecurityManagerNotificationTypePasskeyDigitEntered   BluetoothLESecurityManagerKeypressNotificationType = 1
+	KBluetoothLESecurityManagerNotificationTypePasskeyDigitErased    BluetoothLESecurityManagerKeypressNotificationType = 2
+	KBluetoothLESecurityManagerNotificationTypePasskeyCleared        BluetoothLESecurityManagerKeypressNotificationType = 3
 	KBluetoothLESecurityManagerNotificationTypePasskeyEntryCompleted BluetoothLESecurityManagerKeypressNotificationType = 4
-	KBluetoothLESecurityManagerNotificationTypeReservedStart BluetoothLESecurityManagerKeypressNotificationType = 5
-	KBluetoothLESecurityManagerNotificationTypeReservedEnd BluetoothLESecurityManagerKeypressNotificationType = 255
+	KBluetoothLESecurityManagerNotificationTypeReservedStart         BluetoothLESecurityManagerKeypressNotificationType = 5
+	KBluetoothLESecurityManagerNotificationTypeReservedEnd           BluetoothLESecurityManagerKeypressNotificationType = 255
 )
 
 func (e BluetoothLESecurityManagerKeypressNotificationType) String() string {
@@ -862,9 +862,9 @@ type BluetoothLESecurityManagerOOBData int64
 
 const (
 	KBluetoothLESecurityManagerOOBAuthenticationDataNotPresent BluetoothLESecurityManagerOOBData = 0
-	KBluetoothLESecurityManagerOOBAuthenticationDataPresent BluetoothLESecurityManagerOOBData = 1
-	KBluetoothLESecurityManagerOOBDataReservedStart BluetoothLESecurityManagerOOBData = 2
-	KBluetoothLESecurityManagerOOBDataReservedEnd BluetoothLESecurityManagerOOBData = 255
+	KBluetoothLESecurityManagerOOBAuthenticationDataPresent    BluetoothLESecurityManagerOOBData = 1
+	KBluetoothLESecurityManagerOOBDataReservedStart            BluetoothLESecurityManagerOOBData = 2
+	KBluetoothLESecurityManagerOOBDataReservedEnd              BluetoothLESecurityManagerOOBData = 255
 )
 
 func (e BluetoothLESecurityManagerOOBData) String() string {
@@ -885,23 +885,23 @@ func (e BluetoothLESecurityManagerOOBData) String() string {
 type BluetoothLESecurityManagerPairingFailedReasonCode int64
 
 const (
-	KBluetoothLESecurityManagerReasonCodeReserved BluetoothLESecurityManagerPairingFailedReasonCode = 0
-	KBluetoothLESecurityManagerReasonCodePasskeyEntryFailed BluetoothLESecurityManagerPairingFailedReasonCode = 1
-	KBluetoothLESecurityManagerReasonCodeOOBNotAvailbale BluetoothLESecurityManagerPairingFailedReasonCode = 2
-	KBluetoothLESecurityManagerReasonCodeAuthenticationRequirements BluetoothLESecurityManagerPairingFailedReasonCode = 3
-	KBluetoothLESecurityManagerReasonCodeConfirmValueFailed BluetoothLESecurityManagerPairingFailedReasonCode = 4
-	KBluetoothLESecurityManagerReasonCodePairingNotSupported BluetoothLESecurityManagerPairingFailedReasonCode = 5
-	KBluetoothLESecurityManagerReasonCodeEncryptionKeySize BluetoothLESecurityManagerPairingFailedReasonCode = 6
-	KBluetoothLESecurityManagerReasonCodeCommandNotSupported BluetoothLESecurityManagerPairingFailedReasonCode = 7
-	KBluetoothLESecurityManagerReasonCodeUnspecifiedReason BluetoothLESecurityManagerPairingFailedReasonCode = 8
-	KBluetoothLESecurityManagerReasonCodeRepeatedAttempts BluetoothLESecurityManagerPairingFailedReasonCode = 9
-	KBluetoothLESecurityManagerReasonCodeInvalidParameters BluetoothLESecurityManagerPairingFailedReasonCode = 10
-	KBluetoothLESecurityManagerReasonCodeDHKeyCheckFailed BluetoothLESecurityManagerPairingFailedReasonCode = 11
-	KBluetoothLESecurityManagerReasonCodeNumericComparisonFailed BluetoothLESecurityManagerPairingFailedReasonCode = 12
-	KBluetoothLESecurityManagerReasonCodeBREDRPairingInProgress BluetoothLESecurityManagerPairingFailedReasonCode = 13
+	KBluetoothLESecurityManagerReasonCodeReserved                                        BluetoothLESecurityManagerPairingFailedReasonCode = 0
+	KBluetoothLESecurityManagerReasonCodePasskeyEntryFailed                              BluetoothLESecurityManagerPairingFailedReasonCode = 1
+	KBluetoothLESecurityManagerReasonCodeOOBNotAvailbale                                 BluetoothLESecurityManagerPairingFailedReasonCode = 2
+	KBluetoothLESecurityManagerReasonCodeAuthenticationRequirements                      BluetoothLESecurityManagerPairingFailedReasonCode = 3
+	KBluetoothLESecurityManagerReasonCodeConfirmValueFailed                              BluetoothLESecurityManagerPairingFailedReasonCode = 4
+	KBluetoothLESecurityManagerReasonCodePairingNotSupported                             BluetoothLESecurityManagerPairingFailedReasonCode = 5
+	KBluetoothLESecurityManagerReasonCodeEncryptionKeySize                               BluetoothLESecurityManagerPairingFailedReasonCode = 6
+	KBluetoothLESecurityManagerReasonCodeCommandNotSupported                             BluetoothLESecurityManagerPairingFailedReasonCode = 7
+	KBluetoothLESecurityManagerReasonCodeUnspecifiedReason                               BluetoothLESecurityManagerPairingFailedReasonCode = 8
+	KBluetoothLESecurityManagerReasonCodeRepeatedAttempts                                BluetoothLESecurityManagerPairingFailedReasonCode = 9
+	KBluetoothLESecurityManagerReasonCodeInvalidParameters                               BluetoothLESecurityManagerPairingFailedReasonCode = 10
+	KBluetoothLESecurityManagerReasonCodeDHKeyCheckFailed                                BluetoothLESecurityManagerPairingFailedReasonCode = 11
+	KBluetoothLESecurityManagerReasonCodeNumericComparisonFailed                         BluetoothLESecurityManagerPairingFailedReasonCode = 12
+	KBluetoothLESecurityManagerReasonCodeBREDRPairingInProgress                          BluetoothLESecurityManagerPairingFailedReasonCode = 13
 	KBluetoothLESecurityManagerReasonCodeCrossTransportKeyDerivationGenerationNotAllowed BluetoothLESecurityManagerPairingFailedReasonCode = 14
-	KBluetoothLESecurityManagerReasonCodeReservedStart BluetoothLESecurityManagerPairingFailedReasonCode = 15
-	KBluetoothLESecurityManagerReasonCodeReservedEnd BluetoothLESecurityManagerPairingFailedReasonCode = 255
+	KBluetoothLESecurityManagerReasonCodeReservedStart                                   BluetoothLESecurityManagerPairingFailedReasonCode = 15
+	KBluetoothLESecurityManagerReasonCodeReservedEnd                                     BluetoothLESecurityManagerPairingFailedReasonCode = 255
 )
 
 func (e BluetoothLESecurityManagerPairingFailedReasonCode) String() string {
@@ -948,8 +948,8 @@ func (e BluetoothLESecurityManagerPairingFailedReasonCode) String() string {
 type BluetoothLESecurityManagerUserInputCapability int64
 
 const (
-	KBluetoothLESecurityManagerUserInputCapabilityNoInput BluetoothLESecurityManagerUserInputCapability = 1
-	KBluetoothLESecurityManagerUserInputCapabilityYesNo BluetoothLESecurityManagerUserInputCapability = 2
+	KBluetoothLESecurityManagerUserInputCapabilityNoInput  BluetoothLESecurityManagerUserInputCapability = 1
+	KBluetoothLESecurityManagerUserInputCapabilityYesNo    BluetoothLESecurityManagerUserInputCapability = 2
 	KBluetoothLESecurityManagerUserInputCapabilityKeyboard BluetoothLESecurityManagerUserInputCapability = 3
 )
 
@@ -969,7 +969,7 @@ func (e BluetoothLESecurityManagerUserInputCapability) String() string {
 type BluetoothLESecurityManagerUserOutputCapability int64
 
 const (
-	KBluetoothLESecurityManagerUserOutputCapabilityNoOutput BluetoothLESecurityManagerUserOutputCapability = 1
+	KBluetoothLESecurityManagerUserOutputCapabilityNoOutput      BluetoothLESecurityManagerUserOutputCapability = 1
 	KBluetoothLESecurityManagerUserOutputCapabilityNumericOutput BluetoothLESecurityManagerUserOutputCapability = 2
 )
 
@@ -988,7 +988,7 @@ func (e BluetoothLESecurityManagerUserOutputCapability) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -1006,8 +1006,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -1044,8 +1044,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1064,13 +1064,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1097,24 +1097,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1155,9 +1155,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1177,12 +1177,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1209,14 +1209,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1245,9 +1245,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1266,36 +1266,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1325,8 +1339,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1346,62 +1360,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1527,15 +1541,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1573,7 +1587,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1581,7 +1597,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1599,8 +1615,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1619,26 +1635,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1660,27 +1692,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1704,11 +1736,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1733,22 +1765,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1799,135 +1831,149 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	AddedAfterCCCMask = 32
+	AddedAfterCCCMask   = 32
 	FileInTempCacheMask = 16
-	FileLockedMask = 4
-	HasChildrenMask = 1
-	HasThumbnailMask = 2
-	LargeFileSizeMask = 256
-	RawImageFormatMask = 8
+	FileLockedMask      = 4
+	HasChildrenMask     = 1
+	HasThumbnailMask    = 2
+	LargeFileSizeMask   = 256
+	RawImageFormatMask  = 8
 )
 
 const (
 	KAddMetaDataToFinderComment = 4
-	KAdjustCreationDate = 8
-	KCreateCustomIcon = 2
-	KDeleteAfterDownload = 1
-	KDontEmbedColorSyncProfile = 128
-	KRotateImage = 64
-	KSetFileTypeAndCreator = 16
+	KAdjustCreationDate         = 8
+	KCreateCustomIcon           = 2
+	KDeleteAfterDownload        = 1
+	KDontEmbedColorSyncProfile  = 128
+	KRotateImage                = 64
+	KSetFileTypeAndCreator      = 16
 )
 
 const (
-	KICAAllowMultipleImages = 1
+	KICAAllowMultipleImages        = 1
 	KICADownloadAndReturnPathArray = 2
 )
 
 const (
-	KICAButtonCopy = 1668247673
+	KICAButtonCopy  = 1668247673
 	KICAButtonEMail = 1835100524
-	KICAButtonScan = 1935892846
-	KICAButtonWeb = 2003132960
+	KICAButtonScan  = 1935892846
+	KICAButtonWeb   = 2003132960
 )
 
 const (
 	KICACameraPassThruNotUsed = 2
 	KICACameraPassThruReceive = 1
-	KICACameraPassThruSend = 0
+	KICACameraPassThruSend    = 0
 )
 
 const (
-	KICACannotYieldDevice = -9909
-	KICACommunicationErr = -9900
-	KICADataTypeNotFoundErr = -9910
-	KICADeviceAlreadyOpenErr = -9914
-	KICADeviceGUIDNotFoundErr = -9916
+	KICACannotYieldDevice              = -9909
+	KICACommunicationErr               = -9900
+	KICADataTypeNotFoundErr            = -9910
+	KICADeviceAlreadyOpenErr           = -9914
+	KICADeviceGUIDNotFoundErr          = -9916
 	KICADeviceIOServicePathNotFoundErr = -9917
-	KICADeviceInternalErr = -9912
-	KICADeviceInvalidParamErr = -9913
-	KICADeviceLocationIDNotFoundErr = -9915
-	KICADeviceMemoryAllocationErr = -9911
-	KICADeviceNotFoundErr = -9901
-	KICADeviceNotOpenErr = -9902
-	KICADeviceUnsupportedErr = -9918
-	KICAExtensionInternalErr = -9920
-	KICAFileCorruptedErr = -9903
-	KICAFrameworkInternalErr = -9919
-	KICAIOPendingErr = -9904
-	KICAIndexOutOfRangeErr = -9907
-	KICAInvalidObjectErr = -9905
-	KICAInvalidPropertyErr = -9906
-	KICAInvalidSessionErr = -9921
-	KICAPropertyTypeNotFoundErr = -9908
-	KICASandboxViolation = -9922
-	KICASecureSessionRequired = -9923
+	KICADeviceInternalErr              = -9912
+	KICADeviceInvalidParamErr          = -9913
+	KICADeviceLocationIDNotFoundErr    = -9915
+	KICADeviceMemoryAllocationErr      = -9911
+	KICADeviceNotFoundErr              = -9901
+	KICADeviceNotOpenErr               = -9902
+	KICADeviceUnsupportedErr           = -9918
+	KICAExtensionInternalErr           = -9920
+	KICAFileCorruptedErr               = -9903
+	KICAFrameworkInternalErr           = -9919
+	KICAIOPendingErr                   = -9904
+	KICAIndexOutOfRangeErr             = -9907
+	KICAInvalidObjectErr               = -9905
+	KICAInvalidPropertyErr             = -9906
+	KICAInvalidSessionErr              = -9921
+	KICAPropertyTypeNotFoundErr        = -9908
+	KICASandboxViolation               = -9922
+	KICASecureSessionRequired          = -9923
 )
 
 const (
-	KICADevice = 1768121462
-	KICADeviceCamera = 1668117089
-	KICADeviceMFP = 1835429920
-	KICADeviceOther = 1685025896
-	KICADevicePDA = 1885626656
-	KICADevicePhone = 1885892462
+	KICADevice        = 1768121462
+	KICADeviceCamera  = 1668117089
+	KICADeviceMFP     = 1835429920
+	KICADeviceOther   = 1685025896
+	KICADevicePDA     = 1885626656
+	KICADevicePhone   = 1885892462
 	KICADeviceScanner = 1935892846
-	KICADirectory = 1684632165
-	KICAFile = 1718185061
-	KICAFileAudio = 1635083375
-	KICAFileFirmware = 1718186605
-	KICAFileImage = 1768776039
-	KICAFileMovie = 1836019574
-	KICAFileOther = 1869899877
-	KICAList = 1868720748
+	KICADirectory     = 1684632165
+	KICAFile          = 1718185061
+	KICAFileAudio     = 1635083375
+	KICAFileFirmware  = 1718186605
+	KICAFileImage     = 1768776039
+	KICAFileMovie     = 1836019574
+	KICAFileOther     = 1869899877
+	KICAList          = 1868720748
 )
 
 const (
-	KICAFlagReadAccess = 2
+	KICAFlagReadAccess      = 2
 	KICAFlagReadWriteAccess = 1
 )
 
 const (
-	KICAMessageCameraPassThrough = 1885434739
-	KICAMessageCameraReadClock = 1919118443
-	KICAMessageCheckDevice = 1667787620
-	KICAMessageConnect = 1869636974
-	KICAMessageDeviceYield = 2036950380
-	KICAMessageDisconnect = 1668050803
-	KICAMessageGetEventData = 1835492708
-	KICAMessageGetLastButtonPressed = 1651797567
-	KICAMessageReset = 1919251301
+	KICAMessageCameraPassThrough               = 1885434739
+	KICAMessageCameraReadClock                 = 1919118443
+	KICAMessageCheckDevice                     = 1667787620
+	KICAMessageConnect                         = 1869636974
+	KICAMessageDeviceYield                     = 2036950380
+	KICAMessageDisconnect                      = 1668050803
+	KICAMessageGetEventData                    = 1835492708
+	KICAMessageGetLastButtonPressed            = 1651797567
+	KICAMessageReset                           = 1919251301
 	KICAMessageScannerOverviewSelectionChanged = 1634887009
 )
 
@@ -1936,68 +1982,67 @@ const (
 )
 
 const (
-	KICAProperty = 1886547824
-	KICAPropertyColorSpace = 1093677105
-	KICAPropertyColorSyncProfile = 1886547814
-	KICAPropertyImageAperture = 959590450
-	KICAPropertyImageBitDepth = 808529970
-	KICAPropertyImageDPI = 808530241
-	KICAPropertyImageData = 1768186228
+	KICAProperty                   = 1886547824
+	KICAPropertyColorSpace         = 1093677105
+	KICAPropertyColorSyncProfile   = 1886547814
+	KICAPropertyImageAperture      = 959590450
+	KICAPropertyImageBitDepth      = 808529970
+	KICAPropertyImageDPI           = 808530241
+	KICAPropertyImageData          = 1768186228
 	KICAPropertyImageDateDigitized = 959459380
-	KICAPropertyImageDateOriginal = 959459379
-	KICAPropertyImageExposureTime = 942815553
-	KICAPropertyImageFNumber = 942815556
-	KICAPropertyImageFilename = 1768319340
-	KICAPropertyImageFlash = 959590457
-	KICAPropertyImageHeight = 808529969
-	KICAPropertyImageShutterSpeed = 959590449
-	KICAPropertyImageSize = 1769171322
-	KICAPropertyImageThumbnail = 1953002861
-	KICAPropertyImageWidth = 808529968
+	KICAPropertyImageDateOriginal  = 959459379
+	KICAPropertyImageExposureTime  = 942815553
+	KICAPropertyImageFNumber       = 942815556
+	KICAPropertyImageFilename      = 1768319340
+	KICAPropertyImageFlash         = 959590457
+	KICAPropertyImageHeight        = 808529969
+	KICAPropertyImageShutterSpeed  = 959590449
+	KICAPropertyImageSize          = 1769171322
+	KICAPropertyImageThumbnail     = 1953002861
+	KICAPropertyImageWidth         = 808529968
 )
 
 const (
 	KICAThumbnailFormatJPEG = 1785750887
-	KICAThumbnailFormatPNG = 1886283552
+	KICAThumbnailFormatPNG  = 1886283552
 	KICAThumbnailFormatTIFF = 1953064550
 )
 
 const (
-	KICATypeBoolean = 1651470188
-	KICATypeData = 1684108385
-	KICATypeFixed = 1936289383
-	KICATypeFloat = 1718382433
-	KICATypeSInt16 = 1936273718
-	KICATypeSInt32 = 1936274226
-	KICATypeSInt64 = 1936274996
-	KICATypeString = 1413830740
+	KICATypeBoolean   = 1651470188
+	KICATypeData      = 1684108385
+	KICATypeFixed     = 1936289383
+	KICATypeFloat     = 1718382433
+	KICATypeSInt16    = 1936273718
+	KICATypeSInt32    = 1936274226
+	KICATypeSInt64    = 1936274996
+	KICATypeString    = 1413830740
 	KICATypeThumbnail = 1953002861
-	KICATypeUInt16 = 1969828150
-	KICATypeUInt32 = 1969828658
-	KICATypeUInt64 = 1969829428
-	KICATypeUInt8 = 1969827896
+	KICATypeUInt16    = 1969828150
+	KICATypeUInt32    = 1969828658
+	KICATypeUInt64    = 1969829428
+	KICATypeUInt8     = 1969827896
 )
 
 const (
-	KICAUploadFileAsIs = 0
+	KICAUploadFileAsIs       = 0
 	KICAUploadFileScaleToFit = 1
 )
 
 const (
-	KICD_FileData = 1718185061
-	KICD_MetaData = 1835365473
-	KICD_ThumbnailData = 1953002861
+	KICD_FileData                = 1718185061
+	KICD_MetaData                = 1835365473
+	KICD_ThumbnailData           = 1953002861
 	KICD_ThumbnailDataFormatJPEG = 1953132647
-	KICD_ThumbnailDataFormatPNG = 1953525351
+	KICD_ThumbnailDataFormatPNG  = 1953525351
 	KICD_ThumbnailDataFormatTIFF = 1953786214
 )
 
 const (
-	KICS_FileData = 1718185061
-	KICS_MetaData = 1835365473
-	KICS_ThumbnailData = 1953002861
+	KICS_FileData                = 1718185061
+	KICS_MetaData                = 1835365473
+	KICS_ThumbnailData           = 1953002861
 	KICS_ThumbnailDataFormatJPEG = 1953132647
-	KICS_ThumbnailDataFormatPNG = 1953525351
+	KICS_ThumbnailDataFormatPNG  = 1953525351
 	KICS_ThumbnailDataFormatTIFF = 1953786214
 )
-

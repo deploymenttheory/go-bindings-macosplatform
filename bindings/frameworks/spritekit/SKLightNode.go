@@ -16,18 +16,18 @@ type SKLightNode struct {
 }
 
 var (
-	_clsSKLightNode = _objcClass("SKLightNode")
-	_sKLightNodeSelIsEnabled = objc.RegisterName("isEnabled")
-	_sKLightNodeSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sKLightNodeSelLightColor = objc.RegisterName("lightColor")
-	_sKLightNodeSelSetLightColor = objc.RegisterName("setLightColor:")
-	_sKLightNodeSelAmbientColor = objc.RegisterName("ambientColor")
-	_sKLightNodeSelSetAmbientColor = objc.RegisterName("setAmbientColor:")
-	_sKLightNodeSelShadowColor = objc.RegisterName("shadowColor")
-	_sKLightNodeSelSetShadowColor = objc.RegisterName("setShadowColor:")
-	_sKLightNodeSelFalloff = objc.RegisterName("falloff")
-	_sKLightNodeSelSetFalloff = objc.RegisterName("setFalloff:")
-	_sKLightNodeSelCategoryBitMask = objc.RegisterName("categoryBitMask")
+	_clsSKLightNode                   = _objcClass("SKLightNode")
+	_sKLightNodeSelIsEnabled          = objc.RegisterName("isEnabled")
+	_sKLightNodeSelSetEnabled         = objc.RegisterName("setEnabled:")
+	_sKLightNodeSelLightColor         = objc.RegisterName("lightColor")
+	_sKLightNodeSelSetLightColor      = objc.RegisterName("setLightColor:")
+	_sKLightNodeSelAmbientColor       = objc.RegisterName("ambientColor")
+	_sKLightNodeSelSetAmbientColor    = objc.RegisterName("setAmbientColor:")
+	_sKLightNodeSelShadowColor        = objc.RegisterName("shadowColor")
+	_sKLightNodeSelSetShadowColor     = objc.RegisterName("setShadowColor:")
+	_sKLightNodeSelFalloff            = objc.RegisterName("falloff")
+	_sKLightNodeSelSetFalloff         = objc.RegisterName("setFalloff:")
+	_sKLightNodeSelCategoryBitMask    = objc.RegisterName("categoryBitMask")
 	_sKLightNodeSelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
 )
 
@@ -54,7 +54,9 @@ func (o *SKLightNode) SetEnabled(enabled bool) {
 // Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
 func (o *SKLightNode) LightColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelLightColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *SKLightNode) SetLightColor(lightColor *appkit.NSColor) {
 // Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
 func (o *SKLightNode) AmbientColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelAmbientColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -76,7 +80,9 @@ func (o *SKLightNode) SetAmbientColor(ambientColor *appkit.NSColor) {
 // Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
 func (o *SKLightNode) ShadowColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKLightNodeSelShadowColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -103,4 +109,3 @@ func (o *SKLightNode) CategoryBitMask() uint32 {
 func (o *SKLightNode) SetCategoryBitMask(categoryBitMask uint32) {
 	o.Ptr().Send(_sKLightNodeSelSetCategoryBitMask, categoryBitMask)
 }
-

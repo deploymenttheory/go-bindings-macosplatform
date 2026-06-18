@@ -70,4 +70,3 @@ type DropoutLayerable interface {
 }
 
 var _ DropoutLayerable = (*DropoutLayer)(nil)
-

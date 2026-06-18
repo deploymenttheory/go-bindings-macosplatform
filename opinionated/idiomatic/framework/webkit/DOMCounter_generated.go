@@ -65,7 +65,9 @@ func (x *DOMCounter) Separator() string {
 
 func (x *DOMCounter) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMCounter) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMCounter) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMCounterable is the interface implemented by [DOMCounter], for mocking and DI.
 type DOMCounterable interface {
@@ -76,4 +78,3 @@ type DOMCounterable interface {
 }
 
 var _ DOMCounterable = (*DOMCounter)(nil)
-

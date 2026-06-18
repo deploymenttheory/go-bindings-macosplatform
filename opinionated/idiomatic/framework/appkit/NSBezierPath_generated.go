@@ -436,4 +436,3 @@ type BezierPathable interface {
 }
 
 var _ BezierPathable = (*BezierPath)(nil)
-

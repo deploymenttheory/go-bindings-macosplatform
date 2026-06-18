@@ -91,9 +91,13 @@ func (x *ArrayUnaryKernel) DilationRates() raw.MPSNDArraySizes {
 
 func (x *ArrayUnaryKernel) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel { return x.inner }
 
-func (x *ArrayUnaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *ArrayUnaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayUnaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayUnaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayUnaryKernelable is the interface implemented by [ArrayUnaryKernel], for mocking and DI.
 type ArrayUnaryKernelable interface {
@@ -111,4 +115,3 @@ type ArrayUnaryKernelable interface {
 }
 
 var _ ArrayUnaryKernelable = (*ArrayUnaryKernel)(nil)
-

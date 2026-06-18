@@ -147,9 +147,13 @@ func (x *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *r
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterServiceArea) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterServiceArea) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterServiceArea) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterServiceArea) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterServiceAreaable is the interface implemented by [MTRClusterServiceArea], for mocking and DI.
 type MTRClusterServiceAreaable interface {
@@ -170,4 +174,3 @@ type MTRClusterServiceAreaable interface {
 }
 
 var _ MTRClusterServiceAreaable = (*MTRClusterServiceArea)(nil)
-

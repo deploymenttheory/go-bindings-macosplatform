@@ -56,9 +56,13 @@ func (x *TransitPassProperties) IsInStation() bool {
 	return x.inner.IsInStation()
 }
 
-func (x *TransitPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties { return x.inner }
+func (x *TransitPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties {
+	return x.inner
+}
 
-func (x *TransitPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return &x.inner.PKStoredValuePassProperties }
+func (x *TransitPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties {
+	return &x.inner.PKStoredValuePassProperties
+}
 
 // TransitPassPropertiesable is the interface implemented by [TransitPassProperties], for mocking and DI.
 type TransitPassPropertiesable interface {
@@ -69,4 +73,3 @@ type TransitPassPropertiesable interface {
 }
 
 var _ TransitPassPropertiesable = (*TransitPassProperties)(nil)
-

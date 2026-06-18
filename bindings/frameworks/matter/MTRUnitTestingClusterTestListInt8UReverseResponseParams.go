@@ -18,12 +18,12 @@ type MTRUnitTestingClusterTestListInt8UReverseResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestListInt8UReverseResponseParams = _objcClass("MTRUnitTestingClusterTestListInt8UReverseResponseParams")
+	_clsMTRUnitTestingClusterTestListInt8UReverseResponseParams                           = _objcClass("MTRUnitTestingClusterTestListInt8UReverseResponseParams")
 	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelArg1 = objc.RegisterName("arg1")
-	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetArg1 = objc.RegisterName("setArg1:")
-	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelArg1                       = objc.RegisterName("arg1")
+	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetArg1                    = objc.RegisterName("setArg1:")
+	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestListInt8UReverseResponseParams {
@@ -40,7 +40,9 @@ func MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,11 +61,12 @@ func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetArg1(arg1 *
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestListInt8UReverseResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

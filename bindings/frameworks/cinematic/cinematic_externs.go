@@ -11,4 +11,3 @@ func CNCinematicErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_cinematicLib, "CNCinematicErrorDomain")
 	return ptr
 }
-

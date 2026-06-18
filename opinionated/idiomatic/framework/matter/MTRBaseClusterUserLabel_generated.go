@@ -339,9 +339,13 @@ func (x *MTRBaseClusterUserLabel) SubscribeAttributeClusterRevisionWithMinInterv
 	}
 }
 
-func (x *MTRBaseClusterUserLabel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterUserLabel) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterUserLabel) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterUserLabel) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterUserLabelable is the interface implemented by [MTRBaseClusterUserLabel], for mocking and DI.
 type MTRBaseClusterUserLabelable interface {
@@ -377,4 +381,3 @@ type MTRBaseClusterUserLabelable interface {
 }
 
 var _ MTRBaseClusterUserLabelable = (*MTRBaseClusterUserLabel)(nil)
-

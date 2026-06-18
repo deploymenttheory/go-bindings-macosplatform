@@ -15,19 +15,19 @@ type MPSCNNSpatialNormalizationGradientNode struct {
 }
 
 var (
-	_clsMPSCNNSpatialNormalizationGradientNode = _objcClass("MPSCNNSpatialNormalizationGradientNode")
+	_clsMPSCNNSpatialNormalizationGradientNode                                                         = _objcClass("MPSCNNSpatialNormalizationGradientNode")
 	_mPSCNNSpatialNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelSize = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:")
 	_mPSCNNSpatialNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelSize = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelSize:")
-	_mPSCNNSpatialNormalizationGradientNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNSpatialNormalizationGradientNodeSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSCNNSpatialNormalizationGradientNodeSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNSpatialNormalizationGradientNodeSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
-	_mPSCNNSpatialNormalizationGradientNodeSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNSpatialNormalizationGradientNodeSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNSpatialNormalizationGradientNodeSelBeta = objc.RegisterName("beta")
-	_mPSCNNSpatialNormalizationGradientNodeSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNSpatialNormalizationGradientNodeSelDelta = objc.RegisterName("delta")
-	_mPSCNNSpatialNormalizationGradientNodeSelSetDelta = objc.RegisterName("setDelta:")
+	_mPSCNNSpatialNormalizationGradientNodeSelKernelWidth                                              = objc.RegisterName("kernelWidth")
+	_mPSCNNSpatialNormalizationGradientNodeSelSetKernelWidth                                           = objc.RegisterName("setKernelWidth:")
+	_mPSCNNSpatialNormalizationGradientNodeSelKernelHeight                                             = objc.RegisterName("kernelHeight")
+	_mPSCNNSpatialNormalizationGradientNodeSelSetKernelHeight                                          = objc.RegisterName("setKernelHeight:")
+	_mPSCNNSpatialNormalizationGradientNodeSelAlpha                                                    = objc.RegisterName("alpha")
+	_mPSCNNSpatialNormalizationGradientNodeSelSetAlpha                                                 = objc.RegisterName("setAlpha:")
+	_mPSCNNSpatialNormalizationGradientNodeSelBeta                                                     = objc.RegisterName("beta")
+	_mPSCNNSpatialNormalizationGradientNodeSelSetBeta                                                  = objc.RegisterName("setBeta:")
+	_mPSCNNSpatialNormalizationGradientNodeSelDelta                                                    = objc.RegisterName("delta")
+	_mPSCNNSpatialNormalizationGradientNodeSelSetDelta                                                 = objc.RegisterName("setDelta:")
 )
 
 func MPSCNNSpatialNormalizationGradientNodeFromID(id objc.ID) *MPSCNNSpatialNormalizationGradientNode {
@@ -42,13 +42,17 @@ func MPSCNNSpatialNormalizationGradientNodeFromID(id objc.ID) *MPSCNNSpatialNorm
 
 func MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelSize uint) *MPSCNNSpatialNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNSpatialNormalizationGradientNode), _mPSCNNSpatialNormalizationGradientNodeSelNodeWithSourceGradientSourceImageGradientStateKernelSize, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationGradientNodeFromID(_ret)
 }
 
 func (o *MPSCNNSpatialNormalizationGradientNode) InitWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient *MPSNNImageNode, sourceImage *MPSNNImageNode, gradientState *MPSNNGradientStateNode, kernelSize uint) *MPSCNNSpatialNormalizationGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSpatialNormalizationGradientNodeSelInitWithSourceGradientSourceImageGradientStateKernelSize, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSpatialNormalizationGradientNodeFromID(_ret)
 }
 
@@ -99,4 +103,3 @@ func (o *MPSCNNSpatialNormalizationGradientNode) Delta() float32 {
 func (o *MPSCNNSpatialNormalizationGradientNode) SetDelta(delta float32) {
 	o.Ptr().Send(_mPSCNNSpatialNormalizationGradientNodeSelSetDelta, delta)
 }
-

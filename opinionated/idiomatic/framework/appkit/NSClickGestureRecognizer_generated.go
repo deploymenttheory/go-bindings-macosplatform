@@ -168,7 +168,9 @@ func (x *ClickGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequi
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 }
 
-func (x *ClickGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+func (x *ClickGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer {
+	return &x.inner.NSGestureRecognizer
+}
 
 // ClickGestureRecognizerable is the interface implemented by [ClickGestureRecognizer], for mocking and DI.
 type ClickGestureRecognizerable interface {
@@ -199,4 +201,3 @@ type ClickGestureRecognizerable interface {
 }
 
 var _ ClickGestureRecognizerable = (*ClickGestureRecognizer)(nil)
-

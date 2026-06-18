@@ -18,11 +18,11 @@ type MPSImageDilate struct {
 }
 
 var (
-	_clsMPSImageDilate = _objcClass("MPSImageDilate")
+	_clsMPSImageDilate                                            = _objcClass("MPSImageDilate")
 	_mPSImageDilateSelInitWithDeviceKernelWidthKernelHeightValues = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:values:")
-	_mPSImageDilateSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageDilateSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSImageDilateSelKernelWidth = objc.RegisterName("kernelWidth")
+	_mPSImageDilateSelInitWithCoderDevice                         = objc.RegisterName("initWithCoder:device:")
+	_mPSImageDilateSelKernelHeight                                = objc.RegisterName("kernelHeight")
+	_mPSImageDilateSelKernelWidth                                 = objc.RegisterName("kernelWidth")
 )
 
 func MPSImageDilateFromID(id objc.ID) *MPSImageDilate {
@@ -38,14 +38,18 @@ func MPSImageDilateFromID(id objc.ID) *MPSImageDilate {
 // @abstract   Init a object with kernel height, width and weight values. @discussion Each dilate shape probe defines a 3D surface of values. These are arranged in order left to right, then top to bottom in a 1D array. (values[kernelWidth*y+x] = probe[y][x]) Values should be generally be in the range [0,1] with the center pixel tending towards 0 and edges towards 1. However, any numerical value is allowed. Calculations are subject to the usual floating-point rounding error. @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number. @param      values              The set of values to use as the dilate probe. The values are copied into the filter. To avoid image ligthening or darkening, the center value should be 0.0f.
 func (o *MPSImageDilate) InitWithDeviceKernelWidthKernelHeightValues(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, values *float32) *MPSImageDilate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageDilateSelInitWithDeviceKernelWidthKernelHeightValues, device, kernelWidth, kernelHeight, values)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageDilateFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageDilate) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageDilate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageDilateSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageDilateFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *MPSImageDilate) KernelWidth() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSImageDilateSelKernelWidth)
 	return _ret
 }
-

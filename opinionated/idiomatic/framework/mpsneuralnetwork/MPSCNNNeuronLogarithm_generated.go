@@ -88,7 +88,9 @@ func (x *CNNNeuronLogarithm) WithDestinationImageAllocator(destinationImageAlloc
 
 func (x *CNNNeuronLogarithm) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronLogarithm) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronLogarithm) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronLogarithmable is the interface implemented by [CNNNeuronLogarithm], for mocking and DI.
 type CNNNeuronLogarithmable interface {
@@ -104,4 +106,3 @@ type CNNNeuronLogarithmable interface {
 }
 
 var _ CNNNeuronLogarithmable = (*CNNNeuronLogarithm)(nil)
-

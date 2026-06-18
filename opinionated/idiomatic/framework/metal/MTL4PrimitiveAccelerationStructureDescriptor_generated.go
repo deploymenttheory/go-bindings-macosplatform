@@ -18,7 +18,9 @@ type MTL4PrimitiveAccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4PrimitiveAccelerationStructureDescriptor].
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) Unwrap() *raw.MTL4PrimitiveAccelerationStructureDescriptor { return x.inner }
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) Unwrap() *raw.MTL4PrimitiveAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(i
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMTL4AccelerationStructureGeometryDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMTL4AccelerationStructureGeometryDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTL4AccelerationStructureGeometryDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -156,9 +160,13 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(mo
 	x.inner.SetMotionKeyframeCount(motionKeyframeCount)
 }
 
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor }
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor
+}
 
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor }
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor
+}
 
 // MTL4PrimitiveAccelerationStructureDescriptorable is the interface implemented by [MTL4PrimitiveAccelerationStructureDescriptor], for mocking and DI.
 type MTL4PrimitiveAccelerationStructureDescriptorable interface {
@@ -185,4 +193,3 @@ type MTL4PrimitiveAccelerationStructureDescriptorable interface {
 }
 
 var _ MTL4PrimitiveAccelerationStructureDescriptorable = (*MTL4PrimitiveAccelerationStructureDescriptor)(nil)
-

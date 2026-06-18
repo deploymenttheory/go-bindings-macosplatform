@@ -290,4 +290,3 @@ type CaptureConnectionable interface {
 }
 
 var _ CaptureConnectionable = (*CaptureConnection)(nil)
-

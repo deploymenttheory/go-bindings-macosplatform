@@ -20,7 +20,9 @@ type TriangleAccelerationStructure struct {
 }
 
 // Unwrap returns the underlying [raw.MPSTriangleAccelerationStructure].
-func (x *TriangleAccelerationStructure) Unwrap() *raw.MPSTriangleAccelerationStructure { return x.inner }
+func (x *TriangleAccelerationStructure) Unwrap() *raw.MPSTriangleAccelerationStructure {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,7 +115,9 @@ func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*mpsrayinter
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*mpsrayintersector.MPSPolygonBuffer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -150,11 +154,17 @@ func (x *TriangleAccelerationStructure) SetTriangleCount(triangleCount uint) {
 	x.inner.SetTriangleCount(triangleCount)
 }
 
-func (x *TriangleAccelerationStructure) asPolygonAccelerationStructure() *mpsrayintersector.MPSPolygonAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure }
+func (x *TriangleAccelerationStructure) asPolygonAccelerationStructure() *mpsrayintersector.MPSPolygonAccelerationStructure {
+	return &x.inner.MPSPolygonAccelerationStructure
+}
 
-func (x *TriangleAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure }
+func (x *TriangleAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure {
+	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure
+}
 
-func (x *TriangleAccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.MPSKernel }
+func (x *TriangleAccelerationStructure) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.MPSKernel
+}
 
 // TriangleAccelerationStructureable is the interface implemented by [TriangleAccelerationStructure], for mocking and DI.
 type TriangleAccelerationStructureable interface {
@@ -179,4 +189,3 @@ type TriangleAccelerationStructureable interface {
 }
 
 var _ TriangleAccelerationStructureable = (*TriangleAccelerationStructure)(nil)
-

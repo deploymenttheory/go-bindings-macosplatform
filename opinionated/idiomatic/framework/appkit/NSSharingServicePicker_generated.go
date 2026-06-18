@@ -85,4 +85,3 @@ type SharingServicePickerable interface {
 }
 
 var _ SharingServicePickerable = (*SharingServicePicker)(nil)
-

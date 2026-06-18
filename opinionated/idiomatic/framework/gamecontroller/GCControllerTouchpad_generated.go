@@ -158,7 +158,9 @@ func (x *ControllerTouchpad) SetReportsAbsoluteTouchSurfaceValues(reportsAbsolut
 	x.inner.SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues)
 }
 
-func (x *ControllerTouchpad) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerElement }
+func (x *ControllerTouchpad) asControllerElement() *raw.GCControllerElement {
+	return &x.inner.GCControllerElement
+}
 
 // ControllerTouchpadable is the interface implemented by [ControllerTouchpad], for mocking and DI.
 type ControllerTouchpadable interface {
@@ -187,4 +189,3 @@ type ControllerTouchpadable interface {
 }
 
 var _ ControllerTouchpadable = (*ControllerTouchpad)(nil)
-

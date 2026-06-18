@@ -16,13 +16,13 @@ type NSPersistentCloudKitContainerEventRequest struct {
 }
 
 var (
-	_clsNSPersistentCloudKitContainerEventRequest = _objcClass("NSPersistentCloudKitContainerEventRequest")
-	_nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterDate = objc.RegisterName("fetchEventsAfterDate:")
-	_nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterEvent = objc.RegisterName("fetchEventsAfterEvent:")
+	_clsNSPersistentCloudKitContainerEventRequest                                = _objcClass("NSPersistentCloudKitContainerEventRequest")
+	_nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterDate            = objc.RegisterName("fetchEventsAfterDate:")
+	_nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterEvent           = objc.RegisterName("fetchEventsAfterEvent:")
 	_nSPersistentCloudKitContainerEventRequestSelFetchEventsMatchingFetchRequest = objc.RegisterName("fetchEventsMatchingFetchRequest:")
-	_nSPersistentCloudKitContainerEventRequestSelFetchRequestForEvents = objc.RegisterName("fetchRequestForEvents")
-	_nSPersistentCloudKitContainerEventRequestSelResultType = objc.RegisterName("resultType")
-	_nSPersistentCloudKitContainerEventRequestSelSetResultType = objc.RegisterName("setResultType:")
+	_nSPersistentCloudKitContainerEventRequestSelFetchRequestForEvents           = objc.RegisterName("fetchRequestForEvents")
+	_nSPersistentCloudKitContainerEventRequestSelResultType                      = objc.RegisterName("resultType")
+	_nSPersistentCloudKitContainerEventRequestSelSetResultType                   = objc.RegisterName("setResultType:")
 )
 
 func NSPersistentCloudKitContainerEventRequestFromID(id objc.ID) *NSPersistentCloudKitContainerEventRequest {
@@ -37,19 +37,25 @@ func NSPersistentCloudKitContainerEventRequestFromID(id objc.ID) *NSPersistentCl
 
 func NSPersistentCloudKitContainerEventRequestFetchEventsAfterDate(date *foundation.NSDate) *NSPersistentCloudKitContainerEventRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
 func NSPersistentCloudKitContainerEventRequestFetchEventsAfterEvent(event *NSPersistentCloudKitContainerEvent) *NSPersistentCloudKitContainerEventRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsAfterEvent, event.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
 func NSPersistentCloudKitContainerEventRequestFetchEventsMatchingFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) *NSPersistentCloudKitContainerEventRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentCloudKitContainerEventRequest), _nSPersistentCloudKitContainerEventRequestSelFetchEventsMatchingFetchRequest, fetchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentCloudKitContainerEventRequestFromID(_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *NSPersistentCloudKitContainerEventRequest) ResultType() NSPersistentClo
 func (o *NSPersistentCloudKitContainerEventRequest) SetResultType(resultType NSPersistentCloudKitContainerEventResultType) {
 	o.Ptr().Send(_nSPersistentCloudKitContainerEventRequestSelSetResultType, resultType)
 }
-

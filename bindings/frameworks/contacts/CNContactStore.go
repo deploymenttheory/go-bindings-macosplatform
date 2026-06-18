@@ -18,20 +18,20 @@ type CNContactStore struct {
 }
 
 var (
-	_clsCNContactStore = _objcClass("CNContactStore")
-	_cNContactStoreSelAuthorizationStatusForEntityType = objc.RegisterName("authorizationStatusForEntityType:")
-	_cNContactStoreSelRequestAccessForEntityTypeCompletionHandler = objc.RegisterName("requestAccessForEntityType:completionHandler:")
+	_clsCNContactStore                                                 = _objcClass("CNContactStore")
+	_cNContactStoreSelAuthorizationStatusForEntityType                 = objc.RegisterName("authorizationStatusForEntityType:")
+	_cNContactStoreSelRequestAccessForEntityTypeCompletionHandler      = objc.RegisterName("requestAccessForEntityType:completionHandler:")
 	_cNContactStoreSelUnifiedContactsMatchingPredicateKeysToFetchError = objc.RegisterName("unifiedContactsMatchingPredicate:keysToFetch:error:")
-	_cNContactStoreSelUnifiedContactWithIdentifierKeysToFetchError = objc.RegisterName("unifiedContactWithIdentifier:keysToFetch:error:")
-	_cNContactStoreSelUnifiedMeContactWithKeysToFetchError = objc.RegisterName("unifiedMeContactWithKeysToFetch:error:")
-	_cNContactStoreSelEnumeratorForContactFetchRequestError = objc.RegisterName("enumeratorForContactFetchRequest:error:")
-	_cNContactStoreSelEnumeratorForChangeHistoryFetchRequestError = objc.RegisterName("enumeratorForChangeHistoryFetchRequest:error:")
-	_cNContactStoreSelEnumerateContactsWithFetchRequestErrorUsing = objc.RegisterName("enumerateContactsWithFetchRequest:error:usingBlock:")
-	_cNContactStoreSelGroupsMatchingPredicateError = objc.RegisterName("groupsMatchingPredicate:error:")
-	_cNContactStoreSelContainersMatchingPredicateError = objc.RegisterName("containersMatchingPredicate:error:")
-	_cNContactStoreSelExecuteSaveRequestError = objc.RegisterName("executeSaveRequest:error:")
-	_cNContactStoreSelDefaultContainerIdentifier = objc.RegisterName("defaultContainerIdentifier")
-	_cNContactStoreSelCurrentHistoryToken = objc.RegisterName("currentHistoryToken")
+	_cNContactStoreSelUnifiedContactWithIdentifierKeysToFetchError     = objc.RegisterName("unifiedContactWithIdentifier:keysToFetch:error:")
+	_cNContactStoreSelUnifiedMeContactWithKeysToFetchError             = objc.RegisterName("unifiedMeContactWithKeysToFetch:error:")
+	_cNContactStoreSelEnumeratorForContactFetchRequestError            = objc.RegisterName("enumeratorForContactFetchRequest:error:")
+	_cNContactStoreSelEnumeratorForChangeHistoryFetchRequestError      = objc.RegisterName("enumeratorForChangeHistoryFetchRequest:error:")
+	_cNContactStoreSelEnumerateContactsWithFetchRequestErrorUsing      = objc.RegisterName("enumerateContactsWithFetchRequest:error:usingBlock:")
+	_cNContactStoreSelGroupsMatchingPredicateError                     = objc.RegisterName("groupsMatchingPredicate:error:")
+	_cNContactStoreSelContainersMatchingPredicateError                 = objc.RegisterName("containersMatchingPredicate:error:")
+	_cNContactStoreSelExecuteSaveRequestError                          = objc.RegisterName("executeSaveRequest:error:")
+	_cNContactStoreSelDefaultContainerIdentifier                       = objc.RegisterName("defaultContainerIdentifier")
+	_cNContactStoreSelCurrentHistoryToken                              = objc.RegisterName("currentHistoryToken")
 )
 
 func CNContactStoreFromID(id objc.ID) *CNContactStore {
@@ -66,7 +66,9 @@ func (o *CNContactStore) RequestAccessForEntityTypeCompletionHandler(entityType 
 func (o *CNContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys *foundation.NSArray[CNKeyDescriptor]) (*foundation.NSArray[*CNContact], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactsMatchingPredicateKeysToFetchError, predicate.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -77,7 +79,9 @@ func (o *CNContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predic
 func (o *CNContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier *foundation.NSString, keys *foundation.NSArray[CNKeyDescriptor]) (*CNContact, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedContactWithIdentifierKeysToFetchError, identifier.Ptr(), keys.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -88,7 +92,9 @@ func (o *CNContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier
 func (o *CNContactStore) UnifiedMeContactWithKeysToFetchError(keys *foundation.NSArray[CNKeyDescriptor]) (*CNContact, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelUnifiedMeContactWithKeysToFetchError, keys.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -135,7 +141,9 @@ func (o *CNContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchReques
 func (o *CNContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*CNGroup], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelGroupsMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -146,7 +154,9 @@ func (o *CNContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPr
 func (o *CNContactStore) ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*CNContainer], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelContainersMatchingPredicateError, predicate.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -166,14 +176,17 @@ func (o *CNContactStore) ExecuteSaveRequestError(saveRequest *CNSaveRequest) (bo
 // @abstract The identifier of the default container. @discussion This identifier can be used to fetch the default container. @return The identifier of the default container. If the caller lacks Contacts authorization or an error occurs, nil is returned.
 func (o *CNContactStore) DefaultContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelDefaultContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The current history token. @discussion Retrieve the current history token. If you are fetching contacts or change history events, you should use the token on the @c CNFetchResult instead.
 func (o *CNContactStore) CurrentHistoryToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactStoreSelCurrentHistoryToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

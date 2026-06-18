@@ -35,7 +35,9 @@ func NewPushNotificationTrigger() *PushNotificationTrigger {
 	return &PushNotificationTrigger{inner: raw.UNPushNotificationTriggerFromID(_id)}
 }
 
-func (x *PushNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
+func (x *PushNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
+	return &x.inner.UNNotificationTrigger
+}
 
 // PushNotificationTriggerable is the interface implemented by [PushNotificationTrigger], for mocking and DI.
 type PushNotificationTriggerable interface {
@@ -43,4 +45,3 @@ type PushNotificationTriggerable interface {
 }
 
 var _ PushNotificationTriggerable = (*PushNotificationTrigger)(nil)
-

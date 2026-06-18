@@ -175,4 +175,3 @@ type TextCheckingControllerable interface {
 }
 
 var _ TextCheckingControllerable = (*TextCheckingController)(nil)
-

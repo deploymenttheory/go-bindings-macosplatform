@@ -16,8 +16,8 @@ type MKMapConfiguration struct {
 }
 
 var (
-	_clsMKMapConfiguration = _objcClass("MKMapConfiguration")
-	_mKMapConfigurationSelElevationStyle = objc.RegisterName("elevationStyle")
+	_clsMKMapConfiguration                  = _objcClass("MKMapConfiguration")
+	_mKMapConfigurationSelElevationStyle    = objc.RegisterName("elevationStyle")
 	_mKMapConfigurationSelSetElevationStyle = objc.RegisterName("setElevationStyle:")
 )
 
@@ -39,4 +39,3 @@ func (o *MKMapConfiguration) ElevationStyle() MKMapElevationStyle {
 func (o *MKMapConfiguration) SetElevationStyle(elevationStyle MKMapElevationStyle) {
 	o.Ptr().Send(_mKMapConfigurationSelSetElevationStyle, elevationStyle)
 }
-

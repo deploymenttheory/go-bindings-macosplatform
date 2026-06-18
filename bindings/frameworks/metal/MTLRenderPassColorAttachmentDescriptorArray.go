@@ -16,8 +16,8 @@ type MTLRenderPassColorAttachmentDescriptorArray struct {
 }
 
 var (
-	_clsMTLRenderPassColorAttachmentDescriptorArray = _objcClass("MTLRenderPassColorAttachmentDescriptorArray")
-	_mTLRenderPassColorAttachmentDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLRenderPassColorAttachmentDescriptorArray                            = _objcClass("MTLRenderPassColorAttachmentDescriptorArray")
+	_mTLRenderPassColorAttachmentDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLRenderPassColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLRenderPassColorAttachmentDescriptorArrayFromID(id objc.ID) *MTLRenderPas
 
 func (o *MTLRenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLRenderPassColorAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPassColorAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPassColorAttachmentDescriptorFromID(_ret)
 }
 
 func (o *MTLRenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLRenderPassColorAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }
-

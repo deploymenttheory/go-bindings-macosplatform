@@ -120,4 +120,3 @@ type ImageHistogramable interface {
 }
 
 var _ ImageHistogramable = (*ImageHistogram)(nil)
-

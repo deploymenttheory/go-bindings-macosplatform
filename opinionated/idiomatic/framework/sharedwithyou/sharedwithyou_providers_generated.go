@@ -12,4 +12,3 @@ import (
 type HighlightProvider interface {
 	asHighlight() *raw.SWHighlight
 }
-

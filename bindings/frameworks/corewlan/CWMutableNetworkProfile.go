@@ -16,7 +16,7 @@ type CWMutableNetworkProfile struct {
 }
 
 var (
-	_clsCWMutableNetworkProfile = _objcClass("CWMutableNetworkProfile")
+	_clsCWMutableNetworkProfile            = _objcClass("CWMutableNetworkProfile")
 	_cWMutableNetworkProfileSelSetSsidData = objc.RegisterName("setSsidData:")
 	_cWMutableNetworkProfileSelSetSecurity = objc.RegisterName("setSecurity:")
 )
@@ -38,4 +38,3 @@ func (o *CWMutableNetworkProfile) SetSsidData(ssidData *foundation.NSData) {
 func (o *CWMutableNetworkProfile) SetSecurity(security CWSecurity) {
 	o.Ptr().Send(_cWMutableNetworkProfileSelSetSecurity, security)
 }
-

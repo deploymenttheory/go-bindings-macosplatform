@@ -50,9 +50,13 @@ func (x *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGr
 	return x
 }
 
-func (x *NNConcatenationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *NNConcatenationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *NNConcatenationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNConcatenationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNConcatenationGradientNodeable is the interface implemented by [NNConcatenationGradientNode], for mocking and DI.
 type NNConcatenationGradientNodeable interface {
@@ -62,4 +66,3 @@ type NNConcatenationGradientNodeable interface {
 }
 
 var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)
-

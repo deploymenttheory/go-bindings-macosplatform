@@ -73,9 +73,13 @@ func (x *DistributedNotificationCenter) SetSuspended(suspended bool) {
 	x.inner.SetSuspended(suspended)
 }
 
-func (x *DistributedNotificationCenter) asNotificationCenter() *raw.NSNotificationCenter { return &x.inner.NSNotificationCenter }
+func (x *DistributedNotificationCenter) asNotificationCenter() *raw.NSNotificationCenter {
+	return &x.inner.NSNotificationCenter
+}
 
-func (x *DistributedNotificationCenter) asObject() *raw.NSObject { return &x.inner.NSNotificationCenter.NSObject }
+func (x *DistributedNotificationCenter) asObject() *raw.NSObject {
+	return &x.inner.NSNotificationCenter.NSObject
+}
 
 // DistributedNotificationCenterable is the interface implemented by [DistributedNotificationCenter], for mocking and DI.
 type DistributedNotificationCenterable interface {
@@ -90,4 +94,3 @@ type DistributedNotificationCenterable interface {
 }
 
 var _ DistributedNotificationCenterable = (*DistributedNotificationCenter)(nil)
-

@@ -16,17 +16,17 @@ type DOMCSSPrimitiveValue struct {
 }
 
 var (
-	_clsDOMCSSPrimitiveValue = _objcClass("DOMCSSPrimitiveValue")
-	_dOMCSSPrimitiveValueSelSetFloatValueFloatValue = objc.RegisterName("setFloatValue:floatValue:")
-	_dOMCSSPrimitiveValueSelGetFloatValue = objc.RegisterName("getFloatValue:")
+	_clsDOMCSSPrimitiveValue                          = _objcClass("DOMCSSPrimitiveValue")
+	_dOMCSSPrimitiveValueSelSetFloatValueFloatValue   = objc.RegisterName("setFloatValue:floatValue:")
+	_dOMCSSPrimitiveValueSelGetFloatValue             = objc.RegisterName("getFloatValue:")
 	_dOMCSSPrimitiveValueSelSetStringValueStringValue = objc.RegisterName("setStringValue:stringValue:")
-	_dOMCSSPrimitiveValueSelGetStringValue = objc.RegisterName("getStringValue")
-	_dOMCSSPrimitiveValueSelGetCounterValue = objc.RegisterName("getCounterValue")
-	_dOMCSSPrimitiveValueSelGetRectValue = objc.RegisterName("getRectValue")
-	_dOMCSSPrimitiveValueSelGetRGBColorValue = objc.RegisterName("getRGBColorValue")
-	_dOMCSSPrimitiveValueSelPrimitiveType = objc.RegisterName("primitiveType")
-	_dOMCSSPrimitiveValueSelSetFloatValue = objc.RegisterName("setFloatValue::")
-	_dOMCSSPrimitiveValueSelSetStringValue = objc.RegisterName("setStringValue::")
+	_dOMCSSPrimitiveValueSelGetStringValue            = objc.RegisterName("getStringValue")
+	_dOMCSSPrimitiveValueSelGetCounterValue           = objc.RegisterName("getCounterValue")
+	_dOMCSSPrimitiveValueSelGetRectValue              = objc.RegisterName("getRectValue")
+	_dOMCSSPrimitiveValueSelGetRGBColorValue          = objc.RegisterName("getRGBColorValue")
+	_dOMCSSPrimitiveValueSelPrimitiveType             = objc.RegisterName("primitiveType")
+	_dOMCSSPrimitiveValueSelSetFloatValue             = objc.RegisterName("setFloatValue::")
+	_dOMCSSPrimitiveValueSelSetStringValue            = objc.RegisterName("setStringValue::")
 )
 
 func DOMCSSPrimitiveValueFromID(id objc.ID) *DOMCSSPrimitiveValue {
@@ -54,25 +54,33 @@ func (o *DOMCSSPrimitiveValue) SetStringValueStringValue(stringType uint16, stri
 
 func (o *DOMCSSPrimitiveValue) GetStringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPrimitiveValueSelGetStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMCSSPrimitiveValue) GetCounterValue() *DOMCounter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPrimitiveValueSelGetCounterValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCounterFromID(_ret)
 }
 
 func (o *DOMCSSPrimitiveValue) GetRectValue() *DOMRect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPrimitiveValueSelGetRectValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMRectFromID(_ret)
 }
 
 func (o *DOMCSSPrimitiveValue) GetRGBColorValue() *DOMRGBColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSPrimitiveValueSelGetRGBColorValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMRGBColorFromID(_ret)
 }
 
@@ -88,4 +96,3 @@ func (o *DOMCSSPrimitiveValue) SetFloatValue(unitType uint16, floatValue float32
 func (o *DOMCSSPrimitiveValue) SetStringValue(stringType uint16, stringValue *foundation.NSString) {
 	o.Ptr().Send(_dOMCSSPrimitiveValueSelSetStringValue, stringType, stringValue.Ptr())
 }
-

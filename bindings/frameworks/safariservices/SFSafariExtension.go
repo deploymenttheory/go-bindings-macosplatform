@@ -16,7 +16,7 @@ type SFSafariExtension struct {
 }
 
 var (
-	_clsSFSafariExtension = _objcClass("SFSafariExtension")
+	_clsSFSafariExtension                                = _objcClass("SFSafariExtension")
 	_sFSafariExtensionSelGetBaseURIWithCompletionHandler = objc.RegisterName("getBaseURIWithCompletionHandler:")
 )
 
@@ -44,4 +44,3 @@ func SFSafariExtensionGetBaseURIWithCompletionHandler(completionHandler func(*fo
 	}
 	objc.ID(_clsSFSafariExtension).Send(_sFSafariExtensionSelGetBaseURIWithCompletionHandler, __block_completionHandler)
 }
-

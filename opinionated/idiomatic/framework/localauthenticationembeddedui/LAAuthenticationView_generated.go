@@ -63,4 +63,3 @@ type AuthenticationViewable interface {
 }
 
 var _ AuthenticationViewable = (*AuthenticationView)(nil)
-

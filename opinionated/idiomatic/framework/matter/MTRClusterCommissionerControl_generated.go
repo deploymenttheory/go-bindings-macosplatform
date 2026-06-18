@@ -101,9 +101,13 @@ func (x *MTRClusterCommissionerControl) ReadAttributeClusterRevisionWithParams(p
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterCommissionerControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterCommissionerControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterCommissionerControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterCommissionerControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterCommissionerControlable is the interface implemented by [MTRClusterCommissionerControl], for mocking and DI.
 type MTRClusterCommissionerControlable interface {
@@ -119,4 +123,3 @@ type MTRClusterCommissionerControlable interface {
 }
 
 var _ MTRClusterCommissionerControlable = (*MTRClusterCommissionerControl)(nil)
-

@@ -72,4 +72,3 @@ type VirtioConsoleDeviceable interface {
 }
 
 var _ VirtioConsoleDeviceable = (*VirtioConsoleDevice)(nil)
-

@@ -66,4 +66,3 @@ type Shortcutable interface {
 }
 
 var _ Shortcutable = (*Shortcut)(nil)
-

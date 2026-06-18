@@ -140,4 +140,3 @@ type Activityable interface {
 }
 
 var _ Activityable = (*Activity)(nil)
-

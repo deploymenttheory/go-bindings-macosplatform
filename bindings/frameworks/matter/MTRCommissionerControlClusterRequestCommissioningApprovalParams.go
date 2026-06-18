@@ -16,18 +16,18 @@ type MTRCommissionerControlClusterRequestCommissioningApprovalParams struct {
 }
 
 var (
-	_clsMTRCommissionerControlClusterRequestCommissioningApprovalParams = _objcClass("MTRCommissionerControlClusterRequestCommissioningApprovalParams")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelRequestID = objc.RegisterName("requestID")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetRequestID = objc.RegisterName("setRequestID:")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelVendorID = objc.RegisterName("vendorID")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelProductID = objc.RegisterName("productID")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetProductID = objc.RegisterName("setProductID:")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelLabel = objc.RegisterName("label")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRCommissionerControlClusterRequestCommissioningApprovalParams                               = _objcClass("MTRCommissionerControlClusterRequestCommissioningApprovalParams")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelRequestID                      = objc.RegisterName("requestID")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetRequestID                   = objc.RegisterName("setRequestID:")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelVendorID                       = objc.RegisterName("vendorID")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetVendorID                    = objc.RegisterName("setVendorID:")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelProductID                      = objc.RegisterName("productID")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetProductID                   = objc.RegisterName("setProductID:")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelLabel                          = objc.RegisterName("label")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetLabel                       = objc.RegisterName("setLabel:")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -43,7 +43,9 @@ func MTRCommissionerControlClusterRequestCommissioningApprovalParamsFromID(id ob
 
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelRequestID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetReq
 
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetVen
 
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetPro
 
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +92,9 @@ func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetLab
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +105,12 @@ func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetTim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRCommissionerControlClusterRequestCommissioningApprovalParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

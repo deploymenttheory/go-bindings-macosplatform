@@ -8,26 +8,26 @@ import (
 )
 
 var (
-	_fnFFCreateDevice func(uint, unsafe.Pointer) unsafe.Pointer
-	_fnFFDeviceCreateEffect func(unsafe.Pointer, unsafe.Pointer, *FFEFFECT, unsafe.Pointer) unsafe.Pointer
-	_fnFFDeviceEscape func(unsafe.Pointer, *FFEFFESCAPE) unsafe.Pointer
+	_fnFFCreateDevice                       func(uint, unsafe.Pointer) unsafe.Pointer
+	_fnFFDeviceCreateEffect                 func(unsafe.Pointer, unsafe.Pointer, *FFEFFECT, unsafe.Pointer) unsafe.Pointer
+	_fnFFDeviceEscape                       func(unsafe.Pointer, *FFEFFESCAPE) unsafe.Pointer
 	_fnFFDeviceGetForceFeedbackCapabilities func(unsafe.Pointer, *FFCAPABILITIES) unsafe.Pointer
-	_fnFFDeviceGetForceFeedbackProperty func(unsafe.Pointer, uint, unsafe.Pointer, uint64) unsafe.Pointer
-	_fnFFDeviceGetForceFeedbackState func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnFFDeviceReleaseEffect func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnFFDeviceSendForceFeedbackCommand func(unsafe.Pointer, uint) unsafe.Pointer
-	_fnFFDeviceSetCooperativeLevel func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
-	_fnFFDeviceSetForceFeedbackProperty func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnFFEffectDownload func(unsafe.Pointer) unsafe.Pointer
-	_fnFFEffectEscape func(unsafe.Pointer, *FFEFFESCAPE) unsafe.Pointer
-	_fnFFEffectGetEffectStatus func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnFFEffectGetParameters func(unsafe.Pointer, *FFEFFECT, uint) unsafe.Pointer
-	_fnFFEffectSetParameters func(unsafe.Pointer, *FFEFFECT, uint) unsafe.Pointer
-	_fnFFEffectStart func(unsafe.Pointer, uint, uint) unsafe.Pointer
-	_fnFFEffectStop func(unsafe.Pointer) unsafe.Pointer
-	_fnFFEffectUnload func(unsafe.Pointer) unsafe.Pointer
-	_fnFFIsForceFeedback func(uint) unsafe.Pointer
-	_fnFFReleaseDevice func(unsafe.Pointer) unsafe.Pointer
+	_fnFFDeviceGetForceFeedbackProperty     func(unsafe.Pointer, uint, unsafe.Pointer, uint64) unsafe.Pointer
+	_fnFFDeviceGetForceFeedbackState        func(unsafe.Pointer, *uint) unsafe.Pointer
+	_fnFFDeviceReleaseEffect                func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnFFDeviceSendForceFeedbackCommand     func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnFFDeviceSetCooperativeLevel          func(unsafe.Pointer, unsafe.Pointer, uint) unsafe.Pointer
+	_fnFFDeviceSetForceFeedbackProperty     func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnFFEffectDownload                     func(unsafe.Pointer) unsafe.Pointer
+	_fnFFEffectEscape                       func(unsafe.Pointer, *FFEFFESCAPE) unsafe.Pointer
+	_fnFFEffectGetEffectStatus              func(unsafe.Pointer, *uint) unsafe.Pointer
+	_fnFFEffectGetParameters                func(unsafe.Pointer, *FFEFFECT, uint) unsafe.Pointer
+	_fnFFEffectSetParameters                func(unsafe.Pointer, *FFEFFECT, uint) unsafe.Pointer
+	_fnFFEffectStart                        func(unsafe.Pointer, uint, uint) unsafe.Pointer
+	_fnFFEffectStop                         func(unsafe.Pointer) unsafe.Pointer
+	_fnFFEffectUnload                       func(unsafe.Pointer) unsafe.Pointer
+	_fnFFIsForceFeedback                    func(uint) unsafe.Pointer
+	_fnFFReleaseDevice                      func(unsafe.Pointer) unsafe.Pointer
 )
 
 func FFCreateDevice(hidDevice uint, pDeviceReference unsafe.Pointer) unsafe.Pointer {
@@ -109,4 +109,3 @@ func FFIsForceFeedback(hidDevice uint) unsafe.Pointer {
 func FFReleaseDevice(deviceReference unsafe.Pointer) unsafe.Pointer {
 	return _fnFFReleaseDevice(deviceReference)
 }
-

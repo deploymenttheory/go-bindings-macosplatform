@@ -16,9 +16,9 @@ type PKToolPickerItem struct {
 }
 
 var (
-	_clsPKToolPickerItem = _objcClass("PKToolPickerItem")
+	_clsPKToolPickerItem           = _objcClass("PKToolPickerItem")
 	_pKToolPickerItemSelIdentifier = objc.RegisterName("identifier")
-	_pKToolPickerItemSelTool = objc.RegisterName("tool")
+	_pKToolPickerItemSelTool       = objc.RegisterName("tool")
 )
 
 func PKToolPickerItemFromID(id objc.ID) *PKToolPickerItem {
@@ -34,14 +34,17 @@ func PKToolPickerItemFromID(id objc.ID) *PKToolPickerItem {
 // A string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
 func (o *PKToolPickerItem) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The `PKTool` this tool picker item represents.
 func (o *PKToolPickerItem) Tool() *PKTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKToolPickerItemSelTool)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKToolFromID(_ret)
 }
-

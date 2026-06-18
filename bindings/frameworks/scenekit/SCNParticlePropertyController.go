@@ -17,20 +17,20 @@ type SCNParticlePropertyController struct {
 }
 
 var (
-	_clsSCNParticlePropertyController = _objcClass("SCNParticlePropertyController")
+	_clsSCNParticlePropertyController                        = _objcClass("SCNParticlePropertyController")
 	_sCNParticlePropertyControllerSelControllerWithAnimation = objc.RegisterName("controllerWithAnimation:")
-	_sCNParticlePropertyControllerSelAnimation = objc.RegisterName("animation")
-	_sCNParticlePropertyControllerSelSetAnimation = objc.RegisterName("setAnimation:")
-	_sCNParticlePropertyControllerSelInputMode = objc.RegisterName("inputMode")
-	_sCNParticlePropertyControllerSelSetInputMode = objc.RegisterName("setInputMode:")
-	_sCNParticlePropertyControllerSelInputScale = objc.RegisterName("inputScale")
-	_sCNParticlePropertyControllerSelSetInputScale = objc.RegisterName("setInputScale:")
-	_sCNParticlePropertyControllerSelInputBias = objc.RegisterName("inputBias")
-	_sCNParticlePropertyControllerSelSetInputBias = objc.RegisterName("setInputBias:")
-	_sCNParticlePropertyControllerSelInputOrigin = objc.RegisterName("inputOrigin")
-	_sCNParticlePropertyControllerSelSetInputOrigin = objc.RegisterName("setInputOrigin:")
-	_sCNParticlePropertyControllerSelInputProperty = objc.RegisterName("inputProperty")
-	_sCNParticlePropertyControllerSelSetInputProperty = objc.RegisterName("setInputProperty:")
+	_sCNParticlePropertyControllerSelAnimation               = objc.RegisterName("animation")
+	_sCNParticlePropertyControllerSelSetAnimation            = objc.RegisterName("setAnimation:")
+	_sCNParticlePropertyControllerSelInputMode               = objc.RegisterName("inputMode")
+	_sCNParticlePropertyControllerSelSetInputMode            = objc.RegisterName("setInputMode:")
+	_sCNParticlePropertyControllerSelInputScale              = objc.RegisterName("inputScale")
+	_sCNParticlePropertyControllerSelSetInputScale           = objc.RegisterName("setInputScale:")
+	_sCNParticlePropertyControllerSelInputBias               = objc.RegisterName("inputBias")
+	_sCNParticlePropertyControllerSelSetInputBias            = objc.RegisterName("setInputBias:")
+	_sCNParticlePropertyControllerSelInputOrigin             = objc.RegisterName("inputOrigin")
+	_sCNParticlePropertyControllerSelSetInputOrigin          = objc.RegisterName("setInputOrigin:")
+	_sCNParticlePropertyControllerSelInputProperty           = objc.RegisterName("inputProperty")
+	_sCNParticlePropertyControllerSelSetInputProperty        = objc.RegisterName("setInputProperty:")
 )
 
 func SCNParticlePropertyControllerFromID(id objc.ID) *SCNParticlePropertyController {
@@ -45,13 +45,17 @@ func SCNParticlePropertyControllerFromID(id objc.ID) *SCNParticlePropertyControl
 
 func SCNParticlePropertyControllerControllerWithAnimation(animation *quartzcore.CAAnimation) *SCNParticlePropertyController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNParticlePropertyController), _sCNParticlePropertyControllerSelControllerWithAnimation, animation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNParticlePropertyControllerFromID(_ret)
 }
 
 func (o *SCNParticlePropertyController) Animation() *quartzcore.CAAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNParticlePropertyControllerSelAnimation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CAAnimationFromID(_ret)
 }
 
@@ -88,7 +92,9 @@ func (o *SCNParticlePropertyController) SetInputBias(inputBias float64) {
 
 func (o *SCNParticlePropertyController) InputOrigin() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNParticlePropertyControllerSelInputOrigin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -98,11 +104,12 @@ func (o *SCNParticlePropertyController) SetInputOrigin(inputOrigin *SCNNode) {
 
 func (o *SCNParticlePropertyController) InputProperty() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNParticlePropertyControllerSelInputProperty)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SCNParticlePropertyController) SetInputProperty(inputProperty *foundation.NSString) {
 	o.Ptr().Send(_sCNParticlePropertyControllerSelSetInputProperty, inputProperty.Ptr())
 }
-

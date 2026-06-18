@@ -17,4 +17,3 @@ func OpenDirectoryForContainerIdentifier(containerIdentifier string) *SyncedDire
 	}
 	return &SyncedDirectory{inner: _r}
 }
-

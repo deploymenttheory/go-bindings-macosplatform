@@ -64,4 +64,3 @@ type ModelStructureProgramFunctionable interface {
 }
 
 var _ ModelStructureProgramFunctionable = (*ModelStructureProgramFunction)(nil)
-

@@ -18,12 +18,12 @@ type MTRKeypadInputClusterSendKeyResponseParams struct {
 }
 
 var (
-	_clsMTRKeypadInputClusterSendKeyResponseParams = _objcClass("MTRKeypadInputClusterSendKeyResponseParams")
+	_clsMTRKeypadInputClusterSendKeyResponseParams                           = _objcClass("MTRKeypadInputClusterSendKeyResponseParams")
 	_mTRKeypadInputClusterSendKeyResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRKeypadInputClusterSendKeyResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRKeypadInputClusterSendKeyResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRKeypadInputClusterSendKeyResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRKeypadInputClusterSendKeyResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRKeypadInputClusterSendKeyResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRKeypadInputClusterSendKeyResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRKeypadInputClusterSendKeyResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRKeypadInputClusterSendKeyResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRKeypadInputClusterSendKeyResponseParamsFromID(id objc.ID) *MTRKeypadInputClusterSendKeyResponseParams {
@@ -40,7 +40,9 @@ func MTRKeypadInputClusterSendKeyResponseParamsFromID(id objc.ID) *MTRKeypadInpu
 func (o *MTRKeypadInputClusterSendKeyResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRKeypadInputClusterSendKeyResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRKeypadInputClusterSendKeyResponseParams) InitWithResponseValueError(
 
 func (o *MTRKeypadInputClusterSendKeyResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRKeypadInputClusterSendKeyResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRKeypadInputClusterSendKeyResponseParams) SetStatus(status *foundatio
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRKeypadInputClusterSendKeyResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRKeypadInputClusterSendKeyResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRKeypadInputClusterSendKeyResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRKeypadInputClusterSendKeyResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

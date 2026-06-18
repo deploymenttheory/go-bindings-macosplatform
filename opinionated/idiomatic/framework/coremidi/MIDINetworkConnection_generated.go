@@ -51,4 +51,3 @@ type NetworkConnectionable interface {
 }
 
 var _ NetworkConnectionable = (*NetworkConnection)(nil)
-

@@ -18,16 +18,16 @@ type MTRClusterOTASoftwareUpdateProvider struct {
 }
 
 var (
-	_clsMTRClusterOTASoftwareUpdateProvider = _objcClass("MTRClusterOTASoftwareUpdateProvider")
-	_mTRClusterOTASoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOTASoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterOTASoftwareUpdateProvider                                                                           = _objcClass("MTRClusterOTASoftwareUpdateProvider")
+	_mTRClusterOTASoftwareUpdateProviderSelQueryImageWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOTASoftwareUpdateProviderSelApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterOTASoftwareUpdateProviderSelNotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("notifyUpdateAppliedWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeGeneratedCommandListWithParams                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeAcceptedCommandListWithParams                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeAttributeListWithParams                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeFeatureMapWithParams                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOTASoftwareUpdateProviderSelReadAttributeClusterRevisionWithParams                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterOTASoftwareUpdateProviderFromID(id objc.ID) *MTRClusterOTASoftwareUpdateProvider {
@@ -107,7 +107,8 @@ func (o *MTRClusterOTASoftwareUpdateProvider) ReadAttributeClusterRevisionWithPa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOTASoftwareUpdateProvider) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOTASoftwareUpdateProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOTASoftwareUpdateProviderSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOTASoftwareUpdateProviderFromID(_ret)
 }
-

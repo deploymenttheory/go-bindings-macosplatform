@@ -19,26 +19,26 @@ type AVMutableCaption struct {
 }
 
 var (
-	_clsAVMutableCaption = _objcClass("AVMutableCaption")
-	_aVMutableCaptionSelSetText = objc.RegisterName("setText:")
-	_aVMutableCaptionSelSetTimeRange = objc.RegisterName("setTimeRange:")
-	_aVMutableCaptionSelSetTextColorInRange = objc.RegisterName("setTextColor:inRange:")
-	_aVMutableCaptionSelSetBackgroundColorInRange = objc.RegisterName("setBackgroundColor:inRange:")
-	_aVMutableCaptionSelSetFontWeightInRange = objc.RegisterName("setFontWeight:inRange:")
-	_aVMutableCaptionSelSetFontStyleInRange = objc.RegisterName("setFontStyle:inRange:")
-	_aVMutableCaptionSelSetDecorationInRange = objc.RegisterName("setDecoration:inRange:")
-	_aVMutableCaptionSelSetTextCombineInRange = objc.RegisterName("setTextCombine:inRange:")
-	_aVMutableCaptionSelSetRubyInRange = objc.RegisterName("setRuby:inRange:")
-	_aVMutableCaptionSelRemoveTextColorInRange = objc.RegisterName("removeTextColorInRange:")
+	_clsAVMutableCaption                             = _objcClass("AVMutableCaption")
+	_aVMutableCaptionSelSetText                      = objc.RegisterName("setText:")
+	_aVMutableCaptionSelSetTimeRange                 = objc.RegisterName("setTimeRange:")
+	_aVMutableCaptionSelSetTextColorInRange          = objc.RegisterName("setTextColor:inRange:")
+	_aVMutableCaptionSelSetBackgroundColorInRange    = objc.RegisterName("setBackgroundColor:inRange:")
+	_aVMutableCaptionSelSetFontWeightInRange         = objc.RegisterName("setFontWeight:inRange:")
+	_aVMutableCaptionSelSetFontStyleInRange          = objc.RegisterName("setFontStyle:inRange:")
+	_aVMutableCaptionSelSetDecorationInRange         = objc.RegisterName("setDecoration:inRange:")
+	_aVMutableCaptionSelSetTextCombineInRange        = objc.RegisterName("setTextCombine:inRange:")
+	_aVMutableCaptionSelSetRubyInRange               = objc.RegisterName("setRuby:inRange:")
+	_aVMutableCaptionSelRemoveTextColorInRange       = objc.RegisterName("removeTextColorInRange:")
 	_aVMutableCaptionSelRemoveBackgroundColorInRange = objc.RegisterName("removeBackgroundColorInRange:")
-	_aVMutableCaptionSelRemoveFontWeightInRange = objc.RegisterName("removeFontWeightInRange:")
-	_aVMutableCaptionSelRemoveFontStyleInRange = objc.RegisterName("removeFontStyleInRange:")
-	_aVMutableCaptionSelRemoveDecorationInRange = objc.RegisterName("removeDecorationInRange:")
-	_aVMutableCaptionSelRemoveTextCombineInRange = objc.RegisterName("removeTextCombineInRange:")
-	_aVMutableCaptionSelRemoveRubyInRange = objc.RegisterName("removeRubyInRange:")
-	_aVMutableCaptionSelSetRegion = objc.RegisterName("setRegion:")
-	_aVMutableCaptionSelSetTextAlignment = objc.RegisterName("setTextAlignment:")
-	_aVMutableCaptionSelSetAnimation = objc.RegisterName("setAnimation:")
+	_aVMutableCaptionSelRemoveFontWeightInRange      = objc.RegisterName("removeFontWeightInRange:")
+	_aVMutableCaptionSelRemoveFontStyleInRange       = objc.RegisterName("removeFontStyleInRange:")
+	_aVMutableCaptionSelRemoveDecorationInRange      = objc.RegisterName("removeDecorationInRange:")
+	_aVMutableCaptionSelRemoveTextCombineInRange     = objc.RegisterName("removeTextCombineInRange:")
+	_aVMutableCaptionSelRemoveRubyInRange            = objc.RegisterName("removeRubyInRange:")
+	_aVMutableCaptionSelSetRegion                    = objc.RegisterName("setRegion:")
+	_aVMutableCaptionSelSetTextAlignment             = objc.RegisterName("setTextAlignment:")
+	_aVMutableCaptionSelSetAnimation                 = objc.RegisterName("setAnimation:")
 )
 
 func AVMutableCaptionFromID(id objc.ID) *AVMutableCaption {
@@ -140,4 +140,3 @@ func (o *AVMutableCaption) SetTextAlignment(textAlignment AVCaptionTextAlignment
 func (o *AVMutableCaption) SetAnimation(animation AVCaptionAnimation) {
 	o.Ptr().Send(_aVMutableCaptionSelSetAnimation, animation)
 }
-

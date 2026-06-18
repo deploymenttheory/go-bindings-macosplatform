@@ -183,4 +183,3 @@ type TileOverlayable interface {
 }
 
 var _ TileOverlayable = (*TileOverlay)(nil)
-

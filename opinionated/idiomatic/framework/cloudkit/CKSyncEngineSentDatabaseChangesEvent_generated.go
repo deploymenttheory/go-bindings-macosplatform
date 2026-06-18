@@ -17,7 +17,9 @@ type SyncEngineSentDatabaseChangesEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEngineSentDatabaseChangesEvent].
-func (x *SyncEngineSentDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineSentDatabaseChangesEvent { return x.inner }
+func (x *SyncEngineSentDatabaseChangesEvent) Unwrap() *raw.CKSyncEngineSentDatabaseChangesEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -75,7 +77,9 @@ func (x *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() *foundation.NSD
 	return x.inner.FailedZoneDeletes()
 }
 
-func (x *SyncEngineSentDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineSentDatabaseChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineSentDatabaseChangesEventable is the interface implemented by [SyncEngineSentDatabaseChangesEvent], for mocking and DI.
 type SyncEngineSentDatabaseChangesEventable interface {
@@ -87,4 +91,3 @@ type SyncEngineSentDatabaseChangesEventable interface {
 }
 
 var _ SyncEngineSentDatabaseChangesEventable = (*SyncEngineSentDatabaseChangesEvent)(nil)
-

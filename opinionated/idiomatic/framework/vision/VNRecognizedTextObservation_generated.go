@@ -41,11 +41,17 @@ func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount uint) *found
 	return x.inner.TopCandidates(maxCandidateCount)
 }
 
-func (x *RecognizedTextObservation) asRectangleObservation() *raw.VNRectangleObservation { return &x.inner.VNRectangleObservation }
+func (x *RecognizedTextObservation) asRectangleObservation() *raw.VNRectangleObservation {
+	return &x.inner.VNRectangleObservation
+}
 
-func (x *RecognizedTextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation }
+func (x *RecognizedTextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation
+}
 
-func (x *RecognizedTextObservation) asObservation() *raw.VNObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation }
+func (x *RecognizedTextObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation
+}
 
 // RecognizedTextObservationable is the interface implemented by [RecognizedTextObservation], for mocking and DI.
 type RecognizedTextObservationable interface {
@@ -54,4 +60,3 @@ type RecognizedTextObservationable interface {
 }
 
 var _ RecognizedTextObservationable = (*RecognizedTextObservation)(nil)
-

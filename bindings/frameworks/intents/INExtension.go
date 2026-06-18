@@ -26,4 +26,3 @@ func INExtensionFromID(id objc.ID) *INExtension {
 	purego.Track(o)
 	return o
 }
-

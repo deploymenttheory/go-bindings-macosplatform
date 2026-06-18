@@ -16,12 +16,12 @@ type MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct struct {
 }
 
 var (
-	_clsMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct = _objcClass("MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct")
-	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelEndpoint = objc.RegisterName("endpoint")
-	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetEndpoint = objc.RegisterName("setEndpoint:")
-	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelCluster = objc.RegisterName("cluster")
-	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetCluster = objc.RegisterName("setCluster:")
-	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelRestrictions = objc.RegisterName("restrictions")
+	_clsMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct                = _objcClass("MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct")
+	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelEndpoint        = objc.RegisterName("endpoint")
+	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetEndpoint     = objc.RegisterName("setEndpoint:")
+	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelCluster         = objc.RegisterName("cluster")
+	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetCluster      = objc.RegisterName("setCluster:")
+	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelRestrictions    = objc.RegisterName("restrictions")
 	_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetRestrictions = objc.RegisterName("setRestrictions:")
 )
 
@@ -37,7 +37,9 @@ func MTRAccessControlClusterCommissioningAccessRestrictionEntryStructFromID(id o
 
 func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetEn
 
 func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelCluster)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restr
 func (o *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRAccessControlClusterCommissioningAccessRestrictionEntryStructSelSetRestrictions, restrictions)
 }
-

@@ -16,15 +16,15 @@ type AEAssessmentParticipantConfiguration struct {
 }
 
 var (
-	_clsAEAssessmentParticipantConfiguration = _objcClass("AEAssessmentParticipantConfiguration")
-	_aEAssessmentParticipantConfigurationSelInit = objc.RegisterName("init")
-	_aEAssessmentParticipantConfigurationSelNew = objc.RegisterName("new")
-	_aEAssessmentParticipantConfigurationSelAllowsNetworkAccess = objc.RegisterName("allowsNetworkAccess")
+	_clsAEAssessmentParticipantConfiguration                       = _objcClass("AEAssessmentParticipantConfiguration")
+	_aEAssessmentParticipantConfigurationSelInit                   = objc.RegisterName("init")
+	_aEAssessmentParticipantConfigurationSelNew                    = objc.RegisterName("new")
+	_aEAssessmentParticipantConfigurationSelAllowsNetworkAccess    = objc.RegisterName("allowsNetworkAccess")
 	_aEAssessmentParticipantConfigurationSelSetAllowsNetworkAccess = objc.RegisterName("setAllowsNetworkAccess:")
-	_aEAssessmentParticipantConfigurationSelIsRequired = objc.RegisterName("isRequired")
-	_aEAssessmentParticipantConfigurationSelSetRequired = objc.RegisterName("setRequired:")
-	_aEAssessmentParticipantConfigurationSelConfigurationInfo = objc.RegisterName("configurationInfo")
-	_aEAssessmentParticipantConfigurationSelSetConfigurationInfo = objc.RegisterName("setConfigurationInfo:")
+	_aEAssessmentParticipantConfigurationSelIsRequired             = objc.RegisterName("isRequired")
+	_aEAssessmentParticipantConfigurationSelSetRequired            = objc.RegisterName("setRequired:")
+	_aEAssessmentParticipantConfigurationSelConfigurationInfo      = objc.RegisterName("configurationInfo")
+	_aEAssessmentParticipantConfigurationSelSetConfigurationInfo   = objc.RegisterName("setConfigurationInfo:")
 )
 
 func AEAssessmentParticipantConfigurationFromID(id objc.ID) *AEAssessmentParticipantConfiguration {
@@ -39,7 +39,9 @@ func AEAssessmentParticipantConfigurationFromID(id objc.ID) *AEAssessmentPartici
 
 func (o *AEAssessmentParticipantConfiguration) Init() *AEAssessmentParticipantConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aEAssessmentParticipantConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AEAssessmentParticipantConfigurationFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func (o *AEAssessmentParticipantConfiguration) ConfigurationInfo() *foundation.N
 func (o *AEAssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aEAssessmentParticipantConfigurationSelSetConfigurationInfo, configurationInfo)
 }
-

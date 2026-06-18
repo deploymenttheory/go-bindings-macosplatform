@@ -16,17 +16,17 @@ type CKShareParticipant struct {
 }
 
 var (
-	_clsCKShareParticipant = _objcClass("CKShareParticipant")
+	_clsCKShareParticipant                      = _objcClass("CKShareParticipant")
 	_cKShareParticipantSelOneTimeURLParticipant = objc.RegisterName("oneTimeURLParticipant")
-	_cKShareParticipantSelUserIdentity = objc.RegisterName("userIdentity")
-	_cKShareParticipantSelRole = objc.RegisterName("role")
-	_cKShareParticipantSelSetRole = objc.RegisterName("setRole:")
-	_cKShareParticipantSelAcceptanceStatus = objc.RegisterName("acceptanceStatus")
-	_cKShareParticipantSelPermission = objc.RegisterName("permission")
-	_cKShareParticipantSelSetPermission = objc.RegisterName("setPermission:")
-	_cKShareParticipantSelParticipantID = objc.RegisterName("participantID")
-	_cKShareParticipantSelIsApprovedRequester = objc.RegisterName("isApprovedRequester")
-	_cKShareParticipantSelDateAddedToShare = objc.RegisterName("dateAddedToShare")
+	_cKShareParticipantSelUserIdentity          = objc.RegisterName("userIdentity")
+	_cKShareParticipantSelRole                  = objc.RegisterName("role")
+	_cKShareParticipantSelSetRole               = objc.RegisterName("setRole:")
+	_cKShareParticipantSelAcceptanceStatus      = objc.RegisterName("acceptanceStatus")
+	_cKShareParticipantSelPermission            = objc.RegisterName("permission")
+	_cKShareParticipantSelSetPermission         = objc.RegisterName("setPermission:")
+	_cKShareParticipantSelParticipantID         = objc.RegisterName("participantID")
+	_cKShareParticipantSelIsApprovedRequester   = objc.RegisterName("isApprovedRequester")
+	_cKShareParticipantSelDateAddedToShare      = objc.RegisterName("dateAddedToShare")
 )
 
 func CKShareParticipantFromID(id objc.ID) *CKShareParticipant {
@@ -39,17 +39,21 @@ func CKShareParticipantFromID(id objc.ID) *CKShareParticipant {
 	return o
 }
 
-// Generate a unique URL for inviting a participant without knowing their handle When a participant's email address / phone number / userRecordID isn't known up-front, you can add a ``CKShareParticipant/oneTimeURLParticipant`` to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via ``CKShare/oneTimeURL(for:)``. Any recipient user can use this custom link to fetch share metadata and accept the share. Note that a one-time URL participant in the ``ParticipantAcceptanceStatus/pending`` state has empty ``CKUserIdentity/nameComponents`` and a nil ``CKUserIdentity/lookupInfo``.
+// Generate a unique URL for inviting a participant without knowing their handle When a participant's email address / phone number / userRecordID isn't known up-front, you can add a “CKShareParticipant/oneTimeURLParticipant“ to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via “CKShare/oneTimeURL(for:)“. Any recipient user can use this custom link to fetch share metadata and accept the share. Note that a one-time URL participant in the “ParticipantAcceptanceStatus/pending“ state has empty “CKUserIdentity/nameComponents“ and a nil “CKUserIdentity/lookupInfo“.
 func CKShareParticipantOneTimeURLParticipant() *CKShareParticipant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKShareParticipant), _cKShareParticipantSelOneTimeURLParticipant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKShareParticipantFromID(_ret)
 }
 
 // The identity of the participant. This property contains a reference to the user identity for the share participant.
 func (o *CKShareParticipant) UserIdentity() *CKUserIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareParticipantSelUserIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityFromID(_ret)
 }
 
@@ -63,13 +67,13 @@ func (o *CKShareParticipant) SetRole(role CKShareParticipantRole) {
 	o.Ptr().Send(_cKShareParticipantSelSetRole, role)
 }
 
-// The current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see ``CKShare/ParticipantAcceptanceStatus``.
+// The current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
 func (o *CKShareParticipant) AcceptanceStatus() CKShareParticipantAcceptanceStatus {
 	_ret := objc.Send[CKShareParticipantAcceptanceStatus](o.Ptr(), _cKShareParticipantSelAcceptanceStatus)
 	return _ret
 }
 
-// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see ``CKShare/ParticipantPermission``.
+// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
 func (o *CKShareParticipant) Permission() CKShareParticipantPermission {
 	_ret := objc.Send[CKShareParticipantPermission](o.Ptr(), _cKShareParticipantSelPermission)
 	return _ret
@@ -82,7 +86,9 @@ func (o *CKShareParticipant) SetPermission(permission CKShareParticipantPermissi
 // A unique identifier for this participant.
 func (o *CKShareParticipant) ParticipantID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareParticipantSelParticipantID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +101,8 @@ func (o *CKShareParticipant) IsApprovedRequester() bool {
 // The date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
 func (o *CKShareParticipant) DateAddedToShare() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareParticipantSelDateAddedToShare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

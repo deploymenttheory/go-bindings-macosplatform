@@ -8,4 +8,3 @@ type OpaqueLSSharedFileListItemRef struct{}
 
 // OpaqueLSSharedFileListRef is an opaque type.
 type OpaqueLSSharedFileListRef struct{}
-

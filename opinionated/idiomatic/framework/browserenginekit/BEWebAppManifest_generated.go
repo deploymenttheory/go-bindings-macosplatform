@@ -55,4 +55,3 @@ type WebAppManifestable interface {
 }
 
 var _ WebAppManifestable = (*WebAppManifest)(nil)
-

@@ -162,9 +162,13 @@ func (x *MatrixFindTopK) SetNumberOfTopKValues(numberOfTopKValues uint) {
 	x.inner.SetNumberOfTopKValues(numberOfTopKValues)
 }
 
-func (x *MatrixFindTopK) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixFindTopK) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
-func (x *MatrixFindTopK) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+func (x *MatrixFindTopK) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSMatrixUnaryKernel.MPSKernel
+}
 
 // MatrixFindTopKable is the interface implemented by [MatrixFindTopK], for mocking and DI.
 type MatrixFindTopKable interface {
@@ -192,4 +196,3 @@ type MatrixFindTopKable interface {
 }
 
 var _ MatrixFindTopKable = (*MatrixFindTopK)(nil)
-

@@ -59,4 +59,3 @@ type BETextInteractionDelegate interface {
 	SystemWillChangeSelectionForInteraction(textInteraction unsafe.Pointer)
 	SystemDidChangeSelectionForInteraction(textInteraction unsafe.Pointer)
 }
-

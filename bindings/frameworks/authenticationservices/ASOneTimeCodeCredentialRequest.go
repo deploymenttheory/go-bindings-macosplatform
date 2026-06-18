@@ -16,7 +16,7 @@ type ASOneTimeCodeCredentialRequest struct {
 }
 
 var (
-	_clsASOneTimeCodeCredentialRequest = _objcClass("ASOneTimeCodeCredentialRequest")
+	_clsASOneTimeCodeCredentialRequest                           = _objcClass("ASOneTimeCodeCredentialRequest")
 	_aSOneTimeCodeCredentialRequestSelInitWithCredentialIdentity = objc.RegisterName("initWithCredentialIdentity:")
 )
 
@@ -33,7 +33,8 @@ func ASOneTimeCodeCredentialRequestFromID(id objc.ID) *ASOneTimeCodeCredentialRe
 // @abstract Initializes an instance of ASOneTimeCodeCredentialRequest. @param credentialIdentity the credential identity to use for this request.
 func (o *ASOneTimeCodeCredentialRequest) InitWithCredentialIdentity(credentialIdentity *ASOneTimeCodeCredentialIdentity) *ASOneTimeCodeCredentialRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialRequestSelInitWithCredentialIdentity, credentialIdentity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASOneTimeCodeCredentialRequestFromID(_ret)
 }
-

@@ -16,14 +16,14 @@ type CSCustomAttributeKey struct {
 }
 
 var (
-	_clsCSCustomAttributeKey = _objcClass("CSCustomAttributeKey")
-	_cSCustomAttributeKeySelInitWithKeyName = objc.RegisterName("initWithKeyName:")
+	_clsCSCustomAttributeKey                                                              = _objcClass("CSCustomAttributeKey")
+	_cSCustomAttributeKeySelInitWithKeyName                                               = objc.RegisterName("initWithKeyName:")
 	_cSCustomAttributeKeySelInitWithKeyNameSearchableSearchableByDefaultUniqueMultiValued = objc.RegisterName("initWithKeyName:searchable:searchableByDefault:unique:multiValued:")
-	_cSCustomAttributeKeySelKeyName = objc.RegisterName("keyName")
-	_cSCustomAttributeKeySelIsSearchable = objc.RegisterName("isSearchable")
-	_cSCustomAttributeKeySelIsSearchableByDefault = objc.RegisterName("isSearchableByDefault")
-	_cSCustomAttributeKeySelIsUnique = objc.RegisterName("isUnique")
-	_cSCustomAttributeKeySelIsMultiValued = objc.RegisterName("isMultiValued")
+	_cSCustomAttributeKeySelKeyName                                                       = objc.RegisterName("keyName")
+	_cSCustomAttributeKeySelIsSearchable                                                  = objc.RegisterName("isSearchable")
+	_cSCustomAttributeKeySelIsSearchableByDefault                                         = objc.RegisterName("isSearchableByDefault")
+	_cSCustomAttributeKeySelIsUnique                                                      = objc.RegisterName("isUnique")
+	_cSCustomAttributeKeySelIsMultiValued                                                 = objc.RegisterName("isMultiValued")
 )
 
 func CSCustomAttributeKeyFromID(id objc.ID) *CSCustomAttributeKey {
@@ -38,19 +38,25 @@ func CSCustomAttributeKeyFromID(id objc.ID) *CSCustomAttributeKey {
 
 func (o *CSCustomAttributeKey) InitWithKeyName(keyName *foundation.NSString) *CSCustomAttributeKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSCustomAttributeKeySelInitWithKeyName, keyName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSCustomAttributeKeyFromID(_ret)
 }
 
 func (o *CSCustomAttributeKey) InitWithKeyNameSearchableSearchableByDefaultUniqueMultiValued(keyName *foundation.NSString, searchable bool, searchableByDefault bool, unique bool, multiValued bool) *CSCustomAttributeKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSCustomAttributeKeySelInitWithKeyNameSearchableSearchableByDefaultUniqueMultiValued, keyName.Ptr(), searchable, searchableByDefault, unique, multiValued)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CSCustomAttributeKeyFromID(_ret)
 }
 
 func (o *CSCustomAttributeKey) KeyName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSCustomAttributeKeySelKeyName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *CSCustomAttributeKey) IsMultiValued() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cSCustomAttributeKeySelIsMultiValued)
 	return _ret
 }
-

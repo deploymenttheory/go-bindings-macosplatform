@@ -16,10 +16,10 @@ type MKLocalSearchCompletion struct {
 }
 
 var (
-	_clsMKLocalSearchCompletion = _objcClass("MKLocalSearchCompletion")
-	_mKLocalSearchCompletionSelTitle = objc.RegisterName("title")
-	_mKLocalSearchCompletionSelTitleHighlightRanges = objc.RegisterName("titleHighlightRanges")
-	_mKLocalSearchCompletionSelSubtitle = objc.RegisterName("subtitle")
+	_clsMKLocalSearchCompletion                        = _objcClass("MKLocalSearchCompletion")
+	_mKLocalSearchCompletionSelTitle                   = objc.RegisterName("title")
+	_mKLocalSearchCompletionSelTitleHighlightRanges    = objc.RegisterName("titleHighlightRanges")
+	_mKLocalSearchCompletionSelSubtitle                = objc.RegisterName("subtitle")
 	_mKLocalSearchCompletionSelSubtitleHighlightRanges = objc.RegisterName("subtitleHighlightRanges")
 )
 
@@ -35,7 +35,9 @@ func MKLocalSearchCompletionFromID(id objc.ID) *MKLocalSearchCompletion {
 
 func (o *MKLocalSearchCompletion) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompletionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -46,7 +48,9 @@ func (o *MKLocalSearchCompletion) TitleHighlightRanges() *foundation.NSArray[*fo
 
 func (o *MKLocalSearchCompletion) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompletionSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *MKLocalSearchCompletion) SubtitleHighlightRanges() *foundation.NSArray[
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _mKLocalSearchCompletionSelSubtitleHighlightRanges)
 	return _ret
 }
-

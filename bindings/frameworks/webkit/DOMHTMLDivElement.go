@@ -16,8 +16,8 @@ type DOMHTMLDivElement struct {
 }
 
 var (
-	_clsDOMHTMLDivElement = _objcClass("DOMHTMLDivElement")
-	_dOMHTMLDivElementSelAlign = objc.RegisterName("align")
+	_clsDOMHTMLDivElement         = _objcClass("DOMHTMLDivElement")
+	_dOMHTMLDivElementSelAlign    = objc.RegisterName("align")
 	_dOMHTMLDivElementSelSetAlign = objc.RegisterName("setAlign:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLDivElementFromID(id objc.ID) *DOMHTMLDivElement {
 
 func (o *DOMHTMLDivElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLDivElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLDivElement) SetAlign(align *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLDivElementSelSetAlign, align.Ptr())
 }
-

@@ -512,4 +512,3 @@ type TurnBasedMatchable interface {
 }
 
 var _ TurnBasedMatchable = (*TurnBasedMatch)(nil)
-

@@ -16,10 +16,10 @@ type DOMHTMLFrameSetElement struct {
 }
 
 var (
-	_clsDOMHTMLFrameSetElement = _objcClass("DOMHTMLFrameSetElement")
-	_dOMHTMLFrameSetElementSelCols = objc.RegisterName("cols")
+	_clsDOMHTMLFrameSetElement        = _objcClass("DOMHTMLFrameSetElement")
+	_dOMHTMLFrameSetElementSelCols    = objc.RegisterName("cols")
 	_dOMHTMLFrameSetElementSelSetCols = objc.RegisterName("setCols:")
-	_dOMHTMLFrameSetElementSelRows = objc.RegisterName("rows")
+	_dOMHTMLFrameSetElementSelRows    = objc.RegisterName("rows")
 	_dOMHTMLFrameSetElementSelSetRows = objc.RegisterName("setRows:")
 )
 
@@ -35,7 +35,9 @@ func DOMHTMLFrameSetElementFromID(id objc.ID) *DOMHTMLFrameSetElement {
 
 func (o *DOMHTMLFrameSetElement) Cols() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameSetElementSelCols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *DOMHTMLFrameSetElement) SetCols(cols *foundation.NSString) {
 
 func (o *DOMHTMLFrameSetElement) Rows() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameSetElementSelRows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLFrameSetElement) SetRows(rows *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLFrameSetElementSelSetRows, rows.Ptr())
 }
-

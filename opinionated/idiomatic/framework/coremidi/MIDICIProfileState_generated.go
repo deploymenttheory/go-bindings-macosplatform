@@ -81,4 +81,3 @@ type CIProfileStateable interface {
 }
 
 var _ CIProfileStateable = (*CIProfileState)(nil)
-

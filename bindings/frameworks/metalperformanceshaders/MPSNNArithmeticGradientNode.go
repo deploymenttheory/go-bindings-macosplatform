@@ -17,27 +17,27 @@ type MPSNNArithmeticGradientNode struct {
 }
 
 var (
-	_clsMPSNNArithmeticGradientNode = _objcClass("MPSNNArithmeticGradientNode")
+	_clsMPSNNArithmeticGradientNode                                                                      = _objcClass("MPSNNArithmeticGradientNode")
 	_mPSNNArithmeticGradientNodeSelNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter = objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:")
 	_mPSNNArithmeticGradientNodeSelInitWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter = objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:")
-	_mPSNNArithmeticGradientNodeSelInitWithGradientImagesForwardFilterIsSecondarySourceFilter = objc.RegisterName("initWithGradientImages:forwardFilter:isSecondarySourceFilter:")
-	_mPSNNArithmeticGradientNodeSelPrimaryScale = objc.RegisterName("primaryScale")
-	_mPSNNArithmeticGradientNodeSelSetPrimaryScale = objc.RegisterName("setPrimaryScale:")
-	_mPSNNArithmeticGradientNodeSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_mPSNNArithmeticGradientNodeSelSetSecondaryScale = objc.RegisterName("setSecondaryScale:")
-	_mPSNNArithmeticGradientNodeSelBias = objc.RegisterName("bias")
-	_mPSNNArithmeticGradientNodeSelSetBias = objc.RegisterName("setBias:")
-	_mPSNNArithmeticGradientNodeSelSecondaryStrideInPixelsX = objc.RegisterName("secondaryStrideInPixelsX")
-	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInPixelsX = objc.RegisterName("setSecondaryStrideInPixelsX:")
-	_mPSNNArithmeticGradientNodeSelSecondaryStrideInPixelsY = objc.RegisterName("secondaryStrideInPixelsY")
-	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInPixelsY = objc.RegisterName("setSecondaryStrideInPixelsY:")
-	_mPSNNArithmeticGradientNodeSelSecondaryStrideInFeatureChannels = objc.RegisterName("secondaryStrideInFeatureChannels")
-	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInFeatureChannels = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
-	_mPSNNArithmeticGradientNodeSelMinimumValue = objc.RegisterName("minimumValue")
-	_mPSNNArithmeticGradientNodeSelSetMinimumValue = objc.RegisterName("setMinimumValue:")
-	_mPSNNArithmeticGradientNodeSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSNNArithmeticGradientNodeSelSetMaximumValue = objc.RegisterName("setMaximumValue:")
-	_mPSNNArithmeticGradientNodeSelIsSecondarySourceFilter = objc.RegisterName("isSecondarySourceFilter")
+	_mPSNNArithmeticGradientNodeSelInitWithGradientImagesForwardFilterIsSecondarySourceFilter            = objc.RegisterName("initWithGradientImages:forwardFilter:isSecondarySourceFilter:")
+	_mPSNNArithmeticGradientNodeSelPrimaryScale                                                          = objc.RegisterName("primaryScale")
+	_mPSNNArithmeticGradientNodeSelSetPrimaryScale                                                       = objc.RegisterName("setPrimaryScale:")
+	_mPSNNArithmeticGradientNodeSelSecondaryScale                                                        = objc.RegisterName("secondaryScale")
+	_mPSNNArithmeticGradientNodeSelSetSecondaryScale                                                     = objc.RegisterName("setSecondaryScale:")
+	_mPSNNArithmeticGradientNodeSelBias                                                                  = objc.RegisterName("bias")
+	_mPSNNArithmeticGradientNodeSelSetBias                                                               = objc.RegisterName("setBias:")
+	_mPSNNArithmeticGradientNodeSelSecondaryStrideInPixelsX                                              = objc.RegisterName("secondaryStrideInPixelsX")
+	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInPixelsX                                           = objc.RegisterName("setSecondaryStrideInPixelsX:")
+	_mPSNNArithmeticGradientNodeSelSecondaryStrideInPixelsY                                              = objc.RegisterName("secondaryStrideInPixelsY")
+	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInPixelsY                                           = objc.RegisterName("setSecondaryStrideInPixelsY:")
+	_mPSNNArithmeticGradientNodeSelSecondaryStrideInFeatureChannels                                      = objc.RegisterName("secondaryStrideInFeatureChannels")
+	_mPSNNArithmeticGradientNodeSelSetSecondaryStrideInFeatureChannels                                   = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
+	_mPSNNArithmeticGradientNodeSelMinimumValue                                                          = objc.RegisterName("minimumValue")
+	_mPSNNArithmeticGradientNodeSelSetMinimumValue                                                       = objc.RegisterName("setMinimumValue:")
+	_mPSNNArithmeticGradientNodeSelMaximumValue                                                          = objc.RegisterName("maximumValue")
+	_mPSNNArithmeticGradientNodeSelSetMaximumValue                                                       = objc.RegisterName("setMaximumValue:")
+	_mPSNNArithmeticGradientNodeSelIsSecondarySourceFilter                                               = objc.RegisterName("isSecondarySourceFilter")
 )
 
 func MPSNNArithmeticGradientNodeFromID(id objc.ID) *MPSNNArithmeticGradientNode {
@@ -53,21 +53,27 @@ func MPSNNArithmeticGradientNodeFromID(id objc.ID) *MPSNNArithmeticGradientNode 
 // @abstract create a new arithmetic gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this. @param      sourceGradient          The input gradient from the 'downstream' gradient filter. @param      sourceImage             The source input image from the forward pass (primary or secondary). @param      gradientState           The gradient state produced by the concatenation filter, consumed by this filter.
 func MPSNNArithmeticGradientNodeNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNBinaryGradientStateNode, isSecondarySourceFilter bool) *MPSNNArithmeticGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNArithmeticGradientNode), _mPSNNArithmeticGradientNodeSelNodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNArithmeticGradientNodeFromID(_ret)
 }
 
 // @abstract create a new arithmetic gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this. @param      sourceGradient          The input gradient from the 'downstream' gradient filter. @param      sourceImage             The source input image from the forward pass (primary or secondary). @param      gradientState           The gradient state produced by the concatenation filter, consumed by this filter.
 func (o *MPSNNArithmeticGradientNode) InitWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNBinaryGradientStateNode, isSecondarySourceFilter bool) *MPSNNArithmeticGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNArithmeticGradientNodeSelInitWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNArithmeticGradientNodeFromID(_ret)
 }
 
 // @abstract create a new arithmetic gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this. @param      gradientImages          The input gradient from the 'downstream' gradient filter and the source input image from the forward pass (primary or secondary). @param      filter                  The matching filter node from the forward pass. @param      isSecondarySourceFilter The isSecondarySourceFilter property is used to indicate whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass.
 func (o *MPSNNArithmeticGradientNode) InitWithGradientImagesForwardFilterIsSecondarySourceFilter(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], filter *mpsneuralnetwork.MPSNNFilterNode, isSecondarySourceFilter bool) *MPSNNArithmeticGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNArithmeticGradientNodeSelInitWithGradientImagesForwardFilterIsSecondarySourceFilter, gradientImages, filter.Ptr(), isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNArithmeticGradientNodeFromID(_ret)
 }
 
@@ -147,4 +153,3 @@ func (o *MPSNNArithmeticGradientNode) IsSecondarySourceFilter() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSNNArithmeticGradientNodeSelIsSecondarySourceFilter)
 	return _ret
 }
-

@@ -17,13 +17,13 @@ type AMBundleAction struct {
 }
 
 var (
-	_clsAMBundleAction = _objcClass("AMBundleAction")
+	_clsAMBundleAction                = _objcClass("AMBundleAction")
 	_aMBundleActionSelAwakeFromBundle = objc.RegisterName("awakeFromBundle")
-	_aMBundleActionSelHasView = objc.RegisterName("hasView")
-	_aMBundleActionSelView = objc.RegisterName("view")
-	_aMBundleActionSelBundle = objc.RegisterName("bundle")
-	_aMBundleActionSelParameters = objc.RegisterName("parameters")
-	_aMBundleActionSelSetParameters = objc.RegisterName("setParameters:")
+	_aMBundleActionSelHasView         = objc.RegisterName("hasView")
+	_aMBundleActionSelView            = objc.RegisterName("view")
+	_aMBundleActionSelBundle          = objc.RegisterName("bundle")
+	_aMBundleActionSelParameters      = objc.RegisterName("parameters")
+	_aMBundleActionSelSetParameters   = objc.RegisterName("setParameters:")
 )
 
 func AMBundleActionFromID(id objc.ID) *AMBundleAction {
@@ -47,13 +47,17 @@ func (o *AMBundleAction) HasView() bool {
 
 func (o *AMBundleAction) View() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMBundleActionSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 func (o *AMBundleAction) Bundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aMBundleActionSelBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *AMBundleAction) Parameters() *foundation.NSMutableDictionary[*foundatio
 func (o *AMBundleAction) SetParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_aMBundleActionSelSetParameters, parameters)
 }
-

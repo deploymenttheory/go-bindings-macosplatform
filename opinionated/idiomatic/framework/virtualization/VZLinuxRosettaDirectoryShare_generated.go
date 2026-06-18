@@ -55,7 +55,9 @@ func (x *LinuxRosettaDirectoryShare) SetOptions(options *raw.VZLinuxRosettaCachi
 	x.inner.SetOptions(options)
 }
 
-func (x *LinuxRosettaDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return &x.inner.VZDirectoryShare }
+func (x *LinuxRosettaDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare {
+	return &x.inner.VZDirectoryShare
+}
 
 // LinuxRosettaDirectoryShareable is the interface implemented by [LinuxRosettaDirectoryShare], for mocking and DI.
 type LinuxRosettaDirectoryShareable interface {
@@ -66,4 +68,3 @@ type LinuxRosettaDirectoryShareable interface {
 }
 
 var _ LinuxRosettaDirectoryShareable = (*LinuxRosettaDirectoryShare)(nil)
-

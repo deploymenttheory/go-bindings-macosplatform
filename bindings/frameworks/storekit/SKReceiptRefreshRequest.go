@@ -17,9 +17,9 @@ type SKReceiptRefreshRequest struct {
 }
 
 var (
-	_clsSKReceiptRefreshRequest = _objcClass("SKReceiptRefreshRequest")
+	_clsSKReceiptRefreshRequest                          = _objcClass("SKReceiptRefreshRequest")
 	_sKReceiptRefreshRequestSelInitWithReceiptProperties = objc.RegisterName("initWithReceiptProperties:")
-	_sKReceiptRefreshRequestSelReceiptProperties = objc.RegisterName("receiptProperties")
+	_sKReceiptRefreshRequestSelReceiptProperties         = objc.RegisterName("receiptProperties")
 )
 
 func SKReceiptRefreshRequestFromID(id objc.ID) *SKReceiptRefreshRequest {
@@ -34,7 +34,9 @@ func SKReceiptRefreshRequestFromID(id objc.ID) *SKReceiptRefreshRequest {
 
 func (o *SKReceiptRefreshRequest) InitWithReceiptProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SKReceiptRefreshRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReceiptRefreshRequestSelInitWithReceiptProperties, properties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReceiptRefreshRequestFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *SKReceiptRefreshRequest) ReceiptProperties() *foundation.NSDictionary[*
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _sKReceiptRefreshRequestSelReceiptProperties)
 	return _ret
 }
-

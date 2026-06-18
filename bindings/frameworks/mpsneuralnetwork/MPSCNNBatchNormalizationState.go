@@ -16,14 +16,14 @@ type MPSCNNBatchNormalizationState struct {
 }
 
 var (
-	_clsMPSCNNBatchNormalizationState = _objcClass("MPSCNNBatchNormalizationState")
-	_mPSCNNBatchNormalizationStateSelReset = objc.RegisterName("reset")
-	_mPSCNNBatchNormalizationStateSelGamma = objc.RegisterName("gamma")
-	_mPSCNNBatchNormalizationStateSelBeta = objc.RegisterName("beta")
-	_mPSCNNBatchNormalizationStateSelMean = objc.RegisterName("mean")
-	_mPSCNNBatchNormalizationStateSelVariance = objc.RegisterName("variance")
-	_mPSCNNBatchNormalizationStateSelGradientForGamma = objc.RegisterName("gradientForGamma")
-	_mPSCNNBatchNormalizationStateSelGradientForBeta = objc.RegisterName("gradientForBeta")
+	_clsMPSCNNBatchNormalizationState                   = _objcClass("MPSCNNBatchNormalizationState")
+	_mPSCNNBatchNormalizationStateSelReset              = objc.RegisterName("reset")
+	_mPSCNNBatchNormalizationStateSelGamma              = objc.RegisterName("gamma")
+	_mPSCNNBatchNormalizationStateSelBeta               = objc.RegisterName("beta")
+	_mPSCNNBatchNormalizationStateSelMean               = objc.RegisterName("mean")
+	_mPSCNNBatchNormalizationStateSelVariance           = objc.RegisterName("variance")
+	_mPSCNNBatchNormalizationStateSelGradientForGamma   = objc.RegisterName("gradientForGamma")
+	_mPSCNNBatchNormalizationStateSelGradientForBeta    = objc.RegisterName("gradientForBeta")
 	_mPSCNNBatchNormalizationStateSelBatchNormalization = objc.RegisterName("batchNormalization")
 )
 
@@ -80,7 +80,8 @@ func (o *MPSCNNBatchNormalizationState) GradientForBeta() metal.MTLBuffer {
 
 func (o *MPSCNNBatchNormalizationState) BatchNormalization() *MPSCNNBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationStateSelBatchNormalization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationFromID(_ret)
 }
-

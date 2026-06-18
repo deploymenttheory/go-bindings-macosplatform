@@ -16,10 +16,10 @@ type INAnswerCallIntent struct {
 }
 
 var (
-	_clsINAnswerCallIntent = _objcClass("INAnswerCallIntent")
+	_clsINAnswerCallIntent                                 = _objcClass("INAnswerCallIntent")
 	_iNAnswerCallIntentSelInitWithAudioRouteCallIdentifier = objc.RegisterName("initWithAudioRoute:callIdentifier:")
-	_iNAnswerCallIntentSelAudioRoute = objc.RegisterName("audioRoute")
-	_iNAnswerCallIntentSelCallIdentifier = objc.RegisterName("callIdentifier")
+	_iNAnswerCallIntentSelAudioRoute                       = objc.RegisterName("audioRoute")
+	_iNAnswerCallIntentSelCallIdentifier                   = objc.RegisterName("callIdentifier")
 )
 
 func INAnswerCallIntentFromID(id objc.ID) *INAnswerCallIntent {
@@ -34,7 +34,9 @@ func INAnswerCallIntentFromID(id objc.ID) *INAnswerCallIntent {
 
 func (o *INAnswerCallIntent) InitWithAudioRouteCallIdentifier(audioRoute INCallAudioRoute, callIdentifier *foundation.NSString) *INAnswerCallIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAnswerCallIntentSelInitWithAudioRouteCallIdentifier, audioRoute, callIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAnswerCallIntentFromID(_ret)
 }
 
@@ -45,7 +47,8 @@ func (o *INAnswerCallIntent) AudioRoute() INCallAudioRoute {
 
 func (o *INAnswerCallIntent) CallIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAnswerCallIntentSelCallIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

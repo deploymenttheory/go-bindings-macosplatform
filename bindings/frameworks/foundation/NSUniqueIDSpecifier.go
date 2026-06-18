@@ -15,11 +15,11 @@ type NSUniqueIDSpecifier struct {
 }
 
 var (
-	_clsNSUniqueIDSpecifier = _objcClass("NSUniqueIDSpecifier")
-	_nSUniqueIDSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSUniqueIDSpecifier                                                               = _objcClass("NSUniqueIDSpecifier")
+	_nSUniqueIDSpecifierSelInitWithCoder                                                  = objc.RegisterName("initWithCoder:")
 	_nSUniqueIDSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyUniqueID = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:uniqueID:")
-	_nSUniqueIDSpecifierSelUniqueID = objc.RegisterName("uniqueID")
-	_nSUniqueIDSpecifierSelSetUniqueID = objc.RegisterName("setUniqueID:")
+	_nSUniqueIDSpecifierSelUniqueID                                                       = objc.RegisterName("uniqueID")
+	_nSUniqueIDSpecifierSelSetUniqueID                                                    = objc.RegisterName("setUniqueID:")
 )
 
 func NSUniqueIDSpecifierFromID(id objc.ID) *NSUniqueIDSpecifier {
@@ -34,13 +34,17 @@ func NSUniqueIDSpecifierFromID(id objc.ID) *NSUniqueIDSpecifier {
 
 func (o *NSUniqueIDSpecifier) InitWithCoder(inCoder *NSCoder) *NSUniqueIDSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUniqueIDSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUniqueIDSpecifierFromID(_ret)
 }
 
 func (o *NSUniqueIDSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyUniqueID(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, uniqueID objc.ID) *NSUniqueIDSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUniqueIDSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyUniqueID, classDesc.Ptr(), container.Ptr(), property.Ptr(), uniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUniqueIDSpecifierFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *NSUniqueIDSpecifier) UniqueID() objc.ID {
 func (o *NSUniqueIDSpecifier) SetUniqueID(uniqueID objc.ID) {
 	o.Ptr().Send(_nSUniqueIDSpecifierSelSetUniqueID, uniqueID)
 }
-

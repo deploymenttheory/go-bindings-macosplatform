@@ -17,18 +17,18 @@ type SCNSkinner struct {
 }
 
 var (
-	_clsSCNSkinner = _objcClass("SCNSkinner")
+	_clsSCNSkinner                                                                            = _objcClass("SCNSkinner")
 	_sCNSkinnerSelSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices = objc.RegisterName("skinnerWithBaseGeometry:bones:boneInverseBindTransforms:boneWeights:boneIndices:")
-	_sCNSkinnerSelSkeleton = objc.RegisterName("skeleton")
-	_sCNSkinnerSelSetSkeleton = objc.RegisterName("setSkeleton:")
-	_sCNSkinnerSelBaseGeometry = objc.RegisterName("baseGeometry")
-	_sCNSkinnerSelSetBaseGeometry = objc.RegisterName("setBaseGeometry:")
-	_sCNSkinnerSelBaseGeometryBindTransform = objc.RegisterName("baseGeometryBindTransform")
-	_sCNSkinnerSelSetBaseGeometryBindTransform = objc.RegisterName("setBaseGeometryBindTransform:")
-	_sCNSkinnerSelBoneInverseBindTransforms = objc.RegisterName("boneInverseBindTransforms")
-	_sCNSkinnerSelBones = objc.RegisterName("bones")
-	_sCNSkinnerSelBoneWeights = objc.RegisterName("boneWeights")
-	_sCNSkinnerSelBoneIndices = objc.RegisterName("boneIndices")
+	_sCNSkinnerSelSkeleton                                                                    = objc.RegisterName("skeleton")
+	_sCNSkinnerSelSetSkeleton                                                                 = objc.RegisterName("setSkeleton:")
+	_sCNSkinnerSelBaseGeometry                                                                = objc.RegisterName("baseGeometry")
+	_sCNSkinnerSelSetBaseGeometry                                                             = objc.RegisterName("setBaseGeometry:")
+	_sCNSkinnerSelBaseGeometryBindTransform                                                   = objc.RegisterName("baseGeometryBindTransform")
+	_sCNSkinnerSelSetBaseGeometryBindTransform                                                = objc.RegisterName("setBaseGeometryBindTransform:")
+	_sCNSkinnerSelBoneInverseBindTransforms                                                   = objc.RegisterName("boneInverseBindTransforms")
+	_sCNSkinnerSelBones                                                                       = objc.RegisterName("bones")
+	_sCNSkinnerSelBoneWeights                                                                 = objc.RegisterName("boneWeights")
+	_sCNSkinnerSelBoneIndices                                                                 = objc.RegisterName("boneIndices")
 )
 
 func SCNSkinnerFromID(id objc.ID) *SCNSkinner {
@@ -44,14 +44,18 @@ func SCNSkinnerFromID(id objc.ID) *SCNSkinner {
 // @method skinnerWithBaseGeometry:bones:boneInverseBindTransforms:boneWeights:boneIndices: @abstract Creates and initialize a skinner instance with the specified parameters. @param baseGeometry Specifies the base geometry used by the skinner @param bones Specifies the array of bones. @param boneInverseBindTransforms The inverse of the bone’s bind-space transformation matrix at the time the bind shape was bound to this bone. @param boneWeights A buffer of weights. This contains the weights of every influence of every vertex. The number of influence per vertex is controlled by the number of component in the geometry source. @param boneIndices A buffer of bone indexes. This buffer contains the corresponding index in the bones array for every weight in the weights buffer.
 func SCNSkinnerSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry *SCNGeometry, bones *foundation.NSArray[*SCNNode], boneInverseBindTransforms *foundation.NSArray[*foundation.NSValue], boneWeights *SCNGeometrySource, boneIndices *SCNGeometrySource) *SCNSkinner {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNSkinner), _sCNSkinnerSelSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices, baseGeometry.Ptr(), bones.Ptr(), boneInverseBindTransforms, boneWeights.Ptr(), boneIndices.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNSkinnerFromID(_ret)
 }
 
 // @property skeleton @abstract Specifies the skeleton of the receiver. @discussion When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
 func (o *SCNSkinner) Skeleton() *SCNNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelSkeleton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNNodeFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *SCNSkinner) SetSkeleton(skeleton *SCNNode) {
 // @property baseGeometry @abstract Specifies the base geometry of the receiver. @discussion Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
 func (o *SCNSkinner) BaseGeometry() *SCNGeometry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelBaseGeometry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometryFromID(_ret)
 }
 
@@ -89,21 +95,26 @@ func (o *SCNSkinner) BoneInverseBindTransforms() *foundation.NSArray[*foundation
 // @property bones @abstract The bones of the skinner.
 func (o *SCNSkinner) Bones() *foundation.NSArray[*SCNNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelBones)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNNode](_ret)
 }
 
 // @property boneWeights @abstract The bone weights of the receiver.
 func (o *SCNSkinner) BoneWeights() *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelBoneWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @property boneIndices @abstract The bone indices of the receiver.
 func (o *SCNSkinner) BoneIndices() *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNSkinnerSelBoneIndices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
-

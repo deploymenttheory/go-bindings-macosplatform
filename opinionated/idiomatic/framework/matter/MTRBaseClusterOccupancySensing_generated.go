@@ -1741,9 +1741,13 @@ func (x *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithMi
 	}
 }
 
-func (x *MTRBaseClusterOccupancySensing) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOccupancySensing) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOccupancySensing) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOccupancySensing) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOccupancySensingable is the interface implemented by [MTRBaseClusterOccupancySensing], for mocking and DI.
 type MTRBaseClusterOccupancySensingable interface {
@@ -1861,4 +1865,3 @@ type MTRBaseClusterOccupancySensingable interface {
 }
 
 var _ MTRBaseClusterOccupancySensingable = (*MTRBaseClusterOccupancySensing)(nil)
-

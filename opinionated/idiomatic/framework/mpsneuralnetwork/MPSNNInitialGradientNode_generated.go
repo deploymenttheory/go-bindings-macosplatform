@@ -49,7 +49,9 @@ func (x *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
 	return x
 }
 
-func (x *NNInitialGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNInitialGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNInitialGradientNodeable is the interface implemented by [NNInitialGradientNode], for mocking and DI.
 type NNInitialGradientNodeable interface {
@@ -59,4 +61,3 @@ type NNInitialGradientNodeable interface {
 }
 
 var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)
-

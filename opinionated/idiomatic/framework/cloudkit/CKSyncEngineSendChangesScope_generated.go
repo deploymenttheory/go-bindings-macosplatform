@@ -87,4 +87,3 @@ type SyncEngineSendChangesScopeable interface {
 }
 
 var _ SyncEngineSendChangesScopeable = (*SyncEngineSendChangesScope)(nil)
-

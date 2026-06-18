@@ -132,7 +132,9 @@ func (x *RangeSpecifier) SetEndSpecifier(endSpecifier *raw.NSScriptObjectSpecifi
 	x.inner.SetEndSpecifier(endSpecifier)
 }
 
-func (x *RangeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *RangeSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
 func (x *RangeSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
@@ -156,4 +158,3 @@ type RangeSpecifierable interface {
 }
 
 var _ RangeSpecifierable = (*RangeSpecifier)(nil)
-

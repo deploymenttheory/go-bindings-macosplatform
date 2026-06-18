@@ -73,4 +73,3 @@ type CompositeBehaviorable interface {
 }
 
 var _ CompositeBehaviorable = (*CompositeBehavior)(nil)
-

@@ -11,4 +11,3 @@ type InstallerSection_Private struct{}
 
 // InstallerState_Private is an opaque type.
 type InstallerState_Private struct{}
-

@@ -218,4 +218,3 @@ type ContentItemable interface {
 }
 
 var _ ContentItemable = (*ContentItem)(nil)
-

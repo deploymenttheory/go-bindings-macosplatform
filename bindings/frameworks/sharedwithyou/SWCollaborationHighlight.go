@@ -17,11 +17,11 @@ type SWCollaborationHighlight struct {
 }
 
 var (
-	_clsSWCollaborationHighlight = _objcClass("SWCollaborationHighlight")
+	_clsSWCollaborationHighlight                        = _objcClass("SWCollaborationHighlight")
 	_sWCollaborationHighlightSelCollaborationIdentifier = objc.RegisterName("collaborationIdentifier")
-	_sWCollaborationHighlightSelTitle = objc.RegisterName("title")
-	_sWCollaborationHighlightSelCreationDate = objc.RegisterName("creationDate")
-	_sWCollaborationHighlightSelContentType = objc.RegisterName("contentType")
+	_sWCollaborationHighlightSelTitle                   = objc.RegisterName("title")
+	_sWCollaborationHighlightSelCreationDate            = objc.RegisterName("creationDate")
+	_sWCollaborationHighlightSelContentType             = objc.RegisterName("contentType")
 )
 
 func SWCollaborationHighlightFromID(id objc.ID) *SWCollaborationHighlight {
@@ -37,28 +37,35 @@ func SWCollaborationHighlightFromID(id objc.ID) *SWCollaborationHighlight {
 // @abstract Unique identifier as provided by the app hosting the collaboration @discussion This identifier is unique across platforms and shares
 func (o *SWCollaborationHighlight) CollaborationIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationHighlightSelCollaborationIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Title of the collaboration highlight @discussion Title of the collaboration if provided by the app hosting the collaboration
 func (o *SWCollaborationHighlight) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationHighlightSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Date when the file was created
 func (o *SWCollaborationHighlight) CreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationHighlightSelCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @abstract UTI type for this collaboration highlight
 func (o *SWCollaborationHighlight) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationHighlightSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
-

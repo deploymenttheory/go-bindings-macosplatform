@@ -16,9 +16,9 @@ type CKSyncEngineFetchedRecordZoneChangesEvent struct {
 }
 
 var (
-	_clsCKSyncEngineFetchedRecordZoneChangesEvent = _objcClass("CKSyncEngineFetchedRecordZoneChangesEvent")
+	_clsCKSyncEngineFetchedRecordZoneChangesEvent              = _objcClass("CKSyncEngineFetchedRecordZoneChangesEvent")
 	_cKSyncEngineFetchedRecordZoneChangesEventSelModifications = objc.RegisterName("modifications")
-	_cKSyncEngineFetchedRecordZoneChangesEventSelDeletions = objc.RegisterName("deletions")
+	_cKSyncEngineFetchedRecordZoneChangesEventSelDeletions     = objc.RegisterName("deletions")
 )
 
 func CKSyncEngineFetchedRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngineFetchedRecordZoneChangesEvent {
@@ -34,14 +34,17 @@ func CKSyncEngineFetchedRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngineFe
 // The fetched record modifications.
 func (o *CKSyncEngineFetchedRecordZoneChangesEvent) Modifications() *foundation.NSArray[*CKRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchedRecordZoneChangesEventSelModifications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKRecord](_ret)
 }
 
 // The fetched record deletions.
 func (o *CKSyncEngineFetchedRecordZoneChangesEvent) Deletions() *foundation.NSArray[*CKSyncEngineFetchedRecordDeletion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchedRecordZoneChangesEventSelDeletions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKSyncEngineFetchedRecordDeletion](_ret)
 }
-

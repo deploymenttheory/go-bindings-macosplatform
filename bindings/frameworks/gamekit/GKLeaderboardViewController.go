@@ -17,12 +17,12 @@ type GKLeaderboardViewController struct {
 }
 
 var (
-	_clsGKLeaderboardViewController = _objcClass("GKLeaderboardViewController")
-	_gKLeaderboardViewControllerSelTimeScope = objc.RegisterName("timeScope")
-	_gKLeaderboardViewControllerSelSetTimeScope = objc.RegisterName("setTimeScope:")
-	_gKLeaderboardViewControllerSelCategory = objc.RegisterName("category")
-	_gKLeaderboardViewControllerSelSetCategory = objc.RegisterName("setCategory:")
-	_gKLeaderboardViewControllerSelLeaderboardDelegate = objc.RegisterName("leaderboardDelegate")
+	_clsGKLeaderboardViewController                       = _objcClass("GKLeaderboardViewController")
+	_gKLeaderboardViewControllerSelTimeScope              = objc.RegisterName("timeScope")
+	_gKLeaderboardViewControllerSelSetTimeScope           = objc.RegisterName("setTimeScope:")
+	_gKLeaderboardViewControllerSelCategory               = objc.RegisterName("category")
+	_gKLeaderboardViewControllerSelSetCategory            = objc.RegisterName("setCategory:")
+	_gKLeaderboardViewControllerSelLeaderboardDelegate    = objc.RegisterName("leaderboardDelegate")
 	_gKLeaderboardViewControllerSelSetLeaderboardDelegate = objc.RegisterName("setLeaderboardDelegate:")
 )
 
@@ -47,7 +47,9 @@ func (o *GKLeaderboardViewController) SetTimeScope(timeScope GKLeaderboardTimeSc
 
 func (o *GKLeaderboardViewController) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLeaderboardViewControllerSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,4 +65,3 @@ func (o *GKLeaderboardViewController) LeaderboardDelegate() GKLeaderboardViewCon
 func (o *GKLeaderboardViewController) SetLeaderboardDelegate(leaderboardDelegate GKLeaderboardViewControllerDelegate) {
 	o.Ptr().Send(_gKLeaderboardViewControllerSelSetLeaderboardDelegate, leaderboardDelegate)
 }
-

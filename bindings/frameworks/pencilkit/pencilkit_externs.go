@@ -19,49 +19,64 @@ func PKAppleDrawingTypeIdentifier() uintptr {
 
 func PKInkTypeCrayon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeCrayon")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypeFountainPen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeFountainPen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypeMarker() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeMarker")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypeMonoline() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeMonoline")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypePen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypePen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypePencil() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypePencil")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypeReed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeReed")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func PKInkTypeWatercolor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_pencilkitLib, "PKInkTypeWatercolor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

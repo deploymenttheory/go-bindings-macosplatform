@@ -15,8 +15,8 @@ type INCallRecordTypeResolutionResult struct {
 }
 
 var (
-	_clsINCallRecordTypeResolutionResult = _objcClass("INCallRecordTypeResolutionResult")
-	_iNCallRecordTypeResolutionResultSelSuccessWithResolvedCallRecordType = objc.RegisterName("successWithResolvedCallRecordType:")
+	_clsINCallRecordTypeResolutionResult                                                = _objcClass("INCallRecordTypeResolutionResult")
+	_iNCallRecordTypeResolutionResultSelSuccessWithResolvedCallRecordType               = objc.RegisterName("successWithResolvedCallRecordType:")
 	_iNCallRecordTypeResolutionResultSelConfirmationRequiredWithCallRecordTypeToConfirm = objc.RegisterName("confirmationRequiredWithCallRecordTypeToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INCallRecordTypeResolutionResultFromID(id objc.ID) *INCallRecordTypeResolut
 
 func INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType(resolvedCallRecordType INCallRecordType) *INCallRecordTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeResolutionResult), _iNCallRecordTypeResolutionResultSelSuccessWithResolvedCallRecordType, resolvedCallRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordTypeResolutionResultFromID(_ret)
 }
 
 func INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm INCallRecordType) *INCallRecordTypeResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINCallRecordTypeResolutionResult), _iNCallRecordTypeResolutionResultSelConfirmationRequiredWithCallRecordTypeToConfirm, callRecordTypeToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordTypeResolutionResultFromID(_ret)
 }
-

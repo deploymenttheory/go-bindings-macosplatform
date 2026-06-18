@@ -18,7 +18,9 @@ type AccelerationStructureMotionBoundingBoxGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor].
-func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBoundingB
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -150,7 +154,9 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBo
 	x.inner.SetBoundingBoxCount(boundingBoxCount)
 }
 
-func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return &x.inner.MTLAccelerationStructureGeometryDescriptor
+}
 
 // AccelerationStructureMotionBoundingBoxGeometryDescriptorable is the interface implemented by [AccelerationStructureMotionBoundingBoxGeometryDescriptor], for mocking and DI.
 type AccelerationStructureMotionBoundingBoxGeometryDescriptorable interface {
@@ -175,4 +181,3 @@ type AccelerationStructureMotionBoundingBoxGeometryDescriptorable interface {
 }
 
 var _ AccelerationStructureMotionBoundingBoxGeometryDescriptorable = (*AccelerationStructureMotionBoundingBoxGeometryDescriptor)(nil)
-

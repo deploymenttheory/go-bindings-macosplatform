@@ -69,4 +69,3 @@ type VoiceShortcutable interface {
 }
 
 var _ VoiceShortcutable = (*VoiceShortcut)(nil)
-

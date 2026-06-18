@@ -16,37 +16,37 @@ type MTRChannelClusterProgramStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterProgramStruct = _objcClass("MTRChannelClusterProgramStruct")
-	_mTRChannelClusterProgramStructSelIdentifier = objc.RegisterName("identifier")
-	_mTRChannelClusterProgramStructSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_mTRChannelClusterProgramStructSelChannel = objc.RegisterName("channel")
-	_mTRChannelClusterProgramStructSelSetChannel = objc.RegisterName("setChannel:")
-	_mTRChannelClusterProgramStructSelStartTime = objc.RegisterName("startTime")
-	_mTRChannelClusterProgramStructSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRChannelClusterProgramStructSelEndTime = objc.RegisterName("endTime")
-	_mTRChannelClusterProgramStructSelSetEndTime = objc.RegisterName("setEndTime:")
-	_mTRChannelClusterProgramStructSelTitle = objc.RegisterName("title")
-	_mTRChannelClusterProgramStructSelSetTitle = objc.RegisterName("setTitle:")
-	_mTRChannelClusterProgramStructSelSubtitle = objc.RegisterName("subtitle")
-	_mTRChannelClusterProgramStructSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_mTRChannelClusterProgramStructSelDescriptionString = objc.RegisterName("descriptionString")
-	_mTRChannelClusterProgramStructSelSetDescriptionString = objc.RegisterName("setDescriptionString:")
-	_mTRChannelClusterProgramStructSelAudioLanguages = objc.RegisterName("audioLanguages")
-	_mTRChannelClusterProgramStructSelSetAudioLanguages = objc.RegisterName("setAudioLanguages:")
-	_mTRChannelClusterProgramStructSelRatings = objc.RegisterName("ratings")
-	_mTRChannelClusterProgramStructSelSetRatings = objc.RegisterName("setRatings:")
-	_mTRChannelClusterProgramStructSelReleaseDate = objc.RegisterName("releaseDate")
-	_mTRChannelClusterProgramStructSelSetReleaseDate = objc.RegisterName("setReleaseDate:")
-	_mTRChannelClusterProgramStructSelParentalGuidanceText = objc.RegisterName("parentalGuidanceText")
+	_clsMTRChannelClusterProgramStruct                        = _objcClass("MTRChannelClusterProgramStruct")
+	_mTRChannelClusterProgramStructSelIdentifier              = objc.RegisterName("identifier")
+	_mTRChannelClusterProgramStructSelSetIdentifier           = objc.RegisterName("setIdentifier:")
+	_mTRChannelClusterProgramStructSelChannel                 = objc.RegisterName("channel")
+	_mTRChannelClusterProgramStructSelSetChannel              = objc.RegisterName("setChannel:")
+	_mTRChannelClusterProgramStructSelStartTime               = objc.RegisterName("startTime")
+	_mTRChannelClusterProgramStructSelSetStartTime            = objc.RegisterName("setStartTime:")
+	_mTRChannelClusterProgramStructSelEndTime                 = objc.RegisterName("endTime")
+	_mTRChannelClusterProgramStructSelSetEndTime              = objc.RegisterName("setEndTime:")
+	_mTRChannelClusterProgramStructSelTitle                   = objc.RegisterName("title")
+	_mTRChannelClusterProgramStructSelSetTitle                = objc.RegisterName("setTitle:")
+	_mTRChannelClusterProgramStructSelSubtitle                = objc.RegisterName("subtitle")
+	_mTRChannelClusterProgramStructSelSetSubtitle             = objc.RegisterName("setSubtitle:")
+	_mTRChannelClusterProgramStructSelDescriptionString       = objc.RegisterName("descriptionString")
+	_mTRChannelClusterProgramStructSelSetDescriptionString    = objc.RegisterName("setDescriptionString:")
+	_mTRChannelClusterProgramStructSelAudioLanguages          = objc.RegisterName("audioLanguages")
+	_mTRChannelClusterProgramStructSelSetAudioLanguages       = objc.RegisterName("setAudioLanguages:")
+	_mTRChannelClusterProgramStructSelRatings                 = objc.RegisterName("ratings")
+	_mTRChannelClusterProgramStructSelSetRatings              = objc.RegisterName("setRatings:")
+	_mTRChannelClusterProgramStructSelReleaseDate             = objc.RegisterName("releaseDate")
+	_mTRChannelClusterProgramStructSelSetReleaseDate          = objc.RegisterName("setReleaseDate:")
+	_mTRChannelClusterProgramStructSelParentalGuidanceText    = objc.RegisterName("parentalGuidanceText")
 	_mTRChannelClusterProgramStructSelSetParentalGuidanceText = objc.RegisterName("setParentalGuidanceText:")
-	_mTRChannelClusterProgramStructSelRecordingFlag = objc.RegisterName("recordingFlag")
-	_mTRChannelClusterProgramStructSelSetRecordingFlag = objc.RegisterName("setRecordingFlag:")
-	_mTRChannelClusterProgramStructSelSeriesInfo = objc.RegisterName("seriesInfo")
-	_mTRChannelClusterProgramStructSelSetSeriesInfo = objc.RegisterName("setSeriesInfo:")
-	_mTRChannelClusterProgramStructSelCategoryList = objc.RegisterName("categoryList")
-	_mTRChannelClusterProgramStructSelSetCategoryList = objc.RegisterName("setCategoryList:")
-	_mTRChannelClusterProgramStructSelCastList = objc.RegisterName("castList")
-	_mTRChannelClusterProgramStructSelSetCastList = objc.RegisterName("setCastList:")
+	_mTRChannelClusterProgramStructSelRecordingFlag           = objc.RegisterName("recordingFlag")
+	_mTRChannelClusterProgramStructSelSetRecordingFlag        = objc.RegisterName("setRecordingFlag:")
+	_mTRChannelClusterProgramStructSelSeriesInfo              = objc.RegisterName("seriesInfo")
+	_mTRChannelClusterProgramStructSelSetSeriesInfo           = objc.RegisterName("setSeriesInfo:")
+	_mTRChannelClusterProgramStructSelCategoryList            = objc.RegisterName("categoryList")
+	_mTRChannelClusterProgramStructSelSetCategoryList         = objc.RegisterName("setCategoryList:")
+	_mTRChannelClusterProgramStructSelCastList                = objc.RegisterName("castList")
+	_mTRChannelClusterProgramStructSelSetCastList             = objc.RegisterName("setCastList:")
 )
 
 func MTRChannelClusterProgramStructFromID(id objc.ID) *MTRChannelClusterProgramStruct {
@@ -61,7 +61,9 @@ func MTRChannelClusterProgramStructFromID(id objc.ID) *MTRChannelClusterProgramS
 
 func (o *MTRChannelClusterProgramStruct) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -71,7 +73,9 @@ func (o *MTRChannelClusterProgramStruct) SetIdentifier(identifier *foundation.NS
 
 func (o *MTRChannelClusterProgramStruct) Channel() *MTRChannelClusterChannelInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterChannelInfoStructFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *MTRChannelClusterProgramStruct) SetChannel(channel *MTRChannelClusterCh
 
 func (o *MTRChannelClusterProgramStruct) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -91,7 +97,9 @@ func (o *MTRChannelClusterProgramStruct) SetStartTime(startTime *foundation.NSNu
 
 func (o *MTRChannelClusterProgramStruct) EndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -101,7 +109,9 @@ func (o *MTRChannelClusterProgramStruct) SetEndTime(endTime *foundation.NSNumber
 
 func (o *MTRChannelClusterProgramStruct) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,7 +121,9 @@ func (o *MTRChannelClusterProgramStruct) SetTitle(title *foundation.NSString) {
 
 func (o *MTRChannelClusterProgramStruct) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,7 +133,9 @@ func (o *MTRChannelClusterProgramStruct) SetSubtitle(subtitle *foundation.NSStri
 
 func (o *MTRChannelClusterProgramStruct) DescriptionString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelDescriptionString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,7 +163,9 @@ func (o *MTRChannelClusterProgramStruct) SetRatings(ratings *foundation.NSArray[
 
 func (o *MTRChannelClusterProgramStruct) ReleaseDate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelReleaseDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -159,7 +175,9 @@ func (o *MTRChannelClusterProgramStruct) SetReleaseDate(releaseDate *foundation.
 
 func (o *MTRChannelClusterProgramStruct) ParentalGuidanceText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelParentalGuidanceText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,7 +187,9 @@ func (o *MTRChannelClusterProgramStruct) SetParentalGuidanceText(parentalGuidanc
 
 func (o *MTRChannelClusterProgramStruct) RecordingFlag() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelRecordingFlag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -179,7 +199,9 @@ func (o *MTRChannelClusterProgramStruct) SetRecordingFlag(recordingFlag *foundat
 
 func (o *MTRChannelClusterProgramStruct) SeriesInfo() *MTRChannelClusterSeriesInfoStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramStructSelSeriesInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRChannelClusterSeriesInfoStructFromID(_ret)
 }
 
@@ -204,4 +226,3 @@ func (o *MTRChannelClusterProgramStruct) CastList() *foundation.NSArray[objc.ID]
 func (o *MTRChannelClusterProgramStruct) SetCastList(castList *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRChannelClusterProgramStructSelSetCastList, castList)
 }
-

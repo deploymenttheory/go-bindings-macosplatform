@@ -196,13 +196,21 @@ func (x *CNNMultiplyGradient) WithLabel(label string) *CNNMultiplyGradient {
 	return x
 }
 
-func (x *CNNMultiplyGradient) asCNNArithmeticGradient() *mpsneuralnetwork.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
+func (x *CNNMultiplyGradient) asCNNArithmeticGradient() *mpsneuralnetwork.MPSCNNArithmeticGradient {
+	return &x.inner.MPSCNNArithmeticGradient
+}
 
-func (x *CNNMultiplyGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
+func (x *CNNMultiplyGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNMultiplyGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNMultiplyGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNMultiplyGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNMultiplyGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNMultiplyGradientable is the interface implemented by [CNNMultiplyGradient], for mocking and DI.
 type CNNMultiplyGradientable interface {
@@ -236,4 +244,3 @@ type CNNMultiplyGradientable interface {
 }
 
 var _ CNNMultiplyGradientable = (*CNNMultiplyGradient)(nil)
-

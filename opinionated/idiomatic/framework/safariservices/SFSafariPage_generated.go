@@ -126,4 +126,3 @@ type SafariPageable interface {
 }
 
 var _ SafariPageable = (*SafariPage)(nil)
-

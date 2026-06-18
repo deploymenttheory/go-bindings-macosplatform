@@ -17,14 +17,14 @@ type SCWindow struct {
 }
 
 var (
-	_clsSCWindow = _objcClass("SCWindow")
-	_sCWindowSelWindowID = objc.RegisterName("windowID")
-	_sCWindowSelFrame = objc.RegisterName("frame")
-	_sCWindowSelTitle = objc.RegisterName("title")
-	_sCWindowSelWindowLayer = objc.RegisterName("windowLayer")
+	_clsSCWindow                  = _objcClass("SCWindow")
+	_sCWindowSelWindowID          = objc.RegisterName("windowID")
+	_sCWindowSelFrame             = objc.RegisterName("frame")
+	_sCWindowSelTitle             = objc.RegisterName("title")
+	_sCWindowSelWindowLayer       = objc.RegisterName("windowLayer")
 	_sCWindowSelOwningApplication = objc.RegisterName("owningApplication")
-	_sCWindowSelIsOnScreen = objc.RegisterName("isOnScreen")
-	_sCWindowSelIsActive = objc.RegisterName("isActive")
+	_sCWindowSelIsOnScreen        = objc.RegisterName("isOnScreen")
+	_sCWindowSelIsActive          = objc.RegisterName("isActive")
 )
 
 func SCWindowFromID(id objc.ID) *SCWindow {
@@ -52,7 +52,9 @@ func (o *SCWindow) Frame() corefoundation.CGRect {
 // @abstract title the window title for the SCWindow
 func (o *SCWindow) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCWindowSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *SCWindow) WindowLayer() int {
 // @abstract owningApplication is the SCRunningApplication that owns this SCWindow
 func (o *SCWindow) OwningApplication() *SCRunningApplication {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCWindowSelOwningApplication)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCRunningApplicationFromID(_ret)
 }
 
@@ -80,4 +84,3 @@ func (o *SCWindow) IsActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sCWindowSelIsActive)
 	return _ret
 }
-

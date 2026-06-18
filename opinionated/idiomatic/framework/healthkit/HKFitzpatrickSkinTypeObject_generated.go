@@ -47,4 +47,3 @@ type FitzpatrickSkinTypeObjectable interface {
 }
 
 var _ FitzpatrickSkinTypeObjectable = (*FitzpatrickSkinTypeObject)(nil)
-

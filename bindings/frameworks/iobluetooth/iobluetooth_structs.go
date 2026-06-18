@@ -13,7 +13,7 @@ type BluetoothAFHHostChannelClassification struct {
 
 type BluetoothAFHResults struct {
 	Handle uint16
-	Mode uint8
+	Mode   uint8
 	AfhMap [10]uint8
 }
 
@@ -22,30 +22,30 @@ type BluetoothDeviceAddress struct {
 }
 
 type BluetoothEnhancedSynchronousConnectionInfo struct {
-	TransmitBandWidth uint32
-	ReceiveBandWidth uint32
-	TransmitCodingFormat uint64
-	ReceiveCodingFormat uint64
-	TransmitCodecFrameSize uint16
-	ReceiveCodecFrameSize uint16
-	InputBandwidth uint32
-	OutputBandwidth uint32
-	InputCodingFormat uint64
-	OutputCodingFormat uint64
-	InputCodedDataSize uint16
-	OutputCodedDataSize uint16
-	InputPCMDataFormat uint8
-	OutputPCMDataFormat uint8
-	InputPCMSampelPayloadMSBPosition uint8
+	TransmitBandWidth                 uint32
+	ReceiveBandWidth                  uint32
+	TransmitCodingFormat              uint64
+	ReceiveCodingFormat               uint64
+	TransmitCodecFrameSize            uint16
+	ReceiveCodecFrameSize             uint16
+	InputBandwidth                    uint32
+	OutputBandwidth                   uint32
+	InputCodingFormat                 uint64
+	OutputCodingFormat                uint64
+	InputCodedDataSize                uint16
+	OutputCodedDataSize               uint16
+	InputPCMDataFormat                uint8
+	OutputPCMDataFormat               uint8
+	InputPCMSampelPayloadMSBPosition  uint8
 	OutputPCMSampelPayloadMSBPosition uint8
-	InputDataPath uint8
-	OutputDataPath uint8
-	InputTransportUnitSize uint8
-	OutputTransportUnitSize uint8
-	MaxLatency uint16
-	VoiceSetting uint16
-	RetransmissionEffort uint8
-	PacketType uint16
+	InputDataPath                     uint8
+	OutputDataPath                    uint8
+	InputTransportUnitSize            uint8
+	OutputTransportUnitSize           uint8
+	MaxLatency                        uint16
+	VoiceSetting                      uint16
+	RetransmissionEffort              uint8
+	PacketType                        uint16
 }
 
 type BluetoothEventFilterCondition struct {
@@ -53,22 +53,22 @@ type BluetoothEventFilterCondition struct {
 }
 
 type BluetoothHCIAcceptSynchronousConnectionRequestParams struct {
-	TransmitBandwidth uint32
-	ReceiveBandwidth uint32
-	MaxLatency uint16
-	ContentFormat uint16
+	TransmitBandwidth    uint32
+	ReceiveBandwidth     uint32
+	MaxLatency           uint16
+	ContentFormat        uint16
 	RetransmissionEffort uint8
-	PacketType uint16
+	PacketType           uint16
 }
 
 type BluetoothHCIAutomaticFlushTimeoutInfo struct {
-	Handle uint16
+	Handle  uint16
 	Timeout uint16
 }
 
 type BluetoothHCIBufferSize struct {
-	ACLDataPacketLength uint16
-	SCODataPacketLength uint8
+	ACLDataPacketLength    uint16
+	SCODataPacketLength    uint8
 	TotalNumACLDataPackets uint16
 	TotalNumSCODataPackets uint16
 }
@@ -84,60 +84,60 @@ type BluetoothHCICurrentInquiryAccessCodesForWrite struct {
 }
 
 type BluetoothHCIEncryptionKeySizeInfo struct {
-	Handle uint16
+	Handle  uint16
 	KeySize uint8
 }
 
 type BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams struct {
-	TransmitBandwidth uint32
-	ReceiveBandwidth uint32
-	TransmitCodingFormat uint64
-	ReceiveCodingFormat uint64
-	TransmitCodecFrameSize uint16
-	ReceiveCodecFrameSize uint16
-	InputBandwidth uint32
-	OutputBandwidth uint32
-	InputCodingFormat uint64
-	OutputCodingFormat uint64
-	InputCodedDataSize uint16
-	OutputCodedDataSize uint16
-	InputPCMDataFormat uint8
-	OutputPCMDataFormat uint8
-	InputPCMSamplePayloadMSBPosition uint8
+	TransmitBandwidth                 uint32
+	ReceiveBandwidth                  uint32
+	TransmitCodingFormat              uint64
+	ReceiveCodingFormat               uint64
+	TransmitCodecFrameSize            uint16
+	ReceiveCodecFrameSize             uint16
+	InputBandwidth                    uint32
+	OutputBandwidth                   uint32
+	InputCodingFormat                 uint64
+	OutputCodingFormat                uint64
+	InputCodedDataSize                uint16
+	OutputCodedDataSize               uint16
+	InputPCMDataFormat                uint8
+	OutputPCMDataFormat               uint8
+	InputPCMSamplePayloadMSBPosition  uint8
 	OutputPCMSamplePayloadMSBPosition uint8
-	InputDataPath uint8
-	OutputDataPath uint8
-	InputTransportUnitSize uint8
-	OutputTransportUnitSize uint8
-	MaxLatency uint16
-	PacketType uint16
-	RetransmissionEffort uint8
+	InputDataPath                     uint8
+	OutputDataPath                    uint8
+	InputTransportUnitSize            uint8
+	OutputTransportUnitSize           uint8
+	MaxLatency                        uint16
+	PacketType                        uint16
+	RetransmissionEffort              uint8
 }
 
 type BluetoothHCIEnhancedSetupSynchronousConnectionParams struct {
-	TransmitBandwidth uint32
-	ReceiveBandwidth uint32
-	TransmitCodingFormat uint64
-	ReceiveCodingFormat uint64
-	TransmitCodecFrameSize uint16
-	ReceiveCodecFrameSize uint16
-	InputBandwidth uint32
-	OutputBandwidth uint32
-	InputCodingFormat uint64
-	OutputCodingFormat uint64
-	InputCodedDataSize uint16
-	OutputCodedDataSize uint16
-	InputPCMDataFormat uint8
-	OutputPCMDataFormat uint8
-	InputPCMSamplePayloadMSBPosition uint8
+	TransmitBandwidth                 uint32
+	ReceiveBandwidth                  uint32
+	TransmitCodingFormat              uint64
+	ReceiveCodingFormat               uint64
+	TransmitCodecFrameSize            uint16
+	ReceiveCodecFrameSize             uint16
+	InputBandwidth                    uint32
+	OutputBandwidth                   uint32
+	InputCodingFormat                 uint64
+	OutputCodingFormat                uint64
+	InputCodedDataSize                uint16
+	OutputCodedDataSize               uint16
+	InputPCMDataFormat                uint8
+	OutputPCMDataFormat               uint8
+	InputPCMSamplePayloadMSBPosition  uint8
 	OutputPCMSamplePayloadMSBPosition uint8
-	InputDataPath uint8
-	OutputDataPath uint8
-	InputTransportUnitSize uint8
-	OutputTransportUnitSize uint8
-	MaxLatency uint16
-	PacketType uint16
-	RetransmissionEffort uint8
+	InputDataPath                     uint8
+	OutputDataPath                    uint8
+	InputTransportUnitSize            uint8
+	OutputTransportUnitSize           uint8
+	MaxLatency                        uint16
+	PacketType                        uint16
+	RetransmissionEffort              uint8
 }
 
 type BluetoothHCIEventAuthenticationCompleteResults struct {
@@ -150,20 +150,20 @@ type BluetoothHCIEventChangeConnectionLinkKeyCompleteResults struct {
 
 type BluetoothHCIEventConnectionCompleteResults struct {
 	ConnectionHandle uint16
-	DeviceAddress BluetoothDeviceAddress
-	LinkType uint8
-	EncryptionMode uint8
+	DeviceAddress    BluetoothDeviceAddress
+	LinkType         uint8
+	EncryptionMode   uint8
 }
 
 type BluetoothHCIEventConnectionPacketTypeResults struct {
 	ConnectionHandle uint16
-	PacketType uint16
+	PacketType       uint16
 }
 
 type BluetoothHCIEventConnectionRequestResults struct {
 	DeviceAddress BluetoothDeviceAddress
 	ClassOfDevice uint32
-	LinkType uint8
+	LinkType      uint8
 }
 
 type BluetoothHCIEventDataBufferOverflowResults struct {
@@ -172,12 +172,12 @@ type BluetoothHCIEventDataBufferOverflowResults struct {
 
 type BluetoothHCIEventDisconnectionCompleteResults struct {
 	ConnectionHandle uint16
-	Reason uint8
+	Reason           uint8
 }
 
 type BluetoothHCIEventEncryptionChangeResults struct {
 	ConnectionHandle uint16
-	Enable uint8
+	Enable           uint8
 }
 
 type BluetoothHCIEventEncryptionKeyRefreshCompleteResults struct {
@@ -186,13 +186,13 @@ type BluetoothHCIEventEncryptionKeyRefreshCompleteResults struct {
 
 type BluetoothHCIEventFlowSpecificationData struct {
 	ConnectionHandle uint16
-	Flags uint8
-	FlowDirection uint8
-	ServiceType uint8
-	TokenRate uint32
-	TokenBucketSize uint32
-	PeakBandwidth uint32
-	AccessLatency uint32
+	Flags            uint8
+	FlowDirection    uint8
+	ServiceType      uint8
+	TokenRate        uint32
+	TokenBucketSize  uint32
+	PeakBandwidth    uint32
+	AccessLatency    uint32
 }
 
 type BluetoothHCIEventFlushOccurredResults struct {
@@ -204,87 +204,87 @@ type BluetoothHCIEventHardwareErrorResults struct {
 }
 
 type BluetoothHCIEventLEConnectionCompleteResults struct {
-	ConnectionHandle uint16
-	Role uint8
-	PeerAddressType uint8
-	PeerAddress BluetoothDeviceAddress
-	ConnInterval uint16
-	ConnLatency uint16
-	SupervisionTimeout uint16
+	ConnectionHandle    uint16
+	Role                uint8
+	PeerAddressType     uint8
+	PeerAddress         BluetoothDeviceAddress
+	ConnInterval        uint16
+	ConnLatency         uint16
+	SupervisionTimeout  uint16
 	MasterClockAccuracy uint8
 }
 
 type BluetoothHCIEventLEConnectionUpdateCompleteResults struct {
-	ConnectionHandle uint16
-	ConnInterval uint16
-	ConnLatency uint16
+	ConnectionHandle   uint16
+	ConnInterval       uint16
+	ConnLatency        uint16
 	SupervisionTimeout uint16
 }
 
 type BluetoothHCIEventLEEnhancedConnectionCompleteResults struct {
-	ConnectionHandle uint16
-	Role uint8
-	PeerAddressType uint8
-	PeerAddress BluetoothDeviceAddress
+	ConnectionHandle              uint16
+	Role                          uint8
+	PeerAddressType               uint8
+	PeerAddress                   BluetoothDeviceAddress
 	LocalResolvablePrivateAddress BluetoothDeviceAddress
-	PeerResolvablePrivateAddress BluetoothDeviceAddress
-	ConnInterval uint16
-	ConnLatency uint16
-	SupervisionTimeout uint16
-	MasterClockAccuracy uint8
+	PeerResolvablePrivateAddress  BluetoothDeviceAddress
+	ConnInterval                  uint16
+	ConnLatency                   uint16
+	SupervisionTimeout            uint16
+	MasterClockAccuracy           uint8
 }
 
 type BluetoothHCIEventLELongTermKeyRequestResults struct {
 	ConnectionHandle uint16
-	RandomNumber [8]uint8
-	Ediv uint16
+	RandomNumber     [8]uint8
+	Ediv             uint16
 }
 
 type BluetoothHCIEventLEMetaResults struct {
 	Length uint8
-	Data [255]uint8
+	Data   [255]uint8
 }
 
 type BluetoothHCIEventLEReadRemoteUsedFeaturesCompleteResults struct {
 	ConnectionHandle uint16
-	UsedFeatures BluetoothHCISupportedFeatures
+	UsedFeatures     BluetoothHCISupportedFeatures
 }
 
 type BluetoothHCIEventLinkKeyNotificationResults struct {
 	DeviceAddress BluetoothDeviceAddress
-	LinkKey BluetoothKey
-	KeyType uint8
+	LinkKey       BluetoothKey
+	KeyType       uint8
 }
 
 type BluetoothHCIEventMasterLinkKeyCompleteResults struct {
 	ConnectionHandle uint16
-	KeyFlag uint8
+	KeyFlag          uint8
 }
 
 type BluetoothHCIEventMaxSlotsChangeResults struct {
 	ConnectionHandle uint16
-	MaxSlots uint8
+	MaxSlots         uint8
 }
 
 type BluetoothHCIEventModeChangeResults struct {
 	ConnectionHandle uint16
-	Mode uint8
-	ModeInterval uint16
+	Mode             uint8
+	ModeInterval     uint16
 }
 
 type BluetoothHCIEventPageScanModeChangeResults struct {
 	DeviceAddress BluetoothDeviceAddress
-	PageScanMode uint8
+	PageScanMode  uint8
 }
 
 type BluetoothHCIEventPageScanRepetitionModeChangeResults struct {
-	DeviceAddress BluetoothDeviceAddress
+	DeviceAddress          BluetoothDeviceAddress
 	PageScanRepetitionMode uint8
 }
 
 type BluetoothHCIEventQoSSetupCompleteResults struct {
 	ConnectionHandle uint16
-	SetupParams BluetoothHCIQualityOfServiceSetupParams
+	SetupParams      BluetoothHCIQualityOfServiceSetupParams
 }
 
 type BluetoothHCIEventQoSViolationResults struct {
@@ -293,54 +293,54 @@ type BluetoothHCIEventQoSViolationResults struct {
 
 type BluetoothHCIEventReadClockOffsetResults struct {
 	ConnectionHandle uint16
-	ClockOffset uint16
+	ClockOffset      uint16
 }
 
 type BluetoothHCIEventReadExtendedFeaturesResults struct {
-	ConnectionHandle uint16
+	ConnectionHandle      uint16
 	SupportedFeaturesInfo BluetoothHCIExtendedFeaturesInfo
 }
 
 type BluetoothHCIEventReadRemoteExtendedFeaturesResults struct {
-	Error uint8
+	Error            uint8
 	ConnectionHandle uint16
-	Page uint8
-	MaxPage uint8
-	LmpFeatures BluetoothHCISupportedFeatures
+	Page             uint8
+	MaxPage          uint8
+	LmpFeatures      BluetoothHCISupportedFeatures
 }
 
 type BluetoothHCIEventReadRemoteSupportedFeaturesResults struct {
-	Error uint8
+	Error            uint8
 	ConnectionHandle uint16
-	LmpFeatures BluetoothHCISupportedFeatures
+	LmpFeatures      BluetoothHCISupportedFeatures
 }
 
 type BluetoothHCIEventReadRemoteVersionInfoResults struct {
 	ConnectionHandle uint16
-	LmpVersion uint8
+	LmpVersion       uint8
 	ManufacturerName uint16
-	LmpSubversion uint16
+	LmpSubversion    uint16
 }
 
 type BluetoothHCIEventReadSupportedFeaturesResults struct {
-	ConnectionHandle uint16
+	ConnectionHandle  uint16
 	SupportedFeatures BluetoothHCISupportedFeatures
 }
 
 type BluetoothHCIEventRemoteNameRequestResults struct {
 	DeviceAddress BluetoothDeviceAddress
-	DeviceName [248]uint8
+	DeviceName    [248]uint8
 }
 
 type BluetoothHCIEventReturnLinkKeysResults struct {
 	NumLinkKeys uint8
-	LinkKeys [1]unsafe.Pointer
+	LinkKeys    [1]unsafe.Pointer
 }
 
 type BluetoothHCIEventRoleChangeResults struct {
 	ConnectionHandle uint16
-	DeviceAddress BluetoothDeviceAddress
-	Role uint8
+	DeviceAddress    BluetoothDeviceAddress
+	Role             uint8
 }
 
 type BluetoothHCIEventSimplePairingCompleteResults struct {
@@ -348,41 +348,41 @@ type BluetoothHCIEventSimplePairingCompleteResults struct {
 }
 
 type BluetoothHCIEventSniffSubratingResults struct {
-	ConnectionHandle uint16
+	ConnectionHandle   uint16
 	MaxTransmitLatency uint16
-	MaxReceiveLatency uint16
-	MinRemoteTimeout uint16
-	MinLocalTimeout uint16
+	MaxReceiveLatency  uint16
+	MinRemoteTimeout   uint16
+	MinLocalTimeout    uint16
 }
 
 type BluetoothHCIEventSynchronousConnectionChangedResults struct {
-	ConnectionHandle uint16
+	ConnectionHandle     uint16
 	TransmissionInterval uint8
 	RetransmissionWindow uint8
-	ReceivePacketLength uint16
+	ReceivePacketLength  uint16
 	TransmitPacketLength uint16
 }
 
 type BluetoothHCIEventSynchronousConnectionCompleteResults struct {
-	ConnectionHandle uint16
-	DeviceAddress BluetoothDeviceAddress
-	LinkType uint8
+	ConnectionHandle     uint16
+	DeviceAddress        BluetoothDeviceAddress
+	LinkType             uint8
 	TransmissionInterval uint8
 	RetransmissionWindow uint8
-	ReceivePacketLength uint16
+	ReceivePacketLength  uint16
 	TransmitPacketLength uint16
-	AirMode uint8
+	AirMode              uint8
 }
 
 type BluetoothHCIEventVendorSpecificResults struct {
 	Length uint8
-	Data [255]uint8
+	Data   [255]uint8
 }
 
 type BluetoothHCIExtendedFeaturesInfo struct {
-	Page uint8
+	Page    uint8
 	MaxPage uint8
-	Data [8]uint8
+	Data    [8]uint8
 }
 
 type BluetoothHCIExtendedInquiryResponse struct {
@@ -390,18 +390,18 @@ type BluetoothHCIExtendedInquiryResponse struct {
 }
 
 type BluetoothHCIExtendedInquiryResult struct {
-	NumberOfReponses uint8
-	DeviceAddress BluetoothDeviceAddress
-	PageScanRepetitionMode uint8
-	Reserved uint8
-	ClassOfDevice uint32
-	ClockOffset uint16
-	RSSIValue int8
+	NumberOfReponses        uint8
+	DeviceAddress           BluetoothDeviceAddress
+	PageScanRepetitionMode  uint8
+	Reserved                uint8
+	ClassOfDevice           uint32
+	ClockOffset             uint16
+	RSSIValue               int8
 	ExtendedInquiryResponse BluetoothHCIExtendedInquiryResponse
 }
 
 type BluetoothHCIFailedContactInfo struct {
-	Count uint16
+	Count  uint16
 	Handle uint16
 }
 
@@ -410,108 +410,108 @@ type BluetoothHCIInquiryAccessCode struct {
 }
 
 type BluetoothHCIInquiryResult struct {
-	DeviceAddress BluetoothDeviceAddress
+	DeviceAddress          BluetoothDeviceAddress
 	PageScanRepetitionMode uint8
-	PageScanPeriodMode uint8
-	PageScanMode uint8
-	ClassOfDevice uint32
-	ClockOffset uint16
+	PageScanPeriodMode     uint8
+	PageScanMode           uint8
+	ClassOfDevice          uint32
+	ClockOffset            uint16
 }
 
 type BluetoothHCIInquiryResults struct {
 	Results [50]BluetoothHCIInquiryResult
-	Count uint
+	Count   uint
 }
 
 type BluetoothHCIInquiryWithRSSIResult struct {
-	DeviceAddress BluetoothDeviceAddress
+	DeviceAddress          BluetoothDeviceAddress
 	PageScanRepetitionMode uint8
-	Reserved uint8
-	ClassOfDevice uint32
-	ClockOffset uint16
-	RSSIValue int8
+	Reserved               uint8
+	ClassOfDevice          uint32
+	ClockOffset            uint16
+	RSSIValue              int8
 }
 
 type BluetoothHCIInquiryWithRSSIResults struct {
 	Results [50]BluetoothHCIInquiryWithRSSIResult
-	Count uint
+	Count   uint
 }
 
 type BluetoothHCILEBufferSize struct {
-	ACLDataPacketLength uint16
+	ACLDataPacketLength    uint16
 	TotalNumACLDataPackets uint8
 }
 
 type BluetoothHCILinkPolicySettingsInfo struct {
 	Settings uint16
-	Handle uint16
+	Handle   uint16
 }
 
 type BluetoothHCILinkQualityInfo struct {
-	Handle uint16
+	Handle       uint16
 	QualityValue uint8
 }
 
 type BluetoothHCILinkSupervisionTimeout struct {
-	Handle uint16
+	Handle  uint16
 	Timeout uint16
 }
 
 type BluetoothHCIQualityOfServiceSetupParams struct {
-	Flags uint8
-	ServiceType uint8
-	TokenRate uint32
-	PeakBandwidth uint32
-	Latency uint32
+	Flags          uint8
+	ServiceType    uint8
+	TokenRate      uint32
+	PeakBandwidth  uint32
+	Latency        uint32
 	DelayVariation uint32
 }
 
 type BluetoothHCIRSSIInfo struct {
-	Handle uint16
+	Handle    uint16
 	RSSIValue int8
 }
 
 type BluetoothHCIReadExtendedInquiryResponseResults struct {
-	OutFECRequired uint8
+	OutFECRequired          uint8
 	ExtendedInquiryResponse BluetoothHCIExtendedInquiryResponse
 }
 
 type BluetoothHCIReadLMPHandleResults struct {
-	Handle uint16
+	Handle     uint16
 	Lmp_handle uint8
-	Reserved uint32
+	Reserved   uint32
 }
 
 type BluetoothHCIReadLocalOOBDataResults struct {
-	Hash BluetoothHCISimplePairingOOBData
+	Hash       BluetoothHCISimplePairingOOBData
 	Randomizer BluetoothHCISimplePairingOOBData
 }
 
 type BluetoothHCIRequestCallbackInfo struct {
-	UserCallback uint64
-	UserRefCon uint64
+	UserCallback   uint64
+	UserRefCon     uint64
 	InternalRefCon uint64
-	AsyncIDRefCon uint64
-	Reserved uint64
+	AsyncIDRefCon  uint64
+	Reserved       uint64
 }
 
 type BluetoothHCIRoleInfo struct {
-	Role uint8
+	Role   uint8
 	Handle uint16
 }
 
 type BluetoothHCIScanActivity struct {
 	ScanInterval uint16
-	ScanWindow uint16
+	ScanWindow   uint16
 }
 
 type BluetoothHCISetupSynchronousConnectionParams struct {
-	TransmitBandwidth uint32
-	ReceiveBandwidth uint32
-	MaxLatency uint16
-	VoiceSetting uint16
+	TransmitBandwidth    uint32
+	ReceiveBandwidth     uint32
+	MaxLatency           uint16
+	VoiceSetting         uint16
 	RetransmissionEffort uint8
-	PacketType uint16
+	PacketType           uint16
 }
 
 type BluetoothHCISimplePairingOOBData struct {
@@ -519,7 +519,7 @@ type BluetoothHCISimplePairingOOBData struct {
 }
 
 type BluetoothHCIStoredLinkKeysInfo struct {
-	NumLinkKeysRead uint16
+	NumLinkKeysRead               uint16
 	MaxNumLinkKeysAllowedInDevice uint16
 }
 
@@ -533,21 +533,21 @@ type BluetoothHCISupportedFeatures struct {
 
 type BluetoothHCITransmitPowerLevelInfo struct {
 	Handle uint16
-	Level int8
+	Level  int8
 }
 
 type BluetoothHCIVersionInfo struct {
 	ManufacturerName uint16
-	LmpVersion uint8
-	LmpSubVersion uint16
-	HciVersion uint8
-	HciRevision uint16
+	LmpVersion       uint8
+	LmpSubVersion    uint16
+	HciVersion       uint8
+	HciRevision      uint16
 }
 
 type BluetoothIOCapabilityResponse struct {
-	DeviceAddress BluetoothDeviceAddress
-	IoCapability uint8
-	OOBDataPresence uint8
+	DeviceAddress              BluetoothDeviceAddress
+	IoCapability               uint8
+	OOBDataPresence            uint8
 	AuthenticationRequirements uint8
 }
 
@@ -560,27 +560,27 @@ type BluetoothKey struct {
 }
 
 type BluetoothKeypressNotification struct {
-	DeviceAddress BluetoothDeviceAddress
+	DeviceAddress    BluetoothDeviceAddress
 	NotificationType uint8
 }
 
 type BluetoothL2CAPQualityOfServiceOptions struct {
-	Flags uint8
-	ServiceType uint8
-	TokenRate uint32
+	Flags           uint8
+	ServiceType     uint8
+	TokenRate       uint32
 	TokenBucketSize uint32
-	PeakBandwidth uint32
-	Latency uint32
-	DelayVariation uint32
+	PeakBandwidth   uint32
+	Latency         uint32
+	DelayVariation  uint32
 }
 
 type BluetoothL2CAPRetransmissionAndFlowControlOptions struct {
-	Flags uint8
-	TxWindowSize uint8
-	MaxTransmit uint8
+	Flags                 uint8
+	TxWindowSize          uint8
+	MaxTransmit           uint8
 	RetransmissionTimeout uint16
-	MonitorTimeout uint16
-	MaxPDUPayloadSize uint16
+	MonitorTimeout        uint16
+	MaxPDUPayloadSize     uint16
 }
 
 type BluetoothPINCode struct {
@@ -588,13 +588,13 @@ type BluetoothPINCode struct {
 }
 
 type BluetoothReadClockInfo struct {
-	Handle uint16
-	Clock uint32
+	Handle   uint16
+	Clock    uint32
 	Accuracy uint16
 }
 
 type BluetoothRemoteHostSupportedFeaturesNotification struct {
-	DeviceAddress BluetoothDeviceAddress
+	DeviceAddress         BluetoothDeviceAddress
 	HostSupportedFeatures BluetoothHCISupportedFeatures
 }
 
@@ -603,159 +603,159 @@ type BluetoothSetEventMask struct {
 }
 
 type BluetoothSynchronousConnectionInfo struct {
-	TransmitBandWidth uint32
-	ReceiveBandWidth uint32
-	MaxLatency uint16
-	VoiceSetting uint16
+	TransmitBandWidth    uint32
+	ReceiveBandWidth     uint32
+	MaxLatency           uint16
+	VoiceSetting         uint16
 	RetransmissionEffort uint8
-	PacketType uint16
+	PacketType           uint16
 }
 
 type BluetoothTransportInfo struct {
-	ProductID uint32
-	VendorID uint32
-	Type uint32
-	ProductName [35]int8
-	VendorName [35]int8
-	TotalDataBytesSent uint64
-	TotalSCOBytesSent uint64
+	ProductID              uint32
+	VendorID               uint32
+	Type                   uint32
+	ProductName            [35]int8
+	VendorName             [35]int8
+	TotalDataBytesSent     uint64
+	TotalSCOBytesSent      uint64
 	TotalDataBytesReceived uint64
-	TotalSCOBytesReceived uint64
+	TotalSCOBytesReceived  uint64
 }
 
 type BluetoothUserConfirmationRequest struct {
 	DeviceAddress BluetoothDeviceAddress
-	NumericValue uint32
+	NumericValue  uint32
 }
 
 type BluetoothUserPasskeyNotification struct {
 	DeviceAddress BluetoothDeviceAddress
-	Passkey uint32
+	Passkey       uint32
 }
 
 type IOBluetoothDeviceSearchAttributes struct {
-	Options uint
-	MaxResults uint
+	Options              uint
+	MaxResults           uint
 	DeviceAttributeCount uint
-	AttributeList *IOBluetoothDeviceSearchDeviceAttributes
+	AttributeList        *IOBluetoothDeviceSearchDeviceAttributes
 }
 
 type IOBluetoothDeviceSearchDeviceAttributes struct {
-	Address BluetoothDeviceAddress
-	Name [248]uint8
+	Address           BluetoothDeviceAddress
+	Name              [248]uint8
 	ServiceClassMajor uint32
-	DeviceClassMajor uint32
-	DeviceClassMinor uint32
+	DeviceClassMajor  uint32
+	DeviceClassMinor  uint32
 }
 
 type IOBluetoothL2CAPChannelDataBlock struct {
-	DataPtr unsafe.Pointer
+	DataPtr  unsafe.Pointer
 	DataSize uint
 }
 
 type IOBluetoothL2CAPChannelEvent struct {
 	EventType IOBluetoothL2CAPChannelEventType
-	U unsafe.Pointer
-	Status int
+	U         unsafe.Pointer
+	Status    int
 }
 
 type OBEXAbortCommandData struct {
-	HeaderDataPtr unsafe.Pointer
+	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
 type OBEXAbortCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
 }
 
 type OBEXConnectCommandData struct {
-	HeaderDataPtr unsafe.Pointer
+	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
-	MaxPacketSize uint16
-	Version uint8
-	Flags uint8
+	MaxPacketSize    uint16
+	Version          uint8
+	Flags            uint8
 }
 
 type OBEXConnectCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
-	MaxPacketSize uint16
-	Version uint8
-	Flags uint8
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
+	MaxPacketSize        uint16
+	Version              uint8
+	Flags                uint8
 }
 
 type OBEXDisconnectCommandData struct {
-	HeaderDataPtr unsafe.Pointer
+	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
 type OBEXDisconnectCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
 }
 
 type OBEXErrorData struct {
-	Error int32
-	DataPtr unsafe.Pointer
+	Error      int32
+	DataPtr    unsafe.Pointer
 	DataLength uint
 }
 
 type OBEXGetCommandData struct {
-	HeaderDataPtr unsafe.Pointer
+	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
 }
 
 type OBEXGetCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
 }
 
 type OBEXPutCommandData struct {
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
+	HeaderDataPtr      unsafe.Pointer
+	HeaderDataLength   uint
 	BodyDataLeftToSend uint
 }
 
 type OBEXPutCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
 }
 
 type OBEXSessionEvent struct {
-	Type uint32
-	Session unsafe.Pointer
-	RefCon unsafe.Pointer
+	Type             uint32
+	Session          unsafe.Pointer
+	RefCon           unsafe.Pointer
 	IsEndOfEventData uint8
-	Reserved1 unsafe.Pointer
-	Reserved2 unsafe.Pointer
-	U unsafe.Pointer
+	Reserved1        unsafe.Pointer
+	Reserved2        unsafe.Pointer
+	U                unsafe.Pointer
 }
 
 type OBEXSetPathCommandData struct {
-	HeaderDataPtr unsafe.Pointer
+	HeaderDataPtr    unsafe.Pointer
 	HeaderDataLength uint
-	Flags uint8
-	Constants uint8
+	Flags            uint8
+	Constants        uint8
 }
 
 type OBEXSetPathCommandResponseData struct {
 	ServerResponseOpCode uint8
-	HeaderDataPtr unsafe.Pointer
-	HeaderDataLength uint
-	Flags uint8
-	Constants uint8
+	HeaderDataPtr        unsafe.Pointer
+	HeaderDataLength     uint
+	Flags                uint8
+	Constants            uint8
 }
 
 type OBEXTransportEvent struct {
-	Type uint32
-	Status int32
-	DataPtr unsafe.Pointer
+	Type       uint32
+	Status     int32
+	DataPtr    unsafe.Pointer
 	DataLength uint
 }
 
@@ -773,4 +773,3 @@ type BluetoothHCILESupportedFeatures = BluetoothHCISupportedFeatures
 
 // BluetoothHCILEUsedFeatures is an alias for BluetoothHCISupportedFeatures (C typedef BluetoothHCILEUsedFeatures).
 type BluetoothHCILEUsedFeatures = BluetoothHCISupportedFeatures
-

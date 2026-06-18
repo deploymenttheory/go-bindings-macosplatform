@@ -38,4 +38,3 @@ func SharedCommandCenter() *RemoteCommandCenter {
 	}
 	return &RemoteCommandCenter{inner: _r}
 }
-

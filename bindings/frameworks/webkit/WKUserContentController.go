@@ -16,20 +16,20 @@ type WKUserContentController struct {
 }
 
 var (
-	_clsWKUserContentController = _objcClass("WKUserContentController")
-	_wKUserContentControllerSelAddUserScript = objc.RegisterName("addUserScript:")
-	_wKUserContentControllerSelRemoveAllUserScripts = objc.RegisterName("removeAllUserScripts")
-	_wKUserContentControllerSelAddScriptMessageHandlerContentWorldName = objc.RegisterName("addScriptMessageHandler:contentWorld:name:")
+	_clsWKUserContentController                                                 = _objcClass("WKUserContentController")
+	_wKUserContentControllerSelAddUserScript                                    = objc.RegisterName("addUserScript:")
+	_wKUserContentControllerSelRemoveAllUserScripts                             = objc.RegisterName("removeAllUserScripts")
+	_wKUserContentControllerSelAddScriptMessageHandlerContentWorldName          = objc.RegisterName("addScriptMessageHandler:contentWorld:name:")
 	_wKUserContentControllerSelAddScriptMessageHandlerWithReplyContentWorldName = objc.RegisterName("addScriptMessageHandlerWithReply:contentWorld:name:")
-	_wKUserContentControllerSelAddScriptMessageHandlerName = objc.RegisterName("addScriptMessageHandler:name:")
-	_wKUserContentControllerSelRemoveScriptMessageHandlerForNameContentWorld = objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:")
-	_wKUserContentControllerSelRemoveScriptMessageHandlerForName = objc.RegisterName("removeScriptMessageHandlerForName:")
-	_wKUserContentControllerSelRemoveAllScriptMessageHandlersFromContentWorld = objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:")
-	_wKUserContentControllerSelRemoveAllScriptMessageHandlers = objc.RegisterName("removeAllScriptMessageHandlers")
-	_wKUserContentControllerSelAddContentRuleList = objc.RegisterName("addContentRuleList:")
-	_wKUserContentControllerSelRemoveContentRuleList = objc.RegisterName("removeContentRuleList:")
-	_wKUserContentControllerSelRemoveAllContentRuleLists = objc.RegisterName("removeAllContentRuleLists")
-	_wKUserContentControllerSelUserScripts = objc.RegisterName("userScripts")
+	_wKUserContentControllerSelAddScriptMessageHandlerName                      = objc.RegisterName("addScriptMessageHandler:name:")
+	_wKUserContentControllerSelRemoveScriptMessageHandlerForNameContentWorld    = objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:")
+	_wKUserContentControllerSelRemoveScriptMessageHandlerForName                = objc.RegisterName("removeScriptMessageHandlerForName:")
+	_wKUserContentControllerSelRemoveAllScriptMessageHandlersFromContentWorld   = objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:")
+	_wKUserContentControllerSelRemoveAllScriptMessageHandlers                   = objc.RegisterName("removeAllScriptMessageHandlers")
+	_wKUserContentControllerSelAddContentRuleList                               = objc.RegisterName("addContentRuleList:")
+	_wKUserContentControllerSelRemoveContentRuleList                            = objc.RegisterName("removeContentRuleList:")
+	_wKUserContentControllerSelRemoveAllContentRuleLists                        = objc.RegisterName("removeAllContentRuleLists")
+	_wKUserContentControllerSelUserScripts                                      = objc.RegisterName("userScripts")
 )
 
 func WKUserContentControllerFromID(id objc.ID) *WKUserContentController {
@@ -105,7 +105,8 @@ func (o *WKUserContentController) RemoveAllContentRuleLists() {
 // @abstract The user scripts associated with this user content controller.
 func (o *WKUserContentController) UserScripts() *foundation.NSArray[*WKUserScript] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKUserContentControllerSelUserScripts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*WKUserScript](_ret)
 }
-

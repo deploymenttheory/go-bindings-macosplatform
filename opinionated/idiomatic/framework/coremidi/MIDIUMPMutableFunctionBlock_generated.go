@@ -52,7 +52,9 @@ func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIH
 	return x.inner.ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup, direction, mIDI1Info, uIHint)
 }
 
-func (x *UMPMutableFunctionBlock) asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock { return &x.inner.MIDIUMPFunctionBlock }
+func (x *UMPMutableFunctionBlock) asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock {
+	return &x.inner.MIDIUMPFunctionBlock
+}
 
 // UMPMutableFunctionBlockable is the interface implemented by [UMPMutableFunctionBlock], for mocking and DI.
 type UMPMutableFunctionBlockable interface {
@@ -63,4 +65,3 @@ type UMPMutableFunctionBlockable interface {
 }
 
 var _ UMPMutableFunctionBlockable = (*UMPMutableFunctionBlock)(nil)
-

@@ -26,4 +26,3 @@ func MPSNNReductionSpatialMeanNodeFromID(id objc.ID) *MPSNNReductionSpatialMeanN
 	purego.Track(o)
 	return o
 }
-

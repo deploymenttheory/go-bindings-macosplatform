@@ -16,10 +16,10 @@ type PHASEPushStreamNode struct {
 }
 
 var (
-	_clsPHASEPushStreamNode = _objcClass("PHASEPushStreamNode")
-	_pHASEPushStreamNodeSelScheduleBuffer = objc.RegisterName("scheduleBuffer:")
-	_pHASEPushStreamNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:")
-	_pHASEPushStreamNodeSelScheduleBufferAtTimeOptions = objc.RegisterName("scheduleBuffer:atTime:options:")
+	_clsPHASEPushStreamNode                                                                   = _objcClass("PHASEPushStreamNode")
+	_pHASEPushStreamNodeSelScheduleBuffer                                                     = objc.RegisterName("scheduleBuffer:")
+	_pHASEPushStreamNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler              = objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:")
+	_pHASEPushStreamNodeSelScheduleBufferAtTimeOptions                                        = objc.RegisterName("scheduleBuffer:atTime:options:")
 	_pHASEPushStreamNodeSelScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:")
 )
 
@@ -66,4 +66,3 @@ func (o *PHASEPushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeC
 	}
 	o.Ptr().Send(_pHASEPushStreamNodeSelScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler, buffer.Ptr(), when.Ptr(), options, completionCallbackType, __block_completionHandler)
 }
-

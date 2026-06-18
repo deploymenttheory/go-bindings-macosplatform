@@ -19,7 +19,9 @@ type MTRBaseClusterOtaSoftwareUpdateRequestor struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterOtaSoftwareUpdateRequestor].
-func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateRequestor { return x.inner }
+func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) Unwrap() *raw.MTRBaseClusterOtaSoftwareUpdateRequestor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -335,11 +337,17 @@ func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) SubscribeAttributeClusterRevi
 	}
 }
 
-func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRBaseClusterOTASoftwareUpdateRequestor() *raw.MTRBaseClusterOTASoftwareUpdateRequestor { return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor }
+func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRBaseClusterOTASoftwareUpdateRequestor() *raw.MTRBaseClusterOTASoftwareUpdateRequestor {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor
+}
 
-func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOtaSoftwareUpdateRequestor) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRBaseClusterOTASoftwareUpdateRequestor.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOtaSoftwareUpdateRequestorable is the interface implemented by [MTRBaseClusterOtaSoftwareUpdateRequestor], for mocking and DI.
 type MTRBaseClusterOtaSoftwareUpdateRequestorable interface {
@@ -368,4 +376,3 @@ type MTRBaseClusterOtaSoftwareUpdateRequestorable interface {
 }
 
 var _ MTRBaseClusterOtaSoftwareUpdateRequestorable = (*MTRBaseClusterOtaSoftwareUpdateRequestor)(nil)
-

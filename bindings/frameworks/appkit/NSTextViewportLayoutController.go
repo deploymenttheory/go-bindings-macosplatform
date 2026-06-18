@@ -17,16 +17,16 @@ type NSTextViewportLayoutController struct {
 }
 
 var (
-	_clsNSTextViewportLayoutController = _objcClass("NSTextViewportLayoutController")
-	_nSTextViewportLayoutControllerSelInitWithTextLayoutManager = objc.RegisterName("initWithTextLayoutManager:")
-	_nSTextViewportLayoutControllerSelLayoutViewport = objc.RegisterName("layoutViewport")
+	_clsNSTextViewportLayoutController                               = _objcClass("NSTextViewportLayoutController")
+	_nSTextViewportLayoutControllerSelInitWithTextLayoutManager      = objc.RegisterName("initWithTextLayoutManager:")
+	_nSTextViewportLayoutControllerSelLayoutViewport                 = objc.RegisterName("layoutViewport")
 	_nSTextViewportLayoutControllerSelRelocateViewportToTextLocation = objc.RegisterName("relocateViewportToTextLocation:")
 	_nSTextViewportLayoutControllerSelAdjustViewportByVerticalOffset = objc.RegisterName("adjustViewportByVerticalOffset:")
-	_nSTextViewportLayoutControllerSelDelegate = objc.RegisterName("delegate")
-	_nSTextViewportLayoutControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextViewportLayoutControllerSelTextLayoutManager = objc.RegisterName("textLayoutManager")
-	_nSTextViewportLayoutControllerSelViewportBounds = objc.RegisterName("viewportBounds")
-	_nSTextViewportLayoutControllerSelViewportRange = objc.RegisterName("viewportRange")
+	_nSTextViewportLayoutControllerSelDelegate                       = objc.RegisterName("delegate")
+	_nSTextViewportLayoutControllerSelSetDelegate                    = objc.RegisterName("setDelegate:")
+	_nSTextViewportLayoutControllerSelTextLayoutManager              = objc.RegisterName("textLayoutManager")
+	_nSTextViewportLayoutControllerSelViewportBounds                 = objc.RegisterName("viewportBounds")
+	_nSTextViewportLayoutControllerSelViewportRange                  = objc.RegisterName("viewportRange")
 )
 
 func NSTextViewportLayoutControllerFromID(id objc.ID) *NSTextViewportLayoutController {
@@ -41,7 +41,9 @@ func NSTextViewportLayoutControllerFromID(id objc.ID) *NSTextViewportLayoutContr
 
 func (o *NSTextViewportLayoutController) InitWithTextLayoutManager(textLayoutManager *NSTextLayoutManager) *NSTextViewportLayoutController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelInitWithTextLayoutManager, textLayoutManager.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewportLayoutControllerFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *NSTextViewportLayoutController) SetDelegate(delegate NSTextViewportLayo
 
 func (o *NSTextViewportLayoutController) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
@@ -80,7 +84,8 @@ func (o *NSTextViewportLayoutController) ViewportBounds() corefoundation.CGRect 
 
 func (o *NSTextViewportLayoutController) ViewportRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextViewportLayoutControllerSelViewportRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
-

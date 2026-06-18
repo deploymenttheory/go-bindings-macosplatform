@@ -16,12 +16,12 @@ type SKReachConstraints struct {
 }
 
 var (
-	_clsSKReachConstraints = _objcClass("SKReachConstraints")
+	_clsSKReachConstraints                                       = _objcClass("SKReachConstraints")
 	_sKReachConstraintsSelInitWithLowerAngleLimitUpperAngleLimit = objc.RegisterName("initWithLowerAngleLimit:upperAngleLimit:")
-	_sKReachConstraintsSelLowerAngleLimit = objc.RegisterName("lowerAngleLimit")
-	_sKReachConstraintsSelSetLowerAngleLimit = objc.RegisterName("setLowerAngleLimit:")
-	_sKReachConstraintsSelUpperAngleLimit = objc.RegisterName("upperAngleLimit")
-	_sKReachConstraintsSelSetUpperAngleLimit = objc.RegisterName("setUpperAngleLimit:")
+	_sKReachConstraintsSelLowerAngleLimit                        = objc.RegisterName("lowerAngleLimit")
+	_sKReachConstraintsSelSetLowerAngleLimit                     = objc.RegisterName("setLowerAngleLimit:")
+	_sKReachConstraintsSelUpperAngleLimit                        = objc.RegisterName("upperAngleLimit")
+	_sKReachConstraintsSelSetUpperAngleLimit                     = objc.RegisterName("setUpperAngleLimit:")
 )
 
 func SKReachConstraintsFromID(id objc.ID) *SKReachConstraints {
@@ -36,7 +36,9 @@ func SKReachConstraintsFromID(id objc.ID) *SKReachConstraints {
 
 func (o *SKReachConstraints) InitWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float64, upperAngleLimit float64) *SKReachConstraints {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKReachConstraintsSelInitWithLowerAngleLimitUpperAngleLimit, lowerAngleLimit, upperAngleLimit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKReachConstraintsFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *SKReachConstraints) UpperAngleLimit() float64 {
 func (o *SKReachConstraints) SetUpperAngleLimit(upperAngleLimit float64) {
 	o.Ptr().Send(_sKReachConstraintsSelSetUpperAngleLimit, upperAngleLimit)
 }
-

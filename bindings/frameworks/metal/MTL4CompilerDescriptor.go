@@ -16,10 +16,10 @@ type MTL4CompilerDescriptor struct {
 }
 
 var (
-	_clsMTL4CompilerDescriptor = _objcClass("MTL4CompilerDescriptor")
-	_mTL4CompilerDescriptorSelLabel = objc.RegisterName("label")
-	_mTL4CompilerDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTL4CompilerDescriptorSelPipelineDataSetSerializer = objc.RegisterName("pipelineDataSetSerializer")
+	_clsMTL4CompilerDescriptor                             = _objcClass("MTL4CompilerDescriptor")
+	_mTL4CompilerDescriptorSelLabel                        = objc.RegisterName("label")
+	_mTL4CompilerDescriptorSelSetLabel                     = objc.RegisterName("setLabel:")
+	_mTL4CompilerDescriptorSelPipelineDataSetSerializer    = objc.RegisterName("pipelineDataSetSerializer")
 	_mTL4CompilerDescriptorSelSetPipelineDataSetSerializer = objc.RegisterName("setPipelineDataSetSerializer:")
 )
 
@@ -36,7 +36,9 @@ func MTL4CompilerDescriptorFromID(id objc.ID) *MTL4CompilerDescriptor {
 // Assigns an optional descriptor label to the compiler for debugging purposes.
 func (o *MTL4CompilerDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4CompilerDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *MTL4CompilerDescriptor) PipelineDataSetSerializer() MTL4PipelineDataSet
 func (o *MTL4CompilerDescriptor) SetPipelineDataSetSerializer(pipelineDataSetSerializer MTL4PipelineDataSetSerializer) {
 	o.Ptr().Send(_mTL4CompilerDescriptorSelSetPipelineDataSetSerializer, pipelineDataSetSerializer)
 }
-

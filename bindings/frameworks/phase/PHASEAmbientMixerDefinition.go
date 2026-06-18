@@ -19,11 +19,11 @@ type PHASEAmbientMixerDefinition struct {
 }
 
 var (
-	_clsPHASEAmbientMixerDefinition = _objcClass("PHASEAmbientMixerDefinition")
+	_clsPHASEAmbientMixerDefinition                                           = _objcClass("PHASEAmbientMixerDefinition")
 	_pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientationIdentifier = objc.RegisterName("initWithChannelLayout:orientation:identifier:")
-	_pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientation = objc.RegisterName("initWithChannelLayout:orientation:")
-	_pHASEAmbientMixerDefinitionSelOrientation = objc.RegisterName("orientation")
-	_pHASEAmbientMixerDefinitionSelInputChannelLayout = objc.RegisterName("inputChannelLayout")
+	_pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientation           = objc.RegisterName("initWithChannelLayout:orientation:")
+	_pHASEAmbientMixerDefinitionSelOrientation                                = objc.RegisterName("orientation")
+	_pHASEAmbientMixerDefinitionSelInputChannelLayout                         = objc.RegisterName("inputChannelLayout")
 )
 
 func PHASEAmbientMixerDefinitionFromID(id objc.ID) *PHASEAmbientMixerDefinition {
@@ -39,14 +39,18 @@ func PHASEAmbientMixerDefinitionFromID(id objc.ID) *PHASEAmbientMixerDefinition 
 // @method initWithChannelLayout:orientation:identifier @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this ambient mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @param identifier An optional custom identifier to give to this object @return A new PHASEAmbientMixerDefinition object
 func (o *PHASEAmbientMixerDefinition) InitWithChannelLayoutOrientationIdentifier(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer, identifier *foundation.NSString) *PHASEAmbientMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientationIdentifier, layout.Ptr(), orientation, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEAmbientMixerDefinitionFromID(_ret)
 }
 
 // @method initWithChannelLayout:orientation @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this channel mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @return A new PHASEAmbientMixerDefinition object
 func (o *PHASEAmbientMixerDefinition) InitWithChannelLayoutOrientation(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer) *PHASEAmbientMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAmbientMixerDefinitionSelInitWithChannelLayoutOrientation, layout.Ptr(), orientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEAmbientMixerDefinitionFromID(_ret)
 }
 
@@ -59,7 +63,8 @@ func (o *PHASEAmbientMixerDefinition) Orientation() unsafe.Pointer {
 // @property inputChannelLayout @abstract A readonly value of the input channel layout this mixer was initialized with.
 func (o *PHASEAmbientMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEAmbientMixerDefinitionSelInputChannelLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioChannelLayoutFromID(_ret)
 }
-

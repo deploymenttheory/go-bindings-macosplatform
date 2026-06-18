@@ -49,9 +49,13 @@ func (x *CNNPoolingMaxNode) WithLabel(label string) *CNNPoolingMaxNode {
 	return x
 }
 
-func (x *CNNPoolingMaxNode) asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNode { return &x.inner.MPSCNNPoolingNode }
+func (x *CNNPoolingMaxNode) asCNNPoolingNode() *mpsneuralnetwork.MPSCNNPoolingNode {
+	return &x.inner.MPSCNNPoolingNode
+}
 
-func (x *CNNPoolingMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
+func (x *CNNPoolingMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode
+}
 
 // CNNPoolingMaxNodeable is the interface implemented by [CNNPoolingMaxNode], for mocking and DI.
 type CNNPoolingMaxNodeable interface {
@@ -61,4 +65,3 @@ type CNNPoolingMaxNodeable interface {
 }
 
 var _ CNNPoolingMaxNodeable = (*CNNPoolingMaxNode)(nil)
-

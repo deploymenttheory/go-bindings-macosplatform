@@ -435,9 +435,13 @@ func (x *MTRBaseClusterAudioOutput) SubscribeAttributeClusterRevisionWithMinInte
 	}
 }
 
-func (x *MTRBaseClusterAudioOutput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterAudioOutput) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterAudioOutput) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterAudioOutput) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterAudioOutputable is the interface implemented by [MTRBaseClusterAudioOutput], for mocking and DI.
 type MTRBaseClusterAudioOutputable interface {
@@ -477,4 +481,3 @@ type MTRBaseClusterAudioOutputable interface {
 }
 
 var _ MTRBaseClusterAudioOutputable = (*MTRBaseClusterAudioOutput)(nil)
-

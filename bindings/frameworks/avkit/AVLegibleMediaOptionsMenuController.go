@@ -18,14 +18,14 @@ type AVLegibleMediaOptionsMenuController struct {
 }
 
 var (
-	_clsAVLegibleMediaOptionsMenuController = _objcClass("AVLegibleMediaOptionsMenuController")
-	_aVLegibleMediaOptionsMenuControllerSelInitWithPlayer = objc.RegisterName("initWithPlayer:")
+	_clsAVLegibleMediaOptionsMenuController                 = _objcClass("AVLegibleMediaOptionsMenuController")
+	_aVLegibleMediaOptionsMenuControllerSelInitWithPlayer   = objc.RegisterName("initWithPlayer:")
 	_aVLegibleMediaOptionsMenuControllerSelMenuWithContents = objc.RegisterName("menuWithContents:")
-	_aVLegibleMediaOptionsMenuControllerSelPlayer = objc.RegisterName("player")
-	_aVLegibleMediaOptionsMenuControllerSelSetPlayer = objc.RegisterName("setPlayer:")
-	_aVLegibleMediaOptionsMenuControllerSelDelegate = objc.RegisterName("delegate")
-	_aVLegibleMediaOptionsMenuControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVLegibleMediaOptionsMenuControllerSelMenuState = objc.RegisterName("menuState")
+	_aVLegibleMediaOptionsMenuControllerSelPlayer           = objc.RegisterName("player")
+	_aVLegibleMediaOptionsMenuControllerSelSetPlayer        = objc.RegisterName("setPlayer:")
+	_aVLegibleMediaOptionsMenuControllerSelDelegate         = objc.RegisterName("delegate")
+	_aVLegibleMediaOptionsMenuControllerSelSetDelegate      = objc.RegisterName("setDelegate:")
+	_aVLegibleMediaOptionsMenuControllerSelMenuState        = objc.RegisterName("menuState")
 )
 
 func AVLegibleMediaOptionsMenuControllerFromID(id objc.ID) *AVLegibleMediaOptionsMenuController {
@@ -41,21 +41,27 @@ func AVLegibleMediaOptionsMenuControllerFromID(id objc.ID) *AVLegibleMediaOption
 // @method			initWithPlayer: @param			player The AVPlayer to build menus from, or nil for non-track-specific options only @abstract		Creates an AVLegibleMediaOptionsMenuController with an optional player @discussion		When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
 func (o *AVLegibleMediaOptionsMenuController) InitWithPlayer(player *avfoundation.AVPlayer) *AVLegibleMediaOptionsMenuController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVLegibleMediaOptionsMenuControllerSelInitWithPlayer, player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVLegibleMediaOptionsMenuControllerFromID(_ret)
 }
 
 // @method			menuWithContents: @param			contents A set of values from the AVLegibleMediaOptionsMenuContents @abstract		Builds a legible options menu using the specified contents. @return			A NSMenu ready to be presented by the client, or nil if the menu cannot be built @discussion		Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
 func (o *AVLegibleMediaOptionsMenuController) MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVLegibleMediaOptionsMenuControllerSelMenuWithContents, contents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuFromID(_ret)
 }
 
 // @property		player @abstract		The player associated with the menu controller.
 func (o *AVLegibleMediaOptionsMenuController) Player() *avfoundation.AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVLegibleMediaOptionsMenuControllerSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVPlayerFromID(_ret)
 }
 
@@ -78,4 +84,3 @@ func (o *AVLegibleMediaOptionsMenuController) MenuState() AVLegibleMediaOptionsM
 	_ret := objc.Send[AVLegibleMediaOptionsMenuState](o.Ptr(), _aVLegibleMediaOptionsMenuControllerSelMenuState)
 	return _ret
 }
-

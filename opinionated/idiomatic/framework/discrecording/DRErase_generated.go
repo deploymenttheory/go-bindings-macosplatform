@@ -94,4 +94,3 @@ type Eraseable interface {
 }
 
 var _ Eraseable = (*Erase)(nil)
-

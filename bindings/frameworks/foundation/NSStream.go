@@ -17,19 +17,19 @@ type NSStream struct {
 }
 
 var (
-	_clsNSStream = _objcClass("NSStream")
-	_nSStreamSelOpen = objc.RegisterName("open")
-	_nSStreamSelClose = objc.RegisterName("close")
-	_nSStreamSelPropertyForKey = objc.RegisterName("propertyForKey:")
-	_nSStreamSelSetPropertyForKey = objc.RegisterName("setProperty:forKey:")
-	_nSStreamSelScheduleInRunLoopForMode = objc.RegisterName("scheduleInRunLoop:forMode:")
-	_nSStreamSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_nSStreamSelDelegate = objc.RegisterName("delegate")
-	_nSStreamSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSStreamSelStreamStatus = objc.RegisterName("streamStatus")
-	_nSStreamSelStreamError = objc.RegisterName("streamError")
-	_nSStreamSelGetStreamsToHostWithNamePortInputStreamOutputStream = objc.RegisterName("getStreamsToHostWithName:port:inputStream:outputStream:")
-	_nSStreamSelGetStreamsToHostPortInputStreamOutputStream = objc.RegisterName("getStreamsToHost:port:inputStream:outputStream:")
+	_clsNSStream                                                     = _objcClass("NSStream")
+	_nSStreamSelOpen                                                 = objc.RegisterName("open")
+	_nSStreamSelClose                                                = objc.RegisterName("close")
+	_nSStreamSelPropertyForKey                                       = objc.RegisterName("propertyForKey:")
+	_nSStreamSelSetPropertyForKey                                    = objc.RegisterName("setProperty:forKey:")
+	_nSStreamSelScheduleInRunLoopForMode                             = objc.RegisterName("scheduleInRunLoop:forMode:")
+	_nSStreamSelRemoveFromRunLoopForMode                             = objc.RegisterName("removeFromRunLoop:forMode:")
+	_nSStreamSelDelegate                                             = objc.RegisterName("delegate")
+	_nSStreamSelSetDelegate                                          = objc.RegisterName("setDelegate:")
+	_nSStreamSelStreamStatus                                         = objc.RegisterName("streamStatus")
+	_nSStreamSelStreamError                                          = objc.RegisterName("streamError")
+	_nSStreamSelGetStreamsToHostWithNamePortInputStreamOutputStream  = objc.RegisterName("getStreamsToHostWithName:port:inputStream:outputStream:")
+	_nSStreamSelGetStreamsToHostPortInputStreamOutputStream          = objc.RegisterName("getStreamsToHost:port:inputStream:outputStream:")
 	_nSStreamSelGetBoundStreamsWithBufferSizeInputStreamOutputStream = objc.RegisterName("getBoundStreamsWithBufferSize:inputStream:outputStream:")
 )
 
@@ -101,4 +101,3 @@ func NSStreamGetStreamsToHostPortInputStreamOutputStream(host *NSHost, port int,
 func NSStreamGetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize uint, inputStream *NSInputStream, outputStream *NSOutputStream) {
 	objc.ID(_clsNSStream).Send(_nSStreamSelGetBoundStreamsWithBufferSizeInputStreamOutputStream, bufferSize, inputStream.Ptr(), outputStream.Ptr())
 }
-

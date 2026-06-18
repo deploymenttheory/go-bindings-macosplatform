@@ -18,37 +18,37 @@ type ICCameraDevice struct {
 }
 
 var (
-	_clsICCameraDevice = _objcClass("ICCameraDevice")
-	_iCCameraDeviceSelFilesOfType = objc.RegisterName("filesOfType:")
-	_iCCameraDeviceSelRequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo = objc.RegisterName("requestReadDataFromFile:atOffset:length:readDelegate:didReadDataSelector:contextInfo:")
-	_iCCameraDeviceSelRequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo = objc.RegisterName("requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo:")
-	_iCCameraDeviceSelCancelDownload = objc.RegisterName("cancelDownload")
-	_iCCameraDeviceSelRequestDeleteFiles = objc.RegisterName("requestDeleteFiles:")
-	_iCCameraDeviceSelRequestDeleteFilesDeleteFailedCompletion = objc.RegisterName("requestDeleteFiles:deleteFailed:completion:")
-	_iCCameraDeviceSelCancelDelete = objc.RegisterName("cancelDelete")
-	_iCCameraDeviceSelRequestSyncClock = objc.RegisterName("requestSyncClock")
-	_iCCameraDeviceSelRequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo = objc.RegisterName("requestUploadFile:options:uploadDelegate:didUploadSelector:contextInfo:")
-	_iCCameraDeviceSelRequestTakePicture = objc.RegisterName("requestTakePicture")
-	_iCCameraDeviceSelRequestEnableTethering = objc.RegisterName("requestEnableTethering")
-	_iCCameraDeviceSelRequestDisableTethering = objc.RegisterName("requestDisableTethering")
+	_clsICCameraDevice                                                                                 = _objcClass("ICCameraDevice")
+	_iCCameraDeviceSelFilesOfType                                                                      = objc.RegisterName("filesOfType:")
+	_iCCameraDeviceSelRequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo  = objc.RegisterName("requestReadDataFromFile:atOffset:length:readDelegate:didReadDataSelector:contextInfo:")
+	_iCCameraDeviceSelRequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo         = objc.RegisterName("requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo:")
+	_iCCameraDeviceSelCancelDownload                                                                   = objc.RegisterName("cancelDownload")
+	_iCCameraDeviceSelRequestDeleteFiles                                                               = objc.RegisterName("requestDeleteFiles:")
+	_iCCameraDeviceSelRequestDeleteFilesDeleteFailedCompletion                                         = objc.RegisterName("requestDeleteFiles:deleteFailed:completion:")
+	_iCCameraDeviceSelCancelDelete                                                                     = objc.RegisterName("cancelDelete")
+	_iCCameraDeviceSelRequestSyncClock                                                                 = objc.RegisterName("requestSyncClock")
+	_iCCameraDeviceSelRequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo               = objc.RegisterName("requestUploadFile:options:uploadDelegate:didUploadSelector:contextInfo:")
+	_iCCameraDeviceSelRequestTakePicture                                                               = objc.RegisterName("requestTakePicture")
+	_iCCameraDeviceSelRequestEnableTethering                                                           = objc.RegisterName("requestEnableTethering")
+	_iCCameraDeviceSelRequestDisableTethering                                                          = objc.RegisterName("requestDisableTethering")
 	_iCCameraDeviceSelRequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo = objc.RegisterName("requestSendPTPCommand:outData:sendCommandDelegate:didSendCommandSelector:contextInfo:")
-	_iCCameraDeviceSelRequestSendPTPCommandOutDataCompletion = objc.RegisterName("requestSendPTPCommand:outData:completion:")
-	_iCCameraDeviceSelContentCatalogPercentCompleted = objc.RegisterName("contentCatalogPercentCompleted")
-	_iCCameraDeviceSelContents = objc.RegisterName("contents")
-	_iCCameraDeviceSelMediaFiles = objc.RegisterName("mediaFiles")
-	_iCCameraDeviceSelIsEjectable = objc.RegisterName("isEjectable")
-	_iCCameraDeviceSelIsLocked = objc.RegisterName("isLocked")
-	_iCCameraDeviceSelIsAccessRestrictedAppleDevice = objc.RegisterName("isAccessRestrictedAppleDevice")
-	_iCCameraDeviceSelICloudPhotosEnabled = objc.RegisterName("iCloudPhotosEnabled")
-	_iCCameraDeviceSelMountPoint = objc.RegisterName("mountPoint")
-	_iCCameraDeviceSelMediaPresentation = objc.RegisterName("mediaPresentation")
-	_iCCameraDeviceSelSetMediaPresentation = objc.RegisterName("setMediaPresentation:")
-	_iCCameraDeviceSelTimeOffset = objc.RegisterName("timeOffset")
-	_iCCameraDeviceSelBatteryLevelAvailable = objc.RegisterName("batteryLevelAvailable")
-	_iCCameraDeviceSelBatteryLevel = objc.RegisterName("batteryLevel")
-	_iCCameraDeviceSelTetheredCaptureEnabled = objc.RegisterName("tetheredCaptureEnabled")
-	_iCCameraDeviceSelPtpEventHandler = objc.RegisterName("ptpEventHandler")
-	_iCCameraDeviceSelSetPtpEventHandler = objc.RegisterName("setPtpEventHandler:")
+	_iCCameraDeviceSelRequestSendPTPCommandOutDataCompletion                                           = objc.RegisterName("requestSendPTPCommand:outData:completion:")
+	_iCCameraDeviceSelContentCatalogPercentCompleted                                                   = objc.RegisterName("contentCatalogPercentCompleted")
+	_iCCameraDeviceSelContents                                                                         = objc.RegisterName("contents")
+	_iCCameraDeviceSelMediaFiles                                                                       = objc.RegisterName("mediaFiles")
+	_iCCameraDeviceSelIsEjectable                                                                      = objc.RegisterName("isEjectable")
+	_iCCameraDeviceSelIsLocked                                                                         = objc.RegisterName("isLocked")
+	_iCCameraDeviceSelIsAccessRestrictedAppleDevice                                                    = objc.RegisterName("isAccessRestrictedAppleDevice")
+	_iCCameraDeviceSelICloudPhotosEnabled                                                              = objc.RegisterName("iCloudPhotosEnabled")
+	_iCCameraDeviceSelMountPoint                                                                       = objc.RegisterName("mountPoint")
+	_iCCameraDeviceSelMediaPresentation                                                                = objc.RegisterName("mediaPresentation")
+	_iCCameraDeviceSelSetMediaPresentation                                                             = objc.RegisterName("setMediaPresentation:")
+	_iCCameraDeviceSelTimeOffset                                                                       = objc.RegisterName("timeOffset")
+	_iCCameraDeviceSelBatteryLevelAvailable                                                            = objc.RegisterName("batteryLevelAvailable")
+	_iCCameraDeviceSelBatteryLevel                                                                     = objc.RegisterName("batteryLevel")
+	_iCCameraDeviceSelTetheredCaptureEnabled                                                           = objc.RegisterName("tetheredCaptureEnabled")
+	_iCCameraDeviceSelPtpEventHandler                                                                  = objc.RegisterName("ptpEventHandler")
+	_iCCameraDeviceSelSetPtpEventHandler                                                               = objc.RegisterName("setPtpEventHandler:")
 )
 
 func ICCameraDeviceFromID(id objc.ID) *ICCameraDevice {
@@ -90,7 +90,9 @@ func (o *ICCameraDevice) RequestDeleteFiles(files *foundation.NSArray[*ICCameraI
 // @method requestDeleteFiles:deleteFailed:completion @abstract Allows for deletion of an array of ICCameraItem objects, with the added ability to catch delete failures using the 'deleteFailed' block, and a completion block that will return the overall state of the request. The deleteFailed block will return: - NSDictionary<ICDeleteError, ICCameraItem*>* The completion block will return: — error: - nil if successful - NSError* with an code set to ICReturnDeleteFilesFailed if any file failed. - result: NSDictionary<ICDeleteResult, NSArray<ICCameraItem*>*>* result - ICDeleteSuccessful: NSArray<ICCameraItem*>* success - ICDeleteFailed: NSArray<ICCameraItem*>* failed
 func (o *ICCameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraDeviceSelRequestDeleteFilesDeleteFailedCompletion, files.Ptr(), deleteFailed, completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -156,14 +158,18 @@ func (o *ICCameraDevice) ContentCatalogPercentCompleted() uint {
 // @property contents @abstract ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
 func (o *ICCameraDevice) Contents() *foundation.NSArray[*ICCameraItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraDeviceSelContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICCameraItem](_ret)
 }
 
 // @property mediaFiles @abstract ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
 func (o *ICCameraDevice) MediaFiles() *foundation.NSArray[*ICCameraItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraDeviceSelMediaFiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICCameraItem](_ret)
 }
 
@@ -250,4 +256,3 @@ func (o *ICCameraDevice) SetPtpEventHandler(ptpEventHandler func(*foundation.NSD
 	}
 	o.Ptr().Send(_iCCameraDeviceSelSetPtpEventHandler, __block_ptpEventHandler)
 }
-

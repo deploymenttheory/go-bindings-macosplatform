@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_searchkitLib uintptr
-	_loadOnce sync.Once
+	_searchkitLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -56,67 +56,145 @@ func _loadLibrary() {
 	_register("SKDocumentGetSchemeName", func() { purego.RegisterLibFunc(&_fnSKDocumentGetSchemeName, _searchkitLib, "SKDocumentGetSchemeName") })
 	_register("SKDocumentGetTypeID", func() { purego.RegisterLibFunc(&_fnSKDocumentGetTypeID, _searchkitLib, "SKDocumentGetTypeID") })
 	_register("SKIndexAddDocument", func() { purego.RegisterLibFunc(&_fnSKIndexAddDocument, _searchkitLib, "SKIndexAddDocument") })
-	_register("SKIndexAddDocumentWithText", func() { purego.RegisterLibFunc(&_fnSKIndexAddDocumentWithText, _searchkitLib, "SKIndexAddDocumentWithText") })
+	_register("SKIndexAddDocumentWithText", func() {
+		purego.RegisterLibFunc(&_fnSKIndexAddDocumentWithText, _searchkitLib, "SKIndexAddDocumentWithText")
+	})
 	_register("SKIndexClose", func() { purego.RegisterLibFunc(&_fnSKIndexClose, _searchkitLib, "SKIndexClose") })
 	_register("SKIndexCompact", func() { purego.RegisterLibFunc(&_fnSKIndexCompact, _searchkitLib, "SKIndexCompact") })
-	_register("SKIndexCopyDocumentForDocumentID", func() { purego.RegisterLibFunc(&_fnSKIndexCopyDocumentForDocumentID, _searchkitLib, "SKIndexCopyDocumentForDocumentID") })
-	_register("SKIndexCopyDocumentIDArrayForTermID", func() { purego.RegisterLibFunc(&_fnSKIndexCopyDocumentIDArrayForTermID, _searchkitLib, "SKIndexCopyDocumentIDArrayForTermID") })
-	_register("SKIndexCopyDocumentProperties", func() { purego.RegisterLibFunc(&_fnSKIndexCopyDocumentProperties, _searchkitLib, "SKIndexCopyDocumentProperties") })
-	_register("SKIndexCopyDocumentRefsForDocumentIDs", func() { purego.RegisterLibFunc(&_fnSKIndexCopyDocumentRefsForDocumentIDs, _searchkitLib, "SKIndexCopyDocumentRefsForDocumentIDs") })
-	_register("SKIndexCopyDocumentURLsForDocumentIDs", func() { purego.RegisterLibFunc(&_fnSKIndexCopyDocumentURLsForDocumentIDs, _searchkitLib, "SKIndexCopyDocumentURLsForDocumentIDs") })
-	_register("SKIndexCopyInfoForDocumentIDs", func() { purego.RegisterLibFunc(&_fnSKIndexCopyInfoForDocumentIDs, _searchkitLib, "SKIndexCopyInfoForDocumentIDs") })
-	_register("SKIndexCopyTermIDArrayForDocumentID", func() { purego.RegisterLibFunc(&_fnSKIndexCopyTermIDArrayForDocumentID, _searchkitLib, "SKIndexCopyTermIDArrayForDocumentID") })
-	_register("SKIndexCopyTermStringForTermID", func() { purego.RegisterLibFunc(&_fnSKIndexCopyTermStringForTermID, _searchkitLib, "SKIndexCopyTermStringForTermID") })
-	_register("SKIndexCreateWithMutableData", func() { purego.RegisterLibFunc(&_fnSKIndexCreateWithMutableData, _searchkitLib, "SKIndexCreateWithMutableData") })
+	_register("SKIndexCopyDocumentForDocumentID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyDocumentForDocumentID, _searchkitLib, "SKIndexCopyDocumentForDocumentID")
+	})
+	_register("SKIndexCopyDocumentIDArrayForTermID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyDocumentIDArrayForTermID, _searchkitLib, "SKIndexCopyDocumentIDArrayForTermID")
+	})
+	_register("SKIndexCopyDocumentProperties", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyDocumentProperties, _searchkitLib, "SKIndexCopyDocumentProperties")
+	})
+	_register("SKIndexCopyDocumentRefsForDocumentIDs", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyDocumentRefsForDocumentIDs, _searchkitLib, "SKIndexCopyDocumentRefsForDocumentIDs")
+	})
+	_register("SKIndexCopyDocumentURLsForDocumentIDs", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyDocumentURLsForDocumentIDs, _searchkitLib, "SKIndexCopyDocumentURLsForDocumentIDs")
+	})
+	_register("SKIndexCopyInfoForDocumentIDs", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyInfoForDocumentIDs, _searchkitLib, "SKIndexCopyInfoForDocumentIDs")
+	})
+	_register("SKIndexCopyTermIDArrayForDocumentID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyTermIDArrayForDocumentID, _searchkitLib, "SKIndexCopyTermIDArrayForDocumentID")
+	})
+	_register("SKIndexCopyTermStringForTermID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCopyTermStringForTermID, _searchkitLib, "SKIndexCopyTermStringForTermID")
+	})
+	_register("SKIndexCreateWithMutableData", func() {
+		purego.RegisterLibFunc(&_fnSKIndexCreateWithMutableData, _searchkitLib, "SKIndexCreateWithMutableData")
+	})
 	_register("SKIndexCreateWithURL", func() { purego.RegisterLibFunc(&_fnSKIndexCreateWithURL, _searchkitLib, "SKIndexCreateWithURL") })
-	_register("SKIndexDocumentIteratorCopyNext", func() { purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCopyNext, _searchkitLib, "SKIndexDocumentIteratorCopyNext") })
-	_register("SKIndexDocumentIteratorCreate", func() { purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCreate, _searchkitLib, "SKIndexDocumentIteratorCreate") })
-	_register("SKIndexDocumentIteratorGetTypeID", func() { purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorGetTypeID, _searchkitLib, "SKIndexDocumentIteratorGetTypeID") })
+	_register("SKIndexDocumentIteratorCopyNext", func() {
+		purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCopyNext, _searchkitLib, "SKIndexDocumentIteratorCopyNext")
+	})
+	_register("SKIndexDocumentIteratorCreate", func() {
+		purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCreate, _searchkitLib, "SKIndexDocumentIteratorCreate")
+	})
+	_register("SKIndexDocumentIteratorGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexDocumentIteratorGetTypeID, _searchkitLib, "SKIndexDocumentIteratorGetTypeID")
+	})
 	_register("SKIndexFlush", func() { purego.RegisterLibFunc(&_fnSKIndexFlush, _searchkitLib, "SKIndexFlush") })
-	_register("SKIndexGetAnalysisProperties", func() { purego.RegisterLibFunc(&_fnSKIndexGetAnalysisProperties, _searchkitLib, "SKIndexGetAnalysisProperties") })
+	_register("SKIndexGetAnalysisProperties", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetAnalysisProperties, _searchkitLib, "SKIndexGetAnalysisProperties")
+	})
 	_register("SKIndexGetDocumentCount", func() { purego.RegisterLibFunc(&_fnSKIndexGetDocumentCount, _searchkitLib, "SKIndexGetDocumentCount") })
 	_register("SKIndexGetDocumentID", func() { purego.RegisterLibFunc(&_fnSKIndexGetDocumentID, _searchkitLib, "SKIndexGetDocumentID") })
 	_register("SKIndexGetDocumentState", func() { purego.RegisterLibFunc(&_fnSKIndexGetDocumentState, _searchkitLib, "SKIndexGetDocumentState") })
-	_register("SKIndexGetDocumentTermCount", func() { purego.RegisterLibFunc(&_fnSKIndexGetDocumentTermCount, _searchkitLib, "SKIndexGetDocumentTermCount") })
-	_register("SKIndexGetDocumentTermFrequency", func() { purego.RegisterLibFunc(&_fnSKIndexGetDocumentTermFrequency, _searchkitLib, "SKIndexGetDocumentTermFrequency") })
+	_register("SKIndexGetDocumentTermCount", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetDocumentTermCount, _searchkitLib, "SKIndexGetDocumentTermCount")
+	})
+	_register("SKIndexGetDocumentTermFrequency", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetDocumentTermFrequency, _searchkitLib, "SKIndexGetDocumentTermFrequency")
+	})
 	_register("SKIndexGetIndexType", func() { purego.RegisterLibFunc(&_fnSKIndexGetIndexType, _searchkitLib, "SKIndexGetIndexType") })
-	_register("SKIndexGetMaximumBytesBeforeFlush", func() { purego.RegisterLibFunc(&_fnSKIndexGetMaximumBytesBeforeFlush, _searchkitLib, "SKIndexGetMaximumBytesBeforeFlush") })
-	_register("SKIndexGetMaximumDocumentID", func() { purego.RegisterLibFunc(&_fnSKIndexGetMaximumDocumentID, _searchkitLib, "SKIndexGetMaximumDocumentID") })
+	_register("SKIndexGetMaximumBytesBeforeFlush", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetMaximumBytesBeforeFlush, _searchkitLib, "SKIndexGetMaximumBytesBeforeFlush")
+	})
+	_register("SKIndexGetMaximumDocumentID", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetMaximumDocumentID, _searchkitLib, "SKIndexGetMaximumDocumentID")
+	})
 	_register("SKIndexGetMaximumTermID", func() { purego.RegisterLibFunc(&_fnSKIndexGetMaximumTermID, _searchkitLib, "SKIndexGetMaximumTermID") })
-	_register("SKIndexGetTermDocumentCount", func() { purego.RegisterLibFunc(&_fnSKIndexGetTermDocumentCount, _searchkitLib, "SKIndexGetTermDocumentCount") })
-	_register("SKIndexGetTermIDForTermString", func() { purego.RegisterLibFunc(&_fnSKIndexGetTermIDForTermString, _searchkitLib, "SKIndexGetTermIDForTermString") })
+	_register("SKIndexGetTermDocumentCount", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetTermDocumentCount, _searchkitLib, "SKIndexGetTermDocumentCount")
+	})
+	_register("SKIndexGetTermIDForTermString", func() {
+		purego.RegisterLibFunc(&_fnSKIndexGetTermIDForTermString, _searchkitLib, "SKIndexGetTermIDForTermString")
+	})
 	_register("SKIndexGetTypeID", func() { purego.RegisterLibFunc(&_fnSKIndexGetTypeID, _searchkitLib, "SKIndexGetTypeID") })
 	_register("SKIndexMoveDocument", func() { purego.RegisterLibFunc(&_fnSKIndexMoveDocument, _searchkitLib, "SKIndexMoveDocument") })
 	_register("SKIndexOpenWithData", func() { purego.RegisterLibFunc(&_fnSKIndexOpenWithData, _searchkitLib, "SKIndexOpenWithData") })
-	_register("SKIndexOpenWithMutableData", func() { purego.RegisterLibFunc(&_fnSKIndexOpenWithMutableData, _searchkitLib, "SKIndexOpenWithMutableData") })
+	_register("SKIndexOpenWithMutableData", func() {
+		purego.RegisterLibFunc(&_fnSKIndexOpenWithMutableData, _searchkitLib, "SKIndexOpenWithMutableData")
+	})
 	_register("SKIndexOpenWithURL", func() { purego.RegisterLibFunc(&_fnSKIndexOpenWithURL, _searchkitLib, "SKIndexOpenWithURL") })
 	_register("SKIndexRemoveDocument", func() { purego.RegisterLibFunc(&_fnSKIndexRemoveDocument, _searchkitLib, "SKIndexRemoveDocument") })
 	_register("SKIndexRenameDocument", func() { purego.RegisterLibFunc(&_fnSKIndexRenameDocument, _searchkitLib, "SKIndexRenameDocument") })
-	_register("SKIndexSetDocumentProperties", func() { purego.RegisterLibFunc(&_fnSKIndexSetDocumentProperties, _searchkitLib, "SKIndexSetDocumentProperties") })
-	_register("SKIndexSetMaximumBytesBeforeFlush", func() { purego.RegisterLibFunc(&_fnSKIndexSetMaximumBytesBeforeFlush, _searchkitLib, "SKIndexSetMaximumBytesBeforeFlush") })
-	_register("SKLoadDefaultExtractorPlugIns", func() { purego.RegisterLibFunc(&_fnSKLoadDefaultExtractorPlugIns, _searchkitLib, "SKLoadDefaultExtractorPlugIns") })
+	_register("SKIndexSetDocumentProperties", func() {
+		purego.RegisterLibFunc(&_fnSKIndexSetDocumentProperties, _searchkitLib, "SKIndexSetDocumentProperties")
+	})
+	_register("SKIndexSetMaximumBytesBeforeFlush", func() {
+		purego.RegisterLibFunc(&_fnSKIndexSetMaximumBytesBeforeFlush, _searchkitLib, "SKIndexSetMaximumBytesBeforeFlush")
+	})
+	_register("SKLoadDefaultExtractorPlugIns", func() {
+		purego.RegisterLibFunc(&_fnSKLoadDefaultExtractorPlugIns, _searchkitLib, "SKLoadDefaultExtractorPlugIns")
+	})
 	_register("SKSearchCancel", func() { purego.RegisterLibFunc(&_fnSKSearchCancel, _searchkitLib, "SKSearchCancel") })
 	_register("SKSearchCreate", func() { purego.RegisterLibFunc(&_fnSKSearchCreate, _searchkitLib, "SKSearchCreate") })
 	_register("SKSearchFindMatches", func() { purego.RegisterLibFunc(&_fnSKSearchFindMatches, _searchkitLib, "SKSearchFindMatches") })
 	_register("SKSearchGetTypeID", func() { purego.RegisterLibFunc(&_fnSKSearchGetTypeID, _searchkitLib, "SKSearchGetTypeID") })
-	_register("SKSearchGroupCopyIndexes", func() { purego.RegisterLibFunc(&_fnSKSearchGroupCopyIndexes, _searchkitLib, "SKSearchGroupCopyIndexes") })
+	_register("SKSearchGroupCopyIndexes", func() {
+		purego.RegisterLibFunc(&_fnSKSearchGroupCopyIndexes, _searchkitLib, "SKSearchGroupCopyIndexes")
+	})
 	_register("SKSearchGroupCreate", func() { purego.RegisterLibFunc(&_fnSKSearchGroupCreate, _searchkitLib, "SKSearchGroupCreate") })
 	_register("SKSearchGroupGetTypeID", func() { purego.RegisterLibFunc(&_fnSKSearchGroupGetTypeID, _searchkitLib, "SKSearchGroupGetTypeID") })
-	_register("SKSearchResultsCopyMatchingTerms", func() { purego.RegisterLibFunc(&_fnSKSearchResultsCopyMatchingTerms, _searchkitLib, "SKSearchResultsCopyMatchingTerms") })
-	_register("SKSearchResultsCreateWithDocuments", func() { purego.RegisterLibFunc(&_fnSKSearchResultsCreateWithDocuments, _searchkitLib, "SKSearchResultsCreateWithDocuments") })
-	_register("SKSearchResultsCreateWithQuery", func() { purego.RegisterLibFunc(&_fnSKSearchResultsCreateWithQuery, _searchkitLib, "SKSearchResultsCreateWithQuery") })
+	_register("SKSearchResultsCopyMatchingTerms", func() {
+		purego.RegisterLibFunc(&_fnSKSearchResultsCopyMatchingTerms, _searchkitLib, "SKSearchResultsCopyMatchingTerms")
+	})
+	_register("SKSearchResultsCreateWithDocuments", func() {
+		purego.RegisterLibFunc(&_fnSKSearchResultsCreateWithDocuments, _searchkitLib, "SKSearchResultsCreateWithDocuments")
+	})
+	_register("SKSearchResultsCreateWithQuery", func() {
+		purego.RegisterLibFunc(&_fnSKSearchResultsCreateWithQuery, _searchkitLib, "SKSearchResultsCreateWithQuery")
+	})
 	_register("SKSearchResultsGetCount", func() { purego.RegisterLibFunc(&_fnSKSearchResultsGetCount, _searchkitLib, "SKSearchResultsGetCount") })
-	_register("SKSearchResultsGetInfoInRange", func() { purego.RegisterLibFunc(&_fnSKSearchResultsGetInfoInRange, _searchkitLib, "SKSearchResultsGetInfoInRange") })
-	_register("SKSearchResultsGetTypeID", func() { purego.RegisterLibFunc(&_fnSKSearchResultsGetTypeID, _searchkitLib, "SKSearchResultsGetTypeID") })
-	_register("SKSummaryCopyParagraphAtIndex", func() { purego.RegisterLibFunc(&_fnSKSummaryCopyParagraphAtIndex, _searchkitLib, "SKSummaryCopyParagraphAtIndex") })
-	_register("SKSummaryCopyParagraphSummaryString", func() { purego.RegisterLibFunc(&_fnSKSummaryCopyParagraphSummaryString, _searchkitLib, "SKSummaryCopyParagraphSummaryString") })
-	_register("SKSummaryCopySentenceAtIndex", func() { purego.RegisterLibFunc(&_fnSKSummaryCopySentenceAtIndex, _searchkitLib, "SKSummaryCopySentenceAtIndex") })
-	_register("SKSummaryCopySentenceSummaryString", func() { purego.RegisterLibFunc(&_fnSKSummaryCopySentenceSummaryString, _searchkitLib, "SKSummaryCopySentenceSummaryString") })
-	_register("SKSummaryCreateWithString", func() { purego.RegisterLibFunc(&_fnSKSummaryCreateWithString, _searchkitLib, "SKSummaryCreateWithString") })
-	_register("SKSummaryGetParagraphCount", func() { purego.RegisterLibFunc(&_fnSKSummaryGetParagraphCount, _searchkitLib, "SKSummaryGetParagraphCount") })
-	_register("SKSummaryGetParagraphSummaryInfo", func() { purego.RegisterLibFunc(&_fnSKSummaryGetParagraphSummaryInfo, _searchkitLib, "SKSummaryGetParagraphSummaryInfo") })
-	_register("SKSummaryGetSentenceCount", func() { purego.RegisterLibFunc(&_fnSKSummaryGetSentenceCount, _searchkitLib, "SKSummaryGetSentenceCount") })
-	_register("SKSummaryGetSentenceSummaryInfo", func() { purego.RegisterLibFunc(&_fnSKSummaryGetSentenceSummaryInfo, _searchkitLib, "SKSummaryGetSentenceSummaryInfo") })
+	_register("SKSearchResultsGetInfoInRange", func() {
+		purego.RegisterLibFunc(&_fnSKSearchResultsGetInfoInRange, _searchkitLib, "SKSearchResultsGetInfoInRange")
+	})
+	_register("SKSearchResultsGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnSKSearchResultsGetTypeID, _searchkitLib, "SKSearchResultsGetTypeID")
+	})
+	_register("SKSummaryCopyParagraphAtIndex", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryCopyParagraphAtIndex, _searchkitLib, "SKSummaryCopyParagraphAtIndex")
+	})
+	_register("SKSummaryCopyParagraphSummaryString", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryCopyParagraphSummaryString, _searchkitLib, "SKSummaryCopyParagraphSummaryString")
+	})
+	_register("SKSummaryCopySentenceAtIndex", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryCopySentenceAtIndex, _searchkitLib, "SKSummaryCopySentenceAtIndex")
+	})
+	_register("SKSummaryCopySentenceSummaryString", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryCopySentenceSummaryString, _searchkitLib, "SKSummaryCopySentenceSummaryString")
+	})
+	_register("SKSummaryCreateWithString", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryCreateWithString, _searchkitLib, "SKSummaryCreateWithString")
+	})
+	_register("SKSummaryGetParagraphCount", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryGetParagraphCount, _searchkitLib, "SKSummaryGetParagraphCount")
+	})
+	_register("SKSummaryGetParagraphSummaryInfo", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryGetParagraphSummaryInfo, _searchkitLib, "SKSummaryGetParagraphSummaryInfo")
+	})
+	_register("SKSummaryGetSentenceCount", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryGetSentenceCount, _searchkitLib, "SKSummaryGetSentenceCount")
+	})
+	_register("SKSummaryGetSentenceSummaryInfo", func() {
+		purego.RegisterLibFunc(&_fnSKSummaryGetSentenceSummaryInfo, _searchkitLib, "SKSummaryGetSentenceSummaryInfo")
+	})
 	_register("SKSummaryGetTypeID", func() { purego.RegisterLibFunc(&_fnSKSummaryGetTypeID, _searchkitLib, "SKSummaryGetTypeID") })
 }
 

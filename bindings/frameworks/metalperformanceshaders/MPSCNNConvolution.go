@@ -21,32 +21,32 @@ type MPSCNNConvolution struct {
 }
 
 var (
-	_clsMPSCNNConvolution = _objcClass("MPSCNNConvolution")
-	_mPSCNNConvolutionSelInitWithDeviceWeights = objc.RegisterName("initWithDevice:weights:")
-	_mPSCNNConvolutionSelInitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags = objc.RegisterName("initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:")
-	_mPSCNNConvolutionSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNConvolutionSelResultStateForSourceImageSourceStatesDestinationImage = objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionSelResultStateBatchForSourceImageSourceStatesDestinationImage = objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
+	_clsMPSCNNConvolution                                                                                 = _objcClass("MPSCNNConvolution")
+	_mPSCNNConvolutionSelInitWithDeviceWeights                                                            = objc.RegisterName("initWithDevice:weights:")
+	_mPSCNNConvolutionSelInitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags                   = objc.RegisterName("initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:")
+	_mPSCNNConvolutionSelInitWithCoderDevice                                                              = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNConvolutionSelResultStateForSourceImageSourceStatesDestinationImage                            = objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionSelResultStateBatchForSourceImageSourceStatesDestinationImage                       = objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:")
+	_mPSCNNConvolutionSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage      = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
 	_mPSCNNConvolutionSelTemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage = objc.RegisterName("temporaryResultStateBatchForCommandBuffer:sourceImage:sourceStates:destinationImage:")
-	_mPSCNNConvolutionSelReloadWeightsAndBiasesFromDataSource = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
-	_mPSCNNConvolutionSelReloadWeightsAndBiasesWithDataSource = objc.RegisterName("reloadWeightsAndBiasesWithDataSource:")
-	_mPSCNNConvolutionSelReloadWeightsAndBiasesWithCommandBufferState = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
-	_mPSCNNConvolutionSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary = objc.RegisterName("exportWeightsAndBiasesWithCommandBuffer:resultStateCanBeTemporary:")
-	_mPSCNNConvolutionSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSCNNConvolutionSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSCNNConvolutionSelGroups = objc.RegisterName("groups")
-	_mPSCNNConvolutionSelDataSource = objc.RegisterName("dataSource")
-	_mPSCNNConvolutionSelSubPixelScaleFactor = objc.RegisterName("subPixelScaleFactor")
-	_mPSCNNConvolutionSelNeuron = objc.RegisterName("neuron")
-	_mPSCNNConvolutionSelNeuronType = objc.RegisterName("neuronType")
-	_mPSCNNConvolutionSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSCNNConvolutionSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSCNNConvolutionSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSCNNConvolutionSelFusedNeuronDescriptor = objc.RegisterName("fusedNeuronDescriptor")
-	_mPSCNNConvolutionSelChannelMultiplier = objc.RegisterName("channelMultiplier")
-	_mPSCNNConvolutionSelAccumulatorPrecisionOption = objc.RegisterName("accumulatorPrecisionOption")
-	_mPSCNNConvolutionSelSetAccumulatorPrecisionOption = objc.RegisterName("setAccumulatorPrecisionOption:")
+	_mPSCNNConvolutionSelReloadWeightsAndBiasesFromDataSource                                             = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
+	_mPSCNNConvolutionSelReloadWeightsAndBiasesWithDataSource                                             = objc.RegisterName("reloadWeightsAndBiasesWithDataSource:")
+	_mPSCNNConvolutionSelReloadWeightsAndBiasesWithCommandBufferState                                     = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
+	_mPSCNNConvolutionSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary                 = objc.RegisterName("exportWeightsAndBiasesWithCommandBuffer:resultStateCanBeTemporary:")
+	_mPSCNNConvolutionSelInputFeatureChannels                                                             = objc.RegisterName("inputFeatureChannels")
+	_mPSCNNConvolutionSelOutputFeatureChannels                                                            = objc.RegisterName("outputFeatureChannels")
+	_mPSCNNConvolutionSelGroups                                                                           = objc.RegisterName("groups")
+	_mPSCNNConvolutionSelDataSource                                                                       = objc.RegisterName("dataSource")
+	_mPSCNNConvolutionSelSubPixelScaleFactor                                                              = objc.RegisterName("subPixelScaleFactor")
+	_mPSCNNConvolutionSelNeuron                                                                           = objc.RegisterName("neuron")
+	_mPSCNNConvolutionSelNeuronType                                                                       = objc.RegisterName("neuronType")
+	_mPSCNNConvolutionSelNeuronParameterA                                                                 = objc.RegisterName("neuronParameterA")
+	_mPSCNNConvolutionSelNeuronParameterB                                                                 = objc.RegisterName("neuronParameterB")
+	_mPSCNNConvolutionSelNeuronParameterC                                                                 = objc.RegisterName("neuronParameterC")
+	_mPSCNNConvolutionSelFusedNeuronDescriptor                                                            = objc.RegisterName("fusedNeuronDescriptor")
+	_mPSCNNConvolutionSelChannelMultiplier                                                                = objc.RegisterName("channelMultiplier")
+	_mPSCNNConvolutionSelAccumulatorPrecisionOption                                                       = objc.RegisterName("accumulatorPrecisionOption")
+	_mPSCNNConvolutionSelSetAccumulatorPrecisionOption                                                    = objc.RegisterName("setAccumulatorPrecisionOption:")
 )
 
 func MPSCNNConvolutionFromID(id objc.ID) *MPSCNNConvolution {
@@ -62,28 +62,36 @@ func MPSCNNConvolutionFromID(id objc.ID) *MPSCNNConvolution {
 // @abstract   Initializes a convolution kernel @param      device                          The MTLDevice on which this MPSCNNConvolution filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNConvolution uses to obtain the weights and bias terms for the CNN convolution filter. @return     A valid MPSCNNConvolution object or nil, if failure.
 func (o *MPSCNNConvolution) InitWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelInitWithDeviceWeights, device, weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionFromID(_ret)
 }
 
 // @abstract   Initializes a convolution kernel WARNING:                        This API is depreated and will be removed in the future. It cannot be used when training. Also serialization/unserialization wont work for MPSCNNConvolution objects created with this init. Please move onto using initWithDevice:weights:. @param      device                          The MTLDevice on which this MPSCNNConvolution filter will be used @param      convolutionDescriptor           A pointer to a MPSCNNConvolutionDescriptor. @param      kernelWeights                   A pointer to a weights array.  Each entry is a float value. The number of entries is = inputFeatureChannels * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ inputChannels / groups ] Weights are converted to half float (fp16) internally for best performance. @param      biasTerms                       A pointer to bias terms to be applied to the convolution output.  Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps @param      flags                           Currently unused. Pass MPSCNNConvolutionFlagsNone @return     A valid MPSCNNConvolution object or nil, if failure.
 func (o *MPSCNNConvolution) InitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags(device metal.MTLDevice, convolutionDescriptor *mpsneuralnetwork.MPSCNNConvolutionDescriptor, kernelWeights *float32, biasTerms *float32, flags mpsneuralnetwork.MPSCNNConvolutionFlags) *MPSCNNConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelInitWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags, device, convolutionDescriptor.Ptr(), kernelWeights, biasTerms, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNConvolution) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionFromID(_ret)
 }
 
 // @abstract   Allocate a MPCNNConvolutionGradientSState to hold the results from a -encodeBatchToCommandBuffer... operation @param      sourceImage         The MPSImage consumed by the associated -encode call. @param      sourceStates        The list of MPSStates consumed by the associated -encode call, for a batch size of 1. @return     The list of states produced by the -encode call for batch size of 1. -isResultStateReusedAcrossBatch returns YES for MPSCNNConvolution so same state is used across entire batch. State object is not reusasable across batches.
 func (o *MPSCNNConvolution) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionGradientState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelResultStateForSourceImageSourceStatesDestinationImage, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionGradientStateFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *MPSCNNConvolution) ResultStateBatchForSourceImageSourceStatesDestinatio
 
 func (o *MPSCNNConvolution) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNConvolutionGradientState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionGradientStateFromID(_ret)
 }
 
@@ -121,7 +131,9 @@ func (o *MPSCNNConvolution) ReloadWeightsAndBiasesWithCommandBufferState(command
 // @abstract   GPU side export. Enqueue a kernel to export current weights and biases stored in MPSCNNConvoltion's internal buffers into weights and biases MTLBuffer returned in MPSCNNConvolutionWeightsAndBiasesState. @param      commandBuffer              Metal command buffer on which export kernel is enqueued. @param      resultStateCanBeTemporary  If FALSE, state returned will be non-temporary. If TRUE, returned state may or may not be temporary. @return     MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffer to which weights got exported. This state and be temporary or non-temporary depending on the flag resultStateCanBeTemporary
 func (o *MPSCNNConvolution) ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer metal.MTLCommandBuffer, resultStateCanBeTemporary bool) *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary, commandBuffer, resultStateCanBeTemporary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesStateFromID(_ret)
 }
 
@@ -188,7 +200,9 @@ func (o *MPSCNNConvolution) NeuronParameterC() float32 {
 // @abstract   Fused neuron descritor passed in convolution descriptor for fusion with convolution. @discussion Please see class description for interpretation of c.
 func (o *MPSCNNConvolution) FusedNeuronDescriptor() *mpsneuralnetwork.MPSNNNeuronDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionSelFusedNeuronDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNNeuronDescriptorFromID(_ret)
 }
 
@@ -208,4 +222,3 @@ func (o *MPSCNNConvolution) AccumulatorPrecisionOption() mpsneuralnetwork.MPSNNC
 func (o *MPSCNNConvolution) SetAccumulatorPrecisionOption(accumulatorPrecisionOption mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) {
 	o.Ptr().Send(_mPSCNNConvolutionSelSetAccumulatorPrecisionOption, accumulatorPrecisionOption)
 }
-

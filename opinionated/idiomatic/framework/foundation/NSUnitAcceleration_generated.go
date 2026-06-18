@@ -54,4 +54,3 @@ type UnitAccelerationable interface {
 }
 
 var _ UnitAccelerationable = (*UnitAcceleration)(nil)
-

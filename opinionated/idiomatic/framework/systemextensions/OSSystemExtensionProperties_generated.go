@@ -97,4 +97,3 @@ type SystemExtensionPropertiesable interface {
 }
 
 var _ SystemExtensionPropertiesable = (*SystemExtensionProperties)(nil)
-

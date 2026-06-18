@@ -26,4 +26,3 @@ func MTLFunctionStitchingAttributeAlwaysInlineFromID(id objc.ID) *MTLFunctionSti
 	purego.Track(o)
 	return o
 }
-

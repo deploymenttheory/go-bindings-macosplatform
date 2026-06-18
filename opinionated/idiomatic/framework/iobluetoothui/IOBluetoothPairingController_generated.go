@@ -146,4 +146,3 @@ type BluetoothPairingControllerable interface {
 }
 
 var _ BluetoothPairingControllerable = (*BluetoothPairingController)(nil)
-

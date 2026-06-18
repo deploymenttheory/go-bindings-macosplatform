@@ -68,4 +68,3 @@ type MatchedPlayersable interface {
 }
 
 var _ MatchedPlayersable = (*MatchedPlayers)(nil)
-

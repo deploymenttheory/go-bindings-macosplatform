@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestEventEventFromID(id objc.ID) *MTRTestClusterCluste
 	purego.Track(o)
 	return o
 }
-

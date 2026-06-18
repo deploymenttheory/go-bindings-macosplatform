@@ -96,7 +96,9 @@ func (x *CNNPoolingL2Norm) WithDestinationImageAllocator(destinationImageAllocat
 
 func (x *CNNPoolingL2Norm) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
-func (x *CNNPoolingL2Norm) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNPoolingL2Norm) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
 // CNNPoolingL2Normable is the interface implemented by [CNNPoolingL2Norm], for mocking and DI.
 type CNNPoolingL2Normable interface {
@@ -112,4 +114,3 @@ type CNNPoolingL2Normable interface {
 }
 
 var _ CNNPoolingL2Normable = (*CNNPoolingL2Norm)(nil)
-

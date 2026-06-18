@@ -19,10 +19,10 @@ type GKChallengeEventHandler struct {
 }
 
 var (
-	_clsGKChallengeEventHandler = _objcClass("GKChallengeEventHandler")
+	_clsGKChallengeEventHandler                      = _objcClass("GKChallengeEventHandler")
 	_gKChallengeEventHandlerSelChallengeEventHandler = objc.RegisterName("challengeEventHandler")
-	_gKChallengeEventHandlerSelDelegate = objc.RegisterName("delegate")
-	_gKChallengeEventHandlerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_gKChallengeEventHandlerSelDelegate              = objc.RegisterName("delegate")
+	_gKChallengeEventHandlerSelSetDelegate           = objc.RegisterName("setDelegate:")
 )
 
 func GKChallengeEventHandlerFromID(id objc.ID) *GKChallengeEventHandler {
@@ -38,7 +38,9 @@ func GKChallengeEventHandlerFromID(id objc.ID) *GKChallengeEventHandler {
 // Deprecated: No longer supported.
 func GKChallengeEventHandlerChallengeEventHandler() *GKChallengeEventHandler {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKChallengeEventHandler), _gKChallengeEventHandlerSelChallengeEventHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKChallengeEventHandlerFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *GKChallengeEventHandler) Delegate() GKChallengeEventHandlerDelegate {
 func (o *GKChallengeEventHandler) SetDelegate(delegate GKChallengeEventHandlerDelegate) {
 	o.Ptr().Send(_gKChallengeEventHandlerSelSetDelegate, delegate)
 }
-

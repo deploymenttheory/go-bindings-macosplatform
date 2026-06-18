@@ -16,16 +16,16 @@ type WKWebExtensionControllerConfiguration struct {
 }
 
 var (
-	_clsWKWebExtensionControllerConfiguration = _objcClass("WKWebExtensionControllerConfiguration")
-	_wKWebExtensionControllerConfigurationSelDefaultConfiguration = objc.RegisterName("defaultConfiguration")
-	_wKWebExtensionControllerConfigurationSelNonPersistentConfiguration = objc.RegisterName("nonPersistentConfiguration")
+	_clsWKWebExtensionControllerConfiguration                            = _objcClass("WKWebExtensionControllerConfiguration")
+	_wKWebExtensionControllerConfigurationSelDefaultConfiguration        = objc.RegisterName("defaultConfiguration")
+	_wKWebExtensionControllerConfigurationSelNonPersistentConfiguration  = objc.RegisterName("nonPersistentConfiguration")
 	_wKWebExtensionControllerConfigurationSelConfigurationWithIdentifier = objc.RegisterName("configurationWithIdentifier:")
-	_wKWebExtensionControllerConfigurationSelIsPersistent = objc.RegisterName("isPersistent")
-	_wKWebExtensionControllerConfigurationSelIdentifier = objc.RegisterName("identifier")
-	_wKWebExtensionControllerConfigurationSelWebViewConfiguration = objc.RegisterName("webViewConfiguration")
-	_wKWebExtensionControllerConfigurationSelSetWebViewConfiguration = objc.RegisterName("setWebViewConfiguration:")
-	_wKWebExtensionControllerConfigurationSelDefaultWebsiteDataStore = objc.RegisterName("defaultWebsiteDataStore")
-	_wKWebExtensionControllerConfigurationSelSetDefaultWebsiteDataStore = objc.RegisterName("setDefaultWebsiteDataStore:")
+	_wKWebExtensionControllerConfigurationSelIsPersistent                = objc.RegisterName("isPersistent")
+	_wKWebExtensionControllerConfigurationSelIdentifier                  = objc.RegisterName("identifier")
+	_wKWebExtensionControllerConfigurationSelWebViewConfiguration        = objc.RegisterName("webViewConfiguration")
+	_wKWebExtensionControllerConfigurationSelSetWebViewConfiguration     = objc.RegisterName("setWebViewConfiguration:")
+	_wKWebExtensionControllerConfigurationSelDefaultWebsiteDataStore     = objc.RegisterName("defaultWebsiteDataStore")
+	_wKWebExtensionControllerConfigurationSelSetDefaultWebsiteDataStore  = objc.RegisterName("setDefaultWebsiteDataStore:")
 )
 
 func WKWebExtensionControllerConfigurationFromID(id objc.ID) *WKWebExtensionControllerConfiguration {
@@ -38,24 +38,30 @@ func WKWebExtensionControllerConfigurationFromID(id objc.ID) *WKWebExtensionCont
 	return o
 }
 
-// @abstract Returns a new default configuration that is persistent and not unique. @discussion If a ``WKWebExtensionController`` is associated with a persistent configuration, data will be written to the file system in a common location. When using multiple extension controllers, each controller should use a unique configuration to avoid conflicts. @seealso configurationWithIdentifier:
+// @abstract Returns a new default configuration that is persistent and not unique. @discussion If a “WKWebExtensionController“ is associated with a persistent configuration, data will be written to the file system in a common location. When using multiple extension controllers, each controller should use a unique configuration to avoid conflicts. @seealso configurationWithIdentifier:
 func WKWebExtensionControllerConfigurationDefaultConfiguration() *WKWebExtensionControllerConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionControllerConfiguration), _wKWebExtensionControllerConfigurationSelDefaultConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerConfigurationFromID(_ret)
 }
 
-// @abstract Returns a new non-persistent configuration. @discussion If a ``WKWebExtensionController`` is associated with a non-persistent configuration, no data will be written to the file system. This is useful for extensions in "private browsing" situations.
+// @abstract Returns a new non-persistent configuration. @discussion If a “WKWebExtensionController“ is associated with a non-persistent configuration, no data will be written to the file system. This is useful for extensions in "private browsing" situations.
 func WKWebExtensionControllerConfigurationNonPersistentConfiguration() *WKWebExtensionControllerConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionControllerConfiguration), _wKWebExtensionControllerConfigurationSelNonPersistentConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerConfigurationFromID(_ret)
 }
 
-// @abstract Returns a new configuration that is persistent and unique for the specified identifier. @discussion If a ``WKWebExtensionController`` is associated with a unique persistent configuration, data will be written to the file system in a unique location based on the specified identifier. @seealso defaultConfiguration
+// @abstract Returns a new configuration that is persistent and unique for the specified identifier. @discussion If a “WKWebExtensionController“ is associated with a unique persistent configuration, data will be written to the file system in a unique location based on the specified identifier. @seealso defaultConfiguration
 func WKWebExtensionControllerConfigurationConfigurationWithIdentifier(identifier *foundation.NSUUID) *WKWebExtensionControllerConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWKWebExtensionControllerConfiguration), _wKWebExtensionControllerConfigurationSelConfigurationWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerConfigurationFromID(_ret)
 }
 
@@ -68,14 +74,18 @@ func (o *WKWebExtensionControllerConfiguration) IsPersistent() bool {
 // @abstract The unique identifier used for persistent configuration storage, or `nil` when it is the default or not persistent.
 func (o *WKWebExtensionControllerConfiguration) Identifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerConfigurationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @abstract The web view configuration to be used as a basis for configuring web views in extension contexts.
 func (o *WKWebExtensionControllerConfiguration) WebViewConfiguration() *WKWebViewConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerConfigurationSelWebViewConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebViewConfigurationFromID(_ret)
 }
 
@@ -83,14 +93,15 @@ func (o *WKWebExtensionControllerConfiguration) SetWebViewConfiguration(webViewC
 	o.Ptr().Send(_wKWebExtensionControllerConfigurationSelSetWebViewConfiguration, webViewConfiguration.Ptr())
 }
 
-// @abstract The default data store for website data and cookie access in extension contexts. @discussion This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to ``WKWebsiteDataStore.defaultDataStore``. @note In addition to this data store, extensions can also access other data stores, such as non-persistent ones, for any open tabs.
+// @abstract The default data store for website data and cookie access in extension contexts. @discussion This property sets the primary data store for managing website data, including cookies, which extensions can access, subject to the granted permissions within the extension contexts. Defaults to “WKWebsiteDataStore.defaultDataStore“. @note In addition to this data store, extensions can also access other data stores, such as non-persistent ones, for any open tabs.
 func (o *WKWebExtensionControllerConfiguration) DefaultWebsiteDataStore() *WKWebsiteDataStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerConfigurationSelDefaultWebsiteDataStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebsiteDataStoreFromID(_ret)
 }
 
 func (o *WKWebExtensionControllerConfiguration) SetDefaultWebsiteDataStore(defaultWebsiteDataStore *WKWebsiteDataStore) {
 	o.Ptr().Send(_wKWebExtensionControllerConfigurationSelSetDefaultWebsiteDataStore, defaultWebsiteDataStore.Ptr())
 }
-

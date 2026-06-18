@@ -80,4 +80,3 @@ type VideoProcessorable interface {
 }
 
 var _ VideoProcessorable = (*VideoProcessor)(nil)
-

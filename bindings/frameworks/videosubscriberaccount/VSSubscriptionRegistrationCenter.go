@@ -16,9 +16,9 @@ type VSSubscriptionRegistrationCenter struct {
 }
 
 var (
-	_clsVSSubscriptionRegistrationCenter = _objcClass("VSSubscriptionRegistrationCenter")
+	_clsVSSubscriptionRegistrationCenter                                      = _objcClass("VSSubscriptionRegistrationCenter")
 	_vSSubscriptionRegistrationCenterSelDefaultSubscriptionRegistrationCenter = objc.RegisterName("defaultSubscriptionRegistrationCenter")
-	_vSSubscriptionRegistrationCenterSelSetCurrentSubscription = objc.RegisterName("setCurrentSubscription:")
+	_vSSubscriptionRegistrationCenterSelSetCurrentSubscription                = objc.RegisterName("setCurrentSubscription:")
 )
 
 func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrationCenter {
@@ -34,7 +34,9 @@ func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrat
 // Use the default subscription registration center to tell the system about the customer's ability to access content within your app.
 func VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVSSubscriptionRegistrationCenter), _vSSubscriptionRegistrationCenterSelDefaultSubscriptionRegistrationCenter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSSubscriptionRegistrationCenterFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter() *VS
 func (o *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
 	o.Ptr().Send(_vSSubscriptionRegistrationCenterSelSetCurrentSubscription, currentSubscription.Ptr())
 }
-

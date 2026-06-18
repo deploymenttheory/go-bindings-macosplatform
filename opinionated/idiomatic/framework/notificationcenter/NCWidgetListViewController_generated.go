@@ -162,4 +162,3 @@ type WidgetListViewControllerable interface {
 }
 
 var _ WidgetListViewControllerable = (*WidgetListViewController)(nil)
-

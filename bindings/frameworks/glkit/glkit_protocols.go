@@ -7,4 +7,3 @@ package glkit
 type GLKNamedEffect interface {
 	PrepareToDraw()
 }
-

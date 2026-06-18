@@ -19,51 +19,51 @@ type NSPrintOperation struct {
 }
 
 var (
-	_clsNSPrintOperation = _objcClass("NSPrintOperation")
-	_nSPrintOperationSelPrintOperationWithViewPrintInfo = objc.RegisterName("printOperationWithView:printInfo:")
-	_nSPrintOperationSelPDFOperationWithViewInsideRectToDataPrintInfo = objc.RegisterName("PDFOperationWithView:insideRect:toData:printInfo:")
-	_nSPrintOperationSelPDFOperationWithViewInsideRectToPathPrintInfo = objc.RegisterName("PDFOperationWithView:insideRect:toPath:printInfo:")
-	_nSPrintOperationSelEPSOperationWithViewInsideRectToDataPrintInfo = objc.RegisterName("EPSOperationWithView:insideRect:toData:printInfo:")
-	_nSPrintOperationSelEPSOperationWithViewInsideRectToPathPrintInfo = objc.RegisterName("EPSOperationWithView:insideRect:toPath:printInfo:")
-	_nSPrintOperationSelPrintOperationWithView = objc.RegisterName("printOperationWithView:")
-	_nSPrintOperationSelPDFOperationWithViewInsideRectToData = objc.RegisterName("PDFOperationWithView:insideRect:toData:")
-	_nSPrintOperationSelEPSOperationWithViewInsideRectToData = objc.RegisterName("EPSOperationWithView:insideRect:toData:")
+	_clsNSPrintOperation                                                            = _objcClass("NSPrintOperation")
+	_nSPrintOperationSelPrintOperationWithViewPrintInfo                             = objc.RegisterName("printOperationWithView:printInfo:")
+	_nSPrintOperationSelPDFOperationWithViewInsideRectToDataPrintInfo               = objc.RegisterName("PDFOperationWithView:insideRect:toData:printInfo:")
+	_nSPrintOperationSelPDFOperationWithViewInsideRectToPathPrintInfo               = objc.RegisterName("PDFOperationWithView:insideRect:toPath:printInfo:")
+	_nSPrintOperationSelEPSOperationWithViewInsideRectToDataPrintInfo               = objc.RegisterName("EPSOperationWithView:insideRect:toData:printInfo:")
+	_nSPrintOperationSelEPSOperationWithViewInsideRectToPathPrintInfo               = objc.RegisterName("EPSOperationWithView:insideRect:toPath:printInfo:")
+	_nSPrintOperationSelPrintOperationWithView                                      = objc.RegisterName("printOperationWithView:")
+	_nSPrintOperationSelPDFOperationWithViewInsideRectToData                        = objc.RegisterName("PDFOperationWithView:insideRect:toData:")
+	_nSPrintOperationSelEPSOperationWithViewInsideRectToData                        = objc.RegisterName("EPSOperationWithView:insideRect:toData:")
 	_nSPrintOperationSelRunOperationModalForWindowDelegateDidRunSelectorContextInfo = objc.RegisterName("runOperationModalForWindow:delegate:didRunSelector:contextInfo:")
-	_nSPrintOperationSelRunOperation = objc.RegisterName("runOperation")
-	_nSPrintOperationSelCreateContext = objc.RegisterName("createContext")
-	_nSPrintOperationSelDestroyContext = objc.RegisterName("destroyContext")
-	_nSPrintOperationSelDeliverResult = objc.RegisterName("deliverResult")
-	_nSPrintOperationSelCleanUpOperation = objc.RegisterName("cleanUpOperation")
-	_nSPrintOperationSelCurrentOperation = objc.RegisterName("currentOperation")
-	_nSPrintOperationSelSetCurrentOperation = objc.RegisterName("setCurrentOperation:")
-	_nSPrintOperationSelIsCopyingOperation = objc.RegisterName("isCopyingOperation")
-	_nSPrintOperationSelPreferredRenderingQuality = objc.RegisterName("preferredRenderingQuality")
-	_nSPrintOperationSelJobTitle = objc.RegisterName("jobTitle")
-	_nSPrintOperationSelSetJobTitle = objc.RegisterName("setJobTitle:")
-	_nSPrintOperationSelShowsPrintPanel = objc.RegisterName("showsPrintPanel")
-	_nSPrintOperationSelSetShowsPrintPanel = objc.RegisterName("setShowsPrintPanel:")
-	_nSPrintOperationSelShowsProgressPanel = objc.RegisterName("showsProgressPanel")
-	_nSPrintOperationSelSetShowsProgressPanel = objc.RegisterName("setShowsProgressPanel:")
-	_nSPrintOperationSelPrintPanel = objc.RegisterName("printPanel")
-	_nSPrintOperationSelSetPrintPanel = objc.RegisterName("setPrintPanel:")
-	_nSPrintOperationSelPDFPanel = objc.RegisterName("PDFPanel")
-	_nSPrintOperationSelSetPDFPanel = objc.RegisterName("setPDFPanel:")
-	_nSPrintOperationSelCanSpawnSeparateThread = objc.RegisterName("canSpawnSeparateThread")
-	_nSPrintOperationSelSetCanSpawnSeparateThread = objc.RegisterName("setCanSpawnSeparateThread:")
-	_nSPrintOperationSelPageOrder = objc.RegisterName("pageOrder")
-	_nSPrintOperationSelSetPageOrder = objc.RegisterName("setPageOrder:")
-	_nSPrintOperationSelView = objc.RegisterName("view")
-	_nSPrintOperationSelPrintInfo = objc.RegisterName("printInfo")
-	_nSPrintOperationSelSetPrintInfo = objc.RegisterName("setPrintInfo:")
-	_nSPrintOperationSelContext = objc.RegisterName("context")
-	_nSPrintOperationSelPageRange = objc.RegisterName("pageRange")
-	_nSPrintOperationSelCurrentPage = objc.RegisterName("currentPage")
-	_nSPrintOperationSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSPrintOperationSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSPrintOperationSelSetJobStyleHint = objc.RegisterName("setJobStyleHint:")
-	_nSPrintOperationSelJobStyleHint = objc.RegisterName("jobStyleHint")
-	_nSPrintOperationSelSetShowPanels = objc.RegisterName("setShowPanels:")
-	_nSPrintOperationSelShowPanels = objc.RegisterName("showPanels")
+	_nSPrintOperationSelRunOperation                                                = objc.RegisterName("runOperation")
+	_nSPrintOperationSelCreateContext                                               = objc.RegisterName("createContext")
+	_nSPrintOperationSelDestroyContext                                              = objc.RegisterName("destroyContext")
+	_nSPrintOperationSelDeliverResult                                               = objc.RegisterName("deliverResult")
+	_nSPrintOperationSelCleanUpOperation                                            = objc.RegisterName("cleanUpOperation")
+	_nSPrintOperationSelCurrentOperation                                            = objc.RegisterName("currentOperation")
+	_nSPrintOperationSelSetCurrentOperation                                         = objc.RegisterName("setCurrentOperation:")
+	_nSPrintOperationSelIsCopyingOperation                                          = objc.RegisterName("isCopyingOperation")
+	_nSPrintOperationSelPreferredRenderingQuality                                   = objc.RegisterName("preferredRenderingQuality")
+	_nSPrintOperationSelJobTitle                                                    = objc.RegisterName("jobTitle")
+	_nSPrintOperationSelSetJobTitle                                                 = objc.RegisterName("setJobTitle:")
+	_nSPrintOperationSelShowsPrintPanel                                             = objc.RegisterName("showsPrintPanel")
+	_nSPrintOperationSelSetShowsPrintPanel                                          = objc.RegisterName("setShowsPrintPanel:")
+	_nSPrintOperationSelShowsProgressPanel                                          = objc.RegisterName("showsProgressPanel")
+	_nSPrintOperationSelSetShowsProgressPanel                                       = objc.RegisterName("setShowsProgressPanel:")
+	_nSPrintOperationSelPrintPanel                                                  = objc.RegisterName("printPanel")
+	_nSPrintOperationSelSetPrintPanel                                               = objc.RegisterName("setPrintPanel:")
+	_nSPrintOperationSelPDFPanel                                                    = objc.RegisterName("PDFPanel")
+	_nSPrintOperationSelSetPDFPanel                                                 = objc.RegisterName("setPDFPanel:")
+	_nSPrintOperationSelCanSpawnSeparateThread                                      = objc.RegisterName("canSpawnSeparateThread")
+	_nSPrintOperationSelSetCanSpawnSeparateThread                                   = objc.RegisterName("setCanSpawnSeparateThread:")
+	_nSPrintOperationSelPageOrder                                                   = objc.RegisterName("pageOrder")
+	_nSPrintOperationSelSetPageOrder                                                = objc.RegisterName("setPageOrder:")
+	_nSPrintOperationSelView                                                        = objc.RegisterName("view")
+	_nSPrintOperationSelPrintInfo                                                   = objc.RegisterName("printInfo")
+	_nSPrintOperationSelSetPrintInfo                                                = objc.RegisterName("setPrintInfo:")
+	_nSPrintOperationSelContext                                                     = objc.RegisterName("context")
+	_nSPrintOperationSelPageRange                                                   = objc.RegisterName("pageRange")
+	_nSPrintOperationSelCurrentPage                                                 = objc.RegisterName("currentPage")
+	_nSPrintOperationSelSetAccessoryView                                            = objc.RegisterName("setAccessoryView:")
+	_nSPrintOperationSelAccessoryView                                               = objc.RegisterName("accessoryView")
+	_nSPrintOperationSelSetJobStyleHint                                             = objc.RegisterName("setJobStyleHint:")
+	_nSPrintOperationSelJobStyleHint                                                = objc.RegisterName("jobStyleHint")
+	_nSPrintOperationSelSetShowPanels                                               = objc.RegisterName("setShowPanels:")
+	_nSPrintOperationSelShowPanels                                                  = objc.RegisterName("showPanels")
 )
 
 func NSPrintOperationFromID(id objc.ID) *NSPrintOperation {
@@ -78,49 +78,65 @@ func NSPrintOperationFromID(id objc.ID) *NSPrintOperation {
 
 func NSPrintOperationPrintOperationWithViewPrintInfo(view *NSView, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPrintOperationWithViewPrintInfo, view.Ptr(), printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationPDFOperationWithViewInsideRectToDataPrintInfo(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToDataPrintInfo, view.Ptr(), rect, data.Ptr(), printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationPDFOperationWithViewInsideRectToPathPrintInfo(view *NSView, rect corefoundation.CGRect, path *foundation.NSString, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToPathPrintInfo, view.Ptr(), rect, path.Ptr(), printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationEPSOperationWithViewInsideRectToDataPrintInfo(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToDataPrintInfo, view.Ptr(), rect, data.Ptr(), printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationEPSOperationWithViewInsideRectToPathPrintInfo(view *NSView, rect corefoundation.CGRect, path *foundation.NSString, printInfo *NSPrintInfo) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToPathPrintInfo, view.Ptr(), rect, path.Ptr(), printInfo.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationPrintOperationWithView(view *NSView) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPrintOperationWithView, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationPDFOperationWithViewInsideRectToData(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelPDFOperationWithViewInsideRectToData, view.Ptr(), rect, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
 func NSPrintOperationEPSOperationWithViewInsideRectToData(view *NSView, rect corefoundation.CGRect, data *foundation.NSMutableData) *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelEPSOperationWithViewInsideRectToData, view.Ptr(), rect, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
@@ -135,7 +151,9 @@ func (o *NSPrintOperation) RunOperation() bool {
 
 func (o *NSPrintOperation) CreateContext() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelCreateContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -154,7 +172,9 @@ func (o *NSPrintOperation) CleanUpOperation() {
 
 func NSPrintOperationCurrentOperation() *NSPrintOperation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPrintOperation), _nSPrintOperationSelCurrentOperation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintOperationFromID(_ret)
 }
 
@@ -174,7 +194,9 @@ func (o *NSPrintOperation) PreferredRenderingQuality() NSPrintRenderingQuality {
 
 func (o *NSPrintOperation) JobTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelJobTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -202,7 +224,9 @@ func (o *NSPrintOperation) SetShowsProgressPanel(showsProgressPanel bool) {
 
 func (o *NSPrintOperation) PrintPanel() *NSPrintPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelPrintPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintPanelFromID(_ret)
 }
 
@@ -212,7 +236,9 @@ func (o *NSPrintOperation) SetPrintPanel(printPanel *NSPrintPanel) {
 
 func (o *NSPrintOperation) PDFPanel() *NSPDFPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelPDFPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPDFPanelFromID(_ret)
 }
 
@@ -240,13 +266,17 @@ func (o *NSPrintOperation) SetPageOrder(pageOrder NSPrintingPageOrder) {
 
 func (o *NSPrintOperation) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSPrintOperation) PrintInfo() *NSPrintInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelPrintInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPrintInfoFromID(_ret)
 }
 
@@ -256,7 +286,9 @@ func (o *NSPrintOperation) SetPrintInfo(printInfo *NSPrintInfo) {
 
 func (o *NSPrintOperation) Context() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -278,7 +310,9 @@ func (o *NSPrintOperation) SetAccessoryView(view *NSView) {
 // Deprecated: Use -[NSPrintPanel accessoryControllers] instead
 func (o *NSPrintOperation) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -290,7 +324,9 @@ func (o *NSPrintOperation) SetJobStyleHint(hint *foundation.NSString) {
 // Deprecated: since macOS 10.5.
 func (o *NSPrintOperation) JobStyleHint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPrintOperationSelJobStyleHint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -304,4 +340,3 @@ func (o *NSPrintOperation) ShowPanels() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSPrintOperationSelShowPanels)
 	return _ret
 }
-

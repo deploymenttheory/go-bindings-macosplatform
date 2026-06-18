@@ -165,4 +165,3 @@ type NNOptimizerAdamable interface {
 }
 
 var _ NNOptimizerAdamable = (*NNOptimizerAdam)(nil)
-

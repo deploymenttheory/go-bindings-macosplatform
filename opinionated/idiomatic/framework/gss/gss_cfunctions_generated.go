@@ -418,4 +418,3 @@ func Gsskrb5RegisterAcceptorIdentity(identity string) uint32 {
 func Krb5GssRegisterAcceptorIdentity(identity string) uint32 {
 	return raw.Krb5GssRegisterAcceptorIdentity(identity)
 }
-

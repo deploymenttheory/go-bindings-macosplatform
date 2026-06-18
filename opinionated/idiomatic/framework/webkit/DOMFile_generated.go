@@ -49,7 +49,9 @@ func (x *DOMFile) asDOMBlob() *raw.DOMBlob { return &x.inner.DOMBlob }
 
 func (x *DOMFile) asDOMObject() *raw.DOMObject { return &x.inner.DOMBlob.DOMObject }
 
-func (x *DOMFile) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMBlob.DOMObject.WebScriptObject }
+func (x *DOMFile) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMBlob.DOMObject.WebScriptObject
+}
 
 // DOMFileable is the interface implemented by [DOMFile], for mocking and DI.
 type DOMFileable interface {
@@ -58,4 +60,3 @@ type DOMFileable interface {
 }
 
 var _ DOMFileable = (*DOMFile)(nil)
-

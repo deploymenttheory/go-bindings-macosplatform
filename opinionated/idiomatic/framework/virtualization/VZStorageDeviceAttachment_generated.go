@@ -35,7 +35,9 @@ func NewStorageDeviceAttachment() *StorageDeviceAttachment {
 	return &StorageDeviceAttachment{inner: raw.VZStorageDeviceAttachmentFromID(_id)}
 }
 
-func (x *StorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return x.inner }
+func (x *StorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
+	return x.inner
+}
 
 // StorageDeviceAttachmentable is the interface implemented by [StorageDeviceAttachment], for mocking and DI.
 type StorageDeviceAttachmentable interface {
@@ -43,4 +45,3 @@ type StorageDeviceAttachmentable interface {
 }
 
 var _ StorageDeviceAttachmentable = (*StorageDeviceAttachment)(nil)
-

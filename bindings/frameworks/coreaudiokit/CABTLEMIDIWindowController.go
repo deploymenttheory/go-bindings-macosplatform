@@ -26,4 +26,3 @@ func CABTLEMIDIWindowControllerFromID(id objc.ID) *CABTLEMIDIWindowController {
 	purego.Track(o)
 	return o
 }
-

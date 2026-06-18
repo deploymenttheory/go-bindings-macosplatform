@@ -16,7 +16,9 @@ type MTRICDManagementClusterUnregisterClientParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRICDManagementClusterUnregisterClientParams].
-func (x *MTRICDManagementClusterUnregisterClientParams) Unwrap() *raw.MTRICDManagementClusterUnregisterClientParams { return x.inner }
+func (x *MTRICDManagementClusterUnregisterClientParams) Unwrap() *raw.MTRICDManagementClusterUnregisterClientParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRICDManagementClusterUnregisterClientParamsable interface {
 }
 
 var _ MTRICDManagementClusterUnregisterClientParamsable = (*MTRICDManagementClusterUnregisterClientParams)(nil)
-

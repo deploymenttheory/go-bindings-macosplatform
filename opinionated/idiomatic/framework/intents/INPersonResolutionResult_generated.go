@@ -35,9 +35,13 @@ func NewPersonResolutionResult() *PersonResolutionResult {
 	return &PersonResolutionResult{inner: raw.INPersonResolutionResultFromID(_id)}
 }
 
-func (x *PersonResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult { return x.inner }
+func (x *PersonResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult {
+	return x.inner
+}
 
-func (x *PersonResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *PersonResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // PersonResolutionResultable is the interface implemented by [PersonResolutionResult], for mocking and DI.
 type PersonResolutionResultable interface {
@@ -45,4 +49,3 @@ type PersonResolutionResultable interface {
 }
 
 var _ PersonResolutionResultable = (*PersonResolutionResult)(nil)
-

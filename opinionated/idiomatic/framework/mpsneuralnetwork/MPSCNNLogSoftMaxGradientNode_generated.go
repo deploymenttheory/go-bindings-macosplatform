@@ -49,9 +49,13 @@ func (x *CNNLogSoftMaxGradientNode) WithLabel(label string) *CNNLogSoftMaxGradie
 	return x
 }
 
-func (x *CNNLogSoftMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNLogSoftMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNLogSoftMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNLogSoftMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNLogSoftMaxGradientNodeable is the interface implemented by [CNNLogSoftMaxGradientNode], for mocking and DI.
 type CNNLogSoftMaxGradientNodeable interface {
@@ -61,4 +65,3 @@ type CNNLogSoftMaxGradientNodeable interface {
 }
 
 var _ CNNLogSoftMaxGradientNodeable = (*CNNLogSoftMaxGradientNode)(nil)
-

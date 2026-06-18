@@ -16,14 +16,14 @@ type NSTokenField struct {
 }
 
 var (
-	_clsNSTokenField = _objcClass("NSTokenField")
-	_nSTokenFieldSelTokenStyle = objc.RegisterName("tokenStyle")
-	_nSTokenFieldSelSetTokenStyle = objc.RegisterName("setTokenStyle:")
-	_nSTokenFieldSelCompletionDelay = objc.RegisterName("completionDelay")
-	_nSTokenFieldSelSetCompletionDelay = objc.RegisterName("setCompletionDelay:")
-	_nSTokenFieldSelDefaultCompletionDelay = objc.RegisterName("defaultCompletionDelay")
-	_nSTokenFieldSelTokenizingCharacterSet = objc.RegisterName("tokenizingCharacterSet")
-	_nSTokenFieldSelSetTokenizingCharacterSet = objc.RegisterName("setTokenizingCharacterSet:")
+	_clsNSTokenField                              = _objcClass("NSTokenField")
+	_nSTokenFieldSelTokenStyle                    = objc.RegisterName("tokenStyle")
+	_nSTokenFieldSelSetTokenStyle                 = objc.RegisterName("setTokenStyle:")
+	_nSTokenFieldSelCompletionDelay               = objc.RegisterName("completionDelay")
+	_nSTokenFieldSelSetCompletionDelay            = objc.RegisterName("setCompletionDelay:")
+	_nSTokenFieldSelDefaultCompletionDelay        = objc.RegisterName("defaultCompletionDelay")
+	_nSTokenFieldSelTokenizingCharacterSet        = objc.RegisterName("tokenizingCharacterSet")
+	_nSTokenFieldSelSetTokenizingCharacterSet     = objc.RegisterName("setTokenizingCharacterSet:")
 	_nSTokenFieldSelDefaultTokenizingCharacterSet = objc.RegisterName("defaultTokenizingCharacterSet")
 )
 
@@ -62,7 +62,9 @@ func NSTokenFieldDefaultCompletionDelay() float64 {
 
 func (o *NSTokenField) TokenizingCharacterSet() *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTokenFieldSelTokenizingCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
@@ -72,7 +74,8 @@ func (o *NSTokenField) SetTokenizingCharacterSet(tokenizingCharacterSet *foundat
 
 func NSTokenFieldDefaultTokenizingCharacterSet() *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTokenField), _nSTokenFieldSelDefaultTokenizingCharacterSet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
-

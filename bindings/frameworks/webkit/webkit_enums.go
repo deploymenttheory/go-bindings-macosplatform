@@ -11,9 +11,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -32,7 +32,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 type DNSServiceAAAAPolicy int64
 
 const (
-	KDNSServiceAAAAPolicyNone DNSServiceAAAAPolicy = 0
+	KDNSServiceAAAAPolicyNone     DNSServiceAAAAPolicy = 0
 	KDNSServiceAAAAPolicyFallback DNSServiceAAAAPolicy = 1
 )
 
@@ -65,21 +65,21 @@ func (e DOMEventExceptionCode) String() string {
 type DOMExceptionCode int64
 
 const (
-	DOM_INDEX_SIZE_ERR DOMExceptionCode = 1
-	DOM_DOMSTRING_SIZE_ERR DOMExceptionCode = 2
-	DOM_HIERARCHY_REQUEST_ERR DOMExceptionCode = 3
-	DOM_WRONG_DOCUMENT_ERR DOMExceptionCode = 4
-	DOM_INVALID_CHARACTER_ERR DOMExceptionCode = 5
-	DOM_NO_DATA_ALLOWED_ERR DOMExceptionCode = 6
+	DOM_INDEX_SIZE_ERR              DOMExceptionCode = 1
+	DOM_DOMSTRING_SIZE_ERR          DOMExceptionCode = 2
+	DOM_HIERARCHY_REQUEST_ERR       DOMExceptionCode = 3
+	DOM_WRONG_DOCUMENT_ERR          DOMExceptionCode = 4
+	DOM_INVALID_CHARACTER_ERR       DOMExceptionCode = 5
+	DOM_NO_DATA_ALLOWED_ERR         DOMExceptionCode = 6
 	DOM_NO_MODIFICATION_ALLOWED_ERR DOMExceptionCode = 7
-	DOM_NOT_FOUND_ERR DOMExceptionCode = 8
-	DOM_NOT_SUPPORTED_ERR DOMExceptionCode = 9
-	DOM_INUSE_ATTRIBUTE_ERR DOMExceptionCode = 10
-	DOM_INVALID_STATE_ERR DOMExceptionCode = 11
-	DOM_SYNTAX_ERR DOMExceptionCode = 12
-	DOM_INVALID_MODIFICATION_ERR DOMExceptionCode = 13
-	DOM_NAMESPACE_ERR DOMExceptionCode = 14
-	DOM_INVALID_ACCESS_ERR DOMExceptionCode = 15
+	DOM_NOT_FOUND_ERR               DOMExceptionCode = 8
+	DOM_NOT_SUPPORTED_ERR           DOMExceptionCode = 9
+	DOM_INUSE_ATTRIBUTE_ERR         DOMExceptionCode = 10
+	DOM_INVALID_STATE_ERR           DOMExceptionCode = 11
+	DOM_SYNTAX_ERR                  DOMExceptionCode = 12
+	DOM_INVALID_MODIFICATION_ERR    DOMExceptionCode = 13
+	DOM_NAMESPACE_ERR               DOMExceptionCode = 14
+	DOM_INVALID_ACCESS_ERR          DOMExceptionCode = 15
 )
 
 func (e DOMExceptionCode) String() string {
@@ -123,7 +123,7 @@ type DOMRangeExceptionCode int64
 
 const (
 	DOM_BAD_BOUNDARYPOINTS_ERR DOMRangeExceptionCode = 1
-	DOM_INVALID_NODE_TYPE_ERR DOMRangeExceptionCode = 2
+	DOM_INVALID_NODE_TYPE_ERR  DOMRangeExceptionCode = 2
 )
 
 func (e DOMRangeExceptionCode) String() string {
@@ -141,7 +141,7 @@ type DOMXPathExceptionCode int64
 
 const (
 	DOM_INVALID_EXPRESSION_ERR DOMXPathExceptionCode = 51
-	DOM_TYPE_ERR DOMXPathExceptionCode = 52
+	DOM_TYPE_ERR               DOMXPathExceptionCode = 52
 )
 
 func (e DOMXPathExceptionCode) String() string {
@@ -158,10 +158,10 @@ func (e DOMXPathExceptionCode) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -186,7 +186,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -204,8 +204,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -241,8 +241,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -262,7 +262,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -280,18 +280,26 @@ func (e PMPageToPaperMappingType) String() string {
 type WKAudiovisualMediaTypes uint64
 
 const (
-	WKAudiovisualMediaTypeNone WKAudiovisualMediaTypes = 0
+	WKAudiovisualMediaTypeNone  WKAudiovisualMediaTypes = 0
 	WKAudiovisualMediaTypeAudio WKAudiovisualMediaTypes = 1
 	WKAudiovisualMediaTypeVideo WKAudiovisualMediaTypes = 2
-	WKAudiovisualMediaTypeAll WKAudiovisualMediaTypes = 18446744073709551615
+	WKAudiovisualMediaTypeAll   WKAudiovisualMediaTypes = 18446744073709551615
 )
 
 func (e WKAudiovisualMediaTypes) String() string {
 	var parts []string
-	if e&WKAudiovisualMediaTypeAudio != 0 { parts = append(parts, "WKAudiovisualMediaTypeAudio") }
-	if e&WKAudiovisualMediaTypeVideo != 0 { parts = append(parts, "WKAudiovisualMediaTypeVideo") }
-	if e&WKAudiovisualMediaTypeAll != 0 { parts = append(parts, "WKAudiovisualMediaTypeAll") }
-	if len(parts) == 0 { return "0" }
+	if e&WKAudiovisualMediaTypeAudio != 0 {
+		parts = append(parts, "WKAudiovisualMediaTypeAudio")
+	}
+	if e&WKAudiovisualMediaTypeVideo != 0 {
+		parts = append(parts, "WKAudiovisualMediaTypeVideo")
+	}
+	if e&WKAudiovisualMediaTypeAll != 0 {
+		parts = append(parts, "WKAudiovisualMediaTypeAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -299,8 +307,8 @@ type WKContentMode int64
 
 const (
 	WKContentModeRecommended WKContentMode = 0
-	WKContentModeMobile WKContentMode = 1
-	WKContentModeDesktop WKContentMode = 2
+	WKContentModeMobile      WKContentMode = 1
+	WKContentModeDesktop     WKContentMode = 2
 )
 
 func (e WKContentMode) String() string {
@@ -319,7 +327,7 @@ func (e WKContentMode) String() string {
 type WKCookiePolicy int64
 
 const (
-	WKCookiePolicyAllow WKCookiePolicy = 0
+	WKCookiePolicyAllow    WKCookiePolicy = 0
 	WKCookiePolicyDisallow WKCookiePolicy = 1
 )
 
@@ -338,8 +346,8 @@ type WKDialogResult int64
 
 const (
 	WKDialogResultShowDefault WKDialogResult = 1
-	WKDialogResultAskAgain WKDialogResult = 2
-	WKDialogResultHandled WKDialogResult = 3
+	WKDialogResultAskAgain    WKDialogResult = 2
+	WKDialogResultHandled     WKDialogResult = 3
 )
 
 func (e WKDialogResult) String() string {
@@ -359,7 +367,7 @@ type WKDownloadPlaceholderPolicy int64
 
 const (
 	WKDownloadPlaceholderPolicyDisable WKDownloadPlaceholderPolicy = 0
-	WKDownloadPlaceholderPolicyEnable WKDownloadPlaceholderPolicy = 1
+	WKDownloadPlaceholderPolicyEnable  WKDownloadPlaceholderPolicy = 1
 )
 
 func (e WKDownloadPlaceholderPolicy) String() string {
@@ -377,7 +385,7 @@ type WKDownloadRedirectPolicy int64
 
 const (
 	WKDownloadRedirectPolicyCancel WKDownloadRedirectPolicy = 0
-	WKDownloadRedirectPolicyAllow WKDownloadRedirectPolicy = 1
+	WKDownloadRedirectPolicyAllow  WKDownloadRedirectPolicy = 1
 )
 
 func (e WKDownloadRedirectPolicy) String() string {
@@ -394,23 +402,23 @@ func (e WKDownloadRedirectPolicy) String() string {
 type WKErrorCode int64
 
 const (
-	WKErrorUnknown WKErrorCode = 1
-	WKErrorWebContentProcessTerminated WKErrorCode = 2
-	WKErrorWebViewInvalidated WKErrorCode = 3
-	WKErrorJavaScriptExceptionOccurred WKErrorCode = 4
-	WKErrorJavaScriptResultTypeIsUnsupported WKErrorCode = 5
-	WKErrorContentRuleListStoreCompileFailed WKErrorCode = 6
-	WKErrorContentRuleListStoreLookUpFailed WKErrorCode = 7
-	WKErrorContentRuleListStoreRemoveFailed WKErrorCode = 8
+	WKErrorUnknown                             WKErrorCode = 1
+	WKErrorWebContentProcessTerminated         WKErrorCode = 2
+	WKErrorWebViewInvalidated                  WKErrorCode = 3
+	WKErrorJavaScriptExceptionOccurred         WKErrorCode = 4
+	WKErrorJavaScriptResultTypeIsUnsupported   WKErrorCode = 5
+	WKErrorContentRuleListStoreCompileFailed   WKErrorCode = 6
+	WKErrorContentRuleListStoreLookUpFailed    WKErrorCode = 7
+	WKErrorContentRuleListStoreRemoveFailed    WKErrorCode = 8
 	WKErrorContentRuleListStoreVersionMismatch WKErrorCode = 9
 	WKErrorAttributedStringContentFailedToLoad WKErrorCode = 10
 	WKErrorAttributedStringContentLoadTimedOut WKErrorCode = 11
-	WKErrorJavaScriptInvalidFrameTarget WKErrorCode = 12
-	WKErrorNavigationAppBoundDomain WKErrorCode = 13
-	WKErrorJavaScriptAppBoundDomain WKErrorCode = 14
-	WKErrorDuplicateCredential WKErrorCode = 15
-	WKErrorMalformedCredential WKErrorCode = 16
-	WKErrorCredentialNotFound WKErrorCode = 17
+	WKErrorJavaScriptInvalidFrameTarget        WKErrorCode = 12
+	WKErrorNavigationAppBoundDomain            WKErrorCode = 13
+	WKErrorJavaScriptAppBoundDomain            WKErrorCode = 14
+	WKErrorDuplicateCredential                 WKErrorCode = 15
+	WKErrorMalformedCredential                 WKErrorCode = 16
+	WKErrorCredentialNotFound                  WKErrorCode = 17
 )
 
 func (e WKErrorCode) String() string {
@@ -457,10 +465,10 @@ func (e WKErrorCode) String() string {
 type WKFullscreenState int64
 
 const (
-	WKFullscreenStateNotInFullscreen WKFullscreenState = 0
+	WKFullscreenStateNotInFullscreen    WKFullscreenState = 0
 	WKFullscreenStateEnteringFullscreen WKFullscreenState = 1
-	WKFullscreenStateInFullscreen WKFullscreenState = 2
-	WKFullscreenStateExitingFullscreen WKFullscreenState = 3
+	WKFullscreenStateInFullscreen       WKFullscreenState = 2
+	WKFullscreenStateExitingFullscreen  WKFullscreenState = 3
 )
 
 func (e WKFullscreenState) String() string {
@@ -481,9 +489,9 @@ func (e WKFullscreenState) String() string {
 type WKInactiveSchedulingPolicy int64
 
 const (
-	WKInactiveSchedulingPolicySuspend WKInactiveSchedulingPolicy = 0
+	WKInactiveSchedulingPolicySuspend  WKInactiveSchedulingPolicy = 0
 	WKInactiveSchedulingPolicyThrottle WKInactiveSchedulingPolicy = 1
-	WKInactiveSchedulingPolicyNone WKInactiveSchedulingPolicy = 2
+	WKInactiveSchedulingPolicyNone     WKInactiveSchedulingPolicy = 2
 )
 
 func (e WKInactiveSchedulingPolicy) String() string {
@@ -502,9 +510,9 @@ func (e WKInactiveSchedulingPolicy) String() string {
 type WKMediaCaptureState int64
 
 const (
-	WKMediaCaptureStateNone WKMediaCaptureState = 0
+	WKMediaCaptureStateNone   WKMediaCaptureState = 0
 	WKMediaCaptureStateActive WKMediaCaptureState = 1
-	WKMediaCaptureStateMuted WKMediaCaptureState = 2
+	WKMediaCaptureStateMuted  WKMediaCaptureState = 2
 )
 
 func (e WKMediaCaptureState) String() string {
@@ -523,8 +531,8 @@ func (e WKMediaCaptureState) String() string {
 type WKMediaCaptureType int64
 
 const (
-	WKMediaCaptureTypeCamera WKMediaCaptureType = 0
-	WKMediaCaptureTypeMicrophone WKMediaCaptureType = 1
+	WKMediaCaptureTypeCamera              WKMediaCaptureType = 0
+	WKMediaCaptureTypeMicrophone          WKMediaCaptureType = 1
 	WKMediaCaptureTypeCameraAndMicrophone WKMediaCaptureType = 2
 )
 
@@ -544,9 +552,9 @@ func (e WKMediaCaptureType) String() string {
 type WKMediaPlaybackState int64
 
 const (
-	WKMediaPlaybackStateNone WKMediaPlaybackState = 0
-	WKMediaPlaybackStatePlaying WKMediaPlaybackState = 1
-	WKMediaPlaybackStatePaused WKMediaPlaybackState = 2
+	WKMediaPlaybackStateNone      WKMediaPlaybackState = 0
+	WKMediaPlaybackStatePlaying   WKMediaPlaybackState = 1
+	WKMediaPlaybackStatePaused    WKMediaPlaybackState = 2
 	WKMediaPlaybackStateSuspended WKMediaPlaybackState = 3
 )
 
@@ -568,8 +576,8 @@ func (e WKMediaPlaybackState) String() string {
 type WKNavigationActionPolicy int64
 
 const (
-	WKNavigationActionPolicyCancel WKNavigationActionPolicy = 0
-	WKNavigationActionPolicyAllow WKNavigationActionPolicy = 1
+	WKNavigationActionPolicyCancel   WKNavigationActionPolicy = 0
+	WKNavigationActionPolicyAllow    WKNavigationActionPolicy = 1
 	WKNavigationActionPolicyDownload WKNavigationActionPolicy = 2
 )
 
@@ -589,8 +597,8 @@ func (e WKNavigationActionPolicy) String() string {
 type WKNavigationResponsePolicy int64
 
 const (
-	WKNavigationResponsePolicyCancel WKNavigationResponsePolicy = 0
-	WKNavigationResponsePolicyAllow WKNavigationResponsePolicy = 1
+	WKNavigationResponsePolicyCancel   WKNavigationResponsePolicy = 0
+	WKNavigationResponsePolicyAllow    WKNavigationResponsePolicy = 1
 	WKNavigationResponsePolicyDownload WKNavigationResponsePolicy = 2
 )
 
@@ -610,12 +618,12 @@ func (e WKNavigationResponsePolicy) String() string {
 type WKNavigationType int64
 
 const (
-	WKNavigationTypeLinkActivated WKNavigationType = 0
-	WKNavigationTypeFormSubmitted WKNavigationType = 1
-	WKNavigationTypeBackForward WKNavigationType = 2
-	WKNavigationTypeReload WKNavigationType = 3
+	WKNavigationTypeLinkActivated   WKNavigationType = 0
+	WKNavigationTypeFormSubmitted   WKNavigationType = 1
+	WKNavigationTypeBackForward     WKNavigationType = 2
+	WKNavigationTypeReload          WKNavigationType = 3
 	WKNavigationTypeFormResubmitted WKNavigationType = 4
-	WKNavigationTypeOther WKNavigationType = -1
+	WKNavigationTypeOther           WKNavigationType = -1
 )
 
 func (e WKNavigationType) String() string {
@@ -641,8 +649,8 @@ type WKPermissionDecision int64
 
 const (
 	WKPermissionDecisionPrompt WKPermissionDecision = 0
-	WKPermissionDecisionGrant WKPermissionDecision = 1
-	WKPermissionDecisionDeny WKPermissionDecision = 2
+	WKPermissionDecisionGrant  WKPermissionDecision = 1
+	WKPermissionDecisionDeny   WKPermissionDecision = 2
 )
 
 func (e WKPermissionDecision) String() string {
@@ -661,9 +669,9 @@ func (e WKPermissionDecision) String() string {
 type WKSecurityRestrictionMode int64
 
 const (
-	WKSecurityRestrictionModeNone WKSecurityRestrictionMode = 0
+	WKSecurityRestrictionModeNone                  WKSecurityRestrictionMode = 0
 	WKSecurityRestrictionModeMaximizeCompatibility WKSecurityRestrictionMode = 1
-	WKSecurityRestrictionModeLockdown WKSecurityRestrictionMode = 2
+	WKSecurityRestrictionModeLockdown              WKSecurityRestrictionMode = 2
 )
 
 func (e WKSecurityRestrictionMode) String() string {
@@ -683,7 +691,7 @@ type WKUserInterfaceDirectionPolicy int64
 
 const (
 	WKUserInterfaceDirectionPolicyContent WKUserInterfaceDirectionPolicy = 0
-	WKUserInterfaceDirectionPolicySystem WKUserInterfaceDirectionPolicy = 1
+	WKUserInterfaceDirectionPolicySystem  WKUserInterfaceDirectionPolicy = 1
 )
 
 func (e WKUserInterfaceDirectionPolicy) String() string {
@@ -701,7 +709,7 @@ type WKUserScriptInjectionTime int64
 
 const (
 	WKUserScriptInjectionTimeAtDocumentStart WKUserScriptInjectionTime = 0
-	WKUserScriptInjectionTimeAtDocumentEnd WKUserScriptInjectionTime = 1
+	WKUserScriptInjectionTimeAtDocumentEnd   WKUserScriptInjectionTime = 1
 )
 
 func (e WKUserScriptInjectionTime) String() string {
@@ -718,11 +726,11 @@ func (e WKUserScriptInjectionTime) String() string {
 type WKWebExtensionContextError int64
 
 const (
-	WKWebExtensionContextErrorUnknown WKWebExtensionContextError = 1
-	WKWebExtensionContextErrorAlreadyLoaded WKWebExtensionContextError = 2
-	WKWebExtensionContextErrorNotLoaded WKWebExtensionContextError = 3
-	WKWebExtensionContextErrorBaseURLAlreadyInUse WKWebExtensionContextError = 4
-	WKWebExtensionContextErrorNoBackgroundContent WKWebExtensionContextError = 5
+	WKWebExtensionContextErrorUnknown                       WKWebExtensionContextError = 1
+	WKWebExtensionContextErrorAlreadyLoaded                 WKWebExtensionContextError = 2
+	WKWebExtensionContextErrorNotLoaded                     WKWebExtensionContextError = 3
+	WKWebExtensionContextErrorBaseURLAlreadyInUse           WKWebExtensionContextError = 4
+	WKWebExtensionContextErrorNoBackgroundContent           WKWebExtensionContextError = 5
 	WKWebExtensionContextErrorBackgroundContentFailedToLoad WKWebExtensionContextError = 6
 )
 
@@ -748,13 +756,13 @@ func (e WKWebExtensionContextError) String() string {
 type WKWebExtensionContextPermissionStatus int64
 
 const (
-	WKWebExtensionContextPermissionStatusDeniedExplicitly WKWebExtensionContextPermissionStatus = -3
-	WKWebExtensionContextPermissionStatusDeniedImplicitly WKWebExtensionContextPermissionStatus = -2
+	WKWebExtensionContextPermissionStatusDeniedExplicitly    WKWebExtensionContextPermissionStatus = -3
+	WKWebExtensionContextPermissionStatusDeniedImplicitly    WKWebExtensionContextPermissionStatus = -2
 	WKWebExtensionContextPermissionStatusRequestedImplicitly WKWebExtensionContextPermissionStatus = -1
-	WKWebExtensionContextPermissionStatusUnknown WKWebExtensionContextPermissionStatus = 0
+	WKWebExtensionContextPermissionStatusUnknown             WKWebExtensionContextPermissionStatus = 0
 	WKWebExtensionContextPermissionStatusRequestedExplicitly WKWebExtensionContextPermissionStatus = 1
-	WKWebExtensionContextPermissionStatusGrantedImplicitly WKWebExtensionContextPermissionStatus = 2
-	WKWebExtensionContextPermissionStatusGrantedExplicitly WKWebExtensionContextPermissionStatus = 3
+	WKWebExtensionContextPermissionStatusGrantedImplicitly   WKWebExtensionContextPermissionStatus = 2
+	WKWebExtensionContextPermissionStatusGrantedExplicitly   WKWebExtensionContextPermissionStatus = 3
 )
 
 func (e WKWebExtensionContextPermissionStatus) String() string {
@@ -781,9 +789,9 @@ func (e WKWebExtensionContextPermissionStatus) String() string {
 type WKWebExtensionDataRecordError int64
 
 const (
-	WKWebExtensionDataRecordErrorUnknown WKWebExtensionDataRecordError = 1
-	WKWebExtensionDataRecordErrorLocalStorageFailed WKWebExtensionDataRecordError = 2
-	WKWebExtensionDataRecordErrorSessionStorageFailed WKWebExtensionDataRecordError = 3
+	WKWebExtensionDataRecordErrorUnknown                   WKWebExtensionDataRecordError = 1
+	WKWebExtensionDataRecordErrorLocalStorageFailed        WKWebExtensionDataRecordError = 2
+	WKWebExtensionDataRecordErrorSessionStorageFailed      WKWebExtensionDataRecordError = 3
 	WKWebExtensionDataRecordErrorSynchronizedStorageFailed WKWebExtensionDataRecordError = 4
 )
 
@@ -805,15 +813,15 @@ func (e WKWebExtensionDataRecordError) String() string {
 type WKWebExtensionError int64
 
 const (
-	WKWebExtensionErrorUnknown WKWebExtensionError = 1
-	WKWebExtensionErrorResourceNotFound WKWebExtensionError = 2
-	WKWebExtensionErrorInvalidResourceCodeSignature WKWebExtensionError = 3
-	WKWebExtensionErrorInvalidManifest WKWebExtensionError = 4
-	WKWebExtensionErrorUnsupportedManifestVersion WKWebExtensionError = 5
-	WKWebExtensionErrorInvalidManifestEntry WKWebExtensionError = 6
+	WKWebExtensionErrorUnknown                           WKWebExtensionError = 1
+	WKWebExtensionErrorResourceNotFound                  WKWebExtensionError = 2
+	WKWebExtensionErrorInvalidResourceCodeSignature      WKWebExtensionError = 3
+	WKWebExtensionErrorInvalidManifest                   WKWebExtensionError = 4
+	WKWebExtensionErrorUnsupportedManifestVersion        WKWebExtensionError = 5
+	WKWebExtensionErrorInvalidManifestEntry              WKWebExtensionError = 6
 	WKWebExtensionErrorInvalidDeclarativeNetRequestEntry WKWebExtensionError = 7
-	WKWebExtensionErrorInvalidBackgroundPersistence WKWebExtensionError = 8
-	WKWebExtensionErrorInvalidArchive WKWebExtensionError = 9
+	WKWebExtensionErrorInvalidBackgroundPersistence      WKWebExtensionError = 8
+	WKWebExtensionErrorInvalidArchive                    WKWebExtensionError = 9
 )
 
 func (e WKWebExtensionError) String() string {
@@ -844,10 +852,10 @@ func (e WKWebExtensionError) String() string {
 type WKWebExtensionMatchPatternError int64
 
 const (
-	WKWebExtensionMatchPatternErrorUnknown WKWebExtensionMatchPatternError = 1
+	WKWebExtensionMatchPatternErrorUnknown       WKWebExtensionMatchPatternError = 1
 	WKWebExtensionMatchPatternErrorInvalidScheme WKWebExtensionMatchPatternError = 2
-	WKWebExtensionMatchPatternErrorInvalidHost WKWebExtensionMatchPatternError = 3
-	WKWebExtensionMatchPatternErrorInvalidPath WKWebExtensionMatchPatternError = 4
+	WKWebExtensionMatchPatternErrorInvalidHost   WKWebExtensionMatchPatternError = 3
+	WKWebExtensionMatchPatternErrorInvalidPath   WKWebExtensionMatchPatternError = 4
 )
 
 func (e WKWebExtensionMatchPatternError) String() string {
@@ -868,26 +876,34 @@ func (e WKWebExtensionMatchPatternError) String() string {
 type WKWebExtensionMatchPatternOptions uint64
 
 const (
-	WKWebExtensionMatchPatternOptionsNone WKWebExtensionMatchPatternOptions = 0
-	WKWebExtensionMatchPatternOptionsIgnoreSchemes WKWebExtensionMatchPatternOptions = 1
-	WKWebExtensionMatchPatternOptionsIgnorePaths WKWebExtensionMatchPatternOptions = 2
+	WKWebExtensionMatchPatternOptionsNone                 WKWebExtensionMatchPatternOptions = 0
+	WKWebExtensionMatchPatternOptionsIgnoreSchemes        WKWebExtensionMatchPatternOptions = 1
+	WKWebExtensionMatchPatternOptionsIgnorePaths          WKWebExtensionMatchPatternOptions = 2
 	WKWebExtensionMatchPatternOptionsMatchBidirectionally WKWebExtensionMatchPatternOptions = 4
 )
 
 func (e WKWebExtensionMatchPatternOptions) String() string {
 	var parts []string
-	if e&WKWebExtensionMatchPatternOptionsIgnoreSchemes != 0 { parts = append(parts, "WKWebExtensionMatchPatternOptionsIgnoreSchemes") }
-	if e&WKWebExtensionMatchPatternOptionsIgnorePaths != 0 { parts = append(parts, "WKWebExtensionMatchPatternOptionsIgnorePaths") }
-	if e&WKWebExtensionMatchPatternOptionsMatchBidirectionally != 0 { parts = append(parts, "WKWebExtensionMatchPatternOptionsMatchBidirectionally") }
-	if len(parts) == 0 { return "0" }
+	if e&WKWebExtensionMatchPatternOptionsIgnoreSchemes != 0 {
+		parts = append(parts, "WKWebExtensionMatchPatternOptionsIgnoreSchemes")
+	}
+	if e&WKWebExtensionMatchPatternOptionsIgnorePaths != 0 {
+		parts = append(parts, "WKWebExtensionMatchPatternOptionsIgnorePaths")
+	}
+	if e&WKWebExtensionMatchPatternOptionsMatchBidirectionally != 0 {
+		parts = append(parts, "WKWebExtensionMatchPatternOptionsMatchBidirectionally")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type WKWebExtensionMessagePortError int64
 
 const (
-	WKWebExtensionMessagePortErrorUnknown WKWebExtensionMessagePortError = 1
-	WKWebExtensionMessagePortErrorNotConnected WKWebExtensionMessagePortError = 2
+	WKWebExtensionMessagePortErrorUnknown        WKWebExtensionMessagePortError = 1
+	WKWebExtensionMessagePortErrorNotConnected   WKWebExtensionMessagePortError = 2
 	WKWebExtensionMessagePortErrorMessageInvalid WKWebExtensionMessagePortError = 3
 )
 
@@ -907,39 +923,59 @@ func (e WKWebExtensionMessagePortError) String() string {
 type WKWebExtensionTabChangedProperties uint64
 
 const (
-	WKWebExtensionTabChangedPropertiesNone WKWebExtensionTabChangedProperties = 0
-	WKWebExtensionTabChangedPropertiesLoading WKWebExtensionTabChangedProperties = 2
-	WKWebExtensionTabChangedPropertiesMuted WKWebExtensionTabChangedProperties = 4
-	WKWebExtensionTabChangedPropertiesPinned WKWebExtensionTabChangedProperties = 8
+	WKWebExtensionTabChangedPropertiesNone         WKWebExtensionTabChangedProperties = 0
+	WKWebExtensionTabChangedPropertiesLoading      WKWebExtensionTabChangedProperties = 2
+	WKWebExtensionTabChangedPropertiesMuted        WKWebExtensionTabChangedProperties = 4
+	WKWebExtensionTabChangedPropertiesPinned       WKWebExtensionTabChangedProperties = 8
 	WKWebExtensionTabChangedPropertiesPlayingAudio WKWebExtensionTabChangedProperties = 16
-	WKWebExtensionTabChangedPropertiesReaderMode WKWebExtensionTabChangedProperties = 32
-	WKWebExtensionTabChangedPropertiesSize WKWebExtensionTabChangedProperties = 64
-	WKWebExtensionTabChangedPropertiesTitle WKWebExtensionTabChangedProperties = 128
-	WKWebExtensionTabChangedPropertiesURL WKWebExtensionTabChangedProperties = 256
-	WKWebExtensionTabChangedPropertiesZoomFactor WKWebExtensionTabChangedProperties = 512
+	WKWebExtensionTabChangedPropertiesReaderMode   WKWebExtensionTabChangedProperties = 32
+	WKWebExtensionTabChangedPropertiesSize         WKWebExtensionTabChangedProperties = 64
+	WKWebExtensionTabChangedPropertiesTitle        WKWebExtensionTabChangedProperties = 128
+	WKWebExtensionTabChangedPropertiesURL          WKWebExtensionTabChangedProperties = 256
+	WKWebExtensionTabChangedPropertiesZoomFactor   WKWebExtensionTabChangedProperties = 512
 )
 
 func (e WKWebExtensionTabChangedProperties) String() string {
 	var parts []string
-	if e&WKWebExtensionTabChangedPropertiesLoading != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesLoading") }
-	if e&WKWebExtensionTabChangedPropertiesMuted != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesMuted") }
-	if e&WKWebExtensionTabChangedPropertiesPinned != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesPinned") }
-	if e&WKWebExtensionTabChangedPropertiesPlayingAudio != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesPlayingAudio") }
-	if e&WKWebExtensionTabChangedPropertiesReaderMode != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesReaderMode") }
-	if e&WKWebExtensionTabChangedPropertiesSize != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesSize") }
-	if e&WKWebExtensionTabChangedPropertiesTitle != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesTitle") }
-	if e&WKWebExtensionTabChangedPropertiesURL != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesURL") }
-	if e&WKWebExtensionTabChangedPropertiesZoomFactor != 0 { parts = append(parts, "WKWebExtensionTabChangedPropertiesZoomFactor") }
-	if len(parts) == 0 { return "0" }
+	if e&WKWebExtensionTabChangedPropertiesLoading != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesLoading")
+	}
+	if e&WKWebExtensionTabChangedPropertiesMuted != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesMuted")
+	}
+	if e&WKWebExtensionTabChangedPropertiesPinned != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesPinned")
+	}
+	if e&WKWebExtensionTabChangedPropertiesPlayingAudio != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesPlayingAudio")
+	}
+	if e&WKWebExtensionTabChangedPropertiesReaderMode != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesReaderMode")
+	}
+	if e&WKWebExtensionTabChangedPropertiesSize != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesSize")
+	}
+	if e&WKWebExtensionTabChangedPropertiesTitle != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesTitle")
+	}
+	if e&WKWebExtensionTabChangedPropertiesURL != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesURL")
+	}
+	if e&WKWebExtensionTabChangedPropertiesZoomFactor != 0 {
+		parts = append(parts, "WKWebExtensionTabChangedPropertiesZoomFactor")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type WKWebExtensionWindowState int64
 
 const (
-	WKWebExtensionWindowStateNormal WKWebExtensionWindowState = 0
-	WKWebExtensionWindowStateMinimized WKWebExtensionWindowState = 1
-	WKWebExtensionWindowStateMaximized WKWebExtensionWindowState = 2
+	WKWebExtensionWindowStateNormal     WKWebExtensionWindowState = 0
+	WKWebExtensionWindowStateMinimized  WKWebExtensionWindowState = 1
+	WKWebExtensionWindowStateMaximized  WKWebExtensionWindowState = 2
 	WKWebExtensionWindowStateFullscreen WKWebExtensionWindowState = 3
 )
 
@@ -962,7 +998,7 @@ type WKWebExtensionWindowType int64
 
 const (
 	WKWebExtensionWindowTypeNormal WKWebExtensionWindowType = 0
-	WKWebExtensionWindowTypePopup WKWebExtensionWindowType = 1
+	WKWebExtensionWindowTypePopup  WKWebExtensionWindowType = 1
 )
 
 func (e WKWebExtensionWindowType) String() string {
@@ -984,18 +1020,22 @@ const (
 
 func (e WKWebViewDataType) String() string {
 	var parts []string
-	if e&WKWebViewDataTypeSessionStorage != 0 { parts = append(parts, "WKWebViewDataTypeSessionStorage") }
-	if len(parts) == 0 { return "0" }
+	if e&WKWebViewDataTypeSessionStorage != 0 {
+		parts = append(parts, "WKWebViewDataTypeSessionStorage")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type WKWebpagePreferencesUpgradeToHTTPSPolicy int64
 
 const (
-	WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested WKWebpagePreferencesUpgradeToHTTPSPolicy = 0
-	WKWebpagePreferencesUpgradeToHTTPSPolicyAutomaticFallbackToHTTP WKWebpagePreferencesUpgradeToHTTPSPolicy = 1
+	WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested            WKWebpagePreferencesUpgradeToHTTPSPolicy = 0
+	WKWebpagePreferencesUpgradeToHTTPSPolicyAutomaticFallbackToHTTP    WKWebpagePreferencesUpgradeToHTTPSPolicy = 1
 	WKWebpagePreferencesUpgradeToHTTPSPolicyUserMediatedFallbackToHTTP WKWebpagePreferencesUpgradeToHTTPSPolicy = 2
-	WKWebpagePreferencesUpgradeToHTTPSPolicyErrorOnFailure WKWebpagePreferencesUpgradeToHTTPSPolicy = 3
+	WKWebpagePreferencesUpgradeToHTTPSPolicyErrorOnFailure             WKWebpagePreferencesUpgradeToHTTPSPolicy = 3
 )
 
 func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
@@ -1016,8 +1056,8 @@ func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
 type WebCacheModel uint64
 
 const (
-	WebCacheModelDocumentViewer WebCacheModel = 0
-	WebCacheModelDocumentBrowser WebCacheModel = 1
+	WebCacheModelDocumentViewer    WebCacheModel = 0
+	WebCacheModelDocumentBrowser   WebCacheModel = 1
 	WebCacheModelPrimaryWebBrowser WebCacheModel = 2
 )
 
@@ -1037,54 +1077,76 @@ func (e WebCacheModel) String() string {
 type WebDragDestinationAction uint64
 
 const (
-	WebDragDestinationActionNone WebDragDestinationAction = 0
+	WebDragDestinationActionNone  WebDragDestinationAction = 0
 	WebDragDestinationActionDHTML WebDragDestinationAction = 1
-	WebDragDestinationActionEdit WebDragDestinationAction = 2
-	WebDragDestinationActionLoad WebDragDestinationAction = 4
-	WebDragDestinationActionAny WebDragDestinationAction = 4294967295
+	WebDragDestinationActionEdit  WebDragDestinationAction = 2
+	WebDragDestinationActionLoad  WebDragDestinationAction = 4
+	WebDragDestinationActionAny   WebDragDestinationAction = 4294967295
 )
 
 func (e WebDragDestinationAction) String() string {
 	var parts []string
-	if e&WebDragDestinationActionDHTML != 0 { parts = append(parts, "WebDragDestinationActionDHTML") }
-	if e&WebDragDestinationActionEdit != 0 { parts = append(parts, "WebDragDestinationActionEdit") }
-	if e&WebDragDestinationActionLoad != 0 { parts = append(parts, "WebDragDestinationActionLoad") }
-	if e&WebDragDestinationActionAny != 0 { parts = append(parts, "WebDragDestinationActionAny") }
-	if len(parts) == 0 { return "0" }
+	if e&WebDragDestinationActionDHTML != 0 {
+		parts = append(parts, "WebDragDestinationActionDHTML")
+	}
+	if e&WebDragDestinationActionEdit != 0 {
+		parts = append(parts, "WebDragDestinationActionEdit")
+	}
+	if e&WebDragDestinationActionLoad != 0 {
+		parts = append(parts, "WebDragDestinationActionLoad")
+	}
+	if e&WebDragDestinationActionAny != 0 {
+		parts = append(parts, "WebDragDestinationActionAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type WebDragSourceAction uint64
 
 const (
-	WebDragSourceActionNone WebDragSourceAction = 0
-	WebDragSourceActionDHTML WebDragSourceAction = 1
-	WebDragSourceActionImage WebDragSourceAction = 2
-	WebDragSourceActionLink WebDragSourceAction = 4
+	WebDragSourceActionNone      WebDragSourceAction = 0
+	WebDragSourceActionDHTML     WebDragSourceAction = 1
+	WebDragSourceActionImage     WebDragSourceAction = 2
+	WebDragSourceActionLink      WebDragSourceAction = 4
 	WebDragSourceActionSelection WebDragSourceAction = 8
-	WebDragSourceActionAny WebDragSourceAction = 4294967295
+	WebDragSourceActionAny       WebDragSourceAction = 4294967295
 )
 
 func (e WebDragSourceAction) String() string {
 	var parts []string
-	if e&WebDragSourceActionDHTML != 0 { parts = append(parts, "WebDragSourceActionDHTML") }
-	if e&WebDragSourceActionImage != 0 { parts = append(parts, "WebDragSourceActionImage") }
-	if e&WebDragSourceActionLink != 0 { parts = append(parts, "WebDragSourceActionLink") }
-	if e&WebDragSourceActionSelection != 0 { parts = append(parts, "WebDragSourceActionSelection") }
-	if e&WebDragSourceActionAny != 0 { parts = append(parts, "WebDragSourceActionAny") }
-	if len(parts) == 0 { return "0" }
+	if e&WebDragSourceActionDHTML != 0 {
+		parts = append(parts, "WebDragSourceActionDHTML")
+	}
+	if e&WebDragSourceActionImage != 0 {
+		parts = append(parts, "WebDragSourceActionImage")
+	}
+	if e&WebDragSourceActionLink != 0 {
+		parts = append(parts, "WebDragSourceActionLink")
+	}
+	if e&WebDragSourceActionSelection != 0 {
+		parts = append(parts, "WebDragSourceActionSelection")
+	}
+	if e&WebDragSourceActionAny != 0 {
+		parts = append(parts, "WebDragSourceActionAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type WebNavigationType int64
 
 const (
-	WebNavigationTypeLinkClicked WebNavigationType = 0
-	WebNavigationTypeFormSubmitted WebNavigationType = 1
-	WebNavigationTypeBackForward WebNavigationType = 2
-	WebNavigationTypeReload WebNavigationType = 3
+	WebNavigationTypeLinkClicked     WebNavigationType = 0
+	WebNavigationTypeFormSubmitted   WebNavigationType = 1
+	WebNavigationTypeBackForward     WebNavigationType = 2
+	WebNavigationTypeReload          WebNavigationType = 3
 	WebNavigationTypeFormResubmitted WebNavigationType = 4
-	WebNavigationTypeOther WebNavigationType = 5
+	WebNavigationTypeOther           WebNavigationType = 5
 )
 
 func (e WebNavigationType) String() string {
@@ -1109,8 +1171,8 @@ func (e WebNavigationType) String() string {
 type WebViewInsertAction int64
 
 const (
-	WebViewInsertActionTyped WebViewInsertAction = 0
-	WebViewInsertActionPasted WebViewInsertAction = 1
+	WebViewInsertActionTyped   WebViewInsertAction = 0
+	WebViewInsertActionPasted  WebViewInsertAction = 1
 	WebViewInsertActionDropped WebViewInsertAction = 2
 )
 
@@ -1131,8 +1193,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1151,13 +1213,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1184,24 +1246,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1242,9 +1304,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1264,12 +1326,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1296,14 +1358,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1332,9 +1394,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1353,36 +1415,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1412,8 +1488,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1433,62 +1509,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1614,15 +1690,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1660,7 +1736,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1668,7 +1746,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1686,8 +1764,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1706,26 +1784,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1958,7 +2052,7 @@ func (e Nw_ethernet_channel_state_t) String() string {
 type Nw_framer_start_result_t int64
 
 const (
-	Nw_framer_start_result_ready Nw_framer_start_result_t = 1
+	Nw_framer_start_result_ready           Nw_framer_start_result_t = 1
 	Nw_framer_start_result_will_mark_ready Nw_framer_start_result_t = 2
 )
 
@@ -1977,22 +2071,22 @@ func (e Nw_framer_start_result_t) String() string {
 type Nw_interface_radio_type_t int64
 
 const (
-	Nw_interface_radio_type_unknown Nw_interface_radio_type_t = 0
-	Nw_interface_radio_type_wifi_b Nw_interface_radio_type_t = 1
-	Nw_interface_radio_type_wifi_a Nw_interface_radio_type_t = 2
-	Nw_interface_radio_type_wifi_g Nw_interface_radio_type_t = 3
-	Nw_interface_radio_type_wifi_n Nw_interface_radio_type_t = 4
-	Nw_interface_radio_type_wifi_ac Nw_interface_radio_type_t = 5
-	Nw_interface_radio_type_wifi_ax Nw_interface_radio_type_t = 6
-	Nw_interface_radio_type_cell_lte Nw_interface_radio_type_t = 128
-	Nw_interface_radio_type_cell_endc_sub6 Nw_interface_radio_type_t = 129
-	Nw_interface_radio_type_cell_endc_mmw Nw_interface_radio_type_t = 130
+	Nw_interface_radio_type_unknown         Nw_interface_radio_type_t = 0
+	Nw_interface_radio_type_wifi_b          Nw_interface_radio_type_t = 1
+	Nw_interface_radio_type_wifi_a          Nw_interface_radio_type_t = 2
+	Nw_interface_radio_type_wifi_g          Nw_interface_radio_type_t = 3
+	Nw_interface_radio_type_wifi_n          Nw_interface_radio_type_t = 4
+	Nw_interface_radio_type_wifi_ac         Nw_interface_radio_type_t = 5
+	Nw_interface_radio_type_wifi_ax         Nw_interface_radio_type_t = 6
+	Nw_interface_radio_type_cell_lte        Nw_interface_radio_type_t = 128
+	Nw_interface_radio_type_cell_endc_sub6  Nw_interface_radio_type_t = 129
+	Nw_interface_radio_type_cell_endc_mmw   Nw_interface_radio_type_t = 130
 	Nw_interface_radio_type_cell_nr_sa_sub6 Nw_interface_radio_type_t = 131
-	Nw_interface_radio_type_cell_nr_sa_mmw Nw_interface_radio_type_t = 132
-	Nw_interface_radio_type_cell_wcdma Nw_interface_radio_type_t = 133
-	Nw_interface_radio_type_cell_gsm Nw_interface_radio_type_t = 134
-	Nw_interface_radio_type_cell_cdma Nw_interface_radio_type_t = 135
-	Nw_interface_radio_type_cell_evdo Nw_interface_radio_type_t = 136
+	Nw_interface_radio_type_cell_nr_sa_mmw  Nw_interface_radio_type_t = 132
+	Nw_interface_radio_type_cell_wcdma      Nw_interface_radio_type_t = 133
+	Nw_interface_radio_type_cell_gsm        Nw_interface_radio_type_t = 134
+	Nw_interface_radio_type_cell_cdma       Nw_interface_radio_type_t = 135
+	Nw_interface_radio_type_cell_evdo       Nw_interface_radio_type_t = 136
 )
 
 func (e Nw_interface_radio_type_t) String() string {
@@ -2676,41 +2770,45 @@ func (e Os_clockid_t) String() string {
 type Os_unfair_lock_flags_t int64
 
 const (
-	OS_UNFAIR_LOCK_FLAG_NONE Os_unfair_lock_flags_t = 0
+	OS_UNFAIR_LOCK_FLAG_NONE          Os_unfair_lock_flags_t = 0
 	OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN Os_unfair_lock_flags_t = 262144
 )
 
 func (e Os_unfair_lock_flags_t) String() string {
 	var parts []string
-	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 { parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN") }
-	if len(parts) == 0 { return "0" }
+	if e&OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN != 0 {
+		parts = append(parts, "OS_UNFAIR_LOCK_FLAG_ADAPTIVE_SPIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2734,11 +2832,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2763,22 +2861,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2829,34 +2927,48 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2865,203 +2977,202 @@ const (
 )
 
 const (
-	DOM_ANY_TYPE = 0
-	DOM_ANY_UNORDERED_NODE_TYPE = 8
-	DOM_BOOLEAN_TYPE = 3
-	DOM_FIRST_ORDERED_NODE_TYPE = 9
-	DOM_NUMBER_TYPE = 1
-	DOM_ORDERED_NODE_ITERATOR_TYPE = 5
-	DOM_ORDERED_NODE_SNAPSHOT_TYPE = 7
-	DOM_STRING_TYPE = 2
+	DOM_ANY_TYPE                     = 0
+	DOM_ANY_UNORDERED_NODE_TYPE      = 8
+	DOM_BOOLEAN_TYPE                 = 3
+	DOM_FIRST_ORDERED_NODE_TYPE      = 9
+	DOM_NUMBER_TYPE                  = 1
+	DOM_ORDERED_NODE_ITERATOR_TYPE   = 5
+	DOM_ORDERED_NODE_SNAPSHOT_TYPE   = 7
+	DOM_STRING_TYPE                  = 2
 	DOM_UNORDERED_NODE_ITERATOR_TYPE = 4
 	DOM_UNORDERED_NODE_SNAPSHOT_TYPE = 6
 )
 
 const (
-	DOM_CSS_CUSTOM = 3
-	DOM_CSS_INHERIT = 0
+	DOM_CSS_CUSTOM          = 3
+	DOM_CSS_INHERIT         = 0
 	DOM_CSS_PRIMITIVE_VALUE = 1
-	DOM_CSS_VALUE_LIST = 2
+	DOM_CSS_VALUE_LIST      = 2
 )
 
 const (
-	DOM_CSS_ATTR = 22
-	DOM_CSS_CM = 6
-	DOM_CSS_COUNTER = 23
-	DOM_CSS_DEG = 11
-	DOM_CSS_DIMENSION = 18
-	DOM_CSS_EMS = 3
-	DOM_CSS_EXS = 4
-	DOM_CSS_GRAD = 13
-	DOM_CSS_HZ = 16
-	DOM_CSS_IDENT = 21
-	DOM_CSS_IN = 8
-	DOM_CSS_KHZ = 17
-	DOM_CSS_MM = 7
-	DOM_CSS_MS = 14
-	DOM_CSS_NUMBER = 1
-	DOM_CSS_PC = 10
+	DOM_CSS_ATTR       = 22
+	DOM_CSS_CM         = 6
+	DOM_CSS_COUNTER    = 23
+	DOM_CSS_DEG        = 11
+	DOM_CSS_DIMENSION  = 18
+	DOM_CSS_EMS        = 3
+	DOM_CSS_EXS        = 4
+	DOM_CSS_GRAD       = 13
+	DOM_CSS_HZ         = 16
+	DOM_CSS_IDENT      = 21
+	DOM_CSS_IN         = 8
+	DOM_CSS_KHZ        = 17
+	DOM_CSS_MM         = 7
+	DOM_CSS_MS         = 14
+	DOM_CSS_NUMBER     = 1
+	DOM_CSS_PC         = 10
 	DOM_CSS_PERCENTAGE = 2
-	DOM_CSS_PT = 9
-	DOM_CSS_PX = 5
-	DOM_CSS_RAD = 12
-	DOM_CSS_RECT = 24
-	DOM_CSS_RGBCOLOR = 25
-	DOM_CSS_S = 15
-	DOM_CSS_STRING = 19
-	DOM_CSS_UNKNOWN = 0
-	DOM_CSS_URI = 20
-	DOM_CSS_VH = 27
-	DOM_CSS_VMAX = 29
-	DOM_CSS_VMIN = 28
-	DOM_CSS_VW = 26
+	DOM_CSS_PT         = 9
+	DOM_CSS_PX         = 5
+	DOM_CSS_RAD        = 12
+	DOM_CSS_RECT       = 24
+	DOM_CSS_RGBCOLOR   = 25
+	DOM_CSS_S          = 15
+	DOM_CSS_STRING     = 19
+	DOM_CSS_UNKNOWN    = 0
+	DOM_CSS_URI        = 20
+	DOM_CSS_VH         = 27
+	DOM_CSS_VMAX       = 29
+	DOM_CSS_VMIN       = 28
+	DOM_CSS_VW         = 26
 )
 
 const (
-	DOM_DOM_DELTA_LINE = 1
-	DOM_DOM_DELTA_PAGE = 2
+	DOM_DOM_DELTA_LINE  = 1
+	DOM_DOM_DELTA_PAGE  = 2
 	DOM_DOM_DELTA_PIXEL = 0
 )
 
 const (
-	DOM_ATTRIBUTE_NODE = 2
-	DOM_CDATA_SECTION_NODE = 4
-	DOM_COMMENT_NODE = 8
-	DOM_DOCUMENT_FRAGMENT_NODE = 11
-	DOM_DOCUMENT_NODE = 9
-	DOM_DOCUMENT_POSITION_CONTAINED_BY = 16
-	DOM_DOCUMENT_POSITION_CONTAINS = 8
-	DOM_DOCUMENT_POSITION_DISCONNECTED = 1
-	DOM_DOCUMENT_POSITION_FOLLOWING = 4
+	DOM_ATTRIBUTE_NODE                            = 2
+	DOM_CDATA_SECTION_NODE                        = 4
+	DOM_COMMENT_NODE                              = 8
+	DOM_DOCUMENT_FRAGMENT_NODE                    = 11
+	DOM_DOCUMENT_NODE                             = 9
+	DOM_DOCUMENT_POSITION_CONTAINED_BY            = 16
+	DOM_DOCUMENT_POSITION_CONTAINS                = 8
+	DOM_DOCUMENT_POSITION_DISCONNECTED            = 1
+	DOM_DOCUMENT_POSITION_FOLLOWING               = 4
 	DOM_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 32
-	DOM_DOCUMENT_POSITION_PRECEDING = 2
-	DOM_DOCUMENT_TYPE_NODE = 10
-	DOM_ELEMENT_NODE = 1
-	DOM_ENTITY_NODE = 6
-	DOM_ENTITY_REFERENCE_NODE = 5
-	DOM_NOTATION_NODE = 12
-	DOM_PROCESSING_INSTRUCTION_NODE = 7
-	DOM_TEXT_NODE = 3
+	DOM_DOCUMENT_POSITION_PRECEDING               = 2
+	DOM_DOCUMENT_TYPE_NODE                        = 10
+	DOM_ELEMENT_NODE                              = 1
+	DOM_ENTITY_NODE                               = 6
+	DOM_ENTITY_REFERENCE_NODE                     = 5
+	DOM_NOTATION_NODE                             = 12
+	DOM_PROCESSING_INSTRUCTION_NODE               = 7
+	DOM_TEXT_NODE                                 = 3
 )
 
 const (
-	DOM_FILTER_ACCEPT = 1
-	DOM_FILTER_REJECT = 2
-	DOM_FILTER_SKIP = 3
-	DOM_SHOW_ALL = 4294967295
-	DOM_SHOW_ATTRIBUTE = 2
-	DOM_SHOW_CDATA_SECTION = 8
-	DOM_SHOW_COMMENT = 128
-	DOM_SHOW_DOCUMENT = 256
-	DOM_SHOW_DOCUMENT_FRAGMENT = 1024
-	DOM_SHOW_DOCUMENT_TYPE = 512
-	DOM_SHOW_ELEMENT = 1
-	DOM_SHOW_ENTITY = 32
-	DOM_SHOW_ENTITY_REFERENCE = 16
-	DOM_SHOW_NOTATION = 2048
+	DOM_FILTER_ACCEPT               = 1
+	DOM_FILTER_REJECT               = 2
+	DOM_FILTER_SKIP                 = 3
+	DOM_SHOW_ALL                    = 4294967295
+	DOM_SHOW_ATTRIBUTE              = 2
+	DOM_SHOW_CDATA_SECTION          = 8
+	DOM_SHOW_COMMENT                = 128
+	DOM_SHOW_DOCUMENT               = 256
+	DOM_SHOW_DOCUMENT_FRAGMENT      = 1024
+	DOM_SHOW_DOCUMENT_TYPE          = 512
+	DOM_SHOW_ELEMENT                = 1
+	DOM_SHOW_ENTITY                 = 32
+	DOM_SHOW_ENTITY_REFERENCE       = 16
+	DOM_SHOW_NOTATION               = 2048
 	DOM_SHOW_PROCESSING_INSTRUCTION = 64
-	DOM_SHOW_TEXT = 4
+	DOM_SHOW_TEXT                   = 4
 )
 
 const (
-	DOM_BOTH = 2
+	DOM_BOTH       = 2
 	DOM_HORIZONTAL = 0
-	DOM_VERTICAL = 1
+	DOM_VERTICAL   = 1
 )
 
 const (
-	DOM_KEY_LOCATION_LEFT = 1
-	DOM_KEY_LOCATION_NUMPAD = 3
-	DOM_KEY_LOCATION_RIGHT = 2
+	DOM_KEY_LOCATION_LEFT     = 1
+	DOM_KEY_LOCATION_NUMPAD   = 3
+	DOM_KEY_LOCATION_RIGHT    = 2
 	DOM_KEY_LOCATION_STANDARD = 0
 )
 
 const (
-	DOM_ADDITION = 2
+	DOM_ADDITION     = 2
 	DOM_MODIFICATION = 1
-	DOM_REMOVAL = 3
+	DOM_REMOVAL      = 3
 )
 
 const (
-	DOM_AT_TARGET = 2
-	DOM_BUBBLING_PHASE = 3
+	DOM_AT_TARGET       = 2
+	DOM_BUBBLING_PHASE  = 3
 	DOM_CAPTURING_PHASE = 1
-	DOM_NONE = 0
+	DOM_NONE            = 0
 )
 
 const (
-	DOM_END_TO_END = 2
-	DOM_END_TO_START = 3
-	DOM_NODE_AFTER = 1
-	DOM_NODE_BEFORE = 0
+	DOM_END_TO_END            = 2
+	DOM_END_TO_START          = 3
+	DOM_NODE_AFTER            = 1
+	DOM_NODE_BEFORE           = 0
 	DOM_NODE_BEFORE_AND_AFTER = 2
-	DOM_NODE_INSIDE = 3
-	DOM_START_TO_END = 1
-	DOM_START_TO_START = 0
+	DOM_NODE_INSIDE           = 3
+	DOM_START_TO_END          = 1
+	DOM_START_TO_START        = 0
 )
 
 const (
-	DOM_CHARSET_RULE = 2
-	DOM_FONT_FACE_RULE = 5
-	DOM_IMPORT_RULE = 3
-	DOM_KEYFRAMES_RULE = 7
-	DOM_KEYFRAME_RULE = 8
-	DOM_MEDIA_RULE = 4
-	DOM_NAMESPACE_RULE = 10
-	DOM_PAGE_RULE = 6
-	DOM_STYLE_RULE = 1
-	DOM_SUPPORTS_RULE = 12
-	DOM_UNKNOWN_RULE = 0
+	DOM_CHARSET_RULE          = 2
+	DOM_FONT_FACE_RULE        = 5
+	DOM_IMPORT_RULE           = 3
+	DOM_KEYFRAMES_RULE        = 7
+	DOM_KEYFRAME_RULE         = 8
+	DOM_MEDIA_RULE            = 4
+	DOM_NAMESPACE_RULE        = 10
+	DOM_PAGE_RULE             = 6
+	DOM_STYLE_RULE            = 1
+	DOM_SUPPORTS_RULE         = 12
+	DOM_UNKNOWN_RULE          = 0
 	DOM_WEBKIT_KEYFRAMES_RULE = 7
-	DOM_WEBKIT_KEYFRAME_RULE = 8
-	DOM_WEBKIT_REGION_RULE = 16
+	DOM_WEBKIT_KEYFRAME_RULE  = 8
+	DOM_WEBKIT_REGION_RULE    = 16
 )
 
 const (
 	WebKitErrorBlockedPlugInVersion = 203
-	WebKitErrorCannotFindPlugIn = 200
-	WebKitErrorCannotLoadPlugIn = 201
-	WebKitErrorJavaUnavailable = 202
+	WebKitErrorCannotFindPlugIn     = 200
+	WebKitErrorCannotLoadPlugIn     = 201
+	WebKitErrorJavaUnavailable      = 202
 )
 
 const (
-	WebKitErrorCannotShowMIMEType = 100
-	WebKitErrorCannotShowURL = 101
+	WebKitErrorCannotShowMIMEType                 = 100
+	WebKitErrorCannotShowURL                      = 101
 	WebKitErrorFrameLoadInterruptedByPolicyChange = 102
 )
 
 const (
-	WebMenuItemPDFActualSize = 24
-	WebMenuItemPDFAutoSize = 27
-	WebMenuItemPDFContinuous = 30
-	WebMenuItemPDFFacingPages = 29
-	WebMenuItemPDFNextPage = 31
-	WebMenuItemPDFPreviousPage = 32
-	WebMenuItemPDFSinglePage = 28
-	WebMenuItemPDFZoomIn = 25
-	WebMenuItemPDFZoomOut = 26
-	WebMenuItemTagCopy = 8
-	WebMenuItemTagCopyImageToClipboard = 6
-	WebMenuItemTagCopyLinkToClipboard = 3
-	WebMenuItemTagCut = 13
-	WebMenuItemTagDownloadImageToDisk = 5
-	WebMenuItemTagDownloadLinkToDisk = 2
-	WebMenuItemTagGoBack = 9
-	WebMenuItemTagGoForward = 10
-	WebMenuItemTagIgnoreSpelling = 17
-	WebMenuItemTagLearnSpelling = 18
-	WebMenuItemTagLookUpInDictionary = 22
-	WebMenuItemTagNoGuessesFound = 16
-	WebMenuItemTagOpenFrameInNewWindow = 7
-	WebMenuItemTagOpenImageInNewWindow = 4
-	WebMenuItemTagOpenLinkInNewWindow = 1
+	WebMenuItemPDFActualSize                 = 24
+	WebMenuItemPDFAutoSize                   = 27
+	WebMenuItemPDFContinuous                 = 30
+	WebMenuItemPDFFacingPages                = 29
+	WebMenuItemPDFNextPage                   = 31
+	WebMenuItemPDFPreviousPage               = 32
+	WebMenuItemPDFSinglePage                 = 28
+	WebMenuItemPDFZoomIn                     = 25
+	WebMenuItemPDFZoomOut                    = 26
+	WebMenuItemTagCopy                       = 8
+	WebMenuItemTagCopyImageToClipboard       = 6
+	WebMenuItemTagCopyLinkToClipboard        = 3
+	WebMenuItemTagCut                        = 13
+	WebMenuItemTagDownloadImageToDisk        = 5
+	WebMenuItemTagDownloadLinkToDisk         = 2
+	WebMenuItemTagGoBack                     = 9
+	WebMenuItemTagGoForward                  = 10
+	WebMenuItemTagIgnoreSpelling             = 17
+	WebMenuItemTagLearnSpelling              = 18
+	WebMenuItemTagLookUpInDictionary         = 22
+	WebMenuItemTagNoGuessesFound             = 16
+	WebMenuItemTagOpenFrameInNewWindow       = 7
+	WebMenuItemTagOpenImageInNewWindow       = 4
+	WebMenuItemTagOpenLinkInNewWindow        = 1
 	WebMenuItemTagOpenWithDefaultApplication = 23
-	WebMenuItemTagOther = 19
-	WebMenuItemTagPaste = 14
-	WebMenuItemTagReload = 12
-	WebMenuItemTagSearchInSpotlight = 20
-	WebMenuItemTagSearchWeb = 21
-	WebMenuItemTagSpellingGuess = 15
-	WebMenuItemTagStop = 11
+	WebMenuItemTagOther                      = 19
+	WebMenuItemTagPaste                      = 14
+	WebMenuItemTagReload                     = 12
+	WebMenuItemTagSearchInSpotlight          = 20
+	WebMenuItemTagSearchWeb                  = 21
+	WebMenuItemTagSpellingGuess              = 15
+	WebMenuItemTagStop                       = 11
 )
-

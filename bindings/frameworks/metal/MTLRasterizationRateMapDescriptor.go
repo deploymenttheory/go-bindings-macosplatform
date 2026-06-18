@@ -18,18 +18,18 @@ type MTLRasterizationRateMapDescriptor struct {
 }
 
 var (
-	_clsMTLRasterizationRateMapDescriptor = _objcClass("MTLRasterizationRateMapDescriptor")
-	_mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSize = objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:")
-	_mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayer = objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:layer:")
+	_clsMTLRasterizationRateMapDescriptor                                                             = _objcClass("MTLRasterizationRateMapDescriptor")
+	_mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSize                 = objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:")
+	_mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayer            = objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:layer:")
 	_mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers = objc.RegisterName("rasterizationRateMapDescriptorWithScreenSize:layerCount:layers:")
-	_mTLRasterizationRateMapDescriptorSelLayerAtIndex = objc.RegisterName("layerAtIndex:")
-	_mTLRasterizationRateMapDescriptorSelSetLayerAtIndex = objc.RegisterName("setLayer:atIndex:")
-	_mTLRasterizationRateMapDescriptorSelLayers = objc.RegisterName("layers")
-	_mTLRasterizationRateMapDescriptorSelScreenSize = objc.RegisterName("screenSize")
-	_mTLRasterizationRateMapDescriptorSelSetScreenSize = objc.RegisterName("setScreenSize:")
-	_mTLRasterizationRateMapDescriptorSelLabel = objc.RegisterName("label")
-	_mTLRasterizationRateMapDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLRasterizationRateMapDescriptorSelLayerCount = objc.RegisterName("layerCount")
+	_mTLRasterizationRateMapDescriptorSelLayerAtIndex                                                 = objc.RegisterName("layerAtIndex:")
+	_mTLRasterizationRateMapDescriptorSelSetLayerAtIndex                                              = objc.RegisterName("setLayer:atIndex:")
+	_mTLRasterizationRateMapDescriptorSelLayers                                                       = objc.RegisterName("layers")
+	_mTLRasterizationRateMapDescriptorSelScreenSize                                                   = objc.RegisterName("screenSize")
+	_mTLRasterizationRateMapDescriptorSelSetScreenSize                                                = objc.RegisterName("setScreenSize:")
+	_mTLRasterizationRateMapDescriptorSelLabel                                                        = objc.RegisterName("label")
+	_mTLRasterizationRateMapDescriptorSelSetLabel                                                     = objc.RegisterName("setLabel:")
+	_mTLRasterizationRateMapDescriptorSelLayerCount                                                   = objc.RegisterName("layerCount")
 )
 
 func MTLRasterizationRateMapDescriptorFromID(id objc.ID) *MTLRasterizationRateMapDescriptor {
@@ -45,28 +45,36 @@ func MTLRasterizationRateMapDescriptorFromID(id objc.ID) *MTLRasterizationRateMa
 // @method rasterizationRateMapDescriptorWithScreenSize: @abstract Convenience descriptor creation function without layers @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @return A descriptor containing no layers. Add or remove layers using setObject:atIndexedSubscript:.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSize(screenSize MTLSize) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSize, screenSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
 // @method rasterizationRateMapDescriptorWithScreenSize:layer: @abstract Convenience descriptor creation function for a single layer. @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @param layer The single layer describing how the rasterization rate varies in screen space @return A descriptor containing a single layer. Add or remove layers using setObject:atIndexedSubscript:.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayer(screenSize MTLSize, layer *MTLRasterizationRateLayerDescriptor) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayer, screenSize, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
 // @method rasterizationRateMapDescriptorWithScreenSize:layerCount:layers: @abstract Convenience descriptor creation function for an arbitrary amount of layers stored in a C-array. @param screenSize The dimensions, in screen space pixels, of the region where variable rasterization is applied. The depth component of MTLSize is ignored. @param layerCount The number of layers in the descriptor. @param layers An array of pointers to layer descriptors. The array must contain layerCount non-null pointers to MTLRasterizationRateLayerDescriptor instances. @return A descriptor containing all the specified layers. Add or remove layers using setObject:atIndexedSubscript:. @discussion The function copies the array of pointers internally, the caller need not keep the array alive after creating the descriptor.
 func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers(screenSize MTLSize, layerCount uint, layers unsafe.Pointer) *MTLRasterizationRateMapDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers, screenSize, layerCount, layers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateMapDescriptorFromID(_ret)
 }
 
 // @method layerAtIndex: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setLayer:atIndex: to add or set the layer. Identical to "layers[layerIndex]".
 func (o *MTLRasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *MTLRasterizationRateLayerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateMapDescriptorSelLayerAtIndex, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateLayerDescriptorFromID(_ret)
 }
 
@@ -78,7 +86,9 @@ func (o *MTLRasterizationRateMapDescriptor) SetLayerAtIndex(layer *MTLRasterizat
 // @property layers @return A modifiable array of layers @discussion Accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
 func (o *MTLRasterizationRateMapDescriptor) Layers() *MTLRasterizationRateLayerArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateMapDescriptorSelLayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRasterizationRateLayerArrayFromID(_ret)
 }
 
@@ -95,7 +105,9 @@ func (o *MTLRasterizationRateMapDescriptor) SetScreenSize(screenSize MTLSize) {
 // @property label @abstract A string to help identify this object. @discussion The default value is nil.
 func (o *MTLRasterizationRateMapDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRasterizationRateMapDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,4 +120,3 @@ func (o *MTLRasterizationRateMapDescriptor) LayerCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mTLRasterizationRateMapDescriptorSelLayerCount)
 	return _ret
 }
-

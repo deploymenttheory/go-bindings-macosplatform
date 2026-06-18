@@ -102,7 +102,9 @@ func (x *NNReduceRowMin) WithDestinationImageAllocator(destinationImageAllocator
 
 func (x *NNReduceRowMin) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
-func (x *NNReduceRowMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowMin) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceRowMinable is the interface implemented by [NNReduceRowMin], for mocking and DI.
 type NNReduceRowMinable interface {
@@ -119,4 +121,3 @@ type NNReduceRowMinable interface {
 }
 
 var _ NNReduceRowMinable = (*NNReduceRowMin)(nil)
-

@@ -87,4 +87,3 @@ type UserIdentityable interface {
 }
 
 var _ UserIdentityable = (*UserIdentity)(nil)
-

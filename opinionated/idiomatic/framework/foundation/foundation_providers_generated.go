@@ -218,4 +218,3 @@ type ValueTransformerProvider interface {
 type XMLNodeProvider interface {
 	asXMLNode() *raw.NSXMLNode
 }
-

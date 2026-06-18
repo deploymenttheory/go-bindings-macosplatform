@@ -18,11 +18,11 @@ type MPSNNPadNode struct {
 }
 
 var (
-	_clsMPSNNPadNode = _objcClass("MPSNNPadNode")
+	_clsMPSNNPadNode                                                        = _objcClass("MPSNNPadNode")
 	_mPSNNPadNodeSelNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode = objc.RegisterName("nodeWithSource:paddingSizeBefore:paddingSizeAfter:edgeMode:")
 	_mPSNNPadNodeSelInitWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode = objc.RegisterName("initWithSource:paddingSizeBefore:paddingSizeAfter:edgeMode:")
-	_mPSNNPadNodeSelFillValue = objc.RegisterName("fillValue")
-	_mPSNNPadNodeSelSetFillValue = objc.RegisterName("setFillValue:")
+	_mPSNNPadNodeSelFillValue                                               = objc.RegisterName("fillValue")
+	_mPSNNPadNodeSelSetFillValue                                            = objc.RegisterName("setFillValue:")
 )
 
 func MPSNNPadNodeFromID(id objc.ID) *MPSNNPadNode {
@@ -38,14 +38,18 @@ func MPSNNPadNodeFromID(id objc.ID) *MPSNNPadNode {
 // @abstract   Init a node representing a autoreleased MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      paddingSizeBefore       The amount of padding to apply before the image in each dimension. @param      paddingSizeAfter        The amount of padding to apply after the image in each dimension. @param      edgeMode                The @ref MPSImageEdgeMode for the padding node - Note that for now the pad-node and its gradient are the only nodes that support the extended edge-modes, ie. the ones beyond MPSImageEdgeModeClamp. @return     A new MPSNNFilter node for a MPSNNPad kernel.
 func MPSNNPadNodeNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *MPSNNImageNode, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, edgeMode mpscore.MPSImageEdgeMode) *MPSNNPadNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNPadNode), _mPSNNPadNodeSelNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode, source.Ptr(), paddingSizeBefore, paddingSizeAfter, edgeMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      paddingSizeBefore       The amount of padding to apply before the image in each dimension. @param      paddingSizeAfter        The amount of padding to apply after the image in each dimension. @param      edgeMode                The @ref MPSImageEdgeMode for the padding node - Note that for now the pad-node and its gradient are the only nodes that support the extended edge-modes, ie. the ones beyond MPSImageEdgeModeClamp. @return     A new MPSNNFilter node for a MPSNNPad kernel.
 func (o *MPSNNPadNode) InitWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *MPSNNImageNode, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, edgeMode mpscore.MPSImageEdgeMode) *MPSNNPadNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNPadNodeSelInitWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode, source.Ptr(), paddingSizeBefore, paddingSizeAfter, edgeMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNPadNodeFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSNNPadNode) FillValue() float32 {
 func (o *MPSNNPadNode) SetFillValue(fillValue float32) {
 	o.Ptr().Send(_mPSNNPadNodeSelSetFillValue, fillValue)
 }
-

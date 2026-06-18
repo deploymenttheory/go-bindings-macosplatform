@@ -67,7 +67,9 @@ func (x *MathExpressionFenced) CloseString() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *MathExpressionFenced) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionFenced) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionFencedable is the interface implemented by [MathExpressionFenced], for mocking and DI.
 type MathExpressionFencedable interface {
@@ -78,4 +80,3 @@ type MathExpressionFencedable interface {
 }
 
 var _ MathExpressionFencedable = (*MathExpressionFenced)(nil)
-

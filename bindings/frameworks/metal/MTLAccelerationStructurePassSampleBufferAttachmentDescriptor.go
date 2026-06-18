@@ -16,13 +16,13 @@ type MTLAccelerationStructurePassSampleBufferAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructurePassSampleBufferAttachmentDescriptor = _objcClass("MTLAccelerationStructurePassSampleBufferAttachmentDescriptor")
-	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSampleBuffer = objc.RegisterName("sampleBuffer")
-	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetSampleBuffer = objc.RegisterName("setSampleBuffer:")
-	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex = objc.RegisterName("startOfEncoderSampleIndex")
+	_clsMTLAccelerationStructurePassSampleBufferAttachmentDescriptor                             = _objcClass("MTLAccelerationStructurePassSampleBufferAttachmentDescriptor")
+	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSampleBuffer                 = objc.RegisterName("sampleBuffer")
+	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetSampleBuffer              = objc.RegisterName("setSampleBuffer:")
+	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex    = objc.RegisterName("startOfEncoderSampleIndex")
 	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetStartOfEncoderSampleIndex = objc.RegisterName("setStartOfEncoderSampleIndex:")
-	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex = objc.RegisterName("endOfEncoderSampleIndex")
-	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex = objc.RegisterName("setEndOfEncoderSampleIndex:")
+	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex      = objc.RegisterName("endOfEncoderSampleIndex")
+	_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex   = objc.RegisterName("setEndOfEncoderSampleIndex:")
 )
 
 func MTLAccelerationStructurePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *MTLAccelerationStructurePassSampleBufferAttachmentDescriptor {
@@ -64,4 +64,3 @@ func (o *MTLAccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEnco
 func (o *MTLAccelerationStructurePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
 	o.Ptr().Send(_mTLAccelerationStructurePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex, endOfEncoderSampleIndex)
 }
-

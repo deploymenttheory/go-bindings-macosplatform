@@ -18,7 +18,9 @@ type MacGraphicsDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZMacGraphicsDeviceConfiguration].
-func (x *MacGraphicsDeviceConfiguration) Unwrap() *raw.VZMacGraphicsDeviceConfiguration { return x.inner }
+func (x *MacGraphicsDeviceConfiguration) Unwrap() *raw.VZMacGraphicsDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*raw.VZMacGraphic
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.VZMacGraphicsDisplayConfiguration](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -70,7 +74,9 @@ func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays *foundation.NSArra
 	x.inner.SetDisplays(displays)
 }
 
-func (x *MacGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration { return &x.inner.VZGraphicsDeviceConfiguration }
+func (x *MacGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration {
+	return &x.inner.VZGraphicsDeviceConfiguration
+}
 
 // MacGraphicsDeviceConfigurationable is the interface implemented by [MacGraphicsDeviceConfiguration], for mocking and DI.
 type MacGraphicsDeviceConfigurationable interface {
@@ -81,4 +87,3 @@ type MacGraphicsDeviceConfigurationable interface {
 }
 
 var _ MacGraphicsDeviceConfigurationable = (*MacGraphicsDeviceConfiguration)(nil)
-

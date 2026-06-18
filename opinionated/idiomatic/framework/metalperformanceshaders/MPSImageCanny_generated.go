@@ -143,7 +143,9 @@ func (x *ImageCanny) SetUseFastMode(useFastMode bool) {
 	x.inner.SetUseFastMode(useFastMode)
 }
 
-func (x *ImageCanny) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageCanny) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 func (x *ImageCanny) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
@@ -169,4 +171,3 @@ type ImageCannyable interface {
 }
 
 var _ ImageCannyable = (*ImageCanny)(nil)
-

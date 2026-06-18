@@ -15,7 +15,9 @@ type SymbolAutomaticContentTransition struct {
 }
 
 // Unwrap returns the underlying [raw.NSSymbolAutomaticContentTransition].
-func (x *SymbolAutomaticContentTransition) Unwrap() *raw.NSSymbolAutomaticContentTransition { return x.inner }
+func (x *SymbolAutomaticContentTransition) Unwrap() *raw.NSSymbolAutomaticContentTransition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewSymbolAutomaticContentTransition() *SymbolAutomaticContentTransition {
 	return &SymbolAutomaticContentTransition{inner: raw.NSSymbolAutomaticContentTransitionFromID(_id)}
 }
 
-func (x *SymbolAutomaticContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
+func (x *SymbolAutomaticContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
+	return &x.inner.NSSymbolContentTransition
+}
 
 // SymbolAutomaticContentTransitionable is the interface implemented by [SymbolAutomaticContentTransition], for mocking and DI.
 type SymbolAutomaticContentTransitionable interface {
@@ -43,4 +47,3 @@ type SymbolAutomaticContentTransitionable interface {
 }
 
 var _ SymbolAutomaticContentTransitionable = (*SymbolAutomaticContentTransition)(nil)
-

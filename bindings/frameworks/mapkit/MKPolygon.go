@@ -18,12 +18,12 @@ type MKPolygon struct {
 }
 
 var (
-	_clsMKPolygon = _objcClass("MKPolygon")
-	_mKPolygonSelPolygonWithPointsCount = objc.RegisterName("polygonWithPoints:count:")
-	_mKPolygonSelPolygonWithPointsCountInteriorPolygons = objc.RegisterName("polygonWithPoints:count:interiorPolygons:")
-	_mKPolygonSelPolygonWithCoordinatesCount = objc.RegisterName("polygonWithCoordinates:count:")
+	_clsMKPolygon                                            = _objcClass("MKPolygon")
+	_mKPolygonSelPolygonWithPointsCount                      = objc.RegisterName("polygonWithPoints:count:")
+	_mKPolygonSelPolygonWithPointsCountInteriorPolygons      = objc.RegisterName("polygonWithPoints:count:interiorPolygons:")
+	_mKPolygonSelPolygonWithCoordinatesCount                 = objc.RegisterName("polygonWithCoordinates:count:")
 	_mKPolygonSelPolygonWithCoordinatesCountInteriorPolygons = objc.RegisterName("polygonWithCoordinates:count:interiorPolygons:")
-	_mKPolygonSelInteriorPolygons = objc.RegisterName("interiorPolygons")
+	_mKPolygonSelInteriorPolygons                            = objc.RegisterName("interiorPolygons")
 )
 
 func MKPolygonFromID(id objc.ID) *MKPolygon {
@@ -38,31 +38,40 @@ func MKPolygonFromID(id objc.ID) *MKPolygon {
 
 func MKPolygonPolygonWithPointsCount(points *MKMapPoint, count uint) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithPointsCount, points, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonFromID(_ret)
 }
 
 func MKPolygonPolygonWithPointsCountInteriorPolygons(points *MKMapPoint, count uint, interiorPolygons *foundation.NSArray[*MKPolygon]) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithPointsCountInteriorPolygons, points, count, interiorPolygons.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonFromID(_ret)
 }
 
 func MKPolygonPolygonWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithCoordinatesCount, coords, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonFromID(_ret)
 }
 
 func MKPolygonPolygonWithCoordinatesCountInteriorPolygons(coords unsafe.Pointer, count uint, interiorPolygons *foundation.NSArray[*MKPolygon]) *MKPolygon {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolygon), _mKPolygonSelPolygonWithCoordinatesCountInteriorPolygons, coords, count, interiorPolygons.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonFromID(_ret)
 }
 
 func (o *MKPolygon) InteriorPolygons() *foundation.NSArray[*MKPolygon] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolygonSelInteriorPolygons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKPolygon](_ret)
 }
-

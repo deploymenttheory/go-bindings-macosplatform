@@ -15,16 +15,16 @@ type GCControllerDirectionPad struct {
 }
 
 var (
-	_clsGCControllerDirectionPad = _objcClass("GCControllerDirectionPad")
-	_gCControllerDirectionPadSelSetValueForXAxisYAxis = objc.RegisterName("setValueForXAxis:yAxis:")
-	_gCControllerDirectionPadSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
+	_clsGCControllerDirectionPad                       = _objcClass("GCControllerDirectionPad")
+	_gCControllerDirectionPadSelSetValueForXAxisYAxis  = objc.RegisterName("setValueForXAxis:yAxis:")
+	_gCControllerDirectionPadSelValueChangedHandler    = objc.RegisterName("valueChangedHandler")
 	_gCControllerDirectionPadSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCControllerDirectionPadSelXAxis = objc.RegisterName("xAxis")
-	_gCControllerDirectionPadSelYAxis = objc.RegisterName("yAxis")
-	_gCControllerDirectionPadSelUp = objc.RegisterName("up")
-	_gCControllerDirectionPadSelDown = objc.RegisterName("down")
-	_gCControllerDirectionPadSelLeft = objc.RegisterName("left")
-	_gCControllerDirectionPadSelRight = objc.RegisterName("right")
+	_gCControllerDirectionPadSelXAxis                  = objc.RegisterName("xAxis")
+	_gCControllerDirectionPadSelYAxis                  = objc.RegisterName("yAxis")
+	_gCControllerDirectionPadSelUp                     = objc.RegisterName("up")
+	_gCControllerDirectionPadSelDown                   = objc.RegisterName("down")
+	_gCControllerDirectionPadSelLeft                   = objc.RegisterName("left")
+	_gCControllerDirectionPadSelRight                  = objc.RegisterName("right")
 )
 
 func GCControllerDirectionPadFromID(id objc.ID) *GCControllerDirectionPad {
@@ -63,37 +63,48 @@ func (o *GCControllerDirectionPad) SetValueChangedHandler(valueChangedHandler fu
 
 func (o *GCControllerDirectionPad) XAxis() *GCControllerAxisInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelXAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerAxisInputFromID(_ret)
 }
 
 func (o *GCControllerDirectionPad) YAxis() *GCControllerAxisInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelYAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerAxisInputFromID(_ret)
 }
 
 func (o *GCControllerDirectionPad) Up() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelUp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCControllerDirectionPad) Down() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelDown)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCControllerDirectionPad) Left() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelLeft)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCControllerDirectionPad) Right() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCControllerDirectionPadSelRight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
-

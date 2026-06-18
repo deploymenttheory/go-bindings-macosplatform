@@ -41,4 +41,3 @@ type ScreenshotManagerable interface {
 }
 
 var _ ScreenshotManagerable = (*ScreenshotManager)(nil)
-

@@ -41,4 +41,3 @@ type SettingsHelperable interface {
 }
 
 var _ SettingsHelperable = (*SettingsHelper)(nil)
-

@@ -17,16 +17,16 @@ type QuartzFilterManager struct {
 }
 
 var (
-	_clsQuartzFilterManager = _objcClass("QuartzFilterManager")
-	_quartzFilterManagerSelFilterManager = objc.RegisterName("filterManager")
+	_clsQuartzFilterManager                 = _objcClass("QuartzFilterManager")
+	_quartzFilterManagerSelFilterManager    = objc.RegisterName("filterManager")
 	_quartzFilterManagerSelFiltersInDomains = objc.RegisterName("filtersInDomains:")
-	_quartzFilterManagerSelFilterPanel = objc.RegisterName("filterPanel")
-	_quartzFilterManagerSelFilterView = objc.RegisterName("filterView")
-	_quartzFilterManagerSelSelectedFilter = objc.RegisterName("selectedFilter")
-	_quartzFilterManagerSelSelectFilter = objc.RegisterName("selectFilter:")
-	_quartzFilterManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_quartzFilterManagerSelDelegate = objc.RegisterName("delegate")
-	_quartzFilterManagerSelImportFilter = objc.RegisterName("importFilter:")
+	_quartzFilterManagerSelFilterPanel      = objc.RegisterName("filterPanel")
+	_quartzFilterManagerSelFilterView       = objc.RegisterName("filterView")
+	_quartzFilterManagerSelSelectedFilter   = objc.RegisterName("selectedFilter")
+	_quartzFilterManagerSelSelectFilter     = objc.RegisterName("selectFilter:")
+	_quartzFilterManagerSelSetDelegate      = objc.RegisterName("setDelegate:")
+	_quartzFilterManagerSelDelegate         = objc.RegisterName("delegate")
+	_quartzFilterManagerSelImportFilter     = objc.RegisterName("importFilter:")
 )
 
 func QuartzFilterManagerFromID(id objc.ID) *QuartzFilterManager {
@@ -41,7 +41,9 @@ func QuartzFilterManagerFromID(id objc.ID) *QuartzFilterManager {
 
 func QuartzFilterManagerFilterManager() *QuartzFilterManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQuartzFilterManager), _quartzFilterManagerSelFilterManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterManagerFromID(_ret)
 }
 
@@ -52,19 +54,25 @@ func QuartzFilterManagerFiltersInDomains(domains *foundation.NSArray[objc.ID]) *
 
 func (o *QuartzFilterManager) FilterPanel() *appkit.NSPanel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelFilterPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSPanelFromID(_ret)
 }
 
 func (o *QuartzFilterManager) FilterView() *QuartzFilterView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelFilterView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterViewFromID(_ret)
 }
 
 func (o *QuartzFilterManager) SelectedFilter() *QuartzFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelSelectedFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterFromID(_ret)
 }
 
@@ -84,7 +92,8 @@ func (o *QuartzFilterManager) Delegate() objc.ID {
 
 func (o *QuartzFilterManager) ImportFilter(filterProperties *foundation.NSDictionary[objc.ID, objc.ID]) *QuartzFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _quartzFilterManagerSelImportFilter, filterProperties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QuartzFilterFromID(_ret)
 }
-

@@ -20,37 +20,37 @@ type NSGraphicsContext struct {
 }
 
 var (
-	_clsNSGraphicsContext = _objcClass("NSGraphicsContext")
-	_nSGraphicsContextSelGraphicsContextWithAttributes = objc.RegisterName("graphicsContextWithAttributes:")
-	_nSGraphicsContextSelGraphicsContextWithBitmapImageRep = objc.RegisterName("graphicsContextWithBitmapImageRep:")
-	_nSGraphicsContextSelGraphicsContextWithCGContextFlipped = objc.RegisterName("graphicsContextWithCGContext:flipped:")
-	_nSGraphicsContextSelCurrentContextDrawingToScreen = objc.RegisterName("currentContextDrawingToScreen")
-	_nSGraphicsContextSelSaveGraphicsState = objc.RegisterName("saveGraphicsState")
-	_nSGraphicsContextSelRestoreGraphicsState = objc.RegisterName("restoreGraphicsState")
-	_nSGraphicsContextSelFlushGraphics = objc.RegisterName("flushGraphics")
-	_nSGraphicsContextSelCurrentContext = objc.RegisterName("currentContext")
-	_nSGraphicsContextSelSetCurrentContext = objc.RegisterName("setCurrentContext:")
-	_nSGraphicsContextSelAttributes = objc.RegisterName("attributes")
-	_nSGraphicsContextSelIsDrawingToScreen = objc.RegisterName("isDrawingToScreen")
-	_nSGraphicsContextSelCGContext = objc.RegisterName("CGContext")
-	_nSGraphicsContextSelIsFlipped = objc.RegisterName("isFlipped")
-	_nSGraphicsContextSelShouldAntialias = objc.RegisterName("shouldAntialias")
-	_nSGraphicsContextSelSetShouldAntialias = objc.RegisterName("setShouldAntialias:")
-	_nSGraphicsContextSelImageInterpolation = objc.RegisterName("imageInterpolation")
-	_nSGraphicsContextSelSetImageInterpolation = objc.RegisterName("setImageInterpolation:")
-	_nSGraphicsContextSelPatternPhase = objc.RegisterName("patternPhase")
-	_nSGraphicsContextSelSetPatternPhase = objc.RegisterName("setPatternPhase:")
-	_nSGraphicsContextSelCompositingOperation = objc.RegisterName("compositingOperation")
-	_nSGraphicsContextSelSetCompositingOperation = objc.RegisterName("setCompositingOperation:")
-	_nSGraphicsContextSelColorRenderingIntent = objc.RegisterName("colorRenderingIntent")
-	_nSGraphicsContextSelSetColorRenderingIntent = objc.RegisterName("setColorRenderingIntent:")
-	_nSGraphicsContextSelCIContext = objc.RegisterName("CIContext")
-	_nSGraphicsContextSelSetGraphicsState = objc.RegisterName("setGraphicsState:")
-	_nSGraphicsContextSelFocusStack = objc.RegisterName("focusStack")
-	_nSGraphicsContextSelSetFocusStack = objc.RegisterName("setFocusStack:")
+	_clsNSGraphicsContext                                       = _objcClass("NSGraphicsContext")
+	_nSGraphicsContextSelGraphicsContextWithAttributes          = objc.RegisterName("graphicsContextWithAttributes:")
+	_nSGraphicsContextSelGraphicsContextWithBitmapImageRep      = objc.RegisterName("graphicsContextWithBitmapImageRep:")
+	_nSGraphicsContextSelGraphicsContextWithCGContextFlipped    = objc.RegisterName("graphicsContextWithCGContext:flipped:")
+	_nSGraphicsContextSelCurrentContextDrawingToScreen          = objc.RegisterName("currentContextDrawingToScreen")
+	_nSGraphicsContextSelSaveGraphicsState                      = objc.RegisterName("saveGraphicsState")
+	_nSGraphicsContextSelRestoreGraphicsState                   = objc.RegisterName("restoreGraphicsState")
+	_nSGraphicsContextSelFlushGraphics                          = objc.RegisterName("flushGraphics")
+	_nSGraphicsContextSelCurrentContext                         = objc.RegisterName("currentContext")
+	_nSGraphicsContextSelSetCurrentContext                      = objc.RegisterName("setCurrentContext:")
+	_nSGraphicsContextSelAttributes                             = objc.RegisterName("attributes")
+	_nSGraphicsContextSelIsDrawingToScreen                      = objc.RegisterName("isDrawingToScreen")
+	_nSGraphicsContextSelCGContext                              = objc.RegisterName("CGContext")
+	_nSGraphicsContextSelIsFlipped                              = objc.RegisterName("isFlipped")
+	_nSGraphicsContextSelShouldAntialias                        = objc.RegisterName("shouldAntialias")
+	_nSGraphicsContextSelSetShouldAntialias                     = objc.RegisterName("setShouldAntialias:")
+	_nSGraphicsContextSelImageInterpolation                     = objc.RegisterName("imageInterpolation")
+	_nSGraphicsContextSelSetImageInterpolation                  = objc.RegisterName("setImageInterpolation:")
+	_nSGraphicsContextSelPatternPhase                           = objc.RegisterName("patternPhase")
+	_nSGraphicsContextSelSetPatternPhase                        = objc.RegisterName("setPatternPhase:")
+	_nSGraphicsContextSelCompositingOperation                   = objc.RegisterName("compositingOperation")
+	_nSGraphicsContextSelSetCompositingOperation                = objc.RegisterName("setCompositingOperation:")
+	_nSGraphicsContextSelColorRenderingIntent                   = objc.RegisterName("colorRenderingIntent")
+	_nSGraphicsContextSelSetColorRenderingIntent                = objc.RegisterName("setColorRenderingIntent:")
+	_nSGraphicsContextSelCIContext                              = objc.RegisterName("CIContext")
+	_nSGraphicsContextSelSetGraphicsState                       = objc.RegisterName("setGraphicsState:")
+	_nSGraphicsContextSelFocusStack                             = objc.RegisterName("focusStack")
+	_nSGraphicsContextSelSetFocusStack                          = objc.RegisterName("setFocusStack:")
 	_nSGraphicsContextSelGraphicsContextWithGraphicsPortFlipped = objc.RegisterName("graphicsContextWithGraphicsPort:flipped:")
-	_nSGraphicsContextSelGraphicsContextWithWindow = objc.RegisterName("graphicsContextWithWindow:")
-	_nSGraphicsContextSelGraphicsPort = objc.RegisterName("graphicsPort")
+	_nSGraphicsContextSelGraphicsContextWithWindow              = objc.RegisterName("graphicsContextWithWindow:")
+	_nSGraphicsContextSelGraphicsPort                           = objc.RegisterName("graphicsPort")
 )
 
 func NSGraphicsContextFromID(id objc.ID) *NSGraphicsContext {
@@ -65,19 +65,25 @@ func NSGraphicsContextFromID(id objc.ID) *NSGraphicsContext {
 
 func NSGraphicsContextGraphicsContextWithAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithAttributes, attributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
 func NSGraphicsContextGraphicsContextWithBitmapImageRep(bitmapRep *NSBitmapImageRep) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithBitmapImageRep, bitmapRep.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
 func NSGraphicsContextGraphicsContextWithCGContextFlipped(graphicsPort unsafe.Pointer, initialFlippedState bool) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithCGContextFlipped, graphicsPort, initialFlippedState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -108,7 +114,9 @@ func (o *NSGraphicsContext) FlushGraphics() {
 
 func NSGraphicsContextCurrentContext() *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelCurrentContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -183,7 +191,9 @@ func (o *NSGraphicsContext) SetColorRenderingIntent(colorRenderingIntent NSColor
 
 func (o *NSGraphicsContext) CIContext() *coreimage.CIContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGraphicsContextSelCIContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIContextFromID(_ret)
 }
 
@@ -206,14 +216,18 @@ func (o *NSGraphicsContext) SetFocusStack(stack objc.ID) {
 // Deprecated: since macOS 10.14.
 func NSGraphicsContextGraphicsContextWithGraphicsPortFlipped(graphicsPort unsafe.Pointer, initialFlippedState bool) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithGraphicsPortFlipped, graphicsPort, initialFlippedState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
 // Deprecated: Add instances of NSView to display content in a window
 func NSGraphicsContextGraphicsContextWithWindow(window *NSWindow) *NSGraphicsContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSGraphicsContext), _nSGraphicsContextSelGraphicsContextWithWindow, window.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGraphicsContextFromID(_ret)
 }
 
@@ -222,4 +236,3 @@ func (o *NSGraphicsContext) GraphicsPort() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSGraphicsContextSelGraphicsPort)
 	return _ret
 }
-

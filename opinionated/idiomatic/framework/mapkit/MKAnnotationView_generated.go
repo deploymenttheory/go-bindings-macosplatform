@@ -496,4 +496,3 @@ type AnnotationViewable interface {
 }
 
 var _ AnnotationViewable = (*AnnotationView)(nil)
-

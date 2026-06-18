@@ -120,4 +120,3 @@ type MatrixUnaryKernelable interface {
 }
 
 var _ MatrixUnaryKernelable = (*MatrixUnaryKernel)(nil)
-

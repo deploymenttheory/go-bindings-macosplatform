@@ -17,47 +17,47 @@ type NSSlider struct {
 }
 
 var (
-	_clsNSSlider = _objcClass("NSSlider")
-	_nSSliderSelSliderType = objc.RegisterName("sliderType")
-	_nSSliderSelSetSliderType = objc.RegisterName("setSliderType:")
-	_nSSliderSelMinValue = objc.RegisterName("minValue")
-	_nSSliderSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSSliderSelMaxValue = objc.RegisterName("maxValue")
-	_nSSliderSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSSliderSelNeutralValue = objc.RegisterName("neutralValue")
-	_nSSliderSelSetNeutralValue = objc.RegisterName("setNeutralValue:")
-	_nSSliderSelAltIncrementValue = objc.RegisterName("altIncrementValue")
-	_nSSliderSelSetAltIncrementValue = objc.RegisterName("setAltIncrementValue:")
-	_nSSliderSelKnobThickness = objc.RegisterName("knobThickness")
-	_nSSliderSelIsVertical = objc.RegisterName("isVertical")
-	_nSSliderSelSetVertical = objc.RegisterName("setVertical:")
-	_nSSliderSelTrackFillColor = objc.RegisterName("trackFillColor")
-	_nSSliderSelSetTrackFillColor = objc.RegisterName("setTrackFillColor:")
-	_nSSliderSelTintProminence = objc.RegisterName("tintProminence")
-	_nSSliderSelSetTintProminence = objc.RegisterName("setTintProminence:")
-	_nSSliderSelTickMarkValueAtIndex = objc.RegisterName("tickMarkValueAtIndex:")
-	_nSSliderSelRectOfTickMarkAtIndex = objc.RegisterName("rectOfTickMarkAtIndex:")
-	_nSSliderSelIndexOfTickMarkAtPoint = objc.RegisterName("indexOfTickMarkAtPoint:")
-	_nSSliderSelClosestTickMarkValueToValue = objc.RegisterName("closestTickMarkValueToValue:")
-	_nSSliderSelNumberOfTickMarks = objc.RegisterName("numberOfTickMarks")
-	_nSSliderSelSetNumberOfTickMarks = objc.RegisterName("setNumberOfTickMarks:")
-	_nSSliderSelTickMarkPosition = objc.RegisterName("tickMarkPosition")
-	_nSSliderSelSetTickMarkPosition = objc.RegisterName("setTickMarkPosition:")
-	_nSSliderSelAllowsTickMarkValuesOnly = objc.RegisterName("allowsTickMarkValuesOnly")
-	_nSSliderSelSetAllowsTickMarkValuesOnly = objc.RegisterName("setAllowsTickMarkValuesOnly:")
-	_nSSliderSelSliderWithTargetAction = objc.RegisterName("sliderWithTarget:action:")
+	_clsNSSlider                                            = _objcClass("NSSlider")
+	_nSSliderSelSliderType                                  = objc.RegisterName("sliderType")
+	_nSSliderSelSetSliderType                               = objc.RegisterName("setSliderType:")
+	_nSSliderSelMinValue                                    = objc.RegisterName("minValue")
+	_nSSliderSelSetMinValue                                 = objc.RegisterName("setMinValue:")
+	_nSSliderSelMaxValue                                    = objc.RegisterName("maxValue")
+	_nSSliderSelSetMaxValue                                 = objc.RegisterName("setMaxValue:")
+	_nSSliderSelNeutralValue                                = objc.RegisterName("neutralValue")
+	_nSSliderSelSetNeutralValue                             = objc.RegisterName("setNeutralValue:")
+	_nSSliderSelAltIncrementValue                           = objc.RegisterName("altIncrementValue")
+	_nSSliderSelSetAltIncrementValue                        = objc.RegisterName("setAltIncrementValue:")
+	_nSSliderSelKnobThickness                               = objc.RegisterName("knobThickness")
+	_nSSliderSelIsVertical                                  = objc.RegisterName("isVertical")
+	_nSSliderSelSetVertical                                 = objc.RegisterName("setVertical:")
+	_nSSliderSelTrackFillColor                              = objc.RegisterName("trackFillColor")
+	_nSSliderSelSetTrackFillColor                           = objc.RegisterName("setTrackFillColor:")
+	_nSSliderSelTintProminence                              = objc.RegisterName("tintProminence")
+	_nSSliderSelSetTintProminence                           = objc.RegisterName("setTintProminence:")
+	_nSSliderSelTickMarkValueAtIndex                        = objc.RegisterName("tickMarkValueAtIndex:")
+	_nSSliderSelRectOfTickMarkAtIndex                       = objc.RegisterName("rectOfTickMarkAtIndex:")
+	_nSSliderSelIndexOfTickMarkAtPoint                      = objc.RegisterName("indexOfTickMarkAtPoint:")
+	_nSSliderSelClosestTickMarkValueToValue                 = objc.RegisterName("closestTickMarkValueToValue:")
+	_nSSliderSelNumberOfTickMarks                           = objc.RegisterName("numberOfTickMarks")
+	_nSSliderSelSetNumberOfTickMarks                        = objc.RegisterName("setNumberOfTickMarks:")
+	_nSSliderSelTickMarkPosition                            = objc.RegisterName("tickMarkPosition")
+	_nSSliderSelSetTickMarkPosition                         = objc.RegisterName("setTickMarkPosition:")
+	_nSSliderSelAllowsTickMarkValuesOnly                    = objc.RegisterName("allowsTickMarkValuesOnly")
+	_nSSliderSelSetAllowsTickMarkValuesOnly                 = objc.RegisterName("setAllowsTickMarkValuesOnly:")
+	_nSSliderSelSliderWithTargetAction                      = objc.RegisterName("sliderWithTarget:action:")
 	_nSSliderSelSliderWithValueMinValueMaxValueTargetAction = objc.RegisterName("sliderWithValue:minValue:maxValue:target:action:")
-	_nSSliderSelSetTitleCell = objc.RegisterName("setTitleCell:")
-	_nSSliderSelTitleCell = objc.RegisterName("titleCell")
-	_nSSliderSelSetTitleColor = objc.RegisterName("setTitleColor:")
-	_nSSliderSelTitleColor = objc.RegisterName("titleColor")
-	_nSSliderSelSetTitleFont = objc.RegisterName("setTitleFont:")
-	_nSSliderSelTitleFont = objc.RegisterName("titleFont")
-	_nSSliderSelTitle = objc.RegisterName("title")
-	_nSSliderSelSetTitle = objc.RegisterName("setTitle:")
-	_nSSliderSelSetKnobThickness = objc.RegisterName("setKnobThickness:")
-	_nSSliderSelSetImage = objc.RegisterName("setImage:")
-	_nSSliderSelImage = objc.RegisterName("image")
+	_nSSliderSelSetTitleCell                                = objc.RegisterName("setTitleCell:")
+	_nSSliderSelTitleCell                                   = objc.RegisterName("titleCell")
+	_nSSliderSelSetTitleColor                               = objc.RegisterName("setTitleColor:")
+	_nSSliderSelTitleColor                                  = objc.RegisterName("titleColor")
+	_nSSliderSelSetTitleFont                                = objc.RegisterName("setTitleFont:")
+	_nSSliderSelTitleFont                                   = objc.RegisterName("titleFont")
+	_nSSliderSelTitle                                       = objc.RegisterName("title")
+	_nSSliderSelSetTitle                                    = objc.RegisterName("setTitle:")
+	_nSSliderSelSetKnobThickness                            = objc.RegisterName("setKnobThickness:")
+	_nSSliderSelSetImage                                    = objc.RegisterName("setImage:")
+	_nSSliderSelImage                                       = objc.RegisterName("image")
 )
 
 func NSSliderFromID(id objc.ID) *NSSlider {
@@ -133,7 +133,9 @@ func (o *NSSlider) SetVertical(vertical bool) {
 
 func (o *NSSlider) TrackFillColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTrackFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -141,13 +143,13 @@ func (o *NSSlider) SetTrackFillColor(trackFillColor *NSColor) {
 	o.Ptr().Send(_nSSliderSelSetTrackFillColor, trackFillColor.Ptr())
 }
 
-// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See ``NSTintProminence`` for a list of possible values.
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
 func (o *NSSlider) TintProminence() NSTintProminence {
 	_ret := objc.Send[NSTintProminence](o.Ptr(), _nSSliderSelTintProminence)
 	return _ret
 }
 
-// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See ``NSTintProminence`` for a list of possible values.
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
 func (o *NSSlider) SetTintProminence(tintProminence NSTintProminence) {
 	o.Ptr().Send(_nSSliderSelSetTintProminence, tintProminence)
 }
@@ -202,14 +204,18 @@ func (o *NSSlider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
 // Creates a continuous horizontal slider over the range 0.0 to 1.0. The default value is 0.0. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized slider control.
 func NSSliderSliderWithTargetAction(target objc.ID, action objc.SEL) *NSSlider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithTargetAction, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderFromID(_ret)
 }
 
 // Creates a continuous horizontal slider that represents values over a specified range. @param value The initial value displayed by the control. @param minValue The minimum value represented by the control. @param maxValue The maximum value represented by the control. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized slider control.
 func NSSliderSliderWithValueMinValueMaxValueTargetAction(value float64, minValue float64, maxValue float64, target objc.ID, action objc.SEL) *NSSlider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSlider), _nSSliderSelSliderWithValueMinValueMaxValueTargetAction, value, minValue, maxValue, target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSliderFromID(_ret)
 }
 
@@ -232,7 +238,9 @@ func (o *NSSlider) SetTitleColor(newColor *NSColor) {
 // Deprecated: -titleColor has returned nil since 10.0
 func (o *NSSlider) TitleColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -244,14 +252,18 @@ func (o *NSSlider) SetTitleFont(fontObj *NSFont) {
 // Deprecated: -titleFont has returned nil since 10.0
 func (o *NSSlider) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitleFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
 // Deprecated: -title has returned nil since 10.0
 func (o *NSSlider) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -273,7 +285,8 @@ func (o *NSSlider) SetImage(backgroundImage *NSImage) {
 // Deprecated: -image has returned nil since 10.0
 func (o *NSSlider) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSliderSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
-

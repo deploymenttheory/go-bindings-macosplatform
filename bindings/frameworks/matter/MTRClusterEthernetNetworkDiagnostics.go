@@ -18,27 +18,27 @@ type MTRClusterEthernetNetworkDiagnostics struct {
 }
 
 var (
-	_clsMTRClusterEthernetNetworkDiagnostics = _objcClass("MTRClusterEthernetNetworkDiagnostics")
-	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePHYRateWithParams = objc.RegisterName("readAttributePHYRateWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeFullDuplexWithParams = objc.RegisterName("readAttributeFullDuplexWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePacketRxCountWithParams = objc.RegisterName("readAttributePacketRxCountWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePacketTxCountWithParams = objc.RegisterName("readAttributePacketTxCountWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeTxErrCountWithParams = objc.RegisterName("readAttributeTxErrCountWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeCollisionCountWithParams = objc.RegisterName("readAttributeCollisionCountWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeOverrunCountWithParams = objc.RegisterName("readAttributeOverrunCountWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeCarrierDetectWithParams = objc.RegisterName("readAttributeCarrierDetectWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeTimeSinceResetWithParams = objc.RegisterName("readAttributeTimeSinceResetWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterEthernetNetworkDiagnostics                                                                          = _objcClass("MTRClusterEthernetNetworkDiagnostics")
+	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePHYRateWithParams                                            = objc.RegisterName("readAttributePHYRateWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeFullDuplexWithParams                                         = objc.RegisterName("readAttributeFullDuplexWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePacketRxCountWithParams                                      = objc.RegisterName("readAttributePacketRxCountWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributePacketTxCountWithParams                                      = objc.RegisterName("readAttributePacketTxCountWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeTxErrCountWithParams                                         = objc.RegisterName("readAttributeTxErrCountWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeCollisionCountWithParams                                     = objc.RegisterName("readAttributeCollisionCountWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeOverrunCountWithParams                                       = objc.RegisterName("readAttributeOverrunCountWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeCarrierDetectWithParams                                      = objc.RegisterName("readAttributeCarrierDetectWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeTimeSinceResetWithParams                                     = objc.RegisterName("readAttributeTimeSinceResetWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeGeneratedCommandListWithParams                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeAcceptedCommandListWithParams                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeAttributeListWithParams                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeFeatureMapWithParams                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelReadAttributeClusterRevisionWithParams                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointQueue                                               = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler       = objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterEthernetNetworkDiagnosticsFromID(id objc.ID) *MTRClusterEthernetNetworkDiagnostics {
@@ -146,13 +146,17 @@ func (o *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithP
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterEthernetNetworkDiagnostics) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterEthernetNetworkDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterEthernetNetworkDiagnosticsFromID(_ret)
 }
 
 func (o *MTRClusterEthernetNetworkDiagnostics) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterEthernetNetworkDiagnostics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterEthernetNetworkDiagnosticsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterEthernetNetworkDiagnosticsFromID(_ret)
 }
 
@@ -177,4 +181,3 @@ func (o *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithExpectedValuesExpe
 	}
 	o.Ptr().Send(_mTRClusterEthernetNetworkDiagnosticsSelResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

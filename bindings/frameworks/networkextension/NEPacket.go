@@ -16,12 +16,12 @@ type NEPacket struct {
 }
 
 var (
-	_clsNEPacket = _objcClass("NEPacket")
+	_clsNEPacket                           = _objcClass("NEPacket")
 	_nEPacketSelInitWithDataProtocolFamily = objc.RegisterName("initWithData:protocolFamily:")
-	_nEPacketSelData = objc.RegisterName("data")
-	_nEPacketSelProtocolFamily = objc.RegisterName("protocolFamily")
-	_nEPacketSelDirection = objc.RegisterName("direction")
-	_nEPacketSelMetadata = objc.RegisterName("metadata")
+	_nEPacketSelData                       = objc.RegisterName("data")
+	_nEPacketSelProtocolFamily             = objc.RegisterName("protocolFamily")
+	_nEPacketSelDirection                  = objc.RegisterName("direction")
+	_nEPacketSelMetadata                   = objc.RegisterName("metadata")
 )
 
 func NEPacketFromID(id objc.ID) *NEPacket {
@@ -37,14 +37,18 @@ func NEPacketFromID(id objc.ID) *NEPacket {
 // @method initWithData:protocolFamily: @discussion Initializes a new NEPacket object with data and protocol family. @param data The content of the packet. @param protocolFamily The protocol family of the packet (such as AF_INET or AF_INET6).
 func (o *NEPacket) InitWithDataProtocolFamily(data *foundation.NSData, protocolFamily uint8) *NEPacket {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketSelInitWithDataProtocolFamily, data.Ptr(), protocolFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEPacketFromID(_ret)
 }
 
 // @property data @discussion The data content of the packet.
 func (o *NEPacket) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -63,7 +67,8 @@ func (o *NEPacket) Direction() NETrafficDirection {
 // @property metadata @discussion Metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
 func (o *NEPacket) Metadata() *NEFlowMetaData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFlowMetaDataFromID(_ret)
 }
-

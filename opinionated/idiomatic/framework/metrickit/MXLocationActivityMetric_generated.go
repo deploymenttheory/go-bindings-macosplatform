@@ -80,4 +80,3 @@ type LocationActivityMetricable interface {
 }
 
 var _ LocationActivityMetricable = (*LocationActivityMetric)(nil)
-

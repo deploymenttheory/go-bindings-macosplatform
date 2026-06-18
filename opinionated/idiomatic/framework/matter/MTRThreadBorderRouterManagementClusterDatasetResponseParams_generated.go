@@ -18,11 +18,15 @@ type MTRThreadBorderRouterManagementClusterDatasetResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams].
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams { return x.inner }
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID adopts an existing object pointer as a MTRThreadBorderRouterManagementClusterDatasetResponseParams (nil for 0).
 func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
@@ -68,4 +72,3 @@ type MTRThreadBorderRouterManagementClusterDatasetResponseParamsable interface {
 }
 
 var _ MTRThreadBorderRouterManagementClusterDatasetResponseParamsable = (*MTRThreadBorderRouterManagementClusterDatasetResponseParams)(nil)
-

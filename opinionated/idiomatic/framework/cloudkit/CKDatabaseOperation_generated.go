@@ -124,4 +124,3 @@ type DatabaseOperationable interface {
 }
 
 var _ DatabaseOperationable = (*DatabaseOperation)(nil)
-

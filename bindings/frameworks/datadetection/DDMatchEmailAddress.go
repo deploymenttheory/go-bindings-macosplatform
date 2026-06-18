@@ -18,9 +18,9 @@ type DDMatchEmailAddress struct {
 }
 
 var (
-	_clsDDMatchEmailAddress = _objcClass("DDMatchEmailAddress")
+	_clsDDMatchEmailAddress             = _objcClass("DDMatchEmailAddress")
 	_dDMatchEmailAddressSelEmailAddress = objc.RegisterName("emailAddress")
-	_dDMatchEmailAddressSelLabel = objc.RegisterName("label")
+	_dDMatchEmailAddressSelLabel        = objc.RegisterName("label")
 )
 
 func DDMatchEmailAddressFromID(id objc.ID) *DDMatchEmailAddress {
@@ -36,14 +36,17 @@ func DDMatchEmailAddressFromID(id objc.ID) *DDMatchEmailAddress {
 // A string that represents an email address.
 func (o *DDMatchEmailAddress) EmailAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchEmailAddressSelEmailAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A string that categorizes an email address, such as Home or Work.
 func (o *DDMatchEmailAddress) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchEmailAddressSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -15,10 +15,10 @@ type AVMIDIControlChangeEvent struct {
 }
 
 var (
-	_clsAVMIDIControlChangeEvent = _objcClass("AVMIDIControlChangeEvent")
+	_clsAVMIDIControlChangeEvent                                = _objcClass("AVMIDIControlChangeEvent")
 	_aVMIDIControlChangeEventSelInitWithChannelMessageTypeValue = objc.RegisterName("initWithChannel:messageType:value:")
-	_aVMIDIControlChangeEventSelMessageType = objc.RegisterName("messageType")
-	_aVMIDIControlChangeEventSelValue = objc.RegisterName("value")
+	_aVMIDIControlChangeEventSelMessageType                     = objc.RegisterName("messageType")
+	_aVMIDIControlChangeEventSelValue                           = objc.RegisterName("value")
 )
 
 func AVMIDIControlChangeEventFromID(id objc.ID) *AVMIDIControlChangeEvent {
@@ -34,7 +34,9 @@ func AVMIDIControlChangeEventFromID(id objc.ID) *AVMIDIControlChangeEvent {
 // @method initWithChannel:messageType:value @abstract Initialize the event with a channel, a control change type, and a control value. @param channel The MIDI channel for the control change.  Range: 0-15. @param messageType The AVMIDIControlChangeMessageType indicating which MIDI control change message to send. @param value The value for this control change.  Range: Depends on the type (see the General MIDI specification).
 func (o *AVMIDIControlChangeEvent) InitWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *AVMIDIControlChangeEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIControlChangeEventSelInitWithChannelMessageTypeValue, channel, messageType, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMIDIControlChangeEventFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *AVMIDIControlChangeEvent) Value() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVMIDIControlChangeEventSelValue)
 	return _ret
 }
-

@@ -16,11 +16,15 @@ type MTRCommissionerControlClusterCommissioningRequestResultEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRCommissionerControlClusterCommissioningRequestResultEvent].
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) Unwrap() *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent { return x.inner }
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) Unwrap() *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRCommissionerControlClusterCommissioningRequestResultEventFromID adopts an existing object pointer as a MTRCommissionerControlClusterCommissioningRequestResultEvent (nil for 0).
 func MTRCommissionerControlClusterCommissioningRequestResultEventFromID(id objc.ID) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
@@ -118,4 +122,3 @@ type MTRCommissionerControlClusterCommissioningRequestResultEventable interface 
 }
 
 var _ MTRCommissionerControlClusterCommissioningRequestResultEventable = (*MTRCommissionerControlClusterCommissioningRequestResultEvent)(nil)
-

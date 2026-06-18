@@ -229,4 +229,3 @@ type MapItemable interface {
 }
 
 var _ MapItemable = (*MapItem)(nil)
-

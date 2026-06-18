@@ -153,4 +153,3 @@ func SpatialMediaFilter() *PickerFilter {
 	}
 	return &PickerFilter{inner: _r}
 }
-

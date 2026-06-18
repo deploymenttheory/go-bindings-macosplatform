@@ -15,38 +15,38 @@ type NSDate struct {
 }
 
 var (
-	_clsNSDate = _objcClass("NSDate")
-	_nSDateSelInit = objc.RegisterName("init")
-	_nSDateSelInitWithTimeIntervalSinceReferenceDate = objc.RegisterName("initWithTimeIntervalSinceReferenceDate:")
-	_nSDateSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSDateSelTimeIntervalSinceReferenceDate = objc.RegisterName("timeIntervalSinceReferenceDate")
-	_nSDateSelTimeIntervalSinceDate = objc.RegisterName("timeIntervalSinceDate:")
-	_nSDateSelAddTimeInterval = objc.RegisterName("addTimeInterval:")
-	_nSDateSelDateByAddingTimeInterval = objc.RegisterName("dateByAddingTimeInterval:")
-	_nSDateSelEarlierDate = objc.RegisterName("earlierDate:")
-	_nSDateSelLaterDate = objc.RegisterName("laterDate:")
-	_nSDateSelCompare = objc.RegisterName("compare:")
-	_nSDateSelIsEqualToDate = objc.RegisterName("isEqualToDate:")
-	_nSDateSelDescriptionWithLocale = objc.RegisterName("descriptionWithLocale:")
-	_nSDateSelTimeIntervalSinceNow = objc.RegisterName("timeIntervalSinceNow")
-	_nSDateSelTimeIntervalSince1970 = objc.RegisterName("timeIntervalSince1970")
-	_nSDateSelDate = objc.RegisterName("date")
-	_nSDateSelDateWithTimeIntervalSinceNow = objc.RegisterName("dateWithTimeIntervalSinceNow:")
-	_nSDateSelDateWithTimeIntervalSinceReferenceDate = objc.RegisterName("dateWithTimeIntervalSinceReferenceDate:")
-	_nSDateSelDateWithTimeIntervalSince1970 = objc.RegisterName("dateWithTimeIntervalSince1970:")
-	_nSDateSelDateWithTimeIntervalSinceDate = objc.RegisterName("dateWithTimeInterval:sinceDate:")
-	_nSDateSelInitWithTimeIntervalSinceNow = objc.RegisterName("initWithTimeIntervalSinceNow:")
-	_nSDateSelInitWithTimeIntervalSince1970 = objc.RegisterName("initWithTimeIntervalSince1970:")
-	_nSDateSelInitWithTimeIntervalSinceDate = objc.RegisterName("initWithTimeInterval:sinceDate:")
-	_nSDateSelDistantFuture = objc.RegisterName("distantFuture")
-	_nSDateSelDistantPast = objc.RegisterName("distantPast")
-	_nSDateSelNow = objc.RegisterName("now")
-	_nSDateSelDateWithNaturalLanguageStringLocale = objc.RegisterName("dateWithNaturalLanguageString:locale:")
-	_nSDateSelDateWithNaturalLanguageString = objc.RegisterName("dateWithNaturalLanguageString:")
-	_nSDateSelDateWithString = objc.RegisterName("dateWithString:")
-	_nSDateSelDateWithCalendarFormatTimeZone = objc.RegisterName("dateWithCalendarFormat:timeZone:")
+	_clsNSDate                                            = _objcClass("NSDate")
+	_nSDateSelInit                                        = objc.RegisterName("init")
+	_nSDateSelInitWithTimeIntervalSinceReferenceDate      = objc.RegisterName("initWithTimeIntervalSinceReferenceDate:")
+	_nSDateSelInitWithCoder                               = objc.RegisterName("initWithCoder:")
+	_nSDateSelTimeIntervalSinceReferenceDate              = objc.RegisterName("timeIntervalSinceReferenceDate")
+	_nSDateSelTimeIntervalSinceDate                       = objc.RegisterName("timeIntervalSinceDate:")
+	_nSDateSelAddTimeInterval                             = objc.RegisterName("addTimeInterval:")
+	_nSDateSelDateByAddingTimeInterval                    = objc.RegisterName("dateByAddingTimeInterval:")
+	_nSDateSelEarlierDate                                 = objc.RegisterName("earlierDate:")
+	_nSDateSelLaterDate                                   = objc.RegisterName("laterDate:")
+	_nSDateSelCompare                                     = objc.RegisterName("compare:")
+	_nSDateSelIsEqualToDate                               = objc.RegisterName("isEqualToDate:")
+	_nSDateSelDescriptionWithLocale                       = objc.RegisterName("descriptionWithLocale:")
+	_nSDateSelTimeIntervalSinceNow                        = objc.RegisterName("timeIntervalSinceNow")
+	_nSDateSelTimeIntervalSince1970                       = objc.RegisterName("timeIntervalSince1970")
+	_nSDateSelDate                                        = objc.RegisterName("date")
+	_nSDateSelDateWithTimeIntervalSinceNow                = objc.RegisterName("dateWithTimeIntervalSinceNow:")
+	_nSDateSelDateWithTimeIntervalSinceReferenceDate      = objc.RegisterName("dateWithTimeIntervalSinceReferenceDate:")
+	_nSDateSelDateWithTimeIntervalSince1970               = objc.RegisterName("dateWithTimeIntervalSince1970:")
+	_nSDateSelDateWithTimeIntervalSinceDate               = objc.RegisterName("dateWithTimeInterval:sinceDate:")
+	_nSDateSelInitWithTimeIntervalSinceNow                = objc.RegisterName("initWithTimeIntervalSinceNow:")
+	_nSDateSelInitWithTimeIntervalSince1970               = objc.RegisterName("initWithTimeIntervalSince1970:")
+	_nSDateSelInitWithTimeIntervalSinceDate               = objc.RegisterName("initWithTimeInterval:sinceDate:")
+	_nSDateSelDistantFuture                               = objc.RegisterName("distantFuture")
+	_nSDateSelDistantPast                                 = objc.RegisterName("distantPast")
+	_nSDateSelNow                                         = objc.RegisterName("now")
+	_nSDateSelDateWithNaturalLanguageStringLocale         = objc.RegisterName("dateWithNaturalLanguageString:locale:")
+	_nSDateSelDateWithNaturalLanguageString               = objc.RegisterName("dateWithNaturalLanguageString:")
+	_nSDateSelDateWithString                              = objc.RegisterName("dateWithString:")
+	_nSDateSelDateWithCalendarFormatTimeZone              = objc.RegisterName("dateWithCalendarFormat:timeZone:")
 	_nSDateSelDescriptionWithCalendarFormatTimeZoneLocale = objc.RegisterName("descriptionWithCalendarFormat:timeZone:locale:")
-	_nSDateSelInitWithString = objc.RegisterName("initWithString:")
+	_nSDateSelInitWithString                              = objc.RegisterName("initWithString:")
 )
 
 func NSDateFromID(id objc.ID) *NSDate {
@@ -61,19 +61,25 @@ func NSDateFromID(id objc.ID) *NSDate {
 
 func (o *NSDate) Init() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) InitWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceReferenceDate, ti)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) InitWithCoder(coder *NSCoder) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -95,19 +101,25 @@ func (o *NSDate) AddTimeInterval(seconds float64) objc.ID {
 
 func (o *NSDate) DateByAddingTimeInterval(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDateByAddingTimeInterval, ti)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) EarlierDate(anotherDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelEarlierDate, anotherDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) LaterDate(anotherDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelLaterDate, anotherDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -123,7 +135,9 @@ func (o *NSDate) IsEqualToDate(otherDate *NSDate) bool {
 
 func (o *NSDate) DescriptionWithLocale(locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDescriptionWithLocale, locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -144,67 +158,89 @@ func NSDateTimeIntervalSinceReferenceDate() float64 {
 
 func NSDateDate() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDateWithTimeIntervalSinceNow(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceNow, secs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDateWithTimeIntervalSinceReferenceDate(ti float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceReferenceDate, ti)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDateWithTimeIntervalSince1970(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSince1970, secs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDateWithTimeIntervalSinceDate, secsToBeAdded, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) InitWithTimeIntervalSinceNow(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceNow, secs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) InitWithTimeIntervalSince1970(secs float64) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSince1970, secs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDate) InitWithTimeIntervalSinceDate(secsToBeAdded float64, date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithTimeIntervalSinceDate, secsToBeAdded, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDistantFuture() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDistantFuture)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateDistantPast() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelDistantPast)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSDateNow() *NSDate {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDate), _nSDateSelNow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -229,14 +265,18 @@ func NSDateDateWithString(aString *NSString) objc.ID {
 // Deprecated: since macOS 10.10.
 func (o *NSDate) DateWithCalendarFormatTimeZone(format *NSString, aTimeZone *NSTimeZone) *NSCalendarDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDateWithCalendarFormatTimeZone, format.Ptr(), aTimeZone.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarDateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *NSDate) DescriptionWithCalendarFormatTimeZoneLocale(format *NSString, aTimeZone *NSTimeZone, locale objc.ID) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelDescriptionWithCalendarFormatTimeZoneLocale, format.Ptr(), aTimeZone.Ptr(), locale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -245,4 +285,3 @@ func (o *NSDate) InitWithString(description *NSString) objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateSelInitWithString, description.Ptr())
 	return _ret
 }
-

@@ -101,4 +101,3 @@ type NearbyServiceBrowserable interface {
 }
 
 var _ NearbyServiceBrowserable = (*NearbyServiceBrowser)(nil)
-

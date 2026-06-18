@@ -18,17 +18,17 @@ type MTRClusterTargetNavigator struct {
 }
 
 var (
-	_clsMTRClusterTargetNavigator = _objcClass("MTRClusterTargetNavigator")
-	_mTRClusterTargetNavigatorSelNavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("navigateTargetWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterTargetNavigatorSelReadAttributeTargetListWithParams = objc.RegisterName("readAttributeTargetListWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeCurrentTargetWithParams = objc.RegisterName("readAttributeCurrentTargetWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterTargetNavigatorSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterTargetNavigatorSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterTargetNavigatorSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterTargetNavigator                                                                             = _objcClass("MTRClusterTargetNavigator")
+	_mTRClusterTargetNavigatorSelNavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("navigateTargetWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterTargetNavigatorSelReadAttributeTargetListWithParams                                            = objc.RegisterName("readAttributeTargetListWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeCurrentTargetWithParams                                         = objc.RegisterName("readAttributeCurrentTargetWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeGeneratedCommandListWithParams                                  = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeAcceptedCommandListWithParams                                   = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeAttributeListWithParams                                         = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeFeatureMapWithParams                                            = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterTargetNavigatorSelReadAttributeClusterRevisionWithParams                                       = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterTargetNavigatorSelInitWithDeviceEndpointIDQueue                                                = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterTargetNavigatorSelInitWithDeviceEndpointQueue                                                  = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterTargetNavigatorSelNavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("navigateTargetWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -94,13 +94,17 @@ func (o *MTRClusterTargetNavigator) ReadAttributeClusterRevisionWithParams(param
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterTargetNavigator) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTargetNavigator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTargetNavigatorSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTargetNavigatorFromID(_ret)
 }
 
 func (o *MTRClusterTargetNavigator) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTargetNavigator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterTargetNavigatorSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterTargetNavigatorFromID(_ret)
 }
 
@@ -117,4 +121,3 @@ func (o *MTRClusterTargetNavigator) NavigateTargetWithParamsExpectedValuesExpect
 	}
 	o.Ptr().Send(_mTRClusterTargetNavigatorSelNavigateTargetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

@@ -16,15 +16,15 @@ type NSTableViewRowAction struct {
 }
 
 var (
-	_clsNSTableViewRowAction = _objcClass("NSTableViewRowAction")
+	_clsNSTableViewRowAction                               = _objcClass("NSTableViewRowAction")
 	_nSTableViewRowActionSelRowActionWithStyleTitleHandler = objc.RegisterName("rowActionWithStyle:title:handler:")
-	_nSTableViewRowActionSelStyle = objc.RegisterName("style")
-	_nSTableViewRowActionSelTitle = objc.RegisterName("title")
-	_nSTableViewRowActionSelSetTitle = objc.RegisterName("setTitle:")
-	_nSTableViewRowActionSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTableViewRowActionSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTableViewRowActionSelImage = objc.RegisterName("image")
-	_nSTableViewRowActionSelSetImage = objc.RegisterName("setImage:")
+	_nSTableViewRowActionSelStyle                          = objc.RegisterName("style")
+	_nSTableViewRowActionSelTitle                          = objc.RegisterName("title")
+	_nSTableViewRowActionSelSetTitle                       = objc.RegisterName("setTitle:")
+	_nSTableViewRowActionSelBackgroundColor                = objc.RegisterName("backgroundColor")
+	_nSTableViewRowActionSelSetBackgroundColor             = objc.RegisterName("setBackgroundColor:")
+	_nSTableViewRowActionSelImage                          = objc.RegisterName("image")
+	_nSTableViewRowActionSelSetImage                       = objc.RegisterName("setImage:")
 )
 
 func NSTableViewRowActionFromID(id objc.ID) *NSTableViewRowAction {
@@ -49,7 +49,9 @@ func NSTableViewRowActionRowActionWithStyleTitleHandler(style NSTableViewRowActi
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTableViewRowAction), _nSTableViewRowActionSelRowActionWithStyleTitleHandler, style, title.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTableViewRowActionFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *NSTableViewRowAction) Style() NSTableViewRowActionStyle {
 
 func (o *NSTableViewRowAction) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewRowActionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *NSTableViewRowAction) SetTitle(title *foundation.NSString) {
 
 func (o *NSTableViewRowAction) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewRowActionSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -80,11 +86,12 @@ func (o *NSTableViewRowAction) SetBackgroundColor(backgroundColor *NSColor) {
 
 func (o *NSTableViewRowAction) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTableViewRowActionSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSTableViewRowAction) SetImage(image *NSImage) {
 	o.Ptr().Send(_nSTableViewRowActionSelSetImage, image.Ptr())
 }
-

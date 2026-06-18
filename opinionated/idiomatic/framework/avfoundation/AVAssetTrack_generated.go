@@ -383,4 +383,3 @@ type AssetTrackable interface {
 }
 
 var _ AssetTrackable = (*AssetTrack)(nil)
-

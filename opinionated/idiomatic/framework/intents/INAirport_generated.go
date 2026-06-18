@@ -74,4 +74,3 @@ type Airportable interface {
 }
 
 var _ Airportable = (*Airport)(nil)
-

@@ -17,13 +17,13 @@ type SKMutablePayment struct {
 }
 
 var (
-	_clsSKMutablePayment = _objcClass("SKMutablePayment")
-	_sKMutablePaymentSelSetApplicationUsername = objc.RegisterName("setApplicationUsername:")
-	_sKMutablePaymentSelSetPaymentDiscount = objc.RegisterName("setPaymentDiscount:")
-	_sKMutablePaymentSelProductIdentifier = objc.RegisterName("productIdentifier")
-	_sKMutablePaymentSelSetProductIdentifier = objc.RegisterName("setProductIdentifier:")
-	_sKMutablePaymentSelSetQuantity = objc.RegisterName("setQuantity:")
-	_sKMutablePaymentSelSetRequestData = objc.RegisterName("setRequestData:")
+	_clsSKMutablePayment                              = _objcClass("SKMutablePayment")
+	_sKMutablePaymentSelSetApplicationUsername        = objc.RegisterName("setApplicationUsername:")
+	_sKMutablePaymentSelSetPaymentDiscount            = objc.RegisterName("setPaymentDiscount:")
+	_sKMutablePaymentSelProductIdentifier             = objc.RegisterName("productIdentifier")
+	_sKMutablePaymentSelSetProductIdentifier          = objc.RegisterName("setProductIdentifier:")
+	_sKMutablePaymentSelSetQuantity                   = objc.RegisterName("setQuantity:")
+	_sKMutablePaymentSelSetRequestData                = objc.RegisterName("setRequestData:")
 	_sKMutablePaymentSelSetSimulatesAskToBuyInSandbox = objc.RegisterName("setSimulatesAskToBuyInSandbox:")
 )
 
@@ -50,7 +50,9 @@ func (o *SKMutablePayment) SetPaymentDiscount(paymentDiscount *SKPaymentDiscount
 // Deprecated: Create a Product.PurchaseOption.promotionalOffer to use in Product.purchase(confirmIn:options:).
 func (o *SKMutablePayment) ProductIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKMutablePaymentSelProductIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +74,3 @@ func (o *SKMutablePayment) SetRequestData(requestData *foundation.NSData) {
 func (o *SKMutablePayment) SetSimulatesAskToBuyInSandbox(simulatesAskToBuyInSandbox bool) {
 	o.Ptr().Send(_sKMutablePaymentSelSetSimulatesAskToBuyInSandbox, simulatesAskToBuyInSandbox)
 }
-

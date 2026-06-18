@@ -54,4 +54,3 @@ type UnitMassable interface {
 }
 
 var _ UnitMassable = (*UnitMass)(nil)
-

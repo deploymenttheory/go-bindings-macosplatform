@@ -88,4 +88,3 @@ type Quadtreeable interface {
 }
 
 var _ Quadtreeable = (*Quadtree)(nil)
-

@@ -17,10 +17,10 @@ type QLPreviewReplyAttachment struct {
 }
 
 var (
-	_clsQLPreviewReplyAttachment = _objcClass("QLPreviewReplyAttachment")
+	_clsQLPreviewReplyAttachment                        = _objcClass("QLPreviewReplyAttachment")
 	_qLPreviewReplyAttachmentSelInitWithDataContentType = objc.RegisterName("initWithData:contentType:")
-	_qLPreviewReplyAttachmentSelData = objc.RegisterName("data")
-	_qLPreviewReplyAttachmentSelContentType = objc.RegisterName("contentType")
+	_qLPreviewReplyAttachmentSelData                    = objc.RegisterName("data")
+	_qLPreviewReplyAttachmentSelContentType             = objc.RegisterName("contentType")
 )
 
 func QLPreviewReplyAttachmentFromID(id objc.ID) *QLPreviewReplyAttachment {
@@ -36,21 +36,26 @@ func QLPreviewReplyAttachmentFromID(id objc.ID) *QLPreviewReplyAttachment {
 // @abstract Create an attachment for html previews by providing the data and mime type of the attachment. @param data The data content of an html preview @param contentType The UTType of the attachment for an html preview
 func (o *QLPreviewReplyAttachment) InitWithDataContentType(data *foundation.NSData, contentType *uniformtypeidentifiers.UTType) *QLPreviewReplyAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplyAttachmentSelInitWithDataContentType, data.Ptr(), contentType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewReplyAttachmentFromID(_ret)
 }
 
 // The data content of an html preview
 func (o *QLPreviewReplyAttachment) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplyAttachmentSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The content type of the attachment for an html preview
 func (o *QLPreviewReplyAttachment) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLPreviewReplyAttachmentSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
-

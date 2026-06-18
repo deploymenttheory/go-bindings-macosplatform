@@ -71,4 +71,3 @@ type DocumentQueryable interface {
 }
 
 var _ DocumentQueryable = (*DocumentQuery)(nil)
-

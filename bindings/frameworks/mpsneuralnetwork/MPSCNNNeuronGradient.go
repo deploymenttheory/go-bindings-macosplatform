@@ -17,14 +17,14 @@ type MPSCNNNeuronGradient struct {
 }
 
 var (
-	_clsMPSCNNNeuronGradient = _objcClass("MPSCNNNeuronGradient")
+	_clsMPSCNNNeuronGradient                               = _objcClass("MPSCNNNeuronGradient")
 	_mPSCNNNeuronGradientSelInitWithDeviceNeuronDescriptor = objc.RegisterName("initWithDevice:neuronDescriptor:")
-	_mPSCNNNeuronGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNNeuronGradientSelNeuronType = objc.RegisterName("neuronType")
-	_mPSCNNNeuronGradientSelA = objc.RegisterName("a")
-	_mPSCNNNeuronGradientSelB = objc.RegisterName("b")
-	_mPSCNNNeuronGradientSelC = objc.RegisterName("c")
-	_mPSCNNNeuronGradientSelData = objc.RegisterName("data")
+	_mPSCNNNeuronGradientSelInitWithCoderDevice            = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNNeuronGradientSelNeuronType                     = objc.RegisterName("neuronType")
+	_mPSCNNNeuronGradientSelA                              = objc.RegisterName("a")
+	_mPSCNNNeuronGradientSelB                              = objc.RegisterName("b")
+	_mPSCNNNeuronGradientSelC                              = objc.RegisterName("c")
+	_mPSCNNNeuronGradientSelData                           = objc.RegisterName("data")
 )
 
 func MPSCNNNeuronGradientFromID(id objc.ID) *MPSCNNNeuronGradient {
@@ -40,14 +40,18 @@ func MPSCNNNeuronGradientFromID(id objc.ID) *MPSCNNNeuronGradient {
 // @abstract  Initialize the neuron gradient filter with a neuron descriptor. @param     device                   The device the filter will run on. @param     neuronDescriptor         The neuron descriptor. For the neuron of type MPSCNNNeuronTypePReLU, the neuron descriptor references an NSData object containing a float array with the per feature channel value of PReLu parameter and, in this case, the MPSCNNNeuronGradient retains the NSData object. @return    A valid MPSCNNNeuronGradient object or nil, if failure.
 func (o *MPSCNNNeuronGradient) InitWithDeviceNeuronDescriptor(device metal.MTLDevice, neuronDescriptor *MPSNNNeuronDescriptor) *MPSCNNNeuronGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGradientSelInitWithDeviceNeuronDescriptor, device, neuronDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNNeuronGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNNeuronGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronGradientFromID(_ret)
 }
 
@@ -73,7 +77,8 @@ func (o *MPSCNNNeuronGradient) C() float32 {
 
 func (o *MPSCNNNeuronGradient) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronGradientSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

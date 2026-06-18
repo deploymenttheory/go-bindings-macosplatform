@@ -58,4 +58,3 @@ type SharedTextureHandleable interface {
 }
 
 var _ SharedTextureHandleable = (*SharedTextureHandle)(nil)
-

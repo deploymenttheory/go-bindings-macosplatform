@@ -56,9 +56,13 @@ func (x *NNReductionColumnMeanNode) WithLabel(label string) *NNReductionColumnMe
 	return x
 }
 
-func (x *NNReductionColumnMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionColumnMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionColumnMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionColumnMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionColumnMeanNodeable is the interface implemented by [NNReductionColumnMeanNode], for mocking and DI.
 type NNReductionColumnMeanNodeable interface {
@@ -69,4 +73,3 @@ type NNReductionColumnMeanNodeable interface {
 }
 
 var _ NNReductionColumnMeanNodeable = (*NNReductionColumnMeanNode)(nil)
-

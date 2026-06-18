@@ -149,4 +149,3 @@ type IOBluetoothDeviceInquiryable interface {
 }
 
 var _ IOBluetoothDeviceInquiryable = (*IOBluetoothDeviceInquiry)(nil)
-

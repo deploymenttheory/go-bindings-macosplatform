@@ -16,21 +16,21 @@ type MLCLSTMLayer struct {
 }
 
 var (
-	_clsMLCLSTMLayer = _objcClass("MLCLSTMLayer")
-	_mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsBiases = objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:biases:")
-	_mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases = objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:")
+	_clsMLCLSTMLayer                                                                                                       = _objcClass("MLCLSTMLayer")
+	_mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsBiases                                                     = objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:biases:")
+	_mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases                                      = objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:")
 	_mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation = objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:gateActivations:outputResultActivation:")
-	_mLCLSTMLayerSelDescriptor = objc.RegisterName("descriptor")
-	_mLCLSTMLayerSelGateActivations = objc.RegisterName("gateActivations")
-	_mLCLSTMLayerSelOutputResultActivation = objc.RegisterName("outputResultActivation")
-	_mLCLSTMLayerSelInputWeights = objc.RegisterName("inputWeights")
-	_mLCLSTMLayerSelHiddenWeights = objc.RegisterName("hiddenWeights")
-	_mLCLSTMLayerSelPeepholeWeights = objc.RegisterName("peepholeWeights")
-	_mLCLSTMLayerSelBiases = objc.RegisterName("biases")
-	_mLCLSTMLayerSelInputWeightsParameters = objc.RegisterName("inputWeightsParameters")
-	_mLCLSTMLayerSelHiddenWeightsParameters = objc.RegisterName("hiddenWeightsParameters")
-	_mLCLSTMLayerSelPeepholeWeightsParameters = objc.RegisterName("peepholeWeightsParameters")
-	_mLCLSTMLayerSelBiasesParameters = objc.RegisterName("biasesParameters")
+	_mLCLSTMLayerSelDescriptor                                                                                             = objc.RegisterName("descriptor")
+	_mLCLSTMLayerSelGateActivations                                                                                        = objc.RegisterName("gateActivations")
+	_mLCLSTMLayerSelOutputResultActivation                                                                                 = objc.RegisterName("outputResultActivation")
+	_mLCLSTMLayerSelInputWeights                                                                                           = objc.RegisterName("inputWeights")
+	_mLCLSTMLayerSelHiddenWeights                                                                                          = objc.RegisterName("hiddenWeights")
+	_mLCLSTMLayerSelPeepholeWeights                                                                                        = objc.RegisterName("peepholeWeights")
+	_mLCLSTMLayerSelBiases                                                                                                 = objc.RegisterName("biases")
+	_mLCLSTMLayerSelInputWeightsParameters                                                                                 = objc.RegisterName("inputWeightsParameters")
+	_mLCLSTMLayerSelHiddenWeightsParameters                                                                                = objc.RegisterName("hiddenWeightsParameters")
+	_mLCLSTMLayerSelPeepholeWeightsParameters                                                                              = objc.RegisterName("peepholeWeightsParameters")
+	_mLCLSTMLayerSelBiasesParameters                                                                                       = objc.RegisterName("biasesParameters")
 )
 
 func MLCLSTMLayerFromID(id objc.ID) *MLCLSTMLayer {
@@ -46,98 +46,125 @@ func MLCLSTMLayerFromID(id objc.ID) *MLCLSTMLayer {
 // @abstract   Create a LSTM layer @param      descriptor               The LSTM descriptor @param      inputWeights           An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      hiddenWeights         An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @return     A new LSTM layer.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor]) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsBiases, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), biases.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLSTMLayerFromID(_ret)
 }
 
 // @abstract   Create a LSTM layer @param      descriptor               The LSTM descriptor @param      inputWeights           An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      hiddenWeights         An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      peepholeWeights     An array of (layerCount * 4) tensors describing the peephole weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @return     A new LSTM layer.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], peepholeWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor]) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), peepholeWeights.Ptr(), biases.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLSTMLayerFromID(_ret)
 }
 
 // @abstract   Create a LSTM layer @param      descriptor                            The LSTM descriptor @param      inputWeights                        An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time weights for all stacked layers will come first followed by backward time weights @param      hiddenWeights                      An array of (layerCount * 4) tensors describing the hidden weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time weights for all stacked layers will come first followed by backward time weights @param      peepholeWeights                 An array of (layerCount * 4) tensors describing the peephole weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. @param      biases                               An array of (layerCount * 4) tensors describing the input weights for the input, hidden, cell and output gates for layer0, layer1.. layer(n-1) for layerCount=n. For bidirectional LSTM, the forward time bias terms for all stacked layers will come first followed by backward time bias terms @param      gateActivations                  An array of 4 neuron descriptors for the input, hidden, cell and output gate activations. @param      outputResultActivation  The neuron descriptor used for the activation function applied to output result.  Default is tanh. @return     A new  LSTM layer.
 func MLCLSTMLayerLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor *MLCLSTMDescriptor, inputWeights *foundation.NSArray[*MLCTensor], hiddenWeights *foundation.NSArray[*MLCTensor], peepholeWeights *foundation.NSArray[*MLCTensor], biases *foundation.NSArray[*MLCTensor], gateActivations *foundation.NSArray[*MLCActivationDescriptor], outputResultActivation *MLCActivationDescriptor) *MLCLSTMLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCLSTMLayer), _mLCLSTMLayerSelLayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation, descriptor.Ptr(), inputWeights.Ptr(), hiddenWeights.Ptr(), peepholeWeights.Ptr(), biases.Ptr(), gateActivations.Ptr(), outputResultActivation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLSTMLayerFromID(_ret)
 }
 
 // @property   descriptor @abstract   The LSTM descriptor
 func (o *MLCLSTMLayer) Descriptor() *MLCLSTMDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCLSTMDescriptorFromID(_ret)
 }
 
 // @property   gateActivations @abstract   The array of gate activations for input, hidden, cell and output gates @discussion The default gate activations are: sigmoid, sigmoid, tanh, sigmoid
 func (o *MLCLSTMLayer) GateActivations() *foundation.NSArray[*MLCActivationDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelGateActivations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCActivationDescriptor](_ret)
 }
 
 // @property   outputResultActivation @abstract   The output activation descriptor
 func (o *MLCLSTMLayer) OutputResultActivation() *MLCActivationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelOutputResultActivation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCActivationDescriptorFromID(_ret)
 }
 
 // @property   inputWeights @abstract   The array of tensors describing the input weights for the input, hidden, cell and output gates
 func (o *MLCLSTMLayer) InputWeights() *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelInputWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @property   hiddenWeights @abstract   The array of tensors describing the hidden weights for the input, hidden, cell and output gates
 func (o *MLCLSTMLayer) HiddenWeights() *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelHiddenWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @property   peepholeWeights @abstract   The array of tensors describing the peephole weights for the input, hidden, cell and output gates
 func (o *MLCLSTMLayer) PeepholeWeights() *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelPeepholeWeights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @property   biases @abstract   The array of tensors describing the bias terms for the input, hidden, cell and output gates
 func (o *MLCLSTMLayer) Biases() *foundation.NSArray[*MLCTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelBiases)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensor](_ret)
 }
 
 // @property   inputWeightsParameters @abstract   The input weights tensor parameters used for optimizer update
 func (o *MLCLSTMLayer) InputWeightsParameters() *foundation.NSArray[*MLCTensorParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelInputWeightsParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorParameter](_ret)
 }
 
 // @property   hiddenWeightsParameters @abstract   The hidden weights tensor parameters used for optimizer update
 func (o *MLCLSTMLayer) HiddenWeightsParameters() *foundation.NSArray[*MLCTensorParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelHiddenWeightsParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorParameter](_ret)
 }
 
 // @property   peepholeWeightsParameters @abstract   The peephole weights tensor parameters used for optimizer update
 func (o *MLCLSTMLayer) PeepholeWeightsParameters() *foundation.NSArray[*MLCTensorParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelPeepholeWeightsParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorParameter](_ret)
 }
 
 // @property   biasesParameters @abstract   The bias tensor parameter used for optimizer update
 func (o *MLCLSTMLayer) BiasesParameters() *foundation.NSArray[*MLCTensorParameter] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCLSTMLayerSelBiasesParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLCTensorParameter](_ret)
 }
-

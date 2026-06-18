@@ -146,4 +146,3 @@ type CoreDataCoreSpotlightDelegateable interface {
 }
 
 var _ CoreDataCoreSpotlightDelegateable = (*CoreDataCoreSpotlightDelegate)(nil)
-

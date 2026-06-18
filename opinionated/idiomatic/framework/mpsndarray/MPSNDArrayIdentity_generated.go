@@ -65,11 +65,17 @@ func (x *ArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayDimensi
 	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder, cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)
 }
 
-func (x *ArrayIdentity) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel { return &x.inner.MPSNDArrayUnaryKernel }
+func (x *ArrayIdentity) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel
+}
 
-func (x *ArrayIdentity) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel }
+func (x *ArrayIdentity) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayIdentity) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayIdentity) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayIdentityable is the interface implemented by [ArrayIdentity], for mocking and DI.
 type ArrayIdentityable interface {
@@ -82,4 +88,3 @@ type ArrayIdentityable interface {
 }
 
 var _ ArrayIdentityable = (*ArrayIdentity)(nil)
-

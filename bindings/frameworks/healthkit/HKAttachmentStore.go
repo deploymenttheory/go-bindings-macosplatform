@@ -19,13 +19,13 @@ type HKAttachmentStore struct {
 }
 
 var (
-	_clsHKAttachmentStore = _objcClass("HKAttachmentStore")
-	_hKAttachmentStoreSelInitWithHealthStore = objc.RegisterName("initWithHealthStore:")
+	_clsHKAttachmentStore                                                          = _objcClass("HKAttachmentStore")
+	_hKAttachmentStoreSelInitWithHealthStore                                       = objc.RegisterName("initWithHealthStore:")
 	_hKAttachmentStoreSelAddAttachmentToObjectNameContentTypeURLMetadataCompletion = objc.RegisterName("addAttachmentToObject:name:contentType:URL:metadata:completion:")
-	_hKAttachmentStoreSelRemoveAttachmentFromObjectCompletion = objc.RegisterName("removeAttachment:fromObject:completion:")
-	_hKAttachmentStoreSelGetAttachmentsForObjectCompletion = objc.RegisterName("getAttachmentsForObject:completion:")
-	_hKAttachmentStoreSelGetDataForAttachmentCompletion = objc.RegisterName("getDataForAttachment:completion:")
-	_hKAttachmentStoreSelStreamDataForAttachmentDataHandler = objc.RegisterName("streamDataForAttachment:dataHandler:")
+	_hKAttachmentStoreSelRemoveAttachmentFromObjectCompletion                      = objc.RegisterName("removeAttachment:fromObject:completion:")
+	_hKAttachmentStoreSelGetAttachmentsForObjectCompletion                         = objc.RegisterName("getAttachmentsForObject:completion:")
+	_hKAttachmentStoreSelGetDataForAttachmentCompletion                            = objc.RegisterName("getDataForAttachment:completion:")
+	_hKAttachmentStoreSelStreamDataForAttachmentDataHandler                        = objc.RegisterName("streamDataForAttachment:dataHandler:")
 )
 
 func HKAttachmentStoreFromID(id objc.ID) *HKAttachmentStore {
@@ -41,7 +41,9 @@ func HKAttachmentStoreFromID(id objc.ID) *HKAttachmentStore {
 // @method        initWithHealthStore: @abstract      The designated initializer to create an HKAttachmentStore. @param         healthStore     Specifies the HKHealthStore object to use.
 func (o *HKAttachmentStore) InitWithHealthStore(healthStore *HKHealthStore) *HKAttachmentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentStoreSelInitWithHealthStore, healthStore.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAttachmentStoreFromID(_ret)
 }
 
@@ -100,7 +102,9 @@ func (o *HKAttachmentStore) GetDataForAttachmentCompletion(attachment *HKAttachm
 		defer __block_completion.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentStoreSelGetDataForAttachmentCompletion, attachment.Ptr(), __block_completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -117,7 +121,8 @@ func (o *HKAttachmentStore) StreamDataForAttachmentDataHandler(attachment *HKAtt
 		defer __block_dataHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAttachmentStoreSelStreamDataForAttachmentDataHandler, attachment.Ptr(), __block_dataHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
-

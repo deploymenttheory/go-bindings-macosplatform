@@ -16,13 +16,13 @@ type MKClusterAnnotation struct {
 }
 
 var (
-	_clsMKClusterAnnotation = _objcClass("MKClusterAnnotation")
+	_clsMKClusterAnnotation                          = _objcClass("MKClusterAnnotation")
 	_mKClusterAnnotationSelInitWithMemberAnnotations = objc.RegisterName("initWithMemberAnnotations:")
-	_mKClusterAnnotationSelTitle = objc.RegisterName("title")
-	_mKClusterAnnotationSelSetTitle = objc.RegisterName("setTitle:")
-	_mKClusterAnnotationSelSubtitle = objc.RegisterName("subtitle")
-	_mKClusterAnnotationSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_mKClusterAnnotationSelMemberAnnotations = objc.RegisterName("memberAnnotations")
+	_mKClusterAnnotationSelTitle                     = objc.RegisterName("title")
+	_mKClusterAnnotationSelSetTitle                  = objc.RegisterName("setTitle:")
+	_mKClusterAnnotationSelSubtitle                  = objc.RegisterName("subtitle")
+	_mKClusterAnnotationSelSetSubtitle               = objc.RegisterName("setSubtitle:")
+	_mKClusterAnnotationSelMemberAnnotations         = objc.RegisterName("memberAnnotations")
 )
 
 func MKClusterAnnotationFromID(id objc.ID) *MKClusterAnnotation {
@@ -37,13 +37,17 @@ func MKClusterAnnotationFromID(id objc.ID) *MKClusterAnnotation {
 
 func (o *MKClusterAnnotation) InitWithMemberAnnotations(memberAnnotations *foundation.NSArray[MKAnnotation]) *MKClusterAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKClusterAnnotationSelInitWithMemberAnnotations, memberAnnotations.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKClusterAnnotationFromID(_ret)
 }
 
 func (o *MKClusterAnnotation) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKClusterAnnotationSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,7 +57,9 @@ func (o *MKClusterAnnotation) SetTitle(title *foundation.NSString) {
 
 func (o *MKClusterAnnotation) Subtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKClusterAnnotationSelSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +69,8 @@ func (o *MKClusterAnnotation) SetSubtitle(subtitle *foundation.NSString) {
 
 func (o *MKClusterAnnotation) MemberAnnotations() *foundation.NSArray[MKAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKClusterAnnotationSelMemberAnnotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MKAnnotation](_ret)
 }
-

@@ -15,10 +15,10 @@ type MTLRenderPassDepthAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPassDepthAttachmentDescriptor = _objcClass("MTLRenderPassDepthAttachmentDescriptor")
-	_mTLRenderPassDepthAttachmentDescriptorSelClearDepth = objc.RegisterName("clearDepth")
-	_mTLRenderPassDepthAttachmentDescriptorSelSetClearDepth = objc.RegisterName("setClearDepth:")
-	_mTLRenderPassDepthAttachmentDescriptorSelDepthResolveFilter = objc.RegisterName("depthResolveFilter")
+	_clsMTLRenderPassDepthAttachmentDescriptor                      = _objcClass("MTLRenderPassDepthAttachmentDescriptor")
+	_mTLRenderPassDepthAttachmentDescriptorSelClearDepth            = objc.RegisterName("clearDepth")
+	_mTLRenderPassDepthAttachmentDescriptorSelSetClearDepth         = objc.RegisterName("setClearDepth:")
+	_mTLRenderPassDepthAttachmentDescriptorSelDepthResolveFilter    = objc.RegisterName("depthResolveFilter")
 	_mTLRenderPassDepthAttachmentDescriptorSelSetDepthResolveFilter = objc.RegisterName("setDepthResolveFilter:")
 )
 
@@ -51,4 +51,3 @@ func (o *MTLRenderPassDepthAttachmentDescriptor) DepthResolveFilter() MTLMultisa
 func (o *MTLRenderPassDepthAttachmentDescriptor) SetDepthResolveFilter(depthResolveFilter MTLMultisampleDepthResolveFilter) {
 	o.Ptr().Send(_mTLRenderPassDepthAttachmentDescriptorSelSetDepthResolveFilter, depthResolveFilter)
 }
-

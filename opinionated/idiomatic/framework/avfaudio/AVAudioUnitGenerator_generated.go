@@ -65,4 +65,3 @@ type AudioUnitGeneratorable interface {
 }
 
 var _ AudioUnitGeneratorable = (*AudioUnitGenerator)(nil)
-

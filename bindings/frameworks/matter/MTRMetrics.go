@@ -16,10 +16,10 @@ type MTRMetrics struct {
 }
 
 var (
-	_clsMTRMetrics = _objcClass("MTRMetrics")
+	_clsMTRMetrics                 = _objcClass("MTRMetrics")
 	_mTRMetricsSelMetricDataForKey = objc.RegisterName("metricDataForKey:")
 	_mTRMetricsSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_mTRMetricsSelAllKeys = objc.RegisterName("allKeys")
+	_mTRMetricsSelAllKeys          = objc.RegisterName("allKeys")
 )
 
 func MTRMetricsFromID(id objc.ID) *MTRMetrics {
@@ -35,14 +35,18 @@ func MTRMetricsFromID(id objc.ID) *MTRMetrics {
 // @brief Returns metric data corresponding to the metric identified by its key. @param [in] key Name of the metric @return An object containing the metric data, nil if key is invalid.
 func (o *MTRMetrics) MetricDataForKey(key *foundation.NSString) *MTRMetricData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricsSelMetricDataForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRMetricDataFromID(_ret)
 }
 
 // @brief Returns a unique identifier for the object
 func (o *MTRMetrics) UniqueIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMetricsSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *MTRMetrics) AllKeys() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mTRMetricsSelAllKeys)
 	return _ret
 }
-

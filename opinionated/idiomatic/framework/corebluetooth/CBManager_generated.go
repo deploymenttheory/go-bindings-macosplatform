@@ -55,4 +55,3 @@ type Managerable interface {
 }
 
 var _ Managerable = (*Manager)(nil)
-

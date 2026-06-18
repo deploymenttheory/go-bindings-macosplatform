@@ -35,7 +35,9 @@ func NewKeyboardConfiguration() *KeyboardConfiguration {
 	return &KeyboardConfiguration{inner: raw.VZKeyboardConfigurationFromID(_id)}
 }
 
-func (x *KeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration { return x.inner }
+func (x *KeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration {
+	return x.inner
+}
 
 // KeyboardConfigurationable is the interface implemented by [KeyboardConfiguration], for mocking and DI.
 type KeyboardConfigurationable interface {
@@ -43,4 +45,3 @@ type KeyboardConfigurationable interface {
 }
 
 var _ KeyboardConfigurationable = (*KeyboardConfiguration)(nil)
-

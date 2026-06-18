@@ -118,4 +118,3 @@ func GCMouseCurrent() *Mouse {
 func ConnectedRacingWheels() *foundation.NSSet[*raw.GCRacingWheel] {
 	return raw.GCRacingWheelConnectedRacingWheels()
 }
-

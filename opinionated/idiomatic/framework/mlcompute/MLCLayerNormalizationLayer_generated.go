@@ -117,4 +117,3 @@ type LayerNormalizationLayerable interface {
 }
 
 var _ LayerNormalizationLayerable = (*LayerNormalizationLayer)(nil)
-

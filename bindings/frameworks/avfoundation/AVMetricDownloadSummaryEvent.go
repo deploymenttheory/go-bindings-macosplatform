@@ -16,13 +16,13 @@ type AVMetricDownloadSummaryEvent struct {
 }
 
 var (
-	_clsAVMetricDownloadSummaryEvent = _objcClass("AVMetricDownloadSummaryEvent")
-	_aVMetricDownloadSummaryEventSelErrorEvent = objc.RegisterName("errorEvent")
-	_aVMetricDownloadSummaryEventSelRecoverableErrorCount = objc.RegisterName("recoverableErrorCount")
+	_clsAVMetricDownloadSummaryEvent                          = _objcClass("AVMetricDownloadSummaryEvent")
+	_aVMetricDownloadSummaryEventSelErrorEvent                = objc.RegisterName("errorEvent")
+	_aVMetricDownloadSummaryEventSelRecoverableErrorCount     = objc.RegisterName("recoverableErrorCount")
 	_aVMetricDownloadSummaryEventSelMediaResourceRequestCount = objc.RegisterName("mediaResourceRequestCount")
-	_aVMetricDownloadSummaryEventSelBytesDownloadedCount = objc.RegisterName("bytesDownloadedCount")
-	_aVMetricDownloadSummaryEventSelDownloadDuration = objc.RegisterName("downloadDuration")
-	_aVMetricDownloadSummaryEventSelVariants = objc.RegisterName("variants")
+	_aVMetricDownloadSummaryEventSelBytesDownloadedCount      = objc.RegisterName("bytesDownloadedCount")
+	_aVMetricDownloadSummaryEventSelDownloadDuration          = objc.RegisterName("downloadDuration")
+	_aVMetricDownloadSummaryEventSelVariants                  = objc.RegisterName("variants")
 )
 
 func AVMetricDownloadSummaryEventFromID(id objc.ID) *AVMetricDownloadSummaryEvent {
@@ -38,7 +38,9 @@ func AVMetricDownloadSummaryEventFromID(id objc.ID) *AVMetricDownloadSummaryEven
 // Returns the error event if any. If no value is available, returns nil.
 func (o *AVMetricDownloadSummaryEvent) ErrorEvent() *AVMetricErrorEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricDownloadSummaryEventSelErrorEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricErrorEventFromID(_ret)
 }
 
@@ -69,7 +71,8 @@ func (o *AVMetricDownloadSummaryEvent) DownloadDuration() float64 {
 // Returns the variants that were downloaded.
 func (o *AVMetricDownloadSummaryEvent) Variants() *foundation.NSArray[*AVAssetVariant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricDownloadSummaryEventSelVariants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetVariant](_ret)
 }
-

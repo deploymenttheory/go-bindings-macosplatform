@@ -16,19 +16,19 @@ type AXBrailleTable struct {
 }
 
 var (
-	_clsAXBrailleTable = _objcClass("AXBrailleTable")
-	_aXBrailleTableSelSupportedLocales = objc.RegisterName("supportedLocales")
-	_aXBrailleTableSelDefaultTableForLocale = objc.RegisterName("defaultTableForLocale:")
-	_aXBrailleTableSelTablesForLocale = objc.RegisterName("tablesForLocale:")
+	_clsAXBrailleTable                       = _objcClass("AXBrailleTable")
+	_aXBrailleTableSelSupportedLocales       = objc.RegisterName("supportedLocales")
+	_aXBrailleTableSelDefaultTableForLocale  = objc.RegisterName("defaultTableForLocale:")
+	_aXBrailleTableSelTablesForLocale        = objc.RegisterName("tablesForLocale:")
 	_aXBrailleTableSelLanguageAgnosticTables = objc.RegisterName("languageAgnosticTables")
-	_aXBrailleTableSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_aXBrailleTableSelIdentifier = objc.RegisterName("identifier")
-	_aXBrailleTableSelLocalizedName = objc.RegisterName("localizedName")
-	_aXBrailleTableSelProviderIdentifier = objc.RegisterName("providerIdentifier")
-	_aXBrailleTableSelLocalizedProviderName = objc.RegisterName("localizedProviderName")
-	_aXBrailleTableSelLanguage = objc.RegisterName("language")
-	_aXBrailleTableSelLocales = objc.RegisterName("locales")
-	_aXBrailleTableSelIsEightDot = objc.RegisterName("isEightDot")
+	_aXBrailleTableSelInitWithIdentifier     = objc.RegisterName("initWithIdentifier:")
+	_aXBrailleTableSelIdentifier             = objc.RegisterName("identifier")
+	_aXBrailleTableSelLocalizedName          = objc.RegisterName("localizedName")
+	_aXBrailleTableSelProviderIdentifier     = objc.RegisterName("providerIdentifier")
+	_aXBrailleTableSelLocalizedProviderName  = objc.RegisterName("localizedProviderName")
+	_aXBrailleTableSelLanguage               = objc.RegisterName("language")
+	_aXBrailleTableSelLocales                = objc.RegisterName("locales")
+	_aXBrailleTableSelIsEightDot             = objc.RegisterName("isEightDot")
 )
 
 func AXBrailleTableFromID(id objc.ID) *AXBrailleTable {
@@ -50,63 +50,81 @@ func AXBrailleTableSupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
 // The default table that provides translations for the given locale's language. Returns nil if there is none.
 func AXBrailleTableDefaultTableForLocale(locale *foundation.NSLocale) *AXBrailleTable {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelDefaultTableForLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXBrailleTableFromID(_ret)
 }
 
 // All tables that provide translations for the given locale's language.
 func AXBrailleTableTablesForLocale(locale *foundation.NSLocale) *foundation.NSSet[*AXBrailleTable] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelTablesForLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*AXBrailleTable](_ret)
 }
 
 // All tables that are not specific to any language.
 func AXBrailleTableLanguageAgnosticTables() *foundation.NSSet[*AXBrailleTable] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXBrailleTable), _aXBrailleTableSelLanguageAgnosticTables)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*AXBrailleTable](_ret)
 }
 
 // Returns nil if there is no table with the given identifier.
 func (o *AXBrailleTable) InitWithIdentifier(identifier *foundation.NSString) *AXBrailleTable {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXBrailleTableFromID(_ret)
 }
 
 // A unique string that identifies this table.
 func (o *AXBrailleTable) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The localized name of this table for user display.
 func (o *AXBrailleTable) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The identifier of the provider of this table.
 func (o *AXBrailleTable) ProviderIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelProviderIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The localized name of the provider of this table for user display.
 func (o *AXBrailleTable) LocalizedProviderName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelLocalizedProviderName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The 3-character code from ISO 639-2 for the language this Braille table pertains to.
 func (o *AXBrailleTable) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXBrailleTableSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,4 +139,3 @@ func (o *AXBrailleTable) IsEightDot() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aXBrailleTableSelIsEightDot)
 	return _ret
 }
-

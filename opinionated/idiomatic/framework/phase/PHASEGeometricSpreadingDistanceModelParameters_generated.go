@@ -15,7 +15,9 @@ type GeometricSpreadingDistanceModelParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEGeometricSpreadingDistanceModelParameters].
-func (x *GeometricSpreadingDistanceModelParameters) Unwrap() *raw.PHASEGeometricSpreadingDistanceModelParameters { return x.inner }
+func (x *GeometricSpreadingDistanceModelParameters) Unwrap() *raw.PHASEGeometricSpreadingDistanceModelParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,7 +59,9 @@ func (x *GeometricSpreadingDistanceModelParameters) SetRolloffFactor(rolloffFact
 	x.inner.SetRolloffFactor(rolloffFactor)
 }
 
-func (x *GeometricSpreadingDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return &x.inner.PHASEDistanceModelParameters }
+func (x *GeometricSpreadingDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters {
+	return &x.inner.PHASEDistanceModelParameters
+}
 
 // GeometricSpreadingDistanceModelParametersable is the interface implemented by [GeometricSpreadingDistanceModelParameters], for mocking and DI.
 type GeometricSpreadingDistanceModelParametersable interface {
@@ -69,4 +73,3 @@ type GeometricSpreadingDistanceModelParametersable interface {
 }
 
 var _ GeometricSpreadingDistanceModelParametersable = (*GeometricSpreadingDistanceModelParameters)(nil)
-

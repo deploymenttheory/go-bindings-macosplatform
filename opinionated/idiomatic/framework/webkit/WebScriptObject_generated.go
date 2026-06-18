@@ -105,4 +105,3 @@ type WebScriptObjectable interface {
 }
 
 var _ WebScriptObjectable = (*WebScriptObject)(nil)
-

@@ -16,8 +16,8 @@ type ASPasskeyAssertionCredentialExtensionOutput struct {
 }
 
 var (
-	_clsASPasskeyAssertionCredentialExtensionOutput = _objcClass("ASPasskeyAssertionCredentialExtensionOutput")
-	_aSPasskeyAssertionCredentialExtensionOutputSelInitWithLargeBlobOutput = objc.RegisterName("initWithLargeBlobOutput:")
+	_clsASPasskeyAssertionCredentialExtensionOutput                         = _objcClass("ASPasskeyAssertionCredentialExtensionOutput")
+	_aSPasskeyAssertionCredentialExtensionOutputSelInitWithLargeBlobOutput  = objc.RegisterName("initWithLargeBlobOutput:")
 	_aSPasskeyAssertionCredentialExtensionOutputSelLargeBlobAssertionOutput = objc.RegisterName("largeBlobAssertionOutput")
 )
 
@@ -33,13 +33,16 @@ func ASPasskeyAssertionCredentialExtensionOutputFromID(id objc.ID) *ASPasskeyAss
 
 func (o *ASPasskeyAssertionCredentialExtensionOutput) InitWithLargeBlobOutput(largeBlob *ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput) *ASPasskeyAssertionCredentialExtensionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialExtensionOutputSelInitWithLargeBlobOutput, largeBlob.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasskeyAssertionCredentialExtensionOutputFromID(_ret)
 }
 
 func (o *ASPasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasskeyAssertionCredentialExtensionOutputSelLargeBlobAssertionOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_ret)
 }
-

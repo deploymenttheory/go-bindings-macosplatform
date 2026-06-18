@@ -20,23 +20,23 @@ type MPSCNNArithmetic struct {
 }
 
 var (
-	_clsMPSCNNArithmetic = _objcClass("MPSCNNArithmetic")
-	_mPSCNNArithmeticSelEncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage = objc.RegisterName("encodeToCommandBuffer:primaryImage:secondaryImage:destinationState:destinationImage:")
+	_clsMPSCNNArithmetic                                                                                         = _objcClass("MPSCNNArithmetic")
+	_mPSCNNArithmeticSelEncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage          = objc.RegisterName("encodeToCommandBuffer:primaryImage:secondaryImage:destinationState:destinationImage:")
 	_mPSCNNArithmeticSelEncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:primaryImages:secondaryImages:destinationStates:destinationImages:")
-	_mPSCNNArithmeticSelPrimaryScale = objc.RegisterName("primaryScale")
-	_mPSCNNArithmeticSelSetPrimaryScale = objc.RegisterName("setPrimaryScale:")
-	_mPSCNNArithmeticSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_mPSCNNArithmeticSelSetSecondaryScale = objc.RegisterName("setSecondaryScale:")
-	_mPSCNNArithmeticSelBias = objc.RegisterName("bias")
-	_mPSCNNArithmeticSelSetBias = objc.RegisterName("setBias:")
-	_mPSCNNArithmeticSelPrimaryStrideInFeatureChannels = objc.RegisterName("primaryStrideInFeatureChannels")
-	_mPSCNNArithmeticSelSetPrimaryStrideInFeatureChannels = objc.RegisterName("setPrimaryStrideInFeatureChannels:")
-	_mPSCNNArithmeticSelSecondaryStrideInFeatureChannels = objc.RegisterName("secondaryStrideInFeatureChannels")
-	_mPSCNNArithmeticSelSetSecondaryStrideInFeatureChannels = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
-	_mPSCNNArithmeticSelMinimumValue = objc.RegisterName("minimumValue")
-	_mPSCNNArithmeticSelSetMinimumValue = objc.RegisterName("setMinimumValue:")
-	_mPSCNNArithmeticSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSCNNArithmeticSelSetMaximumValue = objc.RegisterName("setMaximumValue:")
+	_mPSCNNArithmeticSelPrimaryScale                                                                             = objc.RegisterName("primaryScale")
+	_mPSCNNArithmeticSelSetPrimaryScale                                                                          = objc.RegisterName("setPrimaryScale:")
+	_mPSCNNArithmeticSelSecondaryScale                                                                           = objc.RegisterName("secondaryScale")
+	_mPSCNNArithmeticSelSetSecondaryScale                                                                        = objc.RegisterName("setSecondaryScale:")
+	_mPSCNNArithmeticSelBias                                                                                     = objc.RegisterName("bias")
+	_mPSCNNArithmeticSelSetBias                                                                                  = objc.RegisterName("setBias:")
+	_mPSCNNArithmeticSelPrimaryStrideInFeatureChannels                                                           = objc.RegisterName("primaryStrideInFeatureChannels")
+	_mPSCNNArithmeticSelSetPrimaryStrideInFeatureChannels                                                        = objc.RegisterName("setPrimaryStrideInFeatureChannels:")
+	_mPSCNNArithmeticSelSecondaryStrideInFeatureChannels                                                         = objc.RegisterName("secondaryStrideInFeatureChannels")
+	_mPSCNNArithmeticSelSetSecondaryStrideInFeatureChannels                                                      = objc.RegisterName("setSecondaryStrideInFeatureChannels:")
+	_mPSCNNArithmeticSelMinimumValue                                                                             = objc.RegisterName("minimumValue")
+	_mPSCNNArithmeticSelSetMinimumValue                                                                          = objc.RegisterName("setMinimumValue:")
+	_mPSCNNArithmeticSelMaximumValue                                                                             = objc.RegisterName("maximumValue")
+	_mPSCNNArithmeticSelSetMaximumValue                                                                          = objc.RegisterName("setMaximumValue:")
 )
 
 func MPSCNNArithmeticFromID(id objc.ID) *MPSCNNArithmetic {
@@ -125,4 +125,3 @@ func (o *MPSCNNArithmetic) MaximumValue() float32 {
 func (o *MPSCNNArithmetic) SetMaximumValue(maximumValue float32) {
 	o.Ptr().Send(_mPSCNNArithmeticSelSetMaximumValue, maximumValue)
 }
-

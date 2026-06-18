@@ -51,4 +51,3 @@ func Bars() *UnitSignalBars {
 	}
 	return &UnitSignalBars{inner: _r}
 }
-

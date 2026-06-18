@@ -16,42 +16,42 @@ type NSEntityDescription struct {
 }
 
 var (
-	_clsNSEntityDescription = _objcClass("NSEntityDescription")
-	_nSEntityDescriptionSelEntityForNameInManagedObjectContext = objc.RegisterName("entityForName:inManagedObjectContext:")
+	_clsNSEntityDescription                                                      = _objcClass("NSEntityDescription")
+	_nSEntityDescriptionSelEntityForNameInManagedObjectContext                   = objc.RegisterName("entityForName:inManagedObjectContext:")
 	_nSEntityDescriptionSelInsertNewObjectForEntityForNameInManagedObjectContext = objc.RegisterName("insertNewObjectForEntityForName:inManagedObjectContext:")
-	_nSEntityDescriptionSelRelationshipsWithDestinationEntity = objc.RegisterName("relationshipsWithDestinationEntity:")
-	_nSEntityDescriptionSelIsKindOfEntity = objc.RegisterName("isKindOfEntity:")
-	_nSEntityDescriptionSelManagedObjectModel = objc.RegisterName("managedObjectModel")
-	_nSEntityDescriptionSelManagedObjectClassName = objc.RegisterName("managedObjectClassName")
-	_nSEntityDescriptionSelSetManagedObjectClassName = objc.RegisterName("setManagedObjectClassName:")
-	_nSEntityDescriptionSelName = objc.RegisterName("name")
-	_nSEntityDescriptionSelSetName = objc.RegisterName("setName:")
-	_nSEntityDescriptionSelIsAbstract = objc.RegisterName("isAbstract")
-	_nSEntityDescriptionSelSetAbstract = objc.RegisterName("setAbstract:")
-	_nSEntityDescriptionSelSubentitiesByName = objc.RegisterName("subentitiesByName")
-	_nSEntityDescriptionSelSubentities = objc.RegisterName("subentities")
-	_nSEntityDescriptionSelSetSubentities = objc.RegisterName("setSubentities:")
-	_nSEntityDescriptionSelSuperentity = objc.RegisterName("superentity")
-	_nSEntityDescriptionSelPropertiesByName = objc.RegisterName("propertiesByName")
-	_nSEntityDescriptionSelProperties = objc.RegisterName("properties")
-	_nSEntityDescriptionSelSetProperties = objc.RegisterName("setProperties:")
-	_nSEntityDescriptionSelUserInfo = objc.RegisterName("userInfo")
-	_nSEntityDescriptionSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSEntityDescriptionSelAttributesByName = objc.RegisterName("attributesByName")
-	_nSEntityDescriptionSelRelationshipsByName = objc.RegisterName("relationshipsByName")
-	_nSEntityDescriptionSelVersionHash = objc.RegisterName("versionHash")
-	_nSEntityDescriptionSelVersionHashModifier = objc.RegisterName("versionHashModifier")
-	_nSEntityDescriptionSelSetVersionHashModifier = objc.RegisterName("setVersionHashModifier:")
-	_nSEntityDescriptionSelRenamingIdentifier = objc.RegisterName("renamingIdentifier")
-	_nSEntityDescriptionSelSetRenamingIdentifier = objc.RegisterName("setRenamingIdentifier:")
-	_nSEntityDescriptionSelIndexes = objc.RegisterName("indexes")
-	_nSEntityDescriptionSelSetIndexes = objc.RegisterName("setIndexes:")
-	_nSEntityDescriptionSelUniquenessConstraints = objc.RegisterName("uniquenessConstraints")
-	_nSEntityDescriptionSelSetUniquenessConstraints = objc.RegisterName("setUniquenessConstraints:")
-	_nSEntityDescriptionSelCompoundIndexes = objc.RegisterName("compoundIndexes")
-	_nSEntityDescriptionSelSetCompoundIndexes = objc.RegisterName("setCompoundIndexes:")
-	_nSEntityDescriptionSelCoreSpotlightDisplayNameExpression = objc.RegisterName("coreSpotlightDisplayNameExpression")
-	_nSEntityDescriptionSelSetCoreSpotlightDisplayNameExpression = objc.RegisterName("setCoreSpotlightDisplayNameExpression:")
+	_nSEntityDescriptionSelRelationshipsWithDestinationEntity                    = objc.RegisterName("relationshipsWithDestinationEntity:")
+	_nSEntityDescriptionSelIsKindOfEntity                                        = objc.RegisterName("isKindOfEntity:")
+	_nSEntityDescriptionSelManagedObjectModel                                    = objc.RegisterName("managedObjectModel")
+	_nSEntityDescriptionSelManagedObjectClassName                                = objc.RegisterName("managedObjectClassName")
+	_nSEntityDescriptionSelSetManagedObjectClassName                             = objc.RegisterName("setManagedObjectClassName:")
+	_nSEntityDescriptionSelName                                                  = objc.RegisterName("name")
+	_nSEntityDescriptionSelSetName                                               = objc.RegisterName("setName:")
+	_nSEntityDescriptionSelIsAbstract                                            = objc.RegisterName("isAbstract")
+	_nSEntityDescriptionSelSetAbstract                                           = objc.RegisterName("setAbstract:")
+	_nSEntityDescriptionSelSubentitiesByName                                     = objc.RegisterName("subentitiesByName")
+	_nSEntityDescriptionSelSubentities                                           = objc.RegisterName("subentities")
+	_nSEntityDescriptionSelSetSubentities                                        = objc.RegisterName("setSubentities:")
+	_nSEntityDescriptionSelSuperentity                                           = objc.RegisterName("superentity")
+	_nSEntityDescriptionSelPropertiesByName                                      = objc.RegisterName("propertiesByName")
+	_nSEntityDescriptionSelProperties                                            = objc.RegisterName("properties")
+	_nSEntityDescriptionSelSetProperties                                         = objc.RegisterName("setProperties:")
+	_nSEntityDescriptionSelUserInfo                                              = objc.RegisterName("userInfo")
+	_nSEntityDescriptionSelSetUserInfo                                           = objc.RegisterName("setUserInfo:")
+	_nSEntityDescriptionSelAttributesByName                                      = objc.RegisterName("attributesByName")
+	_nSEntityDescriptionSelRelationshipsByName                                   = objc.RegisterName("relationshipsByName")
+	_nSEntityDescriptionSelVersionHash                                           = objc.RegisterName("versionHash")
+	_nSEntityDescriptionSelVersionHashModifier                                   = objc.RegisterName("versionHashModifier")
+	_nSEntityDescriptionSelSetVersionHashModifier                                = objc.RegisterName("setVersionHashModifier:")
+	_nSEntityDescriptionSelRenamingIdentifier                                    = objc.RegisterName("renamingIdentifier")
+	_nSEntityDescriptionSelSetRenamingIdentifier                                 = objc.RegisterName("setRenamingIdentifier:")
+	_nSEntityDescriptionSelIndexes                                               = objc.RegisterName("indexes")
+	_nSEntityDescriptionSelSetIndexes                                            = objc.RegisterName("setIndexes:")
+	_nSEntityDescriptionSelUniquenessConstraints                                 = objc.RegisterName("uniquenessConstraints")
+	_nSEntityDescriptionSelSetUniquenessConstraints                              = objc.RegisterName("setUniquenessConstraints:")
+	_nSEntityDescriptionSelCompoundIndexes                                       = objc.RegisterName("compoundIndexes")
+	_nSEntityDescriptionSelSetCompoundIndexes                                    = objc.RegisterName("setCompoundIndexes:")
+	_nSEntityDescriptionSelCoreSpotlightDisplayNameExpression                    = objc.RegisterName("coreSpotlightDisplayNameExpression")
+	_nSEntityDescriptionSelSetCoreSpotlightDisplayNameExpression                 = objc.RegisterName("setCoreSpotlightDisplayNameExpression:")
 )
 
 func NSEntityDescriptionFromID(id objc.ID) *NSEntityDescription {
@@ -66,19 +66,25 @@ func NSEntityDescriptionFromID(id objc.ID) *NSEntityDescription {
 
 func NSEntityDescriptionEntityForNameInManagedObjectContext(entityName *foundation.NSString, context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEntityDescription), _nSEntityDescriptionSelEntityForNameInManagedObjectContext, entityName.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func NSEntityDescriptionInsertNewObjectForEntityForNameInManagedObjectContext(entityName *foundation.NSString, context_ *NSManagedObjectContext) *NSManagedObject {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSEntityDescription), _nSEntityDescriptionSelInsertNewObjectForEntityForNameInManagedObjectContext, entityName.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
 func (o *NSEntityDescription) RelationshipsWithDestinationEntity(entity *NSEntityDescription) *foundation.NSArray[*NSRelationshipDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelRelationshipsWithDestinationEntity, entity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSRelationshipDescription](_ret)
 }
 
@@ -89,13 +95,17 @@ func (o *NSEntityDescription) IsKindOfEntity(entity *NSEntityDescription) bool {
 
 func (o *NSEntityDescription) ManagedObjectModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelManagedObjectModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSEntityDescription) ManagedObjectClassName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelManagedObjectClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,7 +115,9 @@ func (o *NSEntityDescription) SetManagedObjectClassName(managedObjectClassName *
 
 func (o *NSEntityDescription) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,7 +141,9 @@ func (o *NSEntityDescription) SubentitiesByName() *foundation.NSDictionary[*foun
 
 func (o *NSEntityDescription) Subentities() *foundation.NSArray[*NSEntityDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelSubentities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSEntityDescription](_ret)
 }
 
@@ -139,7 +153,9 @@ func (o *NSEntityDescription) SetSubentities(subentities *foundation.NSArray[*NS
 
 func (o *NSEntityDescription) Superentity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelSuperentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -150,7 +166,9 @@ func (o *NSEntityDescription) PropertiesByName() *foundation.NSDictionary[*found
 
 func (o *NSEntityDescription) Properties() *foundation.NSArray[*NSPropertyDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelProperties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPropertyDescription](_ret)
 }
 
@@ -179,13 +197,17 @@ func (o *NSEntityDescription) RelationshipsByName() *foundation.NSDictionary[*fo
 
 func (o *NSEntityDescription) VersionHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelVersionHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSEntityDescription) VersionHashModifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelVersionHashModifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -195,7 +217,9 @@ func (o *NSEntityDescription) SetVersionHashModifier(versionHashModifier *founda
 
 func (o *NSEntityDescription) RenamingIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelRenamingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -205,7 +229,9 @@ func (o *NSEntityDescription) SetRenamingIdentifier(renamingIdentifier *foundati
 
 func (o *NSEntityDescription) Indexes() *foundation.NSArray[*NSFetchIndexDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSFetchIndexDescription](_ret)
 }
 
@@ -235,11 +261,12 @@ func (o *NSEntityDescription) SetCompoundIndexes(compoundIndexes *foundation.NSA
 
 func (o *NSEntityDescription) CoreSpotlightDisplayNameExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSEntityDescriptionSelCoreSpotlightDisplayNameExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
 func (o *NSEntityDescription) SetCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression *foundation.NSExpression) {
 	o.Ptr().Send(_nSEntityDescriptionSelSetCoreSpotlightDisplayNameExpression, coreSpotlightDisplayNameExpression.Ptr())
 }
-

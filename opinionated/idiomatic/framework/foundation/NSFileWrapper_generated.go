@@ -328,4 +328,3 @@ type FileWrapperable interface {
 }
 
 var _ FileWrapperable = (*FileWrapper)(nil)
-

@@ -55,4 +55,3 @@ type SharedDirectoryable interface {
 }
 
 var _ SharedDirectoryable = (*SharedDirectory)(nil)
-

@@ -153,4 +153,3 @@ type MassFormatterable interface {
 }
 
 var _ MassFormatterable = (*MassFormatter)(nil)
-

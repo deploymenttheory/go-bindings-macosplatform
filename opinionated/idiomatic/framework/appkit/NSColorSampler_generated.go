@@ -66,4 +66,3 @@ type ColorSamplerable interface {
 }
 
 var _ ColorSamplerable = (*ColorSampler)(nil)
-

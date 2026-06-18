@@ -18,11 +18,11 @@ type MPMediaItemArtwork struct {
 }
 
 var (
-	_clsMPMediaItemArtwork = _objcClass("MPMediaItemArtwork")
+	_clsMPMediaItemArtwork                                 = _objcClass("MPMediaItemArtwork")
 	_mPMediaItemArtworkSelInitWithBoundsSizeRequestHandler = objc.RegisterName("initWithBoundsSize:requestHandler:")
-	_mPMediaItemArtworkSelImageWithSize = objc.RegisterName("imageWithSize:")
-	_mPMediaItemArtworkSelBounds = objc.RegisterName("bounds")
-	_mPMediaItemArtworkSelImageCropRect = objc.RegisterName("imageCropRect")
+	_mPMediaItemArtworkSelImageWithSize                    = objc.RegisterName("imageWithSize:")
+	_mPMediaItemArtworkSelBounds                           = objc.RegisterName("bounds")
+	_mPMediaItemArtworkSelImageCropRect                    = objc.RegisterName("imageCropRect")
 )
 
 func MPMediaItemArtworkFromID(id objc.ID) *MPMediaItemArtwork {
@@ -37,13 +37,17 @@ func MPMediaItemArtworkFromID(id objc.ID) *MPMediaItemArtwork {
 
 func (o *MPMediaItemArtwork) InitWithBoundsSizeRequestHandler(boundsSize corefoundation.CGSize, requestHandler objc.Block) *MPMediaItemArtwork {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPMediaItemArtworkSelInitWithBoundsSizeRequestHandler, boundsSize, requestHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPMediaItemArtworkFromID(_ret)
 }
 
 func (o *MPMediaItemArtwork) ImageWithSize(size corefoundation.CGSize) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPMediaItemArtworkSelImageWithSize, size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *MPMediaItemArtwork) ImageCropRect() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _mPMediaItemArtworkSelImageCropRect)
 	return _ret
 }
-

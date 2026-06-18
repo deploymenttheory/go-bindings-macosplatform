@@ -16,9 +16,9 @@ type AVMediaPresentationSetting struct {
 }
 
 var (
-	_clsAVMediaPresentationSetting = _objcClass("AVMediaPresentationSetting")
+	_clsAVMediaPresentationSetting                               = _objcClass("AVMediaPresentationSetting")
 	_aVMediaPresentationSettingSelDisplayNameForLocaleIdentifier = objc.RegisterName("displayNameForLocaleIdentifier:")
-	_aVMediaPresentationSettingSelMediaCharacteristic = objc.RegisterName("mediaCharacteristic")
+	_aVMediaPresentationSettingSelMediaCharacteristic            = objc.RegisterName("mediaCharacteristic")
 )
 
 func AVMediaPresentationSettingFromID(id objc.ID) *AVMediaPresentationSetting {
@@ -34,14 +34,17 @@ func AVMediaPresentationSettingFromID(id objc.ID) *AVMediaPresentationSetting {
 // Returns the display name for the selectable setting that best matches the specified locale identifier.
 func (o *AVMediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaPresentationSettingSelDisplayNameForLocaleIdentifier, localeIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Provides the media characteristic that corresponds to the selectable setting.
 func (o *AVMediaPresentationSetting) MediaCharacteristic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaPresentationSettingSelMediaCharacteristic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

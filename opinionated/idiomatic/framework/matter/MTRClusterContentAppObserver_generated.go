@@ -91,9 +91,13 @@ func (x *MTRClusterContentAppObserver) ReadAttributeClusterRevisionWithParams(pa
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterContentAppObserver) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterContentAppObserver) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterContentAppObserver) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterContentAppObserver) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterContentAppObserverable is the interface implemented by [MTRClusterContentAppObserver], for mocking and DI.
 type MTRClusterContentAppObserverable interface {
@@ -107,4 +111,3 @@ type MTRClusterContentAppObserverable interface {
 }
 
 var _ MTRClusterContentAppObserverable = (*MTRClusterContentAppObserver)(nil)
-

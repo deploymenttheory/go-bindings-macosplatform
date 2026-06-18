@@ -16,15 +16,15 @@ type CalTask struct {
 }
 
 var (
-	_clsCalTask = _objcClass("CalTask")
-	_calTaskSelTask = objc.RegisterName("task")
-	_calTaskSelDueDate = objc.RegisterName("dueDate")
-	_calTaskSelSetDueDate = objc.RegisterName("setDueDate:")
-	_calTaskSelPriority = objc.RegisterName("priority")
-	_calTaskSelSetPriority = objc.RegisterName("setPriority:")
-	_calTaskSelIsCompleted = objc.RegisterName("isCompleted")
-	_calTaskSelSetIsCompleted = objc.RegisterName("setIsCompleted:")
-	_calTaskSelCompletedDate = objc.RegisterName("completedDate")
+	_clsCalTask                 = _objcClass("CalTask")
+	_calTaskSelTask             = objc.RegisterName("task")
+	_calTaskSelDueDate          = objc.RegisterName("dueDate")
+	_calTaskSelSetDueDate       = objc.RegisterName("setDueDate:")
+	_calTaskSelPriority         = objc.RegisterName("priority")
+	_calTaskSelSetPriority      = objc.RegisterName("setPriority:")
+	_calTaskSelIsCompleted      = objc.RegisterName("isCompleted")
+	_calTaskSelSetIsCompleted   = objc.RegisterName("setIsCompleted:")
+	_calTaskSelCompletedDate    = objc.RegisterName("completedDate")
 	_calTaskSelSetCompletedDate = objc.RegisterName("setCompletedDate:")
 )
 
@@ -46,7 +46,9 @@ func CalTaskTask() objc.ID {
 // Deprecated: since macOS 10.8.
 func (o *CalTask) DueDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calTaskSelDueDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -80,7 +82,9 @@ func (o *CalTask) SetIsCompleted(isCompleted bool) {
 // Deprecated: since macOS 10.8.
 func (o *CalTask) CompletedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calTaskSelCompletedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -88,4 +92,3 @@ func (o *CalTask) CompletedDate() *foundation.NSDate {
 func (o *CalTask) SetCompletedDate(completedDate *foundation.NSDate) {
 	o.Ptr().Send(_calTaskSelSetCompletedDate, completedDate.Ptr())
 }
-

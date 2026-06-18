@@ -9,168 +9,168 @@ import "unsafe"
 // [libbsm.h:213]
 type Au_arb_t struct {
 	Howtopr uint8
-	Bu uint8
-	Uc uint8
-	Data *uint8
+	Bu      uint8
+	Uc      uint8
+	Data    *uint8
 }
 
 // [libbsm.h:193]
 type Au_arg32_t struct {
-	No uint8
-	Val uint32
-	Len uint16
+	No   uint8
+	Val  uint32
+	Len  uint16
 	Text string
 }
 
 // [libbsm.h:200]
 type Au_arg64_t struct {
-	No uint8
-	Val uint64
-	Len uint16
+	No   uint8
+	Val  uint64
+	Len  uint16
 	Text string
 }
 
 // [libbsm.h:228]
 type Au_attr32_t struct {
 	Mode uint32
-	Uid uint32
-	Gid uint32
+	Uid  uint32
+	Gid  uint32
 	Fsid uint32
-	Nid uint64
-	Dev uint32
+	Nid  uint64
+	Dev  uint32
 }
 
 // [libbsm.h:237]
 type Au_attr64_t struct {
 	Mode uint32
-	Uid uint32
-	Gid uint32
+	Uid  uint32
+	Gid  uint32
 	Fsid uint32
-	Nid uint64
-	Dev uint64
+	Nid  uint64
+	Dev  uint64
 }
 
 // [libbsm.h:268]
 type Au_cert_hash_t struct {
 	Count uint32
-	Text unsafe.Pointer
+	Text  unsafe.Pointer
 }
 
 // [libbsm.h:124]
 type Au_class_ent struct {
-	Ac_name string
+	Ac_name  string
 	Ac_class uint32
-	Ac_desc string
+	Ac_desc  string
 }
 
 // [audit.h:329]
 type Au_evclass_map struct {
 	Ec_number uint16
-	Ec_class uint32
+	Ec_class  uint32
 }
 
 // [libbsm.h:116]
 type Au_event_ent struct {
 	Ae_number uint16
-	Ae_name string
-	Ae_desc string
-	Ae_class uint32
+	Ae_name   string
+	Ae_desc   string
+	Ae_class  uint32
 }
 
 // [libbsm.h:250]
 type Au_execarg_t struct {
 	Count uint32
-	Text unsafe.Pointer
+	Text  unsafe.Pointer
 }
 
 // [libbsm.h:259]
 type Au_execenv_t struct {
 	Count uint32
-	Text unsafe.Pointer
+	Text  unsafe.Pointer
 }
 
 // [libbsm.h:286]
 type Au_exit_t struct {
 	Status uint32
-	Ret uint32
+	Ret    uint32
 }
 
 // [audit.h:263]
 type Au_expire_after struct {
-	Age int64
-	Size uint64
+	Age     int64
+	Size    uint64
 	Op_type uint8
 }
 
 // [libbsm.h:297]
 type Au_file_t struct {
-	S uint32
-	Ms uint32
-	Len uint16
+	S    uint32
+	Ms   uint32
+	Len  uint16
 	Name string
 }
 
 // [libbsm.h:309]
 type Au_groups_t struct {
-	No uint16
+	No   uint16
 	List [16]uint32
 }
 
 // [libbsm.h:341]
 type Au_header32_ex_t struct {
-	Size uint32
+	Size    uint32
 	Version uint8
-	E_type uint16
-	E_mod uint16
+	E_type  uint16
+	E_mod   uint16
 	Ad_type uint32
-	Addr [4]uint32
-	S uint32
-	Ms uint32
+	Addr    [4]uint32
+	S       uint32
+	Ms      uint32
 }
 
 // [libbsm.h:322]
 type Au_header32_t struct {
-	Size uint32
+	Size    uint32
 	Version uint8
-	E_type uint16
-	E_mod uint16
-	S uint32
-	Ms uint32
+	E_type  uint16
+	E_mod   uint16
+	S       uint32
+	Ms      uint32
 }
 
 // [libbsm.h:361]
 type Au_header64_ex_t struct {
-	Size uint32
+	Size    uint32
 	Version uint8
-	E_type uint16
-	E_mod uint16
+	E_type  uint16
+	E_mod   uint16
 	Ad_type uint32
-	Addr [4]uint32
-	S uint64
-	Ms uint64
+	Addr    [4]uint32
+	S       uint64
+	Ms      uint64
 }
 
 // [libbsm.h:352]
 type Au_header64_t struct {
-	Size uint32
+	Size    uint32
 	Version uint8
-	E_type uint16
-	E_mod uint16
-	S uint64
-	Ms uint64
+	E_type  uint16
+	E_mod   uint16
+	S       uint64
+	Ms      uint64
 }
 
 // [libbsm.h:731]
 type Au_identity_t struct {
-	Signer_type uint32
-	Signing_id_len uint16
-	Signing_id string
+	Signer_type          uint32
+	Signing_id_len       uint16
+	Signing_id           string
 	Signing_id_truncated uint8
-	Team_id_len uint16
-	Team_id string
-	Team_id_truncated uint8
-	Cdhash_len uint16
-	Cdhash *uint8
+	Team_id_len          uint16
+	Team_id              string
+	Team_id_truncated    uint8
+	Cdhash_len           uint16
+	Cdhash               *uint8
 }
 
 // [libbsm.h:383]
@@ -187,38 +187,38 @@ type Au_inaddr_t struct {
 // [libbsm.h:711]
 type Au_invalid_t struct {
 	Length uint16
-	Data string
+	Data   string
 }
 
 // [libbsm.h:400]
 type Au_ip_t struct {
 	Version uint8
-	Tos uint8
-	Len uint16
-	Id uint16
-	Offset uint16
-	Ttl uint8
-	Prot uint8
-	Chksm uint16
-	Src uint32
-	Dest uint32
+	Tos     uint8
+	Len     uint16
+	Id      uint16
+	Offset  uint16
+	Ttl     uint8
+	Prot    uint8
+	Chksm   uint16
+	Src     uint32
+	Dest    uint32
 }
 
 // [libbsm.h:417]
 type Au_ipc_t struct {
 	Type uint8
-	Id uint32
+	Id   uint32
 }
 
 // [libbsm.h:431]
 type Au_ipcperm_t struct {
-	Uid uint32
-	Gid uint32
+	Uid  uint32
+	Gid  uint32
 	Puid uint32
 	Pgid uint32
 	Mode uint32
-	Seq uint32
-	Key uint32
+	Seq  uint32
+	Key  uint32
 }
 
 // [libbsm.h:444]
@@ -228,17 +228,17 @@ type Au_iport_t struct {
 
 // [libbsm.h:703]
 type Au_kevent_t struct {
-	Ident uint32
+	Ident  uint32
 	Filter uint16
-	Flags uint16
+	Flags  uint16
 	Fflags uint32
-	Data uint32
+	Data   uint32
 }
 
 // [libbsm.h:277]
 type Au_krb5_principal_t struct {
 	Count uint32
-	Text unsafe.Pointer
+	Text  unsafe.Pointer
 }
 
 // [audit.h:215]
@@ -255,7 +255,7 @@ type Au_opaque_t struct {
 
 // [libbsm.h:461]
 type Au_path_t struct {
-	Len uint16
+	Len  uint16
 	Path string
 }
 
@@ -266,9 +266,9 @@ type Au_proc32_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tid32
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tid32
 }
 
 // [libbsm.h:513]
@@ -278,9 +278,9 @@ type Au_proc32ex_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tidaddr32
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tidaddr32
 }
 
 // [libbsm.h:489]
@@ -290,9 +290,9 @@ type Au_proc64_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tid64
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tid64
 }
 
 // [libbsm.h:524]
@@ -302,24 +302,24 @@ type Au_proc64ex_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tidaddr64
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tidaddr64
 }
 
 // [audit.h:283]
 type Au_qctrl struct {
 	Aq_hiwater int32
 	Aq_lowater int32
-	Aq_bufsz int32
-	Aq_delay int32
+	Aq_bufsz   int32
+	Aq_delay   int32
 	Aq_minfree int32
 }
 
 // [libbsm.h:539]
 type Au_ret32_t struct {
 	Status uint8
-	Ret uint32
+	Ret    uint32
 }
 
 // [libbsm.h:544]
@@ -336,14 +336,14 @@ type Au_seq_t struct {
 // [audit.h:257]
 type Au_session struct {
 	As_aia_p unsafe.Pointer
-	As_mask Au_mask
+	As_mask  Au_mask
 }
 
 // [libbsm.h:580]
 type Au_socket_ex32_t struct {
 	Domain uint16
-	Type uint16
-	Atype uint16
+	Type   uint16
+	Atype  uint16
 	L_port uint16
 	L_addr [4]uint32
 	R_port uint32
@@ -352,7 +352,7 @@ type Au_socket_ex32_t struct {
 
 // [libbsm.h:563]
 type Au_socket_t struct {
-	Type uint16
+	Type   uint16
 	L_port uint16
 	L_addr uint32
 	R_port uint16
@@ -362,21 +362,21 @@ type Au_socket_t struct {
 // [libbsm.h:601]
 type Au_socketinet32_t struct {
 	Family uint16
-	Port uint16
-	Addr uint32
+	Port   uint16
+	Addr   uint32
 }
 
 // [libbsm.h:595]
 type Au_socketinet_ex32_t struct {
 	Family uint16
-	Port uint16
-	Addr [4]uint32
+	Port   uint16
+	Addr   [4]uint32
 }
 
 // [libbsm.h:611]
 type Au_socketunix_t struct {
 	Family uint16
-	Path [104]int8
+	Path   [104]int8
 }
 
 // [libbsm.h:628]
@@ -386,9 +386,9 @@ type Au_subject32_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tid32
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tid32
 }
 
 // [libbsm.h:663]
@@ -398,9 +398,9 @@ type Au_subject32ex_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tidaddr32
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tidaddr32
 }
 
 // [libbsm.h:639]
@@ -410,9 +410,9 @@ type Au_subject64_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tid64
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tid64
 }
 
 // [libbsm.h:674]
@@ -422,20 +422,20 @@ type Au_subject64ex_t struct {
 	Egid uint32
 	Ruid uint32
 	Rgid uint32
-	Pid uint32
-	Sid uint32
-	Tid Au_tidaddr64
+	Pid  uint32
+	Sid  uint32
+	Tid  Au_tidaddr64
 }
 
 // [libbsm.h:689]
 type Au_text_t struct {
-	Len uint16
+	Len  uint16
 	Text string
 }
 
 // [audit.h:202]
 type Au_tid struct {
-	Port int32
+	Port    int32
 	Machine uint32
 }
 
@@ -484,14 +484,14 @@ type Au_trailer_t struct {
 
 // [libbsm.h:131]
 type Au_user_ent struct {
-	Au_name string
+	Au_name   string
 	Au_always Au_mask
-	Au_never Au_mask
+	Au_never  Au_mask
 }
 
 // [libbsm.h:698]
 type Au_zonename_t struct {
-	Len uint16
+	Len      uint16
 	Zonename string
 }
 
@@ -503,56 +503,56 @@ type Audit_fstat struct {
 
 // [audit.h:299]
 type Audit_stat struct {
-	As_version uint32
-	As_numevent uint32
+	As_version   uint32
+	As_numevent  uint32
 	As_generated int32
 	As_nonattrib int32
-	As_kernel int32
-	As_audit int32
-	As_auditctl int32
-	As_enqueue int32
-	As_written int32
-	As_wblocked int32
-	As_rblocked int32
-	As_dropped int32
+	As_kernel    int32
+	As_audit     int32
+	As_auditctl  int32
+	As_enqueue   int32
+	As_written   int32
+	As_wblocked  int32
+	As_rblocked  int32
+	As_dropped   int32
 	As_totalsize int32
-	As_memused uint32
+	As_memused   uint32
 }
 
 // [audit.h:221]
 type Auditinfo struct {
-	Ai_auid uint32
-	Ai_mask Au_mask
+	Ai_auid   uint32
+	Ai_mask   Au_mask
 	Ai_termid Au_tid
-	Ai_asid int32
+	Ai_asid   int32
 }
 
 // [audit.h:229]
 type Auditinfo_addr struct {
-	Ai_auid uint32
-	Ai_mask Au_mask
+	Ai_auid   uint32
+	Ai_mask   Au_mask
 	Ai_termid Au_tid_addr
-	Ai_asid int32
-	Ai_flags uint64
+	Ai_asid   int32
+	Ai_flags  uint64
 }
 
 // [audit.h:238]
 type Auditpinfo struct {
-	Ap_pid int32
-	Ap_auid uint32
-	Ap_mask Au_mask
+	Ap_pid    int32
+	Ap_auid   uint32
+	Ap_mask   Au_mask
 	Ap_termid Au_tid
-	Ap_asid int32
+	Ap_asid   int32
 }
 
 // [audit.h:247]
 type Auditpinfo_addr struct {
-	Ap_pid int32
-	Ap_auid uint32
-	Ap_mask Au_mask
+	Ap_pid    int32
+	Ap_auid   uint32
+	Ap_mask   Au_mask
 	Ap_termid Au_tid_addr
-	Ap_asid int32
-	Ap_flags uint64
+	Ap_asid   int32
+	Ap_flags  uint64
 }
 
 // [audit_record.h:193]
@@ -593,10 +593,10 @@ type Sockaddr_un struct {
 
 // [libbsm.h:752]
 type Tokenstr struct {
-	Id uint8
+	Id   uint8
 	Data *uint8
-	Len uint64
-	Tt unsafe.Pointer
+	Len  uint64
+	Tt   unsafe.Pointer
 }
 
 // Au_class_ent_t is a typedef alias for Au_class_ent.
@@ -664,4 +664,3 @@ type Token_t = Au_token
 
 // Tokenstr_t is a typedef alias for Tokenstr.
 type Tokenstr_t = Tokenstr
-

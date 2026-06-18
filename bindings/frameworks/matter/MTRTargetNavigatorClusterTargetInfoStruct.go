@@ -16,11 +16,11 @@ type MTRTargetNavigatorClusterTargetInfoStruct struct {
 }
 
 var (
-	_clsMTRTargetNavigatorClusterTargetInfoStruct = _objcClass("MTRTargetNavigatorClusterTargetInfoStruct")
-	_mTRTargetNavigatorClusterTargetInfoStructSelIdentifier = objc.RegisterName("identifier")
+	_clsMTRTargetNavigatorClusterTargetInfoStruct              = _objcClass("MTRTargetNavigatorClusterTargetInfoStruct")
+	_mTRTargetNavigatorClusterTargetInfoStructSelIdentifier    = objc.RegisterName("identifier")
 	_mTRTargetNavigatorClusterTargetInfoStructSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_mTRTargetNavigatorClusterTargetInfoStructSelName = objc.RegisterName("name")
-	_mTRTargetNavigatorClusterTargetInfoStructSelSetName = objc.RegisterName("setName:")
+	_mTRTargetNavigatorClusterTargetInfoStructSelName          = objc.RegisterName("name")
+	_mTRTargetNavigatorClusterTargetInfoStructSelSetName       = objc.RegisterName("setName:")
 )
 
 func MTRTargetNavigatorClusterTargetInfoStructFromID(id objc.ID) *MTRTargetNavigatorClusterTargetInfoStruct {
@@ -35,7 +35,9 @@ func MTRTargetNavigatorClusterTargetInfoStructFromID(id objc.ID) *MTRTargetNavig
 
 func (o *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterTargetInfoStructSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRTargetNavigatorClusterTargetInfoStruct) SetIdentifier(identifier *fo
 
 func (o *MTRTargetNavigatorClusterTargetInfoStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTargetNavigatorClusterTargetInfoStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRTargetNavigatorClusterTargetInfoStruct) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_mTRTargetNavigatorClusterTargetInfoStructSelSetName, name.Ptr())
 }
-

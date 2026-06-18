@@ -18,12 +18,12 @@ type MKLocalSearch struct {
 }
 
 var (
-	_clsMKLocalSearch = _objcClass("MKLocalSearch")
-	_mKLocalSearchSelInitWithRequest = objc.RegisterName("initWithRequest:")
+	_clsMKLocalSearch                                = _objcClass("MKLocalSearch")
+	_mKLocalSearchSelInitWithRequest                 = objc.RegisterName("initWithRequest:")
 	_mKLocalSearchSelInitWithPointsOfInterestRequest = objc.RegisterName("initWithPointsOfInterestRequest:")
-	_mKLocalSearchSelStartWithCompletionHandler = objc.RegisterName("startWithCompletionHandler:")
-	_mKLocalSearchSelCancel = objc.RegisterName("cancel")
-	_mKLocalSearchSelIsSearching = objc.RegisterName("isSearching")
+	_mKLocalSearchSelStartWithCompletionHandler      = objc.RegisterName("startWithCompletionHandler:")
+	_mKLocalSearchSelCancel                          = objc.RegisterName("cancel")
+	_mKLocalSearchSelIsSearching                     = objc.RegisterName("isSearching")
 )
 
 func MKLocalSearchFromID(id objc.ID) *MKLocalSearch {
@@ -38,13 +38,17 @@ func MKLocalSearchFromID(id objc.ID) *MKLocalSearch {
 
 func (o *MKLocalSearch) InitWithRequest(request *MKLocalSearchRequest) *MKLocalSearch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchSelInitWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchFromID(_ret)
 }
 
 func (o *MKLocalSearch) InitWithPointsOfInterestRequest(request *MKLocalPointsOfInterestRequest) *MKLocalSearch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchSelInitWithPointsOfInterestRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchFromID(_ret)
 }
 
@@ -70,4 +74,3 @@ func (o *MKLocalSearch) IsSearching() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKLocalSearchSelIsSearching)
 	return _ret
 }
-

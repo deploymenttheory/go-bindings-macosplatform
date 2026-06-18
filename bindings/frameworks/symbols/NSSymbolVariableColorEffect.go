@@ -15,14 +15,14 @@ type NSSymbolVariableColorEffect struct {
 }
 
 var (
-	_clsNSSymbolVariableColorEffect = _objcClass("NSSymbolVariableColorEffect")
-	_nSSymbolVariableColorEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolVariableColorEffectSelEffectWithIterative = objc.RegisterName("effectWithIterative")
-	_nSSymbolVariableColorEffectSelEffectWithCumulative = objc.RegisterName("effectWithCumulative")
-	_nSSymbolVariableColorEffectSelEffectWithReversing = objc.RegisterName("effectWithReversing")
-	_nSSymbolVariableColorEffectSelEffectWithNonReversing = objc.RegisterName("effectWithNonReversing")
+	_clsNSSymbolVariableColorEffect                             = _objcClass("NSSymbolVariableColorEffect")
+	_nSSymbolVariableColorEffectSelEffect                       = objc.RegisterName("effect")
+	_nSSymbolVariableColorEffectSelEffectWithIterative          = objc.RegisterName("effectWithIterative")
+	_nSSymbolVariableColorEffectSelEffectWithCumulative         = objc.RegisterName("effectWithCumulative")
+	_nSSymbolVariableColorEffectSelEffectWithReversing          = objc.RegisterName("effectWithReversing")
+	_nSSymbolVariableColorEffectSelEffectWithNonReversing       = objc.RegisterName("effectWithNonReversing")
 	_nSSymbolVariableColorEffectSelEffectWithHideInactiveLayers = objc.RegisterName("effectWithHideInactiveLayers")
-	_nSSymbolVariableColorEffectSelEffectWithDimInactiveLayers = objc.RegisterName("effectWithDimInactiveLayers")
+	_nSSymbolVariableColorEffectSelEffectWithDimInactiveLayers  = objc.RegisterName("effectWithDimInactiveLayers")
 )
 
 func NSSymbolVariableColorEffectFromID(id objc.ID) *NSSymbolVariableColorEffect {
@@ -38,49 +38,62 @@ func NSSymbolVariableColorEffectFromID(id objc.ID) *NSSymbolVariableColorEffect 
 // The default variable color effect, determined by the system.
 func NSSymbolVariableColorEffectEffect() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolVariableColorEffect), _nSSymbolVariableColorEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that activates one layer at a time. This cancels the cumulative variant.
 func (o *NSSymbolVariableColorEffect) EffectWithIterative() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithIterative)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that activates each layer until all layers are active. This cancels the iterative variant.
 func (o *NSSymbolVariableColorEffect) EffectWithCumulative() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithCumulative)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates in reverse after fully executing. This cancels the nonReversing variant.
 func (o *NSSymbolVariableColorEffect) EffectWithReversing() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithReversing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that only animates forwards before restarting. This cancels the reversing variant.
 func (o *NSSymbolVariableColorEffect) EffectWithNonReversing() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithNonReversing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that hides layers when they are inactive.
 func (o *NSSymbolVariableColorEffect) EffectWithHideInactiveLayers() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithHideInactiveLayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that draws layers with reduced (but non-zero) opacity when they are inactive.
 func (o *NSSymbolVariableColorEffect) EffectWithDimInactiveLayers() *NSSymbolVariableColorEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolVariableColorEffectSelEffectWithDimInactiveLayers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolVariableColorEffectFromID(_ret)
 }
-

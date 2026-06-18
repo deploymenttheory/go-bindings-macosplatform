@@ -15,7 +15,9 @@ type MTRDeviceStorageBehaviorConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceStorageBehaviorConfiguration].
-func (x *MTRDeviceStorageBehaviorConfiguration) Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration { return x.inner }
+func (x *MTRDeviceStorageBehaviorConfiguration) Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -193,4 +195,3 @@ type MTRDeviceStorageBehaviorConfigurationable interface {
 }
 
 var _ MTRDeviceStorageBehaviorConfigurationable = (*MTRDeviceStorageBehaviorConfiguration)(nil)
-

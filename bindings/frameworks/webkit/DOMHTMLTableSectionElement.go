@@ -16,18 +16,18 @@ type DOMHTMLTableSectionElement struct {
 }
 
 var (
-	_clsDOMHTMLTableSectionElement = _objcClass("DOMHTMLTableSectionElement")
+	_clsDOMHTMLTableSectionElement          = _objcClass("DOMHTMLTableSectionElement")
 	_dOMHTMLTableSectionElementSelInsertRow = objc.RegisterName("insertRow:")
 	_dOMHTMLTableSectionElementSelDeleteRow = objc.RegisterName("deleteRow:")
-	_dOMHTMLTableSectionElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLTableSectionElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLTableSectionElementSelCh = objc.RegisterName("ch")
-	_dOMHTMLTableSectionElementSelSetCh = objc.RegisterName("setCh:")
-	_dOMHTMLTableSectionElementSelChOff = objc.RegisterName("chOff")
-	_dOMHTMLTableSectionElementSelSetChOff = objc.RegisterName("setChOff:")
-	_dOMHTMLTableSectionElementSelVAlign = objc.RegisterName("vAlign")
+	_dOMHTMLTableSectionElementSelAlign     = objc.RegisterName("align")
+	_dOMHTMLTableSectionElementSelSetAlign  = objc.RegisterName("setAlign:")
+	_dOMHTMLTableSectionElementSelCh        = objc.RegisterName("ch")
+	_dOMHTMLTableSectionElementSelSetCh     = objc.RegisterName("setCh:")
+	_dOMHTMLTableSectionElementSelChOff     = objc.RegisterName("chOff")
+	_dOMHTMLTableSectionElementSelSetChOff  = objc.RegisterName("setChOff:")
+	_dOMHTMLTableSectionElementSelVAlign    = objc.RegisterName("vAlign")
 	_dOMHTMLTableSectionElementSelSetVAlign = objc.RegisterName("setVAlign:")
-	_dOMHTMLTableSectionElementSelRows = objc.RegisterName("rows")
+	_dOMHTMLTableSectionElementSelRows      = objc.RegisterName("rows")
 )
 
 func DOMHTMLTableSectionElementFromID(id objc.ID) *DOMHTMLTableSectionElement {
@@ -42,7 +42,9 @@ func DOMHTMLTableSectionElementFromID(id objc.ID) *DOMHTMLTableSectionElement {
 
 func (o *DOMHTMLTableSectionElement) InsertRow(index int) *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelInsertRow, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *DOMHTMLTableSectionElement) DeleteRow(index int) {
 
 func (o *DOMHTMLTableSectionElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *DOMHTMLTableSectionElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLTableSectionElement) Ch() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelCh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *DOMHTMLTableSectionElement) SetCh(ch *foundation.NSString) {
 
 func (o *DOMHTMLTableSectionElement) ChOff() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelChOff)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +90,9 @@ func (o *DOMHTMLTableSectionElement) SetChOff(chOff *foundation.NSString) {
 
 func (o *DOMHTMLTableSectionElement) VAlign() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelVAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,7 +102,8 @@ func (o *DOMHTMLTableSectionElement) SetVAlign(vAlign *foundation.NSString) {
 
 func (o *DOMHTMLTableSectionElement) Rows() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableSectionElementSelRows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
-

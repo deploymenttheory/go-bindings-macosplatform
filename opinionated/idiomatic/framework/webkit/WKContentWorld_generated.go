@@ -52,4 +52,3 @@ type WKContentWorldable interface {
 }
 
 var _ WKContentWorldable = (*WKContentWorld)(nil)
-

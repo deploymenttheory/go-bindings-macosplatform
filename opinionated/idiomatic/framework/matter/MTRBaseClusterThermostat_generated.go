@@ -6067,9 +6067,13 @@ func (x *MTRBaseClusterThermostat) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterThermostat) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterThermostat) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterThermostat) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterThermostat) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterThermostatable is the interface implemented by [MTRBaseClusterThermostat], for mocking and DI.
 type MTRBaseClusterThermostatable interface {
@@ -6440,4 +6444,3 @@ type MTRBaseClusterThermostatable interface {
 }
 
 var _ MTRBaseClusterThermostatable = (*MTRBaseClusterThermostat)(nil)
-

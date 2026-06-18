@@ -360,4 +360,3 @@ type CameraFileable interface {
 }
 
 var _ CameraFileable = (*CameraFile)(nil)
-

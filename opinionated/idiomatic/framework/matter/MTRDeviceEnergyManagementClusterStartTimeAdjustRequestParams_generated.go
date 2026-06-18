@@ -16,11 +16,15 @@ type MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams].
-func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams (nil for 0).
 func MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams {
@@ -118,4 +122,3 @@ type MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsable interface 
 }
 
 var _ MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams)(nil)
-

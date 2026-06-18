@@ -80,4 +80,3 @@ type UpdateContextable interface {
 }
 
 var _ UpdateContextable = (*UpdateContext)(nil)
-

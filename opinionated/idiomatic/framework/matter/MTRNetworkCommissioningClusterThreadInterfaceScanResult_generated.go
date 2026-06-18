@@ -16,7 +16,9 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResult struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterThreadInterfaceScanResult].
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResult { return x.inner }
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -78,7 +80,9 @@ func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) WithLqi(lqi *f
 	return x
 }
 
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct }
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResult) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	return &x.inner.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+}
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResult], for mocking and DI.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
@@ -93,4 +97,3 @@ type MTRNetworkCommissioningClusterThreadInterfaceScanResultable interface {
 }
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResult)(nil)
-

@@ -16,10 +16,10 @@ type MDLVertexBufferLayout struct {
 }
 
 var (
-	_clsMDLVertexBufferLayout = _objcClass("MDLVertexBufferLayout")
+	_clsMDLVertexBufferLayout               = _objcClass("MDLVertexBufferLayout")
 	_mDLVertexBufferLayoutSelInitWithStride = objc.RegisterName("initWithStride:")
-	_mDLVertexBufferLayoutSelStride = objc.RegisterName("stride")
-	_mDLVertexBufferLayoutSelSetStride = objc.RegisterName("setStride:")
+	_mDLVertexBufferLayoutSelStride         = objc.RegisterName("stride")
+	_mDLVertexBufferLayoutSelSetStride      = objc.RegisterName("setStride:")
 )
 
 func MDLVertexBufferLayoutFromID(id objc.ID) *MDLVertexBufferLayout {
@@ -34,7 +34,9 @@ func MDLVertexBufferLayoutFromID(id objc.ID) *MDLVertexBufferLayout {
 
 func (o *MDLVertexBufferLayout) InitWithStride(stride uint) *MDLVertexBufferLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexBufferLayoutSelInitWithStride, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexBufferLayoutFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *MDLVertexBufferLayout) Stride() uint {
 func (o *MDLVertexBufferLayout) SetStride(stride uint) {
 	o.Ptr().Send(_mDLVertexBufferLayoutSelSetStride, stride)
 }
-

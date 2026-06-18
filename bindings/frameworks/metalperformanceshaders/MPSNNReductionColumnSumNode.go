@@ -26,4 +26,3 @@ func MPSNNReductionColumnSumNodeFromID(id objc.ID) *MPSNNReductionColumnSumNode 
 	purego.Track(o)
 	return o
 }
-

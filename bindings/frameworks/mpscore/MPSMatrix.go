@@ -17,21 +17,21 @@ type MPSMatrix struct {
 }
 
 var (
-	_clsMPSMatrix = _objcClass("MPSMatrix")
-	_mPSMatrixSelInitWithBufferDescriptor = objc.RegisterName("initWithBuffer:descriptor:")
+	_clsMPSMatrix                               = _objcClass("MPSMatrix")
+	_mPSMatrixSelInitWithBufferDescriptor       = objc.RegisterName("initWithBuffer:descriptor:")
 	_mPSMatrixSelInitWithBufferOffsetDescriptor = objc.RegisterName("initWithBuffer:offset:descriptor:")
-	_mPSMatrixSelInitWithDeviceDescriptor = objc.RegisterName("initWithDevice:descriptor:")
-	_mPSMatrixSelSynchronizeOnCommandBuffer = objc.RegisterName("synchronizeOnCommandBuffer:")
-	_mPSMatrixSelResourceSize = objc.RegisterName("resourceSize")
-	_mPSMatrixSelDevice = objc.RegisterName("device")
-	_mPSMatrixSelRows = objc.RegisterName("rows")
-	_mPSMatrixSelColumns = objc.RegisterName("columns")
-	_mPSMatrixSelMatrices = objc.RegisterName("matrices")
-	_mPSMatrixSelDataType = objc.RegisterName("dataType")
-	_mPSMatrixSelRowBytes = objc.RegisterName("rowBytes")
-	_mPSMatrixSelMatrixBytes = objc.RegisterName("matrixBytes")
-	_mPSMatrixSelOffset = objc.RegisterName("offset")
-	_mPSMatrixSelData = objc.RegisterName("data")
+	_mPSMatrixSelInitWithDeviceDescriptor       = objc.RegisterName("initWithDevice:descriptor:")
+	_mPSMatrixSelSynchronizeOnCommandBuffer     = objc.RegisterName("synchronizeOnCommandBuffer:")
+	_mPSMatrixSelResourceSize                   = objc.RegisterName("resourceSize")
+	_mPSMatrixSelDevice                         = objc.RegisterName("device")
+	_mPSMatrixSelRows                           = objc.RegisterName("rows")
+	_mPSMatrixSelColumns                        = objc.RegisterName("columns")
+	_mPSMatrixSelMatrices                       = objc.RegisterName("matrices")
+	_mPSMatrixSelDataType                       = objc.RegisterName("dataType")
+	_mPSMatrixSelRowBytes                       = objc.RegisterName("rowBytes")
+	_mPSMatrixSelMatrixBytes                    = objc.RegisterName("matrixBytes")
+	_mPSMatrixSelOffset                         = objc.RegisterName("offset")
+	_mPSMatrixSelData                           = objc.RegisterName("data")
 )
 
 func MPSMatrixFromID(id objc.ID) *MPSMatrix {
@@ -47,21 +47,27 @@ func MPSMatrixFromID(id objc.ID) *MPSMatrix {
 // @abstract   Initialize a MPSMatrix object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSMatrix. May not be NULL. @param      descriptor      The MPSMatrixDescriptor. May not be NULL. @return     A valid MPSMatrix object or nil, if failure. @discussion This function returns a MPSMatrix object which uses the supplied MTLBuffer.  The dimensions and stride of the matrix are specified by the MPSMatrixDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.matrices-1) * descriptor.matrixBytes + (descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
 func (o *MPSMatrix) InitWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *MPSMatrixDescriptor) *MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSelInitWithBufferDescriptor, buffer, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFromID(_ret)
 }
 
 // @abstract   Initialize a MPSMatrix object with a MTLBuffer at a given offset. @param      buffer      The MTLBuffer object which contains the data to use for the MPSMatrix.  May not be NULL. @param      offset      The offset, in bytes, into the buffer at which the data begins. @param      descriptor  The MPSMatrixDescriptor describing the shape of the matrix.
 func (o *MPSMatrix) InitWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *MPSMatrixDescriptor) *MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSelInitWithBufferOffsetDescriptor, buffer, offset, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFromID(_ret)
 }
 
 // @abstract   Initialize a MPSMatrix object with a descriptor. Allocate the buffer. @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSMatrix object or nil @discussion The matrix object will be created, but the storage to hold the matrix data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the matrix.
 func (o *MPSMatrix) InitWithDeviceDescriptor(device metal.MTLDevice, descriptor *MPSMatrixDescriptor) *MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSelInitWithDeviceDescriptor, device, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixFromID(_ret)
 }
 
@@ -129,4 +135,3 @@ func (o *MPSMatrix) Data() metal.MTLBuffer {
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSMatrixSelData)
 	return _ret
 }
-

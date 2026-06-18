@@ -15,15 +15,15 @@ type NSExtensionItem struct {
 }
 
 var (
-	_clsNSExtensionItem = _objcClass("NSExtensionItem")
-	_nSExtensionItemSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSExtensionItemSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSExtensionItemSelAttributedContentText = objc.RegisterName("attributedContentText")
+	_clsNSExtensionItem                         = _objcClass("NSExtensionItem")
+	_nSExtensionItemSelAttributedTitle          = objc.RegisterName("attributedTitle")
+	_nSExtensionItemSelSetAttributedTitle       = objc.RegisterName("setAttributedTitle:")
+	_nSExtensionItemSelAttributedContentText    = objc.RegisterName("attributedContentText")
 	_nSExtensionItemSelSetAttributedContentText = objc.RegisterName("setAttributedContentText:")
-	_nSExtensionItemSelAttachments = objc.RegisterName("attachments")
-	_nSExtensionItemSelSetAttachments = objc.RegisterName("setAttachments:")
-	_nSExtensionItemSelUserInfo = objc.RegisterName("userInfo")
-	_nSExtensionItemSelSetUserInfo = objc.RegisterName("setUserInfo:")
+	_nSExtensionItemSelAttachments              = objc.RegisterName("attachments")
+	_nSExtensionItemSelSetAttachments           = objc.RegisterName("setAttachments:")
+	_nSExtensionItemSelUserInfo                 = objc.RegisterName("userInfo")
+	_nSExtensionItemSelSetUserInfo              = objc.RegisterName("setUserInfo:")
 )
 
 func NSExtensionItemFromID(id objc.ID) *NSExtensionItem {
@@ -38,7 +38,9 @@ func NSExtensionItemFromID(id objc.ID) *NSExtensionItem {
 
 func (o *NSExtensionItem) AttributedTitle() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *NSExtensionItem) SetAttributedTitle(attributedTitle *NSAttributedString
 
 func (o *NSExtensionItem) AttributedContentText() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttributedContentText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *NSExtensionItem) SetAttributedContentText(attributedContentText *NSAttr
 
 func (o *NSExtensionItem) Attachments() *NSArray[*NSItemProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSExtensionItemSelAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSItemProvider](_ret)
 }
 
@@ -74,4 +80,3 @@ func (o *NSExtensionItem) UserInfo() *NSDictionary[objc.ID, objc.ID] {
 func (o *NSExtensionItem) SetUserInfo(userInfo *NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSExtensionItemSelSetUserInfo, userInfo)
 }
-

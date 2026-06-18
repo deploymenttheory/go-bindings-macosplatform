@@ -68,4 +68,3 @@ type StoreProductViewControllerable interface {
 }
 
 var _ StoreProductViewControllerable = (*StoreProductViewController)(nil)
-

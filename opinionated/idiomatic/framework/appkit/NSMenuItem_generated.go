@@ -671,4 +671,3 @@ type MenuItemable interface {
 }
 
 var _ MenuItemable = (*MenuItem)(nil)
-

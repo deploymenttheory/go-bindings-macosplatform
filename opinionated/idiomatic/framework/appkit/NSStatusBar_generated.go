@@ -69,4 +69,3 @@ type StatusBarable interface {
 }
 
 var _ StatusBarable = (*StatusBar)(nil)
-

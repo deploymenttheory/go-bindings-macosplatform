@@ -57,4 +57,3 @@ type GraphNode2Dable interface {
 }
 
 var _ GraphNode2Dable = (*GraphNode2D)(nil)
-

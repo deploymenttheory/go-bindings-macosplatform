@@ -19,34 +19,34 @@ type AVMetadataItem struct {
 }
 
 var (
-	_clsAVMetadataItem = _objcClass("AVMetadataItem")
-	_aVMetadataItemSelIdentifier = objc.RegisterName("identifier")
-	_aVMetadataItemSelExtendedLanguageTag = objc.RegisterName("extendedLanguageTag")
-	_aVMetadataItemSelLocale = objc.RegisterName("locale")
-	_aVMetadataItemSelTime = objc.RegisterName("time")
-	_aVMetadataItemSelDuration = objc.RegisterName("duration")
-	_aVMetadataItemSelDataType = objc.RegisterName("dataType")
-	_aVMetadataItemSelValue = objc.RegisterName("value")
-	_aVMetadataItemSelExtraAttributes = objc.RegisterName("extraAttributes")
-	_aVMetadataItemSelStartDate = objc.RegisterName("startDate")
-	_aVMetadataItemSelStringValue = objc.RegisterName("stringValue")
-	_aVMetadataItemSelNumberValue = objc.RegisterName("numberValue")
-	_aVMetadataItemSelDateValue = objc.RegisterName("dateValue")
-	_aVMetadataItemSelDataValue = objc.RegisterName("dataValue")
-	_aVMetadataItemSelStatusOfValueForKeyError = objc.RegisterName("statusOfValueForKey:error:")
-	_aVMetadataItemSelLoadValuesAsynchronouslyForKeysCompletionHandler = objc.RegisterName("loadValuesAsynchronouslyForKeys:completionHandler:")
+	_clsAVMetadataItem                                                                     = _objcClass("AVMetadataItem")
+	_aVMetadataItemSelIdentifier                                                           = objc.RegisterName("identifier")
+	_aVMetadataItemSelExtendedLanguageTag                                                  = objc.RegisterName("extendedLanguageTag")
+	_aVMetadataItemSelLocale                                                               = objc.RegisterName("locale")
+	_aVMetadataItemSelTime                                                                 = objc.RegisterName("time")
+	_aVMetadataItemSelDuration                                                             = objc.RegisterName("duration")
+	_aVMetadataItemSelDataType                                                             = objc.RegisterName("dataType")
+	_aVMetadataItemSelValue                                                                = objc.RegisterName("value")
+	_aVMetadataItemSelExtraAttributes                                                      = objc.RegisterName("extraAttributes")
+	_aVMetadataItemSelStartDate                                                            = objc.RegisterName("startDate")
+	_aVMetadataItemSelStringValue                                                          = objc.RegisterName("stringValue")
+	_aVMetadataItemSelNumberValue                                                          = objc.RegisterName("numberValue")
+	_aVMetadataItemSelDateValue                                                            = objc.RegisterName("dateValue")
+	_aVMetadataItemSelDataValue                                                            = objc.RegisterName("dataValue")
+	_aVMetadataItemSelStatusOfValueForKeyError                                             = objc.RegisterName("statusOfValueForKey:error:")
+	_aVMetadataItemSelLoadValuesAsynchronouslyForKeysCompletionHandler                     = objc.RegisterName("loadValuesAsynchronouslyForKeys:completionHandler:")
 	_aVMetadataItemSelMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages = objc.RegisterName("metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:")
-	_aVMetadataItemSelMetadataItemsFromArrayFilteredByIdentifier = objc.RegisterName("metadataItemsFromArray:filteredByIdentifier:")
-	_aVMetadataItemSelMetadataItemsFromArrayFilteredByMetadataItemFilter = objc.RegisterName("metadataItemsFromArray:filteredByMetadataItemFilter:")
-	_aVMetadataItemSelIdentifierForKeyKeySpace = objc.RegisterName("identifierForKey:keySpace:")
-	_aVMetadataItemSelKeySpaceForIdentifier = objc.RegisterName("keySpaceForIdentifier:")
-	_aVMetadataItemSelKeyForIdentifier = objc.RegisterName("keyForIdentifier:")
-	_aVMetadataItemSelKey = objc.RegisterName("key")
-	_aVMetadataItemSelCommonKey = objc.RegisterName("commonKey")
-	_aVMetadataItemSelKeySpace = objc.RegisterName("keySpace")
-	_aVMetadataItemSelMetadataItemWithPropertiesOfMetadataItemValueLoadingHandler = objc.RegisterName("metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler:")
-	_aVMetadataItemSelMetadataItemsFromArrayWithLocale = objc.RegisterName("metadataItemsFromArray:withLocale:")
-	_aVMetadataItemSelMetadataItemsFromArrayWithKeyKeySpace = objc.RegisterName("metadataItemsFromArray:withKey:keySpace:")
+	_aVMetadataItemSelMetadataItemsFromArrayFilteredByIdentifier                           = objc.RegisterName("metadataItemsFromArray:filteredByIdentifier:")
+	_aVMetadataItemSelMetadataItemsFromArrayFilteredByMetadataItemFilter                   = objc.RegisterName("metadataItemsFromArray:filteredByMetadataItemFilter:")
+	_aVMetadataItemSelIdentifierForKeyKeySpace                                             = objc.RegisterName("identifierForKey:keySpace:")
+	_aVMetadataItemSelKeySpaceForIdentifier                                                = objc.RegisterName("keySpaceForIdentifier:")
+	_aVMetadataItemSelKeyForIdentifier                                                     = objc.RegisterName("keyForIdentifier:")
+	_aVMetadataItemSelKey                                                                  = objc.RegisterName("key")
+	_aVMetadataItemSelCommonKey                                                            = objc.RegisterName("commonKey")
+	_aVMetadataItemSelKeySpace                                                             = objc.RegisterName("keySpace")
+	_aVMetadataItemSelMetadataItemWithPropertiesOfMetadataItemValueLoadingHandler          = objc.RegisterName("metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler:")
+	_aVMetadataItemSelMetadataItemsFromArrayWithLocale                                     = objc.RegisterName("metadataItemsFromArray:withLocale:")
+	_aVMetadataItemSelMetadataItemsFromArrayWithKeyKeySpace                                = objc.RegisterName("metadataItemsFromArray:withKey:keySpace:")
 )
 
 func AVMetadataItemFromID(id objc.ID) *AVMetadataItem {
@@ -61,19 +61,25 @@ func AVMetadataItemFromID(id objc.ID) *AVMetadataItem {
 
 func (o *AVMetadataItem) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVMetadataItem) ExtendedLanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelExtendedLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVMetadataItem) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *AVMetadataItem) Duration() coremedia.CMTime {
 
 func (o *AVMetadataItem) DataType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelDataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,31 +113,41 @@ func (o *AVMetadataItem) ExtraAttributes() *foundation.NSDictionary[*foundation.
 
 func (o *AVMetadataItem) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *AVMetadataItem) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVMetadataItem) NumberValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelNumberValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *AVMetadataItem) DateValue() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelDateValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *AVMetadataItem) DataValue() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelDataValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -156,34 +174,44 @@ func (o *AVMetadataItem) LoadValuesAsynchronouslyForKeysCompletionHandler(keys *
 // @method		metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages: @abstract		Filters an array of AVMetadataItems according to whether their locales match any language identifier in the specified array of preferred languages. The returned array is sorted according to the order of preference of the language each matches. @param			metadataItems An array of AVMetadataItems to be filtered and sorted. @param			preferredLanguages An array of language identifiers in order of preference, each of which is an IETF BCP 47 (RFC 4646) language identifier. If your goal is to provide the best match for the end user's preferred languages without consideration of your app's available localizations, pass [NSLocale preferredLanguages] as the value of preferredLanguages. However, if you want to filter the available choices in order to obtain the best match among the localizations that are available for your app, pass [NSBundle preferredLocalizationsFromArray:[[NSBundle mainBundle] localizations] forPreferences:[NSLocale preferredLanguages]] instead. The latter choice is normally more appropriate for strings intended for display as part of the app's UI. @result		An instance of NSArray containing metadata items of the specified NSArray that match a preferred language, sorted according to the order of preference of the language each matches.
 func AVMetadataItemMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages(metadataItems *foundation.NSArray[*AVMetadataItem], preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredAndSortedAccordingToPreferredLanguages, metadataItems.Ptr(), preferredLanguages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // @method			metadataItemsFromArray:filteredByIdentifier: @abstract			Filters an array of AVMetadataItems according to identifier. @param			metadataItems An array of AVMetadataItems to be filtered by identifier. @param			identifier The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier. @result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
 func AVMetadataItemMetadataItemsFromArrayFilteredByIdentifier(metadataItems *foundation.NSArray[*AVMetadataItem], identifier *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredByIdentifier, metadataItems.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // @method			metadataItemsFromArray:filteredByMetadataItemFilter: @abstract		Filters an array of AVMetadataItems using the supplied AVMetadataItemFilter. @param			metadataItems An array of AVMetadataItems to be filtered. @param			metadataItemFilter The AVMetadataItemFilter object for filtering the metadataItems. @result			An instance of NSArray containing the metadata items of the target NSArray that have not been removed by metadataItemFilter.
 func AVMetadataItemMetadataItemsFromArrayFilteredByMetadataItemFilter(metadataItems *foundation.NSArray[*AVMetadataItem], metadataItemFilter *AVMetadataItemFilter) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayFilteredByMetadataItemFilter, metadataItems.Ptr(), metadataItemFilter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // @method			identifierForKey:keySpace: @abstract		Provides the metadata identifier that's equivalent to a key and keySpace. @param			key The metadata key. @param			keySpace The metadata keySpace. @result			A metadata identifier equivalent to the given key and keySpace, or nil if no identifier can be constructed from the given key and keySpace. @discussion Metadata keys that are not instances of NSString, NSNumber, or NSData cannot be converted to metadata identifiers; they also cannot be written to media resources via AVAssetExportSession or AVAssetWriter.  Metadata item keySpaces must be a string of one to four printable ASCII characters. For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
 func AVMetadataItemIdentifierForKeyKeySpace(key objc.ID, keySpace *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelIdentifierForKeyKeySpace, key, keySpace.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func AVMetadataItemKeySpaceForIdentifier(identifier *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelKeySpaceForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -199,13 +227,17 @@ func (o *AVMetadataItem) Key() objc.ID {
 
 func (o *AVMetadataItem) CommonKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelCommonKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVMetadataItem) KeySpace() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataItemSelKeySpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -222,21 +254,26 @@ func AVMetadataItemMetadataItemWithPropertiesOfMetadataItemValueLoadingHandler(m
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemWithPropertiesOfMetadataItemValueLoadingHandler, metadataItem.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataItemFromID(_ret)
 }
 
 // @method			metadataItemsFromArray:withLocale: @discussion		Instead, use metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:.
 func AVMetadataItemMetadataItemsFromArrayWithLocale(metadataItems *foundation.NSArray[*AVMetadataItem], locale *foundation.NSLocale) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayWithLocale, metadataItems.Ptr(), locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // @method			metadataItemsFromArray:withKey:keySpace: @discussion		Instead, use metadataItemsFromArray:filteredByIdentifier:.
 func AVMetadataItemMetadataItemsFromArrayWithKeyKeySpace(metadataItems *foundation.NSArray[*AVMetadataItem], key objc.ID, keySpace *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItem), _aVMetadataItemSelMetadataItemsFromArrayWithKeyKeySpace, metadataItems.Ptr(), key, keySpace.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
-

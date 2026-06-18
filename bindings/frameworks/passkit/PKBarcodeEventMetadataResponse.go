@@ -16,10 +16,10 @@ type PKBarcodeEventMetadataResponse struct {
 }
 
 var (
-	_clsPKBarcodeEventMetadataResponse = _objcClass("PKBarcodeEventMetadataResponse")
+	_clsPKBarcodeEventMetadataResponse                           = _objcClass("PKBarcodeEventMetadataResponse")
 	_pKBarcodeEventMetadataResponseSelInitWithPaymentInformation = objc.RegisterName("initWithPaymentInformation:")
-	_pKBarcodeEventMetadataResponseSelPaymentInformation = objc.RegisterName("paymentInformation")
-	_pKBarcodeEventMetadataResponseSelSetPaymentInformation = objc.RegisterName("setPaymentInformation:")
+	_pKBarcodeEventMetadataResponseSelPaymentInformation         = objc.RegisterName("paymentInformation")
+	_pKBarcodeEventMetadataResponseSelSetPaymentInformation      = objc.RegisterName("setPaymentInformation:")
 )
 
 func PKBarcodeEventMetadataResponseFromID(id objc.ID) *PKBarcodeEventMetadataResponse {
@@ -34,17 +34,20 @@ func PKBarcodeEventMetadataResponseFromID(id objc.ID) *PKBarcodeEventMetadataRes
 
 func (o *PKBarcodeEventMetadataResponse) InitWithPaymentInformation(paymentInformation *foundation.NSData) *PKBarcodeEventMetadataResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventMetadataResponseSelInitWithPaymentInformation, paymentInformation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKBarcodeEventMetadataResponseFromID(_ret)
 }
 
 func (o *PKBarcodeEventMetadataResponse) PaymentInformation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKBarcodeEventMetadataResponseSelPaymentInformation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *PKBarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation *foundation.NSData) {
 	o.Ptr().Send(_pKBarcodeEventMetadataResponseSelSetPaymentInformation, paymentInformation.Ptr())
 }
-

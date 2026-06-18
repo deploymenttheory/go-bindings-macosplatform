@@ -51,7 +51,9 @@ func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
 	return &Port{inner: _r}
 }
 
-func (x *MachBootstrapServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
+func (x *MachBootstrapServer) asPortNameServer() *raw.NSPortNameServer {
+	return &x.inner.NSPortNameServer
+}
 
 func (x *MachBootstrapServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
 
@@ -63,4 +65,3 @@ type MachBootstrapServerable interface {
 }
 
 var _ MachBootstrapServerable = (*MachBootstrapServer)(nil)
-

@@ -1,6 +1,6 @@
 # go-bindings-macosplatform
 
-Type-safe Go bindings for native macOS framework APIs, generated directly from the installed version of the Xcode SDK on macOS.
+Type-safe Go bindings for native macOS framework APIs, generated directly from the installed version of the Xcode SDK on macOS deterministically.
 
 This project provides three things:
 

@@ -18,17 +18,17 @@ type GKComponentSystem[ComponentType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKComponentSystem = _objcClass("GKComponentSystem")
-	_gKComponentSystemSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_gKComponentSystemSelInitWithComponentClass = objc.RegisterName("initWithComponentClass:")
-	_gKComponentSystemSelAddComponent = objc.RegisterName("addComponent:")
-	_gKComponentSystemSelAddComponentWithEntity = objc.RegisterName("addComponentWithEntity:")
-	_gKComponentSystemSelRemoveComponentWithEntity = objc.RegisterName("removeComponentWithEntity:")
-	_gKComponentSystemSelRemoveComponent = objc.RegisterName("removeComponent:")
-	_gKComponentSystemSelUpdateWithDeltaTime = objc.RegisterName("updateWithDeltaTime:")
+	_clsGKComponentSystem                               = _objcClass("GKComponentSystem")
+	_gKComponentSystemSelObjectAtIndexedSubscript       = objc.RegisterName("objectAtIndexedSubscript:")
+	_gKComponentSystemSelInitWithComponentClass         = objc.RegisterName("initWithComponentClass:")
+	_gKComponentSystemSelAddComponent                   = objc.RegisterName("addComponent:")
+	_gKComponentSystemSelAddComponentWithEntity         = objc.RegisterName("addComponentWithEntity:")
+	_gKComponentSystemSelRemoveComponentWithEntity      = objc.RegisterName("removeComponentWithEntity:")
+	_gKComponentSystemSelRemoveComponent                = objc.RegisterName("removeComponent:")
+	_gKComponentSystemSelUpdateWithDeltaTime            = objc.RegisterName("updateWithDeltaTime:")
 	_gKComponentSystemSelClassForGenericArgumentAtIndex = objc.RegisterName("classForGenericArgumentAtIndex:")
-	_gKComponentSystemSelComponentClass = objc.RegisterName("componentClass")
-	_gKComponentSystemSelComponents = objc.RegisterName("components")
+	_gKComponentSystemSelComponentClass                 = objc.RegisterName("componentClass")
+	_gKComponentSystemSelComponents                     = objc.RegisterName("components")
 )
 
 func GKComponentSystemFromID[ComponentType purego.AnyObject](id objc.ID) *GKComponentSystem[ComponentType] {
@@ -50,7 +50,9 @@ func (o *GKComponentSystem[ComponentType]) ObjectAtIndexedSubscript(idx uint) Co
 // Initializes a system for the given component class. The receiver can now only accept components of the given class.
 func (o *GKComponentSystem[ComponentType]) InitWithComponentClass(cls objc.Class) *GKComponentSystem[ComponentType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKComponentSystemSelInitWithComponentClass, cls)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKComponentSystemFromID[ComponentType](_ret)
 }
 
@@ -94,7 +96,8 @@ func (o *GKComponentSystem[ComponentType]) ComponentClass() objc.Class {
 // The array of components currently in the system.
 func (o *GKComponentSystem[ComponentType]) Components() *foundation.NSArray[ComponentType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKComponentSystemSelComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ComponentType](_ret)
 }
-

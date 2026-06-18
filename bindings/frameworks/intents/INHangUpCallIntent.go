@@ -16,9 +16,9 @@ type INHangUpCallIntent struct {
 }
 
 var (
-	_clsINHangUpCallIntent = _objcClass("INHangUpCallIntent")
+	_clsINHangUpCallIntent                       = _objcClass("INHangUpCallIntent")
 	_iNHangUpCallIntentSelInitWithCallIdentifier = objc.RegisterName("initWithCallIdentifier:")
-	_iNHangUpCallIntentSelCallIdentifier = objc.RegisterName("callIdentifier")
+	_iNHangUpCallIntentSelCallIdentifier         = objc.RegisterName("callIdentifier")
 )
 
 func INHangUpCallIntentFromID(id objc.ID) *INHangUpCallIntent {
@@ -33,13 +33,16 @@ func INHangUpCallIntentFromID(id objc.ID) *INHangUpCallIntent {
 
 func (o *INHangUpCallIntent) InitWithCallIdentifier(callIdentifier *foundation.NSString) *INHangUpCallIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNHangUpCallIntentSelInitWithCallIdentifier, callIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INHangUpCallIntentFromID(_ret)
 }
 
 func (o *INHangUpCallIntent) CallIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNHangUpCallIntentSelCallIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

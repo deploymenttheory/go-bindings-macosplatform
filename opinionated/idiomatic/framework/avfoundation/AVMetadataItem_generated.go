@@ -188,4 +188,3 @@ type MetadataItemable interface {
 }
 
 var _ MetadataItemable = (*MetadataItem)(nil)
-

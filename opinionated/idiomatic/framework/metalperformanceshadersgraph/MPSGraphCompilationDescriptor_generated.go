@@ -153,7 +153,9 @@ func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisio
 	x.inner.SetReducedPrecisionFastMath(reducedPrecisionFastMath)
 }
 
-func (x *GraphCompilationDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphCompilationDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphCompilationDescriptorable is the interface implemented by [GraphCompilationDescriptor], for mocking and DI.
 type GraphCompilationDescriptorable interface {
@@ -183,4 +185,3 @@ type GraphCompilationDescriptorable interface {
 }
 
 var _ GraphCompilationDescriptorable = (*GraphCompilationDescriptor)(nil)
-

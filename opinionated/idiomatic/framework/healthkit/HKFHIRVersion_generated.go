@@ -80,4 +80,3 @@ type FHIRVersionable interface {
 }
 
 var _ FHIRVersionable = (*FHIRVersion)(nil)
-

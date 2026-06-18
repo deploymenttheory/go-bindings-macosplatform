@@ -9,11 +9,11 @@ import (
 
 type MKCoordinateRegion struct {
 	Center unsafe.Pointer
-	Span MKCoordinateSpan
+	Span   MKCoordinateSpan
 }
 
 type MKCoordinateSpan struct {
-	LatitudeDelta unsafe.Pointer
+	LatitudeDelta  unsafe.Pointer
 	LongitudeDelta unsafe.Pointer
 }
 
@@ -24,18 +24,17 @@ type MKMapPoint struct {
 
 type MKMapRect struct {
 	Origin MKMapPoint
-	Size MKMapSize
+	Size   MKMapSize
 }
 
 type MKMapSize struct {
-	Width float64
+	Width  float64
 	Height float64
 }
 
 type MKTileOverlayPath struct {
-	X int
-	Y int
-	Z int
+	X                  int
+	Y                  int
+	Z                  int
 	ContentScaleFactor float64
 }
-

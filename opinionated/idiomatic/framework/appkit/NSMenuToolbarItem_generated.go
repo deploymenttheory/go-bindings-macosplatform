@@ -241,4 +241,3 @@ type MenuToolbarItemable interface {
 }
 
 var _ MenuToolbarItemable = (*MenuToolbarItem)(nil)
-

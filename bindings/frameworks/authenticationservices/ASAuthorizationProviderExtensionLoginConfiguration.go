@@ -18,105 +18,105 @@ type ASAuthorizationProviderExtensionLoginConfiguration struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionLoginConfiguration = _objcClass("ASAuthorizationProviderExtensionLoginConfiguration")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelInitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience = objc.RegisterName("initWithClientID:issuer:tokenEndpointURL:jwksEndpointURL:audience:")
+	_clsASAuthorizationProviderExtensionLoginConfiguration                                                                = _objcClass("ASAuthorizationProviderExtensionLoginConfiguration")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelInitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience   = objc.RegisterName("initWithClientID:issuer:tokenEndpointURL:jwksEndpointURL:audience:")
 	_aSAuthorizationProviderExtensionLoginConfigurationSelConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion = objc.RegisterName("configurationWithOpenIDConfigurationURL:clientID:issuer:completion:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError = objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError = objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError = objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError = objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestHeaderClaimsReturningError = objc.RegisterName("setCustomRefreshRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestBodyClaimsReturningError = objc.RegisterName("setCustomRefreshRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestHeaderClaimsReturningError = objc.RegisterName("setCustomKeyExchangeRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestBodyClaimsReturningError = objc.RegisterName("setCustomKeyExchangeRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestHeaderClaimsReturningError = objc.RegisterName("setCustomKeyRequestHeaderClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestBodyClaimsReturningError = objc.RegisterName("setCustomKeyRequestBodyClaims:returningError:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelInvalidCredentialPredicate = objc.RegisterName("invalidCredentialPredicate")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetInvalidCredentialPredicate = objc.RegisterName("setInvalidCredentialPredicate:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelAccountDisplayName = objc.RegisterName("accountDisplayName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAccountDisplayName = objc.RegisterName("setAccountDisplayName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelClientID = objc.RegisterName("clientID")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelIssuer = objc.RegisterName("issuer")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelAudience = objc.RegisterName("audience")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAudience = objc.RegisterName("setAudience:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelTokenEndpointURL = objc.RegisterName("tokenEndpointURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetTokenEndpointURL = objc.RegisterName("setTokenEndpointURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelJwksEndpointURL = objc.RegisterName("jwksEndpointURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksEndpointURL = objc.RegisterName("setJwksEndpointURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelJwksTrustedRootCertificates = objc.RegisterName("jwksTrustedRootCertificates")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksTrustedRootCertificates = objc.RegisterName("setJwksTrustedRootCertificates:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelDeviceContext = objc.RegisterName("deviceContext")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetDeviceContext = objc.RegisterName("setDeviceContext:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelUserSecureEnclaveKeyBiometricPolicy = objc.RegisterName("userSecureEnclaveKeyBiometricPolicy")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetUserSecureEnclaveKeyBiometricPolicy = objc.RegisterName("setUserSecureEnclaveKeyBiometricPolicy:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelNonceEndpointURL = objc.RegisterName("nonceEndpointURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetNonceEndpointURL = objc.RegisterName("setNonceEndpointURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelNonceResponseKeypath = objc.RegisterName("nonceResponseKeypath")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetNonceResponseKeypath = objc.RegisterName("setNonceResponseKeypath:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelServerNonceClaimName = objc.RegisterName("serverNonceClaimName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetServerNonceClaimName = objc.RegisterName("setServerNonceClaimName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomNonceRequestValues = objc.RegisterName("customNonceRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomNonceRequestValues = objc.RegisterName("setCustomNonceRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalScopes = objc.RegisterName("additionalScopes")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalScopes = objc.RegisterName("setAdditionalScopes:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalAuthorizationScopes = objc.RegisterName("additionalAuthorizationScopes")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalAuthorizationScopes = objc.RegisterName("setAdditionalAuthorizationScopes:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelIncludePreviousRefreshTokenInLoginRequest = objc.RegisterName("includePreviousRefreshTokenInLoginRequest")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetIncludePreviousRefreshTokenInLoginRequest = objc.RegisterName("setIncludePreviousRefreshTokenInLoginRequest:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelPreviousRefreshTokenClaimName = objc.RegisterName("previousRefreshTokenClaimName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetPreviousRefreshTokenClaimName = objc.RegisterName("setPreviousRefreshTokenClaimName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomRequestJWTParameterName = objc.RegisterName("customRequestJWTParameterName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRequestJWTParameterName = objc.RegisterName("setCustomRequestJWTParameterName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomLoginRequestValues = objc.RegisterName("customLoginRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestValues = objc.RegisterName("setCustomLoginRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelUniqueIdentifierClaimName = objc.RegisterName("uniqueIdentifierClaimName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetUniqueIdentifierClaimName = objc.RegisterName("setUniqueIdentifierClaimName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelGroupRequestClaimName = objc.RegisterName("groupRequestClaimName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetGroupRequestClaimName = objc.RegisterName("setGroupRequestClaimName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelGroupResponseClaimName = objc.RegisterName("groupResponseClaimName")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetGroupResponseClaimName = objc.RegisterName("setGroupResponseClaimName:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelKerberosTicketMappings = objc.RegisterName("kerberosTicketMappings")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetKerberosTicketMappings = objc.RegisterName("setKerberosTicketMappings:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelRefreshEndpointURL = objc.RegisterName("refreshEndpointURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetRefreshEndpointURL = objc.RegisterName("setRefreshEndpointURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomRefreshRequestValues = objc.RegisterName("customRefreshRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestValues = objc.RegisterName("setCustomRefreshRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationType = objc.RegisterName("federationType")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationType = objc.RegisterName("setFederationType:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationRequestURN = objc.RegisterName("federationRequestURN")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationRequestURN = objc.RegisterName("setFederationRequestURN:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURL = objc.RegisterName("federationMEXURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationMEXURL = objc.RegisterName("setFederationMEXURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationUserPreauthenticationURL = objc.RegisterName("federationUserPreauthenticationURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationUserPreauthenticationURL = objc.RegisterName("setFederationUserPreauthenticationURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURLKeypath = objc.RegisterName("federationMEXURLKeypath")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationMEXURLKeypath = objc.RegisterName("setFederationMEXURLKeypath:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationPredicate = objc.RegisterName("federationPredicate")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationPredicate = objc.RegisterName("setFederationPredicate:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomFederationUserPreauthenticationRequestValues = objc.RegisterName("customFederationUserPreauthenticationRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues = objc.RegisterName("setCustomFederationUserPreauthenticationRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionPublicKey = objc.RegisterName("loginRequestEncryptionPublicKey")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionPublicKey = objc.RegisterName("setLoginRequestEncryptionPublicKey:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAPVPrefix = objc.RegisterName("loginRequestEncryptionAPVPrefix")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionAPVPrefix = objc.RegisterName("setLoginRequestEncryptionAPVPrefix:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAlgorithm = objc.RegisterName("loginRequestEncryptionAlgorithm")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionAlgorithm = objc.RegisterName("setLoginRequestEncryptionAlgorithm:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKey = objc.RegisterName("loginRequestHPKEPreSharedKey")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestHPKEPreSharedKey = objc.RegisterName("setLoginRequestHPKEPreSharedKey:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKeyID = objc.RegisterName("loginRequestHPKEPreSharedKeyID")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestHPKEPreSharedKeyID = objc.RegisterName("setLoginRequestHPKEPreSharedKeyID:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelKeyEndpointURL = objc.RegisterName("keyEndpointURL")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetKeyEndpointURL = objc.RegisterName("setKeyEndpointURL:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyExchangeRequestValues = objc.RegisterName("customKeyExchangeRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestValues = objc.RegisterName("setCustomKeyExchangeRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyRequestValues = objc.RegisterName("customKeyRequestValues")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestValues = objc.RegisterName("setCustomKeyRequestValues:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKey = objc.RegisterName("hpkePreSharedKey")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkePreSharedKey = objc.RegisterName("setHpkePreSharedKey:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKeyID = objc.RegisterName("hpkePreSharedKeyID")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkePreSharedKeyID = objc.RegisterName("setHpkePreSharedKeyID:")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkeAuthPublicKey = objc.RegisterName("hpkeAuthPublicKey")
-	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkeAuthPublicKey = objc.RegisterName("setHpkeAuthPublicKey:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestHeaderClaimsReturningError             = objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomAssertionRequestBodyClaimsReturningError               = objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestHeaderClaimsReturningError                 = objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestBodyClaimsReturningError                   = objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestHeaderClaimsReturningError               = objc.RegisterName("setCustomRefreshRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestBodyClaimsReturningError                 = objc.RegisterName("setCustomRefreshRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestHeaderClaimsReturningError           = objc.RegisterName("setCustomKeyExchangeRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestBodyClaimsReturningError             = objc.RegisterName("setCustomKeyExchangeRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestHeaderClaimsReturningError                   = objc.RegisterName("setCustomKeyRequestHeaderClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestBodyClaimsReturningError                     = objc.RegisterName("setCustomKeyRequestBodyClaims:returningError:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelInvalidCredentialPredicate                                      = objc.RegisterName("invalidCredentialPredicate")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetInvalidCredentialPredicate                                   = objc.RegisterName("setInvalidCredentialPredicate:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAccountDisplayName                                              = objc.RegisterName("accountDisplayName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAccountDisplayName                                           = objc.RegisterName("setAccountDisplayName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelClientID                                                        = objc.RegisterName("clientID")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelIssuer                                                          = objc.RegisterName("issuer")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAudience                                                        = objc.RegisterName("audience")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAudience                                                     = objc.RegisterName("setAudience:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelTokenEndpointURL                                                = objc.RegisterName("tokenEndpointURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetTokenEndpointURL                                             = objc.RegisterName("setTokenEndpointURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelJwksEndpointURL                                                 = objc.RegisterName("jwksEndpointURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksEndpointURL                                              = objc.RegisterName("setJwksEndpointURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelJwksTrustedRootCertificates                                     = objc.RegisterName("jwksTrustedRootCertificates")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetJwksTrustedRootCertificates                                  = objc.RegisterName("setJwksTrustedRootCertificates:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelDeviceContext                                                   = objc.RegisterName("deviceContext")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetDeviceContext                                                = objc.RegisterName("setDeviceContext:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelUserSecureEnclaveKeyBiometricPolicy                             = objc.RegisterName("userSecureEnclaveKeyBiometricPolicy")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetUserSecureEnclaveKeyBiometricPolicy                          = objc.RegisterName("setUserSecureEnclaveKeyBiometricPolicy:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelNonceEndpointURL                                                = objc.RegisterName("nonceEndpointURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetNonceEndpointURL                                             = objc.RegisterName("setNonceEndpointURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelNonceResponseKeypath                                            = objc.RegisterName("nonceResponseKeypath")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetNonceResponseKeypath                                         = objc.RegisterName("setNonceResponseKeypath:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelServerNonceClaimName                                            = objc.RegisterName("serverNonceClaimName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetServerNonceClaimName                                         = objc.RegisterName("setServerNonceClaimName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomNonceRequestValues                                        = objc.RegisterName("customNonceRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomNonceRequestValues                                     = objc.RegisterName("setCustomNonceRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalScopes                                                = objc.RegisterName("additionalScopes")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalScopes                                             = objc.RegisterName("setAdditionalScopes:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalAuthorizationScopes                                   = objc.RegisterName("additionalAuthorizationScopes")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetAdditionalAuthorizationScopes                                = objc.RegisterName("setAdditionalAuthorizationScopes:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelIncludePreviousRefreshTokenInLoginRequest                       = objc.RegisterName("includePreviousRefreshTokenInLoginRequest")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetIncludePreviousRefreshTokenInLoginRequest                    = objc.RegisterName("setIncludePreviousRefreshTokenInLoginRequest:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelPreviousRefreshTokenClaimName                                   = objc.RegisterName("previousRefreshTokenClaimName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetPreviousRefreshTokenClaimName                                = objc.RegisterName("setPreviousRefreshTokenClaimName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomRequestJWTParameterName                                   = objc.RegisterName("customRequestJWTParameterName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRequestJWTParameterName                                = objc.RegisterName("setCustomRequestJWTParameterName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomLoginRequestValues                                        = objc.RegisterName("customLoginRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomLoginRequestValues                                     = objc.RegisterName("setCustomLoginRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelUniqueIdentifierClaimName                                       = objc.RegisterName("uniqueIdentifierClaimName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetUniqueIdentifierClaimName                                    = objc.RegisterName("setUniqueIdentifierClaimName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelGroupRequestClaimName                                           = objc.RegisterName("groupRequestClaimName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetGroupRequestClaimName                                        = objc.RegisterName("setGroupRequestClaimName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelGroupResponseClaimName                                          = objc.RegisterName("groupResponseClaimName")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetGroupResponseClaimName                                       = objc.RegisterName("setGroupResponseClaimName:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelKerberosTicketMappings                                          = objc.RegisterName("kerberosTicketMappings")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetKerberosTicketMappings                                       = objc.RegisterName("setKerberosTicketMappings:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelRefreshEndpointURL                                              = objc.RegisterName("refreshEndpointURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetRefreshEndpointURL                                           = objc.RegisterName("setRefreshEndpointURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomRefreshRequestValues                                      = objc.RegisterName("customRefreshRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomRefreshRequestValues                                   = objc.RegisterName("setCustomRefreshRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationType                                                  = objc.RegisterName("federationType")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationType                                               = objc.RegisterName("setFederationType:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationRequestURN                                            = objc.RegisterName("federationRequestURN")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationRequestURN                                         = objc.RegisterName("setFederationRequestURN:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURL                                                = objc.RegisterName("federationMEXURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationMEXURL                                             = objc.RegisterName("setFederationMEXURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationUserPreauthenticationURL                              = objc.RegisterName("federationUserPreauthenticationURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationUserPreauthenticationURL                           = objc.RegisterName("setFederationUserPreauthenticationURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURLKeypath                                         = objc.RegisterName("federationMEXURLKeypath")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationMEXURLKeypath                                      = objc.RegisterName("setFederationMEXURLKeypath:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelFederationPredicate                                             = objc.RegisterName("federationPredicate")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetFederationPredicate                                          = objc.RegisterName("setFederationPredicate:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomFederationUserPreauthenticationRequestValues              = objc.RegisterName("customFederationUserPreauthenticationRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomFederationUserPreauthenticationRequestValues           = objc.RegisterName("setCustomFederationUserPreauthenticationRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionPublicKey                                 = objc.RegisterName("loginRequestEncryptionPublicKey")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionPublicKey                              = objc.RegisterName("setLoginRequestEncryptionPublicKey:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAPVPrefix                                 = objc.RegisterName("loginRequestEncryptionAPVPrefix")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionAPVPrefix                              = objc.RegisterName("setLoginRequestEncryptionAPVPrefix:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAlgorithm                                 = objc.RegisterName("loginRequestEncryptionAlgorithm")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestEncryptionAlgorithm                              = objc.RegisterName("setLoginRequestEncryptionAlgorithm:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKey                                    = objc.RegisterName("loginRequestHPKEPreSharedKey")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestHPKEPreSharedKey                                 = objc.RegisterName("setLoginRequestHPKEPreSharedKey:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKeyID                                  = objc.RegisterName("loginRequestHPKEPreSharedKeyID")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetLoginRequestHPKEPreSharedKeyID                               = objc.RegisterName("setLoginRequestHPKEPreSharedKeyID:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelKeyEndpointURL                                                  = objc.RegisterName("keyEndpointURL")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetKeyEndpointURL                                               = objc.RegisterName("setKeyEndpointURL:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyExchangeRequestValues                                  = objc.RegisterName("customKeyExchangeRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyExchangeRequestValues                               = objc.RegisterName("setCustomKeyExchangeRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelCustomKeyRequestValues                                          = objc.RegisterName("customKeyRequestValues")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetCustomKeyRequestValues                                       = objc.RegisterName("setCustomKeyRequestValues:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKey                                                = objc.RegisterName("hpkePreSharedKey")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkePreSharedKey                                             = objc.RegisterName("setHpkePreSharedKey:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKeyID                                              = objc.RegisterName("hpkePreSharedKeyID")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkePreSharedKeyID                                           = objc.RegisterName("setHpkePreSharedKeyID:")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelHpkeAuthPublicKey                                               = objc.RegisterName("hpkeAuthPublicKey")
+	_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkeAuthPublicKey                                            = objc.RegisterName("setHpkeAuthPublicKey:")
 )
 
 func ASAuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *ASAuthorizationProviderExtensionLoginConfiguration {
@@ -132,7 +132,9 @@ func ASAuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *ASAut
 // @abstract Initializes an ASAuthorizationProviderExtensionLoginConfiguration class with the required values. @param clientID The client_id for the Apple platform SSO login at the identity provider. @param issuer The issuer for the requests, used to validate responses. @param tokenEndpointURL The token endpoint at the idP for login. @param jwksEndpointURL The JWKS URL at the idP for validating tokens. @param audience The audience used for signed assertions.  This should be the tenent at the idP. @return An instance of a ASAuthorizationProviderExtensionLoginConfiguration.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) InitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience(clientID *foundation.NSString, issuer *foundation.NSString, tokenEndpointURL *foundation.NSURL, jwksEndpointURL *foundation.NSURL, audience *foundation.NSString) *ASAuthorizationProviderExtensionLoginConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelInitWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience, clientID.Ptr(), issuer.Ptr(), tokenEndpointURL.Ptr(), jwksEndpointURL.Ptr(), audience.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionLoginConfigurationFromID(_ret)
 }
 
@@ -254,7 +256,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequest
 // @abstract Predicate string used to identify invalid credential errors. @discussion If there is an HTTP 400 or HTTP 401 error when authenticating, this predicate will be used on the response body JSON to determine if the error is due to an invalid password or something else.  If nil, then only an HTTP 401 will be used for an invalid credential.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) InvalidCredentialPredicate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelInvalidCredentialPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -265,7 +269,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetInvalidCredentia
 // @abstract The display name for the account.  Used for notifications and login prompts.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) AccountDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAccountDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -276,21 +282,27 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAccountDisplayNa
 // @abstract The login client_id.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) ClientID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelClientID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The issuer for validation.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) Issuer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelIssuer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract The audience for validation and requests.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) Audience() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAudience)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -301,7 +313,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAudience(audienc
 // @abstract Token Endpoint URL for login request.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) TokenEndpointURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelTokenEndpointURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -312,7 +326,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetTokenEndpointURL
 // @abstract JWKS Endpoint URL for keys.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) JwksEndpointURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelJwksEndpointURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -333,7 +349,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetJwksTrustedRootC
 // @abstract The device context for storing device meta data.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) DeviceContext() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelDeviceContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -354,7 +372,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetUserSecureEnclav
 // @abstract Nonce Endpoint URL, defaults to token tokenEndpointURL.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) NonceEndpointURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelNonceEndpointURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -365,7 +385,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetNonceEndpointURL
 // @abstract The keypath in the nonce response that contains the nonce value.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) NonceResponseKeypath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelNonceResponseKeypath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -376,7 +398,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetNonceResponseKey
 // @abstract The name of the server nonce claim when included in authentication requests.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) ServerNonceClaimName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelServerNonceClaimName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -397,7 +421,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomNonceReque
 // @abstract Additional login scopes.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) AdditionalScopes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalScopes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -408,7 +434,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetAdditionalScopes
 // @abstract Additional authorization scopes.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) AdditionalAuthorizationScopes() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelAdditionalAuthorizationScopes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -429,7 +457,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetIncludePreviousR
 // @abstract The claim name for the previous SSO token value in the login request.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) PreviousRefreshTokenClaimName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelPreviousRefreshTokenClaimName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -440,7 +470,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetPreviousRefreshT
 // @abstract The request parameter name for the JWT.  The default is "assertion".
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) CustomRequestJWTParameterName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelCustomRequestJWTParameterName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -461,7 +493,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomLoginReque
 // @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) UniqueIdentifierClaimName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelUniqueIdentifierClaimName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -472,7 +506,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetUniqueIdentifier
 // @abstract The claim name for group membership request.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) GroupRequestClaimName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelGroupRequestClaimName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -483,7 +519,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetGroupRequestClai
 // @abstract The claim name for group responses in the id_token.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) GroupResponseClaimName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelGroupResponseClaimName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -494,7 +532,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetGroupResponseCla
 // @abstract The Kerberos ticket mappings to use.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) KerberosTicketMappings() *foundation.NSArray[*ASAuthorizationProviderExtensionKerberosMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelKerberosTicketMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationProviderExtensionKerberosMapping](_ret)
 }
 
@@ -505,7 +545,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetKerberosTicketMa
 // @abstract Token Refresh Endpoint URL for login request.  Defaults to the tokenEndpointURL.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) RefreshEndpointURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelRefreshEndpointURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -536,7 +578,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationType(f
 // @abstract The URN to request when performing a federated login.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationRequestURN)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -547,7 +591,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationReques
 // @abstract The federation MEX URL to use.  This can be overwritten when using dynamic federation.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationMEXURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -558,7 +604,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURL
 // @abstract The URL to use when performing dynamic federation.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationUserPreauthenticationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationUserPreauthenticationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -569,7 +617,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationUserPr
 // @abstract The claim in the preauthentication response that contains the MEX URL.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationMEXURLKeypath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationMEXURLKeypath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -580,7 +630,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURL
 // @abstract The predicate to apply to the preauthentication response to perform federation or not.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) FederationPredicate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelFederationPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -611,7 +663,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncr
 // @abstract The APV prefix used for encrypted embedded login assertions.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAPVPrefix() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAPVPrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -622,7 +676,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncr
 // @abstract The encryption algorithm to use for the embedded login assertion.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAlgorithm() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestEncryptionAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -633,7 +689,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncr
 // @abstract The PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -644,7 +702,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKE
 // @abstract  The PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKeyID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelLoginRequestHPKEPreSharedKeyID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -655,7 +715,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKE
 // @abstract The url endpoint for key service, defaults to token tokenEndpointURL.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) KeyEndpointURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelKeyEndpointURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -686,7 +748,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequest
 // @abstract The PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -697,7 +761,9 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetHpkePreSharedKey
 // @abstract The PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKeyID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionLoginConfigurationSelHpkePreSharedKeyID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -714,4 +780,3 @@ func (o *ASAuthorizationProviderExtensionLoginConfiguration) HpkeAuthPublicKey()
 func (o *ASAuthorizationProviderExtensionLoginConfiguration) SetHpkeAuthPublicKey(hpkeAuthPublicKey unsafe.Pointer) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionLoginConfigurationSelSetHpkeAuthPublicKey, hpkeAuthPublicKey)
 }
-

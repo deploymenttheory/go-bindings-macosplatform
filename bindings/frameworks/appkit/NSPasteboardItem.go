@@ -16,19 +16,19 @@ type NSPasteboardItem struct {
 }
 
 var (
-	_clsNSPasteboardItem = _objcClass("NSPasteboardItem")
-	_nSPasteboardItemSelAvailableTypeFromArray = objc.RegisterName("availableTypeFromArray:")
-	_nSPasteboardItemSelSetDataProviderForTypes = objc.RegisterName("setDataProvider:forTypes:")
-	_nSPasteboardItemSelSetDataForType = objc.RegisterName("setData:forType:")
-	_nSPasteboardItemSelSetStringForType = objc.RegisterName("setString:forType:")
-	_nSPasteboardItemSelSetPropertyListForType = objc.RegisterName("setPropertyList:forType:")
-	_nSPasteboardItemSelDataForType = objc.RegisterName("dataForType:")
-	_nSPasteboardItemSelStringForType = objc.RegisterName("stringForType:")
-	_nSPasteboardItemSelPropertyListForType = objc.RegisterName("propertyListForType:")
+	_clsNSPasteboardItem                                           = _objcClass("NSPasteboardItem")
+	_nSPasteboardItemSelAvailableTypeFromArray                     = objc.RegisterName("availableTypeFromArray:")
+	_nSPasteboardItemSelSetDataProviderForTypes                    = objc.RegisterName("setDataProvider:forTypes:")
+	_nSPasteboardItemSelSetDataForType                             = objc.RegisterName("setData:forType:")
+	_nSPasteboardItemSelSetStringForType                           = objc.RegisterName("setString:forType:")
+	_nSPasteboardItemSelSetPropertyListForType                     = objc.RegisterName("setPropertyList:forType:")
+	_nSPasteboardItemSelDataForType                                = objc.RegisterName("dataForType:")
+	_nSPasteboardItemSelStringForType                              = objc.RegisterName("stringForType:")
+	_nSPasteboardItemSelPropertyListForType                        = objc.RegisterName("propertyListForType:")
 	_nSPasteboardItemSelDetectPatternsForPatternsCompletionHandler = objc.RegisterName("detectPatternsForPatterns:completionHandler:")
-	_nSPasteboardItemSelDetectValuesForPatternsCompletionHandler = objc.RegisterName("detectValuesForPatterns:completionHandler:")
-	_nSPasteboardItemSelDetectMetadataForTypesCompletionHandler = objc.RegisterName("detectMetadataForTypes:completionHandler:")
-	_nSPasteboardItemSelTypes = objc.RegisterName("types")
+	_nSPasteboardItemSelDetectValuesForPatternsCompletionHandler   = objc.RegisterName("detectValuesForPatterns:completionHandler:")
+	_nSPasteboardItemSelDetectMetadataForTypesCompletionHandler    = objc.RegisterName("detectMetadataForTypes:completionHandler:")
+	_nSPasteboardItemSelTypes                                      = objc.RegisterName("types")
 )
 
 func NSPasteboardItemFromID(id objc.ID) *NSPasteboardItem {
@@ -43,7 +43,9 @@ func NSPasteboardItemFromID(id objc.ID) *NSPasteboardItem {
 
 func (o *NSPasteboardItem) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardItemSelAvailableTypeFromArray, types)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,13 +71,17 @@ func (o *NSPasteboardItem) SetPropertyListForType(propertyList objc.ID, type_ *f
 
 func (o *NSPasteboardItem) DataForType(type_ *foundation.NSString) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardItemSelDataForType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSPasteboardItem) StringForType(type_ *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardItemSelStringForType, type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,12 +95,12 @@ func (o *NSPasteboardItem) DetectPatternsForPatternsCompletionHandler(patterns *
 	o.Ptr().Send(_nSPasteboardItemSelDetectPatternsForPatternsCompletionHandler, patterns, completionHandler)
 }
 
-// Determines whether this pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see ``NSPasteboardDetectionPattern``. The following example shows how to use this method to find web URLs and web search terms in each item on the pasteboard: ```obj-c NSArray<NSPasteboardItem*> *items = NSPasteboard.generalPasteboard.pasteboardItems; __block NSUInteger idx = 0; for (NSPasteboardItem *item in items) { NSUInteger itemIndex = idx++; [item detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Item %lu: Error: %@", itemIndex, error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Item %lu - Web search retrieved: %@", itemIndex, searchString); } if (urlString != nil) { NSLog(@"Item %lu - Web URL retrieved: %@", itemIndex, urlString); } if (searchString == nil && urlString == nil) { NSLog(@"Item %lu - No web patterns retrieved.", itemIndex); } }]; } ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard item. - completionHandler: A block the system invokes after detecting patterns on the pasteboard item. The block returns either a dictionary with the patterns the system finds on the pasteboard item or an error if detection fails. The dictionary keys specify the matched patterns, and the values specify the corresponding content of the pasteboard.
+// Determines whether this pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see “NSPasteboardDetectionPattern“. The following example shows how to use this method to find web URLs and web search terms in each item on the pasteboard: ```obj-c NSArray<NSPasteboardItem*> *items = NSPasteboard.generalPasteboard.pasteboardItems; __block NSUInteger idx = 0; for (NSPasteboardItem *item in items) { NSUInteger itemIndex = idx++; [item detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Item %lu: Error: %@", itemIndex, error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Item %lu - Web search retrieved: %@", itemIndex, searchString); } if (urlString != nil) { NSLog(@"Item %lu - Web URL retrieved: %@", itemIndex, urlString); } if (searchString == nil && urlString == nil) { NSLog(@"Item %lu - No web patterns retrieved.", itemIndex); } }]; } ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard item. - completionHandler: A block the system invokes after detecting patterns on the pasteboard item. The block returns either a dictionary with the patterns the system finds on the pasteboard item or an error if detection fails. The dictionary keys specify the matched patterns, and the values specify the corresponding content of the pasteboard.
 func (o *NSPasteboardItem) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	o.Ptr().Send(_nSPasteboardItemSelDetectValuesForPatternsCompletionHandler, patterns, completionHandler)
 }
 
-// Determines available metadata from the specified metadata types for this pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see ``NSPasteboardMetadataType``. The following example shows how to iterate over each pasteboard item and, if the item is a URL that points to a file, get its content type with this method: ```obj-c NSArray<NSPasteboardItem*> *items = NSPasteboard.generalPasteboard.pasteboardItems; __block NSUInteger idx = 0; for (NSPasteboardItem *item in items) { NSUInteger itemIndex = idx++; [item detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Item %lu - Error: %@", itemIndex, error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Item %lu - Content type is: %@", itemIndex, contentType.identifier); } else { NSLog(@"Item %lu - Couldn't get content type", itemIndex); } }]; } ``` - Parameters: - types: The metadata types to detect on the pasteboard item. - completionHandler: A block the system invokes after detecting metadata on the pasteboard item. The block receives either a dictionary with the metadata types the system finds on the pasteboard item or an error if detection fails. The dictionary keys specify the matched metadata types, and the values specify the corresponding metadata.
+// Determines available metadata from the specified metadata types for this pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see “NSPasteboardMetadataType“. The following example shows how to iterate over each pasteboard item and, if the item is a URL that points to a file, get its content type with this method: ```obj-c NSArray<NSPasteboardItem*> *items = NSPasteboard.generalPasteboard.pasteboardItems; __block NSUInteger idx = 0; for (NSPasteboardItem *item in items) { NSUInteger itemIndex = idx++; [item detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Item %lu - Error: %@", itemIndex, error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Item %lu - Content type is: %@", itemIndex, contentType.identifier); } else { NSLog(@"Item %lu - Couldn't get content type", itemIndex); } }]; } ``` - Parameters: - types: The metadata types to detect on the pasteboard item. - completionHandler: A block the system invokes after detecting metadata on the pasteboard item. The block receives either a dictionary with the metadata types the system finds on the pasteboard item or an error if detection fails. The dictionary keys specify the matched metadata types, and the values specify the corresponding metadata.
 func (o *NSPasteboardItem) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	o.Ptr().Send(_nSPasteboardItemSelDetectMetadataForTypesCompletionHandler, types, completionHandler)
 }
@@ -103,4 +109,3 @@ func (o *NSPasteboardItem) Types() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nSPasteboardItemSelTypes)
 	return _ret
 }
-

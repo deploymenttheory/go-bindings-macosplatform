@@ -15,7 +15,9 @@ type HapticParameterCurveControlPoint struct {
 }
 
 // Unwrap returns the underlying [raw.CHHapticParameterCurveControlPoint].
-func (x *HapticParameterCurveControlPoint) Unwrap() *raw.CHHapticParameterCurveControlPoint { return x.inner }
+func (x *HapticParameterCurveControlPoint) Unwrap() *raw.CHHapticParameterCurveControlPoint {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type HapticParameterCurveControlPointable interface {
 }
 
 var _ HapticParameterCurveControlPointable = (*HapticParameterCurveControlPoint)(nil)
-

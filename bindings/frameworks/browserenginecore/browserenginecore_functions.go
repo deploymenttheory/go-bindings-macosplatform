@@ -8,11 +8,11 @@ import (
 )
 
 var (
-	_be_memory_inline_jit_restrict_rwx_to_rw_with_witness func() unsafe.Pointer
+	_be_memory_inline_jit_restrict_rwx_to_rw_with_witness      func() unsafe.Pointer
 	_be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl func() unsafe.Pointer
-	_be_memory_inline_jit_restrict_rwx_to_rx_with_witness func() unsafe.Pointer
+	_be_memory_inline_jit_restrict_rwx_to_rx_with_witness      func() unsafe.Pointer
 	_be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl func() unsafe.Pointer
-	_be_memory_inline_jit_restrict_with_witness_supported func() int
+	_be_memory_inline_jit_restrict_with_witness_supported      func() int
 )
 
 // C function: be_memory_inline_jit_restrict_rwx_to_rw_with_witness
@@ -39,4 +39,3 @@ func BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl() unsafe.Pointer {
 func BeMemoryInlineJitRestrictWithWitnessSupported() int {
 	return _be_memory_inline_jit_restrict_with_witness_supported()
 }
-

@@ -54,4 +54,3 @@ type MTLDevice interface {
 // MTLTexture wraps the ObjC protocol MTLTexture.
 type MTLTexture interface {
 }
-

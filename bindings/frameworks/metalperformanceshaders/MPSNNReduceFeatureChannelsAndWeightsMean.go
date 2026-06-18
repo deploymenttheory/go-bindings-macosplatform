@@ -18,8 +18,8 @@ type MPSNNReduceFeatureChannelsAndWeightsMean struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsAndWeightsMean = _objcClass("MPSNNReduceFeatureChannelsAndWeightsMean")
-	_mPSNNReduceFeatureChannelsAndWeightsMeanSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsAndWeightsMean                    = _objcClass("MPSNNReduceFeatureChannelsAndWeightsMean")
+	_mPSNNReduceFeatureChannelsAndWeightsMeanSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsAndWeightsMeanSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -36,14 +36,17 @@ func MPSNNReduceFeatureChannelsAndWeightsMeanFromID(id objc.ID) *MPSNNReduceFeat
 // @abstract Specifies information to apply the reduction operation on an image. @param    device            The device the filter will run on @return   A valid MPSNNReduceFeatureChannelsAndWeightsMean object or nil, if failure.
 func (o *MPSNNReduceFeatureChannelsAndWeightsMean) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsAndWeightsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsMeanSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsAndWeightsMeanFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsAndWeightsMean) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsAndWeightsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsAndWeightsMeanSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsAndWeightsMeanFromID(_ret)
 }
-

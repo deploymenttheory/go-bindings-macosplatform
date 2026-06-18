@@ -47,4 +47,3 @@ type SystemExtensionManagerable interface {
 }
 
 var _ SystemExtensionManagerable = (*SystemExtensionManager)(nil)
-

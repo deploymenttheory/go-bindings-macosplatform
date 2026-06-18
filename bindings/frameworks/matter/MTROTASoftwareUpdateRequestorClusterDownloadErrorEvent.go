@@ -16,15 +16,15 @@ type MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent = _objcClass("MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent")
-	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSoftwareVersion = objc.RegisterName("softwareVersion")
+	_clsMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent                   = _objcClass("MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent")
+	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSoftwareVersion    = objc.RegisterName("softwareVersion")
 	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetSoftwareVersion = objc.RegisterName("setSoftwareVersion:")
-	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelBytesDownloaded = objc.RegisterName("bytesDownloaded")
+	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelBytesDownloaded    = objc.RegisterName("bytesDownloaded")
 	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetBytesDownloaded = objc.RegisterName("setBytesDownloaded:")
-	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelProgressPercent = objc.RegisterName("progressPercent")
+	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelProgressPercent    = objc.RegisterName("progressPercent")
 	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetProgressPercent = objc.RegisterName("setProgressPercent:")
-	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelPlatformCode = objc.RegisterName("platformCode")
-	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetPlatformCode = objc.RegisterName("setPlatformCode:")
+	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelPlatformCode       = objc.RegisterName("platformCode")
+	_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetPlatformCode    = objc.RegisterName("setPlatformCode:")
 )
 
 func MTROTASoftwareUpdateRequestorClusterDownloadErrorEventFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
@@ -39,7 +39,9 @@ func MTROTASoftwareUpdateRequestorClusterDownloadErrorEventFromID(id objc.ID) *M
 
 func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SetSoftwareVers
 
 func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) BytesDownloaded() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelBytesDownloaded)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SetBytesDownloa
 
 func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) ProgressPercent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelProgressPercent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SetProgressPerc
 
 func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) PlatformCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelPlatformCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SetPlatformCode(platformCode *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateRequestorClusterDownloadErrorEventSelSetPlatformCode, platformCode.Ptr())
 }
-

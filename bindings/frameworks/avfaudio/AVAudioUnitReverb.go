@@ -15,10 +15,10 @@ type AVAudioUnitReverb struct {
 }
 
 var (
-	_clsAVAudioUnitReverb = _objcClass("AVAudioUnitReverb")
+	_clsAVAudioUnitReverb                  = _objcClass("AVAudioUnitReverb")
 	_aVAudioUnitReverbSelLoadFactoryPreset = objc.RegisterName("loadFactoryPreset:")
-	_aVAudioUnitReverbSelWetDryMix = objc.RegisterName("wetDryMix")
-	_aVAudioUnitReverbSelSetWetDryMix = objc.RegisterName("setWetDryMix:")
+	_aVAudioUnitReverbSelWetDryMix         = objc.RegisterName("wetDryMix")
+	_aVAudioUnitReverbSelSetWetDryMix      = objc.RegisterName("setWetDryMix:")
 )
 
 func AVAudioUnitReverbFromID(id objc.ID) *AVAudioUnitReverb {
@@ -44,4 +44,3 @@ func (o *AVAudioUnitReverb) WetDryMix() float32 {
 func (o *AVAudioUnitReverb) SetWetDryMix(wetDryMix float32) {
 	o.Ptr().Send(_aVAudioUnitReverbSelSetWetDryMix, wetDryMix)
 }
-

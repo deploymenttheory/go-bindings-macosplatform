@@ -17,7 +17,9 @@ type MTRThermostatClusterPresetStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterPresetStruct].
-func (x *MTRThermostatClusterPresetStruct) Unwrap() *raw.MTRThermostatClusterPresetStruct { return x.inner }
+func (x *MTRThermostatClusterPresetStruct) Unwrap() *raw.MTRThermostatClusterPresetStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -161,4 +163,3 @@ type MTRThermostatClusterPresetStructable interface {
 }
 
 var _ MTRThermostatClusterPresetStructable = (*MTRThermostatClusterPresetStruct)(nil)
-

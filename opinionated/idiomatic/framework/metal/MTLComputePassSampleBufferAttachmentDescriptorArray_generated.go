@@ -15,7 +15,9 @@ type ComputePassSampleBufferAttachmentDescriptorArray struct {
 }
 
 // Unwrap returns the underlying [raw.MTLComputePassSampleBufferAttachmentDescriptorArray].
-func (x *ComputePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptorArray { return x.inner }
+func (x *ComputePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLComputePassSampleBufferAttachmentDescriptorArray {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -57,4 +59,3 @@ type ComputePassSampleBufferAttachmentDescriptorArrayable interface {
 }
 
 var _ ComputePassSampleBufferAttachmentDescriptorArrayable = (*ComputePassSampleBufferAttachmentDescriptorArray)(nil)
-

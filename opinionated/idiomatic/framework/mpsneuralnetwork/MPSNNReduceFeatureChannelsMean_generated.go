@@ -100,9 +100,13 @@ func (x *NNReduceFeatureChannelsMean) WithDestinationImageAllocator(destinationI
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMean) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMean) asNNReduceUnary() *raw.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMean) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMean) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceFeatureChannelsMeanable is the interface implemented by [NNReduceFeatureChannelsMean], for mocking and DI.
 type NNReduceFeatureChannelsMeanable interface {
@@ -119,4 +123,3 @@ type NNReduceFeatureChannelsMeanable interface {
 }
 
 var _ NNReduceFeatureChannelsMeanable = (*NNReduceFeatureChannelsMean)(nil)
-

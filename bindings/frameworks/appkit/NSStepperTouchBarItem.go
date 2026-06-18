@@ -16,22 +16,22 @@ type NSStepperTouchBarItem struct {
 }
 
 var (
-	_clsNSStepperTouchBarItem = _objcClass("NSStepperTouchBarItem")
-	_nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter = objc.RegisterName("stepperTouchBarItemWithIdentifier:formatter:")
+	_clsNSStepperTouchBarItem                                                = _objcClass("NSStepperTouchBarItem")
+	_nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter      = objc.RegisterName("stepperTouchBarItemWithIdentifier:formatter:")
 	_nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierDrawingHandler = objc.RegisterName("stepperTouchBarItemWithIdentifier:drawingHandler:")
-	_nSStepperTouchBarItemSelMaxValue = objc.RegisterName("maxValue")
-	_nSStepperTouchBarItemSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSStepperTouchBarItemSelMinValue = objc.RegisterName("minValue")
-	_nSStepperTouchBarItemSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSStepperTouchBarItemSelIncrement = objc.RegisterName("increment")
-	_nSStepperTouchBarItemSelSetIncrement = objc.RegisterName("setIncrement:")
-	_nSStepperTouchBarItemSelValue = objc.RegisterName("value")
-	_nSStepperTouchBarItemSelSetValue = objc.RegisterName("setValue:")
-	_nSStepperTouchBarItemSelTarget = objc.RegisterName("target")
-	_nSStepperTouchBarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSStepperTouchBarItemSelAction = objc.RegisterName("action")
-	_nSStepperTouchBarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSStepperTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
+	_nSStepperTouchBarItemSelMaxValue                                        = objc.RegisterName("maxValue")
+	_nSStepperTouchBarItemSelSetMaxValue                                     = objc.RegisterName("setMaxValue:")
+	_nSStepperTouchBarItemSelMinValue                                        = objc.RegisterName("minValue")
+	_nSStepperTouchBarItemSelSetMinValue                                     = objc.RegisterName("setMinValue:")
+	_nSStepperTouchBarItemSelIncrement                                       = objc.RegisterName("increment")
+	_nSStepperTouchBarItemSelSetIncrement                                    = objc.RegisterName("setIncrement:")
+	_nSStepperTouchBarItemSelValue                                           = objc.RegisterName("value")
+	_nSStepperTouchBarItemSelSetValue                                        = objc.RegisterName("setValue:")
+	_nSStepperTouchBarItemSelTarget                                          = objc.RegisterName("target")
+	_nSStepperTouchBarItemSelSetTarget                                       = objc.RegisterName("setTarget:")
+	_nSStepperTouchBarItemSelAction                                          = objc.RegisterName("action")
+	_nSStepperTouchBarItemSelSetAction                                       = objc.RegisterName("setAction:")
+	_nSStepperTouchBarItemSelSetCustomizationLabel                           = objc.RegisterName("setCustomizationLabel:")
 )
 
 func NSStepperTouchBarItemFromID(id objc.ID) *NSStepperTouchBarItem {
@@ -47,14 +47,18 @@ func NSStepperTouchBarItemFromID(id objc.ID) *NSStepperTouchBarItem {
 // Creates a `NSStepperTouchBarItem` with a `formatter` to display the stepper's value as text. @param formatter A formatter used to display a textual representation of the stepper's value
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierFormatter(identifier *foundation.NSString, formatter *foundation.NSFormatter) *NSStepperTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierFormatter, identifier.Ptr(), formatter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStepperTouchBarItemFromID(_ret)
 }
 
 // Creates a `NSStepperTouchBarItem` using the result of `drawingHandler` to display the stepper's value as an image. @param drawingHandler A block that draws a graphical representation of the stepper's value in the specified rectangle. The coordinates of this rectangle are specified in points.
 func NSStepperTouchBarItemStepperTouchBarItemWithIdentifierDrawingHandler(identifier *foundation.NSString, drawingHandler objc.Block) *NSStepperTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSStepperTouchBarItem), _nSStepperTouchBarItemSelStepperTouchBarItemWithIdentifierDrawingHandler, identifier.Ptr(), drawingHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStepperTouchBarItemFromID(_ret)
 }
 
@@ -121,4 +125,3 @@ func (o *NSStepperTouchBarItem) SetAction(action objc.SEL) {
 func (o *NSStepperTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSStepperTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

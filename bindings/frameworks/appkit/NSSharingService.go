@@ -16,27 +16,27 @@ type NSSharingService struct {
 }
 
 var (
-	_clsNSSharingService = _objcClass("NSSharingService")
-	_nSSharingServiceSelSharingServicesForItems = objc.RegisterName("sharingServicesForItems:")
-	_nSSharingServiceSelSharingServiceNamed = objc.RegisterName("sharingServiceNamed:")
+	_clsNSSharingService                                        = _objcClass("NSSharingService")
+	_nSSharingServiceSelSharingServicesForItems                 = objc.RegisterName("sharingServicesForItems:")
+	_nSSharingServiceSelSharingServiceNamed                     = objc.RegisterName("sharingServiceNamed:")
 	_nSSharingServiceSelInitWithTitleImageAlternateImageHandler = objc.RegisterName("initWithTitle:image:alternateImage:handler:")
-	_nSSharingServiceSelCanPerformWithItems = objc.RegisterName("canPerformWithItems:")
-	_nSSharingServiceSelPerformWithItems = objc.RegisterName("performWithItems:")
-	_nSSharingServiceSelDelegate = objc.RegisterName("delegate")
-	_nSSharingServiceSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSharingServiceSelTitle = objc.RegisterName("title")
-	_nSSharingServiceSelImage = objc.RegisterName("image")
-	_nSSharingServiceSelAlternateImage = objc.RegisterName("alternateImage")
-	_nSSharingServiceSelMenuItemTitle = objc.RegisterName("menuItemTitle")
-	_nSSharingServiceSelSetMenuItemTitle = objc.RegisterName("setMenuItemTitle:")
-	_nSSharingServiceSelRecipients = objc.RegisterName("recipients")
-	_nSSharingServiceSelSetRecipients = objc.RegisterName("setRecipients:")
-	_nSSharingServiceSelSubject = objc.RegisterName("subject")
-	_nSSharingServiceSelSetSubject = objc.RegisterName("setSubject:")
-	_nSSharingServiceSelMessageBody = objc.RegisterName("messageBody")
-	_nSSharingServiceSelPermanentLink = objc.RegisterName("permanentLink")
-	_nSSharingServiceSelAccountName = objc.RegisterName("accountName")
-	_nSSharingServiceSelAttachmentFileURLs = objc.RegisterName("attachmentFileURLs")
+	_nSSharingServiceSelCanPerformWithItems                     = objc.RegisterName("canPerformWithItems:")
+	_nSSharingServiceSelPerformWithItems                        = objc.RegisterName("performWithItems:")
+	_nSSharingServiceSelDelegate                                = objc.RegisterName("delegate")
+	_nSSharingServiceSelSetDelegate                             = objc.RegisterName("setDelegate:")
+	_nSSharingServiceSelTitle                                   = objc.RegisterName("title")
+	_nSSharingServiceSelImage                                   = objc.RegisterName("image")
+	_nSSharingServiceSelAlternateImage                          = objc.RegisterName("alternateImage")
+	_nSSharingServiceSelMenuItemTitle                           = objc.RegisterName("menuItemTitle")
+	_nSSharingServiceSelSetMenuItemTitle                        = objc.RegisterName("setMenuItemTitle:")
+	_nSSharingServiceSelRecipients                              = objc.RegisterName("recipients")
+	_nSSharingServiceSelSetRecipients                           = objc.RegisterName("setRecipients:")
+	_nSSharingServiceSelSubject                                 = objc.RegisterName("subject")
+	_nSSharingServiceSelSetSubject                              = objc.RegisterName("setSubject:")
+	_nSSharingServiceSelMessageBody                             = objc.RegisterName("messageBody")
+	_nSSharingServiceSelPermanentLink                           = objc.RegisterName("permanentLink")
+	_nSSharingServiceSelAccountName                             = objc.RegisterName("accountName")
+	_nSSharingServiceSelAttachmentFileURLs                      = objc.RegisterName("attachmentFileURLs")
 )
 
 func NSSharingServiceFromID(id objc.ID) *NSSharingService {
@@ -53,14 +53,18 @@ func NSSharingServiceFromID(id objc.ID) *NSSharingService {
 // Deprecated: Use -[NSSharingServicePicker standardShareMenuItem] instead.
 func NSSharingServiceSharingServicesForItems(items *foundation.NSArray[objc.ID]) *foundation.NSArray[*NSSharingService] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSharingService), _nSSharingServiceSelSharingServicesForItems, items)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSSharingService](_ret)
 }
 
 // Returns an NSSharingService representing one of the built-in services.
 func NSSharingServiceSharingServiceNamed(serviceName *foundation.NSString) *NSSharingService {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSharingService), _nSSharingServiceSelSharingServiceNamed, serviceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSharingServiceFromID(_ret)
 }
 
@@ -74,7 +78,9 @@ func (o *NSSharingService) InitWithTitleImageAlternateImageHandler(title *founda
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelInitWithTitleImageAlternateImageHandler, title.Ptr(), image.Ptr(), alternateImage.Ptr(), __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSharingServiceFromID(_ret)
 }
 
@@ -100,26 +106,34 @@ func (o *NSSharingService) SetDelegate(delegate NSSharingServiceDelegate) {
 
 func (o *NSSharingService) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSSharingService) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSSharingService) AlternateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelAlternateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Title of the service in the Share menu. Can be modified.
 func (o *NSSharingService) MenuItemTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelMenuItemTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -141,7 +155,9 @@ func (o *NSSharingService) SetRecipients(recipients *foundation.NSArray[*foundat
 
 func (o *NSSharingService) Subject() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -152,21 +168,27 @@ func (o *NSSharingService) SetSubject(subject *foundation.NSString) {
 // Message body as string
 func (o *NSSharingService) MessageBody() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelMessageBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
 func (o *NSSharingService) PermanentLink() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelPermanentLink)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Account name used for sending on Twitter or Sina Weibo
 func (o *NSSharingService) AccountName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServiceSelAccountName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -175,4 +197,3 @@ func (o *NSSharingService) AttachmentFileURLs() *foundation.NSArray[*foundation.
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSURL]](o.Ptr(), _nSSharingServiceSelAttachmentFileURLs)
 	return _ret
 }
-

@@ -112,4 +112,3 @@ type RoutePickerViewable interface {
 }
 
 var _ RoutePickerViewable = (*RoutePickerView)(nil)
-

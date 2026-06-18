@@ -19,11 +19,11 @@ type GKAgent2D struct {
 }
 
 var (
-	_clsGKAgent2D = _objcClass("GKAgent2D")
-	_gKAgent2DSelPosition = objc.RegisterName("position")
+	_clsGKAgent2D            = _objcClass("GKAgent2D")
+	_gKAgent2DSelPosition    = objc.RegisterName("position")
 	_gKAgent2DSelSetPosition = objc.RegisterName("setPosition:")
-	_gKAgent2DSelVelocity = objc.RegisterName("velocity")
-	_gKAgent2DSelRotation = objc.RegisterName("rotation")
+	_gKAgent2DSelVelocity    = objc.RegisterName("velocity")
+	_gKAgent2DSelRotation    = objc.RegisterName("rotation")
 	_gKAgent2DSelSetRotation = objc.RegisterName("setRotation:")
 )
 
@@ -62,4 +62,3 @@ func (o *GKAgent2D) Rotation() float32 {
 func (o *GKAgent2D) SetRotation(rotation float32) {
 	o.Ptr().Send(_gKAgent2DSelSetRotation, rotation)
 }
-

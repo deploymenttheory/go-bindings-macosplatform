@@ -41,4 +41,3 @@ func UNNotificationDismissActionIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_usernotificationsLib, "UNNotificationDismissActionIdentifier")
 	return ptr
 }
-

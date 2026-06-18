@@ -51,7 +51,9 @@ func (x *MTL4StitchedFunctionDescriptor) WithFunctionDescriptors(items ...MTL4Fu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -90,7 +92,9 @@ func (x *MTL4StitchedFunctionDescriptor) SetFunctionDescriptors(functionDescript
 	x.inner.SetFunctionDescriptors(functionDescriptors)
 }
 
-func (x *MTL4StitchedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+func (x *MTL4StitchedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor {
+	return &x.inner.MTL4FunctionDescriptor
+}
 
 // MTL4StitchedFunctionDescriptorable is the interface implemented by [MTL4StitchedFunctionDescriptor], for mocking and DI.
 type MTL4StitchedFunctionDescriptorable interface {
@@ -104,4 +108,3 @@ type MTL4StitchedFunctionDescriptorable interface {
 }
 
 var _ MTL4StitchedFunctionDescriptorable = (*MTL4StitchedFunctionDescriptor)(nil)
-

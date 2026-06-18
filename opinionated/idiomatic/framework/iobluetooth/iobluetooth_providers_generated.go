@@ -22,4 +22,3 @@ type IOBluetoothObjectProvider interface {
 type OBEXSessionProvider interface {
 	asOBEXSession() *raw.OBEXSession
 }
-

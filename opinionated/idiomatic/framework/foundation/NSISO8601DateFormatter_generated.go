@@ -115,4 +115,3 @@ type ISO8601DateFormatterable interface {
 }
 
 var _ ISO8601DateFormatterable = (*ISO8601DateFormatter)(nil)
-

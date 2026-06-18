@@ -16,11 +16,11 @@ type PKPayment struct {
 }
 
 var (
-	_clsPKPayment = _objcClass("PKPayment")
-	_pKPaymentSelToken = objc.RegisterName("token")
-	_pKPaymentSelBillingContact = objc.RegisterName("billingContact")
+	_clsPKPayment                = _objcClass("PKPayment")
+	_pKPaymentSelToken           = objc.RegisterName("token")
+	_pKPaymentSelBillingContact  = objc.RegisterName("billingContact")
 	_pKPaymentSelShippingContact = objc.RegisterName("shippingContact")
-	_pKPaymentSelShippingMethod = objc.RegisterName("shippingMethod")
+	_pKPaymentSelShippingMethod  = objc.RegisterName("shippingMethod")
 )
 
 func PKPaymentFromID(id objc.ID) *PKPayment {
@@ -35,25 +35,32 @@ func PKPaymentFromID(id objc.ID) *PKPayment {
 
 func (o *PKPayment) Token() *PKPaymentToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentTokenFromID(_ret)
 }
 
 func (o *PKPayment) BillingContact() *PKContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSelBillingContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKContactFromID(_ret)
 }
 
 func (o *PKPayment) ShippingContact() *PKContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSelShippingContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKContactFromID(_ret)
 }
 
 func (o *PKPayment) ShippingMethod() *PKShippingMethod {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSelShippingMethod)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKShippingMethodFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type GCMouse struct {
 }
 
 var (
-	_clsGCMouse = _objcClass("GCMouse")
-	_gCMouseSelMice = objc.RegisterName("mice")
+	_clsGCMouse           = _objcClass("GCMouse")
+	_gCMouseSelMice       = objc.RegisterName("mice")
 	_gCMouseSelMouseInput = objc.RegisterName("mouseInput")
-	_gCMouseSelCurrent = objc.RegisterName("current")
+	_gCMouseSelCurrent    = objc.RegisterName("current")
 )
 
 func GCMouseFromID(id objc.ID) *GCMouse {
@@ -34,21 +34,26 @@ func GCMouseFromID(id objc.ID) *GCMouse {
 
 func GCMouseMice() *foundation.NSArray[*GCMouse] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCMouse), _gCMouseSelMice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GCMouse](_ret)
 }
 
 // Unlike GCController GCMouse supports only one input profile Profile contains mouse buttons, scroll wheel and  pointer delta.
 func (o *GCMouse) MouseInput() *GCMouseInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCMouseSelMouseInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMouseInputFromID(_ret)
 }
 
 // The most recently used mouse device. If a user actuates a mouse input, that mouse will become the current one. @see GCMouseDidBecomeCurrentNotification @see GCMouseDidStopBeingCurrentNotification
 func GCMouseCurrent() *GCMouse {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGCMouse), _gCMouseSelCurrent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCMouseFromID(_ret)
 }
-

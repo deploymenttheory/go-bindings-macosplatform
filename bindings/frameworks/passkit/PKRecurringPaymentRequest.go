@@ -16,20 +16,20 @@ type PKRecurringPaymentRequest struct {
 }
 
 var (
-	_clsPKRecurringPaymentRequest = _objcClass("PKRecurringPaymentRequest")
+	_clsPKRecurringPaymentRequest                                                      = _objcClass("PKRecurringPaymentRequest")
 	_pKRecurringPaymentRequestSelInitWithPaymentDescriptionRegularBillingManagementURL = objc.RegisterName("initWithPaymentDescription:regularBilling:managementURL:")
-	_pKRecurringPaymentRequestSelPaymentDescription = objc.RegisterName("paymentDescription")
-	_pKRecurringPaymentRequestSelSetPaymentDescription = objc.RegisterName("setPaymentDescription:")
-	_pKRecurringPaymentRequestSelRegularBilling = objc.RegisterName("regularBilling")
-	_pKRecurringPaymentRequestSelSetRegularBilling = objc.RegisterName("setRegularBilling:")
-	_pKRecurringPaymentRequestSelTrialBilling = objc.RegisterName("trialBilling")
-	_pKRecurringPaymentRequestSelSetTrialBilling = objc.RegisterName("setTrialBilling:")
-	_pKRecurringPaymentRequestSelBillingAgreement = objc.RegisterName("billingAgreement")
-	_pKRecurringPaymentRequestSelSetBillingAgreement = objc.RegisterName("setBillingAgreement:")
-	_pKRecurringPaymentRequestSelManagementURL = objc.RegisterName("managementURL")
-	_pKRecurringPaymentRequestSelSetManagementURL = objc.RegisterName("setManagementURL:")
-	_pKRecurringPaymentRequestSelTokenNotificationURL = objc.RegisterName("tokenNotificationURL")
-	_pKRecurringPaymentRequestSelSetTokenNotificationURL = objc.RegisterName("setTokenNotificationURL:")
+	_pKRecurringPaymentRequestSelPaymentDescription                                    = objc.RegisterName("paymentDescription")
+	_pKRecurringPaymentRequestSelSetPaymentDescription                                 = objc.RegisterName("setPaymentDescription:")
+	_pKRecurringPaymentRequestSelRegularBilling                                        = objc.RegisterName("regularBilling")
+	_pKRecurringPaymentRequestSelSetRegularBilling                                     = objc.RegisterName("setRegularBilling:")
+	_pKRecurringPaymentRequestSelTrialBilling                                          = objc.RegisterName("trialBilling")
+	_pKRecurringPaymentRequestSelSetTrialBilling                                       = objc.RegisterName("setTrialBilling:")
+	_pKRecurringPaymentRequestSelBillingAgreement                                      = objc.RegisterName("billingAgreement")
+	_pKRecurringPaymentRequestSelSetBillingAgreement                                   = objc.RegisterName("setBillingAgreement:")
+	_pKRecurringPaymentRequestSelManagementURL                                         = objc.RegisterName("managementURL")
+	_pKRecurringPaymentRequestSelSetManagementURL                                      = objc.RegisterName("setManagementURL:")
+	_pKRecurringPaymentRequestSelTokenNotificationURL                                  = objc.RegisterName("tokenNotificationURL")
+	_pKRecurringPaymentRequestSelSetTokenNotificationURL                               = objc.RegisterName("setTokenNotificationURL:")
 )
 
 func PKRecurringPaymentRequestFromID(id objc.ID) *PKRecurringPaymentRequest {
@@ -44,13 +44,17 @@ func PKRecurringPaymentRequestFromID(id objc.ID) *PKRecurringPaymentRequest {
 
 func (o *PKRecurringPaymentRequest) InitWithPaymentDescriptionRegularBillingManagementURL(paymentDescription *foundation.NSString, regularBilling *PKRecurringPaymentSummaryItem, managementURL *foundation.NSURL) *PKRecurringPaymentRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelInitWithPaymentDescriptionRegularBillingManagementURL, paymentDescription.Ptr(), regularBilling.Ptr(), managementURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKRecurringPaymentRequestFromID(_ret)
 }
 
 func (o *PKRecurringPaymentRequest) PaymentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelPaymentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *PKRecurringPaymentRequest) SetPaymentDescription(paymentDescription *fo
 
 func (o *PKRecurringPaymentRequest) RegularBilling() *PKRecurringPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelRegularBilling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKRecurringPaymentSummaryItemFromID(_ret)
 }
 
@@ -70,7 +76,9 @@ func (o *PKRecurringPaymentRequest) SetRegularBilling(regularBilling *PKRecurrin
 
 func (o *PKRecurringPaymentRequest) TrialBilling() *PKRecurringPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelTrialBilling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKRecurringPaymentSummaryItemFromID(_ret)
 }
 
@@ -80,7 +88,9 @@ func (o *PKRecurringPaymentRequest) SetTrialBilling(trialBilling *PKRecurringPay
 
 func (o *PKRecurringPaymentRequest) BillingAgreement() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelBillingAgreement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +100,9 @@ func (o *PKRecurringPaymentRequest) SetBillingAgreement(billingAgreement *founda
 
 func (o *PKRecurringPaymentRequest) ManagementURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelManagementURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -100,11 +112,12 @@ func (o *PKRecurringPaymentRequest) SetManagementURL(managementURL *foundation.N
 
 func (o *PKRecurringPaymentRequest) TokenNotificationURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentRequestSelTokenNotificationURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *PKRecurringPaymentRequest) SetTokenNotificationURL(tokenNotificationURL *foundation.NSURL) {
 	o.Ptr().Send(_pKRecurringPaymentRequestSelSetTokenNotificationURL, tokenNotificationURL.Ptr())
 }
-

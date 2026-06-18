@@ -77,11 +77,15 @@ func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.NS
 	return x.inner.MostRecentQuantityDateInterval()
 }
 
-func (x *DiscreteQuantitySample) asQuantitySample() *raw.HKQuantitySample { return &x.inner.HKQuantitySample }
+func (x *DiscreteQuantitySample) asQuantitySample() *raw.HKQuantitySample {
+	return &x.inner.HKQuantitySample
+}
 
 func (x *DiscreteQuantitySample) asSample() *raw.HKSample { return &x.inner.HKQuantitySample.HKSample }
 
-func (x *DiscreteQuantitySample) asObject() *raw.HKObject { return &x.inner.HKQuantitySample.HKSample.HKObject }
+func (x *DiscreteQuantitySample) asObject() *raw.HKObject {
+	return &x.inner.HKQuantitySample.HKSample.HKObject
+}
 
 // DiscreteQuantitySampleable is the interface implemented by [DiscreteQuantitySample], for mocking and DI.
 type DiscreteQuantitySampleable interface {
@@ -94,4 +98,3 @@ type DiscreteQuantitySampleable interface {
 }
 
 var _ DiscreteQuantitySampleable = (*DiscreteQuantitySample)(nil)
-

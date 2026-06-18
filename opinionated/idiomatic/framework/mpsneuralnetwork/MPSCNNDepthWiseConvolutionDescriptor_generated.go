@@ -15,7 +15,9 @@ type CNNDepthWiseConvolutionDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNDepthWiseConvolutionDescriptor].
-func (x *CNNDepthWiseConvolutionDescriptor) Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor { return x.inner }
+func (x *CNNDepthWiseConvolutionDescriptor) Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -100,7 +102,9 @@ func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() uint {
 	return x.inner.ChannelMultiplier()
 }
 
-func (x *CNNDepthWiseConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor { return &x.inner.MPSCNNConvolutionDescriptor }
+func (x *CNNDepthWiseConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor {
+	return &x.inner.MPSCNNConvolutionDescriptor
+}
 
 // CNNDepthWiseConvolutionDescriptorable is the interface implemented by [CNNDepthWiseConvolutionDescriptor], for mocking and DI.
 type CNNDepthWiseConvolutionDescriptorable interface {
@@ -119,4 +123,3 @@ type CNNDepthWiseConvolutionDescriptorable interface {
 }
 
 var _ CNNDepthWiseConvolutionDescriptorable = (*CNNDepthWiseConvolutionDescriptor)(nil)
-

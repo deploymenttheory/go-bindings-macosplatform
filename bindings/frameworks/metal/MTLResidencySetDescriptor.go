@@ -16,10 +16,10 @@ type MTLResidencySetDescriptor struct {
 }
 
 var (
-	_clsMTLResidencySetDescriptor = _objcClass("MTLResidencySetDescriptor")
-	_mTLResidencySetDescriptorSelLabel = objc.RegisterName("label")
-	_mTLResidencySetDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLResidencySetDescriptorSelInitialCapacity = objc.RegisterName("initialCapacity")
+	_clsMTLResidencySetDescriptor                   = _objcClass("MTLResidencySetDescriptor")
+	_mTLResidencySetDescriptorSelLabel              = objc.RegisterName("label")
+	_mTLResidencySetDescriptorSelSetLabel           = objc.RegisterName("setLabel:")
+	_mTLResidencySetDescriptorSelInitialCapacity    = objc.RegisterName("initialCapacity")
 	_mTLResidencySetDescriptorSelSetInitialCapacity = objc.RegisterName("setInitialCapacity:")
 )
 
@@ -36,7 +36,9 @@ func MTLResidencySetDescriptorFromID(id objc.ID) *MTLResidencySetDescriptor {
 // @property label @abstract An optional label for the MTLResidencySet.
 func (o *MTLResidencySetDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLResidencySetDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *MTLResidencySetDescriptor) InitialCapacity() uint {
 func (o *MTLResidencySetDescriptor) SetInitialCapacity(initialCapacity uint) {
 	o.Ptr().Send(_mTLResidencySetDescriptorSelSetInitialCapacity, initialCapacity)
 }
-

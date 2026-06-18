@@ -16,10 +16,10 @@ type MTRBasicInformationClusterProductAppearanceStruct struct {
 }
 
 var (
-	_clsMTRBasicInformationClusterProductAppearanceStruct = _objcClass("MTRBasicInformationClusterProductAppearanceStruct")
-	_mTRBasicInformationClusterProductAppearanceStructSelFinish = objc.RegisterName("finish")
-	_mTRBasicInformationClusterProductAppearanceStructSelSetFinish = objc.RegisterName("setFinish:")
-	_mTRBasicInformationClusterProductAppearanceStructSelPrimaryColor = objc.RegisterName("primaryColor")
+	_clsMTRBasicInformationClusterProductAppearanceStruct                = _objcClass("MTRBasicInformationClusterProductAppearanceStruct")
+	_mTRBasicInformationClusterProductAppearanceStructSelFinish          = objc.RegisterName("finish")
+	_mTRBasicInformationClusterProductAppearanceStructSelSetFinish       = objc.RegisterName("setFinish:")
+	_mTRBasicInformationClusterProductAppearanceStructSelPrimaryColor    = objc.RegisterName("primaryColor")
 	_mTRBasicInformationClusterProductAppearanceStructSelSetPrimaryColor = objc.RegisterName("setPrimaryColor:")
 )
 
@@ -35,7 +35,9 @@ func MTRBasicInformationClusterProductAppearanceStructFromID(id objc.ID) *MTRBas
 
 func (o *MTRBasicInformationClusterProductAppearanceStruct) Finish() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBasicInformationClusterProductAppearanceStructSelFinish)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRBasicInformationClusterProductAppearanceStruct) SetFinish(finish *fo
 
 func (o *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBasicInformationClusterProductAppearanceStructSelPrimaryColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBasicInformationClusterProductAppearanceStructSelSetPrimaryColor, primaryColor.Ptr())
 }
-

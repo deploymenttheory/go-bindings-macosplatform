@@ -16,9 +16,9 @@ type MLCPlatform struct {
 }
 
 var (
-	_clsMLCPlatform = _objcClass("MLCPlatform")
+	_clsMLCPlatform             = _objcClass("MLCPlatform")
 	_mLCPlatformSelSetRNGSeedTo = objc.RegisterName("setRNGSeedTo:")
-	_mLCPlatformSelGetRNGseed = objc.RegisterName("getRNGseed")
+	_mLCPlatformSelGetRNGseed   = objc.RegisterName("getRNGseed")
 )
 
 func MLCPlatformFromID(id objc.ID) *MLCPlatform {
@@ -39,7 +39,8 @@ func MLCPlatformSetRNGSeedTo(seed *foundation.NSNumber) {
 // @method    getRNGseed @abstract  gets the RNG seed value. If the value is not set it would return nil
 func MLCPlatformGetRNGseed() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCPlatform), _mLCPlatformSelGetRNGseed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

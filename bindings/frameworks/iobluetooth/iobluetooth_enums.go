@@ -26,13 +26,13 @@ func (e BluetoothAMPCommandRejectReason) String() string {
 type BluetoothAMPCreatePhysicalLinkResponseStatus int64
 
 const (
-	KBluetoothAMPManagerCreatePhysicalLinkResponseSuccess BluetoothAMPCreatePhysicalLinkResponseStatus = 0
-	KBluetoothAMPManagerCreatePhysicalLinkResponseInvalidControllerID BluetoothAMPCreatePhysicalLinkResponseStatus = 1
-	KBluetoothAMPManagerCreatePhysicalLinkResponseUnableToStartLinkCreation BluetoothAMPCreatePhysicalLinkResponseStatus = 2
-	KBluetoothAMPManagerCreatePhysicalLinkResponseCollisionOccurred BluetoothAMPCreatePhysicalLinkResponseStatus = 3
+	KBluetoothAMPManagerCreatePhysicalLinkResponseSuccess                                    BluetoothAMPCreatePhysicalLinkResponseStatus = 0
+	KBluetoothAMPManagerCreatePhysicalLinkResponseInvalidControllerID                        BluetoothAMPCreatePhysicalLinkResponseStatus = 1
+	KBluetoothAMPManagerCreatePhysicalLinkResponseUnableToStartLinkCreation                  BluetoothAMPCreatePhysicalLinkResponseStatus = 2
+	KBluetoothAMPManagerCreatePhysicalLinkResponseCollisionOccurred                          BluetoothAMPCreatePhysicalLinkResponseStatus = 3
 	KBluetoothAMPManagerCreatePhysicalLinkResponseAMPDisconnectedPhysicalLinkRequestReceived BluetoothAMPCreatePhysicalLinkResponseStatus = 4
-	KBluetoothAMPManagerCreatePhysicalLinkResponsePhysicalLinkAlreadyExists BluetoothAMPCreatePhysicalLinkResponseStatus = 5
-	KBluetoothAMPManagerCreatePhysicalLinkResponseSecurityViolation BluetoothAMPCreatePhysicalLinkResponseStatus = 6
+	KBluetoothAMPManagerCreatePhysicalLinkResponsePhysicalLinkAlreadyExists                  BluetoothAMPCreatePhysicalLinkResponseStatus = 5
+	KBluetoothAMPManagerCreatePhysicalLinkResponseSecurityViolation                          BluetoothAMPCreatePhysicalLinkResponseStatus = 6
 )
 
 func (e BluetoothAMPCreatePhysicalLinkResponseStatus) String() string {
@@ -59,9 +59,9 @@ func (e BluetoothAMPCreatePhysicalLinkResponseStatus) String() string {
 type BluetoothAMPDisconnectPhysicalLinkResponseStatus int64
 
 const (
-	KBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess BluetoothAMPDisconnectPhysicalLinkResponseStatus = 0
+	KBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess             BluetoothAMPDisconnectPhysicalLinkResponseStatus = 0
 	KBluetoothAMPManagerDisconnectPhysicalLinkResponseInvalidControllerID BluetoothAMPDisconnectPhysicalLinkResponseStatus = 1
-	KBluetoothAMPManagerDisconnectPhysicalLinkResponseNoPhysicalLink BluetoothAMPDisconnectPhysicalLinkResponseStatus = 2
+	KBluetoothAMPManagerDisconnectPhysicalLinkResponseNoPhysicalLink      BluetoothAMPDisconnectPhysicalLinkResponseStatus = 2
 )
 
 func (e BluetoothAMPDisconnectPhysicalLinkResponseStatus) String() string {
@@ -80,13 +80,13 @@ func (e BluetoothAMPDisconnectPhysicalLinkResponseStatus) String() string {
 type BluetoothAMPDiscoverResponseControllerStatus int64
 
 const (
-	KBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown BluetoothAMPDiscoverResponseControllerStatus = 0
-	KBluetoothAMPManagerDiscoverResponseControllerStatusBluetoothOnly BluetoothAMPDiscoverResponseControllerStatus = 1
-	KBluetoothAMPManagerDiscoverResponseControllerStatusNoCapacity BluetoothAMPDiscoverResponseControllerStatus = 2
-	KBluetoothAMPManagerDiscoverResponseControllerStatusLowCapacity BluetoothAMPDiscoverResponseControllerStatus = 3
+	KBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown    BluetoothAMPDiscoverResponseControllerStatus = 0
+	KBluetoothAMPManagerDiscoverResponseControllerStatusBluetoothOnly  BluetoothAMPDiscoverResponseControllerStatus = 1
+	KBluetoothAMPManagerDiscoverResponseControllerStatusNoCapacity     BluetoothAMPDiscoverResponseControllerStatus = 2
+	KBluetoothAMPManagerDiscoverResponseControllerStatusLowCapacity    BluetoothAMPDiscoverResponseControllerStatus = 3
 	KBluetoothAMPManagerDiscoverResponseControllerStatusMediumCapacity BluetoothAMPDiscoverResponseControllerStatus = 4
-	KBluetoothAMPManagerDiscoverResponseControllerStatusHighCapacity BluetoothAMPDiscoverResponseControllerStatus = 5
-	KBluetoothAMPManagerDiscoverResponseControllerStatusFullCapacity BluetoothAMPDiscoverResponseControllerStatus = 6
+	KBluetoothAMPManagerDiscoverResponseControllerStatusHighCapacity   BluetoothAMPDiscoverResponseControllerStatus = 5
+	KBluetoothAMPManagerDiscoverResponseControllerStatusFullCapacity   BluetoothAMPDiscoverResponseControllerStatus = 6
 )
 
 func (e BluetoothAMPDiscoverResponseControllerStatus) String() string {
@@ -113,7 +113,7 @@ func (e BluetoothAMPDiscoverResponseControllerStatus) String() string {
 type BluetoothAMPGetAssocResponseStatus int64
 
 const (
-	KBluetoothAMPManagerGetAssocResponseSuccess BluetoothAMPGetAssocResponseStatus = 0
+	KBluetoothAMPManagerGetAssocResponseSuccess             BluetoothAMPGetAssocResponseStatus = 0
 	KBluetoothAMPManagerGetAssocResponseInvalidControllerID BluetoothAMPGetAssocResponseStatus = 1
 )
 
@@ -131,7 +131,7 @@ func (e BluetoothAMPGetAssocResponseStatus) String() string {
 type BluetoothAMPGetInfoResponseStatus int64
 
 const (
-	KBluetoothAMPManagerGetInfoResponseSuccess BluetoothAMPGetInfoResponseStatus = 0
+	KBluetoothAMPManagerGetInfoResponseSuccess             BluetoothAMPGetInfoResponseStatus = 0
 	KBluetoothAMPManagerGetInfoResponseInvalidControllerID BluetoothAMPGetInfoResponseStatus = 1
 )
 
@@ -149,19 +149,19 @@ func (e BluetoothAMPGetInfoResponseStatus) String() string {
 type BluetoothAMPManagerCode int64
 
 const (
-	KBluetoothAMPManagerCodeReserved BluetoothAMPManagerCode = 0
-	KBluetoothAMPManagerCodeAMPCommandReject BluetoothAMPManagerCode = 1
-	KBluetoothAMPManagerCodeAMPDiscoverRequest BluetoothAMPManagerCode = 2
-	KBluetoothAMPManagerCodeAMPDiscoverResponse BluetoothAMPManagerCode = 3
-	KBluetoothAMPManagerCodeAMPChangeNotify BluetoothAMPManagerCode = 4
-	KBluetoothAMPManagerCodeAMPChangeResponse BluetoothAMPManagerCode = 5
-	KBluetoothAMPManagerCodeAMPGetInfoRequest BluetoothAMPManagerCode = 6
-	KBluetoothAMPManagerCodeAMPGetInfoResponse BluetoothAMPManagerCode = 7
-	KBluetoothAMPManagerCodeAMPGetAssocRequest BluetoothAMPManagerCode = 8
-	KBluetoothAMPManagerCodeAMPGetAssocResponse BluetoothAMPManagerCode = 9
-	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkRequest BluetoothAMPManagerCode = 10
-	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkResponse BluetoothAMPManagerCode = 11
-	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkRequest BluetoothAMPManagerCode = 12
+	KBluetoothAMPManagerCodeReserved                          BluetoothAMPManagerCode = 0
+	KBluetoothAMPManagerCodeAMPCommandReject                  BluetoothAMPManagerCode = 1
+	KBluetoothAMPManagerCodeAMPDiscoverRequest                BluetoothAMPManagerCode = 2
+	KBluetoothAMPManagerCodeAMPDiscoverResponse               BluetoothAMPManagerCode = 3
+	KBluetoothAMPManagerCodeAMPChangeNotify                   BluetoothAMPManagerCode = 4
+	KBluetoothAMPManagerCodeAMPChangeResponse                 BluetoothAMPManagerCode = 5
+	KBluetoothAMPManagerCodeAMPGetInfoRequest                 BluetoothAMPManagerCode = 6
+	KBluetoothAMPManagerCodeAMPGetInfoResponse                BluetoothAMPManagerCode = 7
+	KBluetoothAMPManagerCodeAMPGetAssocRequest                BluetoothAMPManagerCode = 8
+	KBluetoothAMPManagerCodeAMPGetAssocResponse               BluetoothAMPManagerCode = 9
+	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkRequest      BluetoothAMPManagerCode = 10
+	KBluetoothAMPManagerCodeAMPCreatePhysicalLinkResponse     BluetoothAMPManagerCode = 11
+	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkRequest  BluetoothAMPManagerCode = 12
 	KBluetoothAMPManagerCodeAMPDisconnectPhysicalLinkResponse BluetoothAMPManagerCode = 13
 )
 
@@ -203,14 +203,14 @@ func (e BluetoothAMPManagerCode) String() string {
 type BluetoothAuthenticationRequirementsValues int64
 
 const (
-	KBluetoothAuthenticationRequirementsMITMProtectionNotRequired BluetoothAuthenticationRequirementsValues = 0
-	KBluetoothAuthenticationRequirementsMITMProtectionRequired BluetoothAuthenticationRequirementsValues = 1
-	KBluetoothAuthenticationRequirementsMITMProtectionNotRequiredNoBonding BluetoothAuthenticationRequirementsValues = 0
-	KBluetoothAuthenticationRequirementsMITMProtectionRequiredNoBonding BluetoothAuthenticationRequirementsValues = 1
+	KBluetoothAuthenticationRequirementsMITMProtectionNotRequired                 BluetoothAuthenticationRequirementsValues = 0
+	KBluetoothAuthenticationRequirementsMITMProtectionRequired                    BluetoothAuthenticationRequirementsValues = 1
+	KBluetoothAuthenticationRequirementsMITMProtectionNotRequiredNoBonding        BluetoothAuthenticationRequirementsValues = 0
+	KBluetoothAuthenticationRequirementsMITMProtectionRequiredNoBonding           BluetoothAuthenticationRequirementsValues = 1
 	KBluetoothAuthenticationRequirementsMITMProtectionNotRequiredDedicatedBonding BluetoothAuthenticationRequirementsValues = 2
-	KBluetoothAuthenticationRequirementsMITMProtectionRequiredDedicatedBonding BluetoothAuthenticationRequirementsValues = 3
-	KBluetoothAuthenticationRequirementsMITMProtectionNotRequiredGeneralBonding BluetoothAuthenticationRequirementsValues = 4
-	KBluetoothAuthenticationRequirementsMITMProtectionRequiredGeneralBonding BluetoothAuthenticationRequirementsValues = 5
+	KBluetoothAuthenticationRequirementsMITMProtectionRequiredDedicatedBonding    BluetoothAuthenticationRequirementsValues = 3
+	KBluetoothAuthenticationRequirementsMITMProtectionNotRequiredGeneralBonding   BluetoothAuthenticationRequirementsValues = 4
+	KBluetoothAuthenticationRequirementsMITMProtectionRequiredGeneralBonding      BluetoothAuthenticationRequirementsValues = 5
 )
 
 func (e BluetoothAuthenticationRequirementsValues) String() string {
@@ -235,271 +235,271 @@ func (e BluetoothAuthenticationRequirementsValues) String() string {
 type BluetoothCompanyIdentifers int64
 
 const (
-	KBluetoothCompanyIdentiferEricssonTechnologyLicensing BluetoothCompanyIdentifers = 0
-	KBluetoothCompanyIdentiferNokiaMobilePhones BluetoothCompanyIdentifers = 1
-	KBluetoothCompanyIdentiferIntel BluetoothCompanyIdentifers = 2
-	KBluetoothCompanyIdentiferIBM BluetoothCompanyIdentifers = 3
-	KBluetoothCompanyIdentiferToshiba BluetoothCompanyIdentifers = 4
-	KBluetoothCompanyIdentifer3Com BluetoothCompanyIdentifers = 5
-	KBluetoothCompanyIdentiferMicrosoft BluetoothCompanyIdentifers = 6
-	KBluetoothCompanyIdentiferLucent BluetoothCompanyIdentifers = 7
-	KBluetoothCompanyIdentiferMotorola BluetoothCompanyIdentifers = 8
-	KBluetoothCompanyIdentiferInfineonTechnologiesAG BluetoothCompanyIdentifers = 9
-	KBluetoothCompanyIdentiferCambridgeSiliconRadio BluetoothCompanyIdentifers = 10
-	KBluetoothCompanyIdentiferSiliconWave BluetoothCompanyIdentifers = 11
-	KBluetoothCompanyIdentiferDigianswerAS BluetoothCompanyIdentifers = 12
-	KBluetoothCompanyIdentiferTexasInstruments BluetoothCompanyIdentifers = 13
-	KBluetoothCompanyIdentiferParthusTechnologies BluetoothCompanyIdentifers = 14
-	KBluetoothCompanyIdentiferBroadcom BluetoothCompanyIdentifers = 15
-	KBluetoothCompanyIdentiferMitelSemiconductor BluetoothCompanyIdentifers = 16
-	KBluetoothCompanyIdentiferWidcomm BluetoothCompanyIdentifers = 17
-	KBluetoothCompanyIdentiferZeevo BluetoothCompanyIdentifers = 18
-	KBluetoothCompanyIdentiferAtmel BluetoothCompanyIdentifers = 19
-	KBluetoothCompanyIdentiferMistubishiElectric BluetoothCompanyIdentifers = 20
-	KBluetoothCompanyIdentiferRTXTelecom BluetoothCompanyIdentifers = 21
-	KBluetoothCompanyIdentiferKCTechnology BluetoothCompanyIdentifers = 22
-	KBluetoothCompanyIdentiferNewlogic BluetoothCompanyIdentifers = 23
-	KBluetoothCompanyIdentiferTransilica BluetoothCompanyIdentifers = 24
-	KBluetoothCompanyIdentiferRohdeandSchwarz BluetoothCompanyIdentifers = 25
-	KBluetoothCompanyIdentiferTTPCom BluetoothCompanyIdentifers = 26
-	KBluetoothCompanyIdentiferSigniaTechnologies BluetoothCompanyIdentifers = 27
-	KBluetoothCompanyIdentiferConexantSystems BluetoothCompanyIdentifers = 28
-	KBluetoothCompanyIdentiferQualcomm BluetoothCompanyIdentifers = 29
-	KBluetoothCompanyIdentiferInventel BluetoothCompanyIdentifers = 30
-	KBluetoothCompanyIdentiferAVMBerlin BluetoothCompanyIdentifers = 31
-	KBluetoothCompanyIdentiferBandspeed BluetoothCompanyIdentifers = 32
-	KBluetoothCompanyIdentiferMansella BluetoothCompanyIdentifers = 33
-	KBluetoothCompanyIdentiferNEC BluetoothCompanyIdentifers = 34
-	KBluetoothCompanyIdentiferWavePlusTechnology BluetoothCompanyIdentifers = 35
-	KBluetoothCompanyIdentiferAlcatel BluetoothCompanyIdentifers = 36
-	KBluetoothCompanyIdentiferPhilipsSemiconductor BluetoothCompanyIdentifers = 37
-	KBluetoothCompanyIdentiferCTechnologies BluetoothCompanyIdentifers = 38
-	KBluetoothCompanyIdentiferOpenInterface BluetoothCompanyIdentifers = 39
-	KBluetoothCompanyIdentiferRFCMicroDevices BluetoothCompanyIdentifers = 40
-	KBluetoothCompanyIdentiferHitachi BluetoothCompanyIdentifers = 41
-	KBluetoothCompanyIdentiferSymbolTechnologies BluetoothCompanyIdentifers = 42
-	KBluetoothCompanyIdentiferTenovis BluetoothCompanyIdentifers = 43
-	KBluetoothCompanyIdentiferMacronixInternational BluetoothCompanyIdentifers = 44
-	KBluetoothCompanyIdentiferGCTSemiconductor BluetoothCompanyIdentifers = 45
-	KBluetoothCompanyIdentiferNorwoodSystems BluetoothCompanyIdentifers = 46
-	KBluetoothCompanyIdentiferMewTelTechnology BluetoothCompanyIdentifers = 47
-	KBluetoothCompanyIdentiferSTMicroelectronics BluetoothCompanyIdentifers = 48
-	KBluetoothCompanyIdentiferSynopsys BluetoothCompanyIdentifers = 49
-	KBluetoothCompanyIdentiferRedMCommunications BluetoothCompanyIdentifers = 50
-	KBluetoothCompanyIdentiferCommil BluetoothCompanyIdentifers = 51
-	KBluetoothCompanyIdentiferCATC BluetoothCompanyIdentifers = 52
-	KBluetoothCompanyIdentiferEclipse BluetoothCompanyIdentifers = 53
-	KBluetoothCompanyIdentiferRenesasTechnology BluetoothCompanyIdentifers = 54
-	KBluetoothCompanyIdentiferMobilian BluetoothCompanyIdentifers = 55
-	KBluetoothCompanyIdentiferTerax BluetoothCompanyIdentifers = 56
-	KBluetoothCompanyIdentiferIntegratedSystemSolution BluetoothCompanyIdentifers = 57
-	KBluetoothCompanyIdentiferMatsushitaElectricIndustrial BluetoothCompanyIdentifers = 58
-	KBluetoothCompanyIdentiferGennum BluetoothCompanyIdentifers = 59
-	KBluetoothCompanyIdentiferResearchInMotion BluetoothCompanyIdentifers = 60
-	KBluetoothCompanyIdentiferIPextreme BluetoothCompanyIdentifers = 61
-	KBluetoothCompanyIdentiferSystemsAndChips BluetoothCompanyIdentifers = 62
-	KBluetoothCompanyIdentiferBluetoothSIG BluetoothCompanyIdentifers = 63
-	KBluetoothCompanyIdentiferSeikoEpson BluetoothCompanyIdentifers = 64
-	KBluetoothCompanyIdentiferIntegratedSiliconSolution BluetoothCompanyIdentifers = 65
-	KBluetoothCompanyIdentiferCONWISETechnology BluetoothCompanyIdentifers = 66
-	KBluetoothCompanyIdentiferParrotSA BluetoothCompanyIdentifers = 67
-	KBluetoothCompanyIdentiferSocketCommunications BluetoothCompanyIdentifers = 68
-	KBluetoothCompanyIdentiferAtherosCommunications BluetoothCompanyIdentifers = 69
-	KBluetoothCompanyIdentiferMediaTek BluetoothCompanyIdentifers = 70
-	KBluetoothCompanyIdentiferBluegiga BluetoothCompanyIdentifers = 71
-	KBluetoothCompanyIdentiferMarvellTechnologyGroup BluetoothCompanyIdentifers = 72
-	KBluetoothCompanyIdentifer3DSP BluetoothCompanyIdentifers = 73
-	KBluetoothCompanyIdentiferAccelSemiconductor BluetoothCompanyIdentifers = 74
-	KBluetoothCompanyIdentiferContinentialAutomotiveSystems BluetoothCompanyIdentifers = 75
-	KBluetoothCompanyIdentiferApple BluetoothCompanyIdentifers = 76
-	KBluetoothCompanyIdentiferStaccatoCommunications BluetoothCompanyIdentifers = 77
-	KBluetoothCompanyIdentiferAvagoTechnologies BluetoothCompanyIdentifers = 78
-	KBluetoothCompanyIdentiferAPT BluetoothCompanyIdentifers = 79
-	KBluetoothCompanyIdentiferSiRFTechnology BluetoothCompanyIdentifers = 80
-	KBluetoothCompanyIdentiferTZeroTechnologies BluetoothCompanyIdentifers = 81
-	KBluetoothCompanyIdentiferJandM BluetoothCompanyIdentifers = 82
-	KBluetoothCompanyIdentiferFree2Move BluetoothCompanyIdentifers = 83
-	KBluetoothCompanyIdentifer3DiJoy BluetoothCompanyIdentifers = 84
-	KBluetoothCompanyIdentiferPlantronics BluetoothCompanyIdentifers = 85
-	KBluetoothCompanyIdentiferSonyEricssonMobileCommunications BluetoothCompanyIdentifers = 86
-	KBluetoothCompanyIdentiferHarmonInternational BluetoothCompanyIdentifers = 87
-	KBluetoothCompanyIdentiferVisio BluetoothCompanyIdentifers = 88
-	KBluetoothCompanyIdentiferNordicSemiconductor BluetoothCompanyIdentifers = 89
-	KBluetoothCompanyIdentiferEMMicroElectronicMarin BluetoothCompanyIdentifers = 90
-	KBluetoothCompanyIdentiferRalinkTechnology BluetoothCompanyIdentifers = 91
-	KBluetoothCompanyIdentiferBelkinInternational BluetoothCompanyIdentifers = 92
-	KBluetoothCompanyIdentiferRealtekSemiconductor BluetoothCompanyIdentifers = 93
-	KBluetoothCompanyIdentiferStonestreetOne BluetoothCompanyIdentifers = 94
-	KBluetoothCompanyIdentiferWicentric BluetoothCompanyIdentifers = 95
-	KBluetoothCompanyIdentiferRivieraWaves BluetoothCompanyIdentifers = 96
-	KBluetoothCompanyIdentiferRDAMicroelectronics BluetoothCompanyIdentifers = 97
-	KBluetoothCompanyIdentiferGibsonGuitars BluetoothCompanyIdentifers = 98
-	KBluetoothCompanyIdentiferMiCommand BluetoothCompanyIdentifers = 99
-	KBluetoothCompanyIdentiferBandXIInternational BluetoothCompanyIdentifers = 100
-	KBluetoothCompanyIdentiferHewlettPackard BluetoothCompanyIdentifers = 101
-	KBluetoothCompanyIdentifer9SolutionsOy BluetoothCompanyIdentifers = 102
-	KBluetoothCompanyIdentiferGNNetcom BluetoothCompanyIdentifers = 103
-	KBluetoothCompanyIdentiferGeneralMotors BluetoothCompanyIdentifers = 104
-	KBluetoothCompanyIdentiferAAndDEngineering BluetoothCompanyIdentifers = 105
-	KBluetoothCompanyIdentiferMindTree BluetoothCompanyIdentifers = 106
-	KBluetoothCompanyIdentiferPolarElectroOY BluetoothCompanyIdentifers = 107
-	KBluetoothCompanyIdentiferBeautifulEnterprise BluetoothCompanyIdentifers = 108
-	KBluetoothCompanyIdentiferBriarTek BluetoothCompanyIdentifers = 109
-	KBluetoothCompanyIdentiferSummitDataCommunications BluetoothCompanyIdentifers = 110
-	KBluetoothCompanyIdentiferSoundID BluetoothCompanyIdentifers = 111
-	KBluetoothCompanyIdentiferMonster BluetoothCompanyIdentifers = 112
-	KBluetoothCompanyIdentiferConnectBlueAB BluetoothCompanyIdentifers = 113
-	KBluetoothCompanyIdentiferShangHaiSuperSmartElectronics BluetoothCompanyIdentifers = 114
-	KBluetoothCompanyIdentiferGroupSense BluetoothCompanyIdentifers = 115
-	KBluetoothCompanyIdentiferZomm BluetoothCompanyIdentifers = 116
-	KBluetoothCompanyIdentiferSamsungElectronics BluetoothCompanyIdentifers = 117
-	KBluetoothCompanyIdentiferCreativeTechnology BluetoothCompanyIdentifers = 118
-	KBluetoothCompanyIdentiferLairdTechnologies BluetoothCompanyIdentifers = 119
-	KBluetoothCompanyIdentiferNike BluetoothCompanyIdentifers = 120
-	KBluetoothCompanyIdentiferLessWire BluetoothCompanyIdentifers = 121
-	KBluetoothCompanyIdentiferMStarTechnologies BluetoothCompanyIdentifers = 122
-	KBluetoothCompanyIdentiferHanlynnTechnologies BluetoothCompanyIdentifers = 123
-	KBluetoothCompanyIdentiferAAndRCambridge BluetoothCompanyIdentifers = 124
-	KBluetoothCompanyIdentiferSeersTechnology BluetoothCompanyIdentifers = 125
-	KBluetoothCompanyIdentiferSportsTrackingTechnologies BluetoothCompanyIdentifers = 126
-	KBluetoothCompanyIdentiferAutonetMobile BluetoothCompanyIdentifers = 127
-	KBluetoothCompanyIdentiferDeLormePublishingCompany BluetoothCompanyIdentifers = 128
-	KBluetoothCompanyIdentiferWuXiVimicro BluetoothCompanyIdentifers = 129
-	KBluetoothCompanyIdentiferSennheiserCommunications BluetoothCompanyIdentifers = 130
-	KBluetoothCompanyIdentiferTimeKeepingSystems BluetoothCompanyIdentifers = 131
-	KBluetoothCompanyIdentiferLudusHelsinki BluetoothCompanyIdentifers = 132
-	KBluetoothCompanyIdentiferBlueRadios BluetoothCompanyIdentifers = 133
-	KBluetoothCompanyIdentiferEquinux BluetoothCompanyIdentifers = 134
-	KBluetoothCompanyIdentiferGarminInternational BluetoothCompanyIdentifers = 135
-	KBluetoothCompanyIdentiferEcotest BluetoothCompanyIdentifers = 136
-	KBluetoothCompanyIdentiferGNResound BluetoothCompanyIdentifers = 137
-	KBluetoothCompanyIdentiferJawbone BluetoothCompanyIdentifers = 138
-	KBluetoothCompanyIdentiferTopconPositioningSystems BluetoothCompanyIdentifers = 139
-	KBluetoothCompanyIdentiferGimbal BluetoothCompanyIdentifers = 140
-	KBluetoothCompanyIdentiferZscanSoftware BluetoothCompanyIdentifers = 141
-	KBluetoothCompanyIdentiferQuintic BluetoothCompanyIdentifers = 142
-	KBluetoothCompanyIdentiferTelitWirelessSolutions BluetoothCompanyIdentifers = 143
-	KBluetoothCompanyIdentiferFunaiElectric BluetoothCompanyIdentifers = 144
-	KBluetoothCompanyIdentiferAdvancedPANMOBILSystems BluetoothCompanyIdentifers = 145
-	KBluetoothCompanyIdentiferThinkOptics BluetoothCompanyIdentifers = 146
-	KBluetoothCompanyIdentiferUniversalElectriconics BluetoothCompanyIdentifers = 147
-	KBluetoothCompanyIdentiferAirohaTechnology BluetoothCompanyIdentifers = 148
-	KBluetoothCompanyIdentiferNECLightning BluetoothCompanyIdentifers = 149
-	KBluetoothCompanyIdentiferODMTechnology BluetoothCompanyIdentifers = 150
-	KBluetoothCompanyIdentiferConnecteDevice BluetoothCompanyIdentifers = 151
-	KBluetoothCompanyIdentiferZero1TV BluetoothCompanyIdentifers = 152
-	KBluetoothCompanyIdentiferITechDynamicGlobalDistribution BluetoothCompanyIdentifers = 153
-	KBluetoothCompanyIdentiferAlpwise BluetoothCompanyIdentifers = 154
+	KBluetoothCompanyIdentiferEricssonTechnologyLicensing          BluetoothCompanyIdentifers = 0
+	KBluetoothCompanyIdentiferNokiaMobilePhones                    BluetoothCompanyIdentifers = 1
+	KBluetoothCompanyIdentiferIntel                                BluetoothCompanyIdentifers = 2
+	KBluetoothCompanyIdentiferIBM                                  BluetoothCompanyIdentifers = 3
+	KBluetoothCompanyIdentiferToshiba                              BluetoothCompanyIdentifers = 4
+	KBluetoothCompanyIdentifer3Com                                 BluetoothCompanyIdentifers = 5
+	KBluetoothCompanyIdentiferMicrosoft                            BluetoothCompanyIdentifers = 6
+	KBluetoothCompanyIdentiferLucent                               BluetoothCompanyIdentifers = 7
+	KBluetoothCompanyIdentiferMotorola                             BluetoothCompanyIdentifers = 8
+	KBluetoothCompanyIdentiferInfineonTechnologiesAG               BluetoothCompanyIdentifers = 9
+	KBluetoothCompanyIdentiferCambridgeSiliconRadio                BluetoothCompanyIdentifers = 10
+	KBluetoothCompanyIdentiferSiliconWave                          BluetoothCompanyIdentifers = 11
+	KBluetoothCompanyIdentiferDigianswerAS                         BluetoothCompanyIdentifers = 12
+	KBluetoothCompanyIdentiferTexasInstruments                     BluetoothCompanyIdentifers = 13
+	KBluetoothCompanyIdentiferParthusTechnologies                  BluetoothCompanyIdentifers = 14
+	KBluetoothCompanyIdentiferBroadcom                             BluetoothCompanyIdentifers = 15
+	KBluetoothCompanyIdentiferMitelSemiconductor                   BluetoothCompanyIdentifers = 16
+	KBluetoothCompanyIdentiferWidcomm                              BluetoothCompanyIdentifers = 17
+	KBluetoothCompanyIdentiferZeevo                                BluetoothCompanyIdentifers = 18
+	KBluetoothCompanyIdentiferAtmel                                BluetoothCompanyIdentifers = 19
+	KBluetoothCompanyIdentiferMistubishiElectric                   BluetoothCompanyIdentifers = 20
+	KBluetoothCompanyIdentiferRTXTelecom                           BluetoothCompanyIdentifers = 21
+	KBluetoothCompanyIdentiferKCTechnology                         BluetoothCompanyIdentifers = 22
+	KBluetoothCompanyIdentiferNewlogic                             BluetoothCompanyIdentifers = 23
+	KBluetoothCompanyIdentiferTransilica                           BluetoothCompanyIdentifers = 24
+	KBluetoothCompanyIdentiferRohdeandSchwarz                      BluetoothCompanyIdentifers = 25
+	KBluetoothCompanyIdentiferTTPCom                               BluetoothCompanyIdentifers = 26
+	KBluetoothCompanyIdentiferSigniaTechnologies                   BluetoothCompanyIdentifers = 27
+	KBluetoothCompanyIdentiferConexantSystems                      BluetoothCompanyIdentifers = 28
+	KBluetoothCompanyIdentiferQualcomm                             BluetoothCompanyIdentifers = 29
+	KBluetoothCompanyIdentiferInventel                             BluetoothCompanyIdentifers = 30
+	KBluetoothCompanyIdentiferAVMBerlin                            BluetoothCompanyIdentifers = 31
+	KBluetoothCompanyIdentiferBandspeed                            BluetoothCompanyIdentifers = 32
+	KBluetoothCompanyIdentiferMansella                             BluetoothCompanyIdentifers = 33
+	KBluetoothCompanyIdentiferNEC                                  BluetoothCompanyIdentifers = 34
+	KBluetoothCompanyIdentiferWavePlusTechnology                   BluetoothCompanyIdentifers = 35
+	KBluetoothCompanyIdentiferAlcatel                              BluetoothCompanyIdentifers = 36
+	KBluetoothCompanyIdentiferPhilipsSemiconductor                 BluetoothCompanyIdentifers = 37
+	KBluetoothCompanyIdentiferCTechnologies                        BluetoothCompanyIdentifers = 38
+	KBluetoothCompanyIdentiferOpenInterface                        BluetoothCompanyIdentifers = 39
+	KBluetoothCompanyIdentiferRFCMicroDevices                      BluetoothCompanyIdentifers = 40
+	KBluetoothCompanyIdentiferHitachi                              BluetoothCompanyIdentifers = 41
+	KBluetoothCompanyIdentiferSymbolTechnologies                   BluetoothCompanyIdentifers = 42
+	KBluetoothCompanyIdentiferTenovis                              BluetoothCompanyIdentifers = 43
+	KBluetoothCompanyIdentiferMacronixInternational                BluetoothCompanyIdentifers = 44
+	KBluetoothCompanyIdentiferGCTSemiconductor                     BluetoothCompanyIdentifers = 45
+	KBluetoothCompanyIdentiferNorwoodSystems                       BluetoothCompanyIdentifers = 46
+	KBluetoothCompanyIdentiferMewTelTechnology                     BluetoothCompanyIdentifers = 47
+	KBluetoothCompanyIdentiferSTMicroelectronics                   BluetoothCompanyIdentifers = 48
+	KBluetoothCompanyIdentiferSynopsys                             BluetoothCompanyIdentifers = 49
+	KBluetoothCompanyIdentiferRedMCommunications                   BluetoothCompanyIdentifers = 50
+	KBluetoothCompanyIdentiferCommil                               BluetoothCompanyIdentifers = 51
+	KBluetoothCompanyIdentiferCATC                                 BluetoothCompanyIdentifers = 52
+	KBluetoothCompanyIdentiferEclipse                              BluetoothCompanyIdentifers = 53
+	KBluetoothCompanyIdentiferRenesasTechnology                    BluetoothCompanyIdentifers = 54
+	KBluetoothCompanyIdentiferMobilian                             BluetoothCompanyIdentifers = 55
+	KBluetoothCompanyIdentiferTerax                                BluetoothCompanyIdentifers = 56
+	KBluetoothCompanyIdentiferIntegratedSystemSolution             BluetoothCompanyIdentifers = 57
+	KBluetoothCompanyIdentiferMatsushitaElectricIndustrial         BluetoothCompanyIdentifers = 58
+	KBluetoothCompanyIdentiferGennum                               BluetoothCompanyIdentifers = 59
+	KBluetoothCompanyIdentiferResearchInMotion                     BluetoothCompanyIdentifers = 60
+	KBluetoothCompanyIdentiferIPextreme                            BluetoothCompanyIdentifers = 61
+	KBluetoothCompanyIdentiferSystemsAndChips                      BluetoothCompanyIdentifers = 62
+	KBluetoothCompanyIdentiferBluetoothSIG                         BluetoothCompanyIdentifers = 63
+	KBluetoothCompanyIdentiferSeikoEpson                           BluetoothCompanyIdentifers = 64
+	KBluetoothCompanyIdentiferIntegratedSiliconSolution            BluetoothCompanyIdentifers = 65
+	KBluetoothCompanyIdentiferCONWISETechnology                    BluetoothCompanyIdentifers = 66
+	KBluetoothCompanyIdentiferParrotSA                             BluetoothCompanyIdentifers = 67
+	KBluetoothCompanyIdentiferSocketCommunications                 BluetoothCompanyIdentifers = 68
+	KBluetoothCompanyIdentiferAtherosCommunications                BluetoothCompanyIdentifers = 69
+	KBluetoothCompanyIdentiferMediaTek                             BluetoothCompanyIdentifers = 70
+	KBluetoothCompanyIdentiferBluegiga                             BluetoothCompanyIdentifers = 71
+	KBluetoothCompanyIdentiferMarvellTechnologyGroup               BluetoothCompanyIdentifers = 72
+	KBluetoothCompanyIdentifer3DSP                                 BluetoothCompanyIdentifers = 73
+	KBluetoothCompanyIdentiferAccelSemiconductor                   BluetoothCompanyIdentifers = 74
+	KBluetoothCompanyIdentiferContinentialAutomotiveSystems        BluetoothCompanyIdentifers = 75
+	KBluetoothCompanyIdentiferApple                                BluetoothCompanyIdentifers = 76
+	KBluetoothCompanyIdentiferStaccatoCommunications               BluetoothCompanyIdentifers = 77
+	KBluetoothCompanyIdentiferAvagoTechnologies                    BluetoothCompanyIdentifers = 78
+	KBluetoothCompanyIdentiferAPT                                  BluetoothCompanyIdentifers = 79
+	KBluetoothCompanyIdentiferSiRFTechnology                       BluetoothCompanyIdentifers = 80
+	KBluetoothCompanyIdentiferTZeroTechnologies                    BluetoothCompanyIdentifers = 81
+	KBluetoothCompanyIdentiferJandM                                BluetoothCompanyIdentifers = 82
+	KBluetoothCompanyIdentiferFree2Move                            BluetoothCompanyIdentifers = 83
+	KBluetoothCompanyIdentifer3DiJoy                               BluetoothCompanyIdentifers = 84
+	KBluetoothCompanyIdentiferPlantronics                          BluetoothCompanyIdentifers = 85
+	KBluetoothCompanyIdentiferSonyEricssonMobileCommunications     BluetoothCompanyIdentifers = 86
+	KBluetoothCompanyIdentiferHarmonInternational                  BluetoothCompanyIdentifers = 87
+	KBluetoothCompanyIdentiferVisio                                BluetoothCompanyIdentifers = 88
+	KBluetoothCompanyIdentiferNordicSemiconductor                  BluetoothCompanyIdentifers = 89
+	KBluetoothCompanyIdentiferEMMicroElectronicMarin               BluetoothCompanyIdentifers = 90
+	KBluetoothCompanyIdentiferRalinkTechnology                     BluetoothCompanyIdentifers = 91
+	KBluetoothCompanyIdentiferBelkinInternational                  BluetoothCompanyIdentifers = 92
+	KBluetoothCompanyIdentiferRealtekSemiconductor                 BluetoothCompanyIdentifers = 93
+	KBluetoothCompanyIdentiferStonestreetOne                       BluetoothCompanyIdentifers = 94
+	KBluetoothCompanyIdentiferWicentric                            BluetoothCompanyIdentifers = 95
+	KBluetoothCompanyIdentiferRivieraWaves                         BluetoothCompanyIdentifers = 96
+	KBluetoothCompanyIdentiferRDAMicroelectronics                  BluetoothCompanyIdentifers = 97
+	KBluetoothCompanyIdentiferGibsonGuitars                        BluetoothCompanyIdentifers = 98
+	KBluetoothCompanyIdentiferMiCommand                            BluetoothCompanyIdentifers = 99
+	KBluetoothCompanyIdentiferBandXIInternational                  BluetoothCompanyIdentifers = 100
+	KBluetoothCompanyIdentiferHewlettPackard                       BluetoothCompanyIdentifers = 101
+	KBluetoothCompanyIdentifer9SolutionsOy                         BluetoothCompanyIdentifers = 102
+	KBluetoothCompanyIdentiferGNNetcom                             BluetoothCompanyIdentifers = 103
+	KBluetoothCompanyIdentiferGeneralMotors                        BluetoothCompanyIdentifers = 104
+	KBluetoothCompanyIdentiferAAndDEngineering                     BluetoothCompanyIdentifers = 105
+	KBluetoothCompanyIdentiferMindTree                             BluetoothCompanyIdentifers = 106
+	KBluetoothCompanyIdentiferPolarElectroOY                       BluetoothCompanyIdentifers = 107
+	KBluetoothCompanyIdentiferBeautifulEnterprise                  BluetoothCompanyIdentifers = 108
+	KBluetoothCompanyIdentiferBriarTek                             BluetoothCompanyIdentifers = 109
+	KBluetoothCompanyIdentiferSummitDataCommunications             BluetoothCompanyIdentifers = 110
+	KBluetoothCompanyIdentiferSoundID                              BluetoothCompanyIdentifers = 111
+	KBluetoothCompanyIdentiferMonster                              BluetoothCompanyIdentifers = 112
+	KBluetoothCompanyIdentiferConnectBlueAB                        BluetoothCompanyIdentifers = 113
+	KBluetoothCompanyIdentiferShangHaiSuperSmartElectronics        BluetoothCompanyIdentifers = 114
+	KBluetoothCompanyIdentiferGroupSense                           BluetoothCompanyIdentifers = 115
+	KBluetoothCompanyIdentiferZomm                                 BluetoothCompanyIdentifers = 116
+	KBluetoothCompanyIdentiferSamsungElectronics                   BluetoothCompanyIdentifers = 117
+	KBluetoothCompanyIdentiferCreativeTechnology                   BluetoothCompanyIdentifers = 118
+	KBluetoothCompanyIdentiferLairdTechnologies                    BluetoothCompanyIdentifers = 119
+	KBluetoothCompanyIdentiferNike                                 BluetoothCompanyIdentifers = 120
+	KBluetoothCompanyIdentiferLessWire                             BluetoothCompanyIdentifers = 121
+	KBluetoothCompanyIdentiferMStarTechnologies                    BluetoothCompanyIdentifers = 122
+	KBluetoothCompanyIdentiferHanlynnTechnologies                  BluetoothCompanyIdentifers = 123
+	KBluetoothCompanyIdentiferAAndRCambridge                       BluetoothCompanyIdentifers = 124
+	KBluetoothCompanyIdentiferSeersTechnology                      BluetoothCompanyIdentifers = 125
+	KBluetoothCompanyIdentiferSportsTrackingTechnologies           BluetoothCompanyIdentifers = 126
+	KBluetoothCompanyIdentiferAutonetMobile                        BluetoothCompanyIdentifers = 127
+	KBluetoothCompanyIdentiferDeLormePublishingCompany             BluetoothCompanyIdentifers = 128
+	KBluetoothCompanyIdentiferWuXiVimicro                          BluetoothCompanyIdentifers = 129
+	KBluetoothCompanyIdentiferSennheiserCommunications             BluetoothCompanyIdentifers = 130
+	KBluetoothCompanyIdentiferTimeKeepingSystems                   BluetoothCompanyIdentifers = 131
+	KBluetoothCompanyIdentiferLudusHelsinki                        BluetoothCompanyIdentifers = 132
+	KBluetoothCompanyIdentiferBlueRadios                           BluetoothCompanyIdentifers = 133
+	KBluetoothCompanyIdentiferEquinux                              BluetoothCompanyIdentifers = 134
+	KBluetoothCompanyIdentiferGarminInternational                  BluetoothCompanyIdentifers = 135
+	KBluetoothCompanyIdentiferEcotest                              BluetoothCompanyIdentifers = 136
+	KBluetoothCompanyIdentiferGNResound                            BluetoothCompanyIdentifers = 137
+	KBluetoothCompanyIdentiferJawbone                              BluetoothCompanyIdentifers = 138
+	KBluetoothCompanyIdentiferTopconPositioningSystems             BluetoothCompanyIdentifers = 139
+	KBluetoothCompanyIdentiferGimbal                               BluetoothCompanyIdentifers = 140
+	KBluetoothCompanyIdentiferZscanSoftware                        BluetoothCompanyIdentifers = 141
+	KBluetoothCompanyIdentiferQuintic                              BluetoothCompanyIdentifers = 142
+	KBluetoothCompanyIdentiferTelitWirelessSolutions               BluetoothCompanyIdentifers = 143
+	KBluetoothCompanyIdentiferFunaiElectric                        BluetoothCompanyIdentifers = 144
+	KBluetoothCompanyIdentiferAdvancedPANMOBILSystems              BluetoothCompanyIdentifers = 145
+	KBluetoothCompanyIdentiferThinkOptics                          BluetoothCompanyIdentifers = 146
+	KBluetoothCompanyIdentiferUniversalElectriconics               BluetoothCompanyIdentifers = 147
+	KBluetoothCompanyIdentiferAirohaTechnology                     BluetoothCompanyIdentifers = 148
+	KBluetoothCompanyIdentiferNECLightning                         BluetoothCompanyIdentifers = 149
+	KBluetoothCompanyIdentiferODMTechnology                        BluetoothCompanyIdentifers = 150
+	KBluetoothCompanyIdentiferConnecteDevice                       BluetoothCompanyIdentifers = 151
+	KBluetoothCompanyIdentiferZero1TV                              BluetoothCompanyIdentifers = 152
+	KBluetoothCompanyIdentiferITechDynamicGlobalDistribution       BluetoothCompanyIdentifers = 153
+	KBluetoothCompanyIdentiferAlpwise                              BluetoothCompanyIdentifers = 154
 	KBluetoothCompanyIdentiferJiangsuToppowerAutomotiveElectronics BluetoothCompanyIdentifers = 155
-	KBluetoothCompanyIdentiferColorfy BluetoothCompanyIdentifers = 156
-	KBluetoothCompanyIdentiferGeoforce BluetoothCompanyIdentifers = 157
-	KBluetoothCompanyIdentiferBose BluetoothCompanyIdentifers = 158
-	KBluetoothCompanyIdentiferSuuntoOy BluetoothCompanyIdentifers = 159
-	KBluetoothCompanyIdentiferKensingtonComputerProductsGroup BluetoothCompanyIdentifers = 160
-	KBluetoothCompanyIdentiferSRMedizinelektronik BluetoothCompanyIdentifers = 161
-	KBluetoothCompanyIdentiferVertu BluetoothCompanyIdentifers = 162
-	KBluetoothCompanyIdentiferMetaWatch BluetoothCompanyIdentifers = 163
-	KBluetoothCompanyIdentiferLinak BluetoothCompanyIdentifers = 164
-	KBluetoothCompanyIdentiferOTLDynamics BluetoothCompanyIdentifers = 165
-	KBluetoothCompanyIdentiferPandaOcean BluetoothCompanyIdentifers = 166
-	KBluetoothCompanyIdentiferVisteon BluetoothCompanyIdentifers = 167
-	KBluetoothCompanyIdentiferARPDevicesUnlimited BluetoothCompanyIdentifers = 168
-	KBluetoothCompanyIdentiferMagnetiMarelli BluetoothCompanyIdentifers = 169
-	KBluetoothCompanyIdentiferCaenRFID BluetoothCompanyIdentifers = 170
-	KBluetoothCompanyIdentiferIngenieurSystemgruppeZahn BluetoothCompanyIdentifers = 171
-	KBluetoothCompanyIdentiferGreenThrottleGames BluetoothCompanyIdentifers = 172
-	KBluetoothCompanyIdentiferPeterSystemtechnik BluetoothCompanyIdentifers = 173
-	KBluetoothCompanyIdentiferOmegawave BluetoothCompanyIdentifers = 174
-	KBluetoothCompanyIdentiferCinetix BluetoothCompanyIdentifers = 175
-	KBluetoothCompanyIdentiferPassifSemiconductor BluetoothCompanyIdentifers = 176
-	KBluetoothCompanyIdentiferSarisCyclingGroup BluetoothCompanyIdentifers = 177
-	KBluetoothCompanyIdentiferBekey BluetoothCompanyIdentifers = 178
-	KBluetoothCompanyIdentiferClarinoxTechnologies BluetoothCompanyIdentifers = 179
-	KBluetoothCompanyIdentiferBDETechnology BluetoothCompanyIdentifers = 180
-	KBluetoothCompanyIdentiferSwirlNetworks BluetoothCompanyIdentifers = 181
-	KBluetoothCompanyIdentiferMesoInternational BluetoothCompanyIdentifers = 182
-	KBluetoothCompanyIdentiferTreLab BluetoothCompanyIdentifers = 183
-	KBluetoothCompanyIdentiferQualcommInnovationCenter BluetoothCompanyIdentifers = 184
-	KBluetoothCompanyIdentiferJohnsonControls BluetoothCompanyIdentifers = 185
-	KBluetoothCompanyIdentiferStarkeyLaboratories BluetoothCompanyIdentifers = 186
-	KBluetoothCompanyIdentiferSPowerElectronics BluetoothCompanyIdentifers = 187
-	KBluetoothCompanyIdentiferAceSensor BluetoothCompanyIdentifers = 188
-	KBluetoothCompanyIdentiferAplix BluetoothCompanyIdentifers = 189
-	KBluetoothCompanyIdentiferAAMPofAmerica BluetoothCompanyIdentifers = 190
-	KBluetoothCompanyIdentiferStalmartTechnology BluetoothCompanyIdentifers = 191
-	KBluetoothCompanyIdentiferAMICCOMElectronics BluetoothCompanyIdentifers = 192
-	KBluetoothCompanyIdentiferShenzhenExcelsecuDataTechnology BluetoothCompanyIdentifers = 193
-	KBluetoothCompanyIdentiferGeneq BluetoothCompanyIdentifers = 194
-	KBluetoothCompanyIdentiferAdidas BluetoothCompanyIdentifers = 195
-	KBluetoothCompanyIdentiferLGElectronics BluetoothCompanyIdentifers = 196
-	KBluetoothCompanyIdentiferOnsetComputer BluetoothCompanyIdentifers = 197
-	KBluetoothCompanyIdentiferSelflyBV BluetoothCompanyIdentifers = 198
-	KBluetoothCompanyIdentiferQuupa BluetoothCompanyIdentifers = 199
-	KBluetoothCompanyIdentiferGeLo BluetoothCompanyIdentifers = 200
-	KBluetoothCompanyIdentiferEvluma BluetoothCompanyIdentifers = 201
-	KBluetoothCompanyIdentiferMC10 BluetoothCompanyIdentifers = 202
-	KBluetoothCompanyIdentiferBinauricSE BluetoothCompanyIdentifers = 203
-	KBluetoothCompanyIdentiferBeatsElectronics BluetoothCompanyIdentifers = 204
-	KBluetoothCompanyIdentiferMicrochipTechnology BluetoothCompanyIdentifers = 205
-	KBluetoothCompanyIdentiferElgatoSystems BluetoothCompanyIdentifers = 206
-	KBluetoothCompanyIdentiferARCHOS BluetoothCompanyIdentifers = 207
-	KBluetoothCompanyIdentiferDexcom BluetoothCompanyIdentifers = 208
-	KBluetoothCompanyIdentiferPolarElectroEurope BluetoothCompanyIdentifers = 209
-	KBluetoothCompanyIdentiferDialogSemiconductor BluetoothCompanyIdentifers = 210
-	KBluetoothCompanyIdentiferTaixingbangTechnology BluetoothCompanyIdentifers = 211
-	KBluetoothCompanyIdentiferKawantech BluetoothCompanyIdentifers = 212
-	KBluetoothCompanyIdentiferAustcoCommunicationsSystems BluetoothCompanyIdentifers = 213
-	KBluetoothCompanyIdentiferTimexGroup BluetoothCompanyIdentifers = 214
-	KBluetoothCompanyIdentiferQualcommTechnologies BluetoothCompanyIdentifers = 215
-	KBluetoothCompanyIdentiferQualcommConnectedExperiences BluetoothCompanyIdentifers = 216
-	KBluetoothCompanyIdentiferVoyetraTurtleBeach BluetoothCompanyIdentifers = 217
-	KBluetoothCompanyIdentifertxtrGMBH BluetoothCompanyIdentifers = 218
-	KBluetoothCompanyIdentiferBiosentronics BluetoothCompanyIdentifers = 219
-	KBluetoothCompanyIdentiferProctorAndGamble BluetoothCompanyIdentifers = 220
-	KBluetoothCompanyIdentiferHosiden BluetoothCompanyIdentifers = 221
-	KBluetoothCompanyIdentiferMusik BluetoothCompanyIdentifers = 222
-	KBluetoothCompanyIdentiferMisfitWearables BluetoothCompanyIdentifers = 223
-	KBluetoothCompanyIdentiferGoogle BluetoothCompanyIdentifers = 224
-	KBluetoothCompanyIdentiferDanlers BluetoothCompanyIdentifers = 225
-	KBluetoothCompanyIdentiferSemilink BluetoothCompanyIdentifers = 226
-	KBluetoothCompanyIdentiferInMusicBrands BluetoothCompanyIdentifers = 227
-	KBluetoothCompanyIdentiferLSResearch BluetoothCompanyIdentifers = 228
-	KBluetoothCompanyIdentiferEdenSoftwareConsultants BluetoothCompanyIdentifers = 229
-	KBluetoothCompanyIdentiferFreshtemp BluetoothCompanyIdentifers = 230
-	KBluetoothCompanyIdentiferKSTechnologies BluetoothCompanyIdentifers = 231
-	KBluetoothCompanyIdentiferACTSTechnologies BluetoothCompanyIdentifers = 232
-	KBluetoothCompanyIdentiferVtrackSystems BluetoothCompanyIdentifers = 233
-	KBluetoothCompanyIdentiferNielsenKellerman BluetoothCompanyIdentifers = 234
-	KBluetoothCompanyIdentiferServerTechnology BluetoothCompanyIdentifers = 235
-	KBluetoothCompanyIdentiferBioResearchAssociates BluetoothCompanyIdentifers = 236
-	KBluetoothCompanyIdentiferJollyLogic BluetoothCompanyIdentifers = 237
-	KBluetoothCompanyIdentiferAboveAverageOutcomes BluetoothCompanyIdentifers = 238
-	KBluetoothCompanyIdentiferBitsplitters BluetoothCompanyIdentifers = 239
-	KBluetoothCompanyIdentiferPayPal BluetoothCompanyIdentifers = 240
-	KBluetoothCompanyIdentiferWitronTechnology BluetoothCompanyIdentifers = 241
-	KBluetoothCompanyIdentiferMorseProject BluetoothCompanyIdentifers = 242
-	KBluetoothCompanyIdentiferKentDisplays BluetoothCompanyIdentifers = 243
-	KBluetoothCompanyIdentiferNautilus BluetoothCompanyIdentifers = 244
-	KBluetoothCompanyIdentiferSmartifier BluetoothCompanyIdentifers = 245
-	KBluetoothCompanyIdentiferElcometer BluetoothCompanyIdentifers = 246
-	KBluetoothCompanyIdentiferVSNTechnologies BluetoothCompanyIdentifers = 247
-	KBluetoothCompanyIdentiferAceUni BluetoothCompanyIdentifers = 248
-	KBluetoothCompanyIdentiferStickNFind BluetoothCompanyIdentifers = 249
-	KBluetoothCompanyIdentiferCrystalCode BluetoothCompanyIdentifers = 250
-	KBluetoothCompanyIdentiferKOUKAMM BluetoothCompanyIdentifers = 251
-	KBluetoothCompanyIdentiferDelphi BluetoothCompanyIdentifers = 252
-	KBluetoothCompanyIdentiferValenceTech BluetoothCompanyIdentifers = 253
-	KBluetoothCompanyIdentiferStanleyBlackAndDecker BluetoothCompanyIdentifers = 254
-	KBluetoothCompanyIdentiferTypeProducts BluetoothCompanyIdentifers = 255
-	KBluetoothCompanyIdentiferTomTomInternational BluetoothCompanyIdentifers = 256
-	KBluetoothCompanyIdentiferFuGoo BluetoothCompanyIdentifers = 257
-	KBluetoothCompanyIdentiferKeiser BluetoothCompanyIdentifers = 258
-	KBluetoothCompanyIdentiferBangAndOlufson BluetoothCompanyIdentifers = 259
-	KBluetoothCompanyIdentiferPLUSLocationSystems BluetoothCompanyIdentifers = 260
-	KBluetoothCompanyIdentiferUbiquitousComputingTechnology BluetoothCompanyIdentifers = 261
-	KBluetoothCompanyIdentiferInnovativeYachtterSolutions BluetoothCompanyIdentifers = 262
-	KBluetoothCompanyIdentiferWilliamDemantHolding BluetoothCompanyIdentifers = 263
-	KBluetoothCompanyIdentiferInteropIdentifier BluetoothCompanyIdentifers = 65535
+	KBluetoothCompanyIdentiferColorfy                              BluetoothCompanyIdentifers = 156
+	KBluetoothCompanyIdentiferGeoforce                             BluetoothCompanyIdentifers = 157
+	KBluetoothCompanyIdentiferBose                                 BluetoothCompanyIdentifers = 158
+	KBluetoothCompanyIdentiferSuuntoOy                             BluetoothCompanyIdentifers = 159
+	KBluetoothCompanyIdentiferKensingtonComputerProductsGroup      BluetoothCompanyIdentifers = 160
+	KBluetoothCompanyIdentiferSRMedizinelektronik                  BluetoothCompanyIdentifers = 161
+	KBluetoothCompanyIdentiferVertu                                BluetoothCompanyIdentifers = 162
+	KBluetoothCompanyIdentiferMetaWatch                            BluetoothCompanyIdentifers = 163
+	KBluetoothCompanyIdentiferLinak                                BluetoothCompanyIdentifers = 164
+	KBluetoothCompanyIdentiferOTLDynamics                          BluetoothCompanyIdentifers = 165
+	KBluetoothCompanyIdentiferPandaOcean                           BluetoothCompanyIdentifers = 166
+	KBluetoothCompanyIdentiferVisteon                              BluetoothCompanyIdentifers = 167
+	KBluetoothCompanyIdentiferARPDevicesUnlimited                  BluetoothCompanyIdentifers = 168
+	KBluetoothCompanyIdentiferMagnetiMarelli                       BluetoothCompanyIdentifers = 169
+	KBluetoothCompanyIdentiferCaenRFID                             BluetoothCompanyIdentifers = 170
+	KBluetoothCompanyIdentiferIngenieurSystemgruppeZahn            BluetoothCompanyIdentifers = 171
+	KBluetoothCompanyIdentiferGreenThrottleGames                   BluetoothCompanyIdentifers = 172
+	KBluetoothCompanyIdentiferPeterSystemtechnik                   BluetoothCompanyIdentifers = 173
+	KBluetoothCompanyIdentiferOmegawave                            BluetoothCompanyIdentifers = 174
+	KBluetoothCompanyIdentiferCinetix                              BluetoothCompanyIdentifers = 175
+	KBluetoothCompanyIdentiferPassifSemiconductor                  BluetoothCompanyIdentifers = 176
+	KBluetoothCompanyIdentiferSarisCyclingGroup                    BluetoothCompanyIdentifers = 177
+	KBluetoothCompanyIdentiferBekey                                BluetoothCompanyIdentifers = 178
+	KBluetoothCompanyIdentiferClarinoxTechnologies                 BluetoothCompanyIdentifers = 179
+	KBluetoothCompanyIdentiferBDETechnology                        BluetoothCompanyIdentifers = 180
+	KBluetoothCompanyIdentiferSwirlNetworks                        BluetoothCompanyIdentifers = 181
+	KBluetoothCompanyIdentiferMesoInternational                    BluetoothCompanyIdentifers = 182
+	KBluetoothCompanyIdentiferTreLab                               BluetoothCompanyIdentifers = 183
+	KBluetoothCompanyIdentiferQualcommInnovationCenter             BluetoothCompanyIdentifers = 184
+	KBluetoothCompanyIdentiferJohnsonControls                      BluetoothCompanyIdentifers = 185
+	KBluetoothCompanyIdentiferStarkeyLaboratories                  BluetoothCompanyIdentifers = 186
+	KBluetoothCompanyIdentiferSPowerElectronics                    BluetoothCompanyIdentifers = 187
+	KBluetoothCompanyIdentiferAceSensor                            BluetoothCompanyIdentifers = 188
+	KBluetoothCompanyIdentiferAplix                                BluetoothCompanyIdentifers = 189
+	KBluetoothCompanyIdentiferAAMPofAmerica                        BluetoothCompanyIdentifers = 190
+	KBluetoothCompanyIdentiferStalmartTechnology                   BluetoothCompanyIdentifers = 191
+	KBluetoothCompanyIdentiferAMICCOMElectronics                   BluetoothCompanyIdentifers = 192
+	KBluetoothCompanyIdentiferShenzhenExcelsecuDataTechnology      BluetoothCompanyIdentifers = 193
+	KBluetoothCompanyIdentiferGeneq                                BluetoothCompanyIdentifers = 194
+	KBluetoothCompanyIdentiferAdidas                               BluetoothCompanyIdentifers = 195
+	KBluetoothCompanyIdentiferLGElectronics                        BluetoothCompanyIdentifers = 196
+	KBluetoothCompanyIdentiferOnsetComputer                        BluetoothCompanyIdentifers = 197
+	KBluetoothCompanyIdentiferSelflyBV                             BluetoothCompanyIdentifers = 198
+	KBluetoothCompanyIdentiferQuupa                                BluetoothCompanyIdentifers = 199
+	KBluetoothCompanyIdentiferGeLo                                 BluetoothCompanyIdentifers = 200
+	KBluetoothCompanyIdentiferEvluma                               BluetoothCompanyIdentifers = 201
+	KBluetoothCompanyIdentiferMC10                                 BluetoothCompanyIdentifers = 202
+	KBluetoothCompanyIdentiferBinauricSE                           BluetoothCompanyIdentifers = 203
+	KBluetoothCompanyIdentiferBeatsElectronics                     BluetoothCompanyIdentifers = 204
+	KBluetoothCompanyIdentiferMicrochipTechnology                  BluetoothCompanyIdentifers = 205
+	KBluetoothCompanyIdentiferElgatoSystems                        BluetoothCompanyIdentifers = 206
+	KBluetoothCompanyIdentiferARCHOS                               BluetoothCompanyIdentifers = 207
+	KBluetoothCompanyIdentiferDexcom                               BluetoothCompanyIdentifers = 208
+	KBluetoothCompanyIdentiferPolarElectroEurope                   BluetoothCompanyIdentifers = 209
+	KBluetoothCompanyIdentiferDialogSemiconductor                  BluetoothCompanyIdentifers = 210
+	KBluetoothCompanyIdentiferTaixingbangTechnology                BluetoothCompanyIdentifers = 211
+	KBluetoothCompanyIdentiferKawantech                            BluetoothCompanyIdentifers = 212
+	KBluetoothCompanyIdentiferAustcoCommunicationsSystems          BluetoothCompanyIdentifers = 213
+	KBluetoothCompanyIdentiferTimexGroup                           BluetoothCompanyIdentifers = 214
+	KBluetoothCompanyIdentiferQualcommTechnologies                 BluetoothCompanyIdentifers = 215
+	KBluetoothCompanyIdentiferQualcommConnectedExperiences         BluetoothCompanyIdentifers = 216
+	KBluetoothCompanyIdentiferVoyetraTurtleBeach                   BluetoothCompanyIdentifers = 217
+	KBluetoothCompanyIdentifertxtrGMBH                             BluetoothCompanyIdentifers = 218
+	KBluetoothCompanyIdentiferBiosentronics                        BluetoothCompanyIdentifers = 219
+	KBluetoothCompanyIdentiferProctorAndGamble                     BluetoothCompanyIdentifers = 220
+	KBluetoothCompanyIdentiferHosiden                              BluetoothCompanyIdentifers = 221
+	KBluetoothCompanyIdentiferMusik                                BluetoothCompanyIdentifers = 222
+	KBluetoothCompanyIdentiferMisfitWearables                      BluetoothCompanyIdentifers = 223
+	KBluetoothCompanyIdentiferGoogle                               BluetoothCompanyIdentifers = 224
+	KBluetoothCompanyIdentiferDanlers                              BluetoothCompanyIdentifers = 225
+	KBluetoothCompanyIdentiferSemilink                             BluetoothCompanyIdentifers = 226
+	KBluetoothCompanyIdentiferInMusicBrands                        BluetoothCompanyIdentifers = 227
+	KBluetoothCompanyIdentiferLSResearch                           BluetoothCompanyIdentifers = 228
+	KBluetoothCompanyIdentiferEdenSoftwareConsultants              BluetoothCompanyIdentifers = 229
+	KBluetoothCompanyIdentiferFreshtemp                            BluetoothCompanyIdentifers = 230
+	KBluetoothCompanyIdentiferKSTechnologies                       BluetoothCompanyIdentifers = 231
+	KBluetoothCompanyIdentiferACTSTechnologies                     BluetoothCompanyIdentifers = 232
+	KBluetoothCompanyIdentiferVtrackSystems                        BluetoothCompanyIdentifers = 233
+	KBluetoothCompanyIdentiferNielsenKellerman                     BluetoothCompanyIdentifers = 234
+	KBluetoothCompanyIdentiferServerTechnology                     BluetoothCompanyIdentifers = 235
+	KBluetoothCompanyIdentiferBioResearchAssociates                BluetoothCompanyIdentifers = 236
+	KBluetoothCompanyIdentiferJollyLogic                           BluetoothCompanyIdentifers = 237
+	KBluetoothCompanyIdentiferAboveAverageOutcomes                 BluetoothCompanyIdentifers = 238
+	KBluetoothCompanyIdentiferBitsplitters                         BluetoothCompanyIdentifers = 239
+	KBluetoothCompanyIdentiferPayPal                               BluetoothCompanyIdentifers = 240
+	KBluetoothCompanyIdentiferWitronTechnology                     BluetoothCompanyIdentifers = 241
+	KBluetoothCompanyIdentiferMorseProject                         BluetoothCompanyIdentifers = 242
+	KBluetoothCompanyIdentiferKentDisplays                         BluetoothCompanyIdentifers = 243
+	KBluetoothCompanyIdentiferNautilus                             BluetoothCompanyIdentifers = 244
+	KBluetoothCompanyIdentiferSmartifier                           BluetoothCompanyIdentifers = 245
+	KBluetoothCompanyIdentiferElcometer                            BluetoothCompanyIdentifers = 246
+	KBluetoothCompanyIdentiferVSNTechnologies                      BluetoothCompanyIdentifers = 247
+	KBluetoothCompanyIdentiferAceUni                               BluetoothCompanyIdentifers = 248
+	KBluetoothCompanyIdentiferStickNFind                           BluetoothCompanyIdentifers = 249
+	KBluetoothCompanyIdentiferCrystalCode                          BluetoothCompanyIdentifers = 250
+	KBluetoothCompanyIdentiferKOUKAMM                              BluetoothCompanyIdentifers = 251
+	KBluetoothCompanyIdentiferDelphi                               BluetoothCompanyIdentifers = 252
+	KBluetoothCompanyIdentiferValenceTech                          BluetoothCompanyIdentifers = 253
+	KBluetoothCompanyIdentiferStanleyBlackAndDecker                BluetoothCompanyIdentifers = 254
+	KBluetoothCompanyIdentiferTypeProducts                         BluetoothCompanyIdentifers = 255
+	KBluetoothCompanyIdentiferTomTomInternational                  BluetoothCompanyIdentifers = 256
+	KBluetoothCompanyIdentiferFuGoo                                BluetoothCompanyIdentifers = 257
+	KBluetoothCompanyIdentiferKeiser                               BluetoothCompanyIdentifers = 258
+	KBluetoothCompanyIdentiferBangAndOlufson                       BluetoothCompanyIdentifers = 259
+	KBluetoothCompanyIdentiferPLUSLocationSystems                  BluetoothCompanyIdentifers = 260
+	KBluetoothCompanyIdentiferUbiquitousComputingTechnology        BluetoothCompanyIdentifers = 261
+	KBluetoothCompanyIdentiferInnovativeYachtterSolutions          BluetoothCompanyIdentifers = 262
+	KBluetoothCompanyIdentiferWilliamDemantHolding                 BluetoothCompanyIdentifers = 263
+	KBluetoothCompanyIdentiferInteropIdentifier                    BluetoothCompanyIdentifers = 65535
 )
 
 func (e BluetoothCompanyIdentifers) String() string {
@@ -1042,74 +1042,74 @@ func (e BluetoothCompanyIdentifers) String() string {
 type BluetoothFeatureBits int64
 
 const (
-	KBluetoothFeatureThreeSlotPackets BluetoothFeatureBits = 1
-	KBluetoothFeatureFiveSlotPackets BluetoothFeatureBits = 2
-	KBluetoothFeatureEncryption BluetoothFeatureBits = 4
-	KBluetoothFeatureSlotOffset BluetoothFeatureBits = 8
-	KBluetoothFeatureTimingAccuracy BluetoothFeatureBits = 16
-	KBluetoothFeatureSwitchRoles BluetoothFeatureBits = 32
-	KBluetoothFeatureHoldMode BluetoothFeatureBits = 64
-	KBluetoothFeatureSniffMode BluetoothFeatureBits = 128
-	KBluetoothFeatureParkMode BluetoothFeatureBits = 1
-	KBluetoothFeatureRSSI BluetoothFeatureBits = 2
-	KBluetoothFeaturePowerControlRequests BluetoothFeatureBits = 2
-	KBluetoothFeatureChannelQuality BluetoothFeatureBits = 4
-	KBluetoothFeatureSCOLink BluetoothFeatureBits = 8
-	KBluetoothFeatureHV2Packets BluetoothFeatureBits = 16
-	KBluetoothFeatureHV3Packets BluetoothFeatureBits = 32
-	KBluetoothFeatureULawLog BluetoothFeatureBits = 64
-	KBluetoothFeatureALawLog BluetoothFeatureBits = 128
-	KBluetoothFeatureCVSD BluetoothFeatureBits = 1
-	KBluetoothFeaturePagingScheme BluetoothFeatureBits = 2
-	KBluetoothFeaturePowerControl BluetoothFeatureBits = 4
-	KBluetoothFeatureTransparentSCOData BluetoothFeatureBits = 8
-	KBluetoothFeatureFlowControlLagBit0 BluetoothFeatureBits = 16
-	KBluetoothFeatureFlowControlLagBit1 BluetoothFeatureBits = 32
-	KBluetoothFeatureFlowControlLagBit2 BluetoothFeatureBits = 64
-	KBluetoothFeatureBroadcastEncryption BluetoothFeatureBits = 128
-	KBluetoothFeatureScatterMode BluetoothFeatureBits = 1
-	KBluetoothFeatureEnhancedDataRateACL2MbpsMode BluetoothFeatureBits = 2
-	KBluetoothFeatureEnhancedDataRateACL3MbpsMode BluetoothFeatureBits = 4
-	KBluetoothFeatureEnhancedInquiryScan BluetoothFeatureBits = 8
-	KBluetoothFeatureInterlacedInquiryScan BluetoothFeatureBits = 16
-	KBluetoothFeatureInterlacedPageScan BluetoothFeatureBits = 32
-	KBluetoothFeatureRSSIWithInquiryResult BluetoothFeatureBits = 64
-	KBluetoothFeatureExtendedSCOLink BluetoothFeatureBits = 128
-	KBluetoothFeatureEV4Packets BluetoothFeatureBits = 1
-	KBluetoothFeatureEV5Packets BluetoothFeatureBits = 2
-	KBluetoothFeatureAbsenceMasks BluetoothFeatureBits = 4
-	KBluetoothFeatureAFHCapablePeripheral BluetoothFeatureBits = 8
-	KBluetoothFeatureAFHClassificationPeripheral BluetoothFeatureBits = 16
-	KBluetoothFeatureAliasAuhentication BluetoothFeatureBits = 32
-	KBluetoothFeatureLESupportedController BluetoothFeatureBits = 64
-	KBluetoothFeature3SlotEnhancedDataRateACLPackets BluetoothFeatureBits = 128
-	KBluetoothFeatureAFHCapableSlave BluetoothFeatureBits = 8
-	KBluetoothFeatureAFHClassificationSlave BluetoothFeatureBits = 16
-	KBluetoothFeature5SlotEnhancedDataRateACLPackets BluetoothFeatureBits = 1
-	KBluetoothFeatureSniffSubrating BluetoothFeatureBits = 2
-	KBluetoothFeaturePauseEncryption BluetoothFeatureBits = 4
-	KBluetoothFeatureAFHCapableMaster BluetoothFeatureBits = 8
-	KBluetoothFeatureAFHClassificationMaster BluetoothFeatureBits = 16
-	KBluetoothFeatureEnhancedDataRateeSCO2MbpsMode BluetoothFeatureBits = 32
-	KBluetoothFeatureEnhancedDataRateeSCO3MbpsMode BluetoothFeatureBits = 64
-	KBluetoothFeature3SlotEnhancedDataRateeSCOPackets BluetoothFeatureBits = 128
-	KBluetoothFeatureExtendedInquiryResponse BluetoothFeatureBits = 1
-	KBluetoothFeatureSecureSimplePairing BluetoothFeatureBits = 8
-	KBluetoothFeatureEncapsulatedPDU BluetoothFeatureBits = 16
-	KBluetoothFeatureErroneousDataReporting BluetoothFeatureBits = 32
-	KBluetoothFeatureNonFlushablePacketBoundaryFlag BluetoothFeatureBits = 64
-	KBluetoothFeatureLinkSupervisionTimeoutChangedEvent BluetoothFeatureBits = 1
-	KBluetoothFeatureInquiryTransmissionPowerLevel BluetoothFeatureBits = 2
-	KBluetoothFeatureExtendedFeatures BluetoothFeatureBits = 128
-	KBluetoothExtendedFeatureSimpleSecurePairingHostMode BluetoothFeatureBits = 1
-	KBluetoothExtendedFeatureLESupportedHostMode BluetoothFeatureBits = 2
-	KBluetoothExtendedFeatureLEAndBREDRToSameDeviceHostMode BluetoothFeatureBits = 4
-	KBluetoothExtendedFeatureSecureConnectionsHostMode BluetoothFeatureBits = 8
+	KBluetoothFeatureThreeSlotPackets                           BluetoothFeatureBits = 1
+	KBluetoothFeatureFiveSlotPackets                            BluetoothFeatureBits = 2
+	KBluetoothFeatureEncryption                                 BluetoothFeatureBits = 4
+	KBluetoothFeatureSlotOffset                                 BluetoothFeatureBits = 8
+	KBluetoothFeatureTimingAccuracy                             BluetoothFeatureBits = 16
+	KBluetoothFeatureSwitchRoles                                BluetoothFeatureBits = 32
+	KBluetoothFeatureHoldMode                                   BluetoothFeatureBits = 64
+	KBluetoothFeatureSniffMode                                  BluetoothFeatureBits = 128
+	KBluetoothFeatureParkMode                                   BluetoothFeatureBits = 1
+	KBluetoothFeatureRSSI                                       BluetoothFeatureBits = 2
+	KBluetoothFeaturePowerControlRequests                       BluetoothFeatureBits = 2
+	KBluetoothFeatureChannelQuality                             BluetoothFeatureBits = 4
+	KBluetoothFeatureSCOLink                                    BluetoothFeatureBits = 8
+	KBluetoothFeatureHV2Packets                                 BluetoothFeatureBits = 16
+	KBluetoothFeatureHV3Packets                                 BluetoothFeatureBits = 32
+	KBluetoothFeatureULawLog                                    BluetoothFeatureBits = 64
+	KBluetoothFeatureALawLog                                    BluetoothFeatureBits = 128
+	KBluetoothFeatureCVSD                                       BluetoothFeatureBits = 1
+	KBluetoothFeaturePagingScheme                               BluetoothFeatureBits = 2
+	KBluetoothFeaturePowerControl                               BluetoothFeatureBits = 4
+	KBluetoothFeatureTransparentSCOData                         BluetoothFeatureBits = 8
+	KBluetoothFeatureFlowControlLagBit0                         BluetoothFeatureBits = 16
+	KBluetoothFeatureFlowControlLagBit1                         BluetoothFeatureBits = 32
+	KBluetoothFeatureFlowControlLagBit2                         BluetoothFeatureBits = 64
+	KBluetoothFeatureBroadcastEncryption                        BluetoothFeatureBits = 128
+	KBluetoothFeatureScatterMode                                BluetoothFeatureBits = 1
+	KBluetoothFeatureEnhancedDataRateACL2MbpsMode               BluetoothFeatureBits = 2
+	KBluetoothFeatureEnhancedDataRateACL3MbpsMode               BluetoothFeatureBits = 4
+	KBluetoothFeatureEnhancedInquiryScan                        BluetoothFeatureBits = 8
+	KBluetoothFeatureInterlacedInquiryScan                      BluetoothFeatureBits = 16
+	KBluetoothFeatureInterlacedPageScan                         BluetoothFeatureBits = 32
+	KBluetoothFeatureRSSIWithInquiryResult                      BluetoothFeatureBits = 64
+	KBluetoothFeatureExtendedSCOLink                            BluetoothFeatureBits = 128
+	KBluetoothFeatureEV4Packets                                 BluetoothFeatureBits = 1
+	KBluetoothFeatureEV5Packets                                 BluetoothFeatureBits = 2
+	KBluetoothFeatureAbsenceMasks                               BluetoothFeatureBits = 4
+	KBluetoothFeatureAFHCapablePeripheral                       BluetoothFeatureBits = 8
+	KBluetoothFeatureAFHClassificationPeripheral                BluetoothFeatureBits = 16
+	KBluetoothFeatureAliasAuhentication                         BluetoothFeatureBits = 32
+	KBluetoothFeatureLESupportedController                      BluetoothFeatureBits = 64
+	KBluetoothFeature3SlotEnhancedDataRateACLPackets            BluetoothFeatureBits = 128
+	KBluetoothFeatureAFHCapableSlave                            BluetoothFeatureBits = 8
+	KBluetoothFeatureAFHClassificationSlave                     BluetoothFeatureBits = 16
+	KBluetoothFeature5SlotEnhancedDataRateACLPackets            BluetoothFeatureBits = 1
+	KBluetoothFeatureSniffSubrating                             BluetoothFeatureBits = 2
+	KBluetoothFeaturePauseEncryption                            BluetoothFeatureBits = 4
+	KBluetoothFeatureAFHCapableMaster                           BluetoothFeatureBits = 8
+	KBluetoothFeatureAFHClassificationMaster                    BluetoothFeatureBits = 16
+	KBluetoothFeatureEnhancedDataRateeSCO2MbpsMode              BluetoothFeatureBits = 32
+	KBluetoothFeatureEnhancedDataRateeSCO3MbpsMode              BluetoothFeatureBits = 64
+	KBluetoothFeature3SlotEnhancedDataRateeSCOPackets           BluetoothFeatureBits = 128
+	KBluetoothFeatureExtendedInquiryResponse                    BluetoothFeatureBits = 1
+	KBluetoothFeatureSecureSimplePairing                        BluetoothFeatureBits = 8
+	KBluetoothFeatureEncapsulatedPDU                            BluetoothFeatureBits = 16
+	KBluetoothFeatureErroneousDataReporting                     BluetoothFeatureBits = 32
+	KBluetoothFeatureNonFlushablePacketBoundaryFlag             BluetoothFeatureBits = 64
+	KBluetoothFeatureLinkSupervisionTimeoutChangedEvent         BluetoothFeatureBits = 1
+	KBluetoothFeatureInquiryTransmissionPowerLevel              BluetoothFeatureBits = 2
+	KBluetoothFeatureExtendedFeatures                           BluetoothFeatureBits = 128
+	KBluetoothExtendedFeatureSimpleSecurePairingHostMode        BluetoothFeatureBits = 1
+	KBluetoothExtendedFeatureLESupportedHostMode                BluetoothFeatureBits = 2
+	KBluetoothExtendedFeatureLEAndBREDRToSameDeviceHostMode     BluetoothFeatureBits = 4
+	KBluetoothExtendedFeatureSecureConnectionsHostMode          BluetoothFeatureBits = 8
 	KBluetoothExtendedFeatureSecureConnectionsControllerSupport BluetoothFeatureBits = 1
-	KBluetoothExtendedFeaturePing BluetoothFeatureBits = 2
-	KBluetoothExtendedFeatureReserved BluetoothFeatureBits = 4
-	KBluetoothExtendedFeatureTrainNudging BluetoothFeatureBits = 8
-	KBluetoothExtendedFeatureSlotAvailabilityMask BluetoothFeatureBits = 16
+	KBluetoothExtendedFeaturePing                               BluetoothFeatureBits = 2
+	KBluetoothExtendedFeatureReserved                           BluetoothFeatureBits = 4
+	KBluetoothExtendedFeatureTrainNudging                       BluetoothFeatureBits = 8
+	KBluetoothExtendedFeatureSlotAvailabilityMask               BluetoothFeatureBits = 16
 )
 
 func (e BluetoothFeatureBits) String() string {
@@ -1139,7 +1139,7 @@ type BluetoothHCIAFHChannelAssessmentModes int64
 
 const (
 	KAFHChannelAssessmentModeDisabled BluetoothHCIAFHChannelAssessmentModes = 0
-	KAFHChannelAssessmentModeEnabled BluetoothHCIAFHChannelAssessmentModes = 1
+	KAFHChannelAssessmentModeEnabled  BluetoothHCIAFHChannelAssessmentModes = 1
 )
 
 func (e BluetoothHCIAFHChannelAssessmentModes) String() string {
@@ -1157,7 +1157,7 @@ type BluetoothHCIAuthentionEnableModes int64
 
 const (
 	KAuthenticationDisabled BluetoothHCIAuthentionEnableModes = 0
-	KAuthenticationEnabled BluetoothHCIAuthentionEnableModes = 1
+	KAuthenticationEnabled  BluetoothHCIAuthentionEnableModes = 1
 )
 
 func (e BluetoothHCIAuthentionEnableModes) String() string {
@@ -1174,10 +1174,10 @@ func (e BluetoothHCIAuthentionEnableModes) String() string {
 type BluetoothHCIConnectionModes int64
 
 const (
-	KConnectionActiveMode BluetoothHCIConnectionModes = 0
-	KConnectionHoldMode BluetoothHCIConnectionModes = 1
-	KConnectionSniffMode BluetoothHCIConnectionModes = 2
-	KConnectionParkMode BluetoothHCIConnectionModes = 3
+	KConnectionActiveMode               BluetoothHCIConnectionModes = 0
+	KConnectionHoldMode                 BluetoothHCIConnectionModes = 1
+	KConnectionSniffMode                BluetoothHCIConnectionModes = 2
+	KConnectionParkMode                 BluetoothHCIConnectionModes = 3
 	KConnectionModeReservedForFutureUse BluetoothHCIConnectionModes = 4
 )
 
@@ -1202,7 +1202,7 @@ type BluetoothHCIDeleteStoredLinkKeyFlags int64
 
 const (
 	KDeleteKeyForSpecifiedDeviceOnly BluetoothHCIDeleteStoredLinkKeyFlags = 0
-	KDeleteAllStoredLinkKeys BluetoothHCIDeleteStoredLinkKeyFlags = 1
+	KDeleteAllStoredLinkKeys         BluetoothHCIDeleteStoredLinkKeyFlags = 1
 )
 
 func (e BluetoothHCIDeleteStoredLinkKeyFlags) String() string {
@@ -1219,8 +1219,8 @@ func (e BluetoothHCIDeleteStoredLinkKeyFlags) String() string {
 type BluetoothHCIEncryptionModes int64
 
 const (
-	KEncryptionDisabled BluetoothHCIEncryptionModes = 0
-	KEncryptionOnlyForPointToPointPackets BluetoothHCIEncryptionModes = 1
+	KEncryptionDisabled                               BluetoothHCIEncryptionModes = 0
+	KEncryptionOnlyForPointToPointPackets             BluetoothHCIEncryptionModes = 1
 	KEncryptionForBothPointToPointAndBroadcastPackets BluetoothHCIEncryptionModes = 2
 )
 
@@ -1240,46 +1240,46 @@ func (e BluetoothHCIEncryptionModes) String() string {
 type BluetoothHCIExtendedInquiryResponseDataTypes int64
 
 const (
-	KBluetoothHCIExtendedInquiryResponseDataTypeFlags BluetoothHCIExtendedInquiryResponseDataTypes = 1
-	KBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsWithMoreAvailable BluetoothHCIExtendedInquiryResponseDataTypes = 2
-	KBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsCompleteList BluetoothHCIExtendedInquiryResponseDataTypes = 3
-	KBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsWithMoreAvailable BluetoothHCIExtendedInquiryResponseDataTypes = 4
-	KBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsCompleteList BluetoothHCIExtendedInquiryResponseDataTypes = 5
+	KBluetoothHCIExtendedInquiryResponseDataTypeFlags                                    BluetoothHCIExtendedInquiryResponseDataTypes = 1
+	KBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsWithMoreAvailable  BluetoothHCIExtendedInquiryResponseDataTypes = 2
+	KBluetoothHCIExtendedInquiryResponseDataType16BitServiceClassUUIDsCompleteList       BluetoothHCIExtendedInquiryResponseDataTypes = 3
+	KBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsWithMoreAvailable  BluetoothHCIExtendedInquiryResponseDataTypes = 4
+	KBluetoothHCIExtendedInquiryResponseDataType32BitServiceClassUUIDsCompleteList       BluetoothHCIExtendedInquiryResponseDataTypes = 5
 	KBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsWithMoreAvailable BluetoothHCIExtendedInquiryResponseDataTypes = 6
-	KBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsCompleteList BluetoothHCIExtendedInquiryResponseDataTypes = 7
-	KBluetoothHCIExtendedInquiryResponseDataTypeShortenedLocalName BluetoothHCIExtendedInquiryResponseDataTypes = 8
-	KBluetoothHCIExtendedInquiryResponseDataTypeCompleteLocalName BluetoothHCIExtendedInquiryResponseDataTypes = 9
-	KBluetoothHCIExtendedInquiryResponseDataTypeTransmitPowerLevel BluetoothHCIExtendedInquiryResponseDataTypes = 10
-	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBClassOfDevice BluetoothHCIExtendedInquiryResponseDataTypes = 13
-	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingHashC BluetoothHCIExtendedInquiryResponseDataTypes = 14
-	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingRandomizerR BluetoothHCIExtendedInquiryResponseDataTypes = 15
-	KBluetoothHCIExtendedInquiryResponseDataTypeDeviceID BluetoothHCIExtendedInquiryResponseDataTypes = 16
-	KBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerTKValue BluetoothHCIExtendedInquiryResponseDataTypes = 16
-	KBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerOOBFlags BluetoothHCIExtendedInquiryResponseDataTypes = 17
-	KBluetoothHCIExtendedInquiryResponseDataTypePeripheralConnectionIntervalRange BluetoothHCIExtendedInquiryResponseDataTypes = 18
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation16BitUUIDs BluetoothHCIExtendedInquiryResponseDataTypes = 20
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation128BitUUIDs BluetoothHCIExtendedInquiryResponseDataTypes = 21
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData BluetoothHCIExtendedInquiryResponseDataTypes = 22
-	KBluetoothHCIExtendedInquiryResponseDataTypePublicTargetAddress BluetoothHCIExtendedInquiryResponseDataTypes = 23
-	KBluetoothHCIExtendedInquiryResponseDataTypeRandomTargetAddress BluetoothHCIExtendedInquiryResponseDataTypes = 24
-	KBluetoothHCIExtendedInquiryResponseDataTypeAppearance BluetoothHCIExtendedInquiryResponseDataTypes = 25
-	KBluetoothHCIExtendedInquiryResponseDataTypeAdvertisingInterval BluetoothHCIExtendedInquiryResponseDataTypes = 26
-	KBluetoothHCIExtendedInquiryResponseDataTypeLEBluetoothDeviceAddress BluetoothHCIExtendedInquiryResponseDataTypes = 27
-	KBluetoothHCIExtendedInquiryResponseDataTypeLERole BluetoothHCIExtendedInquiryResponseDataTypes = 28
-	KBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingHash BluetoothHCIExtendedInquiryResponseDataTypes = 29
-	KBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingRandomizer BluetoothHCIExtendedInquiryResponseDataTypes = 30
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation32BitUUIDs BluetoothHCIExtendedInquiryResponseDataTypes = 31
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData32BitUUID BluetoothHCIExtendedInquiryResponseDataTypes = 32
-	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData128BitUUID BluetoothHCIExtendedInquiryResponseDataTypes = 33
-	KBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsConfirmationValue BluetoothHCIExtendedInquiryResponseDataTypes = 34
-	KBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsRandomValue BluetoothHCIExtendedInquiryResponseDataTypes = 35
-	KBluetoothHCIExtendedInquiryResponseDataTypeURI BluetoothHCIExtendedInquiryResponseDataTypes = 36
-	KBluetoothHCIExtendedInquiryResponseDataTypeIndoorPositioning BluetoothHCIExtendedInquiryResponseDataTypes = 37
-	KBluetoothHCIExtendedInquiryResponseDataTypeTransportDiscoveryData BluetoothHCIExtendedInquiryResponseDataTypes = 38
-	KBluetoothHCIExtendedInquiryResponseDataTypeCsisRsiData BluetoothHCIExtendedInquiryResponseDataTypes = 46
-	KBluetoothHCIExtendedInquiryResponseDataType3DInformationData BluetoothHCIExtendedInquiryResponseDataTypes = 61
-	KBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData BluetoothHCIExtendedInquiryResponseDataTypes = 255
-	KBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange BluetoothHCIExtendedInquiryResponseDataTypes = 18
+	KBluetoothHCIExtendedInquiryResponseDataType128BitServiceClassUUIDsCompleteList      BluetoothHCIExtendedInquiryResponseDataTypes = 7
+	KBluetoothHCIExtendedInquiryResponseDataTypeShortenedLocalName                       BluetoothHCIExtendedInquiryResponseDataTypes = 8
+	KBluetoothHCIExtendedInquiryResponseDataTypeCompleteLocalName                        BluetoothHCIExtendedInquiryResponseDataTypes = 9
+	KBluetoothHCIExtendedInquiryResponseDataTypeTransmitPowerLevel                       BluetoothHCIExtendedInquiryResponseDataTypes = 10
+	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBClassOfDevice                      BluetoothHCIExtendedInquiryResponseDataTypes = 13
+	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingHashC                 BluetoothHCIExtendedInquiryResponseDataTypes = 14
+	KBluetoothHCIExtendedInquiryResponseDataTypeSSPOOBSimplePairingRandomizerR           BluetoothHCIExtendedInquiryResponseDataTypes = 15
+	KBluetoothHCIExtendedInquiryResponseDataTypeDeviceID                                 BluetoothHCIExtendedInquiryResponseDataTypes = 16
+	KBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerTKValue                   BluetoothHCIExtendedInquiryResponseDataTypes = 16
+	KBluetoothHCIExtendedInquiryResponseDataTypeSecurityManagerOOBFlags                  BluetoothHCIExtendedInquiryResponseDataTypes = 17
+	KBluetoothHCIExtendedInquiryResponseDataTypePeripheralConnectionIntervalRange        BluetoothHCIExtendedInquiryResponseDataTypes = 18
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation16BitUUIDs            BluetoothHCIExtendedInquiryResponseDataTypes = 20
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation128BitUUIDs           BluetoothHCIExtendedInquiryResponseDataTypes = 21
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData                              BluetoothHCIExtendedInquiryResponseDataTypes = 22
+	KBluetoothHCIExtendedInquiryResponseDataTypePublicTargetAddress                      BluetoothHCIExtendedInquiryResponseDataTypes = 23
+	KBluetoothHCIExtendedInquiryResponseDataTypeRandomTargetAddress                      BluetoothHCIExtendedInquiryResponseDataTypes = 24
+	KBluetoothHCIExtendedInquiryResponseDataTypeAppearance                               BluetoothHCIExtendedInquiryResponseDataTypes = 25
+	KBluetoothHCIExtendedInquiryResponseDataTypeAdvertisingInterval                      BluetoothHCIExtendedInquiryResponseDataTypes = 26
+	KBluetoothHCIExtendedInquiryResponseDataTypeLEBluetoothDeviceAddress                 BluetoothHCIExtendedInquiryResponseDataTypes = 27
+	KBluetoothHCIExtendedInquiryResponseDataTypeLERole                                   BluetoothHCIExtendedInquiryResponseDataTypes = 28
+	KBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingHash                        BluetoothHCIExtendedInquiryResponseDataTypes = 29
+	KBluetoothHCIExtendedInquiryResponseDataTypeSimplePairingRandomizer                  BluetoothHCIExtendedInquiryResponseDataTypes = 30
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceSolicitation32BitUUIDs            BluetoothHCIExtendedInquiryResponseDataTypes = 31
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData32BitUUID                     BluetoothHCIExtendedInquiryResponseDataTypes = 32
+	KBluetoothHCIExtendedInquiryResponseDataTypeServiceData128BitUUID                    BluetoothHCIExtendedInquiryResponseDataTypes = 33
+	KBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsConfirmationValue       BluetoothHCIExtendedInquiryResponseDataTypes = 34
+	KBluetoothHCIExtendedInquiryResponseDataTypeSecureConnectionsRandomValue             BluetoothHCIExtendedInquiryResponseDataTypes = 35
+	KBluetoothHCIExtendedInquiryResponseDataTypeURI                                      BluetoothHCIExtendedInquiryResponseDataTypes = 36
+	KBluetoothHCIExtendedInquiryResponseDataTypeIndoorPositioning                        BluetoothHCIExtendedInquiryResponseDataTypes = 37
+	KBluetoothHCIExtendedInquiryResponseDataTypeTransportDiscoveryData                   BluetoothHCIExtendedInquiryResponseDataTypes = 38
+	KBluetoothHCIExtendedInquiryResponseDataTypeCsisRsiData                              BluetoothHCIExtendedInquiryResponseDataTypes = 46
+	KBluetoothHCIExtendedInquiryResponseDataType3DInformationData                        BluetoothHCIExtendedInquiryResponseDataTypes = 61
+	KBluetoothHCIExtendedInquiryResponseDataTypeManufacturerSpecificData                 BluetoothHCIExtendedInquiryResponseDataTypes = 255
+	KBluetoothHCIExtendedInquiryResponseDataTypeSlaveConnectionIntervalRange             BluetoothHCIExtendedInquiryResponseDataTypes = 18
 )
 
 func (e BluetoothHCIExtendedInquiryResponseDataTypes) String() string {
@@ -1368,7 +1368,7 @@ func (e BluetoothHCIExtendedInquiryResponseDataTypes) String() string {
 type BluetoothHCIFECRequiredValues int64
 
 const (
-	KBluetoothHCIFECRequired BluetoothHCIFECRequiredValues = 0
+	KBluetoothHCIFECRequired    BluetoothHCIFECRequiredValues = 0
 	KBluetoothHCIFECNotRequired BluetoothHCIFECRequiredValues = 1
 )
 
@@ -1386,10 +1386,10 @@ func (e BluetoothHCIFECRequiredValues) String() string {
 type BluetoothHCIGeneralFlowControlStates int64
 
 const (
-	KHostControllerToHostFlowControlOff BluetoothHCIGeneralFlowControlStates = 0
+	KHostControllerToHostFlowControlOff      BluetoothHCIGeneralFlowControlStates = 0
 	KHCIACLDataPacketsOnHCISCODataPacketsOff BluetoothHCIGeneralFlowControlStates = 1
 	KHCIACLDataPacketsOffHCISCODataPacketsOn BluetoothHCIGeneralFlowControlStates = 2
-	KHCIACLDataPacketsOnHCISCODataPacketsOn BluetoothHCIGeneralFlowControlStates = 3
+	KHCIACLDataPacketsOnHCISCODataPacketsOn  BluetoothHCIGeneralFlowControlStates = 3
 )
 
 func (e BluetoothHCIGeneralFlowControlStates) String() string {
@@ -1411,9 +1411,9 @@ type BluetoothHCIHoldModeActivityStates int64
 
 const (
 	KMaintainCurrentPowerState BluetoothHCIHoldModeActivityStates = 0
-	KSuspendPageScan BluetoothHCIHoldModeActivityStates = 1
-	KSuspendInquiryScan BluetoothHCIHoldModeActivityStates = 2
-	KSuspendPeriodicInquiries BluetoothHCIHoldModeActivityStates = 3
+	KSuspendPageScan           BluetoothHCIHoldModeActivityStates = 1
+	KSuspendInquiryScan        BluetoothHCIHoldModeActivityStates = 2
+	KSuspendPeriodicInquiries  BluetoothHCIHoldModeActivityStates = 3
 )
 
 func (e BluetoothHCIHoldModeActivityStates) String() string {
@@ -1434,8 +1434,8 @@ func (e BluetoothHCIHoldModeActivityStates) String() string {
 type BluetoothHCIInquiryModes int64
 
 const (
-	KBluetoothHCIInquiryModeResultFormatStandard BluetoothHCIInquiryModes = 0
-	KBluetoothHCIInquiryModeResultFormatWithRSSI BluetoothHCIInquiryModes = 1
+	KBluetoothHCIInquiryModeResultFormatStandard                              BluetoothHCIInquiryModes = 0
+	KBluetoothHCIInquiryModeResultFormatWithRSSI                              BluetoothHCIInquiryModes = 1
 	KBluetoothHCIInquiryModeResultFormatWithRSSIOrExtendedInquiryResultFormat BluetoothHCIInquiryModes = 2
 )
 
@@ -1455,10 +1455,10 @@ func (e BluetoothHCIInquiryModes) String() string {
 type BluetoothHCIInquiryScanTypes int64
 
 const (
-	KBluetoothHCIInquiryScanTypeStandard BluetoothHCIInquiryScanTypes = 0
-	KBluetoothHCIInquiryScanTypeInterlaced BluetoothHCIInquiryScanTypes = 1
+	KBluetoothHCIInquiryScanTypeStandard      BluetoothHCIInquiryScanTypes = 0
+	KBluetoothHCIInquiryScanTypeInterlaced    BluetoothHCIInquiryScanTypes = 1
 	KBluetoothHCIInquiryScanTypeReservedStart BluetoothHCIInquiryScanTypes = 2
-	KBluetoothHCIInquiryScanTypeReservedEnd BluetoothHCIInquiryScanTypes = 255
+	KBluetoothHCIInquiryScanTypeReservedEnd   BluetoothHCIInquiryScanTypes = 255
 )
 
 func (e BluetoothHCIInquiryScanTypes) String() string {
@@ -1479,13 +1479,13 @@ func (e BluetoothHCIInquiryScanTypes) String() string {
 type BluetoothHCILinkPolicySettingsValues int64
 
 const (
-	KDisableAllLMModes BluetoothHCILinkPolicySettingsValues = 0
+	KDisableAllLMModes             BluetoothHCILinkPolicySettingsValues = 0
 	KEnableCentralPeripheralSwitch BluetoothHCILinkPolicySettingsValues = 1
-	KEnableHoldMode BluetoothHCILinkPolicySettingsValues = 2
-	KEnableSniffMode BluetoothHCILinkPolicySettingsValues = 4
-	KEnableParkMode BluetoothHCILinkPolicySettingsValues = 8
-	KReservedForFutureUse BluetoothHCILinkPolicySettingsValues = 16
-	KEnableMasterSlaveSwitch BluetoothHCILinkPolicySettingsValues = 1
+	KEnableHoldMode                BluetoothHCILinkPolicySettingsValues = 2
+	KEnableSniffMode               BluetoothHCILinkPolicySettingsValues = 4
+	KEnableParkMode                BluetoothHCILinkPolicySettingsValues = 8
+	KReservedForFutureUse          BluetoothHCILinkPolicySettingsValues = 16
+	KEnableMasterSlaveSwitch       BluetoothHCILinkPolicySettingsValues = 1
 )
 
 func (e BluetoothHCILinkPolicySettingsValues) String() string {
@@ -1510,10 +1510,10 @@ func (e BluetoothHCILinkPolicySettingsValues) String() string {
 type BluetoothHCIPageScanEnableStates int64
 
 const (
-	KNoScansEnabled BluetoothHCIPageScanEnableStates = 0
+	KNoScansEnabled                     BluetoothHCIPageScanEnableStates = 0
 	KInquiryScanEnabledPageScanDisabled BluetoothHCIPageScanEnableStates = 1
 	KInquiryScanDisabledPageScanEnabled BluetoothHCIPageScanEnableStates = 2
-	KInquiryScanEnabledPageScanEnabled BluetoothHCIPageScanEnableStates = 3
+	KInquiryScanEnabledPageScanEnabled  BluetoothHCIPageScanEnableStates = 3
 )
 
 func (e BluetoothHCIPageScanEnableStates) String() string {
@@ -1579,10 +1579,10 @@ func (e BluetoothHCIPageScanPeriodModes) String() string {
 type BluetoothHCIPageScanTypes int64
 
 const (
-	KBluetoothHCIPageScanTypeStandard BluetoothHCIPageScanTypes = 0
-	KBluetoothHCIPageScanTypeInterlaced BluetoothHCIPageScanTypes = 1
+	KBluetoothHCIPageScanTypeStandard      BluetoothHCIPageScanTypes = 0
+	KBluetoothHCIPageScanTypeInterlaced    BluetoothHCIPageScanTypes = 1
 	KBluetoothHCIPageScanTypeReservedStart BluetoothHCIPageScanTypes = 2
-	KBluetoothHCIPageScanTypeReservedEnd BluetoothHCIPageScanTypes = 255
+	KBluetoothHCIPageScanTypeReservedEnd   BluetoothHCIPageScanTypes = 255
 )
 
 func (e BluetoothHCIPageScanTypes) String() string {
@@ -1603,8 +1603,8 @@ func (e BluetoothHCIPageScanTypes) String() string {
 type BluetoothHCIPowerState int64
 
 const (
-	KBluetoothHCIPowerStateON BluetoothHCIPowerState = 1
-	KBluetoothHCIPowerStateOFF BluetoothHCIPowerState = 0
+	KBluetoothHCIPowerStateON           BluetoothHCIPowerState = 1
+	KBluetoothHCIPowerStateOFF          BluetoothHCIPowerState = 0
 	KBluetoothHCIPowerStateUnintialized BluetoothHCIPowerState = 255
 )
 
@@ -1625,7 +1625,7 @@ type BluetoothHCIReadStoredLinkKeysFlags int64
 
 const (
 	KReturnLinkKeyForSpecifiedDeviceOnly BluetoothHCIReadStoredLinkKeysFlags = 0
-	KReadAllStoredLinkKeys BluetoothHCIReadStoredLinkKeysFlags = 1
+	KReadAllStoredLinkKeys               BluetoothHCIReadStoredLinkKeysFlags = 1
 )
 
 func (e BluetoothHCIReadStoredLinkKeysFlags) String() string {
@@ -1642,10 +1642,10 @@ func (e BluetoothHCIReadStoredLinkKeysFlags) String() string {
 type BluetoothHCIRetransmissionEffortTypes int64
 
 const (
-	KHCIRetransmissionEffortTypeNone BluetoothHCIRetransmissionEffortTypes = 0
-	KHCIRetransmissionEffortTypeAtLeastOneAndOptimizeForPower BluetoothHCIRetransmissionEffortTypes = 1
+	KHCIRetransmissionEffortTypeNone                             BluetoothHCIRetransmissionEffortTypes = 0
+	KHCIRetransmissionEffortTypeAtLeastOneAndOptimizeForPower    BluetoothHCIRetransmissionEffortTypes = 1
 	KHCIRetransmissionEffortTypeAtLeastOneAndOptimizeLinkQuality BluetoothHCIRetransmissionEffortTypes = 2
-	KHCIRetransmissionEffortTypeDontCare BluetoothHCIRetransmissionEffortTypes = 255
+	KHCIRetransmissionEffortTypeDontCare                         BluetoothHCIRetransmissionEffortTypes = 255
 )
 
 func (e BluetoothHCIRetransmissionEffortTypes) String() string {
@@ -1666,10 +1666,10 @@ func (e BluetoothHCIRetransmissionEffortTypes) String() string {
 type BluetoothHCIRoles int64
 
 const (
-	KBluetoothHCICentralRole BluetoothHCIRoles = 0
+	KBluetoothHCICentralRole    BluetoothHCIRoles = 0
 	KBluetoothHCIPeripheralRole BluetoothHCIRoles = 1
-	KBluetoothHCIMasterRole BluetoothHCIRoles = 0
-	KBluetoothHCISlaveRole BluetoothHCIRoles = 1
+	KBluetoothHCIMasterRole     BluetoothHCIRoles = 0
+	KBluetoothHCISlaveRole      BluetoothHCIRoles = 1
 )
 
 func (e BluetoothHCIRoles) String() string {
@@ -1687,7 +1687,7 @@ type BluetoothHCISCOFlowControlStates int64
 
 const (
 	KSCOFlowControlDisabled BluetoothHCISCOFlowControlStates = 0
-	KSCOFlowControlEnabled BluetoothHCISCOFlowControlStates = 1
+	KSCOFlowControlEnabled  BluetoothHCISCOFlowControlStates = 1
 )
 
 func (e BluetoothHCISCOFlowControlStates) String() string {
@@ -1704,7 +1704,7 @@ func (e BluetoothHCISCOFlowControlStates) String() string {
 type BluetoothHCISimplePairingModes int64
 
 const (
-	KBluetoothHCISimplePairingModeNotSet BluetoothHCISimplePairingModes = 0
+	KBluetoothHCISimplePairingModeNotSet  BluetoothHCISimplePairingModes = 0
 	KBluetoothHCISimplePairingModeEnabled BluetoothHCISimplePairingModes = 1
 )
 
@@ -1755,19 +1755,19 @@ func (e BluetoothHCITransmitReadPowerLevelTypes) String() string {
 type BluetoothHCIVersions int64
 
 const (
-	KBluetoothHCIVersionCoreSpecification1_0b BluetoothHCIVersions = 0
-	KBluetoothHCIVersionCoreSpecification1_1 BluetoothHCIVersions = 1
-	KBluetoothHCIVersionCoreSpecification1_2 BluetoothHCIVersions = 2
+	KBluetoothHCIVersionCoreSpecification1_0b   BluetoothHCIVersions = 0
+	KBluetoothHCIVersionCoreSpecification1_1    BluetoothHCIVersions = 1
+	KBluetoothHCIVersionCoreSpecification1_2    BluetoothHCIVersions = 2
 	KBluetoothHCIVersionCoreSpecification2_0EDR BluetoothHCIVersions = 3
 	KBluetoothHCIVersionCoreSpecification2_1EDR BluetoothHCIVersions = 4
-	KBluetoothHCIVersionCoreSpecification3_0HS BluetoothHCIVersions = 5
-	KBluetoothHCIVersionCoreSpecification4_0 BluetoothHCIVersions = 6
-	KBluetoothHCIVersionCoreSpecification4_1 BluetoothHCIVersions = 7
-	KBluetoothHCIVersionCoreSpecification4_2 BluetoothHCIVersions = 8
-	KBluetoothHCIVersionCoreSpecification5_0 BluetoothHCIVersions = 9
-	KBluetoothHCIVersionCoreSpecification5_1 BluetoothHCIVersions = 10
-	KBluetoothHCIVersionCoreSpecification5_2 BluetoothHCIVersions = 11
-	KBluetoothHCIVersionCoreSpecification5_3 BluetoothHCIVersions = 12
+	KBluetoothHCIVersionCoreSpecification3_0HS  BluetoothHCIVersions = 5
+	KBluetoothHCIVersionCoreSpecification4_0    BluetoothHCIVersions = 6
+	KBluetoothHCIVersionCoreSpecification4_1    BluetoothHCIVersions = 7
+	KBluetoothHCIVersionCoreSpecification4_2    BluetoothHCIVersions = 8
+	KBluetoothHCIVersionCoreSpecification5_0    BluetoothHCIVersions = 9
+	KBluetoothHCIVersionCoreSpecification5_1    BluetoothHCIVersions = 10
+	KBluetoothHCIVersionCoreSpecification5_2    BluetoothHCIVersions = 11
+	KBluetoothHCIVersionCoreSpecification5_3    BluetoothHCIVersions = 12
 )
 
 func (e BluetoothHCIVersions) String() string {
@@ -1806,9 +1806,9 @@ func (e BluetoothHCIVersions) String() string {
 type BluetoothIOCapabilities int64
 
 const (
-	KBluetoothCapabilityTypeDisplayOnly BluetoothIOCapabilities = 0
-	KBluetoothCapabilityTypeDisplayYesNo BluetoothIOCapabilities = 1
-	KBluetoothCapabilityTypeKeyboardOnly BluetoothIOCapabilities = 2
+	KBluetoothCapabilityTypeDisplayOnly     BluetoothIOCapabilities = 0
+	KBluetoothCapabilityTypeDisplayYesNo    BluetoothIOCapabilities = 1
+	KBluetoothCapabilityTypeKeyboardOnly    BluetoothIOCapabilities = 2
 	KBluetoothCapabilityTypeNoInputNoOutput BluetoothIOCapabilities = 3
 )
 
@@ -1830,10 +1830,10 @@ func (e BluetoothIOCapabilities) String() string {
 type BluetoothKeypressNotificationTypes int64
 
 const (
-	KBluetoothKeypressNotificationTypePasskeyEntryStarted BluetoothKeypressNotificationTypes = 0
-	KBluetoothKeypressNotificationTypePasskeyDigitEntered BluetoothKeypressNotificationTypes = 1
-	KBluetoothKeypressNotificationTypePasskeyDigitErased BluetoothKeypressNotificationTypes = 2
-	KBluetoothKeypressNotificationTypePasskeyCleared BluetoothKeypressNotificationTypes = 3
+	KBluetoothKeypressNotificationTypePasskeyEntryStarted   BluetoothKeypressNotificationTypes = 0
+	KBluetoothKeypressNotificationTypePasskeyDigitEntered   BluetoothKeypressNotificationTypes = 1
+	KBluetoothKeypressNotificationTypePasskeyDigitErased    BluetoothKeypressNotificationTypes = 2
+	KBluetoothKeypressNotificationTypePasskeyCleared        BluetoothKeypressNotificationTypes = 3
 	KBluetoothKeypressNotificationTypePasskeyEntryCompleted BluetoothKeypressNotificationTypes = 4
 )
 
@@ -1857,29 +1857,29 @@ func (e BluetoothKeypressNotificationTypes) String() string {
 type BluetoothL2CAPCommandCode int64
 
 const (
-	KBluetoothL2CAPCommandCodeReserved BluetoothL2CAPCommandCode = 0
-	KBluetoothL2CAPCommandCodeCommandReject BluetoothL2CAPCommandCode = 1
-	KBluetoothL2CAPCommandCodeConnectionRequest BluetoothL2CAPCommandCode = 2
-	KBluetoothL2CAPCommandCodeConnectionResponse BluetoothL2CAPCommandCode = 3
-	KBluetoothL2CAPCommandCodeConfigureRequest BluetoothL2CAPCommandCode = 4
-	KBluetoothL2CAPCommandCodeConfigureResponse BluetoothL2CAPCommandCode = 5
-	KBluetoothL2CAPCommandCodeDisconnectionRequest BluetoothL2CAPCommandCode = 6
-	KBluetoothL2CAPCommandCodeDisconnectionResponse BluetoothL2CAPCommandCode = 7
-	KBluetoothL2CAPCommandCodeEchoRequest BluetoothL2CAPCommandCode = 8
-	KBluetoothL2CAPCommandCodeEchoResponse BluetoothL2CAPCommandCode = 9
-	KBluetoothL2CAPCommandCodeInformationRequest BluetoothL2CAPCommandCode = 10
-	KBluetoothL2CAPCommandCodeInformationResponse BluetoothL2CAPCommandCode = 11
-	KBluetoothL2CAPCommandCodeCreateChannelRequest BluetoothL2CAPCommandCode = 12
-	KBluetoothL2CAPCommandCodeCreateChannelResponse BluetoothL2CAPCommandCode = 13
-	KBluetoothL2CAPCommandCodeMoveChannelRequest BluetoothL2CAPCommandCode = 14
-	KBluetoothL2CAPCommandCodeMoveChannelResponse BluetoothL2CAPCommandCode = 15
-	KBluetoothL2CAPCommandCodeMoveChannelConfirmation BluetoothL2CAPCommandCode = 16
-	KBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse BluetoothL2CAPCommandCode = 17
-	KBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest BluetoothL2CAPCommandCode = 18
+	KBluetoothL2CAPCommandCodeReserved                          BluetoothL2CAPCommandCode = 0
+	KBluetoothL2CAPCommandCodeCommandReject                     BluetoothL2CAPCommandCode = 1
+	KBluetoothL2CAPCommandCodeConnectionRequest                 BluetoothL2CAPCommandCode = 2
+	KBluetoothL2CAPCommandCodeConnectionResponse                BluetoothL2CAPCommandCode = 3
+	KBluetoothL2CAPCommandCodeConfigureRequest                  BluetoothL2CAPCommandCode = 4
+	KBluetoothL2CAPCommandCodeConfigureResponse                 BluetoothL2CAPCommandCode = 5
+	KBluetoothL2CAPCommandCodeDisconnectionRequest              BluetoothL2CAPCommandCode = 6
+	KBluetoothL2CAPCommandCodeDisconnectionResponse             BluetoothL2CAPCommandCode = 7
+	KBluetoothL2CAPCommandCodeEchoRequest                       BluetoothL2CAPCommandCode = 8
+	KBluetoothL2CAPCommandCodeEchoResponse                      BluetoothL2CAPCommandCode = 9
+	KBluetoothL2CAPCommandCodeInformationRequest                BluetoothL2CAPCommandCode = 10
+	KBluetoothL2CAPCommandCodeInformationResponse               BluetoothL2CAPCommandCode = 11
+	KBluetoothL2CAPCommandCodeCreateChannelRequest              BluetoothL2CAPCommandCode = 12
+	KBluetoothL2CAPCommandCodeCreateChannelResponse             BluetoothL2CAPCommandCode = 13
+	KBluetoothL2CAPCommandCodeMoveChannelRequest                BluetoothL2CAPCommandCode = 14
+	KBluetoothL2CAPCommandCodeMoveChannelResponse               BluetoothL2CAPCommandCode = 15
+	KBluetoothL2CAPCommandCodeMoveChannelConfirmation           BluetoothL2CAPCommandCode = 16
+	KBluetoothL2CAPCommandCodeMoveChannelConfirmationResponse   BluetoothL2CAPCommandCode = 17
+	KBluetoothL2CAPCommandCodeConnectionParameterUpdateRequest  BluetoothL2CAPCommandCode = 18
 	KBluetoothL2CAPCommandCodeConnectionParameterUpdateResponse BluetoothL2CAPCommandCode = 19
-	KBluetoothL2CAPCommandCodeLECreditBasedConnectionRequest BluetoothL2CAPCommandCode = 20
-	KBluetoothL2CAPCommandCodeLECreditBasedConnectionResponse BluetoothL2CAPCommandCode = 21
-	KBluetoothL2CAPCommandCodeLEFlowControlCredit BluetoothL2CAPCommandCode = 22
+	KBluetoothL2CAPCommandCodeLECreditBasedConnectionRequest    BluetoothL2CAPCommandCode = 20
+	KBluetoothL2CAPCommandCodeLECreditBasedConnectionResponse   BluetoothL2CAPCommandCode = 21
+	KBluetoothL2CAPCommandCodeLEFlowControlCredit               BluetoothL2CAPCommandCode = 22
 )
 
 func (e BluetoothL2CAPCommandCode) String() string {
@@ -1938,9 +1938,9 @@ func (e BluetoothL2CAPCommandCode) String() string {
 type BluetoothL2CAPCommandRejectReason int64
 
 const (
-	KBluetoothL2CAPCommandRejectReasonCommandNotUnderstood BluetoothL2CAPCommandRejectReason = 0
+	KBluetoothL2CAPCommandRejectReasonCommandNotUnderstood  BluetoothL2CAPCommandRejectReason = 0
 	KBluetoothL2CAPCommandRejectReasonSignallingMTUExceeded BluetoothL2CAPCommandRejectReason = 1
-	KBluetoothL2CAPCommandRejectReasonInvalidCIDInRequest BluetoothL2CAPCommandRejectReason = 2
+	KBluetoothL2CAPCommandRejectReasonInvalidCIDInRequest   BluetoothL2CAPCommandRejectReason = 2
 )
 
 func (e BluetoothL2CAPCommandRejectReason) String() string {
@@ -1959,13 +1959,13 @@ func (e BluetoothL2CAPCommandRejectReason) String() string {
 type BluetoothL2CAPConfigurationOption int64
 
 const (
-	KBluetoothL2CAPConfigurationOptionMTU BluetoothL2CAPConfigurationOption = 1
-	KBluetoothL2CAPConfigurationOptionFlushTimeout BluetoothL2CAPConfigurationOption = 2
-	KBluetoothL2CAPConfigurationOptionQoS BluetoothL2CAPConfigurationOption = 3
+	KBluetoothL2CAPConfigurationOptionMTU                          BluetoothL2CAPConfigurationOption = 1
+	KBluetoothL2CAPConfigurationOptionFlushTimeout                 BluetoothL2CAPConfigurationOption = 2
+	KBluetoothL2CAPConfigurationOptionQoS                          BluetoothL2CAPConfigurationOption = 3
 	KBluetoothL2CAPConfigurationOptionRetransmissionAndFlowControl BluetoothL2CAPConfigurationOption = 4
-	KBluetoothL2CAPConfigurationOptionFrameCheckSequence BluetoothL2CAPConfigurationOption = 5
-	KBluetoothL2CAPConfigurationOptionExtendedFlowSpecification BluetoothL2CAPConfigurationOption = 6
-	KBluetoothL2CAPConfigurationOptionExtendedWindowSize BluetoothL2CAPConfigurationOption = 7
+	KBluetoothL2CAPConfigurationOptionFrameCheckSequence           BluetoothL2CAPConfigurationOption = 5
+	KBluetoothL2CAPConfigurationOptionExtendedFlowSpecification    BluetoothL2CAPConfigurationOption = 6
+	KBluetoothL2CAPConfigurationOptionExtendedWindowSize           BluetoothL2CAPConfigurationOption = 7
 )
 
 func (e BluetoothL2CAPConfigurationOption) String() string {
@@ -1992,10 +1992,10 @@ func (e BluetoothL2CAPConfigurationOption) String() string {
 type BluetoothL2CAPConfigurationResult int64
 
 const (
-	KBluetoothL2CAPConfigurationResultSuccess BluetoothL2CAPConfigurationResult = 0
+	KBluetoothL2CAPConfigurationResultSuccess            BluetoothL2CAPConfigurationResult = 0
 	KBluetoothL2CAPConfigurationResultUnacceptableParams BluetoothL2CAPConfigurationResult = 1
-	KBluetoothL2CAPConfigurationResultRejected BluetoothL2CAPConfigurationResult = 2
-	KBluetoothL2CAPConfigurationResultUnknownOptions BluetoothL2CAPConfigurationResult = 3
+	KBluetoothL2CAPConfigurationResultRejected           BluetoothL2CAPConfigurationResult = 2
+	KBluetoothL2CAPConfigurationResultUnknownOptions     BluetoothL2CAPConfigurationResult = 3
 )
 
 func (e BluetoothL2CAPConfigurationResult) String() string {
@@ -2016,11 +2016,11 @@ func (e BluetoothL2CAPConfigurationResult) String() string {
 type BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags int64
 
 const (
-	KBluetoothL2CAPConfigurationBasicL2CAPModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 0
-	KBluetoothL2CAPConfigurationRetransmissionModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 1
-	KBluetoothL2CAPConfigurationFlowControlModeFlag BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 2
+	KBluetoothL2CAPConfigurationBasicL2CAPModeFlag         BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 0
+	KBluetoothL2CAPConfigurationRetransmissionModeFlag     BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 1
+	KBluetoothL2CAPConfigurationFlowControlModeFlag        BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 2
 	KBluetoothL2CAPConfigurationEnhancedRetransmissionMode BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 3
-	KBluetoothL2CAPConfigurationStreamingMode BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 4
+	KBluetoothL2CAPConfigurationStreamingMode              BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 4
 )
 
 func (e BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags) String() string {
@@ -2043,13 +2043,13 @@ func (e BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags) String() s
 type BluetoothL2CAPConnectionResult int64
 
 const (
-	KBluetoothL2CAPConnectionResultSuccessful BluetoothL2CAPConnectionResult = 0
-	KBluetoothL2CAPConnectionResultPending BluetoothL2CAPConnectionResult = 1
-	KBluetoothL2CAPConnectionResultRefusedPSMNotSupported BluetoothL2CAPConnectionResult = 2
-	KBluetoothL2CAPConnectionResultRefusedSecurityBlock BluetoothL2CAPConnectionResult = 3
-	KBluetoothL2CAPConnectionResultRefusedNoResources BluetoothL2CAPConnectionResult = 4
-	KBluetoothL2CAPConnectionResultRefusedReserved BluetoothL2CAPConnectionResult = 5
-	KBluetoothL2CAPConnectionResultRefusedInvalidSourceCID BluetoothL2CAPConnectionResult = 6
+	KBluetoothL2CAPConnectionResultSuccessful                       BluetoothL2CAPConnectionResult = 0
+	KBluetoothL2CAPConnectionResultPending                          BluetoothL2CAPConnectionResult = 1
+	KBluetoothL2CAPConnectionResultRefusedPSMNotSupported           BluetoothL2CAPConnectionResult = 2
+	KBluetoothL2CAPConnectionResultRefusedSecurityBlock             BluetoothL2CAPConnectionResult = 3
+	KBluetoothL2CAPConnectionResultRefusedNoResources               BluetoothL2CAPConnectionResult = 4
+	KBluetoothL2CAPConnectionResultRefusedReserved                  BluetoothL2CAPConnectionResult = 5
+	KBluetoothL2CAPConnectionResultRefusedInvalidSourceCID          BluetoothL2CAPConnectionResult = 6
 	KBluetoothL2CAPConnectionResultRefusedSourceCIDAlreadyAllocated BluetoothL2CAPConnectionResult = 7
 )
 
@@ -2079,9 +2079,9 @@ func (e BluetoothL2CAPConnectionResult) String() string {
 type BluetoothL2CAPConnectionStatus int64
 
 const (
-	KBluetoothL2CAPConnectionStatusNoInfoAvailable BluetoothL2CAPConnectionStatus = 0
+	KBluetoothL2CAPConnectionStatusNoInfoAvailable       BluetoothL2CAPConnectionStatus = 0
 	KBluetoothL2CAPConnectionStatusAuthenticationPending BluetoothL2CAPConnectionStatus = 1
-	KBluetoothL2CAPConnectionStatusAuthorizationPending BluetoothL2CAPConnectionStatus = 2
+	KBluetoothL2CAPConnectionStatusAuthorizationPending  BluetoothL2CAPConnectionStatus = 2
 )
 
 func (e BluetoothL2CAPConnectionStatus) String() string {
@@ -2100,17 +2100,17 @@ func (e BluetoothL2CAPConnectionStatus) String() string {
 type BluetoothL2CAPInformationExtendedFeaturesMask int64
 
 const (
-	KBluetoothL2CAPInformationNoExtendedFeatures BluetoothL2CAPInformationExtendedFeaturesMask = 0
-	KBluetoothL2CAPInformationFlowControlMode BluetoothL2CAPInformationExtendedFeaturesMask = 1
-	KBluetoothL2CAPInformationRetransmissionMode BluetoothL2CAPInformationExtendedFeaturesMask = 2
-	KBluetoothL2CAPInformationBidirectionalQoS BluetoothL2CAPInformationExtendedFeaturesMask = 4
+	KBluetoothL2CAPInformationNoExtendedFeatures         BluetoothL2CAPInformationExtendedFeaturesMask = 0
+	KBluetoothL2CAPInformationFlowControlMode            BluetoothL2CAPInformationExtendedFeaturesMask = 1
+	KBluetoothL2CAPInformationRetransmissionMode         BluetoothL2CAPInformationExtendedFeaturesMask = 2
+	KBluetoothL2CAPInformationBidirectionalQoS           BluetoothL2CAPInformationExtendedFeaturesMask = 4
 	KBluetoothL2CAPInformationEnhancedRetransmissionMode BluetoothL2CAPInformationExtendedFeaturesMask = 8
-	KBluetoothL2CAPInformationStreamingMode BluetoothL2CAPInformationExtendedFeaturesMask = 16
-	KBluetoothL2CAPInformationFCSOption BluetoothL2CAPInformationExtendedFeaturesMask = 32
-	KBluetoothL2CAPInformationExtendedFlowSpecification BluetoothL2CAPInformationExtendedFeaturesMask = 64
-	KBluetoothL2CAPInformationFixedChannels BluetoothL2CAPInformationExtendedFeaturesMask = 128
-	KBluetoothL2CAPInformationExtendedWindowSize BluetoothL2CAPInformationExtendedFeaturesMask = 256
-	KBluetoothL2CAPUnicastConnectionlessDataReception BluetoothL2CAPInformationExtendedFeaturesMask = 512
+	KBluetoothL2CAPInformationStreamingMode              BluetoothL2CAPInformationExtendedFeaturesMask = 16
+	KBluetoothL2CAPInformationFCSOption                  BluetoothL2CAPInformationExtendedFeaturesMask = 32
+	KBluetoothL2CAPInformationExtendedFlowSpecification  BluetoothL2CAPInformationExtendedFeaturesMask = 64
+	KBluetoothL2CAPInformationFixedChannels              BluetoothL2CAPInformationExtendedFeaturesMask = 128
+	KBluetoothL2CAPInformationExtendedWindowSize         BluetoothL2CAPInformationExtendedFeaturesMask = 256
+	KBluetoothL2CAPUnicastConnectionlessDataReception    BluetoothL2CAPInformationExtendedFeaturesMask = 512
 )
 
 func (e BluetoothL2CAPInformationExtendedFeaturesMask) String() string {
@@ -2145,7 +2145,7 @@ func (e BluetoothL2CAPInformationExtendedFeaturesMask) String() string {
 type BluetoothL2CAPInformationResult int64
 
 const (
-	KBluetoothL2CAPInformationResultSuccess BluetoothL2CAPInformationResult = 0
+	KBluetoothL2CAPInformationResultSuccess      BluetoothL2CAPInformationResult = 0
 	KBluetoothL2CAPInformationResultNotSupported BluetoothL2CAPInformationResult = 1
 )
 
@@ -2163,8 +2163,8 @@ func (e BluetoothL2CAPInformationResult) String() string {
 type BluetoothL2CAPInformationType int64
 
 const (
-	KBluetoothL2CAPInformationTypeConnectionlessMTU BluetoothL2CAPInformationType = 1
-	KBluetoothL2CAPInformationTypeExtendedFeatures BluetoothL2CAPInformationType = 2
+	KBluetoothL2CAPInformationTypeConnectionlessMTU      BluetoothL2CAPInformationType = 1
+	KBluetoothL2CAPInformationTypeExtendedFeatures       BluetoothL2CAPInformationType = 2
 	KBluetoothL2CAPInformationTypeFixedChannelsSupported BluetoothL2CAPInformationType = 3
 )
 
@@ -2184,7 +2184,7 @@ func (e BluetoothL2CAPInformationType) String() string {
 type BluetoothL2CAPQoSType int64
 
 const (
-	KBluetoothL2CAPQoSTypeNoTraffic BluetoothL2CAPQoSType = 0
+	KBluetoothL2CAPQoSTypeNoTraffic  BluetoothL2CAPQoSType = 0
 	KBluetoothL2CAPQoSTypeBestEffort BluetoothL2CAPQoSType = 1
 	KBluetoothL2CAPQoSTypeGuaranteed BluetoothL2CAPQoSType = 2
 )
@@ -2205,9 +2205,9 @@ func (e BluetoothL2CAPQoSType) String() string {
 type BluetoothL2CAPSegmentationAndReassembly int64
 
 const (
-	KBluetoothL2CAPSegmentationAndReassemblyUnsegmentedSDU BluetoothL2CAPSegmentationAndReassembly = 0
-	KBluetoothL2CAPSegmentationAndReassemblyStartOfSDU BluetoothL2CAPSegmentationAndReassembly = 1
-	KBluetoothL2CAPSegmentationAndReassemblyEndOfSDU BluetoothL2CAPSegmentationAndReassembly = 2
+	KBluetoothL2CAPSegmentationAndReassemblyUnsegmentedSDU    BluetoothL2CAPSegmentationAndReassembly = 0
+	KBluetoothL2CAPSegmentationAndReassemblyStartOfSDU        BluetoothL2CAPSegmentationAndReassembly = 1
+	KBluetoothL2CAPSegmentationAndReassemblyEndOfSDU          BluetoothL2CAPSegmentationAndReassembly = 2
 	KBluetoothL2CAPSegmentationAndReassemblyContinuationOfSDU BluetoothL2CAPSegmentationAndReassembly = 3
 )
 
@@ -2229,10 +2229,10 @@ func (e BluetoothL2CAPSegmentationAndReassembly) String() string {
 type BluetoothL2CAPSupervisoryFuctionType int64
 
 const (
-	KBluetoothL2CAPSupervisoryFuctionTypeReceiverReady BluetoothL2CAPSupervisoryFuctionType = 0
-	KBluetoothL2CAPSupervisoryFuctionTypeReject BluetoothL2CAPSupervisoryFuctionType = 1
+	KBluetoothL2CAPSupervisoryFuctionTypeReceiverReady    BluetoothL2CAPSupervisoryFuctionType = 0
+	KBluetoothL2CAPSupervisoryFuctionTypeReject           BluetoothL2CAPSupervisoryFuctionType = 1
 	KBluetoothL2CAPSupervisoryFuctionTypeReceiverNotReady BluetoothL2CAPSupervisoryFuctionType = 2
-	KBluetoothL2CAPSupervisoryFuctionTypeSelectiveReject BluetoothL2CAPSupervisoryFuctionType = 3
+	KBluetoothL2CAPSupervisoryFuctionTypeSelectiveReject  BluetoothL2CAPSupervisoryFuctionType = 3
 )
 
 func (e BluetoothL2CAPSupervisoryFuctionType) String() string {
@@ -2271,11 +2271,11 @@ func (e BluetoothLEAddressType) String() string {
 type BluetoothLEAdvertisingType int64
 
 const (
-	BluetoothLEAdvertisingTypeConnectableUndirected BluetoothLEAdvertisingType = 0
-	BluetoothLEAdvertisingTypeConnectableDirected BluetoothLEAdvertisingType = 1
-	BluetoothLEAdvertisingTypeDiscoverableUndirected BluetoothLEAdvertisingType = 2
+	BluetoothLEAdvertisingTypeConnectableUndirected    BluetoothLEAdvertisingType = 0
+	BluetoothLEAdvertisingTypeConnectableDirected      BluetoothLEAdvertisingType = 1
+	BluetoothLEAdvertisingTypeDiscoverableUndirected   BluetoothLEAdvertisingType = 2
 	BluetoothLEAdvertisingTypeNonConnectableUndirected BluetoothLEAdvertisingType = 3
-	BluetoothLEAdvertisingTypeScanResponse BluetoothLEAdvertisingType = 4
+	BluetoothLEAdvertisingTypeScanResponse             BluetoothLEAdvertisingType = 4
 )
 
 func (e BluetoothLEAdvertisingType) String() string {
@@ -2316,15 +2316,15 @@ func (e BluetoothLEConnectionInterval) String() string {
 type BluetoothLEFeatureBits int64
 
 const (
-	KBluetoothLEFeatureLEEncryption BluetoothLEFeatureBits = 1
-	KBluetoothLEFeatureConnectionParamsRequestProcedure BluetoothLEFeatureBits = 2
-	KBluetoothLEFeatureExtendedRejectIndication BluetoothLEFeatureBits = 4
+	KBluetoothLEFeatureLEEncryption                        BluetoothLEFeatureBits = 1
+	KBluetoothLEFeatureConnectionParamsRequestProcedure    BluetoothLEFeatureBits = 2
+	KBluetoothLEFeatureExtendedRejectIndication            BluetoothLEFeatureBits = 4
 	KBluetoothLEFeaturePeripheralInitiatedFeaturesExchange BluetoothLEFeatureBits = 8
-	KBluetoothLEFeatureLEPing BluetoothLEFeatureBits = 16
-	KBluetoothLEFeatureLEDataPacketLengthExtension BluetoothLEFeatureBits = 32
-	KBluetoothLEFeatureLLPrivacy BluetoothLEFeatureBits = 64
-	KBluetoothLEFeatureExtendedScannerFilterPolicies BluetoothLEFeatureBits = 128
-	KBluetoothLEFeatureSlaveInitiatedFeaturesExchange BluetoothLEFeatureBits = 8
+	KBluetoothLEFeatureLEPing                              BluetoothLEFeatureBits = 16
+	KBluetoothLEFeatureLEDataPacketLengthExtension         BluetoothLEFeatureBits = 32
+	KBluetoothLEFeatureLLPrivacy                           BluetoothLEFeatureBits = 64
+	KBluetoothLEFeatureExtendedScannerFilterPolicies       BluetoothLEFeatureBits = 128
+	KBluetoothLEFeatureSlaveInitiatedFeaturesExchange      BluetoothLEFeatureBits = 8
 )
 
 func (e BluetoothLEFeatureBits) String() string {
@@ -2354,7 +2354,7 @@ type BluetoothLEScan int64
 
 const (
 	BluetoothLEScanDisable BluetoothLEScan = 0
-	BluetoothLEScanEnable BluetoothLEScan = 1
+	BluetoothLEScanEnable  BluetoothLEScan = 1
 )
 
 func (e BluetoothLEScan) String() string {
@@ -2372,7 +2372,7 @@ type BluetoothLEScanDuplicateFilter int64
 
 const (
 	BluetoothLEScanDuplicateFilterDisable BluetoothLEScanDuplicateFilter = 0
-	BluetoothLEScanDuplicateFilterEnable BluetoothLEScanDuplicateFilter = 1
+	BluetoothLEScanDuplicateFilterEnable  BluetoothLEScanDuplicateFilter = 1
 )
 
 func (e BluetoothLEScanDuplicateFilter) String() string {
@@ -2389,8 +2389,8 @@ func (e BluetoothLEScanDuplicateFilter) String() string {
 type BluetoothLEScanFilter int64
 
 const (
-	BluetoothLEScanFilterNone BluetoothLEScanFilter = 0
-	BluetoothLEScanFilterSafelist BluetoothLEScanFilter = 1
+	BluetoothLEScanFilterNone      BluetoothLEScanFilter = 0
+	BluetoothLEScanFilterSafelist  BluetoothLEScanFilter = 1
 	BluetoothLEScanFilterWhitelist BluetoothLEScanFilter = 1
 )
 
@@ -2409,7 +2409,7 @@ type BluetoothLEScanType int64
 
 const (
 	BluetoothLEScanTypePassive BluetoothLEScanType = 0
-	BluetoothLEScanTypeActive BluetoothLEScanType = 1
+	BluetoothLEScanTypeActive  BluetoothLEScanType = 1
 )
 
 func (e BluetoothLEScanType) String() string {
@@ -2426,23 +2426,23 @@ func (e BluetoothLEScanType) String() string {
 type BluetoothLESecurityManagerCommandCode int64
 
 const (
-	KBluetoothLESecurityManagerCommandCodeReserved BluetoothLESecurityManagerCommandCode = 0
-	KBluetoothLESecurityManagerCommandCodePairingRequest BluetoothLESecurityManagerCommandCode = 1
-	KBluetoothLESecurityManagerCommandCodePairingResponse BluetoothLESecurityManagerCommandCode = 2
-	KBluetoothLESecurityManagerCommandCodePairingConfirm BluetoothLESecurityManagerCommandCode = 3
-	KBluetoothLESecurityManagerCommandCodePairingRandom BluetoothLESecurityManagerCommandCode = 4
-	KBluetoothLESecurityManagerCommandCodePairingFailed BluetoothLESecurityManagerCommandCode = 5
-	KBluetoothLESecurityManagerCommandCodeEncryptionInfo BluetoothLESecurityManagerCommandCode = 6
-	KBluetoothLESecurityManagerCommandCodeMasterIdentification BluetoothLESecurityManagerCommandCode = 7
-	KBluetoothLESecurityManagerCommandCodeIdentityInfo BluetoothLESecurityManagerCommandCode = 8
-	KBluetoothLESecurityManagerCommandCodeIdentityAddressInfo BluetoothLESecurityManagerCommandCode = 9
-	KBluetoothLESecurityManagerCommandCodeSigningInfo BluetoothLESecurityManagerCommandCode = 10
-	KBluetoothLESecurityManagerCommandCodeSecurityRequest BluetoothLESecurityManagerCommandCode = 11
-	KBluetoothLESecurityManagerCommandCodePairingPublicKey BluetoothLESecurityManagerCommandCode = 12
-	KBluetoothLESecurityManagerCommandCodePairingDHKeyCheck BluetoothLESecurityManagerCommandCode = 13
+	KBluetoothLESecurityManagerCommandCodeReserved                    BluetoothLESecurityManagerCommandCode = 0
+	KBluetoothLESecurityManagerCommandCodePairingRequest              BluetoothLESecurityManagerCommandCode = 1
+	KBluetoothLESecurityManagerCommandCodePairingResponse             BluetoothLESecurityManagerCommandCode = 2
+	KBluetoothLESecurityManagerCommandCodePairingConfirm              BluetoothLESecurityManagerCommandCode = 3
+	KBluetoothLESecurityManagerCommandCodePairingRandom               BluetoothLESecurityManagerCommandCode = 4
+	KBluetoothLESecurityManagerCommandCodePairingFailed               BluetoothLESecurityManagerCommandCode = 5
+	KBluetoothLESecurityManagerCommandCodeEncryptionInfo              BluetoothLESecurityManagerCommandCode = 6
+	KBluetoothLESecurityManagerCommandCodeMasterIdentification        BluetoothLESecurityManagerCommandCode = 7
+	KBluetoothLESecurityManagerCommandCodeIdentityInfo                BluetoothLESecurityManagerCommandCode = 8
+	KBluetoothLESecurityManagerCommandCodeIdentityAddressInfo         BluetoothLESecurityManagerCommandCode = 9
+	KBluetoothLESecurityManagerCommandCodeSigningInfo                 BluetoothLESecurityManagerCommandCode = 10
+	KBluetoothLESecurityManagerCommandCodeSecurityRequest             BluetoothLESecurityManagerCommandCode = 11
+	KBluetoothLESecurityManagerCommandCodePairingPublicKey            BluetoothLESecurityManagerCommandCode = 12
+	KBluetoothLESecurityManagerCommandCodePairingDHKeyCheck           BluetoothLESecurityManagerCommandCode = 13
 	KBluetoothLESecurityManagerCommandCodePairingKeypressNotification BluetoothLESecurityManagerCommandCode = 14
-	KBluetoothLESecurityManagerCommandCodeReservedStart BluetoothLESecurityManagerCommandCode = 15
-	KBluetoothLESecurityManagerCommandCodeReservedEnd BluetoothLESecurityManagerCommandCode = 255
+	KBluetoothLESecurityManagerCommandCodeReservedStart               BluetoothLESecurityManagerCommandCode = 15
+	KBluetoothLESecurityManagerCommandCodeReservedEnd                 BluetoothLESecurityManagerCommandCode = 255
 )
 
 func (e BluetoothLESecurityManagerCommandCode) String() string {
@@ -2489,13 +2489,13 @@ func (e BluetoothLESecurityManagerCommandCode) String() string {
 type BluetoothLESecurityManagerIOCapability int64
 
 const (
-	KBluetoothLESecurityManagerIOCapabilityDisplayOnly BluetoothLESecurityManagerIOCapability = 0
-	KBluetoothLESecurityManagerIOCapabilityDisplayYesNo BluetoothLESecurityManagerIOCapability = 1
-	KBluetoothLESecurityManagerIOCapabilityKeyboardOnly BluetoothLESecurityManagerIOCapability = 2
+	KBluetoothLESecurityManagerIOCapabilityDisplayOnly     BluetoothLESecurityManagerIOCapability = 0
+	KBluetoothLESecurityManagerIOCapabilityDisplayYesNo    BluetoothLESecurityManagerIOCapability = 1
+	KBluetoothLESecurityManagerIOCapabilityKeyboardOnly    BluetoothLESecurityManagerIOCapability = 2
 	KBluetoothLESecurityManagerIOCapabilityNoInputNoOutput BluetoothLESecurityManagerIOCapability = 3
 	KBluetoothLESecurityManagerIOCapabilityKeyboardDisplay BluetoothLESecurityManagerIOCapability = 4
-	KBluetoothLESecurityManagerIOCapabilityReservedStart BluetoothLESecurityManagerIOCapability = 5
-	KBluetoothLESecurityManagerIOCapabilityReservedEnd BluetoothLESecurityManagerIOCapability = 255
+	KBluetoothLESecurityManagerIOCapabilityReservedStart   BluetoothLESecurityManagerIOCapability = 5
+	KBluetoothLESecurityManagerIOCapabilityReservedEnd     BluetoothLESecurityManagerIOCapability = 255
 )
 
 func (e BluetoothLESecurityManagerIOCapability) String() string {
@@ -2523,9 +2523,9 @@ type BluetoothLESecurityManagerKeyDistributionFormat int64
 
 const (
 	KBluetoothLESecurityManagerEncryptionKey BluetoothLESecurityManagerKeyDistributionFormat = 1
-	KBluetoothLESecurityManagerIDKey BluetoothLESecurityManagerKeyDistributionFormat = 2
-	KBluetoothLESecurityManagerSignKey BluetoothLESecurityManagerKeyDistributionFormat = 4
-	KBluetoothLESecurityManagerLinkKey BluetoothLESecurityManagerKeyDistributionFormat = 8
+	KBluetoothLESecurityManagerIDKey         BluetoothLESecurityManagerKeyDistributionFormat = 2
+	KBluetoothLESecurityManagerSignKey       BluetoothLESecurityManagerKeyDistributionFormat = 4
+	KBluetoothLESecurityManagerLinkKey       BluetoothLESecurityManagerKeyDistributionFormat = 8
 )
 
 func (e BluetoothLESecurityManagerKeyDistributionFormat) String() string {
@@ -2546,13 +2546,13 @@ func (e BluetoothLESecurityManagerKeyDistributionFormat) String() string {
 type BluetoothLESecurityManagerKeypressNotificationType int64
 
 const (
-	KBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted BluetoothLESecurityManagerKeypressNotificationType = 0
-	KBluetoothLESecurityManagerNotificationTypePasskeyDigitEntered BluetoothLESecurityManagerKeypressNotificationType = 1
-	KBluetoothLESecurityManagerNotificationTypePasskeyDigitErased BluetoothLESecurityManagerKeypressNotificationType = 2
-	KBluetoothLESecurityManagerNotificationTypePasskeyCleared BluetoothLESecurityManagerKeypressNotificationType = 3
+	KBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted   BluetoothLESecurityManagerKeypressNotificationType = 0
+	KBluetoothLESecurityManagerNotificationTypePasskeyDigitEntered   BluetoothLESecurityManagerKeypressNotificationType = 1
+	KBluetoothLESecurityManagerNotificationTypePasskeyDigitErased    BluetoothLESecurityManagerKeypressNotificationType = 2
+	KBluetoothLESecurityManagerNotificationTypePasskeyCleared        BluetoothLESecurityManagerKeypressNotificationType = 3
 	KBluetoothLESecurityManagerNotificationTypePasskeyEntryCompleted BluetoothLESecurityManagerKeypressNotificationType = 4
-	KBluetoothLESecurityManagerNotificationTypeReservedStart BluetoothLESecurityManagerKeypressNotificationType = 5
-	KBluetoothLESecurityManagerNotificationTypeReservedEnd BluetoothLESecurityManagerKeypressNotificationType = 255
+	KBluetoothLESecurityManagerNotificationTypeReservedStart         BluetoothLESecurityManagerKeypressNotificationType = 5
+	KBluetoothLESecurityManagerNotificationTypeReservedEnd           BluetoothLESecurityManagerKeypressNotificationType = 255
 )
 
 func (e BluetoothLESecurityManagerKeypressNotificationType) String() string {
@@ -2580,9 +2580,9 @@ type BluetoothLESecurityManagerOOBData int64
 
 const (
 	KBluetoothLESecurityManagerOOBAuthenticationDataNotPresent BluetoothLESecurityManagerOOBData = 0
-	KBluetoothLESecurityManagerOOBAuthenticationDataPresent BluetoothLESecurityManagerOOBData = 1
-	KBluetoothLESecurityManagerOOBDataReservedStart BluetoothLESecurityManagerOOBData = 2
-	KBluetoothLESecurityManagerOOBDataReservedEnd BluetoothLESecurityManagerOOBData = 255
+	KBluetoothLESecurityManagerOOBAuthenticationDataPresent    BluetoothLESecurityManagerOOBData = 1
+	KBluetoothLESecurityManagerOOBDataReservedStart            BluetoothLESecurityManagerOOBData = 2
+	KBluetoothLESecurityManagerOOBDataReservedEnd              BluetoothLESecurityManagerOOBData = 255
 )
 
 func (e BluetoothLESecurityManagerOOBData) String() string {
@@ -2603,23 +2603,23 @@ func (e BluetoothLESecurityManagerOOBData) String() string {
 type BluetoothLESecurityManagerPairingFailedReasonCode int64
 
 const (
-	KBluetoothLESecurityManagerReasonCodeReserved BluetoothLESecurityManagerPairingFailedReasonCode = 0
-	KBluetoothLESecurityManagerReasonCodePasskeyEntryFailed BluetoothLESecurityManagerPairingFailedReasonCode = 1
-	KBluetoothLESecurityManagerReasonCodeOOBNotAvailbale BluetoothLESecurityManagerPairingFailedReasonCode = 2
-	KBluetoothLESecurityManagerReasonCodeAuthenticationRequirements BluetoothLESecurityManagerPairingFailedReasonCode = 3
-	KBluetoothLESecurityManagerReasonCodeConfirmValueFailed BluetoothLESecurityManagerPairingFailedReasonCode = 4
-	KBluetoothLESecurityManagerReasonCodePairingNotSupported BluetoothLESecurityManagerPairingFailedReasonCode = 5
-	KBluetoothLESecurityManagerReasonCodeEncryptionKeySize BluetoothLESecurityManagerPairingFailedReasonCode = 6
-	KBluetoothLESecurityManagerReasonCodeCommandNotSupported BluetoothLESecurityManagerPairingFailedReasonCode = 7
-	KBluetoothLESecurityManagerReasonCodeUnspecifiedReason BluetoothLESecurityManagerPairingFailedReasonCode = 8
-	KBluetoothLESecurityManagerReasonCodeRepeatedAttempts BluetoothLESecurityManagerPairingFailedReasonCode = 9
-	KBluetoothLESecurityManagerReasonCodeInvalidParameters BluetoothLESecurityManagerPairingFailedReasonCode = 10
-	KBluetoothLESecurityManagerReasonCodeDHKeyCheckFailed BluetoothLESecurityManagerPairingFailedReasonCode = 11
-	KBluetoothLESecurityManagerReasonCodeNumericComparisonFailed BluetoothLESecurityManagerPairingFailedReasonCode = 12
-	KBluetoothLESecurityManagerReasonCodeBREDRPairingInProgress BluetoothLESecurityManagerPairingFailedReasonCode = 13
+	KBluetoothLESecurityManagerReasonCodeReserved                                        BluetoothLESecurityManagerPairingFailedReasonCode = 0
+	KBluetoothLESecurityManagerReasonCodePasskeyEntryFailed                              BluetoothLESecurityManagerPairingFailedReasonCode = 1
+	KBluetoothLESecurityManagerReasonCodeOOBNotAvailbale                                 BluetoothLESecurityManagerPairingFailedReasonCode = 2
+	KBluetoothLESecurityManagerReasonCodeAuthenticationRequirements                      BluetoothLESecurityManagerPairingFailedReasonCode = 3
+	KBluetoothLESecurityManagerReasonCodeConfirmValueFailed                              BluetoothLESecurityManagerPairingFailedReasonCode = 4
+	KBluetoothLESecurityManagerReasonCodePairingNotSupported                             BluetoothLESecurityManagerPairingFailedReasonCode = 5
+	KBluetoothLESecurityManagerReasonCodeEncryptionKeySize                               BluetoothLESecurityManagerPairingFailedReasonCode = 6
+	KBluetoothLESecurityManagerReasonCodeCommandNotSupported                             BluetoothLESecurityManagerPairingFailedReasonCode = 7
+	KBluetoothLESecurityManagerReasonCodeUnspecifiedReason                               BluetoothLESecurityManagerPairingFailedReasonCode = 8
+	KBluetoothLESecurityManagerReasonCodeRepeatedAttempts                                BluetoothLESecurityManagerPairingFailedReasonCode = 9
+	KBluetoothLESecurityManagerReasonCodeInvalidParameters                               BluetoothLESecurityManagerPairingFailedReasonCode = 10
+	KBluetoothLESecurityManagerReasonCodeDHKeyCheckFailed                                BluetoothLESecurityManagerPairingFailedReasonCode = 11
+	KBluetoothLESecurityManagerReasonCodeNumericComparisonFailed                         BluetoothLESecurityManagerPairingFailedReasonCode = 12
+	KBluetoothLESecurityManagerReasonCodeBREDRPairingInProgress                          BluetoothLESecurityManagerPairingFailedReasonCode = 13
 	KBluetoothLESecurityManagerReasonCodeCrossTransportKeyDerivationGenerationNotAllowed BluetoothLESecurityManagerPairingFailedReasonCode = 14
-	KBluetoothLESecurityManagerReasonCodeReservedStart BluetoothLESecurityManagerPairingFailedReasonCode = 15
-	KBluetoothLESecurityManagerReasonCodeReservedEnd BluetoothLESecurityManagerPairingFailedReasonCode = 255
+	KBluetoothLESecurityManagerReasonCodeReservedStart                                   BluetoothLESecurityManagerPairingFailedReasonCode = 15
+	KBluetoothLESecurityManagerReasonCodeReservedEnd                                     BluetoothLESecurityManagerPairingFailedReasonCode = 255
 )
 
 func (e BluetoothLESecurityManagerPairingFailedReasonCode) String() string {
@@ -2666,8 +2666,8 @@ func (e BluetoothLESecurityManagerPairingFailedReasonCode) String() string {
 type BluetoothLESecurityManagerUserInputCapability int64
 
 const (
-	KBluetoothLESecurityManagerUserInputCapabilityNoInput BluetoothLESecurityManagerUserInputCapability = 1
-	KBluetoothLESecurityManagerUserInputCapabilityYesNo BluetoothLESecurityManagerUserInputCapability = 2
+	KBluetoothLESecurityManagerUserInputCapabilityNoInput  BluetoothLESecurityManagerUserInputCapability = 1
+	KBluetoothLESecurityManagerUserInputCapabilityYesNo    BluetoothLESecurityManagerUserInputCapability = 2
 	KBluetoothLESecurityManagerUserInputCapabilityKeyboard BluetoothLESecurityManagerUserInputCapability = 3
 )
 
@@ -2687,7 +2687,7 @@ func (e BluetoothLESecurityManagerUserInputCapability) String() string {
 type BluetoothLESecurityManagerUserOutputCapability int64
 
 const (
-	KBluetoothLESecurityManagerUserOutputCapabilityNoOutput BluetoothLESecurityManagerUserOutputCapability = 1
+	KBluetoothLESecurityManagerUserOutputCapabilityNoOutput      BluetoothLESecurityManagerUserOutputCapability = 1
 	KBluetoothLESecurityManagerUserOutputCapabilityNumericOutput BluetoothLESecurityManagerUserOutputCapability = 2
 )
 
@@ -2705,18 +2705,18 @@ func (e BluetoothLESecurityManagerUserOutputCapability) String() string {
 type BluetoothLMPVersions int64
 
 const (
-	KBluetoothLMPVersionCoreSpecification1_0b BluetoothLMPVersions = 0
-	KBluetoothLMPVersionCoreSpecification1_1 BluetoothLMPVersions = 1
-	KBluetoothLMPVersionCoreSpecification1_2 BluetoothLMPVersions = 2
+	KBluetoothLMPVersionCoreSpecification1_0b   BluetoothLMPVersions = 0
+	KBluetoothLMPVersionCoreSpecification1_1    BluetoothLMPVersions = 1
+	KBluetoothLMPVersionCoreSpecification1_2    BluetoothLMPVersions = 2
 	KBluetoothLMPVersionCoreSpecification2_0EDR BluetoothLMPVersions = 3
 	KBluetoothLMPVersionCoreSpecification2_1EDR BluetoothLMPVersions = 4
-	KBluetoothLMPVersionCoreSpecification3_0HS BluetoothLMPVersions = 5
-	KBluetoothLMPVersionCoreSpecification4_0 BluetoothLMPVersions = 6
-	KBluetoothLMPVersionCoreSpecification4_1 BluetoothLMPVersions = 7
-	KBluetoothLMPVersionCoreSpecification4_2 BluetoothLMPVersions = 8
-	KBluetoothLMPVersionCoreSpecification5_0 BluetoothLMPVersions = 9
-	KBluetoothLMPVersionCoreSpecification5_1 BluetoothLMPVersions = 10
-	KBluetoothLMPVersionCoreSpecification5_2 BluetoothLMPVersions = 11
+	KBluetoothLMPVersionCoreSpecification3_0HS  BluetoothLMPVersions = 5
+	KBluetoothLMPVersionCoreSpecification4_0    BluetoothLMPVersions = 6
+	KBluetoothLMPVersionCoreSpecification4_1    BluetoothLMPVersions = 7
+	KBluetoothLMPVersionCoreSpecification4_2    BluetoothLMPVersions = 8
+	KBluetoothLMPVersionCoreSpecification5_0    BluetoothLMPVersions = 9
+	KBluetoothLMPVersionCoreSpecification5_1    BluetoothLMPVersions = 10
+	KBluetoothLMPVersionCoreSpecification5_2    BluetoothLMPVersions = 11
 )
 
 func (e BluetoothLMPVersions) String() string {
@@ -2753,10 +2753,10 @@ func (e BluetoothLMPVersions) String() string {
 type BluetoothLinkTypes int64
 
 const (
-	KBluetoothSCOConnection BluetoothLinkTypes = 0
-	KBluetoothACLConnection BluetoothLinkTypes = 1
+	KBluetoothSCOConnection  BluetoothLinkTypes = 0
+	KBluetoothACLConnection  BluetoothLinkTypes = 1
 	KBluetoothESCOConnection BluetoothLinkTypes = 2
-	KBluetoothLinkTypeNone BluetoothLinkTypes = 255
+	KBluetoothLinkTypeNone   BluetoothLinkTypes = 255
 )
 
 func (e BluetoothLinkTypes) String() string {
@@ -2777,7 +2777,7 @@ func (e BluetoothLinkTypes) String() string {
 type BluetoothOOBDataPresenceValues int64
 
 const (
-	KBluetoothOOBAuthenticationDataNotPresent BluetoothOOBDataPresenceValues = 0
+	KBluetoothOOBAuthenticationDataNotPresent              BluetoothOOBDataPresenceValues = 0
 	KBluetoothOOBAuthenticationDataFromRemoteDevicePresent BluetoothOOBDataPresenceValues = 1
 )
 
@@ -2795,9 +2795,9 @@ func (e BluetoothOOBDataPresenceValues) String() string {
 type BluetoothRFCOMMLineStatus int64
 
 const (
-	BluetoothRFCOMMLineStatusNoError BluetoothRFCOMMLineStatus = 0
+	BluetoothRFCOMMLineStatusNoError      BluetoothRFCOMMLineStatus = 0
 	BluetoothRFCOMMLineStatusOverrunError BluetoothRFCOMMLineStatus = 1
-	BluetoothRFCOMMLineStatusParityError BluetoothRFCOMMLineStatus = 2
+	BluetoothRFCOMMLineStatusParityError  BluetoothRFCOMMLineStatus = 2
 	BluetoothRFCOMMLineStatusFramingError BluetoothRFCOMMLineStatus = 3
 )
 
@@ -2819,10 +2819,10 @@ func (e BluetoothRFCOMMLineStatus) String() string {
 type BluetoothRFCOMMParityType int64
 
 const (
-	KBluetoothRFCOMMParityTypeNoParity BluetoothRFCOMMParityType = 0
-	KBluetoothRFCOMMParityTypeOddParity BluetoothRFCOMMParityType = 1
+	KBluetoothRFCOMMParityTypeNoParity   BluetoothRFCOMMParityType = 0
+	KBluetoothRFCOMMParityTypeOddParity  BluetoothRFCOMMParityType = 1
 	KBluetoothRFCOMMParityTypeEvenParity BluetoothRFCOMMParityType = 2
-	KBluetoothRFCOMMParityTypeMaxParity BluetoothRFCOMMParityType = 3
+	KBluetoothRFCOMMParityTypeMaxParity  BluetoothRFCOMMParityType = 3
 )
 
 func (e BluetoothRFCOMMParityType) String() string {
@@ -2844,7 +2844,7 @@ type BluetoothSimplePairingDebugModes int64
 
 const (
 	KBluetoothHCISimplePairingDebugModeDisabled BluetoothSimplePairingDebugModes = 0
-	KBluetoothHCISimplePairingDebugModeEnabled BluetoothSimplePairingDebugModes = 1
+	KBluetoothHCISimplePairingDebugModeEnabled  BluetoothSimplePairingDebugModes = 1
 )
 
 func (e BluetoothSimplePairingDebugModes) String() string {
@@ -2861,11 +2861,11 @@ func (e BluetoothSimplePairingDebugModes) String() string {
 type BluetoothTransportTypes int64
 
 const (
-	KBluetoothTransportTypeUSB BluetoothTransportTypes = 1
-	KBluetoothTransportTypePCCard BluetoothTransportTypes = 2
+	KBluetoothTransportTypeUSB     BluetoothTransportTypes = 1
+	KBluetoothTransportTypePCCard  BluetoothTransportTypes = 2
 	KBluetoothTransportTypePCICard BluetoothTransportTypes = 3
-	KBluetoothTransportTypeUART BluetoothTransportTypes = 4
-	KBluetoothTransportTypePCIe BluetoothTransportTypes = 5
+	KBluetoothTransportTypeUART    BluetoothTransportTypes = 4
+	KBluetoothTransportTypePCIe    BluetoothTransportTypes = 5
 )
 
 func (e BluetoothTransportTypes) String() string {
@@ -2890,7 +2890,7 @@ type FTSFileType int64
 
 const (
 	KFTSFileTypeFolder FTSFileType = 1
-	KFTSFileTypeFile FTSFileType = 2
+	KFTSFileTypeFile   FTSFileType = 2
 )
 
 func (e FTSFileType) String() string {
@@ -2907,8 +2907,8 @@ func (e FTSFileType) String() string {
 type IOBluetoothDeviceSearchOptionsBits int64
 
 const (
-	KSearchOptionsNone IOBluetoothDeviceSearchOptionsBits = 0
-	KSearchOptionsAlwaysStartInquiry IOBluetoothDeviceSearchOptionsBits = 1
+	KSearchOptionsNone                 IOBluetoothDeviceSearchOptionsBits = 0
+	KSearchOptionsAlwaysStartInquiry   IOBluetoothDeviceSearchOptionsBits = 1
 	KSearchOptionsDiscardCachedResults IOBluetoothDeviceSearchOptionsBits = 2
 )
 
@@ -2929,7 +2929,7 @@ type IOBluetoothDeviceSearchTypesBits int64
 
 const (
 	KIOBluetoothDeviceSearchClassic IOBluetoothDeviceSearchTypesBits = 1
-	KIOBluetoothDeviceSearchLE IOBluetoothDeviceSearchTypesBits = 2
+	KIOBluetoothDeviceSearchLE      IOBluetoothDeviceSearchTypesBits = 2
 )
 
 func (e IOBluetoothDeviceSearchTypesBits) String() string {
@@ -2946,17 +2946,17 @@ func (e IOBluetoothDeviceSearchTypesBits) String() string {
 type IOBluetoothHandsFreeAudioGatewayFeatures int64
 
 const (
-	IOBluetoothHandsFreeAudioGatewayFeatureNone IOBluetoothHandsFreeAudioGatewayFeatures = 0
-	IOBluetoothHandsFreeAudioGatewayFeatureThreeWayCalling IOBluetoothHandsFreeAudioGatewayFeatures = 1
-	IOBluetoothHandsFreeAudioGatewayFeatureECAndOrNRFunction IOBluetoothHandsFreeAudioGatewayFeatures = 2
-	IOBluetoothHandsFreeAudioGatewayFeatureVoiceRecognition IOBluetoothHandsFreeAudioGatewayFeatures = 4
-	IOBluetoothHandsFreeAudioGatewayFeatureInBandRingTone IOBluetoothHandsFreeAudioGatewayFeatures = 8
+	IOBluetoothHandsFreeAudioGatewayFeatureNone                     IOBluetoothHandsFreeAudioGatewayFeatures = 0
+	IOBluetoothHandsFreeAudioGatewayFeatureThreeWayCalling          IOBluetoothHandsFreeAudioGatewayFeatures = 1
+	IOBluetoothHandsFreeAudioGatewayFeatureECAndOrNRFunction        IOBluetoothHandsFreeAudioGatewayFeatures = 2
+	IOBluetoothHandsFreeAudioGatewayFeatureVoiceRecognition         IOBluetoothHandsFreeAudioGatewayFeatures = 4
+	IOBluetoothHandsFreeAudioGatewayFeatureInBandRingTone           IOBluetoothHandsFreeAudioGatewayFeatures = 8
 	IOBluetoothHandsFreeAudioGatewayFeatureAttachedNumberToVoiceTag IOBluetoothHandsFreeAudioGatewayFeatures = 16
-	IOBluetoothHandsFreeAudioGatewayFeatureRejectCallCapability IOBluetoothHandsFreeAudioGatewayFeatures = 32
-	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallStatus IOBluetoothHandsFreeAudioGatewayFeatures = 64
-	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallControl IOBluetoothHandsFreeAudioGatewayFeatures = 128
+	IOBluetoothHandsFreeAudioGatewayFeatureRejectCallCapability     IOBluetoothHandsFreeAudioGatewayFeatures = 32
+	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallStatus       IOBluetoothHandsFreeAudioGatewayFeatures = 64
+	IOBluetoothHandsFreeAudioGatewayFeatureEnhancedCallControl      IOBluetoothHandsFreeAudioGatewayFeatures = 128
 	IOBluetoothHandsFreeAudioGatewayFeatureExtendedErrorResultCodes IOBluetoothHandsFreeAudioGatewayFeatures = 256
-	IOBluetoothHandsFreeAudioGatewayFeatureCodecNegotiation IOBluetoothHandsFreeAudioGatewayFeatures = 512
+	IOBluetoothHandsFreeAudioGatewayFeatureCodecNegotiation         IOBluetoothHandsFreeAudioGatewayFeatures = 512
 )
 
 func (e IOBluetoothHandsFreeAudioGatewayFeatures) String() string {
@@ -2991,13 +2991,13 @@ func (e IOBluetoothHandsFreeAudioGatewayFeatures) String() string {
 type IOBluetoothHandsFreeCallHoldModes uint64
 
 const (
-	IOBluetoothHandsFreeCallHoldMode0 IOBluetoothHandsFreeCallHoldModes = 1
-	IOBluetoothHandsFreeCallHoldMode1 IOBluetoothHandsFreeCallHoldModes = 2
+	IOBluetoothHandsFreeCallHoldMode0    IOBluetoothHandsFreeCallHoldModes = 1
+	IOBluetoothHandsFreeCallHoldMode1    IOBluetoothHandsFreeCallHoldModes = 2
 	IOBluetoothHandsFreeCallHoldMode1idx IOBluetoothHandsFreeCallHoldModes = 4
-	IOBluetoothHandsFreeCallHoldMode2 IOBluetoothHandsFreeCallHoldModes = 8
+	IOBluetoothHandsFreeCallHoldMode2    IOBluetoothHandsFreeCallHoldModes = 8
 	IOBluetoothHandsFreeCallHoldMode2idx IOBluetoothHandsFreeCallHoldModes = 16
-	IOBluetoothHandsFreeCallHoldMode3 IOBluetoothHandsFreeCallHoldModes = 32
-	IOBluetoothHandsFreeCallHoldMode4 IOBluetoothHandsFreeCallHoldModes = 64
+	IOBluetoothHandsFreeCallHoldMode3    IOBluetoothHandsFreeCallHoldModes = 32
+	IOBluetoothHandsFreeCallHoldMode4    IOBluetoothHandsFreeCallHoldModes = 64
 )
 
 func (e IOBluetoothHandsFreeCallHoldModes) String() string {
@@ -3024,8 +3024,8 @@ func (e IOBluetoothHandsFreeCallHoldModes) String() string {
 type IOBluetoothHandsFreeCodecID int64
 
 const (
-	IOBluetoothHandsFreeCodecIDCVSD IOBluetoothHandsFreeCodecID = 1
-	IOBluetoothHandsFreeCodecIDmSBC IOBluetoothHandsFreeCodecID = 2
+	IOBluetoothHandsFreeCodecIDCVSD   IOBluetoothHandsFreeCodecID = 1
+	IOBluetoothHandsFreeCodecIDmSBC   IOBluetoothHandsFreeCodecID = 2
 	IOBluetoothHandsFreeCodecIDAACELD IOBluetoothHandsFreeCodecID = 128
 )
 
@@ -3045,15 +3045,15 @@ func (e IOBluetoothHandsFreeCodecID) String() string {
 type IOBluetoothHandsFreeDeviceFeatures int64
 
 const (
-	IOBluetoothHandsFreeDeviceFeatureNone IOBluetoothHandsFreeDeviceFeatures = 0
-	IOBluetoothHandsFreeDeviceFeatureECAndOrNRFunction IOBluetoothHandsFreeDeviceFeatures = 1
-	IOBluetoothHandsFreeDeviceFeatureThreeWayCalling IOBluetoothHandsFreeDeviceFeatures = 2
-	IOBluetoothHandsFreeDeviceFeatureCLIPresentation IOBluetoothHandsFreeDeviceFeatures = 4
-	IOBluetoothHandsFreeDeviceFeatureVoiceRecognition IOBluetoothHandsFreeDeviceFeatures = 8
+	IOBluetoothHandsFreeDeviceFeatureNone                IOBluetoothHandsFreeDeviceFeatures = 0
+	IOBluetoothHandsFreeDeviceFeatureECAndOrNRFunction   IOBluetoothHandsFreeDeviceFeatures = 1
+	IOBluetoothHandsFreeDeviceFeatureThreeWayCalling     IOBluetoothHandsFreeDeviceFeatures = 2
+	IOBluetoothHandsFreeDeviceFeatureCLIPresentation     IOBluetoothHandsFreeDeviceFeatures = 4
+	IOBluetoothHandsFreeDeviceFeatureVoiceRecognition    IOBluetoothHandsFreeDeviceFeatures = 8
 	IOBluetoothHandsFreeDeviceFeatureRemoteVolumeControl IOBluetoothHandsFreeDeviceFeatures = 16
-	IOBluetoothHandsFreeDeviceFeatureEnhancedCallStatus IOBluetoothHandsFreeDeviceFeatures = 32
+	IOBluetoothHandsFreeDeviceFeatureEnhancedCallStatus  IOBluetoothHandsFreeDeviceFeatures = 32
 	IOBluetoothHandsFreeDeviceFeatureEnhancedCallControl IOBluetoothHandsFreeDeviceFeatures = 64
-	IOBluetoothHandsFreeDeviceFeatureCodecNegotiation IOBluetoothHandsFreeDeviceFeatures = 128
+	IOBluetoothHandsFreeDeviceFeatureCodecNegotiation    IOBluetoothHandsFreeDeviceFeatures = 128
 )
 
 func (e IOBluetoothHandsFreeDeviceFeatures) String() string {
@@ -3085,10 +3085,10 @@ type IOBluetoothHandsFreePDUMessageStatus uint64
 
 const (
 	IOBluetoothHandsFreePDUStatusRecUnread IOBluetoothHandsFreePDUMessageStatus = 0
-	IOBluetoothHandsFreePDUStatusRecRead IOBluetoothHandsFreePDUMessageStatus = 1
+	IOBluetoothHandsFreePDUStatusRecRead   IOBluetoothHandsFreePDUMessageStatus = 1
 	IOBluetoothHandsFreePDUStatusStoUnsent IOBluetoothHandsFreePDUMessageStatus = 2
-	IOBluetoothHandsFreePDUStatusStoSent IOBluetoothHandsFreePDUMessageStatus = 3
-	IOBluetoothHandsFreePDUStatusAll IOBluetoothHandsFreePDUMessageStatus = 4
+	IOBluetoothHandsFreePDUStatusStoSent   IOBluetoothHandsFreePDUMessageStatus = 3
+	IOBluetoothHandsFreePDUStatusAll       IOBluetoothHandsFreePDUMessageStatus = 4
 )
 
 func (e IOBluetoothHandsFreePDUMessageStatus) String() string {
@@ -3111,8 +3111,8 @@ func (e IOBluetoothHandsFreePDUMessageStatus) String() string {
 type IOBluetoothHandsFreeSMSSupport uint64
 
 const (
-	IOBluetoothHandsFreePhase2SMSSupport IOBluetoothHandsFreeSMSSupport = 1
-	IOBluetoothHandsFreePhase2pSMSSupport IOBluetoothHandsFreeSMSSupport = 2
+	IOBluetoothHandsFreePhase2SMSSupport              IOBluetoothHandsFreeSMSSupport = 1
+	IOBluetoothHandsFreePhase2pSMSSupport             IOBluetoothHandsFreeSMSSupport = 2
 	IOBluetoothHandsFreeManufactureSpecificSMSSupport IOBluetoothHandsFreeSMSSupport = 4
 )
 
@@ -3132,11 +3132,11 @@ func (e IOBluetoothHandsFreeSMSSupport) String() string {
 type IOBluetoothL2CAPChannelEventType int64
 
 const (
-	KIOBluetoothL2CAPChannelEventTypeData IOBluetoothL2CAPChannelEventType = 1
-	KIOBluetoothL2CAPChannelEventTypeOpenComplete IOBluetoothL2CAPChannelEventType = 2
-	KIOBluetoothL2CAPChannelEventTypeClosed IOBluetoothL2CAPChannelEventType = 3
-	KIOBluetoothL2CAPChannelEventTypeReconfigured IOBluetoothL2CAPChannelEventType = 4
-	KIOBluetoothL2CAPChannelEventTypeWriteComplete IOBluetoothL2CAPChannelEventType = 5
+	KIOBluetoothL2CAPChannelEventTypeData                IOBluetoothL2CAPChannelEventType = 1
+	KIOBluetoothL2CAPChannelEventTypeOpenComplete        IOBluetoothL2CAPChannelEventType = 2
+	KIOBluetoothL2CAPChannelEventTypeClosed              IOBluetoothL2CAPChannelEventType = 3
+	KIOBluetoothL2CAPChannelEventTypeReconfigured        IOBluetoothL2CAPChannelEventType = 4
+	KIOBluetoothL2CAPChannelEventTypeWriteComplete       IOBluetoothL2CAPChannelEventType = 5
 	KIOBluetoothL2CAPChannelEventTypeQueueSpaceAvailable IOBluetoothL2CAPChannelEventType = 6
 )
 
@@ -3162,7 +3162,7 @@ func (e IOBluetoothL2CAPChannelEventType) String() string {
 type IOBluetoothSMSMode uint64
 
 const (
-	IOBluetoothSMSModePDU IOBluetoothSMSMode = 0
+	IOBluetoothSMSModePDU  IOBluetoothSMSMode = 0
 	IOBluetoothSMSModeText IOBluetoothSMSMode = 1
 )
 
@@ -3180,7 +3180,7 @@ func (e IOBluetoothSMSMode) String() string {
 type IOBluetoothUserNotificationChannelDirection int64
 
 const (
-	KIOBluetoothUserNotificationChannelDirectionAny IOBluetoothUserNotificationChannelDirection = 0
+	KIOBluetoothUserNotificationChannelDirectionAny      IOBluetoothUserNotificationChannelDirection = 0
 	KIOBluetoothUserNotificationChannelDirectionIncoming IOBluetoothUserNotificationChannelDirection = 1
 	KIOBluetoothUserNotificationChannelDirectionOutgoing IOBluetoothUserNotificationChannelDirection = 2
 )
@@ -3202,7 +3202,7 @@ func (e IOBluetoothUserNotificationChannelDirection) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -3220,8 +3220,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -3257,15 +3257,15 @@ func (e MDQuerySortOptionFlags) String() string {
 type OBEXConnectFlagValues int64
 
 const (
-	KOBEXConnectFlagNone OBEXConnectFlagValues = 0
+	KOBEXConnectFlagNone                            OBEXConnectFlagValues = 0
 	KOBEXConnectFlagSupportMultipleItLMPConnections OBEXConnectFlagValues = 1
-	KOBEXConnectFlag1Reserved OBEXConnectFlagValues = 2
-	KOBEXConnectFlag2Reserved OBEXConnectFlagValues = 4
-	KOBEXConnectFlag3Reserved OBEXConnectFlagValues = 8
-	KOBEXConnectFlag4Reserved OBEXConnectFlagValues = 16
-	KOBEXConnectFlag5Reserved OBEXConnectFlagValues = 32
-	KOBEXConnectFlag6Reserved OBEXConnectFlagValues = 64
-	KOBEXConnectFlag7Reserved OBEXConnectFlagValues = 128
+	KOBEXConnectFlag1Reserved                       OBEXConnectFlagValues = 2
+	KOBEXConnectFlag2Reserved                       OBEXConnectFlagValues = 4
+	KOBEXConnectFlag3Reserved                       OBEXConnectFlagValues = 8
+	KOBEXConnectFlag4Reserved                       OBEXConnectFlagValues = 16
+	KOBEXConnectFlag5Reserved                       OBEXConnectFlagValues = 32
+	KOBEXConnectFlag6Reserved                       OBEXConnectFlagValues = 64
+	KOBEXConnectFlag7Reserved                       OBEXConnectFlagValues = 128
 )
 
 func (e OBEXConnectFlagValues) String() string {
@@ -3296,32 +3296,32 @@ func (e OBEXConnectFlagValues) String() string {
 type OBEXErrorCodes int64
 
 const (
-	KOBEXErrorRangeMin OBEXErrorCodes = -21850
-	KOBEXErrorRangeMax OBEXErrorCodes = -21899
-	KOBEXSuccess OBEXErrorCodes = 0
-	KOBEXGeneralError OBEXErrorCodes = -21850
-	KOBEXNoResourcesError OBEXErrorCodes = -21851
-	KOBEXUnsupportedError OBEXErrorCodes = -21852
-	KOBEXInternalError OBEXErrorCodes = -21853
-	KOBEXBadArgumentError OBEXErrorCodes = -21854
-	KOBEXTimeoutError OBEXErrorCodes = -21855
-	KOBEXBadRequestError OBEXErrorCodes = -21856
-	KOBEXCancelledError OBEXErrorCodes = -21857
-	KOBEXForbiddenError OBEXErrorCodes = -21858
-	KOBEXUnauthorizedError OBEXErrorCodes = -21859
-	KOBEXNotAcceptableError OBEXErrorCodes = -21860
-	KOBEXConflictError OBEXErrorCodes = -21861
-	KOBEXMethodNotAllowedError OBEXErrorCodes = -21862
-	KOBEXNotFoundError OBEXErrorCodes = -21863
-	KOBEXNotImplementedError OBEXErrorCodes = -21864
-	KOBEXPreconditionFailedError OBEXErrorCodes = -21865
-	KOBEXSessionBusyError OBEXErrorCodes = -21875
-	KOBEXSessionNotConnectedError OBEXErrorCodes = -21876
-	KOBEXSessionBadRequestError OBEXErrorCodes = -21877
-	KOBEXSessionBadResponseError OBEXErrorCodes = -21878
-	KOBEXSessionNoTransportError OBEXErrorCodes = -21879
-	KOBEXSessionTransportDiedError OBEXErrorCodes = -21880
-	KOBEXSessionTimeoutError OBEXErrorCodes = -21881
+	KOBEXErrorRangeMin                OBEXErrorCodes = -21850
+	KOBEXErrorRangeMax                OBEXErrorCodes = -21899
+	KOBEXSuccess                      OBEXErrorCodes = 0
+	KOBEXGeneralError                 OBEXErrorCodes = -21850
+	KOBEXNoResourcesError             OBEXErrorCodes = -21851
+	KOBEXUnsupportedError             OBEXErrorCodes = -21852
+	KOBEXInternalError                OBEXErrorCodes = -21853
+	KOBEXBadArgumentError             OBEXErrorCodes = -21854
+	KOBEXTimeoutError                 OBEXErrorCodes = -21855
+	KOBEXBadRequestError              OBEXErrorCodes = -21856
+	KOBEXCancelledError               OBEXErrorCodes = -21857
+	KOBEXForbiddenError               OBEXErrorCodes = -21858
+	KOBEXUnauthorizedError            OBEXErrorCodes = -21859
+	KOBEXNotAcceptableError           OBEXErrorCodes = -21860
+	KOBEXConflictError                OBEXErrorCodes = -21861
+	KOBEXMethodNotAllowedError        OBEXErrorCodes = -21862
+	KOBEXNotFoundError                OBEXErrorCodes = -21863
+	KOBEXNotImplementedError          OBEXErrorCodes = -21864
+	KOBEXPreconditionFailedError      OBEXErrorCodes = -21865
+	KOBEXSessionBusyError             OBEXErrorCodes = -21875
+	KOBEXSessionNotConnectedError     OBEXErrorCodes = -21876
+	KOBEXSessionBadRequestError       OBEXErrorCodes = -21877
+	KOBEXSessionBadResponseError      OBEXErrorCodes = -21878
+	KOBEXSessionNoTransportError      OBEXErrorCodes = -21879
+	KOBEXSessionTransportDiedError    OBEXErrorCodes = -21880
+	KOBEXSessionTimeoutError          OBEXErrorCodes = -21881
 	KOBEXSessionAlreadyConnectedError OBEXErrorCodes = -21882
 )
 
@@ -3387,32 +3387,32 @@ func (e OBEXErrorCodes) String() string {
 type OBEXHeaderIdentifiers int64
 
 const (
-	KOBEXHeaderIDName OBEXHeaderIdentifiers = 1
-	KOBEXHeaderIDDescription OBEXHeaderIdentifiers = 5
-	KOBEXHeaderIDReservedRangeStart OBEXHeaderIdentifiers = 16
-	KOBEXHeaderIDReservedRangeEnd OBEXHeaderIdentifiers = 47
-	KOBEXHeaderIDUserDefinedRangeStart OBEXHeaderIdentifiers = 48
-	KOBEXHeaderIDUserDefinedRangeEnd OBEXHeaderIdentifiers = 63
-	KOBEXHeaderIDType OBEXHeaderIdentifiers = 66
-	KOBEXHeaderIDTimeISO OBEXHeaderIdentifiers = 68
-	KOBEXHeaderIDTarget OBEXHeaderIdentifiers = 70
-	KOBEXHeaderIDHTTP OBEXHeaderIdentifiers = 71
-	KOBEXHeaderIDBody OBEXHeaderIdentifiers = 72
-	KOBEXHeaderIDEndOfBody OBEXHeaderIdentifiers = 73
-	KOBEXHeaderIDWho OBEXHeaderIdentifiers = 74
-	KOBEXHeaderIDAppParameters OBEXHeaderIdentifiers = 76
-	KOBEXHeaderIDAuthorizationChallenge OBEXHeaderIdentifiers = 77
-	KOBEXHeaderIDAuthorizationResponse OBEXHeaderIdentifiers = 78
-	KOBEXHeaderIDObjectClass OBEXHeaderIdentifiers = 79
-	KOBEXHeaderIDCount OBEXHeaderIdentifiers = 192
-	KOBEXHeaderIDLength OBEXHeaderIdentifiers = 195
-	KOBEXHeaderIDTime4Byte OBEXHeaderIdentifiers = 196
-	KOBEXHeaderIDConnectionID OBEXHeaderIdentifiers = 203
-	KOBEXHeaderIDOBEX13WANUUID OBEXHeaderIdentifiers = 80
-	KOBEXHeaderIDOBEX13ObjectClass OBEXHeaderIdentifiers = 81
-	KOBEXHeaderIDOBEX13SessionParameters OBEXHeaderIdentifiers = 82
+	KOBEXHeaderIDName                        OBEXHeaderIdentifiers = 1
+	KOBEXHeaderIDDescription                 OBEXHeaderIdentifiers = 5
+	KOBEXHeaderIDReservedRangeStart          OBEXHeaderIdentifiers = 16
+	KOBEXHeaderIDReservedRangeEnd            OBEXHeaderIdentifiers = 47
+	KOBEXHeaderIDUserDefinedRangeStart       OBEXHeaderIdentifiers = 48
+	KOBEXHeaderIDUserDefinedRangeEnd         OBEXHeaderIdentifiers = 63
+	KOBEXHeaderIDType                        OBEXHeaderIdentifiers = 66
+	KOBEXHeaderIDTimeISO                     OBEXHeaderIdentifiers = 68
+	KOBEXHeaderIDTarget                      OBEXHeaderIdentifiers = 70
+	KOBEXHeaderIDHTTP                        OBEXHeaderIdentifiers = 71
+	KOBEXHeaderIDBody                        OBEXHeaderIdentifiers = 72
+	KOBEXHeaderIDEndOfBody                   OBEXHeaderIdentifiers = 73
+	KOBEXHeaderIDWho                         OBEXHeaderIdentifiers = 74
+	KOBEXHeaderIDAppParameters               OBEXHeaderIdentifiers = 76
+	KOBEXHeaderIDAuthorizationChallenge      OBEXHeaderIdentifiers = 77
+	KOBEXHeaderIDAuthorizationResponse       OBEXHeaderIdentifiers = 78
+	KOBEXHeaderIDObjectClass                 OBEXHeaderIdentifiers = 79
+	KOBEXHeaderIDCount                       OBEXHeaderIdentifiers = 192
+	KOBEXHeaderIDLength                      OBEXHeaderIdentifiers = 195
+	KOBEXHeaderIDTime4Byte                   OBEXHeaderIdentifiers = 196
+	KOBEXHeaderIDConnectionID                OBEXHeaderIdentifiers = 203
+	KOBEXHeaderIDOBEX13WANUUID               OBEXHeaderIdentifiers = 80
+	KOBEXHeaderIDOBEX13ObjectClass           OBEXHeaderIdentifiers = 81
+	KOBEXHeaderIDOBEX13SessionParameters     OBEXHeaderIdentifiers = 82
 	KOBEXHeaderIDOBEX13SessionSequenceNumber OBEXHeaderIdentifiers = 147
-	KOBEXHeaderIDOBEX13CreatorID OBEXHeaderIdentifiers = 207
+	KOBEXHeaderIDOBEX13CreatorID             OBEXHeaderIdentifiers = 207
 )
 
 func (e OBEXHeaderIdentifiers) String() string {
@@ -3477,15 +3477,15 @@ func (e OBEXHeaderIdentifiers) String() string {
 type OBEXNonceFlagValues int64
 
 const (
-	KOBEXNonceFlagNone OBEXNonceFlagValues = 0
+	KOBEXNonceFlagNone                 OBEXNonceFlagValues = 0
 	KOBEXNonceFlagSendUserIDInResponse OBEXNonceFlagValues = 1
-	KOBEXNonceFlagAccessModeReadOnly OBEXNonceFlagValues = 2
-	KOBEXNonceFlag2Reserved OBEXNonceFlagValues = 4
-	KOBEXNonceFlag3Reserved OBEXNonceFlagValues = 8
-	KOBEXNonceFlag4Reserved OBEXNonceFlagValues = 16
-	KOBEXNonceFlag5Reserved OBEXNonceFlagValues = 32
-	KOBEXNonceFlag6Reserved OBEXNonceFlagValues = 64
-	KOBEXNonceFlag7Reserved OBEXNonceFlagValues = 128
+	KOBEXNonceFlagAccessModeReadOnly   OBEXNonceFlagValues = 2
+	KOBEXNonceFlag2Reserved            OBEXNonceFlagValues = 4
+	KOBEXNonceFlag3Reserved            OBEXNonceFlagValues = 8
+	KOBEXNonceFlag4Reserved            OBEXNonceFlagValues = 16
+	KOBEXNonceFlag5Reserved            OBEXNonceFlagValues = 32
+	KOBEXNonceFlag6Reserved            OBEXNonceFlagValues = 64
+	KOBEXNonceFlag7Reserved            OBEXNonceFlagValues = 128
 )
 
 func (e OBEXNonceFlagValues) String() string {
@@ -3516,20 +3516,20 @@ func (e OBEXNonceFlagValues) String() string {
 type OBEXOpCodeCommandValues int64
 
 const (
-	KOBEXOpCodeReserved OBEXOpCodeCommandValues = 4
-	KOBEXOpCodeConnect OBEXOpCodeCommandValues = 128
-	KOBEXOpCodeDisconnect OBEXOpCodeCommandValues = 129
-	KOBEXOpCodePut OBEXOpCodeCommandValues = 2
-	KOBEXOpCodePutWithHighBitSet OBEXOpCodeCommandValues = 130
-	KOBEXOpCodeGet OBEXOpCodeCommandValues = 3
-	KOBEXOpCodeGetWithHighBitSet OBEXOpCodeCommandValues = 131
+	KOBEXOpCodeReserved               OBEXOpCodeCommandValues = 4
+	KOBEXOpCodeConnect                OBEXOpCodeCommandValues = 128
+	KOBEXOpCodeDisconnect             OBEXOpCodeCommandValues = 129
+	KOBEXOpCodePut                    OBEXOpCodeCommandValues = 2
+	KOBEXOpCodePutWithHighBitSet      OBEXOpCodeCommandValues = 130
+	KOBEXOpCodeGet                    OBEXOpCodeCommandValues = 3
+	KOBEXOpCodeGetWithHighBitSet      OBEXOpCodeCommandValues = 131
 	KOBEXOpCodeReservedWithHighBitSet OBEXOpCodeCommandValues = 132
-	KOBEXOpCodeSetPath OBEXOpCodeCommandValues = 133
-	KOBEXOpCodeAbort OBEXOpCodeCommandValues = 255
-	KOBEXOpCodeReservedRangeStart OBEXOpCodeCommandValues = 6
-	KOBEXOpCodeReservedRangeEnd OBEXOpCodeCommandValues = 15
-	KOBEXOpCodeUserDefinedStart OBEXOpCodeCommandValues = 16
-	KOBEXOpCodeUserDefinedEnd OBEXOpCodeCommandValues = 31
+	KOBEXOpCodeSetPath                OBEXOpCodeCommandValues = 133
+	KOBEXOpCodeAbort                  OBEXOpCodeCommandValues = 255
+	KOBEXOpCodeReservedRangeStart     OBEXOpCodeCommandValues = 6
+	KOBEXOpCodeReservedRangeEnd       OBEXOpCodeCommandValues = 15
+	KOBEXOpCodeUserDefinedStart       OBEXOpCodeCommandValues = 16
+	KOBEXOpCodeUserDefinedEnd         OBEXOpCodeCommandValues = 31
 )
 
 func (e OBEXOpCodeCommandValues) String() string {
@@ -3570,84 +3570,84 @@ func (e OBEXOpCodeCommandValues) String() string {
 type OBEXOpCodeResponseValues int64
 
 const (
-	KOBEXResponseCodeReservedRangeStart OBEXOpCodeResponseValues = 0
-	KOBEXResponseCodeReservedRangeEnd OBEXOpCodeResponseValues = 15
-	KOBEXResponseCodeContinue OBEXOpCodeResponseValues = 16
-	KOBEXResponseCodeContinueWithFinalBit OBEXOpCodeResponseValues = 144
-	KOBEXResponseCodeSuccess OBEXOpCodeResponseValues = 32
-	KOBEXResponseCodeSuccessWithFinalBit OBEXOpCodeResponseValues = 160
-	KOBEXResponseCodeCreated OBEXOpCodeResponseValues = 33
-	KOBEXResponseCodeCreatedWithFinalBit OBEXOpCodeResponseValues = 161
-	KOBEXResponseCodeAccepted OBEXOpCodeResponseValues = 34
-	KOBEXResponseCodeAcceptedWithFinalBit OBEXOpCodeResponseValues = 162
-	KOBEXResponseCodeNonAuthoritativeInfo OBEXOpCodeResponseValues = 35
-	KOBEXResponseCodeNonAuthoritativeInfoWithFinalBit OBEXOpCodeResponseValues = 163
-	KOBEXResponseCodeNoContent OBEXOpCodeResponseValues = 36
-	KOBEXResponseCodeNoContentWithFinalBit OBEXOpCodeResponseValues = 164
-	KOBEXResponseCodeResetContent OBEXOpCodeResponseValues = 37
-	KOBEXResponseCodeResetContentWithFinalBit OBEXOpCodeResponseValues = 165
-	KOBEXResponseCodePartialContent OBEXOpCodeResponseValues = 38
-	KOBEXResponseCodePartialContentWithFinalBit OBEXOpCodeResponseValues = 166
-	KOBEXResponseCodeMultipleChoices OBEXOpCodeResponseValues = 48
-	KOBEXResponseCodeMultipleChoicesWithFinalBit OBEXOpCodeResponseValues = 176
-	KOBEXResponseCodeMovedPermanently OBEXOpCodeResponseValues = 49
-	KOBEXResponseCodeMovedPermanentlyWithFinalBit OBEXOpCodeResponseValues = 177
-	KOBEXResponseCodeMovedTemporarily OBEXOpCodeResponseValues = 50
-	KOBEXResponseCodeMovedTemporarilyWithFinalBit OBEXOpCodeResponseValues = 178
-	KOBEXResponseCodeSeeOther OBEXOpCodeResponseValues = 51
-	KOBEXResponseCodeSeeOtherWithFinalBit OBEXOpCodeResponseValues = 179
-	KOBEXResponseCodeNotModified OBEXOpCodeResponseValues = 52
-	KOBEXResponseCodeNotModifiedWithFinalBit OBEXOpCodeResponseValues = 180
-	KOBEXResponseCodeUseProxy OBEXOpCodeResponseValues = 53
-	KOBEXResponseCodeUseProxyWithFinalBit OBEXOpCodeResponseValues = 181
-	KOBEXResponseCodeBadRequest OBEXOpCodeResponseValues = 64
-	KOBEXResponseCodeBadRequestWithFinalBit OBEXOpCodeResponseValues = 192
-	KOBEXResponseCodeUnauthorized OBEXOpCodeResponseValues = 65
-	KOBEXResponseCodeUnauthorizedWithFinalBit OBEXOpCodeResponseValues = 193
-	KOBEXResponseCodePaymentRequired OBEXOpCodeResponseValues = 66
-	KOBEXResponseCodePaymentRequiredWithFinalBit OBEXOpCodeResponseValues = 194
-	KOBEXResponseCodeForbidden OBEXOpCodeResponseValues = 67
-	KOBEXResponseCodeForbiddenWithFinalBit OBEXOpCodeResponseValues = 195
-	KOBEXResponseCodeNotFound OBEXOpCodeResponseValues = 68
-	KOBEXResponseCodeNotFoundWithFinalBit OBEXOpCodeResponseValues = 196
-	KOBEXResponseCodeMethodNotAllowed OBEXOpCodeResponseValues = 69
-	KOBEXResponseCodeMethodNotAllowedWithFinalBit OBEXOpCodeResponseValues = 197
-	KOBEXResponseCodeNotAcceptable OBEXOpCodeResponseValues = 70
-	KOBEXResponseCodeNotAcceptableWithFinalBit OBEXOpCodeResponseValues = 198
-	KOBEXResponseCodeProxyAuthenticationRequired OBEXOpCodeResponseValues = 71
+	KOBEXResponseCodeReservedRangeStart                      OBEXOpCodeResponseValues = 0
+	KOBEXResponseCodeReservedRangeEnd                        OBEXOpCodeResponseValues = 15
+	KOBEXResponseCodeContinue                                OBEXOpCodeResponseValues = 16
+	KOBEXResponseCodeContinueWithFinalBit                    OBEXOpCodeResponseValues = 144
+	KOBEXResponseCodeSuccess                                 OBEXOpCodeResponseValues = 32
+	KOBEXResponseCodeSuccessWithFinalBit                     OBEXOpCodeResponseValues = 160
+	KOBEXResponseCodeCreated                                 OBEXOpCodeResponseValues = 33
+	KOBEXResponseCodeCreatedWithFinalBit                     OBEXOpCodeResponseValues = 161
+	KOBEXResponseCodeAccepted                                OBEXOpCodeResponseValues = 34
+	KOBEXResponseCodeAcceptedWithFinalBit                    OBEXOpCodeResponseValues = 162
+	KOBEXResponseCodeNonAuthoritativeInfo                    OBEXOpCodeResponseValues = 35
+	KOBEXResponseCodeNonAuthoritativeInfoWithFinalBit        OBEXOpCodeResponseValues = 163
+	KOBEXResponseCodeNoContent                               OBEXOpCodeResponseValues = 36
+	KOBEXResponseCodeNoContentWithFinalBit                   OBEXOpCodeResponseValues = 164
+	KOBEXResponseCodeResetContent                            OBEXOpCodeResponseValues = 37
+	KOBEXResponseCodeResetContentWithFinalBit                OBEXOpCodeResponseValues = 165
+	KOBEXResponseCodePartialContent                          OBEXOpCodeResponseValues = 38
+	KOBEXResponseCodePartialContentWithFinalBit              OBEXOpCodeResponseValues = 166
+	KOBEXResponseCodeMultipleChoices                         OBEXOpCodeResponseValues = 48
+	KOBEXResponseCodeMultipleChoicesWithFinalBit             OBEXOpCodeResponseValues = 176
+	KOBEXResponseCodeMovedPermanently                        OBEXOpCodeResponseValues = 49
+	KOBEXResponseCodeMovedPermanentlyWithFinalBit            OBEXOpCodeResponseValues = 177
+	KOBEXResponseCodeMovedTemporarily                        OBEXOpCodeResponseValues = 50
+	KOBEXResponseCodeMovedTemporarilyWithFinalBit            OBEXOpCodeResponseValues = 178
+	KOBEXResponseCodeSeeOther                                OBEXOpCodeResponseValues = 51
+	KOBEXResponseCodeSeeOtherWithFinalBit                    OBEXOpCodeResponseValues = 179
+	KOBEXResponseCodeNotModified                             OBEXOpCodeResponseValues = 52
+	KOBEXResponseCodeNotModifiedWithFinalBit                 OBEXOpCodeResponseValues = 180
+	KOBEXResponseCodeUseProxy                                OBEXOpCodeResponseValues = 53
+	KOBEXResponseCodeUseProxyWithFinalBit                    OBEXOpCodeResponseValues = 181
+	KOBEXResponseCodeBadRequest                              OBEXOpCodeResponseValues = 64
+	KOBEXResponseCodeBadRequestWithFinalBit                  OBEXOpCodeResponseValues = 192
+	KOBEXResponseCodeUnauthorized                            OBEXOpCodeResponseValues = 65
+	KOBEXResponseCodeUnauthorizedWithFinalBit                OBEXOpCodeResponseValues = 193
+	KOBEXResponseCodePaymentRequired                         OBEXOpCodeResponseValues = 66
+	KOBEXResponseCodePaymentRequiredWithFinalBit             OBEXOpCodeResponseValues = 194
+	KOBEXResponseCodeForbidden                               OBEXOpCodeResponseValues = 67
+	KOBEXResponseCodeForbiddenWithFinalBit                   OBEXOpCodeResponseValues = 195
+	KOBEXResponseCodeNotFound                                OBEXOpCodeResponseValues = 68
+	KOBEXResponseCodeNotFoundWithFinalBit                    OBEXOpCodeResponseValues = 196
+	KOBEXResponseCodeMethodNotAllowed                        OBEXOpCodeResponseValues = 69
+	KOBEXResponseCodeMethodNotAllowedWithFinalBit            OBEXOpCodeResponseValues = 197
+	KOBEXResponseCodeNotAcceptable                           OBEXOpCodeResponseValues = 70
+	KOBEXResponseCodeNotAcceptableWithFinalBit               OBEXOpCodeResponseValues = 198
+	KOBEXResponseCodeProxyAuthenticationRequired             OBEXOpCodeResponseValues = 71
 	KOBEXResponseCodeProxyAuthenticationRequiredWithFinalBit OBEXOpCodeResponseValues = 199
-	KOBEXResponseCodeRequestTimeOut OBEXOpCodeResponseValues = 72
-	KOBEXResponseCodeRequestTimeOutWithFinalBit OBEXOpCodeResponseValues = 200
-	KOBEXResponseCodeConflict OBEXOpCodeResponseValues = 73
-	KOBEXResponseCodeConflictWithFinalBit OBEXOpCodeResponseValues = 201
-	KOBEXResponseCodeGone OBEXOpCodeResponseValues = 74
-	KOBEXResponseCodeGoneWithFinalBit OBEXOpCodeResponseValues = 202
-	KOBEXResponseCodeLengthRequired OBEXOpCodeResponseValues = 75
-	KOBEXResponseCodeLengthRequiredFinalBit OBEXOpCodeResponseValues = 203
-	KOBEXResponseCodePreconditionFailed OBEXOpCodeResponseValues = 76
-	KOBEXResponseCodePreconditionFailedWithFinalBit OBEXOpCodeResponseValues = 204
-	KOBEXResponseCodeRequestedEntityTooLarge OBEXOpCodeResponseValues = 77
-	KOBEXResponseCodeRequestedEntityTooLargeWithFinalBit OBEXOpCodeResponseValues = 205
-	KOBEXResponseCodeRequestURLTooLarge OBEXOpCodeResponseValues = 78
-	KOBEXResponseCodeRequestURLTooLargeWithFinalBit OBEXOpCodeResponseValues = 206
-	KOBEXResponseCodeUnsupportedMediaType OBEXOpCodeResponseValues = 79
-	KOBEXResponseCodeUnsupportedMediaTypeWithFinalBit OBEXOpCodeResponseValues = 207
-	KOBEXResponseCodeInternalServerError OBEXOpCodeResponseValues = 80
-	KOBEXResponseCodeInternalServerErrorWithFinalBit OBEXOpCodeResponseValues = 208
-	KOBEXResponseCodeNotImplemented OBEXOpCodeResponseValues = 81
-	KOBEXResponseCodeNotImplementedWithFinalBit OBEXOpCodeResponseValues = 209
-	KOBEXResponseCodeBadGateway OBEXOpCodeResponseValues = 82
-	KOBEXResponseCodeBadGatewayWithFinalBit OBEXOpCodeResponseValues = 210
-	KOBEXResponseCodeServiceUnavailable OBEXOpCodeResponseValues = 83
-	KOBEXResponseCodeServiceUnavailableWithFinalBit OBEXOpCodeResponseValues = 211
-	KOBEXResponseCodeGatewayTimeout OBEXOpCodeResponseValues = 84
-	KOBEXResponseCodeGatewayTimeoutWithFinalBit OBEXOpCodeResponseValues = 212
-	KOBEXResponseCodeHTTPVersionNotSupported OBEXOpCodeResponseValues = 85
-	KOBEXResponseCodeHTTPVersionNotSupportedWithFinalBit OBEXOpCodeResponseValues = 213
-	KOBEXResponseCodeDatabaseFull OBEXOpCodeResponseValues = 96
-	KOBEXResponseCodeDatabaseFullWithFinalBit OBEXOpCodeResponseValues = 224
-	KOBEXResponseCodeDatabaseLocked OBEXOpCodeResponseValues = 97
-	KOBEXResponseCodeDatabaseLockedWithFinalBit OBEXOpCodeResponseValues = 225
+	KOBEXResponseCodeRequestTimeOut                          OBEXOpCodeResponseValues = 72
+	KOBEXResponseCodeRequestTimeOutWithFinalBit              OBEXOpCodeResponseValues = 200
+	KOBEXResponseCodeConflict                                OBEXOpCodeResponseValues = 73
+	KOBEXResponseCodeConflictWithFinalBit                    OBEXOpCodeResponseValues = 201
+	KOBEXResponseCodeGone                                    OBEXOpCodeResponseValues = 74
+	KOBEXResponseCodeGoneWithFinalBit                        OBEXOpCodeResponseValues = 202
+	KOBEXResponseCodeLengthRequired                          OBEXOpCodeResponseValues = 75
+	KOBEXResponseCodeLengthRequiredFinalBit                  OBEXOpCodeResponseValues = 203
+	KOBEXResponseCodePreconditionFailed                      OBEXOpCodeResponseValues = 76
+	KOBEXResponseCodePreconditionFailedWithFinalBit          OBEXOpCodeResponseValues = 204
+	KOBEXResponseCodeRequestedEntityTooLarge                 OBEXOpCodeResponseValues = 77
+	KOBEXResponseCodeRequestedEntityTooLargeWithFinalBit     OBEXOpCodeResponseValues = 205
+	KOBEXResponseCodeRequestURLTooLarge                      OBEXOpCodeResponseValues = 78
+	KOBEXResponseCodeRequestURLTooLargeWithFinalBit          OBEXOpCodeResponseValues = 206
+	KOBEXResponseCodeUnsupportedMediaType                    OBEXOpCodeResponseValues = 79
+	KOBEXResponseCodeUnsupportedMediaTypeWithFinalBit        OBEXOpCodeResponseValues = 207
+	KOBEXResponseCodeInternalServerError                     OBEXOpCodeResponseValues = 80
+	KOBEXResponseCodeInternalServerErrorWithFinalBit         OBEXOpCodeResponseValues = 208
+	KOBEXResponseCodeNotImplemented                          OBEXOpCodeResponseValues = 81
+	KOBEXResponseCodeNotImplementedWithFinalBit              OBEXOpCodeResponseValues = 209
+	KOBEXResponseCodeBadGateway                              OBEXOpCodeResponseValues = 82
+	KOBEXResponseCodeBadGatewayWithFinalBit                  OBEXOpCodeResponseValues = 210
+	KOBEXResponseCodeServiceUnavailable                      OBEXOpCodeResponseValues = 83
+	KOBEXResponseCodeServiceUnavailableWithFinalBit          OBEXOpCodeResponseValues = 211
+	KOBEXResponseCodeGatewayTimeout                          OBEXOpCodeResponseValues = 84
+	KOBEXResponseCodeGatewayTimeoutWithFinalBit              OBEXOpCodeResponseValues = 212
+	KOBEXResponseCodeHTTPVersionNotSupported                 OBEXOpCodeResponseValues = 85
+	KOBEXResponseCodeHTTPVersionNotSupportedWithFinalBit     OBEXOpCodeResponseValues = 213
+	KOBEXResponseCodeDatabaseFull                            OBEXOpCodeResponseValues = 96
+	KOBEXResponseCodeDatabaseFullWithFinalBit                OBEXOpCodeResponseValues = 224
+	KOBEXResponseCodeDatabaseLocked                          OBEXOpCodeResponseValues = 97
+	KOBEXResponseCodeDatabaseLockedWithFinalBit              OBEXOpCodeResponseValues = 225
 )
 
 func (e OBEXOpCodeResponseValues) String() string {
@@ -3816,11 +3816,11 @@ func (e OBEXOpCodeResponseValues) String() string {
 type OBEXOpCodeSessionValues int64
 
 const (
-	KOBEXOpCodeCreateSession OBEXOpCodeSessionValues = 0
-	KOBEXOpCodeCloseSession OBEXOpCodeSessionValues = 1
+	KOBEXOpCodeCreateSession  OBEXOpCodeSessionValues = 0
+	KOBEXOpCodeCloseSession   OBEXOpCodeSessionValues = 1
 	KOBEXOpCodeSuspendSession OBEXOpCodeSessionValues = 2
-	KOBEXOpCodeResumeSession OBEXOpCodeSessionValues = 3
-	KOBEXOpCodeSetTimeout OBEXOpCodeSessionValues = 4
+	KOBEXOpCodeResumeSession  OBEXOpCodeSessionValues = 3
+	KOBEXOpCodeSetTimeout     OBEXOpCodeSessionValues = 4
 )
 
 func (e OBEXOpCodeSessionValues) String() string {
@@ -3843,15 +3843,15 @@ func (e OBEXOpCodeSessionValues) String() string {
 type OBEXPutFlagValues int64
 
 const (
-	KOBEXPutFlagNone OBEXPutFlagValues = 0
-	KOBEXPutFlagGoToParentDirFirst OBEXPutFlagValues = 1
+	KOBEXPutFlagNone                OBEXPutFlagValues = 0
+	KOBEXPutFlagGoToParentDirFirst  OBEXPutFlagValues = 1
 	KOBEXPutFlagDontCreateDirectory OBEXPutFlagValues = 2
-	KOBEXPutFlag2Reserved OBEXPutFlagValues = 4
-	KOBEXPutFlag3Reserved OBEXPutFlagValues = 8
-	KOBEXPutFlag4Reserved OBEXPutFlagValues = 16
-	KOBEXPutFlag5Reserved OBEXPutFlagValues = 32
-	KOBEXPutFlag6Reserved OBEXPutFlagValues = 64
-	KOBEXPutFlag7Reserved OBEXPutFlagValues = 128
+	KOBEXPutFlag2Reserved           OBEXPutFlagValues = 4
+	KOBEXPutFlag3Reserved           OBEXPutFlagValues = 8
+	KOBEXPutFlag4Reserved           OBEXPutFlagValues = 16
+	KOBEXPutFlag5Reserved           OBEXPutFlagValues = 32
+	KOBEXPutFlag6Reserved           OBEXPutFlagValues = 64
+	KOBEXPutFlag7Reserved           OBEXPutFlagValues = 128
 )
 
 func (e OBEXPutFlagValues) String() string {
@@ -3882,7 +3882,7 @@ func (e OBEXPutFlagValues) String() string {
 type OBEXRealmValues int64
 
 const (
-	KOBEXRealmASCII OBEXRealmValues = 0
+	KOBEXRealmASCII    OBEXRealmValues = 0
 	KOBEXRealmISO88591 OBEXRealmValues = 1
 	KOBEXRealmISO88592 OBEXRealmValues = 2
 	KOBEXRealmISO88593 OBEXRealmValues = 3
@@ -3892,7 +3892,7 @@ const (
 	KOBEXRealmISO88597 OBEXRealmValues = 7
 	KOBEXRealmISO88598 OBEXRealmValues = 8
 	KOBEXRealmISO88599 OBEXRealmValues = 9
-	KOBEXRealmUNICODE OBEXRealmValues = 255
+	KOBEXRealmUNICODE  OBEXRealmValues = 255
 )
 
 func (e OBEXRealmValues) String() string {
@@ -3927,19 +3927,19 @@ func (e OBEXRealmValues) String() string {
 type OBEXSessionEventTypes int64
 
 const (
-	KOBEXSessionEventTypeConnectCommandResponseReceived OBEXSessionEventTypes = 1329808707
+	KOBEXSessionEventTypeConnectCommandResponseReceived    OBEXSessionEventTypes = 1329808707
 	KOBEXSessionEventTypeDisconnectCommandResponseReceived OBEXSessionEventTypes = 1329808708
-	KOBEXSessionEventTypePutCommandResponseReceived OBEXSessionEventTypes = 1329808720
-	KOBEXSessionEventTypeGetCommandResponseReceived OBEXSessionEventTypes = 1329808711
-	KOBEXSessionEventTypeSetPathCommandResponseReceived OBEXSessionEventTypes = 1329808723
-	KOBEXSessionEventTypeAbortCommandResponseReceived OBEXSessionEventTypes = 1329808705
-	KOBEXSessionEventTypeConnectCommandReceived OBEXSessionEventTypes = 1330857283
-	KOBEXSessionEventTypeDisconnectCommandReceived OBEXSessionEventTypes = 1330857284
-	KOBEXSessionEventTypePutCommandReceived OBEXSessionEventTypes = 1330857296
-	KOBEXSessionEventTypeGetCommandReceived OBEXSessionEventTypes = 1330857287
-	KOBEXSessionEventTypeSetPathCommandReceived OBEXSessionEventTypes = 1330857299
-	KOBEXSessionEventTypeAbortCommandReceived OBEXSessionEventTypes = 1330857281
-	KOBEXSessionEventTypeError OBEXSessionEventTypes = 1330070853
+	KOBEXSessionEventTypePutCommandResponseReceived        OBEXSessionEventTypes = 1329808720
+	KOBEXSessionEventTypeGetCommandResponseReceived        OBEXSessionEventTypes = 1329808711
+	KOBEXSessionEventTypeSetPathCommandResponseReceived    OBEXSessionEventTypes = 1329808723
+	KOBEXSessionEventTypeAbortCommandResponseReceived      OBEXSessionEventTypes = 1329808705
+	KOBEXSessionEventTypeConnectCommandReceived            OBEXSessionEventTypes = 1330857283
+	KOBEXSessionEventTypeDisconnectCommandReceived         OBEXSessionEventTypes = 1330857284
+	KOBEXSessionEventTypePutCommandReceived                OBEXSessionEventTypes = 1330857296
+	KOBEXSessionEventTypeGetCommandReceived                OBEXSessionEventTypes = 1330857287
+	KOBEXSessionEventTypeSetPathCommandReceived            OBEXSessionEventTypes = 1330857299
+	KOBEXSessionEventTypeAbortCommandReceived              OBEXSessionEventTypes = 1330857281
+	KOBEXSessionEventTypeError                             OBEXSessionEventTypes = 1330070853
 )
 
 func (e OBEXSessionEventTypes) String() string {
@@ -3978,12 +3978,12 @@ func (e OBEXSessionEventTypes) String() string {
 type OBEXSessionParameterTags int64
 
 const (
-	KOBEXSessionParameterTagDeviceAddress OBEXSessionParameterTags = 0
-	KOBEXSessionParameterTagNonce OBEXSessionParameterTags = 1
-	KOBEXSessionParameterTagSessionID OBEXSessionParameterTags = 2
+	KOBEXSessionParameterTagDeviceAddress      OBEXSessionParameterTags = 0
+	KOBEXSessionParameterTagNonce              OBEXSessionParameterTags = 1
+	KOBEXSessionParameterTagSessionID          OBEXSessionParameterTags = 2
 	KOBEXSessionParameterTagNextSequenceNumber OBEXSessionParameterTags = 3
-	KOBEXSessionParameterTagTimeout OBEXSessionParameterTags = 4
-	KOBEXSessionParameterTagSessionOpcode OBEXSessionParameterTags = 5
+	KOBEXSessionParameterTagTimeout            OBEXSessionParameterTags = 4
+	KOBEXSessionParameterTagSessionOpcode      OBEXSessionParameterTags = 5
 )
 
 func (e OBEXSessionParameterTags) String() string {
@@ -4009,7 +4009,7 @@ type OBEXTransportEventTypes int64
 
 const (
 	KOBEXTransportEventTypeDataReceived OBEXTransportEventTypes = 1147237441
-	KOBEXTransportEventTypeStatus OBEXTransportEventTypes = 1400136020
+	KOBEXTransportEventTypeStatus       OBEXTransportEventTypes = 1400136020
 )
 
 func (e OBEXTransportEventTypes) String() string {
@@ -4041,11 +4041,11 @@ func (e OBEXVersions) String() string {
 type ProtocolParameters int64
 
 const (
-	KBluetoothSDPProtocolParameterL2CAPPSM ProtocolParameters = 1
-	KBluetoothSDPProtocolParameterRFCOMMChannel ProtocolParameters = 1
-	KBluetoothSDPProtocolParameterTCPPort ProtocolParameters = 1
-	KBluetoothSDPProtocolParameterUDPPort ProtocolParameters = 1
-	KBluetoothSDPProtocolParameterBNEPVersion ProtocolParameters = 1
+	KBluetoothSDPProtocolParameterL2CAPPSM                           ProtocolParameters = 1
+	KBluetoothSDPProtocolParameterRFCOMMChannel                      ProtocolParameters = 1
+	KBluetoothSDPProtocolParameterTCPPort                            ProtocolParameters = 1
+	KBluetoothSDPProtocolParameterUDPPort                            ProtocolParameters = 1
+	KBluetoothSDPProtocolParameterBNEPVersion                        ProtocolParameters = 1
 	KBluetoothSDPProtocolParameterBNEPSupportedNetworkPacketTypeList ProtocolParameters = 2
 )
 
@@ -4063,17 +4063,17 @@ func (e ProtocolParameters) String() string {
 type SDPAttributeDeviceIdentificationRecord int64
 
 const (
-	KBluetoothSDPAttributeDeviceIdentifierServiceDescription SDPAttributeDeviceIdentificationRecord = 1
-	KBluetoothSDPAttributeDeviceIdentifierDocumentationURL SDPAttributeDeviceIdentificationRecord = 10
+	KBluetoothSDPAttributeDeviceIdentifierServiceDescription  SDPAttributeDeviceIdentificationRecord = 1
+	KBluetoothSDPAttributeDeviceIdentifierDocumentationURL    SDPAttributeDeviceIdentificationRecord = 10
 	KBluetoothSDPAttributeDeviceIdentifierClientExecutableURL SDPAttributeDeviceIdentificationRecord = 11
-	KBluetoothSDPAttributeDeviceIdentifierSpecificationID SDPAttributeDeviceIdentificationRecord = 512
-	KBluetoothSDPAttributeDeviceIdentifierVendorID SDPAttributeDeviceIdentificationRecord = 513
-	KBluetoothSDPAttributeDeviceIdentifierProductID SDPAttributeDeviceIdentificationRecord = 514
-	KBluetoothSDPAttributeDeviceIdentifierVersion SDPAttributeDeviceIdentificationRecord = 515
-	KBluetoothSDPAttributeDeviceIdentifierPrimaryRecord SDPAttributeDeviceIdentificationRecord = 516
-	KBluetoothSDPAttributeDeviceIdentifierVendorIDSource SDPAttributeDeviceIdentificationRecord = 517
-	KBluetoothSDPAttributeDeviceIdentifierReservedRangeStart SDPAttributeDeviceIdentificationRecord = 518
-	KBluetoothSDPAttributeDeviceIdentifierReservedRangeEnd SDPAttributeDeviceIdentificationRecord = 767
+	KBluetoothSDPAttributeDeviceIdentifierSpecificationID     SDPAttributeDeviceIdentificationRecord = 512
+	KBluetoothSDPAttributeDeviceIdentifierVendorID            SDPAttributeDeviceIdentificationRecord = 513
+	KBluetoothSDPAttributeDeviceIdentifierProductID           SDPAttributeDeviceIdentificationRecord = 514
+	KBluetoothSDPAttributeDeviceIdentifierVersion             SDPAttributeDeviceIdentificationRecord = 515
+	KBluetoothSDPAttributeDeviceIdentifierPrimaryRecord       SDPAttributeDeviceIdentificationRecord = 516
+	KBluetoothSDPAttributeDeviceIdentifierVendorIDSource      SDPAttributeDeviceIdentificationRecord = 517
+	KBluetoothSDPAttributeDeviceIdentifierReservedRangeStart  SDPAttributeDeviceIdentificationRecord = 518
+	KBluetoothSDPAttributeDeviceIdentifierReservedRangeEnd    SDPAttributeDeviceIdentificationRecord = 767
 )
 
 func (e SDPAttributeDeviceIdentificationRecord) String() string {
@@ -4108,65 +4108,65 @@ func (e SDPAttributeDeviceIdentificationRecord) String() string {
 type SDPAttributeIdentifierCodes int64
 
 const (
-	KBluetoothSDPAttributeIdentifierServiceRecordHandle SDPAttributeIdentifierCodes = 0
-	KBluetoothSDPAttributeIdentifierServiceClassIDList SDPAttributeIdentifierCodes = 1
-	KBluetoothSDPAttributeIdentifierServiceRecordState SDPAttributeIdentifierCodes = 2
-	KBluetoothSDPAttributeIdentifierServiceID SDPAttributeIdentifierCodes = 3
-	KBluetoothSDPAttributeIdentifierProtocolDescriptorList SDPAttributeIdentifierCodes = 4
-	KBluetoothSDPAttributeIdentifierBrowseGroupList SDPAttributeIdentifierCodes = 5
-	KBluetoothSDPAttributeIdentifierLanguageBaseAttributeIDList SDPAttributeIdentifierCodes = 6
-	KBluetoothSDPAttributeIdentifierServiceInfoTimeToLive SDPAttributeIdentifierCodes = 7
-	KBluetoothSDPAttributeIdentifierServiceAvailability SDPAttributeIdentifierCodes = 8
-	KBluetoothSDPAttributeIdentifierBluetoothProfileDescriptorList SDPAttributeIdentifierCodes = 9
-	KBluetoothSDPAttributeIdentifierDocumentationURL SDPAttributeIdentifierCodes = 10
-	KBluetoothSDPAttributeIdentifierClientExecutableURL SDPAttributeIdentifierCodes = 11
-	KBluetoothSDPAttributeIdentifierIconURL SDPAttributeIdentifierCodes = 12
+	KBluetoothSDPAttributeIdentifierServiceRecordHandle               SDPAttributeIdentifierCodes = 0
+	KBluetoothSDPAttributeIdentifierServiceClassIDList                SDPAttributeIdentifierCodes = 1
+	KBluetoothSDPAttributeIdentifierServiceRecordState                SDPAttributeIdentifierCodes = 2
+	KBluetoothSDPAttributeIdentifierServiceID                         SDPAttributeIdentifierCodes = 3
+	KBluetoothSDPAttributeIdentifierProtocolDescriptorList            SDPAttributeIdentifierCodes = 4
+	KBluetoothSDPAttributeIdentifierBrowseGroupList                   SDPAttributeIdentifierCodes = 5
+	KBluetoothSDPAttributeIdentifierLanguageBaseAttributeIDList       SDPAttributeIdentifierCodes = 6
+	KBluetoothSDPAttributeIdentifierServiceInfoTimeToLive             SDPAttributeIdentifierCodes = 7
+	KBluetoothSDPAttributeIdentifierServiceAvailability               SDPAttributeIdentifierCodes = 8
+	KBluetoothSDPAttributeIdentifierBluetoothProfileDescriptorList    SDPAttributeIdentifierCodes = 9
+	KBluetoothSDPAttributeIdentifierDocumentationURL                  SDPAttributeIdentifierCodes = 10
+	KBluetoothSDPAttributeIdentifierClientExecutableURL               SDPAttributeIdentifierCodes = 11
+	KBluetoothSDPAttributeIdentifierIconURL                           SDPAttributeIdentifierCodes = 12
 	KBluetoothSDPAttributeIdentifierAdditionalProtocolsDescriptorList SDPAttributeIdentifierCodes = 13
-	KBluetoothSDPAttributeIdentifierVersionNumberList SDPAttributeIdentifierCodes = 512
-	KBluetoothSDPAttributeIdentifierServiceDatabaseState SDPAttributeIdentifierCodes = 513
-	KBluetoothSDPAttributeIdentifierGroupID SDPAttributeIdentifierCodes = 512
-	KBluetoothSDPAttributeIdentifierIPSubnet SDPAttributeIdentifierCodes = 512
-	KBluetoothSDPAttributeIdentifierHIDReleaseNumber SDPAttributeIdentifierCodes = 512
-	KBluetoothSDPAttributeIdentifierHIDParserVersion SDPAttributeIdentifierCodes = 513
-	KBluetoothSDPAttributeIdentifierHIDDeviceSubclass SDPAttributeIdentifierCodes = 514
-	KBluetoothSDPAttributeIdentifierHIDCountryCode SDPAttributeIdentifierCodes = 515
-	KBluetoothSDPAttributeIdentifierHIDVirtualCable SDPAttributeIdentifierCodes = 516
-	KBluetoothSDPAttributeIdentifierHIDReconnectInitiate SDPAttributeIdentifierCodes = 517
-	KBluetoothSDPAttributeIdentifierHIDDescriptorList SDPAttributeIdentifierCodes = 518
-	KBluetoothSDPAttributeIdentifierHIDLangIDBaseList SDPAttributeIdentifierCodes = 519
-	KBluetoothSDPAttributeIdentifierHIDSDPDisable SDPAttributeIdentifierCodes = 520
-	KBluetoothSDPAttributeIdentifierHIDBatteryPower SDPAttributeIdentifierCodes = 521
-	KBluetoothSDPAttributeIdentifierHIDRemoteWake SDPAttributeIdentifierCodes = 522
-	KBluetoothSDPAttributeIdentifierHIDProfileVersion SDPAttributeIdentifierCodes = 523
-	KBluetoothSDPAttributeIdentifierHIDSupervisionTimeout SDPAttributeIdentifierCodes = 524
-	KBluetoothSDPAttributeIdentifierHIDNormallyConnectable SDPAttributeIdentifierCodes = 525
-	KBluetoothSDPAttributeIdentifierHIDBootDevice SDPAttributeIdentifierCodes = 526
-	KBluetoothSDPAttributeIdentifierHIDSSRHostMaxLatency SDPAttributeIdentifierCodes = 527
-	KBluetoothSDPAttributeIdentifierHIDSSRHostMinTimeout SDPAttributeIdentifierCodes = 528
-	KBluetoothSDPAttributeIdentifierServiceVersion SDPAttributeIdentifierCodes = 768
-	KBluetoothSDPAttributeIdentifierExternalNetwork SDPAttributeIdentifierCodes = 769
-	KBluetoothSDPAttributeIdentifierNetwork SDPAttributeIdentifierCodes = 769
-	KBluetoothSDPAttributeIdentifierSupportedDataStoresList SDPAttributeIdentifierCodes = 769
-	KBluetoothSDPAttributeIdentifierFaxClass1Support SDPAttributeIdentifierCodes = 770
-	KBluetoothSDPAttributeIdentifierRemoteAudioVolumeControl SDPAttributeIdentifierCodes = 770
-	KBluetoothSDPAttributeIdentifierFaxClass2_0Support SDPAttributeIdentifierCodes = 771
-	KBluetoothSDPAttributeIdentifierSupporterFormatsList SDPAttributeIdentifierCodes = 771
-	KBluetoothSDPAttributeIdentifierFaxClass2Support SDPAttributeIdentifierCodes = 772
-	KBluetoothSDPAttributeIdentifierAudioFeedbackSupport SDPAttributeIdentifierCodes = 773
-	KBluetoothSDPAttributeIdentifierNetworkAddress SDPAttributeIdentifierCodes = 774
-	KBluetoothSDPAttributeIdentifierWAPGateway SDPAttributeIdentifierCodes = 775
-	KBluetoothSDPAttributeIdentifierHomepageURL SDPAttributeIdentifierCodes = 776
-	KBluetoothSDPAttributeIdentifierWAPStackType SDPAttributeIdentifierCodes = 777
-	KBluetoothSDPAttributeIdentifierSecurityDescription SDPAttributeIdentifierCodes = 778
-	KBluetoothSDPAttributeIdentifierNetAccessType SDPAttributeIdentifierCodes = 779
-	KBluetoothSDPAttributeIdentifierMaxNetAccessRate SDPAttributeIdentifierCodes = 780
-	KBluetoothSDPAttributeIdentifierSupportedCapabilities SDPAttributeIdentifierCodes = 784
-	KBluetoothSDPAttributeIdentifierSupportedFeatures SDPAttributeIdentifierCodes = 785
-	KBluetoothSDPAttributeIdentifierSupportedFunctions SDPAttributeIdentifierCodes = 786
-	KBluetoothSDPAttributeIdentifierTotalImagingDataCapacity SDPAttributeIdentifierCodes = 787
-	KBluetoothSDPAttributeIdentifierServiceName SDPAttributeIdentifierCodes = 0
-	KBluetoothSDPAttributeIdentifierServiceDescription SDPAttributeIdentifierCodes = 1
-	KBluetoothSDPAttributeIdentifierProviderName SDPAttributeIdentifierCodes = 2
+	KBluetoothSDPAttributeIdentifierVersionNumberList                 SDPAttributeIdentifierCodes = 512
+	KBluetoothSDPAttributeIdentifierServiceDatabaseState              SDPAttributeIdentifierCodes = 513
+	KBluetoothSDPAttributeIdentifierGroupID                           SDPAttributeIdentifierCodes = 512
+	KBluetoothSDPAttributeIdentifierIPSubnet                          SDPAttributeIdentifierCodes = 512
+	KBluetoothSDPAttributeIdentifierHIDReleaseNumber                  SDPAttributeIdentifierCodes = 512
+	KBluetoothSDPAttributeIdentifierHIDParserVersion                  SDPAttributeIdentifierCodes = 513
+	KBluetoothSDPAttributeIdentifierHIDDeviceSubclass                 SDPAttributeIdentifierCodes = 514
+	KBluetoothSDPAttributeIdentifierHIDCountryCode                    SDPAttributeIdentifierCodes = 515
+	KBluetoothSDPAttributeIdentifierHIDVirtualCable                   SDPAttributeIdentifierCodes = 516
+	KBluetoothSDPAttributeIdentifierHIDReconnectInitiate              SDPAttributeIdentifierCodes = 517
+	KBluetoothSDPAttributeIdentifierHIDDescriptorList                 SDPAttributeIdentifierCodes = 518
+	KBluetoothSDPAttributeIdentifierHIDLangIDBaseList                 SDPAttributeIdentifierCodes = 519
+	KBluetoothSDPAttributeIdentifierHIDSDPDisable                     SDPAttributeIdentifierCodes = 520
+	KBluetoothSDPAttributeIdentifierHIDBatteryPower                   SDPAttributeIdentifierCodes = 521
+	KBluetoothSDPAttributeIdentifierHIDRemoteWake                     SDPAttributeIdentifierCodes = 522
+	KBluetoothSDPAttributeIdentifierHIDProfileVersion                 SDPAttributeIdentifierCodes = 523
+	KBluetoothSDPAttributeIdentifierHIDSupervisionTimeout             SDPAttributeIdentifierCodes = 524
+	KBluetoothSDPAttributeIdentifierHIDNormallyConnectable            SDPAttributeIdentifierCodes = 525
+	KBluetoothSDPAttributeIdentifierHIDBootDevice                     SDPAttributeIdentifierCodes = 526
+	KBluetoothSDPAttributeIdentifierHIDSSRHostMaxLatency              SDPAttributeIdentifierCodes = 527
+	KBluetoothSDPAttributeIdentifierHIDSSRHostMinTimeout              SDPAttributeIdentifierCodes = 528
+	KBluetoothSDPAttributeIdentifierServiceVersion                    SDPAttributeIdentifierCodes = 768
+	KBluetoothSDPAttributeIdentifierExternalNetwork                   SDPAttributeIdentifierCodes = 769
+	KBluetoothSDPAttributeIdentifierNetwork                           SDPAttributeIdentifierCodes = 769
+	KBluetoothSDPAttributeIdentifierSupportedDataStoresList           SDPAttributeIdentifierCodes = 769
+	KBluetoothSDPAttributeIdentifierFaxClass1Support                  SDPAttributeIdentifierCodes = 770
+	KBluetoothSDPAttributeIdentifierRemoteAudioVolumeControl          SDPAttributeIdentifierCodes = 770
+	KBluetoothSDPAttributeIdentifierFaxClass2_0Support                SDPAttributeIdentifierCodes = 771
+	KBluetoothSDPAttributeIdentifierSupporterFormatsList              SDPAttributeIdentifierCodes = 771
+	KBluetoothSDPAttributeIdentifierFaxClass2Support                  SDPAttributeIdentifierCodes = 772
+	KBluetoothSDPAttributeIdentifierAudioFeedbackSupport              SDPAttributeIdentifierCodes = 773
+	KBluetoothSDPAttributeIdentifierNetworkAddress                    SDPAttributeIdentifierCodes = 774
+	KBluetoothSDPAttributeIdentifierWAPGateway                        SDPAttributeIdentifierCodes = 775
+	KBluetoothSDPAttributeIdentifierHomepageURL                       SDPAttributeIdentifierCodes = 776
+	KBluetoothSDPAttributeIdentifierWAPStackType                      SDPAttributeIdentifierCodes = 777
+	KBluetoothSDPAttributeIdentifierSecurityDescription               SDPAttributeIdentifierCodes = 778
+	KBluetoothSDPAttributeIdentifierNetAccessType                     SDPAttributeIdentifierCodes = 779
+	KBluetoothSDPAttributeIdentifierMaxNetAccessRate                  SDPAttributeIdentifierCodes = 780
+	KBluetoothSDPAttributeIdentifierSupportedCapabilities             SDPAttributeIdentifierCodes = 784
+	KBluetoothSDPAttributeIdentifierSupportedFeatures                 SDPAttributeIdentifierCodes = 785
+	KBluetoothSDPAttributeIdentifierSupportedFunctions                SDPAttributeIdentifierCodes = 786
+	KBluetoothSDPAttributeIdentifierTotalImagingDataCapacity          SDPAttributeIdentifierCodes = 787
+	KBluetoothSDPAttributeIdentifierServiceName                       SDPAttributeIdentifierCodes = 0
+	KBluetoothSDPAttributeIdentifierServiceDescription                SDPAttributeIdentifierCodes = 1
+	KBluetoothSDPAttributeIdentifierProviderName                      SDPAttributeIdentifierCodes = 2
 )
 
 func (e SDPAttributeIdentifierCodes) String() string {
@@ -4275,75 +4275,75 @@ func (e SDPAttributeIdentifierCodes) String() string {
 type SDPServiceClasses int64
 
 const (
-	KBluetoothSDPUUID16ServiceClassServiceDiscoveryServer SDPServiceClasses = 4096
-	KBluetoothSDPUUID16ServiceClassBrowseGroupDescriptor SDPServiceClasses = 4097
-	KBluetoothSDPUUID16ServiceClassPublicBrowseGroup SDPServiceClasses = 4098
-	KBluetoothSDPUUID16ServiceClassSerialPort SDPServiceClasses = 4353
-	KBluetoothSDPUUID16ServiceClassLANAccessUsingPPP SDPServiceClasses = 4354
-	KBluetoothSDPUUID16ServiceClassDialupNetworking SDPServiceClasses = 4355
-	KBluetoothSDPUUID16ServiceClassIrMCSync SDPServiceClasses = 4356
-	KBluetoothSDPUUID16ServiceClassOBEXObjectPush SDPServiceClasses = 4357
-	KBluetoothSDPUUID16ServiceClassOBEXFileTransfer SDPServiceClasses = 4358
-	KBluetoothSDPUUID16ServiceClassIrMCSyncCommand SDPServiceClasses = 4359
-	KBluetoothSDPUUID16ServiceClassHeadset SDPServiceClasses = 4360
-	KBluetoothSDPUUID16ServiceClassCordlessTelephony SDPServiceClasses = 4361
-	KBluetoothSDPUUID16ServiceClassAudioSource SDPServiceClasses = 4362
-	KBluetoothSDPUUID16ServiceClassAudioSink SDPServiceClasses = 4363
-	KBluetoothSDPUUID16ServiceClassAVRemoteControlTarget SDPServiceClasses = 4364
-	KBluetoothSDPUUID16ServiceClassAdvancedAudioDistribution SDPServiceClasses = 4365
-	KBluetoothSDPUUID16ServiceClassAVRemoteControl SDPServiceClasses = 4366
-	KBluetoothSDPUUID16ServiceClassAVRemoteControlController SDPServiceClasses = 4367
-	KBluetoothSDPUUID16ServiceClassIntercom SDPServiceClasses = 4368
-	KBluetoothSDPUUID16ServiceClassFax SDPServiceClasses = 4369
-	KBluetoothSDPUUID16ServiceClassHeadsetAudioGateway SDPServiceClasses = 4370
-	KBluetoothSDPUUID16ServiceClassWAP SDPServiceClasses = 4371
-	KBluetoothSDPUUID16ServiceClassWAPClient SDPServiceClasses = 4372
-	KBluetoothSDPUUID16ServiceClassPANU SDPServiceClasses = 4373
-	KBluetoothSDPUUID16ServiceClassNAP SDPServiceClasses = 4374
-	KBluetoothSDPUUID16ServiceClassGN SDPServiceClasses = 4375
-	KBluetoothSDPUUID16ServiceClassDirectPrinting SDPServiceClasses = 4376
-	KBluetoothSDPUUID16ServiceClassReferencePrinting SDPServiceClasses = 4377
-	KBluetoothSDPUUID16ServiceClassImaging SDPServiceClasses = 4378
-	KBluetoothSDPUUID16ServiceClassImagingResponder SDPServiceClasses = 4379
-	KBluetoothSDPUUID16ServiceClassImagingAutomaticArchive SDPServiceClasses = 4380
-	KBluetoothSDPUUID16ServiceClassImagingReferencedObjects SDPServiceClasses = 4381
-	KBluetoothSDPUUID16ServiceClassHandsFree SDPServiceClasses = 4382
-	KBluetoothSDPUUID16ServiceClassHandsFreeAudioGateway SDPServiceClasses = 4383
+	KBluetoothSDPUUID16ServiceClassServiceDiscoveryServer                SDPServiceClasses = 4096
+	KBluetoothSDPUUID16ServiceClassBrowseGroupDescriptor                 SDPServiceClasses = 4097
+	KBluetoothSDPUUID16ServiceClassPublicBrowseGroup                     SDPServiceClasses = 4098
+	KBluetoothSDPUUID16ServiceClassSerialPort                            SDPServiceClasses = 4353
+	KBluetoothSDPUUID16ServiceClassLANAccessUsingPPP                     SDPServiceClasses = 4354
+	KBluetoothSDPUUID16ServiceClassDialupNetworking                      SDPServiceClasses = 4355
+	KBluetoothSDPUUID16ServiceClassIrMCSync                              SDPServiceClasses = 4356
+	KBluetoothSDPUUID16ServiceClassOBEXObjectPush                        SDPServiceClasses = 4357
+	KBluetoothSDPUUID16ServiceClassOBEXFileTransfer                      SDPServiceClasses = 4358
+	KBluetoothSDPUUID16ServiceClassIrMCSyncCommand                       SDPServiceClasses = 4359
+	KBluetoothSDPUUID16ServiceClassHeadset                               SDPServiceClasses = 4360
+	KBluetoothSDPUUID16ServiceClassCordlessTelephony                     SDPServiceClasses = 4361
+	KBluetoothSDPUUID16ServiceClassAudioSource                           SDPServiceClasses = 4362
+	KBluetoothSDPUUID16ServiceClassAudioSink                             SDPServiceClasses = 4363
+	KBluetoothSDPUUID16ServiceClassAVRemoteControlTarget                 SDPServiceClasses = 4364
+	KBluetoothSDPUUID16ServiceClassAdvancedAudioDistribution             SDPServiceClasses = 4365
+	KBluetoothSDPUUID16ServiceClassAVRemoteControl                       SDPServiceClasses = 4366
+	KBluetoothSDPUUID16ServiceClassAVRemoteControlController             SDPServiceClasses = 4367
+	KBluetoothSDPUUID16ServiceClassIntercom                              SDPServiceClasses = 4368
+	KBluetoothSDPUUID16ServiceClassFax                                   SDPServiceClasses = 4369
+	KBluetoothSDPUUID16ServiceClassHeadsetAudioGateway                   SDPServiceClasses = 4370
+	KBluetoothSDPUUID16ServiceClassWAP                                   SDPServiceClasses = 4371
+	KBluetoothSDPUUID16ServiceClassWAPClient                             SDPServiceClasses = 4372
+	KBluetoothSDPUUID16ServiceClassPANU                                  SDPServiceClasses = 4373
+	KBluetoothSDPUUID16ServiceClassNAP                                   SDPServiceClasses = 4374
+	KBluetoothSDPUUID16ServiceClassGN                                    SDPServiceClasses = 4375
+	KBluetoothSDPUUID16ServiceClassDirectPrinting                        SDPServiceClasses = 4376
+	KBluetoothSDPUUID16ServiceClassReferencePrinting                     SDPServiceClasses = 4377
+	KBluetoothSDPUUID16ServiceClassImaging                               SDPServiceClasses = 4378
+	KBluetoothSDPUUID16ServiceClassImagingResponder                      SDPServiceClasses = 4379
+	KBluetoothSDPUUID16ServiceClassImagingAutomaticArchive               SDPServiceClasses = 4380
+	KBluetoothSDPUUID16ServiceClassImagingReferencedObjects              SDPServiceClasses = 4381
+	KBluetoothSDPUUID16ServiceClassHandsFree                             SDPServiceClasses = 4382
+	KBluetoothSDPUUID16ServiceClassHandsFreeAudioGateway                 SDPServiceClasses = 4383
 	KBluetoothSDPUUID16ServiceClassDirectPrintingReferenceObjectsService SDPServiceClasses = 4384
-	KBluetoothSDPUUID16ServiceClassReflectedUI SDPServiceClasses = 4385
-	KBluetoothSDPUUID16ServiceClassBasicPrinting SDPServiceClasses = 4386
-	KBluetoothSDPUUID16ServiceClassPrintingStatus SDPServiceClasses = 4387
-	KBluetoothSDPUUID16ServiceClassHumanInterfaceDeviceService SDPServiceClasses = 4388
-	KBluetoothSDPUUID16ServiceClassHardcopyCableReplacement SDPServiceClasses = 4389
-	KBluetoothSDPUUID16ServiceClassHCR_Print SDPServiceClasses = 4390
-	KBluetoothSDPUUID16ServiceClassHCR_Scan SDPServiceClasses = 4391
-	KBluetoothSDPUUID16ServiceClassCommonISDNAccess SDPServiceClasses = 4392
-	KBluetoothSDPUUID16ServiceClassVideoConferencingGW SDPServiceClasses = 4393
-	KBluetoothSDPUUID16ServiceClassUDI_MT SDPServiceClasses = 4394
-	KBluetoothSDPUUID16ServiceClassUDI_TA SDPServiceClasses = 4395
-	KBluetoothSDPUUID16ServiceClassAudioVideo SDPServiceClasses = 4396
-	KBluetoothSDPUUID16ServiceClassSIM_Access SDPServiceClasses = 4397
-	KBluetoothSDPUUID16ServiceClassPhonebookAccess_PCE SDPServiceClasses = 4398
-	KBluetoothSDPUUID16ServiceClassPhonebookAccess_PSE SDPServiceClasses = 4399
-	KBluetoothSDPUUID16ServiceClassPhonebookAccess SDPServiceClasses = 4400
-	KBluetoothSDPUUID16ServiceClassHeadset_HS SDPServiceClasses = 4401
-	KBluetoothSDPUUID16ServiceClassMessageAccessServer SDPServiceClasses = 4402
-	KBluetoothSDPUUID16ServiceClassMessageNotificationServer SDPServiceClasses = 4403
-	KBluetoothSDPUUID16ServiceClassMessageAccessProfile SDPServiceClasses = 4404
-	KBluetoothSDPUUID16ServiceClassGlobalNavigationSatelliteSystem SDPServiceClasses = 4405
+	KBluetoothSDPUUID16ServiceClassReflectedUI                           SDPServiceClasses = 4385
+	KBluetoothSDPUUID16ServiceClassBasicPrinting                         SDPServiceClasses = 4386
+	KBluetoothSDPUUID16ServiceClassPrintingStatus                        SDPServiceClasses = 4387
+	KBluetoothSDPUUID16ServiceClassHumanInterfaceDeviceService           SDPServiceClasses = 4388
+	KBluetoothSDPUUID16ServiceClassHardcopyCableReplacement              SDPServiceClasses = 4389
+	KBluetoothSDPUUID16ServiceClassHCR_Print                             SDPServiceClasses = 4390
+	KBluetoothSDPUUID16ServiceClassHCR_Scan                              SDPServiceClasses = 4391
+	KBluetoothSDPUUID16ServiceClassCommonISDNAccess                      SDPServiceClasses = 4392
+	KBluetoothSDPUUID16ServiceClassVideoConferencingGW                   SDPServiceClasses = 4393
+	KBluetoothSDPUUID16ServiceClassUDI_MT                                SDPServiceClasses = 4394
+	KBluetoothSDPUUID16ServiceClassUDI_TA                                SDPServiceClasses = 4395
+	KBluetoothSDPUUID16ServiceClassAudioVideo                            SDPServiceClasses = 4396
+	KBluetoothSDPUUID16ServiceClassSIM_Access                            SDPServiceClasses = 4397
+	KBluetoothSDPUUID16ServiceClassPhonebookAccess_PCE                   SDPServiceClasses = 4398
+	KBluetoothSDPUUID16ServiceClassPhonebookAccess_PSE                   SDPServiceClasses = 4399
+	KBluetoothSDPUUID16ServiceClassPhonebookAccess                       SDPServiceClasses = 4400
+	KBluetoothSDPUUID16ServiceClassHeadset_HS                            SDPServiceClasses = 4401
+	KBluetoothSDPUUID16ServiceClassMessageAccessServer                   SDPServiceClasses = 4402
+	KBluetoothSDPUUID16ServiceClassMessageNotificationServer             SDPServiceClasses = 4403
+	KBluetoothSDPUUID16ServiceClassMessageAccessProfile                  SDPServiceClasses = 4404
+	KBluetoothSDPUUID16ServiceClassGlobalNavigationSatelliteSystem       SDPServiceClasses = 4405
 	KBluetoothSDPUUID16ServiceClassGlobalNavigationSatelliteSystemServer SDPServiceClasses = 4406
-	KBluetoothSDPUUID16ServiceClassPnPInformation SDPServiceClasses = 4608
-	KBluetoothSDPUUID16ServiceClassGenericNetworking SDPServiceClasses = 4609
-	KBluetoothSDPUUID16ServiceClassGenericFileTransfer SDPServiceClasses = 4610
-	KBluetoothSDPUUID16ServiceClassGenericAudio SDPServiceClasses = 4611
-	KBluetoothSDPUUID16ServiceClassGenericTelephony SDPServiceClasses = 4612
-	KBluetoothSDPUUID16ServiceClassVideoSource SDPServiceClasses = 4867
-	KBluetoothSDPUUID16ServiceClassVideoSink SDPServiceClasses = 4868
-	KBluetoothSDPUUID16ServiceClassVideoDistribution SDPServiceClasses = 4869
-	KBluetoothSDPUUID16ServiceClassHealthDevice SDPServiceClasses = 5120
-	KBluetoothSDPUUID16ServiceClassHealthDeviceSource SDPServiceClasses = 5121
-	KBluetoothSDPUUID16ServiceClassHealthDeviceSink SDPServiceClasses = 5122
-	KBluetoothSDPUUID16ServiceClassGATT SDPServiceClasses = 6145
+	KBluetoothSDPUUID16ServiceClassPnPInformation                        SDPServiceClasses = 4608
+	KBluetoothSDPUUID16ServiceClassGenericNetworking                     SDPServiceClasses = 4609
+	KBluetoothSDPUUID16ServiceClassGenericFileTransfer                   SDPServiceClasses = 4610
+	KBluetoothSDPUUID16ServiceClassGenericAudio                          SDPServiceClasses = 4611
+	KBluetoothSDPUUID16ServiceClassGenericTelephony                      SDPServiceClasses = 4612
+	KBluetoothSDPUUID16ServiceClassVideoSource                           SDPServiceClasses = 4867
+	KBluetoothSDPUUID16ServiceClassVideoSink                             SDPServiceClasses = 4868
+	KBluetoothSDPUUID16ServiceClassVideoDistribution                     SDPServiceClasses = 4869
+	KBluetoothSDPUUID16ServiceClassHealthDevice                          SDPServiceClasses = 5120
+	KBluetoothSDPUUID16ServiceClassHealthDeviceSource                    SDPServiceClasses = 5121
+	KBluetoothSDPUUID16ServiceClassHealthDeviceSink                      SDPServiceClasses = 5122
+	KBluetoothSDPUUID16ServiceClassGATT                                  SDPServiceClasses = 6145
 )
 
 func (e SDPServiceClasses) String() string {
@@ -4495,8 +4495,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -4515,13 +4515,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -4548,24 +4548,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -4606,9 +4606,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -4628,12 +4628,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -4660,14 +4660,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -4696,9 +4696,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -4717,36 +4717,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -4776,8 +4790,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -4797,62 +4811,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -4978,15 +4992,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -5024,7 +5038,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -5032,7 +5048,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -5050,8 +5066,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -5070,26 +5086,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -5111,27 +5143,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -5155,11 +5187,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -5184,22 +5216,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -5250,139 +5282,153 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	KBluetoothAirModeALawLog = 1
-	KBluetoothAirModeCVSD = 2
+	KBluetoothAirModeALawLog         = 1
+	KBluetoothAirModeCVSD            = 2
 	KBluetoothAirModeTransparentData = 3
-	KBluetoothAirModeULawLog = 0
+	KBluetoothAirModeULawLog         = 0
 )
 
 const (
-	KBluetoothConnectionHandleNone = 65535
+	KBluetoothConnectionHandleNone                 = 65535
 	KBluetoothConnectionHandleSerialDeviceReserved = 4095
 )
 
 const (
-	KBluetoothDeviceClassMajorAny = 707406378
-	KBluetoothDeviceClassMajorAudio = 4
-	KBluetoothDeviceClassMajorComputer = 1
-	KBluetoothDeviceClassMajorEnd = 1852796518
-	KBluetoothDeviceClassMajorHealth = 9
-	KBluetoothDeviceClassMajorImaging = 6
+	KBluetoothDeviceClassMajorAny            = 707406378
+	KBluetoothDeviceClassMajorAudio          = 4
+	KBluetoothDeviceClassMajorComputer       = 1
+	KBluetoothDeviceClassMajorEnd            = 1852796518
+	KBluetoothDeviceClassMajorHealth         = 9
+	KBluetoothDeviceClassMajorImaging        = 6
 	KBluetoothDeviceClassMajorLANAccessPoint = 3
-	KBluetoothDeviceClassMajorMiscellaneous = 0
-	KBluetoothDeviceClassMajorNone = 1852796517
-	KBluetoothDeviceClassMajorPeripheral = 5
-	KBluetoothDeviceClassMajorPhone = 2
-	KBluetoothDeviceClassMajorToy = 8
-	KBluetoothDeviceClassMajorUnclassified = 31
-	KBluetoothDeviceClassMajorWearable = 7
+	KBluetoothDeviceClassMajorMiscellaneous  = 0
+	KBluetoothDeviceClassMajorNone           = 1852796517
+	KBluetoothDeviceClassMajorPeripheral     = 5
+	KBluetoothDeviceClassMajorPhone          = 2
+	KBluetoothDeviceClassMajorToy            = 8
+	KBluetoothDeviceClassMajorUnclassified   = 31
+	KBluetoothDeviceClassMajorWearable       = 7
 )
 
 const (
-	KBluetoothDeviceClassMinorAny = 707406378
-	KBluetoothDeviceClassMinorAudioCamcorder = 13
-	KBluetoothDeviceClassMinorAudioCar = 8
-	KBluetoothDeviceClassMinorAudioGamingToy = 18
-	KBluetoothDeviceClassMinorAudioHandsFree = 2
-	KBluetoothDeviceClassMinorAudioHeadphones = 6
-	KBluetoothDeviceClassMinorAudioHeadset = 1
-	KBluetoothDeviceClassMinorAudioHiFi = 10
-	KBluetoothDeviceClassMinorAudioLoudspeaker = 5
-	KBluetoothDeviceClassMinorAudioMicrophone = 4
-	KBluetoothDeviceClassMinorAudioPortable = 7
-	KBluetoothDeviceClassMinorAudioReserved1 = 3
-	KBluetoothDeviceClassMinorAudioReserved2 = 17
-	KBluetoothDeviceClassMinorAudioSetTopBox = 9
-	KBluetoothDeviceClassMinorAudioUnclassified = 0
-	KBluetoothDeviceClassMinorAudioVCR = 11
-	KBluetoothDeviceClassMinorAudioVideoCamera = 12
-	KBluetoothDeviceClassMinorAudioVideoConferencing = 16
+	KBluetoothDeviceClassMinorAny                             = 707406378
+	KBluetoothDeviceClassMinorAudioCamcorder                  = 13
+	KBluetoothDeviceClassMinorAudioCar                        = 8
+	KBluetoothDeviceClassMinorAudioGamingToy                  = 18
+	KBluetoothDeviceClassMinorAudioHandsFree                  = 2
+	KBluetoothDeviceClassMinorAudioHeadphones                 = 6
+	KBluetoothDeviceClassMinorAudioHeadset                    = 1
+	KBluetoothDeviceClassMinorAudioHiFi                       = 10
+	KBluetoothDeviceClassMinorAudioLoudspeaker                = 5
+	KBluetoothDeviceClassMinorAudioMicrophone                 = 4
+	KBluetoothDeviceClassMinorAudioPortable                   = 7
+	KBluetoothDeviceClassMinorAudioReserved1                  = 3
+	KBluetoothDeviceClassMinorAudioReserved2                  = 17
+	KBluetoothDeviceClassMinorAudioSetTopBox                  = 9
+	KBluetoothDeviceClassMinorAudioUnclassified               = 0
+	KBluetoothDeviceClassMinorAudioVCR                        = 11
+	KBluetoothDeviceClassMinorAudioVideoCamera                = 12
+	KBluetoothDeviceClassMinorAudioVideoConferencing          = 16
 	KBluetoothDeviceClassMinorAudioVideoDisplayAndLoudspeaker = 15
-	KBluetoothDeviceClassMinorAudioVideoMonitor = 14
-	KBluetoothDeviceClassMinorComputerDesktopWorkstation = 1
-	KBluetoothDeviceClassMinorComputerHandheld = 4
-	KBluetoothDeviceClassMinorComputerLaptop = 3
-	KBluetoothDeviceClassMinorComputerPalmSized = 5
-	KBluetoothDeviceClassMinorComputerServer = 2
-	KBluetoothDeviceClassMinorComputerUnclassified = 0
-	KBluetoothDeviceClassMinorComputerWearable = 6
-	KBluetoothDeviceClassMinorEnd = 1852796518
-	KBluetoothDeviceClassMinorHealthBloodPressureMonitor = 1
-	KBluetoothDeviceClassMinorHealthDataDisplay = 7
-	KBluetoothDeviceClassMinorHealthGlucoseMeter = 4
-	KBluetoothDeviceClassMinorHealthHeartRateMonitor = 6
-	KBluetoothDeviceClassMinorHealthPulseOximeter = 5
-	KBluetoothDeviceClassMinorHealthScale = 3
-	KBluetoothDeviceClassMinorHealthThermometer = 2
-	KBluetoothDeviceClassMinorHealthUndefined = 0
-	KBluetoothDeviceClassMinorImaging1Camera = 8
-	KBluetoothDeviceClassMinorImaging1Display = 4
-	KBluetoothDeviceClassMinorImaging1Printer = 32
-	KBluetoothDeviceClassMinorImaging1Scanner = 16
-	KBluetoothDeviceClassMinorImaging2Unclassified = 0
-	KBluetoothDeviceClassMinorNone = 1852796517
-	KBluetoothDeviceClassMinorPeripheral1Combo = 48
-	KBluetoothDeviceClassMinorPeripheral1Keyboard = 16
-	KBluetoothDeviceClassMinorPeripheral1Pointing = 32
-	KBluetoothDeviceClassMinorPeripheral2AnyPointing = 1886349678
-	KBluetoothDeviceClassMinorPeripheral2CardReader = 6
-	KBluetoothDeviceClassMinorPeripheral2DigitalPen = 7
-	KBluetoothDeviceClassMinorPeripheral2DigitizerTablet = 5
-	KBluetoothDeviceClassMinorPeripheral2Gamepad = 2
-	KBluetoothDeviceClassMinorPeripheral2GesturalInputDevice = 9
-	KBluetoothDeviceClassMinorPeripheral2HandheldScanner = 8
-	KBluetoothDeviceClassMinorPeripheral2Joystick = 1
-	KBluetoothDeviceClassMinorPeripheral2RemoteControl = 3
-	KBluetoothDeviceClassMinorPeripheral2SensingDevice = 4
-	KBluetoothDeviceClassMinorPeripheral2Unclassified = 0
-	KBluetoothDeviceClassMinorPhoneCellular = 1
-	KBluetoothDeviceClassMinorPhoneCommonISDNAccess = 5
-	KBluetoothDeviceClassMinorPhoneCordless = 2
-	KBluetoothDeviceClassMinorPhoneSmartPhone = 3
-	KBluetoothDeviceClassMinorPhoneUnclassified = 0
-	KBluetoothDeviceClassMinorPhoneWiredModemOrVoiceGateway = 4
-	KBluetoothDeviceClassMinorToyController = 4
-	KBluetoothDeviceClassMinorToyDollActionFigure = 3
-	KBluetoothDeviceClassMinorToyGame = 5
-	KBluetoothDeviceClassMinorToyRobot = 1
-	KBluetoothDeviceClassMinorToyVehicle = 2
-	KBluetoothDeviceClassMinorWearableGlasses = 5
-	KBluetoothDeviceClassMinorWearableHelmet = 4
-	KBluetoothDeviceClassMinorWearableJacket = 3
-	KBluetoothDeviceClassMinorWearablePager = 2
-	KBluetoothDeviceClassMinorWearableWristWatch = 1
+	KBluetoothDeviceClassMinorAudioVideoMonitor               = 14
+	KBluetoothDeviceClassMinorComputerDesktopWorkstation      = 1
+	KBluetoothDeviceClassMinorComputerHandheld                = 4
+	KBluetoothDeviceClassMinorComputerLaptop                  = 3
+	KBluetoothDeviceClassMinorComputerPalmSized               = 5
+	KBluetoothDeviceClassMinorComputerServer                  = 2
+	KBluetoothDeviceClassMinorComputerUnclassified            = 0
+	KBluetoothDeviceClassMinorComputerWearable                = 6
+	KBluetoothDeviceClassMinorEnd                             = 1852796518
+	KBluetoothDeviceClassMinorHealthBloodPressureMonitor      = 1
+	KBluetoothDeviceClassMinorHealthDataDisplay               = 7
+	KBluetoothDeviceClassMinorHealthGlucoseMeter              = 4
+	KBluetoothDeviceClassMinorHealthHeartRateMonitor          = 6
+	KBluetoothDeviceClassMinorHealthPulseOximeter             = 5
+	KBluetoothDeviceClassMinorHealthScale                     = 3
+	KBluetoothDeviceClassMinorHealthThermometer               = 2
+	KBluetoothDeviceClassMinorHealthUndefined                 = 0
+	KBluetoothDeviceClassMinorImaging1Camera                  = 8
+	KBluetoothDeviceClassMinorImaging1Display                 = 4
+	KBluetoothDeviceClassMinorImaging1Printer                 = 32
+	KBluetoothDeviceClassMinorImaging1Scanner                 = 16
+	KBluetoothDeviceClassMinorImaging2Unclassified            = 0
+	KBluetoothDeviceClassMinorNone                            = 1852796517
+	KBluetoothDeviceClassMinorPeripheral1Combo                = 48
+	KBluetoothDeviceClassMinorPeripheral1Keyboard             = 16
+	KBluetoothDeviceClassMinorPeripheral1Pointing             = 32
+	KBluetoothDeviceClassMinorPeripheral2AnyPointing          = 1886349678
+	KBluetoothDeviceClassMinorPeripheral2CardReader           = 6
+	KBluetoothDeviceClassMinorPeripheral2DigitalPen           = 7
+	KBluetoothDeviceClassMinorPeripheral2DigitizerTablet      = 5
+	KBluetoothDeviceClassMinorPeripheral2Gamepad              = 2
+	KBluetoothDeviceClassMinorPeripheral2GesturalInputDevice  = 9
+	KBluetoothDeviceClassMinorPeripheral2HandheldScanner      = 8
+	KBluetoothDeviceClassMinorPeripheral2Joystick             = 1
+	KBluetoothDeviceClassMinorPeripheral2RemoteControl        = 3
+	KBluetoothDeviceClassMinorPeripheral2SensingDevice        = 4
+	KBluetoothDeviceClassMinorPeripheral2Unclassified         = 0
+	KBluetoothDeviceClassMinorPhoneCellular                   = 1
+	KBluetoothDeviceClassMinorPhoneCommonISDNAccess           = 5
+	KBluetoothDeviceClassMinorPhoneCordless                   = 2
+	KBluetoothDeviceClassMinorPhoneSmartPhone                 = 3
+	KBluetoothDeviceClassMinorPhoneUnclassified               = 0
+	KBluetoothDeviceClassMinorPhoneWiredModemOrVoiceGateway   = 4
+	KBluetoothDeviceClassMinorToyController                   = 4
+	KBluetoothDeviceClassMinorToyDollActionFigure             = 3
+	KBluetoothDeviceClassMinorToyGame                         = 5
+	KBluetoothDeviceClassMinorToyRobot                        = 1
+	KBluetoothDeviceClassMinorToyVehicle                      = 2
+	KBluetoothDeviceClassMinorWearableGlasses                 = 5
+	KBluetoothDeviceClassMinorWearableHelmet                  = 4
+	KBluetoothDeviceClassMinorWearableJacket                  = 3
+	KBluetoothDeviceClassMinorWearablePager                   = 2
+	KBluetoothDeviceClassMinorWearableWristWatch              = 1
 )
 
 const (
@@ -5390,72 +5436,72 @@ const (
 )
 
 const (
-	KBluetoothAllowRoleSwitch = 1
+	KBluetoothAllowRoleSwitch     = 1
 	KBluetoothDontAllowRoleSwitch = 0
 )
 
 const (
 	KBluetoothEncryptionEnableBREDRAESCCM = 2
-	KBluetoothEncryptionEnableBREDRE0 = 1
-	KBluetoothEncryptionEnableLEAESCCM = 1
-	KBluetoothEncryptionEnableOff = 0
-	KBluetoothEncryptionEnableOn = 1
+	KBluetoothEncryptionEnableBREDRE0     = 1
+	KBluetoothEncryptionEnableLEAESCCM    = 1
+	KBluetoothEncryptionEnableOff         = 0
+	KBluetoothEncryptionEnableOn          = 1
 )
 
 const (
-	KBluetoothGAPAppearanceGenericBarcodeScanner = 704
-	KBluetoothGAPAppearanceGenericBloodPressure = 896
-	KBluetoothGAPAppearanceGenericClock = 256
-	KBluetoothGAPAppearanceGenericComputer = 128
-	KBluetoothGAPAppearanceGenericCycling = 1152
-	KBluetoothGAPAppearanceGenericDisplay = 320
-	KBluetoothGAPAppearanceGenericEyeGlasses = 448
-	KBluetoothGAPAppearanceGenericGlucoseMeter = 1024
-	KBluetoothGAPAppearanceGenericHeartrateSensor = 832
-	KBluetoothGAPAppearanceGenericHumanInterfaceDevice = 960
-	KBluetoothGAPAppearanceGenericKeyring = 576
-	KBluetoothGAPAppearanceGenericMediaPlayer = 640
-	KBluetoothGAPAppearanceGenericPhone = 64
-	KBluetoothGAPAppearanceGenericRemoteControl = 384
-	KBluetoothGAPAppearanceGenericRunningWalkingSensor = 1088
-	KBluetoothGAPAppearanceGenericTag = 512
-	KBluetoothGAPAppearanceGenericThermometer = 768
-	KBluetoothGAPAppearanceGenericWatch = 192
-	KBluetoothGAPAppearanceHumanInterfaceDeviceBarcodeScanner = 968
-	KBluetoothGAPAppearanceHumanInterfaceDeviceCardReader = 966
-	KBluetoothGAPAppearanceHumanInterfaceDeviceDigitalPen = 967
+	KBluetoothGAPAppearanceGenericBarcodeScanner               = 704
+	KBluetoothGAPAppearanceGenericBloodPressure                = 896
+	KBluetoothGAPAppearanceGenericClock                        = 256
+	KBluetoothGAPAppearanceGenericComputer                     = 128
+	KBluetoothGAPAppearanceGenericCycling                      = 1152
+	KBluetoothGAPAppearanceGenericDisplay                      = 320
+	KBluetoothGAPAppearanceGenericEyeGlasses                   = 448
+	KBluetoothGAPAppearanceGenericGlucoseMeter                 = 1024
+	KBluetoothGAPAppearanceGenericHeartrateSensor              = 832
+	KBluetoothGAPAppearanceGenericHumanInterfaceDevice         = 960
+	KBluetoothGAPAppearanceGenericKeyring                      = 576
+	KBluetoothGAPAppearanceGenericMediaPlayer                  = 640
+	KBluetoothGAPAppearanceGenericPhone                        = 64
+	KBluetoothGAPAppearanceGenericRemoteControl                = 384
+	KBluetoothGAPAppearanceGenericRunningWalkingSensor         = 1088
+	KBluetoothGAPAppearanceGenericTag                          = 512
+	KBluetoothGAPAppearanceGenericThermometer                  = 768
+	KBluetoothGAPAppearanceGenericWatch                        = 192
+	KBluetoothGAPAppearanceHumanInterfaceDeviceBarcodeScanner  = 968
+	KBluetoothGAPAppearanceHumanInterfaceDeviceCardReader      = 966
+	KBluetoothGAPAppearanceHumanInterfaceDeviceDigitalPen      = 967
 	KBluetoothGAPAppearanceHumanInterfaceDeviceDigitizerTablet = 965
-	KBluetoothGAPAppearanceHumanInterfaceDeviceGamepad = 964
-	KBluetoothGAPAppearanceHumanInterfaceDeviceJoystick = 963
-	KBluetoothGAPAppearanceHumanInterfaceDeviceKeyboard = 961
-	KBluetoothGAPAppearanceHumanInterfaceDeviceMouse = 962
-	KBluetoothGAPAppearanceUnknown = 0
+	KBluetoothGAPAppearanceHumanInterfaceDeviceGamepad         = 964
+	KBluetoothGAPAppearanceHumanInterfaceDeviceJoystick        = 963
+	KBluetoothGAPAppearanceHumanInterfaceDeviceKeyboard        = 961
+	KBluetoothGAPAppearanceHumanInterfaceDeviceMouse           = 962
+	KBluetoothGAPAppearanceUnknown                             = 0
 )
 
 const (
-	KBluetoothGeneralInquiryAccessCodeIndex = 0
+	KBluetoothGeneralInquiryAccessCodeIndex    = 0
 	KBluetoothGeneralInquiryAccessCodeLAPValue = 10390323
-	KBluetoothLimitedInquiryAccessCodeEnd = 10390273
-	KBluetoothLimitedInquiryAccessCodeIndex = 1
+	KBluetoothLimitedInquiryAccessCodeEnd      = 10390273
+	KBluetoothLimitedInquiryAccessCodeIndex    = 1
 	KBluetoothLimitedInquiryAccessCodeLAPValue = 10390272
 )
 
 const (
-	KBluetoothHCICommandPacketHeaderSize = 3
+	KBluetoothHCICommandPacketHeaderSize  = 3
 	KBluetoothHCICommandPacketMaxDataSize = 255
-	KBluetoothHCIDataPacketHeaderSize = 4
-	KBluetoothHCIDataPacketMaxDataSize = 65535
-	KBluetoothHCIEventPacketHeaderSize = 2
-	KBluetoothHCIEventPacketMaxDataSize = 255
-	KBluetoothHCIMaxCommandPacketSize = 258
-	KBluetoothHCIMaxDataPacketSize = 65539
-	KBluetoothHCIMaxEventPacketSize = 257
+	KBluetoothHCIDataPacketHeaderSize     = 4
+	KBluetoothHCIDataPacketMaxDataSize    = 65535
+	KBluetoothHCIEventPacketHeaderSize    = 2
+	KBluetoothHCIEventPacketMaxDataSize   = 255
+	KBluetoothHCIMaxCommandPacketSize     = 258
+	KBluetoothHCIMaxDataPacketSize        = 65539
+	KBluetoothHCIMaxEventPacketSize       = 257
 )
 
 const (
-	KBluetoothHCIErroneousDataReportingDisabled = 0
-	KBluetoothHCIErroneousDataReportingEnabled = 1
-	KBluetoothHCIErroneousDataReportingReservedEnd = 255
+	KBluetoothHCIErroneousDataReportingDisabled      = 0
+	KBluetoothHCIErroneousDataReportingEnabled       = 1
+	KBluetoothHCIErroneousDataReportingReservedEnd   = 255
 	KBluetoothHCIErroneousDataReportingReservedStart = 2
 )
 
@@ -5464,554 +5510,554 @@ const (
 )
 
 const (
-	KBluetoothHCIErrorACLConnectionAlreadyExists = 11
-	KBluetoothHCIErrorAuthenticationFailure = 5
-	KBluetoothHCIErrorChannelClassificationNotSupported = 46
-	KBluetoothHCIErrorCoarseClockAdjustmentRejected = 64
-	KBluetoothHCIErrorCommandDisallowed = 12
-	KBluetoothHCIErrorConnectionFailedToBeEstablished = 62
+	KBluetoothHCIErrorACLConnectionAlreadyExists                    = 11
+	KBluetoothHCIErrorAuthenticationFailure                         = 5
+	KBluetoothHCIErrorChannelClassificationNotSupported             = 46
+	KBluetoothHCIErrorCoarseClockAdjustmentRejected                 = 64
+	KBluetoothHCIErrorCommandDisallowed                             = 12
+	KBluetoothHCIErrorConnectionFailedToBeEstablished               = 62
 	KBluetoothHCIErrorConnectionRejectedDueToNoSuitableChannelFound = 57
-	KBluetoothHCIErrorConnectionTerminatedByLocalHost = 22
-	KBluetoothHCIErrorConnectionTerminatedDueToMICFailure = 61
-	KBluetoothHCIErrorConnectionTimeout = 8
-	KBluetoothHCIErrorControllerBusy = 58
-	KBluetoothHCIErrorDifferentTransactionCollision = 42
-	KBluetoothHCIErrorDirectedAdvertisingTimeout = 60
-	KBluetoothHCIErrorEncryptionModeNotAcceptable = 37
-	KBluetoothHCIErrorExtendedInquiryResponseTooLarge = 54
-	KBluetoothHCIErrorHardwareFailure = 3
-	KBluetoothHCIErrorHostBusyPairing = 56
-	KBluetoothHCIErrorHostRejectedLimitedResources = 13
-	KBluetoothHCIErrorHostRejectedRemoteDeviceIsPersonal = 15
-	KBluetoothHCIErrorHostRejectedSecurityReasons = 14
-	KBluetoothHCIErrorHostRejectedUnacceptableDeviceAddress = 15
-	KBluetoothHCIErrorHostTimeout = 16
-	KBluetoothHCIErrorInstantPassed = 40
-	KBluetoothHCIErrorInsufficientSecurity = 47
-	KBluetoothHCIErrorInvalidHCICommandParameters = 18
-	KBluetoothHCIErrorInvalidLMPParameters = 30
-	KBluetoothHCIErrorKeyMissing = 6
-	KBluetoothHCIErrorLMPErrorTransactionCollision = 35
-	KBluetoothHCIErrorLMPPDUNotAllowed = 36
-	KBluetoothHCIErrorLMPResponseTimeout = 34
-	KBluetoothHCIErrorMACConnectionFailed = 63
-	KBluetoothHCIErrorMax = 64
-	KBluetoothHCIErrorMaxNumberOfConnections = 9
-	KBluetoothHCIErrorMaxNumberOfSCOConnectionsToADevice = 10
-	KBluetoothHCIErrorMemoryFull = 7
-	KBluetoothHCIErrorNoConnection = 2
-	KBluetoothHCIErrorOtherEndTerminatedConnectionAboutToPowerOff = 21
-	KBluetoothHCIErrorOtherEndTerminatedConnectionLowResources = 20
-	KBluetoothHCIErrorOtherEndTerminatedConnectionUserEnded = 19
-	KBluetoothHCIErrorPageTimeout = 4
-	KBluetoothHCIErrorPairingNotAllowed = 24
-	KBluetoothHCIErrorPairingWithUnitKeyNotSupported = 41
-	KBluetoothHCIErrorParameterOutOfMandatoryRange = 48
-	KBluetoothHCIErrorQoSNotSupported = 39
-	KBluetoothHCIErrorQoSRejected = 45
-	KBluetoothHCIErrorQoSUnacceptableParameter = 44
-	KBluetoothHCIErrorRepeatedAttempts = 23
-	KBluetoothHCIErrorReservedSlotViolation = 52
-	KBluetoothHCIErrorRoleChangeNotAllowed = 33
-	KBluetoothHCIErrorRoleSwitchFailed = 53
-	KBluetoothHCIErrorRoleSwitchPending = 49
-	KBluetoothHCIErrorSCOAirModeRejected = 29
-	KBluetoothHCIErrorSCOIntervalRejected = 28
-	KBluetoothHCIErrorSCOOffsetRejected = 27
-	KBluetoothHCIErrorSecureSimplePairingNotSupportedByHost = 55
-	KBluetoothHCIErrorSuccess = 0
-	KBluetoothHCIErrorUnacceptableConnectionInterval = 59
-	KBluetoothHCIErrorUnitKeyUsed = 38
-	KBluetoothHCIErrorUnknownHCICommand = 1
-	KBluetoothHCIErrorUnknownLMPPDU = 25
-	KBluetoothHCIErrorUnspecifiedError = 31
-	KBluetoothHCIErrorUnsupportedFeatureOrParameterValue = 17
-	KBluetoothHCIErrorUnsupportedLMPParameterValue = 32
-	KBluetoothHCIErrorUnsupportedRemoteFeature = 26
+	KBluetoothHCIErrorConnectionTerminatedByLocalHost               = 22
+	KBluetoothHCIErrorConnectionTerminatedDueToMICFailure           = 61
+	KBluetoothHCIErrorConnectionTimeout                             = 8
+	KBluetoothHCIErrorControllerBusy                                = 58
+	KBluetoothHCIErrorDifferentTransactionCollision                 = 42
+	KBluetoothHCIErrorDirectedAdvertisingTimeout                    = 60
+	KBluetoothHCIErrorEncryptionModeNotAcceptable                   = 37
+	KBluetoothHCIErrorExtendedInquiryResponseTooLarge               = 54
+	KBluetoothHCIErrorHardwareFailure                               = 3
+	KBluetoothHCIErrorHostBusyPairing                               = 56
+	KBluetoothHCIErrorHostRejectedLimitedResources                  = 13
+	KBluetoothHCIErrorHostRejectedRemoteDeviceIsPersonal            = 15
+	KBluetoothHCIErrorHostRejectedSecurityReasons                   = 14
+	KBluetoothHCIErrorHostRejectedUnacceptableDeviceAddress         = 15
+	KBluetoothHCIErrorHostTimeout                                   = 16
+	KBluetoothHCIErrorInstantPassed                                 = 40
+	KBluetoothHCIErrorInsufficientSecurity                          = 47
+	KBluetoothHCIErrorInvalidHCICommandParameters                   = 18
+	KBluetoothHCIErrorInvalidLMPParameters                          = 30
+	KBluetoothHCIErrorKeyMissing                                    = 6
+	KBluetoothHCIErrorLMPErrorTransactionCollision                  = 35
+	KBluetoothHCIErrorLMPPDUNotAllowed                              = 36
+	KBluetoothHCIErrorLMPResponseTimeout                            = 34
+	KBluetoothHCIErrorMACConnectionFailed                           = 63
+	KBluetoothHCIErrorMax                                           = 64
+	KBluetoothHCIErrorMaxNumberOfConnections                        = 9
+	KBluetoothHCIErrorMaxNumberOfSCOConnectionsToADevice            = 10
+	KBluetoothHCIErrorMemoryFull                                    = 7
+	KBluetoothHCIErrorNoConnection                                  = 2
+	KBluetoothHCIErrorOtherEndTerminatedConnectionAboutToPowerOff   = 21
+	KBluetoothHCIErrorOtherEndTerminatedConnectionLowResources      = 20
+	KBluetoothHCIErrorOtherEndTerminatedConnectionUserEnded         = 19
+	KBluetoothHCIErrorPageTimeout                                   = 4
+	KBluetoothHCIErrorPairingNotAllowed                             = 24
+	KBluetoothHCIErrorPairingWithUnitKeyNotSupported                = 41
+	KBluetoothHCIErrorParameterOutOfMandatoryRange                  = 48
+	KBluetoothHCIErrorQoSNotSupported                               = 39
+	KBluetoothHCIErrorQoSRejected                                   = 45
+	KBluetoothHCIErrorQoSUnacceptableParameter                      = 44
+	KBluetoothHCIErrorRepeatedAttempts                              = 23
+	KBluetoothHCIErrorReservedSlotViolation                         = 52
+	KBluetoothHCIErrorRoleChangeNotAllowed                          = 33
+	KBluetoothHCIErrorRoleSwitchFailed                              = 53
+	KBluetoothHCIErrorRoleSwitchPending                             = 49
+	KBluetoothHCIErrorSCOAirModeRejected                            = 29
+	KBluetoothHCIErrorSCOIntervalRejected                           = 28
+	KBluetoothHCIErrorSCOOffsetRejected                             = 27
+	KBluetoothHCIErrorSecureSimplePairingNotSupportedByHost         = 55
+	KBluetoothHCIErrorSuccess                                       = 0
+	KBluetoothHCIErrorUnacceptableConnectionInterval                = 59
+	KBluetoothHCIErrorUnitKeyUsed                                   = 38
+	KBluetoothHCIErrorUnknownHCICommand                             = 1
+	KBluetoothHCIErrorUnknownLMPPDU                                 = 25
+	KBluetoothHCIErrorUnspecifiedError                              = 31
+	KBluetoothHCIErrorUnsupportedFeatureOrParameterValue            = 17
+	KBluetoothHCIErrorUnsupportedLMPParameterValue                  = 32
+	KBluetoothHCIErrorUnsupportedRemoteFeature                      = 26
 )
 
 const (
-	KBluetoothHCIEventAMPReceiverReport = 75
-	KBluetoothHCIEventAMPStartTest = 73
-	KBluetoothHCIEventAMPStatusChange = 77
-	KBluetoothHCIEventAMPTestEnd = 74
-	KBluetoothHCIEventAuthenticationComplete = 6
-	KBluetoothHCIEventChangeConnectionLinkKeyComplete = 9
-	KBluetoothHCIEventChannelSelected = 65
-	KBluetoothHCIEventCommandComplete = 14
-	KBluetoothHCIEventCommandStatus = 15
-	KBluetoothHCIEventConnectionComplete = 3
-	KBluetoothHCIEventConnectionPacketType = 29
-	KBluetoothHCIEventConnectionRequest = 4
-	KBluetoothHCIEventDataBufferOverflow = 26
-	KBluetoothHCIEventDisconnectionComplete = 5
-	KBluetoothHCIEventDisconnectionLogicalLinkComplete = 70
-	KBluetoothHCIEventDisconnectionPhysicalLinkComplete = 66
-	KBluetoothHCIEventEncryptionChange = 8
-	KBluetoothHCIEventEncryptionKeyRefreshComplete = 48
-	KBluetoothHCIEventEnhancedFlushComplete = 57
-	KBluetoothHCIEventExtendedInquiryResult = 47
-	KBluetoothHCIEventFlowSpecModifyComplete = 71
-	KBluetoothHCIEventFlowSpecificationComplete = 33
-	KBluetoothHCIEventFlushOccurred = 17
-	KBluetoothHCIEventHardwareError = 16
-	KBluetoothHCIEventIOCapabilityRequest = 49
-	KBluetoothHCIEventIOCapabilityResponse = 50
-	KBluetoothHCIEventInquiryComplete = 1
-	KBluetoothHCIEventInquiryResult = 2
-	KBluetoothHCIEventInquiryResultWithRSSI = 34
-	KBluetoothHCIEventKeypressNotification = 60
-	KBluetoothHCIEventLEMetaEvent = 62
-	KBluetoothHCIEventLinkKeyNotification = 24
-	KBluetoothHCIEventLinkKeyRequest = 23
-	KBluetoothHCIEventLinkSupervisionTimeoutChanged = 56
-	KBluetoothHCIEventLogicalLinkComplete = 69
-	KBluetoothHCIEventLogoTesting = 254
-	KBluetoothHCIEventLoopbackCommand = 25
-	KBluetoothHCIEventMasterLinkKeyComplete = 10
-	KBluetoothHCIEventMaxSlotsChange = 27
-	KBluetoothHCIEventModeChange = 20
-	KBluetoothHCIEventNumberOfCompletedDataBlocks = 72
-	KBluetoothHCIEventNumberOfCompletedPackets = 19
-	KBluetoothHCIEventPINCodeRequest = 22
-	KBluetoothHCIEventPageScanModeChange = 31
-	KBluetoothHCIEventPageScanRepetitionModeChange = 32
-	KBluetoothHCIEventPhysicalLinkComplete = 64
-	KBluetoothHCIEventPhysicalLinkLossEarlyWarning = 67
-	KBluetoothHCIEventPhysicalLinkRecovery = 68
-	KBluetoothHCIEventQoSSetupComplete = 13
-	KBluetoothHCIEventQoSViolation = 30
-	KBluetoothHCIEventReadClockOffsetComplete = 28
-	KBluetoothHCIEventReadRemoteExtendedFeaturesComplete = 35
-	KBluetoothHCIEventReadRemoteSupportedFeaturesComplete = 11
-	KBluetoothHCIEventReadRemoteVersionInformationComplete = 12
+	KBluetoothHCIEventAMPReceiverReport                       = 75
+	KBluetoothHCIEventAMPStartTest                            = 73
+	KBluetoothHCIEventAMPStatusChange                         = 77
+	KBluetoothHCIEventAMPTestEnd                              = 74
+	KBluetoothHCIEventAuthenticationComplete                  = 6
+	KBluetoothHCIEventChangeConnectionLinkKeyComplete         = 9
+	KBluetoothHCIEventChannelSelected                         = 65
+	KBluetoothHCIEventCommandComplete                         = 14
+	KBluetoothHCIEventCommandStatus                           = 15
+	KBluetoothHCIEventConnectionComplete                      = 3
+	KBluetoothHCIEventConnectionPacketType                    = 29
+	KBluetoothHCIEventConnectionRequest                       = 4
+	KBluetoothHCIEventDataBufferOverflow                      = 26
+	KBluetoothHCIEventDisconnectionComplete                   = 5
+	KBluetoothHCIEventDisconnectionLogicalLinkComplete        = 70
+	KBluetoothHCIEventDisconnectionPhysicalLinkComplete       = 66
+	KBluetoothHCIEventEncryptionChange                        = 8
+	KBluetoothHCIEventEncryptionKeyRefreshComplete            = 48
+	KBluetoothHCIEventEnhancedFlushComplete                   = 57
+	KBluetoothHCIEventExtendedInquiryResult                   = 47
+	KBluetoothHCIEventFlowSpecModifyComplete                  = 71
+	KBluetoothHCIEventFlowSpecificationComplete               = 33
+	KBluetoothHCIEventFlushOccurred                           = 17
+	KBluetoothHCIEventHardwareError                           = 16
+	KBluetoothHCIEventIOCapabilityRequest                     = 49
+	KBluetoothHCIEventIOCapabilityResponse                    = 50
+	KBluetoothHCIEventInquiryComplete                         = 1
+	KBluetoothHCIEventInquiryResult                           = 2
+	KBluetoothHCIEventInquiryResultWithRSSI                   = 34
+	KBluetoothHCIEventKeypressNotification                    = 60
+	KBluetoothHCIEventLEMetaEvent                             = 62
+	KBluetoothHCIEventLinkKeyNotification                     = 24
+	KBluetoothHCIEventLinkKeyRequest                          = 23
+	KBluetoothHCIEventLinkSupervisionTimeoutChanged           = 56
+	KBluetoothHCIEventLogicalLinkComplete                     = 69
+	KBluetoothHCIEventLogoTesting                             = 254
+	KBluetoothHCIEventLoopbackCommand                         = 25
+	KBluetoothHCIEventMasterLinkKeyComplete                   = 10
+	KBluetoothHCIEventMaxSlotsChange                          = 27
+	KBluetoothHCIEventModeChange                              = 20
+	KBluetoothHCIEventNumberOfCompletedDataBlocks             = 72
+	KBluetoothHCIEventNumberOfCompletedPackets                = 19
+	KBluetoothHCIEventPINCodeRequest                          = 22
+	KBluetoothHCIEventPageScanModeChange                      = 31
+	KBluetoothHCIEventPageScanRepetitionModeChange            = 32
+	KBluetoothHCIEventPhysicalLinkComplete                    = 64
+	KBluetoothHCIEventPhysicalLinkLossEarlyWarning            = 67
+	KBluetoothHCIEventPhysicalLinkRecovery                    = 68
+	KBluetoothHCIEventQoSSetupComplete                        = 13
+	KBluetoothHCIEventQoSViolation                            = 30
+	KBluetoothHCIEventReadClockOffsetComplete                 = 28
+	KBluetoothHCIEventReadRemoteExtendedFeaturesComplete      = 35
+	KBluetoothHCIEventReadRemoteSupportedFeaturesComplete     = 11
+	KBluetoothHCIEventReadRemoteVersionInformationComplete    = 12
 	KBluetoothHCIEventRemoteHostSupportedFeaturesNotification = 61
-	KBluetoothHCIEventRemoteNameRequestComplete = 7
-	KBluetoothHCIEventRemoteOOBDataRequest = 53
-	KBluetoothHCIEventReturnLinkKeys = 21
-	KBluetoothHCIEventRoleChange = 18
-	KBluetoothHCIEventShortRangeModeChangeComplete = 76
-	KBluetoothHCIEventSimplePairingComplete = 54
-	KBluetoothHCIEventSniffSubrating = 46
-	KBluetoothHCIEventSynchronousConnectionChanged = 45
-	KBluetoothHCIEventSynchronousConnectionComplete = 44
-	KBluetoothHCIEventUserConfirmationRequest = 51
-	KBluetoothHCIEventUserPasskeyNotification = 59
-	KBluetoothHCIEventUserPasskeyRequest = 52
-	KBluetoothHCIEventVendorSpecific = 255
-	KBluetoothHCISubEventLEAdvertisingReport = 2
-	KBluetoothHCISubEventLEAdvertisingSetTerminated = 18
-	KBluetoothHCISubEventLEChannelSelectionAlgorithm = 20
-	KBluetoothHCISubEventLEConnectionComplete = 1
-	KBluetoothHCISubEventLEConnectionUpdateComplete = 3
-	KBluetoothHCISubEventLEDataLengthChange = 7
-	KBluetoothHCISubEventLEDirectAdvertisingReport = 11
-	KBluetoothHCISubEventLEEnhancedConnectionComplete = 10
-	KBluetoothHCISubEventLEExtendedAdvertising = 13
-	KBluetoothHCISubEventLEGenerateDHKeyComplete = 9
-	KBluetoothHCISubEventLELongTermKeyRequest = 5
-	KBluetoothHCISubEventLEPeriodicAdvertisingReport = 15
+	KBluetoothHCIEventRemoteNameRequestComplete               = 7
+	KBluetoothHCIEventRemoteOOBDataRequest                    = 53
+	KBluetoothHCIEventReturnLinkKeys                          = 21
+	KBluetoothHCIEventRoleChange                              = 18
+	KBluetoothHCIEventShortRangeModeChangeComplete            = 76
+	KBluetoothHCIEventSimplePairingComplete                   = 54
+	KBluetoothHCIEventSniffSubrating                          = 46
+	KBluetoothHCIEventSynchronousConnectionChanged            = 45
+	KBluetoothHCIEventSynchronousConnectionComplete           = 44
+	KBluetoothHCIEventUserConfirmationRequest                 = 51
+	KBluetoothHCIEventUserPasskeyNotification                 = 59
+	KBluetoothHCIEventUserPasskeyRequest                      = 52
+	KBluetoothHCIEventVendorSpecific                          = 255
+	KBluetoothHCISubEventLEAdvertisingReport                  = 2
+	KBluetoothHCISubEventLEAdvertisingSetTerminated           = 18
+	KBluetoothHCISubEventLEChannelSelectionAlgorithm          = 20
+	KBluetoothHCISubEventLEConnectionComplete                 = 1
+	KBluetoothHCISubEventLEConnectionUpdateComplete           = 3
+	KBluetoothHCISubEventLEDataLengthChange                   = 7
+	KBluetoothHCISubEventLEDirectAdvertisingReport            = 11
+	KBluetoothHCISubEventLEEnhancedConnectionComplete         = 10
+	KBluetoothHCISubEventLEExtendedAdvertising                = 13
+	KBluetoothHCISubEventLEGenerateDHKeyComplete              = 9
+	KBluetoothHCISubEventLELongTermKeyRequest                 = 5
+	KBluetoothHCISubEventLEPeriodicAdvertisingReport          = 15
 	KBluetoothHCISubEventLEPeriodicAdvertisingSyncEstablished = 14
-	KBluetoothHCISubEventLEPeriodicAdvertisingSyncLost = 16
-	KBluetoothHCISubEventLEPhyUpdateComplete = 12
-	KBluetoothHCISubEventLEReadLocalP256PublicKeyComplete = 8
-	KBluetoothHCISubEventLEReadRemoteUsedFeaturesComplete = 4
-	KBluetoothHCISubEventLERemoteConnectionParameterRequest = 6
-	KBluetoothHCISubEventLEScanRequestReceived = 19
-	KBluetoothHCISubEventLEScanTimeout = 17
+	KBluetoothHCISubEventLEPeriodicAdvertisingSyncLost        = 16
+	KBluetoothHCISubEventLEPhyUpdateComplete                  = 12
+	KBluetoothHCISubEventLEReadLocalP256PublicKeyComplete     = 8
+	KBluetoothHCISubEventLEReadRemoteUsedFeaturesComplete     = 4
+	KBluetoothHCISubEventLERemoteConnectionParameterRequest   = 6
+	KBluetoothHCISubEventLEScanRequestReceived                = 19
+	KBluetoothHCISubEventLEScanTimeout                        = 17
 )
 
 const (
-	KBluetoothHCIEventMaskAll = 4294967295
-	KBluetoothHCIEventMaskAuthenticationComplete = 32
-	KBluetoothHCIEventMaskChangeConnectionLinkKeyComplete = 256
-	KBluetoothHCIEventMaskCommandComplete = 8192
-	KBluetoothHCIEventMaskCommandStatus = 16384
-	KBluetoothHCIEventMaskConnectionComplete = 4
-	KBluetoothHCIEventMaskConnectionPacketTypeChanged = 268435456
-	KBluetoothHCIEventMaskConnectionRequest = 8
-	KBluetoothHCIEventMaskDataBufferOverflow = 33554432
-	KBluetoothHCIEventMaskDefault = 4294967295
-	KBluetoothHCIEventMaskDisconnectionComplete = 16
-	KBluetoothHCIEventMaskEncryptionChange = 128
-	KBluetoothHCIEventMaskFlushOccurred = 65536
-	KBluetoothHCIEventMaskHardwareError = 32768
-	KBluetoothHCIEventMaskInquiryComplete = 1
-	KBluetoothHCIEventMaskInquiryResult = 2
-	KBluetoothHCIEventMaskLinkKeyNotification = 8388608
-	KBluetoothHCIEventMaskLinkKeyRequest = 4194304
-	KBluetoothHCIEventMaskLoopbackCommand = 16777216
-	KBluetoothHCIEventMaskMasterLinkKeyComplete = 512
-	KBluetoothHCIEventMaskMaxSlotsChange = 67108864
-	KBluetoothHCIEventMaskModeChange = 524288
-	KBluetoothHCIEventMaskNone = 0
-	KBluetoothHCIEventMaskNumberOfCompletedPackets = 262144
-	KBluetoothHCIEventMaskPINCodeRequest = 2097152
-	KBluetoothHCIEventMaskPageScanModeChange = 1073741824
-	KBluetoothHCIEventMaskPageScanRepetitionModeChange = 2147483648
-	KBluetoothHCIEventMaskQoSSetupComplete = 4096
-	KBluetoothHCIEventMaskQoSViolation = 536870912
-	KBluetoothHCIEventMaskReadClockOffsetComplete = 134217728
-	KBluetoothHCIEventMaskReadRemoteSupportedFeaturesComplete = 1024
+	KBluetoothHCIEventMaskAll                                  = 4294967295
+	KBluetoothHCIEventMaskAuthenticationComplete               = 32
+	KBluetoothHCIEventMaskChangeConnectionLinkKeyComplete      = 256
+	KBluetoothHCIEventMaskCommandComplete                      = 8192
+	KBluetoothHCIEventMaskCommandStatus                        = 16384
+	KBluetoothHCIEventMaskConnectionComplete                   = 4
+	KBluetoothHCIEventMaskConnectionPacketTypeChanged          = 268435456
+	KBluetoothHCIEventMaskConnectionRequest                    = 8
+	KBluetoothHCIEventMaskDataBufferOverflow                   = 33554432
+	KBluetoothHCIEventMaskDefault                              = 4294967295
+	KBluetoothHCIEventMaskDisconnectionComplete                = 16
+	KBluetoothHCIEventMaskEncryptionChange                     = 128
+	KBluetoothHCIEventMaskFlushOccurred                        = 65536
+	KBluetoothHCIEventMaskHardwareError                        = 32768
+	KBluetoothHCIEventMaskInquiryComplete                      = 1
+	KBluetoothHCIEventMaskInquiryResult                        = 2
+	KBluetoothHCIEventMaskLinkKeyNotification                  = 8388608
+	KBluetoothHCIEventMaskLinkKeyRequest                       = 4194304
+	KBluetoothHCIEventMaskLoopbackCommand                      = 16777216
+	KBluetoothHCIEventMaskMasterLinkKeyComplete                = 512
+	KBluetoothHCIEventMaskMaxSlotsChange                       = 67108864
+	KBluetoothHCIEventMaskModeChange                           = 524288
+	KBluetoothHCIEventMaskNone                                 = 0
+	KBluetoothHCIEventMaskNumberOfCompletedPackets             = 262144
+	KBluetoothHCIEventMaskPINCodeRequest                       = 2097152
+	KBluetoothHCIEventMaskPageScanModeChange                   = 1073741824
+	KBluetoothHCIEventMaskPageScanRepetitionModeChange         = 2147483648
+	KBluetoothHCIEventMaskQoSSetupComplete                     = 4096
+	KBluetoothHCIEventMaskQoSViolation                         = 536870912
+	KBluetoothHCIEventMaskReadClockOffsetComplete              = 134217728
+	KBluetoothHCIEventMaskReadRemoteSupportedFeaturesComplete  = 1024
 	KBluetoothHCIEventMaskReadRemoteVersionInformationComplete = 2048
-	KBluetoothHCIEventMaskRemoteNameRequestComplete = 64
-	KBluetoothHCIEventMaskReturnLinkKeys = 1048576
-	KBluetoothHCIEventMaskRoleChange = 131072
+	KBluetoothHCIEventMaskRemoteNameRequestComplete            = 64
+	KBluetoothHCIEventMaskReturnLinkKeys                       = 1048576
+	KBluetoothHCIEventMaskRoleChange                           = 131072
 )
 
 const (
-	KBluetoothHCILoopbackModeLocal = 1
-	KBluetoothHCILoopbackModeOff = 0
+	KBluetoothHCILoopbackModeLocal  = 1
+	KBluetoothHCILoopbackModeOff    = 0
 	KBluetoothHCILoopbackModeRemote = 2
 )
 
 const (
-	KBluetoothHCICommandAMPTest = 9
-	KBluetoothHCICommandAMPTestEnd = 8
-	KBluetoothHCICommandAcceptConnectionRequest = 9
-	KBluetoothHCICommandAcceptSniffRequest = 49
-	KBluetoothHCICommandAcceptSynchronousConnectionRequest = 41
-	KBluetoothHCICommandAddSCOConnection = 7
-	KBluetoothHCICommandAuthenticationRequested = 17
-	KBluetoothHCICommandChangeConnectionLinkKey = 21
-	KBluetoothHCICommandChangeConnectionPacketType = 15
-	KBluetoothHCICommandChangeLocalName = 19
-	KBluetoothHCICommandCreateConnection = 5
-	KBluetoothHCICommandCreateConnectionCancel = 8
-	KBluetoothHCICommandCreateNewUnitKey = 11
-	KBluetoothHCICommandDeleteReservedLTADDR = 117
-	KBluetoothHCICommandDeleteStoredLinkKey = 18
-	KBluetoothHCICommandDisconnect = 6
-	KBluetoothHCICommandEnableAMPReceiverReports = 7
-	KBluetoothHCICommandEnableDeviceUnderTestMode = 3
-	KBluetoothHCICommandEnhancedAcceptSynchronousConnectionRequest = 62
-	KBluetoothHCICommandEnhancedFlush = 95
-	KBluetoothHCICommandEnhancedSetupSynchronousConnection = 61
-	KBluetoothHCICommandExitParkMode = 6
-	KBluetoothHCICommandExitPeriodicInquiryMode = 4
-	KBluetoothHCICommandExitSniffMode = 4
-	KBluetoothHCICommandFlowSpecification = 16
-	KBluetoothHCICommandFlush = 8
-	KBluetoothHCICommandGetLinkQuality = 3
-	KBluetoothHCICommandGetMWSTransportLayerConfiguration = 12
-	KBluetoothHCICommandGroupHostController = 3
-	KBluetoothHCICommandGroupInformational = 4
-	KBluetoothHCICommandGroupLinkControl = 1
-	KBluetoothHCICommandGroupLinkPolicy = 2
-	KBluetoothHCICommandGroupLogoTesting = 62
-	KBluetoothHCICommandGroupLowEnergy = 8
-	KBluetoothHCICommandGroupMax = 64
-	KBluetoothHCICommandGroupNoOp = 0
-	KBluetoothHCICommandGroupStatus = 5
-	KBluetoothHCICommandGroupTesting = 6
-	KBluetoothHCICommandGroupVendorSpecific = 63
-	KBluetoothHCICommandHoldMode = 1
-	KBluetoothHCICommandHostBufferSize = 51
-	KBluetoothHCICommandHostNumberOfCompletedPackets = 53
-	KBluetoothHCICommandIOCapabilityRequestNegativeReply = 52
-	KBluetoothHCICommandIOCapabilityRequestReply = 43
-	KBluetoothHCICommandInquiry = 1
-	KBluetoothHCICommandInquiryCancel = 2
-	KBluetoothHCICommandLEAddDeviceToPeriodicAdvertiserList = 71
-	KBluetoothHCICommandLEAddDeviceToResolvingList = 39
-	KBluetoothHCICommandLEAddDeviceToWhiteList = 17
-	KBluetoothHCICommandLEClearAdvertisingSets = 61
-	KBluetoothHCICommandLEClearPeriodicAdvertiserList = 73
-	KBluetoothHCICommandLEClearResolvingList = 41
-	KBluetoothHCICommandLEClearWhiteList = 16
-	KBluetoothHCICommandLEConnectionUpdate = 19
-	KBluetoothHCICommandLECreateConnection = 13
-	KBluetoothHCICommandLECreateConnectionCancel = 14
-	KBluetoothHCICommandLEEncrypt = 23
-	KBluetoothHCICommandLEEnhancedReceiverTest = 51
-	KBluetoothHCICommandLEEnhancedTransmitterTest = 52
-	KBluetoothHCICommandLEExtendedCreateConnection = 67
-	KBluetoothHCICommandLEGenerateDHKey = 38
-	KBluetoothHCICommandLELongTermKeyRequestNegativeReply = 27
-	KBluetoothHCICommandLELongTermKeyRequestReply = 26
-	KBluetoothHCICommandLEPeriodicAdvertisingCreateSync = 68
-	KBluetoothHCICommandLEPeriodicAdvertisingCreateSyncCancel = 69
-	KBluetoothHCICommandLEPeriodicAdvertisingTerminateSync = 70
-	KBluetoothHCICommandLERand = 24
-	KBluetoothHCICommandLEReadAdvertisingChannelTxPower = 7
-	KBluetoothHCICommandLEReadBufferSize = 2
-	KBluetoothHCICommandLEReadChannelMap = 21
-	KBluetoothHCICommandLEReadLocalP256PublicKey = 37
-	KBluetoothHCICommandLEReadLocalResolvableAddress = 44
-	KBluetoothHCICommandLEReadLocalSupportedFeatures = 3
-	KBluetoothHCICommandLEReadMaximumAdvertisingDataLength = 58
-	KBluetoothHCICommandLEReadMaximumDataLength = 47
-	KBluetoothHCICommandLEReadNumberofSupportedAdvertisingSets = 59
-	KBluetoothHCICommandLEReadPeerResolvableAddress = 43
-	KBluetoothHCICommandLEReadPeriodicAdvertiserListSize = 74
-	KBluetoothHCICommandLEReadPhy = 48
-	KBluetoothHCICommandLEReadRFPathCompensation = 76
-	KBluetoothHCICommandLEReadRemoteUsedFeatures = 22
-	KBluetoothHCICommandLEReadResolvingListSize = 42
-	KBluetoothHCICommandLEReadSuggestedDefaultDataLength = 35
-	KBluetoothHCICommandLEReadSupportedStates = 28
-	KBluetoothHCICommandLEReadTransmitPower = 75
-	KBluetoothHCICommandLEReadWhiteListSize = 15
-	KBluetoothHCICommandLEReceiverTest = 29
+	KBluetoothHCICommandAMPTest                                         = 9
+	KBluetoothHCICommandAMPTestEnd                                      = 8
+	KBluetoothHCICommandAcceptConnectionRequest                         = 9
+	KBluetoothHCICommandAcceptSniffRequest                              = 49
+	KBluetoothHCICommandAcceptSynchronousConnectionRequest              = 41
+	KBluetoothHCICommandAddSCOConnection                                = 7
+	KBluetoothHCICommandAuthenticationRequested                         = 17
+	KBluetoothHCICommandChangeConnectionLinkKey                         = 21
+	KBluetoothHCICommandChangeConnectionPacketType                      = 15
+	KBluetoothHCICommandChangeLocalName                                 = 19
+	KBluetoothHCICommandCreateConnection                                = 5
+	KBluetoothHCICommandCreateConnectionCancel                          = 8
+	KBluetoothHCICommandCreateNewUnitKey                                = 11
+	KBluetoothHCICommandDeleteReservedLTADDR                            = 117
+	KBluetoothHCICommandDeleteStoredLinkKey                             = 18
+	KBluetoothHCICommandDisconnect                                      = 6
+	KBluetoothHCICommandEnableAMPReceiverReports                        = 7
+	KBluetoothHCICommandEnableDeviceUnderTestMode                       = 3
+	KBluetoothHCICommandEnhancedAcceptSynchronousConnectionRequest      = 62
+	KBluetoothHCICommandEnhancedFlush                                   = 95
+	KBluetoothHCICommandEnhancedSetupSynchronousConnection              = 61
+	KBluetoothHCICommandExitParkMode                                    = 6
+	KBluetoothHCICommandExitPeriodicInquiryMode                         = 4
+	KBluetoothHCICommandExitSniffMode                                   = 4
+	KBluetoothHCICommandFlowSpecification                               = 16
+	KBluetoothHCICommandFlush                                           = 8
+	KBluetoothHCICommandGetLinkQuality                                  = 3
+	KBluetoothHCICommandGetMWSTransportLayerConfiguration               = 12
+	KBluetoothHCICommandGroupHostController                             = 3
+	KBluetoothHCICommandGroupInformational                              = 4
+	KBluetoothHCICommandGroupLinkControl                                = 1
+	KBluetoothHCICommandGroupLinkPolicy                                 = 2
+	KBluetoothHCICommandGroupLogoTesting                                = 62
+	KBluetoothHCICommandGroupLowEnergy                                  = 8
+	KBluetoothHCICommandGroupMax                                        = 64
+	KBluetoothHCICommandGroupNoOp                                       = 0
+	KBluetoothHCICommandGroupStatus                                     = 5
+	KBluetoothHCICommandGroupTesting                                    = 6
+	KBluetoothHCICommandGroupVendorSpecific                             = 63
+	KBluetoothHCICommandHoldMode                                        = 1
+	KBluetoothHCICommandHostBufferSize                                  = 51
+	KBluetoothHCICommandHostNumberOfCompletedPackets                    = 53
+	KBluetoothHCICommandIOCapabilityRequestNegativeReply                = 52
+	KBluetoothHCICommandIOCapabilityRequestReply                        = 43
+	KBluetoothHCICommandInquiry                                         = 1
+	KBluetoothHCICommandInquiryCancel                                   = 2
+	KBluetoothHCICommandLEAddDeviceToPeriodicAdvertiserList             = 71
+	KBluetoothHCICommandLEAddDeviceToResolvingList                      = 39
+	KBluetoothHCICommandLEAddDeviceToWhiteList                          = 17
+	KBluetoothHCICommandLEClearAdvertisingSets                          = 61
+	KBluetoothHCICommandLEClearPeriodicAdvertiserList                   = 73
+	KBluetoothHCICommandLEClearResolvingList                            = 41
+	KBluetoothHCICommandLEClearWhiteList                                = 16
+	KBluetoothHCICommandLEConnectionUpdate                              = 19
+	KBluetoothHCICommandLECreateConnection                              = 13
+	KBluetoothHCICommandLECreateConnectionCancel                        = 14
+	KBluetoothHCICommandLEEncrypt                                       = 23
+	KBluetoothHCICommandLEEnhancedReceiverTest                          = 51
+	KBluetoothHCICommandLEEnhancedTransmitterTest                       = 52
+	KBluetoothHCICommandLEExtendedCreateConnection                      = 67
+	KBluetoothHCICommandLEGenerateDHKey                                 = 38
+	KBluetoothHCICommandLELongTermKeyRequestNegativeReply               = 27
+	KBluetoothHCICommandLELongTermKeyRequestReply                       = 26
+	KBluetoothHCICommandLEPeriodicAdvertisingCreateSync                 = 68
+	KBluetoothHCICommandLEPeriodicAdvertisingCreateSyncCancel           = 69
+	KBluetoothHCICommandLEPeriodicAdvertisingTerminateSync              = 70
+	KBluetoothHCICommandLERand                                          = 24
+	KBluetoothHCICommandLEReadAdvertisingChannelTxPower                 = 7
+	KBluetoothHCICommandLEReadBufferSize                                = 2
+	KBluetoothHCICommandLEReadChannelMap                                = 21
+	KBluetoothHCICommandLEReadLocalP256PublicKey                        = 37
+	KBluetoothHCICommandLEReadLocalResolvableAddress                    = 44
+	KBluetoothHCICommandLEReadLocalSupportedFeatures                    = 3
+	KBluetoothHCICommandLEReadMaximumAdvertisingDataLength              = 58
+	KBluetoothHCICommandLEReadMaximumDataLength                         = 47
+	KBluetoothHCICommandLEReadNumberofSupportedAdvertisingSets          = 59
+	KBluetoothHCICommandLEReadPeerResolvableAddress                     = 43
+	KBluetoothHCICommandLEReadPeriodicAdvertiserListSize                = 74
+	KBluetoothHCICommandLEReadPhy                                       = 48
+	KBluetoothHCICommandLEReadRFPathCompensation                        = 76
+	KBluetoothHCICommandLEReadRemoteUsedFeatures                        = 22
+	KBluetoothHCICommandLEReadResolvingListSize                         = 42
+	KBluetoothHCICommandLEReadSuggestedDefaultDataLength                = 35
+	KBluetoothHCICommandLEReadSupportedStates                           = 28
+	KBluetoothHCICommandLEReadTransmitPower                             = 75
+	KBluetoothHCICommandLEReadWhiteListSize                             = 15
+	KBluetoothHCICommandLEReceiverTest                                  = 29
 	KBluetoothHCICommandLERemoteConnectionParameterRequestNegativeReply = 33
-	KBluetoothHCICommandLERemoteConnectionParameterRequestReply = 32
-	KBluetoothHCICommandLERemoveAdvertisingSet = 60
-	KBluetoothHCICommandLERemoveDeviceFromPeriodicAdvertiserList = 72
-	KBluetoothHCICommandLERemoveDeviceFromResolvingList = 40
-	KBluetoothHCICommandLERemoveDeviceFromWhiteList = 18
-	KBluetoothHCICommandLESetAddressResolutionEnable = 45
-	KBluetoothHCICommandLESetAdvertiseEnable = 10
-	KBluetoothHCICommandLESetAdvertisingData = 8
-	KBluetoothHCICommandLESetAdvertisingParameters = 6
-	KBluetoothHCICommandLESetAdvertisingSetRandomAddress = 53
-	KBluetoothHCICommandLESetDataLength = 34
-	KBluetoothHCICommandLESetDefaultPhy = 49
-	KBluetoothHCICommandLESetEventMask = 1
-	KBluetoothHCICommandLESetExtendedAdvertisingData = 55
-	KBluetoothHCICommandLESetExtendedAdvertisingEnableCommand = 57
-	KBluetoothHCICommandLESetExtendedAdvertisingParameters = 54
-	KBluetoothHCICommandLESetExtendedScanEnable = 66
-	KBluetoothHCICommandLESetExtendedScanParameters = 65
-	KBluetoothHCICommandLESetExtendedScanResponseData = 56
-	KBluetoothHCICommandLESetHostChannelClassification = 20
-	KBluetoothHCICommandLESetPeriodicAdvertisingData = 63
-	KBluetoothHCICommandLESetPeriodicAdvertisingEnable = 64
-	KBluetoothHCICommandLESetPeriodicAdvertisingParameters = 62
-	KBluetoothHCICommandLESetPhy = 50
-	KBluetoothHCICommandLESetPrivacyMode = 78
-	KBluetoothHCICommandLESetRandomAddress = 5
-	KBluetoothHCICommandLESetResolvablePrivateAddressTimeout = 46
-	KBluetoothHCICommandLESetScanEnable = 12
-	KBluetoothHCICommandLESetScanParameters = 11
-	KBluetoothHCICommandLESetScanResponseData = 9
-	KBluetoothHCICommandLEStartEncryption = 25
-	KBluetoothHCICommandLETestEnd = 31
-	KBluetoothHCICommandLETransmitterTest = 30
-	KBluetoothHCICommandLEWriteRFPathCompensation = 77
-	KBluetoothHCICommandLEWriteSuggestedDefaultDataLength = 36
-	KBluetoothHCICommandLinkKeyRequestNegativeReply = 12
-	KBluetoothHCICommandLinkKeyRequestReply = 11
-	KBluetoothHCICommandMasterLinkKey = 23
-	KBluetoothHCICommandMax = 1023
-	KBluetoothHCICommandNoOp = 0
-	KBluetoothHCICommandPINCodeRequestNegativeReply = 14
-	KBluetoothHCICommandPINCodeRequestReply = 13
-	KBluetoothHCICommandParkMode = 5
-	KBluetoothHCICommandPeriodicInquiryMode = 3
-	KBluetoothHCICommandQoSSetup = 7
-	KBluetoothHCICommandReadAFHChannelAssessmentMode = 72
-	KBluetoothHCICommandReadAFHMappings = 6
-	KBluetoothHCICommandReadAuthenticatedPayloadTimeout = 123
-	KBluetoothHCICommandReadAuthenticationEnable = 31
-	KBluetoothHCICommandReadAutomaticFlushTimeout = 39
-	KBluetoothHCICommandReadBestEffortFlushTimeout = 105
-	KBluetoothHCICommandReadBufferSize = 5
-	KBluetoothHCICommandReadClassOfDevice = 35
-	KBluetoothHCICommandReadClock = 7
-	KBluetoothHCICommandReadClockOffset = 31
-	KBluetoothHCICommandReadConnectionAcceptTimeout = 21
-	KBluetoothHCICommandReadCountryCode = 7
-	KBluetoothHCICommandReadCurrentIACLAP = 57
-	KBluetoothHCICommandReadDataBlockSize = 10
-	KBluetoothHCICommandReadDefaultErroneousDataReporting = 90
-	KBluetoothHCICommandReadDefaultLinkPolicySettings = 14
-	KBluetoothHCICommandReadDeviceAddress = 9
-	KBluetoothHCICommandReadEncryptionKeySize = 8
-	KBluetoothHCICommandReadEncryptionMode = 33
-	KBluetoothHCICommandReadEnhancedTransmitPowerLevel = 104
-	KBluetoothHCICommandReadExtendedInquiryLength = 128
-	KBluetoothHCICommandReadExtendedInquiryResponse = 81
-	KBluetoothHCICommandReadExtendedPageTimeout = 126
-	KBluetoothHCICommandReadFailedContactCounter = 1
-	KBluetoothHCICommandReadFlowControlMode = 102
-	KBluetoothHCICommandReadHoldModeActivity = 43
-	KBluetoothHCICommandReadInquiryMode = 68
-	KBluetoothHCICommandReadInquiryResponseTransmitPower = 88
-	KBluetoothHCICommandReadInquiryScanActivity = 29
-	KBluetoothHCICommandReadInquiryScanType = 66
-	KBluetoothHCICommandReadLEHostSupported = 108
-	KBluetoothHCICommandReadLMPHandle = 32
-	KBluetoothHCICommandReadLinkPolicySettings = 12
-	KBluetoothHCICommandReadLinkSupervisionTimeout = 54
-	KBluetoothHCICommandReadLocalAMPASSOC = 10
-	KBluetoothHCICommandReadLocalAMPInfo = 9
-	KBluetoothHCICommandReadLocalExtendedFeatures = 4
-	KBluetoothHCICommandReadLocalName = 20
-	KBluetoothHCICommandReadLocalOOBData = 87
-	KBluetoothHCICommandReadLocalOOBExtendedData = 125
-	KBluetoothHCICommandReadLocalSupportedCodecs = 11
-	KBluetoothHCICommandReadLocalSupportedCommands = 2
-	KBluetoothHCICommandReadLocalSupportedFeatures = 3
-	KBluetoothHCICommandReadLocalVersionInformation = 1
-	KBluetoothHCICommandReadLocationData = 100
-	KBluetoothHCICommandReadLogicalLinkAcceptTimeout = 97
-	KBluetoothHCICommandReadLoopbackMode = 1
-	KBluetoothHCICommandReadNumberOfBroadcastRetransmissions = 41
-	KBluetoothHCICommandReadNumberOfSupportedIAC = 56
-	KBluetoothHCICommandReadPINType = 9
-	KBluetoothHCICommandReadPageScanActivity = 27
-	KBluetoothHCICommandReadPageScanMode = 61
-	KBluetoothHCICommandReadPageScanPeriodMode = 59
-	KBluetoothHCICommandReadPageScanType = 70
-	KBluetoothHCICommandReadPageTimeout = 23
-	KBluetoothHCICommandReadRSSI = 5
-	KBluetoothHCICommandReadRemoteExtendedFeatures = 28
-	KBluetoothHCICommandReadRemoteSupportedFeatures = 27
-	KBluetoothHCICommandReadRemoteVersionInformation = 29
-	KBluetoothHCICommandReadSCOFlowControlEnable = 46
-	KBluetoothHCICommandReadScanEnable = 25
-	KBluetoothHCICommandReadSecureConnectionsHostSupport = 121
-	KBluetoothHCICommandReadSimplePairingMode = 85
-	KBluetoothHCICommandReadStoredLinkKey = 13
-	KBluetoothHCICommandReadSynchronizationTrainParameters = 119
-	KBluetoothHCICommandReadTransmitPowerLevel = 45
-	KBluetoothHCICommandReadVoiceSetting = 37
-	KBluetoothHCICommandReceiveSynchronizationTrain = 68
-	KBluetoothHCICommandRefreshEncryptionKey = 83
-	KBluetoothHCICommandRejectConnectionRequest = 10
-	KBluetoothHCICommandRejectSniffRequest = 50
-	KBluetoothHCICommandRejectSynchronousConnectionRequest = 42
-	KBluetoothHCICommandRemoteNameRequest = 25
-	KBluetoothHCICommandRemoteNameRequestCancel = 26
-	KBluetoothHCICommandRemoteOOBDataRequestNegativeReply = 51
-	KBluetoothHCICommandRemoteOOBDataRequestReply = 48
-	KBluetoothHCICommandRemoteOOBExtendedDataRequestReply = 69
-	KBluetoothHCICommandReset = 3
-	KBluetoothHCICommandResetFailedContactCounter = 2
-	KBluetoothHCICommandRoleDiscovery = 9
-	KBluetoothHCICommandSendKeypressNotification = 96
-	KBluetoothHCICommandSetAFHClassification = 63
-	KBluetoothHCICommandSetConnectionEncryption = 19
-	KBluetoothHCICommandSetConnectionlessPeripheralBroadcast = 65
-	KBluetoothHCICommandSetConnectionlessPeripheralBroadcastData = 118
-	KBluetoothHCICommandSetConnectionlessPeripheralBroadcastReceive = 66
-	KBluetoothHCICommandSetConnectionlessSlaveBroadcast = 65
-	KBluetoothHCICommandSetConnectionlessSlaveBroadcastData = 118
-	KBluetoothHCICommandSetConnectionlessSlaveBroadcastReceive = 66
-	KBluetoothHCICommandSetEventFilter = 5
-	KBluetoothHCICommandSetEventMask = 1
-	KBluetoothHCICommandSetEventMaskPageTwo = 99
-	KBluetoothHCICommandSetExternalFrameConfiguration = 111
-	KBluetoothHCICommandSetHostControllerToHostFlowControl = 49
-	KBluetoothHCICommandSetMWSChannelParameters = 110
-	KBluetoothHCICommandSetMWSPATTERNConfiguration = 115
-	KBluetoothHCICommandSetMWSScanFrequencyTable = 114
-	KBluetoothHCICommandSetMWSSignaling = 112
-	KBluetoothHCICommandSetMWSTransportLayer = 113
-	KBluetoothHCICommandSetReservedLTADDR = 116
-	KBluetoothHCICommandSetTriggeredClockCapture = 13
-	KBluetoothHCICommandSetupSynchronousConnection = 40
-	KBluetoothHCICommandShortRangeMode = 107
-	KBluetoothHCICommandSniffMode = 3
-	KBluetoothHCICommandSniffSubrating = 17
-	KBluetoothHCICommandStartSynchronizationTrain = 67
-	KBluetoothHCICommandSwitchRole = 11
-	KBluetoothHCICommandTruncatedPage = 63
-	KBluetoothHCICommandTruncatedPageCancel = 64
-	KBluetoothHCICommandUserConfirmationRequestNegativeReply = 45
-	KBluetoothHCICommandUserConfirmationRequestReply = 44
-	KBluetoothHCICommandUserPasskeyRequestNegativeReply = 47
-	KBluetoothHCICommandUserPasskeyRequestReply = 46
-	KBluetoothHCICommandWriteAFHChannelAssessmentMode = 73
-	KBluetoothHCICommandWriteAuthenticatedPayloadTimeout = 124
-	KBluetoothHCICommandWriteAuthenticationEnable = 32
-	KBluetoothHCICommandWriteAutomaticFlushTimeout = 40
-	KBluetoothHCICommandWriteBestEffortFlushTimeout = 106
-	KBluetoothHCICommandWriteClassOfDevice = 36
-	KBluetoothHCICommandWriteConnectionAcceptTimeout = 22
-	KBluetoothHCICommandWriteCurrentIACLAP = 58
-	KBluetoothHCICommandWriteDefaultErroneousDataReporting = 91
-	KBluetoothHCICommandWriteDefaultLinkPolicySettings = 15
-	KBluetoothHCICommandWriteEncryptionMode = 34
-	KBluetoothHCICommandWriteExtendedInquiryLength = 129
-	KBluetoothHCICommandWriteExtendedInquiryResponse = 82
-	KBluetoothHCICommandWriteExtendedPageTimeout = 127
-	KBluetoothHCICommandWriteFlowControlMode = 103
-	KBluetoothHCICommandWriteHoldModeActivity = 44
-	KBluetoothHCICommandWriteInquiryMode = 69
-	KBluetoothHCICommandWriteInquiryResponseTransmitPower = 89
-	KBluetoothHCICommandWriteInquiryScanActivity = 30
-	KBluetoothHCICommandWriteInquiryScanType = 67
-	KBluetoothHCICommandWriteLEHostSupported = 109
-	KBluetoothHCICommandWriteLinkPolicySettings = 13
-	KBluetoothHCICommandWriteLinkSupervisionTimeout = 55
-	KBluetoothHCICommandWriteLocationData = 101
-	KBluetoothHCICommandWriteLogicalLinkAcceptTimeout = 98
-	KBluetoothHCICommandWriteLoopbackMode = 2
-	KBluetoothHCICommandWriteNumberOfBroadcastRetransmissions = 42
-	KBluetoothHCICommandWritePINType = 10
-	KBluetoothHCICommandWritePageScanActivity = 28
-	KBluetoothHCICommandWritePageScanMode = 62
-	KBluetoothHCICommandWritePageScanPeriodMode = 60
-	KBluetoothHCICommandWritePageScanType = 71
-	KBluetoothHCICommandWritePageTimeout = 24
-	KBluetoothHCICommandWriteRemoteAMPASSOC = 11
-	KBluetoothHCICommandWriteSCOFlowControlEnable = 47
-	KBluetoothHCICommandWriteScanEnable = 26
-	KBluetoothHCICommandWriteSecureConnectionsHostSupport = 122
-	KBluetoothHCICommandWriteSimplePairingDebugMode = 4
-	KBluetoothHCICommandWriteSimplePairingMode = 86
-	KBluetoothHCICommandWriteStoredLinkKey = 17
-	KBluetoothHCICommandWriteSynchronizationTrainParameters = 120
-	KBluetoothHCICommandWriteVoiceSetting = 38
-	KBluetoothHCIOpCodeNoOp = 0
+	KBluetoothHCICommandLERemoteConnectionParameterRequestReply         = 32
+	KBluetoothHCICommandLERemoveAdvertisingSet                          = 60
+	KBluetoothHCICommandLERemoveDeviceFromPeriodicAdvertiserList        = 72
+	KBluetoothHCICommandLERemoveDeviceFromResolvingList                 = 40
+	KBluetoothHCICommandLERemoveDeviceFromWhiteList                     = 18
+	KBluetoothHCICommandLESetAddressResolutionEnable                    = 45
+	KBluetoothHCICommandLESetAdvertiseEnable                            = 10
+	KBluetoothHCICommandLESetAdvertisingData                            = 8
+	KBluetoothHCICommandLESetAdvertisingParameters                      = 6
+	KBluetoothHCICommandLESetAdvertisingSetRandomAddress                = 53
+	KBluetoothHCICommandLESetDataLength                                 = 34
+	KBluetoothHCICommandLESetDefaultPhy                                 = 49
+	KBluetoothHCICommandLESetEventMask                                  = 1
+	KBluetoothHCICommandLESetExtendedAdvertisingData                    = 55
+	KBluetoothHCICommandLESetExtendedAdvertisingEnableCommand           = 57
+	KBluetoothHCICommandLESetExtendedAdvertisingParameters              = 54
+	KBluetoothHCICommandLESetExtendedScanEnable                         = 66
+	KBluetoothHCICommandLESetExtendedScanParameters                     = 65
+	KBluetoothHCICommandLESetExtendedScanResponseData                   = 56
+	KBluetoothHCICommandLESetHostChannelClassification                  = 20
+	KBluetoothHCICommandLESetPeriodicAdvertisingData                    = 63
+	KBluetoothHCICommandLESetPeriodicAdvertisingEnable                  = 64
+	KBluetoothHCICommandLESetPeriodicAdvertisingParameters              = 62
+	KBluetoothHCICommandLESetPhy                                        = 50
+	KBluetoothHCICommandLESetPrivacyMode                                = 78
+	KBluetoothHCICommandLESetRandomAddress                              = 5
+	KBluetoothHCICommandLESetResolvablePrivateAddressTimeout            = 46
+	KBluetoothHCICommandLESetScanEnable                                 = 12
+	KBluetoothHCICommandLESetScanParameters                             = 11
+	KBluetoothHCICommandLESetScanResponseData                           = 9
+	KBluetoothHCICommandLEStartEncryption                               = 25
+	KBluetoothHCICommandLETestEnd                                       = 31
+	KBluetoothHCICommandLETransmitterTest                               = 30
+	KBluetoothHCICommandLEWriteRFPathCompensation                       = 77
+	KBluetoothHCICommandLEWriteSuggestedDefaultDataLength               = 36
+	KBluetoothHCICommandLinkKeyRequestNegativeReply                     = 12
+	KBluetoothHCICommandLinkKeyRequestReply                             = 11
+	KBluetoothHCICommandMasterLinkKey                                   = 23
+	KBluetoothHCICommandMax                                             = 1023
+	KBluetoothHCICommandNoOp                                            = 0
+	KBluetoothHCICommandPINCodeRequestNegativeReply                     = 14
+	KBluetoothHCICommandPINCodeRequestReply                             = 13
+	KBluetoothHCICommandParkMode                                        = 5
+	KBluetoothHCICommandPeriodicInquiryMode                             = 3
+	KBluetoothHCICommandQoSSetup                                        = 7
+	KBluetoothHCICommandReadAFHChannelAssessmentMode                    = 72
+	KBluetoothHCICommandReadAFHMappings                                 = 6
+	KBluetoothHCICommandReadAuthenticatedPayloadTimeout                 = 123
+	KBluetoothHCICommandReadAuthenticationEnable                        = 31
+	KBluetoothHCICommandReadAutomaticFlushTimeout                       = 39
+	KBluetoothHCICommandReadBestEffortFlushTimeout                      = 105
+	KBluetoothHCICommandReadBufferSize                                  = 5
+	KBluetoothHCICommandReadClassOfDevice                               = 35
+	KBluetoothHCICommandReadClock                                       = 7
+	KBluetoothHCICommandReadClockOffset                                 = 31
+	KBluetoothHCICommandReadConnectionAcceptTimeout                     = 21
+	KBluetoothHCICommandReadCountryCode                                 = 7
+	KBluetoothHCICommandReadCurrentIACLAP                               = 57
+	KBluetoothHCICommandReadDataBlockSize                               = 10
+	KBluetoothHCICommandReadDefaultErroneousDataReporting               = 90
+	KBluetoothHCICommandReadDefaultLinkPolicySettings                   = 14
+	KBluetoothHCICommandReadDeviceAddress                               = 9
+	KBluetoothHCICommandReadEncryptionKeySize                           = 8
+	KBluetoothHCICommandReadEncryptionMode                              = 33
+	KBluetoothHCICommandReadEnhancedTransmitPowerLevel                  = 104
+	KBluetoothHCICommandReadExtendedInquiryLength                       = 128
+	KBluetoothHCICommandReadExtendedInquiryResponse                     = 81
+	KBluetoothHCICommandReadExtendedPageTimeout                         = 126
+	KBluetoothHCICommandReadFailedContactCounter                        = 1
+	KBluetoothHCICommandReadFlowControlMode                             = 102
+	KBluetoothHCICommandReadHoldModeActivity                            = 43
+	KBluetoothHCICommandReadInquiryMode                                 = 68
+	KBluetoothHCICommandReadInquiryResponseTransmitPower                = 88
+	KBluetoothHCICommandReadInquiryScanActivity                         = 29
+	KBluetoothHCICommandReadInquiryScanType                             = 66
+	KBluetoothHCICommandReadLEHostSupported                             = 108
+	KBluetoothHCICommandReadLMPHandle                                   = 32
+	KBluetoothHCICommandReadLinkPolicySettings                          = 12
+	KBluetoothHCICommandReadLinkSupervisionTimeout                      = 54
+	KBluetoothHCICommandReadLocalAMPASSOC                               = 10
+	KBluetoothHCICommandReadLocalAMPInfo                                = 9
+	KBluetoothHCICommandReadLocalExtendedFeatures                       = 4
+	KBluetoothHCICommandReadLocalName                                   = 20
+	KBluetoothHCICommandReadLocalOOBData                                = 87
+	KBluetoothHCICommandReadLocalOOBExtendedData                        = 125
+	KBluetoothHCICommandReadLocalSupportedCodecs                        = 11
+	KBluetoothHCICommandReadLocalSupportedCommands                      = 2
+	KBluetoothHCICommandReadLocalSupportedFeatures                      = 3
+	KBluetoothHCICommandReadLocalVersionInformation                     = 1
+	KBluetoothHCICommandReadLocationData                                = 100
+	KBluetoothHCICommandReadLogicalLinkAcceptTimeout                    = 97
+	KBluetoothHCICommandReadLoopbackMode                                = 1
+	KBluetoothHCICommandReadNumberOfBroadcastRetransmissions            = 41
+	KBluetoothHCICommandReadNumberOfSupportedIAC                        = 56
+	KBluetoothHCICommandReadPINType                                     = 9
+	KBluetoothHCICommandReadPageScanActivity                            = 27
+	KBluetoothHCICommandReadPageScanMode                                = 61
+	KBluetoothHCICommandReadPageScanPeriodMode                          = 59
+	KBluetoothHCICommandReadPageScanType                                = 70
+	KBluetoothHCICommandReadPageTimeout                                 = 23
+	KBluetoothHCICommandReadRSSI                                        = 5
+	KBluetoothHCICommandReadRemoteExtendedFeatures                      = 28
+	KBluetoothHCICommandReadRemoteSupportedFeatures                     = 27
+	KBluetoothHCICommandReadRemoteVersionInformation                    = 29
+	KBluetoothHCICommandReadSCOFlowControlEnable                        = 46
+	KBluetoothHCICommandReadScanEnable                                  = 25
+	KBluetoothHCICommandReadSecureConnectionsHostSupport                = 121
+	KBluetoothHCICommandReadSimplePairingMode                           = 85
+	KBluetoothHCICommandReadStoredLinkKey                               = 13
+	KBluetoothHCICommandReadSynchronizationTrainParameters              = 119
+	KBluetoothHCICommandReadTransmitPowerLevel                          = 45
+	KBluetoothHCICommandReadVoiceSetting                                = 37
+	KBluetoothHCICommandReceiveSynchronizationTrain                     = 68
+	KBluetoothHCICommandRefreshEncryptionKey                            = 83
+	KBluetoothHCICommandRejectConnectionRequest                         = 10
+	KBluetoothHCICommandRejectSniffRequest                              = 50
+	KBluetoothHCICommandRejectSynchronousConnectionRequest              = 42
+	KBluetoothHCICommandRemoteNameRequest                               = 25
+	KBluetoothHCICommandRemoteNameRequestCancel                         = 26
+	KBluetoothHCICommandRemoteOOBDataRequestNegativeReply               = 51
+	KBluetoothHCICommandRemoteOOBDataRequestReply                       = 48
+	KBluetoothHCICommandRemoteOOBExtendedDataRequestReply               = 69
+	KBluetoothHCICommandReset                                           = 3
+	KBluetoothHCICommandResetFailedContactCounter                       = 2
+	KBluetoothHCICommandRoleDiscovery                                   = 9
+	KBluetoothHCICommandSendKeypressNotification                        = 96
+	KBluetoothHCICommandSetAFHClassification                            = 63
+	KBluetoothHCICommandSetConnectionEncryption                         = 19
+	KBluetoothHCICommandSetConnectionlessPeripheralBroadcast            = 65
+	KBluetoothHCICommandSetConnectionlessPeripheralBroadcastData        = 118
+	KBluetoothHCICommandSetConnectionlessPeripheralBroadcastReceive     = 66
+	KBluetoothHCICommandSetConnectionlessSlaveBroadcast                 = 65
+	KBluetoothHCICommandSetConnectionlessSlaveBroadcastData             = 118
+	KBluetoothHCICommandSetConnectionlessSlaveBroadcastReceive          = 66
+	KBluetoothHCICommandSetEventFilter                                  = 5
+	KBluetoothHCICommandSetEventMask                                    = 1
+	KBluetoothHCICommandSetEventMaskPageTwo                             = 99
+	KBluetoothHCICommandSetExternalFrameConfiguration                   = 111
+	KBluetoothHCICommandSetHostControllerToHostFlowControl              = 49
+	KBluetoothHCICommandSetMWSChannelParameters                         = 110
+	KBluetoothHCICommandSetMWSPATTERNConfiguration                      = 115
+	KBluetoothHCICommandSetMWSScanFrequencyTable                        = 114
+	KBluetoothHCICommandSetMWSSignaling                                 = 112
+	KBluetoothHCICommandSetMWSTransportLayer                            = 113
+	KBluetoothHCICommandSetReservedLTADDR                               = 116
+	KBluetoothHCICommandSetTriggeredClockCapture                        = 13
+	KBluetoothHCICommandSetupSynchronousConnection                      = 40
+	KBluetoothHCICommandShortRangeMode                                  = 107
+	KBluetoothHCICommandSniffMode                                       = 3
+	KBluetoothHCICommandSniffSubrating                                  = 17
+	KBluetoothHCICommandStartSynchronizationTrain                       = 67
+	KBluetoothHCICommandSwitchRole                                      = 11
+	KBluetoothHCICommandTruncatedPage                                   = 63
+	KBluetoothHCICommandTruncatedPageCancel                             = 64
+	KBluetoothHCICommandUserConfirmationRequestNegativeReply            = 45
+	KBluetoothHCICommandUserConfirmationRequestReply                    = 44
+	KBluetoothHCICommandUserPasskeyRequestNegativeReply                 = 47
+	KBluetoothHCICommandUserPasskeyRequestReply                         = 46
+	KBluetoothHCICommandWriteAFHChannelAssessmentMode                   = 73
+	KBluetoothHCICommandWriteAuthenticatedPayloadTimeout                = 124
+	KBluetoothHCICommandWriteAuthenticationEnable                       = 32
+	KBluetoothHCICommandWriteAutomaticFlushTimeout                      = 40
+	KBluetoothHCICommandWriteBestEffortFlushTimeout                     = 106
+	KBluetoothHCICommandWriteClassOfDevice                              = 36
+	KBluetoothHCICommandWriteConnectionAcceptTimeout                    = 22
+	KBluetoothHCICommandWriteCurrentIACLAP                              = 58
+	KBluetoothHCICommandWriteDefaultErroneousDataReporting              = 91
+	KBluetoothHCICommandWriteDefaultLinkPolicySettings                  = 15
+	KBluetoothHCICommandWriteEncryptionMode                             = 34
+	KBluetoothHCICommandWriteExtendedInquiryLength                      = 129
+	KBluetoothHCICommandWriteExtendedInquiryResponse                    = 82
+	KBluetoothHCICommandWriteExtendedPageTimeout                        = 127
+	KBluetoothHCICommandWriteFlowControlMode                            = 103
+	KBluetoothHCICommandWriteHoldModeActivity                           = 44
+	KBluetoothHCICommandWriteInquiryMode                                = 69
+	KBluetoothHCICommandWriteInquiryResponseTransmitPower               = 89
+	KBluetoothHCICommandWriteInquiryScanActivity                        = 30
+	KBluetoothHCICommandWriteInquiryScanType                            = 67
+	KBluetoothHCICommandWriteLEHostSupported                            = 109
+	KBluetoothHCICommandWriteLinkPolicySettings                         = 13
+	KBluetoothHCICommandWriteLinkSupervisionTimeout                     = 55
+	KBluetoothHCICommandWriteLocationData                               = 101
+	KBluetoothHCICommandWriteLogicalLinkAcceptTimeout                   = 98
+	KBluetoothHCICommandWriteLoopbackMode                               = 2
+	KBluetoothHCICommandWriteNumberOfBroadcastRetransmissions           = 42
+	KBluetoothHCICommandWritePINType                                    = 10
+	KBluetoothHCICommandWritePageScanActivity                           = 28
+	KBluetoothHCICommandWritePageScanMode                               = 62
+	KBluetoothHCICommandWritePageScanPeriodMode                         = 60
+	KBluetoothHCICommandWritePageScanType                               = 71
+	KBluetoothHCICommandWritePageTimeout                                = 24
+	KBluetoothHCICommandWriteRemoteAMPASSOC                             = 11
+	KBluetoothHCICommandWriteSCOFlowControlEnable                       = 47
+	KBluetoothHCICommandWriteScanEnable                                 = 26
+	KBluetoothHCICommandWriteSecureConnectionsHostSupport               = 122
+	KBluetoothHCICommandWriteSimplePairingDebugMode                     = 4
+	KBluetoothHCICommandWriteSimplePairingMode                          = 86
+	KBluetoothHCICommandWriteStoredLinkKey                              = 17
+	KBluetoothHCICommandWriteSynchronizationTrainParameters             = 120
+	KBluetoothHCICommandWriteVoiceSetting                               = 38
+	KBluetoothHCIOpCodeNoOp                                             = 0
 )
 
 const (
-	KBluetoothHCITransportUSBClassCode = 224
+	KBluetoothHCITransportUSBClassCode    = 224
 	KBluetoothHCITransportUSBProtocolCode = 1
 	KBluetoothHCITransportUSBSubClassCode = 1
 )
 
 const (
 	KBluetoothKeyFlagSemiPermanent = 0
-	KBluetoothKeyFlagTemporary = 1
+	KBluetoothKeyFlagTemporary     = 1
 )
 
 const (
-	KBluetoothKeyTypeAuthenticatedCombination = 5
-	KBluetoothKeyTypeAuthenticatedCombinationP256 = 8
-	KBluetoothKeyTypeChangedCombination = 6
-	KBluetoothKeyTypeCombination = 0
-	KBluetoothKeyTypeDebugCombination = 3
-	KBluetoothKeyTypeLocalUnit = 1
-	KBluetoothKeyTypeRemoteUnit = 2
-	KBluetoothKeyTypeUnauthenticatedCombination = 4
+	KBluetoothKeyTypeAuthenticatedCombination       = 5
+	KBluetoothKeyTypeAuthenticatedCombinationP256   = 8
+	KBluetoothKeyTypeChangedCombination             = 6
+	KBluetoothKeyTypeCombination                    = 0
+	KBluetoothKeyTypeDebugCombination               = 3
+	KBluetoothKeyTypeLocalUnit                      = 1
+	KBluetoothKeyTypeRemoteUnit                     = 2
+	KBluetoothKeyTypeUnauthenticatedCombination     = 4
 	KBluetoothKeyTypeUnauthenticatedCombinationP256 = 7
 )
 
 const (
-	KBluetoothL2CAPChannelAMPManagerProtocol = 3
-	KBluetoothL2CAPChannelAMPTestManager = 63
-	KBluetoothL2CAPChannelAttributeProtocol = 4
+	KBluetoothL2CAPChannelAMPManagerProtocol   = 3
+	KBluetoothL2CAPChannelAMPTestManager       = 63
+	KBluetoothL2CAPChannelAttributeProtocol    = 4
 	KBluetoothL2CAPChannelBREDRSecurityManager = 7
-	KBluetoothL2CAPChannelConnectionLessData = 2
-	KBluetoothL2CAPChannelDynamicEnd = 65535
-	KBluetoothL2CAPChannelDynamicStart = 64
-	KBluetoothL2CAPChannelEnd = 65535
-	KBluetoothL2CAPChannelLEAP = 42
-	KBluetoothL2CAPChannelLEAS = 43
-	KBluetoothL2CAPChannelLESignalling = 5
-	KBluetoothL2CAPChannelMagicPairing = 48
-	KBluetoothL2CAPChannelMagnet = 58
-	KBluetoothL2CAPChannelNull = 0
-	KBluetoothL2CAPChannelReservedEnd = 62
-	KBluetoothL2CAPChannelReservedStart = 8
-	KBluetoothL2CAPChannelSecurityManager = 6
-	KBluetoothL2CAPChannelSignalling = 1
+	KBluetoothL2CAPChannelConnectionLessData   = 2
+	KBluetoothL2CAPChannelDynamicEnd           = 65535
+	KBluetoothL2CAPChannelDynamicStart         = 64
+	KBluetoothL2CAPChannelEnd                  = 65535
+	KBluetoothL2CAPChannelLEAP                 = 42
+	KBluetoothL2CAPChannelLEAS                 = 43
+	KBluetoothL2CAPChannelLESignalling         = 5
+	KBluetoothL2CAPChannelMagicPairing         = 48
+	KBluetoothL2CAPChannelMagnet               = 58
+	KBluetoothL2CAPChannelNull                 = 0
+	KBluetoothL2CAPChannelReservedEnd          = 62
+	KBluetoothL2CAPChannelReservedStart        = 8
+	KBluetoothL2CAPChannelSecurityManager      = 6
+	KBluetoothL2CAPChannelSignalling           = 1
 )
 
 const (
-	KBluetoothL2CAPConfigurationOptionFlushTimeoutLength = 2
-	KBluetoothL2CAPConfigurationOptionMTULength = 2
-	KBluetoothL2CAPConfigurationOptionQoSLength = 22
+	KBluetoothL2CAPConfigurationOptionFlushTimeoutLength                 = 2
+	KBluetoothL2CAPConfigurationOptionMTULength                          = 2
+	KBluetoothL2CAPConfigurationOptionQoSLength                          = 22
 	KBluetoothL2CAPConfigurationOptionRetransmissionAndFlowControlLength = 9
 )
 
 const (
-	KBluetoothL2CAPFlushTimeoutEnd = 65536
-	KBluetoothL2CAPFlushTimeoutForever = 65535
-	KBluetoothL2CAPFlushTimeoutImmediate = 1
+	KBluetoothL2CAPFlushTimeoutEnd         = 65536
+	KBluetoothL2CAPFlushTimeoutForever     = 65535
+	KBluetoothL2CAPFlushTimeoutImmediate   = 1
 	KBluetoothL2CAPFlushTimeoutUseExisting = 0
 )
 
@@ -6020,51 +6066,51 @@ const (
 )
 
 const (
-	KBluetoothL2CAPFlushTimeoutDefault = 65535
-	KBluetoothL2CAPMTUDefault = 1017
-	KBluetoothL2CAPMTULowEnergyDefault = 27
-	KBluetoothL2CAPMTULowEnergyMax = 251
-	KBluetoothL2CAPMTUMaximum = 65535
-	KBluetoothL2CAPMTUMinimum = 48
-	KBluetoothL2CAPMTUSIG = 48
-	KBluetoothL2CAPMTUStart = 32767
-	KBluetoothL2CAPQoSDelayVariationDefault = 4294967295
-	KBluetoothL2CAPQoSFlagsDefault = 0
-	KBluetoothL2CAPQoSLatencyDefault = 4294967295
-	KBluetoothL2CAPQoSPeakBandwidthDefault = 0
+	KBluetoothL2CAPFlushTimeoutDefault       = 65535
+	KBluetoothL2CAPMTUDefault                = 1017
+	KBluetoothL2CAPMTULowEnergyDefault       = 27
+	KBluetoothL2CAPMTULowEnergyMax           = 251
+	KBluetoothL2CAPMTUMaximum                = 65535
+	KBluetoothL2CAPMTUMinimum                = 48
+	KBluetoothL2CAPMTUSIG                    = 48
+	KBluetoothL2CAPMTUStart                  = 32767
+	KBluetoothL2CAPQoSDelayVariationDefault  = 4294967295
+	KBluetoothL2CAPQoSFlagsDefault           = 0
+	KBluetoothL2CAPQoSLatencyDefault         = 4294967295
+	KBluetoothL2CAPQoSPeakBandwidthDefault   = 0
 	KBluetoothL2CAPQoSTokenBucketSizeDefault = 0
-	KBluetoothL2CAPQoSTokenRateDefault = 0
-	KBluetoothL2CAPQoSTypeDefault = 1
+	KBluetoothL2CAPQoSTokenRateDefault       = 0
+	KBluetoothL2CAPQoSTypeDefault            = 1
 )
 
 const (
 	KBluetoothACLLogicalChannelL2CAPContinue = 1
-	KBluetoothACLLogicalChannelL2CAPStart = 2
-	KBluetoothACLLogicalChannelLMP = 3
-	KBluetoothACLLogicalChannelReserved = 0
-	KBluetoothL2CAPMaxPacketSize = 65535
+	KBluetoothACLLogicalChannelL2CAPStart    = 2
+	KBluetoothACLLogicalChannelLMP           = 3
+	KBluetoothACLLogicalChannelReserved      = 0
+	KBluetoothL2CAPMaxPacketSize             = 65535
 )
 
 const (
-	KBluetoothL2CAPPSMAACP = 4097
-	KBluetoothL2CAPPSMATT = 31
-	KBluetoothL2CAPPSMAVCTP = 23
-	KBluetoothL2CAPPSMAVCTP_Browsing = 27
-	KBluetoothL2CAPPSMAVDTP = 25
-	KBluetoothL2CAPPSMBNEP = 15
-	KBluetoothL2CAPPSMD2D = 4111
-	KBluetoothL2CAPPSMDynamicEnd = 65535
-	KBluetoothL2CAPPSMDynamicStart = 4097
-	KBluetoothL2CAPPSMHIDControl = 17
-	KBluetoothL2CAPPSMHIDInterrupt = 19
-	KBluetoothL2CAPPSMNone = 0
-	KBluetoothL2CAPPSMRFCOMM = 3
-	KBluetoothL2CAPPSMReservedEnd = 4096
-	KBluetoothL2CAPPSMReservedStart = 1
-	KBluetoothL2CAPPSMSDP = 1
-	KBluetoothL2CAPPSMTCS_BIN = 5
+	KBluetoothL2CAPPSMAACP             = 4097
+	KBluetoothL2CAPPSMATT              = 31
+	KBluetoothL2CAPPSMAVCTP            = 23
+	KBluetoothL2CAPPSMAVCTP_Browsing   = 27
+	KBluetoothL2CAPPSMAVDTP            = 25
+	KBluetoothL2CAPPSMBNEP             = 15
+	KBluetoothL2CAPPSMD2D              = 4111
+	KBluetoothL2CAPPSMDynamicEnd       = 65535
+	KBluetoothL2CAPPSMDynamicStart     = 4097
+	KBluetoothL2CAPPSMHIDControl       = 17
+	KBluetoothL2CAPPSMHIDInterrupt     = 19
+	KBluetoothL2CAPPSMNone             = 0
+	KBluetoothL2CAPPSMRFCOMM           = 3
+	KBluetoothL2CAPPSMReservedEnd      = 4096
+	KBluetoothL2CAPPSMReservedStart    = 1
+	KBluetoothL2CAPPSMSDP              = 1
+	KBluetoothL2CAPPSMTCS_BIN          = 5
 	KBluetoothL2CAPPSMTCS_BIN_Cordless = 7
-	KBluetoothL2CAPPSMUID_C_Plane = 29
+	KBluetoothL2CAPPSMUID_C_Plane      = 29
 )
 
 const (
@@ -6072,81 +6118,81 @@ const (
 )
 
 const (
-	KBluetoothL2CAPTCICommandL2CA_ConfigReq = 3
-	KBluetoothL2CAPTCICommandL2CA_ConfigResp = 19
-	KBluetoothL2CAPTCICommandL2CA_ConnectReq = 1
-	KBluetoothL2CAPTCICommandL2CA_ConnectResp = 17
-	KBluetoothL2CAPTCICommandL2CA_DisableCLT = 4
-	KBluetoothL2CAPTCICommandL2CA_DisconnectReq = 2
-	KBluetoothL2CAPTCICommandL2CA_DisconnectResp = 18
-	KBluetoothL2CAPTCICommandL2CA_EnableCLT = 5
-	KBluetoothL2CAPTCICommandL2CA_GetInfo = 14
-	KBluetoothL2CAPTCICommandL2CA_GroupAddMember = 8
-	KBluetoothL2CAPTCICommandL2CA_GroupClose = 7
-	KBluetoothL2CAPTCICommandL2CA_GroupCreate = 6
-	KBluetoothL2CAPTCICommandL2CA_GroupMembership = 10
+	KBluetoothL2CAPTCICommandL2CA_ConfigReq         = 3
+	KBluetoothL2CAPTCICommandL2CA_ConfigResp        = 19
+	KBluetoothL2CAPTCICommandL2CA_ConnectReq        = 1
+	KBluetoothL2CAPTCICommandL2CA_ConnectResp       = 17
+	KBluetoothL2CAPTCICommandL2CA_DisableCLT        = 4
+	KBluetoothL2CAPTCICommandL2CA_DisconnectReq     = 2
+	KBluetoothL2CAPTCICommandL2CA_DisconnectResp    = 18
+	KBluetoothL2CAPTCICommandL2CA_EnableCLT         = 5
+	KBluetoothL2CAPTCICommandL2CA_GetInfo           = 14
+	KBluetoothL2CAPTCICommandL2CA_GroupAddMember    = 8
+	KBluetoothL2CAPTCICommandL2CA_GroupClose        = 7
+	KBluetoothL2CAPTCICommandL2CA_GroupCreate       = 6
+	KBluetoothL2CAPTCICommandL2CA_GroupMembership   = 10
 	KBluetoothL2CAPTCICommandL2CA_GroupRemoveMember = 9
-	KBluetoothL2CAPTCICommandL2CA_Ping = 13
-	KBluetoothL2CAPTCICommandL2CA_ReadData = 12
-	KBluetoothL2CAPTCICommandL2CA_Reserved1 = 15
-	KBluetoothL2CAPTCICommandL2CA_Reserved2 = 16
-	KBluetoothL2CAPTCICommandL2CA_WriteData = 11
-	KBluetoothL2CAPTCICommandReserved = 0
+	KBluetoothL2CAPTCICommandL2CA_Ping              = 13
+	KBluetoothL2CAPTCICommandL2CA_ReadData          = 12
+	KBluetoothL2CAPTCICommandL2CA_Reserved1         = 15
+	KBluetoothL2CAPTCICommandL2CA_Reserved2         = 16
+	KBluetoothL2CAPTCICommandL2CA_WriteData         = 11
+	KBluetoothL2CAPTCICommandReserved               = 0
 )
 
 const (
-	KBluetoothL2CAPTCIEventIDL2CA_ConfigInd = 2
-	KBluetoothL2CAPTCIEventIDL2CA_ConnectInd = 1
-	KBluetoothL2CAPTCIEventIDL2CA_DisconnectInd = 3
+	KBluetoothL2CAPTCIEventIDL2CA_ConfigInd       = 2
+	KBluetoothL2CAPTCIEventIDL2CA_ConnectInd      = 1
+	KBluetoothL2CAPTCIEventIDL2CA_DisconnectInd   = 3
 	KBluetoothL2CAPTCIEventIDL2CA_QoSViolationInd = 4
-	KBluetoothL2CAPTCIEventIDL2CA_TimeOutInd = 5
-	KBluetoothL2CAPTCIEventIDReserved = 0
+	KBluetoothL2CAPTCIEventIDL2CA_TimeOutInd      = 5
+	KBluetoothL2CAPTCIEventIDReserved             = 0
 )
 
 const (
 	KBluetoothLEMaxTXOctetsDefault = 128
-	KBluetoothLEMaxTXOctetsMax = 251
-	KBluetoothLEMaxTXOctetsMin = 27
-	KBluetoothLEMaxTXTimeDefault = 27
-	KBluetoothLEMaxTXTimeMax = 2120
-	KBluetoothLEMaxTXTimeMin = 328
+	KBluetoothLEMaxTXOctetsMax     = 251
+	KBluetoothLEMaxTXOctetsMin     = 27
+	KBluetoothLEMaxTXTimeDefault   = 27
+	KBluetoothLEMaxTXTimeMax       = 2120
+	KBluetoothLEMaxTXTimeMin       = 328
 )
 
 const (
-	KBluetoothLESecurityManagerBonding = 1
-	KBluetoothLESecurityManagerNoBonding = 0
-	KBluetoothLESecurityManagerReservedEnd = 3
+	KBluetoothLESecurityManagerBonding       = 1
+	KBluetoothLESecurityManagerNoBonding     = 0
+	KBluetoothLESecurityManagerReservedEnd   = 3
 	KBluetoothLESecurityManagerReservedStart = 2
 )
 
 const (
 	KBluetoothLETXOctetsDefault = 27
-	KBluetoothLETXOctetsMax = 251
-	KBluetoothLETXOctetsMin = 27
-	KBluetoothLETXTimeDefault = 328
-	KBluetoothLETXTimeMax = 2120
-	KBluetoothLETXTimeMin = 328
+	KBluetoothLETXOctetsMax     = 251
+	KBluetoothLETXOctetsMin     = 27
+	KBluetoothLETXTimeDefault   = 328
+	KBluetoothLETXTimeMax       = 2120
+	KBluetoothLETXTimeMin       = 328
 )
 
 const (
-	KBluetoothPacketType2DH1Omit = 2
-	KBluetoothPacketType2DH3Omit = 256
-	KBluetoothPacketType2DH5Omit = 4096
-	KBluetoothPacketType3DH1Omit = 4
-	KBluetoothPacketType3DH3Omit = 512
-	KBluetoothPacketType3DM5Omit = 8192
-	KBluetoothPacketTypeAUX = 512
-	KBluetoothPacketTypeDH1 = 16
-	KBluetoothPacketTypeDH3 = 2048
-	KBluetoothPacketTypeDH5 = 32768
-	KBluetoothPacketTypeDM1 = 8
-	KBluetoothPacketTypeDM3 = 1024
-	KBluetoothPacketTypeDM5 = 16384
-	KBluetoothPacketTypeDV = 256
-	KBluetoothPacketTypeEnd = 32769
-	KBluetoothPacketTypeHV1 = 32
-	KBluetoothPacketTypeHV2 = 64
-	KBluetoothPacketTypeHV3 = 128
+	KBluetoothPacketType2DH1Omit  = 2
+	KBluetoothPacketType2DH3Omit  = 256
+	KBluetoothPacketType2DH5Omit  = 4096
+	KBluetoothPacketType3DH1Omit  = 4
+	KBluetoothPacketType3DH3Omit  = 512
+	KBluetoothPacketType3DM5Omit  = 8192
+	KBluetoothPacketTypeAUX       = 512
+	KBluetoothPacketTypeDH1       = 16
+	KBluetoothPacketTypeDH3       = 2048
+	KBluetoothPacketTypeDH5       = 32768
+	KBluetoothPacketTypeDM1       = 8
+	KBluetoothPacketTypeDM3       = 1024
+	KBluetoothPacketTypeDM5       = 16384
+	KBluetoothPacketTypeDV        = 256
+	KBluetoothPacketTypeEnd       = 32769
+	KBluetoothPacketTypeHV1       = 32
+	KBluetoothPacketTypeHV2       = 64
+	KBluetoothPacketTypeHV3       = 128
 	KBluetoothPacketTypeReserved1 = 1
 )
 
@@ -6170,140 +6216,140 @@ const (
 )
 
 const (
-	KBluetoothRoleBecomeCentral = 0
-	KBluetoothRoleBecomeMaster = 0
+	KBluetoothRoleBecomeCentral    = 0
+	KBluetoothRoleBecomeMaster     = 0
 	KBluetoothRoleRemainPeripheral = 1
-	KBluetoothRoleRemainSlave = 1
+	KBluetoothRoleRemainSlave      = 1
 )
 
 const (
-	KBluetoothSDPDataElementTypeBoolean = 5
+	KBluetoothSDPDataElementTypeBoolean                = 5
 	KBluetoothSDPDataElementTypeDataElementAlternative = 7
-	KBluetoothSDPDataElementTypeDataElementSequence = 6
-	KBluetoothSDPDataElementTypeNil = 0
-	KBluetoothSDPDataElementTypeReservedEnd = 31
-	KBluetoothSDPDataElementTypeReservedStart = 9
-	KBluetoothSDPDataElementTypeSignedInt = 2
-	KBluetoothSDPDataElementTypeString = 4
-	KBluetoothSDPDataElementTypeURL = 8
-	KBluetoothSDPDataElementTypeUUID = 3
-	KBluetoothSDPDataElementTypeUnsignedInt = 1
+	KBluetoothSDPDataElementTypeDataElementSequence    = 6
+	KBluetoothSDPDataElementTypeNil                    = 0
+	KBluetoothSDPDataElementTypeReservedEnd            = 31
+	KBluetoothSDPDataElementTypeReservedStart          = 9
+	KBluetoothSDPDataElementTypeSignedInt              = 2
+	KBluetoothSDPDataElementTypeString                 = 4
+	KBluetoothSDPDataElementTypeURL                    = 8
+	KBluetoothSDPDataElementTypeUUID                   = 3
+	KBluetoothSDPDataElementTypeUnsignedInt            = 1
 )
 
 const (
-	KBluetoothSDPErrorCodeInsufficientResources = 6
-	KBluetoothSDPErrorCodeInvalidContinuationState = 5
-	KBluetoothSDPErrorCodeInvalidPDUSize = 4
-	KBluetoothSDPErrorCodeInvalidRequestSyntax = 3
-	KBluetoothSDPErrorCodeInvalidSDPVersion = 1
+	KBluetoothSDPErrorCodeInsufficientResources      = 6
+	KBluetoothSDPErrorCodeInvalidContinuationState   = 5
+	KBluetoothSDPErrorCodeInvalidPDUSize             = 4
+	KBluetoothSDPErrorCodeInvalidRequestSyntax       = 3
+	KBluetoothSDPErrorCodeInvalidSDPVersion          = 1
 	KBluetoothSDPErrorCodeInvalidServiceRecordHandle = 2
-	KBluetoothSDPErrorCodeReserved = 0
-	KBluetoothSDPErrorCodeReservedEnd = 65535
-	KBluetoothSDPErrorCodeReservedStart = 7
-	KBluetoothSDPErrorCodeSuccess = 0
+	KBluetoothSDPErrorCodeReserved                   = 0
+	KBluetoothSDPErrorCodeReservedEnd                = 65535
+	KBluetoothSDPErrorCodeReservedStart              = 7
+	KBluetoothSDPErrorCodeSuccess                    = 0
 )
 
 const (
-	KBluetoothSDPPDUIDErrorResponse = 1
-	KBluetoothSDPPDUIDReserved = 0
-	KBluetoothSDPPDUIDServiceAttributeRequest = 4
-	KBluetoothSDPPDUIDServiceAttributeResponse = 5
-	KBluetoothSDPPDUIDServiceSearchAttributeRequest = 6
+	KBluetoothSDPPDUIDErrorResponse                  = 1
+	KBluetoothSDPPDUIDReserved                       = 0
+	KBluetoothSDPPDUIDServiceAttributeRequest        = 4
+	KBluetoothSDPPDUIDServiceAttributeResponse       = 5
+	KBluetoothSDPPDUIDServiceSearchAttributeRequest  = 6
 	KBluetoothSDPPDUIDServiceSearchAttributeResponse = 7
-	KBluetoothSDPPDUIDServiceSearchRequest = 2
-	KBluetoothSDPPDUIDServiceSearchResponse = 3
+	KBluetoothSDPPDUIDServiceSearchRequest           = 2
+	KBluetoothSDPPDUIDServiceSearchResponse          = 3
 )
 
 const (
-	KBluetoothSDPUUID16ATT = 7
-	KBluetoothSDPUUID16AVCTP = 23
-	KBluetoothSDPUUID16AVDTP = 25
-	KBluetoothSDPUUID16BNEP = 15
-	KBluetoothSDPUUID16Base = 0
-	KBluetoothSDPUUID16CMPT = 27
-	KBluetoothSDPUUID16FTP = 10
-	KBluetoothSDPUUID16HIDP = 17
-	KBluetoothSDPUUID16HTTP = 12
+	KBluetoothSDPUUID16ATT                    = 7
+	KBluetoothSDPUUID16AVCTP                  = 23
+	KBluetoothSDPUUID16AVDTP                  = 25
+	KBluetoothSDPUUID16BNEP                   = 15
+	KBluetoothSDPUUID16Base                   = 0
+	KBluetoothSDPUUID16CMPT                   = 27
+	KBluetoothSDPUUID16FTP                    = 10
+	KBluetoothSDPUUID16HIDP                   = 17
+	KBluetoothSDPUUID16HTTP                   = 12
 	KBluetoothSDPUUID16HardcopyControlChannel = 18
-	KBluetoothSDPUUID16HardcopyDataChannel = 20
-	KBluetoothSDPUUID16HardcopyNotification = 22
-	KBluetoothSDPUUID16IP = 9
-	KBluetoothSDPUUID16L2CAP = 256
-	KBluetoothSDPUUID16MCAPControlChannel = 30
-	KBluetoothSDPUUID16MCAPDataChannel = 31
-	KBluetoothSDPUUID16OBEX = 8
-	KBluetoothSDPUUID16RFCOMM = 3
-	KBluetoothSDPUUID16SDP = 1
-	KBluetoothSDPUUID16TCP = 4
-	KBluetoothSDPUUID16TCSAT = 6
-	KBluetoothSDPUUID16TCSBIN = 5
-	KBluetoothSDPUUID16UDI_C_Plane = 29
-	KBluetoothSDPUUID16UDP = 2
-	KBluetoothSDPUUID16UPNP = 16
-	KBluetoothSDPUUID16WSP = 14
+	KBluetoothSDPUUID16HardcopyDataChannel    = 20
+	KBluetoothSDPUUID16HardcopyNotification   = 22
+	KBluetoothSDPUUID16IP                     = 9
+	KBluetoothSDPUUID16L2CAP                  = 256
+	KBluetoothSDPUUID16MCAPControlChannel     = 30
+	KBluetoothSDPUUID16MCAPDataChannel        = 31
+	KBluetoothSDPUUID16OBEX                   = 8
+	KBluetoothSDPUUID16RFCOMM                 = 3
+	KBluetoothSDPUUID16SDP                    = 1
+	KBluetoothSDPUUID16TCP                    = 4
+	KBluetoothSDPUUID16TCSAT                  = 6
+	KBluetoothSDPUUID16TCSBIN                 = 5
+	KBluetoothSDPUUID16UDI_C_Plane            = 29
+	KBluetoothSDPUUID16UDP                    = 2
+	KBluetoothSDPUUID16UPNP                   = 16
+	KBluetoothSDPUUID16WSP                    = 14
 )
 
 const (
-	KBluetoothServiceClassMajorAny = 707406378
-	KBluetoothServiceClassMajorAudio = 256
-	KBluetoothServiceClassMajorCapturing = 64
-	KBluetoothServiceClassMajorEnd = 1852796518
-	KBluetoothServiceClassMajorInformation = 1024
+	KBluetoothServiceClassMajorAny                     = 707406378
+	KBluetoothServiceClassMajorAudio                   = 256
+	KBluetoothServiceClassMajorCapturing               = 64
+	KBluetoothServiceClassMajorEnd                     = 1852796518
+	KBluetoothServiceClassMajorInformation             = 1024
 	KBluetoothServiceClassMajorLimitedDiscoverableMode = 1
-	KBluetoothServiceClassMajorNetworking = 16
-	KBluetoothServiceClassMajorNone = 1852796517
-	KBluetoothServiceClassMajorObjectTransfer = 128
-	KBluetoothServiceClassMajorPositioning = 8
-	KBluetoothServiceClassMajorRendering = 32
-	KBluetoothServiceClassMajorReserved1 = 2
-	KBluetoothServiceClassMajorReserved2 = 4
-	KBluetoothServiceClassMajorTelephony = 512
+	KBluetoothServiceClassMajorNetworking              = 16
+	KBluetoothServiceClassMajorNone                    = 1852796517
+	KBluetoothServiceClassMajorObjectTransfer          = 128
+	KBluetoothServiceClassMajorPositioning             = 8
+	KBluetoothServiceClassMajorRendering               = 32
+	KBluetoothServiceClassMajorReserved1               = 2
+	KBluetoothServiceClassMajorReserved2               = 4
+	KBluetoothServiceClassMajorTelephony               = 512
 )
 
 const (
-	KBluetoothSynchronousConnectionPacketType2EV3Omit = 64
-	KBluetoothSynchronousConnectionPacketType2EV5Omit = 256
-	KBluetoothSynchronousConnectionPacketType3EV3Omit = 128
-	KBluetoothSynchronousConnectionPacketType3EV5Omit = 512
-	KBluetoothSynchronousConnectionPacketTypeAll = 65535
-	KBluetoothSynchronousConnectionPacketTypeEV3 = 8
-	KBluetoothSynchronousConnectionPacketTypeEV4 = 16
-	KBluetoothSynchronousConnectionPacketTypeEV5 = 32
-	KBluetoothSynchronousConnectionPacketTypeEnd = 65536
+	KBluetoothSynchronousConnectionPacketType2EV3Omit  = 64
+	KBluetoothSynchronousConnectionPacketType2EV5Omit  = 256
+	KBluetoothSynchronousConnectionPacketType3EV3Omit  = 128
+	KBluetoothSynchronousConnectionPacketType3EV5Omit  = 512
+	KBluetoothSynchronousConnectionPacketTypeAll       = 65535
+	KBluetoothSynchronousConnectionPacketTypeEV3       = 8
+	KBluetoothSynchronousConnectionPacketTypeEV4       = 16
+	KBluetoothSynchronousConnectionPacketTypeEV5       = 32
+	KBluetoothSynchronousConnectionPacketTypeEnd       = 65536
 	KBluetoothSynchronousConnectionPacketTypeFutureUse = 64512
-	KBluetoothSynchronousConnectionPacketTypeHV1 = 1
-	KBluetoothSynchronousConnectionPacketTypeHV2 = 2
-	KBluetoothSynchronousConnectionPacketTypeHV3 = 4
-	KBluetoothSynchronousConnectionPacketTypeNone = 0
+	KBluetoothSynchronousConnectionPacketTypeHV1       = 1
+	KBluetoothSynchronousConnectionPacketTypeHV2       = 2
+	KBluetoothSynchronousConnectionPacketTypeHV3       = 4
+	KBluetoothSynchronousConnectionPacketTypeNone      = 0
 )
 
 const (
-	KBluetoothVoiceSettingAirCodingFormatALaw = 2
-	KBluetoothVoiceSettingAirCodingFormatCVSD = 0
-	KBluetoothVoiceSettingAirCodingFormatMask = 3
+	KBluetoothVoiceSettingAirCodingFormatALaw            = 2
+	KBluetoothVoiceSettingAirCodingFormatCVSD            = 0
+	KBluetoothVoiceSettingAirCodingFormatMask            = 3
 	KBluetoothVoiceSettingAirCodingFormatTransparentData = 3
-	KBluetoothVoiceSettingAirCodingFormatULaw = 1
+	KBluetoothVoiceSettingAirCodingFormatULaw            = 1
 )
 
 const (
-	KBluetoothVoiceSettingInputCodingALawInputCoding = 512
+	KBluetoothVoiceSettingInputCodingALawInputCoding   = 512
 	KBluetoothVoiceSettingInputCodingLinearInputCoding = 0
-	KBluetoothVoiceSettingInputCodingMask = 768
-	KBluetoothVoiceSettingInputCodingULawInputCoding = 256
+	KBluetoothVoiceSettingInputCodingMask              = 768
+	KBluetoothVoiceSettingInputCodingULawInputCoding   = 256
 )
 
 const (
-	KBluetoothVoiceSettingInputDataFormat1sComplement = 0
-	KBluetoothVoiceSettingInputDataFormat2sComplement = 64
-	KBluetoothVoiceSettingInputDataFormatMask = 192
+	KBluetoothVoiceSettingInputDataFormat1sComplement  = 0
+	KBluetoothVoiceSettingInputDataFormat2sComplement  = 64
+	KBluetoothVoiceSettingInputDataFormatMask          = 192
 	KBluetoothVoiceSettingInputDataFormatSignMagnitude = 128
-	KBluetoothVoiceSettingInputDataFormatUnsigned = 192
+	KBluetoothVoiceSettingInputDataFormatUnsigned      = 192
 )
 
 const (
 	KBluetoothVoiceSettingInputSampleSize16Bit = 32
-	KBluetoothVoiceSettingInputSampleSize8Bit = 0
-	KBluetoothVoiceSettingInputSampleSizeMask = 32
+	KBluetoothVoiceSettingInputSampleSize8Bit  = 0
+	KBluetoothVoiceSettingInputSampleSizeMask  = 32
 )
 
 const (
@@ -6313,4 +6359,3 @@ const (
 const (
 	KMaximumNumberOfInquiryAccessCodes = 64
 )
-

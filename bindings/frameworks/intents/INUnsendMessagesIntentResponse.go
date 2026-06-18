@@ -16,9 +16,9 @@ type INUnsendMessagesIntentResponse struct {
 }
 
 var (
-	_clsINUnsendMessagesIntentResponse = _objcClass("INUnsendMessagesIntentResponse")
+	_clsINUnsendMessagesIntentResponse                         = _objcClass("INUnsendMessagesIntentResponse")
 	_iNUnsendMessagesIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNUnsendMessagesIntentResponseSelCode = objc.RegisterName("code")
+	_iNUnsendMessagesIntentResponseSelCode                     = objc.RegisterName("code")
 )
 
 func INUnsendMessagesIntentResponseFromID(id objc.ID) *INUnsendMessagesIntentResponse {
@@ -33,7 +33,9 @@ func INUnsendMessagesIntentResponseFromID(id objc.ID) *INUnsendMessagesIntentRes
 
 func (o *INUnsendMessagesIntentResponse) InitWithCodeUserActivity(code INUnsendMessagesIntentResponseCode, userActivity *foundation.NSUserActivity) *INUnsendMessagesIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUnsendMessagesIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INUnsendMessagesIntentResponseFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *INUnsendMessagesIntentResponse) Code() INUnsendMessagesIntentResponseCo
 	_ret := objc.Send[INUnsendMessagesIntentResponseCode](o.Ptr(), _iNUnsendMessagesIntentResponseSelCode)
 	return _ret
 }
-

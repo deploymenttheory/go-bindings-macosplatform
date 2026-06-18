@@ -17,50 +17,50 @@ type NSScrubber struct {
 }
 
 var (
-	_clsNSScrubber = _objcClass("NSScrubber")
-	_nSScrubberSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSScrubberSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSScrubberSelReloadData = objc.RegisterName("reloadData")
-	_nSScrubberSelPerformSequentialBatchUpdates = objc.RegisterName("performSequentialBatchUpdates:")
-	_nSScrubberSelInsertItemsAtIndexes = objc.RegisterName("insertItemsAtIndexes:")
-	_nSScrubberSelRemoveItemsAtIndexes = objc.RegisterName("removeItemsAtIndexes:")
-	_nSScrubberSelReloadItemsAtIndexes = objc.RegisterName("reloadItemsAtIndexes:")
-	_nSScrubberSelMoveItemAtIndexToIndex = objc.RegisterName("moveItemAtIndex:toIndex:")
-	_nSScrubberSelScrollItemAtIndexToAlignment = objc.RegisterName("scrollItemAtIndex:toAlignment:")
-	_nSScrubberSelItemViewForItemAtIndex = objc.RegisterName("itemViewForItemAtIndex:")
-	_nSScrubberSelRegisterClassForItemIdentifier = objc.RegisterName("registerClass:forItemIdentifier:")
-	_nSScrubberSelRegisterNibForItemIdentifier = objc.RegisterName("registerNib:forItemIdentifier:")
-	_nSScrubberSelMakeItemWithIdentifierOwner = objc.RegisterName("makeItemWithIdentifier:owner:")
-	_nSScrubberSelDataSource = objc.RegisterName("dataSource")
-	_nSScrubberSelSetDataSource = objc.RegisterName("setDataSource:")
-	_nSScrubberSelDelegate = objc.RegisterName("delegate")
-	_nSScrubberSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSScrubberSelScrubberLayout = objc.RegisterName("scrubberLayout")
-	_nSScrubberSelSetScrubberLayout = objc.RegisterName("setScrubberLayout:")
-	_nSScrubberSelNumberOfItems = objc.RegisterName("numberOfItems")
-	_nSScrubberSelHighlightedIndex = objc.RegisterName("highlightedIndex")
-	_nSScrubberSelSelectedIndex = objc.RegisterName("selectedIndex")
-	_nSScrubberSelSetSelectedIndex = objc.RegisterName("setSelectedIndex:")
-	_nSScrubberSelMode = objc.RegisterName("mode")
-	_nSScrubberSelSetMode = objc.RegisterName("setMode:")
-	_nSScrubberSelItemAlignment = objc.RegisterName("itemAlignment")
-	_nSScrubberSelSetItemAlignment = objc.RegisterName("setItemAlignment:")
-	_nSScrubberSelIsContinuous = objc.RegisterName("isContinuous")
-	_nSScrubberSelSetContinuous = objc.RegisterName("setContinuous:")
-	_nSScrubberSelFloatsSelectionViews = objc.RegisterName("floatsSelectionViews")
-	_nSScrubberSelSetFloatsSelectionViews = objc.RegisterName("setFloatsSelectionViews:")
-	_nSScrubberSelSelectionBackgroundStyle = objc.RegisterName("selectionBackgroundStyle")
-	_nSScrubberSelSetSelectionBackgroundStyle = objc.RegisterName("setSelectionBackgroundStyle:")
-	_nSScrubberSelSelectionOverlayStyle = objc.RegisterName("selectionOverlayStyle")
-	_nSScrubberSelSetSelectionOverlayStyle = objc.RegisterName("setSelectionOverlayStyle:")
-	_nSScrubberSelShowsArrowButtons = objc.RegisterName("showsArrowButtons")
-	_nSScrubberSelSetShowsArrowButtons = objc.RegisterName("setShowsArrowButtons:")
-	_nSScrubberSelShowsAdditionalContentIndicators = objc.RegisterName("showsAdditionalContentIndicators")
+	_clsNSScrubber                                    = _objcClass("NSScrubber")
+	_nSScrubberSelInitWithFrame                       = objc.RegisterName("initWithFrame:")
+	_nSScrubberSelInitWithCoder                       = objc.RegisterName("initWithCoder:")
+	_nSScrubberSelReloadData                          = objc.RegisterName("reloadData")
+	_nSScrubberSelPerformSequentialBatchUpdates       = objc.RegisterName("performSequentialBatchUpdates:")
+	_nSScrubberSelInsertItemsAtIndexes                = objc.RegisterName("insertItemsAtIndexes:")
+	_nSScrubberSelRemoveItemsAtIndexes                = objc.RegisterName("removeItemsAtIndexes:")
+	_nSScrubberSelReloadItemsAtIndexes                = objc.RegisterName("reloadItemsAtIndexes:")
+	_nSScrubberSelMoveItemAtIndexToIndex              = objc.RegisterName("moveItemAtIndex:toIndex:")
+	_nSScrubberSelScrollItemAtIndexToAlignment        = objc.RegisterName("scrollItemAtIndex:toAlignment:")
+	_nSScrubberSelItemViewForItemAtIndex              = objc.RegisterName("itemViewForItemAtIndex:")
+	_nSScrubberSelRegisterClassForItemIdentifier      = objc.RegisterName("registerClass:forItemIdentifier:")
+	_nSScrubberSelRegisterNibForItemIdentifier        = objc.RegisterName("registerNib:forItemIdentifier:")
+	_nSScrubberSelMakeItemWithIdentifierOwner         = objc.RegisterName("makeItemWithIdentifier:owner:")
+	_nSScrubberSelDataSource                          = objc.RegisterName("dataSource")
+	_nSScrubberSelSetDataSource                       = objc.RegisterName("setDataSource:")
+	_nSScrubberSelDelegate                            = objc.RegisterName("delegate")
+	_nSScrubberSelSetDelegate                         = objc.RegisterName("setDelegate:")
+	_nSScrubberSelScrubberLayout                      = objc.RegisterName("scrubberLayout")
+	_nSScrubberSelSetScrubberLayout                   = objc.RegisterName("setScrubberLayout:")
+	_nSScrubberSelNumberOfItems                       = objc.RegisterName("numberOfItems")
+	_nSScrubberSelHighlightedIndex                    = objc.RegisterName("highlightedIndex")
+	_nSScrubberSelSelectedIndex                       = objc.RegisterName("selectedIndex")
+	_nSScrubberSelSetSelectedIndex                    = objc.RegisterName("setSelectedIndex:")
+	_nSScrubberSelMode                                = objc.RegisterName("mode")
+	_nSScrubberSelSetMode                             = objc.RegisterName("setMode:")
+	_nSScrubberSelItemAlignment                       = objc.RegisterName("itemAlignment")
+	_nSScrubberSelSetItemAlignment                    = objc.RegisterName("setItemAlignment:")
+	_nSScrubberSelIsContinuous                        = objc.RegisterName("isContinuous")
+	_nSScrubberSelSetContinuous                       = objc.RegisterName("setContinuous:")
+	_nSScrubberSelFloatsSelectionViews                = objc.RegisterName("floatsSelectionViews")
+	_nSScrubberSelSetFloatsSelectionViews             = objc.RegisterName("setFloatsSelectionViews:")
+	_nSScrubberSelSelectionBackgroundStyle            = objc.RegisterName("selectionBackgroundStyle")
+	_nSScrubberSelSetSelectionBackgroundStyle         = objc.RegisterName("setSelectionBackgroundStyle:")
+	_nSScrubberSelSelectionOverlayStyle               = objc.RegisterName("selectionOverlayStyle")
+	_nSScrubberSelSetSelectionOverlayStyle            = objc.RegisterName("setSelectionOverlayStyle:")
+	_nSScrubberSelShowsArrowButtons                   = objc.RegisterName("showsArrowButtons")
+	_nSScrubberSelSetShowsArrowButtons                = objc.RegisterName("setShowsArrowButtons:")
+	_nSScrubberSelShowsAdditionalContentIndicators    = objc.RegisterName("showsAdditionalContentIndicators")
 	_nSScrubberSelSetShowsAdditionalContentIndicators = objc.RegisterName("setShowsAdditionalContentIndicators:")
-	_nSScrubberSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSScrubberSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSScrubberSelBackgroundView = objc.RegisterName("backgroundView")
-	_nSScrubberSelSetBackgroundView = objc.RegisterName("setBackgroundView:")
+	_nSScrubberSelBackgroundColor                     = objc.RegisterName("backgroundColor")
+	_nSScrubberSelSetBackgroundColor                  = objc.RegisterName("setBackgroundColor:")
+	_nSScrubberSelBackgroundView                      = objc.RegisterName("backgroundView")
+	_nSScrubberSelSetBackgroundView                   = objc.RegisterName("setBackgroundView:")
 )
 
 func NSScrubberFromID(id objc.ID) *NSScrubber {
@@ -75,13 +75,17 @@ func NSScrubberFromID(id objc.ID) *NSScrubber {
 
 func (o *NSScrubber) InitWithFrame(frameRect corefoundation.CGRect) *NSScrubber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberFromID(_ret)
 }
 
 func (o *NSScrubber) InitWithCoder(coder *foundation.NSCoder) *NSScrubber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberFromID(_ret)
 }
 
@@ -130,7 +134,9 @@ func (o *NSScrubber) ScrollItemAtIndexToAlignment(index int, alignment NSScrubbe
 // Returns the @c NSScrubberItemView for the given index, if one currently exists; returns @c nil otherwise.
 func (o *NSScrubber) ItemViewForItemAtIndex(index int) *NSScrubberItemView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelItemViewForItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberItemViewFromID(_ret)
 }
 
@@ -147,7 +153,9 @@ func (o *NSScrubber) RegisterNibForItemIdentifier(nib *NSNib, itemIdentifier *fo
 // Creates or reuses a @c NSScrubberItemView corresponding to the provided @c itemIdentifier. @c NSScrubber searches, in order: the reuse queue, the list of registered classes, and then the list of registered nibs. If the reuse queue is empty, and there is no Class or Interface Builder archive registered for the @c itemIdentifier, this method returns @c nil.
 func (o *NSScrubber) MakeItemWithIdentifierOwner(itemIdentifier *foundation.NSString, owner objc.ID) *NSScrubberItemView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelMakeItemWithIdentifierOwner, itemIdentifier.Ptr(), owner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberItemViewFromID(_ret)
 }
 
@@ -171,7 +179,9 @@ func (o *NSScrubber) SetDelegate(delegate NSScrubberDelegate) {
 
 func (o *NSScrubber) ScrubberLayout() *NSScrubberLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelScrubberLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberLayoutFromID(_ret)
 }
 
@@ -249,7 +259,9 @@ func (o *NSScrubber) SetFloatsSelectionViews(floatsSelectionViews bool) {
 // Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
 func (o *NSScrubber) SelectionBackgroundStyle() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionBackgroundStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
@@ -261,7 +273,9 @@ func (o *NSScrubber) SetSelectionBackgroundStyle(selectionBackgroundStyle *NSScr
 // Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
 func (o *NSScrubber) SelectionOverlayStyle() *NSScrubberSelectionStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelSelectionOverlayStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrubberSelectionStyleFromID(_ret)
 }
 
@@ -295,7 +309,9 @@ func (o *NSScrubber) SetShowsAdditionalContentIndicators(showsAdditionalContentI
 // If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
 func (o *NSScrubber) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -307,7 +323,9 @@ func (o *NSScrubber) SetBackgroundColor(backgroundColor *NSColor) {
 // If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
 func (o *NSScrubber) BackgroundView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrubberSelBackgroundView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -315,4 +333,3 @@ func (o *NSScrubber) BackgroundView() *NSView {
 func (o *NSScrubber) SetBackgroundView(backgroundView *NSView) {
 	o.Ptr().Send(_nSScrubberSelSetBackgroundView, backgroundView.Ptr())
 }
-

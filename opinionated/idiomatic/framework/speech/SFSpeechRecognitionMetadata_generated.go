@@ -75,4 +75,3 @@ type SpeechRecognitionMetadataable interface {
 }
 
 var _ SpeechRecognitionMetadataable = (*SpeechRecognitionMetadata)(nil)
-

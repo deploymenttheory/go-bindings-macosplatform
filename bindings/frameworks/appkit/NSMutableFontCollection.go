@@ -16,16 +16,16 @@ type NSMutableFontCollection struct {
 }
 
 var (
-	_clsNSMutableFontCollection = _objcClass("NSMutableFontCollection")
-	_nSMutableFontCollectionSelFontCollectionWithDescriptors = objc.RegisterName("fontCollectionWithDescriptors:")
-	_nSMutableFontCollectionSelFontCollectionWithLocale = objc.RegisterName("fontCollectionWithLocale:")
-	_nSMutableFontCollectionSelFontCollectionWithName = objc.RegisterName("fontCollectionWithName:")
-	_nSMutableFontCollectionSelFontCollectionWithNameVisibility = objc.RegisterName("fontCollectionWithName:visibility:")
-	_nSMutableFontCollectionSelAddQueryForDescriptors = objc.RegisterName("addQueryForDescriptors:")
-	_nSMutableFontCollectionSelRemoveQueryForDescriptors = objc.RegisterName("removeQueryForDescriptors:")
+	_clsNSMutableFontCollection                                          = _objcClass("NSMutableFontCollection")
+	_nSMutableFontCollectionSelFontCollectionWithDescriptors             = objc.RegisterName("fontCollectionWithDescriptors:")
+	_nSMutableFontCollectionSelFontCollectionWithLocale                  = objc.RegisterName("fontCollectionWithLocale:")
+	_nSMutableFontCollectionSelFontCollectionWithName                    = objc.RegisterName("fontCollectionWithName:")
+	_nSMutableFontCollectionSelFontCollectionWithNameVisibility          = objc.RegisterName("fontCollectionWithName:visibility:")
+	_nSMutableFontCollectionSelAddQueryForDescriptors                    = objc.RegisterName("addQueryForDescriptors:")
+	_nSMutableFontCollectionSelRemoveQueryForDescriptors                 = objc.RegisterName("removeQueryForDescriptors:")
 	_nSMutableFontCollectionSelFontCollectionWithAllAvailableDescriptors = objc.RegisterName("fontCollectionWithAllAvailableDescriptors")
-	_nSMutableFontCollectionSelSetQueryDescriptors = objc.RegisterName("setQueryDescriptors:")
-	_nSMutableFontCollectionSelSetExclusionDescriptors = objc.RegisterName("setExclusionDescriptors:")
+	_nSMutableFontCollectionSelSetQueryDescriptors                       = objc.RegisterName("setQueryDescriptors:")
+	_nSMutableFontCollectionSelSetExclusionDescriptors                   = objc.RegisterName("setExclusionDescriptors:")
 )
 
 func NSMutableFontCollectionFromID(id objc.ID) *NSMutableFontCollection {
@@ -40,25 +40,33 @@ func NSMutableFontCollectionFromID(id objc.ID) *NSMutableFontCollection {
 
 func NSMutableFontCollectionFontCollectionWithDescriptors(queryDescriptors *foundation.NSArray[*NSFontDescriptor]) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithDescriptors, queryDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableFontCollectionFromID(_ret)
 }
 
 func NSMutableFontCollectionFontCollectionWithLocale(locale *foundation.NSLocale) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableFontCollectionFromID(_ret)
 }
 
 func NSMutableFontCollectionFontCollectionWithName(name *foundation.NSString) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableFontCollectionFromID(_ret)
 }
 
 func NSMutableFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString, visibility NSFontCollectionVisibility) *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithNameVisibility, name.Ptr(), visibility)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableFontCollectionFromID(_ret)
 }
 
@@ -72,7 +80,9 @@ func (o *NSMutableFontCollection) RemoveQueryForDescriptors(descriptors *foundat
 
 func NSMutableFontCollectionFontCollectionWithAllAvailableDescriptors() *NSMutableFontCollection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableFontCollection), _nSMutableFontCollectionSelFontCollectionWithAllAvailableDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableFontCollectionFromID(_ret)
 }
 
@@ -83,4 +93,3 @@ func (o *NSMutableFontCollection) SetQueryDescriptors(queryDescriptors *foundati
 func (o *NSMutableFontCollection) SetExclusionDescriptors(exclusionDescriptors *foundation.NSArray[*NSFontDescriptor]) {
 	o.Ptr().Send(_nSMutableFontCollectionSelSetExclusionDescriptors, exclusionDescriptors.Ptr())
 }
-

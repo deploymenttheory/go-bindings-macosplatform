@@ -16,17 +16,17 @@ type MTLDepthStencilDescriptor struct {
 }
 
 var (
-	_clsMTLDepthStencilDescriptor = _objcClass("MTLDepthStencilDescriptor")
-	_mTLDepthStencilDescriptorSelDepthCompareFunction = objc.RegisterName("depthCompareFunction")
+	_clsMTLDepthStencilDescriptor                        = _objcClass("MTLDepthStencilDescriptor")
+	_mTLDepthStencilDescriptorSelDepthCompareFunction    = objc.RegisterName("depthCompareFunction")
 	_mTLDepthStencilDescriptorSelSetDepthCompareFunction = objc.RegisterName("setDepthCompareFunction:")
-	_mTLDepthStencilDescriptorSelIsDepthWriteEnabled = objc.RegisterName("isDepthWriteEnabled")
-	_mTLDepthStencilDescriptorSelSetDepthWriteEnabled = objc.RegisterName("setDepthWriteEnabled:")
-	_mTLDepthStencilDescriptorSelFrontFaceStencil = objc.RegisterName("frontFaceStencil")
-	_mTLDepthStencilDescriptorSelSetFrontFaceStencil = objc.RegisterName("setFrontFaceStencil:")
-	_mTLDepthStencilDescriptorSelBackFaceStencil = objc.RegisterName("backFaceStencil")
-	_mTLDepthStencilDescriptorSelSetBackFaceStencil = objc.RegisterName("setBackFaceStencil:")
-	_mTLDepthStencilDescriptorSelLabel = objc.RegisterName("label")
-	_mTLDepthStencilDescriptorSelSetLabel = objc.RegisterName("setLabel:")
+	_mTLDepthStencilDescriptorSelIsDepthWriteEnabled     = objc.RegisterName("isDepthWriteEnabled")
+	_mTLDepthStencilDescriptorSelSetDepthWriteEnabled    = objc.RegisterName("setDepthWriteEnabled:")
+	_mTLDepthStencilDescriptorSelFrontFaceStencil        = objc.RegisterName("frontFaceStencil")
+	_mTLDepthStencilDescriptorSelSetFrontFaceStencil     = objc.RegisterName("setFrontFaceStencil:")
+	_mTLDepthStencilDescriptorSelBackFaceStencil         = objc.RegisterName("backFaceStencil")
+	_mTLDepthStencilDescriptorSelSetBackFaceStencil      = objc.RegisterName("setBackFaceStencil:")
+	_mTLDepthStencilDescriptorSelLabel                   = objc.RegisterName("label")
+	_mTLDepthStencilDescriptorSelSetLabel                = objc.RegisterName("setLabel:")
 )
 
 func MTLDepthStencilDescriptorFromID(id objc.ID) *MTLDepthStencilDescriptor {
@@ -59,7 +59,9 @@ func (o *MTLDepthStencilDescriptor) SetDepthWriteEnabled(depthWriteEnabled bool)
 
 func (o *MTLDepthStencilDescriptor) FrontFaceStencil() *MTLStencilDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLDepthStencilDescriptorSelFrontFaceStencil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStencilDescriptorFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *MTLDepthStencilDescriptor) SetFrontFaceStencil(frontFaceStencil *MTLSte
 
 func (o *MTLDepthStencilDescriptor) BackFaceStencil() *MTLStencilDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLDepthStencilDescriptorSelBackFaceStencil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLStencilDescriptorFromID(_ret)
 }
 
@@ -80,11 +84,12 @@ func (o *MTLDepthStencilDescriptor) SetBackFaceStencil(backFaceStencil *MTLStenc
 // @property label @abstract A string to help identify the created object.
 func (o *MTLDepthStencilDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLDepthStencilDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTLDepthStencilDescriptor) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mTLDepthStencilDescriptorSelSetLabel, label.Ptr())
 }
-

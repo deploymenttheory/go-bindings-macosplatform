@@ -69,4 +69,3 @@ type CalAttendeeable interface {
 }
 
 var _ CalAttendeeable = (*CalAttendee)(nil)
-

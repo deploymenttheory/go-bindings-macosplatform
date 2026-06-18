@@ -17,85 +17,85 @@ type NSCollectionView struct {
 }
 
 var (
-	_clsNSCollectionView = _objcClass("NSCollectionView")
-	_nSCollectionViewSelReloadData = objc.RegisterName("reloadData")
-	_nSCollectionViewSelLayoutAttributesForItemAtIndexPath = objc.RegisterName("layoutAttributesForItemAtIndexPath:")
+	_clsNSCollectionView                                                         = _objcClass("NSCollectionView")
+	_nSCollectionViewSelReloadData                                               = objc.RegisterName("reloadData")
+	_nSCollectionViewSelLayoutAttributesForItemAtIndexPath                       = objc.RegisterName("layoutAttributesForItemAtIndexPath:")
 	_nSCollectionViewSelLayoutAttributesForSupplementaryElementOfKindAtIndexPath = objc.RegisterName("layoutAttributesForSupplementaryElementOfKind:atIndexPath:")
-	_nSCollectionViewSelFrameForItemAtIndex = objc.RegisterName("frameForItemAtIndex:")
-	_nSCollectionViewSelFrameForItemAtIndexWithNumberOfItems = objc.RegisterName("frameForItemAtIndex:withNumberOfItems:")
-	_nSCollectionViewSelNumberOfItemsInSection = objc.RegisterName("numberOfItemsInSection:")
-	_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition = objc.RegisterName("selectItemsAtIndexPaths:scrollPosition:")
-	_nSCollectionViewSelDeselectItemsAtIndexPaths = objc.RegisterName("deselectItemsAtIndexPaths:")
-	_nSCollectionViewSelSelectAll = objc.RegisterName("selectAll:")
-	_nSCollectionViewSelDeselectAll = objc.RegisterName("deselectAll:")
-	_nSCollectionViewSelRegisterClassForItemWithIdentifier = objc.RegisterName("registerClass:forItemWithIdentifier:")
-	_nSCollectionViewSelRegisterNibForItemWithIdentifier = objc.RegisterName("registerNib:forItemWithIdentifier:")
-	_nSCollectionViewSelRegisterClassForSupplementaryViewOfKindWithIdentifier = objc.RegisterName("registerClass:forSupplementaryViewOfKind:withIdentifier:")
-	_nSCollectionViewSelRegisterNibForSupplementaryViewOfKindWithIdentifier = objc.RegisterName("registerNib:forSupplementaryViewOfKind:withIdentifier:")
-	_nSCollectionViewSelMakeItemWithIdentifierForIndexPath = objc.RegisterName("makeItemWithIdentifier:forIndexPath:")
-	_nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath = objc.RegisterName("makeSupplementaryViewOfKind:withIdentifier:forIndexPath:")
-	_nSCollectionViewSelItemAtIndex = objc.RegisterName("itemAtIndex:")
-	_nSCollectionViewSelItemAtIndexPath = objc.RegisterName("itemAtIndexPath:")
-	_nSCollectionViewSelVisibleItems = objc.RegisterName("visibleItems")
-	_nSCollectionViewSelIndexPathsForVisibleItems = objc.RegisterName("indexPathsForVisibleItems")
-	_nSCollectionViewSelIndexPathForItem = objc.RegisterName("indexPathForItem:")
-	_nSCollectionViewSelIndexPathForItemAtPoint = objc.RegisterName("indexPathForItemAtPoint:")
-	_nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath = objc.RegisterName("supplementaryViewForElementKind:atIndexPath:")
-	_nSCollectionViewSelVisibleSupplementaryViewsOfKind = objc.RegisterName("visibleSupplementaryViewsOfKind:")
-	_nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind = objc.RegisterName("indexPathsForVisibleSupplementaryElementsOfKind:")
-	_nSCollectionViewSelInsertSections = objc.RegisterName("insertSections:")
-	_nSCollectionViewSelDeleteSections = objc.RegisterName("deleteSections:")
-	_nSCollectionViewSelReloadSections = objc.RegisterName("reloadSections:")
-	_nSCollectionViewSelMoveSectionToSection = objc.RegisterName("moveSection:toSection:")
-	_nSCollectionViewSelInsertItemsAtIndexPaths = objc.RegisterName("insertItemsAtIndexPaths:")
-	_nSCollectionViewSelDeleteItemsAtIndexPaths = objc.RegisterName("deleteItemsAtIndexPaths:")
-	_nSCollectionViewSelReloadItemsAtIndexPaths = objc.RegisterName("reloadItemsAtIndexPaths:")
-	_nSCollectionViewSelMoveItemAtIndexPathToIndexPath = objc.RegisterName("moveItemAtIndexPath:toIndexPath:")
-	_nSCollectionViewSelPerformBatchUpdatesCompletionHandler = objc.RegisterName("performBatchUpdates:completionHandler:")
-	_nSCollectionViewSelToggleSectionCollapse = objc.RegisterName("toggleSectionCollapse:")
-	_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition = objc.RegisterName("scrollToItemsAtIndexPaths:scrollPosition:")
-	_nSCollectionViewSelSetDraggingSourceOperationMaskForLocal = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
-	_nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset = objc.RegisterName("draggingImageForItemsAtIndexPaths:withEvent:offset:")
-	_nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset = objc.RegisterName("draggingImageForItemsAtIndexes:withEvent:offset:")
-	_nSCollectionViewSelDataSource = objc.RegisterName("dataSource")
-	_nSCollectionViewSelSetDataSource = objc.RegisterName("setDataSource:")
-	_nSCollectionViewSelPrefetchDataSource = objc.RegisterName("prefetchDataSource")
-	_nSCollectionViewSelSetPrefetchDataSource = objc.RegisterName("setPrefetchDataSource:")
-	_nSCollectionViewSelContent = objc.RegisterName("content")
-	_nSCollectionViewSelSetContent = objc.RegisterName("setContent:")
-	_nSCollectionViewSelDelegate = objc.RegisterName("delegate")
-	_nSCollectionViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSCollectionViewSelBackgroundView = objc.RegisterName("backgroundView")
-	_nSCollectionViewSelSetBackgroundView = objc.RegisterName("setBackgroundView:")
-	_nSCollectionViewSelBackgroundViewScrollsWithContent = objc.RegisterName("backgroundViewScrollsWithContent")
-	_nSCollectionViewSelSetBackgroundViewScrollsWithContent = objc.RegisterName("setBackgroundViewScrollsWithContent:")
-	_nSCollectionViewSelCollectionViewLayout = objc.RegisterName("collectionViewLayout")
-	_nSCollectionViewSelSetCollectionViewLayout = objc.RegisterName("setCollectionViewLayout:")
-	_nSCollectionViewSelBackgroundColors = objc.RegisterName("backgroundColors")
-	_nSCollectionViewSelSetBackgroundColors = objc.RegisterName("setBackgroundColors:")
-	_nSCollectionViewSelNumberOfSections = objc.RegisterName("numberOfSections")
-	_nSCollectionViewSelIsFirstResponder = objc.RegisterName("isFirstResponder")
-	_nSCollectionViewSelIsSelectable = objc.RegisterName("isSelectable")
-	_nSCollectionViewSelSetSelectable = objc.RegisterName("setSelectable:")
-	_nSCollectionViewSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_nSCollectionViewSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_nSCollectionViewSelAllowsMultipleSelection = objc.RegisterName("allowsMultipleSelection")
-	_nSCollectionViewSelSetAllowsMultipleSelection = objc.RegisterName("setAllowsMultipleSelection:")
-	_nSCollectionViewSelSelectionIndexes = objc.RegisterName("selectionIndexes")
-	_nSCollectionViewSelSetSelectionIndexes = objc.RegisterName("setSelectionIndexes:")
-	_nSCollectionViewSelSelectionIndexPaths = objc.RegisterName("selectionIndexPaths")
-	_nSCollectionViewSelSetSelectionIndexPaths = objc.RegisterName("setSelectionIndexPaths:")
-	_nSCollectionViewSelNewItemForRepresentedObject = objc.RegisterName("newItemForRepresentedObject:")
-	_nSCollectionViewSelItemPrototype = objc.RegisterName("itemPrototype")
-	_nSCollectionViewSelSetItemPrototype = objc.RegisterName("setItemPrototype:")
-	_nSCollectionViewSelMaxNumberOfRows = objc.RegisterName("maxNumberOfRows")
-	_nSCollectionViewSelSetMaxNumberOfRows = objc.RegisterName("setMaxNumberOfRows:")
-	_nSCollectionViewSelMaxNumberOfColumns = objc.RegisterName("maxNumberOfColumns")
-	_nSCollectionViewSelSetMaxNumberOfColumns = objc.RegisterName("setMaxNumberOfColumns:")
-	_nSCollectionViewSelMinItemSize = objc.RegisterName("minItemSize")
-	_nSCollectionViewSelSetMinItemSize = objc.RegisterName("setMinItemSize:")
-	_nSCollectionViewSelMaxItemSize = objc.RegisterName("maxItemSize")
-	_nSCollectionViewSelSetMaxItemSize = objc.RegisterName("setMaxItemSize:")
+	_nSCollectionViewSelFrameForItemAtIndex                                      = objc.RegisterName("frameForItemAtIndex:")
+	_nSCollectionViewSelFrameForItemAtIndexWithNumberOfItems                     = objc.RegisterName("frameForItemAtIndex:withNumberOfItems:")
+	_nSCollectionViewSelNumberOfItemsInSection                                   = objc.RegisterName("numberOfItemsInSection:")
+	_nSCollectionViewSelSelectItemsAtIndexPathsScrollPosition                    = objc.RegisterName("selectItemsAtIndexPaths:scrollPosition:")
+	_nSCollectionViewSelDeselectItemsAtIndexPaths                                = objc.RegisterName("deselectItemsAtIndexPaths:")
+	_nSCollectionViewSelSelectAll                                                = objc.RegisterName("selectAll:")
+	_nSCollectionViewSelDeselectAll                                              = objc.RegisterName("deselectAll:")
+	_nSCollectionViewSelRegisterClassForItemWithIdentifier                       = objc.RegisterName("registerClass:forItemWithIdentifier:")
+	_nSCollectionViewSelRegisterNibForItemWithIdentifier                         = objc.RegisterName("registerNib:forItemWithIdentifier:")
+	_nSCollectionViewSelRegisterClassForSupplementaryViewOfKindWithIdentifier    = objc.RegisterName("registerClass:forSupplementaryViewOfKind:withIdentifier:")
+	_nSCollectionViewSelRegisterNibForSupplementaryViewOfKindWithIdentifier      = objc.RegisterName("registerNib:forSupplementaryViewOfKind:withIdentifier:")
+	_nSCollectionViewSelMakeItemWithIdentifierForIndexPath                       = objc.RegisterName("makeItemWithIdentifier:forIndexPath:")
+	_nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath    = objc.RegisterName("makeSupplementaryViewOfKind:withIdentifier:forIndexPath:")
+	_nSCollectionViewSelItemAtIndex                                              = objc.RegisterName("itemAtIndex:")
+	_nSCollectionViewSelItemAtIndexPath                                          = objc.RegisterName("itemAtIndexPath:")
+	_nSCollectionViewSelVisibleItems                                             = objc.RegisterName("visibleItems")
+	_nSCollectionViewSelIndexPathsForVisibleItems                                = objc.RegisterName("indexPathsForVisibleItems")
+	_nSCollectionViewSelIndexPathForItem                                         = objc.RegisterName("indexPathForItem:")
+	_nSCollectionViewSelIndexPathForItemAtPoint                                  = objc.RegisterName("indexPathForItemAtPoint:")
+	_nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath               = objc.RegisterName("supplementaryViewForElementKind:atIndexPath:")
+	_nSCollectionViewSelVisibleSupplementaryViewsOfKind                          = objc.RegisterName("visibleSupplementaryViewsOfKind:")
+	_nSCollectionViewSelIndexPathsForVisibleSupplementaryElementsOfKind          = objc.RegisterName("indexPathsForVisibleSupplementaryElementsOfKind:")
+	_nSCollectionViewSelInsertSections                                           = objc.RegisterName("insertSections:")
+	_nSCollectionViewSelDeleteSections                                           = objc.RegisterName("deleteSections:")
+	_nSCollectionViewSelReloadSections                                           = objc.RegisterName("reloadSections:")
+	_nSCollectionViewSelMoveSectionToSection                                     = objc.RegisterName("moveSection:toSection:")
+	_nSCollectionViewSelInsertItemsAtIndexPaths                                  = objc.RegisterName("insertItemsAtIndexPaths:")
+	_nSCollectionViewSelDeleteItemsAtIndexPaths                                  = objc.RegisterName("deleteItemsAtIndexPaths:")
+	_nSCollectionViewSelReloadItemsAtIndexPaths                                  = objc.RegisterName("reloadItemsAtIndexPaths:")
+	_nSCollectionViewSelMoveItemAtIndexPathToIndexPath                           = objc.RegisterName("moveItemAtIndexPath:toIndexPath:")
+	_nSCollectionViewSelPerformBatchUpdatesCompletionHandler                     = objc.RegisterName("performBatchUpdates:completionHandler:")
+	_nSCollectionViewSelToggleSectionCollapse                                    = objc.RegisterName("toggleSectionCollapse:")
+	_nSCollectionViewSelScrollToItemsAtIndexPathsScrollPosition                  = objc.RegisterName("scrollToItemsAtIndexPaths:scrollPosition:")
+	_nSCollectionViewSelSetDraggingSourceOperationMaskForLocal                   = objc.RegisterName("setDraggingSourceOperationMask:forLocal:")
+	_nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset         = objc.RegisterName("draggingImageForItemsAtIndexPaths:withEvent:offset:")
+	_nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset            = objc.RegisterName("draggingImageForItemsAtIndexes:withEvent:offset:")
+	_nSCollectionViewSelDataSource                                               = objc.RegisterName("dataSource")
+	_nSCollectionViewSelSetDataSource                                            = objc.RegisterName("setDataSource:")
+	_nSCollectionViewSelPrefetchDataSource                                       = objc.RegisterName("prefetchDataSource")
+	_nSCollectionViewSelSetPrefetchDataSource                                    = objc.RegisterName("setPrefetchDataSource:")
+	_nSCollectionViewSelContent                                                  = objc.RegisterName("content")
+	_nSCollectionViewSelSetContent                                               = objc.RegisterName("setContent:")
+	_nSCollectionViewSelDelegate                                                 = objc.RegisterName("delegate")
+	_nSCollectionViewSelSetDelegate                                              = objc.RegisterName("setDelegate:")
+	_nSCollectionViewSelBackgroundView                                           = objc.RegisterName("backgroundView")
+	_nSCollectionViewSelSetBackgroundView                                        = objc.RegisterName("setBackgroundView:")
+	_nSCollectionViewSelBackgroundViewScrollsWithContent                         = objc.RegisterName("backgroundViewScrollsWithContent")
+	_nSCollectionViewSelSetBackgroundViewScrollsWithContent                      = objc.RegisterName("setBackgroundViewScrollsWithContent:")
+	_nSCollectionViewSelCollectionViewLayout                                     = objc.RegisterName("collectionViewLayout")
+	_nSCollectionViewSelSetCollectionViewLayout                                  = objc.RegisterName("setCollectionViewLayout:")
+	_nSCollectionViewSelBackgroundColors                                         = objc.RegisterName("backgroundColors")
+	_nSCollectionViewSelSetBackgroundColors                                      = objc.RegisterName("setBackgroundColors:")
+	_nSCollectionViewSelNumberOfSections                                         = objc.RegisterName("numberOfSections")
+	_nSCollectionViewSelIsFirstResponder                                         = objc.RegisterName("isFirstResponder")
+	_nSCollectionViewSelIsSelectable                                             = objc.RegisterName("isSelectable")
+	_nSCollectionViewSelSetSelectable                                            = objc.RegisterName("setSelectable:")
+	_nSCollectionViewSelAllowsEmptySelection                                     = objc.RegisterName("allowsEmptySelection")
+	_nSCollectionViewSelSetAllowsEmptySelection                                  = objc.RegisterName("setAllowsEmptySelection:")
+	_nSCollectionViewSelAllowsMultipleSelection                                  = objc.RegisterName("allowsMultipleSelection")
+	_nSCollectionViewSelSetAllowsMultipleSelection                               = objc.RegisterName("setAllowsMultipleSelection:")
+	_nSCollectionViewSelSelectionIndexes                                         = objc.RegisterName("selectionIndexes")
+	_nSCollectionViewSelSetSelectionIndexes                                      = objc.RegisterName("setSelectionIndexes:")
+	_nSCollectionViewSelSelectionIndexPaths                                      = objc.RegisterName("selectionIndexPaths")
+	_nSCollectionViewSelSetSelectionIndexPaths                                   = objc.RegisterName("setSelectionIndexPaths:")
+	_nSCollectionViewSelNewItemForRepresentedObject                              = objc.RegisterName("newItemForRepresentedObject:")
+	_nSCollectionViewSelItemPrototype                                            = objc.RegisterName("itemPrototype")
+	_nSCollectionViewSelSetItemPrototype                                         = objc.RegisterName("setItemPrototype:")
+	_nSCollectionViewSelMaxNumberOfRows                                          = objc.RegisterName("maxNumberOfRows")
+	_nSCollectionViewSelSetMaxNumberOfRows                                       = objc.RegisterName("setMaxNumberOfRows:")
+	_nSCollectionViewSelMaxNumberOfColumns                                       = objc.RegisterName("maxNumberOfColumns")
+	_nSCollectionViewSelSetMaxNumberOfColumns                                    = objc.RegisterName("setMaxNumberOfColumns:")
+	_nSCollectionViewSelMinItemSize                                              = objc.RegisterName("minItemSize")
+	_nSCollectionViewSelSetMinItemSize                                           = objc.RegisterName("setMinItemSize:")
+	_nSCollectionViewSelMaxItemSize                                              = objc.RegisterName("maxItemSize")
+	_nSCollectionViewSelSetMaxItemSize                                           = objc.RegisterName("setMaxItemSize:")
 )
 
 func NSCollectionViewFromID(id objc.ID) *NSCollectionView {
@@ -114,13 +114,17 @@ func (o *NSCollectionView) ReloadData() {
 
 func (o *NSCollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func (o *NSCollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelLayoutAttributesForSupplementaryElementOfKindAtIndexPath, kind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
@@ -173,31 +177,41 @@ func (o *NSCollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(n
 
 func (o *NSCollectionView) MakeItemWithIdentifierForIndexPath(identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeItemWithIdentifierForIndexPath, identifier.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewItemFromID(_ret)
 }
 
 func (o *NSCollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind *foundation.NSString, identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelMakeSupplementaryViewOfKindWithIdentifierForIndexPath, elementKind.Ptr(), identifier.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSCollectionView) ItemAtIndex(index uint) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewItemFromID(_ret)
 }
 
 func (o *NSCollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemAtIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewItemFromID(_ret)
 }
 
 func (o *NSCollectionView) VisibleItems() *foundation.NSArray[*NSCollectionViewItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionViewItem](_ret)
 }
 
@@ -208,25 +222,33 @@ func (o *NSCollectionView) IndexPathsForVisibleItems() *foundation.NSSet[*founda
 
 func (o *NSCollectionView) IndexPathForItem(item *NSCollectionViewItem) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItem, item.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
 func (o *NSCollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelIndexPathForItemAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
 func (o *NSCollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSupplementaryViewForElementKindAtIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSCollectionView) VisibleSupplementaryViewsOfKind(elementKind *foundation.NSString) *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelVisibleSupplementaryViewsOfKind, elementKind.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -299,13 +321,17 @@ func (o *NSCollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationM
 
 func (o *NSCollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths *foundation.NSSet[*foundation.NSIndexPath], event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexPathsWithEventOffset, indexPaths, event.Ptr(), dragImageOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSCollectionView) DraggingImageForItemsAtIndexesWithEventOffset(indexes *foundation.NSIndexSet, event *NSEvent, dragImageOffset *corefoundation.CGPoint) *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelDraggingImageForItemsAtIndexesWithEventOffset, indexes.Ptr(), event.Ptr(), dragImageOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -347,7 +373,9 @@ func (o *NSCollectionView) SetDelegate(delegate NSCollectionViewDelegate) {
 
 func (o *NSCollectionView) BackgroundView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -366,7 +394,9 @@ func (o *NSCollectionView) SetBackgroundViewScrollsWithContent(backgroundViewScr
 
 func (o *NSCollectionView) CollectionViewLayout() *NSCollectionViewLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelCollectionViewLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutFromID(_ret)
 }
 
@@ -376,7 +406,9 @@ func (o *NSCollectionView) SetCollectionViewLayout(collectionViewLayout *NSColle
 
 func (o *NSCollectionView) BackgroundColors() *foundation.NSArray[*NSColor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelBackgroundColors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColor](_ret)
 }
 
@@ -423,7 +455,9 @@ func (o *NSCollectionView) SetAllowsMultipleSelection(allowsMultipleSelection bo
 
 func (o *NSCollectionView) SelectionIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelSelectionIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -449,7 +483,9 @@ func (o *NSCollectionView) NewItemForRepresentedObject(object objc.ID) *NSCollec
 // Deprecated: Use -registerNib:forItemWithIdentifier: or -registerClass:forItemWithIdentifier: instead.
 func (o *NSCollectionView) ItemPrototype() *NSCollectionViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewSelItemPrototype)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewItemFromID(_ret)
 }
 
@@ -501,4 +537,3 @@ func (o *NSCollectionView) MaxItemSize() corefoundation.CGSize {
 func (o *NSCollectionView) SetMaxItemSize(maxItemSize corefoundation.CGSize) {
 	o.Ptr().Send(_nSCollectionViewSelSetMaxItemSize, maxItemSize)
 }
-

@@ -17,9 +17,9 @@ type MPSCNNFullyConnectedGradient struct {
 }
 
 var (
-	_clsMPSCNNFullyConnectedGradient = _objcClass("MPSCNNFullyConnectedGradient")
+	_clsMPSCNNFullyConnectedGradient                      = _objcClass("MPSCNNFullyConnectedGradient")
 	_mPSCNNFullyConnectedGradientSelInitWithDeviceWeights = objc.RegisterName("initWithDevice:weights:")
-	_mPSCNNFullyConnectedGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNFullyConnectedGradientSelInitWithCoderDevice   = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSCNNFullyConnectedGradientFromID(id objc.ID) *MPSCNNFullyConnectedGradient {
@@ -35,14 +35,17 @@ func MPSCNNFullyConnectedGradientFromID(id objc.ID) *MPSCNNFullyConnectedGradien
 // @abstract   Initializes a convolution gradient (with respect to weights and bias) object. @param      device                          The MTLDevice on which this MPSCNNConvolutionGradient filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. Note that same data source as provided to forward convolution should be used. @return     A valid MPSCNNConvolutionGradient object or nil, if failure.
 func (o *MPSCNNFullyConnectedGradient) InitWithDeviceWeights(device metal.MTLDevice, weights MPSCNNConvolutionDataSource) *MPSCNNFullyConnectedGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedGradientSelInitWithDeviceWeights, device, weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNFullyConnectedGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNFullyConnectedGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNFullyConnectedGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNFullyConnectedGradientFromID(_ret)
 }
-

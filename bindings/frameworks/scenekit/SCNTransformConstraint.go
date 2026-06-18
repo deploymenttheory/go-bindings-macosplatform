@@ -15,9 +15,9 @@ type SCNTransformConstraint struct {
 }
 
 var (
-	_clsSCNTransformConstraint = _objcClass("SCNTransformConstraint")
-	_sCNTransformConstraintSelTransformConstraintInWorldSpaceWith = objc.RegisterName("transformConstraintInWorldSpace:withBlock:")
-	_sCNTransformConstraintSelPositionConstraintInWorldSpaceWith = objc.RegisterName("positionConstraintInWorldSpace:withBlock:")
+	_clsSCNTransformConstraint                                      = _objcClass("SCNTransformConstraint")
+	_sCNTransformConstraintSelTransformConstraintInWorldSpaceWith   = objc.RegisterName("transformConstraintInWorldSpace:withBlock:")
+	_sCNTransformConstraintSelPositionConstraintInWorldSpaceWith    = objc.RegisterName("positionConstraintInWorldSpace:withBlock:")
 	_sCNTransformConstraintSelOrientationConstraintInWorldSpaceWith = objc.RegisterName("orientationConstraintInWorldSpace:withBlock:")
 )
 
@@ -34,21 +34,26 @@ func SCNTransformConstraintFromID(id objc.ID) *SCNTransformConstraint {
 // @method transformConstraintInWorldSpace:withBlock: @abstract Creates and returns a SCNTransformConstraint object with the specified parameters. @param world Determines whether the constraint is evaluated in world or local space. @param block The custom block to call to evaluate the constraint. @discussion The node and its transform are passed to the block. The transform returned by the block will be used to render the node.
 func SCNTransformConstraintTransformConstraintInWorldSpaceWith(world bool, block objc.Block) *SCNTransformConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransformConstraint), _sCNTransformConstraintSelTransformConstraintInWorldSpaceWith, world, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTransformConstraintFromID(_ret)
 }
 
 // @method positionConstraintInWorldSpace:withBlock: @abstract Creates and returns a SCNTransformConstraint object with the specified parameters. @param world Determines whether the constraint is evaluated in world or local space. @param block The custom block to call to evaluate the constraint. @discussion The node and its position are passed to the block. The position returned by the block will be used to render the node.
 func SCNTransformConstraintPositionConstraintInWorldSpaceWith(world bool, block objc.Block) *SCNTransformConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransformConstraint), _sCNTransformConstraintSelPositionConstraintInWorldSpaceWith, world, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTransformConstraintFromID(_ret)
 }
 
 // @method orientationConstraintInWorldSpace:withBlock: @abstract Creates and returns a SCNTransformConstraint object with the specified parameters. @param world Determines whether the constraint is evaluated in world or local space. @param block The custom block to call to evaluate the constraint. @discussion The node and its quaternion are passed to the block. The quaternion returned by the block will be used to render the node.
 func SCNTransformConstraintOrientationConstraintInWorldSpaceWith(world bool, block objc.Block) *SCNTransformConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTransformConstraint), _sCNTransformConstraintSelOrientationConstraintInWorldSpaceWith, world, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTransformConstraintFromID(_ret)
 }
-

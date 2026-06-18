@@ -283,4 +283,3 @@ func ColorSyncTransformSetProperty(transform unsafe.Pointer, key unsafe.Pointer,
 func ColorSyncUnregisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer) bool {
 	return raw.ColorSyncUnregisterDevice(deviceClass, deviceID)
 }
-

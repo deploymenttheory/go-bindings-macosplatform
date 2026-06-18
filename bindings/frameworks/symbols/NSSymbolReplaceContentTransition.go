@@ -15,13 +15,13 @@ type NSSymbolReplaceContentTransition struct {
 }
 
 var (
-	_clsNSSymbolReplaceContentTransition = _objcClass("NSSymbolReplaceContentTransition")
-	_nSSymbolReplaceContentTransitionSelTransition = objc.RegisterName("transition")
-	_nSSymbolReplaceContentTransitionSelReplaceDownUpTransition = objc.RegisterName("replaceDownUpTransition")
-	_nSSymbolReplaceContentTransitionSelReplaceUpUpTransition = objc.RegisterName("replaceUpUpTransition")
-	_nSSymbolReplaceContentTransitionSelReplaceOffUpTransition = objc.RegisterName("replaceOffUpTransition")
-	_nSSymbolReplaceContentTransitionSelTransitionWithByLayer = objc.RegisterName("transitionWithByLayer")
-	_nSSymbolReplaceContentTransitionSelTransitionWithWholeSymbol = objc.RegisterName("transitionWithWholeSymbol")
+	_clsNSSymbolReplaceContentTransition                            = _objcClass("NSSymbolReplaceContentTransition")
+	_nSSymbolReplaceContentTransitionSelTransition                  = objc.RegisterName("transition")
+	_nSSymbolReplaceContentTransitionSelReplaceDownUpTransition     = objc.RegisterName("replaceDownUpTransition")
+	_nSSymbolReplaceContentTransitionSelReplaceUpUpTransition       = objc.RegisterName("replaceUpUpTransition")
+	_nSSymbolReplaceContentTransitionSelReplaceOffUpTransition      = objc.RegisterName("replaceOffUpTransition")
+	_nSSymbolReplaceContentTransitionSelTransitionWithByLayer       = objc.RegisterName("transitionWithByLayer")
+	_nSSymbolReplaceContentTransitionSelTransitionWithWholeSymbol   = objc.RegisterName("transitionWithWholeSymbol")
 	_nSSymbolReplaceContentTransitionSelMagicTransitionWithFallback = objc.RegisterName("magicTransitionWithFallback:")
 )
 
@@ -38,49 +38,62 @@ func NSSymbolReplaceContentTransitionFromID(id objc.ID) *NSSymbolReplaceContentT
 // The default replace transition, determined by the system.
 func NSSymbolReplaceContentTransitionTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Convenience initializer for a replace content transition where the initial symbol scales down as it is removed, and the new symbol scales up as it is added.
 func NSSymbolReplaceContentTransitionReplaceDownUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceDownUpTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Convenience initializer for a replace content transition where the initial symbol scales up as it is removed, and the new symbol scales up as it is added.
 func NSSymbolReplaceContentTransitionReplaceUpUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceUpUpTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Convenience initializer for a replace content transition where the initial symbol is removed with no animation, and the new symbol scales up as it is added.
 func NSSymbolReplaceContentTransitionReplaceOffUpTransition() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelReplaceOffUpTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Returns a copy of the content transition that animates incrementally, by layer.
 func (o *NSSymbolReplaceContentTransition) TransitionWithByLayer() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolReplaceContentTransitionSelTransitionWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Returns a copy of the content transition that animates all layers of the symbol simultaneously.
 func (o *NSSymbolReplaceContentTransition) TransitionWithWholeSymbol() *NSSymbolReplaceContentTransition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolReplaceContentTransitionSelTransitionWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolReplaceContentTransitionFromID(_ret)
 }
 
 // Convenience initializer for a MagicReplace content transition with a configured Replace fallback.
 func NSSymbolReplaceContentTransitionMagicTransitionWithFallback(fallback *NSSymbolReplaceContentTransition) *NSSymbolMagicReplaceContentTransition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolReplaceContentTransition), _nSSymbolReplaceContentTransitionSelMagicTransitionWithFallback, fallback.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolMagicReplaceContentTransitionFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type MTRDishwasherAlarmClusterModifyEnabledAlarmsParams struct {
 }
 
 var (
-	_clsMTRDishwasherAlarmClusterModifyEnabledAlarmsParams = _objcClass("MTRDishwasherAlarmClusterModifyEnabledAlarmsParams")
-	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelMask = objc.RegisterName("mask")
-	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetMask = objc.RegisterName("setMask:")
-	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDishwasherAlarmClusterModifyEnabledAlarmsParams                               = _objcClass("MTRDishwasherAlarmClusterModifyEnabledAlarmsParams")
+	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelMask                           = objc.RegisterName("mask")
+	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetMask                        = objc.RegisterName("setMask:")
+	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsFromID(id objc.ID) *MTRDi
 
 func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetMask(mask *found
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetTimedInvokeTimeo
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

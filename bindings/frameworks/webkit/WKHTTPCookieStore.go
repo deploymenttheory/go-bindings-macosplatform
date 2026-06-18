@@ -16,15 +16,15 @@ type WKHTTPCookieStore struct {
 }
 
 var (
-	_clsWKHTTPCookieStore = _objcClass("WKHTTPCookieStore")
-	_wKHTTPCookieStoreSelGetAllCookies = objc.RegisterName("getAllCookies:")
-	_wKHTTPCookieStoreSelSetCookieCompletionHandler = objc.RegisterName("setCookie:completionHandler:")
-	_wKHTTPCookieStoreSelSetCookiesCompletionHandler = objc.RegisterName("setCookies:completionHandler:")
-	_wKHTTPCookieStoreSelDeleteCookieCompletionHandler = objc.RegisterName("deleteCookie:completionHandler:")
-	_wKHTTPCookieStoreSelAddObserver = objc.RegisterName("addObserver:")
-	_wKHTTPCookieStoreSelRemoveObserver = objc.RegisterName("removeObserver:")
+	_clsWKHTTPCookieStore                                 = _objcClass("WKHTTPCookieStore")
+	_wKHTTPCookieStoreSelGetAllCookies                    = objc.RegisterName("getAllCookies:")
+	_wKHTTPCookieStoreSelSetCookieCompletionHandler       = objc.RegisterName("setCookie:completionHandler:")
+	_wKHTTPCookieStoreSelSetCookiesCompletionHandler      = objc.RegisterName("setCookies:completionHandler:")
+	_wKHTTPCookieStoreSelDeleteCookieCompletionHandler    = objc.RegisterName("deleteCookie:completionHandler:")
+	_wKHTTPCookieStoreSelAddObserver                      = objc.RegisterName("addObserver:")
+	_wKHTTPCookieStoreSelRemoveObserver                   = objc.RegisterName("removeObserver:")
 	_wKHTTPCookieStoreSelSetCookiePolicyCompletionHandler = objc.RegisterName("setCookiePolicy:completionHandler:")
-	_wKHTTPCookieStoreSelGetCookiePolicy = objc.RegisterName("getCookiePolicy:")
+	_wKHTTPCookieStoreSelGetCookiePolicy                  = objc.RegisterName("getCookiePolicy:")
 )
 
 func WKHTTPCookieStoreFromID(id objc.ID) *WKHTTPCookieStore {
@@ -111,4 +111,3 @@ func (o *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolic
 	}
 	o.Ptr().Send(_wKHTTPCookieStoreSelGetCookiePolicy, __block_completionHandler)
 }
-

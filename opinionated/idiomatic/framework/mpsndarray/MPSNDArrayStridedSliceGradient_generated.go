@@ -42,11 +42,17 @@ func (x *ArrayStridedSliceGradient) WithDestinationArrayAllocator(destinationArr
 	return x
 }
 
-func (x *ArrayStridedSliceGradient) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel }
+func (x *ArrayStridedSliceGradient) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel {
+	return &x.inner.MPSNDArrayUnaryGradientKernel
+}
 
-func (x *ArrayStridedSliceGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
+func (x *ArrayStridedSliceGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *ArrayStridedSliceGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayStridedSliceGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayStridedSliceGradientable is the interface implemented by [ArrayStridedSliceGradient], for mocking and DI.
 type ArrayStridedSliceGradientable interface {
@@ -55,4 +61,3 @@ type ArrayStridedSliceGradientable interface {
 }
 
 var _ ArrayStridedSliceGradientable = (*ArrayStridedSliceGradient)(nil)
-

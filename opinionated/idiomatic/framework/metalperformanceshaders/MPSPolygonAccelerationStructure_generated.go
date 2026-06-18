@@ -108,7 +108,9 @@ func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*mpsrayinters
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*mpsrayintersector.MPSPolygonBuffer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -251,9 +253,13 @@ func (x *PolygonAccelerationStructure) SetPolygonBuffers(polygonBuffers *foundat
 	x.inner.SetPolygonBuffers(polygonBuffers)
 }
 
-func (x *PolygonAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure { return &x.inner.MPSAccelerationStructure }
+func (x *PolygonAccelerationStructure) asAccelerationStructure() *mpsrayintersector.MPSAccelerationStructure {
+	return &x.inner.MPSAccelerationStructure
+}
 
-func (x *PolygonAccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.MPSAccelerationStructure.MPSKernel }
+func (x *PolygonAccelerationStructure) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSAccelerationStructure.MPSKernel
+}
 
 // PolygonAccelerationStructureable is the interface implemented by [PolygonAccelerationStructure], for mocking and DI.
 type PolygonAccelerationStructureable interface {
@@ -297,4 +303,3 @@ type PolygonAccelerationStructureable interface {
 }
 
 var _ PolygonAccelerationStructureable = (*PolygonAccelerationStructure)(nil)
-

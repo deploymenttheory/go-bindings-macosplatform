@@ -16,12 +16,12 @@ type NEVPNIKEv2PPKConfiguration struct {
 }
 
 var (
-	_clsNEVPNIKEv2PPKConfiguration = _objcClass("NEVPNIKEv2PPKConfiguration")
+	_clsNEVPNIKEv2PPKConfiguration                                    = _objcClass("NEVPNIKEv2PPKConfiguration")
 	_nEVPNIKEv2PPKConfigurationSelInitWithIdentifierKeychainReference = objc.RegisterName("initWithIdentifier:keychainReference:")
-	_nEVPNIKEv2PPKConfigurationSelIdentifier = objc.RegisterName("identifier")
-	_nEVPNIKEv2PPKConfigurationSelKeychainReference = objc.RegisterName("keychainReference")
-	_nEVPNIKEv2PPKConfigurationSelIsMandatory = objc.RegisterName("isMandatory")
-	_nEVPNIKEv2PPKConfigurationSelSetIsMandatory = objc.RegisterName("setIsMandatory:")
+	_nEVPNIKEv2PPKConfigurationSelIdentifier                          = objc.RegisterName("identifier")
+	_nEVPNIKEv2PPKConfigurationSelKeychainReference                   = objc.RegisterName("keychainReference")
+	_nEVPNIKEv2PPKConfigurationSelIsMandatory                         = objc.RegisterName("isMandatory")
+	_nEVPNIKEv2PPKConfigurationSelSetIsMandatory                      = objc.RegisterName("setIsMandatory:")
 )
 
 func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
@@ -37,21 +37,27 @@ func NEVPNIKEv2PPKConfigurationFromID(id objc.ID) *NEVPNIKEv2PPKConfiguration {
 // @method initWithIdentifier:keychainReference: @discussion Initialize a newly-allocated NEVPNIKEv2PPKConfiguration object. @param identifier The identifier for the PPK. @param keychainReference A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
 func (o *NEVPNIKEv2PPKConfiguration) InitWithIdentifierKeychainReference(identifier *foundation.NSString, keychainReference *foundation.NSData) *NEVPNIKEv2PPKConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNIKEv2PPKConfigurationSelInitWithIdentifierKeychainReference, identifier.Ptr(), keychainReference.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEVPNIKEv2PPKConfigurationFromID(_ret)
 }
 
 // @property identifier @discussion The identifer for the PPK.
 func (o *NEVPNIKEv2PPKConfiguration) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNIKEv2PPKConfigurationSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property keychainReference @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the PPK.
 func (o *NEVPNIKEv2PPKConfiguration) KeychainReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEVPNIKEv2PPKConfigurationSelKeychainReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *NEVPNIKEv2PPKConfiguration) IsMandatory() bool {
 func (o *NEVPNIKEv2PPKConfiguration) SetIsMandatory(isMandatory bool) {
 	o.Ptr().Send(_nEVPNIKEv2PPKConfigurationSelSetIsMandatory, isMandatory)
 }
-

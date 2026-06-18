@@ -16,11 +16,11 @@ type NSPersistentCloudKitContainerOptions struct {
 }
 
 var (
-	_clsNSPersistentCloudKitContainerOptions = _objcClass("NSPersistentCloudKitContainerOptions")
+	_clsNSPersistentCloudKitContainerOptions                            = _objcClass("NSPersistentCloudKitContainerOptions")
 	_nSPersistentCloudKitContainerOptionsSelInitWithContainerIdentifier = objc.RegisterName("initWithContainerIdentifier:")
-	_nSPersistentCloudKitContainerOptionsSelContainerIdentifier = objc.RegisterName("containerIdentifier")
-	_nSPersistentCloudKitContainerOptionsSelDatabaseScope = objc.RegisterName("databaseScope")
-	_nSPersistentCloudKitContainerOptionsSelSetDatabaseScope = objc.RegisterName("setDatabaseScope:")
+	_nSPersistentCloudKitContainerOptionsSelContainerIdentifier         = objc.RegisterName("containerIdentifier")
+	_nSPersistentCloudKitContainerOptionsSelDatabaseScope               = objc.RegisterName("databaseScope")
+	_nSPersistentCloudKitContainerOptionsSelSetDatabaseScope            = objc.RegisterName("setDatabaseScope:")
 )
 
 func NSPersistentCloudKitContainerOptionsFromID(id objc.ID) *NSPersistentCloudKitContainerOptions {
@@ -35,14 +35,18 @@ func NSPersistentCloudKitContainerOptionsFromID(id objc.ID) *NSPersistentCloudKi
 
 func (o *NSPersistentCloudKitContainerOptions) InitWithContainerIdentifier(containerIdentifier *foundation.NSString) *NSPersistentCloudKitContainerOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerOptionsSelInitWithContainerIdentifier, containerIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentCloudKitContainerOptionsFromID(_ret)
 }
 
 // The container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
 func (o *NSPersistentCloudKitContainerOptions) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentCloudKitContainerOptionsSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *NSPersistentCloudKitContainerOptions) DatabaseScope() objc.ID {
 func (o *NSPersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope objc.ID) {
 	o.Ptr().Send(_nSPersistentCloudKitContainerOptionsSelSetDatabaseScope, databaseScope)
 }
-

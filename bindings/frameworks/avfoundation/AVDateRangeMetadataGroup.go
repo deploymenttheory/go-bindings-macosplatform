@@ -16,10 +16,10 @@ type AVDateRangeMetadataGroup struct {
 }
 
 var (
-	_clsAVDateRangeMetadataGroup = _objcClass("AVDateRangeMetadataGroup")
+	_clsAVDateRangeMetadataGroup                              = _objcClass("AVDateRangeMetadataGroup")
 	_aVDateRangeMetadataGroupSelInitWithItemsStartDateEndDate = objc.RegisterName("initWithItems:startDate:endDate:")
-	_aVDateRangeMetadataGroupSelStartDate = objc.RegisterName("startDate")
-	_aVDateRangeMetadataGroupSelEndDate = objc.RegisterName("endDate")
+	_aVDateRangeMetadataGroupSelStartDate                     = objc.RegisterName("startDate")
+	_aVDateRangeMetadataGroupSelEndDate                       = objc.RegisterName("endDate")
 )
 
 func AVDateRangeMetadataGroupFromID(id objc.ID) *AVDateRangeMetadataGroup {
@@ -35,19 +35,24 @@ func AVDateRangeMetadataGroupFromID(id objc.ID) *AVDateRangeMetadataGroup {
 // @method		initWithItems:startDate:endDate: @abstract	Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		startDate The start date of the collection of AVMetadataItems. @param		endDate The end date of the collection of AVMetadataItems. If the receiver is intended to represent information about an instantaneous event, the value of endDate should be equal to the value of startDate. A value of nil for endDate indicates that the endDate is indefinite. @result		An instance of AVDateRangeMetadataGroup.
 func (o *AVDateRangeMetadataGroup) InitWithItemsStartDateEndDate(items *foundation.NSArray[*AVMetadataItem], startDate *foundation.NSDate, endDate *foundation.NSDate) *AVDateRangeMetadataGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDateRangeMetadataGroupSelInitWithItemsStartDateEndDate, items.Ptr(), startDate.Ptr(), endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVDateRangeMetadataGroupFromID(_ret)
 }
 
 func (o *AVDateRangeMetadataGroup) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDateRangeMetadataGroupSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *AVDateRangeMetadataGroup) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDateRangeMetadataGroupSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

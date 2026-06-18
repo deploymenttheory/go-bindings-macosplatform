@@ -16,30 +16,30 @@ type DOMHTMLFrameElement struct {
 }
 
 var (
-	_clsDOMHTMLFrameElement = _objcClass("DOMHTMLFrameElement")
-	_dOMHTMLFrameElementSelFrameBorder = objc.RegisterName("frameBorder")
-	_dOMHTMLFrameElementSelSetFrameBorder = objc.RegisterName("setFrameBorder:")
-	_dOMHTMLFrameElementSelLongDesc = objc.RegisterName("longDesc")
-	_dOMHTMLFrameElementSelSetLongDesc = objc.RegisterName("setLongDesc:")
-	_dOMHTMLFrameElementSelMarginHeight = objc.RegisterName("marginHeight")
+	_clsDOMHTMLFrameElement                = _objcClass("DOMHTMLFrameElement")
+	_dOMHTMLFrameElementSelFrameBorder     = objc.RegisterName("frameBorder")
+	_dOMHTMLFrameElementSelSetFrameBorder  = objc.RegisterName("setFrameBorder:")
+	_dOMHTMLFrameElementSelLongDesc        = objc.RegisterName("longDesc")
+	_dOMHTMLFrameElementSelSetLongDesc     = objc.RegisterName("setLongDesc:")
+	_dOMHTMLFrameElementSelMarginHeight    = objc.RegisterName("marginHeight")
 	_dOMHTMLFrameElementSelSetMarginHeight = objc.RegisterName("setMarginHeight:")
-	_dOMHTMLFrameElementSelMarginWidth = objc.RegisterName("marginWidth")
-	_dOMHTMLFrameElementSelSetMarginWidth = objc.RegisterName("setMarginWidth:")
-	_dOMHTMLFrameElementSelName = objc.RegisterName("name")
-	_dOMHTMLFrameElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLFrameElementSelNoResize = objc.RegisterName("noResize")
-	_dOMHTMLFrameElementSelSetNoResize = objc.RegisterName("setNoResize:")
-	_dOMHTMLFrameElementSelScrolling = objc.RegisterName("scrolling")
-	_dOMHTMLFrameElementSelSetScrolling = objc.RegisterName("setScrolling:")
-	_dOMHTMLFrameElementSelSrc = objc.RegisterName("src")
-	_dOMHTMLFrameElementSelSetSrc = objc.RegisterName("setSrc:")
+	_dOMHTMLFrameElementSelMarginWidth     = objc.RegisterName("marginWidth")
+	_dOMHTMLFrameElementSelSetMarginWidth  = objc.RegisterName("setMarginWidth:")
+	_dOMHTMLFrameElementSelName            = objc.RegisterName("name")
+	_dOMHTMLFrameElementSelSetName         = objc.RegisterName("setName:")
+	_dOMHTMLFrameElementSelNoResize        = objc.RegisterName("noResize")
+	_dOMHTMLFrameElementSelSetNoResize     = objc.RegisterName("setNoResize:")
+	_dOMHTMLFrameElementSelScrolling       = objc.RegisterName("scrolling")
+	_dOMHTMLFrameElementSelSetScrolling    = objc.RegisterName("setScrolling:")
+	_dOMHTMLFrameElementSelSrc             = objc.RegisterName("src")
+	_dOMHTMLFrameElementSelSetSrc          = objc.RegisterName("setSrc:")
 	_dOMHTMLFrameElementSelContentDocument = objc.RegisterName("contentDocument")
-	_dOMHTMLFrameElementSelContentWindow = objc.RegisterName("contentWindow")
-	_dOMHTMLFrameElementSelLocation = objc.RegisterName("location")
-	_dOMHTMLFrameElementSelSetLocation = objc.RegisterName("setLocation:")
-	_dOMHTMLFrameElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLFrameElementSelHeight = objc.RegisterName("height")
-	_dOMHTMLFrameElementSelContentFrame = objc.RegisterName("contentFrame")
+	_dOMHTMLFrameElementSelContentWindow   = objc.RegisterName("contentWindow")
+	_dOMHTMLFrameElementSelLocation        = objc.RegisterName("location")
+	_dOMHTMLFrameElementSelSetLocation     = objc.RegisterName("setLocation:")
+	_dOMHTMLFrameElementSelWidth           = objc.RegisterName("width")
+	_dOMHTMLFrameElementSelHeight          = objc.RegisterName("height")
+	_dOMHTMLFrameElementSelContentFrame    = objc.RegisterName("contentFrame")
 )
 
 func DOMHTMLFrameElementFromID(id objc.ID) *DOMHTMLFrameElement {
@@ -54,7 +54,9 @@ func DOMHTMLFrameElementFromID(id objc.ID) *DOMHTMLFrameElement {
 
 func (o *DOMHTMLFrameElement) FrameBorder() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelFrameBorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,7 +66,9 @@ func (o *DOMHTMLFrameElement) SetFrameBorder(frameBorder *foundation.NSString) {
 
 func (o *DOMHTMLFrameElement) LongDesc() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelLongDesc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -74,7 +78,9 @@ func (o *DOMHTMLFrameElement) SetLongDesc(longDesc *foundation.NSString) {
 
 func (o *DOMHTMLFrameElement) MarginHeight() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelMarginHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +90,9 @@ func (o *DOMHTMLFrameElement) SetMarginHeight(marginHeight *foundation.NSString)
 
 func (o *DOMHTMLFrameElement) MarginWidth() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelMarginWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +102,9 @@ func (o *DOMHTMLFrameElement) SetMarginWidth(marginWidth *foundation.NSString) {
 
 func (o *DOMHTMLFrameElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,7 +123,9 @@ func (o *DOMHTMLFrameElement) SetNoResize(noResize bool) {
 
 func (o *DOMHTMLFrameElement) Scrolling() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelScrolling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +135,9 @@ func (o *DOMHTMLFrameElement) SetScrolling(scrolling *foundation.NSString) {
 
 func (o *DOMHTMLFrameElement) Src() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelSrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -133,19 +147,25 @@ func (o *DOMHTMLFrameElement) SetSrc(src *foundation.NSString) {
 
 func (o *DOMHTMLFrameElement) ContentDocument() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelContentDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 func (o *DOMHTMLFrameElement) ContentWindow() *DOMAbstractView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelContentWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAbstractViewFromID(_ret)
 }
 
 func (o *DOMHTMLFrameElement) Location() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -165,7 +185,8 @@ func (o *DOMHTMLFrameElement) Height() int {
 
 func (o *DOMHTMLFrameElement) ContentFrame() *WebFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLFrameElementSelContentFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebFrameFromID(_ret)
 }
-

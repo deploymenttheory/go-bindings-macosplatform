@@ -19,16 +19,16 @@ type MEByteSource struct {
 }
 
 var (
-	_clsMEByteSource = _objcClass("MEByteSource")
+	_clsMEByteSource                                                         = _objcClass("MEByteSource")
 	_mEByteSourceSelReadDataOfLengthFromOffsetToDestinationCompletionHandler = objc.RegisterName("readDataOfLength:fromOffset:toDestination:completionHandler:")
-	_mEByteSourceSelReadDataOfLengthFromOffsetCompletionHandler = objc.RegisterName("readDataOfLength:fromOffset:completionHandler:")
-	_mEByteSourceSelReadDataOfLengthFromOffsetToDestinationBytesReadError = objc.RegisterName("readDataOfLength:fromOffset:toDestination:bytesRead:error:")
-	_mEByteSourceSelAvailableLengthAtOffset = objc.RegisterName("availableLengthAtOffset:")
-	_mEByteSourceSelByteSourceForRelatedFileNameError = objc.RegisterName("byteSourceForRelatedFileName:error:")
-	_mEByteSourceSelFileName = objc.RegisterName("fileName")
-	_mEByteSourceSelContentType = objc.RegisterName("contentType")
-	_mEByteSourceSelFileLength = objc.RegisterName("fileLength")
-	_mEByteSourceSelRelatedFileNamesInSameDirectory = objc.RegisterName("relatedFileNamesInSameDirectory")
+	_mEByteSourceSelReadDataOfLengthFromOffsetCompletionHandler              = objc.RegisterName("readDataOfLength:fromOffset:completionHandler:")
+	_mEByteSourceSelReadDataOfLengthFromOffsetToDestinationBytesReadError    = objc.RegisterName("readDataOfLength:fromOffset:toDestination:bytesRead:error:")
+	_mEByteSourceSelAvailableLengthAtOffset                                  = objc.RegisterName("availableLengthAtOffset:")
+	_mEByteSourceSelByteSourceForRelatedFileNameError                        = objc.RegisterName("byteSourceForRelatedFileName:error:")
+	_mEByteSourceSelFileName                                                 = objc.RegisterName("fileName")
+	_mEByteSourceSelContentType                                              = objc.RegisterName("contentType")
+	_mEByteSourceSelFileLength                                               = objc.RegisterName("fileLength")
+	_mEByteSourceSelRelatedFileNamesInSameDirectory                          = objc.RegisterName("relatedFileNamesInSameDirectory")
 )
 
 func MEByteSourceFromID(id objc.ID) *MEByteSource {
@@ -88,7 +88,9 @@ func (o *MEByteSource) AvailableLengthAtOffset(offset int64) int64 {
 func (o *MEByteSource) ByteSourceForRelatedFileNameError(fileName *foundation.NSString) (*MEByteSource, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelByteSourceForRelatedFileNameError, fileName.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,14 +100,18 @@ func (o *MEByteSource) ByteSourceForRelatedFileNameError(fileName *foundation.NS
 // @property   	fileName @abstract		The name of a MEByteSource's file. @discussion		The name of the source file for the MEByteSource.
 func (o *MEByteSource) FileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelFileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property   	contentType @abstract		A UTType indicating the format of the MEByteSource's file. @discussion		A UTType indicating the format of the source file for the MEByteSource.
 func (o *MEByteSource) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEByteSourceSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -120,4 +126,3 @@ func (o *MEByteSource) RelatedFileNamesInSameDirectory() *foundation.NSArray[*fo
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mEByteSourceSelRelatedFileNamesInSameDirectory)
 	return _ret
 }
-

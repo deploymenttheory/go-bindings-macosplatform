@@ -17,13 +17,13 @@ type SKPaymentDiscount struct {
 }
 
 var (
-	_clsSKPaymentDiscount = _objcClass("SKPaymentDiscount")
+	_clsSKPaymentDiscount                                                       = _objcClass("SKPaymentDiscount")
 	_sKPaymentDiscountSelInitWithIdentifierKeyIdentifierNonceSignatureTimestamp = objc.RegisterName("initWithIdentifier:keyIdentifier:nonce:signature:timestamp:")
-	_sKPaymentDiscountSelIdentifier = objc.RegisterName("identifier")
-	_sKPaymentDiscountSelKeyIdentifier = objc.RegisterName("keyIdentifier")
-	_sKPaymentDiscountSelNonce = objc.RegisterName("nonce")
-	_sKPaymentDiscountSelSignature = objc.RegisterName("signature")
-	_sKPaymentDiscountSelTimestamp = objc.RegisterName("timestamp")
+	_sKPaymentDiscountSelIdentifier                                             = objc.RegisterName("identifier")
+	_sKPaymentDiscountSelKeyIdentifier                                          = objc.RegisterName("keyIdentifier")
+	_sKPaymentDiscountSelNonce                                                  = objc.RegisterName("nonce")
+	_sKPaymentDiscountSelSignature                                              = objc.RegisterName("signature")
+	_sKPaymentDiscountSelTimestamp                                              = objc.RegisterName("timestamp")
 )
 
 func SKPaymentDiscountFromID(id objc.ID) *SKPaymentDiscount {
@@ -38,37 +38,48 @@ func SKPaymentDiscountFromID(id objc.ID) *SKPaymentDiscount {
 
 func (o *SKPaymentDiscount) InitWithIdentifierKeyIdentifierNonceSignatureTimestamp(identifier *foundation.NSString, keyIdentifier *foundation.NSString, nonce *foundation.NSUUID, signature *foundation.NSString, timestamp *foundation.NSNumber) *SKPaymentDiscount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelInitWithIdentifierKeyIdentifierNonceSignatureTimestamp, identifier.Ptr(), keyIdentifier.Ptr(), nonce.Ptr(), signature.Ptr(), timestamp.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentDiscountFromID(_ret)
 }
 
 func (o *SKPaymentDiscount) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SKPaymentDiscount) KeyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelKeyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SKPaymentDiscount) Nonce() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *SKPaymentDiscount) Signature() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SKPaymentDiscount) Timestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentDiscountSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

@@ -151,4 +151,3 @@ type CalRecurrenceRuleable interface {
 }
 
 var _ CalRecurrenceRuleable = (*CalRecurrenceRule)(nil)
-

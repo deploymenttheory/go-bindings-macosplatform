@@ -67,7 +67,9 @@ func (x *DOMOverflowEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent
 
 func (x *DOMOverflowEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
-func (x *DOMOverflowEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMOverflowEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMOverflowEventable is the interface implemented by [DOMOverflowEvent], for mocking and DI.
 type DOMOverflowEventable interface {
@@ -80,4 +82,3 @@ type DOMOverflowEventable interface {
 }
 
 var _ DOMOverflowEventable = (*DOMOverflowEvent)(nil)
-

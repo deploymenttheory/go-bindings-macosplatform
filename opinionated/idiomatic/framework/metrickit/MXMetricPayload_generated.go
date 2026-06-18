@@ -245,4 +245,3 @@ type MetricPayloadable interface {
 }
 
 var _ MetricPayloadable = (*MetricPayload)(nil)
-

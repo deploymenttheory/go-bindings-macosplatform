@@ -19,63 +19,80 @@ func SCStreamErrorDomain() uintptr {
 // @key SCStreamFrameInfoBoundingRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the bounding rect associated with the frame. Bounding rect is the size and location of smallest bounding box containing all captured windows in points and in surface coordinates.
 func SCStreamFrameInfoBoundingRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoBoundingRect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoContentRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content rect associated with the frame. Content rect is the size and location of content in points in surface.
 func SCStreamFrameInfoContentRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoContentRect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoContentScale @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content scale associated with the frame. Content scale is the scaling factor from original content size to its size in surface.
 func SCStreamFrameInfoContentScale() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoContentScale")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoDirtyRects @abstract The key for the CFDictionary attached to the CMSampleBuffer for an array of rectangles that is the union of both rectangles that were redrawn and rectangles that were moved. This is an array of CGRect in NSValue. The CGRects elements are specified in pixels.
 func SCStreamFrameInfoDirtyRects() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoDirtyRects")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoDisplayTime @abstract The key for the CFDictionary attached to the CMSampleBuffer for the mach absolute time when the event occurred. For a frame event, this is when the frame was displayed by the window server.
 func SCStreamFrameInfoDisplayTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoDisplayTime")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoPresenterOverlayContentRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the content rect associated with the frame while in presenter overlay.  In presenter overlay small, this content rect is the size and location of smallest bounding box containing all captured windows plus small overlay window in points and in surface coordinates. In presenter overlay large, this content rect is the size and location of shared content in points and in surface coordinates.
 func SCStreamFrameInfoPresenterOverlayContentRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoPresenterOverlayContentRect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoScaleFactor @abstract The key for the CFDictionary attached to the CMSampleBuffer for the display resolution associated with the frame. Display resolution is the pixel to point scaling factor. It should be in the range of [1, 4].
 func SCStreamFrameInfoScaleFactor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoScaleFactor")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoScreenRect @abstract The key for the CFDictionary attached to the CMSampleBuffer for the onscreen location of the captured content
 func SCStreamFrameInfoScreenRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoScreenRect")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 // @key SCStreamFrameInfoStatus @abstract The key for the CFDictionary attached to the CMSampleBuffer that denotes the frames SCFrameStatus
 func SCStreamFrameInfoStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_screencapturekitLib, "SCStreamFrameInfoStatus")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

@@ -56,7 +56,9 @@ func (x *AssetWriterInput) WithMetadata(items ...MetadataItemProvider) *AssetWri
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -444,4 +446,3 @@ type AssetWriterInputable interface {
 }
 
 var _ AssetWriterInputable = (*AssetWriterInput)(nil)
-

@@ -19,14 +19,14 @@ type AVDelegatingPlaybackCoordinator struct {
 }
 
 var (
-	_clsAVDelegatingPlaybackCoordinator = _objcClass("AVDelegatingPlaybackCoordinator")
-	_aVDelegatingPlaybackCoordinatorSelInitWithPlaybackControlDelegate = objc.RegisterName("initWithPlaybackControlDelegate:")
-	_aVDelegatingPlaybackCoordinatorSelCoordinateRateChangeToRateOptions = objc.RegisterName("coordinateRateChangeToRate:options:")
-	_aVDelegatingPlaybackCoordinatorSelCoordinateSeekToTimeOptions = objc.RegisterName("coordinateSeekToTime:options:")
+	_clsAVDelegatingPlaybackCoordinator                                                                    = _objcClass("AVDelegatingPlaybackCoordinator")
+	_aVDelegatingPlaybackCoordinatorSelInitWithPlaybackControlDelegate                                     = objc.RegisterName("initWithPlaybackControlDelegate:")
+	_aVDelegatingPlaybackCoordinatorSelCoordinateRateChangeToRateOptions                                   = objc.RegisterName("coordinateRateChangeToRate:options:")
+	_aVDelegatingPlaybackCoordinatorSelCoordinateSeekToTimeOptions                                         = objc.RegisterName("coordinateSeekToTime:options:")
 	_aVDelegatingPlaybackCoordinatorSelTransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase = objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:")
-	_aVDelegatingPlaybackCoordinatorSelReapplyCurrentItemStateToPlaybackControlDelegate = objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate")
-	_aVDelegatingPlaybackCoordinatorSelPlaybackControlDelegate = objc.RegisterName("playbackControlDelegate")
-	_aVDelegatingPlaybackCoordinatorSelCurrentItemIdentifier = objc.RegisterName("currentItemIdentifier")
+	_aVDelegatingPlaybackCoordinatorSelReapplyCurrentItemStateToPlaybackControlDelegate                    = objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate")
+	_aVDelegatingPlaybackCoordinatorSelPlaybackControlDelegate                                             = objc.RegisterName("playbackControlDelegate")
+	_aVDelegatingPlaybackCoordinatorSelCurrentItemIdentifier                                               = objc.RegisterName("currentItemIdentifier")
 )
 
 func AVDelegatingPlaybackCoordinatorFromID(id objc.ID) *AVDelegatingPlaybackCoordinator {
@@ -42,7 +42,9 @@ func AVDelegatingPlaybackCoordinatorFromID(id objc.ID) *AVDelegatingPlaybackCoor
 // Creates an AVPlaybackCoordinator for a custom playback object. Use this to create an AVPlaybackCoordinator when playback is not driven by an AVPlayer. - Parameter playbackControlDelegate: An object conforming to the AVPlaybackCoordinatorPlaybackControlDelegate protocol representing a custom playback object. The coordinator will only hold a weak reference to its delegate. - NOTE: See AVPlayer's playbackCoordinator property to get an AVPlaybackCoordinator for an AVPlayer.
 func (o *AVDelegatingPlaybackCoordinator) InitWithPlaybackControlDelegate(playbackControlDelegate AVPlaybackCoordinatorPlaybackControlDelegate) *AVDelegatingPlaybackCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDelegatingPlaybackCoordinatorSelInitWithPlaybackControlDelegate, playbackControlDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVDelegatingPlaybackCoordinatorFromID(_ret)
 }
 
@@ -75,7 +77,8 @@ func (o *AVDelegatingPlaybackCoordinator) PlaybackControlDelegate() AVPlaybackCo
 // The item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
 func (o *AVDelegatingPlaybackCoordinator) CurrentItemIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVDelegatingPlaybackCoordinatorSelCurrentItemIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

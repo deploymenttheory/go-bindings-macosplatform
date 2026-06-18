@@ -16,9 +16,9 @@ type FSTaskOptions struct {
 }
 
 var (
-	_clsFSTaskOptions = _objcClass("FSTaskOptions")
+	_clsFSTaskOptions             = _objcClass("FSTaskOptions")
 	_fSTaskOptionsSelUrlForOption = objc.RegisterName("urlForOption:")
-	_fSTaskOptionsSelTaskOptions = objc.RegisterName("taskOptions")
+	_fSTaskOptionsSelTaskOptions  = objc.RegisterName("taskOptions")
 )
 
 func FSTaskOptionsFromID(id objc.ID) *FSTaskOptions {
@@ -34,7 +34,9 @@ func FSTaskOptionsFromID(id objc.ID) *FSTaskOptions {
 // Retrieves a URL for a given option. Some command-line options refer to paths that indicate a location in which the module needs access to a file outside of its container. FSKit passes these paths as a URL tagged by the option name. For example, `"-B" "./someFile"` returns the URL for `./someFile` when passed an option `"B"`. To indicate that your module treats a given option as a path, include it in the `pathOptions` dictionary within a command options dictionary (`FSActivatOptionSyntax`, `FSCheckOptionSyntax`, or `FSFormatOptionSyntax`). This dictionary uses the command option name as a key, and each entry has a value indicating what kind of entry to create. - Parameter option: The option for which to retrieve the URL. This value doesn't include leading dashes.
 func (o *FSTaskOptions) UrlForOption(option *foundation.NSString) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSTaskOptionsSelUrlForOption, option.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *FSTaskOptions) TaskOptions() *foundation.NSArray[*foundation.NSString] 
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _fSTaskOptionsSelTaskOptions)
 	return _ret
 }
-

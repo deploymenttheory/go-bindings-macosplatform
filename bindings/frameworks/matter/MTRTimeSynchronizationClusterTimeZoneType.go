@@ -25,4 +25,3 @@ func MTRTimeSynchronizationClusterTimeZoneTypeFromID(id objc.ID) *MTRTimeSynchro
 	purego.Track(o)
 	return o
 }
-

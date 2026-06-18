@@ -72,4 +72,3 @@ type CompoundPredicateable interface {
 }
 
 var _ CompoundPredicateable = (*CompoundPredicate)(nil)
-

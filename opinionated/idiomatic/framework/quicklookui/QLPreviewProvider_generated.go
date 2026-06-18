@@ -41,4 +41,3 @@ type PreviewProviderable interface {
 }
 
 var _ PreviewProviderable = (*PreviewProvider)(nil)
-

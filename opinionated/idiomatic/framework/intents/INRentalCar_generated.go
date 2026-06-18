@@ -94,4 +94,3 @@ type RentalCarable interface {
 }
 
 var _ RentalCarable = (*RentalCar)(nil)
-

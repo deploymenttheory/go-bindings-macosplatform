@@ -16,32 +16,32 @@ type VSUserAccount struct {
 }
 
 var (
-	_clsVSUserAccount = _objcClass("VSUserAccount")
-	_vSUserAccountSelInitWithAccountTypeUpdateURL = objc.RegisterName("initWithAccountType:updateURL:")
-	_vSUserAccountSelUpdateURL = objc.RegisterName("updateURL")
-	_vSUserAccountSelSetUpdateURL = objc.RegisterName("setUpdateURL:")
-	_vSUserAccountSelRequiresSystemTrust = objc.RegisterName("requiresSystemTrust")
-	_vSUserAccountSelSetRequiresSystemTrust = objc.RegisterName("setRequiresSystemTrust:")
-	_vSUserAccountSelAccountProviderIdentifier = objc.RegisterName("accountProviderIdentifier")
-	_vSUserAccountSelSetAccountProviderIdentifier = objc.RegisterName("setAccountProviderIdentifier:")
-	_vSUserAccountSelIdentifier = objc.RegisterName("identifier")
-	_vSUserAccountSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_vSUserAccountSelAccountType = objc.RegisterName("accountType")
-	_vSUserAccountSelSetAccountType = objc.RegisterName("setAccountType:")
-	_vSUserAccountSelIsSignedOut = objc.RegisterName("isSignedOut")
-	_vSUserAccountSelSetSignedOut = objc.RegisterName("setSignedOut:")
-	_vSUserAccountSelSubscriptionBillingCycleEndDate = objc.RegisterName("subscriptionBillingCycleEndDate")
+	_clsVSUserAccount                                   = _objcClass("VSUserAccount")
+	_vSUserAccountSelInitWithAccountTypeUpdateURL       = objc.RegisterName("initWithAccountType:updateURL:")
+	_vSUserAccountSelUpdateURL                          = objc.RegisterName("updateURL")
+	_vSUserAccountSelSetUpdateURL                       = objc.RegisterName("setUpdateURL:")
+	_vSUserAccountSelRequiresSystemTrust                = objc.RegisterName("requiresSystemTrust")
+	_vSUserAccountSelSetRequiresSystemTrust             = objc.RegisterName("setRequiresSystemTrust:")
+	_vSUserAccountSelAccountProviderIdentifier          = objc.RegisterName("accountProviderIdentifier")
+	_vSUserAccountSelSetAccountProviderIdentifier       = objc.RegisterName("setAccountProviderIdentifier:")
+	_vSUserAccountSelIdentifier                         = objc.RegisterName("identifier")
+	_vSUserAccountSelSetIdentifier                      = objc.RegisterName("setIdentifier:")
+	_vSUserAccountSelAccountType                        = objc.RegisterName("accountType")
+	_vSUserAccountSelSetAccountType                     = objc.RegisterName("setAccountType:")
+	_vSUserAccountSelIsSignedOut                        = objc.RegisterName("isSignedOut")
+	_vSUserAccountSelSetSignedOut                       = objc.RegisterName("setSignedOut:")
+	_vSUserAccountSelSubscriptionBillingCycleEndDate    = objc.RegisterName("subscriptionBillingCycleEndDate")
 	_vSUserAccountSelSetSubscriptionBillingCycleEndDate = objc.RegisterName("setSubscriptionBillingCycleEndDate:")
-	_vSUserAccountSelTierIdentifiers = objc.RegisterName("tierIdentifiers")
-	_vSUserAccountSelSetTierIdentifiers = objc.RegisterName("setTierIdentifiers:")
-	_vSUserAccountSelBillingIdentifier = objc.RegisterName("billingIdentifier")
-	_vSUserAccountSelSetBillingIdentifier = objc.RegisterName("setBillingIdentifier:")
-	_vSUserAccountSelAuthenticationData = objc.RegisterName("authenticationData")
-	_vSUserAccountSelSetAuthenticationData = objc.RegisterName("setAuthenticationData:")
-	_vSUserAccountSelIsFromCurrentDevice = objc.RegisterName("isFromCurrentDevice")
-	_vSUserAccountSelDeviceCategory = objc.RegisterName("deviceCategory")
-	_vSUserAccountSelAppleSubscription = objc.RegisterName("appleSubscription")
-	_vSUserAccountSelSetAppleSubscription = objc.RegisterName("setAppleSubscription:")
+	_vSUserAccountSelTierIdentifiers                    = objc.RegisterName("tierIdentifiers")
+	_vSUserAccountSelSetTierIdentifiers                 = objc.RegisterName("setTierIdentifiers:")
+	_vSUserAccountSelBillingIdentifier                  = objc.RegisterName("billingIdentifier")
+	_vSUserAccountSelSetBillingIdentifier               = objc.RegisterName("setBillingIdentifier:")
+	_vSUserAccountSelAuthenticationData                 = objc.RegisterName("authenticationData")
+	_vSUserAccountSelSetAuthenticationData              = objc.RegisterName("setAuthenticationData:")
+	_vSUserAccountSelIsFromCurrentDevice                = objc.RegisterName("isFromCurrentDevice")
+	_vSUserAccountSelDeviceCategory                     = objc.RegisterName("deviceCategory")
+	_vSUserAccountSelAppleSubscription                  = objc.RegisterName("appleSubscription")
+	_vSUserAccountSelSetAppleSubscription               = objc.RegisterName("setAppleSubscription:")
 )
 
 func VSUserAccountFromID(id objc.ID) *VSUserAccount {
@@ -56,13 +56,17 @@ func VSUserAccountFromID(id objc.ID) *VSUserAccount {
 
 func (o *VSUserAccount) InitWithAccountTypeUpdateURL(accountType VSUserAccountType, url *foundation.NSURL) *VSUserAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelInitWithAccountTypeUpdateURL, accountType, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSUserAccountFromID(_ret)
 }
 
 func (o *VSUserAccount) UpdateURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelUpdateURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *VSUserAccount) SetRequiresSystemTrust(requiresSystemTrust bool) {
 
 func (o *VSUserAccount) AccountProviderIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelAccountProviderIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -91,7 +97,9 @@ func (o *VSUserAccount) SetAccountProviderIdentifier(accountProviderIdentifier *
 
 func (o *VSUserAccount) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +127,9 @@ func (o *VSUserAccount) SetSignedOut(signedOut bool) {
 
 func (o *VSUserAccount) SubscriptionBillingCycleEndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelSubscriptionBillingCycleEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -138,7 +148,9 @@ func (o *VSUserAccount) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*
 
 func (o *VSUserAccount) BillingIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelBillingIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -148,7 +160,9 @@ func (o *VSUserAccount) SetBillingIdentifier(billingIdentifier *foundation.NSStr
 
 func (o *VSUserAccount) AuthenticationData() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelAuthenticationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -168,11 +182,12 @@ func (o *VSUserAccount) DeviceCategory() VSOriginatingDeviceCategory {
 
 func (o *VSUserAccount) AppleSubscription() *VSAppleSubscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSUserAccountSelAppleSubscription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSAppleSubscriptionFromID(_ret)
 }
 
 func (o *VSUserAccount) SetAppleSubscription(appleSubscription *VSAppleSubscription) {
 	o.Ptr().Send(_vSUserAccountSelSetAppleSubscription, appleSubscription.Ptr())
 }
-

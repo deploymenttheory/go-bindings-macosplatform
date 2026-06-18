@@ -16,7 +16,7 @@ type CBAttribute struct {
 }
 
 var (
-	_clsCBAttribute = _objcClass("CBAttribute")
+	_clsCBAttribute     = _objcClass("CBAttribute")
 	_cBAttributeSelUUID = objc.RegisterName("UUID")
 )
 
@@ -32,7 +32,8 @@ func CBAttributeFromID(id objc.ID) *CBAttribute {
 
 func (o *CBAttribute) UUID() *CBUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBAttributeSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBUUIDFromID(_ret)
 }
-

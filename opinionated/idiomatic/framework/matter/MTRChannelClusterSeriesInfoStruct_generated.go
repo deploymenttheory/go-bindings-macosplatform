@@ -17,7 +17,9 @@ type MTRChannelClusterSeriesInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterSeriesInfoStruct].
-func (x *MTRChannelClusterSeriesInfoStruct) Unwrap() *raw.MTRChannelClusterSeriesInfoStruct { return x.inner }
+func (x *MTRChannelClusterSeriesInfoStruct) Unwrap() *raw.MTRChannelClusterSeriesInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,4 +91,3 @@ type MTRChannelClusterSeriesInfoStructable interface {
 }
 
 var _ MTRChannelClusterSeriesInfoStructable = (*MTRChannelClusterSeriesInfoStruct)(nil)
-

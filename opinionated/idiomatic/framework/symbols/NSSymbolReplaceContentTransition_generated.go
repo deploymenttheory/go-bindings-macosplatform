@@ -15,7 +15,9 @@ type SymbolReplaceContentTransition struct {
 }
 
 // Unwrap returns the underlying [raw.NSSymbolReplaceContentTransition].
-func (x *SymbolReplaceContentTransition) Unwrap() *raw.NSSymbolReplaceContentTransition { return x.inner }
+func (x *SymbolReplaceContentTransition) Unwrap() *raw.NSSymbolReplaceContentTransition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -53,7 +55,9 @@ func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolRepl
 	return &SymbolReplaceContentTransition{inner: _r}
 }
 
-func (x *SymbolReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
+func (x *SymbolReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
+	return &x.inner.NSSymbolContentTransition
+}
 
 // SymbolReplaceContentTransitionable is the interface implemented by [SymbolReplaceContentTransition], for mocking and DI.
 type SymbolReplaceContentTransitionable interface {
@@ -63,4 +67,3 @@ type SymbolReplaceContentTransitionable interface {
 }
 
 var _ SymbolReplaceContentTransitionable = (*SymbolReplaceContentTransition)(nil)
-

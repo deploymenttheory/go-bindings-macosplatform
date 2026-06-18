@@ -18,23 +18,23 @@ type AVAudioFile struct {
 }
 
 var (
-	_clsAVAudioFile = _objcClass("AVAudioFile")
-	_aVAudioFileSelInit = objc.RegisterName("init")
-	_aVAudioFileSelInitForReadingError = objc.RegisterName("initForReading:error:")
-	_aVAudioFileSelInitForReadingCommonFormatInterleavedError = objc.RegisterName("initForReading:commonFormat:interleaved:error:")
-	_aVAudioFileSelInitForWritingSettingsError = objc.RegisterName("initForWriting:settings:error:")
+	_clsAVAudioFile                                                   = _objcClass("AVAudioFile")
+	_aVAudioFileSelInit                                               = objc.RegisterName("init")
+	_aVAudioFileSelInitForReadingError                                = objc.RegisterName("initForReading:error:")
+	_aVAudioFileSelInitForReadingCommonFormatInterleavedError         = objc.RegisterName("initForReading:commonFormat:interleaved:error:")
+	_aVAudioFileSelInitForWritingSettingsError                        = objc.RegisterName("initForWriting:settings:error:")
 	_aVAudioFileSelInitForWritingSettingsCommonFormatInterleavedError = objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:")
-	_aVAudioFileSelClose = objc.RegisterName("close")
-	_aVAudioFileSelReadIntoBufferError = objc.RegisterName("readIntoBuffer:error:")
-	_aVAudioFileSelReadIntoBufferFrameCountError = objc.RegisterName("readIntoBuffer:frameCount:error:")
-	_aVAudioFileSelWriteFromBufferError = objc.RegisterName("writeFromBuffer:error:")
-	_aVAudioFileSelIsOpen = objc.RegisterName("isOpen")
-	_aVAudioFileSelUrl = objc.RegisterName("url")
-	_aVAudioFileSelFileFormat = objc.RegisterName("fileFormat")
-	_aVAudioFileSelProcessingFormat = objc.RegisterName("processingFormat")
-	_aVAudioFileSelLength = objc.RegisterName("length")
-	_aVAudioFileSelFramePosition = objc.RegisterName("framePosition")
-	_aVAudioFileSelSetFramePosition = objc.RegisterName("setFramePosition:")
+	_aVAudioFileSelClose                                              = objc.RegisterName("close")
+	_aVAudioFileSelReadIntoBufferError                                = objc.RegisterName("readIntoBuffer:error:")
+	_aVAudioFileSelReadIntoBufferFrameCountError                      = objc.RegisterName("readIntoBuffer:frameCount:error:")
+	_aVAudioFileSelWriteFromBufferError                               = objc.RegisterName("writeFromBuffer:error:")
+	_aVAudioFileSelIsOpen                                             = objc.RegisterName("isOpen")
+	_aVAudioFileSelUrl                                                = objc.RegisterName("url")
+	_aVAudioFileSelFileFormat                                         = objc.RegisterName("fileFormat")
+	_aVAudioFileSelProcessingFormat                                   = objc.RegisterName("processingFormat")
+	_aVAudioFileSelLength                                             = objc.RegisterName("length")
+	_aVAudioFileSelFramePosition                                      = objc.RegisterName("framePosition")
+	_aVAudioFileSelSetFramePosition                                   = objc.RegisterName("setFramePosition:")
 )
 
 func AVAudioFileFromID(id objc.ID) *AVAudioFile {
@@ -50,7 +50,9 @@ func AVAudioFileFromID(id objc.ID) *AVAudioFile {
 // Deprecated: Deprecated - use initForReading or initForWriting
 func (o *AVAudioFile) Init() *AVAudioFile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFileFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *AVAudioFile) Init() *AVAudioFile {
 func (o *AVAudioFile) InitForReadingError(fileURL *foundation.NSURL) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingError, fileURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -69,7 +73,9 @@ func (o *AVAudioFile) InitForReadingError(fileURL *foundation.NSURL) (*AVAudioFi
 func (o *AVAudioFile) InitForReadingCommonFormatInterleavedError(fileURL *foundation.NSURL, format AVAudioCommonFormat, interleaved bool) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForReadingCommonFormatInterleavedError, fileURL.Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -80,7 +86,9 @@ func (o *AVAudioFile) InitForReadingCommonFormatInterleavedError(fileURL *founda
 func (o *AVAudioFile) InitForWritingSettingsError(fileURL *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsError, fileURL.Ptr(), settings, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -91,7 +99,9 @@ func (o *AVAudioFile) InitForWritingSettingsError(fileURL *foundation.NSURL, set
 func (o *AVAudioFile) InitForWritingSettingsCommonFormatInterleavedError(fileURL *foundation.NSURL, settings *foundation.NSDictionary[*foundation.NSString, objc.ID], format AVAudioCommonFormat, interleaved bool) (*AVAudioFile, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelInitForWritingSettingsCommonFormatInterleavedError, fileURL.Ptr(), settings, format, interleaved, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -142,21 +152,27 @@ func (o *AVAudioFile) IsOpen() bool {
 // @property url @abstract The URL the file is reading or writing.
 func (o *AVAudioFile) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property fileFormat @abstract The on-disk format of the file.
 func (o *AVAudioFile) FileFormat() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelFileFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
 // @property processingFormat @abstract The processing format of the file.
 func (o *AVAudioFile) ProcessingFormat() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioFileSelProcessingFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -175,4 +191,3 @@ func (o *AVAudioFile) FramePosition() int64 {
 func (o *AVAudioFile) SetFramePosition(framePosition int64) {
 	o.Ptr().Send(_aVAudioFileSelSetFramePosition, framePosition)
 }
-

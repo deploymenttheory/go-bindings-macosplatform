@@ -390,4 +390,3 @@ type LibMediaItemable interface {
 }
 
 var _ LibMediaItemable = (*LibMediaItem)(nil)
-

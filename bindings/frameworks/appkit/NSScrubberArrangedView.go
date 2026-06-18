@@ -15,12 +15,12 @@ type NSScrubberArrangedView struct {
 }
 
 var (
-	_clsNSScrubberArrangedView = _objcClass("NSScrubberArrangedView")
+	_clsNSScrubberArrangedView                      = _objcClass("NSScrubberArrangedView")
 	_nSScrubberArrangedViewSelApplyLayoutAttributes = objc.RegisterName("applyLayoutAttributes:")
-	_nSScrubberArrangedViewSelIsSelected = objc.RegisterName("isSelected")
-	_nSScrubberArrangedViewSelSetSelected = objc.RegisterName("setSelected:")
-	_nSScrubberArrangedViewSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_nSScrubberArrangedViewSelSetHighlighted = objc.RegisterName("setHighlighted:")
+	_nSScrubberArrangedViewSelIsSelected            = objc.RegisterName("isSelected")
+	_nSScrubberArrangedViewSelSetSelected           = objc.RegisterName("setSelected:")
+	_nSScrubberArrangedViewSelIsHighlighted         = objc.RegisterName("isHighlighted")
+	_nSScrubberArrangedViewSelSetHighlighted        = objc.RegisterName("setHighlighted:")
 )
 
 func NSScrubberArrangedViewFromID(id objc.ID) *NSScrubberArrangedView {
@@ -54,4 +54,3 @@ func (o *NSScrubberArrangedView) IsHighlighted() bool {
 func (o *NSScrubberArrangedView) SetHighlighted(highlighted bool) {
 	o.Ptr().Send(_nSScrubberArrangedViewSelSetHighlighted, highlighted)
 }
-

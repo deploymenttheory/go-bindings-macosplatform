@@ -74,4 +74,3 @@ type Samplerable interface {
 }
 
 var _ Samplerable = (*Sampler)(nil)
-

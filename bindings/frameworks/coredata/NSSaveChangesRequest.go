@@ -16,12 +16,12 @@ type NSSaveChangesRequest struct {
 }
 
 var (
-	_clsNSSaveChangesRequest = _objcClass("NSSaveChangesRequest")
+	_clsNSSaveChangesRequest                                                                 = _objcClass("NSSaveChangesRequest")
 	_nSSaveChangesRequestSelInitWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects = objc.RegisterName("initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:")
-	_nSSaveChangesRequestSelInsertedObjects = objc.RegisterName("insertedObjects")
-	_nSSaveChangesRequestSelUpdatedObjects = objc.RegisterName("updatedObjects")
-	_nSSaveChangesRequestSelDeletedObjects = objc.RegisterName("deletedObjects")
-	_nSSaveChangesRequestSelLockedObjects = objc.RegisterName("lockedObjects")
+	_nSSaveChangesRequestSelInsertedObjects                                                  = objc.RegisterName("insertedObjects")
+	_nSSaveChangesRequestSelUpdatedObjects                                                   = objc.RegisterName("updatedObjects")
+	_nSSaveChangesRequestSelDeletedObjects                                                   = objc.RegisterName("deletedObjects")
+	_nSSaveChangesRequestSelLockedObjects                                                    = objc.RegisterName("lockedObjects")
 )
 
 func NSSaveChangesRequestFromID(id objc.ID) *NSSaveChangesRequest {
@@ -36,31 +36,40 @@ func NSSaveChangesRequestFromID(id objc.ID) *NSSaveChangesRequest {
 
 func (o *NSSaveChangesRequest) InitWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects *foundation.NSSet[*NSManagedObject], updatedObjects *foundation.NSSet[*NSManagedObject], deletedObjects *foundation.NSSet[*NSManagedObject], lockedObjects *foundation.NSSet[*NSManagedObject]) *NSSaveChangesRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelInitWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects, insertedObjects.Ptr(), updatedObjects.Ptr(), deletedObjects.Ptr(), lockedObjects.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSaveChangesRequestFromID(_ret)
 }
 
 func (o *NSSaveChangesRequest) InsertedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelInsertedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSSaveChangesRequest) UpdatedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelUpdatedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSSaveChangesRequest) DeletedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelDeletedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
 
 func (o *NSSaveChangesRequest) LockedObjects() *foundation.NSSet[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSaveChangesRequestSelLockedObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*NSManagedObject](_ret)
 }
-

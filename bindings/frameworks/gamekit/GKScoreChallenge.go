@@ -16,8 +16,8 @@ type GKScoreChallenge struct {
 }
 
 var (
-	_clsGKScoreChallenge = _objcClass("GKScoreChallenge")
-	_gKScoreChallengeSelScore = objc.RegisterName("score")
+	_clsGKScoreChallenge                 = _objcClass("GKScoreChallenge")
+	_gKScoreChallengeSelScore            = objc.RegisterName("score")
 	_gKScoreChallengeSelLeaderboardEntry = objc.RegisterName("leaderboardEntry")
 )
 
@@ -35,14 +35,17 @@ func GKScoreChallengeFromID(id objc.ID) *GKScoreChallenge {
 // Deprecated: since macOS 14.4.
 func (o *GKScoreChallenge) Score() *GKScore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreChallengeSelScore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKScoreFromID(_ret)
 }
 
 // The leaderboard entry to meet to satisfy this challenge
 func (o *GKScoreChallenge) LeaderboardEntry() *GKLeaderboardEntry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKScoreChallengeSelLeaderboardEntry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLeaderboardEntryFromID(_ret)
 }
-

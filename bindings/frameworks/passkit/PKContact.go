@@ -17,16 +17,16 @@ type PKContact struct {
 }
 
 var (
-	_clsPKContact = _objcClass("PKContact")
-	_pKContactSelName = objc.RegisterName("name")
-	_pKContactSelSetName = objc.RegisterName("setName:")
-	_pKContactSelPostalAddress = objc.RegisterName("postalAddress")
-	_pKContactSelSetPostalAddress = objc.RegisterName("setPostalAddress:")
-	_pKContactSelPhoneNumber = objc.RegisterName("phoneNumber")
-	_pKContactSelSetPhoneNumber = objc.RegisterName("setPhoneNumber:")
-	_pKContactSelEmailAddress = objc.RegisterName("emailAddress")
-	_pKContactSelSetEmailAddress = objc.RegisterName("setEmailAddress:")
-	_pKContactSelSupplementarySubLocality = objc.RegisterName("supplementarySubLocality")
+	_clsPKContact                            = _objcClass("PKContact")
+	_pKContactSelName                        = objc.RegisterName("name")
+	_pKContactSelSetName                     = objc.RegisterName("setName:")
+	_pKContactSelPostalAddress               = objc.RegisterName("postalAddress")
+	_pKContactSelSetPostalAddress            = objc.RegisterName("setPostalAddress:")
+	_pKContactSelPhoneNumber                 = objc.RegisterName("phoneNumber")
+	_pKContactSelSetPhoneNumber              = objc.RegisterName("setPhoneNumber:")
+	_pKContactSelEmailAddress                = objc.RegisterName("emailAddress")
+	_pKContactSelSetEmailAddress             = objc.RegisterName("setEmailAddress:")
+	_pKContactSelSupplementarySubLocality    = objc.RegisterName("supplementarySubLocality")
 	_pKContactSelSetSupplementarySubLocality = objc.RegisterName("setSupplementarySubLocality:")
 )
 
@@ -42,7 +42,9 @@ func PKContactFromID(id objc.ID) *PKContact {
 
 func (o *PKContact) Name() *foundation.NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKContactSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPersonNameComponentsFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *PKContact) SetName(name *foundation.NSPersonNameComponents) {
 
 func (o *PKContact) PostalAddress() *contacts.CNPostalAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKContactSelPostalAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return contacts.CNPostalAddressFromID(_ret)
 }
 
@@ -62,7 +66,9 @@ func (o *PKContact) SetPostalAddress(postalAddress *contacts.CNPostalAddress) {
 
 func (o *PKContact) PhoneNumber() *contacts.CNPhoneNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKContactSelPhoneNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return contacts.CNPhoneNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *PKContact) SetPhoneNumber(phoneNumber *contacts.CNPhoneNumber) {
 
 func (o *PKContact) EmailAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKContactSelEmailAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,11 +90,12 @@ func (o *PKContact) SetEmailAddress(emailAddress *foundation.NSString) {
 
 func (o *PKContact) SupplementarySubLocality() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKContactSelSupplementarySubLocality)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKContact) SetSupplementarySubLocality(supplementarySubLocality *foundation.NSString) {
 	o.Ptr().Send(_pKContactSelSetSupplementarySubLocality, supplementarySubLocality.Ptr())
 }
-

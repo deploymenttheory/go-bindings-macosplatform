@@ -69,4 +69,3 @@ type SGDOptimizerable interface {
 }
 
 var _ SGDOptimizerable = (*SGDOptimizer)(nil)
-

@@ -18,7 +18,7 @@ type HKStatisticsQuery struct {
 }
 
 var (
-	_clsHKStatisticsQuery = _objcClass("HKStatisticsQuery")
+	_clsHKStatisticsQuery                                                                    = _objcClass("HKStatisticsQuery")
 	_hKStatisticsQuerySelInitWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler = objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:completionHandler:")
 )
 
@@ -47,7 +47,8 @@ func (o *HKStatisticsQuery) InitWithQuantityTypeQuantitySamplePredicateOptionsCo
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsQuerySelInitWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler, quantityType.Ptr(), quantitySamplePredicate.Ptr(), options, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStatisticsQueryFromID(_ret)
 }
-

@@ -18,24 +18,24 @@ type SKVideoNode struct {
 }
 
 var (
-	_clsSKVideoNode = _objcClass("SKVideoNode")
-	_sKVideoNodeSelVideoNodeWithAVPlayer = objc.RegisterName("videoNodeWithAVPlayer:")
+	_clsSKVideoNode                            = _objcClass("SKVideoNode")
+	_sKVideoNodeSelVideoNodeWithAVPlayer       = objc.RegisterName("videoNodeWithAVPlayer:")
 	_sKVideoNodeSelVideoNodeWithVideoFileNamed = objc.RegisterName("videoNodeWithVideoFileNamed:")
-	_sKVideoNodeSelVideoNodeWithFileNamed = objc.RegisterName("videoNodeWithFileNamed:")
-	_sKVideoNodeSelVideoNodeWithVideoURL = objc.RegisterName("videoNodeWithVideoURL:")
-	_sKVideoNodeSelVideoNodeWithURL = objc.RegisterName("videoNodeWithURL:")
-	_sKVideoNodeSelInitWithAVPlayer = objc.RegisterName("initWithAVPlayer:")
-	_sKVideoNodeSelInitWithVideoFileNamed = objc.RegisterName("initWithVideoFileNamed:")
-	_sKVideoNodeSelInitWithFileNamed = objc.RegisterName("initWithFileNamed:")
-	_sKVideoNodeSelInitWithVideoURL = objc.RegisterName("initWithVideoURL:")
-	_sKVideoNodeSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sKVideoNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKVideoNodeSelPlay = objc.RegisterName("play")
-	_sKVideoNodeSelPause = objc.RegisterName("pause")
-	_sKVideoNodeSelSize = objc.RegisterName("size")
-	_sKVideoNodeSelSetSize = objc.RegisterName("setSize:")
-	_sKVideoNodeSelAnchorPoint = objc.RegisterName("anchorPoint")
-	_sKVideoNodeSelSetAnchorPoint = objc.RegisterName("setAnchorPoint:")
+	_sKVideoNodeSelVideoNodeWithFileNamed      = objc.RegisterName("videoNodeWithFileNamed:")
+	_sKVideoNodeSelVideoNodeWithVideoURL       = objc.RegisterName("videoNodeWithVideoURL:")
+	_sKVideoNodeSelVideoNodeWithURL            = objc.RegisterName("videoNodeWithURL:")
+	_sKVideoNodeSelInitWithAVPlayer            = objc.RegisterName("initWithAVPlayer:")
+	_sKVideoNodeSelInitWithVideoFileNamed      = objc.RegisterName("initWithVideoFileNamed:")
+	_sKVideoNodeSelInitWithFileNamed           = objc.RegisterName("initWithFileNamed:")
+	_sKVideoNodeSelInitWithVideoURL            = objc.RegisterName("initWithVideoURL:")
+	_sKVideoNodeSelInitWithURL                 = objc.RegisterName("initWithURL:")
+	_sKVideoNodeSelInitWithCoder               = objc.RegisterName("initWithCoder:")
+	_sKVideoNodeSelPlay                        = objc.RegisterName("play")
+	_sKVideoNodeSelPause                       = objc.RegisterName("pause")
+	_sKVideoNodeSelSize                        = objc.RegisterName("size")
+	_sKVideoNodeSelSetSize                     = objc.RegisterName("setSize:")
+	_sKVideoNodeSelAnchorPoint                 = objc.RegisterName("anchorPoint")
+	_sKVideoNodeSelSetAnchorPoint              = objc.RegisterName("setAnchorPoint:")
 )
 
 func SKVideoNodeFromID(id objc.ID) *SKVideoNode {
@@ -51,7 +51,9 @@ func SKVideoNodeFromID(id objc.ID) *SKVideoNode {
 // Create a video node from an AVPlayer. You can use the AVPlayer to control playback.
 func SKVideoNodeVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithAVPlayer, player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
@@ -59,13 +61,17 @@ func SKVideoNodeVideoNodeWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNod
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoFileNamed, videoFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 func SKVideoNodeVideoNodeWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithFileNamed, videoFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
@@ -73,20 +79,26 @@ func SKVideoNodeVideoNodeWithFileNamed(videoFile *foundation.NSString) *SKVideoN
 // Deprecated: since macOS 10.11.
 func SKVideoNodeVideoNodeWithVideoURL(videoURL *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithVideoURL, videoURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 func SKVideoNodeVideoNodeWithURL(videoURL *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKVideoNode), _sKVideoNodeSelVideoNodeWithURL, videoURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 // Designated Initializer. Initialize a video node from an AVPlayer. You can use the AVPlayer to control playback.
 func (o *SKVideoNode) InitWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithAVPlayer, player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
@@ -94,33 +106,43 @@ func (o *SKVideoNode) InitWithAVPlayer(player *avfoundation.AVPlayer) *SKVideoNo
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoFileNamed, videoFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 func (o *SKVideoNode) InitWithFileNamed(videoFile *foundation.NSString) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithFileNamed, videoFile.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *SKVideoNode) InitWithVideoURL(url *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithVideoURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 func (o *SKVideoNode) InitWithURL(url *foundation.NSURL) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
 // Support coding and decoding via NSKeyedArchiver.
 func (o *SKVideoNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKVideoNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKVideoNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKVideoNodeFromID(_ret)
 }
 
@@ -151,4 +173,3 @@ func (o *SKVideoNode) AnchorPoint() corefoundation.CGPoint {
 func (o *SKVideoNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
 	o.Ptr().Send(_sKVideoNodeSelSetAnchorPoint, anchorPoint)
 }
-

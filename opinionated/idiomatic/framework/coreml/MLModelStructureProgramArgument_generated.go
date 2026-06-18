@@ -54,4 +54,3 @@ type ModelStructureProgramArgumentable interface {
 }
 
 var _ ModelStructureProgramArgumentable = (*ModelStructureProgramArgument)(nil)
-

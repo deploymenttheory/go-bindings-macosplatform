@@ -15,7 +15,7 @@ type VZUSBScreenCoordinatePointingDeviceConfiguration struct {
 }
 
 var (
-	_clsVZUSBScreenCoordinatePointingDeviceConfiguration = _objcClass("VZUSBScreenCoordinatePointingDeviceConfiguration")
+	_clsVZUSBScreenCoordinatePointingDeviceConfiguration     = _objcClass("VZUSBScreenCoordinatePointingDeviceConfiguration")
 	_vZUSBScreenCoordinatePointingDeviceConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZUSBScreenCoordinatePointingDeviceConfigurationFromID(id objc.ID) *VZUSBSc
 
 func (o *VZUSBScreenCoordinatePointingDeviceConfiguration) Init() *VZUSBScreenCoordinatePointingDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBScreenCoordinatePointingDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZUSBScreenCoordinatePointingDeviceConfigurationFromID(_ret)
 }
-

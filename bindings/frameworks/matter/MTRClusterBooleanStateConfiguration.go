@@ -18,25 +18,25 @@ type MTRClusterBooleanStateConfiguration struct {
 }
 
 var (
-	_clsMTRClusterBooleanStateConfiguration = _objcClass("MTRClusterBooleanStateConfiguration")
-	_mTRClusterBooleanStateConfigurationSelSuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("suppressAlarmWithParams:expectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterBooleanStateConfiguration                                                                          = _objcClass("MTRClusterBooleanStateConfiguration")
+	_mTRClusterBooleanStateConfigurationSelSuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion      = objc.RegisterName("suppressAlarmWithParams:expectedValues:expectedValueInterval:completion:")
 	_mTRClusterBooleanStateConfigurationSelEnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("enableDisableAlarmWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeCurrentSensitivityLevelWithParams = objc.RegisterName("readAttributeCurrentSensitivityLevelWithParams:")
-	_mTRClusterBooleanStateConfigurationSelWriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeCurrentSensitivityLevelWithParams                            = objc.RegisterName("readAttributeCurrentSensitivityLevelWithParams:")
+	_mTRClusterBooleanStateConfigurationSelWriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:")
 	_mTRClusterBooleanStateConfigurationSelWriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:params:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeSupportedSensitivityLevelsWithParams = objc.RegisterName("readAttributeSupportedSensitivityLevelsWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeDefaultSensitivityLevelWithParams = objc.RegisterName("readAttributeDefaultSensitivityLevelWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsActiveWithParams = objc.RegisterName("readAttributeAlarmsActiveWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsSuppressedWithParams = objc.RegisterName("readAttributeAlarmsSuppressedWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsEnabledWithParams = objc.RegisterName("readAttributeAlarmsEnabledWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsSupportedWithParams = objc.RegisterName("readAttributeAlarmsSupportedWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeSensorFaultWithParams = objc.RegisterName("readAttributeSensorFaultWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBooleanStateConfigurationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBooleanStateConfigurationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeSupportedSensitivityLevelsWithParams                         = objc.RegisterName("readAttributeSupportedSensitivityLevelsWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeDefaultSensitivityLevelWithParams                            = objc.RegisterName("readAttributeDefaultSensitivityLevelWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsActiveWithParams                                       = objc.RegisterName("readAttributeAlarmsActiveWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsSuppressedWithParams                                   = objc.RegisterName("readAttributeAlarmsSuppressedWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsEnabledWithParams                                      = objc.RegisterName("readAttributeAlarmsEnabledWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAlarmsSupportedWithParams                                    = objc.RegisterName("readAttributeAlarmsSupportedWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeSensorFaultWithParams                                        = objc.RegisterName("readAttributeSensorFaultWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeGeneratedCommandListWithParams                               = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAcceptedCommandListWithParams                                = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeAttributeListWithParams                                      = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeFeatureMapWithParams                                         = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBooleanStateConfigurationSelReadAttributeClusterRevisionWithParams                                    = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBooleanStateConfigurationSelInitWithDeviceEndpointIDQueue                                             = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterBooleanStateConfigurationFromID(id objc.ID) *MTRClusterBooleanStateConfiguration {
@@ -147,7 +147,8 @@ func (o *MTRClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithPa
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterBooleanStateConfiguration) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBooleanStateConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBooleanStateConfigurationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBooleanStateConfigurationFromID(_ret)
 }
-

@@ -15,25 +15,25 @@ type MTL4InstanceAccelerationStructureDescriptor struct {
 }
 
 var (
-	_clsMTL4InstanceAccelerationStructureDescriptor = _objcClass("MTL4InstanceAccelerationStructureDescriptor")
-	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorBuffer = objc.RegisterName("instanceDescriptorBuffer")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBuffer = objc.RegisterName("setInstanceDescriptorBuffer:")
-	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorStride = objc.RegisterName("instanceDescriptorStride")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorStride = objc.RegisterName("setInstanceDescriptorStride:")
-	_mTL4InstanceAccelerationStructureDescriptorSelInstanceCount = objc.RegisterName("instanceCount")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceCount = objc.RegisterName("setInstanceCount:")
-	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorType = objc.RegisterName("instanceDescriptorType")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorType = objc.RegisterName("setInstanceDescriptorType:")
-	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformBuffer = objc.RegisterName("motionTransformBuffer")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformBuffer = objc.RegisterName("setMotionTransformBuffer:")
-	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformCount = objc.RegisterName("motionTransformCount")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformCount = objc.RegisterName("setMotionTransformCount:")
-	_mTL4InstanceAccelerationStructureDescriptorSelInstanceTransformationMatrixLayout = objc.RegisterName("instanceTransformationMatrixLayout")
+	_clsMTL4InstanceAccelerationStructureDescriptor                                      = _objcClass("MTL4InstanceAccelerationStructureDescriptor")
+	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorBuffer              = objc.RegisterName("instanceDescriptorBuffer")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorBuffer           = objc.RegisterName("setInstanceDescriptorBuffer:")
+	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorStride              = objc.RegisterName("instanceDescriptorStride")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorStride           = objc.RegisterName("setInstanceDescriptorStride:")
+	_mTL4InstanceAccelerationStructureDescriptorSelInstanceCount                         = objc.RegisterName("instanceCount")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceCount                      = objc.RegisterName("setInstanceCount:")
+	_mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorType                = objc.RegisterName("instanceDescriptorType")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceDescriptorType             = objc.RegisterName("setInstanceDescriptorType:")
+	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformBuffer                 = objc.RegisterName("motionTransformBuffer")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformBuffer              = objc.RegisterName("setMotionTransformBuffer:")
+	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformCount                  = objc.RegisterName("motionTransformCount")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformCount               = objc.RegisterName("setMotionTransformCount:")
+	_mTL4InstanceAccelerationStructureDescriptorSelInstanceTransformationMatrixLayout    = objc.RegisterName("instanceTransformationMatrixLayout")
 	_mTL4InstanceAccelerationStructureDescriptorSelSetInstanceTransformationMatrixLayout = objc.RegisterName("setInstanceTransformationMatrixLayout:")
-	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformType = objc.RegisterName("motionTransformType")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformType = objc.RegisterName("setMotionTransformType:")
-	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformStride = objc.RegisterName("motionTransformStride")
-	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformStride = objc.RegisterName("setMotionTransformStride:")
+	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformType                   = objc.RegisterName("motionTransformType")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformType                = objc.RegisterName("setMotionTransformType:")
+	_mTL4InstanceAccelerationStructureDescriptorSelMotionTransformStride                 = objc.RegisterName("motionTransformStride")
+	_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformStride              = objc.RegisterName("setMotionTransformStride:")
 )
 
 func MTL4InstanceAccelerationStructureDescriptorFromID(id objc.ID) *MTL4InstanceAccelerationStructureDescriptor {
@@ -46,7 +46,7 @@ func MTL4InstanceAccelerationStructureDescriptorFromID(id objc.ID) *MTL4Instance
 	return o
 }
 
-// Assigns a reference to a buffer containing instance descriptors for acceleration structures to reference. This buffer conceptually represents an array of instance data. The specific format for the structs that comprise each entry depends on the value of the  ``instanceDescriptorType`` property. You are responsible for ensuring the buffer address the range contains is not zero.
+// Assigns a reference to a buffer containing instance descriptors for acceleration structures to reference. This buffer conceptually represents an array of instance data. The specific format for the structs that comprise each entry depends on the value of the  “instanceDescriptorType“ property. You are responsible for ensuring the buffer address the range contains is not zero.
 func (o *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() MTL4BufferRange {
 	_ret := objc.Send[MTL4BufferRange](o.Ptr(), _mTL4InstanceAccelerationStructureDescriptorSelInstanceDescriptorBuffer)
 	return _ret
@@ -106,7 +106,7 @@ func (o *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformCount(mo
 	o.Ptr().Send(_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformCount, motionTransformCount)
 }
 
-// Specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both ``instanceDescriptorBuffer`` and ``motionTransformBuffer`` reference. Defaults to `MTLMatrixLayoutColumnMajor`.
+// Specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both “instanceDescriptorBuffer“ and “motionTransformBuffer“ reference. Defaults to `MTLMatrixLayoutColumnMajor`.
 func (o *MTL4InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MTLMatrixLayout {
 	_ret := objc.Send[MTLMatrixLayout](o.Ptr(), _mTL4InstanceAccelerationStructureDescriptorSelInstanceTransformationMatrixLayout)
 	return _ret
@@ -135,4 +135,3 @@ func (o *MTL4InstanceAccelerationStructureDescriptor) MotionTransformStride() ui
 func (o *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride uint) {
 	o.Ptr().Send(_mTL4InstanceAccelerationStructureDescriptorSelSetMotionTransformStride, motionTransformStride)
 }
-

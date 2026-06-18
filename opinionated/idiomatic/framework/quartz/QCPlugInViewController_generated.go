@@ -53,4 +53,3 @@ type QCPlugInViewControllerable interface {
 }
 
 var _ QCPlugInViewControllerable = (*QCPlugInViewController)(nil)
-

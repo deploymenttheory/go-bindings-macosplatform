@@ -64,4 +64,3 @@ type TextAlternativesable interface {
 }
 
 var _ TextAlternativesable = (*TextAlternatives)(nil)
-

@@ -179,13 +179,21 @@ func (x *CNNFullyConnectedGradient) WithLabel(label string) *CNNFullyConnectedGr
 	return x
 }
 
-func (x *CNNFullyConnectedGradient) asCNNConvolutionGradient() *mpsneuralnetwork.MPSCNNConvolutionGradient { return &x.inner.MPSCNNConvolutionGradient }
+func (x *CNNFullyConnectedGradient) asCNNConvolutionGradient() *mpsneuralnetwork.MPSCNNConvolutionGradient {
+	return &x.inner.MPSCNNConvolutionGradient
+}
 
-func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel }
+func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNFullyConnectedGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNFullyConnectedGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNFullyConnectedGradientable is the interface implemented by [CNNFullyConnectedGradient], for mocking and DI.
 type CNNFullyConnectedGradientable interface {
@@ -215,4 +223,3 @@ type CNNFullyConnectedGradientable interface {
 }
 
 var _ CNNFullyConnectedGradientable = (*CNNFullyConnectedGradient)(nil)
-

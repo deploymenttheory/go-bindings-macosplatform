@@ -17,13 +17,13 @@ type MDLAreaLight struct {
 }
 
 var (
-	_clsMDLAreaLight = _objcClass("MDLAreaLight")
-	_mDLAreaLightSelAreaRadius = objc.RegisterName("areaRadius")
-	_mDLAreaLightSelSetAreaRadius = objc.RegisterName("setAreaRadius:")
-	_mDLAreaLightSelSuperEllipticPower = objc.RegisterName("superEllipticPower")
+	_clsMDLAreaLight                      = _objcClass("MDLAreaLight")
+	_mDLAreaLightSelAreaRadius            = objc.RegisterName("areaRadius")
+	_mDLAreaLightSelSetAreaRadius         = objc.RegisterName("setAreaRadius:")
+	_mDLAreaLightSelSuperEllipticPower    = objc.RegisterName("superEllipticPower")
 	_mDLAreaLightSelSetSuperEllipticPower = objc.RegisterName("setSuperEllipticPower:")
-	_mDLAreaLightSelAspect = objc.RegisterName("aspect")
-	_mDLAreaLightSelSetAspect = objc.RegisterName("setAspect:")
+	_mDLAreaLightSelAspect                = objc.RegisterName("aspect")
+	_mDLAreaLightSelSetAspect             = objc.RegisterName("setAspect:")
 )
 
 func MDLAreaLightFromID(id objc.ID) *MDLAreaLight {
@@ -62,4 +62,3 @@ func (o *MDLAreaLight) Aspect() float32 {
 func (o *MDLAreaLight) SetAspect(aspect float32) {
 	o.Ptr().Send(_mDLAreaLightSelSetAspect, aspect)
 }
-

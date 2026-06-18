@@ -143,4 +143,3 @@ type SafariWindowable interface {
 }
 
 var _ SafariWindowable = (*SafariWindow)(nil)
-

@@ -8,104 +8,104 @@ import (
 )
 
 var (
-	_alBuffer3f func(uint, int, float32, float32, float32)
-	_alBuffer3i func(uint, int, int, int, int)
-	_alBufferData func(uint, int, unsafe.Pointer, int, int)
-	_alBufferf func(uint, int, float32)
-	_alBufferfv func(uint, int, *float32)
-	_alBufferi func(uint, int, int)
-	_alBufferiv func(uint, int, *int)
-	_alDeleteBuffers func(int, *uint)
-	_alDeleteSources func(int, *uint)
-	_alDisable func(int)
-	_alDistanceModel func(int)
-	_alDopplerFactor func(float32)
-	_alDopplerVelocity func(float32)
-	_alEnable func(int)
-	_alGenBuffers func(int, *uint)
-	_alGenSources func(int, *uint)
-	_alGetBoolean func(int) int8
-	_alGetBooleanv func(int, *int8)
-	_alGetBuffer3f func(uint, int, *float32, *float32, *float32)
-	_alGetBuffer3i func(uint, int, *int, *int, *int)
-	_alGetBufferf func(uint, int, *float32)
-	_alGetBufferfv func(uint, int, *float32)
-	_alGetBufferi func(uint, int, *int)
-	_alGetBufferiv func(uint, int, *int)
-	_alGetDouble func(int) float64
-	_alGetDoublev func(int, *float64)
-	_alGetEnumValue func(*int8) int
-	_alGetError func() int
-	_alGetFloat func(int) float32
-	_alGetFloatv func(int, *float32)
-	_alGetInteger func(int) int
-	_alGetIntegerv func(int, *int)
-	_alGetListener3f func(int, *float32, *float32, *float32)
-	_alGetListener3i func(int, *int, *int, *int)
-	_alGetListenerf func(int, *float32)
-	_alGetListenerfv func(int, *float32)
-	_alGetListeneri func(int, *int)
-	_alGetListeneriv func(int, *int)
-	_alGetProcAddress func(*int8) unsafe.Pointer
-	_alGetSource3f func(uint, int, *float32, *float32, *float32)
-	_alGetSource3i func(uint, int, *int, *int, *int)
-	_alGetSourcef func(uint, int, *float32)
-	_alGetSourcefv func(uint, int, *float32)
-	_alGetSourcei func(uint, int, *int)
-	_alGetSourceiv func(uint, int, *int)
-	_alGetString func(int) *int8
-	_alIsBuffer func(uint) int8
-	_alIsEnabled func(int) int8
-	_alIsExtensionPresent func(*int8) int8
-	_alIsSource func(uint) int8
-	_alListener3f func(int, float32, float32, float32)
-	_alListener3i func(int, int, int, int)
-	_alListenerf func(int, float32)
-	_alListenerfv func(int, *float32)
-	_alListeneri func(int, int)
-	_alListeneriv func(int, *int)
-	_alSource3f func(uint, int, float32, float32, float32)
-	_alSource3i func(uint, int, int, int, int)
-	_alSourcePause func(uint)
-	_alSourcePausev func(int, *uint)
-	_alSourcePlay func(uint)
-	_alSourcePlayv func(int, *uint)
-	_alSourceQueueBuffers func(uint, int, *uint)
-	_alSourceRewind func(uint)
-	_alSourceRewindv func(int, *uint)
-	_alSourceStop func(uint)
-	_alSourceStopv func(int, *uint)
+	_alBuffer3f             func(uint, int, float32, float32, float32)
+	_alBuffer3i             func(uint, int, int, int, int)
+	_alBufferData           func(uint, int, unsafe.Pointer, int, int)
+	_alBufferf              func(uint, int, float32)
+	_alBufferfv             func(uint, int, *float32)
+	_alBufferi              func(uint, int, int)
+	_alBufferiv             func(uint, int, *int)
+	_alDeleteBuffers        func(int, *uint)
+	_alDeleteSources        func(int, *uint)
+	_alDisable              func(int)
+	_alDistanceModel        func(int)
+	_alDopplerFactor        func(float32)
+	_alDopplerVelocity      func(float32)
+	_alEnable               func(int)
+	_alGenBuffers           func(int, *uint)
+	_alGenSources           func(int, *uint)
+	_alGetBoolean           func(int) int8
+	_alGetBooleanv          func(int, *int8)
+	_alGetBuffer3f          func(uint, int, *float32, *float32, *float32)
+	_alGetBuffer3i          func(uint, int, *int, *int, *int)
+	_alGetBufferf           func(uint, int, *float32)
+	_alGetBufferfv          func(uint, int, *float32)
+	_alGetBufferi           func(uint, int, *int)
+	_alGetBufferiv          func(uint, int, *int)
+	_alGetDouble            func(int) float64
+	_alGetDoublev           func(int, *float64)
+	_alGetEnumValue         func(*int8) int
+	_alGetError             func() int
+	_alGetFloat             func(int) float32
+	_alGetFloatv            func(int, *float32)
+	_alGetInteger           func(int) int
+	_alGetIntegerv          func(int, *int)
+	_alGetListener3f        func(int, *float32, *float32, *float32)
+	_alGetListener3i        func(int, *int, *int, *int)
+	_alGetListenerf         func(int, *float32)
+	_alGetListenerfv        func(int, *float32)
+	_alGetListeneri         func(int, *int)
+	_alGetListeneriv        func(int, *int)
+	_alGetProcAddress       func(*int8) unsafe.Pointer
+	_alGetSource3f          func(uint, int, *float32, *float32, *float32)
+	_alGetSource3i          func(uint, int, *int, *int, *int)
+	_alGetSourcef           func(uint, int, *float32)
+	_alGetSourcefv          func(uint, int, *float32)
+	_alGetSourcei           func(uint, int, *int)
+	_alGetSourceiv          func(uint, int, *int)
+	_alGetString            func(int) *int8
+	_alIsBuffer             func(uint) int8
+	_alIsEnabled            func(int) int8
+	_alIsExtensionPresent   func(*int8) int8
+	_alIsSource             func(uint) int8
+	_alListener3f           func(int, float32, float32, float32)
+	_alListener3i           func(int, int, int, int)
+	_alListenerf            func(int, float32)
+	_alListenerfv           func(int, *float32)
+	_alListeneri            func(int, int)
+	_alListeneriv           func(int, *int)
+	_alSource3f             func(uint, int, float32, float32, float32)
+	_alSource3i             func(uint, int, int, int, int)
+	_alSourcePause          func(uint)
+	_alSourcePausev         func(int, *uint)
+	_alSourcePlay           func(uint)
+	_alSourcePlayv          func(int, *uint)
+	_alSourceQueueBuffers   func(uint, int, *uint)
+	_alSourceRewind         func(uint)
+	_alSourceRewindv        func(int, *uint)
+	_alSourceStop           func(uint)
+	_alSourceStopv          func(int, *uint)
 	_alSourceUnqueueBuffers func(uint, int, *uint)
-	_alSourcef func(uint, int, float32)
-	_alSourcefv func(uint, int, *float32)
-	_alSourcei func(uint, int, int)
-	_alSourceiv func(uint, int, *int)
-	_alSpeedOfSound func(float32)
-	_alcCaptureCloseDevice func(unsafe.Pointer) int8
-	_alcCaptureOpenDevice func(*int8, uint, int, int) unsafe.Pointer
-	_alcCaptureSamples func(unsafe.Pointer, unsafe.Pointer, int)
-	_alcCaptureStart func(unsafe.Pointer)
-	_alcCaptureStop func(unsafe.Pointer)
-	_alcCloseDevice func(unsafe.Pointer) int8
-	_alcCreateContext func(unsafe.Pointer, *int) unsafe.Pointer
-	_alcDestroyContext func(unsafe.Pointer)
-	_alcGetContextsDevice func(unsafe.Pointer) unsafe.Pointer
-	_alcGetCurrentContext func() unsafe.Pointer
-	_alcGetEnumValue func(unsafe.Pointer, *int8) int
-	_alcGetError func(unsafe.Pointer) int
-	_alcGetIntegerv func(unsafe.Pointer, int, int, *int)
-	_alcGetProcAddress func(unsafe.Pointer, *int8) unsafe.Pointer
-	_alcGetString func(unsafe.Pointer, int) *int8
-	_alcIsExtensionPresent func(unsafe.Pointer, *int8) int8
-	_alcMakeContextCurrent func(unsafe.Pointer) int8
-	_alcOpenDevice func(*int8) unsafe.Pointer
-	_alcProcessContext func(unsafe.Pointer)
-	_alcSuspendContext func(unsafe.Pointer)
-	_alutExit func() unsafe.Pointer
-	_alutInit func(*int, *int8) unsafe.Pointer
-	_alutLoadWAVFile func(*int8, *int, unsafe.Pointer, *int, *int) unsafe.Pointer
-	_alutLoadWAVMemory func(*int8, *int, unsafe.Pointer, *int, *int) unsafe.Pointer
-	_alutUnloadWAV func(int, unsafe.Pointer, int, int) unsafe.Pointer
+	_alSourcef              func(uint, int, float32)
+	_alSourcefv             func(uint, int, *float32)
+	_alSourcei              func(uint, int, int)
+	_alSourceiv             func(uint, int, *int)
+	_alSpeedOfSound         func(float32)
+	_alcCaptureCloseDevice  func(unsafe.Pointer) int8
+	_alcCaptureOpenDevice   func(*int8, uint, int, int) unsafe.Pointer
+	_alcCaptureSamples      func(unsafe.Pointer, unsafe.Pointer, int)
+	_alcCaptureStart        func(unsafe.Pointer)
+	_alcCaptureStop         func(unsafe.Pointer)
+	_alcCloseDevice         func(unsafe.Pointer) int8
+	_alcCreateContext       func(unsafe.Pointer, *int) unsafe.Pointer
+	_alcDestroyContext      func(unsafe.Pointer)
+	_alcGetContextsDevice   func(unsafe.Pointer) unsafe.Pointer
+	_alcGetCurrentContext   func() unsafe.Pointer
+	_alcGetEnumValue        func(unsafe.Pointer, *int8) int
+	_alcGetError            func(unsafe.Pointer) int
+	_alcGetIntegerv         func(unsafe.Pointer, int, int, *int)
+	_alcGetProcAddress      func(unsafe.Pointer, *int8) unsafe.Pointer
+	_alcGetString           func(unsafe.Pointer, int) *int8
+	_alcIsExtensionPresent  func(unsafe.Pointer, *int8) int8
+	_alcMakeContextCurrent  func(unsafe.Pointer) int8
+	_alcOpenDevice          func(*int8) unsafe.Pointer
+	_alcProcessContext      func(unsafe.Pointer)
+	_alcSuspendContext      func(unsafe.Pointer)
+	_alutExit               func() unsafe.Pointer
+	_alutInit               func(*int, *int8) unsafe.Pointer
+	_alutLoadWAVFile        func(*int8, *int, unsafe.Pointer, *int, *int) unsafe.Pointer
+	_alutLoadWAVMemory      func(*int8, *int, unsafe.Pointer, *int, *int) unsafe.Pointer
+	_alutUnloadWAV          func(int, unsafe.Pointer, int, int) unsafe.Pointer
 )
 
 // C function: alBuffer3f
@@ -597,4 +597,3 @@ func AlutLoadWAVMemory(memory *int8, format *int, data unsafe.Pointer, size *int
 func AlutUnloadWAV(format int, data unsafe.Pointer, size int, freq int) unsafe.Pointer {
 	return _alutUnloadWAV(format, data, size, freq)
 }
-

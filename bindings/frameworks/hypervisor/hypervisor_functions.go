@@ -12,95 +12,95 @@ import (
 )
 
 var (
-	_hv_gic_config_create func() unsafe.Pointer
-	_hv_gic_config_set_distributor_base func(objc.ID, uint64) int
-	_hv_gic_config_set_msi_interrupt_range func(objc.ID, uint32, uint32) int
-	_hv_gic_config_set_msi_region_base func(objc.ID, uint64) int
-	_hv_gic_config_set_redistributor_base func(objc.ID, uint64) int
-	_hv_gic_create func(objc.ID) int
-	_hv_gic_get_distributor_base_alignment func(*uint) int
-	_hv_gic_get_distributor_reg func(Hv_gic_distributor_reg_t, *uint64) int
-	_hv_gic_get_distributor_size func(*uint) int
-	_hv_gic_get_icc_reg func(uint64, Hv_gic_icc_reg_t, *uint64) int
-	_hv_gic_get_ich_reg func(uint64, Hv_gic_ich_reg_t, *uint64) int
-	_hv_gic_get_icv_reg func(uint64, Hv_gic_icv_reg_t, *uint64) int
-	_hv_gic_get_intid func(Hv_gic_intid_t, *uint32) int
-	_hv_gic_get_msi_reg func(Hv_gic_msi_reg_t, *uint64) int
-	_hv_gic_get_msi_region_base_alignment func(*uint) int
-	_hv_gic_get_msi_region_size func(*uint) int
-	_hv_gic_get_redistributor_base func(uint64, *uint64) int
-	_hv_gic_get_redistributor_base_alignment func(*uint) int
-	_hv_gic_get_redistributor_reg func(uint64, Hv_gic_redistributor_reg_t, *uint64) int
-	_hv_gic_get_redistributor_region_size func(*uint) int
-	_hv_gic_get_redistributor_size func(*uint) int
-	_hv_gic_get_spi_interrupt_range func(*uint32, *uint32) int
-	_hv_gic_reset func() int
-	_hv_gic_send_msi func(uint64, uint32) int
-	_hv_gic_set_distributor_reg func(Hv_gic_distributor_reg_t, uint64) int
-	_hv_gic_set_icc_reg func(uint64, Hv_gic_icc_reg_t, uint64) int
-	_hv_gic_set_ich_reg func(uint64, Hv_gic_ich_reg_t, uint64) int
-	_hv_gic_set_icv_reg func(uint64, Hv_gic_icv_reg_t, uint64) int
-	_hv_gic_set_msi_reg func(Hv_gic_msi_reg_t, uint64) int
-	_hv_gic_set_redistributor_reg func(uint64, Hv_gic_redistributor_reg_t, uint64) int
-	_hv_gic_set_spi func(uint32, bool) int
-	_hv_gic_set_state func(unsafe.Pointer, uint) int
-	_hv_gic_state_create func() unsafe.Pointer
-	_hv_gic_state_get_data func(objc.ID, unsafe.Pointer) int
-	_hv_gic_state_get_size func(objc.ID, *uint) int
-	_hv_sme_config_get_max_svl_bytes func(*uint) int
-	_hv_vcpu_config_create func() unsafe.Pointer
+	_hv_gic_config_create                         func() unsafe.Pointer
+	_hv_gic_config_set_distributor_base           func(objc.ID, uint64) int
+	_hv_gic_config_set_msi_interrupt_range        func(objc.ID, uint32, uint32) int
+	_hv_gic_config_set_msi_region_base            func(objc.ID, uint64) int
+	_hv_gic_config_set_redistributor_base         func(objc.ID, uint64) int
+	_hv_gic_create                                func(objc.ID) int
+	_hv_gic_get_distributor_base_alignment        func(*uint) int
+	_hv_gic_get_distributor_reg                   func(Hv_gic_distributor_reg_t, *uint64) int
+	_hv_gic_get_distributor_size                  func(*uint) int
+	_hv_gic_get_icc_reg                           func(uint64, Hv_gic_icc_reg_t, *uint64) int
+	_hv_gic_get_ich_reg                           func(uint64, Hv_gic_ich_reg_t, *uint64) int
+	_hv_gic_get_icv_reg                           func(uint64, Hv_gic_icv_reg_t, *uint64) int
+	_hv_gic_get_intid                             func(Hv_gic_intid_t, *uint32) int
+	_hv_gic_get_msi_reg                           func(Hv_gic_msi_reg_t, *uint64) int
+	_hv_gic_get_msi_region_base_alignment         func(*uint) int
+	_hv_gic_get_msi_region_size                   func(*uint) int
+	_hv_gic_get_redistributor_base                func(uint64, *uint64) int
+	_hv_gic_get_redistributor_base_alignment      func(*uint) int
+	_hv_gic_get_redistributor_reg                 func(uint64, Hv_gic_redistributor_reg_t, *uint64) int
+	_hv_gic_get_redistributor_region_size         func(*uint) int
+	_hv_gic_get_redistributor_size                func(*uint) int
+	_hv_gic_get_spi_interrupt_range               func(*uint32, *uint32) int
+	_hv_gic_reset                                 func() int
+	_hv_gic_send_msi                              func(uint64, uint32) int
+	_hv_gic_set_distributor_reg                   func(Hv_gic_distributor_reg_t, uint64) int
+	_hv_gic_set_icc_reg                           func(uint64, Hv_gic_icc_reg_t, uint64) int
+	_hv_gic_set_ich_reg                           func(uint64, Hv_gic_ich_reg_t, uint64) int
+	_hv_gic_set_icv_reg                           func(uint64, Hv_gic_icv_reg_t, uint64) int
+	_hv_gic_set_msi_reg                           func(Hv_gic_msi_reg_t, uint64) int
+	_hv_gic_set_redistributor_reg                 func(uint64, Hv_gic_redistributor_reg_t, uint64) int
+	_hv_gic_set_spi                               func(uint32, bool) int
+	_hv_gic_set_state                             func(unsafe.Pointer, uint) int
+	_hv_gic_state_create                          func() unsafe.Pointer
+	_hv_gic_state_get_data                        func(objc.ID, unsafe.Pointer) int
+	_hv_gic_state_get_size                        func(objc.ID, *uint) int
+	_hv_sme_config_get_max_svl_bytes              func(*uint) int
+	_hv_vcpu_config_create                        func() unsafe.Pointer
 	_hv_vcpu_config_get_ccsidr_el1_sys_reg_values func(objc.ID, Hv_cache_type_t, *uint64) int
-	_hv_vcpu_config_get_feature_reg func(objc.ID, Hv_feature_reg_t, *uint64) int
-	_hv_vcpu_create func(*uint64, *HvVcpuExitT, objc.ID) int
-	_hv_vcpu_destroy func(uint64) int
-	_hv_vcpu_get_exec_time func(uint64, *uint64) int
-	_hv_vcpu_get_pending_interrupt func(uint64, Hv_interrupt_type_t, unsafe.Pointer) int
-	_hv_vcpu_get_reg func(uint64, Hv_reg_t, *uint64) int
-	_hv_vcpu_get_simd_fp_reg func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
-	_hv_vcpu_get_sme_p_reg func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
-	_hv_vcpu_get_sme_state func(uint64, *HvVcpuSmeStateT) int
-	_hv_vcpu_get_sme_z_reg func(uint64, Hv_sme_z_reg_t, *uint8, uint) int
-	_hv_vcpu_get_sme_za_reg func(uint64, *uint8, uint) int
-	_hv_vcpu_get_sme_zt0_reg func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_sys_reg func(uint64, Hv_sys_reg_t, *uint64) int
-	_hv_vcpu_get_trap_debug_exceptions func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_trap_debug_reg_accesses func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_vtimer_mask func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_vtimer_offset func(uint64, *uint64) int
-	_hv_vcpu_run func(uint64) int
-	_hv_vcpu_set_pending_interrupt func(uint64, Hv_interrupt_type_t, bool) int
-	_hv_vcpu_set_reg func(uint64, Hv_reg_t, uint64) int
-	_hv_vcpu_set_simd_fp_reg func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
-	_hv_vcpu_set_sme_p_reg func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
-	_hv_vcpu_set_sme_state func(uint64, *HvVcpuSmeStateT) int
-	_hv_vcpu_set_sme_z_reg func(uint64, Hv_sme_z_reg_t, *uint8, uint) int
-	_hv_vcpu_set_sme_za_reg func(uint64, *uint8, uint) int
-	_hv_vcpu_set_sme_zt0_reg func(uint64, unsafe.Pointer) int
-	_hv_vcpu_set_sys_reg func(uint64, Hv_sys_reg_t, uint64) int
-	_hv_vcpu_set_trap_debug_exceptions func(uint64, bool) int
-	_hv_vcpu_set_trap_debug_reg_accesses func(uint64, bool) int
-	_hv_vcpu_set_vtimer_mask func(uint64, bool) int
-	_hv_vcpu_set_vtimer_offset func(uint64, uint64) int
-	_hv_vcpus_exit func(*uint64, uint32) int
-	_hv_vm_allocate func(unsafe.Pointer, uint, uint64) int
-	_hv_vm_config_create func() unsafe.Pointer
-	_hv_vm_config_get_default_ipa_granule func(*Hv_ipa_granule_t) int
-	_hv_vm_config_get_default_ipa_size func(*uint32) int
-	_hv_vm_config_get_el2_enabled func(objc.ID, unsafe.Pointer) int
-	_hv_vm_config_get_el2_supported func(unsafe.Pointer) int
-	_hv_vm_config_get_ipa_granule func(objc.ID, *Hv_ipa_granule_t) int
-	_hv_vm_config_get_ipa_size func(objc.ID, *uint32) int
-	_hv_vm_config_get_max_ipa_size func(*uint32) int
-	_hv_vm_config_set_el2_enabled func(objc.ID, bool) int
-	_hv_vm_config_set_ipa_granule func(objc.ID, Hv_ipa_granule_t) int
-	_hv_vm_config_set_ipa_size func(objc.ID, uint32) int
-	_hv_vm_create func(objc.ID) int
-	_hv_vm_deallocate func(unsafe.Pointer, uint) int
-	_hv_vm_destroy func() int
-	_hv_vm_get_max_vcpu_count func(*uint32) int
-	_hv_vm_map func(unsafe.Pointer, uint64, uint, uint64) int
-	_hv_vm_protect func(uint64, uint, uint64) int
-	_hv_vm_unmap func(uint64, uint) int
+	_hv_vcpu_config_get_feature_reg               func(objc.ID, Hv_feature_reg_t, *uint64) int
+	_hv_vcpu_create                               func(*uint64, *HvVcpuExitT, objc.ID) int
+	_hv_vcpu_destroy                              func(uint64) int
+	_hv_vcpu_get_exec_time                        func(uint64, *uint64) int
+	_hv_vcpu_get_pending_interrupt                func(uint64, Hv_interrupt_type_t, unsafe.Pointer) int
+	_hv_vcpu_get_reg                              func(uint64, Hv_reg_t, *uint64) int
+	_hv_vcpu_get_simd_fp_reg                      func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
+	_hv_vcpu_get_sme_p_reg                        func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
+	_hv_vcpu_get_sme_state                        func(uint64, *HvVcpuSmeStateT) int
+	_hv_vcpu_get_sme_z_reg                        func(uint64, Hv_sme_z_reg_t, *uint8, uint) int
+	_hv_vcpu_get_sme_za_reg                       func(uint64, *uint8, uint) int
+	_hv_vcpu_get_sme_zt0_reg                      func(uint64, unsafe.Pointer) int
+	_hv_vcpu_get_sys_reg                          func(uint64, Hv_sys_reg_t, *uint64) int
+	_hv_vcpu_get_trap_debug_exceptions            func(uint64, unsafe.Pointer) int
+	_hv_vcpu_get_trap_debug_reg_accesses          func(uint64, unsafe.Pointer) int
+	_hv_vcpu_get_vtimer_mask                      func(uint64, unsafe.Pointer) int
+	_hv_vcpu_get_vtimer_offset                    func(uint64, *uint64) int
+	_hv_vcpu_run                                  func(uint64) int
+	_hv_vcpu_set_pending_interrupt                func(uint64, Hv_interrupt_type_t, bool) int
+	_hv_vcpu_set_reg                              func(uint64, Hv_reg_t, uint64) int
+	_hv_vcpu_set_simd_fp_reg                      func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
+	_hv_vcpu_set_sme_p_reg                        func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
+	_hv_vcpu_set_sme_state                        func(uint64, *HvVcpuSmeStateT) int
+	_hv_vcpu_set_sme_z_reg                        func(uint64, Hv_sme_z_reg_t, *uint8, uint) int
+	_hv_vcpu_set_sme_za_reg                       func(uint64, *uint8, uint) int
+	_hv_vcpu_set_sme_zt0_reg                      func(uint64, unsafe.Pointer) int
+	_hv_vcpu_set_sys_reg                          func(uint64, Hv_sys_reg_t, uint64) int
+	_hv_vcpu_set_trap_debug_exceptions            func(uint64, bool) int
+	_hv_vcpu_set_trap_debug_reg_accesses          func(uint64, bool) int
+	_hv_vcpu_set_vtimer_mask                      func(uint64, bool) int
+	_hv_vcpu_set_vtimer_offset                    func(uint64, uint64) int
+	_hv_vcpus_exit                                func(*uint64, uint32) int
+	_hv_vm_allocate                               func(unsafe.Pointer, uint, uint64) int
+	_hv_vm_config_create                          func() unsafe.Pointer
+	_hv_vm_config_get_default_ipa_granule         func(*Hv_ipa_granule_t) int
+	_hv_vm_config_get_default_ipa_size            func(*uint32) int
+	_hv_vm_config_get_el2_enabled                 func(objc.ID, unsafe.Pointer) int
+	_hv_vm_config_get_el2_supported               func(unsafe.Pointer) int
+	_hv_vm_config_get_ipa_granule                 func(objc.ID, *Hv_ipa_granule_t) int
+	_hv_vm_config_get_ipa_size                    func(objc.ID, *uint32) int
+	_hv_vm_config_get_max_ipa_size                func(*uint32) int
+	_hv_vm_config_set_el2_enabled                 func(objc.ID, bool) int
+	_hv_vm_config_set_ipa_granule                 func(objc.ID, Hv_ipa_granule_t) int
+	_hv_vm_config_set_ipa_size                    func(objc.ID, uint32) int
+	_hv_vm_create                                 func(objc.ID) int
+	_hv_vm_deallocate                             func(unsafe.Pointer, uint) int
+	_hv_vm_destroy                                func() int
+	_hv_vm_get_max_vcpu_count                     func(*uint32) int
+	_hv_vm_map                                    func(unsafe.Pointer, uint64, uint, uint64) int
+	_hv_vm_protect                                func(uint64, uint, uint64) int
+	_hv_vm_unmap                                  func(uint64, uint) int
 )
 
 // C function: hv_gic_config_create
@@ -547,4 +547,3 @@ func HvVmProtect(ipa uint64, size uint, flags uint64) int {
 func HvVmUnmap(ipa uint64, size uint) int {
 	return _hv_vm_unmap(ipa, size)
 }
-

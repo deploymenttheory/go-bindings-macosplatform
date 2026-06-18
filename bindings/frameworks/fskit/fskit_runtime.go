@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_fskitLib uintptr
-	_loadOnce sync.Once
+	_fskitLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 

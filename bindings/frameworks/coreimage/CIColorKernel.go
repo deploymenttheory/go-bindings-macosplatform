@@ -17,8 +17,8 @@ type CIColorKernel struct {
 }
 
 var (
-	_clsCIColorKernel = _objcClass("CIColorKernel")
-	_cIColorKernelSelKernelWithString = objc.RegisterName("kernelWithString:")
+	_clsCIColorKernel                         = _objcClass("CIColorKernel")
+	_cIColorKernelSelKernelWithString         = objc.RegisterName("kernelWithString:")
 	_cIColorKernelSelApplyWithExtentArguments = objc.RegisterName("applyWithExtent:arguments:")
 )
 
@@ -34,13 +34,16 @@ func CIColorKernelFromID(id objc.ID) *CIColorKernel {
 
 func CIColorKernelKernelWithString(string_ *foundation.NSString) *CIColorKernel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIColorKernel), _cIColorKernelSelKernelWithString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIColorKernelFromID(_ret)
 }
 
 func (o *CIColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIColorKernelSelApplyWithExtentArguments, extent, args)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIImageFromID(_ret)
 }
-

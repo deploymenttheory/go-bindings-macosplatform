@@ -17,7 +17,9 @@ type SharingServicePickerToolbarItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSSharingServicePickerToolbarItem].
-func (x *SharingServicePickerToolbarItem) Unwrap() *raw.NSSharingServicePickerToolbarItem { return x.inner }
+func (x *SharingServicePickerToolbarItem) Unwrap() *raw.NSSharingServicePickerToolbarItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -185,7 +187,9 @@ func (x *SharingServicePickerToolbarItem) SetDelegate(delegate raw.NSSharingServ
 	x.inner.SetDelegate(delegate)
 }
 
-func (x *SharingServicePickerToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+func (x *SharingServicePickerToolbarItem) asToolbarItem() *raw.NSToolbarItem {
+	return &x.inner.NSToolbarItem
+}
 
 // SharingServicePickerToolbarItemable is the interface implemented by [SharingServicePickerToolbarItem], for mocking and DI.
 type SharingServicePickerToolbarItemable interface {
@@ -218,4 +222,3 @@ type SharingServicePickerToolbarItemable interface {
 }
 
 var _ SharingServicePickerToolbarItemable = (*SharingServicePickerToolbarItem)(nil)
-

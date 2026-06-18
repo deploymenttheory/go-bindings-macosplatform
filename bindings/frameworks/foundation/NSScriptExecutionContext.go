@@ -15,14 +15,14 @@ type NSScriptExecutionContext struct {
 }
 
 var (
-	_clsNSScriptExecutionContext = _objcClass("NSScriptExecutionContext")
+	_clsNSScriptExecutionContext                             = _objcClass("NSScriptExecutionContext")
 	_nSScriptExecutionContextSelSharedScriptExecutionContext = objc.RegisterName("sharedScriptExecutionContext")
-	_nSScriptExecutionContextSelTopLevelObject = objc.RegisterName("topLevelObject")
-	_nSScriptExecutionContextSelSetTopLevelObject = objc.RegisterName("setTopLevelObject:")
-	_nSScriptExecutionContextSelObjectBeingTested = objc.RegisterName("objectBeingTested")
-	_nSScriptExecutionContextSelSetObjectBeingTested = objc.RegisterName("setObjectBeingTested:")
-	_nSScriptExecutionContextSelRangeContainerObject = objc.RegisterName("rangeContainerObject")
-	_nSScriptExecutionContextSelSetRangeContainerObject = objc.RegisterName("setRangeContainerObject:")
+	_nSScriptExecutionContextSelTopLevelObject               = objc.RegisterName("topLevelObject")
+	_nSScriptExecutionContextSelSetTopLevelObject            = objc.RegisterName("setTopLevelObject:")
+	_nSScriptExecutionContextSelObjectBeingTested            = objc.RegisterName("objectBeingTested")
+	_nSScriptExecutionContextSelSetObjectBeingTested         = objc.RegisterName("setObjectBeingTested:")
+	_nSScriptExecutionContextSelRangeContainerObject         = objc.RegisterName("rangeContainerObject")
+	_nSScriptExecutionContextSelSetRangeContainerObject      = objc.RegisterName("setRangeContainerObject:")
 )
 
 func NSScriptExecutionContextFromID(id objc.ID) *NSScriptExecutionContext {
@@ -37,7 +37,9 @@ func NSScriptExecutionContextFromID(id objc.ID) *NSScriptExecutionContext {
 
 func NSScriptExecutionContextSharedScriptExecutionContext() *NSScriptExecutionContext {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptExecutionContext), _nSScriptExecutionContextSelSharedScriptExecutionContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptExecutionContextFromID(_ret)
 }
 
@@ -67,4 +69,3 @@ func (o *NSScriptExecutionContext) RangeContainerObject() objc.ID {
 func (o *NSScriptExecutionContext) SetRangeContainerObject(rangeContainerObject objc.ID) {
 	o.Ptr().Send(_nSScriptExecutionContextSelSetRangeContainerObject, rangeContainerObject)
 }
-

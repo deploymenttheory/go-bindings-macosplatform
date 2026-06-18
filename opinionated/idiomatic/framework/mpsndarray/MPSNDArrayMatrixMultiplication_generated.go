@@ -74,11 +74,17 @@ func (x *ArrayMatrixMultiplication) SetBeta(beta float64) {
 	x.inner.SetBeta(beta)
 }
 
-func (x *ArrayMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication { return x.inner }
+func (x *ArrayMatrixMultiplication) asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication {
+	return x.inner
+}
 
-func (x *ArrayMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
+func (x *ArrayMatrixMultiplication) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayMatrixMultiplication) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayMatrixMultiplicationable is the interface implemented by [ArrayMatrixMultiplication], for mocking and DI.
 type ArrayMatrixMultiplicationable interface {
@@ -93,4 +99,3 @@ type ArrayMatrixMultiplicationable interface {
 }
 
 var _ ArrayMatrixMultiplicationable = (*ArrayMatrixMultiplication)(nil)
-

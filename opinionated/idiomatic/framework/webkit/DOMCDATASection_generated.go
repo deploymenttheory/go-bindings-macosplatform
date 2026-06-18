@@ -62,13 +62,19 @@ func (x *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
 
 func (x *DOMCDATASection) asDOMText() *raw.DOMText { return &x.inner.DOMText }
 
-func (x *DOMCDATASection) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMText.DOMCharacterData }
+func (x *DOMCDATASection) asDOMCharacterData() *raw.DOMCharacterData {
+	return &x.inner.DOMText.DOMCharacterData
+}
 
 func (x *DOMCDATASection) asDOMNode() *raw.DOMNode { return &x.inner.DOMText.DOMCharacterData.DOMNode }
 
-func (x *DOMCDATASection) asDOMObject() *raw.DOMObject { return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject }
+func (x *DOMCDATASection) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject
+}
 
-func (x *DOMCDATASection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMCDATASection) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMCDATASectionable is the interface implemented by [DOMCDATASection], for mocking and DI.
 type DOMCDATASectionable interface {
@@ -80,4 +86,3 @@ type DOMCDATASectionable interface {
 }
 
 var _ DOMCDATASectionable = (*DOMCDATASection)(nil)
-

@@ -15,7 +15,9 @@ type MTRBridgedDeviceBasicClusterLeaveEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicClusterLeaveEvent].
-func (x *MTRBridgedDeviceBasicClusterLeaveEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterLeaveEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicClusterLeaveEvent) Unwrap() *raw.MTRBridgedDeviceBasicClusterLeaveEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewMTRBridgedDeviceBasicClusterLeaveEvent() *MTRBridgedDeviceBasicClusterLe
 	return &MTRBridgedDeviceBasicClusterLeaveEvent{inner: raw.MTRBridgedDeviceBasicClusterLeaveEventFromID(_id)}
 }
 
-func (x *MTRBridgedDeviceBasicClusterLeaveEvent) asMTRBridgedDeviceBasicInformationClusterLeaveEvent() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterLeaveEvent }
+func (x *MTRBridgedDeviceBasicClusterLeaveEvent) asMTRBridgedDeviceBasicInformationClusterLeaveEvent() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent {
+	return &x.inner.MTRBridgedDeviceBasicInformationClusterLeaveEvent
+}
 
 // MTRBridgedDeviceBasicClusterLeaveEventable is the interface implemented by [MTRBridgedDeviceBasicClusterLeaveEvent], for mocking and DI.
 type MTRBridgedDeviceBasicClusterLeaveEventable interface {
@@ -43,4 +47,3 @@ type MTRBridgedDeviceBasicClusterLeaveEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicClusterLeaveEventable = (*MTRBridgedDeviceBasicClusterLeaveEvent)(nil)
-

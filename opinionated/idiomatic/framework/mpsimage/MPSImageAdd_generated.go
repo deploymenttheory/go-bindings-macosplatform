@@ -112,7 +112,9 @@ func (x *ImageAdd) WithClipRect(clipRect metal.MTLRegion) *ImageAdd {
 
 func (x *ImageAdd) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
 
-func (x *ImageAdd) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageAdd) asBinaryImageKernel() *raw.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
 // ImageAddable is the interface implemented by [ImageAdd], for mocking and DI.
 type ImageAddable interface {
@@ -132,4 +134,3 @@ type ImageAddable interface {
 }
 
 var _ ImageAddable = (*ImageAdd)(nil)
-

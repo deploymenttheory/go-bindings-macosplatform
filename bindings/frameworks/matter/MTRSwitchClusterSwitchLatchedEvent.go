@@ -16,7 +16,7 @@ type MTRSwitchClusterSwitchLatchedEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterSwitchLatchedEvent = _objcClass("MTRSwitchClusterSwitchLatchedEvent")
+	_clsMTRSwitchClusterSwitchLatchedEvent               = _objcClass("MTRSwitchClusterSwitchLatchedEvent")
 	_mTRSwitchClusterSwitchLatchedEventSelGetNewPosition = objc.RegisterName("getNewPosition")
 	_mTRSwitchClusterSwitchLatchedEventSelSetNewPosition = objc.RegisterName("setNewPosition:")
 )
@@ -33,11 +33,12 @@ func MTRSwitchClusterSwitchLatchedEventFromID(id objc.ID) *MTRSwitchClusterSwitc
 
 func (o *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterSwitchLatchedEventSelGetNewPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterSwitchLatchedEventSelSetNewPosition, newPosition.Ptr())
 }
-

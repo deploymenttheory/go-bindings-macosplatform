@@ -45,7 +45,9 @@ func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4Funct
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +63,9 @@ func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MT
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -133,4 +137,3 @@ type MTL4StaticLinkingDescriptorable interface {
 }
 
 var _ MTL4StaticLinkingDescriptorable = (*MTL4StaticLinkingDescriptor)(nil)
-

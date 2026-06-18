@@ -15,7 +15,7 @@ type NSDeleteCommand struct {
 }
 
 var (
-	_clsNSDeleteCommand = _objcClass("NSDeleteCommand")
+	_clsNSDeleteCommand             = _objcClass("NSDeleteCommand")
 	_nSDeleteCommandSelKeySpecifier = objc.RegisterName("keySpecifier")
 )
 
@@ -31,7 +31,8 @@ func NSDeleteCommandFromID(id objc.ID) *NSDeleteCommand {
 
 func (o *NSDeleteCommand) KeySpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDeleteCommandSelKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
-

@@ -16,12 +16,12 @@ type MTRDeviceEnergyManagementModeClusterModeOptionStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementModeClusterModeOptionStruct = _objcClass("MTRDeviceEnergyManagementModeClusterModeOptionStruct")
-	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelLabel = objc.RegisterName("label")
-	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelMode = objc.RegisterName("mode")
-	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetMode = objc.RegisterName("setMode:")
-	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelModeTags = objc.RegisterName("modeTags")
+	_clsMTRDeviceEnergyManagementModeClusterModeOptionStruct            = _objcClass("MTRDeviceEnergyManagementModeClusterModeOptionStruct")
+	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelLabel       = objc.RegisterName("label")
+	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetLabel    = objc.RegisterName("setLabel:")
+	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelMode        = objc.RegisterName("mode")
+	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetMode     = objc.RegisterName("setMode:")
+	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelModeTags    = objc.RegisterName("modeTags")
 	_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetModeTags = objc.RegisterName("setModeTags:")
 )
 
@@ -37,7 +37,9 @@ func MTRDeviceEnergyManagementModeClusterModeOptionStructFromID(id objc.ID) *MTR
 
 func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetLabel(label *f
 
 func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterModeOptionStructSelMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ModeTags() *found
 func (o *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterModeOptionStructSelSetModeTags, modeTags)
 }
-

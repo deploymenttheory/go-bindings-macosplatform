@@ -18,11 +18,11 @@ type PKAddPassMetadataPreview struct {
 }
 
 var (
-	_clsPKAddPassMetadataPreview = _objcClass("PKAddPassMetadataPreview")
-	_pKAddPassMetadataPreviewSelInitWithPassThumbnailLocalizedDescription = objc.RegisterName("initWithPassThumbnail:localizedDescription:")
+	_clsPKAddPassMetadataPreview                                             = _objcClass("PKAddPassMetadataPreview")
+	_pKAddPassMetadataPreviewSelInitWithPassThumbnailLocalizedDescription    = objc.RegisterName("initWithPassThumbnail:localizedDescription:")
 	_pKAddPassMetadataPreviewSelPreviewWithPassThumbnailLocalizedDescription = objc.RegisterName("previewWithPassThumbnail:localizedDescription:")
-	_pKAddPassMetadataPreviewSelPassThumbnailImage = objc.RegisterName("passThumbnailImage")
-	_pKAddPassMetadataPreviewSelLocalizedDescription = objc.RegisterName("localizedDescription")
+	_pKAddPassMetadataPreviewSelPassThumbnailImage                           = objc.RegisterName("passThumbnailImage")
+	_pKAddPassMetadataPreviewSelLocalizedDescription                         = objc.RegisterName("localizedDescription")
 )
 
 func PKAddPassMetadataPreviewFromID(id objc.ID) *PKAddPassMetadataPreview {
@@ -38,13 +38,17 @@ func PKAddPassMetadataPreviewFromID(id objc.ID) *PKAddPassMetadataPreview {
 // Initializer preview object to represent the pass being added to Wallet.which requires a CGImage of the pass's card art and a localized description. - Properties: - passThumbnail: CGImage representing the card artwork of the pass to be presented during provisioning. - localizedDescription: Localized description of the pass.
 func (o *PKAddPassMetadataPreview) InitWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description *foundation.NSString) *PKAddPassMetadataPreview {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPassMetadataPreviewSelInitWithPassThumbnailLocalizedDescription, passThumbnail, description.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPassMetadataPreviewFromID(_ret)
 }
 
 func PKAddPassMetadataPreviewPreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description *foundation.NSString) *PKAddPassMetadataPreview {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKAddPassMetadataPreview), _pKAddPassMetadataPreviewSelPreviewWithPassThumbnailLocalizedDescription, passThumbnail, description.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddPassMetadataPreviewFromID(_ret)
 }
 
@@ -57,7 +61,8 @@ func (o *PKAddPassMetadataPreview) PassThumbnailImage() unsafe.Pointer {
 // Localized description of the pass to be referenced during provisioning.
 func (o *PKAddPassMetadataPreview) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddPassMetadataPreviewSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

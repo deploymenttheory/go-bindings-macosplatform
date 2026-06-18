@@ -190,11 +190,17 @@ func (x *CNNSubtract) WithLabel(label string) *CNNSubtract {
 	return x
 }
 
-func (x *CNNSubtract) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
+func (x *CNNSubtract) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
+	return &x.inner.MPSCNNArithmetic
+}
 
-func (x *CNNSubtract) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNSubtract) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
-func (x *CNNSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNSubtract) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNSubtractable is the interface implemented by [CNNSubtract], for mocking and DI.
 type CNNSubtractable interface {
@@ -227,4 +233,3 @@ type CNNSubtractable interface {
 }
 
 var _ CNNSubtractable = (*CNNSubtract)(nil)
-

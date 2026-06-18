@@ -121,4 +121,3 @@ type CoherentNoiseSourceable interface {
 }
 
 var _ CoherentNoiseSourceable = (*CoherentNoiseSource)(nil)
-

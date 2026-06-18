@@ -41,4 +41,3 @@ type EDRMetadataable interface {
 }
 
 var _ EDRMetadataable = (*EDRMetadata)(nil)
-

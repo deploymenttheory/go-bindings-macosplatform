@@ -47,4 +47,3 @@ type WKNavigationable interface {
 }
 
 var _ WKNavigationable = (*WKNavigation)(nil)
-

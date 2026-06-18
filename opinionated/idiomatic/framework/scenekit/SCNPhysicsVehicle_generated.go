@@ -76,7 +76,9 @@ func (x *PhysicsVehicle) ChassisBody() *PhysicsBody {
 	return &PhysicsBody{inner: _r}
 }
 
-func (x *PhysicsVehicle) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+func (x *PhysicsVehicle) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
+	return &x.inner.SCNPhysicsBehavior
+}
 
 // PhysicsVehicleable is the interface implemented by [PhysicsVehicle], for mocking and DI.
 type PhysicsVehicleable interface {
@@ -90,4 +92,3 @@ type PhysicsVehicleable interface {
 }
 
 var _ PhysicsVehicleable = (*PhysicsVehicle)(nil)
-

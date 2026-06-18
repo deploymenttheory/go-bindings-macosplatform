@@ -15,12 +15,12 @@ type NSNotificationQueue struct {
 }
 
 var (
-	_clsNSNotificationQueue = _objcClass("NSNotificationQueue")
-	_nSNotificationQueueSelInitWithNotificationCenter = objc.RegisterName("initWithNotificationCenter:")
-	_nSNotificationQueueSelEnqueueNotificationPostingStyle = objc.RegisterName("enqueueNotification:postingStyle:")
+	_clsNSNotificationQueue                                                    = _objcClass("NSNotificationQueue")
+	_nSNotificationQueueSelInitWithNotificationCenter                          = objc.RegisterName("initWithNotificationCenter:")
+	_nSNotificationQueueSelEnqueueNotificationPostingStyle                     = objc.RegisterName("enqueueNotification:postingStyle:")
 	_nSNotificationQueueSelEnqueueNotificationPostingStyleCoalesceMaskForModes = objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:")
-	_nSNotificationQueueSelDequeueNotificationsMatchingCoalesceMask = objc.RegisterName("dequeueNotificationsMatching:coalesceMask:")
-	_nSNotificationQueueSelDefaultQueue = objc.RegisterName("defaultQueue")
+	_nSNotificationQueueSelDequeueNotificationsMatchingCoalesceMask            = objc.RegisterName("dequeueNotificationsMatching:coalesceMask:")
+	_nSNotificationQueueSelDefaultQueue                                        = objc.RegisterName("defaultQueue")
 )
 
 func NSNotificationQueueFromID(id objc.ID) *NSNotificationQueue {
@@ -35,7 +35,9 @@ func NSNotificationQueueFromID(id objc.ID) *NSNotificationQueue {
 
 func (o *NSNotificationQueue) InitWithNotificationCenter(notificationCenter *NSNotificationCenter) *NSNotificationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNotificationQueueSelInitWithNotificationCenter, notificationCenter.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationQueueFromID(_ret)
 }
 
@@ -53,7 +55,8 @@ func (o *NSNotificationQueue) DequeueNotificationsMatchingCoalesceMask(notificat
 
 func NSNotificationQueueDefaultQueue() *NSNotificationQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNotificationQueue), _nSNotificationQueueSelDefaultQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNotificationQueueFromID(_ret)
 }
-

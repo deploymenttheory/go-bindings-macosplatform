@@ -229,4 +229,3 @@ type NDArrayable interface {
 }
 
 var _ NDArrayable = (*NDArray)(nil)
-

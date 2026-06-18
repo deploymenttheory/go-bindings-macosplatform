@@ -45,7 +45,9 @@ func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescripti
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asAttributeDescription().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asAttributeDescription().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSAttributeDescription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -166,9 +168,13 @@ func (x *CompositeAttributeDescription) SetElements(elements *foundation.NSArray
 	x.inner.SetElements(elements)
 }
 
-func (x *CompositeAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription { return &x.inner.NSAttributeDescription }
+func (x *CompositeAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription {
+	return &x.inner.NSAttributeDescription
+}
 
-func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSAttributeDescription.NSPropertyDescription }
+func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyDescription {
+	return &x.inner.NSAttributeDescription.NSPropertyDescription
+}
 
 // CompositeAttributeDescriptionable is the interface implemented by [CompositeAttributeDescription], for mocking and DI.
 type CompositeAttributeDescriptionable interface {
@@ -195,4 +201,3 @@ type CompositeAttributeDescriptionable interface {
 }
 
 var _ CompositeAttributeDescriptionable = (*CompositeAttributeDescription)(nil)
-

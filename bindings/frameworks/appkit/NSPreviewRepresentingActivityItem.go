@@ -16,8 +16,8 @@ type NSPreviewRepresentingActivityItem struct {
 }
 
 var (
-	_clsNSPreviewRepresentingActivityItem = _objcClass("NSPreviewRepresentingActivityItem")
-	_nSPreviewRepresentingActivityItemSelInitWithItemTitleImageIcon = objc.RegisterName("initWithItem:title:image:icon:")
+	_clsNSPreviewRepresentingActivityItem                                           = _objcClass("NSPreviewRepresentingActivityItem")
+	_nSPreviewRepresentingActivityItemSelInitWithItemTitleImageIcon                 = objc.RegisterName("initWithItem:title:image:icon:")
 	_nSPreviewRepresentingActivityItemSelInitWithItemTitleImageProviderIconProvider = objc.RegisterName("initWithItem:title:imageProvider:iconProvider:")
 )
 
@@ -33,13 +33,16 @@ func NSPreviewRepresentingActivityItemFromID(id objc.ID) *NSPreviewRepresentingA
 
 func (o *NSPreviewRepresentingActivityItem) InitWithItemTitleImageIcon(item objc.ID, title *foundation.NSString, image *NSImage, icon *NSImage) *NSPreviewRepresentingActivityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreviewRepresentingActivityItemSelInitWithItemTitleImageIcon, item, title.Ptr(), image.Ptr(), icon.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPreviewRepresentingActivityItemFromID(_ret)
 }
 
 func (o *NSPreviewRepresentingActivityItem) InitWithItemTitleImageProviderIconProvider(item objc.ID, title *foundation.NSString, imageProvider *foundation.NSItemProvider, iconProvider *foundation.NSItemProvider) *NSPreviewRepresentingActivityItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPreviewRepresentingActivityItemSelInitWithItemTitleImageProviderIconProvider, item, title.Ptr(), imageProvider.Ptr(), iconProvider.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPreviewRepresentingActivityItemFromID(_ret)
 }
-

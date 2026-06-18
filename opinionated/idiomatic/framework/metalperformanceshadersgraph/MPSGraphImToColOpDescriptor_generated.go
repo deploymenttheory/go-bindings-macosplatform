@@ -216,7 +216,9 @@ func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNa
 	x.inner.SetDataLayout(dataLayout)
 }
 
-func (x *GraphImToColOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphImToColOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphImToColOpDescriptorable is the interface implemented by [GraphImToColOpDescriptor], for mocking and DI.
 type GraphImToColOpDescriptorable interface {
@@ -258,4 +260,3 @@ type GraphImToColOpDescriptorable interface {
 }
 
 var _ GraphImToColOpDescriptorable = (*GraphImToColOpDescriptor)(nil)
-

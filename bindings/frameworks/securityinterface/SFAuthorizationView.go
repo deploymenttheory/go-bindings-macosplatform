@@ -18,22 +18,22 @@ type SFAuthorizationView struct {
 }
 
 var (
-	_clsSFAuthorizationView = _objcClass("SFAuthorizationView")
-	_sFAuthorizationViewSelSetString = objc.RegisterName("setString:")
+	_clsSFAuthorizationView                       = _objcClass("SFAuthorizationView")
+	_sFAuthorizationViewSelSetString              = objc.RegisterName("setString:")
 	_sFAuthorizationViewSelSetAuthorizationRights = objc.RegisterName("setAuthorizationRights:")
-	_sFAuthorizationViewSelAuthorizationRights = objc.RegisterName("authorizationRights")
-	_sFAuthorizationViewSelAuthorization = objc.RegisterName("authorization")
-	_sFAuthorizationViewSelUpdateStatus = objc.RegisterName("updateStatus:")
-	_sFAuthorizationViewSelSetAutoupdate = objc.RegisterName("setAutoupdate:")
-	_sFAuthorizationViewSelSetAutoupdateInterval = objc.RegisterName("setAutoupdate:interval:")
-	_sFAuthorizationViewSelAuthorizationState = objc.RegisterName("authorizationState")
-	_sFAuthorizationViewSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sFAuthorizationViewSelIsEnabled = objc.RegisterName("isEnabled")
-	_sFAuthorizationViewSelSetFlags = objc.RegisterName("setFlags:")
-	_sFAuthorizationViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sFAuthorizationViewSelDelegate = objc.RegisterName("delegate")
-	_sFAuthorizationViewSelAuthorize = objc.RegisterName("authorize:")
-	_sFAuthorizationViewSelDeauthorize = objc.RegisterName("deauthorize:")
+	_sFAuthorizationViewSelAuthorizationRights    = objc.RegisterName("authorizationRights")
+	_sFAuthorizationViewSelAuthorization          = objc.RegisterName("authorization")
+	_sFAuthorizationViewSelUpdateStatus           = objc.RegisterName("updateStatus:")
+	_sFAuthorizationViewSelSetAutoupdate          = objc.RegisterName("setAutoupdate:")
+	_sFAuthorizationViewSelSetAutoupdateInterval  = objc.RegisterName("setAutoupdate:interval:")
+	_sFAuthorizationViewSelAuthorizationState     = objc.RegisterName("authorizationState")
+	_sFAuthorizationViewSelSetEnabled             = objc.RegisterName("setEnabled:")
+	_sFAuthorizationViewSelIsEnabled              = objc.RegisterName("isEnabled")
+	_sFAuthorizationViewSelSetFlags               = objc.RegisterName("setFlags:")
+	_sFAuthorizationViewSelSetDelegate            = objc.RegisterName("setDelegate:")
+	_sFAuthorizationViewSelDelegate               = objc.RegisterName("delegate")
+	_sFAuthorizationViewSelAuthorize              = objc.RegisterName("authorize:")
+	_sFAuthorizationViewSelDeauthorize            = objc.RegisterName("deauthorize:")
 )
 
 func SFAuthorizationViewFromID(id objc.ID) *SFAuthorizationView {
@@ -65,7 +65,9 @@ func (o *SFAuthorizationView) AuthorizationRights() *security.AuthorizationItemS
 // @method authorization @abstract Returns the authorization object associated with this view.
 func (o *SFAuthorizationView) Authorization() *securityfoundation.SFAuthorization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationViewSelAuthorization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return securityfoundation.SFAuthorizationFromID(_ret)
 }
 
@@ -129,4 +131,3 @@ func (o *SFAuthorizationView) Deauthorize(inSender objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFAuthorizationViewSelDeauthorize, inSender)
 	return _ret
 }
-

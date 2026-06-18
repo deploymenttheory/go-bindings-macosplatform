@@ -16,7 +16,9 @@ type MTRApplicationLauncherClusterApplicationEPStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplicationEPStruct].
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) Unwrap() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return x.inner }
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) Unwrap() *raw.MTRApplicationLauncherClusterApplicationEPStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -72,7 +74,9 @@ func (x *MTRApplicationLauncherClusterApplicationEPStruct) SetEndpoint(endpoint 
 	x.inner.SetEndpoint(endpoint)
 }
 
-func (x *MTRApplicationLauncherClusterApplicationEPStruct) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return x.inner }
+func (x *MTRApplicationLauncherClusterApplicationEPStruct) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct {
+	return x.inner
+}
 
 // MTRApplicationLauncherClusterApplicationEPStructable is the interface implemented by [MTRApplicationLauncherClusterApplicationEPStruct], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationEPStructable interface {
@@ -86,4 +90,3 @@ type MTRApplicationLauncherClusterApplicationEPStructable interface {
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPStructable = (*MTRApplicationLauncherClusterApplicationEPStruct)(nil)
-

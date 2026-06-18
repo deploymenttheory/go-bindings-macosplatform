@@ -18,7 +18,9 @@ type PersistentCloudKitContainerEvent struct {
 }
 
 // Unwrap returns the underlying [raw.NSPersistentCloudKitContainerEvent].
-func (x *PersistentCloudKitContainerEvent) Unwrap() *raw.NSPersistentCloudKitContainerEvent { return x.inner }
+func (x *PersistentCloudKitContainerEvent) Unwrap() *raw.NSPersistentCloudKitContainerEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -90,4 +92,3 @@ type PersistentCloudKitContainerEventable interface {
 }
 
 var _ PersistentCloudKitContainerEventable = (*PersistentCloudKitContainerEvent)(nil)
-

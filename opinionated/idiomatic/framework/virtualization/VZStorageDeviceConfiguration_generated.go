@@ -44,7 +44,9 @@ func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
 	return &StorageDeviceAttachment{inner: _r}
 }
 
-func (x *StorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return x.inner }
+func (x *StorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
+	return x.inner
+}
 
 // StorageDeviceConfigurationable is the interface implemented by [StorageDeviceConfiguration], for mocking and DI.
 type StorageDeviceConfigurationable interface {
@@ -53,4 +55,3 @@ type StorageDeviceConfigurationable interface {
 }
 
 var _ StorageDeviceConfigurationable = (*StorageDeviceConfiguration)(nil)
-

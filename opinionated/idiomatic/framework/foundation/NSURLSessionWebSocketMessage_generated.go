@@ -85,4 +85,3 @@ type URLSessionWebSocketMessageable interface {
 }
 
 var _ URLSessionWebSocketMessageable = (*URLSessionWebSocketMessage)(nil)
-

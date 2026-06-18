@@ -15,7 +15,9 @@ type SyncEnginePendingDatabaseChange struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEnginePendingDatabaseChange].
-func (x *SyncEnginePendingDatabaseChange) Unwrap() *raw.CKSyncEnginePendingDatabaseChange { return x.inner }
+func (x *SyncEnginePendingDatabaseChange) Unwrap() *raw.CKSyncEnginePendingDatabaseChange {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,7 +51,9 @@ func (x *SyncEnginePendingDatabaseChange) Type() raw.CKSyncEnginePendingDatabase
 	return x.inner.Type()
 }
 
-func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange { return x.inner }
+func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
+	return x.inner
+}
 
 // SyncEnginePendingDatabaseChangeable is the interface implemented by [SyncEnginePendingDatabaseChange], for mocking and DI.
 type SyncEnginePendingDatabaseChangeable interface {
@@ -59,4 +63,3 @@ type SyncEnginePendingDatabaseChangeable interface {
 }
 
 var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)
-

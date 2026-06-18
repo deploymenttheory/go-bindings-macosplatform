@@ -16,12 +16,12 @@ type ICScannerFeatureEnumeration struct {
 }
 
 var (
-	_clsICScannerFeatureEnumeration = _objcClass("ICScannerFeatureEnumeration")
-	_iCScannerFeatureEnumerationSelCurrentValue = objc.RegisterName("currentValue")
-	_iCScannerFeatureEnumerationSelSetCurrentValue = objc.RegisterName("setCurrentValue:")
-	_iCScannerFeatureEnumerationSelDefaultValue = objc.RegisterName("defaultValue")
-	_iCScannerFeatureEnumerationSelValues = objc.RegisterName("values")
-	_iCScannerFeatureEnumerationSelMenuItemLabels = objc.RegisterName("menuItemLabels")
+	_clsICScannerFeatureEnumeration                       = _objcClass("ICScannerFeatureEnumeration")
+	_iCScannerFeatureEnumerationSelCurrentValue           = objc.RegisterName("currentValue")
+	_iCScannerFeatureEnumerationSelSetCurrentValue        = objc.RegisterName("setCurrentValue:")
+	_iCScannerFeatureEnumerationSelDefaultValue           = objc.RegisterName("defaultValue")
+	_iCScannerFeatureEnumerationSelValues                 = objc.RegisterName("values")
+	_iCScannerFeatureEnumerationSelMenuItemLabels         = objc.RegisterName("menuItemLabels")
 	_iCScannerFeatureEnumerationSelMenuItemLabelsTooltips = objc.RegisterName("menuItemLabelsTooltips")
 )
 
@@ -68,4 +68,3 @@ func (o *ICScannerFeatureEnumeration) MenuItemLabelsTooltips() *foundation.NSArr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _iCScannerFeatureEnumerationSelMenuItemLabelsTooltips)
 	return _ret
 }
-

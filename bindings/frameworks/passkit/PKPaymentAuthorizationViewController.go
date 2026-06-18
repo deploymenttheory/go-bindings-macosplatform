@@ -17,17 +17,17 @@ type PKPaymentAuthorizationViewController struct {
 }
 
 var (
-	_clsPKPaymentAuthorizationViewController = _objcClass("PKPaymentAuthorizationViewController")
-	_pKPaymentAuthorizationViewControllerSelCanMakePayments = objc.RegisterName("canMakePayments")
-	_pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworks = objc.RegisterName("canMakePaymentsUsingNetworks:")
-	_pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworksCapabilities = objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:")
-	_pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest = objc.RegisterName("initWithPaymentRequest:")
-	_pKPaymentAuthorizationViewControllerSelSupportsDisbursements = objc.RegisterName("supportsDisbursements")
-	_pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworks = objc.RegisterName("supportsDisbursementsUsingNetworks:")
+	_clsPKPaymentAuthorizationViewController                                               = _objcClass("PKPaymentAuthorizationViewController")
+	_pKPaymentAuthorizationViewControllerSelCanMakePayments                                = objc.RegisterName("canMakePayments")
+	_pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworks                   = objc.RegisterName("canMakePaymentsUsingNetworks:")
+	_pKPaymentAuthorizationViewControllerSelCanMakePaymentsUsingNetworksCapabilities       = objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:")
+	_pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest                         = objc.RegisterName("initWithPaymentRequest:")
+	_pKPaymentAuthorizationViewControllerSelSupportsDisbursements                          = objc.RegisterName("supportsDisbursements")
+	_pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworks             = objc.RegisterName("supportsDisbursementsUsingNetworks:")
 	_pKPaymentAuthorizationViewControllerSelSupportsDisbursementsUsingNetworksCapabilities = objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:")
-	_pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest = objc.RegisterName("initWithDisbursementRequest:")
-	_pKPaymentAuthorizationViewControllerSelDelegate = objc.RegisterName("delegate")
-	_pKPaymentAuthorizationViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest                    = objc.RegisterName("initWithDisbursementRequest:")
+	_pKPaymentAuthorizationViewControllerSelDelegate                                       = objc.RegisterName("delegate")
+	_pKPaymentAuthorizationViewControllerSelSetDelegate                                    = objc.RegisterName("setDelegate:")
 )
 
 func PKPaymentAuthorizationViewControllerFromID(id objc.ID) *PKPaymentAuthorizationViewController {
@@ -57,7 +57,9 @@ func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilitie
 
 func (o *PKPaymentAuthorizationViewController) InitWithPaymentRequest(request *PKPaymentRequest) *PKPaymentAuthorizationViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithPaymentRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentAuthorizationViewControllerFromID(_ret)
 }
 
@@ -78,7 +80,9 @@ func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapab
 
 func (o *PKPaymentAuthorizationViewController) InitWithDisbursementRequest(request *PKDisbursementRequest) *PKPaymentAuthorizationViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationViewControllerSelInitWithDisbursementRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentAuthorizationViewControllerFromID(_ret)
 }
 
@@ -90,4 +94,3 @@ func (o *PKPaymentAuthorizationViewController) Delegate() PKPaymentAuthorization
 func (o *PKPaymentAuthorizationViewController) SetDelegate(delegate PKPaymentAuthorizationViewControllerDelegate) {
 	o.Ptr().Send(_pKPaymentAuthorizationViewControllerSelSetDelegate, delegate)
 }
-

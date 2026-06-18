@@ -18,25 +18,25 @@ type GKRuleSystem struct {
 }
 
 var (
-	_clsGKRuleSystem = _objcClass("GKRuleSystem")
-	_gKRuleSystemSelInit = objc.RegisterName("init")
-	_gKRuleSystemSelEvaluate = objc.RegisterName("evaluate")
-	_gKRuleSystemSelAddRule = objc.RegisterName("addRule:")
-	_gKRuleSystemSelAddRulesFromArray = objc.RegisterName("addRulesFromArray:")
-	_gKRuleSystemSelRemoveAllRules = objc.RegisterName("removeAllRules")
-	_gKRuleSystemSelGradeForFact = objc.RegisterName("gradeForFact:")
+	_clsGKRuleSystem                     = _objcClass("GKRuleSystem")
+	_gKRuleSystemSelInit                 = objc.RegisterName("init")
+	_gKRuleSystemSelEvaluate             = objc.RegisterName("evaluate")
+	_gKRuleSystemSelAddRule              = objc.RegisterName("addRule:")
+	_gKRuleSystemSelAddRulesFromArray    = objc.RegisterName("addRulesFromArray:")
+	_gKRuleSystemSelRemoveAllRules       = objc.RegisterName("removeAllRules")
+	_gKRuleSystemSelGradeForFact         = objc.RegisterName("gradeForFact:")
 	_gKRuleSystemSelMinimumGradeForFacts = objc.RegisterName("minimumGradeForFacts:")
 	_gKRuleSystemSelMaximumGradeForFacts = objc.RegisterName("maximumGradeForFacts:")
-	_gKRuleSystemSelAssertFact = objc.RegisterName("assertFact:")
-	_gKRuleSystemSelAssertFactGrade = objc.RegisterName("assertFact:grade:")
-	_gKRuleSystemSelRetractFact = objc.RegisterName("retractFact:")
-	_gKRuleSystemSelRetractFactGrade = objc.RegisterName("retractFact:grade:")
-	_gKRuleSystemSelReset = objc.RegisterName("reset")
-	_gKRuleSystemSelState = objc.RegisterName("state")
-	_gKRuleSystemSelRules = objc.RegisterName("rules")
-	_gKRuleSystemSelAgenda = objc.RegisterName("agenda")
-	_gKRuleSystemSelExecuted = objc.RegisterName("executed")
-	_gKRuleSystemSelFacts = objc.RegisterName("facts")
+	_gKRuleSystemSelAssertFact           = objc.RegisterName("assertFact:")
+	_gKRuleSystemSelAssertFactGrade      = objc.RegisterName("assertFact:grade:")
+	_gKRuleSystemSelRetractFact          = objc.RegisterName("retractFact:")
+	_gKRuleSystemSelRetractFactGrade     = objc.RegisterName("retractFact:grade:")
+	_gKRuleSystemSelReset                = objc.RegisterName("reset")
+	_gKRuleSystemSelState                = objc.RegisterName("state")
+	_gKRuleSystemSelRules                = objc.RegisterName("rules")
+	_gKRuleSystemSelAgenda               = objc.RegisterName("agenda")
+	_gKRuleSystemSelExecuted             = objc.RegisterName("executed")
+	_gKRuleSystemSelFacts                = objc.RegisterName("facts")
 )
 
 func GKRuleSystemFromID(id objc.ID) *GKRuleSystem {
@@ -52,7 +52,9 @@ func GKRuleSystemFromID(id objc.ID) *GKRuleSystem {
 // Initializes a clean rule system with no state, rules or facts.
 func (o *GKRuleSystem) Init() *GKRuleSystem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRuleSystemFromID(_ret)
 }
 
@@ -128,21 +130,27 @@ func (o *GKRuleSystem) State() *foundation.NSMutableDictionary[objc.ID, objc.ID]
 // The current set of rules that will be used to set the agenda when rules are first added to the system. They will also be used to refill the agenda whenever it is set. This is at all times the union of the agenda and executed sets. @see agenda @see executed
 func (o *GKRuleSystem) Rules() *foundation.NSArray[*GKRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKRule](_ret)
 }
 
 // The current set of rules to be evaluated, in salience order, where if the salience is equivalent the order of insertion into the agenda is used to decide which is first. Adjust salience of your rules to adjust the order the next time the agenda is reset. Changing salience on a rule currently in the agenda does not change its order in the agenda. This is at all times the difference between the rules and executed sets. @see rules @see executed @see reset
 func (o *GKRuleSystem) Agenda() *foundation.NSArray[*GKRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelAgenda)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKRule](_ret)
 }
 
 // The current set of rules that have already executed. Rules in this set will not be executed again until the system is reset. This is at all times the difference between the rules and agenda sets. @see rules @see agenda @see reset
 func (o *GKRuleSystem) Executed() *foundation.NSArray[*GKRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRuleSystemSelExecuted)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKRule](_ret)
 }
 
@@ -151,4 +159,3 @@ func (o *GKRuleSystem) Facts() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _gKRuleSystemSelFacts)
 	return _ret
 }
-

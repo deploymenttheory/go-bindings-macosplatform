@@ -215,4 +215,3 @@ type GraphRandomOpDescriptorable interface {
 }
 
 var _ GraphRandomOpDescriptorable = (*GraphRandomOpDescriptor)(nil)
-

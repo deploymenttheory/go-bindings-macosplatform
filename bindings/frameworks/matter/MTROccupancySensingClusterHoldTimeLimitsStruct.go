@@ -16,12 +16,12 @@ type MTROccupancySensingClusterHoldTimeLimitsStruct struct {
 }
 
 var (
-	_clsMTROccupancySensingClusterHoldTimeLimitsStruct = _objcClass("MTROccupancySensingClusterHoldTimeLimitsStruct")
-	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMin = objc.RegisterName("holdTimeMin")
-	_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeMin = objc.RegisterName("setHoldTimeMin:")
-	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMax = objc.RegisterName("holdTimeMax")
-	_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeMax = objc.RegisterName("setHoldTimeMax:")
-	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeDefault = objc.RegisterName("holdTimeDefault")
+	_clsMTROccupancySensingClusterHoldTimeLimitsStruct                   = _objcClass("MTROccupancySensingClusterHoldTimeLimitsStruct")
+	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMin        = objc.RegisterName("holdTimeMin")
+	_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeMin     = objc.RegisterName("setHoldTimeMin:")
+	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMax        = objc.RegisterName("holdTimeMax")
+	_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeMax     = objc.RegisterName("setHoldTimeMax:")
+	_mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeDefault    = objc.RegisterName("holdTimeDefault")
 	_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeDefault = objc.RegisterName("setHoldTimeDefault:")
 )
 
@@ -37,7 +37,9 @@ func MTROccupancySensingClusterHoldTimeLimitsStructFromID(id objc.ID) *MTROccupa
 
 func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMin)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMin(holdTime
 
 func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMax(holdTime
 
 func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROccupancySensingClusterHoldTimeLimitsStructSelHoldTimeDefault)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeDefault(holdTimeDefault *foundation.NSNumber) {
 	o.Ptr().Send(_mTROccupancySensingClusterHoldTimeLimitsStructSelSetHoldTimeDefault, holdTimeDefault.Ptr())
 }
-

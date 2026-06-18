@@ -26,4 +26,3 @@ func WebDownloadFromID(id objc.ID) *WebDownload {
 	purego.Track(o)
 	return o
 }
-

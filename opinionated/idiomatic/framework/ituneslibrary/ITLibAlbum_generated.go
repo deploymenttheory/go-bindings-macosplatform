@@ -138,4 +138,3 @@ type LibAlbumable interface {
 }
 
 var _ LibAlbumable = (*LibAlbum)(nil)
-

@@ -54,7 +54,9 @@ func (x *MathExpressionFraction) DenimonatorExpression() *MathExpression {
 	return &MathExpression{inner: _r}
 }
 
-func (x *MathExpressionFraction) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+func (x *MathExpressionFraction) asMathExpression() *raw.AXMathExpression {
+	return &x.inner.AXMathExpression
+}
 
 // MathExpressionFractionable is the interface implemented by [MathExpressionFraction], for mocking and DI.
 type MathExpressionFractionable interface {
@@ -64,4 +66,3 @@ type MathExpressionFractionable interface {
 }
 
 var _ MathExpressionFractionable = (*MathExpressionFraction)(nil)
-

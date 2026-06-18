@@ -16,7 +16,9 @@ type MTL4TileRenderPipelineDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4TileRenderPipelineDescriptor].
-func (x *MTL4TileRenderPipelineDescriptor) Unwrap() *raw.MTL4TileRenderPipelineDescriptor { return x.inner }
+func (x *MTL4TileRenderPipelineDescriptor) Unwrap() *raw.MTL4TileRenderPipelineDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -182,7 +184,9 @@ func (x *MTL4TileRenderPipelineDescriptor) SetSupportBinaryLinking(supportBinary
 	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
 }
 
-func (x *MTL4TileRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+func (x *MTL4TileRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
+	return &x.inner.MTL4PipelineDescriptor
+}
 
 // MTL4TileRenderPipelineDescriptorable is the interface implemented by [MTL4TileRenderPipelineDescriptor], for mocking and DI.
 type MTL4TileRenderPipelineDescriptorable interface {
@@ -215,4 +219,3 @@ type MTL4TileRenderPipelineDescriptorable interface {
 }
 
 var _ MTL4TileRenderPipelineDescriptorable = (*MTL4TileRenderPipelineDescriptor)(nil)
-

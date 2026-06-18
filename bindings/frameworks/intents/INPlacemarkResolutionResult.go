@@ -17,8 +17,8 @@ type INPlacemarkResolutionResult struct {
 }
 
 var (
-	_clsINPlacemarkResolutionResult = _objcClass("INPlacemarkResolutionResult")
-	_iNPlacemarkResolutionResultSelSuccessWithResolvedPlacemark = objc.RegisterName("successWithResolvedPlacemark:")
+	_clsINPlacemarkResolutionResult                                           = _objcClass("INPlacemarkResolutionResult")
+	_iNPlacemarkResolutionResultSelSuccessWithResolvedPlacemark               = objc.RegisterName("successWithResolvedPlacemark:")
 	_iNPlacemarkResolutionResultSelDisambiguationWithPlacemarksToDisambiguate = objc.RegisterName("disambiguationWithPlacemarksToDisambiguate:")
 	_iNPlacemarkResolutionResultSelConfirmationRequiredWithPlacemarkToConfirm = objc.RegisterName("confirmationRequiredWithPlacemarkToConfirm:")
 )
@@ -35,19 +35,24 @@ func INPlacemarkResolutionResultFromID(id objc.ID) *INPlacemarkResolutionResult 
 
 func INPlacemarkResolutionResultSuccessWithResolvedPlacemark(resolvedPlacemark *corelocation.CLPlacemark) *INPlacemarkResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelSuccessWithResolvedPlacemark, resolvedPlacemark.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPlacemarkResolutionResultFromID(_ret)
 }
 
 func INPlacemarkResolutionResultDisambiguationWithPlacemarksToDisambiguate(placemarksToDisambiguate *foundation.NSArray[*corelocation.CLPlacemark]) *INPlacemarkResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelDisambiguationWithPlacemarksToDisambiguate, placemarksToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPlacemarkResolutionResultFromID(_ret)
 }
 
 func INPlacemarkResolutionResultConfirmationRequiredWithPlacemarkToConfirm(placemarkToConfirm *corelocation.CLPlacemark) *INPlacemarkResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPlacemarkResolutionResult), _iNPlacemarkResolutionResultSelConfirmationRequiredWithPlacemarkToConfirm, placemarkToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPlacemarkResolutionResultFromID(_ret)
 }
-

@@ -173,7 +173,9 @@ func (x *MTL4ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(support
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 }
 
-func (x *MTL4ComputePipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+func (x *MTL4ComputePipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
+	return &x.inner.MTL4PipelineDescriptor
+}
 
 // MTL4ComputePipelineDescriptorable is the interface implemented by [MTL4ComputePipelineDescriptor], for mocking and DI.
 type MTL4ComputePipelineDescriptorable interface {
@@ -205,4 +207,3 @@ type MTL4ComputePipelineDescriptorable interface {
 }
 
 var _ MTL4ComputePipelineDescriptorable = (*MTL4ComputePipelineDescriptor)(nil)
-

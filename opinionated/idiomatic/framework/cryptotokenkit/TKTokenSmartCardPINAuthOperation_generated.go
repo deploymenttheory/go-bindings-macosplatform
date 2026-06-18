@@ -17,7 +17,9 @@ type TokenSmartCardPINAuthOperation struct {
 }
 
 // Unwrap returns the underlying [raw.TKTokenSmartCardPINAuthOperation].
-func (x *TokenSmartCardPINAuthOperation) Unwrap() *raw.TKTokenSmartCardPINAuthOperation { return x.inner }
+func (x *TokenSmartCardPINAuthOperation) Unwrap() *raw.TKTokenSmartCardPINAuthOperation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -129,7 +131,9 @@ func (x *TokenSmartCardPINAuthOperation) SetPIN(pIN string) {
 	x.inner.SetPIN(foundation.NSStringStringWithUTF8String(pIN))
 }
 
-func (x *TokenSmartCardPINAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return &x.inner.TKTokenAuthOperation }
+func (x *TokenSmartCardPINAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation {
+	return &x.inner.TKTokenAuthOperation
+}
 
 // TokenSmartCardPINAuthOperationable is the interface implemented by [TokenSmartCardPINAuthOperation], for mocking and DI.
 type TokenSmartCardPINAuthOperationable interface {
@@ -152,4 +156,3 @@ type TokenSmartCardPINAuthOperationable interface {
 }
 
 var _ TokenSmartCardPINAuthOperationable = (*TokenSmartCardPINAuthOperation)(nil)
-

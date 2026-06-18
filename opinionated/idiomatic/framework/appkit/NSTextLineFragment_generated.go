@@ -107,4 +107,3 @@ type TextLineFragmentable interface {
 }
 
 var _ TextLineFragmentable = (*TextLineFragment)(nil)
-

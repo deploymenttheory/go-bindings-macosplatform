@@ -104,4 +104,3 @@ type MTRDeviceControllerFactoryable interface {
 }
 
 var _ MTRDeviceControllerFactoryable = (*MTRDeviceControllerFactory)(nil)
-

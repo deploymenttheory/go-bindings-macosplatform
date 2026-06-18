@@ -16,10 +16,10 @@ type MPSNNReduceBinary struct {
 }
 
 var (
-	_clsMPSNNReduceBinary = _objcClass("MPSNNReduceBinary")
-	_mPSNNReduceBinarySelPrimarySourceClipRect = objc.RegisterName("primarySourceClipRect")
-	_mPSNNReduceBinarySelSetPrimarySourceClipRect = objc.RegisterName("setPrimarySourceClipRect:")
-	_mPSNNReduceBinarySelSecondarySourceClipRect = objc.RegisterName("secondarySourceClipRect")
+	_clsMPSNNReduceBinary                           = _objcClass("MPSNNReduceBinary")
+	_mPSNNReduceBinarySelPrimarySourceClipRect      = objc.RegisterName("primarySourceClipRect")
+	_mPSNNReduceBinarySelSetPrimarySourceClipRect   = objc.RegisterName("setPrimarySourceClipRect:")
+	_mPSNNReduceBinarySelSecondarySourceClipRect    = objc.RegisterName("secondarySourceClipRect")
 	_mPSNNReduceBinarySelSetSecondarySourceClipRect = objc.RegisterName("setSecondarySourceClipRect:")
 )
 
@@ -52,4 +52,3 @@ func (o *MPSNNReduceBinary) SecondarySourceClipRect() metal.MTLRegion {
 func (o *MPSNNReduceBinary) SetSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) {
 	o.Ptr().Send(_mPSNNReduceBinarySelSetSecondarySourceClipRect, secondarySourceClipRect)
 }
-

@@ -8,17 +8,17 @@ import (
 )
 
 type AEBuildError struct {
-	FError uint
+	FError    uint
 	FErrorPos uint
 }
 
 type AEDesc struct {
 	DescriptorType uint
-	DataHandle unsafe.Pointer
+	DataHandle     unsafe.Pointer
 }
 
 type AEKeyDesc struct {
-	DescKey uint
+	DescKey     uint
 	DescContent AEDesc
 }
 
@@ -26,22 +26,22 @@ type AEKeyDesc struct {
 type AERemoteProcessResolver struct{}
 
 type AERemoteProcessResolverContext struct {
-	Version int
-	Info unsafe.Pointer
-	Retain unsafe.Pointer
-	Release unsafe.Pointer
+	Version         int
+	Info            unsafe.Pointer
+	Retain          unsafe.Pointer
+	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
 
 type IntlText struct {
 	TheScriptCode int16
-	TheLangCode int16
-	TheText [1]int8
+	TheLangCode   int16
+	TheText       [1]int8
 }
 
 type OffsetArray struct {
 	FNumOfOffsets int16
-	FOffset [1]int
+	FOffset       [1]int
 }
 
 // OpaqueAEDataStorageType is an opaque type.
@@ -52,33 +52,32 @@ type OpaqueAEStreamRef struct{}
 
 type TScriptingSizeResource struct {
 	ScriptingSizeFlags int16
-	MinStackSize uint
+	MinStackSize       uint
 	PreferredStackSize uint
-	MaxStackSize uint
-	MinHeapSize uint
-	PreferredHeapSize uint
-	MaxHeapSize uint
+	MaxStackSize       uint
+	MinHeapSize        uint
+	PreferredHeapSize  uint
+	MaxHeapSize        uint
 }
 
 type TextRange struct {
-	FStart int
-	FEnd int
+	FStart       int
+	FEnd         int
 	FHiliteStyle int16
 }
 
 type TextRangeArray struct {
 	FNumOfRanges int16
-	FRange [1]TextRange
+	FRange       [1]TextRange
 }
 
 type WritingCode struct {
 	TheScriptCode int16
-	TheLangCode int16
+	TheLangCode   int16
 }
 
 // C struct: ccntTokenRecord
 type CcntTokenRecord struct {
 	TokenClass uint
-	Token AEDesc
+	Token      AEDesc
 }
-

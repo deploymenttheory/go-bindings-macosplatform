@@ -80,4 +80,3 @@ type LossLayerable interface {
 }
 
 var _ LossLayerable = (*LossLayer)(nil)
-

@@ -16,13 +16,13 @@ type MPRemoteCommand struct {
 }
 
 var (
-	_clsMPRemoteCommand = _objcClass("MPRemoteCommand")
-	_mPRemoteCommandSelAddTargetAction = objc.RegisterName("addTarget:action:")
-	_mPRemoteCommandSelRemoveTargetAction = objc.RegisterName("removeTarget:action:")
-	_mPRemoteCommandSelRemoveTarget = objc.RegisterName("removeTarget:")
+	_clsMPRemoteCommand                     = _objcClass("MPRemoteCommand")
+	_mPRemoteCommandSelAddTargetAction      = objc.RegisterName("addTarget:action:")
+	_mPRemoteCommandSelRemoveTargetAction   = objc.RegisterName("removeTarget:action:")
+	_mPRemoteCommandSelRemoveTarget         = objc.RegisterName("removeTarget:")
 	_mPRemoteCommandSelAddTargetWithHandler = objc.RegisterName("addTargetWithHandler:")
-	_mPRemoteCommandSelIsEnabled = objc.RegisterName("isEnabled")
-	_mPRemoteCommandSelSetEnabled = objc.RegisterName("setEnabled:")
+	_mPRemoteCommandSelIsEnabled            = objc.RegisterName("isEnabled")
+	_mPRemoteCommandSelSetEnabled           = objc.RegisterName("setEnabled:")
 )
 
 func MPRemoteCommandFromID(id objc.ID) *MPRemoteCommand {
@@ -72,4 +72,3 @@ func (o *MPRemoteCommand) IsEnabled() bool {
 func (o *MPRemoteCommand) SetEnabled(enabled bool) {
 	o.Ptr().Send(_mPRemoteCommandSelSetEnabled, enabled)
 }
-

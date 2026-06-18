@@ -16,7 +16,9 @@ type MTRDoorLockClusterCredentialStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterCredentialStruct].
-func (x *MTRDoorLockClusterCredentialStruct) Unwrap() *raw.MTRDoorLockClusterCredentialStruct { return x.inner }
+func (x *MTRDoorLockClusterCredentialStruct) Unwrap() *raw.MTRDoorLockClusterCredentialStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRDoorLockClusterCredentialStruct) SetCredentialIndex(credentialIndex 
 	x.inner.SetCredentialIndex(credentialIndex)
 }
 
-func (x *MTRDoorLockClusterCredentialStruct) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct { return x.inner }
+func (x *MTRDoorLockClusterCredentialStruct) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct {
+	return x.inner
+}
 
 // MTRDoorLockClusterCredentialStructable is the interface implemented by [MTRDoorLockClusterCredentialStruct], for mocking and DI.
 type MTRDoorLockClusterCredentialStructable interface {
@@ -82,4 +86,3 @@ type MTRDoorLockClusterCredentialStructable interface {
 }
 
 var _ MTRDoorLockClusterCredentialStructable = (*MTRDoorLockClusterCredentialStruct)(nil)
-

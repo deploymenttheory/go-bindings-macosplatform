@@ -18,45 +18,45 @@ type MDLAsset struct {
 }
 
 var (
-	_clsMDLAsset = _objcClass("MDLAsset")
-	_mDLAssetSelInitWithURL = objc.RegisterName("initWithURL:")
-	_mDLAssetSelInitWithURLVertexDescriptorBufferAllocator = objc.RegisterName("initWithURL:vertexDescriptor:bufferAllocator:")
-	_mDLAssetSelInitWithBufferAllocator = objc.RegisterName("initWithBufferAllocator:")
+	_clsMDLAsset                                                                = _objcClass("MDLAsset")
+	_mDLAssetSelInitWithURL                                                     = objc.RegisterName("initWithURL:")
+	_mDLAssetSelInitWithURLVertexDescriptorBufferAllocator                      = objc.RegisterName("initWithURL:vertexDescriptor:bufferAllocator:")
+	_mDLAssetSelInitWithBufferAllocator                                         = objc.RegisterName("initWithBufferAllocator:")
 	_mDLAssetSelInitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError = objc.RegisterName("initWithURL:vertexDescriptor:bufferAllocator:preserveTopology:error:")
-	_mDLAssetSelExportAssetToURL = objc.RegisterName("exportAssetToURL:")
-	_mDLAssetSelExportAssetToURLError = objc.RegisterName("exportAssetToURL:error:")
-	_mDLAssetSelObjectAtPath = objc.RegisterName("objectAtPath:")
-	_mDLAssetSelCanImportFileExtension = objc.RegisterName("canImportFileExtension:")
-	_mDLAssetSelCanExportFileExtension = objc.RegisterName("canExportFileExtension:")
-	_mDLAssetSelChildObjectsOfClass = objc.RegisterName("childObjectsOfClass:")
-	_mDLAssetSelLoadTextures = objc.RegisterName("loadTextures")
-	_mDLAssetSelBoundingBoxAtTime = objc.RegisterName("boundingBoxAtTime:")
-	_mDLAssetSelAddObject = objc.RegisterName("addObject:")
-	_mDLAssetSelRemoveObject = objc.RegisterName("removeObject:")
-	_mDLAssetSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_mDLAssetSelObjectAtIndex = objc.RegisterName("objectAtIndex:")
-	_mDLAssetSelBoundingBox = objc.RegisterName("boundingBox")
-	_mDLAssetSelFrameInterval = objc.RegisterName("frameInterval")
-	_mDLAssetSelSetFrameInterval = objc.RegisterName("setFrameInterval:")
-	_mDLAssetSelStartTime = objc.RegisterName("startTime")
-	_mDLAssetSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mDLAssetSelEndTime = objc.RegisterName("endTime")
-	_mDLAssetSelSetEndTime = objc.RegisterName("setEndTime:")
-	_mDLAssetSelUpAxis = objc.RegisterName("upAxis")
-	_mDLAssetSelSetUpAxis = objc.RegisterName("setUpAxis:")
-	_mDLAssetSelURL = objc.RegisterName("URL")
-	_mDLAssetSelResolver = objc.RegisterName("resolver")
-	_mDLAssetSelSetResolver = objc.RegisterName("setResolver:")
-	_mDLAssetSelBufferAllocator = objc.RegisterName("bufferAllocator")
-	_mDLAssetSelVertexDescriptor = objc.RegisterName("vertexDescriptor")
-	_mDLAssetSelCount = objc.RegisterName("count")
-	_mDLAssetSelMasters = objc.RegisterName("masters")
-	_mDLAssetSelSetMasters = objc.RegisterName("setMasters:")
-	_mDLAssetSelOriginals = objc.RegisterName("originals")
-	_mDLAssetSelSetOriginals = objc.RegisterName("setOriginals:")
-	_mDLAssetSelAnimations = objc.RegisterName("animations")
-	_mDLAssetSelSetAnimations = objc.RegisterName("setAnimations:")
-	_mDLAssetSelPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource = objc.RegisterName("placeLightProbesWithDensity:heuristic:usingIrradianceDataSource:")
+	_mDLAssetSelExportAssetToURL                                                = objc.RegisterName("exportAssetToURL:")
+	_mDLAssetSelExportAssetToURLError                                           = objc.RegisterName("exportAssetToURL:error:")
+	_mDLAssetSelObjectAtPath                                                    = objc.RegisterName("objectAtPath:")
+	_mDLAssetSelCanImportFileExtension                                          = objc.RegisterName("canImportFileExtension:")
+	_mDLAssetSelCanExportFileExtension                                          = objc.RegisterName("canExportFileExtension:")
+	_mDLAssetSelChildObjectsOfClass                                             = objc.RegisterName("childObjectsOfClass:")
+	_mDLAssetSelLoadTextures                                                    = objc.RegisterName("loadTextures")
+	_mDLAssetSelBoundingBoxAtTime                                               = objc.RegisterName("boundingBoxAtTime:")
+	_mDLAssetSelAddObject                                                       = objc.RegisterName("addObject:")
+	_mDLAssetSelRemoveObject                                                    = objc.RegisterName("removeObject:")
+	_mDLAssetSelObjectAtIndexedSubscript                                        = objc.RegisterName("objectAtIndexedSubscript:")
+	_mDLAssetSelObjectAtIndex                                                   = objc.RegisterName("objectAtIndex:")
+	_mDLAssetSelBoundingBox                                                     = objc.RegisterName("boundingBox")
+	_mDLAssetSelFrameInterval                                                   = objc.RegisterName("frameInterval")
+	_mDLAssetSelSetFrameInterval                                                = objc.RegisterName("setFrameInterval:")
+	_mDLAssetSelStartTime                                                       = objc.RegisterName("startTime")
+	_mDLAssetSelSetStartTime                                                    = objc.RegisterName("setStartTime:")
+	_mDLAssetSelEndTime                                                         = objc.RegisterName("endTime")
+	_mDLAssetSelSetEndTime                                                      = objc.RegisterName("setEndTime:")
+	_mDLAssetSelUpAxis                                                          = objc.RegisterName("upAxis")
+	_mDLAssetSelSetUpAxis                                                       = objc.RegisterName("setUpAxis:")
+	_mDLAssetSelURL                                                             = objc.RegisterName("URL")
+	_mDLAssetSelResolver                                                        = objc.RegisterName("resolver")
+	_mDLAssetSelSetResolver                                                     = objc.RegisterName("setResolver:")
+	_mDLAssetSelBufferAllocator                                                 = objc.RegisterName("bufferAllocator")
+	_mDLAssetSelVertexDescriptor                                                = objc.RegisterName("vertexDescriptor")
+	_mDLAssetSelCount                                                           = objc.RegisterName("count")
+	_mDLAssetSelMasters                                                         = objc.RegisterName("masters")
+	_mDLAssetSelSetMasters                                                      = objc.RegisterName("setMasters:")
+	_mDLAssetSelOriginals                                                       = objc.RegisterName("originals")
+	_mDLAssetSelSetOriginals                                                    = objc.RegisterName("setOriginals:")
+	_mDLAssetSelAnimations                                                      = objc.RegisterName("animations")
+	_mDLAssetSelSetAnimations                                                   = objc.RegisterName("setAnimations:")
+	_mDLAssetSelPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource   = objc.RegisterName("placeLightProbesWithDensity:heuristic:usingIrradianceDataSource:")
 )
 
 func MDLAssetFromID(id objc.ID) *MDLAsset {
@@ -72,21 +72,27 @@ func MDLAssetFromID(id objc.ID) *MDLAsset {
 // @method initWithURL: @abstract Initialize an MDLAsset using the contents of the resource located at the indicated URL @discussion Vertex layout (i.e. vertexDescriptor) will be specified by ModelIO depending on attributes of the resource.  Buffers will be allocated using a default NSData based allocator Submeshes will be converted to triangle topology.
 func (o *MDLAsset) InitWithURL(uRL *foundation.NSURL) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAssetFromID(_ret)
 }
 
 // @method initWithURL:vertexDescriptor:bufferAllocator: @abstract Initialize an MDLAsset using the contents of the resource located at URL, ensuring that the asset conforms to the supplied vertexDescriptor, and buffers are allocated in the supplied allocator @discussion The default behavior is to triangulate any discovered meshes and to conform the mesh to the supplied vertexDescriptor. If nil is passed as the vertexDescriptor, then a vertexDescriptor will be created according to the attributes of the resource. If nil is passed as the bufferAllocator, buffers will be allocated using a default NSData based allocator. Submeshes will be converted to triangle topology.
 func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocator(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocator, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAssetFromID(_ret)
 }
 
 // @method initWithBufferAllocator: @abstract Initialize an empty MDLAsset with a buffer allocator to be used during other operations.
 func (o *MDLAsset) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithBufferAllocator, bufferAllocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAssetFromID(_ret)
 }
 
@@ -94,7 +100,9 @@ func (o *MDLAsset) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocato
 func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator, preserveTopology bool) (*MDLAsset, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator, preserveTopology, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -120,7 +128,9 @@ func (o *MDLAsset) ExportAssetToURLError(uRL *foundation.NSURL) (bool, error) {
 // @abstract Return the object at the specified path, or nil if none exists there
 func (o *MDLAsset) ObjectAtPath(path *foundation.NSString) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelObjectAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
@@ -139,7 +149,9 @@ func MDLAssetCanExportFileExtension(extension *foundation.NSString) bool {
 // @method childObjectsOfClass: @abstract Inspects an asset's hierarchy for objects of the specified class type @return returns an NSArray of all objects in the asset matching the requested class @discussion This can be used to get references to all MDLMesh objects, MDLLights, etc. if objectClass is not a subclass of MDLObject, an exception will be raised.
 func (o *MDLAsset) ChildObjectsOfClass(objectClass objc.Class) *foundation.NSArray[*MDLObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelChildObjectsOfClass, objectClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLObject](_ret)
 }
 
@@ -167,14 +179,18 @@ func (o *MDLAsset) RemoveObject(object *MDLObject) {
 // @method objectAtIndexedSubscript: @abstract return the indexed top level object
 func (o *MDLAsset) ObjectAtIndexedSubscript(index uint) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
 // @method objectAtIndex: @abstract return the indexed top level object
 func (o *MDLAsset) ObjectAtIndex(index uint) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelObjectAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
@@ -227,7 +243,9 @@ func (o *MDLAsset) SetUpAxis(upAxis unsafe.Pointer) {
 // @property URL @abstract URL used to create the asset @discussion If the asset was not created with a URL, nil will be returned.
 func (o *MDLAsset) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -250,7 +268,9 @@ func (o *MDLAsset) BufferAllocator() MDLMeshBufferAllocator {
 // @property vertexDescriptor @abstract Vertex descriptor set upon asset initialization @discussion Will be nil if there was no descriptor set
 func (o *MDLAsset) VertexDescriptor() *MDLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelVertexDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexDescriptorFromID(_ret)
 }
 
@@ -294,7 +314,8 @@ func (o *MDLAsset) SetAnimations(animations MDLObjectContainerComponent) {
 
 func MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value float32, type_ MDLProbePlacement, dataSource MDLLightProbeIrradianceDataSource) *foundation.NSArray[*MDLLightProbe] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMDLAsset), _mDLAssetSelPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource, value, type_, dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLLightProbe](_ret)
 }
-

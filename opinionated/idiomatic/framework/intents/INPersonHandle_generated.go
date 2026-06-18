@@ -77,4 +77,3 @@ type PersonHandleable interface {
 }
 
 var _ PersonHandleable = (*PersonHandle)(nil)
-

@@ -41,4 +41,3 @@ type MTROTAHeaderParserable interface {
 }
 
 var _ MTROTAHeaderParserable = (*MTROTAHeaderParser)(nil)
-

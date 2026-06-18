@@ -32,7 +32,7 @@ type PHASEAutomaticHeadTrackingFlags uint64
 
 const (
 	PHASEAutomaticHeadTrackingFlagOrientation PHASEAutomaticHeadTrackingFlags = 1
-	PHASEAutomaticHeadTrackingFlagPosition PHASEAutomaticHeadTrackingFlags = 2
+	PHASEAutomaticHeadTrackingFlagPosition    PHASEAutomaticHeadTrackingFlags = 2
 )
 
 func (e PHASEAutomaticHeadTrackingFlags) String() string {
@@ -52,7 +52,7 @@ func (e PHASEAutomaticHeadTrackingFlags) String() string {
 type PHASECalibrationMode int64
 
 const (
-	PHASECalibrationModeNone PHASECalibrationMode = 0
+	PHASECalibrationModeNone        PHASECalibrationMode = 0
 	PHASECalibrationModeRelativeSpl PHASECalibrationMode = 1
 	PHASECalibrationModeAbsoluteSpl PHASECalibrationMode = 2
 )
@@ -73,11 +73,11 @@ func (e PHASECalibrationMode) String() string {
 type PHASECullOption int64
 
 const (
-	PHASECullOptionTerminate PHASECullOption = 0
-	PHASECullOptionSleepWakeAtZero PHASECullOption = 1
-	PHASECullOptionSleepWakeAtRandomOffset PHASECullOption = 2
+	PHASECullOptionTerminate                 PHASECullOption = 0
+	PHASECullOptionSleepWakeAtZero           PHASECullOption = 1
+	PHASECullOptionSleepWakeAtRandomOffset   PHASECullOption = 2
 	PHASECullOptionSleepWakeAtRealtimeOffset PHASECullOption = 3
-	PHASECullOptionDoNotCull PHASECullOption = 4
+	PHASECullOptionDoNotCull                 PHASECullOption = 4
 )
 
 func (e PHASECullOption) String() string {
@@ -100,14 +100,14 @@ func (e PHASECullOption) String() string {
 type PHASECurveType int64
 
 const (
-	PHASECurveTypeLinear PHASECurveType = 1668435054
-	PHASECurveTypeSquared PHASECurveType = 1668436849
+	PHASECurveTypeLinear         PHASECurveType = 1668435054
+	PHASECurveTypeSquared        PHASECurveType = 1668436849
 	PHASECurveTypeInverseSquared PHASECurveType = 1668434257
-	PHASECurveTypeCubed PHASECurveType = 1668432757
-	PHASECurveTypeInverseCubed PHASECurveType = 1668434243
-	PHASECurveTypeSine PHASECurveType = 1668436846
-	PHASECurveTypeInverseSine PHASECurveType = 1668434259
-	PHASECurveTypeSigmoid PHASECurveType = 1668436839
+	PHASECurveTypeCubed          PHASECurveType = 1668432757
+	PHASECurveTypeInverseCubed   PHASECurveType = 1668434243
+	PHASECurveTypeSine           PHASECurveType = 1668436846
+	PHASECurveTypeInverseSine    PHASECurveType = 1668434259
+	PHASECurveTypeSigmoid        PHASECurveType = 1668436839
 	PHASECurveTypeInverseSigmoid PHASECurveType = 1668434247
 	PHASECurveTypeHoldStartValue PHASECurveType = 1668434003
 	PHASECurveTypeJumpToEndValue PHASECurveType = 1668434501
@@ -146,11 +146,11 @@ type PHASEMaterialPreset int64
 
 const (
 	PHASEMaterialPresetCardboard PHASEMaterialPreset = 1833136740
-	PHASEMaterialPresetGlass PHASEMaterialPreset = 1833397363
-	PHASEMaterialPresetBrick PHASEMaterialPreset = 1833071211
-	PHASEMaterialPresetConcrete PHASEMaterialPreset = 1833132914
-	PHASEMaterialPresetDrywall PHASEMaterialPreset = 1833202295
-	PHASEMaterialPresetWood PHASEMaterialPreset = 1834448228
+	PHASEMaterialPresetGlass     PHASEMaterialPreset = 1833397363
+	PHASEMaterialPresetBrick     PHASEMaterialPreset = 1833071211
+	PHASEMaterialPresetConcrete  PHASEMaterialPreset = 1833132914
+	PHASEMaterialPresetDrywall   PHASEMaterialPreset = 1833202295
+	PHASEMaterialPresetWood      PHASEMaterialPreset = 1834448228
 )
 
 func (e PHASEMaterialPreset) String() string {
@@ -190,7 +190,7 @@ func (e PHASEMediumPreset) String() string {
 type PHASENormalizationMode int64
 
 const (
-	PHASENormalizationModeNone PHASENormalizationMode = 0
+	PHASENormalizationModeNone    PHASENormalizationMode = 0
 	PHASENormalizationModeDynamic PHASENormalizationMode = 1
 )
 
@@ -227,9 +227,9 @@ func (e PHASEPlaybackMode) String() string {
 type PHASEPushStreamBufferOptions uint64
 
 const (
-	PHASEPushStreamBufferDefault PHASEPushStreamBufferOptions = 1
-	PHASEPushStreamBufferLoops PHASEPushStreamBufferOptions = 2
-	PHASEPushStreamBufferInterrupts PHASEPushStreamBufferOptions = 4
+	PHASEPushStreamBufferDefault          PHASEPushStreamBufferOptions = 1
+	PHASEPushStreamBufferLoops            PHASEPushStreamBufferOptions = 2
+	PHASEPushStreamBufferInterrupts       PHASEPushStreamBufferOptions = 4
 	PHASEPushStreamBufferInterruptsAtLoop PHASEPushStreamBufferOptions = 8
 )
 
@@ -273,7 +273,7 @@ type PHASERenderingState int64
 const (
 	PHASERenderingStateStopped PHASERenderingState = 0
 	PHASERenderingStateStarted PHASERenderingState = 1
-	PHASERenderingStatePaused PHASERenderingState = 2
+	PHASERenderingStatePaused  PHASERenderingState = 2
 )
 
 func (e PHASERenderingState) String() string {
@@ -292,19 +292,19 @@ func (e PHASERenderingState) String() string {
 type PHASEReverbPreset int64
 
 const (
-	PHASEReverbPresetNone PHASEReverbPreset = 1917742958
-	PHASEReverbPresetSmallRoom PHASEReverbPreset = 1918063213
-	PHASEReverbPresetMediumRoom PHASEReverbPreset = 1917669997
-	PHASEReverbPresetLargeRoom PHASEReverbPreset = 1917604401
-	PHASEReverbPresetLargeRoom2 PHASEReverbPreset = 1917604402
+	PHASEReverbPresetNone          PHASEReverbPreset = 1917742958
+	PHASEReverbPresetSmallRoom     PHASEReverbPreset = 1918063213
+	PHASEReverbPresetMediumRoom    PHASEReverbPreset = 1917669997
+	PHASEReverbPresetLargeRoom     PHASEReverbPreset = 1917604401
+	PHASEReverbPresetLargeRoom2    PHASEReverbPreset = 1917604402
 	PHASEReverbPresetMediumChamber PHASEReverbPreset = 1917666152
-	PHASEReverbPresetLargeChamber PHASEReverbPreset = 1917600616
-	PHASEReverbPresetMediumHall PHASEReverbPreset = 1917667377
-	PHASEReverbPresetMediumHall2 PHASEReverbPreset = 1917667378
-	PHASEReverbPresetMediumHall3 PHASEReverbPreset = 1917667379
-	PHASEReverbPresetLargeHall PHASEReverbPreset = 1917601841
-	PHASEReverbPresetLargeHall2 PHASEReverbPreset = 1917601842
-	PHASEReverbPresetCathedral PHASEReverbPreset = 1917023336
+	PHASEReverbPresetLargeChamber  PHASEReverbPreset = 1917600616
+	PHASEReverbPresetMediumHall    PHASEReverbPreset = 1917667377
+	PHASEReverbPresetMediumHall2   PHASEReverbPreset = 1917667378
+	PHASEReverbPresetMediumHall3   PHASEReverbPreset = 1917667379
+	PHASEReverbPresetLargeHall     PHASEReverbPreset = 1917601841
+	PHASEReverbPresetLargeHall2    PHASEReverbPreset = 1917601842
+	PHASEReverbPresetCathedral     PHASEReverbPreset = 1917023336
 )
 
 func (e PHASEReverbPreset) String() string {
@@ -343,8 +343,8 @@ func (e PHASEReverbPreset) String() string {
 type PHASESoundEventPrepareHandlerReason int64
 
 const (
-	PHASESoundEventPrepareHandlerReasonFailure PHASESoundEventPrepareHandlerReason = 0
-	PHASESoundEventPrepareHandlerReasonPrepared PHASESoundEventPrepareHandlerReason = 1
+	PHASESoundEventPrepareHandlerReasonFailure    PHASESoundEventPrepareHandlerReason = 0
+	PHASESoundEventPrepareHandlerReasonPrepared   PHASESoundEventPrepareHandlerReason = 1
 	PHASESoundEventPrepareHandlerReasonTerminated PHASESoundEventPrepareHandlerReason = 2
 )
 
@@ -366,7 +366,7 @@ type PHASESoundEventPrepareState int64
 const (
 	PHASESoundEventPrepareStatePrepareNotStarted PHASESoundEventPrepareState = 0
 	PHASESoundEventPrepareStatePrepareInProgress PHASESoundEventPrepareState = 1
-	PHASESoundEventPrepareStatePrepared PHASESoundEventPrepareState = 2
+	PHASESoundEventPrepareStatePrepared          PHASESoundEventPrepareState = 2
 )
 
 func (e PHASESoundEventPrepareState) String() string {
@@ -385,9 +385,9 @@ func (e PHASESoundEventPrepareState) String() string {
 type PHASESoundEventSeekHandlerReason int64
 
 const (
-	PHASESoundEventSeekHandlerReasonFailure PHASESoundEventSeekHandlerReason = 0
+	PHASESoundEventSeekHandlerReasonFailure                      PHASESoundEventSeekHandlerReason = 0
 	PHASESoundEventSeekHandlerReasonFailureSeekAlreadyInProgress PHASESoundEventSeekHandlerReason = 1
-	PHASESoundEventSeekHandlerReasonSeekSuccessful PHASESoundEventSeekHandlerReason = 2
+	PHASESoundEventSeekHandlerReasonSeekSuccessful               PHASESoundEventSeekHandlerReason = 2
 )
 
 func (e PHASESoundEventSeekHandlerReason) String() string {
@@ -406,9 +406,9 @@ func (e PHASESoundEventSeekHandlerReason) String() string {
 type PHASESoundEventStartHandlerReason int64
 
 const (
-	PHASESoundEventStartHandlerReasonFailure PHASESoundEventStartHandlerReason = 0
+	PHASESoundEventStartHandlerReasonFailure         PHASESoundEventStartHandlerReason = 0
 	PHASESoundEventStartHandlerReasonFinishedPlaying PHASESoundEventStartHandlerReason = 1
-	PHASESoundEventStartHandlerReasonTerminated PHASESoundEventStartHandlerReason = 2
+	PHASESoundEventStartHandlerReasonTerminated      PHASESoundEventStartHandlerReason = 2
 )
 
 func (e PHASESoundEventStartHandlerReason) String() string {
@@ -429,8 +429,8 @@ type PHASESpatialPipelineFlags uint64
 
 const (
 	PHASESpatialPipelineFlagDirectPathTransmission PHASESpatialPipelineFlags = 1
-	PHASESpatialPipelineFlagEarlyReflections PHASESpatialPipelineFlags = 2
-	PHASESpatialPipelineFlagLateReverb PHASESpatialPipelineFlags = 4
+	PHASESpatialPipelineFlagEarlyReflections       PHASESpatialPipelineFlags = 2
+	PHASESpatialPipelineFlagLateReverb             PHASESpatialPipelineFlags = 4
 )
 
 func (e PHASESpatialPipelineFlags) String() string {
@@ -453,8 +453,8 @@ func (e PHASESpatialPipelineFlags) String() string {
 type PHASESpatializationMode int64
 
 const (
-	PHASESpatializationModeAutomatic PHASESpatializationMode = 0
-	PHASESpatializationModeAlwaysUseBinaural PHASESpatializationMode = 1
+	PHASESpatializationModeAutomatic             PHASESpatializationMode = 0
+	PHASESpatializationModeAlwaysUseBinaural     PHASESpatializationMode = 1
 	PHASESpatializationModeAlwaysUseChannelBased PHASESpatializationMode = 2
 )
 
@@ -475,7 +475,7 @@ type PHASEUpdateMode int64
 
 const (
 	PHASEUpdateModeAutomatic PHASEUpdateMode = 0
-	PHASEUpdateModeManual PHASEUpdateMode = 1
+	PHASEUpdateModeManual    PHASEUpdateMode = 1
 )
 
 func (e PHASEUpdateMode) String() string {
@@ -488,4 +488,3 @@ func (e PHASEUpdateMode) String() string {
 		return fmt.Sprintf("PHASEUpdateMode(%d)", int64(e))
 	}
 }
-

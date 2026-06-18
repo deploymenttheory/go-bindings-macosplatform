@@ -16,11 +16,11 @@ type MTRWriteParams struct {
 }
 
 var (
-	_clsMTRWriteParams = _objcClass("MTRWriteParams")
-	_mTRWriteParamsSelTimedWriteTimeout = objc.RegisterName("timedWriteTimeout")
+	_clsMTRWriteParams                     = _objcClass("MTRWriteParams")
+	_mTRWriteParamsSelTimedWriteTimeout    = objc.RegisterName("timedWriteTimeout")
 	_mTRWriteParamsSelSetTimedWriteTimeout = objc.RegisterName("setTimedWriteTimeout:")
-	_mTRWriteParamsSelDataVersion = objc.RegisterName("dataVersion")
-	_mTRWriteParamsSelSetDataVersion = objc.RegisterName("setDataVersion:")
+	_mTRWriteParamsSelDataVersion          = objc.RegisterName("dataVersion")
+	_mTRWriteParamsSelSetDataVersion       = objc.RegisterName("setDataVersion:")
 )
 
 func MTRWriteParamsFromID(id objc.ID) *MTRWriteParams {
@@ -36,7 +36,9 @@ func MTRWriteParamsFromID(id objc.ID) *MTRWriteParams {
 // Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
 func (o *MTRWriteParams) TimedWriteTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWriteParamsSelTimedWriteTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNu
 // Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
 func (o *MTRWriteParams) DataVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWriteParamsSelDataVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWriteParams) SetDataVersion(dataVersion *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWriteParamsSelSetDataVersion, dataVersion.Ptr())
 }
-

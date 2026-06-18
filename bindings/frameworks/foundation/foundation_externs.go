@@ -24,7 +24,9 @@ func NSAlternateDescriptionAttributeName() uintptr {
 
 func NSAppleEventManagerWillProcessFirstEventNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAppleEventManagerWillProcessFirstEventNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -76,7 +78,9 @@ func NSAssertionHandlerKey() uintptr {
 
 func NSAverageKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAverageKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -88,181 +92,241 @@ func NSBuddhistCalendar() uintptr {
 
 func NSBundleDidLoadNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSBundleDidLoadNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarDayChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarDayChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierBangla() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierBangla")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierBuddhist() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierBuddhist")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierChinese() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierChinese")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierCoptic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierCoptic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierDangi() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierDangi")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierEthiopicAmeteAlem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierEthiopicAmeteAlem")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierEthiopicAmeteMihret() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierEthiopicAmeteMihret")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierGregorian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierGregorian")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierGujarati() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierGujarati")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierHebrew() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierHebrew")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierISO8601() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierISO8601")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierIndian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIndian")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierIslamic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierIslamicCivil() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicCivil")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierIslamicTabular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicTabular")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierIslamicUmmAlQura() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierIslamicUmmAlQura")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierJapanese() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierJapanese")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierKannada() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierKannada")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierMalayalam() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierMalayalam")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierMarathi() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierMarathi")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierOdia() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierOdia")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierPersian() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierPersian")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierRepublicOfChina() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierRepublicOfChina")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierTamil() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierTamil")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierTelugu() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierTelugu")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierVietnamese() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierVietnamese")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCalendarIdentifierVikram() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCalendarIdentifierVikram")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCharacterConversionException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCharacterConversionException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -274,13 +338,17 @@ func NSChineseCalendar() uintptr {
 
 func NSClassDescriptionNeededForClassNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSClassDescriptionNeededForClassNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSCocoaErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCocoaErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -304,7 +372,9 @@ func NSConnectionReplyMode() uintptr {
 
 func NSCountKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCountKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -316,7 +386,9 @@ func NSCurrencySymbol() uintptr {
 
 func NSCurrentLocaleDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSCurrentLocaleDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -334,7 +406,9 @@ func NSDateTimeOrdering() uintptr {
 
 func NSDebugDescriptionErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDebugDescriptionErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -346,25 +420,33 @@ func NSDecimalDigits() uintptr {
 
 func NSDecimalNumberDivideByZeroException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberDivideByZeroException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDecimalNumberExactnessException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberExactnessException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDecimalNumberOverflowException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberOverflowException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDecimalNumberUnderflowException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDecimalNumberUnderflowException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -376,38 +458,50 @@ func NSDecimalSeparator() uintptr {
 
 func NSDefaultRunLoopMode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDefaultRunLoopMode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDestinationInvalidException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDestinationInvalidException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Programs no longer transition to single-threaded mode from threaded environments
 func NSDidBecomeSingleThreadedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDidBecomeSingleThreadedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDistinctUnionOfArraysKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfArraysKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDistinctUnionOfObjectsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfObjectsKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSDistinctUnionOfSetsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSDistinctUnionOfSetsKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -419,7 +513,9 @@ func NSEarlierTimeDesignations() uintptr {
 
 func NSEdgeInsetsZero() NSEdgeInsets {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSEdgeInsetsZero")
-	if ptr == 0 { return NSEdgeInsets{} }
+	if ptr == 0 {
+		return NSEdgeInsets{}
+	}
 	return *(*NSEdgeInsets)(unsafe.Pointer(ptr))
 }
 
@@ -493,67 +589,89 @@ func NSFailedAuthenticationException() uintptr {
 
 func NSFileAppendOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileAppendOnly")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileBusy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileBusy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileCreationDate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileCreationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileDeviceIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileDeviceIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileExtensionHidden() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileExtensionHidden")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileGroupOwnerAccountID() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileGroupOwnerAccountID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileGroupOwnerAccountName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileGroupOwnerAccountName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHFSCreatorCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHFSCreatorCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHFSTypeCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHFSTypeCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHandleConnectionAcceptedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleConnectionAcceptedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHandleDataAvailableNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleDataAvailableNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -575,25 +693,33 @@ func NSFileHandleNotificationMonitorModes() uintptr {
 
 func NSFileHandleOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleOperationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHandleReadCompletionNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleReadCompletionNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileHandleReadToEndOfFileCompletionNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleReadToEndOfFileCompletionNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileImmutable() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileImmutable")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -604,151 +730,201 @@ func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() uintptr {
 
 func NSFileModificationDate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileModificationDate")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileOwnerAccountID() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileOwnerAccountID")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileOwnerAccountName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileOwnerAccountName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFilePathErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFilePathErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFilePosixPermissions() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFilePosixPermissions")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProtectionComplete() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionComplete")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProtectionCompleteUnlessOpen() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionCompleteUnlessOpen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionCompleteUntilFirstUserAuthentication")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileProtectionNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileProtectionNone")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileReferenceCount() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileReferenceCount")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileSize() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSize")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileSystemFileNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemFileNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileSystemFreeNodes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemFreeNodes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileSystemNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileSystemNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeBlockSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeBlockSpecial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeCharacterSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeCharacterSpecial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeDirectory() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeDirectory")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeRegular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeRegular")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeSocket() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeSocket")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeSymbolicLink() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeSymbolicLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFileTypeUnknown() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileTypeUnknown")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSFoundationVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFoundationVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func NSGenericException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGenericException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -782,35 +958,45 @@ func NSGregorianCalendar() uintptr {
 // @const NSHTTPCookieComment @discussion Key for cookie comment text
 func NSHTTPCookieComment() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieComment")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieCommentURL @discussion Key for cookie comment URL
 func NSHTTPCookieCommentURL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieCommentURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieDiscard @discussion Key for cookie discard (session-only) flag
 func NSHTTPCookieDiscard() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieDiscard")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieDomain @discussion Key for cookie domain
 func NSHTTPCookieDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieExpires @discussion Key for cookie expiration date
 func NSHTTPCookieExpires() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieExpires")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -818,98 +1004,126 @@ func NSHTTPCookieExpires() *NSString {
 // Deprecated: Notification is never posted
 func NSHTTPCookieManagerAcceptPolicyChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieManagerAcceptPolicyChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieManagerCookiesChangedNotification @abstract Notification sent when the set of cookies changes
 func NSHTTPCookieManagerCookiesChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieManagerCookiesChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieMaximumAge @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
 func NSHTTPCookieMaximumAge() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieMaximumAge")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieName @discussion Key for cookie name
 func NSHTTPCookieName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieOriginURL @discussion Key for cookie origin URL
 func NSHTTPCookieOriginURL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieOriginURL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookiePath @discussion Key for cookie path
 func NSHTTPCookiePath() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookiePath")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookiePort @discussion Key for cookie ports
 func NSHTTPCookiePort() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookiePort")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieSameSiteLax @discussion String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
 func NSHTTPCookieSameSiteLax() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSiteLax")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieSameSitePolicy @discussion Key for cookie same site
 func NSHTTPCookieSameSitePolicy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSitePolicy")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieSameSiteStrict @discussion String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
 func NSHTTPCookieSameSiteStrict() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSameSiteStrict")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieSecure @discussion Key for cookie secure flag
 func NSHTTPCookieSecure() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSecure")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieSetByJavaScript @discussion An NSString object indicating that the cookie is set via JavaScript.
 func NSHTTPCookieSetByJavaScript() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieSetByJavaScript")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieValue @discussion Key for cookie value
 func NSHTTPCookieValue() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieValue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSHTTPCookieVersion @discussion Key for cookie version
 func NSHTTPCookieVersion() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPCookieVersion")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -957,7 +1171,9 @@ func NSHebrewCalendar() uintptr {
 
 func NSHelpAnchorErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHelpAnchorErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -980,7 +1196,9 @@ func NSImageURLAttributeName() uintptr {
 
 func NSInconsistentArchiveException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInconsistentArchiveException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1007,7 +1225,9 @@ func NSInflectionAlternativeAttributeName() uintptr {
 
 func NSInflectionConceptsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInflectionConceptsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1029,45 +1249,59 @@ func NSInlinePresentationIntentAttributeName() uintptr {
 // Deprecated: Not supported
 func NSIntHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Not supported
 func NSIntMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Not supported
 func NSIntMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSIntegerHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntegerHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSIntegerMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntegerMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSIntegerMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIntegerMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSInternalInconsistencyException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInternalInconsistencyException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1079,55 +1313,73 @@ func NSInternationalCurrencyString() uintptr {
 
 func NSInvalidArchiveOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidArchiveOperationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvalidArgumentException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidArgumentException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvalidReceivePortException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidReceivePortException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvalidSendPortException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidSendPortException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvalidUnarchiveOperationException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvalidUnarchiveOperationException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvocationOperationCancelledException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvocationOperationCancelledException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSInvocationOperationVoidResultException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSInvocationOperationVoidResultException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSIsNilTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIsNilTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSIsNotNilTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIsNotNilTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1161,31 +1413,41 @@ func NSJapaneseCalendar() uintptr {
 
 func NSKeyValueChangeIndexesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeIndexesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKeyValueChangeKindKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeKindKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKeyValueChangeNewKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeNewKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKeyValueChangeNotificationIsPriorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeNotificationIsPriorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSKeyValueChangeOldKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyValueChangeOldKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1197,7 +1459,9 @@ func NSKeyedArchiveRootObjectKey() uintptr {
 // Deprecated: since macOS 10.14.
 func NSKeyedUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyedUnarchiveFromDataTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1215,266 +1479,342 @@ func NSLaterTimeDesignations() uintptr {
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagAdjective() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagAdjective")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagAdverb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagAdverb")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagClassifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagClassifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagCloseParenthesis() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagCloseParenthesis")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagCloseQuote() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagCloseQuote")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagConjunction() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagConjunction")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagDash() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagDash")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagDeterminer() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagDeterminer")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagIdiom() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagIdiom")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagInterjection() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagInterjection")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagNoun() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagNoun")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagNumber() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagNumber")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOpenParenthesis() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOpenParenthesis")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOpenQuote() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOpenQuote")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOrganizationName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOrganizationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOther() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOther")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherPunctuation() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherPunctuation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherWhitespace() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherWhitespace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagOtherWord() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagOtherWord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagParagraphBreak() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagParagraphBreak")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagParticle() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagParticle")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPersonalName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPersonalName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPlaceName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPlaceName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPreposition() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPreposition")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPronoun() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPronoun")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagPunctuation() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagPunctuation")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLanguage() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLanguage")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLemma() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLemma")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeLexicalClass() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeLexicalClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeNameType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeNameType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeNameTypeOrLexicalClass() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeNameTypeOrLexicalClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeScript() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeScript")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSchemeTokenType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSchemeTokenType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagSentenceTerminator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagSentenceTerminator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagVerb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagVerb")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWhitespace() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWhitespace")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWord() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWord")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
 func NSLinguisticTagWordJoiner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLinguisticTagWordJoiner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1490,139 +1830,185 @@ func NSLoadedClasses() uintptr {
 
 func NSLocalNotificationCenterType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalNotificationCenterType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleAlternateQuotationBeginDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleAlternateQuotationBeginDelimiterKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleAlternateQuotationEndDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleAlternateQuotationEndDelimiterKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCalendar")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCollationIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCollationIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCollatorIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCollatorIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCountryCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCountryCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCurrencyCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCurrencyCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleCurrencySymbol() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleCurrencySymbol")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleDecimalSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleDecimalSeparator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleExemplarCharacterSet() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleExemplarCharacterSet")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleGroupingSeparator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleGroupingSeparator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleIdentifier() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleIdentifier")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleLanguageCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleLanguageCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleMeasurementSystem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleMeasurementSystem")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleQuotationBeginDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleQuotationBeginDelimiterKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleQuotationEndDelimiterKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleQuotationEndDelimiterKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleScriptCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleScriptCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleUsesMetricSystem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleUsesMetricSystem")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocaleVariantCode() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocaleVariantCode")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocalizedDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedDescriptionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocalizedFailureErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedFailureErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocalizedFailureReasonErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedFailureReasonErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1633,25 +2019,33 @@ func NSLocalizedNumberFormatAttributeName() uintptr {
 
 func NSLocalizedRecoveryOptionsErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedRecoveryOptionsErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSLocalizedRecoverySuggestionErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLocalizedRecoverySuggestionErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMachErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMachErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMallocException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMallocException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -1662,7 +2056,9 @@ func NSMarkdownSourcePositionAttributeName() uintptr {
 
 func NSMaximumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMaximumKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2448,25 +2844,33 @@ func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() uintptr {
 
 func NSMetadataQueryDidFinishGatheringNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidFinishGatheringNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMetadataQueryDidStartGatheringNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidStartGatheringNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMetadataQueryDidUpdateNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryDidUpdateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSMetadataQueryGatheringProgressNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryGatheringProgressNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2658,7 +3062,9 @@ func NSMetadataUbiquitousSharedItemRoleParticipant() uintptr {
 
 func NSMinimumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMinimumKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2675,13 +3081,17 @@ func NSMorphologyAttributeName() uintptr {
 
 func NSMultipleUnderlyingErrorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMultipleUnderlyingErrorsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSNegateBooleanTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNegateBooleanTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2715,85 +3125,113 @@ func NSNextNextDayDesignations() uintptr {
 
 func NSNonOwnedPointerHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonOwnedPointerHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonOwnedPointerMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonOwnedPointerMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonOwnedPointerMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonOwnedPointerMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonOwnedPointerOrNullMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonOwnedPointerOrNullMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonRetainedObjectHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonRetainedObjectHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonRetainedObjectMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonRetainedObjectMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSNonRetainedObjectMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSNonRetainedObjectMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSOSStatusErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOSStatusErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSObjectHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSObjectInaccessibleException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectInaccessibleException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSObjectMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSObjectMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSObjectNotAvailableException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSObjectNotAvailableException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSOldStyleException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOldStyleException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2804,37 +3242,49 @@ func NSOperationNotSupportedForKeyException() uintptr {
 
 func NSOwnedObjectIdentityHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOwnedObjectIdentityHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSOwnedPointerHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOwnedPointerHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSOwnedPointerMapKeyCallBacks() NSMapTableKeyCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOwnedPointerMapKeyCallBacks")
-	if ptr == 0 { return NSMapTableKeyCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableKeyCallBacks{}
+	}
 	return *(*NSMapTableKeyCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSOwnedPointerMapValueCallBacks() NSMapTableValueCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOwnedPointerMapValueCallBacks")
-	if ptr == 0 { return NSMapTableValueCallBacks{} }
+	if ptr == 0 {
+		return NSMapTableValueCallBacks{}
+	}
 	return *(*NSMapTableValueCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSPOSIXErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPOSIXErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSParseErrorException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSParseErrorException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2886,31 +3336,41 @@ func NSPersonNameComponentSuffix() uintptr {
 
 func NSPointerToStructHashCallBacks() NSHashTableCallBacks {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPointerToStructHashCallBacks")
-	if ptr == 0 { return NSHashTableCallBacks{} }
+	if ptr == 0 {
+		return NSHashTableCallBacks{}
+	}
 	return *(*NSHashTableCallBacks)(unsafe.Pointer(ptr))
 }
 
 func NSPortDidBecomeInvalidNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortDidBecomeInvalidNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPortReceiveException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortReceiveException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPortSendException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortSendException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSPortTimeoutException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPortTimeoutException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2922,7 +3382,9 @@ func NSPositiveCurrencyFormatString() uintptr {
 
 func NSPresentationIntentAttributeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPresentationIntentAttributeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2934,19 +3396,25 @@ func NSPriorDayDesignations() uintptr {
 
 func NSProcessInfoPowerStateDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProcessInfoPowerStateDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProcessInfoThermalStateDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProcessInfoThermalStateDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressEstimatedTimeRemainingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressEstimatedTimeRemainingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2962,7 +3430,9 @@ func NSProgressFileAnimationImageOriginalRectKey() uintptr {
 
 func NSProgressFileCompletedCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileCompletedCountKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -2973,79 +3443,105 @@ func NSProgressFileIconKey() uintptr {
 
 func NSProgressFileOperationKindCopying() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindCopying")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindDecompressingAfterDownloading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindDecompressingAfterDownloading")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindDownloading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindDownloading")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindDuplicating() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindDuplicating")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindReceiving() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindReceiving")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileOperationKindUploading() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileOperationKindUploading")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileTotalCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileTotalCountKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressFileURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressFileURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressKindFile() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressKindFile")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSProgressThroughputKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSProgressThroughputKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRangeException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRangeException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSRecoveryAttempterErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRecoveryAttempterErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3068,13 +3564,17 @@ func NSRepublicOfChinaCalendar() uintptr {
 
 func NSRunLoopCommonModes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRunLoopCommonModes")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSecureUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSecureUnarchiveFromDataTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3104,379 +3604,505 @@ func NSShortWeekDayNameArray() uintptr {
 
 func NSStreamDataWrittenToMemoryStreamKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamDataWrittenToMemoryStreamKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamFileCurrentOffsetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamFileCurrentOffsetKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceType() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceType")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceTypeBackground() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeBackground")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceTypeCallSignaling() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeCallSignaling")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceTypeVideo() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVideo")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceTypeVoIP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVoIP")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamNetworkServiceTypeVoice() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamNetworkServiceTypeVoice")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyConfigurationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyConfigurationKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyHostKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyHostKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyPasswordKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyPasswordKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyPortKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyPortKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyUserKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyUserKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyVersion4() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersion4")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyVersion5() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersion5")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSOCKSProxyVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSOCKSProxyVersionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSSLErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSSLErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelNegotiatedSSL() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelNegotiatedSSL")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelNone")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelSSLv2() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelSSLv2")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelSSLv3() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelSSLv3")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStreamSocketSecurityLevelTLSv1() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStreamSocketSecurityLevelTLSv1")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionAllowLossyKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionAllowLossyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionDisallowedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionDisallowedEncodingsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionFromWindowsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionFromWindowsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionLikelyLanguageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionLikelyLanguageKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionLossySubstitutionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionLossySubstitutionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionSuggestedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionSuggestedEncodingsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingDetectionUseOnlySuggestedEncodingsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringEncodingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringEncodingErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformFullwidthToHalfwidth() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformFullwidthToHalfwidth")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformHiraganaToKatakana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformHiraganaToKatakana")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToArabic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToArabic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToCyrillic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToCyrillic")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToGreek() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToGreek")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToHangul() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHangul")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToHebrew() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHebrew")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToHiragana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToHiragana")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToKatakana() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToKatakana")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformLatinToThai() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformLatinToThai")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformMandarinToLatin() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformMandarinToLatin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformStripCombiningMarks() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformStripCombiningMarks")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformStripDiacritics() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformStripDiacritics")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformToLatin() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToLatin")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformToUnicodeName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToUnicodeName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSStringTransformToXMLHex() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSStringTransformToXMLHex")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSumKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSumKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSystemClockDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSystemClockDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSSystemTimeZoneDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSSystemTimeZoneDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTaskDidTerminateNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTaskDidTerminateNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingAirlineKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingAirlineKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingCityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingCityKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingCountryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingCountryKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingFlightKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingFlightKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingJobTitleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingJobTitleKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingOrganizationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingOrganizationKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingPhoneKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingPhoneKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingStateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingStateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingStreetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingStreetKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSTextCheckingZIPKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSTextCheckingZIPKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3495,14 +4121,18 @@ func NSThousandsSeparator() uintptr {
 // Deprecated: This notification does not protect against data races
 func NSThreadWillExitNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThreadWillExitNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
 func NSThumbnail1024x1024SizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSThumbnail1024x1024SizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3520,7 +4150,9 @@ func NSTimeFormatString() uintptr {
 
 func NSURLAddedToDirectoryDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAddedToDirectoryDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3531,7 +4163,9 @@ func NSURLApplicationIsScriptableKey() uintptr {
 
 func NSURLAttributeModificationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAttributeModificationDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3585,31 +4219,41 @@ func NSURLAuthenticationMethodServerTrust() uintptr {
 
 func NSURLCanonicalPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCanonicalPathKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLContentAccessDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentAccessDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLContentModificationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentModificationDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLContentTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLContentTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCreationDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3617,7 +4261,9 @@ func NSURLCreationDateKey() *NSString {
 // Deprecated: Notification is never posted
 func NSURLCredentialStorageChangedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCredentialStorageChangedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3628,25 +4274,33 @@ func NSURLCredentialStorageRemoveSynchronizableCredentials() uintptr {
 
 func NSURLCustomIconKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCustomIconKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLDirectoryEntryCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLDirectoryEntryCountKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLDocumentIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLDocumentIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLEffectiveIconKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLEffectiveIconKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3658,7 +4312,9 @@ func NSURLErrorBackgroundTaskCancelledReasonKey() uintptr {
 
 func NSURLErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3683,122 +4339,162 @@ func NSURLErrorFailingURLStringErrorKey() uintptr {
 
 func NSURLErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // @const NSURLErrorNetworkUnavailableReasonKey @abstract The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
 func NSURLErrorNetworkUnavailableReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorNetworkUnavailableReasonKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileAllocatedSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileAllocatedSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileContentIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileContentIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileProtectionComplete() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionComplete")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileProtectionCompleteUnlessOpen() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionCompleteUnlessOpen")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionCompleteUntilFirstUserAuthentication")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileProtectionNone() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileProtectionNone")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeBlockSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeBlockSpecial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeCharacterSpecial() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeCharacterSpecial")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeDirectory() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeDirectory")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeNamedPipe() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeNamedPipe")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeRegular() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeRegular")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeSocket() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeSocket")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeSymbolicLink() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeSymbolicLink")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileResourceTypeUnknown() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileResourceTypeUnknown")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -3809,211 +4505,281 @@ func NSURLFileScheme() uintptr {
 
 func NSURLFileSecurityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileSecurityKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLGenerationIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLGenerationIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLHasHiddenExtensionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLHasHiddenExtensionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsAliasFileKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsAliasFileKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsApplicationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsApplicationKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsDirectoryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsDirectoryKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsExcludedFromBackupKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsExcludedFromBackupKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsExecutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsExecutableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsHiddenKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsHiddenKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsMountTriggerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsMountTriggerKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsPackageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsPackageKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsPurgeableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsPurgeableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsReadableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsReadableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsRegularFileKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsRegularFileKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsSparseKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSparseKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsSymbolicLinkKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSymbolicLinkKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsSystemImmutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsSystemImmutableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsUbiquitousItemKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsUbiquitousItemKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsUserImmutableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsUserImmutableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsVolumeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsVolumeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLIsWritableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLIsWritableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLKeysOfUnsetValuesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLKeysOfUnsetValuesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLabelColorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLabelColorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLabelNumberKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLabelNumberKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLinkCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLinkCountKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLocalizedLabelKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedLabelKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLocalizedNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLLocalizedTypeDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLLocalizedTypeDescriptionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLMayHaveExtendedAttributesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLMayHaveExtendedAttributesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLMayShareFileContentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLMayShareFileContentKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLParentDirectoryURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLParentDirectoryURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLPathKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLPreferredIOBlockSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLPreferredIOBlockSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4088,7 +4854,9 @@ func NSURLSessionTaskPriorityLow() uintptr {
 
 func NSURLSessionTransferSizeUnknown() int64 {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionTransferSizeUnknown")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*int64)(unsafe.Pointer(ptr))
 }
 
@@ -4106,7 +4874,9 @@ func NSURLTagNamesKey() uintptr {
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
 func NSURLThumbnailDictionaryKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLThumbnailDictionaryKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4118,467 +4888,621 @@ func NSURLThumbnailKey() uintptr {
 
 func NSURLTotalFileAllocatedSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTotalFileAllocatedSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLTotalFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTotalFileSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use NSURLContentTypeKey instead
 func NSURLTypeIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLTypeIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemContainerDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemContainerDisplayNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadRequestedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadRequestedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadingStatusCurrent() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusCurrent")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusDownloaded")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadingStatusKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemDownloadingStatusNotDownloaded")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemHasUnresolvedConflictsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use NSURLUbiquitousItemDownloadingStatusKey instead
 func NSURLUbiquitousItemIsDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsDownloadedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsDownloadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsDownloadingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsExcludedFromSyncKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsExcludedFromSyncKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsSharedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsSharedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsSyncPausedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsSyncPausedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsUploadedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemIsUploadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemIsUploadingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use NSMetadataUbiquitousItemPercentDownloadedKey instead
 func NSURLUbiquitousItemPercentDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemPercentDownloadedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: Use NSMetadataUbiquitousItemPercentUploadedKey instead
 func NSURLUbiquitousItemPercentUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemPercentUploadedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemSupportedSyncControlsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemSupportedSyncControlsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousItemUploadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousItemUploadingErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemCurrentUserPermissionsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemCurrentUserRoleKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemOwnerNameComponentsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemPermissionsReadOnly")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemPermissionsReadWrite")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemRoleOwner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemRoleOwner")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLUbiquitousSharedItemRoleParticipant() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLUbiquitousSharedItemRoleParticipant")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeAvailableCapacityForImportantUsageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityForImportantUsageKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityForOpportunisticUsageKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeAvailableCapacityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeAvailableCapacityKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeCreationDateKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIdentifierKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIdentifierKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsAutomountedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsAutomountedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsBrowsableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsBrowsableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsEjectableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsEjectableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsEncryptedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsEncryptedKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsInternalKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsInternalKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsJournalingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsJournalingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsLocalKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsLocalKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsReadOnlyKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsReadOnlyKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsRemovableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsRemovableKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeIsRootFileSystemKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeIsRootFileSystemKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeLocalizedFormatDescriptionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeLocalizedFormatDescriptionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeLocalizedNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeLocalizedNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeMaximumFileSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeMaximumFileSizeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeMountFromLocationKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeMountFromLocationKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeResourceCountKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeResourceCountKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSubtypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSubtypeKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsAccessPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsAccessPermissionsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsAdvisoryFileLockingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsAdvisoryFileLockingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsCasePreservedNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCasePreservedNamesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsCaseSensitiveNamesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCaseSensitiveNamesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsCompressionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsCompressionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsExclusiveRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsExclusiveRenamingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsExtendedSecurityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsExtendedSecurityKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsFileCloningKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsFileCloningKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsFileProtectionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsFileProtectionKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsHardLinksKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsHardLinksKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsImmutableFilesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsImmutableFilesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsJournalingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsJournalingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsPersistentIDsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsPersistentIDsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsRenamingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsRootDirectoryDatesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsRootDirectoryDatesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsSparseFilesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSparseFilesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsSwapRenamingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSwapRenamingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsSymbolicLinksKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsSymbolicLinksKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsVolumeSizesKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsVolumeSizesKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeSupportsZeroRunsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeSupportsZeroRunsKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeTotalCapacityKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeTotalCapacityKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeTypeNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeTypeNameKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeURLForRemountingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeURLForRemountingKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeURLKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSURLVolumeUUIDStringKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLVolumeUUIDStringKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4594,62 +5518,82 @@ func NSUbiquitousKeyValueStoreChangedKeysKey() uintptr {
 
 func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreDidChangeExternallyNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUbiquityIdentityDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquityIdentityDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 // Deprecated: since macOS 10.14.
 func NSUnarchiveFromDataTransformerName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnarchiveFromDataTransformerName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndefinedKeyException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndefinedKeyException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUnderlyingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnderlyingErrorKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerCheckpointNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerCheckpointNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerDidCloseUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidCloseUndoGroupNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerDidOpenUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidOpenUndoGroupNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerDidRedoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidRedoChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerDidUndoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerDidUndoChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4660,37 +5604,49 @@ func NSUndoManagerGroupIsDiscardableKey() uintptr {
 
 func NSUndoManagerWillCloseUndoGroupNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillCloseUndoGroupNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerWillRedoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillRedoChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUndoManagerWillUndoChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerWillUndoChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUnionOfArraysKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfArraysKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUnionOfObjectsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfObjectsKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUnionOfSetsKeyValueOperator() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUnionOfSetsKeyValueOperator")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4702,7 +5658,9 @@ func NSUserActivityTypeBrowsingWeb() uintptr {
 // NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
 func NSUserDefaultsDidChangeNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUserDefaultsDidChangeNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4721,13 +5679,17 @@ func NSWeekDayNameArray() uintptr {
 // Deprecated: This notification does not protect against data races
 func NSWillBecomeMultiThreadedNotification() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSWillBecomeMultiThreadedNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
 func NSXMLParserErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSXMLParserErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**NSString)(unsafe.Pointer(ptr))
 }
 
@@ -4739,19 +5701,24 @@ func NSYearMonthWeekDesignations() uintptr {
 
 func NSZeroPoint() corefoundation.CGPoint {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroPoint")
-	if ptr == 0 { return corefoundation.CGPoint{} }
+	if ptr == 0 {
+		return corefoundation.CGPoint{}
+	}
 	return *(*corefoundation.CGPoint)(unsafe.Pointer(ptr))
 }
 
 func NSZeroRect() corefoundation.CGRect {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroRect")
-	if ptr == 0 { return corefoundation.CGRect{} }
+	if ptr == 0 {
+		return corefoundation.CGRect{}
+	}
 	return *(*corefoundation.CGRect)(unsafe.Pointer(ptr))
 }
 
 func NSZeroSize() corefoundation.CGSize {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSZeroSize")
-	if ptr == 0 { return corefoundation.CGSize{} }
+	if ptr == 0 {
+		return corefoundation.CGSize{}
+	}
 	return *(*corefoundation.CGSize)(unsafe.Pointer(ptr))
 }
-

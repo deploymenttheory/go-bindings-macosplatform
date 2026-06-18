@@ -135,11 +135,17 @@ func (x *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
 	return &MixerDefinition{inner: _r}
 }
 
-func (x *GeneratorNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return x.inner }
+func (x *GeneratorNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
+	return x.inner
+}
 
-func (x *GeneratorNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
+func (x *GeneratorNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition
+}
 
-func (x *GeneratorNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+func (x *GeneratorNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+}
 
 // GeneratorNodeDefinitionable is the interface implemented by [GeneratorNodeDefinition], for mocking and DI.
 type GeneratorNodeDefinitionable interface {
@@ -163,4 +169,3 @@ type GeneratorNodeDefinitionable interface {
 }
 
 var _ GeneratorNodeDefinitionable = (*GeneratorNodeDefinition)(nil)
-

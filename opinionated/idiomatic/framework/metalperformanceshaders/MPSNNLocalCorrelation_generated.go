@@ -238,11 +238,17 @@ func (x *NNLocalCorrelation) SetStrideInY(strideInY uint) {
 	x.inner.SetStrideInY(strideInY)
 }
 
-func (x *NNLocalCorrelation) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
+func (x *NNLocalCorrelation) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary {
+	return &x.inner.MPSNNReduceBinary
+}
 
-func (x *NNLocalCorrelation) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
+func (x *NNLocalCorrelation) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel
+}
 
-func (x *NNLocalCorrelation) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel }
+func (x *NNLocalCorrelation) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel
+}
 
 // NNLocalCorrelationable is the interface implemented by [NNLocalCorrelation], for mocking and DI.
 type NNLocalCorrelationable interface {
@@ -282,4 +288,3 @@ type NNLocalCorrelationable interface {
 }
 
 var _ NNLocalCorrelationable = (*NNLocalCorrelation)(nil)
-

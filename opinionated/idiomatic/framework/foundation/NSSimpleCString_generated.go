@@ -54,4 +54,3 @@ type SimpleCStringable interface {
 }
 
 var _ SimpleCStringable = (*SimpleCString)(nil)
-

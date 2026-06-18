@@ -83,4 +83,3 @@ type WorkflowViewable interface {
 }
 
 var _ WorkflowViewable = (*WorkflowView)(nil)
-

@@ -17,11 +17,11 @@ type MPSCNNNeuronExponentialNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronExponentialNode = _objcClass("MPSCNNNeuronExponentialNode")
+	_clsMPSCNNNeuronExponentialNode                  = _objcClass("MPSCNNNeuronExponentialNode")
 	_mPSCNNNeuronExponentialNodeSelNodeWithSourceABC = objc.RegisterName("nodeWithSource:a:b:c:")
 	_mPSCNNNeuronExponentialNodeSelInitWithSourceABC = objc.RegisterName("initWithSource:a:b:c:")
-	_mPSCNNNeuronExponentialNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNNeuronExponentialNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_mPSCNNNeuronExponentialNodeSelNodeWithSource    = objc.RegisterName("nodeWithSource:")
+	_mPSCNNNeuronExponentialNodeSelInitWithSource    = objc.RegisterName("initWithSource:")
 )
 
 func MPSCNNNeuronExponentialNodeFromID(id objc.ID) *MPSCNNNeuronExponentialNode {
@@ -36,28 +36,35 @@ func MPSCNNNeuronExponentialNodeFromID(id objc.ID) *MPSCNNNeuronExponentialNode 
 
 func MPSCNNNeuronExponentialNodeNodeWithSourceABC(sourceNode *MPSNNImageNode, a float32, b float32, c float32) *MPSCNNNeuronExponentialNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronExponentialNode), _mPSCNNNeuronExponentialNodeSelNodeWithSourceABC, sourceNode.Ptr(), a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronExponentialNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNNeuronExponential kernel @discussion For each pixel, applies the following function: @code f(x) = c ^ (a * x + b) @endcode @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      a                       See discussion above. @param      b                       See discussion above. @param      c                       See discussion above. @return     A new MPSNNFilter node for a MPSCNNNeuronExponential kernel.
 func (o *MPSCNNNeuronExponentialNode) InitWithSourceABC(sourceNode *MPSNNImageNode, a float32, b float32, c float32) *MPSCNNNeuronExponentialNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronExponentialNodeSelInitWithSourceABC, sourceNode.Ptr(), a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronExponentialNodeFromID(_ret)
 }
 
 // @abstract Create an autoreleased node with default values for parameters a, b, and c
 func MPSCNNNeuronExponentialNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronExponentialNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronExponentialNode), _mPSCNNNeuronExponentialNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronExponentialNodeFromID(_ret)
 }
 
 // @abstract Init a node with default values for parameters a, b, and c
 func (o *MPSCNNNeuronExponentialNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNNeuronExponentialNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronExponentialNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronExponentialNodeFromID(_ret)
 }
-

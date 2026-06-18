@@ -16,50 +16,50 @@ type NSSplitViewItem struct {
 }
 
 var (
-	_clsNSSplitViewItem = _objcClass("NSSplitViewItem")
-	_nSSplitViewItemSelSplitViewItemWithViewController = objc.RegisterName("splitViewItemWithViewController:")
-	_nSSplitViewItemSelSidebarWithViewController = objc.RegisterName("sidebarWithViewController:")
-	_nSSplitViewItemSelContentListWithViewController = objc.RegisterName("contentListWithViewController:")
-	_nSSplitViewItemSelInspectorWithViewController = objc.RegisterName("inspectorWithViewController:")
-	_nSSplitViewItemSelAddTopAlignedAccessoryViewController = objc.RegisterName("addTopAlignedAccessoryViewController:")
-	_nSSplitViewItemSelInsertTopAlignedAccessoryViewControllerAtIndex = objc.RegisterName("insertTopAlignedAccessoryViewController:atIndex:")
-	_nSSplitViewItemSelRemoveTopAlignedAccessoryViewControllerAtIndex = objc.RegisterName("removeTopAlignedAccessoryViewControllerAtIndex:")
-	_nSSplitViewItemSelAddBottomAlignedAccessoryViewController = objc.RegisterName("addBottomAlignedAccessoryViewController:")
+	_clsNSSplitViewItem                                                  = _objcClass("NSSplitViewItem")
+	_nSSplitViewItemSelSplitViewItemWithViewController                   = objc.RegisterName("splitViewItemWithViewController:")
+	_nSSplitViewItemSelSidebarWithViewController                         = objc.RegisterName("sidebarWithViewController:")
+	_nSSplitViewItemSelContentListWithViewController                     = objc.RegisterName("contentListWithViewController:")
+	_nSSplitViewItemSelInspectorWithViewController                       = objc.RegisterName("inspectorWithViewController:")
+	_nSSplitViewItemSelAddTopAlignedAccessoryViewController              = objc.RegisterName("addTopAlignedAccessoryViewController:")
+	_nSSplitViewItemSelInsertTopAlignedAccessoryViewControllerAtIndex    = objc.RegisterName("insertTopAlignedAccessoryViewController:atIndex:")
+	_nSSplitViewItemSelRemoveTopAlignedAccessoryViewControllerAtIndex    = objc.RegisterName("removeTopAlignedAccessoryViewControllerAtIndex:")
+	_nSSplitViewItemSelAddBottomAlignedAccessoryViewController           = objc.RegisterName("addBottomAlignedAccessoryViewController:")
 	_nSSplitViewItemSelInsertBottomAlignedAccessoryViewControllerAtIndex = objc.RegisterName("insertBottomAlignedAccessoryViewController:atIndex:")
 	_nSSplitViewItemSelRemoveBottomAlignedAccessoryViewControllerAtIndex = objc.RegisterName("removeBottomAlignedAccessoryViewControllerAtIndex:")
-	_nSSplitViewItemSelBehavior = objc.RegisterName("behavior")
-	_nSSplitViewItemSelViewController = objc.RegisterName("viewController")
-	_nSSplitViewItemSelSetViewController = objc.RegisterName("setViewController:")
-	_nSSplitViewItemSelIsCollapsed = objc.RegisterName("isCollapsed")
-	_nSSplitViewItemSelSetCollapsed = objc.RegisterName("setCollapsed:")
-	_nSSplitViewItemSelCanCollapse = objc.RegisterName("canCollapse")
-	_nSSplitViewItemSelSetCanCollapse = objc.RegisterName("setCanCollapse:")
-	_nSSplitViewItemSelCollapseBehavior = objc.RegisterName("collapseBehavior")
-	_nSSplitViewItemSelSetCollapseBehavior = objc.RegisterName("setCollapseBehavior:")
-	_nSSplitViewItemSelMinimumThickness = objc.RegisterName("minimumThickness")
-	_nSSplitViewItemSelSetMinimumThickness = objc.RegisterName("setMinimumThickness:")
-	_nSSplitViewItemSelMaximumThickness = objc.RegisterName("maximumThickness")
-	_nSSplitViewItemSelSetMaximumThickness = objc.RegisterName("setMaximumThickness:")
-	_nSSplitViewItemSelPreferredThicknessFraction = objc.RegisterName("preferredThicknessFraction")
-	_nSSplitViewItemSelSetPreferredThicknessFraction = objc.RegisterName("setPreferredThicknessFraction:")
-	_nSSplitViewItemSelHoldingPriority = objc.RegisterName("holdingPriority")
-	_nSSplitViewItemSelSetHoldingPriority = objc.RegisterName("setHoldingPriority:")
-	_nSSplitViewItemSelAutomaticMaximumThickness = objc.RegisterName("automaticMaximumThickness")
-	_nSSplitViewItemSelSetAutomaticMaximumThickness = objc.RegisterName("setAutomaticMaximumThickness:")
-	_nSSplitViewItemSelIsSpringLoaded = objc.RegisterName("isSpringLoaded")
-	_nSSplitViewItemSelSetSpringLoaded = objc.RegisterName("setSpringLoaded:")
-	_nSSplitViewItemSelCanCollapseFromWindowResize = objc.RegisterName("canCollapseFromWindowResize")
-	_nSSplitViewItemSelSetCanCollapseFromWindowResize = objc.RegisterName("setCanCollapseFromWindowResize:")
-	_nSSplitViewItemSelAllowsFullHeightLayout = objc.RegisterName("allowsFullHeightLayout")
-	_nSSplitViewItemSelSetAllowsFullHeightLayout = objc.RegisterName("setAllowsFullHeightLayout:")
-	_nSSplitViewItemSelTitlebarSeparatorStyle = objc.RegisterName("titlebarSeparatorStyle")
-	_nSSplitViewItemSelSetTitlebarSeparatorStyle = objc.RegisterName("setTitlebarSeparatorStyle:")
-	_nSSplitViewItemSelAutomaticallyAdjustsSafeAreaInsets = objc.RegisterName("automaticallyAdjustsSafeAreaInsets")
-	_nSSplitViewItemSelSetAutomaticallyAdjustsSafeAreaInsets = objc.RegisterName("setAutomaticallyAdjustsSafeAreaInsets:")
-	_nSSplitViewItemSelTopAlignedAccessoryViewControllers = objc.RegisterName("topAlignedAccessoryViewControllers")
-	_nSSplitViewItemSelSetTopAlignedAccessoryViewControllers = objc.RegisterName("setTopAlignedAccessoryViewControllers:")
-	_nSSplitViewItemSelBottomAlignedAccessoryViewControllers = objc.RegisterName("bottomAlignedAccessoryViewControllers")
-	_nSSplitViewItemSelSetBottomAlignedAccessoryViewControllers = objc.RegisterName("setBottomAlignedAccessoryViewControllers:")
+	_nSSplitViewItemSelBehavior                                          = objc.RegisterName("behavior")
+	_nSSplitViewItemSelViewController                                    = objc.RegisterName("viewController")
+	_nSSplitViewItemSelSetViewController                                 = objc.RegisterName("setViewController:")
+	_nSSplitViewItemSelIsCollapsed                                       = objc.RegisterName("isCollapsed")
+	_nSSplitViewItemSelSetCollapsed                                      = objc.RegisterName("setCollapsed:")
+	_nSSplitViewItemSelCanCollapse                                       = objc.RegisterName("canCollapse")
+	_nSSplitViewItemSelSetCanCollapse                                    = objc.RegisterName("setCanCollapse:")
+	_nSSplitViewItemSelCollapseBehavior                                  = objc.RegisterName("collapseBehavior")
+	_nSSplitViewItemSelSetCollapseBehavior                               = objc.RegisterName("setCollapseBehavior:")
+	_nSSplitViewItemSelMinimumThickness                                  = objc.RegisterName("minimumThickness")
+	_nSSplitViewItemSelSetMinimumThickness                               = objc.RegisterName("setMinimumThickness:")
+	_nSSplitViewItemSelMaximumThickness                                  = objc.RegisterName("maximumThickness")
+	_nSSplitViewItemSelSetMaximumThickness                               = objc.RegisterName("setMaximumThickness:")
+	_nSSplitViewItemSelPreferredThicknessFraction                        = objc.RegisterName("preferredThicknessFraction")
+	_nSSplitViewItemSelSetPreferredThicknessFraction                     = objc.RegisterName("setPreferredThicknessFraction:")
+	_nSSplitViewItemSelHoldingPriority                                   = objc.RegisterName("holdingPriority")
+	_nSSplitViewItemSelSetHoldingPriority                                = objc.RegisterName("setHoldingPriority:")
+	_nSSplitViewItemSelAutomaticMaximumThickness                         = objc.RegisterName("automaticMaximumThickness")
+	_nSSplitViewItemSelSetAutomaticMaximumThickness                      = objc.RegisterName("setAutomaticMaximumThickness:")
+	_nSSplitViewItemSelIsSpringLoaded                                    = objc.RegisterName("isSpringLoaded")
+	_nSSplitViewItemSelSetSpringLoaded                                   = objc.RegisterName("setSpringLoaded:")
+	_nSSplitViewItemSelCanCollapseFromWindowResize                       = objc.RegisterName("canCollapseFromWindowResize")
+	_nSSplitViewItemSelSetCanCollapseFromWindowResize                    = objc.RegisterName("setCanCollapseFromWindowResize:")
+	_nSSplitViewItemSelAllowsFullHeightLayout                            = objc.RegisterName("allowsFullHeightLayout")
+	_nSSplitViewItemSelSetAllowsFullHeightLayout                         = objc.RegisterName("setAllowsFullHeightLayout:")
+	_nSSplitViewItemSelTitlebarSeparatorStyle                            = objc.RegisterName("titlebarSeparatorStyle")
+	_nSSplitViewItemSelSetTitlebarSeparatorStyle                         = objc.RegisterName("setTitlebarSeparatorStyle:")
+	_nSSplitViewItemSelAutomaticallyAdjustsSafeAreaInsets                = objc.RegisterName("automaticallyAdjustsSafeAreaInsets")
+	_nSSplitViewItemSelSetAutomaticallyAdjustsSafeAreaInsets             = objc.RegisterName("setAutomaticallyAdjustsSafeAreaInsets:")
+	_nSSplitViewItemSelTopAlignedAccessoryViewControllers                = objc.RegisterName("topAlignedAccessoryViewControllers")
+	_nSSplitViewItemSelSetTopAlignedAccessoryViewControllers             = objc.RegisterName("setTopAlignedAccessoryViewControllers:")
+	_nSSplitViewItemSelBottomAlignedAccessoryViewControllers             = objc.RegisterName("bottomAlignedAccessoryViewControllers")
+	_nSSplitViewItemSelSetBottomAlignedAccessoryViewControllers          = objc.RegisterName("setBottomAlignedAccessoryViewControllers:")
 )
 
 func NSSplitViewItemFromID(id objc.ID) *NSSplitViewItem {
@@ -75,28 +75,36 @@ func NSSplitViewItemFromID(id objc.ID) *NSSplitViewItem {
 // Creates an autoreleased SplitViewItem that represents the provided ViewController. All other properties are left at their default. \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem.
 func NSSplitViewItemSplitViewItemWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelSplitViewItemWithViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewItemFromID(_ret)
 }
 
 // Creates a split view item representing a sidebar for the provided ViewController. Sidebars have standard system behavior, specifically: - Translucent material background - The ability to collapse/uncollapse on split view size changes - The ability to overlay at small split view sizes when in fullscreen - canCollapse is set to YES - minimumThickness and maximumThickness are set to the standard minimum and maximum sidebar size - preferredThicknessFraction is set to the standard fraction for sidebars (0.15) - springLoaded is set to YES \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as a sidebar.
 func NSSplitViewItemSidebarWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelSidebarWithViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewItemFromID(_ret)
 }
 
 // Creates a split view item representing a content list for the provided ViewController, akin to Mail's message list, Note's note list. Content lists have system standard defaults, specifically: - minimumThickness and maximumThickness are set to the system standard for content lists - automaticMaximumThickness is set to the system standard for content lists - preferredThicknessFraction is set to the standard fraction for content lists (0.28 when a neighbor sidebar is visible, 0.33 if not) \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as a content list.
 func NSSplitViewItemContentListWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelContentListWithViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewItemFromID(_ret)
 }
 
 // Creates a split view item representing an inspector for the provided ViewController. On macOS 14.0 and above inspectors have the following standard system behavior: - canCollapse is set to YES - minimumThickness and maximumThickness are set to the standard inspector size (270) and are not resizable by default \param viewController The view controller used to set the viewController property \return An autoreleased SplitViewItem that acts as an inspector.
 func NSSplitViewItemInspectorWithViewController(viewController *NSViewController) *NSSplitViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSplitViewItem), _nSSplitViewItemSelInspectorWithViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewItemFromID(_ret)
 }
 
@@ -135,7 +143,9 @@ func (o *NSSplitViewItem) Behavior() NSSplitViewItemBehavior {
 // The view controller represented by the SplitViewItem. An exception will be thrown if a new viewController is set while the receiving SplitViewItem is added to a SplitViewController.
 func (o *NSSplitViewItem) ViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemSelViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -290,7 +300,9 @@ func (o *NSSplitViewItem) SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdj
 // The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
 func (o *NSSplitViewItem) TopAlignedAccessoryViewControllers() *foundation.NSArray[*NSSplitViewItemAccessoryViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemSelTopAlignedAccessoryViewControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSSplitViewItemAccessoryViewController](_ret)
 }
 
@@ -301,11 +313,12 @@ func (o *NSSplitViewItem) SetTopAlignedAccessoryViewControllers(topAlignedAccess
 
 func (o *NSSplitViewItem) BottomAlignedAccessoryViewControllers() *foundation.NSArray[*NSSplitViewItemAccessoryViewController] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemSelBottomAlignedAccessoryViewControllers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSSplitViewItemAccessoryViewController](_ret)
 }
 
 func (o *NSSplitViewItem) SetBottomAlignedAccessoryViewControllers(bottomAlignedAccessoryViewControllers *foundation.NSArray[*NSSplitViewItemAccessoryViewController]) {
 	o.Ptr().Send(_nSSplitViewItemSelSetBottomAlignedAccessoryViewControllers, bottomAlignedAccessoryViewControllers.Ptr())
 }
-

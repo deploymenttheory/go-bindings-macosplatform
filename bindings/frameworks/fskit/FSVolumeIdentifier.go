@@ -25,4 +25,3 @@ func FSVolumeIdentifierFromID(id objc.ID) *FSVolumeIdentifier {
 	purego.Track(o)
 	return o
 }
-

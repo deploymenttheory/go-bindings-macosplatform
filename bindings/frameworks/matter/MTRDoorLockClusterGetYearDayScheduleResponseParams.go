@@ -18,20 +18,20 @@ type MTRDoorLockClusterGetYearDayScheduleResponseParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterGetYearDayScheduleResponseParams = _objcClass("MTRDoorLockClusterGetYearDayScheduleResponseParams")
+	_clsMTRDoorLockClusterGetYearDayScheduleResponseParams                           = _objcClass("MTRDoorLockClusterGetYearDayScheduleResponseParams")
 	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelYearDayIndex = objc.RegisterName("yearDayIndex")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetYearDayIndex = objc.RegisterName("setYearDayIndex:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalStartTime = objc.RegisterName("localStartTime")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetLocalStartTime = objc.RegisterName("setLocalStartTime:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalEndTime = objc.RegisterName("localEndTime")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetLocalEndTime = objc.RegisterName("setLocalEndTime:")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelYearDayIndex               = objc.RegisterName("yearDayIndex")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetYearDayIndex            = objc.RegisterName("setYearDayIndex:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelUserIndex                  = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetUserIndex               = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalStartTime             = objc.RegisterName("localStartTime")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetLocalStartTime          = objc.RegisterName("setLocalStartTime:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalEndTime               = objc.RegisterName("localEndTime")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetLocalEndTime            = objc.RegisterName("setLocalEndTime:")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRDoorLockClusterGetYearDayScheduleResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
@@ -48,7 +48,9 @@ func MTRDoorLockClusterGetYearDayScheduleResponseParamsFromID(id objc.ID) *MTRDo
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDoorLockClusterGetYearDayScheduleResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -57,7 +59,9 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) InitWithResponseVal
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelYearDayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetYearDayIndex(yea
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetUserIndex(userIn
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetStatus(status *f
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalStartTime(l
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelLocalEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -108,11 +120,12 @@ func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalEndTime(loc
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterGetYearDayScheduleResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterGetYearDayScheduleResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

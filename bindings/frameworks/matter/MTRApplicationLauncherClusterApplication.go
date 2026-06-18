@@ -25,4 +25,3 @@ func MTRApplicationLauncherClusterApplicationFromID(id objc.ID) *MTRApplicationL
 	purego.Track(o)
 	return o
 }
-

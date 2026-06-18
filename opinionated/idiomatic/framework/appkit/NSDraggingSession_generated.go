@@ -128,4 +128,3 @@ type DraggingSessionable interface {
 }
 
 var _ DraggingSessionable = (*DraggingSession)(nil)
-

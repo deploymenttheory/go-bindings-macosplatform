@@ -297,7 +297,9 @@ func (x *GraphPooling2DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadTo
 	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
 }
 
-func (x *GraphPooling2DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphPooling2DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphPooling2DOpDescriptorable is the interface implemented by [GraphPooling2DOpDescriptor], for mocking and DI.
 type GraphPooling2DOpDescriptorable interface {
@@ -354,4 +356,3 @@ type GraphPooling2DOpDescriptorable interface {
 }
 
 var _ GraphPooling2DOpDescriptorable = (*GraphPooling2DOpDescriptor)(nil)
-

@@ -112,9 +112,13 @@ func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFi
 	x.inner.UpdateFlowUsingVerdictForDirection(flow, verdict, direction)
 }
 
-func (x *NEFilterDataProvider) asNEFilterProvider() *raw.NEFilterProvider { return &x.inner.NEFilterProvider }
+func (x *NEFilterDataProvider) asNEFilterProvider() *raw.NEFilterProvider {
+	return &x.inner.NEFilterProvider
+}
 
-func (x *NEFilterDataProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEFilterProvider.NEProvider }
+func (x *NEFilterDataProvider) asNEProvider() *raw.NEProvider {
+	return &x.inner.NEFilterProvider.NEProvider
+}
 
 // NEFilterDataProviderable is the interface implemented by [NEFilterDataProvider], for mocking and DI.
 type NEFilterDataProviderable interface {
@@ -130,4 +134,3 @@ type NEFilterDataProviderable interface {
 }
 
 var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)
-

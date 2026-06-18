@@ -97,4 +97,3 @@ type CharacterSetable interface {
 }
 
 var _ CharacterSetable = (*CharacterSet)(nil)
-

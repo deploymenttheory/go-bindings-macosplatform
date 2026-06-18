@@ -16,7 +16,9 @@ type MTRClusterTimeFormatLocalization struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterTimeFormatLocalization].
-func (x *MTRClusterTimeFormatLocalization) Unwrap() *raw.MTRClusterTimeFormatLocalization { return x.inner }
+func (x *MTRClusterTimeFormatLocalization) Unwrap() *raw.MTRClusterTimeFormatLocalization {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,9 +106,13 @@ func (x *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParam
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterTimeFormatLocalization) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterTimeFormatLocalization) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterTimeFormatLocalization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterTimeFormatLocalization) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterTimeFormatLocalizationable is the interface implemented by [MTRClusterTimeFormatLocalization], for mocking and DI.
 type MTRClusterTimeFormatLocalizationable interface {
@@ -126,4 +132,3 @@ type MTRClusterTimeFormatLocalizationable interface {
 }
 
 var _ MTRClusterTimeFormatLocalizationable = (*MTRClusterTimeFormatLocalization)(nil)
-

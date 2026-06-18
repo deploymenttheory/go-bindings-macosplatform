@@ -95,4 +95,3 @@ func (e SFSpeechRecognizerAuthorizationStatus) String() string {
 		return fmt.Sprintf("SFSpeechRecognizerAuthorizationStatus(%d)", int64(e))
 	}
 }
-

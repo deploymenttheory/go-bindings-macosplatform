@@ -18,7 +18,7 @@ type HKSourceQuery struct {
 }
 
 var (
-	_clsHKSourceQuery = _objcClass("HKSourceQuery")
+	_clsHKSourceQuery                                                   = _objcClass("HKSourceQuery")
 	_hKSourceQuerySelInitWithSampleTypeSamplePredicateCompletionHandler = objc.RegisterName("initWithSampleType:samplePredicate:completionHandler:")
 )
 
@@ -48,7 +48,8 @@ func (o *HKSourceQuery) InitWithSampleTypeSamplePredicateCompletionHandler(sampl
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKSourceQuerySelInitWithSampleTypeSamplePredicateCompletionHandler, sampleType.Ptr(), objectPredicate.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKSourceQueryFromID(_ret)
 }
-

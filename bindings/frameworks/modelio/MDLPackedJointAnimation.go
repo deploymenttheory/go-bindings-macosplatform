@@ -16,12 +16,12 @@ type MDLPackedJointAnimation struct {
 }
 
 var (
-	_clsMDLPackedJointAnimation = _objcClass("MDLPackedJointAnimation")
+	_clsMDLPackedJointAnimation                       = _objcClass("MDLPackedJointAnimation")
 	_mDLPackedJointAnimationSelInitWithNameJointPaths = objc.RegisterName("initWithName:jointPaths:")
-	_mDLPackedJointAnimationSelJointPaths = objc.RegisterName("jointPaths")
-	_mDLPackedJointAnimationSelTranslations = objc.RegisterName("translations")
-	_mDLPackedJointAnimationSelRotations = objc.RegisterName("rotations")
-	_mDLPackedJointAnimationSelScales = objc.RegisterName("scales")
+	_mDLPackedJointAnimationSelJointPaths             = objc.RegisterName("jointPaths")
+	_mDLPackedJointAnimationSelTranslations           = objc.RegisterName("translations")
+	_mDLPackedJointAnimationSelRotations              = objc.RegisterName("rotations")
+	_mDLPackedJointAnimationSelScales                 = objc.RegisterName("scales")
 )
 
 func MDLPackedJointAnimationFromID(id objc.ID) *MDLPackedJointAnimation {
@@ -36,7 +36,9 @@ func MDLPackedJointAnimationFromID(id objc.ID) *MDLPackedJointAnimation {
 
 func (o *MDLPackedJointAnimation) InitWithNameJointPaths(name *foundation.NSString, jointPaths *foundation.NSArray[*foundation.NSString]) *MDLPackedJointAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelInitWithNameJointPaths, name.Ptr(), jointPaths)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLPackedJointAnimationFromID(_ret)
 }
 
@@ -47,19 +49,24 @@ func (o *MDLPackedJointAnimation) JointPaths() *foundation.NSArray[*foundation.N
 
 func (o *MDLPackedJointAnimation) Translations() *MDLAnimatedVector3Array {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelTranslations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedVector3ArrayFromID(_ret)
 }
 
 func (o *MDLPackedJointAnimation) Rotations() *MDLAnimatedQuaternionArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelRotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedQuaternionArrayFromID(_ret)
 }
 
 func (o *MDLPackedJointAnimation) Scales() *MDLAnimatedVector3Array {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPackedJointAnimationSelScales)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLAnimatedVector3ArrayFromID(_ret)
 }
-

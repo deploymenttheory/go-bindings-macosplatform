@@ -16,14 +16,14 @@ type MTRCommandWithRequiredResponse struct {
 }
 
 var (
-	_clsMTRCommandWithRequiredResponse = _objcClass("MTRCommandWithRequiredResponse")
+	_clsMTRCommandWithRequiredResponse                                          = _objcClass("MTRCommandWithRequiredResponse")
 	_mTRCommandWithRequiredResponseSelInitWithPathCommandFieldsRequiredResponse = objc.RegisterName("initWithPath:commandFields:requiredResponse:")
-	_mTRCommandWithRequiredResponseSelPath = objc.RegisterName("path")
-	_mTRCommandWithRequiredResponseSelSetPath = objc.RegisterName("setPath:")
-	_mTRCommandWithRequiredResponseSelCommandFields = objc.RegisterName("commandFields")
-	_mTRCommandWithRequiredResponseSelSetCommandFields = objc.RegisterName("setCommandFields:")
-	_mTRCommandWithRequiredResponseSelRequiredResponse = objc.RegisterName("requiredResponse")
-	_mTRCommandWithRequiredResponseSelSetRequiredResponse = objc.RegisterName("setRequiredResponse:")
+	_mTRCommandWithRequiredResponseSelPath                                      = objc.RegisterName("path")
+	_mTRCommandWithRequiredResponseSelSetPath                                   = objc.RegisterName("setPath:")
+	_mTRCommandWithRequiredResponseSelCommandFields                             = objc.RegisterName("commandFields")
+	_mTRCommandWithRequiredResponseSelSetCommandFields                          = objc.RegisterName("setCommandFields:")
+	_mTRCommandWithRequiredResponseSelRequiredResponse                          = objc.RegisterName("requiredResponse")
+	_mTRCommandWithRequiredResponseSelSetRequiredResponse                       = objc.RegisterName("setRequiredResponse:")
 )
 
 func MTRCommandWithRequiredResponseFromID(id objc.ID) *MTRCommandWithRequiredResponse {
@@ -38,14 +38,18 @@ func MTRCommandWithRequiredResponseFromID(id objc.ID) *MTRCommandWithRequiredRes
 
 func (o *MTRCommandWithRequiredResponse) InitWithPathCommandFieldsRequiredResponse(path *MTRCommandPath, commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommandWithRequiredResponseSelInitWithPathCommandFieldsRequiredResponse, path.Ptr(), commandFields, requiredResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCommandWithRequiredResponseFromID(_ret)
 }
 
 // The path of the command being invoked.
 func (o *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCommandWithRequiredResponseSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCommandPathFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *MTRCommandWithRequiredResponse) RequiredResponse() *foundation.NSDictio
 func (o *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
 	o.Ptr().Send(_mTRCommandWithRequiredResponseSelSetRequiredResponse, requiredResponse)
 }
-

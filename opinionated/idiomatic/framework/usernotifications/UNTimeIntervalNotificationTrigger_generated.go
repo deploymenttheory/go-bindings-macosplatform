@@ -16,7 +16,9 @@ type TimeIntervalNotificationTrigger struct {
 }
 
 // Unwrap returns the underlying [raw.UNTimeIntervalNotificationTrigger].
-func (x *TimeIntervalNotificationTrigger) Unwrap() *raw.UNTimeIntervalNotificationTrigger { return x.inner }
+func (x *TimeIntervalNotificationTrigger) Unwrap() *raw.UNTimeIntervalNotificationTrigger {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,7 +48,9 @@ func (x *TimeIntervalNotificationTrigger) TimeInterval() float64 {
 	return x.inner.TimeInterval()
 }
 
-func (x *TimeIntervalNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
+func (x *TimeIntervalNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
+	return &x.inner.UNNotificationTrigger
+}
 
 // TimeIntervalNotificationTriggerable is the interface implemented by [TimeIntervalNotificationTrigger], for mocking and DI.
 type TimeIntervalNotificationTriggerable interface {
@@ -56,4 +60,3 @@ type TimeIntervalNotificationTriggerable interface {
 }
 
 var _ TimeIntervalNotificationTriggerable = (*TimeIntervalNotificationTrigger)(nil)
-

@@ -19,12 +19,12 @@ type QLThumbnailReply struct {
 }
 
 var (
-	_clsQLThumbnailReply = _objcClass("QLThumbnailReply")
-	_qLThumbnailReplySelReplyWithContextSizeDrawingBlock = objc.RegisterName("replyWithContextSize:drawingBlock:")
+	_clsQLThumbnailReply                                               = _objcClass("QLThumbnailReply")
+	_qLThumbnailReplySelReplyWithContextSizeDrawingBlock               = objc.RegisterName("replyWithContextSize:drawingBlock:")
 	_qLThumbnailReplySelReplyWithContextSizeCurrentContextDrawingBlock = objc.RegisterName("replyWithContextSize:currentContextDrawingBlock:")
-	_qLThumbnailReplySelReplyWithImageFileURL = objc.RegisterName("replyWithImageFileURL:")
-	_qLThumbnailReplySelExtensionBadge = objc.RegisterName("extensionBadge")
-	_qLThumbnailReplySelSetExtensionBadge = objc.RegisterName("setExtensionBadge:")
+	_qLThumbnailReplySelReplyWithImageFileURL                          = objc.RegisterName("replyWithImageFileURL:")
+	_qLThumbnailReplySelExtensionBadge                                 = objc.RegisterName("extensionBadge")
+	_qLThumbnailReplySelSetExtensionBadge                              = objc.RegisterName("setExtensionBadge:")
 )
 
 func QLThumbnailReplyFromID(id objc.ID) *QLThumbnailReply {
@@ -47,7 +47,9 @@ func QLThumbnailReplyReplyWithContextSizeDrawingBlock(contextSize corefoundation
 		defer __block_drawingBlock.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLThumbnailReply), _qLThumbnailReplySelReplyWithContextSizeDrawingBlock, contextSize, __block_drawingBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLThumbnailReplyFromID(_ret)
 }
 
@@ -61,25 +63,30 @@ func QLThumbnailReplyReplyWithContextSizeCurrentContextDrawingBlock(contextSize 
 		defer __block_drawingBlock.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLThumbnailReply), _qLThumbnailReplySelReplyWithContextSizeCurrentContextDrawingBlock, contextSize, __block_drawingBlock)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLThumbnailReplyFromID(_ret)
 }
 
 // You can create a reply object with a file URL of an image that will be used as the thumbnail. The image will be downscaled to fit the size of the QLFileThumbnailRequest if necessary.
 func QLThumbnailReplyReplyWithImageFileURL(fileURL *foundation.NSURL) *QLThumbnailReply {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLThumbnailReply), _qLThumbnailReplySelReplyWithImageFileURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLThumbnailReplyFromID(_ret)
 }
 
 // The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
 func (o *QLThumbnailReply) ExtensionBadge() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLThumbnailReplySelExtensionBadge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *QLThumbnailReply) SetExtensionBadge(extensionBadge *foundation.NSString) {
 	o.Ptr().Send(_qLThumbnailReplySelSetExtensionBadge, extensionBadge.Ptr())
 }
-

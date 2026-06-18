@@ -16,10 +16,10 @@ type CLSProgressReportingCapability struct {
 }
 
 var (
-	_clsCLSProgressReportingCapability = _objcClass("CLSProgressReportingCapability")
+	_clsCLSProgressReportingCapability                    = _objcClass("CLSProgressReportingCapability")
 	_cLSProgressReportingCapabilitySelInitWithKindDetails = objc.RegisterName("initWithKind:details:")
-	_cLSProgressReportingCapabilitySelKind = objc.RegisterName("kind")
-	_cLSProgressReportingCapabilitySelDetails = objc.RegisterName("details")
+	_cLSProgressReportingCapabilitySelKind                = objc.RegisterName("kind")
+	_cLSProgressReportingCapabilitySelDetails             = objc.RegisterName("details")
 )
 
 func CLSProgressReportingCapabilityFromID(id objc.ID) *CLSProgressReportingCapability {
@@ -35,7 +35,9 @@ func CLSProgressReportingCapabilityFromID(id objc.ID) *CLSProgressReportingCapab
 // @abstract       Initialize and configure the type of progress reporting capability @param         kind        The kind of progress reporting capability @param         details     An optional localized string describing the capability. For example: "Reports percentage of progress", "Reports overall score". Schoolwork will use an appropriate default string if one is not provided.
 func (o *CLSProgressReportingCapability) InitWithKindDetails(kind CLSProgressReportingCapabilityKind, details *foundation.NSString) *CLSProgressReportingCapability {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSProgressReportingCapabilitySelInitWithKindDetails, kind, details.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSProgressReportingCapabilityFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func (o *CLSProgressReportingCapability) Kind() CLSProgressReportingCapabilityKi
 // @abstract      Returns progress reporting details
 func (o *CLSProgressReportingCapability) Details() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSProgressReportingCapabilitySelDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

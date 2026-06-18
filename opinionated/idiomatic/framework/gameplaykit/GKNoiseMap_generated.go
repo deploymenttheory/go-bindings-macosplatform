@@ -98,4 +98,3 @@ type NoiseMapable interface {
 }
 
 var _ NoiseMapable = (*NoiseMap)(nil)
-

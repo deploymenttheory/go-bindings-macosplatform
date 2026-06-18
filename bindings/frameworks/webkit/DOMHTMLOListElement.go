@@ -16,13 +16,13 @@ type DOMHTMLOListElement struct {
 }
 
 var (
-	_clsDOMHTMLOListElement = _objcClass("DOMHTMLOListElement")
-	_dOMHTMLOListElementSelCompact = objc.RegisterName("compact")
+	_clsDOMHTMLOListElement           = _objcClass("DOMHTMLOListElement")
+	_dOMHTMLOListElementSelCompact    = objc.RegisterName("compact")
 	_dOMHTMLOListElementSelSetCompact = objc.RegisterName("setCompact:")
-	_dOMHTMLOListElementSelStart = objc.RegisterName("start")
-	_dOMHTMLOListElementSelSetStart = objc.RegisterName("setStart:")
-	_dOMHTMLOListElementSelType = objc.RegisterName("type")
-	_dOMHTMLOListElementSelSetType = objc.RegisterName("setType:")
+	_dOMHTMLOListElementSelStart      = objc.RegisterName("start")
+	_dOMHTMLOListElementSelSetStart   = objc.RegisterName("setStart:")
+	_dOMHTMLOListElementSelType       = objc.RegisterName("type")
+	_dOMHTMLOListElementSelSetType    = objc.RegisterName("setType:")
 )
 
 func DOMHTMLOListElementFromID(id objc.ID) *DOMHTMLOListElement {
@@ -55,11 +55,12 @@ func (o *DOMHTMLOListElement) SetStart(start int) {
 
 func (o *DOMHTMLOListElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOListElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLOListElement) SetType(type_ *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLOListElementSelSetType, type_.Ptr())
 }
-

@@ -17,7 +17,9 @@ type MTRChannelClusterLineupInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterLineupInfoStruct].
-func (x *MTRChannelClusterLineupInfoStruct) Unwrap() *raw.MTRChannelClusterLineupInfoStruct { return x.inner }
+func (x *MTRChannelClusterLineupInfoStruct) Unwrap() *raw.MTRChannelClusterLineupInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,7 +115,9 @@ func (x *MTRChannelClusterLineupInfoStruct) SetLineupInfoType(lineupInfoType *fo
 	x.inner.SetLineupInfoType(lineupInfoType)
 }
 
-func (x *MTRChannelClusterLineupInfoStruct) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct { return x.inner }
+func (x *MTRChannelClusterLineupInfoStruct) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct {
+	return x.inner
+}
 
 // MTRChannelClusterLineupInfoStructable is the interface implemented by [MTRChannelClusterLineupInfoStruct], for mocking and DI.
 type MTRChannelClusterLineupInfoStructable interface {
@@ -133,4 +137,3 @@ type MTRChannelClusterLineupInfoStructable interface {
 }
 
 var _ MTRChannelClusterLineupInfoStructable = (*MTRChannelClusterLineupInfoStruct)(nil)
-

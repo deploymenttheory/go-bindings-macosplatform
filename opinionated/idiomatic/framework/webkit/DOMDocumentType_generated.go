@@ -113,7 +113,9 @@ func (x *DOMDocumentType) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMDocumentType) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMDocumentType) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMDocumentType) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMDocumentTypeable is the interface implemented by [DOMDocumentType], for mocking and DI.
 type DOMDocumentTypeable interface {
@@ -130,4 +132,3 @@ type DOMDocumentTypeable interface {
 }
 
 var _ DOMDocumentTypeable = (*DOMDocumentType)(nil)
-

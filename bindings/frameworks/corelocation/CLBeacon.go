@@ -18,15 +18,15 @@ type CLBeacon struct {
 }
 
 var (
-	_clsCLBeacon = _objcClass("CLBeacon")
-	_cLBeaconSelTimestamp = objc.RegisterName("timestamp")
-	_cLBeaconSelUUID = objc.RegisterName("UUID")
+	_clsCLBeacon              = _objcClass("CLBeacon")
+	_cLBeaconSelTimestamp     = objc.RegisterName("timestamp")
+	_cLBeaconSelUUID          = objc.RegisterName("UUID")
 	_cLBeaconSelProximityUUID = objc.RegisterName("proximityUUID")
-	_cLBeaconSelMajor = objc.RegisterName("major")
-	_cLBeaconSelMinor = objc.RegisterName("minor")
-	_cLBeaconSelProximity = objc.RegisterName("proximity")
-	_cLBeaconSelAccuracy = objc.RegisterName("accuracy")
-	_cLBeaconSelRssi = objc.RegisterName("rssi")
+	_cLBeaconSelMajor         = objc.RegisterName("major")
+	_cLBeaconSelMinor         = objc.RegisterName("minor")
+	_cLBeaconSelProximity     = objc.RegisterName("proximity")
+	_cLBeaconSelAccuracy      = objc.RegisterName("accuracy")
+	_cLBeaconSelRssi          = objc.RegisterName("rssi")
 )
 
 func CLBeaconFromID(id objc.ID) *CLBeacon {
@@ -41,32 +41,42 @@ func CLBeaconFromID(id objc.ID) *CLBeacon {
 
 func (o *CLBeacon) Timestamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *CLBeacon) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // Deprecated: since macOS 10.15.
 func (o *CLBeacon) ProximityUUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconSelProximityUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *CLBeacon) Major() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconSelMajor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CLBeacon) Minor() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLBeaconSelMinor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -84,4 +94,3 @@ func (o *CLBeacon) Rssi() int {
 	_ret := objc.Send[int](o.Ptr(), _cLBeaconSelRssi)
 	return _ret
 }
-

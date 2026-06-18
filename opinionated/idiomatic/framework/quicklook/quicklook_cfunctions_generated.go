@@ -210,4 +210,3 @@ func QLThumbnailRequestSetThumbnailWithDataRepresentation(thumbnail unsafe.Point
 func QLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail unsafe.Pointer, url unsafe.Pointer, contentTypeUTI unsafe.Pointer, previewProperties unsafe.Pointer, properties unsafe.Pointer) {
 	raw.QLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail, url, contentTypeUTI, previewProperties, properties)
 }
-

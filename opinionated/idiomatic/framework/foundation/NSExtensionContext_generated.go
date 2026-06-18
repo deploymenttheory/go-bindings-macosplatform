@@ -76,4 +76,3 @@ type ExtensionContextable interface {
 }
 
 var _ ExtensionContextable = (*ExtensionContext)(nil)
-

@@ -17,23 +17,23 @@ type GKMatchmakerViewController struct {
 }
 
 var (
-	_clsGKMatchmakerViewController = _objcClass("GKMatchmakerViewController")
-	_gKMatchmakerViewControllerSelInitWithMatchRequest = objc.RegisterName("initWithMatchRequest:")
-	_gKMatchmakerViewControllerSelInitWithInvite = objc.RegisterName("initWithInvite:")
-	_gKMatchmakerViewControllerSelAddPlayersToMatch = objc.RegisterName("addPlayersToMatch:")
-	_gKMatchmakerViewControllerSelSetHostedPlayerDidConnect = objc.RegisterName("setHostedPlayer:didConnect:")
-	_gKMatchmakerViewControllerSelMatchmakerDelegate = objc.RegisterName("matchmakerDelegate")
-	_gKMatchmakerViewControllerSelSetMatchmakerDelegate = objc.RegisterName("setMatchmakerDelegate:")
-	_gKMatchmakerViewControllerSelMatchRequest = objc.RegisterName("matchRequest")
-	_gKMatchmakerViewControllerSelIsHosted = objc.RegisterName("isHosted")
-	_gKMatchmakerViewControllerSelSetHosted = objc.RegisterName("setHosted:")
-	_gKMatchmakerViewControllerSelMatchmakingMode = objc.RegisterName("matchmakingMode")
-	_gKMatchmakerViewControllerSelSetMatchmakingMode = objc.RegisterName("setMatchmakingMode:")
-	_gKMatchmakerViewControllerSelCanStartWithMinimumPlayers = objc.RegisterName("canStartWithMinimumPlayers")
+	_clsGKMatchmakerViewController                              = _objcClass("GKMatchmakerViewController")
+	_gKMatchmakerViewControllerSelInitWithMatchRequest          = objc.RegisterName("initWithMatchRequest:")
+	_gKMatchmakerViewControllerSelInitWithInvite                = objc.RegisterName("initWithInvite:")
+	_gKMatchmakerViewControllerSelAddPlayersToMatch             = objc.RegisterName("addPlayersToMatch:")
+	_gKMatchmakerViewControllerSelSetHostedPlayerDidConnect     = objc.RegisterName("setHostedPlayer:didConnect:")
+	_gKMatchmakerViewControllerSelMatchmakerDelegate            = objc.RegisterName("matchmakerDelegate")
+	_gKMatchmakerViewControllerSelSetMatchmakerDelegate         = objc.RegisterName("setMatchmakerDelegate:")
+	_gKMatchmakerViewControllerSelMatchRequest                  = objc.RegisterName("matchRequest")
+	_gKMatchmakerViewControllerSelIsHosted                      = objc.RegisterName("isHosted")
+	_gKMatchmakerViewControllerSelSetHosted                     = objc.RegisterName("setHosted:")
+	_gKMatchmakerViewControllerSelMatchmakingMode               = objc.RegisterName("matchmakingMode")
+	_gKMatchmakerViewControllerSelSetMatchmakingMode            = objc.RegisterName("setMatchmakingMode:")
+	_gKMatchmakerViewControllerSelCanStartWithMinimumPlayers    = objc.RegisterName("canStartWithMinimumPlayers")
 	_gKMatchmakerViewControllerSelSetCanStartWithMinimumPlayers = objc.RegisterName("setCanStartWithMinimumPlayers:")
-	_gKMatchmakerViewControllerSelDefaultInvitationMessage = objc.RegisterName("defaultInvitationMessage")
-	_gKMatchmakerViewControllerSelSetDefaultInvitationMessage = objc.RegisterName("setDefaultInvitationMessage:")
-	_gKMatchmakerViewControllerSelSetHostedPlayerConnected = objc.RegisterName("setHostedPlayer:connected:")
+	_gKMatchmakerViewControllerSelDefaultInvitationMessage      = objc.RegisterName("defaultInvitationMessage")
+	_gKMatchmakerViewControllerSelSetDefaultInvitationMessage   = objc.RegisterName("setDefaultInvitationMessage:")
+	_gKMatchmakerViewControllerSelSetHostedPlayerConnected      = objc.RegisterName("setHostedPlayer:connected:")
 )
 
 func GKMatchmakerViewControllerFromID(id objc.ID) *GKMatchmakerViewController {
@@ -78,7 +78,9 @@ func (o *GKMatchmakerViewController) SetMatchmakerDelegate(matchmakerDelegate GK
 
 func (o *GKMatchmakerViewController) MatchRequest() *GKMatchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelMatchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKMatchRequestFromID(_ret)
 }
 
@@ -116,7 +118,9 @@ func (o *GKMatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithM
 // Deprecated: No longer supported.
 func (o *GKMatchmakerViewController) DefaultInvitationMessage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchmakerViewControllerSelDefaultInvitationMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,4 +134,3 @@ func (o *GKMatchmakerViewController) SetDefaultInvitationMessage(defaultInvitati
 func (o *GKMatchmakerViewController) SetHostedPlayerConnected(playerID *foundation.NSString, connected bool) {
 	o.Ptr().Send(_gKMatchmakerViewControllerSelSetHostedPlayerConnected, playerID.Ptr(), connected)
 }
-

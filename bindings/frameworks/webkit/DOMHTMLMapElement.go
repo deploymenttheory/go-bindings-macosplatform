@@ -16,9 +16,9 @@ type DOMHTMLMapElement struct {
 }
 
 var (
-	_clsDOMHTMLMapElement = _objcClass("DOMHTMLMapElement")
-	_dOMHTMLMapElementSelAreas = objc.RegisterName("areas")
-	_dOMHTMLMapElementSelName = objc.RegisterName("name")
+	_clsDOMHTMLMapElement        = _objcClass("DOMHTMLMapElement")
+	_dOMHTMLMapElementSelAreas   = objc.RegisterName("areas")
+	_dOMHTMLMapElementSelName    = objc.RegisterName("name")
 	_dOMHTMLMapElementSelSetName = objc.RegisterName("setName:")
 )
 
@@ -34,17 +34,20 @@ func DOMHTMLMapElementFromID(id objc.ID) *DOMHTMLMapElement {
 
 func (o *DOMHTMLMapElement) Areas() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMapElementSelAreas)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLMapElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMapElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLMapElement) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLMapElementSelSetName, name.Ptr())
 }
-

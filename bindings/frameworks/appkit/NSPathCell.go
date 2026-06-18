@@ -17,31 +17,31 @@ type NSPathCell struct {
 }
 
 var (
-	_clsNSPathCell = _objcClass("NSPathCell")
-	_nSPathCellSelRectOfPathComponentCellWithFrameInView = objc.RegisterName("rectOfPathComponentCell:withFrame:inView:")
+	_clsNSPathCell                                        = _objcClass("NSPathCell")
+	_nSPathCellSelRectOfPathComponentCellWithFrameInView  = objc.RegisterName("rectOfPathComponentCell:withFrame:inView:")
 	_nSPathCellSelPathComponentCellAtPointWithFrameInView = objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:")
-	_nSPathCellSelMouseEnteredWithFrameInView = objc.RegisterName("mouseEntered:withFrame:inView:")
-	_nSPathCellSelMouseExitedWithFrameInView = objc.RegisterName("mouseExited:withFrame:inView:")
-	_nSPathCellSelPathStyle = objc.RegisterName("pathStyle")
-	_nSPathCellSelSetPathStyle = objc.RegisterName("setPathStyle:")
-	_nSPathCellSelURL = objc.RegisterName("URL")
-	_nSPathCellSelSetURL = objc.RegisterName("setURL:")
-	_nSPathCellSelAllowedTypes = objc.RegisterName("allowedTypes")
-	_nSPathCellSelSetAllowedTypes = objc.RegisterName("setAllowedTypes:")
-	_nSPathCellSelDelegate = objc.RegisterName("delegate")
-	_nSPathCellSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSPathCellSelPathComponentCellClass = objc.RegisterName("pathComponentCellClass")
-	_nSPathCellSelPathComponentCells = objc.RegisterName("pathComponentCells")
-	_nSPathCellSelSetPathComponentCells = objc.RegisterName("setPathComponentCells:")
-	_nSPathCellSelClickedPathComponentCell = objc.RegisterName("clickedPathComponentCell")
-	_nSPathCellSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSPathCellSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSPathCellSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSPathCellSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSPathCellSelPlaceholderString = objc.RegisterName("placeholderString")
-	_nSPathCellSelSetPlaceholderString = objc.RegisterName("setPlaceholderString:")
-	_nSPathCellSelPlaceholderAttributedString = objc.RegisterName("placeholderAttributedString")
-	_nSPathCellSelSetPlaceholderAttributedString = objc.RegisterName("setPlaceholderAttributedString:")
+	_nSPathCellSelMouseEnteredWithFrameInView             = objc.RegisterName("mouseEntered:withFrame:inView:")
+	_nSPathCellSelMouseExitedWithFrameInView              = objc.RegisterName("mouseExited:withFrame:inView:")
+	_nSPathCellSelPathStyle                               = objc.RegisterName("pathStyle")
+	_nSPathCellSelSetPathStyle                            = objc.RegisterName("setPathStyle:")
+	_nSPathCellSelURL                                     = objc.RegisterName("URL")
+	_nSPathCellSelSetURL                                  = objc.RegisterName("setURL:")
+	_nSPathCellSelAllowedTypes                            = objc.RegisterName("allowedTypes")
+	_nSPathCellSelSetAllowedTypes                         = objc.RegisterName("setAllowedTypes:")
+	_nSPathCellSelDelegate                                = objc.RegisterName("delegate")
+	_nSPathCellSelSetDelegate                             = objc.RegisterName("setDelegate:")
+	_nSPathCellSelPathComponentCellClass                  = objc.RegisterName("pathComponentCellClass")
+	_nSPathCellSelPathComponentCells                      = objc.RegisterName("pathComponentCells")
+	_nSPathCellSelSetPathComponentCells                   = objc.RegisterName("setPathComponentCells:")
+	_nSPathCellSelClickedPathComponentCell                = objc.RegisterName("clickedPathComponentCell")
+	_nSPathCellSelDoubleAction                            = objc.RegisterName("doubleAction")
+	_nSPathCellSelSetDoubleAction                         = objc.RegisterName("setDoubleAction:")
+	_nSPathCellSelBackgroundColor                         = objc.RegisterName("backgroundColor")
+	_nSPathCellSelSetBackgroundColor                      = objc.RegisterName("setBackgroundColor:")
+	_nSPathCellSelPlaceholderString                       = objc.RegisterName("placeholderString")
+	_nSPathCellSelSetPlaceholderString                    = objc.RegisterName("setPlaceholderString:")
+	_nSPathCellSelPlaceholderAttributedString             = objc.RegisterName("placeholderAttributedString")
+	_nSPathCellSelSetPlaceholderAttributedString          = objc.RegisterName("setPlaceholderAttributedString:")
 )
 
 func NSPathCellFromID(id objc.ID) *NSPathCell {
@@ -61,7 +61,9 @@ func (o *NSPathCell) RectOfPathComponentCellWithFrameInView(cell *NSPathComponen
 
 func (o *NSPathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *NSView) *NSPathComponentCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCellAtPointWithFrameInView, point, frame, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPathComponentCellFromID(_ret)
 }
 
@@ -84,7 +86,9 @@ func (o *NSPathCell) SetPathStyle(pathStyle NSPathStyle) {
 
 func (o *NSPathCell) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -117,7 +121,9 @@ func NSPathCellPathComponentCellClass() objc.Class {
 
 func (o *NSPathCell) PathComponentCells() *foundation.NSArray[*NSPathComponentCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPathComponentCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPathComponentCell](_ret)
 }
 
@@ -127,7 +133,9 @@ func (o *NSPathCell) SetPathComponentCells(pathComponentCells *foundation.NSArra
 
 func (o *NSPathCell) ClickedPathComponentCell() *NSPathComponentCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelClickedPathComponentCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPathComponentCellFromID(_ret)
 }
 
@@ -142,7 +150,9 @@ func (o *NSPathCell) SetDoubleAction(doubleAction objc.SEL) {
 
 func (o *NSPathCell) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -152,7 +162,9 @@ func (o *NSPathCell) SetBackgroundColor(backgroundColor *NSColor) {
 
 func (o *NSPathCell) PlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -162,11 +174,12 @@ func (o *NSPathCell) SetPlaceholderString(placeholderString *foundation.NSString
 
 func (o *NSPathCell) PlaceholderAttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathCellSelPlaceholderAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *NSPathCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
 	o.Ptr().Send(_nSPathCellSelSetPlaceholderAttributedString, placeholderAttributedString.Ptr())
 }
-

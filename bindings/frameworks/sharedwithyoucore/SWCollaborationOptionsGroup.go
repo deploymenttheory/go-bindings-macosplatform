@@ -16,16 +16,16 @@ type SWCollaborationOptionsGroup struct {
 }
 
 var (
-	_clsSWCollaborationOptionsGroup = _objcClass("SWCollaborationOptionsGroup")
-	_sWCollaborationOptionsGroupSelInitWithIdentifierOptions = objc.RegisterName("initWithIdentifier:options:")
+	_clsSWCollaborationOptionsGroup                                  = _objcClass("SWCollaborationOptionsGroup")
+	_sWCollaborationOptionsGroupSelInitWithIdentifierOptions         = objc.RegisterName("initWithIdentifier:options:")
 	_sWCollaborationOptionsGroupSelOptionsGroupWithIdentifierOptions = objc.RegisterName("optionsGroupWithIdentifier:options:")
-	_sWCollaborationOptionsGroupSelTitle = objc.RegisterName("title")
-	_sWCollaborationOptionsGroupSelSetTitle = objc.RegisterName("setTitle:")
-	_sWCollaborationOptionsGroupSelIdentifier = objc.RegisterName("identifier")
-	_sWCollaborationOptionsGroupSelFooter = objc.RegisterName("footer")
-	_sWCollaborationOptionsGroupSelSetFooter = objc.RegisterName("setFooter:")
-	_sWCollaborationOptionsGroupSelOptions = objc.RegisterName("options")
-	_sWCollaborationOptionsGroupSelSetOptions = objc.RegisterName("setOptions:")
+	_sWCollaborationOptionsGroupSelTitle                             = objc.RegisterName("title")
+	_sWCollaborationOptionsGroupSelSetTitle                          = objc.RegisterName("setTitle:")
+	_sWCollaborationOptionsGroupSelIdentifier                        = objc.RegisterName("identifier")
+	_sWCollaborationOptionsGroupSelFooter                            = objc.RegisterName("footer")
+	_sWCollaborationOptionsGroupSelSetFooter                         = objc.RegisterName("setFooter:")
+	_sWCollaborationOptionsGroupSelOptions                           = objc.RegisterName("options")
+	_sWCollaborationOptionsGroupSelSetOptions                        = objc.RegisterName("setOptions:")
 )
 
 func SWCollaborationOptionsGroupFromID(id objc.ID) *SWCollaborationOptionsGroup {
@@ -41,21 +41,27 @@ func SWCollaborationOptionsGroupFromID(id objc.ID) *SWCollaborationOptionsGroup 
 // @abstract Initializes a new option group @param identifier unique identifier for the group @param options SWCollaborationOptions to display in the section
 func (o *SWCollaborationOptionsGroup) InitWithIdentifierOptions(identifier *foundation.NSString, options *foundation.NSArray[*SWCollaborationOption]) *SWCollaborationOptionsGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelInitWithIdentifierOptions, identifier.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationOptionsGroupFromID(_ret)
 }
 
 // @abstract Initializes a new option group @param identifier unique identifier for the group @param options SWCollaborationOptions to display in the group
 func SWCollaborationOptionsGroupOptionsGroupWithIdentifierOptions(identifier *foundation.NSString, options *foundation.NSArray[*SWCollaborationOption]) *SWCollaborationOptionsGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSWCollaborationOptionsGroup), _sWCollaborationOptionsGroupSelOptionsGroupWithIdentifierOptions, identifier.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationOptionsGroupFromID(_ret)
 }
 
 // @abstract Localized string used to title the section
 func (o *SWCollaborationOptionsGroup) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -66,14 +72,18 @@ func (o *SWCollaborationOptionsGroup) SetTitle(title *foundation.NSString) {
 // @abstract A unique identifier
 func (o *SWCollaborationOptionsGroup) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @abstract Localized string to describe or provide additional information about the group of options
 func (o *SWCollaborationOptionsGroup) Footer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelFooter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,11 +94,12 @@ func (o *SWCollaborationOptionsGroup) SetFooter(footer *foundation.NSString) {
 // @abstract SWCollaborationOptions to be displayed in the group
 func (o *SWCollaborationOptionsGroup) Options() *foundation.NSArray[*SWCollaborationOption] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWCollaborationOptionsGroupSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SWCollaborationOption](_ret)
 }
 
 func (o *SWCollaborationOptionsGroup) SetOptions(options *foundation.NSArray[*SWCollaborationOption]) {
 	o.Ptr().Send(_sWCollaborationOptionsGroupSelSetOptions, options.Ptr())
 }
-

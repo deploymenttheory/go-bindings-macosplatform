@@ -18,12 +18,12 @@ type MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams = _objcClass("MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams")
+	_clsMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams                           = _objcClass("MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams")
 	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsFromID(id obj
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) InitWit
 
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStat
 
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

@@ -51,7 +51,9 @@ func (x *MTRControllerFactoryParams) WithPaaCerts(items ...*foundation.NSData) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -67,7 +69,9 @@ func (x *MTRControllerFactoryParams) WithCdCerts(items ...*foundation.NSData) *M
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -89,7 +93,9 @@ func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -105,7 +111,9 @@ func (x *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(it
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -173,7 +181,9 @@ func (x *MTRControllerFactoryParams) SetCdCerts(cdCerts *foundation.NSArray[*fou
 	x.inner.SetCdCerts(cdCerts)
 }
 
-func (x *MTRControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams { return &x.inner.MTRDeviceControllerFactoryParams }
+func (x *MTRControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams {
+	return &x.inner.MTRDeviceControllerFactoryParams
+}
 
 // MTRControllerFactoryParamsable is the interface implemented by [MTRControllerFactoryParams], for mocking and DI.
 type MTRControllerFactoryParamsable interface {
@@ -196,4 +206,3 @@ type MTRControllerFactoryParamsable interface {
 }
 
 var _ MTRControllerFactoryParamsable = (*MTRControllerFactoryParams)(nil)
-

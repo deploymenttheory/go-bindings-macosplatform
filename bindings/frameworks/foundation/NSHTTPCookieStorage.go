@@ -15,20 +15,20 @@ type NSHTTPCookieStorage struct {
 }
 
 var (
-	_clsNSHTTPCookieStorage = _objcClass("NSHTTPCookieStorage")
+	_clsNSHTTPCookieStorage                                               = _objcClass("NSHTTPCookieStorage")
 	_nSHTTPCookieStorageSelSharedCookieStorageForGroupContainerIdentifier = objc.RegisterName("sharedCookieStorageForGroupContainerIdentifier:")
-	_nSHTTPCookieStorageSelSetCookie = objc.RegisterName("setCookie:")
-	_nSHTTPCookieStorageSelDeleteCookie = objc.RegisterName("deleteCookie:")
-	_nSHTTPCookieStorageSelRemoveCookiesSinceDate = objc.RegisterName("removeCookiesSinceDate:")
-	_nSHTTPCookieStorageSelCookiesForURL = objc.RegisterName("cookiesForURL:")
-	_nSHTTPCookieStorageSelSetCookiesForURLMainDocumentURL = objc.RegisterName("setCookies:forURL:mainDocumentURL:")
-	_nSHTTPCookieStorageSelSortedCookiesUsingDescriptors = objc.RegisterName("sortedCookiesUsingDescriptors:")
-	_nSHTTPCookieStorageSelSharedHTTPCookieStorage = objc.RegisterName("sharedHTTPCookieStorage")
-	_nSHTTPCookieStorageSelCookies = objc.RegisterName("cookies")
-	_nSHTTPCookieStorageSelCookieAcceptPolicy = objc.RegisterName("cookieAcceptPolicy")
-	_nSHTTPCookieStorageSelSetCookieAcceptPolicy = objc.RegisterName("setCookieAcceptPolicy:")
-	_nSHTTPCookieStorageSelStoreCookiesForTask = objc.RegisterName("storeCookies:forTask:")
-	_nSHTTPCookieStorageSelGetCookiesForTaskCompletionHandler = objc.RegisterName("getCookiesForTask:completionHandler:")
+	_nSHTTPCookieStorageSelSetCookie                                      = objc.RegisterName("setCookie:")
+	_nSHTTPCookieStorageSelDeleteCookie                                   = objc.RegisterName("deleteCookie:")
+	_nSHTTPCookieStorageSelRemoveCookiesSinceDate                         = objc.RegisterName("removeCookiesSinceDate:")
+	_nSHTTPCookieStorageSelCookiesForURL                                  = objc.RegisterName("cookiesForURL:")
+	_nSHTTPCookieStorageSelSetCookiesForURLMainDocumentURL                = objc.RegisterName("setCookies:forURL:mainDocumentURL:")
+	_nSHTTPCookieStorageSelSortedCookiesUsingDescriptors                  = objc.RegisterName("sortedCookiesUsingDescriptors:")
+	_nSHTTPCookieStorageSelSharedHTTPCookieStorage                        = objc.RegisterName("sharedHTTPCookieStorage")
+	_nSHTTPCookieStorageSelCookies                                        = objc.RegisterName("cookies")
+	_nSHTTPCookieStorageSelCookieAcceptPolicy                             = objc.RegisterName("cookieAcceptPolicy")
+	_nSHTTPCookieStorageSelSetCookieAcceptPolicy                          = objc.RegisterName("setCookieAcceptPolicy:")
+	_nSHTTPCookieStorageSelStoreCookiesForTask                            = objc.RegisterName("storeCookies:forTask:")
+	_nSHTTPCookieStorageSelGetCookiesForTaskCompletionHandler             = objc.RegisterName("getCookiesForTask:completionHandler:")
 )
 
 func NSHTTPCookieStorageFromID(id objc.ID) *NSHTTPCookieStorage {
@@ -44,7 +44,9 @@ func NSHTTPCookieStorageFromID(id objc.ID) *NSHTTPCookieStorage {
 // @method sharedCookieStorageForGroupContainerIdentifier: @abstract Get the cookie storage for the container associated with the specified application group identifier @param identifier The application group identifier @result A cookie storage with a persistent store in the application group container @discussion By default, applications and associated app extensions have different data containers, which means that the sharedHTTPCookieStorage singleton will refer to different persistent cookie stores in an application and any app extensions that it contains. This method allows clients to create a persistent cookie storage that can be shared among all applications and extensions with access to the same application group. Subsequent calls to this method with the same identifier will return the same cookie storage instance.
 func NSHTTPCookieStorageSharedCookieStorageForGroupContainerIdentifier(identifier *NSString) *NSHTTPCookieStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookieStorage), _nSHTTPCookieStorageSelSharedCookieStorageForGroupContainerIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHTTPCookieStorageFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *NSHTTPCookieStorage) RemoveCookiesSinceDate(date *NSDate) {
 // @method cookiesForURL: @abstract Returns an array of cookies to send to the given URL. @param URL The URL for which to get cookies. @result an NSArray of NSHTTPCookie objects. @discussion The cookie manager examines the cookies it stores and includes those which should be sent to the given URL. You can use <tt>+[NSCookie requestHeaderFieldsWithCookies:]</tt> to turn this array into a set of header fields to add to a request.
 func (o *NSHTTPCookieStorage) CookiesForURL(uRL *NSURL) *NSArray[*NSHTTPCookie] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieStorageSelCookiesForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSHTTPCookie](_ret)
 }
 
@@ -78,21 +82,27 @@ func (o *NSHTTPCookieStorage) SetCookiesForURLMainDocumentURL(cookies *NSArray[*
 // @method sortedCookiesUsingDescriptors: @abstract Returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter. @param sortOrder an array of NSSortDescriptors which represent the preferred sort order of the resulting array. @discussion proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
 func (o *NSHTTPCookieStorage) SortedCookiesUsingDescriptors(sortOrder *NSArray[*NSSortDescriptor]) *NSArray[*NSHTTPCookie] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieStorageSelSortedCookiesUsingDescriptors, sortOrder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSHTTPCookie](_ret)
 }
 
 // @property sharedHTTPCookieStorage @abstract Get the shared cookie storage in the default location. @result The shared cookie storage @discussion Starting in OS X 10.11, each app has its own sharedHTTPCookieStorage singleton, which will not be shared with other applications.
 func NSHTTPCookieStorageSharedHTTPCookieStorage() *NSHTTPCookieStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookieStorage), _nSHTTPCookieStorageSelSharedHTTPCookieStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSHTTPCookieStorageFromID(_ret)
 }
 
 // @abstract Get all the cookies @result An NSArray of NSHTTPCookies
 func (o *NSHTTPCookieStorage) Cookies() *NSArray[*NSHTTPCookie] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSHTTPCookieStorageSelCookies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSHTTPCookie](_ret)
 }
 
@@ -123,4 +133,3 @@ func (o *NSHTTPCookieStorage) GetCookiesForTaskCompletionHandler(task *NSURLSess
 	}
 	o.Ptr().Send(_nSHTTPCookieStorageSelGetCookiesForTaskCompletionHandler, task.Ptr(), __block_completionHandler)
 }
-

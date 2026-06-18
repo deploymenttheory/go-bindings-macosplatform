@@ -15,4 +15,3 @@ var (
 func MXSignpostMetricsSnapshot() unsafe.Pointer {
 	return __MXSignpostMetricsSnapshot()
 }
-

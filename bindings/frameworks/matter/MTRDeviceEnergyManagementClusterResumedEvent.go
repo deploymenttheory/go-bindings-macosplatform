@@ -16,8 +16,8 @@ type MTRDeviceEnergyManagementClusterResumedEvent struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterResumedEvent = _objcClass("MTRDeviceEnergyManagementClusterResumedEvent")
-	_mTRDeviceEnergyManagementClusterResumedEventSelCause = objc.RegisterName("cause")
+	_clsMTRDeviceEnergyManagementClusterResumedEvent         = _objcClass("MTRDeviceEnergyManagementClusterResumedEvent")
+	_mTRDeviceEnergyManagementClusterResumedEventSelCause    = objc.RegisterName("cause")
 	_mTRDeviceEnergyManagementClusterResumedEventSelSetCause = objc.RegisterName("setCause:")
 )
 
@@ -33,11 +33,12 @@ func MTRDeviceEnergyManagementClusterResumedEventFromID(id objc.ID) *MTRDeviceEn
 
 func (o *MTRDeviceEnergyManagementClusterResumedEvent) Cause() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterResumedEventSelCause)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterResumedEventSelSetCause, cause.Ptr())
 }
-

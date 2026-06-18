@@ -15,16 +15,16 @@ type SCNTorus struct {
 }
 
 var (
-	_clsSCNTorus = _objcClass("SCNTorus")
+	_clsSCNTorus                              = _objcClass("SCNTorus")
 	_sCNTorusSelTorusWithRingRadiusPipeRadius = objc.RegisterName("torusWithRingRadius:pipeRadius:")
-	_sCNTorusSelRingRadius = objc.RegisterName("ringRadius")
-	_sCNTorusSelSetRingRadius = objc.RegisterName("setRingRadius:")
-	_sCNTorusSelPipeRadius = objc.RegisterName("pipeRadius")
-	_sCNTorusSelSetPipeRadius = objc.RegisterName("setPipeRadius:")
-	_sCNTorusSelRingSegmentCount = objc.RegisterName("ringSegmentCount")
-	_sCNTorusSelSetRingSegmentCount = objc.RegisterName("setRingSegmentCount:")
-	_sCNTorusSelPipeSegmentCount = objc.RegisterName("pipeSegmentCount")
-	_sCNTorusSelSetPipeSegmentCount = objc.RegisterName("setPipeSegmentCount:")
+	_sCNTorusSelRingRadius                    = objc.RegisterName("ringRadius")
+	_sCNTorusSelSetRingRadius                 = objc.RegisterName("setRingRadius:")
+	_sCNTorusSelPipeRadius                    = objc.RegisterName("pipeRadius")
+	_sCNTorusSelSetPipeRadius                 = objc.RegisterName("setPipeRadius:")
+	_sCNTorusSelRingSegmentCount              = objc.RegisterName("ringSegmentCount")
+	_sCNTorusSelSetRingSegmentCount           = objc.RegisterName("setRingSegmentCount:")
+	_sCNTorusSelPipeSegmentCount              = objc.RegisterName("pipeSegmentCount")
+	_sCNTorusSelSetPipeSegmentCount           = objc.RegisterName("setPipeSegmentCount:")
 )
 
 func SCNTorusFromID(id objc.ID) *SCNTorus {
@@ -40,7 +40,9 @@ func SCNTorusFromID(id objc.ID) *SCNTorus {
 // @method torusWithRingRadius:pipeRadius: @abstract Creates and returns a torus with given ring radius and pipe radius. @param ringRadius The radius of the ring. @param pipeRadius The radius of the pipe.
 func SCNTorusTorusWithRingRadiusPipeRadius(ringRadius float64, pipeRadius float64) *SCNTorus {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNTorus), _sCNTorusSelTorusWithRingRadiusPipeRadius, ringRadius, pipeRadius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNTorusFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *SCNTorus) PipeSegmentCount() int {
 func (o *SCNTorus) SetPipeSegmentCount(pipeSegmentCount int) {
 	o.Ptr().Send(_sCNTorusSelSetPipeSegmentCount, pipeSegmentCount)
 }
-

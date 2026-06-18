@@ -47,9 +47,13 @@ func (x *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
 	})
 }
 
-func (x *SoundEventNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return x.inner }
+func (x *SoundEventNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
+	return x.inner
+}
 
-func (x *SoundEventNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEDefinition }
+func (x *SoundEventNodeDefinition) asDefinition() *raw.PHASEDefinition {
+	return &x.inner.PHASEDefinition
+}
 
 // SoundEventNodeDefinitionable is the interface implemented by [SoundEventNodeDefinition], for mocking and DI.
 type SoundEventNodeDefinitionable interface {
@@ -58,4 +62,3 @@ type SoundEventNodeDefinitionable interface {
 }
 
 var _ SoundEventNodeDefinitionable = (*SoundEventNodeDefinition)(nil)
-

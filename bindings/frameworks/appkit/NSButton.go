@@ -17,73 +17,73 @@ type NSButton struct {
 }
 
 var (
-	_clsNSButton = _objcClass("NSButton")
-	_nSButtonSelButtonWithTitleImageTargetAction = objc.RegisterName("buttonWithTitle:image:target:action:")
-	_nSButtonSelButtonWithTitleTargetAction = objc.RegisterName("buttonWithTitle:target:action:")
-	_nSButtonSelButtonWithImageTargetAction = objc.RegisterName("buttonWithImage:target:action:")
-	_nSButtonSelCheckboxWithTitleTargetAction = objc.RegisterName("checkboxWithTitle:target:action:")
-	_nSButtonSelRadioButtonWithTitleTargetAction = objc.RegisterName("radioButtonWithTitle:target:action:")
-	_nSButtonSelSetButtonType = objc.RegisterName("setButtonType:")
-	_nSButtonSelSetPeriodicDelayInterval = objc.RegisterName("setPeriodicDelay:interval:")
-	_nSButtonSelGetPeriodicDelayInterval = objc.RegisterName("getPeriodicDelay:interval:")
-	_nSButtonSelSetNextState = objc.RegisterName("setNextState")
-	_nSButtonSelHighlight = objc.RegisterName("highlight:")
-	_nSButtonSelCompressWithPrioritizedCompressionOptions = objc.RegisterName("compressWithPrioritizedCompressionOptions:")
+	_clsNSButton                                             = _objcClass("NSButton")
+	_nSButtonSelButtonWithTitleImageTargetAction             = objc.RegisterName("buttonWithTitle:image:target:action:")
+	_nSButtonSelButtonWithTitleTargetAction                  = objc.RegisterName("buttonWithTitle:target:action:")
+	_nSButtonSelButtonWithImageTargetAction                  = objc.RegisterName("buttonWithImage:target:action:")
+	_nSButtonSelCheckboxWithTitleTargetAction                = objc.RegisterName("checkboxWithTitle:target:action:")
+	_nSButtonSelRadioButtonWithTitleTargetAction             = objc.RegisterName("radioButtonWithTitle:target:action:")
+	_nSButtonSelSetButtonType                                = objc.RegisterName("setButtonType:")
+	_nSButtonSelSetPeriodicDelayInterval                     = objc.RegisterName("setPeriodicDelay:interval:")
+	_nSButtonSelGetPeriodicDelayInterval                     = objc.RegisterName("getPeriodicDelay:interval:")
+	_nSButtonSelSetNextState                                 = objc.RegisterName("setNextState")
+	_nSButtonSelHighlight                                    = objc.RegisterName("highlight:")
+	_nSButtonSelCompressWithPrioritizedCompressionOptions    = objc.RegisterName("compressWithPrioritizedCompressionOptions:")
 	_nSButtonSelMinimumSizeWithPrioritizedCompressionOptions = objc.RegisterName("minimumSizeWithPrioritizedCompressionOptions:")
-	_nSButtonSelTitle = objc.RegisterName("title")
-	_nSButtonSelSetTitle = objc.RegisterName("setTitle:")
-	_nSButtonSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSButtonSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSButtonSelAlternateTitle = objc.RegisterName("alternateTitle")
-	_nSButtonSelSetAlternateTitle = objc.RegisterName("setAlternateTitle:")
-	_nSButtonSelAttributedAlternateTitle = objc.RegisterName("attributedAlternateTitle")
-	_nSButtonSelSetAttributedAlternateTitle = objc.RegisterName("setAttributedAlternateTitle:")
-	_nSButtonSelHasDestructiveAction = objc.RegisterName("hasDestructiveAction")
-	_nSButtonSelSetHasDestructiveAction = objc.RegisterName("setHasDestructiveAction:")
-	_nSButtonSelSound = objc.RegisterName("sound")
-	_nSButtonSelSetSound = objc.RegisterName("setSound:")
-	_nSButtonSelIsSpringLoaded = objc.RegisterName("isSpringLoaded")
-	_nSButtonSelSetSpringLoaded = objc.RegisterName("setSpringLoaded:")
-	_nSButtonSelMaxAcceleratorLevel = objc.RegisterName("maxAcceleratorLevel")
-	_nSButtonSelSetMaxAcceleratorLevel = objc.RegisterName("setMaxAcceleratorLevel:")
-	_nSButtonSelBezelStyle = objc.RegisterName("bezelStyle")
-	_nSButtonSelSetBezelStyle = objc.RegisterName("setBezelStyle:")
-	_nSButtonSelIsBordered = objc.RegisterName("isBordered")
-	_nSButtonSelSetBordered = objc.RegisterName("setBordered:")
-	_nSButtonSelIsTransparent = objc.RegisterName("isTransparent")
-	_nSButtonSelSetTransparent = objc.RegisterName("setTransparent:")
-	_nSButtonSelShowsBorderOnlyWhileMouseInside = objc.RegisterName("showsBorderOnlyWhileMouseInside")
-	_nSButtonSelSetShowsBorderOnlyWhileMouseInside = objc.RegisterName("setShowsBorderOnlyWhileMouseInside:")
-	_nSButtonSelBezelColor = objc.RegisterName("bezelColor")
-	_nSButtonSelSetBezelColor = objc.RegisterName("setBezelColor:")
-	_nSButtonSelContentTintColor = objc.RegisterName("contentTintColor")
-	_nSButtonSelSetContentTintColor = objc.RegisterName("setContentTintColor:")
-	_nSButtonSelTintProminence = objc.RegisterName("tintProminence")
-	_nSButtonSelSetTintProminence = objc.RegisterName("setTintProminence:")
-	_nSButtonSelImage = objc.RegisterName("image")
-	_nSButtonSelSetImage = objc.RegisterName("setImage:")
-	_nSButtonSelAlternateImage = objc.RegisterName("alternateImage")
-	_nSButtonSelSetAlternateImage = objc.RegisterName("setAlternateImage:")
-	_nSButtonSelImagePosition = objc.RegisterName("imagePosition")
-	_nSButtonSelSetImagePosition = objc.RegisterName("setImagePosition:")
-	_nSButtonSelImageScaling = objc.RegisterName("imageScaling")
-	_nSButtonSelSetImageScaling = objc.RegisterName("setImageScaling:")
-	_nSButtonSelImageHugsTitle = objc.RegisterName("imageHugsTitle")
-	_nSButtonSelSetImageHugsTitle = objc.RegisterName("setImageHugsTitle:")
-	_nSButtonSelSymbolConfiguration = objc.RegisterName("symbolConfiguration")
-	_nSButtonSelSetSymbolConfiguration = objc.RegisterName("setSymbolConfiguration:")
-	_nSButtonSelState = objc.RegisterName("state")
-	_nSButtonSelSetState = objc.RegisterName("setState:")
-	_nSButtonSelAllowsMixedState = objc.RegisterName("allowsMixedState")
-	_nSButtonSelSetAllowsMixedState = objc.RegisterName("setAllowsMixedState:")
-	_nSButtonSelKeyEquivalent = objc.RegisterName("keyEquivalent")
-	_nSButtonSelSetKeyEquivalent = objc.RegisterName("setKeyEquivalent:")
-	_nSButtonSelKeyEquivalentModifierMask = objc.RegisterName("keyEquivalentModifierMask")
-	_nSButtonSelSetKeyEquivalentModifierMask = objc.RegisterName("setKeyEquivalentModifierMask:")
-	_nSButtonSelActiveCompressionOptions = objc.RegisterName("activeCompressionOptions")
-	_nSButtonSelBorderShape = objc.RegisterName("borderShape")
-	_nSButtonSelSetBorderShape = objc.RegisterName("setBorderShape:")
-	_nSButtonSelSetTitleWithMnemonic = objc.RegisterName("setTitleWithMnemonic:")
+	_nSButtonSelTitle                                        = objc.RegisterName("title")
+	_nSButtonSelSetTitle                                     = objc.RegisterName("setTitle:")
+	_nSButtonSelAttributedTitle                              = objc.RegisterName("attributedTitle")
+	_nSButtonSelSetAttributedTitle                           = objc.RegisterName("setAttributedTitle:")
+	_nSButtonSelAlternateTitle                               = objc.RegisterName("alternateTitle")
+	_nSButtonSelSetAlternateTitle                            = objc.RegisterName("setAlternateTitle:")
+	_nSButtonSelAttributedAlternateTitle                     = objc.RegisterName("attributedAlternateTitle")
+	_nSButtonSelSetAttributedAlternateTitle                  = objc.RegisterName("setAttributedAlternateTitle:")
+	_nSButtonSelHasDestructiveAction                         = objc.RegisterName("hasDestructiveAction")
+	_nSButtonSelSetHasDestructiveAction                      = objc.RegisterName("setHasDestructiveAction:")
+	_nSButtonSelSound                                        = objc.RegisterName("sound")
+	_nSButtonSelSetSound                                     = objc.RegisterName("setSound:")
+	_nSButtonSelIsSpringLoaded                               = objc.RegisterName("isSpringLoaded")
+	_nSButtonSelSetSpringLoaded                              = objc.RegisterName("setSpringLoaded:")
+	_nSButtonSelMaxAcceleratorLevel                          = objc.RegisterName("maxAcceleratorLevel")
+	_nSButtonSelSetMaxAcceleratorLevel                       = objc.RegisterName("setMaxAcceleratorLevel:")
+	_nSButtonSelBezelStyle                                   = objc.RegisterName("bezelStyle")
+	_nSButtonSelSetBezelStyle                                = objc.RegisterName("setBezelStyle:")
+	_nSButtonSelIsBordered                                   = objc.RegisterName("isBordered")
+	_nSButtonSelSetBordered                                  = objc.RegisterName("setBordered:")
+	_nSButtonSelIsTransparent                                = objc.RegisterName("isTransparent")
+	_nSButtonSelSetTransparent                               = objc.RegisterName("setTransparent:")
+	_nSButtonSelShowsBorderOnlyWhileMouseInside              = objc.RegisterName("showsBorderOnlyWhileMouseInside")
+	_nSButtonSelSetShowsBorderOnlyWhileMouseInside           = objc.RegisterName("setShowsBorderOnlyWhileMouseInside:")
+	_nSButtonSelBezelColor                                   = objc.RegisterName("bezelColor")
+	_nSButtonSelSetBezelColor                                = objc.RegisterName("setBezelColor:")
+	_nSButtonSelContentTintColor                             = objc.RegisterName("contentTintColor")
+	_nSButtonSelSetContentTintColor                          = objc.RegisterName("setContentTintColor:")
+	_nSButtonSelTintProminence                               = objc.RegisterName("tintProminence")
+	_nSButtonSelSetTintProminence                            = objc.RegisterName("setTintProminence:")
+	_nSButtonSelImage                                        = objc.RegisterName("image")
+	_nSButtonSelSetImage                                     = objc.RegisterName("setImage:")
+	_nSButtonSelAlternateImage                               = objc.RegisterName("alternateImage")
+	_nSButtonSelSetAlternateImage                            = objc.RegisterName("setAlternateImage:")
+	_nSButtonSelImagePosition                                = objc.RegisterName("imagePosition")
+	_nSButtonSelSetImagePosition                             = objc.RegisterName("setImagePosition:")
+	_nSButtonSelImageScaling                                 = objc.RegisterName("imageScaling")
+	_nSButtonSelSetImageScaling                              = objc.RegisterName("setImageScaling:")
+	_nSButtonSelImageHugsTitle                               = objc.RegisterName("imageHugsTitle")
+	_nSButtonSelSetImageHugsTitle                            = objc.RegisterName("setImageHugsTitle:")
+	_nSButtonSelSymbolConfiguration                          = objc.RegisterName("symbolConfiguration")
+	_nSButtonSelSetSymbolConfiguration                       = objc.RegisterName("setSymbolConfiguration:")
+	_nSButtonSelState                                        = objc.RegisterName("state")
+	_nSButtonSelSetState                                     = objc.RegisterName("setState:")
+	_nSButtonSelAllowsMixedState                             = objc.RegisterName("allowsMixedState")
+	_nSButtonSelSetAllowsMixedState                          = objc.RegisterName("setAllowsMixedState:")
+	_nSButtonSelKeyEquivalent                                = objc.RegisterName("keyEquivalent")
+	_nSButtonSelSetKeyEquivalent                             = objc.RegisterName("setKeyEquivalent:")
+	_nSButtonSelKeyEquivalentModifierMask                    = objc.RegisterName("keyEquivalentModifierMask")
+	_nSButtonSelSetKeyEquivalentModifierMask                 = objc.RegisterName("setKeyEquivalentModifierMask:")
+	_nSButtonSelActiveCompressionOptions                     = objc.RegisterName("activeCompressionOptions")
+	_nSButtonSelBorderShape                                  = objc.RegisterName("borderShape")
+	_nSButtonSelSetBorderShape                               = objc.RegisterName("setBorderShape:")
+	_nSButtonSelSetTitleWithMnemonic                         = objc.RegisterName("setTitleWithMnemonic:")
 )
 
 func NSButtonFromID(id objc.ID) *NSButton {
@@ -99,35 +99,45 @@ func NSButtonFromID(id objc.ID) *NSButton {
 // Creates a standard push button with a title and image. @param title The localized title string that is displayed on the button. @param image The image that is displayed alongside the title. In left-to-right localizations, the image is displayed to the left of the title. In right-to-left localizations, it is displayed to the right. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
 func NSButtonButtonWithTitleImageTargetAction(title *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleImageTargetAction, title.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 // Creates a standard push button with the provided title. @param title The localized title string that is displayed on the button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
 func NSButtonButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 // Creates a standard push button with the provided image. Set the image's accessibilityDescription property to ensure accessibility for this control. @param image The image to display in the body of the button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
 func NSButtonButtonWithImageTargetAction(image *NSImage, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelButtonWithImageTargetAction, image.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 // Creates a standard checkbox with the provided title. @param title The localized title string that is displayed alongside the checkbox. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
 func NSButtonCheckboxWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelCheckboxWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 // Creates a standard radio button with the provided title. @param title The localized title string that is displayed alongside the radio button. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @return An initialized button object.
 func NSButtonRadioButtonWithTitleTargetAction(title *foundation.NSString, target objc.ID, action objc.SEL) *NSButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButton), _nSButtonSelRadioButtonWithTitleTargetAction, title.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
@@ -168,7 +178,9 @@ func (o *NSButton) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptio
 // The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
 func (o *NSButton) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -180,7 +192,9 @@ func (o *NSButton) SetTitle(title *foundation.NSString) {
 // The button's title, expressed as an attributed string.
 func (o *NSButton) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -192,7 +206,9 @@ func (o *NSButton) SetAttributedTitle(attributedTitle *foundation.NSAttributedSt
 // The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
 func (o *NSButton) AlternateTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -204,7 +220,9 @@ func (o *NSButton) SetAlternateTitle(alternateTitle *foundation.NSString) {
 // The alternate title, expressed as an attributed string.
 func (o *NSButton) AttributedAlternateTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAttributedAlternateTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -227,7 +245,9 @@ func (o *NSButton) SetHasDestructiveAction(hasDestructiveAction bool) {
 // The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
 func (o *NSButton) Sound() *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
@@ -303,7 +323,9 @@ func (o *NSButton) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseI
 // Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
 func (o *NSButton) BezelColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelBezelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -315,7 +337,9 @@ func (o *NSButton) SetBezelColor(bezelColor *NSColor) {
 // Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
 func (o *NSButton) ContentTintColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelContentTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -324,13 +348,13 @@ func (o *NSButton) SetContentTintColor(contentTintColor *NSColor) {
 	o.Ptr().Send(_nSButtonSelSetContentTintColor, contentTintColor.Ptr())
 }
 
-// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See ``NSTintProminence`` for a list of possible values.
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
 func (o *NSButton) TintProminence() NSTintProminence {
 	_ret := objc.Send[NSTintProminence](o.Ptr(), _nSButtonSelTintProminence)
 	return _ret
 }
 
-// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See ``NSTintProminence`` for a list of possible values.
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
 func (o *NSButton) SetTintProminence(tintProminence NSTintProminence) {
 	o.Ptr().Send(_nSButtonSelSetTintProminence, tintProminence)
 }
@@ -338,7 +362,9 @@ func (o *NSButton) SetTintProminence(tintProminence NSTintProminence) {
 // The image that appears on the button when it’s in an off state, or nil if there is no such image.
 func (o *NSButton) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -350,7 +376,9 @@ func (o *NSButton) SetImage(image *NSImage) {
 // An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
 func (o *NSButton) AlternateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelAlternateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -395,7 +423,9 @@ func (o *NSButton) SetImageHugsTitle(imageHugsTitle bool) {
 // Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
 func (o *NSButton) SymbolConfiguration() *NSImageSymbolConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelSymbolConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageSymbolConfigurationFromID(_ret)
 }
 
@@ -429,7 +459,9 @@ func (o *NSButton) SetAllowsMixedState(allowsMixedState bool) {
 // This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
 func (o *NSButton) KeyEquivalent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelKeyEquivalent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -451,7 +483,9 @@ func (o *NSButton) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEven
 
 func (o *NSButton) ActiveCompressionOptions() *NSUserInterfaceCompressionOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonSelActiveCompressionOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserInterfaceCompressionOptionsFromID(_ret)
 }
 
@@ -468,4 +502,3 @@ func (o *NSButton) SetBorderShape(borderShape NSControlBorderShape) {
 func (o *NSButton) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSButtonSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
 }
-

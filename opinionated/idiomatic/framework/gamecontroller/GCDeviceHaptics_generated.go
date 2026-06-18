@@ -55,4 +55,3 @@ type DeviceHapticsable interface {
 }
 
 var _ DeviceHapticsable = (*DeviceHaptics)(nil)
-

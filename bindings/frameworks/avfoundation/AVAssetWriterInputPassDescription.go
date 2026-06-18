@@ -16,7 +16,7 @@ type AVAssetWriterInputPassDescription struct {
 }
 
 var (
-	_clsAVAssetWriterInputPassDescription = _objcClass("AVAssetWriterInputPassDescription")
+	_clsAVAssetWriterInputPassDescription                 = _objcClass("AVAssetWriterInputPassDescription")
 	_aVAssetWriterInputPassDescriptionSelSourceTimeRanges = objc.RegisterName("sourceTimeRanges")
 )
 
@@ -34,4 +34,3 @@ func (o *AVAssetWriterInputPassDescription) SourceTimeRanges() *foundation.NSArr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _aVAssetWriterInputPassDescriptionSelSourceTimeRanges)
 	return _ret
 }
-

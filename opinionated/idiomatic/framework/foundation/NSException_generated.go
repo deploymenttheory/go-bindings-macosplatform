@@ -109,4 +109,3 @@ type Exceptionable interface {
 }
 
 var _ Exceptionable = (*Exception)(nil)
-

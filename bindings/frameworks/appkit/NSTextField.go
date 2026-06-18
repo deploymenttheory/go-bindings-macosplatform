@@ -16,66 +16,66 @@ type NSTextField struct {
 }
 
 var (
-	_clsNSTextField = _objcClass("NSTextField")
-	_nSTextFieldSelSelectText = objc.RegisterName("selectText:")
-	_nSTextFieldSelTextShouldBeginEditing = objc.RegisterName("textShouldBeginEditing:")
-	_nSTextFieldSelTextShouldEndEditing = objc.RegisterName("textShouldEndEditing:")
-	_nSTextFieldSelTextDidBeginEditing = objc.RegisterName("textDidBeginEditing:")
-	_nSTextFieldSelTextDidEndEditing = objc.RegisterName("textDidEndEditing:")
-	_nSTextFieldSelTextDidChange = objc.RegisterName("textDidChange:")
-	_nSTextFieldSelPlaceholderString = objc.RegisterName("placeholderString")
-	_nSTextFieldSelSetPlaceholderString = objc.RegisterName("setPlaceholderString:")
-	_nSTextFieldSelPlaceholderAttributedString = objc.RegisterName("placeholderAttributedString")
-	_nSTextFieldSelSetPlaceholderAttributedString = objc.RegisterName("setPlaceholderAttributedString:")
-	_nSTextFieldSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSTextFieldSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSTextFieldSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSTextFieldSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSTextFieldSelTextColor = objc.RegisterName("textColor")
-	_nSTextFieldSelSetTextColor = objc.RegisterName("setTextColor:")
-	_nSTextFieldSelIsBordered = objc.RegisterName("isBordered")
-	_nSTextFieldSelSetBordered = objc.RegisterName("setBordered:")
-	_nSTextFieldSelIsBezeled = objc.RegisterName("isBezeled")
-	_nSTextFieldSelSetBezeled = objc.RegisterName("setBezeled:")
-	_nSTextFieldSelIsEditable = objc.RegisterName("isEditable")
-	_nSTextFieldSelSetEditable = objc.RegisterName("setEditable:")
-	_nSTextFieldSelIsSelectable = objc.RegisterName("isSelectable")
-	_nSTextFieldSelSetSelectable = objc.RegisterName("setSelectable:")
-	_nSTextFieldSelDelegate = objc.RegisterName("delegate")
-	_nSTextFieldSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTextFieldSelBezelStyle = objc.RegisterName("bezelStyle")
-	_nSTextFieldSelSetBezelStyle = objc.RegisterName("setBezelStyle:")
-	_nSTextFieldSelPreferredMaxLayoutWidth = objc.RegisterName("preferredMaxLayoutWidth")
-	_nSTextFieldSelSetPreferredMaxLayoutWidth = objc.RegisterName("setPreferredMaxLayoutWidth:")
-	_nSTextFieldSelMaximumNumberOfLines = objc.RegisterName("maximumNumberOfLines")
-	_nSTextFieldSelSetMaximumNumberOfLines = objc.RegisterName("setMaximumNumberOfLines:")
-	_nSTextFieldSelAllowsDefaultTighteningForTruncation = objc.RegisterName("allowsDefaultTighteningForTruncation")
-	_nSTextFieldSelSetAllowsDefaultTighteningForTruncation = objc.RegisterName("setAllowsDefaultTighteningForTruncation:")
-	_nSTextFieldSelLineBreakStrategy = objc.RegisterName("lineBreakStrategy")
-	_nSTextFieldSelSetLineBreakStrategy = objc.RegisterName("setLineBreakStrategy:")
-	_nSTextFieldSelAllowsWritingTools = objc.RegisterName("allowsWritingTools")
-	_nSTextFieldSelSetAllowsWritingTools = objc.RegisterName("setAllowsWritingTools:")
-	_nSTextFieldSelAllowsWritingToolsAffordance = objc.RegisterName("allowsWritingToolsAffordance")
-	_nSTextFieldSelSetAllowsWritingToolsAffordance = objc.RegisterName("setAllowsWritingToolsAffordance:")
-	_nSTextFieldSelPlaceholderStrings = objc.RegisterName("placeholderStrings")
-	_nSTextFieldSelSetPlaceholderStrings = objc.RegisterName("setPlaceholderStrings:")
-	_nSTextFieldSelPlaceholderAttributedStrings = objc.RegisterName("placeholderAttributedStrings")
-	_nSTextFieldSelSetPlaceholderAttributedStrings = objc.RegisterName("setPlaceholderAttributedStrings:")
-	_nSTextFieldSelResolvesNaturalAlignmentWithBaseWritingDirection = objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection")
+	_clsNSTextField                                                    = _objcClass("NSTextField")
+	_nSTextFieldSelSelectText                                          = objc.RegisterName("selectText:")
+	_nSTextFieldSelTextShouldBeginEditing                              = objc.RegisterName("textShouldBeginEditing:")
+	_nSTextFieldSelTextShouldEndEditing                                = objc.RegisterName("textShouldEndEditing:")
+	_nSTextFieldSelTextDidBeginEditing                                 = objc.RegisterName("textDidBeginEditing:")
+	_nSTextFieldSelTextDidEndEditing                                   = objc.RegisterName("textDidEndEditing:")
+	_nSTextFieldSelTextDidChange                                       = objc.RegisterName("textDidChange:")
+	_nSTextFieldSelPlaceholderString                                   = objc.RegisterName("placeholderString")
+	_nSTextFieldSelSetPlaceholderString                                = objc.RegisterName("setPlaceholderString:")
+	_nSTextFieldSelPlaceholderAttributedString                         = objc.RegisterName("placeholderAttributedString")
+	_nSTextFieldSelSetPlaceholderAttributedString                      = objc.RegisterName("setPlaceholderAttributedString:")
+	_nSTextFieldSelBackgroundColor                                     = objc.RegisterName("backgroundColor")
+	_nSTextFieldSelSetBackgroundColor                                  = objc.RegisterName("setBackgroundColor:")
+	_nSTextFieldSelDrawsBackground                                     = objc.RegisterName("drawsBackground")
+	_nSTextFieldSelSetDrawsBackground                                  = objc.RegisterName("setDrawsBackground:")
+	_nSTextFieldSelTextColor                                           = objc.RegisterName("textColor")
+	_nSTextFieldSelSetTextColor                                        = objc.RegisterName("setTextColor:")
+	_nSTextFieldSelIsBordered                                          = objc.RegisterName("isBordered")
+	_nSTextFieldSelSetBordered                                         = objc.RegisterName("setBordered:")
+	_nSTextFieldSelIsBezeled                                           = objc.RegisterName("isBezeled")
+	_nSTextFieldSelSetBezeled                                          = objc.RegisterName("setBezeled:")
+	_nSTextFieldSelIsEditable                                          = objc.RegisterName("isEditable")
+	_nSTextFieldSelSetEditable                                         = objc.RegisterName("setEditable:")
+	_nSTextFieldSelIsSelectable                                        = objc.RegisterName("isSelectable")
+	_nSTextFieldSelSetSelectable                                       = objc.RegisterName("setSelectable:")
+	_nSTextFieldSelDelegate                                            = objc.RegisterName("delegate")
+	_nSTextFieldSelSetDelegate                                         = objc.RegisterName("setDelegate:")
+	_nSTextFieldSelBezelStyle                                          = objc.RegisterName("bezelStyle")
+	_nSTextFieldSelSetBezelStyle                                       = objc.RegisterName("setBezelStyle:")
+	_nSTextFieldSelPreferredMaxLayoutWidth                             = objc.RegisterName("preferredMaxLayoutWidth")
+	_nSTextFieldSelSetPreferredMaxLayoutWidth                          = objc.RegisterName("setPreferredMaxLayoutWidth:")
+	_nSTextFieldSelMaximumNumberOfLines                                = objc.RegisterName("maximumNumberOfLines")
+	_nSTextFieldSelSetMaximumNumberOfLines                             = objc.RegisterName("setMaximumNumberOfLines:")
+	_nSTextFieldSelAllowsDefaultTighteningForTruncation                = objc.RegisterName("allowsDefaultTighteningForTruncation")
+	_nSTextFieldSelSetAllowsDefaultTighteningForTruncation             = objc.RegisterName("setAllowsDefaultTighteningForTruncation:")
+	_nSTextFieldSelLineBreakStrategy                                   = objc.RegisterName("lineBreakStrategy")
+	_nSTextFieldSelSetLineBreakStrategy                                = objc.RegisterName("setLineBreakStrategy:")
+	_nSTextFieldSelAllowsWritingTools                                  = objc.RegisterName("allowsWritingTools")
+	_nSTextFieldSelSetAllowsWritingTools                               = objc.RegisterName("setAllowsWritingTools:")
+	_nSTextFieldSelAllowsWritingToolsAffordance                        = objc.RegisterName("allowsWritingToolsAffordance")
+	_nSTextFieldSelSetAllowsWritingToolsAffordance                     = objc.RegisterName("setAllowsWritingToolsAffordance:")
+	_nSTextFieldSelPlaceholderStrings                                  = objc.RegisterName("placeholderStrings")
+	_nSTextFieldSelSetPlaceholderStrings                               = objc.RegisterName("setPlaceholderStrings:")
+	_nSTextFieldSelPlaceholderAttributedStrings                        = objc.RegisterName("placeholderAttributedStrings")
+	_nSTextFieldSelSetPlaceholderAttributedStrings                     = objc.RegisterName("setPlaceholderAttributedStrings:")
+	_nSTextFieldSelResolvesNaturalAlignmentWithBaseWritingDirection    = objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection")
 	_nSTextFieldSelSetResolvesNaturalAlignmentWithBaseWritingDirection = objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:")
-	_nSTextFieldSelIsAutomaticTextCompletionEnabled = objc.RegisterName("isAutomaticTextCompletionEnabled")
-	_nSTextFieldSelSetAutomaticTextCompletionEnabled = objc.RegisterName("setAutomaticTextCompletionEnabled:")
-	_nSTextFieldSelAllowsCharacterPickerTouchBarItem = objc.RegisterName("allowsCharacterPickerTouchBarItem")
-	_nSTextFieldSelSetAllowsCharacterPickerTouchBarItem = objc.RegisterName("setAllowsCharacterPickerTouchBarItem:")
-	_nSTextFieldSelLabelWithString = objc.RegisterName("labelWithString:")
-	_nSTextFieldSelWrappingLabelWithString = objc.RegisterName("wrappingLabelWithString:")
-	_nSTextFieldSelLabelWithAttributedString = objc.RegisterName("labelWithAttributedString:")
-	_nSTextFieldSelTextFieldWithString = objc.RegisterName("textFieldWithString:")
-	_nSTextFieldSelAllowsEditingTextAttributes = objc.RegisterName("allowsEditingTextAttributes")
-	_nSTextFieldSelSetAllowsEditingTextAttributes = objc.RegisterName("setAllowsEditingTextAttributes:")
-	_nSTextFieldSelImportsGraphics = objc.RegisterName("importsGraphics")
-	_nSTextFieldSelSetImportsGraphics = objc.RegisterName("setImportsGraphics:")
-	_nSTextFieldSelSetTitleWithMnemonic = objc.RegisterName("setTitleWithMnemonic:")
+	_nSTextFieldSelIsAutomaticTextCompletionEnabled                    = objc.RegisterName("isAutomaticTextCompletionEnabled")
+	_nSTextFieldSelSetAutomaticTextCompletionEnabled                   = objc.RegisterName("setAutomaticTextCompletionEnabled:")
+	_nSTextFieldSelAllowsCharacterPickerTouchBarItem                   = objc.RegisterName("allowsCharacterPickerTouchBarItem")
+	_nSTextFieldSelSetAllowsCharacterPickerTouchBarItem                = objc.RegisterName("setAllowsCharacterPickerTouchBarItem:")
+	_nSTextFieldSelLabelWithString                                     = objc.RegisterName("labelWithString:")
+	_nSTextFieldSelWrappingLabelWithString                             = objc.RegisterName("wrappingLabelWithString:")
+	_nSTextFieldSelLabelWithAttributedString                           = objc.RegisterName("labelWithAttributedString:")
+	_nSTextFieldSelTextFieldWithString                                 = objc.RegisterName("textFieldWithString:")
+	_nSTextFieldSelAllowsEditingTextAttributes                         = objc.RegisterName("allowsEditingTextAttributes")
+	_nSTextFieldSelSetAllowsEditingTextAttributes                      = objc.RegisterName("setAllowsEditingTextAttributes:")
+	_nSTextFieldSelImportsGraphics                                     = objc.RegisterName("importsGraphics")
+	_nSTextFieldSelSetImportsGraphics                                  = objc.RegisterName("setImportsGraphics:")
+	_nSTextFieldSelSetTitleWithMnemonic                                = objc.RegisterName("setTitleWithMnemonic:")
 )
 
 func NSTextFieldFromID(id objc.ID) *NSTextField {
@@ -116,7 +116,9 @@ func (o *NSTextField) TextDidChange(notification *foundation.NSNotification) {
 
 func (o *NSTextField) PlaceholderString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -126,7 +128,9 @@ func (o *NSTextField) SetPlaceholderString(placeholderString *foundation.NSStrin
 
 func (o *NSTextField) PlaceholderAttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelPlaceholderAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -136,7 +140,9 @@ func (o *NSTextField) SetPlaceholderAttributedString(placeholderAttributedString
 
 func (o *NSTextField) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -155,7 +161,9 @@ func (o *NSTextField) SetDrawsBackground(drawsBackground bool) {
 
 func (o *NSTextField) TextColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFieldSelTextColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -289,13 +297,13 @@ func (o *NSTextField) SetPlaceholderAttributedStrings(placeholderAttributedStrin
 	o.Ptr().Send(_nSTextFieldSelSetPlaceholderAttributedStrings, placeholderAttributedStrings)
 }
 
-// Specifies the behavior for resolving ``NSTextAlignment/natural`` to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (o *NSTextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextFieldSelResolvesNaturalAlignmentWithBaseWritingDirection)
 	return _ret
 }
 
-// Specifies the behavior for resolving ``NSTextAlignment/natural`` to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
 func (o *NSTextField) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
 	o.Ptr().Send(_nSTextFieldSelSetResolvesNaturalAlignmentWithBaseWritingDirection, resolvesNaturalAlignmentWithBaseWritingDirection)
 }
@@ -321,28 +329,36 @@ func (o *NSTextField) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPicker
 // Creates a non-wrapping, non-editable, non-selectable text field that displays text in the default system font. @param stringValue The title text to display in the field. @return An initialized text field object.
 func NSTextFieldLabelWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithString, stringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
 // Creates a wrapping, non-editable, selectable text field that displays text in the default system font. @param stringValue The title text to display in the field. @return An initialized text field object.
 func NSTextFieldWrappingLabelWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelWrappingLabelWithString, stringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
 // Creates a non-editable, non-selectable text field that displays attributed text. The line break mode of this field is determined by the attributed string's NSParagraphStyle attribute. @param attributedStringValue The attributed string to display in the field. @return An initialized text field object.
 func NSTextFieldLabelWithAttributedString(attributedStringValue *foundation.NSAttributedString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelLabelWithAttributedString, attributedStringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
 // Creates a non-wrapping editable text field. @param stringValue The initial contents of the text field, or empty string for an initially empty text field. @return An initialized text field object.
 func NSTextFieldTextFieldWithString(stringValue *foundation.NSString) *NSTextField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextField), _nSTextFieldSelTextFieldWithString, stringValue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
@@ -368,4 +384,3 @@ func (o *NSTextField) SetImportsGraphics(importsGraphics bool) {
 func (o *NSTextField) SetTitleWithMnemonic(stringWithAmpersand *foundation.NSString) {
 	o.Ptr().Send(_nSTextFieldSelSetTitleWithMnemonic, stringWithAmpersand.Ptr())
 }
-

@@ -17,7 +17,7 @@ type HKElectrocardiogramQuery struct {
 }
 
 var (
-	_clsHKElectrocardiogramQuery = _objcClass("HKElectrocardiogramQuery")
+	_clsHKElectrocardiogramQuery                                     = _objcClass("HKElectrocardiogramQuery")
 	_hKElectrocardiogramQuerySelInitWithElectrocardiogramDataHandler = objc.RegisterName("initWithElectrocardiogram:dataHandler:")
 )
 
@@ -47,7 +47,8 @@ func (o *HKElectrocardiogramQuery) InitWithElectrocardiogramDataHandler(electroc
 		defer __block_dataHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKElectrocardiogramQuerySelInitWithElectrocardiogramDataHandler, electrocardiogram.Ptr(), __block_dataHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKElectrocardiogramQueryFromID(_ret)
 }
-

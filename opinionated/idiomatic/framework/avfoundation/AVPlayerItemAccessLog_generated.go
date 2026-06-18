@@ -67,4 +67,3 @@ type PlayerItemAccessLogable interface {
 }
 
 var _ PlayerItemAccessLogable = (*PlayerItemAccessLog)(nil)
-

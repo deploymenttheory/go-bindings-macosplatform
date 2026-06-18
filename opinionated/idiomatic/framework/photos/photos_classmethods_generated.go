@@ -328,4 +328,3 @@ func AuthorizationStatus() raw.PHAuthorizationStatus {
 func RequestAuthorization(handler func(raw.PHAuthorizationStatus)) {
 	raw.PHPhotoLibraryRequestAuthorization(handler)
 }
-

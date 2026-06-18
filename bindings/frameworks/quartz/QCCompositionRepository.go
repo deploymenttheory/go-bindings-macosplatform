@@ -16,11 +16,11 @@ type QCCompositionRepository struct {
 }
 
 var (
-	_clsQCCompositionRepository = _objcClass("QCCompositionRepository")
-	_qCCompositionRepositorySelSharedCompositionRepository = objc.RegisterName("sharedCompositionRepository")
-	_qCCompositionRepositorySelCompositionWithIdentifier = objc.RegisterName("compositionWithIdentifier:")
+	_clsQCCompositionRepository                                       = _objcClass("QCCompositionRepository")
+	_qCCompositionRepositorySelSharedCompositionRepository            = objc.RegisterName("sharedCompositionRepository")
+	_qCCompositionRepositorySelCompositionWithIdentifier              = objc.RegisterName("compositionWithIdentifier:")
 	_qCCompositionRepositorySelCompositionsWithProtocolsAndAttributes = objc.RegisterName("compositionsWithProtocols:andAttributes:")
-	_qCCompositionRepositorySelAllCompositions = objc.RegisterName("allCompositions")
+	_qCCompositionRepositorySelAllCompositions                        = objc.RegisterName("allCompositions")
 )
 
 func QCCompositionRepositoryFromID(id objc.ID) *QCCompositionRepository {
@@ -35,13 +35,17 @@ func QCCompositionRepositoryFromID(id objc.ID) *QCCompositionRepository {
 
 func QCCompositionRepositorySharedCompositionRepository() *QCCompositionRepository {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCCompositionRepository), _qCCompositionRepositorySelSharedCompositionRepository)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionRepositoryFromID(_ret)
 }
 
 func (o *QCCompositionRepository) CompositionWithIdentifier(identifier *foundation.NSString) *QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionRepositorySelCompositionWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QCCompositionFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID]
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _qCCompositionRepositorySelAllCompositions)
 	return _ret
 }
-

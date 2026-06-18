@@ -113,9 +113,13 @@ func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterHEPAFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterHEPAFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterHEPAFilterMonitoring) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterHEPAFilterMonitoring) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterHEPAFilterMonitoringable is the interface implemented by [MTRClusterHEPAFilterMonitoring], for mocking and DI.
 type MTRClusterHEPAFilterMonitoringable interface {
@@ -138,4 +142,3 @@ type MTRClusterHEPAFilterMonitoringable interface {
 }
 
 var _ MTRClusterHEPAFilterMonitoringable = (*MTRClusterHEPAFilterMonitoring)(nil)
-

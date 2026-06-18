@@ -12,4 +12,3 @@ import (
 )
 
 var _ unsafe.Pointer // suppress unused import
-

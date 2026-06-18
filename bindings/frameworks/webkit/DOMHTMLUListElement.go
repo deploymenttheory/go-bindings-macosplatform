@@ -16,11 +16,11 @@ type DOMHTMLUListElement struct {
 }
 
 var (
-	_clsDOMHTMLUListElement = _objcClass("DOMHTMLUListElement")
-	_dOMHTMLUListElementSelCompact = objc.RegisterName("compact")
+	_clsDOMHTMLUListElement           = _objcClass("DOMHTMLUListElement")
+	_dOMHTMLUListElementSelCompact    = objc.RegisterName("compact")
 	_dOMHTMLUListElementSelSetCompact = objc.RegisterName("setCompact:")
-	_dOMHTMLUListElementSelType = objc.RegisterName("type")
-	_dOMHTMLUListElementSelSetType = objc.RegisterName("setType:")
+	_dOMHTMLUListElementSelType       = objc.RegisterName("type")
+	_dOMHTMLUListElementSelSetType    = objc.RegisterName("setType:")
 )
 
 func DOMHTMLUListElementFromID(id objc.ID) *DOMHTMLUListElement {
@@ -44,11 +44,12 @@ func (o *DOMHTMLUListElement) SetCompact(compact bool) {
 
 func (o *DOMHTMLUListElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLUListElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLUListElement) SetType(type_ *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLUListElementSelSetType, type_.Ptr())
 }
-

@@ -16,7 +16,9 @@ type MTRMediaPlaybackClusterPlaybackPositionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterPlaybackPositionStruct].
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct { return x.inner }
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetPosition(position *fo
 	x.inner.SetPosition(position)
 }
 
-func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct { return x.inner }
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct {
+	return x.inner
+}
 
 // MTRMediaPlaybackClusterPlaybackPositionStructable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPositionStruct], for mocking and DI.
 type MTRMediaPlaybackClusterPlaybackPositionStructable interface {
@@ -82,4 +86,3 @@ type MTRMediaPlaybackClusterPlaybackPositionStructable interface {
 }
 
 var _ MTRMediaPlaybackClusterPlaybackPositionStructable = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)
-

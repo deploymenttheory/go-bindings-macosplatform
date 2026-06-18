@@ -18,10 +18,10 @@ type SKArcadeService struct {
 }
 
 var (
-	_clsSKArcadeService = _objcClass("SKArcadeService")
+	_clsSKArcadeService                                                                   = _objcClass("SKArcadeService")
 	_sKArcadeServiceSelRegisterArcadeAppWithRandomFromLibRandomFromLibLengthResultHandler = objc.RegisterName("registerArcadeAppWithRandomFromLib:randomFromLibLength:resultHandler:")
-	_sKArcadeServiceSelArcadeSubscriptionStatusWithNonceResultHandler = objc.RegisterName("arcadeSubscriptionStatusWithNonce:resultHandler:")
-	_sKArcadeServiceSelRepairArcadeApp = objc.RegisterName("repairArcadeApp")
+	_sKArcadeServiceSelArcadeSubscriptionStatusWithNonceResultHandler                     = objc.RegisterName("arcadeSubscriptionStatusWithNonce:resultHandler:")
+	_sKArcadeServiceSelRepairArcadeApp                                                    = objc.RegisterName("repairArcadeApp")
 )
 
 func SKArcadeServiceFromID(id objc.ID) *SKArcadeService {
@@ -71,4 +71,3 @@ func SKArcadeServiceArcadeSubscriptionStatusWithNonceResultHandler(nonce uint64,
 func SKArcadeServiceRepairArcadeApp() {
 	objc.ID(_clsSKArcadeService).Send(_sKArcadeServiceSelRepairArcadeApp)
 }
-

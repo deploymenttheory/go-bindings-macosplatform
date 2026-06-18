@@ -18,11 +18,11 @@ type VZMacAuxiliaryStorage struct {
 }
 
 var (
-	_clsVZMacAuxiliaryStorage = _objcClass("VZMacAuxiliaryStorage")
-	_vZMacAuxiliaryStorageSelInitWithURL = objc.RegisterName("initWithURL:")
+	_clsVZMacAuxiliaryStorage                                                  = _objcClass("VZMacAuxiliaryStorage")
+	_vZMacAuxiliaryStorageSelInitWithURL                                       = objc.RegisterName("initWithURL:")
 	_vZMacAuxiliaryStorageSelInitCreatingStorageAtURLHardwareModelOptionsError = objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:")
-	_vZMacAuxiliaryStorageSelURL = objc.RegisterName("URL")
-	_vZMacAuxiliaryStorageSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
+	_vZMacAuxiliaryStorageSelURL                                               = objc.RegisterName("URL")
+	_vZMacAuxiliaryStorageSelInitWithContentsOfURL                             = objc.RegisterName("initWithContentsOfURL:")
 )
 
 func VZMacAuxiliaryStorageFromID(id objc.ID) *VZMacAuxiliaryStorage {
@@ -38,7 +38,9 @@ func VZMacAuxiliaryStorageFromID(id objc.ID) *VZMacAuxiliaryStorage {
 // @abstract Initialize the auxiliary storage from the URL of an existing file. @param URL The URL of the auxiliary storage on the local file system. @discussion To create a new auxiliary storage, use -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error].
 func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxiliaryStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacAuxiliaryStorageFromID(_ret)
 }
 
@@ -46,7 +48,9 @@ func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxilia
 func (o *VZMacAuxiliaryStorage) InitCreatingStorageAtURLHardwareModelOptionsError(uRL *foundation.NSURL, hardwareModel *VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*VZMacAuxiliaryStorage, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitCreatingStorageAtURLHardwareModelOptionsError, uRL.Ptr(), hardwareModel.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,14 +59,17 @@ func (o *VZMacAuxiliaryStorage) InitCreatingStorageAtURLHardwareModelOptionsErro
 
 func (o *VZMacAuxiliaryStorage) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *VZMacAuxiliaryStorage) InitWithContentsOfURL(uRL *foundation.NSURL) *VZMacAuxiliaryStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithContentsOfURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacAuxiliaryStorageFromID(_ret)
 }
-

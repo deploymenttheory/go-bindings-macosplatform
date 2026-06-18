@@ -18,15 +18,15 @@ type HKStatisticsCollectionQuery struct {
 }
 
 var (
-	_clsHKStatisticsCollectionQuery = _objcClass("HKStatisticsCollectionQuery")
+	_clsHKStatisticsCollectionQuery                                                                               = _objcClass("HKStatisticsCollectionQuery")
 	_hKStatisticsCollectionQuerySelInitWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents = objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:")
-	_hKStatisticsCollectionQuerySelAnchorDate = objc.RegisterName("anchorDate")
-	_hKStatisticsCollectionQuerySelOptions = objc.RegisterName("options")
-	_hKStatisticsCollectionQuerySelIntervalComponents = objc.RegisterName("intervalComponents")
-	_hKStatisticsCollectionQuerySelInitialResultsHandler = objc.RegisterName("initialResultsHandler")
-	_hKStatisticsCollectionQuerySelSetInitialResultsHandler = objc.RegisterName("setInitialResultsHandler:")
-	_hKStatisticsCollectionQuerySelStatisticsUpdateHandler = objc.RegisterName("statisticsUpdateHandler")
-	_hKStatisticsCollectionQuerySelSetStatisticsUpdateHandler = objc.RegisterName("setStatisticsUpdateHandler:")
+	_hKStatisticsCollectionQuerySelAnchorDate                                                                     = objc.RegisterName("anchorDate")
+	_hKStatisticsCollectionQuerySelOptions                                                                        = objc.RegisterName("options")
+	_hKStatisticsCollectionQuerySelIntervalComponents                                                             = objc.RegisterName("intervalComponents")
+	_hKStatisticsCollectionQuerySelInitialResultsHandler                                                          = objc.RegisterName("initialResultsHandler")
+	_hKStatisticsCollectionQuerySelSetInitialResultsHandler                                                       = objc.RegisterName("setInitialResultsHandler:")
+	_hKStatisticsCollectionQuerySelStatisticsUpdateHandler                                                        = objc.RegisterName("statisticsUpdateHandler")
+	_hKStatisticsCollectionQuerySelSetStatisticsUpdateHandler                                                     = objc.RegisterName("setStatisticsUpdateHandler:")
 )
 
 func HKStatisticsCollectionQueryFromID(id objc.ID) *HKStatisticsCollectionQuery {
@@ -41,13 +41,17 @@ func HKStatisticsCollectionQueryFromID(id objc.ID) *HKStatisticsCollectionQuery 
 
 func (o *HKStatisticsCollectionQuery) InitWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *HKStatisticsCollectionQuery {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionQuerySelInitWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents, quantityType.Ptr(), quantitySamplePredicate.Ptr(), options, anchorDate.Ptr(), intervalComponents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStatisticsCollectionQueryFromID(_ret)
 }
 
 func (o *HKStatisticsCollectionQuery) AnchorDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionQuerySelAnchorDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *HKStatisticsCollectionQuery) Options() HKStatisticsOptions {
 
 func (o *HKStatisticsCollectionQuery) IntervalComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKStatisticsCollectionQuerySelIntervalComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -108,4 +114,3 @@ func (o *HKStatisticsCollectionQuery) SetStatisticsUpdateHandler(statisticsUpdat
 	}
 	o.Ptr().Send(_hKStatisticsCollectionQuerySelSetStatisticsUpdateHandler, __block_statisticsUpdateHandler)
 }
-

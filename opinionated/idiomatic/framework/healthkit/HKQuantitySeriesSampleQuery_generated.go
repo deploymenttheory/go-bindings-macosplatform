@@ -91,4 +91,3 @@ type QuantitySeriesSampleQueryable interface {
 }
 
 var _ QuantitySeriesSampleQueryable = (*QuantitySeriesSampleQuery)(nil)
-

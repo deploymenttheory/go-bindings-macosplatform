@@ -61,4 +61,3 @@ type StateConstraintable interface {
 }
 
 var _ StateConstraintable = (*StateConstraint)(nil)
-

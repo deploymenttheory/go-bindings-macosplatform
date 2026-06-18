@@ -71,7 +71,9 @@ func (x *FetchRecordChangesOperation) WithDesiredKeys(items ...*foundation.NSStr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -277,9 +279,13 @@ func (x *FetchRecordChangesOperation) SetFetchRecordChangesCompletionBlock(fetch
 	x.inner.SetFetchRecordChangesCompletionBlock(fetchRecordChangesCompletionBlock)
 }
 
-func (x *FetchRecordChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchRecordChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchRecordChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchRecordChangesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchRecordChangesOperationable is the interface implemented by [FetchRecordChangesOperation], for mocking and DI.
 type FetchRecordChangesOperationable interface {
@@ -318,4 +324,3 @@ type FetchRecordChangesOperationable interface {
 }
 
 var _ FetchRecordChangesOperationable = (*FetchRecordChangesOperation)(nil)
-

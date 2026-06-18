@@ -17,24 +17,24 @@ type SKPaymentQueue struct {
 }
 
 var (
-	_clsSKPaymentQueue = _objcClass("SKPaymentQueue")
-	_sKPaymentQueueSelDefaultQueue = objc.RegisterName("defaultQueue")
-	_sKPaymentQueueSelCanMakePayments = objc.RegisterName("canMakePayments")
-	_sKPaymentQueueSelAddPayment = objc.RegisterName("addPayment:")
-	_sKPaymentQueueSelRestoreCompletedTransactions = objc.RegisterName("restoreCompletedTransactions")
+	_clsSKPaymentQueue                                                    = _objcClass("SKPaymentQueue")
+	_sKPaymentQueueSelDefaultQueue                                        = objc.RegisterName("defaultQueue")
+	_sKPaymentQueueSelCanMakePayments                                     = objc.RegisterName("canMakePayments")
+	_sKPaymentQueueSelAddPayment                                          = objc.RegisterName("addPayment:")
+	_sKPaymentQueueSelRestoreCompletedTransactions                        = objc.RegisterName("restoreCompletedTransactions")
 	_sKPaymentQueueSelRestoreCompletedTransactionsWithApplicationUsername = objc.RegisterName("restoreCompletedTransactionsWithApplicationUsername:")
-	_sKPaymentQueueSelFinishTransaction = objc.RegisterName("finishTransaction:")
-	_sKPaymentQueueSelStartDownloads = objc.RegisterName("startDownloads:")
-	_sKPaymentQueueSelPauseDownloads = objc.RegisterName("pauseDownloads:")
-	_sKPaymentQueueSelResumeDownloads = objc.RegisterName("resumeDownloads:")
-	_sKPaymentQueueSelCancelDownloads = objc.RegisterName("cancelDownloads:")
-	_sKPaymentQueueSelAddTransactionObserver = objc.RegisterName("addTransactionObserver:")
-	_sKPaymentQueueSelRemoveTransactionObserver = objc.RegisterName("removeTransactionObserver:")
-	_sKPaymentQueueSelDelegate = objc.RegisterName("delegate")
-	_sKPaymentQueueSelSetDelegate = objc.RegisterName("setDelegate:")
-	_sKPaymentQueueSelStorefront = objc.RegisterName("storefront")
-	_sKPaymentQueueSelTransactionObservers = objc.RegisterName("transactionObservers")
-	_sKPaymentQueueSelTransactions = objc.RegisterName("transactions")
+	_sKPaymentQueueSelFinishTransaction                                   = objc.RegisterName("finishTransaction:")
+	_sKPaymentQueueSelStartDownloads                                      = objc.RegisterName("startDownloads:")
+	_sKPaymentQueueSelPauseDownloads                                      = objc.RegisterName("pauseDownloads:")
+	_sKPaymentQueueSelResumeDownloads                                     = objc.RegisterName("resumeDownloads:")
+	_sKPaymentQueueSelCancelDownloads                                     = objc.RegisterName("cancelDownloads:")
+	_sKPaymentQueueSelAddTransactionObserver                              = objc.RegisterName("addTransactionObserver:")
+	_sKPaymentQueueSelRemoveTransactionObserver                           = objc.RegisterName("removeTransactionObserver:")
+	_sKPaymentQueueSelDelegate                                            = objc.RegisterName("delegate")
+	_sKPaymentQueueSelSetDelegate                                         = objc.RegisterName("setDelegate:")
+	_sKPaymentQueueSelStorefront                                          = objc.RegisterName("storefront")
+	_sKPaymentQueueSelTransactionObservers                                = objc.RegisterName("transactionObservers")
+	_sKPaymentQueueSelTransactions                                        = objc.RegisterName("transactions")
 )
 
 func SKPaymentQueueFromID(id objc.ID) *SKPaymentQueue {
@@ -50,7 +50,9 @@ func SKPaymentQueueFromID(id objc.ID) *SKPaymentQueue {
 // Deprecated: Use Storefront.current.
 func SKPaymentQueueDefaultQueue() *SKPaymentQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPaymentQueue), _sKPaymentQueueSelDefaultQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPaymentQueueFromID(_ret)
 }
 
@@ -124,21 +126,26 @@ func (o *SKPaymentQueue) SetDelegate(delegate SKPaymentQueueDelegate) {
 // Deprecated: Use Storefront.current.
 func (o *SKPaymentQueue) Storefront() *SKStorefront {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentQueueSelStorefront)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKStorefrontFromID(_ret)
 }
 
 // Deprecated: Use Transaction.updates or PurchaseResult from Product.purchase(confirmIn:options:).
 func (o *SKPaymentQueue) TransactionObservers() *foundation.NSArray[SKPaymentTransactionObserver] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentQueueSelTransactionObservers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[SKPaymentTransactionObserver](_ret)
 }
 
 // Deprecated: Use Transaction.unfinished.
 func (o *SKPaymentQueue) Transactions() *foundation.NSArray[*SKPaymentTransaction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPaymentQueueSelTransactions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKPaymentTransaction](_ret)
 }
-

@@ -15,7 +15,9 @@ type DateComponentsResolutionResult struct {
 }
 
 // Unwrap returns the underlying [raw.INDateComponentsResolutionResult].
-func (x *DateComponentsResolutionResult) Unwrap() *raw.INDateComponentsResolutionResult { return x.inner }
+func (x *DateComponentsResolutionResult) Unwrap() *raw.INDateComponentsResolutionResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewDateComponentsResolutionResult() *DateComponentsResolutionResult {
 	return &DateComponentsResolutionResult{inner: raw.INDateComponentsResolutionResultFromID(_id)}
 }
 
-func (x *DateComponentsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *DateComponentsResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // DateComponentsResolutionResultable is the interface implemented by [DateComponentsResolutionResult], for mocking and DI.
 type DateComponentsResolutionResultable interface {
@@ -43,4 +47,3 @@ type DateComponentsResolutionResultable interface {
 }
 
 var _ DateComponentsResolutionResultable = (*DateComponentsResolutionResult)(nil)
-

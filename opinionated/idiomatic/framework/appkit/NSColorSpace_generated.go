@@ -99,4 +99,3 @@ type ColorSpaceable interface {
 }
 
 var _ ColorSpaceable = (*ColorSpace)(nil)
-

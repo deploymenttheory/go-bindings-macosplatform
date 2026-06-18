@@ -15,7 +15,9 @@ type RenderPassDepthAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLRenderPassDepthAttachmentDescriptor].
-func (x *RenderPassDepthAttachmentDescriptor) Unwrap() *raw.MTLRenderPassDepthAttachmentDescriptor { return x.inner }
+func (x *RenderPassDepthAttachmentDescriptor) Unwrap() *raw.MTLRenderPassDepthAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -133,7 +135,9 @@ func (x *RenderPassDepthAttachmentDescriptor) SetDepthResolveFilter(depthResolve
 	x.inner.SetDepthResolveFilter(depthResolveFilter)
 }
 
-func (x *RenderPassDepthAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+func (x *RenderPassDepthAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor {
+	return &x.inner.MTLRenderPassAttachmentDescriptor
+}
 
 // RenderPassDepthAttachmentDescriptorable is the interface implemented by [RenderPassDepthAttachmentDescriptor], for mocking and DI.
 type RenderPassDepthAttachmentDescriptorable interface {
@@ -158,4 +162,3 @@ type RenderPassDepthAttachmentDescriptorable interface {
 }
 
 var _ RenderPassDepthAttachmentDescriptorable = (*RenderPassDepthAttachmentDescriptor)(nil)
-

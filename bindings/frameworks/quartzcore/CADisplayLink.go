@@ -16,16 +16,16 @@ type CADisplayLink struct {
 }
 
 var (
-	_clsCADisplayLink = _objcClass("CADisplayLink")
-	_cADisplayLinkSelAddToRunLoopForMode = objc.RegisterName("addToRunLoop:forMode:")
-	_cADisplayLinkSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_cADisplayLinkSelInvalidate = objc.RegisterName("invalidate")
-	_cADisplayLinkSelTimestamp = objc.RegisterName("timestamp")
-	_cADisplayLinkSelDuration = objc.RegisterName("duration")
-	_cADisplayLinkSelTargetTimestamp = objc.RegisterName("targetTimestamp")
-	_cADisplayLinkSelIsPaused = objc.RegisterName("isPaused")
-	_cADisplayLinkSelSetPaused = objc.RegisterName("setPaused:")
-	_cADisplayLinkSelPreferredFrameRateRange = objc.RegisterName("preferredFrameRateRange")
+	_clsCADisplayLink                           = _objcClass("CADisplayLink")
+	_cADisplayLinkSelAddToRunLoopForMode        = objc.RegisterName("addToRunLoop:forMode:")
+	_cADisplayLinkSelRemoveFromRunLoopForMode   = objc.RegisterName("removeFromRunLoop:forMode:")
+	_cADisplayLinkSelInvalidate                 = objc.RegisterName("invalidate")
+	_cADisplayLinkSelTimestamp                  = objc.RegisterName("timestamp")
+	_cADisplayLinkSelDuration                   = objc.RegisterName("duration")
+	_cADisplayLinkSelTargetTimestamp            = objc.RegisterName("targetTimestamp")
+	_cADisplayLinkSelIsPaused                   = objc.RegisterName("isPaused")
+	_cADisplayLinkSelSetPaused                  = objc.RegisterName("setPaused:")
+	_cADisplayLinkSelPreferredFrameRateRange    = objc.RegisterName("preferredFrameRateRange")
 	_cADisplayLinkSelSetPreferredFrameRateRange = objc.RegisterName("setPreferredFrameRateRange:")
 )
 
@@ -83,4 +83,3 @@ func (o *CADisplayLink) PreferredFrameRateRange() CAFrameRateRange {
 func (o *CADisplayLink) SetPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) {
 	o.Ptr().Send(_cADisplayLinkSelSetPreferredFrameRateRange, preferredFrameRateRange)
 }
-

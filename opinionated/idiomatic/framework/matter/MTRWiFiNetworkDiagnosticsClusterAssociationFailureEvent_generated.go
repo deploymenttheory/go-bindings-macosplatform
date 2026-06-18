@@ -16,7 +16,9 @@ type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent].
-func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent { return x.inner }
+func (x *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable interface {
 }
 
 var _ MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventable = (*MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent)(nil)
-

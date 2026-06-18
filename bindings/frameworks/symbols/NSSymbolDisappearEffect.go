@@ -15,11 +15,11 @@ type NSSymbolDisappearEffect struct {
 }
 
 var (
-	_clsNSSymbolDisappearEffect = _objcClass("NSSymbolDisappearEffect")
-	_nSSymbolDisappearEffectSelEffect = objc.RegisterName("effect")
-	_nSSymbolDisappearEffectSelDisappearUpEffect = objc.RegisterName("disappearUpEffect")
-	_nSSymbolDisappearEffectSelDisappearDownEffect = objc.RegisterName("disappearDownEffect")
-	_nSSymbolDisappearEffectSelEffectWithByLayer = objc.RegisterName("effectWithByLayer")
+	_clsNSSymbolDisappearEffect                      = _objcClass("NSSymbolDisappearEffect")
+	_nSSymbolDisappearEffectSelEffect                = objc.RegisterName("effect")
+	_nSSymbolDisappearEffectSelDisappearUpEffect     = objc.RegisterName("disappearUpEffect")
+	_nSSymbolDisappearEffectSelDisappearDownEffect   = objc.RegisterName("disappearDownEffect")
+	_nSSymbolDisappearEffectSelEffectWithByLayer     = objc.RegisterName("effectWithByLayer")
 	_nSSymbolDisappearEffectSelEffectWithWholeSymbol = objc.RegisterName("effectWithWholeSymbol")
 )
 
@@ -36,35 +36,44 @@ func NSSymbolDisappearEffectFromID(id objc.ID) *NSSymbolDisappearEffect {
 // The default disappear effect, determined by the system.
 func NSSymbolDisappearEffectEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
 // Convenience initializer for a disappear effect that disappears scaling up.
 func NSSymbolDisappearEffectDisappearUpEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelDisappearUpEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
 // Convenience initializer for a disappear effect that disappears scaling down.
 func NSSymbolDisappearEffectDisappearDownEffect() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolDisappearEffect), _nSSymbolDisappearEffectSelDisappearDownEffect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
 func (o *NSSymbolDisappearEffect) EffectWithByLayer() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDisappearEffectSelEffectWithByLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDisappearEffectFromID(_ret)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (o *NSSymbolDisappearEffect) EffectWithWholeSymbol() *NSSymbolDisappearEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolDisappearEffectSelEffectWithWholeSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolDisappearEffectFromID(_ret)
 }
-

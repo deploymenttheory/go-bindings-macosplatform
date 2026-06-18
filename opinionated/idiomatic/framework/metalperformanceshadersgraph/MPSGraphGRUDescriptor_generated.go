@@ -214,4 +214,3 @@ type GraphGRUDescriptorable interface {
 }
 
 var _ GraphGRUDescriptorable = (*GraphGRUDescriptor)(nil)
-

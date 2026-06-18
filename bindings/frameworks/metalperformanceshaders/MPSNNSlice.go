@@ -18,8 +18,8 @@ type MPSNNSlice struct {
 }
 
 var (
-	_clsMPSNNSlice = _objcClass("MPSNNSlice")
-	_mPSNNSliceSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNSlice                    = _objcClass("MPSNNSlice")
+	_mPSNNSliceSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNSliceSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -36,13 +36,16 @@ func MPSNNSliceFromID(id objc.ID) *MPSNNSlice {
 // @abstract Initialize a MPSNNSlice kernel @param    device            The device the filter will run on @return   A valid MPSNNSlice object or nil, if failure.
 func (o *MPSNNSlice) InitWithDevice(device metal.MTLDevice) *MPSNNSlice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNSliceSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNSliceFromID(_ret)
 }
 
 func (o *MPSNNSlice) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNSlice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNSliceSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNSliceFromID(_ret)
 }
-

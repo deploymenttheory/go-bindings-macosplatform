@@ -34,4 +34,3 @@ func CWKeychainSetWiFiEAPIdentity(domain raw.CWKeychainDomain, ssid *foundation.
 func CWMergeNetworks(networks *foundation.NSSet[*raw.CWNetwork]) *foundation.NSSet[*raw.CWNetwork] {
 	return raw.CWMergeNetworks(networks)
 }
-

@@ -13,7 +13,7 @@ type CVAttachmentMode int64
 
 const (
 	KCVAttachmentMode_ShouldNotPropagate CVAttachmentMode = 0
-	KCVAttachmentMode_ShouldPropagate CVAttachmentMode = 1
+	KCVAttachmentMode_ShouldPropagate    CVAttachmentMode = 1
 )
 
 func (e CVAttachmentMode) String() string {
@@ -62,4 +62,3 @@ func (e CVPixelBufferPoolFlushFlags) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

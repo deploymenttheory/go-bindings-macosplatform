@@ -15,7 +15,9 @@ type ImageAestheticsScoresObservation struct {
 }
 
 // Unwrap returns the underlying [raw.VNImageAestheticsScoresObservation].
-func (x *ImageAestheticsScoresObservation) Unwrap() *raw.VNImageAestheticsScoresObservation { return x.inner }
+func (x *ImageAestheticsScoresObservation) Unwrap() *raw.VNImageAestheticsScoresObservation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
 	return x.inner.OverallScore()
 }
 
-func (x *ImageAestheticsScoresObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+func (x *ImageAestheticsScoresObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNObservation
+}
 
 // ImageAestheticsScoresObservationable is the interface implemented by [ImageAestheticsScoresObservation], for mocking and DI.
 type ImageAestheticsScoresObservationable interface {
@@ -55,4 +59,3 @@ type ImageAestheticsScoresObservationable interface {
 }
 
 var _ ImageAestheticsScoresObservationable = (*ImageAestheticsScoresObservation)(nil)
-

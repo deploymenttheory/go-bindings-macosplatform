@@ -109,4 +109,3 @@ type ImageCopyToMatrixable interface {
 }
 
 var _ ImageCopyToMatrixable = (*ImageCopyToMatrix)(nil)
-

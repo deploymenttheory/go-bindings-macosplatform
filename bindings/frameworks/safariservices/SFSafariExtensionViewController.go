@@ -16,7 +16,7 @@ type SFSafariExtensionViewController struct {
 }
 
 var (
-	_clsSFSafariExtensionViewController = _objcClass("SFSafariExtensionViewController")
+	_clsSFSafariExtensionViewController               = _objcClass("SFSafariExtensionViewController")
 	_sFSafariExtensionViewControllerSelDismissPopover = objc.RegisterName("dismissPopover")
 )
 
@@ -33,4 +33,3 @@ func SFSafariExtensionViewControllerFromID(id objc.ID) *SFSafariExtensionViewCon
 func (o *SFSafariExtensionViewController) DismissPopover() {
 	o.Ptr().Send(_sFSafariExtensionViewControllerSelDismissPopover)
 }
-

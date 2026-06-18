@@ -163,4 +163,3 @@ type OperationGroupable interface {
 }
 
 var _ OperationGroupable = (*OperationGroup)(nil)
-

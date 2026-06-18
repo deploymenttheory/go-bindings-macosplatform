@@ -45,4 +45,3 @@ type CompactTLVRecordable interface {
 }
 
 var _ CompactTLVRecordable = (*CompactTLVRecord)(nil)
-

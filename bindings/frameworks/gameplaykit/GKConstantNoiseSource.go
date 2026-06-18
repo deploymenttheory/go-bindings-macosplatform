@@ -17,11 +17,11 @@ type GKConstantNoiseSource struct {
 }
 
 var (
-	_clsGKConstantNoiseSource = _objcClass("GKConstantNoiseSource")
+	_clsGKConstantNoiseSource                       = _objcClass("GKConstantNoiseSource")
 	_gKConstantNoiseSourceSelConstantNoiseWithValue = objc.RegisterName("constantNoiseWithValue:")
-	_gKConstantNoiseSourceSelInitWithValue = objc.RegisterName("initWithValue:")
-	_gKConstantNoiseSourceSelValue = objc.RegisterName("value")
-	_gKConstantNoiseSourceSelSetValue = objc.RegisterName("setValue:")
+	_gKConstantNoiseSourceSelInitWithValue          = objc.RegisterName("initWithValue:")
+	_gKConstantNoiseSourceSelValue                  = objc.RegisterName("value")
+	_gKConstantNoiseSourceSelSetValue               = objc.RegisterName("setValue:")
 )
 
 func GKConstantNoiseSourceFromID(id objc.ID) *GKConstantNoiseSource {
@@ -36,13 +36,17 @@ func GKConstantNoiseSourceFromID(id objc.ID) *GKConstantNoiseSource {
 
 func GKConstantNoiseSourceConstantNoiseWithValue(value float64) *GKConstantNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKConstantNoiseSource), _gKConstantNoiseSourceSelConstantNoiseWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKConstantNoiseSourceFromID(_ret)
 }
 
 func (o *GKConstantNoiseSource) InitWithValue(value float64) *GKConstantNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKConstantNoiseSourceSelInitWithValue, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKConstantNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKConstantNoiseSource) Value() float64 {
 func (o *GKConstantNoiseSource) SetValue(value float64) {
 	o.Ptr().Send(_gKConstantNoiseSourceSelSetValue, value)
 }
-

@@ -15,12 +15,12 @@ type VZVirtioGraphicsScanoutConfiguration struct {
 }
 
 var (
-	_clsVZVirtioGraphicsScanoutConfiguration = _objcClass("VZVirtioGraphicsScanoutConfiguration")
+	_clsVZVirtioGraphicsScanoutConfiguration                                    = _objcClass("VZVirtioGraphicsScanoutConfiguration")
 	_vZVirtioGraphicsScanoutConfigurationSelInitWithWidthInPixelsHeightInPixels = objc.RegisterName("initWithWidthInPixels:heightInPixels:")
-	_vZVirtioGraphicsScanoutConfigurationSelWidthInPixels = objc.RegisterName("widthInPixels")
-	_vZVirtioGraphicsScanoutConfigurationSelSetWidthInPixels = objc.RegisterName("setWidthInPixels:")
-	_vZVirtioGraphicsScanoutConfigurationSelHeightInPixels = objc.RegisterName("heightInPixels")
-	_vZVirtioGraphicsScanoutConfigurationSelSetHeightInPixels = objc.RegisterName("setHeightInPixels:")
+	_vZVirtioGraphicsScanoutConfigurationSelWidthInPixels                       = objc.RegisterName("widthInPixels")
+	_vZVirtioGraphicsScanoutConfigurationSelSetWidthInPixels                    = objc.RegisterName("setWidthInPixels:")
+	_vZVirtioGraphicsScanoutConfigurationSelHeightInPixels                      = objc.RegisterName("heightInPixels")
+	_vZVirtioGraphicsScanoutConfigurationSelSetHeightInPixels                   = objc.RegisterName("setHeightInPixels:")
 )
 
 func VZVirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VZVirtioGraphicsScanoutConfiguration {
@@ -36,7 +36,9 @@ func VZVirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VZVirtioGraphicsSca
 // @abstract Create a scanout configuration with the specified pixel dimensions. @param widthInPixels The width of the scanout, in pixels. @param heightInPixels The height of the scanout, in pixels.
 func (o *VZVirtioGraphicsScanoutConfiguration) InitWithWidthInPixelsHeightInPixels(widthInPixels int, heightInPixels int) *VZVirtioGraphicsScanoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioGraphicsScanoutConfigurationSelInitWithWidthInPixelsHeightInPixels, widthInPixels, heightInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioGraphicsScanoutConfigurationFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *VZVirtioGraphicsScanoutConfiguration) HeightInPixels() int {
 func (o *VZVirtioGraphicsScanoutConfiguration) SetHeightInPixels(heightInPixels int) {
 	o.Ptr().Send(_vZVirtioGraphicsScanoutConfigurationSelSetHeightInPixels, heightInPixels)
 }
-

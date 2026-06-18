@@ -16,12 +16,12 @@ type MAMusicHapticsManager struct {
 }
 
 var (
-	_clsMAMusicHapticsManager = _objcClass("MAMusicHapticsManager")
+	_clsMAMusicHapticsManager                                                                  = _objcClass("MAMusicHapticsManager")
 	_mAMusicHapticsManagerSelCheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler = objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:")
-	_mAMusicHapticsManagerSelAddStatusObserver = objc.RegisterName("addStatusObserver:")
-	_mAMusicHapticsManagerSelRemoveStatusObserver = objc.RegisterName("removeStatusObserver:")
-	_mAMusicHapticsManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_mAMusicHapticsManagerSelIsActive = objc.RegisterName("isActive")
+	_mAMusicHapticsManagerSelAddStatusObserver                                                 = objc.RegisterName("addStatusObserver:")
+	_mAMusicHapticsManagerSelRemoveStatusObserver                                              = objc.RegisterName("removeStatusObserver:")
+	_mAMusicHapticsManagerSelSharedManager                                                     = objc.RegisterName("sharedManager")
+	_mAMusicHapticsManagerSelIsActive                                                          = objc.RegisterName("isActive")
 )
 
 func MAMusicHapticsManagerFromID(id objc.ID) *MAMusicHapticsManager {
@@ -68,7 +68,9 @@ func (o *MAMusicHapticsManager) RemoveStatusObserver(registrationToken foundatio
 
 func MAMusicHapticsManagerSharedManager() *MAMusicHapticsManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMAMusicHapticsManager), _mAMusicHapticsManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MAMusicHapticsManagerFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *MAMusicHapticsManager) IsActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mAMusicHapticsManagerSelIsActive)
 	return _ret
 }
-

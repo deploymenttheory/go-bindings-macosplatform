@@ -108,4 +108,3 @@ func UserIdentityWithPosixUIDAuthority(uid uint, authority *raw.CBIdentityAuthor
 	}
 	return &UserIdentity{inner: _r}
 }
-

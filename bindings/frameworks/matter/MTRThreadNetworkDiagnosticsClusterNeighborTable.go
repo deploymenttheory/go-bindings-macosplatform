@@ -25,4 +25,3 @@ func MTRThreadNetworkDiagnosticsClusterNeighborTableFromID(id objc.ID) *MTRThrea
 	purego.Track(o)
 	return o
 }
-

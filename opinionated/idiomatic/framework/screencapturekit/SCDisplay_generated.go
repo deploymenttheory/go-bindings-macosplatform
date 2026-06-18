@@ -66,4 +66,3 @@ type Displayable interface {
 }
 
 var _ Displayable = (*Display)(nil)
-

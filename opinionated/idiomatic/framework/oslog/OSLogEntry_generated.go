@@ -67,4 +67,3 @@ type LogEntryable interface {
 }
 
 var _ LogEntryable = (*LogEntry)(nil)
-

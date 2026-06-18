@@ -26,4 +26,3 @@ func MPSCNNPoolingAverageGradientNodeFromID(id objc.ID) *MPSCNNPoolingAverageGra
 	purego.Track(o)
 	return o
 }
-

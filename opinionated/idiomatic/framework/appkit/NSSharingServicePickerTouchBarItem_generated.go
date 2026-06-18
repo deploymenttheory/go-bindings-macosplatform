@@ -17,7 +17,9 @@ type SharingServicePickerTouchBarItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSSharingServicePickerTouchBarItem].
-func (x *SharingServicePickerTouchBarItem) Unwrap() *raw.NSSharingServicePickerTouchBarItem { return x.inner }
+func (x *SharingServicePickerTouchBarItem) Unwrap() *raw.NSSharingServicePickerTouchBarItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -115,7 +117,9 @@ func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *raw.NSIma
 	x.inner.SetButtonImage(buttonImage)
 }
 
-func (x *SharingServicePickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+func (x *SharingServicePickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem {
+	return &x.inner.NSTouchBarItem
+}
 
 // SharingServicePickerTouchBarItemable is the interface implemented by [SharingServicePickerTouchBarItem], for mocking and DI.
 type SharingServicePickerTouchBarItemable interface {
@@ -136,4 +140,3 @@ type SharingServicePickerTouchBarItemable interface {
 }
 
 var _ SharingServicePickerTouchBarItemable = (*SharingServicePickerTouchBarItem)(nil)
-

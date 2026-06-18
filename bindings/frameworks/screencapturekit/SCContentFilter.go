@@ -17,21 +17,21 @@ type SCContentFilter struct {
 }
 
 var (
-	_clsSCContentFilter = _objcClass("SCContentFilter")
-	_sCContentFilterSelInitWithDesktopIndependentWindow = objc.RegisterName("initWithDesktopIndependentWindow:")
-	_sCContentFilterSelInitWithDisplayExcludingWindows = objc.RegisterName("initWithDisplay:excludingWindows:")
-	_sCContentFilterSelInitWithDisplayIncludingWindows = objc.RegisterName("initWithDisplay:includingWindows:")
+	_clsSCContentFilter                                                     = _objcClass("SCContentFilter")
+	_sCContentFilterSelInitWithDesktopIndependentWindow                     = objc.RegisterName("initWithDesktopIndependentWindow:")
+	_sCContentFilterSelInitWithDisplayExcludingWindows                      = objc.RegisterName("initWithDisplay:excludingWindows:")
+	_sCContentFilterSelInitWithDisplayIncludingWindows                      = objc.RegisterName("initWithDisplay:includingWindows:")
 	_sCContentFilterSelInitWithDisplayIncludingApplicationsExceptingWindows = objc.RegisterName("initWithDisplay:includingApplications:exceptingWindows:")
 	_sCContentFilterSelInitWithDisplayExcludingApplicationsExceptingWindows = objc.RegisterName("initWithDisplay:excludingApplications:exceptingWindows:")
-	_sCContentFilterSelStreamType = objc.RegisterName("streamType")
-	_sCContentFilterSelStyle = objc.RegisterName("style")
-	_sCContentFilterSelPointPixelScale = objc.RegisterName("pointPixelScale")
-	_sCContentFilterSelContentRect = objc.RegisterName("contentRect")
-	_sCContentFilterSelIncludeMenuBar = objc.RegisterName("includeMenuBar")
-	_sCContentFilterSelSetIncludeMenuBar = objc.RegisterName("setIncludeMenuBar:")
-	_sCContentFilterSelIncludedDisplays = objc.RegisterName("includedDisplays")
-	_sCContentFilterSelIncludedApplications = objc.RegisterName("includedApplications")
-	_sCContentFilterSelIncludedWindows = objc.RegisterName("includedWindows")
+	_sCContentFilterSelStreamType                                           = objc.RegisterName("streamType")
+	_sCContentFilterSelStyle                                                = objc.RegisterName("style")
+	_sCContentFilterSelPointPixelScale                                      = objc.RegisterName("pointPixelScale")
+	_sCContentFilterSelContentRect                                          = objc.RegisterName("contentRect")
+	_sCContentFilterSelIncludeMenuBar                                       = objc.RegisterName("includeMenuBar")
+	_sCContentFilterSelSetIncludeMenuBar                                    = objc.RegisterName("setIncludeMenuBar:")
+	_sCContentFilterSelIncludedDisplays                                     = objc.RegisterName("includedDisplays")
+	_sCContentFilterSelIncludedApplications                                 = objc.RegisterName("includedApplications")
+	_sCContentFilterSelIncludedWindows                                      = objc.RegisterName("includedWindows")
 )
 
 func SCContentFilterFromID(id objc.ID) *SCContentFilter {
@@ -47,35 +47,45 @@ func SCContentFilterFromID(id objc.ID) *SCContentFilter {
 // @abstract initWithDesktopIndependentWindow: @param window the independent SCWindow you wish to capture @discussion this method will create a SCContentFilter that captures just the independent window passed in.
 func (o *SCContentFilter) InitWithDesktopIndependentWindow(window *SCWindow) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDesktopIndependentWindow, window.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentFilterFromID(_ret)
 }
 
 // @abstract initWithDisplay:excludingWindows @param display the SCDisplay you wish to capture @param excluded the SCWindow(s) you wish to exclude from the passed in SCDisplay @discussion This method will create a SCContentFilter that captures the SCDisplay, excluding the passed in excluded SCWindow(s). The desktop background and dock will be included with this content filter.
 func (o *SCContentFilter) InitWithDisplayExcludingWindows(display *SCDisplay, excluded *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayExcludingWindows, display.Ptr(), excluded.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentFilterFromID(_ret)
 }
 
 // @abstract initWithDisplay:includingWindows @param display the SCDisplay you wish to capture @param includedWindows a set of SCWindows you wish to capture @discussion This method will create a SCContentFilter that captures a group of SCWindows. The desktop background and dock will be excluded with this content filter.
 func (o *SCContentFilter) InitWithDisplayIncludingWindows(display *SCDisplay, includedWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayIncludingWindows, display.Ptr(), includedWindows.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentFilterFromID(_ret)
 }
 
 // @abstract initWithDisplay:includingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will not be shown if their owning application is in the provided list and will be shown otherwise. The desktop background and dock will be excluded with this content filter.
 func (o *SCContentFilter) InitWithDisplayIncludingApplicationsExceptingWindows(display *SCDisplay, applications *foundation.NSArray[*SCRunningApplication], exceptingWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayIncludingApplicationsExceptingWindows, display.Ptr(), applications.Ptr(), exceptingWindows.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentFilterFromID(_ret)
 }
 
 // @abstract initWithDisplay:excludingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you do not wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows not owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will be shown if their owning application is in the provided list and will not be shown otherwise. The desktop background and dock will be included with this content filter.
 func (o *SCContentFilter) InitWithDisplayExcludingApplicationsExceptingWindows(display *SCDisplay, applications *foundation.NSArray[*SCRunningApplication], exceptingWindows *foundation.NSArray[*SCWindow]) *SCContentFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelInitWithDisplayExcludingApplicationsExceptingWindows, display.Ptr(), applications.Ptr(), exceptingWindows.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCContentFilterFromID(_ret)
 }
 
@@ -117,21 +127,26 @@ func (o *SCContentFilter) SetIncludeMenuBar(includeMenuBar bool) {
 // @abstract SCDisplays that are included in the content filter
 func (o *SCContentFilter) IncludedDisplays() *foundation.NSArray[*SCDisplay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelIncludedDisplays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCDisplay](_ret)
 }
 
 // @abstract Applications that are included in the content filter
 func (o *SCContentFilter) IncludedApplications() *foundation.NSArray[*SCRunningApplication] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelIncludedApplications)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCRunningApplication](_ret)
 }
 
 // @abstract Windows that are included in the content filter
 func (o *SCContentFilter) IncludedWindows() *foundation.NSArray[*SCWindow] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCContentFilterSelIncludedWindows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCWindow](_ret)
 }
-

@@ -16,8 +16,8 @@ type LAEnvironmentMechanismCompanion struct {
 }
 
 var (
-	_clsLAEnvironmentMechanismCompanion = _objcClass("LAEnvironmentMechanismCompanion")
-	_lAEnvironmentMechanismCompanionSelType = objc.RegisterName("type")
+	_clsLAEnvironmentMechanismCompanion          = _objcClass("LAEnvironmentMechanismCompanion")
+	_lAEnvironmentMechanismCompanionSelType      = objc.RegisterName("type")
 	_lAEnvironmentMechanismCompanionSelStateHash = objc.RegisterName("stateHash")
 )
 
@@ -40,7 +40,8 @@ func (o *LAEnvironmentMechanismCompanion) Type() LACompanionType {
 // @brief Hash of the current companion pairing as returned by @c LAContext.domainState.companion.stateHash(for:) @discussion If no companion are paired for this companion type, @c stateHash property is @c nil. If at least one companion is paired for this companion type, @c stateHash is not @c nil and it changes whenever the set of paired companions of this type is changed.
 func (o *LAEnvironmentMechanismCompanion) StateHash() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lAEnvironmentMechanismCompanionSelStateHash)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

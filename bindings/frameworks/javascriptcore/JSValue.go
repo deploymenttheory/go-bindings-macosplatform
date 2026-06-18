@@ -19,81 +19,81 @@ type JSValue struct {
 }
 
 var (
-	_clsJSValue = _objcClass("JSValue")
-	_jSValueSelValueWithObjectInContext = objc.RegisterName("valueWithObject:inContext:")
-	_jSValueSelValueWithBoolInContext = objc.RegisterName("valueWithBool:inContext:")
-	_jSValueSelValueWithDoubleInContext = objc.RegisterName("valueWithDouble:inContext:")
-	_jSValueSelValueWithInt32InContext = objc.RegisterName("valueWithInt32:inContext:")
-	_jSValueSelValueWithUInt32InContext = objc.RegisterName("valueWithUInt32:inContext:")
-	_jSValueSelValueWithNewObjectInContext = objc.RegisterName("valueWithNewObjectInContext:")
-	_jSValueSelValueWithNewArrayInContext = objc.RegisterName("valueWithNewArrayInContext:")
+	_clsJSValue                                                       = _objcClass("JSValue")
+	_jSValueSelValueWithObjectInContext                               = objc.RegisterName("valueWithObject:inContext:")
+	_jSValueSelValueWithBoolInContext                                 = objc.RegisterName("valueWithBool:inContext:")
+	_jSValueSelValueWithDoubleInContext                               = objc.RegisterName("valueWithDouble:inContext:")
+	_jSValueSelValueWithInt32InContext                                = objc.RegisterName("valueWithInt32:inContext:")
+	_jSValueSelValueWithUInt32InContext                               = objc.RegisterName("valueWithUInt32:inContext:")
+	_jSValueSelValueWithNewObjectInContext                            = objc.RegisterName("valueWithNewObjectInContext:")
+	_jSValueSelValueWithNewArrayInContext                             = objc.RegisterName("valueWithNewArrayInContext:")
 	_jSValueSelValueWithNewRegularExpressionFromPatternFlagsInContext = objc.RegisterName("valueWithNewRegularExpressionFromPattern:flags:inContext:")
-	_jSValueSelValueWithNewErrorFromMessageInContext = objc.RegisterName("valueWithNewErrorFromMessage:inContext:")
-	_jSValueSelValueWithNewPromiseInContextFromExecutor = objc.RegisterName("valueWithNewPromiseInContext:fromExecutor:")
-	_jSValueSelValueWithNewPromiseResolvedWithResultInContext = objc.RegisterName("valueWithNewPromiseResolvedWithResult:inContext:")
-	_jSValueSelValueWithNewPromiseRejectedWithReasonInContext = objc.RegisterName("valueWithNewPromiseRejectedWithReason:inContext:")
-	_jSValueSelValueWithNewSymbolFromDescriptionInContext = objc.RegisterName("valueWithNewSymbolFromDescription:inContext:")
-	_jSValueSelValueWithNewBigIntFromStringInContext = objc.RegisterName("valueWithNewBigIntFromString:inContext:")
-	_jSValueSelValueWithNewBigIntFromInt64InContext = objc.RegisterName("valueWithNewBigIntFromInt64:inContext:")
-	_jSValueSelValueWithNewBigIntFromUInt64InContext = objc.RegisterName("valueWithNewBigIntFromUInt64:inContext:")
-	_jSValueSelValueWithNewBigIntFromDoubleInContext = objc.RegisterName("valueWithNewBigIntFromDouble:inContext:")
-	_jSValueSelValueWithNullInContext = objc.RegisterName("valueWithNullInContext:")
-	_jSValueSelValueWithUndefinedInContext = objc.RegisterName("valueWithUndefinedInContext:")
-	_jSValueSelToObject = objc.RegisterName("toObject")
-	_jSValueSelToObjectOfClass = objc.RegisterName("toObjectOfClass:")
-	_jSValueSelToBool = objc.RegisterName("toBool")
-	_jSValueSelToDouble = objc.RegisterName("toDouble")
-	_jSValueSelToInt32 = objc.RegisterName("toInt32")
-	_jSValueSelToUInt32 = objc.RegisterName("toUInt32")
-	_jSValueSelToInt64 = objc.RegisterName("toInt64")
-	_jSValueSelToUInt64 = objc.RegisterName("toUInt64")
-	_jSValueSelToNumber = objc.RegisterName("toNumber")
-	_jSValueSelToString = objc.RegisterName("toString")
-	_jSValueSelToDate = objc.RegisterName("toDate")
-	_jSValueSelToArray = objc.RegisterName("toArray")
-	_jSValueSelToDictionary = objc.RegisterName("toDictionary")
-	_jSValueSelIsInstanceOf = objc.RegisterName("isInstanceOf:")
-	_jSValueSelIsEqualToObject = objc.RegisterName("isEqualToObject:")
-	_jSValueSelIsEqualWithTypeCoercionToObject = objc.RegisterName("isEqualWithTypeCoercionToObject:")
-	_jSValueSelCompareJSValue = objc.RegisterName("compareJSValue:")
-	_jSValueSelCompareInt64 = objc.RegisterName("compareInt64:")
-	_jSValueSelCompareUInt64 = objc.RegisterName("compareUInt64:")
-	_jSValueSelCompareDouble = objc.RegisterName("compareDouble:")
-	_jSValueSelCallWithArguments = objc.RegisterName("callWithArguments:")
-	_jSValueSelConstructWithArguments = objc.RegisterName("constructWithArguments:")
-	_jSValueSelInvokeMethodWithArguments = objc.RegisterName("invokeMethod:withArguments:")
-	_jSValueSelContext = objc.RegisterName("context")
-	_jSValueSelIsUndefined = objc.RegisterName("isUndefined")
-	_jSValueSelIsNull = objc.RegisterName("isNull")
-	_jSValueSelIsBoolean = objc.RegisterName("isBoolean")
-	_jSValueSelIsNumber = objc.RegisterName("isNumber")
-	_jSValueSelIsString = objc.RegisterName("isString")
-	_jSValueSelIsObject = objc.RegisterName("isObject")
-	_jSValueSelIsArray = objc.RegisterName("isArray")
-	_jSValueSelIsDate = objc.RegisterName("isDate")
-	_jSValueSelIsSymbol = objc.RegisterName("isSymbol")
-	_jSValueSelIsBigInt = objc.RegisterName("isBigInt")
-	_jSValueSelValueWithPointInContext = objc.RegisterName("valueWithPoint:inContext:")
-	_jSValueSelValueWithRangeInContext = objc.RegisterName("valueWithRange:inContext:")
-	_jSValueSelValueWithRectInContext = objc.RegisterName("valueWithRect:inContext:")
-	_jSValueSelValueWithSizeInContext = objc.RegisterName("valueWithSize:inContext:")
-	_jSValueSelToPoint = objc.RegisterName("toPoint")
-	_jSValueSelToRange = objc.RegisterName("toRange")
-	_jSValueSelToRect = objc.RegisterName("toRect")
-	_jSValueSelToSize = objc.RegisterName("toSize")
-	_jSValueSelValueForProperty = objc.RegisterName("valueForProperty:")
-	_jSValueSelSetValueForProperty = objc.RegisterName("setValue:forProperty:")
-	_jSValueSelDeleteProperty = objc.RegisterName("deleteProperty:")
-	_jSValueSelHasProperty = objc.RegisterName("hasProperty:")
-	_jSValueSelDefinePropertyDescriptor = objc.RegisterName("defineProperty:descriptor:")
-	_jSValueSelValueAtIndex = objc.RegisterName("valueAtIndex:")
-	_jSValueSelSetValueAtIndex = objc.RegisterName("setValue:atIndex:")
-	_jSValueSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_jSValueSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_jSValueSelSetObjectForKeyedSubscript = objc.RegisterName("setObject:forKeyedSubscript:")
-	_jSValueSelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
-	_jSValueSelValueWithJSValueRefInContext = objc.RegisterName("valueWithJSValueRef:inContext:")
-	_jSValueSelJSValueRef = objc.RegisterName("JSValueRef")
+	_jSValueSelValueWithNewErrorFromMessageInContext                  = objc.RegisterName("valueWithNewErrorFromMessage:inContext:")
+	_jSValueSelValueWithNewPromiseInContextFromExecutor               = objc.RegisterName("valueWithNewPromiseInContext:fromExecutor:")
+	_jSValueSelValueWithNewPromiseResolvedWithResultInContext         = objc.RegisterName("valueWithNewPromiseResolvedWithResult:inContext:")
+	_jSValueSelValueWithNewPromiseRejectedWithReasonInContext         = objc.RegisterName("valueWithNewPromiseRejectedWithReason:inContext:")
+	_jSValueSelValueWithNewSymbolFromDescriptionInContext             = objc.RegisterName("valueWithNewSymbolFromDescription:inContext:")
+	_jSValueSelValueWithNewBigIntFromStringInContext                  = objc.RegisterName("valueWithNewBigIntFromString:inContext:")
+	_jSValueSelValueWithNewBigIntFromInt64InContext                   = objc.RegisterName("valueWithNewBigIntFromInt64:inContext:")
+	_jSValueSelValueWithNewBigIntFromUInt64InContext                  = objc.RegisterName("valueWithNewBigIntFromUInt64:inContext:")
+	_jSValueSelValueWithNewBigIntFromDoubleInContext                  = objc.RegisterName("valueWithNewBigIntFromDouble:inContext:")
+	_jSValueSelValueWithNullInContext                                 = objc.RegisterName("valueWithNullInContext:")
+	_jSValueSelValueWithUndefinedInContext                            = objc.RegisterName("valueWithUndefinedInContext:")
+	_jSValueSelToObject                                               = objc.RegisterName("toObject")
+	_jSValueSelToObjectOfClass                                        = objc.RegisterName("toObjectOfClass:")
+	_jSValueSelToBool                                                 = objc.RegisterName("toBool")
+	_jSValueSelToDouble                                               = objc.RegisterName("toDouble")
+	_jSValueSelToInt32                                                = objc.RegisterName("toInt32")
+	_jSValueSelToUInt32                                               = objc.RegisterName("toUInt32")
+	_jSValueSelToInt64                                                = objc.RegisterName("toInt64")
+	_jSValueSelToUInt64                                               = objc.RegisterName("toUInt64")
+	_jSValueSelToNumber                                               = objc.RegisterName("toNumber")
+	_jSValueSelToString                                               = objc.RegisterName("toString")
+	_jSValueSelToDate                                                 = objc.RegisterName("toDate")
+	_jSValueSelToArray                                                = objc.RegisterName("toArray")
+	_jSValueSelToDictionary                                           = objc.RegisterName("toDictionary")
+	_jSValueSelIsInstanceOf                                           = objc.RegisterName("isInstanceOf:")
+	_jSValueSelIsEqualToObject                                        = objc.RegisterName("isEqualToObject:")
+	_jSValueSelIsEqualWithTypeCoercionToObject                        = objc.RegisterName("isEqualWithTypeCoercionToObject:")
+	_jSValueSelCompareJSValue                                         = objc.RegisterName("compareJSValue:")
+	_jSValueSelCompareInt64                                           = objc.RegisterName("compareInt64:")
+	_jSValueSelCompareUInt64                                          = objc.RegisterName("compareUInt64:")
+	_jSValueSelCompareDouble                                          = objc.RegisterName("compareDouble:")
+	_jSValueSelCallWithArguments                                      = objc.RegisterName("callWithArguments:")
+	_jSValueSelConstructWithArguments                                 = objc.RegisterName("constructWithArguments:")
+	_jSValueSelInvokeMethodWithArguments                              = objc.RegisterName("invokeMethod:withArguments:")
+	_jSValueSelContext                                                = objc.RegisterName("context")
+	_jSValueSelIsUndefined                                            = objc.RegisterName("isUndefined")
+	_jSValueSelIsNull                                                 = objc.RegisterName("isNull")
+	_jSValueSelIsBoolean                                              = objc.RegisterName("isBoolean")
+	_jSValueSelIsNumber                                               = objc.RegisterName("isNumber")
+	_jSValueSelIsString                                               = objc.RegisterName("isString")
+	_jSValueSelIsObject                                               = objc.RegisterName("isObject")
+	_jSValueSelIsArray                                                = objc.RegisterName("isArray")
+	_jSValueSelIsDate                                                 = objc.RegisterName("isDate")
+	_jSValueSelIsSymbol                                               = objc.RegisterName("isSymbol")
+	_jSValueSelIsBigInt                                               = objc.RegisterName("isBigInt")
+	_jSValueSelValueWithPointInContext                                = objc.RegisterName("valueWithPoint:inContext:")
+	_jSValueSelValueWithRangeInContext                                = objc.RegisterName("valueWithRange:inContext:")
+	_jSValueSelValueWithRectInContext                                 = objc.RegisterName("valueWithRect:inContext:")
+	_jSValueSelValueWithSizeInContext                                 = objc.RegisterName("valueWithSize:inContext:")
+	_jSValueSelToPoint                                                = objc.RegisterName("toPoint")
+	_jSValueSelToRange                                                = objc.RegisterName("toRange")
+	_jSValueSelToRect                                                 = objc.RegisterName("toRect")
+	_jSValueSelToSize                                                 = objc.RegisterName("toSize")
+	_jSValueSelValueForProperty                                       = objc.RegisterName("valueForProperty:")
+	_jSValueSelSetValueForProperty                                    = objc.RegisterName("setValue:forProperty:")
+	_jSValueSelDeleteProperty                                         = objc.RegisterName("deleteProperty:")
+	_jSValueSelHasProperty                                            = objc.RegisterName("hasProperty:")
+	_jSValueSelDefinePropertyDescriptor                               = objc.RegisterName("defineProperty:descriptor:")
+	_jSValueSelValueAtIndex                                           = objc.RegisterName("valueAtIndex:")
+	_jSValueSelSetValueAtIndex                                        = objc.RegisterName("setValue:atIndex:")
+	_jSValueSelObjectForKeyedSubscript                                = objc.RegisterName("objectForKeyedSubscript:")
+	_jSValueSelObjectAtIndexedSubscript                               = objc.RegisterName("objectAtIndexedSubscript:")
+	_jSValueSelSetObjectForKeyedSubscript                             = objc.RegisterName("setObject:forKeyedSubscript:")
+	_jSValueSelSetObjectAtIndexedSubscript                            = objc.RegisterName("setObject:atIndexedSubscript:")
+	_jSValueSelValueWithJSValueRefInContext                           = objc.RegisterName("valueWithJSValueRef:inContext:")
+	_jSValueSelJSValueRef                                             = objc.RegisterName("JSValueRef")
 )
 
 func JSValueFromID(id objc.ID) *JSValue {
@@ -109,63 +109,81 @@ func JSValueFromID(id objc.ID) *JSValue {
 // @methodgroup Creating JavaScript Values @method @abstract Create a JSValue by converting an Objective-C object. @discussion The resulting JSValue retains the provided Objective-C object. @param value The Objective-C object to be converted. @result The new JSValue.
 func JSValueValueWithObjectInContext(value objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithObjectInContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JavaScript value from a BOOL primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
 func JSValueValueWithBoolInContext(value bool, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithBoolInContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JavaScript value from a double primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
 func JSValueValueWithDoubleInContext(value float64, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithDoubleInContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JavaScript value from an <code>int32_t</code> primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
 func JSValueValueWithInt32InContext(value int32, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithInt32InContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JavaScript value from a <code>uint32_t</code> primitive. @param context The JSContext in which the resulting JSValue will be created. @result The new JSValue representing the equivalent boolean value.
 func JSValueValueWithUInt32InContext(value uint32, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithUInt32InContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new, empty JavaScript object. @param context The JSContext in which the resulting object will be created. @result The new JavaScript object.
 func JSValueValueWithNewObjectInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewObjectInContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new, empty JavaScript array. @param context The JSContext in which the resulting array will be created. @result The new JavaScript array.
 func JSValueValueWithNewArrayInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewArrayInContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new JavaScript regular expression object. @param pattern The regular expression pattern. @param flags The regular expression flags. @param context The JSContext in which the resulting regular expression object will be created. @result The new JavaScript regular expression object.
 func JSValueValueWithNewRegularExpressionFromPatternFlagsInContext(pattern *foundation.NSString, flags *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewRegularExpressionFromPatternFlagsInContext, pattern.Ptr(), flags.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new JavaScript error object. @param message The error message. @param context The JSContext in which the resulting error object will be created. @result The new JavaScript error object.
 func JSValueValueWithNewErrorFromMessageInContext(message *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewErrorFromMessageInContext, message.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -185,70 +203,90 @@ func JSValueValueWithNewPromiseInContextFromExecutor(context_ *JSContext, callba
 		defer __block_callback.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewPromiseInContextFromExecutor, context_.Ptr(), __block_callback)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new resolved promise object with the provided value. @param result The result value to be passed to any reactions. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a new promise JavaScript object. @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [resolve callWithArguments:@[result]]; } inContext:context]</code>
 func JSValueValueWithNewPromiseResolvedWithResultInContext(result objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewPromiseResolvedWithResultInContext, result, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new rejected promise object with the provided value. @param reason The result value to be passed to any reactions. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a new promise JavaScript object. @discussion This method is equivalent to calling <code>[JSValue valueWithNewPromiseFromExecutor:^(JSValue *resolve, JSValue *reject) { [reject callWithArguments:@[reason]]; } inContext:context]</code>
 func JSValueValueWithNewPromiseRejectedWithReasonInContext(reason objc.ID, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewPromiseRejectedWithReasonInContext, reason, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new, unique, symbol object. @param description The description of the symbol object being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a unique JavaScript value with type symbol.
 func JSValueValueWithNewSymbolFromDescriptionInContext(description *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewSymbolFromDescriptionInContext, description.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new BigInt value from a numeric string. @param string The string representation of the BigInt JavaScript value being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a JavaScript value with type BigInt. @discussion This is equivalent to calling the <code>BigInt</code> constructor from JavaScript with a string argument.
 func JSValueValueWithNewBigIntFromStringInContext(string_ *foundation.NSString, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewBigIntFromStringInContext, string_.Ptr(), context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new BigInt value from a <code>int64_t</code>. @param int64 The signed 64-bit integer of the BigInt JavaScript value being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a JavaScript value with type BigInt.
 func JSValueValueWithNewBigIntFromInt64InContext(int64 int64, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewBigIntFromInt64InContext, int64, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new BigInt value from a <code>uint64_t</code>. @param uint64 The unsigned 64-bit integer of the BigInt JavaScript value being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a JavaScript value with type BigInt.
 func JSValueValueWithNewBigIntFromUInt64InContext(uint64 uint64, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewBigIntFromUInt64InContext, uint64, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a new BigInt value from a double. @param value The value of the BigInt JavaScript value being created. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing a JavaScript value with type BigInt. @discussion If the value is not an integer, an exception is thrown.
 func JSValueValueWithNewBigIntFromDoubleInContext(value float64, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNewBigIntFromDoubleInContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create the JavaScript value <code>null</code>. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing the JavaScript value <code>null</code>.
 func JSValueValueWithNullInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithNullInContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create the JavaScript value <code>undefined</code>. @param context The JSContext to which the resulting JSValue belongs. @result The JSValue representing the JavaScript value <code>undefined</code>.
 func JSValueValueWithUndefinedInContext(context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithUndefinedInContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -303,21 +341,27 @@ func (o *JSValue) ToUInt64() uint64 {
 // @method @abstract Convert a JSValue to a NSNumber. @discussion If the JSValue represents a boolean, a NSNumber value of YES or NO will be returned. For all other types, the result is equivalent to <code>Number(value)</code> in JavaScript. @result The NSNumber result of the conversion.
 func (o *JSValue) ToNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @method @abstract Convert a JSValue to a NSString. @discussion The JSValue is converted to a string according to the rules specified by the JavaScript language. @result The NSString containing the result of the conversion.
 func (o *JSValue) ToString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method @abstract Convert a JSValue to a NSDate. @discussion The value is converted to a number representing a time interval since 1970 which is then used to create a new NSDate instance. @result The NSDate created using the converted time interval.
 func (o *JSValue) ToDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelToDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -378,28 +422,36 @@ func (o *JSValue) CompareDouble(other float64) JSRelationCondition {
 // @methodgroup Calling Functions and Constructors @method @abstract Invoke a JSValue as a function. @discussion In JavaScript, if a function doesn't explicitly return a value then it implicitly returns the JavaScript value <code>undefined</code>. @param arguments The arguments to pass to the function. @result The return value of the function call.
 func (o *JSValue) CallWithArguments(arguments *foundation.NSArray[objc.ID]) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelCallWithArguments, arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Invoke a JSValue as a constructor. @discussion This is equivalent to using the <code>new</code> syntax in JavaScript. @param arguments The arguments to pass to the constructor. @result The return value of the constructor call.
 func (o *JSValue) ConstructWithArguments(arguments *foundation.NSArray[objc.ID]) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelConstructWithArguments, arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Invoke a method on a JSValue. @discussion Accesses the property named <code>method</code> from this value and calls the resulting value as a function, passing this JSValue as the <code>this</code> value along with the specified arguments. @param method The name of the method to be invoked. @param arguments The arguments to pass to the method. @result The return value of the method call.
 func (o *JSValue) InvokeMethodWithArguments(method *foundation.NSString, arguments *foundation.NSArray[objc.ID]) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelInvokeMethodWithArguments, method.Ptr(), arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @property @abstract The JSContext that this value originates from.
 func (o *JSValue) Context() *JSContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSContextFromID(_ret)
 }
 
@@ -466,28 +518,36 @@ func (o *JSValue) IsBigInt() bool {
 // @method @abstract Create a JSValue from a CGPoint. @result A newly allocated JavaScript object containing properties named <code>x</code> and <code>y</code>, with values from the CGPoint.
 func JSValueValueWithPointInContext(point corefoundation.CGPoint, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithPointInContext, point, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JSValue from a NSRange. @result A newly allocated JavaScript object containing properties named <code>location</code> and <code>length</code>, with values from the NSRange.
 func JSValueValueWithRangeInContext(range_ foundation.NSRange, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithRangeInContext, range_, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JSValue from a CGRect. @result A newly allocated JavaScript object containing properties named <code>x</code>, <code>y</code>, <code>width</code>, and <code>height</code>, with values from the CGRect.
 func JSValueValueWithRectInContext(rect corefoundation.CGRect, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithRectInContext, rect, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 // @method @abstract Create a JSValue from a CGSize. @result A newly allocated JavaScript object containing properties named <code>width</code> and <code>height</code>, with values from the CGSize.
 func JSValueValueWithSizeInContext(size corefoundation.CGSize, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithSizeInContext, size, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -518,7 +578,9 @@ func (o *JSValue) ToSize() corefoundation.CGSize {
 // @method @abstract Access a property of a JSValue. @result The JSValue for the requested property or the JSValue <code>undefined</code> if the property does not exist. @discussion Corresponds to the JavaScript operation <code>object[property]</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
 func (o *JSValue) ValueForProperty(property objc.ID) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelValueForProperty, property)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -547,7 +609,9 @@ func (o *JSValue) DefinePropertyDescriptor(property objc.ID, descriptor objc.ID)
 // @method @abstract Access an indexed (numerical) property on a JSValue. @result The JSValue for the property at the specified index. Returns the JavaScript value <code>undefined</code> if no property exists at that index.
 func (o *JSValue) ValueAtIndex(index uint) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelValueAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -558,13 +622,17 @@ func (o *JSValue) SetValueAtIndex(value objc.ID, index uint) {
 
 func (o *JSValue) ObjectForKeyedSubscript(key objc.ID) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelObjectForKeyedSubscript, key)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
 func (o *JSValue) ObjectAtIndexedSubscript(index uint) *JSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _jSValueSelObjectAtIndexedSubscript, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -579,7 +647,9 @@ func (o *JSValue) SetObjectAtIndexedSubscript(object objc.ID, index uint) {
 // @method @abstract Creates a JSValue, wrapping its C API counterpart. @result The Objective-C API equivalent of the specified JSValueRef.
 func JSValueValueWithJSValueRefInContext(value unsafe.Pointer, context_ *JSContext) *JSValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsJSValue), _jSValueSelValueWithJSValueRefInContext, value, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return JSValueFromID(_ret)
 }
 
@@ -587,4 +657,3 @@ func (o *JSValue) JSValueRef() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _jSValueSelJSValueRef)
 	return _ret
 }
-

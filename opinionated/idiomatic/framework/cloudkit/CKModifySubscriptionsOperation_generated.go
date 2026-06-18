@@ -53,7 +53,9 @@ func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...Subscrip
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asSubscription().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asSubscription().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKSubscription](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -69,7 +71,9 @@ func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...*fou
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -233,9 +237,13 @@ func (x *ModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(mod
 	x.inner.SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock)
 }
 
-func (x *ModifySubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *ModifySubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *ModifySubscriptionsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *ModifySubscriptionsOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // ModifySubscriptionsOperationable is the interface implemented by [ModifySubscriptionsOperation], for mocking and DI.
 type ModifySubscriptionsOperationable interface {
@@ -267,4 +275,3 @@ type ModifySubscriptionsOperationable interface {
 }
 
 var _ ModifySubscriptionsOperationable = (*ModifySubscriptionsOperation)(nil)
-

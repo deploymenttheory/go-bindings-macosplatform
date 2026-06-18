@@ -18,13 +18,13 @@ type HKAudiogramSensitivityPoint struct {
 }
 
 var (
-	_clsHKAudiogramSensitivityPoint = _objcClass("HKAudiogramSensitivityPoint")
+	_clsHKAudiogramSensitivityPoint                                                                        = _objcClass("HKAudiogramSensitivityPoint")
 	_hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError = objc.RegisterName("sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error:")
-	_hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyTestsError = objc.RegisterName("sensitivityPointWithFrequency:tests:error:")
-	_hKAudiogramSensitivityPointSelFrequency = objc.RegisterName("frequency")
-	_hKAudiogramSensitivityPointSelLeftEarSensitivity = objc.RegisterName("leftEarSensitivity")
-	_hKAudiogramSensitivityPointSelRightEarSensitivity = objc.RegisterName("rightEarSensitivity")
-	_hKAudiogramSensitivityPointSelTests = objc.RegisterName("tests")
+	_hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyTestsError                                 = objc.RegisterName("sensitivityPointWithFrequency:tests:error:")
+	_hKAudiogramSensitivityPointSelFrequency                                                               = objc.RegisterName("frequency")
+	_hKAudiogramSensitivityPointSelLeftEarSensitivity                                                      = objc.RegisterName("leftEarSensitivity")
+	_hKAudiogramSensitivityPointSelRightEarSensitivity                                                     = objc.RegisterName("rightEarSensitivity")
+	_hKAudiogramSensitivityPointSelTests                                                                   = objc.RegisterName("tests")
 )
 
 func HKAudiogramSensitivityPointFromID(id objc.ID) *HKAudiogramSensitivityPoint {
@@ -41,7 +41,9 @@ func HKAudiogramSensitivityPointFromID(id objc.ID) *HKAudiogramSensitivityPoint 
 func HKAudiogramSensitivityPointSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError(frequency *HKQuantity, leftEarSensitivity *HKQuantity, rightEarSensitivity *HKQuantity) (*HKAudiogramSensitivityPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSensitivityPoint), _hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyLeftEarSensitivityRightEarSensitivityError, frequency.Ptr(), leftEarSensitivity.Ptr(), rightEarSensitivity.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,7 +54,9 @@ func HKAudiogramSensitivityPointSensitivityPointWithFrequencyLeftEarSensitivityR
 func HKAudiogramSensitivityPointSensitivityPointWithFrequencyTestsError(frequency *HKQuantity, tests *foundation.NSArray[*HKAudiogramSensitivityTest]) (*HKAudiogramSensitivityPoint, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSensitivityPoint), _hKAudiogramSensitivityPointSelSensitivityPointWithFrequencyTestsError, frequency.Ptr(), tests.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,28 +66,35 @@ func HKAudiogramSensitivityPointSensitivityPointWithFrequencyTestsError(frequenc
 // @property frequency  Frequency where sensitivity was measured.  The unit of measurement is [HKUnit hertzUnit] or "Hz".
 func (o *HKAudiogramSensitivityPoint) Frequency() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointSelFrequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property sensitivity Left ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
 func (o *HKAudiogramSensitivityPoint) LeftEarSensitivity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointSelLeftEarSensitivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property sensitivity Right ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
 func (o *HKAudiogramSensitivityPoint) RightEarSensitivity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointSelRightEarSensitivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      tests @abstract      The tests conducted at this frequency
 func (o *HKAudiogramSensitivityPoint) Tests() *foundation.NSArray[*HKAudiogramSensitivityTest] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointSelTests)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKAudiogramSensitivityTest](_ret)
 }
-

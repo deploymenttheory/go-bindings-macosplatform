@@ -102,4 +102,3 @@ type NotificationCategoryable interface {
 }
 
 var _ NotificationCategoryable = (*NotificationCategory)(nil)
-

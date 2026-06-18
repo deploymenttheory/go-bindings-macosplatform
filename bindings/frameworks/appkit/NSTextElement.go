@@ -16,15 +16,15 @@ type NSTextElement struct {
 }
 
 var (
-	_clsNSTextElement = _objcClass("NSTextElement")
+	_clsNSTextElement                           = _objcClass("NSTextElement")
 	_nSTextElementSelInitWithTextContentManager = objc.RegisterName("initWithTextContentManager:")
-	_nSTextElementSelTextContentManager = objc.RegisterName("textContentManager")
-	_nSTextElementSelSetTextContentManager = objc.RegisterName("setTextContentManager:")
-	_nSTextElementSelElementRange = objc.RegisterName("elementRange")
-	_nSTextElementSelSetElementRange = objc.RegisterName("setElementRange:")
-	_nSTextElementSelChildElements = objc.RegisterName("childElements")
-	_nSTextElementSelParentElement = objc.RegisterName("parentElement")
-	_nSTextElementSelIsRepresentedElement = objc.RegisterName("isRepresentedElement")
+	_nSTextElementSelTextContentManager         = objc.RegisterName("textContentManager")
+	_nSTextElementSelSetTextContentManager      = objc.RegisterName("setTextContentManager:")
+	_nSTextElementSelElementRange               = objc.RegisterName("elementRange")
+	_nSTextElementSelSetElementRange            = objc.RegisterName("setElementRange:")
+	_nSTextElementSelChildElements              = objc.RegisterName("childElements")
+	_nSTextElementSelParentElement              = objc.RegisterName("parentElement")
+	_nSTextElementSelIsRepresentedElement       = objc.RegisterName("isRepresentedElement")
 )
 
 func NSTextElementFromID(id objc.ID) *NSTextElement {
@@ -39,13 +39,17 @@ func NSTextElementFromID(id objc.ID) *NSTextElement {
 
 func (o *NSTextElement) InitWithTextContentManager(textContentManager *NSTextContentManager) *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelInitWithTextContentManager, textContentManager.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextElementFromID(_ret)
 }
 
 func (o *NSTextElement) TextContentManager() *NSTextContentManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelTextContentManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContentManagerFromID(_ret)
 }
 
@@ -55,7 +59,9 @@ func (o *NSTextElement) SetTextContentManager(textContentManager *NSTextContentM
 
 func (o *NSTextElement) ElementRange() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelElementRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
 
@@ -65,13 +71,17 @@ func (o *NSTextElement) SetElementRange(elementRange *NSTextRange) {
 
 func (o *NSTextElement) ChildElements() *foundation.NSArray[*NSTextElement] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelChildElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextElement](_ret)
 }
 
 func (o *NSTextElement) ParentElement() *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextElementSelParentElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextElementFromID(_ret)
 }
 
@@ -79,4 +89,3 @@ func (o *NSTextElement) IsRepresentedElement() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSTextElementSelIsRepresentedElement)
 	return _ret
 }
-

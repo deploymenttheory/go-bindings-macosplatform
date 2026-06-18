@@ -15,7 +15,7 @@ type VZUSBKeyboardConfiguration struct {
 }
 
 var (
-	_clsVZUSBKeyboardConfiguration = _objcClass("VZUSBKeyboardConfiguration")
+	_clsVZUSBKeyboardConfiguration     = _objcClass("VZUSBKeyboardConfiguration")
 	_vZUSBKeyboardConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZUSBKeyboardConfigurationFromID(id objc.ID) *VZUSBKeyboardConfiguration {
 
 func (o *VZUSBKeyboardConfiguration) Init() *VZUSBKeyboardConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBKeyboardConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZUSBKeyboardConfigurationFromID(_ret)
 }
-

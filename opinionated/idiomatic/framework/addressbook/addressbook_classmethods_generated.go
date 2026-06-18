@@ -99,4 +99,3 @@ func SearchElementForConjunctionChildren(conjuction int, children *foundation.NS
 	}
 	return &SearchElement{inner: _r}
 }
-

@@ -20,25 +20,25 @@ type MPSNNLossGradient struct {
 }
 
 var (
-	_clsMPSNNLossGradient = _objcClass("MPSNNLossGradient")
-	_mPSNNLossGradientSelInitWithDeviceLossDescriptor = objc.RegisterName("initWithDevice:lossDescriptor:")
-	_mPSNNLossGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNLossGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:labels:weights:sourceStates:")
+	_clsMPSNNLossGradient                                                                                                   = _objcClass("MPSNNLossGradient")
+	_mPSNNLossGradientSelInitWithDeviceLossDescriptor                                                                       = objc.RegisterName("initWithDevice:lossDescriptor:")
+	_mPSNNLossGradientSelInitWithCoderDevice                                                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSNNLossGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates                     = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:labels:weights:sourceStates:")
 	_mPSNNLossGradientSelEncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:labels:weights:sourceStates:destinationGradients:")
-	_mPSNNLossGradientSelLossType = objc.RegisterName("lossType")
-	_mPSNNLossGradientSelReductionType = objc.RegisterName("reductionType")
-	_mPSNNLossGradientSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
-	_mPSNNLossGradientSelNumberOfClasses = objc.RegisterName("numberOfClasses")
-	_mPSNNLossGradientSelWeight = objc.RegisterName("weight")
-	_mPSNNLossGradientSelSetWeight = objc.RegisterName("setWeight:")
-	_mPSNNLossGradientSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mPSNNLossGradientSelSetLabelSmoothing = objc.RegisterName("setLabelSmoothing:")
-	_mPSNNLossGradientSelEpsilon = objc.RegisterName("epsilon")
-	_mPSNNLossGradientSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSNNLossGradientSelDelta = objc.RegisterName("delta")
-	_mPSNNLossGradientSelSetDelta = objc.RegisterName("setDelta:")
-	_mPSNNLossGradientSelComputeLabelGradients = objc.RegisterName("computeLabelGradients")
-	_mPSNNLossGradientSelSetComputeLabelGradients = objc.RegisterName("setComputeLabelGradients:")
+	_mPSNNLossGradientSelLossType                                                                                           = objc.RegisterName("lossType")
+	_mPSNNLossGradientSelReductionType                                                                                      = objc.RegisterName("reductionType")
+	_mPSNNLossGradientSelReduceAcrossBatch                                                                                  = objc.RegisterName("reduceAcrossBatch")
+	_mPSNNLossGradientSelNumberOfClasses                                                                                    = objc.RegisterName("numberOfClasses")
+	_mPSNNLossGradientSelWeight                                                                                             = objc.RegisterName("weight")
+	_mPSNNLossGradientSelSetWeight                                                                                          = objc.RegisterName("setWeight:")
+	_mPSNNLossGradientSelLabelSmoothing                                                                                     = objc.RegisterName("labelSmoothing")
+	_mPSNNLossGradientSelSetLabelSmoothing                                                                                  = objc.RegisterName("setLabelSmoothing:")
+	_mPSNNLossGradientSelEpsilon                                                                                            = objc.RegisterName("epsilon")
+	_mPSNNLossGradientSelSetEpsilon                                                                                         = objc.RegisterName("setEpsilon:")
+	_mPSNNLossGradientSelDelta                                                                                              = objc.RegisterName("delta")
+	_mPSNNLossGradientSelSetDelta                                                                                           = objc.RegisterName("setDelta:")
+	_mPSNNLossGradientSelComputeLabelGradients                                                                              = objc.RegisterName("computeLabelGradients")
+	_mPSNNLossGradientSelSetComputeLabelGradients                                                                           = objc.RegisterName("setComputeLabelGradients:")
 )
 
 func MPSNNLossGradientFromID(id objc.ID) *MPSNNLossGradient {
@@ -54,14 +54,18 @@ func MPSNNLossGradientFromID(id objc.ID) *MPSNNLossGradient {
 // @abstract   Initialize the loss gradient filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSNNLossGradient object or nil, if failure.
 func (o *MPSNNLossGradient) InitWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSNNLossGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientSelInitWithDeviceLossDescriptor, device, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientFromID(_ret)
 }
 
 // @abstract <NSSecureCoding> support
 func (o *MPSNNLossGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNLossGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNLossGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNLossGradientFromID(_ret)
 }
 
@@ -142,4 +146,3 @@ func (o *MPSNNLossGradient) ComputeLabelGradients() bool {
 func (o *MPSNNLossGradient) SetComputeLabelGradients(computeLabelGradients bool) {
 	o.Ptr().Send(_mPSNNLossGradientSelSetComputeLabelGradients, computeLabelGradients)
 }
-

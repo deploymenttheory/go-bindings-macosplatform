@@ -16,13 +16,13 @@ type CIAztecCodeDescriptor struct {
 }
 
 var (
-	_clsCIAztecCodeDescriptor = _objcClass("CIAztecCodeDescriptor")
-	_cIAztecCodeDescriptorSelInitWithPayloadIsCompactLayerCountDataCodewordCount = objc.RegisterName("initWithPayload:isCompact:layerCount:dataCodewordCount:")
+	_clsCIAztecCodeDescriptor                                                          = _objcClass("CIAztecCodeDescriptor")
+	_cIAztecCodeDescriptorSelInitWithPayloadIsCompactLayerCountDataCodewordCount       = objc.RegisterName("initWithPayload:isCompact:layerCount:dataCodewordCount:")
 	_cIAztecCodeDescriptorSelDescriptorWithPayloadIsCompactLayerCountDataCodewordCount = objc.RegisterName("descriptorWithPayload:isCompact:layerCount:dataCodewordCount:")
-	_cIAztecCodeDescriptorSelErrorCorrectedPayload = objc.RegisterName("errorCorrectedPayload")
-	_cIAztecCodeDescriptorSelIsCompact = objc.RegisterName("isCompact")
-	_cIAztecCodeDescriptorSelLayerCount = objc.RegisterName("layerCount")
-	_cIAztecCodeDescriptorSelDataCodewordCount = objc.RegisterName("dataCodewordCount")
+	_cIAztecCodeDescriptorSelErrorCorrectedPayload                                     = objc.RegisterName("errorCorrectedPayload")
+	_cIAztecCodeDescriptorSelIsCompact                                                 = objc.RegisterName("isCompact")
+	_cIAztecCodeDescriptorSelLayerCount                                                = objc.RegisterName("layerCount")
+	_cIAztecCodeDescriptorSelDataCodewordCount                                         = objc.RegisterName("dataCodewordCount")
 )
 
 func CIAztecCodeDescriptorFromID(id objc.ID) *CIAztecCodeDescriptor {
@@ -35,24 +35,30 @@ func CIAztecCodeDescriptorFromID(id objc.ID) *CIAztecCodeDescriptor {
 	return o
 }
 
-// Initializes an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An initialized ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Initializes an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func (o *CIAztecCodeDescriptor) InitWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *CIAztecCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIAztecCodeDescriptorSelInitWithPayloadIsCompactLayerCountDataCodewordCount, errorCorrectedPayload.Ptr(), isCompact, layerCount, dataCodewordCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIAztecCodeDescriptorFromID(_ret)
 }
 
-// Creates an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An autoreleased ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Creates an Aztec code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Aztec code symbol. - isCompact: A Boolean indicating whether or not the Aztec code is compact. - layerCount: The number of layers in the Aztec code, from 1 to 32. - dataCodewordCount: The number of codewords in the Aztec code, from 1 to 2048. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func CIAztecCodeDescriptorDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(errorCorrectedPayload *foundation.NSData, isCompact bool, layerCount int, dataCodewordCount int) *CIAztecCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIAztecCodeDescriptor), _cIAztecCodeDescriptorSelDescriptorWithPayloadIsCompactLayerCountDataCodewordCount, errorCorrectedPayload.Ptr(), isCompact, layerCount, dataCodewordCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIAztecCodeDescriptorFromID(_ret)
 }
 
 // The error-corrected payload that comprises the the Aztec code symbol. Aztec Codes are formally specified in ISO/IEC 24778:2008(E). The error corrected payload consists of the 6-, 8-, 10-, or 12-bit message codewords produced at the end of the step described in section 7.3.1.2 "Formation of data codewords", which exists immediately prior to adding error correction. These codewords have dummy bits inserted to ensure that an entire codeword isn't all 0's or all 1's. Clients will need to remove these extra bits as part of interpreting the payload.
 func (o *CIAztecCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIAztecCodeDescriptorSelErrorCorrectedPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -62,7 +68,7 @@ func (o *CIAztecCodeDescriptor) IsCompact() bool {
 	return _ret
 }
 
-// The number of data layers in the Aztec code symbol. Combined with ``isCompact-property``, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
+// The number of data layers in the Aztec code symbol. Combined with “isCompact-property“, the number of data layers determines the number of modules in the Aztec Code symbol. Valid values range from 1 to 32. Compact symbols can have up to 4 data layers. The number of data layers also determines the number of bits in each data codeword of the message carried by the Aztec Code symbol.
 func (o *CIAztecCodeDescriptor) LayerCount() int {
 	_ret := objc.Send[int](o.Ptr(), _cIAztecCodeDescriptorSelLayerCount)
 	return _ret
@@ -73,4 +79,3 @@ func (o *CIAztecCodeDescriptor) DataCodewordCount() int {
 	_ret := objc.Send[int](o.Ptr(), _cIAztecCodeDescriptorSelDataCodewordCount)
 	return _ret
 }
-

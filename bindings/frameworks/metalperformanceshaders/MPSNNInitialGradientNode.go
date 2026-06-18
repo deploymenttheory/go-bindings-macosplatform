@@ -18,7 +18,7 @@ type MPSNNInitialGradientNode struct {
 }
 
 var (
-	_clsMPSNNInitialGradientNode = _objcClass("MPSNNInitialGradientNode")
+	_clsMPSNNInitialGradientNode               = _objcClass("MPSNNInitialGradientNode")
 	_mPSNNInitialGradientNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 	_mPSNNInitialGradientNodeSelInitWithSource = objc.RegisterName("initWithSource:")
 )
@@ -36,14 +36,17 @@ func MPSNNInitialGradientNodeFromID(id objc.ID) *MPSNNInitialGradientNode {
 // @abstract   Init a node representing a MPSNNInitialGradient MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSNNInitialGradient kernel.
 func MPSNNInitialGradientNodeNodeWithSource(source *mpsneuralnetwork.MPSNNImageNode) *MPSNNInitialGradientNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNInitialGradientNode), _mPSNNInitialGradientNodeSelNodeWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNInitialGradientNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSNNInitialGradient MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSNNInitialGradient kernel.
 func (o *MPSNNInitialGradientNode) InitWithSource(source *mpsneuralnetwork.MPSNNImageNode) *MPSNNInitialGradientNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNInitialGradientNodeSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNInitialGradientNodeFromID(_ret)
 }
-

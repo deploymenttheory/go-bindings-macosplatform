@@ -15,12 +15,12 @@ type NSUnitAngle struct {
 }
 
 var (
-	_clsNSUnitAngle = _objcClass("NSUnitAngle")
-	_nSUnitAngleSelDegrees = objc.RegisterName("degrees")
-	_nSUnitAngleSelArcMinutes = objc.RegisterName("arcMinutes")
-	_nSUnitAngleSelArcSeconds = objc.RegisterName("arcSeconds")
-	_nSUnitAngleSelRadians = objc.RegisterName("radians")
-	_nSUnitAngleSelGradians = objc.RegisterName("gradians")
+	_clsNSUnitAngle            = _objcClass("NSUnitAngle")
+	_nSUnitAngleSelDegrees     = objc.RegisterName("degrees")
+	_nSUnitAngleSelArcMinutes  = objc.RegisterName("arcMinutes")
+	_nSUnitAngleSelArcSeconds  = objc.RegisterName("arcSeconds")
+	_nSUnitAngleSelRadians     = objc.RegisterName("radians")
+	_nSUnitAngleSelGradians    = objc.RegisterName("gradians")
 	_nSUnitAngleSelRevolutions = objc.RegisterName("revolutions")
 )
 
@@ -36,37 +36,48 @@ func NSUnitAngleFromID(id objc.ID) *NSUnitAngle {
 
 func NSUnitAngleDegrees() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelDegrees)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
 
 func NSUnitAngleArcMinutes() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelArcMinutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
 
 func NSUnitAngleArcSeconds() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelArcSeconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
 
 func NSUnitAngleRadians() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelRadians)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
 
 func NSUnitAngleGradians() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelGradians)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
 
 func NSUnitAngleRevolutions() *NSUnitAngle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitAngle), _nSUnitAngleSelRevolutions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitAngleFromID(_ret)
 }
-

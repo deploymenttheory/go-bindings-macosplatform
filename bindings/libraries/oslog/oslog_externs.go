@@ -14,4 +14,3 @@ var (
 	// Introduced: macOS 10.13
 	_os_log_disabled unsafe.Pointer
 )
-

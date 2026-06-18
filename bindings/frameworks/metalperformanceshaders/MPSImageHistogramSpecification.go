@@ -18,11 +18,11 @@ type MPSImageHistogramSpecification struct {
 }
 
 var (
-	_clsMPSImageHistogramSpecification = _objcClass("MPSImageHistogramSpecification")
-	_mPSImageHistogramSpecificationSelInitWithDeviceHistogramInfo = objc.RegisterName("initWithDevice:histogramInfo:")
-	_mPSImageHistogramSpecificationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSImageHistogramSpecification                                                                                                                      = _objcClass("MPSImageHistogramSpecification")
+	_mPSImageHistogramSpecificationSelInitWithDeviceHistogramInfo                                                                                           = objc.RegisterName("initWithDevice:histogramInfo:")
+	_mPSImageHistogramSpecificationSelInitWithCoderDevice                                                                                                   = objc.RegisterName("initWithCoder:device:")
 	_mPSImageHistogramSpecificationSelEncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset = objc.RegisterName("encodeTransformToCommandBuffer:sourceTexture:sourceHistogram:sourceHistogramOffset:desiredHistogram:desiredHistogramOffset:")
-	_mPSImageHistogramSpecificationSelHistogramInfo = objc.RegisterName("histogramInfo")
+	_mPSImageHistogramSpecificationSelHistogramInfo                                                                                                         = objc.RegisterName("histogramInfo")
 )
 
 func MPSImageHistogramSpecificationFromID(id objc.ID) *MPSImageHistogramSpecification {
@@ -37,14 +37,18 @@ func MPSImageHistogramSpecificationFromID(id objc.ID) *MPSImageHistogramSpecific
 
 func (o *MPSImageHistogramSpecification) InitWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *mpsimage.MPSImageHistogramInfo) *MPSImageHistogramSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSpecificationSelInitWithDeviceHistogramInfo, device, histogramInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageHistogramSpecificationFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageHistogramSpecification) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageHistogramSpecification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageHistogramSpecificationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageHistogramSpecificationFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSImageHistogramSpecification) HistogramInfo() mpsimage.MPSImageHistog
 	_ret := objc.Send[mpsimage.MPSImageHistogramInfo](o.Ptr(), _mPSImageHistogramSpecificationSelHistogramInfo)
 	return _ret
 }
-

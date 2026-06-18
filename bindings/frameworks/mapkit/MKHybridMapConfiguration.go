@@ -15,13 +15,13 @@ type MKHybridMapConfiguration struct {
 }
 
 var (
-	_clsMKHybridMapConfiguration = _objcClass("MKHybridMapConfiguration")
-	_mKHybridMapConfigurationSelInit = objc.RegisterName("init")
-	_mKHybridMapConfigurationSelInitWithElevationStyle = objc.RegisterName("initWithElevationStyle:")
-	_mKHybridMapConfigurationSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
+	_clsMKHybridMapConfiguration                         = _objcClass("MKHybridMapConfiguration")
+	_mKHybridMapConfigurationSelInit                     = objc.RegisterName("init")
+	_mKHybridMapConfigurationSelInitWithElevationStyle   = objc.RegisterName("initWithElevationStyle:")
+	_mKHybridMapConfigurationSelPointOfInterestFilter    = objc.RegisterName("pointOfInterestFilter")
 	_mKHybridMapConfigurationSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKHybridMapConfigurationSelShowsTraffic = objc.RegisterName("showsTraffic")
-	_mKHybridMapConfigurationSelSetShowsTraffic = objc.RegisterName("setShowsTraffic:")
+	_mKHybridMapConfigurationSelShowsTraffic             = objc.RegisterName("showsTraffic")
+	_mKHybridMapConfigurationSelSetShowsTraffic          = objc.RegisterName("setShowsTraffic:")
 )
 
 func MKHybridMapConfigurationFromID(id objc.ID) *MKHybridMapConfiguration {
@@ -36,19 +36,25 @@ func MKHybridMapConfigurationFromID(id objc.ID) *MKHybridMapConfiguration {
 
 func (o *MKHybridMapConfiguration) Init() *MKHybridMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKHybridMapConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKHybridMapConfigurationFromID(_ret)
 }
 
 func (o *MKHybridMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKHybridMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKHybridMapConfigurationSelInitWithElevationStyle, elevationStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKHybridMapConfigurationFromID(_ret)
 }
 
 func (o *MKHybridMapConfiguration) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKHybridMapConfigurationSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *MKHybridMapConfiguration) ShowsTraffic() bool {
 func (o *MKHybridMapConfiguration) SetShowsTraffic(showsTraffic bool) {
 	o.Ptr().Send(_mKHybridMapConfigurationSelSetShowsTraffic, showsTraffic)
 }
-

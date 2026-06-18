@@ -484,7 +484,9 @@ func KCVImageBufferYCbCrMatrix_SMPTE_240M_1995() uintptr {
 
 func KCVIndefiniteTime() CVTime {
 	ptr, _ := purego.Dlsym(_corevideoLib, "kCVIndefiniteTime")
-	if ptr == 0 { return CVTime{} }
+	if ptr == 0 {
+		return CVTime{}
+	}
 	return *(*CVTime)(unsafe.Pointer(ptr))
 }
 
@@ -914,7 +916,8 @@ func KCVPixelFormatVerticalSubsampling() uintptr {
 
 func KCVZeroTime() CVTime {
 	ptr, _ := purego.Dlsym(_corevideoLib, "kCVZeroTime")
-	if ptr == 0 { return CVTime{} }
+	if ptr == 0 {
+		return CVTime{}
+	}
 	return *(*CVTime)(unsafe.Pointer(ptr))
 }
-

@@ -13,4 +13,3 @@ import (
 func OpenTranscriptIntentParameters(businessIdentifier string, intentParameters *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
 	raw.BCChatActionOpenTranscriptIntentParameters(foundation.NSStringStringWithUTF8String(businessIdentifier), intentParameters)
 }
-

@@ -16,7 +16,9 @@ type MTRXPCDeviceControllerParameters struct {
 }
 
 // Unwrap returns the underlying [raw.MTRXPCDeviceControllerParameters].
-func (x *MTRXPCDeviceControllerParameters) Unwrap() *raw.MTRXPCDeviceControllerParameters { return x.inner }
+func (x *MTRXPCDeviceControllerParameters) Unwrap() *raw.MTRXPCDeviceControllerParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *MTRXPCDeviceControllerParameters) XpcConnectionBlock() objc.Block {
 	return x.inner.XpcConnectionBlock()
 }
 
-func (x *MTRXPCDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerAbstractParameters }
+func (x *MTRXPCDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
+	return &x.inner.MTRDeviceControllerAbstractParameters
+}
 
 // MTRXPCDeviceControllerParametersable is the interface implemented by [MTRXPCDeviceControllerParameters], for mocking and DI.
 type MTRXPCDeviceControllerParametersable interface {
@@ -71,4 +75,3 @@ type MTRXPCDeviceControllerParametersable interface {
 }
 
 var _ MTRXPCDeviceControllerParametersable = (*MTRXPCDeviceControllerParameters)(nil)
-

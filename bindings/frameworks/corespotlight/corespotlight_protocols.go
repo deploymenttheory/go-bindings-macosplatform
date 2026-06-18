@@ -12,4 +12,3 @@ type CSSearchableIndexDelegate interface {
 	SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(searchableIndex *CSSearchableIndex, acknowledgementHandler func())
 	SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(searchableIndex *CSSearchableIndex, identifiers *foundation.NSArray[*foundation.NSString], acknowledgementHandler func())
 }
-

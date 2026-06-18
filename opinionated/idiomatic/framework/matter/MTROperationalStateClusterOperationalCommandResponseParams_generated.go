@@ -18,11 +18,15 @@ type MTROperationalStateClusterOperationalCommandResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalCommandResponseParams].
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTROperationalStateClusterOperationalCommandResponseParams { return x.inner }
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) Unwrap() *raw.MTROperationalStateClusterOperationalCommandResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalStateClusterOperationalCommandResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROperationalStateClusterOperationalCommandResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROperationalStateClusterOperationalCommandResponseParamsFromID adopts an existing object pointer as a MTROperationalStateClusterOperationalCommandResponseParams (nil for 0).
 func MTROperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTROperationalStateClusterOperationalCommandResponseParams {
@@ -72,4 +76,3 @@ type MTROperationalStateClusterOperationalCommandResponseParamsable interface {
 }
 
 var _ MTROperationalStateClusterOperationalCommandResponseParamsable = (*MTROperationalStateClusterOperationalCommandResponseParams)(nil)
-

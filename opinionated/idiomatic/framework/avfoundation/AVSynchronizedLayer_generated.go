@@ -64,4 +64,3 @@ type SynchronizedLayerable interface {
 }
 
 var _ SynchronizedLayerable = (*SynchronizedLayer)(nil)
-

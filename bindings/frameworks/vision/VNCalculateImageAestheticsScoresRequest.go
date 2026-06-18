@@ -25,4 +25,3 @@ func VNCalculateImageAestheticsScoresRequestFromID(id objc.ID) *VNCalculateImage
 	purego.Track(o)
 	return o
 }
-

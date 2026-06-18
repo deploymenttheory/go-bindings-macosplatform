@@ -92,4 +92,3 @@ type DiskSpaceUsageMetricable interface {
 }
 
 var _ DiskSpaceUsageMetricable = (*DiskSpaceUsageMetric)(nil)
-

@@ -17,7 +17,9 @@ type MTRTargetNavigatorClusterTargetInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTargetNavigatorClusterTargetInfoStruct].
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) Unwrap() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return x.inner }
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) Unwrap() *raw.MTRTargetNavigatorClusterTargetInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -73,7 +75,9 @@ func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct { return x.inner }
+func (x *MTRTargetNavigatorClusterTargetInfoStruct) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct {
+	return x.inner
+}
 
 // MTRTargetNavigatorClusterTargetInfoStructable is the interface implemented by [MTRTargetNavigatorClusterTargetInfoStruct], for mocking and DI.
 type MTRTargetNavigatorClusterTargetInfoStructable interface {
@@ -87,4 +91,3 @@ type MTRTargetNavigatorClusterTargetInfoStructable interface {
 }
 
 var _ MTRTargetNavigatorClusterTargetInfoStructable = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)
-

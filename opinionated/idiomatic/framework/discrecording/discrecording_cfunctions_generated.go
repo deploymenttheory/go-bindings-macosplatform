@@ -489,4 +489,3 @@ func DRTrackSetProperties(track unsafe.Pointer, properties unsafe.Pointer) {
 func DRTrackSpeedTest(track unsafe.Pointer, howManyMilliseconds uint, howManyBytes uint) float32 {
 	return raw.DRTrackSpeedTest(track, howManyMilliseconds, howManyBytes)
 }
-

@@ -19,97 +19,97 @@ type NSMatrix struct {
 }
 
 var (
-	_clsNSMatrix = _objcClass("NSMatrix")
-	_nSMatrixSelInitWithFrame = objc.RegisterName("initWithFrame:")
+	_clsNSMatrix                                                      = _objcClass("NSMatrix")
+	_nSMatrixSelInitWithFrame                                         = objc.RegisterName("initWithFrame:")
 	_nSMatrixSelInitWithFrameModePrototypeNumberOfRowsNumberOfColumns = objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:")
 	_nSMatrixSelInitWithFrameModeCellClassNumberOfRowsNumberOfColumns = objc.RegisterName("initWithFrame:mode:cellClass:numberOfRows:numberOfColumns:")
-	_nSMatrixSelMakeCellAtRowColumn = objc.RegisterName("makeCellAtRow:column:")
-	_nSMatrixSelSendActionToForAllCells = objc.RegisterName("sendAction:to:forAllCells:")
-	_nSMatrixSelSortUsingSelector = objc.RegisterName("sortUsingSelector:")
-	_nSMatrixSelSortUsingFunctionContext = objc.RegisterName("sortUsingFunction:context:")
-	_nSMatrixSelSetSelectionFromToAnchorHighlight = objc.RegisterName("setSelectionFrom:to:anchor:highlight:")
-	_nSMatrixSelDeselectSelectedCell = objc.RegisterName("deselectSelectedCell")
-	_nSMatrixSelDeselectAllCells = objc.RegisterName("deselectAllCells")
-	_nSMatrixSelSelectCellAtRowColumn = objc.RegisterName("selectCellAtRow:column:")
-	_nSMatrixSelSelectAll = objc.RegisterName("selectAll:")
-	_nSMatrixSelSelectCellWithTag = objc.RegisterName("selectCellWithTag:")
-	_nSMatrixSelSetScrollable = objc.RegisterName("setScrollable:")
-	_nSMatrixSelSetStateAtRowColumn = objc.RegisterName("setState:atRow:column:")
-	_nSMatrixSelGetNumberOfRowsColumns = objc.RegisterName("getNumberOfRows:columns:")
-	_nSMatrixSelCellAtRowColumn = objc.RegisterName("cellAtRow:column:")
-	_nSMatrixSelCellFrameAtRowColumn = objc.RegisterName("cellFrameAtRow:column:")
-	_nSMatrixSelGetRowColumnOfCell = objc.RegisterName("getRow:column:ofCell:")
-	_nSMatrixSelGetRowColumnForPoint = objc.RegisterName("getRow:column:forPoint:")
-	_nSMatrixSelRenewRowsColumns = objc.RegisterName("renewRows:columns:")
-	_nSMatrixSelPutCellAtRowColumn = objc.RegisterName("putCell:atRow:column:")
-	_nSMatrixSelAddRow = objc.RegisterName("addRow")
-	_nSMatrixSelAddRowWithCells = objc.RegisterName("addRowWithCells:")
-	_nSMatrixSelInsertRow = objc.RegisterName("insertRow:")
-	_nSMatrixSelInsertRowWithCells = objc.RegisterName("insertRow:withCells:")
-	_nSMatrixSelRemoveRow = objc.RegisterName("removeRow:")
-	_nSMatrixSelAddColumn = objc.RegisterName("addColumn")
-	_nSMatrixSelAddColumnWithCells = objc.RegisterName("addColumnWithCells:")
-	_nSMatrixSelInsertColumn = objc.RegisterName("insertColumn:")
-	_nSMatrixSelInsertColumnWithCells = objc.RegisterName("insertColumn:withCells:")
-	_nSMatrixSelRemoveColumn = objc.RegisterName("removeColumn:")
-	_nSMatrixSelCellWithTag = objc.RegisterName("cellWithTag:")
-	_nSMatrixSelSizeToCells = objc.RegisterName("sizeToCells")
-	_nSMatrixSelSetValidateSize = objc.RegisterName("setValidateSize:")
-	_nSMatrixSelDrawCellAtRowColumn = objc.RegisterName("drawCellAtRow:column:")
-	_nSMatrixSelHighlightCellAtRowColumn = objc.RegisterName("highlightCell:atRow:column:")
-	_nSMatrixSelScrollCellToVisibleAtRowColumn = objc.RegisterName("scrollCellToVisibleAtRow:column:")
-	_nSMatrixSelSendAction = objc.RegisterName("sendAction")
-	_nSMatrixSelSendDoubleAction = objc.RegisterName("sendDoubleAction")
-	_nSMatrixSelTextShouldBeginEditing = objc.RegisterName("textShouldBeginEditing:")
-	_nSMatrixSelTextShouldEndEditing = objc.RegisterName("textShouldEndEditing:")
-	_nSMatrixSelTextDidBeginEditing = objc.RegisterName("textDidBeginEditing:")
-	_nSMatrixSelTextDidEndEditing = objc.RegisterName("textDidEndEditing:")
-	_nSMatrixSelTextDidChange = objc.RegisterName("textDidChange:")
-	_nSMatrixSelSelectText = objc.RegisterName("selectText:")
-	_nSMatrixSelSelectTextAtRowColumn = objc.RegisterName("selectTextAtRow:column:")
-	_nSMatrixSelSetToolTipForCell = objc.RegisterName("setToolTip:forCell:")
-	_nSMatrixSelToolTipForCell = objc.RegisterName("toolTipForCell:")
-	_nSMatrixSelPrototype = objc.RegisterName("prototype")
-	_nSMatrixSelSetPrototype = objc.RegisterName("setPrototype:")
-	_nSMatrixSelMode = objc.RegisterName("mode")
-	_nSMatrixSelSetMode = objc.RegisterName("setMode:")
-	_nSMatrixSelAllowsEmptySelection = objc.RegisterName("allowsEmptySelection")
-	_nSMatrixSelSetAllowsEmptySelection = objc.RegisterName("setAllowsEmptySelection:")
-	_nSMatrixSelCells = objc.RegisterName("cells")
-	_nSMatrixSelSelectedCells = objc.RegisterName("selectedCells")
-	_nSMatrixSelSelectedRow = objc.RegisterName("selectedRow")
-	_nSMatrixSelSelectedColumn = objc.RegisterName("selectedColumn")
-	_nSMatrixSelIsSelectionByRect = objc.RegisterName("isSelectionByRect")
-	_nSMatrixSelSetSelectionByRect = objc.RegisterName("setSelectionByRect:")
-	_nSMatrixSelCellSize = objc.RegisterName("cellSize")
-	_nSMatrixSelSetCellSize = objc.RegisterName("setCellSize:")
-	_nSMatrixSelIntercellSpacing = objc.RegisterName("intercellSpacing")
-	_nSMatrixSelSetIntercellSpacing = objc.RegisterName("setIntercellSpacing:")
-	_nSMatrixSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSMatrixSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSMatrixSelCellBackgroundColor = objc.RegisterName("cellBackgroundColor")
-	_nSMatrixSelSetCellBackgroundColor = objc.RegisterName("setCellBackgroundColor:")
-	_nSMatrixSelDrawsCellBackground = objc.RegisterName("drawsCellBackground")
-	_nSMatrixSelSetDrawsCellBackground = objc.RegisterName("setDrawsCellBackground:")
-	_nSMatrixSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSMatrixSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSMatrixSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_nSMatrixSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_nSMatrixSelDoubleAction = objc.RegisterName("doubleAction")
-	_nSMatrixSelSetDoubleAction = objc.RegisterName("setDoubleAction:")
-	_nSMatrixSelAutosizesCells = objc.RegisterName("autosizesCells")
-	_nSMatrixSelSetAutosizesCells = objc.RegisterName("setAutosizesCells:")
-	_nSMatrixSelIsAutoscroll = objc.RegisterName("isAutoscroll")
-	_nSMatrixSelSetAutoscroll = objc.RegisterName("setAutoscroll:")
-	_nSMatrixSelMouseDownFlags = objc.RegisterName("mouseDownFlags")
-	_nSMatrixSelDelegate = objc.RegisterName("delegate")
-	_nSMatrixSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSMatrixSelAutorecalculatesCellSize = objc.RegisterName("autorecalculatesCellSize")
-	_nSMatrixSelSetAutorecalculatesCellSize = objc.RegisterName("setAutorecalculatesCellSize:")
-	_nSMatrixSelTabKeyTraversesCells = objc.RegisterName("tabKeyTraversesCells")
-	_nSMatrixSelSetTabKeyTraversesCells = objc.RegisterName("setTabKeyTraversesCells:")
-	_nSMatrixSelKeyCell = objc.RegisterName("keyCell")
-	_nSMatrixSelSetKeyCell = objc.RegisterName("setKeyCell:")
+	_nSMatrixSelMakeCellAtRowColumn                                   = objc.RegisterName("makeCellAtRow:column:")
+	_nSMatrixSelSendActionToForAllCells                               = objc.RegisterName("sendAction:to:forAllCells:")
+	_nSMatrixSelSortUsingSelector                                     = objc.RegisterName("sortUsingSelector:")
+	_nSMatrixSelSortUsingFunctionContext                              = objc.RegisterName("sortUsingFunction:context:")
+	_nSMatrixSelSetSelectionFromToAnchorHighlight                     = objc.RegisterName("setSelectionFrom:to:anchor:highlight:")
+	_nSMatrixSelDeselectSelectedCell                                  = objc.RegisterName("deselectSelectedCell")
+	_nSMatrixSelDeselectAllCells                                      = objc.RegisterName("deselectAllCells")
+	_nSMatrixSelSelectCellAtRowColumn                                 = objc.RegisterName("selectCellAtRow:column:")
+	_nSMatrixSelSelectAll                                             = objc.RegisterName("selectAll:")
+	_nSMatrixSelSelectCellWithTag                                     = objc.RegisterName("selectCellWithTag:")
+	_nSMatrixSelSetScrollable                                         = objc.RegisterName("setScrollable:")
+	_nSMatrixSelSetStateAtRowColumn                                   = objc.RegisterName("setState:atRow:column:")
+	_nSMatrixSelGetNumberOfRowsColumns                                = objc.RegisterName("getNumberOfRows:columns:")
+	_nSMatrixSelCellAtRowColumn                                       = objc.RegisterName("cellAtRow:column:")
+	_nSMatrixSelCellFrameAtRowColumn                                  = objc.RegisterName("cellFrameAtRow:column:")
+	_nSMatrixSelGetRowColumnOfCell                                    = objc.RegisterName("getRow:column:ofCell:")
+	_nSMatrixSelGetRowColumnForPoint                                  = objc.RegisterName("getRow:column:forPoint:")
+	_nSMatrixSelRenewRowsColumns                                      = objc.RegisterName("renewRows:columns:")
+	_nSMatrixSelPutCellAtRowColumn                                    = objc.RegisterName("putCell:atRow:column:")
+	_nSMatrixSelAddRow                                                = objc.RegisterName("addRow")
+	_nSMatrixSelAddRowWithCells                                       = objc.RegisterName("addRowWithCells:")
+	_nSMatrixSelInsertRow                                             = objc.RegisterName("insertRow:")
+	_nSMatrixSelInsertRowWithCells                                    = objc.RegisterName("insertRow:withCells:")
+	_nSMatrixSelRemoveRow                                             = objc.RegisterName("removeRow:")
+	_nSMatrixSelAddColumn                                             = objc.RegisterName("addColumn")
+	_nSMatrixSelAddColumnWithCells                                    = objc.RegisterName("addColumnWithCells:")
+	_nSMatrixSelInsertColumn                                          = objc.RegisterName("insertColumn:")
+	_nSMatrixSelInsertColumnWithCells                                 = objc.RegisterName("insertColumn:withCells:")
+	_nSMatrixSelRemoveColumn                                          = objc.RegisterName("removeColumn:")
+	_nSMatrixSelCellWithTag                                           = objc.RegisterName("cellWithTag:")
+	_nSMatrixSelSizeToCells                                           = objc.RegisterName("sizeToCells")
+	_nSMatrixSelSetValidateSize                                       = objc.RegisterName("setValidateSize:")
+	_nSMatrixSelDrawCellAtRowColumn                                   = objc.RegisterName("drawCellAtRow:column:")
+	_nSMatrixSelHighlightCellAtRowColumn                              = objc.RegisterName("highlightCell:atRow:column:")
+	_nSMatrixSelScrollCellToVisibleAtRowColumn                        = objc.RegisterName("scrollCellToVisibleAtRow:column:")
+	_nSMatrixSelSendAction                                            = objc.RegisterName("sendAction")
+	_nSMatrixSelSendDoubleAction                                      = objc.RegisterName("sendDoubleAction")
+	_nSMatrixSelTextShouldBeginEditing                                = objc.RegisterName("textShouldBeginEditing:")
+	_nSMatrixSelTextShouldEndEditing                                  = objc.RegisterName("textShouldEndEditing:")
+	_nSMatrixSelTextDidBeginEditing                                   = objc.RegisterName("textDidBeginEditing:")
+	_nSMatrixSelTextDidEndEditing                                     = objc.RegisterName("textDidEndEditing:")
+	_nSMatrixSelTextDidChange                                         = objc.RegisterName("textDidChange:")
+	_nSMatrixSelSelectText                                            = objc.RegisterName("selectText:")
+	_nSMatrixSelSelectTextAtRowColumn                                 = objc.RegisterName("selectTextAtRow:column:")
+	_nSMatrixSelSetToolTipForCell                                     = objc.RegisterName("setToolTip:forCell:")
+	_nSMatrixSelToolTipForCell                                        = objc.RegisterName("toolTipForCell:")
+	_nSMatrixSelPrototype                                             = objc.RegisterName("prototype")
+	_nSMatrixSelSetPrototype                                          = objc.RegisterName("setPrototype:")
+	_nSMatrixSelMode                                                  = objc.RegisterName("mode")
+	_nSMatrixSelSetMode                                               = objc.RegisterName("setMode:")
+	_nSMatrixSelAllowsEmptySelection                                  = objc.RegisterName("allowsEmptySelection")
+	_nSMatrixSelSetAllowsEmptySelection                               = objc.RegisterName("setAllowsEmptySelection:")
+	_nSMatrixSelCells                                                 = objc.RegisterName("cells")
+	_nSMatrixSelSelectedCells                                         = objc.RegisterName("selectedCells")
+	_nSMatrixSelSelectedRow                                           = objc.RegisterName("selectedRow")
+	_nSMatrixSelSelectedColumn                                        = objc.RegisterName("selectedColumn")
+	_nSMatrixSelIsSelectionByRect                                     = objc.RegisterName("isSelectionByRect")
+	_nSMatrixSelSetSelectionByRect                                    = objc.RegisterName("setSelectionByRect:")
+	_nSMatrixSelCellSize                                              = objc.RegisterName("cellSize")
+	_nSMatrixSelSetCellSize                                           = objc.RegisterName("setCellSize:")
+	_nSMatrixSelIntercellSpacing                                      = objc.RegisterName("intercellSpacing")
+	_nSMatrixSelSetIntercellSpacing                                   = objc.RegisterName("setIntercellSpacing:")
+	_nSMatrixSelBackgroundColor                                       = objc.RegisterName("backgroundColor")
+	_nSMatrixSelSetBackgroundColor                                    = objc.RegisterName("setBackgroundColor:")
+	_nSMatrixSelCellBackgroundColor                                   = objc.RegisterName("cellBackgroundColor")
+	_nSMatrixSelSetCellBackgroundColor                                = objc.RegisterName("setCellBackgroundColor:")
+	_nSMatrixSelDrawsCellBackground                                   = objc.RegisterName("drawsCellBackground")
+	_nSMatrixSelSetDrawsCellBackground                                = objc.RegisterName("setDrawsCellBackground:")
+	_nSMatrixSelDrawsBackground                                       = objc.RegisterName("drawsBackground")
+	_nSMatrixSelSetDrawsBackground                                    = objc.RegisterName("setDrawsBackground:")
+	_nSMatrixSelNumberOfRows                                          = objc.RegisterName("numberOfRows")
+	_nSMatrixSelNumberOfColumns                                       = objc.RegisterName("numberOfColumns")
+	_nSMatrixSelDoubleAction                                          = objc.RegisterName("doubleAction")
+	_nSMatrixSelSetDoubleAction                                       = objc.RegisterName("setDoubleAction:")
+	_nSMatrixSelAutosizesCells                                        = objc.RegisterName("autosizesCells")
+	_nSMatrixSelSetAutosizesCells                                     = objc.RegisterName("setAutosizesCells:")
+	_nSMatrixSelIsAutoscroll                                          = objc.RegisterName("isAutoscroll")
+	_nSMatrixSelSetAutoscroll                                         = objc.RegisterName("setAutoscroll:")
+	_nSMatrixSelMouseDownFlags                                        = objc.RegisterName("mouseDownFlags")
+	_nSMatrixSelDelegate                                              = objc.RegisterName("delegate")
+	_nSMatrixSelSetDelegate                                           = objc.RegisterName("setDelegate:")
+	_nSMatrixSelAutorecalculatesCellSize                              = objc.RegisterName("autorecalculatesCellSize")
+	_nSMatrixSelSetAutorecalculatesCellSize                           = objc.RegisterName("setAutorecalculatesCellSize:")
+	_nSMatrixSelTabKeyTraversesCells                                  = objc.RegisterName("tabKeyTraversesCells")
+	_nSMatrixSelSetTabKeyTraversesCells                               = objc.RegisterName("setTabKeyTraversesCells:")
+	_nSMatrixSelKeyCell                                               = objc.RegisterName("keyCell")
+	_nSMatrixSelSetKeyCell                                            = objc.RegisterName("setKeyCell:")
 )
 
 func NSMatrixFromID(id objc.ID) *NSMatrix {
@@ -124,25 +124,33 @@ func NSMatrixFromID(id objc.ID) *NSMatrix {
 
 func (o *NSMatrix) InitWithFrame(frameRect corefoundation.CGRect) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMatrixFromID(_ret)
 }
 
 func (o *NSMatrix) InitWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, cell *NSCell, rowsHigh int, colsWide int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModePrototypeNumberOfRowsNumberOfColumns, frameRect, mode, cell.Ptr(), rowsHigh, colsWide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMatrixFromID(_ret)
 }
 
 func (o *NSMatrix) InitWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *NSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelInitWithFrameModeCellClassNumberOfRowsNumberOfColumns, frameRect, mode, factoryId, rowsHigh, colsWide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMatrixFromID(_ret)
 }
 
 func (o *NSMatrix) MakeCellAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelMakeCellAtRowColumn, row, col)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -197,7 +205,9 @@ func (o *NSMatrix) GetNumberOfRowsColumns(rowCount *int64, colCount *int64) {
 
 func (o *NSMatrix) CellAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellAtRowColumn, row, col)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -266,7 +276,9 @@ func (o *NSMatrix) RemoveColumn(col int) {
 
 func (o *NSMatrix) CellWithTag(tag int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellWithTag, tag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -327,7 +339,9 @@ func (o *NSMatrix) SelectText(sender objc.ID) {
 
 func (o *NSMatrix) SelectTextAtRowColumn(row int, col int) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectTextAtRowColumn, row, col)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -337,13 +351,17 @@ func (o *NSMatrix) SetToolTipForCell(toolTipString *foundation.NSString, cell *N
 
 func (o *NSMatrix) ToolTipForCell(cell *NSCell) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelToolTipForCell, cell.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSMatrix) Prototype() *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelPrototype)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -371,13 +389,17 @@ func (o *NSMatrix) SetAllowsEmptySelection(allowsEmptySelection bool) {
 
 func (o *NSMatrix) Cells() *foundation.NSArray[*NSCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCell](_ret)
 }
 
 func (o *NSMatrix) SelectedCells() *foundation.NSArray[*NSCell] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelSelectedCells)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCell](_ret)
 }
 
@@ -420,7 +442,9 @@ func (o *NSMatrix) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
 
 func (o *NSMatrix) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -430,7 +454,9 @@ func (o *NSMatrix) SetBackgroundColor(backgroundColor *NSColor) {
 
 func (o *NSMatrix) CellBackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelCellBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -527,11 +553,12 @@ func (o *NSMatrix) SetTabKeyTraversesCells(tabKeyTraversesCells bool) {
 
 func (o *NSMatrix) KeyCell() *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMatrixSelKeyCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
 func (o *NSMatrix) SetKeyCell(keyCell *NSCell) {
 	o.Ptr().Send(_nSMatrixSelSetKeyCell, keyCell.Ptr())
 }
-

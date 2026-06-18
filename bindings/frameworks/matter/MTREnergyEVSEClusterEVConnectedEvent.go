@@ -16,8 +16,8 @@ type MTREnergyEVSEClusterEVConnectedEvent struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterEVConnectedEvent = _objcClass("MTREnergyEVSEClusterEVConnectedEvent")
-	_mTREnergyEVSEClusterEVConnectedEventSelSessionID = objc.RegisterName("sessionID")
+	_clsMTREnergyEVSEClusterEVConnectedEvent             = _objcClass("MTREnergyEVSEClusterEVConnectedEvent")
+	_mTREnergyEVSEClusterEVConnectedEventSelSessionID    = objc.RegisterName("sessionID")
 	_mTREnergyEVSEClusterEVConnectedEventSelSetSessionID = objc.RegisterName("setSessionID:")
 )
 
@@ -33,11 +33,12 @@ func MTREnergyEVSEClusterEVConnectedEventFromID(id objc.ID) *MTREnergyEVSECluste
 
 func (o *MTREnergyEVSEClusterEVConnectedEvent) SessionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterEVConnectedEventSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEClusterEVConnectedEvent) SetSessionID(sessionID *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEClusterEVConnectedEventSelSetSessionID, sessionID.Ptr())
 }
-

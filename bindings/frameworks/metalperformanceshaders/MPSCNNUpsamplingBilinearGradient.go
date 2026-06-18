@@ -17,7 +17,7 @@ type MPSCNNUpsamplingBilinearGradient struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingBilinearGradient = _objcClass("MPSCNNUpsamplingBilinearGradient")
+	_clsMPSCNNUpsamplingBilinearGradient                                                     = _objcClass("MPSCNNUpsamplingBilinearGradient")
 	_mPSCNNUpsamplingBilinearGradientSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNUpsamplingBilinearGradientFromID(id objc.ID) *MPSCNNUpsamplingBilinea
 // @abstract  Initialize the bilinear spatial downsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The downsampling factor for the x dimension. @param     integerScaleFactorY      The downsampling factor for the y dimension. @return    A valid MPSCNNUpsamplingBilinearGradient object or nil, if failure.
 func (o *MPSCNNUpsamplingBilinearGradient) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingBilinearGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearGradientSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY, device, integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearGradientFromID(_ret)
 }
-

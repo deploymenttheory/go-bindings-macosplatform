@@ -96,4 +96,3 @@ type SavedGameable interface {
 }
 
 var _ SavedGameable = (*SavedGame)(nil)
-

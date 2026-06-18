@@ -17,10 +17,10 @@ type JRSAppKitAWT struct {
 }
 
 var (
-	_clsJRSAppKitAWT = _objcClass("JRSAppKitAWT")
-	_jRSAppKitAWTSelAwtAppDelegate = objc.RegisterName("awtAppDelegate")
+	_clsJRSAppKitAWT                          = _objcClass("JRSAppKitAWT")
+	_jRSAppKitAWTSelAwtAppDelegate            = objc.RegisterName("awtAppDelegate")
 	_jRSAppKitAWTSelRegisterAWTAppWithOptions = objc.RegisterName("registerAWTAppWithOptions:")
-	_jRSAppKitAWTSelMarkAppIsDaemon = objc.RegisterName("markAppIsDaemon")
+	_jRSAppKitAWTSelMarkAppIsDaemon           = objc.RegisterName("markAppIsDaemon")
 )
 
 func JRSAppKitAWTFromID(id objc.ID) *JRSAppKitAWT {
@@ -46,4 +46,3 @@ func JRSAppKitAWTMarkAppIsDaemon() bool {
 	_ret := objc.Send[bool](objc.ID(_clsJRSAppKitAWT), _jRSAppKitAWTSelMarkAppIsDaemon)
 	return _ret
 }
-

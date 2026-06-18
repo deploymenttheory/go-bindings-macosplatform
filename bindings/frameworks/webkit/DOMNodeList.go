@@ -15,8 +15,8 @@ type DOMNodeList struct {
 }
 
 var (
-	_clsDOMNodeList = _objcClass("DOMNodeList")
-	_dOMNodeListSelItem = objc.RegisterName("item:")
+	_clsDOMNodeList       = _objcClass("DOMNodeList")
+	_dOMNodeListSelItem   = objc.RegisterName("item:")
 	_dOMNodeListSelLength = objc.RegisterName("length")
 )
 
@@ -32,7 +32,9 @@ func DOMNodeListFromID(id objc.ID) *DOMNodeList {
 
 func (o *DOMNodeList) Item(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *DOMNodeList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMNodeListSelLength)
 	return _ret
 }
-

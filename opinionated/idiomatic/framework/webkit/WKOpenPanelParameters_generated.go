@@ -53,4 +53,3 @@ type WKOpenPanelParametersable interface {
 }
 
 var _ WKOpenPanelParametersable = (*WKOpenPanelParameters)(nil)
-

@@ -75,4 +75,3 @@ type CaptionFormatConformerable interface {
 }
 
 var _ CaptionFormatConformerable = (*CaptionFormatConformer)(nil)
-

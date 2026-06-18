@@ -16,8 +16,8 @@ type MTRTimeSynchronizationClusterDSTStatusEvent struct {
 }
 
 var (
-	_clsMTRTimeSynchronizationClusterDSTStatusEvent = _objcClass("MTRTimeSynchronizationClusterDSTStatusEvent")
-	_mTRTimeSynchronizationClusterDSTStatusEventSelDstOffsetActive = objc.RegisterName("dstOffsetActive")
+	_clsMTRTimeSynchronizationClusterDSTStatusEvent                   = _objcClass("MTRTimeSynchronizationClusterDSTStatusEvent")
+	_mTRTimeSynchronizationClusterDSTStatusEventSelDstOffsetActive    = objc.RegisterName("dstOffsetActive")
 	_mTRTimeSynchronizationClusterDSTStatusEventSelSetDstOffsetActive = objc.RegisterName("setDstOffsetActive:")
 )
 
@@ -33,11 +33,12 @@ func MTRTimeSynchronizationClusterDSTStatusEventFromID(id objc.ID) *MTRTimeSynch
 
 func (o *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTimeSynchronizationClusterDSTStatusEventSelDstOffsetActive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTimeSynchronizationClusterDSTStatusEvent) SetDstOffsetActive(dstOffsetActive *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTimeSynchronizationClusterDSTStatusEventSelSetDstOffsetActive, dstOffsetActive.Ptr())
 }
-

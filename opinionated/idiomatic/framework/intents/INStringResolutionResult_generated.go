@@ -35,7 +35,9 @@ func NewStringResolutionResult() *StringResolutionResult {
 	return &StringResolutionResult{inner: raw.INStringResolutionResultFromID(_id)}
 }
 
-func (x *StringResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
+func (x *StringResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return &x.inner.INIntentResolutionResult
+}
 
 // StringResolutionResultable is the interface implemented by [StringResolutionResult], for mocking and DI.
 type StringResolutionResultable interface {
@@ -43,4 +45,3 @@ type StringResolutionResultable interface {
 }
 
 var _ StringResolutionResultable = (*StringResolutionResult)(nil)
-

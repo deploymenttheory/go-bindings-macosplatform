@@ -12,7 +12,7 @@ var (
 	_fnAVAudioMake3DVector func(float32, float32, float32) AVAudio3DPoint
 	// @abstract Creates and returns an AVAudio3DVectorOrientation object
 	_fnAVAudioMake3DVectorOrientation func(AVAudio3DPoint, AVAudio3DPoint) AVAudio3DVectorOrientation
-	_fnAVMakeBeatRange func(float64, float64) AVBeatRange
+	_fnAVMakeBeatRange                func(float64, float64) AVBeatRange
 )
 
 // @abstract Creates and returns an AVAudio3DAngularOrientation object
@@ -38,4 +38,3 @@ func AVAudioMake3DVectorOrientation(forward AVAudio3DPoint, up AVAudio3DPoint) A
 func AVMakeBeatRange(startBeat float64, lengthInBeats float64) AVBeatRange {
 	return _fnAVMakeBeatRange(startBeat, lengthInBeats)
 }
-

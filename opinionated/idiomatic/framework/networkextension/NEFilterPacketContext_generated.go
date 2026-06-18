@@ -41,4 +41,3 @@ type NEFilterPacketContextable interface {
 }
 
 var _ NEFilterPacketContextable = (*NEFilterPacketContext)(nil)
-

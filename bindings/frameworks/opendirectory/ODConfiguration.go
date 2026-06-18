@@ -19,56 +19,56 @@ type ODConfiguration struct {
 }
 
 var (
-	_clsODConfiguration = _objcClass("ODConfiguration")
-	_oDConfigurationSelConfiguration = objc.RegisterName("configuration")
-	_oDConfigurationSelSuggestedTrustAccount = objc.RegisterName("suggestedTrustAccount:")
-	_oDConfigurationSelSuggestedTrustPassword = objc.RegisterName("suggestedTrustPassword:")
-	_oDConfigurationSelSaveUsingAuthorizationError = objc.RegisterName("saveUsingAuthorization:error:")
+	_clsODConfiguration                                                                       = _objcClass("ODConfiguration")
+	_oDConfigurationSelConfiguration                                                          = objc.RegisterName("configuration")
+	_oDConfigurationSelSuggestedTrustAccount                                                  = objc.RegisterName("suggestedTrustAccount:")
+	_oDConfigurationSelSuggestedTrustPassword                                                 = objc.RegisterName("suggestedTrustPassword:")
+	_oDConfigurationSelSaveUsingAuthorizationError                                            = objc.RegisterName("saveUsingAuthorization:error:")
 	_oDConfigurationSelAddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError = objc.RegisterName("addTrustType:trustAccount:trustPassword:username:password:joinExisting:error:")
-	_oDConfigurationSelRemoveTrustUsingUsernamePasswordDeleteTrustAccountError = objc.RegisterName("removeTrustUsingUsername:password:deleteTrustAccount:error:")
-	_oDConfigurationSelNodeName = objc.RegisterName("nodeName")
-	_oDConfigurationSelSetNodeName = objc.RegisterName("setNodeName:")
-	_oDConfigurationSelComment = objc.RegisterName("comment")
-	_oDConfigurationSelSetComment = objc.RegisterName("setComment:")
-	_oDConfigurationSelDefaultMappings = objc.RegisterName("defaultMappings")
-	_oDConfigurationSelSetDefaultMappings = objc.RegisterName("setDefaultMappings:")
-	_oDConfigurationSelTemplateName = objc.RegisterName("templateName")
-	_oDConfigurationSelSetTemplateName = objc.RegisterName("setTemplateName:")
-	_oDConfigurationSelVirtualSubnodes = objc.RegisterName("virtualSubnodes")
-	_oDConfigurationSelSetVirtualSubnodes = objc.RegisterName("setVirtualSubnodes:")
-	_oDConfigurationSelHideRegistration = objc.RegisterName("hideRegistration")
-	_oDConfigurationSelSetHideRegistration = objc.RegisterName("setHideRegistration:")
-	_oDConfigurationSelPreferredDestinationHostName = objc.RegisterName("preferredDestinationHostName")
-	_oDConfigurationSelSetPreferredDestinationHostName = objc.RegisterName("setPreferredDestinationHostName:")
-	_oDConfigurationSelPreferredDestinationHostPort = objc.RegisterName("preferredDestinationHostPort")
-	_oDConfigurationSelSetPreferredDestinationHostPort = objc.RegisterName("setPreferredDestinationHostPort:")
-	_oDConfigurationSelTrustAccount = objc.RegisterName("trustAccount")
-	_oDConfigurationSelTrustMetaAccount = objc.RegisterName("trustMetaAccount")
-	_oDConfigurationSelTrustKerberosPrincipal = objc.RegisterName("trustKerberosPrincipal")
-	_oDConfigurationSelTrustType = objc.RegisterName("trustType")
-	_oDConfigurationSelTrustUsesMutualAuthentication = objc.RegisterName("trustUsesMutualAuthentication")
-	_oDConfigurationSelTrustUsesKerberosKeytab = objc.RegisterName("trustUsesKerberosKeytab")
-	_oDConfigurationSelTrustUsesSystemKeychain = objc.RegisterName("trustUsesSystemKeychain")
-	_oDConfigurationSelPacketSigning = objc.RegisterName("packetSigning")
-	_oDConfigurationSelSetPacketSigning = objc.RegisterName("setPacketSigning:")
-	_oDConfigurationSelPacketEncryption = objc.RegisterName("packetEncryption")
-	_oDConfigurationSelSetPacketEncryption = objc.RegisterName("setPacketEncryption:")
-	_oDConfigurationSelManInTheMiddleProtection = objc.RegisterName("manInTheMiddleProtection")
-	_oDConfigurationSelSetManInTheMiddleProtection = objc.RegisterName("setManInTheMiddleProtection:")
-	_oDConfigurationSelQueryTimeoutInSeconds = objc.RegisterName("queryTimeoutInSeconds")
-	_oDConfigurationSelSetQueryTimeoutInSeconds = objc.RegisterName("setQueryTimeoutInSeconds:")
-	_oDConfigurationSelConnectionSetupTimeoutInSeconds = objc.RegisterName("connectionSetupTimeoutInSeconds")
-	_oDConfigurationSelSetConnectionSetupTimeoutInSeconds = objc.RegisterName("setConnectionSetupTimeoutInSeconds:")
-	_oDConfigurationSelConnectionIdleTimeoutInSeconds = objc.RegisterName("connectionIdleTimeoutInSeconds")
-	_oDConfigurationSelSetConnectionIdleTimeoutInSeconds = objc.RegisterName("setConnectionIdleTimeoutInSeconds:")
-	_oDConfigurationSelDefaultModuleEntries = objc.RegisterName("defaultModuleEntries")
-	_oDConfigurationSelSetDefaultModuleEntries = objc.RegisterName("setDefaultModuleEntries:")
-	_oDConfigurationSelAuthenticationModuleEntries = objc.RegisterName("authenticationModuleEntries")
-	_oDConfigurationSelSetAuthenticationModuleEntries = objc.RegisterName("setAuthenticationModuleEntries:")
-	_oDConfigurationSelDiscoveryModuleEntries = objc.RegisterName("discoveryModuleEntries")
-	_oDConfigurationSelSetDiscoveryModuleEntries = objc.RegisterName("setDiscoveryModuleEntries:")
-	_oDConfigurationSelGeneralModuleEntries = objc.RegisterName("generalModuleEntries")
-	_oDConfigurationSelSetGeneralModuleEntries = objc.RegisterName("setGeneralModuleEntries:")
+	_oDConfigurationSelRemoveTrustUsingUsernamePasswordDeleteTrustAccountError                = objc.RegisterName("removeTrustUsingUsername:password:deleteTrustAccount:error:")
+	_oDConfigurationSelNodeName                                                               = objc.RegisterName("nodeName")
+	_oDConfigurationSelSetNodeName                                                            = objc.RegisterName("setNodeName:")
+	_oDConfigurationSelComment                                                                = objc.RegisterName("comment")
+	_oDConfigurationSelSetComment                                                             = objc.RegisterName("setComment:")
+	_oDConfigurationSelDefaultMappings                                                        = objc.RegisterName("defaultMappings")
+	_oDConfigurationSelSetDefaultMappings                                                     = objc.RegisterName("setDefaultMappings:")
+	_oDConfigurationSelTemplateName                                                           = objc.RegisterName("templateName")
+	_oDConfigurationSelSetTemplateName                                                        = objc.RegisterName("setTemplateName:")
+	_oDConfigurationSelVirtualSubnodes                                                        = objc.RegisterName("virtualSubnodes")
+	_oDConfigurationSelSetVirtualSubnodes                                                     = objc.RegisterName("setVirtualSubnodes:")
+	_oDConfigurationSelHideRegistration                                                       = objc.RegisterName("hideRegistration")
+	_oDConfigurationSelSetHideRegistration                                                    = objc.RegisterName("setHideRegistration:")
+	_oDConfigurationSelPreferredDestinationHostName                                           = objc.RegisterName("preferredDestinationHostName")
+	_oDConfigurationSelSetPreferredDestinationHostName                                        = objc.RegisterName("setPreferredDestinationHostName:")
+	_oDConfigurationSelPreferredDestinationHostPort                                           = objc.RegisterName("preferredDestinationHostPort")
+	_oDConfigurationSelSetPreferredDestinationHostPort                                        = objc.RegisterName("setPreferredDestinationHostPort:")
+	_oDConfigurationSelTrustAccount                                                           = objc.RegisterName("trustAccount")
+	_oDConfigurationSelTrustMetaAccount                                                       = objc.RegisterName("trustMetaAccount")
+	_oDConfigurationSelTrustKerberosPrincipal                                                 = objc.RegisterName("trustKerberosPrincipal")
+	_oDConfigurationSelTrustType                                                              = objc.RegisterName("trustType")
+	_oDConfigurationSelTrustUsesMutualAuthentication                                          = objc.RegisterName("trustUsesMutualAuthentication")
+	_oDConfigurationSelTrustUsesKerberosKeytab                                                = objc.RegisterName("trustUsesKerberosKeytab")
+	_oDConfigurationSelTrustUsesSystemKeychain                                                = objc.RegisterName("trustUsesSystemKeychain")
+	_oDConfigurationSelPacketSigning                                                          = objc.RegisterName("packetSigning")
+	_oDConfigurationSelSetPacketSigning                                                       = objc.RegisterName("setPacketSigning:")
+	_oDConfigurationSelPacketEncryption                                                       = objc.RegisterName("packetEncryption")
+	_oDConfigurationSelSetPacketEncryption                                                    = objc.RegisterName("setPacketEncryption:")
+	_oDConfigurationSelManInTheMiddleProtection                                               = objc.RegisterName("manInTheMiddleProtection")
+	_oDConfigurationSelSetManInTheMiddleProtection                                            = objc.RegisterName("setManInTheMiddleProtection:")
+	_oDConfigurationSelQueryTimeoutInSeconds                                                  = objc.RegisterName("queryTimeoutInSeconds")
+	_oDConfigurationSelSetQueryTimeoutInSeconds                                               = objc.RegisterName("setQueryTimeoutInSeconds:")
+	_oDConfigurationSelConnectionSetupTimeoutInSeconds                                        = objc.RegisterName("connectionSetupTimeoutInSeconds")
+	_oDConfigurationSelSetConnectionSetupTimeoutInSeconds                                     = objc.RegisterName("setConnectionSetupTimeoutInSeconds:")
+	_oDConfigurationSelConnectionIdleTimeoutInSeconds                                         = objc.RegisterName("connectionIdleTimeoutInSeconds")
+	_oDConfigurationSelSetConnectionIdleTimeoutInSeconds                                      = objc.RegisterName("setConnectionIdleTimeoutInSeconds:")
+	_oDConfigurationSelDefaultModuleEntries                                                   = objc.RegisterName("defaultModuleEntries")
+	_oDConfigurationSelSetDefaultModuleEntries                                                = objc.RegisterName("setDefaultModuleEntries:")
+	_oDConfigurationSelAuthenticationModuleEntries                                            = objc.RegisterName("authenticationModuleEntries")
+	_oDConfigurationSelSetAuthenticationModuleEntries                                         = objc.RegisterName("setAuthenticationModuleEntries:")
+	_oDConfigurationSelDiscoveryModuleEntries                                                 = objc.RegisterName("discoveryModuleEntries")
+	_oDConfigurationSelSetDiscoveryModuleEntries                                              = objc.RegisterName("setDiscoveryModuleEntries:")
+	_oDConfigurationSelGeneralModuleEntries                                                   = objc.RegisterName("generalModuleEntries")
+	_oDConfigurationSelSetGeneralModuleEntries                                                = objc.RegisterName("setGeneralModuleEntries:")
 )
 
 func ODConfigurationFromID(id objc.ID) *ODConfiguration {
@@ -84,21 +84,27 @@ func ODConfigurationFromID(id objc.ID) *ODConfiguration {
 // @method configuration @abstract Returns an initialized and autoreleased ODConfiguration object. @discussion Returns an initialized and autoreleased ODConfiguration object.
 func ODConfigurationConfiguration() *ODConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODConfiguration), _oDConfigurationSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODConfigurationFromID(_ret)
 }
 
 // @method suggestedTrustAccount: @abstract Returns a suggested name to use for the trust account. @discussion Returns a suggested name to use for a trust account.  This name will be derived from the hostname (if provided), otherwise it will be derived from the local hostname removing special characters that may not be allowed by many systems.
 func ODConfigurationSuggestedTrustAccount(hostname *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODConfiguration), _oDConfigurationSelSuggestedTrustAccount, hostname.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method suggestedTrustPassword: @abstract Returns a suggested password to be used for trust account with the requested length. @discussion Returns a suggested password to be used for trust account with the requested length.
 func ODConfigurationSuggestedTrustPassword(length uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODConfiguration), _oDConfigurationSelSuggestedTrustPassword, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -134,7 +140,9 @@ func (o *ODConfiguration) RemoveTrustUsingUsernamePasswordDeleteTrustAccountErro
 
 func (o *ODConfiguration) NodeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelNodeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -144,7 +152,9 @@ func (o *ODConfiguration) SetNodeName(nodeName *foundation.NSString) {
 
 func (o *ODConfiguration) Comment() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelComment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -154,7 +164,9 @@ func (o *ODConfiguration) SetComment(comment *foundation.NSString) {
 
 func (o *ODConfiguration) DefaultMappings() *ODMappings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelDefaultMappings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODMappingsFromID(_ret)
 }
 
@@ -164,7 +176,9 @@ func (o *ODConfiguration) SetDefaultMappings(defaultMappings *ODMappings) {
 
 func (o *ODConfiguration) TemplateName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelTemplateName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -192,7 +206,9 @@ func (o *ODConfiguration) SetHideRegistration(hideRegistration bool) {
 
 func (o *ODConfiguration) PreferredDestinationHostName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelPreferredDestinationHostName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -211,25 +227,33 @@ func (o *ODConfiguration) SetPreferredDestinationHostPort(preferredDestinationHo
 
 func (o *ODConfiguration) TrustAccount() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelTrustAccount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ODConfiguration) TrustMetaAccount() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelTrustMetaAccount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ODConfiguration) TrustKerberosPrincipal() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelTrustKerberosPrincipal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *ODConfiguration) TrustType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDConfigurationSelTrustType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -337,4 +361,3 @@ func (o *ODConfiguration) GeneralModuleEntries() *foundation.NSArray[objc.ID] {
 func (o *ODConfiguration) SetGeneralModuleEntries(generalModuleEntries *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_oDConfigurationSelSetGeneralModuleEntries, generalModuleEntries)
 }
-

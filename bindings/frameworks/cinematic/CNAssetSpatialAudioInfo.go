@@ -19,17 +19,17 @@ type CNAssetSpatialAudioInfo struct {
 }
 
 var (
-	_clsCNAssetSpatialAudioInfo = _objcClass("CNAssetSpatialAudioInfo")
+	_clsCNAssetSpatialAudioInfo                                             = _objcClass("CNAssetSpatialAudioInfo")
 	_cNAssetSpatialAudioInfoSelCheckIfContainsSpatialAudioCompletionHandler = objc.RegisterName("checkIfContainsSpatialAudio:completionHandler:")
-	_cNAssetSpatialAudioInfoSelLoadFromAssetCompletionHandler = objc.RegisterName("loadFromAsset:completionHandler:")
-	_cNAssetSpatialAudioInfoSelIsSupported = objc.RegisterName("isSupported")
-	_cNAssetSpatialAudioInfoSelDefaultSpatialAudioTrack = objc.RegisterName("defaultSpatialAudioTrack")
-	_cNAssetSpatialAudioInfoSelDefaultEffectIntensity = objc.RegisterName("defaultEffectIntensity")
-	_cNAssetSpatialAudioInfoSelDefaultRenderingStyle = objc.RegisterName("defaultRenderingStyle")
-	_cNAssetSpatialAudioInfoSelSpatialAudioMixMetadata = objc.RegisterName("spatialAudioMixMetadata")
-	_cNAssetSpatialAudioInfoSelAudioMixWithEffectIntensityRenderingStyle = objc.RegisterName("audioMixWithEffectIntensity:renderingStyle:")
-	_cNAssetSpatialAudioInfoSelAssetReaderOutputSettingsForContentType = objc.RegisterName("assetReaderOutputSettingsForContentType:")
-	_cNAssetSpatialAudioInfoSelAssetWriterInputSettingsForContentType = objc.RegisterName("assetWriterInputSettingsForContentType:")
+	_cNAssetSpatialAudioInfoSelLoadFromAssetCompletionHandler               = objc.RegisterName("loadFromAsset:completionHandler:")
+	_cNAssetSpatialAudioInfoSelIsSupported                                  = objc.RegisterName("isSupported")
+	_cNAssetSpatialAudioInfoSelDefaultSpatialAudioTrack                     = objc.RegisterName("defaultSpatialAudioTrack")
+	_cNAssetSpatialAudioInfoSelDefaultEffectIntensity                       = objc.RegisterName("defaultEffectIntensity")
+	_cNAssetSpatialAudioInfoSelDefaultRenderingStyle                        = objc.RegisterName("defaultRenderingStyle")
+	_cNAssetSpatialAudioInfoSelSpatialAudioMixMetadata                      = objc.RegisterName("spatialAudioMixMetadata")
+	_cNAssetSpatialAudioInfoSelAudioMixWithEffectIntensityRenderingStyle    = objc.RegisterName("audioMixWithEffectIntensity:renderingStyle:")
+	_cNAssetSpatialAudioInfoSelAssetReaderOutputSettingsForContentType      = objc.RegisterName("assetReaderOutputSettingsForContentType:")
+	_cNAssetSpatialAudioInfoSelAssetWriterInputSettingsForContentType       = objc.RegisterName("assetWriterInputSettingsForContentType:")
 )
 
 func CNAssetSpatialAudioInfoFromID(id objc.ID) *CNAssetSpatialAudioInfo {
@@ -78,7 +78,9 @@ func CNAssetSpatialAudioInfoIsSupported() bool {
 // @property		defaulSpatialAudioTrack @abstract		default `AVAssetTrack` containing Spatial Audio
 func (o *CNAssetSpatialAudioInfo) DefaultSpatialAudioTrack() *avfoundation.AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelDefaultSpatialAudioTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetTrackFromID(_ret)
 }
 
@@ -97,14 +99,18 @@ func (o *CNAssetSpatialAudioInfo) DefaultRenderingStyle() CNSpatialAudioRenderin
 // @method		spatialAudioMixMetadata @abstract		The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
 func (o *CNAssetSpatialAudioInfo) SpatialAudioMixMetadata() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelSpatialAudioMixMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @method		audioMixWithEffectIntensity:renderingStyle: @abstract		returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. @discussion    Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
 func (o *CNAssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle CNSpatialAudioRenderingStyle) *avfoundation.AVAudioMix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetSpatialAudioInfoSelAudioMixWithEffectIntensityRenderingStyle, effectIntensity, renderingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAudioMixFromID(_ret)
 }
 
@@ -119,4 +125,3 @@ func (o *CNAssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(content
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _cNAssetSpatialAudioInfoSelAssetWriterInputSettingsForContentType, contentType)
 	return _ret
 }
-

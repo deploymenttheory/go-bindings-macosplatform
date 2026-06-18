@@ -16,32 +16,32 @@ type MLCConvolutionDescriptor struct {
 }
 
 var (
-	_clsMLCConvolutionDescriptor = _objcClass("MLCConvolutionDescriptor")
-	_mLCConvolutionDescriptorSelDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:")
-	_mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes = objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount = objc.RegisterName("convolutionTransposeDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:")
-	_mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes = objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:")
+	_clsMLCConvolutionDescriptor                                                                                                                                                      = _objcClass("MLCConvolutionDescriptor")
+	_mLCConvolutionDescriptorSelDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes                 = objc.RegisterName("descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:")
+	_mLCConvolutionDescriptorSelDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount                                                                = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:")
+	_mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes                                            = objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:")
+	_mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes                     = objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:")
+	_mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount                                            = objc.RegisterName("convolutionTransposeDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:outputFeatureChannelCount:")
+	_mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes                        = objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:")
 	_mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:channelMultiplier:")
-	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:")
-	_mLCConvolutionDescriptorSelConvolutionType = objc.RegisterName("convolutionType")
-	_mLCConvolutionDescriptorSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mLCConvolutionDescriptorSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mLCConvolutionDescriptorSelInputFeatureChannelCount = objc.RegisterName("inputFeatureChannelCount")
-	_mLCConvolutionDescriptorSelOutputFeatureChannelCount = objc.RegisterName("outputFeatureChannelCount")
-	_mLCConvolutionDescriptorSelStrideInX = objc.RegisterName("strideInX")
-	_mLCConvolutionDescriptorSelStrideInY = objc.RegisterName("strideInY")
-	_mLCConvolutionDescriptorSelDilationRateInX = objc.RegisterName("dilationRateInX")
-	_mLCConvolutionDescriptorSelDilationRateInY = objc.RegisterName("dilationRateInY")
-	_mLCConvolutionDescriptorSelGroupCount = objc.RegisterName("groupCount")
-	_mLCConvolutionDescriptorSelPaddingPolicy = objc.RegisterName("paddingPolicy")
-	_mLCConvolutionDescriptorSelPaddingSizeInX = objc.RegisterName("paddingSizeInX")
-	_mLCConvolutionDescriptorSelPaddingSizeInY = objc.RegisterName("paddingSizeInY")
-	_mLCConvolutionDescriptorSelIsConvolutionTranspose = objc.RegisterName("isConvolutionTranspose")
-	_mLCConvolutionDescriptorSelUsesDepthwiseConvolution = objc.RegisterName("usesDepthwiseConvolution")
+	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier                                                    = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannelCount:channelMultiplier:")
+	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes                                = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:")
+	_mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes                   = objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:")
+	_mLCConvolutionDescriptorSelConvolutionType                                                                                                                                       = objc.RegisterName("convolutionType")
+	_mLCConvolutionDescriptorSelKernelWidth                                                                                                                                           = objc.RegisterName("kernelWidth")
+	_mLCConvolutionDescriptorSelKernelHeight                                                                                                                                          = objc.RegisterName("kernelHeight")
+	_mLCConvolutionDescriptorSelInputFeatureChannelCount                                                                                                                              = objc.RegisterName("inputFeatureChannelCount")
+	_mLCConvolutionDescriptorSelOutputFeatureChannelCount                                                                                                                             = objc.RegisterName("outputFeatureChannelCount")
+	_mLCConvolutionDescriptorSelStrideInX                                                                                                                                             = objc.RegisterName("strideInX")
+	_mLCConvolutionDescriptorSelStrideInY                                                                                                                                             = objc.RegisterName("strideInY")
+	_mLCConvolutionDescriptorSelDilationRateInX                                                                                                                                       = objc.RegisterName("dilationRateInX")
+	_mLCConvolutionDescriptorSelDilationRateInY                                                                                                                                       = objc.RegisterName("dilationRateInY")
+	_mLCConvolutionDescriptorSelGroupCount                                                                                                                                            = objc.RegisterName("groupCount")
+	_mLCConvolutionDescriptorSelPaddingPolicy                                                                                                                                         = objc.RegisterName("paddingPolicy")
+	_mLCConvolutionDescriptorSelPaddingSizeInX                                                                                                                                        = objc.RegisterName("paddingSizeInX")
+	_mLCConvolutionDescriptorSelPaddingSizeInY                                                                                                                                        = objc.RegisterName("paddingSizeInY")
+	_mLCConvolutionDescriptorSelIsConvolutionTranspose                                                                                                                                = objc.RegisterName("isConvolutionTranspose")
+	_mLCConvolutionDescriptorSelUsesDepthwiseConvolution                                                                                                                              = objc.RegisterName("usesDepthwiseConvolution")
 )
 
 func MLCConvolutionDescriptorFromID(id objc.ID) *MLCConvolutionDescriptor {
@@ -57,70 +57,90 @@ func MLCConvolutionDescriptorFromID(id objc.ID) *MLCConvolutionDescriptor {
 // @abstract   Creates a convolution descriptor with the specified convolution type. @param      convolutionType              The type of convolution. @param      kernelSizes                  The kernel sizes in x and y. @param      inputFeatureChannelCount     The number of feature channels in the input tensor. @param      outputFeatureChannelCount    The number of feature channels in the output tensor. When the convolution type is \p MLCConvolutionTypeDepthwise , this value must be a multiple of \p inputFeatureChannelCount . @param      groupCount                   The number of groups. @param      strides                      The kernel strides in x and y. @param      dilationRates                The dilation rates in x and y. @param      paddingPolicy                The padding policy. @param      paddingSizes                 The padding sizes in x and y if padding policy is \p MLCPaddingPolicyUsePaddingSize . @return     A new convolution descriptor.
 func MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType MLCConvolutionType, kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes, convolutionType, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object @param      kernelWidth                         The kernel size in x @param      kernelHeight                       The kernel size in x @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount, kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @param      strides                                  The kernel strides in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @param      groupCount                           Number of groups @param      strides                                  The kernel strides in x and y @param      dilationRates                    The dilation rates in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for convolution transpose @param      kernelWidth                         The kernel size in x @param      kernelHeight                       The kernel size in x @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureChannelCount, kernelWidth, kernelHeight, inputFeatureChannelCount, outputFeatureChannelCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for convolution transpose @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @param      strides                                  The kernel strides in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for convolution transpose @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      outputFeatureChannelCount   The number of feature channels in the output tensor @param      groupCount                           Number of groups @param      strides                                  The kernel strides in x and y @param      dilationRates                    The dilation rates in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for depthwise convolution @param      kernelWidth                         The kernel size in x @param      kernelHeight                       The kernel size in x @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      channelMultiplier            The channel multiplier @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier(kernelWidth uint, kernelHeight uint, inputFeatureChannelCount uint, channelMultiplier uint) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelCountChannelMultiplier, kernelWidth, kernelHeight, inputFeatureChannelCount, channelMultiplier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for depthwise convolution @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      channelMultiplier            The channel multiplier @param      strides                                  The kernel strides in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MLCConvolutionDescriptor object for depthwise convolution @param      kernelSizes                         The kernel sizes in x and y @param      inputFeatureChannelCount     The number of feature channels in the input tensor @param      channelMultiplier            The channel multiplier @param      strides                                  The kernel strides in x and y @param      dilationRates                    The dilation rates in x and y @param      paddingPolicy                    The padding policy @param      paddingSizes                      The padding sizes in x and y if padding policy is MLCPaddingPolicyUsePaddingSIze @return     A new MLCConvolutionDescriptor object.
 func MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *MLCConvolutionDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCConvolutionDescriptor), _mLCConvolutionDescriptorSelDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes, kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, dilationRates, paddingPolicy, paddingSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCConvolutionDescriptorFromID(_ret)
 }
 
@@ -213,4 +233,3 @@ func (o *MLCConvolutionDescriptor) UsesDepthwiseConvolution() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCConvolutionDescriptorSelUsesDepthwiseConvolution)
 	return _ret
 }
-

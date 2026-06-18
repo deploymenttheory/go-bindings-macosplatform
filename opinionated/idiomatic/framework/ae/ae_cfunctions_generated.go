@@ -619,4 +619,3 @@ func NewOSLMarkUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
 func VAEBuildAppleEvent(theClass uint, theID uint, addressType uint, addressData unsafe.Pointer, addressLength int, returnID int16, transactionID int, resultEvt *raw.AEDesc, error_ *raw.AEBuildError, paramsFmt string, args string) int {
 	return raw.VAEBuildAppleEvent(theClass, theID, addressType, addressData, addressLength, returnID, transactionID, resultEvt, error_, paramsFmt, args)
 }
-

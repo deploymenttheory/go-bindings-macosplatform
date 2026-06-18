@@ -17,44 +17,44 @@ type NSMutableArray[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSMutableArray = _objcClass("NSMutableArray")
-	_nSMutableArraySelAddObject = objc.RegisterName("addObject:")
-	_nSMutableArraySelInsertObjectAtIndex = objc.RegisterName("insertObject:atIndex:")
-	_nSMutableArraySelRemoveLastObject = objc.RegisterName("removeLastObject")
-	_nSMutableArraySelRemoveObjectAtIndex = objc.RegisterName("removeObjectAtIndex:")
-	_nSMutableArraySelReplaceObjectAtIndexWithObject = objc.RegisterName("replaceObjectAtIndex:withObject:")
-	_nSMutableArraySelInit = objc.RegisterName("init")
-	_nSMutableArraySelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableArraySelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMutableArraySelAddObjectsFromArray = objc.RegisterName("addObjectsFromArray:")
-	_nSMutableArraySelExchangeObjectAtIndexWithObjectAtIndex = objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:")
-	_nSMutableArraySelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSMutableArraySelRemoveObjectInRange = objc.RegisterName("removeObject:inRange:")
-	_nSMutableArraySelRemoveObject = objc.RegisterName("removeObject:")
-	_nSMutableArraySelRemoveObjectIdenticalToInRange = objc.RegisterName("removeObjectIdenticalTo:inRange:")
-	_nSMutableArraySelRemoveObjectIdenticalTo = objc.RegisterName("removeObjectIdenticalTo:")
-	_nSMutableArraySelRemoveObjectsFromIndicesNumIndices = objc.RegisterName("removeObjectsFromIndices:numIndices:")
-	_nSMutableArraySelRemoveObjectsInArray = objc.RegisterName("removeObjectsInArray:")
-	_nSMutableArraySelRemoveObjectsInRange = objc.RegisterName("removeObjectsInRange:")
+	_clsNSMutableArray                                               = _objcClass("NSMutableArray")
+	_nSMutableArraySelAddObject                                      = objc.RegisterName("addObject:")
+	_nSMutableArraySelInsertObjectAtIndex                            = objc.RegisterName("insertObject:atIndex:")
+	_nSMutableArraySelRemoveLastObject                               = objc.RegisterName("removeLastObject")
+	_nSMutableArraySelRemoveObjectAtIndex                            = objc.RegisterName("removeObjectAtIndex:")
+	_nSMutableArraySelReplaceObjectAtIndexWithObject                 = objc.RegisterName("replaceObjectAtIndex:withObject:")
+	_nSMutableArraySelInit                                           = objc.RegisterName("init")
+	_nSMutableArraySelInitWithCapacity                               = objc.RegisterName("initWithCapacity:")
+	_nSMutableArraySelInitWithCoder                                  = objc.RegisterName("initWithCoder:")
+	_nSMutableArraySelAddObjectsFromArray                            = objc.RegisterName("addObjectsFromArray:")
+	_nSMutableArraySelExchangeObjectAtIndexWithObjectAtIndex         = objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:")
+	_nSMutableArraySelRemoveAllObjects                               = objc.RegisterName("removeAllObjects")
+	_nSMutableArraySelRemoveObjectInRange                            = objc.RegisterName("removeObject:inRange:")
+	_nSMutableArraySelRemoveObject                                   = objc.RegisterName("removeObject:")
+	_nSMutableArraySelRemoveObjectIdenticalToInRange                 = objc.RegisterName("removeObjectIdenticalTo:inRange:")
+	_nSMutableArraySelRemoveObjectIdenticalTo                        = objc.RegisterName("removeObjectIdenticalTo:")
+	_nSMutableArraySelRemoveObjectsFromIndicesNumIndices             = objc.RegisterName("removeObjectsFromIndices:numIndices:")
+	_nSMutableArraySelRemoveObjectsInArray                           = objc.RegisterName("removeObjectsInArray:")
+	_nSMutableArraySelRemoveObjectsInRange                           = objc.RegisterName("removeObjectsInRange:")
 	_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArrayRange = objc.RegisterName("replaceObjectsInRange:withObjectsFromArray:range:")
-	_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArray = objc.RegisterName("replaceObjectsInRange:withObjectsFromArray:")
-	_nSMutableArraySelSetArray = objc.RegisterName("setArray:")
-	_nSMutableArraySelSortUsingFunctionContext = objc.RegisterName("sortUsingFunction:context:")
-	_nSMutableArraySelSortUsingSelector = objc.RegisterName("sortUsingSelector:")
-	_nSMutableArraySelInsertObjectsAtIndexes = objc.RegisterName("insertObjects:atIndexes:")
-	_nSMutableArraySelRemoveObjectsAtIndexes = objc.RegisterName("removeObjectsAtIndexes:")
-	_nSMutableArraySelReplaceObjectsAtIndexesWithObjects = objc.RegisterName("replaceObjectsAtIndexes:withObjects:")
-	_nSMutableArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
-	_nSMutableArraySelSortUsingComparator = objc.RegisterName("sortUsingComparator:")
-	_nSMutableArraySelSortWithOptionsUsingComparator = objc.RegisterName("sortWithOptions:usingComparator:")
-	_nSMutableArraySelArrayWithCapacity = objc.RegisterName("arrayWithCapacity:")
-	_nSMutableArraySelArrayWithContentsOfFile = objc.RegisterName("arrayWithContentsOfFile:")
-	_nSMutableArraySelArrayWithContentsOfURL = objc.RegisterName("arrayWithContentsOfURL:")
-	_nSMutableArraySelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSMutableArraySelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSMutableArraySelApplyDifference = objc.RegisterName("applyDifference:")
-	_nSMutableArraySelSortUsingDescriptors = objc.RegisterName("sortUsingDescriptors:")
-	_nSMutableArraySelFilterUsingPredicate = objc.RegisterName("filterUsingPredicate:")
+	_nSMutableArraySelReplaceObjectsInRangeWithObjectsFromArray      = objc.RegisterName("replaceObjectsInRange:withObjectsFromArray:")
+	_nSMutableArraySelSetArray                                       = objc.RegisterName("setArray:")
+	_nSMutableArraySelSortUsingFunctionContext                       = objc.RegisterName("sortUsingFunction:context:")
+	_nSMutableArraySelSortUsingSelector                              = objc.RegisterName("sortUsingSelector:")
+	_nSMutableArraySelInsertObjectsAtIndexes                         = objc.RegisterName("insertObjects:atIndexes:")
+	_nSMutableArraySelRemoveObjectsAtIndexes                         = objc.RegisterName("removeObjectsAtIndexes:")
+	_nSMutableArraySelReplaceObjectsAtIndexesWithObjects             = objc.RegisterName("replaceObjectsAtIndexes:withObjects:")
+	_nSMutableArraySelSetObjectAtIndexedSubscript                    = objc.RegisterName("setObject:atIndexedSubscript:")
+	_nSMutableArraySelSortUsingComparator                            = objc.RegisterName("sortUsingComparator:")
+	_nSMutableArraySelSortWithOptionsUsingComparator                 = objc.RegisterName("sortWithOptions:usingComparator:")
+	_nSMutableArraySelArrayWithCapacity                              = objc.RegisterName("arrayWithCapacity:")
+	_nSMutableArraySelArrayWithContentsOfFile                        = objc.RegisterName("arrayWithContentsOfFile:")
+	_nSMutableArraySelArrayWithContentsOfURL                         = objc.RegisterName("arrayWithContentsOfURL:")
+	_nSMutableArraySelInitWithContentsOfFile                         = objc.RegisterName("initWithContentsOfFile:")
+	_nSMutableArraySelInitWithContentsOfURL                          = objc.RegisterName("initWithContentsOfURL:")
+	_nSMutableArraySelApplyDifference                                = objc.RegisterName("applyDifference:")
+	_nSMutableArraySelSortUsingDescriptors                           = objc.RegisterName("sortUsingDescriptors:")
+	_nSMutableArraySelFilterUsingPredicate                           = objc.RegisterName("filterUsingPredicate:")
 )
 
 func NSMutableArrayFromID[ObjectType purego.AnyObject](id objc.ID) *NSMutableArray[ObjectType] {
@@ -89,19 +89,25 @@ func (o *NSMutableArray[ObjectType]) ReplaceObjectAtIndexWithObject(index uint, 
 
 func (o *NSMutableArray[ObjectType]) Init() *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableArray[ObjectType]) InitWithCapacity(numItems uint) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableArray[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
@@ -210,31 +216,41 @@ func (o *NSMutableArray[ObjectType]) SortWithOptionsUsingComparator(opts NSSortO
 
 func NSMutableArrayArrayWithCapacity(numItems uint) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
 func NSMutableArrayArrayWithContentsOfFile(path *NSString) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
 func NSMutableArrayArrayWithContentsOfURL(url *NSURL) *NSMutableArray[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableArray), _nSMutableArraySelArrayWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[objc.ID](_ret)
 }
 
 func (o *NSMutableArray[ObjectType]) InitWithContentsOfFile(path *NSString) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableArray[ObjectType]) InitWithContentsOfURL(url *NSURL) *NSMutableArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableArraySelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableArrayFromID[ObjectType](_ret)
 }
 
@@ -249,4 +265,3 @@ func (o *NSMutableArray[ObjectType]) SortUsingDescriptors(sortDescriptors *NSArr
 func (o *NSMutableArray[ObjectType]) FilterUsingPredicate(predicate *NSPredicate) {
 	o.Ptr().Send(_nSMutableArraySelFilterUsingPredicate, predicate.Ptr())
 }
-

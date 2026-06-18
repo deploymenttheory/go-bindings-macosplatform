@@ -26,4 +26,3 @@ func GLKMeshBufferAllocatorFromID(id objc.ID) *GLKMeshBufferAllocator {
 	purego.Track(o)
 	return o
 }
-

@@ -17,20 +17,20 @@ type PHImageRequestOptions struct {
 }
 
 var (
-	_clsPHImageRequestOptions = _objcClass("PHImageRequestOptions")
-	_pHImageRequestOptionsSelDeliveryMode = objc.RegisterName("deliveryMode")
-	_pHImageRequestOptionsSelSetDeliveryMode = objc.RegisterName("setDeliveryMode:")
-	_pHImageRequestOptionsSelResizeMode = objc.RegisterName("resizeMode")
-	_pHImageRequestOptionsSelSetResizeMode = objc.RegisterName("setResizeMode:")
-	_pHImageRequestOptionsSelNormalizedCropRect = objc.RegisterName("normalizedCropRect")
-	_pHImageRequestOptionsSelSetNormalizedCropRect = objc.RegisterName("setNormalizedCropRect:")
-	_pHImageRequestOptionsSelIsNetworkAccessAllowed = objc.RegisterName("isNetworkAccessAllowed")
-	_pHImageRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
-	_pHImageRequestOptionsSelIsSynchronous = objc.RegisterName("isSynchronous")
-	_pHImageRequestOptionsSelSetSynchronous = objc.RegisterName("setSynchronous:")
-	_pHImageRequestOptionsSelProgressHandler = objc.RegisterName("progressHandler")
-	_pHImageRequestOptionsSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
-	_pHImageRequestOptionsSelAllowSecondaryDegradedImage = objc.RegisterName("allowSecondaryDegradedImage")
+	_clsPHImageRequestOptions                               = _objcClass("PHImageRequestOptions")
+	_pHImageRequestOptionsSelDeliveryMode                   = objc.RegisterName("deliveryMode")
+	_pHImageRequestOptionsSelSetDeliveryMode                = objc.RegisterName("setDeliveryMode:")
+	_pHImageRequestOptionsSelResizeMode                     = objc.RegisterName("resizeMode")
+	_pHImageRequestOptionsSelSetResizeMode                  = objc.RegisterName("setResizeMode:")
+	_pHImageRequestOptionsSelNormalizedCropRect             = objc.RegisterName("normalizedCropRect")
+	_pHImageRequestOptionsSelSetNormalizedCropRect          = objc.RegisterName("setNormalizedCropRect:")
+	_pHImageRequestOptionsSelIsNetworkAccessAllowed         = objc.RegisterName("isNetworkAccessAllowed")
+	_pHImageRequestOptionsSelSetNetworkAccessAllowed        = objc.RegisterName("setNetworkAccessAllowed:")
+	_pHImageRequestOptionsSelIsSynchronous                  = objc.RegisterName("isSynchronous")
+	_pHImageRequestOptionsSelSetSynchronous                 = objc.RegisterName("setSynchronous:")
+	_pHImageRequestOptionsSelProgressHandler                = objc.RegisterName("progressHandler")
+	_pHImageRequestOptionsSelSetProgressHandler             = objc.RegisterName("setProgressHandler:")
+	_pHImageRequestOptionsSelAllowSecondaryDegradedImage    = objc.RegisterName("allowSecondaryDegradedImage")
 	_pHImageRequestOptionsSelSetAllowSecondaryDegradedImage = objc.RegisterName("setAllowSecondaryDegradedImage:")
 )
 
@@ -106,4 +106,3 @@ func (o *PHImageRequestOptions) AllowSecondaryDegradedImage() bool {
 func (o *PHImageRequestOptions) SetAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) {
 	o.Ptr().Send(_pHImageRequestOptionsSelSetAllowSecondaryDegradedImage, allowSecondaryDegradedImage)
 }
-

@@ -22,4 +22,3 @@ type ParameterGroupProvider interface {
 type ParameterNodeProvider interface {
 	asParameterNode() *raw.AUParameterNode
 }
-

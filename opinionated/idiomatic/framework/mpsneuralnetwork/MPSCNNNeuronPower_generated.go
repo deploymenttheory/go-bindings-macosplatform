@@ -104,4 +104,3 @@ type CNNNeuronPowerable interface {
 }
 
 var _ CNNNeuronPowerable = (*CNNNeuronPower)(nil)
-

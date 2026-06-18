@@ -15,10 +15,10 @@ type NSBackgroundExtensionView struct {
 }
 
 var (
-	_clsNSBackgroundExtensionView = _objcClass("NSBackgroundExtensionView")
-	_nSBackgroundExtensionViewSelContentView = objc.RegisterName("contentView")
-	_nSBackgroundExtensionViewSelSetContentView = objc.RegisterName("setContentView:")
-	_nSBackgroundExtensionViewSelAutomaticallyPlacesContentView = objc.RegisterName("automaticallyPlacesContentView")
+	_clsNSBackgroundExtensionView                                  = _objcClass("NSBackgroundExtensionView")
+	_nSBackgroundExtensionViewSelContentView                       = objc.RegisterName("contentView")
+	_nSBackgroundExtensionViewSelSetContentView                    = objc.RegisterName("setContentView:")
+	_nSBackgroundExtensionViewSelAutomaticallyPlacesContentView    = objc.RegisterName("automaticallyPlacesContentView")
 	_nSBackgroundExtensionViewSelSetAutomaticallyPlacesContentView = objc.RegisterName("setAutomaticallyPlacesContentView:")
 )
 
@@ -35,7 +35,9 @@ func NSBackgroundExtensionViewFromID(id objc.ID) *NSBackgroundExtensionView {
 // The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
 func (o *NSBackgroundExtensionView) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBackgroundExtensionViewSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -54,4 +56,3 @@ func (o *NSBackgroundExtensionView) AutomaticallyPlacesContentView() bool {
 func (o *NSBackgroundExtensionView) SetAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) {
 	o.Ptr().Send(_nSBackgroundExtensionViewSelSetAutomaticallyPlacesContentView, automaticallyPlacesContentView)
 }
-

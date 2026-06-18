@@ -76,7 +76,9 @@ func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...*foundat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -174,7 +176,9 @@ func (x *MutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrameHD
 	x.inner.SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy)
 }
 
-func (x *MutableVideoComposition) asVideoComposition() *raw.AVVideoComposition { return &x.inner.AVVideoComposition }
+func (x *MutableVideoComposition) asVideoComposition() *raw.AVVideoComposition {
+	return &x.inner.AVVideoComposition
+}
 
 // MutableVideoCompositionable is the interface implemented by [MutableVideoComposition], for mocking and DI.
 type MutableVideoCompositionable interface {
@@ -205,4 +209,3 @@ type MutableVideoCompositionable interface {
 }
 
 var _ MutableVideoCompositionable = (*MutableVideoComposition)(nil)
-

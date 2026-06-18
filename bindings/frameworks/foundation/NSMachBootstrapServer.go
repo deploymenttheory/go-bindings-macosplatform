@@ -16,8 +16,8 @@ type NSMachBootstrapServer struct {
 }
 
 var (
-	_clsNSMachBootstrapServer = _objcClass("NSMachBootstrapServer")
-	_nSMachBootstrapServerSelSharedInstance = objc.RegisterName("sharedInstance")
+	_clsNSMachBootstrapServer                    = _objcClass("NSMachBootstrapServer")
+	_nSMachBootstrapServerSelSharedInstance      = objc.RegisterName("sharedInstance")
 	_nSMachBootstrapServerSelServicePortWithName = objc.RegisterName("servicePortWithName:")
 )
 
@@ -38,7 +38,8 @@ func NSMachBootstrapServerSharedInstance() objc.ID {
 
 func (o *NSMachBootstrapServer) ServicePortWithName(name *NSString) *NSPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachBootstrapServerSelServicePortWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
-

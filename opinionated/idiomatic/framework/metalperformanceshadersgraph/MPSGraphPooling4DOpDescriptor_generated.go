@@ -46,7 +46,9 @@ func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumb
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -62,7 +64,9 @@ func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -78,7 +82,9 @@ func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -94,7 +100,9 @@ func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -247,7 +255,9 @@ func (x *GraphPooling4DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataT
 	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
 }
 
-func (x *GraphPooling4DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphPooling4DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphPooling4DOpDescriptorable is the interface implemented by [GraphPooling4DOpDescriptor], for mocking and DI.
 type GraphPooling4DOpDescriptorable interface {
@@ -282,4 +292,3 @@ type GraphPooling4DOpDescriptorable interface {
 }
 
 var _ GraphPooling4DOpDescriptorable = (*GraphPooling4DOpDescriptor)(nil)
-

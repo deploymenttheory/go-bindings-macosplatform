@@ -16,7 +16,9 @@ type MTRMediaPlaybackClusterNextParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterNextParams].
-func (x *MTRMediaPlaybackClusterNextParams) Unwrap() *raw.MTRMediaPlaybackClusterNextParams { return x.inner }
+func (x *MTRMediaPlaybackClusterNextParams) Unwrap() *raw.MTRMediaPlaybackClusterNextParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRMediaPlaybackClusterNextParamsable interface {
 }
 
 var _ MTRMediaPlaybackClusterNextParamsable = (*MTRMediaPlaybackClusterNextParams)(nil)
-

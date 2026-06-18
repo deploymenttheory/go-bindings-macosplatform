@@ -18,17 +18,17 @@ type AVBIPAddress struct {
 }
 
 var (
-	_clsAVBIPAddress = _objcClass("AVBIPAddress")
-	_aVBIPAddressSelInitWithIPv6Address = objc.RegisterName("initWithIPv6Address:")
+	_clsAVBIPAddress                        = _objcClass("AVBIPAddress")
+	_aVBIPAddressSelInitWithIPv6Address     = objc.RegisterName("initWithIPv6Address:")
 	_aVBIPAddressSelInitWithIPv6AddressData = objc.RegisterName("initWithIPv6AddressData:")
-	_aVBIPAddressSelInitWithIPv4Address = objc.RegisterName("initWithIPv4Address:")
-	_aVBIPAddressSelInitWithSockAddr = objc.RegisterName("initWithSockAddr:")
-	_aVBIPAddressSelRepresentsIPv4Address = objc.RegisterName("representsIPv4Address")
-	_aVBIPAddressSelIpv6Address = objc.RegisterName("ipv6Address")
-	_aVBIPAddressSelSetIpv6Address = objc.RegisterName("setIpv6Address:")
-	_aVBIPAddressSelIpv4Address = objc.RegisterName("ipv4Address")
-	_aVBIPAddressSelSetIpv4Address = objc.RegisterName("setIpv4Address:")
-	_aVBIPAddressSelStringRepresentation = objc.RegisterName("stringRepresentation")
+	_aVBIPAddressSelInitWithIPv4Address     = objc.RegisterName("initWithIPv4Address:")
+	_aVBIPAddressSelInitWithSockAddr        = objc.RegisterName("initWithSockAddr:")
+	_aVBIPAddressSelRepresentsIPv4Address   = objc.RegisterName("representsIPv4Address")
+	_aVBIPAddressSelIpv6Address             = objc.RegisterName("ipv6Address")
+	_aVBIPAddressSelSetIpv6Address          = objc.RegisterName("setIpv6Address:")
+	_aVBIPAddressSelIpv4Address             = objc.RegisterName("ipv4Address")
+	_aVBIPAddressSelSetIpv4Address          = objc.RegisterName("setIpv4Address:")
+	_aVBIPAddressSelStringRepresentation    = objc.RegisterName("stringRepresentation")
 	_aVBIPAddressSelSetStringRepresentation = objc.RegisterName("setStringRepresentation:")
 )
 
@@ -45,28 +45,36 @@ func AVBIPAddressFromID(id objc.ID) *AVBIPAddress {
 // @method	initWithIPv6Address: @abstract	This method initializes the receiver to contain the IPv6 address specified. @param		ipv6Address A pointer to 16 octets of memory containing the IPv6 address. @result	The initialized receiver.
 func (o *AVBIPAddress) InitWithIPv6Address(ipv6Address *uint8) *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelInitWithIPv6Address, ipv6Address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
 // @method	initWithIPv6AddressData: @abstract	This method initializes the receiver to contain the IPv6 address specified. @param		ipv6Address An NSData containing 16 octets with the IPv6 address. @result	The initialized receiver.
 func (o *AVBIPAddress) InitWithIPv6AddressData(ipv6Address *foundation.NSData) *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelInitWithIPv6AddressData, ipv6Address.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
 // @method	initWithIPv4Address: @abstract	This method initializes the receiver to contain the IPv4 address specified. @param		ipv4Address A uint32_t containing the IPv4 address in host byte order. @result	The initialized receiver.
 func (o *AVBIPAddress) InitWithIPv4Address(ipv4Address uint32) *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelInitWithIPv4Address, ipv4Address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
 // @method	initWithSockAddr: @abstract	This method initializes the receiver to contain the address specified. @param		sockAddr A pointer to a sock_addr containing either an IPv4 or IPv6 address. @result	The initialized receiver.
 func (o *AVBIPAddress) InitWithSockAddr(sockAddr unsafe.Pointer) *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelInitWithSockAddr, sockAddr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
@@ -79,7 +87,9 @@ func (o *AVBIPAddress) RepresentsIPv4Address() bool {
 // @property	ipv6Address @abstract	An NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
 func (o *AVBIPAddress) Ipv6Address() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelIpv6Address)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -100,11 +110,12 @@ func (o *AVBIPAddress) SetIpv4Address(ipv4Address uint32) {
 // @property	stringRepresentation @abstract	A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
 func (o *AVBIPAddress) StringRepresentation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVBIPAddressSelStringRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVBIPAddress) SetStringRepresentation(stringRepresentation *foundation.NSString) {
 	o.Ptr().Send(_aVBIPAddressSelSetStringRepresentation, stringRepresentation.Ptr())
 }
-

@@ -170,4 +170,3 @@ type CNNDropoutable interface {
 }
 
 var _ CNNDropoutable = (*CNNDropout)(nil)
-

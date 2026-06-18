@@ -22,24 +22,24 @@ type MPSMatrixBatchNormalization struct {
 }
 
 var (
-	_clsMPSMatrixBatchNormalization = _objcClass("MPSMatrixBatchNormalization")
-	_mPSMatrixBatchNormalizationSelSetNeuronTypeParameterAParameterBParameterC = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
-	_mPSMatrixBatchNormalizationSelNeuronType = objc.RegisterName("neuronType")
-	_mPSMatrixBatchNormalizationSelNeuronParameterA = objc.RegisterName("neuronParameterA")
-	_mPSMatrixBatchNormalizationSelNeuronParameterB = objc.RegisterName("neuronParameterB")
-	_mPSMatrixBatchNormalizationSelNeuronParameterC = objc.RegisterName("neuronParameterC")
-	_mPSMatrixBatchNormalizationSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixBatchNormalization                                                                                          = _objcClass("MPSMatrixBatchNormalization")
+	_mPSMatrixBatchNormalizationSelSetNeuronTypeParameterAParameterBParameterC                                               = objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:")
+	_mPSMatrixBatchNormalizationSelNeuronType                                                                                = objc.RegisterName("neuronType")
+	_mPSMatrixBatchNormalizationSelNeuronParameterA                                                                          = objc.RegisterName("neuronParameterA")
+	_mPSMatrixBatchNormalizationSelNeuronParameterB                                                                          = objc.RegisterName("neuronParameterB")
+	_mPSMatrixBatchNormalizationSelNeuronParameterC                                                                          = objc.RegisterName("neuronParameterC")
+	_mPSMatrixBatchNormalizationSelInitWithDevice                                                                            = objc.RegisterName("initWithDevice:")
 	_mPSMatrixBatchNormalizationSelEncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix = objc.RegisterName("encodeToCommandBuffer:inputMatrix:meanVector:varianceVector:gammaVector:betaVector:resultMatrix:")
-	_mPSMatrixBatchNormalizationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSMatrixBatchNormalizationSelCopyWithZoneDevice = objc.RegisterName("copyWithZone:device:")
-	_mPSMatrixBatchNormalizationSelSourceNumberOfFeatureVectors = objc.RegisterName("sourceNumberOfFeatureVectors")
-	_mPSMatrixBatchNormalizationSelSetSourceNumberOfFeatureVectors = objc.RegisterName("setSourceNumberOfFeatureVectors:")
-	_mPSMatrixBatchNormalizationSelSourceInputFeatureChannels = objc.RegisterName("sourceInputFeatureChannels")
-	_mPSMatrixBatchNormalizationSelSetSourceInputFeatureChannels = objc.RegisterName("setSourceInputFeatureChannels:")
-	_mPSMatrixBatchNormalizationSelEpsilon = objc.RegisterName("epsilon")
-	_mPSMatrixBatchNormalizationSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSMatrixBatchNormalizationSelComputeStatistics = objc.RegisterName("computeStatistics")
-	_mPSMatrixBatchNormalizationSelSetComputeStatistics = objc.RegisterName("setComputeStatistics:")
+	_mPSMatrixBatchNormalizationSelInitWithCoderDevice                                                                       = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixBatchNormalizationSelCopyWithZoneDevice                                                                        = objc.RegisterName("copyWithZone:device:")
+	_mPSMatrixBatchNormalizationSelSourceNumberOfFeatureVectors                                                              = objc.RegisterName("sourceNumberOfFeatureVectors")
+	_mPSMatrixBatchNormalizationSelSetSourceNumberOfFeatureVectors                                                           = objc.RegisterName("setSourceNumberOfFeatureVectors:")
+	_mPSMatrixBatchNormalizationSelSourceInputFeatureChannels                                                                = objc.RegisterName("sourceInputFeatureChannels")
+	_mPSMatrixBatchNormalizationSelSetSourceInputFeatureChannels                                                             = objc.RegisterName("setSourceInputFeatureChannels:")
+	_mPSMatrixBatchNormalizationSelEpsilon                                                                                   = objc.RegisterName("epsilon")
+	_mPSMatrixBatchNormalizationSelSetEpsilon                                                                                = objc.RegisterName("setEpsilon:")
+	_mPSMatrixBatchNormalizationSelComputeStatistics                                                                         = objc.RegisterName("computeStatistics")
+	_mPSMatrixBatchNormalizationSelSetComputeStatistics                                                                      = objc.RegisterName("setComputeStatistics:")
 )
 
 func MPSMatrixBatchNormalizationFromID(id objc.ID) *MPSMatrixBatchNormalization {
@@ -83,7 +83,9 @@ func (o *MPSMatrixBatchNormalization) NeuronParameterC() float32 {
 
 func (o *MPSMatrixBatchNormalization) InitWithDevice(device metal.MTLDevice) *MPSMatrixBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixBatchNormalizationSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixBatchNormalizationFromID(_ret)
 }
 
@@ -95,7 +97,9 @@ func (o *MPSMatrixBatchNormalization) EncodeToCommandBufferInputMatrixMeanVector
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixBatchNormalization object. @param      device      The MTLDevice on which to make the MPSMatrixBatchNormalization object. @return     A new MPSMatrixBatchNormalization object, or nil if failure.
 func (o *MPSMatrixBatchNormalization) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixBatchNormalizationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixBatchNormalizationFromID(_ret)
 }
 
@@ -144,4 +148,3 @@ func (o *MPSMatrixBatchNormalization) ComputeStatistics() bool {
 func (o *MPSMatrixBatchNormalization) SetComputeStatistics(computeStatistics bool) {
 	o.Ptr().Send(_mPSMatrixBatchNormalizationSelSetComputeStatistics, computeStatistics)
 }
-

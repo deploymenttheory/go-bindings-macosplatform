@@ -18,7 +18,9 @@ type AsynchronousCIImageFilteringRequest struct {
 }
 
 // Unwrap returns the underlying [raw.AVAsynchronousCIImageFilteringRequest].
-func (x *AsynchronousCIImageFilteringRequest) Unwrap() *raw.AVAsynchronousCIImageFilteringRequest { return x.inner }
+func (x *AsynchronousCIImageFilteringRequest) Unwrap() *raw.AVAsynchronousCIImageFilteringRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -74,4 +76,3 @@ type AsynchronousCIImageFilteringRequestable interface {
 }
 
 var _ AsynchronousCIImageFilteringRequestable = (*AsynchronousCIImageFilteringRequest)(nil)
-

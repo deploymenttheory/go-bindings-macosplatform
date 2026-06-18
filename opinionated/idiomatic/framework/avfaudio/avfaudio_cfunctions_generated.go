@@ -32,4 +32,3 @@ func AVAudioMake3DVectorOrientation(forward raw.AVAudio3DPoint, up raw.AVAudio3D
 func AVMakeBeatRange(startBeat float64, lengthInBeats float64) raw.AVBeatRange {
 	return raw.AVMakeBeatRange(startBeat, lengthInBeats)
 }
-

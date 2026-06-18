@@ -147,4 +147,3 @@ type ChooseIdentityPanelable interface {
 }
 
 var _ ChooseIdentityPanelable = (*ChooseIdentityPanel)(nil)
-

@@ -17,9 +17,9 @@ type SKProductSubscriptionPeriod struct {
 }
 
 var (
-	_clsSKProductSubscriptionPeriod = _objcClass("SKProductSubscriptionPeriod")
+	_clsSKProductSubscriptionPeriod              = _objcClass("SKProductSubscriptionPeriod")
 	_sKProductSubscriptionPeriodSelNumberOfUnits = objc.RegisterName("numberOfUnits")
-	_sKProductSubscriptionPeriodSelUnit = objc.RegisterName("unit")
+	_sKProductSubscriptionPeriodSelUnit          = objc.RegisterName("unit")
 )
 
 func SKProductSubscriptionPeriodFromID(id objc.ID) *SKProductSubscriptionPeriod {
@@ -41,4 +41,3 @@ func (o *SKProductSubscriptionPeriod) Unit() SKProductPeriodUnit {
 	_ret := objc.Send[SKProductPeriodUnit](o.Ptr(), _sKProductSubscriptionPeriodSelUnit)
 	return _ret
 }
-

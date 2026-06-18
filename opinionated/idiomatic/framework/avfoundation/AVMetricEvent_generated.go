@@ -68,4 +68,3 @@ type MetricEventable interface {
 }
 
 var _ MetricEventable = (*MetricEvent)(nil)
-

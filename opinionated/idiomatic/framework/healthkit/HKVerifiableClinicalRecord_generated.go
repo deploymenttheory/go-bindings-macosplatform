@@ -132,4 +132,3 @@ type VerifiableClinicalRecordable interface {
 }
 
 var _ VerifiableClinicalRecordable = (*VerifiableClinicalRecord)(nil)
-

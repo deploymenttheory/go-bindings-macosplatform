@@ -56,4 +56,3 @@ type CPUMetricable interface {
 }
 
 var _ CPUMetricable = (*CPUMetric)(nil)
-

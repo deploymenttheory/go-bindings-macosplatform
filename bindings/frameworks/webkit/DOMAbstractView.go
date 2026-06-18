@@ -15,7 +15,7 @@ type DOMAbstractView struct {
 }
 
 var (
-	_clsDOMAbstractView = _objcClass("DOMAbstractView")
+	_clsDOMAbstractView         = _objcClass("DOMAbstractView")
 	_dOMAbstractViewSelDocument = objc.RegisterName("document")
 )
 
@@ -31,7 +31,8 @@ func DOMAbstractViewFromID(id objc.ID) *DOMAbstractView {
 
 func (o *DOMAbstractView) Document() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMAbstractViewSelDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
-

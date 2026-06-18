@@ -16,13 +16,13 @@ type WKFindConfiguration struct {
 }
 
 var (
-	_clsWKFindConfiguration = _objcClass("WKFindConfiguration")
-	_wKFindConfigurationSelBackwards = objc.RegisterName("backwards")
-	_wKFindConfigurationSelSetBackwards = objc.RegisterName("setBackwards:")
-	_wKFindConfigurationSelCaseSensitive = objc.RegisterName("caseSensitive")
+	_clsWKFindConfiguration                 = _objcClass("WKFindConfiguration")
+	_wKFindConfigurationSelBackwards        = objc.RegisterName("backwards")
+	_wKFindConfigurationSelSetBackwards     = objc.RegisterName("setBackwards:")
+	_wKFindConfigurationSelCaseSensitive    = objc.RegisterName("caseSensitive")
 	_wKFindConfigurationSelSetCaseSensitive = objc.RegisterName("setCaseSensitive:")
-	_wKFindConfigurationSelWraps = objc.RegisterName("wraps")
-	_wKFindConfigurationSelSetWraps = objc.RegisterName("setWraps:")
+	_wKFindConfigurationSelWraps            = objc.RegisterName("wraps")
+	_wKFindConfigurationSelSetWraps         = objc.RegisterName("setWraps:")
 )
 
 func WKFindConfigurationFromID(id objc.ID) *WKFindConfiguration {
@@ -61,4 +61,3 @@ func (o *WKFindConfiguration) Wraps() bool {
 func (o *WKFindConfiguration) SetWraps(wraps bool) {
 	o.Ptr().Send(_wKFindConfigurationSelSetWraps, wraps)
 }
-

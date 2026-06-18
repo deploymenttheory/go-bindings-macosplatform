@@ -18,33 +18,33 @@ type MTRDevice struct {
 }
 
 var (
-	_clsMTRDevice = _objcClass("MTRDevice")
-	_mTRDeviceSelDeviceWithNodeIDController = objc.RegisterName("deviceWithNodeID:controller:")
-	_mTRDeviceSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_mTRDeviceSelAddDelegateQueue = objc.RegisterName("addDelegate:queue:")
-	_mTRDeviceSelAddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents = objc.RegisterName("addDelegate:queue:interestedPathsForAttributes:interestedPathsForEvents:")
-	_mTRDeviceSelRemoveDelegate = objc.RegisterName("removeDelegate:")
-	_mTRDeviceSelReadAttributeWithEndpointIDClusterIDAttributeIDParams = objc.RegisterName("readAttributeWithEndpointID:clusterID:attributeID:params:")
-	_mTRDeviceSelWriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout = objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:expectedValueInterval:timedWriteTimeout:")
-	_mTRDeviceSelReadAttributePaths = objc.RegisterName("readAttributePaths:")
-	_mTRDeviceSelDescriptorClusters = objc.RegisterName("descriptorClusters")
-	_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:queue:completion:")
-	_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:timedInvokeTimeout:queue:completion:")
-	_mTRDeviceSelInvokeCommandsQueueCompletion = objc.RegisterName("invokeCommands:queue:completion:")
-	_mTRDeviceSelOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion = objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:")
-	_mTRDeviceSelOpenCommissioningWindowWithDiscriminatorDurationQueueCompletion = objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:")
-	_mTRDeviceSelDownloadLogOfTypeTimeoutQueueCompletion = objc.RegisterName("downloadLogOfType:timeout:queue:completion:")
-	_mTRDeviceSelWaitForAttributeValuesTimeoutQueueCompletion = objc.RegisterName("waitForAttributeValues:timeout:queue:completion:")
-	_mTRDeviceSelState = objc.RegisterName("state")
-	_mTRDeviceSelDeviceCachePrimed = objc.RegisterName("deviceCachePrimed")
-	_mTRDeviceSelEstimatedStartTime = objc.RegisterName("estimatedStartTime")
-	_mTRDeviceSelDeviceController = objc.RegisterName("deviceController")
-	_mTRDeviceSelNodeID = objc.RegisterName("nodeID")
-	_mTRDeviceSelEstimatedSubscriptionLatency = objc.RegisterName("estimatedSubscriptionLatency")
-	_mTRDeviceSelVendorID = objc.RegisterName("vendorID")
-	_mTRDeviceSelProductID = objc.RegisterName("productID")
-	_mTRDeviceSelNetworkCommissioningFeatures = objc.RegisterName("networkCommissioningFeatures")
-	_mTRDeviceSelDeviceWithNodeIDDeviceController = objc.RegisterName("deviceWithNodeID:deviceController:")
+	_clsMTRDevice                                                                                                                                     = _objcClass("MTRDevice")
+	_mTRDeviceSelDeviceWithNodeIDController                                                                                                           = objc.RegisterName("deviceWithNodeID:controller:")
+	_mTRDeviceSelSetDelegateQueue                                                                                                                     = objc.RegisterName("setDelegate:queue:")
+	_mTRDeviceSelAddDelegateQueue                                                                                                                     = objc.RegisterName("addDelegate:queue:")
+	_mTRDeviceSelAddDelegateQueueInterestedPathsForAttributesInterestedPathsForEvents                                                                 = objc.RegisterName("addDelegate:queue:interestedPathsForAttributes:interestedPathsForEvents:")
+	_mTRDeviceSelRemoveDelegate                                                                                                                       = objc.RegisterName("removeDelegate:")
+	_mTRDeviceSelReadAttributeWithEndpointIDClusterIDAttributeIDParams                                                                                = objc.RegisterName("readAttributeWithEndpointID:clusterID:attributeID:params:")
+	_mTRDeviceSelWriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout                                          = objc.RegisterName("writeAttributeWithEndpointID:clusterID:attributeID:value:expectedValueInterval:timedWriteTimeout:")
+	_mTRDeviceSelReadAttributePaths                                                                                                                   = objc.RegisterName("readAttributePaths:")
+	_mTRDeviceSelDescriptorClusters                                                                                                                   = objc.RegisterName("descriptorClusters")
+	_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion                         = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:queue:completion:")
+	_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion       = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:timedInvokeTimeout:queue:completion:")
+	_mTRDeviceSelInvokeCommandsQueueCompletion                                                                                                        = objc.RegisterName("invokeCommands:queue:completion:")
+	_mTRDeviceSelOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion                                                         = objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:")
+	_mTRDeviceSelOpenCommissioningWindowWithDiscriminatorDurationQueueCompletion                                                                      = objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:")
+	_mTRDeviceSelDownloadLogOfTypeTimeoutQueueCompletion                                                                                              = objc.RegisterName("downloadLogOfType:timeout:queue:completion:")
+	_mTRDeviceSelWaitForAttributeValuesTimeoutQueueCompletion                                                                                         = objc.RegisterName("waitForAttributeValues:timeout:queue:completion:")
+	_mTRDeviceSelState                                                                                                                                = objc.RegisterName("state")
+	_mTRDeviceSelDeviceCachePrimed                                                                                                                    = objc.RegisterName("deviceCachePrimed")
+	_mTRDeviceSelEstimatedStartTime                                                                                                                   = objc.RegisterName("estimatedStartTime")
+	_mTRDeviceSelDeviceController                                                                                                                     = objc.RegisterName("deviceController")
+	_mTRDeviceSelNodeID                                                                                                                               = objc.RegisterName("nodeID")
+	_mTRDeviceSelEstimatedSubscriptionLatency                                                                                                         = objc.RegisterName("estimatedSubscriptionLatency")
+	_mTRDeviceSelVendorID                                                                                                                             = objc.RegisterName("vendorID")
+	_mTRDeviceSelProductID                                                                                                                            = objc.RegisterName("productID")
+	_mTRDeviceSelNetworkCommissioningFeatures                                                                                                         = objc.RegisterName("networkCommissioningFeatures")
+	_mTRDeviceSelDeviceWithNodeIDDeviceController                                                                                                     = objc.RegisterName("deviceWithNodeID:deviceController:")
 	_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion = objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:timedInvokeTimeout:clientQueue:completion:")
 )
 
@@ -61,7 +61,9 @@ func MTRDeviceFromID(id objc.ID) *MTRDevice {
 // Get an MTRDevice object representing a device with a specific node ID associated with a specific controller. MTRDevice objects are stateful, and callers should hold on to the MTRDevice while they are using it.
 func MTRDeviceDeviceWithNodeIDController(nodeID *foundation.NSNumber, controller *MTRDeviceController) *MTRDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDevice), _mTRDeviceSelDeviceWithNodeIDController, nodeID.Ptr(), controller.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceFromID(_ret)
 }
 
@@ -177,7 +179,9 @@ func (o *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundat
 		defer __block_completion.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelWaitForAttributeValuesTimeoutQueueCompletion, values, timeout, queue.Ptr(), __block_completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRAttributeValueWaiterFromID(_ret)
 }
 
@@ -195,42 +199,54 @@ func (o *MTRDevice) DeviceCachePrimed() bool {
 
 func (o *MTRDevice) EstimatedStartTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelEstimatedStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The controller this device was created for.  May return nil if that controller has been shut down.
 func (o *MTRDevice) DeviceController() *MTRDeviceController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelDeviceController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFromID(_ret)
 }
 
 // The node ID of the node this device corresponds to.
 func (o *MTRDevice) NodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // An estimate of how much time is likely to elapse between setDelegate being called and the current device state (attributes, stored events) being known. nil if no such estimate is available.  Otherwise, the NSNumber stores an NSTimeInterval.
 func (o *MTRDevice) EstimatedSubscriptionLatency() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelEstimatedSubscriptionLatency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The Vendor Identifier associated with the device. A non-nil value if the vendor identifier has been determined from the device, nil if unknown.
 func (o *MTRDevice) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The Product Identifier associated with the device. A non-nil value if the product identifier has been determined from the device, nil if unknown.
 func (o *MTRDevice) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -243,11 +259,12 @@ func (o *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeatur
 // Deprecated MTRDevice APIs.
 func MTRDeviceDeviceWithNodeIDDeviceController(nodeID uint64, deviceController *MTRDeviceController) *MTRDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRDevice), _mTRDeviceSelDeviceWithNodeIDDeviceController, nodeID, deviceController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceFromID(_ret)
 }
 
 func (o *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	o.Ptr().Send(_mTRDeviceSelInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion, endpointID.Ptr(), clusterID.Ptr(), commandID.Ptr(), commandFields, expectedValues, expectedValueInterval.Ptr(), timeout.Ptr(), queue.Ptr(), completion)
 }
-

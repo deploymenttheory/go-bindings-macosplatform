@@ -16,9 +16,9 @@ type MTLAccelerationStructurePassDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructurePassDescriptor = _objcClass("MTLAccelerationStructurePassDescriptor")
+	_clsMTLAccelerationStructurePassDescriptor                                    = _objcClass("MTLAccelerationStructurePassDescriptor")
 	_mTLAccelerationStructurePassDescriptorSelAccelerationStructurePassDescriptor = objc.RegisterName("accelerationStructurePassDescriptor")
-	_mTLAccelerationStructurePassDescriptorSelSampleBufferAttachments = objc.RegisterName("sampleBufferAttachments")
+	_mTLAccelerationStructurePassDescriptorSelSampleBufferAttachments             = objc.RegisterName("sampleBufferAttachments")
 )
 
 func MTLAccelerationStructurePassDescriptorFromID(id objc.ID) *MTLAccelerationStructurePassDescriptor {
@@ -34,13 +34,16 @@ func MTLAccelerationStructurePassDescriptorFromID(id objc.ID) *MTLAccelerationSt
 // @method accelerationStructurePassDescriptor @abstract Create an autoreleased default acceleration structure pass descriptor
 func MTLAccelerationStructurePassDescriptorAccelerationStructurePassDescriptor() *MTLAccelerationStructurePassDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructurePassDescriptor), _mTLAccelerationStructurePassDescriptorSelAccelerationStructurePassDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructurePassDescriptorFromID(_ret)
 }
 
 func (o *MTLAccelerationStructurePassDescriptor) SampleBufferAttachments() *MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructurePassDescriptorSelSampleBufferAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_ret)
 }
-

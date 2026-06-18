@@ -98,4 +98,3 @@ type AssetCollectionable interface {
 }
 
 var _ AssetCollectionable = (*AssetCollection)(nil)
-

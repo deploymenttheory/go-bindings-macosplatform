@@ -17,161 +17,161 @@ type NSCell struct {
 }
 
 var (
-	_clsNSCell = _objcClass("NSCell")
-	_nSCellSelInit = objc.RegisterName("init")
-	_nSCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSCellSelInitImageCell = objc.RegisterName("initImageCell:")
-	_nSCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSCellSelSendActionOn = objc.RegisterName("sendActionOn:")
-	_nSCellSelCompare = objc.RegisterName("compare:")
-	_nSCellSelTakeIntValueFrom = objc.RegisterName("takeIntValueFrom:")
-	_nSCellSelTakeFloatValueFrom = objc.RegisterName("takeFloatValueFrom:")
-	_nSCellSelTakeDoubleValueFrom = objc.RegisterName("takeDoubleValueFrom:")
-	_nSCellSelTakeStringValueFrom = objc.RegisterName("takeStringValueFrom:")
-	_nSCellSelTakeObjectValueFrom = objc.RegisterName("takeObjectValueFrom:")
-	_nSCellSelTakeIntegerValueFrom = objc.RegisterName("takeIntegerValueFrom:")
-	_nSCellSelCellAttribute = objc.RegisterName("cellAttribute:")
-	_nSCellSelSetCellAttributeTo = objc.RegisterName("setCellAttribute:to:")
-	_nSCellSelImageRectForBounds = objc.RegisterName("imageRectForBounds:")
-	_nSCellSelTitleRectForBounds = objc.RegisterName("titleRectForBounds:")
-	_nSCellSelDrawingRectForBounds = objc.RegisterName("drawingRectForBounds:")
-	_nSCellSel_bulletStringForStringBulletCharacter = objc.RegisterName("_bulletStringForString:bulletCharacter:")
-	_nSCellSelCellSizeForBounds = objc.RegisterName("cellSizeForBounds:")
-	_nSCellSelHighlightColorWithFrameInView = objc.RegisterName("highlightColorWithFrame:inView:")
-	_nSCellSelCalcDrawInfo = objc.RegisterName("calcDrawInfo:")
-	_nSCellSelSetUpFieldEditorAttributes = objc.RegisterName("setUpFieldEditorAttributes:")
-	_nSCellSelDrawInteriorWithFrameInView = objc.RegisterName("drawInteriorWithFrame:inView:")
-	_nSCellSelDrawWithFrameInView = objc.RegisterName("drawWithFrame:inView:")
-	_nSCellSelHighlightWithFrameInView = objc.RegisterName("highlight:withFrame:inView:")
-	_nSCellSelGetPeriodicDelayInterval = objc.RegisterName("getPeriodicDelay:interval:")
-	_nSCellSelStartTrackingAtInView = objc.RegisterName("startTrackingAt:inView:")
-	_nSCellSelContinueTrackingAtInView = objc.RegisterName("continueTracking:at:inView:")
-	_nSCellSelStopTrackingAtInViewMouseIsUp = objc.RegisterName("stopTracking:at:inView:mouseIsUp:")
-	_nSCellSelTrackMouseInRectOfViewUntilMouseUp = objc.RegisterName("trackMouse:inRect:ofView:untilMouseUp:")
-	_nSCellSelEditWithFrameInViewEditorDelegateEvent = objc.RegisterName("editWithFrame:inView:editor:delegate:event:")
+	_clsNSCell                                               = _objcClass("NSCell")
+	_nSCellSelInit                                           = objc.RegisterName("init")
+	_nSCellSelInitTextCell                                   = objc.RegisterName("initTextCell:")
+	_nSCellSelInitImageCell                                  = objc.RegisterName("initImageCell:")
+	_nSCellSelInitWithCoder                                  = objc.RegisterName("initWithCoder:")
+	_nSCellSelSendActionOn                                   = objc.RegisterName("sendActionOn:")
+	_nSCellSelCompare                                        = objc.RegisterName("compare:")
+	_nSCellSelTakeIntValueFrom                               = objc.RegisterName("takeIntValueFrom:")
+	_nSCellSelTakeFloatValueFrom                             = objc.RegisterName("takeFloatValueFrom:")
+	_nSCellSelTakeDoubleValueFrom                            = objc.RegisterName("takeDoubleValueFrom:")
+	_nSCellSelTakeStringValueFrom                            = objc.RegisterName("takeStringValueFrom:")
+	_nSCellSelTakeObjectValueFrom                            = objc.RegisterName("takeObjectValueFrom:")
+	_nSCellSelTakeIntegerValueFrom                           = objc.RegisterName("takeIntegerValueFrom:")
+	_nSCellSelCellAttribute                                  = objc.RegisterName("cellAttribute:")
+	_nSCellSelSetCellAttributeTo                             = objc.RegisterName("setCellAttribute:to:")
+	_nSCellSelImageRectForBounds                             = objc.RegisterName("imageRectForBounds:")
+	_nSCellSelTitleRectForBounds                             = objc.RegisterName("titleRectForBounds:")
+	_nSCellSelDrawingRectForBounds                           = objc.RegisterName("drawingRectForBounds:")
+	_nSCellSel_bulletStringForStringBulletCharacter          = objc.RegisterName("_bulletStringForString:bulletCharacter:")
+	_nSCellSelCellSizeForBounds                              = objc.RegisterName("cellSizeForBounds:")
+	_nSCellSelHighlightColorWithFrameInView                  = objc.RegisterName("highlightColorWithFrame:inView:")
+	_nSCellSelCalcDrawInfo                                   = objc.RegisterName("calcDrawInfo:")
+	_nSCellSelSetUpFieldEditorAttributes                     = objc.RegisterName("setUpFieldEditorAttributes:")
+	_nSCellSelDrawInteriorWithFrameInView                    = objc.RegisterName("drawInteriorWithFrame:inView:")
+	_nSCellSelDrawWithFrameInView                            = objc.RegisterName("drawWithFrame:inView:")
+	_nSCellSelHighlightWithFrameInView                       = objc.RegisterName("highlight:withFrame:inView:")
+	_nSCellSelGetPeriodicDelayInterval                       = objc.RegisterName("getPeriodicDelay:interval:")
+	_nSCellSelStartTrackingAtInView                          = objc.RegisterName("startTrackingAt:inView:")
+	_nSCellSelContinueTrackingAtInView                       = objc.RegisterName("continueTracking:at:inView:")
+	_nSCellSelStopTrackingAtInViewMouseIsUp                  = objc.RegisterName("stopTracking:at:inView:mouseIsUp:")
+	_nSCellSelTrackMouseInRectOfViewUntilMouseUp             = objc.RegisterName("trackMouse:inRect:ofView:untilMouseUp:")
+	_nSCellSelEditWithFrameInViewEditorDelegateEvent         = objc.RegisterName("editWithFrame:inView:editor:delegate:event:")
 	_nSCellSelSelectWithFrameInViewEditorDelegateStartLength = objc.RegisterName("selectWithFrame:inView:editor:delegate:start:length:")
-	_nSCellSelEndEditing = objc.RegisterName("endEditing:")
-	_nSCellSelResetCursorRectInView = objc.RegisterName("resetCursorRect:inView:")
-	_nSCellSelMenuForEventInRectOfView = objc.RegisterName("menuForEvent:inRect:ofView:")
-	_nSCellSelFieldEditorForView = objc.RegisterName("fieldEditorForView:")
-	_nSCellSelDraggingImageComponentsWithFrameInView = objc.RegisterName("draggingImageComponentsWithFrame:inView:")
-	_nSCellSelPrefersTrackingUntilMouseUp = objc.RegisterName("prefersTrackingUntilMouseUp")
-	_nSCellSelControlView = objc.RegisterName("controlView")
-	_nSCellSelSetControlView = objc.RegisterName("setControlView:")
-	_nSCellSelType = objc.RegisterName("type")
-	_nSCellSelSetType = objc.RegisterName("setType:")
-	_nSCellSelState = objc.RegisterName("state")
-	_nSCellSelSetState = objc.RegisterName("setState:")
-	_nSCellSelTarget = objc.RegisterName("target")
-	_nSCellSelSetTarget = objc.RegisterName("setTarget:")
-	_nSCellSelAction = objc.RegisterName("action")
-	_nSCellSelSetAction = objc.RegisterName("setAction:")
-	_nSCellSelTag = objc.RegisterName("tag")
-	_nSCellSelSetTag = objc.RegisterName("setTag:")
-	_nSCellSelTitle = objc.RegisterName("title")
-	_nSCellSelSetTitle = objc.RegisterName("setTitle:")
-	_nSCellSelIsOpaque = objc.RegisterName("isOpaque")
-	_nSCellSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSCellSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSCellSelIsContinuous = objc.RegisterName("isContinuous")
-	_nSCellSelSetContinuous = objc.RegisterName("setContinuous:")
-	_nSCellSelIsEditable = objc.RegisterName("isEditable")
-	_nSCellSelSetEditable = objc.RegisterName("setEditable:")
-	_nSCellSelIsSelectable = objc.RegisterName("isSelectable")
-	_nSCellSelSetSelectable = objc.RegisterName("setSelectable:")
-	_nSCellSelIsBordered = objc.RegisterName("isBordered")
-	_nSCellSelSetBordered = objc.RegisterName("setBordered:")
-	_nSCellSelIsBezeled = objc.RegisterName("isBezeled")
-	_nSCellSelSetBezeled = objc.RegisterName("setBezeled:")
-	_nSCellSelIsScrollable = objc.RegisterName("isScrollable")
-	_nSCellSelSetScrollable = objc.RegisterName("setScrollable:")
-	_nSCellSelIsHighlighted = objc.RegisterName("isHighlighted")
-	_nSCellSelSetHighlighted = objc.RegisterName("setHighlighted:")
-	_nSCellSelAlignment = objc.RegisterName("alignment")
-	_nSCellSelSetAlignment = objc.RegisterName("setAlignment:")
-	_nSCellSelWraps = objc.RegisterName("wraps")
-	_nSCellSelSetWraps = objc.RegisterName("setWraps:")
-	_nSCellSelFont = objc.RegisterName("font")
-	_nSCellSelSetFont = objc.RegisterName("setFont:")
-	_nSCellSelKeyEquivalent = objc.RegisterName("keyEquivalent")
-	_nSCellSelFormatter = objc.RegisterName("formatter")
-	_nSCellSelSetFormatter = objc.RegisterName("setFormatter:")
-	_nSCellSelObjectValue = objc.RegisterName("objectValue")
-	_nSCellSelSetObjectValue = objc.RegisterName("setObjectValue:")
-	_nSCellSelHasValidObjectValue = objc.RegisterName("hasValidObjectValue")
-	_nSCellSelStringValue = objc.RegisterName("stringValue")
-	_nSCellSelSetStringValue = objc.RegisterName("setStringValue:")
-	_nSCellSelIntValue = objc.RegisterName("intValue")
-	_nSCellSelSetIntValue = objc.RegisterName("setIntValue:")
-	_nSCellSelFloatValue = objc.RegisterName("floatValue")
-	_nSCellSelSetFloatValue = objc.RegisterName("setFloatValue:")
-	_nSCellSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSCellSelSetDoubleValue = objc.RegisterName("setDoubleValue:")
-	_nSCellSelIntegerValue = objc.RegisterName("integerValue")
-	_nSCellSelSetIntegerValue = objc.RegisterName("setIntegerValue:")
-	_nSCellSelImage = objc.RegisterName("image")
-	_nSCellSelSetImage = objc.RegisterName("setImage:")
-	_nSCellSelControlSize = objc.RegisterName("controlSize")
-	_nSCellSelSetControlSize = objc.RegisterName("setControlSize:")
-	_nSCellSelRepresentedObject = objc.RegisterName("representedObject")
-	_nSCellSelSetRepresentedObject = objc.RegisterName("setRepresentedObject:")
-	_nSCellSelCellSize = objc.RegisterName("cellSize")
-	_nSCellSelMouseDownFlags = objc.RegisterName("mouseDownFlags")
-	_nSCellSelMenu = objc.RegisterName("menu")
-	_nSCellSelSetMenu = objc.RegisterName("setMenu:")
-	_nSCellSelDefaultMenu = objc.RegisterName("defaultMenu")
-	_nSCellSelSendsActionOnEndEditing = objc.RegisterName("sendsActionOnEndEditing")
-	_nSCellSelSetSendsActionOnEndEditing = objc.RegisterName("setSendsActionOnEndEditing:")
-	_nSCellSelBaseWritingDirection = objc.RegisterName("baseWritingDirection")
-	_nSCellSelSetBaseWritingDirection = objc.RegisterName("setBaseWritingDirection:")
-	_nSCellSelLineBreakMode = objc.RegisterName("lineBreakMode")
-	_nSCellSelSetLineBreakMode = objc.RegisterName("setLineBreakMode:")
-	_nSCellSelAllowsUndo = objc.RegisterName("allowsUndo")
-	_nSCellSelSetAllowsUndo = objc.RegisterName("setAllowsUndo:")
-	_nSCellSelTruncatesLastVisibleLine = objc.RegisterName("truncatesLastVisibleLine")
-	_nSCellSelSetTruncatesLastVisibleLine = objc.RegisterName("setTruncatesLastVisibleLine:")
-	_nSCellSelUserInterfaceLayoutDirection = objc.RegisterName("userInterfaceLayoutDirection")
-	_nSCellSelSetUserInterfaceLayoutDirection = objc.RegisterName("setUserInterfaceLayoutDirection:")
-	_nSCellSelUsesSingleLineMode = objc.RegisterName("usesSingleLineMode")
-	_nSCellSelSetUsesSingleLineMode = objc.RegisterName("setUsesSingleLineMode:")
-	_nSCellSelPerformClick = objc.RegisterName("performClick:")
-	_nSCellSelDrawFocusRingMaskWithFrameInView = objc.RegisterName("drawFocusRingMaskWithFrame:inView:")
-	_nSCellSelFocusRingMaskBoundsForFrameInView = objc.RegisterName("focusRingMaskBoundsForFrame:inView:")
-	_nSCellSelRefusesFirstResponder = objc.RegisterName("refusesFirstResponder")
-	_nSCellSelSetRefusesFirstResponder = objc.RegisterName("setRefusesFirstResponder:")
-	_nSCellSelAcceptsFirstResponder = objc.RegisterName("acceptsFirstResponder")
-	_nSCellSelShowsFirstResponder = objc.RegisterName("showsFirstResponder")
-	_nSCellSelSetShowsFirstResponder = objc.RegisterName("setShowsFirstResponder:")
-	_nSCellSelFocusRingType = objc.RegisterName("focusRingType")
-	_nSCellSelSetFocusRingType = objc.RegisterName("setFocusRingType:")
-	_nSCellSelDefaultFocusRingType = objc.RegisterName("defaultFocusRingType")
-	_nSCellSelWantsNotificationForMarkedText = objc.RegisterName("wantsNotificationForMarkedText")
-	_nSCellSelAttributedStringValue = objc.RegisterName("attributedStringValue")
-	_nSCellSelSetAttributedStringValue = objc.RegisterName("setAttributedStringValue:")
-	_nSCellSelAllowsEditingTextAttributes = objc.RegisterName("allowsEditingTextAttributes")
-	_nSCellSelSetAllowsEditingTextAttributes = objc.RegisterName("setAllowsEditingTextAttributes:")
-	_nSCellSelImportsGraphics = objc.RegisterName("importsGraphics")
-	_nSCellSelSetImportsGraphics = objc.RegisterName("setImportsGraphics:")
-	_nSCellSelSetNextState = objc.RegisterName("setNextState")
-	_nSCellSelAllowsMixedState = objc.RegisterName("allowsMixedState")
-	_nSCellSelSetAllowsMixedState = objc.RegisterName("setAllowsMixedState:")
-	_nSCellSelNextState = objc.RegisterName("nextState")
-	_nSCellSelHitTestForEventInRectOfView = objc.RegisterName("hitTestForEvent:inRect:ofView:")
-	_nSCellSelExpansionFrameWithFrameInView = objc.RegisterName("expansionFrameWithFrame:inView:")
-	_nSCellSelDrawWithExpansionFrameInView = objc.RegisterName("drawWithExpansionFrame:inView:")
-	_nSCellSelBackgroundStyle = objc.RegisterName("backgroundStyle")
-	_nSCellSelSetBackgroundStyle = objc.RegisterName("setBackgroundStyle:")
-	_nSCellSelInteriorBackgroundStyle = objc.RegisterName("interiorBackgroundStyle")
-	_nSCellSelEntryType = objc.RegisterName("entryType")
-	_nSCellSelSetEntryType = objc.RegisterName("setEntryType:")
-	_nSCellSelIsEntryAcceptable = objc.RegisterName("isEntryAcceptable:")
-	_nSCellSelSetFloatingPointFormatLeftRight = objc.RegisterName("setFloatingPointFormat:left:right:")
-	_nSCellSelSetMnemonicLocation = objc.RegisterName("setMnemonicLocation:")
-	_nSCellSelMnemonicLocation = objc.RegisterName("mnemonicLocation")
-	_nSCellSelMnemonic = objc.RegisterName("mnemonic")
-	_nSCellSelSetTitleWithMnemonic = objc.RegisterName("setTitleWithMnemonic:")
-	_nSCellSelControlTint = objc.RegisterName("controlTint")
-	_nSCellSelSetControlTint = objc.RegisterName("setControlTint:")
+	_nSCellSelEndEditing                                     = objc.RegisterName("endEditing:")
+	_nSCellSelResetCursorRectInView                          = objc.RegisterName("resetCursorRect:inView:")
+	_nSCellSelMenuForEventInRectOfView                       = objc.RegisterName("menuForEvent:inRect:ofView:")
+	_nSCellSelFieldEditorForView                             = objc.RegisterName("fieldEditorForView:")
+	_nSCellSelDraggingImageComponentsWithFrameInView         = objc.RegisterName("draggingImageComponentsWithFrame:inView:")
+	_nSCellSelPrefersTrackingUntilMouseUp                    = objc.RegisterName("prefersTrackingUntilMouseUp")
+	_nSCellSelControlView                                    = objc.RegisterName("controlView")
+	_nSCellSelSetControlView                                 = objc.RegisterName("setControlView:")
+	_nSCellSelType                                           = objc.RegisterName("type")
+	_nSCellSelSetType                                        = objc.RegisterName("setType:")
+	_nSCellSelState                                          = objc.RegisterName("state")
+	_nSCellSelSetState                                       = objc.RegisterName("setState:")
+	_nSCellSelTarget                                         = objc.RegisterName("target")
+	_nSCellSelSetTarget                                      = objc.RegisterName("setTarget:")
+	_nSCellSelAction                                         = objc.RegisterName("action")
+	_nSCellSelSetAction                                      = objc.RegisterName("setAction:")
+	_nSCellSelTag                                            = objc.RegisterName("tag")
+	_nSCellSelSetTag                                         = objc.RegisterName("setTag:")
+	_nSCellSelTitle                                          = objc.RegisterName("title")
+	_nSCellSelSetTitle                                       = objc.RegisterName("setTitle:")
+	_nSCellSelIsOpaque                                       = objc.RegisterName("isOpaque")
+	_nSCellSelIsEnabled                                      = objc.RegisterName("isEnabled")
+	_nSCellSelSetEnabled                                     = objc.RegisterName("setEnabled:")
+	_nSCellSelIsContinuous                                   = objc.RegisterName("isContinuous")
+	_nSCellSelSetContinuous                                  = objc.RegisterName("setContinuous:")
+	_nSCellSelIsEditable                                     = objc.RegisterName("isEditable")
+	_nSCellSelSetEditable                                    = objc.RegisterName("setEditable:")
+	_nSCellSelIsSelectable                                   = objc.RegisterName("isSelectable")
+	_nSCellSelSetSelectable                                  = objc.RegisterName("setSelectable:")
+	_nSCellSelIsBordered                                     = objc.RegisterName("isBordered")
+	_nSCellSelSetBordered                                    = objc.RegisterName("setBordered:")
+	_nSCellSelIsBezeled                                      = objc.RegisterName("isBezeled")
+	_nSCellSelSetBezeled                                     = objc.RegisterName("setBezeled:")
+	_nSCellSelIsScrollable                                   = objc.RegisterName("isScrollable")
+	_nSCellSelSetScrollable                                  = objc.RegisterName("setScrollable:")
+	_nSCellSelIsHighlighted                                  = objc.RegisterName("isHighlighted")
+	_nSCellSelSetHighlighted                                 = objc.RegisterName("setHighlighted:")
+	_nSCellSelAlignment                                      = objc.RegisterName("alignment")
+	_nSCellSelSetAlignment                                   = objc.RegisterName("setAlignment:")
+	_nSCellSelWraps                                          = objc.RegisterName("wraps")
+	_nSCellSelSetWraps                                       = objc.RegisterName("setWraps:")
+	_nSCellSelFont                                           = objc.RegisterName("font")
+	_nSCellSelSetFont                                        = objc.RegisterName("setFont:")
+	_nSCellSelKeyEquivalent                                  = objc.RegisterName("keyEquivalent")
+	_nSCellSelFormatter                                      = objc.RegisterName("formatter")
+	_nSCellSelSetFormatter                                   = objc.RegisterName("setFormatter:")
+	_nSCellSelObjectValue                                    = objc.RegisterName("objectValue")
+	_nSCellSelSetObjectValue                                 = objc.RegisterName("setObjectValue:")
+	_nSCellSelHasValidObjectValue                            = objc.RegisterName("hasValidObjectValue")
+	_nSCellSelStringValue                                    = objc.RegisterName("stringValue")
+	_nSCellSelSetStringValue                                 = objc.RegisterName("setStringValue:")
+	_nSCellSelIntValue                                       = objc.RegisterName("intValue")
+	_nSCellSelSetIntValue                                    = objc.RegisterName("setIntValue:")
+	_nSCellSelFloatValue                                     = objc.RegisterName("floatValue")
+	_nSCellSelSetFloatValue                                  = objc.RegisterName("setFloatValue:")
+	_nSCellSelDoubleValue                                    = objc.RegisterName("doubleValue")
+	_nSCellSelSetDoubleValue                                 = objc.RegisterName("setDoubleValue:")
+	_nSCellSelIntegerValue                                   = objc.RegisterName("integerValue")
+	_nSCellSelSetIntegerValue                                = objc.RegisterName("setIntegerValue:")
+	_nSCellSelImage                                          = objc.RegisterName("image")
+	_nSCellSelSetImage                                       = objc.RegisterName("setImage:")
+	_nSCellSelControlSize                                    = objc.RegisterName("controlSize")
+	_nSCellSelSetControlSize                                 = objc.RegisterName("setControlSize:")
+	_nSCellSelRepresentedObject                              = objc.RegisterName("representedObject")
+	_nSCellSelSetRepresentedObject                           = objc.RegisterName("setRepresentedObject:")
+	_nSCellSelCellSize                                       = objc.RegisterName("cellSize")
+	_nSCellSelMouseDownFlags                                 = objc.RegisterName("mouseDownFlags")
+	_nSCellSelMenu                                           = objc.RegisterName("menu")
+	_nSCellSelSetMenu                                        = objc.RegisterName("setMenu:")
+	_nSCellSelDefaultMenu                                    = objc.RegisterName("defaultMenu")
+	_nSCellSelSendsActionOnEndEditing                        = objc.RegisterName("sendsActionOnEndEditing")
+	_nSCellSelSetSendsActionOnEndEditing                     = objc.RegisterName("setSendsActionOnEndEditing:")
+	_nSCellSelBaseWritingDirection                           = objc.RegisterName("baseWritingDirection")
+	_nSCellSelSetBaseWritingDirection                        = objc.RegisterName("setBaseWritingDirection:")
+	_nSCellSelLineBreakMode                                  = objc.RegisterName("lineBreakMode")
+	_nSCellSelSetLineBreakMode                               = objc.RegisterName("setLineBreakMode:")
+	_nSCellSelAllowsUndo                                     = objc.RegisterName("allowsUndo")
+	_nSCellSelSetAllowsUndo                                  = objc.RegisterName("setAllowsUndo:")
+	_nSCellSelTruncatesLastVisibleLine                       = objc.RegisterName("truncatesLastVisibleLine")
+	_nSCellSelSetTruncatesLastVisibleLine                    = objc.RegisterName("setTruncatesLastVisibleLine:")
+	_nSCellSelUserInterfaceLayoutDirection                   = objc.RegisterName("userInterfaceLayoutDirection")
+	_nSCellSelSetUserInterfaceLayoutDirection                = objc.RegisterName("setUserInterfaceLayoutDirection:")
+	_nSCellSelUsesSingleLineMode                             = objc.RegisterName("usesSingleLineMode")
+	_nSCellSelSetUsesSingleLineMode                          = objc.RegisterName("setUsesSingleLineMode:")
+	_nSCellSelPerformClick                                   = objc.RegisterName("performClick:")
+	_nSCellSelDrawFocusRingMaskWithFrameInView               = objc.RegisterName("drawFocusRingMaskWithFrame:inView:")
+	_nSCellSelFocusRingMaskBoundsForFrameInView              = objc.RegisterName("focusRingMaskBoundsForFrame:inView:")
+	_nSCellSelRefusesFirstResponder                          = objc.RegisterName("refusesFirstResponder")
+	_nSCellSelSetRefusesFirstResponder                       = objc.RegisterName("setRefusesFirstResponder:")
+	_nSCellSelAcceptsFirstResponder                          = objc.RegisterName("acceptsFirstResponder")
+	_nSCellSelShowsFirstResponder                            = objc.RegisterName("showsFirstResponder")
+	_nSCellSelSetShowsFirstResponder                         = objc.RegisterName("setShowsFirstResponder:")
+	_nSCellSelFocusRingType                                  = objc.RegisterName("focusRingType")
+	_nSCellSelSetFocusRingType                               = objc.RegisterName("setFocusRingType:")
+	_nSCellSelDefaultFocusRingType                           = objc.RegisterName("defaultFocusRingType")
+	_nSCellSelWantsNotificationForMarkedText                 = objc.RegisterName("wantsNotificationForMarkedText")
+	_nSCellSelAttributedStringValue                          = objc.RegisterName("attributedStringValue")
+	_nSCellSelSetAttributedStringValue                       = objc.RegisterName("setAttributedStringValue:")
+	_nSCellSelAllowsEditingTextAttributes                    = objc.RegisterName("allowsEditingTextAttributes")
+	_nSCellSelSetAllowsEditingTextAttributes                 = objc.RegisterName("setAllowsEditingTextAttributes:")
+	_nSCellSelImportsGraphics                                = objc.RegisterName("importsGraphics")
+	_nSCellSelSetImportsGraphics                             = objc.RegisterName("setImportsGraphics:")
+	_nSCellSelSetNextState                                   = objc.RegisterName("setNextState")
+	_nSCellSelAllowsMixedState                               = objc.RegisterName("allowsMixedState")
+	_nSCellSelSetAllowsMixedState                            = objc.RegisterName("setAllowsMixedState:")
+	_nSCellSelNextState                                      = objc.RegisterName("nextState")
+	_nSCellSelHitTestForEventInRectOfView                    = objc.RegisterName("hitTestForEvent:inRect:ofView:")
+	_nSCellSelExpansionFrameWithFrameInView                  = objc.RegisterName("expansionFrameWithFrame:inView:")
+	_nSCellSelDrawWithExpansionFrameInView                   = objc.RegisterName("drawWithExpansionFrame:inView:")
+	_nSCellSelBackgroundStyle                                = objc.RegisterName("backgroundStyle")
+	_nSCellSelSetBackgroundStyle                             = objc.RegisterName("setBackgroundStyle:")
+	_nSCellSelInteriorBackgroundStyle                        = objc.RegisterName("interiorBackgroundStyle")
+	_nSCellSelEntryType                                      = objc.RegisterName("entryType")
+	_nSCellSelSetEntryType                                   = objc.RegisterName("setEntryType:")
+	_nSCellSelIsEntryAcceptable                              = objc.RegisterName("isEntryAcceptable:")
+	_nSCellSelSetFloatingPointFormatLeftRight                = objc.RegisterName("setFloatingPointFormat:left:right:")
+	_nSCellSelSetMnemonicLocation                            = objc.RegisterName("setMnemonicLocation:")
+	_nSCellSelMnemonicLocation                               = objc.RegisterName("mnemonicLocation")
+	_nSCellSelMnemonic                                       = objc.RegisterName("mnemonic")
+	_nSCellSelSetTitleWithMnemonic                           = objc.RegisterName("setTitleWithMnemonic:")
+	_nSCellSelControlTint                                    = objc.RegisterName("controlTint")
+	_nSCellSelSetControlTint                                 = objc.RegisterName("setControlTint:")
 )
 
 func NSCellFromID(id objc.ID) *NSCell {
@@ -186,25 +186,33 @@ func NSCellFromID(id objc.ID) *NSCell {
 
 func (o *NSCell) Init() *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
 func (o *NSCell) InitTextCell(string_ *foundation.NSString) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
 func (o *NSCell) InitImageCell(image *NSImage) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInitImageCell, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
 func (o *NSCell) InitWithCoder(coder *foundation.NSCoder) *NSCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCellFromID(_ret)
 }
 
@@ -268,7 +276,9 @@ func (o *NSCell) DrawingRectForBounds(rect corefoundation.CGRect) corefoundation
 
 func NSCell_bulletStringForStringBulletCharacter(string_ *foundation.NSString, bulletChar uint16) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCell), _nSCellSel_bulletStringForStringBulletCharacter, string_.Ptr(), bulletChar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -279,7 +289,9 @@ func (o *NSCell) CellSizeForBounds(rect corefoundation.CGRect) corefoundation.CG
 
 func (o *NSCell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *NSView) *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelHighlightColorWithFrameInView, cellFrame, controlView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -289,7 +301,9 @@ func (o *NSCell) CalcDrawInfo(rect corefoundation.CGRect) {
 
 func (o *NSCell) SetUpFieldEditorAttributes(textObj *NSText) *NSText {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelSetUpFieldEditorAttributes, textObj.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFromID(_ret)
 }
 
@@ -346,19 +360,25 @@ func (o *NSCell) ResetCursorRectInView(cellFrame corefoundation.CGRect, controlV
 
 func (o *NSCell) MenuForEventInRectOfView(event *NSEvent, cellFrame corefoundation.CGRect, view *NSView) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelMenuForEventInRectOfView, event.Ptr(), cellFrame, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
 func (o *NSCell) FieldEditorForView(controlView *NSView) *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelFieldEditorForView, controlView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func (o *NSCell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *NSView) *foundation.NSArray[*NSDraggingImageComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelDraggingImageComponentsWithFrameInView, frame, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
 }
 
@@ -369,7 +389,9 @@ func NSCellPrefersTrackingUntilMouseUp() bool {
 
 func (o *NSCell) ControlView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelControlView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -424,7 +446,9 @@ func (o *NSCell) SetTag(tag int) {
 
 func (o *NSCell) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -529,7 +553,9 @@ func (o *NSCell) SetWraps(wraps bool) {
 
 func (o *NSCell) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -539,13 +565,17 @@ func (o *NSCell) SetFont(font *NSFont) {
 
 func (o *NSCell) KeyEquivalent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelKeyEquivalent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSCell) Formatter() *foundation.NSFormatter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelFormatter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFormatterFromID(_ret)
 }
 
@@ -569,7 +599,9 @@ func (o *NSCell) HasValidObjectValue() bool {
 
 func (o *NSCell) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -615,7 +647,9 @@ func (o *NSCell) SetIntegerValue(integerValue int) {
 
 func (o *NSCell) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -653,7 +687,9 @@ func (o *NSCell) MouseDownFlags() int {
 
 func (o *NSCell) Menu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -663,7 +699,9 @@ func (o *NSCell) SetMenu(menu *NSMenu) {
 
 func NSCellDefaultMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCell), _nSCellSelDefaultMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -787,7 +825,9 @@ func (o *NSCell) WantsNotificationForMarkedText() bool {
 
 func (o *NSCell) AttributedStringValue() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelAttributedStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -895,7 +935,9 @@ func (o *NSCell) MnemonicLocation() uint {
 // Deprecated: since macOS 10.8.
 func (o *NSCell) Mnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCellSelMnemonic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -914,4 +956,3 @@ func (o *NSCell) ControlTint() NSControlTint {
 func (o *NSCell) SetControlTint(controlTint NSControlTint) {
 	o.Ptr().Send(_nSCellSelSetControlTint, controlTint)
 }
-

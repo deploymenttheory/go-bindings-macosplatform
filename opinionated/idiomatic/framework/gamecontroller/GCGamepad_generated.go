@@ -140,7 +140,9 @@ func (x *Gamepad) RightShoulder() *ControllerButtonInput {
 
 func (x *Gamepad) asGamepad() *raw.GCGamepad { return x.inner }
 
-func (x *Gamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+func (x *Gamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCPhysicalInputProfile
+}
 
 // Gamepadable is the interface implemented by [Gamepad], for mocking and DI.
 type Gamepadable interface {
@@ -161,4 +163,3 @@ type Gamepadable interface {
 }
 
 var _ Gamepadable = (*Gamepad)(nil)
-

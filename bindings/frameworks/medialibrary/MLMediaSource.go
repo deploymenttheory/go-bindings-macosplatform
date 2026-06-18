@@ -16,15 +16,15 @@ type MLMediaSource struct {
 }
 
 var (
-	_clsMLMediaSource = _objcClass("MLMediaSource")
-	_mLMediaSourceSelMediaGroupForIdentifier = objc.RegisterName("mediaGroupForIdentifier:")
-	_mLMediaSourceSelMediaGroupsForIdentifiers = objc.RegisterName("mediaGroupsForIdentifiers:")
-	_mLMediaSourceSelMediaObjectForIdentifier = objc.RegisterName("mediaObjectForIdentifier:")
+	_clsMLMediaSource                           = _objcClass("MLMediaSource")
+	_mLMediaSourceSelMediaGroupForIdentifier    = objc.RegisterName("mediaGroupForIdentifier:")
+	_mLMediaSourceSelMediaGroupsForIdentifiers  = objc.RegisterName("mediaGroupsForIdentifiers:")
+	_mLMediaSourceSelMediaObjectForIdentifier   = objc.RegisterName("mediaObjectForIdentifier:")
 	_mLMediaSourceSelMediaObjectsForIdentifiers = objc.RegisterName("mediaObjectsForIdentifiers:")
-	_mLMediaSourceSelMediaLibrary = objc.RegisterName("mediaLibrary")
-	_mLMediaSourceSelMediaSourceIdentifier = objc.RegisterName("mediaSourceIdentifier")
-	_mLMediaSourceSelAttributes = objc.RegisterName("attributes")
-	_mLMediaSourceSelRootMediaGroup = objc.RegisterName("rootMediaGroup")
+	_mLMediaSourceSelMediaLibrary               = objc.RegisterName("mediaLibrary")
+	_mLMediaSourceSelMediaSourceIdentifier      = objc.RegisterName("mediaSourceIdentifier")
+	_mLMediaSourceSelAttributes                 = objc.RegisterName("attributes")
+	_mLMediaSourceSelRootMediaGroup             = objc.RegisterName("rootMediaGroup")
 )
 
 func MLMediaSourceFromID(id objc.ID) *MLMediaSource {
@@ -39,7 +39,9 @@ func MLMediaSourceFromID(id objc.ID) *MLMediaSource {
 
 func (o *MLMediaSource) MediaGroupForIdentifier(mediaGroupIdentifier *foundation.NSString) *MLMediaGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaGroupForIdentifier, mediaGroupIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaGroupFromID(_ret)
 }
 
@@ -50,7 +52,9 @@ func (o *MLMediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers *foundat
 
 func (o *MLMediaSource) MediaObjectForIdentifier(mediaObjectIdentifier *foundation.NSString) *MLMediaObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaObjectForIdentifier, mediaObjectIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaObjectFromID(_ret)
 }
 
@@ -61,13 +65,17 @@ func (o *MLMediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers *found
 
 func (o *MLMediaSource) MediaLibrary() *MLMediaLibrary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaLibrary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaLibraryFromID(_ret)
 }
 
 func (o *MLMediaSource) MediaSourceIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelMediaSourceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,7 +86,8 @@ func (o *MLMediaSource) Attributes() *foundation.NSDictionary[*foundation.NSStri
 
 func (o *MLMediaSource) RootMediaGroup() *MLMediaGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaSourceSelRootMediaGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaGroupFromID(_ret)
 }
-

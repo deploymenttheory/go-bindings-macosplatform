@@ -100,9 +100,13 @@ func (x *NNReduceFeatureChannelsMax) WithDestinationImageAllocator(destinationIm
 	return x
 }
 
-func (x *NNReduceFeatureChannelsMax) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsMax) asNNReduceUnary() *raw.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsMax) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceFeatureChannelsMaxable is the interface implemented by [NNReduceFeatureChannelsMax], for mocking and DI.
 type NNReduceFeatureChannelsMaxable interface {
@@ -119,4 +123,3 @@ type NNReduceFeatureChannelsMaxable interface {
 }
 
 var _ NNReduceFeatureChannelsMaxable = (*NNReduceFeatureChannelsMax)(nil)
-

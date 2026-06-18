@@ -48,4 +48,3 @@ type GeoJSONDecoderable interface {
 }
 
 var _ GeoJSONDecoderable = (*GeoJSONDecoder)(nil)
-

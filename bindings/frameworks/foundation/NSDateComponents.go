@@ -16,52 +16,52 @@ type NSDateComponents struct {
 }
 
 var (
-	_clsNSDateComponents = _objcClass("NSDateComponents")
-	_nSDateComponentsSelWeek = objc.RegisterName("week")
-	_nSDateComponentsSelSetWeek = objc.RegisterName("setWeek:")
-	_nSDateComponentsSelSetValueForComponent = objc.RegisterName("setValue:forComponent:")
-	_nSDateComponentsSelValueForComponent = objc.RegisterName("valueForComponent:")
+	_clsNSDateComponents                      = _objcClass("NSDateComponents")
+	_nSDateComponentsSelWeek                  = objc.RegisterName("week")
+	_nSDateComponentsSelSetWeek               = objc.RegisterName("setWeek:")
+	_nSDateComponentsSelSetValueForComponent  = objc.RegisterName("setValue:forComponent:")
+	_nSDateComponentsSelValueForComponent     = objc.RegisterName("valueForComponent:")
 	_nSDateComponentsSelIsValidDateInCalendar = objc.RegisterName("isValidDateInCalendar:")
-	_nSDateComponentsSelCalendar = objc.RegisterName("calendar")
-	_nSDateComponentsSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSDateComponentsSelTimeZone = objc.RegisterName("timeZone")
-	_nSDateComponentsSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSDateComponentsSelEra = objc.RegisterName("era")
-	_nSDateComponentsSelSetEra = objc.RegisterName("setEra:")
-	_nSDateComponentsSelYear = objc.RegisterName("year")
-	_nSDateComponentsSelSetYear = objc.RegisterName("setYear:")
-	_nSDateComponentsSelMonth = objc.RegisterName("month")
-	_nSDateComponentsSelSetMonth = objc.RegisterName("setMonth:")
-	_nSDateComponentsSelDay = objc.RegisterName("day")
-	_nSDateComponentsSelSetDay = objc.RegisterName("setDay:")
-	_nSDateComponentsSelHour = objc.RegisterName("hour")
-	_nSDateComponentsSelSetHour = objc.RegisterName("setHour:")
-	_nSDateComponentsSelMinute = objc.RegisterName("minute")
-	_nSDateComponentsSelSetMinute = objc.RegisterName("setMinute:")
-	_nSDateComponentsSelSecond = objc.RegisterName("second")
-	_nSDateComponentsSelSetSecond = objc.RegisterName("setSecond:")
-	_nSDateComponentsSelNanosecond = objc.RegisterName("nanosecond")
-	_nSDateComponentsSelSetNanosecond = objc.RegisterName("setNanosecond:")
-	_nSDateComponentsSelWeekday = objc.RegisterName("weekday")
-	_nSDateComponentsSelSetWeekday = objc.RegisterName("setWeekday:")
-	_nSDateComponentsSelWeekdayOrdinal = objc.RegisterName("weekdayOrdinal")
-	_nSDateComponentsSelSetWeekdayOrdinal = objc.RegisterName("setWeekdayOrdinal:")
-	_nSDateComponentsSelQuarter = objc.RegisterName("quarter")
-	_nSDateComponentsSelSetQuarter = objc.RegisterName("setQuarter:")
-	_nSDateComponentsSelWeekOfMonth = objc.RegisterName("weekOfMonth")
-	_nSDateComponentsSelSetWeekOfMonth = objc.RegisterName("setWeekOfMonth:")
-	_nSDateComponentsSelWeekOfYear = objc.RegisterName("weekOfYear")
-	_nSDateComponentsSelSetWeekOfYear = objc.RegisterName("setWeekOfYear:")
-	_nSDateComponentsSelYearForWeekOfYear = objc.RegisterName("yearForWeekOfYear")
-	_nSDateComponentsSelSetYearForWeekOfYear = objc.RegisterName("setYearForWeekOfYear:")
-	_nSDateComponentsSelDayOfYear = objc.RegisterName("dayOfYear")
-	_nSDateComponentsSelSetDayOfYear = objc.RegisterName("setDayOfYear:")
-	_nSDateComponentsSelIsLeapMonth = objc.RegisterName("isLeapMonth")
-	_nSDateComponentsSelSetLeapMonth = objc.RegisterName("setLeapMonth:")
-	_nSDateComponentsSelIsRepeatedDay = objc.RegisterName("isRepeatedDay")
-	_nSDateComponentsSelSetRepeatedDay = objc.RegisterName("setRepeatedDay:")
-	_nSDateComponentsSelDate = objc.RegisterName("date")
-	_nSDateComponentsSelIsValidDate = objc.RegisterName("isValidDate")
+	_nSDateComponentsSelCalendar              = objc.RegisterName("calendar")
+	_nSDateComponentsSelSetCalendar           = objc.RegisterName("setCalendar:")
+	_nSDateComponentsSelTimeZone              = objc.RegisterName("timeZone")
+	_nSDateComponentsSelSetTimeZone           = objc.RegisterName("setTimeZone:")
+	_nSDateComponentsSelEra                   = objc.RegisterName("era")
+	_nSDateComponentsSelSetEra                = objc.RegisterName("setEra:")
+	_nSDateComponentsSelYear                  = objc.RegisterName("year")
+	_nSDateComponentsSelSetYear               = objc.RegisterName("setYear:")
+	_nSDateComponentsSelMonth                 = objc.RegisterName("month")
+	_nSDateComponentsSelSetMonth              = objc.RegisterName("setMonth:")
+	_nSDateComponentsSelDay                   = objc.RegisterName("day")
+	_nSDateComponentsSelSetDay                = objc.RegisterName("setDay:")
+	_nSDateComponentsSelHour                  = objc.RegisterName("hour")
+	_nSDateComponentsSelSetHour               = objc.RegisterName("setHour:")
+	_nSDateComponentsSelMinute                = objc.RegisterName("minute")
+	_nSDateComponentsSelSetMinute             = objc.RegisterName("setMinute:")
+	_nSDateComponentsSelSecond                = objc.RegisterName("second")
+	_nSDateComponentsSelSetSecond             = objc.RegisterName("setSecond:")
+	_nSDateComponentsSelNanosecond            = objc.RegisterName("nanosecond")
+	_nSDateComponentsSelSetNanosecond         = objc.RegisterName("setNanosecond:")
+	_nSDateComponentsSelWeekday               = objc.RegisterName("weekday")
+	_nSDateComponentsSelSetWeekday            = objc.RegisterName("setWeekday:")
+	_nSDateComponentsSelWeekdayOrdinal        = objc.RegisterName("weekdayOrdinal")
+	_nSDateComponentsSelSetWeekdayOrdinal     = objc.RegisterName("setWeekdayOrdinal:")
+	_nSDateComponentsSelQuarter               = objc.RegisterName("quarter")
+	_nSDateComponentsSelSetQuarter            = objc.RegisterName("setQuarter:")
+	_nSDateComponentsSelWeekOfMonth           = objc.RegisterName("weekOfMonth")
+	_nSDateComponentsSelSetWeekOfMonth        = objc.RegisterName("setWeekOfMonth:")
+	_nSDateComponentsSelWeekOfYear            = objc.RegisterName("weekOfYear")
+	_nSDateComponentsSelSetWeekOfYear         = objc.RegisterName("setWeekOfYear:")
+	_nSDateComponentsSelYearForWeekOfYear     = objc.RegisterName("yearForWeekOfYear")
+	_nSDateComponentsSelSetYearForWeekOfYear  = objc.RegisterName("setYearForWeekOfYear:")
+	_nSDateComponentsSelDayOfYear             = objc.RegisterName("dayOfYear")
+	_nSDateComponentsSelSetDayOfYear          = objc.RegisterName("setDayOfYear:")
+	_nSDateComponentsSelIsLeapMonth           = objc.RegisterName("isLeapMonth")
+	_nSDateComponentsSelSetLeapMonth          = objc.RegisterName("setLeapMonth:")
+	_nSDateComponentsSelIsRepeatedDay         = objc.RegisterName("isRepeatedDay")
+	_nSDateComponentsSelSetRepeatedDay        = objc.RegisterName("setRepeatedDay:")
+	_nSDateComponentsSelDate                  = objc.RegisterName("date")
+	_nSDateComponentsSelIsValidDate           = objc.RegisterName("isValidDate")
 )
 
 func NSDateComponentsFromID(id objc.ID) *NSDateComponents {
@@ -101,7 +101,9 @@ func (o *NSDateComponents) IsValidDateInCalendar(calendar *NSCalendar) bool {
 
 func (o *NSDateComponents) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -111,7 +113,9 @@ func (o *NSDateComponents) SetCalendar(calendar *NSCalendar) {
 
 func (o *NSDateComponents) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -274,7 +278,9 @@ func (o *NSDateComponents) SetRepeatedDay(repeatedDay bool) {
 
 func (o *NSDateComponents) Date() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateComponentsSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -282,4 +288,3 @@ func (o *NSDateComponents) IsValidDate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSDateComponentsSelIsValidDate)
 	return _ret
 }
-

@@ -114,4 +114,3 @@ type SampleBufferVideoRendererable interface {
 }
 
 var _ SampleBufferVideoRendererable = (*SampleBufferVideoRenderer)(nil)
-

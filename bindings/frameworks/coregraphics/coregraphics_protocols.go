@@ -6,4 +6,3 @@ package coregraphics
 // MTLDevice wraps the ObjC protocol MTLDevice.
 type MTLDevice interface {
 }
-

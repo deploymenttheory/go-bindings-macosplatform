@@ -18,14 +18,14 @@ type SNAudioFileAnalyzer struct {
 }
 
 var (
-	_clsSNAudioFileAnalyzer = _objcClass("SNAudioFileAnalyzer")
-	_sNAudioFileAnalyzerSelInitWithURLError = objc.RegisterName("initWithURL:error:")
-	_sNAudioFileAnalyzerSelAddRequestWithObserverError = objc.RegisterName("addRequest:withObserver:error:")
-	_sNAudioFileAnalyzerSelRemoveRequest = objc.RegisterName("removeRequest:")
-	_sNAudioFileAnalyzerSelRemoveAllRequests = objc.RegisterName("removeAllRequests")
-	_sNAudioFileAnalyzerSelAnalyze = objc.RegisterName("analyze")
+	_clsSNAudioFileAnalyzer                             = _objcClass("SNAudioFileAnalyzer")
+	_sNAudioFileAnalyzerSelInitWithURLError             = objc.RegisterName("initWithURL:error:")
+	_sNAudioFileAnalyzerSelAddRequestWithObserverError  = objc.RegisterName("addRequest:withObserver:error:")
+	_sNAudioFileAnalyzerSelRemoveRequest                = objc.RegisterName("removeRequest:")
+	_sNAudioFileAnalyzerSelRemoveAllRequests            = objc.RegisterName("removeAllRequests")
+	_sNAudioFileAnalyzerSelAnalyze                      = objc.RegisterName("analyze")
 	_sNAudioFileAnalyzerSelAnalyzeWithCompletionHandler = objc.RegisterName("analyzeWithCompletionHandler:")
-	_sNAudioFileAnalyzerSelCancelAnalysis = objc.RegisterName("cancelAnalysis")
+	_sNAudioFileAnalyzerSelCancelAnalysis               = objc.RegisterName("cancelAnalysis")
 )
 
 func SNAudioFileAnalyzerFromID(id objc.ID) *SNAudioFileAnalyzer {
@@ -42,7 +42,9 @@ func SNAudioFileAnalyzerFromID(id objc.ID) *SNAudioFileAnalyzer {
 func (o *SNAudioFileAnalyzer) InitWithURLError(url *foundation.NSURL) (*SNAudioFileAnalyzer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _sNAudioFileAnalyzerSelInitWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -90,4 +92,3 @@ func (o *SNAudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler fun
 func (o *SNAudioFileAnalyzer) CancelAnalysis() {
 	o.Ptr().Send(_sNAudioFileAnalyzerSelCancelAnalysis)
 }
-

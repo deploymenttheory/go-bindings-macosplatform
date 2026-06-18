@@ -51,7 +51,9 @@ func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStorePr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -80,7 +82,9 @@ func (x *AsynchronousFetchRequest) SetEstimatedResultCount(estimatedResultCount 
 	x.inner.SetEstimatedResultCount(estimatedResultCount)
 }
 
-func (x *AsynchronousFetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *AsynchronousFetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // AsynchronousFetchRequestable is the interface implemented by [AsynchronousFetchRequest], for mocking and DI.
 type AsynchronousFetchRequestable interface {
@@ -94,4 +98,3 @@ type AsynchronousFetchRequestable interface {
 }
 
 var _ AsynchronousFetchRequestable = (*AsynchronousFetchRequest)(nil)
-

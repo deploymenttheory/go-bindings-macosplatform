@@ -61,4 +61,3 @@ type Pedometerable interface {
 }
 
 var _ Pedometerable = (*Pedometer)(nil)
-

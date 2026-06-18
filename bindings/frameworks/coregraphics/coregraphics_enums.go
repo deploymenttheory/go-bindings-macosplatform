@@ -11,34 +11,58 @@ import (
 type CGBitmapInfo int64
 
 const (
-	KCGBitmapAlphaInfoMask CGBitmapInfo = 31
-	KCGBitmapComponentInfoMask CGBitmapInfo = 3840
-	KCGBitmapByteOrderInfoMask CGBitmapInfo = 28672
+	KCGBitmapAlphaInfoMask       CGBitmapInfo = 31
+	KCGBitmapComponentInfoMask   CGBitmapInfo = 3840
+	KCGBitmapByteOrderInfoMask   CGBitmapInfo = 28672
 	KCGBitmapPixelFormatInfoMask CGBitmapInfo = 983040
-	KCGBitmapFloatInfoMask CGBitmapInfo = 3840
-	KCGBitmapByteOrderMask CGBitmapInfo = 28672
-	KCGBitmapFloatComponents CGBitmapInfo = 256
-	KCGBitmapByteOrderDefault CGBitmapInfo = 0
-	KCGBitmapByteOrder16Little CGBitmapInfo = 4096
-	KCGBitmapByteOrder32Little CGBitmapInfo = 8192
-	KCGBitmapByteOrder16Big CGBitmapInfo = 12288
-	KCGBitmapByteOrder32Big CGBitmapInfo = 16384
+	KCGBitmapFloatInfoMask       CGBitmapInfo = 3840
+	KCGBitmapByteOrderMask       CGBitmapInfo = 28672
+	KCGBitmapFloatComponents     CGBitmapInfo = 256
+	KCGBitmapByteOrderDefault    CGBitmapInfo = 0
+	KCGBitmapByteOrder16Little   CGBitmapInfo = 4096
+	KCGBitmapByteOrder32Little   CGBitmapInfo = 8192
+	KCGBitmapByteOrder16Big      CGBitmapInfo = 12288
+	KCGBitmapByteOrder32Big      CGBitmapInfo = 16384
 )
 
 func (e CGBitmapInfo) String() string {
 	var parts []string
-	if e&KCGBitmapAlphaInfoMask != 0 { parts = append(parts, "KCGBitmapAlphaInfoMask") }
-	if e&KCGBitmapComponentInfoMask != 0 { parts = append(parts, "KCGBitmapComponentInfoMask") }
-	if e&KCGBitmapByteOrderInfoMask != 0 { parts = append(parts, "KCGBitmapByteOrderInfoMask") }
-	if e&KCGBitmapPixelFormatInfoMask != 0 { parts = append(parts, "KCGBitmapPixelFormatInfoMask") }
-	if e&KCGBitmapFloatInfoMask != 0 { parts = append(parts, "KCGBitmapFloatInfoMask") }
-	if e&KCGBitmapByteOrderMask != 0 { parts = append(parts, "KCGBitmapByteOrderMask") }
-	if e&KCGBitmapFloatComponents != 0 { parts = append(parts, "KCGBitmapFloatComponents") }
-	if e&KCGBitmapByteOrder16Little != 0 { parts = append(parts, "KCGBitmapByteOrder16Little") }
-	if e&KCGBitmapByteOrder32Little != 0 { parts = append(parts, "KCGBitmapByteOrder32Little") }
-	if e&KCGBitmapByteOrder16Big != 0 { parts = append(parts, "KCGBitmapByteOrder16Big") }
-	if e&KCGBitmapByteOrder32Big != 0 { parts = append(parts, "KCGBitmapByteOrder32Big") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGBitmapAlphaInfoMask != 0 {
+		parts = append(parts, "KCGBitmapAlphaInfoMask")
+	}
+	if e&KCGBitmapComponentInfoMask != 0 {
+		parts = append(parts, "KCGBitmapComponentInfoMask")
+	}
+	if e&KCGBitmapByteOrderInfoMask != 0 {
+		parts = append(parts, "KCGBitmapByteOrderInfoMask")
+	}
+	if e&KCGBitmapPixelFormatInfoMask != 0 {
+		parts = append(parts, "KCGBitmapPixelFormatInfoMask")
+	}
+	if e&KCGBitmapFloatInfoMask != 0 {
+		parts = append(parts, "KCGBitmapFloatInfoMask")
+	}
+	if e&KCGBitmapByteOrderMask != 0 {
+		parts = append(parts, "KCGBitmapByteOrderMask")
+	}
+	if e&KCGBitmapFloatComponents != 0 {
+		parts = append(parts, "KCGBitmapFloatComponents")
+	}
+	if e&KCGBitmapByteOrder16Little != 0 {
+		parts = append(parts, "KCGBitmapByteOrder16Little")
+	}
+	if e&KCGBitmapByteOrder32Little != 0 {
+		parts = append(parts, "KCGBitmapByteOrder32Little")
+	}
+	if e&KCGBitmapByteOrder16Big != 0 {
+		parts = append(parts, "KCGBitmapByteOrder16Big")
+	}
+	if e&KCGBitmapByteOrder32Big != 0 {
+		parts = append(parts, "KCGBitmapByteOrder32Big")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -46,17 +70,17 @@ type CGBitmapLayout int64
 
 const (
 	KCGBitmapLayoutAlphaOnly CGBitmapLayout = 0
-	KCGBitmapLayoutGray CGBitmapLayout = 1
+	KCGBitmapLayoutGray      CGBitmapLayout = 1
 	KCGBitmapLayoutGrayAlpha CGBitmapLayout = 2
-	KCGBitmapLayoutRGBA CGBitmapLayout = 3
-	KCGBitmapLayoutARGB CGBitmapLayout = 4
-	KCGBitmapLayoutRGBX CGBitmapLayout = 5
-	KCGBitmapLayoutXRGB CGBitmapLayout = 6
-	KCGBitmapLayoutBGRA CGBitmapLayout = 7
-	KCGBitmapLayoutBGRX CGBitmapLayout = 8
-	KCGBitmapLayoutABGR CGBitmapLayout = 9
-	KCGBitmapLayoutXBGR CGBitmapLayout = 10
-	KCGBitmapLayoutCMYK CGBitmapLayout = 11
+	KCGBitmapLayoutRGBA      CGBitmapLayout = 3
+	KCGBitmapLayoutARGB      CGBitmapLayout = 4
+	KCGBitmapLayoutRGBX      CGBitmapLayout = 5
+	KCGBitmapLayoutXRGB      CGBitmapLayout = 6
+	KCGBitmapLayoutBGRA      CGBitmapLayout = 7
+	KCGBitmapLayoutBGRX      CGBitmapLayout = 8
+	KCGBitmapLayoutABGR      CGBitmapLayout = 9
+	KCGBitmapLayoutXBGR      CGBitmapLayout = 10
+	KCGBitmapLayoutCMYK      CGBitmapLayout = 11
 )
 
 func (e CGBitmapLayout) String() string {
@@ -93,34 +117,34 @@ func (e CGBitmapLayout) String() string {
 type CGBlendMode int64
 
 const (
-	KCGBlendModeNormal CGBlendMode = 0
-	KCGBlendModeMultiply CGBlendMode = 1
-	KCGBlendModeScreen CGBlendMode = 2
-	KCGBlendModeOverlay CGBlendMode = 3
-	KCGBlendModeDarken CGBlendMode = 4
-	KCGBlendModeLighten CGBlendMode = 5
-	KCGBlendModeColorDodge CGBlendMode = 6
-	KCGBlendModeColorBurn CGBlendMode = 7
-	KCGBlendModeSoftLight CGBlendMode = 8
-	KCGBlendModeHardLight CGBlendMode = 9
-	KCGBlendModeDifference CGBlendMode = 10
-	KCGBlendModeExclusion CGBlendMode = 11
-	KCGBlendModeHue CGBlendMode = 12
-	KCGBlendModeSaturation CGBlendMode = 13
-	KCGBlendModeColor CGBlendMode = 14
-	KCGBlendModeLuminosity CGBlendMode = 15
-	KCGBlendModeClear CGBlendMode = 16
-	KCGBlendModeCopy CGBlendMode = 17
-	KCGBlendModeSourceIn CGBlendMode = 18
-	KCGBlendModeSourceOut CGBlendMode = 19
-	KCGBlendModeSourceAtop CGBlendMode = 20
+	KCGBlendModeNormal          CGBlendMode = 0
+	KCGBlendModeMultiply        CGBlendMode = 1
+	KCGBlendModeScreen          CGBlendMode = 2
+	KCGBlendModeOverlay         CGBlendMode = 3
+	KCGBlendModeDarken          CGBlendMode = 4
+	KCGBlendModeLighten         CGBlendMode = 5
+	KCGBlendModeColorDodge      CGBlendMode = 6
+	KCGBlendModeColorBurn       CGBlendMode = 7
+	KCGBlendModeSoftLight       CGBlendMode = 8
+	KCGBlendModeHardLight       CGBlendMode = 9
+	KCGBlendModeDifference      CGBlendMode = 10
+	KCGBlendModeExclusion       CGBlendMode = 11
+	KCGBlendModeHue             CGBlendMode = 12
+	KCGBlendModeSaturation      CGBlendMode = 13
+	KCGBlendModeColor           CGBlendMode = 14
+	KCGBlendModeLuminosity      CGBlendMode = 15
+	KCGBlendModeClear           CGBlendMode = 16
+	KCGBlendModeCopy            CGBlendMode = 17
+	KCGBlendModeSourceIn        CGBlendMode = 18
+	KCGBlendModeSourceOut       CGBlendMode = 19
+	KCGBlendModeSourceAtop      CGBlendMode = 20
 	KCGBlendModeDestinationOver CGBlendMode = 21
-	KCGBlendModeDestinationIn CGBlendMode = 22
-	KCGBlendModeDestinationOut CGBlendMode = 23
+	KCGBlendModeDestinationIn   CGBlendMode = 22
+	KCGBlendModeDestinationOut  CGBlendMode = 23
 	KCGBlendModeDestinationAtop CGBlendMode = 24
-	KCGBlendModeXOR CGBlendMode = 25
-	KCGBlendModePlusDarker CGBlendMode = 26
-	KCGBlendModePlusLighter CGBlendMode = 27
+	KCGBlendModeXOR             CGBlendMode = 25
+	KCGBlendModePlusDarker      CGBlendMode = 26
+	KCGBlendModePlusLighter     CGBlendMode = 27
 )
 
 func (e CGBlendMode) String() string {
@@ -190,21 +214,25 @@ type CGCaptureOptions int64
 
 const (
 	KCGCaptureNoOptions CGCaptureOptions = 0
-	KCGCaptureNoFill CGCaptureOptions = 1
+	KCGCaptureNoFill    CGCaptureOptions = 1
 )
 
 func (e CGCaptureOptions) String() string {
 	var parts []string
-	if e&KCGCaptureNoFill != 0 { parts = append(parts, "KCGCaptureNoFill") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGCaptureNoFill != 0 {
+		parts = append(parts, "KCGCaptureNoFill")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGColorConversionInfoTransformType int64
 
 const (
-	KCGColorConversionTransformFromSpace CGColorConversionInfoTransformType = 0
-	KCGColorConversionTransformToSpace CGColorConversionInfoTransformType = 1
+	KCGColorConversionTransformFromSpace  CGColorConversionInfoTransformType = 0
+	KCGColorConversionTransformToSpace    CGColorConversionInfoTransformType = 1
 	KCGColorConversionTransformApplySpace CGColorConversionInfoTransformType = 2
 )
 
@@ -225,32 +253,44 @@ type CGColorModel int64
 
 const (
 	KCGColorModelNoColorant CGColorModel = 0
-	KCGColorModelGray CGColorModel = 1
-	KCGColorModelRGB CGColorModel = 2
-	KCGColorModelCMYK CGColorModel = 4
-	KCGColorModelLab CGColorModel = 8
-	KCGColorModelDeviceN CGColorModel = 16
+	KCGColorModelGray       CGColorModel = 1
+	KCGColorModelRGB        CGColorModel = 2
+	KCGColorModelCMYK       CGColorModel = 4
+	KCGColorModelLab        CGColorModel = 8
+	KCGColorModelDeviceN    CGColorModel = 16
 )
 
 func (e CGColorModel) String() string {
 	var parts []string
-	if e&KCGColorModelGray != 0 { parts = append(parts, "KCGColorModelGray") }
-	if e&KCGColorModelRGB != 0 { parts = append(parts, "KCGColorModelRGB") }
-	if e&KCGColorModelCMYK != 0 { parts = append(parts, "KCGColorModelCMYK") }
-	if e&KCGColorModelLab != 0 { parts = append(parts, "KCGColorModelLab") }
-	if e&KCGColorModelDeviceN != 0 { parts = append(parts, "KCGColorModelDeviceN") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGColorModelGray != 0 {
+		parts = append(parts, "KCGColorModelGray")
+	}
+	if e&KCGColorModelRGB != 0 {
+		parts = append(parts, "KCGColorModelRGB")
+	}
+	if e&KCGColorModelCMYK != 0 {
+		parts = append(parts, "KCGColorModelCMYK")
+	}
+	if e&KCGColorModelLab != 0 {
+		parts = append(parts, "KCGColorModelLab")
+	}
+	if e&KCGColorModelDeviceN != 0 {
+		parts = append(parts, "KCGColorModelDeviceN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGColorRenderingIntent int64
 
 const (
-	KCGRenderingIntentDefault CGColorRenderingIntent = 0
+	KCGRenderingIntentDefault              CGColorRenderingIntent = 0
 	KCGRenderingIntentAbsoluteColorimetric CGColorRenderingIntent = 1
 	KCGRenderingIntentRelativeColorimetric CGColorRenderingIntent = 2
-	KCGRenderingIntentPerceptual CGColorRenderingIntent = 3
-	KCGRenderingIntentSaturation CGColorRenderingIntent = 4
+	KCGRenderingIntentPerceptual           CGColorRenderingIntent = 3
+	KCGRenderingIntentSaturation           CGColorRenderingIntent = 4
 )
 
 func (e CGColorRenderingIntent) String() string {
@@ -273,15 +313,15 @@ func (e CGColorRenderingIntent) String() string {
 type CGColorSpaceModel int64
 
 const (
-	KCGColorSpaceModelUnknown CGColorSpaceModel = -1
+	KCGColorSpaceModelUnknown    CGColorSpaceModel = -1
 	KCGColorSpaceModelMonochrome CGColorSpaceModel = 0
-	KCGColorSpaceModelRGB CGColorSpaceModel = 1
-	KCGColorSpaceModelCMYK CGColorSpaceModel = 2
-	KCGColorSpaceModelLab CGColorSpaceModel = 3
-	KCGColorSpaceModelDeviceN CGColorSpaceModel = 4
-	KCGColorSpaceModelIndexed CGColorSpaceModel = 5
-	KCGColorSpaceModelPattern CGColorSpaceModel = 6
-	KCGColorSpaceModelXYZ CGColorSpaceModel = 7
+	KCGColorSpaceModelRGB        CGColorSpaceModel = 1
+	KCGColorSpaceModelCMYK       CGColorSpaceModel = 2
+	KCGColorSpaceModelLab        CGColorSpaceModel = 3
+	KCGColorSpaceModelDeviceN    CGColorSpaceModel = 4
+	KCGColorSpaceModelIndexed    CGColorSpaceModel = 5
+	KCGColorSpaceModelPattern    CGColorSpaceModel = 6
+	KCGColorSpaceModelXYZ        CGColorSpaceModel = 7
 )
 
 func (e CGColorSpaceModel) String() string {
@@ -312,13 +352,13 @@ func (e CGColorSpaceModel) String() string {
 type CGComponent int64
 
 const (
-	KCGComponentUnknown CGComponent = 0
-	KCGComponentInteger8Bit CGComponent = 1
+	KCGComponentUnknown      CGComponent = 0
+	KCGComponentInteger8Bit  CGComponent = 1
 	KCGComponentInteger10Bit CGComponent = 6
 	KCGComponentInteger16Bit CGComponent = 2
 	KCGComponentInteger32Bit CGComponent = 3
-	KCGComponentFloat16Bit CGComponent = 5
-	KCGComponentFloat32Bit CGComponent = 4
+	KCGComponentFloat16Bit   CGComponent = 5
+	KCGComponentFloat32Bit   CGComponent = 4
 )
 
 func (e CGComponent) String() string {
@@ -345,49 +385,79 @@ func (e CGComponent) String() string {
 type CGConfigureOption int64
 
 const (
-	KCGConfigureForAppOnly CGConfigureOption = 0
-	KCGConfigureForSession CGConfigureOption = 1
+	KCGConfigureForAppOnly  CGConfigureOption = 0
+	KCGConfigureForSession  CGConfigureOption = 1
 	KCGConfigurePermanently CGConfigureOption = 2
 )
 
 func (e CGConfigureOption) String() string {
 	var parts []string
-	if e&KCGConfigureForSession != 0 { parts = append(parts, "KCGConfigureForSession") }
-	if e&KCGConfigurePermanently != 0 { parts = append(parts, "KCGConfigurePermanently") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGConfigureForSession != 0 {
+		parts = append(parts, "KCGConfigureForSession")
+	}
+	if e&KCGConfigurePermanently != 0 {
+		parts = append(parts, "KCGConfigurePermanently")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGDisplayChangeSummaryFlags int64
 
 const (
-	KCGDisplayBeginConfigurationFlag CGDisplayChangeSummaryFlags = 1
-	KCGDisplayMovedFlag CGDisplayChangeSummaryFlags = 2
-	KCGDisplaySetMainFlag CGDisplayChangeSummaryFlags = 4
-	KCGDisplaySetModeFlag CGDisplayChangeSummaryFlags = 8
-	KCGDisplayAddFlag CGDisplayChangeSummaryFlags = 16
-	KCGDisplayRemoveFlag CGDisplayChangeSummaryFlags = 32
-	KCGDisplayEnabledFlag CGDisplayChangeSummaryFlags = 256
-	KCGDisplayDisabledFlag CGDisplayChangeSummaryFlags = 512
-	KCGDisplayMirrorFlag CGDisplayChangeSummaryFlags = 1024
-	KCGDisplayUnMirrorFlag CGDisplayChangeSummaryFlags = 2048
+	KCGDisplayBeginConfigurationFlag  CGDisplayChangeSummaryFlags = 1
+	KCGDisplayMovedFlag               CGDisplayChangeSummaryFlags = 2
+	KCGDisplaySetMainFlag             CGDisplayChangeSummaryFlags = 4
+	KCGDisplaySetModeFlag             CGDisplayChangeSummaryFlags = 8
+	KCGDisplayAddFlag                 CGDisplayChangeSummaryFlags = 16
+	KCGDisplayRemoveFlag              CGDisplayChangeSummaryFlags = 32
+	KCGDisplayEnabledFlag             CGDisplayChangeSummaryFlags = 256
+	KCGDisplayDisabledFlag            CGDisplayChangeSummaryFlags = 512
+	KCGDisplayMirrorFlag              CGDisplayChangeSummaryFlags = 1024
+	KCGDisplayUnMirrorFlag            CGDisplayChangeSummaryFlags = 2048
 	KCGDisplayDesktopShapeChangedFlag CGDisplayChangeSummaryFlags = 4096
 )
 
 func (e CGDisplayChangeSummaryFlags) String() string {
 	var parts []string
-	if e&KCGDisplayBeginConfigurationFlag != 0 { parts = append(parts, "KCGDisplayBeginConfigurationFlag") }
-	if e&KCGDisplayMovedFlag != 0 { parts = append(parts, "KCGDisplayMovedFlag") }
-	if e&KCGDisplaySetMainFlag != 0 { parts = append(parts, "KCGDisplaySetMainFlag") }
-	if e&KCGDisplaySetModeFlag != 0 { parts = append(parts, "KCGDisplaySetModeFlag") }
-	if e&KCGDisplayAddFlag != 0 { parts = append(parts, "KCGDisplayAddFlag") }
-	if e&KCGDisplayRemoveFlag != 0 { parts = append(parts, "KCGDisplayRemoveFlag") }
-	if e&KCGDisplayEnabledFlag != 0 { parts = append(parts, "KCGDisplayEnabledFlag") }
-	if e&KCGDisplayDisabledFlag != 0 { parts = append(parts, "KCGDisplayDisabledFlag") }
-	if e&KCGDisplayMirrorFlag != 0 { parts = append(parts, "KCGDisplayMirrorFlag") }
-	if e&KCGDisplayUnMirrorFlag != 0 { parts = append(parts, "KCGDisplayUnMirrorFlag") }
-	if e&KCGDisplayDesktopShapeChangedFlag != 0 { parts = append(parts, "KCGDisplayDesktopShapeChangedFlag") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGDisplayBeginConfigurationFlag != 0 {
+		parts = append(parts, "KCGDisplayBeginConfigurationFlag")
+	}
+	if e&KCGDisplayMovedFlag != 0 {
+		parts = append(parts, "KCGDisplayMovedFlag")
+	}
+	if e&KCGDisplaySetMainFlag != 0 {
+		parts = append(parts, "KCGDisplaySetMainFlag")
+	}
+	if e&KCGDisplaySetModeFlag != 0 {
+		parts = append(parts, "KCGDisplaySetModeFlag")
+	}
+	if e&KCGDisplayAddFlag != 0 {
+		parts = append(parts, "KCGDisplayAddFlag")
+	}
+	if e&KCGDisplayRemoveFlag != 0 {
+		parts = append(parts, "KCGDisplayRemoveFlag")
+	}
+	if e&KCGDisplayEnabledFlag != 0 {
+		parts = append(parts, "KCGDisplayEnabledFlag")
+	}
+	if e&KCGDisplayDisabledFlag != 0 {
+		parts = append(parts, "KCGDisplayDisabledFlag")
+	}
+	if e&KCGDisplayMirrorFlag != 0 {
+		parts = append(parts, "KCGDisplayMirrorFlag")
+	}
+	if e&KCGDisplayUnMirrorFlag != 0 {
+		parts = append(parts, "KCGDisplayUnMirrorFlag")
+	}
+	if e&KCGDisplayDesktopShapeChangedFlag != 0 {
+		parts = append(parts, "KCGDisplayDesktopShapeChangedFlag")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -395,9 +465,9 @@ type CGDisplayStreamFrameStatus int64
 
 const (
 	KCGDisplayStreamFrameStatusFrameComplete CGDisplayStreamFrameStatus = 0
-	KCGDisplayStreamFrameStatusFrameIdle CGDisplayStreamFrameStatus = 1
-	KCGDisplayStreamFrameStatusFrameBlank CGDisplayStreamFrameStatus = 2
-	KCGDisplayStreamFrameStatusStopped CGDisplayStreamFrameStatus = 3
+	KCGDisplayStreamFrameStatusFrameIdle     CGDisplayStreamFrameStatus = 1
+	KCGDisplayStreamFrameStatusFrameBlank    CGDisplayStreamFrameStatus = 2
+	KCGDisplayStreamFrameStatusStopped       CGDisplayStreamFrameStatus = 3
 )
 
 func (e CGDisplayStreamFrameStatus) String() string {
@@ -418,9 +488,9 @@ func (e CGDisplayStreamFrameStatus) String() string {
 type CGDisplayStreamUpdateRectType int64
 
 const (
-	KCGDisplayStreamUpdateRefreshedRects CGDisplayStreamUpdateRectType = 0
-	KCGDisplayStreamUpdateMovedRects CGDisplayStreamUpdateRectType = 1
-	KCGDisplayStreamUpdateDirtyRects CGDisplayStreamUpdateRectType = 2
+	KCGDisplayStreamUpdateRefreshedRects    CGDisplayStreamUpdateRectType = 0
+	KCGDisplayStreamUpdateMovedRects        CGDisplayStreamUpdateRectType = 1
+	KCGDisplayStreamUpdateDirtyRects        CGDisplayStreamUpdateRectType = 2
 	KCGDisplayStreamUpdateReducedDirtyRects CGDisplayStreamUpdateRectType = 3
 )
 
@@ -442,17 +512,17 @@ func (e CGDisplayStreamUpdateRectType) String() string {
 type CGError int64
 
 const (
-	KCGErrorSuccess CGError = 0
-	KCGErrorFailure CGError = 1000
-	KCGErrorIllegalArgument CGError = 1001
+	KCGErrorSuccess           CGError = 0
+	KCGErrorFailure           CGError = 1000
+	KCGErrorIllegalArgument   CGError = 1001
 	KCGErrorInvalidConnection CGError = 1002
-	KCGErrorInvalidContext CGError = 1003
-	KCGErrorCannotComplete CGError = 1004
-	KCGErrorNotImplemented CGError = 1006
-	KCGErrorRangeCheck CGError = 1007
-	KCGErrorTypeCheck CGError = 1008
-	KCGErrorInvalidOperation CGError = 1010
-	KCGErrorNoneAvailable CGError = 1011
+	KCGErrorInvalidContext    CGError = 1003
+	KCGErrorCannotComplete    CGError = 1004
+	KCGErrorNotImplemented    CGError = 1006
+	KCGErrorRangeCheck        CGError = 1007
+	KCGErrorTypeCheck         CGError = 1008
+	KCGErrorInvalidOperation  CGError = 1010
+	KCGErrorNoneAvailable     CGError = 1011
 )
 
 func (e CGError) String() string {
@@ -487,71 +557,71 @@ func (e CGError) String() string {
 type CGEventField int64
 
 const (
-	KCGMouseEventNumber CGEventField = 0
-	KCGMouseEventClickState CGEventField = 1
-	KCGMouseEventPressure CGEventField = 2
-	KCGMouseEventButtonNumber CGEventField = 3
-	KCGMouseEventDeltaX CGEventField = 4
-	KCGMouseEventDeltaY CGEventField = 5
-	KCGMouseEventInstantMouser CGEventField = 6
-	KCGMouseEventSubtype CGEventField = 7
-	KCGKeyboardEventAutorepeat CGEventField = 8
-	KCGKeyboardEventKeycode CGEventField = 9
-	KCGKeyboardEventKeyboardType CGEventField = 10
-	KCGScrollWheelEventDeltaAxis1 CGEventField = 11
-	KCGScrollWheelEventDeltaAxis2 CGEventField = 12
-	KCGScrollWheelEventDeltaAxis3 CGEventField = 13
-	KCGScrollWheelEventFixedPtDeltaAxis1 CGEventField = 93
-	KCGScrollWheelEventFixedPtDeltaAxis2 CGEventField = 94
-	KCGScrollWheelEventFixedPtDeltaAxis3 CGEventField = 95
-	KCGScrollWheelEventPointDeltaAxis1 CGEventField = 96
-	KCGScrollWheelEventPointDeltaAxis2 CGEventField = 97
-	KCGScrollWheelEventPointDeltaAxis3 CGEventField = 98
-	KCGScrollWheelEventScrollPhase CGEventField = 99
-	KCGScrollWheelEventScrollCount CGEventField = 100
-	KCGScrollWheelEventMomentumPhase CGEventField = 123
-	KCGScrollWheelEventInstantMouser CGEventField = 14
-	KCGTabletEventPointX CGEventField = 15
-	KCGTabletEventPointY CGEventField = 16
-	KCGTabletEventPointZ CGEventField = 17
-	KCGTabletEventPointButtons CGEventField = 18
-	KCGTabletEventPointPressure CGEventField = 19
-	KCGTabletEventTiltX CGEventField = 20
-	KCGTabletEventTiltY CGEventField = 21
-	KCGTabletEventRotation CGEventField = 22
-	KCGTabletEventTangentialPressure CGEventField = 23
-	KCGTabletEventDeviceID CGEventField = 24
-	KCGTabletEventVendor1 CGEventField = 25
-	KCGTabletEventVendor2 CGEventField = 26
-	KCGTabletEventVendor3 CGEventField = 27
-	KCGTabletProximityEventVendorID CGEventField = 28
-	KCGTabletProximityEventTabletID CGEventField = 29
-	KCGTabletProximityEventPointerID CGEventField = 30
-	KCGTabletProximityEventDeviceID CGEventField = 31
-	KCGTabletProximityEventSystemTabletID CGEventField = 32
-	KCGTabletProximityEventVendorPointerType CGEventField = 33
-	KCGTabletProximityEventVendorPointerSerialNumber CGEventField = 34
-	KCGTabletProximityEventVendorUniqueID CGEventField = 35
-	KCGTabletProximityEventCapabilityMask CGEventField = 36
-	KCGTabletProximityEventPointerType CGEventField = 37
-	KCGTabletProximityEventEnterProximity CGEventField = 38
-	KCGEventTargetProcessSerialNumber CGEventField = 39
-	KCGEventTargetUnixProcessID CGEventField = 40
-	KCGEventSourceUnixProcessID CGEventField = 41
-	KCGEventSourceUserData CGEventField = 42
-	KCGEventSourceUserID CGEventField = 43
-	KCGEventSourceGroupID CGEventField = 44
-	KCGEventSourceStateID CGEventField = 45
-	KCGScrollWheelEventIsContinuous CGEventField = 88
-	KCGMouseEventWindowUnderMousePointer CGEventField = 91
+	KCGMouseEventNumber                                        CGEventField = 0
+	KCGMouseEventClickState                                    CGEventField = 1
+	KCGMouseEventPressure                                      CGEventField = 2
+	KCGMouseEventButtonNumber                                  CGEventField = 3
+	KCGMouseEventDeltaX                                        CGEventField = 4
+	KCGMouseEventDeltaY                                        CGEventField = 5
+	KCGMouseEventInstantMouser                                 CGEventField = 6
+	KCGMouseEventSubtype                                       CGEventField = 7
+	KCGKeyboardEventAutorepeat                                 CGEventField = 8
+	KCGKeyboardEventKeycode                                    CGEventField = 9
+	KCGKeyboardEventKeyboardType                               CGEventField = 10
+	KCGScrollWheelEventDeltaAxis1                              CGEventField = 11
+	KCGScrollWheelEventDeltaAxis2                              CGEventField = 12
+	KCGScrollWheelEventDeltaAxis3                              CGEventField = 13
+	KCGScrollWheelEventFixedPtDeltaAxis1                       CGEventField = 93
+	KCGScrollWheelEventFixedPtDeltaAxis2                       CGEventField = 94
+	KCGScrollWheelEventFixedPtDeltaAxis3                       CGEventField = 95
+	KCGScrollWheelEventPointDeltaAxis1                         CGEventField = 96
+	KCGScrollWheelEventPointDeltaAxis2                         CGEventField = 97
+	KCGScrollWheelEventPointDeltaAxis3                         CGEventField = 98
+	KCGScrollWheelEventScrollPhase                             CGEventField = 99
+	KCGScrollWheelEventScrollCount                             CGEventField = 100
+	KCGScrollWheelEventMomentumPhase                           CGEventField = 123
+	KCGScrollWheelEventInstantMouser                           CGEventField = 14
+	KCGTabletEventPointX                                       CGEventField = 15
+	KCGTabletEventPointY                                       CGEventField = 16
+	KCGTabletEventPointZ                                       CGEventField = 17
+	KCGTabletEventPointButtons                                 CGEventField = 18
+	KCGTabletEventPointPressure                                CGEventField = 19
+	KCGTabletEventTiltX                                        CGEventField = 20
+	KCGTabletEventTiltY                                        CGEventField = 21
+	KCGTabletEventRotation                                     CGEventField = 22
+	KCGTabletEventTangentialPressure                           CGEventField = 23
+	KCGTabletEventDeviceID                                     CGEventField = 24
+	KCGTabletEventVendor1                                      CGEventField = 25
+	KCGTabletEventVendor2                                      CGEventField = 26
+	KCGTabletEventVendor3                                      CGEventField = 27
+	KCGTabletProximityEventVendorID                            CGEventField = 28
+	KCGTabletProximityEventTabletID                            CGEventField = 29
+	KCGTabletProximityEventPointerID                           CGEventField = 30
+	KCGTabletProximityEventDeviceID                            CGEventField = 31
+	KCGTabletProximityEventSystemTabletID                      CGEventField = 32
+	KCGTabletProximityEventVendorPointerType                   CGEventField = 33
+	KCGTabletProximityEventVendorPointerSerialNumber           CGEventField = 34
+	KCGTabletProximityEventVendorUniqueID                      CGEventField = 35
+	KCGTabletProximityEventCapabilityMask                      CGEventField = 36
+	KCGTabletProximityEventPointerType                         CGEventField = 37
+	KCGTabletProximityEventEnterProximity                      CGEventField = 38
+	KCGEventTargetProcessSerialNumber                          CGEventField = 39
+	KCGEventTargetUnixProcessID                                CGEventField = 40
+	KCGEventSourceUnixProcessID                                CGEventField = 41
+	KCGEventSourceUserData                                     CGEventField = 42
+	KCGEventSourceUserID                                       CGEventField = 43
+	KCGEventSourceGroupID                                      CGEventField = 44
+	KCGEventSourceStateID                                      CGEventField = 45
+	KCGScrollWheelEventIsContinuous                            CGEventField = 88
+	KCGMouseEventWindowUnderMousePointer                       CGEventField = 91
 	KCGMouseEventWindowUnderMousePointerThatCanHandleThisEvent CGEventField = 92
-	KCGEventUnacceleratedPointerMovementX CGEventField = 170
-	KCGEventUnacceleratedPointerMovementY CGEventField = 171
-	KCGScrollWheelEventMomentumOptionPhase CGEventField = 173
-	KCGScrollWheelEventAcceleratedDeltaAxis1 CGEventField = 176
-	KCGScrollWheelEventAcceleratedDeltaAxis2 CGEventField = 175
-	KCGScrollWheelEventRawDeltaAxis1 CGEventField = 178
-	KCGScrollWheelEventRawDeltaAxis2 CGEventField = 177
+	KCGEventUnacceleratedPointerMovementX                      CGEventField = 170
+	KCGEventUnacceleratedPointerMovementY                      CGEventField = 171
+	KCGScrollWheelEventMomentumOptionPhase                     CGEventField = 173
+	KCGScrollWheelEventAcceleratedDeltaAxis1                   CGEventField = 176
+	KCGScrollWheelEventAcceleratedDeltaAxis2                   CGEventField = 175
+	KCGScrollWheelEventRawDeltaAxis1                           CGEventField = 178
+	KCGScrollWheelEventRawDeltaAxis2                           CGEventField = 177
 )
 
 func (e CGEventField) String() string {
@@ -694,54 +764,82 @@ func (e CGEventField) String() string {
 type CGEventFilterMask int64
 
 const (
-	KCGEventFilterMaskPermitLocalMouseEvents CGEventFilterMask = 1
+	KCGEventFilterMaskPermitLocalMouseEvents    CGEventFilterMask = 1
 	KCGEventFilterMaskPermitLocalKeyboardEvents CGEventFilterMask = 2
 	KCGEventFilterMaskPermitSystemDefinedEvents CGEventFilterMask = 4
 )
 
 func (e CGEventFilterMask) String() string {
 	var parts []string
-	if e&KCGEventFilterMaskPermitLocalMouseEvents != 0 { parts = append(parts, "KCGEventFilterMaskPermitLocalMouseEvents") }
-	if e&KCGEventFilterMaskPermitLocalKeyboardEvents != 0 { parts = append(parts, "KCGEventFilterMaskPermitLocalKeyboardEvents") }
-	if e&KCGEventFilterMaskPermitSystemDefinedEvents != 0 { parts = append(parts, "KCGEventFilterMaskPermitSystemDefinedEvents") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGEventFilterMaskPermitLocalMouseEvents != 0 {
+		parts = append(parts, "KCGEventFilterMaskPermitLocalMouseEvents")
+	}
+	if e&KCGEventFilterMaskPermitLocalKeyboardEvents != 0 {
+		parts = append(parts, "KCGEventFilterMaskPermitLocalKeyboardEvents")
+	}
+	if e&KCGEventFilterMaskPermitSystemDefinedEvents != 0 {
+		parts = append(parts, "KCGEventFilterMaskPermitSystemDefinedEvents")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGEventFlags int64
 
 const (
-	KCGEventFlagMaskAlphaShift CGEventFlags = 65536
-	KCGEventFlagMaskShift CGEventFlags = 131072
-	KCGEventFlagMaskControl CGEventFlags = 262144
-	KCGEventFlagMaskAlternate CGEventFlags = 524288
-	KCGEventFlagMaskCommand CGEventFlags = 1048576
-	KCGEventFlagMaskHelp CGEventFlags = 4194304
-	KCGEventFlagMaskSecondaryFn CGEventFlags = 8388608
-	KCGEventFlagMaskNumericPad CGEventFlags = 2097152
+	KCGEventFlagMaskAlphaShift   CGEventFlags = 65536
+	KCGEventFlagMaskShift        CGEventFlags = 131072
+	KCGEventFlagMaskControl      CGEventFlags = 262144
+	KCGEventFlagMaskAlternate    CGEventFlags = 524288
+	KCGEventFlagMaskCommand      CGEventFlags = 1048576
+	KCGEventFlagMaskHelp         CGEventFlags = 4194304
+	KCGEventFlagMaskSecondaryFn  CGEventFlags = 8388608
+	KCGEventFlagMaskNumericPad   CGEventFlags = 2097152
 	KCGEventFlagMaskNonCoalesced CGEventFlags = 256
 )
 
 func (e CGEventFlags) String() string {
 	var parts []string
-	if e&KCGEventFlagMaskAlphaShift != 0 { parts = append(parts, "KCGEventFlagMaskAlphaShift") }
-	if e&KCGEventFlagMaskShift != 0 { parts = append(parts, "KCGEventFlagMaskShift") }
-	if e&KCGEventFlagMaskControl != 0 { parts = append(parts, "KCGEventFlagMaskControl") }
-	if e&KCGEventFlagMaskAlternate != 0 { parts = append(parts, "KCGEventFlagMaskAlternate") }
-	if e&KCGEventFlagMaskCommand != 0 { parts = append(parts, "KCGEventFlagMaskCommand") }
-	if e&KCGEventFlagMaskHelp != 0 { parts = append(parts, "KCGEventFlagMaskHelp") }
-	if e&KCGEventFlagMaskSecondaryFn != 0 { parts = append(parts, "KCGEventFlagMaskSecondaryFn") }
-	if e&KCGEventFlagMaskNumericPad != 0 { parts = append(parts, "KCGEventFlagMaskNumericPad") }
-	if e&KCGEventFlagMaskNonCoalesced != 0 { parts = append(parts, "KCGEventFlagMaskNonCoalesced") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGEventFlagMaskAlphaShift != 0 {
+		parts = append(parts, "KCGEventFlagMaskAlphaShift")
+	}
+	if e&KCGEventFlagMaskShift != 0 {
+		parts = append(parts, "KCGEventFlagMaskShift")
+	}
+	if e&KCGEventFlagMaskControl != 0 {
+		parts = append(parts, "KCGEventFlagMaskControl")
+	}
+	if e&KCGEventFlagMaskAlternate != 0 {
+		parts = append(parts, "KCGEventFlagMaskAlternate")
+	}
+	if e&KCGEventFlagMaskCommand != 0 {
+		parts = append(parts, "KCGEventFlagMaskCommand")
+	}
+	if e&KCGEventFlagMaskHelp != 0 {
+		parts = append(parts, "KCGEventFlagMaskHelp")
+	}
+	if e&KCGEventFlagMaskSecondaryFn != 0 {
+		parts = append(parts, "KCGEventFlagMaskSecondaryFn")
+	}
+	if e&KCGEventFlagMaskNumericPad != 0 {
+		parts = append(parts, "KCGEventFlagMaskNumericPad")
+	}
+	if e&KCGEventFlagMaskNonCoalesced != 0 {
+		parts = append(parts, "KCGEventFlagMaskNonCoalesced")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGEventMouseSubtype int64
 
 const (
-	KCGEventMouseSubtypeDefault CGEventMouseSubtype = 0
-	KCGEventMouseSubtypeTabletPoint CGEventMouseSubtype = 1
+	KCGEventMouseSubtypeDefault         CGEventMouseSubtype = 0
+	KCGEventMouseSubtypeTabletPoint     CGEventMouseSubtype = 1
 	KCGEventMouseSubtypeTabletProximity CGEventMouseSubtype = 2
 )
 
@@ -761,9 +859,9 @@ func (e CGEventMouseSubtype) String() string {
 type CGEventSourceStateID int64
 
 const (
-	KCGEventSourceStatePrivate CGEventSourceStateID = -1
+	KCGEventSourceStatePrivate              CGEventSourceStateID = -1
 	KCGEventSourceStateCombinedSessionState CGEventSourceStateID = 0
-	KCGEventSourceStateHIDSystemState CGEventSourceStateID = 1
+	KCGEventSourceStateHIDSystemState       CGEventSourceStateID = 1
 )
 
 func (e CGEventSourceStateID) String() string {
@@ -783,8 +881,8 @@ type CGEventSuppressionState int64
 
 const (
 	KCGEventSuppressionStateSuppressionInterval CGEventSuppressionState = 0
-	KCGEventSuppressionStateRemoteMouseDrag CGEventSuppressionState = 1
-	KCGNumberOfEventSuppressionStates CGEventSuppressionState = 2
+	KCGEventSuppressionStateRemoteMouseDrag     CGEventSuppressionState = 1
+	KCGNumberOfEventSuppressionStates           CGEventSuppressionState = 2
 )
 
 func (e CGEventSuppressionState) String() string {
@@ -803,8 +901,8 @@ func (e CGEventSuppressionState) String() string {
 type CGEventTapLocation int64
 
 const (
-	KCGHIDEventTap CGEventTapLocation = 0
-	KCGSessionEventTap CGEventTapLocation = 1
+	KCGHIDEventTap              CGEventTapLocation = 0
+	KCGSessionEventTap          CGEventTapLocation = 1
 	KCGAnnotatedSessionEventTap CGEventTapLocation = 2
 )
 
@@ -824,7 +922,7 @@ func (e CGEventTapLocation) String() string {
 type CGEventTapOptions int64
 
 const (
-	KCGEventTapOptionDefault CGEventTapOptions = 0
+	KCGEventTapOptionDefault    CGEventTapOptions = 0
 	KCGEventTapOptionListenOnly CGEventTapOptions = 1
 )
 
@@ -860,24 +958,24 @@ func (e CGEventTapPlacement) String() string {
 type CGEventType int64
 
 const (
-	KCGEventNull CGEventType = 0
-	KCGEventLeftMouseDown CGEventType = 1
-	KCGEventLeftMouseUp CGEventType = 2
-	KCGEventRightMouseDown CGEventType = 3
-	KCGEventRightMouseUp CGEventType = 4
-	KCGEventMouseMoved CGEventType = 5
-	KCGEventLeftMouseDragged CGEventType = 6
-	KCGEventRightMouseDragged CGEventType = 7
-	KCGEventKeyDown CGEventType = 10
-	KCGEventKeyUp CGEventType = 11
-	KCGEventFlagsChanged CGEventType = 12
-	KCGEventScrollWheel CGEventType = 22
-	KCGEventTabletPointer CGEventType = 23
-	KCGEventTabletProximity CGEventType = 24
-	KCGEventOtherMouseDown CGEventType = 25
-	KCGEventOtherMouseUp CGEventType = 26
-	KCGEventOtherMouseDragged CGEventType = 27
-	KCGEventTapDisabledByTimeout CGEventType = 4294967294
+	KCGEventNull                   CGEventType = 0
+	KCGEventLeftMouseDown          CGEventType = 1
+	KCGEventLeftMouseUp            CGEventType = 2
+	KCGEventRightMouseDown         CGEventType = 3
+	KCGEventRightMouseUp           CGEventType = 4
+	KCGEventMouseMoved             CGEventType = 5
+	KCGEventLeftMouseDragged       CGEventType = 6
+	KCGEventRightMouseDragged      CGEventType = 7
+	KCGEventKeyDown                CGEventType = 10
+	KCGEventKeyUp                  CGEventType = 11
+	KCGEventFlagsChanged           CGEventType = 12
+	KCGEventScrollWheel            CGEventType = 22
+	KCGEventTabletPointer          CGEventType = 23
+	KCGEventTabletProximity        CGEventType = 24
+	KCGEventOtherMouseDown         CGEventType = 25
+	KCGEventOtherMouseUp           CGEventType = 26
+	KCGEventOtherMouseDragged      CGEventType = 27
+	KCGEventTapDisabledByTimeout   CGEventType = 4294967294
 	KCGEventTapDisabledByUserInput CGEventType = 4294967295
 )
 
@@ -929,8 +1027,8 @@ func (e CGEventType) String() string {
 type CGFontPostScriptFormat int64
 
 const (
-	KCGFontPostScriptFormatType1 CGFontPostScriptFormat = 1
-	KCGFontPostScriptFormatType3 CGFontPostScriptFormat = 3
+	KCGFontPostScriptFormatType1  CGFontPostScriptFormat = 1
+	KCGFontPostScriptFormatType3  CGFontPostScriptFormat = 3
 	KCGFontPostScriptFormatType42 CGFontPostScriptFormat = 42
 )
 
@@ -950,12 +1048,12 @@ func (e CGFontPostScriptFormat) String() string {
 type CGGesturePhase int64
 
 const (
-	KCGGesturePhaseNone CGGesturePhase = 0
-	KCGGesturePhaseBegan CGGesturePhase = 1
-	KCGGesturePhaseChanged CGGesturePhase = 2
-	KCGGesturePhaseEnded CGGesturePhase = 4
+	KCGGesturePhaseNone      CGGesturePhase = 0
+	KCGGesturePhaseBegan     CGGesturePhase = 1
+	KCGGesturePhaseChanged   CGGesturePhase = 2
+	KCGGesturePhaseEnded     CGGesturePhase = 4
 	KCGGesturePhaseCancelled CGGesturePhase = 8
-	KCGGesturePhaseMayBegin CGGesturePhase = 128
+	KCGGesturePhaseMayBegin  CGGesturePhase = 128
 )
 
 func (e CGGesturePhase) String() string {
@@ -999,28 +1097,34 @@ type CGGradientDrawingOptions int64
 
 const (
 	KCGGradientDrawsBeforeStartLocation CGGradientDrawingOptions = 1
-	KCGGradientDrawsAfterEndLocation CGGradientDrawingOptions = 2
+	KCGGradientDrawsAfterEndLocation    CGGradientDrawingOptions = 2
 )
 
 func (e CGGradientDrawingOptions) String() string {
 	var parts []string
-	if e&KCGGradientDrawsBeforeStartLocation != 0 { parts = append(parts, "KCGGradientDrawsBeforeStartLocation") }
-	if e&KCGGradientDrawsAfterEndLocation != 0 { parts = append(parts, "KCGGradientDrawsAfterEndLocation") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGGradientDrawsBeforeStartLocation != 0 {
+		parts = append(parts, "KCGGradientDrawsBeforeStartLocation")
+	}
+	if e&KCGGradientDrawsAfterEndLocation != 0 {
+		parts = append(parts, "KCGGradientDrawsAfterEndLocation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGImageAlphaInfo int64
 
 const (
-	KCGImageAlphaNone CGImageAlphaInfo = 0
-	KCGImageAlphaPremultipliedLast CGImageAlphaInfo = 1
+	KCGImageAlphaNone               CGImageAlphaInfo = 0
+	KCGImageAlphaPremultipliedLast  CGImageAlphaInfo = 1
 	KCGImageAlphaPremultipliedFirst CGImageAlphaInfo = 2
-	KCGImageAlphaLast CGImageAlphaInfo = 3
-	KCGImageAlphaFirst CGImageAlphaInfo = 4
-	KCGImageAlphaNoneSkipLast CGImageAlphaInfo = 5
-	KCGImageAlphaNoneSkipFirst CGImageAlphaInfo = 6
-	KCGImageAlphaOnly CGImageAlphaInfo = 7
+	KCGImageAlphaLast               CGImageAlphaInfo = 3
+	KCGImageAlphaFirst              CGImageAlphaInfo = 4
+	KCGImageAlphaNoneSkipLast       CGImageAlphaInfo = 5
+	KCGImageAlphaNoneSkipFirst      CGImageAlphaInfo = 6
+	KCGImageAlphaOnly               CGImageAlphaInfo = 7
 )
 
 func (e CGImageAlphaInfo) String() string {
@@ -1049,14 +1153,14 @@ func (e CGImageAlphaInfo) String() string {
 type CGImageByteOrderInfo int64
 
 const (
-	KCGImageByteOrderMask CGImageByteOrderInfo = 28672
-	KCGImageByteOrderDefault CGImageByteOrderInfo = 0
+	KCGImageByteOrderMask     CGImageByteOrderInfo = 28672
+	KCGImageByteOrderDefault  CGImageByteOrderInfo = 0
 	KCGImageByteOrder16Little CGImageByteOrderInfo = 4096
 	KCGImageByteOrder32Little CGImageByteOrderInfo = 8192
-	KCGImageByteOrder16Big CGImageByteOrderInfo = 12288
-	KCGImageByteOrder32Big CGImageByteOrderInfo = 16384
-	KCGImageByteOrder16Host CGImageByteOrderInfo = 4096
-	KCGImageByteOrder32Host CGImageByteOrderInfo = 8192
+	KCGImageByteOrder16Big    CGImageByteOrderInfo = 12288
+	KCGImageByteOrder32Big    CGImageByteOrderInfo = 16384
+	KCGImageByteOrder16Host   CGImageByteOrderInfo = 4096
+	KCGImageByteOrder32Host   CGImageByteOrderInfo = 8192
 )
 
 func (e CGImageByteOrderInfo) String() string {
@@ -1082,7 +1186,7 @@ type CGImageComponentInfo int64
 
 const (
 	KCGImageComponentInteger CGImageComponentInfo = 0
-	KCGImageComponentFloat CGImageComponentInfo = 256
+	KCGImageComponentFloat   CGImageComponentInfo = 256
 )
 
 func (e CGImageComponentInfo) String() string {
@@ -1099,12 +1203,12 @@ func (e CGImageComponentInfo) String() string {
 type CGImagePixelFormatInfo int64
 
 const (
-	KCGImagePixelFormatMask CGImagePixelFormatInfo = 983040
-	KCGImagePixelFormatPacked CGImagePixelFormatInfo = 0
-	KCGImagePixelFormatRGB555 CGImagePixelFormatInfo = 65536
-	KCGImagePixelFormatRGB565 CGImagePixelFormatInfo = 131072
+	KCGImagePixelFormatMask      CGImagePixelFormatInfo = 983040
+	KCGImagePixelFormatPacked    CGImagePixelFormatInfo = 0
+	KCGImagePixelFormatRGB555    CGImagePixelFormatInfo = 65536
+	KCGImagePixelFormatRGB565    CGImagePixelFormatInfo = 131072
 	KCGImagePixelFormatRGB101010 CGImagePixelFormatInfo = 196608
-	KCGImagePixelFormatRGBCIF10 CGImagePixelFormatInfo = 262144
+	KCGImagePixelFormatRGBCIF10  CGImagePixelFormatInfo = 262144
 )
 
 func (e CGImagePixelFormatInfo) String() string {
@@ -1130,10 +1234,10 @@ type CGInterpolationQuality int64
 
 const (
 	KCGInterpolationDefault CGInterpolationQuality = 0
-	KCGInterpolationNone CGInterpolationQuality = 1
-	KCGInterpolationLow CGInterpolationQuality = 2
-	KCGInterpolationMedium CGInterpolationQuality = 4
-	KCGInterpolationHigh CGInterpolationQuality = 3
+	KCGInterpolationNone    CGInterpolationQuality = 1
+	KCGInterpolationLow     CGInterpolationQuality = 2
+	KCGInterpolationMedium  CGInterpolationQuality = 4
+	KCGInterpolationHigh    CGInterpolationQuality = 3
 )
 
 func (e CGInterpolationQuality) String() string {
@@ -1156,8 +1260,8 @@ func (e CGInterpolationQuality) String() string {
 type CGLineCap int64
 
 const (
-	KCGLineCapButt CGLineCap = 0
-	KCGLineCapRound CGLineCap = 1
+	KCGLineCapButt   CGLineCap = 0
+	KCGLineCapRound  CGLineCap = 1
 	KCGLineCapSquare CGLineCap = 2
 )
 
@@ -1198,10 +1302,10 @@ func (e CGLineJoin) String() string {
 type CGMomentumScrollPhase int64
 
 const (
-	KCGMomentumScrollPhaseNone CGMomentumScrollPhase = 0
-	KCGMomentumScrollPhaseBegin CGMomentumScrollPhase = 1
+	KCGMomentumScrollPhaseNone     CGMomentumScrollPhase = 0
+	KCGMomentumScrollPhaseBegin    CGMomentumScrollPhase = 1
 	KCGMomentumScrollPhaseContinue CGMomentumScrollPhase = 2
-	KCGMomentumScrollPhaseEnd CGMomentumScrollPhase = 3
+	KCGMomentumScrollPhaseEnd      CGMomentumScrollPhase = 3
 )
 
 func (e CGMomentumScrollPhase) String() string {
@@ -1222,8 +1326,8 @@ func (e CGMomentumScrollPhase) String() string {
 type CGMouseButton int64
 
 const (
-	KCGMouseButtonLeft CGMouseButton = 0
-	KCGMouseButtonRight CGMouseButton = 1
+	KCGMouseButtonLeft   CGMouseButton = 0
+	KCGMouseButtonRight  CGMouseButton = 1
 	KCGMouseButtonCenter CGMouseButton = 2
 )
 
@@ -1243,27 +1347,45 @@ func (e CGMouseButton) String() string {
 type CGPDFAccessPermissions int64
 
 const (
-	KCGPDFAllowsLowQualityPrinting CGPDFAccessPermissions = 1
-	KCGPDFAllowsHighQualityPrinting CGPDFAccessPermissions = 2
-	KCGPDFAllowsDocumentChanges CGPDFAccessPermissions = 4
-	KCGPDFAllowsDocumentAssembly CGPDFAccessPermissions = 8
-	KCGPDFAllowsContentCopying CGPDFAccessPermissions = 16
+	KCGPDFAllowsLowQualityPrinting   CGPDFAccessPermissions = 1
+	KCGPDFAllowsHighQualityPrinting  CGPDFAccessPermissions = 2
+	KCGPDFAllowsDocumentChanges      CGPDFAccessPermissions = 4
+	KCGPDFAllowsDocumentAssembly     CGPDFAccessPermissions = 8
+	KCGPDFAllowsContentCopying       CGPDFAccessPermissions = 16
 	KCGPDFAllowsContentAccessibility CGPDFAccessPermissions = 32
-	KCGPDFAllowsCommenting CGPDFAccessPermissions = 64
-	KCGPDFAllowsFormFieldEntry CGPDFAccessPermissions = 128
+	KCGPDFAllowsCommenting           CGPDFAccessPermissions = 64
+	KCGPDFAllowsFormFieldEntry       CGPDFAccessPermissions = 128
 )
 
 func (e CGPDFAccessPermissions) String() string {
 	var parts []string
-	if e&KCGPDFAllowsLowQualityPrinting != 0 { parts = append(parts, "KCGPDFAllowsLowQualityPrinting") }
-	if e&KCGPDFAllowsHighQualityPrinting != 0 { parts = append(parts, "KCGPDFAllowsHighQualityPrinting") }
-	if e&KCGPDFAllowsDocumentChanges != 0 { parts = append(parts, "KCGPDFAllowsDocumentChanges") }
-	if e&KCGPDFAllowsDocumentAssembly != 0 { parts = append(parts, "KCGPDFAllowsDocumentAssembly") }
-	if e&KCGPDFAllowsContentCopying != 0 { parts = append(parts, "KCGPDFAllowsContentCopying") }
-	if e&KCGPDFAllowsContentAccessibility != 0 { parts = append(parts, "KCGPDFAllowsContentAccessibility") }
-	if e&KCGPDFAllowsCommenting != 0 { parts = append(parts, "KCGPDFAllowsCommenting") }
-	if e&KCGPDFAllowsFormFieldEntry != 0 { parts = append(parts, "KCGPDFAllowsFormFieldEntry") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGPDFAllowsLowQualityPrinting != 0 {
+		parts = append(parts, "KCGPDFAllowsLowQualityPrinting")
+	}
+	if e&KCGPDFAllowsHighQualityPrinting != 0 {
+		parts = append(parts, "KCGPDFAllowsHighQualityPrinting")
+	}
+	if e&KCGPDFAllowsDocumentChanges != 0 {
+		parts = append(parts, "KCGPDFAllowsDocumentChanges")
+	}
+	if e&KCGPDFAllowsDocumentAssembly != 0 {
+		parts = append(parts, "KCGPDFAllowsDocumentAssembly")
+	}
+	if e&KCGPDFAllowsContentCopying != 0 {
+		parts = append(parts, "KCGPDFAllowsContentCopying")
+	}
+	if e&KCGPDFAllowsContentAccessibility != 0 {
+		parts = append(parts, "KCGPDFAllowsContentAccessibility")
+	}
+	if e&KCGPDFAllowsCommenting != 0 {
+		parts = append(parts, "KCGPDFAllowsCommenting")
+	}
+	if e&KCGPDFAllowsFormFieldEntry != 0 {
+		parts = append(parts, "KCGPDFAllowsFormFieldEntry")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1271,10 +1393,10 @@ type CGPDFBox int64
 
 const (
 	KCGPDFMediaBox CGPDFBox = 0
-	KCGPDFCropBox CGPDFBox = 1
+	KCGPDFCropBox  CGPDFBox = 1
 	KCGPDFBleedBox CGPDFBox = 2
-	KCGPDFTrimBox CGPDFBox = 3
-	KCGPDFArtBox CGPDFBox = 4
+	KCGPDFTrimBox  CGPDFBox = 3
+	KCGPDFArtBox   CGPDFBox = 4
 )
 
 func (e CGPDFBox) String() string {
@@ -1297,9 +1419,9 @@ func (e CGPDFBox) String() string {
 type CGPDFDataFormat int64
 
 const (
-	CGPDFDataFormatRaw CGPDFDataFormat = 0
+	CGPDFDataFormatRaw         CGPDFDataFormat = 0
 	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
-	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
+	CGPDFDataFormatJPEG2000    CGPDFDataFormat = 2
 )
 
 func (e CGPDFDataFormat) String() string {
@@ -1318,15 +1440,15 @@ func (e CGPDFDataFormat) String() string {
 type CGPDFObjectType int64
 
 const (
-	KCGPDFObjectTypeNull CGPDFObjectType = 1
-	KCGPDFObjectTypeBoolean CGPDFObjectType = 2
-	KCGPDFObjectTypeInteger CGPDFObjectType = 3
-	KCGPDFObjectTypeReal CGPDFObjectType = 4
-	KCGPDFObjectTypeName CGPDFObjectType = 5
-	KCGPDFObjectTypeString CGPDFObjectType = 6
-	KCGPDFObjectTypeArray CGPDFObjectType = 7
+	KCGPDFObjectTypeNull       CGPDFObjectType = 1
+	KCGPDFObjectTypeBoolean    CGPDFObjectType = 2
+	KCGPDFObjectTypeInteger    CGPDFObjectType = 3
+	KCGPDFObjectTypeReal       CGPDFObjectType = 4
+	KCGPDFObjectTypeName       CGPDFObjectType = 5
+	KCGPDFObjectTypeString     CGPDFObjectType = 6
+	KCGPDFObjectTypeArray      CGPDFObjectType = 7
 	KCGPDFObjectTypeDictionary CGPDFObjectType = 8
-	KCGPDFObjectTypeStream CGPDFObjectType = 9
+	KCGPDFObjectTypeStream     CGPDFObjectType = 9
 )
 
 func (e CGPDFObjectType) String() string {
@@ -1357,56 +1479,56 @@ func (e CGPDFObjectType) String() string {
 type CGPDFTagType int64
 
 const (
-	CGPDFTagTypeDocument CGPDFTagType = 100
-	CGPDFTagTypePart CGPDFTagType = 101
-	CGPDFTagTypeArt CGPDFTagType = 102
-	CGPDFTagTypeSection CGPDFTagType = 103
-	CGPDFTagTypeDiv CGPDFTagType = 104
-	CGPDFTagTypeBlockQuote CGPDFTagType = 105
-	CGPDFTagTypeCaption CGPDFTagType = 106
-	CGPDFTagTypeTOC CGPDFTagType = 107
-	CGPDFTagTypeTOCI CGPDFTagType = 108
-	CGPDFTagTypeIndex CGPDFTagType = 109
-	CGPDFTagTypeNonStructure CGPDFTagType = 110
-	CGPDFTagTypePrivate CGPDFTagType = 111
-	CGPDFTagTypeParagraph CGPDFTagType = 200
-	CGPDFTagTypeHeader CGPDFTagType = 201
-	CGPDFTagTypeHeader1 CGPDFTagType = 202
-	CGPDFTagTypeHeader2 CGPDFTagType = 203
-	CGPDFTagTypeHeader3 CGPDFTagType = 204
-	CGPDFTagTypeHeader4 CGPDFTagType = 205
-	CGPDFTagTypeHeader5 CGPDFTagType = 206
-	CGPDFTagTypeHeader6 CGPDFTagType = 207
-	CGPDFTagTypeList CGPDFTagType = 300
-	CGPDFTagTypeListItem CGPDFTagType = 301
-	CGPDFTagTypeLabel CGPDFTagType = 302
-	CGPDFTagTypeListBody CGPDFTagType = 303
-	CGPDFTagTypeTable CGPDFTagType = 400
-	CGPDFTagTypeTableRow CGPDFTagType = 401
-	CGPDFTagTypeTableHeaderCell CGPDFTagType = 402
-	CGPDFTagTypeTableDataCell CGPDFTagType = 403
-	CGPDFTagTypeTableHeader CGPDFTagType = 404
-	CGPDFTagTypeTableBody CGPDFTagType = 405
-	CGPDFTagTypeTableFooter CGPDFTagType = 406
-	CGPDFTagTypeSpan CGPDFTagType = 500
-	CGPDFTagTypeQuote CGPDFTagType = 501
-	CGPDFTagTypeNote CGPDFTagType = 502
-	CGPDFTagTypeReference CGPDFTagType = 503
-	CGPDFTagTypeBibliography CGPDFTagType = 504
-	CGPDFTagTypeCode CGPDFTagType = 505
-	CGPDFTagTypeLink CGPDFTagType = 506
-	CGPDFTagTypeAnnotation CGPDFTagType = 507
-	CGPDFTagTypeRuby CGPDFTagType = 600
-	CGPDFTagTypeRubyBaseText CGPDFTagType = 601
+	CGPDFTagTypeDocument           CGPDFTagType = 100
+	CGPDFTagTypePart               CGPDFTagType = 101
+	CGPDFTagTypeArt                CGPDFTagType = 102
+	CGPDFTagTypeSection            CGPDFTagType = 103
+	CGPDFTagTypeDiv                CGPDFTagType = 104
+	CGPDFTagTypeBlockQuote         CGPDFTagType = 105
+	CGPDFTagTypeCaption            CGPDFTagType = 106
+	CGPDFTagTypeTOC                CGPDFTagType = 107
+	CGPDFTagTypeTOCI               CGPDFTagType = 108
+	CGPDFTagTypeIndex              CGPDFTagType = 109
+	CGPDFTagTypeNonStructure       CGPDFTagType = 110
+	CGPDFTagTypePrivate            CGPDFTagType = 111
+	CGPDFTagTypeParagraph          CGPDFTagType = 200
+	CGPDFTagTypeHeader             CGPDFTagType = 201
+	CGPDFTagTypeHeader1            CGPDFTagType = 202
+	CGPDFTagTypeHeader2            CGPDFTagType = 203
+	CGPDFTagTypeHeader3            CGPDFTagType = 204
+	CGPDFTagTypeHeader4            CGPDFTagType = 205
+	CGPDFTagTypeHeader5            CGPDFTagType = 206
+	CGPDFTagTypeHeader6            CGPDFTagType = 207
+	CGPDFTagTypeList               CGPDFTagType = 300
+	CGPDFTagTypeListItem           CGPDFTagType = 301
+	CGPDFTagTypeLabel              CGPDFTagType = 302
+	CGPDFTagTypeListBody           CGPDFTagType = 303
+	CGPDFTagTypeTable              CGPDFTagType = 400
+	CGPDFTagTypeTableRow           CGPDFTagType = 401
+	CGPDFTagTypeTableHeaderCell    CGPDFTagType = 402
+	CGPDFTagTypeTableDataCell      CGPDFTagType = 403
+	CGPDFTagTypeTableHeader        CGPDFTagType = 404
+	CGPDFTagTypeTableBody          CGPDFTagType = 405
+	CGPDFTagTypeTableFooter        CGPDFTagType = 406
+	CGPDFTagTypeSpan               CGPDFTagType = 500
+	CGPDFTagTypeQuote              CGPDFTagType = 501
+	CGPDFTagTypeNote               CGPDFTagType = 502
+	CGPDFTagTypeReference          CGPDFTagType = 503
+	CGPDFTagTypeBibliography       CGPDFTagType = 504
+	CGPDFTagTypeCode               CGPDFTagType = 505
+	CGPDFTagTypeLink               CGPDFTagType = 506
+	CGPDFTagTypeAnnotation         CGPDFTagType = 507
+	CGPDFTagTypeRuby               CGPDFTagType = 600
+	CGPDFTagTypeRubyBaseText       CGPDFTagType = 601
 	CGPDFTagTypeRubyAnnotationText CGPDFTagType = 602
-	CGPDFTagTypeRubyPunctuation CGPDFTagType = 603
-	CGPDFTagTypeWarichu CGPDFTagType = 604
-	CGPDFTagTypeWarichuText CGPDFTagType = 605
+	CGPDFTagTypeRubyPunctuation    CGPDFTagType = 603
+	CGPDFTagTypeWarichu            CGPDFTagType = 604
+	CGPDFTagTypeWarichuText        CGPDFTagType = 605
 	CGPDFTagTypeWarichuPunctiation CGPDFTagType = 606
-	CGPDFTagTypeFigure CGPDFTagType = 700
-	CGPDFTagTypeFormula CGPDFTagType = 701
-	CGPDFTagTypeForm CGPDFTagType = 702
-	CGPDFTagTypeObject CGPDFTagType = 800
+	CGPDFTagTypeFigure             CGPDFTagType = 700
+	CGPDFTagTypeFormula            CGPDFTagType = 701
+	CGPDFTagTypeForm               CGPDFTagType = 702
+	CGPDFTagTypeObject             CGPDFTagType = 800
 )
 
 func (e CGPDFTagType) String() string {
@@ -1519,10 +1641,10 @@ func (e CGPDFTagType) String() string {
 type CGPathDrawingMode int64
 
 const (
-	KCGPathFill CGPathDrawingMode = 0
-	KCGPathEOFill CGPathDrawingMode = 1
-	KCGPathStroke CGPathDrawingMode = 2
-	KCGPathFillStroke CGPathDrawingMode = 3
+	KCGPathFill         CGPathDrawingMode = 0
+	KCGPathEOFill       CGPathDrawingMode = 1
+	KCGPathStroke       CGPathDrawingMode = 2
+	KCGPathFillStroke   CGPathDrawingMode = 3
 	KCGPathEOFillStroke CGPathDrawingMode = 4
 )
 
@@ -1546,11 +1668,11 @@ func (e CGPathDrawingMode) String() string {
 type CGPathElementType int64
 
 const (
-	KCGPathElementMoveToPoint CGPathElementType = 0
-	KCGPathElementAddLineToPoint CGPathElementType = 1
+	KCGPathElementMoveToPoint         CGPathElementType = 0
+	KCGPathElementAddLineToPoint      CGPathElementType = 1
 	KCGPathElementAddQuadCurveToPoint CGPathElementType = 2
-	KCGPathElementAddCurveToPoint CGPathElementType = 3
-	KCGPathElementCloseSubpath CGPathElementType = 4
+	KCGPathElementAddCurveToPoint     CGPathElementType = 3
+	KCGPathElementCloseSubpath        CGPathElementType = 4
 )
 
 func (e CGPathElementType) String() string {
@@ -1573,9 +1695,9 @@ func (e CGPathElementType) String() string {
 type CGPatternTiling int64
 
 const (
-	KCGPatternTilingNoDistortion CGPatternTiling = 0
+	KCGPatternTilingNoDistortion                     CGPatternTiling = 0
 	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
-	KCGPatternTilingConstantSpacing CGPatternTiling = 2
+	KCGPatternTilingConstantSpacing                  CGPatternTiling = 2
 )
 
 func (e CGPatternTiling) String() string {
@@ -1594,16 +1716,22 @@ func (e CGPatternTiling) String() string {
 type CGScreenUpdateOperation int64
 
 const (
-	KCGScreenUpdateOperationRefresh CGScreenUpdateOperation = 0
-	KCGScreenUpdateOperationMove CGScreenUpdateOperation = 1
+	KCGScreenUpdateOperationRefresh                    CGScreenUpdateOperation = 0
+	KCGScreenUpdateOperationMove                       CGScreenUpdateOperation = 1
 	KCGScreenUpdateOperationReducedDirtyRectangleCount CGScreenUpdateOperation = 2147483648
 )
 
 func (e CGScreenUpdateOperation) String() string {
 	var parts []string
-	if e&KCGScreenUpdateOperationMove != 0 { parts = append(parts, "KCGScreenUpdateOperationMove") }
-	if e&KCGScreenUpdateOperationReducedDirtyRectangleCount != 0 { parts = append(parts, "KCGScreenUpdateOperationReducedDirtyRectangleCount") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGScreenUpdateOperationMove != 0 {
+		parts = append(parts, "KCGScreenUpdateOperationMove")
+	}
+	if e&KCGScreenUpdateOperationReducedDirtyRectangleCount != 0 {
+		parts = append(parts, "KCGScreenUpdateOperationReducedDirtyRectangleCount")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1611,7 +1739,7 @@ type CGScrollEventUnit int64
 
 const (
 	KCGScrollEventUnitPixel CGScrollEventUnit = 0
-	KCGScrollEventUnitLine CGScrollEventUnit = 1
+	KCGScrollEventUnitLine  CGScrollEventUnit = 1
 )
 
 func (e CGScrollEventUnit) String() string {
@@ -1628,11 +1756,11 @@ func (e CGScrollEventUnit) String() string {
 type CGScrollPhase int64
 
 const (
-	KCGScrollPhaseBegan CGScrollPhase = 1
-	KCGScrollPhaseChanged CGScrollPhase = 2
-	KCGScrollPhaseEnded CGScrollPhase = 4
+	KCGScrollPhaseBegan     CGScrollPhase = 1
+	KCGScrollPhaseChanged   CGScrollPhase = 2
+	KCGScrollPhaseEnded     CGScrollPhase = 4
 	KCGScrollPhaseCancelled CGScrollPhase = 8
-	KCGScrollPhaseMayBegin CGScrollPhase = 128
+	KCGScrollPhaseMayBegin  CGScrollPhase = 128
 )
 
 func (e CGScrollPhase) String() string {
@@ -1655,14 +1783,14 @@ func (e CGScrollPhase) String() string {
 type CGTextDrawingMode int64
 
 const (
-	KCGTextFill CGTextDrawingMode = 0
-	KCGTextStroke CGTextDrawingMode = 1
-	KCGTextFillStroke CGTextDrawingMode = 2
-	KCGTextInvisible CGTextDrawingMode = 3
-	KCGTextFillClip CGTextDrawingMode = 4
-	KCGTextStrokeClip CGTextDrawingMode = 5
+	KCGTextFill           CGTextDrawingMode = 0
+	KCGTextStroke         CGTextDrawingMode = 1
+	KCGTextFillStroke     CGTextDrawingMode = 2
+	KCGTextInvisible      CGTextDrawingMode = 3
+	KCGTextFillClip       CGTextDrawingMode = 4
+	KCGTextStrokeClip     CGTextDrawingMode = 5
 	KCGTextFillStrokeClip CGTextDrawingMode = 6
-	KCGTextClip CGTextDrawingMode = 7
+	KCGTextClip           CGTextDrawingMode = 7
 )
 
 func (e CGTextDrawingMode) String() string {
@@ -1693,7 +1821,7 @@ type CGTextEncoding int64
 
 const (
 	KCGEncodingFontSpecific CGTextEncoding = 0
-	KCGEncodingMacRoman CGTextEncoding = 1
+	KCGEncodingMacRoman     CGTextEncoding = 1
 )
 
 func (e CGTextEncoding) String() string {
@@ -1710,12 +1838,12 @@ func (e CGTextEncoding) String() string {
 type CGToneMapping int64
 
 const (
-	KCGToneMappingDefault CGToneMapping = 0
+	KCGToneMappingDefault                  CGToneMapping = 0
 	KCGToneMappingImageSpecificLumaScaling CGToneMapping = 1
-	KCGToneMappingReferenceWhiteBased CGToneMapping = 2
-	KCGToneMappingITURecommended CGToneMapping = 3
-	KCGToneMappingEXRGamma CGToneMapping = 4
-	KCGToneMappingNone CGToneMapping = 5
+	KCGToneMappingReferenceWhiteBased      CGToneMapping = 2
+	KCGToneMappingITURecommended           CGToneMapping = 3
+	KCGToneMappingEXRGamma                 CGToneMapping = 4
+	KCGToneMappingNone                     CGToneMapping = 5
 )
 
 func (e CGToneMapping) String() string {
@@ -1740,9 +1868,9 @@ func (e CGToneMapping) String() string {
 type CGWindowBackingType int64
 
 const (
-	KCGBackingStoreRetained CGWindowBackingType = 0
+	KCGBackingStoreRetained    CGWindowBackingType = 0
 	KCGBackingStoreNonretained CGWindowBackingType = 1
-	KCGBackingStoreBuffered CGWindowBackingType = 2
+	KCGBackingStoreBuffered    CGWindowBackingType = 2
 )
 
 func (e CGWindowBackingType) String() string {
@@ -1761,50 +1889,62 @@ func (e CGWindowBackingType) String() string {
 type CGWindowImageOption int64
 
 const (
-	KCGWindowImageDefault CGWindowImageOption = 0
+	KCGWindowImageDefault             CGWindowImageOption = 0
 	KCGWindowImageBoundsIgnoreFraming CGWindowImageOption = 1
-	KCGWindowImageShouldBeOpaque CGWindowImageOption = 2
-	KCGWindowImageOnlyShadows CGWindowImageOption = 4
-	KCGWindowImageBestResolution CGWindowImageOption = 8
-	KCGWindowImageNominalResolution CGWindowImageOption = 16
+	KCGWindowImageShouldBeOpaque      CGWindowImageOption = 2
+	KCGWindowImageOnlyShadows         CGWindowImageOption = 4
+	KCGWindowImageBestResolution      CGWindowImageOption = 8
+	KCGWindowImageNominalResolution   CGWindowImageOption = 16
 )
 
 func (e CGWindowImageOption) String() string {
 	var parts []string
-	if e&KCGWindowImageBoundsIgnoreFraming != 0 { parts = append(parts, "KCGWindowImageBoundsIgnoreFraming") }
-	if e&KCGWindowImageShouldBeOpaque != 0 { parts = append(parts, "KCGWindowImageShouldBeOpaque") }
-	if e&KCGWindowImageOnlyShadows != 0 { parts = append(parts, "KCGWindowImageOnlyShadows") }
-	if e&KCGWindowImageBestResolution != 0 { parts = append(parts, "KCGWindowImageBestResolution") }
-	if e&KCGWindowImageNominalResolution != 0 { parts = append(parts, "KCGWindowImageNominalResolution") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGWindowImageBoundsIgnoreFraming != 0 {
+		parts = append(parts, "KCGWindowImageBoundsIgnoreFraming")
+	}
+	if e&KCGWindowImageShouldBeOpaque != 0 {
+		parts = append(parts, "KCGWindowImageShouldBeOpaque")
+	}
+	if e&KCGWindowImageOnlyShadows != 0 {
+		parts = append(parts, "KCGWindowImageOnlyShadows")
+	}
+	if e&KCGWindowImageBestResolution != 0 {
+		parts = append(parts, "KCGWindowImageBestResolution")
+	}
+	if e&KCGWindowImageNominalResolution != 0 {
+		parts = append(parts, "KCGWindowImageNominalResolution")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGWindowLevelKey int64
 
 const (
-	KCGBaseWindowLevelKey CGWindowLevelKey = 0
-	KCGMinimumWindowLevelKey CGWindowLevelKey = 1
-	KCGDesktopWindowLevelKey CGWindowLevelKey = 2
-	KCGBackstopMenuLevelKey CGWindowLevelKey = 3
-	KCGNormalWindowLevelKey CGWindowLevelKey = 4
-	KCGFloatingWindowLevelKey CGWindowLevelKey = 5
-	KCGTornOffMenuWindowLevelKey CGWindowLevelKey = 6
-	KCGDockWindowLevelKey CGWindowLevelKey = 7
-	KCGMainMenuWindowLevelKey CGWindowLevelKey = 8
-	KCGStatusWindowLevelKey CGWindowLevelKey = 9
-	KCGModalPanelWindowLevelKey CGWindowLevelKey = 10
-	KCGPopUpMenuWindowLevelKey CGWindowLevelKey = 11
-	KCGDraggingWindowLevelKey CGWindowLevelKey = 12
-	KCGScreenSaverWindowLevelKey CGWindowLevelKey = 13
-	KCGMaximumWindowLevelKey CGWindowLevelKey = 14
-	KCGOverlayWindowLevelKey CGWindowLevelKey = 15
-	KCGHelpWindowLevelKey CGWindowLevelKey = 16
-	KCGUtilityWindowLevelKey CGWindowLevelKey = 17
-	KCGDesktopIconWindowLevelKey CGWindowLevelKey = 18
-	KCGCursorWindowLevelKey CGWindowLevelKey = 19
+	KCGBaseWindowLevelKey              CGWindowLevelKey = 0
+	KCGMinimumWindowLevelKey           CGWindowLevelKey = 1
+	KCGDesktopWindowLevelKey           CGWindowLevelKey = 2
+	KCGBackstopMenuLevelKey            CGWindowLevelKey = 3
+	KCGNormalWindowLevelKey            CGWindowLevelKey = 4
+	KCGFloatingWindowLevelKey          CGWindowLevelKey = 5
+	KCGTornOffMenuWindowLevelKey       CGWindowLevelKey = 6
+	KCGDockWindowLevelKey              CGWindowLevelKey = 7
+	KCGMainMenuWindowLevelKey          CGWindowLevelKey = 8
+	KCGStatusWindowLevelKey            CGWindowLevelKey = 9
+	KCGModalPanelWindowLevelKey        CGWindowLevelKey = 10
+	KCGPopUpMenuWindowLevelKey         CGWindowLevelKey = 11
+	KCGDraggingWindowLevelKey          CGWindowLevelKey = 12
+	KCGScreenSaverWindowLevelKey       CGWindowLevelKey = 13
+	KCGMaximumWindowLevelKey           CGWindowLevelKey = 14
+	KCGOverlayWindowLevelKey           CGWindowLevelKey = 15
+	KCGHelpWindowLevelKey              CGWindowLevelKey = 16
+	KCGUtilityWindowLevelKey           CGWindowLevelKey = 17
+	KCGDesktopIconWindowLevelKey       CGWindowLevelKey = 18
+	KCGCursorWindowLevelKey            CGWindowLevelKey = 19
 	KCGAssistiveTechHighWindowLevelKey CGWindowLevelKey = 20
-	KCGNumberOfWindowLevelKeys CGWindowLevelKey = 21
+	KCGNumberOfWindowLevelKeys         CGWindowLevelKey = 21
 )
 
 func (e CGWindowLevelKey) String() string {
@@ -1861,30 +2001,42 @@ func (e CGWindowLevelKey) String() string {
 type CGWindowListOption int64
 
 const (
-	KCGWindowListOptionAll CGWindowListOption = 0
-	KCGWindowListOptionOnScreenOnly CGWindowListOption = 1
+	KCGWindowListOptionAll                 CGWindowListOption = 0
+	KCGWindowListOptionOnScreenOnly        CGWindowListOption = 1
 	KCGWindowListOptionOnScreenAboveWindow CGWindowListOption = 2
 	KCGWindowListOptionOnScreenBelowWindow CGWindowListOption = 4
-	KCGWindowListOptionIncludingWindow CGWindowListOption = 8
-	KCGWindowListExcludeDesktopElements CGWindowListOption = 16
+	KCGWindowListOptionIncludingWindow     CGWindowListOption = 8
+	KCGWindowListExcludeDesktopElements    CGWindowListOption = 16
 )
 
 func (e CGWindowListOption) String() string {
 	var parts []string
-	if e&KCGWindowListOptionOnScreenOnly != 0 { parts = append(parts, "KCGWindowListOptionOnScreenOnly") }
-	if e&KCGWindowListOptionOnScreenAboveWindow != 0 { parts = append(parts, "KCGWindowListOptionOnScreenAboveWindow") }
-	if e&KCGWindowListOptionOnScreenBelowWindow != 0 { parts = append(parts, "KCGWindowListOptionOnScreenBelowWindow") }
-	if e&KCGWindowListOptionIncludingWindow != 0 { parts = append(parts, "KCGWindowListOptionIncludingWindow") }
-	if e&KCGWindowListExcludeDesktopElements != 0 { parts = append(parts, "KCGWindowListExcludeDesktopElements") }
-	if len(parts) == 0 { return "0" }
+	if e&KCGWindowListOptionOnScreenOnly != 0 {
+		parts = append(parts, "KCGWindowListOptionOnScreenOnly")
+	}
+	if e&KCGWindowListOptionOnScreenAboveWindow != 0 {
+		parts = append(parts, "KCGWindowListOptionOnScreenAboveWindow")
+	}
+	if e&KCGWindowListOptionOnScreenBelowWindow != 0 {
+		parts = append(parts, "KCGWindowListOptionOnScreenBelowWindow")
+	}
+	if e&KCGWindowListOptionIncludingWindow != 0 {
+		parts = append(parts, "KCGWindowListOptionIncludingWindow")
+	}
+	if e&KCGWindowListExcludeDesktopElements != 0 {
+		parts = append(parts, "KCGWindowListExcludeDesktopElements")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CGWindowSharingType int64
 
 const (
-	KCGWindowSharingNone CGWindowSharingType = 0
-	KCGWindowSharingReadOnly CGWindowSharingType = 1
+	KCGWindowSharingNone      CGWindowSharingType = 0
+	KCGWindowSharingReadOnly  CGWindowSharingType = 1
 	KCGWindowSharingReadWrite CGWindowSharingType = 2
 )
 
@@ -1904,10 +2056,10 @@ func (e CGWindowSharingType) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -1931,8 +2083,8 @@ func (e EvCmd) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -1953,8 +2105,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1973,13 +2125,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -2006,24 +2158,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -2064,9 +2216,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -2086,12 +2238,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -2118,14 +2270,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -2154,9 +2306,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -2175,36 +2327,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -2234,8 +2400,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -2255,62 +2421,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -2440,7 +2606,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2448,7 +2616,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -2466,8 +2634,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -2486,26 +2654,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2527,27 +2711,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2571,11 +2755,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2600,22 +2784,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2662,4 +2846,3 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 		return fmt.Sprintf("Virtual_memory_guard_exception_code_t(%d)", int64(e))
 	}
 }
-

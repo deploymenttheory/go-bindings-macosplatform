@@ -178,7 +178,9 @@ func (x *CNNMultiply) WithDestinationImageAllocator(destinationImageAllocator mp
 
 func (x *CNNMultiply) asCNNArithmetic() *raw.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
-func (x *CNNMultiply) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNMultiply) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
 // CNNMultiplyable is the interface implemented by [CNNMultiply], for mocking and DI.
 type CNNMultiplyable interface {
@@ -209,4 +211,3 @@ type CNNMultiplyable interface {
 }
 
 var _ CNNMultiplyable = (*CNNMultiply)(nil)
-

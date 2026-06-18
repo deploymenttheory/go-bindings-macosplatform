@@ -16,14 +16,14 @@ type CLMonitor struct {
 }
 
 var (
-	_clsCLMonitor = _objcClass("CLMonitor")
-	_cLMonitorSelRequestMonitorWithConfigurationCompletion = objc.RegisterName("requestMonitorWithConfiguration:completion:")
-	_cLMonitorSelAddConditionForMonitoringIdentifier = objc.RegisterName("addConditionForMonitoring:identifier:")
+	_clsCLMonitor                                                = _objcClass("CLMonitor")
+	_cLMonitorSelRequestMonitorWithConfigurationCompletion       = objc.RegisterName("requestMonitorWithConfiguration:completion:")
+	_cLMonitorSelAddConditionForMonitoringIdentifier             = objc.RegisterName("addConditionForMonitoring:identifier:")
 	_cLMonitorSelAddConditionForMonitoringIdentifierAssumedState = objc.RegisterName("addConditionForMonitoring:identifier:assumedState:")
-	_cLMonitorSelRemoveConditionFromMonitoringWithIdentifier = objc.RegisterName("removeConditionFromMonitoringWithIdentifier:")
-	_cLMonitorSelMonitoringRecordForIdentifier = objc.RegisterName("monitoringRecordForIdentifier:")
-	_cLMonitorSelName = objc.RegisterName("name")
-	_cLMonitorSelMonitoredIdentifiers = objc.RegisterName("monitoredIdentifiers")
+	_cLMonitorSelRemoveConditionFromMonitoringWithIdentifier     = objc.RegisterName("removeConditionFromMonitoringWithIdentifier:")
+	_cLMonitorSelMonitoringRecordForIdentifier                   = objc.RegisterName("monitoringRecordForIdentifier:")
+	_cLMonitorSelName                                            = objc.RegisterName("name")
+	_cLMonitorSelMonitoredIdentifiers                            = objc.RegisterName("monitoredIdentifiers")
 )
 
 func CLMonitorFromID(id objc.ID) *CLMonitor {
@@ -64,13 +64,17 @@ func (o *CLMonitor) RemoveConditionFromMonitoringWithIdentifier(identifier *foun
 
 func (o *CLMonitor) MonitoringRecordForIdentifier(identifier *foundation.NSString) *CLMonitoringRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitorSelMonitoringRecordForIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLMonitoringRecordFromID(_ret)
 }
 
 func (o *CLMonitor) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLMonitorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -78,4 +82,3 @@ func (o *CLMonitor) MonitoredIdentifiers() *foundation.NSArray[*foundation.NSStr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cLMonitorSelMonitoredIdentifiers)
 	return _ret
 }
-

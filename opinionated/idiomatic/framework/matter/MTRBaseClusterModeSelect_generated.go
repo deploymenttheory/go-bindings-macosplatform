@@ -857,9 +857,13 @@ func (x *MTRBaseClusterModeSelect) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterModeSelect) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterModeSelect) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterModeSelect) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterModeSelect) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterModeSelectable is the interface implemented by [MTRBaseClusterModeSelect], for mocking and DI.
 type MTRBaseClusterModeSelectable interface {
@@ -921,4 +925,3 @@ type MTRBaseClusterModeSelectable interface {
 }
 
 var _ MTRBaseClusterModeSelectable = (*MTRBaseClusterModeSelect)(nil)
-

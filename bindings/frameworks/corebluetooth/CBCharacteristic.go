@@ -16,13 +16,13 @@ type CBCharacteristic struct {
 }
 
 var (
-	_clsCBCharacteristic = _objcClass("CBCharacteristic")
-	_cBCharacteristicSelService = objc.RegisterName("service")
-	_cBCharacteristicSelProperties = objc.RegisterName("properties")
-	_cBCharacteristicSelValue = objc.RegisterName("value")
-	_cBCharacteristicSelDescriptors = objc.RegisterName("descriptors")
+	_clsCBCharacteristic              = _objcClass("CBCharacteristic")
+	_cBCharacteristicSelService       = objc.RegisterName("service")
+	_cBCharacteristicSelProperties    = objc.RegisterName("properties")
+	_cBCharacteristicSelValue         = objc.RegisterName("value")
+	_cBCharacteristicSelDescriptors   = objc.RegisterName("descriptors")
 	_cBCharacteristicSelIsBroadcasted = objc.RegisterName("isBroadcasted")
-	_cBCharacteristicSelIsNotifying = objc.RegisterName("isNotifying")
+	_cBCharacteristicSelIsNotifying   = objc.RegisterName("isNotifying")
 )
 
 func CBCharacteristicFromID(id objc.ID) *CBCharacteristic {
@@ -38,7 +38,9 @@ func CBCharacteristicFromID(id objc.ID) *CBCharacteristic {
 // @property service @discussion A back-pointer to the service this characteristic belongs to.
 func (o *CBCharacteristic) Service() *CBService {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCharacteristicSelService)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBServiceFromID(_ret)
 }
 
@@ -51,14 +53,18 @@ func (o *CBCharacteristic) Properties() CBCharacteristicProperties {
 // @property value @discussion The value of the characteristic.
 func (o *CBCharacteristic) Value() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCharacteristicSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property descriptors @discussion A list of the CBDescriptors that have so far been discovered in this characteristic.
 func (o *CBCharacteristic) Descriptors() *foundation.NSArray[*CBDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCharacteristicSelDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBDescriptor](_ret)
 }
 
@@ -74,4 +80,3 @@ func (o *CBCharacteristic) IsNotifying() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBCharacteristicSelIsNotifying)
 	return _ret
 }
-

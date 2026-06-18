@@ -18,14 +18,14 @@ type MTRThermostatClusterAtomicResponseParams struct {
 }
 
 var (
-	_clsMTRThermostatClusterAtomicResponseParams = _objcClass("MTRThermostatClusterAtomicResponseParams")
+	_clsMTRThermostatClusterAtomicResponseParams                           = _objcClass("MTRThermostatClusterAtomicResponseParams")
 	_mTRThermostatClusterAtomicResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRThermostatClusterAtomicResponseParamsSelStatusCode = objc.RegisterName("statusCode")
-	_mTRThermostatClusterAtomicResponseParamsSelSetStatusCode = objc.RegisterName("setStatusCode:")
-	_mTRThermostatClusterAtomicResponseParamsSelAttributeStatus = objc.RegisterName("attributeStatus")
-	_mTRThermostatClusterAtomicResponseParamsSelSetAttributeStatus = objc.RegisterName("setAttributeStatus:")
-	_mTRThermostatClusterAtomicResponseParamsSelTimeout = objc.RegisterName("timeout")
-	_mTRThermostatClusterAtomicResponseParamsSelSetTimeout = objc.RegisterName("setTimeout:")
+	_mTRThermostatClusterAtomicResponseParamsSelStatusCode                 = objc.RegisterName("statusCode")
+	_mTRThermostatClusterAtomicResponseParamsSelSetStatusCode              = objc.RegisterName("setStatusCode:")
+	_mTRThermostatClusterAtomicResponseParamsSelAttributeStatus            = objc.RegisterName("attributeStatus")
+	_mTRThermostatClusterAtomicResponseParamsSelSetAttributeStatus         = objc.RegisterName("setAttributeStatus:")
+	_mTRThermostatClusterAtomicResponseParamsSelTimeout                    = objc.RegisterName("timeout")
+	_mTRThermostatClusterAtomicResponseParamsSelSetTimeout                 = objc.RegisterName("setTimeout:")
 )
 
 func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatClusterAtomicResponseParams {
@@ -42,7 +42,9 @@ func MTRThermostatClusterAtomicResponseParamsFromID(id objc.ID) *MTRThermostatCl
 func (o *MTRThermostatClusterAtomicResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThermostatClusterAtomicResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRThermostatClusterAtomicResponseParams) InitWithResponseValueError(re
 
 func (o *MTRThermostatClusterAtomicResponseParams) StatusCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelStatusCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -70,11 +74,12 @@ func (o *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeS
 
 func (o *MTRThermostatClusterAtomicResponseParams) Timeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicResponseParamsSelTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterAtomicResponseParams) SetTimeout(timeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterAtomicResponseParamsSelSetTimeout, timeout.Ptr())
 }
-

@@ -16,12 +16,12 @@ type MLCReductionLayer struct {
 }
 
 var (
-	_clsMLCReductionLayer = _objcClass("MLCReductionLayer")
-	_mLCReductionLayerSelLayerWithReductionTypeDimension = objc.RegisterName("layerWithReductionType:dimension:")
+	_clsMLCReductionLayer                                 = _objcClass("MLCReductionLayer")
+	_mLCReductionLayerSelLayerWithReductionTypeDimension  = objc.RegisterName("layerWithReductionType:dimension:")
 	_mLCReductionLayerSelLayerWithReductionTypeDimensions = objc.RegisterName("layerWithReductionType:dimensions:")
-	_mLCReductionLayerSelReductionType = objc.RegisterName("reductionType")
-	_mLCReductionLayerSelDimension = objc.RegisterName("dimension")
-	_mLCReductionLayerSelDimensions = objc.RegisterName("dimensions")
+	_mLCReductionLayerSelReductionType                    = objc.RegisterName("reductionType")
+	_mLCReductionLayerSelDimension                        = objc.RegisterName("dimension")
+	_mLCReductionLayerSelDimensions                       = objc.RegisterName("dimensions")
 )
 
 func MLCReductionLayerFromID(id objc.ID) *MLCReductionLayer {
@@ -37,14 +37,18 @@ func MLCReductionLayerFromID(id objc.ID) *MLCReductionLayer {
 // @abstract Create a reduction layer. @param    reductionType        The reduction type. @param    dimension          The reduction dimension. @return   A new reduction layer.
 func MLCReductionLayerLayerWithReductionTypeDimension(reductionType MLCReductionType, dimension uint) *MLCReductionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReductionLayer), _mLCReductionLayerSelLayerWithReductionTypeDimension, reductionType, dimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCReductionLayerFromID(_ret)
 }
 
 // @abstract Create a reduction layer. @param    reductionType        The reduction type. @param    dimensions               The list of dimensions to reduce over @return   A new reduction layer.
 func MLCReductionLayerLayerWithReductionTypeDimensions(reductionType MLCReductionType, dimensions *foundation.NSArray[*foundation.NSNumber]) *MLCReductionLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReductionLayer), _mLCReductionLayerSelLayerWithReductionTypeDimensions, reductionType, dimensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCReductionLayerFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *MLCReductionLayer) Dimensions() *foundation.NSArray[*foundation.NSNumbe
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCReductionLayerSelDimensions)
 	return _ret
 }
-

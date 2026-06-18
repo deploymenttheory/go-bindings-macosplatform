@@ -104,7 +104,9 @@ func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSSt
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -425,7 +427,9 @@ func (x *TokenFieldCell) SetDelegate(delegate raw.NSTokenFieldCellDelegate) {
 
 func (x *TokenFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
-func (x *TokenFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
+func (x *TokenFieldCell) asActionCell() *raw.NSActionCell {
+	return &x.inner.NSTextFieldCell.NSActionCell
+}
 
 func (x *TokenFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
 
@@ -499,4 +503,3 @@ type TokenFieldCellable interface {
 }
 
 var _ TokenFieldCellable = (*TokenFieldCell)(nil)
-

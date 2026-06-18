@@ -175,4 +175,3 @@ type ImageRequestOptionsable interface {
 }
 
 var _ ImageRequestOptionsable = (*ImageRequestOptions)(nil)
-

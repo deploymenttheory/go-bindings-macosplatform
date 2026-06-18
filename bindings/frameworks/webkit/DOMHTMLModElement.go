@@ -16,10 +16,10 @@ type DOMHTMLModElement struct {
 }
 
 var (
-	_clsDOMHTMLModElement = _objcClass("DOMHTMLModElement")
-	_dOMHTMLModElementSelCite = objc.RegisterName("cite")
-	_dOMHTMLModElementSelSetCite = objc.RegisterName("setCite:")
-	_dOMHTMLModElementSelDateTime = objc.RegisterName("dateTime")
+	_clsDOMHTMLModElement            = _objcClass("DOMHTMLModElement")
+	_dOMHTMLModElementSelCite        = objc.RegisterName("cite")
+	_dOMHTMLModElementSelSetCite     = objc.RegisterName("setCite:")
+	_dOMHTMLModElementSelDateTime    = objc.RegisterName("dateTime")
 	_dOMHTMLModElementSelSetDateTime = objc.RegisterName("setDateTime:")
 )
 
@@ -35,7 +35,9 @@ func DOMHTMLModElementFromID(id objc.ID) *DOMHTMLModElement {
 
 func (o *DOMHTMLModElement) Cite() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLModElementSelCite)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *DOMHTMLModElement) SetCite(cite *foundation.NSString) {
 
 func (o *DOMHTMLModElement) DateTime() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLModElementSelDateTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLModElement) SetDateTime(dateTime *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLModElementSelSetDateTime, dateTime.Ptr())
 }
-

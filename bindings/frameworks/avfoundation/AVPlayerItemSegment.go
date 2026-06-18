@@ -17,11 +17,11 @@ type AVPlayerItemSegment struct {
 }
 
 var (
-	_clsAVPlayerItemSegment = _objcClass("AVPlayerItemSegment")
-	_aVPlayerItemSegmentSelSegmentType = objc.RegisterName("segmentType")
-	_aVPlayerItemSegmentSelTimeMapping = objc.RegisterName("timeMapping")
-	_aVPlayerItemSegmentSelLoadedTimeRanges = objc.RegisterName("loadedTimeRanges")
-	_aVPlayerItemSegmentSelStartDate = objc.RegisterName("startDate")
+	_clsAVPlayerItemSegment                  = _objcClass("AVPlayerItemSegment")
+	_aVPlayerItemSegmentSelSegmentType       = objc.RegisterName("segmentType")
+	_aVPlayerItemSegmentSelTimeMapping       = objc.RegisterName("timeMapping")
+	_aVPlayerItemSegmentSelLoadedTimeRanges  = objc.RegisterName("loadedTimeRanges")
+	_aVPlayerItemSegmentSelStartDate         = objc.RegisterName("startDate")
 	_aVPlayerItemSegmentSelInterstitialEvent = objc.RegisterName("interstitialEvent")
 )
 
@@ -56,14 +56,17 @@ func (o *AVPlayerItemSegment) LoadedTimeRanges() *foundation.NSArray[*foundation
 // @property		startDate @abstract		The date this segment starts at. @discussion The date this segment starts at. This value will be nil if the primary item does not contain dates.
 func (o *AVPlayerItemSegment) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSegmentSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property		interstitialEvent @abstract		The associated interstitial event for this segment. @discussion The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
 func (o *AVPlayerItemSegment) InterstitialEvent() *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSegmentSelInterstitialEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
-

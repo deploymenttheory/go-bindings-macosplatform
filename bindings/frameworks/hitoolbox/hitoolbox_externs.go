@@ -14,7 +14,9 @@ import (
 // @const		IMKTextOrientationName @abstract	The key used to find client's text orientation value which is part of the dictionary returned by attributesForCharacterIndex. @discussion The orientation is the orientation of the client's text.  Use this key to access the orientation value in the attributes dictionary returned by attributesForCharacterIndex. The value is an NSNumber which represents a BOOL value. A value of 1 means the client's text is laid out horizontally.  A value of 0 means that the client's text is laid out vertically.
 func IMKTextOrientationName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "IMKTextOrientationName")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -95,55 +97,73 @@ func KHIToolboxVersionNumber() uintptr {
 
 func KHIViewMenuContentID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewMenuContentID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowCloseBoxID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowCloseBoxID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowCollapseBoxID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowCollapseBoxID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowContentID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowContentID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowGrowBoxID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowGrowBoxID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowTitleID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowTitleID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowToolbarButtonID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowToolbarButtonID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowToolbarID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowToolbarID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
 func KHIViewWindowZoomBoxID() ControlID {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kHIViewWindowZoomBoxID")
-	if ptr == 0 { return ControlID{} }
+	if ptr == 0 {
+		return ControlID{}
+	}
 	return *(*ControlID)(unsafe.Pointer(ptr))
 }
 
@@ -466,4 +486,3 @@ func KTXNRTFDocumentType() uintptr {
 	ptr, _ := purego.Dlsym(_hitoolboxLib, "kTXNRTFDocumentType")
 	return ptr
 }
-

@@ -16,17 +16,17 @@ type NSCollectionLayoutGroup struct {
 }
 
 var (
-	_clsNSCollectionLayoutGroup = _objcClass("NSCollectionLayoutGroup")
+	_clsNSCollectionLayoutGroup                                          = _objcClass("NSCollectionLayoutGroup")
 	_nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitemCount = objc.RegisterName("horizontalGroupWithLayoutSize:subitem:count:")
-	_nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems = objc.RegisterName("horizontalGroupWithLayoutSize:subitems:")
-	_nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount = objc.RegisterName("verticalGroupWithLayoutSize:subitem:count:")
-	_nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems = objc.RegisterName("verticalGroupWithLayoutSize:subitems:")
-	_nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider = objc.RegisterName("customGroupWithLayoutSize:itemProvider:")
-	_nSCollectionLayoutGroupSelVisualDescription = objc.RegisterName("visualDescription")
-	_nSCollectionLayoutGroupSelSetSupplementaryItems = objc.RegisterName("setSupplementaryItems:")
-	_nSCollectionLayoutGroupSelInterItemSpacing = objc.RegisterName("interItemSpacing")
-	_nSCollectionLayoutGroupSelSetInterItemSpacing = objc.RegisterName("setInterItemSpacing:")
-	_nSCollectionLayoutGroupSelSubitems = objc.RegisterName("subitems")
+	_nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems     = objc.RegisterName("horizontalGroupWithLayoutSize:subitems:")
+	_nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount   = objc.RegisterName("verticalGroupWithLayoutSize:subitem:count:")
+	_nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems       = objc.RegisterName("verticalGroupWithLayoutSize:subitems:")
+	_nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider     = objc.RegisterName("customGroupWithLayoutSize:itemProvider:")
+	_nSCollectionLayoutGroupSelVisualDescription                         = objc.RegisterName("visualDescription")
+	_nSCollectionLayoutGroupSelSetSupplementaryItems                     = objc.RegisterName("setSupplementaryItems:")
+	_nSCollectionLayoutGroupSelInterItemSpacing                          = objc.RegisterName("interItemSpacing")
+	_nSCollectionLayoutGroupSelSetInterItemSpacing                       = objc.RegisterName("setInterItemSpacing:")
+	_nSCollectionLayoutGroupSelSubitems                                  = objc.RegisterName("subitems")
 )
 
 func NSCollectionLayoutGroupFromID(id objc.ID) *NSCollectionLayoutGroup {
@@ -41,37 +41,49 @@ func NSCollectionLayoutGroupFromID(id objc.ID) *NSCollectionLayoutGroup {
 
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
 func NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelHorizontalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitemCount(layoutSize *NSCollectionLayoutSize, subitem *NSCollectionLayoutItem, count int) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitemCount, layoutSize.Ptr(), subitem.Ptr(), count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
 func NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize *NSCollectionLayoutSize, subitems *foundation.NSArray[*NSCollectionLayoutItem]) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelVerticalGroupWithLayoutSizeSubitems, layoutSize.Ptr(), subitems.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
 func NSCollectionLayoutGroupCustomGroupWithLayoutSizeItemProvider(layoutSize *NSCollectionLayoutSize, itemProvider objc.Block) *NSCollectionLayoutGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutGroup), _nSCollectionLayoutGroupSelCustomGroupWithLayoutSizeItemProvider, layoutSize.Ptr(), itemProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutGroupFromID(_ret)
 }
 
 func (o *NSCollectionLayoutGroup) VisualDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelVisualDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -81,7 +93,9 @@ func (o *NSCollectionLayoutGroup) SetSupplementaryItems(supplementaryItems *foun
 
 func (o *NSCollectionLayoutGroup) InterItemSpacing() *NSCollectionLayoutSpacing {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelInterItemSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSpacingFromID(_ret)
 }
 
@@ -91,7 +105,8 @@ func (o *NSCollectionLayoutGroup) SetInterItemSpacing(interItemSpacing *NSCollec
 
 func (o *NSCollectionLayoutGroup) Subitems() *foundation.NSArray[*NSCollectionLayoutItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutGroupSelSubitems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionLayoutItem](_ret)
 }
-

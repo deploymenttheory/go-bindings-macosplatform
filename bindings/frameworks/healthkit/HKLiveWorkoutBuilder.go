@@ -15,16 +15,16 @@ type HKLiveWorkoutBuilder struct {
 }
 
 var (
-	_clsHKLiveWorkoutBuilder = _objcClass("HKLiveWorkoutBuilder")
-	_hKLiveWorkoutBuilderSelDelegate = objc.RegisterName("delegate")
-	_hKLiveWorkoutBuilderSelSetDelegate = objc.RegisterName("setDelegate:")
-	_hKLiveWorkoutBuilderSelWorkoutSession = objc.RegisterName("workoutSession")
-	_hKLiveWorkoutBuilderSelShouldCollectWorkoutEvents = objc.RegisterName("shouldCollectWorkoutEvents")
+	_clsHKLiveWorkoutBuilder                              = _objcClass("HKLiveWorkoutBuilder")
+	_hKLiveWorkoutBuilderSelDelegate                      = objc.RegisterName("delegate")
+	_hKLiveWorkoutBuilderSelSetDelegate                   = objc.RegisterName("setDelegate:")
+	_hKLiveWorkoutBuilderSelWorkoutSession                = objc.RegisterName("workoutSession")
+	_hKLiveWorkoutBuilderSelShouldCollectWorkoutEvents    = objc.RegisterName("shouldCollectWorkoutEvents")
 	_hKLiveWorkoutBuilderSelSetShouldCollectWorkoutEvents = objc.RegisterName("setShouldCollectWorkoutEvents:")
-	_hKLiveWorkoutBuilderSelDataSource = objc.RegisterName("dataSource")
-	_hKLiveWorkoutBuilderSelSetDataSource = objc.RegisterName("setDataSource:")
-	_hKLiveWorkoutBuilderSelElapsedTime = objc.RegisterName("elapsedTime")
-	_hKLiveWorkoutBuilderSelCurrentWorkoutActivity = objc.RegisterName("currentWorkoutActivity")
+	_hKLiveWorkoutBuilderSelDataSource                    = objc.RegisterName("dataSource")
+	_hKLiveWorkoutBuilderSelSetDataSource                 = objc.RegisterName("setDataSource:")
+	_hKLiveWorkoutBuilderSelElapsedTime                   = objc.RegisterName("elapsedTime")
+	_hKLiveWorkoutBuilderSelCurrentWorkoutActivity        = objc.RegisterName("currentWorkoutActivity")
 )
 
 func HKLiveWorkoutBuilderFromID(id objc.ID) *HKLiveWorkoutBuilder {
@@ -50,7 +50,9 @@ func (o *HKLiveWorkoutBuilder) SetDelegate(delegate HKLiveWorkoutBuilderDelegate
 // @property      workoutSession @abstract      The workout session with which this builder is associated.
 func (o *HKLiveWorkoutBuilder) WorkoutSession() *HKWorkoutSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutBuilderSelWorkoutSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutSessionFromID(_ret)
 }
 
@@ -67,7 +69,9 @@ func (o *HKLiveWorkoutBuilder) SetShouldCollectWorkoutEvents(shouldCollectWorkou
 // @property      dataSource @abstract      The data source that will provide data to this workout builder.
 func (o *HKLiveWorkoutBuilder) DataSource() *HKLiveWorkoutDataSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutBuilderSelDataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKLiveWorkoutDataSourceFromID(_ret)
 }
 
@@ -84,7 +88,8 @@ func (o *HKLiveWorkoutBuilder) ElapsedTime() float64 {
 // @property      currentWorkoutActivity @abstract      The latest activity that has been added to this builder. @discussion    When an activity is in progress it will be returned by this property. The end date of this activity will always be nil. When the activity is ended, the property would be set to nil until a new activity begins.
 func (o *HKLiveWorkoutBuilder) CurrentWorkoutActivity() *HKWorkoutActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLiveWorkoutBuilderSelCurrentWorkoutActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutActivityFromID(_ret)
 }
-

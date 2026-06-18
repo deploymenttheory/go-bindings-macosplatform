@@ -50,4 +50,3 @@ type PlayerVideoOutputable interface {
 }
 
 var _ PlayerVideoOutputable = (*PlayerVideoOutput)(nil)
-

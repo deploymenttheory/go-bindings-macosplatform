@@ -109,9 +109,13 @@ func (x *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(para
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterApplicationBasic) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterApplicationBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterApplicationBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterApplicationBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterApplicationBasicable is the interface implemented by [MTRClusterApplicationBasic], for mocking and DI.
 type MTRClusterApplicationBasicable interface {
@@ -132,4 +136,3 @@ type MTRClusterApplicationBasicable interface {
 }
 
 var _ MTRClusterApplicationBasicable = (*MTRClusterApplicationBasic)(nil)
-

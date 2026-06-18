@@ -15,17 +15,17 @@ type MKStandardMapConfiguration struct {
 }
 
 var (
-	_clsMKStandardMapConfiguration = _objcClass("MKStandardMapConfiguration")
-	_mKStandardMapConfigurationSelInit = objc.RegisterName("init")
-	_mKStandardMapConfigurationSelInitWithElevationStyle = objc.RegisterName("initWithElevationStyle:")
+	_clsMKStandardMapConfiguration                                    = _objcClass("MKStandardMapConfiguration")
+	_mKStandardMapConfigurationSelInit                                = objc.RegisterName("init")
+	_mKStandardMapConfigurationSelInitWithElevationStyle              = objc.RegisterName("initWithElevationStyle:")
 	_mKStandardMapConfigurationSelInitWithElevationStyleEmphasisStyle = objc.RegisterName("initWithElevationStyle:emphasisStyle:")
-	_mKStandardMapConfigurationSelInitWithEmphasisStyle = objc.RegisterName("initWithEmphasisStyle:")
-	_mKStandardMapConfigurationSelEmphasisStyle = objc.RegisterName("emphasisStyle")
-	_mKStandardMapConfigurationSelSetEmphasisStyle = objc.RegisterName("setEmphasisStyle:")
-	_mKStandardMapConfigurationSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
-	_mKStandardMapConfigurationSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKStandardMapConfigurationSelShowsTraffic = objc.RegisterName("showsTraffic")
-	_mKStandardMapConfigurationSelSetShowsTraffic = objc.RegisterName("setShowsTraffic:")
+	_mKStandardMapConfigurationSelInitWithEmphasisStyle               = objc.RegisterName("initWithEmphasisStyle:")
+	_mKStandardMapConfigurationSelEmphasisStyle                       = objc.RegisterName("emphasisStyle")
+	_mKStandardMapConfigurationSelSetEmphasisStyle                    = objc.RegisterName("setEmphasisStyle:")
+	_mKStandardMapConfigurationSelPointOfInterestFilter               = objc.RegisterName("pointOfInterestFilter")
+	_mKStandardMapConfigurationSelSetPointOfInterestFilter            = objc.RegisterName("setPointOfInterestFilter:")
+	_mKStandardMapConfigurationSelShowsTraffic                        = objc.RegisterName("showsTraffic")
+	_mKStandardMapConfigurationSelSetShowsTraffic                     = objc.RegisterName("setShowsTraffic:")
 )
 
 func MKStandardMapConfigurationFromID(id objc.ID) *MKStandardMapConfiguration {
@@ -40,25 +40,33 @@ func MKStandardMapConfigurationFromID(id objc.ID) *MKStandardMapConfiguration {
 
 func (o *MKStandardMapConfiguration) Init() *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
 func (o *MKStandardMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithElevationStyle, elevationStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
 func (o *MKStandardMapConfiguration) InitWithElevationStyleEmphasisStyle(elevationStyle MKMapElevationStyle, emphasisStyle MKStandardMapEmphasisStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithElevationStyleEmphasisStyle, elevationStyle, emphasisStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
 func (o *MKStandardMapConfiguration) InitWithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *MKStandardMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelInitWithEmphasisStyle, emphasisStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKStandardMapConfigurationFromID(_ret)
 }
 
@@ -73,7 +81,9 @@ func (o *MKStandardMapConfiguration) SetEmphasisStyle(emphasisStyle MKStandardMa
 
 func (o *MKStandardMapConfiguration) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKStandardMapConfigurationSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -89,4 +99,3 @@ func (o *MKStandardMapConfiguration) ShowsTraffic() bool {
 func (o *MKStandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
 	o.Ptr().Send(_mKStandardMapConfigurationSelSetShowsTraffic, showsTraffic)
 }
-

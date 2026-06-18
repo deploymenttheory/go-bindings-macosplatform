@@ -15,7 +15,9 @@ type CollectionViewCompositionalLayout struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewCompositionalLayout].
-func (x *CollectionViewCompositionalLayout) Unwrap() *raw.NSCollectionViewCompositionalLayout { return x.inner }
+func (x *CollectionViewCompositionalLayout) Unwrap() *raw.NSCollectionViewCompositionalLayout {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -77,7 +79,9 @@ func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *raw.
 	x.inner.SetConfiguration(configuration)
 }
 
-func (x *CollectionViewCompositionalLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+func (x *CollectionViewCompositionalLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
+	return &x.inner.NSCollectionViewLayout
+}
 
 // CollectionViewCompositionalLayoutable is the interface implemented by [CollectionViewCompositionalLayout], for mocking and DI.
 type CollectionViewCompositionalLayoutable interface {
@@ -88,4 +92,3 @@ type CollectionViewCompositionalLayoutable interface {
 }
 
 var _ CollectionViewCompositionalLayoutable = (*CollectionViewCompositionalLayout)(nil)
-

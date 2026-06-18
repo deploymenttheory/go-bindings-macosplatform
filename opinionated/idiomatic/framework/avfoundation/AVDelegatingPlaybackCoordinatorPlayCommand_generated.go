@@ -16,7 +16,9 @@ type DelegatingPlaybackCoordinatorPlayCommand struct {
 }
 
 // Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorPlayCommand].
-func (x *DelegatingPlaybackCoordinatorPlayCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlayCommand { return x.inner }
+func (x *DelegatingPlaybackCoordinatorPlayCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlayCommand {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *DelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.CMT
 	return x.inner.HostClockTime()
 }
 
-func (x *DelegatingPlaybackCoordinatorPlayCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+func (x *DelegatingPlaybackCoordinatorPlayCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
+	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+}
 
 // DelegatingPlaybackCoordinatorPlayCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlayCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorPlayCommandable interface {
@@ -62,4 +66,3 @@ type DelegatingPlaybackCoordinatorPlayCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorPlayCommandable = (*DelegatingPlaybackCoordinatorPlayCommand)(nil)
-

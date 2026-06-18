@@ -52,4 +52,3 @@ func KSKTermChars() uintptr {
 	ptr, _ := purego.Dlsym(_searchkitLib, "kSKTermChars")
 	return ptr
 }
-

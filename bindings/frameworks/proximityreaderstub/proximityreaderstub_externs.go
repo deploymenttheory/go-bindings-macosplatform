@@ -11,13 +11,16 @@ import (
 
 func ProximityReaderStubVersionNumber() float64 {
 	ptr, _ := purego.Dlsym(_proximityreaderstubLib, "ProximityReaderStubVersionNumber")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
 func ProximityReaderStubVersionString() []unsafe.Pointer {
 	ptr, _ := purego.Dlsym(_proximityreaderstubLib, "ProximityReaderStubVersionString")
-	if ptr == 0 { return []unsafe.Pointer{} }
+	if ptr == 0 {
+		return []unsafe.Pointer{}
+	}
 	return *(*[]unsafe.Pointer)(unsafe.Pointer(ptr))
 }
-

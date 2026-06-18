@@ -25,20 +25,19 @@ type OpaquePMPrinter struct{}
 type OpaquePMServer struct{}
 
 type PMLanguageInfo struct {
-	Level [33]uint8
+	Level   [33]uint8
 	Version [33]uint8
 	Release [33]uint8
 }
 
 type PMRect struct {
-	Top float64
-	Left float64
+	Top    float64
+	Left   float64
 	Bottom float64
-	Right float64
+	Right  float64
 }
 
 type PMResolution struct {
 	HRes float64
 	VRes float64
 }
-

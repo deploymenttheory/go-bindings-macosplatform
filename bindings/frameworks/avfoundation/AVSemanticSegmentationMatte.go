@@ -19,14 +19,14 @@ type AVSemanticSegmentationMatte struct {
 }
 
 var (
-	_clsAVSemanticSegmentationMatte = _objcClass("AVSemanticSegmentationMatte")
+	_clsAVSemanticSegmentationMatte                                                                                       = _objcClass("AVSemanticSegmentationMatte")
 	_aVSemanticSegmentationMatteSelSemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError = objc.RegisterName("semanticSegmentationMatteFromImageSourceAuxiliaryDataType:dictionaryRepresentation:error:")
-	_aVSemanticSegmentationMatteSelSemanticSegmentationMatteByApplyingExifOrientation = objc.RegisterName("semanticSegmentationMatteByApplyingExifOrientation:")
-	_aVSemanticSegmentationMatteSelSemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError = objc.RegisterName("semanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer:error:")
-	_aVSemanticSegmentationMatteSelDictionaryRepresentationForAuxiliaryDataType = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
-	_aVSemanticSegmentationMatteSelMatteType = objc.RegisterName("matteType")
-	_aVSemanticSegmentationMatteSelPixelFormatType = objc.RegisterName("pixelFormatType")
-	_aVSemanticSegmentationMatteSelMattingImage = objc.RegisterName("mattingImage")
+	_aVSemanticSegmentationMatteSelSemanticSegmentationMatteByApplyingExifOrientation                                     = objc.RegisterName("semanticSegmentationMatteByApplyingExifOrientation:")
+	_aVSemanticSegmentationMatteSelSemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError      = objc.RegisterName("semanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer:error:")
+	_aVSemanticSegmentationMatteSelDictionaryRepresentationForAuxiliaryDataType                                           = objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:")
+	_aVSemanticSegmentationMatteSelMatteType                                                                              = objc.RegisterName("matteType")
+	_aVSemanticSegmentationMatteSelPixelFormatType                                                                        = objc.RegisterName("pixelFormatType")
+	_aVSemanticSegmentationMatteSelMattingImage                                                                           = objc.RegisterName("mattingImage")
 )
 
 func AVSemanticSegmentationMatteFromID(id objc.ID) *AVSemanticSegmentationMatte {
@@ -43,7 +43,9 @@ func AVSemanticSegmentationMatteFromID(id objc.ID) *AVSemanticSegmentationMatte 
 func AVSemanticSegmentationMatteSemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError(imageSourceAuxiliaryDataType unsafe.Pointer, imageSourceAuxiliaryDataInfoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) (*AVSemanticSegmentationMatte, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSemanticSegmentationMatte), _aVSemanticSegmentationMatteSelSemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentationError, imageSourceAuxiliaryDataType, imageSourceAuxiliaryDataInfoDictionary, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func AVSemanticSegmentationMatteSemanticSegmentationMatteFromImageSourceAuxiliar
 // @method semanticSegmentationMatteByApplyingExifOrientation: @abstract Returns a derivative AVSemanticSegmentationMatte instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the matte should be rotated / mirrored. @result An AVSemanticSegmentationMatte's instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing a semantic segmentation matte, you may use this initializer to create a derivative copy of the matte in which the specified orientation is applied. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
 func (o *AVSemanticSegmentationMatte) SemanticSegmentationMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *AVSemanticSegmentationMatte {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSemanticSegmentationMatteSelSemanticSegmentationMatteByApplyingExifOrientation, exifOrientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSemanticSegmentationMatteFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *AVSemanticSegmentationMatte) SemanticSegmentationMatteByApplyingExifOri
 func (o *AVSemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*AVSemanticSegmentationMatte, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSemanticSegmentationMatteSelSemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError, pixelBuffer, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -77,7 +83,9 @@ func (o *AVSemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataTy
 // @property matteType @abstract Specifies the receiver's semantic segmentation matting image type. @discussion An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
 func (o *AVSemanticSegmentationMatte) MatteType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSemanticSegmentationMatteSelMatteType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,4 +100,3 @@ func (o *AVSemanticSegmentationMatte) MattingImage() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVSemanticSegmentationMatteSelMattingImage)
 	return _ret
 }
-

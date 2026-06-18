@@ -85,4 +85,3 @@ type MTL4CommandQueueDescriptorable interface {
 }
 
 var _ MTL4CommandQueueDescriptorable = (*MTL4CommandQueueDescriptor)(nil)
-

@@ -24,4 +24,3 @@ func KCSetInteractionAllowed(state uint8) error {
 	}
 	return nil
 }
-

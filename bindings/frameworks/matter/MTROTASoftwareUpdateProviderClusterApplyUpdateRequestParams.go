@@ -16,14 +16,14 @@ type MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams = _objcClass("MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelUpdateToken = objc.RegisterName("updateToken")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetUpdateToken = objc.RegisterName("setUpdateToken:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelGetNewVersion = objc.RegisterName("getNewVersion")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetNewVersion = objc.RegisterName("setNewVersion:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams                               = _objcClass("MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelUpdateToken                    = objc.RegisterName("updateToken")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetUpdateToken                 = objc.RegisterName("setUpdateToken:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelGetNewVersion                  = objc.RegisterName("getNewVersion")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetNewVersion                  = objc.RegisterName("setNewVersion:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.I
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) UpdateToken() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelUpdateToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetUpdateT
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) GetNewVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelGetNewVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetNewVers
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetTimedIn
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

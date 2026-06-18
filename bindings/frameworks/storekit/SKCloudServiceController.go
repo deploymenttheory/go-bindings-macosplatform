@@ -19,12 +19,12 @@ type SKCloudServiceController struct {
 }
 
 var (
-	_clsSKCloudServiceController = _objcClass("SKCloudServiceController")
-	_sKCloudServiceControllerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_sKCloudServiceControllerSelRequestAuthorization = objc.RegisterName("requestAuthorization:")
-	_sKCloudServiceControllerSelRequestCapabilitiesWithCompletionHandler = objc.RegisterName("requestCapabilitiesWithCompletionHandler:")
-	_sKCloudServiceControllerSelRequestStorefrontCountryCodeWithCompletionHandler = objc.RegisterName("requestStorefrontCountryCodeWithCompletionHandler:")
-	_sKCloudServiceControllerSelRequestStorefrontIdentifierWithCompletionHandler = objc.RegisterName("requestStorefrontIdentifierWithCompletionHandler:")
+	_clsSKCloudServiceController                                                   = _objcClass("SKCloudServiceController")
+	_sKCloudServiceControllerSelAuthorizationStatus                                = objc.RegisterName("authorizationStatus")
+	_sKCloudServiceControllerSelRequestAuthorization                               = objc.RegisterName("requestAuthorization:")
+	_sKCloudServiceControllerSelRequestCapabilitiesWithCompletionHandler           = objc.RegisterName("requestCapabilitiesWithCompletionHandler:")
+	_sKCloudServiceControllerSelRequestStorefrontCountryCodeWithCompletionHandler  = objc.RegisterName("requestStorefrontCountryCodeWithCompletionHandler:")
+	_sKCloudServiceControllerSelRequestStorefrontIdentifierWithCompletionHandler   = objc.RegisterName("requestStorefrontIdentifierWithCompletionHandler:")
 	_sKCloudServiceControllerSelRequestUserTokenForDeveloperTokenCompletionHandler = objc.RegisterName("requestUserTokenForDeveloperToken:completionHandler:")
 )
 
@@ -112,4 +112,3 @@ func (o *SKCloudServiceController) RequestUserTokenForDeveloperTokenCompletionHa
 	}
 	o.Ptr().Send(_sKCloudServiceControllerSelRequestUserTokenForDeveloperTokenCompletionHandler, developerToken.Ptr(), __block_completionHandler)
 }
-

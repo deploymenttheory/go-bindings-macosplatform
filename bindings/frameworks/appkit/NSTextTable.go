@@ -17,18 +17,18 @@ type NSTextTable struct {
 }
 
 var (
-	_clsNSTextTable = _objcClass("NSTextTable")
-	_nSTextTableSelRectForBlockLayoutAtPointInRectTextContainerCharacterRange = objc.RegisterName("rectForBlock:layoutAtPoint:inRect:textContainer:characterRange:")
-	_nSTextTableSelBoundsRectForBlockContentRectInRectTextContainerCharacterRange = objc.RegisterName("boundsRectForBlock:contentRect:inRect:textContainer:characterRange:")
+	_clsNSTextTable                                                                 = _objcClass("NSTextTable")
+	_nSTextTableSelRectForBlockLayoutAtPointInRectTextContainerCharacterRange       = objc.RegisterName("rectForBlock:layoutAtPoint:inRect:textContainer:characterRange:")
+	_nSTextTableSelBoundsRectForBlockContentRectInRectTextContainerCharacterRange   = objc.RegisterName("boundsRectForBlock:contentRect:inRect:textContainer:characterRange:")
 	_nSTextTableSelDrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager = objc.RegisterName("drawBackgroundForBlock:withFrame:inView:characterRange:layoutManager:")
-	_nSTextTableSelNumberOfColumns = objc.RegisterName("numberOfColumns")
-	_nSTextTableSelSetNumberOfColumns = objc.RegisterName("setNumberOfColumns:")
-	_nSTextTableSelLayoutAlgorithm = objc.RegisterName("layoutAlgorithm")
-	_nSTextTableSelSetLayoutAlgorithm = objc.RegisterName("setLayoutAlgorithm:")
-	_nSTextTableSelCollapsesBorders = objc.RegisterName("collapsesBorders")
-	_nSTextTableSelSetCollapsesBorders = objc.RegisterName("setCollapsesBorders:")
-	_nSTextTableSelHidesEmptyCells = objc.RegisterName("hidesEmptyCells")
-	_nSTextTableSelSetHidesEmptyCells = objc.RegisterName("setHidesEmptyCells:")
+	_nSTextTableSelNumberOfColumns                                                  = objc.RegisterName("numberOfColumns")
+	_nSTextTableSelSetNumberOfColumns                                               = objc.RegisterName("setNumberOfColumns:")
+	_nSTextTableSelLayoutAlgorithm                                                  = objc.RegisterName("layoutAlgorithm")
+	_nSTextTableSelSetLayoutAlgorithm                                               = objc.RegisterName("setLayoutAlgorithm:")
+	_nSTextTableSelCollapsesBorders                                                 = objc.RegisterName("collapsesBorders")
+	_nSTextTableSelSetCollapsesBorders                                              = objc.RegisterName("setCollapsesBorders:")
+	_nSTextTableSelHidesEmptyCells                                                  = objc.RegisterName("hidesEmptyCells")
+	_nSTextTableSelSetHidesEmptyCells                                               = objc.RegisterName("setHidesEmptyCells:")
 )
 
 func NSTextTableFromID(id objc.ID) *NSTextTable {
@@ -90,4 +90,3 @@ func (o *NSTextTable) HidesEmptyCells() bool {
 func (o *NSTextTable) SetHidesEmptyCells(hidesEmptyCells bool) {
 	o.Ptr().Send(_nSTextTableSelSetHidesEmptyCells, hidesEmptyCells)
 }
-

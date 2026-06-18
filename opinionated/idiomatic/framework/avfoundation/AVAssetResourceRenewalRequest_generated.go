@@ -48,7 +48,9 @@ func (x *AssetResourceRenewalRequest) WithRedirect(redirect *foundation.NSURLReq
 	return x
 }
 
-func (x *AssetResourceRenewalRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest { return &x.inner.AVAssetResourceLoadingRequest }
+func (x *AssetResourceRenewalRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest {
+	return &x.inner.AVAssetResourceLoadingRequest
+}
 
 // AssetResourceRenewalRequestable is the interface implemented by [AssetResourceRenewalRequest], for mocking and DI.
 type AssetResourceRenewalRequestable interface {
@@ -58,4 +60,3 @@ type AssetResourceRenewalRequestable interface {
 }
 
 var _ AssetResourceRenewalRequestable = (*AssetResourceRenewalRequest)(nil)
-

@@ -19,28 +19,28 @@ type AVSampleCursor struct {
 }
 
 var (
-	_clsAVSampleCursor = _objcClass("AVSampleCursor")
-	_aVSampleCursorSelStepInDecodeOrderByCount = objc.RegisterName("stepInDecodeOrderByCount:")
-	_aVSampleCursorSelStepInPresentationOrderByCount = objc.RegisterName("stepInPresentationOrderByCount:")
-	_aVSampleCursorSelStepByDecodeTimeWasPinned = objc.RegisterName("stepByDecodeTime:wasPinned:")
-	_aVSampleCursorSelStepByPresentationTimeWasPinned = objc.RegisterName("stepByPresentationTime:wasPinned:")
-	_aVSampleCursorSelComparePositionInDecodeOrderWithPositionOfCursor = objc.RegisterName("comparePositionInDecodeOrderWithPositionOfCursor:")
+	_clsAVSampleCursor                                                                               = _objcClass("AVSampleCursor")
+	_aVSampleCursorSelStepInDecodeOrderByCount                                                       = objc.RegisterName("stepInDecodeOrderByCount:")
+	_aVSampleCursorSelStepInPresentationOrderByCount                                                 = objc.RegisterName("stepInPresentationOrderByCount:")
+	_aVSampleCursorSelStepByDecodeTimeWasPinned                                                      = objc.RegisterName("stepByDecodeTime:wasPinned:")
+	_aVSampleCursorSelStepByPresentationTimeWasPinned                                                = objc.RegisterName("stepByPresentationTime:wasPinned:")
+	_aVSampleCursorSelComparePositionInDecodeOrderWithPositionOfCursor                               = objc.RegisterName("comparePositionInDecodeOrderWithPositionOfCursor:")
 	_aVSampleCursorSelSamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor = objc.RegisterName("samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor:")
 	_aVSampleCursorSelSamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor = objc.RegisterName("samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor:")
-	_aVSampleCursorSelPresentationTimeStamp = objc.RegisterName("presentationTimeStamp")
-	_aVSampleCursorSelDecodeTimeStamp = objc.RegisterName("decodeTimeStamp")
-	_aVSampleCursorSelCopyCurrentSampleFormatDescription = objc.RegisterName("copyCurrentSampleFormatDescription")
-	_aVSampleCursorSelCurrentSampleDuration = objc.RegisterName("currentSampleDuration")
-	_aVSampleCursorSelCurrentSampleSyncInfo = objc.RegisterName("currentSampleSyncInfo")
-	_aVSampleCursorSelCurrentSampleDependencyInfo = objc.RegisterName("currentSampleDependencyInfo")
-	_aVSampleCursorSelCurrentSampleDependencyAttachments = objc.RegisterName("currentSampleDependencyAttachments")
-	_aVSampleCursorSelCurrentSampleAudioDependencyInfo = objc.RegisterName("currentSampleAudioDependencyInfo")
-	_aVSampleCursorSelSamplesRequiredForDecoderRefresh = objc.RegisterName("samplesRequiredForDecoderRefresh")
-	_aVSampleCursorSelCurrentChunkStorageURL = objc.RegisterName("currentChunkStorageURL")
-	_aVSampleCursorSelCurrentChunkStorageRange = objc.RegisterName("currentChunkStorageRange")
-	_aVSampleCursorSelCurrentChunkInfo = objc.RegisterName("currentChunkInfo")
-	_aVSampleCursorSelCurrentSampleIndexInChunk = objc.RegisterName("currentSampleIndexInChunk")
-	_aVSampleCursorSelCurrentSampleStorageRange = objc.RegisterName("currentSampleStorageRange")
+	_aVSampleCursorSelPresentationTimeStamp                                                          = objc.RegisterName("presentationTimeStamp")
+	_aVSampleCursorSelDecodeTimeStamp                                                                = objc.RegisterName("decodeTimeStamp")
+	_aVSampleCursorSelCopyCurrentSampleFormatDescription                                             = objc.RegisterName("copyCurrentSampleFormatDescription")
+	_aVSampleCursorSelCurrentSampleDuration                                                          = objc.RegisterName("currentSampleDuration")
+	_aVSampleCursorSelCurrentSampleSyncInfo                                                          = objc.RegisterName("currentSampleSyncInfo")
+	_aVSampleCursorSelCurrentSampleDependencyInfo                                                    = objc.RegisterName("currentSampleDependencyInfo")
+	_aVSampleCursorSelCurrentSampleDependencyAttachments                                             = objc.RegisterName("currentSampleDependencyAttachments")
+	_aVSampleCursorSelCurrentSampleAudioDependencyInfo                                               = objc.RegisterName("currentSampleAudioDependencyInfo")
+	_aVSampleCursorSelSamplesRequiredForDecoderRefresh                                               = objc.RegisterName("samplesRequiredForDecoderRefresh")
+	_aVSampleCursorSelCurrentChunkStorageURL                                                         = objc.RegisterName("currentChunkStorageURL")
+	_aVSampleCursorSelCurrentChunkStorageRange                                                       = objc.RegisterName("currentChunkStorageRange")
+	_aVSampleCursorSelCurrentChunkInfo                                                               = objc.RegisterName("currentChunkInfo")
+	_aVSampleCursorSelCurrentSampleIndexInChunk                                                      = objc.RegisterName("currentSampleIndexInChunk")
+	_aVSampleCursorSelCurrentSampleStorageRange                                                      = objc.RegisterName("currentSampleStorageRange")
 )
 
 func AVSampleCursorFromID(id objc.ID) *AVSampleCursor {
@@ -152,7 +152,9 @@ func (o *AVSampleCursor) SamplesRequiredForDecoderRefresh() int {
 // @property		currentChunkStorageURL @abstract		The URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". @discussion		May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
 func (o *AVSampleCursor) CurrentChunkStorageURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleCursorSelCurrentChunkStorageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -179,4 +181,3 @@ func (o *AVSampleCursor) CurrentSampleStorageRange() AVSampleCursorStorageRange 
 	_ret := objc.Send[AVSampleCursorStorageRange](o.Ptr(), _aVSampleCursorSelCurrentSampleStorageRange)
 	return _ret
 }
-

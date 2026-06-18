@@ -26,4 +26,3 @@ func SCStreamErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_replaykitLib, "SCStreamErrorDomain")
 	return ptr
 }
-

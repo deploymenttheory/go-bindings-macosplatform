@@ -48,4 +48,3 @@ type AUPannerViewable interface {
 }
 
 var _ AUPannerViewable = (*AUPannerView)(nil)
-

@@ -15,16 +15,16 @@ type NSURLDownload struct {
 }
 
 var (
-	_clsNSURLDownload = _objcClass("NSURLDownload")
+	_clsNSURLDownload                                             = _objcClass("NSURLDownload")
 	_nSURLDownloadSelCanResumeDownloadDecodedWithEncodingMIMEType = objc.RegisterName("canResumeDownloadDecodedWithEncodingMIMEType:")
-	_nSURLDownloadSelInitWithRequestDelegate = objc.RegisterName("initWithRequest:delegate:")
-	_nSURLDownloadSelInitWithResumeDataDelegatePath = objc.RegisterName("initWithResumeData:delegate:path:")
-	_nSURLDownloadSelCancel = objc.RegisterName("cancel")
-	_nSURLDownloadSelSetDestinationAllowOverwrite = objc.RegisterName("setDestination:allowOverwrite:")
-	_nSURLDownloadSelRequest = objc.RegisterName("request")
-	_nSURLDownloadSelResumeData = objc.RegisterName("resumeData")
-	_nSURLDownloadSelDeletesFileUponFailure = objc.RegisterName("deletesFileUponFailure")
-	_nSURLDownloadSelSetDeletesFileUponFailure = objc.RegisterName("setDeletesFileUponFailure:")
+	_nSURLDownloadSelInitWithRequestDelegate                      = objc.RegisterName("initWithRequest:delegate:")
+	_nSURLDownloadSelInitWithResumeDataDelegatePath               = objc.RegisterName("initWithResumeData:delegate:path:")
+	_nSURLDownloadSelCancel                                       = objc.RegisterName("cancel")
+	_nSURLDownloadSelSetDestinationAllowOverwrite                 = objc.RegisterName("setDestination:allowOverwrite:")
+	_nSURLDownloadSelRequest                                      = objc.RegisterName("request")
+	_nSURLDownloadSelResumeData                                   = objc.RegisterName("resumeData")
+	_nSURLDownloadSelDeletesFileUponFailure                       = objc.RegisterName("deletesFileUponFailure")
+	_nSURLDownloadSelSetDeletesFileUponFailure                    = objc.RegisterName("setDeletesFileUponFailure:")
 )
 
 func NSURLDownloadFromID(id objc.ID) *NSURLDownload {
@@ -47,7 +47,9 @@ func NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType(mIMEType *NSStrin
 // Deprecated: Use NSURLSession downloadTask (see NSURLSession.h)
 func (o *NSURLDownload) InitWithRequestDelegate(request *NSURLRequest, delegate NSURLDownloadDelegate) *NSURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelInitWithRequestDelegate, request.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLDownloadFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *NSURLDownload) InitWithRequestDelegate(request *NSURLRequest, delegate 
 // Deprecated: Use NSURLSession downloadTask (see NSURLSession.h)
 func (o *NSURLDownload) InitWithResumeDataDelegatePath(resumeData *NSData, delegate NSURLDownloadDelegate, path *NSString) *NSURLDownload {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelInitWithResumeDataDelegatePath, resumeData.Ptr(), delegate, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLDownloadFromID(_ret)
 }
 
@@ -72,14 +76,18 @@ func (o *NSURLDownload) SetDestinationAllowOverwrite(path *NSString, allowOverwr
 // @abstract Returns the request of the download. @result The request of the download.
 func (o *NSURLDownload) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 // @abstract Returns the resume data of a download that is incomplete. @result The resume data. @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary state information that NSURLDownload needs to resume a download. The resume data can later be used when initializing a download with initWithResumeData:delegate:path:. Non-nil is returned if resuming the download seems possible. Non-nil is returned if the download was cancelled or ended in error after some but not all data has been received. The protocol of the download as well as the server must support resuming for non-nil to be returned. In order to later resume a download, be sure to call setDeletesFileUponFailure: with NO.
 func (o *NSURLDownload) ResumeData() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLDownloadSelResumeData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -92,4 +100,3 @@ func (o *NSURLDownload) DeletesFileUponFailure() bool {
 func (o *NSURLDownload) SetDeletesFileUponFailure(deletesFileUponFailure bool) {
 	o.Ptr().Send(_nSURLDownloadSelSetDeletesFileUponFailure, deletesFileUponFailure)
 }
-

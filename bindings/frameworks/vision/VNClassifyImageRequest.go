@@ -18,9 +18,9 @@ type VNClassifyImageRequest struct {
 }
 
 var (
-	_clsVNClassifyImageRequest = _objcClass("VNClassifyImageRequest")
+	_clsVNClassifyImageRequest                                     = _objcClass("VNClassifyImageRequest")
 	_vNClassifyImageRequestSelKnownClassificationsForRevisionError = objc.RegisterName("knownClassificationsForRevision:error:")
-	_vNClassifyImageRequestSelSupportedIdentifiersAndReturnError = objc.RegisterName("supportedIdentifiersAndReturnError:")
+	_vNClassifyImageRequestSelSupportedIdentifiersAndReturnError   = objc.RegisterName("supportedIdentifiersAndReturnError:")
 )
 
 func VNClassifyImageRequestFromID(id objc.ID) *VNClassifyImageRequest {
@@ -38,7 +38,9 @@ func VNClassifyImageRequestFromID(id objc.ID) *VNClassifyImageRequest {
 func VNClassifyImageRequestKnownClassificationsForRevisionError(requestRevision uint) (*foundation.NSArray[*VNClassificationObservation], error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNClassifyImageRequest), _vNClassifyImageRequestSelKnownClassificationsForRevisionError, requestRevision, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -54,4 +56,3 @@ func (o *VNClassifyImageRequest) SupportedIdentifiersAndReturnError() (*foundati
 	}
 	return _ret, nil
 }
-

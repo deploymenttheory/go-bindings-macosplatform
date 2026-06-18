@@ -15,7 +15,7 @@ type CKSyncEngineWillFetchRecordZoneChangesEvent struct {
 }
 
 var (
-	_clsCKSyncEngineWillFetchRecordZoneChangesEvent = _objcClass("CKSyncEngineWillFetchRecordZoneChangesEvent")
+	_clsCKSyncEngineWillFetchRecordZoneChangesEvent       = _objcClass("CKSyncEngineWillFetchRecordZoneChangesEvent")
 	_cKSyncEngineWillFetchRecordZoneChangesEventSelZoneID = objc.RegisterName("zoneID")
 )
 
@@ -31,7 +31,8 @@ func CKSyncEngineWillFetchRecordZoneChangesEventFromID(id objc.ID) *CKSyncEngine
 
 func (o *CKSyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineWillFetchRecordZoneChangesEventSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
-

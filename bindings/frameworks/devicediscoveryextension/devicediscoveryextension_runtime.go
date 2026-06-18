@@ -14,8 +14,8 @@ import (
 
 var (
 	_devicediscoveryextensionLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce                    sync.Once
+	_failedSymbols               = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,11 +48,21 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DDDeviceCategoryToString", func() { purego.RegisterLibFunc(&_fnDDDeviceCategoryToString, _devicediscoveryextensionLib, "DDDeviceCategoryToString") })
-	_register("DDDeviceMediaPlaybackStateToString", func() { purego.RegisterLibFunc(&_fnDDDeviceMediaPlaybackStateToString, _devicediscoveryextensionLib, "DDDeviceMediaPlaybackStateToString") })
-	_register("DDDeviceProtocolToString", func() { purego.RegisterLibFunc(&_fnDDDeviceProtocolToString, _devicediscoveryextensionLib, "DDDeviceProtocolToString") })
-	_register("DDDeviceStateToString", func() { purego.RegisterLibFunc(&_fnDDDeviceStateToString, _devicediscoveryextensionLib, "DDDeviceStateToString") })
-	_register("DDEventTypeToString", func() { purego.RegisterLibFunc(&_fnDDEventTypeToString, _devicediscoveryextensionLib, "DDEventTypeToString") })
+	_register("DDDeviceCategoryToString", func() {
+		purego.RegisterLibFunc(&_fnDDDeviceCategoryToString, _devicediscoveryextensionLib, "DDDeviceCategoryToString")
+	})
+	_register("DDDeviceMediaPlaybackStateToString", func() {
+		purego.RegisterLibFunc(&_fnDDDeviceMediaPlaybackStateToString, _devicediscoveryextensionLib, "DDDeviceMediaPlaybackStateToString")
+	})
+	_register("DDDeviceProtocolToString", func() {
+		purego.RegisterLibFunc(&_fnDDDeviceProtocolToString, _devicediscoveryextensionLib, "DDDeviceProtocolToString")
+	})
+	_register("DDDeviceStateToString", func() {
+		purego.RegisterLibFunc(&_fnDDDeviceStateToString, _devicediscoveryextensionLib, "DDDeviceStateToString")
+	})
+	_register("DDEventTypeToString", func() {
+		purego.RegisterLibFunc(&_fnDDEventTypeToString, _devicediscoveryextensionLib, "DDEventTypeToString")
+	})
 }
 
 func init() {

@@ -11,11 +11,11 @@ import (
 type AVAssetExportSessionStatus int64
 
 const (
-	AVAssetExportSessionStatusUnknown AVAssetExportSessionStatus = 0
-	AVAssetExportSessionStatusWaiting AVAssetExportSessionStatus = 1
+	AVAssetExportSessionStatusUnknown   AVAssetExportSessionStatus = 0
+	AVAssetExportSessionStatusWaiting   AVAssetExportSessionStatus = 1
 	AVAssetExportSessionStatusExporting AVAssetExportSessionStatus = 2
 	AVAssetExportSessionStatusCompleted AVAssetExportSessionStatus = 3
-	AVAssetExportSessionStatusFailed AVAssetExportSessionStatus = 4
+	AVAssetExportSessionStatusFailed    AVAssetExportSessionStatus = 4
 	AVAssetExportSessionStatusCancelled AVAssetExportSessionStatus = 5
 )
 
@@ -42,7 +42,7 @@ type AVAssetImageGeneratorResult int64
 
 const (
 	AVAssetImageGeneratorSucceeded AVAssetImageGeneratorResult = 0
-	AVAssetImageGeneratorFailed AVAssetImageGeneratorResult = 1
+	AVAssetImageGeneratorFailed    AVAssetImageGeneratorResult = 1
 	AVAssetImageGeneratorCancelled AVAssetImageGeneratorResult = 2
 )
 
@@ -62,10 +62,10 @@ func (e AVAssetImageGeneratorResult) String() string {
 type AVAssetReaderStatus int64
 
 const (
-	AVAssetReaderStatusUnknown AVAssetReaderStatus = 0
-	AVAssetReaderStatusReading AVAssetReaderStatus = 1
+	AVAssetReaderStatusUnknown   AVAssetReaderStatus = 0
+	AVAssetReaderStatusReading   AVAssetReaderStatus = 1
 	AVAssetReaderStatusCompleted AVAssetReaderStatus = 2
-	AVAssetReaderStatusFailed AVAssetReaderStatus = 3
+	AVAssetReaderStatusFailed    AVAssetReaderStatus = 3
 	AVAssetReaderStatusCancelled AVAssetReaderStatus = 4
 )
 
@@ -100,19 +100,33 @@ const (
 	// Indicates that references from a local asset to local media data stored outside the asset's container file should not be followed.
 	AVAssetReferenceRestrictionForbidLocalReferenceToLocal AVAssetReferenceRestrictions = 8
 	// Indicates that only references to media data stored within the asset's container file should be allowed.
-	AVAssetReferenceRestrictionForbidAll AVAssetReferenceRestrictions = 65535
+	AVAssetReferenceRestrictionForbidAll     AVAssetReferenceRestrictions = 65535
 	AVAssetReferenceRestrictionDefaultPolicy AVAssetReferenceRestrictions = 2
 )
 
 func (e AVAssetReferenceRestrictions) String() string {
 	var parts []string
-	if e&AVAssetReferenceRestrictionForbidRemoteReferenceToLocal != 0 { parts = append(parts, "AVAssetReferenceRestrictionForbidRemoteReferenceToLocal") }
-	if e&AVAssetReferenceRestrictionForbidLocalReferenceToRemote != 0 { parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToRemote") }
-	if e&AVAssetReferenceRestrictionForbidCrossSiteReference != 0 { parts = append(parts, "AVAssetReferenceRestrictionForbidCrossSiteReference") }
-	if e&AVAssetReferenceRestrictionForbidLocalReferenceToLocal != 0 { parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToLocal") }
-	if e&AVAssetReferenceRestrictionForbidAll != 0 { parts = append(parts, "AVAssetReferenceRestrictionForbidAll") }
-	if e&AVAssetReferenceRestrictionDefaultPolicy != 0 { parts = append(parts, "AVAssetReferenceRestrictionDefaultPolicy") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAssetReferenceRestrictionForbidRemoteReferenceToLocal != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionForbidRemoteReferenceToLocal")
+	}
+	if e&AVAssetReferenceRestrictionForbidLocalReferenceToRemote != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToRemote")
+	}
+	if e&AVAssetReferenceRestrictionForbidCrossSiteReference != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionForbidCrossSiteReference")
+	}
+	if e&AVAssetReferenceRestrictionForbidLocalReferenceToLocal != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToLocal")
+	}
+	if e&AVAssetReferenceRestrictionForbidAll != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionForbidAll")
+	}
+	if e&AVAssetReferenceRestrictionDefaultPolicy != 0 {
+		parts = append(parts, "AVAssetReferenceRestrictionDefaultPolicy")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -120,7 +134,7 @@ type AVAssetSegmentType int64
 
 const (
 	AVAssetSegmentTypeInitialization AVAssetSegmentType = 1
-	AVAssetSegmentTypeSeparable AVAssetSegmentType = 2
+	AVAssetSegmentTypeSeparable      AVAssetSegmentType = 2
 )
 
 func (e AVAssetSegmentType) String() string {
@@ -137,25 +151,29 @@ func (e AVAssetSegmentType) String() string {
 type AVAssetTrackGroupOutputHandling uint64
 
 const (
-	AVAssetTrackGroupOutputHandlingNone AVAssetTrackGroupOutputHandling = 0
+	AVAssetTrackGroupOutputHandlingNone                    AVAssetTrackGroupOutputHandling = 0
 	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks AVAssetTrackGroupOutputHandling = 1
-	AVAssetTrackGroupOutputHandlingDefaultPolicy AVAssetTrackGroupOutputHandling = 0
+	AVAssetTrackGroupOutputHandlingDefaultPolicy           AVAssetTrackGroupOutputHandling = 0
 )
 
 func (e AVAssetTrackGroupOutputHandling) String() string {
 	var parts []string
-	if e&AVAssetTrackGroupOutputHandlingPreserveAlternateTracks != 0 { parts = append(parts, "AVAssetTrackGroupOutputHandlingPreserveAlternateTracks") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAssetTrackGroupOutputHandlingPreserveAlternateTracks != 0 {
+		parts = append(parts, "AVAssetTrackGroupOutputHandlingPreserveAlternateTracks")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AVAssetWriterStatus int64
 
 const (
-	AVAssetWriterStatusUnknown AVAssetWriterStatus = 0
-	AVAssetWriterStatusWriting AVAssetWriterStatus = 1
+	AVAssetWriterStatusUnknown   AVAssetWriterStatus = 0
+	AVAssetWriterStatusWriting   AVAssetWriterStatus = 1
 	AVAssetWriterStatusCompleted AVAssetWriterStatus = 2
-	AVAssetWriterStatusFailed AVAssetWriterStatus = 3
+	AVAssetWriterStatusFailed    AVAssetWriterStatus = 3
 	AVAssetWriterStatusCancelled AVAssetWriterStatus = 4
 )
 
@@ -179,18 +197,26 @@ func (e AVAssetWriterStatus) String() string {
 type AVAudioSpatializationFormats uint64
 
 const (
-	AVAudioSpatializationFormatNone AVAudioSpatializationFormats = 0
-	AVAudioSpatializationFormatMonoAndStereo AVAudioSpatializationFormats = 3
-	AVAudioSpatializationFormatMultichannel AVAudioSpatializationFormats = 4
+	AVAudioSpatializationFormatNone                      AVAudioSpatializationFormats = 0
+	AVAudioSpatializationFormatMonoAndStereo             AVAudioSpatializationFormats = 3
+	AVAudioSpatializationFormatMultichannel              AVAudioSpatializationFormats = 4
 	AVAudioSpatializationFormatMonoStereoAndMultichannel AVAudioSpatializationFormats = 7
 )
 
 func (e AVAudioSpatializationFormats) String() string {
 	var parts []string
-	if e&AVAudioSpatializationFormatMonoAndStereo != 0 { parts = append(parts, "AVAudioSpatializationFormatMonoAndStereo") }
-	if e&AVAudioSpatializationFormatMultichannel != 0 { parts = append(parts, "AVAudioSpatializationFormatMultichannel") }
-	if e&AVAudioSpatializationFormatMonoStereoAndMultichannel != 0 { parts = append(parts, "AVAudioSpatializationFormatMonoStereoAndMultichannel") }
-	if len(parts) == 0 { return "0" }
+	if e&AVAudioSpatializationFormatMonoAndStereo != 0 {
+		parts = append(parts, "AVAudioSpatializationFormatMonoAndStereo")
+	}
+	if e&AVAudioSpatializationFormatMultichannel != 0 {
+		parts = append(parts, "AVAudioSpatializationFormatMultichannel")
+	}
+	if e&AVAudioSpatializationFormatMonoStereoAndMultichannel != 0 {
+		parts = append(parts, "AVAudioSpatializationFormatMonoStereoAndMultichannel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -198,9 +224,9 @@ type AVAuthorizationStatus int64
 
 const (
 	AVAuthorizationStatusNotDetermined AVAuthorizationStatus = 0
-	AVAuthorizationStatusRestricted AVAuthorizationStatus = 1
-	AVAuthorizationStatusDenied AVAuthorizationStatus = 2
-	AVAuthorizationStatusAuthorized AVAuthorizationStatus = 3
+	AVAuthorizationStatusRestricted    AVAuthorizationStatus = 1
+	AVAuthorizationStatusDenied        AVAuthorizationStatus = 2
+	AVAuthorizationStatusAuthorized    AVAuthorizationStatus = 3
 )
 
 func (e AVAuthorizationStatus) String() string {
@@ -221,7 +247,7 @@ func (e AVAuthorizationStatus) String() string {
 type AVCaptionAnimation int64
 
 const (
-	AVCaptionAnimationNone AVCaptionAnimation = 0
+	AVCaptionAnimationNone            AVCaptionAnimation = 0
 	AVCaptionAnimationCharacterReveal AVCaptionAnimation = 1
 )
 
@@ -239,10 +265,10 @@ func (e AVCaptionAnimation) String() string {
 type AVCaptionConversionValidatorStatus int64
 
 const (
-	AVCaptionConversionValidatorStatusUnknown AVCaptionConversionValidatorStatus = 0
+	AVCaptionConversionValidatorStatusUnknown    AVCaptionConversionValidatorStatus = 0
 	AVCaptionConversionValidatorStatusValidating AVCaptionConversionValidatorStatus = 1
-	AVCaptionConversionValidatorStatusCompleted AVCaptionConversionValidatorStatus = 2
-	AVCaptionConversionValidatorStatusStopped AVCaptionConversionValidatorStatus = 3
+	AVCaptionConversionValidatorStatusCompleted  AVCaptionConversionValidatorStatus = 2
+	AVCaptionConversionValidatorStatusStopped    AVCaptionConversionValidatorStatus = 3
 )
 
 func (e AVCaptionConversionValidatorStatus) String() string {
@@ -263,18 +289,26 @@ func (e AVCaptionConversionValidatorStatus) String() string {
 type AVCaptionDecoration uint64
 
 const (
-	AVCaptionDecorationNone AVCaptionDecoration = 0
-	AVCaptionDecorationUnderline AVCaptionDecoration = 1
+	AVCaptionDecorationNone        AVCaptionDecoration = 0
+	AVCaptionDecorationUnderline   AVCaptionDecoration = 1
 	AVCaptionDecorationLineThrough AVCaptionDecoration = 2
-	AVCaptionDecorationOverline AVCaptionDecoration = 4
+	AVCaptionDecorationOverline    AVCaptionDecoration = 4
 )
 
 func (e AVCaptionDecoration) String() string {
 	var parts []string
-	if e&AVCaptionDecorationUnderline != 0 { parts = append(parts, "AVCaptionDecorationUnderline") }
-	if e&AVCaptionDecorationLineThrough != 0 { parts = append(parts, "AVCaptionDecorationLineThrough") }
-	if e&AVCaptionDecorationOverline != 0 { parts = append(parts, "AVCaptionDecorationOverline") }
-	if len(parts) == 0 { return "0" }
+	if e&AVCaptionDecorationUnderline != 0 {
+		parts = append(parts, "AVCaptionDecorationUnderline")
+	}
+	if e&AVCaptionDecorationLineThrough != 0 {
+		parts = append(parts, "AVCaptionDecorationLineThrough")
+	}
+	if e&AVCaptionDecorationOverline != 0 {
+		parts = append(parts, "AVCaptionDecorationOverline")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -282,8 +316,8 @@ type AVCaptionFontStyle int64
 
 const (
 	AVCaptionFontStyleUnknown AVCaptionFontStyle = 0
-	AVCaptionFontStyleNormal AVCaptionFontStyle = 1
-	AVCaptionFontStyleItalic AVCaptionFontStyle = 2
+	AVCaptionFontStyleNormal  AVCaptionFontStyle = 1
+	AVCaptionFontStyleItalic  AVCaptionFontStyle = 2
 )
 
 func (e AVCaptionFontStyle) String() string {
@@ -303,8 +337,8 @@ type AVCaptionFontWeight int64
 
 const (
 	AVCaptionFontWeightUnknown AVCaptionFontWeight = 0
-	AVCaptionFontWeightNormal AVCaptionFontWeight = 1
-	AVCaptionFontWeightBold AVCaptionFontWeight = 2
+	AVCaptionFontWeightNormal  AVCaptionFontWeight = 1
+	AVCaptionFontWeightBold    AVCaptionFontWeight = 2
 )
 
 func (e AVCaptionFontWeight) String() string {
@@ -325,7 +359,7 @@ type AVCaptionRegionDisplayAlignment int64
 const (
 	AVCaptionRegionDisplayAlignmentBefore AVCaptionRegionDisplayAlignment = 0
 	AVCaptionRegionDisplayAlignmentCenter AVCaptionRegionDisplayAlignment = 1
-	AVCaptionRegionDisplayAlignmentAfter AVCaptionRegionDisplayAlignment = 2
+	AVCaptionRegionDisplayAlignmentAfter  AVCaptionRegionDisplayAlignment = 2
 )
 
 func (e AVCaptionRegionDisplayAlignment) String() string {
@@ -344,7 +378,7 @@ func (e AVCaptionRegionDisplayAlignment) String() string {
 type AVCaptionRegionScroll int64
 
 const (
-	AVCaptionRegionScrollNone AVCaptionRegionScroll = 0
+	AVCaptionRegionScrollNone   AVCaptionRegionScroll = 0
 	AVCaptionRegionScrollRollUp AVCaptionRegionScroll = 1
 )
 
@@ -380,10 +414,10 @@ func (e AVCaptionRegionWritingMode) String() string {
 type AVCaptionRubyAlignment int64
 
 const (
-	AVCaptionRubyAlignmentStart AVCaptionRubyAlignment = 0
-	AVCaptionRubyAlignmentCenter AVCaptionRubyAlignment = 1
+	AVCaptionRubyAlignmentStart                  AVCaptionRubyAlignment = 0
+	AVCaptionRubyAlignmentCenter                 AVCaptionRubyAlignment = 1
 	AVCaptionRubyAlignmentDistributeSpaceBetween AVCaptionRubyAlignment = 2
-	AVCaptionRubyAlignmentDistributeSpaceAround AVCaptionRubyAlignment = 3
+	AVCaptionRubyAlignmentDistributeSpaceAround  AVCaptionRubyAlignment = 3
 )
 
 func (e AVCaptionRubyAlignment) String() string {
@@ -405,7 +439,7 @@ type AVCaptionRubyPosition int64
 
 const (
 	AVCaptionRubyPositionBefore AVCaptionRubyPosition = 0
-	AVCaptionRubyPositionAfter AVCaptionRubyPosition = 1
+	AVCaptionRubyPositionAfter  AVCaptionRubyPosition = 1
 )
 
 func (e AVCaptionRubyPosition) String() string {
@@ -422,11 +456,11 @@ func (e AVCaptionRubyPosition) String() string {
 type AVCaptionTextAlignment int64
 
 const (
-	AVCaptionTextAlignmentStart AVCaptionTextAlignment = 0
-	AVCaptionTextAlignmentEnd AVCaptionTextAlignment = 1
+	AVCaptionTextAlignmentStart  AVCaptionTextAlignment = 0
+	AVCaptionTextAlignmentEnd    AVCaptionTextAlignment = 1
 	AVCaptionTextAlignmentCenter AVCaptionTextAlignment = 2
-	AVCaptionTextAlignmentLeft AVCaptionTextAlignment = 3
-	AVCaptionTextAlignmentRight AVCaptionTextAlignment = 4
+	AVCaptionTextAlignmentLeft   AVCaptionTextAlignment = 3
+	AVCaptionTextAlignmentRight  AVCaptionTextAlignment = 4
 )
 
 func (e AVCaptionTextAlignment) String() string {
@@ -449,12 +483,12 @@ func (e AVCaptionTextAlignment) String() string {
 type AVCaptionTextCombine int64
 
 const (
-	AVCaptionTextCombineAll AVCaptionTextCombine = -1
-	AVCaptionTextCombineNone AVCaptionTextCombine = 0
-	AVCaptionTextCombineOneDigit AVCaptionTextCombine = 1
-	AVCaptionTextCombineTwoDigits AVCaptionTextCombine = 2
+	AVCaptionTextCombineAll         AVCaptionTextCombine = -1
+	AVCaptionTextCombineNone        AVCaptionTextCombine = 0
+	AVCaptionTextCombineOneDigit    AVCaptionTextCombine = 1
+	AVCaptionTextCombineTwoDigits   AVCaptionTextCombine = 2
 	AVCaptionTextCombineThreeDigits AVCaptionTextCombine = 3
-	AVCaptionTextCombineFourDigits AVCaptionTextCombine = 4
+	AVCaptionTextCombineFourDigits  AVCaptionTextCombine = 4
 )
 
 func (e AVCaptionTextCombine) String() string {
@@ -480,8 +514,8 @@ type AVCaptionUnitsType int64
 
 const (
 	AVCaptionUnitsTypeUnspecified AVCaptionUnitsType = 0
-	AVCaptionUnitsTypeCells AVCaptionUnitsType = 1
-	AVCaptionUnitsTypePercent AVCaptionUnitsType = 2
+	AVCaptionUnitsTypeCells       AVCaptionUnitsType = 1
+	AVCaptionUnitsTypePercent     AVCaptionUnitsType = 2
 )
 
 func (e AVCaptionUnitsType) String() string {
@@ -500,9 +534,9 @@ func (e AVCaptionUnitsType) String() string {
 type AVCaptureAutoFocusSystem int64
 
 const (
-	AVCaptureAutoFocusSystemNone AVCaptureAutoFocusSystem = 0
+	AVCaptureAutoFocusSystemNone              AVCaptureAutoFocusSystem = 0
 	AVCaptureAutoFocusSystemContrastDetection AVCaptureAutoFocusSystem = 1
-	AVCaptureAutoFocusSystemPhaseDetection AVCaptureAutoFocusSystem = 2
+	AVCaptureAutoFocusSystemPhaseDetection    AVCaptureAutoFocusSystem = 2
 )
 
 func (e AVCaptureAutoFocusSystem) String() string {
@@ -549,8 +583,8 @@ func (e AVCaptureCameraLensSmudgeDetectionStatus) String() string {
 type AVCaptureCenterStageControlMode int64
 
 const (
-	AVCaptureCenterStageControlModeUser AVCaptureCenterStageControlMode = 0
-	AVCaptureCenterStageControlModeApp AVCaptureCenterStageControlMode = 1
+	AVCaptureCenterStageControlModeUser        AVCaptureCenterStageControlMode = 0
+	AVCaptureCenterStageControlModeApp         AVCaptureCenterStageControlMode = 1
 	AVCaptureCenterStageControlModeCooperative AVCaptureCenterStageControlMode = 2
 )
 
@@ -615,8 +649,8 @@ type AVCaptureDevicePosition int64
 
 const (
 	AVCaptureDevicePositionUnspecified AVCaptureDevicePosition = 0
-	AVCaptureDevicePositionBack AVCaptureDevicePosition = 1
-	AVCaptureDevicePositionFront AVCaptureDevicePosition = 2
+	AVCaptureDevicePositionBack        AVCaptureDevicePosition = 1
+	AVCaptureDevicePositionFront       AVCaptureDevicePosition = 2
 )
 
 func (e AVCaptureDevicePosition) String() string {
@@ -636,7 +670,7 @@ type AVCaptureDeviceTransportControlsPlaybackMode int64
 
 const (
 	AVCaptureDeviceTransportControlsNotPlayingMode AVCaptureDeviceTransportControlsPlaybackMode = 0
-	AVCaptureDeviceTransportControlsPlayingMode AVCaptureDeviceTransportControlsPlaybackMode = 1
+	AVCaptureDeviceTransportControlsPlayingMode    AVCaptureDeviceTransportControlsPlaybackMode = 1
 )
 
 func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
@@ -653,10 +687,10 @@ func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
 type AVCaptureExposureMode int64
 
 const (
-	AVCaptureExposureModeLocked AVCaptureExposureMode = 0
-	AVCaptureExposureModeAutoExpose AVCaptureExposureMode = 1
+	AVCaptureExposureModeLocked                 AVCaptureExposureMode = 0
+	AVCaptureExposureModeAutoExpose             AVCaptureExposureMode = 1
 	AVCaptureExposureModeContinuousAutoExposure AVCaptureExposureMode = 2
-	AVCaptureExposureModeCustom AVCaptureExposureMode = 3
+	AVCaptureExposureModeCustom                 AVCaptureExposureMode = 3
 )
 
 func (e AVCaptureExposureMode) String() string {
@@ -677,8 +711,8 @@ func (e AVCaptureExposureMode) String() string {
 type AVCaptureFlashMode int64
 
 const (
-	AVCaptureFlashModeOff AVCaptureFlashMode = 0
-	AVCaptureFlashModeOn AVCaptureFlashMode = 1
+	AVCaptureFlashModeOff  AVCaptureFlashMode = 0
+	AVCaptureFlashModeOn   AVCaptureFlashMode = 1
 	AVCaptureFlashModeAuto AVCaptureFlashMode = 2
 )
 
@@ -698,8 +732,8 @@ func (e AVCaptureFlashMode) String() string {
 type AVCaptureFocusMode int64
 
 const (
-	AVCaptureFocusModeLocked AVCaptureFocusMode = 0
-	AVCaptureFocusModeAutoFocus AVCaptureFocusMode = 1
+	AVCaptureFocusModeLocked              AVCaptureFocusMode = 0
+	AVCaptureFocusModeAutoFocus           AVCaptureFocusMode = 1
 	AVCaptureFocusModeContinuousAutoFocus AVCaptureFocusMode = 2
 )
 
@@ -719,8 +753,8 @@ func (e AVCaptureFocusMode) String() string {
 type AVCaptureMicrophoneMode int64
 
 const (
-	AVCaptureMicrophoneModeStandard AVCaptureMicrophoneMode = 0
-	AVCaptureMicrophoneModeWideSpectrum AVCaptureMicrophoneMode = 1
+	AVCaptureMicrophoneModeStandard       AVCaptureMicrophoneMode = 0
+	AVCaptureMicrophoneModeWideSpectrum   AVCaptureMicrophoneMode = 1
 	AVCaptureMicrophoneModeVoiceIsolation AVCaptureMicrophoneMode = 2
 )
 
@@ -740,8 +774,8 @@ func (e AVCaptureMicrophoneMode) String() string {
 type AVCaptureMultichannelAudioMode int64
 
 const (
-	AVCaptureMultichannelAudioModeNone AVCaptureMultichannelAudioMode = 0
-	AVCaptureMultichannelAudioModeStereo AVCaptureMultichannelAudioMode = 1
+	AVCaptureMultichannelAudioModeNone                 AVCaptureMultichannelAudioMode = 0
+	AVCaptureMultichannelAudioModeStereo               AVCaptureMultichannelAudioMode = 1
 	AVCaptureMultichannelAudioModeFirstOrderAmbisonics AVCaptureMultichannelAudioMode = 2
 )
 
@@ -761,9 +795,9 @@ func (e AVCaptureMultichannelAudioMode) String() string {
 type AVCaptureOutputDataDroppedReason int64
 
 const (
-	AVCaptureOutputDataDroppedReasonNone AVCaptureOutputDataDroppedReason = 0
-	AVCaptureOutputDataDroppedReasonLateData AVCaptureOutputDataDroppedReason = 1
-	AVCaptureOutputDataDroppedReasonOutOfBuffers AVCaptureOutputDataDroppedReason = 2
+	AVCaptureOutputDataDroppedReasonNone          AVCaptureOutputDataDroppedReason = 0
+	AVCaptureOutputDataDroppedReasonLateData      AVCaptureOutputDataDroppedReason = 1
+	AVCaptureOutputDataDroppedReasonOutOfBuffers  AVCaptureOutputDataDroppedReason = 2
 	AVCaptureOutputDataDroppedReasonDiscontinuity AVCaptureOutputDataDroppedReason = 3
 )
 
@@ -785,10 +819,10 @@ func (e AVCaptureOutputDataDroppedReason) String() string {
 type AVCapturePhotoOutputCaptureReadiness int64
 
 const (
-	AVCapturePhotoOutputCaptureReadinessSessionNotRunning AVCapturePhotoOutputCaptureReadiness = 0
-	AVCapturePhotoOutputCaptureReadinessReady AVCapturePhotoOutputCaptureReadiness = 1
-	AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily AVCapturePhotoOutputCaptureReadiness = 2
-	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture AVCapturePhotoOutputCaptureReadiness = 3
+	AVCapturePhotoOutputCaptureReadinessSessionNotRunning            AVCapturePhotoOutputCaptureReadiness = 0
+	AVCapturePhotoOutputCaptureReadinessReady                        AVCapturePhotoOutputCaptureReadiness = 1
+	AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily          AVCapturePhotoOutputCaptureReadiness = 2
+	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture    AVCapturePhotoOutputCaptureReadiness = 3
 	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing AVCapturePhotoOutputCaptureReadiness = 4
 )
 
@@ -812,9 +846,9 @@ func (e AVCapturePhotoOutputCaptureReadiness) String() string {
 type AVCapturePhotoQualityPrioritization int64
 
 const (
-	AVCapturePhotoQualityPrioritizationSpeed AVCapturePhotoQualityPrioritization = 1
+	AVCapturePhotoQualityPrioritizationSpeed    AVCapturePhotoQualityPrioritization = 1
 	AVCapturePhotoQualityPrioritizationBalanced AVCapturePhotoQualityPrioritization = 2
-	AVCapturePhotoQualityPrioritizationQuality AVCapturePhotoQualityPrioritization = 3
+	AVCapturePhotoQualityPrioritizationQuality  AVCapturePhotoQualityPrioritization = 3
 )
 
 func (e AVCapturePhotoQualityPrioritization) String() string {
@@ -833,18 +867,26 @@ func (e AVCapturePhotoQualityPrioritization) String() string {
 type AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
+	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
 	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 4
 )
 
 func (e AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) String() string {
 	var parts []string
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged != 0 { parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged") }
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged != 0 { parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged") }
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged != 0 { parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged") }
-	if len(parts) == 0 { return "0" }
+	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged != 0 {
+		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged")
+	}
+	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged != 0 {
+		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged")
+	}
+	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged != 0 {
+		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -852,9 +894,9 @@ type AVCapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
 	AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported AVCapturePrimaryConstituentDeviceSwitchingBehavior = 0
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto AVCapturePrimaryConstituentDeviceSwitchingBehavior = 1
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted AVCapturePrimaryConstituentDeviceSwitchingBehavior = 2
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked AVCapturePrimaryConstituentDeviceSwitchingBehavior = 3
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto        AVCapturePrimaryConstituentDeviceSwitchingBehavior = 1
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted  AVCapturePrimaryConstituentDeviceSwitchingBehavior = 2
+	AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked      AVCapturePrimaryConstituentDeviceSwitchingBehavior = 3
 )
 
 func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
@@ -875,7 +917,7 @@ func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 type AVCaptureSystemUserInterface int64
 
 const (
-	AVCaptureSystemUserInterfaceVideoEffects AVCaptureSystemUserInterface = 1
+	AVCaptureSystemUserInterfaceVideoEffects    AVCaptureSystemUserInterface = 1
 	AVCaptureSystemUserInterfaceMicrophoneModes AVCaptureSystemUserInterface = 2
 )
 
@@ -961,8 +1003,8 @@ func (e AVCaptureTimecodeSourceType) String() string {
 type AVCaptureTorchMode int64
 
 const (
-	AVCaptureTorchModeOff AVCaptureTorchMode = 0
-	AVCaptureTorchModeOn AVCaptureTorchMode = 1
+	AVCaptureTorchModeOff  AVCaptureTorchMode = 0
+	AVCaptureTorchModeOn   AVCaptureTorchMode = 1
 	AVCaptureTorchModeAuto AVCaptureTorchMode = 2
 )
 
@@ -983,10 +1025,10 @@ func (e AVCaptureTorchMode) String() string {
 type AVCaptureVideoOrientation int64
 
 const (
-	AVCaptureVideoOrientationPortrait AVCaptureVideoOrientation = 1
+	AVCaptureVideoOrientationPortrait           AVCaptureVideoOrientation = 1
 	AVCaptureVideoOrientationPortraitUpsideDown AVCaptureVideoOrientation = 2
-	AVCaptureVideoOrientationLandscapeRight AVCaptureVideoOrientation = 3
-	AVCaptureVideoOrientationLandscapeLeft AVCaptureVideoOrientation = 4
+	AVCaptureVideoOrientationLandscapeRight     AVCaptureVideoOrientation = 3
+	AVCaptureVideoOrientationLandscapeLeft      AVCaptureVideoOrientation = 4
 )
 
 func (e AVCaptureVideoOrientation) String() string {
@@ -1007,8 +1049,8 @@ func (e AVCaptureVideoOrientation) String() string {
 type AVCaptureWhiteBalanceMode int64
 
 const (
-	AVCaptureWhiteBalanceModeLocked AVCaptureWhiteBalanceMode = 0
-	AVCaptureWhiteBalanceModeAutoWhiteBalance AVCaptureWhiteBalanceMode = 1
+	AVCaptureWhiteBalanceModeLocked                     AVCaptureWhiteBalanceMode = 0
+	AVCaptureWhiteBalanceModeAutoWhiteBalance           AVCaptureWhiteBalanceMode = 1
 	AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance AVCaptureWhiteBalanceMode = 2
 )
 
@@ -1028,13 +1070,13 @@ func (e AVCaptureWhiteBalanceMode) String() string {
 type AVContentAuthorizationStatus int64
 
 const (
-	AVContentAuthorizationUnknown AVContentAuthorizationStatus = 0
-	AVContentAuthorizationCompleted AVContentAuthorizationStatus = 1
-	AVContentAuthorizationCancelled AVContentAuthorizationStatus = 2
-	AVContentAuthorizationTimedOut AVContentAuthorizationStatus = 3
-	AVContentAuthorizationBusy AVContentAuthorizationStatus = 4
+	AVContentAuthorizationUnknown      AVContentAuthorizationStatus = 0
+	AVContentAuthorizationCompleted    AVContentAuthorizationStatus = 1
+	AVContentAuthorizationCancelled    AVContentAuthorizationStatus = 2
+	AVContentAuthorizationTimedOut     AVContentAuthorizationStatus = 3
+	AVContentAuthorizationBusy         AVContentAuthorizationStatus = 4
 	AVContentAuthorizationNotAvailable AVContentAuthorizationStatus = 5
-	AVContentAuthorizationNotPossible AVContentAuthorizationStatus = 6
+	AVContentAuthorizationNotPossible  AVContentAuthorizationStatus = 6
 )
 
 func (e AVContentAuthorizationStatus) String() string {
@@ -1103,8 +1145,12 @@ const (
 
 func (e AVDelegatingPlaybackCoordinatorRateChangeOptions) String() string {
 	var parts []string
-	if e&AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately != 0 { parts = append(parts, "AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately") }
-	if len(parts) == 0 { return "0" }
+	if e&AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately != 0 {
+		parts = append(parts, "AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1117,8 +1163,12 @@ const (
 
 func (e AVDelegatingPlaybackCoordinatorSeekOptions) String() string {
 	var parts []string
-	if e&AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately != 0 { parts = append(parts, "AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately") }
-	if len(parts) == 0 { return "0" }
+	if e&AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately != 0 {
+		parts = append(parts, "AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1143,7 +1193,7 @@ func (e AVDepthDataAccuracy) String() string {
 type AVDepthDataQuality int64
 
 const (
-	AVDepthDataQualityLow AVDepthDataQuality = 0
+	AVDepthDataQualityLow  AVDepthDataQuality = 0
 	AVDepthDataQualityHigh AVDepthDataQuality = 1
 )
 
@@ -1161,81 +1211,81 @@ func (e AVDepthDataQuality) String() string {
 type AVError int64
 
 const (
-	AVErrorUnknown AVError = -11800
-	AVErrorOutOfMemory AVError = -11801
-	AVErrorSessionNotRunning AVError = -11803
-	AVErrorDeviceAlreadyUsedByAnotherSession AVError = -11804
-	AVErrorNoDataCaptured AVError = -11805
-	AVErrorSessionConfigurationChanged AVError = -11806
-	AVErrorDiskFull AVError = -11807
-	AVErrorDeviceWasDisconnected AVError = -11808
-	AVErrorMediaChanged AVError = -11809
-	AVErrorMaximumDurationReached AVError = -11810
-	AVErrorMaximumFileSizeReached AVError = -11811
-	AVErrorMediaDiscontinuity AVError = -11812
-	AVErrorMaximumNumberOfSamplesForFileFormatReached AVError = -11813
-	AVErrorDeviceNotConnected AVError = -11814
-	AVErrorDeviceInUseByAnotherApplication AVError = -11815
-	AVErrorDeviceLockedForConfigurationByAnotherProcess AVError = -11817
-	AVErrorExportFailed AVError = -11820
-	AVErrorDecodeFailed AVError = -11821
-	AVErrorInvalidSourceMedia AVError = -11822
-	AVErrorFileAlreadyExists AVError = -11823
-	AVErrorCompositionTrackSegmentsNotContiguous AVError = -11824
-	AVErrorInvalidCompositionTrackSegmentDuration AVError = -11825
+	AVErrorUnknown                                       AVError = -11800
+	AVErrorOutOfMemory                                   AVError = -11801
+	AVErrorSessionNotRunning                             AVError = -11803
+	AVErrorDeviceAlreadyUsedByAnotherSession             AVError = -11804
+	AVErrorNoDataCaptured                                AVError = -11805
+	AVErrorSessionConfigurationChanged                   AVError = -11806
+	AVErrorDiskFull                                      AVError = -11807
+	AVErrorDeviceWasDisconnected                         AVError = -11808
+	AVErrorMediaChanged                                  AVError = -11809
+	AVErrorMaximumDurationReached                        AVError = -11810
+	AVErrorMaximumFileSizeReached                        AVError = -11811
+	AVErrorMediaDiscontinuity                            AVError = -11812
+	AVErrorMaximumNumberOfSamplesForFileFormatReached    AVError = -11813
+	AVErrorDeviceNotConnected                            AVError = -11814
+	AVErrorDeviceInUseByAnotherApplication               AVError = -11815
+	AVErrorDeviceLockedForConfigurationByAnotherProcess  AVError = -11817
+	AVErrorExportFailed                                  AVError = -11820
+	AVErrorDecodeFailed                                  AVError = -11821
+	AVErrorInvalidSourceMedia                            AVError = -11822
+	AVErrorFileAlreadyExists                             AVError = -11823
+	AVErrorCompositionTrackSegmentsNotContiguous         AVError = -11824
+	AVErrorInvalidCompositionTrackSegmentDuration        AVError = -11825
 	AVErrorInvalidCompositionTrackSegmentSourceStartTime AVError = -11826
-	AVErrorInvalidCompositionTrackSegmentSourceDuration AVError = -11827
-	AVErrorFileFormatNotRecognized AVError = -11828
-	AVErrorFileFailedToParse AVError = -11829
-	AVErrorMaximumStillImageCaptureRequestsExceeded AVError = -11830
-	AVErrorContentIsProtected AVError = -11831
-	AVErrorNoImageAtTime AVError = -11832
-	AVErrorDecoderNotFound AVError = -11833
-	AVErrorEncoderNotFound AVError = -11834
-	AVErrorContentIsNotAuthorized AVError = -11835
-	AVErrorApplicationIsNotAuthorized AVError = -11836
-	AVErrorEncoderTemporarilyUnavailable AVError = -11840
-	AVErrorInvalidVideoComposition AVError = -11841
-	AVErrorReferenceForbiddenByReferencePolicy AVError = -11842
-	AVErrorInvalidOutputURLPathExtension AVError = -11843
-	AVErrorScreenCaptureFailed AVError = -11844
-	AVErrorDisplayWasDisabled AVError = -11845
-	AVErrorTorchLevelUnavailable AVError = -11846
-	AVErrorIncompatibleAsset AVError = -11848
-	AVErrorFailedToLoadMediaData AVError = -11849
-	AVErrorServerIncorrectlyConfigured AVError = -11850
-	AVErrorApplicationIsNotAuthorizedToUseDevice AVError = -11852
-	AVErrorFailedToParse AVError = -11853
-	AVErrorFileTypeDoesNotSupportSampleReferences AVError = -11854
-	AVErrorUndecodableMediaData AVError = -11855
-	AVErrorAirPlayControllerRequiresInternet AVError = -11856
-	AVErrorAirPlayReceiverRequiresInternet AVError = -11857
-	AVErrorVideoCompositorFailed AVError = -11858
-	AVErrorCreateContentKeyRequestFailed AVError = -11860
-	AVErrorUnsupportedOutputSettings AVError = -11861
-	AVErrorOperationNotAllowed AVError = -11862
-	AVErrorContentIsUnavailable AVError = -11863
-	AVErrorFormatUnsupported AVError = -11864
-	AVErrorMalformedDepth AVError = -11865
-	AVErrorContentNotUpdated AVError = -11866
-	AVErrorNoLongerPlayable AVError = -11867
-	AVErrorNoCompatibleAlternatesForExternalDisplay AVError = -11868
-	AVErrorNoSourceTrack AVError = -11869
-	AVErrorExternalPlaybackNotSupportedForAsset AVError = -11870
-	AVErrorOperationNotSupportedForPreset AVError = -11871
-	AVErrorIncorrectlyConfigured AVError = -11875
-	AVErrorSegmentStartedWithNonSyncSample AVError = -11876
-	AVErrorRosettaNotInstalled AVError = -11877
-	AVErrorOperationCancelled AVError = -11878
-	AVErrorContentKeyRequestCancelled AVError = -11879
-	AVErrorInvalidSampleCursor AVError = -11880
-	AVErrorFailedToLoadSampleData AVError = -11881
-	AVErrorAirPlayReceiverTemporarilyUnavailable AVError = -11882
-	AVErrorEncodeFailed AVError = -11883
-	AVErrorSandboxExtensionDenied AVError = -11884
-	AVErrorToneMappingFailed AVError = -11885
-	AVErrorMediaExtensionDisabled AVError = -11886
-	AVErrorMediaExtensionConflict AVError = -11887
+	AVErrorInvalidCompositionTrackSegmentSourceDuration  AVError = -11827
+	AVErrorFileFormatNotRecognized                       AVError = -11828
+	AVErrorFileFailedToParse                             AVError = -11829
+	AVErrorMaximumStillImageCaptureRequestsExceeded      AVError = -11830
+	AVErrorContentIsProtected                            AVError = -11831
+	AVErrorNoImageAtTime                                 AVError = -11832
+	AVErrorDecoderNotFound                               AVError = -11833
+	AVErrorEncoderNotFound                               AVError = -11834
+	AVErrorContentIsNotAuthorized                        AVError = -11835
+	AVErrorApplicationIsNotAuthorized                    AVError = -11836
+	AVErrorEncoderTemporarilyUnavailable                 AVError = -11840
+	AVErrorInvalidVideoComposition                       AVError = -11841
+	AVErrorReferenceForbiddenByReferencePolicy           AVError = -11842
+	AVErrorInvalidOutputURLPathExtension                 AVError = -11843
+	AVErrorScreenCaptureFailed                           AVError = -11844
+	AVErrorDisplayWasDisabled                            AVError = -11845
+	AVErrorTorchLevelUnavailable                         AVError = -11846
+	AVErrorIncompatibleAsset                             AVError = -11848
+	AVErrorFailedToLoadMediaData                         AVError = -11849
+	AVErrorServerIncorrectlyConfigured                   AVError = -11850
+	AVErrorApplicationIsNotAuthorizedToUseDevice         AVError = -11852
+	AVErrorFailedToParse                                 AVError = -11853
+	AVErrorFileTypeDoesNotSupportSampleReferences        AVError = -11854
+	AVErrorUndecodableMediaData                          AVError = -11855
+	AVErrorAirPlayControllerRequiresInternet             AVError = -11856
+	AVErrorAirPlayReceiverRequiresInternet               AVError = -11857
+	AVErrorVideoCompositorFailed                         AVError = -11858
+	AVErrorCreateContentKeyRequestFailed                 AVError = -11860
+	AVErrorUnsupportedOutputSettings                     AVError = -11861
+	AVErrorOperationNotAllowed                           AVError = -11862
+	AVErrorContentIsUnavailable                          AVError = -11863
+	AVErrorFormatUnsupported                             AVError = -11864
+	AVErrorMalformedDepth                                AVError = -11865
+	AVErrorContentNotUpdated                             AVError = -11866
+	AVErrorNoLongerPlayable                              AVError = -11867
+	AVErrorNoCompatibleAlternatesForExternalDisplay      AVError = -11868
+	AVErrorNoSourceTrack                                 AVError = -11869
+	AVErrorExternalPlaybackNotSupportedForAsset          AVError = -11870
+	AVErrorOperationNotSupportedForPreset                AVError = -11871
+	AVErrorIncorrectlyConfigured                         AVError = -11875
+	AVErrorSegmentStartedWithNonSyncSample               AVError = -11876
+	AVErrorRosettaNotInstalled                           AVError = -11877
+	AVErrorOperationCancelled                            AVError = -11878
+	AVErrorContentKeyRequestCancelled                    AVError = -11879
+	AVErrorInvalidSampleCursor                           AVError = -11880
+	AVErrorFailedToLoadSampleData                        AVError = -11881
+	AVErrorAirPlayReceiverTemporarilyUnavailable         AVError = -11882
+	AVErrorEncodeFailed                                  AVError = -11883
+	AVErrorSandboxExtensionDenied                        AVError = -11884
+	AVErrorToneMappingFailed                             AVError = -11885
+	AVErrorMediaExtensionDisabled                        AVError = -11886
+	AVErrorMediaExtensionConflict                        AVError = -11887
 )
 
 func (e AVError) String() string {
@@ -1454,10 +1504,10 @@ func (e AVExternalSyncDeviceStatus) String() string {
 type AVKeyValueStatus int64
 
 const (
-	AVKeyValueStatusUnknown AVKeyValueStatus = 0
-	AVKeyValueStatusLoading AVKeyValueStatus = 1
-	AVKeyValueStatusLoaded AVKeyValueStatus = 2
-	AVKeyValueStatusFailed AVKeyValueStatus = 3
+	AVKeyValueStatusUnknown   AVKeyValueStatus = 0
+	AVKeyValueStatusLoading   AVKeyValueStatus = 1
+	AVKeyValueStatusLoaded    AVKeyValueStatus = 2
+	AVKeyValueStatusFailed    AVKeyValueStatus = 3
 	AVKeyValueStatusCancelled AVKeyValueStatus = 4
 )
 
@@ -1481,14 +1531,18 @@ func (e AVKeyValueStatus) String() string {
 type AVMovieWritingOptions uint64
 
 const (
-	AVMovieWritingAddMovieHeaderToDestination AVMovieWritingOptions = 0
+	AVMovieWritingAddMovieHeaderToDestination          AVMovieWritingOptions = 0
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly AVMovieWritingOptions = 1
 )
 
 func (e AVMovieWritingOptions) String() string {
 	var parts []string
-	if e&AVMovieWritingTruncateDestinationToMovieHeaderOnly != 0 { parts = append(parts, "AVMovieWritingTruncateDestinationToMovieHeaderOnly") }
-	if len(parts) == 0 { return "0" }
+	if e&AVMovieWritingTruncateDestinationToMovieHeaderOnly != 0 {
+		parts = append(parts, "AVMovieWritingTruncateDestinationToMovieHeaderOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1573,14 +1627,20 @@ const (
 	AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent AVPlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
 	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement AVPlayerInterstitialEventRestrictions = 4
-	AVPlayerInterstitialEventRestrictionDefaultPolicy AVPlayerInterstitialEventRestrictions = 0
+	AVPlayerInterstitialEventRestrictionDefaultPolicy                                 AVPlayerInterstitialEventRestrictions = 0
 )
 
 func (e AVPlayerInterstitialEventRestrictions) String() string {
 	var parts []string
-	if e&AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent != 0 { parts = append(parts, "AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent") }
-	if e&AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement != 0 { parts = append(parts, "AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement") }
-	if len(parts) == 0 { return "0" }
+	if e&AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent != 0 {
+		parts = append(parts, "AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent")
+	}
+	if e&AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement != 0 {
+		parts = append(parts, "AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1635,7 +1695,7 @@ func (e AVPlayerInterstitialEventTimelineOccupancy) String() string {
 type AVPlayerItemSegmentType int64
 
 const (
-	AVPlayerItemSegmentTypePrimary AVPlayerItemSegmentType = 0
+	AVPlayerItemSegmentTypePrimary      AVPlayerItemSegmentType = 0
 	AVPlayerItemSegmentTypeInterstitial AVPlayerItemSegmentType = 1
 )
 
@@ -1678,7 +1738,7 @@ type AVPlayerLooperItemOrdering int64
 
 const (
 	AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems AVPlayerLooperItemOrdering = 0
-	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems AVPlayerLooperItemOrdering = 1
+	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems  AVPlayerLooperItemOrdering = 1
 )
 
 func (e AVPlayerLooperItemOrdering) String() string {
@@ -1695,9 +1755,9 @@ func (e AVPlayerLooperItemOrdering) String() string {
 type AVPlayerLooperStatus int64
 
 const (
-	AVPlayerLooperStatusUnknown AVPlayerLooperStatus = 0
-	AVPlayerLooperStatusReady AVPlayerLooperStatus = 1
-	AVPlayerLooperStatusFailed AVPlayerLooperStatus = 2
+	AVPlayerLooperStatusUnknown   AVPlayerLooperStatus = 0
+	AVPlayerLooperStatusReady     AVPlayerLooperStatus = 1
+	AVPlayerLooperStatusFailed    AVPlayerLooperStatus = 2
 	AVPlayerLooperStatusCancelled AVPlayerLooperStatus = 3
 )
 
@@ -1791,9 +1851,9 @@ func (e AVPlayerTimeControlStatus) String() string {
 type AVQueuedSampleBufferRenderingStatus int64
 
 const (
-	AVQueuedSampleBufferRenderingStatusUnknown AVQueuedSampleBufferRenderingStatus = 0
+	AVQueuedSampleBufferRenderingStatusUnknown   AVQueuedSampleBufferRenderingStatus = 0
 	AVQueuedSampleBufferRenderingStatusRendering AVQueuedSampleBufferRenderingStatus = 1
-	AVQueuedSampleBufferRenderingStatusFailed AVQueuedSampleBufferRenderingStatus = 2
+	AVQueuedSampleBufferRenderingStatusFailed    AVQueuedSampleBufferRenderingStatus = 2
 )
 
 func (e AVQueuedSampleBufferRenderingStatus) String() string {
@@ -1813,7 +1873,7 @@ type AVSampleBufferRequestDirection int64
 
 const (
 	AVSampleBufferRequestDirectionForward AVSampleBufferRequestDirection = 1
-	AVSampleBufferRequestDirectionNone AVSampleBufferRequestDirection = 0
+	AVSampleBufferRequestDirectionNone    AVSampleBufferRequestDirection = 0
 	AVSampleBufferRequestDirectionReverse AVSampleBufferRequestDirection = -1
 )
 
@@ -1833,8 +1893,8 @@ func (e AVSampleBufferRequestDirection) String() string {
 type AVSampleBufferRequestMode int64
 
 const (
-	AVSampleBufferRequestModeImmediate AVSampleBufferRequestMode = 0
-	AVSampleBufferRequestModeScheduled AVSampleBufferRequestMode = 1
+	AVSampleBufferRequestModeImmediate     AVSampleBufferRequestMode = 0
+	AVSampleBufferRequestModeScheduled     AVSampleBufferRequestMode = 1
 	AVSampleBufferRequestModeOpportunistic AVSampleBufferRequestMode = 2
 )
 
@@ -1862,17 +1922,21 @@ const (
 
 func (e AVVariantPreferences) String() string {
 	var parts []string
-	if e&AVVariantPreferenceScalabilityToLosslessAudio != 0 { parts = append(parts, "AVVariantPreferenceScalabilityToLosslessAudio") }
-	if len(parts) == 0 { return "0" }
+	if e&AVVariantPreferenceScalabilityToLosslessAudio != 0 {
+		parts = append(parts, "AVVariantPreferenceScalabilityToLosslessAudio")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AVVideoFieldMode int64
 
 const (
-	AVVideoFieldModeBoth AVVideoFieldMode = 0
-	AVVideoFieldModeTopOnly AVVideoFieldMode = 1
-	AVVideoFieldModeBottomOnly AVVideoFieldMode = 2
+	AVVideoFieldModeBoth        AVVideoFieldMode = 0
+	AVVideoFieldModeTopOnly     AVVideoFieldMode = 1
+	AVVideoFieldModeBottomOnly  AVVideoFieldMode = 2
 	AVVideoFieldModeDeinterlace AVVideoFieldMode = 3
 )
 
@@ -1894,9 +1958,9 @@ func (e AVVideoFieldMode) String() string {
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -1915,7 +1979,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 type CMTagCollectionVideoOutputPreset int64
 
 const (
-	KCMTagCollectionVideoOutputPreset_Monoscopic CMTagCollectionVideoOutputPreset = 0
+	KCMTagCollectionVideoOutputPreset_Monoscopic   CMTagCollectionVideoOutputPreset = 0
 	KCMTagCollectionVideoOutputPreset_Stereoscopic CMTagCollectionVideoOutputPreset = 1
 )
 
@@ -1933,10 +1997,10 @@ func (e CMTagCollectionVideoOutputPreset) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -1961,7 +2025,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -1979,8 +2043,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -2016,8 +2080,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -2037,7 +2101,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -2056,8 +2120,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -2076,13 +2140,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -2109,24 +2173,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -2167,9 +2231,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -2189,12 +2253,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -2221,14 +2285,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -2257,9 +2321,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -2278,36 +2342,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -2337,8 +2415,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -2358,62 +2436,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -2539,15 +2617,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -2585,7 +2663,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2593,7 +2673,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -2611,8 +2691,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -2631,26 +2711,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2672,27 +2768,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -2716,11 +2812,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -2745,22 +2841,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2811,34 +2907,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

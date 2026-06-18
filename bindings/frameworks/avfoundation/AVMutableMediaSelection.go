@@ -15,7 +15,7 @@ type AVMutableMediaSelection struct {
 }
 
 var (
-	_clsAVMutableMediaSelection = _objcClass("AVMutableMediaSelection")
+	_clsAVMutableMediaSelection                                       = _objcClass("AVMutableMediaSelection")
 	_aVMutableMediaSelectionSelSelectMediaOptionInMediaSelectionGroup = objc.RegisterName("selectMediaOption:inMediaSelectionGroup:")
 )
 
@@ -33,4 +33,3 @@ func AVMutableMediaSelectionFromID(id objc.ID) *AVMutableMediaSelection {
 func (o *AVMutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *AVMediaSelectionOption, mediaSelectionGroup *AVMediaSelectionGroup) {
 	o.Ptr().Send(_aVMutableMediaSelectionSelSelectMediaOptionInMediaSelectionGroup, mediaSelectionOption.Ptr(), mediaSelectionGroup.Ptr())
 }
-

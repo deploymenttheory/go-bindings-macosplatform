@@ -16,26 +16,26 @@ type DOMHTMLElement struct {
 }
 
 var (
-	_clsDOMHTMLElement = _objcClass("DOMHTMLElement")
-	_dOMHTMLElementSelClick = objc.RegisterName("click")
-	_dOMHTMLElementSelTitle = objc.RegisterName("title")
-	_dOMHTMLElementSelSetTitle = objc.RegisterName("setTitle:")
-	_dOMHTMLElementSelLang = objc.RegisterName("lang")
-	_dOMHTMLElementSelSetLang = objc.RegisterName("setLang:")
-	_dOMHTMLElementSelDir = objc.RegisterName("dir")
-	_dOMHTMLElementSelSetDir = objc.RegisterName("setDir:")
-	_dOMHTMLElementSelTabIndex = objc.RegisterName("tabIndex")
-	_dOMHTMLElementSelSetTabIndex = objc.RegisterName("setTabIndex:")
-	_dOMHTMLElementSelAccessKey = objc.RegisterName("accessKey")
-	_dOMHTMLElementSelSetAccessKey = objc.RegisterName("setAccessKey:")
-	_dOMHTMLElementSelSetInnerText = objc.RegisterName("setInnerText:")
-	_dOMHTMLElementSelOuterText = objc.RegisterName("outerText")
-	_dOMHTMLElementSelSetOuterText = objc.RegisterName("setOuterText:")
-	_dOMHTMLElementSelContentEditable = objc.RegisterName("contentEditable")
+	_clsDOMHTMLElement                   = _objcClass("DOMHTMLElement")
+	_dOMHTMLElementSelClick              = objc.RegisterName("click")
+	_dOMHTMLElementSelTitle              = objc.RegisterName("title")
+	_dOMHTMLElementSelSetTitle           = objc.RegisterName("setTitle:")
+	_dOMHTMLElementSelLang               = objc.RegisterName("lang")
+	_dOMHTMLElementSelSetLang            = objc.RegisterName("setLang:")
+	_dOMHTMLElementSelDir                = objc.RegisterName("dir")
+	_dOMHTMLElementSelSetDir             = objc.RegisterName("setDir:")
+	_dOMHTMLElementSelTabIndex           = objc.RegisterName("tabIndex")
+	_dOMHTMLElementSelSetTabIndex        = objc.RegisterName("setTabIndex:")
+	_dOMHTMLElementSelAccessKey          = objc.RegisterName("accessKey")
+	_dOMHTMLElementSelSetAccessKey       = objc.RegisterName("setAccessKey:")
+	_dOMHTMLElementSelSetInnerText       = objc.RegisterName("setInnerText:")
+	_dOMHTMLElementSelOuterText          = objc.RegisterName("outerText")
+	_dOMHTMLElementSelSetOuterText       = objc.RegisterName("setOuterText:")
+	_dOMHTMLElementSelContentEditable    = objc.RegisterName("contentEditable")
 	_dOMHTMLElementSelSetContentEditable = objc.RegisterName("setContentEditable:")
-	_dOMHTMLElementSelIdName = objc.RegisterName("idName")
-	_dOMHTMLElementSelSetIdName = objc.RegisterName("setIdName:")
-	_dOMHTMLElementSelChildren = objc.RegisterName("children")
+	_dOMHTMLElementSelIdName             = objc.RegisterName("idName")
+	_dOMHTMLElementSelSetIdName          = objc.RegisterName("setIdName:")
+	_dOMHTMLElementSelChildren           = objc.RegisterName("children")
 	_dOMHTMLElementSelTitleDisplayString = objc.RegisterName("titleDisplayString")
 )
 
@@ -55,7 +55,9 @@ func (o *DOMHTMLElement) Click() {
 
 func (o *DOMHTMLElement) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *DOMHTMLElement) SetTitle(title *foundation.NSString) {
 
 func (o *DOMHTMLElement) Lang() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelLang)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *DOMHTMLElement) SetLang(lang *foundation.NSString) {
 
 func (o *DOMHTMLElement) Dir() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelDir)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,7 +100,9 @@ func (o *DOMHTMLElement) SetTabIndex(tabIndex int) {
 
 func (o *DOMHTMLElement) AccessKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelAccessKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,7 +116,9 @@ func (o *DOMHTMLElement) SetInnerText(innerText *foundation.NSString) {
 
 func (o *DOMHTMLElement) OuterText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelOuterText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -118,7 +128,9 @@ func (o *DOMHTMLElement) SetOuterText(outerText *foundation.NSString) {
 
 func (o *DOMHTMLElement) ContentEditable() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelContentEditable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -128,7 +140,9 @@ func (o *DOMHTMLElement) SetContentEditable(contentEditable *foundation.NSString
 
 func (o *DOMHTMLElement) IdName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelIdName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -138,13 +152,16 @@ func (o *DOMHTMLElement) SetIdName(idName *foundation.NSString) {
 
 func (o *DOMHTMLElement) Children() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLElement) TitleDisplayString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLElementSelTitleDisplayString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

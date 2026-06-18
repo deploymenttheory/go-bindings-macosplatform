@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_storekitLib uintptr
-	_loadOnce sync.Once
+	_storekitLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("SKTerminateForInvalidReceipt", func() { purego.RegisterLibFunc(&_fnSKTerminateForInvalidReceipt, _storekitLib, "SKTerminateForInvalidReceipt") })
+	_register("SKTerminateForInvalidReceipt", func() {
+		purego.RegisterLibFunc(&_fnSKTerminateForInvalidReceipt, _storekitLib, "SKTerminateForInvalidReceipt")
+	})
 }
 
 func init() {

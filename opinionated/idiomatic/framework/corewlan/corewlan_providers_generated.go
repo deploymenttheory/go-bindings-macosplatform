@@ -17,4 +17,3 @@ type ConfigurationProvider interface {
 type NetworkProfileProvider interface {
 	asNetworkProfile() *raw.CWNetworkProfile
 }
-

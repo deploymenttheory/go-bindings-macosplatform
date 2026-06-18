@@ -16,14 +16,14 @@ type NEIPv6Settings struct {
 }
 
 var (
-	_clsNEIPv6Settings = _objcClass("NEIPv6Settings")
+	_clsNEIPv6Settings                                      = _objcClass("NEIPv6Settings")
 	_nEIPv6SettingsSelInitWithAddressesNetworkPrefixLengths = objc.RegisterName("initWithAddresses:networkPrefixLengths:")
-	_nEIPv6SettingsSelAddresses = objc.RegisterName("addresses")
-	_nEIPv6SettingsSelNetworkPrefixLengths = objc.RegisterName("networkPrefixLengths")
-	_nEIPv6SettingsSelIncludedRoutes = objc.RegisterName("includedRoutes")
-	_nEIPv6SettingsSelSetIncludedRoutes = objc.RegisterName("setIncludedRoutes:")
-	_nEIPv6SettingsSelExcludedRoutes = objc.RegisterName("excludedRoutes")
-	_nEIPv6SettingsSelSetExcludedRoutes = objc.RegisterName("setExcludedRoutes:")
+	_nEIPv6SettingsSelAddresses                             = objc.RegisterName("addresses")
+	_nEIPv6SettingsSelNetworkPrefixLengths                  = objc.RegisterName("networkPrefixLengths")
+	_nEIPv6SettingsSelIncludedRoutes                        = objc.RegisterName("includedRoutes")
+	_nEIPv6SettingsSelSetIncludedRoutes                     = objc.RegisterName("setIncludedRoutes:")
+	_nEIPv6SettingsSelExcludedRoutes                        = objc.RegisterName("excludedRoutes")
+	_nEIPv6SettingsSelSetExcludedRoutes                     = objc.RegisterName("setExcludedRoutes:")
 )
 
 func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
@@ -39,7 +39,9 @@ func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
 // @method initWithAddresses:networkPrefixLengths: @discussion Initialize a newly-allocated NEIPv6Settings object. @param addresses An array of IPv6 addresses represented as dotted decimal strings. @param networkPrefixLengths An array of NSNumber objects each containing the length in bits of the network prefix of the corresponding address in the addresses parameter. @return The initialized object.
 func (o *NEIPv6Settings) InitWithAddressesNetworkPrefixLengths(addresses *foundation.NSArray[*foundation.NSString], networkPrefixLengths *foundation.NSArray[*foundation.NSNumber]) *NEIPv6Settings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelInitWithAddressesNetworkPrefixLengths, addresses, networkPrefixLengths)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEIPv6SettingsFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *NEIPv6Settings) NetworkPrefixLengths() *foundation.NSArray[*foundation.
 // @property includedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
 func (o *NEIPv6Settings) IncludedRoutes() *foundation.NSArray[*NEIPv6Route] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelIncludedRoutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEIPv6Route](_ret)
 }
 
@@ -69,11 +73,12 @@ func (o *NEIPv6Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*N
 // @property excludedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
 func (o *NEIPv6Settings) ExcludedRoutes() *foundation.NSArray[*NEIPv6Route] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEIPv6SettingsSelExcludedRoutes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NEIPv6Route](_ret)
 }
 
 func (o *NEIPv6Settings) SetExcludedRoutes(excludedRoutes *foundation.NSArray[*NEIPv6Route]) {
 	o.Ptr().Send(_nEIPv6SettingsSelSetExcludedRoutes, excludedRoutes.Ptr())
 }
-

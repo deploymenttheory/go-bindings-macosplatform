@@ -16,15 +16,15 @@ type CNMutablePostalAddress struct {
 }
 
 var (
-	_clsCNMutablePostalAddress = _objcClass("CNMutablePostalAddress")
-	_cNMutablePostalAddressSelSetStreet = objc.RegisterName("setStreet:")
-	_cNMutablePostalAddressSelSetSubLocality = objc.RegisterName("setSubLocality:")
-	_cNMutablePostalAddressSelSetCity = objc.RegisterName("setCity:")
+	_clsCNMutablePostalAddress                         = _objcClass("CNMutablePostalAddress")
+	_cNMutablePostalAddressSelSetStreet                = objc.RegisterName("setStreet:")
+	_cNMutablePostalAddressSelSetSubLocality           = objc.RegisterName("setSubLocality:")
+	_cNMutablePostalAddressSelSetCity                  = objc.RegisterName("setCity:")
 	_cNMutablePostalAddressSelSetSubAdministrativeArea = objc.RegisterName("setSubAdministrativeArea:")
-	_cNMutablePostalAddressSelSetState = objc.RegisterName("setState:")
-	_cNMutablePostalAddressSelSetPostalCode = objc.RegisterName("setPostalCode:")
-	_cNMutablePostalAddressSelSetCountry = objc.RegisterName("setCountry:")
-	_cNMutablePostalAddressSelSetISOCountryCode = objc.RegisterName("setISOCountryCode:")
+	_cNMutablePostalAddressSelSetState                 = objc.RegisterName("setState:")
+	_cNMutablePostalAddressSelSetPostalCode            = objc.RegisterName("setPostalCode:")
+	_cNMutablePostalAddressSelSetCountry               = objc.RegisterName("setCountry:")
+	_cNMutablePostalAddressSelSetISOCountryCode        = objc.RegisterName("setISOCountryCode:")
 )
 
 func CNMutablePostalAddressFromID(id objc.ID) *CNMutablePostalAddress {
@@ -68,4 +68,3 @@ func (o *CNMutablePostalAddress) SetCountry(country *foundation.NSString) {
 func (o *CNMutablePostalAddress) SetISOCountryCode(iSOCountryCode *foundation.NSString) {
 	o.Ptr().Send(_cNMutablePostalAddressSelSetISOCountryCode, iSOCountryCode.Ptr())
 }
-

@@ -15,7 +15,7 @@ type MPFeedbackCommandEvent struct {
 }
 
 var (
-	_clsMPFeedbackCommandEvent = _objcClass("MPFeedbackCommandEvent")
+	_clsMPFeedbackCommandEvent           = _objcClass("MPFeedbackCommandEvent")
 	_mPFeedbackCommandEventSelIsNegative = objc.RegisterName("isNegative")
 )
 
@@ -33,4 +33,3 @@ func (o *MPFeedbackCommandEvent) IsNegative() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPFeedbackCommandEventSelIsNegative)
 	return _ret
 }
-

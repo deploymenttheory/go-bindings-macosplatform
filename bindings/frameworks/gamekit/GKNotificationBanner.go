@@ -17,8 +17,8 @@ type GKNotificationBanner struct {
 }
 
 var (
-	_clsGKNotificationBanner = _objcClass("GKNotificationBanner")
-	_gKNotificationBannerSelShowBannerWithTitleMessageCompletionHandler = objc.RegisterName("showBannerWithTitle:message:completionHandler:")
+	_clsGKNotificationBanner                                                    = _objcClass("GKNotificationBanner")
+	_gKNotificationBannerSelShowBannerWithTitleMessageCompletionHandler         = objc.RegisterName("showBannerWithTitle:message:completionHandler:")
 	_gKNotificationBannerSelShowBannerWithTitleMessageDurationCompletionHandler = objc.RegisterName("showBannerWithTitle:message:duration:completionHandler:")
 )
 
@@ -55,4 +55,3 @@ func GKNotificationBannerShowBannerWithTitleMessageDurationCompletionHandler(tit
 	}
 	objc.ID(_clsGKNotificationBanner).Send(_gKNotificationBannerSelShowBannerWithTitleMessageDurationCompletionHandler, title.Ptr(), message.Ptr(), duration, __block_completionHandler)
 }
-

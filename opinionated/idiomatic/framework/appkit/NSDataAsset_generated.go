@@ -77,4 +77,3 @@ type DataAssetable interface {
 }
 
 var _ DataAssetable = (*DataAsset)(nil)
-

@@ -12,4 +12,3 @@ import (
 type DownloadProvider interface {
 	asDownload() *raw.BADownload
 }
-

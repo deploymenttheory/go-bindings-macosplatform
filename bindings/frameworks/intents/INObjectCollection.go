@@ -16,12 +16,12 @@ type INObjectCollection[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsINObjectCollection = _objcClass("INObjectCollection")
-	_iNObjectCollectionSelInitWithSections = objc.RegisterName("initWithSections:")
-	_iNObjectCollectionSelInitWithItems = objc.RegisterName("initWithItems:")
-	_iNObjectCollectionSelSections = objc.RegisterName("sections")
-	_iNObjectCollectionSelAllItems = objc.RegisterName("allItems")
-	_iNObjectCollectionSelUsesIndexedCollation = objc.RegisterName("usesIndexedCollation")
+	_clsINObjectCollection                        = _objcClass("INObjectCollection")
+	_iNObjectCollectionSelInitWithSections        = objc.RegisterName("initWithSections:")
+	_iNObjectCollectionSelInitWithItems           = objc.RegisterName("initWithItems:")
+	_iNObjectCollectionSelSections                = objc.RegisterName("sections")
+	_iNObjectCollectionSelAllItems                = objc.RegisterName("allItems")
+	_iNObjectCollectionSelUsesIndexedCollation    = objc.RegisterName("usesIndexedCollation")
 	_iNObjectCollectionSelSetUsesIndexedCollation = objc.RegisterName("setUsesIndexedCollation:")
 )
 
@@ -37,13 +37,17 @@ func INObjectCollectionFromID[ObjectType purego.AnyObject](id objc.ID) *INObject
 
 func (o *INObjectCollection[ObjectType]) InitWithSections(sections *foundation.NSArray[objc.ID]) *INObjectCollection[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelInitWithSections, sections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectCollectionFromID[ObjectType](_ret)
 }
 
 func (o *INObjectCollection[ObjectType]) InitWithItems(items *foundation.NSArray[ObjectType]) *INObjectCollection[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelInitWithItems, items.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INObjectCollectionFromID[ObjectType](_ret)
 }
 
@@ -54,7 +58,9 @@ func (o *INObjectCollection[ObjectType]) Sections() *foundation.NSArray[objc.ID]
 
 func (o *INObjectCollection[ObjectType]) AllItems() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNObjectCollectionSelAllItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
 
@@ -66,4 +72,3 @@ func (o *INObjectCollection[ObjectType]) UsesIndexedCollation() bool {
 func (o *INObjectCollection[ObjectType]) SetUsesIndexedCollation(usesIndexedCollation bool) {
 	o.Ptr().Send(_iNObjectCollectionSelSetUsesIndexedCollation, usesIndexedCollation)
 }
-

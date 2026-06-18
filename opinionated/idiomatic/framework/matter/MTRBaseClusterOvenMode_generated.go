@@ -250,9 +250,13 @@ func (x *MTRBaseClusterOvenMode) SubscribeAttributeClusterRevisionWithParamsSubs
 	}
 }
 
-func (x *MTRBaseClusterOvenMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterOvenMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterOvenMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterOvenMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterOvenModeable is the interface implemented by [MTRBaseClusterOvenMode], for mocking and DI.
 type MTRBaseClusterOvenModeable interface {
@@ -275,4 +279,3 @@ type MTRBaseClusterOvenModeable interface {
 }
 
 var _ MTRBaseClusterOvenModeable = (*MTRBaseClusterOvenMode)(nil)
-

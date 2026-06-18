@@ -18,8 +18,8 @@ type SACrashDetectionEvent struct {
 }
 
 var (
-	_clsSACrashDetectionEvent = _objcClass("SACrashDetectionEvent")
-	_sACrashDetectionEventSelDate = objc.RegisterName("date")
+	_clsSACrashDetectionEvent         = _objcClass("SACrashDetectionEvent")
+	_sACrashDetectionEventSelDate     = objc.RegisterName("date")
 	_sACrashDetectionEventSelResponse = objc.RegisterName("response")
 	_sACrashDetectionEventSelLocation = objc.RegisterName("location")
 )
@@ -37,7 +37,9 @@ func SACrashDetectionEventFromID(id objc.ID) *SACrashDetectionEvent {
 // date @discussion The time a crash was detected
 func (o *SACrashDetectionEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sACrashDetectionEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *SACrashDetectionEvent) Location() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sACrashDetectionEventSelLocation)
 	return _ret
 }
-

@@ -18,9 +18,9 @@ type VZLinuxRosettaAbstractSocketCachingOptions struct {
 }
 
 var (
-	_clsVZLinuxRosettaAbstractSocketCachingOptions = _objcClass("VZLinuxRosettaAbstractSocketCachingOptions")
+	_clsVZLinuxRosettaAbstractSocketCachingOptions                  = _objcClass("VZLinuxRosettaAbstractSocketCachingOptions")
 	_vZLinuxRosettaAbstractSocketCachingOptionsSelInitWithNameError = objc.RegisterName("initWithName:error:")
-	_vZLinuxRosettaAbstractSocketCachingOptionsSelName = objc.RegisterName("name")
+	_vZLinuxRosettaAbstractSocketCachingOptionsSelName              = objc.RegisterName("name")
 	_vZLinuxRosettaAbstractSocketCachingOptionsSelMaximumNameLength = objc.RegisterName("maximumNameLength")
 )
 
@@ -38,7 +38,9 @@ func VZLinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *VZLinuxRosett
 func (o *VZLinuxRosettaAbstractSocketCachingOptions) InitWithNameError(name *foundation.NSString) (*VZLinuxRosettaAbstractSocketCachingOptions, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaAbstractSocketCachingOptionsSelInitWithNameError, name.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,7 +50,9 @@ func (o *VZLinuxRosettaAbstractSocketCachingOptions) InitWithNameError(name *fou
 // @abstract Name set by initWithName. @discussion This is the name of the Abstract Socket to be used by Rosetta.
 func (o *VZLinuxRosettaAbstractSocketCachingOptions) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxRosettaAbstractSocketCachingOptionsSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func VZLinuxRosettaAbstractSocketCachingOptionsMaximumNameLength() uint {
 	_ret := objc.Send[uint](objc.ID(_clsVZLinuxRosettaAbstractSocketCachingOptions), _vZLinuxRosettaAbstractSocketCachingOptionsSelMaximumNameLength)
 	return _ret
 }
-

@@ -531,4 +531,3 @@ type ManagedObjectContextable interface {
 }
 
 var _ ManagedObjectContextable = (*ManagedObjectContext)(nil)
-

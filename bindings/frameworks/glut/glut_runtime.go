@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_glutLib uintptr
-	_loadOnce sync.Once
+	_glutLib       uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -108,7 +108,9 @@ func _loadLibrary() {
 	_register("glutPositionWindow", func() { purego.RegisterLibFunc(&_glutPositionWindow, _glutLib, "glutPositionWindow") })
 	_register("glutPostOverlayRedisplay", func() { purego.RegisterLibFunc(&_glutPostOverlayRedisplay, _glutLib, "glutPostOverlayRedisplay") })
 	_register("glutPostRedisplay", func() { purego.RegisterLibFunc(&_glutPostRedisplay, _glutLib, "glutPostRedisplay") })
-	_register("glutPostWindowOverlayRedisplay", func() { purego.RegisterLibFunc(&_glutPostWindowOverlayRedisplay, _glutLib, "glutPostWindowOverlayRedisplay") })
+	_register("glutPostWindowOverlayRedisplay", func() {
+		purego.RegisterLibFunc(&_glutPostWindowOverlayRedisplay, _glutLib, "glutPostWindowOverlayRedisplay")
+	})
 	_register("glutPostWindowRedisplay", func() { purego.RegisterLibFunc(&_glutPostWindowRedisplay, _glutLib, "glutPostWindowRedisplay") })
 	_register("glutPushWindow", func() { purego.RegisterLibFunc(&_glutPushWindow, _glutLib, "glutPushWindow") })
 	_register("glutRemoveMenuItem", func() { purego.RegisterLibFunc(&_glutRemoveMenuItem, _glutLib, "glutRemoveMenuItem") })

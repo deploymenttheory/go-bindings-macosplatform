@@ -16,8 +16,8 @@ type PHASEShapeElement struct {
 }
 
 var (
-	_clsPHASEShapeElement = _objcClass("PHASEShapeElement")
-	_pHASEShapeElementSelMaterial = objc.RegisterName("material")
+	_clsPHASEShapeElement            = _objcClass("PHASEShapeElement")
+	_pHASEShapeElementSelMaterial    = objc.RegisterName("material")
 	_pHASEShapeElementSelSetMaterial = objc.RegisterName("setMaterial:")
 )
 
@@ -33,11 +33,12 @@ func PHASEShapeElementFromID(id objc.ID) *PHASEShapeElement {
 
 func (o *PHASEShapeElement) Material() *PHASEMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEShapeElementSelMaterial)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMaterialFromID(_ret)
 }
 
 func (o *PHASEShapeElement) SetMaterial(material *PHASEMaterial) {
 	o.Ptr().Send(_pHASEShapeElementSelSetMaterial, material.Ptr())
 }
-

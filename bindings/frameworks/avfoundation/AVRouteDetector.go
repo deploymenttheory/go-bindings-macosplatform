@@ -16,10 +16,10 @@ type AVRouteDetector struct {
 }
 
 var (
-	_clsAVRouteDetector = _objcClass("AVRouteDetector")
-	_aVRouteDetectorSelIsRouteDetectionEnabled = objc.RegisterName("isRouteDetectionEnabled")
+	_clsAVRouteDetector                         = _objcClass("AVRouteDetector")
+	_aVRouteDetectorSelIsRouteDetectionEnabled  = objc.RegisterName("isRouteDetectionEnabled")
 	_aVRouteDetectorSelSetRouteDetectionEnabled = objc.RegisterName("setRouteDetectionEnabled:")
-	_aVRouteDetectorSelMultipleRoutesDetected = objc.RegisterName("multipleRoutesDetected")
+	_aVRouteDetectorSelMultipleRoutesDetected   = objc.RegisterName("multipleRoutesDetected")
 )
 
 func AVRouteDetectorFromID(id objc.ID) *AVRouteDetector {
@@ -47,4 +47,3 @@ func (o *AVRouteDetector) MultipleRoutesDetected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVRouteDetectorSelMultipleRoutesDetected)
 	return _ret
 }
-

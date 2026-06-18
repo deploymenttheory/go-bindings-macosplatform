@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterAirDetectionEventFromID(id objc.ID) *M
 	purego.Track(o)
 	return o
 }
-

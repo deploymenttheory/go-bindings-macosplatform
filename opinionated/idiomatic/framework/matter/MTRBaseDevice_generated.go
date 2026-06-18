@@ -184,4 +184,3 @@ type MTRBaseDeviceable interface {
 }
 
 var _ MTRBaseDeviceable = (*MTRBaseDevice)(nil)
-

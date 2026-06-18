@@ -16,75 +16,75 @@ type NSCalendar struct {
 }
 
 var (
-	_clsNSCalendar = _objcClass("NSCalendar")
-	_nSCalendarSelCalendarWithIdentifier = objc.RegisterName("calendarWithIdentifier:")
-	_nSCalendarSelInitWithCalendarIdentifier = objc.RegisterName("initWithCalendarIdentifier:")
-	_nSCalendarSelMinimumRangeOfUnit = objc.RegisterName("minimumRangeOfUnit:")
-	_nSCalendarSelMaximumRangeOfUnit = objc.RegisterName("maximumRangeOfUnit:")
-	_nSCalendarSelRangeOfUnitInUnitForDate = objc.RegisterName("rangeOfUnit:inUnit:forDate:")
-	_nSCalendarSelOrdinalityOfUnitInUnitForDate = objc.RegisterName("ordinalityOfUnit:inUnit:forDate:")
-	_nSCalendarSelRangeOfUnitStartDateIntervalForDate = objc.RegisterName("rangeOfUnit:startDate:interval:forDate:")
-	_nSCalendarSelDateFromComponents = objc.RegisterName("dateFromComponents:")
-	_nSCalendarSelComponentsFromDate = objc.RegisterName("components:fromDate:")
-	_nSCalendarSelDateByAddingComponentsToDateOptions = objc.RegisterName("dateByAddingComponents:toDate:options:")
-	_nSCalendarSelComponentsFromDateToDateOptions = objc.RegisterName("components:fromDate:toDate:options:")
-	_nSCalendarSelGetEraYearMonthDayFromDate = objc.RegisterName("getEra:year:month:day:fromDate:")
-	_nSCalendarSelGetEraYearForWeekOfYearWeekOfYearWeekdayFromDate = objc.RegisterName("getEra:yearForWeekOfYear:weekOfYear:weekday:fromDate:")
-	_nSCalendarSelGetHourMinuteSecondNanosecondFromDate = objc.RegisterName("getHour:minute:second:nanosecond:fromDate:")
-	_nSCalendarSelComponentFromDate = objc.RegisterName("component:fromDate:")
-	_nSCalendarSelDateWithEraYearMonthDayHourMinuteSecondNanosecond = objc.RegisterName("dateWithEra:year:month:day:hour:minute:second:nanosecond:")
+	_clsNSCalendar                                                                        = _objcClass("NSCalendar")
+	_nSCalendarSelCalendarWithIdentifier                                                  = objc.RegisterName("calendarWithIdentifier:")
+	_nSCalendarSelInitWithCalendarIdentifier                                              = objc.RegisterName("initWithCalendarIdentifier:")
+	_nSCalendarSelMinimumRangeOfUnit                                                      = objc.RegisterName("minimumRangeOfUnit:")
+	_nSCalendarSelMaximumRangeOfUnit                                                      = objc.RegisterName("maximumRangeOfUnit:")
+	_nSCalendarSelRangeOfUnitInUnitForDate                                                = objc.RegisterName("rangeOfUnit:inUnit:forDate:")
+	_nSCalendarSelOrdinalityOfUnitInUnitForDate                                           = objc.RegisterName("ordinalityOfUnit:inUnit:forDate:")
+	_nSCalendarSelRangeOfUnitStartDateIntervalForDate                                     = objc.RegisterName("rangeOfUnit:startDate:interval:forDate:")
+	_nSCalendarSelDateFromComponents                                                      = objc.RegisterName("dateFromComponents:")
+	_nSCalendarSelComponentsFromDate                                                      = objc.RegisterName("components:fromDate:")
+	_nSCalendarSelDateByAddingComponentsToDateOptions                                     = objc.RegisterName("dateByAddingComponents:toDate:options:")
+	_nSCalendarSelComponentsFromDateToDateOptions                                         = objc.RegisterName("components:fromDate:toDate:options:")
+	_nSCalendarSelGetEraYearMonthDayFromDate                                              = objc.RegisterName("getEra:year:month:day:fromDate:")
+	_nSCalendarSelGetEraYearForWeekOfYearWeekOfYearWeekdayFromDate                        = objc.RegisterName("getEra:yearForWeekOfYear:weekOfYear:weekday:fromDate:")
+	_nSCalendarSelGetHourMinuteSecondNanosecondFromDate                                   = objc.RegisterName("getHour:minute:second:nanosecond:fromDate:")
+	_nSCalendarSelComponentFromDate                                                       = objc.RegisterName("component:fromDate:")
+	_nSCalendarSelDateWithEraYearMonthDayHourMinuteSecondNanosecond                       = objc.RegisterName("dateWithEra:year:month:day:hour:minute:second:nanosecond:")
 	_nSCalendarSelDateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond = objc.RegisterName("dateWithEra:yearForWeekOfYear:weekOfYear:weekday:hour:minute:second:nanosecond:")
-	_nSCalendarSelStartOfDayForDate = objc.RegisterName("startOfDayForDate:")
-	_nSCalendarSelComponentsInTimeZoneFromDate = objc.RegisterName("componentsInTimeZone:fromDate:")
-	_nSCalendarSelCompareDateToDateToUnitGranularity = objc.RegisterName("compareDate:toDate:toUnitGranularity:")
-	_nSCalendarSelIsDateEqualToDateToUnitGranularity = objc.RegisterName("isDate:equalToDate:toUnitGranularity:")
-	_nSCalendarSelIsDateInSameDayAsDate = objc.RegisterName("isDate:inSameDayAsDate:")
-	_nSCalendarSelIsDateInToday = objc.RegisterName("isDateInToday:")
-	_nSCalendarSelIsDateInYesterday = objc.RegisterName("isDateInYesterday:")
-	_nSCalendarSelIsDateInTomorrow = objc.RegisterName("isDateInTomorrow:")
-	_nSCalendarSelIsDateInWeekend = objc.RegisterName("isDateInWeekend:")
-	_nSCalendarSelRangeOfWeekendStartDateIntervalContainingDate = objc.RegisterName("rangeOfWeekendStartDate:interval:containingDate:")
-	_nSCalendarSelNextWeekendStartDateIntervalOptionsAfterDate = objc.RegisterName("nextWeekendStartDate:interval:options:afterDate:")
-	_nSCalendarSelComponentsFromDateComponentsToDateComponentsOptions = objc.RegisterName("components:fromDateComponents:toDateComponents:options:")
-	_nSCalendarSelDateByAddingUnitValueToDateOptions = objc.RegisterName("dateByAddingUnit:value:toDate:options:")
-	_nSCalendarSelEnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing = objc.RegisterName("enumerateDatesStartingAfterDate:matchingComponents:options:usingBlock:")
-	_nSCalendarSelNextDateAfterDateMatchingComponentsOptions = objc.RegisterName("nextDateAfterDate:matchingComponents:options:")
-	_nSCalendarSelNextDateAfterDateMatchingUnitValueOptions = objc.RegisterName("nextDateAfterDate:matchingUnit:value:options:")
-	_nSCalendarSelNextDateAfterDateMatchingHourMinuteSecondOptions = objc.RegisterName("nextDateAfterDate:matchingHour:minute:second:options:")
-	_nSCalendarSelDateBySettingUnitValueOfDateOptions = objc.RegisterName("dateBySettingUnit:value:ofDate:options:")
-	_nSCalendarSelDateBySettingHourMinuteSecondOfDateOptions = objc.RegisterName("dateBySettingHour:minute:second:ofDate:options:")
-	_nSCalendarSelDateMatchesComponents = objc.RegisterName("date:matchesComponents:")
-	_nSCalendarSelCurrentCalendar = objc.RegisterName("currentCalendar")
-	_nSCalendarSelAutoupdatingCurrentCalendar = objc.RegisterName("autoupdatingCurrentCalendar")
-	_nSCalendarSelCalendarIdentifier = objc.RegisterName("calendarIdentifier")
-	_nSCalendarSelLocale = objc.RegisterName("locale")
-	_nSCalendarSelSetLocale = objc.RegisterName("setLocale:")
-	_nSCalendarSelTimeZone = objc.RegisterName("timeZone")
-	_nSCalendarSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSCalendarSelFirstWeekday = objc.RegisterName("firstWeekday")
-	_nSCalendarSelSetFirstWeekday = objc.RegisterName("setFirstWeekday:")
-	_nSCalendarSelMinimumDaysInFirstWeek = objc.RegisterName("minimumDaysInFirstWeek")
-	_nSCalendarSelSetMinimumDaysInFirstWeek = objc.RegisterName("setMinimumDaysInFirstWeek:")
-	_nSCalendarSelEraSymbols = objc.RegisterName("eraSymbols")
-	_nSCalendarSelLongEraSymbols = objc.RegisterName("longEraSymbols")
-	_nSCalendarSelMonthSymbols = objc.RegisterName("monthSymbols")
-	_nSCalendarSelShortMonthSymbols = objc.RegisterName("shortMonthSymbols")
-	_nSCalendarSelVeryShortMonthSymbols = objc.RegisterName("veryShortMonthSymbols")
-	_nSCalendarSelStandaloneMonthSymbols = objc.RegisterName("standaloneMonthSymbols")
-	_nSCalendarSelShortStandaloneMonthSymbols = objc.RegisterName("shortStandaloneMonthSymbols")
-	_nSCalendarSelVeryShortStandaloneMonthSymbols = objc.RegisterName("veryShortStandaloneMonthSymbols")
-	_nSCalendarSelWeekdaySymbols = objc.RegisterName("weekdaySymbols")
-	_nSCalendarSelShortWeekdaySymbols = objc.RegisterName("shortWeekdaySymbols")
-	_nSCalendarSelVeryShortWeekdaySymbols = objc.RegisterName("veryShortWeekdaySymbols")
-	_nSCalendarSelStandaloneWeekdaySymbols = objc.RegisterName("standaloneWeekdaySymbols")
-	_nSCalendarSelShortStandaloneWeekdaySymbols = objc.RegisterName("shortStandaloneWeekdaySymbols")
-	_nSCalendarSelVeryShortStandaloneWeekdaySymbols = objc.RegisterName("veryShortStandaloneWeekdaySymbols")
-	_nSCalendarSelQuarterSymbols = objc.RegisterName("quarterSymbols")
-	_nSCalendarSelShortQuarterSymbols = objc.RegisterName("shortQuarterSymbols")
-	_nSCalendarSelStandaloneQuarterSymbols = objc.RegisterName("standaloneQuarterSymbols")
-	_nSCalendarSelShortStandaloneQuarterSymbols = objc.RegisterName("shortStandaloneQuarterSymbols")
-	_nSCalendarSelAMSymbol = objc.RegisterName("AMSymbol")
-	_nSCalendarSelPMSymbol = objc.RegisterName("PMSymbol")
+	_nSCalendarSelStartOfDayForDate                                                       = objc.RegisterName("startOfDayForDate:")
+	_nSCalendarSelComponentsInTimeZoneFromDate                                            = objc.RegisterName("componentsInTimeZone:fromDate:")
+	_nSCalendarSelCompareDateToDateToUnitGranularity                                      = objc.RegisterName("compareDate:toDate:toUnitGranularity:")
+	_nSCalendarSelIsDateEqualToDateToUnitGranularity                                      = objc.RegisterName("isDate:equalToDate:toUnitGranularity:")
+	_nSCalendarSelIsDateInSameDayAsDate                                                   = objc.RegisterName("isDate:inSameDayAsDate:")
+	_nSCalendarSelIsDateInToday                                                           = objc.RegisterName("isDateInToday:")
+	_nSCalendarSelIsDateInYesterday                                                       = objc.RegisterName("isDateInYesterday:")
+	_nSCalendarSelIsDateInTomorrow                                                        = objc.RegisterName("isDateInTomorrow:")
+	_nSCalendarSelIsDateInWeekend                                                         = objc.RegisterName("isDateInWeekend:")
+	_nSCalendarSelRangeOfWeekendStartDateIntervalContainingDate                           = objc.RegisterName("rangeOfWeekendStartDate:interval:containingDate:")
+	_nSCalendarSelNextWeekendStartDateIntervalOptionsAfterDate                            = objc.RegisterName("nextWeekendStartDate:interval:options:afterDate:")
+	_nSCalendarSelComponentsFromDateComponentsToDateComponentsOptions                     = objc.RegisterName("components:fromDateComponents:toDateComponents:options:")
+	_nSCalendarSelDateByAddingUnitValueToDateOptions                                      = objc.RegisterName("dateByAddingUnit:value:toDate:options:")
+	_nSCalendarSelEnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing           = objc.RegisterName("enumerateDatesStartingAfterDate:matchingComponents:options:usingBlock:")
+	_nSCalendarSelNextDateAfterDateMatchingComponentsOptions                              = objc.RegisterName("nextDateAfterDate:matchingComponents:options:")
+	_nSCalendarSelNextDateAfterDateMatchingUnitValueOptions                               = objc.RegisterName("nextDateAfterDate:matchingUnit:value:options:")
+	_nSCalendarSelNextDateAfterDateMatchingHourMinuteSecondOptions                        = objc.RegisterName("nextDateAfterDate:matchingHour:minute:second:options:")
+	_nSCalendarSelDateBySettingUnitValueOfDateOptions                                     = objc.RegisterName("dateBySettingUnit:value:ofDate:options:")
+	_nSCalendarSelDateBySettingHourMinuteSecondOfDateOptions                              = objc.RegisterName("dateBySettingHour:minute:second:ofDate:options:")
+	_nSCalendarSelDateMatchesComponents                                                   = objc.RegisterName("date:matchesComponents:")
+	_nSCalendarSelCurrentCalendar                                                         = objc.RegisterName("currentCalendar")
+	_nSCalendarSelAutoupdatingCurrentCalendar                                             = objc.RegisterName("autoupdatingCurrentCalendar")
+	_nSCalendarSelCalendarIdentifier                                                      = objc.RegisterName("calendarIdentifier")
+	_nSCalendarSelLocale                                                                  = objc.RegisterName("locale")
+	_nSCalendarSelSetLocale                                                               = objc.RegisterName("setLocale:")
+	_nSCalendarSelTimeZone                                                                = objc.RegisterName("timeZone")
+	_nSCalendarSelSetTimeZone                                                             = objc.RegisterName("setTimeZone:")
+	_nSCalendarSelFirstWeekday                                                            = objc.RegisterName("firstWeekday")
+	_nSCalendarSelSetFirstWeekday                                                         = objc.RegisterName("setFirstWeekday:")
+	_nSCalendarSelMinimumDaysInFirstWeek                                                  = objc.RegisterName("minimumDaysInFirstWeek")
+	_nSCalendarSelSetMinimumDaysInFirstWeek                                               = objc.RegisterName("setMinimumDaysInFirstWeek:")
+	_nSCalendarSelEraSymbols                                                              = objc.RegisterName("eraSymbols")
+	_nSCalendarSelLongEraSymbols                                                          = objc.RegisterName("longEraSymbols")
+	_nSCalendarSelMonthSymbols                                                            = objc.RegisterName("monthSymbols")
+	_nSCalendarSelShortMonthSymbols                                                       = objc.RegisterName("shortMonthSymbols")
+	_nSCalendarSelVeryShortMonthSymbols                                                   = objc.RegisterName("veryShortMonthSymbols")
+	_nSCalendarSelStandaloneMonthSymbols                                                  = objc.RegisterName("standaloneMonthSymbols")
+	_nSCalendarSelShortStandaloneMonthSymbols                                             = objc.RegisterName("shortStandaloneMonthSymbols")
+	_nSCalendarSelVeryShortStandaloneMonthSymbols                                         = objc.RegisterName("veryShortStandaloneMonthSymbols")
+	_nSCalendarSelWeekdaySymbols                                                          = objc.RegisterName("weekdaySymbols")
+	_nSCalendarSelShortWeekdaySymbols                                                     = objc.RegisterName("shortWeekdaySymbols")
+	_nSCalendarSelVeryShortWeekdaySymbols                                                 = objc.RegisterName("veryShortWeekdaySymbols")
+	_nSCalendarSelStandaloneWeekdaySymbols                                                = objc.RegisterName("standaloneWeekdaySymbols")
+	_nSCalendarSelShortStandaloneWeekdaySymbols                                           = objc.RegisterName("shortStandaloneWeekdaySymbols")
+	_nSCalendarSelVeryShortStandaloneWeekdaySymbols                                       = objc.RegisterName("veryShortStandaloneWeekdaySymbols")
+	_nSCalendarSelQuarterSymbols                                                          = objc.RegisterName("quarterSymbols")
+	_nSCalendarSelShortQuarterSymbols                                                     = objc.RegisterName("shortQuarterSymbols")
+	_nSCalendarSelStandaloneQuarterSymbols                                                = objc.RegisterName("standaloneQuarterSymbols")
+	_nSCalendarSelShortStandaloneQuarterSymbols                                           = objc.RegisterName("shortStandaloneQuarterSymbols")
+	_nSCalendarSelAMSymbol                                                                = objc.RegisterName("AMSymbol")
+	_nSCalendarSelPMSymbol                                                                = objc.RegisterName("PMSymbol")
 )
 
 func NSCalendarFromID(id objc.ID) *NSCalendar {
@@ -99,7 +99,9 @@ func NSCalendarFromID(id objc.ID) *NSCalendar {
 
 func NSCalendarCalendarWithIdentifier(calendarIdentifierConstant *NSString) *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelCalendarWithIdentifier, calendarIdentifierConstant.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -135,25 +137,33 @@ func (o *NSCalendar) RangeOfUnitStartDateIntervalForDate(unit NSCalendarUnit, da
 
 func (o *NSCalendar) DateFromComponents(comps *NSDateComponents) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateFromComponents, comps.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *NSDate) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDate, unitFlags, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateComponentsFromID(_ret)
 }
 
 func (o *NSCalendar) DateByAddingComponentsToDateOptions(comps *NSDateComponents, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateByAddingComponentsToDateOptions, comps.Ptr(), date.Ptr(), opts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, startingDate *NSDate, resultDate *NSDate, opts NSCalendarOptions) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDateToDateOptions, unitFlags, startingDate.Ptr(), resultDate.Ptr(), opts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateComponentsFromID(_ret)
 }
 
@@ -176,25 +186,33 @@ func (o *NSCalendar) ComponentFromDate(unit NSCalendarUnit, date *NSDate) int {
 
 func (o *NSCalendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateWithEraYearMonthDayHourMinuteSecondNanosecond, eraValue, yearValue, monthValue, dayValue, hourValue, minuteValue, secondValue, nanosecondValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond, eraValue, yearValue, weekValue, weekdayValue, hourValue, minuteValue, secondValue, nanosecondValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) StartOfDayForDate(date *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStartOfDayForDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) ComponentsInTimeZoneFromDate(timezone *NSTimeZone, date *NSDate) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsInTimeZoneFromDate, timezone.Ptr(), date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateComponentsFromID(_ret)
 }
 
@@ -245,13 +263,17 @@ func (o *NSCalendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *NSDate,
 
 func (o *NSCalendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags NSCalendarUnit, startingDateComp *NSDateComponents, resultDateComp *NSDateComponents, options NSCalendarOptions) *NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelComponentsFromDateComponentsToDateComponentsOptions, unitFlags, startingDateComp.Ptr(), resultDateComp.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateComponentsFromID(_ret)
 }
 
 func (o *NSCalendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value int, date *NSDate, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateByAddingUnitValueToDateOptions, unit, value, date.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -271,31 +293,41 @@ func (o *NSCalendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsi
 
 func (o *NSCalendar) NextDateAfterDateMatchingComponentsOptions(date *NSDate, comps *NSDateComponents, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingComponentsOptions, date.Ptr(), comps.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) NextDateAfterDateMatchingUnitValueOptions(date *NSDate, unit NSCalendarUnit, value int, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingUnitValueOptions, date.Ptr(), unit, value, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *NSDate, hourValue int, minuteValue int, secondValue int, options NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelNextDateAfterDateMatchingHourMinuteSecondOptions, date.Ptr(), hourValue, minuteValue, secondValue, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v int, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateBySettingUnitValueOfDateOptions, unit, v, date.Ptr(), opts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSCalendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *NSDate, opts NSCalendarOptions) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelDateBySettingHourMinuteSecondOfDateOptions, h, m, s, date.Ptr(), opts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -306,25 +338,33 @@ func (o *NSCalendar) DateMatchesComponents(date *NSDate, components *NSDateCompo
 
 func NSCalendarCurrentCalendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelCurrentCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
 func NSCalendarAutoupdatingCurrentCalendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCalendar), _nSCalendarSelAutoupdatingCurrentCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
 func (o *NSCalendar) CalendarIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelCalendarIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSCalendar) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -334,7 +374,9 @@ func (o *NSCalendar) SetLocale(locale *NSLocale) {
 
 func (o *NSCalendar) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -362,121 +404,160 @@ func (o *NSCalendar) SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) {
 
 func (o *NSCalendar) EraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelEraSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) LongEraSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelLongEraSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) MonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) VeryShortMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) StandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) VeryShortStandaloneMonthSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortStandaloneMonthSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) WeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) VeryShortWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) StandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) VeryShortStandaloneWeekdaySymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelVeryShortStandaloneWeekdaySymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) QuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) StandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelStandaloneQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) ShortStandaloneQuarterSymbols() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelShortStandaloneQuarterSymbols)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSCalendar) AMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelAMSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSCalendar) PMSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCalendarSelPMSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

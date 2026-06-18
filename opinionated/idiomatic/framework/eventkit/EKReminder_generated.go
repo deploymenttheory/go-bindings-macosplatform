@@ -110,7 +110,9 @@ func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.EKAlarm](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -126,7 +128,9 @@ func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.EKRecurrenceRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -218,4 +222,3 @@ type Reminderable interface {
 }
 
 var _ Reminderable = (*Reminder)(nil)
-

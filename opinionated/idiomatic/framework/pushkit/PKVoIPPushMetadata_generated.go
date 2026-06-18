@@ -47,4 +47,3 @@ type VoIPPushMetadataable interface {
 }
 
 var _ VoIPPushMetadataable = (*VoIPPushMetadata)(nil)
-

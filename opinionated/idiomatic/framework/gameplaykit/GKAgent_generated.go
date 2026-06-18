@@ -182,4 +182,3 @@ type Agentable interface {
 }
 
 var _ Agentable = (*Agent)(nil)
-

@@ -87,9 +87,13 @@ func (x *ImageHistogramEqualization) HistogramInfo() mpsimage.MPSImageHistogramI
 	return x.inner.HistogramInfo()
 }
 
-func (x *ImageHistogramEqualization) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageHistogramEqualization) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageHistogramEqualization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageHistogramEqualization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
 type ImageHistogramEqualizationable interface {
@@ -104,4 +108,3 @@ type ImageHistogramEqualizationable interface {
 }
 
 var _ ImageHistogramEqualizationable = (*ImageHistogramEqualization)(nil)
-

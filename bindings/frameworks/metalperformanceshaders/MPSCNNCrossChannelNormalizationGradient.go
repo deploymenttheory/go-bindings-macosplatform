@@ -18,16 +18,16 @@ type MPSCNNCrossChannelNormalizationGradient struct {
 }
 
 var (
-	_clsMPSCNNCrossChannelNormalizationGradient = _objcClass("MPSCNNCrossChannelNormalizationGradient")
+	_clsMPSCNNCrossChannelNormalizationGradient                         = _objcClass("MPSCNNCrossChannelNormalizationGradient")
 	_mPSCNNCrossChannelNormalizationGradientSelInitWithDeviceKernelSize = objc.RegisterName("initWithDevice:kernelSize:")
-	_mPSCNNCrossChannelNormalizationGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNCrossChannelNormalizationGradientSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNCrossChannelNormalizationGradientSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNCrossChannelNormalizationGradientSelBeta = objc.RegisterName("beta")
-	_mPSCNNCrossChannelNormalizationGradientSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNCrossChannelNormalizationGradientSelDelta = objc.RegisterName("delta")
-	_mPSCNNCrossChannelNormalizationGradientSelSetDelta = objc.RegisterName("setDelta:")
-	_mPSCNNCrossChannelNormalizationGradientSelKernelSize = objc.RegisterName("kernelSize")
+	_mPSCNNCrossChannelNormalizationGradientSelInitWithCoderDevice      = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNCrossChannelNormalizationGradientSelAlpha                    = objc.RegisterName("alpha")
+	_mPSCNNCrossChannelNormalizationGradientSelSetAlpha                 = objc.RegisterName("setAlpha:")
+	_mPSCNNCrossChannelNormalizationGradientSelBeta                     = objc.RegisterName("beta")
+	_mPSCNNCrossChannelNormalizationGradientSelSetBeta                  = objc.RegisterName("setBeta:")
+	_mPSCNNCrossChannelNormalizationGradientSelDelta                    = objc.RegisterName("delta")
+	_mPSCNNCrossChannelNormalizationGradientSelSetDelta                 = objc.RegisterName("setDelta:")
+	_mPSCNNCrossChannelNormalizationGradientSelKernelSize               = objc.RegisterName("kernelSize")
 )
 
 func MPSCNNCrossChannelNormalizationGradientFromID(id objc.ID) *MPSCNNCrossChannelNormalizationGradient {
@@ -43,14 +43,18 @@ func MPSCNNCrossChannelNormalizationGradientFromID(id objc.ID) *MPSCNNCrossChann
 // @abstract  Initialize a cross channel normalization gradient filter @param      device              The device the filter will run on @param      kernelSize          The kernel filter size in each dimension. @return     A valid MPSCNNCrossChannelNormalization object or nil, if failure.
 func (o *MPSCNNCrossChannelNormalizationGradient) InitWithDeviceKernelSize(device metal.MTLDevice, kernelSize uint) *MPSCNNCrossChannelNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationGradientSelInitWithDeviceKernelSize, device, kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNCrossChannelNormalizationGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNCrossChannelNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationGradientFromID(_ret)
 }
 
@@ -89,4 +93,3 @@ func (o *MPSCNNCrossChannelNormalizationGradient) KernelSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNCrossChannelNormalizationGradientSelKernelSize)
 	return _ret
 }
-

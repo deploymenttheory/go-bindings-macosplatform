@@ -58,4 +58,3 @@ func CanExportToApplication(applicationBundleIdentifier string) bool {
 func ExportSlideshowItemToApplication(item objc.ID, applicationBundleIdentifier string) {
 	raw.IKSlideshowExportSlideshowItemToApplication(item, foundation.NSStringStringWithUTF8String(applicationBundleIdentifier))
 }
-

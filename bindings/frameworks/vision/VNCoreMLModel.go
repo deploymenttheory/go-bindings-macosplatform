@@ -19,12 +19,12 @@ type VNCoreMLModel struct {
 }
 
 var (
-	_clsVNCoreMLModel = _objcClass("VNCoreMLModel")
-	_vNCoreMLModelSelModelForMLModelError = objc.RegisterName("modelForMLModel:error:")
-	_vNCoreMLModelSelInputImageFeatureName = objc.RegisterName("inputImageFeatureName")
+	_clsVNCoreMLModel                         = _objcClass("VNCoreMLModel")
+	_vNCoreMLModelSelModelForMLModelError     = objc.RegisterName("modelForMLModel:error:")
+	_vNCoreMLModelSelInputImageFeatureName    = objc.RegisterName("inputImageFeatureName")
 	_vNCoreMLModelSelSetInputImageFeatureName = objc.RegisterName("setInputImageFeatureName:")
-	_vNCoreMLModelSelFeatureProvider = objc.RegisterName("featureProvider")
-	_vNCoreMLModelSelSetFeatureProvider = objc.RegisterName("setFeatureProvider:")
+	_vNCoreMLModelSelFeatureProvider          = objc.RegisterName("featureProvider")
+	_vNCoreMLModelSelSetFeatureProvider       = objc.RegisterName("setFeatureProvider:")
 )
 
 func VNCoreMLModelFromID(id objc.ID) *VNCoreMLModel {
@@ -40,7 +40,9 @@ func VNCoreMLModelFromID(id objc.ID) *VNCoreMLModel {
 func VNCoreMLModelModelForMLModelError(model *coreml.MLModel) (*VNCoreMLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNCoreMLModel), _vNCoreMLModelSelModelForMLModelError, model.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -50,7 +52,9 @@ func VNCoreMLModelModelForMLModelError(model *coreml.MLModel) (*VNCoreMLModel, e
 // @brief The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
 func (o *VNCoreMLModel) InputImageFeatureName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNCoreMLModelSelInputImageFeatureName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *VNCoreMLModel) FeatureProvider() coreml.MLFeatureProvider {
 func (o *VNCoreMLModel) SetFeatureProvider(featureProvider coreml.MLFeatureProvider) {
 	o.Ptr().Send(_vNCoreMLModelSelSetFeatureProvider, featureProvider)
 }
-

@@ -16,8 +16,8 @@ type BETextAlternatives struct {
 }
 
 var (
-	_clsBETextAlternatives = _objcClass("BETextAlternatives")
-	_bETextAlternativesSelPrimaryString = objc.RegisterName("primaryString")
+	_clsBETextAlternatives                   = _objcClass("BETextAlternatives")
+	_bETextAlternativesSelPrimaryString      = objc.RegisterName("primaryString")
 	_bETextAlternativesSelAlternativeStrings = objc.RegisterName("alternativeStrings")
 )
 
@@ -34,7 +34,9 @@ func BETextAlternativesFromID(id objc.ID) *BETextAlternatives {
 // Original text for which alternative strings are provided
 func (o *BETextAlternatives) PrimaryString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bETextAlternativesSelPrimaryString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *BETextAlternatives) AlternativeStrings() *foundation.NSArray[*foundatio
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _bETextAlternativesSelAlternativeStrings)
 	return _ret
 }
-

@@ -16,17 +16,17 @@ type TKSmartCardUserInteractionForPINOperation struct {
 }
 
 var (
-	_clsTKSmartCardUserInteractionForPINOperation = _objcClass("TKSmartCardUserInteractionForPINOperation")
-	_tKSmartCardUserInteractionForPINOperationSelPINCompletion = objc.RegisterName("PINCompletion")
-	_tKSmartCardUserInteractionForPINOperationSelSetPINCompletion = objc.RegisterName("setPINCompletion:")
-	_tKSmartCardUserInteractionForPINOperationSelPINMessageIndices = objc.RegisterName("PINMessageIndices")
+	_clsTKSmartCardUserInteractionForPINOperation                     = _objcClass("TKSmartCardUserInteractionForPINOperation")
+	_tKSmartCardUserInteractionForPINOperationSelPINCompletion        = objc.RegisterName("PINCompletion")
+	_tKSmartCardUserInteractionForPINOperationSelSetPINCompletion     = objc.RegisterName("setPINCompletion:")
+	_tKSmartCardUserInteractionForPINOperationSelPINMessageIndices    = objc.RegisterName("PINMessageIndices")
 	_tKSmartCardUserInteractionForPINOperationSelSetPINMessageIndices = objc.RegisterName("setPINMessageIndices:")
-	_tKSmartCardUserInteractionForPINOperationSelLocale = objc.RegisterName("locale")
-	_tKSmartCardUserInteractionForPINOperationSelSetLocale = objc.RegisterName("setLocale:")
-	_tKSmartCardUserInteractionForPINOperationSelResultSW = objc.RegisterName("resultSW")
-	_tKSmartCardUserInteractionForPINOperationSelSetResultSW = objc.RegisterName("setResultSW:")
-	_tKSmartCardUserInteractionForPINOperationSelResultData = objc.RegisterName("resultData")
-	_tKSmartCardUserInteractionForPINOperationSelSetResultData = objc.RegisterName("setResultData:")
+	_tKSmartCardUserInteractionForPINOperationSelLocale               = objc.RegisterName("locale")
+	_tKSmartCardUserInteractionForPINOperationSelSetLocale            = objc.RegisterName("setLocale:")
+	_tKSmartCardUserInteractionForPINOperationSelResultSW             = objc.RegisterName("resultSW")
+	_tKSmartCardUserInteractionForPINOperationSelSetResultSW          = objc.RegisterName("setResultSW:")
+	_tKSmartCardUserInteractionForPINOperationSelResultData           = objc.RegisterName("resultData")
+	_tKSmartCardUserInteractionForPINOperationSelSetResultData        = objc.RegisterName("setResultData:")
 )
 
 func TKSmartCardUserInteractionForPINOperationFromID(id objc.ID) *TKSmartCardUserInteractionForPINOperation {
@@ -62,7 +62,9 @@ func (o *TKSmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMess
 // Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
 func (o *TKSmartCardUserInteractionForPINOperation) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardUserInteractionForPINOperationSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
@@ -83,11 +85,12 @@ func (o *TKSmartCardUserInteractionForPINOperation) SetResultSW(resultSW uint16)
 // Optional block of returned data (without SW1SW2 bytes).
 func (o *TKSmartCardUserInteractionForPINOperation) ResultData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardUserInteractionForPINOperationSelResultData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *TKSmartCardUserInteractionForPINOperation) SetResultData(resultData *foundation.NSData) {
 	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetResultData, resultData.Ptr())
 }
-

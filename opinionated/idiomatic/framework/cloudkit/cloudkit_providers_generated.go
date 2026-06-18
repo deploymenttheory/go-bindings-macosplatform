@@ -42,4 +42,3 @@ type SyncEngineEventProvider interface {
 type SyncEnginePendingDatabaseChangeProvider interface {
 	asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange
 }
-

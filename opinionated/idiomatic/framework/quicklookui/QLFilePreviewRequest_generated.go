@@ -48,4 +48,3 @@ type FilePreviewRequestable interface {
 }
 
 var _ FilePreviewRequestable = (*FilePreviewRequest)(nil)
-

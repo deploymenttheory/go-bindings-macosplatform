@@ -16,10 +16,10 @@ type MTRSwitchClusterMultiPressOngoingEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterMultiPressOngoingEvent = _objcClass("MTRSwitchClusterMultiPressOngoingEvent")
-	_mTRSwitchClusterMultiPressOngoingEventSelGetNewPosition = objc.RegisterName("getNewPosition")
-	_mTRSwitchClusterMultiPressOngoingEventSelSetNewPosition = objc.RegisterName("setNewPosition:")
-	_mTRSwitchClusterMultiPressOngoingEventSelCurrentNumberOfPressesCounted = objc.RegisterName("currentNumberOfPressesCounted")
+	_clsMTRSwitchClusterMultiPressOngoingEvent                                 = _objcClass("MTRSwitchClusterMultiPressOngoingEvent")
+	_mTRSwitchClusterMultiPressOngoingEventSelGetNewPosition                   = objc.RegisterName("getNewPosition")
+	_mTRSwitchClusterMultiPressOngoingEventSelSetNewPosition                   = objc.RegisterName("setNewPosition:")
+	_mTRSwitchClusterMultiPressOngoingEventSelCurrentNumberOfPressesCounted    = objc.RegisterName("currentNumberOfPressesCounted")
 	_mTRSwitchClusterMultiPressOngoingEventSelSetCurrentNumberOfPressesCounted = objc.RegisterName("setCurrentNumberOfPressesCounted:")
 )
 
@@ -35,7 +35,9 @@ func MTRSwitchClusterMultiPressOngoingEventFromID(id objc.ID) *MTRSwitchClusterM
 
 func (o *MTRSwitchClusterMultiPressOngoingEvent) GetNewPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterMultiPressOngoingEventSelGetNewPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRSwitchClusterMultiPressOngoingEvent) SetNewPosition(newPosition *fou
 
 func (o *MTRSwitchClusterMultiPressOngoingEvent) CurrentNumberOfPressesCounted() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterMultiPressOngoingEventSelCurrentNumberOfPressesCounted)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterMultiPressOngoingEvent) SetCurrentNumberOfPressesCounted(currentNumberOfPressesCounted *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterMultiPressOngoingEventSelSetCurrentNumberOfPressesCounted, currentNumberOfPressesCounted.Ptr())
 }
-

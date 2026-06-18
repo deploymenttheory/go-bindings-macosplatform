@@ -16,12 +16,12 @@ type AVAssetWriterInputCaptionAdaptor struct {
 }
 
 var (
-	_clsAVAssetWriterInputCaptionAdaptor = _objcClass("AVAssetWriterInputCaptionAdaptor")
+	_clsAVAssetWriterInputCaptionAdaptor                                                   = _objcClass("AVAssetWriterInputCaptionAdaptor")
 	_aVAssetWriterInputCaptionAdaptorSelAssetWriterInputCaptionAdaptorWithAssetWriterInput = objc.RegisterName("assetWriterInputCaptionAdaptorWithAssetWriterInput:")
-	_aVAssetWriterInputCaptionAdaptorSelInitWithAssetWriterInput = objc.RegisterName("initWithAssetWriterInput:")
-	_aVAssetWriterInputCaptionAdaptorSelAppendCaption = objc.RegisterName("appendCaption:")
-	_aVAssetWriterInputCaptionAdaptorSelAppendCaptionGroup = objc.RegisterName("appendCaptionGroup:")
-	_aVAssetWriterInputCaptionAdaptorSelAssetWriterInput = objc.RegisterName("assetWriterInput")
+	_aVAssetWriterInputCaptionAdaptorSelInitWithAssetWriterInput                           = objc.RegisterName("initWithAssetWriterInput:")
+	_aVAssetWriterInputCaptionAdaptorSelAppendCaption                                      = objc.RegisterName("appendCaption:")
+	_aVAssetWriterInputCaptionAdaptorSelAppendCaptionGroup                                 = objc.RegisterName("appendCaptionGroup:")
+	_aVAssetWriterInputCaptionAdaptorSelAssetWriterInput                                   = objc.RegisterName("assetWriterInput")
 )
 
 func AVAssetWriterInputCaptionAdaptorFromID(id objc.ID) *AVAssetWriterInputCaptionAdaptor {
@@ -37,14 +37,18 @@ func AVAssetWriterInputCaptionAdaptorFromID(id objc.ID) *AVAssetWriterInputCapti
 // Creates a new caption adaptor for writing to the specified asset writer input.
 func AVAssetWriterInputCaptionAdaptorAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AVAssetWriterInput) *AVAssetWriterInputCaptionAdaptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInputCaptionAdaptor), _aVAssetWriterInputCaptionAdaptorSelAssetWriterInputCaptionAdaptorWithAssetWriterInput, input.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputCaptionAdaptorFromID(_ret)
 }
 
 // Creates a new caption adaptor for writing to the specified asset writer input. This method thows an exception for any of the following reasons: - input is nil - the input's media type is not supported (should use text or closed caption) - the input is already attached to an asset writer caption adaptor - the input has already started writing
 func (o *AVAssetWriterInputCaptionAdaptor) InitWithAssetWriterInput(input *AVAssetWriterInput) *AVAssetWriterInputCaptionAdaptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputCaptionAdaptorSelInitWithAssetWriterInput, input.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputCaptionAdaptorFromID(_ret)
 }
 
@@ -63,7 +67,8 @@ func (o *AVAssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *AVCa
 // The asset writer input that was used to initialize the receiver.
 func (o *AVAssetWriterInputCaptionAdaptor) AssetWriterInput() *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputCaptionAdaptorSelAssetWriterInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
-

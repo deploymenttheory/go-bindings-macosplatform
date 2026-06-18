@@ -16,10 +16,10 @@ type AVExternalStorageDeviceDiscoverySession struct {
 }
 
 var (
-	_clsAVExternalStorageDeviceDiscoverySession = _objcClass("AVExternalStorageDeviceDiscoverySession")
-	_aVExternalStorageDeviceDiscoverySessionSelSharedSession = objc.RegisterName("sharedSession")
+	_clsAVExternalStorageDeviceDiscoverySession                       = _objcClass("AVExternalStorageDeviceDiscoverySession")
+	_aVExternalStorageDeviceDiscoverySessionSelSharedSession          = objc.RegisterName("sharedSession")
 	_aVExternalStorageDeviceDiscoverySessionSelExternalStorageDevices = objc.RegisterName("externalStorageDevices")
-	_aVExternalStorageDeviceDiscoverySessionSelIsSupported = objc.RegisterName("isSupported")
+	_aVExternalStorageDeviceDiscoverySessionSelIsSupported            = objc.RegisterName("isSupported")
 )
 
 func AVExternalStorageDeviceDiscoverySessionFromID(id objc.ID) *AVExternalStorageDeviceDiscoverySession {
@@ -35,14 +35,18 @@ func AVExternalStorageDeviceDiscoverySessionFromID(id objc.ID) *AVExternalStorag
 // @@property sharedSession @abstract Returns the singleton instance of the external storage device discovery session. @discussion There is only one external storage device discovery session for each host device which can be accessed using this method. Will return nil if the device doesn't support external storage devices.
 func AVExternalStorageDeviceDiscoverySessionSharedSession() *AVExternalStorageDeviceDiscoverySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVExternalStorageDeviceDiscoverySession), _aVExternalStorageDeviceDiscoverySessionSelSharedSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExternalStorageDeviceDiscoverySessionFromID(_ret)
 }
 
 // @property externalStorageDevices @abstract An array of external storage devices connected to this device. Read only. Key-value observable. @discussion An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
 func (o *AVExternalStorageDeviceDiscoverySession) ExternalStorageDevices() *foundation.NSArray[*AVExternalStorageDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalStorageDeviceDiscoverySessionSelExternalStorageDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVExternalStorageDevice](_ret)
 }
 
@@ -51,4 +55,3 @@ func AVExternalStorageDeviceDiscoverySessionIsSupported() bool {
 	_ret := objc.Send[bool](objc.ID(_clsAVExternalStorageDeviceDiscoverySession), _aVExternalStorageDeviceDiscoverySessionSelIsSupported)
 	return _ret
 }
-

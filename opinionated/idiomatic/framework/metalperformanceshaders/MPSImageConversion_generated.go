@@ -81,9 +81,13 @@ func (x *ImageConversion) DestinationAlpha() mpsimage.MPSAlphaType {
 	return x.inner.DestinationAlpha()
 }
 
-func (x *ImageConversion) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageConversion) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageConversion) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageConversion) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
 type ImageConversionable interface {
@@ -98,4 +102,3 @@ type ImageConversionable interface {
 }
 
 var _ ImageConversionable = (*ImageConversion)(nil)
-

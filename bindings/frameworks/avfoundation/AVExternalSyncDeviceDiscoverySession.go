@@ -16,10 +16,10 @@ type AVExternalSyncDeviceDiscoverySession struct {
 }
 
 var (
-	_clsAVExternalSyncDeviceDiscoverySession = _objcClass("AVExternalSyncDeviceDiscoverySession")
+	_clsAVExternalSyncDeviceDiscoverySession              = _objcClass("AVExternalSyncDeviceDiscoverySession")
 	_aVExternalSyncDeviceDiscoverySessionSelSharedSession = objc.RegisterName("sharedSession")
-	_aVExternalSyncDeviceDiscoverySessionSelIsSupported = objc.RegisterName("isSupported")
-	_aVExternalSyncDeviceDiscoverySessionSelDevices = objc.RegisterName("devices")
+	_aVExternalSyncDeviceDiscoverySessionSelIsSupported   = objc.RegisterName("isSupported")
+	_aVExternalSyncDeviceDiscoverySessionSelDevices       = objc.RegisterName("devices")
 )
 
 func AVExternalSyncDeviceDiscoverySessionFromID(id objc.ID) *AVExternalSyncDeviceDiscoverySession {
@@ -32,10 +32,12 @@ func AVExternalSyncDeviceDiscoverySessionFromID(id objc.ID) *AVExternalSyncDevic
 	return o
 }
 
-// The singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. ``sharedSession`` returns `nil` if the host device doesn't support external sync devices.
+// The singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. “sharedSession“ returns `nil` if the host device doesn't support external sync devices.
 func AVExternalSyncDeviceDiscoverySessionSharedSession() *AVExternalSyncDeviceDiscoverySession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVExternalSyncDeviceDiscoverySession), _aVExternalSyncDeviceDiscoverySessionSelSharedSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVExternalSyncDeviceDiscoverySessionFromID(_ret)
 }
 
@@ -48,7 +50,8 @@ func AVExternalSyncDeviceDiscoverySessionIsSupported() bool {
 // An array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
 func (o *AVExternalSyncDeviceDiscoverySession) Devices() *foundation.NSArray[*AVExternalSyncDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVExternalSyncDeviceDiscoverySessionSelDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVExternalSyncDevice](_ret)
 }
-

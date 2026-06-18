@@ -67,9 +67,13 @@ func (x *MTRClusterAirQuality) ReadAttributeClusterRevisionWithParams(params *ra
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterAirQuality) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterAirQuality) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterAirQuality) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterAirQuality) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterAirQualityable is the interface implemented by [MTRClusterAirQuality], for mocking and DI.
 type MTRClusterAirQualityable interface {
@@ -83,4 +87,3 @@ type MTRClusterAirQualityable interface {
 }
 
 var _ MTRClusterAirQualityable = (*MTRClusterAirQuality)(nil)
-

@@ -1,0 +1,39 @@
+# Declarative LuLu firewall configuration (YAML).
+# Apply with:   lulu apply config/firewall.example.yaml
+# Or have the daemon reconcile at startup:  LULU_CONFIG=.../firewall.example.yaml luludaemon
+#
+# `lulu apply` is idempotent and only manages the rules it creates: hand-added
+# rules (via `lulu allow`/`block`) are never pruned.
+version: "1"
+
+# Verdict for flows with no matching rule. (Informational here; the extension's
+# DefaultAllow controls live behaviour.)
+defaultAction: block
+
+rules:
+  # Allow a process to talk to anything (process-wide rule, no endpoints).
+  - name: Homebrew
+    path: /opt/homebrew/bin/brew
+    action: allow
+
+  # Allow curl, but only to a specific host:port.
+  - name: curl to example.com
+    path: /usr/bin/curl
+    action: allow
+    endpoints:
+      - host: example.com
+        port: "443"
+
+  # Block netcat entirely.
+  - name: netcat
+    path: /usr/bin/nc
+    action: block
+
+  # Block a process from reaching two specific endpoints.
+  - name: telemetry blocklist
+    path: /Applications/SomeApp.app/Contents/MacOS/SomeApp
+    action: block
+    endpoints:
+      - host: telemetry.example.net
+      - host: 203.0.113.10
+        port: "443"

@@ -58,4 +58,3 @@ type SignatureGeneratorable interface {
 }
 
 var _ SignatureGeneratorable = (*SignatureGenerator)(nil)
-

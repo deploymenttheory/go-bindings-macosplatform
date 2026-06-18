@@ -17,14 +17,14 @@ type NSAlignmentFeedbackFilter struct {
 }
 
 var (
-	_clsNSAlignmentFeedbackFilter = _objcClass("NSAlignmentFeedbackFilter")
-	_nSAlignmentFeedbackFilterSelUpdateWithEvent = objc.RegisterName("updateWithEvent:")
-	_nSAlignmentFeedbackFilterSelUpdateWithPanRecognizer = objc.RegisterName("updateWithPanRecognizer:")
+	_clsNSAlignmentFeedbackFilter                                                                             = _objcClass("NSAlignmentFeedbackFilter")
+	_nSAlignmentFeedbackFilterSelUpdateWithEvent                                                              = objc.RegisterName("updateWithEvent:")
+	_nSAlignmentFeedbackFilterSelUpdateWithPanRecognizer                                                      = objc.RegisterName("updateWithPanRecognizer:")
 	_nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint = objc.RegisterName("alignmentFeedbackTokenForMovementInView:previousPoint:alignedPoint:defaultPoint:")
-	_nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX = objc.RegisterName("alignmentFeedbackTokenForHorizontalMovementInView:previousX:alignedX:defaultX:")
-	_nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY = objc.RegisterName("alignmentFeedbackTokenForVerticalMovementInView:previousY:alignedY:defaultY:")
-	_nSAlignmentFeedbackFilterSelPerformFeedbackPerformanceTime = objc.RegisterName("performFeedback:performanceTime:")
-	_nSAlignmentFeedbackFilterSelInputEventMask = objc.RegisterName("inputEventMask")
+	_nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX   = objc.RegisterName("alignmentFeedbackTokenForHorizontalMovementInView:previousX:alignedX:defaultX:")
+	_nSAlignmentFeedbackFilterSelAlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY     = objc.RegisterName("alignmentFeedbackTokenForVerticalMovementInView:previousY:alignedY:defaultY:")
+	_nSAlignmentFeedbackFilterSelPerformFeedbackPerformanceTime                                               = objc.RegisterName("performFeedback:performanceTime:")
+	_nSAlignmentFeedbackFilterSelInputEventMask                                                               = objc.RegisterName("inputEventMask")
 )
 
 func NSAlignmentFeedbackFilterFromID(id objc.ID) *NSAlignmentFeedbackFilter {
@@ -68,4 +68,3 @@ func NSAlignmentFeedbackFilterInputEventMask() NSEventMask {
 	_ret := objc.Send[NSEventMask](objc.ID(_clsNSAlignmentFeedbackFilter), _nSAlignmentFeedbackFilterSelInputEventMask)
 	return _ret
 }
-

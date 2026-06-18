@@ -43,4 +43,3 @@ type CharacteristicTypeable interface {
 }
 
 var _ CharacteristicTypeable = (*CharacteristicType)(nil)
-

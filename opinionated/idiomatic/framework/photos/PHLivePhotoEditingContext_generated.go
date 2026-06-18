@@ -151,4 +151,3 @@ type LivePhotoEditingContextable interface {
 }
 
 var _ LivePhotoEditingContextable = (*LivePhotoEditingContext)(nil)
-

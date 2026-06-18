@@ -17,16 +17,16 @@ type MPSVectorDescriptor struct {
 }
 
 var (
-	_clsMPSVectorDescriptor = _objcClass("MPSVectorDescriptor")
-	_mPSVectorDescriptorSelVectorDescriptorWithLengthDataType = objc.RegisterName("vectorDescriptorWithLength:dataType:")
+	_clsMPSVectorDescriptor                                                     = _objcClass("MPSVectorDescriptor")
+	_mPSVectorDescriptorSelVectorDescriptorWithLengthDataType                   = objc.RegisterName("vectorDescriptorWithLength:dataType:")
 	_mPSVectorDescriptorSelVectorDescriptorWithLengthVectorsVectorBytesDataType = objc.RegisterName("vectorDescriptorWithLength:vectors:vectorBytes:dataType:")
-	_mPSVectorDescriptorSelVectorBytesForLengthDataType = objc.RegisterName("vectorBytesForLength:dataType:")
-	_mPSVectorDescriptorSelLength = objc.RegisterName("length")
-	_mPSVectorDescriptorSelSetLength = objc.RegisterName("setLength:")
-	_mPSVectorDescriptorSelVectors = objc.RegisterName("vectors")
-	_mPSVectorDescriptorSelDataType = objc.RegisterName("dataType")
-	_mPSVectorDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mPSVectorDescriptorSelVectorBytes = objc.RegisterName("vectorBytes")
+	_mPSVectorDescriptorSelVectorBytesForLengthDataType                         = objc.RegisterName("vectorBytesForLength:dataType:")
+	_mPSVectorDescriptorSelLength                                               = objc.RegisterName("length")
+	_mPSVectorDescriptorSelSetLength                                            = objc.RegisterName("setLength:")
+	_mPSVectorDescriptorSelVectors                                              = objc.RegisterName("vectors")
+	_mPSVectorDescriptorSelDataType                                             = objc.RegisterName("dataType")
+	_mPSVectorDescriptorSelSetDataType                                          = objc.RegisterName("setDataType:")
+	_mPSVectorDescriptorSelVectorBytes                                          = objc.RegisterName("vectorBytes")
 )
 
 func MPSVectorDescriptorFromID(id objc.ID) *MPSVectorDescriptor {
@@ -42,14 +42,18 @@ func MPSVectorDescriptorFromID(id objc.ID) *MPSVectorDescriptor {
 // @abstract   Create a MPSVectorDescriptor with the specified length and data type. @param      length              The number of elements in a single vector. @param      dataType            The type of the data to be stored in the vector. @discussion Use this function for creating a descriptor of a MPSVector object containing a single vector.
 func MPSVectorDescriptorVectorDescriptorWithLengthDataType(length uint, dataType mpscore.MPSDataType) *MPSVectorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSVectorDescriptor), _mPSVectorDescriptorSelVectorDescriptorWithLengthDataType, length, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSVectorDescriptorFromID(_ret)
 }
 
 // @abstract   Create a MPSVectorDescriptor with the specified length and data type. @param      length              The number of elements in a single vector. @param      vectors             The number of vectors in the MPSVector object. @param      vectorBytes         The number of bytes between starting elements of consecutive vectors. @param      dataType            The type of the data to be stored in the vector. @discussion For performance considerations the optimal stride between vectors may not necessarily be equal to the vector length.  The MPSVectorDescriptor class provides a method which may be used to determine this value, see the vectorBytesForLength API.
 func MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors uint, vectorBytes uint, dataType mpscore.MPSDataType) *MPSVectorDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSVectorDescriptor), _mPSVectorDescriptorSelVectorDescriptorWithLengthVectorsVectorBytesDataType, length, vectors, vectorBytes, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSVectorDescriptorFromID(_ret)
 }
 
@@ -90,4 +94,3 @@ func (o *MPSVectorDescriptor) VectorBytes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSVectorDescriptorSelVectorBytes)
 	return _ret
 }
-

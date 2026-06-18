@@ -16,32 +16,32 @@ type NSDiffableDataSourceSnapshot[SectionIdentifierType purego.AnyObject, ItemId
 }
 
 var (
-	_clsNSDiffableDataSourceSnapshot = _objcClass("NSDiffableDataSourceSnapshot")
-	_nSDiffableDataSourceSnapshotSelNumberOfItemsInSection = objc.RegisterName("numberOfItemsInSection:")
-	_nSDiffableDataSourceSnapshotSelItemIdentifiersInSectionWithIdentifier = objc.RegisterName("itemIdentifiersInSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelSectionIdentifierForSectionContainingItemIdentifier = objc.RegisterName("sectionIdentifierForSectionContainingItemIdentifier:")
-	_nSDiffableDataSourceSnapshotSelIndexOfItemIdentifier = objc.RegisterName("indexOfItemIdentifier:")
-	_nSDiffableDataSourceSnapshotSelIndexOfSectionIdentifier = objc.RegisterName("indexOfSectionIdentifier:")
-	_nSDiffableDataSourceSnapshotSelAppendItemsWithIdentifiers = objc.RegisterName("appendItemsWithIdentifiers:")
-	_nSDiffableDataSourceSnapshotSelAppendItemsWithIdentifiersIntoSectionWithIdentifier = objc.RegisterName("appendItemsWithIdentifiers:intoSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelInsertItemsWithIdentifiersBeforeItemWithIdentifier = objc.RegisterName("insertItemsWithIdentifiers:beforeItemWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelInsertItemsWithIdentifiersAfterItemWithIdentifier = objc.RegisterName("insertItemsWithIdentifiers:afterItemWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelDeleteItemsWithIdentifiers = objc.RegisterName("deleteItemsWithIdentifiers:")
-	_nSDiffableDataSourceSnapshotSelDeleteAllItems = objc.RegisterName("deleteAllItems")
-	_nSDiffableDataSourceSnapshotSelMoveItemWithIdentifierBeforeItemWithIdentifier = objc.RegisterName("moveItemWithIdentifier:beforeItemWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelMoveItemWithIdentifierAfterItemWithIdentifier = objc.RegisterName("moveItemWithIdentifier:afterItemWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelReloadItemsWithIdentifiers = objc.RegisterName("reloadItemsWithIdentifiers:")
-	_nSDiffableDataSourceSnapshotSelAppendSectionsWithIdentifiers = objc.RegisterName("appendSectionsWithIdentifiers:")
+	_clsNSDiffableDataSourceSnapshot                                                         = _objcClass("NSDiffableDataSourceSnapshot")
+	_nSDiffableDataSourceSnapshotSelNumberOfItemsInSection                                   = objc.RegisterName("numberOfItemsInSection:")
+	_nSDiffableDataSourceSnapshotSelItemIdentifiersInSectionWithIdentifier                   = objc.RegisterName("itemIdentifiersInSectionWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelSectionIdentifierForSectionContainingItemIdentifier      = objc.RegisterName("sectionIdentifierForSectionContainingItemIdentifier:")
+	_nSDiffableDataSourceSnapshotSelIndexOfItemIdentifier                                    = objc.RegisterName("indexOfItemIdentifier:")
+	_nSDiffableDataSourceSnapshotSelIndexOfSectionIdentifier                                 = objc.RegisterName("indexOfSectionIdentifier:")
+	_nSDiffableDataSourceSnapshotSelAppendItemsWithIdentifiers                               = objc.RegisterName("appendItemsWithIdentifiers:")
+	_nSDiffableDataSourceSnapshotSelAppendItemsWithIdentifiersIntoSectionWithIdentifier      = objc.RegisterName("appendItemsWithIdentifiers:intoSectionWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelInsertItemsWithIdentifiersBeforeItemWithIdentifier       = objc.RegisterName("insertItemsWithIdentifiers:beforeItemWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelInsertItemsWithIdentifiersAfterItemWithIdentifier        = objc.RegisterName("insertItemsWithIdentifiers:afterItemWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelDeleteItemsWithIdentifiers                               = objc.RegisterName("deleteItemsWithIdentifiers:")
+	_nSDiffableDataSourceSnapshotSelDeleteAllItems                                           = objc.RegisterName("deleteAllItems")
+	_nSDiffableDataSourceSnapshotSelMoveItemWithIdentifierBeforeItemWithIdentifier           = objc.RegisterName("moveItemWithIdentifier:beforeItemWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelMoveItemWithIdentifierAfterItemWithIdentifier            = objc.RegisterName("moveItemWithIdentifier:afterItemWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelReloadItemsWithIdentifiers                               = objc.RegisterName("reloadItemsWithIdentifiers:")
+	_nSDiffableDataSourceSnapshotSelAppendSectionsWithIdentifiers                            = objc.RegisterName("appendSectionsWithIdentifiers:")
 	_nSDiffableDataSourceSnapshotSelInsertSectionsWithIdentifiersBeforeSectionWithIdentifier = objc.RegisterName("insertSectionsWithIdentifiers:beforeSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelInsertSectionsWithIdentifiersAfterSectionWithIdentifier = objc.RegisterName("insertSectionsWithIdentifiers:afterSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelDeleteSectionsWithIdentifiers = objc.RegisterName("deleteSectionsWithIdentifiers:")
-	_nSDiffableDataSourceSnapshotSelMoveSectionWithIdentifierBeforeSectionWithIdentifier = objc.RegisterName("moveSectionWithIdentifier:beforeSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelMoveSectionWithIdentifierAfterSectionWithIdentifier = objc.RegisterName("moveSectionWithIdentifier:afterSectionWithIdentifier:")
-	_nSDiffableDataSourceSnapshotSelReloadSectionsWithIdentifiers = objc.RegisterName("reloadSectionsWithIdentifiers:")
-	_nSDiffableDataSourceSnapshotSelNumberOfItems = objc.RegisterName("numberOfItems")
-	_nSDiffableDataSourceSnapshotSelNumberOfSections = objc.RegisterName("numberOfSections")
-	_nSDiffableDataSourceSnapshotSelSectionIdentifiers = objc.RegisterName("sectionIdentifiers")
-	_nSDiffableDataSourceSnapshotSelItemIdentifiers = objc.RegisterName("itemIdentifiers")
+	_nSDiffableDataSourceSnapshotSelInsertSectionsWithIdentifiersAfterSectionWithIdentifier  = objc.RegisterName("insertSectionsWithIdentifiers:afterSectionWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelDeleteSectionsWithIdentifiers                            = objc.RegisterName("deleteSectionsWithIdentifiers:")
+	_nSDiffableDataSourceSnapshotSelMoveSectionWithIdentifierBeforeSectionWithIdentifier     = objc.RegisterName("moveSectionWithIdentifier:beforeSectionWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelMoveSectionWithIdentifierAfterSectionWithIdentifier      = objc.RegisterName("moveSectionWithIdentifier:afterSectionWithIdentifier:")
+	_nSDiffableDataSourceSnapshotSelReloadSectionsWithIdentifiers                            = objc.RegisterName("reloadSectionsWithIdentifiers:")
+	_nSDiffableDataSourceSnapshotSelNumberOfItems                                            = objc.RegisterName("numberOfItems")
+	_nSDiffableDataSourceSnapshotSelNumberOfSections                                         = objc.RegisterName("numberOfSections")
+	_nSDiffableDataSourceSnapshotSelSectionIdentifiers                                       = objc.RegisterName("sectionIdentifiers")
+	_nSDiffableDataSourceSnapshotSelItemIdentifiers                                          = objc.RegisterName("itemIdentifiers")
 )
 
 func NSDiffableDataSourceSnapshotFromID[SectionIdentifierType purego.AnyObject, ItemIdentifierType purego.AnyObject](id objc.ID) *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType] {
@@ -61,7 +61,9 @@ func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]
 
 func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) ItemIdentifiersInSectionWithIdentifier(sectionIdentifier SectionIdentifierType) *foundation.NSArray[ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDiffableDataSourceSnapshotSelItemIdentifiersInSectionWithIdentifier, sectionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ItemIdentifierType](_ret)
 }
 
@@ -156,13 +158,16 @@ func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]
 
 func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) SectionIdentifiers() *foundation.NSArray[SectionIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDiffableDataSourceSnapshotSelSectionIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[SectionIdentifierType](_ret)
 }
 
 func (o *NSDiffableDataSourceSnapshot[SectionIdentifierType, ItemIdentifierType]) ItemIdentifiers() *foundation.NSArray[ItemIdentifierType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDiffableDataSourceSnapshotSelItemIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ItemIdentifierType](_ret)
 }
-

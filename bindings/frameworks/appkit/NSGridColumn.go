@@ -16,21 +16,21 @@ type NSGridColumn struct {
 }
 
 var (
-	_clsNSGridColumn = _objcClass("NSGridColumn")
-	_nSGridColumnSelCellAtIndex = objc.RegisterName("cellAtIndex:")
-	_nSGridColumnSelMergeCellsInRange = objc.RegisterName("mergeCellsInRange:")
-	_nSGridColumnSelGridView = objc.RegisterName("gridView")
-	_nSGridColumnSelNumberOfCells = objc.RegisterName("numberOfCells")
-	_nSGridColumnSelXPlacement = objc.RegisterName("xPlacement")
-	_nSGridColumnSelSetXPlacement = objc.RegisterName("setXPlacement:")
-	_nSGridColumnSelWidth = objc.RegisterName("width")
-	_nSGridColumnSelSetWidth = objc.RegisterName("setWidth:")
-	_nSGridColumnSelLeadingPadding = objc.RegisterName("leadingPadding")
-	_nSGridColumnSelSetLeadingPadding = objc.RegisterName("setLeadingPadding:")
-	_nSGridColumnSelTrailingPadding = objc.RegisterName("trailingPadding")
+	_clsNSGridColumn                   = _objcClass("NSGridColumn")
+	_nSGridColumnSelCellAtIndex        = objc.RegisterName("cellAtIndex:")
+	_nSGridColumnSelMergeCellsInRange  = objc.RegisterName("mergeCellsInRange:")
+	_nSGridColumnSelGridView           = objc.RegisterName("gridView")
+	_nSGridColumnSelNumberOfCells      = objc.RegisterName("numberOfCells")
+	_nSGridColumnSelXPlacement         = objc.RegisterName("xPlacement")
+	_nSGridColumnSelSetXPlacement      = objc.RegisterName("setXPlacement:")
+	_nSGridColumnSelWidth              = objc.RegisterName("width")
+	_nSGridColumnSelSetWidth           = objc.RegisterName("setWidth:")
+	_nSGridColumnSelLeadingPadding     = objc.RegisterName("leadingPadding")
+	_nSGridColumnSelSetLeadingPadding  = objc.RegisterName("setLeadingPadding:")
+	_nSGridColumnSelTrailingPadding    = objc.RegisterName("trailingPadding")
 	_nSGridColumnSelSetTrailingPadding = objc.RegisterName("setTrailingPadding:")
-	_nSGridColumnSelIsHidden = objc.RegisterName("isHidden")
-	_nSGridColumnSelSetHidden = objc.RegisterName("setHidden:")
+	_nSGridColumnSelIsHidden           = objc.RegisterName("isHidden")
+	_nSGridColumnSelSetHidden          = objc.RegisterName("setHidden:")
 )
 
 func NSGridColumnFromID(id objc.ID) *NSGridColumn {
@@ -45,7 +45,9 @@ func NSGridColumnFromID(id objc.ID) *NSGridColumn {
 
 func (o *NSGridColumn) CellAtIndex(index int) *NSGridCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelCellAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridCellFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *NSGridColumn) MergeCellsInRange(range_ foundation.NSRange) {
 
 func (o *NSGridColumn) GridView() *NSGridView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSGridColumnSelGridView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGridViewFromID(_ret)
 }
 
@@ -108,4 +112,3 @@ func (o *NSGridColumn) IsHidden() bool {
 func (o *NSGridColumn) SetHidden(hidden bool) {
 	o.Ptr().Send(_nSGridColumnSelSetHidden, hidden)
 }
-

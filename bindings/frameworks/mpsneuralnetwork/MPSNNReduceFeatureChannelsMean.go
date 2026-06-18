@@ -17,8 +17,8 @@ type MPSNNReduceFeatureChannelsMean struct {
 }
 
 var (
-	_clsMPSNNReduceFeatureChannelsMean = _objcClass("MPSNNReduceFeatureChannelsMean")
-	_mPSNNReduceFeatureChannelsMeanSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceFeatureChannelsMean                    = _objcClass("MPSNNReduceFeatureChannelsMean")
+	_mPSNNReduceFeatureChannelsMeanSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceFeatureChannelsMeanSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceFeatureChannelsMeanFromID(id objc.ID) *MPSNNReduceFeatureChannel
 
 func (o *MPSNNReduceFeatureChannelsMean) InitWithDevice(device metal.MTLDevice) *MPSNNReduceFeatureChannelsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsMeanSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsMeanFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceFeatureChannelsMean object, or nil if failure.
 func (o *MPSNNReduceFeatureChannelsMean) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceFeatureChannelsMean {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceFeatureChannelsMeanSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceFeatureChannelsMeanFromID(_ret)
 }
-

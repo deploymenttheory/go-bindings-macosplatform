@@ -61,4 +61,3 @@ type ProtocolCheckerable interface {
 }
 
 var _ ProtocolCheckerable = (*ProtocolChecker)(nil)
-

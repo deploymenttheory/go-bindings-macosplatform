@@ -18,12 +18,12 @@ type MKDirections struct {
 }
 
 var (
-	_clsMKDirections = _objcClass("MKDirections")
-	_mKDirectionsSelInitWithRequest = objc.RegisterName("initWithRequest:")
+	_clsMKDirections                                         = _objcClass("MKDirections")
+	_mKDirectionsSelInitWithRequest                          = objc.RegisterName("initWithRequest:")
 	_mKDirectionsSelCalculateDirectionsWithCompletionHandler = objc.RegisterName("calculateDirectionsWithCompletionHandler:")
-	_mKDirectionsSelCalculateETAWithCompletionHandler = objc.RegisterName("calculateETAWithCompletionHandler:")
-	_mKDirectionsSelCancel = objc.RegisterName("cancel")
-	_mKDirectionsSelIsCalculating = objc.RegisterName("isCalculating")
+	_mKDirectionsSelCalculateETAWithCompletionHandler        = objc.RegisterName("calculateETAWithCompletionHandler:")
+	_mKDirectionsSelCancel                                   = objc.RegisterName("cancel")
+	_mKDirectionsSelIsCalculating                            = objc.RegisterName("isCalculating")
 )
 
 func MKDirectionsFromID(id objc.ID) *MKDirections {
@@ -38,7 +38,9 @@ func MKDirectionsFromID(id objc.ID) *MKDirections {
 
 func (o *MKDirections) InitWithRequest(request *MKDirectionsRequest) *MKDirections {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKDirectionsSelInitWithRequest, request.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKDirectionsFromID(_ret)
 }
 
@@ -78,4 +80,3 @@ func (o *MKDirections) IsCalculating() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKDirectionsSelIsCalculating)
 	return _ret
 }
-

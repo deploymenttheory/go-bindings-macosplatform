@@ -50,4 +50,3 @@ type Nullable interface {
 }
 
 var _ Nullable = (*Null)(nil)
-

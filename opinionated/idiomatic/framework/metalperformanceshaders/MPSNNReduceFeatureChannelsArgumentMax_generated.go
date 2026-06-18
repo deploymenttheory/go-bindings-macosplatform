@@ -19,7 +19,9 @@ type NNReduceFeatureChannelsArgumentMax struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsArgumentMax].
-func (x *NNReduceFeatureChannelsArgumentMax) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMax { return x.inner }
+func (x *NNReduceFeatureChannelsArgumentMax) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMax {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -113,11 +115,17 @@ func (x *NNReduceFeatureChannelsArgumentMax) WithLabel(label string) *NNReduceFe
 	return x
 }
 
-func (x *NNReduceFeatureChannelsArgumentMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsArgumentMax) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsArgumentMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsArgumentMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
-func (x *NNReduceFeatureChannelsArgumentMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+func (x *NNReduceFeatureChannelsArgumentMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel
+}
 
 // NNReduceFeatureChannelsArgumentMaxable is the interface implemented by [NNReduceFeatureChannelsArgumentMax], for mocking and DI.
 type NNReduceFeatureChannelsArgumentMaxable interface {
@@ -136,4 +144,3 @@ type NNReduceFeatureChannelsArgumentMaxable interface {
 }
 
 var _ NNReduceFeatureChannelsArgumentMaxable = (*NNReduceFeatureChannelsArgumentMax)(nil)
-

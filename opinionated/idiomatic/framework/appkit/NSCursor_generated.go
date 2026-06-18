@@ -128,4 +128,3 @@ type Cursorable interface {
 }
 
 var _ Cursorable = (*Cursor)(nil)
-

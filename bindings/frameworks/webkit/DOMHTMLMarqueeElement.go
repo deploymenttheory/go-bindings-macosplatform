@@ -15,9 +15,9 @@ type DOMHTMLMarqueeElement struct {
 }
 
 var (
-	_clsDOMHTMLMarqueeElement = _objcClass("DOMHTMLMarqueeElement")
+	_clsDOMHTMLMarqueeElement      = _objcClass("DOMHTMLMarqueeElement")
 	_dOMHTMLMarqueeElementSelStart = objc.RegisterName("start")
-	_dOMHTMLMarqueeElementSelStop = objc.RegisterName("stop")
+	_dOMHTMLMarqueeElementSelStop  = objc.RegisterName("stop")
 )
 
 func DOMHTMLMarqueeElementFromID(id objc.ID) *DOMHTMLMarqueeElement {
@@ -37,4 +37,3 @@ func (o *DOMHTMLMarqueeElement) Start() {
 func (o *DOMHTMLMarqueeElement) Stop() {
 	o.Ptr().Send(_dOMHTMLMarqueeElementSelStop)
 }
-

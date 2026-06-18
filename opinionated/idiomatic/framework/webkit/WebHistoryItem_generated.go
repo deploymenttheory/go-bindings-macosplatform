@@ -110,4 +110,3 @@ type WebHistoryItemable interface {
 }
 
 var _ WebHistoryItemable = (*WebHistoryItem)(nil)
-

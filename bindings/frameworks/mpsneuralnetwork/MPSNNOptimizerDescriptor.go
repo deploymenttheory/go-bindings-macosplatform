@@ -16,25 +16,25 @@ type MPSNNOptimizerDescriptor struct {
 }
 
 var (
-	_clsMPSNNOptimizerDescriptor = _objcClass("MPSNNOptimizerDescriptor")
-	_mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleRegularizationTypeRegularizationScale = objc.RegisterName("initWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
-	_mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale = objc.RegisterName("initWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:")
-	_mPSNNOptimizerDescriptorSelOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale = objc.RegisterName("optimizerDescriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
+	_clsMPSNNOptimizerDescriptor                                                                                                                                           = _objcClass("MPSNNOptimizerDescriptor")
+	_mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleRegularizationTypeRegularizationScale                                                                   = objc.RegisterName("initWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
+	_mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale                = objc.RegisterName("initWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:")
+	_mPSNNOptimizerDescriptorSelOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale                                                    = objc.RegisterName("optimizerDescriptorWithLearningRate:gradientRescale:regularizationType:regularizationScale:")
 	_mPSNNOptimizerDescriptorSelOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale = objc.RegisterName("optimizerDescriptorWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:")
-	_mPSNNOptimizerDescriptorSelLearningRate = objc.RegisterName("learningRate")
-	_mPSNNOptimizerDescriptorSelSetLearningRate = objc.RegisterName("setLearningRate:")
-	_mPSNNOptimizerDescriptorSelGradientRescale = objc.RegisterName("gradientRescale")
-	_mPSNNOptimizerDescriptorSelSetGradientRescale = objc.RegisterName("setGradientRescale:")
-	_mPSNNOptimizerDescriptorSelApplyGradientClipping = objc.RegisterName("applyGradientClipping")
-	_mPSNNOptimizerDescriptorSelSetApplyGradientClipping = objc.RegisterName("setApplyGradientClipping:")
-	_mPSNNOptimizerDescriptorSelGradientClipMax = objc.RegisterName("gradientClipMax")
-	_mPSNNOptimizerDescriptorSelSetGradientClipMax = objc.RegisterName("setGradientClipMax:")
-	_mPSNNOptimizerDescriptorSelGradientClipMin = objc.RegisterName("gradientClipMin")
-	_mPSNNOptimizerDescriptorSelSetGradientClipMin = objc.RegisterName("setGradientClipMin:")
-	_mPSNNOptimizerDescriptorSelRegularizationScale = objc.RegisterName("regularizationScale")
-	_mPSNNOptimizerDescriptorSelSetRegularizationScale = objc.RegisterName("setRegularizationScale:")
-	_mPSNNOptimizerDescriptorSelRegularizationType = objc.RegisterName("regularizationType")
-	_mPSNNOptimizerDescriptorSelSetRegularizationType = objc.RegisterName("setRegularizationType:")
+	_mPSNNOptimizerDescriptorSelLearningRate                                                                                                                               = objc.RegisterName("learningRate")
+	_mPSNNOptimizerDescriptorSelSetLearningRate                                                                                                                            = objc.RegisterName("setLearningRate:")
+	_mPSNNOptimizerDescriptorSelGradientRescale                                                                                                                            = objc.RegisterName("gradientRescale")
+	_mPSNNOptimizerDescriptorSelSetGradientRescale                                                                                                                         = objc.RegisterName("setGradientRescale:")
+	_mPSNNOptimizerDescriptorSelApplyGradientClipping                                                                                                                      = objc.RegisterName("applyGradientClipping")
+	_mPSNNOptimizerDescriptorSelSetApplyGradientClipping                                                                                                                   = objc.RegisterName("setApplyGradientClipping:")
+	_mPSNNOptimizerDescriptorSelGradientClipMax                                                                                                                            = objc.RegisterName("gradientClipMax")
+	_mPSNNOptimizerDescriptorSelSetGradientClipMax                                                                                                                         = objc.RegisterName("setGradientClipMax:")
+	_mPSNNOptimizerDescriptorSelGradientClipMin                                                                                                                            = objc.RegisterName("gradientClipMin")
+	_mPSNNOptimizerDescriptorSelSetGradientClipMin                                                                                                                         = objc.RegisterName("setGradientClipMin:")
+	_mPSNNOptimizerDescriptorSelRegularizationScale                                                                                                                        = objc.RegisterName("regularizationScale")
+	_mPSNNOptimizerDescriptorSelSetRegularizationScale                                                                                                                     = objc.RegisterName("setRegularizationScale:")
+	_mPSNNOptimizerDescriptorSelRegularizationType                                                                                                                         = objc.RegisterName("regularizationType")
+	_mPSNNOptimizerDescriptorSelSetRegularizationType                                                                                                                      = objc.RegisterName("setRegularizationType:")
 )
 
 func MPSNNOptimizerDescriptorFromID(id objc.ID) *MPSNNOptimizerDescriptor {
@@ -49,25 +49,33 @@ func MPSNNOptimizerDescriptorFromID(id objc.ID) *MPSNNOptimizerDescriptor {
 
 func (o *MPSNNOptimizerDescriptor) InitWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *MPSNNOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleRegularizationTypeRegularizationScale, learningRate, gradientRescale, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerDescriptorFromID(_ret)
 }
 
 func (o *MPSNNOptimizerDescriptor) InitWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *MPSNNOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNOptimizerDescriptorSelInitWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale, learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerDescriptorFromID(_ret)
 }
 
 func MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *MPSNNOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNOptimizerDescriptor), _mPSNNOptimizerDescriptorSelOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale, learningRate, gradientRescale, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerDescriptorFromID(_ret)
 }
 
 func MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *MPSNNOptimizerDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNOptimizerDescriptor), _mPSNNOptimizerDescriptorSelOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale, learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNOptimizerDescriptorFromID(_ret)
 }
 
@@ -140,4 +148,3 @@ func (o *MPSNNOptimizerDescriptor) RegularizationType() MPSNNRegularizationType 
 func (o *MPSNNOptimizerDescriptor) SetRegularizationType(regularizationType MPSNNRegularizationType) {
 	o.Ptr().Send(_mPSNNOptimizerDescriptorSelSetRegularizationType, regularizationType)
 }
-

@@ -26,4 +26,3 @@ func MTRTimeSynchronizationClusterDSTTableEmptyEventFromID(id objc.ID) *MTRTimeS
 	purego.Track(o)
 	return o
 }
-

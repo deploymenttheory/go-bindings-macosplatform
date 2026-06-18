@@ -15,11 +15,11 @@ type NSNameSpecifier struct {
 }
 
 var (
-	_clsNSNameSpecifier = _objcClass("NSNameSpecifier")
-	_nSNameSpecifierSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSNameSpecifier                                                           = _objcClass("NSNameSpecifier")
+	_nSNameSpecifierSelInitWithCoder                                              = objc.RegisterName("initWithCoder:")
 	_nSNameSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyName = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:name:")
-	_nSNameSpecifierSelName = objc.RegisterName("name")
-	_nSNameSpecifierSelSetName = objc.RegisterName("setName:")
+	_nSNameSpecifierSelName                                                       = objc.RegisterName("name")
+	_nSNameSpecifierSelSetName                                                    = objc.RegisterName("setName:")
 )
 
 func NSNameSpecifierFromID(id objc.ID) *NSNameSpecifier {
@@ -34,23 +34,28 @@ func NSNameSpecifierFromID(id objc.ID) *NSNameSpecifier {
 
 func (o *NSNameSpecifier) InitWithCoder(inCoder *NSCoder) *NSNameSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNameSpecifierSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNameSpecifierFromID(_ret)
 }
 
 func (o *NSNameSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyName(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, name *NSString) *NSNameSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNameSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyName, classDesc.Ptr(), container.Ptr(), property.Ptr(), name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNameSpecifierFromID(_ret)
 }
 
 func (o *NSNameSpecifier) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNameSpecifierSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNameSpecifier) SetName(name *NSString) {
 	o.Ptr().Send(_nSNameSpecifierSelSetName, name.Ptr())
 }
-

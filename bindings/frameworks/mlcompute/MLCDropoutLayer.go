@@ -15,10 +15,10 @@ type MLCDropoutLayer struct {
 }
 
 var (
-	_clsMLCDropoutLayer = _objcClass("MLCDropoutLayer")
+	_clsMLCDropoutLayer                  = _objcClass("MLCDropoutLayer")
 	_mLCDropoutLayerSelLayerWithRateSeed = objc.RegisterName("layerWithRate:seed:")
-	_mLCDropoutLayerSelRate = objc.RegisterName("rate")
-	_mLCDropoutLayerSelSeed = objc.RegisterName("seed")
+	_mLCDropoutLayerSelRate              = objc.RegisterName("rate")
+	_mLCDropoutLayerSelSeed              = objc.RegisterName("seed")
 )
 
 func MLCDropoutLayerFromID(id objc.ID) *MLCDropoutLayer {
@@ -34,7 +34,9 @@ func MLCDropoutLayerFromID(id objc.ID) *MLCDropoutLayer {
 // @abstract   Create a dropout layer @param      rate  A scalar float value. The probability that each element is dropped. @param      seed  The seed used to generate random numbers. @return     A new dropout layer
 func MLCDropoutLayerLayerWithRateSeed(rate float32, seed uint) *MLCDropoutLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDropoutLayer), _mLCDropoutLayerSelLayerWithRateSeed, rate, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDropoutLayerFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *MLCDropoutLayer) Seed() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mLCDropoutLayerSelSeed)
 	return _ret
 }
-

@@ -87,4 +87,3 @@ type TextParagraphable interface {
 }
 
 var _ TextParagraphable = (*TextParagraph)(nil)
-

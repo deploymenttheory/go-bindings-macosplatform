@@ -57,4 +57,3 @@ type PolygonObstacleable interface {
 }
 
 var _ PolygonObstacleable = (*PolygonObstacle)(nil)
-

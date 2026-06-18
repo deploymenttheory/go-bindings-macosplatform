@@ -51,4 +51,3 @@ func GlutStrokeRoman() uintptr {
 	ptr, _ := purego.Dlsym(_glutLib, "glutStrokeRoman")
 	return ptr
 }
-

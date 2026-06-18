@@ -17,7 +17,9 @@ type ConeDirectivityModelParameters struct {
 }
 
 // Unwrap returns the underlying [raw.PHASEConeDirectivityModelParameters].
-func (x *ConeDirectivityModelParameters) Unwrap() *raw.PHASEConeDirectivityModelParameters { return x.inner }
+func (x *ConeDirectivityModelParameters) Unwrap() *raw.PHASEConeDirectivityModelParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -49,7 +51,9 @@ func (x *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityM
 	})
 }
 
-func (x *ConeDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters { return &x.inner.PHASEDirectivityModelParameters }
+func (x *ConeDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters {
+	return &x.inner.PHASEDirectivityModelParameters
+}
 
 // ConeDirectivityModelParametersable is the interface implemented by [ConeDirectivityModelParameters], for mocking and DI.
 type ConeDirectivityModelParametersable interface {
@@ -58,4 +62,3 @@ type ConeDirectivityModelParametersable interface {
 }
 
 var _ ConeDirectivityModelParametersable = (*ConeDirectivityModelParameters)(nil)
-

@@ -21,346 +21,346 @@ type NSView struct {
 }
 
 var (
-	_clsNSView = _objcClass("NSView")
-	_nSViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSViewSelIsDescendantOf = objc.RegisterName("isDescendantOf:")
-	_nSViewSelAncestorSharedWithView = objc.RegisterName("ancestorSharedWithView:")
-	_nSViewSelGetRectsBeingDrawnCount = objc.RegisterName("getRectsBeingDrawn:count:")
-	_nSViewSelNeedsToDrawRect = objc.RegisterName("needsToDrawRect:")
-	_nSViewSelViewDidHide = objc.RegisterName("viewDidHide")
-	_nSViewSelViewDidUnhide = objc.RegisterName("viewDidUnhide")
-	_nSViewSelAddSubview = objc.RegisterName("addSubview:")
-	_nSViewSelAddSubviewPositionedRelativeTo = objc.RegisterName("addSubview:positioned:relativeTo:")
-	_nSViewSelSortSubviewsUsingFunctionContext = objc.RegisterName("sortSubviewsUsingFunction:context:")
-	_nSViewSelViewWillMoveToWindow = objc.RegisterName("viewWillMoveToWindow:")
-	_nSViewSelViewDidMoveToWindow = objc.RegisterName("viewDidMoveToWindow")
-	_nSViewSelViewWillMoveToSuperview = objc.RegisterName("viewWillMoveToSuperview:")
-	_nSViewSelViewDidMoveToSuperview = objc.RegisterName("viewDidMoveToSuperview")
-	_nSViewSelDidAddSubview = objc.RegisterName("didAddSubview:")
-	_nSViewSelWillRemoveSubview = objc.RegisterName("willRemoveSubview:")
-	_nSViewSelRemoveFromSuperview = objc.RegisterName("removeFromSuperview")
-	_nSViewSelReplaceSubviewWith = objc.RegisterName("replaceSubview:with:")
-	_nSViewSelRemoveFromSuperviewWithoutNeedingDisplay = objc.RegisterName("removeFromSuperviewWithoutNeedingDisplay")
-	_nSViewSelViewDidChangeBackingProperties = objc.RegisterName("viewDidChangeBackingProperties")
-	_nSViewSelResizeSubviewsWithOldSize = objc.RegisterName("resizeSubviewsWithOldSize:")
-	_nSViewSelResizeWithOldSuperviewSize = objc.RegisterName("resizeWithOldSuperviewSize:")
-	_nSViewSelSetFrameOrigin = objc.RegisterName("setFrameOrigin:")
-	_nSViewSelSetFrameSize = objc.RegisterName("setFrameSize:")
-	_nSViewSelSetBoundsOrigin = objc.RegisterName("setBoundsOrigin:")
-	_nSViewSelSetBoundsSize = objc.RegisterName("setBoundsSize:")
-	_nSViewSelTranslateOriginToPoint = objc.RegisterName("translateOriginToPoint:")
-	_nSViewSelScaleUnitSquareToSize = objc.RegisterName("scaleUnitSquareToSize:")
-	_nSViewSelRotateByAngle = objc.RegisterName("rotateByAngle:")
-	_nSViewSelConvertPointFromView = objc.RegisterName("convertPoint:fromView:")
-	_nSViewSelConvertPointToView = objc.RegisterName("convertPoint:toView:")
-	_nSViewSelConvertSizeFromView = objc.RegisterName("convertSize:fromView:")
-	_nSViewSelConvertSizeToView = objc.RegisterName("convertSize:toView:")
-	_nSViewSelConvertRectFromView = objc.RegisterName("convertRect:fromView:")
-	_nSViewSelConvertRectToView = objc.RegisterName("convertRect:toView:")
-	_nSViewSelBackingAlignedRectOptions = objc.RegisterName("backingAlignedRect:options:")
-	_nSViewSelCenterScanRect = objc.RegisterName("centerScanRect:")
-	_nSViewSelConvertPointToBacking = objc.RegisterName("convertPointToBacking:")
-	_nSViewSelConvertPointFromBacking = objc.RegisterName("convertPointFromBacking:")
-	_nSViewSelConvertSizeToBacking = objc.RegisterName("convertSizeToBacking:")
-	_nSViewSelConvertSizeFromBacking = objc.RegisterName("convertSizeFromBacking:")
-	_nSViewSelConvertRectToBacking = objc.RegisterName("convertRectToBacking:")
-	_nSViewSelConvertRectFromBacking = objc.RegisterName("convertRectFromBacking:")
-	_nSViewSelConvertPointToLayer = objc.RegisterName("convertPointToLayer:")
-	_nSViewSelConvertPointFromLayer = objc.RegisterName("convertPointFromLayer:")
-	_nSViewSelConvertSizeToLayer = objc.RegisterName("convertSizeToLayer:")
-	_nSViewSelConvertSizeFromLayer = objc.RegisterName("convertSizeFromLayer:")
-	_nSViewSelConvertRectToLayer = objc.RegisterName("convertRectToLayer:")
-	_nSViewSelConvertRectFromLayer = objc.RegisterName("convertRectFromLayer:")
-	_nSViewSelSetNeedsDisplayInRect = objc.RegisterName("setNeedsDisplayInRect:")
-	_nSViewSelLockFocus = objc.RegisterName("lockFocus")
-	_nSViewSelUnlockFocus = objc.RegisterName("unlockFocus")
-	_nSViewSelLockFocusIfCanDraw = objc.RegisterName("lockFocusIfCanDraw")
-	_nSViewSelLockFocusIfCanDrawInContext = objc.RegisterName("lockFocusIfCanDrawInContext:")
-	_nSViewSelDisplay = objc.RegisterName("display")
-	_nSViewSelDisplayIfNeeded = objc.RegisterName("displayIfNeeded")
-	_nSViewSelDisplayIfNeededIgnoringOpacity = objc.RegisterName("displayIfNeededIgnoringOpacity")
-	_nSViewSelDisplayRect = objc.RegisterName("displayRect:")
-	_nSViewSelDisplayIfNeededInRect = objc.RegisterName("displayIfNeededInRect:")
-	_nSViewSelDisplayRectIgnoringOpacity = objc.RegisterName("displayRectIgnoringOpacity:")
-	_nSViewSelDisplayIfNeededInRectIgnoringOpacity = objc.RegisterName("displayIfNeededInRectIgnoringOpacity:")
-	_nSViewSelDrawRect = objc.RegisterName("drawRect:")
-	_nSViewSelDisplayRectIgnoringOpacityInContext = objc.RegisterName("displayRectIgnoringOpacity:inContext:")
-	_nSViewSelBitmapImageRepForCachingDisplayInRect = objc.RegisterName("bitmapImageRepForCachingDisplayInRect:")
-	_nSViewSelCacheDisplayInRectToBitmapImageRep = objc.RegisterName("cacheDisplayInRect:toBitmapImageRep:")
-	_nSViewSelViewWillDraw = objc.RegisterName("viewWillDraw")
-	_nSViewSelScrollPoint = objc.RegisterName("scrollPoint:")
-	_nSViewSelScrollRectToVisible = objc.RegisterName("scrollRectToVisible:")
-	_nSViewSelAutoscroll = objc.RegisterName("autoscroll:")
-	_nSViewSelAdjustScroll = objc.RegisterName("adjustScroll:")
-	_nSViewSelScrollRectBy = objc.RegisterName("scrollRect:by:")
-	_nSViewSelTranslateRectsNeedingDisplayInRectBy = objc.RegisterName("translateRectsNeedingDisplayInRect:by:")
-	_nSViewSelHitTest = objc.RegisterName("hitTest:")
-	_nSViewSelMouseInRect = objc.RegisterName("mouse:inRect:")
-	_nSViewSelViewWithTag = objc.RegisterName("viewWithTag:")
-	_nSViewSelAcceptsFirstMouse = objc.RegisterName("acceptsFirstMouse:")
-	_nSViewSelShouldDelayWindowOrderingForEvent = objc.RegisterName("shouldDelayWindowOrderingForEvent:")
-	_nSViewSelMakeBackingLayer = objc.RegisterName("makeBackingLayer")
-	_nSViewSelUpdateLayer = objc.RegisterName("updateLayer")
-	_nSViewSelLayoutSubtreeIfNeeded = objc.RegisterName("layoutSubtreeIfNeeded")
-	_nSViewSelLayout = objc.RegisterName("layout")
-	_nSViewSelMenuForEvent = objc.RegisterName("menuForEvent:")
-	_nSViewSelWillOpenMenuWithEvent = objc.RegisterName("willOpenMenu:withEvent:")
-	_nSViewSelDidCloseMenuWithEvent = objc.RegisterName("didCloseMenu:withEvent:")
-	_nSViewSelAddToolTipRectOwnerUserData = objc.RegisterName("addToolTipRect:owner:userData:")
-	_nSViewSelRemoveToolTip = objc.RegisterName("removeToolTip:")
-	_nSViewSelRemoveAllToolTips = objc.RegisterName("removeAllToolTips")
-	_nSViewSelViewWillStartLiveResize = objc.RegisterName("viewWillStartLiveResize")
-	_nSViewSelViewDidEndLiveResize = objc.RegisterName("viewDidEndLiveResize")
-	_nSViewSelGetRectsExposedDuringLiveResizeCount = objc.RegisterName("getRectsExposedDuringLiveResize:count:")
-	_nSViewSelRectForSmartMagnificationAtPointInRect = objc.RegisterName("rectForSmartMagnificationAtPoint:inRect:")
-	_nSViewSelPrepareForReuse = objc.RegisterName("prepareForReuse")
-	_nSViewSelPrepareContentInRect = objc.RegisterName("prepareContentInRect:")
-	_nSViewSelViewDidChangeEffectiveAppearance = objc.RegisterName("viewDidChangeEffectiveAppearance")
-	_nSViewSelWindow = objc.RegisterName("window")
-	_nSViewSelSuperview = objc.RegisterName("superview")
-	_nSViewSelSubviews = objc.RegisterName("subviews")
-	_nSViewSelSetSubviews = objc.RegisterName("setSubviews:")
-	_nSViewSelOpaqueAncestor = objc.RegisterName("opaqueAncestor")
-	_nSViewSelIsHidden = objc.RegisterName("isHidden")
-	_nSViewSelSetHidden = objc.RegisterName("setHidden:")
-	_nSViewSelIsHiddenOrHasHiddenAncestor = objc.RegisterName("isHiddenOrHasHiddenAncestor")
-	_nSViewSelWantsDefaultClipping = objc.RegisterName("wantsDefaultClipping")
-	_nSViewSelPostsFrameChangedNotifications = objc.RegisterName("postsFrameChangedNotifications")
-	_nSViewSelSetPostsFrameChangedNotifications = objc.RegisterName("setPostsFrameChangedNotifications:")
-	_nSViewSelAutoresizesSubviews = objc.RegisterName("autoresizesSubviews")
-	_nSViewSelSetAutoresizesSubviews = objc.RegisterName("setAutoresizesSubviews:")
-	_nSViewSelAutoresizingMask = objc.RegisterName("autoresizingMask")
-	_nSViewSelSetAutoresizingMask = objc.RegisterName("setAutoresizingMask:")
-	_nSViewSelFrame = objc.RegisterName("frame")
-	_nSViewSelSetFrame = objc.RegisterName("setFrame:")
-	_nSViewSelFrameRotation = objc.RegisterName("frameRotation")
-	_nSViewSelSetFrameRotation = objc.RegisterName("setFrameRotation:")
-	_nSViewSelFrameCenterRotation = objc.RegisterName("frameCenterRotation")
-	_nSViewSelSetFrameCenterRotation = objc.RegisterName("setFrameCenterRotation:")
-	_nSViewSelBoundsRotation = objc.RegisterName("boundsRotation")
-	_nSViewSelSetBoundsRotation = objc.RegisterName("setBoundsRotation:")
-	_nSViewSelBounds = objc.RegisterName("bounds")
-	_nSViewSelSetBounds = objc.RegisterName("setBounds:")
-	_nSViewSelIsFlipped = objc.RegisterName("isFlipped")
-	_nSViewSelIsRotatedFromBase = objc.RegisterName("isRotatedFromBase")
-	_nSViewSelIsRotatedOrScaledFromBase = objc.RegisterName("isRotatedOrScaledFromBase")
-	_nSViewSelIsOpaque = objc.RegisterName("isOpaque")
-	_nSViewSelCanDrawConcurrently = objc.RegisterName("canDrawConcurrently")
-	_nSViewSelSetCanDrawConcurrently = objc.RegisterName("setCanDrawConcurrently:")
-	_nSViewSelCanDraw = objc.RegisterName("canDraw")
-	_nSViewSelNeedsDisplay = objc.RegisterName("needsDisplay")
-	_nSViewSelSetNeedsDisplay = objc.RegisterName("setNeedsDisplay:")
-	_nSViewSelFocusView = objc.RegisterName("focusView")
-	_nSViewSelVisibleRect = objc.RegisterName("visibleRect")
-	_nSViewSelTag = objc.RegisterName("tag")
-	_nSViewSelNeedsPanelToBecomeKey = objc.RegisterName("needsPanelToBecomeKey")
-	_nSViewSelMouseDownCanMoveWindow = objc.RegisterName("mouseDownCanMoveWindow")
-	_nSViewSelAcceptsTouchEvents = objc.RegisterName("acceptsTouchEvents")
-	_nSViewSelSetAcceptsTouchEvents = objc.RegisterName("setAcceptsTouchEvents:")
-	_nSViewSelWantsRestingTouches = objc.RegisterName("wantsRestingTouches")
-	_nSViewSelSetWantsRestingTouches = objc.RegisterName("setWantsRestingTouches:")
-	_nSViewSelLayerContentsRedrawPolicy = objc.RegisterName("layerContentsRedrawPolicy")
-	_nSViewSelSetLayerContentsRedrawPolicy = objc.RegisterName("setLayerContentsRedrawPolicy:")
-	_nSViewSelLayerContentsPlacement = objc.RegisterName("layerContentsPlacement")
-	_nSViewSelSetLayerContentsPlacement = objc.RegisterName("setLayerContentsPlacement:")
-	_nSViewSelWantsLayer = objc.RegisterName("wantsLayer")
-	_nSViewSelSetWantsLayer = objc.RegisterName("setWantsLayer:")
-	_nSViewSelLayer = objc.RegisterName("layer")
-	_nSViewSelSetLayer = objc.RegisterName("setLayer:")
-	_nSViewSelWantsUpdateLayer = objc.RegisterName("wantsUpdateLayer")
-	_nSViewSelCanDrawSubviewsIntoLayer = objc.RegisterName("canDrawSubviewsIntoLayer")
-	_nSViewSelSetCanDrawSubviewsIntoLayer = objc.RegisterName("setCanDrawSubviewsIntoLayer:")
-	_nSViewSelNeedsLayout = objc.RegisterName("needsLayout")
-	_nSViewSelSetNeedsLayout = objc.RegisterName("setNeedsLayout:")
-	_nSViewSelAlphaValue = objc.RegisterName("alphaValue")
-	_nSViewSelSetAlphaValue = objc.RegisterName("setAlphaValue:")
-	_nSViewSelLayerUsesCoreImageFilters = objc.RegisterName("layerUsesCoreImageFilters")
-	_nSViewSelSetLayerUsesCoreImageFilters = objc.RegisterName("setLayerUsesCoreImageFilters:")
-	_nSViewSelBackgroundFilters = objc.RegisterName("backgroundFilters")
-	_nSViewSelSetBackgroundFilters = objc.RegisterName("setBackgroundFilters:")
-	_nSViewSelCompositingFilter = objc.RegisterName("compositingFilter")
-	_nSViewSelSetCompositingFilter = objc.RegisterName("setCompositingFilter:")
-	_nSViewSelContentFilters = objc.RegisterName("contentFilters")
-	_nSViewSelSetContentFilters = objc.RegisterName("setContentFilters:")
-	_nSViewSelShadow = objc.RegisterName("shadow")
-	_nSViewSelSetShadow = objc.RegisterName("setShadow:")
-	_nSViewSelClipsToBounds = objc.RegisterName("clipsToBounds")
-	_nSViewSelSetClipsToBounds = objc.RegisterName("setClipsToBounds:")
-	_nSViewSelPostsBoundsChangedNotifications = objc.RegisterName("postsBoundsChangedNotifications")
-	_nSViewSelSetPostsBoundsChangedNotifications = objc.RegisterName("setPostsBoundsChangedNotifications:")
-	_nSViewSelEnclosingScrollView = objc.RegisterName("enclosingScrollView")
-	_nSViewSelDefaultMenu = objc.RegisterName("defaultMenu")
-	_nSViewSelToolTip = objc.RegisterName("toolTip")
-	_nSViewSelSetToolTip = objc.RegisterName("setToolTip:")
-	_nSViewSelInLiveResize = objc.RegisterName("inLiveResize")
-	_nSViewSelPreservesContentDuringLiveResize = objc.RegisterName("preservesContentDuringLiveResize")
-	_nSViewSelRectPreservedDuringLiveResize = objc.RegisterName("rectPreservedDuringLiveResize")
-	_nSViewSelInputContext = objc.RegisterName("inputContext")
-	_nSViewSelUserInterfaceLayoutDirection = objc.RegisterName("userInterfaceLayoutDirection")
-	_nSViewSelSetUserInterfaceLayoutDirection = objc.RegisterName("setUserInterfaceLayoutDirection:")
-	_nSViewSelIsCompatibleWithResponsiveScrolling = objc.RegisterName("isCompatibleWithResponsiveScrolling")
-	_nSViewSelPreparedContentRect = objc.RegisterName("preparedContentRect")
-	_nSViewSelSetPreparedContentRect = objc.RegisterName("setPreparedContentRect:")
-	_nSViewSelAllowsVibrancy = objc.RegisterName("allowsVibrancy")
-	_nSViewSelSetKeyboardFocusRingNeedsDisplayInRect = objc.RegisterName("setKeyboardFocusRingNeedsDisplayInRect:")
-	_nSViewSelDrawFocusRingMask = objc.RegisterName("drawFocusRingMask")
-	_nSViewSelNoteFocusRingMaskChanged = objc.RegisterName("noteFocusRingMaskChanged")
-	_nSViewSelNextKeyView = objc.RegisterName("nextKeyView")
-	_nSViewSelSetNextKeyView = objc.RegisterName("setNextKeyView:")
-	_nSViewSelPreviousKeyView = objc.RegisterName("previousKeyView")
-	_nSViewSelNextValidKeyView = objc.RegisterName("nextValidKeyView")
-	_nSViewSelPreviousValidKeyView = objc.RegisterName("previousValidKeyView")
-	_nSViewSelCanBecomeKeyView = objc.RegisterName("canBecomeKeyView")
-	_nSViewSelFocusRingType = objc.RegisterName("focusRingType")
-	_nSViewSelSetFocusRingType = objc.RegisterName("setFocusRingType:")
-	_nSViewSelDefaultFocusRingType = objc.RegisterName("defaultFocusRingType")
-	_nSViewSelFocusRingMaskBounds = objc.RegisterName("focusRingMaskBounds")
-	_nSViewSelWriteEPSInsideRectToPasteboard = objc.RegisterName("writeEPSInsideRect:toPasteboard:")
-	_nSViewSelDataWithEPSInsideRect = objc.RegisterName("dataWithEPSInsideRect:")
-	_nSViewSelWritePDFInsideRectToPasteboard = objc.RegisterName("writePDFInsideRect:toPasteboard:")
-	_nSViewSelDataWithPDFInsideRect = objc.RegisterName("dataWithPDFInsideRect:")
-	_nSViewSelPrint = objc.RegisterName("print:")
-	_nSViewSelKnowsPageRange = objc.RegisterName("knowsPageRange:")
-	_nSViewSelAdjustPageWidthNewLeftRightLimit = objc.RegisterName("adjustPageWidthNew:left:right:limit:")
-	_nSViewSelAdjustPageHeightNewTopBottomLimit = objc.RegisterName("adjustPageHeightNew:top:bottom:limit:")
-	_nSViewSelRectForPage = objc.RegisterName("rectForPage:")
-	_nSViewSelLocationOfPrintRect = objc.RegisterName("locationOfPrintRect:")
-	_nSViewSelDrawPageBorderWithSize = objc.RegisterName("drawPageBorderWithSize:")
-	_nSViewSelDrawSheetBorderWithSize = objc.RegisterName("drawSheetBorderWithSize:")
-	_nSViewSelBeginDocument = objc.RegisterName("beginDocument")
-	_nSViewSelEndDocument = objc.RegisterName("endDocument")
-	_nSViewSelBeginPageInRectAtPlacement = objc.RegisterName("beginPageInRect:atPlacement:")
-	_nSViewSelEndPage = objc.RegisterName("endPage")
-	_nSViewSelHeightAdjustLimit = objc.RegisterName("heightAdjustLimit")
-	_nSViewSelWidthAdjustLimit = objc.RegisterName("widthAdjustLimit")
-	_nSViewSelPageHeader = objc.RegisterName("pageHeader")
-	_nSViewSelPageFooter = objc.RegisterName("pageFooter")
-	_nSViewSelPrintJobTitle = objc.RegisterName("printJobTitle")
-	_nSViewSelBeginDraggingSessionWithItemsEventSource = objc.RegisterName("beginDraggingSessionWithItems:event:source:")
-	_nSViewSelRegisterForDraggedTypes = objc.RegisterName("registerForDraggedTypes:")
-	_nSViewSelUnregisterDraggedTypes = objc.RegisterName("unregisterDraggedTypes")
-	_nSViewSelRegisteredDraggedTypes = objc.RegisterName("registeredDraggedTypes")
-	_nSViewSelEnterFullScreenModeWithOptions = objc.RegisterName("enterFullScreenMode:withOptions:")
-	_nSViewSelExitFullScreenModeWithOptions = objc.RegisterName("exitFullScreenModeWithOptions:")
-	_nSViewSelIsInFullScreenMode = objc.RegisterName("isInFullScreenMode")
-	_nSViewSelShowDefinitionForAttributedStringAtPoint = objc.RegisterName("showDefinitionForAttributedString:atPoint:")
+	_clsNSView                                                                    = _objcClass("NSView")
+	_nSViewSelInitWithFrame                                                       = objc.RegisterName("initWithFrame:")
+	_nSViewSelInitWithCoder                                                       = objc.RegisterName("initWithCoder:")
+	_nSViewSelIsDescendantOf                                                      = objc.RegisterName("isDescendantOf:")
+	_nSViewSelAncestorSharedWithView                                              = objc.RegisterName("ancestorSharedWithView:")
+	_nSViewSelGetRectsBeingDrawnCount                                             = objc.RegisterName("getRectsBeingDrawn:count:")
+	_nSViewSelNeedsToDrawRect                                                     = objc.RegisterName("needsToDrawRect:")
+	_nSViewSelViewDidHide                                                         = objc.RegisterName("viewDidHide")
+	_nSViewSelViewDidUnhide                                                       = objc.RegisterName("viewDidUnhide")
+	_nSViewSelAddSubview                                                          = objc.RegisterName("addSubview:")
+	_nSViewSelAddSubviewPositionedRelativeTo                                      = objc.RegisterName("addSubview:positioned:relativeTo:")
+	_nSViewSelSortSubviewsUsingFunctionContext                                    = objc.RegisterName("sortSubviewsUsingFunction:context:")
+	_nSViewSelViewWillMoveToWindow                                                = objc.RegisterName("viewWillMoveToWindow:")
+	_nSViewSelViewDidMoveToWindow                                                 = objc.RegisterName("viewDidMoveToWindow")
+	_nSViewSelViewWillMoveToSuperview                                             = objc.RegisterName("viewWillMoveToSuperview:")
+	_nSViewSelViewDidMoveToSuperview                                              = objc.RegisterName("viewDidMoveToSuperview")
+	_nSViewSelDidAddSubview                                                       = objc.RegisterName("didAddSubview:")
+	_nSViewSelWillRemoveSubview                                                   = objc.RegisterName("willRemoveSubview:")
+	_nSViewSelRemoveFromSuperview                                                 = objc.RegisterName("removeFromSuperview")
+	_nSViewSelReplaceSubviewWith                                                  = objc.RegisterName("replaceSubview:with:")
+	_nSViewSelRemoveFromSuperviewWithoutNeedingDisplay                            = objc.RegisterName("removeFromSuperviewWithoutNeedingDisplay")
+	_nSViewSelViewDidChangeBackingProperties                                      = objc.RegisterName("viewDidChangeBackingProperties")
+	_nSViewSelResizeSubviewsWithOldSize                                           = objc.RegisterName("resizeSubviewsWithOldSize:")
+	_nSViewSelResizeWithOldSuperviewSize                                          = objc.RegisterName("resizeWithOldSuperviewSize:")
+	_nSViewSelSetFrameOrigin                                                      = objc.RegisterName("setFrameOrigin:")
+	_nSViewSelSetFrameSize                                                        = objc.RegisterName("setFrameSize:")
+	_nSViewSelSetBoundsOrigin                                                     = objc.RegisterName("setBoundsOrigin:")
+	_nSViewSelSetBoundsSize                                                       = objc.RegisterName("setBoundsSize:")
+	_nSViewSelTranslateOriginToPoint                                              = objc.RegisterName("translateOriginToPoint:")
+	_nSViewSelScaleUnitSquareToSize                                               = objc.RegisterName("scaleUnitSquareToSize:")
+	_nSViewSelRotateByAngle                                                       = objc.RegisterName("rotateByAngle:")
+	_nSViewSelConvertPointFromView                                                = objc.RegisterName("convertPoint:fromView:")
+	_nSViewSelConvertPointToView                                                  = objc.RegisterName("convertPoint:toView:")
+	_nSViewSelConvertSizeFromView                                                 = objc.RegisterName("convertSize:fromView:")
+	_nSViewSelConvertSizeToView                                                   = objc.RegisterName("convertSize:toView:")
+	_nSViewSelConvertRectFromView                                                 = objc.RegisterName("convertRect:fromView:")
+	_nSViewSelConvertRectToView                                                   = objc.RegisterName("convertRect:toView:")
+	_nSViewSelBackingAlignedRectOptions                                           = objc.RegisterName("backingAlignedRect:options:")
+	_nSViewSelCenterScanRect                                                      = objc.RegisterName("centerScanRect:")
+	_nSViewSelConvertPointToBacking                                               = objc.RegisterName("convertPointToBacking:")
+	_nSViewSelConvertPointFromBacking                                             = objc.RegisterName("convertPointFromBacking:")
+	_nSViewSelConvertSizeToBacking                                                = objc.RegisterName("convertSizeToBacking:")
+	_nSViewSelConvertSizeFromBacking                                              = objc.RegisterName("convertSizeFromBacking:")
+	_nSViewSelConvertRectToBacking                                                = objc.RegisterName("convertRectToBacking:")
+	_nSViewSelConvertRectFromBacking                                              = objc.RegisterName("convertRectFromBacking:")
+	_nSViewSelConvertPointToLayer                                                 = objc.RegisterName("convertPointToLayer:")
+	_nSViewSelConvertPointFromLayer                                               = objc.RegisterName("convertPointFromLayer:")
+	_nSViewSelConvertSizeToLayer                                                  = objc.RegisterName("convertSizeToLayer:")
+	_nSViewSelConvertSizeFromLayer                                                = objc.RegisterName("convertSizeFromLayer:")
+	_nSViewSelConvertRectToLayer                                                  = objc.RegisterName("convertRectToLayer:")
+	_nSViewSelConvertRectFromLayer                                                = objc.RegisterName("convertRectFromLayer:")
+	_nSViewSelSetNeedsDisplayInRect                                               = objc.RegisterName("setNeedsDisplayInRect:")
+	_nSViewSelLockFocus                                                           = objc.RegisterName("lockFocus")
+	_nSViewSelUnlockFocus                                                         = objc.RegisterName("unlockFocus")
+	_nSViewSelLockFocusIfCanDraw                                                  = objc.RegisterName("lockFocusIfCanDraw")
+	_nSViewSelLockFocusIfCanDrawInContext                                         = objc.RegisterName("lockFocusIfCanDrawInContext:")
+	_nSViewSelDisplay                                                             = objc.RegisterName("display")
+	_nSViewSelDisplayIfNeeded                                                     = objc.RegisterName("displayIfNeeded")
+	_nSViewSelDisplayIfNeededIgnoringOpacity                                      = objc.RegisterName("displayIfNeededIgnoringOpacity")
+	_nSViewSelDisplayRect                                                         = objc.RegisterName("displayRect:")
+	_nSViewSelDisplayIfNeededInRect                                               = objc.RegisterName("displayIfNeededInRect:")
+	_nSViewSelDisplayRectIgnoringOpacity                                          = objc.RegisterName("displayRectIgnoringOpacity:")
+	_nSViewSelDisplayIfNeededInRectIgnoringOpacity                                = objc.RegisterName("displayIfNeededInRectIgnoringOpacity:")
+	_nSViewSelDrawRect                                                            = objc.RegisterName("drawRect:")
+	_nSViewSelDisplayRectIgnoringOpacityInContext                                 = objc.RegisterName("displayRectIgnoringOpacity:inContext:")
+	_nSViewSelBitmapImageRepForCachingDisplayInRect                               = objc.RegisterName("bitmapImageRepForCachingDisplayInRect:")
+	_nSViewSelCacheDisplayInRectToBitmapImageRep                                  = objc.RegisterName("cacheDisplayInRect:toBitmapImageRep:")
+	_nSViewSelViewWillDraw                                                        = objc.RegisterName("viewWillDraw")
+	_nSViewSelScrollPoint                                                         = objc.RegisterName("scrollPoint:")
+	_nSViewSelScrollRectToVisible                                                 = objc.RegisterName("scrollRectToVisible:")
+	_nSViewSelAutoscroll                                                          = objc.RegisterName("autoscroll:")
+	_nSViewSelAdjustScroll                                                        = objc.RegisterName("adjustScroll:")
+	_nSViewSelScrollRectBy                                                        = objc.RegisterName("scrollRect:by:")
+	_nSViewSelTranslateRectsNeedingDisplayInRectBy                                = objc.RegisterName("translateRectsNeedingDisplayInRect:by:")
+	_nSViewSelHitTest                                                             = objc.RegisterName("hitTest:")
+	_nSViewSelMouseInRect                                                         = objc.RegisterName("mouse:inRect:")
+	_nSViewSelViewWithTag                                                         = objc.RegisterName("viewWithTag:")
+	_nSViewSelAcceptsFirstMouse                                                   = objc.RegisterName("acceptsFirstMouse:")
+	_nSViewSelShouldDelayWindowOrderingForEvent                                   = objc.RegisterName("shouldDelayWindowOrderingForEvent:")
+	_nSViewSelMakeBackingLayer                                                    = objc.RegisterName("makeBackingLayer")
+	_nSViewSelUpdateLayer                                                         = objc.RegisterName("updateLayer")
+	_nSViewSelLayoutSubtreeIfNeeded                                               = objc.RegisterName("layoutSubtreeIfNeeded")
+	_nSViewSelLayout                                                              = objc.RegisterName("layout")
+	_nSViewSelMenuForEvent                                                        = objc.RegisterName("menuForEvent:")
+	_nSViewSelWillOpenMenuWithEvent                                               = objc.RegisterName("willOpenMenu:withEvent:")
+	_nSViewSelDidCloseMenuWithEvent                                               = objc.RegisterName("didCloseMenu:withEvent:")
+	_nSViewSelAddToolTipRectOwnerUserData                                         = objc.RegisterName("addToolTipRect:owner:userData:")
+	_nSViewSelRemoveToolTip                                                       = objc.RegisterName("removeToolTip:")
+	_nSViewSelRemoveAllToolTips                                                   = objc.RegisterName("removeAllToolTips")
+	_nSViewSelViewWillStartLiveResize                                             = objc.RegisterName("viewWillStartLiveResize")
+	_nSViewSelViewDidEndLiveResize                                                = objc.RegisterName("viewDidEndLiveResize")
+	_nSViewSelGetRectsExposedDuringLiveResizeCount                                = objc.RegisterName("getRectsExposedDuringLiveResize:count:")
+	_nSViewSelRectForSmartMagnificationAtPointInRect                              = objc.RegisterName("rectForSmartMagnificationAtPoint:inRect:")
+	_nSViewSelPrepareForReuse                                                     = objc.RegisterName("prepareForReuse")
+	_nSViewSelPrepareContentInRect                                                = objc.RegisterName("prepareContentInRect:")
+	_nSViewSelViewDidChangeEffectiveAppearance                                    = objc.RegisterName("viewDidChangeEffectiveAppearance")
+	_nSViewSelWindow                                                              = objc.RegisterName("window")
+	_nSViewSelSuperview                                                           = objc.RegisterName("superview")
+	_nSViewSelSubviews                                                            = objc.RegisterName("subviews")
+	_nSViewSelSetSubviews                                                         = objc.RegisterName("setSubviews:")
+	_nSViewSelOpaqueAncestor                                                      = objc.RegisterName("opaqueAncestor")
+	_nSViewSelIsHidden                                                            = objc.RegisterName("isHidden")
+	_nSViewSelSetHidden                                                           = objc.RegisterName("setHidden:")
+	_nSViewSelIsHiddenOrHasHiddenAncestor                                         = objc.RegisterName("isHiddenOrHasHiddenAncestor")
+	_nSViewSelWantsDefaultClipping                                                = objc.RegisterName("wantsDefaultClipping")
+	_nSViewSelPostsFrameChangedNotifications                                      = objc.RegisterName("postsFrameChangedNotifications")
+	_nSViewSelSetPostsFrameChangedNotifications                                   = objc.RegisterName("setPostsFrameChangedNotifications:")
+	_nSViewSelAutoresizesSubviews                                                 = objc.RegisterName("autoresizesSubviews")
+	_nSViewSelSetAutoresizesSubviews                                              = objc.RegisterName("setAutoresizesSubviews:")
+	_nSViewSelAutoresizingMask                                                    = objc.RegisterName("autoresizingMask")
+	_nSViewSelSetAutoresizingMask                                                 = objc.RegisterName("setAutoresizingMask:")
+	_nSViewSelFrame                                                               = objc.RegisterName("frame")
+	_nSViewSelSetFrame                                                            = objc.RegisterName("setFrame:")
+	_nSViewSelFrameRotation                                                       = objc.RegisterName("frameRotation")
+	_nSViewSelSetFrameRotation                                                    = objc.RegisterName("setFrameRotation:")
+	_nSViewSelFrameCenterRotation                                                 = objc.RegisterName("frameCenterRotation")
+	_nSViewSelSetFrameCenterRotation                                              = objc.RegisterName("setFrameCenterRotation:")
+	_nSViewSelBoundsRotation                                                      = objc.RegisterName("boundsRotation")
+	_nSViewSelSetBoundsRotation                                                   = objc.RegisterName("setBoundsRotation:")
+	_nSViewSelBounds                                                              = objc.RegisterName("bounds")
+	_nSViewSelSetBounds                                                           = objc.RegisterName("setBounds:")
+	_nSViewSelIsFlipped                                                           = objc.RegisterName("isFlipped")
+	_nSViewSelIsRotatedFromBase                                                   = objc.RegisterName("isRotatedFromBase")
+	_nSViewSelIsRotatedOrScaledFromBase                                           = objc.RegisterName("isRotatedOrScaledFromBase")
+	_nSViewSelIsOpaque                                                            = objc.RegisterName("isOpaque")
+	_nSViewSelCanDrawConcurrently                                                 = objc.RegisterName("canDrawConcurrently")
+	_nSViewSelSetCanDrawConcurrently                                              = objc.RegisterName("setCanDrawConcurrently:")
+	_nSViewSelCanDraw                                                             = objc.RegisterName("canDraw")
+	_nSViewSelNeedsDisplay                                                        = objc.RegisterName("needsDisplay")
+	_nSViewSelSetNeedsDisplay                                                     = objc.RegisterName("setNeedsDisplay:")
+	_nSViewSelFocusView                                                           = objc.RegisterName("focusView")
+	_nSViewSelVisibleRect                                                         = objc.RegisterName("visibleRect")
+	_nSViewSelTag                                                                 = objc.RegisterName("tag")
+	_nSViewSelNeedsPanelToBecomeKey                                               = objc.RegisterName("needsPanelToBecomeKey")
+	_nSViewSelMouseDownCanMoveWindow                                              = objc.RegisterName("mouseDownCanMoveWindow")
+	_nSViewSelAcceptsTouchEvents                                                  = objc.RegisterName("acceptsTouchEvents")
+	_nSViewSelSetAcceptsTouchEvents                                               = objc.RegisterName("setAcceptsTouchEvents:")
+	_nSViewSelWantsRestingTouches                                                 = objc.RegisterName("wantsRestingTouches")
+	_nSViewSelSetWantsRestingTouches                                              = objc.RegisterName("setWantsRestingTouches:")
+	_nSViewSelLayerContentsRedrawPolicy                                           = objc.RegisterName("layerContentsRedrawPolicy")
+	_nSViewSelSetLayerContentsRedrawPolicy                                        = objc.RegisterName("setLayerContentsRedrawPolicy:")
+	_nSViewSelLayerContentsPlacement                                              = objc.RegisterName("layerContentsPlacement")
+	_nSViewSelSetLayerContentsPlacement                                           = objc.RegisterName("setLayerContentsPlacement:")
+	_nSViewSelWantsLayer                                                          = objc.RegisterName("wantsLayer")
+	_nSViewSelSetWantsLayer                                                       = objc.RegisterName("setWantsLayer:")
+	_nSViewSelLayer                                                               = objc.RegisterName("layer")
+	_nSViewSelSetLayer                                                            = objc.RegisterName("setLayer:")
+	_nSViewSelWantsUpdateLayer                                                    = objc.RegisterName("wantsUpdateLayer")
+	_nSViewSelCanDrawSubviewsIntoLayer                                            = objc.RegisterName("canDrawSubviewsIntoLayer")
+	_nSViewSelSetCanDrawSubviewsIntoLayer                                         = objc.RegisterName("setCanDrawSubviewsIntoLayer:")
+	_nSViewSelNeedsLayout                                                         = objc.RegisterName("needsLayout")
+	_nSViewSelSetNeedsLayout                                                      = objc.RegisterName("setNeedsLayout:")
+	_nSViewSelAlphaValue                                                          = objc.RegisterName("alphaValue")
+	_nSViewSelSetAlphaValue                                                       = objc.RegisterName("setAlphaValue:")
+	_nSViewSelLayerUsesCoreImageFilters                                           = objc.RegisterName("layerUsesCoreImageFilters")
+	_nSViewSelSetLayerUsesCoreImageFilters                                        = objc.RegisterName("setLayerUsesCoreImageFilters:")
+	_nSViewSelBackgroundFilters                                                   = objc.RegisterName("backgroundFilters")
+	_nSViewSelSetBackgroundFilters                                                = objc.RegisterName("setBackgroundFilters:")
+	_nSViewSelCompositingFilter                                                   = objc.RegisterName("compositingFilter")
+	_nSViewSelSetCompositingFilter                                                = objc.RegisterName("setCompositingFilter:")
+	_nSViewSelContentFilters                                                      = objc.RegisterName("contentFilters")
+	_nSViewSelSetContentFilters                                                   = objc.RegisterName("setContentFilters:")
+	_nSViewSelShadow                                                              = objc.RegisterName("shadow")
+	_nSViewSelSetShadow                                                           = objc.RegisterName("setShadow:")
+	_nSViewSelClipsToBounds                                                       = objc.RegisterName("clipsToBounds")
+	_nSViewSelSetClipsToBounds                                                    = objc.RegisterName("setClipsToBounds:")
+	_nSViewSelPostsBoundsChangedNotifications                                     = objc.RegisterName("postsBoundsChangedNotifications")
+	_nSViewSelSetPostsBoundsChangedNotifications                                  = objc.RegisterName("setPostsBoundsChangedNotifications:")
+	_nSViewSelEnclosingScrollView                                                 = objc.RegisterName("enclosingScrollView")
+	_nSViewSelDefaultMenu                                                         = objc.RegisterName("defaultMenu")
+	_nSViewSelToolTip                                                             = objc.RegisterName("toolTip")
+	_nSViewSelSetToolTip                                                          = objc.RegisterName("setToolTip:")
+	_nSViewSelInLiveResize                                                        = objc.RegisterName("inLiveResize")
+	_nSViewSelPreservesContentDuringLiveResize                                    = objc.RegisterName("preservesContentDuringLiveResize")
+	_nSViewSelRectPreservedDuringLiveResize                                       = objc.RegisterName("rectPreservedDuringLiveResize")
+	_nSViewSelInputContext                                                        = objc.RegisterName("inputContext")
+	_nSViewSelUserInterfaceLayoutDirection                                        = objc.RegisterName("userInterfaceLayoutDirection")
+	_nSViewSelSetUserInterfaceLayoutDirection                                     = objc.RegisterName("setUserInterfaceLayoutDirection:")
+	_nSViewSelIsCompatibleWithResponsiveScrolling                                 = objc.RegisterName("isCompatibleWithResponsiveScrolling")
+	_nSViewSelPreparedContentRect                                                 = objc.RegisterName("preparedContentRect")
+	_nSViewSelSetPreparedContentRect                                              = objc.RegisterName("setPreparedContentRect:")
+	_nSViewSelAllowsVibrancy                                                      = objc.RegisterName("allowsVibrancy")
+	_nSViewSelSetKeyboardFocusRingNeedsDisplayInRect                              = objc.RegisterName("setKeyboardFocusRingNeedsDisplayInRect:")
+	_nSViewSelDrawFocusRingMask                                                   = objc.RegisterName("drawFocusRingMask")
+	_nSViewSelNoteFocusRingMaskChanged                                            = objc.RegisterName("noteFocusRingMaskChanged")
+	_nSViewSelNextKeyView                                                         = objc.RegisterName("nextKeyView")
+	_nSViewSelSetNextKeyView                                                      = objc.RegisterName("setNextKeyView:")
+	_nSViewSelPreviousKeyView                                                     = objc.RegisterName("previousKeyView")
+	_nSViewSelNextValidKeyView                                                    = objc.RegisterName("nextValidKeyView")
+	_nSViewSelPreviousValidKeyView                                                = objc.RegisterName("previousValidKeyView")
+	_nSViewSelCanBecomeKeyView                                                    = objc.RegisterName("canBecomeKeyView")
+	_nSViewSelFocusRingType                                                       = objc.RegisterName("focusRingType")
+	_nSViewSelSetFocusRingType                                                    = objc.RegisterName("setFocusRingType:")
+	_nSViewSelDefaultFocusRingType                                                = objc.RegisterName("defaultFocusRingType")
+	_nSViewSelFocusRingMaskBounds                                                 = objc.RegisterName("focusRingMaskBounds")
+	_nSViewSelWriteEPSInsideRectToPasteboard                                      = objc.RegisterName("writeEPSInsideRect:toPasteboard:")
+	_nSViewSelDataWithEPSInsideRect                                               = objc.RegisterName("dataWithEPSInsideRect:")
+	_nSViewSelWritePDFInsideRectToPasteboard                                      = objc.RegisterName("writePDFInsideRect:toPasteboard:")
+	_nSViewSelDataWithPDFInsideRect                                               = objc.RegisterName("dataWithPDFInsideRect:")
+	_nSViewSelPrint                                                               = objc.RegisterName("print:")
+	_nSViewSelKnowsPageRange                                                      = objc.RegisterName("knowsPageRange:")
+	_nSViewSelAdjustPageWidthNewLeftRightLimit                                    = objc.RegisterName("adjustPageWidthNew:left:right:limit:")
+	_nSViewSelAdjustPageHeightNewTopBottomLimit                                   = objc.RegisterName("adjustPageHeightNew:top:bottom:limit:")
+	_nSViewSelRectForPage                                                         = objc.RegisterName("rectForPage:")
+	_nSViewSelLocationOfPrintRect                                                 = objc.RegisterName("locationOfPrintRect:")
+	_nSViewSelDrawPageBorderWithSize                                              = objc.RegisterName("drawPageBorderWithSize:")
+	_nSViewSelDrawSheetBorderWithSize                                             = objc.RegisterName("drawSheetBorderWithSize:")
+	_nSViewSelBeginDocument                                                       = objc.RegisterName("beginDocument")
+	_nSViewSelEndDocument                                                         = objc.RegisterName("endDocument")
+	_nSViewSelBeginPageInRectAtPlacement                                          = objc.RegisterName("beginPageInRect:atPlacement:")
+	_nSViewSelEndPage                                                             = objc.RegisterName("endPage")
+	_nSViewSelHeightAdjustLimit                                                   = objc.RegisterName("heightAdjustLimit")
+	_nSViewSelWidthAdjustLimit                                                    = objc.RegisterName("widthAdjustLimit")
+	_nSViewSelPageHeader                                                          = objc.RegisterName("pageHeader")
+	_nSViewSelPageFooter                                                          = objc.RegisterName("pageFooter")
+	_nSViewSelPrintJobTitle                                                       = objc.RegisterName("printJobTitle")
+	_nSViewSelBeginDraggingSessionWithItemsEventSource                            = objc.RegisterName("beginDraggingSessionWithItems:event:source:")
+	_nSViewSelRegisterForDraggedTypes                                             = objc.RegisterName("registerForDraggedTypes:")
+	_nSViewSelUnregisterDraggedTypes                                              = objc.RegisterName("unregisterDraggedTypes")
+	_nSViewSelRegisteredDraggedTypes                                              = objc.RegisterName("registeredDraggedTypes")
+	_nSViewSelEnterFullScreenModeWithOptions                                      = objc.RegisterName("enterFullScreenMode:withOptions:")
+	_nSViewSelExitFullScreenModeWithOptions                                       = objc.RegisterName("exitFullScreenModeWithOptions:")
+	_nSViewSelIsInFullScreenMode                                                  = objc.RegisterName("isInFullScreenMode")
+	_nSViewSelShowDefinitionForAttributedStringAtPoint                            = objc.RegisterName("showDefinitionForAttributedString:atPoint:")
 	_nSViewSelShowDefinitionForAttributedStringRangeOptionsBaselineOriginProvider = objc.RegisterName("showDefinitionForAttributedString:range:options:baselineOriginProvider:")
-	_nSViewSelIsDrawingFindIndicator = objc.RegisterName("isDrawingFindIndicator")
-	_nSViewSelAddGestureRecognizer = objc.RegisterName("addGestureRecognizer:")
-	_nSViewSelRemoveGestureRecognizer = objc.RegisterName("removeGestureRecognizer:")
-	_nSViewSelGestureRecognizers = objc.RegisterName("gestureRecognizers")
-	_nSViewSelSetGestureRecognizers = objc.RegisterName("setGestureRecognizers:")
-	_nSViewSelAllowedTouchTypes = objc.RegisterName("allowedTouchTypes")
-	_nSViewSelSetAllowedTouchTypes = objc.RegisterName("setAllowedTouchTypes:")
-	_nSViewSelSafeAreaInsets = objc.RegisterName("safeAreaInsets")
-	_nSViewSelAdditionalSafeAreaInsets = objc.RegisterName("additionalSafeAreaInsets")
-	_nSViewSelSetAdditionalSafeAreaInsets = objc.RegisterName("setAdditionalSafeAreaInsets:")
-	_nSViewSelSafeAreaLayoutGuide = objc.RegisterName("safeAreaLayoutGuide")
-	_nSViewSelSafeAreaRect = objc.RegisterName("safeAreaRect")
-	_nSViewSelLayoutMarginsGuide = objc.RegisterName("layoutMarginsGuide")
-	_nSViewSelPrefersCompactControlSizeMetrics = objc.RegisterName("prefersCompactControlSizeMetrics")
-	_nSViewSelSetPrefersCompactControlSizeMetrics = objc.RegisterName("setPrefersCompactControlSizeMetrics:")
-	_nSViewSelAddTrackingArea = objc.RegisterName("addTrackingArea:")
-	_nSViewSelRemoveTrackingArea = objc.RegisterName("removeTrackingArea:")
-	_nSViewSelUpdateTrackingAreas = objc.RegisterName("updateTrackingAreas")
-	_nSViewSelAddCursorRectCursor = objc.RegisterName("addCursorRect:cursor:")
-	_nSViewSelRemoveCursorRectCursor = objc.RegisterName("removeCursorRect:cursor:")
-	_nSViewSelDiscardCursorRects = objc.RegisterName("discardCursorRects")
-	_nSViewSelResetCursorRects = objc.RegisterName("resetCursorRects")
-	_nSViewSelAddTrackingRectOwnerUserDataAssumeInside = objc.RegisterName("addTrackingRect:owner:userData:assumeInside:")
-	_nSViewSelRemoveTrackingRect = objc.RegisterName("removeTrackingRect:")
-	_nSViewSelTrackingAreas = objc.RegisterName("trackingAreas")
-	_nSViewSelDisplayLinkWithTargetSelector = objc.RegisterName("displayLinkWithTarget:selector:")
-	_nSViewSelDragImageAtOffsetEventPasteboardSourceSlideBack = objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:")
-	_nSViewSelDragFileFromRectSlideBackEvent = objc.RegisterName("dragFile:fromRect:slideBack:event:")
-	_nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent = objc.RegisterName("dragPromisedFilesOfTypes:fromRect:source:slideBack:event:")
-	_nSViewSelConvertPointToBase = objc.RegisterName("convertPointToBase:")
-	_nSViewSelConvertPointFromBase = objc.RegisterName("convertPointFromBase:")
-	_nSViewSelConvertSizeToBase = objc.RegisterName("convertSizeToBase:")
-	_nSViewSelConvertSizeFromBase = objc.RegisterName("convertSizeFromBase:")
-	_nSViewSelConvertRectToBase = objc.RegisterName("convertRectToBase:")
-	_nSViewSelConvertRectFromBase = objc.RegisterName("convertRectFromBase:")
-	_nSViewSelShouldDrawColor = objc.RegisterName("shouldDrawColor")
-	_nSViewSelGState = objc.RegisterName("gState")
-	_nSViewSelAllocateGState = objc.RegisterName("allocateGState")
-	_nSViewSelReleaseGState = objc.RegisterName("releaseGState")
-	_nSViewSelSetUpGState = objc.RegisterName("setUpGState")
-	_nSViewSelRenewGState = objc.RegisterName("renewGState")
-	_nSViewSelWritingToolsCoordinator = objc.RegisterName("writingToolsCoordinator")
-	_nSViewSelSetWritingToolsCoordinator = objc.RegisterName("setWritingToolsCoordinator:")
-	_nSViewSelEnclosingMenuItem = objc.RegisterName("enclosingMenuItem")
-	_nSViewSelCandidateListTouchBarItem = objc.RegisterName("candidateListTouchBarItem")
-	_nSViewSelReflectScrolledClipView = objc.RegisterName("reflectScrolledClipView:")
-	_nSViewSelScrollClipViewToPoint = objc.RegisterName("scrollClipView:toPoint:")
-	_nSViewSelAddConstraint = objc.RegisterName("addConstraint:")
-	_nSViewSelAddConstraints = objc.RegisterName("addConstraints:")
-	_nSViewSelRemoveConstraint = objc.RegisterName("removeConstraint:")
-	_nSViewSelRemoveConstraints = objc.RegisterName("removeConstraints:")
-	_nSViewSelLeadingAnchor = objc.RegisterName("leadingAnchor")
-	_nSViewSelTrailingAnchor = objc.RegisterName("trailingAnchor")
-	_nSViewSelLeftAnchor = objc.RegisterName("leftAnchor")
-	_nSViewSelRightAnchor = objc.RegisterName("rightAnchor")
-	_nSViewSelTopAnchor = objc.RegisterName("topAnchor")
-	_nSViewSelBottomAnchor = objc.RegisterName("bottomAnchor")
-	_nSViewSelWidthAnchor = objc.RegisterName("widthAnchor")
-	_nSViewSelHeightAnchor = objc.RegisterName("heightAnchor")
-	_nSViewSelCenterXAnchor = objc.RegisterName("centerXAnchor")
-	_nSViewSelCenterYAnchor = objc.RegisterName("centerYAnchor")
-	_nSViewSelFirstBaselineAnchor = objc.RegisterName("firstBaselineAnchor")
-	_nSViewSelLastBaselineAnchor = objc.RegisterName("lastBaselineAnchor")
-	_nSViewSelConstraints = objc.RegisterName("constraints")
-	_nSViewSelUpdateConstraintsForSubtreeIfNeeded = objc.RegisterName("updateConstraintsForSubtreeIfNeeded")
-	_nSViewSelUpdateConstraints = objc.RegisterName("updateConstraints")
-	_nSViewSelNeedsUpdateConstraints = objc.RegisterName("needsUpdateConstraints")
-	_nSViewSelSetNeedsUpdateConstraints = objc.RegisterName("setNeedsUpdateConstraints:")
-	_nSViewSelTranslatesAutoresizingMaskIntoConstraints = objc.RegisterName("translatesAutoresizingMaskIntoConstraints")
-	_nSViewSelSetTranslatesAutoresizingMaskIntoConstraints = objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:")
-	_nSViewSelRequiresConstraintBasedLayout = objc.RegisterName("requiresConstraintBasedLayout")
-	_nSViewSelAlignmentRectForFrame = objc.RegisterName("alignmentRectForFrame:")
-	_nSViewSelFrameForAlignmentRect = objc.RegisterName("frameForAlignmentRect:")
-	_nSViewSelInvalidateIntrinsicContentSize = objc.RegisterName("invalidateIntrinsicContentSize")
-	_nSViewSelContentHuggingPriorityForOrientation = objc.RegisterName("contentHuggingPriorityForOrientation:")
-	_nSViewSelSetContentHuggingPriorityForOrientation = objc.RegisterName("setContentHuggingPriority:forOrientation:")
-	_nSViewSelContentCompressionResistancePriorityForOrientation = objc.RegisterName("contentCompressionResistancePriorityForOrientation:")
-	_nSViewSelSetContentCompressionResistancePriorityForOrientation = objc.RegisterName("setContentCompressionResistancePriority:forOrientation:")
-	_nSViewSelAlignmentRectInsets = objc.RegisterName("alignmentRectInsets")
-	_nSViewSelFirstBaselineOffsetFromTop = objc.RegisterName("firstBaselineOffsetFromTop")
-	_nSViewSelLastBaselineOffsetFromBottom = objc.RegisterName("lastBaselineOffsetFromBottom")
-	_nSViewSelBaselineOffsetFromBottom = objc.RegisterName("baselineOffsetFromBottom")
-	_nSViewSelIntrinsicContentSize = objc.RegisterName("intrinsicContentSize")
-	_nSViewSelIsHorizontalContentSizeConstraintActive = objc.RegisterName("isHorizontalContentSizeConstraintActive")
-	_nSViewSelSetHorizontalContentSizeConstraintActive = objc.RegisterName("setHorizontalContentSizeConstraintActive:")
-	_nSViewSelIsVerticalContentSizeConstraintActive = objc.RegisterName("isVerticalContentSizeConstraintActive")
-	_nSViewSelSetVerticalContentSizeConstraintActive = objc.RegisterName("setVerticalContentSizeConstraintActive:")
-	_nSViewSelFittingSize = objc.RegisterName("fittingSize")
-	_nSViewSelConstraintsAffectingLayoutForOrientation = objc.RegisterName("constraintsAffectingLayoutForOrientation:")
-	_nSViewSelExerciseAmbiguityInLayout = objc.RegisterName("exerciseAmbiguityInLayout")
-	_nSViewSelHasAmbiguousLayout = objc.RegisterName("hasAmbiguousLayout")
-	_nSViewSelAddLayoutGuide = objc.RegisterName("addLayoutGuide:")
-	_nSViewSelRemoveLayoutGuide = objc.RegisterName("removeLayoutGuide:")
-	_nSViewSelLayoutGuides = objc.RegisterName("layoutGuides")
-	_nSViewSelLayoutGuideForLayoutRegion = objc.RegisterName("layoutGuideForLayoutRegion:")
-	_nSViewSelEdgeInsetsForLayoutRegion = objc.RegisterName("edgeInsetsForLayoutRegion:")
-	_nSViewSelRectForLayoutRegion = objc.RegisterName("rectForLayoutRegion:")
-	_nSViewSelRulerViewShouldMoveMarker = objc.RegisterName("rulerView:shouldMoveMarker:")
-	_nSViewSelRulerViewWillMoveMarkerToLocation = objc.RegisterName("rulerView:willMoveMarker:toLocation:")
-	_nSViewSelRulerViewDidMoveMarker = objc.RegisterName("rulerView:didMoveMarker:")
-	_nSViewSelRulerViewShouldRemoveMarker = objc.RegisterName("rulerView:shouldRemoveMarker:")
-	_nSViewSelRulerViewDidRemoveMarker = objc.RegisterName("rulerView:didRemoveMarker:")
-	_nSViewSelRulerViewShouldAddMarker = objc.RegisterName("rulerView:shouldAddMarker:")
-	_nSViewSelRulerViewWillAddMarkerAtLocation = objc.RegisterName("rulerView:willAddMarker:atLocation:")
-	_nSViewSelRulerViewDidAddMarker = objc.RegisterName("rulerView:didAddMarker:")
-	_nSViewSelRulerViewHandleMouseDown = objc.RegisterName("rulerView:handleMouseDown:")
-	_nSViewSelRulerViewWillSetClientView = objc.RegisterName("rulerView:willSetClientView:")
-	_nSViewSelRulerViewLocationForPoint = objc.RegisterName("rulerView:locationForPoint:")
-	_nSViewSelRulerViewPointForLocation = objc.RegisterName("rulerView:pointForLocation:")
-	_nSViewSelWantsBestResolutionOpenGLSurface = objc.RegisterName("wantsBestResolutionOpenGLSurface")
-	_nSViewSelSetWantsBestResolutionOpenGLSurface = objc.RegisterName("setWantsBestResolutionOpenGLSurface:")
-	_nSViewSelWantsExtendedDynamicRangeOpenGLSurface = objc.RegisterName("wantsExtendedDynamicRangeOpenGLSurface")
-	_nSViewSelSetWantsExtendedDynamicRangeOpenGLSurface = objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:")
-	_nSViewSelPressureConfiguration = objc.RegisterName("pressureConfiguration")
-	_nSViewSelSetPressureConfiguration = objc.RegisterName("setPressureConfiguration:")
+	_nSViewSelIsDrawingFindIndicator                                              = objc.RegisterName("isDrawingFindIndicator")
+	_nSViewSelAddGestureRecognizer                                                = objc.RegisterName("addGestureRecognizer:")
+	_nSViewSelRemoveGestureRecognizer                                             = objc.RegisterName("removeGestureRecognizer:")
+	_nSViewSelGestureRecognizers                                                  = objc.RegisterName("gestureRecognizers")
+	_nSViewSelSetGestureRecognizers                                               = objc.RegisterName("setGestureRecognizers:")
+	_nSViewSelAllowedTouchTypes                                                   = objc.RegisterName("allowedTouchTypes")
+	_nSViewSelSetAllowedTouchTypes                                                = objc.RegisterName("setAllowedTouchTypes:")
+	_nSViewSelSafeAreaInsets                                                      = objc.RegisterName("safeAreaInsets")
+	_nSViewSelAdditionalSafeAreaInsets                                            = objc.RegisterName("additionalSafeAreaInsets")
+	_nSViewSelSetAdditionalSafeAreaInsets                                         = objc.RegisterName("setAdditionalSafeAreaInsets:")
+	_nSViewSelSafeAreaLayoutGuide                                                 = objc.RegisterName("safeAreaLayoutGuide")
+	_nSViewSelSafeAreaRect                                                        = objc.RegisterName("safeAreaRect")
+	_nSViewSelLayoutMarginsGuide                                                  = objc.RegisterName("layoutMarginsGuide")
+	_nSViewSelPrefersCompactControlSizeMetrics                                    = objc.RegisterName("prefersCompactControlSizeMetrics")
+	_nSViewSelSetPrefersCompactControlSizeMetrics                                 = objc.RegisterName("setPrefersCompactControlSizeMetrics:")
+	_nSViewSelAddTrackingArea                                                     = objc.RegisterName("addTrackingArea:")
+	_nSViewSelRemoveTrackingArea                                                  = objc.RegisterName("removeTrackingArea:")
+	_nSViewSelUpdateTrackingAreas                                                 = objc.RegisterName("updateTrackingAreas")
+	_nSViewSelAddCursorRectCursor                                                 = objc.RegisterName("addCursorRect:cursor:")
+	_nSViewSelRemoveCursorRectCursor                                              = objc.RegisterName("removeCursorRect:cursor:")
+	_nSViewSelDiscardCursorRects                                                  = objc.RegisterName("discardCursorRects")
+	_nSViewSelResetCursorRects                                                    = objc.RegisterName("resetCursorRects")
+	_nSViewSelAddTrackingRectOwnerUserDataAssumeInside                            = objc.RegisterName("addTrackingRect:owner:userData:assumeInside:")
+	_nSViewSelRemoveTrackingRect                                                  = objc.RegisterName("removeTrackingRect:")
+	_nSViewSelTrackingAreas                                                       = objc.RegisterName("trackingAreas")
+	_nSViewSelDisplayLinkWithTargetSelector                                       = objc.RegisterName("displayLinkWithTarget:selector:")
+	_nSViewSelDragImageAtOffsetEventPasteboardSourceSlideBack                     = objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:")
+	_nSViewSelDragFileFromRectSlideBackEvent                                      = objc.RegisterName("dragFile:fromRect:slideBack:event:")
+	_nSViewSelDragPromisedFilesOfTypesFromRectSourceSlideBackEvent                = objc.RegisterName("dragPromisedFilesOfTypes:fromRect:source:slideBack:event:")
+	_nSViewSelConvertPointToBase                                                  = objc.RegisterName("convertPointToBase:")
+	_nSViewSelConvertPointFromBase                                                = objc.RegisterName("convertPointFromBase:")
+	_nSViewSelConvertSizeToBase                                                   = objc.RegisterName("convertSizeToBase:")
+	_nSViewSelConvertSizeFromBase                                                 = objc.RegisterName("convertSizeFromBase:")
+	_nSViewSelConvertRectToBase                                                   = objc.RegisterName("convertRectToBase:")
+	_nSViewSelConvertRectFromBase                                                 = objc.RegisterName("convertRectFromBase:")
+	_nSViewSelShouldDrawColor                                                     = objc.RegisterName("shouldDrawColor")
+	_nSViewSelGState                                                              = objc.RegisterName("gState")
+	_nSViewSelAllocateGState                                                      = objc.RegisterName("allocateGState")
+	_nSViewSelReleaseGState                                                       = objc.RegisterName("releaseGState")
+	_nSViewSelSetUpGState                                                         = objc.RegisterName("setUpGState")
+	_nSViewSelRenewGState                                                         = objc.RegisterName("renewGState")
+	_nSViewSelWritingToolsCoordinator                                             = objc.RegisterName("writingToolsCoordinator")
+	_nSViewSelSetWritingToolsCoordinator                                          = objc.RegisterName("setWritingToolsCoordinator:")
+	_nSViewSelEnclosingMenuItem                                                   = objc.RegisterName("enclosingMenuItem")
+	_nSViewSelCandidateListTouchBarItem                                           = objc.RegisterName("candidateListTouchBarItem")
+	_nSViewSelReflectScrolledClipView                                             = objc.RegisterName("reflectScrolledClipView:")
+	_nSViewSelScrollClipViewToPoint                                               = objc.RegisterName("scrollClipView:toPoint:")
+	_nSViewSelAddConstraint                                                       = objc.RegisterName("addConstraint:")
+	_nSViewSelAddConstraints                                                      = objc.RegisterName("addConstraints:")
+	_nSViewSelRemoveConstraint                                                    = objc.RegisterName("removeConstraint:")
+	_nSViewSelRemoveConstraints                                                   = objc.RegisterName("removeConstraints:")
+	_nSViewSelLeadingAnchor                                                       = objc.RegisterName("leadingAnchor")
+	_nSViewSelTrailingAnchor                                                      = objc.RegisterName("trailingAnchor")
+	_nSViewSelLeftAnchor                                                          = objc.RegisterName("leftAnchor")
+	_nSViewSelRightAnchor                                                         = objc.RegisterName("rightAnchor")
+	_nSViewSelTopAnchor                                                           = objc.RegisterName("topAnchor")
+	_nSViewSelBottomAnchor                                                        = objc.RegisterName("bottomAnchor")
+	_nSViewSelWidthAnchor                                                         = objc.RegisterName("widthAnchor")
+	_nSViewSelHeightAnchor                                                        = objc.RegisterName("heightAnchor")
+	_nSViewSelCenterXAnchor                                                       = objc.RegisterName("centerXAnchor")
+	_nSViewSelCenterYAnchor                                                       = objc.RegisterName("centerYAnchor")
+	_nSViewSelFirstBaselineAnchor                                                 = objc.RegisterName("firstBaselineAnchor")
+	_nSViewSelLastBaselineAnchor                                                  = objc.RegisterName("lastBaselineAnchor")
+	_nSViewSelConstraints                                                         = objc.RegisterName("constraints")
+	_nSViewSelUpdateConstraintsForSubtreeIfNeeded                                 = objc.RegisterName("updateConstraintsForSubtreeIfNeeded")
+	_nSViewSelUpdateConstraints                                                   = objc.RegisterName("updateConstraints")
+	_nSViewSelNeedsUpdateConstraints                                              = objc.RegisterName("needsUpdateConstraints")
+	_nSViewSelSetNeedsUpdateConstraints                                           = objc.RegisterName("setNeedsUpdateConstraints:")
+	_nSViewSelTranslatesAutoresizingMaskIntoConstraints                           = objc.RegisterName("translatesAutoresizingMaskIntoConstraints")
+	_nSViewSelSetTranslatesAutoresizingMaskIntoConstraints                        = objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:")
+	_nSViewSelRequiresConstraintBasedLayout                                       = objc.RegisterName("requiresConstraintBasedLayout")
+	_nSViewSelAlignmentRectForFrame                                               = objc.RegisterName("alignmentRectForFrame:")
+	_nSViewSelFrameForAlignmentRect                                               = objc.RegisterName("frameForAlignmentRect:")
+	_nSViewSelInvalidateIntrinsicContentSize                                      = objc.RegisterName("invalidateIntrinsicContentSize")
+	_nSViewSelContentHuggingPriorityForOrientation                                = objc.RegisterName("contentHuggingPriorityForOrientation:")
+	_nSViewSelSetContentHuggingPriorityForOrientation                             = objc.RegisterName("setContentHuggingPriority:forOrientation:")
+	_nSViewSelContentCompressionResistancePriorityForOrientation                  = objc.RegisterName("contentCompressionResistancePriorityForOrientation:")
+	_nSViewSelSetContentCompressionResistancePriorityForOrientation               = objc.RegisterName("setContentCompressionResistancePriority:forOrientation:")
+	_nSViewSelAlignmentRectInsets                                                 = objc.RegisterName("alignmentRectInsets")
+	_nSViewSelFirstBaselineOffsetFromTop                                          = objc.RegisterName("firstBaselineOffsetFromTop")
+	_nSViewSelLastBaselineOffsetFromBottom                                        = objc.RegisterName("lastBaselineOffsetFromBottom")
+	_nSViewSelBaselineOffsetFromBottom                                            = objc.RegisterName("baselineOffsetFromBottom")
+	_nSViewSelIntrinsicContentSize                                                = objc.RegisterName("intrinsicContentSize")
+	_nSViewSelIsHorizontalContentSizeConstraintActive                             = objc.RegisterName("isHorizontalContentSizeConstraintActive")
+	_nSViewSelSetHorizontalContentSizeConstraintActive                            = objc.RegisterName("setHorizontalContentSizeConstraintActive:")
+	_nSViewSelIsVerticalContentSizeConstraintActive                               = objc.RegisterName("isVerticalContentSizeConstraintActive")
+	_nSViewSelSetVerticalContentSizeConstraintActive                              = objc.RegisterName("setVerticalContentSizeConstraintActive:")
+	_nSViewSelFittingSize                                                         = objc.RegisterName("fittingSize")
+	_nSViewSelConstraintsAffectingLayoutForOrientation                            = objc.RegisterName("constraintsAffectingLayoutForOrientation:")
+	_nSViewSelExerciseAmbiguityInLayout                                           = objc.RegisterName("exerciseAmbiguityInLayout")
+	_nSViewSelHasAmbiguousLayout                                                  = objc.RegisterName("hasAmbiguousLayout")
+	_nSViewSelAddLayoutGuide                                                      = objc.RegisterName("addLayoutGuide:")
+	_nSViewSelRemoveLayoutGuide                                                   = objc.RegisterName("removeLayoutGuide:")
+	_nSViewSelLayoutGuides                                                        = objc.RegisterName("layoutGuides")
+	_nSViewSelLayoutGuideForLayoutRegion                                          = objc.RegisterName("layoutGuideForLayoutRegion:")
+	_nSViewSelEdgeInsetsForLayoutRegion                                           = objc.RegisterName("edgeInsetsForLayoutRegion:")
+	_nSViewSelRectForLayoutRegion                                                 = objc.RegisterName("rectForLayoutRegion:")
+	_nSViewSelRulerViewShouldMoveMarker                                           = objc.RegisterName("rulerView:shouldMoveMarker:")
+	_nSViewSelRulerViewWillMoveMarkerToLocation                                   = objc.RegisterName("rulerView:willMoveMarker:toLocation:")
+	_nSViewSelRulerViewDidMoveMarker                                              = objc.RegisterName("rulerView:didMoveMarker:")
+	_nSViewSelRulerViewShouldRemoveMarker                                         = objc.RegisterName("rulerView:shouldRemoveMarker:")
+	_nSViewSelRulerViewDidRemoveMarker                                            = objc.RegisterName("rulerView:didRemoveMarker:")
+	_nSViewSelRulerViewShouldAddMarker                                            = objc.RegisterName("rulerView:shouldAddMarker:")
+	_nSViewSelRulerViewWillAddMarkerAtLocation                                    = objc.RegisterName("rulerView:willAddMarker:atLocation:")
+	_nSViewSelRulerViewDidAddMarker                                               = objc.RegisterName("rulerView:didAddMarker:")
+	_nSViewSelRulerViewHandleMouseDown                                            = objc.RegisterName("rulerView:handleMouseDown:")
+	_nSViewSelRulerViewWillSetClientView                                          = objc.RegisterName("rulerView:willSetClientView:")
+	_nSViewSelRulerViewLocationForPoint                                           = objc.RegisterName("rulerView:locationForPoint:")
+	_nSViewSelRulerViewPointForLocation                                           = objc.RegisterName("rulerView:pointForLocation:")
+	_nSViewSelWantsBestResolutionOpenGLSurface                                    = objc.RegisterName("wantsBestResolutionOpenGLSurface")
+	_nSViewSelSetWantsBestResolutionOpenGLSurface                                 = objc.RegisterName("setWantsBestResolutionOpenGLSurface:")
+	_nSViewSelWantsExtendedDynamicRangeOpenGLSurface                              = objc.RegisterName("wantsExtendedDynamicRangeOpenGLSurface")
+	_nSViewSelSetWantsExtendedDynamicRangeOpenGLSurface                           = objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:")
+	_nSViewSelPressureConfiguration                                               = objc.RegisterName("pressureConfiguration")
+	_nSViewSelSetPressureConfiguration                                            = objc.RegisterName("setPressureConfiguration:")
 )
 
 func NSViewFromID(id objc.ID) *NSView {
@@ -375,13 +375,17 @@ func NSViewFromID(id objc.ID) *NSView {
 
 func (o *NSView) InitWithFrame(frameRect corefoundation.CGRect) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSView) InitWithCoder(coder *foundation.NSCoder) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -392,7 +396,9 @@ func (o *NSView) IsDescendantOf(view *NSView) bool {
 
 func (o *NSView) AncestorSharedWithView(view *NSView) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelAncestorSharedWithView, view.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -666,7 +672,9 @@ func (o *NSView) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect,
 
 func (o *NSView) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *NSBitmapImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBitmapImageRepForCachingDisplayInRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBitmapImageRepFromID(_ret)
 }
 
@@ -708,7 +716,9 @@ func (o *NSView) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CG
 
 func (o *NSView) HitTest(point corefoundation.CGPoint) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHitTest, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -719,7 +729,9 @@ func (o *NSView) MouseInRect(point corefoundation.CGPoint, rect corefoundation.C
 
 func (o *NSView) ViewWithTag(tag int) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelViewWithTag, tag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -735,7 +747,9 @@ func (o *NSView) ShouldDelayWindowOrderingForEvent(event *NSEvent) bool {
 
 func (o *NSView) MakeBackingLayer() *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMakeBackingLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -753,7 +767,9 @@ func (o *NSView) Layout() {
 
 func (o *NSView) MenuForEvent(event *NSEvent) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelMenuForEvent, event.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -812,19 +828,25 @@ func (o *NSView) ViewDidChangeEffectiveAppearance() {
 
 func (o *NSView) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 func (o *NSView) Superview() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSuperview)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSView) Subviews() *foundation.NSArray[*NSView] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSubviews)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSView](_ret)
 }
 
@@ -834,7 +856,9 @@ func (o *NSView) SetSubviews(subviews *foundation.NSArray[*NSView]) {
 
 func (o *NSView) OpaqueAncestor() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelOpaqueAncestor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -978,7 +1002,9 @@ func (o *NSView) SetNeedsDisplay(needsDisplay bool) {
 // Deprecated: Use -[NSView displayRectIgnoringOpacity:inContext:] to draw a view subtree into a graphics context.
 func NSViewFocusView() *NSView {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelFocusView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -1052,7 +1078,9 @@ func (o *NSView) SetWantsLayer(wantsLayer bool) {
 
 func (o *NSView) Layer() *quartzcore.CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CALayerFromID(_ret)
 }
 
@@ -1112,7 +1140,9 @@ func (o *NSView) SetBackgroundFilters(backgroundFilters *foundation.NSArray[*cor
 
 func (o *NSView) CompositingFilter() *coreimage.CIFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCompositingFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIFilterFromID(_ret)
 }
 
@@ -1131,7 +1161,9 @@ func (o *NSView) SetContentFilters(contentFilters *foundation.NSArray[*coreimage
 
 func (o *NSView) Shadow() *NSShadow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelShadow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSShadowFromID(_ret)
 }
 
@@ -1160,19 +1192,25 @@ func (o *NSView) SetPostsBoundsChangedNotifications(postsBoundsChangedNotificati
 // The nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
 func (o *NSView) EnclosingScrollView() *NSScrollView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingScrollView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
 func NSViewDefaultMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSView), _nSViewSelDefaultMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
 func (o *NSView) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -1197,7 +1235,9 @@ func (o *NSView) RectPreservedDuringLiveResize() corefoundation.CGRect {
 
 func (o *NSView) InputContext() *NSTextInputContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelInputContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextInputContextFromID(_ret)
 }
 
@@ -1243,7 +1283,9 @@ func (o *NSView) NoteFocusRingMaskChanged() {
 
 func (o *NSView) NextKeyView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -1253,19 +1295,25 @@ func (o *NSView) SetNextKeyView(nextKeyView *NSView) {
 
 func (o *NSView) PreviousKeyView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSView) NextValidKeyView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelNextValidKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSView) PreviousValidKeyView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPreviousValidKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -1299,7 +1347,9 @@ func (o *NSView) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, past
 
 func (o *NSView) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithEPSInsideRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -1309,7 +1359,9 @@ func (o *NSView) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, past
 
 func (o *NSView) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDataWithPDFInsideRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -1378,26 +1430,34 @@ func (o *NSView) WidthAdjustLimit() float64 {
 
 func (o *NSView) PageHeader() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageHeader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *NSView) PageFooter() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPageFooter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 // Deprecated: This is never invoked and the NSView implementation does nothing
 func (o *NSView) PrintJobTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPrintJobTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSView) BeginDraggingSessionWithItemsEventSource(items *foundation.NSArray[*NSDraggingItem], event *NSEvent, source NSDraggingSource) *NSDraggingSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBeginDraggingSessionWithItemsEventSource, items.Ptr(), event.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDraggingSessionFromID(_ret)
 }
 
@@ -1451,7 +1511,9 @@ func (o *NSView) RemoveGestureRecognizer(gestureRecognizer *NSGestureRecognizer)
 
 func (o *NSView) GestureRecognizers() *foundation.NSArray[*NSGestureRecognizer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelGestureRecognizers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSGestureRecognizer](_ret)
 }
 
@@ -1484,7 +1546,9 @@ func (o *NSView) SetAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation
 
 func (o *NSView) SafeAreaLayoutGuide() *NSLayoutGuide {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelSafeAreaLayoutGuide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutGuideFromID(_ret)
 }
 
@@ -1495,7 +1559,9 @@ func (o *NSView) SafeAreaRect() corefoundation.CGRect {
 
 func (o *NSView) LayoutMarginsGuide() *NSLayoutGuide {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutMarginsGuide)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutGuideFromID(_ret)
 }
 
@@ -1549,14 +1615,18 @@ func (o *NSView) RemoveTrackingRect(tag int) {
 
 func (o *NSView) TrackingAreas() *foundation.NSArray[*NSTrackingArea] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrackingAreas)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTrackingArea](_ret)
 }
 
 // Returns a new display link whose callback will be invoked in-sync with the display the view is on. If the view is hidden, or not on any display, the callback will not be invoked.
 func (o *NSView) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelDisplayLinkWithTargetSelector, target, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartzcore.CADisplayLinkFromID(_ret)
 }
 
@@ -1647,7 +1717,9 @@ func (o *NSView) RenewGState() {
 
 func (o *NSView) WritingToolsCoordinator() *NSWritingToolsCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWritingToolsCoordinator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWritingToolsCoordinatorFromID(_ret)
 }
 
@@ -1657,7 +1729,9 @@ func (o *NSView) SetWritingToolsCoordinator(writingToolsCoordinator *NSWritingTo
 
 func (o *NSView) EnclosingMenuItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelEnclosingMenuItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -1692,79 +1766,105 @@ func (o *NSView) RemoveConstraints(constraints *foundation.NSArray[*NSLayoutCons
 
 func (o *NSView) LeadingAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeadingAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) TrailingAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTrailingAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) LeftAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLeftAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) RightAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelRightAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) TopAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelTopAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) BottomAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelBottomAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) WidthAnchor() *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelWidthAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutDimensionFromID(_ret)
 }
 
 func (o *NSView) HeightAnchor() *NSLayoutDimension {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelHeightAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutDimensionFromID(_ret)
 }
 
 func (o *NSView) CenterXAnchor() *NSLayoutXAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterXAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutXAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) CenterYAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelCenterYAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) FirstBaselineAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelFirstBaselineAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) LastBaselineAnchor() *NSLayoutYAxisAnchor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLastBaselineAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutYAxisAnchorFromID(_ret)
 }
 
 func (o *NSView) Constraints() *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
@@ -1881,7 +1981,9 @@ func (o *NSView) FittingSize() corefoundation.CGSize {
 
 func (o *NSView) ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelConstraintsAffectingLayoutForOrientation, orientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
 
@@ -1904,13 +2006,17 @@ func (o *NSView) RemoveLayoutGuide(guide *NSLayoutGuide) {
 
 func (o *NSView) LayoutGuides() *foundation.NSArray[*NSLayoutGuide] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutGuide](_ret)
 }
 
 func (o *NSView) LayoutGuideForLayoutRegion(layoutRegion *NSViewLayoutRegion) *NSLayoutGuide {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelLayoutGuideForLayoutRegion, layoutRegion.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutGuideFromID(_ret)
 }
 
@@ -2003,11 +2109,12 @@ func (o *NSView) SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicR
 
 func (o *NSView) PressureConfiguration() *NSPressureConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSViewSelPressureConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPressureConfigurationFromID(_ret)
 }
 
 func (o *NSView) SetPressureConfiguration(pressureConfiguration *NSPressureConfiguration) {
 	o.Ptr().Send(_nSViewSelSetPressureConfiguration, pressureConfiguration.Ptr())
 }
-

@@ -47,4 +47,3 @@ type WheelchairUseObjectable interface {
 }
 
 var _ WheelchairUseObjectable = (*WheelchairUseObject)(nil)
-

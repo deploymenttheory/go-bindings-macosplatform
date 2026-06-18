@@ -18,10 +18,10 @@ type MTROperationalStateClusterOperationalCommandResponseParams struct {
 }
 
 var (
-	_clsMTROperationalStateClusterOperationalCommandResponseParams = _objcClass("MTROperationalStateClusterOperationalCommandResponseParams")
+	_clsMTROperationalStateClusterOperationalCommandResponseParams                           = _objcClass("MTROperationalStateClusterOperationalCommandResponseParams")
 	_mTROperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState = objc.RegisterName("commandResponseState")
-	_mTROperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState = objc.RegisterName("setCommandResponseState:")
+	_mTROperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState       = objc.RegisterName("commandResponseState")
+	_mTROperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState    = objc.RegisterName("setCommandResponseState:")
 )
 
 func MTROperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID) *MTROperationalStateClusterOperationalCommandResponseParams {
@@ -38,7 +38,9 @@ func MTROperationalStateClusterOperationalCommandResponseParamsFromID(id objc.ID
 func (o *MTROperationalStateClusterOperationalCommandResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalStateClusterOperationalCommandResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTROperationalStateClusterOperationalCommandResponseParams) InitWithRes
 
 func (o *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalStateClusterOperationalCommandResponseParamsSelCommandResponseState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROperationalStateClusterErrorStateStructFromID(_ret)
 }
 
 func (o *MTROperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) {
 	o.Ptr().Send(_mTROperationalStateClusterOperationalCommandResponseParamsSelSetCommandResponseState, commandResponseState.Ptr())
 }
-

@@ -118,7 +118,9 @@ func (x *RecurringPaymentSummaryItem) SetEndDate(endDate *foundation.NSDate) {
 	x.inner.SetEndDate(endDate)
 }
 
-func (x *RecurringPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+func (x *RecurringPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
+	return &x.inner.PKPaymentSummaryItem
+}
 
 // RecurringPaymentSummaryItemable is the interface implemented by [RecurringPaymentSummaryItem], for mocking and DI.
 type RecurringPaymentSummaryItemable interface {
@@ -141,4 +143,3 @@ type RecurringPaymentSummaryItemable interface {
 }
 
 var _ RecurringPaymentSummaryItemable = (*RecurringPaymentSummaryItem)(nil)
-

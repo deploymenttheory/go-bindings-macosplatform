@@ -16,24 +16,24 @@ type MTRDeviceEnergyManagementClusterForecastStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterForecastStruct = _objcClass("MTRDeviceEnergyManagementClusterForecastStruct")
-	_mTRDeviceEnergyManagementClusterForecastStructSelForecastID = objc.RegisterName("forecastID")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetForecastID = objc.RegisterName("setForecastID:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelActiveSlotNumber = objc.RegisterName("activeSlotNumber")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetActiveSlotNumber = objc.RegisterName("setActiveSlotNumber:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelStartTime = objc.RegisterName("startTime")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelEndTime = objc.RegisterName("endTime")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetEndTime = objc.RegisterName("setEndTime:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelEarliestStartTime = objc.RegisterName("earliestStartTime")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetEarliestStartTime = objc.RegisterName("setEarliestStartTime:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelLatestEndTime = objc.RegisterName("latestEndTime")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetLatestEndTime = objc.RegisterName("setLatestEndTime:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelIsPausable = objc.RegisterName("isPausable")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetIsPausable = objc.RegisterName("setIsPausable:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSlots = objc.RegisterName("slots")
-	_mTRDeviceEnergyManagementClusterForecastStructSelSetSlots = objc.RegisterName("setSlots:")
-	_mTRDeviceEnergyManagementClusterForecastStructSelForecastUpdateReason = objc.RegisterName("forecastUpdateReason")
+	_clsMTRDeviceEnergyManagementClusterForecastStruct                        = _objcClass("MTRDeviceEnergyManagementClusterForecastStruct")
+	_mTRDeviceEnergyManagementClusterForecastStructSelForecastID              = objc.RegisterName("forecastID")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetForecastID           = objc.RegisterName("setForecastID:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelActiveSlotNumber        = objc.RegisterName("activeSlotNumber")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetActiveSlotNumber     = objc.RegisterName("setActiveSlotNumber:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelStartTime               = objc.RegisterName("startTime")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetStartTime            = objc.RegisterName("setStartTime:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelEndTime                 = objc.RegisterName("endTime")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetEndTime              = objc.RegisterName("setEndTime:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelEarliestStartTime       = objc.RegisterName("earliestStartTime")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetEarliestStartTime    = objc.RegisterName("setEarliestStartTime:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelLatestEndTime           = objc.RegisterName("latestEndTime")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetLatestEndTime        = objc.RegisterName("setLatestEndTime:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelIsPausable              = objc.RegisterName("isPausable")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetIsPausable           = objc.RegisterName("setIsPausable:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSlots                   = objc.RegisterName("slots")
+	_mTRDeviceEnergyManagementClusterForecastStructSelSetSlots                = objc.RegisterName("setSlots:")
+	_mTRDeviceEnergyManagementClusterForecastStructSelForecastUpdateReason    = objc.RegisterName("forecastUpdateReason")
 	_mTRDeviceEnergyManagementClusterForecastStructSelSetForecastUpdateReason = objc.RegisterName("setForecastUpdateReason:")
 )
 
@@ -49,7 +49,9 @@ func MTRDeviceEnergyManagementClusterForecastStructFromID(id objc.ID) *MTRDevice
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelForecastID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastID(forecastI
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelActiveSlotNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetActiveSlotNumber(act
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetStartTime(startTime 
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetEndTime(endTime *fou
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelEarliestStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetEarliestStartTime(ea
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelLatestEndTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetLatestEndTime(latest
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelIsPausable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -128,11 +142,12 @@ func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots *foundat
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterForecastStructSelForecastUpdateReason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterForecastStructSelSetForecastUpdateReason, forecastUpdateReason.Ptr())
 }
-

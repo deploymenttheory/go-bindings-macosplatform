@@ -18,17 +18,17 @@ type AVSpatialVideoConfiguration struct {
 }
 
 var (
-	_clsAVSpatialVideoConfiguration = _objcClass("AVSpatialVideoConfiguration")
-	_aVSpatialVideoConfigurationSelInit = objc.RegisterName("init")
-	_aVSpatialVideoConfigurationSelInitWithFormatDescription = objc.RegisterName("initWithFormatDescription:")
-	_aVSpatialVideoConfigurationSelCameraCalibrationDataLensCollection = objc.RegisterName("cameraCalibrationDataLensCollection")
+	_clsAVSpatialVideoConfiguration                                       = _objcClass("AVSpatialVideoConfiguration")
+	_aVSpatialVideoConfigurationSelInit                                   = objc.RegisterName("init")
+	_aVSpatialVideoConfigurationSelInitWithFormatDescription              = objc.RegisterName("initWithFormatDescription:")
+	_aVSpatialVideoConfigurationSelCameraCalibrationDataLensCollection    = objc.RegisterName("cameraCalibrationDataLensCollection")
 	_aVSpatialVideoConfigurationSelSetCameraCalibrationDataLensCollection = objc.RegisterName("setCameraCalibrationDataLensCollection:")
-	_aVSpatialVideoConfigurationSelHorizontalFieldOfView = objc.RegisterName("horizontalFieldOfView")
-	_aVSpatialVideoConfigurationSelSetHorizontalFieldOfView = objc.RegisterName("setHorizontalFieldOfView:")
-	_aVSpatialVideoConfigurationSelCameraSystemBaseline = objc.RegisterName("cameraSystemBaseline")
-	_aVSpatialVideoConfigurationSelSetCameraSystemBaseline = objc.RegisterName("setCameraSystemBaseline:")
-	_aVSpatialVideoConfigurationSelDisparityAdjustment = objc.RegisterName("disparityAdjustment")
-	_aVSpatialVideoConfigurationSelSetDisparityAdjustment = objc.RegisterName("setDisparityAdjustment:")
+	_aVSpatialVideoConfigurationSelHorizontalFieldOfView                  = objc.RegisterName("horizontalFieldOfView")
+	_aVSpatialVideoConfigurationSelSetHorizontalFieldOfView               = objc.RegisterName("setHorizontalFieldOfView:")
+	_aVSpatialVideoConfigurationSelCameraSystemBaseline                   = objc.RegisterName("cameraSystemBaseline")
+	_aVSpatialVideoConfigurationSelSetCameraSystemBaseline                = objc.RegisterName("setCameraSystemBaseline:")
+	_aVSpatialVideoConfigurationSelDisparityAdjustment                    = objc.RegisterName("disparityAdjustment")
+	_aVSpatialVideoConfigurationSelSetDisparityAdjustment                 = objc.RegisterName("setDisparityAdjustment:")
 )
 
 func AVSpatialVideoConfigurationFromID(id objc.ID) *AVSpatialVideoConfiguration {
@@ -43,14 +43,18 @@ func AVSpatialVideoConfigurationFromID(id objc.ID) *AVSpatialVideoConfiguration 
 
 func (o *AVSpatialVideoConfiguration) Init() *AVSpatialVideoConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpatialVideoConfigurationFromID(_ret)
 }
 
 // Initializes an AVSpatialVideoConfiguration with a format description. The format description is not stored. - Parameter formatDescription: Format description to use to initialize the AVSpatialVideoConfiguration. - Returns: An instance of AVSpatialVideoConfiguration
 func (o *AVSpatialVideoConfiguration) InitWithFormatDescription(formatDescription unsafe.Pointer) *AVSpatialVideoConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelInitWithFormatDescription, formatDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpatialVideoConfigurationFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *AVSpatialVideoConfiguration) SetCameraCalibrationDataLensCollection(cam
 // Specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
 func (o *AVSpatialVideoConfiguration) HorizontalFieldOfView() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelHorizontalFieldOfView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -78,7 +84,9 @@ func (o *AVSpatialVideoConfiguration) SetHorizontalFieldOfView(horizontalFieldOf
 // Specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
 func (o *AVSpatialVideoConfiguration) CameraSystemBaseline() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelCameraSystemBaseline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,11 +97,12 @@ func (o *AVSpatialVideoConfiguration) SetCameraSystemBaseline(cameraSystemBaseli
 // Specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
 func (o *AVSpatialVideoConfiguration) DisparityAdjustment() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpatialVideoConfigurationSelDisparityAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *AVSpatialVideoConfiguration) SetDisparityAdjustment(disparityAdjustment *foundation.NSNumber) {
 	o.Ptr().Send(_aVSpatialVideoConfigurationSelSetDisparityAdjustment, disparityAdjustment.Ptr())
 }
-

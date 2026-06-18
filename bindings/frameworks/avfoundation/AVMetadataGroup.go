@@ -16,10 +16,10 @@ type AVMetadataGroup struct {
 }
 
 var (
-	_clsAVMetadataGroup = _objcClass("AVMetadataGroup")
-	_aVMetadataGroupSelItems = objc.RegisterName("items")
+	_clsAVMetadataGroup                 = _objcClass("AVMetadataGroup")
+	_aVMetadataGroupSelItems            = objc.RegisterName("items")
 	_aVMetadataGroupSelClassifyingLabel = objc.RegisterName("classifyingLabel")
-	_aVMetadataGroupSelUniqueID = objc.RegisterName("uniqueID")
+	_aVMetadataGroupSelUniqueID         = objc.RegisterName("uniqueID")
 )
 
 func AVMetadataGroupFromID(id objc.ID) *AVMetadataGroup {
@@ -34,19 +34,24 @@ func AVMetadataGroupFromID(id objc.ID) *AVMetadataGroup {
 
 func (o *AVMetadataGroup) Items() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataGroupSelItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 func (o *AVMetadataGroup) ClassifyingLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataGroupSelClassifyingLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVMetadataGroup) UniqueID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetadataGroupSelUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

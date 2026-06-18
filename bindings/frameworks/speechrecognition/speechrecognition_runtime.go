@@ -14,8 +14,8 @@ import (
 
 var (
 	_speechrecognitionLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce             sync.Once
+	_failedSymbols        = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,39 +48,63 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DisposeSRCallBackUPP", func() { purego.RegisterLibFunc(&_fnDisposeSRCallBackUPP, _speechrecognitionLib, "DisposeSRCallBackUPP") })
+	_register("DisposeSRCallBackUPP", func() {
+		purego.RegisterLibFunc(&_fnDisposeSRCallBackUPP, _speechrecognitionLib, "DisposeSRCallBackUPP")
+	})
 	_register("InvokeSRCallBackUPP", func() { purego.RegisterLibFunc(&_fnInvokeSRCallBackUPP, _speechrecognitionLib, "InvokeSRCallBackUPP") })
 	_register("NewSRCallBackUPP", func() { purego.RegisterLibFunc(&_fnNewSRCallBackUPP, _speechrecognitionLib, "NewSRCallBackUPP") })
 	_register("SRAddLanguageObject", func() { purego.RegisterLibFunc(&_fnSRAddLanguageObject, _speechrecognitionLib, "SRAddLanguageObject") })
 	_register("SRAddText", func() { purego.RegisterLibFunc(&_fnSRAddText, _speechrecognitionLib, "SRAddText") })
 	_register("SRCancelRecognition", func() { purego.RegisterLibFunc(&_fnSRCancelRecognition, _speechrecognitionLib, "SRCancelRecognition") })
-	_register("SRChangeLanguageObject", func() { purego.RegisterLibFunc(&_fnSRChangeLanguageObject, _speechrecognitionLib, "SRChangeLanguageObject") })
-	_register("SRCloseRecognitionSystem", func() { purego.RegisterLibFunc(&_fnSRCloseRecognitionSystem, _speechrecognitionLib, "SRCloseRecognitionSystem") })
-	_register("SRContinueRecognition", func() { purego.RegisterLibFunc(&_fnSRContinueRecognition, _speechrecognitionLib, "SRContinueRecognition") })
+	_register("SRChangeLanguageObject", func() {
+		purego.RegisterLibFunc(&_fnSRChangeLanguageObject, _speechrecognitionLib, "SRChangeLanguageObject")
+	})
+	_register("SRCloseRecognitionSystem", func() {
+		purego.RegisterLibFunc(&_fnSRCloseRecognitionSystem, _speechrecognitionLib, "SRCloseRecognitionSystem")
+	})
+	_register("SRContinueRecognition", func() {
+		purego.RegisterLibFunc(&_fnSRContinueRecognition, _speechrecognitionLib, "SRContinueRecognition")
+	})
 	_register("SRCountItems", func() { purego.RegisterLibFunc(&_fnSRCountItems, _speechrecognitionLib, "SRCountItems") })
-	_register("SRDrawRecognizedText", func() { purego.RegisterLibFunc(&_fnSRDrawRecognizedText, _speechrecognitionLib, "SRDrawRecognizedText") })
+	_register("SRDrawRecognizedText", func() {
+		purego.RegisterLibFunc(&_fnSRDrawRecognizedText, _speechrecognitionLib, "SRDrawRecognizedText")
+	})
 	_register("SRDrawText", func() { purego.RegisterLibFunc(&_fnSRDrawText, _speechrecognitionLib, "SRDrawText") })
-	_register("SREmptyLanguageObject", func() { purego.RegisterLibFunc(&_fnSREmptyLanguageObject, _speechrecognitionLib, "SREmptyLanguageObject") })
+	_register("SREmptyLanguageObject", func() {
+		purego.RegisterLibFunc(&_fnSREmptyLanguageObject, _speechrecognitionLib, "SREmptyLanguageObject")
+	})
 	_register("SRGetIndexedItem", func() { purego.RegisterLibFunc(&_fnSRGetIndexedItem, _speechrecognitionLib, "SRGetIndexedItem") })
 	_register("SRGetLanguageModel", func() { purego.RegisterLibFunc(&_fnSRGetLanguageModel, _speechrecognitionLib, "SRGetLanguageModel") })
 	_register("SRGetProperty", func() { purego.RegisterLibFunc(&_fnSRGetProperty, _speechrecognitionLib, "SRGetProperty") })
 	_register("SRGetReference", func() { purego.RegisterLibFunc(&_fnSRGetReference, _speechrecognitionLib, "SRGetReference") })
 	_register("SRIdle", func() { purego.RegisterLibFunc(&_fnSRIdle, _speechrecognitionLib, "SRIdle") })
 	_register("SRNewLanguageModel", func() { purego.RegisterLibFunc(&_fnSRNewLanguageModel, _speechrecognitionLib, "SRNewLanguageModel") })
-	_register("SRNewLanguageObjectFromDataFile", func() { purego.RegisterLibFunc(&_fnSRNewLanguageObjectFromDataFile, _speechrecognitionLib, "SRNewLanguageObjectFromDataFile") })
-	_register("SRNewLanguageObjectFromHandle", func() { purego.RegisterLibFunc(&_fnSRNewLanguageObjectFromHandle, _speechrecognitionLib, "SRNewLanguageObjectFromHandle") })
+	_register("SRNewLanguageObjectFromDataFile", func() {
+		purego.RegisterLibFunc(&_fnSRNewLanguageObjectFromDataFile, _speechrecognitionLib, "SRNewLanguageObjectFromDataFile")
+	})
+	_register("SRNewLanguageObjectFromHandle", func() {
+		purego.RegisterLibFunc(&_fnSRNewLanguageObjectFromHandle, _speechrecognitionLib, "SRNewLanguageObjectFromHandle")
+	})
 	_register("SRNewPath", func() { purego.RegisterLibFunc(&_fnSRNewPath, _speechrecognitionLib, "SRNewPath") })
 	_register("SRNewPhrase", func() { purego.RegisterLibFunc(&_fnSRNewPhrase, _speechrecognitionLib, "SRNewPhrase") })
 	_register("SRNewRecognizer", func() { purego.RegisterLibFunc(&_fnSRNewRecognizer, _speechrecognitionLib, "SRNewRecognizer") })
 	_register("SRNewWord", func() { purego.RegisterLibFunc(&_fnSRNewWord, _speechrecognitionLib, "SRNewWord") })
-	_register("SROpenRecognitionSystem", func() { purego.RegisterLibFunc(&_fnSROpenRecognitionSystem, _speechrecognitionLib, "SROpenRecognitionSystem") })
+	_register("SROpenRecognitionSystem", func() {
+		purego.RegisterLibFunc(&_fnSROpenRecognitionSystem, _speechrecognitionLib, "SROpenRecognitionSystem")
+	})
 	_register("SRProcessBegin", func() { purego.RegisterLibFunc(&_fnSRProcessBegin, _speechrecognitionLib, "SRProcessBegin") })
 	_register("SRProcessEnd", func() { purego.RegisterLibFunc(&_fnSRProcessEnd, _speechrecognitionLib, "SRProcessEnd") })
-	_register("SRPutLanguageObjectIntoDataFile", func() { purego.RegisterLibFunc(&_fnSRPutLanguageObjectIntoDataFile, _speechrecognitionLib, "SRPutLanguageObjectIntoDataFile") })
-	_register("SRPutLanguageObjectIntoHandle", func() { purego.RegisterLibFunc(&_fnSRPutLanguageObjectIntoHandle, _speechrecognitionLib, "SRPutLanguageObjectIntoHandle") })
+	_register("SRPutLanguageObjectIntoDataFile", func() {
+		purego.RegisterLibFunc(&_fnSRPutLanguageObjectIntoDataFile, _speechrecognitionLib, "SRPutLanguageObjectIntoDataFile")
+	})
+	_register("SRPutLanguageObjectIntoHandle", func() {
+		purego.RegisterLibFunc(&_fnSRPutLanguageObjectIntoHandle, _speechrecognitionLib, "SRPutLanguageObjectIntoHandle")
+	})
 	_register("SRReleaseObject", func() { purego.RegisterLibFunc(&_fnSRReleaseObject, _speechrecognitionLib, "SRReleaseObject") })
 	_register("SRRemoveIndexedItem", func() { purego.RegisterLibFunc(&_fnSRRemoveIndexedItem, _speechrecognitionLib, "SRRemoveIndexedItem") })
-	_register("SRRemoveLanguageObject", func() { purego.RegisterLibFunc(&_fnSRRemoveLanguageObject, _speechrecognitionLib, "SRRemoveLanguageObject") })
+	_register("SRRemoveLanguageObject", func() {
+		purego.RegisterLibFunc(&_fnSRRemoveLanguageObject, _speechrecognitionLib, "SRRemoveLanguageObject")
+	})
 	_register("SRSetIndexedItem", func() { purego.RegisterLibFunc(&_fnSRSetIndexedItem, _speechrecognitionLib, "SRSetIndexedItem") })
 	_register("SRSetLanguageModel", func() { purego.RegisterLibFunc(&_fnSRSetLanguageModel, _speechrecognitionLib, "SRSetLanguageModel") })
 	_register("SRSetProperty", func() { purego.RegisterLibFunc(&_fnSRSetProperty, _speechrecognitionLib, "SRSetProperty") })

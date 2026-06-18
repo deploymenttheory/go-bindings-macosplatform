@@ -17,46 +17,46 @@ type NSTabView struct {
 }
 
 var (
-	_clsNSTabView = _objcClass("NSTabView")
-	_nSTabViewSelSelectTabViewItem = objc.RegisterName("selectTabViewItem:")
-	_nSTabViewSelSelectTabViewItemAtIndex = objc.RegisterName("selectTabViewItemAtIndex:")
-	_nSTabViewSelSelectTabViewItemWithIdentifier = objc.RegisterName("selectTabViewItemWithIdentifier:")
+	_clsNSTabView                                  = _objcClass("NSTabView")
+	_nSTabViewSelSelectTabViewItem                 = objc.RegisterName("selectTabViewItem:")
+	_nSTabViewSelSelectTabViewItemAtIndex          = objc.RegisterName("selectTabViewItemAtIndex:")
+	_nSTabViewSelSelectTabViewItemWithIdentifier   = objc.RegisterName("selectTabViewItemWithIdentifier:")
 	_nSTabViewSelTakeSelectedTabViewItemFromSender = objc.RegisterName("takeSelectedTabViewItemFromSender:")
-	_nSTabViewSelSelectFirstTabViewItem = objc.RegisterName("selectFirstTabViewItem:")
-	_nSTabViewSelSelectLastTabViewItem = objc.RegisterName("selectLastTabViewItem:")
-	_nSTabViewSelSelectNextTabViewItem = objc.RegisterName("selectNextTabViewItem:")
-	_nSTabViewSelSelectPreviousTabViewItem = objc.RegisterName("selectPreviousTabViewItem:")
-	_nSTabViewSelAddTabViewItem = objc.RegisterName("addTabViewItem:")
-	_nSTabViewSelInsertTabViewItemAtIndex = objc.RegisterName("insertTabViewItem:atIndex:")
-	_nSTabViewSelRemoveTabViewItem = objc.RegisterName("removeTabViewItem:")
-	_nSTabViewSelTabViewItemAtPoint = objc.RegisterName("tabViewItemAtPoint:")
-	_nSTabViewSelIndexOfTabViewItem = objc.RegisterName("indexOfTabViewItem:")
-	_nSTabViewSelTabViewItemAtIndex = objc.RegisterName("tabViewItemAtIndex:")
-	_nSTabViewSelIndexOfTabViewItemWithIdentifier = objc.RegisterName("indexOfTabViewItemWithIdentifier:")
-	_nSTabViewSelSelectedTabViewItem = objc.RegisterName("selectedTabViewItem")
-	_nSTabViewSelFont = objc.RegisterName("font")
-	_nSTabViewSelSetFont = objc.RegisterName("setFont:")
-	_nSTabViewSelTabViewType = objc.RegisterName("tabViewType")
-	_nSTabViewSelSetTabViewType = objc.RegisterName("setTabViewType:")
-	_nSTabViewSelTabPosition = objc.RegisterName("tabPosition")
-	_nSTabViewSelSetTabPosition = objc.RegisterName("setTabPosition:")
-	_nSTabViewSelTabViewBorderType = objc.RegisterName("tabViewBorderType")
-	_nSTabViewSelSetTabViewBorderType = objc.RegisterName("setTabViewBorderType:")
-	_nSTabViewSelTabViewItems = objc.RegisterName("tabViewItems")
-	_nSTabViewSelSetTabViewItems = objc.RegisterName("setTabViewItems:")
-	_nSTabViewSelAllowsTruncatedLabels = objc.RegisterName("allowsTruncatedLabels")
-	_nSTabViewSelSetAllowsTruncatedLabels = objc.RegisterName("setAllowsTruncatedLabels:")
-	_nSTabViewSelMinimumSize = objc.RegisterName("minimumSize")
-	_nSTabViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSTabViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSTabViewSelControlSize = objc.RegisterName("controlSize")
-	_nSTabViewSelSetControlSize = objc.RegisterName("setControlSize:")
-	_nSTabViewSelDelegate = objc.RegisterName("delegate")
-	_nSTabViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSTabViewSelContentRect = objc.RegisterName("contentRect")
-	_nSTabViewSelNumberOfTabViewItems = objc.RegisterName("numberOfTabViewItems")
-	_nSTabViewSelControlTint = objc.RegisterName("controlTint")
-	_nSTabViewSelSetControlTint = objc.RegisterName("setControlTint:")
+	_nSTabViewSelSelectFirstTabViewItem            = objc.RegisterName("selectFirstTabViewItem:")
+	_nSTabViewSelSelectLastTabViewItem             = objc.RegisterName("selectLastTabViewItem:")
+	_nSTabViewSelSelectNextTabViewItem             = objc.RegisterName("selectNextTabViewItem:")
+	_nSTabViewSelSelectPreviousTabViewItem         = objc.RegisterName("selectPreviousTabViewItem:")
+	_nSTabViewSelAddTabViewItem                    = objc.RegisterName("addTabViewItem:")
+	_nSTabViewSelInsertTabViewItemAtIndex          = objc.RegisterName("insertTabViewItem:atIndex:")
+	_nSTabViewSelRemoveTabViewItem                 = objc.RegisterName("removeTabViewItem:")
+	_nSTabViewSelTabViewItemAtPoint                = objc.RegisterName("tabViewItemAtPoint:")
+	_nSTabViewSelIndexOfTabViewItem                = objc.RegisterName("indexOfTabViewItem:")
+	_nSTabViewSelTabViewItemAtIndex                = objc.RegisterName("tabViewItemAtIndex:")
+	_nSTabViewSelIndexOfTabViewItemWithIdentifier  = objc.RegisterName("indexOfTabViewItemWithIdentifier:")
+	_nSTabViewSelSelectedTabViewItem               = objc.RegisterName("selectedTabViewItem")
+	_nSTabViewSelFont                              = objc.RegisterName("font")
+	_nSTabViewSelSetFont                           = objc.RegisterName("setFont:")
+	_nSTabViewSelTabViewType                       = objc.RegisterName("tabViewType")
+	_nSTabViewSelSetTabViewType                    = objc.RegisterName("setTabViewType:")
+	_nSTabViewSelTabPosition                       = objc.RegisterName("tabPosition")
+	_nSTabViewSelSetTabPosition                    = objc.RegisterName("setTabPosition:")
+	_nSTabViewSelTabViewBorderType                 = objc.RegisterName("tabViewBorderType")
+	_nSTabViewSelSetTabViewBorderType              = objc.RegisterName("setTabViewBorderType:")
+	_nSTabViewSelTabViewItems                      = objc.RegisterName("tabViewItems")
+	_nSTabViewSelSetTabViewItems                   = objc.RegisterName("setTabViewItems:")
+	_nSTabViewSelAllowsTruncatedLabels             = objc.RegisterName("allowsTruncatedLabels")
+	_nSTabViewSelSetAllowsTruncatedLabels          = objc.RegisterName("setAllowsTruncatedLabels:")
+	_nSTabViewSelMinimumSize                       = objc.RegisterName("minimumSize")
+	_nSTabViewSelDrawsBackground                   = objc.RegisterName("drawsBackground")
+	_nSTabViewSelSetDrawsBackground                = objc.RegisterName("setDrawsBackground:")
+	_nSTabViewSelControlSize                       = objc.RegisterName("controlSize")
+	_nSTabViewSelSetControlSize                    = objc.RegisterName("setControlSize:")
+	_nSTabViewSelDelegate                          = objc.RegisterName("delegate")
+	_nSTabViewSelSetDelegate                       = objc.RegisterName("setDelegate:")
+	_nSTabViewSelContentRect                       = objc.RegisterName("contentRect")
+	_nSTabViewSelNumberOfTabViewItems              = objc.RegisterName("numberOfTabViewItems")
+	_nSTabViewSelControlTint                       = objc.RegisterName("controlTint")
+	_nSTabViewSelSetControlTint                    = objc.RegisterName("setControlTint:")
 )
 
 func NSTabViewFromID(id objc.ID) *NSTabView {
@@ -115,7 +115,9 @@ func (o *NSTabView) RemoveTabViewItem(tabViewItem *NSTabViewItem) {
 
 func (o *NSTabView) TabViewItemAtPoint(point corefoundation.CGPoint) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
@@ -126,7 +128,9 @@ func (o *NSTabView) IndexOfTabViewItem(tabViewItem *NSTabViewItem) int {
 
 func (o *NSTabView) TabViewItemAtIndex(index int) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
@@ -137,13 +141,17 @@ func (o *NSTabView) IndexOfTabViewItemWithIdentifier(identifier objc.ID) int {
 
 func (o *NSTabView) SelectedTabViewItem() *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelSelectedTabViewItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
 func (o *NSTabView) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -180,7 +188,9 @@ func (o *NSTabView) SetTabViewBorderType(tabViewBorderType NSTabViewBorderType) 
 
 func (o *NSTabView) TabViewItems() *foundation.NSArray[*NSTabViewItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewSelTabViewItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTabViewItem](_ret)
 }
 
@@ -249,4 +259,3 @@ func (o *NSTabView) ControlTint() NSControlTint {
 func (o *NSTabView) SetControlTint(controlTint NSControlTint) {
 	o.Ptr().Send(_nSTabViewSelSetControlTint, controlTint)
 }
-

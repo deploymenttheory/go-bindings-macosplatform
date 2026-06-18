@@ -19,9 +19,9 @@ type MPSMatrixCopyDescriptor struct {
 }
 
 var (
-	_clsMPSMatrixCopyDescriptor = _objcClass("MPSMatrixCopyDescriptor")
-	_mPSMatrixCopyDescriptorSelDescriptorWithSourceMatrixDestinationMatrixOffsets = objc.RegisterName("descriptorWithSourceMatrix:destinationMatrix:offsets:")
-	_mPSMatrixCopyDescriptorSelInitWithDeviceCount = objc.RegisterName("initWithDevice:count:")
+	_clsMPSMatrixCopyDescriptor                                                            = _objcClass("MPSMatrixCopyDescriptor")
+	_mPSMatrixCopyDescriptorSelDescriptorWithSourceMatrixDestinationMatrixOffsets          = objc.RegisterName("descriptorWithSourceMatrix:destinationMatrix:offsets:")
+	_mPSMatrixCopyDescriptorSelInitWithDeviceCount                                         = objc.RegisterName("initWithDevice:count:")
 	_mPSMatrixCopyDescriptorSelSetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets = objc.RegisterName("setCopyOperationAtIndex:sourceMatrix:destinationMatrix:offsets:")
 	_mPSMatrixCopyDescriptorSelInitWithSourceMatricesDestinationMatricesOffsetVectorOffset = objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:")
 )
@@ -39,14 +39,18 @@ func MPSMatrixCopyDescriptorFromID(id objc.ID) *MPSMatrixCopyDescriptor {
 // @abstract   convenience allocator for single copies
 func MPSMatrixCopyDescriptorDescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets) *MPSMatrixCopyDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSMatrixCopyDescriptor), _mPSMatrixCopyDescriptorSelDescriptorWithSourceMatrixDestinationMatrixOffsets, sourceMatrix.Ptr(), destinationMatrix.Ptr(), offsets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixCopyDescriptorFromID(_ret)
 }
 
 // @abstract       initialize a MPSMatrixCopyDescriptor with default values. @discussion     Use -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets to initialize. All indices must be initialized before use. @param          device    The device on which the copy will be performed @param          count     The number of copy operations the object will encode @return     A MPSMatrixCopyDescriptor. It still needs to be initialized with -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets
 func (o *MPSMatrixCopyDescriptor) InitWithDeviceCount(device metal.MTLDevice, count uint) *MPSMatrixCopyDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopyDescriptorSelInitWithDeviceCount, device, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixCopyDescriptorFromID(_ret)
 }
 
@@ -58,7 +62,8 @@ func (o *MPSMatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestination
 // @abstract       Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU @discussion     Use this method when the offsets needed are coming from GPU based computation. @param          sourceMatrices      A list of matrices from which the matrix data is read @param          destinationMatrices A list of matrices to which to write the data. The count must match the number of source matrices. @param          offsets         A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixCopyOffsets. @param          byteOffset      A byte offset into the offsets vector where the data starts in 'offsets'. This value must be a multiple of 16. @result         A valid MPSMatrixCopyDescriptor to represent the list of copy operations
 func (o *MPSMatrixCopyDescriptor) InitWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], offsets *mpscore.MPSVector, byteOffset uint) *MPSMatrixCopyDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixCopyDescriptorSelInitWithSourceMatricesDestinationMatricesOffsetVectorOffset, sourceMatrices, destinationMatrices, offsets.Ptr(), byteOffset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixCopyDescriptorFromID(_ret)
 }
-

@@ -65,4 +65,3 @@ type ActivationDescriptorable interface {
 }
 
 var _ ActivationDescriptorable = (*ActivationDescriptor)(nil)
-

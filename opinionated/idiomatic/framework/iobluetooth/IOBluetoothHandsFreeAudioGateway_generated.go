@@ -16,7 +16,9 @@ type IOBluetoothHandsFreeAudioGateway struct {
 }
 
 // Unwrap returns the underlying [raw.IOBluetoothHandsFreeAudioGateway].
-func (x *IOBluetoothHandsFreeAudioGateway) Unwrap() *raw.IOBluetoothHandsFreeAudioGateway { return x.inner }
+func (x *IOBluetoothHandsFreeAudioGateway) Unwrap() *raw.IOBluetoothHandsFreeAudioGateway {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -98,7 +100,9 @@ func (x *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, w
 	x.inner.SendResponseWithOK(foundation.NSStringStringWithUTF8String(response), withOK)
 }
 
-func (x *IOBluetoothHandsFreeAudioGateway) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree { return &x.inner.IOBluetoothHandsFree }
+func (x *IOBluetoothHandsFreeAudioGateway) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree {
+	return &x.inner.IOBluetoothHandsFree
+}
 
 // IOBluetoothHandsFreeAudioGatewayable is the interface implemented by [IOBluetoothHandsFreeAudioGateway], for mocking and DI.
 type IOBluetoothHandsFreeAudioGatewayable interface {
@@ -117,4 +121,3 @@ type IOBluetoothHandsFreeAudioGatewayable interface {
 }
 
 var _ IOBluetoothHandsFreeAudioGatewayable = (*IOBluetoothHandsFreeAudioGateway)(nil)
-

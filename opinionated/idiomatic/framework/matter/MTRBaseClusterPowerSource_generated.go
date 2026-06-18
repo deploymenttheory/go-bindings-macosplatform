@@ -3089,9 +3089,13 @@ func (x *MTRBaseClusterPowerSource) SubscribeAttributeClusterRevisionWithMinInte
 	}
 }
 
-func (x *MTRBaseClusterPowerSource) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterPowerSource) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterPowerSource) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterPowerSource) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterPowerSourceable is the interface implemented by [MTRBaseClusterPowerSource], for mocking and DI.
 type MTRBaseClusterPowerSourceable interface {
@@ -3245,4 +3249,3 @@ type MTRBaseClusterPowerSourceable interface {
 }
 
 var _ MTRBaseClusterPowerSourceable = (*MTRBaseClusterPowerSource)(nil)
-

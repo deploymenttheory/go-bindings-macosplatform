@@ -14,7 +14,7 @@ type NSAccessibilityCustomRotorSearchDirection int64
 
 const (
 	NSAccessibilityCustomRotorSearchDirectionPrevious NSAccessibilityCustomRotorSearchDirection = 0
-	NSAccessibilityCustomRotorSearchDirectionNext NSAccessibilityCustomRotorSearchDirection = 1
+	NSAccessibilityCustomRotorSearchDirectionNext     NSAccessibilityCustomRotorSearchDirection = 1
 )
 
 func (e NSAccessibilityCustomRotorSearchDirection) String() string {
@@ -32,28 +32,28 @@ func (e NSAccessibilityCustomRotorSearchDirection) String() string {
 type NSAccessibilityCustomRotorType int64
 
 const (
-	NSAccessibilityCustomRotorTypeCustom NSAccessibilityCustomRotorType = 0
-	NSAccessibilityCustomRotorTypeAny NSAccessibilityCustomRotorType = 1
-	NSAccessibilityCustomRotorTypeAnnotation NSAccessibilityCustomRotorType = 2
-	NSAccessibilityCustomRotorTypeBoldText NSAccessibilityCustomRotorType = 3
-	NSAccessibilityCustomRotorTypeHeading NSAccessibilityCustomRotorType = 4
-	NSAccessibilityCustomRotorTypeHeadingLevel1 NSAccessibilityCustomRotorType = 5
-	NSAccessibilityCustomRotorTypeHeadingLevel2 NSAccessibilityCustomRotorType = 6
-	NSAccessibilityCustomRotorTypeHeadingLevel3 NSAccessibilityCustomRotorType = 7
-	NSAccessibilityCustomRotorTypeHeadingLevel4 NSAccessibilityCustomRotorType = 8
-	NSAccessibilityCustomRotorTypeHeadingLevel5 NSAccessibilityCustomRotorType = 9
-	NSAccessibilityCustomRotorTypeHeadingLevel6 NSAccessibilityCustomRotorType = 10
-	NSAccessibilityCustomRotorTypeImage NSAccessibilityCustomRotorType = 11
-	NSAccessibilityCustomRotorTypeItalicText NSAccessibilityCustomRotorType = 12
-	NSAccessibilityCustomRotorTypeLandmark NSAccessibilityCustomRotorType = 13
-	NSAccessibilityCustomRotorTypeLink NSAccessibilityCustomRotorType = 14
-	NSAccessibilityCustomRotorTypeList NSAccessibilityCustomRotorType = 15
+	NSAccessibilityCustomRotorTypeCustom         NSAccessibilityCustomRotorType = 0
+	NSAccessibilityCustomRotorTypeAny            NSAccessibilityCustomRotorType = 1
+	NSAccessibilityCustomRotorTypeAnnotation     NSAccessibilityCustomRotorType = 2
+	NSAccessibilityCustomRotorTypeBoldText       NSAccessibilityCustomRotorType = 3
+	NSAccessibilityCustomRotorTypeHeading        NSAccessibilityCustomRotorType = 4
+	NSAccessibilityCustomRotorTypeHeadingLevel1  NSAccessibilityCustomRotorType = 5
+	NSAccessibilityCustomRotorTypeHeadingLevel2  NSAccessibilityCustomRotorType = 6
+	NSAccessibilityCustomRotorTypeHeadingLevel3  NSAccessibilityCustomRotorType = 7
+	NSAccessibilityCustomRotorTypeHeadingLevel4  NSAccessibilityCustomRotorType = 8
+	NSAccessibilityCustomRotorTypeHeadingLevel5  NSAccessibilityCustomRotorType = 9
+	NSAccessibilityCustomRotorTypeHeadingLevel6  NSAccessibilityCustomRotorType = 10
+	NSAccessibilityCustomRotorTypeImage          NSAccessibilityCustomRotorType = 11
+	NSAccessibilityCustomRotorTypeItalicText     NSAccessibilityCustomRotorType = 12
+	NSAccessibilityCustomRotorTypeLandmark       NSAccessibilityCustomRotorType = 13
+	NSAccessibilityCustomRotorTypeLink           NSAccessibilityCustomRotorType = 14
+	NSAccessibilityCustomRotorTypeList           NSAccessibilityCustomRotorType = 15
 	NSAccessibilityCustomRotorTypeMisspelledWord NSAccessibilityCustomRotorType = 16
-	NSAccessibilityCustomRotorTypeTable NSAccessibilityCustomRotorType = 17
-	NSAccessibilityCustomRotorTypeTextField NSAccessibilityCustomRotorType = 18
+	NSAccessibilityCustomRotorTypeTable          NSAccessibilityCustomRotorType = 17
+	NSAccessibilityCustomRotorTypeTextField      NSAccessibilityCustomRotorType = 18
 	NSAccessibilityCustomRotorTypeUnderlinedText NSAccessibilityCustomRotorType = 19
-	NSAccessibilityCustomRotorTypeVisitedLink NSAccessibilityCustomRotorType = 20
-	NSAccessibilityCustomRotorTypeAudiograph NSAccessibilityCustomRotorType = 21
+	NSAccessibilityCustomRotorTypeVisitedLink    NSAccessibilityCustomRotorType = 20
+	NSAccessibilityCustomRotorTypeAudiograph     NSAccessibilityCustomRotorType = 21
 )
 
 func (e NSAccessibilityCustomRotorType) String() string {
@@ -135,8 +135,8 @@ func (e NSAlertStyle) String() string {
 type NSAnimationBlockingMode uint64
 
 const (
-	NSAnimationBlocking NSAnimationBlockingMode = 0
-	NSAnimationNonblocking NSAnimationBlockingMode = 1
+	NSAnimationBlocking            NSAnimationBlockingMode = 0
+	NSAnimationNonblocking         NSAnimationBlockingMode = 1
 	NSAnimationNonblockingThreaded NSAnimationBlockingMode = 2
 )
 
@@ -157,9 +157,9 @@ type NSAnimationCurve uint64
 
 const (
 	NSAnimationEaseInOut NSAnimationCurve = 0
-	NSAnimationEaseIn NSAnimationCurve = 1
-	NSAnimationEaseOut NSAnimationCurve = 2
-	NSAnimationLinear NSAnimationCurve = 3
+	NSAnimationEaseIn    NSAnimationCurve = 1
+	NSAnimationEaseOut   NSAnimationCurve = 2
+	NSAnimationLinear    NSAnimationCurve = 3
 )
 
 func (e NSAnimationCurve) String() string {
@@ -182,7 +182,7 @@ type NSAnimationEffect uint64
 
 const (
 	NSAnimationEffectDisappearingItemDefault NSAnimationEffect = 0
-	NSAnimationEffectPoof NSAnimationEffect = 10
+	NSAnimationEffectPoof                    NSAnimationEffect = 10
 )
 
 func (e NSAnimationEffect) String() string {
@@ -227,8 +227,8 @@ func (e NSApplicationActivationOptions) String() string {
 type NSApplicationActivationPolicy int64
 
 const (
-	NSApplicationActivationPolicyRegular NSApplicationActivationPolicy = 0
-	NSApplicationActivationPolicyAccessory NSApplicationActivationPolicy = 1
+	NSApplicationActivationPolicyRegular    NSApplicationActivationPolicy = 0
+	NSApplicationActivationPolicyAccessory  NSApplicationActivationPolicy = 1
 	NSApplicationActivationPolicyProhibited NSApplicationActivationPolicy = 2
 )
 
@@ -249,7 +249,7 @@ type NSApplicationDelegateReply uint64
 
 const (
 	NSApplicationDelegateReplySuccess NSApplicationDelegateReply = 0
-	NSApplicationDelegateReplyCancel NSApplicationDelegateReply = 1
+	NSApplicationDelegateReplyCancel  NSApplicationDelegateReply = 1
 	NSApplicationDelegateReplyFailure NSApplicationDelegateReply = 2
 )
 
@@ -370,13 +370,13 @@ func (e NSApplicationPresentationOptions) String() string {
 type NSAutoresizingMaskOptions uint64
 
 const (
-	NSViewNotSizable NSAutoresizingMaskOptions = 0
-	NSViewMinXMargin NSAutoresizingMaskOptions = 1
-	NSViewWidthSizable NSAutoresizingMaskOptions = 2
-	NSViewMaxXMargin NSAutoresizingMaskOptions = 4
-	NSViewMinYMargin NSAutoresizingMaskOptions = 8
+	NSViewNotSizable    NSAutoresizingMaskOptions = 0
+	NSViewMinXMargin    NSAutoresizingMaskOptions = 1
+	NSViewWidthSizable  NSAutoresizingMaskOptions = 2
+	NSViewMaxXMargin    NSAutoresizingMaskOptions = 4
+	NSViewMinYMargin    NSAutoresizingMaskOptions = 8
 	NSViewHeightSizable NSAutoresizingMaskOptions = 16
-	NSViewMaxYMargin NSAutoresizingMaskOptions = 32
+	NSViewMaxYMargin    NSAutoresizingMaskOptions = 32
 )
 
 func (e NSAutoresizingMaskOptions) String() string {
@@ -408,10 +408,10 @@ func (e NSAutoresizingMaskOptions) String() string {
 type NSBackgroundStyle int64
 
 const (
-	NSBackgroundStyleNormal NSBackgroundStyle = 0
+	NSBackgroundStyleNormal     NSBackgroundStyle = 0
 	NSBackgroundStyleEmphasized NSBackgroundStyle = 1
-	NSBackgroundStyleRaised NSBackgroundStyle = 2
-	NSBackgroundStyleLowered NSBackgroundStyle = 3
+	NSBackgroundStyleRaised     NSBackgroundStyle = 2
+	NSBackgroundStyleLowered    NSBackgroundStyle = 3
 )
 
 func (e NSBackgroundStyle) String() string {
@@ -542,10 +542,10 @@ func (e NSBezelStyle) String() string {
 type NSBezierPathElement uint64
 
 const (
-	NSBezierPathElementMoveTo NSBezierPathElement = 0
-	NSBezierPathElementLineTo NSBezierPathElement = 1
-	NSBezierPathElementCubicCurveTo NSBezierPathElement = 2
-	NSBezierPathElementClosePath NSBezierPathElement = 3
+	NSBezierPathElementMoveTo           NSBezierPathElement = 0
+	NSBezierPathElementLineTo           NSBezierPathElement = 1
+	NSBezierPathElementCubicCurveTo     NSBezierPathElement = 2
+	NSBezierPathElementClosePath        NSBezierPathElement = 3
 	NSBezierPathElementQuadraticCurveTo NSBezierPathElement = 4
 	// Deprecated: since macOS 14.0.
 	NSBezierPathElementCurveTo NSBezierPathElement = 2
@@ -572,13 +572,13 @@ func (e NSBezierPathElement) String() string {
 type NSBitmapFormat uint64
 
 const (
-	NSBitmapFormatAlphaFirst NSBitmapFormat = 1
-	NSBitmapFormatAlphaNonpremultiplied NSBitmapFormat = 2
-	NSBitmapFormatFloatingPointSamples NSBitmapFormat = 4
-	NSBitmapFormatSixteenBitLittleEndian NSBitmapFormat = 256
+	NSBitmapFormatAlphaFirst               NSBitmapFormat = 1
+	NSBitmapFormatAlphaNonpremultiplied    NSBitmapFormat = 2
+	NSBitmapFormatFloatingPointSamples     NSBitmapFormat = 4
+	NSBitmapFormatSixteenBitLittleEndian   NSBitmapFormat = 256
 	NSBitmapFormatThirtyTwoBitLittleEndian NSBitmapFormat = 512
-	NSBitmapFormatSixteenBitBigEndian NSBitmapFormat = 1024
-	NSBitmapFormatThirtyTwoBitBigEndian NSBitmapFormat = 2048
+	NSBitmapFormatSixteenBitBigEndian      NSBitmapFormat = 1024
+	NSBitmapFormatThirtyTwoBitBigEndian    NSBitmapFormat = 2048
 )
 
 func (e NSBitmapFormat) String() string {
@@ -613,11 +613,11 @@ func (e NSBitmapFormat) String() string {
 type NSBitmapImageFileType uint64
 
 const (
-	NSBitmapImageFileTypeTIFF NSBitmapImageFileType = 0
-	NSBitmapImageFileTypeBMP NSBitmapImageFileType = 1
-	NSBitmapImageFileTypeGIF NSBitmapImageFileType = 2
-	NSBitmapImageFileTypeJPEG NSBitmapImageFileType = 3
-	NSBitmapImageFileTypePNG NSBitmapImageFileType = 4
+	NSBitmapImageFileTypeTIFF     NSBitmapImageFileType = 0
+	NSBitmapImageFileTypeBMP      NSBitmapImageFileType = 1
+	NSBitmapImageFileTypeGIF      NSBitmapImageFileType = 2
+	NSBitmapImageFileTypeJPEG     NSBitmapImageFileType = 3
+	NSBitmapImageFileTypePNG      NSBitmapImageFileType = 4
 	NSBitmapImageFileTypeJPEG2000 NSBitmapImageFileType = 5
 )
 
@@ -643,9 +643,9 @@ func (e NSBitmapImageFileType) String() string {
 type NSBorderType uint64
 
 const (
-	NSNoBorder NSBorderType = 0
-	NSLineBorder NSBorderType = 1
-	NSBezelBorder NSBorderType = 2
+	NSNoBorder     NSBorderType = 0
+	NSLineBorder   NSBorderType = 1
+	NSBezelBorder  NSBorderType = 2
 	NSGrooveBorder NSBorderType = 3
 )
 
@@ -667,9 +667,9 @@ func (e NSBorderType) String() string {
 type NSBoxType uint64
 
 const (
-	NSBoxPrimary NSBoxType = 0
+	NSBoxPrimary   NSBoxType = 0
 	NSBoxSeparator NSBoxType = 2
-	NSBoxCustom NSBoxType = 4
+	NSBoxCustom    NSBoxType = 4
 )
 
 func (e NSBoxType) String() string {
@@ -688,7 +688,7 @@ func (e NSBoxType) String() string {
 type NSBrowserColumnResizingType uint64
 
 const (
-	NSBrowserNoColumnResizing NSBrowserColumnResizingType = 0
+	NSBrowserNoColumnResizing   NSBrowserColumnResizingType = 0
 	NSBrowserAutoColumnResizing NSBrowserColumnResizingType = 1
 	NSBrowserUserColumnResizing NSBrowserColumnResizingType = 2
 )
@@ -709,15 +709,15 @@ func (e NSBrowserColumnResizingType) String() string {
 type NSButtonType uint64
 
 const (
-	NSButtonTypeMomentaryLight NSButtonType = 0
-	NSButtonTypePushOnPushOff NSButtonType = 1
-	NSButtonTypeToggle NSButtonType = 2
-	NSButtonTypeSwitch NSButtonType = 3
-	NSButtonTypeRadio NSButtonType = 4
-	NSButtonTypeMomentaryChange NSButtonType = 5
-	NSButtonTypeOnOff NSButtonType = 6
-	NSButtonTypeMomentaryPushIn NSButtonType = 7
-	NSButtonTypeAccelerator NSButtonType = 8
+	NSButtonTypeMomentaryLight        NSButtonType = 0
+	NSButtonTypePushOnPushOff         NSButtonType = 1
+	NSButtonTypeToggle                NSButtonType = 2
+	NSButtonTypeSwitch                NSButtonType = 3
+	NSButtonTypeRadio                 NSButtonType = 4
+	NSButtonTypeMomentaryChange       NSButtonType = 5
+	NSButtonTypeOnOff                 NSButtonType = 6
+	NSButtonTypeMomentaryPushIn       NSButtonType = 7
+	NSButtonTypeAccelerator           NSButtonType = 8
 	NSButtonTypeMultiLevelAccelerator NSButtonType = 9
 )
 
@@ -751,23 +751,23 @@ func (e NSButtonType) String() string {
 type NSCellAttribute uint64
 
 const (
-	NSCellDisabled NSCellAttribute = 0
-	NSCellState NSCellAttribute = 1
-	NSPushInCell NSCellAttribute = 2
-	NSCellEditable NSCellAttribute = 3
-	NSChangeGrayCell NSCellAttribute = 4
-	NSCellHighlighted NSCellAttribute = 5
-	NSCellLightsByContents NSCellAttribute = 6
-	NSCellLightsByGray NSCellAttribute = 7
-	NSChangeBackgroundCell NSCellAttribute = 8
-	NSCellLightsByBackground NSCellAttribute = 9
-	NSCellIsBordered NSCellAttribute = 10
-	NSCellHasOverlappingImage NSCellAttribute = 11
-	NSCellHasImageHorizontal NSCellAttribute = 12
+	NSCellDisabled               NSCellAttribute = 0
+	NSCellState                  NSCellAttribute = 1
+	NSPushInCell                 NSCellAttribute = 2
+	NSCellEditable               NSCellAttribute = 3
+	NSChangeGrayCell             NSCellAttribute = 4
+	NSCellHighlighted            NSCellAttribute = 5
+	NSCellLightsByContents       NSCellAttribute = 6
+	NSCellLightsByGray           NSCellAttribute = 7
+	NSChangeBackgroundCell       NSCellAttribute = 8
+	NSCellLightsByBackground     NSCellAttribute = 9
+	NSCellIsBordered             NSCellAttribute = 10
+	NSCellHasOverlappingImage    NSCellAttribute = 11
+	NSCellHasImageHorizontal     NSCellAttribute = 12
 	NSCellHasImageOnLeftOrBottom NSCellAttribute = 13
-	NSCellChangesContents NSCellAttribute = 14
-	NSCellIsInsetButton NSCellAttribute = 15
-	NSCellAllowsMixedState NSCellAttribute = 16
+	NSCellChangesContents        NSCellAttribute = 14
+	NSCellIsInsetButton          NSCellAttribute = 15
+	NSCellAllowsMixedState       NSCellAttribute = 16
 )
 
 func (e NSCellAttribute) String() string {
@@ -815,10 +815,10 @@ func (e NSCellAttribute) String() string {
 type NSCellHitResult uint64
 
 const (
-	NSCellHitNone NSCellHitResult = 0
-	NSCellHitContentArea NSCellHitResult = 1
+	NSCellHitNone             NSCellHitResult = 0
+	NSCellHitContentArea      NSCellHitResult = 1
 	NSCellHitEditableTextArea NSCellHitResult = 2
-	NSCellHitTrackableArea NSCellHitResult = 4
+	NSCellHitTrackableArea    NSCellHitResult = 4
 )
 
 func (e NSCellHitResult) String() string {
@@ -841,14 +841,14 @@ func (e NSCellHitResult) String() string {
 type NSCellImagePosition uint64
 
 const (
-	NSNoImage NSCellImagePosition = 0
-	NSImageOnly NSCellImagePosition = 1
-	NSImageLeft NSCellImagePosition = 2
-	NSImageRight NSCellImagePosition = 3
-	NSImageBelow NSCellImagePosition = 4
-	NSImageAbove NSCellImagePosition = 5
+	NSNoImage       NSCellImagePosition = 0
+	NSImageOnly     NSCellImagePosition = 1
+	NSImageLeft     NSCellImagePosition = 2
+	NSImageRight    NSCellImagePosition = 3
+	NSImageBelow    NSCellImagePosition = 4
+	NSImageAbove    NSCellImagePosition = 5
 	NSImageOverlaps NSCellImagePosition = 6
-	NSImageLeading NSCellImagePosition = 7
+	NSImageLeading  NSCellImagePosition = 7
 	NSImageTrailing NSCellImagePosition = 8
 )
 
@@ -881,10 +881,10 @@ func (e NSCellImagePosition) String() string {
 type NSCellStyleMask uint64
 
 const (
-	NSNoCellMask NSCellStyleMask = 0
-	NSContentsCellMask NSCellStyleMask = 1
-	NSPushInCellMask NSCellStyleMask = 2
-	NSChangeGrayCellMask NSCellStyleMask = 4
+	NSNoCellMask               NSCellStyleMask = 0
+	NSContentsCellMask         NSCellStyleMask = 1
+	NSPushInCellMask           NSCellStyleMask = 2
+	NSChangeGrayCellMask       NSCellStyleMask = 4
 	NSChangeBackgroundCellMask NSCellStyleMask = 8
 )
 
@@ -911,8 +911,8 @@ func (e NSCellStyleMask) String() string {
 type NSCellType uint64
 
 const (
-	NSNullCellType NSCellType = 0
-	NSTextCellType NSCellType = 1
+	NSNullCellType  NSCellType = 0
+	NSTextCellType  NSCellType = 1
 	NSImageCellType NSCellType = 2
 )
 
@@ -933,11 +933,11 @@ type NSCharacterCollection uint64
 
 const (
 	NSIdentityMappingCharacterCollection NSCharacterCollection = 0
-	NSAdobeCNS1CharacterCollection NSCharacterCollection = 1
-	NSAdobeGB1CharacterCollection NSCharacterCollection = 2
-	NSAdobeJapan1CharacterCollection NSCharacterCollection = 3
-	NSAdobeJapan2CharacterCollection NSCharacterCollection = 4
-	NSAdobeKorea1CharacterCollection NSCharacterCollection = 5
+	NSAdobeCNS1CharacterCollection       NSCharacterCollection = 1
+	NSAdobeGB1CharacterCollection        NSCharacterCollection = 2
+	NSAdobeJapan1CharacterCollection     NSCharacterCollection = 3
+	NSAdobeJapan2CharacterCollection     NSCharacterCollection = 4
+	NSAdobeKorea1CharacterCollection     NSCharacterCollection = 5
 )
 
 func (e NSCharacterCollection) String() string {
@@ -962,10 +962,10 @@ func (e NSCharacterCollection) String() string {
 type NSCollectionElementCategory int64
 
 const (
-	NSCollectionElementCategoryItem NSCollectionElementCategory = 0
+	NSCollectionElementCategoryItem              NSCollectionElementCategory = 0
 	NSCollectionElementCategorySupplementaryView NSCollectionElementCategory = 1
-	NSCollectionElementCategoryDecorationView NSCollectionElementCategory = 2
-	NSCollectionElementCategoryInterItemGap NSCollectionElementCategory = 3
+	NSCollectionElementCategoryDecorationView    NSCollectionElementCategory = 2
+	NSCollectionElementCategoryInterItemGap      NSCollectionElementCategory = 3
 )
 
 func (e NSCollectionElementCategory) String() string {
@@ -986,12 +986,12 @@ func (e NSCollectionElementCategory) String() string {
 type NSCollectionLayoutSectionOrthogonalScrollingBehavior int64
 
 const (
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorNone                           NSCollectionLayoutSectionOrthogonalScrollingBehavior = 0
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuous                     NSCollectionLayoutSectionOrthogonalScrollingBehavior = 1
 	NSCollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary NSCollectionLayoutSectionOrthogonalScrollingBehavior = 2
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
-	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorPaging                         NSCollectionLayoutSectionOrthogonalScrollingBehavior = 3
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging                    NSCollectionLayoutSectionOrthogonalScrollingBehavior = 4
+	NSCollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered            NSCollectionLayoutSectionOrthogonalScrollingBehavior = 5
 )
 
 func (e NSCollectionLayoutSectionOrthogonalScrollingBehavior) String() string {
@@ -1019,8 +1019,8 @@ const (
 	NSCollectionUpdateActionInsert NSCollectionUpdateAction = 0
 	NSCollectionUpdateActionDelete NSCollectionUpdateAction = 1
 	NSCollectionUpdateActionReload NSCollectionUpdateAction = 2
-	NSCollectionUpdateActionMove NSCollectionUpdateAction = 3
-	NSCollectionUpdateActionNone NSCollectionUpdateAction = 4
+	NSCollectionUpdateActionMove   NSCollectionUpdateAction = 3
+	NSCollectionUpdateActionNone   NSCollectionUpdateAction = 4
 )
 
 func (e NSCollectionUpdateAction) String() string {
@@ -1043,10 +1043,10 @@ func (e NSCollectionUpdateAction) String() string {
 type NSCollectionViewItemHighlightState int64
 
 const (
-	NSCollectionViewItemHighlightNone NSCollectionViewItemHighlightState = 0
-	NSCollectionViewItemHighlightForSelection NSCollectionViewItemHighlightState = 1
+	NSCollectionViewItemHighlightNone           NSCollectionViewItemHighlightState = 0
+	NSCollectionViewItemHighlightForSelection   NSCollectionViewItemHighlightState = 1
 	NSCollectionViewItemHighlightForDeselection NSCollectionViewItemHighlightState = 2
-	NSCollectionViewItemHighlightAsDropTarget NSCollectionViewItemHighlightState = 3
+	NSCollectionViewItemHighlightAsDropTarget   NSCollectionViewItemHighlightState = 3
 )
 
 func (e NSCollectionViewItemHighlightState) String() string {
@@ -1067,7 +1067,7 @@ func (e NSCollectionViewItemHighlightState) String() string {
 type NSCollectionViewScrollDirection int64
 
 const (
-	NSCollectionViewScrollDirectionVertical NSCollectionViewScrollDirection = 0
+	NSCollectionViewScrollDirectionVertical   NSCollectionViewScrollDirection = 0
 	NSCollectionViewScrollDirectionHorizontal NSCollectionViewScrollDirection = 1
 )
 
@@ -1086,17 +1086,17 @@ func (e NSCollectionViewScrollDirection) String() string {
 type NSCollectionViewScrollPosition uint64
 
 const (
-	NSCollectionViewScrollPositionNone NSCollectionViewScrollPosition = 0
-	NSCollectionViewScrollPositionTop NSCollectionViewScrollPosition = 1
-	NSCollectionViewScrollPositionCenteredVertically NSCollectionViewScrollPosition = 2
-	NSCollectionViewScrollPositionBottom NSCollectionViewScrollPosition = 4
+	NSCollectionViewScrollPositionNone                  NSCollectionViewScrollPosition = 0
+	NSCollectionViewScrollPositionTop                   NSCollectionViewScrollPosition = 1
+	NSCollectionViewScrollPositionCenteredVertically    NSCollectionViewScrollPosition = 2
+	NSCollectionViewScrollPositionBottom                NSCollectionViewScrollPosition = 4
 	NSCollectionViewScrollPositionNearestHorizontalEdge NSCollectionViewScrollPosition = 512
-	NSCollectionViewScrollPositionLeft NSCollectionViewScrollPosition = 8
-	NSCollectionViewScrollPositionCenteredHorizontally NSCollectionViewScrollPosition = 16
-	NSCollectionViewScrollPositionRight NSCollectionViewScrollPosition = 32
-	NSCollectionViewScrollPositionLeadingEdge NSCollectionViewScrollPosition = 64
-	NSCollectionViewScrollPositionTrailingEdge NSCollectionViewScrollPosition = 128
-	NSCollectionViewScrollPositionNearestVerticalEdge NSCollectionViewScrollPosition = 256
+	NSCollectionViewScrollPositionLeft                  NSCollectionViewScrollPosition = 8
+	NSCollectionViewScrollPositionCenteredHorizontally  NSCollectionViewScrollPosition = 16
+	NSCollectionViewScrollPositionRight                 NSCollectionViewScrollPosition = 32
+	NSCollectionViewScrollPositionLeadingEdge           NSCollectionViewScrollPosition = 64
+	NSCollectionViewScrollPositionTrailingEdge          NSCollectionViewScrollPosition = 128
+	NSCollectionViewScrollPositionNearestVerticalEdge   NSCollectionViewScrollPosition = 256
 )
 
 func (e NSCollectionViewScrollPosition) String() string {
@@ -1140,15 +1140,15 @@ func (e NSCollectionViewScrollPosition) String() string {
 type NSColorPanelMode int64
 
 const (
-	NSColorPanelModeNone NSColorPanelMode = -1
-	NSColorPanelModeGray NSColorPanelMode = 0
-	NSColorPanelModeRGB NSColorPanelMode = 1
-	NSColorPanelModeCMYK NSColorPanelMode = 2
-	NSColorPanelModeHSB NSColorPanelMode = 3
+	NSColorPanelModeNone          NSColorPanelMode = -1
+	NSColorPanelModeGray          NSColorPanelMode = 0
+	NSColorPanelModeRGB           NSColorPanelMode = 1
+	NSColorPanelModeCMYK          NSColorPanelMode = 2
+	NSColorPanelModeHSB           NSColorPanelMode = 3
 	NSColorPanelModeCustomPalette NSColorPanelMode = 4
-	NSColorPanelModeColorList NSColorPanelMode = 5
-	NSColorPanelModeWheel NSColorPanelMode = 6
-	NSColorPanelModeCrayon NSColorPanelMode = 7
+	NSColorPanelModeColorList     NSColorPanelMode = 5
+	NSColorPanelModeWheel         NSColorPanelMode = 6
+	NSColorPanelModeCrayon        NSColorPanelMode = 7
 )
 
 func (e NSColorPanelMode) String() string {
@@ -1180,15 +1180,15 @@ func (e NSColorPanelMode) String() string {
 type NSColorPanelOptions uint64
 
 const (
-	NSColorPanelGrayModeMask NSColorPanelOptions = 1
-	NSColorPanelRGBModeMask NSColorPanelOptions = 2
-	NSColorPanelCMYKModeMask NSColorPanelOptions = 4
-	NSColorPanelHSBModeMask NSColorPanelOptions = 8
+	NSColorPanelGrayModeMask          NSColorPanelOptions = 1
+	NSColorPanelRGBModeMask           NSColorPanelOptions = 2
+	NSColorPanelCMYKModeMask          NSColorPanelOptions = 4
+	NSColorPanelHSBModeMask           NSColorPanelOptions = 8
 	NSColorPanelCustomPaletteModeMask NSColorPanelOptions = 16
-	NSColorPanelColorListModeMask NSColorPanelOptions = 32
-	NSColorPanelWheelModeMask NSColorPanelOptions = 64
-	NSColorPanelCrayonModeMask NSColorPanelOptions = 128
-	NSColorPanelAllModesMask NSColorPanelOptions = 65535
+	NSColorPanelColorListModeMask     NSColorPanelOptions = 32
+	NSColorPanelWheelModeMask         NSColorPanelOptions = 64
+	NSColorPanelCrayonModeMask        NSColorPanelOptions = 128
+	NSColorPanelAllModesMask          NSColorPanelOptions = 65535
 )
 
 func (e NSColorPanelOptions) String() string {
@@ -1229,11 +1229,11 @@ func (e NSColorPanelOptions) String() string {
 type NSColorRenderingIntent int64
 
 const (
-	NSColorRenderingIntentDefault NSColorRenderingIntent = 0
+	NSColorRenderingIntentDefault              NSColorRenderingIntent = 0
 	NSColorRenderingIntentAbsoluteColorimetric NSColorRenderingIntent = 1
 	NSColorRenderingIntentRelativeColorimetric NSColorRenderingIntent = 2
-	NSColorRenderingIntentPerceptual NSColorRenderingIntent = 3
-	NSColorRenderingIntentSaturation NSColorRenderingIntent = 4
+	NSColorRenderingIntentPerceptual           NSColorRenderingIntent = 3
+	NSColorRenderingIntentSaturation           NSColorRenderingIntent = 4
 )
 
 func (e NSColorRenderingIntent) String() string {
@@ -1256,13 +1256,13 @@ func (e NSColorRenderingIntent) String() string {
 type NSColorSpaceModel int64
 
 const (
-	NSColorSpaceModelUnknown NSColorSpaceModel = -1
-	NSColorSpaceModelGray NSColorSpaceModel = 0
-	NSColorSpaceModelRGB NSColorSpaceModel = 1
-	NSColorSpaceModelCMYK NSColorSpaceModel = 2
-	NSColorSpaceModelLAB NSColorSpaceModel = 3
-	NSColorSpaceModelDeviceN NSColorSpaceModel = 4
-	NSColorSpaceModelIndexed NSColorSpaceModel = 5
+	NSColorSpaceModelUnknown   NSColorSpaceModel = -1
+	NSColorSpaceModelGray      NSColorSpaceModel = 0
+	NSColorSpaceModelRGB       NSColorSpaceModel = 1
+	NSColorSpaceModelCMYK      NSColorSpaceModel = 2
+	NSColorSpaceModelLAB       NSColorSpaceModel = 3
+	NSColorSpaceModelDeviceN   NSColorSpaceModel = 4
+	NSColorSpaceModelIndexed   NSColorSpaceModel = 5
 	NSColorSpaceModelPatterned NSColorSpaceModel = 6
 )
 
@@ -1292,11 +1292,11 @@ func (e NSColorSpaceModel) String() string {
 type NSColorSystemEffect int64
 
 const (
-	NSColorSystemEffectNone NSColorSystemEffect = 0
-	NSColorSystemEffectPressed NSColorSystemEffect = 1
+	NSColorSystemEffectNone        NSColorSystemEffect = 0
+	NSColorSystemEffectPressed     NSColorSystemEffect = 1
 	NSColorSystemEffectDeepPressed NSColorSystemEffect = 2
-	NSColorSystemEffectDisabled NSColorSystemEffect = 3
-	NSColorSystemEffectRollover NSColorSystemEffect = 4
+	NSColorSystemEffectDisabled    NSColorSystemEffect = 3
+	NSColorSystemEffectRollover    NSColorSystemEffect = 4
 )
 
 func (e NSColorSystemEffect) String() string {
@@ -1320,8 +1320,8 @@ type NSColorType int64
 
 const (
 	NSColorTypeComponentBased NSColorType = 0
-	NSColorTypePattern NSColorType = 1
-	NSColorTypeCatalog NSColorType = 2
+	NSColorTypePattern        NSColorType = 1
+	NSColorTypeCatalog        NSColorType = 2
 )
 
 func (e NSColorType) String() string {
@@ -1340,8 +1340,8 @@ func (e NSColorType) String() string {
 type NSColorWellStyle int64
 
 const (
-	NSColorWellStyleDefault NSColorWellStyle = 0
-	NSColorWellStyleMinimal NSColorWellStyle = 1
+	NSColorWellStyleDefault  NSColorWellStyle = 0
+	NSColorWellStyleMinimal  NSColorWellStyle = 1
 	NSColorWellStyleExpanded NSColorWellStyle = 2
 )
 
@@ -1381,37 +1381,37 @@ func (e NSComboButtonStyle) String() string {
 type NSCompositingOperation uint64
 
 const (
-	NSCompositingOperationClear NSCompositingOperation = 0
-	NSCompositingOperationCopy NSCompositingOperation = 1
-	NSCompositingOperationSourceOver NSCompositingOperation = 2
-	NSCompositingOperationSourceIn NSCompositingOperation = 3
-	NSCompositingOperationSourceOut NSCompositingOperation = 4
-	NSCompositingOperationSourceAtop NSCompositingOperation = 5
+	NSCompositingOperationClear           NSCompositingOperation = 0
+	NSCompositingOperationCopy            NSCompositingOperation = 1
+	NSCompositingOperationSourceOver      NSCompositingOperation = 2
+	NSCompositingOperationSourceIn        NSCompositingOperation = 3
+	NSCompositingOperationSourceOut       NSCompositingOperation = 4
+	NSCompositingOperationSourceAtop      NSCompositingOperation = 5
 	NSCompositingOperationDestinationOver NSCompositingOperation = 6
-	NSCompositingOperationDestinationIn NSCompositingOperation = 7
-	NSCompositingOperationDestinationOut NSCompositingOperation = 8
+	NSCompositingOperationDestinationIn   NSCompositingOperation = 7
+	NSCompositingOperationDestinationOut  NSCompositingOperation = 8
 	NSCompositingOperationDestinationAtop NSCompositingOperation = 9
-	NSCompositingOperationXOR NSCompositingOperation = 10
-	NSCompositingOperationPlusDarker NSCompositingOperation = 11
+	NSCompositingOperationXOR             NSCompositingOperation = 10
+	NSCompositingOperationPlusDarker      NSCompositingOperation = 11
 	// Deprecated: Use NSCompositingOperationSourceOver instead
 	NSCompositingOperationHighlight NSCompositingOperation = 12
 	// Deprecated: Use NSCompositingOperationSourceOver instead
 	NSCompositingOperationPlusLighter NSCompositingOperation = 13
-	NSCompositingOperationMultiply NSCompositingOperation = 14
-	NSCompositingOperationScreen NSCompositingOperation = 15
-	NSCompositingOperationOverlay NSCompositingOperation = 16
-	NSCompositingOperationDarken NSCompositingOperation = 17
-	NSCompositingOperationLighten NSCompositingOperation = 18
-	NSCompositingOperationColorDodge NSCompositingOperation = 19
-	NSCompositingOperationColorBurn NSCompositingOperation = 20
-	NSCompositingOperationSoftLight NSCompositingOperation = 21
-	NSCompositingOperationHardLight NSCompositingOperation = 22
-	NSCompositingOperationDifference NSCompositingOperation = 23
-	NSCompositingOperationExclusion NSCompositingOperation = 24
-	NSCompositingOperationHue NSCompositingOperation = 25
-	NSCompositingOperationSaturation NSCompositingOperation = 26
-	NSCompositingOperationColor NSCompositingOperation = 27
-	NSCompositingOperationLuminosity NSCompositingOperation = 28
+	NSCompositingOperationMultiply    NSCompositingOperation = 14
+	NSCompositingOperationScreen      NSCompositingOperation = 15
+	NSCompositingOperationOverlay     NSCompositingOperation = 16
+	NSCompositingOperationDarken      NSCompositingOperation = 17
+	NSCompositingOperationLighten     NSCompositingOperation = 18
+	NSCompositingOperationColorDodge  NSCompositingOperation = 19
+	NSCompositingOperationColorBurn   NSCompositingOperation = 20
+	NSCompositingOperationSoftLight   NSCompositingOperation = 21
+	NSCompositingOperationHardLight   NSCompositingOperation = 22
+	NSCompositingOperationDifference  NSCompositingOperation = 23
+	NSCompositingOperationExclusion   NSCompositingOperation = 24
+	NSCompositingOperationHue         NSCompositingOperation = 25
+	NSCompositingOperationSaturation  NSCompositingOperation = 26
+	NSCompositingOperationColor       NSCompositingOperation = 27
+	NSCompositingOperationLuminosity  NSCompositingOperation = 28
 )
 
 func (e NSCompositingOperation) String() string {
@@ -1483,10 +1483,10 @@ type NSControlBorderShape int64
 
 const (
 	// The control will resolve this to an appropriate shape for the given control size and context
-	NSControlBorderShapeAutomatic NSControlBorderShape = 0
-	NSControlBorderShapeCapsule NSControlBorderShape = 1
+	NSControlBorderShapeAutomatic        NSControlBorderShape = 0
+	NSControlBorderShapeCapsule          NSControlBorderShape = 1
 	NSControlBorderShapeRoundedRectangle NSControlBorderShape = 2
-	NSControlBorderShapeCircle NSControlBorderShape = 3
+	NSControlBorderShapeCircle           NSControlBorderShape = 3
 )
 
 func (e NSControlBorderShape) String() string {
@@ -1507,10 +1507,10 @@ func (e NSControlBorderShape) String() string {
 type NSControlSize uint64
 
 const (
-	NSControlSizeRegular NSControlSize = 0
-	NSControlSizeSmall NSControlSize = 1
-	NSControlSizeMini NSControlSize = 2
-	NSControlSizeLarge NSControlSize = 3
+	NSControlSizeRegular    NSControlSize = 0
+	NSControlSizeSmall      NSControlSize = 1
+	NSControlSizeMini       NSControlSize = 2
+	NSControlSizeLarge      NSControlSize = 3
 	NSControlSizeExtraLarge NSControlSize = 4
 )
 
@@ -1534,10 +1534,10 @@ func (e NSControlSize) String() string {
 type NSControlTint uint64
 
 const (
-	NSDefaultControlTint NSControlTint = 0
-	NSBlueControlTint NSControlTint = 1
+	NSDefaultControlTint  NSControlTint = 0
+	NSBlueControlTint     NSControlTint = 1
 	NSGraphiteControlTint NSControlTint = 6
-	NSClearControlTint NSControlTint = 7
+	NSClearControlTint    NSControlTint = 7
 )
 
 func (e NSControlTint) String() string {
@@ -1558,9 +1558,9 @@ func (e NSControlTint) String() string {
 type NSCorrectionIndicatorType int64
 
 const (
-	NSCorrectionIndicatorTypeDefault NSCorrectionIndicatorType = 0
+	NSCorrectionIndicatorTypeDefault   NSCorrectionIndicatorType = 0
 	NSCorrectionIndicatorTypeReversion NSCorrectionIndicatorType = 1
-	NSCorrectionIndicatorTypeGuesses NSCorrectionIndicatorType = 2
+	NSCorrectionIndicatorTypeGuesses   NSCorrectionIndicatorType = 2
 )
 
 func (e NSCorrectionIndicatorType) String() string {
@@ -1579,11 +1579,11 @@ func (e NSCorrectionIndicatorType) String() string {
 type NSCorrectionResponse int64
 
 const (
-	NSCorrectionResponseNone NSCorrectionResponse = 0
+	NSCorrectionResponseNone     NSCorrectionResponse = 0
 	NSCorrectionResponseAccepted NSCorrectionResponse = 1
 	NSCorrectionResponseRejected NSCorrectionResponse = 2
-	NSCorrectionResponseIgnored NSCorrectionResponse = 3
-	NSCorrectionResponseEdited NSCorrectionResponse = 4
+	NSCorrectionResponseIgnored  NSCorrectionResponse = 3
+	NSCorrectionResponseEdited   NSCorrectionResponse = 4
 	NSCorrectionResponseReverted NSCorrectionResponse = 5
 )
 
@@ -1683,12 +1683,12 @@ func (e NSCursorFrameResizePosition) String() string {
 type NSDatePickerElementFlags uint64
 
 const (
-	NSDatePickerElementFlagHourMinute NSDatePickerElementFlags = 12
+	NSDatePickerElementFlagHourMinute       NSDatePickerElementFlags = 12
 	NSDatePickerElementFlagHourMinuteSecond NSDatePickerElementFlags = 14
-	NSDatePickerElementFlagTimeZone NSDatePickerElementFlags = 16
-	NSDatePickerElementFlagYearMonth NSDatePickerElementFlags = 192
-	NSDatePickerElementFlagYearMonthDay NSDatePickerElementFlags = 224
-	NSDatePickerElementFlagEra NSDatePickerElementFlags = 256
+	NSDatePickerElementFlagTimeZone         NSDatePickerElementFlags = 16
+	NSDatePickerElementFlagYearMonth        NSDatePickerElementFlags = 192
+	NSDatePickerElementFlagYearMonthDay     NSDatePickerElementFlags = 224
+	NSDatePickerElementFlagEra              NSDatePickerElementFlags = 256
 )
 
 func (e NSDatePickerElementFlags) String() string {
@@ -1721,7 +1721,7 @@ type NSDatePickerMode uint64
 
 const (
 	NSDatePickerModeSingle NSDatePickerMode = 0
-	NSDatePickerModeRange NSDatePickerMode = 1
+	NSDatePickerModeRange  NSDatePickerMode = 1
 )
 
 func (e NSDatePickerMode) String() string {
@@ -1739,8 +1739,8 @@ type NSDatePickerStyle uint64
 
 const (
 	NSDatePickerStyleTextFieldAndStepper NSDatePickerStyle = 0
-	NSDatePickerStyleClockAndCalendar NSDatePickerStyle = 1
-	NSDatePickerStyleTextField NSDatePickerStyle = 2
+	NSDatePickerStyleClockAndCalendar    NSDatePickerStyle = 1
+	NSDatePickerStyleTextField           NSDatePickerStyle = 2
 )
 
 func (e NSDatePickerStyle) String() string {
@@ -1760,12 +1760,12 @@ func (e NSDatePickerStyle) String() string {
 type NSDirectionalRectEdge uint64
 
 const (
-	NSDirectionalRectEdgeNone NSDirectionalRectEdge = 0
-	NSDirectionalRectEdgeTop NSDirectionalRectEdge = 1
-	NSDirectionalRectEdgeLeading NSDirectionalRectEdge = 2
-	NSDirectionalRectEdgeBottom NSDirectionalRectEdge = 4
+	NSDirectionalRectEdgeNone     NSDirectionalRectEdge = 0
+	NSDirectionalRectEdgeTop      NSDirectionalRectEdge = 1
+	NSDirectionalRectEdgeLeading  NSDirectionalRectEdge = 2
+	NSDirectionalRectEdgeBottom   NSDirectionalRectEdge = 4
 	NSDirectionalRectEdgeTrailing NSDirectionalRectEdge = 8
-	NSDirectionalRectEdgeAll NSDirectionalRectEdge = 15
+	NSDirectionalRectEdgeAll      NSDirectionalRectEdge = 15
 )
 
 func (e NSDirectionalRectEdge) String() string {
@@ -1795,7 +1795,7 @@ type NSDisplayGamut int64
 
 const (
 	NSDisplayGamutSRGB NSDisplayGamut = 1
-	NSDisplayGamutP3 NSDisplayGamut = 2
+	NSDisplayGamutP3   NSDisplayGamut = 2
 )
 
 func (e NSDisplayGamut) String() string {
@@ -1812,13 +1812,13 @@ func (e NSDisplayGamut) String() string {
 type NSDocumentChangeType uint64
 
 const (
-	NSChangeDone NSDocumentChangeType = 0
-	NSChangeUndone NSDocumentChangeType = 1
-	NSChangeRedone NSDocumentChangeType = 5
-	NSChangeCleared NSDocumentChangeType = 2
+	NSChangeDone              NSDocumentChangeType = 0
+	NSChangeUndone            NSDocumentChangeType = 1
+	NSChangeRedone            NSDocumentChangeType = 5
+	NSChangeCleared           NSDocumentChangeType = 2
 	NSChangeReadOtherContents NSDocumentChangeType = 3
-	NSChangeAutosaved NSDocumentChangeType = 4
-	NSChangeDiscardable NSDocumentChangeType = 256
+	NSChangeAutosaved         NSDocumentChangeType = 4
+	NSChangeDiscardable       NSDocumentChangeType = 256
 )
 
 func (e NSDocumentChangeType) String() string {
@@ -1846,14 +1846,14 @@ func (e NSDocumentChangeType) String() string {
 type NSDragOperation uint64
 
 const (
-	NSDragOperationNone NSDragOperation = 0
-	NSDragOperationCopy NSDragOperation = 1
-	NSDragOperationLink NSDragOperation = 2
+	NSDragOperationNone    NSDragOperation = 0
+	NSDragOperationCopy    NSDragOperation = 1
+	NSDragOperationLink    NSDragOperation = 2
 	NSDragOperationGeneric NSDragOperation = 4
 	NSDragOperationPrivate NSDragOperation = 8
-	NSDragOperationMove NSDragOperation = 16
-	NSDragOperationDelete NSDragOperation = 32
-	NSDragOperationEvery NSDragOperation = 18446744073709551615
+	NSDragOperationMove    NSDragOperation = 16
+	NSDragOperationDelete  NSDragOperation = 32
+	NSDragOperationEvery   NSDragOperation = 18446744073709551615
 	// Deprecated: since macOS 10.10.
 	NSDragOperationAll_Obsolete NSDragOperation = 15
 	// Deprecated: since macOS 10.10.
@@ -1900,10 +1900,10 @@ type NSDraggingFormation int64
 const (
 	// Deprecated: since macOS 10.10.
 	NSDraggingFormationDefault NSDraggingFormation = 0
-	NSDraggingFormationNone NSDraggingFormation = 1
-	NSDraggingFormationPile NSDraggingFormation = 2
-	NSDraggingFormationList NSDraggingFormation = 3
-	NSDraggingFormationStack NSDraggingFormation = 4
+	NSDraggingFormationNone    NSDraggingFormation = 1
+	NSDraggingFormationPile    NSDraggingFormation = 2
+	NSDraggingFormationList    NSDraggingFormation = 3
+	NSDraggingFormationStack   NSDraggingFormation = 4
 )
 
 func (e NSDraggingFormation) String() string {
@@ -1927,7 +1927,7 @@ func (e NSDraggingFormation) String() string {
 type NSDraggingItemEnumerationOptions uint64
 
 const (
-	NSDraggingItemEnumerationConcurrent NSDraggingItemEnumerationOptions = 1
+	NSDraggingItemEnumerationConcurrent               NSDraggingItemEnumerationOptions = 1
 	NSDraggingItemEnumerationClearNonenumeratedImages NSDraggingItemEnumerationOptions = 65536
 )
 
@@ -1951,7 +1951,7 @@ type NSEventButtonMask uint64
 
 const (
 	// Deprecated: since macOS 10.12.
-	NSEventButtonMaskPenTip NSEventButtonMask = 1
+	NSEventButtonMaskPenTip       NSEventButtonMask = 1
 	NSEventButtonMaskPenLowerSide NSEventButtonMask = 2
 	NSEventButtonMaskPenUpperSide NSEventButtonMask = 4
 )
@@ -1976,9 +1976,9 @@ func (e NSEventButtonMask) String() string {
 type NSEventGestureAxis int64
 
 const (
-	NSEventGestureAxisNone NSEventGestureAxis = 0
+	NSEventGestureAxisNone       NSEventGestureAxis = 0
 	NSEventGestureAxisHorizontal NSEventGestureAxis = 1
-	NSEventGestureAxisVertical NSEventGestureAxis = 2
+	NSEventGestureAxisVertical   NSEventGestureAxis = 2
 )
 
 func (e NSEventGestureAxis) String() string {
@@ -1999,41 +1999,41 @@ func (e NSEventGestureAxis) String() string {
 type NSEventMask uint64
 
 const (
-	NSEventMaskLeftMouseDown NSEventMask = 2
-	NSEventMaskLeftMouseUp NSEventMask = 4
-	NSEventMaskRightMouseDown NSEventMask = 8
-	NSEventMaskRightMouseUp NSEventMask = 16
-	NSEventMaskMouseMoved NSEventMask = 32
-	NSEventMaskLeftMouseDragged NSEventMask = 64
-	NSEventMaskRightMouseDragged NSEventMask = 128
-	NSEventMaskMouseEntered NSEventMask = 256
-	NSEventMaskMouseExited NSEventMask = 512
-	NSEventMaskKeyDown NSEventMask = 1024
-	NSEventMaskKeyUp NSEventMask = 2048
-	NSEventMaskFlagsChanged NSEventMask = 4096
-	NSEventMaskAppKitDefined NSEventMask = 8192
-	NSEventMaskSystemDefined NSEventMask = 16384
+	NSEventMaskLeftMouseDown      NSEventMask = 2
+	NSEventMaskLeftMouseUp        NSEventMask = 4
+	NSEventMaskRightMouseDown     NSEventMask = 8
+	NSEventMaskRightMouseUp       NSEventMask = 16
+	NSEventMaskMouseMoved         NSEventMask = 32
+	NSEventMaskLeftMouseDragged   NSEventMask = 64
+	NSEventMaskRightMouseDragged  NSEventMask = 128
+	NSEventMaskMouseEntered       NSEventMask = 256
+	NSEventMaskMouseExited        NSEventMask = 512
+	NSEventMaskKeyDown            NSEventMask = 1024
+	NSEventMaskKeyUp              NSEventMask = 2048
+	NSEventMaskFlagsChanged       NSEventMask = 4096
+	NSEventMaskAppKitDefined      NSEventMask = 8192
+	NSEventMaskSystemDefined      NSEventMask = 16384
 	NSEventMaskApplicationDefined NSEventMask = 32768
-	NSEventMaskPeriodic NSEventMask = 65536
-	NSEventMaskCursorUpdate NSEventMask = 131072
-	NSEventMaskScrollWheel NSEventMask = 4194304
-	NSEventMaskTabletPoint NSEventMask = 8388608
-	NSEventMaskTabletProximity NSEventMask = 16777216
-	NSEventMaskOtherMouseDown NSEventMask = 33554432
-	NSEventMaskOtherMouseUp NSEventMask = 67108864
-	NSEventMaskOtherMouseDragged NSEventMask = 134217728
-	NSEventMaskGesture NSEventMask = 536870912
-	NSEventMaskMagnify NSEventMask = 1073741824
-	NSEventMaskSwipe NSEventMask = 2147483648
-	NSEventMaskRotate NSEventMask = 262144
-	NSEventMaskBeginGesture NSEventMask = 524288
-	NSEventMaskEndGesture NSEventMask = 1048576
-	NSEventMaskSmartMagnify NSEventMask = 4294967296
-	NSEventMaskPressure NSEventMask = 17179869184
-	NSEventMaskDirectTouch NSEventMask = 137438953472
-	NSEventMaskChangeMode NSEventMask = 274877906944
-	NSEventMaskMouseCancelled NSEventMask = 1099511627776
-	NSEventMaskAny NSEventMask = 18446744073709551615
+	NSEventMaskPeriodic           NSEventMask = 65536
+	NSEventMaskCursorUpdate       NSEventMask = 131072
+	NSEventMaskScrollWheel        NSEventMask = 4194304
+	NSEventMaskTabletPoint        NSEventMask = 8388608
+	NSEventMaskTabletProximity    NSEventMask = 16777216
+	NSEventMaskOtherMouseDown     NSEventMask = 33554432
+	NSEventMaskOtherMouseUp       NSEventMask = 67108864
+	NSEventMaskOtherMouseDragged  NSEventMask = 134217728
+	NSEventMaskGesture            NSEventMask = 536870912
+	NSEventMaskMagnify            NSEventMask = 1073741824
+	NSEventMaskSwipe              NSEventMask = 2147483648
+	NSEventMaskRotate             NSEventMask = 262144
+	NSEventMaskBeginGesture       NSEventMask = 524288
+	NSEventMaskEndGesture         NSEventMask = 1048576
+	NSEventMaskSmartMagnify       NSEventMask = 4294967296
+	NSEventMaskPressure           NSEventMask = 17179869184
+	NSEventMaskDirectTouch        NSEventMask = 137438953472
+	NSEventMaskChangeMode         NSEventMask = 274877906944
+	NSEventMaskMouseCancelled     NSEventMask = 1099511627776
+	NSEventMaskAny                NSEventMask = 18446744073709551615
 )
 
 func (e NSEventMask) String() string {
@@ -2153,14 +2153,14 @@ func (e NSEventMask) String() string {
 type NSEventModifierFlags uint64
 
 const (
-	NSEventModifierFlagCapsLock NSEventModifierFlags = 65536
-	NSEventModifierFlagShift NSEventModifierFlags = 131072
-	NSEventModifierFlagControl NSEventModifierFlags = 262144
-	NSEventModifierFlagOption NSEventModifierFlags = 524288
-	NSEventModifierFlagCommand NSEventModifierFlags = 1048576
-	NSEventModifierFlagNumericPad NSEventModifierFlags = 2097152
-	NSEventModifierFlagHelp NSEventModifierFlags = 4194304
-	NSEventModifierFlagFunction NSEventModifierFlags = 8388608
+	NSEventModifierFlagCapsLock                   NSEventModifierFlags = 65536
+	NSEventModifierFlagShift                      NSEventModifierFlags = 131072
+	NSEventModifierFlagControl                    NSEventModifierFlags = 262144
+	NSEventModifierFlagOption                     NSEventModifierFlags = 524288
+	NSEventModifierFlagCommand                    NSEventModifierFlags = 1048576
+	NSEventModifierFlagNumericPad                 NSEventModifierFlags = 2097152
+	NSEventModifierFlagHelp                       NSEventModifierFlags = 4194304
+	NSEventModifierFlagFunction                   NSEventModifierFlags = 8388608
 	NSEventModifierFlagDeviceIndependentFlagsMask NSEventModifierFlags = 4294901760
 )
 
@@ -2206,12 +2206,12 @@ const (
 	// Deprecated: since macOS 10.12.
 	NSEventPhaseNone NSEventPhase = 0
 	// Deprecated: since macOS 10.12.
-	NSEventPhaseBegan NSEventPhase = 1
+	NSEventPhaseBegan      NSEventPhase = 1
 	NSEventPhaseStationary NSEventPhase = 2
-	NSEventPhaseChanged NSEventPhase = 4
-	NSEventPhaseEnded NSEventPhase = 8
-	NSEventPhaseCancelled NSEventPhase = 16
-	NSEventPhaseMayBegin NSEventPhase = 32
+	NSEventPhaseChanged    NSEventPhase = 4
+	NSEventPhaseEnded      NSEventPhase = 8
+	NSEventPhaseCancelled  NSEventPhase = 16
+	NSEventPhaseMayBegin   NSEventPhase = 32
 )
 
 func (e NSEventPhase) String() string {
@@ -2243,16 +2243,16 @@ func (e NSEventPhase) String() string {
 type NSEventSubtype int16
 
 const (
-	NSEventSubtypeWindowExposed NSEventSubtype = 0
-	NSEventSubtypeApplicationActivated NSEventSubtype = 1
+	NSEventSubtypeWindowExposed          NSEventSubtype = 0
+	NSEventSubtypeApplicationActivated   NSEventSubtype = 1
 	NSEventSubtypeApplicationDeactivated NSEventSubtype = 2
-	NSEventSubtypeWindowMoved NSEventSubtype = 4
-	NSEventSubtypeScreenChanged NSEventSubtype = 8
-	NSEventSubtypePowerOff NSEventSubtype = 1
-	NSEventSubtypeMouseEvent NSEventSubtype = 0
-	NSEventSubtypeTabletPoint NSEventSubtype = 1
-	NSEventSubtypeTabletProximity NSEventSubtype = 2
-	NSEventSubtypeTouch NSEventSubtype = 3
+	NSEventSubtypeWindowMoved            NSEventSubtype = 4
+	NSEventSubtypeScreenChanged          NSEventSubtype = 8
+	NSEventSubtypePowerOff               NSEventSubtype = 1
+	NSEventSubtypeMouseEvent             NSEventSubtype = 0
+	NSEventSubtypeTabletPoint            NSEventSubtype = 1
+	NSEventSubtypeTabletProximity        NSEventSubtype = 2
+	NSEventSubtypeTouch                  NSEventSubtype = 3
 )
 
 func (e NSEventSubtype) String() string {
@@ -2278,7 +2278,7 @@ func (e NSEventSubtype) String() string {
 type NSEventSwipeTrackingOptions uint64
 
 const (
-	NSEventSwipeTrackingLockDirection NSEventSwipeTrackingOptions = 1
+	NSEventSwipeTrackingLockDirection      NSEventSwipeTrackingOptions = 1
 	NSEventSwipeTrackingClampGestureAmount NSEventSwipeTrackingOptions = 2
 )
 
@@ -2299,41 +2299,41 @@ func (e NSEventSwipeTrackingOptions) String() string {
 type NSEventType uint64
 
 const (
-	NSEventTypeLeftMouseDown NSEventType = 1
-	NSEventTypeLeftMouseUp NSEventType = 2
-	NSEventTypeRightMouseDown NSEventType = 3
-	NSEventTypeRightMouseUp NSEventType = 4
-	NSEventTypeMouseMoved NSEventType = 5
-	NSEventTypeLeftMouseDragged NSEventType = 6
-	NSEventTypeRightMouseDragged NSEventType = 7
-	NSEventTypeMouseEntered NSEventType = 8
-	NSEventTypeMouseExited NSEventType = 9
-	NSEventTypeKeyDown NSEventType = 10
-	NSEventTypeKeyUp NSEventType = 11
-	NSEventTypeFlagsChanged NSEventType = 12
-	NSEventTypeAppKitDefined NSEventType = 13
-	NSEventTypeSystemDefined NSEventType = 14
+	NSEventTypeLeftMouseDown      NSEventType = 1
+	NSEventTypeLeftMouseUp        NSEventType = 2
+	NSEventTypeRightMouseDown     NSEventType = 3
+	NSEventTypeRightMouseUp       NSEventType = 4
+	NSEventTypeMouseMoved         NSEventType = 5
+	NSEventTypeLeftMouseDragged   NSEventType = 6
+	NSEventTypeRightMouseDragged  NSEventType = 7
+	NSEventTypeMouseEntered       NSEventType = 8
+	NSEventTypeMouseExited        NSEventType = 9
+	NSEventTypeKeyDown            NSEventType = 10
+	NSEventTypeKeyUp              NSEventType = 11
+	NSEventTypeFlagsChanged       NSEventType = 12
+	NSEventTypeAppKitDefined      NSEventType = 13
+	NSEventTypeSystemDefined      NSEventType = 14
 	NSEventTypeApplicationDefined NSEventType = 15
-	NSEventTypePeriodic NSEventType = 16
-	NSEventTypeCursorUpdate NSEventType = 17
-	NSEventTypeScrollWheel NSEventType = 22
-	NSEventTypeTabletPoint NSEventType = 23
-	NSEventTypeTabletProximity NSEventType = 24
-	NSEventTypeOtherMouseDown NSEventType = 25
-	NSEventTypeOtherMouseUp NSEventType = 26
-	NSEventTypeOtherMouseDragged NSEventType = 27
-	NSEventTypeGesture NSEventType = 29
-	NSEventTypeMagnify NSEventType = 30
-	NSEventTypeSwipe NSEventType = 31
-	NSEventTypeRotate NSEventType = 18
-	NSEventTypeBeginGesture NSEventType = 19
-	NSEventTypeEndGesture NSEventType = 20
-	NSEventTypeSmartMagnify NSEventType = 32
-	NSEventTypeQuickLook NSEventType = 33
-	NSEventTypePressure NSEventType = 34
-	NSEventTypeDirectTouch NSEventType = 37
-	NSEventTypeChangeMode NSEventType = 38
-	NSEventTypeMouseCancelled NSEventType = 40
+	NSEventTypePeriodic           NSEventType = 16
+	NSEventTypeCursorUpdate       NSEventType = 17
+	NSEventTypeScrollWheel        NSEventType = 22
+	NSEventTypeTabletPoint        NSEventType = 23
+	NSEventTypeTabletProximity    NSEventType = 24
+	NSEventTypeOtherMouseDown     NSEventType = 25
+	NSEventTypeOtherMouseUp       NSEventType = 26
+	NSEventTypeOtherMouseDragged  NSEventType = 27
+	NSEventTypeGesture            NSEventType = 29
+	NSEventTypeMagnify            NSEventType = 30
+	NSEventTypeSwipe              NSEventType = 31
+	NSEventTypeRotate             NSEventType = 18
+	NSEventTypeBeginGesture       NSEventType = 19
+	NSEventTypeEndGesture         NSEventType = 20
+	NSEventTypeSmartMagnify       NSEventType = 32
+	NSEventTypeQuickLook          NSEventType = 33
+	NSEventTypePressure           NSEventType = 34
+	NSEventTypeDirectTouch        NSEventType = 37
+	NSEventTypeChangeMode         NSEventType = 38
+	NSEventTypeMouseCancelled     NSEventType = 40
 )
 
 func (e NSEventType) String() string {
@@ -2416,7 +2416,7 @@ func (e NSEventType) String() string {
 type NSFocusRingPlacement uint64
 
 const (
-	NSFocusRingOnly NSFocusRingPlacement = 0
+	NSFocusRingOnly  NSFocusRingPlacement = 0
 	NSFocusRingBelow NSFocusRingPlacement = 1
 	NSFocusRingAbove NSFocusRingPlacement = 2
 )
@@ -2437,8 +2437,8 @@ func (e NSFocusRingPlacement) String() string {
 type NSFocusRingType uint64
 
 const (
-	NSFocusRingTypeDefault NSFocusRingType = 0
-	NSFocusRingTypeNone NSFocusRingType = 1
+	NSFocusRingTypeDefault  NSFocusRingType = 0
+	NSFocusRingTypeNone     NSFocusRingType = 1
 	NSFocusRingTypeExterior NSFocusRingType = 2
 )
 
@@ -2458,13 +2458,13 @@ func (e NSFocusRingType) String() string {
 type NSFontAction uint64
 
 const (
-	NSNoFontChangeAction NSFontAction = 0
-	NSViaPanelFontAction NSFontAction = 1
-	NSAddTraitFontAction NSFontAction = 2
-	NSSizeUpFontAction NSFontAction = 3
-	NSSizeDownFontAction NSFontAction = 4
-	NSHeavierFontAction NSFontAction = 5
-	NSLighterFontAction NSFontAction = 6
+	NSNoFontChangeAction    NSFontAction = 0
+	NSViaPanelFontAction    NSFontAction = 1
+	NSAddTraitFontAction    NSFontAction = 2
+	NSSizeUpFontAction      NSFontAction = 3
+	NSSizeDownFontAction    NSFontAction = 4
+	NSHeavierFontAction     NSFontAction = 5
+	NSLighterFontAction     NSFontAction = 6
 	NSRemoveTraitFontAction NSFontAction = 7
 )
 
@@ -2531,8 +2531,8 @@ func (e NSFontCollectionOptions) String() string {
 type NSFontCollectionVisibility uint64
 
 const (
-	NSFontCollectionVisibilityProcess NSFontCollectionVisibility = 1
-	NSFontCollectionVisibilityUser NSFontCollectionVisibility = 2
+	NSFontCollectionVisibilityProcess  NSFontCollectionVisibility = 1
+	NSFontCollectionVisibilityUser     NSFontCollectionVisibility = 2
 	NSFontCollectionVisibilityComputer NSFontCollectionVisibility = 4
 )
 
@@ -2557,25 +2557,25 @@ func (e NSFontCollectionVisibility) String() string {
 type NSFontDescriptorSymbolicTraits int64
 
 const (
-	NSFontDescriptorTraitItalic NSFontDescriptorSymbolicTraits = 1
-	NSFontDescriptorTraitBold NSFontDescriptorSymbolicTraits = 2
-	NSFontDescriptorTraitExpanded NSFontDescriptorSymbolicTraits = 32
-	NSFontDescriptorTraitCondensed NSFontDescriptorSymbolicTraits = 64
-	NSFontDescriptorTraitMonoSpace NSFontDescriptorSymbolicTraits = 1024
-	NSFontDescriptorTraitVertical NSFontDescriptorSymbolicTraits = 2048
-	NSFontDescriptorTraitUIOptimized NSFontDescriptorSymbolicTraits = 4096
-	NSFontDescriptorTraitTightLeading NSFontDescriptorSymbolicTraits = 32768
-	NSFontDescriptorTraitLooseLeading NSFontDescriptorSymbolicTraits = 65536
-	NSFontDescriptorClassOldStyleSerifs NSFontDescriptorSymbolicTraits = 268435456
+	NSFontDescriptorTraitItalic             NSFontDescriptorSymbolicTraits = 1
+	NSFontDescriptorTraitBold               NSFontDescriptorSymbolicTraits = 2
+	NSFontDescriptorTraitExpanded           NSFontDescriptorSymbolicTraits = 32
+	NSFontDescriptorTraitCondensed          NSFontDescriptorSymbolicTraits = 64
+	NSFontDescriptorTraitMonoSpace          NSFontDescriptorSymbolicTraits = 1024
+	NSFontDescriptorTraitVertical           NSFontDescriptorSymbolicTraits = 2048
+	NSFontDescriptorTraitUIOptimized        NSFontDescriptorSymbolicTraits = 4096
+	NSFontDescriptorTraitTightLeading       NSFontDescriptorSymbolicTraits = 32768
+	NSFontDescriptorTraitLooseLeading       NSFontDescriptorSymbolicTraits = 65536
+	NSFontDescriptorClassOldStyleSerifs     NSFontDescriptorSymbolicTraits = 268435456
 	NSFontDescriptorClassTransitionalSerifs NSFontDescriptorSymbolicTraits = 536870912
-	NSFontDescriptorClassModernSerifs NSFontDescriptorSymbolicTraits = 805306368
-	NSFontDescriptorClassClarendonSerifs NSFontDescriptorSymbolicTraits = 1073741824
-	NSFontDescriptorClassSlabSerifs NSFontDescriptorSymbolicTraits = 1342177280
-	NSFontDescriptorClassFreeformSerifs NSFontDescriptorSymbolicTraits = 1879048192
-	NSFontDescriptorClassSansSerif NSFontDescriptorSymbolicTraits = 2147483648
-	NSFontDescriptorClassOrnamentals NSFontDescriptorSymbolicTraits = 2415919104
-	NSFontDescriptorClassScripts NSFontDescriptorSymbolicTraits = 2684354560
-	NSFontDescriptorClassSymbolic NSFontDescriptorSymbolicTraits = 3221225472
+	NSFontDescriptorClassModernSerifs       NSFontDescriptorSymbolicTraits = 805306368
+	NSFontDescriptorClassClarendonSerifs    NSFontDescriptorSymbolicTraits = 1073741824
+	NSFontDescriptorClassSlabSerifs         NSFontDescriptorSymbolicTraits = 1342177280
+	NSFontDescriptorClassFreeformSerifs     NSFontDescriptorSymbolicTraits = 1879048192
+	NSFontDescriptorClassSansSerif          NSFontDescriptorSymbolicTraits = 2147483648
+	NSFontDescriptorClassOrnamentals        NSFontDescriptorSymbolicTraits = 2415919104
+	NSFontDescriptorClassScripts            NSFontDescriptorSymbolicTraits = 2684354560
+	NSFontDescriptorClassSymbolic           NSFontDescriptorSymbolicTraits = 3221225472
 )
 
 func (e NSFontDescriptorSymbolicTraits) String() string {
@@ -2647,9 +2647,9 @@ func (e NSFontDescriptorSymbolicTraits) String() string {
 type NSFontRenderingMode uint64
 
 const (
-	NSFontDefaultRenderingMode NSFontRenderingMode = 0
-	NSFontAntialiasedRenderingMode NSFontRenderingMode = 1
-	NSFontIntegerAdvancementsRenderingMode NSFontRenderingMode = 2
+	NSFontDefaultRenderingMode                        NSFontRenderingMode = 0
+	NSFontAntialiasedRenderingMode                    NSFontRenderingMode = 1
+	NSFontIntegerAdvancementsRenderingMode            NSFontRenderingMode = 2
 	NSFontAntialiasedIntegerAdvancementsRenderingMode NSFontRenderingMode = 3
 )
 
@@ -2672,18 +2672,18 @@ func (e NSFontRenderingMode) String() string {
 type NSFontTraitMask uint64
 
 const (
-	NSItalicFontMask NSFontTraitMask = 1
-	NSBoldFontMask NSFontTraitMask = 2
-	NSUnboldFontMask NSFontTraitMask = 4
+	NSItalicFontMask                  NSFontTraitMask = 1
+	NSBoldFontMask                    NSFontTraitMask = 2
+	NSUnboldFontMask                  NSFontTraitMask = 4
 	NSNonStandardCharacterSetFontMask NSFontTraitMask = 8
-	NSNarrowFontMask NSFontTraitMask = 16
-	NSExpandedFontMask NSFontTraitMask = 32
-	NSCondensedFontMask NSFontTraitMask = 64
-	NSSmallCapsFontMask NSFontTraitMask = 128
-	NSPosterFontMask NSFontTraitMask = 256
-	NSCompressedFontMask NSFontTraitMask = 512
-	NSFixedPitchFontMask NSFontTraitMask = 1024
-	NSUnitalicFontMask NSFontTraitMask = 16777216
+	NSNarrowFontMask                  NSFontTraitMask = 16
+	NSExpandedFontMask                NSFontTraitMask = 32
+	NSCondensedFontMask               NSFontTraitMask = 64
+	NSSmallCapsFontMask               NSFontTraitMask = 128
+	NSPosterFontMask                  NSFontTraitMask = 256
+	NSCompressedFontMask              NSFontTraitMask = 512
+	NSFixedPitchFontMask              NSFontTraitMask = 1024
+	NSUnitalicFontMask                NSFontTraitMask = 16777216
 )
 
 func (e NSFontTraitMask) String() string {
@@ -2733,12 +2733,12 @@ func (e NSFontTraitMask) String() string {
 type NSGestureRecognizerState int64
 
 const (
-	NSGestureRecognizerStatePossible NSGestureRecognizerState = 0
-	NSGestureRecognizerStateBegan NSGestureRecognizerState = 1
-	NSGestureRecognizerStateChanged NSGestureRecognizerState = 2
-	NSGestureRecognizerStateEnded NSGestureRecognizerState = 3
-	NSGestureRecognizerStateCancelled NSGestureRecognizerState = 4
-	NSGestureRecognizerStateFailed NSGestureRecognizerState = 5
+	NSGestureRecognizerStatePossible   NSGestureRecognizerState = 0
+	NSGestureRecognizerStateBegan      NSGestureRecognizerState = 1
+	NSGestureRecognizerStateChanged    NSGestureRecognizerState = 2
+	NSGestureRecognizerStateEnded      NSGestureRecognizerState = 3
+	NSGestureRecognizerStateCancelled  NSGestureRecognizerState = 4
+	NSGestureRecognizerStateFailed     NSGestureRecognizerState = 5
 	NSGestureRecognizerStateRecognized NSGestureRecognizerState = 3
 )
 
@@ -2818,9 +2818,9 @@ func (e NSGlyphInscription) String() string {
 type NSGlyphProperty int64
 
 const (
-	NSGlyphPropertyNull NSGlyphProperty = 1
+	NSGlyphPropertyNull             NSGlyphProperty = 1
 	NSGlyphPropertyControlCharacter NSGlyphProperty = 2
-	NSGlyphPropertyElastic NSGlyphProperty = 4
+	NSGlyphPropertyElastic          NSGlyphProperty = 4
 	NSGlyphPropertyNonBaseCharacter NSGlyphProperty = 8
 )
 
@@ -2849,7 +2849,7 @@ type NSGradientDrawingOptions uint64
 
 const (
 	NSGradientDrawsBeforeStartingLocation NSGradientDrawingOptions = 1
-	NSGradientDrawsAfterEndingLocation NSGradientDrawingOptions = 2
+	NSGradientDrawsAfterEndingLocation    NSGradientDrawingOptions = 2
 )
 
 func (e NSGradientDrawingOptions) String() string {
@@ -2870,11 +2870,11 @@ func (e NSGradientDrawingOptions) String() string {
 type NSGradientType uint64
 
 const (
-	NSGradientNone NSGradientType = 0
-	NSGradientConcaveWeak NSGradientType = 1
+	NSGradientNone          NSGradientType = 0
+	NSGradientConcaveWeak   NSGradientType = 1
 	NSGradientConcaveStrong NSGradientType = 2
-	NSGradientConvexWeak NSGradientType = 3
-	NSGradientConvexStrong NSGradientType = 4
+	NSGradientConvexWeak    NSGradientType = 3
+	NSGradientConvexStrong  NSGradientType = 4
 )
 
 func (e NSGradientType) String() string {
@@ -2898,13 +2898,13 @@ type NSGridCellPlacement int64
 
 const (
 	NSGridCellPlacementInherited NSGridCellPlacement = 0
-	NSGridCellPlacementNone NSGridCellPlacement = 1
-	NSGridCellPlacementLeading NSGridCellPlacement = 2
-	NSGridCellPlacementTop NSGridCellPlacement = 2
-	NSGridCellPlacementTrailing NSGridCellPlacement = 3
-	NSGridCellPlacementBottom NSGridCellPlacement = 3
-	NSGridCellPlacementCenter NSGridCellPlacement = 4
-	NSGridCellPlacementFill NSGridCellPlacement = 5
+	NSGridCellPlacementNone      NSGridCellPlacement = 1
+	NSGridCellPlacementLeading   NSGridCellPlacement = 2
+	NSGridCellPlacementTop       NSGridCellPlacement = 2
+	NSGridCellPlacementTrailing  NSGridCellPlacement = 3
+	NSGridCellPlacementBottom    NSGridCellPlacement = 3
+	NSGridCellPlacementCenter    NSGridCellPlacement = 4
+	NSGridCellPlacementFill      NSGridCellPlacement = 5
 )
 
 func (e NSGridCellPlacement) String() string {
@@ -2929,10 +2929,10 @@ func (e NSGridCellPlacement) String() string {
 type NSGridRowAlignment int64
 
 const (
-	NSGridRowAlignmentInherited NSGridRowAlignment = 0
-	NSGridRowAlignmentNone NSGridRowAlignment = 1
+	NSGridRowAlignmentInherited     NSGridRowAlignment = 0
+	NSGridRowAlignmentNone          NSGridRowAlignment = 1
 	NSGridRowAlignmentFirstBaseline NSGridRowAlignment = 2
-	NSGridRowAlignmentLastBaseline NSGridRowAlignment = 3
+	NSGridRowAlignmentLastBaseline  NSGridRowAlignment = 3
 )
 
 func (e NSGridRowAlignment) String() string {
@@ -2953,8 +2953,8 @@ func (e NSGridRowAlignment) String() string {
 type NSHapticFeedbackPerformanceTime uint64
 
 const (
-	NSHapticFeedbackPerformanceTimeDefault NSHapticFeedbackPerformanceTime = 0
-	NSHapticFeedbackPerformanceTimeNow NSHapticFeedbackPerformanceTime = 1
+	NSHapticFeedbackPerformanceTimeDefault       NSHapticFeedbackPerformanceTime = 0
+	NSHapticFeedbackPerformanceTimeNow           NSHapticFeedbackPerformanceTime = 1
 	NSHapticFeedbackPerformanceTimeDrawCompleted NSHapticFeedbackPerformanceTime = 2
 )
 
@@ -3003,15 +3003,15 @@ func (e NSHorizontalDirections) String() string {
 type NSImageAlignment uint64
 
 const (
-	NSImageAlignCenter NSImageAlignment = 0
-	NSImageAlignTop NSImageAlignment = 1
-	NSImageAlignTopLeft NSImageAlignment = 2
-	NSImageAlignTopRight NSImageAlignment = 3
-	NSImageAlignLeft NSImageAlignment = 4
-	NSImageAlignBottom NSImageAlignment = 5
-	NSImageAlignBottomLeft NSImageAlignment = 6
+	NSImageAlignCenter      NSImageAlignment = 0
+	NSImageAlignTop         NSImageAlignment = 1
+	NSImageAlignTopLeft     NSImageAlignment = 2
+	NSImageAlignTopRight    NSImageAlignment = 3
+	NSImageAlignLeft        NSImageAlignment = 4
+	NSImageAlignBottom      NSImageAlignment = 5
+	NSImageAlignBottomLeft  NSImageAlignment = 6
 	NSImageAlignBottomRight NSImageAlignment = 7
-	NSImageAlignRight NSImageAlignment = 8
+	NSImageAlignRight       NSImageAlignment = 8
 )
 
 func (e NSImageAlignment) String() string {
@@ -3043,9 +3043,9 @@ type NSImageCacheMode uint64
 
 const (
 	NSImageCacheDefault NSImageCacheMode = 0
-	NSImageCacheAlways NSImageCacheMode = 1
-	NSImageCacheBySize NSImageCacheMode = 2
-	NSImageCacheNever NSImageCacheMode = 3
+	NSImageCacheAlways  NSImageCacheMode = 1
+	NSImageCacheBySize  NSImageCacheMode = 2
+	NSImageCacheNever   NSImageCacheMode = 3
 )
 
 func (e NSImageCacheMode) String() string {
@@ -3094,11 +3094,11 @@ func (e NSImageDynamicRange) String() string {
 type NSImageFrameStyle uint64
 
 const (
-	NSImageFrameNone NSImageFrameStyle = 0
-	NSImageFramePhoto NSImageFrameStyle = 1
+	NSImageFrameNone      NSImageFrameStyle = 0
+	NSImageFramePhoto     NSImageFrameStyle = 1
 	NSImageFrameGrayBezel NSImageFrameStyle = 2
-	NSImageFrameGroove NSImageFrameStyle = 3
-	NSImageFrameButton NSImageFrameStyle = 4
+	NSImageFrameGroove    NSImageFrameStyle = 3
+	NSImageFrameButton    NSImageFrameStyle = 4
 )
 
 func (e NSImageFrameStyle) String() string {
@@ -3122,10 +3122,10 @@ type NSImageInterpolation uint64
 
 const (
 	NSImageInterpolationDefault NSImageInterpolation = 0
-	NSImageInterpolationNone NSImageInterpolation = 1
-	NSImageInterpolationLow NSImageInterpolation = 2
-	NSImageInterpolationMedium NSImageInterpolation = 4
-	NSImageInterpolationHigh NSImageInterpolation = 3
+	NSImageInterpolationNone    NSImageInterpolation = 1
+	NSImageInterpolationLow     NSImageInterpolation = 2
+	NSImageInterpolationMedium  NSImageInterpolation = 4
+	NSImageInterpolationHigh    NSImageInterpolation = 3
 )
 
 func (e NSImageInterpolation) String() string {
@@ -3169,7 +3169,7 @@ func (e NSImageLayoutDirection) String() string {
 type NSImageResizingMode int64
 
 const (
-	NSImageResizingModeTile NSImageResizingMode = 0
+	NSImageResizingModeTile    NSImageResizingMode = 0
 	NSImageResizingModeStretch NSImageResizingMode = 1
 )
 
@@ -3187,9 +3187,9 @@ func (e NSImageResizingMode) String() string {
 type NSImageScaling uint64
 
 const (
-	NSImageScaleProportionallyDown NSImageScaling = 0
-	NSImageScaleAxesIndependently NSImageScaling = 1
-	NSImageScaleNone NSImageScaling = 2
+	NSImageScaleProportionallyDown     NSImageScaling = 0
+	NSImageScaleAxesIndependently      NSImageScaling = 1
+	NSImageScaleNone                   NSImageScaling = 2
 	NSImageScaleProportionallyUpOrDown NSImageScaling = 3
 	// Deprecated: Use NSImageScaleProportionallyDown instead
 	NSScaleProportionally NSImageScaling = 0
@@ -3241,9 +3241,9 @@ func (e NSImageSymbolColorRenderingMode) String() string {
 type NSImageSymbolScale int64
 
 const (
-	NSImageSymbolScaleSmall NSImageSymbolScale = 1
+	NSImageSymbolScaleSmall  NSImageSymbolScale = 1
 	NSImageSymbolScaleMedium NSImageSymbolScale = 2
-	NSImageSymbolScaleLarge NSImageSymbolScale = 3
+	NSImageSymbolScaleLarge  NSImageSymbolScale = 3
 )
 
 func (e NSImageSymbolScale) String() string {
@@ -3286,19 +3286,19 @@ func (e NSImageSymbolVariableValueMode) String() string {
 type NSLayoutAttribute int64
 
 const (
-	NSLayoutAttributeLeft NSLayoutAttribute = 1
-	NSLayoutAttributeRight NSLayoutAttribute = 2
-	NSLayoutAttributeTop NSLayoutAttribute = 3
-	NSLayoutAttributeBottom NSLayoutAttribute = 4
-	NSLayoutAttributeLeading NSLayoutAttribute = 5
-	NSLayoutAttributeTrailing NSLayoutAttribute = 6
-	NSLayoutAttributeWidth NSLayoutAttribute = 7
-	NSLayoutAttributeHeight NSLayoutAttribute = 8
-	NSLayoutAttributeCenterX NSLayoutAttribute = 9
-	NSLayoutAttributeCenterY NSLayoutAttribute = 10
-	NSLayoutAttributeLastBaseline NSLayoutAttribute = 11
-	NSLayoutAttributeBaseline NSLayoutAttribute = 11
-	NSLayoutAttributeFirstBaseline NSLayoutAttribute = 12
+	NSLayoutAttributeLeft           NSLayoutAttribute = 1
+	NSLayoutAttributeRight          NSLayoutAttribute = 2
+	NSLayoutAttributeTop            NSLayoutAttribute = 3
+	NSLayoutAttributeBottom         NSLayoutAttribute = 4
+	NSLayoutAttributeLeading        NSLayoutAttribute = 5
+	NSLayoutAttributeTrailing       NSLayoutAttribute = 6
+	NSLayoutAttributeWidth          NSLayoutAttribute = 7
+	NSLayoutAttributeHeight         NSLayoutAttribute = 8
+	NSLayoutAttributeCenterX        NSLayoutAttribute = 9
+	NSLayoutAttributeCenterY        NSLayoutAttribute = 10
+	NSLayoutAttributeLastBaseline   NSLayoutAttribute = 11
+	NSLayoutAttributeBaseline       NSLayoutAttribute = 11
+	NSLayoutAttributeFirstBaseline  NSLayoutAttribute = 12
 	NSLayoutAttributeNotAnAttribute NSLayoutAttribute = 0
 )
 
@@ -3339,7 +3339,7 @@ type NSLayoutConstraintOrientation int64
 
 const (
 	NSLayoutConstraintOrientationHorizontal NSLayoutConstraintOrientation = 0
-	NSLayoutConstraintOrientationVertical NSLayoutConstraintOrientation = 1
+	NSLayoutConstraintOrientationVertical   NSLayoutConstraintOrientation = 1
 )
 
 func (e NSLayoutConstraintOrientation) String() string {
@@ -3357,22 +3357,22 @@ func (e NSLayoutConstraintOrientation) String() string {
 type NSLayoutFormatOptions uint64
 
 const (
-	NSLayoutFormatAlignAllLeft NSLayoutFormatOptions = 2
-	NSLayoutFormatAlignAllRight NSLayoutFormatOptions = 4
-	NSLayoutFormatAlignAllTop NSLayoutFormatOptions = 8
-	NSLayoutFormatAlignAllBottom NSLayoutFormatOptions = 16
-	NSLayoutFormatAlignAllLeading NSLayoutFormatOptions = 32
-	NSLayoutFormatAlignAllTrailing NSLayoutFormatOptions = 64
-	NSLayoutFormatAlignAllCenterX NSLayoutFormatOptions = 512
-	NSLayoutFormatAlignAllCenterY NSLayoutFormatOptions = 1024
-	NSLayoutFormatAlignAllLastBaseline NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignAllFirstBaseline NSLayoutFormatOptions = 4096
-	NSLayoutFormatAlignAllBaseline NSLayoutFormatOptions = 2048
-	NSLayoutFormatAlignmentMask NSLayoutFormatOptions = 65535
+	NSLayoutFormatAlignAllLeft               NSLayoutFormatOptions = 2
+	NSLayoutFormatAlignAllRight              NSLayoutFormatOptions = 4
+	NSLayoutFormatAlignAllTop                NSLayoutFormatOptions = 8
+	NSLayoutFormatAlignAllBottom             NSLayoutFormatOptions = 16
+	NSLayoutFormatAlignAllLeading            NSLayoutFormatOptions = 32
+	NSLayoutFormatAlignAllTrailing           NSLayoutFormatOptions = 64
+	NSLayoutFormatAlignAllCenterX            NSLayoutFormatOptions = 512
+	NSLayoutFormatAlignAllCenterY            NSLayoutFormatOptions = 1024
+	NSLayoutFormatAlignAllLastBaseline       NSLayoutFormatOptions = 2048
+	NSLayoutFormatAlignAllFirstBaseline      NSLayoutFormatOptions = 4096
+	NSLayoutFormatAlignAllBaseline           NSLayoutFormatOptions = 2048
+	NSLayoutFormatAlignmentMask              NSLayoutFormatOptions = 65535
 	NSLayoutFormatDirectionLeadingToTrailing NSLayoutFormatOptions = 0
-	NSLayoutFormatDirectionLeftToRight NSLayoutFormatOptions = 65536
-	NSLayoutFormatDirectionRightToLeft NSLayoutFormatOptions = 131072
-	NSLayoutFormatDirectionMask NSLayoutFormatOptions = 196608
+	NSLayoutFormatDirectionLeftToRight       NSLayoutFormatOptions = 65536
+	NSLayoutFormatDirectionRightToLeft       NSLayoutFormatOptions = 131072
+	NSLayoutFormatDirectionMask              NSLayoutFormatOptions = 196608
 )
 
 func (e NSLayoutFormatOptions) String() string {
@@ -3431,8 +3431,8 @@ func (e NSLayoutFormatOptions) String() string {
 type NSLayoutRelation int64
 
 const (
-	NSLayoutRelationLessThanOrEqual NSLayoutRelation = -1
-	NSLayoutRelationEqual NSLayoutRelation = 0
+	NSLayoutRelationLessThanOrEqual    NSLayoutRelation = -1
+	NSLayoutRelationEqual              NSLayoutRelation = 0
 	NSLayoutRelationGreaterThanOrEqual NSLayoutRelation = 1
 )
 
@@ -3452,8 +3452,8 @@ func (e NSLayoutRelation) String() string {
 type NSLevelIndicatorPlaceholderVisibility int64
 
 const (
-	NSLevelIndicatorPlaceholderVisibilityAutomatic NSLevelIndicatorPlaceholderVisibility = 0
-	NSLevelIndicatorPlaceholderVisibilityAlways NSLevelIndicatorPlaceholderVisibility = 1
+	NSLevelIndicatorPlaceholderVisibilityAutomatic    NSLevelIndicatorPlaceholderVisibility = 0
+	NSLevelIndicatorPlaceholderVisibilityAlways       NSLevelIndicatorPlaceholderVisibility = 1
 	NSLevelIndicatorPlaceholderVisibilityWhileEditing NSLevelIndicatorPlaceholderVisibility = 2
 )
 
@@ -3473,10 +3473,10 @@ func (e NSLevelIndicatorPlaceholderVisibility) String() string {
 type NSLevelIndicatorStyle uint64
 
 const (
-	NSLevelIndicatorStyleRelevancy NSLevelIndicatorStyle = 0
+	NSLevelIndicatorStyleRelevancy          NSLevelIndicatorStyle = 0
 	NSLevelIndicatorStyleContinuousCapacity NSLevelIndicatorStyle = 1
-	NSLevelIndicatorStyleDiscreteCapacity NSLevelIndicatorStyle = 2
-	NSLevelIndicatorStyleRating NSLevelIndicatorStyle = 3
+	NSLevelIndicatorStyleDiscreteCapacity   NSLevelIndicatorStyle = 2
+	NSLevelIndicatorStyleRating             NSLevelIndicatorStyle = 3
 )
 
 func (e NSLevelIndicatorStyle) String() string {
@@ -3497,11 +3497,11 @@ func (e NSLevelIndicatorStyle) String() string {
 type NSLineBreakMode uint64
 
 const (
-	NSLineBreakByWordWrapping NSLineBreakMode = 0
-	NSLineBreakByCharWrapping NSLineBreakMode = 1
-	NSLineBreakByClipping NSLineBreakMode = 2
-	NSLineBreakByTruncatingHead NSLineBreakMode = 3
-	NSLineBreakByTruncatingTail NSLineBreakMode = 4
+	NSLineBreakByWordWrapping     NSLineBreakMode = 0
+	NSLineBreakByCharWrapping     NSLineBreakMode = 1
+	NSLineBreakByClipping         NSLineBreakMode = 2
+	NSLineBreakByTruncatingHead   NSLineBreakMode = 3
+	NSLineBreakByTruncatingTail   NSLineBreakMode = 4
 	NSLineBreakByTruncatingMiddle NSLineBreakMode = 5
 )
 
@@ -3528,10 +3528,10 @@ func (e NSLineBreakMode) String() string {
 type NSLineBreakStrategy uint64
 
 const (
-	NSLineBreakStrategyNone NSLineBreakStrategy = 0
-	NSLineBreakStrategyPushOut NSLineBreakStrategy = 1
+	NSLineBreakStrategyNone               NSLineBreakStrategy = 0
+	NSLineBreakStrategyPushOut            NSLineBreakStrategy = 1
 	NSLineBreakStrategyHangulWordPriority NSLineBreakStrategy = 2
-	NSLineBreakStrategyStandard NSLineBreakStrategy = 65535
+	NSLineBreakStrategyStandard           NSLineBreakStrategy = 65535
 )
 
 func (e NSLineBreakStrategy) String() string {
@@ -3554,8 +3554,8 @@ func (e NSLineBreakStrategy) String() string {
 type NSLineCapStyle uint64
 
 const (
-	NSLineCapStyleButt NSLineCapStyle = 0
-	NSLineCapStyleRound NSLineCapStyle = 1
+	NSLineCapStyleButt   NSLineCapStyle = 0
+	NSLineCapStyleRound  NSLineCapStyle = 1
 	NSLineCapStyleSquare NSLineCapStyle = 2
 )
 
@@ -3597,10 +3597,10 @@ type NSLineMovementDirection uint64
 
 const (
 	NSLineDoesntMove NSLineMovementDirection = 0
-	NSLineMovesLeft NSLineMovementDirection = 1
+	NSLineMovesLeft  NSLineMovementDirection = 1
 	NSLineMovesRight NSLineMovementDirection = 2
-	NSLineMovesDown NSLineMovementDirection = 3
-	NSLineMovesUp NSLineMovementDirection = 4
+	NSLineMovesDown  NSLineMovementDirection = 3
+	NSLineMovesUp    NSLineMovementDirection = 4
 )
 
 func (e NSLineMovementDirection) String() string {
@@ -3623,10 +3623,10 @@ func (e NSLineMovementDirection) String() string {
 type NSLineSweepDirection uint64
 
 const (
-	NSLineSweepLeft NSLineSweepDirection = 0
+	NSLineSweepLeft  NSLineSweepDirection = 0
 	NSLineSweepRight NSLineSweepDirection = 1
-	NSLineSweepDown NSLineSweepDirection = 2
-	NSLineSweepUp NSLineSweepDirection = 3
+	NSLineSweepDown  NSLineSweepDirection = 2
+	NSLineSweepUp    NSLineSweepDirection = 3
 )
 
 func (e NSLineSweepDirection) String() string {
@@ -3647,10 +3647,10 @@ func (e NSLineSweepDirection) String() string {
 type NSMatrixMode uint64
 
 const (
-	NSRadioModeMatrix NSMatrixMode = 0
+	NSRadioModeMatrix     NSMatrixMode = 0
 	NSHighlightModeMatrix NSMatrixMode = 1
-	NSListModeMatrix NSMatrixMode = 2
-	NSTrackModeMatrix NSMatrixMode = 3
+	NSListModeMatrix      NSMatrixMode = 2
+	NSTrackModeMatrix     NSMatrixMode = 3
 )
 
 func (e NSMatrixMode) String() string {
@@ -3749,11 +3749,11 @@ func (e NSMenuPresentationStyle) String() string {
 type NSMenuProperties uint64
 
 const (
-	NSMenuPropertyItemTitle NSMenuProperties = 1
-	NSMenuPropertyItemAttributedTitle NSMenuProperties = 2
-	NSMenuPropertyItemKeyEquivalent NSMenuProperties = 4
-	NSMenuPropertyItemImage NSMenuProperties = 8
-	NSMenuPropertyItemEnabled NSMenuProperties = 16
+	NSMenuPropertyItemTitle                    NSMenuProperties = 1
+	NSMenuPropertyItemAttributedTitle          NSMenuProperties = 2
+	NSMenuPropertyItemKeyEquivalent            NSMenuProperties = 4
+	NSMenuPropertyItemImage                    NSMenuProperties = 8
+	NSMenuPropertyItemEnabled                  NSMenuProperties = 16
 	NSMenuPropertyItemAccessibilityDescription NSMenuProperties = 32
 )
 
@@ -3829,16 +3829,16 @@ func (e NSMultibyteGlyphPacking) String() string {
 type NSOpenGLContextParameter int64
 
 const (
-	NSOpenGLContextParameterSwapInterval NSOpenGLContextParameter = 222
-	NSOpenGLContextParameterSurfaceOrder NSOpenGLContextParameter = 235
-	NSOpenGLContextParameterSurfaceOpacity NSOpenGLContextParameter = 236
-	NSOpenGLContextParameterSurfaceBackingSize NSOpenGLContextParameter = 304
-	NSOpenGLContextParameterReclaimResources NSOpenGLContextParameter = 308
-	NSOpenGLContextParameterCurrentRendererID NSOpenGLContextParameter = 309
-	NSOpenGLContextParameterGPUVertexProcessing NSOpenGLContextParameter = 310
+	NSOpenGLContextParameterSwapInterval          NSOpenGLContextParameter = 222
+	NSOpenGLContextParameterSurfaceOrder          NSOpenGLContextParameter = 235
+	NSOpenGLContextParameterSurfaceOpacity        NSOpenGLContextParameter = 236
+	NSOpenGLContextParameterSurfaceBackingSize    NSOpenGLContextParameter = 304
+	NSOpenGLContextParameterReclaimResources      NSOpenGLContextParameter = 308
+	NSOpenGLContextParameterCurrentRendererID     NSOpenGLContextParameter = 309
+	NSOpenGLContextParameterGPUVertexProcessing   NSOpenGLContextParameter = 310
 	NSOpenGLContextParameterGPUFragmentProcessing NSOpenGLContextParameter = 311
-	NSOpenGLContextParameterHasDrawable NSOpenGLContextParameter = 314
-	NSOpenGLContextParameterMPSwapsInFlight NSOpenGLContextParameter = 315
+	NSOpenGLContextParameterHasDrawable           NSOpenGLContextParameter = 314
+	NSOpenGLContextParameterMPSwapsInFlight       NSOpenGLContextParameter = 315
 	// Deprecated: since macOS 10.14.
 	NSOpenGLContextParameterSwapRectangle NSOpenGLContextParameter = 200
 	// Deprecated: since macOS 10.14.
@@ -3892,10 +3892,10 @@ func (e NSOpenGLContextParameter) String() string {
 type NSOpenGLGlobalOption int64
 
 const (
-	NSOpenGLGOFormatCacheSize NSOpenGLGlobalOption = 501
+	NSOpenGLGOFormatCacheSize  NSOpenGLGlobalOption = 501
 	NSOpenGLGOClearFormatCache NSOpenGLGlobalOption = 502
-	NSOpenGLGORetainRenderers NSOpenGLGlobalOption = 503
-	NSOpenGLGOUseBuildCache NSOpenGLGlobalOption = 506
+	NSOpenGLGORetainRenderers  NSOpenGLGlobalOption = 503
+	NSOpenGLGOUseBuildCache    NSOpenGLGlobalOption = 506
 	// Deprecated: since macOS 10.4.
 	NSOpenGLGOResetLibrary NSOpenGLGlobalOption = 504
 )
@@ -3921,8 +3921,8 @@ func (e NSOpenGLGlobalOption) String() string {
 type NSPDFPanelOptions int64
 
 const (
-	NSPDFPanelShowsPaperSize NSPDFPanelOptions = 4
-	NSPDFPanelShowsOrientation NSPDFPanelOptions = 8
+	NSPDFPanelShowsPaperSize          NSPDFPanelOptions = 4
+	NSPDFPanelShowsOrientation        NSPDFPanelOptions = 8
 	NSPDFPanelRequestsParentDirectory NSPDFPanelOptions = 16777216
 )
 
@@ -3946,8 +3946,8 @@ func (e NSPDFPanelOptions) String() string {
 type NSPageControllerTransitionStyle int64
 
 const (
-	NSPageControllerTransitionStyleStackHistory NSPageControllerTransitionStyle = 0
-	NSPageControllerTransitionStyleStackBook NSPageControllerTransitionStyle = 1
+	NSPageControllerTransitionStyleStackHistory    NSPageControllerTransitionStyle = 0
+	NSPageControllerTransitionStyleStackBook       NSPageControllerTransitionStyle = 1
 	NSPageControllerTransitionStyleHorizontalStrip NSPageControllerTransitionStyle = 2
 )
 
@@ -3968,7 +3968,7 @@ type NSPageLayoutResult int64
 
 const (
 	NSPageLayoutResultCancelled NSPageLayoutResult = 0
-	NSPageLayoutResultChanged NSPageLayoutResult = 1
+	NSPageLayoutResultChanged   NSPageLayoutResult = 1
 )
 
 func (e NSPageLayoutResult) String() string {
@@ -3985,7 +3985,7 @@ func (e NSPageLayoutResult) String() string {
 type NSPaperOrientation int64
 
 const (
-	NSPaperOrientationPortrait NSPaperOrientation = 0
+	NSPaperOrientationPortrait  NSPaperOrientation = 0
 	NSPaperOrientationLandscape NSPaperOrientation = 1
 )
 
@@ -4051,7 +4051,7 @@ type NSPathStyle int64
 
 const (
 	NSPathStyleStandard NSPathStyle = 0
-	NSPathStylePopUp NSPathStyle = 2
+	NSPathStylePopUp    NSPathStyle = 2
 	// Deprecated: since macOS 10.7.
 	NSPathStyleNavigationBar NSPathStyle = 1
 )
@@ -4073,7 +4073,7 @@ type NSPickerTouchBarItemControlRepresentation int64
 
 const (
 	NSPickerTouchBarItemControlRepresentationAutomatic NSPickerTouchBarItemControlRepresentation = 0
-	NSPickerTouchBarItemControlRepresentationExpanded NSPickerTouchBarItemControlRepresentation = 1
+	NSPickerTouchBarItemControlRepresentationExpanded  NSPickerTouchBarItemControlRepresentation = 1
 	NSPickerTouchBarItemControlRepresentationCollapsed NSPickerTouchBarItemControlRepresentation = 2
 )
 
@@ -4117,9 +4117,9 @@ type NSPointingDeviceType uint64
 const (
 	// Deprecated: since macOS 10.12.
 	NSPointingDeviceTypeUnknown NSPointingDeviceType = 0
-	NSPointingDeviceTypePen NSPointingDeviceType = 1
-	NSPointingDeviceTypeCursor NSPointingDeviceType = 2
-	NSPointingDeviceTypeEraser NSPointingDeviceType = 3
+	NSPointingDeviceTypePen     NSPointingDeviceType = 1
+	NSPointingDeviceTypeCursor  NSPointingDeviceType = 2
+	NSPointingDeviceTypeEraser  NSPointingDeviceType = 3
 )
 
 func (e NSPointingDeviceType) String() string {
@@ -4140,7 +4140,7 @@ func (e NSPointingDeviceType) String() string {
 type NSPopUpArrowPosition uint64
 
 const (
-	NSPopUpNoArrow NSPopUpArrowPosition = 0
+	NSPopUpNoArrow       NSPopUpArrowPosition = 0
 	NSPopUpArrowAtCenter NSPopUpArrowPosition = 1
 	NSPopUpArrowAtBottom NSPopUpArrowPosition = 2
 )
@@ -4163,8 +4163,8 @@ type NSPopoverBehavior int64
 
 const (
 	NSPopoverBehaviorApplicationDefined NSPopoverBehavior = 0
-	NSPopoverBehaviorTransient NSPopoverBehavior = 1
-	NSPopoverBehaviorSemitransient NSPopoverBehavior = 2
+	NSPopoverBehaviorTransient          NSPopoverBehavior = 1
+	NSPopoverBehaviorSemitransient      NSPopoverBehavior = 2
 )
 
 func (e NSPopoverBehavior) String() string {
@@ -4183,13 +4183,13 @@ func (e NSPopoverBehavior) String() string {
 type NSPressureBehavior int64
 
 const (
-	NSPressureBehaviorUnknown NSPressureBehavior = -1
-	NSPressureBehaviorPrimaryDefault NSPressureBehavior = 0
-	NSPressureBehaviorPrimaryClick NSPressureBehavior = 1
-	NSPressureBehaviorPrimaryGeneric NSPressureBehavior = 2
+	NSPressureBehaviorUnknown            NSPressureBehavior = -1
+	NSPressureBehaviorPrimaryDefault     NSPressureBehavior = 0
+	NSPressureBehaviorPrimaryClick       NSPressureBehavior = 1
+	NSPressureBehaviorPrimaryGeneric     NSPressureBehavior = 2
 	NSPressureBehaviorPrimaryAccelerator NSPressureBehavior = 3
-	NSPressureBehaviorPrimaryDeepClick NSPressureBehavior = 5
-	NSPressureBehaviorPrimaryDeepDrag NSPressureBehavior = 6
+	NSPressureBehaviorPrimaryDeepClick   NSPressureBehavior = 5
+	NSPressureBehaviorPrimaryDeepDrag    NSPressureBehavior = 6
 )
 
 func (e NSPressureBehavior) String() string {
@@ -4217,14 +4217,14 @@ func (e NSPressureBehavior) String() string {
 type NSPrintPanelOptions uint64
 
 const (
-	NSPrintPanelShowsCopies NSPrintPanelOptions = 1
-	NSPrintPanelShowsPageRange NSPrintPanelOptions = 2
-	NSPrintPanelShowsPaperSize NSPrintPanelOptions = 4
-	NSPrintPanelShowsOrientation NSPrintPanelOptions = 8
-	NSPrintPanelShowsScaling NSPrintPanelOptions = 16
-	NSPrintPanelShowsPrintSelection NSPrintPanelOptions = 32
+	NSPrintPanelShowsCopies             NSPrintPanelOptions = 1
+	NSPrintPanelShowsPageRange          NSPrintPanelOptions = 2
+	NSPrintPanelShowsPaperSize          NSPrintPanelOptions = 4
+	NSPrintPanelShowsOrientation        NSPrintPanelOptions = 8
+	NSPrintPanelShowsScaling            NSPrintPanelOptions = 16
+	NSPrintPanelShowsPrintSelection     NSPrintPanelOptions = 32
 	NSPrintPanelShowsPageSetupAccessory NSPrintPanelOptions = 256
-	NSPrintPanelShowsPreview NSPrintPanelOptions = 131072
+	NSPrintPanelShowsPreview            NSPrintPanelOptions = 131072
 )
 
 func (e NSPrintPanelOptions) String() string {
@@ -4263,7 +4263,7 @@ type NSPrintPanelResult int64
 
 const (
 	NSPrintPanelResultCancelled NSPrintPanelResult = 0
-	NSPrintPanelResultPrinted NSPrintPanelResult = 1
+	NSPrintPanelResultPrinted   NSPrintPanelResult = 1
 )
 
 func (e NSPrintPanelResult) String() string {
@@ -4280,7 +4280,7 @@ func (e NSPrintPanelResult) String() string {
 type NSPrintRenderingQuality int64
 
 const (
-	NSPrintRenderingQualityBest NSPrintRenderingQuality = 0
+	NSPrintRenderingQualityBest       NSPrintRenderingQuality = 0
 	NSPrintRenderingQualityResponsive NSPrintRenderingQuality = 1
 )
 
@@ -4298,9 +4298,9 @@ func (e NSPrintRenderingQuality) String() string {
 type NSPrinterTableStatus uint64
 
 const (
-	NSPrinterTableOK NSPrinterTableStatus = 0
+	NSPrinterTableOK       NSPrinterTableStatus = 0
 	NSPrinterTableNotFound NSPrinterTableStatus = 1
-	NSPrinterTableError NSPrinterTableStatus = 2
+	NSPrinterTableError    NSPrinterTableStatus = 2
 )
 
 func (e NSPrinterTableStatus) String() string {
@@ -4320,9 +4320,9 @@ type NSPrintingPageOrder int64
 
 const (
 	NSDescendingPageOrder NSPrintingPageOrder = -1
-	NSSpecialPageOrder NSPrintingPageOrder = 0
-	NSAscendingPageOrder NSPrintingPageOrder = 1
-	NSUnknownPageOrder NSPrintingPageOrder = 2
+	NSSpecialPageOrder    NSPrintingPageOrder = 0
+	NSAscendingPageOrder  NSPrintingPageOrder = 1
+	NSUnknownPageOrder    NSPrintingPageOrder = 2
 )
 
 func (e NSPrintingPageOrder) String() string {
@@ -4344,8 +4344,8 @@ type NSPrintingPaginationMode uint64
 
 const (
 	NSPrintingPaginationModeAutomatic NSPrintingPaginationMode = 0
-	NSPrintingPaginationModeFit NSPrintingPaginationMode = 1
-	NSPrintingPaginationModeClip NSPrintingPaginationMode = 2
+	NSPrintingPaginationModeFit       NSPrintingPaginationMode = 1
+	NSPrintingPaginationModeClip      NSPrintingPaginationMode = 2
 )
 
 func (e NSPrintingPaginationMode) String() string {
@@ -4364,7 +4364,7 @@ func (e NSPrintingPaginationMode) String() string {
 type NSProgressIndicatorStyle uint64
 
 const (
-	NSProgressIndicatorStyleBar NSProgressIndicatorStyle = 0
+	NSProgressIndicatorStyleBar      NSProgressIndicatorStyle = 0
 	NSProgressIndicatorStyleSpinning NSProgressIndicatorStyle = 1
 )
 
@@ -4382,15 +4382,15 @@ func (e NSProgressIndicatorStyle) String() string {
 type NSRectAlignment int64
 
 const (
-	NSRectAlignmentNone NSRectAlignment = 0
-	NSRectAlignmentTop NSRectAlignment = 1
-	NSRectAlignmentTopLeading NSRectAlignment = 2
-	NSRectAlignmentLeading NSRectAlignment = 3
-	NSRectAlignmentBottomLeading NSRectAlignment = 4
-	NSRectAlignmentBottom NSRectAlignment = 5
+	NSRectAlignmentNone           NSRectAlignment = 0
+	NSRectAlignmentTop            NSRectAlignment = 1
+	NSRectAlignmentTopLeading     NSRectAlignment = 2
+	NSRectAlignmentLeading        NSRectAlignment = 3
+	NSRectAlignmentBottomLeading  NSRectAlignment = 4
+	NSRectAlignmentBottom         NSRectAlignment = 5
 	NSRectAlignmentBottomTrailing NSRectAlignment = 6
-	NSRectAlignmentTrailing NSRectAlignment = 7
-	NSRectAlignmentTopTrailing NSRectAlignment = 8
+	NSRectAlignmentTrailing       NSRectAlignment = 7
+	NSRectAlignmentTopTrailing    NSRectAlignment = 8
 )
 
 func (e NSRectAlignment) String() string {
@@ -4423,7 +4423,7 @@ func (e NSRectAlignment) String() string {
 type NSRemoteNotificationType uint64
 
 const (
-	NSRemoteNotificationTypeNone NSRemoteNotificationType = 0
+	NSRemoteNotificationTypeNone  NSRemoteNotificationType = 0
 	NSRemoteNotificationTypeBadge NSRemoteNotificationType = 1
 	NSRemoteNotificationTypeSound NSRemoteNotificationType = 2
 	NSRemoteNotificationTypeAlert NSRemoteNotificationType = 4
@@ -4449,7 +4449,7 @@ func (e NSRemoteNotificationType) String() string {
 type NSRequestUserAttentionType uint64
 
 const (
-	NSCriticalRequest NSRequestUserAttentionType = 0
+	NSCriticalRequest      NSRequestUserAttentionType = 0
 	NSInformationalRequest NSRequestUserAttentionType = 10
 )
 
@@ -4467,10 +4467,10 @@ func (e NSRequestUserAttentionType) String() string {
 type NSRuleEditorNestingMode uint64
 
 const (
-	NSRuleEditorNestingModeSingle NSRuleEditorNestingMode = 0
-	NSRuleEditorNestingModeList NSRuleEditorNestingMode = 1
+	NSRuleEditorNestingModeSingle   NSRuleEditorNestingMode = 0
+	NSRuleEditorNestingModeList     NSRuleEditorNestingMode = 1
 	NSRuleEditorNestingModeCompound NSRuleEditorNestingMode = 2
-	NSRuleEditorNestingModeSimple NSRuleEditorNestingMode = 3
+	NSRuleEditorNestingModeSimple   NSRuleEditorNestingMode = 3
 )
 
 func (e NSRuleEditorNestingMode) String() string {
@@ -4491,7 +4491,7 @@ func (e NSRuleEditorNestingMode) String() string {
 type NSRuleEditorRowType uint64
 
 const (
-	NSRuleEditorRowTypeSimple NSRuleEditorRowType = 0
+	NSRuleEditorRowTypeSimple   NSRuleEditorRowType = 0
 	NSRuleEditorRowTypeCompound NSRuleEditorRowType = 1
 )
 
@@ -4510,7 +4510,7 @@ type NSRulerOrientation uint64
 
 const (
 	NSHorizontalRuler NSRulerOrientation = 0
-	NSVerticalRuler NSRulerOrientation = 1
+	NSVerticalRuler   NSRulerOrientation = 1
 )
 
 func (e NSRulerOrientation) String() string {
@@ -4527,12 +4527,12 @@ func (e NSRulerOrientation) String() string {
 type NSSaveOperationType uint64
 
 const (
-	NSSaveOperation NSSaveOperationType = 0
-	NSSaveAsOperation NSSaveOperationType = 1
-	NSSaveToOperation NSSaveOperationType = 2
-	NSAutosaveInPlaceOperation NSSaveOperationType = 4
+	NSSaveOperation              NSSaveOperationType = 0
+	NSSaveAsOperation            NSSaveOperationType = 1
+	NSSaveToOperation            NSSaveOperationType = 2
+	NSAutosaveInPlaceOperation   NSSaveOperationType = 4
 	NSAutosaveElsewhereOperation NSSaveOperationType = 3
-	NSAutosaveAsOperation NSSaveOperationType = 5
+	NSAutosaveAsOperation        NSSaveOperationType = 5
 	// Deprecated: Use NSAutosaveElsewhereOperation instead
 	NSAutosaveOperation NSSaveOperationType = 3
 )
@@ -4560,10 +4560,10 @@ func (e NSSaveOperationType) String() string {
 type NSScrollArrowPosition uint64
 
 const (
-	NSScrollerArrowsMaxEnd NSScrollArrowPosition = 0
-	NSScrollerArrowsMinEnd NSScrollArrowPosition = 1
+	NSScrollerArrowsMaxEnd         NSScrollArrowPosition = 0
+	NSScrollerArrowsMinEnd         NSScrollArrowPosition = 1
 	NSScrollerArrowsDefaultSetting NSScrollArrowPosition = 0
-	NSScrollerArrowsNone NSScrollArrowPosition = 2
+	NSScrollerArrowsNone           NSScrollArrowPosition = 2
 )
 
 func (e NSScrollArrowPosition) String() string {
@@ -4583,8 +4583,8 @@ type NSScrollElasticity int64
 
 const (
 	NSScrollElasticityAutomatic NSScrollElasticity = 0
-	NSScrollElasticityNone NSScrollElasticity = 1
-	NSScrollElasticityAllowed NSScrollElasticity = 2
+	NSScrollElasticityNone      NSScrollElasticity = 1
+	NSScrollElasticityAllowed   NSScrollElasticity = 2
 )
 
 func (e NSScrollElasticity) String() string {
@@ -4604,8 +4604,8 @@ type NSScrollViewFindBarPosition int64
 
 const (
 	NSScrollViewFindBarPositionAboveHorizontalRuler NSScrollViewFindBarPosition = 0
-	NSScrollViewFindBarPositionAboveContent NSScrollViewFindBarPosition = 1
-	NSScrollViewFindBarPositionBelowContent NSScrollViewFindBarPosition = 2
+	NSScrollViewFindBarPositionAboveContent         NSScrollViewFindBarPosition = 1
+	NSScrollViewFindBarPositionBelowContent         NSScrollViewFindBarPosition = 2
 )
 
 func (e NSScrollViewFindBarPosition) String() string {
@@ -4646,8 +4646,8 @@ type NSScrollerKnobStyle int64
 
 const (
 	NSScrollerKnobStyleDefault NSScrollerKnobStyle = 0
-	NSScrollerKnobStyleDark NSScrollerKnobStyle = 1
-	NSScrollerKnobStyleLight NSScrollerKnobStyle = 2
+	NSScrollerKnobStyleDark    NSScrollerKnobStyle = 1
+	NSScrollerKnobStyleLight   NSScrollerKnobStyle = 2
 )
 
 func (e NSScrollerKnobStyle) String() string {
@@ -4667,9 +4667,9 @@ func (e NSScrollerKnobStyle) String() string {
 type NSScrollerPart uint64
 
 const (
-	NSScrollerNoPart NSScrollerPart = 0
+	NSScrollerNoPart        NSScrollerPart = 0
 	NSScrollerDecrementPage NSScrollerPart = 1
-	NSScrollerKnob NSScrollerPart = 2
+	NSScrollerKnob          NSScrollerPart = 2
 	NSScrollerIncrementPage NSScrollerPart = 3
 	// Deprecated: Scroller arrows are not used anymore.
 	NSScrollerDecrementLine NSScrollerPart = 4
@@ -4703,7 +4703,7 @@ func (e NSScrollerPart) String() string {
 type NSScrollerStyle int64
 
 const (
-	NSScrollerStyleLegacy NSScrollerStyle = 0
+	NSScrollerStyleLegacy  NSScrollerStyle = 0
 	NSScrollerStyleOverlay NSScrollerStyle = 1
 )
 
@@ -4722,10 +4722,10 @@ func (e NSScrollerStyle) String() string {
 type NSScrubberAlignment int64
 
 const (
-	NSScrubberAlignmentNone NSScrubberAlignment = 0
-	NSScrubberAlignmentLeading NSScrubberAlignment = 1
+	NSScrubberAlignmentNone     NSScrubberAlignment = 0
+	NSScrubberAlignmentLeading  NSScrubberAlignment = 1
 	NSScrubberAlignmentTrailing NSScrubberAlignment = 2
-	NSScrubberAlignmentCenter NSScrubberAlignment = 3
+	NSScrubberAlignmentCenter   NSScrubberAlignment = 3
 )
 
 func (e NSScrubberAlignment) String() string {
@@ -4748,7 +4748,7 @@ type NSScrubberMode int64
 
 const (
 	NSScrubberModeFixed NSScrubberMode = 0
-	NSScrubberModeFree NSScrubberMode = 1
+	NSScrubberModeFree  NSScrubberMode = 1
 )
 
 func (e NSScrubberMode) String() string {
@@ -4793,14 +4793,14 @@ func (e NSSegmentDistribution) String() string {
 type NSSegmentStyle int64
 
 const (
-	NSSegmentStyleAutomatic NSSegmentStyle = 0
-	NSSegmentStyleRounded NSSegmentStyle = 1
-	NSSegmentStyleRoundRect NSSegmentStyle = 3
-	NSSegmentStyleTexturedSquare NSSegmentStyle = 4
-	NSSegmentStyleSmallSquare NSSegmentStyle = 6
-	NSSegmentStyleSeparated NSSegmentStyle = 8
+	NSSegmentStyleAutomatic       NSSegmentStyle = 0
+	NSSegmentStyleRounded         NSSegmentStyle = 1
+	NSSegmentStyleRoundRect       NSSegmentStyle = 3
+	NSSegmentStyleTexturedSquare  NSSegmentStyle = 4
+	NSSegmentStyleSmallSquare     NSSegmentStyle = 6
+	NSSegmentStyleSeparated       NSSegmentStyle = 8
 	NSSegmentStyleTexturedRounded NSSegmentStyle = 2
-	NSSegmentStyleCapsule NSSegmentStyle = 5
+	NSSegmentStyleCapsule         NSSegmentStyle = 5
 )
 
 func (e NSSegmentStyle) String() string {
@@ -4829,9 +4829,9 @@ func (e NSSegmentStyle) String() string {
 type NSSegmentSwitchTracking uint64
 
 const (
-	NSSegmentSwitchTrackingSelectOne NSSegmentSwitchTracking = 0
-	NSSegmentSwitchTrackingSelectAny NSSegmentSwitchTracking = 1
-	NSSegmentSwitchTrackingMomentary NSSegmentSwitchTracking = 2
+	NSSegmentSwitchTrackingSelectOne            NSSegmentSwitchTracking = 0
+	NSSegmentSwitchTrackingSelectAny            NSSegmentSwitchTracking = 1
+	NSSegmentSwitchTrackingMomentary            NSSegmentSwitchTracking = 2
 	NSSegmentSwitchTrackingMomentaryAccelerator NSSegmentSwitchTracking = 3
 )
 
@@ -4853,7 +4853,7 @@ func (e NSSegmentSwitchTracking) String() string {
 type NSSelectionAffinity uint64
 
 const (
-	NSSelectionAffinityUpstream NSSelectionAffinity = 0
+	NSSelectionAffinityUpstream   NSSelectionAffinity = 0
 	NSSelectionAffinityDownstream NSSelectionAffinity = 1
 )
 
@@ -4871,8 +4871,8 @@ func (e NSSelectionAffinity) String() string {
 type NSSelectionDirection uint64
 
 const (
-	NSDirectSelection NSSelectionDirection = 0
-	NSSelectingNext NSSelectionDirection = 1
+	NSDirectSelection   NSSelectionDirection = 0
+	NSSelectingNext     NSSelectionDirection = 1
 	NSSelectingPrevious NSSelectionDirection = 2
 )
 
@@ -4893,7 +4893,7 @@ type NSSelectionGranularity uint64
 
 const (
 	NSSelectByCharacter NSSelectionGranularity = 0
-	NSSelectByWord NSSelectionGranularity = 1
+	NSSelectByWord      NSSelectionGranularity = 1
 	NSSelectByParagraph NSSelectionGranularity = 2
 )
 
@@ -4913,7 +4913,7 @@ func (e NSSelectionGranularity) String() string {
 type NSSharingCollaborationMode int64
 
 const (
-	NSSharingCollaborationModeSendCopy NSSharingCollaborationMode = 0
+	NSSharingCollaborationModeSendCopy    NSSharingCollaborationMode = 0
 	NSSharingCollaborationModeCollaborate NSSharingCollaborationMode = 1
 )
 
@@ -4931,7 +4931,7 @@ func (e NSSharingCollaborationMode) String() string {
 type NSSliderType uint64
 
 const (
-	NSSliderTypeLinear NSSliderType = 0
+	NSSliderTypeLinear   NSSliderType = 0
 	NSSliderTypeCircular NSSliderType = 1
 )
 
@@ -4951,8 +4951,8 @@ type NSSpeechBoundary uint64
 const (
 	// Deprecated: since macOS 10.5.
 	NSSpeechImmediateBoundary NSSpeechBoundary = 0
-	NSSpeechWordBoundary NSSpeechBoundary = 1
-	NSSpeechSentenceBoundary NSSpeechBoundary = 2
+	NSSpeechWordBoundary      NSSpeechBoundary = 1
+	NSSpeechSentenceBoundary  NSSpeechBoundary = 2
 )
 
 func (e NSSpeechBoundary) String() string {
@@ -4971,8 +4971,8 @@ func (e NSSpeechBoundary) String() string {
 type NSSplitViewDividerStyle int64
 
 const (
-	NSSplitViewDividerStyleThick NSSplitViewDividerStyle = 1
-	NSSplitViewDividerStyleThin NSSplitViewDividerStyle = 2
+	NSSplitViewDividerStyleThick        NSSplitViewDividerStyle = 1
+	NSSplitViewDividerStyleThin         NSSplitViewDividerStyle = 2
 	NSSplitViewDividerStylePaneSplitter NSSplitViewDividerStyle = 3
 )
 
@@ -4992,10 +4992,10 @@ func (e NSSplitViewDividerStyle) String() string {
 type NSSplitViewItemBehavior int64
 
 const (
-	NSSplitViewItemBehaviorDefault NSSplitViewItemBehavior = 0
-	NSSplitViewItemBehaviorSidebar NSSplitViewItemBehavior = 1
+	NSSplitViewItemBehaviorDefault     NSSplitViewItemBehavior = 0
+	NSSplitViewItemBehaviorSidebar     NSSplitViewItemBehavior = 1
 	NSSplitViewItemBehaviorContentList NSSplitViewItemBehavior = 2
-	NSSplitViewItemBehaviorInspector NSSplitViewItemBehavior = 3
+	NSSplitViewItemBehaviorInspector   NSSplitViewItemBehavior = 3
 )
 
 func (e NSSplitViewItemBehavior) String() string {
@@ -5080,10 +5080,10 @@ func (e NSStackViewDistribution) String() string {
 type NSStackViewGravity int64
 
 const (
-	NSStackViewGravityTop NSStackViewGravity = 1
-	NSStackViewGravityLeading NSStackViewGravity = 1
-	NSStackViewGravityCenter NSStackViewGravity = 2
-	NSStackViewGravityBottom NSStackViewGravity = 3
+	NSStackViewGravityTop      NSStackViewGravity = 1
+	NSStackViewGravityLeading  NSStackViewGravity = 1
+	NSStackViewGravityCenter   NSStackViewGravity = 2
+	NSStackViewGravityBottom   NSStackViewGravity = 3
 	NSStackViewGravityTrailing NSStackViewGravity = 3
 )
 
@@ -5104,7 +5104,7 @@ func (e NSStackViewGravity) String() string {
 type NSStatusItemBehavior uint64
 
 const (
-	NSStatusItemBehaviorRemovalAllowed NSStatusItemBehavior = 2
+	NSStatusItemBehaviorRemovalAllowed       NSStatusItemBehavior = 2
 	NSStatusItemBehaviorTerminationOnRemoval NSStatusItemBehavior = 4
 )
 
@@ -5125,14 +5125,14 @@ func (e NSStatusItemBehavior) String() string {
 type NSTIFFCompression uint64
 
 const (
-	NSTIFFCompressionNone NSTIFFCompression = 1
+	NSTIFFCompressionNone      NSTIFFCompression = 1
 	NSTIFFCompressionCCITTFAX3 NSTIFFCompression = 3
 	NSTIFFCompressionCCITTFAX4 NSTIFFCompression = 4
-	NSTIFFCompressionLZW NSTIFFCompression = 5
-	NSTIFFCompressionJPEG NSTIFFCompression = 6
-	NSTIFFCompressionNEXT NSTIFFCompression = 32766
-	NSTIFFCompressionPackBits NSTIFFCompression = 32773
-	NSTIFFCompressionOldJPEG NSTIFFCompression = 32865
+	NSTIFFCompressionLZW       NSTIFFCompression = 5
+	NSTIFFCompressionJPEG      NSTIFFCompression = 6
+	NSTIFFCompressionNEXT      NSTIFFCompression = 32766
+	NSTIFFCompressionPackBits  NSTIFFCompression = 32773
+	NSTIFFCompressionOldJPEG   NSTIFFCompression = 32865
 )
 
 func (e NSTIFFCompression) String() string {
@@ -5161,11 +5161,11 @@ func (e NSTIFFCompression) String() string {
 type NSTabPosition uint64
 
 const (
-	NSTabPositionNone NSTabPosition = 0
-	NSTabPositionTop NSTabPosition = 1
-	NSTabPositionLeft NSTabPosition = 2
+	NSTabPositionNone   NSTabPosition = 0
+	NSTabPositionTop    NSTabPosition = 1
+	NSTabPositionLeft   NSTabPosition = 2
 	NSTabPositionBottom NSTabPosition = 3
-	NSTabPositionRight NSTabPosition = 4
+	NSTabPositionRight  NSTabPosition = 4
 )
 
 func (e NSTabPosition) String() string {
@@ -5188,9 +5188,9 @@ func (e NSTabPosition) String() string {
 type NSTabState uint64
 
 const (
-	NSSelectedTab NSTabState = 0
+	NSSelectedTab   NSTabState = 0
 	NSBackgroundTab NSTabState = 1
-	NSPressedTab NSTabState = 2
+	NSPressedTab    NSTabState = 2
 )
 
 func (e NSTabState) String() string {
@@ -5209,8 +5209,8 @@ func (e NSTabState) String() string {
 type NSTabViewBorderType uint64
 
 const (
-	NSTabViewBorderTypeNone NSTabViewBorderType = 0
-	NSTabViewBorderTypeLine NSTabViewBorderType = 1
+	NSTabViewBorderTypeNone  NSTabViewBorderType = 0
+	NSTabViewBorderTypeLine  NSTabViewBorderType = 1
 	NSTabViewBorderTypeBezel NSTabViewBorderType = 2
 )
 
@@ -5258,13 +5258,13 @@ func (e NSTabViewControllerTabStyle) String() string {
 type NSTabViewType uint64
 
 const (
-	NSTopTabsBezelBorder NSTabViewType = 0
-	NSLeftTabsBezelBorder NSTabViewType = 1
+	NSTopTabsBezelBorder    NSTabViewType = 0
+	NSLeftTabsBezelBorder   NSTabViewType = 1
 	NSBottomTabsBezelBorder NSTabViewType = 2
-	NSRightTabsBezelBorder NSTabViewType = 3
-	NSNoTabsBezelBorder NSTabViewType = 4
-	NSNoTabsLineBorder NSTabViewType = 5
-	NSNoTabsNoBorder NSTabViewType = 6
+	NSRightTabsBezelBorder  NSTabViewType = 3
+	NSNoTabsBezelBorder     NSTabViewType = 4
+	NSNoTabsLineBorder      NSTabViewType = 5
+	NSNoTabsNoBorder        NSTabViewType = 6
 )
 
 func (e NSTabViewType) String() string {
@@ -5292,7 +5292,7 @@ func (e NSTabViewType) String() string {
 type NSTableColumnResizingOptions uint64
 
 const (
-	NSTableColumnNoResizing NSTableColumnResizingOptions = 0
+	NSTableColumnNoResizing       NSTableColumnResizingOptions = 0
 	NSTableColumnAutoresizingMask NSTableColumnResizingOptions = 1
 	NSTableColumnUserResizingMask NSTableColumnResizingOptions = 2
 )
@@ -5317,10 +5317,10 @@ type NSTableViewAnimationOptions uint64
 const (
 	NSTableViewAnimationEffectNone NSTableViewAnimationOptions = 0
 	NSTableViewAnimationEffectFade NSTableViewAnimationOptions = 1
-	NSTableViewAnimationEffectGap NSTableViewAnimationOptions = 2
-	NSTableViewAnimationSlideUp NSTableViewAnimationOptions = 16
-	NSTableViewAnimationSlideDown NSTableViewAnimationOptions = 32
-	NSTableViewAnimationSlideLeft NSTableViewAnimationOptions = 48
+	NSTableViewAnimationEffectGap  NSTableViewAnimationOptions = 2
+	NSTableViewAnimationSlideUp    NSTableViewAnimationOptions = 16
+	NSTableViewAnimationSlideDown  NSTableViewAnimationOptions = 32
+	NSTableViewAnimationSlideLeft  NSTableViewAnimationOptions = 48
 	NSTableViewAnimationSlideRight NSTableViewAnimationOptions = 64
 )
 
@@ -5353,12 +5353,12 @@ func (e NSTableViewAnimationOptions) String() string {
 type NSTableViewColumnAutoresizingStyle uint64
 
 const (
-	NSTableViewNoColumnAutoresizing NSTableViewColumnAutoresizingStyle = 0
-	NSTableViewUniformColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 1
-	NSTableViewSequentialColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 2
+	NSTableViewNoColumnAutoresizing                     NSTableViewColumnAutoresizingStyle = 0
+	NSTableViewUniformColumnAutoresizingStyle           NSTableViewColumnAutoresizingStyle = 1
+	NSTableViewSequentialColumnAutoresizingStyle        NSTableViewColumnAutoresizingStyle = 2
 	NSTableViewReverseSequentialColumnAutoresizingStyle NSTableViewColumnAutoresizingStyle = 3
-	NSTableViewLastColumnOnlyAutoresizingStyle NSTableViewColumnAutoresizingStyle = 4
-	NSTableViewFirstColumnOnlyAutoresizingStyle NSTableViewColumnAutoresizingStyle = 5
+	NSTableViewLastColumnOnlyAutoresizingStyle          NSTableViewColumnAutoresizingStyle = 4
+	NSTableViewFirstColumnOnlyAutoresizingStyle         NSTableViewColumnAutoresizingStyle = 5
 )
 
 func (e NSTableViewColumnAutoresizingStyle) String() string {
@@ -5383,10 +5383,10 @@ func (e NSTableViewColumnAutoresizingStyle) String() string {
 type NSTableViewDraggingDestinationFeedbackStyle int64
 
 const (
-	NSTableViewDraggingDestinationFeedbackStyleNone NSTableViewDraggingDestinationFeedbackStyle = -1
-	NSTableViewDraggingDestinationFeedbackStyleRegular NSTableViewDraggingDestinationFeedbackStyle = 0
+	NSTableViewDraggingDestinationFeedbackStyleNone       NSTableViewDraggingDestinationFeedbackStyle = -1
+	NSTableViewDraggingDestinationFeedbackStyleRegular    NSTableViewDraggingDestinationFeedbackStyle = 0
 	NSTableViewDraggingDestinationFeedbackStyleSourceList NSTableViewDraggingDestinationFeedbackStyle = 1
-	NSTableViewDraggingDestinationFeedbackStyleGap NSTableViewDraggingDestinationFeedbackStyle = 2
+	NSTableViewDraggingDestinationFeedbackStyleGap        NSTableViewDraggingDestinationFeedbackStyle = 2
 )
 
 func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
@@ -5407,7 +5407,7 @@ func (e NSTableViewDraggingDestinationFeedbackStyle) String() string {
 type NSTableViewDropOperation uint64
 
 const (
-	NSTableViewDropOn NSTableViewDropOperation = 0
+	NSTableViewDropOn    NSTableViewDropOperation = 0
 	NSTableViewDropAbove NSTableViewDropOperation = 1
 )
 
@@ -5426,9 +5426,9 @@ func (e NSTableViewDropOperation) String() string {
 type NSTableViewGridLineStyle uint64
 
 const (
-	NSTableViewGridNone NSTableViewGridLineStyle = 0
-	NSTableViewSolidVerticalGridLineMask NSTableViewGridLineStyle = 1
-	NSTableViewSolidHorizontalGridLineMask NSTableViewGridLineStyle = 2
+	NSTableViewGridNone                     NSTableViewGridLineStyle = 0
+	NSTableViewSolidVerticalGridLineMask    NSTableViewGridLineStyle = 1
+	NSTableViewSolidHorizontalGridLineMask  NSTableViewGridLineStyle = 2
 	NSTableViewDashedHorizontalGridLineMask NSTableViewGridLineStyle = 8
 )
 
@@ -5452,7 +5452,7 @@ func (e NSTableViewGridLineStyle) String() string {
 type NSTableViewRowActionStyle int64
 
 const (
-	NSTableViewRowActionStyleRegular NSTableViewRowActionStyle = 0
+	NSTableViewRowActionStyleRegular     NSTableViewRowActionStyle = 0
 	NSTableViewRowActionStyleDestructive NSTableViewRowActionStyle = 1
 )
 
@@ -5471,10 +5471,10 @@ type NSTableViewRowSizeStyle int64
 
 const (
 	NSTableViewRowSizeStyleDefault NSTableViewRowSizeStyle = -1
-	NSTableViewRowSizeStyleCustom NSTableViewRowSizeStyle = 0
-	NSTableViewRowSizeStyleSmall NSTableViewRowSizeStyle = 1
-	NSTableViewRowSizeStyleMedium NSTableViewRowSizeStyle = 2
-	NSTableViewRowSizeStyleLarge NSTableViewRowSizeStyle = 3
+	NSTableViewRowSizeStyleCustom  NSTableViewRowSizeStyle = 0
+	NSTableViewRowSizeStyleSmall   NSTableViewRowSizeStyle = 1
+	NSTableViewRowSizeStyleMedium  NSTableViewRowSizeStyle = 2
+	NSTableViewRowSizeStyleLarge   NSTableViewRowSizeStyle = 3
 )
 
 func (e NSTableViewRowSizeStyle) String() string {
@@ -5497,7 +5497,7 @@ func (e NSTableViewRowSizeStyle) String() string {
 type NSTableViewSelectionHighlightStyle int64
 
 const (
-	NSTableViewSelectionHighlightStyleNone NSTableViewSelectionHighlightStyle = -1
+	NSTableViewSelectionHighlightStyleNone    NSTableViewSelectionHighlightStyle = -1
 	NSTableViewSelectionHighlightStyleRegular NSTableViewSelectionHighlightStyle = 0
 	// Deprecated: Set the NSTableView.style property to NSTableViewStyleSourceList instead.
 	NSTableViewSelectionHighlightStyleSourceList NSTableViewSelectionHighlightStyle = 1
@@ -5519,11 +5519,11 @@ func (e NSTableViewSelectionHighlightStyle) String() string {
 type NSTableViewStyle int64
 
 const (
-	NSTableViewStyleAutomatic NSTableViewStyle = 0
-	NSTableViewStyleFullWidth NSTableViewStyle = 1
-	NSTableViewStyleInset NSTableViewStyle = 2
+	NSTableViewStyleAutomatic  NSTableViewStyle = 0
+	NSTableViewStyleFullWidth  NSTableViewStyle = 1
+	NSTableViewStyleInset      NSTableViewStyle = 2
 	NSTableViewStyleSourceList NSTableViewStyle = 3
-	NSTableViewStylePlain NSTableViewStyle = 4
+	NSTableViewStylePlain      NSTableViewStyle = 4
 )
 
 func (e NSTableViewStyle) String() string {
@@ -5546,9 +5546,9 @@ func (e NSTableViewStyle) String() string {
 type NSTextAlignment int64
 
 const (
-	NSTextAlignmentLeft NSTextAlignment = 0
-	NSTextAlignmentCenter NSTextAlignment = 1
-	NSTextAlignmentRight NSTextAlignment = 2
+	NSTextAlignmentLeft      NSTextAlignment = 0
+	NSTextAlignmentCenter    NSTextAlignment = 1
+	NSTextAlignmentRight     NSTextAlignment = 2
 	NSTextAlignmentJustified NSTextAlignment = 3
 	// Resolved to either ``left`` or ``right`` based on the natural alignment resolution type active in the associated component. There are two types of natural alignment resolution behavior. The natural alignment is resolved based on either the UI language or the base writing direction. The behavior is selected by the ``resolvesNaturalAlignmentWithBaseWritingDirection`` property for ``NSTextLayoutManager``. ``NSStringDrawingOptions.resolvesNaturalAlignmentWithBaseWritingDirection`` specifies the base writing direction based resolution for ``NSStringDrawing``.
 	NSTextAlignmentNatural NSTextAlignment = 4
@@ -5574,10 +5574,10 @@ func (e NSTextAlignment) String() string {
 type NSTextBlockDimension uint64
 
 const (
-	NSTextBlockWidth NSTextBlockDimension = 0
-	NSTextBlockMinimumWidth NSTextBlockDimension = 1
-	NSTextBlockMaximumWidth NSTextBlockDimension = 2
-	NSTextBlockHeight NSTextBlockDimension = 4
+	NSTextBlockWidth         NSTextBlockDimension = 0
+	NSTextBlockMinimumWidth  NSTextBlockDimension = 1
+	NSTextBlockMaximumWidth  NSTextBlockDimension = 2
+	NSTextBlockHeight        NSTextBlockDimension = 4
 	NSTextBlockMinimumHeight NSTextBlockDimension = 5
 	NSTextBlockMaximumHeight NSTextBlockDimension = 6
 )
@@ -5605,8 +5605,8 @@ type NSTextBlockLayer int64
 
 const (
 	NSTextBlockPadding NSTextBlockLayer = -1
-	NSTextBlockBorder NSTextBlockLayer = 0
-	NSTextBlockMargin NSTextBlockLayer = 1
+	NSTextBlockBorder  NSTextBlockLayer = 0
+	NSTextBlockMargin  NSTextBlockLayer = 1
 )
 
 func (e NSTextBlockLayer) String() string {
@@ -5625,7 +5625,7 @@ func (e NSTextBlockLayer) String() string {
 type NSTextBlockValueType uint64
 
 const (
-	NSTextBlockAbsoluteValueType NSTextBlockValueType = 0
+	NSTextBlockAbsoluteValueType   NSTextBlockValueType = 0
 	NSTextBlockPercentageValueType NSTextBlockValueType = 1
 )
 
@@ -5643,9 +5643,9 @@ func (e NSTextBlockValueType) String() string {
 type NSTextBlockVerticalAlignment uint64
 
 const (
-	NSTextBlockTopAlignment NSTextBlockVerticalAlignment = 0
-	NSTextBlockMiddleAlignment NSTextBlockVerticalAlignment = 1
-	NSTextBlockBottomAlignment NSTextBlockVerticalAlignment = 2
+	NSTextBlockTopAlignment      NSTextBlockVerticalAlignment = 0
+	NSTextBlockMiddleAlignment   NSTextBlockVerticalAlignment = 1
+	NSTextBlockBottomAlignment   NSTextBlockVerticalAlignment = 2
 	NSTextBlockBaselineAlignment NSTextBlockVerticalAlignment = 3
 )
 
@@ -5667,7 +5667,7 @@ func (e NSTextBlockVerticalAlignment) String() string {
 type NSTextFieldBezelStyle uint64
 
 const (
-	NSTextFieldSquareBezel NSTextFieldBezelStyle = 0
+	NSTextFieldSquareBezel  NSTextFieldBezelStyle = 0
 	NSTextFieldRoundedBezel NSTextFieldBezelStyle = 1
 )
 
@@ -5685,19 +5685,19 @@ func (e NSTextFieldBezelStyle) String() string {
 type NSTextFinderAction int64
 
 const (
-	NSTextFinderActionShowFindInterface NSTextFinderAction = 1
-	NSTextFinderActionNextMatch NSTextFinderAction = 2
-	NSTextFinderActionPreviousMatch NSTextFinderAction = 3
-	NSTextFinderActionReplaceAll NSTextFinderAction = 4
-	NSTextFinderActionReplace NSTextFinderAction = 5
-	NSTextFinderActionReplaceAndFind NSTextFinderAction = 6
-	NSTextFinderActionSetSearchString NSTextFinderAction = 7
+	NSTextFinderActionShowFindInterface     NSTextFinderAction = 1
+	NSTextFinderActionNextMatch             NSTextFinderAction = 2
+	NSTextFinderActionPreviousMatch         NSTextFinderAction = 3
+	NSTextFinderActionReplaceAll            NSTextFinderAction = 4
+	NSTextFinderActionReplace               NSTextFinderAction = 5
+	NSTextFinderActionReplaceAndFind        NSTextFinderAction = 6
+	NSTextFinderActionSetSearchString       NSTextFinderAction = 7
 	NSTextFinderActionReplaceAllInSelection NSTextFinderAction = 8
-	NSTextFinderActionSelectAll NSTextFinderAction = 9
-	NSTextFinderActionSelectAllInSelection NSTextFinderAction = 10
-	NSTextFinderActionHideFindInterface NSTextFinderAction = 11
-	NSTextFinderActionShowReplaceInterface NSTextFinderAction = 12
-	NSTextFinderActionHideReplaceInterface NSTextFinderAction = 13
+	NSTextFinderActionSelectAll             NSTextFinderAction = 9
+	NSTextFinderActionSelectAllInSelection  NSTextFinderAction = 10
+	NSTextFinderActionHideFindInterface     NSTextFinderAction = 11
+	NSTextFinderActionShowReplaceInterface  NSTextFinderAction = 12
+	NSTextFinderActionHideReplaceInterface  NSTextFinderAction = 13
 )
 
 func (e NSTextFinderAction) String() string {
@@ -5737,8 +5737,8 @@ type NSTextInputTraitType int64
 
 const (
 	NSTextInputTraitTypeDefault NSTextInputTraitType = 0
-	NSTextInputTraitTypeNo NSTextInputTraitType = 1
-	NSTextInputTraitTypeYes NSTextInputTraitType = 2
+	NSTextInputTraitTypeNo      NSTextInputTraitType = 1
+	NSTextInputTraitTypeYes     NSTextInputTraitType = 2
 )
 
 func (e NSTextInputTraitType) String() string {
@@ -5758,7 +5758,7 @@ func (e NSTextInputTraitType) String() string {
 type NSTextInsertionIndicatorAutomaticModeOptions int64
 
 const (
-	NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView NSTextInsertionIndicatorAutomaticModeOptions = 1
+	NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView   NSTextInsertionIndicatorAutomaticModeOptions = 1
 	NSTextInsertionIndicatorAutomaticModeOptionsShowWhileTracking NSTextInsertionIndicatorAutomaticModeOptions = 2
 )
 
@@ -5780,8 +5780,8 @@ type NSTextInsertionIndicatorDisplayMode int64
 
 const (
 	NSTextInsertionIndicatorDisplayModeAutomatic NSTextInsertionIndicatorDisplayMode = 0
-	NSTextInsertionIndicatorDisplayModeHidden NSTextInsertionIndicatorDisplayMode = 1
-	NSTextInsertionIndicatorDisplayModeVisible NSTextInsertionIndicatorDisplayMode = 2
+	NSTextInsertionIndicatorDisplayModeHidden    NSTextInsertionIndicatorDisplayMode = 1
+	NSTextInsertionIndicatorDisplayModeVisible   NSTextInsertionIndicatorDisplayMode = 2
 )
 
 func (e NSTextInsertionIndicatorDisplayMode) String() string {
@@ -5801,10 +5801,10 @@ func (e NSTextInsertionIndicatorDisplayMode) String() string {
 type NSTextLayoutFragmentEnumerationOptions uint64
 
 const (
-	NSTextLayoutFragmentEnumerationOptionsNone NSTextLayoutFragmentEnumerationOptions = 0
-	NSTextLayoutFragmentEnumerationOptionsReverse NSTextLayoutFragmentEnumerationOptions = 1
-	NSTextLayoutFragmentEnumerationOptionsEstimatesSize NSTextLayoutFragmentEnumerationOptions = 2
-	NSTextLayoutFragmentEnumerationOptionsEnsuresLayout NSTextLayoutFragmentEnumerationOptions = 4
+	NSTextLayoutFragmentEnumerationOptionsNone                     NSTextLayoutFragmentEnumerationOptions = 0
+	NSTextLayoutFragmentEnumerationOptionsReverse                  NSTextLayoutFragmentEnumerationOptions = 1
+	NSTextLayoutFragmentEnumerationOptionsEstimatesSize            NSTextLayoutFragmentEnumerationOptions = 2
+	NSTextLayoutFragmentEnumerationOptionsEnsuresLayout            NSTextLayoutFragmentEnumerationOptions = 4
 	NSTextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment NSTextLayoutFragmentEnumerationOptions = 8
 )
 
@@ -5831,10 +5831,10 @@ func (e NSTextLayoutFragmentEnumerationOptions) String() string {
 type NSTextLayoutFragmentState uint64
 
 const (
-	NSTextLayoutFragmentStateNone NSTextLayoutFragmentState = 0
-	NSTextLayoutFragmentStateEstimatedUsageBounds NSTextLayoutFragmentState = 1
+	NSTextLayoutFragmentStateNone                  NSTextLayoutFragmentState = 0
+	NSTextLayoutFragmentStateEstimatedUsageBounds  NSTextLayoutFragmentState = 1
 	NSTextLayoutFragmentStateCalculatedUsageBounds NSTextLayoutFragmentState = 2
-	NSTextLayoutFragmentStateLayoutAvailable NSTextLayoutFragmentState = 3
+	NSTextLayoutFragmentStateLayoutAvailable       NSTextLayoutFragmentState = 3
 )
 
 func (e NSTextLayoutFragmentState) String() string {
@@ -5856,12 +5856,12 @@ func (e NSTextLayoutFragmentState) String() string {
 type NSTextLayoutManagerSegmentOptions uint64
 
 const (
-	NSTextLayoutManagerSegmentOptionsNone NSTextLayoutManagerSegmentOptions = 0
-	NSTextLayoutManagerSegmentOptionsRangeNotRequired NSTextLayoutManagerSegmentOptions = 1
+	NSTextLayoutManagerSegmentOptionsNone                    NSTextLayoutManagerSegmentOptions = 0
+	NSTextLayoutManagerSegmentOptionsRangeNotRequired        NSTextLayoutManagerSegmentOptions = 1
 	NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded NSTextLayoutManagerSegmentOptions = 2
-	NSTextLayoutManagerSegmentOptionsHeadSegmentExtended NSTextLayoutManagerSegmentOptions = 4
-	NSTextLayoutManagerSegmentOptionsTailSegmentExtended NSTextLayoutManagerSegmentOptions = 8
-	NSTextLayoutManagerSegmentOptionsUpstreamAffinity NSTextLayoutManagerSegmentOptions = 16
+	NSTextLayoutManagerSegmentOptionsHeadSegmentExtended     NSTextLayoutManagerSegmentOptions = 4
+	NSTextLayoutManagerSegmentOptionsTailSegmentExtended     NSTextLayoutManagerSegmentOptions = 8
+	NSTextLayoutManagerSegmentOptionsUpstreamAffinity        NSTextLayoutManagerSegmentOptions = 16
 )
 
 func (e NSTextLayoutManagerSegmentOptions) String() string {
@@ -5890,7 +5890,7 @@ func (e NSTextLayoutManagerSegmentOptions) String() string {
 type NSTextLayoutManagerSegmentType int64
 
 const (
-	NSTextLayoutManagerSegmentTypeStandard NSTextLayoutManagerSegmentType = 0
+	NSTextLayoutManagerSegmentTypeStandard  NSTextLayoutManagerSegmentType = 0
 	NSTextLayoutManagerSegmentTypeSelection NSTextLayoutManagerSegmentType = 1
 	NSTextLayoutManagerSegmentTypeHighlight NSTextLayoutManagerSegmentType = 2
 )
@@ -5912,7 +5912,7 @@ type NSTextLayoutOrientation int64
 
 const (
 	NSTextLayoutOrientationHorizontal NSTextLayoutOrientation = 0
-	NSTextLayoutOrientationVertical NSTextLayoutOrientation = 1
+	NSTextLayoutOrientationVertical   NSTextLayoutOrientation = 1
 )
 
 func (e NSTextLayoutOrientation) String() string {
@@ -5947,7 +5947,7 @@ func (e NSTextListOptions) String() string {
 type NSTextSelectionAffinity int64
 
 const (
-	NSTextSelectionAffinityUpstream NSTextSelectionAffinity = 0
+	NSTextSelectionAffinityUpstream   NSTextSelectionAffinity = 0
 	NSTextSelectionAffinityDownstream NSTextSelectionAffinity = 1
 )
 
@@ -5966,10 +5966,10 @@ type NSTextSelectionGranularity int64
 
 const (
 	NSTextSelectionGranularityCharacter NSTextSelectionGranularity = 0
-	NSTextSelectionGranularityWord NSTextSelectionGranularity = 1
+	NSTextSelectionGranularityWord      NSTextSelectionGranularity = 1
 	NSTextSelectionGranularityParagraph NSTextSelectionGranularity = 2
-	NSTextSelectionGranularityLine NSTextSelectionGranularity = 3
-	NSTextSelectionGranularitySentence NSTextSelectionGranularity = 4
+	NSTextSelectionGranularityLine      NSTextSelectionGranularity = 3
+	NSTextSelectionGranularitySentence  NSTextSelectionGranularity = 4
 )
 
 func (e NSTextSelectionGranularity) String() string {
@@ -5993,12 +5993,12 @@ type NSTextSelectionNavigationDestination int64
 
 const (
 	NSTextSelectionNavigationDestinationCharacter NSTextSelectionNavigationDestination = 0
-	NSTextSelectionNavigationDestinationWord NSTextSelectionNavigationDestination = 1
-	NSTextSelectionNavigationDestinationLine NSTextSelectionNavigationDestination = 2
-	NSTextSelectionNavigationDestinationSentence NSTextSelectionNavigationDestination = 3
+	NSTextSelectionNavigationDestinationWord      NSTextSelectionNavigationDestination = 1
+	NSTextSelectionNavigationDestinationLine      NSTextSelectionNavigationDestination = 2
+	NSTextSelectionNavigationDestinationSentence  NSTextSelectionNavigationDestination = 3
 	NSTextSelectionNavigationDestinationParagraph NSTextSelectionNavigationDestination = 4
 	NSTextSelectionNavigationDestinationContainer NSTextSelectionNavigationDestination = 5
-	NSTextSelectionNavigationDestinationDocument NSTextSelectionNavigationDestination = 6
+	NSTextSelectionNavigationDestinationDocument  NSTextSelectionNavigationDestination = 6
 )
 
 func (e NSTextSelectionNavigationDestination) String() string {
@@ -6025,12 +6025,12 @@ func (e NSTextSelectionNavigationDestination) String() string {
 type NSTextSelectionNavigationDirection int64
 
 const (
-	NSTextSelectionNavigationDirectionForward NSTextSelectionNavigationDirection = 0
+	NSTextSelectionNavigationDirectionForward  NSTextSelectionNavigationDirection = 0
 	NSTextSelectionNavigationDirectionBackward NSTextSelectionNavigationDirection = 1
-	NSTextSelectionNavigationDirectionRight NSTextSelectionNavigationDirection = 2
-	NSTextSelectionNavigationDirectionLeft NSTextSelectionNavigationDirection = 3
-	NSTextSelectionNavigationDirectionUp NSTextSelectionNavigationDirection = 4
-	NSTextSelectionNavigationDirectionDown NSTextSelectionNavigationDirection = 5
+	NSTextSelectionNavigationDirectionRight    NSTextSelectionNavigationDirection = 2
+	NSTextSelectionNavigationDirectionLeft     NSTextSelectionNavigationDirection = 3
+	NSTextSelectionNavigationDirectionUp       NSTextSelectionNavigationDirection = 4
+	NSTextSelectionNavigationDirectionDown     NSTextSelectionNavigationDirection = 5
 )
 
 func (e NSTextSelectionNavigationDirection) String() string {
@@ -6056,8 +6056,8 @@ func (e NSTextSelectionNavigationDirection) String() string {
 type NSTextSelectionNavigationModifier uint64
 
 const (
-	NSTextSelectionNavigationModifierExtend NSTextSelectionNavigationModifier = 1
-	NSTextSelectionNavigationModifierVisual NSTextSelectionNavigationModifier = 2
+	NSTextSelectionNavigationModifierExtend   NSTextSelectionNavigationModifier = 1
+	NSTextSelectionNavigationModifierVisual   NSTextSelectionNavigationModifier = 2
 	NSTextSelectionNavigationModifierMultiple NSTextSelectionNavigationModifier = 4
 )
 
@@ -6121,9 +6121,9 @@ func (e NSTextStorageEditActions) String() string {
 type NSTextTabType uint64
 
 const (
-	NSLeftTabStopType NSTextTabType = 0
-	NSRightTabStopType NSTextTabType = 1
-	NSCenterTabStopType NSTextTabType = 2
+	NSLeftTabStopType    NSTextTabType = 0
+	NSRightTabStopType   NSTextTabType = 1
+	NSCenterTabStopType  NSTextTabType = 2
 	NSDecimalTabStopType NSTextTabType = 3
 )
 
@@ -6146,7 +6146,7 @@ type NSTextTableLayoutAlgorithm uint64
 
 const (
 	NSTextTableAutomaticLayoutAlgorithm NSTextTableLayoutAlgorithm = 0
-	NSTextTableFixedLayoutAlgorithm NSTextTableLayoutAlgorithm = 1
+	NSTextTableFixedLayoutAlgorithm     NSTextTableLayoutAlgorithm = 1
 )
 
 func (e NSTextTableLayoutAlgorithm) String() string {
@@ -6163,9 +6163,9 @@ func (e NSTextTableLayoutAlgorithm) String() string {
 type NSTickMarkPosition uint64
 
 const (
-	NSTickMarkPositionBelow NSTickMarkPosition = 0
-	NSTickMarkPositionAbove NSTickMarkPosition = 1
-	NSTickMarkPositionLeading NSTickMarkPosition = 1
+	NSTickMarkPositionBelow    NSTickMarkPosition = 0
+	NSTickMarkPositionAbove    NSTickMarkPosition = 1
+	NSTickMarkPositionLeading  NSTickMarkPosition = 1
 	NSTickMarkPositionTrailing NSTickMarkPosition = 0
 )
 
@@ -6185,8 +6185,8 @@ type NSTintProminence int64
 
 const (
 	NSTintProminenceAutomatic NSTintProminence = 0
-	NSTintProminenceNone NSTintProminence = 1
-	NSTintProminencePrimary NSTintProminence = 2
+	NSTintProminenceNone      NSTintProminence = 1
+	NSTintProminencePrimary   NSTintProminence = 2
 	NSTintProminenceSecondary NSTintProminence = 3
 )
 
@@ -6208,12 +6208,12 @@ func (e NSTintProminence) String() string {
 type NSTitlePosition uint64
 
 const (
-	NSNoTitle NSTitlePosition = 0
-	NSAboveTop NSTitlePosition = 1
-	NSAtTop NSTitlePosition = 2
-	NSBelowTop NSTitlePosition = 3
+	NSNoTitle     NSTitlePosition = 0
+	NSAboveTop    NSTitlePosition = 1
+	NSAtTop       NSTitlePosition = 2
+	NSBelowTop    NSTitlePosition = 3
 	NSAboveBottom NSTitlePosition = 4
-	NSAtBottom NSTitlePosition = 5
+	NSAtBottom    NSTitlePosition = 5
 	NSBelowBottom NSTitlePosition = 6
 )
 
@@ -6242,9 +6242,9 @@ type NSTitlebarSeparatorStyle int64
 
 const (
 	NSTitlebarSeparatorStyleAutomatic NSTitlebarSeparatorStyle = 0
-	NSTitlebarSeparatorStyleNone NSTitlebarSeparatorStyle = 1
-	NSTitlebarSeparatorStyleLine NSTitlebarSeparatorStyle = 2
-	NSTitlebarSeparatorStyleShadow NSTitlebarSeparatorStyle = 3
+	NSTitlebarSeparatorStyleNone      NSTitlebarSeparatorStyle = 1
+	NSTitlebarSeparatorStyleLine      NSTitlebarSeparatorStyle = 2
+	NSTitlebarSeparatorStyleShadow    NSTitlebarSeparatorStyle = 3
 )
 
 func (e NSTitlebarSeparatorStyle) String() string {
@@ -6265,10 +6265,10 @@ func (e NSTitlebarSeparatorStyle) String() string {
 type NSTokenStyle uint64
 
 const (
-	NSTokenStyleDefault NSTokenStyle = 0
-	NSTokenStyleNone NSTokenStyle = 1
-	NSTokenStyleRounded NSTokenStyle = 2
-	NSTokenStyleSquared NSTokenStyle = 3
+	NSTokenStyleDefault      NSTokenStyle = 0
+	NSTokenStyleNone         NSTokenStyle = 1
+	NSTokenStyleRounded      NSTokenStyle = 2
+	NSTokenStyleSquared      NSTokenStyle = 3
 	NSTokenStylePlainSquared NSTokenStyle = 4
 )
 
@@ -6292,10 +6292,10 @@ func (e NSTokenStyle) String() string {
 type NSToolbarDisplayMode uint64
 
 const (
-	NSToolbarDisplayModeDefault NSToolbarDisplayMode = 0
+	NSToolbarDisplayModeDefault      NSToolbarDisplayMode = 0
 	NSToolbarDisplayModeIconAndLabel NSToolbarDisplayMode = 1
-	NSToolbarDisplayModeIconOnly NSToolbarDisplayMode = 2
-	NSToolbarDisplayModeLabelOnly NSToolbarDisplayMode = 3
+	NSToolbarDisplayModeIconOnly     NSToolbarDisplayMode = 2
+	NSToolbarDisplayModeLabelOnly    NSToolbarDisplayMode = 3
 )
 
 func (e NSToolbarDisplayMode) String() string {
@@ -6317,7 +6317,7 @@ type NSToolbarItemGroupControlRepresentation int64
 
 const (
 	NSToolbarItemGroupControlRepresentationAutomatic NSToolbarItemGroupControlRepresentation = 0
-	NSToolbarItemGroupControlRepresentationExpanded NSToolbarItemGroupControlRepresentation = 1
+	NSToolbarItemGroupControlRepresentationExpanded  NSToolbarItemGroupControlRepresentation = 1
 	NSToolbarItemGroupControlRepresentationCollapsed NSToolbarItemGroupControlRepresentation = 2
 )
 
@@ -6358,7 +6358,7 @@ func (e NSToolbarItemGroupSelectionMode) String() string {
 type NSToolbarItemStyle int64
 
 const (
-	NSToolbarItemStylePlain NSToolbarItemStyle = 0
+	NSToolbarItemStylePlain     NSToolbarItemStyle = 0
 	NSToolbarItemStyleProminent NSToolbarItemStyle = 1
 )
 
@@ -6379,7 +6379,7 @@ type NSToolbarSizeMode uint64
 const (
 	NSToolbarSizeModeDefault NSToolbarSizeMode = 0
 	NSToolbarSizeModeRegular NSToolbarSizeMode = 1
-	NSToolbarSizeModeSmall NSToolbarSizeMode = 2
+	NSToolbarSizeModeSmall   NSToolbarSizeMode = 2
 )
 
 func (e NSToolbarSizeMode) String() string {
@@ -6399,13 +6399,13 @@ func (e NSToolbarSizeMode) String() string {
 type NSTouchPhase uint64
 
 const (
-	NSTouchPhaseBegan NSTouchPhase = 1
-	NSTouchPhaseMoved NSTouchPhase = 2
+	NSTouchPhaseBegan      NSTouchPhase = 1
+	NSTouchPhaseMoved      NSTouchPhase = 2
 	NSTouchPhaseStationary NSTouchPhase = 4
-	NSTouchPhaseEnded NSTouchPhase = 8
-	NSTouchPhaseCancelled NSTouchPhase = 16
-	NSTouchPhaseTouching NSTouchPhase = 7
-	NSTouchPhaseAny NSTouchPhase = 18446744073709551615
+	NSTouchPhaseEnded      NSTouchPhase = 8
+	NSTouchPhaseCancelled  NSTouchPhase = 16
+	NSTouchPhaseTouching   NSTouchPhase = 7
+	NSTouchPhaseAny        NSTouchPhase = 18446744073709551615
 )
 
 func (e NSTouchPhase) String() string {
@@ -6440,7 +6440,7 @@ func (e NSTouchPhase) String() string {
 type NSTouchType int64
 
 const (
-	NSTouchTypeDirect NSTouchType = 0
+	NSTouchTypeDirect   NSTouchType = 0
 	NSTouchTypeIndirect NSTouchType = 1
 )
 
@@ -6459,7 +6459,7 @@ func (e NSTouchType) String() string {
 type NSTouchTypeMask uint64
 
 const (
-	NSTouchTypeMaskDirect NSTouchTypeMask = 1
+	NSTouchTypeMaskDirect   NSTouchTypeMask = 1
 	NSTouchTypeMaskIndirect NSTouchTypeMask = 2
 )
 
@@ -6481,16 +6481,16 @@ func (e NSTouchTypeMask) String() string {
 type NSTrackingAreaOptions uint64
 
 const (
-	NSTrackingMouseEnteredAndExited NSTrackingAreaOptions = 1
-	NSTrackingMouseMoved NSTrackingAreaOptions = 2
-	NSTrackingCursorUpdate NSTrackingAreaOptions = 4
+	NSTrackingMouseEnteredAndExited    NSTrackingAreaOptions = 1
+	NSTrackingMouseMoved               NSTrackingAreaOptions = 2
+	NSTrackingCursorUpdate             NSTrackingAreaOptions = 4
 	NSTrackingActiveWhenFirstResponder NSTrackingAreaOptions = 16
-	NSTrackingActiveInKeyWindow NSTrackingAreaOptions = 32
-	NSTrackingActiveInActiveApp NSTrackingAreaOptions = 64
-	NSTrackingActiveAlways NSTrackingAreaOptions = 128
-	NSTrackingAssumeInside NSTrackingAreaOptions = 256
-	NSTrackingInVisibleRect NSTrackingAreaOptions = 512
-	NSTrackingEnabledDuringMouseDrag NSTrackingAreaOptions = 1024
+	NSTrackingActiveInKeyWindow        NSTrackingAreaOptions = 32
+	NSTrackingActiveInActiveApp        NSTrackingAreaOptions = 64
+	NSTrackingActiveAlways             NSTrackingAreaOptions = 128
+	NSTrackingAssumeInside             NSTrackingAreaOptions = 256
+	NSTrackingInVisibleRect            NSTrackingAreaOptions = 512
+	NSTrackingEnabledDuringMouseDrag   NSTrackingAreaOptions = 1024
 )
 
 func (e NSTrackingAreaOptions) String() string {
@@ -6534,12 +6534,12 @@ func (e NSTrackingAreaOptions) String() string {
 type NSTypesetterBehavior int64
 
 const (
-	NSTypesetterLatestBehavior NSTypesetterBehavior = -1
-	NSTypesetterOriginalBehavior NSTypesetterBehavior = 0
+	NSTypesetterLatestBehavior                  NSTypesetterBehavior = -1
+	NSTypesetterOriginalBehavior                NSTypesetterBehavior = 0
 	NSTypesetterBehavior_10_2_WithCompatibility NSTypesetterBehavior = 1
-	NSTypesetterBehavior_10_2 NSTypesetterBehavior = 2
-	NSTypesetterBehavior_10_3 NSTypesetterBehavior = 3
-	NSTypesetterBehavior_10_4 NSTypesetterBehavior = 4
+	NSTypesetterBehavior_10_2                   NSTypesetterBehavior = 2
+	NSTypesetterBehavior_10_3                   NSTypesetterBehavior = 3
+	NSTypesetterBehavior_10_4                   NSTypesetterBehavior = 4
 )
 
 func (e NSTypesetterBehavior) String() string {
@@ -6566,11 +6566,11 @@ type NSTypesetterControlCharacterAction uint64
 
 const (
 	NSTypesetterZeroAdvancementAction NSTypesetterControlCharacterAction = 1
-	NSTypesetterWhitespaceAction NSTypesetterControlCharacterAction = 2
-	NSTypesetterHorizontalTabAction NSTypesetterControlCharacterAction = 4
-	NSTypesetterLineBreakAction NSTypesetterControlCharacterAction = 8
-	NSTypesetterParagraphBreakAction NSTypesetterControlCharacterAction = 16
-	NSTypesetterContainerBreakAction NSTypesetterControlCharacterAction = 32
+	NSTypesetterWhitespaceAction      NSTypesetterControlCharacterAction = 2
+	NSTypesetterHorizontalTabAction   NSTypesetterControlCharacterAction = 4
+	NSTypesetterLineBreakAction       NSTypesetterControlCharacterAction = 8
+	NSTypesetterParagraphBreakAction  NSTypesetterControlCharacterAction = 16
+	NSTypesetterContainerBreakAction  NSTypesetterControlCharacterAction = 32
 )
 
 func (e NSTypesetterControlCharacterAction) String() string {
@@ -6603,16 +6603,16 @@ func (e NSTypesetterControlCharacterAction) String() string {
 type NSUnderlineStyle int64
 
 const (
-	NSUnderlineStyleNone NSUnderlineStyle = 0
-	NSUnderlineStyleSingle NSUnderlineStyle = 1
-	NSUnderlineStyleThick NSUnderlineStyle = 2
-	NSUnderlineStyleDouble NSUnderlineStyle = 9
-	NSUnderlineStylePatternSolid NSUnderlineStyle = 0
-	NSUnderlineStylePatternDot NSUnderlineStyle = 256
-	NSUnderlineStylePatternDash NSUnderlineStyle = 512
-	NSUnderlineStylePatternDashDot NSUnderlineStyle = 768
+	NSUnderlineStyleNone              NSUnderlineStyle = 0
+	NSUnderlineStyleSingle            NSUnderlineStyle = 1
+	NSUnderlineStyleThick             NSUnderlineStyle = 2
+	NSUnderlineStyleDouble            NSUnderlineStyle = 9
+	NSUnderlineStylePatternSolid      NSUnderlineStyle = 0
+	NSUnderlineStylePatternDot        NSUnderlineStyle = 256
+	NSUnderlineStylePatternDash       NSUnderlineStyle = 512
+	NSUnderlineStylePatternDashDot    NSUnderlineStyle = 768
 	NSUnderlineStylePatternDashDotDot NSUnderlineStyle = 1024
-	NSUnderlineStyleByWord NSUnderlineStyle = 32768
+	NSUnderlineStyleByWord            NSUnderlineStyle = 32768
 )
 
 func (e NSUnderlineStyle) String() string {
@@ -6692,7 +6692,7 @@ type NSUserInterfaceLayoutOrientation int64
 
 const (
 	NSUserInterfaceLayoutOrientationHorizontal NSUserInterfaceLayoutOrientation = 0
-	NSUserInterfaceLayoutOrientationVertical NSUserInterfaceLayoutOrientation = 1
+	NSUserInterfaceLayoutOrientationVertical   NSUserInterfaceLayoutOrientation = 1
 )
 
 func (e NSUserInterfaceLayoutOrientation) String() string {
@@ -6739,14 +6739,14 @@ func (e NSVerticalDirections) String() string {
 type NSViewControllerTransitionOptions uint64
 
 const (
-	NSViewControllerTransitionNone NSViewControllerTransitionOptions = 0
-	NSViewControllerTransitionCrossfade NSViewControllerTransitionOptions = 1
-	NSViewControllerTransitionSlideUp NSViewControllerTransitionOptions = 16
-	NSViewControllerTransitionSlideDown NSViewControllerTransitionOptions = 32
-	NSViewControllerTransitionSlideLeft NSViewControllerTransitionOptions = 64
-	NSViewControllerTransitionSlideRight NSViewControllerTransitionOptions = 128
-	NSViewControllerTransitionSlideForward NSViewControllerTransitionOptions = 320
-	NSViewControllerTransitionSlideBackward NSViewControllerTransitionOptions = 384
+	NSViewControllerTransitionNone                 NSViewControllerTransitionOptions = 0
+	NSViewControllerTransitionCrossfade            NSViewControllerTransitionOptions = 1
+	NSViewControllerTransitionSlideUp              NSViewControllerTransitionOptions = 16
+	NSViewControllerTransitionSlideDown            NSViewControllerTransitionOptions = 32
+	NSViewControllerTransitionSlideLeft            NSViewControllerTransitionOptions = 64
+	NSViewControllerTransitionSlideRight           NSViewControllerTransitionOptions = 128
+	NSViewControllerTransitionSlideForward         NSViewControllerTransitionOptions = 320
+	NSViewControllerTransitionSlideBackward        NSViewControllerTransitionOptions = 384
 	NSViewControllerTransitionAllowUserInteraction NSViewControllerTransitionOptions = 4096
 )
 
@@ -6785,18 +6785,18 @@ func (e NSViewControllerTransitionOptions) String() string {
 type NSViewLayerContentsPlacement int64
 
 const (
-	NSViewLayerContentsPlacementScaleAxesIndependently NSViewLayerContentsPlacement = 0
-	NSViewLayerContentsPlacementScaleProportionallyToFit NSViewLayerContentsPlacement = 1
+	NSViewLayerContentsPlacementScaleAxesIndependently    NSViewLayerContentsPlacement = 0
+	NSViewLayerContentsPlacementScaleProportionallyToFit  NSViewLayerContentsPlacement = 1
 	NSViewLayerContentsPlacementScaleProportionallyToFill NSViewLayerContentsPlacement = 2
-	NSViewLayerContentsPlacementCenter NSViewLayerContentsPlacement = 3
-	NSViewLayerContentsPlacementTop NSViewLayerContentsPlacement = 4
-	NSViewLayerContentsPlacementTopRight NSViewLayerContentsPlacement = 5
-	NSViewLayerContentsPlacementRight NSViewLayerContentsPlacement = 6
-	NSViewLayerContentsPlacementBottomRight NSViewLayerContentsPlacement = 7
-	NSViewLayerContentsPlacementBottom NSViewLayerContentsPlacement = 8
-	NSViewLayerContentsPlacementBottomLeft NSViewLayerContentsPlacement = 9
-	NSViewLayerContentsPlacementLeft NSViewLayerContentsPlacement = 10
-	NSViewLayerContentsPlacementTopLeft NSViewLayerContentsPlacement = 11
+	NSViewLayerContentsPlacementCenter                    NSViewLayerContentsPlacement = 3
+	NSViewLayerContentsPlacementTop                       NSViewLayerContentsPlacement = 4
+	NSViewLayerContentsPlacementTopRight                  NSViewLayerContentsPlacement = 5
+	NSViewLayerContentsPlacementRight                     NSViewLayerContentsPlacement = 6
+	NSViewLayerContentsPlacementBottomRight               NSViewLayerContentsPlacement = 7
+	NSViewLayerContentsPlacementBottom                    NSViewLayerContentsPlacement = 8
+	NSViewLayerContentsPlacementBottomLeft                NSViewLayerContentsPlacement = 9
+	NSViewLayerContentsPlacementLeft                      NSViewLayerContentsPlacement = 10
+	NSViewLayerContentsPlacementTopLeft                   NSViewLayerContentsPlacement = 11
 )
 
 func (e NSViewLayerContentsPlacement) String() string {
@@ -6833,11 +6833,11 @@ func (e NSViewLayerContentsPlacement) String() string {
 type NSViewLayerContentsRedrawPolicy int64
 
 const (
-	NSViewLayerContentsRedrawNever NSViewLayerContentsRedrawPolicy = 0
+	NSViewLayerContentsRedrawNever             NSViewLayerContentsRedrawPolicy = 0
 	NSViewLayerContentsRedrawOnSetNeedsDisplay NSViewLayerContentsRedrawPolicy = 1
-	NSViewLayerContentsRedrawDuringViewResize NSViewLayerContentsRedrawPolicy = 2
-	NSViewLayerContentsRedrawBeforeViewResize NSViewLayerContentsRedrawPolicy = 3
-	NSViewLayerContentsRedrawCrossfade NSViewLayerContentsRedrawPolicy = 4
+	NSViewLayerContentsRedrawDuringViewResize  NSViewLayerContentsRedrawPolicy = 2
+	NSViewLayerContentsRedrawBeforeViewResize  NSViewLayerContentsRedrawPolicy = 3
+	NSViewLayerContentsRedrawCrossfade         NSViewLayerContentsRedrawPolicy = 4
 )
 
 func (e NSViewLayerContentsRedrawPolicy) String() string {
@@ -6860,9 +6860,9 @@ func (e NSViewLayerContentsRedrawPolicy) String() string {
 type NSViewLayoutRegionAdaptivityAxis int64
 
 const (
-	NSViewLayoutRegionAdaptivityAxisNone NSViewLayoutRegionAdaptivityAxis = 0
+	NSViewLayoutRegionAdaptivityAxisNone       NSViewLayoutRegionAdaptivityAxis = 0
 	NSViewLayoutRegionAdaptivityAxisHorizontal NSViewLayoutRegionAdaptivityAxis = 1
-	NSViewLayoutRegionAdaptivityAxisVertical NSViewLayoutRegionAdaptivityAxis = 2
+	NSViewLayoutRegionAdaptivityAxisVertical   NSViewLayoutRegionAdaptivityAxis = 2
 )
 
 func (e NSViewLayoutRegionAdaptivityAxis) String() string {
@@ -7035,11 +7035,11 @@ func (e NSWindingRule) String() string {
 type NSWindowAnimationBehavior int64
 
 const (
-	NSWindowAnimationBehaviorDefault NSWindowAnimationBehavior = 0
-	NSWindowAnimationBehaviorNone NSWindowAnimationBehavior = 2
+	NSWindowAnimationBehaviorDefault        NSWindowAnimationBehavior = 0
+	NSWindowAnimationBehaviorNone           NSWindowAnimationBehavior = 2
 	NSWindowAnimationBehaviorDocumentWindow NSWindowAnimationBehavior = 3
-	NSWindowAnimationBehaviorUtilityWindow NSWindowAnimationBehavior = 4
-	NSWindowAnimationBehaviorAlertPanel NSWindowAnimationBehavior = 5
+	NSWindowAnimationBehaviorUtilityWindow  NSWindowAnimationBehavior = 4
+	NSWindowAnimationBehaviorAlertPanel     NSWindowAnimationBehavior = 5
 )
 
 func (e NSWindowAnimationBehavior) String() string {
@@ -7067,7 +7067,7 @@ const (
 	NSWindowBackingLocationDefault NSWindowBackingLocation = 0
 	// Deprecated: This property does not do anything and should not be used
 	NSWindowBackingLocationVideoMemory NSWindowBackingLocation = 1
-	NSWindowBackingLocationMainMemory NSWindowBackingLocation = 2
+	NSWindowBackingLocationMainMemory  NSWindowBackingLocation = 2
 )
 
 func (e NSWindowBackingLocation) String() string {
@@ -7087,11 +7087,11 @@ func (e NSWindowBackingLocation) String() string {
 type NSWindowButton uint64
 
 const (
-	NSWindowCloseButton NSWindowButton = 0
-	NSWindowMiniaturizeButton NSWindowButton = 1
-	NSWindowZoomButton NSWindowButton = 2
-	NSWindowToolbarButton NSWindowButton = 3
-	NSWindowDocumentIconButton NSWindowButton = 4
+	NSWindowCloseButton            NSWindowButton = 0
+	NSWindowMiniaturizeButton      NSWindowButton = 1
+	NSWindowZoomButton             NSWindowButton = 2
+	NSWindowToolbarButton          NSWindowButton = 3
+	NSWindowDocumentIconButton     NSWindowButton = 4
 	NSWindowDocumentVersionsButton NSWindowButton = 6
 )
 
@@ -7119,22 +7119,22 @@ func (e NSWindowButton) String() string {
 type NSWindowCollectionBehavior uint64
 
 const (
-	NSWindowCollectionBehaviorDefault NSWindowCollectionBehavior = 0
-	NSWindowCollectionBehaviorCanJoinAllSpaces NSWindowCollectionBehavior = 1
-	NSWindowCollectionBehaviorMoveToActiveSpace NSWindowCollectionBehavior = 2
-	NSWindowCollectionBehaviorManaged NSWindowCollectionBehavior = 4
-	NSWindowCollectionBehaviorTransient NSWindowCollectionBehavior = 8
-	NSWindowCollectionBehaviorStationary NSWindowCollectionBehavior = 16
-	NSWindowCollectionBehaviorParticipatesInCycle NSWindowCollectionBehavior = 32
-	NSWindowCollectionBehaviorIgnoresCycle NSWindowCollectionBehavior = 64
-	NSWindowCollectionBehaviorFullScreenPrimary NSWindowCollectionBehavior = 128
-	NSWindowCollectionBehaviorFullScreenAuxiliary NSWindowCollectionBehavior = 256
-	NSWindowCollectionBehaviorFullScreenNone NSWindowCollectionBehavior = 512
-	NSWindowCollectionBehaviorFullScreenAllowsTiling NSWindowCollectionBehavior = 2048
+	NSWindowCollectionBehaviorDefault                   NSWindowCollectionBehavior = 0
+	NSWindowCollectionBehaviorCanJoinAllSpaces          NSWindowCollectionBehavior = 1
+	NSWindowCollectionBehaviorMoveToActiveSpace         NSWindowCollectionBehavior = 2
+	NSWindowCollectionBehaviorManaged                   NSWindowCollectionBehavior = 4
+	NSWindowCollectionBehaviorTransient                 NSWindowCollectionBehavior = 8
+	NSWindowCollectionBehaviorStationary                NSWindowCollectionBehavior = 16
+	NSWindowCollectionBehaviorParticipatesInCycle       NSWindowCollectionBehavior = 32
+	NSWindowCollectionBehaviorIgnoresCycle              NSWindowCollectionBehavior = 64
+	NSWindowCollectionBehaviorFullScreenPrimary         NSWindowCollectionBehavior = 128
+	NSWindowCollectionBehaviorFullScreenAuxiliary       NSWindowCollectionBehavior = 256
+	NSWindowCollectionBehaviorFullScreenNone            NSWindowCollectionBehavior = 512
+	NSWindowCollectionBehaviorFullScreenAllowsTiling    NSWindowCollectionBehavior = 2048
 	NSWindowCollectionBehaviorFullScreenDisallowsTiling NSWindowCollectionBehavior = 4096
-	NSWindowCollectionBehaviorPrimary NSWindowCollectionBehavior = 65536
-	NSWindowCollectionBehaviorAuxiliary NSWindowCollectionBehavior = 131072
-	NSWindowCollectionBehaviorCanJoinAllApplications NSWindowCollectionBehavior = 262144
+	NSWindowCollectionBehaviorPrimary                   NSWindowCollectionBehavior = 65536
+	NSWindowCollectionBehaviorAuxiliary                 NSWindowCollectionBehavior = 131072
+	NSWindowCollectionBehaviorCanJoinAllApplications    NSWindowCollectionBehavior = 262144
 )
 
 func (e NSWindowCollectionBehavior) String() string {
@@ -7193,8 +7193,8 @@ func (e NSWindowCollectionBehavior) String() string {
 type NSWindowDepth int64
 
 const (
-	NSWindowDepthTwentyfourBitRGB NSWindowDepth = 520
-	NSWindowDepthSixtyfourBitRGB NSWindowDepth = 528
+	NSWindowDepthTwentyfourBitRGB            NSWindowDepth = 520
+	NSWindowDepthSixtyfourBitRGB             NSWindowDepth = 528
 	NSWindowDepthOnehundredtwentyeightBitRGB NSWindowDepth = 544
 )
 
@@ -7236,7 +7236,7 @@ type NSWindowNumberListOptions uint64
 
 const (
 	NSWindowNumberListAllApplications NSWindowNumberListOptions = 1
-	NSWindowNumberListAllSpaces NSWindowNumberListOptions = 16
+	NSWindowNumberListAllSpaces       NSWindowNumberListOptions = 16
 )
 
 func (e NSWindowNumberListOptions) String() string {
@@ -7277,7 +7277,7 @@ type NSWindowOrderingMode int64
 const (
 	NSWindowAbove NSWindowOrderingMode = 1
 	NSWindowBelow NSWindowOrderingMode = -1
-	NSWindowOut NSWindowOrderingMode = 0
+	NSWindowOut   NSWindowOrderingMode = 0
 )
 
 func (e NSWindowOrderingMode) String() string {
@@ -7297,7 +7297,7 @@ func (e NSWindowOrderingMode) String() string {
 type NSWindowSharingType uint64
 
 const (
-	NSWindowSharingNone NSWindowSharingType = 0
+	NSWindowSharingNone     NSWindowSharingType = 0
 	NSWindowSharingReadOnly NSWindowSharingType = 1
 )
 
@@ -7317,21 +7317,21 @@ func (e NSWindowSharingType) String() string {
 type NSWindowStyleMask uint64
 
 const (
-	NSWindowStyleMaskBorderless NSWindowStyleMask = 0
-	NSWindowStyleMaskTitled NSWindowStyleMask = 1
-	NSWindowStyleMaskClosable NSWindowStyleMask = 2
+	NSWindowStyleMaskBorderless     NSWindowStyleMask = 0
+	NSWindowStyleMaskTitled         NSWindowStyleMask = 1
+	NSWindowStyleMaskClosable       NSWindowStyleMask = 2
 	NSWindowStyleMaskMiniaturizable NSWindowStyleMask = 4
-	NSWindowStyleMaskResizable NSWindowStyleMask = 8
+	NSWindowStyleMaskResizable      NSWindowStyleMask = 8
 	// Deprecated: Textured window style should no longer be used
 	NSWindowStyleMaskTexturedBackground NSWindowStyleMask = 256
 	// Deprecated: Textured window style should no longer be used
 	NSWindowStyleMaskUnifiedTitleAndToolbar NSWindowStyleMask = 4096
-	NSWindowStyleMaskFullScreen NSWindowStyleMask = 16384
-	NSWindowStyleMaskFullSizeContentView NSWindowStyleMask = 32768
-	NSWindowStyleMaskUtilityWindow NSWindowStyleMask = 16
-	NSWindowStyleMaskDocModalWindow NSWindowStyleMask = 64
-	NSWindowStyleMaskNonactivatingPanel NSWindowStyleMask = 128
-	NSWindowStyleMaskHUDWindow NSWindowStyleMask = 8192
+	NSWindowStyleMaskFullScreen             NSWindowStyleMask = 16384
+	NSWindowStyleMaskFullSizeContentView    NSWindowStyleMask = 32768
+	NSWindowStyleMaskUtilityWindow          NSWindowStyleMask = 16
+	NSWindowStyleMaskDocModalWindow         NSWindowStyleMask = 64
+	NSWindowStyleMaskNonactivatingPanel     NSWindowStyleMask = 128
+	NSWindowStyleMaskHUDWindow              NSWindowStyleMask = 8192
 )
 
 func (e NSWindowStyleMask) String() string {
@@ -7382,8 +7382,8 @@ func (e NSWindowStyleMask) String() string {
 type NSWindowTabbingMode int64
 
 const (
-	NSWindowTabbingModeAutomatic NSWindowTabbingMode = 0
-	NSWindowTabbingModePreferred NSWindowTabbingMode = 1
+	NSWindowTabbingModeAutomatic  NSWindowTabbingMode = 0
+	NSWindowTabbingModePreferred  NSWindowTabbingMode = 1
 	NSWindowTabbingModeDisallowed NSWindowTabbingMode = 2
 )
 
@@ -7405,7 +7405,7 @@ type NSWindowTitleVisibility int64
 
 const (
 	NSWindowTitleVisible NSWindowTitleVisibility = 0
-	NSWindowTitleHidden NSWindowTitleVisibility = 1
+	NSWindowTitleHidden  NSWindowTitleVisibility = 1
 )
 
 func (e NSWindowTitleVisibility) String() string {
@@ -7423,10 +7423,10 @@ func (e NSWindowTitleVisibility) String() string {
 type NSWindowToolbarStyle int64
 
 const (
-	NSWindowToolbarStyleAutomatic NSWindowToolbarStyle = 0
-	NSWindowToolbarStyleExpanded NSWindowToolbarStyle = 1
-	NSWindowToolbarStylePreference NSWindowToolbarStyle = 2
-	NSWindowToolbarStyleUnified NSWindowToolbarStyle = 3
+	NSWindowToolbarStyleAutomatic      NSWindowToolbarStyle = 0
+	NSWindowToolbarStyleExpanded       NSWindowToolbarStyle = 1
+	NSWindowToolbarStylePreference     NSWindowToolbarStyle = 2
+	NSWindowToolbarStyleUnified        NSWindowToolbarStyle = 3
 	NSWindowToolbarStyleUnifiedCompact NSWindowToolbarStyle = 4
 )
 
@@ -7450,8 +7450,8 @@ func (e NSWindowToolbarStyle) String() string {
 type NSWindowUserTabbingPreference int64
 
 const (
-	NSWindowUserTabbingPreferenceManual NSWindowUserTabbingPreference = 0
-	NSWindowUserTabbingPreferenceAlways NSWindowUserTabbingPreference = 1
+	NSWindowUserTabbingPreferenceManual       NSWindowUserTabbingPreference = 0
+	NSWindowUserTabbingPreferenceAlways       NSWindowUserTabbingPreference = 1
 	NSWindowUserTabbingPreferenceInFullScreen NSWindowUserTabbingPreference = 2
 )
 
@@ -7472,8 +7472,8 @@ type NSWorkspaceAuthorizationType int64
 
 const (
 	NSWorkspaceAuthorizationTypeCreateSymbolicLink NSWorkspaceAuthorizationType = 0
-	NSWorkspaceAuthorizationTypeSetAttributes NSWorkspaceAuthorizationType = 1
-	NSWorkspaceAuthorizationTypeReplaceFile NSWorkspaceAuthorizationType = 2
+	NSWorkspaceAuthorizationTypeSetAttributes      NSWorkspaceAuthorizationType = 1
+	NSWorkspaceAuthorizationTypeReplaceFile        NSWorkspaceAuthorizationType = 2
 )
 
 func (e NSWorkspaceAuthorizationType) String() string {
@@ -7494,7 +7494,7 @@ type NSWorkspaceIconCreationOptions uint64
 
 const (
 	NSExcludeQuickDrawElementsIconCreationOption NSWorkspaceIconCreationOptions = 2
-	NSExclude10_4ElementsIconCreationOption NSWorkspaceIconCreationOptions = 4
+	NSExclude10_4ElementsIconCreationOption      NSWorkspaceIconCreationOptions = 4
 )
 
 func (e NSWorkspaceIconCreationOptions) String() string {
@@ -7589,7 +7589,7 @@ func (e NSWorkspaceLaunchOptions) String() string {
 type NSWritingDirection int64
 
 const (
-	NSWritingDirectionNatural NSWritingDirection = -1
+	NSWritingDirectionNatural     NSWritingDirection = -1
 	NSWritingDirectionLeftToRight NSWritingDirection = 0
 	NSWritingDirectionRightToLeft NSWritingDirection = 1
 )
@@ -7610,10 +7610,10 @@ func (e NSWritingDirection) String() string {
 type NSWritingToolsBehavior int64
 
 const (
-	NSWritingToolsBehaviorNone NSWritingToolsBehavior = -1
-	NSWritingToolsBehaviorDefault NSWritingToolsBehavior = 0
+	NSWritingToolsBehaviorNone     NSWritingToolsBehavior = -1
+	NSWritingToolsBehaviorDefault  NSWritingToolsBehavior = 0
 	NSWritingToolsBehaviorComplete NSWritingToolsBehavior = 1
-	NSWritingToolsBehaviorLimited NSWritingToolsBehavior = 2
+	NSWritingToolsBehaviorLimited  NSWritingToolsBehavior = 2
 )
 
 func (e NSWritingToolsBehavior) String() string {
@@ -7631,7 +7631,7 @@ func (e NSWritingToolsBehavior) String() string {
 	}
 }
 
-// The states that indicate the current activity, if any, Writing Tools is performing in your view. Making changes to your view requires several different levels of interaction. Initially, Writing Tools displays its UI and collects information about what the person wants to do. When the person selects an operation, Writing Tools sends the relevant details to a large language model (LLM) and processes the results. It then works with the custom view to integrate any changes into the view’s text storage. During each of these activities, the coordinator reflects what’s happening in its ``NSWritingToolsCoordinator/state`` property. You can use the current state as a guide to making decisions in other parts of your view.
+// The states that indicate the current activity, if any, Writing Tools is performing in your view. Making changes to your view requires several different levels of interaction. Initially, Writing Tools displays its UI and collects information about what the person wants to do. When the person selects an operation, Writing Tools sends the relevant details to a large language model (LLM) and processes the results. It then works with the custom view to integrate any changes into the view’s text storage. During each of these activities, the coordinator reflects what’s happening in its “NSWritingToolsCoordinator/state“ property. You can use the current state as a guide to making decisions in other parts of your view.
 type NSWritingToolsCoordinatorState int64
 
 const (
@@ -7660,7 +7660,7 @@ func (e NSWritingToolsCoordinatorState) String() string {
 	}
 }
 
-// Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your ``NSWritingToolsCoordinator`` object so it can track them correctly. Call the ``NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)`` method to report changes that occur inside one of your context objects. Call the ``NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)`` method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
+// Constants that specify the reason you updated your view’s content outside of the Writing Tools workflow. If you modify your view’s text storage while Writing Tools is active, report those changes to your “NSWritingToolsCoordinator“ object so it can track them correctly. Call the “NSWritingToolsCoordinator/updateRange(_:with:reason:forContextWithIdentifier:)“ method to report changes that occur inside one of your context objects. Call the “NSWritingToolsCoordinator/updateForReflowedTextInContextWithIdentifier(_:)“ method for changes that affect the layout of your text, such as text insertions before a context object or changes to your view’s frame rectangle.
 type NSWritingToolsCoordinatorTextUpdateReason int64
 
 const (
@@ -7685,11 +7685,11 @@ func (e NSWritingToolsCoordinatorTextUpdateReason) String() string {
 type NSWritingToolsResultOptions uint64
 
 const (
-	NSWritingToolsResultDefault NSWritingToolsResultOptions = 0
-	NSWritingToolsResultPlainText NSWritingToolsResultOptions = 1
-	NSWritingToolsResultRichText NSWritingToolsResultOptions = 2
-	NSWritingToolsResultList NSWritingToolsResultOptions = 4
-	NSWritingToolsResultTable NSWritingToolsResultOptions = 8
+	NSWritingToolsResultDefault            NSWritingToolsResultOptions = 0
+	NSWritingToolsResultPlainText          NSWritingToolsResultOptions = 1
+	NSWritingToolsResultRichText           NSWritingToolsResultOptions = 2
+	NSWritingToolsResultList               NSWritingToolsResultOptions = 4
+	NSWritingToolsResultTable              NSWritingToolsResultOptions = 8
 	NSWritingToolsResultPresentationIntent NSWritingToolsResultOptions = 16
 )
 
@@ -7715,4 +7715,3 @@ func (e NSWritingToolsResultOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

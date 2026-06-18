@@ -16,10 +16,10 @@ type VSAccountApplicationProvider struct {
 }
 
 var (
-	_clsVSAccountApplicationProvider = _objcClass("VSAccountApplicationProvider")
+	_clsVSAccountApplicationProvider                                       = _objcClass("VSAccountApplicationProvider")
 	_vSAccountApplicationProviderSelInitWithLocalizedDisplayNameIdentifier = objc.RegisterName("initWithLocalizedDisplayName:identifier:")
-	_vSAccountApplicationProviderSelLocalizedDisplayName = objc.RegisterName("localizedDisplayName")
-	_vSAccountApplicationProviderSelIdentifier = objc.RegisterName("identifier")
+	_vSAccountApplicationProviderSelLocalizedDisplayName                   = objc.RegisterName("localizedDisplayName")
+	_vSAccountApplicationProviderSelIdentifier                             = objc.RegisterName("identifier")
 )
 
 func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvider {
@@ -35,21 +35,26 @@ func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvide
 // Returns an application provider using a given display name and identifier. Both the localizedDisplayName and identifier parameters must be non-empty strings.
 func (o *VSAccountApplicationProvider) InitWithLocalizedDisplayNameIdentifier(localizedDisplayName *foundation.NSString, identifier *foundation.NSString) *VSAccountApplicationProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountApplicationProviderSelInitWithLocalizedDisplayNameIdentifier, localizedDisplayName.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VSAccountApplicationProviderFromID(_ret)
 }
 
 // The display name of the provider as it will appear in the list of providers.
 func (o *VSAccountApplicationProvider) LocalizedDisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountApplicationProviderSelLocalizedDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The identifier of the provider. If selected, this value is returned to your application.
 func (o *VSAccountApplicationProvider) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vSAccountApplicationProviderSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

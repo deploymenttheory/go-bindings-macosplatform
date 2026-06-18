@@ -86,4 +86,3 @@ type EnvironmentStateable interface {
 }
 
 var _ EnvironmentStateable = (*EnvironmentState)(nil)
-

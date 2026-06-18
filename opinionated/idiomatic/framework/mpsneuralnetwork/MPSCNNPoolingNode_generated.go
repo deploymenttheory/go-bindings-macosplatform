@@ -99,4 +99,3 @@ type CNNPoolingNodeable interface {
 }
 
 var _ CNNPoolingNodeable = (*CNNPoolingNode)(nil)
-

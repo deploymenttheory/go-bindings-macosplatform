@@ -16,23 +16,23 @@ type MTRUnitTestingClusterTestFabricScoped struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestFabricScoped = _objcClass("MTRUnitTestingClusterTestFabricScoped")
-	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8u = objc.RegisterName("fabricSensitiveInt8u")
-	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8u = objc.RegisterName("setFabricSensitiveInt8u:")
-	_mTRUnitTestingClusterTestFabricScopedSelOptionalFabricSensitiveInt8u = objc.RegisterName("optionalFabricSensitiveInt8u")
-	_mTRUnitTestingClusterTestFabricScopedSelSetOptionalFabricSensitiveInt8u = objc.RegisterName("setOptionalFabricSensitiveInt8u:")
-	_mTRUnitTestingClusterTestFabricScopedSelNullableFabricSensitiveInt8u = objc.RegisterName("nullableFabricSensitiveInt8u")
-	_mTRUnitTestingClusterTestFabricScopedSelSetNullableFabricSensitiveInt8u = objc.RegisterName("setNullableFabricSensitiveInt8u:")
-	_mTRUnitTestingClusterTestFabricScopedSelNullableOptionalFabricSensitiveInt8u = objc.RegisterName("nullableOptionalFabricSensitiveInt8u")
+	_clsMTRUnitTestingClusterTestFabricScoped                                        = _objcClass("MTRUnitTestingClusterTestFabricScoped")
+	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8u                    = objc.RegisterName("fabricSensitiveInt8u")
+	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8u                 = objc.RegisterName("setFabricSensitiveInt8u:")
+	_mTRUnitTestingClusterTestFabricScopedSelOptionalFabricSensitiveInt8u            = objc.RegisterName("optionalFabricSensitiveInt8u")
+	_mTRUnitTestingClusterTestFabricScopedSelSetOptionalFabricSensitiveInt8u         = objc.RegisterName("setOptionalFabricSensitiveInt8u:")
+	_mTRUnitTestingClusterTestFabricScopedSelNullableFabricSensitiveInt8u            = objc.RegisterName("nullableFabricSensitiveInt8u")
+	_mTRUnitTestingClusterTestFabricScopedSelSetNullableFabricSensitiveInt8u         = objc.RegisterName("setNullableFabricSensitiveInt8u:")
+	_mTRUnitTestingClusterTestFabricScopedSelNullableOptionalFabricSensitiveInt8u    = objc.RegisterName("nullableOptionalFabricSensitiveInt8u")
 	_mTRUnitTestingClusterTestFabricScopedSelSetNullableOptionalFabricSensitiveInt8u = objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:")
-	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveCharString = objc.RegisterName("fabricSensitiveCharString")
-	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveCharString = objc.RegisterName("setFabricSensitiveCharString:")
-	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveStruct = objc.RegisterName("fabricSensitiveStruct")
-	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveStruct = objc.RegisterName("setFabricSensitiveStruct:")
-	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8uList = objc.RegisterName("fabricSensitiveInt8uList")
-	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8uList = objc.RegisterName("setFabricSensitiveInt8uList:")
-	_mTRUnitTestingClusterTestFabricScopedSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTRUnitTestingClusterTestFabricScopedSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveCharString               = objc.RegisterName("fabricSensitiveCharString")
+	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveCharString            = objc.RegisterName("setFabricSensitiveCharString:")
+	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveStruct                   = objc.RegisterName("fabricSensitiveStruct")
+	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveStruct                = objc.RegisterName("setFabricSensitiveStruct:")
+	_mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8uList                = objc.RegisterName("fabricSensitiveInt8uList")
+	_mTRUnitTestingClusterTestFabricScopedSelSetFabricSensitiveInt8uList             = objc.RegisterName("setFabricSensitiveInt8uList:")
+	_mTRUnitTestingClusterTestFabricScopedSelFabricIndex                             = objc.RegisterName("fabricIndex")
+	_mTRUnitTestingClusterTestFabricScopedSelSetFabricIndex                          = objc.RegisterName("setFabricIndex:")
 )
 
 func MTRUnitTestingClusterTestFabricScopedFromID(id objc.ID) *MTRUnitTestingClusterTestFabricScoped {
@@ -47,7 +47,9 @@ func MTRUnitTestingClusterTestFabricScopedFromID(id objc.ID) *MTRUnitTestingClus
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveInt8u)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8u(fabricSe
 
 func (o *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelOptionalFabricSensitiveInt8u)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetOptionalFabricSensitiveInt8u(
 
 func (o *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelNullableFabricSensitiveInt8u)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetNullableFabricSensitiveInt8u(
 
 func (o *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelNullableOptionalFabricSensitiveInt8u)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetNullableOptionalFabricSensiti
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveCharString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +107,9 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveCharString(fab
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricSensitiveStruct)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
@@ -116,11 +128,12 @@ func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uList(fabr
 
 func (o *MTRUnitTestingClusterTestFabricScoped) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestFabricScopedSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestFabricScoped) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestFabricScopedSelSetFabricIndex, fabricIndex.Ptr())
 }
-

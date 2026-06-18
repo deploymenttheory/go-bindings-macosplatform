@@ -19,51 +19,51 @@ type NSImageRep struct {
 }
 
 var (
-	_clsNSImageRep = _objcClass("NSImageRep")
-	_nSImageRepSelInit = objc.RegisterName("init")
-	_nSImageRepSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSImageRepSelDraw = objc.RegisterName("draw")
-	_nSImageRepSelDrawAtPoint = objc.RegisterName("drawAtPoint:")
-	_nSImageRepSelDrawInRect = objc.RegisterName("drawInRect:")
+	_clsNSImageRep                                                       = _objcClass("NSImageRep")
+	_nSImageRepSelInit                                                   = objc.RegisterName("init")
+	_nSImageRepSelInitWithCoder                                          = objc.RegisterName("initWithCoder:")
+	_nSImageRepSelDraw                                                   = objc.RegisterName("draw")
+	_nSImageRepSelDrawAtPoint                                            = objc.RegisterName("drawAtPoint:")
+	_nSImageRepSelDrawInRect                                             = objc.RegisterName("drawInRect:")
 	_nSImageRepSelDrawInRectFromRectOperationFractionRespectFlippedHints = objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:")
-	_nSImageRepSelRegisterImageRepClass = objc.RegisterName("registerImageRepClass:")
-	_nSImageRepSelUnregisterImageRepClass = objc.RegisterName("unregisterImageRepClass:")
-	_nSImageRepSelImageRepClassForFileType = objc.RegisterName("imageRepClassForFileType:")
-	_nSImageRepSelImageRepClassForPasteboardType = objc.RegisterName("imageRepClassForPasteboardType:")
-	_nSImageRepSelImageRepClassForType = objc.RegisterName("imageRepClassForType:")
-	_nSImageRepSelImageRepClassForData = objc.RegisterName("imageRepClassForData:")
-	_nSImageRepSelCanInitWithData = objc.RegisterName("canInitWithData:")
-	_nSImageRepSelImageUnfilteredFileTypes = objc.RegisterName("imageUnfilteredFileTypes")
-	_nSImageRepSelImageUnfilteredPasteboardTypes = objc.RegisterName("imageUnfilteredPasteboardTypes")
-	_nSImageRepSelImageFileTypes = objc.RegisterName("imageFileTypes")
-	_nSImageRepSelImagePasteboardTypes = objc.RegisterName("imagePasteboardTypes")
-	_nSImageRepSelCanInitWithPasteboard = objc.RegisterName("canInitWithPasteboard:")
-	_nSImageRepSelImageRepsWithContentsOfFile = objc.RegisterName("imageRepsWithContentsOfFile:")
-	_nSImageRepSelImageRepWithContentsOfFile = objc.RegisterName("imageRepWithContentsOfFile:")
-	_nSImageRepSelImageRepsWithContentsOfURL = objc.RegisterName("imageRepsWithContentsOfURL:")
-	_nSImageRepSelImageRepWithContentsOfURL = objc.RegisterName("imageRepWithContentsOfURL:")
-	_nSImageRepSelImageRepsWithPasteboard = objc.RegisterName("imageRepsWithPasteboard:")
-	_nSImageRepSelImageRepWithPasteboard = objc.RegisterName("imageRepWithPasteboard:")
-	_nSImageRepSelCGImageForProposedRectContextHints = objc.RegisterName("CGImageForProposedRect:context:hints:")
-	_nSImageRepSelSize = objc.RegisterName("size")
-	_nSImageRepSelSetSize = objc.RegisterName("setSize:")
-	_nSImageRepSelHasAlpha = objc.RegisterName("hasAlpha")
-	_nSImageRepSelSetAlpha = objc.RegisterName("setAlpha:")
-	_nSImageRepSelIsOpaque = objc.RegisterName("isOpaque")
-	_nSImageRepSelSetOpaque = objc.RegisterName("setOpaque:")
-	_nSImageRepSelColorSpaceName = objc.RegisterName("colorSpaceName")
-	_nSImageRepSelSetColorSpaceName = objc.RegisterName("setColorSpaceName:")
-	_nSImageRepSelBitsPerSample = objc.RegisterName("bitsPerSample")
-	_nSImageRepSelSetBitsPerSample = objc.RegisterName("setBitsPerSample:")
-	_nSImageRepSelPixelsWide = objc.RegisterName("pixelsWide")
-	_nSImageRepSelSetPixelsWide = objc.RegisterName("setPixelsWide:")
-	_nSImageRepSelPixelsHigh = objc.RegisterName("pixelsHigh")
-	_nSImageRepSelSetPixelsHigh = objc.RegisterName("setPixelsHigh:")
-	_nSImageRepSelLayoutDirection = objc.RegisterName("layoutDirection")
-	_nSImageRepSelSetLayoutDirection = objc.RegisterName("setLayoutDirection:")
-	_nSImageRepSelRegisteredImageRepClasses = objc.RegisterName("registeredImageRepClasses")
-	_nSImageRepSelImageUnfilteredTypes = objc.RegisterName("imageUnfilteredTypes")
-	_nSImageRepSelImageTypes = objc.RegisterName("imageTypes")
+	_nSImageRepSelRegisterImageRepClass                                  = objc.RegisterName("registerImageRepClass:")
+	_nSImageRepSelUnregisterImageRepClass                                = objc.RegisterName("unregisterImageRepClass:")
+	_nSImageRepSelImageRepClassForFileType                               = objc.RegisterName("imageRepClassForFileType:")
+	_nSImageRepSelImageRepClassForPasteboardType                         = objc.RegisterName("imageRepClassForPasteboardType:")
+	_nSImageRepSelImageRepClassForType                                   = objc.RegisterName("imageRepClassForType:")
+	_nSImageRepSelImageRepClassForData                                   = objc.RegisterName("imageRepClassForData:")
+	_nSImageRepSelCanInitWithData                                        = objc.RegisterName("canInitWithData:")
+	_nSImageRepSelImageUnfilteredFileTypes                               = objc.RegisterName("imageUnfilteredFileTypes")
+	_nSImageRepSelImageUnfilteredPasteboardTypes                         = objc.RegisterName("imageUnfilteredPasteboardTypes")
+	_nSImageRepSelImageFileTypes                                         = objc.RegisterName("imageFileTypes")
+	_nSImageRepSelImagePasteboardTypes                                   = objc.RegisterName("imagePasteboardTypes")
+	_nSImageRepSelCanInitWithPasteboard                                  = objc.RegisterName("canInitWithPasteboard:")
+	_nSImageRepSelImageRepsWithContentsOfFile                            = objc.RegisterName("imageRepsWithContentsOfFile:")
+	_nSImageRepSelImageRepWithContentsOfFile                             = objc.RegisterName("imageRepWithContentsOfFile:")
+	_nSImageRepSelImageRepsWithContentsOfURL                             = objc.RegisterName("imageRepsWithContentsOfURL:")
+	_nSImageRepSelImageRepWithContentsOfURL                              = objc.RegisterName("imageRepWithContentsOfURL:")
+	_nSImageRepSelImageRepsWithPasteboard                                = objc.RegisterName("imageRepsWithPasteboard:")
+	_nSImageRepSelImageRepWithPasteboard                                 = objc.RegisterName("imageRepWithPasteboard:")
+	_nSImageRepSelCGImageForProposedRectContextHints                     = objc.RegisterName("CGImageForProposedRect:context:hints:")
+	_nSImageRepSelSize                                                   = objc.RegisterName("size")
+	_nSImageRepSelSetSize                                                = objc.RegisterName("setSize:")
+	_nSImageRepSelHasAlpha                                               = objc.RegisterName("hasAlpha")
+	_nSImageRepSelSetAlpha                                               = objc.RegisterName("setAlpha:")
+	_nSImageRepSelIsOpaque                                               = objc.RegisterName("isOpaque")
+	_nSImageRepSelSetOpaque                                              = objc.RegisterName("setOpaque:")
+	_nSImageRepSelColorSpaceName                                         = objc.RegisterName("colorSpaceName")
+	_nSImageRepSelSetColorSpaceName                                      = objc.RegisterName("setColorSpaceName:")
+	_nSImageRepSelBitsPerSample                                          = objc.RegisterName("bitsPerSample")
+	_nSImageRepSelSetBitsPerSample                                       = objc.RegisterName("setBitsPerSample:")
+	_nSImageRepSelPixelsWide                                             = objc.RegisterName("pixelsWide")
+	_nSImageRepSelSetPixelsWide                                          = objc.RegisterName("setPixelsWide:")
+	_nSImageRepSelPixelsHigh                                             = objc.RegisterName("pixelsHigh")
+	_nSImageRepSelSetPixelsHigh                                          = objc.RegisterName("setPixelsHigh:")
+	_nSImageRepSelLayoutDirection                                        = objc.RegisterName("layoutDirection")
+	_nSImageRepSelSetLayoutDirection                                     = objc.RegisterName("setLayoutDirection:")
+	_nSImageRepSelRegisteredImageRepClasses                              = objc.RegisterName("registeredImageRepClasses")
+	_nSImageRepSelImageUnfilteredTypes                                   = objc.RegisterName("imageUnfilteredTypes")
+	_nSImageRepSelImageTypes                                             = objc.RegisterName("imageTypes")
 )
 
 func NSImageRepFromID(id objc.ID) *NSImageRep {
@@ -78,13 +78,17 @@ func NSImageRepFromID(id objc.ID) *NSImageRep {
 
 func (o *NSImageRep) Init() *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageRepSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
 func (o *NSImageRep) InitWithCoder(coder *foundation.NSCoder) *NSImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageRepSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
@@ -174,37 +178,49 @@ func NSImageRepCanInitWithPasteboard(pasteboard *NSPasteboard) bool {
 
 func NSImageRepImageRepsWithContentsOfFile(filename *foundation.NSString) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithContentsOfFile, filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
 func NSImageRepImageRepWithContentsOfFile(filename *foundation.NSString) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithContentsOfFile, filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
 func NSImageRepImageRepsWithContentsOfURL(url *foundation.NSURL) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
 func NSImageRepImageRepWithContentsOfURL(url *foundation.NSURL) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
 func NSImageRepImageRepsWithPasteboard(pasteboard *NSPasteboard) *foundation.NSArray[*NSImageRep] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepsWithPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSImageRep](_ret)
 }
 
 func NSImageRepImageRepWithPasteboard(pasteboard *NSPasteboard) *NSImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSImageRep), _nSImageRepSelImageRepWithPasteboard, pasteboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageRepFromID(_ret)
 }
 
@@ -242,7 +258,9 @@ func (o *NSImageRep) SetOpaque(opaque bool) {
 
 func (o *NSImageRep) ColorSpaceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSImageRepSelColorSpaceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -300,4 +318,3 @@ func NSImageRepImageTypes() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](objc.ID(_clsNSImageRep), _nSImageRepSelImageTypes)
 	return _ret
 }
-

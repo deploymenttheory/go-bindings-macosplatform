@@ -15,10 +15,10 @@ type NSIndexSpecifier struct {
 }
 
 var (
-	_clsNSIndexSpecifier = _objcClass("NSIndexSpecifier")
+	_clsNSIndexSpecifier                                                            = _objcClass("NSIndexSpecifier")
 	_nSIndexSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyIndex = objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:index:")
-	_nSIndexSpecifierSelIndex = objc.RegisterName("index")
-	_nSIndexSpecifierSelSetIndex = objc.RegisterName("setIndex:")
+	_nSIndexSpecifierSelIndex                                                       = objc.RegisterName("index")
+	_nSIndexSpecifierSelSetIndex                                                    = objc.RegisterName("setIndex:")
 )
 
 func NSIndexSpecifierFromID(id objc.ID) *NSIndexSpecifier {
@@ -33,7 +33,9 @@ func NSIndexSpecifierFromID(id objc.ID) *NSIndexSpecifier {
 
 func (o *NSIndexSpecifier) InitWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *NSScriptClassDescription, container *NSScriptObjectSpecifier, property *NSString, index int) *NSIndexSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIndexSpecifierSelInitWithContainerClassDescriptionContainerSpecifierKeyIndex, classDesc.Ptr(), container.Ptr(), property.Ptr(), index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIndexSpecifierFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *NSIndexSpecifier) Index() int {
 func (o *NSIndexSpecifier) SetIndex(index int) {
 	o.Ptr().Send(_nSIndexSpecifierSelSetIndex, index)
 }
-

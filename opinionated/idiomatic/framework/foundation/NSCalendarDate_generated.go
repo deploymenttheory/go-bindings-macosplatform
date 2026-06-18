@@ -197,4 +197,3 @@ type CalendarDateable interface {
 }
 
 var _ CalendarDateable = (*CalendarDate)(nil)
-

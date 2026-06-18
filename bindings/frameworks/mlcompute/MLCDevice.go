@@ -17,16 +17,16 @@ type MLCDevice struct {
 }
 
 var (
-	_clsMLCDevice = _objcClass("MLCDevice")
-	_mLCDeviceSelCpuDevice = objc.RegisterName("cpuDevice")
-	_mLCDeviceSelGpuDevice = objc.RegisterName("gpuDevice")
-	_mLCDeviceSelAneDevice = objc.RegisterName("aneDevice")
-	_mLCDeviceSelDeviceWithType = objc.RegisterName("deviceWithType:")
+	_clsMLCDevice                                            = _objcClass("MLCDevice")
+	_mLCDeviceSelCpuDevice                                   = objc.RegisterName("cpuDevice")
+	_mLCDeviceSelGpuDevice                                   = objc.RegisterName("gpuDevice")
+	_mLCDeviceSelAneDevice                                   = objc.RegisterName("aneDevice")
+	_mLCDeviceSelDeviceWithType                              = objc.RegisterName("deviceWithType:")
 	_mLCDeviceSelDeviceWithTypeSelectsMultipleComputeDevices = objc.RegisterName("deviceWithType:selectsMultipleComputeDevices:")
-	_mLCDeviceSelDeviceWithGPUDevices = objc.RegisterName("deviceWithGPUDevices:")
-	_mLCDeviceSelType = objc.RegisterName("type")
-	_mLCDeviceSelActualDeviceType = objc.RegisterName("actualDeviceType")
-	_mLCDeviceSelGpuDevices = objc.RegisterName("gpuDevices")
+	_mLCDeviceSelDeviceWithGPUDevices                        = objc.RegisterName("deviceWithGPUDevices:")
+	_mLCDeviceSelType                                        = objc.RegisterName("type")
+	_mLCDeviceSelActualDeviceType                            = objc.RegisterName("actualDeviceType")
+	_mLCDeviceSelGpuDevices                                  = objc.RegisterName("gpuDevices")
 )
 
 func MLCDeviceFromID(id objc.ID) *MLCDevice {
@@ -42,42 +42,54 @@ func MLCDeviceFromID(id objc.ID) *MLCDevice {
 // @abstract   Creates a device which uses the CPU. @return     A new device.
 func MLCDeviceCpuDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelCpuDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Creates a device which uses a GPU, if any. @return     A new device, or `nil` if no GPU exists.
 func MLCDeviceGpuDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelGpuDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Creates a device which uses the Apple Neural Engine, if any. @return     A new device, or `nil` if no ANE exists.
 func MLCDeviceAneDevice() *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelAneDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Create a MLCDevice object @param      type    A device type @return     A new device object
 func MLCDeviceDeviceWithType(type_ MLCDeviceType) *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithType, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Create a MLCDevice object that uses multiple devices if available @param      type    A device type @param      selectsMultipleComputeDevices    A boolean to indicate whether to select multiple compute devices @return     A new device object
 func MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(type_ MLCDeviceType, selectsMultipleComputeDevices bool) *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithTypeSelectsMultipleComputeDevices, type_, selectsMultipleComputeDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
 // @abstract   Create a MLCDevice object @discussion This method can be used by developers to select specific GPUs @param      gpus    List of Metal devices @return     A new device object
 func MLCDeviceDeviceWithGPUDevices(gpus *foundation.NSArray[metal.MTLDevice]) *MLCDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCDevice), _mLCDeviceSelDeviceWithGPUDevices, gpus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCDeviceFromID(_ret)
 }
 
@@ -97,4 +109,3 @@ func (o *MLCDevice) GpuDevices() *foundation.NSArray[metal.MTLDevice] {
 	_ret := objc.Send[*foundation.NSArray[metal.MTLDevice]](o.Ptr(), _mLCDeviceSelGpuDevices)
 	return _ret
 }
-

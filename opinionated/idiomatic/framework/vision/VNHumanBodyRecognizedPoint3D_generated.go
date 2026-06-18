@@ -51,9 +51,13 @@ func (x *HumanBodyRecognizedPoint3D) ParentJoint() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *HumanBodyRecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D { return &x.inner.VNRecognizedPoint3D }
+func (x *HumanBodyRecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D {
+	return &x.inner.VNRecognizedPoint3D
+}
 
-func (x *HumanBodyRecognizedPoint3D) asPoint3D() *raw.VNPoint3D { return &x.inner.VNRecognizedPoint3D.VNPoint3D }
+func (x *HumanBodyRecognizedPoint3D) asPoint3D() *raw.VNPoint3D {
+	return &x.inner.VNRecognizedPoint3D.VNPoint3D
+}
 
 // HumanBodyRecognizedPoint3Dable is the interface implemented by [HumanBodyRecognizedPoint3D], for mocking and DI.
 type HumanBodyRecognizedPoint3Dable interface {
@@ -63,4 +67,3 @@ type HumanBodyRecognizedPoint3Dable interface {
 }
 
 var _ HumanBodyRecognizedPoint3Dable = (*HumanBodyRecognizedPoint3D)(nil)
-

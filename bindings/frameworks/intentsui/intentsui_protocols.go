@@ -28,4 +28,3 @@ type INUIEditVoiceShortcutViewControllerDelegate interface {
 	EditVoiceShortcutViewControllerDidDeleteVoiceShortcutWithIdentifier(controller *INUIEditVoiceShortcutViewController, deletedVoiceShortcutIdentifier *foundation.NSUUID)
 	EditVoiceShortcutViewControllerDidCancel(controller *INUIEditVoiceShortcutViewController)
 }
-

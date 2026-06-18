@@ -13,7 +13,7 @@ type BCChatButtonStyle int64
 
 const (
 	BCChatButtonStyleLight BCChatButtonStyle = 0
-	BCChatButtonStyleDark BCChatButtonStyle = 1
+	BCChatButtonStyleDark  BCChatButtonStyle = 1
 )
 
 func (e BCChatButtonStyle) String() string {
@@ -26,4 +26,3 @@ func (e BCChatButtonStyle) String() string {
 		return fmt.Sprintf("BCChatButtonStyle(%d)", int64(e))
 	}
 }
-

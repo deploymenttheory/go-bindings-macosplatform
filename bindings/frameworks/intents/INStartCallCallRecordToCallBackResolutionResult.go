@@ -15,8 +15,8 @@ type INStartCallCallRecordToCallBackResolutionResult struct {
 }
 
 var (
-	_clsINStartCallCallRecordToCallBackResolutionResult = _objcClass("INStartCallCallRecordToCallBackResolutionResult")
-	_iNStartCallCallRecordToCallBackResolutionResultSelUnsupportedForReason = objc.RegisterName("unsupportedForReason:")
+	_clsINStartCallCallRecordToCallBackResolutionResult                                   = _objcClass("INStartCallCallRecordToCallBackResolutionResult")
+	_iNStartCallCallRecordToCallBackResolutionResultSelUnsupportedForReason               = objc.RegisterName("unsupportedForReason:")
 	_iNStartCallCallRecordToCallBackResolutionResultSelInitWithCallRecordResolutionResult = objc.RegisterName("initWithCallRecordResolutionResult:")
 )
 
@@ -32,13 +32,16 @@ func INStartCallCallRecordToCallBackResolutionResultFromID(id objc.ID) *INStartC
 
 func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason INStartCallCallRecordToCallBackUnsupportedReason) *INStartCallCallRecordToCallBackResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINStartCallCallRecordToCallBackResolutionResult), _iNStartCallCallRecordToCallBackResolutionResultSelUnsupportedForReason, reason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStartCallCallRecordToCallBackResolutionResultFromID(_ret)
 }
 
 func (o *INStartCallCallRecordToCallBackResolutionResult) InitWithCallRecordResolutionResult(callRecordResolutionResult *INCallRecordResolutionResult) *INStartCallCallRecordToCallBackResolutionResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallCallRecordToCallBackResolutionResultSelInitWithCallRecordResolutionResult, callRecordResolutionResult.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStartCallCallRecordToCallBackResolutionResultFromID(_ret)
 }
-

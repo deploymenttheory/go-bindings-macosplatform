@@ -16,17 +16,17 @@ type CATransition struct {
 }
 
 var (
-	_clsCATransition = _objcClass("CATransition")
-	_cATransitionSelType = objc.RegisterName("type")
-	_cATransitionSelSetType = objc.RegisterName("setType:")
-	_cATransitionSelSubtype = objc.RegisterName("subtype")
-	_cATransitionSelSetSubtype = objc.RegisterName("setSubtype:")
-	_cATransitionSelStartProgress = objc.RegisterName("startProgress")
+	_clsCATransition                 = _objcClass("CATransition")
+	_cATransitionSelType             = objc.RegisterName("type")
+	_cATransitionSelSetType          = objc.RegisterName("setType:")
+	_cATransitionSelSubtype          = objc.RegisterName("subtype")
+	_cATransitionSelSetSubtype       = objc.RegisterName("setSubtype:")
+	_cATransitionSelStartProgress    = objc.RegisterName("startProgress")
 	_cATransitionSelSetStartProgress = objc.RegisterName("setStartProgress:")
-	_cATransitionSelEndProgress = objc.RegisterName("endProgress")
-	_cATransitionSelSetEndProgress = objc.RegisterName("setEndProgress:")
-	_cATransitionSelFilter = objc.RegisterName("filter")
-	_cATransitionSelSetFilter = objc.RegisterName("setFilter:")
+	_cATransitionSelEndProgress      = objc.RegisterName("endProgress")
+	_cATransitionSelSetEndProgress   = objc.RegisterName("setEndProgress:")
+	_cATransitionSelFilter           = objc.RegisterName("filter")
+	_cATransitionSelSetFilter        = objc.RegisterName("setFilter:")
 )
 
 func CATransitionFromID(id objc.ID) *CATransition {
@@ -41,7 +41,9 @@ func CATransitionFromID(id objc.ID) *CATransition {
 
 func (o *CATransition) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cATransitionSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *CATransition) SetType(type_ *foundation.NSString) {
 
 func (o *CATransition) Subtype() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cATransitionSelSubtype)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -85,4 +89,3 @@ func (o *CATransition) Filter() objc.ID {
 func (o *CATransition) SetFilter(filter objc.ID) {
 	o.Ptr().Send(_cATransitionSelSetFilter, filter)
 }
-

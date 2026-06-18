@@ -16,12 +16,12 @@ type ASAuthorizationWebBrowserPublicKeyCredentialManager struct {
 }
 
 var (
-	_clsASAuthorizationWebBrowserPublicKeyCredentialManager = _objcClass("ASAuthorizationWebBrowserPublicKeyCredentialManager")
-	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelInit = objc.RegisterName("init")
-	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelRequestAuthorizationForPublicKeyCredentials = objc.RegisterName("requestAuthorizationForPublicKeyCredentials:")
+	_clsASAuthorizationWebBrowserPublicKeyCredentialManager                                                    = _objcClass("ASAuthorizationWebBrowserPublicKeyCredentialManager")
+	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelInit                                                = objc.RegisterName("init")
+	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelRequestAuthorizationForPublicKeyCredentials         = objc.RegisterName("requestAuthorizationForPublicKeyCredentials:")
 	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelPlatformCredentialsForRelyingPartyCompletionHandler = objc.RegisterName("platformCredentialsForRelyingParty:completionHandler:")
-	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelIsDeviceConfiguredForPasskeys = objc.RegisterName("isDeviceConfiguredForPasskeys")
-	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelAuthorizationStateForPlatformCredentials = objc.RegisterName("authorizationStateForPlatformCredentials")
+	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelIsDeviceConfiguredForPasskeys                       = objc.RegisterName("isDeviceConfiguredForPasskeys")
+	_aSAuthorizationWebBrowserPublicKeyCredentialManagerSelAuthorizationStateForPlatformCredentials            = objc.RegisterName("authorizationStateForPlatformCredentials")
 )
 
 func ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(id objc.ID) *ASAuthorizationWebBrowserPublicKeyCredentialManager {
@@ -36,7 +36,9 @@ func ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(id objc.ID) *ASAu
 
 func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) Init() *ASAuthorizationWebBrowserPublicKeyCredentialManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationWebBrowserPublicKeyCredentialManagerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationWebBrowserPublicKeyCredentialManagerFromID(_ret)
 }
 
@@ -74,4 +76,3 @@ func (o *ASAuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationState
 	_ret := objc.Send[ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState](o.Ptr(), _aSAuthorizationWebBrowserPublicKeyCredentialManagerSelAuthorizationStateForPlatformCredentials)
 	return _ret
 }
-

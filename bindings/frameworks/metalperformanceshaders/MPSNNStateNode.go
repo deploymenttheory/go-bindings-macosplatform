@@ -17,12 +17,12 @@ type MPSNNStateNode struct {
 }
 
 var (
-	_clsMPSNNStateNode = _objcClass("MPSNNStateNode")
-	_mPSNNStateNodeSelHandle = objc.RegisterName("handle")
-	_mPSNNStateNodeSelSetHandle = objc.RegisterName("setHandle:")
-	_mPSNNStateNodeSelExportFromGraph = objc.RegisterName("exportFromGraph")
-	_mPSNNStateNodeSelSetExportFromGraph = objc.RegisterName("setExportFromGraph:")
-	_mPSNNStateNodeSelSynchronizeResource = objc.RegisterName("synchronizeResource")
+	_clsMPSNNStateNode                       = _objcClass("MPSNNStateNode")
+	_mPSNNStateNodeSelHandle                 = objc.RegisterName("handle")
+	_mPSNNStateNodeSelSetHandle              = objc.RegisterName("setHandle:")
+	_mPSNNStateNodeSelExportFromGraph        = objc.RegisterName("exportFromGraph")
+	_mPSNNStateNodeSelSetExportFromGraph     = objc.RegisterName("setExportFromGraph:")
+	_mPSNNStateNodeSelSynchronizeResource    = objc.RegisterName("synchronizeResource")
 	_mPSNNStateNodeSelSetSynchronizeResource = objc.RegisterName("setSynchronizeResource:")
 )
 
@@ -65,4 +65,3 @@ func (o *MPSNNStateNode) SynchronizeResource() bool {
 func (o *MPSNNStateNode) SetSynchronizeResource(synchronizeResource bool) {
 	o.Ptr().Send(_mPSNNStateNodeSelSetSynchronizeResource, synchronizeResource)
 }
-

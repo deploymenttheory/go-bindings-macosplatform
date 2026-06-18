@@ -18,10 +18,10 @@ type HKWorkoutRouteBuilder struct {
 }
 
 var (
-	_clsHKWorkoutRouteBuilder = _objcClass("HKWorkoutRouteBuilder")
-	_hKWorkoutRouteBuilderSelInitWithHealthStoreDevice = objc.RegisterName("initWithHealthStore:device:")
-	_hKWorkoutRouteBuilderSelInsertRouteDataCompletion = objc.RegisterName("insertRouteData:completion:")
-	_hKWorkoutRouteBuilderSelAddMetadataCompletion = objc.RegisterName("addMetadata:completion:")
+	_clsHKWorkoutRouteBuilder                                         = _objcClass("HKWorkoutRouteBuilder")
+	_hKWorkoutRouteBuilderSelInitWithHealthStoreDevice                = objc.RegisterName("initWithHealthStore:device:")
+	_hKWorkoutRouteBuilderSelInsertRouteDataCompletion                = objc.RegisterName("insertRouteData:completion:")
+	_hKWorkoutRouteBuilderSelAddMetadataCompletion                    = objc.RegisterName("addMetadata:completion:")
 	_hKWorkoutRouteBuilderSelFinishRouteWithWorkoutMetadataCompletion = objc.RegisterName("finishRouteWithWorkout:metadata:completion:")
 )
 
@@ -38,7 +38,9 @@ func HKWorkoutRouteBuilderFromID(id objc.ID) *HKWorkoutRouteBuilder {
 // @method             initWithHealthStore:device: @abstract           The designated initializer to create an HKWorkoutRouteBuilder. If you are using an HKWorkoutBuilder , you should not create an HKWorkoutRouteBuilder, instead use -[HKWorkoutBuilder seriesBuilderForType:] @discussion         The HKHealthStore is retained during the life of the object for the saving of the series data and final return of the series sample. @param healthStore  Specifies the HKHealthStore object to use for building the series. @param device       The optional device represents the HKDevice from which the data is provided.
 func (o *HKWorkoutRouteBuilder) InitWithHealthStoreDevice(healthStore *HKHealthStore, device *HKDevice) *HKWorkoutRouteBuilder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutRouteBuilderSelInitWithHealthStoreDevice, healthStore.Ptr(), device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutRouteBuilderFromID(_ret)
 }
 
@@ -80,4 +82,3 @@ func (o *HKWorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(workout
 	}
 	o.Ptr().Send(_hKWorkoutRouteBuilderSelFinishRouteWithWorkoutMetadataCompletion, workout.Ptr(), metadata, __block_completion)
 }
-

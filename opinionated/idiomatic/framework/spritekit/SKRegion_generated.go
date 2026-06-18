@@ -110,4 +110,3 @@ type Regionable interface {
 }
 
 var _ Regionable = (*Region)(nil)
-

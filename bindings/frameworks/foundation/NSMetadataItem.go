@@ -15,11 +15,11 @@ type NSMetadataItem struct {
 }
 
 var (
-	_clsNSMetadataItem = _objcClass("NSMetadataItem")
-	_nSMetadataItemSelInitWithURL = objc.RegisterName("initWithURL:")
-	_nSMetadataItemSelValueForAttribute = objc.RegisterName("valueForAttribute:")
+	_clsNSMetadataItem                    = _objcClass("NSMetadataItem")
+	_nSMetadataItemSelInitWithURL         = objc.RegisterName("initWithURL:")
+	_nSMetadataItemSelValueForAttribute   = objc.RegisterName("valueForAttribute:")
 	_nSMetadataItemSelValuesForAttributes = objc.RegisterName("valuesForAttributes:")
-	_nSMetadataItemSelAttributes = objc.RegisterName("attributes")
+	_nSMetadataItemSelAttributes          = objc.RegisterName("attributes")
 )
 
 func NSMetadataItemFromID(id objc.ID) *NSMetadataItem {
@@ -34,7 +34,9 @@ func NSMetadataItemFromID(id objc.ID) *NSMetadataItem {
 
 func (o *NSMetadataItem) InitWithURL(url *NSURL) *NSMetadataItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataItemSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMetadataItemFromID(_ret)
 }
 
@@ -50,7 +52,8 @@ func (o *NSMetadataItem) ValuesForAttributes(keys *NSArray[*NSString]) *NSDictio
 
 func (o *NSMetadataItem) Attributes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMetadataItemSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
-

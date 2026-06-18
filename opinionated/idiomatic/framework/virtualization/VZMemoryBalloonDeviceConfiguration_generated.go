@@ -15,7 +15,9 @@ type MemoryBalloonDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZMemoryBalloonDeviceConfiguration].
-func (x *MemoryBalloonDeviceConfiguration) Unwrap() *raw.VZMemoryBalloonDeviceConfiguration { return x.inner }
+func (x *MemoryBalloonDeviceConfiguration) Unwrap() *raw.VZMemoryBalloonDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewMemoryBalloonDeviceConfiguration() *MemoryBalloonDeviceConfiguration {
 	return &MemoryBalloonDeviceConfiguration{inner: raw.VZMemoryBalloonDeviceConfigurationFromID(_id)}
 }
 
-func (x *MemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration { return x.inner }
+func (x *MemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration {
+	return x.inner
+}
 
 // MemoryBalloonDeviceConfigurationable is the interface implemented by [MemoryBalloonDeviceConfiguration], for mocking and DI.
 type MemoryBalloonDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type MemoryBalloonDeviceConfigurationable interface {
 }
 
 var _ MemoryBalloonDeviceConfigurationable = (*MemoryBalloonDeviceConfiguration)(nil)
-

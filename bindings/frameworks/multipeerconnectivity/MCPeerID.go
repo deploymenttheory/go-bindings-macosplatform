@@ -16,9 +16,9 @@ type MCPeerID struct {
 }
 
 var (
-	_clsMCPeerID = _objcClass("MCPeerID")
+	_clsMCPeerID                    = _objcClass("MCPeerID")
 	_mCPeerIDSelInitWithDisplayName = objc.RegisterName("initWithDisplayName:")
-	_mCPeerIDSelDisplayName = objc.RegisterName("displayName")
+	_mCPeerIDSelDisplayName         = objc.RegisterName("displayName")
 )
 
 func MCPeerIDFromID(id objc.ID) *MCPeerID {
@@ -33,13 +33,16 @@ func MCPeerIDFromID(id objc.ID) *MCPeerID {
 
 func (o *MCPeerID) InitWithDisplayName(myDisplayName *foundation.NSString) *MCPeerID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCPeerIDSelInitWithDisplayName, myDisplayName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCPeerIDFromID(_ret)
 }
 
 func (o *MCPeerID) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCPeerIDSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

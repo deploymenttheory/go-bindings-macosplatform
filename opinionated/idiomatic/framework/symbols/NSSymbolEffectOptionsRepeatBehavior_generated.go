@@ -15,7 +15,9 @@ type SymbolEffectOptionsRepeatBehavior struct {
 }
 
 // Unwrap returns the underlying [raw.NSSymbolEffectOptionsRepeatBehavior].
-func (x *SymbolEffectOptionsRepeatBehavior) Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior { return x.inner }
+func (x *SymbolEffectOptionsRepeatBehavior) Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type SymbolEffectOptionsRepeatBehaviorable interface {
 }
 
 var _ SymbolEffectOptionsRepeatBehaviorable = (*SymbolEffectOptionsRepeatBehavior)(nil)
-

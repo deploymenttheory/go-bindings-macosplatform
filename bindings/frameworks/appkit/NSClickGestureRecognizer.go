@@ -15,12 +15,12 @@ type NSClickGestureRecognizer struct {
 }
 
 var (
-	_clsNSClickGestureRecognizer = _objcClass("NSClickGestureRecognizer")
-	_nSClickGestureRecognizerSelButtonMask = objc.RegisterName("buttonMask")
-	_nSClickGestureRecognizerSelSetButtonMask = objc.RegisterName("setButtonMask:")
-	_nSClickGestureRecognizerSelNumberOfClicksRequired = objc.RegisterName("numberOfClicksRequired")
-	_nSClickGestureRecognizerSelSetNumberOfClicksRequired = objc.RegisterName("setNumberOfClicksRequired:")
-	_nSClickGestureRecognizerSelNumberOfTouchesRequired = objc.RegisterName("numberOfTouchesRequired")
+	_clsNSClickGestureRecognizer                           = _objcClass("NSClickGestureRecognizer")
+	_nSClickGestureRecognizerSelButtonMask                 = objc.RegisterName("buttonMask")
+	_nSClickGestureRecognizerSelSetButtonMask              = objc.RegisterName("setButtonMask:")
+	_nSClickGestureRecognizerSelNumberOfClicksRequired     = objc.RegisterName("numberOfClicksRequired")
+	_nSClickGestureRecognizerSelSetNumberOfClicksRequired  = objc.RegisterName("setNumberOfClicksRequired:")
+	_nSClickGestureRecognizerSelNumberOfTouchesRequired    = objc.RegisterName("numberOfTouchesRequired")
 	_nSClickGestureRecognizerSelSetNumberOfTouchesRequired = objc.RegisterName("setNumberOfTouchesRequired:")
 )
 
@@ -60,4 +60,3 @@ func (o *NSClickGestureRecognizer) NumberOfTouchesRequired() int {
 func (o *NSClickGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
 	o.Ptr().Send(_nSClickGestureRecognizerSelSetNumberOfTouchesRequired, numberOfTouchesRequired)
 }
-

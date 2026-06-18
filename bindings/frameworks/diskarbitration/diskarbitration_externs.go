@@ -236,4 +236,3 @@ func KDADiskDescriptionWatchVolumePath() uintptr {
 	ptr, _ := purego.Dlsym(_diskarbitrationLib, "kDADiskDescriptionWatchVolumePath")
 	return ptr
 }
-

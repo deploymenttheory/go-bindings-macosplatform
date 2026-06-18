@@ -160,9 +160,13 @@ func (x *CNNCrossChannelNormalization) KernelSize() uint {
 	return x.inner.KernelSize()
 }
 
-func (x *CNNCrossChannelNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNCrossChannelNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNCrossChannelNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNCrossChannelNormalization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNCrossChannelNormalizationable is the interface implemented by [CNNCrossChannelNormalization], for mocking and DI.
 type CNNCrossChannelNormalizationable interface {
@@ -190,4 +194,3 @@ type CNNCrossChannelNormalizationable interface {
 }
 
 var _ CNNCrossChannelNormalizationable = (*CNNCrossChannelNormalization)(nil)
-

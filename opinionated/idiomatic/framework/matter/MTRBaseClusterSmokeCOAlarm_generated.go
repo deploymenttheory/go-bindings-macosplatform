@@ -810,9 +810,13 @@ func (x *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeClusterRevisionWithParams
 	}
 }
 
-func (x *MTRBaseClusterSmokeCOAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterSmokeCOAlarm) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterSmokeCOAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterSmokeCOAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterSmokeCOAlarmable is the interface implemented by [MTRBaseClusterSmokeCOAlarm], for mocking and DI.
 type MTRBaseClusterSmokeCOAlarmable interface {
@@ -860,4 +864,3 @@ type MTRBaseClusterSmokeCOAlarmable interface {
 }
 
 var _ MTRBaseClusterSmokeCOAlarmable = (*MTRBaseClusterSmokeCOAlarm)(nil)
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_pcscLib uintptr
-	_loadOnce sync.Once
+	_pcscLib       uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 

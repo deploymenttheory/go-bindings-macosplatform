@@ -74,4 +74,3 @@ type DirectionsResponseable interface {
 }
 
 var _ DirectionsResponseable = (*DirectionsResponse)(nil)
-

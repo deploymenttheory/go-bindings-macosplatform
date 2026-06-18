@@ -202,4 +202,3 @@ type OpenGLContextable interface {
 }
 
 var _ OpenGLContextable = (*OpenGLContext)(nil)
-

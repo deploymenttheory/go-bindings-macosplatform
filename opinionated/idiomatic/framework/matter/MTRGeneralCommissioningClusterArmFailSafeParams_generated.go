@@ -16,7 +16,9 @@ type MTRGeneralCommissioningClusterArmFailSafeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterArmFailSafeParams].
-func (x *MTRGeneralCommissioningClusterArmFailSafeParams) Unwrap() *raw.MTRGeneralCommissioningClusterArmFailSafeParams { return x.inner }
+func (x *MTRGeneralCommissioningClusterArmFailSafeParams) Unwrap() *raw.MTRGeneralCommissioningClusterArmFailSafeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRGeneralCommissioningClusterArmFailSafeParamsable interface {
 }
 
 var _ MTRGeneralCommissioningClusterArmFailSafeParamsable = (*MTRGeneralCommissioningClusterArmFailSafeParams)(nil)
-

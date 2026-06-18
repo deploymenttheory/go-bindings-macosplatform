@@ -37,4 +37,3 @@ func IsFloorCountingAvailable() bool {
 func IsPaceAvailable() bool {
 	return raw.CMPedometerIsPaceAvailable()
 }
-

@@ -16,19 +16,19 @@ type MTRThermostatClusterPresetStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterPresetStruct = _objcClass("MTRThermostatClusterPresetStruct")
-	_mTRThermostatClusterPresetStructSelPresetHandle = objc.RegisterName("presetHandle")
-	_mTRThermostatClusterPresetStructSelSetPresetHandle = objc.RegisterName("setPresetHandle:")
-	_mTRThermostatClusterPresetStructSelPresetScenario = objc.RegisterName("presetScenario")
-	_mTRThermostatClusterPresetStructSelSetPresetScenario = objc.RegisterName("setPresetScenario:")
-	_mTRThermostatClusterPresetStructSelName = objc.RegisterName("name")
-	_mTRThermostatClusterPresetStructSelSetName = objc.RegisterName("setName:")
-	_mTRThermostatClusterPresetStructSelCoolingSetpoint = objc.RegisterName("coolingSetpoint")
+	_clsMTRThermostatClusterPresetStruct                   = _objcClass("MTRThermostatClusterPresetStruct")
+	_mTRThermostatClusterPresetStructSelPresetHandle       = objc.RegisterName("presetHandle")
+	_mTRThermostatClusterPresetStructSelSetPresetHandle    = objc.RegisterName("setPresetHandle:")
+	_mTRThermostatClusterPresetStructSelPresetScenario     = objc.RegisterName("presetScenario")
+	_mTRThermostatClusterPresetStructSelSetPresetScenario  = objc.RegisterName("setPresetScenario:")
+	_mTRThermostatClusterPresetStructSelName               = objc.RegisterName("name")
+	_mTRThermostatClusterPresetStructSelSetName            = objc.RegisterName("setName:")
+	_mTRThermostatClusterPresetStructSelCoolingSetpoint    = objc.RegisterName("coolingSetpoint")
 	_mTRThermostatClusterPresetStructSelSetCoolingSetpoint = objc.RegisterName("setCoolingSetpoint:")
-	_mTRThermostatClusterPresetStructSelHeatingSetpoint = objc.RegisterName("heatingSetpoint")
+	_mTRThermostatClusterPresetStructSelHeatingSetpoint    = objc.RegisterName("heatingSetpoint")
 	_mTRThermostatClusterPresetStructSelSetHeatingSetpoint = objc.RegisterName("setHeatingSetpoint:")
-	_mTRThermostatClusterPresetStructSelBuiltIn = objc.RegisterName("builtIn")
-	_mTRThermostatClusterPresetStructSelSetBuiltIn = objc.RegisterName("setBuiltIn:")
+	_mTRThermostatClusterPresetStructSelBuiltIn            = objc.RegisterName("builtIn")
+	_mTRThermostatClusterPresetStructSelSetBuiltIn         = objc.RegisterName("setBuiltIn:")
 )
 
 func MTRThermostatClusterPresetStructFromID(id objc.ID) *MTRThermostatClusterPresetStruct {
@@ -43,7 +43,9 @@ func MTRThermostatClusterPresetStructFromID(id objc.ID) *MTRThermostatClusterPre
 
 func (o *MTRThermostatClusterPresetStruct) PresetHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelPresetHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRThermostatClusterPresetStruct) SetPresetHandle(presetHandle *foundat
 
 func (o *MTRThermostatClusterPresetStruct) PresetScenario() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelPresetScenario)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRThermostatClusterPresetStruct) SetPresetScenario(presetScenario *fou
 
 func (o *MTRThermostatClusterPresetStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRThermostatClusterPresetStruct) SetName(name *foundation.NSString) {
 
 func (o *MTRThermostatClusterPresetStruct) CoolingSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelCoolingSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRThermostatClusterPresetStruct) SetCoolingSetpoint(coolingSetpoint *f
 
 func (o *MTRThermostatClusterPresetStruct) HeatingSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelHeatingSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRThermostatClusterPresetStruct) SetHeatingSetpoint(heatingSetpoint *f
 
 func (o *MTRThermostatClusterPresetStruct) BuiltIn() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetStructSelBuiltIn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterPresetStruct) SetBuiltIn(builtIn *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterPresetStructSelSetBuiltIn, builtIn.Ptr())
 }
-

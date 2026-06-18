@@ -8,61 +8,61 @@ import (
 )
 
 var (
-	_fnCGDisplayCreateUUIDFromDisplayID func(uint32) unsafe.Pointer
-	_fnCGDisplayGetDisplayIDFromUUID func(unsafe.Pointer) uint32
-	_fnColorSyncAPIVersion func() uint32
-	_fnColorSyncCMMCopyCMMIdentifier func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMCopyLocalizedName func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMCreate func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMGetBundle func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncCMMGetTypeID func() uint
-	_fnColorSyncCreateCodeFragment func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncDeviceCopyDeviceInfo func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncDeviceSetCustomProfiles func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncIterateDeviceProfiles func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledCMMs func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledProfiles func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncIterateInstalledProfilesWithOptions func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileContainsTag func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileCopyData func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyDescriptionString func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyHeader func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyTag func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCopyTagSignatures func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateDeviceProfile func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnCGDisplayCreateUUIDFromDisplayID                    func(uint32) unsafe.Pointer
+	_fnCGDisplayGetDisplayIDFromUUID                       func(unsafe.Pointer) uint32
+	_fnColorSyncAPIVersion                                 func() uint32
+	_fnColorSyncCMMCopyCMMIdentifier                       func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncCMMCopyLocalizedName                       func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncCMMCreate                                  func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncCMMGetBundle                               func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncCMMGetTypeID                               func() uint
+	_fnColorSyncCreateCodeFragment                         func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncDeviceCopyDeviceInfo                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncDeviceSetCustomProfiles                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncIterateDeviceProfiles                      func(unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncIterateInstalledCMMs                       func(unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncIterateInstalledProfiles                   func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncIterateInstalledProfilesWithOptions        func(unsafe.Pointer, *uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncProfileContainsTag                         func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncProfileCopyData                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCopyDescriptionString               func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCopyHeader                          func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCopyTag                             func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCopyTagSignatures                   func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreate                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreateDeviceProfile                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnColorSyncProfileCreateDisplayTransferTablesFromVCGT func(unsafe.Pointer, *uint) unsafe.Pointer
-	_fnColorSyncProfileCreateLink func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateMutable func() unsafe.Pointer
-	_fnColorSyncProfileCreateMutableCopy func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithDisplayID func(uint32) unsafe.Pointer
-	_fnColorSyncProfileCreateWithName func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileCreateWithURLAndOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileEstimateGamma func(unsafe.Pointer, unsafe.Pointer) float32
-	_fnColorSyncProfileEstimateGammaWithDisplayID func(int, unsafe.Pointer) float32
-	_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT func(unsafe.Pointer, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) bool
-	_fnColorSyncProfileGetMD5 func(unsafe.Pointer) ColorSyncMD5
-	_fnColorSyncProfileGetTypeID func() uint
-	_fnColorSyncProfileGetURL func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncProfileInstall func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileIsHLGBased func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsMatrixBased func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsPQBased func(unsafe.Pointer) bool
-	_fnColorSyncProfileIsWideGamut func(unsafe.Pointer) bool
-	_fnColorSyncProfileRemoveTag func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileSetHeader func(unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileSetTag func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncProfileUninstall func(unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncProfileVerify func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncRegisterDevice func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
-	_fnColorSyncTransformConvert func(unsafe.Pointer, uint, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer) bool
-	_fnColorSyncTransformCopyProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformCreate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformGetProfileSequence func(unsafe.Pointer) unsafe.Pointer
-	_fnColorSyncTransformGetTypeID func() uint
-	_fnColorSyncTransformSetProperty func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnColorSyncUnregisterDevice func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncProfileCreateLink                          func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreateMutable                       func() unsafe.Pointer
+	_fnColorSyncProfileCreateMutableCopy                   func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreateWithDisplayID                 func(uint32) unsafe.Pointer
+	_fnColorSyncProfileCreateWithName                      func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreateWithURL                       func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileCreateWithURLAndOptions             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileEstimateGamma                       func(unsafe.Pointer, unsafe.Pointer) float32
+	_fnColorSyncProfileEstimateGammaWithDisplayID          func(int, unsafe.Pointer) float32
+	_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT   func(unsafe.Pointer, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32, *float32) bool
+	_fnColorSyncProfileGetMD5                              func(unsafe.Pointer) ColorSyncMD5
+	_fnColorSyncProfileGetTypeID                           func() uint
+	_fnColorSyncProfileGetURL                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncProfileInstall                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncProfileIsHLGBased                          func(unsafe.Pointer) bool
+	_fnColorSyncProfileIsMatrixBased                       func(unsafe.Pointer) bool
+	_fnColorSyncProfileIsPQBased                           func(unsafe.Pointer) bool
+	_fnColorSyncProfileIsWideGamut                         func(unsafe.Pointer) bool
+	_fnColorSyncProfileRemoveTag                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncProfileSetHeader                           func(unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncProfileSetTag                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncProfileUninstall                           func(unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncProfileVerify                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncRegisterDevice                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+	_fnColorSyncTransformConvert                           func(unsafe.Pointer, uint, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer, ColorSyncDataDepth, uint32, uint, unsafe.Pointer) bool
+	_fnColorSyncTransformCopyProperty                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncTransformCreate                            func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncTransformGetProfileSequence                func(unsafe.Pointer) unsafe.Pointer
+	_fnColorSyncTransformGetTypeID                         func() uint
+	_fnColorSyncTransformSetProperty                       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnColorSyncUnregisterDevice                           func(unsafe.Pointer, unsafe.Pointer) bool
 )
 
 func CGDisplayCreateUUIDFromDisplayID(displayID uint32) unsafe.Pointer {
@@ -284,4 +284,3 @@ func ColorSyncTransformSetProperty(transform unsafe.Pointer, key unsafe.Pointer,
 func ColorSyncUnregisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer) bool {
 	return _fnColorSyncUnregisterDevice(deviceClass, deviceID)
 }
-

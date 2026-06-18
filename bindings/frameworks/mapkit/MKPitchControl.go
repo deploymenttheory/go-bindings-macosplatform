@@ -16,10 +16,10 @@ type MKPitchControl struct {
 }
 
 var (
-	_clsMKPitchControl = _objcClass("MKPitchControl")
+	_clsMKPitchControl                        = _objcClass("MKPitchControl")
 	_mKPitchControlSelPitchControlWithMapView = objc.RegisterName("pitchControlWithMapView:")
-	_mKPitchControlSelMapView = objc.RegisterName("mapView")
-	_mKPitchControlSelSetMapView = objc.RegisterName("setMapView:")
+	_mKPitchControlSelMapView                 = objc.RegisterName("mapView")
+	_mKPitchControlSelSetMapView              = objc.RegisterName("setMapView:")
 )
 
 func MKPitchControlFromID(id objc.ID) *MKPitchControl {
@@ -34,17 +34,20 @@ func MKPitchControlFromID(id objc.ID) *MKPitchControl {
 
 func MKPitchControlPitchControlWithMapView(mapView *MKMapView) *MKPitchControl {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPitchControl), _mKPitchControlSelPitchControlWithMapView, mapView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPitchControlFromID(_ret)
 }
 
 func (o *MKPitchControl) MapView() *MKMapView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPitchControlSelMapView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapViewFromID(_ret)
 }
 
 func (o *MKPitchControl) SetMapView(mapView *MKMapView) {
 	o.Ptr().Send(_mKPitchControlSelSetMapView, mapView.Ptr())
 }
-

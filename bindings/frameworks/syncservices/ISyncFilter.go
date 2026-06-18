@@ -16,8 +16,8 @@ type ISyncFilter struct {
 }
 
 var (
-	_clsISyncFilter = _objcClass("ISyncFilter")
-	_iSyncFilterSelFilterMatchingAllFilters = objc.RegisterName("filterMatchingAllFilters:")
+	_clsISyncFilter                               = _objcClass("ISyncFilter")
+	_iSyncFilterSelFilterMatchingAllFilters       = objc.RegisterName("filterMatchingAllFilters:")
 	_iSyncFilterSelFilterMatchingAtLeastOneFilter = objc.RegisterName("filterMatchingAtLeastOneFilter:")
 )
 
@@ -42,4 +42,3 @@ func ISyncFilterFilterMatchingAtLeastOneFilter(filters *foundation.NSArray[objc.
 	_ret := objc.Send[ISyncFiltering](objc.ID(_clsISyncFilter), _iSyncFilterSelFilterMatchingAtLeastOneFilter, filters)
 	return _ret
 }
-

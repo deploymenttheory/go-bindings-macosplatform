@@ -17,14 +17,14 @@ type CMIOExtensionStreamCustomClockConfiguration struct {
 }
 
 var (
-	_clsCMIOExtensionStreamCustomClockConfiguration = _objcClass("CMIOExtensionStreamCustomClockConfiguration")
+	_clsCMIOExtensionStreamCustomClockConfiguration                                                                                                                                              = _objcClass("CMIOExtensionStreamCustomClockConfiguration")
 	_cMIOExtensionStreamCustomClockConfigurationSelCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing = objc.RegisterName("customClockConfigurationWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:")
-	_cMIOExtensionStreamCustomClockConfigurationSelInitWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing = objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:")
-	_cMIOExtensionStreamCustomClockConfigurationSelClockName = objc.RegisterName("clockName")
-	_cMIOExtensionStreamCustomClockConfigurationSelSourceIdentifier = objc.RegisterName("sourceIdentifier")
-	_cMIOExtensionStreamCustomClockConfigurationSelGetTimeCallMinimumInterval = objc.RegisterName("getTimeCallMinimumInterval")
-	_cMIOExtensionStreamCustomClockConfigurationSelNumberOfEventsForRateSmoothing = objc.RegisterName("numberOfEventsForRateSmoothing")
-	_cMIOExtensionStreamCustomClockConfigurationSelNumberOfAveragesForRateSmoothing = objc.RegisterName("numberOfAveragesForRateSmoothing")
+	_cMIOExtensionStreamCustomClockConfigurationSelInitWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing                     = objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:")
+	_cMIOExtensionStreamCustomClockConfigurationSelClockName                                                                                                                                     = objc.RegisterName("clockName")
+	_cMIOExtensionStreamCustomClockConfigurationSelSourceIdentifier                                                                                                                              = objc.RegisterName("sourceIdentifier")
+	_cMIOExtensionStreamCustomClockConfigurationSelGetTimeCallMinimumInterval                                                                                                                    = objc.RegisterName("getTimeCallMinimumInterval")
+	_cMIOExtensionStreamCustomClockConfigurationSelNumberOfEventsForRateSmoothing                                                                                                                = objc.RegisterName("numberOfEventsForRateSmoothing")
+	_cMIOExtensionStreamCustomClockConfigurationSelNumberOfAveragesForRateSmoothing                                                                                                              = objc.RegisterName("numberOfAveragesForRateSmoothing")
 )
 
 func CMIOExtensionStreamCustomClockConfigurationFromID(id objc.ID) *CMIOExtensionStreamCustomClockConfiguration {
@@ -40,28 +40,36 @@ func CMIOExtensionStreamCustomClockConfigurationFromID(id objc.ID) *CMIOExtensio
 // @method customClockConfigurationWithName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing: @abstract Return a custom clock configuration instance. @param clockName The name of the clock being specified. @param sourceIdentifier An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value. @param getTimeCallMinimumInterval If the clock is queried for its current time more often than this interval, an interpolated value will be returned. @param numberOfEventsForRateSmoothing The number of events to use for rate smoothing; must be > 0. @param numberOfAveragesForRateSmoothing The number of averages used for rate smoothing; if 0, the default smoothing algorithm is used. @result A CMIOExtensionStreamCustomClockConfiguration instance.
 func CMIOExtensionStreamCustomClockConfigurationCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName *foundation.NSString, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *CMIOExtensionStreamCustomClockConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStreamCustomClockConfiguration), _cMIOExtensionStreamCustomClockConfigurationSelCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing, clockName.Ptr(), sourceIdentifier.Ptr(), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamCustomClockConfigurationFromID(_ret)
 }
 
 // @method initWithName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing: @abstract Initialize a custom clock configuration instance. @param clockName The name of the clock being specified. @param sourceIdentifier An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value. @param getTimeCallMinimumInterval If the clock is queried for its current time more often than this interval, an interpolated value will be returned. @param numberOfEventsForRateSmoothing The number of events to use for rate smoothing; must be > 0. @param numberOfAveragesForRateSmoothing The number of averages used for rate smoothing; if 0, the default smoothing algorithm is used. @result A CMIOExtensionStreamCustomClockConfiguration instance.
 func (o *CMIOExtensionStreamCustomClockConfiguration) InitWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName *foundation.NSString, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *CMIOExtensionStreamCustomClockConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamCustomClockConfigurationSelInitWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing, clockName.Ptr(), sourceIdentifier.Ptr(), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamCustomClockConfigurationFromID(_ret)
 }
 
 // @property clockName @abstract The name of the clock.
 func (o *CMIOExtensionStreamCustomClockConfiguration) ClockName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamCustomClockConfigurationSelClockName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property sourceIdentifier @abstract The identifier of the entity driving the clock. @discussion An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
 func (o *CMIOExtensionStreamCustomClockConfiguration) SourceIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamCustomClockConfigurationSelSourceIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -82,4 +90,3 @@ func (o *CMIOExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmo
 	_ret := objc.Send[uint32](o.Ptr(), _cMIOExtensionStreamCustomClockConfigurationSelNumberOfAveragesForRateSmoothing)
 	return _ret
 }
-

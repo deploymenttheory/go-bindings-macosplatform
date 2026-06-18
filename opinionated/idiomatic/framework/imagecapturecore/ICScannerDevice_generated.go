@@ -180,4 +180,3 @@ type ScannerDeviceable interface {
 }
 
 var _ ScannerDeviceable = (*ScannerDevice)(nil)
-

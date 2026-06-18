@@ -51,7 +51,9 @@ func (x *TokenConfiguration) WithKeychainItems(items ...TokenKeychainItemProvide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asTokenKeychainItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTokenKeychainItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.TKTokenKeychainItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -134,4 +136,3 @@ type TokenConfigurationable interface {
 }
 
 var _ TokenConfigurationable = (*TokenConfiguration)(nil)
-

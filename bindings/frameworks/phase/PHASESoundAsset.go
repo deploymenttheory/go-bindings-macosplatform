@@ -16,8 +16,8 @@ type PHASESoundAsset struct {
 }
 
 var (
-	_clsPHASESoundAsset = _objcClass("PHASESoundAsset")
-	_pHASESoundAssetSelUrl = objc.RegisterName("url")
+	_clsPHASESoundAsset     = _objcClass("PHASESoundAsset")
+	_pHASESoundAssetSelUrl  = objc.RegisterName("url")
 	_pHASESoundAssetSelData = objc.RegisterName("data")
 	_pHASESoundAssetSelType = objc.RegisterName("type")
 )
@@ -35,14 +35,18 @@ func PHASESoundAssetFromID(id objc.ID) *PHASESoundAsset {
 // @property url @abstract The URL of the sound asset, if applicable.
 func (o *PHASESoundAsset) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundAssetSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // @property data @abstract The buffer for the sound asset, if applicable.
 func (o *PHASESoundAsset) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESoundAssetSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *PHASESoundAsset) Type() PHASEAssetType {
 	_ret := objc.Send[PHASEAssetType](o.Ptr(), _pHASESoundAssetSelType)
 	return _ret
 }
-

@@ -46,7 +46,9 @@ func (x *GradientLayer) WithLocations(items ...*foundation.NSNumber) *GradientLa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -140,7 +142,9 @@ func (x *GradientLayer) WithSublayers(items ...LayerProvider) *GradientLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -390,7 +394,9 @@ func (x *GradientLayer) WithConstraints(items ...*raw.CAConstraint) *GradientLay
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -532,4 +538,3 @@ type GradientLayerable interface {
 }
 
 var _ GradientLayerable = (*GradientLayer)(nil)
-

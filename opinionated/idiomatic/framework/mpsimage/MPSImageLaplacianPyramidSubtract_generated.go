@@ -17,7 +17,9 @@ type ImageLaplacianPyramidSubtract struct {
 }
 
 // Unwrap returns the underlying [raw.MPSImageLaplacianPyramidSubtract].
-func (x *ImageLaplacianPyramidSubtract) Unwrap() *raw.MPSImageLaplacianPyramidSubtract { return x.inner }
+func (x *ImageLaplacianPyramidSubtract) Unwrap() *raw.MPSImageLaplacianPyramidSubtract {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -67,11 +69,17 @@ func (x *ImageLaplacianPyramidSubtract) WithEdgeMode(edgeMode mpscore.MPSImageEd
 	return x
 }
 
-func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
+func (x *ImageLaplacianPyramidSubtract) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid {
+	return &x.inner.MPSImageLaplacianPyramid
+}
 
-func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
+func (x *ImageLaplacianPyramidSubtract) asImagePyramid() *raw.MPSImagePyramid {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid
+}
 
-func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageLaplacianPyramidSubtract) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel
+}
 
 // ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
 type ImageLaplacianPyramidSubtractable interface {
@@ -84,4 +92,3 @@ type ImageLaplacianPyramidSubtractable interface {
 }
 
 var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)
-

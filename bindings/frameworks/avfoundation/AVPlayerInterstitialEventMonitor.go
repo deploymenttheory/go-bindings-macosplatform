@@ -16,15 +16,15 @@ type AVPlayerInterstitialEventMonitor struct {
 }
 
 var (
-	_clsAVPlayerInterstitialEventMonitor = _objcClass("AVPlayerInterstitialEventMonitor")
+	_clsAVPlayerInterstitialEventMonitor                                          = _objcClass("AVPlayerInterstitialEventMonitor")
 	_aVPlayerInterstitialEventMonitorSelInterstitialEventMonitorWithPrimaryPlayer = objc.RegisterName("interstitialEventMonitorWithPrimaryPlayer:")
-	_aVPlayerInterstitialEventMonitorSelInitWithPrimaryPlayer = objc.RegisterName("initWithPrimaryPlayer:")
-	_aVPlayerInterstitialEventMonitorSelPrimaryPlayer = objc.RegisterName("primaryPlayer")
-	_aVPlayerInterstitialEventMonitorSelInterstitialPlayer = objc.RegisterName("interstitialPlayer")
-	_aVPlayerInterstitialEventMonitorSelEvents = objc.RegisterName("events")
-	_aVPlayerInterstitialEventMonitorSelCurrentEvent = objc.RegisterName("currentEvent")
-	_aVPlayerInterstitialEventMonitorSelCurrentEventSkippableState = objc.RegisterName("currentEventSkippableState")
-	_aVPlayerInterstitialEventMonitorSelCurrentEventSkipControlLabel = objc.RegisterName("currentEventSkipControlLabel")
+	_aVPlayerInterstitialEventMonitorSelInitWithPrimaryPlayer                     = objc.RegisterName("initWithPrimaryPlayer:")
+	_aVPlayerInterstitialEventMonitorSelPrimaryPlayer                             = objc.RegisterName("primaryPlayer")
+	_aVPlayerInterstitialEventMonitorSelInterstitialPlayer                        = objc.RegisterName("interstitialPlayer")
+	_aVPlayerInterstitialEventMonitorSelEvents                                    = objc.RegisterName("events")
+	_aVPlayerInterstitialEventMonitorSelCurrentEvent                              = objc.RegisterName("currentEvent")
+	_aVPlayerInterstitialEventMonitorSelCurrentEventSkippableState                = objc.RegisterName("currentEventSkippableState")
+	_aVPlayerInterstitialEventMonitorSelCurrentEventSkipControlLabel              = objc.RegisterName("currentEventSkipControlLabel")
 )
 
 func AVPlayerInterstitialEventMonitorFromID(id objc.ID) *AVPlayerInterstitialEventMonitor {
@@ -40,41 +40,53 @@ func AVPlayerInterstitialEventMonitorFromID(id objc.ID) *AVPlayerInterstitialEve
 // Returns an instance of AVPlayerInterstitialEvent for use in observing and scheduling interstitial playback. - Parameter primaryPlayer: The AVPlayer that will play the primaryItems of the receiver's interstitial events. - Returns: An instance of AVPlayerInterstitialEventMonitor.
 func AVPlayerInterstitialEventMonitorInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventMonitor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEventMonitor), _aVPlayerInterstitialEventMonitorSelInterstitialEventMonitorWithPrimaryPlayer, primaryPlayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventMonitorFromID(_ret)
 }
 
 func (o *AVPlayerInterstitialEventMonitor) InitWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventMonitor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelInitWithPrimaryPlayer, primaryPlayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventMonitorFromID(_ret)
 }
 
 // The AVPlayer that will play the primaryItems of the receiver's interstitial events.
 func (o *AVPlayerInterstitialEventMonitor) PrimaryPlayer() *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelPrimaryPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerFromID(_ret)
 }
 
 // The AVQueuePlayer that will play interstitial items during suspension of playback of primary items.
 func (o *AVPlayerInterstitialEventMonitor) InterstitialPlayer() *AVQueuePlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelInterstitialPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVQueuePlayerFromID(_ret)
 }
 
 // Provides the current schedule of interstitial events, specified either intrinsically within the content of primary items, such as via use of directives carried by HLS media playlists, or via use of an AVPlayerInterstitialEventController. When interstitial events follow a schedule specified intrinsically within the content of primary items, the value of this property will typically change whenever the currentItem of the primaryPlayer changes. For HLS content that specifies interstitials via the use of DATERANGE tags, the value of this property may also change whenever the set of DATERANGE tags in the currentItem's media playlist changes. When interstitial events follow a schedule specified via use of an AVPlayerInterstitialEventController, the value of this property changes only when a new schedule is set on the AVPlayerInterstitialEventController. The events returned in this array are immutable. Attempting to mutate them will trigger an exception. To alter an event, make a copy and mutate the copy.
 func (o *AVPlayerInterstitialEventMonitor) Events() *foundation.NSArray[*AVPlayerInterstitialEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerInterstitialEvent](_ret)
 }
 
 // The current interstitial event. Has a value of nil during playback of primary content by the primary player.
 func (o *AVPlayerInterstitialEventMonitor) CurrentEvent() *AVPlayerInterstitialEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelCurrentEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventFromID(_ret)
 }
 
@@ -87,7 +99,8 @@ func (o *AVPlayerInterstitialEventMonitor) CurrentEventSkippableState() AVPlayer
 // The skip control label for the currentEvent. If a localizedStringsBundle has been set on the AVPlayerInterstitialEventController, and a skipControlLocalizedLabelBundleKey is set on the currentEvent, then this value will be the localized string that was matched to the event's skipControlLocalizedLabelBundleKey for the corresponding system language in the supplied Bundle, if any. If currentEvent is nil, then the value will be nil.
 func (o *AVPlayerInterstitialEventMonitor) CurrentEventSkipControlLabel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventMonitorSelCurrentEventSkipControlLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

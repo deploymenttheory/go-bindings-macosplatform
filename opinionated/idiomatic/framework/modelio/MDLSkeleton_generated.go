@@ -113,4 +113,3 @@ type Skeletonable interface {
 }
 
 var _ Skeletonable = (*Skeleton)(nil)
-

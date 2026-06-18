@@ -16,40 +16,40 @@ type NSWindowController struct {
 }
 
 var (
-	_clsNSWindowController = _objcClass("NSWindowController")
-	_nSWindowControllerSelInitWithWindow = objc.RegisterName("initWithWindow:")
-	_nSWindowControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSWindowControllerSelInitWithWindowNibName = objc.RegisterName("initWithWindowNibName:")
-	_nSWindowControllerSelInitWithWindowNibNameOwner = objc.RegisterName("initWithWindowNibName:owner:")
-	_nSWindowControllerSelInitWithWindowNibPathOwner = objc.RegisterName("initWithWindowNibPath:owner:")
-	_nSWindowControllerSelSetDocumentEdited = objc.RegisterName("setDocumentEdited:")
+	_clsNSWindowController                                       = _objcClass("NSWindowController")
+	_nSWindowControllerSelInitWithWindow                         = objc.RegisterName("initWithWindow:")
+	_nSWindowControllerSelInitWithCoder                          = objc.RegisterName("initWithCoder:")
+	_nSWindowControllerSelInitWithWindowNibName                  = objc.RegisterName("initWithWindowNibName:")
+	_nSWindowControllerSelInitWithWindowNibNameOwner             = objc.RegisterName("initWithWindowNibName:owner:")
+	_nSWindowControllerSelInitWithWindowNibPathOwner             = objc.RegisterName("initWithWindowNibPath:owner:")
+	_nSWindowControllerSelSetDocumentEdited                      = objc.RegisterName("setDocumentEdited:")
 	_nSWindowControllerSelSynchronizeWindowTitleWithDocumentName = objc.RegisterName("synchronizeWindowTitleWithDocumentName")
-	_nSWindowControllerSelWindowTitleForDocumentDisplayName = objc.RegisterName("windowTitleForDocumentDisplayName:")
-	_nSWindowControllerSelWindowWillLoad = objc.RegisterName("windowWillLoad")
-	_nSWindowControllerSelWindowDidLoad = objc.RegisterName("windowDidLoad")
-	_nSWindowControllerSelLoadWindow = objc.RegisterName("loadWindow")
-	_nSWindowControllerSelClose = objc.RegisterName("close")
-	_nSWindowControllerSelShowWindow = objc.RegisterName("showWindow:")
-	_nSWindowControllerSelWindowNibName = objc.RegisterName("windowNibName")
-	_nSWindowControllerSelWindowNibPath = objc.RegisterName("windowNibPath")
-	_nSWindowControllerSelOwner = objc.RegisterName("owner")
-	_nSWindowControllerSelWindowFrameAutosaveName = objc.RegisterName("windowFrameAutosaveName")
-	_nSWindowControllerSelSetWindowFrameAutosaveName = objc.RegisterName("setWindowFrameAutosaveName:")
-	_nSWindowControllerSelShouldCascadeWindows = objc.RegisterName("shouldCascadeWindows")
-	_nSWindowControllerSelSetShouldCascadeWindows = objc.RegisterName("setShouldCascadeWindows:")
-	_nSWindowControllerSelPreviewRepresentableActivityItems = objc.RegisterName("previewRepresentableActivityItems")
-	_nSWindowControllerSelSetPreviewRepresentableActivityItems = objc.RegisterName("setPreviewRepresentableActivityItems:")
-	_nSWindowControllerSelDocument = objc.RegisterName("document")
-	_nSWindowControllerSelSetDocument = objc.RegisterName("setDocument:")
-	_nSWindowControllerSelShouldCloseDocument = objc.RegisterName("shouldCloseDocument")
-	_nSWindowControllerSelSetShouldCloseDocument = objc.RegisterName("setShouldCloseDocument:")
-	_nSWindowControllerSelContentViewController = objc.RegisterName("contentViewController")
-	_nSWindowControllerSelSetContentViewController = objc.RegisterName("setContentViewController:")
-	_nSWindowControllerSelWindow = objc.RegisterName("window")
-	_nSWindowControllerSelSetWindow = objc.RegisterName("setWindow:")
-	_nSWindowControllerSelIsWindowLoaded = objc.RegisterName("isWindowLoaded")
-	_nSWindowControllerSelStoryboard = objc.RegisterName("storyboard")
-	_nSWindowControllerSelDismissController = objc.RegisterName("dismissController:")
+	_nSWindowControllerSelWindowTitleForDocumentDisplayName      = objc.RegisterName("windowTitleForDocumentDisplayName:")
+	_nSWindowControllerSelWindowWillLoad                         = objc.RegisterName("windowWillLoad")
+	_nSWindowControllerSelWindowDidLoad                          = objc.RegisterName("windowDidLoad")
+	_nSWindowControllerSelLoadWindow                             = objc.RegisterName("loadWindow")
+	_nSWindowControllerSelClose                                  = objc.RegisterName("close")
+	_nSWindowControllerSelShowWindow                             = objc.RegisterName("showWindow:")
+	_nSWindowControllerSelWindowNibName                          = objc.RegisterName("windowNibName")
+	_nSWindowControllerSelWindowNibPath                          = objc.RegisterName("windowNibPath")
+	_nSWindowControllerSelOwner                                  = objc.RegisterName("owner")
+	_nSWindowControllerSelWindowFrameAutosaveName                = objc.RegisterName("windowFrameAutosaveName")
+	_nSWindowControllerSelSetWindowFrameAutosaveName             = objc.RegisterName("setWindowFrameAutosaveName:")
+	_nSWindowControllerSelShouldCascadeWindows                   = objc.RegisterName("shouldCascadeWindows")
+	_nSWindowControllerSelSetShouldCascadeWindows                = objc.RegisterName("setShouldCascadeWindows:")
+	_nSWindowControllerSelPreviewRepresentableActivityItems      = objc.RegisterName("previewRepresentableActivityItems")
+	_nSWindowControllerSelSetPreviewRepresentableActivityItems   = objc.RegisterName("setPreviewRepresentableActivityItems:")
+	_nSWindowControllerSelDocument                               = objc.RegisterName("document")
+	_nSWindowControllerSelSetDocument                            = objc.RegisterName("setDocument:")
+	_nSWindowControllerSelShouldCloseDocument                    = objc.RegisterName("shouldCloseDocument")
+	_nSWindowControllerSelSetShouldCloseDocument                 = objc.RegisterName("setShouldCloseDocument:")
+	_nSWindowControllerSelContentViewController                  = objc.RegisterName("contentViewController")
+	_nSWindowControllerSelSetContentViewController               = objc.RegisterName("setContentViewController:")
+	_nSWindowControllerSelWindow                                 = objc.RegisterName("window")
+	_nSWindowControllerSelSetWindow                              = objc.RegisterName("setWindow:")
+	_nSWindowControllerSelIsWindowLoaded                         = objc.RegisterName("isWindowLoaded")
+	_nSWindowControllerSelStoryboard                             = objc.RegisterName("storyboard")
+	_nSWindowControllerSelDismissController                      = objc.RegisterName("dismissController:")
 )
 
 func NSWindowControllerFromID(id objc.ID) *NSWindowController {
@@ -64,31 +64,41 @@ func NSWindowControllerFromID(id objc.ID) *NSWindowController {
 
 func (o *NSWindowController) InitWithWindow(window *NSWindow) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindow, window.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
 func (o *NSWindowController) InitWithCoder(coder *foundation.NSCoder) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
 func (o *NSWindowController) InitWithWindowNibName(windowNibName *foundation.NSString) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibName, windowNibName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
 func (o *NSWindowController) InitWithWindowNibNameOwner(windowNibName *foundation.NSString, owner objc.ID) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibNameOwner, windowNibName.Ptr(), owner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
 func (o *NSWindowController) InitWithWindowNibPathOwner(windowNibPath *foundation.NSString, owner objc.ID) *NSWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelInitWithWindowNibPathOwner, windowNibPath.Ptr(), owner)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowControllerFromID(_ret)
 }
 
@@ -102,7 +112,9 @@ func (o *NSWindowController) SynchronizeWindowTitleWithDocumentName() {
 
 func (o *NSWindowController) WindowTitleForDocumentDisplayName(displayName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowTitleForDocumentDisplayName, displayName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -128,13 +140,17 @@ func (o *NSWindowController) ShowWindow(sender objc.ID) {
 
 func (o *NSWindowController) WindowNibName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSWindowController) WindowNibPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowNibPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -145,7 +161,9 @@ func (o *NSWindowController) Owner() objc.ID {
 
 func (o *NSWindowController) WindowFrameAutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindowFrameAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -164,7 +182,9 @@ func (o *NSWindowController) SetShouldCascadeWindows(shouldCascadeWindows bool) 
 
 func (o *NSWindowController) PreviewRepresentableActivityItems() *foundation.NSArray[NSPreviewRepresentableActivityItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelPreviewRepresentableActivityItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[NSPreviewRepresentableActivityItem](_ret)
 }
 
@@ -192,7 +212,9 @@ func (o *NSWindowController) SetShouldCloseDocument(shouldCloseDocument bool) {
 
 func (o *NSWindowController) ContentViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelContentViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -202,7 +224,9 @@ func (o *NSWindowController) SetContentViewController(contentViewController *NSV
 
 func (o *NSWindowController) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
@@ -217,11 +241,12 @@ func (o *NSWindowController) IsWindowLoaded() bool {
 
 func (o *NSWindowController) Storyboard() *NSStoryboard {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWindowControllerSelStoryboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStoryboardFromID(_ret)
 }
 
 func (o *NSWindowController) DismissController(sender objc.ID) {
 	o.Ptr().Send(_nSWindowControllerSelDismissController, sender)
 }
-

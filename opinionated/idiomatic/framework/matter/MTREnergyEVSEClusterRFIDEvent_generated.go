@@ -61,4 +61,3 @@ type MTREnergyEVSEClusterRFIDEventable interface {
 }
 
 var _ MTREnergyEVSEClusterRFIDEventable = (*MTREnergyEVSEClusterRFIDEvent)(nil)
-

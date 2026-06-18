@@ -59,4 +59,3 @@ type AuthorizationAppleIDProviderable interface {
 }
 
 var _ AuthorizationAppleIDProviderable = (*AuthorizationAppleIDProvider)(nil)
-

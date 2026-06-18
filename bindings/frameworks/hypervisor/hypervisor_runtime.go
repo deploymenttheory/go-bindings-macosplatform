@@ -14,7 +14,7 @@ import (
 
 var (
 	_hypervisorLib uintptr
-	_loadOnce sync.Once
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,48 +49,90 @@ func _loadLibrary() {
 		return
 	}
 	_register("hv_gic_config_create", func() { purego.RegisterLibFunc(&_hv_gic_config_create, _hypervisorLib, "hv_gic_config_create") })
-	_register("hv_gic_config_set_distributor_base", func() { purego.RegisterLibFunc(&_hv_gic_config_set_distributor_base, _hypervisorLib, "hv_gic_config_set_distributor_base") })
-	_register("hv_gic_config_set_msi_interrupt_range", func() { purego.RegisterLibFunc(&_hv_gic_config_set_msi_interrupt_range, _hypervisorLib, "hv_gic_config_set_msi_interrupt_range") })
-	_register("hv_gic_config_set_msi_region_base", func() { purego.RegisterLibFunc(&_hv_gic_config_set_msi_region_base, _hypervisorLib, "hv_gic_config_set_msi_region_base") })
-	_register("hv_gic_config_set_redistributor_base", func() { purego.RegisterLibFunc(&_hv_gic_config_set_redistributor_base, _hypervisorLib, "hv_gic_config_set_redistributor_base") })
+	_register("hv_gic_config_set_distributor_base", func() {
+		purego.RegisterLibFunc(&_hv_gic_config_set_distributor_base, _hypervisorLib, "hv_gic_config_set_distributor_base")
+	})
+	_register("hv_gic_config_set_msi_interrupt_range", func() {
+		purego.RegisterLibFunc(&_hv_gic_config_set_msi_interrupt_range, _hypervisorLib, "hv_gic_config_set_msi_interrupt_range")
+	})
+	_register("hv_gic_config_set_msi_region_base", func() {
+		purego.RegisterLibFunc(&_hv_gic_config_set_msi_region_base, _hypervisorLib, "hv_gic_config_set_msi_region_base")
+	})
+	_register("hv_gic_config_set_redistributor_base", func() {
+		purego.RegisterLibFunc(&_hv_gic_config_set_redistributor_base, _hypervisorLib, "hv_gic_config_set_redistributor_base")
+	})
 	_register("hv_gic_create", func() { purego.RegisterLibFunc(&_hv_gic_create, _hypervisorLib, "hv_gic_create") })
-	_register("hv_gic_get_distributor_base_alignment", func() { purego.RegisterLibFunc(&_hv_gic_get_distributor_base_alignment, _hypervisorLib, "hv_gic_get_distributor_base_alignment") })
-	_register("hv_gic_get_distributor_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_distributor_reg, _hypervisorLib, "hv_gic_get_distributor_reg") })
-	_register("hv_gic_get_distributor_size", func() { purego.RegisterLibFunc(&_hv_gic_get_distributor_size, _hypervisorLib, "hv_gic_get_distributor_size") })
+	_register("hv_gic_get_distributor_base_alignment", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_distributor_base_alignment, _hypervisorLib, "hv_gic_get_distributor_base_alignment")
+	})
+	_register("hv_gic_get_distributor_reg", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_distributor_reg, _hypervisorLib, "hv_gic_get_distributor_reg")
+	})
+	_register("hv_gic_get_distributor_size", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_distributor_size, _hypervisorLib, "hv_gic_get_distributor_size")
+	})
 	_register("hv_gic_get_icc_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_icc_reg, _hypervisorLib, "hv_gic_get_icc_reg") })
 	_register("hv_gic_get_ich_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_ich_reg, _hypervisorLib, "hv_gic_get_ich_reg") })
 	_register("hv_gic_get_icv_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_icv_reg, _hypervisorLib, "hv_gic_get_icv_reg") })
 	_register("hv_gic_get_intid", func() { purego.RegisterLibFunc(&_hv_gic_get_intid, _hypervisorLib, "hv_gic_get_intid") })
 	_register("hv_gic_get_msi_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_msi_reg, _hypervisorLib, "hv_gic_get_msi_reg") })
-	_register("hv_gic_get_msi_region_base_alignment", func() { purego.RegisterLibFunc(&_hv_gic_get_msi_region_base_alignment, _hypervisorLib, "hv_gic_get_msi_region_base_alignment") })
-	_register("hv_gic_get_msi_region_size", func() { purego.RegisterLibFunc(&_hv_gic_get_msi_region_size, _hypervisorLib, "hv_gic_get_msi_region_size") })
-	_register("hv_gic_get_redistributor_base", func() { purego.RegisterLibFunc(&_hv_gic_get_redistributor_base, _hypervisorLib, "hv_gic_get_redistributor_base") })
-	_register("hv_gic_get_redistributor_base_alignment", func() { purego.RegisterLibFunc(&_hv_gic_get_redistributor_base_alignment, _hypervisorLib, "hv_gic_get_redistributor_base_alignment") })
-	_register("hv_gic_get_redistributor_reg", func() { purego.RegisterLibFunc(&_hv_gic_get_redistributor_reg, _hypervisorLib, "hv_gic_get_redistributor_reg") })
-	_register("hv_gic_get_redistributor_region_size", func() { purego.RegisterLibFunc(&_hv_gic_get_redistributor_region_size, _hypervisorLib, "hv_gic_get_redistributor_region_size") })
-	_register("hv_gic_get_redistributor_size", func() { purego.RegisterLibFunc(&_hv_gic_get_redistributor_size, _hypervisorLib, "hv_gic_get_redistributor_size") })
-	_register("hv_gic_get_spi_interrupt_range", func() { purego.RegisterLibFunc(&_hv_gic_get_spi_interrupt_range, _hypervisorLib, "hv_gic_get_spi_interrupt_range") })
+	_register("hv_gic_get_msi_region_base_alignment", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_msi_region_base_alignment, _hypervisorLib, "hv_gic_get_msi_region_base_alignment")
+	})
+	_register("hv_gic_get_msi_region_size", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_msi_region_size, _hypervisorLib, "hv_gic_get_msi_region_size")
+	})
+	_register("hv_gic_get_redistributor_base", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_redistributor_base, _hypervisorLib, "hv_gic_get_redistributor_base")
+	})
+	_register("hv_gic_get_redistributor_base_alignment", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_redistributor_base_alignment, _hypervisorLib, "hv_gic_get_redistributor_base_alignment")
+	})
+	_register("hv_gic_get_redistributor_reg", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_redistributor_reg, _hypervisorLib, "hv_gic_get_redistributor_reg")
+	})
+	_register("hv_gic_get_redistributor_region_size", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_redistributor_region_size, _hypervisorLib, "hv_gic_get_redistributor_region_size")
+	})
+	_register("hv_gic_get_redistributor_size", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_redistributor_size, _hypervisorLib, "hv_gic_get_redistributor_size")
+	})
+	_register("hv_gic_get_spi_interrupt_range", func() {
+		purego.RegisterLibFunc(&_hv_gic_get_spi_interrupt_range, _hypervisorLib, "hv_gic_get_spi_interrupt_range")
+	})
 	_register("hv_gic_reset", func() { purego.RegisterLibFunc(&_hv_gic_reset, _hypervisorLib, "hv_gic_reset") })
 	_register("hv_gic_send_msi", func() { purego.RegisterLibFunc(&_hv_gic_send_msi, _hypervisorLib, "hv_gic_send_msi") })
-	_register("hv_gic_set_distributor_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_distributor_reg, _hypervisorLib, "hv_gic_set_distributor_reg") })
+	_register("hv_gic_set_distributor_reg", func() {
+		purego.RegisterLibFunc(&_hv_gic_set_distributor_reg, _hypervisorLib, "hv_gic_set_distributor_reg")
+	})
 	_register("hv_gic_set_icc_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_icc_reg, _hypervisorLib, "hv_gic_set_icc_reg") })
 	_register("hv_gic_set_ich_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_ich_reg, _hypervisorLib, "hv_gic_set_ich_reg") })
 	_register("hv_gic_set_icv_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_icv_reg, _hypervisorLib, "hv_gic_set_icv_reg") })
 	_register("hv_gic_set_msi_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_msi_reg, _hypervisorLib, "hv_gic_set_msi_reg") })
-	_register("hv_gic_set_redistributor_reg", func() { purego.RegisterLibFunc(&_hv_gic_set_redistributor_reg, _hypervisorLib, "hv_gic_set_redistributor_reg") })
+	_register("hv_gic_set_redistributor_reg", func() {
+		purego.RegisterLibFunc(&_hv_gic_set_redistributor_reg, _hypervisorLib, "hv_gic_set_redistributor_reg")
+	})
 	_register("hv_gic_set_spi", func() { purego.RegisterLibFunc(&_hv_gic_set_spi, _hypervisorLib, "hv_gic_set_spi") })
 	_register("hv_gic_set_state", func() { purego.RegisterLibFunc(&_hv_gic_set_state, _hypervisorLib, "hv_gic_set_state") })
 	_register("hv_gic_state_create", func() { purego.RegisterLibFunc(&_hv_gic_state_create, _hypervisorLib, "hv_gic_state_create") })
 	_register("hv_gic_state_get_data", func() { purego.RegisterLibFunc(&_hv_gic_state_get_data, _hypervisorLib, "hv_gic_state_get_data") })
 	_register("hv_gic_state_get_size", func() { purego.RegisterLibFunc(&_hv_gic_state_get_size, _hypervisorLib, "hv_gic_state_get_size") })
-	_register("hv_sme_config_get_max_svl_bytes", func() { purego.RegisterLibFunc(&_hv_sme_config_get_max_svl_bytes, _hypervisorLib, "hv_sme_config_get_max_svl_bytes") })
+	_register("hv_sme_config_get_max_svl_bytes", func() {
+		purego.RegisterLibFunc(&_hv_sme_config_get_max_svl_bytes, _hypervisorLib, "hv_sme_config_get_max_svl_bytes")
+	})
 	_register("hv_vcpu_config_create", func() { purego.RegisterLibFunc(&_hv_vcpu_config_create, _hypervisorLib, "hv_vcpu_config_create") })
-	_register("hv_vcpu_config_get_ccsidr_el1_sys_reg_values", func() { purego.RegisterLibFunc(&_hv_vcpu_config_get_ccsidr_el1_sys_reg_values, _hypervisorLib, "hv_vcpu_config_get_ccsidr_el1_sys_reg_values") })
-	_register("hv_vcpu_config_get_feature_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_config_get_feature_reg, _hypervisorLib, "hv_vcpu_config_get_feature_reg") })
+	_register("hv_vcpu_config_get_ccsidr_el1_sys_reg_values", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_config_get_ccsidr_el1_sys_reg_values, _hypervisorLib, "hv_vcpu_config_get_ccsidr_el1_sys_reg_values")
+	})
+	_register("hv_vcpu_config_get_feature_reg", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_config_get_feature_reg, _hypervisorLib, "hv_vcpu_config_get_feature_reg")
+	})
 	_register("hv_vcpu_create", func() { purego.RegisterLibFunc(&_hv_vcpu_create, _hypervisorLib, "hv_vcpu_create") })
 	_register("hv_vcpu_destroy", func() { purego.RegisterLibFunc(&_hv_vcpu_destroy, _hypervisorLib, "hv_vcpu_destroy") })
 	_register("hv_vcpu_get_exec_time", func() { purego.RegisterLibFunc(&_hv_vcpu_get_exec_time, _hypervisorLib, "hv_vcpu_get_exec_time") })
-	_register("hv_vcpu_get_pending_interrupt", func() { purego.RegisterLibFunc(&_hv_vcpu_get_pending_interrupt, _hypervisorLib, "hv_vcpu_get_pending_interrupt") })
+	_register("hv_vcpu_get_pending_interrupt", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_get_pending_interrupt, _hypervisorLib, "hv_vcpu_get_pending_interrupt")
+	})
 	_register("hv_vcpu_get_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_reg, _hypervisorLib, "hv_vcpu_get_reg") })
 	_register("hv_vcpu_get_simd_fp_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_simd_fp_reg, _hypervisorLib, "hv_vcpu_get_simd_fp_reg") })
 	_register("hv_vcpu_get_sme_p_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sme_p_reg, _hypervisorLib, "hv_vcpu_get_sme_p_reg") })
@@ -99,12 +141,20 @@ func _loadLibrary() {
 	_register("hv_vcpu_get_sme_za_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sme_za_reg, _hypervisorLib, "hv_vcpu_get_sme_za_reg") })
 	_register("hv_vcpu_get_sme_zt0_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sme_zt0_reg, _hypervisorLib, "hv_vcpu_get_sme_zt0_reg") })
 	_register("hv_vcpu_get_sys_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_get_sys_reg, _hypervisorLib, "hv_vcpu_get_sys_reg") })
-	_register("hv_vcpu_get_trap_debug_exceptions", func() { purego.RegisterLibFunc(&_hv_vcpu_get_trap_debug_exceptions, _hypervisorLib, "hv_vcpu_get_trap_debug_exceptions") })
-	_register("hv_vcpu_get_trap_debug_reg_accesses", func() { purego.RegisterLibFunc(&_hv_vcpu_get_trap_debug_reg_accesses, _hypervisorLib, "hv_vcpu_get_trap_debug_reg_accesses") })
+	_register("hv_vcpu_get_trap_debug_exceptions", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_get_trap_debug_exceptions, _hypervisorLib, "hv_vcpu_get_trap_debug_exceptions")
+	})
+	_register("hv_vcpu_get_trap_debug_reg_accesses", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_get_trap_debug_reg_accesses, _hypervisorLib, "hv_vcpu_get_trap_debug_reg_accesses")
+	})
 	_register("hv_vcpu_get_vtimer_mask", func() { purego.RegisterLibFunc(&_hv_vcpu_get_vtimer_mask, _hypervisorLib, "hv_vcpu_get_vtimer_mask") })
-	_register("hv_vcpu_get_vtimer_offset", func() { purego.RegisterLibFunc(&_hv_vcpu_get_vtimer_offset, _hypervisorLib, "hv_vcpu_get_vtimer_offset") })
+	_register("hv_vcpu_get_vtimer_offset", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_get_vtimer_offset, _hypervisorLib, "hv_vcpu_get_vtimer_offset")
+	})
 	_register("hv_vcpu_run", func() { purego.RegisterLibFunc(&_hv_vcpu_run, _hypervisorLib, "hv_vcpu_run") })
-	_register("hv_vcpu_set_pending_interrupt", func() { purego.RegisterLibFunc(&_hv_vcpu_set_pending_interrupt, _hypervisorLib, "hv_vcpu_set_pending_interrupt") })
+	_register("hv_vcpu_set_pending_interrupt", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_set_pending_interrupt, _hypervisorLib, "hv_vcpu_set_pending_interrupt")
+	})
 	_register("hv_vcpu_set_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_reg, _hypervisorLib, "hv_vcpu_set_reg") })
 	_register("hv_vcpu_set_simd_fp_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_simd_fp_reg, _hypervisorLib, "hv_vcpu_set_simd_fp_reg") })
 	_register("hv_vcpu_set_sme_p_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sme_p_reg, _hypervisorLib, "hv_vcpu_set_sme_p_reg") })
@@ -113,23 +163,49 @@ func _loadLibrary() {
 	_register("hv_vcpu_set_sme_za_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sme_za_reg, _hypervisorLib, "hv_vcpu_set_sme_za_reg") })
 	_register("hv_vcpu_set_sme_zt0_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sme_zt0_reg, _hypervisorLib, "hv_vcpu_set_sme_zt0_reg") })
 	_register("hv_vcpu_set_sys_reg", func() { purego.RegisterLibFunc(&_hv_vcpu_set_sys_reg, _hypervisorLib, "hv_vcpu_set_sys_reg") })
-	_register("hv_vcpu_set_trap_debug_exceptions", func() { purego.RegisterLibFunc(&_hv_vcpu_set_trap_debug_exceptions, _hypervisorLib, "hv_vcpu_set_trap_debug_exceptions") })
-	_register("hv_vcpu_set_trap_debug_reg_accesses", func() { purego.RegisterLibFunc(&_hv_vcpu_set_trap_debug_reg_accesses, _hypervisorLib, "hv_vcpu_set_trap_debug_reg_accesses") })
+	_register("hv_vcpu_set_trap_debug_exceptions", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_set_trap_debug_exceptions, _hypervisorLib, "hv_vcpu_set_trap_debug_exceptions")
+	})
+	_register("hv_vcpu_set_trap_debug_reg_accesses", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_set_trap_debug_reg_accesses, _hypervisorLib, "hv_vcpu_set_trap_debug_reg_accesses")
+	})
 	_register("hv_vcpu_set_vtimer_mask", func() { purego.RegisterLibFunc(&_hv_vcpu_set_vtimer_mask, _hypervisorLib, "hv_vcpu_set_vtimer_mask") })
-	_register("hv_vcpu_set_vtimer_offset", func() { purego.RegisterLibFunc(&_hv_vcpu_set_vtimer_offset, _hypervisorLib, "hv_vcpu_set_vtimer_offset") })
+	_register("hv_vcpu_set_vtimer_offset", func() {
+		purego.RegisterLibFunc(&_hv_vcpu_set_vtimer_offset, _hypervisorLib, "hv_vcpu_set_vtimer_offset")
+	})
 	_register("hv_vcpus_exit", func() { purego.RegisterLibFunc(&_hv_vcpus_exit, _hypervisorLib, "hv_vcpus_exit") })
 	_register("hv_vm_allocate", func() { purego.RegisterLibFunc(&_hv_vm_allocate, _hypervisorLib, "hv_vm_allocate") })
 	_register("hv_vm_config_create", func() { purego.RegisterLibFunc(&_hv_vm_config_create, _hypervisorLib, "hv_vm_config_create") })
-	_register("hv_vm_config_get_default_ipa_granule", func() { purego.RegisterLibFunc(&_hv_vm_config_get_default_ipa_granule, _hypervisorLib, "hv_vm_config_get_default_ipa_granule") })
-	_register("hv_vm_config_get_default_ipa_size", func() { purego.RegisterLibFunc(&_hv_vm_config_get_default_ipa_size, _hypervisorLib, "hv_vm_config_get_default_ipa_size") })
-	_register("hv_vm_config_get_el2_enabled", func() { purego.RegisterLibFunc(&_hv_vm_config_get_el2_enabled, _hypervisorLib, "hv_vm_config_get_el2_enabled") })
-	_register("hv_vm_config_get_el2_supported", func() { purego.RegisterLibFunc(&_hv_vm_config_get_el2_supported, _hypervisorLib, "hv_vm_config_get_el2_supported") })
-	_register("hv_vm_config_get_ipa_granule", func() { purego.RegisterLibFunc(&_hv_vm_config_get_ipa_granule, _hypervisorLib, "hv_vm_config_get_ipa_granule") })
-	_register("hv_vm_config_get_ipa_size", func() { purego.RegisterLibFunc(&_hv_vm_config_get_ipa_size, _hypervisorLib, "hv_vm_config_get_ipa_size") })
-	_register("hv_vm_config_get_max_ipa_size", func() { purego.RegisterLibFunc(&_hv_vm_config_get_max_ipa_size, _hypervisorLib, "hv_vm_config_get_max_ipa_size") })
-	_register("hv_vm_config_set_el2_enabled", func() { purego.RegisterLibFunc(&_hv_vm_config_set_el2_enabled, _hypervisorLib, "hv_vm_config_set_el2_enabled") })
-	_register("hv_vm_config_set_ipa_granule", func() { purego.RegisterLibFunc(&_hv_vm_config_set_ipa_granule, _hypervisorLib, "hv_vm_config_set_ipa_granule") })
-	_register("hv_vm_config_set_ipa_size", func() { purego.RegisterLibFunc(&_hv_vm_config_set_ipa_size, _hypervisorLib, "hv_vm_config_set_ipa_size") })
+	_register("hv_vm_config_get_default_ipa_granule", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_default_ipa_granule, _hypervisorLib, "hv_vm_config_get_default_ipa_granule")
+	})
+	_register("hv_vm_config_get_default_ipa_size", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_default_ipa_size, _hypervisorLib, "hv_vm_config_get_default_ipa_size")
+	})
+	_register("hv_vm_config_get_el2_enabled", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_el2_enabled, _hypervisorLib, "hv_vm_config_get_el2_enabled")
+	})
+	_register("hv_vm_config_get_el2_supported", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_el2_supported, _hypervisorLib, "hv_vm_config_get_el2_supported")
+	})
+	_register("hv_vm_config_get_ipa_granule", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_ipa_granule, _hypervisorLib, "hv_vm_config_get_ipa_granule")
+	})
+	_register("hv_vm_config_get_ipa_size", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_ipa_size, _hypervisorLib, "hv_vm_config_get_ipa_size")
+	})
+	_register("hv_vm_config_get_max_ipa_size", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_get_max_ipa_size, _hypervisorLib, "hv_vm_config_get_max_ipa_size")
+	})
+	_register("hv_vm_config_set_el2_enabled", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_set_el2_enabled, _hypervisorLib, "hv_vm_config_set_el2_enabled")
+	})
+	_register("hv_vm_config_set_ipa_granule", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_set_ipa_granule, _hypervisorLib, "hv_vm_config_set_ipa_granule")
+	})
+	_register("hv_vm_config_set_ipa_size", func() {
+		purego.RegisterLibFunc(&_hv_vm_config_set_ipa_size, _hypervisorLib, "hv_vm_config_set_ipa_size")
+	})
 	_register("hv_vm_create", func() { purego.RegisterLibFunc(&_hv_vm_create, _hypervisorLib, "hv_vm_create") })
 	_register("hv_vm_deallocate", func() { purego.RegisterLibFunc(&_hv_vm_deallocate, _hypervisorLib, "hv_vm_deallocate") })
 	_register("hv_vm_destroy", func() { purego.RegisterLibFunc(&_hv_vm_destroy, _hypervisorLib, "hv_vm_destroy") })

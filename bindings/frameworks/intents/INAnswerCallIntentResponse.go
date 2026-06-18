@@ -16,11 +16,11 @@ type INAnswerCallIntentResponse struct {
 }
 
 var (
-	_clsINAnswerCallIntentResponse = _objcClass("INAnswerCallIntentResponse")
+	_clsINAnswerCallIntentResponse                         = _objcClass("INAnswerCallIntentResponse")
 	_iNAnswerCallIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNAnswerCallIntentResponseSelCode = objc.RegisterName("code")
-	_iNAnswerCallIntentResponseSelCallRecords = objc.RegisterName("callRecords")
-	_iNAnswerCallIntentResponseSelSetCallRecords = objc.RegisterName("setCallRecords:")
+	_iNAnswerCallIntentResponseSelCode                     = objc.RegisterName("code")
+	_iNAnswerCallIntentResponseSelCallRecords              = objc.RegisterName("callRecords")
+	_iNAnswerCallIntentResponseSelSetCallRecords           = objc.RegisterName("setCallRecords:")
 )
 
 func INAnswerCallIntentResponseFromID(id objc.ID) *INAnswerCallIntentResponse {
@@ -35,7 +35,9 @@ func INAnswerCallIntentResponseFromID(id objc.ID) *INAnswerCallIntentResponse {
 
 func (o *INAnswerCallIntentResponse) InitWithCodeUserActivity(code INAnswerCallIntentResponseCode, userActivity *foundation.NSUserActivity) *INAnswerCallIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAnswerCallIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAnswerCallIntentResponseFromID(_ret)
 }
 
@@ -46,11 +48,12 @@ func (o *INAnswerCallIntentResponse) Code() INAnswerCallIntentResponseCode {
 
 func (o *INAnswerCallIntentResponse) CallRecords() *foundation.NSArray[*INCallRecord] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAnswerCallIntentResponseSelCallRecords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INCallRecord](_ret)
 }
 
 func (o *INAnswerCallIntentResponse) SetCallRecords(callRecords *foundation.NSArray[*INCallRecord]) {
 	o.Ptr().Send(_iNAnswerCallIntentResponseSelSetCallRecords, callRecords.Ptr())
 }
-

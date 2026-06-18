@@ -633,4 +633,3 @@ type WKWebExtensionContextable interface {
 }
 
 var _ WKWebExtensionContextable = (*WKWebExtensionContext)(nil)
-

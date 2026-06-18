@@ -16,12 +16,12 @@ type CLLocationUpdater struct {
 }
 
 var (
-	_clsCLLocationUpdater = _objcClass("CLLocationUpdater")
-	_cLLocationUpdaterSelLiveUpdaterWithQueueHandler = objc.RegisterName("liveUpdaterWithQueue:handler:")
+	_clsCLLocationUpdater                                         = _objcClass("CLLocationUpdater")
+	_cLLocationUpdaterSelLiveUpdaterWithQueueHandler              = objc.RegisterName("liveUpdaterWithQueue:handler:")
 	_cLLocationUpdaterSelLiveUpdaterWithConfigurationQueueHandler = objc.RegisterName("liveUpdaterWithConfiguration:queue:handler:")
-	_cLLocationUpdaterSelResume = objc.RegisterName("resume")
-	_cLLocationUpdaterSelPause = objc.RegisterName("pause")
-	_cLLocationUpdaterSelInvalidate = objc.RegisterName("invalidate")
+	_cLLocationUpdaterSelResume                                   = objc.RegisterName("resume")
+	_cLLocationUpdaterSelPause                                    = objc.RegisterName("pause")
+	_cLLocationUpdaterSelInvalidate                               = objc.RegisterName("invalidate")
 )
 
 func CLLocationUpdaterFromID(id objc.ID) *CLLocationUpdater {
@@ -46,7 +46,9 @@ func CLLocationUpdaterLiveUpdaterWithQueueHandler(queue *foundation.NSObject, ha
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsCLLocationUpdater), _cLLocationUpdaterSelLiveUpdaterWithQueueHandler, queue.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLLocationUpdaterFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler(configuration CLL
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsCLLocationUpdater), _cLLocationUpdaterSelLiveUpdaterWithConfigurationQueueHandler, configuration, queue.Ptr(), __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLLocationUpdaterFromID(_ret)
 }
 
@@ -77,4 +81,3 @@ func (o *CLLocationUpdater) Pause() {
 func (o *CLLocationUpdater) Invalidate() {
 	o.Ptr().Send(_cLLocationUpdaterSelInvalidate)
 }
-

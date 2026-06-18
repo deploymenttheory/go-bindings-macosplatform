@@ -15,11 +15,15 @@ type AuthorizationPlatformPublicKeyCredentialRegistrationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest].
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest { return x.inner }
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) ID() objc.ID { return x.inner.Ptr() }
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialRegistrationRequest (nil for 0).
 func AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
@@ -91,7 +95,9 @@ func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequest
 	x.inner.SetRequestStyle(requestStyle)
 }
 
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
@@ -108,4 +114,3 @@ type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialRegistrationRequestable = (*AuthorizationPlatformPublicKeyCredentialRegistrationRequest)(nil)
-

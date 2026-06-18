@@ -17,17 +17,17 @@ type MDLAnimatedVector3Array struct {
 }
 
 var (
-	_clsMDLAnimatedVector3Array = _objcClass("MDLAnimatedVector3Array")
-	_mDLAnimatedVector3ArraySelInitWithElementCount = objc.RegisterName("initWithElementCount:")
-	_mDLAnimatedVector3ArraySelSetFloat3ArrayCountAtTime = objc.RegisterName("setFloat3Array:count:atTime:")
-	_mDLAnimatedVector3ArraySelSetDouble3ArrayCountAtTime = objc.RegisterName("setDouble3Array:count:atTime:")
-	_mDLAnimatedVector3ArraySelGetFloat3ArrayMaxCountAtTime = objc.RegisterName("getFloat3Array:maxCount:atTime:")
-	_mDLAnimatedVector3ArraySelGetDouble3ArrayMaxCountAtTime = objc.RegisterName("getDouble3Array:maxCount:atTime:")
-	_mDLAnimatedVector3ArraySelResetWithFloat3ArrayCountAtTimesCount = objc.RegisterName("resetWithFloat3Array:count:atTimes:count:")
+	_clsMDLAnimatedVector3Array                                       = _objcClass("MDLAnimatedVector3Array")
+	_mDLAnimatedVector3ArraySelInitWithElementCount                   = objc.RegisterName("initWithElementCount:")
+	_mDLAnimatedVector3ArraySelSetFloat3ArrayCountAtTime              = objc.RegisterName("setFloat3Array:count:atTime:")
+	_mDLAnimatedVector3ArraySelSetDouble3ArrayCountAtTime             = objc.RegisterName("setDouble3Array:count:atTime:")
+	_mDLAnimatedVector3ArraySelGetFloat3ArrayMaxCountAtTime           = objc.RegisterName("getFloat3Array:maxCount:atTime:")
+	_mDLAnimatedVector3ArraySelGetDouble3ArrayMaxCountAtTime          = objc.RegisterName("getDouble3Array:maxCount:atTime:")
+	_mDLAnimatedVector3ArraySelResetWithFloat3ArrayCountAtTimesCount  = objc.RegisterName("resetWithFloat3Array:count:atTimes:count:")
 	_mDLAnimatedVector3ArraySelResetWithDouble3ArrayCountAtTimesCount = objc.RegisterName("resetWithDouble3Array:count:atTimes:count:")
-	_mDLAnimatedVector3ArraySelGetFloat3ArrayMaxCount = objc.RegisterName("getFloat3Array:maxCount:")
-	_mDLAnimatedVector3ArraySelGetDouble3ArrayMaxCount = objc.RegisterName("getDouble3Array:maxCount:")
-	_mDLAnimatedVector3ArraySelElementCount = objc.RegisterName("elementCount")
+	_mDLAnimatedVector3ArraySelGetFloat3ArrayMaxCount                 = objc.RegisterName("getFloat3Array:maxCount:")
+	_mDLAnimatedVector3ArraySelGetDouble3ArrayMaxCount                = objc.RegisterName("getDouble3Array:maxCount:")
+	_mDLAnimatedVector3ArraySelElementCount                           = objc.RegisterName("elementCount")
 )
 
 func MDLAnimatedVector3ArrayFromID(id objc.ID) *MDLAnimatedVector3Array {
@@ -85,4 +85,3 @@ func (o *MDLAnimatedVector3Array) ElementCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedVector3ArraySelElementCount)
 	return _ret
 }
-

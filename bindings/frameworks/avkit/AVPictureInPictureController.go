@@ -18,25 +18,25 @@ type AVPictureInPictureController struct {
 }
 
 var (
-	_clsAVPictureInPictureController = _objcClass("AVPictureInPictureController")
-	_aVPictureInPictureControllerSelIsPictureInPictureSupported = objc.RegisterName("isPictureInPictureSupported")
-	_aVPictureInPictureControllerSelInitWithContentSource = objc.RegisterName("initWithContentSource:")
-	_aVPictureInPictureControllerSelInitWithPlayerLayer = objc.RegisterName("initWithPlayerLayer:")
-	_aVPictureInPictureControllerSelStartPictureInPicture = objc.RegisterName("startPictureInPicture")
-	_aVPictureInPictureControllerSelStopPictureInPicture = objc.RegisterName("stopPictureInPicture")
+	_clsAVPictureInPictureController                                 = _objcClass("AVPictureInPictureController")
+	_aVPictureInPictureControllerSelIsPictureInPictureSupported      = objc.RegisterName("isPictureInPictureSupported")
+	_aVPictureInPictureControllerSelInitWithContentSource            = objc.RegisterName("initWithContentSource:")
+	_aVPictureInPictureControllerSelInitWithPlayerLayer              = objc.RegisterName("initWithPlayerLayer:")
+	_aVPictureInPictureControllerSelStartPictureInPicture            = objc.RegisterName("startPictureInPicture")
+	_aVPictureInPictureControllerSelStopPictureInPicture             = objc.RegisterName("stopPictureInPicture")
 	_aVPictureInPictureControllerSelPictureInPictureButtonStartImage = objc.RegisterName("pictureInPictureButtonStartImage")
-	_aVPictureInPictureControllerSelPictureInPictureButtonStopImage = objc.RegisterName("pictureInPictureButtonStopImage")
-	_aVPictureInPictureControllerSelContentSource = objc.RegisterName("contentSource")
-	_aVPictureInPictureControllerSelSetContentSource = objc.RegisterName("setContentSource:")
-	_aVPictureInPictureControllerSelPlayerLayer = objc.RegisterName("playerLayer")
-	_aVPictureInPictureControllerSelDelegate = objc.RegisterName("delegate")
-	_aVPictureInPictureControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVPictureInPictureControllerSelIsPictureInPicturePossible = objc.RegisterName("isPictureInPicturePossible")
-	_aVPictureInPictureControllerSelIsPictureInPictureActive = objc.RegisterName("isPictureInPictureActive")
-	_aVPictureInPictureControllerSelIsPictureInPictureSuspended = objc.RegisterName("isPictureInPictureSuspended")
-	_aVPictureInPictureControllerSelRequiresLinearPlayback = objc.RegisterName("requiresLinearPlayback")
-	_aVPictureInPictureControllerSelSetRequiresLinearPlayback = objc.RegisterName("setRequiresLinearPlayback:")
-	_aVPictureInPictureControllerSelInvalidatePlaybackState = objc.RegisterName("invalidatePlaybackState")
+	_aVPictureInPictureControllerSelPictureInPictureButtonStopImage  = objc.RegisterName("pictureInPictureButtonStopImage")
+	_aVPictureInPictureControllerSelContentSource                    = objc.RegisterName("contentSource")
+	_aVPictureInPictureControllerSelSetContentSource                 = objc.RegisterName("setContentSource:")
+	_aVPictureInPictureControllerSelPlayerLayer                      = objc.RegisterName("playerLayer")
+	_aVPictureInPictureControllerSelDelegate                         = objc.RegisterName("delegate")
+	_aVPictureInPictureControllerSelSetDelegate                      = objc.RegisterName("setDelegate:")
+	_aVPictureInPictureControllerSelIsPictureInPicturePossible       = objc.RegisterName("isPictureInPicturePossible")
+	_aVPictureInPictureControllerSelIsPictureInPictureActive         = objc.RegisterName("isPictureInPictureActive")
+	_aVPictureInPictureControllerSelIsPictureInPictureSuspended      = objc.RegisterName("isPictureInPictureSuspended")
+	_aVPictureInPictureControllerSelRequiresLinearPlayback           = objc.RegisterName("requiresLinearPlayback")
+	_aVPictureInPictureControllerSelSetRequiresLinearPlayback        = objc.RegisterName("setRequiresLinearPlayback:")
+	_aVPictureInPictureControllerSelInvalidatePlaybackState          = objc.RegisterName("invalidatePlaybackState")
 )
 
 func AVPictureInPictureControllerFromID(id objc.ID) *AVPictureInPictureController {
@@ -58,14 +58,18 @@ func AVPictureInPictureControllerIsPictureInPictureSupported() bool {
 // @method     initWithContentSource: @param      contentSource The content source to be shown in Picture in Picture. @abstract   Use this initializer for content that may be a sample buffer display layer or a player layer.
 func (o *AVPictureInPictureController) InitWithContentSource(contentSource *AVPictureInPictureControllerContentSource) *AVPictureInPictureController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelInitWithContentSource, contentSource.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPictureInPictureControllerFromID(_ret)
 }
 
 // @method		initWithPlayerLayer: @param		playerLayer The player layer from which to source the media content for the Picture in Picture controller. @abstract	Initialize the picture in picture controller with a player layer.
 func (o *AVPictureInPictureController) InitWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *AVPictureInPictureController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelInitWithPlayerLayer, playerLayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPictureInPictureControllerFromID(_ret)
 }
 
@@ -82,21 +86,27 @@ func (o *AVPictureInPictureController) StopPictureInPicture() {
 // @property	pictureInPictureButtonStartImage @abstract	System default Picture in Picture start template image for use in client's Picture in Picture button.
 func AVPictureInPictureControllerPictureInPictureButtonStartImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPictureInPictureController), _aVPictureInPictureControllerSelPictureInPictureButtonStartImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 // @property	pictureInPictureButtonStopImage @abstract	System default Picture in Picture stop template image for use in client's Picture in Picture button.
 func AVPictureInPictureControllerPictureInPictureButtonStopImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPictureInPictureController), _aVPictureInPictureControllerSelPictureInPictureButtonStopImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 // @property   contentSource @abstract   The receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
 func (o *AVPictureInPictureController) ContentSource() *AVPictureInPictureControllerContentSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelContentSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPictureInPictureControllerContentSourceFromID(_ret)
 }
 
@@ -107,7 +117,9 @@ func (o *AVPictureInPictureController) SetContentSource(contentSource *AVPicture
 // @property	playerLayer @abstract	The receiver's player layer.
 func (o *AVPictureInPictureController) PlayerLayer() *avfoundation.AVPlayerLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerSelPlayerLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVPlayerLayerFromID(_ret)
 }
 
@@ -153,4 +165,3 @@ func (o *AVPictureInPictureController) SetRequiresLinearPlayback(requiresLinearP
 func (o *AVPictureInPictureController) InvalidatePlaybackState() {
 	o.Ptr().Send(_aVPictureInPictureControllerSelInvalidatePlaybackState)
 }
-

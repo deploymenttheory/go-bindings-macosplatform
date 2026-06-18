@@ -60,4 +60,3 @@ type DiskWriteExceptionDiagnosticable interface {
 }
 
 var _ DiskWriteExceptionDiagnosticable = (*DiskWriteExceptionDiagnostic)(nil)
-

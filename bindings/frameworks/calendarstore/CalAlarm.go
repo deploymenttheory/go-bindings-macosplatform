@@ -17,25 +17,25 @@ type CalAlarm struct {
 }
 
 var (
-	_clsCalAlarm = _objcClass("CalAlarm")
-	_calAlarmSelAlarm = objc.RegisterName("alarm")
-	_calAlarmSelSetAcknowledged = objc.RegisterName("setAcknowledged:")
-	_calAlarmSelAcknowledged = objc.RegisterName("acknowledged")
-	_calAlarmSelSetRelatedTo = objc.RegisterName("setRelatedTo:")
-	_calAlarmSelRelatedTo = objc.RegisterName("relatedTo")
+	_clsCalAlarm                      = _objcClass("CalAlarm")
+	_calAlarmSelAlarm                 = objc.RegisterName("alarm")
+	_calAlarmSelSetAcknowledged       = objc.RegisterName("setAcknowledged:")
+	_calAlarmSelAcknowledged          = objc.RegisterName("acknowledged")
+	_calAlarmSelSetRelatedTo          = objc.RegisterName("setRelatedTo:")
+	_calAlarmSelRelatedTo             = objc.RegisterName("relatedTo")
 	_calAlarmSelTriggerDateRelativeTo = objc.RegisterName("triggerDateRelativeTo:")
-	_calAlarmSelAction = objc.RegisterName("action")
-	_calAlarmSelSetAction = objc.RegisterName("setAction:")
-	_calAlarmSelSound = objc.RegisterName("sound")
-	_calAlarmSelSetSound = objc.RegisterName("setSound:")
-	_calAlarmSelEmailAddress = objc.RegisterName("emailAddress")
-	_calAlarmSelSetEmailAddress = objc.RegisterName("setEmailAddress:")
-	_calAlarmSelUrl = objc.RegisterName("url")
-	_calAlarmSelSetUrl = objc.RegisterName("setUrl:")
-	_calAlarmSelRelativeTrigger = objc.RegisterName("relativeTrigger")
-	_calAlarmSelSetRelativeTrigger = objc.RegisterName("setRelativeTrigger:")
-	_calAlarmSelAbsoluteTrigger = objc.RegisterName("absoluteTrigger")
-	_calAlarmSelSetAbsoluteTrigger = objc.RegisterName("setAbsoluteTrigger:")
+	_calAlarmSelAction                = objc.RegisterName("action")
+	_calAlarmSelSetAction             = objc.RegisterName("setAction:")
+	_calAlarmSelSound                 = objc.RegisterName("sound")
+	_calAlarmSelSetSound              = objc.RegisterName("setSound:")
+	_calAlarmSelEmailAddress          = objc.RegisterName("emailAddress")
+	_calAlarmSelSetEmailAddress       = objc.RegisterName("setEmailAddress:")
+	_calAlarmSelUrl                   = objc.RegisterName("url")
+	_calAlarmSelSetUrl                = objc.RegisterName("setUrl:")
+	_calAlarmSelRelativeTrigger       = objc.RegisterName("relativeTrigger")
+	_calAlarmSelSetRelativeTrigger    = objc.RegisterName("setRelativeTrigger:")
+	_calAlarmSelAbsoluteTrigger       = objc.RegisterName("absoluteTrigger")
+	_calAlarmSelSetAbsoluteTrigger    = objc.RegisterName("setAbsoluteTrigger:")
 )
 
 func CalAlarmFromID(id objc.ID) *CalAlarm {
@@ -62,7 +62,9 @@ func (o *CalAlarm) SetAcknowledged(date *foundation.NSDate) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) Acknowledged() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelAcknowledged)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -74,21 +76,27 @@ func (o *CalAlarm) SetRelatedTo(relatedTo *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) RelatedTo() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelRelatedTo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) TriggerDateRelativeTo(date *foundation.NSDate) *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelTriggerDateRelativeTo, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) Action() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -100,7 +108,9 @@ func (o *CalAlarm) SetAction(action *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) Sound() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelSound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -112,7 +122,9 @@ func (o *CalAlarm) SetSound(sound *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) EmailAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelEmailAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -124,7 +136,9 @@ func (o *CalAlarm) SetEmailAddress(emailAddress *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -147,7 +161,9 @@ func (o *CalAlarm) SetRelativeTrigger(relativeTrigger float64) {
 // Deprecated: since macOS 10.8.
 func (o *CalAlarm) AbsoluteTrigger() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAlarmSelAbsoluteTrigger)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -155,4 +171,3 @@ func (o *CalAlarm) AbsoluteTrigger() *foundation.NSDate {
 func (o *CalAlarm) SetAbsoluteTrigger(absoluteTrigger *foundation.NSDate) {
 	o.Ptr().Send(_calAlarmSelSetAbsoluteTrigger, absoluteTrigger.Ptr())
 }
-

@@ -18,14 +18,14 @@ type MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams = _objcClass("MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams")
+	_clsMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams                           = _objcClass("MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams")
 	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelAction = objc.RegisterName("action")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetAction = objc.RegisterName("setAction:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelDelayedActionTime = objc.RegisterName("delayedActionTime")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetDelayedActionTime = objc.RegisterName("setDelayedActionTime:")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelAction                     = objc.RegisterName("action")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetAction                  = objc.RegisterName("setAction:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelDelayedActionTime          = objc.RegisterName("delayedActionTime")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetDelayedActionTime       = objc.RegisterName("setDelayedActionTime:")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(id objc.ID) *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams {
@@ -42,7 +42,9 @@ func MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(id objc.
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) InitWithR
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) Action() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) SetAction
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) DelayedActionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelDelayedActionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) SetDelaye
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

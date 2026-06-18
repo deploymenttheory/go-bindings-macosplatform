@@ -18,9 +18,9 @@ type MDLMeshBufferMap struct {
 }
 
 var (
-	_clsMDLMeshBufferMap = _objcClass("MDLMeshBufferMap")
+	_clsMDLMeshBufferMap                         = _objcClass("MDLMeshBufferMap")
 	_mDLMeshBufferMapSelInitWithBytesDeallocator = objc.RegisterName("initWithBytes:deallocator:")
-	_mDLMeshBufferMapSelBytes = objc.RegisterName("bytes")
+	_mDLMeshBufferMapSelBytes                    = objc.RegisterName("bytes")
 )
 
 func MDLMeshBufferMapFromID(id objc.ID) *MDLMeshBufferMap {
@@ -43,7 +43,9 @@ func (o *MDLMeshBufferMap) InitWithBytesDeallocator(bytes_ unsafe.Pointer, deall
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferMapSelInitWithBytesDeallocator, bytes_, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshBufferMapFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *MDLMeshBufferMap) Bytes() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mDLMeshBufferMapSelBytes)
 	return _ret
 }
-

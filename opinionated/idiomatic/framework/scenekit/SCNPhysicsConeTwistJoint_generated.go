@@ -134,7 +134,9 @@ func (x *PhysicsConeTwistJoint) SetMaximumTwistAngle(maximumTwistAngle float64) 
 	x.inner.SetMaximumTwistAngle(maximumTwistAngle)
 }
 
-func (x *PhysicsConeTwistJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+func (x *PhysicsConeTwistJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
+	return &x.inner.SCNPhysicsBehavior
+}
 
 // PhysicsConeTwistJointable is the interface implemented by [PhysicsConeTwistJoint], for mocking and DI.
 type PhysicsConeTwistJointable interface {
@@ -159,4 +161,3 @@ type PhysicsConeTwistJointable interface {
 }
 
 var _ PhysicsConeTwistJointable = (*PhysicsConeTwistJoint)(nil)
-

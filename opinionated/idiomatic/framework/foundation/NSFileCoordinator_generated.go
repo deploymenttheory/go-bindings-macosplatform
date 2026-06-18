@@ -187,4 +187,3 @@ type FileCoordinatorable interface {
 }
 
 var _ FileCoordinatorable = (*FileCoordinator)(nil)
-

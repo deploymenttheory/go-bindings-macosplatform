@@ -62,4 +62,3 @@ type NWHostEndpointable interface {
 }
 
 var _ NWHostEndpointable = (*NWHostEndpoint)(nil)
-

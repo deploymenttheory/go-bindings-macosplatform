@@ -78,4 +78,3 @@ type CollaborationHighlightable interface {
 }
 
 var _ CollaborationHighlightable = (*CollaborationHighlight)(nil)
-

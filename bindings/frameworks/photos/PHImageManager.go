@@ -17,15 +17,15 @@ type PHImageManager struct {
 }
 
 var (
-	_clsPHImageManager = _objcClass("PHImageManager")
-	_pHImageManagerSelDefaultManager = objc.RegisterName("defaultManager")
-	_pHImageManagerSelRequestImageForAssetTargetSizeContentModeOptionsResultHandler = objc.RegisterName("requestImageForAsset:targetSize:contentMode:options:resultHandler:")
-	_pHImageManagerSelRequestImageDataAndOrientationForAssetOptionsResultHandler = objc.RegisterName("requestImageDataAndOrientationForAsset:options:resultHandler:")
-	_pHImageManagerSelCancelImageRequest = objc.RegisterName("cancelImageRequest:")
+	_clsPHImageManager                                                                  = _objcClass("PHImageManager")
+	_pHImageManagerSelDefaultManager                                                    = objc.RegisterName("defaultManager")
+	_pHImageManagerSelRequestImageForAssetTargetSizeContentModeOptionsResultHandler     = objc.RegisterName("requestImageForAsset:targetSize:contentMode:options:resultHandler:")
+	_pHImageManagerSelRequestImageDataAndOrientationForAssetOptionsResultHandler        = objc.RegisterName("requestImageDataAndOrientationForAsset:options:resultHandler:")
+	_pHImageManagerSelCancelImageRequest                                                = objc.RegisterName("cancelImageRequest:")
 	_pHImageManagerSelRequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler = objc.RegisterName("requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:")
-	_pHImageManagerSelRequestPlayerItemForVideoOptionsResultHandler = objc.RegisterName("requestPlayerItemForVideo:options:resultHandler:")
-	_pHImageManagerSelRequestExportSessionForVideoOptionsExportPresetResultHandler = objc.RegisterName("requestExportSessionForVideo:options:exportPreset:resultHandler:")
-	_pHImageManagerSelRequestAVAssetForVideoOptionsResultHandler = objc.RegisterName("requestAVAssetForVideo:options:resultHandler:")
+	_pHImageManagerSelRequestPlayerItemForVideoOptionsResultHandler                     = objc.RegisterName("requestPlayerItemForVideo:options:resultHandler:")
+	_pHImageManagerSelRequestExportSessionForVideoOptionsExportPresetResultHandler      = objc.RegisterName("requestExportSessionForVideo:options:exportPreset:resultHandler:")
+	_pHImageManagerSelRequestAVAssetForVideoOptionsResultHandler                        = objc.RegisterName("requestAVAssetForVideo:options:resultHandler:")
 )
 
 func PHImageManagerFromID(id objc.ID) *PHImageManager {
@@ -40,7 +40,9 @@ func PHImageManagerFromID(id objc.ID) *PHImageManager {
 
 func PHImageManagerDefaultManager() *PHImageManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHImageManager), _pHImageManagerSelDefaultManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHImageManagerFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *PHImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *PHAss
 	_ret := objc.Send[int32](o.Ptr(), _pHImageManagerSelRequestAVAssetForVideoOptionsResultHandler, asset.Ptr(), options.Ptr(), resultHandler)
 	return _ret
 }
-

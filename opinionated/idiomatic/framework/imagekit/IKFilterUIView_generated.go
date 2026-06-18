@@ -57,4 +57,3 @@ type FilterUIViewable interface {
 }
 
 var _ FilterUIViewable = (*FilterUIView)(nil)
-

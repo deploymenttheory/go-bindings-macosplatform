@@ -60,4 +60,3 @@ type AUAudioUnitViewConfigurationable interface {
 }
 
 var _ AUAudioUnitViewConfigurationable = (*AUAudioUnitViewConfiguration)(nil)
-

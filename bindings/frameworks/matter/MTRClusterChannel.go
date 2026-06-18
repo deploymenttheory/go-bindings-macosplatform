@@ -18,27 +18,27 @@ type MTRClusterChannel struct {
 }
 
 var (
-	_clsMTRClusterChannel = _objcClass("MTRClusterChannel")
-	_mTRClusterChannelSelChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelChangeChannelByNumberWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeChannelByNumberWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelSkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("skipChannelWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelGetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getProgramGuideWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelGetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("getProgramGuideWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelRecordProgramWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("recordProgramWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelCancelRecordProgramWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("cancelRecordProgramWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterChannelSelReadAttributeChannelListWithParams = objc.RegisterName("readAttributeChannelListWithParams:")
-	_mTRClusterChannelSelReadAttributeLineupWithParams = objc.RegisterName("readAttributeLineupWithParams:")
-	_mTRClusterChannelSelReadAttributeCurrentChannelWithParams = objc.RegisterName("readAttributeCurrentChannelWithParams:")
-	_mTRClusterChannelSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterChannelSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterChannelSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterChannelSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterChannelSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterChannelSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterChannelSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterChannelSelChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterChannel                                                                                    = _objcClass("MTRClusterChannel")
+	_mTRClusterChannelSelChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelChangeChannelByNumberWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("changeChannelByNumberWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelSkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletion                  = objc.RegisterName("skipChannelWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelGetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion              = objc.RegisterName("getProgramGuideWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelGetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion                    = objc.RegisterName("getProgramGuideWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelRecordProgramWithParamsExpectedValuesExpectedValueIntervalCompletion                = objc.RegisterName("recordProgramWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelCancelRecordProgramWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("cancelRecordProgramWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterChannelSelReadAttributeChannelListWithParams                                                  = objc.RegisterName("readAttributeChannelListWithParams:")
+	_mTRClusterChannelSelReadAttributeLineupWithParams                                                       = objc.RegisterName("readAttributeLineupWithParams:")
+	_mTRClusterChannelSelReadAttributeCurrentChannelWithParams                                               = objc.RegisterName("readAttributeCurrentChannelWithParams:")
+	_mTRClusterChannelSelReadAttributeGeneratedCommandListWithParams                                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterChannelSelReadAttributeAcceptedCommandListWithParams                                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterChannelSelReadAttributeAttributeListWithParams                                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterChannelSelReadAttributeFeatureMapWithParams                                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterChannelSelReadAttributeClusterRevisionWithParams                                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterChannelSelInitWithDeviceEndpointIDQueue                                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterChannelSelInitWithDeviceEndpointQueue                                                         = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterChannelSelChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler         = objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterChannelSelChangeChannelByNumberWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("changeChannelByNumberWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterChannelSelSkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("skipChannelWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterChannelSelSkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler           = objc.RegisterName("skipChannelWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterChannelFromID(id objc.ID) *MTRClusterChannel {
@@ -180,13 +180,17 @@ func (o *MTRClusterChannel) ReadAttributeClusterRevisionWithParams(params *MTRRe
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterChannel) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterChannel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterChannelSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterChannelFromID(_ret)
 }
 
 func (o *MTRClusterChannel) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterChannel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterChannelSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterChannelFromID(_ret)
 }
 
@@ -225,4 +229,3 @@ func (o *MTRClusterChannel) SkipChannelWithParamsExpectedValuesExpectedValueInte
 	}
 	o.Ptr().Send(_mTRClusterChannelSelSkipChannelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

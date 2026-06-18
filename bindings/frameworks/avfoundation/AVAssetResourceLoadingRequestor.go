@@ -16,7 +16,7 @@ type AVAssetResourceLoadingRequestor struct {
 }
 
 var (
-	_clsAVAssetResourceLoadingRequestor = _objcClass("AVAssetResourceLoadingRequestor")
+	_clsAVAssetResourceLoadingRequestor                              = _objcClass("AVAssetResourceLoadingRequestor")
 	_aVAssetResourceLoadingRequestorSelProvidesExpiredSessionReports = objc.RegisterName("providesExpiredSessionReports")
 )
 
@@ -34,4 +34,3 @@ func (o *AVAssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAssetResourceLoadingRequestorSelProvidesExpiredSessionReports)
 	return _ret
 }
-

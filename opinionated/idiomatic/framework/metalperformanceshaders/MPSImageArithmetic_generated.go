@@ -193,9 +193,13 @@ func (x *ImageArithmetic) SetMaximumValue(maximumValue float32) {
 	x.inner.SetMaximumValue(maximumValue)
 }
 
-func (x *ImageArithmetic) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSBinaryImageKernel }
+func (x *ImageArithmetic) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
+	return &x.inner.MPSBinaryImageKernel
+}
 
-func (x *ImageArithmetic) asKernel() *mpscore.MPSKernel { return &x.inner.MPSBinaryImageKernel.MPSKernel }
+func (x *ImageArithmetic) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSBinaryImageKernel.MPSKernel
+}
 
 // ImageArithmeticable is the interface implemented by [ImageArithmetic], for mocking and DI.
 type ImageArithmeticable interface {
@@ -231,4 +235,3 @@ type ImageArithmeticable interface {
 }
 
 var _ ImageArithmeticable = (*ImageArithmetic)(nil)
-

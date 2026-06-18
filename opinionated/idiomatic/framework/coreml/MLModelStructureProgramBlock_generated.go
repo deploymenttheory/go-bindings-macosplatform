@@ -78,4 +78,3 @@ type ModelStructureProgramBlockable interface {
 }
 
 var _ ModelStructureProgramBlockable = (*ModelStructureProgramBlock)(nil)
-

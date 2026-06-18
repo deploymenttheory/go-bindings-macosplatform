@@ -18,15 +18,15 @@ type MPSCNNNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNNormalizationNode = _objcClass("MPSCNNNormalizationNode")
+	_clsMPSCNNNormalizationNode               = _objcClass("MPSCNNNormalizationNode")
 	_mPSCNNNormalizationNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 	_mPSCNNNormalizationNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSCNNNormalizationNodeSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNNormalizationNodeSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNNormalizationNodeSelBeta = objc.RegisterName("beta")
-	_mPSCNNNormalizationNodeSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNNormalizationNodeSelDelta = objc.RegisterName("delta")
-	_mPSCNNNormalizationNodeSelSetDelta = objc.RegisterName("setDelta:")
+	_mPSCNNNormalizationNodeSelAlpha          = objc.RegisterName("alpha")
+	_mPSCNNNormalizationNodeSelSetAlpha       = objc.RegisterName("setAlpha:")
+	_mPSCNNNormalizationNodeSelBeta           = objc.RegisterName("beta")
+	_mPSCNNNormalizationNodeSelSetBeta        = objc.RegisterName("setBeta:")
+	_mPSCNNNormalizationNodeSelDelta          = objc.RegisterName("delta")
+	_mPSCNNNormalizationNodeSelSetDelta       = objc.RegisterName("setDelta:")
 )
 
 func MPSCNNNormalizationNodeFromID(id objc.ID) *MPSCNNNormalizationNode {
@@ -41,13 +41,17 @@ func MPSCNNNormalizationNodeFromID(id objc.ID) *MPSCNNNormalizationNode {
 
 func MPSCNNNormalizationNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNormalizationNode), _mPSCNNNormalizationNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNNormalizationNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSCNNNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNormalizationNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationNodeFromID(_ret)
 }
 
@@ -80,4 +84,3 @@ func (o *MPSCNNNormalizationNode) Delta() float32 {
 func (o *MPSCNNNormalizationNode) SetDelta(delta float32) {
 	o.Ptr().Send(_mPSCNNNormalizationNodeSelSetDelta, delta)
 }
-

@@ -18,15 +18,15 @@ type AVAssetReaderOutput struct {
 }
 
 var (
-	_clsAVAssetReaderOutput = _objcClass("AVAssetReaderOutput")
-	_aVAssetReaderOutputSelCopyNextSampleBuffer = objc.RegisterName("copyNextSampleBuffer")
-	_aVAssetReaderOutputSelMediaType = objc.RegisterName("mediaType")
-	_aVAssetReaderOutputSelAlwaysCopiesSampleData = objc.RegisterName("alwaysCopiesSampleData")
+	_clsAVAssetReaderOutput                          = _objcClass("AVAssetReaderOutput")
+	_aVAssetReaderOutputSelCopyNextSampleBuffer      = objc.RegisterName("copyNextSampleBuffer")
+	_aVAssetReaderOutputSelMediaType                 = objc.RegisterName("mediaType")
+	_aVAssetReaderOutputSelAlwaysCopiesSampleData    = objc.RegisterName("alwaysCopiesSampleData")
 	_aVAssetReaderOutputSelSetAlwaysCopiesSampleData = objc.RegisterName("setAlwaysCopiesSampleData:")
 	_aVAssetReaderOutputSelResetForReadingTimeRanges = objc.RegisterName("resetForReadingTimeRanges:")
-	_aVAssetReaderOutputSelMarkConfigurationAsFinal = objc.RegisterName("markConfigurationAsFinal")
-	_aVAssetReaderOutputSelSupportsRandomAccess = objc.RegisterName("supportsRandomAccess")
-	_aVAssetReaderOutputSelSetSupportsRandomAccess = objc.RegisterName("setSupportsRandomAccess:")
+	_aVAssetReaderOutputSelMarkConfigurationAsFinal  = objc.RegisterName("markConfigurationAsFinal")
+	_aVAssetReaderOutputSelSupportsRandomAccess      = objc.RegisterName("supportsRandomAccess")
+	_aVAssetReaderOutputSelSetSupportsRandomAccess   = objc.RegisterName("setSupportsRandomAccess:")
 )
 
 func AVAssetReaderOutputFromID(id objc.ID) *AVAssetReaderOutput {
@@ -48,7 +48,9 @@ func (o *AVAssetReaderOutput) CopyNextSampleBuffer() unsafe.Pointer {
 // @property mediaType @abstract The media type of the samples that can be read from the receiver. @discussion The value of this property is one of the media type strings defined in AVMediaFormat.h.
 func (o *AVAssetReaderOutput) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetReaderOutputSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *AVAssetReaderOutput) SupportsRandomAccess() bool {
 func (o *AVAssetReaderOutput) SetSupportsRandomAccess(supportsRandomAccess bool) {
 	o.Ptr().Send(_aVAssetReaderOutputSelSetSupportsRandomAccess, supportsRandomAccess)
 }
-

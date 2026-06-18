@@ -17,4 +17,3 @@ type RemoteCommandProvider interface {
 type RemoteCommandEventProvider interface {
 	asRemoteCommandEvent() *raw.MPRemoteCommandEvent
 }
-

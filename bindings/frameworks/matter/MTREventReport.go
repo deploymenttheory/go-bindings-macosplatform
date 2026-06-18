@@ -18,17 +18,17 @@ type MTREventReport struct {
 }
 
 var (
-	_clsMTREventReport = _objcClass("MTREventReport")
+	_clsMTREventReport                           = _objcClass("MTREventReport")
 	_mTREventReportSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTREventReportSelPath = objc.RegisterName("path")
-	_mTREventReportSelEventNumber = objc.RegisterName("eventNumber")
-	_mTREventReportSelPriority = objc.RegisterName("priority")
-	_mTREventReportSelEventTimeType = objc.RegisterName("eventTimeType")
-	_mTREventReportSelSystemUpTime = objc.RegisterName("systemUpTime")
-	_mTREventReportSelTimestampDate = objc.RegisterName("timestampDate")
-	_mTREventReportSelValue = objc.RegisterName("value")
-	_mTREventReportSelError = objc.RegisterName("error")
-	_mTREventReportSelTimestamp = objc.RegisterName("timestamp")
+	_mTREventReportSelPath                       = objc.RegisterName("path")
+	_mTREventReportSelEventNumber                = objc.RegisterName("eventNumber")
+	_mTREventReportSelPriority                   = objc.RegisterName("priority")
+	_mTREventReportSelEventTimeType              = objc.RegisterName("eventTimeType")
+	_mTREventReportSelSystemUpTime               = objc.RegisterName("systemUpTime")
+	_mTREventReportSelTimestampDate              = objc.RegisterName("timestampDate")
+	_mTREventReportSelValue                      = objc.RegisterName("value")
+	_mTREventReportSelError                      = objc.RegisterName("error")
+	_mTREventReportSelTimestamp                  = objc.RegisterName("timestamp")
 )
 
 func MTREventReportFromID(id objc.ID) *MTREventReport {
@@ -45,7 +45,9 @@ func MTREventReportFromID(id objc.ID) *MTREventReport {
 func (o *MTREventReport) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREventReport, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -54,21 +56,27 @@ func (o *MTREventReport) InitWithResponseValueError(responseValue *foundation.NS
 
 func (o *MTREventReport) Path() *MTREventPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTREventPathFromID(_ret)
 }
 
 // eventNumber will only have a useful value if "error" is nil.
 func (o *MTREventReport) EventNumber() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelEventNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // priority will only have a useful value if "error" is nil.
 func (o *MTREventReport) Priority() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelPriority)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTREventReport) SystemUpTime() float64 {
 
 func (o *MTREventReport) TimestampDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelTimestampDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -103,7 +113,8 @@ func (o *MTREventReport) Error() unsafe.Pointer {
 
 func (o *MTREventReport) Timestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREventReportSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

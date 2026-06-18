@@ -54,7 +54,9 @@ func (x *NNLabelsNode) WithSynchronizeResource(synchronizeResource bool) *NNLabe
 	return x
 }
 
-func (x *NNLabelsNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
+func (x *NNLabelsNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode {
+	return &x.inner.MPSNNStateNode
+}
 
 // NNLabelsNodeable is the interface implemented by [NNLabelsNode], for mocking and DI.
 type NNLabelsNodeable interface {
@@ -65,4 +67,3 @@ type NNLabelsNodeable interface {
 }
 
 var _ NNLabelsNodeable = (*NNLabelsNode)(nil)
-

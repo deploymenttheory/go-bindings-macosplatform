@@ -41,4 +41,3 @@ type RenderServerable interface {
 }
 
 var _ RenderServerable = (*RenderServer)(nil)
-

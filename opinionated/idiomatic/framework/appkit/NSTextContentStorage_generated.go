@@ -125,7 +125,9 @@ func (x *TextContentStorage) SetAttributedString(attributedString *foundation.NS
 	x.inner.SetAttributedString(attributedString)
 }
 
-func (x *TextContentStorage) asTextContentManager() *raw.NSTextContentManager { return &x.inner.NSTextContentManager }
+func (x *TextContentStorage) asTextContentManager() *raw.NSTextContentManager {
+	return &x.inner.NSTextContentManager
+}
 
 // TextContentStorageable is the interface implemented by [TextContentStorage], for mocking and DI.
 type TextContentStorageable interface {
@@ -148,4 +150,3 @@ type TextContentStorageable interface {
 }
 
 var _ TextContentStorageable = (*TextContentStorage)(nil)
-

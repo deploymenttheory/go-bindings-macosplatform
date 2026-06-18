@@ -138,4 +138,3 @@ type PreviewViewable interface {
 }
 
 var _ PreviewViewable = (*PreviewView)(nil)
-

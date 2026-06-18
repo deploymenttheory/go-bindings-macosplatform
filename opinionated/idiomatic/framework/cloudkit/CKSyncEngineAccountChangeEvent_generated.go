@@ -58,7 +58,9 @@ func (x *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
 	return &RecordID{inner: _r}
 }
 
-func (x *SyncEngineAccountChangeEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineAccountChangeEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineAccountChangeEventable is the interface implemented by [SyncEngineAccountChangeEvent], for mocking and DI.
 type SyncEngineAccountChangeEventable interface {
@@ -69,4 +71,3 @@ type SyncEngineAccountChangeEventable interface {
 }
 
 var _ SyncEngineAccountChangeEventable = (*SyncEngineAccountChangeEvent)(nil)
-

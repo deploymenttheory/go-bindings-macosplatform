@@ -16,17 +16,17 @@ type MTLTextureViewDescriptor struct {
 }
 
 var (
-	_clsMTLTextureViewDescriptor = _objcClass("MTLTextureViewDescriptor")
-	_mTLTextureViewDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
+	_clsMTLTextureViewDescriptor               = _objcClass("MTLTextureViewDescriptor")
+	_mTLTextureViewDescriptorSelPixelFormat    = objc.RegisterName("pixelFormat")
 	_mTLTextureViewDescriptorSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_mTLTextureViewDescriptorSelTextureType = objc.RegisterName("textureType")
+	_mTLTextureViewDescriptorSelTextureType    = objc.RegisterName("textureType")
 	_mTLTextureViewDescriptorSelSetTextureType = objc.RegisterName("setTextureType:")
-	_mTLTextureViewDescriptorSelLevelRange = objc.RegisterName("levelRange")
-	_mTLTextureViewDescriptorSelSetLevelRange = objc.RegisterName("setLevelRange:")
-	_mTLTextureViewDescriptorSelSliceRange = objc.RegisterName("sliceRange")
-	_mTLTextureViewDescriptorSelSetSliceRange = objc.RegisterName("setSliceRange:")
-	_mTLTextureViewDescriptorSelSwizzle = objc.RegisterName("swizzle")
-	_mTLTextureViewDescriptorSelSetSwizzle = objc.RegisterName("setSwizzle:")
+	_mTLTextureViewDescriptorSelLevelRange     = objc.RegisterName("levelRange")
+	_mTLTextureViewDescriptorSelSetLevelRange  = objc.RegisterName("setLevelRange:")
+	_mTLTextureViewDescriptorSelSliceRange     = objc.RegisterName("sliceRange")
+	_mTLTextureViewDescriptorSelSetSliceRange  = objc.RegisterName("setSliceRange:")
+	_mTLTextureViewDescriptorSelSwizzle        = objc.RegisterName("swizzle")
+	_mTLTextureViewDescriptorSelSetSwizzle     = objc.RegisterName("setSwizzle:")
 )
 
 func MTLTextureViewDescriptorFromID(id objc.ID) *MTLTextureViewDescriptor {
@@ -88,4 +88,3 @@ func (o *MTLTextureViewDescriptor) Swizzle() MTLTextureSwizzleChannels {
 func (o *MTLTextureViewDescriptor) SetSwizzle(swizzle MTLTextureSwizzleChannels) {
 	o.Ptr().Send(_mTLTextureViewDescriptorSelSetSwizzle, swizzle)
 }
-

@@ -18,16 +18,16 @@ type MTRClusterLaundryWasherMode struct {
 }
 
 var (
-	_clsMTRClusterLaundryWasherMode = _objcClass("MTRClusterLaundryWasherMode")
+	_clsMTRClusterLaundryWasherMode                                                                    = _objcClass("MTRClusterLaundryWasherMode")
 	_mTRClusterLaundryWasherModeSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterLaundryWasherModeSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterLaundryWasherModeSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterLaundryWasherModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterLaundryWasherModeSelReadAttributeSupportedModesWithParams                               = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeCurrentModeWithParams                                  = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeGeneratedCommandListWithParams                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeAcceptedCommandListWithParams                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeAttributeListWithParams                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeFeatureMapWithParams                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterLaundryWasherModeSelReadAttributeClusterRevisionWithParams                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterLaundryWasherModeSelInitWithDeviceEndpointIDQueue                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterLaundryWasherModeFromID(id objc.ID) *MTRClusterLaundryWasherMode {
@@ -92,7 +92,8 @@ func (o *MTRClusterLaundryWasherMode) ReadAttributeClusterRevisionWithParams(par
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterLaundryWasherMode) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLaundryWasherMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterLaundryWasherModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterLaundryWasherModeFromID(_ret)
 }
-

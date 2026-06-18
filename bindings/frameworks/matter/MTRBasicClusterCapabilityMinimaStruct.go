@@ -25,4 +25,3 @@ func MTRBasicClusterCapabilityMinimaStructFromID(id objc.ID) *MTRBasicClusterCap
 	purego.Track(o)
 	return o
 }
-

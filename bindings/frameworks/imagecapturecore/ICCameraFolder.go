@@ -16,7 +16,7 @@ type ICCameraFolder struct {
 }
 
 var (
-	_clsICCameraFolder = _objcClass("ICCameraFolder")
+	_clsICCameraFolder         = _objcClass("ICCameraFolder")
 	_iCCameraFolderSelContents = objc.RegisterName("contents")
 )
 
@@ -32,7 +32,8 @@ func ICCameraFolderFromID(id objc.ID) *ICCameraFolder {
 
 func (o *ICCameraFolder) Contents() *foundation.NSArray[*ICCameraItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFolderSelContents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICCameraItem](_ret)
 }
-

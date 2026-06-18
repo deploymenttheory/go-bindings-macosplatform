@@ -16,10 +16,10 @@ type HKLensSpecification struct {
 }
 
 var (
-	_clsHKLensSpecification = _objcClass("HKLensSpecification")
-	_hKLensSpecificationSelSphere = objc.RegisterName("sphere")
+	_clsHKLensSpecification         = _objcClass("HKLensSpecification")
+	_hKLensSpecificationSelSphere   = objc.RegisterName("sphere")
 	_hKLensSpecificationSelCylinder = objc.RegisterName("cylinder")
-	_hKLensSpecificationSelAxis = objc.RegisterName("axis")
+	_hKLensSpecificationSelAxis     = objc.RegisterName("axis")
 	_hKLensSpecificationSelAddPower = objc.RegisterName("addPower")
 )
 
@@ -36,28 +36,35 @@ func HKLensSpecificationFromID(id objc.ID) *HKLensSpecification {
 // @property      sphere @abstract      The lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
 func (o *HKLensSpecification) Sphere() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLensSpecificationSelSphere)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      cylinder @abstract      The lens power required to correct astigmatism. Can be positive or negative.
 func (o *HKLensSpecification) Cylinder() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLensSpecificationSelCylinder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      axis @abstract      The angle along which cylindrical power should be positioned to correct astigmatism
 func (o *HKLensSpecification) Axis() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLensSpecificationSelAxis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      addPower @abstract      The power adjustment applied to a multifocal lens to correct presbyopia
 func (o *HKLensSpecification) AddPower() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKLensSpecificationSelAddPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
-

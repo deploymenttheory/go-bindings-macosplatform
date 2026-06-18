@@ -16,15 +16,15 @@ type MPSNDArrayAffineQuantizationDescriptor struct {
 }
 
 var (
-	_clsMPSNDArrayAffineQuantizationDescriptor = _objcClass("MPSNDArrayAffineQuantizationDescriptor")
-	_mPSNDArrayAffineQuantizationDescriptorSelInit = objc.RegisterName("init")
+	_clsMPSNDArrayAffineQuantizationDescriptor                                        = _objcClass("MPSNDArrayAffineQuantizationDescriptor")
+	_mPSNDArrayAffineQuantizationDescriptorSelInit                                    = objc.RegisterName("init")
 	_mPSNDArrayAffineQuantizationDescriptorSelInitWithDataTypeHasZeroPointHasMinValue = objc.RegisterName("initWithDataType:hasZeroPoint:hasMinValue:")
-	_mPSNDArrayAffineQuantizationDescriptorSelHasZeroPoint = objc.RegisterName("hasZeroPoint")
-	_mPSNDArrayAffineQuantizationDescriptorSelSetHasZeroPoint = objc.RegisterName("setHasZeroPoint:")
-	_mPSNDArrayAffineQuantizationDescriptorSelHasMinValue = objc.RegisterName("hasMinValue")
-	_mPSNDArrayAffineQuantizationDescriptorSelSetHasMinValue = objc.RegisterName("setHasMinValue:")
-	_mPSNDArrayAffineQuantizationDescriptorSelImplicitZeroPoint = objc.RegisterName("implicitZeroPoint")
-	_mPSNDArrayAffineQuantizationDescriptorSelSetImplicitZeroPoint = objc.RegisterName("setImplicitZeroPoint:")
+	_mPSNDArrayAffineQuantizationDescriptorSelHasZeroPoint                            = objc.RegisterName("hasZeroPoint")
+	_mPSNDArrayAffineQuantizationDescriptorSelSetHasZeroPoint                         = objc.RegisterName("setHasZeroPoint:")
+	_mPSNDArrayAffineQuantizationDescriptorSelHasMinValue                             = objc.RegisterName("hasMinValue")
+	_mPSNDArrayAffineQuantizationDescriptorSelSetHasMinValue                          = objc.RegisterName("setHasMinValue:")
+	_mPSNDArrayAffineQuantizationDescriptorSelImplicitZeroPoint                       = objc.RegisterName("implicitZeroPoint")
+	_mPSNDArrayAffineQuantizationDescriptorSelSetImplicitZeroPoint                    = objc.RegisterName("setImplicitZeroPoint:")
 )
 
 func MPSNDArrayAffineQuantizationDescriptorFromID(id objc.ID) *MPSNDArrayAffineQuantizationDescriptor {
@@ -39,14 +39,18 @@ func MPSNDArrayAffineQuantizationDescriptorFromID(id objc.ID) *MPSNDArrayAffineQ
 
 func (o *MPSNDArrayAffineQuantizationDescriptor) Init() *MPSNDArrayAffineQuantizationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayAffineQuantizationDescriptorSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayAffineQuantizationDescriptorFromID(_ret)
 }
 
 // @abstract   Initializes an affine quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      hasZeroPoint        A flag indicating that a zero-point input is expected. @param      hasMinValue        A flag indicating that a minimum value input is expected. @result     A new quantization descriptor.
 func (o *MPSNDArrayAffineQuantizationDescriptor) InitWithDataTypeHasZeroPointHasMinValue(quantizationDataType mpscore.MPSDataType, hasZeroPoint bool, hasMinValue bool) *MPSNDArrayAffineQuantizationDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayAffineQuantizationDescriptorSelInitWithDataTypeHasZeroPointHasMinValue, quantizationDataType, hasZeroPoint, hasMinValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayAffineQuantizationDescriptorFromID(_ret)
 }
 
@@ -79,4 +83,3 @@ func (o *MPSNDArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
 func (o *MPSNDArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
 	o.Ptr().Send(_mPSNDArrayAffineQuantizationDescriptorSelSetImplicitZeroPoint, implicitZeroPoint)
 }
-

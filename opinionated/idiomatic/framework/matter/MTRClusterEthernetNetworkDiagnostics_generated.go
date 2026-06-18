@@ -17,7 +17,9 @@ type MTRClusterEthernetNetworkDiagnostics struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterEthernetNetworkDiagnostics].
-func (x *MTRClusterEthernetNetworkDiagnostics) Unwrap() *raw.MTRClusterEthernetNetworkDiagnostics { return x.inner }
+func (x *MTRClusterEthernetNetworkDiagnostics) Unwrap() *raw.MTRClusterEthernetNetworkDiagnostics {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -135,9 +137,13 @@ func (x *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithExpectedValuesExpe
 	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterEthernetNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterEthernetNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterEthernetNetworkDiagnostics) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterEthernetNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterEthernetNetworkDiagnosticsable is the interface implemented by [MTRClusterEthernetNetworkDiagnostics], for mocking and DI.
 type MTRClusterEthernetNetworkDiagnosticsable interface {
@@ -163,4 +169,3 @@ type MTRClusterEthernetNetworkDiagnosticsable interface {
 }
 
 var _ MTRClusterEthernetNetworkDiagnosticsable = (*MTRClusterEthernetNetworkDiagnostics)(nil)
-

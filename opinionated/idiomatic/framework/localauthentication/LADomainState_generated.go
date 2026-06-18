@@ -68,4 +68,3 @@ type DomainStateable interface {
 }
 
 var _ DomainStateable = (*DomainState)(nil)
-

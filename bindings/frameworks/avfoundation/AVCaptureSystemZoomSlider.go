@@ -15,8 +15,8 @@ type AVCaptureSystemZoomSlider struct {
 }
 
 var (
-	_clsAVCaptureSystemZoomSlider = _objcClass("AVCaptureSystemZoomSlider")
-	_aVCaptureSystemZoomSliderSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsAVCaptureSystemZoomSlider                     = _objcClass("AVCaptureSystemZoomSlider")
+	_aVCaptureSystemZoomSliderSelInitWithDevice       = objc.RegisterName("initWithDevice:")
 	_aVCaptureSystemZoomSliderSelInitWithDeviceAction = objc.RegisterName("initWithDevice:action:")
 )
 
@@ -33,7 +33,9 @@ func AVCaptureSystemZoomSliderFromID(id objc.ID) *AVCaptureSystemZoomSlider {
 // @method initWithDevice: @abstract Initializes an `AVCaptureSystemZoomSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemZoomSlider` may only be initialized with `AVCaptureDevice` instances that support setting `videoZoomFactor`, otherwise an `NSInvalidArgumentException` is thrown.
 func (o *AVCaptureSystemZoomSlider) InitWithDevice(device *AVCaptureDevice) *AVCaptureSystemZoomSlider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemZoomSliderSelInitWithDevice, device.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSystemZoomSliderFromID(_ret)
 }
 
@@ -47,7 +49,8 @@ func (o *AVCaptureSystemZoomSlider) InitWithDeviceAction(device *AVCaptureDevice
 		defer __block_action.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureSystemZoomSliderSelInitWithDeviceAction, device.Ptr(), __block_action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureSystemZoomSliderFromID(_ret)
 }
-

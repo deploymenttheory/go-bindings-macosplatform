@@ -16,9 +16,9 @@ type PHASECardioidDirectivityModelParameters struct {
 }
 
 var (
-	_clsPHASECardioidDirectivityModelParameters = _objcClass("PHASECardioidDirectivityModelParameters")
+	_clsPHASECardioidDirectivityModelParameters                          = _objcClass("PHASECardioidDirectivityModelParameters")
 	_pHASECardioidDirectivityModelParametersSelInitWithSubbandParameters = objc.RegisterName("initWithSubbandParameters:")
-	_pHASECardioidDirectivityModelParametersSelSubbandParameters = objc.RegisterName("subbandParameters")
+	_pHASECardioidDirectivityModelParametersSelSubbandParameters         = objc.RegisterName("subbandParameters")
 )
 
 func PHASECardioidDirectivityModelParametersFromID(id objc.ID) *PHASECardioidDirectivityModelParameters {
@@ -33,13 +33,16 @@ func PHASECardioidDirectivityModelParametersFromID(id objc.ID) *PHASECardioidDir
 
 func (o *PHASECardioidDirectivityModelParameters) InitWithSubbandParameters(subbandParameters *foundation.NSArray[*PHASECardioidDirectivityModelSubbandParameters]) *PHASECardioidDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASECardioidDirectivityModelParametersSelInitWithSubbandParameters, subbandParameters.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASECardioidDirectivityModelParametersFromID(_ret)
 }
 
 func (o *PHASECardioidDirectivityModelParameters) SubbandParameters() *foundation.NSArray[*PHASECardioidDirectivityModelSubbandParameters] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASECardioidDirectivityModelParametersSelSubbandParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASECardioidDirectivityModelSubbandParameters](_ret)
 }
-

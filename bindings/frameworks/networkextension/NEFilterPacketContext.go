@@ -26,4 +26,3 @@ func NEFilterPacketContextFromID(id objc.ID) *NEFilterPacketContext {
 	purego.Track(o)
 	return o
 }
-

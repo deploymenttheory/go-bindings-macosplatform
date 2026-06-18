@@ -356,4 +356,3 @@ type ItemAttributesable interface {
 }
 
 var _ ItemAttributesable = (*ItemAttributes)(nil)
-

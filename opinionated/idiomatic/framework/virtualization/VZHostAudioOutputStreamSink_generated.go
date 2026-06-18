@@ -35,7 +35,9 @@ func NewHostAudioOutputStreamSink() *HostAudioOutputStreamSink {
 	return &HostAudioOutputStreamSink{inner: raw.VZHostAudioOutputStreamSinkFromID(_id)}
 }
 
-func (x *HostAudioOutputStreamSink) asAudioOutputStreamSink() *raw.VZAudioOutputStreamSink { return &x.inner.VZAudioOutputStreamSink }
+func (x *HostAudioOutputStreamSink) asAudioOutputStreamSink() *raw.VZAudioOutputStreamSink {
+	return &x.inner.VZAudioOutputStreamSink
+}
 
 // HostAudioOutputStreamSinkable is the interface implemented by [HostAudioOutputStreamSink], for mocking and DI.
 type HostAudioOutputStreamSinkable interface {
@@ -43,4 +45,3 @@ type HostAudioOutputStreamSinkable interface {
 }
 
 var _ HostAudioOutputStreamSinkable = (*HostAudioOutputStreamSink)(nil)
-

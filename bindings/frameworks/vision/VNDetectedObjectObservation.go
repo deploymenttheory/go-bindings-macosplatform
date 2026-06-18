@@ -16,11 +16,11 @@ type VNDetectedObjectObservation struct {
 }
 
 var (
-	_clsVNDetectedObjectObservation = _objcClass("VNDetectedObjectObservation")
-	_vNDetectedObjectObservationSelObservationWithBoundingBox = objc.RegisterName("observationWithBoundingBox:")
+	_clsVNDetectedObjectObservation                                          = _objcClass("VNDetectedObjectObservation")
+	_vNDetectedObjectObservationSelObservationWithBoundingBox                = objc.RegisterName("observationWithBoundingBox:")
 	_vNDetectedObjectObservationSelObservationWithRequestRevisionBoundingBox = objc.RegisterName("observationWithRequestRevision:boundingBox:")
-	_vNDetectedObjectObservationSelBoundingBox = objc.RegisterName("boundingBox")
-	_vNDetectedObjectObservationSelGlobalSegmentationMask = objc.RegisterName("globalSegmentationMask")
+	_vNDetectedObjectObservationSelBoundingBox                               = objc.RegisterName("boundingBox")
+	_vNDetectedObjectObservationSelGlobalSegmentationMask                    = objc.RegisterName("globalSegmentationMask")
 )
 
 func VNDetectedObjectObservationFromID(id objc.ID) *VNDetectedObjectObservation {
@@ -36,13 +36,17 @@ func VNDetectedObjectObservationFromID(id objc.ID) *VNDetectedObjectObservation 
 // @brief create a new VNDetectedObjectObservation with a normalized bounding box and a confidence of 1.0.
 func VNDetectedObjectObservationObservationWithBoundingBox(boundingBox corefoundation.CGRect) *VNDetectedObjectObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectedObjectObservation), _vNDetectedObjectObservationSelObservationWithBoundingBox, boundingBox)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectedObjectObservationFromID(_ret)
 }
 
 func VNDetectedObjectObservationObservationWithRequestRevisionBoundingBox(requestRevision uint, boundingBox corefoundation.CGRect) *VNDetectedObjectObservation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNDetectedObjectObservation), _vNDetectedObjectObservationSelObservationWithRequestRevisionBoundingBox, requestRevision, boundingBox)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNDetectedObjectObservationFromID(_ret)
 }
 
@@ -55,7 +59,8 @@ func (o *VNDetectedObjectObservation) BoundingBox() corefoundation.CGRect {
 // @brief The resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
 func (o *VNDetectedObjectObservation) GlobalSegmentationMask() *VNPixelBufferObservation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNDetectedObjectObservationSelGlobalSegmentationMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNPixelBufferObservationFromID(_ret)
 }
-

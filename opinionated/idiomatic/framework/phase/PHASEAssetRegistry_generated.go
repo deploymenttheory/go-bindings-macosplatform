@@ -117,4 +117,3 @@ type AssetRegistryable interface {
 }
 
 var _ AssetRegistryable = (*AssetRegistry)(nil)
-

@@ -19,11 +19,11 @@ type GKGraphNode2D struct {
 }
 
 var (
-	_clsGKGraphNode2D = _objcClass("GKGraphNode2D")
+	_clsGKGraphNode2D              = _objcClass("GKGraphNode2D")
 	_gKGraphNode2DSelNodeWithPoint = objc.RegisterName("nodeWithPoint:")
 	_gKGraphNode2DSelInitWithPoint = objc.RegisterName("initWithPoint:")
-	_gKGraphNode2DSelPosition = objc.RegisterName("position")
-	_gKGraphNode2DSelSetPosition = objc.RegisterName("setPosition:")
+	_gKGraphNode2DSelPosition      = objc.RegisterName("position")
+	_gKGraphNode2DSelSetPosition   = objc.RegisterName("setPosition:")
 )
 
 func GKGraphNode2DFromID(id objc.ID) *GKGraphNode2D {
@@ -38,13 +38,17 @@ func GKGraphNode2DFromID(id objc.ID) *GKGraphNode2D {
 
 func GKGraphNode2DNodeWithPoint(point unsafe.Pointer) *GKGraphNode2D {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGraphNode2D), _gKGraphNode2DSelNodeWithPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGraphNode2DFromID(_ret)
 }
 
 func (o *GKGraphNode2D) InitWithPoint(point unsafe.Pointer) *GKGraphNode2D {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphNode2DSelInitWithPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGraphNode2DFromID(_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *GKGraphNode2D) Position() unsafe.Pointer {
 func (o *GKGraphNode2D) SetPosition(position unsafe.Pointer) {
 	o.Ptr().Send(_gKGraphNode2DSelSetPosition, position)
 }
-

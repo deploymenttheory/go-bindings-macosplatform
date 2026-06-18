@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"fmt"
 	"maps"
-	"os"
 	"path/filepath"
 	"strings"
 
@@ -195,10 +194,7 @@ func emitGenericFunctionWrappers(
 	buf.Write(body.Bytes())
 
 	fname := pkgName + "_cfunctions_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", fname, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
 }
 
 // emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
@@ -308,10 +304,7 @@ func emitClassMethodFunctions(
 	buf.Write(body.Bytes())
 
 	fname := pkgName + "_classmethods_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", fname, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
 }
 
 // classRawMethodNames computes, per class-method selector, the exact Go
@@ -545,10 +538,7 @@ func emitCFFunctionWrappers(
 	buf.Write(body.Bytes())
 
 	fname := pkgName + "_cffunctions_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", fname, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
 }
 
 // cFunctionNameFor recovers the original C symbol for an exported Go function

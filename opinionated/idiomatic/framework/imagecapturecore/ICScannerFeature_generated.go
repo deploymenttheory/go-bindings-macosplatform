@@ -80,4 +80,3 @@ type ScannerFeatureable interface {
 }
 
 var _ ScannerFeatureable = (*ScannerFeature)(nil)
-

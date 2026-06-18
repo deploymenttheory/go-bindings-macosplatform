@@ -16,16 +16,16 @@ type NLTokenizer struct {
 }
 
 var (
-	_clsNLTokenizer = _objcClass("NLTokenizer")
-	_nLTokenizerSelInitWithUnit = objc.RegisterName("initWithUnit:")
-	_nLTokenizerSelSetLanguage = objc.RegisterName("setLanguage:")
-	_nLTokenizerSelTokenRangeAtIndex = objc.RegisterName("tokenRangeAtIndex:")
-	_nLTokenizerSelTokenRangeForRange = objc.RegisterName("tokenRangeForRange:")
-	_nLTokenizerSelTokensForRange = objc.RegisterName("tokensForRange:")
+	_clsNLTokenizer                            = _objcClass("NLTokenizer")
+	_nLTokenizerSelInitWithUnit                = objc.RegisterName("initWithUnit:")
+	_nLTokenizerSelSetLanguage                 = objc.RegisterName("setLanguage:")
+	_nLTokenizerSelTokenRangeAtIndex           = objc.RegisterName("tokenRangeAtIndex:")
+	_nLTokenizerSelTokenRangeForRange          = objc.RegisterName("tokenRangeForRange:")
+	_nLTokenizerSelTokensForRange              = objc.RegisterName("tokensForRange:")
 	_nLTokenizerSelEnumerateTokensInRangeUsing = objc.RegisterName("enumerateTokensInRange:usingBlock:")
-	_nLTokenizerSelUnit = objc.RegisterName("unit")
-	_nLTokenizerSelString = objc.RegisterName("string")
-	_nLTokenizerSelSetString = objc.RegisterName("setString:")
+	_nLTokenizerSelUnit                        = objc.RegisterName("unit")
+	_nLTokenizerSelString                      = objc.RegisterName("string")
+	_nLTokenizerSelSetString                   = objc.RegisterName("setString:")
 )
 
 func NLTokenizerFromID(id objc.ID) *NLTokenizer {
@@ -40,7 +40,9 @@ func NLTokenizerFromID(id objc.ID) *NLTokenizer {
 
 func (o *NLTokenizer) InitWithUnit(unit NLTokenUnit) *NLTokenizer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTokenizerSelInitWithUnit, unit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLTokenizerFromID(_ret)
 }
 
@@ -74,11 +76,12 @@ func (o *NLTokenizer) Unit() NLTokenUnit {
 
 func (o *NLTokenizer) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLTokenizerSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NLTokenizer) SetString(string_ *foundation.NSString) {
 	o.Ptr().Send(_nLTokenizerSelSetString, string_.Ptr())
 }
-

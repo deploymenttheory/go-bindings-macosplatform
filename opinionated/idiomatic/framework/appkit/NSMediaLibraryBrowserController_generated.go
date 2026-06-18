@@ -105,4 +105,3 @@ type MediaLibraryBrowserControllerable interface {
 }
 
 var _ MediaLibraryBrowserControllerable = (*MediaLibraryBrowserController)(nil)
-

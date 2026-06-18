@@ -17,25 +17,25 @@ type NSCollectionViewLayoutAttributes struct {
 }
 
 var (
-	_clsNSCollectionViewLayoutAttributes = _objcClass("NSCollectionViewLayoutAttributes")
-	_nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath = objc.RegisterName("layoutAttributesForItemWithIndexPath:")
-	_nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath = objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:")
+	_clsNSCollectionViewLayoutAttributes                                                        = _objcClass("NSCollectionViewLayoutAttributes")
+	_nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath                    = objc.RegisterName("layoutAttributesForItemWithIndexPath:")
+	_nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath          = objc.RegisterName("layoutAttributesForInterItemGapBeforeIndexPath:")
 	_nSCollectionViewLayoutAttributesSelLayoutAttributesForSupplementaryViewOfKindWithIndexPath = objc.RegisterName("layoutAttributesForSupplementaryViewOfKind:withIndexPath:")
-	_nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath = objc.RegisterName("layoutAttributesForDecorationViewOfKind:withIndexPath:")
-	_nSCollectionViewLayoutAttributesSelFrame = objc.RegisterName("frame")
-	_nSCollectionViewLayoutAttributesSelSetFrame = objc.RegisterName("setFrame:")
-	_nSCollectionViewLayoutAttributesSelSize = objc.RegisterName("size")
-	_nSCollectionViewLayoutAttributesSelSetSize = objc.RegisterName("setSize:")
-	_nSCollectionViewLayoutAttributesSelAlpha = objc.RegisterName("alpha")
-	_nSCollectionViewLayoutAttributesSelSetAlpha = objc.RegisterName("setAlpha:")
-	_nSCollectionViewLayoutAttributesSelZIndex = objc.RegisterName("zIndex")
-	_nSCollectionViewLayoutAttributesSelSetZIndex = objc.RegisterName("setZIndex:")
-	_nSCollectionViewLayoutAttributesSelIsHidden = objc.RegisterName("isHidden")
-	_nSCollectionViewLayoutAttributesSelSetHidden = objc.RegisterName("setHidden:")
-	_nSCollectionViewLayoutAttributesSelIndexPath = objc.RegisterName("indexPath")
-	_nSCollectionViewLayoutAttributesSelSetIndexPath = objc.RegisterName("setIndexPath:")
-	_nSCollectionViewLayoutAttributesSelRepresentedElementCategory = objc.RegisterName("representedElementCategory")
-	_nSCollectionViewLayoutAttributesSelRepresentedElementKind = objc.RegisterName("representedElementKind")
+	_nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath    = objc.RegisterName("layoutAttributesForDecorationViewOfKind:withIndexPath:")
+	_nSCollectionViewLayoutAttributesSelFrame                                                   = objc.RegisterName("frame")
+	_nSCollectionViewLayoutAttributesSelSetFrame                                                = objc.RegisterName("setFrame:")
+	_nSCollectionViewLayoutAttributesSelSize                                                    = objc.RegisterName("size")
+	_nSCollectionViewLayoutAttributesSelSetSize                                                 = objc.RegisterName("setSize:")
+	_nSCollectionViewLayoutAttributesSelAlpha                                                   = objc.RegisterName("alpha")
+	_nSCollectionViewLayoutAttributesSelSetAlpha                                                = objc.RegisterName("setAlpha:")
+	_nSCollectionViewLayoutAttributesSelZIndex                                                  = objc.RegisterName("zIndex")
+	_nSCollectionViewLayoutAttributesSelSetZIndex                                               = objc.RegisterName("setZIndex:")
+	_nSCollectionViewLayoutAttributesSelIsHidden                                                = objc.RegisterName("isHidden")
+	_nSCollectionViewLayoutAttributesSelSetHidden                                               = objc.RegisterName("setHidden:")
+	_nSCollectionViewLayoutAttributesSelIndexPath                                               = objc.RegisterName("indexPath")
+	_nSCollectionViewLayoutAttributesSelSetIndexPath                                            = objc.RegisterName("setIndexPath:")
+	_nSCollectionViewLayoutAttributesSelRepresentedElementCategory                              = objc.RegisterName("representedElementCategory")
+	_nSCollectionViewLayoutAttributesSelRepresentedElementKind                                  = objc.RegisterName("representedElementKind")
 )
 
 func NSCollectionViewLayoutAttributesFromID(id objc.ID) *NSCollectionViewLayoutAttributes {
@@ -50,25 +50,33 @@ func NSCollectionViewLayoutAttributesFromID(id objc.ID) *NSCollectionViewLayoutA
 
 func NSCollectionViewLayoutAttributesLayoutAttributesForItemWithIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForItemWithIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func NSCollectionViewLayoutAttributesLayoutAttributesForInterItemGapBeforeIndexPath(indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForInterItemGapBeforeIndexPath, indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func NSCollectionViewLayoutAttributesLayoutAttributesForSupplementaryViewOfKindWithIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForSupplementaryViewOfKindWithIndexPath, elementKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
 func NSCollectionViewLayoutAttributesLayoutAttributesForDecorationViewOfKindWithIndexPath(decorationViewKind *foundation.NSString, indexPath *foundation.NSIndexPath) *NSCollectionViewLayoutAttributes {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionViewLayoutAttributes), _nSCollectionViewLayoutAttributesSelLayoutAttributesForDecorationViewOfKindWithIndexPath, decorationViewKind.Ptr(), indexPath.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutAttributesFromID(_ret)
 }
 
@@ -119,7 +127,9 @@ func (o *NSCollectionViewLayoutAttributes) SetHidden(hidden bool) {
 
 func (o *NSCollectionViewLayoutAttributes) IndexPath() *foundation.NSIndexPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelIndexPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexPathFromID(_ret)
 }
 
@@ -134,7 +144,8 @@ func (o *NSCollectionViewLayoutAttributes) RepresentedElementCategory() NSCollec
 
 func (o *NSCollectionViewLayoutAttributes) RepresentedElementKind() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewLayoutAttributesSelRepresentedElementKind)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -18,18 +18,18 @@ type CLUpdate struct {
 }
 
 var (
-	_clsCLUpdate = _objcClass("CLUpdate")
-	_cLUpdateSelAuthorizationDenied = objc.RegisterName("authorizationDenied")
-	_cLUpdateSelAuthorizationDeniedGlobally = objc.RegisterName("authorizationDeniedGlobally")
-	_cLUpdateSelAuthorizationRestricted = objc.RegisterName("authorizationRestricted")
-	_cLUpdateSelIsStationary = objc.RegisterName("isStationary")
-	_cLUpdateSelStationary = objc.RegisterName("stationary")
-	_cLUpdateSelInsufficientlyInUse = objc.RegisterName("insufficientlyInUse")
-	_cLUpdateSelLocationUnavailable = objc.RegisterName("locationUnavailable")
-	_cLUpdateSelAccuracyLimited = objc.RegisterName("accuracyLimited")
-	_cLUpdateSelServiceSessionRequired = objc.RegisterName("serviceSessionRequired")
+	_clsCLUpdate                               = _objcClass("CLUpdate")
+	_cLUpdateSelAuthorizationDenied            = objc.RegisterName("authorizationDenied")
+	_cLUpdateSelAuthorizationDeniedGlobally    = objc.RegisterName("authorizationDeniedGlobally")
+	_cLUpdateSelAuthorizationRestricted        = objc.RegisterName("authorizationRestricted")
+	_cLUpdateSelIsStationary                   = objc.RegisterName("isStationary")
+	_cLUpdateSelStationary                     = objc.RegisterName("stationary")
+	_cLUpdateSelInsufficientlyInUse            = objc.RegisterName("insufficientlyInUse")
+	_cLUpdateSelLocationUnavailable            = objc.RegisterName("locationUnavailable")
+	_cLUpdateSelAccuracyLimited                = objc.RegisterName("accuracyLimited")
+	_cLUpdateSelServiceSessionRequired         = objc.RegisterName("serviceSessionRequired")
 	_cLUpdateSelAuthorizationRequestInProgress = objc.RegisterName("authorizationRequestInProgress")
-	_cLUpdateSelLocation = objc.RegisterName("location")
+	_cLUpdateSelLocation                       = objc.RegisterName("location")
 )
 
 func CLUpdateFromID(id objc.ID) *CLUpdate {
@@ -97,4 +97,3 @@ func (o *CLUpdate) Location() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cLUpdateSelLocation)
 	return _ret
 }
-

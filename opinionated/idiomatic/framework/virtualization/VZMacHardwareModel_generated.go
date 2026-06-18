@@ -55,4 +55,3 @@ type MacHardwareModelable interface {
 }
 
 var _ MacHardwareModelable = (*MacHardwareModel)(nil)
-

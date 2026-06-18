@@ -16,14 +16,14 @@ type SKPhysicsJointSliding struct {
 }
 
 var (
-	_clsSKPhysicsJointSliding = _objcClass("SKPhysicsJointSliding")
+	_clsSKPhysicsJointSliding                              = _objcClass("SKPhysicsJointSliding")
 	_sKPhysicsJointSlidingSelJointWithBodyABodyBAnchorAxis = objc.RegisterName("jointWithBodyA:bodyB:anchor:axis:")
-	_sKPhysicsJointSlidingSelShouldEnableLimits = objc.RegisterName("shouldEnableLimits")
-	_sKPhysicsJointSlidingSelSetShouldEnableLimits = objc.RegisterName("setShouldEnableLimits:")
-	_sKPhysicsJointSlidingSelLowerDistanceLimit = objc.RegisterName("lowerDistanceLimit")
-	_sKPhysicsJointSlidingSelSetLowerDistanceLimit = objc.RegisterName("setLowerDistanceLimit:")
-	_sKPhysicsJointSlidingSelUpperDistanceLimit = objc.RegisterName("upperDistanceLimit")
-	_sKPhysicsJointSlidingSelSetUpperDistanceLimit = objc.RegisterName("setUpperDistanceLimit:")
+	_sKPhysicsJointSlidingSelShouldEnableLimits            = objc.RegisterName("shouldEnableLimits")
+	_sKPhysicsJointSlidingSelSetShouldEnableLimits         = objc.RegisterName("setShouldEnableLimits:")
+	_sKPhysicsJointSlidingSelLowerDistanceLimit            = objc.RegisterName("lowerDistanceLimit")
+	_sKPhysicsJointSlidingSelSetLowerDistanceLimit         = objc.RegisterName("setLowerDistanceLimit:")
+	_sKPhysicsJointSlidingSelUpperDistanceLimit            = objc.RegisterName("upperDistanceLimit")
+	_sKPhysicsJointSlidingSelSetUpperDistanceLimit         = objc.RegisterName("setUpperDistanceLimit:")
 )
 
 func SKPhysicsJointSlidingFromID(id objc.ID) *SKPhysicsJointSliding {
@@ -38,7 +38,9 @@ func SKPhysicsJointSlidingFromID(id objc.ID) *SKPhysicsJointSliding {
 
 func SKPhysicsJointSlidingJointWithBodyABodyBAnchorAxis(bodyA *SKPhysicsBody, bodyB *SKPhysicsBody, anchor corefoundation.CGPoint, axis corefoundation.CGVector) *SKPhysicsJointSliding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKPhysicsJointSliding), _sKPhysicsJointSlidingSelJointWithBodyABodyBAnchorAxis, bodyA.Ptr(), bodyB.Ptr(), anchor, axis)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsJointSlidingFromID(_ret)
 }
 
@@ -68,4 +70,3 @@ func (o *SKPhysicsJointSliding) UpperDistanceLimit() float64 {
 func (o *SKPhysicsJointSliding) SetUpperDistanceLimit(upperDistanceLimit float64) {
 	o.Ptr().Send(_sKPhysicsJointSlidingSelSetUpperDistanceLimit, upperDistanceLimit)
 }
-

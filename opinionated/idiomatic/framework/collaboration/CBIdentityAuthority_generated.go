@@ -59,4 +59,3 @@ type IdentityAuthorityable interface {
 }
 
 var _ IdentityAuthorityable = (*IdentityAuthority)(nil)
-

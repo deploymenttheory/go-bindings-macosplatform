@@ -41,4 +41,3 @@ type FinderSyncable interface {
 }
 
 var _ FinderSyncable = (*FinderSync)(nil)
-

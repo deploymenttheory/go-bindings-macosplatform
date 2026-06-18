@@ -16,7 +16,7 @@ type WebUndefined struct {
 }
 
 var (
-	_clsWebUndefined = _objcClass("WebUndefined")
+	_clsWebUndefined          = _objcClass("WebUndefined")
 	_webUndefinedSelUndefined = objc.RegisterName("undefined")
 )
 
@@ -33,7 +33,8 @@ func WebUndefinedFromID(id objc.ID) *WebUndefined {
 // @method undefined @result The WebUndefined shared instance.
 func WebUndefinedUndefined() *WebUndefined {
 	_ret := objc.Send[objc.ID](objc.ID(_clsWebUndefined), _webUndefinedSelUndefined)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebUndefinedFromID(_ret)
 }
-

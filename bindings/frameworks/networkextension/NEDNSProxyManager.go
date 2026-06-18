@@ -18,17 +18,17 @@ type NEDNSProxyManager struct {
 }
 
 var (
-	_clsNEDNSProxyManager = _objcClass("NEDNSProxyManager")
-	_nEDNSProxyManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_nEDNSProxyManagerSelLoadFromPreferencesWithCompletionHandler = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
+	_clsNEDNSProxyManager                                           = _objcClass("NEDNSProxyManager")
+	_nEDNSProxyManagerSelSharedManager                              = objc.RegisterName("sharedManager")
+	_nEDNSProxyManagerSelLoadFromPreferencesWithCompletionHandler   = objc.RegisterName("loadFromPreferencesWithCompletionHandler:")
 	_nEDNSProxyManagerSelRemoveFromPreferencesWithCompletionHandler = objc.RegisterName("removeFromPreferencesWithCompletionHandler:")
-	_nEDNSProxyManagerSelSaveToPreferencesWithCompletionHandler = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
-	_nEDNSProxyManagerSelLocalizedDescription = objc.RegisterName("localizedDescription")
-	_nEDNSProxyManagerSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
-	_nEDNSProxyManagerSelProviderProtocol = objc.RegisterName("providerProtocol")
-	_nEDNSProxyManagerSelSetProviderProtocol = objc.RegisterName("setProviderProtocol:")
-	_nEDNSProxyManagerSelIsEnabled = objc.RegisterName("isEnabled")
-	_nEDNSProxyManagerSelSetEnabled = objc.RegisterName("setEnabled:")
+	_nEDNSProxyManagerSelSaveToPreferencesWithCompletionHandler     = objc.RegisterName("saveToPreferencesWithCompletionHandler:")
+	_nEDNSProxyManagerSelLocalizedDescription                       = objc.RegisterName("localizedDescription")
+	_nEDNSProxyManagerSelSetLocalizedDescription                    = objc.RegisterName("setLocalizedDescription:")
+	_nEDNSProxyManagerSelProviderProtocol                           = objc.RegisterName("providerProtocol")
+	_nEDNSProxyManagerSelSetProviderProtocol                        = objc.RegisterName("setProviderProtocol:")
+	_nEDNSProxyManagerSelIsEnabled                                  = objc.RegisterName("isEnabled")
+	_nEDNSProxyManagerSelSetEnabled                                 = objc.RegisterName("setEnabled:")
 )
 
 func NEDNSProxyManagerFromID(id objc.ID) *NEDNSProxyManager {
@@ -44,7 +44,9 @@ func NEDNSProxyManagerFromID(id objc.ID) *NEDNSProxyManager {
 // @method sharedManager @return The singleton NEDNSProxyManager object for the calling process.
 func NEDNSProxyManagerSharedManager() *NEDNSProxyManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNEDNSProxyManager), _nEDNSProxyManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSProxyManagerFromID(_ret)
 }
 
@@ -87,7 +89,9 @@ func (o *NEDNSProxyManager) SaveToPreferencesWithCompletionHandler(completionHan
 // @property localizedDescription @discussion A string containing a description of the DNS proxy.
 func (o *NEDNSProxyManager) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSProxyManagerSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -98,7 +102,9 @@ func (o *NEDNSProxyManager) SetLocalizedDescription(localizedDescription *founda
 // @property providerProtocol @discussion An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
 func (o *NEDNSProxyManager) ProviderProtocol() *NEDNSProxyProviderProtocol {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSProxyManagerSelProviderProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEDNSProxyProviderProtocolFromID(_ret)
 }
 
@@ -115,4 +121,3 @@ func (o *NEDNSProxyManager) IsEnabled() bool {
 func (o *NEDNSProxyManager) SetEnabled(enabled bool) {
 	o.Ptr().Send(_nEDNSProxyManagerSelSetEnabled, enabled)
 }
-

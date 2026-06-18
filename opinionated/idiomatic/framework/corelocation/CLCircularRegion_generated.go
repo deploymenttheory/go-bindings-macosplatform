@@ -60,4 +60,3 @@ type CircularRegionable interface {
 }
 
 var _ CircularRegionable = (*CircularRegion)(nil)
-

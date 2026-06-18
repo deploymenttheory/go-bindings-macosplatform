@@ -778,4 +778,3 @@ func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, erro
 func IsVoIPAllowed() bool {
 	return raw.GKVoiceChatIsVoIPAllowed()
 }
-

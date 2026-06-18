@@ -16,15 +16,15 @@ type DOMStyleSheet struct {
 }
 
 var (
-	_clsDOMStyleSheet = _objcClass("DOMStyleSheet")
-	_dOMStyleSheetSelType = objc.RegisterName("type")
-	_dOMStyleSheetSelDisabled = objc.RegisterName("disabled")
-	_dOMStyleSheetSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMStyleSheetSelOwnerNode = objc.RegisterName("ownerNode")
+	_clsDOMStyleSheet                 = _objcClass("DOMStyleSheet")
+	_dOMStyleSheetSelType             = objc.RegisterName("type")
+	_dOMStyleSheetSelDisabled         = objc.RegisterName("disabled")
+	_dOMStyleSheetSelSetDisabled      = objc.RegisterName("setDisabled:")
+	_dOMStyleSheetSelOwnerNode        = objc.RegisterName("ownerNode")
 	_dOMStyleSheetSelParentStyleSheet = objc.RegisterName("parentStyleSheet")
-	_dOMStyleSheetSelHref = objc.RegisterName("href")
-	_dOMStyleSheetSelTitle = objc.RegisterName("title")
-	_dOMStyleSheetSelMedia = objc.RegisterName("media")
+	_dOMStyleSheetSelHref             = objc.RegisterName("href")
+	_dOMStyleSheetSelTitle            = objc.RegisterName("title")
+	_dOMStyleSheetSelMedia            = objc.RegisterName("media")
 )
 
 func DOMStyleSheetFromID(id objc.ID) *DOMStyleSheet {
@@ -39,7 +39,9 @@ func DOMStyleSheetFromID(id objc.ID) *DOMStyleSheet {
 
 func (o *DOMStyleSheet) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,31 +56,40 @@ func (o *DOMStyleSheet) SetDisabled(disabled bool) {
 
 func (o *DOMStyleSheet) OwnerNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelOwnerNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelParentStyleSheet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMStyleSheetFromID(_ret)
 }
 
 func (o *DOMStyleSheet) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMStyleSheet) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMStyleSheet) Media() *DOMMediaList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMStyleSheetSelMedia)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMMediaListFromID(_ret)
 }
-

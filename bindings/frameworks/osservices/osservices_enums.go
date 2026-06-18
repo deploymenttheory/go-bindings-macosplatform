@@ -11,15 +11,15 @@ import (
 type WSTypeID int64
 
 const (
-	EWSUnknownType WSTypeID = 0
-	EWSNullType WSTypeID = 1
-	EWSBooleanType WSTypeID = 2
-	EWSIntegerType WSTypeID = 3
-	EWSDoubleType WSTypeID = 4
-	EWSStringType WSTypeID = 5
-	EWSDateType WSTypeID = 6
-	EWSDataType WSTypeID = 7
-	EWSArrayType WSTypeID = 8
+	EWSUnknownType    WSTypeID = 0
+	EWSNullType       WSTypeID = 1
+	EWSBooleanType    WSTypeID = 2
+	EWSIntegerType    WSTypeID = 3
+	EWSDoubleType     WSTypeID = 4
+	EWSStringType     WSTypeID = 5
+	EWSDateType       WSTypeID = 6
+	EWSDataType       WSTypeID = 7
+	EWSArrayType      WSTypeID = 8
 	EWSDictionaryType WSTypeID = 9
 )
 
@@ -54,8 +54,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -74,13 +74,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -107,24 +107,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -165,9 +165,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -187,12 +187,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -219,14 +219,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -255,9 +255,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -276,36 +276,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -335,8 +349,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -356,62 +370,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -537,15 +551,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -583,7 +597,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -591,7 +607,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -609,8 +625,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -629,26 +645,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -670,27 +702,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -714,11 +746,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -743,22 +775,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -809,49 +841,63 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	HDActivity = 3
+	HDActivity   = 3
 	IdleActivity = 4
-	NetActivity = 2
-	OverallAct = 0
-	UsrActivity = 1
+	NetActivity  = 2
+	OverallAct   = 0
+	UsrActivity  = 1
 )
 
 const (
-	ErrWSInternalError = -65793
-	ErrWSParseError = -65795
-	ErrWSTimeoutError = -65796
+	ErrWSInternalError  = -65793
+	ErrWSParseError     = -65795
+	ErrWSTimeoutError   = -65796
 	ErrWSTransportError = -65794
 )
 
@@ -866,7 +912,7 @@ const (
 
 const (
 	KCSIdentityClassGroup = 2
-	KCSIdentityClassUser = 1
+	KCSIdentityClassUser  = 1
 )
 
 const (
@@ -875,123 +921,123 @@ const (
 
 const (
 	KCSIdentityFlagHidden = 1
-	KCSIdentityFlagNone = 0
+	KCSIdentityFlagNone   = 0
 )
 
 const (
-	KCSIdentityQueryEventErrorOccurred = 5
-	KCSIdentityQueryEventResultsAdded = 2
-	KCSIdentityQueryEventResultsChanged = 3
-	KCSIdentityQueryEventResultsRemoved = 4
+	KCSIdentityQueryEventErrorOccurred       = 5
+	KCSIdentityQueryEventResultsAdded        = 2
+	KCSIdentityQueryEventResultsChanged      = 3
+	KCSIdentityQueryEventResultsRemoved      = 4
 	KCSIdentityQueryEventSearchPhaseFinished = 1
 )
 
 const (
-	KCSIdentityQueryGenerateUpdateEvents = 1
+	KCSIdentityQueryGenerateUpdateEvents    = 1
 	KCSIdentityQueryIncludeHiddenIdentities = 2
 )
 
 const (
 	KCSIdentityQueryStringBeginsWith = 2
-	KCSIdentityQueryStringEquals = 1
+	KCSIdentityQueryStringEquals     = 1
 )
 
 const (
 	KCSIdentityAuthorityNotAccessibleErr = -2
-	KCSIdentityDeletedErr = -4
-	KCSIdentityDuplicateFullNameErr = -6
-	KCSIdentityDuplicatePosixNameErr = -8
-	KCSIdentityInvalidFullNameErr = -5
-	KCSIdentityInvalidPosixNameErr = -7
-	KCSIdentityPermissionErr = -3
-	KCSIdentityUnknownAuthorityErr = -1
+	KCSIdentityDeletedErr                = -4
+	KCSIdentityDuplicateFullNameErr      = -6
+	KCSIdentityDuplicatePosixNameErr     = -8
+	KCSIdentityInvalidFullNameErr        = -5
+	KCSIdentityInvalidPosixNameErr       = -7
+	KCSIdentityPermissionErr             = -3
+	KCSIdentityUnknownAuthorityErr       = -1
 )
 
 const (
-	KCertSearchAny = 0
-	KCertSearchDecryptAllowed = 64
+	KCertSearchAny               = 0
+	KCertSearchDecryptAllowed    = 64
 	KCertSearchDecryptDisallowed = 128
-	KCertSearchDecryptIgnored = 0
-	KCertSearchDecryptMask = 192
-	KCertSearchEncryptAllowed = 16
+	KCertSearchDecryptIgnored    = 0
+	KCertSearchDecryptMask       = 192
+	KCertSearchEncryptAllowed    = 16
 	KCertSearchEncryptDisallowed = 32
-	KCertSearchEncryptIgnored = 0
-	KCertSearchEncryptMask = 48
-	KCertSearchPrivKeyRequired = 4096
-	KCertSearchShift = 0
-	KCertSearchSigningAllowed = 1
+	KCertSearchEncryptIgnored    = 0
+	KCertSearchEncryptMask       = 48
+	KCertSearchPrivKeyRequired   = 4096
+	KCertSearchShift             = 0
+	KCertSearchSigningAllowed    = 1
 	KCertSearchSigningDisallowed = 2
-	KCertSearchSigningIgnored = 0
-	KCertSearchSigningMask = 3
-	KCertSearchUnwrapAllowed = 1024
-	KCertSearchUnwrapDisallowed = 2048
-	KCertSearchUnwrapIgnored = 0
-	KCertSearchUnwrapMask = 3072
-	KCertSearchVerifyAllowed = 4
-	KCertSearchVerifyDisallowed = 8
-	KCertSearchVerifyIgnored = 0
-	KCertSearchVerifyMask = 12
-	KCertSearchWrapAllowed = 256
-	KCertSearchWrapDisallowed = 512
-	KCertSearchWrapIgnored = 0
-	KCertSearchWrapMask = 768
+	KCertSearchSigningIgnored    = 0
+	KCertSearchSigningMask       = 3
+	KCertSearchUnwrapAllowed     = 1024
+	KCertSearchUnwrapDisallowed  = 2048
+	KCertSearchUnwrapIgnored     = 0
+	KCertSearchUnwrapMask        = 3072
+	KCertSearchVerifyAllowed     = 4
+	KCertSearchVerifyDisallowed  = 8
+	KCertSearchVerifyIgnored     = 0
+	KCertSearchVerifyMask        = 12
+	KCertSearchWrapAllowed       = 256
+	KCertSearchWrapDisallowed    = 512
+	KCertSearchWrapIgnored       = 0
+	KCertSearchWrapMask          = 768
 )
 
 const (
 	KAppleSharePasswordKCItemClass = 1634953328
-	KCertificateKCItemClass = 1667592820
-	KGenericPasswordKCItemClass = 1734700656
-	KInternetPasswordKCItemClass = 1768842612
+	KCertificateKCItemClass        = 1667592820
+	KGenericPasswordKCItemClass    = 1734700656
+	KInternetPasswordKCItemClass   = 1768842612
 )
 
 const (
-	KAccountKCItemAttr = 1633903476
-	KAddressKCItemAttr = 1633969266
-	KAuthTypeKCItemAttr = 1635023216
-	KClassKCItemAttr = 1668047219
-	KCommentKCItemAttr = 1768123764
-	KCommonNameKCItemAttr = 1668161568
-	KCreationDateKCItemAttr = 1667522932
-	KCreatorKCItemAttr = 1668445298
-	KCustomIconKCItemAttr = 1668641641
-	KDecryptKCItemAttr = 1684366194
-	KDescriptionKCItemAttr = 1684370275
-	KEMailKCItemAttr = 1835100524
-	KEncryptKCItemAttr = 1701733234
-	KEndDateKCItemAttr = 1701077364
-	KGenericKCItemAttr = 1734700641
-	KInvisibleKCItemAttr = 1768846953
-	KIssuerKCItemAttr = 1769173877
-	KIssuerURLKCItemAttr = 1769304684
-	KLabelKCItemAttr = 1818321516
-	KModDateKCItemAttr = 1835295092
-	KNegativeKCItemAttr = 1852139361
-	KPathKCItemAttr = 1885434984
-	KPortKCItemAttr = 1886351988
-	KProtocolKCItemAttr = 1886675820
-	KPublicKeyHashKCItemAttr = 1752198009
-	KScriptCodeKCItemAttr = 1935897200
+	KAccountKCItemAttr        = 1633903476
+	KAddressKCItemAttr        = 1633969266
+	KAuthTypeKCItemAttr       = 1635023216
+	KClassKCItemAttr          = 1668047219
+	KCommentKCItemAttr        = 1768123764
+	KCommonNameKCItemAttr     = 1668161568
+	KCreationDateKCItemAttr   = 1667522932
+	KCreatorKCItemAttr        = 1668445298
+	KCustomIconKCItemAttr     = 1668641641
+	KDecryptKCItemAttr        = 1684366194
+	KDescriptionKCItemAttr    = 1684370275
+	KEMailKCItemAttr          = 1835100524
+	KEncryptKCItemAttr        = 1701733234
+	KEndDateKCItemAttr        = 1701077364
+	KGenericKCItemAttr        = 1734700641
+	KInvisibleKCItemAttr      = 1768846953
+	KIssuerKCItemAttr         = 1769173877
+	KIssuerURLKCItemAttr      = 1769304684
+	KLabelKCItemAttr          = 1818321516
+	KModDateKCItemAttr        = 1835295092
+	KNegativeKCItemAttr       = 1852139361
+	KPathKCItemAttr           = 1885434984
+	KPortKCItemAttr           = 1886351988
+	KProtocolKCItemAttr       = 1886675820
+	KPublicKeyHashKCItemAttr  = 1752198009
+	KScriptCodeKCItemAttr     = 1935897200
 	KSecurityDomainKCItemAttr = 1935961454
-	KSerialNumberKCItemAttr = 1936614002
-	KServerKCItemAttr = 1936881266
-	KServiceKCItemAttr = 1937138533
-	KSignKCItemAttr = 1936287598
-	KSignatureKCItemAttr = 1936943463
-	KStartDateKCItemAttr = 1935958388
-	KSubjectKCItemAttr = 1937072746
-	KTypeKCItemAttr = 1954115685
-	KUnwrapKCItemAttr = 1970173810
-	KVerifyKCItemAttr = 1986359913
-	KVolumeKCItemAttr = 1986817381
-	KWrapKCItemAttr = 2003984752
+	KSerialNumberKCItemAttr   = 1936614002
+	KServerKCItemAttr         = 1936881266
+	KServiceKCItemAttr        = 1937138533
+	KSignKCItemAttr           = 1936287598
+	KSignatureKCItemAttr      = 1936943463
+	KStartDateKCItemAttr      = 1935958388
+	KSubjectKCItemAttr        = 1937072746
+	KTypeKCItemAttr           = 1954115685
+	KUnwrapKCItemAttr         = 1970173810
+	KVerifyKCItemAttr         = 1986359913
+	KVolumeKCItemAttr         = 1986817381
+	KWrapKCItemAttr           = 2003984752
 )
 
 const (
-	KHuge1BitMask = 1768122403
+	KHuge1BitMask  = 1768122403
 	KHuge32BitData = 1768436530
-	KHuge4BitData = 1768122420
-	KHuge8BitData = 1768122424
-	KHuge8BitMask = 1748528491
+	KHuge4BitData  = 1768122420
+	KHuge8BitData  = 1768122424
+	KHuge8BitMask  = 1748528491
 )
 
 const (
@@ -1000,175 +1046,174 @@ const (
 
 const (
 	KIconServices128PixelDataARGB = 1768108087
-	KIconServices16PixelDataARGB = 1768108084
-	KIconServices32PixelDataARGB = 1768108085
-	KIconServices48PixelDataARGB = 1768108086
+	KIconServices16PixelDataARGB  = 1768108084
+	KIconServices32PixelDataARGB  = 1768108085
+	KIconServices48PixelDataARGB  = 1768108086
 )
 
 const (
 	KIconServices1024PixelDataARGB = 1768108336
-	KIconServices256PixelDataARGB = 1768108088
-	KIconServices512PixelDataARGB = 1768108089
-	KThumbnail32BitData = 1769222962
-	KThumbnail8BitMask = 1949855083
+	KIconServices256PixelDataARGB  = 1768108088
+	KIconServices512PixelDataARGB  = 1768108089
+	KThumbnail32BitData            = 1769222962
+	KThumbnail8BitMask             = 1949855083
 )
 
 const (
-	KAddKCEvent = 3
-	KDataAccessKCEvent = 10
-	KDefaultChangedKCEvent = 9
-	KDeleteKCEvent = 4
-	KIdleKCEvent = 0
+	KAddKCEvent                 = 3
+	KDataAccessKCEvent          = 10
+	KDefaultChangedKCEvent      = 9
+	KDeleteKCEvent              = 4
+	KIdleKCEvent                = 0
 	KKeychainListChangedKCEvent = 11
-	KLockKCEvent = 1
-	KPasswordChangedKCEvent = 6
-	KSystemKCEvent = 8
-	KUnlockKCEvent = 2
-	KUpdateKCEvent = 5
+	KLockKCEvent                = 1
+	KPasswordChangedKCEvent     = 6
+	KSystemKCEvent              = 8
+	KUnlockKCEvent              = 2
+	KUpdateKCEvent              = 5
 )
 
 const (
-	KAddKCEventMask = 8
-	KDataAccessKCEventMask = 1024
-	KDefaultChangedKCEventMask = 512
-	KDeleteKCEventMask = 16
-	KEveryKCEventMask = 65535
-	KIdleKCEventMask = 1
-	KLockKCEventMask = 2
+	KAddKCEventMask             = 8
+	KDataAccessKCEventMask      = 1024
+	KDefaultChangedKCEventMask  = 512
+	KDeleteKCEventMask          = 16
+	KEveryKCEventMask           = 65535
+	KIdleKCEventMask            = 1
+	KLockKCEventMask            = 2
 	KPasswordChangedKCEventMask = 64
-	KSystemEventKCEventMask = 256
-	KUnlockKCEventMask = 4
-	KUpdateKCEventMask = 32
+	KSystemEventKCEventMask     = 256
+	KUnlockKCEventMask          = 4
+	KUpdateKCEventMask          = 32
 )
 
 const (
-	KKCAuthTypeDPA = 1685086561
-	KKCAuthTypeDefault = 1684434036
+	KKCAuthTypeDPA        = 1685086561
+	KKCAuthTypeDefault    = 1684434036
 	KKCAuthTypeHTTPDigest = 1752462436
-	KKCAuthTypeMSN = 1836281441
-	KKCAuthTypeNTLM = 1853123693
-	KKCAuthTypeRPA = 1919967585
+	KKCAuthTypeMSN        = 1836281441
+	KKCAuthTypeNTLM       = 1853123693
+	KKCAuthTypeRPA        = 1919967585
 )
 
 const (
-	KKCProtocolTypeAFP = 1634103328
-	KKCProtocolTypeAppleTalk = 1635019883
-	KKCProtocolTypeFTP = 1718906912
+	KKCProtocolTypeAFP        = 1634103328
+	KKCProtocolTypeAppleTalk  = 1635019883
+	KKCProtocolTypeFTP        = 1718906912
 	KKCProtocolTypeFTPAccount = 1718906977
-	KKCProtocolTypeHTTP = 1752462448
-	KKCProtocolTypeIMAP = 1768776048
-	KKCProtocolTypeIRC = 1769104160
-	KKCProtocolTypeLDAP = 1818517872
-	KKCProtocolTypeNNTP = 1852732528
-	KKCProtocolTypePOP3 = 1886351411
-	KKCProtocolTypeSMTP = 1936553072
-	KKCProtocolTypeSOCKS = 1936685088
-	KKCProtocolTypeTelnet = 1952803950
+	KKCProtocolTypeHTTP       = 1752462448
+	KKCProtocolTypeIMAP       = 1768776048
+	KKCProtocolTypeIRC        = 1769104160
+	KKCProtocolTypeLDAP       = 1818517872
+	KKCProtocolTypeNNTP       = 1852732528
+	KKCProtocolTypePOP3       = 1886351411
+	KKCProtocolTypeSMTP       = 1936553072
+	KKCProtocolTypeSOCKS      = 1936685088
+	KKCProtocolTypeTelnet     = 1952803950
 )
 
 const (
-	KLarge1BitMask = 1229147683
+	KLarge1BitMask  = 1229147683
 	KLarge32BitData = 1768698674
-	KLarge4BitData = 1768123444
-	KLarge8BitData = 1768123448
-	KLarge8BitMask = 1815637355
-	KMini1BitMask = 1768123683
-	KMini4BitData = 1768123700
-	KMini8BitData = 1768123704
-	KSmall1BitMask = 1768125219
+	KLarge4BitData  = 1768123444
+	KLarge8BitData  = 1768123448
+	KLarge8BitMask  = 1815637355
+	KMini1BitMask   = 1768123683
+	KMini4BitData   = 1768123700
+	KMini8BitData   = 1768123704
+	KSmall1BitMask  = 1768125219
 	KSmall32BitData = 1769157426
-	KSmall4BitData = 1768125236
-	KSmall8BitData = 1768125240
-	KSmall8BitMask = 1933077867
+	KSmall4BitData  = 1768125236
+	KSmall8BitData  = 1768125240
+	KSmall8BitMask  = 1933077867
 )
 
 const (
 	KFirstFailKCStopOn = 3
 	KFirstPassKCStopOn = 2
-	KNoneKCStopOn = 1
-	KPolicyKCStopOn = 0
+	KNoneKCStopOn      = 1
+	KPolicyKCStopOn    = 0
 )
 
 const (
-	KCertUsageAllAdd = 2147483392
-	KCertUsageDecryptAdd = 16384
+	KCertUsageAllAdd           = 2147483392
+	KCertUsageDecryptAdd       = 16384
 	KCertUsageDecryptAskAndAdd = 32768
-	KCertUsageEncryptAdd = 4096
+	KCertUsageEncryptAdd       = 4096
 	KCertUsageEncryptAskAndAdd = 8192
-	KCertUsageKeyExchAdd = 65536
+	KCertUsageKeyExchAdd       = 65536
 	KCertUsageKeyExchAskAndAdd = 131072
-	KCertUsageRootAdd = 262144
-	KCertUsageRootAskAndAdd = 524288
-	KCertUsageSSLAdd = 1048576
-	KCertUsageSSLAskAndAdd = 2097152
-	KCertUsageShift = 8
-	KCertUsageSigningAdd = 256
+	KCertUsageRootAdd          = 262144
+	KCertUsageRootAskAndAdd    = 524288
+	KCertUsageSSLAdd           = 1048576
+	KCertUsageSSLAskAndAdd     = 2097152
+	KCertUsageShift            = 8
+	KCertUsageSigningAdd       = 256
 	KCertUsageSigningAskAndAdd = 512
-	KCertUsageVerifyAdd = 1024
-	KCertUsageVerifyAskAndAdd = 2048
-	KSecOptionReserved = 255
+	KCertUsageVerifyAdd        = 1024
+	KCertUsageVerifyAskAndAdd  = 2048
+	KSecOptionReserved         = 255
 )
 
 const (
 	KDeviceInitiatedWake = 18
-	KDozeDemand = 7
-	KDozeRequest = 9
-	KDozeToFullWakeUp = 20
-	KDozeWakeUp = 8
-	KEnterIdle = 24
-	KEnterRun = 11
-	KEnterStandby = 10
-	KExitIdle = 26
-	KGetPowerInfo = 21
-	KGetPowerLevel = 16
-	KGetWakeOnNetInfo = 22
-	KSetPowerLevel = 17
-	KSleepDemand = 2
-	KSleepDeny = 5
-	KSleepNow = 6
-	KSleepRequest = 1
-	KSleepRevoke = 4
-	KSleepUnlock = 4
-	KSleepWakeUp = 3
-	KStillIdle = 25
-	KSuspendDemand = 13
-	KSuspendRequest = 12
-	KSuspendRevoke = 14
-	KSuspendWakeToDoze = 23
-	KSuspendWakeUp = 15
-	KWakeToDoze = 19
+	KDozeDemand          = 7
+	KDozeRequest         = 9
+	KDozeToFullWakeUp    = 20
+	KDozeWakeUp          = 8
+	KEnterIdle           = 24
+	KEnterRun            = 11
+	KEnterStandby        = 10
+	KExitIdle            = 26
+	KGetPowerInfo        = 21
+	KGetPowerLevel       = 16
+	KGetWakeOnNetInfo    = 22
+	KSetPowerLevel       = 17
+	KSleepDemand         = 2
+	KSleepDeny           = 5
+	KSleepNow            = 6
+	KSleepRequest        = 1
+	KSleepRevoke         = 4
+	KSleepUnlock         = 4
+	KSleepWakeUp         = 3
+	KStillIdle           = 25
+	KSuspendDemand       = 13
+	KSuspendRequest      = 12
+	KSuspendRevoke       = 14
+	KSuspendWakeToDoze   = 23
+	KSuspendWakeUp       = 15
+	KWakeToDoze          = 19
 )
 
 const (
-	KDropIconVariant = 1685221232
+	KDropIconVariant     = 1685221232
 	KOpenDropIconVariant = 1868853872
-	KOpenIconVariant = 1869636974
+	KOpenIconVariant     = 1869636974
 	KRolloverIconVariant = 1870030194
-	KTileIconVariant = 1953066085
+	KTileIconVariant     = 1953066085
 )
 
 const (
-	KRdPermKCStatus = 2
+	KRdPermKCStatus      = 2
 	KUnlockStateKCStatus = 1
-	KWrPermKCStatus = 4
+	KWrPermKCStatus      = 4
 )
 
 const (
 	Large1BitMask = 1229147683
 	Large4BitData = 1768123444
 	Large8BitData = 1768123448
-	Mini1BitMask = 1768123683
-	Mini4BitData = 1768123700
-	Mini8BitData = 1768123704
+	Mini1BitMask  = 1768123683
+	Mini4BitData  = 1768123700
+	Mini8BitData  = 1768123704
 	Small1BitMask = 1768125219
 	Small4BitData = 1768125236
 	Small8BitData = 1768125240
 )
 
 const (
-	NoCalls = 1
-	NoRequest = 2
+	NoCalls    = 1
+	NoRequest  = 2
 	SleepQType = 16
-	SlpQType = 16
+	SlpQType   = 16
 )
-

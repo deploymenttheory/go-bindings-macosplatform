@@ -112,4 +112,3 @@ type WorkoutActivityable interface {
 }
 
 var _ WorkoutActivityable = (*WorkoutActivity)(nil)
-

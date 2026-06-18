@@ -76,4 +76,3 @@ type ClinicalRecordable interface {
 }
 
 var _ ClinicalRecordable = (*ClinicalRecord)(nil)
-

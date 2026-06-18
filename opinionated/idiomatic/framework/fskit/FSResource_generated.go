@@ -65,4 +65,3 @@ type Resourceable interface {
 }
 
 var _ Resourceable = (*Resource)(nil)
-

@@ -26,4 +26,3 @@ func MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventFromID(i
 	purego.Track(o)
 	return o
 }
-

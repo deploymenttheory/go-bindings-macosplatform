@@ -180,4 +180,3 @@ func AudioStreamRemovePropertyListener(inStream uint, inChannel uint, inProperty
 func AudioStreamSetProperty(inStream uint, inWhen *coreaudiotypes.AudioTimeStamp, inChannel uint, inPropertyID uint, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
 	return raw.AudioStreamSetProperty(inStream, inWhen, inChannel, inPropertyID, inPropertyDataSize, inPropertyData)
 }
-

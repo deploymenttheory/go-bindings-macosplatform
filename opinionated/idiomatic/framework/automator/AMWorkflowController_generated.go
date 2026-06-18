@@ -154,4 +154,3 @@ type WorkflowControllerable interface {
 }
 
 var _ WorkflowControllerable = (*WorkflowController)(nil)
-

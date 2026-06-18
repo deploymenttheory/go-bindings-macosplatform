@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_printcoreLib uintptr
-	_loadOnce sync.Once
+	_printcoreLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("PMCGImageCreateWithEPSDataProvider", func() { purego.RegisterLibFunc(&_fnPMCGImageCreateWithEPSDataProvider, _printcoreLib, "PMCGImageCreateWithEPSDataProvider") })
+	_register("PMCGImageCreateWithEPSDataProvider", func() {
+		purego.RegisterLibFunc(&_fnPMCGImageCreateWithEPSDataProvider, _printcoreLib, "PMCGImageCreateWithEPSDataProvider")
+	})
 	_register("PMCopyAvailablePPDs", func() { purego.RegisterLibFunc(&_fnPMCopyAvailablePPDs, _printcoreLib, "PMCopyAvailablePPDs") })
 	_register("PMCopyLocalizedPPD", func() { purego.RegisterLibFunc(&_fnPMCopyLocalizedPPD, _printcoreLib, "PMCopyLocalizedPPD") })
 	_register("PMCopyPPDData", func() { purego.RegisterLibFunc(&_fnPMCopyPPDData, _printcoreLib, "PMCopyPPDData") })
@@ -56,7 +58,9 @@ func _loadLibrary() {
 	_register("PMCopyPrintSettings", func() { purego.RegisterLibFunc(&_fnPMCopyPrintSettings, _printcoreLib, "PMCopyPrintSettings") })
 	_register("PMCreateGenericPrinter", func() { purego.RegisterLibFunc(&_fnPMCreateGenericPrinter, _printcoreLib, "PMCreateGenericPrinter") })
 	_register("PMCreatePageFormat", func() { purego.RegisterLibFunc(&_fnPMCreatePageFormat, _printcoreLib, "PMCreatePageFormat") })
-	_register("PMCreatePageFormatWithPMPaper", func() { purego.RegisterLibFunc(&_fnPMCreatePageFormatWithPMPaper, _printcoreLib, "PMCreatePageFormatWithPMPaper") })
+	_register("PMCreatePageFormatWithPMPaper", func() {
+		purego.RegisterLibFunc(&_fnPMCreatePageFormatWithPMPaper, _printcoreLib, "PMCreatePageFormatWithPMPaper")
+	})
 	_register("PMCreatePrintSettings", func() { purego.RegisterLibFunc(&_fnPMCreatePrintSettings, _printcoreLib, "PMCreatePrintSettings") })
 	_register("PMCreateSession", func() { purego.RegisterLibFunc(&_fnPMCreateSession, _printcoreLib, "PMCreateSession") })
 	_register("PMGetAdjustedPageRect", func() { purego.RegisterLibFunc(&_fnPMGetAdjustedPageRect, _printcoreLib, "PMGetAdjustedPageRect") })
@@ -67,17 +71,29 @@ func _loadLibrary() {
 	_register("PMGetFirstPage", func() { purego.RegisterLibFunc(&_fnPMGetFirstPage, _printcoreLib, "PMGetFirstPage") })
 	_register("PMGetLastPage", func() { purego.RegisterLibFunc(&_fnPMGetLastPage, _printcoreLib, "PMGetLastPage") })
 	_register("PMGetOrientation", func() { purego.RegisterLibFunc(&_fnPMGetOrientation, _printcoreLib, "PMGetOrientation") })
-	_register("PMGetPageFormatExtendedData", func() { purego.RegisterLibFunc(&_fnPMGetPageFormatExtendedData, _printcoreLib, "PMGetPageFormatExtendedData") })
+	_register("PMGetPageFormatExtendedData", func() {
+		purego.RegisterLibFunc(&_fnPMGetPageFormatExtendedData, _printcoreLib, "PMGetPageFormatExtendedData")
+	})
 	_register("PMGetPageFormatPaper", func() { purego.RegisterLibFunc(&_fnPMGetPageFormatPaper, _printcoreLib, "PMGetPageFormatPaper") })
 	_register("PMGetPageRange", func() { purego.RegisterLibFunc(&_fnPMGetPageRange, _printcoreLib, "PMGetPageRange") })
 	_register("PMGetScale", func() { purego.RegisterLibFunc(&_fnPMGetScale, _printcoreLib, "PMGetScale") })
 	_register("PMGetUnadjustedPageRect", func() { purego.RegisterLibFunc(&_fnPMGetUnadjustedPageRect, _printcoreLib, "PMGetUnadjustedPageRect") })
-	_register("PMGetUnadjustedPaperRect", func() { purego.RegisterLibFunc(&_fnPMGetUnadjustedPaperRect, _printcoreLib, "PMGetUnadjustedPaperRect") })
-	_register("PMPageFormatCreateDataRepresentation", func() { purego.RegisterLibFunc(&_fnPMPageFormatCreateDataRepresentation, _printcoreLib, "PMPageFormatCreateDataRepresentation") })
-	_register("PMPageFormatCreateWithDataRepresentation", func() { purego.RegisterLibFunc(&_fnPMPageFormatCreateWithDataRepresentation, _printcoreLib, "PMPageFormatCreateWithDataRepresentation") })
-	_register("PMPageFormatGetPrinterID", func() { purego.RegisterLibFunc(&_fnPMPageFormatGetPrinterID, _printcoreLib, "PMPageFormatGetPrinterID") })
+	_register("PMGetUnadjustedPaperRect", func() {
+		purego.RegisterLibFunc(&_fnPMGetUnadjustedPaperRect, _printcoreLib, "PMGetUnadjustedPaperRect")
+	})
+	_register("PMPageFormatCreateDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnPMPageFormatCreateDataRepresentation, _printcoreLib, "PMPageFormatCreateDataRepresentation")
+	})
+	_register("PMPageFormatCreateWithDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnPMPageFormatCreateWithDataRepresentation, _printcoreLib, "PMPageFormatCreateWithDataRepresentation")
+	})
+	_register("PMPageFormatGetPrinterID", func() {
+		purego.RegisterLibFunc(&_fnPMPageFormatGetPrinterID, _printcoreLib, "PMPageFormatGetPrinterID")
+	})
 	_register("PMPaperCreateCustom", func() { purego.RegisterLibFunc(&_fnPMPaperCreateCustom, _printcoreLib, "PMPaperCreateCustom") })
-	_register("PMPaperCreateLocalizedName", func() { purego.RegisterLibFunc(&_fnPMPaperCreateLocalizedName, _printcoreLib, "PMPaperCreateLocalizedName") })
+	_register("PMPaperCreateLocalizedName", func() {
+		purego.RegisterLibFunc(&_fnPMPaperCreateLocalizedName, _printcoreLib, "PMPaperCreateLocalizedName")
+	})
 	_register("PMPaperGetHeight", func() { purego.RegisterLibFunc(&_fnPMPaperGetHeight, _printcoreLib, "PMPaperGetHeight") })
 	_register("PMPaperGetID", func() { purego.RegisterLibFunc(&_fnPMPaperGetID, _printcoreLib, "PMPaperGetID") })
 	_register("PMPaperGetMargins", func() { purego.RegisterLibFunc(&_fnPMPaperGetMargins, _printcoreLib, "PMPaperGetMargins") })
@@ -86,87 +102,179 @@ func _loadLibrary() {
 	_register("PMPaperGetWidth", func() { purego.RegisterLibFunc(&_fnPMPaperGetWidth, _printcoreLib, "PMPaperGetWidth") })
 	_register("PMPaperIsCustom", func() { purego.RegisterLibFunc(&_fnPMPaperIsCustom, _printcoreLib, "PMPaperIsCustom") })
 	_register("PMPresetCopyName", func() { purego.RegisterLibFunc(&_fnPMPresetCopyName, _printcoreLib, "PMPresetCopyName") })
-	_register("PMPresetCreatePrintSettings", func() { purego.RegisterLibFunc(&_fnPMPresetCreatePrintSettings, _printcoreLib, "PMPresetCreatePrintSettings") })
+	_register("PMPresetCreatePrintSettings", func() {
+		purego.RegisterLibFunc(&_fnPMPresetCreatePrintSettings, _printcoreLib, "PMPresetCreatePrintSettings")
+	})
 	_register("PMPresetGetAttributes", func() { purego.RegisterLibFunc(&_fnPMPresetGetAttributes, _printcoreLib, "PMPresetGetAttributes") })
-	_register("PMPrintSettingsCopyAsDictionary", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsCopyAsDictionary, _printcoreLib, "PMPrintSettingsCopyAsDictionary") })
+	_register("PMPrintSettingsCopyAsDictionary", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsCopyAsDictionary, _printcoreLib, "PMPrintSettingsCopyAsDictionary")
+	})
 	_register("PMPrintSettingsCopyKeys", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsCopyKeys, _printcoreLib, "PMPrintSettingsCopyKeys") })
-	_register("PMPrintSettingsCreateDataRepresentation", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsCreateDataRepresentation, _printcoreLib, "PMPrintSettingsCreateDataRepresentation") })
-	_register("PMPrintSettingsCreateWithDataRepresentation", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsCreateWithDataRepresentation, _printcoreLib, "PMPrintSettingsCreateWithDataRepresentation") })
-	_register("PMPrintSettingsGetJobName", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsGetJobName, _printcoreLib, "PMPrintSettingsGetJobName") })
+	_register("PMPrintSettingsCreateDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsCreateDataRepresentation, _printcoreLib, "PMPrintSettingsCreateDataRepresentation")
+	})
+	_register("PMPrintSettingsCreateWithDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsCreateWithDataRepresentation, _printcoreLib, "PMPrintSettingsCreateWithDataRepresentation")
+	})
+	_register("PMPrintSettingsGetJobName", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsGetJobName, _printcoreLib, "PMPrintSettingsGetJobName")
+	})
 	_register("PMPrintSettingsGetValue", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsGetValue, _printcoreLib, "PMPrintSettingsGetValue") })
-	_register("PMPrintSettingsSetJobName", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsSetJobName, _printcoreLib, "PMPrintSettingsSetJobName") })
+	_register("PMPrintSettingsSetJobName", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsSetJobName, _printcoreLib, "PMPrintSettingsSetJobName")
+	})
 	_register("PMPrintSettingsSetValue", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsSetValue, _printcoreLib, "PMPrintSettingsSetValue") })
-	_register("PMPrintSettingsToOptions", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsToOptions, _printcoreLib, "PMPrintSettingsToOptions") })
-	_register("PMPrintSettingsToOptionsWithPrinterAndPageFormat", func() { purego.RegisterLibFunc(&_fnPMPrintSettingsToOptionsWithPrinterAndPageFormat, _printcoreLib, "PMPrintSettingsToOptionsWithPrinterAndPageFormat") })
-	_register("PMPrinterCopyDescriptionURL", func() { purego.RegisterLibFunc(&_fnPMPrinterCopyDescriptionURL, _printcoreLib, "PMPrinterCopyDescriptionURL") })
+	_register("PMPrintSettingsToOptions", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsToOptions, _printcoreLib, "PMPrintSettingsToOptions")
+	})
+	_register("PMPrintSettingsToOptionsWithPrinterAndPageFormat", func() {
+		purego.RegisterLibFunc(&_fnPMPrintSettingsToOptionsWithPrinterAndPageFormat, _printcoreLib, "PMPrintSettingsToOptionsWithPrinterAndPageFormat")
+	})
+	_register("PMPrinterCopyDescriptionURL", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterCopyDescriptionURL, _printcoreLib, "PMPrinterCopyDescriptionURL")
+	})
 	_register("PMPrinterCopyDeviceURI", func() { purego.RegisterLibFunc(&_fnPMPrinterCopyDeviceURI, _printcoreLib, "PMPrinterCopyDeviceURI") })
 	_register("PMPrinterCopyHostName", func() { purego.RegisterLibFunc(&_fnPMPrinterCopyHostName, _printcoreLib, "PMPrinterCopyHostName") })
 	_register("PMPrinterCopyPresets", func() { purego.RegisterLibFunc(&_fnPMPrinterCopyPresets, _printcoreLib, "PMPrinterCopyPresets") })
 	_register("PMPrinterCopyState", func() { purego.RegisterLibFunc(&_fnPMPrinterCopyState, _printcoreLib, "PMPrinterCopyState") })
-	_register("PMPrinterCreateFromPrinterID", func() { purego.RegisterLibFunc(&_fnPMPrinterCreateFromPrinterID, _printcoreLib, "PMPrinterCreateFromPrinterID") })
+	_register("PMPrinterCreateFromPrinterID", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterCreateFromPrinterID, _printcoreLib, "PMPrinterCreateFromPrinterID")
+	})
 	_register("PMPrinterGetCommInfo", func() { purego.RegisterLibFunc(&_fnPMPrinterGetCommInfo, _printcoreLib, "PMPrinterGetCommInfo") })
-	_register("PMPrinterGetDriverCreator", func() { purego.RegisterLibFunc(&_fnPMPrinterGetDriverCreator, _printcoreLib, "PMPrinterGetDriverCreator") })
-	_register("PMPrinterGetDriverReleaseInfo", func() { purego.RegisterLibFunc(&_fnPMPrinterGetDriverReleaseInfo, _printcoreLib, "PMPrinterGetDriverReleaseInfo") })
+	_register("PMPrinterGetDriverCreator", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetDriverCreator, _printcoreLib, "PMPrinterGetDriverCreator")
+	})
+	_register("PMPrinterGetDriverReleaseInfo", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetDriverReleaseInfo, _printcoreLib, "PMPrinterGetDriverReleaseInfo")
+	})
 	_register("PMPrinterGetID", func() { purego.RegisterLibFunc(&_fnPMPrinterGetID, _printcoreLib, "PMPrinterGetID") })
-	_register("PMPrinterGetIndexedPrinterResolution", func() { purego.RegisterLibFunc(&_fnPMPrinterGetIndexedPrinterResolution, _printcoreLib, "PMPrinterGetIndexedPrinterResolution") })
-	_register("PMPrinterGetLanguageInfo", func() { purego.RegisterLibFunc(&_fnPMPrinterGetLanguageInfo, _printcoreLib, "PMPrinterGetLanguageInfo") })
+	_register("PMPrinterGetIndexedPrinterResolution", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetIndexedPrinterResolution, _printcoreLib, "PMPrinterGetIndexedPrinterResolution")
+	})
+	_register("PMPrinterGetLanguageInfo", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetLanguageInfo, _printcoreLib, "PMPrinterGetLanguageInfo")
+	})
 	_register("PMPrinterGetLocation", func() { purego.RegisterLibFunc(&_fnPMPrinterGetLocation, _printcoreLib, "PMPrinterGetLocation") })
-	_register("PMPrinterGetMakeAndModelName", func() { purego.RegisterLibFunc(&_fnPMPrinterGetMakeAndModelName, _printcoreLib, "PMPrinterGetMakeAndModelName") })
+	_register("PMPrinterGetMakeAndModelName", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetMakeAndModelName, _printcoreLib, "PMPrinterGetMakeAndModelName")
+	})
 	_register("PMPrinterGetMimeTypes", func() { purego.RegisterLibFunc(&_fnPMPrinterGetMimeTypes, _printcoreLib, "PMPrinterGetMimeTypes") })
 	_register("PMPrinterGetName", func() { purego.RegisterLibFunc(&_fnPMPrinterGetName, _printcoreLib, "PMPrinterGetName") })
-	_register("PMPrinterGetOutputResolution", func() { purego.RegisterLibFunc(&_fnPMPrinterGetOutputResolution, _printcoreLib, "PMPrinterGetOutputResolution") })
+	_register("PMPrinterGetOutputResolution", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetOutputResolution, _printcoreLib, "PMPrinterGetOutputResolution")
+	})
 	_register("PMPrinterGetPaperList", func() { purego.RegisterLibFunc(&_fnPMPrinterGetPaperList, _printcoreLib, "PMPrinterGetPaperList") })
-	_register("PMPrinterGetPrinterResolutionCount", func() { purego.RegisterLibFunc(&_fnPMPrinterGetPrinterResolutionCount, _printcoreLib, "PMPrinterGetPrinterResolutionCount") })
+	_register("PMPrinterGetPrinterResolutionCount", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterGetPrinterResolutionCount, _printcoreLib, "PMPrinterGetPrinterResolutionCount")
+	})
 	_register("PMPrinterGetState", func() { purego.RegisterLibFunc(&_fnPMPrinterGetState, _printcoreLib, "PMPrinterGetState") })
 	_register("PMPrinterIsDefault", func() { purego.RegisterLibFunc(&_fnPMPrinterIsDefault, _printcoreLib, "PMPrinterIsDefault") })
 	_register("PMPrinterIsFavorite", func() { purego.RegisterLibFunc(&_fnPMPrinterIsFavorite, _printcoreLib, "PMPrinterIsFavorite") })
-	_register("PMPrinterIsPostScriptCapable", func() { purego.RegisterLibFunc(&_fnPMPrinterIsPostScriptCapable, _printcoreLib, "PMPrinterIsPostScriptCapable") })
-	_register("PMPrinterIsPostScriptPrinter", func() { purego.RegisterLibFunc(&_fnPMPrinterIsPostScriptPrinter, _printcoreLib, "PMPrinterIsPostScriptPrinter") })
+	_register("PMPrinterIsPostScriptCapable", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterIsPostScriptCapable, _printcoreLib, "PMPrinterIsPostScriptCapable")
+	})
+	_register("PMPrinterIsPostScriptPrinter", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterIsPostScriptPrinter, _printcoreLib, "PMPrinterIsPostScriptPrinter")
+	})
 	_register("PMPrinterIsRemote", func() { purego.RegisterLibFunc(&_fnPMPrinterIsRemote, _printcoreLib, "PMPrinterIsRemote") })
 	_register("PMPrinterPrintWithFile", func() { purego.RegisterLibFunc(&_fnPMPrinterPrintWithFile, _printcoreLib, "PMPrinterPrintWithFile") })
-	_register("PMPrinterPrintWithProvider", func() { purego.RegisterLibFunc(&_fnPMPrinterPrintWithProvider, _printcoreLib, "PMPrinterPrintWithProvider") })
+	_register("PMPrinterPrintWithProvider", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterPrintWithProvider, _printcoreLib, "PMPrinterPrintWithProvider")
+	})
 	_register("PMPrinterSendCommand", func() { purego.RegisterLibFunc(&_fnPMPrinterSendCommand, _printcoreLib, "PMPrinterSendCommand") })
 	_register("PMPrinterSetDefault", func() { purego.RegisterLibFunc(&_fnPMPrinterSetDefault, _printcoreLib, "PMPrinterSetDefault") })
-	_register("PMPrinterSetOutputResolution", func() { purego.RegisterLibFunc(&_fnPMPrinterSetOutputResolution, _printcoreLib, "PMPrinterSetOutputResolution") })
-	_register("PMPrinterWritePostScriptToURL", func() { purego.RegisterLibFunc(&_fnPMPrinterWritePostScriptToURL, _printcoreLib, "PMPrinterWritePostScriptToURL") })
+	_register("PMPrinterSetOutputResolution", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterSetOutputResolution, _printcoreLib, "PMPrinterSetOutputResolution")
+	})
+	_register("PMPrinterWritePostScriptToURL", func() {
+		purego.RegisterLibFunc(&_fnPMPrinterWritePostScriptToURL, _printcoreLib, "PMPrinterWritePostScriptToURL")
+	})
 	_register("PMRelease", func() { purego.RegisterLibFunc(&_fnPMRelease, _printcoreLib, "PMRelease") })
 	_register("PMRetain", func() { purego.RegisterLibFunc(&_fnPMRetain, _printcoreLib, "PMRetain") })
-	_register("PMServerCreatePrinterList", func() { purego.RegisterLibFunc(&_fnPMServerCreatePrinterList, _printcoreLib, "PMServerCreatePrinterList") })
-	_register("PMServerLaunchPrinterBrowser", func() { purego.RegisterLibFunc(&_fnPMServerLaunchPrinterBrowser, _printcoreLib, "PMServerLaunchPrinterBrowser") })
-	_register("PMSessionBeginCGDocumentNoDialog", func() { purego.RegisterLibFunc(&_fnPMSessionBeginCGDocumentNoDialog, _printcoreLib, "PMSessionBeginCGDocumentNoDialog") })
-	_register("PMSessionBeginPageNoDialog", func() { purego.RegisterLibFunc(&_fnPMSessionBeginPageNoDialog, _printcoreLib, "PMSessionBeginPageNoDialog") })
-	_register("PMSessionCopyDestinationFormat", func() { purego.RegisterLibFunc(&_fnPMSessionCopyDestinationFormat, _printcoreLib, "PMSessionCopyDestinationFormat") })
-	_register("PMSessionCopyDestinationLocation", func() { purego.RegisterLibFunc(&_fnPMSessionCopyDestinationLocation, _printcoreLib, "PMSessionCopyDestinationLocation") })
-	_register("PMSessionCopyOutputFormatList", func() { purego.RegisterLibFunc(&_fnPMSessionCopyOutputFormatList, _printcoreLib, "PMSessionCopyOutputFormatList") })
-	_register("PMSessionCreatePageFormatList", func() { purego.RegisterLibFunc(&_fnPMSessionCreatePageFormatList, _printcoreLib, "PMSessionCreatePageFormatList") })
-	_register("PMSessionCreatePrinterList", func() { purego.RegisterLibFunc(&_fnPMSessionCreatePrinterList, _printcoreLib, "PMSessionCreatePrinterList") })
-	_register("PMSessionDefaultPageFormat", func() { purego.RegisterLibFunc(&_fnPMSessionDefaultPageFormat, _printcoreLib, "PMSessionDefaultPageFormat") })
-	_register("PMSessionDefaultPrintSettings", func() { purego.RegisterLibFunc(&_fnPMSessionDefaultPrintSettings, _printcoreLib, "PMSessionDefaultPrintSettings") })
-	_register("PMSessionEndDocumentNoDialog", func() { purego.RegisterLibFunc(&_fnPMSessionEndDocumentNoDialog, _printcoreLib, "PMSessionEndDocumentNoDialog") })
-	_register("PMSessionEndPageNoDialog", func() { purego.RegisterLibFunc(&_fnPMSessionEndPageNoDialog, _printcoreLib, "PMSessionEndPageNoDialog") })
+	_register("PMServerCreatePrinterList", func() {
+		purego.RegisterLibFunc(&_fnPMServerCreatePrinterList, _printcoreLib, "PMServerCreatePrinterList")
+	})
+	_register("PMServerLaunchPrinterBrowser", func() {
+		purego.RegisterLibFunc(&_fnPMServerLaunchPrinterBrowser, _printcoreLib, "PMServerLaunchPrinterBrowser")
+	})
+	_register("PMSessionBeginCGDocumentNoDialog", func() {
+		purego.RegisterLibFunc(&_fnPMSessionBeginCGDocumentNoDialog, _printcoreLib, "PMSessionBeginCGDocumentNoDialog")
+	})
+	_register("PMSessionBeginPageNoDialog", func() {
+		purego.RegisterLibFunc(&_fnPMSessionBeginPageNoDialog, _printcoreLib, "PMSessionBeginPageNoDialog")
+	})
+	_register("PMSessionCopyDestinationFormat", func() {
+		purego.RegisterLibFunc(&_fnPMSessionCopyDestinationFormat, _printcoreLib, "PMSessionCopyDestinationFormat")
+	})
+	_register("PMSessionCopyDestinationLocation", func() {
+		purego.RegisterLibFunc(&_fnPMSessionCopyDestinationLocation, _printcoreLib, "PMSessionCopyDestinationLocation")
+	})
+	_register("PMSessionCopyOutputFormatList", func() {
+		purego.RegisterLibFunc(&_fnPMSessionCopyOutputFormatList, _printcoreLib, "PMSessionCopyOutputFormatList")
+	})
+	_register("PMSessionCreatePageFormatList", func() {
+		purego.RegisterLibFunc(&_fnPMSessionCreatePageFormatList, _printcoreLib, "PMSessionCreatePageFormatList")
+	})
+	_register("PMSessionCreatePrinterList", func() {
+		purego.RegisterLibFunc(&_fnPMSessionCreatePrinterList, _printcoreLib, "PMSessionCreatePrinterList")
+	})
+	_register("PMSessionDefaultPageFormat", func() {
+		purego.RegisterLibFunc(&_fnPMSessionDefaultPageFormat, _printcoreLib, "PMSessionDefaultPageFormat")
+	})
+	_register("PMSessionDefaultPrintSettings", func() {
+		purego.RegisterLibFunc(&_fnPMSessionDefaultPrintSettings, _printcoreLib, "PMSessionDefaultPrintSettings")
+	})
+	_register("PMSessionEndDocumentNoDialog", func() {
+		purego.RegisterLibFunc(&_fnPMSessionEndDocumentNoDialog, _printcoreLib, "PMSessionEndDocumentNoDialog")
+	})
+	_register("PMSessionEndPageNoDialog", func() {
+		purego.RegisterLibFunc(&_fnPMSessionEndPageNoDialog, _printcoreLib, "PMSessionEndPageNoDialog")
+	})
 	_register("PMSessionError", func() { purego.RegisterLibFunc(&_fnPMSessionError, _printcoreLib, "PMSessionError") })
-	_register("PMSessionGetCGGraphicsContext", func() { purego.RegisterLibFunc(&_fnPMSessionGetCGGraphicsContext, _printcoreLib, "PMSessionGetCGGraphicsContext") })
-	_register("PMSessionGetCurrentPrinter", func() { purego.RegisterLibFunc(&_fnPMSessionGetCurrentPrinter, _printcoreLib, "PMSessionGetCurrentPrinter") })
-	_register("PMSessionGetDataFromSession", func() { purego.RegisterLibFunc(&_fnPMSessionGetDataFromSession, _printcoreLib, "PMSessionGetDataFromSession") })
-	_register("PMSessionGetDestinationType", func() { purego.RegisterLibFunc(&_fnPMSessionGetDestinationType, _printcoreLib, "PMSessionGetDestinationType") })
-	_register("PMSessionSetCurrentPMPrinter", func() { purego.RegisterLibFunc(&_fnPMSessionSetCurrentPMPrinter, _printcoreLib, "PMSessionSetCurrentPMPrinter") })
-	_register("PMSessionSetDataInSession", func() { purego.RegisterLibFunc(&_fnPMSessionSetDataInSession, _printcoreLib, "PMSessionSetDataInSession") })
+	_register("PMSessionGetCGGraphicsContext", func() {
+		purego.RegisterLibFunc(&_fnPMSessionGetCGGraphicsContext, _printcoreLib, "PMSessionGetCGGraphicsContext")
+	})
+	_register("PMSessionGetCurrentPrinter", func() {
+		purego.RegisterLibFunc(&_fnPMSessionGetCurrentPrinter, _printcoreLib, "PMSessionGetCurrentPrinter")
+	})
+	_register("PMSessionGetDataFromSession", func() {
+		purego.RegisterLibFunc(&_fnPMSessionGetDataFromSession, _printcoreLib, "PMSessionGetDataFromSession")
+	})
+	_register("PMSessionGetDestinationType", func() {
+		purego.RegisterLibFunc(&_fnPMSessionGetDestinationType, _printcoreLib, "PMSessionGetDestinationType")
+	})
+	_register("PMSessionSetCurrentPMPrinter", func() {
+		purego.RegisterLibFunc(&_fnPMSessionSetCurrentPMPrinter, _printcoreLib, "PMSessionSetCurrentPMPrinter")
+	})
+	_register("PMSessionSetDataInSession", func() {
+		purego.RegisterLibFunc(&_fnPMSessionSetDataInSession, _printcoreLib, "PMSessionSetDataInSession")
+	})
 	_register("PMSessionSetDestination", func() { purego.RegisterLibFunc(&_fnPMSessionSetDestination, _printcoreLib, "PMSessionSetDestination") })
 	_register("PMSessionSetError", func() { purego.RegisterLibFunc(&_fnPMSessionSetError, _printcoreLib, "PMSessionSetError") })
-	_register("PMSessionValidatePageFormat", func() { purego.RegisterLibFunc(&_fnPMSessionValidatePageFormat, _printcoreLib, "PMSessionValidatePageFormat") })
-	_register("PMSessionValidatePrintSettings", func() { purego.RegisterLibFunc(&_fnPMSessionValidatePrintSettings, _printcoreLib, "PMSessionValidatePrintSettings") })
+	_register("PMSessionValidatePageFormat", func() {
+		purego.RegisterLibFunc(&_fnPMSessionValidatePageFormat, _printcoreLib, "PMSessionValidatePageFormat")
+	})
+	_register("PMSessionValidatePrintSettings", func() {
+		purego.RegisterLibFunc(&_fnPMSessionValidatePrintSettings, _printcoreLib, "PMSessionValidatePrintSettings")
+	})
 	_register("PMSetCollate", func() { purego.RegisterLibFunc(&_fnPMSetCollate, _printcoreLib, "PMSetCollate") })
 	_register("PMSetCopies", func() { purego.RegisterLibFunc(&_fnPMSetCopies, _printcoreLib, "PMSetCopies") })
 	_register("PMSetDuplex", func() { purego.RegisterLibFunc(&_fnPMSetDuplex, _printcoreLib, "PMSetDuplex") })
 	_register("PMSetFirstPage", func() { purego.RegisterLibFunc(&_fnPMSetFirstPage, _printcoreLib, "PMSetFirstPage") })
 	_register("PMSetLastPage", func() { purego.RegisterLibFunc(&_fnPMSetLastPage, _printcoreLib, "PMSetLastPage") })
 	_register("PMSetOrientation", func() { purego.RegisterLibFunc(&_fnPMSetOrientation, _printcoreLib, "PMSetOrientation") })
-	_register("PMSetPageFormatExtendedData", func() { purego.RegisterLibFunc(&_fnPMSetPageFormatExtendedData, _printcoreLib, "PMSetPageFormatExtendedData") })
+	_register("PMSetPageFormatExtendedData", func() {
+		purego.RegisterLibFunc(&_fnPMSetPageFormatExtendedData, _printcoreLib, "PMSetPageFormatExtendedData")
+	})
 	_register("PMSetPageRange", func() { purego.RegisterLibFunc(&_fnPMSetPageRange, _printcoreLib, "PMSetPageRange") })
 	_register("PMSetScale", func() { purego.RegisterLibFunc(&_fnPMSetScale, _printcoreLib, "PMSetScale") })
 	_register("PMWorkflowCopyItems", func() { purego.RegisterLibFunc(&_fnPMWorkflowCopyItems, _printcoreLib, "PMWorkflowCopyItems") })
-	_register("PMWorkflowSubmitPDFWithOptions", func() { purego.RegisterLibFunc(&_fnPMWorkflowSubmitPDFWithOptions, _printcoreLib, "PMWorkflowSubmitPDFWithOptions") })
-	_register("PMWorkflowSubmitPDFWithSettings", func() { purego.RegisterLibFunc(&_fnPMWorkflowSubmitPDFWithSettings, _printcoreLib, "PMWorkflowSubmitPDFWithSettings") })
+	_register("PMWorkflowSubmitPDFWithOptions", func() {
+		purego.RegisterLibFunc(&_fnPMWorkflowSubmitPDFWithOptions, _printcoreLib, "PMWorkflowSubmitPDFWithOptions")
+	})
+	_register("PMWorkflowSubmitPDFWithSettings", func() {
+		purego.RegisterLibFunc(&_fnPMWorkflowSubmitPDFWithSettings, _printcoreLib, "PMWorkflowSubmitPDFWithSettings")
+	})
 }
 
 func init() {

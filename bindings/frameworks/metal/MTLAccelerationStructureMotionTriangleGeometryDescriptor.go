@@ -16,28 +16,28 @@ type MTLAccelerationStructureMotionTriangleGeometryDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureMotionTriangleGeometryDescriptor = _objcClass("MTLAccelerationStructureMotionTriangleGeometryDescriptor")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexBuffers = objc.RegisterName("vertexBuffers")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexBuffers = objc.RegisterName("setVertexBuffers:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexFormat = objc.RegisterName("vertexFormat")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexFormat = objc.RegisterName("setVertexFormat:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexStride = objc.RegisterName("vertexStride")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexStride = objc.RegisterName("setVertexStride:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexBuffer = objc.RegisterName("indexBuffer")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexBuffer = objc.RegisterName("setIndexBuffer:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexBufferOffset = objc.RegisterName("indexBufferOffset")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexBufferOffset = objc.RegisterName("setIndexBufferOffset:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexType = objc.RegisterName("indexType")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexType = objc.RegisterName("setIndexType:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTriangleCount = objc.RegisterName("triangleCount")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTriangleCount = objc.RegisterName("setTriangleCount:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixBuffer = objc.RegisterName("transformationMatrixBuffer")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixBuffer = objc.RegisterName("setTransformationMatrixBuffer:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixBufferOffset = objc.RegisterName("transformationMatrixBufferOffset")
+	_clsMTLAccelerationStructureMotionTriangleGeometryDescriptor                                    = _objcClass("MTLAccelerationStructureMotionTriangleGeometryDescriptor")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelDescriptor                          = objc.RegisterName("descriptor")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexBuffers                       = objc.RegisterName("vertexBuffers")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexBuffers                    = objc.RegisterName("setVertexBuffers:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexFormat                        = objc.RegisterName("vertexFormat")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexFormat                     = objc.RegisterName("setVertexFormat:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexStride                        = objc.RegisterName("vertexStride")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetVertexStride                     = objc.RegisterName("setVertexStride:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexBuffer                         = objc.RegisterName("indexBuffer")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexBuffer                      = objc.RegisterName("setIndexBuffer:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexBufferOffset                   = objc.RegisterName("indexBufferOffset")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexBufferOffset                = objc.RegisterName("setIndexBufferOffset:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelIndexType                           = objc.RegisterName("indexType")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetIndexType                        = objc.RegisterName("setIndexType:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTriangleCount                       = objc.RegisterName("triangleCount")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTriangleCount                    = objc.RegisterName("setTriangleCount:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixBuffer          = objc.RegisterName("transformationMatrixBuffer")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixBuffer       = objc.RegisterName("setTransformationMatrixBuffer:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixBufferOffset    = objc.RegisterName("transformationMatrixBufferOffset")
 	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixBufferOffset = objc.RegisterName("setTransformationMatrixBufferOffset:")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixLayout = objc.RegisterName("transformationMatrixLayout")
-	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixLayout = objc.RegisterName("setTransformationMatrixLayout:")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelTransformationMatrixLayout          = objc.RegisterName("transformationMatrixLayout")
+	_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixLayout       = objc.RegisterName("setTransformationMatrixLayout:")
 )
 
 func MTLAccelerationStructureMotionTriangleGeometryDescriptorFromID(id objc.ID) *MTLAccelerationStructureMotionTriangleGeometryDescriptor {
@@ -52,14 +52,18 @@ func MTLAccelerationStructureMotionTriangleGeometryDescriptorFromID(id objc.ID) 
 
 func MTLAccelerationStructureMotionTriangleGeometryDescriptorDescriptor() *MTLAccelerationStructureMotionTriangleGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureMotionTriangleGeometryDescriptor), _mTLAccelerationStructureMotionTriangleGeometryDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructureMotionTriangleGeometryDescriptorFromID(_ret)
 }
 
 // @brief Vertex buffer containing triangle vertices similar to what MTLAccelerationStructureTriangleGeometryDescriptor has but array of the values.
 func (o *MTLAccelerationStructureMotionTriangleGeometryDescriptor) VertexBuffers() *foundation.NSArray[*MTLMotionKeyframeData] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLAccelerationStructureMotionTriangleGeometryDescriptorSelVertexBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTLMotionKeyframeData](_ret)
 }
 
@@ -156,4 +160,3 @@ func (o *MTLAccelerationStructureMotionTriangleGeometryDescriptor) Transformatio
 func (o *MTLAccelerationStructureMotionTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) {
 	o.Ptr().Send(_mTLAccelerationStructureMotionTriangleGeometryDescriptorSelSetTransformationMatrixLayout, transformationMatrixLayout)
 }
-

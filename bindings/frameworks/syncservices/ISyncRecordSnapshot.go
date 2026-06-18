@@ -18,13 +18,13 @@ type ISyncRecordSnapshot struct {
 }
 
 var (
-	_clsISyncRecordSnapshot = _objcClass("ISyncRecordSnapshot")
-	_iSyncRecordSnapshotSelRecordsWithIdentifiers = objc.RegisterName("recordsWithIdentifiers:")
+	_clsISyncRecordSnapshot                                                         = _objcClass("ISyncRecordSnapshot")
+	_iSyncRecordSnapshotSelRecordsWithIdentifiers                                   = objc.RegisterName("recordsWithIdentifiers:")
 	_iSyncRecordSnapshotSelTargetIdentifiersForRelationshipNameWithSourceIdentifier = objc.RegisterName("targetIdentifiersForRelationshipName:withSourceIdentifier:")
 	_iSyncRecordSnapshotSelSourceIdentifiersForRelationshipNameWithTargetIdentifier = objc.RegisterName("sourceIdentifiersForRelationshipName:withTargetIdentifier:")
-	_iSyncRecordSnapshotSelRecordsWithMatchingAttributes = objc.RegisterName("recordsWithMatchingAttributes:")
-	_iSyncRecordSnapshotSelRecordReferenceForRecordWithIdentifier = objc.RegisterName("recordReferenceForRecordWithIdentifier:")
-	_iSyncRecordSnapshotSelRecordIdentifierForReferenceIsModified = objc.RegisterName("recordIdentifierForReference:isModified:")
+	_iSyncRecordSnapshotSelRecordsWithMatchingAttributes                            = objc.RegisterName("recordsWithMatchingAttributes:")
+	_iSyncRecordSnapshotSelRecordReferenceForRecordWithIdentifier                   = objc.RegisterName("recordReferenceForRecordWithIdentifier:")
+	_iSyncRecordSnapshotSelRecordIdentifierForReferenceIsModified                   = objc.RegisterName("recordIdentifierForReference:isModified:")
 )
 
 func ISyncRecordSnapshotFromID(id objc.ID) *ISyncRecordSnapshot {
@@ -70,7 +70,8 @@ func (o *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier 
 // Deprecated: since macOS 10.7.
 func (o *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer, pModified *bool) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iSyncRecordSnapshotSelRecordIdentifierForReferenceIsModified, reference, pModified)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

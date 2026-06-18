@@ -15,12 +15,12 @@ type GCXboxGamepad struct {
 }
 
 var (
-	_clsGCXboxGamepad = _objcClass("GCXboxGamepad")
+	_clsGCXboxGamepad              = _objcClass("GCXboxGamepad")
 	_gCXboxGamepadSelPaddleButton1 = objc.RegisterName("paddleButton1")
 	_gCXboxGamepadSelPaddleButton2 = objc.RegisterName("paddleButton2")
 	_gCXboxGamepadSelPaddleButton3 = objc.RegisterName("paddleButton3")
 	_gCXboxGamepadSelPaddleButton4 = objc.RegisterName("paddleButton4")
-	_gCXboxGamepadSelButtonShare = objc.RegisterName("buttonShare")
+	_gCXboxGamepadSelButtonShare   = objc.RegisterName("buttonShare")
 )
 
 func GCXboxGamepadFromID(id objc.ID) *GCXboxGamepad {
@@ -36,32 +36,41 @@ func GCXboxGamepadFromID(id objc.ID) *GCXboxGamepad {
 // Some Xbox controller variants can support up to four additional buttons. @example The standard Bluetooth-enabled Xbox Wireless Controller does not have paddle buttons @example The Xbox Elite Wireless Controller has four extra digital buttons. @note The four extra digital buttons on the Xbox Elite Wireless Controller are only directly addressable when the controller is on its default mapping profile. Otherwise, the paddle buttons are directly bound to other inputs on the controller.
 func (o *GCXboxGamepad) PaddleButton1() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCXboxGamepadSelPaddleButton1)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCXboxGamepad) PaddleButton2() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCXboxGamepadSelPaddleButton2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCXboxGamepad) PaddleButton3() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCXboxGamepadSelPaddleButton3)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 func (o *GCXboxGamepad) PaddleButton4() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCXboxGamepadSelPaddleButton4)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
 
 // Some Xbox controller variants feature a Share button. @example The Bluetooth-enabled Xbox Wireless Controller introduced with the Xbox Series X and Xbox Series S in 2020 has a Share button. @note The Share button is reserved by the system for screenshot and video recording gestures. If you wish to disable these gestures in your app and take control of the Share button, set buttonShare.preferredSystemGestureState to GCSystemGestureStateDisabled.
 func (o *GCXboxGamepad) ButtonShare() *GCControllerButtonInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCXboxGamepadSelButtonShare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCControllerButtonInputFromID(_ret)
 }
-

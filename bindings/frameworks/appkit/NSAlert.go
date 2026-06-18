@@ -18,35 +18,35 @@ type NSAlert struct {
 }
 
 var (
-	_clsNSAlert = _objcClass("NSAlert")
-	_nSAlertSelAlertWithError = objc.RegisterName("alertWithError:")
-	_nSAlertSelAddButtonWithTitle = objc.RegisterName("addButtonWithTitle:")
-	_nSAlertSelLayout = objc.RegisterName("layout")
-	_nSAlertSelRunModal = objc.RegisterName("runModal")
-	_nSAlertSelBeginSheetModalForWindowCompletionHandler = objc.RegisterName("beginSheetModalForWindow:completionHandler:")
-	_nSAlertSelMessageText = objc.RegisterName("messageText")
-	_nSAlertSelSetMessageText = objc.RegisterName("setMessageText:")
-	_nSAlertSelInformativeText = objc.RegisterName("informativeText")
-	_nSAlertSelSetInformativeText = objc.RegisterName("setInformativeText:")
-	_nSAlertSelIcon = objc.RegisterName("icon")
-	_nSAlertSelSetIcon = objc.RegisterName("setIcon:")
-	_nSAlertSelButtons = objc.RegisterName("buttons")
-	_nSAlertSelAlertStyle = objc.RegisterName("alertStyle")
-	_nSAlertSelSetAlertStyle = objc.RegisterName("setAlertStyle:")
-	_nSAlertSelShowsHelp = objc.RegisterName("showsHelp")
-	_nSAlertSelSetShowsHelp = objc.RegisterName("setShowsHelp:")
-	_nSAlertSelHelpAnchor = objc.RegisterName("helpAnchor")
-	_nSAlertSelSetHelpAnchor = objc.RegisterName("setHelpAnchor:")
-	_nSAlertSelDelegate = objc.RegisterName("delegate")
-	_nSAlertSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSAlertSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSAlertSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
-	_nSAlertSelShowsSuppressionButton = objc.RegisterName("showsSuppressionButton")
-	_nSAlertSelSetShowsSuppressionButton = objc.RegisterName("setShowsSuppressionButton:")
-	_nSAlertSelSuppressionButton = objc.RegisterName("suppressionButton")
-	_nSAlertSelWindow = objc.RegisterName("window")
+	_clsNSAlert                                                                                     = _objcClass("NSAlert")
+	_nSAlertSelAlertWithError                                                                       = objc.RegisterName("alertWithError:")
+	_nSAlertSelAddButtonWithTitle                                                                   = objc.RegisterName("addButtonWithTitle:")
+	_nSAlertSelLayout                                                                               = objc.RegisterName("layout")
+	_nSAlertSelRunModal                                                                             = objc.RegisterName("runModal")
+	_nSAlertSelBeginSheetModalForWindowCompletionHandler                                            = objc.RegisterName("beginSheetModalForWindow:completionHandler:")
+	_nSAlertSelMessageText                                                                          = objc.RegisterName("messageText")
+	_nSAlertSelSetMessageText                                                                       = objc.RegisterName("setMessageText:")
+	_nSAlertSelInformativeText                                                                      = objc.RegisterName("informativeText")
+	_nSAlertSelSetInformativeText                                                                   = objc.RegisterName("setInformativeText:")
+	_nSAlertSelIcon                                                                                 = objc.RegisterName("icon")
+	_nSAlertSelSetIcon                                                                              = objc.RegisterName("setIcon:")
+	_nSAlertSelButtons                                                                              = objc.RegisterName("buttons")
+	_nSAlertSelAlertStyle                                                                           = objc.RegisterName("alertStyle")
+	_nSAlertSelSetAlertStyle                                                                        = objc.RegisterName("setAlertStyle:")
+	_nSAlertSelShowsHelp                                                                            = objc.RegisterName("showsHelp")
+	_nSAlertSelSetShowsHelp                                                                         = objc.RegisterName("setShowsHelp:")
+	_nSAlertSelHelpAnchor                                                                           = objc.RegisterName("helpAnchor")
+	_nSAlertSelSetHelpAnchor                                                                        = objc.RegisterName("setHelpAnchor:")
+	_nSAlertSelDelegate                                                                             = objc.RegisterName("delegate")
+	_nSAlertSelSetDelegate                                                                          = objc.RegisterName("setDelegate:")
+	_nSAlertSelAccessoryView                                                                        = objc.RegisterName("accessoryView")
+	_nSAlertSelSetAccessoryView                                                                     = objc.RegisterName("setAccessoryView:")
+	_nSAlertSelShowsSuppressionButton                                                               = objc.RegisterName("showsSuppressionButton")
+	_nSAlertSelSetShowsSuppressionButton                                                            = objc.RegisterName("setShowsSuppressionButton:")
+	_nSAlertSelSuppressionButton                                                                    = objc.RegisterName("suppressionButton")
+	_nSAlertSelWindow                                                                               = objc.RegisterName("window")
 	_nSAlertSelAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat = objc.RegisterName("alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:")
-	_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo = objc.RegisterName("beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:")
+	_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo                       = objc.RegisterName("beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:")
 )
 
 func NSAlertFromID(id objc.ID) *NSAlert {
@@ -62,14 +62,18 @@ func NSAlertFromID(id objc.ID) *NSAlert {
 // Returns an alert initialized from information in an error object. - Parameter error: Error information to display. - Returns: An initialized alert. - Note: The `NSAlert` class extracts the localized error description, recovery suggestion, and recovery options from the error parameter and uses them as the alert’s message text, informative text, and button titles, respectively.
 func NSAlertAlertWithError(error_ unsafe.Pointer) *NSAlert {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithError, error_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAlertFromID(_ret)
 }
 
 // Adds a button with a given title to the alert. Buttons should be added from most-to-least prominent. The exact visual arrangement of the buttons is determined by `NSAlert` internally. In general, they are arranged from trailing-to-leading edge when laid out horizontally, and top-to-bottom when laid out vertically, with some exceptions for buttons like “Cancel”. The first three buttons are identified by the order in which they are added (not the order in which they may appear visually) as `NSAlertFirstButtonReturn`, `NSAlertSecondButtonReturn`, `NSAlertThirdButtonReturn` in the return-code parameter. Subsequent buttons are identified as `NSAlertThirdButtonReturn` + *n*, where *n* is an integer. By default, the first button has a key equivalent of Return, any button with a title of “Cancel” has a key equivalent of Escape, and any button with the title “Don’t Save” has a key equivalent of Command-D (but only if it’s not the first button). You can also assign different key equivalents for the buttons using the `keyEquivalent` method of the `NSButton` class. In addition, you can use the `tag` property of the `NSButton` class to set the alert presentation’s return-code. The framework reserves the use of the button’s `target` and `action`. - Parameter title: Title of the button to add to the alert. - Returns: The button that was added to the alert.
 func (o *NSAlert) AddButtonWithTitle(title *foundation.NSString) *NSButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAddButtonWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
@@ -99,7 +103,9 @@ func (o *NSAlert) BeginSheetModalForWindowCompletionHandler(sheetWindow *NSWindo
 // The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (o *NSAlert) MessageText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelMessageText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,7 +117,9 @@ func (o *NSAlert) SetMessageText(messageText *foundation.NSString) {
 // The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (o *NSAlert) InformativeText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelInformativeText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +131,9 @@ func (o *NSAlert) SetInformativeText(informativeText *foundation.NSString) {
 // The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
 func (o *NSAlert) Icon() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelIcon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -135,7 +145,9 @@ func (o *NSAlert) SetIcon(icon *NSImage) {
 // The array of response buttons for the alert. The buttons are in the order in which they were added, and do not necessarily reflect the order they are arranged visually. The array does not include the default “OK” button that is shown in an alert presented without any buttons added with `-addButtonWithTitle:`.
 func (o *NSAlert) Buttons() *foundation.NSArray[*NSButton] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelButtons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSButton](_ret)
 }
 
@@ -164,7 +176,9 @@ func (o *NSAlert) SetShowsHelp(showsHelp bool) {
 // The alert’s HTML help anchor used when the user clicks the alert’s help button
 func (o *NSAlert) HelpAnchor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelHelpAnchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -187,7 +201,9 @@ func (o *NSAlert) SetDelegate(delegate NSAlertDelegate) {
 // The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
 func (o *NSAlert) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -210,21 +226,27 @@ func (o *NSAlert) SetShowsSuppressionButton(showsSuppressionButton bool) {
 // The alert’s suppression checkbox. The checkbox may be customized, including the title and the initial state. Additionally, use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again. In order to show the suppression button in the alert panel, you must set `showsSuppressionButton` to `YES`.
 func (o *NSAlert) SuppressionButton() *NSButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelSuppressionButton)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonFromID(_ret)
 }
 
 // The app-modal panel or document-modal sheet that corresponds to the alert
 func (o *NSAlert) Window() *NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAlertSelWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWindowFromID(_ret)
 }
 
 // Deprecated: Use -init instead
 func NSAlertAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat(message *foundation.NSString, defaultButton *foundation.NSString, alternateButton *foundation.NSString, otherButton *foundation.NSString, format *foundation.NSString) *NSAlert {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAlert), _nSAlertSelAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat, message.Ptr(), defaultButton.Ptr(), alternateButton.Ptr(), otherButton.Ptr(), format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAlertFromID(_ret)
 }
 
@@ -232,4 +254,3 @@ func NSAlertAlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformati
 func (o *NSAlert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	o.Ptr().Send(_nSAlertSelBeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo, window.Ptr(), delegate, didEndSelector, contextInfo)
 }
-

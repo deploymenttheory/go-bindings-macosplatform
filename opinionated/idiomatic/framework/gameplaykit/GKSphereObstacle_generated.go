@@ -76,4 +76,3 @@ type SphereObstacleable interface {
 }
 
 var _ SphereObstacleable = (*SphereObstacle)(nil)
-

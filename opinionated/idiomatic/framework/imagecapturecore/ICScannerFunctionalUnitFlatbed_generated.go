@@ -123,7 +123,9 @@ func (x *ScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
 	return x.inner.DocumentSize()
 }
 
-func (x *ScannerFunctionalUnitFlatbed) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+func (x *ScannerFunctionalUnitFlatbed) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
+	return &x.inner.ICScannerFunctionalUnit
+}
 
 // ScannerFunctionalUnitFlatbedable is the interface implemented by [ScannerFunctionalUnitFlatbed], for mocking and DI.
 type ScannerFunctionalUnitFlatbedable interface {
@@ -146,4 +148,3 @@ type ScannerFunctionalUnitFlatbedable interface {
 }
 
 var _ ScannerFunctionalUnitFlatbedable = (*ScannerFunctionalUnitFlatbed)(nil)
-

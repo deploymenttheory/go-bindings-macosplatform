@@ -91,4 +91,3 @@ type SymbolEffectOptionsable interface {
 }
 
 var _ SymbolEffectOptionsable = (*SymbolEffectOptions)(nil)
-

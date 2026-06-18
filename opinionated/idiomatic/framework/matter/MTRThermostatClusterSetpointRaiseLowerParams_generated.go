@@ -16,7 +16,9 @@ type MTRThermostatClusterSetpointRaiseLowerParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterSetpointRaiseLowerParams].
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams { return x.inner }
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRThermostatClusterSetpointRaiseLowerParamsable interface {
 }
 
 var _ MTRThermostatClusterSetpointRaiseLowerParamsable = (*MTRThermostatClusterSetpointRaiseLowerParams)(nil)
-

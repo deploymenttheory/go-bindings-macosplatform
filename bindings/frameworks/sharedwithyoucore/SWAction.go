@@ -16,10 +16,10 @@ type SWAction struct {
 }
 
 var (
-	_clsSWAction = _objcClass("SWAction")
-	_sWActionSelFulfill = objc.RegisterName("fulfill")
-	_sWActionSelFail = objc.RegisterName("fail")
-	_sWActionSelUuid = objc.RegisterName("uuid")
+	_clsSWAction           = _objcClass("SWAction")
+	_sWActionSelFulfill    = objc.RegisterName("fulfill")
+	_sWActionSelFail       = objc.RegisterName("fail")
+	_sWActionSelUuid       = objc.RegisterName("uuid")
 	_sWActionSelIsComplete = objc.RegisterName("isComplete")
 )
 
@@ -43,7 +43,9 @@ func (o *SWAction) Fail() {
 
 func (o *SWAction) Uuid() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWActionSelUuid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *SWAction) IsComplete() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sWActionSelIsComplete)
 	return _ret
 }
-

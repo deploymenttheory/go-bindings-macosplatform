@@ -85,4 +85,3 @@ type MTRServiceAreaClusterMapStructable interface {
 }
 
 var _ MTRServiceAreaClusterMapStructable = (*MTRServiceAreaClusterMapStruct)(nil)
-

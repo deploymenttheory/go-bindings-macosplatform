@@ -16,7 +16,9 @@ type MTRNetworkCommissioningClusterNetworkInfo struct {
 }
 
 // Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterNetworkInfo].
-func (x *MTRNetworkCommissioningClusterNetworkInfo) Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfo { return x.inner }
+func (x *MTRNetworkCommissioningClusterNetworkInfo) Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfo {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected *fou
 	return x
 }
 
-func (x *MTRNetworkCommissioningClusterNetworkInfo) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct { return &x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct }
+func (x *MTRNetworkCommissioningClusterNetworkInfo) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct {
+	return &x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct
+}
 
 // MTRNetworkCommissioningClusterNetworkInfoable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfo], for mocking and DI.
 type MTRNetworkCommissioningClusterNetworkInfoable interface {
@@ -58,4 +62,3 @@ type MTRNetworkCommissioningClusterNetworkInfoable interface {
 }
 
 var _ MTRNetworkCommissioningClusterNetworkInfoable = (*MTRNetworkCommissioningClusterNetworkInfo)(nil)
-

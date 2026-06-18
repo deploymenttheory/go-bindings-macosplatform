@@ -15,8 +15,8 @@ type MKImageryMapConfiguration struct {
 }
 
 var (
-	_clsMKImageryMapConfiguration = _objcClass("MKImageryMapConfiguration")
-	_mKImageryMapConfigurationSelInit = objc.RegisterName("init")
+	_clsMKImageryMapConfiguration                       = _objcClass("MKImageryMapConfiguration")
+	_mKImageryMapConfigurationSelInit                   = objc.RegisterName("init")
 	_mKImageryMapConfigurationSelInitWithElevationStyle = objc.RegisterName("initWithElevationStyle:")
 )
 
@@ -32,13 +32,16 @@ func MKImageryMapConfigurationFromID(id objc.ID) *MKImageryMapConfiguration {
 
 func (o *MKImageryMapConfiguration) Init() *MKImageryMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKImageryMapConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKImageryMapConfigurationFromID(_ret)
 }
 
 func (o *MKImageryMapConfiguration) InitWithElevationStyle(elevationStyle MKMapElevationStyle) *MKImageryMapConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKImageryMapConfigurationSelInitWithElevationStyle, elevationStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKImageryMapConfigurationFromID(_ret)
 }
-

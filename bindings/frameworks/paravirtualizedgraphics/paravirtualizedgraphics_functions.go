@@ -19,14 +19,16 @@ var (
 	// @function PGMaxDisplayPortCount @abstract Returns the maximum number of PGDisplay ports that a PGDevice can be configured with. @note See PGDeviceDescriptor's displayPortCount property.
 	_fnPGMaxDisplayPortCount func() uint32
 	// @function PGNewDeviceWithDescriptor @abstract Create a new PGDevice implementation object based on the provided descriptor. @param descriptor The device descriptor for the new device. @deprecated Use PGCreateDeviceWithDescriptor instead as it's annotated correctly for ARC.
-// Deprecated: since macOS 15.2.
+	// Deprecated: since macOS 15.2.
 	_fnPGNewDeviceWithDescriptor func(objc.ID) PGDevice
 )
 
 // @function PGCopyOptionROMURL @abstract Copy the URL of the option ROM to be used by the device.  The URL will be a local file path to a flat ROM image.  The client code should pad the ROM image out to a power of 2 size with a zero-filled trailer and present the resulting bytes as read only memory to the PCI option ROM BAR for the device. @return The URL.
 func PGCopyOptionROMURL() *foundation.NSURL {
 	_ret := _fnPGCopyOptionROMURL()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func PGMaxDisplayPortCount() uint32 {
 func PGNewDeviceWithDescriptor(descriptor *PGDeviceDescriptor) PGDevice {
 	return _fnPGNewDeviceWithDescriptor(descriptor.Ptr())
 }
-

@@ -16,49 +16,49 @@ type NSRuleEditor struct {
 }
 
 var (
-	_clsNSRuleEditor = _objcClass("NSRuleEditor")
-	_nSRuleEditorSelReloadCriteria = objc.RegisterName("reloadCriteria")
-	_nSRuleEditorSelReloadPredicate = objc.RegisterName("reloadPredicate")
-	_nSRuleEditorSelPredicateForRow = objc.RegisterName("predicateForRow:")
-	_nSRuleEditorSelSubrowIndexesForRow = objc.RegisterName("subrowIndexesForRow:")
-	_nSRuleEditorSelCriteriaForRow = objc.RegisterName("criteriaForRow:")
-	_nSRuleEditorSelDisplayValuesForRow = objc.RegisterName("displayValuesForRow:")
-	_nSRuleEditorSelRowForDisplayValue = objc.RegisterName("rowForDisplayValue:")
-	_nSRuleEditorSelRowTypeForRow = objc.RegisterName("rowTypeForRow:")
-	_nSRuleEditorSelParentRowForRow = objc.RegisterName("parentRowForRow:")
-	_nSRuleEditorSelAddRow = objc.RegisterName("addRow:")
+	_clsNSRuleEditor                                             = _objcClass("NSRuleEditor")
+	_nSRuleEditorSelReloadCriteria                               = objc.RegisterName("reloadCriteria")
+	_nSRuleEditorSelReloadPredicate                              = objc.RegisterName("reloadPredicate")
+	_nSRuleEditorSelPredicateForRow                              = objc.RegisterName("predicateForRow:")
+	_nSRuleEditorSelSubrowIndexesForRow                          = objc.RegisterName("subrowIndexesForRow:")
+	_nSRuleEditorSelCriteriaForRow                               = objc.RegisterName("criteriaForRow:")
+	_nSRuleEditorSelDisplayValuesForRow                          = objc.RegisterName("displayValuesForRow:")
+	_nSRuleEditorSelRowForDisplayValue                           = objc.RegisterName("rowForDisplayValue:")
+	_nSRuleEditorSelRowTypeForRow                                = objc.RegisterName("rowTypeForRow:")
+	_nSRuleEditorSelParentRowForRow                              = objc.RegisterName("parentRowForRow:")
+	_nSRuleEditorSelAddRow                                       = objc.RegisterName("addRow:")
 	_nSRuleEditorSelInsertRowAtIndexWithTypeAsSubrowOfRowAnimate = objc.RegisterName("insertRowAtIndex:withType:asSubrowOfRow:animate:")
-	_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex = objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:")
-	_nSRuleEditorSelRemoveRowAtIndex = objc.RegisterName("removeRowAtIndex:")
-	_nSRuleEditorSelRemoveRowsAtIndexesIncludeSubrows = objc.RegisterName("removeRowsAtIndexes:includeSubrows:")
-	_nSRuleEditorSelSelectRowIndexesByExtendingSelection = objc.RegisterName("selectRowIndexes:byExtendingSelection:")
-	_nSRuleEditorSelDelegate = objc.RegisterName("delegate")
-	_nSRuleEditorSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSRuleEditorSelFormattingStringsFilename = objc.RegisterName("formattingStringsFilename")
-	_nSRuleEditorSelSetFormattingStringsFilename = objc.RegisterName("setFormattingStringsFilename:")
-	_nSRuleEditorSelFormattingDictionary = objc.RegisterName("formattingDictionary")
-	_nSRuleEditorSelSetFormattingDictionary = objc.RegisterName("setFormattingDictionary:")
-	_nSRuleEditorSelNestingMode = objc.RegisterName("nestingMode")
-	_nSRuleEditorSelSetNestingMode = objc.RegisterName("setNestingMode:")
-	_nSRuleEditorSelRowHeight = objc.RegisterName("rowHeight")
-	_nSRuleEditorSelSetRowHeight = objc.RegisterName("setRowHeight:")
-	_nSRuleEditorSelIsEditable = objc.RegisterName("isEditable")
-	_nSRuleEditorSelSetEditable = objc.RegisterName("setEditable:")
-	_nSRuleEditorSelCanRemoveAllRows = objc.RegisterName("canRemoveAllRows")
-	_nSRuleEditorSelSetCanRemoveAllRows = objc.RegisterName("setCanRemoveAllRows:")
-	_nSRuleEditorSelPredicate = objc.RegisterName("predicate")
-	_nSRuleEditorSelNumberOfRows = objc.RegisterName("numberOfRows")
-	_nSRuleEditorSelSelectedRowIndexes = objc.RegisterName("selectedRowIndexes")
-	_nSRuleEditorSelRowClass = objc.RegisterName("rowClass")
-	_nSRuleEditorSelSetRowClass = objc.RegisterName("setRowClass:")
-	_nSRuleEditorSelRowTypeKeyPath = objc.RegisterName("rowTypeKeyPath")
-	_nSRuleEditorSelSetRowTypeKeyPath = objc.RegisterName("setRowTypeKeyPath:")
-	_nSRuleEditorSelSubrowsKeyPath = objc.RegisterName("subrowsKeyPath")
-	_nSRuleEditorSelSetSubrowsKeyPath = objc.RegisterName("setSubrowsKeyPath:")
-	_nSRuleEditorSelCriteriaKeyPath = objc.RegisterName("criteriaKeyPath")
-	_nSRuleEditorSelSetCriteriaKeyPath = objc.RegisterName("setCriteriaKeyPath:")
-	_nSRuleEditorSelDisplayValuesKeyPath = objc.RegisterName("displayValuesKeyPath")
-	_nSRuleEditorSelSetDisplayValuesKeyPath = objc.RegisterName("setDisplayValuesKeyPath:")
+	_nSRuleEditorSelSetCriteriaAndDisplayValuesForRowAtIndex     = objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:")
+	_nSRuleEditorSelRemoveRowAtIndex                             = objc.RegisterName("removeRowAtIndex:")
+	_nSRuleEditorSelRemoveRowsAtIndexesIncludeSubrows            = objc.RegisterName("removeRowsAtIndexes:includeSubrows:")
+	_nSRuleEditorSelSelectRowIndexesByExtendingSelection         = objc.RegisterName("selectRowIndexes:byExtendingSelection:")
+	_nSRuleEditorSelDelegate                                     = objc.RegisterName("delegate")
+	_nSRuleEditorSelSetDelegate                                  = objc.RegisterName("setDelegate:")
+	_nSRuleEditorSelFormattingStringsFilename                    = objc.RegisterName("formattingStringsFilename")
+	_nSRuleEditorSelSetFormattingStringsFilename                 = objc.RegisterName("setFormattingStringsFilename:")
+	_nSRuleEditorSelFormattingDictionary                         = objc.RegisterName("formattingDictionary")
+	_nSRuleEditorSelSetFormattingDictionary                      = objc.RegisterName("setFormattingDictionary:")
+	_nSRuleEditorSelNestingMode                                  = objc.RegisterName("nestingMode")
+	_nSRuleEditorSelSetNestingMode                               = objc.RegisterName("setNestingMode:")
+	_nSRuleEditorSelRowHeight                                    = objc.RegisterName("rowHeight")
+	_nSRuleEditorSelSetRowHeight                                 = objc.RegisterName("setRowHeight:")
+	_nSRuleEditorSelIsEditable                                   = objc.RegisterName("isEditable")
+	_nSRuleEditorSelSetEditable                                  = objc.RegisterName("setEditable:")
+	_nSRuleEditorSelCanRemoveAllRows                             = objc.RegisterName("canRemoveAllRows")
+	_nSRuleEditorSelSetCanRemoveAllRows                          = objc.RegisterName("setCanRemoveAllRows:")
+	_nSRuleEditorSelPredicate                                    = objc.RegisterName("predicate")
+	_nSRuleEditorSelNumberOfRows                                 = objc.RegisterName("numberOfRows")
+	_nSRuleEditorSelSelectedRowIndexes                           = objc.RegisterName("selectedRowIndexes")
+	_nSRuleEditorSelRowClass                                     = objc.RegisterName("rowClass")
+	_nSRuleEditorSelSetRowClass                                  = objc.RegisterName("setRowClass:")
+	_nSRuleEditorSelRowTypeKeyPath                               = objc.RegisterName("rowTypeKeyPath")
+	_nSRuleEditorSelSetRowTypeKeyPath                            = objc.RegisterName("setRowTypeKeyPath:")
+	_nSRuleEditorSelSubrowsKeyPath                               = objc.RegisterName("subrowsKeyPath")
+	_nSRuleEditorSelSetSubrowsKeyPath                            = objc.RegisterName("setSubrowsKeyPath:")
+	_nSRuleEditorSelCriteriaKeyPath                              = objc.RegisterName("criteriaKeyPath")
+	_nSRuleEditorSelSetCriteriaKeyPath                           = objc.RegisterName("setCriteriaKeyPath:")
+	_nSRuleEditorSelDisplayValuesKeyPath                         = objc.RegisterName("displayValuesKeyPath")
+	_nSRuleEditorSelSetDisplayValuesKeyPath                      = objc.RegisterName("setDisplayValuesKeyPath:")
 )
 
 func NSRuleEditorFromID(id objc.ID) *NSRuleEditor {
@@ -81,13 +81,17 @@ func (o *NSRuleEditor) ReloadPredicate() {
 
 func (o *NSRuleEditor) PredicateForRow(row int) *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicateForRow, row)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
 func (o *NSRuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowIndexesForRow, rowIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -151,7 +155,9 @@ func (o *NSRuleEditor) SetDelegate(delegate NSRuleEditorDelegate) {
 
 func (o *NSRuleEditor) FormattingStringsFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelFormattingStringsFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -206,7 +212,9 @@ func (o *NSRuleEditor) SetCanRemoveAllRows(canRemoveAllRows bool) {
 
 func (o *NSRuleEditor) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -217,7 +225,9 @@ func (o *NSRuleEditor) NumberOfRows() int {
 
 func (o *NSRuleEditor) SelectedRowIndexes() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSelectedRowIndexes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -232,7 +242,9 @@ func (o *NSRuleEditor) SetRowClass(rowClass objc.Class) {
 
 func (o *NSRuleEditor) RowTypeKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelRowTypeKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -242,7 +254,9 @@ func (o *NSRuleEditor) SetRowTypeKeyPath(rowTypeKeyPath *foundation.NSString) {
 
 func (o *NSRuleEditor) SubrowsKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelSubrowsKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -252,7 +266,9 @@ func (o *NSRuleEditor) SetSubrowsKeyPath(subrowsKeyPath *foundation.NSString) {
 
 func (o *NSRuleEditor) CriteriaKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelCriteriaKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -262,11 +278,12 @@ func (o *NSRuleEditor) SetCriteriaKeyPath(criteriaKeyPath *foundation.NSString) 
 
 func (o *NSRuleEditor) DisplayValuesKeyPath() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRuleEditorSelDisplayValuesKeyPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSRuleEditor) SetDisplayValuesKeyPath(displayValuesKeyPath *foundation.NSString) {
 	o.Ptr().Send(_nSRuleEditorSelSetDisplayValuesKeyPath, displayValuesKeyPath.Ptr())
 }
-

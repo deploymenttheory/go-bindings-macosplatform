@@ -16,16 +16,16 @@ type CKShareMetadata struct {
 }
 
 var (
-	_clsCKShareMetadata = _objcClass("CKShareMetadata")
-	_cKShareMetadataSelContainerIdentifier = objc.RegisterName("containerIdentifier")
-	_cKShareMetadataSelShare = objc.RegisterName("share")
+	_clsCKShareMetadata                         = _objcClass("CKShareMetadata")
+	_cKShareMetadataSelContainerIdentifier      = objc.RegisterName("containerIdentifier")
+	_cKShareMetadataSelShare                    = objc.RegisterName("share")
 	_cKShareMetadataSelHierarchicalRootRecordID = objc.RegisterName("hierarchicalRootRecordID")
-	_cKShareMetadataSelParticipantRole = objc.RegisterName("participantRole")
-	_cKShareMetadataSelParticipantStatus = objc.RegisterName("participantStatus")
-	_cKShareMetadataSelParticipantPermission = objc.RegisterName("participantPermission")
-	_cKShareMetadataSelOwnerIdentity = objc.RegisterName("ownerIdentity")
-	_cKShareMetadataSelRootRecord = objc.RegisterName("rootRecord")
-	_cKShareMetadataSelRootRecordID = objc.RegisterName("rootRecordID")
+	_cKShareMetadataSelParticipantRole          = objc.RegisterName("participantRole")
+	_cKShareMetadataSelParticipantStatus        = objc.RegisterName("participantStatus")
+	_cKShareMetadataSelParticipantPermission    = objc.RegisterName("participantPermission")
+	_cKShareMetadataSelOwnerIdentity            = objc.RegisterName("ownerIdentity")
+	_cKShareMetadataSelRootRecord               = objc.RegisterName("rootRecord")
+	_cKShareMetadataSelRootRecordID             = objc.RegisterName("rootRecordID")
 )
 
 func CKShareMetadataFromID(id objc.ID) *CKShareMetadata {
@@ -41,21 +41,27 @@ func CKShareMetadataFromID(id objc.ID) *CKShareMetadata {
 // The ID of the share's container.
 func (o *CKShareMetadata) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The share that owns the metadata.
 func (o *CKShareMetadata) Share() *CKShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelShare)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKShareFromID(_ret)
 }
 
 // The record ID of the shared hierarchy's root record. CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property is `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
 func (o *CKShareMetadata) HierarchicalRootRecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelHierarchicalRootRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
@@ -80,22 +86,27 @@ func (o *CKShareMetadata) ParticipantPermission() CKShareParticipantPermission {
 // The identity of the share's owner.
 func (o *CKShareMetadata) OwnerIdentity() *CKUserIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelOwnerIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityFromID(_ret)
 }
 
-// The share's root record. This property contains the root record of the shared record hierarchy if you set the ``CKFetchShareMetadataOperation/shouldFetchRootRecord`` property of the operation that fetches the metadata to <doc://com.apple.documentation/documentation/swift/true>. You can specify which fields CloudKit returns by setting the same operation's ``CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex`` property. The operation ignores the ``CKFetchShareMetadataOperation/shouldFetchRootRecord`` and ``CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex`` properties when fetching a shared record zone's metadata because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
+// The share's root record. This property contains the root record of the shared record hierarchy if you set the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ property of the operation that fetches the metadata to <doc://com.apple.documentation/documentation/swift/true>. You can specify which fields CloudKit returns by setting the same operation's “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ property. The operation ignores the “CKFetchShareMetadataOperation/shouldFetchRootRecord“ and “CKFetchShareMetadataOperation/rootRecordDesiredKeys-3xrex“ properties when fetching a shared record zone's metadata because, unlike a shared record hierarchy, a record zone doesn't have a nominated root record.
 func (o *CKShareMetadata) RootRecord() *CKRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelRootRecord)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordFromID(_ret)
 }
 
-// The record ID of the share's root record. @DeprecationSummary { Use ``CKShare/Metadata/hierarchicalRootRecordID`` instead. } CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property returns `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
+// The record ID of the share's root record. @DeprecationSummary { Use “CKShare/Metadata/hierarchicalRootRecordID“ instead. } CloudKit populates this property only for metadata that belongs to a shared record hierarchy. If the metadata is part of a shared record zone, the property returns `nil`. This is because, unlike a shared record hierarchy, a shared record zone doesn't have a nominated root record.
 // Deprecated: since macOS 13.0.
 func (o *CKShareMetadata) RootRecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareMetadataSelRootRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
-

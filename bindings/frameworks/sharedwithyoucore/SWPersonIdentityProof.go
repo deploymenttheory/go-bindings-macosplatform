@@ -16,10 +16,10 @@ type SWPersonIdentityProof struct {
 }
 
 var (
-	_clsSWPersonIdentityProof = _objcClass("SWPersonIdentityProof")
+	_clsSWPersonIdentityProof                = _objcClass("SWPersonIdentityProof")
 	_sWPersonIdentityProofSelInclusionHashes = objc.RegisterName("inclusionHashes")
-	_sWPersonIdentityProofSelPublicKey = objc.RegisterName("publicKey")
-	_sWPersonIdentityProofSelPublicKeyIndex = objc.RegisterName("publicKeyIndex")
+	_sWPersonIdentityProofSelPublicKey       = objc.RegisterName("publicKey")
+	_sWPersonIdentityProofSelPublicKeyIndex  = objc.RegisterName("publicKeyIndex")
 )
 
 func SWPersonIdentityProofFromID(id objc.ID) *SWPersonIdentityProof {
@@ -41,7 +41,9 @@ func (o *SWPersonIdentityProof) InclusionHashes() *foundation.NSArray[*foundatio
 // @abstract Public key of local device
 func (o *SWPersonIdentityProof) PublicKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWPersonIdentityProofSelPublicKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *SWPersonIdentityProof) PublicKeyIndex() uint {
 	_ret := objc.Send[uint](o.Ptr(), _sWPersonIdentityProofSelPublicKeyIndex)
 	return _ret
 }
-

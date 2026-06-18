@@ -64,4 +64,3 @@ type ToolPickerItemable interface {
 }
 
 var _ ToolPickerItemable = (*ToolPickerItem)(nil)
-

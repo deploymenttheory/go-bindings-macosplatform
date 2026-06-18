@@ -16,7 +16,7 @@ type MTLArchitecture struct {
 }
 
 var (
-	_clsMTLArchitecture = _objcClass("MTLArchitecture")
+	_clsMTLArchitecture     = _objcClass("MTLArchitecture")
 	_mTLArchitectureSelName = objc.RegisterName("name")
 )
 
@@ -32,7 +32,8 @@ func MTLArchitectureFromID(id objc.ID) *MTLArchitecture {
 
 func (o *MTLArchitecture) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLArchitectureSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

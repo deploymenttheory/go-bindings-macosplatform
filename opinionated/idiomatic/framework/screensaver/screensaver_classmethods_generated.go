@@ -28,4 +28,3 @@ func BackingStoreType() appkit.NSBackingStoreType {
 func PerformGammaFade() bool {
 	return raw.ScreenSaverViewPerformGammaFade()
 }
-

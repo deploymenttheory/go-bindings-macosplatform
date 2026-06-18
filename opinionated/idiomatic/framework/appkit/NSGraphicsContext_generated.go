@@ -206,4 +206,3 @@ type GraphicsContextable interface {
 }
 
 var _ GraphicsContextable = (*GraphicsContext)(nil)
-

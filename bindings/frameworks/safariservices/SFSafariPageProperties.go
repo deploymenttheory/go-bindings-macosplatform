@@ -16,11 +16,11 @@ type SFSafariPageProperties struct {
 }
 
 var (
-	_clsSFSafariPageProperties = _objcClass("SFSafariPageProperties")
-	_sFSafariPagePropertiesSelUrl = objc.RegisterName("url")
-	_sFSafariPagePropertiesSelTitle = objc.RegisterName("title")
+	_clsSFSafariPageProperties                    = _objcClass("SFSafariPageProperties")
+	_sFSafariPagePropertiesSelUrl                 = objc.RegisterName("url")
+	_sFSafariPagePropertiesSelTitle               = objc.RegisterName("title")
 	_sFSafariPagePropertiesSelUsesPrivateBrowsing = objc.RegisterName("usesPrivateBrowsing")
-	_sFSafariPagePropertiesSelIsActive = objc.RegisterName("isActive")
+	_sFSafariPagePropertiesSelIsActive            = objc.RegisterName("isActive")
 )
 
 func SFSafariPagePropertiesFromID(id objc.ID) *SFSafariPageProperties {
@@ -35,13 +35,17 @@ func SFSafariPagePropertiesFromID(id objc.ID) *SFSafariPageProperties {
 
 func (o *SFSafariPageProperties) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSafariPagePropertiesSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *SFSafariPageProperties) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSafariPagePropertiesSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *SFSafariPageProperties) IsActive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFSafariPagePropertiesSelIsActive)
 	return _ret
 }
-

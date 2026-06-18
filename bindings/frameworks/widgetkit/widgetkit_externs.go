@@ -30,4 +30,3 @@ func WGWidgetUserInfoKeyKind() uintptr {
 	ptr, _ := purego.Dlsym(_widgetkitLib, "WGWidgetUserInfoKeyKind")
 	return ptr
 }
-

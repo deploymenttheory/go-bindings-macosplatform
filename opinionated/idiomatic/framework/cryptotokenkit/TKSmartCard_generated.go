@@ -256,4 +256,3 @@ type SmartCardable interface {
 }
 
 var _ SmartCardable = (*SmartCard)(nil)
-

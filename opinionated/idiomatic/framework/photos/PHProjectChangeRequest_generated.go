@@ -90,7 +90,9 @@ func (x *ProjectChangeRequest) SetProjectExtensionData(projectExtensionData *fou
 	x.inner.SetProjectExtensionData(projectExtensionData)
 }
 
-func (x *ProjectChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+func (x *ProjectChangeRequest) asChangeRequest() *raw.PHChangeRequest {
+	return &x.inner.PHChangeRequest
+}
 
 // ProjectChangeRequestable is the interface implemented by [ProjectChangeRequest], for mocking and DI.
 type ProjectChangeRequestable interface {
@@ -107,4 +109,3 @@ type ProjectChangeRequestable interface {
 }
 
 var _ ProjectChangeRequestable = (*ProjectChangeRequest)(nil)
-

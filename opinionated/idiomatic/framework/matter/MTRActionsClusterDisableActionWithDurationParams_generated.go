@@ -16,7 +16,9 @@ type MTRActionsClusterDisableActionWithDurationParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterDisableActionWithDurationParams].
-func (x *MTRActionsClusterDisableActionWithDurationParams) Unwrap() *raw.MTRActionsClusterDisableActionWithDurationParams { return x.inner }
+func (x *MTRActionsClusterDisableActionWithDurationParams) Unwrap() *raw.MTRActionsClusterDisableActionWithDurationParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -137,4 +139,3 @@ type MTRActionsClusterDisableActionWithDurationParamsable interface {
 }
 
 var _ MTRActionsClusterDisableActionWithDurationParamsable = (*MTRActionsClusterDisableActionWithDurationParams)(nil)
-

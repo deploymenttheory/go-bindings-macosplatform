@@ -17,15 +17,15 @@ type AVAudioChannelLayout struct {
 }
 
 var (
-	_clsAVAudioChannelLayout = _objcClass("AVAudioChannelLayout")
-	_aVAudioChannelLayoutSelInitWithLayoutTag = objc.RegisterName("initWithLayoutTag:")
-	_aVAudioChannelLayoutSelInitWithLayout = objc.RegisterName("initWithLayout:")
-	_aVAudioChannelLayoutSelIsEqual = objc.RegisterName("isEqual:")
+	_clsAVAudioChannelLayout                    = _objcClass("AVAudioChannelLayout")
+	_aVAudioChannelLayoutSelInitWithLayoutTag   = objc.RegisterName("initWithLayoutTag:")
+	_aVAudioChannelLayoutSelInitWithLayout      = objc.RegisterName("initWithLayout:")
+	_aVAudioChannelLayoutSelIsEqual             = objc.RegisterName("isEqual:")
 	_aVAudioChannelLayoutSelLayoutWithLayoutTag = objc.RegisterName("layoutWithLayoutTag:")
-	_aVAudioChannelLayoutSelLayoutWithLayout = objc.RegisterName("layoutWithLayout:")
-	_aVAudioChannelLayoutSelLayoutTag = objc.RegisterName("layoutTag")
-	_aVAudioChannelLayoutSelLayout = objc.RegisterName("layout")
-	_aVAudioChannelLayoutSelChannelCount = objc.RegisterName("channelCount")
+	_aVAudioChannelLayoutSelLayoutWithLayout    = objc.RegisterName("layoutWithLayout:")
+	_aVAudioChannelLayoutSelLayoutTag           = objc.RegisterName("layoutTag")
+	_aVAudioChannelLayoutSelLayout              = objc.RegisterName("layout")
+	_aVAudioChannelLayoutSelChannelCount        = objc.RegisterName("channelCount")
 )
 
 func AVAudioChannelLayoutFromID(id objc.ID) *AVAudioChannelLayout {
@@ -41,14 +41,18 @@ func AVAudioChannelLayoutFromID(id objc.ID) *AVAudioChannelLayout {
 // @method initWithLayoutTag: @abstract Initialize from a layout tag. @param layoutTag The tag. @discussion Returns nil if the tag is either kAudioChannelLayoutTag_UseChannelDescriptions or kAudioChannelLayoutTag_UseChannelBitmap.
 func (o *AVAudioChannelLayout) InitWithLayoutTag(layoutTag uint) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioChannelLayoutSelInitWithLayoutTag, layoutTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
 // @method initWithLayout: @abstract Initialize from an AudioChannelLayout. @param layout The AudioChannelLayout. @discussion If the provided layout's tag is kAudioChannelLayoutTag_UseChannelDescriptions, this initializer attempts to convert it to a more specific tag.
 func (o *AVAudioChannelLayout) InitWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioChannelLayoutSelInitWithLayout, layout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
@@ -61,14 +65,18 @@ func (o *AVAudioChannelLayout) IsEqual(object objc.ID) bool {
 // @method layoutWithLayoutTag: @abstract Create from a layout tag.
 func AVAudioChannelLayoutLayoutWithLayoutTag(layoutTag uint) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioChannelLayout), _aVAudioChannelLayoutSelLayoutWithLayoutTag, layoutTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
 // @method layoutWithLayout: @abstract Create from an AudioChannelLayout
 func AVAudioChannelLayoutLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AVAudioChannelLayout {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAudioChannelLayout), _aVAudioChannelLayoutSelLayoutWithLayout, layout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioChannelLayoutFromID(_ret)
 }
 
@@ -89,4 +97,3 @@ func (o *AVAudioChannelLayout) ChannelCount() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _aVAudioChannelLayoutSelChannelCount)
 	return _ret
 }
-

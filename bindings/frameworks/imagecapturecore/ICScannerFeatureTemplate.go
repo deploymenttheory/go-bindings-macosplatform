@@ -16,7 +16,7 @@ type ICScannerFeatureTemplate struct {
 }
 
 var (
-	_clsICScannerFeatureTemplate = _objcClass("ICScannerFeatureTemplate")
+	_clsICScannerFeatureTemplate        = _objcClass("ICScannerFeatureTemplate")
 	_iCScannerFeatureTemplateSelTargets = objc.RegisterName("targets")
 )
 
@@ -34,4 +34,3 @@ func (o *ICScannerFeatureTemplate) Targets() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _iCScannerFeatureTemplateSelTargets)
 	return _ret
 }
-

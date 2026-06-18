@@ -18,14 +18,14 @@ type MIDIUMPMutableEndpoint struct {
 }
 
 var (
-	_clsMIDIUMPMutableEndpoint = _objcClass("MIDIUMPMutableEndpoint")
+	_clsMIDIUMPMutableEndpoint                                                                       = _objcClass("MIDIUMPMutableEndpoint")
 	_mIDIUMPMutableEndpointSelInitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback = objc.RegisterName("initWithName:deviceInfo:productInstanceID:MIDIProtocol:destinationCallback:")
-	_mIDIUMPMutableEndpointSelSetNameError = objc.RegisterName("setName:error:")
-	_mIDIUMPMutableEndpointSelRegisterFunctionBlocksMarkAsStaticError = objc.RegisterName("registerFunctionBlocks:markAsStatic:error:")
-	_mIDIUMPMutableEndpointSelSetEnabledError = objc.RegisterName("setEnabled:error:")
-	_mIDIUMPMutableEndpointSelMutableFunctionBlocks = objc.RegisterName("mutableFunctionBlocks")
-	_mIDIUMPMutableEndpointSelSetMutableFunctionBlocks = objc.RegisterName("setMutableFunctionBlocks:")
-	_mIDIUMPMutableEndpointSelIsEnabled = objc.RegisterName("isEnabled")
+	_mIDIUMPMutableEndpointSelSetNameError                                                           = objc.RegisterName("setName:error:")
+	_mIDIUMPMutableEndpointSelRegisterFunctionBlocksMarkAsStaticError                                = objc.RegisterName("registerFunctionBlocks:markAsStatic:error:")
+	_mIDIUMPMutableEndpointSelSetEnabledError                                                        = objc.RegisterName("setEnabled:error:")
+	_mIDIUMPMutableEndpointSelMutableFunctionBlocks                                                  = objc.RegisterName("mutableFunctionBlocks")
+	_mIDIUMPMutableEndpointSelSetMutableFunctionBlocks                                               = objc.RegisterName("setMutableFunctionBlocks:")
+	_mIDIUMPMutableEndpointSelIsEnabled                                                              = objc.RegisterName("isEnabled")
 )
 
 func MIDIUMPMutableEndpointFromID(id objc.ID) *MIDIUMPMutableEndpoint {
@@ -48,7 +48,9 @@ func (o *MIDIUMPMutableEndpoint) InitWithNameDeviceInfoProductInstanceIDMIDIProt
 		defer __block_destinationCallback.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableEndpointSelInitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback, name.Ptr(), deviceInfo.Ptr(), productInstanceID.Ptr(), mIDIProtocol, __block_destinationCallback)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDIUMPMutableEndpointFromID(_ret)
 }
 
@@ -85,7 +87,9 @@ func (o *MIDIUMPMutableEndpoint) SetEnabledError(isEnabled bool) (bool, error) {
 // @property	mutableFunctionBlocks @brief		The Function Blocks associated with the UMP endpoint, if any.
 func (o *MIDIUMPMutableEndpoint) MutableFunctionBlocks() *foundation.NSArray[*MIDIUMPMutableFunctionBlock] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableEndpointSelMutableFunctionBlocks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDIUMPMutableFunctionBlock](_ret)
 }
 
@@ -98,4 +102,3 @@ func (o *MIDIUMPMutableEndpoint) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDIUMPMutableEndpointSelIsEnabled)
 	return _ret
 }
-

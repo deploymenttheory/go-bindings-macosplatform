@@ -17,11 +17,11 @@ type MPSCNNNormalizationGammaAndBetaState struct {
 }
 
 var (
-	_clsMPSCNNNormalizationGammaAndBetaState = _objcClass("MPSCNNNormalizationGammaAndBetaState")
-	_mPSCNNNormalizationGammaAndBetaStateSelInitWithGammaBeta = objc.RegisterName("initWithGamma:beta:")
+	_clsMPSCNNNormalizationGammaAndBetaState                                                       = _objcClass("MPSCNNNormalizationGammaAndBetaState")
+	_mPSCNNNormalizationGammaAndBetaStateSelInitWithGammaBeta                                      = objc.RegisterName("initWithGamma:beta:")
 	_mPSCNNNormalizationGammaAndBetaStateSelTemporaryStateWithCommandBufferNumberOfFeatureChannels = objc.RegisterName("temporaryStateWithCommandBuffer:numberOfFeatureChannels:")
-	_mPSCNNNormalizationGammaAndBetaStateSelGamma = objc.RegisterName("gamma")
-	_mPSCNNNormalizationGammaAndBetaStateSelBeta = objc.RegisterName("beta")
+	_mPSCNNNormalizationGammaAndBetaStateSelGamma                                                  = objc.RegisterName("gamma")
+	_mPSCNNNormalizationGammaAndBetaStateSelBeta                                                   = objc.RegisterName("beta")
 )
 
 func MPSCNNNormalizationGammaAndBetaStateFromID(id objc.ID) *MPSCNNNormalizationGammaAndBetaState {
@@ -37,14 +37,18 @@ func MPSCNNNormalizationGammaAndBetaStateFromID(id objc.ID) *MPSCNNNormalization
 // @abstract   Initialize a MPSCNNNormalizationGammaAndBetaState object using values contained in MTLBuffers. @param      gamma       The MTLBuffer containing gamma terms. @param      beta        The MTLBuffer containing beta terms.
 func (o *MPSCNNNormalizationGammaAndBetaState) InitWithGammaBeta(gamma metal.MTLBuffer, beta metal.MTLBuffer) *MPSCNNNormalizationGammaAndBetaState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNormalizationGammaAndBetaStateSelInitWithGammaBeta, gamma, beta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationGammaAndBetaStateFromID(_ret)
 }
 
 // @abstract   Create a temporary MPSCNNNormalizationGammaAndBetaState suitable for a normalization operation on images containing no more than the specified number of feature channels. @param      commandBuffer           The command buffer on which the temporary state will be used. @param      numberOfFeatureChannels The number of feature channels used to size the state.
 func MPSCNNNormalizationGammaAndBetaStateTemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer metal.MTLCommandBuffer, numberOfFeatureChannels uint) *MPSCNNNormalizationGammaAndBetaState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNormalizationGammaAndBetaState), _mPSCNNNormalizationGammaAndBetaStateSelTemporaryStateWithCommandBufferNumberOfFeatureChannels, commandBuffer, numberOfFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationGammaAndBetaStateFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *MPSCNNNormalizationGammaAndBetaState) Beta() metal.MTLBuffer {
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSCNNNormalizationGammaAndBetaStateSelBeta)
 	return _ret
 }
-

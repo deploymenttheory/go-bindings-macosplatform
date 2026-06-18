@@ -168,7 +168,9 @@ func (x *PanGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequire
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 }
 
-func (x *PanGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+func (x *PanGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer {
+	return &x.inner.NSGestureRecognizer
+}
 
 // PanGestureRecognizerable is the interface implemented by [PanGestureRecognizer], for mocking and DI.
 type PanGestureRecognizerable interface {
@@ -199,4 +201,3 @@ type PanGestureRecognizerable interface {
 }
 
 var _ PanGestureRecognizerable = (*PanGestureRecognizer)(nil)
-

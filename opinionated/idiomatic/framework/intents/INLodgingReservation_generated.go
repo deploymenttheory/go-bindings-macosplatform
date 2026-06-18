@@ -81,4 +81,3 @@ type LodgingReservationable interface {
 }
 
 var _ LodgingReservationable = (*LodgingReservation)(nil)
-

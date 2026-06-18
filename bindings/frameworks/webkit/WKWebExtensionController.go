@@ -18,33 +18,33 @@ type WKWebExtensionController struct {
 }
 
 var (
-	_clsWKWebExtensionController = _objcClass("WKWebExtensionController")
-	_wKWebExtensionControllerSelInit = objc.RegisterName("init")
-	_wKWebExtensionControllerSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
-	_wKWebExtensionControllerSelLoadExtensionContextError = objc.RegisterName("loadExtensionContext:error:")
-	_wKWebExtensionControllerSelUnloadExtensionContextError = objc.RegisterName("unloadExtensionContext:error:")
-	_wKWebExtensionControllerSelExtensionContextForExtension = objc.RegisterName("extensionContextForExtension:")
-	_wKWebExtensionControllerSelExtensionContextForURL = objc.RegisterName("extensionContextForURL:")
-	_wKWebExtensionControllerSelFetchDataRecordsOfTypesCompletionHandler = objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:")
+	_clsWKWebExtensionController                                                           = _objcClass("WKWebExtensionController")
+	_wKWebExtensionControllerSelInit                                                       = objc.RegisterName("init")
+	_wKWebExtensionControllerSelInitWithConfiguration                                      = objc.RegisterName("initWithConfiguration:")
+	_wKWebExtensionControllerSelLoadExtensionContextError                                  = objc.RegisterName("loadExtensionContext:error:")
+	_wKWebExtensionControllerSelUnloadExtensionContextError                                = objc.RegisterName("unloadExtensionContext:error:")
+	_wKWebExtensionControllerSelExtensionContextForExtension                               = objc.RegisterName("extensionContextForExtension:")
+	_wKWebExtensionControllerSelExtensionContextForURL                                     = objc.RegisterName("extensionContextForURL:")
+	_wKWebExtensionControllerSelFetchDataRecordsOfTypesCompletionHandler                   = objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:")
 	_wKWebExtensionControllerSelFetchDataRecordOfTypesForExtensionContextCompletionHandler = objc.RegisterName("fetchDataRecordOfTypes:forExtensionContext:completionHandler:")
-	_wKWebExtensionControllerSelRemoveDataOfTypesFromDataRecordsCompletionHandler = objc.RegisterName("removeDataOfTypes:fromDataRecords:completionHandler:")
-	_wKWebExtensionControllerSelDidOpenWindow = objc.RegisterName("didOpenWindow:")
-	_wKWebExtensionControllerSelDidCloseWindow = objc.RegisterName("didCloseWindow:")
-	_wKWebExtensionControllerSelDidFocusWindow = objc.RegisterName("didFocusWindow:")
-	_wKWebExtensionControllerSelDidOpenTab = objc.RegisterName("didOpenTab:")
-	_wKWebExtensionControllerSelDidCloseTabWindowIsClosing = objc.RegisterName("didCloseTab:windowIsClosing:")
-	_wKWebExtensionControllerSelDidActivateTabPreviousActiveTab = objc.RegisterName("didActivateTab:previousActiveTab:")
-	_wKWebExtensionControllerSelDidSelectTabs = objc.RegisterName("didSelectTabs:")
-	_wKWebExtensionControllerSelDidDeselectTabs = objc.RegisterName("didDeselectTabs:")
-	_wKWebExtensionControllerSelDidMoveTabFromIndexInWindow = objc.RegisterName("didMoveTab:fromIndex:inWindow:")
-	_wKWebExtensionControllerSelDidReplaceTabWithTab = objc.RegisterName("didReplaceTab:withTab:")
-	_wKWebExtensionControllerSelDidChangeTabPropertiesForTab = objc.RegisterName("didChangeTabProperties:forTab:")
-	_wKWebExtensionControllerSelDelegate = objc.RegisterName("delegate")
-	_wKWebExtensionControllerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_wKWebExtensionControllerSelConfiguration = objc.RegisterName("configuration")
-	_wKWebExtensionControllerSelExtensions = objc.RegisterName("extensions")
-	_wKWebExtensionControllerSelExtensionContexts = objc.RegisterName("extensionContexts")
-	_wKWebExtensionControllerSelAllExtensionDataTypes = objc.RegisterName("allExtensionDataTypes")
+	_wKWebExtensionControllerSelRemoveDataOfTypesFromDataRecordsCompletionHandler          = objc.RegisterName("removeDataOfTypes:fromDataRecords:completionHandler:")
+	_wKWebExtensionControllerSelDidOpenWindow                                              = objc.RegisterName("didOpenWindow:")
+	_wKWebExtensionControllerSelDidCloseWindow                                             = objc.RegisterName("didCloseWindow:")
+	_wKWebExtensionControllerSelDidFocusWindow                                             = objc.RegisterName("didFocusWindow:")
+	_wKWebExtensionControllerSelDidOpenTab                                                 = objc.RegisterName("didOpenTab:")
+	_wKWebExtensionControllerSelDidCloseTabWindowIsClosing                                 = objc.RegisterName("didCloseTab:windowIsClosing:")
+	_wKWebExtensionControllerSelDidActivateTabPreviousActiveTab                            = objc.RegisterName("didActivateTab:previousActiveTab:")
+	_wKWebExtensionControllerSelDidSelectTabs                                              = objc.RegisterName("didSelectTabs:")
+	_wKWebExtensionControllerSelDidDeselectTabs                                            = objc.RegisterName("didDeselectTabs:")
+	_wKWebExtensionControllerSelDidMoveTabFromIndexInWindow                                = objc.RegisterName("didMoveTab:fromIndex:inWindow:")
+	_wKWebExtensionControllerSelDidReplaceTabWithTab                                       = objc.RegisterName("didReplaceTab:withTab:")
+	_wKWebExtensionControllerSelDidChangeTabPropertiesForTab                               = objc.RegisterName("didChangeTabProperties:forTab:")
+	_wKWebExtensionControllerSelDelegate                                                   = objc.RegisterName("delegate")
+	_wKWebExtensionControllerSelSetDelegate                                                = objc.RegisterName("setDelegate:")
+	_wKWebExtensionControllerSelConfiguration                                              = objc.RegisterName("configuration")
+	_wKWebExtensionControllerSelExtensions                                                 = objc.RegisterName("extensions")
+	_wKWebExtensionControllerSelExtensionContexts                                          = objc.RegisterName("extensionContexts")
+	_wKWebExtensionControllerSelAllExtensionDataTypes                                      = objc.RegisterName("allExtensionDataTypes")
 )
 
 func WKWebExtensionControllerFromID(id objc.ID) *WKWebExtensionController {
@@ -57,17 +57,21 @@ func WKWebExtensionControllerFromID(id objc.ID) *WKWebExtensionController {
 	return o
 }
 
-// @abstract Returns a web extension controller initialized with the default configuration. @result An initialized web extension controller, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use ``initWithConfiguration:`` to initialize an instance with a configuration. @seealso initWithConfiguration:
+// @abstract Returns a web extension controller initialized with the default configuration. @result An initialized web extension controller, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use “initWithConfiguration:“ to initialize an instance with a configuration. @seealso initWithConfiguration:
 func (o *WKWebExtensionController) Init() *WKWebExtensionController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerFromID(_ret)
 }
 
-// @abstract Returns a web extension controller initialized with the specified configuration. @param configuration The configuration for the new web extension controller. @result An initialized web extension controller, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use ``init:`` to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web extension controller. @seealso init
+// @abstract Returns a web extension controller initialized with the specified configuration. @param configuration The configuration for the new web extension controller. @result An initialized web extension controller, or nil if the object could not be initialized. @discussion This is a designated initializer. You can use “init:“ to initialize an instance with the default configuration. The initializer copies the specified configuration, so mutating the configuration after invoking the initializer has no effect on the web extension controller. @seealso init
 func (o *WKWebExtensionController) InitWithConfiguration(configuration *WKWebExtensionControllerConfiguration) *WKWebExtensionController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerFromID(_ret)
 }
 
@@ -94,14 +98,18 @@ func (o *WKWebExtensionController) UnloadExtensionContextError(extensionContext 
 // @abstract Returns a loaded extension context for the specified extension. @param extension An extension to lookup. @result An extension context or `nil` if no match was found. @seealso extensions
 func (o *WKWebExtensionController) ExtensionContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensionContextForExtension, extension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionContextFromID(_ret)
 }
 
-// @abstract Returns a loaded extension context matching the specified URL. @param URL The URL to lookup. @result An extension context or `nil` if no match was found. @discussion This method is useful for determining the extension context to use when about to navigate to an extension URL. For example, you could use this method to retrieve the appropriate extension context and then use its ``webViewConfiguration`` property to configure a web view for loading that URL.
+// @abstract Returns a loaded extension context matching the specified URL. @param URL The URL to lookup. @result An extension context or `nil` if no match was found. @discussion This method is useful for determining the extension context to use when about to navigate to an extension URL. For example, you could use this method to retrieve the appropriate extension context and then use its “webViewConfiguration“ property to configure a web view for loading that URL.
 func (o *WKWebExtensionController) ExtensionContextForURL(uRL *foundation.NSURL) *WKWebExtensionContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensionContextForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionContextFromID(_ret)
 }
 
@@ -215,21 +223,27 @@ func (o *WKWebExtensionController) SetDelegate(delegate WKWebExtensionController
 // @abstract A copy of the configuration with which the web extension controller was initialized. @discussion Mutating the configuration has no effect on the web extension controller.
 func (o *WKWebExtensionController) Configuration() *WKWebExtensionControllerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WKWebExtensionControllerConfigurationFromID(_ret)
 }
 
 // @abstract A set of all the currently loaded extensions. @seealso extensionContexts
 func (o *WKWebExtensionController) Extensions() *foundation.NSSet[*WKWebExtension] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtension](_ret)
 }
 
 // @abstract A set of all the currently loaded extension contexts. @seealso extensions
 func (o *WKWebExtensionController) ExtensionContexts() *foundation.NSSet[*WKWebExtensionContext] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionControllerSelExtensionContexts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSSetFromID[*WKWebExtensionContext](_ret)
 }
 
@@ -238,4 +252,3 @@ func WKWebExtensionControllerAllExtensionDataTypes() *foundation.NSSet[*foundati
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](objc.ID(_clsWKWebExtensionController), _wKWebExtensionControllerSelAllExtensionDataTypes)
 	return _ret
 }
-

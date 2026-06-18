@@ -72,9 +72,13 @@ func (x *MTRClusterMicrowaveOvenMode) ReadAttributeClusterRevisionWithParams(par
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterMicrowaveOvenMode) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterMicrowaveOvenMode) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterMicrowaveOvenMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterMicrowaveOvenMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterMicrowaveOvenModeable is the interface implemented by [MTRClusterMicrowaveOvenMode], for mocking and DI.
 type MTRClusterMicrowaveOvenModeable interface {
@@ -89,4 +93,3 @@ type MTRClusterMicrowaveOvenModeable interface {
 }
 
 var _ MTRClusterMicrowaveOvenModeable = (*MTRClusterMicrowaveOvenMode)(nil)
-

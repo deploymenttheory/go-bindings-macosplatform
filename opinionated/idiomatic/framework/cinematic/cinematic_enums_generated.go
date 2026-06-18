@@ -11,18 +11,18 @@ import (
 type CNDetectionType int64
 
 const (
-	CNDetectionTypeUnknown CNDetectionType = 0
-	CNDetectionTypeHumanFace CNDetectionType = 1
-	CNDetectionTypeHumanHead CNDetectionType = 2
+	CNDetectionTypeUnknown    CNDetectionType = 0
+	CNDetectionTypeHumanFace  CNDetectionType = 1
+	CNDetectionTypeHumanHead  CNDetectionType = 2
 	CNDetectionTypeHumanTorso CNDetectionType = 3
-	CNDetectionTypeCatBody CNDetectionType = 4
-	CNDetectionTypeDogBody CNDetectionType = 5
-	CNDetectionTypeCatHead CNDetectionType = 9
-	CNDetectionTypeDogHead CNDetectionType = 10
+	CNDetectionTypeCatBody    CNDetectionType = 4
+	CNDetectionTypeDogBody    CNDetectionType = 5
+	CNDetectionTypeCatHead    CNDetectionType = 9
+	CNDetectionTypeDogHead    CNDetectionType = 10
 	CNDetectionTypeSportsBall CNDetectionType = 11
-	CNDetectionTypeAutoFocus CNDetectionType = 100
+	CNDetectionTypeAutoFocus  CNDetectionType = 100
 	CNDetectionTypeFixedFocus CNDetectionType = 101
-	CNDetectionTypeCustom CNDetectionType = 102
+	CNDetectionTypeCustom     CNDetectionType = 102
 )
 
 func (e CNDetectionType) String() string {
@@ -59,9 +59,9 @@ func (e CNDetectionType) String() string {
 type CNRenderingQuality int64
 
 const (
-	CNRenderingQualityThumbnail CNRenderingQuality = 0
-	CNRenderingQualityPreview CNRenderingQuality = 1
-	CNRenderingQualityExport CNRenderingQuality = 2
+	CNRenderingQualityThumbnail  CNRenderingQuality = 0
+	CNRenderingQualityPreview    CNRenderingQuality = 1
+	CNRenderingQualityExport     CNRenderingQuality = 2
 	CNRenderingQualityExportHigh CNRenderingQuality = 3
 )
 
@@ -151,4 +151,3 @@ func (e CNSpatialAudioRenderingStyle) String() string {
 		return fmt.Sprintf("CNSpatialAudioRenderingStyle(%d)", int64(e))
 	}
 }
-

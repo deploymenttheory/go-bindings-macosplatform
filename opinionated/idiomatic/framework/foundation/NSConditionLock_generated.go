@@ -117,4 +117,3 @@ type ConditionLockable interface {
 }
 
 var _ ConditionLockable = (*ConditionLock)(nil)
-

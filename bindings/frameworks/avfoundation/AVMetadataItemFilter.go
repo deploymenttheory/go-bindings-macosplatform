@@ -16,7 +16,7 @@ type AVMetadataItemFilter struct {
 }
 
 var (
-	_clsAVMetadataItemFilter = _objcClass("AVMetadataItemFilter")
+	_clsAVMetadataItemFilter                             = _objcClass("AVMetadataItemFilter")
 	_aVMetadataItemFilterSelMetadataItemFilterForSharing = objc.RegisterName("metadataItemFilterForSharing")
 )
 
@@ -32,7 +32,8 @@ func AVMetadataItemFilterFromID(id objc.ID) *AVMetadataItemFilter {
 
 func AVMetadataItemFilterMetadataItemFilterForSharing() *AVMetadataItemFilter {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMetadataItemFilter), _aVMetadataItemFilterSelMetadataItemFilterForSharing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataItemFilterFromID(_ret)
 }
-

@@ -16,11 +16,11 @@ type AVAudioUnitEQ struct {
 }
 
 var (
-	_clsAVAudioUnitEQ = _objcClass("AVAudioUnitEQ")
+	_clsAVAudioUnitEQ                      = _objcClass("AVAudioUnitEQ")
 	_aVAudioUnitEQSelInitWithNumberOfBands = objc.RegisterName("initWithNumberOfBands:")
-	_aVAudioUnitEQSelBands = objc.RegisterName("bands")
-	_aVAudioUnitEQSelGlobalGain = objc.RegisterName("globalGain")
-	_aVAudioUnitEQSelSetGlobalGain = objc.RegisterName("setGlobalGain:")
+	_aVAudioUnitEQSelBands                 = objc.RegisterName("bands")
+	_aVAudioUnitEQSelGlobalGain            = objc.RegisterName("globalGain")
+	_aVAudioUnitEQSelSetGlobalGain         = objc.RegisterName("setGlobalGain:")
 )
 
 func AVAudioUnitEQFromID(id objc.ID) *AVAudioUnitEQ {
@@ -36,14 +36,18 @@ func AVAudioUnitEQFromID(id objc.ID) *AVAudioUnitEQ {
 // @method initWithNumberOfBands: @abstract Initialize the EQ with number of bands. @param numberOfBands The number of bands created by the EQ.
 func (o *AVAudioUnitEQ) InitWithNumberOfBands(numberOfBands uint) *AVAudioUnitEQ {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitEQSelInitWithNumberOfBands, numberOfBands)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitEQFromID(_ret)
 }
 
 // @property bands @abstract Array of AVAudioUnitEQFilterParameters objects. @discussion The number of elements in the array is equal to the number of bands.
 func (o *AVAudioUnitEQ) Bands() *foundation.NSArray[*AVAudioUnitEQFilterParameters] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitEQSelBands)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAudioUnitEQFilterParameters](_ret)
 }
 
@@ -56,4 +60,3 @@ func (o *AVAudioUnitEQ) GlobalGain() float32 {
 func (o *AVAudioUnitEQ) SetGlobalGain(globalGain float32) {
 	o.Ptr().Send(_aVAudioUnitEQSelSetGlobalGain, globalGain)
 }
-

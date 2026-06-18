@@ -125,4 +125,3 @@ type NetServiceBrowserable interface {
 }
 
 var _ NetServiceBrowserable = (*NetServiceBrowser)(nil)
-

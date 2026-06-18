@@ -18,17 +18,17 @@ type QLThumbnailGenerationRequest struct {
 }
 
 var (
-	_clsQLThumbnailGenerationRequest = _objcClass("QLThumbnailGenerationRequest")
+	_clsQLThumbnailGenerationRequest                                              = _objcClass("QLThumbnailGenerationRequest")
 	_qLThumbnailGenerationRequestSelInitWithFileAtURLSizeScaleRepresentationTypes = objc.RegisterName("initWithFileAtURL:size:scale:representationTypes:")
-	_qLThumbnailGenerationRequestSelContentType = objc.RegisterName("contentType")
-	_qLThumbnailGenerationRequestSelSetContentType = objc.RegisterName("setContentType:")
-	_qLThumbnailGenerationRequestSelMinimumDimension = objc.RegisterName("minimumDimension")
-	_qLThumbnailGenerationRequestSelSetMinimumDimension = objc.RegisterName("setMinimumDimension:")
-	_qLThumbnailGenerationRequestSelIconMode = objc.RegisterName("iconMode")
-	_qLThumbnailGenerationRequestSelSetIconMode = objc.RegisterName("setIconMode:")
-	_qLThumbnailGenerationRequestSelSize = objc.RegisterName("size")
-	_qLThumbnailGenerationRequestSelScale = objc.RegisterName("scale")
-	_qLThumbnailGenerationRequestSelRepresentationTypes = objc.RegisterName("representationTypes")
+	_qLThumbnailGenerationRequestSelContentType                                   = objc.RegisterName("contentType")
+	_qLThumbnailGenerationRequestSelSetContentType                                = objc.RegisterName("setContentType:")
+	_qLThumbnailGenerationRequestSelMinimumDimension                              = objc.RegisterName("minimumDimension")
+	_qLThumbnailGenerationRequestSelSetMinimumDimension                           = objc.RegisterName("setMinimumDimension:")
+	_qLThumbnailGenerationRequestSelIconMode                                      = objc.RegisterName("iconMode")
+	_qLThumbnailGenerationRequestSelSetIconMode                                   = objc.RegisterName("setIconMode:")
+	_qLThumbnailGenerationRequestSelSize                                          = objc.RegisterName("size")
+	_qLThumbnailGenerationRequestSelScale                                         = objc.RegisterName("scale")
+	_qLThumbnailGenerationRequestSelRepresentationTypes                           = objc.RegisterName("representationTypes")
 )
 
 func QLThumbnailGenerationRequestFromID(id objc.ID) *QLThumbnailGenerationRequest {
@@ -44,14 +44,18 @@ func QLThumbnailGenerationRequestFromID(id objc.ID) *QLThumbnailGenerationReques
 // @param url The url of the file on disk for which a thumbnail is requested. @param size The desired size of the thumbnails that should be generated. @param scale The desired scale of the thumbnails that should be generated. This will usually be the scale of the screen. You can for instance pass a scale different from the one of the screen if you would like to save generated thumbnails to a server to later download them on devices with a different screen scale. @param representationTypes The desired successive representations of the thumbnail that should be generated when possible.
 func (o *QLThumbnailGenerationRequest) InitWithFileAtURLSizeScaleRepresentationTypes(url *foundation.NSURL, size corefoundation.CGSize, scale float64, representationTypes QLThumbnailGenerationRequestRepresentationTypes) *QLThumbnailGenerationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLThumbnailGenerationRequestSelInitWithFileAtURLSizeScaleRepresentationTypes, url.Ptr(), size, scale, representationTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLThumbnailGenerationRequestFromID(_ret)
 }
 
 // The content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
 func (o *QLThumbnailGenerationRequest) ContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLThumbnailGenerationRequestSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -93,4 +97,3 @@ func (o *QLThumbnailGenerationRequest) RepresentationTypes() QLThumbnailGenerati
 	_ret := objc.Send[QLThumbnailGenerationRequestRepresentationTypes](o.Ptr(), _qLThumbnailGenerationRequestSelRepresentationTypes)
 	return _ret
 }
-

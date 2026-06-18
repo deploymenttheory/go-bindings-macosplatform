@@ -148,4 +148,3 @@ type PrivateKeyable interface {
 }
 
 var _ PrivateKeyable = (*PrivateKey)(nil)
-

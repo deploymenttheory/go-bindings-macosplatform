@@ -11,10 +11,10 @@ import (
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -39,7 +39,7 @@ type MDLAnimatedValueInterpolation uint64
 
 const (
 	MDLAnimatedValueInterpolationConstant MDLAnimatedValueInterpolation = 0
-	MDLAnimatedValueInterpolationLinear MDLAnimatedValueInterpolation = 1
+	MDLAnimatedValueInterpolationLinear   MDLAnimatedValueInterpolation = 1
 )
 
 func (e MDLAnimatedValueInterpolation) String() string {
@@ -56,7 +56,7 @@ func (e MDLAnimatedValueInterpolation) String() string {
 type MDLCameraProjection uint64
 
 const (
-	MDLCameraProjectionPerspective MDLCameraProjection = 0
+	MDLCameraProjectionPerspective  MDLCameraProjection = 0
 	MDLCameraProjectionOrthographic MDLCameraProjection = 1
 )
 
@@ -75,8 +75,8 @@ type MDLDataPrecision uint64
 
 const (
 	MDLDataPrecisionUndefined MDLDataPrecision = 0
-	MDLDataPrecisionFloat MDLDataPrecision = 1
-	MDLDataPrecisionDouble MDLDataPrecision = 2
+	MDLDataPrecisionFloat     MDLDataPrecision = 1
+	MDLDataPrecisionDouble    MDLDataPrecision = 2
 )
 
 func (e MDLDataPrecision) String() string {
@@ -95,11 +95,11 @@ func (e MDLDataPrecision) String() string {
 type MDLGeometryType int64
 
 const (
-	MDLGeometryTypePoints MDLGeometryType = 0
-	MDLGeometryTypeLines MDLGeometryType = 1
-	MDLGeometryTypeTriangles MDLGeometryType = 2
-	MDLGeometryTypeTriangleStrips MDLGeometryType = 3
-	MDLGeometryTypeQuads MDLGeometryType = 4
+	MDLGeometryTypePoints           MDLGeometryType = 0
+	MDLGeometryTypeLines            MDLGeometryType = 1
+	MDLGeometryTypeTriangles        MDLGeometryType = 2
+	MDLGeometryTypeTriangleStrips   MDLGeometryType = 3
+	MDLGeometryTypeQuads            MDLGeometryType = 4
 	MDLGeometryTypeVariableTopology MDLGeometryType = 5
 )
 
@@ -126,12 +126,12 @@ type MDLIndexBitDepth uint64
 
 const (
 	MDLIndexBitDepthInvalid MDLIndexBitDepth = 0
-	MDLIndexBitDepthUInt8 MDLIndexBitDepth = 8
-	MDLIndexBitDepthUint8 MDLIndexBitDepth = 8
-	MDLIndexBitDepthUInt16 MDLIndexBitDepth = 16
-	MDLIndexBitDepthUint16 MDLIndexBitDepth = 16
-	MDLIndexBitDepthUInt32 MDLIndexBitDepth = 32
-	MDLIndexBitDepthUint32 MDLIndexBitDepth = 32
+	MDLIndexBitDepthUInt8   MDLIndexBitDepth = 8
+	MDLIndexBitDepthUint8   MDLIndexBitDepth = 8
+	MDLIndexBitDepthUInt16  MDLIndexBitDepth = 16
+	MDLIndexBitDepthUint16  MDLIndexBitDepth = 16
+	MDLIndexBitDepthUInt32  MDLIndexBitDepth = 32
+	MDLIndexBitDepthUint32  MDLIndexBitDepth = 32
 )
 
 func (e MDLIndexBitDepth) String() string {
@@ -152,18 +152,18 @@ func (e MDLIndexBitDepth) String() string {
 type MDLLightType uint64
 
 const (
-	MDLLightTypeUnknown MDLLightType = 0
-	MDLLightTypeAmbient MDLLightType = 1
-	MDLLightTypeDirectional MDLLightType = 2
-	MDLLightTypeSpot MDLLightType = 3
-	MDLLightTypePoint MDLLightType = 4
-	MDLLightTypeLinear MDLLightType = 5
-	MDLLightTypeDiscArea MDLLightType = 6
+	MDLLightTypeUnknown         MDLLightType = 0
+	MDLLightTypeAmbient         MDLLightType = 1
+	MDLLightTypeDirectional     MDLLightType = 2
+	MDLLightTypeSpot            MDLLightType = 3
+	MDLLightTypePoint           MDLLightType = 4
+	MDLLightTypeLinear          MDLLightType = 5
+	MDLLightTypeDiscArea        MDLLightType = 6
 	MDLLightTypeRectangularArea MDLLightType = 7
 	MDLLightTypeSuperElliptical MDLLightType = 8
-	MDLLightTypePhotometric MDLLightType = 9
-	MDLLightTypeProbe MDLLightType = 10
-	MDLLightTypeEnvironment MDLLightType = 11
+	MDLLightTypePhotometric     MDLLightType = 9
+	MDLLightTypeProbe           MDLLightType = 10
+	MDLLightTypeEnvironment     MDLLightType = 11
 )
 
 func (e MDLLightType) String() string {
@@ -200,8 +200,8 @@ func (e MDLLightType) String() string {
 type MDLMaterialFace uint64
 
 const (
-	MDLMaterialFaceFront MDLMaterialFace = 0
-	MDLMaterialFaceBack MDLMaterialFace = 1
+	MDLMaterialFaceFront       MDLMaterialFace = 0
+	MDLMaterialFaceBack        MDLMaterialFace = 1
 	MDLMaterialFaceDoubleSided MDLMaterialFace = 2
 )
 
@@ -222,7 +222,7 @@ type MDLMaterialMipMapFilterMode uint64
 
 const (
 	MDLMaterialMipMapFilterModeNearest MDLMaterialMipMapFilterMode = 0
-	MDLMaterialMipMapFilterModeLinear MDLMaterialMipMapFilterMode = 1
+	MDLMaterialMipMapFilterModeLinear  MDLMaterialMipMapFilterMode = 1
 )
 
 func (e MDLMaterialMipMapFilterMode) String() string {
@@ -239,17 +239,17 @@ func (e MDLMaterialMipMapFilterMode) String() string {
 type MDLMaterialPropertyType uint64
 
 const (
-	MDLMaterialPropertyTypeNone MDLMaterialPropertyType = 0
-	MDLMaterialPropertyTypeString MDLMaterialPropertyType = 1
-	MDLMaterialPropertyTypeURL MDLMaterialPropertyType = 2
-	MDLMaterialPropertyTypeTexture MDLMaterialPropertyType = 3
-	MDLMaterialPropertyTypeColor MDLMaterialPropertyType = 4
-	MDLMaterialPropertyTypeFloat MDLMaterialPropertyType = 5
-	MDLMaterialPropertyTypeFloat2 MDLMaterialPropertyType = 6
-	MDLMaterialPropertyTypeFloat3 MDLMaterialPropertyType = 7
-	MDLMaterialPropertyTypeFloat4 MDLMaterialPropertyType = 8
+	MDLMaterialPropertyTypeNone     MDLMaterialPropertyType = 0
+	MDLMaterialPropertyTypeString   MDLMaterialPropertyType = 1
+	MDLMaterialPropertyTypeURL      MDLMaterialPropertyType = 2
+	MDLMaterialPropertyTypeTexture  MDLMaterialPropertyType = 3
+	MDLMaterialPropertyTypeColor    MDLMaterialPropertyType = 4
+	MDLMaterialPropertyTypeFloat    MDLMaterialPropertyType = 5
+	MDLMaterialPropertyTypeFloat2   MDLMaterialPropertyType = 6
+	MDLMaterialPropertyTypeFloat3   MDLMaterialPropertyType = 7
+	MDLMaterialPropertyTypeFloat4   MDLMaterialPropertyType = 8
 	MDLMaterialPropertyTypeMatrix44 MDLMaterialPropertyType = 9
-	MDLMaterialPropertyTypeBuffer MDLMaterialPropertyType = 10
+	MDLMaterialPropertyTypeBuffer   MDLMaterialPropertyType = 10
 )
 
 func (e MDLMaterialPropertyType) String() string {
@@ -284,32 +284,32 @@ func (e MDLMaterialPropertyType) String() string {
 type MDLMaterialSemantic uint64
 
 const (
-	MDLMaterialSemanticBaseColor MDLMaterialSemantic = 0
-	MDLMaterialSemanticSubsurface MDLMaterialSemantic = 1
-	MDLMaterialSemanticMetallic MDLMaterialSemantic = 2
-	MDLMaterialSemanticSpecular MDLMaterialSemantic = 3
-	MDLMaterialSemanticSpecularExponent MDLMaterialSemantic = 4
-	MDLMaterialSemanticSpecularTint MDLMaterialSemantic = 5
-	MDLMaterialSemanticRoughness MDLMaterialSemantic = 6
-	MDLMaterialSemanticAnisotropic MDLMaterialSemantic = 7
-	MDLMaterialSemanticAnisotropicRotation MDLMaterialSemantic = 8
-	MDLMaterialSemanticSheen MDLMaterialSemantic = 9
-	MDLMaterialSemanticSheenTint MDLMaterialSemantic = 10
-	MDLMaterialSemanticClearcoat MDLMaterialSemantic = 11
-	MDLMaterialSemanticClearcoatGloss MDLMaterialSemantic = 12
-	MDLMaterialSemanticEmission MDLMaterialSemantic = 13
-	MDLMaterialSemanticBump MDLMaterialSemantic = 14
-	MDLMaterialSemanticOpacity MDLMaterialSemantic = 15
+	MDLMaterialSemanticBaseColor                  MDLMaterialSemantic = 0
+	MDLMaterialSemanticSubsurface                 MDLMaterialSemantic = 1
+	MDLMaterialSemanticMetallic                   MDLMaterialSemantic = 2
+	MDLMaterialSemanticSpecular                   MDLMaterialSemantic = 3
+	MDLMaterialSemanticSpecularExponent           MDLMaterialSemantic = 4
+	MDLMaterialSemanticSpecularTint               MDLMaterialSemantic = 5
+	MDLMaterialSemanticRoughness                  MDLMaterialSemantic = 6
+	MDLMaterialSemanticAnisotropic                MDLMaterialSemantic = 7
+	MDLMaterialSemanticAnisotropicRotation        MDLMaterialSemantic = 8
+	MDLMaterialSemanticSheen                      MDLMaterialSemantic = 9
+	MDLMaterialSemanticSheenTint                  MDLMaterialSemantic = 10
+	MDLMaterialSemanticClearcoat                  MDLMaterialSemantic = 11
+	MDLMaterialSemanticClearcoatGloss             MDLMaterialSemantic = 12
+	MDLMaterialSemanticEmission                   MDLMaterialSemantic = 13
+	MDLMaterialSemanticBump                       MDLMaterialSemantic = 14
+	MDLMaterialSemanticOpacity                    MDLMaterialSemantic = 15
 	MDLMaterialSemanticInterfaceIndexOfRefraction MDLMaterialSemantic = 16
-	MDLMaterialSemanticMaterialIndexOfRefraction MDLMaterialSemantic = 17
-	MDLMaterialSemanticObjectSpaceNormal MDLMaterialSemantic = 18
-	MDLMaterialSemanticTangentSpaceNormal MDLMaterialSemantic = 19
-	MDLMaterialSemanticDisplacement MDLMaterialSemantic = 20
-	MDLMaterialSemanticDisplacementScale MDLMaterialSemantic = 21
-	MDLMaterialSemanticAmbientOcclusion MDLMaterialSemantic = 22
-	MDLMaterialSemanticAmbientOcclusionScale MDLMaterialSemantic = 23
-	MDLMaterialSemanticNone MDLMaterialSemantic = 32768
-	MDLMaterialSemanticUserDefined MDLMaterialSemantic = 32769
+	MDLMaterialSemanticMaterialIndexOfRefraction  MDLMaterialSemantic = 17
+	MDLMaterialSemanticObjectSpaceNormal          MDLMaterialSemantic = 18
+	MDLMaterialSemanticTangentSpaceNormal         MDLMaterialSemantic = 19
+	MDLMaterialSemanticDisplacement               MDLMaterialSemantic = 20
+	MDLMaterialSemanticDisplacementScale          MDLMaterialSemantic = 21
+	MDLMaterialSemanticAmbientOcclusion           MDLMaterialSemantic = 22
+	MDLMaterialSemanticAmbientOcclusionScale      MDLMaterialSemantic = 23
+	MDLMaterialSemanticNone                       MDLMaterialSemantic = 32768
+	MDLMaterialSemanticUserDefined                MDLMaterialSemantic = 32769
 )
 
 func (e MDLMaterialSemantic) String() string {
@@ -375,7 +375,7 @@ type MDLMaterialTextureFilterMode uint64
 
 const (
 	MDLMaterialTextureFilterModeNearest MDLMaterialTextureFilterMode = 0
-	MDLMaterialTextureFilterModeLinear MDLMaterialTextureFilterMode = 1
+	MDLMaterialTextureFilterModeLinear  MDLMaterialTextureFilterMode = 1
 )
 
 func (e MDLMaterialTextureFilterMode) String() string {
@@ -392,7 +392,7 @@ func (e MDLMaterialTextureFilterMode) String() string {
 type MDLMaterialTextureWrapMode uint64
 
 const (
-	MDLMaterialTextureWrapModeClamp MDLMaterialTextureWrapMode = 0
+	MDLMaterialTextureWrapModeClamp  MDLMaterialTextureWrapMode = 0
 	MDLMaterialTextureWrapModeRepeat MDLMaterialTextureWrapMode = 1
 	MDLMaterialTextureWrapModeMirror MDLMaterialTextureWrapMode = 2
 )
@@ -414,7 +414,7 @@ type MDLMeshBufferType uint64
 
 const (
 	MDLMeshBufferTypeVertex MDLMeshBufferType = 1
-	MDLMeshBufferTypeIndex MDLMeshBufferType = 2
+	MDLMeshBufferTypeIndex  MDLMeshBufferType = 2
 	MDLMeshBufferTypeCustom MDLMeshBufferType = 3
 )
 
@@ -434,7 +434,7 @@ func (e MDLMeshBufferType) String() string {
 type MDLProbePlacement int64
 
 const (
-	MDLProbePlacementUniformGrid MDLProbePlacement = 0
+	MDLProbePlacementUniformGrid            MDLProbePlacement = 0
 	MDLProbePlacementIrradianceDistribution MDLProbePlacement = 1
 )
 
@@ -452,17 +452,17 @@ func (e MDLProbePlacement) String() string {
 type MDLTextureChannelEncoding int64
 
 const (
-	MDLTextureChannelEncodingUInt8 MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUint8 MDLTextureChannelEncoding = 1
-	MDLTextureChannelEncodingUInt16 MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUint16 MDLTextureChannelEncoding = 2
-	MDLTextureChannelEncodingUInt24 MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUint24 MDLTextureChannelEncoding = 3
-	MDLTextureChannelEncodingUInt32 MDLTextureChannelEncoding = 4
-	MDLTextureChannelEncodingUint32 MDLTextureChannelEncoding = 4
-	MDLTextureChannelEncodingFloat16 MDLTextureChannelEncoding = 258
+	MDLTextureChannelEncodingUInt8     MDLTextureChannelEncoding = 1
+	MDLTextureChannelEncodingUint8     MDLTextureChannelEncoding = 1
+	MDLTextureChannelEncodingUInt16    MDLTextureChannelEncoding = 2
+	MDLTextureChannelEncodingUint16    MDLTextureChannelEncoding = 2
+	MDLTextureChannelEncodingUInt24    MDLTextureChannelEncoding = 3
+	MDLTextureChannelEncodingUint24    MDLTextureChannelEncoding = 3
+	MDLTextureChannelEncodingUInt32    MDLTextureChannelEncoding = 4
+	MDLTextureChannelEncodingUint32    MDLTextureChannelEncoding = 4
+	MDLTextureChannelEncodingFloat16   MDLTextureChannelEncoding = 258
 	MDLTextureChannelEncodingFloat16SR MDLTextureChannelEncoding = 770
-	MDLTextureChannelEncodingFloat32 MDLTextureChannelEncoding = 260
+	MDLTextureChannelEncodingFloat32   MDLTextureChannelEncoding = 260
 )
 
 func (e MDLTextureChannelEncoding) String() string {
@@ -519,69 +519,69 @@ func (e MDLTransformOpRotationOrder) String() string {
 type MDLVertexFormat uint64
 
 const (
-	MDLVertexFormatInvalid MDLVertexFormat = 0
-	MDLVertexFormatPackedBit MDLVertexFormat = 4096
-	MDLVertexFormatUCharBits MDLVertexFormat = 65536
-	MDLVertexFormatCharBits MDLVertexFormat = 131072
-	MDLVertexFormatUCharNormalizedBits MDLVertexFormat = 196608
-	MDLVertexFormatCharNormalizedBits MDLVertexFormat = 262144
-	MDLVertexFormatUShortBits MDLVertexFormat = 327680
-	MDLVertexFormatShortBits MDLVertexFormat = 393216
-	MDLVertexFormatUShortNormalizedBits MDLVertexFormat = 458752
-	MDLVertexFormatShortNormalizedBits MDLVertexFormat = 524288
-	MDLVertexFormatUIntBits MDLVertexFormat = 589824
-	MDLVertexFormatIntBits MDLVertexFormat = 655360
-	MDLVertexFormatHalfBits MDLVertexFormat = 720896
-	MDLVertexFormatFloatBits MDLVertexFormat = 786432
-	MDLVertexFormatUChar MDLVertexFormat = 65537
-	MDLVertexFormatUChar2 MDLVertexFormat = 65538
-	MDLVertexFormatUChar3 MDLVertexFormat = 65539
-	MDLVertexFormatUChar4 MDLVertexFormat = 65540
-	MDLVertexFormatChar MDLVertexFormat = 131073
-	MDLVertexFormatChar2 MDLVertexFormat = 131074
-	MDLVertexFormatChar3 MDLVertexFormat = 131075
-	MDLVertexFormatChar4 MDLVertexFormat = 131076
-	MDLVertexFormatUCharNormalized MDLVertexFormat = 196609
-	MDLVertexFormatUChar2Normalized MDLVertexFormat = 196610
-	MDLVertexFormatUChar3Normalized MDLVertexFormat = 196611
-	MDLVertexFormatUChar4Normalized MDLVertexFormat = 196612
-	MDLVertexFormatCharNormalized MDLVertexFormat = 262145
-	MDLVertexFormatChar2Normalized MDLVertexFormat = 262146
-	MDLVertexFormatChar3Normalized MDLVertexFormat = 262147
-	MDLVertexFormatChar4Normalized MDLVertexFormat = 262148
-	MDLVertexFormatUShort MDLVertexFormat = 327681
-	MDLVertexFormatUShort2 MDLVertexFormat = 327682
-	MDLVertexFormatUShort3 MDLVertexFormat = 327683
-	MDLVertexFormatUShort4 MDLVertexFormat = 327684
-	MDLVertexFormatShort MDLVertexFormat = 393217
-	MDLVertexFormatShort2 MDLVertexFormat = 393218
-	MDLVertexFormatShort3 MDLVertexFormat = 393219
-	MDLVertexFormatShort4 MDLVertexFormat = 393220
-	MDLVertexFormatUShortNormalized MDLVertexFormat = 458753
-	MDLVertexFormatUShort2Normalized MDLVertexFormat = 458754
-	MDLVertexFormatUShort3Normalized MDLVertexFormat = 458755
-	MDLVertexFormatUShort4Normalized MDLVertexFormat = 458756
-	MDLVertexFormatShortNormalized MDLVertexFormat = 524289
-	MDLVertexFormatShort2Normalized MDLVertexFormat = 524290
-	MDLVertexFormatShort3Normalized MDLVertexFormat = 524291
-	MDLVertexFormatShort4Normalized MDLVertexFormat = 524292
-	MDLVertexFormatUInt MDLVertexFormat = 589825
-	MDLVertexFormatUInt2 MDLVertexFormat = 589826
-	MDLVertexFormatUInt3 MDLVertexFormat = 589827
-	MDLVertexFormatUInt4 MDLVertexFormat = 589828
-	MDLVertexFormatInt MDLVertexFormat = 655361
-	MDLVertexFormatInt2 MDLVertexFormat = 655362
-	MDLVertexFormatInt3 MDLVertexFormat = 655363
-	MDLVertexFormatInt4 MDLVertexFormat = 655364
-	MDLVertexFormatHalf MDLVertexFormat = 720897
-	MDLVertexFormatHalf2 MDLVertexFormat = 720898
-	MDLVertexFormatHalf3 MDLVertexFormat = 720899
-	MDLVertexFormatHalf4 MDLVertexFormat = 720900
-	MDLVertexFormatFloat MDLVertexFormat = 786433
-	MDLVertexFormatFloat2 MDLVertexFormat = 786434
-	MDLVertexFormatFloat3 MDLVertexFormat = 786435
-	MDLVertexFormatFloat4 MDLVertexFormat = 786436
-	MDLVertexFormatInt1010102Normalized MDLVertexFormat = 659460
+	MDLVertexFormatInvalid               MDLVertexFormat = 0
+	MDLVertexFormatPackedBit             MDLVertexFormat = 4096
+	MDLVertexFormatUCharBits             MDLVertexFormat = 65536
+	MDLVertexFormatCharBits              MDLVertexFormat = 131072
+	MDLVertexFormatUCharNormalizedBits   MDLVertexFormat = 196608
+	MDLVertexFormatCharNormalizedBits    MDLVertexFormat = 262144
+	MDLVertexFormatUShortBits            MDLVertexFormat = 327680
+	MDLVertexFormatShortBits             MDLVertexFormat = 393216
+	MDLVertexFormatUShortNormalizedBits  MDLVertexFormat = 458752
+	MDLVertexFormatShortNormalizedBits   MDLVertexFormat = 524288
+	MDLVertexFormatUIntBits              MDLVertexFormat = 589824
+	MDLVertexFormatIntBits               MDLVertexFormat = 655360
+	MDLVertexFormatHalfBits              MDLVertexFormat = 720896
+	MDLVertexFormatFloatBits             MDLVertexFormat = 786432
+	MDLVertexFormatUChar                 MDLVertexFormat = 65537
+	MDLVertexFormatUChar2                MDLVertexFormat = 65538
+	MDLVertexFormatUChar3                MDLVertexFormat = 65539
+	MDLVertexFormatUChar4                MDLVertexFormat = 65540
+	MDLVertexFormatChar                  MDLVertexFormat = 131073
+	MDLVertexFormatChar2                 MDLVertexFormat = 131074
+	MDLVertexFormatChar3                 MDLVertexFormat = 131075
+	MDLVertexFormatChar4                 MDLVertexFormat = 131076
+	MDLVertexFormatUCharNormalized       MDLVertexFormat = 196609
+	MDLVertexFormatUChar2Normalized      MDLVertexFormat = 196610
+	MDLVertexFormatUChar3Normalized      MDLVertexFormat = 196611
+	MDLVertexFormatUChar4Normalized      MDLVertexFormat = 196612
+	MDLVertexFormatCharNormalized        MDLVertexFormat = 262145
+	MDLVertexFormatChar2Normalized       MDLVertexFormat = 262146
+	MDLVertexFormatChar3Normalized       MDLVertexFormat = 262147
+	MDLVertexFormatChar4Normalized       MDLVertexFormat = 262148
+	MDLVertexFormatUShort                MDLVertexFormat = 327681
+	MDLVertexFormatUShort2               MDLVertexFormat = 327682
+	MDLVertexFormatUShort3               MDLVertexFormat = 327683
+	MDLVertexFormatUShort4               MDLVertexFormat = 327684
+	MDLVertexFormatShort                 MDLVertexFormat = 393217
+	MDLVertexFormatShort2                MDLVertexFormat = 393218
+	MDLVertexFormatShort3                MDLVertexFormat = 393219
+	MDLVertexFormatShort4                MDLVertexFormat = 393220
+	MDLVertexFormatUShortNormalized      MDLVertexFormat = 458753
+	MDLVertexFormatUShort2Normalized     MDLVertexFormat = 458754
+	MDLVertexFormatUShort3Normalized     MDLVertexFormat = 458755
+	MDLVertexFormatUShort4Normalized     MDLVertexFormat = 458756
+	MDLVertexFormatShortNormalized       MDLVertexFormat = 524289
+	MDLVertexFormatShort2Normalized      MDLVertexFormat = 524290
+	MDLVertexFormatShort3Normalized      MDLVertexFormat = 524291
+	MDLVertexFormatShort4Normalized      MDLVertexFormat = 524292
+	MDLVertexFormatUInt                  MDLVertexFormat = 589825
+	MDLVertexFormatUInt2                 MDLVertexFormat = 589826
+	MDLVertexFormatUInt3                 MDLVertexFormat = 589827
+	MDLVertexFormatUInt4                 MDLVertexFormat = 589828
+	MDLVertexFormatInt                   MDLVertexFormat = 655361
+	MDLVertexFormatInt2                  MDLVertexFormat = 655362
+	MDLVertexFormatInt3                  MDLVertexFormat = 655363
+	MDLVertexFormatInt4                  MDLVertexFormat = 655364
+	MDLVertexFormatHalf                  MDLVertexFormat = 720897
+	MDLVertexFormatHalf2                 MDLVertexFormat = 720898
+	MDLVertexFormatHalf3                 MDLVertexFormat = 720899
+	MDLVertexFormatHalf4                 MDLVertexFormat = 720900
+	MDLVertexFormatFloat                 MDLVertexFormat = 786433
+	MDLVertexFormatFloat2                MDLVertexFormat = 786434
+	MDLVertexFormatFloat3                MDLVertexFormat = 786435
+	MDLVertexFormatFloat4                MDLVertexFormat = 786436
+	MDLVertexFormatInt1010102Normalized  MDLVertexFormat = 659460
 	MDLVertexFormatUInt1010102Normalized MDLVertexFormat = 593924
 )
 
@@ -724,7 +724,7 @@ func (e MDLVertexFormat) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -742,8 +742,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -779,8 +779,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -801,8 +801,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -821,13 +821,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -854,24 +854,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -912,9 +912,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -934,12 +934,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -966,14 +966,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1002,9 +1002,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1023,36 +1023,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1082,8 +1096,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1103,62 +1117,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1284,15 +1298,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1330,7 +1344,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1338,7 +1354,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1356,8 +1372,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1376,26 +1392,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1417,27 +1449,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1461,11 +1493,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1490,22 +1522,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1556,34 +1588,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

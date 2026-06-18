@@ -16,16 +16,16 @@ type MTRThermostatClusterAtomicRequestParams struct {
 }
 
 var (
-	_clsMTRThermostatClusterAtomicRequestParams = _objcClass("MTRThermostatClusterAtomicRequestParams")
-	_mTRThermostatClusterAtomicRequestParamsSelRequestType = objc.RegisterName("requestType")
-	_mTRThermostatClusterAtomicRequestParamsSelSetRequestType = objc.RegisterName("setRequestType:")
-	_mTRThermostatClusterAtomicRequestParamsSelAttributeRequests = objc.RegisterName("attributeRequests")
-	_mTRThermostatClusterAtomicRequestParamsSelSetAttributeRequests = objc.RegisterName("setAttributeRequests:")
-	_mTRThermostatClusterAtomicRequestParamsSelTimeout = objc.RegisterName("timeout")
-	_mTRThermostatClusterAtomicRequestParamsSelSetTimeout = objc.RegisterName("setTimeout:")
-	_mTRThermostatClusterAtomicRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRThermostatClusterAtomicRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRThermostatClusterAtomicRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRThermostatClusterAtomicRequestParams                               = _objcClass("MTRThermostatClusterAtomicRequestParams")
+	_mTRThermostatClusterAtomicRequestParamsSelRequestType                    = objc.RegisterName("requestType")
+	_mTRThermostatClusterAtomicRequestParamsSelSetRequestType                 = objc.RegisterName("setRequestType:")
+	_mTRThermostatClusterAtomicRequestParamsSelAttributeRequests              = objc.RegisterName("attributeRequests")
+	_mTRThermostatClusterAtomicRequestParamsSelSetAttributeRequests           = objc.RegisterName("setAttributeRequests:")
+	_mTRThermostatClusterAtomicRequestParamsSelTimeout                        = objc.RegisterName("timeout")
+	_mTRThermostatClusterAtomicRequestParamsSelSetTimeout                     = objc.RegisterName("setTimeout:")
+	_mTRThermostatClusterAtomicRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRThermostatClusterAtomicRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRThermostatClusterAtomicRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRThermostatClusterAtomicRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRThermostatClusterAtomicRequestParamsFromID(id objc.ID) *MTRThermostatClu
 
 func (o *MTRThermostatClusterAtomicRequestParams) RequestType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelRequestType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +62,9 @@ func (o *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attribute
 
 func (o *MTRThermostatClusterAtomicRequestParams) Timeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,7 +75,9 @@ func (o *MTRThermostatClusterAtomicRequestParams) SetTimeout(timeout *foundation
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -82,11 +88,12 @@ func (o *MTRThermostatClusterAtomicRequestParams) SetTimedInvokeTimeoutMs(timedI
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterAtomicRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterAtomicRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterAtomicRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

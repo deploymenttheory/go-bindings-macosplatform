@@ -50,4 +50,3 @@ type MTRAttributePathable interface {
 }
 
 var _ MTRAttributePathable = (*MTRAttributePath)(nil)
-

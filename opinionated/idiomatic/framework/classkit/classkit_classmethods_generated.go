@@ -16,4 +16,3 @@ func Shared() *DataStore {
 	}
 	return &DataStore{inner: _r}
 }
-

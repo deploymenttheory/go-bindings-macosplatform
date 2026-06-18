@@ -63,4 +63,3 @@ type ConstantNoiseSourceable interface {
 }
 
 var _ ConstantNoiseSourceable = (*ConstantNoiseSource)(nil)
-

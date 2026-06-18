@@ -18,27 +18,27 @@ type MDLObject struct {
 }
 
 var (
-	_clsMDLObject = _objcClass("MDLObject")
-	_mDLObjectSelSetComponentForProtocol = objc.RegisterName("setComponent:forProtocol:")
-	_mDLObjectSelComponentConformingToProtocol = objc.RegisterName("componentConformingToProtocol:")
-	_mDLObjectSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_mDLObjectSelSetObjectForKeyedSubscript = objc.RegisterName("setObject:forKeyedSubscript:")
-	_mDLObjectSelObjectAtPath = objc.RegisterName("objectAtPath:")
+	_clsMDLObject                                                      = _objcClass("MDLObject")
+	_mDLObjectSelSetComponentForProtocol                               = objc.RegisterName("setComponent:forProtocol:")
+	_mDLObjectSelComponentConformingToProtocol                         = objc.RegisterName("componentConformingToProtocol:")
+	_mDLObjectSelObjectForKeyedSubscript                               = objc.RegisterName("objectForKeyedSubscript:")
+	_mDLObjectSelSetObjectForKeyedSubscript                            = objc.RegisterName("setObject:forKeyedSubscript:")
+	_mDLObjectSelObjectAtPath                                          = objc.RegisterName("objectAtPath:")
 	_mDLObjectSelEnumerateChildObjectsOfClassRootUsingBlockStopPointer = objc.RegisterName("enumerateChildObjectsOfClass:root:usingBlock:stopPointer:")
-	_mDLObjectSelAddChild = objc.RegisterName("addChild:")
-	_mDLObjectSelBoundingBoxAtTime = objc.RegisterName("boundingBoxAtTime:")
-	_mDLObjectSelComponents = objc.RegisterName("components")
-	_mDLObjectSelParent = objc.RegisterName("parent")
-	_mDLObjectSelSetParent = objc.RegisterName("setParent:")
-	_mDLObjectSelInstance = objc.RegisterName("instance")
-	_mDLObjectSelSetInstance = objc.RegisterName("setInstance:")
-	_mDLObjectSelPath = objc.RegisterName("path")
-	_mDLObjectSelTransform = objc.RegisterName("transform")
-	_mDLObjectSelSetTransform = objc.RegisterName("setTransform:")
-	_mDLObjectSelChildren = objc.RegisterName("children")
-	_mDLObjectSelSetChildren = objc.RegisterName("setChildren:")
-	_mDLObjectSelHidden = objc.RegisterName("hidden")
-	_mDLObjectSelSetHidden = objc.RegisterName("setHidden:")
+	_mDLObjectSelAddChild                                              = objc.RegisterName("addChild:")
+	_mDLObjectSelBoundingBoxAtTime                                     = objc.RegisterName("boundingBoxAtTime:")
+	_mDLObjectSelComponents                                            = objc.RegisterName("components")
+	_mDLObjectSelParent                                                = objc.RegisterName("parent")
+	_mDLObjectSelSetParent                                             = objc.RegisterName("setParent:")
+	_mDLObjectSelInstance                                              = objc.RegisterName("instance")
+	_mDLObjectSelSetInstance                                           = objc.RegisterName("setInstance:")
+	_mDLObjectSelPath                                                  = objc.RegisterName("path")
+	_mDLObjectSelTransform                                             = objc.RegisterName("transform")
+	_mDLObjectSelSetTransform                                          = objc.RegisterName("setTransform:")
+	_mDLObjectSelChildren                                              = objc.RegisterName("children")
+	_mDLObjectSelSetChildren                                           = objc.RegisterName("setChildren:")
+	_mDLObjectSelHidden                                                = objc.RegisterName("hidden")
+	_mDLObjectSelSetHidden                                             = objc.RegisterName("setHidden:")
 )
 
 func MDLObjectFromID(id objc.ID) *MDLObject {
@@ -76,7 +76,9 @@ func (o *MDLObject) SetObjectForKeyedSubscript(obj MDLComponent, key unsafe.Poin
 // @abstract Return the object at the specified path, or nil if none exists there
 func (o *MDLObject) ObjectAtPath(path *foundation.NSString) *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelObjectAtPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
@@ -108,14 +110,18 @@ func (o *MDLObject) BoundingBoxAtTime(time_ float64) MDLAxisAlignedBoundingBox {
 // @property components @abstract Allows applications to introspect the components on the objects.
 func (o *MDLObject) Components() *foundation.NSArray[MDLComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MDLComponent](_ret)
 }
 
 // @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
 func (o *MDLObject) Parent() *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
@@ -126,7 +132,9 @@ func (o *MDLObject) SetParent(parent *MDLObject) {
 // @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
 func (o *MDLObject) Instance() *MDLObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLObjectFromID(_ret)
 }
 
@@ -137,7 +145,9 @@ func (o *MDLObject) SetInstance(instance *MDLObject) {
 // @property path @abstract a string representing a path to the object @discussion a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
 func (o *MDLObject) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLObjectSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,4 +179,3 @@ func (o *MDLObject) Hidden() bool {
 func (o *MDLObject) SetHidden(hidden bool) {
 	o.Ptr().Send(_mDLObjectSelSetHidden, hidden)
 }
-

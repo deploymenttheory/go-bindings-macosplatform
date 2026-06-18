@@ -17,15 +17,15 @@ type AVCaptureOutput struct {
 }
 
 var (
-	_clsAVCaptureOutput = _objcClass("AVCaptureOutput")
-	_aVCaptureOutputSelConnectionWithMediaType = objc.RegisterName("connectionWithMediaType:")
+	_clsAVCaptureOutput                                                     = _objcClass("AVCaptureOutput")
+	_aVCaptureOutputSelConnectionWithMediaType                              = objc.RegisterName("connectionWithMediaType:")
 	_aVCaptureOutputSelTransformedMetadataObjectForMetadataObjectConnection = objc.RegisterName("transformedMetadataObjectForMetadataObject:connection:")
-	_aVCaptureOutputSelMetadataOutputRectOfInterestForRect = objc.RegisterName("metadataOutputRectOfInterestForRect:")
-	_aVCaptureOutputSelRectForMetadataOutputRectOfInterest = objc.RegisterName("rectForMetadataOutputRectOfInterest:")
-	_aVCaptureOutputSelConnections = objc.RegisterName("connections")
-	_aVCaptureOutputSelIsDeferredStartSupported = objc.RegisterName("isDeferredStartSupported")
-	_aVCaptureOutputSelIsDeferredStartEnabled = objc.RegisterName("isDeferredStartEnabled")
-	_aVCaptureOutputSelSetDeferredStartEnabled = objc.RegisterName("setDeferredStartEnabled:")
+	_aVCaptureOutputSelMetadataOutputRectOfInterestForRect                  = objc.RegisterName("metadataOutputRectOfInterestForRect:")
+	_aVCaptureOutputSelRectForMetadataOutputRectOfInterest                  = objc.RegisterName("rectForMetadataOutputRectOfInterest:")
+	_aVCaptureOutputSelConnections                                          = objc.RegisterName("connections")
+	_aVCaptureOutputSelIsDeferredStartSupported                             = objc.RegisterName("isDeferredStartSupported")
+	_aVCaptureOutputSelIsDeferredStartEnabled                               = objc.RegisterName("isDeferredStartEnabled")
+	_aVCaptureOutputSelSetDeferredStartEnabled                              = objc.RegisterName("setDeferredStartEnabled:")
 )
 
 func AVCaptureOutputFromID(id objc.ID) *AVCaptureOutput {
@@ -41,14 +41,18 @@ func AVCaptureOutputFromID(id objc.ID) *AVCaptureOutput {
 // @method connectionWithMediaType: @abstract Returns the first connection in the connections array with an inputPort of the specified mediaType. @param mediaType An AVMediaType constant from AVMediaFormat.h, e.g. AVMediaTypeVideo. @discussion This convenience method returns the first AVCaptureConnection in the receiver's connections array that has an AVCaptureInputPort of the specified mediaType. If no connection with the specified mediaType is found, nil is returned.
 func (o *AVCaptureOutput) ConnectionWithMediaType(mediaType *foundation.NSString) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureOutputSelConnectionWithMediaType, mediaType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
 // @method transformedMetadataObjectForMetadataObject:connection: @abstract Converts an AVMetadataObject's visual properties to the receiver's coordinates. @param metadataObject An AVMetadataObject originating from the same AVCaptureInput as the receiver. @param connection The receiver's connection whose AVCaptureInput matches that of the metadata object to be converted. @result An AVMetadataObject whose properties are in output coordinates. @discussion AVMetadataObject bounds may be expressed as a rect where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. Face metadata objects likewise express yaw and roll angles with respect to an unrotated picture. -transformedMetadataObjectForMetadataObject:connection: converts the visual properties in the coordinate space of the supplied AVMetadataObject to the coordinate space of the receiver. The conversion takes orientation, mirroring, and scaling into consideration. If the provided metadata object originates from an input source other than the preview layer's, nil will be returned. If an AVCaptureVideoDataOutput instance's connection's videoOrientation or videoMirrored properties are set to non-default values, the output applies the desired mirroring and orientation by physically rotating and or flipping sample buffers as they pass through it. AVCaptureStillImageOutput, on the other hand, does not physically rotate its buffers. It attaches an appropriate kCGImagePropertyOrientation number to captured still image buffers (see ImageIO/CGImageProperties.h) indicating how the image should be displayed on playback. Likewise, AVCaptureMovieFileOutput does not physically apply orientation/mirroring to its sample buffers -- it uses a QuickTime track matrix to indicate how the buffers should be rotated and/or flipped on playback. transformedMetadataObjectForMetadataObject:connection: alters the visual properties of the provided metadata object to match the physical rotation / mirroring of the sample buffers provided by the receiver through the indicated connection. I.e., for video data output, adjusted metadata object coordinates are rotated/mirrored. For still image and movie file output, they are not.
 func (o *AVCaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(metadataObject *AVMetadataObject, connection *AVCaptureConnection) *AVMetadataObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureOutputSelTransformedMetadataObjectForMetadataObjectConnection, metadataObject.Ptr(), connection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataObjectFromID(_ret)
 }
 
@@ -67,17 +71,19 @@ func (o *AVCaptureOutput) RectForMetadataOutputRectOfInterest(rectInMetadataOutp
 // @property connections @abstract The connections that describe the flow of media data to the receiver from AVCaptureInputs. @discussion The value of this property is an NSArray of AVCaptureConnection objects, each describing the mapping between the receiver and the AVCaptureInputPorts of one or more AVCaptureInputs.
 func (o *AVCaptureOutput) Connections() *foundation.NSArray[*AVCaptureConnection] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureOutputSelConnections)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureConnection](_ret)
 }
 
-// A `BOOL` value that indicates whether the output supports deferred start. You can only set the ``deferredStartEnabled`` property value to `true` if the output supports deferred start.
+// A `BOOL` value that indicates whether the output supports deferred start. You can only set the “deferredStartEnabled“ property value to `true` if the output supports deferred start.
 func (o *AVCaptureOutput) IsDeferredStartSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureOutputSelIsDeferredStartSupported)
 	return _ret
 }
 
-// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after ``AVCaptureSession/startRunning`` returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an ``AVCaptureVideoDataOutput`` that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for ``AVCapturePhotoOutput`` and ``AVCaptureFileOutput`` subclasses if supported, and `false` otherwise. When set to `true` for ``AVCapturePhotoOutput``, if you want to support multiple capture requests before running deferred start, set ``AVCapturePhotoOutput/responsiveCaptureEnabled`` to `true` on that output. If ``deferredStartSupported`` is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling ``AVCaptureSession/commitConfiguration`` as it requires a lengthy reconfiguration of the capture render pipeline.
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
 func (o *AVCaptureOutput) IsDeferredStartEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureOutputSelIsDeferredStartEnabled)
 	return _ret
@@ -86,4 +92,3 @@ func (o *AVCaptureOutput) IsDeferredStartEnabled() bool {
 func (o *AVCaptureOutput) SetDeferredStartEnabled(deferredStartEnabled bool) {
 	o.Ptr().Send(_aVCaptureOutputSelSetDeferredStartEnabled, deferredStartEnabled)
 }
-

@@ -16,12 +16,12 @@ type AVPlaybackSpeed struct {
 }
 
 var (
-	_clsAVPlaybackSpeed = _objcClass("AVPlaybackSpeed")
+	_clsAVPlaybackSpeed                          = _objcClass("AVPlaybackSpeed")
 	_aVPlaybackSpeedSelInitWithRateLocalizedName = objc.RegisterName("initWithRate:localizedName:")
-	_aVPlaybackSpeedSelSystemDefaultSpeeds = objc.RegisterName("systemDefaultSpeeds")
-	_aVPlaybackSpeedSelRate = objc.RegisterName("rate")
-	_aVPlaybackSpeedSelLocalizedName = objc.RegisterName("localizedName")
-	_aVPlaybackSpeedSelLocalizedNumericName = objc.RegisterName("localizedNumericName")
+	_aVPlaybackSpeedSelSystemDefaultSpeeds       = objc.RegisterName("systemDefaultSpeeds")
+	_aVPlaybackSpeedSelRate                      = objc.RegisterName("rate")
+	_aVPlaybackSpeedSelLocalizedName             = objc.RegisterName("localizedName")
+	_aVPlaybackSpeedSelLocalizedNumericName      = objc.RegisterName("localizedNumericName")
 )
 
 func AVPlaybackSpeedFromID(id objc.ID) *AVPlaybackSpeed {
@@ -37,14 +37,18 @@ func AVPlaybackSpeedFromID(id objc.ID) *AVPlaybackSpeed {
 // @method         initWithRate:localizedName: @param         rate The rate to be used when this playback speed is selected. @param         localizedName A localized name to be displayed representing this playback speed in a UI. @abstract      Initializes an AVPlaybackSpeed.
 func (o *AVPlaybackSpeed) InitWithRateLocalizedName(rate float32, localizedName *foundation.NSString) *AVPlaybackSpeed {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackSpeedSelInitWithRateLocalizedName, rate, localizedName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlaybackSpeedFromID(_ret)
 }
 
 // @property      systemDefaultSpeeds @abstract      A list of playback speeds to be used by default across the system.
 func AVPlaybackSpeedSystemDefaultSpeeds() *foundation.NSArray[*AVPlaybackSpeed] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlaybackSpeed), _aVPlaybackSpeedSelSystemDefaultSpeeds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlaybackSpeed](_ret)
 }
 
@@ -57,14 +61,17 @@ func (o *AVPlaybackSpeed) Rate() float32 {
 // @property      localizedName @abstract      A localized name for this playback speed. @discussion    This name will be used to represent this playback speed in playback UIs where more space is available.
 func (o *AVPlaybackSpeed) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackSpeedSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property      localizedNumericName @abstract      A localized name for this playback speed used when space is limited. @discussion    This name will be used to represent this playback speed in playback UIs where limited space is available.
 func (o *AVPlaybackSpeed) LocalizedNumericName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlaybackSpeedSelLocalizedNumericName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

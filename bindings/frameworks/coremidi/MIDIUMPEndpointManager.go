@@ -16,9 +16,9 @@ type MIDIUMPEndpointManager struct {
 }
 
 var (
-	_clsMIDIUMPEndpointManager = _objcClass("MIDIUMPEndpointManager")
+	_clsMIDIUMPEndpointManager               = _objcClass("MIDIUMPEndpointManager")
 	_mIDIUMPEndpointManagerSelSharedInstance = objc.RegisterName("sharedInstance")
-	_mIDIUMPEndpointManagerSelUMPEndpoints = objc.RegisterName("UMPEndpoints")
+	_mIDIUMPEndpointManagerSelUMPEndpoints   = objc.RegisterName("UMPEndpoints")
 )
 
 func MIDIUMPEndpointManagerFromID(id objc.ID) *MIDIUMPEndpointManager {
@@ -34,14 +34,17 @@ func MIDIUMPEndpointManagerFromID(id objc.ID) *MIDIUMPEndpointManager {
 // @property   sharedInstance @brief		Retrieve the shared UMP Endpoint manager for the client process. @discussion	After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
 func MIDIUMPEndpointManagerSharedInstance() *MIDIUMPEndpointManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMIDIUMPEndpointManager), _mIDIUMPEndpointManagerSelSharedInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDIUMPEndpointManagerFromID(_ret)
 }
 
 // @property	UMPEndpoints @brief		A  list of UMP endpoints discovered using UMP endpoint discovery.
 func (o *MIDIUMPEndpointManager) UMPEndpoints() *foundation.NSArray[*MIDIUMPEndpoint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPEndpointManagerSelUMPEndpoints)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MIDIUMPEndpoint](_ret)
 }
-

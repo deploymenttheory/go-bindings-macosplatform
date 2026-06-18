@@ -247,7 +247,9 @@ func (x *CNNConvolutionDescriptor) SetNeuron(neuron unsafe.Pointer) {
 	x.inner.SetNeuron(neuron)
 }
 
-func (x *CNNConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor { return x.inner }
+func (x *CNNConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor {
+	return x.inner
+}
 
 // CNNConvolutionDescriptorable is the interface implemented by [CNNConvolutionDescriptor], for mocking and DI.
 type CNNConvolutionDescriptorable interface {
@@ -294,4 +296,3 @@ type CNNConvolutionDescriptorable interface {
 }
 
 var _ CNNConvolutionDescriptorable = (*CNNConvolutionDescriptor)(nil)
-

@@ -17,43 +17,43 @@ type MTLFXTemporalScalerDescriptor struct {
 }
 
 var (
-	_clsMTLFXTemporalScalerDescriptor = _objcClass("MTLFXTemporalScalerDescriptor")
-	_mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDevice = objc.RegisterName("newTemporalScalerWithDevice:")
-	_mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDeviceCompiler = objc.RegisterName("newTemporalScalerWithDevice:compiler:")
+	_clsMTLFXTemporalScalerDescriptor                                       = _objcClass("MTLFXTemporalScalerDescriptor")
+	_mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDevice            = objc.RegisterName("newTemporalScalerWithDevice:")
+	_mTLFXTemporalScalerDescriptorSelNewTemporalScalerWithDeviceCompiler    = objc.RegisterName("newTemporalScalerWithDevice:compiler:")
 	_mTLFXTemporalScalerDescriptorSelSupportedInputContentMinScaleForDevice = objc.RegisterName("supportedInputContentMinScaleForDevice:")
 	_mTLFXTemporalScalerDescriptorSelSupportedInputContentMaxScaleForDevice = objc.RegisterName("supportedInputContentMaxScaleForDevice:")
-	_mTLFXTemporalScalerDescriptorSelSupportsDevice = objc.RegisterName("supportsDevice:")
-	_mTLFXTemporalScalerDescriptorSelSupportsMetal4FX = objc.RegisterName("supportsMetal4FX:")
-	_mTLFXTemporalScalerDescriptorSelColorTextureFormat = objc.RegisterName("colorTextureFormat")
-	_mTLFXTemporalScalerDescriptorSelSetColorTextureFormat = objc.RegisterName("setColorTextureFormat:")
-	_mTLFXTemporalScalerDescriptorSelDepthTextureFormat = objc.RegisterName("depthTextureFormat")
-	_mTLFXTemporalScalerDescriptorSelSetDepthTextureFormat = objc.RegisterName("setDepthTextureFormat:")
-	_mTLFXTemporalScalerDescriptorSelMotionTextureFormat = objc.RegisterName("motionTextureFormat")
-	_mTLFXTemporalScalerDescriptorSelSetMotionTextureFormat = objc.RegisterName("setMotionTextureFormat:")
-	_mTLFXTemporalScalerDescriptorSelOutputTextureFormat = objc.RegisterName("outputTextureFormat")
-	_mTLFXTemporalScalerDescriptorSelSetOutputTextureFormat = objc.RegisterName("setOutputTextureFormat:")
-	_mTLFXTemporalScalerDescriptorSelInputWidth = objc.RegisterName("inputWidth")
-	_mTLFXTemporalScalerDescriptorSelSetInputWidth = objc.RegisterName("setInputWidth:")
-	_mTLFXTemporalScalerDescriptorSelInputHeight = objc.RegisterName("inputHeight")
-	_mTLFXTemporalScalerDescriptorSelSetInputHeight = objc.RegisterName("setInputHeight:")
-	_mTLFXTemporalScalerDescriptorSelOutputWidth = objc.RegisterName("outputWidth")
-	_mTLFXTemporalScalerDescriptorSelSetOutputWidth = objc.RegisterName("setOutputWidth:")
-	_mTLFXTemporalScalerDescriptorSelOutputHeight = objc.RegisterName("outputHeight")
-	_mTLFXTemporalScalerDescriptorSelSetOutputHeight = objc.RegisterName("setOutputHeight:")
-	_mTLFXTemporalScalerDescriptorSelIsAutoExposureEnabled = objc.RegisterName("isAutoExposureEnabled")
-	_mTLFXTemporalScalerDescriptorSelSetAutoExposureEnabled = objc.RegisterName("setAutoExposureEnabled:")
-	_mTLFXTemporalScalerDescriptorSelRequiresSynchronousInitialization = objc.RegisterName("requiresSynchronousInitialization")
-	_mTLFXTemporalScalerDescriptorSelSetRequiresSynchronousInitialization = objc.RegisterName("setRequiresSynchronousInitialization:")
-	_mTLFXTemporalScalerDescriptorSelIsInputContentPropertiesEnabled = objc.RegisterName("isInputContentPropertiesEnabled")
-	_mTLFXTemporalScalerDescriptorSelSetInputContentPropertiesEnabled = objc.RegisterName("setInputContentPropertiesEnabled:")
-	_mTLFXTemporalScalerDescriptorSelInputContentMinScale = objc.RegisterName("inputContentMinScale")
-	_mTLFXTemporalScalerDescriptorSelSetInputContentMinScale = objc.RegisterName("setInputContentMinScale:")
-	_mTLFXTemporalScalerDescriptorSelInputContentMaxScale = objc.RegisterName("inputContentMaxScale")
-	_mTLFXTemporalScalerDescriptorSelSetInputContentMaxScale = objc.RegisterName("setInputContentMaxScale:")
-	_mTLFXTemporalScalerDescriptorSelIsReactiveMaskTextureEnabled = objc.RegisterName("isReactiveMaskTextureEnabled")
-	_mTLFXTemporalScalerDescriptorSelSetReactiveMaskTextureEnabled = objc.RegisterName("setReactiveMaskTextureEnabled:")
-	_mTLFXTemporalScalerDescriptorSelReactiveMaskTextureFormat = objc.RegisterName("reactiveMaskTextureFormat")
-	_mTLFXTemporalScalerDescriptorSelSetReactiveMaskTextureFormat = objc.RegisterName("setReactiveMaskTextureFormat:")
+	_mTLFXTemporalScalerDescriptorSelSupportsDevice                         = objc.RegisterName("supportsDevice:")
+	_mTLFXTemporalScalerDescriptorSelSupportsMetal4FX                       = objc.RegisterName("supportsMetal4FX:")
+	_mTLFXTemporalScalerDescriptorSelColorTextureFormat                     = objc.RegisterName("colorTextureFormat")
+	_mTLFXTemporalScalerDescriptorSelSetColorTextureFormat                  = objc.RegisterName("setColorTextureFormat:")
+	_mTLFXTemporalScalerDescriptorSelDepthTextureFormat                     = objc.RegisterName("depthTextureFormat")
+	_mTLFXTemporalScalerDescriptorSelSetDepthTextureFormat                  = objc.RegisterName("setDepthTextureFormat:")
+	_mTLFXTemporalScalerDescriptorSelMotionTextureFormat                    = objc.RegisterName("motionTextureFormat")
+	_mTLFXTemporalScalerDescriptorSelSetMotionTextureFormat                 = objc.RegisterName("setMotionTextureFormat:")
+	_mTLFXTemporalScalerDescriptorSelOutputTextureFormat                    = objc.RegisterName("outputTextureFormat")
+	_mTLFXTemporalScalerDescriptorSelSetOutputTextureFormat                 = objc.RegisterName("setOutputTextureFormat:")
+	_mTLFXTemporalScalerDescriptorSelInputWidth                             = objc.RegisterName("inputWidth")
+	_mTLFXTemporalScalerDescriptorSelSetInputWidth                          = objc.RegisterName("setInputWidth:")
+	_mTLFXTemporalScalerDescriptorSelInputHeight                            = objc.RegisterName("inputHeight")
+	_mTLFXTemporalScalerDescriptorSelSetInputHeight                         = objc.RegisterName("setInputHeight:")
+	_mTLFXTemporalScalerDescriptorSelOutputWidth                            = objc.RegisterName("outputWidth")
+	_mTLFXTemporalScalerDescriptorSelSetOutputWidth                         = objc.RegisterName("setOutputWidth:")
+	_mTLFXTemporalScalerDescriptorSelOutputHeight                           = objc.RegisterName("outputHeight")
+	_mTLFXTemporalScalerDescriptorSelSetOutputHeight                        = objc.RegisterName("setOutputHeight:")
+	_mTLFXTemporalScalerDescriptorSelIsAutoExposureEnabled                  = objc.RegisterName("isAutoExposureEnabled")
+	_mTLFXTemporalScalerDescriptorSelSetAutoExposureEnabled                 = objc.RegisterName("setAutoExposureEnabled:")
+	_mTLFXTemporalScalerDescriptorSelRequiresSynchronousInitialization      = objc.RegisterName("requiresSynchronousInitialization")
+	_mTLFXTemporalScalerDescriptorSelSetRequiresSynchronousInitialization   = objc.RegisterName("setRequiresSynchronousInitialization:")
+	_mTLFXTemporalScalerDescriptorSelIsInputContentPropertiesEnabled        = objc.RegisterName("isInputContentPropertiesEnabled")
+	_mTLFXTemporalScalerDescriptorSelSetInputContentPropertiesEnabled       = objc.RegisterName("setInputContentPropertiesEnabled:")
+	_mTLFXTemporalScalerDescriptorSelInputContentMinScale                   = objc.RegisterName("inputContentMinScale")
+	_mTLFXTemporalScalerDescriptorSelSetInputContentMinScale                = objc.RegisterName("setInputContentMinScale:")
+	_mTLFXTemporalScalerDescriptorSelInputContentMaxScale                   = objc.RegisterName("inputContentMaxScale")
+	_mTLFXTemporalScalerDescriptorSelSetInputContentMaxScale                = objc.RegisterName("setInputContentMaxScale:")
+	_mTLFXTemporalScalerDescriptorSelIsReactiveMaskTextureEnabled           = objc.RegisterName("isReactiveMaskTextureEnabled")
+	_mTLFXTemporalScalerDescriptorSelSetReactiveMaskTextureEnabled          = objc.RegisterName("setReactiveMaskTextureEnabled:")
+	_mTLFXTemporalScalerDescriptorSelReactiveMaskTextureFormat              = objc.RegisterName("reactiveMaskTextureFormat")
+	_mTLFXTemporalScalerDescriptorSelSetReactiveMaskTextureFormat           = objc.RegisterName("setReactiveMaskTextureFormat:")
 )
 
 func MTLFXTemporalScalerDescriptorFromID(id objc.ID) *MTLFXTemporalScalerDescriptor {
@@ -182,7 +182,7 @@ func (o *MTLFXTemporalScalerDescriptor) SetOutputHeight(outputHeight uint) {
 	o.Ptr().Send(_mTLFXTemporalScalerDescriptorSelSetOutputHeight, outputHeight)
 }
 
-// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their ``MTLFXTemporalScalerBase/exposureTexture`` property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
+// A Boolean value that indicates whether MetalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (o *MTLFXTemporalScalerDescriptor) IsAutoExposureEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLFXTemporalScalerDescriptorSelIsAutoExposureEnabled)
 	return _ret
@@ -192,7 +192,7 @@ func (o *MTLFXTemporalScalerDescriptor) SetAutoExposureEnabled(autoExposureEnabl
 	o.Ptr().Send(_mTLFXTemporalScalerDescriptorSelSetAutoExposureEnabled, autoExposureEnabled)
 }
 
-// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like ``newTemporalScalerWithDevice:``. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
+// A Boolean value that indicates whether MetalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
 func (o *MTLFXTemporalScalerDescriptor) RequiresSynchronousInitialization() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLFXTemporalScalerDescriptorSelRequiresSynchronousInitialization)
 	return _ret
@@ -202,7 +202,7 @@ func (o *MTLFXTemporalScalerDescriptor) SetRequiresSynchronousInitialization(req
 	o.Ptr().Send(_mTLFXTemporalScalerDescriptorSelSetRequiresSynchronousInitialization, requiresSynchronousInitialization)
 }
 
-// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties ``inputContentMinScale`` and ``inputContentMaxScale`` represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
+// A Boolean value that indicates whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties “inputContentMinScale“ and “inputContentMaxScale“ represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
 func (o *MTLFXTemporalScalerDescriptor) IsInputContentPropertiesEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mTLFXTemporalScalerDescriptorSelIsInputContentPropertiesEnabled)
 	return _ret
@@ -251,4 +251,3 @@ func (o *MTLFXTemporalScalerDescriptor) ReactiveMaskTextureFormat() metal.MTLPix
 func (o *MTLFXTemporalScalerDescriptor) SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) {
 	o.Ptr().Send(_mTLFXTemporalScalerDescriptorSelSetReactiveMaskTextureFormat, reactiveMaskTextureFormat)
 }
-

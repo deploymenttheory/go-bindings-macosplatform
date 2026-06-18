@@ -41,4 +41,3 @@ type UnitSignalBarsable interface {
 }
 
 var _ UnitSignalBarsable = (*UnitSignalBars)(nil)
-

@@ -17,8 +17,8 @@ type MKPolyline struct {
 }
 
 var (
-	_clsMKPolyline = _objcClass("MKPolyline")
-	_mKPolylineSelPolylineWithPointsCount = objc.RegisterName("polylineWithPoints:count:")
+	_clsMKPolyline                             = _objcClass("MKPolyline")
+	_mKPolylineSelPolylineWithPointsCount      = objc.RegisterName("polylineWithPoints:count:")
 	_mKPolylineSelPolylineWithCoordinatesCount = objc.RegisterName("polylineWithCoordinates:count:")
 )
 
@@ -34,13 +34,16 @@ func MKPolylineFromID(id objc.ID) *MKPolyline {
 
 func MKPolylinePolylineWithPointsCount(points *MKMapPoint, count uint) *MKPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolyline), _mKPolylineSelPolylineWithPointsCount, points, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineFromID(_ret)
 }
 
 func MKPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count uint) *MKPolyline {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKPolyline), _mKPolylineSelPolylineWithCoordinatesCount, coords, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineFromID(_ret)
 }
-

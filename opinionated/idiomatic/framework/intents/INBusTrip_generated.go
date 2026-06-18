@@ -117,4 +117,3 @@ type BusTripable interface {
 }
 
 var _ BusTripable = (*BusTrip)(nil)
-

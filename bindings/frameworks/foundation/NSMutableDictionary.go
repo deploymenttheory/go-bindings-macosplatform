@@ -15,23 +15,23 @@ type NSMutableDictionary[KeyType purego.AnyObject, ObjectType purego.AnyObject] 
 }
 
 var (
-	_clsNSMutableDictionary = _objcClass("NSMutableDictionary")
-	_nSMutableDictionarySelRemoveObjectForKey = objc.RegisterName("removeObjectForKey:")
-	_nSMutableDictionarySelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_nSMutableDictionarySelInit = objc.RegisterName("init")
-	_nSMutableDictionarySelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableDictionarySelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMutableDictionarySelAddEntriesFromDictionary = objc.RegisterName("addEntriesFromDictionary:")
-	_nSMutableDictionarySelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSMutableDictionarySelRemoveObjectsForKeys = objc.RegisterName("removeObjectsForKeys:")
-	_nSMutableDictionarySelSetDictionary = objc.RegisterName("setDictionary:")
-	_nSMutableDictionarySelSetObjectForKeyedSubscript = objc.RegisterName("setObject:forKeyedSubscript:")
-	_nSMutableDictionarySelDictionaryWithCapacity = objc.RegisterName("dictionaryWithCapacity:")
+	_clsNSMutableDictionary                             = _objcClass("NSMutableDictionary")
+	_nSMutableDictionarySelRemoveObjectForKey           = objc.RegisterName("removeObjectForKey:")
+	_nSMutableDictionarySelSetObjectForKey              = objc.RegisterName("setObject:forKey:")
+	_nSMutableDictionarySelInit                         = objc.RegisterName("init")
+	_nSMutableDictionarySelInitWithCapacity             = objc.RegisterName("initWithCapacity:")
+	_nSMutableDictionarySelInitWithCoder                = objc.RegisterName("initWithCoder:")
+	_nSMutableDictionarySelAddEntriesFromDictionary     = objc.RegisterName("addEntriesFromDictionary:")
+	_nSMutableDictionarySelRemoveAllObjects             = objc.RegisterName("removeAllObjects")
+	_nSMutableDictionarySelRemoveObjectsForKeys         = objc.RegisterName("removeObjectsForKeys:")
+	_nSMutableDictionarySelSetDictionary                = objc.RegisterName("setDictionary:")
+	_nSMutableDictionarySelSetObjectForKeyedSubscript   = objc.RegisterName("setObject:forKeyedSubscript:")
+	_nSMutableDictionarySelDictionaryWithCapacity       = objc.RegisterName("dictionaryWithCapacity:")
 	_nSMutableDictionarySelDictionaryWithContentsOfFile = objc.RegisterName("dictionaryWithContentsOfFile:")
-	_nSMutableDictionarySelDictionaryWithContentsOfURL = objc.RegisterName("dictionaryWithContentsOfURL:")
-	_nSMutableDictionarySelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSMutableDictionarySelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSMutableDictionarySelDictionaryWithSharedKeySet = objc.RegisterName("dictionaryWithSharedKeySet:")
+	_nSMutableDictionarySelDictionaryWithContentsOfURL  = objc.RegisterName("dictionaryWithContentsOfURL:")
+	_nSMutableDictionarySelInitWithContentsOfFile       = objc.RegisterName("initWithContentsOfFile:")
+	_nSMutableDictionarySelInitWithContentsOfURL        = objc.RegisterName("initWithContentsOfURL:")
+	_nSMutableDictionarySelDictionaryWithSharedKeySet   = objc.RegisterName("dictionaryWithSharedKeySet:")
 )
 
 func NSMutableDictionaryFromID[KeyType purego.AnyObject, ObjectType purego.AnyObject](id objc.ID) *NSMutableDictionary[KeyType, ObjectType] {
@@ -54,19 +54,25 @@ func (o *NSMutableDictionary[KeyType, ObjectType]) SetObjectForKey(anObject Obje
 
 func (o *NSMutableDictionary[KeyType, ObjectType]) Init() *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
 func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithCapacity(numItems uint) *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
 func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
@@ -92,37 +98,48 @@ func (o *NSMutableDictionary[KeyType, ObjectType]) SetObjectForKeyedSubscript(ob
 
 func NSMutableDictionaryDictionaryWithCapacity(numItems uint) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func NSMutableDictionaryDictionaryWithContentsOfFile(path *NSString) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func NSMutableDictionaryDictionaryWithContentsOfURL(url *NSURL) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
 func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithContentsOfFile(path *NSString) *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInitWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
 func (o *NSMutableDictionary[KeyType, ObjectType]) InitWithContentsOfURL(url *NSURL) *NSMutableDictionary[KeyType, ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableDictionarySelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[KeyType, ObjectType](_ret)
 }
 
 func NSMutableDictionaryDictionaryWithSharedKeySet(keyset objc.ID) *NSMutableDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableDictionary), _nSMutableDictionarySelDictionaryWithSharedKeySet, keyset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableDictionaryFromID[objc.ID, objc.ID](_ret)
 }
-

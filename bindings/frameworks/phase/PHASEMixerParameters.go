@@ -16,9 +16,9 @@ type PHASEMixerParameters struct {
 }
 
 var (
-	_clsPHASEMixerParameters = _objcClass("PHASEMixerParameters")
+	_clsPHASEMixerParameters                                                      = _objcClass("PHASEMixerParameters")
 	_pHASEMixerParametersSelAddSpatialMixerParametersWithIdentifierSourceListener = objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:")
-	_pHASEMixerParametersSelAddAmbientMixerParametersWithIdentifierListener = objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:")
+	_pHASEMixerParametersSelAddAmbientMixerParametersWithIdentifierListener       = objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:")
 )
 
 func PHASEMixerParametersFromID(id objc.ID) *PHASEMixerParameters {
@@ -40,4 +40,3 @@ func (o *PHASEMixerParameters) AddSpatialMixerParametersWithIdentifierSourceList
 func (o *PHASEMixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier *foundation.NSString, listener *PHASEListener) {
 	o.Ptr().Send(_pHASEMixerParametersSelAddAmbientMixerParametersWithIdentifierListener, identifier.Ptr(), listener.Ptr())
 }
-

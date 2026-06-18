@@ -57,4 +57,3 @@ type CompositionLayerable interface {
 }
 
 var _ CompositionLayerable = (*CompositionLayer)(nil)
-

@@ -4,8 +4,8 @@
 package quartzcore
 
 type CAFrameRateRange struct {
-	Minimum float32
-	Maximum float32
+	Minimum   float32
+	Maximum   float32
 	Preferred float32
 }
 
@@ -27,4 +27,3 @@ type CATransform3D struct {
 	M43 float64
 	M44 float64
 }
-

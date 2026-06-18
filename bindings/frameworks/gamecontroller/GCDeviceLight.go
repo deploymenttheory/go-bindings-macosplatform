@@ -16,8 +16,8 @@ type GCDeviceLight struct {
 }
 
 var (
-	_clsGCDeviceLight = _objcClass("GCDeviceLight")
-	_gCDeviceLightSelColor = objc.RegisterName("color")
+	_clsGCDeviceLight         = _objcClass("GCDeviceLight")
+	_gCDeviceLightSelColor    = objc.RegisterName("color")
 	_gCDeviceLightSelSetColor = objc.RegisterName("setColor:")
 )
 
@@ -33,11 +33,12 @@ func GCDeviceLightFromID(id objc.ID) *GCDeviceLight {
 
 func (o *GCDeviceLight) Color() *GCColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDeviceLightSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCColorFromID(_ret)
 }
 
 func (o *GCDeviceLight) SetColor(color *GCColor) {
 	o.Ptr().Send(_gCDeviceLightSelSetColor, color.Ptr())
 }
-

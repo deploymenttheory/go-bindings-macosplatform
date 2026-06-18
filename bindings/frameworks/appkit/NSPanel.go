@@ -15,11 +15,11 @@ type NSPanel struct {
 }
 
 var (
-	_clsNSPanel = _objcClass("NSPanel")
-	_nSPanelSelSetFloatingPanel = objc.RegisterName("setFloatingPanel:")
-	_nSPanelSelBecomesKeyOnlyIfNeeded = objc.RegisterName("becomesKeyOnlyIfNeeded")
+	_clsNSPanel                          = _objcClass("NSPanel")
+	_nSPanelSelSetFloatingPanel          = objc.RegisterName("setFloatingPanel:")
+	_nSPanelSelBecomesKeyOnlyIfNeeded    = objc.RegisterName("becomesKeyOnlyIfNeeded")
 	_nSPanelSelSetBecomesKeyOnlyIfNeeded = objc.RegisterName("setBecomesKeyOnlyIfNeeded:")
-	_nSPanelSelSetWorksWhenModal = objc.RegisterName("setWorksWhenModal:")
+	_nSPanelSelSetWorksWhenModal         = objc.RegisterName("setWorksWhenModal:")
 )
 
 func NSPanelFromID(id objc.ID) *NSPanel {
@@ -48,4 +48,3 @@ func (o *NSPanel) SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) {
 func (o *NSPanel) SetWorksWhenModal(worksWhenModal bool) {
 	o.Ptr().Send(_nSPanelSelSetWorksWhenModal, worksWhenModal)
 }
-

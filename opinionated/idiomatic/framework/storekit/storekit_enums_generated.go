@@ -14,9 +14,9 @@ type SKCloudServiceAuthorizationStatus int64
 
 const (
 	SKCloudServiceAuthorizationStatusNotDetermined SKCloudServiceAuthorizationStatus = 0
-	SKCloudServiceAuthorizationStatusDenied SKCloudServiceAuthorizationStatus = 1
-	SKCloudServiceAuthorizationStatusRestricted SKCloudServiceAuthorizationStatus = 2
-	SKCloudServiceAuthorizationStatusAuthorized SKCloudServiceAuthorizationStatus = 3
+	SKCloudServiceAuthorizationStatusDenied        SKCloudServiceAuthorizationStatus = 1
+	SKCloudServiceAuthorizationStatusRestricted    SKCloudServiceAuthorizationStatus = 2
+	SKCloudServiceAuthorizationStatusAuthorized    SKCloudServiceAuthorizationStatus = 3
 )
 
 func (e SKCloudServiceAuthorizationStatus) String() string {
@@ -40,7 +40,7 @@ type SKCloudServiceCapability uint64
 
 const (
 	// Deprecated: Use MusicAuthorization.Status from MusicKit.
-	SKCloudServiceCapabilityNone SKCloudServiceCapability = 0
+	SKCloudServiceCapabilityNone                 SKCloudServiceCapability = 0
 	SKCloudServiceCapabilityMusicCatalogPlayback SKCloudServiceCapability = 1
 	// Deprecated: Use the canBecomeSubscriber property of MusicSubscription from MusicKit.
 	SKCloudServiceCapabilityMusicCatalogSubscriptionEligible SKCloudServiceCapability = 2
@@ -69,11 +69,11 @@ func (e SKCloudServiceCapability) String() string {
 type SKDownloadState int64
 
 const (
-	SKDownloadStateWaiting SKDownloadState = 0
-	SKDownloadStateActive SKDownloadState = 1
-	SKDownloadStatePaused SKDownloadState = 2
-	SKDownloadStateFinished SKDownloadState = 3
-	SKDownloadStateFailed SKDownloadState = 4
+	SKDownloadStateWaiting   SKDownloadState = 0
+	SKDownloadStateActive    SKDownloadState = 1
+	SKDownloadStatePaused    SKDownloadState = 2
+	SKDownloadStateFinished  SKDownloadState = 3
+	SKDownloadStateFailed    SKDownloadState = 4
 	SKDownloadStateCancelled SKDownloadState = 5
 )
 
@@ -102,7 +102,7 @@ type SKProductDiscountPaymentMode uint64
 const (
 	SKProductDiscountPaymentModePayAsYouGo SKProductDiscountPaymentMode = 0
 	SKProductDiscountPaymentModePayUpFront SKProductDiscountPaymentMode = 1
-	SKProductDiscountPaymentModeFreeTrial SKProductDiscountPaymentMode = 2
+	SKProductDiscountPaymentModeFreeTrial  SKProductDiscountPaymentMode = 2
 )
 
 func (e SKProductDiscountPaymentMode) String() string {
@@ -143,10 +143,10 @@ func (e SKProductDiscountType) String() string {
 type SKProductPeriodUnit uint64
 
 const (
-	SKProductPeriodUnitDay SKProductPeriodUnit = 0
-	SKProductPeriodUnitWeek SKProductPeriodUnit = 1
+	SKProductPeriodUnitDay   SKProductPeriodUnit = 0
+	SKProductPeriodUnitWeek  SKProductPeriodUnit = 1
 	SKProductPeriodUnitMonth SKProductPeriodUnit = 2
-	SKProductPeriodUnitYear SKProductPeriodUnit = 3
+	SKProductPeriodUnitYear  SKProductPeriodUnit = 3
 )
 
 func (e SKProductPeriodUnit) String() string {
@@ -169,8 +169,8 @@ type SKProductStorePromotionVisibility int64
 
 const (
 	SKProductStorePromotionVisibilityDefault SKProductStorePromotionVisibility = 0
-	SKProductStorePromotionVisibilityShow SKProductStorePromotionVisibility = 1
-	SKProductStorePromotionVisibilityHide SKProductStorePromotionVisibility = 2
+	SKProductStorePromotionVisibilityShow    SKProductStorePromotionVisibility = 1
+	SKProductStorePromotionVisibilityHide    SKProductStorePromotionVisibility = 2
 )
 
 func (e SKProductStorePromotionVisibility) String() string {
@@ -185,4 +185,3 @@ func (e SKProductStorePromotionVisibility) String() string {
 		return fmt.Sprintf("SKProductStorePromotionVisibility(%d)", int64(e))
 	}
 }
-

@@ -16,7 +16,9 @@ type MTL4MachineLearningPipelineDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4MachineLearningPipelineDescriptor].
-func (x *MTL4MachineLearningPipelineDescriptor) Unwrap() *raw.MTL4MachineLearningPipelineDescriptor { return x.inner }
+func (x *MTL4MachineLearningPipelineDescriptor) Unwrap() *raw.MTL4MachineLearningPipelineDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,7 +94,9 @@ func (x *MTL4MachineLearningPipelineDescriptor) SetMachineLearningFunctionDescri
 	x.inner.SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor)
 }
 
-func (x *MTL4MachineLearningPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+func (x *MTL4MachineLearningPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
+	return &x.inner.MTL4PipelineDescriptor
+}
 
 // MTL4MachineLearningPipelineDescriptorable is the interface implemented by [MTL4MachineLearningPipelineDescriptor], for mocking and DI.
 type MTL4MachineLearningPipelineDescriptorable interface {
@@ -109,4 +113,3 @@ type MTL4MachineLearningPipelineDescriptorable interface {
 }
 
 var _ MTL4MachineLearningPipelineDescriptorable = (*MTL4MachineLearningPipelineDescriptor)(nil)
-

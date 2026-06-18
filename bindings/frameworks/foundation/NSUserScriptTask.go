@@ -17,10 +17,10 @@ type NSUserScriptTask struct {
 }
 
 var (
-	_clsNSUserScriptTask = _objcClass("NSUserScriptTask")
-	_nSUserScriptTaskSelInitWithURLError = objc.RegisterName("initWithURL:error:")
+	_clsNSUserScriptTask                             = _objcClass("NSUserScriptTask")
+	_nSUserScriptTaskSelInitWithURLError             = objc.RegisterName("initWithURL:error:")
 	_nSUserScriptTaskSelExecuteWithCompletionHandler = objc.RegisterName("executeWithCompletionHandler:")
-	_nSUserScriptTaskSelScriptURL = objc.RegisterName("scriptURL")
+	_nSUserScriptTaskSelScriptURL                    = objc.RegisterName("scriptURL")
 )
 
 func NSUserScriptTaskFromID(id objc.ID) *NSUserScriptTask {
@@ -36,7 +36,9 @@ func NSUserScriptTaskFromID(id objc.ID) *NSUserScriptTask {
 func (o *NSUserScriptTask) InitWithURLError(url *NSURL) (*NSUserScriptTask, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserScriptTaskSelInitWithURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -56,7 +58,8 @@ func (o *NSUserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Poin
 
 func (o *NSUserScriptTask) ScriptURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserScriptTaskSelScriptURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
-

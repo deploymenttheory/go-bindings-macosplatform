@@ -17,23 +17,23 @@ type NSFileCoordinator struct {
 }
 
 var (
-	_clsNSFileCoordinator = _objcClass("NSFileCoordinator")
-	_nSFileCoordinatorSelAddFilePresenter = objc.RegisterName("addFilePresenter:")
-	_nSFileCoordinatorSelRemoveFilePresenter = objc.RegisterName("removeFilePresenter:")
-	_nSFileCoordinatorSelInitWithFilePresenter = objc.RegisterName("initWithFilePresenter:")
-	_nSFileCoordinatorSelCoordinateAccessWithIntentsQueueByAccessor = objc.RegisterName("coordinateAccessWithIntents:queue:byAccessor:")
-	_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsErrorByAccessor = objc.RegisterName("coordinateReadingItemAtURL:options:error:byAccessor:")
-	_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsErrorByAccessor = objc.RegisterName("coordinateWritingItemAtURL:options:error:byAccessor:")
-	_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor = objc.RegisterName("coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:")
-	_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor = objc.RegisterName("coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor:")
+	_clsNSFileCoordinator                                                                            = _objcClass("NSFileCoordinator")
+	_nSFileCoordinatorSelAddFilePresenter                                                            = objc.RegisterName("addFilePresenter:")
+	_nSFileCoordinatorSelRemoveFilePresenter                                                         = objc.RegisterName("removeFilePresenter:")
+	_nSFileCoordinatorSelInitWithFilePresenter                                                       = objc.RegisterName("initWithFilePresenter:")
+	_nSFileCoordinatorSelCoordinateAccessWithIntentsQueueByAccessor                                  = objc.RegisterName("coordinateAccessWithIntents:queue:byAccessor:")
+	_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsErrorByAccessor                            = objc.RegisterName("coordinateReadingItemAtURL:options:error:byAccessor:")
+	_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsErrorByAccessor                            = objc.RegisterName("coordinateWritingItemAtURL:options:error:byAccessor:")
+	_nSFileCoordinatorSelCoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor     = objc.RegisterName("coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:")
+	_nSFileCoordinatorSelCoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor     = objc.RegisterName("coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor:")
 	_nSFileCoordinatorSelPrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor = objc.RegisterName("prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:")
-	_nSFileCoordinatorSelItemAtURLWillMoveToURL = objc.RegisterName("itemAtURL:willMoveToURL:")
-	_nSFileCoordinatorSelItemAtURLDidMoveToURL = objc.RegisterName("itemAtURL:didMoveToURL:")
-	_nSFileCoordinatorSelItemAtURLDidChangeUbiquityAttributes = objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:")
-	_nSFileCoordinatorSelCancel = objc.RegisterName("cancel")
-	_nSFileCoordinatorSelFilePresenters = objc.RegisterName("filePresenters")
-	_nSFileCoordinatorSelPurposeIdentifier = objc.RegisterName("purposeIdentifier")
-	_nSFileCoordinatorSelSetPurposeIdentifier = objc.RegisterName("setPurposeIdentifier:")
+	_nSFileCoordinatorSelItemAtURLWillMoveToURL                                                      = objc.RegisterName("itemAtURL:willMoveToURL:")
+	_nSFileCoordinatorSelItemAtURLDidMoveToURL                                                       = objc.RegisterName("itemAtURL:didMoveToURL:")
+	_nSFileCoordinatorSelItemAtURLDidChangeUbiquityAttributes                                        = objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:")
+	_nSFileCoordinatorSelCancel                                                                      = objc.RegisterName("cancel")
+	_nSFileCoordinatorSelFilePresenters                                                              = objc.RegisterName("filePresenters")
+	_nSFileCoordinatorSelPurposeIdentifier                                                           = objc.RegisterName("purposeIdentifier")
+	_nSFileCoordinatorSelSetPurposeIdentifier                                                        = objc.RegisterName("setPurposeIdentifier:")
 )
 
 func NSFileCoordinatorFromID(id objc.ID) *NSFileCoordinator {
@@ -56,7 +56,9 @@ func NSFileCoordinatorRemoveFilePresenter(filePresenter NSFilePresenter) {
 
 func (o *NSFileCoordinator) InitWithFilePresenter(filePresenterOrNil NSFilePresenter) *NSFileCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileCoordinatorSelInitWithFilePresenter, filePresenterOrNil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileCoordinatorFromID(_ret)
 }
 
@@ -162,17 +164,20 @@ func (o *NSFileCoordinator) Cancel() {
 
 func NSFileCoordinatorFilePresenters() *NSArray[NSFilePresenter] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileCoordinator), _nSFileCoordinatorSelFilePresenters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[NSFilePresenter](_ret)
 }
 
 func (o *NSFileCoordinator) PurposeIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileCoordinatorSelPurposeIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFileCoordinator) SetPurposeIdentifier(purposeIdentifier *NSString) {
 	o.Ptr().Send(_nSFileCoordinatorSelSetPurposeIdentifier, purposeIdentifier.Ptr())
 }
-

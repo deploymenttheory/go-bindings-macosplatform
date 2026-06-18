@@ -15,29 +15,29 @@ type NSUnitLength struct {
 }
 
 var (
-	_clsNSUnitLength = _objcClass("NSUnitLength")
-	_nSUnitLengthSelMegameters = objc.RegisterName("megameters")
-	_nSUnitLengthSelKilometers = objc.RegisterName("kilometers")
-	_nSUnitLengthSelHectometers = objc.RegisterName("hectometers")
-	_nSUnitLengthSelDecameters = objc.RegisterName("decameters")
-	_nSUnitLengthSelMeters = objc.RegisterName("meters")
-	_nSUnitLengthSelDecimeters = objc.RegisterName("decimeters")
-	_nSUnitLengthSelCentimeters = objc.RegisterName("centimeters")
-	_nSUnitLengthSelMillimeters = objc.RegisterName("millimeters")
-	_nSUnitLengthSelMicrometers = objc.RegisterName("micrometers")
-	_nSUnitLengthSelNanometers = objc.RegisterName("nanometers")
-	_nSUnitLengthSelPicometers = objc.RegisterName("picometers")
-	_nSUnitLengthSelInches = objc.RegisterName("inches")
-	_nSUnitLengthSelFeet = objc.RegisterName("feet")
-	_nSUnitLengthSelYards = objc.RegisterName("yards")
-	_nSUnitLengthSelMiles = objc.RegisterName("miles")
+	_clsNSUnitLength                  = _objcClass("NSUnitLength")
+	_nSUnitLengthSelMegameters        = objc.RegisterName("megameters")
+	_nSUnitLengthSelKilometers        = objc.RegisterName("kilometers")
+	_nSUnitLengthSelHectometers       = objc.RegisterName("hectometers")
+	_nSUnitLengthSelDecameters        = objc.RegisterName("decameters")
+	_nSUnitLengthSelMeters            = objc.RegisterName("meters")
+	_nSUnitLengthSelDecimeters        = objc.RegisterName("decimeters")
+	_nSUnitLengthSelCentimeters       = objc.RegisterName("centimeters")
+	_nSUnitLengthSelMillimeters       = objc.RegisterName("millimeters")
+	_nSUnitLengthSelMicrometers       = objc.RegisterName("micrometers")
+	_nSUnitLengthSelNanometers        = objc.RegisterName("nanometers")
+	_nSUnitLengthSelPicometers        = objc.RegisterName("picometers")
+	_nSUnitLengthSelInches            = objc.RegisterName("inches")
+	_nSUnitLengthSelFeet              = objc.RegisterName("feet")
+	_nSUnitLengthSelYards             = objc.RegisterName("yards")
+	_nSUnitLengthSelMiles             = objc.RegisterName("miles")
 	_nSUnitLengthSelScandinavianMiles = objc.RegisterName("scandinavianMiles")
-	_nSUnitLengthSelLightyears = objc.RegisterName("lightyears")
-	_nSUnitLengthSelNauticalMiles = objc.RegisterName("nauticalMiles")
-	_nSUnitLengthSelFathoms = objc.RegisterName("fathoms")
-	_nSUnitLengthSelFurlongs = objc.RegisterName("furlongs")
+	_nSUnitLengthSelLightyears        = objc.RegisterName("lightyears")
+	_nSUnitLengthSelNauticalMiles     = objc.RegisterName("nauticalMiles")
+	_nSUnitLengthSelFathoms           = objc.RegisterName("fathoms")
+	_nSUnitLengthSelFurlongs          = objc.RegisterName("furlongs")
 	_nSUnitLengthSelAstronomicalUnits = objc.RegisterName("astronomicalUnits")
-	_nSUnitLengthSelParsecs = objc.RegisterName("parsecs")
+	_nSUnitLengthSelParsecs           = objc.RegisterName("parsecs")
 )
 
 func NSUnitLengthFromID(id objc.ID) *NSUnitLength {
@@ -52,133 +52,176 @@ func NSUnitLengthFromID(id objc.ID) *NSUnitLength {
 
 func NSUnitLengthMegameters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMegameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthKilometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelKilometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthHectometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelHectometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthDecameters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelDecameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthMeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthDecimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelDecimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthCentimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelCentimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthMillimeters() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMillimeters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthMicrometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMicrometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthNanometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelNanometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthPicometers() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelPicometers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthInches() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelInches)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthFeet() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFeet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthYards() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelYards)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelMiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthScandinavianMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelScandinavianMiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthLightyears() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelLightyears)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthNauticalMiles() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelNauticalMiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthFathoms() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFathoms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthFurlongs() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelFurlongs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthAstronomicalUnits() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelAstronomicalUnits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
 
 func NSUnitLengthParsecs() *NSUnitLength {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitLength), _nSUnitLengthSelParsecs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitLengthFromID(_ret)
 }
-

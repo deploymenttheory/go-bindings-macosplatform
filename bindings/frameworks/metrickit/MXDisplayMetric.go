@@ -15,7 +15,7 @@ type MXDisplayMetric struct {
 }
 
 var (
-	_clsMXDisplayMetric = _objcClass("MXDisplayMetric")
+	_clsMXDisplayMetric                      = _objcClass("MXDisplayMetric")
 	_mXDisplayMetricSelAveragePixelLuminance = objc.RegisterName("averagePixelLuminance")
 )
 
@@ -31,7 +31,8 @@ func MXDisplayMetricFromID(id objc.ID) *MXDisplayMetric {
 
 func (o *MXDisplayMetric) AveragePixelLuminance() *MXAverage[*MXUnitAveragePixelLuminance] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mXDisplayMetricSelAveragePixelLuminance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MXAverageFromID[*MXUnitAveragePixelLuminance](_ret)
 }
-

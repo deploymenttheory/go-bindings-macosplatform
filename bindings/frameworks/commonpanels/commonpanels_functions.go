@@ -11,32 +11,32 @@ import (
 )
 
 var (
-	_fnCMCalibrateDisplay func(*CalibratorInfo) int16
-	_fnDisposeCalibrateEventUPP func(unsafe.Pointer)
-	_fnDisposeCalibrateUPP func(unsafe.Pointer)
-	_fnDisposeCanCalibrateUPP func(unsafe.Pointer)
-	_fnDisposeNColorChangedUPP func(unsafe.Pointer)
-	_fnFCAddCollection func(unsafe.Pointer, uint) int
-	_fnFCAddFontDescriptorToCollection func(unsafe.Pointer, unsafe.Pointer) int
-	_fnFCCopyCollectionNames func() unsafe.Pointer
-	_fnFCCopyFontDescriptorsInCollection func(unsafe.Pointer) unsafe.Pointer
+	_fnCMCalibrateDisplay                       func(*CalibratorInfo) int16
+	_fnDisposeCalibrateEventUPP                 func(unsafe.Pointer)
+	_fnDisposeCalibrateUPP                      func(unsafe.Pointer)
+	_fnDisposeCanCalibrateUPP                   func(unsafe.Pointer)
+	_fnDisposeNColorChangedUPP                  func(unsafe.Pointer)
+	_fnFCAddCollection                          func(unsafe.Pointer, uint) int
+	_fnFCAddFontDescriptorToCollection          func(unsafe.Pointer, unsafe.Pointer) int
+	_fnFCCopyCollectionNames                    func() unsafe.Pointer
+	_fnFCCopyFontDescriptorsInCollection        func(unsafe.Pointer) unsafe.Pointer
 	_fnFCFontDescriptorCreateWithFontAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnFCFontDescriptorCreateWithName func(unsafe.Pointer, float64) unsafe.Pointer
-	_fnFCRemoveCollection func(unsafe.Pointer) int
-	_fnFCRemoveFontDescriptorFromCollection func(unsafe.Pointer, unsafe.Pointer) int
-	_fnFPIsFontPanelVisible func() uint8
-	_fnFPShowHideFontPanel func() int
-	_fnGetColor func(unsafe.Pointer, *uint8, *qd.RGBColor, *qd.RGBColor) uint8
-	_fnInvokeCalibrateEventUPP func(*hitoolbox.EventRecord, unsafe.Pointer)
-	_fnInvokeCalibrateUPP func(*CalibratorInfo, unsafe.Pointer) int16
-	_fnInvokeCanCalibrateUPP func(uint, *uint8, unsafe.Pointer) uint8
-	_fnInvokeNColorChangedUPP func(unsafe.Pointer, *NPMColor, unsafe.Pointer)
-	_fnNPickColor func(*NColorPickerInfo) int16
-	_fnNewCalibrateEventUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewCalibrateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewCanCalibrateUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnNewNColorChangedUPP func(unsafe.Pointer) unsafe.Pointer
-	_fnSetFontInfoForSelection func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnFCFontDescriptorCreateWithName           func(unsafe.Pointer, float64) unsafe.Pointer
+	_fnFCRemoveCollection                       func(unsafe.Pointer) int
+	_fnFCRemoveFontDescriptorFromCollection     func(unsafe.Pointer, unsafe.Pointer) int
+	_fnFPIsFontPanelVisible                     func() uint8
+	_fnFPShowHideFontPanel                      func() int
+	_fnGetColor                                 func(unsafe.Pointer, *uint8, *qd.RGBColor, *qd.RGBColor) uint8
+	_fnInvokeCalibrateEventUPP                  func(*hitoolbox.EventRecord, unsafe.Pointer)
+	_fnInvokeCalibrateUPP                       func(*CalibratorInfo, unsafe.Pointer) int16
+	_fnInvokeCanCalibrateUPP                    func(uint, *uint8, unsafe.Pointer) uint8
+	_fnInvokeNColorChangedUPP                   func(unsafe.Pointer, *NPMColor, unsafe.Pointer)
+	_fnNPickColor                               func(*NColorPickerInfo) int16
+	_fnNewCalibrateEventUPP                     func(unsafe.Pointer) unsafe.Pointer
+	_fnNewCalibrateUPP                          func(unsafe.Pointer) unsafe.Pointer
+	_fnNewCanCalibrateUPP                       func(unsafe.Pointer) unsafe.Pointer
+	_fnNewNColorChangedUPP                      func(unsafe.Pointer) unsafe.Pointer
+	_fnSetFontInfoForSelection                  func(uint, uint, unsafe.Pointer, unsafe.Pointer) int
 )
 
 func CMCalibrateDisplay(theInfo *CalibratorInfo) int16 {
@@ -142,4 +142,3 @@ func NewNColorChangedUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
 func SetFontInfoForSelection(iStyleType uint, iNumStyles uint, iStyles unsafe.Pointer, iFPEventTarget unsafe.Pointer) int {
 	return _fnSetFontInfoForSelection(iStyleType, iNumStyles, iStyles, iFPEventTarget)
 }
-

@@ -79,4 +79,3 @@ type Taskable interface {
 }
 
 var _ Taskable = (*Task)(nil)
-

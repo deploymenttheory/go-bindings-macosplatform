@@ -16,10 +16,10 @@ type EKVirtualConferenceURLDescriptor struct {
 }
 
 var (
-	_clsEKVirtualConferenceURLDescriptor = _objcClass("EKVirtualConferenceURLDescriptor")
+	_clsEKVirtualConferenceURLDescriptor                 = _objcClass("EKVirtualConferenceURLDescriptor")
 	_eKVirtualConferenceURLDescriptorSelInitWithTitleURL = objc.RegisterName("initWithTitle:URL:")
-	_eKVirtualConferenceURLDescriptorSelTitle = objc.RegisterName("title")
-	_eKVirtualConferenceURLDescriptorSelURL = objc.RegisterName("URL")
+	_eKVirtualConferenceURLDescriptorSelTitle            = objc.RegisterName("title")
+	_eKVirtualConferenceURLDescriptorSelURL              = objc.RegisterName("URL")
 )
 
 func EKVirtualConferenceURLDescriptorFromID(id objc.ID) *EKVirtualConferenceURLDescriptor {
@@ -35,19 +35,24 @@ func EKVirtualConferenceURLDescriptorFromID(id objc.ID) *EKVirtualConferenceURLD
 // @method     initWithTitle:URL: @abstract   Initializes an instance of EKVirtualConferenceURLDescriptor. @param      title       A user-readable title describing this URL. This string may be displayed in the UI. This string is optional and may be left nil. If your virtual conference only has one way to join it, then you can probably leave this nil. However, if your virtual conference has multiple ways to join it, you should have a title for each URL so that users can better understand what each URL represents. @param      URL         A URL that, when opened, will join the virtual conference.
 func (o *EKVirtualConferenceURLDescriptor) InitWithTitleURL(title *foundation.NSString, uRL *foundation.NSURL) *EKVirtualConferenceURLDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelInitWithTitleURL, title.Ptr(), uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKVirtualConferenceURLDescriptorFromID(_ret)
 }
 
 func (o *EKVirtualConferenceURLDescriptor) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *EKVirtualConferenceURLDescriptor) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceURLDescriptorSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

@@ -12,4 +12,3 @@ import (
 
 // Ar_error_domain returns the value of the CoreFoundation reference constant ar_error_domain as an objc.ID.
 func Ar_error_domain() objc.ID { return purego.CFConstant(raw.Ar_error_domain()) }
-

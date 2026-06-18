@@ -55,7 +55,9 @@ func (x *ImageIntegral) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIn
 	return x
 }
 
-func (x *ImageIntegral) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageIntegral) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
 type ImageIntegralable interface {
@@ -66,4 +68,3 @@ type ImageIntegralable interface {
 }
 
 var _ ImageIntegralable = (*ImageIntegral)(nil)
-

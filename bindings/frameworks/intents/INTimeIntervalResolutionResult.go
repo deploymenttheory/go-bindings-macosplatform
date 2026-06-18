@@ -15,8 +15,8 @@ type INTimeIntervalResolutionResult struct {
 }
 
 var (
-	_clsINTimeIntervalResolutionResult = _objcClass("INTimeIntervalResolutionResult")
-	_iNTimeIntervalResolutionResultSelSuccessWithResolvedTimeInterval = objc.RegisterName("successWithResolvedTimeInterval:")
+	_clsINTimeIntervalResolutionResult                                              = _objcClass("INTimeIntervalResolutionResult")
+	_iNTimeIntervalResolutionResultSelSuccessWithResolvedTimeInterval               = objc.RegisterName("successWithResolvedTimeInterval:")
 	_iNTimeIntervalResolutionResultSelConfirmationRequiredWithTimeIntervalToConfirm = objc.RegisterName("confirmationRequiredWithTimeIntervalToConfirm:")
 )
 
@@ -32,13 +32,16 @@ func INTimeIntervalResolutionResultFromID(id objc.ID) *INTimeIntervalResolutionR
 
 func INTimeIntervalResolutionResultSuccessWithResolvedTimeInterval(resolvedTimeInterval float64) *INTimeIntervalResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINTimeIntervalResolutionResult), _iNTimeIntervalResolutionResultSelSuccessWithResolvedTimeInterval, resolvedTimeInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INTimeIntervalResolutionResultFromID(_ret)
 }
 
 func INTimeIntervalResolutionResultConfirmationRequiredWithTimeIntervalToConfirm(timeIntervalToConfirm float64) *INTimeIntervalResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINTimeIntervalResolutionResult), _iNTimeIntervalResolutionResultSelConfirmationRequiredWithTimeIntervalToConfirm, timeIntervalToConfirm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INTimeIntervalResolutionResultFromID(_ret)
 }
-

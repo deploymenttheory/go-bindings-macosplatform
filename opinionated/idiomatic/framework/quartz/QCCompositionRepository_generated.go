@@ -64,4 +64,3 @@ type QCCompositionRepositoryable interface {
 }
 
 var _ QCCompositionRepositoryable = (*QCCompositionRepository)(nil)
-

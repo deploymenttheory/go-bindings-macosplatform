@@ -16,24 +16,24 @@ type MTRDoorLockClusterSetWeekDayScheduleParams struct {
 }
 
 var (
-	_clsMTRDoorLockClusterSetWeekDayScheduleParams = _objcClass("MTRDoorLockClusterSetWeekDayScheduleParams")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelWeekDayIndex = objc.RegisterName("weekDayIndex")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetWeekDayIndex = objc.RegisterName("setWeekDayIndex:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelUserIndex = objc.RegisterName("userIndex")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetUserIndex = objc.RegisterName("setUserIndex:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelDaysMask = objc.RegisterName("daysMask")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetDaysMask = objc.RegisterName("setDaysMask:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelStartHour = objc.RegisterName("startHour")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetStartHour = objc.RegisterName("setStartHour:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelStartMinute = objc.RegisterName("startMinute")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetStartMinute = objc.RegisterName("setStartMinute:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelEndHour = objc.RegisterName("endHour")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetEndHour = objc.RegisterName("setEndHour:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelEndMinute = objc.RegisterName("endMinute")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetEndMinute = objc.RegisterName("setEndMinute:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDoorLockClusterSetWeekDayScheduleParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDoorLockClusterSetWeekDayScheduleParams                               = _objcClass("MTRDoorLockClusterSetWeekDayScheduleParams")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelWeekDayIndex                   = objc.RegisterName("weekDayIndex")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetWeekDayIndex                = objc.RegisterName("setWeekDayIndex:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelUserIndex                      = objc.RegisterName("userIndex")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetUserIndex                   = objc.RegisterName("setUserIndex:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelDaysMask                       = objc.RegisterName("daysMask")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetDaysMask                    = objc.RegisterName("setDaysMask:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelStartHour                      = objc.RegisterName("startHour")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetStartHour                   = objc.RegisterName("setStartHour:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelStartMinute                    = objc.RegisterName("startMinute")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetStartMinute                 = objc.RegisterName("setStartMinute:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelEndHour                        = objc.RegisterName("endHour")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetEndHour                     = objc.RegisterName("setEndHour:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelEndMinute                      = objc.RegisterName("endMinute")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetEndMinute                   = objc.RegisterName("setEndMinute:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDoorLockClusterSetWeekDayScheduleParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -49,7 +49,9 @@ func MTRDoorLockClusterSetWeekDayScheduleParamsFromID(id objc.ID) *MTRDoorLockCl
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) WeekDayIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelWeekDayIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetWeekDayIndex(weekDayInde
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) UserIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelUserIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetUserIndex(userIndex *fou
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) DaysMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelDaysMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetDaysMask(daysMask *found
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) StartHour() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelStartHour)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetStartHour(startHour *fou
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) StartMinute() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelStartMinute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetStartMinute(startMinute 
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) EndHour() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelEndHour)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetEndHour(endHour *foundat
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) EndMinute() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelEndMinute)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -120,7 +134,9 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetEndMinute(endMinute *fou
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -131,11 +147,12 @@ func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetTimedInvokeTimeoutMs(tim
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterSetWeekDayScheduleParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterSetWeekDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterSetWeekDayScheduleParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

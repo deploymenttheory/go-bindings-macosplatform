@@ -16,8 +16,8 @@ type MTLComputePassSampleBufferAttachmentDescriptorArray struct {
 }
 
 var (
-	_clsMTLComputePassSampleBufferAttachmentDescriptorArray = _objcClass("MTLComputePassSampleBufferAttachmentDescriptorArray")
-	_mTLComputePassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLComputePassSampleBufferAttachmentDescriptorArray                            = _objcClass("MTLComputePassSampleBufferAttachmentDescriptorArray")
+	_mTLComputePassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLComputePassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLComputePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *MTLC
 
 func (o *MTLComputePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLComputePassSampleBufferAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLComputePassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLComputePassSampleBufferAttachmentDescriptorFromID(_ret)
 }
 
 func (o *MTLComputePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLComputePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLComputePassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }
-

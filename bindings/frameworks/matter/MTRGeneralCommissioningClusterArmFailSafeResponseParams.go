@@ -18,14 +18,14 @@ type MTRGeneralCommissioningClusterArmFailSafeResponseParams struct {
 }
 
 var (
-	_clsMTRGeneralCommissioningClusterArmFailSafeResponseParams = _objcClass("MTRGeneralCommissioningClusterArmFailSafeResponseParams")
+	_clsMTRGeneralCommissioningClusterArmFailSafeResponseParams                           = _objcClass("MTRGeneralCommissioningClusterArmFailSafeResponseParams")
 	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelErrorCode = objc.RegisterName("errorCode")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetErrorCode = objc.RegisterName("setErrorCode:")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelDebugText = objc.RegisterName("debugText")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetDebugText = objc.RegisterName("setDebugText:")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelErrorCode                  = objc.RegisterName("errorCode")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetErrorCode               = objc.RegisterName("setErrorCode:")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelDebugText                  = objc.RegisterName("debugText")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetDebugText               = objc.RegisterName("setDebugText:")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterArmFailSafeResponseParams {
@@ -42,7 +42,9 @@ func MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID(id objc.ID) *
 func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) InitWithRespon
 
 func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) ErrorCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelErrorCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetErrorCode(e
 
 func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) DebugText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelDebugText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetDebugText(d
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGeneralCommissioningClusterArmFailSafeResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

@@ -16,7 +16,9 @@ type ExtensionPropertyAttributes struct {
 }
 
 // Unwrap returns the underlying [raw.CMIOExtensionPropertyAttributes].
-func (x *ExtensionPropertyAttributes) Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID] { return x.inner }
+func (x *ExtensionPropertyAttributes) Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -67,4 +69,3 @@ type ExtensionPropertyAttributesable interface {
 }
 
 var _ ExtensionPropertyAttributesable = (*ExtensionPropertyAttributes)(nil)
-

@@ -80,4 +80,3 @@ type Detectionable interface {
 }
 
 var _ Detectionable = (*Detection)(nil)
-

@@ -18,18 +18,18 @@ type CKFetchShareMetadataOperation struct {
 }
 
 var (
-	_clsCKFetchShareMetadataOperation = _objcClass("CKFetchShareMetadataOperation")
-	_cKFetchShareMetadataOperationSelInit = objc.RegisterName("init")
-	_cKFetchShareMetadataOperationSelInitWithShareURLs = objc.RegisterName("initWithShareURLs:")
-	_cKFetchShareMetadataOperationSelShareURLs = objc.RegisterName("shareURLs")
-	_cKFetchShareMetadataOperationSelSetShareURLs = objc.RegisterName("setShareURLs:")
-	_cKFetchShareMetadataOperationSelShouldFetchRootRecord = objc.RegisterName("shouldFetchRootRecord")
-	_cKFetchShareMetadataOperationSelSetShouldFetchRootRecord = objc.RegisterName("setShouldFetchRootRecord:")
-	_cKFetchShareMetadataOperationSelRootRecordDesiredKeys = objc.RegisterName("rootRecordDesiredKeys")
-	_cKFetchShareMetadataOperationSelSetRootRecordDesiredKeys = objc.RegisterName("setRootRecordDesiredKeys:")
-	_cKFetchShareMetadataOperationSelPerShareMetadataBlock = objc.RegisterName("perShareMetadataBlock")
-	_cKFetchShareMetadataOperationSelSetPerShareMetadataBlock = objc.RegisterName("setPerShareMetadataBlock:")
-	_cKFetchShareMetadataOperationSelFetchShareMetadataCompletionBlock = objc.RegisterName("fetchShareMetadataCompletionBlock")
+	_clsCKFetchShareMetadataOperation                                     = _objcClass("CKFetchShareMetadataOperation")
+	_cKFetchShareMetadataOperationSelInit                                 = objc.RegisterName("init")
+	_cKFetchShareMetadataOperationSelInitWithShareURLs                    = objc.RegisterName("initWithShareURLs:")
+	_cKFetchShareMetadataOperationSelShareURLs                            = objc.RegisterName("shareURLs")
+	_cKFetchShareMetadataOperationSelSetShareURLs                         = objc.RegisterName("setShareURLs:")
+	_cKFetchShareMetadataOperationSelShouldFetchRootRecord                = objc.RegisterName("shouldFetchRootRecord")
+	_cKFetchShareMetadataOperationSelSetShouldFetchRootRecord             = objc.RegisterName("setShouldFetchRootRecord:")
+	_cKFetchShareMetadataOperationSelRootRecordDesiredKeys                = objc.RegisterName("rootRecordDesiredKeys")
+	_cKFetchShareMetadataOperationSelSetRootRecordDesiredKeys             = objc.RegisterName("setRootRecordDesiredKeys:")
+	_cKFetchShareMetadataOperationSelPerShareMetadataBlock                = objc.RegisterName("perShareMetadataBlock")
+	_cKFetchShareMetadataOperationSelSetPerShareMetadataBlock             = objc.RegisterName("setPerShareMetadataBlock:")
+	_cKFetchShareMetadataOperationSelFetchShareMetadataCompletionBlock    = objc.RegisterName("fetchShareMetadataCompletionBlock")
 	_cKFetchShareMetadataOperationSelSetFetchShareMetadataCompletionBlock = objc.RegisterName("setFetchShareMetadataCompletionBlock:")
 )
 
@@ -46,14 +46,18 @@ func CKFetchShareMetadataOperationFromID(id objc.ID) *CKFetchShareMetadataOperat
 // Creates an empty fetch share metadata operation.
 func (o *CKFetchShareMetadataOperation) Init() *CKFetchShareMetadataOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchShareMetadataOperationFromID(_ret)
 }
 
-// Creates an operation for fetching the metadata for the specified shares. - Parameters: - shareURLs: The URLs of the shares. If you specify `nil`, you must assign a value to the ``CKFetchShareMetadataOperation/shareURLs`` property before you execute the operation. After creating the operation, assign a handler to the ``CKFetchShareMetadataOperation/fetchShareMetadataCompletionBlock`` property to process the results.
+// Creates an operation for fetching the metadata for the specified shares. - Parameters: - shareURLs: The URLs of the shares. If you specify `nil`, you must assign a value to the “CKFetchShareMetadataOperation/shareURLs“ property before you execute the operation. After creating the operation, assign a handler to the “CKFetchShareMetadataOperation/fetchShareMetadataCompletionBlock“ property to process the results.
 func (o *CKFetchShareMetadataOperation) InitWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *CKFetchShareMetadataOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchShareMetadataOperationSelInitWithShareURLs, shareURLs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchShareMetadataOperationFromID(_ret)
 }
 
@@ -77,7 +81,7 @@ func (o *CKFetchShareMetadataOperation) SetShouldFetchRootRecord(shouldFetchRoot
 	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetShouldFetchRootRecord, shouldFetchRootRecord)
 }
 
-// The fields to return when fetching the root record. For a shared record hierarchy, and when ``CKFetchShareMetadataOperation/shouldFetchRootRecord`` is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
+// The fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
 func (o *CKFetchShareMetadataOperation) RootRecordDesiredKeys() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKFetchShareMetadataOperationSelRootRecordDesiredKeys)
 	return _ret
@@ -87,7 +91,7 @@ func (o *CKFetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesir
 	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetRootRecordDesiredKeys, rootRecordDesiredKeys)
 }
 
-// The closure to execute as the operation fetches individual shares. The closure returns no value and takes the following parameters: - The share's URL. - The share metadata, or `nil` if CloudKit can't fetch the metadata. - If CloudKit can't fetch the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each URL in the ``CKFetchShareMetadataOperation/shareURLs`` property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+// The closure to execute as the operation fetches individual shares. The closure returns no value and takes the following parameters: - The share's URL. - The share metadata, or `nil` if CloudKit can't fetch the metadata. - If CloudKit can't fetch the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each URL in the “CKFetchShareMetadataOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
 func (o *CKFetchShareMetadataOperation) PerShareMetadataBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchShareMetadataOperationSelPerShareMetadataBlock)
 	return _ret
@@ -110,7 +114,7 @@ func (o *CKFetchShareMetadataOperation) SetPerShareMetadataBlock(perShareMetadat
 	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetPerShareMetadataBlock, __block_perShareMetadataBlock)
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully fetches the metadatas. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type ``CKError/Code/partialFailure`` when it can't fetch some of the metadatas. The `userInfo` dictionary of the error contains a ``CKPartialErrorsByItemIDKey`` key that has a dictionary as its value. The keys of the dictionary identify the metadatas that CloudKit can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully fetches the metadatas. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't fetch some of the metadatas. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary identify the metadatas that CloudKit can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
 func (o *CKFetchShareMetadataOperation) FetchShareMetadataCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchShareMetadataOperationSelFetchShareMetadataCompletionBlock)
 	return _ret
@@ -126,4 +130,3 @@ func (o *CKFetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(fet
 	}
 	o.Ptr().Send(_cKFetchShareMetadataOperationSelSetFetchShareMetadataCompletionBlock, __block_fetchShareMetadataCompletionBlock)
 }
-

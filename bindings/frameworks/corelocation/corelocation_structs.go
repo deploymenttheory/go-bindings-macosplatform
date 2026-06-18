@@ -5,4 +5,3 @@ package corelocation
 
 // CLLocationCoordinate2D is an opaque type.
 type CLLocationCoordinate2D struct{}
-

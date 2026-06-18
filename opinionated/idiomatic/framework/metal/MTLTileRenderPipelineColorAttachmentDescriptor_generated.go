@@ -15,7 +15,9 @@ type TileRenderPipelineColorAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLTileRenderPipelineColorAttachmentDescriptor].
-func (x *TileRenderPipelineColorAttachmentDescriptor) Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptor { return x.inner }
+func (x *TileRenderPipelineColorAttachmentDescriptor) Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,4 +62,3 @@ type TileRenderPipelineColorAttachmentDescriptorable interface {
 }
 
 var _ TileRenderPipelineColorAttachmentDescriptorable = (*TileRenderPipelineColorAttachmentDescriptor)(nil)
-

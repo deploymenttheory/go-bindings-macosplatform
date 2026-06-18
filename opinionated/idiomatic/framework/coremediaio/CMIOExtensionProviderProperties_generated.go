@@ -115,4 +115,3 @@ type ExtensionProviderPropertiesable interface {
 }
 
 var _ ExtensionProviderPropertiesable = (*ExtensionProviderProperties)(nil)
-

@@ -17,12 +17,12 @@ type MESampleCursorChunk struct {
 }
 
 var (
-	_clsMESampleCursorChunk = _objcClass("MESampleCursorChunk")
+	_clsMESampleCursorChunk                                                                   = _objcClass("MESampleCursorChunk")
 	_mESampleCursorChunkSelInitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk = objc.RegisterName("initWithByteSource:chunkStorageRange:chunkInfo:sampleIndexWithinChunk:")
-	_mESampleCursorChunkSelByteSource = objc.RegisterName("byteSource")
-	_mESampleCursorChunkSelChunkStorageRange = objc.RegisterName("chunkStorageRange")
-	_mESampleCursorChunkSelChunkInfo = objc.RegisterName("chunkInfo")
-	_mESampleCursorChunkSelSampleIndexWithinChunk = objc.RegisterName("sampleIndexWithinChunk")
+	_mESampleCursorChunkSelByteSource                                                         = objc.RegisterName("byteSource")
+	_mESampleCursorChunkSelChunkStorageRange                                                  = objc.RegisterName("chunkStorageRange")
+	_mESampleCursorChunkSelChunkInfo                                                          = objc.RegisterName("chunkInfo")
+	_mESampleCursorChunkSelSampleIndexWithinChunk                                             = objc.RegisterName("sampleIndexWithinChunk")
 )
 
 func MESampleCursorChunkFromID(id objc.ID) *MESampleCursorChunk {
@@ -38,14 +38,18 @@ func MESampleCursorChunkFromID(id objc.ID) *MESampleCursorChunk {
 // @property		initWithByteSource @abstract		The initializer for the MESampleCursorChunk class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			chunkStorageRange The offset location and length of the sample's chunk within the MEByteSource. @param			chunkInfo A completed AVSampleCursorChunkInfo with details about the chunk in the media. @param			sampleIndexWithinChunk The offset of the sample within the chunk, in samples.
 func (o *MESampleCursorChunk) InitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *MESampleCursorChunk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleCursorChunkSelInitWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk, byteSource.Ptr(), chunkStorageRange, chunkInfo, sampleIndexWithinChunk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MESampleCursorChunkFromID(_ret)
 }
 
 // @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
 func (o *MESampleCursorChunk) ByteSource() *MEByteSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mESampleCursorChunkSelByteSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEByteSourceFromID(_ret)
 }
 
@@ -66,4 +70,3 @@ func (o *MESampleCursorChunk) SampleIndexWithinChunk() int {
 	_ret := objc.Send[int](o.Ptr(), _mESampleCursorChunkSelSampleIndexWithinChunk)
 	return _ret
 }
-

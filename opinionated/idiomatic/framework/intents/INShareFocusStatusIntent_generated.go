@@ -69,4 +69,3 @@ type ShareFocusStatusIntentable interface {
 }
 
 var _ ShareFocusStatusIntentable = (*ShareFocusStatusIntent)(nil)
-

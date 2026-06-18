@@ -13,53 +13,53 @@ import (
 )
 
 var (
-	_fnAudioConvertHostTimeToNanos func(uint64) uint64
-	_fnAudioConvertNanosToHostTime func(uint64) uint64
-	_fnAudioDeviceAddIOProc func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioDeviceAddPropertyListener func(uint, uint, uint8, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioDeviceCreateIOProcID func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioDeviceCreateIOProcIDWithBlock func(unsafe.Pointer, uint, objc.ID, objc.Block) int
-	_fnAudioDeviceDestroyIOProcID func(uint, unsafe.Pointer) int
-	_fnAudioDeviceGetCurrentTime func(uint, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioDeviceGetNearestStartTime func(uint, *coreaudiotypes.AudioTimeStamp, uint) int
-	_fnAudioDeviceGetProperty func(uint, uint, uint8, uint, *uint, unsafe.Pointer) int
-	_fnAudioDeviceGetPropertyInfo func(uint, uint, uint8, uint, *uint, *uint8) int
-	_fnAudioDeviceRead func(uint, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList) int
-	_fnAudioDeviceRemoveIOProc func(uint, unsafe.Pointer) int
-	_fnAudioDeviceRemovePropertyListener func(uint, uint, uint8, uint, unsafe.Pointer) int
-	_fnAudioDeviceSetProperty func(uint, *coreaudiotypes.AudioTimeStamp, uint, uint8, uint, uint, unsafe.Pointer) int
-	_fnAudioDeviceStart func(uint, unsafe.Pointer) int
-	_fnAudioDeviceStartAtTime func(uint, unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, uint) int
-	_fnAudioDeviceStop func(uint, unsafe.Pointer) int
-	_fnAudioDeviceTranslateTime func(uint, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
-	_fnAudioGetCurrentHostTime func() uint64
-	_fnAudioGetHostClockFrequency func() float64
-	_fnAudioGetHostClockMinimumTimeDelta func() uint
-	_fnAudioHardwareAddPropertyListener func(uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioHardwareAddRunLoopSource func(unsafe.Pointer) int
-	_fnAudioHardwareCreateAggregateDevice func(unsafe.Pointer, *uint) int
-	_fnAudioHardwareDestroyAggregateDevice func(uint) int
-	_fnAudioHardwareGetProperty func(uint, *uint, unsafe.Pointer) int
-	_fnAudioHardwareGetPropertyInfo func(uint, *uint, *uint8) int
-	_fnAudioHardwareRemovePropertyListener func(uint, unsafe.Pointer) int
-	_fnAudioHardwareRemoveRunLoopSource func(unsafe.Pointer) int
-	_fnAudioHardwareSetProperty func(uint, uint, unsafe.Pointer) int
-	_fnAudioHardwareUnload func() int
-	_fnAudioObjectAddPropertyListener func(uint, *AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioObjectAddPropertyListenerBlock func(uint, *AudioObjectPropertyAddress, objc.ID, objc.Block) int
-	_fnAudioObjectGetPropertyData func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
-	_fnAudioObjectGetPropertyDataSize func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint) int
-	_fnAudioObjectHasProperty func(uint, *AudioObjectPropertyAddress) uint8
-	_fnAudioObjectIsPropertySettable func(uint, *AudioObjectPropertyAddress, *uint8) int
-	_fnAudioObjectRemovePropertyListener func(uint, *AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioConvertHostTimeToNanos            func(uint64) uint64
+	_fnAudioConvertNanosToHostTime            func(uint64) uint64
+	_fnAudioDeviceAddIOProc                   func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioDeviceAddPropertyListener         func(uint, uint, uint8, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioDeviceCreateIOProcID              func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioDeviceCreateIOProcIDWithBlock     func(unsafe.Pointer, uint, objc.ID, objc.Block) int
+	_fnAudioDeviceDestroyIOProcID             func(uint, unsafe.Pointer) int
+	_fnAudioDeviceGetCurrentTime              func(uint, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioDeviceGetNearestStartTime         func(uint, *coreaudiotypes.AudioTimeStamp, uint) int
+	_fnAudioDeviceGetProperty                 func(uint, uint, uint8, uint, *uint, unsafe.Pointer) int
+	_fnAudioDeviceGetPropertyInfo             func(uint, uint, uint8, uint, *uint, *uint8) int
+	_fnAudioDeviceRead                        func(uint, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioBufferList) int
+	_fnAudioDeviceRemoveIOProc                func(uint, unsafe.Pointer) int
+	_fnAudioDeviceRemovePropertyListener      func(uint, uint, uint8, uint, unsafe.Pointer) int
+	_fnAudioDeviceSetProperty                 func(uint, *coreaudiotypes.AudioTimeStamp, uint, uint8, uint, uint, unsafe.Pointer) int
+	_fnAudioDeviceStart                       func(uint, unsafe.Pointer) int
+	_fnAudioDeviceStartAtTime                 func(uint, unsafe.Pointer, *coreaudiotypes.AudioTimeStamp, uint) int
+	_fnAudioDeviceStop                        func(uint, unsafe.Pointer) int
+	_fnAudioDeviceTranslateTime               func(uint, *coreaudiotypes.AudioTimeStamp, *coreaudiotypes.AudioTimeStamp) int
+	_fnAudioGetCurrentHostTime                func() uint64
+	_fnAudioGetHostClockFrequency             func() float64
+	_fnAudioGetHostClockMinimumTimeDelta      func() uint
+	_fnAudioHardwareAddPropertyListener       func(uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioHardwareAddRunLoopSource          func(unsafe.Pointer) int
+	_fnAudioHardwareCreateAggregateDevice     func(unsafe.Pointer, *uint) int
+	_fnAudioHardwareDestroyAggregateDevice    func(uint) int
+	_fnAudioHardwareGetProperty               func(uint, *uint, unsafe.Pointer) int
+	_fnAudioHardwareGetPropertyInfo           func(uint, *uint, *uint8) int
+	_fnAudioHardwareRemovePropertyListener    func(uint, unsafe.Pointer) int
+	_fnAudioHardwareRemoveRunLoopSource       func(unsafe.Pointer) int
+	_fnAudioHardwareSetProperty               func(uint, uint, unsafe.Pointer) int
+	_fnAudioHardwareUnload                    func() int
+	_fnAudioObjectAddPropertyListener         func(uint, *AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioObjectAddPropertyListenerBlock    func(uint, *AudioObjectPropertyAddress, objc.ID, objc.Block) int
+	_fnAudioObjectGetPropertyData             func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint, unsafe.Pointer) int
+	_fnAudioObjectGetPropertyDataSize         func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, *uint) int
+	_fnAudioObjectHasProperty                 func(uint, *AudioObjectPropertyAddress) uint8
+	_fnAudioObjectIsPropertySettable          func(uint, *AudioObjectPropertyAddress, *uint8) int
+	_fnAudioObjectRemovePropertyListener      func(uint, *AudioObjectPropertyAddress, unsafe.Pointer, unsafe.Pointer) int
 	_fnAudioObjectRemovePropertyListenerBlock func(uint, *AudioObjectPropertyAddress, objc.ID, objc.Block) int
-	_fnAudioObjectSetPropertyData func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
-	_fnAudioObjectShow func(uint)
-	_fnAudioStreamAddPropertyListener func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnAudioStreamGetProperty func(uint, uint, uint, *uint, unsafe.Pointer) int
-	_fnAudioStreamGetPropertyInfo func(uint, uint, uint, *uint, *uint8) int
-	_fnAudioStreamRemovePropertyListener func(uint, uint, uint, unsafe.Pointer) int
-	_fnAudioStreamSetProperty func(uint, *coreaudiotypes.AudioTimeStamp, uint, uint, uint, unsafe.Pointer) int
+	_fnAudioObjectSetPropertyData             func(uint, *AudioObjectPropertyAddress, uint, unsafe.Pointer, uint, unsafe.Pointer) int
+	_fnAudioObjectShow                        func(uint)
+	_fnAudioStreamAddPropertyListener         func(uint, uint, uint, unsafe.Pointer, unsafe.Pointer) int
+	_fnAudioStreamGetProperty                 func(uint, uint, uint, *uint, unsafe.Pointer) int
+	_fnAudioStreamGetPropertyInfo             func(uint, uint, uint, *uint, *uint8) int
+	_fnAudioStreamRemovePropertyListener      func(uint, uint, uint, unsafe.Pointer) int
+	_fnAudioStreamSetProperty                 func(uint, *coreaudiotypes.AudioTimeStamp, uint, uint, uint, unsafe.Pointer) int
 )
 
 func AudioConvertHostTimeToNanos(inHostTime uint64) uint64 {
@@ -270,4 +270,3 @@ func AudioStreamRemovePropertyListener(inStream uint, inChannel uint, inProperty
 func AudioStreamSetProperty(inStream uint, inWhen *coreaudiotypes.AudioTimeStamp, inChannel uint, inPropertyID uint, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
 	return _fnAudioStreamSetProperty(inStream, inWhen, inChannel, inPropertyID, inPropertyDataSize, inPropertyData)
 }
-

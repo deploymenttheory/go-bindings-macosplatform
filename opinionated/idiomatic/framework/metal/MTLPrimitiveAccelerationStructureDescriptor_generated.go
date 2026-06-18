@@ -18,7 +18,9 @@ type PrimitiveAccelerationStructureDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLPrimitiveAccelerationStructureDescriptor].
-func (x *PrimitiveAccelerationStructureDescriptor) Unwrap() *raw.MTLPrimitiveAccelerationStructureDescriptor { return x.inner }
+func (x *PrimitiveAccelerationStructureDescriptor) Unwrap() *raw.MTLPrimitiveAccelerationStructureDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asAccelerationStructureGeometryDescriptor().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asAccelerationStructureGeometryDescriptor().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLAccelerationStructureGeometryDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -156,7 +160,9 @@ func (x *PrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(motion
 	x.inner.SetMotionKeyframeCount(motionKeyframeCount)
 }
 
-func (x *PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTLAccelerationStructureDescriptor }
+func (x *PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
+	return &x.inner.MTLAccelerationStructureDescriptor
+}
 
 // PrimitiveAccelerationStructureDescriptorable is the interface implemented by [PrimitiveAccelerationStructureDescriptor], for mocking and DI.
 type PrimitiveAccelerationStructureDescriptorable interface {
@@ -183,4 +189,3 @@ type PrimitiveAccelerationStructureDescriptorable interface {
 }
 
 var _ PrimitiveAccelerationStructureDescriptorable = (*PrimitiveAccelerationStructureDescriptor)(nil)
-

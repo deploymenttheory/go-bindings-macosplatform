@@ -17,32 +17,32 @@ type NSAttributedString struct {
 }
 
 var (
-	_clsNSAttributedString = _objcClass("NSAttributedString")
-	_nSAttributedStringSelAttributesAtIndexEffectiveRange = objc.RegisterName("attributesAtIndex:effectiveRange:")
-	_nSAttributedStringSelString = objc.RegisterName("string")
-	_nSAttributedStringSelAttributeAtIndexEffectiveRange = objc.RegisterName("attribute:atIndex:effectiveRange:")
-	_nSAttributedStringSelAttributedSubstringFromRange = objc.RegisterName("attributedSubstringFromRange:")
-	_nSAttributedStringSelAttributesAtIndexLongestEffectiveRangeInRange = objc.RegisterName("attributesAtIndex:longestEffectiveRange:inRange:")
-	_nSAttributedStringSelAttributeAtIndexLongestEffectiveRangeInRange = objc.RegisterName("attribute:atIndex:longestEffectiveRange:inRange:")
-	_nSAttributedStringSelIsEqualToAttributedString = objc.RegisterName("isEqualToAttributedString:")
-	_nSAttributedStringSelInitWithString = objc.RegisterName("initWithString:")
-	_nSAttributedStringSelInitWithStringAttributes = objc.RegisterName("initWithString:attributes:")
-	_nSAttributedStringSelInitWithAttributedString = objc.RegisterName("initWithAttributedString:")
-	_nSAttributedStringSelEnumerateAttributesInRangeOptionsUsing = objc.RegisterName("enumerateAttributesInRange:options:usingBlock:")
-	_nSAttributedStringSelEnumerateAttributeInRangeOptionsUsing = objc.RegisterName("enumerateAttribute:inRange:options:usingBlock:")
-	_nSAttributedStringSelLength = objc.RegisterName("length")
+	_clsNSAttributedString                                                       = _objcClass("NSAttributedString")
+	_nSAttributedStringSelAttributesAtIndexEffectiveRange                        = objc.RegisterName("attributesAtIndex:effectiveRange:")
+	_nSAttributedStringSelString                                                 = objc.RegisterName("string")
+	_nSAttributedStringSelAttributeAtIndexEffectiveRange                         = objc.RegisterName("attribute:atIndex:effectiveRange:")
+	_nSAttributedStringSelAttributedSubstringFromRange                           = objc.RegisterName("attributedSubstringFromRange:")
+	_nSAttributedStringSelAttributesAtIndexLongestEffectiveRangeInRange          = objc.RegisterName("attributesAtIndex:longestEffectiveRange:inRange:")
+	_nSAttributedStringSelAttributeAtIndexLongestEffectiveRangeInRange           = objc.RegisterName("attribute:atIndex:longestEffectiveRange:inRange:")
+	_nSAttributedStringSelIsEqualToAttributedString                              = objc.RegisterName("isEqualToAttributedString:")
+	_nSAttributedStringSelInitWithString                                         = objc.RegisterName("initWithString:")
+	_nSAttributedStringSelInitWithStringAttributes                               = objc.RegisterName("initWithString:attributes:")
+	_nSAttributedStringSelInitWithAttributedString                               = objc.RegisterName("initWithAttributedString:")
+	_nSAttributedStringSelEnumerateAttributesInRangeOptionsUsing                 = objc.RegisterName("enumerateAttributesInRange:options:usingBlock:")
+	_nSAttributedStringSelEnumerateAttributeInRangeOptionsUsing                  = objc.RegisterName("enumerateAttribute:inRange:options:usingBlock:")
+	_nSAttributedStringSelLength                                                 = objc.RegisterName("length")
 	_nSAttributedStringSelInitWithContentsOfMarkdownFileAtURLOptionsBaseURLError = objc.RegisterName("initWithContentsOfMarkdownFileAtURL:options:baseURL:error:")
-	_nSAttributedStringSelInitWithMarkdownOptionsBaseURLError = objc.RegisterName("initWithMarkdown:options:baseURL:error:")
-	_nSAttributedStringSelInitWithMarkdownStringOptionsBaseURLError = objc.RegisterName("initWithMarkdownString:options:baseURL:error:")
-	_nSAttributedStringSelInitWithFormatOptionsLocale = objc.RegisterName("initWithFormat:options:locale:")
-	_nSAttributedStringSelInitWithFormatOptionsLocaleArguments = objc.RegisterName("initWithFormat:options:locale:arguments:")
-	_nSAttributedStringSelLocalizedAttributedStringWithFormat = objc.RegisterName("localizedAttributedStringWithFormat:")
-	_nSAttributedStringSelLocalizedAttributedStringWithFormatOptions = objc.RegisterName("localizedAttributedStringWithFormat:options:")
-	_nSAttributedStringSelInitWithFormatOptionsLocaleContext = objc.RegisterName("initWithFormat:options:locale:context:")
-	_nSAttributedStringSelInitWithFormatOptionsLocaleContextArguments = objc.RegisterName("initWithFormat:options:locale:context:arguments:")
-	_nSAttributedStringSelLocalizedAttributedStringWithFormatContext = objc.RegisterName("localizedAttributedStringWithFormat:context:")
-	_nSAttributedStringSelLocalizedAttributedStringWithFormatOptionsContext = objc.RegisterName("localizedAttributedStringWithFormat:options:context:")
-	_nSAttributedStringSelAttributedStringByInflectingString = objc.RegisterName("attributedStringByInflectingString")
+	_nSAttributedStringSelInitWithMarkdownOptionsBaseURLError                    = objc.RegisterName("initWithMarkdown:options:baseURL:error:")
+	_nSAttributedStringSelInitWithMarkdownStringOptionsBaseURLError              = objc.RegisterName("initWithMarkdownString:options:baseURL:error:")
+	_nSAttributedStringSelInitWithFormatOptionsLocale                            = objc.RegisterName("initWithFormat:options:locale:")
+	_nSAttributedStringSelInitWithFormatOptionsLocaleArguments                   = objc.RegisterName("initWithFormat:options:locale:arguments:")
+	_nSAttributedStringSelLocalizedAttributedStringWithFormat                    = objc.RegisterName("localizedAttributedStringWithFormat:")
+	_nSAttributedStringSelLocalizedAttributedStringWithFormatOptions             = objc.RegisterName("localizedAttributedStringWithFormat:options:")
+	_nSAttributedStringSelInitWithFormatOptionsLocaleContext                     = objc.RegisterName("initWithFormat:options:locale:context:")
+	_nSAttributedStringSelInitWithFormatOptionsLocaleContextArguments            = objc.RegisterName("initWithFormat:options:locale:context:arguments:")
+	_nSAttributedStringSelLocalizedAttributedStringWithFormatContext             = objc.RegisterName("localizedAttributedStringWithFormat:context:")
+	_nSAttributedStringSelLocalizedAttributedStringWithFormatOptionsContext      = objc.RegisterName("localizedAttributedStringWithFormat:options:context:")
+	_nSAttributedStringSelAttributedStringByInflectingString                     = objc.RegisterName("attributedStringByInflectingString")
 )
 
 func NSAttributedStringFromID(id objc.ID) *NSAttributedString {
@@ -62,7 +62,9 @@ func (o *NSAttributedString) AttributesAtIndexEffectiveRange(location uint, rang
 
 func (o *NSAttributedString) String() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -73,7 +75,9 @@ func (o *NSAttributedString) AttributeAtIndexEffectiveRange(attrName *NSString, 
 
 func (o *NSAttributedString) AttributedSubstringFromRange(range_ NSRange) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributedSubstringFromRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -94,19 +98,25 @@ func (o *NSAttributedString) IsEqualToAttributedString(other *NSAttributedString
 
 func (o *NSAttributedString) InitWithString(str *NSString) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithString, str.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 func (o *NSAttributedString) InitWithStringAttributes(str *NSString, attrs *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithStringAttributes, str.Ptr(), attrs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 func (o *NSAttributedString) InitWithAttributedString(attrStr *NSAttributedString) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithAttributedString, attrStr.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -126,7 +136,9 @@ func (o *NSAttributedString) Length() uint {
 func (o *NSAttributedString) InitWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile *NSURL, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithContentsOfMarkdownFileAtURLOptionsBaseURLError, markdownFile.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -136,7 +148,9 @@ func (o *NSAttributedString) InitWithContentsOfMarkdownFileAtURLOptionsBaseURLEr
 func (o *NSAttributedString) InitWithMarkdownOptionsBaseURLError(markdown *NSData, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownOptionsBaseURLError, markdown.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -146,7 +160,9 @@ func (o *NSAttributedString) InitWithMarkdownOptionsBaseURLError(markdown *NSDat
 func (o *NSAttributedString) InitWithMarkdownStringOptionsBaseURLError(markdownString *NSString, options *NSAttributedStringMarkdownParsingOptions, baseURL *NSURL) (*NSAttributedString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithMarkdownStringOptionsBaseURLError, markdownString.Ptr(), options.Ptr(), baseURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -156,63 +172,80 @@ func (o *NSAttributedString) InitWithMarkdownStringOptionsBaseURLError(markdownS
 // Formats the string using the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocale(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocale, format.Ptr(), options, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocaleArguments(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale, arguments string) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleArguments, format.Ptr(), options, locale.Ptr(), arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the current locale and default options.
 func NSAttributedStringLocalizedAttributedStringWithFormat(format *NSAttributedString) *NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the current locale and the specified options.
 func NSAttributedStringLocalizedAttributedStringWithFormatOptions(format *NSAttributedString, options NSAttributedStringFormattingOptions) *NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatOptions, format.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocaleContext(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContext, format.Ptr(), options, locale.Ptr(), context_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 func (o *NSAttributedString) InitWithFormatOptionsLocaleContextArguments(format *NSAttributedString, options NSAttributedStringFormattingOptions, locale *NSLocale, context_ *NSDictionary[*NSString, objc.ID], arguments string) *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelInitWithFormatOptionsLocaleContextArguments, format.Ptr(), options, locale.Ptr(), context_, arguments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the current locale and default options.
 func NSAttributedStringLocalizedAttributedStringWithFormatContext(format *NSAttributedString, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatContext, format.Ptr(), context_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // Formats the string using the current locale and the specified options.
 func NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext(format *NSAttributedString, options NSAttributedStringFormattingOptions, context_ *NSDictionary[*NSString, objc.ID]) *NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAttributedString), _nSAttributedStringSelLocalizedAttributedStringWithFormatOptionsContext, format.Ptr(), options, context_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
 // If the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
 func (o *NSAttributedString) AttributedStringByInflectingString() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAttributedStringSelAttributedStringByInflectingString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
-

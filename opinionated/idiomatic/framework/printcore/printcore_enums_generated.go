@@ -11,8 +11,8 @@ import (
 type PMDataFormat int64
 
 const (
-	KPMDataFormatXMLDefault PMDataFormat = 0
-	KPMDataFormatXMLMinimal PMDataFormat = 1
+	KPMDataFormatXMLDefault    PMDataFormat = 0
+	KPMDataFormatXMLMinimal    PMDataFormat = 1
 	KPMDataFormatXMLCompressed PMDataFormat = 2
 )
 
@@ -28,4 +28,3 @@ func (e PMDataFormat) String() string {
 		return fmt.Sprintf("PMDataFormat(%d)", int64(e))
 	}
 }
-

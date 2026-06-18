@@ -17,16 +17,16 @@ type MPSCNNCrossChannelNormalization struct {
 }
 
 var (
-	_clsMPSCNNCrossChannelNormalization = _objcClass("MPSCNNCrossChannelNormalization")
+	_clsMPSCNNCrossChannelNormalization                         = _objcClass("MPSCNNCrossChannelNormalization")
 	_mPSCNNCrossChannelNormalizationSelInitWithDeviceKernelSize = objc.RegisterName("initWithDevice:kernelSize:")
-	_mPSCNNCrossChannelNormalizationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNCrossChannelNormalizationSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNCrossChannelNormalizationSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNCrossChannelNormalizationSelBeta = objc.RegisterName("beta")
-	_mPSCNNCrossChannelNormalizationSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNCrossChannelNormalizationSelDelta = objc.RegisterName("delta")
-	_mPSCNNCrossChannelNormalizationSelSetDelta = objc.RegisterName("setDelta:")
-	_mPSCNNCrossChannelNormalizationSelKernelSize = objc.RegisterName("kernelSize")
+	_mPSCNNCrossChannelNormalizationSelInitWithCoderDevice      = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNCrossChannelNormalizationSelAlpha                    = objc.RegisterName("alpha")
+	_mPSCNNCrossChannelNormalizationSelSetAlpha                 = objc.RegisterName("setAlpha:")
+	_mPSCNNCrossChannelNormalizationSelBeta                     = objc.RegisterName("beta")
+	_mPSCNNCrossChannelNormalizationSelSetBeta                  = objc.RegisterName("setBeta:")
+	_mPSCNNCrossChannelNormalizationSelDelta                    = objc.RegisterName("delta")
+	_mPSCNNCrossChannelNormalizationSelSetDelta                 = objc.RegisterName("setDelta:")
+	_mPSCNNCrossChannelNormalizationSelKernelSize               = objc.RegisterName("kernelSize")
 )
 
 func MPSCNNCrossChannelNormalizationFromID(id objc.ID) *MPSCNNCrossChannelNormalization {
@@ -42,14 +42,18 @@ func MPSCNNCrossChannelNormalizationFromID(id objc.ID) *MPSCNNCrossChannelNormal
 // @abstract  Initialize a local response normalization filter in a channel @param      device              The device the filter will run on @param      kernelSize          The kernel filter size in each dimension. @return     A valid MPSCNNCrossChannelNormalization object or nil, if failure.
 func (o *MPSCNNCrossChannelNormalization) InitWithDeviceKernelSize(device metal.MTLDevice, kernelSize uint) *MPSCNNCrossChannelNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationSelInitWithDeviceKernelSize, device, kernelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNCrossChannelNormalization) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNCrossChannelNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNCrossChannelNormalizationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNCrossChannelNormalizationFromID(_ret)
 }
 
@@ -88,4 +92,3 @@ func (o *MPSCNNCrossChannelNormalization) KernelSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNCrossChannelNormalizationSelKernelSize)
 	return _ret
 }
-

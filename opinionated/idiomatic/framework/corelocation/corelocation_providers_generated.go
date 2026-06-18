@@ -22,4 +22,3 @@ type ConditionProvider interface {
 type RegionProvider interface {
 	asRegion() *raw.CLRegion
 }
-

@@ -15,19 +15,19 @@ type NSDateInterval struct {
 }
 
 var (
-	_clsNSDateInterval = _objcClass("NSDateInterval")
-	_nSDateIntervalSelInit = objc.RegisterName("init")
-	_nSDateIntervalSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSDateIntervalSelInitWithStartDateDuration = objc.RegisterName("initWithStartDate:duration:")
-	_nSDateIntervalSelInitWithStartDateEndDate = objc.RegisterName("initWithStartDate:endDate:")
-	_nSDateIntervalSelCompare = objc.RegisterName("compare:")
-	_nSDateIntervalSelIsEqualToDateInterval = objc.RegisterName("isEqualToDateInterval:")
-	_nSDateIntervalSelIntersectsDateInterval = objc.RegisterName("intersectsDateInterval:")
+	_clsNSDateInterval                             = _objcClass("NSDateInterval")
+	_nSDateIntervalSelInit                         = objc.RegisterName("init")
+	_nSDateIntervalSelInitWithCoder                = objc.RegisterName("initWithCoder:")
+	_nSDateIntervalSelInitWithStartDateDuration    = objc.RegisterName("initWithStartDate:duration:")
+	_nSDateIntervalSelInitWithStartDateEndDate     = objc.RegisterName("initWithStartDate:endDate:")
+	_nSDateIntervalSelCompare                      = objc.RegisterName("compare:")
+	_nSDateIntervalSelIsEqualToDateInterval        = objc.RegisterName("isEqualToDateInterval:")
+	_nSDateIntervalSelIntersectsDateInterval       = objc.RegisterName("intersectsDateInterval:")
 	_nSDateIntervalSelIntersectionWithDateInterval = objc.RegisterName("intersectionWithDateInterval:")
-	_nSDateIntervalSelContainsDate = objc.RegisterName("containsDate:")
-	_nSDateIntervalSelStartDate = objc.RegisterName("startDate")
-	_nSDateIntervalSelEndDate = objc.RegisterName("endDate")
-	_nSDateIntervalSelDuration = objc.RegisterName("duration")
+	_nSDateIntervalSelContainsDate                 = objc.RegisterName("containsDate:")
+	_nSDateIntervalSelStartDate                    = objc.RegisterName("startDate")
+	_nSDateIntervalSelEndDate                      = objc.RegisterName("endDate")
+	_nSDateIntervalSelDuration                     = objc.RegisterName("duration")
 )
 
 func NSDateIntervalFromID(id objc.ID) *NSDateInterval {
@@ -42,25 +42,33 @@ func NSDateIntervalFromID(id objc.ID) *NSDateInterval {
 
 func (o *NSDateInterval) Init() *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
 func (o *NSDateInterval) InitWithCoder(coder *NSCoder) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
 func (o *NSDateInterval) InitWithStartDateDuration(startDate *NSDate, duration float64) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithStartDateDuration, startDate.Ptr(), duration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
 func (o *NSDateInterval) InitWithStartDateEndDate(startDate *NSDate, endDate *NSDate) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelInitWithStartDateEndDate, startDate.Ptr(), endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
@@ -81,7 +89,9 @@ func (o *NSDateInterval) IntersectsDateInterval(dateInterval *NSDateInterval) bo
 
 func (o *NSDateInterval) IntersectionWithDateInterval(dateInterval *NSDateInterval) *NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelIntersectionWithDateInterval, dateInterval.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateIntervalFromID(_ret)
 }
 
@@ -92,13 +102,17 @@ func (o *NSDateInterval) ContainsDate(date *NSDate) bool {
 
 func (o *NSDateInterval) StartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSDateInterval) EndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -106,4 +120,3 @@ func (o *NSDateInterval) Duration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _nSDateIntervalSelDuration)
 	return _ret
 }
-

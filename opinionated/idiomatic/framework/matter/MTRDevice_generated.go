@@ -222,4 +222,3 @@ type MTRDeviceable interface {
 }
 
 var _ MTRDeviceable = (*MTRDevice)(nil)
-

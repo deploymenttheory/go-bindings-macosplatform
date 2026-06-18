@@ -106,7 +106,9 @@ func (x *RAWProcessingFloatParameter) SetCurrentValue(currentValue float32) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
-func (x *RAWProcessingFloatParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingFloatParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingFloatParameterable is the interface implemented by [RAWProcessingFloatParameter], for mocking and DI.
 type RAWProcessingFloatParameterable interface {
@@ -122,4 +124,3 @@ type RAWProcessingFloatParameterable interface {
 }
 
 var _ RAWProcessingFloatParameterable = (*RAWProcessingFloatParameter)(nil)
-

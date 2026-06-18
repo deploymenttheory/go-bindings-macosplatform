@@ -68,7 +68,9 @@ func (x *ReflectionMapEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.GLKEffectPropertyTexture](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -119,4 +121,3 @@ type ReflectionMapEffectable interface {
 }
 
 var _ ReflectionMapEffectable = (*ReflectionMapEffect)(nil)
-

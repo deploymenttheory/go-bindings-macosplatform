@@ -111,4 +111,3 @@ type BlockOperationable interface {
 }
 
 var _ BlockOperationable = (*BlockOperation)(nil)
-

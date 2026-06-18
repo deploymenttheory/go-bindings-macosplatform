@@ -15,7 +15,9 @@ type GraphConvolution3DOpDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphConvolution3DOpDescriptor].
-func (x *GraphConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphConvolution3DOpDescriptor { return x.inner }
+func (x *GraphConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphConvolution3DOpDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -296,7 +298,9 @@ func (x *GraphConvolution3DOpDescriptor) SetGroups(groups uint) {
 	x.inner.SetGroups(groups)
 }
 
-func (x *GraphConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphConvolution3DOpDescriptorable is the interface implemented by [GraphConvolution3DOpDescriptor], for mocking and DI.
 type GraphConvolution3DOpDescriptorable interface {
@@ -353,4 +357,3 @@ type GraphConvolution3DOpDescriptorable interface {
 }
 
 var _ GraphConvolution3DOpDescriptorable = (*GraphConvolution3DOpDescriptor)(nil)
-

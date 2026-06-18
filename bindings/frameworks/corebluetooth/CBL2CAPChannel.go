@@ -16,11 +16,11 @@ type CBL2CAPChannel struct {
 }
 
 var (
-	_clsCBL2CAPChannel = _objcClass("CBL2CAPChannel")
-	_cBL2CAPChannelSelPeer = objc.RegisterName("peer")
-	_cBL2CAPChannelSelInputStream = objc.RegisterName("inputStream")
+	_clsCBL2CAPChannel             = _objcClass("CBL2CAPChannel")
+	_cBL2CAPChannelSelPeer         = objc.RegisterName("peer")
+	_cBL2CAPChannelSelInputStream  = objc.RegisterName("inputStream")
 	_cBL2CAPChannelSelOutputStream = objc.RegisterName("outputStream")
-	_cBL2CAPChannelSelPSM = objc.RegisterName("PSM")
+	_cBL2CAPChannelSelPSM          = objc.RegisterName("PSM")
 )
 
 func CBL2CAPChannelFromID(id objc.ID) *CBL2CAPChannel {
@@ -36,21 +36,27 @@ func CBL2CAPChannelFromID(id objc.ID) *CBL2CAPChannel {
 // @property peer @discussion The peer connected to the channel
 func (o *CBL2CAPChannel) Peer() *CBPeer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBL2CAPChannelSelPeer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBPeerFromID(_ret)
 }
 
 // @property inputStream @discussion An NSStream used for reading data from the remote peer
 func (o *CBL2CAPChannel) InputStream() *foundation.NSInputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBL2CAPChannelSelInputStream)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSInputStreamFromID(_ret)
 }
 
 // @property outputStream @discussion An NSStream used for writing data to the peer
 func (o *CBL2CAPChannel) OutputStream() *foundation.NSOutputStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBL2CAPChannelSelOutputStream)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSOutputStreamFromID(_ret)
 }
 
@@ -59,4 +65,3 @@ func (o *CBL2CAPChannel) PSM() uint16 {
 	_ret := objc.Send[uint16](o.Ptr(), _cBL2CAPChannelSelPSM)
 	return _ret
 }
-

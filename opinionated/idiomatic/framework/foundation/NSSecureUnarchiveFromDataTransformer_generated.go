@@ -15,7 +15,9 @@ type SecureUnarchiveFromDataTransformer struct {
 }
 
 // Unwrap returns the underlying [raw.NSSecureUnarchiveFromDataTransformer].
-func (x *SecureUnarchiveFromDataTransformer) Unwrap() *raw.NSSecureUnarchiveFromDataTransformer { return x.inner }
+func (x *SecureUnarchiveFromDataTransformer) Unwrap() *raw.NSSecureUnarchiveFromDataTransformer {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,9 +43,13 @@ func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingPr
 	return x
 }
 
-func (x *SecureUnarchiveFromDataTransformer) asValueTransformer() *raw.NSValueTransformer { return &x.inner.NSValueTransformer }
+func (x *SecureUnarchiveFromDataTransformer) asValueTransformer() *raw.NSValueTransformer {
+	return &x.inner.NSValueTransformer
+}
 
-func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject { return &x.inner.NSValueTransformer.NSObject }
+func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject {
+	return &x.inner.NSValueTransformer.NSObject
+}
 
 // SecureUnarchiveFromDataTransformerable is the interface implemented by [SecureUnarchiveFromDataTransformer], for mocking and DI.
 type SecureUnarchiveFromDataTransformerable interface {
@@ -52,4 +58,3 @@ type SecureUnarchiveFromDataTransformerable interface {
 }
 
 var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)
-

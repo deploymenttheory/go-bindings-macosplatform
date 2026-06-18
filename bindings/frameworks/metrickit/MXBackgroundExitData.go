@@ -16,16 +16,16 @@ type MXBackgroundExitData struct {
 }
 
 var (
-	_clsMXBackgroundExitData = _objcClass("MXBackgroundExitData")
-	_mXBackgroundExitDataSelCumulativeNormalAppExitCount = objc.RegisterName("cumulativeNormalAppExitCount")
-	_mXBackgroundExitDataSelCumulativeMemoryResourceLimitExitCount = objc.RegisterName("cumulativeMemoryResourceLimitExitCount")
-	_mXBackgroundExitDataSelCumulativeCPUResourceLimitExitCount = objc.RegisterName("cumulativeCPUResourceLimitExitCount")
-	_mXBackgroundExitDataSelCumulativeMemoryPressureExitCount = objc.RegisterName("cumulativeMemoryPressureExitCount")
-	_mXBackgroundExitDataSelCumulativeBadAccessExitCount = objc.RegisterName("cumulativeBadAccessExitCount")
-	_mXBackgroundExitDataSelCumulativeAbnormalExitCount = objc.RegisterName("cumulativeAbnormalExitCount")
-	_mXBackgroundExitDataSelCumulativeIllegalInstructionExitCount = objc.RegisterName("cumulativeIllegalInstructionExitCount")
-	_mXBackgroundExitDataSelCumulativeAppWatchdogExitCount = objc.RegisterName("cumulativeAppWatchdogExitCount")
-	_mXBackgroundExitDataSelCumulativeSuspendedWithLockedFileExitCount = objc.RegisterName("cumulativeSuspendedWithLockedFileExitCount")
+	_clsMXBackgroundExitData                                                  = _objcClass("MXBackgroundExitData")
+	_mXBackgroundExitDataSelCumulativeNormalAppExitCount                      = objc.RegisterName("cumulativeNormalAppExitCount")
+	_mXBackgroundExitDataSelCumulativeMemoryResourceLimitExitCount            = objc.RegisterName("cumulativeMemoryResourceLimitExitCount")
+	_mXBackgroundExitDataSelCumulativeCPUResourceLimitExitCount               = objc.RegisterName("cumulativeCPUResourceLimitExitCount")
+	_mXBackgroundExitDataSelCumulativeMemoryPressureExitCount                 = objc.RegisterName("cumulativeMemoryPressureExitCount")
+	_mXBackgroundExitDataSelCumulativeBadAccessExitCount                      = objc.RegisterName("cumulativeBadAccessExitCount")
+	_mXBackgroundExitDataSelCumulativeAbnormalExitCount                       = objc.RegisterName("cumulativeAbnormalExitCount")
+	_mXBackgroundExitDataSelCumulativeIllegalInstructionExitCount             = objc.RegisterName("cumulativeIllegalInstructionExitCount")
+	_mXBackgroundExitDataSelCumulativeAppWatchdogExitCount                    = objc.RegisterName("cumulativeAppWatchdogExitCount")
+	_mXBackgroundExitDataSelCumulativeSuspendedWithLockedFileExitCount        = objc.RegisterName("cumulativeSuspendedWithLockedFileExitCount")
 	_mXBackgroundExitDataSelCumulativeBackgroundTaskAssertionTimeoutExitCount = objc.RegisterName("cumulativeBackgroundTaskAssertionTimeoutExitCount")
 )
 
@@ -98,4 +98,3 @@ func (o *MXBackgroundExitData) CumulativeBackgroundTaskAssertionTimeoutExitCount
 	_ret := objc.Send[uint](o.Ptr(), _mXBackgroundExitDataSelCumulativeBackgroundTaskAssertionTimeoutExitCount)
 	return _ret
 }
-

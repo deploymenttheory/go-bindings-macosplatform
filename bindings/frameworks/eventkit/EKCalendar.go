@@ -19,23 +19,23 @@ type EKCalendar struct {
 }
 
 var (
-	_clsEKCalendar = _objcClass("EKCalendar")
+	_clsEKCalendar                                = _objcClass("EKCalendar")
 	_eKCalendarSelCalendarForEntityTypeEventStore = objc.RegisterName("calendarForEntityType:eventStore:")
-	_eKCalendarSelSource = objc.RegisterName("source")
-	_eKCalendarSelSetSource = objc.RegisterName("setSource:")
-	_eKCalendarSelCalendarIdentifier = objc.RegisterName("calendarIdentifier")
-	_eKCalendarSelTitle = objc.RegisterName("title")
-	_eKCalendarSelSetTitle = objc.RegisterName("setTitle:")
-	_eKCalendarSelType = objc.RegisterName("type")
-	_eKCalendarSelAllowsContentModifications = objc.RegisterName("allowsContentModifications")
-	_eKCalendarSelIsSubscribed = objc.RegisterName("isSubscribed")
-	_eKCalendarSelIsImmutable = objc.RegisterName("isImmutable")
-	_eKCalendarSelCGColor = objc.RegisterName("CGColor")
-	_eKCalendarSelSetCGColor = objc.RegisterName("setCGColor:")
-	_eKCalendarSelColor = objc.RegisterName("color")
-	_eKCalendarSelSetColor = objc.RegisterName("setColor:")
-	_eKCalendarSelSupportedEventAvailabilities = objc.RegisterName("supportedEventAvailabilities")
-	_eKCalendarSelAllowedEntityTypes = objc.RegisterName("allowedEntityTypes")
+	_eKCalendarSelSource                          = objc.RegisterName("source")
+	_eKCalendarSelSetSource                       = objc.RegisterName("setSource:")
+	_eKCalendarSelCalendarIdentifier              = objc.RegisterName("calendarIdentifier")
+	_eKCalendarSelTitle                           = objc.RegisterName("title")
+	_eKCalendarSelSetTitle                        = objc.RegisterName("setTitle:")
+	_eKCalendarSelType                            = objc.RegisterName("type")
+	_eKCalendarSelAllowsContentModifications      = objc.RegisterName("allowsContentModifications")
+	_eKCalendarSelIsSubscribed                    = objc.RegisterName("isSubscribed")
+	_eKCalendarSelIsImmutable                     = objc.RegisterName("isImmutable")
+	_eKCalendarSelCGColor                         = objc.RegisterName("CGColor")
+	_eKCalendarSelSetCGColor                      = objc.RegisterName("setCGColor:")
+	_eKCalendarSelColor                           = objc.RegisterName("color")
+	_eKCalendarSelSetColor                        = objc.RegisterName("setColor:")
+	_eKCalendarSelSupportedEventAvailabilities    = objc.RegisterName("supportedEventAvailabilities")
+	_eKCalendarSelAllowedEntityTypes              = objc.RegisterName("allowedEntityTypes")
 )
 
 func EKCalendarFromID(id objc.ID) *EKCalendar {
@@ -51,14 +51,18 @@ func EKCalendarFromID(id objc.ID) *EKCalendar {
 // @method     calendarForEntityType: @abstract   Creates a new autoreleased calendar that may contain the given entity type. @discussion You can only create calendars that accept either reminders or events via our API. However, other servers might allow mixing the two (though it is not common). @param      entityType    The entity type that this calendar may support. @param      eventStore    The event store in which to create this calendar.
 func EKCalendarCalendarForEntityTypeEventStore(entityType EKEntityType, eventStore *EKEventStore) *EKCalendar {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEKCalendar), _eKCalendarSelCalendarForEntityTypeEventStore, entityType, eventStore.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKCalendarFromID(_ret)
 }
 
 // @property   source @abstract   The source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. @discussion This will be nil for new calendars until you set it.
 func (o *EKCalendar) Source() *EKSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKSourceFromID(_ret)
 }
 
@@ -69,14 +73,18 @@ func (o *EKCalendar) SetSource(source *EKSource) {
 // @property   calendarIdentifier @abstract   A unique identifier for the calendar. It is not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a calendar that is no longer fetchable by this property, e.g. by title, type, color, etc. Use [EKEventStore calendarWithIdentifier:] to look up the calendar by this value.
 func (o *EKCalendar) CalendarIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarSelCalendarIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property   title @abstract   The title of the calendar.
 func (o *EKCalendar) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -121,7 +129,9 @@ func (o *EKCalendar) SetCGColor(cGColor unsafe.Pointer) {
 // @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.
 func (o *EKCalendar) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKCalendarSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -139,4 +149,3 @@ func (o *EKCalendar) AllowedEntityTypes() EKEntityMask {
 	_ret := objc.Send[EKEntityMask](o.Ptr(), _eKCalendarSelAllowedEntityTypes)
 	return _ret
 }
-

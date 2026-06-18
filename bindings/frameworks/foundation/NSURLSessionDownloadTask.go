@@ -15,10 +15,10 @@ type NSURLSessionDownloadTask struct {
 }
 
 var (
-	_clsNSURLSessionDownloadTask = _objcClass("NSURLSessionDownloadTask")
+	_clsNSURLSessionDownloadTask                            = _objcClass("NSURLSessionDownloadTask")
 	_nSURLSessionDownloadTaskSelCancelByProducingResumeData = objc.RegisterName("cancelByProducingResumeData:")
-	_nSURLSessionDownloadTaskSelInit = objc.RegisterName("init")
-	_nSURLSessionDownloadTaskSelNew = objc.RegisterName("new")
+	_nSURLSessionDownloadTaskSelInit                        = objc.RegisterName("init")
+	_nSURLSessionDownloadTaskSelNew                         = objc.RegisterName("new")
 )
 
 func NSURLSessionDownloadTaskFromID(id objc.ID) *NSURLSessionDownloadTask {
@@ -48,7 +48,9 @@ func (o *NSURLSessionDownloadTask) CancelByProducingResumeData(completionHandler
 // Deprecated: Please use -[NSURLSession downloadTaskWithRequest:] or other NSURLSession methods to create instances
 func (o *NSURLSessionDownloadTask) Init() *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionDownloadTaskSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func NSURLSessionDownloadTaskNew() *NSURLSessionDownloadTask {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLSessionDownloadTask), _nSURLSessionDownloadTaskSelNew)
 	return NSURLSessionDownloadTaskFromID(_ret)
 }
-

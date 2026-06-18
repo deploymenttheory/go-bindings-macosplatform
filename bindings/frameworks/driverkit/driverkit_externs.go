@@ -112,7 +112,9 @@ func IOUserClient_Class() uintptr {
 // @extern IOVMPageSize @abstract Containes the page size of the VM paging system in bytes.
 func IOVMPageSize() uint64 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "IOVMPageSize")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint64)(unsafe.Pointer(ptr))
 }
 
@@ -198,231 +200,306 @@ func OSString_Class() uintptr {
 
 func GIOBufferMemoryDescriptorMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOBufferMemoryDescriptorMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOCommandMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOCommandMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOCommandPoolMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOCommandPoolMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIODMACommandMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIODMACommandMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIODataQueueDispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIODataQueueDispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIODispatchQueueMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIODispatchQueueMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIODispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIODispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOHistogramReporterMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOHistogramReporterMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOInterruptDispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOInterruptDispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOMemoryDescriptorMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOMemoryDescriptorMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOMemoryMapMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOMemoryMapMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOReportLegendMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOReportLegendMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOReporterMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOReporterMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOServiceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOServiceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOServiceNotificationDispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOServiceNotificationDispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOServiceStateNotificationDispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOServiceStateNotificationDispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOSimpleReporterMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOSimpleReporterMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOStateReporterMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOStateReporterMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOTimerDispatchSourceMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOTimerDispatchSourceMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GIOUserClientMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gIOUserClientMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSActionMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSActionMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSAction_IOUserClient_KernelCompletionMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSAction_IOUserClient_KernelCompletionMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSArrayMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSArrayMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSBooleanMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSBooleanMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSBundleMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSBundleMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSCollectionMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSCollectionMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSContainerMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSContainerMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSDataMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSDataMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSDictionaryMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSDictionaryMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSMappedFileMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSMappedFileMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSNumberMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSNumberMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSObjectMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSObjectMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSOrderedSetMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSOrderedSetMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSSerializationMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSSerializationMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSSetMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSSetMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 func GOSStringMetaClass() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "gOSStringMetaClass")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 // @const kOSBooleanFalse @abstract The OSBoolean constant for <code>false</code>. @discussion kOSBooleanFalse is the OSBoolean constant for <code>true</code>. This object does not need to be retained or released (but it can be). Comparisons should be of the form <code>booleanObject == kOSBooleanFalse</code>
 func KOSBooleanFalse() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "kOSBooleanFalse")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
 
 // @const kOSBooleanTrue @abstract The OSBoolean constant for <code>true</code>. @discussion kOSBooleanTrue is the OSBoolean constant for <code>true</code>. This object does not need to be retained or released (but it can be). Comparisons should be of the form <code>booleanObject == kOSBooleanTrue</code>
 func KOSBooleanTrue() *int32 {
 	ptr, _ := purego.Dlsym(_driverkitLib, "kOSBooleanTrue")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**int32)(unsafe.Pointer(ptr))
 }
-

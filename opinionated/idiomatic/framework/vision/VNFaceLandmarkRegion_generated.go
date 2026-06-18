@@ -49,4 +49,3 @@ type FaceLandmarkRegionable interface {
 }
 
 var _ FaceLandmarkRegionable = (*FaceLandmarkRegion)(nil)
-

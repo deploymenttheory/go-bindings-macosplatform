@@ -16,35 +16,35 @@ type MTRThreadNetworkDiagnosticsClusterNeighborTableStruct struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterNeighborTableStruct = _objcClass("MTRThreadNetworkDiagnosticsClusterNeighborTableStruct")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelExtAddress = objc.RegisterName("extAddress")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetExtAddress = objc.RegisterName("setExtAddress:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAge = objc.RegisterName("age")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetAge = objc.RegisterName("setAge:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRloc16 = objc.RegisterName("rloc16")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetRloc16 = objc.RegisterName("setRloc16:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLinkFrameCounter = objc.RegisterName("linkFrameCounter")
+	_clsMTRThreadNetworkDiagnosticsClusterNeighborTableStruct                    = _objcClass("MTRThreadNetworkDiagnosticsClusterNeighborTableStruct")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelExtAddress          = objc.RegisterName("extAddress")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetExtAddress       = objc.RegisterName("setExtAddress:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAge                 = objc.RegisterName("age")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetAge              = objc.RegisterName("setAge:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRloc16              = objc.RegisterName("rloc16")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetRloc16           = objc.RegisterName("setRloc16:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLinkFrameCounter    = objc.RegisterName("linkFrameCounter")
 	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetLinkFrameCounter = objc.RegisterName("setLinkFrameCounter:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMleFrameCounter = objc.RegisterName("mleFrameCounter")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetMleFrameCounter = objc.RegisterName("setMleFrameCounter:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLqi = objc.RegisterName("lqi")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetLqi = objc.RegisterName("setLqi:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAverageRssi = objc.RegisterName("averageRssi")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetAverageRssi = objc.RegisterName("setAverageRssi:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLastRssi = objc.RegisterName("lastRssi")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetLastRssi = objc.RegisterName("setLastRssi:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFrameErrorRate = objc.RegisterName("frameErrorRate")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetFrameErrorRate = objc.RegisterName("setFrameErrorRate:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMessageErrorRate = objc.RegisterName("messageErrorRate")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMleFrameCounter     = objc.RegisterName("mleFrameCounter")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetMleFrameCounter  = objc.RegisterName("setMleFrameCounter:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLqi                 = objc.RegisterName("lqi")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetLqi              = objc.RegisterName("setLqi:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAverageRssi         = objc.RegisterName("averageRssi")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetAverageRssi      = objc.RegisterName("setAverageRssi:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLastRssi            = objc.RegisterName("lastRssi")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetLastRssi         = objc.RegisterName("setLastRssi:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFrameErrorRate      = objc.RegisterName("frameErrorRate")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetFrameErrorRate   = objc.RegisterName("setFrameErrorRate:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMessageErrorRate    = objc.RegisterName("messageErrorRate")
 	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetMessageErrorRate = objc.RegisterName("setMessageErrorRate:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRxOnWhenIdle = objc.RegisterName("rxOnWhenIdle")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetRxOnWhenIdle = objc.RegisterName("setRxOnWhenIdle:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullThreadDevice = objc.RegisterName("fullThreadDevice")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRxOnWhenIdle        = objc.RegisterName("rxOnWhenIdle")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetRxOnWhenIdle     = objc.RegisterName("setRxOnWhenIdle:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullThreadDevice    = objc.RegisterName("fullThreadDevice")
 	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetFullThreadDevice = objc.RegisterName("setFullThreadDevice:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullNetworkData = objc.RegisterName("fullNetworkData")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetFullNetworkData = objc.RegisterName("setFullNetworkData:")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelIsChild = objc.RegisterName("isChild")
-	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetIsChild = objc.RegisterName("setIsChild:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullNetworkData     = objc.RegisterName("fullNetworkData")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetFullNetworkData  = objc.RegisterName("setFullNetworkData:")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelIsChild             = objc.RegisterName("isChild")
+	_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetIsChild          = objc.RegisterName("setIsChild:")
 )
 
 func MTRThreadNetworkDiagnosticsClusterNeighborTableStructFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct {
@@ -59,7 +59,9 @@ func MTRThreadNetworkDiagnosticsClusterNeighborTableStructFromID(id objc.ID) *MT
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) ExtAddress() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelExtAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetExtAddress(ex
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Age() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetAge(age *foun
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Rloc16() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRloc16)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetRloc16(rloc16
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) LinkFrameCounter() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLinkFrameCounter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +107,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLinkFrameCoun
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) MleFrameCounter() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMleFrameCounter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +119,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetMleFrameCount
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) Lqi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLqi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -119,7 +131,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLqi(lqi *foun
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) AverageRssi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelAverageRssi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -129,7 +143,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetAverageRssi(a
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) LastRssi() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelLastRssi)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -139,7 +155,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetLastRssi(last
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FrameErrorRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFrameErrorRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -149,7 +167,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFrameErrorRat
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) MessageErrorRate() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelMessageErrorRate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -159,7 +179,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetMessageErrorR
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) RxOnWhenIdle() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelRxOnWhenIdle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -169,7 +191,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetRxOnWhenIdle(
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FullThreadDevice() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullThreadDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -179,7 +203,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFullThreadDev
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) FullNetworkData() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelFullNetworkData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -189,11 +215,12 @@ func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetFullNetworkDa
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) IsChild() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelIsChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterNeighborTableStruct) SetIsChild(isChild *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterNeighborTableStructSelSetIsChild, isChild.Ptr())
 }
-

@@ -26,4 +26,3 @@ func VZEntropyDeviceConfigurationFromID(id objc.ID) *VZEntropyDeviceConfiguratio
 	purego.Track(o)
 	return o
 }
-

@@ -189,4 +189,3 @@ type GameActivityDefinitionable interface {
 }
 
 var _ GameActivityDefinitionable = (*GameActivityDefinition)(nil)
-

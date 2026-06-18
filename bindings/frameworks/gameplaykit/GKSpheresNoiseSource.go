@@ -17,11 +17,11 @@ type GKSpheresNoiseSource struct {
 }
 
 var (
-	_clsGKSpheresNoiseSource = _objcClass("GKSpheresNoiseSource")
+	_clsGKSpheresNoiseSource                          = _objcClass("GKSpheresNoiseSource")
 	_gKSpheresNoiseSourceSelSpheresNoiseWithFrequency = objc.RegisterName("spheresNoiseWithFrequency:")
-	_gKSpheresNoiseSourceSelInitWithFrequency = objc.RegisterName("initWithFrequency:")
-	_gKSpheresNoiseSourceSelFrequency = objc.RegisterName("frequency")
-	_gKSpheresNoiseSourceSelSetFrequency = objc.RegisterName("setFrequency:")
+	_gKSpheresNoiseSourceSelInitWithFrequency         = objc.RegisterName("initWithFrequency:")
+	_gKSpheresNoiseSourceSelFrequency                 = objc.RegisterName("frequency")
+	_gKSpheresNoiseSourceSelSetFrequency              = objc.RegisterName("setFrequency:")
 )
 
 func GKSpheresNoiseSourceFromID(id objc.ID) *GKSpheresNoiseSource {
@@ -36,13 +36,17 @@ func GKSpheresNoiseSourceFromID(id objc.ID) *GKSpheresNoiseSource {
 
 func GKSpheresNoiseSourceSpheresNoiseWithFrequency(frequency float64) *GKSpheresNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSpheresNoiseSource), _gKSpheresNoiseSourceSelSpheresNoiseWithFrequency, frequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSpheresNoiseSourceFromID(_ret)
 }
 
 func (o *GKSpheresNoiseSource) InitWithFrequency(frequency float64) *GKSpheresNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSpheresNoiseSourceSelInitWithFrequency, frequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSpheresNoiseSourceFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *GKSpheresNoiseSource) Frequency() float64 {
 func (o *GKSpheresNoiseSource) SetFrequency(frequency float64) {
 	o.Ptr().Send(_gKSpheresNoiseSourceSelSetFrequency, frequency)
 }
-

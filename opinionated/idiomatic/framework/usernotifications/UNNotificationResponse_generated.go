@@ -64,4 +64,3 @@ type NotificationResponseable interface {
 }
 
 var _ NotificationResponseable = (*NotificationResponse)(nil)
-

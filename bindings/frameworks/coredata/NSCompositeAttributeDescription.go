@@ -16,8 +16,8 @@ type NSCompositeAttributeDescription struct {
 }
 
 var (
-	_clsNSCompositeAttributeDescription = _objcClass("NSCompositeAttributeDescription")
-	_nSCompositeAttributeDescriptionSelElements = objc.RegisterName("elements")
+	_clsNSCompositeAttributeDescription            = _objcClass("NSCompositeAttributeDescription")
+	_nSCompositeAttributeDescriptionSelElements    = objc.RegisterName("elements")
 	_nSCompositeAttributeDescriptionSelSetElements = objc.RegisterName("setElements:")
 )
 
@@ -33,11 +33,12 @@ func NSCompositeAttributeDescriptionFromID(id objc.ID) *NSCompositeAttributeDesc
 
 func (o *NSCompositeAttributeDescription) Elements() *foundation.NSArray[*NSAttributeDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCompositeAttributeDescriptionSelElements)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSAttributeDescription](_ret)
 }
 
 func (o *NSCompositeAttributeDescription) SetElements(elements *foundation.NSArray[*NSAttributeDescription]) {
 	o.Ptr().Send(_nSCompositeAttributeDescriptionSelSetElements, elements.Ptr())
 }
-

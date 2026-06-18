@@ -15,7 +15,7 @@ type VZMacTrackpadConfiguration struct {
 }
 
 var (
-	_clsVZMacTrackpadConfiguration = _objcClass("VZMacTrackpadConfiguration")
+	_clsVZMacTrackpadConfiguration     = _objcClass("VZMacTrackpadConfiguration")
 	_vZMacTrackpadConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZMacTrackpadConfigurationFromID(id objc.ID) *VZMacTrackpadConfiguration {
 
 func (o *VZMacTrackpadConfiguration) Init() *VZMacTrackpadConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacTrackpadConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZMacTrackpadConfigurationFromID(_ret)
 }
-

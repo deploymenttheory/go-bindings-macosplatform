@@ -16,16 +16,16 @@ type MTROperationalCertificateChain struct {
 }
 
 var (
-	_clsMTROperationalCertificateChain = _objcClass("MTROperationalCertificateChain")
+	_clsMTROperationalCertificateChain                                                                                 = _objcClass("MTROperationalCertificateChain")
 	_mTROperationalCertificateChainSelInitWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject = objc.RegisterName("initWithOperationalCertificate:intermediateCertificate:rootCertificate:adminSubject:")
-	_mTROperationalCertificateChainSelOperationalCertificate = objc.RegisterName("operationalCertificate")
-	_mTROperationalCertificateChainSelSetOperationalCertificate = objc.RegisterName("setOperationalCertificate:")
-	_mTROperationalCertificateChainSelIntermediateCertificate = objc.RegisterName("intermediateCertificate")
-	_mTROperationalCertificateChainSelSetIntermediateCertificate = objc.RegisterName("setIntermediateCertificate:")
-	_mTROperationalCertificateChainSelRootCertificate = objc.RegisterName("rootCertificate")
-	_mTROperationalCertificateChainSelSetRootCertificate = objc.RegisterName("setRootCertificate:")
-	_mTROperationalCertificateChainSelAdminSubject = objc.RegisterName("adminSubject")
-	_mTROperationalCertificateChainSelSetAdminSubject = objc.RegisterName("setAdminSubject:")
+	_mTROperationalCertificateChainSelOperationalCertificate                                                           = objc.RegisterName("operationalCertificate")
+	_mTROperationalCertificateChainSelSetOperationalCertificate                                                        = objc.RegisterName("setOperationalCertificate:")
+	_mTROperationalCertificateChainSelIntermediateCertificate                                                          = objc.RegisterName("intermediateCertificate")
+	_mTROperationalCertificateChainSelSetIntermediateCertificate                                                       = objc.RegisterName("setIntermediateCertificate:")
+	_mTROperationalCertificateChainSelRootCertificate                                                                  = objc.RegisterName("rootCertificate")
+	_mTROperationalCertificateChainSelSetRootCertificate                                                               = objc.RegisterName("setRootCertificate:")
+	_mTROperationalCertificateChainSelAdminSubject                                                                     = objc.RegisterName("adminSubject")
+	_mTROperationalCertificateChainSelSetAdminSubject                                                                  = objc.RegisterName("setAdminSubject:")
 )
 
 func MTROperationalCertificateChainFromID(id objc.ID) *MTROperationalCertificateChain {
@@ -40,13 +40,17 @@ func MTROperationalCertificateChainFromID(id objc.ID) *MTROperationalCertificate
 
 func (o *MTROperationalCertificateChain) InitWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject(operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData, adminSubject *foundation.NSNumber) *MTROperationalCertificateChain {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCertificateChainSelInitWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr(), adminSubject.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTROperationalCertificateChainFromID(_ret)
 }
 
 func (o *MTROperationalCertificateChain) OperationalCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCertificateChainSelOperationalCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -57,7 +61,9 @@ func (o *MTROperationalCertificateChain) SetOperationalCertificate(operationalCe
 // A nil intermediateCertificate means there is no intermediate.
 func (o *MTROperationalCertificateChain) IntermediateCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCertificateChainSelIntermediateCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -67,7 +73,9 @@ func (o *MTROperationalCertificateChain) SetIntermediateCertificate(intermediate
 
 func (o *MTROperationalCertificateChain) RootCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCertificateChainSelRootCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -78,11 +86,12 @@ func (o *MTROperationalCertificateChain) SetRootCertificate(rootCertificate *fou
 // adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
 func (o *MTROperationalCertificateChain) AdminSubject() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCertificateChainSelAdminSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCertificateChain) SetAdminSubject(adminSubject *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCertificateChainSelSetAdminSubject, adminSubject.Ptr())
 }
-

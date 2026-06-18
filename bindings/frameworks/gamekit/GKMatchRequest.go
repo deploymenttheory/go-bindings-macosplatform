@@ -18,36 +18,36 @@ type GKMatchRequest struct {
 }
 
 var (
-	_clsGKMatchRequest = _objcClass("GKMatchRequest")
+	_clsGKMatchRequest                                = _objcClass("GKMatchRequest")
 	_gKMatchRequestSelMaxPlayersAllowedForMatchOfType = objc.RegisterName("maxPlayersAllowedForMatchOfType:")
-	_gKMatchRequestSelMinPlayers = objc.RegisterName("minPlayers")
-	_gKMatchRequestSelSetMinPlayers = objc.RegisterName("setMinPlayers:")
-	_gKMatchRequestSelMaxPlayers = objc.RegisterName("maxPlayers")
-	_gKMatchRequestSelSetMaxPlayers = objc.RegisterName("setMaxPlayers:")
-	_gKMatchRequestSelPlayerGroup = objc.RegisterName("playerGroup")
-	_gKMatchRequestSelSetPlayerGroup = objc.RegisterName("setPlayerGroup:")
-	_gKMatchRequestSelPlayerAttributes = objc.RegisterName("playerAttributes")
-	_gKMatchRequestSelSetPlayerAttributes = objc.RegisterName("setPlayerAttributes:")
-	_gKMatchRequestSelRecipients = objc.RegisterName("recipients")
-	_gKMatchRequestSelSetRecipients = objc.RegisterName("setRecipients:")
-	_gKMatchRequestSelInviteMessage = objc.RegisterName("inviteMessage")
-	_gKMatchRequestSelSetInviteMessage = objc.RegisterName("setInviteMessage:")
-	_gKMatchRequestSelDefaultNumberOfPlayers = objc.RegisterName("defaultNumberOfPlayers")
-	_gKMatchRequestSelSetDefaultNumberOfPlayers = objc.RegisterName("setDefaultNumberOfPlayers:")
-	_gKMatchRequestSelRestrictToAutomatch = objc.RegisterName("restrictToAutomatch")
-	_gKMatchRequestSelSetRestrictToAutomatch = objc.RegisterName("setRestrictToAutomatch:")
-	_gKMatchRequestSelRecipientResponseHandler = objc.RegisterName("recipientResponseHandler")
-	_gKMatchRequestSelSetRecipientResponseHandler = objc.RegisterName("setRecipientResponseHandler:")
-	_gKMatchRequestSelInviteeResponseHandler = objc.RegisterName("inviteeResponseHandler")
-	_gKMatchRequestSelSetInviteeResponseHandler = objc.RegisterName("setInviteeResponseHandler:")
-	_gKMatchRequestSelPlayersToInvite = objc.RegisterName("playersToInvite")
-	_gKMatchRequestSelSetPlayersToInvite = objc.RegisterName("setPlayersToInvite:")
-	_gKMatchRequestSelQueueName = objc.RegisterName("queueName")
-	_gKMatchRequestSelSetQueueName = objc.RegisterName("setQueueName:")
-	_gKMatchRequestSelProperties = objc.RegisterName("properties")
-	_gKMatchRequestSelSetProperties = objc.RegisterName("setProperties:")
-	_gKMatchRequestSelRecipientProperties = objc.RegisterName("recipientProperties")
-	_gKMatchRequestSelSetRecipientProperties = objc.RegisterName("setRecipientProperties:")
+	_gKMatchRequestSelMinPlayers                      = objc.RegisterName("minPlayers")
+	_gKMatchRequestSelSetMinPlayers                   = objc.RegisterName("setMinPlayers:")
+	_gKMatchRequestSelMaxPlayers                      = objc.RegisterName("maxPlayers")
+	_gKMatchRequestSelSetMaxPlayers                   = objc.RegisterName("setMaxPlayers:")
+	_gKMatchRequestSelPlayerGroup                     = objc.RegisterName("playerGroup")
+	_gKMatchRequestSelSetPlayerGroup                  = objc.RegisterName("setPlayerGroup:")
+	_gKMatchRequestSelPlayerAttributes                = objc.RegisterName("playerAttributes")
+	_gKMatchRequestSelSetPlayerAttributes             = objc.RegisterName("setPlayerAttributes:")
+	_gKMatchRequestSelRecipients                      = objc.RegisterName("recipients")
+	_gKMatchRequestSelSetRecipients                   = objc.RegisterName("setRecipients:")
+	_gKMatchRequestSelInviteMessage                   = objc.RegisterName("inviteMessage")
+	_gKMatchRequestSelSetInviteMessage                = objc.RegisterName("setInviteMessage:")
+	_gKMatchRequestSelDefaultNumberOfPlayers          = objc.RegisterName("defaultNumberOfPlayers")
+	_gKMatchRequestSelSetDefaultNumberOfPlayers       = objc.RegisterName("setDefaultNumberOfPlayers:")
+	_gKMatchRequestSelRestrictToAutomatch             = objc.RegisterName("restrictToAutomatch")
+	_gKMatchRequestSelSetRestrictToAutomatch          = objc.RegisterName("setRestrictToAutomatch:")
+	_gKMatchRequestSelRecipientResponseHandler        = objc.RegisterName("recipientResponseHandler")
+	_gKMatchRequestSelSetRecipientResponseHandler     = objc.RegisterName("setRecipientResponseHandler:")
+	_gKMatchRequestSelInviteeResponseHandler          = objc.RegisterName("inviteeResponseHandler")
+	_gKMatchRequestSelSetInviteeResponseHandler       = objc.RegisterName("setInviteeResponseHandler:")
+	_gKMatchRequestSelPlayersToInvite                 = objc.RegisterName("playersToInvite")
+	_gKMatchRequestSelSetPlayersToInvite              = objc.RegisterName("setPlayersToInvite:")
+	_gKMatchRequestSelQueueName                       = objc.RegisterName("queueName")
+	_gKMatchRequestSelSetQueueName                    = objc.RegisterName("setQueueName:")
+	_gKMatchRequestSelProperties                      = objc.RegisterName("properties")
+	_gKMatchRequestSelSetProperties                   = objc.RegisterName("setProperties:")
+	_gKMatchRequestSelRecipientProperties             = objc.RegisterName("recipientProperties")
+	_gKMatchRequestSelSetRecipientProperties          = objc.RegisterName("setRecipientProperties:")
 )
 
 func GKMatchRequestFromID(id objc.ID) *GKMatchRequest {
@@ -109,7 +109,9 @@ func (o *GKMatchRequest) SetPlayerAttributes(playerAttributes uint32) {
 // Array of GKPlayers to invite, or nil if none. This array can also include local guest players.
 func (o *GKMatchRequest) Recipients() *foundation.NSArray[*GKPlayer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchRequestSelRecipients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKPlayer](_ret)
 }
 
@@ -120,7 +122,9 @@ func (o *GKMatchRequest) SetRecipients(recipients *foundation.NSArray[*GKPlayer]
 // Message sent to invited players, may be modified if using GKMatchmakerViewController Will return nil if the player is underage or restricted.
 func (o *GKMatchRequest) InviteMessage() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchRequestSelInviteMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -205,7 +209,9 @@ func (o *GKMatchRequest) SetPlayersToInvite(playersToInvite *foundation.NSArray[
 // The name of the queue, if rule-based matchmaking is used.
 func (o *GKMatchRequest) QueueName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKMatchRequestSelQueueName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -232,4 +238,3 @@ func (o *GKMatchRequest) RecipientProperties() *foundation.NSDictionary[*GKPlaye
 func (o *GKMatchRequest) SetRecipientProperties(recipientProperties *foundation.NSDictionary[*GKPlayer, objc.ID]) {
 	o.Ptr().Send(_gKMatchRequestSelSetRecipientProperties, recipientProperties)
 }
-

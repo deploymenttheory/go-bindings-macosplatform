@@ -16,24 +16,24 @@ type WebBackForwardList struct {
 }
 
 var (
-	_clsWebBackForwardList = _objcClass("WebBackForwardList")
-	_webBackForwardListSelAddItem = objc.RegisterName("addItem:")
-	_webBackForwardListSelGoBack = objc.RegisterName("goBack")
-	_webBackForwardListSelGoForward = objc.RegisterName("goForward")
-	_webBackForwardListSelGoToItem = objc.RegisterName("goToItem:")
-	_webBackForwardListSelBackListWithLimit = objc.RegisterName("backListWithLimit:")
+	_clsWebBackForwardList                     = _objcClass("WebBackForwardList")
+	_webBackForwardListSelAddItem              = objc.RegisterName("addItem:")
+	_webBackForwardListSelGoBack               = objc.RegisterName("goBack")
+	_webBackForwardListSelGoForward            = objc.RegisterName("goForward")
+	_webBackForwardListSelGoToItem             = objc.RegisterName("goToItem:")
+	_webBackForwardListSelBackListWithLimit    = objc.RegisterName("backListWithLimit:")
 	_webBackForwardListSelForwardListWithLimit = objc.RegisterName("forwardListWithLimit:")
-	_webBackForwardListSelContainsItem = objc.RegisterName("containsItem:")
-	_webBackForwardListSelItemAtIndex = objc.RegisterName("itemAtIndex:")
-	_webBackForwardListSelBackItem = objc.RegisterName("backItem")
-	_webBackForwardListSelCurrentItem = objc.RegisterName("currentItem")
-	_webBackForwardListSelForwardItem = objc.RegisterName("forwardItem")
-	_webBackForwardListSelCapacity = objc.RegisterName("capacity")
-	_webBackForwardListSelSetCapacity = objc.RegisterName("setCapacity:")
-	_webBackForwardListSelBackListCount = objc.RegisterName("backListCount")
-	_webBackForwardListSelForwardListCount = objc.RegisterName("forwardListCount")
-	_webBackForwardListSelSetPageCacheSize = objc.RegisterName("setPageCacheSize:")
-	_webBackForwardListSelPageCacheSize = objc.RegisterName("pageCacheSize")
+	_webBackForwardListSelContainsItem         = objc.RegisterName("containsItem:")
+	_webBackForwardListSelItemAtIndex          = objc.RegisterName("itemAtIndex:")
+	_webBackForwardListSelBackItem             = objc.RegisterName("backItem")
+	_webBackForwardListSelCurrentItem          = objc.RegisterName("currentItem")
+	_webBackForwardListSelForwardItem          = objc.RegisterName("forwardItem")
+	_webBackForwardListSelCapacity             = objc.RegisterName("capacity")
+	_webBackForwardListSelSetCapacity          = objc.RegisterName("setCapacity:")
+	_webBackForwardListSelBackListCount        = objc.RegisterName("backListCount")
+	_webBackForwardListSelForwardListCount     = objc.RegisterName("forwardListCount")
+	_webBackForwardListSelSetPageCacheSize     = objc.RegisterName("setPageCacheSize:")
+	_webBackForwardListSelPageCacheSize        = objc.RegisterName("pageCacheSize")
 )
 
 func WebBackForwardListFromID(id objc.ID) *WebBackForwardList {
@@ -87,28 +87,36 @@ func (o *WebBackForwardList) ContainsItem(item *WebHistoryItem) bool {
 // @method itemAtIndex: @abstract Returns an entry the given distance from the current entry. @param index Index of the desired list item relative to the current item; 0 is current item, -1 is back item, 1 is forward item, etc. @result The entry the given distance from the current entry. If index exceeds the limits of the list, nil is returned.
 func (o *WebBackForwardList) ItemAtIndex(index int) *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webBackForwardListSelItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
 // @property backItem @abstract The entry right before the current entry, or nil if there isn't one.
 func (o *WebBackForwardList) BackItem() *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webBackForwardListSelBackItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
 // @property currentItem @abstract Returns the current entry.
 func (o *WebBackForwardList) CurrentItem() *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webBackForwardListSelCurrentItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
 // @property forwardItem @abstract The entry right after the current entry, or nil if there isn't one.
 func (o *WebBackForwardList) ForwardItem() *WebHistoryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _webBackForwardListSelForwardItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebHistoryItemFromID(_ret)
 }
 
@@ -144,4 +152,3 @@ func (o *WebBackForwardList) PageCacheSize() uint {
 	_ret := objc.Send[uint](o.Ptr(), _webBackForwardListSelPageCacheSize)
 	return _ret
 }
-

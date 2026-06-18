@@ -16,15 +16,15 @@ type MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct struct {
 }
 
 var (
-	_clsMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct = _objcClass("MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetTimestamp = objc.RegisterName("importedResetTimestamp")
+	_clsMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct                          = _objcClass("MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetTimestamp    = objc.RegisterName("importedResetTimestamp")
 	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetImportedResetTimestamp = objc.RegisterName("setImportedResetTimestamp:")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetTimestamp = objc.RegisterName("exportedResetTimestamp")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetTimestamp    = objc.RegisterName("exportedResetTimestamp")
 	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetExportedResetTimestamp = objc.RegisterName("setExportedResetTimestamp:")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetSystime = objc.RegisterName("importedResetSystime")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetImportedResetSystime = objc.RegisterName("setImportedResetSystime:")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetSystime = objc.RegisterName("exportedResetSystime")
-	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetExportedResetSystime = objc.RegisterName("setExportedResetSystime:")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetSystime      = objc.RegisterName("importedResetSystime")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetImportedResetSystime   = objc.RegisterName("setImportedResetSystime:")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetSystime      = objc.RegisterName("exportedResetSystime")
+	_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetExportedResetSystime   = objc.RegisterName("setExportedResetSystime:")
 )
 
 func MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructFromID(id objc.ID) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
@@ -39,7 +39,9 @@ func MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructFromID(id o
 
 func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetIm
 
 func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetEx
 
 func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelImportedResetSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetIm
 
 func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelExportedResetSystime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetExportedResetSystime(exportedResetSystime *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructSelSetExportedResetSystime, exportedResetSystime.Ptr())
 }
-

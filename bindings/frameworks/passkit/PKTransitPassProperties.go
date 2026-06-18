@@ -16,10 +16,10 @@ type PKTransitPassProperties struct {
 }
 
 var (
-	_clsPKTransitPassProperties = _objcClass("PKTransitPassProperties")
-	_pKTransitPassPropertiesSelTransitBalance = objc.RegisterName("transitBalance")
+	_clsPKTransitPassProperties                           = _objcClass("PKTransitPassProperties")
+	_pKTransitPassPropertiesSelTransitBalance             = objc.RegisterName("transitBalance")
 	_pKTransitPassPropertiesSelTransitBalanceCurrencyCode = objc.RegisterName("transitBalanceCurrencyCode")
-	_pKTransitPassPropertiesSelIsInStation = objc.RegisterName("isInStation")
+	_pKTransitPassPropertiesSelIsInStation                = objc.RegisterName("isInStation")
 )
 
 func PKTransitPassPropertiesFromID(id objc.ID) *PKTransitPassProperties {
@@ -35,14 +35,18 @@ func PKTransitPassPropertiesFromID(id objc.ID) *PKTransitPassProperties {
 // Deprecated: since macOS 12.0.
 func (o *PKTransitPassProperties) TransitBalance() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKTransitPassPropertiesSelTransitBalance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
 // Deprecated: since macOS 12.0.
 func (o *PKTransitPassProperties) TransitBalanceCurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKTransitPassPropertiesSelTransitBalanceCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *PKTransitPassProperties) IsInStation() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKTransitPassPropertiesSelIsInStation)
 	return _ret
 }
-

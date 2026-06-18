@@ -15,8 +15,8 @@ type VNImageAestheticsScoresObservation struct {
 }
 
 var (
-	_clsVNImageAestheticsScoresObservation = _objcClass("VNImageAestheticsScoresObservation")
-	_vNImageAestheticsScoresObservationSelIsUtility = objc.RegisterName("isUtility")
+	_clsVNImageAestheticsScoresObservation             = _objcClass("VNImageAestheticsScoresObservation")
+	_vNImageAestheticsScoresObservationSelIsUtility    = objc.RegisterName("isUtility")
 	_vNImageAestheticsScoresObservationSelOverallScore = objc.RegisterName("overallScore")
 )
 
@@ -41,4 +41,3 @@ func (o *VNImageAestheticsScoresObservation) OverallScore() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNImageAestheticsScoresObservationSelOverallScore)
 	return _ret
 }
-

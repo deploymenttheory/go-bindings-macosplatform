@@ -16,7 +16,9 @@ type MTRActionsClusterStartActionParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRActionsClusterStartActionParams].
-func (x *MTRActionsClusterStartActionParams) Unwrap() *raw.MTRActionsClusterStartActionParams { return x.inner }
+func (x *MTRActionsClusterStartActionParams) Unwrap() *raw.MTRActionsClusterStartActionParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTRActionsClusterStartActionParamsable interface {
 }
 
 var _ MTRActionsClusterStartActionParamsable = (*MTRActionsClusterStartActionParams)(nil)
-

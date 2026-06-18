@@ -167,11 +167,17 @@ func (x *CNNSoftMaxGradient) WithLabel(label string) *CNNSoftMaxGradient {
 	return x
 }
 
-func (x *CNNSoftMaxGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNSoftMaxGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNSoftMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNSoftMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNSoftMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNSoftMaxGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNSoftMaxGradientable is the interface implemented by [CNNSoftMaxGradient], for mocking and DI.
 type CNNSoftMaxGradientable interface {
@@ -199,4 +205,3 @@ type CNNSoftMaxGradientable interface {
 }
 
 var _ CNNSoftMaxGradientable = (*CNNSoftMaxGradient)(nil)
-

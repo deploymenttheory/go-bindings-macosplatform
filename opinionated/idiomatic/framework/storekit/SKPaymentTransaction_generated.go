@@ -98,4 +98,3 @@ type PaymentTransactionable interface {
 }
 
 var _ PaymentTransactionable = (*PaymentTransaction)(nil)
-

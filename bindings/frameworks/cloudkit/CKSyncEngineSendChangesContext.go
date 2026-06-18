@@ -16,8 +16,8 @@ type CKSyncEngineSendChangesContext struct {
 }
 
 var (
-	_clsCKSyncEngineSendChangesContext = _objcClass("CKSyncEngineSendChangesContext")
-	_cKSyncEngineSendChangesContextSelReason = objc.RegisterName("reason")
+	_clsCKSyncEngineSendChangesContext        = _objcClass("CKSyncEngineSendChangesContext")
+	_cKSyncEngineSendChangesContextSelReason  = objc.RegisterName("reason")
 	_cKSyncEngineSendChangesContextSelOptions = objc.RegisterName("options")
 )
 
@@ -40,7 +40,8 @@ func (o *CKSyncEngineSendChangesContext) Reason() CKSyncEngineSyncReason {
 // The additional options for the send operation.
 func (o *CKSyncEngineSendChangesContext) Options() *CKSyncEngineSendChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineSendChangesContextSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineSendChangesOptionsFromID(_ret)
 }
-

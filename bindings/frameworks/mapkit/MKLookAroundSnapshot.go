@@ -17,7 +17,7 @@ type MKLookAroundSnapshot struct {
 }
 
 var (
-	_clsMKLookAroundSnapshot = _objcClass("MKLookAroundSnapshot")
+	_clsMKLookAroundSnapshot      = _objcClass("MKLookAroundSnapshot")
 	_mKLookAroundSnapshotSelImage = objc.RegisterName("image")
 )
 
@@ -33,7 +33,8 @@ func MKLookAroundSnapshotFromID(id objc.ID) *MKLookAroundSnapshot {
 
 func (o *MKLookAroundSnapshot) Image() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSnapshotSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
-

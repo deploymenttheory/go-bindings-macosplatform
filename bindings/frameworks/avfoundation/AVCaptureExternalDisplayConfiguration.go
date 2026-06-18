@@ -17,13 +17,13 @@ type AVCaptureExternalDisplayConfiguration struct {
 }
 
 var (
-	_clsAVCaptureExternalDisplayConfiguration = _objcClass("AVCaptureExternalDisplayConfiguration")
-	_aVCaptureExternalDisplayConfigurationSelShouldMatchFrameRate = objc.RegisterName("shouldMatchFrameRate")
-	_aVCaptureExternalDisplayConfigurationSelSetShouldMatchFrameRate = objc.RegisterName("setShouldMatchFrameRate:")
-	_aVCaptureExternalDisplayConfigurationSelBypassColorSpaceConversion = objc.RegisterName("bypassColorSpaceConversion")
+	_clsAVCaptureExternalDisplayConfiguration                              = _objcClass("AVCaptureExternalDisplayConfiguration")
+	_aVCaptureExternalDisplayConfigurationSelShouldMatchFrameRate          = objc.RegisterName("shouldMatchFrameRate")
+	_aVCaptureExternalDisplayConfigurationSelSetShouldMatchFrameRate       = objc.RegisterName("setShouldMatchFrameRate:")
+	_aVCaptureExternalDisplayConfigurationSelBypassColorSpaceConversion    = objc.RegisterName("bypassColorSpaceConversion")
 	_aVCaptureExternalDisplayConfigurationSelSetBypassColorSpaceConversion = objc.RegisterName("setBypassColorSpaceConversion:")
-	_aVCaptureExternalDisplayConfigurationSelPreferredResolution = objc.RegisterName("preferredResolution")
-	_aVCaptureExternalDisplayConfigurationSelSetPreferredResolution = objc.RegisterName("setPreferredResolution:")
+	_aVCaptureExternalDisplayConfigurationSelPreferredResolution           = objc.RegisterName("preferredResolution")
+	_aVCaptureExternalDisplayConfigurationSelSetPreferredResolution        = objc.RegisterName("setPreferredResolution:")
 )
 
 func AVCaptureExternalDisplayConfigurationFromID(id objc.ID) *AVCaptureExternalDisplayConfiguration {
@@ -36,7 +36,7 @@ func AVCaptureExternalDisplayConfigurationFromID(id objc.ID) *AVCaptureExternalD
 	return o
 }
 
-// A property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your ``AVCaptureVideoPreviewLayer`` to match its source ``AVCaptureDevice/activeVideoMinFrameDuration``, set ``shouldMatchFrameRate`` to `true`. The default value is `false`.
+// A property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
 func (o *AVCaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureExternalDisplayConfigurationSelShouldMatchFrameRate)
 	return _ret
@@ -46,7 +46,7 @@ func (o *AVCaptureExternalDisplayConfiguration) SetShouldMatchFrameRate(shouldMa
 	o.Ptr().Send(_aVCaptureExternalDisplayConfigurationSelSetShouldMatchFrameRate, shouldMatchFrameRate)
 }
 
-// A property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set ``bypassColorSpaceConversion`` to `true` if you would like the configurator's  ``AVCaptureVideoPreviewLayer`` color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the ``CALayer`` remain untouched. The default value is `false`.
+// A property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
 func (o *AVCaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureExternalDisplayConfigurationSelBypassColorSpaceConversion)
 	return _ret
@@ -56,7 +56,7 @@ func (o *AVCaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(by
 	o.Ptr().Send(_aVCaptureExternalDisplayConfigurationSelSetBypassColorSpaceConversion, bypassColorSpaceConversion)
 }
 
-// Your preferred external display resolution. Use ``preferredResolution`` to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
+// Your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
 func (o *AVCaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
 	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCaptureExternalDisplayConfigurationSelPreferredResolution)
 	return _ret
@@ -65,4 +65,3 @@ func (o *AVCaptureExternalDisplayConfiguration) PreferredResolution() coremedia.
 func (o *AVCaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions) {
 	o.Ptr().Send(_aVCaptureExternalDisplayConfigurationSelSetPreferredResolution, preferredResolution)
 }
-

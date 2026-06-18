@@ -16,8 +16,8 @@ type DOMHTMLTitleElement struct {
 }
 
 var (
-	_clsDOMHTMLTitleElement = _objcClass("DOMHTMLTitleElement")
-	_dOMHTMLTitleElementSelText = objc.RegisterName("text")
+	_clsDOMHTMLTitleElement        = _objcClass("DOMHTMLTitleElement")
+	_dOMHTMLTitleElementSelText    = objc.RegisterName("text")
 	_dOMHTMLTitleElementSelSetText = objc.RegisterName("setText:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLTitleElementFromID(id objc.ID) *DOMHTMLTitleElement {
 
 func (o *DOMHTMLTitleElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTitleElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLTitleElement) SetText(text *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLTitleElementSelSetText, text.Ptr())
 }
-

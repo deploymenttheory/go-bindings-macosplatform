@@ -18,12 +18,12 @@ type MPSMatrixRandomMTGP32 struct {
 }
 
 var (
-	_clsMPSMatrixRandomMTGP32 = _objcClass("MPSMatrixRandomMTGP32")
-	_mPSMatrixRandomMTGP32SelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixRandomMTGP32                                                            = _objcClass("MPSMatrixRandomMTGP32")
+	_mPSMatrixRandomMTGP32SelInitWithDevice                                              = objc.RegisterName("initWithDevice:")
 	_mPSMatrixRandomMTGP32SelInitWithDeviceDestinationDataTypeSeedDistributionDescriptor = objc.RegisterName("initWithDevice:destinationDataType:seed:distributionDescriptor:")
-	_mPSMatrixRandomMTGP32SelSynchronizeStateOnCommandBuffer = objc.RegisterName("synchronizeStateOnCommandBuffer:")
-	_mPSMatrixRandomMTGP32SelInitWithDeviceDestinationDataTypeSeed = objc.RegisterName("initWithDevice:destinationDataType:seed:")
-	_mPSMatrixRandomMTGP32SelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixRandomMTGP32SelSynchronizeStateOnCommandBuffer                             = objc.RegisterName("synchronizeStateOnCommandBuffer:")
+	_mPSMatrixRandomMTGP32SelInitWithDeviceDestinationDataTypeSeed                       = objc.RegisterName("initWithDevice:destinationDataType:seed:")
+	_mPSMatrixRandomMTGP32SelInitWithCoderDevice                                         = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSMatrixRandomMTGP32FromID(id objc.ID) *MPSMatrixRandomMTGP32 {
@@ -39,14 +39,18 @@ func MPSMatrixRandomMTGP32FromID(id objc.ID) *MPSMatrixRandomMTGP32 {
 // @abstract   initialize a MPSMatrixRandomMTGP32 filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
 func (o *MPSMatrixRandomMTGP32) InitWithDevice(device metal.MTLDevice) *MPSMatrixRandomMTGP32 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomMTGP32SelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomMTGP32FromID(_ret)
 }
 
 // @abstract   initialize a MPSMatrixRandomMTGP32 filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
 func (o *MPSMatrixRandomMTGP32) InitWithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *MPSMatrixRandomDistributionDescriptor) *MPSMatrixRandomMTGP32 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomMTGP32SelInitWithDeviceDestinationDataTypeSeedDistributionDescriptor, device, destinationDataType, seed, distributionDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomMTGP32FromID(_ret)
 }
 
@@ -58,13 +62,16 @@ func (o *MPSMatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer me
 // @abstract   initialize a MPSMatrixRandomMTGP32 filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
 func (o *MPSMatrixRandomMTGP32) InitWithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MPSMatrixRandomMTGP32 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomMTGP32SelInitWithDeviceDestinationDataTypeSeed, device, destinationDataType, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomMTGP32FromID(_ret)
 }
 
 func (o *MPSMatrixRandomMTGP32) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixRandomMTGP32 {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomMTGP32SelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomMTGP32FromID(_ret)
 }
-

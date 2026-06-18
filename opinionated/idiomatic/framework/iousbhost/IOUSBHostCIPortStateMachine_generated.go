@@ -163,4 +163,3 @@ type HostCIPortStateMachineable interface {
 }
 
 var _ HostCIPortStateMachineable = (*HostCIPortStateMachine)(nil)
-

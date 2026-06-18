@@ -16,21 +16,21 @@ type MPSImageArithmetic struct {
 }
 
 var (
-	_clsMPSImageArithmetic = _objcClass("MPSImageArithmetic")
-	_mPSImageArithmeticSelPrimaryScale = objc.RegisterName("primaryScale")
-	_mPSImageArithmeticSelSetPrimaryScale = objc.RegisterName("setPrimaryScale:")
-	_mPSImageArithmeticSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_mPSImageArithmeticSelSetSecondaryScale = objc.RegisterName("setSecondaryScale:")
-	_mPSImageArithmeticSelBias = objc.RegisterName("bias")
-	_mPSImageArithmeticSelSetBias = objc.RegisterName("setBias:")
-	_mPSImageArithmeticSelPrimaryStrideInPixels = objc.RegisterName("primaryStrideInPixels")
-	_mPSImageArithmeticSelSetPrimaryStrideInPixels = objc.RegisterName("setPrimaryStrideInPixels:")
-	_mPSImageArithmeticSelSecondaryStrideInPixels = objc.RegisterName("secondaryStrideInPixels")
+	_clsMPSImageArithmetic                           = _objcClass("MPSImageArithmetic")
+	_mPSImageArithmeticSelPrimaryScale               = objc.RegisterName("primaryScale")
+	_mPSImageArithmeticSelSetPrimaryScale            = objc.RegisterName("setPrimaryScale:")
+	_mPSImageArithmeticSelSecondaryScale             = objc.RegisterName("secondaryScale")
+	_mPSImageArithmeticSelSetSecondaryScale          = objc.RegisterName("setSecondaryScale:")
+	_mPSImageArithmeticSelBias                       = objc.RegisterName("bias")
+	_mPSImageArithmeticSelSetBias                    = objc.RegisterName("setBias:")
+	_mPSImageArithmeticSelPrimaryStrideInPixels      = objc.RegisterName("primaryStrideInPixels")
+	_mPSImageArithmeticSelSetPrimaryStrideInPixels   = objc.RegisterName("setPrimaryStrideInPixels:")
+	_mPSImageArithmeticSelSecondaryStrideInPixels    = objc.RegisterName("secondaryStrideInPixels")
 	_mPSImageArithmeticSelSetSecondaryStrideInPixels = objc.RegisterName("setSecondaryStrideInPixels:")
-	_mPSImageArithmeticSelMinimumValue = objc.RegisterName("minimumValue")
-	_mPSImageArithmeticSelSetMinimumValue = objc.RegisterName("setMinimumValue:")
-	_mPSImageArithmeticSelMaximumValue = objc.RegisterName("maximumValue")
-	_mPSImageArithmeticSelSetMaximumValue = objc.RegisterName("setMaximumValue:")
+	_mPSImageArithmeticSelMinimumValue               = objc.RegisterName("minimumValue")
+	_mPSImageArithmeticSelSetMinimumValue            = objc.RegisterName("setMinimumValue:")
+	_mPSImageArithmeticSelMaximumValue               = objc.RegisterName("maximumValue")
+	_mPSImageArithmeticSelSetMaximumValue            = objc.RegisterName("setMaximumValue:")
 )
 
 func MPSImageArithmeticFromID(id objc.ID) *MPSImageArithmetic {
@@ -109,4 +109,3 @@ func (o *MPSImageArithmetic) MaximumValue() float32 {
 func (o *MPSImageArithmetic) SetMaximumValue(maximumValue float32) {
 	o.Ptr().Send(_mPSImageArithmeticSelSetMaximumValue, maximumValue)
 }
-

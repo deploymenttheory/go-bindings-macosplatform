@@ -124,9 +124,13 @@ func (x *DOMKeyboardEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMU
 
 func (x *DOMKeyboardEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMUIEvent.DOMEvent }
 
-func (x *DOMKeyboardEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject }
+func (x *DOMKeyboardEvent) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMUIEvent.DOMEvent.DOMObject
+}
 
-func (x *DOMKeyboardEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+func (x *DOMKeyboardEvent) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject
+}
 
 // DOMKeyboardEventable is the interface implemented by [DOMKeyboardEvent], for mocking and DI.
 type DOMKeyboardEventable interface {
@@ -145,4 +149,3 @@ type DOMKeyboardEventable interface {
 }
 
 var _ DOMKeyboardEventable = (*DOMKeyboardEvent)(nil)
-

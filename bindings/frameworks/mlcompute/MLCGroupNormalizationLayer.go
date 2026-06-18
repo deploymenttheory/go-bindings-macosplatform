@@ -15,15 +15,15 @@ type MLCGroupNormalizationLayer struct {
 }
 
 var (
-	_clsMLCGroupNormalizationLayer = _objcClass("MLCGroupNormalizationLayer")
+	_clsMLCGroupNormalizationLayer                                                               = _objcClass("MLCGroupNormalizationLayer")
 	_mLCGroupNormalizationLayerSelLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon = objc.RegisterName("layerWithFeatureChannelCount:groupCount:beta:gamma:varianceEpsilon:")
-	_mLCGroupNormalizationLayerSelFeatureChannelCount = objc.RegisterName("featureChannelCount")
-	_mLCGroupNormalizationLayerSelGroupCount = objc.RegisterName("groupCount")
-	_mLCGroupNormalizationLayerSelBeta = objc.RegisterName("beta")
-	_mLCGroupNormalizationLayerSelGamma = objc.RegisterName("gamma")
-	_mLCGroupNormalizationLayerSelBetaParameter = objc.RegisterName("betaParameter")
-	_mLCGroupNormalizationLayerSelGammaParameter = objc.RegisterName("gammaParameter")
-	_mLCGroupNormalizationLayerSelVarianceEpsilon = objc.RegisterName("varianceEpsilon")
+	_mLCGroupNormalizationLayerSelFeatureChannelCount                                            = objc.RegisterName("featureChannelCount")
+	_mLCGroupNormalizationLayerSelGroupCount                                                     = objc.RegisterName("groupCount")
+	_mLCGroupNormalizationLayerSelBeta                                                           = objc.RegisterName("beta")
+	_mLCGroupNormalizationLayerSelGamma                                                          = objc.RegisterName("gamma")
+	_mLCGroupNormalizationLayerSelBetaParameter                                                  = objc.RegisterName("betaParameter")
+	_mLCGroupNormalizationLayerSelGammaParameter                                                 = objc.RegisterName("gammaParameter")
+	_mLCGroupNormalizationLayerSelVarianceEpsilon                                                = objc.RegisterName("varianceEpsilon")
 )
 
 func MLCGroupNormalizationLayerFromID(id objc.ID) *MLCGroupNormalizationLayer {
@@ -39,7 +39,9 @@ func MLCGroupNormalizationLayerFromID(id objc.ID) *MLCGroupNormalizationLayer {
 // @abstract Create a group normalization layer @param featureChannelCount  The number of feature channels @param beta  Training parameter @param gamma  Training parameter @param groupCount  The number of groups to divide the feature channels into @param varianceEpsilon  A small numerical value added to variance for stability @return A new group normalization layer.
 func MLCGroupNormalizationLayerLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount uint, groupCount uint, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCGroupNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCGroupNormalizationLayer), _mLCGroupNormalizationLayerSelLayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon, featureChannelCount, groupCount, beta.Ptr(), gamma.Ptr(), varianceEpsilon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCGroupNormalizationLayerFromID(_ret)
 }
 
@@ -58,28 +60,36 @@ func (o *MLCGroupNormalizationLayer) GroupCount() uint {
 // @property   beta @abstract   The beta tensor
 func (o *MLCGroupNormalizationLayer) Beta() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGroupNormalizationLayerSelBeta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   gamma @abstract   The gamma tensor
 func (o *MLCGroupNormalizationLayer) Gamma() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGroupNormalizationLayerSelGamma)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
 func (o *MLCGroupNormalizationLayer) BetaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGroupNormalizationLayerSelBetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
 func (o *MLCGroupNormalizationLayer) GammaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCGroupNormalizationLayerSelGammaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
@@ -88,4 +98,3 @@ func (o *MLCGroupNormalizationLayer) VarianceEpsilon() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCGroupNormalizationLayerSelVarianceEpsilon)
 	return _ret
 }
-

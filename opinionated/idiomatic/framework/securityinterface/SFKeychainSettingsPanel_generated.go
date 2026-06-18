@@ -56,4 +56,3 @@ type KeychainSettingsPanelable interface {
 }
 
 var _ KeychainSettingsPanelable = (*KeychainSettingsPanel)(nil)
-

@@ -66,7 +66,9 @@ func (x *GraphShapedType) SetDataType(dataType mpscore.MPSDataType) {
 
 func (x *GraphShapedType) asGraphType() *raw.MPSGraphType { return &x.inner.MPSGraphType }
 
-func (x *GraphShapedType) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphType.MPSGraphObject }
+func (x *GraphShapedType) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphType.MPSGraphObject
+}
 
 // GraphShapedTypeable is the interface implemented by [GraphShapedType], for mocking and DI.
 type GraphShapedTypeable interface {
@@ -79,4 +81,3 @@ type GraphShapedTypeable interface {
 }
 
 var _ GraphShapedTypeable = (*GraphShapedType)(nil)
-

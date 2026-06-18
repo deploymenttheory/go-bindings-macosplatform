@@ -15,10 +15,10 @@ type NSRotationGestureRecognizer struct {
 }
 
 var (
-	_clsNSRotationGestureRecognizer = _objcClass("NSRotationGestureRecognizer")
-	_nSRotationGestureRecognizerSelRotation = objc.RegisterName("rotation")
-	_nSRotationGestureRecognizerSelSetRotation = objc.RegisterName("setRotation:")
-	_nSRotationGestureRecognizerSelRotationInDegrees = objc.RegisterName("rotationInDegrees")
+	_clsNSRotationGestureRecognizer                     = _objcClass("NSRotationGestureRecognizer")
+	_nSRotationGestureRecognizerSelRotation             = objc.RegisterName("rotation")
+	_nSRotationGestureRecognizerSelSetRotation          = objc.RegisterName("setRotation:")
+	_nSRotationGestureRecognizerSelRotationInDegrees    = objc.RegisterName("rotationInDegrees")
 	_nSRotationGestureRecognizerSelSetRotationInDegrees = objc.RegisterName("setRotationInDegrees:")
 )
 
@@ -49,4 +49,3 @@ func (o *NSRotationGestureRecognizer) RotationInDegrees() float64 {
 func (o *NSRotationGestureRecognizer) SetRotationInDegrees(rotationInDegrees float64) {
 	o.Ptr().Send(_nSRotationGestureRecognizerSelSetRotationInDegrees, rotationInDegrees)
 }
-

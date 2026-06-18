@@ -16,7 +16,9 @@ type TableViewDiffableDataSource struct {
 }
 
 // Unwrap returns the underlying [raw.NSTableViewDiffableDataSource].
-func (x *TableViewDiffableDataSource) Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID] { return x.inner }
+func (x *TableViewDiffableDataSource) Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -151,4 +153,3 @@ type TableViewDiffableDataSourceable interface {
 }
 
 var _ TableViewDiffableDataSourceable = (*TableViewDiffableDataSource)(nil)
-

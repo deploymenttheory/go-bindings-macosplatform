@@ -25,4 +25,3 @@ func MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID(id objc.ID) *MTRGene
 	purego.Track(o)
 	return o
 }
-

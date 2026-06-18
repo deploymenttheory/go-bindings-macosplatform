@@ -50,4 +50,3 @@ type PlugInViewControllerable interface {
 }
 
 var _ PlugInViewControllerable = (*PlugInViewController)(nil)
-

@@ -16,22 +16,22 @@ type INCallRecord struct {
 }
 
 var (
-	_clsINCallRecord = _objcClass("INCallRecord")
+	_clsINCallRecord                                                                                                                      = _objcClass("INCallRecord")
 	_iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked = objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked:")
-	_iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen = objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:")
-	_iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls = objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:numberOfCalls:")
-	_iNCallRecordSelIdentifier = objc.RegisterName("identifier")
-	_iNCallRecordSelDateCreated = objc.RegisterName("dateCreated")
-	_iNCallRecordSelCallRecordType = objc.RegisterName("callRecordType")
-	_iNCallRecordSelCallDuration = objc.RegisterName("callDuration")
-	_iNCallRecordSelUnseen = objc.RegisterName("unseen")
-	_iNCallRecordSelCallCapability = objc.RegisterName("callCapability")
-	_iNCallRecordSelNumberOfCalls = objc.RegisterName("numberOfCalls")
-	_iNCallRecordSelIsCallerIdBlocked = objc.RegisterName("isCallerIdBlocked")
-	_iNCallRecordSelParticipants = objc.RegisterName("participants")
-	_iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen = objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:")
-	_iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls = objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:numberOfCalls:")
-	_iNCallRecordSelCaller = objc.RegisterName("caller")
+	_iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen                                           = objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:")
+	_iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls                              = objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:numberOfCalls:")
+	_iNCallRecordSelIdentifier                                                                                                            = objc.RegisterName("identifier")
+	_iNCallRecordSelDateCreated                                                                                                           = objc.RegisterName("dateCreated")
+	_iNCallRecordSelCallRecordType                                                                                                        = objc.RegisterName("callRecordType")
+	_iNCallRecordSelCallDuration                                                                                                          = objc.RegisterName("callDuration")
+	_iNCallRecordSelUnseen                                                                                                                = objc.RegisterName("unseen")
+	_iNCallRecordSelCallCapability                                                                                                        = objc.RegisterName("callCapability")
+	_iNCallRecordSelNumberOfCalls                                                                                                         = objc.RegisterName("numberOfCalls")
+	_iNCallRecordSelIsCallerIdBlocked                                                                                                     = objc.RegisterName("isCallerIdBlocked")
+	_iNCallRecordSelParticipants                                                                                                          = objc.RegisterName("participants")
+	_iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen                                     = objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:")
+	_iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls                        = objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:numberOfCalls:")
+	_iNCallRecordSelCaller                                                                                                                = objc.RegisterName("caller")
 )
 
 func INCallRecordFromID(id objc.ID) *INCallRecord {
@@ -46,31 +46,41 @@ func INCallRecordFromID(id objc.ID) *INCallRecord {
 
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, participants *foundation.NSArray[*INPerson], numberOfCalls *foundation.NSNumber, isCallerIdBlocked *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), participants.Ptr(), numberOfCalls.Ptr(), isCallerIdBlocked.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier *foundation.NSString, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls, identifier.Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
 func (o *INCallRecord) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INCallRecord) DateCreated() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelDateCreated)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -81,13 +91,17 @@ func (o *INCallRecord) CallRecordType() INCallRecordType {
 
 func (o *INCallRecord) CallDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelCallDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *INCallRecord) Unseen() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelUnseen)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -98,40 +112,51 @@ func (o *INCallRecord) CallCapability() INCallCapability {
 
 func (o *INCallRecord) NumberOfCalls() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelNumberOfCalls)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *INCallRecord) IsCallerIdBlocked() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelIsCallerIdBlocked)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *INCallRecord) Participants() *foundation.NSArray[*INPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelParticipants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INPerson](_ret)
 }
 
 // Deprecated: Replaced by -initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen(identifier *foundation.NSString, dateCreated *foundation.NSDate, caller *INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen, identifier.Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
 // Deprecated: Replaced by -initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked
 func (o *INCallRecord) InitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier *foundation.NSString, dateCreated *foundation.NSDate, caller *INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelInitWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls, identifier.Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
 // Deprecated: since macOS 12.0.
 func (o *INCallRecord) Caller() *INPerson {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNCallRecordSelCaller)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPersonFromID(_ret)
 }
-

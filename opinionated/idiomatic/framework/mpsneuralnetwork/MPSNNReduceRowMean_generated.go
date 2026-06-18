@@ -102,7 +102,9 @@ func (x *NNReduceRowMean) WithDestinationImageAllocator(destinationImageAllocato
 
 func (x *NNReduceRowMean) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
-func (x *NNReduceRowMean) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceRowMean) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceRowMeanable is the interface implemented by [NNReduceRowMean], for mocking and DI.
 type NNReduceRowMeanable interface {
@@ -119,4 +121,3 @@ type NNReduceRowMeanable interface {
 }
 
 var _ NNReduceRowMeanable = (*NNReduceRowMean)(nil)
-

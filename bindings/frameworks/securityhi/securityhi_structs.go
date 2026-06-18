@@ -13,10 +13,9 @@ import (
 type OpaqueURLReference struct{}
 
 type URLCallbackInfo struct {
-	Version uint
-	UrlRef unsafe.Pointer
-	Property string
+	Version     uint
+	UrlRef      unsafe.Pointer
+	Property    string
 	CurrentSize uint
 	SystemEvent *hitoolbox.EventRecord
 }
-

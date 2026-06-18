@@ -120,4 +120,3 @@ type StructMemberable interface {
 }
 
 var _ StructMemberable = (*StructMember)(nil)
-

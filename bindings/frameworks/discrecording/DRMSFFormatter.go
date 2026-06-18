@@ -18,10 +18,10 @@ type DRMSFFormatter struct {
 }
 
 var (
-	_clsDRMSFFormatter = _objcClass("DRMSFFormatter")
+	_clsDRMSFFormatter               = _objcClass("DRMSFFormatter")
 	_dRMSFFormatterSelInitWithFormat = objc.RegisterName("initWithFormat:")
-	_dRMSFFormatterSelFormat = objc.RegisterName("format")
-	_dRMSFFormatterSelSetFormat = objc.RegisterName("setFormat:")
+	_dRMSFFormatterSelFormat         = objc.RegisterName("format")
+	_dRMSFFormatterSelSetFormat      = objc.RegisterName("setFormat:")
 )
 
 func DRMSFFormatterFromID(id objc.ID) *DRMSFFormatter {
@@ -43,7 +43,9 @@ func (o *DRMSFFormatter) InitWithFormat(format *foundation.NSString) objc.ID {
 // @method 	format @abstract	Returns the format string to the caller
 func (o *DRMSFFormatter) Format() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRMSFFormatterSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *DRMSFFormatter) Format() *foundation.NSString {
 func (o *DRMSFFormatter) SetFormat(format *foundation.NSString) {
 	o.Ptr().Send(_dRMSFFormatterSelSetFormat, format.Ptr())
 }
-

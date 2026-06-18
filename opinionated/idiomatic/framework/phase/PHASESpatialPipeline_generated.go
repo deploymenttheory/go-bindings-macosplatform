@@ -55,4 +55,3 @@ type SpatialPipelineable interface {
 }
 
 var _ SpatialPipelineable = (*SpatialPipeline)(nil)
-

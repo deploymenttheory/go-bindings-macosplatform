@@ -103,9 +103,13 @@ func (x *MTRClusterTemperatureControl) ReadAttributeClusterRevisionWithParams(pa
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterTemperatureControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterTemperatureControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterTemperatureControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterTemperatureControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterTemperatureControlable is the interface implemented by [MTRClusterTemperatureControl], for mocking and DI.
 type MTRClusterTemperatureControlable interface {
@@ -126,4 +130,3 @@ type MTRClusterTemperatureControlable interface {
 }
 
 var _ MTRClusterTemperatureControlable = (*MTRClusterTemperatureControl)(nil)
-

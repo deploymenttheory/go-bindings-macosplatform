@@ -22,19 +22,19 @@ type PHLivePhotoEditingContext struct {
 }
 
 var (
-	_clsPHLivePhotoEditingContext = _objcClass("PHLivePhotoEditingContext")
-	_pHLivePhotoEditingContextSelInitWithLivePhotoEditingInput = objc.RegisterName("initWithLivePhotoEditingInput:")
+	_clsPHLivePhotoEditingContext                                                                  = _objcClass("PHLivePhotoEditingContext")
+	_pHLivePhotoEditingContextSelInitWithLivePhotoEditingInput                                     = objc.RegisterName("initWithLivePhotoEditingInput:")
 	_pHLivePhotoEditingContextSelPrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler = objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:")
-	_pHLivePhotoEditingContextSelSaveLivePhotoToOutputOptionsCompletionHandler = objc.RegisterName("saveLivePhotoToOutput:options:completionHandler:")
-	_pHLivePhotoEditingContextSelCancel = objc.RegisterName("cancel")
-	_pHLivePhotoEditingContextSelFullSizeImage = objc.RegisterName("fullSizeImage")
-	_pHLivePhotoEditingContextSelDuration = objc.RegisterName("duration")
-	_pHLivePhotoEditingContextSelPhotoTime = objc.RegisterName("photoTime")
-	_pHLivePhotoEditingContextSelFrameProcessor = objc.RegisterName("frameProcessor")
-	_pHLivePhotoEditingContextSelSetFrameProcessor = objc.RegisterName("setFrameProcessor:")
-	_pHLivePhotoEditingContextSelAudioVolume = objc.RegisterName("audioVolume")
-	_pHLivePhotoEditingContextSelSetAudioVolume = objc.RegisterName("setAudioVolume:")
-	_pHLivePhotoEditingContextSelOrientation = objc.RegisterName("orientation")
+	_pHLivePhotoEditingContextSelSaveLivePhotoToOutputOptionsCompletionHandler                     = objc.RegisterName("saveLivePhotoToOutput:options:completionHandler:")
+	_pHLivePhotoEditingContextSelCancel                                                            = objc.RegisterName("cancel")
+	_pHLivePhotoEditingContextSelFullSizeImage                                                     = objc.RegisterName("fullSizeImage")
+	_pHLivePhotoEditingContextSelDuration                                                          = objc.RegisterName("duration")
+	_pHLivePhotoEditingContextSelPhotoTime                                                         = objc.RegisterName("photoTime")
+	_pHLivePhotoEditingContextSelFrameProcessor                                                    = objc.RegisterName("frameProcessor")
+	_pHLivePhotoEditingContextSelSetFrameProcessor                                                 = objc.RegisterName("setFrameProcessor:")
+	_pHLivePhotoEditingContextSelAudioVolume                                                       = objc.RegisterName("audioVolume")
+	_pHLivePhotoEditingContextSelSetAudioVolume                                                    = objc.RegisterName("setAudioVolume:")
+	_pHLivePhotoEditingContextSelOrientation                                                       = objc.RegisterName("orientation")
 )
 
 func PHLivePhotoEditingContextFromID(id objc.ID) *PHLivePhotoEditingContext {
@@ -50,7 +50,9 @@ func PHLivePhotoEditingContextFromID(id objc.ID) *PHLivePhotoEditingContext {
 // Initializer from the specified live photo input Return nil if the specified input is not for a live photo
 func (o *PHLivePhotoEditingContext) InitWithLivePhotoEditingInput(livePhotoInput *PHContentEditingInput) *PHLivePhotoEditingContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoEditingContextSelInitWithLivePhotoEditingInput, livePhotoInput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHLivePhotoEditingContextFromID(_ret)
 }
 
@@ -89,7 +91,9 @@ func (o *PHLivePhotoEditingContext) Cancel() {
 // The original full-size image from the input live photo
 func (o *PHLivePhotoEditingContext) FullSizeImage() *coreimage.CIImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHLivePhotoEditingContextSelFullSizeImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coreimage.CIImageFromID(_ret)
 }
 
@@ -131,4 +135,3 @@ func (o *PHLivePhotoEditingContext) Orientation() imageio.CGImagePropertyOrienta
 	_ret := objc.Send[imageio.CGImagePropertyOrientation](o.Ptr(), _pHLivePhotoEditingContextSelOrientation)
 	return _ret
 }
-

@@ -49,4 +49,3 @@ type ChangeHistoryEventable interface {
 }
 
 var _ ChangeHistoryEventable = (*ChangeHistoryEvent)(nil)
-

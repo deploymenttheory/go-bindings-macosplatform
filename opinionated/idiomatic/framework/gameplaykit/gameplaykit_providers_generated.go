@@ -62,4 +62,3 @@ type RandomSourceProvider interface {
 type RuleProvider interface {
 	asRule() *raw.GKRule
 }
-

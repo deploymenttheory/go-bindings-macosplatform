@@ -18,7 +18,9 @@ type MutableAudioMixInputParameters struct {
 }
 
 // Unwrap returns the underlying [raw.AVMutableAudioMixInputParameters].
-func (x *MutableAudioMixInputParameters) Unwrap() *raw.AVMutableAudioMixInputParameters { return x.inner }
+func (x *MutableAudioMixInputParameters) Unwrap() *raw.AVMutableAudioMixInputParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -75,7 +77,9 @@ func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor 
 	x.inner.SetAudioTapProcessor(audioTapProcessor)
 }
 
-func (x *MutableAudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters { return &x.inner.AVAudioMixInputParameters }
+func (x *MutableAudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters {
+	return &x.inner.AVAudioMixInputParameters
+}
 
 // MutableAudioMixInputParametersable is the interface implemented by [MutableAudioMixInputParameters], for mocking and DI.
 type MutableAudioMixInputParametersable interface {
@@ -90,4 +94,3 @@ type MutableAudioMixInputParametersable interface {
 }
 
 var _ MutableAudioMixInputParametersable = (*MutableAudioMixInputParameters)(nil)
-

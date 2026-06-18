@@ -79,4 +79,3 @@ type AlignmentFeedbackFilterable interface {
 }
 
 var _ AlignmentFeedbackFilterable = (*AlignmentFeedbackFilter)(nil)
-

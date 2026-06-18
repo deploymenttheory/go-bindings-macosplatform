@@ -14,8 +14,8 @@ import (
 
 var (
 	_accessibilityLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce         sync.Once
+	_failedSymbols    = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,15 +48,29 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("AXAnimatedImagesEnabled", func() { purego.RegisterLibFunc(&_fnAXAnimatedImagesEnabled, _accessibilityLib, "AXAnimatedImagesEnabled") })
-	_register("AXAssistiveAccessEnabled", func() { purego.RegisterLibFunc(&_fnAXAssistiveAccessEnabled, _accessibilityLib, "AXAssistiveAccessEnabled") })
+	_register("AXAnimatedImagesEnabled", func() {
+		purego.RegisterLibFunc(&_fnAXAnimatedImagesEnabled, _accessibilityLib, "AXAnimatedImagesEnabled")
+	})
+	_register("AXAssistiveAccessEnabled", func() {
+		purego.RegisterLibFunc(&_fnAXAssistiveAccessEnabled, _accessibilityLib, "AXAssistiveAccessEnabled")
+	})
 	_register("AXNameFromColor", func() { purego.RegisterLibFunc(&_fnAXNameFromColor, _accessibilityLib, "AXNameFromColor") })
 	_register("AXOpenSettingsFeature", func() { purego.RegisterLibFunc(&_fnAXOpenSettingsFeature, _accessibilityLib, "AXOpenSettingsFeature") })
-	_register("AXOpenSettingsFeatureIsSupported", func() { purego.RegisterLibFunc(&_fnAXOpenSettingsFeatureIsSupported, _accessibilityLib, "AXOpenSettingsFeatureIsSupported") })
-	_register("AXPrefersActionSliderAlternative", func() { purego.RegisterLibFunc(&_fnAXPrefersActionSliderAlternative, _accessibilityLib, "AXPrefersActionSliderAlternative") })
-	_register("AXPrefersHorizontalTextLayout", func() { purego.RegisterLibFunc(&_fnAXPrefersHorizontalTextLayout, _accessibilityLib, "AXPrefersHorizontalTextLayout") })
-	_register("AXPrefersNonBlinkingTextInsertionIndicator", func() { purego.RegisterLibFunc(&_fnAXPrefersNonBlinkingTextInsertionIndicator, _accessibilityLib, "AXPrefersNonBlinkingTextInsertionIndicator") })
-	_register("AXReduceHighlightingEffectsEnabled", func() { purego.RegisterLibFunc(&_fnAXReduceHighlightingEffectsEnabled, _accessibilityLib, "AXReduceHighlightingEffectsEnabled") })
+	_register("AXOpenSettingsFeatureIsSupported", func() {
+		purego.RegisterLibFunc(&_fnAXOpenSettingsFeatureIsSupported, _accessibilityLib, "AXOpenSettingsFeatureIsSupported")
+	})
+	_register("AXPrefersActionSliderAlternative", func() {
+		purego.RegisterLibFunc(&_fnAXPrefersActionSliderAlternative, _accessibilityLib, "AXPrefersActionSliderAlternative")
+	})
+	_register("AXPrefersHorizontalTextLayout", func() {
+		purego.RegisterLibFunc(&_fnAXPrefersHorizontalTextLayout, _accessibilityLib, "AXPrefersHorizontalTextLayout")
+	})
+	_register("AXPrefersNonBlinkingTextInsertionIndicator", func() {
+		purego.RegisterLibFunc(&_fnAXPrefersNonBlinkingTextInsertionIndicator, _accessibilityLib, "AXPrefersNonBlinkingTextInsertionIndicator")
+	})
+	_register("AXReduceHighlightingEffectsEnabled", func() {
+		purego.RegisterLibFunc(&_fnAXReduceHighlightingEffectsEnabled, _accessibilityLib, "AXReduceHighlightingEffectsEnabled")
+	})
 	_register("AXShowBordersEnabled", func() { purego.RegisterLibFunc(&_fnAXShowBordersEnabled, _accessibilityLib, "AXShowBordersEnabled") })
 }
 

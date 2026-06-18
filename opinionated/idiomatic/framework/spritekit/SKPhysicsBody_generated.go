@@ -480,4 +480,3 @@ type PhysicsBodyable interface {
 }
 
 var _ PhysicsBodyable = (*PhysicsBody)(nil)
-

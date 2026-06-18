@@ -16,10 +16,10 @@ type VNHorizonObservation struct {
 }
 
 var (
-	_clsVNHorizonObservation = _objcClass("VNHorizonObservation")
+	_clsVNHorizonObservation                             = _objcClass("VNHorizonObservation")
 	_vNHorizonObservationSelTransformForImageWidthHeight = objc.RegisterName("transformForImageWidth:height:")
-	_vNHorizonObservationSelTransform = objc.RegisterName("transform")
-	_vNHorizonObservationSelAngle = objc.RegisterName("angle")
+	_vNHorizonObservationSelTransform                    = objc.RegisterName("transform")
+	_vNHorizonObservationSelAngle                        = objc.RegisterName("angle")
 )
 
 func VNHorizonObservationFromID(id objc.ID) *VNHorizonObservation {
@@ -49,4 +49,3 @@ func (o *VNHorizonObservation) Angle() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNHorizonObservationSelAngle)
 	return _ret
 }
-

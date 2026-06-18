@@ -114,11 +114,17 @@ func (x *CNNBinaryFullyConnected) WithLabel(label string) *CNNBinaryFullyConnect
 	return x
 }
 
-func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *mpsneuralnetwork.MPSCNNBinaryConvolution { return &x.inner.MPSCNNBinaryConvolution }
+func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *mpsneuralnetwork.MPSCNNBinaryConvolution {
+	return &x.inner.MPSCNNBinaryConvolution
+}
 
-func (x *CNNBinaryFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel }
+func (x *CNNBinaryFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel
+}
 
-func (x *CNNBinaryFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.MPSKernel }
+func (x *CNNBinaryFullyConnected) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.MPSKernel
+}
 
 // CNNBinaryFullyConnectedable is the interface implemented by [CNNBinaryFullyConnected], for mocking and DI.
 type CNNBinaryFullyConnectedable interface {
@@ -136,4 +142,3 @@ type CNNBinaryFullyConnectedable interface {
 }
 
 var _ CNNBinaryFullyConnectedable = (*CNNBinaryFullyConnected)(nil)
-

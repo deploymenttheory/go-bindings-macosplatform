@@ -323,4 +323,3 @@ type BitmapImageRepable interface {
 }
 
 var _ BitmapImageRepable = (*BitmapImageRep)(nil)
-

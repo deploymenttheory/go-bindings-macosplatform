@@ -16,8 +16,8 @@ type CMAmbientPressureData struct {
 }
 
 var (
-	_clsCMAmbientPressureData = _objcClass("CMAmbientPressureData")
-	_cMAmbientPressureDataSelPressure = objc.RegisterName("pressure")
+	_clsCMAmbientPressureData            = _objcClass("CMAmbientPressureData")
+	_cMAmbientPressureDataSelPressure    = objc.RegisterName("pressure")
 	_cMAmbientPressureDataSelTemperature = objc.RegisterName("temperature")
 )
 
@@ -42,4 +42,3 @@ func (o *CMAmbientPressureData) Temperature() *foundation.NSMeasurement[*foundat
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitTemperature]](o.Ptr(), _cMAmbientPressureDataSelTemperature)
 	return _ret
 }
-

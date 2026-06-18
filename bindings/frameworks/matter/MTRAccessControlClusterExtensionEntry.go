@@ -25,4 +25,3 @@ func MTRAccessControlClusterExtensionEntryFromID(id objc.ID) *MTRAccessControlCl
 	purego.Track(o)
 	return o
 }
-

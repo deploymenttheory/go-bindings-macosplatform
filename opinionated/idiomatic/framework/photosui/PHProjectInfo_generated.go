@@ -102,4 +102,3 @@ type ProjectInfoable interface {
 }
 
 var _ ProjectInfoable = (*ProjectInfo)(nil)
-

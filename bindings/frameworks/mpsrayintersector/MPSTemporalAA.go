@@ -18,13 +18,13 @@ type MPSTemporalAA struct {
 }
 
 var (
-	_clsMPSTemporalAA = _objcClass("MPSTemporalAA")
-	_mPSTemporalAASelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSTemporalAASelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSTemporalAASelEncodeWithCoder = objc.RegisterName("encodeWithCoder:")
+	_clsMPSTemporalAA                                                                                                   = _objcClass("MPSTemporalAA")
+	_mPSTemporalAASelInitWithDevice                                                                                     = objc.RegisterName("initWithDevice:")
+	_mPSTemporalAASelInitWithCoderDevice                                                                                = objc.RegisterName("initWithCoder:device:")
+	_mPSTemporalAASelEncodeWithCoder                                                                                    = objc.RegisterName("encodeWithCoder:")
 	_mPSTemporalAASelEncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture = objc.RegisterName("encodeToCommandBuffer:sourceTexture:previousTexture:destinationTexture:motionVectorTexture:depthTexture:")
-	_mPSTemporalAASelBlendFactor = objc.RegisterName("blendFactor")
-	_mPSTemporalAASelSetBlendFactor = objc.RegisterName("setBlendFactor:")
+	_mPSTemporalAASelBlendFactor                                                                                        = objc.RegisterName("blendFactor")
+	_mPSTemporalAASelSetBlendFactor                                                                                     = objc.RegisterName("setBlendFactor:")
 )
 
 func MPSTemporalAAFromID(id objc.ID) *MPSTemporalAA {
@@ -39,13 +39,17 @@ func MPSTemporalAAFromID(id objc.ID) *MPSTemporalAA {
 
 func (o *MPSTemporalAA) InitWithDevice(device metal.MTLDevice) *MPSTemporalAA {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSTemporalAASelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporalAAFromID(_ret)
 }
 
 func (o *MPSTemporalAA) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSTemporalAA {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSTemporalAASelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSTemporalAAFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *MPSTemporalAA) BlendFactor() float32 {
 func (o *MPSTemporalAA) SetBlendFactor(blendFactor float32) {
 	o.Ptr().Send(_mPSTemporalAASelSetBlendFactor, blendFactor)
 }
-

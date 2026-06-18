@@ -17,9 +17,9 @@ type AVMutableTimedMetadataGroup struct {
 }
 
 var (
-	_clsAVMutableTimedMetadataGroup = _objcClass("AVMutableTimedMetadataGroup")
+	_clsAVMutableTimedMetadataGroup             = _objcClass("AVMutableTimedMetadataGroup")
 	_aVMutableTimedMetadataGroupSelSetTimeRange = objc.RegisterName("setTimeRange:")
-	_aVMutableTimedMetadataGroupSelSetItems = objc.RegisterName("setItems:")
+	_aVMutableTimedMetadataGroupSelSetItems     = objc.RegisterName("setItems:")
 )
 
 func AVMutableTimedMetadataGroupFromID(id objc.ID) *AVMutableTimedMetadataGroup {
@@ -39,4 +39,3 @@ func (o *AVMutableTimedMetadataGroup) SetTimeRange(timeRange coremedia.CMTimeRan
 func (o *AVMutableTimedMetadataGroup) SetItems(items *foundation.NSArray[*AVMetadataItem]) {
 	o.Ptr().Send(_aVMutableTimedMetadataGroupSelSetItems, items.Ptr())
 }
-

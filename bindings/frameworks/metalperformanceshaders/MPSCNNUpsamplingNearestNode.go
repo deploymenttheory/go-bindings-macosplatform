@@ -18,11 +18,11 @@ type MPSCNNUpsamplingNearestNode struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingNearestNode = _objcClass("MPSCNNUpsamplingNearestNode")
+	_clsMPSCNNUpsamplingNearestNode                                                     = _objcClass("MPSCNNUpsamplingNearestNode")
 	_mPSCNNUpsamplingNearestNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:")
 	_mPSCNNUpsamplingNearestNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("initWithSource:integerScaleFactorX:integerScaleFactorY:")
-	_mPSCNNUpsamplingNearestNodeSelScaleFactorX = objc.RegisterName("scaleFactorX")
-	_mPSCNNUpsamplingNearestNodeSelScaleFactorY = objc.RegisterName("scaleFactorY")
+	_mPSCNNUpsamplingNearestNodeSelScaleFactorX                                         = objc.RegisterName("scaleFactorX")
+	_mPSCNNUpsamplingNearestNodeSelScaleFactorY                                         = objc.RegisterName("scaleFactorY")
 )
 
 func MPSCNNUpsamplingNearestNodeFromID(id objc.ID) *MPSCNNUpsamplingNearestNode {
@@ -38,14 +38,18 @@ func MPSCNNUpsamplingNearestNodeFromID(id objc.ID) *MPSCNNUpsamplingNearestNode 
 // @abstract Convenience initializer for an autoreleased MPSCNNUpsamplingNearest nodes @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @return     A new MPSNNFilter node for a MPSCNNUpsamplingNearest kernel.
 func MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *mpsneuralnetwork.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingNearestNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNUpsamplingNearestNode), _mPSCNNUpsamplingNearestNodeSelNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingNearestNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNUpsamplingNearest kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      integerScaleFactorX     The upsampling factor for the x dimension. @param      integerScaleFactorY     The upsampling factor for the y dimension. @return     A new MPSNNFilter node for a MPSCNNUpsamplingNearest kernel.
 func (o *MPSCNNUpsamplingNearestNode) InitWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode *mpsneuralnetwork.MPSNNImageNode, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingNearestNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingNearestNodeSelInitWithSourceIntegerScaleFactorXIntegerScaleFactorY, sourceNode.Ptr(), integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingNearestNodeFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MPSCNNUpsamplingNearestNode) ScaleFactorY() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _mPSCNNUpsamplingNearestNodeSelScaleFactorY)
 	return _ret
 }
-

@@ -77,4 +77,3 @@ type MTRCommissionableBrowserResultable interface {
 }
 
 var _ MTRCommissionableBrowserResultable = (*MTRCommissionableBrowserResult)(nil)
-

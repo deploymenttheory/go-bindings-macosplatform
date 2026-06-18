@@ -18,20 +18,20 @@ type MDLVertexAttribute struct {
 }
 
 var (
-	_clsMDLVertexAttribute = _objcClass("MDLVertexAttribute")
+	_clsMDLVertexAttribute                                    = _objcClass("MDLVertexAttribute")
 	_mDLVertexAttributeSelInitWithNameFormatOffsetBufferIndex = objc.RegisterName("initWithName:format:offset:bufferIndex:")
-	_mDLVertexAttributeSelName = objc.RegisterName("name")
-	_mDLVertexAttributeSelSetName = objc.RegisterName("setName:")
-	_mDLVertexAttributeSelFormat = objc.RegisterName("format")
-	_mDLVertexAttributeSelSetFormat = objc.RegisterName("setFormat:")
-	_mDLVertexAttributeSelOffset = objc.RegisterName("offset")
-	_mDLVertexAttributeSelSetOffset = objc.RegisterName("setOffset:")
-	_mDLVertexAttributeSelBufferIndex = objc.RegisterName("bufferIndex")
-	_mDLVertexAttributeSelSetBufferIndex = objc.RegisterName("setBufferIndex:")
-	_mDLVertexAttributeSelTime = objc.RegisterName("time")
-	_mDLVertexAttributeSelSetTime = objc.RegisterName("setTime:")
-	_mDLVertexAttributeSelInitializationValue = objc.RegisterName("initializationValue")
-	_mDLVertexAttributeSelSetInitializationValue = objc.RegisterName("setInitializationValue:")
+	_mDLVertexAttributeSelName                                = objc.RegisterName("name")
+	_mDLVertexAttributeSelSetName                             = objc.RegisterName("setName:")
+	_mDLVertexAttributeSelFormat                              = objc.RegisterName("format")
+	_mDLVertexAttributeSelSetFormat                           = objc.RegisterName("setFormat:")
+	_mDLVertexAttributeSelOffset                              = objc.RegisterName("offset")
+	_mDLVertexAttributeSelSetOffset                           = objc.RegisterName("setOffset:")
+	_mDLVertexAttributeSelBufferIndex                         = objc.RegisterName("bufferIndex")
+	_mDLVertexAttributeSelSetBufferIndex                      = objc.RegisterName("setBufferIndex:")
+	_mDLVertexAttributeSelTime                                = objc.RegisterName("time")
+	_mDLVertexAttributeSelSetTime                             = objc.RegisterName("setTime:")
+	_mDLVertexAttributeSelInitializationValue                 = objc.RegisterName("initializationValue")
+	_mDLVertexAttributeSelSetInitializationValue              = objc.RegisterName("setInitializationValue:")
 )
 
 func MDLVertexAttributeFromID(id objc.ID) *MDLVertexAttribute {
@@ -47,14 +47,18 @@ func MDLVertexAttributeFromID(id objc.ID) *MDLVertexAttribute {
 // @method initWithName:format:offset:bufferIndex @abstract Initialize attribute object with all properties
 func (o *MDLVertexAttribute) InitWithNameFormatOffsetBufferIndex(name *foundation.NSString, format MDLVertexFormat, offset uint, bufferIndex uint) *MDLVertexAttribute {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexAttributeSelInitWithNameFormatOffsetBufferIndex, name.Ptr(), format, offset, bufferIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLVertexAttributeFromID(_ret)
 }
 
 // @property name @abstract Identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
 func (o *MDLVertexAttribute) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLVertexAttributeSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -111,4 +115,3 @@ func (o *MDLVertexAttribute) InitializationValue() unsafe.Pointer {
 func (o *MDLVertexAttribute) SetInitializationValue(initializationValue unsafe.Pointer) {
 	o.Ptr().Send(_mDLVertexAttributeSelSetInitializationValue, initializationValue)
 }
-

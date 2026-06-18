@@ -88,7 +88,9 @@ func (x *CNNNeuronHardSigmoid) WithDestinationImageAllocator(destinationImageAll
 
 func (x *CNNNeuronHardSigmoid) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronHardSigmoid) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronHardSigmoid) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronHardSigmoidable is the interface implemented by [CNNNeuronHardSigmoid], for mocking and DI.
 type CNNNeuronHardSigmoidable interface {
@@ -104,4 +106,3 @@ type CNNNeuronHardSigmoidable interface {
 }
 
 var _ CNNNeuronHardSigmoidable = (*CNNNeuronHardSigmoid)(nil)
-

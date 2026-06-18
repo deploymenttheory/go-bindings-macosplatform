@@ -17,7 +17,7 @@ type MPSCNNNeuronPReLU struct {
 }
 
 var (
-	_clsMPSCNNNeuronPReLU = _objcClass("MPSCNNNeuronPReLU")
+	_clsMPSCNNNeuronPReLU                     = _objcClass("MPSCNNNeuronPReLU")
 	_mPSCNNNeuronPReLUSelInitWithDeviceACount = objc.RegisterName("initWithDevice:a:count:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNNeuronPReLUFromID(id objc.ID) *MPSCNNNeuronPReLU {
 // @abstract  Initialize the PReLU neuron filter @param     device           The device the filter will run on @param     a                Array of floats containing per channel value of PReLu parameter @param     count            Number of float values in array a. This usually corresponds to number of output channels in convolution layer @return    A valid MPSCNNNeuronPReLU object or nil, if failure.
 func (o *MPSCNNNeuronPReLU) InitWithDeviceACount(device metal.MTLDevice, a *float32, count uint) *MPSCNNNeuronPReLU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronPReLUSelInitWithDeviceACount, device, a, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronPReLUFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type MDLPathAssetResolver struct {
 }
 
 var (
-	_clsMDLPathAssetResolver = _objcClass("MDLPathAssetResolver")
+	_clsMDLPathAssetResolver             = _objcClass("MDLPathAssetResolver")
 	_mDLPathAssetResolverSelInitWithPath = objc.RegisterName("initWithPath:")
-	_mDLPathAssetResolverSelPath = objc.RegisterName("path")
-	_mDLPathAssetResolverSelSetPath = objc.RegisterName("setPath:")
+	_mDLPathAssetResolverSelPath         = objc.RegisterName("path")
+	_mDLPathAssetResolverSelSetPath      = objc.RegisterName("setPath:")
 )
 
 func MDLPathAssetResolverFromID(id objc.ID) *MDLPathAssetResolver {
@@ -34,17 +34,20 @@ func MDLPathAssetResolverFromID(id objc.ID) *MDLPathAssetResolver {
 
 func (o *MDLPathAssetResolver) InitWithPath(path *foundation.NSString) *MDLPathAssetResolver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPathAssetResolverSelInitWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLPathAssetResolverFromID(_ret)
 }
 
 func (o *MDLPathAssetResolver) Path() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPathAssetResolverSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MDLPathAssetResolver) SetPath(path *foundation.NSString) {
 	o.Ptr().Send(_mDLPathAssetResolverSelSetPath, path.Ptr())
 }
-

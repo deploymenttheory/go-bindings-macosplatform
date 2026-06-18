@@ -96,4 +96,3 @@ type WKWebExtensionTabConfigurationable interface {
 }
 
 var _ WKWebExtensionTabConfigurationable = (*WKWebExtensionTabConfiguration)(nil)
-

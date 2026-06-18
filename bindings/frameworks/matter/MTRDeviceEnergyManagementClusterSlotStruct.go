@@ -16,42 +16,42 @@ type MTRDeviceEnergyManagementClusterSlotStruct struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementClusterSlotStruct = _objcClass("MTRDeviceEnergyManagementClusterSlotStruct")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMinDuration = objc.RegisterName("minDuration")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinDuration = objc.RegisterName("setMinDuration:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMaxDuration = objc.RegisterName("maxDuration")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxDuration = objc.RegisterName("setMaxDuration:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelDefaultDuration = objc.RegisterName("defaultDuration")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetDefaultDuration = objc.RegisterName("setDefaultDuration:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelElapsedSlotTime = objc.RegisterName("elapsedSlotTime")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetElapsedSlotTime = objc.RegisterName("setElapsedSlotTime:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelRemainingSlotTime = objc.RegisterName("remainingSlotTime")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetRemainingSlotTime = objc.RegisterName("setRemainingSlotTime:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSlotIsPausable = objc.RegisterName("slotIsPausable")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetSlotIsPausable = objc.RegisterName("setSlotIsPausable:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMinPauseDuration = objc.RegisterName("minPauseDuration")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPauseDuration = objc.RegisterName("setMinPauseDuration:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPauseDuration = objc.RegisterName("maxPauseDuration")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPauseDuration = objc.RegisterName("setMaxPauseDuration:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelManufacturerESAState = objc.RegisterName("manufacturerESAState")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetManufacturerESAState = objc.RegisterName("setManufacturerESAState:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelNominalPower = objc.RegisterName("nominalPower")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetNominalPower = objc.RegisterName("setNominalPower:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMinPower = objc.RegisterName("minPower")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPower = objc.RegisterName("setMinPower:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPower = objc.RegisterName("maxPower")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPower = objc.RegisterName("setMaxPower:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelNominalEnergy = objc.RegisterName("nominalEnergy")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetNominalEnergy = objc.RegisterName("setNominalEnergy:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelCosts = objc.RegisterName("costs")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetCosts = objc.RegisterName("setCosts:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMinPowerAdjustment = objc.RegisterName("minPowerAdjustment")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPowerAdjustment = objc.RegisterName("setMinPowerAdjustment:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPowerAdjustment = objc.RegisterName("maxPowerAdjustment")
-	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPowerAdjustment = objc.RegisterName("setMaxPowerAdjustment:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMinDurationAdjustment = objc.RegisterName("minDurationAdjustment")
+	_clsMTRDeviceEnergyManagementClusterSlotStruct                         = _objcClass("MTRDeviceEnergyManagementClusterSlotStruct")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMinDuration              = objc.RegisterName("minDuration")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinDuration           = objc.RegisterName("setMinDuration:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMaxDuration              = objc.RegisterName("maxDuration")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxDuration           = objc.RegisterName("setMaxDuration:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelDefaultDuration          = objc.RegisterName("defaultDuration")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetDefaultDuration       = objc.RegisterName("setDefaultDuration:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelElapsedSlotTime          = objc.RegisterName("elapsedSlotTime")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetElapsedSlotTime       = objc.RegisterName("setElapsedSlotTime:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelRemainingSlotTime        = objc.RegisterName("remainingSlotTime")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetRemainingSlotTime     = objc.RegisterName("setRemainingSlotTime:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSlotIsPausable           = objc.RegisterName("slotIsPausable")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetSlotIsPausable        = objc.RegisterName("setSlotIsPausable:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMinPauseDuration         = objc.RegisterName("minPauseDuration")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPauseDuration      = objc.RegisterName("setMinPauseDuration:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPauseDuration         = objc.RegisterName("maxPauseDuration")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPauseDuration      = objc.RegisterName("setMaxPauseDuration:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelManufacturerESAState     = objc.RegisterName("manufacturerESAState")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetManufacturerESAState  = objc.RegisterName("setManufacturerESAState:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelNominalPower             = objc.RegisterName("nominalPower")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetNominalPower          = objc.RegisterName("setNominalPower:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMinPower                 = objc.RegisterName("minPower")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPower              = objc.RegisterName("setMinPower:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPower                 = objc.RegisterName("maxPower")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPower              = objc.RegisterName("setMaxPower:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelNominalEnergy            = objc.RegisterName("nominalEnergy")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetNominalEnergy         = objc.RegisterName("setNominalEnergy:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelCosts                    = objc.RegisterName("costs")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetCosts                 = objc.RegisterName("setCosts:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMinPowerAdjustment       = objc.RegisterName("minPowerAdjustment")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinPowerAdjustment    = objc.RegisterName("setMinPowerAdjustment:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMaxPowerAdjustment       = objc.RegisterName("maxPowerAdjustment")
+	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxPowerAdjustment    = objc.RegisterName("setMaxPowerAdjustment:")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMinDurationAdjustment    = objc.RegisterName("minDurationAdjustment")
 	_mTRDeviceEnergyManagementClusterSlotStructSelSetMinDurationAdjustment = objc.RegisterName("setMinDurationAdjustment:")
-	_mTRDeviceEnergyManagementClusterSlotStructSelMaxDurationAdjustment = objc.RegisterName("maxDurationAdjustment")
+	_mTRDeviceEnergyManagementClusterSlotStructSelMaxDurationAdjustment    = objc.RegisterName("maxDurationAdjustment")
 	_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxDurationAdjustment = objc.RegisterName("setMaxDurationAdjustment:")
 )
 
@@ -67,7 +67,9 @@ func MTRDeviceEnergyManagementClusterSlotStructFromID(id objc.ID) *MTRDeviceEner
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMinDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +79,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDuration(minDuration 
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMaxDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +91,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDuration(maxDuration 
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelDefaultDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,7 +103,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetDefaultDuration(defaultD
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelElapsedSlotTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,7 +115,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetElapsedSlotTime(elapsedS
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelRemainingSlotTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -117,7 +127,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetRemainingSlotTime(remain
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelSlotIsPausable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -127,7 +139,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetSlotIsPausable(slotIsPau
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMinPauseDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -137,7 +151,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPauseDuration(minPaus
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMaxPauseDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -147,7 +163,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPauseDuration(maxPaus
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelManufacturerESAState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -157,7 +175,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetManufacturerESAState(man
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelNominalPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -167,7 +187,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetNominalPower(nominalPowe
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMinPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -177,7 +199,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPower(minPower *found
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMaxPower)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -187,7 +211,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPower(maxPower *found
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelNominalEnergy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -206,7 +232,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs *foundation.
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMinPowerAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -216,7 +244,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMinPowerAdjustment(minPo
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMaxPowerAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -226,7 +256,9 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxPowerAdjustment(maxPo
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMinDurationAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -236,11 +268,12 @@ func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMinDurationAdjustment(mi
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementClusterSlotStructSelMaxDurationAdjustment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementClusterSlotStruct) SetMaxDurationAdjustment(maxDurationAdjustment *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementClusterSlotStructSelSetMaxDurationAdjustment, maxDurationAdjustment.Ptr())
 }
-

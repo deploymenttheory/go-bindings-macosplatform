@@ -93,4 +93,3 @@ type PointerTypeable interface {
 }
 
 var _ PointerTypeable = (*PointerType)(nil)
-

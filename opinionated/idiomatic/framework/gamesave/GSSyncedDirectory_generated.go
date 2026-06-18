@@ -85,4 +85,3 @@ type SyncedDirectoryable interface {
 }
 
 var _ SyncedDirectoryable = (*SyncedDirectory)(nil)
-

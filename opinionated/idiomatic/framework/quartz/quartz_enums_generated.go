@@ -13,7 +13,7 @@ type IKImageBrowserCellState int64
 const (
 	IKImageStateNoImage IKImageBrowserCellState = 0
 	IKImageStateInvalid IKImageBrowserCellState = 1
-	IKImageStateReady IKImageBrowserCellState = 2
+	IKImageStateReady   IKImageBrowserCellState = 2
 )
 
 func (e IKImageBrowserCellState) String() string {
@@ -32,9 +32,9 @@ func (e IKImageBrowserCellState) String() string {
 type QCPlugInExecutionMode int64
 
 const (
-	KQCPlugInExecutionModeProvider QCPlugInExecutionMode = 1
+	KQCPlugInExecutionModeProvider  QCPlugInExecutionMode = 1
 	KQCPlugInExecutionModeProcessor QCPlugInExecutionMode = 2
-	KQCPlugInExecutionModeConsumer QCPlugInExecutionMode = 3
+	KQCPlugInExecutionModeConsumer  QCPlugInExecutionMode = 3
 )
 
 func (e QCPlugInExecutionMode) String() string {
@@ -53,8 +53,8 @@ func (e QCPlugInExecutionMode) String() string {
 type QCPlugInTimeMode int64
 
 const (
-	KQCPlugInTimeModeNone QCPlugInTimeMode = 0
-	KQCPlugInTimeModeIdle QCPlugInTimeMode = 1
+	KQCPlugInTimeModeNone     QCPlugInTimeMode = 0
+	KQCPlugInTimeModeIdle     QCPlugInTimeMode = 1
 	KQCPlugInTimeModeTimeBase QCPlugInTimeMode = 2
 )
 
@@ -70,4 +70,3 @@ func (e QCPlugInTimeMode) String() string {
 		return fmt.Sprintf("QCPlugInTimeMode(%d)", int64(e))
 	}
 }
-

@@ -18,19 +18,19 @@ type CMIOExtensionProvider struct {
 }
 
 var (
-	_clsCMIOExtensionProvider = _objcClass("CMIOExtensionProvider")
-	_cMIOExtensionProviderSelStartServiceWithProvider = objc.RegisterName("startServiceWithProvider:")
-	_cMIOExtensionProviderSelStopServiceWithProvider = objc.RegisterName("stopServiceWithProvider:")
+	_clsCMIOExtensionProvider                              = _objcClass("CMIOExtensionProvider")
+	_cMIOExtensionProviderSelStartServiceWithProvider      = objc.RegisterName("startServiceWithProvider:")
+	_cMIOExtensionProviderSelStopServiceWithProvider       = objc.RegisterName("stopServiceWithProvider:")
 	_cMIOExtensionProviderSelProviderWithSourceClientQueue = objc.RegisterName("providerWithSource:clientQueue:")
-	_cMIOExtensionProviderSelInitWithSourceClientQueue = objc.RegisterName("initWithSource:clientQueue:")
-	_cMIOExtensionProviderSelAddDeviceError = objc.RegisterName("addDevice:error:")
-	_cMIOExtensionProviderSelRemoveDeviceError = objc.RegisterName("removeDevice:error:")
-	_cMIOExtensionProviderSelNotifyPropertiesChanged = objc.RegisterName("notifyPropertiesChanged:")
-	_cMIOExtensionProviderSelSource = objc.RegisterName("source")
-	_cMIOExtensionProviderSelClientQueue = objc.RegisterName("clientQueue")
-	_cMIOExtensionProviderSelConnectedClients = objc.RegisterName("connectedClients")
-	_cMIOExtensionProviderSelDevices = objc.RegisterName("devices")
-	_cMIOExtensionProviderSelIgnoreSIGTERM = objc.RegisterName("ignoreSIGTERM")
+	_cMIOExtensionProviderSelInitWithSourceClientQueue     = objc.RegisterName("initWithSource:clientQueue:")
+	_cMIOExtensionProviderSelAddDeviceError                = objc.RegisterName("addDevice:error:")
+	_cMIOExtensionProviderSelRemoveDeviceError             = objc.RegisterName("removeDevice:error:")
+	_cMIOExtensionProviderSelNotifyPropertiesChanged       = objc.RegisterName("notifyPropertiesChanged:")
+	_cMIOExtensionProviderSelSource                        = objc.RegisterName("source")
+	_cMIOExtensionProviderSelClientQueue                   = objc.RegisterName("clientQueue")
+	_cMIOExtensionProviderSelConnectedClients              = objc.RegisterName("connectedClients")
+	_cMIOExtensionProviderSelDevices                       = objc.RegisterName("devices")
+	_cMIOExtensionProviderSelIgnoreSIGTERM                 = objc.RegisterName("ignoreSIGTERM")
 )
 
 func CMIOExtensionProviderFromID(id objc.ID) *CMIOExtensionProvider {
@@ -56,14 +56,18 @@ func CMIOExtensionProviderStopServiceWithProvider(provider *CMIOExtensionProvide
 // @method providerWithSource:clientQueue: @abstract Returns a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
 func CMIOExtensionProviderProviderWithSourceClientQueue(source CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *CMIOExtensionProvider {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionProvider), _cMIOExtensionProviderSelProviderWithSourceClientQueue, source, clientQueue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionProviderFromID(_ret)
 }
 
 // @method initWithSource:clientQueue: @abstract Initialize a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
 func (o *CMIOExtensionProvider) InitWithSourceClientQueue(source CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *CMIOExtensionProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderSelInitWithSourceClientQueue, source, clientQueue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionProviderFromID(_ret)
 }
 
@@ -101,21 +105,27 @@ func (o *CMIOExtensionProvider) Source() CMIOExtensionProviderSource {
 // @property clientQueue @abstract The dispatch queue on which source methods from the provider/device/stream will be called.
 func (o *CMIOExtensionProvider) ClientQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderSelClientQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
 // @property connectedClients @abstract The array of connected clients. @discussion This property is key-value observable.
 func (o *CMIOExtensionProvider) ConnectedClients() *foundation.NSArray[*CMIOExtensionClient] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderSelConnectedClients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CMIOExtensionClient](_ret)
 }
 
 // @property devices @abstract The devices array of the provider. @discussion This property is not key-value observable.
 func (o *CMIOExtensionProvider) Devices() *foundation.NSArray[*CMIOExtensionDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionProviderSelDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CMIOExtensionDevice](_ret)
 }
 
@@ -123,4 +133,3 @@ func (o *CMIOExtensionProvider) Devices() *foundation.NSArray[*CMIOExtensionDevi
 func CMIOExtensionProviderIgnoreSIGTERM() {
 	objc.ID(_clsCMIOExtensionProvider).Send(_cMIOExtensionProviderSelIgnoreSIGTERM)
 }
-

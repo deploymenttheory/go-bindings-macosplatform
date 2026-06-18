@@ -16,14 +16,14 @@ type NSTextTab struct {
 }
 
 var (
-	_clsNSTextTab = _objcClass("NSTextTab")
-	_nSTextTabSelColumnTerminatorsForLocale = objc.RegisterName("columnTerminatorsForLocale:")
-	_nSTextTabSelLocation = objc.RegisterName("location")
-	_nSTextTabSelOptions = objc.RegisterName("options")
+	_clsNSTextTab                                     = _objcClass("NSTextTab")
+	_nSTextTabSelColumnTerminatorsForLocale           = objc.RegisterName("columnTerminatorsForLocale:")
+	_nSTextTabSelLocation                             = objc.RegisterName("location")
+	_nSTextTabSelOptions                              = objc.RegisterName("options")
 	_nSTextTabSelInitWithTextAlignmentLocationOptions = objc.RegisterName("initWithTextAlignment:location:options:")
-	_nSTextTabSelAlignment = objc.RegisterName("alignment")
-	_nSTextTabSelInitWithTypeLocation = objc.RegisterName("initWithType:location:")
-	_nSTextTabSelTabStopType = objc.RegisterName("tabStopType")
+	_nSTextTabSelAlignment                            = objc.RegisterName("alignment")
+	_nSTextTabSelInitWithTypeLocation                 = objc.RegisterName("initWithType:location:")
+	_nSTextTabSelTabStopType                          = objc.RegisterName("tabStopType")
 )
 
 func NSTextTabFromID(id objc.ID) *NSTextTab {
@@ -38,7 +38,9 @@ func NSTextTabFromID(id objc.ID) *NSTextTab {
 
 func NSTextTabColumnTerminatorsForLocale(aLocale *foundation.NSLocale) *foundation.NSCharacterSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTextTab), _nSTextTabSelColumnTerminatorsForLocale, aLocale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSCharacterSetFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *NSTextTab) Options() *foundation.NSDictionary[*foundation.NSString, obj
 
 func (o *NSTextTab) InitWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTextAlignmentLocationOptions, alignment, loc, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextTabFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *NSTextTab) Alignment() NSTextAlignment {
 
 func (o *NSTextTab) InitWithTypeLocation(type_ NSTextTabType, loc float64) *NSTextTab {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTabSelInitWithTypeLocation, type_, loc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextTabFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *NSTextTab) TabStopType() NSTextTabType {
 	_ret := objc.Send[NSTextTabType](o.Ptr(), _nSTextTabSelTabStopType)
 	return _ret
 }
-

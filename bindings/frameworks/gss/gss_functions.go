@@ -10,88 +10,88 @@ import (
 )
 
 var (
-	_fnGSSCreateCredentialFromUUID func(unsafe.Pointer) unsafe.Pointer
-	_fnGSSCreateError func(*GssOIDDescStruct, uint32, uint32) unsafe.Pointer
-	_fnGSSCreateName func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) unsafe.Pointer
-	_fnGSSCredentialCopyName func(unsafe.Pointer) unsafe.Pointer
-	_fnGSSCredentialCopyUUID func(unsafe.Pointer) unsafe.Pointer
-	_fnGSSCredentialGetLifetime func(unsafe.Pointer) uint32
-	_fnGSSNameCreateDisplayString func(unsafe.Pointer) unsafe.Pointer
-	_gss_aapl_change_password func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_aapl_initial_cred func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_accept_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
-	_gss_acquire_cred func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
-	_gss_acquire_cred_with_password func(*uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
-	_gss_add_buffer_set_member func(*uint32, unsafe.Pointer, **GssBufferSetDescStruct) uint32
-	_gss_add_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, uint32, uint32, unsafe.Pointer, **GssOIDSetDescStruct, *uint32, *uint32) uint32
-	_gss_add_oid_set_member func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_canonicalize_name func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_compare_name func(*uint32, unsafe.Pointer, unsafe.Pointer, *int32) uint32
-	_gss_context_time func(*uint32, unsafe.Pointer, *uint32) uint32
-	_gss_create_empty_buffer_set func(*uint32, **GssBufferSetDescStruct) uint32
-	_gss_create_empty_oid_set func(*uint32, **GssOIDSetDescStruct) uint32
-	_gss_decapsulate_token func(*GssBufferDescStruct, *GssOIDDescStruct, *GssBufferDescStruct) uint32
-	_gss_delete_sec_context func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_destroy_cred func(*uint32, unsafe.Pointer) uint32
-	_gss_display_mech_attr func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
-	_gss_display_name func(*uint32, unsafe.Pointer, *GssBufferDescStruct, **GssOIDDescStruct) uint32
-	_gss_display_status func(*uint32, uint32, int, unsafe.Pointer, *uint32, *GssBufferDescStruct) uint32
-	_gss_duplicate_name func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_duplicate_oid func(*uint32, *GssOIDDescStruct, **GssOIDDescStruct) uint32
-	_gss_encapsulate_token func(*GssBufferDescStruct, *GssOIDDescStruct, *GssBufferDescStruct) uint32
-	_gss_export_cred func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_export_name func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_export_sec_context func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_get_mic func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
-	_gss_import_cred func(*uint32, *GssBufferDescStruct, unsafe.Pointer) uint32
-	_gss_import_name func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) uint32
-	_gss_import_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_indicate_mechs func(*uint32, **GssOIDSetDescStruct) uint32
-	_gss_indicate_mechs_by_attrs func(*uint32, *GssOIDSetDescStruct, *GssOIDSetDescStruct, *GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_init_sec_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32) uint32
-	_gss_inquire_attrs_for_mech func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_inquire_context func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **GssOIDDescStruct, *uint32, *int32, *int32) uint32
-	_gss_inquire_cred func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **GssOIDSetDescStruct) uint32
-	_gss_inquire_cred_by_mech func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, *uint32, *int) uint32
-	_gss_inquire_cred_by_oid func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
-	_gss_inquire_mech_for_saslname func(*uint32, unsafe.Pointer, **GssOIDDescStruct) uint32
-	_gss_inquire_mechs_for_name func(*uint32, unsafe.Pointer, **GssOIDSetDescStruct) uint32
-	_gss_inquire_name func(*uint32, unsafe.Pointer, *int32, **GssOIDDescStruct, **GssBufferSetDescStruct) uint32
-	_gss_inquire_names_for_mech func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
-	_gss_inquire_saslname_for_mech func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
-	_gss_inquire_sec_context_by_oid func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
-	_gss_iter_creds func(*uint32, uint32, *GssOIDDescStruct, objc.Block) uint32
-	_gss_iter_creds_f func(*uint32, uint32, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_krb5_ccache_name func(*uint32, string, string) uint32
-	_gss_krb5_copy_ccache func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_krb5_export_lucid_sec_context func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32
-	_gss_krb5_free_lucid_sec_context func(*uint32, unsafe.Pointer) uint32
-	_gss_krb5_set_allowable_enctypes func(*uint32, unsafe.Pointer, uint32, *int32) uint32
-	_gss_oid_equal func(*GssOIDDescStruct, *GssOIDDescStruct) int
-	_gss_oid_to_str func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct) uint32
-	_gss_process_context_token func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_pseudo_random func(*uint32, unsafe.Pointer, int, unsafe.Pointer, int, *GssBufferDescStruct) uint32
-	_gss_release_buffer func(*uint32, *GssBufferDescStruct) uint32
-	_gss_release_buffer_set func(*uint32, **GssBufferSetDescStruct) uint32
-	_gss_release_cred func(*uint32, unsafe.Pointer) uint32
-	_gss_release_name func(*uint32, unsafe.Pointer) uint32
-	_gss_release_oid func(*uint32, **GssOIDDescStruct) uint32
-	_gss_release_oid_set func(*uint32, **GssOIDSetDescStruct) uint32
-	_gss_seal func(*uint32, unsafe.Pointer, int, int, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
-	_gss_set_cred_option func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_set_sec_context_option func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
-	_gss_sign func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct, *GssBufferDescStruct) uint32
-	_gss_test_oid_set_member func(*uint32, *GssOIDDescStruct, unsafe.Pointer, *int32) uint32
-	_gss_unseal func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *int32) uint32
-	_gss_unwrap func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssBufferDescStruct, *int32, *uint32) uint32
-	_gss_userok func(unsafe.Pointer, string) int
-	_gss_verify func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32) uint32
-	_gss_verify_mic func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32) uint32
-	_gss_wrap func(*uint32, unsafe.Pointer, int, uint32, unsafe.Pointer, *int32, *GssBufferDescStruct) uint32
-	_gss_wrap_size_limit func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
+	_fnGSSCreateCredentialFromUUID               func(unsafe.Pointer) unsafe.Pointer
+	_fnGSSCreateError                            func(*GssOIDDescStruct, uint32, uint32) unsafe.Pointer
+	_fnGSSCreateName                             func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) unsafe.Pointer
+	_fnGSSCredentialCopyName                     func(unsafe.Pointer) unsafe.Pointer
+	_fnGSSCredentialCopyUUID                     func(unsafe.Pointer) unsafe.Pointer
+	_fnGSSCredentialGetLifetime                  func(unsafe.Pointer) uint32
+	_fnGSSNameCreateDisplayString                func(unsafe.Pointer) unsafe.Pointer
+	_gss_aapl_change_password                    func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_aapl_initial_cred                       func(unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_accept_sec_context                      func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32, unsafe.Pointer) uint32
+	_gss_acquire_cred                            func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
+	_gss_acquire_cred_with_password              func(*uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, **GssOIDSetDescStruct, *uint32) uint32
+	_gss_add_buffer_set_member                   func(*uint32, unsafe.Pointer, **GssBufferSetDescStruct) uint32
+	_gss_add_cred                                func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, uint32, uint32, unsafe.Pointer, **GssOIDSetDescStruct, *uint32, *uint32) uint32
+	_gss_add_oid_set_member                      func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
+	_gss_canonicalize_name                       func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_compare_name                            func(*uint32, unsafe.Pointer, unsafe.Pointer, *int32) uint32
+	_gss_context_time                            func(*uint32, unsafe.Pointer, *uint32) uint32
+	_gss_create_empty_buffer_set                 func(*uint32, **GssBufferSetDescStruct) uint32
+	_gss_create_empty_oid_set                    func(*uint32, **GssOIDSetDescStruct) uint32
+	_gss_decapsulate_token                       func(*GssBufferDescStruct, *GssOIDDescStruct, *GssBufferDescStruct) uint32
+	_gss_delete_sec_context                      func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_destroy_cred                            func(*uint32, unsafe.Pointer) uint32
+	_gss_display_mech_attr                       func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
+	_gss_display_name                            func(*uint32, unsafe.Pointer, *GssBufferDescStruct, **GssOIDDescStruct) uint32
+	_gss_display_status                          func(*uint32, uint32, int, unsafe.Pointer, *uint32, *GssBufferDescStruct) uint32
+	_gss_duplicate_name                          func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_duplicate_oid                           func(*uint32, *GssOIDDescStruct, **GssOIDDescStruct) uint32
+	_gss_encapsulate_token                       func(*GssBufferDescStruct, *GssOIDDescStruct, *GssBufferDescStruct) uint32
+	_gss_export_cred                             func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_export_name                             func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_export_sec_context                      func(*uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_get_mic                                 func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer, *GssBufferDescStruct) uint32
+	_gss_import_cred                             func(*uint32, *GssBufferDescStruct, unsafe.Pointer) uint32
+	_gss_import_name                             func(*uint32, unsafe.Pointer, *GssOIDDescStruct, unsafe.Pointer) uint32
+	_gss_import_sec_context                      func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_indicate_mechs                          func(*uint32, **GssOIDSetDescStruct) uint32
+	_gss_indicate_mechs_by_attrs                 func(*uint32, *GssOIDSetDescStruct, *GssOIDSetDescStruct, *GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
+	_gss_init_sec_context                        func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, **GssOIDDescStruct, *GssBufferDescStruct, *uint32, *uint32) uint32
+	_gss_inquire_attrs_for_mech                  func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct, **GssOIDSetDescStruct) uint32
+	_gss_inquire_context                         func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, **GssOIDDescStruct, *uint32, *int32, *int32) uint32
+	_gss_inquire_cred                            func(*uint32, unsafe.Pointer, unsafe.Pointer, *uint32, *int, **GssOIDSetDescStruct) uint32
+	_gss_inquire_cred_by_mech                    func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32, *uint32, *int) uint32
+	_gss_inquire_cred_by_oid                     func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
+	_gss_inquire_mech_for_saslname               func(*uint32, unsafe.Pointer, **GssOIDDescStruct) uint32
+	_gss_inquire_mechs_for_name                  func(*uint32, unsafe.Pointer, **GssOIDSetDescStruct) uint32
+	_gss_inquire_name                            func(*uint32, unsafe.Pointer, *int32, **GssOIDDescStruct, **GssBufferSetDescStruct) uint32
+	_gss_inquire_names_for_mech                  func(*uint32, *GssOIDDescStruct, **GssOIDSetDescStruct) uint32
+	_gss_inquire_saslname_for_mech               func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *GssBufferDescStruct) uint32
+	_gss_inquire_sec_context_by_oid              func(*uint32, unsafe.Pointer, unsafe.Pointer, **GssBufferSetDescStruct) uint32
+	_gss_iter_creds                              func(*uint32, uint32, *GssOIDDescStruct, objc.Block) uint32
+	_gss_iter_creds_f                            func(*uint32, uint32, *GssOIDDescStruct, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_krb5_ccache_name                        func(*uint32, string, string) uint32
+	_gss_krb5_copy_ccache                        func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_krb5_export_lucid_sec_context           func(*uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32
+	_gss_krb5_free_lucid_sec_context             func(*uint32, unsafe.Pointer) uint32
+	_gss_krb5_set_allowable_enctypes             func(*uint32, unsafe.Pointer, uint32, *int32) uint32
+	_gss_oid_equal                               func(*GssOIDDescStruct, *GssOIDDescStruct) int
+	_gss_oid_to_str                              func(*uint32, *GssOIDDescStruct, *GssBufferDescStruct) uint32
+	_gss_process_context_token                   func(*uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_pseudo_random                           func(*uint32, unsafe.Pointer, int, unsafe.Pointer, int, *GssBufferDescStruct) uint32
+	_gss_release_buffer                          func(*uint32, *GssBufferDescStruct) uint32
+	_gss_release_buffer_set                      func(*uint32, **GssBufferSetDescStruct) uint32
+	_gss_release_cred                            func(*uint32, unsafe.Pointer) uint32
+	_gss_release_name                            func(*uint32, unsafe.Pointer) uint32
+	_gss_release_oid                             func(*uint32, **GssOIDDescStruct) uint32
+	_gss_release_oid_set                         func(*uint32, **GssOIDSetDescStruct) uint32
+	_gss_seal                                    func(*uint32, unsafe.Pointer, int, int, *GssBufferDescStruct, *int32, *GssBufferDescStruct) uint32
+	_gss_set_cred_option                         func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_set_sec_context_option                  func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_gss_sign                                    func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct, *GssBufferDescStruct) uint32
+	_gss_test_oid_set_member                     func(*uint32, *GssOIDDescStruct, unsafe.Pointer, *int32) uint32
+	_gss_unseal                                  func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32, *int32) uint32
+	_gss_unwrap                                  func(*uint32, unsafe.Pointer, unsafe.Pointer, *GssBufferDescStruct, *int32, *uint32) uint32
+	_gss_userok                                  func(unsafe.Pointer, string) int
+	_gss_verify                                  func(*uint32, unsafe.Pointer, *GssBufferDescStruct, *GssBufferDescStruct, *int32) uint32
+	_gss_verify_mic                              func(*uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uint32) uint32
+	_gss_wrap                                    func(*uint32, unsafe.Pointer, int, uint32, unsafe.Pointer, *int32, *GssBufferDescStruct) uint32
+	_gss_wrap_size_limit                         func(*uint32, unsafe.Pointer, int, uint32, uint32, *uint32) uint32
 	_gsskrb5_extract_authz_data_from_sec_context func(*uint32, unsafe.Pointer, int, *GssBufferDescStruct) uint32
-	_gsskrb5_register_acceptor_identity func(string) uint32
-	_krb5_gss_register_acceptor_identity func(string) uint32
+	_gsskrb5_register_acceptor_identity          func(string) uint32
+	_krb5_gss_register_acceptor_identity         func(string) uint32
 )
 
 func GSSCreateCredentialFromUUID(uuid unsafe.Pointer) unsafe.Pointer {
@@ -503,4 +503,3 @@ func Gsskrb5RegisterAcceptorIdentity(identity string) uint32 {
 func Krb5GssRegisterAcceptorIdentity(identity string) uint32 {
 	return _krb5_gss_register_acceptor_identity(identity)
 }
-

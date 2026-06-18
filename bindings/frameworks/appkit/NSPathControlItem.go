@@ -16,14 +16,14 @@ type NSPathControlItem struct {
 }
 
 var (
-	_clsNSPathControlItem = _objcClass("NSPathControlItem")
-	_nSPathControlItemSelTitle = objc.RegisterName("title")
-	_nSPathControlItemSelSetTitle = objc.RegisterName("setTitle:")
-	_nSPathControlItemSelAttributedTitle = objc.RegisterName("attributedTitle")
+	_clsNSPathControlItem                   = _objcClass("NSPathControlItem")
+	_nSPathControlItemSelTitle              = objc.RegisterName("title")
+	_nSPathControlItemSelSetTitle           = objc.RegisterName("setTitle:")
+	_nSPathControlItemSelAttributedTitle    = objc.RegisterName("attributedTitle")
 	_nSPathControlItemSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSPathControlItemSelImage = objc.RegisterName("image")
-	_nSPathControlItemSelSetImage = objc.RegisterName("setImage:")
-	_nSPathControlItemSelURL = objc.RegisterName("URL")
+	_nSPathControlItemSelImage              = objc.RegisterName("image")
+	_nSPathControlItemSelSetImage           = objc.RegisterName("setImage:")
+	_nSPathControlItemSelURL                = objc.RegisterName("URL")
 )
 
 func NSPathControlItemFromID(id objc.ID) *NSPathControlItem {
@@ -38,7 +38,9 @@ func NSPathControlItemFromID(id objc.ID) *NSPathControlItem {
 
 func (o *NSPathControlItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *NSPathControlItem) SetTitle(title *foundation.NSString) {
 
 func (o *NSPathControlItem) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlItemSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -58,7 +62,9 @@ func (o *NSPathControlItem) SetAttributedTitle(attributedTitle *foundation.NSAtt
 
 func (o *NSPathControlItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -68,7 +74,8 @@ func (o *NSPathControlItem) SetImage(image *NSImage) {
 
 func (o *NSPathControlItem) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPathControlItemSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

@@ -16,10 +16,10 @@ type PKAddSecureElementPassConfiguration struct {
 }
 
 var (
-	_clsPKAddSecureElementPassConfiguration = _objcClass("PKAddSecureElementPassConfiguration")
-	_pKAddSecureElementPassConfigurationSelIssuerIdentifier = objc.RegisterName("issuerIdentifier")
-	_pKAddSecureElementPassConfigurationSelSetIssuerIdentifier = objc.RegisterName("setIssuerIdentifier:")
-	_pKAddSecureElementPassConfigurationSelLocalizedDescription = objc.RegisterName("localizedDescription")
+	_clsPKAddSecureElementPassConfiguration                        = _objcClass("PKAddSecureElementPassConfiguration")
+	_pKAddSecureElementPassConfigurationSelIssuerIdentifier        = objc.RegisterName("issuerIdentifier")
+	_pKAddSecureElementPassConfigurationSelSetIssuerIdentifier     = objc.RegisterName("setIssuerIdentifier:")
+	_pKAddSecureElementPassConfigurationSelLocalizedDescription    = objc.RegisterName("localizedDescription")
 	_pKAddSecureElementPassConfigurationSelSetLocalizedDescription = objc.RegisterName("setLocalizedDescription:")
 )
 
@@ -35,7 +35,9 @@ func PKAddSecureElementPassConfigurationFromID(id objc.ID) *PKAddSecureElementPa
 
 func (o *PKAddSecureElementPassConfiguration) IssuerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddSecureElementPassConfigurationSelIssuerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *PKAddSecureElementPassConfiguration) SetIssuerIdentifier(issuerIdentifi
 
 func (o *PKAddSecureElementPassConfiguration) LocalizedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddSecureElementPassConfigurationSelLocalizedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKAddSecureElementPassConfiguration) SetLocalizedDescription(localizedDescription *foundation.NSString) {
 	o.Ptr().Send(_pKAddSecureElementPassConfigurationSelSetLocalizedDescription, localizedDescription.Ptr())
 }
-

@@ -18,8 +18,8 @@ type DDMatchShipmentTrackingNumber struct {
 }
 
 var (
-	_clsDDMatchShipmentTrackingNumber = _objcClass("DDMatchShipmentTrackingNumber")
-	_dDMatchShipmentTrackingNumberSelCarrier = objc.RegisterName("carrier")
+	_clsDDMatchShipmentTrackingNumber               = _objcClass("DDMatchShipmentTrackingNumber")
+	_dDMatchShipmentTrackingNumberSelCarrier        = objc.RegisterName("carrier")
 	_dDMatchShipmentTrackingNumberSelTrackingNumber = objc.RegisterName("trackingNumber")
 )
 
@@ -36,14 +36,17 @@ func DDMatchShipmentTrackingNumberFromID(id objc.ID) *DDMatchShipmentTrackingNum
 // The name of a parcel carrier.
 func (o *DDMatchShipmentTrackingNumber) Carrier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchShipmentTrackingNumberSelCarrier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A string that represents a carrier’s tracking identifier for a parcel.
 func (o *DDMatchShipmentTrackingNumber) TrackingNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchShipmentTrackingNumberSelTrackingNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

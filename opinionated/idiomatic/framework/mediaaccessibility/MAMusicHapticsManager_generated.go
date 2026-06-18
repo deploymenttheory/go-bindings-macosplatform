@@ -66,4 +66,3 @@ type MusicHapticsManagerable interface {
 }
 
 var _ MusicHapticsManagerable = (*MusicHapticsManager)(nil)
-

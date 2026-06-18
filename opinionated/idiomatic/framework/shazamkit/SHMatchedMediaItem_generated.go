@@ -67,4 +67,3 @@ type MatchedMediaItemable interface {
 }
 
 var _ MatchedMediaItemable = (*MatchedMediaItem)(nil)
-

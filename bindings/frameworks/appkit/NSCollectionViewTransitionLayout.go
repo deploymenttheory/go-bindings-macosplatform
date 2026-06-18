@@ -16,14 +16,14 @@ type NSCollectionViewTransitionLayout struct {
 }
 
 var (
-	_clsNSCollectionViewTransitionLayout = _objcClass("NSCollectionViewTransitionLayout")
+	_clsNSCollectionViewTransitionLayout                                = _objcClass("NSCollectionViewTransitionLayout")
 	_nSCollectionViewTransitionLayoutSelInitWithCurrentLayoutNextLayout = objc.RegisterName("initWithCurrentLayout:nextLayout:")
-	_nSCollectionViewTransitionLayoutSelUpdateValueForAnimatedKey = objc.RegisterName("updateValue:forAnimatedKey:")
-	_nSCollectionViewTransitionLayoutSelValueForAnimatedKey = objc.RegisterName("valueForAnimatedKey:")
-	_nSCollectionViewTransitionLayoutSelTransitionProgress = objc.RegisterName("transitionProgress")
-	_nSCollectionViewTransitionLayoutSelSetTransitionProgress = objc.RegisterName("setTransitionProgress:")
-	_nSCollectionViewTransitionLayoutSelCurrentLayout = objc.RegisterName("currentLayout")
-	_nSCollectionViewTransitionLayoutSelNextLayout = objc.RegisterName("nextLayout")
+	_nSCollectionViewTransitionLayoutSelUpdateValueForAnimatedKey       = objc.RegisterName("updateValue:forAnimatedKey:")
+	_nSCollectionViewTransitionLayoutSelValueForAnimatedKey             = objc.RegisterName("valueForAnimatedKey:")
+	_nSCollectionViewTransitionLayoutSelTransitionProgress              = objc.RegisterName("transitionProgress")
+	_nSCollectionViewTransitionLayoutSelSetTransitionProgress           = objc.RegisterName("setTransitionProgress:")
+	_nSCollectionViewTransitionLayoutSelCurrentLayout                   = objc.RegisterName("currentLayout")
+	_nSCollectionViewTransitionLayoutSelNextLayout                      = objc.RegisterName("nextLayout")
 )
 
 func NSCollectionViewTransitionLayoutFromID(id objc.ID) *NSCollectionViewTransitionLayout {
@@ -38,7 +38,9 @@ func NSCollectionViewTransitionLayoutFromID(id objc.ID) *NSCollectionViewTransit
 
 func (o *NSCollectionViewTransitionLayout) InitWithCurrentLayoutNextLayout(currentLayout *NSCollectionViewLayout, newLayout *NSCollectionViewLayout) *NSCollectionViewTransitionLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelInitWithCurrentLayoutNextLayout, currentLayout.Ptr(), newLayout.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewTransitionLayoutFromID(_ret)
 }
 
@@ -62,13 +64,16 @@ func (o *NSCollectionViewTransitionLayout) SetTransitionProgress(transitionProgr
 
 func (o *NSCollectionViewTransitionLayout) CurrentLayout() *NSCollectionViewLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelCurrentLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutFromID(_ret)
 }
 
 func (o *NSCollectionViewTransitionLayout) NextLayout() *NSCollectionViewLayout {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewTransitionLayoutSelNextLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewLayoutFromID(_ret)
 }
-

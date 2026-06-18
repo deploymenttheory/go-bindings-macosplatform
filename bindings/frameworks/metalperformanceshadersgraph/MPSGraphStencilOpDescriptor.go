@@ -17,27 +17,27 @@ type MPSGraphStencilOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphStencilOpDescriptor = _objcClass("MPSGraphStencilOpDescriptor")
+	_clsMPSGraphStencilOpDescriptor                                                                                                             = _objcClass("MPSGraphStencilOpDescriptor")
 	_mPSGraphStencilOpDescriptorSelDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant = objc.RegisterName("descriptorWithReductionMode:offsets:strides:dilationRates:explicitPadding:boundaryMode:paddingStyle:paddingConstant:")
-	_mPSGraphStencilOpDescriptorSelDescriptorWithOffsetsExplicitPadding = objc.RegisterName("descriptorWithOffsets:explicitPadding:")
-	_mPSGraphStencilOpDescriptorSelDescriptorWithExplicitPadding = objc.RegisterName("descriptorWithExplicitPadding:")
-	_mPSGraphStencilOpDescriptorSelDescriptorWithPaddingStyle = objc.RegisterName("descriptorWithPaddingStyle:")
-	_mPSGraphStencilOpDescriptorSelReductionMode = objc.RegisterName("reductionMode")
-	_mPSGraphStencilOpDescriptorSelSetReductionMode = objc.RegisterName("setReductionMode:")
-	_mPSGraphStencilOpDescriptorSelOffsets = objc.RegisterName("offsets")
-	_mPSGraphStencilOpDescriptorSelSetOffsets = objc.RegisterName("setOffsets:")
-	_mPSGraphStencilOpDescriptorSelStrides = objc.RegisterName("strides")
-	_mPSGraphStencilOpDescriptorSelSetStrides = objc.RegisterName("setStrides:")
-	_mPSGraphStencilOpDescriptorSelDilationRates = objc.RegisterName("dilationRates")
-	_mPSGraphStencilOpDescriptorSelSetDilationRates = objc.RegisterName("setDilationRates:")
-	_mPSGraphStencilOpDescriptorSelExplicitPadding = objc.RegisterName("explicitPadding")
-	_mPSGraphStencilOpDescriptorSelSetExplicitPadding = objc.RegisterName("setExplicitPadding:")
-	_mPSGraphStencilOpDescriptorSelBoundaryMode = objc.RegisterName("boundaryMode")
-	_mPSGraphStencilOpDescriptorSelSetBoundaryMode = objc.RegisterName("setBoundaryMode:")
-	_mPSGraphStencilOpDescriptorSelPaddingStyle = objc.RegisterName("paddingStyle")
-	_mPSGraphStencilOpDescriptorSelSetPaddingStyle = objc.RegisterName("setPaddingStyle:")
-	_mPSGraphStencilOpDescriptorSelPaddingConstant = objc.RegisterName("paddingConstant")
-	_mPSGraphStencilOpDescriptorSelSetPaddingConstant = objc.RegisterName("setPaddingConstant:")
+	_mPSGraphStencilOpDescriptorSelDescriptorWithOffsetsExplicitPadding                                                                         = objc.RegisterName("descriptorWithOffsets:explicitPadding:")
+	_mPSGraphStencilOpDescriptorSelDescriptorWithExplicitPadding                                                                                = objc.RegisterName("descriptorWithExplicitPadding:")
+	_mPSGraphStencilOpDescriptorSelDescriptorWithPaddingStyle                                                                                   = objc.RegisterName("descriptorWithPaddingStyle:")
+	_mPSGraphStencilOpDescriptorSelReductionMode                                                                                                = objc.RegisterName("reductionMode")
+	_mPSGraphStencilOpDescriptorSelSetReductionMode                                                                                             = objc.RegisterName("setReductionMode:")
+	_mPSGraphStencilOpDescriptorSelOffsets                                                                                                      = objc.RegisterName("offsets")
+	_mPSGraphStencilOpDescriptorSelSetOffsets                                                                                                   = objc.RegisterName("setOffsets:")
+	_mPSGraphStencilOpDescriptorSelStrides                                                                                                      = objc.RegisterName("strides")
+	_mPSGraphStencilOpDescriptorSelSetStrides                                                                                                   = objc.RegisterName("setStrides:")
+	_mPSGraphStencilOpDescriptorSelDilationRates                                                                                                = objc.RegisterName("dilationRates")
+	_mPSGraphStencilOpDescriptorSelSetDilationRates                                                                                             = objc.RegisterName("setDilationRates:")
+	_mPSGraphStencilOpDescriptorSelExplicitPadding                                                                                              = objc.RegisterName("explicitPadding")
+	_mPSGraphStencilOpDescriptorSelSetExplicitPadding                                                                                           = objc.RegisterName("setExplicitPadding:")
+	_mPSGraphStencilOpDescriptorSelBoundaryMode                                                                                                 = objc.RegisterName("boundaryMode")
+	_mPSGraphStencilOpDescriptorSelSetBoundaryMode                                                                                              = objc.RegisterName("setBoundaryMode:")
+	_mPSGraphStencilOpDescriptorSelPaddingStyle                                                                                                 = objc.RegisterName("paddingStyle")
+	_mPSGraphStencilOpDescriptorSelSetPaddingStyle                                                                                              = objc.RegisterName("setPaddingStyle:")
+	_mPSGraphStencilOpDescriptorSelPaddingConstant                                                                                              = objc.RegisterName("paddingConstant")
+	_mPSGraphStencilOpDescriptorSelSetPaddingConstant                                                                                           = objc.RegisterName("setPaddingConstant:")
 )
 
 func MPSGraphStencilOpDescriptorFromID(id objc.ID) *MPSGraphStencilOpDescriptor {
@@ -53,28 +53,36 @@ func MPSGraphStencilOpDescriptorFromID(id objc.ID) *MPSGraphStencilOpDescriptor 
 // Creates a stencil operation descriptor with given values. - Parameters: - reductionMode: See `reductionMode` property. - offsets: See `offsets` property. - strides: See `strides` property. - dilationRates: See `dilationRates` property. - explicitPadding: See `explicitPadding` property. - boundaryMode: See `boundaryMode` property. - paddingStyle: See `paddingStyle` property. - paddingConstant: See `paddingConstant` property. - Returns: A valid MPSGraphStencilOpDescriptor object
 func MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode MPSGraphReductionMode, offsets unsafe.Pointer, strides unsafe.Pointer, dilationRates unsafe.Pointer, explicitPadding unsafe.Pointer, boundaryMode MPSGraphPaddingMode, paddingStyle MPSGraphPaddingStyle, paddingConstant float32) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant, reductionMode, offsets, strides, dilationRates, explicitPadding, boundaryMode, paddingStyle, paddingConstant)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
 // Creates a stencil operation descriptor with default values. - Parameters: - offsets: See `offsets` property. - explicitPadding: See `explicitPadding` property. - Returns: A valid MPSGraphStencilOpDescriptor object
 func MPSGraphStencilOpDescriptorDescriptorWithOffsetsExplicitPadding(offsets unsafe.Pointer, explicitPadding unsafe.Pointer) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithOffsetsExplicitPadding, offsets, explicitPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
 // Creates a stencil operation descriptor with default values. - Parameters: - explicitPadding: See `explicitPadding` property. - Returns: A valid MPSGraphStencilOpDescriptor object
 func MPSGraphStencilOpDescriptorDescriptorWithExplicitPadding(explicitPadding unsafe.Pointer) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithExplicitPadding, explicitPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
 // Creates a stencil operation descriptor with default values. - Parameters: - paddingStyle: See `paddingStyle` property. - Returns: A valid MPSGraphStencilOpDescriptor object
 func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *MPSGraphStencilOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphStencilOpDescriptor), _mPSGraphStencilOpDescriptorSelDescriptorWithPaddingStyle, paddingStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphStencilOpDescriptorFromID(_ret)
 }
 
@@ -157,4 +165,3 @@ func (o *MPSGraphStencilOpDescriptor) PaddingConstant() float32 {
 func (o *MPSGraphStencilOpDescriptor) SetPaddingConstant(paddingConstant float32) {
 	o.Ptr().Send(_mPSGraphStencilOpDescriptorSelSetPaddingConstant, paddingConstant)
 }
-

@@ -20,39 +20,39 @@ type PDFPage struct {
 }
 
 var (
-	_clsPDFPage = _objcClass("PDFPage")
-	_pDFPageSelInit = objc.RegisterName("init")
-	_pDFPageSelInitWithImageOptions = objc.RegisterName("initWithImage:options:")
-	_pDFPageSelInitWithImage = objc.RegisterName("initWithImage:")
-	_pDFPageSelBoundsForBox = objc.RegisterName("boundsForBox:")
-	_pDFPageSelSetBoundsForBox = objc.RegisterName("setBounds:forBox:")
-	_pDFPageSelAddAnnotation = objc.RegisterName("addAnnotation:")
-	_pDFPageSelRemoveAnnotation = objc.RegisterName("removeAnnotation:")
-	_pDFPageSelAnnotationAtPoint = objc.RegisterName("annotationAtPoint:")
-	_pDFPageSelTransformForBox = objc.RegisterName("transformForBox:")
-	_pDFPageSelDrawWithBoxToContext = objc.RegisterName("drawWithBox:toContext:")
-	_pDFPageSelTransformContextForBox = objc.RegisterName("transformContext:forBox:")
-	_pDFPageSelThumbnailOfSizeForBox = objc.RegisterName("thumbnailOfSize:forBox:")
-	_pDFPageSelCharacterBoundsAtIndex = objc.RegisterName("characterBoundsAtIndex:")
-	_pDFPageSelCharacterIndexAtPoint = objc.RegisterName("characterIndexAtPoint:")
-	_pDFPageSelSelectionForRect = objc.RegisterName("selectionForRect:")
-	_pDFPageSelSelectionForWordAtPoint = objc.RegisterName("selectionForWordAtPoint:")
-	_pDFPageSelSelectionForLineAtPoint = objc.RegisterName("selectionForLineAtPoint:")
+	_clsPDFPage                          = _objcClass("PDFPage")
+	_pDFPageSelInit                      = objc.RegisterName("init")
+	_pDFPageSelInitWithImageOptions      = objc.RegisterName("initWithImage:options:")
+	_pDFPageSelInitWithImage             = objc.RegisterName("initWithImage:")
+	_pDFPageSelBoundsForBox              = objc.RegisterName("boundsForBox:")
+	_pDFPageSelSetBoundsForBox           = objc.RegisterName("setBounds:forBox:")
+	_pDFPageSelAddAnnotation             = objc.RegisterName("addAnnotation:")
+	_pDFPageSelRemoveAnnotation          = objc.RegisterName("removeAnnotation:")
+	_pDFPageSelAnnotationAtPoint         = objc.RegisterName("annotationAtPoint:")
+	_pDFPageSelTransformForBox           = objc.RegisterName("transformForBox:")
+	_pDFPageSelDrawWithBoxToContext      = objc.RegisterName("drawWithBox:toContext:")
+	_pDFPageSelTransformContextForBox    = objc.RegisterName("transformContext:forBox:")
+	_pDFPageSelThumbnailOfSizeForBox     = objc.RegisterName("thumbnailOfSize:forBox:")
+	_pDFPageSelCharacterBoundsAtIndex    = objc.RegisterName("characterBoundsAtIndex:")
+	_pDFPageSelCharacterIndexAtPoint     = objc.RegisterName("characterIndexAtPoint:")
+	_pDFPageSelSelectionForRect          = objc.RegisterName("selectionForRect:")
+	_pDFPageSelSelectionForWordAtPoint   = objc.RegisterName("selectionForWordAtPoint:")
+	_pDFPageSelSelectionForLineAtPoint   = objc.RegisterName("selectionForLineAtPoint:")
 	_pDFPageSelSelectionFromPointToPoint = objc.RegisterName("selectionFromPoint:toPoint:")
-	_pDFPageSelSelectionForRange = objc.RegisterName("selectionForRange:")
-	_pDFPageSelDocument = objc.RegisterName("document")
-	_pDFPageSelPageRef = objc.RegisterName("pageRef")
-	_pDFPageSelLabel = objc.RegisterName("label")
-	_pDFPageSelRotation = objc.RegisterName("rotation")
-	_pDFPageSelSetRotation = objc.RegisterName("setRotation:")
-	_pDFPageSelAnnotations = objc.RegisterName("annotations")
-	_pDFPageSelDisplaysAnnotations = objc.RegisterName("displaysAnnotations")
-	_pDFPageSelSetDisplaysAnnotations = objc.RegisterName("setDisplaysAnnotations:")
-	_pDFPageSelNumberOfCharacters = objc.RegisterName("numberOfCharacters")
-	_pDFPageSelString = objc.RegisterName("string")
-	_pDFPageSelAttributedString = objc.RegisterName("attributedString")
-	_pDFPageSelDataRepresentation = objc.RegisterName("dataRepresentation")
-	_pDFPageSelDrawWithBox = objc.RegisterName("drawWithBox:")
+	_pDFPageSelSelectionForRange         = objc.RegisterName("selectionForRange:")
+	_pDFPageSelDocument                  = objc.RegisterName("document")
+	_pDFPageSelPageRef                   = objc.RegisterName("pageRef")
+	_pDFPageSelLabel                     = objc.RegisterName("label")
+	_pDFPageSelRotation                  = objc.RegisterName("rotation")
+	_pDFPageSelSetRotation               = objc.RegisterName("setRotation:")
+	_pDFPageSelAnnotations               = objc.RegisterName("annotations")
+	_pDFPageSelDisplaysAnnotations       = objc.RegisterName("displaysAnnotations")
+	_pDFPageSelSetDisplaysAnnotations    = objc.RegisterName("setDisplaysAnnotations:")
+	_pDFPageSelNumberOfCharacters        = objc.RegisterName("numberOfCharacters")
+	_pDFPageSelString                    = objc.RegisterName("string")
+	_pDFPageSelAttributedString          = objc.RegisterName("attributedString")
+	_pDFPageSelDataRepresentation        = objc.RegisterName("dataRepresentation")
+	_pDFPageSelDrawWithBox               = objc.RegisterName("drawWithBox:")
 )
 
 func PDFPageFromID(id objc.ID) *PDFPage {
@@ -67,19 +67,25 @@ func PDFPageFromID(id objc.ID) *PDFPage {
 
 func (o *PDFPage) Init() *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
 func (o *PDFPage) InitWithImageOptions(image *appkit.NSImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInitWithImageOptions, image.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
 func (o *PDFPage) InitWithImage(image *appkit.NSImage) *PDFPage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelInitWithImage, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFPageFromID(_ret)
 }
 
@@ -102,7 +108,9 @@ func (o *PDFPage) RemoveAnnotation(annotation *PDFAnnotation) {
 
 func (o *PDFPage) AnnotationAtPoint(point corefoundation.CGPoint) *PDFAnnotation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelAnnotationAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFAnnotationFromID(_ret)
 }
 
@@ -121,7 +129,9 @@ func (o *PDFPage) TransformContextForBox(context_ unsafe.Pointer, box PDFDisplay
 
 func (o *PDFPage) ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayBox) *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelThumbnailOfSizeForBox, size, box)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -137,37 +147,49 @@ func (o *PDFPage) CharacterIndexAtPoint(point corefoundation.CGPoint) int {
 
 func (o *PDFPage) SelectionForRect(rect corefoundation.CGRect) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForRect, rect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFPage) SelectionForWordAtPoint(point corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForWordAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFPage) SelectionForLineAtPoint(point corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForLineAtPoint, point)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFPage) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionFromPointToPoint, startPoint, endPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFPage) SelectionForRange(range_ foundation.NSRange) *PDFSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelSelectionForRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFSelectionFromID(_ret)
 }
 
 func (o *PDFPage) Document() *PDFDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PDFDocumentFromID(_ret)
 }
 
@@ -178,7 +200,9 @@ func (o *PDFPage) PageRef() unsafe.Pointer {
 
 func (o *PDFPage) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -193,7 +217,9 @@ func (o *PDFPage) SetRotation(rotation int) {
 
 func (o *PDFPage) Annotations() *foundation.NSArray[*PDFAnnotation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelAnnotations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PDFAnnotation](_ret)
 }
 
@@ -213,19 +239,25 @@ func (o *PDFPage) NumberOfCharacters() uint {
 
 func (o *PDFPage) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PDFPage) AttributedString() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelAttributedString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *PDFPage) DataRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pDFPageSelDataRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -236,4 +268,3 @@ func (o *PDFPage) DrawWithBox(box PDFDisplayBox) {
 func (o *PDFPage) TransformContextForBox2(box PDFDisplayBox) {
 	o.Ptr().Send(_pDFPageSelTransformContextForBox, box)
 }
-

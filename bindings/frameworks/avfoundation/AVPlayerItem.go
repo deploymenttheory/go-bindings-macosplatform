@@ -20,118 +20,118 @@ type AVPlayerItem struct {
 }
 
 var (
-	_clsAVPlayerItem = _objcClass("AVPlayerItem")
-	_aVPlayerItemSelPlayerItemWithURL = objc.RegisterName("playerItemWithURL:")
-	_aVPlayerItemSelPlayerItemWithAsset = objc.RegisterName("playerItemWithAsset:")
-	_aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys = objc.RegisterName("playerItemWithAsset:automaticallyLoadedAssetKeys:")
-	_aVPlayerItemSelInitWithURL = objc.RegisterName("initWithURL:")
-	_aVPlayerItemSelInitWithAsset = objc.RegisterName("initWithAsset:")
-	_aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys = objc.RegisterName("initWithAsset:automaticallyLoadedAssetKeys:")
-	_aVPlayerItemSelStatus = objc.RegisterName("status")
-	_aVPlayerItemSelError = objc.RegisterName("error")
-	_aVPlayerItemSelAsset = objc.RegisterName("asset")
-	_aVPlayerItemSelTracks = objc.RegisterName("tracks")
-	_aVPlayerItemSelDuration = objc.RegisterName("duration")
-	_aVPlayerItemSelPresentationSize = objc.RegisterName("presentationSize")
-	_aVPlayerItemSelTimedMetadata = objc.RegisterName("timedMetadata")
-	_aVPlayerItemSelAutomaticallyLoadedAssetKeys = objc.RegisterName("automaticallyLoadedAssetKeys")
-	_aVPlayerItemSelCanPlayFastForward = objc.RegisterName("canPlayFastForward")
-	_aVPlayerItemSelCanPlaySlowForward = objc.RegisterName("canPlaySlowForward")
-	_aVPlayerItemSelCanPlayReverse = objc.RegisterName("canPlayReverse")
-	_aVPlayerItemSelCanPlaySlowReverse = objc.RegisterName("canPlaySlowReverse")
-	_aVPlayerItemSelCanPlayFastReverse = objc.RegisterName("canPlayFastReverse")
-	_aVPlayerItemSelCanStepForward = objc.RegisterName("canStepForward")
-	_aVPlayerItemSelCanStepBackward = objc.RegisterName("canStepBackward")
-	_aVPlayerItemSelConfiguredTimeOffsetFromLive = objc.RegisterName("configuredTimeOffsetFromLive")
-	_aVPlayerItemSelSetConfiguredTimeOffsetFromLive = objc.RegisterName("setConfiguredTimeOffsetFromLive:")
-	_aVPlayerItemSelRecommendedTimeOffsetFromLive = objc.RegisterName("recommendedTimeOffsetFromLive")
-	_aVPlayerItemSelAutomaticallyPreservesTimeOffsetFromLive = objc.RegisterName("automaticallyPreservesTimeOffsetFromLive")
-	_aVPlayerItemSelSetAutomaticallyPreservesTimeOffsetFromLive = objc.RegisterName("setAutomaticallyPreservesTimeOffsetFromLive:")
-	_aVPlayerItemSelCurrentTime = objc.RegisterName("currentTime")
-	_aVPlayerItemSelSeekToTimeCompletionHandler = objc.RegisterName("seekToTime:completionHandler:")
-	_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:")
-	_aVPlayerItemSelCancelPendingSeeks = objc.RegisterName("cancelPendingSeeks")
-	_aVPlayerItemSelCurrentDate = objc.RegisterName("currentDate")
-	_aVPlayerItemSelSeekToDateCompletionHandler = objc.RegisterName("seekToDate:completionHandler:")
-	_aVPlayerItemSelStepByCount = objc.RegisterName("stepByCount:")
-	_aVPlayerItemSelForwardPlaybackEndTime = objc.RegisterName("forwardPlaybackEndTime")
-	_aVPlayerItemSelSetForwardPlaybackEndTime = objc.RegisterName("setForwardPlaybackEndTime:")
-	_aVPlayerItemSelReversePlaybackEndTime = objc.RegisterName("reversePlaybackEndTime")
-	_aVPlayerItemSelSetReversePlaybackEndTime = objc.RegisterName("setReversePlaybackEndTime:")
-	_aVPlayerItemSelSeekableTimeRanges = objc.RegisterName("seekableTimeRanges")
-	_aVPlayerItemSelTimebase = objc.RegisterName("timebase")
-	_aVPlayerItemSelVideoComposition = objc.RegisterName("videoComposition")
-	_aVPlayerItemSelSetVideoComposition = objc.RegisterName("setVideoComposition:")
-	_aVPlayerItemSelCustomVideoCompositor = objc.RegisterName("customVideoCompositor")
-	_aVPlayerItemSelSeekingWaitsForVideoCompositionRendering = objc.RegisterName("seekingWaitsForVideoCompositionRendering")
-	_aVPlayerItemSelSetSeekingWaitsForVideoCompositionRendering = objc.RegisterName("setSeekingWaitsForVideoCompositionRendering:")
-	_aVPlayerItemSelTextStyleRules = objc.RegisterName("textStyleRules")
-	_aVPlayerItemSelSetTextStyleRules = objc.RegisterName("setTextStyleRules:")
-	_aVPlayerItemSelVideoApertureMode = objc.RegisterName("videoApertureMode")
-	_aVPlayerItemSelSetVideoApertureMode = objc.RegisterName("setVideoApertureMode:")
-	_aVPlayerItemSelAppliesPerFrameHDRDisplayMetadata = objc.RegisterName("appliesPerFrameHDRDisplayMetadata")
-	_aVPlayerItemSelSetAppliesPerFrameHDRDisplayMetadata = objc.RegisterName("setAppliesPerFrameHDRDisplayMetadata:")
-	_aVPlayerItemSelAudioTimePitchAlgorithm = objc.RegisterName("audioTimePitchAlgorithm")
-	_aVPlayerItemSelSetAudioTimePitchAlgorithm = objc.RegisterName("setAudioTimePitchAlgorithm:")
-	_aVPlayerItemSelIsAudioSpatializationAllowed = objc.RegisterName("isAudioSpatializationAllowed")
-	_aVPlayerItemSelSetAudioSpatializationAllowed = objc.RegisterName("setAudioSpatializationAllowed:")
-	_aVPlayerItemSelAllowedAudioSpatializationFormats = objc.RegisterName("allowedAudioSpatializationFormats")
-	_aVPlayerItemSelSetAllowedAudioSpatializationFormats = objc.RegisterName("setAllowedAudioSpatializationFormats:")
-	_aVPlayerItemSelAudioMix = objc.RegisterName("audioMix")
-	_aVPlayerItemSelSetAudioMix = objc.RegisterName("setAudioMix:")
-	_aVPlayerItemSelLoadedTimeRanges = objc.RegisterName("loadedTimeRanges")
-	_aVPlayerItemSelIsPlaybackLikelyToKeepUp = objc.RegisterName("isPlaybackLikelyToKeepUp")
-	_aVPlayerItemSelIsPlaybackBufferFull = objc.RegisterName("isPlaybackBufferFull")
-	_aVPlayerItemSelIsPlaybackBufferEmpty = objc.RegisterName("isPlaybackBufferEmpty")
-	_aVPlayerItemSelCanUseNetworkResourcesForLiveStreamingWhilePaused = objc.RegisterName("canUseNetworkResourcesForLiveStreamingWhilePaused")
-	_aVPlayerItemSelSetCanUseNetworkResourcesForLiveStreamingWhilePaused = objc.RegisterName("setCanUseNetworkResourcesForLiveStreamingWhilePaused:")
-	_aVPlayerItemSelPreferredForwardBufferDuration = objc.RegisterName("preferredForwardBufferDuration")
-	_aVPlayerItemSelSetPreferredForwardBufferDuration = objc.RegisterName("setPreferredForwardBufferDuration:")
-	_aVPlayerItemSelPreferredPeakBitRate = objc.RegisterName("preferredPeakBitRate")
-	_aVPlayerItemSelSetPreferredPeakBitRate = objc.RegisterName("setPreferredPeakBitRate:")
-	_aVPlayerItemSelPreferredPeakBitRateForExpensiveNetworks = objc.RegisterName("preferredPeakBitRateForExpensiveNetworks")
-	_aVPlayerItemSelSetPreferredPeakBitRateForExpensiveNetworks = objc.RegisterName("setPreferredPeakBitRateForExpensiveNetworks:")
-	_aVPlayerItemSelPreferredMaximumResolution = objc.RegisterName("preferredMaximumResolution")
-	_aVPlayerItemSelSetPreferredMaximumResolution = objc.RegisterName("setPreferredMaximumResolution:")
-	_aVPlayerItemSelPreferredMaximumResolutionForExpensiveNetworks = objc.RegisterName("preferredMaximumResolutionForExpensiveNetworks")
-	_aVPlayerItemSelSetPreferredMaximumResolutionForExpensiveNetworks = objc.RegisterName("setPreferredMaximumResolutionForExpensiveNetworks:")
-	_aVPlayerItemSelStartsOnFirstEligibleVariant = objc.RegisterName("startsOnFirstEligibleVariant")
-	_aVPlayerItemSelSetStartsOnFirstEligibleVariant = objc.RegisterName("setStartsOnFirstEligibleVariant:")
-	_aVPlayerItemSelVariantPreferences = objc.RegisterName("variantPreferences")
-	_aVPlayerItemSelSetVariantPreferences = objc.RegisterName("setVariantPreferences:")
-	_aVPlayerItemSelSelectMediaOptionInMediaSelectionGroup = objc.RegisterName("selectMediaOption:inMediaSelectionGroup:")
-	_aVPlayerItemSelSelectMediaOptionAutomaticallyInMediaSelectionGroup = objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:")
-	_aVPlayerItemSelCurrentMediaSelection = objc.RegisterName("currentMediaSelection")
-	_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup = objc.RegisterName("selectMediaPresentationLanguage:forMediaSelectionGroup:")
-	_aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup = objc.RegisterName("selectedMediaPresentationLanguageForMediaSelectionGroup:")
-	_aVPlayerItemSelSelectMediaPresentationSettingForMediaSelectionGroup = objc.RegisterName("selectMediaPresentationSetting:forMediaSelectionGroup:")
-	_aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup = objc.RegisterName("selectedMediaPresentationSettingsForMediaSelectionGroup:")
-	_aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup = objc.RegisterName("effectiveMediaPresentationSettingsForMediaSelectionGroup:")
-	_aVPlayerItemSelPreferredCustomMediaSelectionSchemes = objc.RegisterName("preferredCustomMediaSelectionSchemes")
-	_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes = objc.RegisterName("setPreferredCustomMediaSelectionSchemes:")
-	_aVPlayerItemSelAccessLog = objc.RegisterName("accessLog")
-	_aVPlayerItemSelErrorLog = objc.RegisterName("errorLog")
-	_aVPlayerItemSelAddOutput = objc.RegisterName("addOutput:")
-	_aVPlayerItemSelRemoveOutput = objc.RegisterName("removeOutput:")
-	_aVPlayerItemSelOutputs = objc.RegisterName("outputs")
-	_aVPlayerItemSelAddMediaDataCollector = objc.RegisterName("addMediaDataCollector:")
-	_aVPlayerItemSelRemoveMediaDataCollector = objc.RegisterName("removeMediaDataCollector:")
-	_aVPlayerItemSelMediaDataCollectors = objc.RegisterName("mediaDataCollectors")
-	_aVPlayerItemSelSeekToTime = objc.RegisterName("seekToTime:")
-	_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfter = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:")
-	_aVPlayerItemSelSeekToDate = objc.RegisterName("seekToDate:")
-	_aVPlayerItemSelSelectedMediaOptionInMediaSelectionGroup = objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:")
+	_clsAVPlayerItem                                                                              = _objcClass("AVPlayerItem")
+	_aVPlayerItemSelPlayerItemWithURL                                                             = objc.RegisterName("playerItemWithURL:")
+	_aVPlayerItemSelPlayerItemWithAsset                                                           = objc.RegisterName("playerItemWithAsset:")
+	_aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys                               = objc.RegisterName("playerItemWithAsset:automaticallyLoadedAssetKeys:")
+	_aVPlayerItemSelInitWithURL                                                                   = objc.RegisterName("initWithURL:")
+	_aVPlayerItemSelInitWithAsset                                                                 = objc.RegisterName("initWithAsset:")
+	_aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys                                     = objc.RegisterName("initWithAsset:automaticallyLoadedAssetKeys:")
+	_aVPlayerItemSelStatus                                                                        = objc.RegisterName("status")
+	_aVPlayerItemSelError                                                                         = objc.RegisterName("error")
+	_aVPlayerItemSelAsset                                                                         = objc.RegisterName("asset")
+	_aVPlayerItemSelTracks                                                                        = objc.RegisterName("tracks")
+	_aVPlayerItemSelDuration                                                                      = objc.RegisterName("duration")
+	_aVPlayerItemSelPresentationSize                                                              = objc.RegisterName("presentationSize")
+	_aVPlayerItemSelTimedMetadata                                                                 = objc.RegisterName("timedMetadata")
+	_aVPlayerItemSelAutomaticallyLoadedAssetKeys                                                  = objc.RegisterName("automaticallyLoadedAssetKeys")
+	_aVPlayerItemSelCanPlayFastForward                                                            = objc.RegisterName("canPlayFastForward")
+	_aVPlayerItemSelCanPlaySlowForward                                                            = objc.RegisterName("canPlaySlowForward")
+	_aVPlayerItemSelCanPlayReverse                                                                = objc.RegisterName("canPlayReverse")
+	_aVPlayerItemSelCanPlaySlowReverse                                                            = objc.RegisterName("canPlaySlowReverse")
+	_aVPlayerItemSelCanPlayFastReverse                                                            = objc.RegisterName("canPlayFastReverse")
+	_aVPlayerItemSelCanStepForward                                                                = objc.RegisterName("canStepForward")
+	_aVPlayerItemSelCanStepBackward                                                               = objc.RegisterName("canStepBackward")
+	_aVPlayerItemSelConfiguredTimeOffsetFromLive                                                  = objc.RegisterName("configuredTimeOffsetFromLive")
+	_aVPlayerItemSelSetConfiguredTimeOffsetFromLive                                               = objc.RegisterName("setConfiguredTimeOffsetFromLive:")
+	_aVPlayerItemSelRecommendedTimeOffsetFromLive                                                 = objc.RegisterName("recommendedTimeOffsetFromLive")
+	_aVPlayerItemSelAutomaticallyPreservesTimeOffsetFromLive                                      = objc.RegisterName("automaticallyPreservesTimeOffsetFromLive")
+	_aVPlayerItemSelSetAutomaticallyPreservesTimeOffsetFromLive                                   = objc.RegisterName("setAutomaticallyPreservesTimeOffsetFromLive:")
+	_aVPlayerItemSelCurrentTime                                                                   = objc.RegisterName("currentTime")
+	_aVPlayerItemSelSeekToTimeCompletionHandler                                                   = objc.RegisterName("seekToTime:completionHandler:")
+	_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfterCompletionHandler                      = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:")
+	_aVPlayerItemSelCancelPendingSeeks                                                            = objc.RegisterName("cancelPendingSeeks")
+	_aVPlayerItemSelCurrentDate                                                                   = objc.RegisterName("currentDate")
+	_aVPlayerItemSelSeekToDateCompletionHandler                                                   = objc.RegisterName("seekToDate:completionHandler:")
+	_aVPlayerItemSelStepByCount                                                                   = objc.RegisterName("stepByCount:")
+	_aVPlayerItemSelForwardPlaybackEndTime                                                        = objc.RegisterName("forwardPlaybackEndTime")
+	_aVPlayerItemSelSetForwardPlaybackEndTime                                                     = objc.RegisterName("setForwardPlaybackEndTime:")
+	_aVPlayerItemSelReversePlaybackEndTime                                                        = objc.RegisterName("reversePlaybackEndTime")
+	_aVPlayerItemSelSetReversePlaybackEndTime                                                     = objc.RegisterName("setReversePlaybackEndTime:")
+	_aVPlayerItemSelSeekableTimeRanges                                                            = objc.RegisterName("seekableTimeRanges")
+	_aVPlayerItemSelTimebase                                                                      = objc.RegisterName("timebase")
+	_aVPlayerItemSelVideoComposition                                                              = objc.RegisterName("videoComposition")
+	_aVPlayerItemSelSetVideoComposition                                                           = objc.RegisterName("setVideoComposition:")
+	_aVPlayerItemSelCustomVideoCompositor                                                         = objc.RegisterName("customVideoCompositor")
+	_aVPlayerItemSelSeekingWaitsForVideoCompositionRendering                                      = objc.RegisterName("seekingWaitsForVideoCompositionRendering")
+	_aVPlayerItemSelSetSeekingWaitsForVideoCompositionRendering                                   = objc.RegisterName("setSeekingWaitsForVideoCompositionRendering:")
+	_aVPlayerItemSelTextStyleRules                                                                = objc.RegisterName("textStyleRules")
+	_aVPlayerItemSelSetTextStyleRules                                                             = objc.RegisterName("setTextStyleRules:")
+	_aVPlayerItemSelVideoApertureMode                                                             = objc.RegisterName("videoApertureMode")
+	_aVPlayerItemSelSetVideoApertureMode                                                          = objc.RegisterName("setVideoApertureMode:")
+	_aVPlayerItemSelAppliesPerFrameHDRDisplayMetadata                                             = objc.RegisterName("appliesPerFrameHDRDisplayMetadata")
+	_aVPlayerItemSelSetAppliesPerFrameHDRDisplayMetadata                                          = objc.RegisterName("setAppliesPerFrameHDRDisplayMetadata:")
+	_aVPlayerItemSelAudioTimePitchAlgorithm                                                       = objc.RegisterName("audioTimePitchAlgorithm")
+	_aVPlayerItemSelSetAudioTimePitchAlgorithm                                                    = objc.RegisterName("setAudioTimePitchAlgorithm:")
+	_aVPlayerItemSelIsAudioSpatializationAllowed                                                  = objc.RegisterName("isAudioSpatializationAllowed")
+	_aVPlayerItemSelSetAudioSpatializationAllowed                                                 = objc.RegisterName("setAudioSpatializationAllowed:")
+	_aVPlayerItemSelAllowedAudioSpatializationFormats                                             = objc.RegisterName("allowedAudioSpatializationFormats")
+	_aVPlayerItemSelSetAllowedAudioSpatializationFormats                                          = objc.RegisterName("setAllowedAudioSpatializationFormats:")
+	_aVPlayerItemSelAudioMix                                                                      = objc.RegisterName("audioMix")
+	_aVPlayerItemSelSetAudioMix                                                                   = objc.RegisterName("setAudioMix:")
+	_aVPlayerItemSelLoadedTimeRanges                                                              = objc.RegisterName("loadedTimeRanges")
+	_aVPlayerItemSelIsPlaybackLikelyToKeepUp                                                      = objc.RegisterName("isPlaybackLikelyToKeepUp")
+	_aVPlayerItemSelIsPlaybackBufferFull                                                          = objc.RegisterName("isPlaybackBufferFull")
+	_aVPlayerItemSelIsPlaybackBufferEmpty                                                         = objc.RegisterName("isPlaybackBufferEmpty")
+	_aVPlayerItemSelCanUseNetworkResourcesForLiveStreamingWhilePaused                             = objc.RegisterName("canUseNetworkResourcesForLiveStreamingWhilePaused")
+	_aVPlayerItemSelSetCanUseNetworkResourcesForLiveStreamingWhilePaused                          = objc.RegisterName("setCanUseNetworkResourcesForLiveStreamingWhilePaused:")
+	_aVPlayerItemSelPreferredForwardBufferDuration                                                = objc.RegisterName("preferredForwardBufferDuration")
+	_aVPlayerItemSelSetPreferredForwardBufferDuration                                             = objc.RegisterName("setPreferredForwardBufferDuration:")
+	_aVPlayerItemSelPreferredPeakBitRate                                                          = objc.RegisterName("preferredPeakBitRate")
+	_aVPlayerItemSelSetPreferredPeakBitRate                                                       = objc.RegisterName("setPreferredPeakBitRate:")
+	_aVPlayerItemSelPreferredPeakBitRateForExpensiveNetworks                                      = objc.RegisterName("preferredPeakBitRateForExpensiveNetworks")
+	_aVPlayerItemSelSetPreferredPeakBitRateForExpensiveNetworks                                   = objc.RegisterName("setPreferredPeakBitRateForExpensiveNetworks:")
+	_aVPlayerItemSelPreferredMaximumResolution                                                    = objc.RegisterName("preferredMaximumResolution")
+	_aVPlayerItemSelSetPreferredMaximumResolution                                                 = objc.RegisterName("setPreferredMaximumResolution:")
+	_aVPlayerItemSelPreferredMaximumResolutionForExpensiveNetworks                                = objc.RegisterName("preferredMaximumResolutionForExpensiveNetworks")
+	_aVPlayerItemSelSetPreferredMaximumResolutionForExpensiveNetworks                             = objc.RegisterName("setPreferredMaximumResolutionForExpensiveNetworks:")
+	_aVPlayerItemSelStartsOnFirstEligibleVariant                                                  = objc.RegisterName("startsOnFirstEligibleVariant")
+	_aVPlayerItemSelSetStartsOnFirstEligibleVariant                                               = objc.RegisterName("setStartsOnFirstEligibleVariant:")
+	_aVPlayerItemSelVariantPreferences                                                            = objc.RegisterName("variantPreferences")
+	_aVPlayerItemSelSetVariantPreferences                                                         = objc.RegisterName("setVariantPreferences:")
+	_aVPlayerItemSelSelectMediaOptionInMediaSelectionGroup                                        = objc.RegisterName("selectMediaOption:inMediaSelectionGroup:")
+	_aVPlayerItemSelSelectMediaOptionAutomaticallyInMediaSelectionGroup                           = objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:")
+	_aVPlayerItemSelCurrentMediaSelection                                                         = objc.RegisterName("currentMediaSelection")
+	_aVPlayerItemSelSelectMediaPresentationLanguageForMediaSelectionGroup                         = objc.RegisterName("selectMediaPresentationLanguage:forMediaSelectionGroup:")
+	_aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup                       = objc.RegisterName("selectedMediaPresentationLanguageForMediaSelectionGroup:")
+	_aVPlayerItemSelSelectMediaPresentationSettingForMediaSelectionGroup                          = objc.RegisterName("selectMediaPresentationSetting:forMediaSelectionGroup:")
+	_aVPlayerItemSelSelectedMediaPresentationSettingsForMediaSelectionGroup                       = objc.RegisterName("selectedMediaPresentationSettingsForMediaSelectionGroup:")
+	_aVPlayerItemSelEffectiveMediaPresentationSettingsForMediaSelectionGroup                      = objc.RegisterName("effectiveMediaPresentationSettingsForMediaSelectionGroup:")
+	_aVPlayerItemSelPreferredCustomMediaSelectionSchemes                                          = objc.RegisterName("preferredCustomMediaSelectionSchemes")
+	_aVPlayerItemSelSetPreferredCustomMediaSelectionSchemes                                       = objc.RegisterName("setPreferredCustomMediaSelectionSchemes:")
+	_aVPlayerItemSelAccessLog                                                                     = objc.RegisterName("accessLog")
+	_aVPlayerItemSelErrorLog                                                                      = objc.RegisterName("errorLog")
+	_aVPlayerItemSelAddOutput                                                                     = objc.RegisterName("addOutput:")
+	_aVPlayerItemSelRemoveOutput                                                                  = objc.RegisterName("removeOutput:")
+	_aVPlayerItemSelOutputs                                                                       = objc.RegisterName("outputs")
+	_aVPlayerItemSelAddMediaDataCollector                                                         = objc.RegisterName("addMediaDataCollector:")
+	_aVPlayerItemSelRemoveMediaDataCollector                                                      = objc.RegisterName("removeMediaDataCollector:")
+	_aVPlayerItemSelMediaDataCollectors                                                           = objc.RegisterName("mediaDataCollectors")
+	_aVPlayerItemSelSeekToTime                                                                    = objc.RegisterName("seekToTime:")
+	_aVPlayerItemSelSeekToTimeToleranceBeforeToleranceAfter                                       = objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:")
+	_aVPlayerItemSelSeekToDate                                                                    = objc.RegisterName("seekToDate:")
+	_aVPlayerItemSelSelectedMediaOptionInMediaSelectionGroup                                      = objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:")
 	_aVPlayerItemSelRequestContentAuthorizationAsynchronouslyWithTimeoutIntervalCompletionHandler = objc.RegisterName("requestContentAuthorizationAsynchronouslyWithTimeoutInterval:completionHandler:")
-	_aVPlayerItemSelCancelContentAuthorizationRequest = objc.RegisterName("cancelContentAuthorizationRequest")
-	_aVPlayerItemSelIsAuthorizationRequiredForPlayback = objc.RegisterName("isAuthorizationRequiredForPlayback")
-	_aVPlayerItemSelIsApplicationAuthorizedForPlayback = objc.RegisterName("isApplicationAuthorizedForPlayback")
-	_aVPlayerItemSelIsContentAuthorizedForPlayback = objc.RegisterName("isContentAuthorizedForPlayback")
-	_aVPlayerItemSelContentAuthorizationRequestStatus = objc.RegisterName("contentAuthorizationRequestStatus")
-	_aVPlayerItemSelAutomaticallyHandlesInterstitialEvents = objc.RegisterName("automaticallyHandlesInterstitialEvents")
-	_aVPlayerItemSelSetAutomaticallyHandlesInterstitialEvents = objc.RegisterName("setAutomaticallyHandlesInterstitialEvents:")
-	_aVPlayerItemSelTemplatePlayerItem = objc.RegisterName("templatePlayerItem")
-	_aVPlayerItemSelInterstitialEventIdentifier = objc.RegisterName("interstitialEventIdentifier")
-	_aVPlayerItemSelIntegratedTimeline = objc.RegisterName("integratedTimeline")
+	_aVPlayerItemSelCancelContentAuthorizationRequest                                             = objc.RegisterName("cancelContentAuthorizationRequest")
+	_aVPlayerItemSelIsAuthorizationRequiredForPlayback                                            = objc.RegisterName("isAuthorizationRequiredForPlayback")
+	_aVPlayerItemSelIsApplicationAuthorizedForPlayback                                            = objc.RegisterName("isApplicationAuthorizedForPlayback")
+	_aVPlayerItemSelIsContentAuthorizedForPlayback                                                = objc.RegisterName("isContentAuthorizedForPlayback")
+	_aVPlayerItemSelContentAuthorizationRequestStatus                                             = objc.RegisterName("contentAuthorizationRequestStatus")
+	_aVPlayerItemSelAutomaticallyHandlesInterstitialEvents                                        = objc.RegisterName("automaticallyHandlesInterstitialEvents")
+	_aVPlayerItemSelSetAutomaticallyHandlesInterstitialEvents                                     = objc.RegisterName("setAutomaticallyHandlesInterstitialEvents:")
+	_aVPlayerItemSelTemplatePlayerItem                                                            = objc.RegisterName("templatePlayerItem")
+	_aVPlayerItemSelInterstitialEventIdentifier                                                   = objc.RegisterName("interstitialEventIdentifier")
+	_aVPlayerItemSelIntegratedTimeline                                                            = objc.RegisterName("integratedTimeline")
 )
 
 func AVPlayerItemFromID(id objc.ID) *AVPlayerItem {
@@ -147,42 +147,54 @@ func AVPlayerItemFromID(id objc.ID) *AVPlayerItem {
 // Returns an instance of AVPlayerItem for playing a resource at the specified location. Equivalent to +playerItemWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset. - Parameter URL: - Returns: An instance of AVPlayerItem.
 func AVPlayerItemPlayerItemWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // Returns an instance of AVPlayerItem for playing an AVAsset. Equivalent to +playerItemWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, an overload of this initializer will be chosen automatically to allow you to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Returns: An instance of AVPlayerItem.
 func AVPlayerItemPlayerItemWithAsset(asset *AVAsset) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // Returns an instance of AVPlayerItem for playing an AVAsset. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, you can use `init(asset:automaticallyLoadedAssetKeys:)` to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Parameter automaticallyLoadedAssetKeys: An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration. - Returns: An instance of AVPlayerItem.
 func AVPlayerItemPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerItem), _aVPlayerItemSelPlayerItemWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // Initializes an AVPlayerItem with an NSURL. Equivalent to -initWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset. - Parameter URL: - Returns: An instance of AVPlayerItem
 func (o *AVPlayerItem) InitWithURL(uRL *foundation.NSURL) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // Initializes an AVPlayerItem with an AVAsset. Equivalent to -initWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, an overload of this initializer will be chosen automatically to allow you to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Returns: An instance of AVPlayerItem
 func (o *AVPlayerItem) InitWithAsset(asset *AVAsset) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // Initializes an AVPlayerItem with an AVAsset. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, you can use `init(asset:automaticallyLoadedAssetKeys:)` to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: An instance of AVAsset. - Parameter automaticallyLoadedAssetKeys: An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration. - Returns: An instance of AVPlayerItem
 func (o *AVPlayerItem) InitWithAssetAutomaticallyLoadedAssetKeys(asset *AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInitWithAssetAutomaticallyLoadedAssetKeys, asset.Ptr(), automaticallyLoadedAssetKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
@@ -201,14 +213,18 @@ func (o *AVPlayerItem) Error() unsafe.Pointer {
 // Accessor for underlying AVAsset.
 func (o *AVPlayerItem) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
 // Provides array of AVPlayerItem tracks. Observable (can change dynamically during playback). The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource has been sufficiently loaded, its value is an empty NSArray. Use key-value observation to obtain a valid array of tracks as soon as it becomes available.
 func (o *AVPlayerItem) Tracks() *foundation.NSArray[*AVPlayerItemTrack] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTracks)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemTrack](_ret)
 }
 
@@ -228,7 +244,9 @@ func (o *AVPlayerItem) PresentationSize() corefoundation.CGSize {
 // Deprecated: Use AVPlayerItemMetadataOutput to obtain timed metadata
 func (o *AVPlayerItem) TimedMetadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTimedMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -344,7 +362,9 @@ func (o *AVPlayerItem) CancelPendingSeeks() {
 // If currentTime is mapped to a particular (real-time) date, return that date. - Returns: Returns the date of current playback, or nil if playback is not mapped to any date.
 func (o *AVPlayerItem) CurrentDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -401,7 +421,9 @@ func (o *AVPlayerItem) Timebase() unsafe.Pointer {
 // Indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
 func (o *AVPlayerItem) VideoComposition() *AVVideoComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelVideoComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
 
@@ -429,7 +451,9 @@ func (o *AVPlayerItem) SetSeekingWaitsForVideoCompositionRendering(seekingWaitsF
 // An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media. The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played. For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font. This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
 func (o *AVPlayerItem) TextStyleRules() *foundation.NSArray[*AVTextStyleRule] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTextStyleRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVTextStyleRule](_ret)
 }
 
@@ -440,7 +464,9 @@ func (o *AVPlayerItem) SetTextStyleRules(textStyleRules *foundation.NSArray[*AVT
 // Specifies the video aperture mode to apply during playback. See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
 func (o *AVPlayerItem) VideoApertureMode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelVideoApertureMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -461,7 +487,9 @@ func (o *AVPlayerItem) SetAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDi
 // Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
 func (o *AVPlayerItem) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAudioTimePitchAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -494,7 +522,9 @@ func (o *AVPlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatiali
 // Indicates the audio mix parameters to be applied during playback The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
 func (o *AVPlayerItem) AudioMix() *AVAudioMix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAudioMix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioMixFromID(_ret)
 }
 
@@ -617,7 +647,9 @@ func (o *AVPlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(media
 
 func (o *AVPlayerItem) CurrentMediaSelection() *AVMediaSelection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelCurrentMediaSelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionFromID(_ret)
 }
 
@@ -629,7 +661,9 @@ func (o *AVPlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(lan
 // Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, for which the selected media presentation language is requested.
 func (o *AVPlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaPresentationLanguageForMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -653,7 +687,9 @@ func (o *AVPlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(
 // Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
 func (o *AVPlayerItem) PreferredCustomMediaSelectionSchemes() *foundation.NSArray[*AVCustomMediaSelectionScheme] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelPreferredCustomMediaSelectionSchemes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCustomMediaSelectionScheme](_ret)
 }
 
@@ -664,14 +700,18 @@ func (o *AVPlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMe
 // Returns an object that represents a snapshot of the network access log. Can be nil. An AVPlayerItemAccessLog provides methods to retrieve the network access log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemAccessLog instance.
 func (o *AVPlayerItem) AccessLog() *AVPlayerItemAccessLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelAccessLog)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemAccessLogFromID(_ret)
 }
 
 // Returns an object that represents a snapshot of the error log. Can be nil. An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemErrorLog instance.
 func (o *AVPlayerItem) ErrorLog() *AVPlayerItemErrorLog {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelErrorLog)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemErrorLogFromID(_ret)
 }
 
@@ -687,7 +727,9 @@ func (o *AVPlayerItem) RemoveOutput(output *AVPlayerItemOutput) {
 
 func (o *AVPlayerItem) Outputs() *foundation.NSArray[*AVPlayerItemOutput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelOutputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemOutput](_ret)
 }
 
@@ -703,7 +745,9 @@ func (o *AVPlayerItem) RemoveMediaDataCollector(collector *AVPlayerItemMediaData
 
 func (o *AVPlayerItem) MediaDataCollectors() *foundation.NSArray[*AVPlayerItemMediaDataCollector] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelMediaDataCollectors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVPlayerItemMediaDataCollector](_ret)
 }
 
@@ -730,7 +774,9 @@ func (o *AVPlayerItem) SeekToDate(date *foundation.NSDate) bool {
 // Deprecated: Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups
 func (o *AVPlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelSelectedMediaOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
@@ -789,20 +835,25 @@ func (o *AVPlayerItem) SetAutomaticallyHandlesInterstitialEvents(automaticallyHa
 // If the item was created automatically according to a template item for looping, for interstitial playback, or for other purposes, indicates the AVPlayerItem that was used as the template.
 func (o *AVPlayerItem) TemplatePlayerItem() *AVPlayerItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelTemplatePlayerItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemFromID(_ret)
 }
 
 // The identifier of the AVPlayerInterstitialEvent that created this item, or nil if the item was not created from an interstitial event.
 func (o *AVPlayerItem) InterstitialEventIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelInterstitialEventIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVPlayerItem) IntegratedTimeline() *AVPlayerItemIntegratedTimeline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerItemSelIntegratedTimeline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerItemIntegratedTimelineFromID(_ret)
 }
-

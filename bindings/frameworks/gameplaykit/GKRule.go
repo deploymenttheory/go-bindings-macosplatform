@@ -18,14 +18,14 @@ type GKRule struct {
 }
 
 var (
-	_clsGKRule = _objcClass("GKRule")
-	_gKRuleSelEvaluatePredicateWithSystem = objc.RegisterName("evaluatePredicateWithSystem:")
-	_gKRuleSelPerformActionWithSystem = objc.RegisterName("performActionWithSystem:")
-	_gKRuleSelRuleWithPredicateAssertingFactGrade = objc.RegisterName("ruleWithPredicate:assertingFact:grade:")
+	_clsGKRule                                     = _objcClass("GKRule")
+	_gKRuleSelEvaluatePredicateWithSystem          = objc.RegisterName("evaluatePredicateWithSystem:")
+	_gKRuleSelPerformActionWithSystem              = objc.RegisterName("performActionWithSystem:")
+	_gKRuleSelRuleWithPredicateAssertingFactGrade  = objc.RegisterName("ruleWithPredicate:assertingFact:grade:")
 	_gKRuleSelRuleWithPredicateRetractingFactGrade = objc.RegisterName("ruleWithPredicate:retractingFact:grade:")
-	_gKRuleSelRuleWithBlockPredicateAction = objc.RegisterName("ruleWithBlockPredicate:action:")
-	_gKRuleSelSalience = objc.RegisterName("salience")
-	_gKRuleSelSetSalience = objc.RegisterName("setSalience:")
+	_gKRuleSelRuleWithBlockPredicateAction         = objc.RegisterName("ruleWithBlockPredicate:action:")
+	_gKRuleSelSalience                             = objc.RegisterName("salience")
+	_gKRuleSelSetSalience                          = objc.RegisterName("setSalience:")
 )
 
 func GKRuleFromID(id objc.ID) *GKRule {
@@ -52,14 +52,18 @@ func (o *GKRule) PerformActionWithSystem(system *GKRuleSystem) {
 // Create a data-driven rule that uses NSPredicate and a single assert as the action.
 func GKRuleRuleWithPredicateAssertingFactGrade(predicate *foundation.NSPredicate, fact foundation.NSObjectProtocol, grade float32) *GKRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRule), _gKRuleSelRuleWithPredicateAssertingFactGrade, predicate.Ptr(), fact, grade)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRuleFromID(_ret)
 }
 
 // Short hand for data-driven rule that uses NSPredicate and a single retract as the action.
 func GKRuleRuleWithPredicateRetractingFactGrade(predicate *foundation.NSPredicate, fact foundation.NSObjectProtocol, grade float32) *GKRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRule), _gKRuleSelRuleWithPredicateRetractingFactGrade, predicate.Ptr(), fact, grade)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRuleFromID(_ret)
 }
 
@@ -86,7 +90,9 @@ func GKRuleRuleWithBlockPredicateAction(predicate func(*GKRuleSystem) bool, acti
 		defer __block_action.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRule), _gKRuleSelRuleWithBlockPredicateAction, __block_predicate, __block_action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRuleFromID(_ret)
 }
 
@@ -99,4 +105,3 @@ func (o *GKRule) Salience() int {
 func (o *GKRule) SetSalience(salience int) {
 	o.Ptr().Send(_gKRuleSelSetSalience, salience)
 }
-

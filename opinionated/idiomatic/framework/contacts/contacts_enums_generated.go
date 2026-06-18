@@ -43,8 +43,8 @@ func (e CNAuthorizationStatus) String() string {
 type CNContactDisplayNameOrder int64
 
 const (
-	CNContactDisplayNameOrderUserDefault CNContactDisplayNameOrder = 0
-	CNContactDisplayNameOrderGivenNameFirst CNContactDisplayNameOrder = 1
+	CNContactDisplayNameOrderUserDefault     CNContactDisplayNameOrder = 0
+	CNContactDisplayNameOrderGivenNameFirst  CNContactDisplayNameOrder = 1
 	CNContactDisplayNameOrderFamilyNameFirst CNContactDisplayNameOrder = 2
 )
 
@@ -84,10 +84,10 @@ func (e CNContactFormatterStyle) String() string {
 type CNContactSortOrder int64
 
 const (
-	CNContactSortOrderNone CNContactSortOrder = 0
+	CNContactSortOrderNone        CNContactSortOrder = 0
 	CNContactSortOrderUserDefault CNContactSortOrder = 1
-	CNContactSortOrderGivenName CNContactSortOrder = 2
-	CNContactSortOrderFamilyName CNContactSortOrder = 3
+	CNContactSortOrderGivenName   CNContactSortOrder = 2
+	CNContactSortOrderFamilyName  CNContactSortOrder = 3
 )
 
 func (e CNContactSortOrder) String() string {
@@ -108,7 +108,7 @@ func (e CNContactSortOrder) String() string {
 type CNContactType int64
 
 const (
-	CNContactTypePerson CNContactType = 0
+	CNContactTypePerson       CNContactType = 0
 	CNContactTypeOrganization CNContactType = 1
 )
 
@@ -127,9 +127,9 @@ type CNContainerType int64
 
 const (
 	CNContainerTypeUnassigned CNContainerType = 0
-	CNContainerTypeLocal CNContainerType = 1
-	CNContainerTypeExchange CNContainerType = 2
-	CNContainerTypeCardDAV CNContainerType = 3
+	CNContainerTypeLocal      CNContainerType = 1
+	CNContainerTypeExchange   CNContainerType = 2
+	CNContainerTypeCardDAV    CNContainerType = 3
 )
 
 func (e CNContainerType) String() string {
@@ -178,4 +178,3 @@ func (e CNPostalAddressFormatterStyle) String() string {
 		return fmt.Sprintf("CNPostalAddressFormatterStyle(%d)", int64(e))
 	}
 }
-

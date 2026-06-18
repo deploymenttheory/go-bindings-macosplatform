@@ -16,7 +16,9 @@ type MTRTestClusterClusterTestNullableOptionalResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterTestNullableOptionalResponseParams].
-func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalResponseParams { return x.inner }
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,7 +68,9 @@ func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) WithTimedInvok
 	return x
 }
 
-func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams { return &x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams }
+func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams {
+	return &x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams
+}
 
 // MTRTestClusterClusterTestNullableOptionalResponseParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestNullableOptionalResponseParamsable interface {
@@ -79,4 +83,3 @@ type MTRTestClusterClusterTestNullableOptionalResponseParamsable interface {
 }
 
 var _ MTRTestClusterClusterTestNullableOptionalResponseParamsable = (*MTRTestClusterClusterTestNullableOptionalResponseParams)(nil)
-

@@ -60,7 +60,9 @@ func (x *DOMCSSValueList) asDOMCSSValue() *raw.DOMCSSValue { return &x.inner.DOM
 
 func (x *DOMCSSValueList) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSValue.DOMObject }
 
-func (x *DOMCSSValueList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSValue.DOMObject.WebScriptObject }
+func (x *DOMCSSValueList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSValue.DOMObject.WebScriptObject
+}
 
 // DOMCSSValueListable is the interface implemented by [DOMCSSValueList], for mocking and DI.
 type DOMCSSValueListable interface {
@@ -71,4 +73,3 @@ type DOMCSSValueListable interface {
 }
 
 var _ DOMCSSValueListable = (*DOMCSSValueList)(nil)
-

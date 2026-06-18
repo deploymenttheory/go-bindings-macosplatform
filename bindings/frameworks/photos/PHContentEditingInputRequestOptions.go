@@ -16,13 +16,13 @@ type PHContentEditingInputRequestOptions struct {
 }
 
 var (
-	_clsPHContentEditingInputRequestOptions = _objcClass("PHContentEditingInputRequestOptions")
-	_pHContentEditingInputRequestOptionsSelCanHandleAdjustmentData = objc.RegisterName("canHandleAdjustmentData")
+	_clsPHContentEditingInputRequestOptions                           = _objcClass("PHContentEditingInputRequestOptions")
+	_pHContentEditingInputRequestOptionsSelCanHandleAdjustmentData    = objc.RegisterName("canHandleAdjustmentData")
 	_pHContentEditingInputRequestOptionsSelSetCanHandleAdjustmentData = objc.RegisterName("setCanHandleAdjustmentData:")
-	_pHContentEditingInputRequestOptionsSelIsNetworkAccessAllowed = objc.RegisterName("isNetworkAccessAllowed")
-	_pHContentEditingInputRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
-	_pHContentEditingInputRequestOptionsSelProgressHandler = objc.RegisterName("progressHandler")
-	_pHContentEditingInputRequestOptionsSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
+	_pHContentEditingInputRequestOptionsSelIsNetworkAccessAllowed     = objc.RegisterName("isNetworkAccessAllowed")
+	_pHContentEditingInputRequestOptionsSelSetNetworkAccessAllowed    = objc.RegisterName("setNetworkAccessAllowed:")
+	_pHContentEditingInputRequestOptionsSelProgressHandler            = objc.RegisterName("progressHandler")
+	_pHContentEditingInputRequestOptionsSelSetProgressHandler         = objc.RegisterName("setProgressHandler:")
 )
 
 func PHContentEditingInputRequestOptionsFromID(id objc.ID) *PHContentEditingInputRequestOptions {
@@ -78,4 +78,3 @@ func (o *PHContentEditingInputRequestOptions) SetProgressHandler(progressHandler
 	}
 	o.Ptr().Send(_pHContentEditingInputRequestOptionsSelSetProgressHandler, __block_progressHandler)
 }
-

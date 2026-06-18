@@ -18,9 +18,9 @@ type HKCDADocumentSample struct {
 }
 
 var (
-	_clsHKCDADocumentSample = _objcClass("HKCDADocumentSample")
+	_clsHKCDADocumentSample                                                                 = _objcClass("HKCDADocumentSample")
 	_hKCDADocumentSampleSelCDADocumentSampleWithDataStartDateEndDateMetadataValidationError = objc.RegisterName("CDADocumentSampleWithData:startDate:endDate:metadata:validationError:")
-	_hKCDADocumentSampleSelDocument = objc.RegisterName("document")
+	_hKCDADocumentSampleSelDocument                                                         = objc.RegisterName("document")
 )
 
 func HKCDADocumentSampleFromID(id objc.ID) *HKCDADocumentSample {
@@ -37,7 +37,9 @@ func HKCDADocumentSampleFromID(id objc.ID) *HKCDADocumentSample {
 func HKCDADocumentSampleCDADocumentSampleWithDataStartDateEndDateMetadataValidationError(documentData *foundation.NSData, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*HKCDADocumentSample, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCDADocumentSample), _hKCDADocumentSampleSelCDADocumentSampleWithDataStartDateEndDateMetadataValidationError, documentData.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,7 +49,8 @@ func HKCDADocumentSampleCDADocumentSampleWithDataStartDateEndDateMetadataValidat
 // @property      document @abstract      The contents of the document. @discussion    Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
 func (o *HKCDADocumentSample) Document() *HKCDADocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCDADocumentSampleSelDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCDADocumentFromID(_ret)
 }
-

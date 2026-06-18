@@ -18,20 +18,20 @@ type MPSImageGuidedFilter struct {
 }
 
 var (
-	_clsMPSImageGuidedFilter = _objcClass("MPSImageGuidedFilter")
-	_mPSImageGuidedFilterSelInitWithDeviceKernelDiameter = objc.RegisterName("initWithDevice:kernelDiameter:")
-	_mPSImageGuidedFilterSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSImageGuidedFilterSelEncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture = objc.RegisterName("encodeRegressionToCommandBuffer:sourceTexture:guidanceTexture:weightsTexture:destinationCoefficientsTexture:")
-	_mPSImageGuidedFilterSelEncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture = objc.RegisterName("encodeReconstructionToCommandBuffer:guidanceTexture:coefficientsTexture:destinationTexture:")
+	_clsMPSImageGuidedFilter                                                                                                                                        = _objcClass("MPSImageGuidedFilter")
+	_mPSImageGuidedFilterSelInitWithDeviceKernelDiameter                                                                                                            = objc.RegisterName("initWithDevice:kernelDiameter:")
+	_mPSImageGuidedFilterSelInitWithCoderDevice                                                                                                                     = objc.RegisterName("initWithCoder:device:")
+	_mPSImageGuidedFilterSelEncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture                                 = objc.RegisterName("encodeRegressionToCommandBuffer:sourceTexture:guidanceTexture:weightsTexture:destinationCoefficientsTexture:")
+	_mPSImageGuidedFilterSelEncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture                                                 = objc.RegisterName("encodeReconstructionToCommandBuffer:guidanceTexture:coefficientsTexture:destinationTexture:")
 	_mPSImageGuidedFilterSelEncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB = objc.RegisterName("encodeRegressionToCommandBuffer:sourceTexture:guidanceTexture:weightsTexture:destinationCoefficientsTextureA:destinationCoefficientsTextureB:")
-	_mPSImageGuidedFilterSelEncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture = objc.RegisterName("encodeReconstructionToCommandBuffer:guidanceTexture:coefficientsTextureA:coefficientsTextureB:destinationTexture:")
-	_mPSImageGuidedFilterSelKernelDiameter = objc.RegisterName("kernelDiameter")
-	_mPSImageGuidedFilterSelEpsilon = objc.RegisterName("epsilon")
-	_mPSImageGuidedFilterSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSImageGuidedFilterSelReconstructScale = objc.RegisterName("reconstructScale")
-	_mPSImageGuidedFilterSelSetReconstructScale = objc.RegisterName("setReconstructScale:")
-	_mPSImageGuidedFilterSelReconstructOffset = objc.RegisterName("reconstructOffset")
-	_mPSImageGuidedFilterSelSetReconstructOffset = objc.RegisterName("setReconstructOffset:")
+	_mPSImageGuidedFilterSelEncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture                            = objc.RegisterName("encodeReconstructionToCommandBuffer:guidanceTexture:coefficientsTextureA:coefficientsTextureB:destinationTexture:")
+	_mPSImageGuidedFilterSelKernelDiameter                                                                                                                          = objc.RegisterName("kernelDiameter")
+	_mPSImageGuidedFilterSelEpsilon                                                                                                                                 = objc.RegisterName("epsilon")
+	_mPSImageGuidedFilterSelSetEpsilon                                                                                                                              = objc.RegisterName("setEpsilon:")
+	_mPSImageGuidedFilterSelReconstructScale                                                                                                                        = objc.RegisterName("reconstructScale")
+	_mPSImageGuidedFilterSelSetReconstructScale                                                                                                                     = objc.RegisterName("setReconstructScale:")
+	_mPSImageGuidedFilterSelReconstructOffset                                                                                                                       = objc.RegisterName("reconstructOffset")
+	_mPSImageGuidedFilterSelSetReconstructOffset                                                                                                                    = objc.RegisterName("setReconstructOffset:")
 )
 
 func MPSImageGuidedFilterFromID(id objc.ID) *MPSImageGuidedFilter {
@@ -47,14 +47,18 @@ func MPSImageGuidedFilterFromID(id objc.ID) *MPSImageGuidedFilter {
 // @abstract Specifies information to apply the guided filter regression. @param    device            The device the filter will run on @param    kernelDiameter    The local window size @return     A valid MPSImageGuidedFilterRegression object or nil, if failure.
 func (o *MPSImageGuidedFilter) InitWithDeviceKernelDiameter(device metal.MTLDevice, kernelDiameter uint) *MPSImageGuidedFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageGuidedFilterSelInitWithDeviceKernelDiameter, device, kernelDiameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageGuidedFilterFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSImageGuidedFilter) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSImageGuidedFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageGuidedFilterSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageGuidedFilterFromID(_ret)
 }
 
@@ -113,4 +117,3 @@ func (o *MPSImageGuidedFilter) ReconstructOffset() float32 {
 func (o *MPSImageGuidedFilter) SetReconstructOffset(reconstructOffset float32) {
 	o.Ptr().Send(_mPSImageGuidedFilterSelSetReconstructOffset, reconstructOffset)
 }
-

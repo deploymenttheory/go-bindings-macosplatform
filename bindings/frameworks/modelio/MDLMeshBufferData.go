@@ -16,10 +16,10 @@ type MDLMeshBufferData struct {
 }
 
 var (
-	_clsMDLMeshBufferData = _objcClass("MDLMeshBufferData")
+	_clsMDLMeshBufferData                   = _objcClass("MDLMeshBufferData")
 	_mDLMeshBufferDataSelInitWithTypeLength = objc.RegisterName("initWithType:length:")
-	_mDLMeshBufferDataSelInitWithTypeData = objc.RegisterName("initWithType:data:")
-	_mDLMeshBufferDataSelData = objc.RegisterName("data")
+	_mDLMeshBufferDataSelInitWithTypeData   = objc.RegisterName("initWithType:data:")
+	_mDLMeshBufferDataSelData               = objc.RegisterName("data")
 )
 
 func MDLMeshBufferDataFromID(id objc.ID) *MDLMeshBufferData {
@@ -35,20 +35,25 @@ func MDLMeshBufferDataFromID(id objc.ID) *MDLMeshBufferData {
 // @method initWithType:length @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param length the size of buffer to allocate, in bytes
 func (o *MDLMeshBufferData) InitWithTypeLength(type_ MDLMeshBufferType, length uint) *MDLMeshBufferData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferDataSelInitWithTypeLength, type_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshBufferDataFromID(_ret)
 }
 
 // @method initWithType:data @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param data the data to be used as a mesh buffer. It will be copied.
 func (o *MDLMeshBufferData) InitWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MDLMeshBufferData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferDataSelInitWithTypeData, type_, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMeshBufferDataFromID(_ret)
 }
 
 func (o *MDLMeshBufferData) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMeshBufferDataSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

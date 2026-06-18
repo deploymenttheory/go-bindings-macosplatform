@@ -16,12 +16,12 @@ type NSSymbolEffectOptions struct {
 }
 
 var (
-	_clsNSSymbolEffectOptions = _objcClass("NSSymbolEffectOptions")
-	_nSSymbolEffectOptionsSelOptions = objc.RegisterName("options")
-	_nSSymbolEffectOptionsSelOptionsWithRepeating = objc.RegisterName("optionsWithRepeating")
-	_nSSymbolEffectOptionsSelOptionsWithNonRepeating = objc.RegisterName("optionsWithNonRepeating")
-	_nSSymbolEffectOptionsSelOptionsWithRepeatCount = objc.RegisterName("optionsWithRepeatCount:")
-	_nSSymbolEffectOptionsSelOptionsWithSpeed = objc.RegisterName("optionsWithSpeed:")
+	_clsNSSymbolEffectOptions                          = _objcClass("NSSymbolEffectOptions")
+	_nSSymbolEffectOptionsSelOptions                   = objc.RegisterName("options")
+	_nSSymbolEffectOptionsSelOptionsWithRepeating      = objc.RegisterName("optionsWithRepeating")
+	_nSSymbolEffectOptionsSelOptionsWithNonRepeating   = objc.RegisterName("optionsWithNonRepeating")
+	_nSSymbolEffectOptionsSelOptionsWithRepeatCount    = objc.RegisterName("optionsWithRepeatCount:")
+	_nSSymbolEffectOptionsSelOptionsWithSpeed          = objc.RegisterName("optionsWithSpeed:")
 	_nSSymbolEffectOptionsSelOptionsWithRepeatBehavior = objc.RegisterName("optionsWithRepeatBehavior:")
 )
 
@@ -38,7 +38,9 @@ func NSSymbolEffectOptionsFromID(id objc.ID) *NSSymbolEffectOptions {
 // The default options.
 func NSSymbolEffectOptionsOptions() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
@@ -46,7 +48,9 @@ func NSSymbolEffectOptionsOptions() *NSSymbolEffectOptions {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
@@ -54,7 +58,9 @@ func NSSymbolEffectOptionsOptionsWithRepeating() *NSSymbolEffectOptions {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSSymbolEffectOptions) OptionsWithRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
@@ -62,14 +68,18 @@ func (o *NSSymbolEffectOptions) OptionsWithRepeating() *NSSymbolEffectOptions {
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithNonRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithNonRepeating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
 // Return a copy of the options that prefers not to repeat.
 func (o *NSSymbolEffectOptions) OptionsWithNonRepeating() *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithNonRepeating)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
@@ -77,7 +87,9 @@ func (o *NSSymbolEffectOptions) OptionsWithNonRepeating() *NSSymbolEffectOptions
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func NSSymbolEffectOptionsOptionsWithRepeatCount(count int) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeatCount, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
@@ -85,35 +97,44 @@ func NSSymbolEffectOptionsOptionsWithRepeatCount(count int) *NSSymbolEffectOptio
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
 func (o *NSSymbolEffectOptions) OptionsWithRepeatCount(count int) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeatCount, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
 // Convenience initializer setting the preferred speed multiplier. - Parameter speed: the preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
 func NSSymbolEffectOptionsOptionsWithSpeed(speed float64) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithSpeed, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
 // Return a copy of the options setting the preferred speed multiplier. - Parameter speed: The preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
 func (o *NSSymbolEffectOptions) OptionsWithSpeed(speed float64) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithSpeed, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
 // Convenience initializer setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
 func NSSymbolEffectOptionsOptionsWithRepeatBehavior(behavior *NSSymbolEffectOptionsRepeatBehavior) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSSymbolEffectOptions), _nSSymbolEffectOptionsSelOptionsWithRepeatBehavior, behavior.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
 
 // Return a copy of the options setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
 func (o *NSSymbolEffectOptions) OptionsWithRepeatBehavior(behavior *NSSymbolEffectOptionsRepeatBehavior) *NSSymbolEffectOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSymbolEffectOptionsSelOptionsWithRepeatBehavior, behavior.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSymbolEffectOptionsFromID(_ret)
 }
-

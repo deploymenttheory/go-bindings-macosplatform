@@ -227,7 +227,9 @@ func (x *ScriptObjectSpecifier) Descriptor() *AppleEventDescriptor {
 	return &AppleEventDescriptor{inner: _r}
 }
 
-func (x *ScriptObjectSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return x.inner }
+func (x *ScriptObjectSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return x.inner
+}
 
 func (x *ScriptObjectSpecifier) asObject() *raw.NSObject { return &x.inner.NSObject }
 
@@ -265,4 +267,3 @@ type ScriptObjectSpecifierable interface {
 }
 
 var _ ScriptObjectSpecifierable = (*ScriptObjectSpecifier)(nil)
-

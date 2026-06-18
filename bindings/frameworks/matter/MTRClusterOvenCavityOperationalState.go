@@ -18,23 +18,23 @@ type MTRClusterOvenCavityOperationalState struct {
 }
 
 var (
-	_clsMTRClusterOvenCavityOperationalState = _objcClass("MTRClusterOvenCavityOperationalState")
-	_mTRClusterOvenCavityOperationalStateSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOvenCavityOperationalStateSelStopWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:")
+	_clsMTRClusterOvenCavityOperationalState                                                             = _objcClass("MTRClusterOvenCavityOperationalState")
+	_mTRClusterOvenCavityOperationalStateSelStopWithParamsExpectedValuesExpectedValueIntervalCompletion  = objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterOvenCavityOperationalStateSelStopWithExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:")
 	_mTRClusterOvenCavityOperationalStateSelStartWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterOvenCavityOperationalStateSelStartWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributePhaseListWithParams = objc.RegisterName("readAttributePhaseListWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeCurrentPhaseWithParams = objc.RegisterName("readAttributeCurrentPhaseWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeCountdownTimeWithParams = objc.RegisterName("readAttributeCountdownTimeWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalStateListWithParams = objc.RegisterName("readAttributeOperationalStateListWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalStateWithParams = objc.RegisterName("readAttributeOperationalStateWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalErrorWithParams = objc.RegisterName("readAttributeOperationalErrorWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterOvenCavityOperationalStateSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterOvenCavityOperationalStateSelStartWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributePhaseListWithParams                             = objc.RegisterName("readAttributePhaseListWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeCurrentPhaseWithParams                          = objc.RegisterName("readAttributeCurrentPhaseWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeCountdownTimeWithParams                         = objc.RegisterName("readAttributeCountdownTimeWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalStateListWithParams                  = objc.RegisterName("readAttributeOperationalStateListWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalStateWithParams                      = objc.RegisterName("readAttributeOperationalStateWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeOperationalErrorWithParams                      = objc.RegisterName("readAttributeOperationalErrorWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeGeneratedCommandListWithParams                  = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeAcceptedCommandListWithParams                   = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeAttributeListWithParams                         = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeFeatureMapWithParams                            = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelReadAttributeClusterRevisionWithParams                       = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterOvenCavityOperationalStateSelInitWithDeviceEndpointIDQueue                                = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterOvenCavityOperationalStateFromID(id objc.ID) *MTRClusterOvenCavityOperationalState {
@@ -161,7 +161,8 @@ func (o *MTRClusterOvenCavityOperationalState) ReadAttributeClusterRevisionWithP
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterOvenCavityOperationalState) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOvenCavityOperationalState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterOvenCavityOperationalStateSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterOvenCavityOperationalStateFromID(_ret)
 }
-

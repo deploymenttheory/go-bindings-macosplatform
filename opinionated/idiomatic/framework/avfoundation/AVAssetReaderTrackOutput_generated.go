@@ -84,7 +84,9 @@ func (x *AssetReaderTrackOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgori
 	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
 }
 
-func (x *AssetReaderTrackOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+func (x *AssetReaderTrackOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
+	return &x.inner.AVAssetReaderOutput
+}
 
 // AssetReaderTrackOutputable is the interface implemented by [AssetReaderTrackOutput], for mocking and DI.
 type AssetReaderTrackOutputable interface {
@@ -99,4 +101,3 @@ type AssetReaderTrackOutputable interface {
 }
 
 var _ AssetReaderTrackOutputable = (*AssetReaderTrackOutput)(nil)
-

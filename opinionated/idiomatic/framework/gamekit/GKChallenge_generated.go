@@ -119,4 +119,3 @@ type Challengeable interface {
 }
 
 var _ Challengeable = (*Challenge)(nil)
-

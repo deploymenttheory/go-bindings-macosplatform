@@ -16,14 +16,14 @@ type MTRMediaInputClusterRenameInputParams struct {
 }
 
 var (
-	_clsMTRMediaInputClusterRenameInputParams = _objcClass("MTRMediaInputClusterRenameInputParams")
-	_mTRMediaInputClusterRenameInputParamsSelIndex = objc.RegisterName("index")
-	_mTRMediaInputClusterRenameInputParamsSelSetIndex = objc.RegisterName("setIndex:")
-	_mTRMediaInputClusterRenameInputParamsSelName = objc.RegisterName("name")
-	_mTRMediaInputClusterRenameInputParamsSelSetName = objc.RegisterName("setName:")
-	_mTRMediaInputClusterRenameInputParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRMediaInputClusterRenameInputParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRMediaInputClusterRenameInputParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRMediaInputClusterRenameInputParams                               = _objcClass("MTRMediaInputClusterRenameInputParams")
+	_mTRMediaInputClusterRenameInputParamsSelIndex                          = objc.RegisterName("index")
+	_mTRMediaInputClusterRenameInputParamsSelSetIndex                       = objc.RegisterName("setIndex:")
+	_mTRMediaInputClusterRenameInputParamsSelName                           = objc.RegisterName("name")
+	_mTRMediaInputClusterRenameInputParamsSelSetName                        = objc.RegisterName("setName:")
+	_mTRMediaInputClusterRenameInputParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRMediaInputClusterRenameInputParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRMediaInputClusterRenameInputParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRMediaInputClusterRenameInputParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRMediaInputClusterRenameInputParamsFromID(id objc.ID) *MTRMediaInputClust
 
 func (o *MTRMediaInputClusterRenameInputParams) Index() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterRenameInputParamsSelIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRMediaInputClusterRenameInputParams) SetIndex(index *foundation.NSNum
 
 func (o *MTRMediaInputClusterRenameInputParams) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterRenameInputParamsSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRMediaInputClusterRenameInputParams) SetName(name *foundation.NSStrin
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRMediaInputClusterRenameInputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterRenameInputParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRMediaInputClusterRenameInputParams) SetTimedInvokeTimeoutMs(timedInv
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRMediaInputClusterRenameInputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaInputClusterRenameInputParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMediaInputClusterRenameInputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMediaInputClusterRenameInputParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

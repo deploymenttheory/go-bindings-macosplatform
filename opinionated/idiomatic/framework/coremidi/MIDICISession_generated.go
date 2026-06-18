@@ -150,4 +150,3 @@ type CISessionable interface {
 }
 
 var _ CISessionable = (*CISession)(nil)
-

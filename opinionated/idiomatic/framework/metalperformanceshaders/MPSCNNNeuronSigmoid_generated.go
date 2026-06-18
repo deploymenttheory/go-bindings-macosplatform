@@ -102,9 +102,13 @@ func (x *CNNNeuronSigmoid) WithLabel(label string) *CNNNeuronSigmoid {
 
 func (x *CNNNeuronSigmoid) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronSigmoid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronSigmoid) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronSigmoidable is the interface implemented by [CNNNeuronSigmoid], for mocking and DI.
 type CNNNeuronSigmoidable interface {
@@ -122,4 +126,3 @@ type CNNNeuronSigmoidable interface {
 }
 
 var _ CNNNeuronSigmoidable = (*CNNNeuronSigmoid)(nil)
-

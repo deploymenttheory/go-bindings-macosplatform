@@ -15,9 +15,9 @@ type VZSingleDirectoryShare struct {
 }
 
 var (
-	_clsVZSingleDirectoryShare = _objcClass("VZSingleDirectoryShare")
+	_clsVZSingleDirectoryShare                  = _objcClass("VZSingleDirectoryShare")
 	_vZSingleDirectoryShareSelInitWithDirectory = objc.RegisterName("initWithDirectory:")
-	_vZSingleDirectoryShareSelDirectory = objc.RegisterName("directory")
+	_vZSingleDirectoryShareSelDirectory         = objc.RegisterName("directory")
 )
 
 func VZSingleDirectoryShareFromID(id objc.ID) *VZSingleDirectoryShare {
@@ -33,13 +33,16 @@ func VZSingleDirectoryShareFromID(id objc.ID) *VZSingleDirectoryShare {
 // @abstract Initialize the directory share with a directory on the host. @param directory Directory to share.
 func (o *VZSingleDirectoryShare) InitWithDirectory(directory *VZSharedDirectory) *VZSingleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSingleDirectoryShareSelInitWithDirectory, directory.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSingleDirectoryShareFromID(_ret)
 }
 
 func (o *VZSingleDirectoryShare) Directory() *VZSharedDirectory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSingleDirectoryShareSelDirectory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSharedDirectoryFromID(_ret)
 }
-

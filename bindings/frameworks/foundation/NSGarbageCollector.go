@@ -18,17 +18,17 @@ type NSGarbageCollector struct {
 }
 
 var (
-	_clsNSGarbageCollector = _objcClass("NSGarbageCollector")
-	_nSGarbageCollectorSelDefaultCollector = objc.RegisterName("defaultCollector")
-	_nSGarbageCollectorSelIsCollecting = objc.RegisterName("isCollecting")
-	_nSGarbageCollectorSelDisable = objc.RegisterName("disable")
-	_nSGarbageCollectorSelEnable = objc.RegisterName("enable")
-	_nSGarbageCollectorSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSGarbageCollectorSelCollectIfNeeded = objc.RegisterName("collectIfNeeded")
-	_nSGarbageCollectorSelCollectExhaustively = objc.RegisterName("collectExhaustively")
+	_clsNSGarbageCollector                           = _objcClass("NSGarbageCollector")
+	_nSGarbageCollectorSelDefaultCollector           = objc.RegisterName("defaultCollector")
+	_nSGarbageCollectorSelIsCollecting               = objc.RegisterName("isCollecting")
+	_nSGarbageCollectorSelDisable                    = objc.RegisterName("disable")
+	_nSGarbageCollectorSelEnable                     = objc.RegisterName("enable")
+	_nSGarbageCollectorSelIsEnabled                  = objc.RegisterName("isEnabled")
+	_nSGarbageCollectorSelCollectIfNeeded            = objc.RegisterName("collectIfNeeded")
+	_nSGarbageCollectorSelCollectExhaustively        = objc.RegisterName("collectExhaustively")
 	_nSGarbageCollectorSelDisableCollectorForPointer = objc.RegisterName("disableCollectorForPointer:")
-	_nSGarbageCollectorSelEnableCollectorForPointer = objc.RegisterName("enableCollectorForPointer:")
-	_nSGarbageCollectorSelZone = objc.RegisterName("zone")
+	_nSGarbageCollectorSelEnableCollectorForPointer  = objc.RegisterName("enableCollectorForPointer:")
+	_nSGarbageCollectorSelZone                       = objc.RegisterName("zone")
 )
 
 func NSGarbageCollectorFromID(id objc.ID) *NSGarbageCollector {
@@ -88,4 +88,3 @@ func (o *NSGarbageCollector) Zone() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSGarbageCollectorSelZone)
 	return _ret
 }
-

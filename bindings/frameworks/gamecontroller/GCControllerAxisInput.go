@@ -15,11 +15,11 @@ type GCControllerAxisInput struct {
 }
 
 var (
-	_clsGCControllerAxisInput = _objcClass("GCControllerAxisInput")
-	_gCControllerAxisInputSelSetValue = objc.RegisterName("setValue:")
-	_gCControllerAxisInputSelValueChangedHandler = objc.RegisterName("valueChangedHandler")
+	_clsGCControllerAxisInput                       = _objcClass("GCControllerAxisInput")
+	_gCControllerAxisInputSelSetValue               = objc.RegisterName("setValue:")
+	_gCControllerAxisInputSelValueChangedHandler    = objc.RegisterName("valueChangedHandler")
 	_gCControllerAxisInputSelSetValueChangedHandler = objc.RegisterName("setValueChangedHandler:")
-	_gCControllerAxisInputSelValue = objc.RegisterName("value")
+	_gCControllerAxisInputSelValue                  = objc.RegisterName("value")
 )
 
 func GCControllerAxisInputFromID(id objc.ID) *GCControllerAxisInput {
@@ -61,4 +61,3 @@ func (o *GCControllerAxisInput) Value() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _gCControllerAxisInputSelValue)
 	return _ret
 }
-

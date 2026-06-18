@@ -56,9 +56,13 @@ func (x *CNNNeuronExponentialNode) WithLabel(label string) *CNNNeuronExponential
 	return x
 }
 
-func (x *CNNNeuronExponentialNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
+func (x *CNNNeuronExponentialNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode {
+	return &x.inner.MPSCNNNeuronNode
+}
 
-func (x *CNNNeuronExponentialNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronExponentialNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronExponentialNodeable is the interface implemented by [CNNNeuronExponentialNode], for mocking and DI.
 type CNNNeuronExponentialNodeable interface {
@@ -68,4 +72,3 @@ type CNNNeuronExponentialNodeable interface {
 }
 
 var _ CNNNeuronExponentialNodeable = (*CNNNeuronExponentialNode)(nil)
-

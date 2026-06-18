@@ -107,4 +107,3 @@ type URLAuthenticationChallengeable interface {
 }
 
 var _ URLAuthenticationChallengeable = (*URLAuthenticationChallenge)(nil)
-

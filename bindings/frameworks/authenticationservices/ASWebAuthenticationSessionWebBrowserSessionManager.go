@@ -16,10 +16,10 @@ type ASWebAuthenticationSessionWebBrowserSessionManager struct {
 }
 
 var (
-	_clsASWebAuthenticationSessionWebBrowserSessionManager = _objcClass("ASWebAuthenticationSessionWebBrowserSessionManager")
-	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSharedManager = objc.RegisterName("sharedManager")
-	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSessionHandler = objc.RegisterName("sessionHandler")
-	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSetSessionHandler = objc.RegisterName("setSessionHandler:")
+	_clsASWebAuthenticationSessionWebBrowserSessionManager                                    = _objcClass("ASWebAuthenticationSessionWebBrowserSessionManager")
+	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSharedManager                       = objc.RegisterName("sharedManager")
+	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSessionHandler                      = objc.RegisterName("sessionHandler")
+	_aSWebAuthenticationSessionWebBrowserSessionManagerSelSetSessionHandler                   = objc.RegisterName("setSessionHandler:")
 	_aSWebAuthenticationSessionWebBrowserSessionManagerSelWasLaunchedByAuthenticationServices = objc.RegisterName("wasLaunchedByAuthenticationServices")
 )
 
@@ -35,7 +35,9 @@ func ASWebAuthenticationSessionWebBrowserSessionManagerFromID(id objc.ID) *ASWeb
 
 func ASWebAuthenticationSessionWebBrowserSessionManagerSharedManager() *ASWebAuthenticationSessionWebBrowserSessionManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASWebAuthenticationSessionWebBrowserSessionManager), _aSWebAuthenticationSessionWebBrowserSessionManagerSelSharedManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASWebAuthenticationSessionWebBrowserSessionManagerFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *ASWebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthen
 	_ret := objc.Send[bool](o.Ptr(), _aSWebAuthenticationSessionWebBrowserSessionManagerSelWasLaunchedByAuthenticationServices)
 	return _ret
 }
-

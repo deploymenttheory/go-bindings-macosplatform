@@ -47,9 +47,13 @@ func (x *GraphVariableOp) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
 }
 
-func (x *GraphVariableOp) asGraphOperation() *raw.MPSGraphOperation { return &x.inner.MPSGraphOperation }
+func (x *GraphVariableOp) asGraphOperation() *raw.MPSGraphOperation {
+	return &x.inner.MPSGraphOperation
+}
 
-func (x *GraphVariableOp) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphOperation.MPSGraphObject }
+func (x *GraphVariableOp) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphOperation.MPSGraphObject
+}
 
 // GraphVariableOpable is the interface implemented by [GraphVariableOp], for mocking and DI.
 type GraphVariableOpable interface {
@@ -59,4 +63,3 @@ type GraphVariableOpable interface {
 }
 
 var _ GraphVariableOpable = (*GraphVariableOp)(nil)
-

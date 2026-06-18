@@ -18,39 +18,39 @@ type ICCameraFile struct {
 }
 
 var (
-	_clsICCameraFile = _objcClass("ICCameraFile")
-	_iCCameraFileSelFingerprintForFileAtURL = objc.RegisterName("fingerprintForFileAtURL:")
-	_iCCameraFileSelRequestThumbnailDataWithOptionsCompletion = objc.RegisterName("requestThumbnailDataWithOptions:completion:")
+	_clsICCameraFile                                               = _objcClass("ICCameraFile")
+	_iCCameraFileSelFingerprintForFileAtURL                        = objc.RegisterName("fingerprintForFileAtURL:")
+	_iCCameraFileSelRequestThumbnailDataWithOptionsCompletion      = objc.RegisterName("requestThumbnailDataWithOptions:completion:")
 	_iCCameraFileSelRequestMetadataDictionaryWithOptionsCompletion = objc.RegisterName("requestMetadataDictionaryWithOptions:completion:")
-	_iCCameraFileSelRequestDownloadWithOptionsCompletion = objc.RegisterName("requestDownloadWithOptions:completion:")
-	_iCCameraFileSelRequestReadDataAtOffsetLengthCompletion = objc.RegisterName("requestReadDataAtOffset:length:completion:")
-	_iCCameraFileSelRequestSecurityScopedURLWithCompletion = objc.RegisterName("requestSecurityScopedURLWithCompletion:")
-	_iCCameraFileSelRequestFingerprintWithCompletion = objc.RegisterName("requestFingerprintWithCompletion:")
-	_iCCameraFileSelWidth = objc.RegisterName("width")
-	_iCCameraFileSelHeight = objc.RegisterName("height")
-	_iCCameraFileSelOriginalFilename = objc.RegisterName("originalFilename")
-	_iCCameraFileSelCreatedFilename = objc.RegisterName("createdFilename")
-	_iCCameraFileSelFileSize = objc.RegisterName("fileSize")
-	_iCCameraFileSelOrientation = objc.RegisterName("orientation")
-	_iCCameraFileSelSetOrientation = objc.RegisterName("setOrientation:")
-	_iCCameraFileSelDuration = objc.RegisterName("duration")
-	_iCCameraFileSelHighFramerate = objc.RegisterName("highFramerate")
-	_iCCameraFileSelTimeLapse = objc.RegisterName("timeLapse")
-	_iCCameraFileSelFirstPicked = objc.RegisterName("firstPicked")
-	_iCCameraFileSelOriginatingAssetID = objc.RegisterName("originatingAssetID")
-	_iCCameraFileSelGroupUUID = objc.RegisterName("groupUUID")
-	_iCCameraFileSelGpsString = objc.RegisterName("gpsString")
-	_iCCameraFileSelRelatedUUID = objc.RegisterName("relatedUUID")
-	_iCCameraFileSelBurstUUID = objc.RegisterName("burstUUID")
-	_iCCameraFileSelBurstFavorite = objc.RegisterName("burstFavorite")
-	_iCCameraFileSelBurstPicked = objc.RegisterName("burstPicked")
-	_iCCameraFileSelSidecarFiles = objc.RegisterName("sidecarFiles")
-	_iCCameraFileSelPairedRawImage = objc.RegisterName("pairedRawImage")
-	_iCCameraFileSelFileCreationDate = objc.RegisterName("fileCreationDate")
-	_iCCameraFileSelFileModificationDate = objc.RegisterName("fileModificationDate")
-	_iCCameraFileSelExifCreationDate = objc.RegisterName("exifCreationDate")
-	_iCCameraFileSelExifModificationDate = objc.RegisterName("exifModificationDate")
-	_iCCameraFileSelFingerprint = objc.RegisterName("fingerprint")
+	_iCCameraFileSelRequestDownloadWithOptionsCompletion           = objc.RegisterName("requestDownloadWithOptions:completion:")
+	_iCCameraFileSelRequestReadDataAtOffsetLengthCompletion        = objc.RegisterName("requestReadDataAtOffset:length:completion:")
+	_iCCameraFileSelRequestSecurityScopedURLWithCompletion         = objc.RegisterName("requestSecurityScopedURLWithCompletion:")
+	_iCCameraFileSelRequestFingerprintWithCompletion               = objc.RegisterName("requestFingerprintWithCompletion:")
+	_iCCameraFileSelWidth                                          = objc.RegisterName("width")
+	_iCCameraFileSelHeight                                         = objc.RegisterName("height")
+	_iCCameraFileSelOriginalFilename                               = objc.RegisterName("originalFilename")
+	_iCCameraFileSelCreatedFilename                                = objc.RegisterName("createdFilename")
+	_iCCameraFileSelFileSize                                       = objc.RegisterName("fileSize")
+	_iCCameraFileSelOrientation                                    = objc.RegisterName("orientation")
+	_iCCameraFileSelSetOrientation                                 = objc.RegisterName("setOrientation:")
+	_iCCameraFileSelDuration                                       = objc.RegisterName("duration")
+	_iCCameraFileSelHighFramerate                                  = objc.RegisterName("highFramerate")
+	_iCCameraFileSelTimeLapse                                      = objc.RegisterName("timeLapse")
+	_iCCameraFileSelFirstPicked                                    = objc.RegisterName("firstPicked")
+	_iCCameraFileSelOriginatingAssetID                             = objc.RegisterName("originatingAssetID")
+	_iCCameraFileSelGroupUUID                                      = objc.RegisterName("groupUUID")
+	_iCCameraFileSelGpsString                                      = objc.RegisterName("gpsString")
+	_iCCameraFileSelRelatedUUID                                    = objc.RegisterName("relatedUUID")
+	_iCCameraFileSelBurstUUID                                      = objc.RegisterName("burstUUID")
+	_iCCameraFileSelBurstFavorite                                  = objc.RegisterName("burstFavorite")
+	_iCCameraFileSelBurstPicked                                    = objc.RegisterName("burstPicked")
+	_iCCameraFileSelSidecarFiles                                   = objc.RegisterName("sidecarFiles")
+	_iCCameraFileSelPairedRawImage                                 = objc.RegisterName("pairedRawImage")
+	_iCCameraFileSelFileCreationDate                               = objc.RegisterName("fileCreationDate")
+	_iCCameraFileSelFileModificationDate                           = objc.RegisterName("fileModificationDate")
+	_iCCameraFileSelExifCreationDate                               = objc.RegisterName("exifCreationDate")
+	_iCCameraFileSelExifModificationDate                           = objc.RegisterName("exifModificationDate")
+	_iCCameraFileSelFingerprint                                    = objc.RegisterName("fingerprint")
 )
 
 func ICCameraFileFromID(id objc.ID) *ICCameraFile {
@@ -66,7 +66,9 @@ func ICCameraFileFromID(id objc.ID) *ICCameraFile {
 // @property fingerprintForFileAtURL @abstract Generates a fingerprint given a URL date, or nil.
 func ICCameraFileFingerprintForFileAtURL(url *foundation.NSURL) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsICCameraFile), _iCCameraFileSelFingerprintForFileAtURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,7 +105,9 @@ func (o *ICCameraFile) RequestDownloadWithOptionsCompletion(options *foundation.
 		defer __block_completion.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelRequestDownloadWithOptionsCompletion, options, __block_completion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -167,14 +171,18 @@ func (o *ICCameraFile) Height() int {
 // @property originalFilename @abstract Original filename on disk
 func (o *ICCameraFile) OriginalFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelOriginalFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property createdFilename @abstract Created filename
 func (o *ICCameraFile) CreatedFilename() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelCreatedFilename)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -221,35 +229,45 @@ func (o *ICCameraFile) FirstPicked() bool {
 // @property originatingAssetID @abstract originatingAssetID of file if present, nil if not a HEIF or HVEC.
 func (o *ICCameraFile) OriginatingAssetID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelOriginatingAssetID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property groupUUID @abstract groupUUID of file if present, nil if file has no groupUUID.
 func (o *ICCameraFile) GroupUUID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelGroupUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property gpsString @abstract GPS String in standard format.
 func (o *ICCameraFile) GpsString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelGpsString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property relatedUUID @abstract Internal related UUID for dbg/aae/etc.
 func (o *ICCameraFile) RelatedUUID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelRelatedUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property burstUUID @abstract burstUUID of file if present, nil if not in a burst.
 func (o *ICCameraFile) BurstUUID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelBurstUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -268,49 +286,62 @@ func (o *ICCameraFile) BurstPicked() bool {
 // @property sidecarFiles @abstract This property is NULL if there are no sidecar files associated with this file. Otherwise it is an array of ICCameraFile instances of sidecar files associated with this file. An example of a sidecar file is a file with the same base name as this file and having an extension XMP.
 func (o *ICCameraFile) SidecarFiles() *foundation.NSArray[*ICCameraItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelSidecarFiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ICCameraItem](_ret)
 }
 
 // @property pairedRawImage @abstract A single item subset of the sidecarFiles array, which contains the logical RAW compliment of a JPG or other format image.
 func (o *ICCameraFile) PairedRawImage() *ICCameraFile {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelPairedRawImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ICCameraFileFromID(_ret)
 }
 
 // @property fileCreationDate @abstract Properties will either represent the actual file creation date, or nil.
 func (o *ICCameraFile) FileCreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelFileCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property fileModificationDate @abstract Properties will either represent the actual file modification date, or nil.
 func (o *ICCameraFile) FileModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelFileModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property exifCreationDate @abstract Properties will either represent the exif creation date, or nil.
 func (o *ICCameraFile) ExifCreationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelExifCreationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property exifModificationDate @abstract Properties will either represent the exif modification date, or nil.
 func (o *ICCameraFile) ExifModificationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelExifModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property fingerprint @abstract A fingerprint generated from the camera file data date, or nil.
 func (o *ICCameraFile) Fingerprint() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iCCameraFileSelFingerprint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

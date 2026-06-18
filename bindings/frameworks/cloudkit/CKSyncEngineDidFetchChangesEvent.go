@@ -15,7 +15,7 @@ type CKSyncEngineDidFetchChangesEvent struct {
 }
 
 var (
-	_clsCKSyncEngineDidFetchChangesEvent = _objcClass("CKSyncEngineDidFetchChangesEvent")
+	_clsCKSyncEngineDidFetchChangesEvent        = _objcClass("CKSyncEngineDidFetchChangesEvent")
 	_cKSyncEngineDidFetchChangesEventSelContext = objc.RegisterName("context")
 )
 
@@ -31,7 +31,8 @@ func CKSyncEngineDidFetchChangesEventFromID(id objc.ID) *CKSyncEngineDidFetchCha
 
 func (o *CKSyncEngineDidFetchChangesEvent) Context() *CKSyncEngineFetchChangesContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineDidFetchChangesEventSelContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesContextFromID(_ret)
 }
-

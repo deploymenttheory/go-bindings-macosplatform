@@ -152,4 +152,3 @@ type ContentFilterable interface {
 }
 
 var _ ContentFilterable = (*ContentFilter)(nil)
-

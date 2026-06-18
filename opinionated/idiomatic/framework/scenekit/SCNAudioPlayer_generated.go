@@ -123,4 +123,3 @@ type AudioPlayerable interface {
 }
 
 var _ AudioPlayerable = (*AudioPlayer)(nil)
-

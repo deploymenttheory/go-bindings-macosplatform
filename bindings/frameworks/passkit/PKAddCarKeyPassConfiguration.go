@@ -16,18 +16,18 @@ type PKAddCarKeyPassConfiguration struct {
 }
 
 var (
-	_clsPKAddCarKeyPassConfiguration = _objcClass("PKAddCarKeyPassConfiguration")
-	_pKAddCarKeyPassConfigurationSelInit = objc.RegisterName("init")
-	_pKAddCarKeyPassConfigurationSelPassword = objc.RegisterName("password")
-	_pKAddCarKeyPassConfigurationSelSetPassword = objc.RegisterName("setPassword:")
-	_pKAddCarKeyPassConfigurationSelSupportedRadioTechnologies = objc.RegisterName("supportedRadioTechnologies")
-	_pKAddCarKeyPassConfigurationSelSetSupportedRadioTechnologies = objc.RegisterName("setSupportedRadioTechnologies:")
-	_pKAddCarKeyPassConfigurationSelManufacturerIdentifier = objc.RegisterName("manufacturerIdentifier")
-	_pKAddCarKeyPassConfigurationSelSetManufacturerIdentifier = objc.RegisterName("setManufacturerIdentifier:")
-	_pKAddCarKeyPassConfigurationSelProvisioningTemplateIdentifier = objc.RegisterName("provisioningTemplateIdentifier")
+	_clsPKAddCarKeyPassConfiguration                                  = _objcClass("PKAddCarKeyPassConfiguration")
+	_pKAddCarKeyPassConfigurationSelInit                              = objc.RegisterName("init")
+	_pKAddCarKeyPassConfigurationSelPassword                          = objc.RegisterName("password")
+	_pKAddCarKeyPassConfigurationSelSetPassword                       = objc.RegisterName("setPassword:")
+	_pKAddCarKeyPassConfigurationSelSupportedRadioTechnologies        = objc.RegisterName("supportedRadioTechnologies")
+	_pKAddCarKeyPassConfigurationSelSetSupportedRadioTechnologies     = objc.RegisterName("setSupportedRadioTechnologies:")
+	_pKAddCarKeyPassConfigurationSelManufacturerIdentifier            = objc.RegisterName("manufacturerIdentifier")
+	_pKAddCarKeyPassConfigurationSelSetManufacturerIdentifier         = objc.RegisterName("setManufacturerIdentifier:")
+	_pKAddCarKeyPassConfigurationSelProvisioningTemplateIdentifier    = objc.RegisterName("provisioningTemplateIdentifier")
 	_pKAddCarKeyPassConfigurationSelSetProvisioningTemplateIdentifier = objc.RegisterName("setProvisioningTemplateIdentifier:")
-	_pKAddCarKeyPassConfigurationSelProductPlanIdentifier = objc.RegisterName("productPlanIdentifier")
-	_pKAddCarKeyPassConfigurationSelSetProductPlanIdentifier = objc.RegisterName("setProductPlanIdentifier:")
+	_pKAddCarKeyPassConfigurationSelProductPlanIdentifier             = objc.RegisterName("productPlanIdentifier")
+	_pKAddCarKeyPassConfigurationSelSetProductPlanIdentifier          = objc.RegisterName("setProductPlanIdentifier:")
 )
 
 func PKAddCarKeyPassConfigurationFromID(id objc.ID) *PKAddCarKeyPassConfiguration {
@@ -42,13 +42,17 @@ func PKAddCarKeyPassConfigurationFromID(id objc.ID) *PKAddCarKeyPassConfiguratio
 
 func (o *PKAddCarKeyPassConfiguration) Init() *PKAddCarKeyPassConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKAddCarKeyPassConfigurationFromID(_ret)
 }
 
 func (o *PKAddCarKeyPassConfiguration) Password() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelPassword)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *PKAddCarKeyPassConfiguration) SetSupportedRadioTechnologies(supportedRa
 
 func (o *PKAddCarKeyPassConfiguration) ManufacturerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelManufacturerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *PKAddCarKeyPassConfiguration) SetManufacturerIdentifier(manufacturerIde
 
 func (o *PKAddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelProvisioningTemplateIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,11 +95,12 @@ func (o *PKAddCarKeyPassConfiguration) SetProvisioningTemplateIdentifier(provisi
 
 func (o *PKAddCarKeyPassConfiguration) ProductPlanIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKAddCarKeyPassConfigurationSelProductPlanIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKAddCarKeyPassConfiguration) SetProductPlanIdentifier(productPlanIdentifier *foundation.NSString) {
 	o.Ptr().Send(_pKAddCarKeyPassConfigurationSelSetProductPlanIdentifier, productPlanIdentifier.Ptr())
 }
-

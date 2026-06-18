@@ -88,4 +88,3 @@ type RatingCommandable interface {
 }
 
 var _ RatingCommandable = (*RatingCommand)(nil)
-

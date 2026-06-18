@@ -16,11 +16,11 @@ type MTREnergyEVSEClusterChargingTargetScheduleStruct struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterChargingTargetScheduleStruct = _objcClass("MTREnergyEVSEClusterChargingTargetScheduleStruct")
-	_mTREnergyEVSEClusterChargingTargetScheduleStructSelDayOfWeekForSequence = objc.RegisterName("dayOfWeekForSequence")
+	_clsMTREnergyEVSEClusterChargingTargetScheduleStruct                        = _objcClass("MTREnergyEVSEClusterChargingTargetScheduleStruct")
+	_mTREnergyEVSEClusterChargingTargetScheduleStructSelDayOfWeekForSequence    = objc.RegisterName("dayOfWeekForSequence")
 	_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetDayOfWeekForSequence = objc.RegisterName("setDayOfWeekForSequence:")
-	_mTREnergyEVSEClusterChargingTargetScheduleStructSelChargingTargets = objc.RegisterName("chargingTargets")
-	_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetChargingTargets = objc.RegisterName("setChargingTargets:")
+	_mTREnergyEVSEClusterChargingTargetScheduleStructSelChargingTargets         = objc.RegisterName("chargingTargets")
+	_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetChargingTargets      = objc.RegisterName("setChargingTargets:")
 )
 
 func MTREnergyEVSEClusterChargingTargetScheduleStructFromID(id objc.ID) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
@@ -35,7 +35,9 @@ func MTREnergyEVSEClusterChargingTargetScheduleStructFromID(id objc.ID) *MTREner
 
 func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterChargingTargetScheduleStructSelDayOfWeekForSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() *fo
 func (o *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTREnergyEVSEClusterChargingTargetScheduleStructSelSetChargingTargets, chargingTargets)
 }
-

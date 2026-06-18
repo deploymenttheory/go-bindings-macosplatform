@@ -104,4 +104,3 @@ type Sceneable interface {
 }
 
 var _ Sceneable = (*Scene)(nil)
-

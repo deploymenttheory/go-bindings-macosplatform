@@ -199,4 +199,3 @@ type CapturePhotoSettingsable interface {
 }
 
 var _ CapturePhotoSettingsable = (*CapturePhotoSettings)(nil)
-

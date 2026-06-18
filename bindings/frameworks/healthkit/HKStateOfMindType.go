@@ -25,4 +25,3 @@ func HKStateOfMindTypeFromID(id objc.ID) *HKStateOfMindType {
 	purego.Track(o)
 	return o
 }
-

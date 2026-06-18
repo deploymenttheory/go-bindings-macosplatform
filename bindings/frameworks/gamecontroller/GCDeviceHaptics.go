@@ -17,9 +17,9 @@ type GCDeviceHaptics struct {
 }
 
 var (
-	_clsGCDeviceHaptics = _objcClass("GCDeviceHaptics")
+	_clsGCDeviceHaptics                         = _objcClass("GCDeviceHaptics")
 	_gCDeviceHapticsSelCreateEngineWithLocality = objc.RegisterName("createEngineWithLocality:")
-	_gCDeviceHapticsSelSupportedLocalities = objc.RegisterName("supportedLocalities")
+	_gCDeviceHapticsSelSupportedLocalities      = objc.RegisterName("supportedLocalities")
 )
 
 func GCDeviceHapticsFromID(id objc.ID) *GCDeviceHaptics {
@@ -35,7 +35,9 @@ func GCDeviceHapticsFromID(id objc.ID) *GCDeviceHaptics {
 // Creates and returns a new instance of CHHapticEngine with a given GCHapticsLocality. Any patterns you send to this engine will play on all specified actuators. @note Often times, it is best to use GCHapticsLocalityDefault. Engines created with the default locality will give users an expected haptic experience. On most game controllers, this will cause your haptic patterns to play on the handles. If you want to play different experiences on different actuators (for example, using the left handle actuator as a woofer and the right actuator as a tweeter), you can create multiple engines (for example, one with a GCHapticsLocalityLeftHandle locality and another with a GCHapticsLocalityRightHandle locality). @see CHHapticEngine @see GCHapticsLocality
 func (o *GCDeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCDeviceHapticsSelCreateEngineWithLocality, locality.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corehaptics.CHHapticEngineFromID(_ret)
 }
 
@@ -44,4 +46,3 @@ func (o *GCDeviceHaptics) SupportedLocalities() *foundation.NSSet[*foundation.NS
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _gCDeviceHapticsSelSupportedLocalities)
 	return _ret
 }
-

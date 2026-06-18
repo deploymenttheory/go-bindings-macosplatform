@@ -16,7 +16,9 @@ type AuthorizationProviderExtensionAuthorizationResult struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionAuthorizationResult].
-func (x *AuthorizationProviderExtensionAuthorizationResult) Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationResult { return x.inner }
+func (x *AuthorizationProviderExtensionAuthorizationResult) Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -119,4 +121,3 @@ type AuthorizationProviderExtensionAuthorizationResultable interface {
 }
 
 var _ AuthorizationProviderExtensionAuthorizationResultable = (*AuthorizationProviderExtensionAuthorizationResult)(nil)
-

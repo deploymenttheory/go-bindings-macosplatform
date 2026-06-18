@@ -88,4 +88,3 @@ func CreateTreeWithChildren(children *foundation.NSArray[*raw.AUParameterNode]) 
 	}
 	return &ParameterTree{inner: _r}
 }
-

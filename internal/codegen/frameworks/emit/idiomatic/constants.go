@@ -5,10 +5,10 @@ package idiomatic
 import (
 	"bytes"
 	"fmt"
-	"os"
 	"path/filepath"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -97,10 +97,7 @@ func emitConstants(
 	buf.Write(body.Bytes())
 
 	fname := pkgName + "_constants_generated.go"
-	if err := os.WriteFile(filepath.Join(outDir, fname), buf.Bytes(), 0o600); err != nil {
-		return fmt.Errorf("write %s: %w", fname, err)
-	}
-	return nil
+	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
 }
 
 // isCFRefExtern reports whether an extern's ObjC type is a CoreFoundation

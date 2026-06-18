@@ -16,10 +16,10 @@ type MTRFixedLabelClusterLabelStruct struct {
 }
 
 var (
-	_clsMTRFixedLabelClusterLabelStruct = _objcClass("MTRFixedLabelClusterLabelStruct")
-	_mTRFixedLabelClusterLabelStructSelLabel = objc.RegisterName("label")
+	_clsMTRFixedLabelClusterLabelStruct         = _objcClass("MTRFixedLabelClusterLabelStruct")
+	_mTRFixedLabelClusterLabelStructSelLabel    = objc.RegisterName("label")
 	_mTRFixedLabelClusterLabelStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRFixedLabelClusterLabelStructSelValue = objc.RegisterName("value")
+	_mTRFixedLabelClusterLabelStructSelValue    = objc.RegisterName("value")
 	_mTRFixedLabelClusterLabelStructSelSetValue = objc.RegisterName("setValue:")
 )
 
@@ -35,7 +35,9 @@ func MTRFixedLabelClusterLabelStructFromID(id objc.ID) *MTRFixedLabelClusterLabe
 
 func (o *MTRFixedLabelClusterLabelStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFixedLabelClusterLabelStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRFixedLabelClusterLabelStruct) SetLabel(label *foundation.NSString) {
 
 func (o *MTRFixedLabelClusterLabelStruct) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFixedLabelClusterLabelStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRFixedLabelClusterLabelStruct) SetValue(value *foundation.NSString) {
 	o.Ptr().Send(_mTRFixedLabelClusterLabelStructSelSetValue, value.Ptr())
 }
-

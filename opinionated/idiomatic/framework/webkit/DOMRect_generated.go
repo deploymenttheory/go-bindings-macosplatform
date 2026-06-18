@@ -85,4 +85,3 @@ type DOMRectable interface {
 }
 
 var _ DOMRectable = (*DOMRect)(nil)
-

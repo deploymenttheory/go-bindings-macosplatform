@@ -16,7 +16,9 @@ type GraphCreateSparseOpDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphCreateSparseOpDescriptor].
-func (x *GraphCreateSparseOpDescriptor) Unwrap() *raw.MPSGraphCreateSparseOpDescriptor { return x.inner }
+func (x *GraphCreateSparseOpDescriptor) Unwrap() *raw.MPSGraphCreateSparseOpDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *GraphCreateSparseOpDescriptor) SetDataType(dataType mpscore.MPSDataType
 	x.inner.SetDataType(dataType)
 }
 
-func (x *GraphCreateSparseOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphCreateSparseOpDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphCreateSparseOpDescriptorable is the interface implemented by [GraphCreateSparseOpDescriptor], for mocking and DI.
 type GraphCreateSparseOpDescriptorable interface {
@@ -82,4 +86,3 @@ type GraphCreateSparseOpDescriptorable interface {
 }
 
 var _ GraphCreateSparseOpDescriptorable = (*GraphCreateSparseOpDescriptor)(nil)
-

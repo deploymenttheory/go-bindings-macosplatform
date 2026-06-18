@@ -16,23 +16,23 @@ type MTRAdministratorCommissioningClusterOpenCommissioningWindowParams struct {
 }
 
 var (
-	_clsMTRAdministratorCommissioningClusterOpenCommissioningWindowParams = _objcClass("MTRAdministratorCommissioningClusterOpenCommissioningWindowParams")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelCommissioningTimeout = objc.RegisterName("commissioningTimeout")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetCommissioningTimeout = objc.RegisterName("setCommissioningTimeout:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakePasscodeVerifier = objc.RegisterName("pakePasscodeVerifier")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetPakePasscodeVerifier = objc.RegisterName("setPakePasscodeVerifier:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelDiscriminator = objc.RegisterName("discriminator")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetDiscriminator = objc.RegisterName("setDiscriminator:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelIterations = objc.RegisterName("iterations")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetIterations = objc.RegisterName("setIterations:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSalt = objc.RegisterName("salt")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetSalt = objc.RegisterName("setSalt:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRAdministratorCommissioningClusterOpenCommissioningWindowParams                               = _objcClass("MTRAdministratorCommissioningClusterOpenCommissioningWindowParams")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelCommissioningTimeout           = objc.RegisterName("commissioningTimeout")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetCommissioningTimeout        = objc.RegisterName("setCommissioningTimeout:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakePasscodeVerifier           = objc.RegisterName("pakePasscodeVerifier")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetPakePasscodeVerifier        = objc.RegisterName("setPakePasscodeVerifier:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelDiscriminator                  = objc.RegisterName("discriminator")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetDiscriminator               = objc.RegisterName("setDiscriminator:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelIterations                     = objc.RegisterName("iterations")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetIterations                  = objc.RegisterName("setIterations:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSalt                           = objc.RegisterName("salt")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetSalt                        = objc.RegisterName("setSalt:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakeVerifier = objc.RegisterName("pakeVerifier")
-	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetPakeVerifier = objc.RegisterName("setPakeVerifier:")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakeVerifier                   = objc.RegisterName("pakeVerifier")
+	_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetPakeVerifier                = objc.RegisterName("setPakeVerifier:")
 )
 
 func MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(id objc.ID) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
@@ -47,7 +47,9 @@ func MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsFromID(id 
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelCommissioningTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,7 +59,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetC
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakePasscodeVerifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -67,7 +71,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetP
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelDiscriminator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetD
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelIterations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -87,7 +95,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetI
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSalt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -98,7 +108,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetS
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetT
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -119,11 +133,12 @@ func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetS
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelPakeVerifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakeVerifier(pakeVerifier *foundation.NSData) {
 	o.Ptr().Send(_mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsSelSetPakeVerifier, pakeVerifier.Ptr())
 }
-

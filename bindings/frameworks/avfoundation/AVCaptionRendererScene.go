@@ -17,9 +17,9 @@ type AVCaptionRendererScene struct {
 }
 
 var (
-	_clsAVCaptionRendererScene = _objcClass("AVCaptionRendererScene")
-	_aVCaptionRendererSceneSelTimeRange = objc.RegisterName("timeRange")
-	_aVCaptionRendererSceneSelHasActiveCaptions = objc.RegisterName("hasActiveCaptions")
+	_clsAVCaptionRendererScene                     = _objcClass("AVCaptionRendererScene")
+	_aVCaptionRendererSceneSelTimeRange            = objc.RegisterName("timeRange")
+	_aVCaptionRendererSceneSelHasActiveCaptions    = objc.RegisterName("hasActiveCaptions")
 	_aVCaptionRendererSceneSelNeedsPeriodicRefresh = objc.RegisterName("needsPeriodicRefresh")
 )
 
@@ -50,4 +50,3 @@ func (o *AVCaptionRendererScene) NeedsPeriodicRefresh() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptionRendererSceneSelNeedsPeriodicRefresh)
 	return _ret
 }
-

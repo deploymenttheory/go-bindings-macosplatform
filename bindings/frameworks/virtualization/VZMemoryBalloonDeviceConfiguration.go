@@ -26,4 +26,3 @@ func VZMemoryBalloonDeviceConfigurationFromID(id objc.ID) *VZMemoryBalloonDevice
 	purego.Track(o)
 	return o
 }
-

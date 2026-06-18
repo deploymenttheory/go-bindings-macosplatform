@@ -16,19 +16,19 @@ type MTL4PrimitiveAccelerationStructureDescriptor struct {
 }
 
 var (
-	_clsMTL4PrimitiveAccelerationStructureDescriptor = _objcClass("MTL4PrimitiveAccelerationStructureDescriptor")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelGeometryDescriptors = objc.RegisterName("geometryDescriptors")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelSetGeometryDescriptors = objc.RegisterName("setGeometryDescriptors:")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionStartBorderMode = objc.RegisterName("motionStartBorderMode")
+	_clsMTL4PrimitiveAccelerationStructureDescriptor                         = _objcClass("MTL4PrimitiveAccelerationStructureDescriptor")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelGeometryDescriptors      = objc.RegisterName("geometryDescriptors")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelSetGeometryDescriptors   = objc.RegisterName("setGeometryDescriptors:")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionStartBorderMode    = objc.RegisterName("motionStartBorderMode")
 	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionStartBorderMode = objc.RegisterName("setMotionStartBorderMode:")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionEndBorderMode = objc.RegisterName("motionEndBorderMode")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionEndBorderMode = objc.RegisterName("setMotionEndBorderMode:")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionStartTime = objc.RegisterName("motionStartTime")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionStartTime = objc.RegisterName("setMotionStartTime:")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionEndTime = objc.RegisterName("motionEndTime")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionEndTime = objc.RegisterName("setMotionEndTime:")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionKeyframeCount = objc.RegisterName("motionKeyframeCount")
-	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount = objc.RegisterName("setMotionKeyframeCount:")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionEndBorderMode      = objc.RegisterName("motionEndBorderMode")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionEndBorderMode   = objc.RegisterName("setMotionEndBorderMode:")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionStartTime          = objc.RegisterName("motionStartTime")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionStartTime       = objc.RegisterName("setMotionStartTime:")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionEndTime            = objc.RegisterName("motionEndTime")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionEndTime         = objc.RegisterName("setMotionEndTime:")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelMotionKeyframeCount      = objc.RegisterName("motionKeyframeCount")
+	_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount   = objc.RegisterName("setMotionKeyframeCount:")
 )
 
 func MTL4PrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *MTL4PrimitiveAccelerationStructureDescriptor {
@@ -41,10 +41,12 @@ func MTL4PrimitiveAccelerationStructureDescriptorFromID(id objc.ID) *MTL4Primiti
 	return o
 }
 
-// Associates the array of geometry descriptors that comprise this primitive acceleration structure. If you enable keyframe motion by setting property ``motionKeyframeCount`` to a value greater than `1`, then all geometry descriptors this array references need to be motion geometry descriptors and have a number of primitive buffers equals to ``motionKeyframeCount``. Example of motion geometry descriptors include: ``MTL4AccelerationStructureMotionTriangleGeometryDescriptor``, ``MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor``, ``MTL4AccelerationStructureMotionCurveGeometryDescriptor``.
+// Associates the array of geometry descriptors that comprise this primitive acceleration structure. If you enable keyframe motion by setting property “motionKeyframeCount“ to a value greater than `1`, then all geometry descriptors this array references need to be motion geometry descriptors and have a number of primitive buffers equals to “motionKeyframeCount“. Example of motion geometry descriptors include: “MTL4AccelerationStructureMotionTriangleGeometryDescriptor“, “MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor“, “MTL4AccelerationStructureMotionCurveGeometryDescriptor“.
 func (o *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() *foundation.NSArray[*MTL4AccelerationStructureGeometryDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4PrimitiveAccelerationStructureDescriptorSelGeometryDescriptors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTL4AccelerationStructureGeometryDescriptor](_ret)
 }
 
@@ -52,7 +54,7 @@ func (o *MTL4PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(ge
 	o.Ptr().Send(_mTL4PrimitiveAccelerationStructureDescriptorSelSetGeometryDescriptors, geometryDescriptors.Ptr())
 }
 
-// Configures the behavior when the ray-tracing system samples the acceleration structure before the motion start time. Use this property to control the behavior when the ray-tracing system samples the acceleration structure at a time prior to the one you set for ``motionStartTime``. The default value of this property is `MTLMotionBorderModeClamp`.
+// Configures the behavior when the ray-tracing system samples the acceleration structure before the motion start time. Use this property to control the behavior when the ray-tracing system samples the acceleration structure at a time prior to the one you set for “motionStartTime“. The default value of this property is `MTLMotionBorderModeClamp`.
 func (o *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MTLMotionBorderMode {
 	_ret := objc.Send[MTLMotionBorderMode](o.Ptr(), _mTL4PrimitiveAccelerationStructureDescriptorSelMotionStartBorderMode)
 	return _ret
@@ -62,7 +64,7 @@ func (o *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(
 	o.Ptr().Send(_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionStartBorderMode, motionStartBorderMode)
 }
 
-// Configures the motion border mode. This property controls what happens if Metal samples the acceleration structure after ``motionEndTime``. Its default value is `MTLMotionBorderModeClamp`.
+// Configures the motion border mode. This property controls what happens if Metal samples the acceleration structure after “motionEndTime“. Its default value is `MTLMotionBorderModeClamp`.
 func (o *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MTLMotionBorderMode {
 	_ret := objc.Send[MTLMotionBorderMode](o.Ptr(), _mTL4PrimitiveAccelerationStructureDescriptorSelMotionEndBorderMode)
 	return _ret
@@ -101,4 +103,3 @@ func (o *MTL4PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() uin
 func (o *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(motionKeyframeCount uint) {
 	o.Ptr().Send(_mTL4PrimitiveAccelerationStructureDescriptorSelSetMotionKeyframeCount, motionKeyframeCount)
 }
-

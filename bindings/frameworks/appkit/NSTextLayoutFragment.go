@@ -19,28 +19,28 @@ type NSTextLayoutFragment struct {
 }
 
 var (
-	_clsNSTextLayoutFragment = _objcClass("NSTextLayoutFragment")
-	_nSTextLayoutFragmentSelInitWithTextElementRange = objc.RegisterName("initWithTextElement:range:")
-	_nSTextLayoutFragmentSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSTextLayoutFragment                                                    = _objcClass("NSTextLayoutFragment")
+	_nSTextLayoutFragmentSelInitWithTextElementRange                            = objc.RegisterName("initWithTextElement:range:")
+	_nSTextLayoutFragmentSelInitWithCoder                                       = objc.RegisterName("initWithCoder:")
 	_nSTextLayoutFragmentSelTextLineFragmentForVerticalOffsetRequiresExactMatch = objc.RegisterName("textLineFragmentForVerticalOffset:requiresExactMatch:")
-	_nSTextLayoutFragmentSelTextLineFragmentForTextLocationIsUpstreamAffinity = objc.RegisterName("textLineFragmentForTextLocation:isUpstreamAffinity:")
-	_nSTextLayoutFragmentSelInvalidateLayout = objc.RegisterName("invalidateLayout")
-	_nSTextLayoutFragmentSelDrawAtPointInContext = objc.RegisterName("drawAtPoint:inContext:")
-	_nSTextLayoutFragmentSelFrameForTextAttachmentAtLocation = objc.RegisterName("frameForTextAttachmentAtLocation:")
-	_nSTextLayoutFragmentSelTextLayoutManager = objc.RegisterName("textLayoutManager")
-	_nSTextLayoutFragmentSelTextElement = objc.RegisterName("textElement")
-	_nSTextLayoutFragmentSelRangeInElement = objc.RegisterName("rangeInElement")
-	_nSTextLayoutFragmentSelTextLineFragments = objc.RegisterName("textLineFragments")
-	_nSTextLayoutFragmentSelLayoutQueue = objc.RegisterName("layoutQueue")
-	_nSTextLayoutFragmentSelSetLayoutQueue = objc.RegisterName("setLayoutQueue:")
-	_nSTextLayoutFragmentSelState = objc.RegisterName("state")
-	_nSTextLayoutFragmentSelLayoutFragmentFrame = objc.RegisterName("layoutFragmentFrame")
-	_nSTextLayoutFragmentSelRenderingSurfaceBounds = objc.RegisterName("renderingSurfaceBounds")
-	_nSTextLayoutFragmentSelLeadingPadding = objc.RegisterName("leadingPadding")
-	_nSTextLayoutFragmentSelTrailingPadding = objc.RegisterName("trailingPadding")
-	_nSTextLayoutFragmentSelTopMargin = objc.RegisterName("topMargin")
-	_nSTextLayoutFragmentSelBottomMargin = objc.RegisterName("bottomMargin")
-	_nSTextLayoutFragmentSelTextAttachmentViewProviders = objc.RegisterName("textAttachmentViewProviders")
+	_nSTextLayoutFragmentSelTextLineFragmentForTextLocationIsUpstreamAffinity   = objc.RegisterName("textLineFragmentForTextLocation:isUpstreamAffinity:")
+	_nSTextLayoutFragmentSelInvalidateLayout                                    = objc.RegisterName("invalidateLayout")
+	_nSTextLayoutFragmentSelDrawAtPointInContext                                = objc.RegisterName("drawAtPoint:inContext:")
+	_nSTextLayoutFragmentSelFrameForTextAttachmentAtLocation                    = objc.RegisterName("frameForTextAttachmentAtLocation:")
+	_nSTextLayoutFragmentSelTextLayoutManager                                   = objc.RegisterName("textLayoutManager")
+	_nSTextLayoutFragmentSelTextElement                                         = objc.RegisterName("textElement")
+	_nSTextLayoutFragmentSelRangeInElement                                      = objc.RegisterName("rangeInElement")
+	_nSTextLayoutFragmentSelTextLineFragments                                   = objc.RegisterName("textLineFragments")
+	_nSTextLayoutFragmentSelLayoutQueue                                         = objc.RegisterName("layoutQueue")
+	_nSTextLayoutFragmentSelSetLayoutQueue                                      = objc.RegisterName("setLayoutQueue:")
+	_nSTextLayoutFragmentSelState                                               = objc.RegisterName("state")
+	_nSTextLayoutFragmentSelLayoutFragmentFrame                                 = objc.RegisterName("layoutFragmentFrame")
+	_nSTextLayoutFragmentSelRenderingSurfaceBounds                              = objc.RegisterName("renderingSurfaceBounds")
+	_nSTextLayoutFragmentSelLeadingPadding                                      = objc.RegisterName("leadingPadding")
+	_nSTextLayoutFragmentSelTrailingPadding                                     = objc.RegisterName("trailingPadding")
+	_nSTextLayoutFragmentSelTopMargin                                           = objc.RegisterName("topMargin")
+	_nSTextLayoutFragmentSelBottomMargin                                        = objc.RegisterName("bottomMargin")
+	_nSTextLayoutFragmentSelTextAttachmentViewProviders                         = objc.RegisterName("textAttachmentViewProviders")
 )
 
 func NSTextLayoutFragmentFromID(id objc.ID) *NSTextLayoutFragment {
@@ -55,25 +55,33 @@ func NSTextLayoutFragmentFromID(id objc.ID) *NSTextLayoutFragment {
 
 func (o *NSTextLayoutFragment) InitWithTextElementRange(textElement *NSTextElement, rangeInElement *NSTextRange) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelInitWithTextElementRange, textElement.Ptr(), rangeInElement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) InitWithCoder(coder *foundation.NSCoder) *NSTextLayoutFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutFragmentFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragmentForVerticalOffsetRequiresExactMatch, verticalOffset, requiresExactMatch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation NSTextLocation, isUpstreamAffinity bool) *NSTextLineFragment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragmentForTextLocationIsUpstreamAffinity, textLocation, isUpstreamAffinity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLineFragmentFromID(_ret)
 }
 
@@ -92,31 +100,41 @@ func (o *NSTextLayoutFragment) FrameForTextAttachmentAtLocation(location NSTextL
 
 func (o *NSTextLayoutFragment) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) TextElement() *NSTextElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextElementFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) RangeInElement() *NSTextRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelRangeInElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextRangeFromID(_ret)
 }
 
 func (o *NSTextLayoutFragment) TextLineFragments() *foundation.NSArray[*NSTextLineFragment] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextLineFragments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextLineFragment](_ret)
 }
 
 func (o *NSTextLayoutFragment) LayoutQueue() *foundation.NSOperationQueue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelLayoutQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSOperationQueueFromID(_ret)
 }
 
@@ -161,7 +179,8 @@ func (o *NSTextLayoutFragment) BottomMargin() float64 {
 
 func (o *NSTextLayoutFragment) TextAttachmentViewProviders() *foundation.NSArray[*NSTextAttachmentViewProvider] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextLayoutFragmentSelTextAttachmentViewProviders)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextAttachmentViewProvider](_ret)
 }
-

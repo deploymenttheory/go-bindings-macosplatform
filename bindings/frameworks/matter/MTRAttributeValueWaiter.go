@@ -16,9 +16,9 @@ type MTRAttributeValueWaiter struct {
 }
 
 var (
-	_clsMTRAttributeValueWaiter = _objcClass("MTRAttributeValueWaiter")
+	_clsMTRAttributeValueWaiter       = _objcClass("MTRAttributeValueWaiter")
 	_mTRAttributeValueWaiterSelCancel = objc.RegisterName("cancel")
-	_mTRAttributeValueWaiterSelUUID = objc.RegisterName("UUID")
+	_mTRAttributeValueWaiterSelUUID   = objc.RegisterName("UUID")
 )
 
 func MTRAttributeValueWaiterFromID(id objc.ID) *MTRAttributeValueWaiter {
@@ -38,7 +38,8 @@ func (o *MTRAttributeValueWaiter) Cancel() {
 
 func (o *MTRAttributeValueWaiter) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAttributeValueWaiterSelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
-

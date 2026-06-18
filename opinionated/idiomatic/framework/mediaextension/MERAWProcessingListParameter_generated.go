@@ -108,7 +108,9 @@ func (x *RAWProcessingListParameter) SetCurrentValue(currentValue int) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
-func (x *RAWProcessingListParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+func (x *RAWProcessingListParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
+	return &x.inner.MERAWProcessingParameter
+}
 
 // RAWProcessingListParameterable is the interface implemented by [RAWProcessingListParameter], for mocking and DI.
 type RAWProcessingListParameterable interface {
@@ -123,4 +125,3 @@ type RAWProcessingListParameterable interface {
 }
 
 var _ RAWProcessingListParameterable = (*RAWProcessingListParameter)(nil)
-

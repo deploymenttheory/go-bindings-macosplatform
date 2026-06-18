@@ -58,11 +58,17 @@ func (x *ArrayGather) SetAxis(axis uint) {
 	x.inner.SetAxis(axis)
 }
 
-func (x *ArrayGather) asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel { return &x.inner.MPSNDArrayBinaryKernel }
+func (x *ArrayGather) asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel {
+	return &x.inner.MPSNDArrayBinaryKernel
+}
 
-func (x *ArrayGather) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel }
+func (x *ArrayGather) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
+	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel
+}
 
-func (x *ArrayGather) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayGather) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayGatherable is the interface implemented by [ArrayGather], for mocking and DI.
 type ArrayGatherable interface {
@@ -74,4 +80,3 @@ type ArrayGatherable interface {
 }
 
 var _ ArrayGatherable = (*ArrayGather)(nil)
-

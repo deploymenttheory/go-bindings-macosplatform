@@ -131,4 +131,3 @@ type CNNBinaryConvolutionable interface {
 }
 
 var _ CNNBinaryConvolutionable = (*CNNBinaryConvolution)(nil)
-

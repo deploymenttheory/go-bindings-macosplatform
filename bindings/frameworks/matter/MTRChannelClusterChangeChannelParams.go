@@ -16,12 +16,12 @@ type MTRChannelClusterChangeChannelParams struct {
 }
 
 var (
-	_clsMTRChannelClusterChangeChannelParams = _objcClass("MTRChannelClusterChangeChannelParams")
-	_mTRChannelClusterChangeChannelParamsSelMatch = objc.RegisterName("match")
-	_mTRChannelClusterChangeChannelParamsSelSetMatch = objc.RegisterName("setMatch:")
-	_mTRChannelClusterChangeChannelParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRChannelClusterChangeChannelParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRChannelClusterChangeChannelParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRChannelClusterChangeChannelParams                               = _objcClass("MTRChannelClusterChangeChannelParams")
+	_mTRChannelClusterChangeChannelParamsSelMatch                          = objc.RegisterName("match")
+	_mTRChannelClusterChangeChannelParamsSelSetMatch                       = objc.RegisterName("setMatch:")
+	_mTRChannelClusterChangeChannelParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRChannelClusterChangeChannelParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRChannelClusterChangeChannelParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRChannelClusterChangeChannelParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRChannelClusterChangeChannelParamsFromID(id objc.ID) *MTRChannelClusterCh
 
 func (o *MTRChannelClusterChangeChannelParams) Match() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelParamsSelMatch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRChannelClusterChangeChannelParams) SetMatch(match *foundation.NSStri
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRChannelClusterChangeChannelParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRChannelClusterChangeChannelParams) SetTimedInvokeTimeoutMs(timedInvo
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRChannelClusterChangeChannelParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterChangeChannelParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRChannelClusterChangeChannelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRChannelClusterChangeChannelParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

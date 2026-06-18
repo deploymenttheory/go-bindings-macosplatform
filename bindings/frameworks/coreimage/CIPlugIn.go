@@ -16,12 +16,12 @@ type CIPlugIn struct {
 }
 
 var (
-	_clsCIPlugIn = _objcClass("CIPlugIn")
-	_cIPlugInSelLoadAllPlugIns = objc.RegisterName("loadAllPlugIns")
-	_cIPlugInSelLoadNonExecutablePlugIns = objc.RegisterName("loadNonExecutablePlugIns")
-	_cIPlugInSelLoadPlugInAllowNonExecutable = objc.RegisterName("loadPlugIn:allowNonExecutable:")
+	_clsCIPlugIn                              = _objcClass("CIPlugIn")
+	_cIPlugInSelLoadAllPlugIns                = objc.RegisterName("loadAllPlugIns")
+	_cIPlugInSelLoadNonExecutablePlugIns      = objc.RegisterName("loadNonExecutablePlugIns")
+	_cIPlugInSelLoadPlugInAllowNonExecutable  = objc.RegisterName("loadPlugIn:allowNonExecutable:")
 	_cIPlugInSelLoadPlugInAllowExecutableCode = objc.RegisterName("loadPlugIn:allowExecutableCode:")
-	_cIPlugInSelLoadNonExecutablePlugIn = objc.RegisterName("loadNonExecutablePlugIn:")
+	_cIPlugInSelLoadNonExecutablePlugIn       = objc.RegisterName("loadNonExecutablePlugIn:")
 )
 
 func CIPlugInFromID(id objc.ID) *CIPlugIn {
@@ -62,4 +62,3 @@ func CIPlugInLoadPlugInAllowExecutableCode(url *foundation.NSURL, allowExecutabl
 func CIPlugInLoadNonExecutablePlugIn(url *foundation.NSURL) {
 	objc.ID(_clsCIPlugIn).Send(_cIPlugInSelLoadNonExecutablePlugIn, url.Ptr())
 }
-

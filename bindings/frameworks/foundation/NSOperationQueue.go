@@ -15,28 +15,28 @@ type NSOperationQueue struct {
 }
 
 var (
-	_clsNSOperationQueue = _objcClass("NSOperationQueue")
-	_nSOperationQueueSelAddOperation = objc.RegisterName("addOperation:")
-	_nSOperationQueueSelAddOperationsWaitUntilFinished = objc.RegisterName("addOperations:waitUntilFinished:")
-	_nSOperationQueueSelAddOperationWith = objc.RegisterName("addOperationWithBlock:")
-	_nSOperationQueueSelAddBarrierBlock = objc.RegisterName("addBarrierBlock:")
-	_nSOperationQueueSelCancelAllOperations = objc.RegisterName("cancelAllOperations")
+	_clsNSOperationQueue                                  = _objcClass("NSOperationQueue")
+	_nSOperationQueueSelAddOperation                      = objc.RegisterName("addOperation:")
+	_nSOperationQueueSelAddOperationsWaitUntilFinished    = objc.RegisterName("addOperations:waitUntilFinished:")
+	_nSOperationQueueSelAddOperationWith                  = objc.RegisterName("addOperationWithBlock:")
+	_nSOperationQueueSelAddBarrierBlock                   = objc.RegisterName("addBarrierBlock:")
+	_nSOperationQueueSelCancelAllOperations               = objc.RegisterName("cancelAllOperations")
 	_nSOperationQueueSelWaitUntilAllOperationsAreFinished = objc.RegisterName("waitUntilAllOperationsAreFinished")
-	_nSOperationQueueSelProgress = objc.RegisterName("progress")
-	_nSOperationQueueSelMaxConcurrentOperationCount = objc.RegisterName("maxConcurrentOperationCount")
-	_nSOperationQueueSelSetMaxConcurrentOperationCount = objc.RegisterName("setMaxConcurrentOperationCount:")
-	_nSOperationQueueSelIsSuspended = objc.RegisterName("isSuspended")
-	_nSOperationQueueSelSetSuspended = objc.RegisterName("setSuspended:")
-	_nSOperationQueueSelName = objc.RegisterName("name")
-	_nSOperationQueueSelSetName = objc.RegisterName("setName:")
-	_nSOperationQueueSelQualityOfService = objc.RegisterName("qualityOfService")
-	_nSOperationQueueSelSetQualityOfService = objc.RegisterName("setQualityOfService:")
-	_nSOperationQueueSelUnderlyingQueue = objc.RegisterName("underlyingQueue")
-	_nSOperationQueueSelSetUnderlyingQueue = objc.RegisterName("setUnderlyingQueue:")
-	_nSOperationQueueSelCurrentQueue = objc.RegisterName("currentQueue")
-	_nSOperationQueueSelMainQueue = objc.RegisterName("mainQueue")
-	_nSOperationQueueSelOperations = objc.RegisterName("operations")
-	_nSOperationQueueSelOperationCount = objc.RegisterName("operationCount")
+	_nSOperationQueueSelProgress                          = objc.RegisterName("progress")
+	_nSOperationQueueSelMaxConcurrentOperationCount       = objc.RegisterName("maxConcurrentOperationCount")
+	_nSOperationQueueSelSetMaxConcurrentOperationCount    = objc.RegisterName("setMaxConcurrentOperationCount:")
+	_nSOperationQueueSelIsSuspended                       = objc.RegisterName("isSuspended")
+	_nSOperationQueueSelSetSuspended                      = objc.RegisterName("setSuspended:")
+	_nSOperationQueueSelName                              = objc.RegisterName("name")
+	_nSOperationQueueSelSetName                           = objc.RegisterName("setName:")
+	_nSOperationQueueSelQualityOfService                  = objc.RegisterName("qualityOfService")
+	_nSOperationQueueSelSetQualityOfService               = objc.RegisterName("setQualityOfService:")
+	_nSOperationQueueSelUnderlyingQueue                   = objc.RegisterName("underlyingQueue")
+	_nSOperationQueueSelSetUnderlyingQueue                = objc.RegisterName("setUnderlyingQueue:")
+	_nSOperationQueueSelCurrentQueue                      = objc.RegisterName("currentQueue")
+	_nSOperationQueueSelMainQueue                         = objc.RegisterName("mainQueue")
+	_nSOperationQueueSelOperations                        = objc.RegisterName("operations")
+	_nSOperationQueueSelOperationCount                    = objc.RegisterName("operationCount")
 )
 
 func NSOperationQueueFromID(id objc.ID) *NSOperationQueue {
@@ -91,7 +91,9 @@ func (o *NSOperationQueue) WaitUntilAllOperationsAreFinished() {
 // @property progress @discussion     The `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario. @example NSOperationQueue *queue = [[NSOperationQueue alloc] init]; queue.progress.totalUnitCount = 10;
 func (o *NSOperationQueue) Progress() *NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationQueueSelProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
@@ -115,7 +117,9 @@ func (o *NSOperationQueue) SetSuspended(suspended bool) {
 
 func (o *NSOperationQueue) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationQueueSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -134,7 +138,9 @@ func (o *NSOperationQueue) SetQualityOfService(qualityOfService NSQualityOfServi
 
 func (o *NSOperationQueue) UnderlyingQueue() *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationQueueSelUnderlyingQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectFromID(_ret)
 }
 
@@ -144,20 +150,26 @@ func (o *NSOperationQueue) SetUnderlyingQueue(underlyingQueue *NSObject) {
 
 func NSOperationQueueCurrentQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOperationQueue), _nSOperationQueueSelCurrentQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOperationQueueFromID(_ret)
 }
 
 func NSOperationQueueMainQueue() *NSOperationQueue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSOperationQueue), _nSOperationQueueSelMainQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOperationQueueFromID(_ret)
 }
 
 // Deprecated: access to operations is inherently a race condition, it should not be used. For barrier style behaviors please use addBarrierBlock: instead
 func (o *NSOperationQueue) Operations() *NSArray[*NSOperation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOperationQueueSelOperations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSOperation](_ret)
 }
 
@@ -166,4 +178,3 @@ func (o *NSOperationQueue) OperationCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nSOperationQueueSelOperationCount)
 	return _ret
 }
-

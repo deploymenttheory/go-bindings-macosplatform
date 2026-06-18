@@ -94,4 +94,3 @@ type HapticPatternable interface {
 }
 
 var _ HapticPatternable = (*HapticPattern)(nil)
-

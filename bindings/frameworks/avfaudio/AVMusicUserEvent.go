@@ -16,9 +16,9 @@ type AVMusicUserEvent struct {
 }
 
 var (
-	_clsAVMusicUserEvent = _objcClass("AVMusicUserEvent")
+	_clsAVMusicUserEvent             = _objcClass("AVMusicUserEvent")
 	_aVMusicUserEventSelInitWithData = objc.RegisterName("initWithData:")
-	_aVMusicUserEventSelSizeInBytes = objc.RegisterName("sizeInBytes")
+	_aVMusicUserEventSelSizeInBytes  = objc.RegisterName("sizeInBytes")
 )
 
 func AVMusicUserEventFromID(id objc.ID) *AVMusicUserEvent {
@@ -34,7 +34,9 @@ func AVMusicUserEventFromID(id objc.ID) *AVMusicUserEvent {
 // @method initWithData: @abstract Initialize the event with an NSData. @param data An NSData object containing the contents to be returned via the AVMusicTrack's user callback.
 func (o *AVMusicUserEvent) InitWithData(data *foundation.NSData) *AVMusicUserEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMusicUserEventSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMusicUserEventFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *AVMusicUserEvent) SizeInBytes() uint {
 	_ret := objc.Send[uint](o.Ptr(), _aVMusicUserEventSelSizeInBytes)
 	return _ret
 }
-

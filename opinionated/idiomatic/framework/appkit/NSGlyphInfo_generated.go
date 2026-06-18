@@ -80,4 +80,3 @@ type GlyphInfoable interface {
 }
 
 var _ GlyphInfoable = (*GlyphInfo)(nil)
-

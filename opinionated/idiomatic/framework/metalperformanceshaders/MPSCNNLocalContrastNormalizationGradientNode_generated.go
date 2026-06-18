@@ -17,7 +17,9 @@ type CNNLocalContrastNormalizationGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNLocalContrastNormalizationGradientNode].
-func (x *CNNLocalContrastNormalizationGradientNode) Unwrap() *raw.MPSCNNLocalContrastNormalizationGradientNode { return x.inner }
+func (x *CNNLocalContrastNormalizationGradientNode) Unwrap() *raw.MPSCNNLocalContrastNormalizationGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -156,9 +158,13 @@ func (x *CNNLocalContrastNormalizationGradientNode) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
-func (x *CNNLocalContrastNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNLocalContrastNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNLocalContrastNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNLocalContrastNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNLocalContrastNormalizationGradientNodeable is the interface implemented by [CNNLocalContrastNormalizationGradientNode], for mocking and DI.
 type CNNLocalContrastNormalizationGradientNodeable interface {
@@ -188,4 +194,3 @@ type CNNLocalContrastNormalizationGradientNodeable interface {
 }
 
 var _ CNNLocalContrastNormalizationGradientNodeable = (*CNNLocalContrastNormalizationGradientNode)(nil)
-

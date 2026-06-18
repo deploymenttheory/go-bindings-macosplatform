@@ -500,4 +500,3 @@ func MIDIThruConnectionSetParams(connection uint, inConnectionParams objc.ID) er
 	}
 	return nil
 }
-

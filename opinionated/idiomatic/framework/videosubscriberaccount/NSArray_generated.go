@@ -41,4 +41,3 @@ type NSArrayable interface {
 }
 
 var _ NSArrayable = (*NSArray)(nil)
-

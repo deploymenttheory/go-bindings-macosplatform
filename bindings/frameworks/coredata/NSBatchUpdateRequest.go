@@ -16,20 +16,20 @@ type NSBatchUpdateRequest struct {
 }
 
 var (
-	_clsNSBatchUpdateRequest = _objcClass("NSBatchUpdateRequest")
+	_clsNSBatchUpdateRequest                                 = _objcClass("NSBatchUpdateRequest")
 	_nSBatchUpdateRequestSelBatchUpdateRequestWithEntityName = objc.RegisterName("batchUpdateRequestWithEntityName:")
-	_nSBatchUpdateRequestSelInitWithEntityName = objc.RegisterName("initWithEntityName:")
-	_nSBatchUpdateRequestSelInitWithEntity = objc.RegisterName("initWithEntity:")
-	_nSBatchUpdateRequestSelEntityName = objc.RegisterName("entityName")
-	_nSBatchUpdateRequestSelEntity = objc.RegisterName("entity")
-	_nSBatchUpdateRequestSelPredicate = objc.RegisterName("predicate")
-	_nSBatchUpdateRequestSelSetPredicate = objc.RegisterName("setPredicate:")
-	_nSBatchUpdateRequestSelIncludesSubentities = objc.RegisterName("includesSubentities")
-	_nSBatchUpdateRequestSelSetIncludesSubentities = objc.RegisterName("setIncludesSubentities:")
-	_nSBatchUpdateRequestSelResultType = objc.RegisterName("resultType")
-	_nSBatchUpdateRequestSelSetResultType = objc.RegisterName("setResultType:")
-	_nSBatchUpdateRequestSelPropertiesToUpdate = objc.RegisterName("propertiesToUpdate")
-	_nSBatchUpdateRequestSelSetPropertiesToUpdate = objc.RegisterName("setPropertiesToUpdate:")
+	_nSBatchUpdateRequestSelInitWithEntityName               = objc.RegisterName("initWithEntityName:")
+	_nSBatchUpdateRequestSelInitWithEntity                   = objc.RegisterName("initWithEntity:")
+	_nSBatchUpdateRequestSelEntityName                       = objc.RegisterName("entityName")
+	_nSBatchUpdateRequestSelEntity                           = objc.RegisterName("entity")
+	_nSBatchUpdateRequestSelPredicate                        = objc.RegisterName("predicate")
+	_nSBatchUpdateRequestSelSetPredicate                     = objc.RegisterName("setPredicate:")
+	_nSBatchUpdateRequestSelIncludesSubentities              = objc.RegisterName("includesSubentities")
+	_nSBatchUpdateRequestSelSetIncludesSubentities           = objc.RegisterName("setIncludesSubentities:")
+	_nSBatchUpdateRequestSelResultType                       = objc.RegisterName("resultType")
+	_nSBatchUpdateRequestSelSetResultType                    = objc.RegisterName("setResultType:")
+	_nSBatchUpdateRequestSelPropertiesToUpdate               = objc.RegisterName("propertiesToUpdate")
+	_nSBatchUpdateRequestSelSetPropertiesToUpdate            = objc.RegisterName("setPropertiesToUpdate:")
 )
 
 func NSBatchUpdateRequestFromID(id objc.ID) *NSBatchUpdateRequest {
@@ -44,37 +44,49 @@ func NSBatchUpdateRequestFromID(id objc.ID) *NSBatchUpdateRequest {
 
 func NSBatchUpdateRequestBatchUpdateRequestWithEntityName(entityName *foundation.NSString) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSBatchUpdateRequest), _nSBatchUpdateRequestSelBatchUpdateRequestWithEntityName, entityName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchUpdateRequestFromID(_ret)
 }
 
 func (o *NSBatchUpdateRequest) InitWithEntityName(entityName *foundation.NSString) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelInitWithEntityName, entityName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchUpdateRequestFromID(_ret)
 }
 
 func (o *NSBatchUpdateRequest) InitWithEntity(entity *NSEntityDescription) *NSBatchUpdateRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelInitWithEntity, entity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBatchUpdateRequestFromID(_ret)
 }
 
 func (o *NSBatchUpdateRequest) EntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSBatchUpdateRequest) Entity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSBatchUpdateRequest) Predicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBatchUpdateRequestSelPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -108,4 +120,3 @@ func (o *NSBatchUpdateRequest) PropertiesToUpdate() *foundation.NSDictionary[obj
 func (o *NSBatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSBatchUpdateRequestSelSetPropertiesToUpdate, propertiesToUpdate)
 }
-

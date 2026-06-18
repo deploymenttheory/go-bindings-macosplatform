@@ -20,9 +20,9 @@ type MKMapSnapshot struct {
 }
 
 var (
-	_clsMKMapSnapshot = _objcClass("MKMapSnapshot")
+	_clsMKMapSnapshot                   = _objcClass("MKMapSnapshot")
 	_mKMapSnapshotSelPointForCoordinate = objc.RegisterName("pointForCoordinate:")
-	_mKMapSnapshotSelAppearance = objc.RegisterName("appearance")
+	_mKMapSnapshotSelAppearance         = objc.RegisterName("appearance")
 )
 
 func MKMapSnapshotFromID(id objc.ID) *MKMapSnapshot {
@@ -42,7 +42,8 @@ func (o *MKMapSnapshot) PointForCoordinate(coordinate unsafe.Pointer) corefounda
 
 func (o *MKMapSnapshot) Appearance() *appkit.NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapSnapshotSelAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSAppearanceFromID(_ret)
 }
-

@@ -17,8 +17,8 @@ type MPSNNReduceColumnMax struct {
 }
 
 var (
-	_clsMPSNNReduceColumnMax = _objcClass("MPSNNReduceColumnMax")
-	_mPSNNReduceColumnMaxSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSNNReduceColumnMax                    = _objcClass("MPSNNReduceColumnMax")
+	_mPSNNReduceColumnMaxSelInitWithDevice      = objc.RegisterName("initWithDevice:")
 	_mPSNNReduceColumnMaxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
 )
 
@@ -34,14 +34,17 @@ func MPSNNReduceColumnMaxFromID(id objc.ID) *MPSNNReduceColumnMax {
 
 func (o *MPSNNReduceColumnMax) InitWithDevice(device metal.MTLDevice) *MPSNNReduceColumnMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMaxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMaxFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSNNReduceColumnMax object, or nil if failure.
 func (o *MPSNNReduceColumnMax) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNReduceColumnMax {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNReduceColumnMaxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNReduceColumnMaxFromID(_ret)
 }
-

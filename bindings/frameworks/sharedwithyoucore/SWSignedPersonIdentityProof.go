@@ -16,9 +16,9 @@ type SWSignedPersonIdentityProof struct {
 }
 
 var (
-	_clsSWSignedPersonIdentityProof = _objcClass("SWSignedPersonIdentityProof")
+	_clsSWSignedPersonIdentityProof                                         = _objcClass("SWSignedPersonIdentityProof")
 	_sWSignedPersonIdentityProofSelInitWithPersonIdentityProofSignatureData = objc.RegisterName("initWithPersonIdentityProof:signatureData:")
-	_sWSignedPersonIdentityProofSelSignatureData = objc.RegisterName("signatureData")
+	_sWSignedPersonIdentityProofSelSignatureData                            = objc.RegisterName("signatureData")
 )
 
 func SWSignedPersonIdentityProofFromID(id objc.ID) *SWSignedPersonIdentityProof {
@@ -33,13 +33,16 @@ func SWSignedPersonIdentityProofFromID(id objc.ID) *SWSignedPersonIdentityProof 
 
 func (o *SWSignedPersonIdentityProof) InitWithPersonIdentityProofSignatureData(personIdentityProof *SWPersonIdentityProof, data *foundation.NSData) *SWSignedPersonIdentityProof {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWSignedPersonIdentityProofSelInitWithPersonIdentityProofSignatureData, personIdentityProof.Ptr(), data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWSignedPersonIdentityProofFromID(_ret)
 }
 
 func (o *SWSignedPersonIdentityProof) SignatureData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWSignedPersonIdentityProofSelSignatureData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

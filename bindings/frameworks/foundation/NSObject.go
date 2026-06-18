@@ -21,148 +21,148 @@ func (o *NSObject) Ptr() objc.ID { return o.ptr }
 func (o *NSObject) InitPtr(id objc.ID) { o.ptr = id }
 
 var (
-	_clsNSObject = _objcClass("NSObject")
-	_nSObjectSelInit = objc.RegisterName("init")
-	_nSObjectSelNew = objc.RegisterName("new")
-	_nSObjectSelAllocWithZone = objc.RegisterName("allocWithZone:")
-	_nSObjectSelAlloc = objc.RegisterName("alloc")
-	_nSObjectSelDealloc = objc.RegisterName("dealloc")
-	_nSObjectSelFinalize = objc.RegisterName("finalize")
-	_nSObjectSelCopy = objc.RegisterName("copy")
-	_nSObjectSelMutableCopy = objc.RegisterName("mutableCopy")
-	_nSObjectSelCopyWithZone = objc.RegisterName("copyWithZone:")
-	_nSObjectSelMutableCopyWithZone = objc.RegisterName("mutableCopyWithZone:")
-	_nSObjectSelInstancesRespondToSelector = objc.RegisterName("instancesRespondToSelector:")
-	_nSObjectSelConformsToProtocol = objc.RegisterName("conformsToProtocol:")
-	_nSObjectSelMethodForSelector = objc.RegisterName("methodForSelector:")
-	_nSObjectSelInstanceMethodForSelector = objc.RegisterName("instanceMethodForSelector:")
-	_nSObjectSelDoesNotRecognizeSelector = objc.RegisterName("doesNotRecognizeSelector:")
-	_nSObjectSelForwardingTargetForSelector = objc.RegisterName("forwardingTargetForSelector:")
-	_nSObjectSelForwardInvocation = objc.RegisterName("forwardInvocation:")
-	_nSObjectSelMethodSignatureForSelector = objc.RegisterName("methodSignatureForSelector:")
-	_nSObjectSelInstanceMethodSignatureForSelector = objc.RegisterName("instanceMethodSignatureForSelector:")
-	_nSObjectSelIsSubclassOfClass = objc.RegisterName("isSubclassOfClass:")
-	_nSObjectSelResolveClassMethod = objc.RegisterName("resolveClassMethod:")
-	_nSObjectSelResolveInstanceMethod = objc.RegisterName("resolveInstanceMethod:")
-	_nSObjectSelHash = objc.RegisterName("hash")
-	_nSObjectSelSuperclass = objc.RegisterName("superclass")
-	_nSObjectSelClass = objc.RegisterName("class")
-	_nSObjectSelDescription = objc.RegisterName("description")
-	_nSObjectSelDebugDescription = objc.RegisterName("debugDescription")
-	_nSObjectSelVersion = objc.RegisterName("version")
-	_nSObjectSelSetVersion = objc.RegisterName("setVersion:")
-	_nSObjectSelReplacementObjectForCoder = objc.RegisterName("replacementObjectForCoder:")
-	_nSObjectSelAwakeAfterUsingCoder = objc.RegisterName("awakeAfterUsingCoder:")
-	_nSObjectSelClassForCoder = objc.RegisterName("classForCoder")
-	_nSObjectSelAutoContentAccessingProxy = objc.RegisterName("autoContentAccessingProxy")
+	_clsNSObject                                                                         = _objcClass("NSObject")
+	_nSObjectSelInit                                                                     = objc.RegisterName("init")
+	_nSObjectSelNew                                                                      = objc.RegisterName("new")
+	_nSObjectSelAllocWithZone                                                            = objc.RegisterName("allocWithZone:")
+	_nSObjectSelAlloc                                                                    = objc.RegisterName("alloc")
+	_nSObjectSelDealloc                                                                  = objc.RegisterName("dealloc")
+	_nSObjectSelFinalize                                                                 = objc.RegisterName("finalize")
+	_nSObjectSelCopy                                                                     = objc.RegisterName("copy")
+	_nSObjectSelMutableCopy                                                              = objc.RegisterName("mutableCopy")
+	_nSObjectSelCopyWithZone                                                             = objc.RegisterName("copyWithZone:")
+	_nSObjectSelMutableCopyWithZone                                                      = objc.RegisterName("mutableCopyWithZone:")
+	_nSObjectSelInstancesRespondToSelector                                               = objc.RegisterName("instancesRespondToSelector:")
+	_nSObjectSelConformsToProtocol                                                       = objc.RegisterName("conformsToProtocol:")
+	_nSObjectSelMethodForSelector                                                        = objc.RegisterName("methodForSelector:")
+	_nSObjectSelInstanceMethodForSelector                                                = objc.RegisterName("instanceMethodForSelector:")
+	_nSObjectSelDoesNotRecognizeSelector                                                 = objc.RegisterName("doesNotRecognizeSelector:")
+	_nSObjectSelForwardingTargetForSelector                                              = objc.RegisterName("forwardingTargetForSelector:")
+	_nSObjectSelForwardInvocation                                                        = objc.RegisterName("forwardInvocation:")
+	_nSObjectSelMethodSignatureForSelector                                               = objc.RegisterName("methodSignatureForSelector:")
+	_nSObjectSelInstanceMethodSignatureForSelector                                       = objc.RegisterName("instanceMethodSignatureForSelector:")
+	_nSObjectSelIsSubclassOfClass                                                        = objc.RegisterName("isSubclassOfClass:")
+	_nSObjectSelResolveClassMethod                                                       = objc.RegisterName("resolveClassMethod:")
+	_nSObjectSelResolveInstanceMethod                                                    = objc.RegisterName("resolveInstanceMethod:")
+	_nSObjectSelHash                                                                     = objc.RegisterName("hash")
+	_nSObjectSelSuperclass                                                               = objc.RegisterName("superclass")
+	_nSObjectSelClass                                                                    = objc.RegisterName("class")
+	_nSObjectSelDescription                                                              = objc.RegisterName("description")
+	_nSObjectSelDebugDescription                                                         = objc.RegisterName("debugDescription")
+	_nSObjectSelVersion                                                                  = objc.RegisterName("version")
+	_nSObjectSelSetVersion                                                               = objc.RegisterName("setVersion:")
+	_nSObjectSelReplacementObjectForCoder                                                = objc.RegisterName("replacementObjectForCoder:")
+	_nSObjectSelAwakeAfterUsingCoder                                                     = objc.RegisterName("awakeAfterUsingCoder:")
+	_nSObjectSelClassForCoder                                                            = objc.RegisterName("classForCoder")
+	_nSObjectSelAutoContentAccessingProxy                                                = objc.RegisterName("autoContentAccessingProxy")
 	_nSObjectSelAttemptRecoveryFromErrorOptionIndexDelegateDidRecoverSelectorContextInfo = objc.RegisterName("attemptRecoveryFromError:optionIndex:delegate:didRecoverSelector:contextInfo:")
-	_nSObjectSelAttemptRecoveryFromErrorOptionIndex = objc.RegisterName("attemptRecoveryFromError:optionIndex:")
-	_nSObjectSelPerformSelectorWithObjectAfterDelayInModes = objc.RegisterName("performSelector:withObject:afterDelay:inModes:")
-	_nSObjectSelPerformSelectorWithObjectAfterDelay = objc.RegisterName("performSelector:withObject:afterDelay:")
-	_nSObjectSelCancelPreviousPerformRequestsWithTargetSelectorObject = objc.RegisterName("cancelPreviousPerformRequestsWithTarget:selector:object:")
-	_nSObjectSelCancelPreviousPerformRequestsWithTarget = objc.RegisterName("cancelPreviousPerformRequestsWithTarget:")
-	_nSObjectSelURLResourceDataDidBecomeAvailable = objc.RegisterName("URL:resourceDataDidBecomeAvailable:")
-	_nSObjectSelURLResourceDidFinishLoading = objc.RegisterName("URLResourceDidFinishLoading:")
-	_nSObjectSelURLResourceDidCancelLoading = objc.RegisterName("URLResourceDidCancelLoading:")
-	_nSObjectSelURLResourceDidFailLoadingWithReason = objc.RegisterName("URL:resourceDidFailLoadingWithReason:")
-	_nSObjectSelFileManagerShouldProceedAfterError = objc.RegisterName("fileManager:shouldProceedAfterError:")
-	_nSObjectSelFileManagerWillProcessPath = objc.RegisterName("fileManager:willProcessPath:")
-	_nSObjectSelValueForKey = objc.RegisterName("valueForKey:")
-	_nSObjectSelSetValueForKey = objc.RegisterName("setValue:forKey:")
-	_nSObjectSelValidateValueForKeyError = objc.RegisterName("validateValue:forKey:error:")
-	_nSObjectSelMutableArrayValueForKey = objc.RegisterName("mutableArrayValueForKey:")
-	_nSObjectSelMutableOrderedSetValueForKey = objc.RegisterName("mutableOrderedSetValueForKey:")
-	_nSObjectSelMutableSetValueForKey = objc.RegisterName("mutableSetValueForKey:")
-	_nSObjectSelValueForKeyPath = objc.RegisterName("valueForKeyPath:")
-	_nSObjectSelSetValueForKeyPath = objc.RegisterName("setValue:forKeyPath:")
-	_nSObjectSelValidateValueForKeyPathError = objc.RegisterName("validateValue:forKeyPath:error:")
-	_nSObjectSelMutableArrayValueForKeyPath = objc.RegisterName("mutableArrayValueForKeyPath:")
-	_nSObjectSelMutableOrderedSetValueForKeyPath = objc.RegisterName("mutableOrderedSetValueForKeyPath:")
-	_nSObjectSelMutableSetValueForKeyPath = objc.RegisterName("mutableSetValueForKeyPath:")
-	_nSObjectSelValueForUndefinedKey = objc.RegisterName("valueForUndefinedKey:")
-	_nSObjectSelSetValueForUndefinedKey = objc.RegisterName("setValue:forUndefinedKey:")
-	_nSObjectSelSetNilValueForKey = objc.RegisterName("setNilValueForKey:")
-	_nSObjectSelDictionaryWithValuesForKeys = objc.RegisterName("dictionaryWithValuesForKeys:")
-	_nSObjectSelSetValuesForKeysWithDictionary = objc.RegisterName("setValuesForKeysWithDictionary:")
-	_nSObjectSelAccessInstanceVariablesDirectly = objc.RegisterName("accessInstanceVariablesDirectly")
-	_nSObjectSelUseStoredAccessor = objc.RegisterName("useStoredAccessor")
-	_nSObjectSelStoredValueForKey = objc.RegisterName("storedValueForKey:")
-	_nSObjectSelTakeStoredValueForKey = objc.RegisterName("takeStoredValue:forKey:")
-	_nSObjectSelTakeValueForKey = objc.RegisterName("takeValue:forKey:")
-	_nSObjectSelTakeValueForKeyPath = objc.RegisterName("takeValue:forKeyPath:")
-	_nSObjectSelHandleQueryWithUnboundKey = objc.RegisterName("handleQueryWithUnboundKey:")
-	_nSObjectSelHandleTakeValueForUnboundKey = objc.RegisterName("handleTakeValue:forUnboundKey:")
-	_nSObjectSelUnableToSetNilForKey = objc.RegisterName("unableToSetNilForKey:")
-	_nSObjectSelValuesForKeys = objc.RegisterName("valuesForKeys:")
-	_nSObjectSelTakeValuesFromDictionary = objc.RegisterName("takeValuesFromDictionary:")
-	_nSObjectSelObserveValueForKeyPathOfObjectChangeContext = objc.RegisterName("observeValueForKeyPath:ofObject:change:context:")
-	_nSObjectSelAddObserverForKeyPathOptionsContext = objc.RegisterName("addObserver:forKeyPath:options:context:")
-	_nSObjectSelRemoveObserverForKeyPathContext = objc.RegisterName("removeObserver:forKeyPath:context:")
-	_nSObjectSelRemoveObserverForKeyPath = objc.RegisterName("removeObserver:forKeyPath:")
-	_nSObjectSelWillChangeValueForKey = objc.RegisterName("willChangeValueForKey:")
-	_nSObjectSelDidChangeValueForKey = objc.RegisterName("didChangeValueForKey:")
-	_nSObjectSelWillChangeValuesAtIndexesForKey = objc.RegisterName("willChange:valuesAtIndexes:forKey:")
-	_nSObjectSelDidChangeValuesAtIndexesForKey = objc.RegisterName("didChange:valuesAtIndexes:forKey:")
-	_nSObjectSelWillChangeValueForKeyWithSetMutationUsingObjects = objc.RegisterName("willChangeValueForKey:withSetMutation:usingObjects:")
-	_nSObjectSelDidChangeValueForKeyWithSetMutationUsingObjects = objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:")
-	_nSObjectSelKeyPathsForValuesAffectingValueForKey = objc.RegisterName("keyPathsForValuesAffectingValueForKey:")
-	_nSObjectSelAutomaticallyNotifiesObserversForKey = objc.RegisterName("automaticallyNotifiesObserversForKey:")
-	_nSObjectSelObservationInfo = objc.RegisterName("observationInfo")
-	_nSObjectSelSetObservationInfo = objc.RegisterName("setObservationInfo:")
-	_nSObjectSelSetKeysTriggerChangeNotificationsForDependentKey = objc.RegisterName("setKeys:triggerChangeNotificationsForDependentKey:")
-	_nSObjectSelSetSharedObservers = objc.RegisterName("setSharedObservers:")
-	_nSObjectSelReplacementObjectForKeyedArchiver = objc.RegisterName("replacementObjectForKeyedArchiver:")
-	_nSObjectSelClassFallbacksForKeyedArchiver = objc.RegisterName("classFallbacksForKeyedArchiver")
-	_nSObjectSelClassForKeyedArchiver = objc.RegisterName("classForKeyedArchiver")
-	_nSObjectSelClassForKeyedUnarchiver = objc.RegisterName("classForKeyedUnarchiver")
-	_nSObjectSelPerformSelectorOnMainThreadWithObjectWaitUntilDoneModes = objc.RegisterName("performSelectorOnMainThread:withObject:waitUntilDone:modes:")
-	_nSObjectSelPerformSelectorOnMainThreadWithObjectWaitUntilDone = objc.RegisterName("performSelectorOnMainThread:withObject:waitUntilDone:")
-	_nSObjectSelPerformSelectorOnThreadWithObjectWaitUntilDoneModes = objc.RegisterName("performSelector:onThread:withObject:waitUntilDone:modes:")
-	_nSObjectSelPerformSelectorOnThreadWithObjectWaitUntilDone = objc.RegisterName("performSelector:onThread:withObject:waitUntilDone:")
-	_nSObjectSelPerformSelectorInBackgroundWithObject = objc.RegisterName("performSelectorInBackground:withObject:")
-	_nSObjectSelReplacementObjectForArchiver = objc.RegisterName("replacementObjectForArchiver:")
-	_nSObjectSelClassForArchiver = objc.RegisterName("classForArchiver")
-	_nSObjectSelReplacementObjectForPortCoder = objc.RegisterName("replacementObjectForPortCoder:")
-	_nSObjectSelClassForPortCoder = objc.RegisterName("classForPortCoder")
-	_nSObjectSelInverseForRelationshipKey = objc.RegisterName("inverseForRelationshipKey:")
-	_nSObjectSelClassDescription = objc.RegisterName("classDescription")
-	_nSObjectSelAttributeKeys = objc.RegisterName("attributeKeys")
-	_nSObjectSelToOneRelationshipKeys = objc.RegisterName("toOneRelationshipKeys")
-	_nSObjectSelToManyRelationshipKeys = objc.RegisterName("toManyRelationshipKeys")
-	_nSObjectSelScriptingValueForSpecifier = objc.RegisterName("scriptingValueForSpecifier:")
-	_nSObjectSelCopyScriptingValueForKeyWithProperties = objc.RegisterName("copyScriptingValue:forKey:withProperties:")
-	_nSObjectSelNewScriptingObjectOfClassForValueForKeyWithContentsValueProperties = objc.RegisterName("newScriptingObjectOfClass:forValueForKey:withContentsValue:properties:")
-	_nSObjectSelScriptingProperties = objc.RegisterName("scriptingProperties")
-	_nSObjectSelSetScriptingProperties = objc.RegisterName("setScriptingProperties:")
-	_nSObjectSelClassCode = objc.RegisterName("classCode")
-	_nSObjectSelClassName = objc.RegisterName("className")
-	_nSObjectSelValueAtIndexInPropertyWithKey = objc.RegisterName("valueAtIndex:inPropertyWithKey:")
-	_nSObjectSelValueWithNameInPropertyWithKey = objc.RegisterName("valueWithName:inPropertyWithKey:")
-	_nSObjectSelValueWithUniqueIDInPropertyWithKey = objc.RegisterName("valueWithUniqueID:inPropertyWithKey:")
-	_nSObjectSelInsertValueAtIndexInPropertyWithKey = objc.RegisterName("insertValue:atIndex:inPropertyWithKey:")
-	_nSObjectSelRemoveValueAtIndexFromPropertyWithKey = objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:")
-	_nSObjectSelReplaceValueAtIndexInPropertyWithKeyWithValue = objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:")
-	_nSObjectSelInsertValueInPropertyWithKey = objc.RegisterName("insertValue:inPropertyWithKey:")
-	_nSObjectSelCoerceValueForKey = objc.RegisterName("coerceValue:forKey:")
-	_nSObjectSelIndicesOfObjectsByEvaluatingObjectSpecifier = objc.RegisterName("indicesOfObjectsByEvaluatingObjectSpecifier:")
-	_nSObjectSelObjectSpecifier = objc.RegisterName("objectSpecifier")
-	_nSObjectSelIsEqualTo = objc.RegisterName("isEqualTo:")
-	_nSObjectSelIsLessThanOrEqualTo = objc.RegisterName("isLessThanOrEqualTo:")
-	_nSObjectSelIsLessThan = objc.RegisterName("isLessThan:")
-	_nSObjectSelIsGreaterThanOrEqualTo = objc.RegisterName("isGreaterThanOrEqualTo:")
-	_nSObjectSelIsGreaterThan = objc.RegisterName("isGreaterThan:")
-	_nSObjectSelIsNotEqualTo = objc.RegisterName("isNotEqualTo:")
-	_nSObjectSelDoesContain = objc.RegisterName("doesContain:")
-	_nSObjectSelIsLike = objc.RegisterName("isLike:")
-	_nSObjectSelIsCaseInsensitiveLike = objc.RegisterName("isCaseInsensitiveLike:")
-	_nSObjectSelScriptingIsEqualTo = objc.RegisterName("scriptingIsEqualTo:")
-	_nSObjectSelScriptingIsLessThanOrEqualTo = objc.RegisterName("scriptingIsLessThanOrEqualTo:")
-	_nSObjectSelScriptingIsLessThan = objc.RegisterName("scriptingIsLessThan:")
-	_nSObjectSelScriptingIsGreaterThanOrEqualTo = objc.RegisterName("scriptingIsGreaterThanOrEqualTo:")
-	_nSObjectSelScriptingIsGreaterThan = objc.RegisterName("scriptingIsGreaterThan:")
-	_nSObjectSelScriptingBeginsWith = objc.RegisterName("scriptingBeginsWith:")
-	_nSObjectSelScriptingEndsWith = objc.RegisterName("scriptingEndsWith:")
-	_nSObjectSelScriptingContains = objc.RegisterName("scriptingContains:")
+	_nSObjectSelAttemptRecoveryFromErrorOptionIndex                                      = objc.RegisterName("attemptRecoveryFromError:optionIndex:")
+	_nSObjectSelPerformSelectorWithObjectAfterDelayInModes                               = objc.RegisterName("performSelector:withObject:afterDelay:inModes:")
+	_nSObjectSelPerformSelectorWithObjectAfterDelay                                      = objc.RegisterName("performSelector:withObject:afterDelay:")
+	_nSObjectSelCancelPreviousPerformRequestsWithTargetSelectorObject                    = objc.RegisterName("cancelPreviousPerformRequestsWithTarget:selector:object:")
+	_nSObjectSelCancelPreviousPerformRequestsWithTarget                                  = objc.RegisterName("cancelPreviousPerformRequestsWithTarget:")
+	_nSObjectSelURLResourceDataDidBecomeAvailable                                        = objc.RegisterName("URL:resourceDataDidBecomeAvailable:")
+	_nSObjectSelURLResourceDidFinishLoading                                              = objc.RegisterName("URLResourceDidFinishLoading:")
+	_nSObjectSelURLResourceDidCancelLoading                                              = objc.RegisterName("URLResourceDidCancelLoading:")
+	_nSObjectSelURLResourceDidFailLoadingWithReason                                      = objc.RegisterName("URL:resourceDidFailLoadingWithReason:")
+	_nSObjectSelFileManagerShouldProceedAfterError                                       = objc.RegisterName("fileManager:shouldProceedAfterError:")
+	_nSObjectSelFileManagerWillProcessPath                                               = objc.RegisterName("fileManager:willProcessPath:")
+	_nSObjectSelValueForKey                                                              = objc.RegisterName("valueForKey:")
+	_nSObjectSelSetValueForKey                                                           = objc.RegisterName("setValue:forKey:")
+	_nSObjectSelValidateValueForKeyError                                                 = objc.RegisterName("validateValue:forKey:error:")
+	_nSObjectSelMutableArrayValueForKey                                                  = objc.RegisterName("mutableArrayValueForKey:")
+	_nSObjectSelMutableOrderedSetValueForKey                                             = objc.RegisterName("mutableOrderedSetValueForKey:")
+	_nSObjectSelMutableSetValueForKey                                                    = objc.RegisterName("mutableSetValueForKey:")
+	_nSObjectSelValueForKeyPath                                                          = objc.RegisterName("valueForKeyPath:")
+	_nSObjectSelSetValueForKeyPath                                                       = objc.RegisterName("setValue:forKeyPath:")
+	_nSObjectSelValidateValueForKeyPathError                                             = objc.RegisterName("validateValue:forKeyPath:error:")
+	_nSObjectSelMutableArrayValueForKeyPath                                              = objc.RegisterName("mutableArrayValueForKeyPath:")
+	_nSObjectSelMutableOrderedSetValueForKeyPath                                         = objc.RegisterName("mutableOrderedSetValueForKeyPath:")
+	_nSObjectSelMutableSetValueForKeyPath                                                = objc.RegisterName("mutableSetValueForKeyPath:")
+	_nSObjectSelValueForUndefinedKey                                                     = objc.RegisterName("valueForUndefinedKey:")
+	_nSObjectSelSetValueForUndefinedKey                                                  = objc.RegisterName("setValue:forUndefinedKey:")
+	_nSObjectSelSetNilValueForKey                                                        = objc.RegisterName("setNilValueForKey:")
+	_nSObjectSelDictionaryWithValuesForKeys                                              = objc.RegisterName("dictionaryWithValuesForKeys:")
+	_nSObjectSelSetValuesForKeysWithDictionary                                           = objc.RegisterName("setValuesForKeysWithDictionary:")
+	_nSObjectSelAccessInstanceVariablesDirectly                                          = objc.RegisterName("accessInstanceVariablesDirectly")
+	_nSObjectSelUseStoredAccessor                                                        = objc.RegisterName("useStoredAccessor")
+	_nSObjectSelStoredValueForKey                                                        = objc.RegisterName("storedValueForKey:")
+	_nSObjectSelTakeStoredValueForKey                                                    = objc.RegisterName("takeStoredValue:forKey:")
+	_nSObjectSelTakeValueForKey                                                          = objc.RegisterName("takeValue:forKey:")
+	_nSObjectSelTakeValueForKeyPath                                                      = objc.RegisterName("takeValue:forKeyPath:")
+	_nSObjectSelHandleQueryWithUnboundKey                                                = objc.RegisterName("handleQueryWithUnboundKey:")
+	_nSObjectSelHandleTakeValueForUnboundKey                                             = objc.RegisterName("handleTakeValue:forUnboundKey:")
+	_nSObjectSelUnableToSetNilForKey                                                     = objc.RegisterName("unableToSetNilForKey:")
+	_nSObjectSelValuesForKeys                                                            = objc.RegisterName("valuesForKeys:")
+	_nSObjectSelTakeValuesFromDictionary                                                 = objc.RegisterName("takeValuesFromDictionary:")
+	_nSObjectSelObserveValueForKeyPathOfObjectChangeContext                              = objc.RegisterName("observeValueForKeyPath:ofObject:change:context:")
+	_nSObjectSelAddObserverForKeyPathOptionsContext                                      = objc.RegisterName("addObserver:forKeyPath:options:context:")
+	_nSObjectSelRemoveObserverForKeyPathContext                                          = objc.RegisterName("removeObserver:forKeyPath:context:")
+	_nSObjectSelRemoveObserverForKeyPath                                                 = objc.RegisterName("removeObserver:forKeyPath:")
+	_nSObjectSelWillChangeValueForKey                                                    = objc.RegisterName("willChangeValueForKey:")
+	_nSObjectSelDidChangeValueForKey                                                     = objc.RegisterName("didChangeValueForKey:")
+	_nSObjectSelWillChangeValuesAtIndexesForKey                                          = objc.RegisterName("willChange:valuesAtIndexes:forKey:")
+	_nSObjectSelDidChangeValuesAtIndexesForKey                                           = objc.RegisterName("didChange:valuesAtIndexes:forKey:")
+	_nSObjectSelWillChangeValueForKeyWithSetMutationUsingObjects                         = objc.RegisterName("willChangeValueForKey:withSetMutation:usingObjects:")
+	_nSObjectSelDidChangeValueForKeyWithSetMutationUsingObjects                          = objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:")
+	_nSObjectSelKeyPathsForValuesAffectingValueForKey                                    = objc.RegisterName("keyPathsForValuesAffectingValueForKey:")
+	_nSObjectSelAutomaticallyNotifiesObserversForKey                                     = objc.RegisterName("automaticallyNotifiesObserversForKey:")
+	_nSObjectSelObservationInfo                                                          = objc.RegisterName("observationInfo")
+	_nSObjectSelSetObservationInfo                                                       = objc.RegisterName("setObservationInfo:")
+	_nSObjectSelSetKeysTriggerChangeNotificationsForDependentKey                         = objc.RegisterName("setKeys:triggerChangeNotificationsForDependentKey:")
+	_nSObjectSelSetSharedObservers                                                       = objc.RegisterName("setSharedObservers:")
+	_nSObjectSelReplacementObjectForKeyedArchiver                                        = objc.RegisterName("replacementObjectForKeyedArchiver:")
+	_nSObjectSelClassFallbacksForKeyedArchiver                                           = objc.RegisterName("classFallbacksForKeyedArchiver")
+	_nSObjectSelClassForKeyedArchiver                                                    = objc.RegisterName("classForKeyedArchiver")
+	_nSObjectSelClassForKeyedUnarchiver                                                  = objc.RegisterName("classForKeyedUnarchiver")
+	_nSObjectSelPerformSelectorOnMainThreadWithObjectWaitUntilDoneModes                  = objc.RegisterName("performSelectorOnMainThread:withObject:waitUntilDone:modes:")
+	_nSObjectSelPerformSelectorOnMainThreadWithObjectWaitUntilDone                       = objc.RegisterName("performSelectorOnMainThread:withObject:waitUntilDone:")
+	_nSObjectSelPerformSelectorOnThreadWithObjectWaitUntilDoneModes                      = objc.RegisterName("performSelector:onThread:withObject:waitUntilDone:modes:")
+	_nSObjectSelPerformSelectorOnThreadWithObjectWaitUntilDone                           = objc.RegisterName("performSelector:onThread:withObject:waitUntilDone:")
+	_nSObjectSelPerformSelectorInBackgroundWithObject                                    = objc.RegisterName("performSelectorInBackground:withObject:")
+	_nSObjectSelReplacementObjectForArchiver                                             = objc.RegisterName("replacementObjectForArchiver:")
+	_nSObjectSelClassForArchiver                                                         = objc.RegisterName("classForArchiver")
+	_nSObjectSelReplacementObjectForPortCoder                                            = objc.RegisterName("replacementObjectForPortCoder:")
+	_nSObjectSelClassForPortCoder                                                        = objc.RegisterName("classForPortCoder")
+	_nSObjectSelInverseForRelationshipKey                                                = objc.RegisterName("inverseForRelationshipKey:")
+	_nSObjectSelClassDescription                                                         = objc.RegisterName("classDescription")
+	_nSObjectSelAttributeKeys                                                            = objc.RegisterName("attributeKeys")
+	_nSObjectSelToOneRelationshipKeys                                                    = objc.RegisterName("toOneRelationshipKeys")
+	_nSObjectSelToManyRelationshipKeys                                                   = objc.RegisterName("toManyRelationshipKeys")
+	_nSObjectSelScriptingValueForSpecifier                                               = objc.RegisterName("scriptingValueForSpecifier:")
+	_nSObjectSelCopyScriptingValueForKeyWithProperties                                   = objc.RegisterName("copyScriptingValue:forKey:withProperties:")
+	_nSObjectSelNewScriptingObjectOfClassForValueForKeyWithContentsValueProperties       = objc.RegisterName("newScriptingObjectOfClass:forValueForKey:withContentsValue:properties:")
+	_nSObjectSelScriptingProperties                                                      = objc.RegisterName("scriptingProperties")
+	_nSObjectSelSetScriptingProperties                                                   = objc.RegisterName("setScriptingProperties:")
+	_nSObjectSelClassCode                                                                = objc.RegisterName("classCode")
+	_nSObjectSelClassName                                                                = objc.RegisterName("className")
+	_nSObjectSelValueAtIndexInPropertyWithKey                                            = objc.RegisterName("valueAtIndex:inPropertyWithKey:")
+	_nSObjectSelValueWithNameInPropertyWithKey                                           = objc.RegisterName("valueWithName:inPropertyWithKey:")
+	_nSObjectSelValueWithUniqueIDInPropertyWithKey                                       = objc.RegisterName("valueWithUniqueID:inPropertyWithKey:")
+	_nSObjectSelInsertValueAtIndexInPropertyWithKey                                      = objc.RegisterName("insertValue:atIndex:inPropertyWithKey:")
+	_nSObjectSelRemoveValueAtIndexFromPropertyWithKey                                    = objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:")
+	_nSObjectSelReplaceValueAtIndexInPropertyWithKeyWithValue                            = objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:")
+	_nSObjectSelInsertValueInPropertyWithKey                                             = objc.RegisterName("insertValue:inPropertyWithKey:")
+	_nSObjectSelCoerceValueForKey                                                        = objc.RegisterName("coerceValue:forKey:")
+	_nSObjectSelIndicesOfObjectsByEvaluatingObjectSpecifier                              = objc.RegisterName("indicesOfObjectsByEvaluatingObjectSpecifier:")
+	_nSObjectSelObjectSpecifier                                                          = objc.RegisterName("objectSpecifier")
+	_nSObjectSelIsEqualTo                                                                = objc.RegisterName("isEqualTo:")
+	_nSObjectSelIsLessThanOrEqualTo                                                      = objc.RegisterName("isLessThanOrEqualTo:")
+	_nSObjectSelIsLessThan                                                               = objc.RegisterName("isLessThan:")
+	_nSObjectSelIsGreaterThanOrEqualTo                                                   = objc.RegisterName("isGreaterThanOrEqualTo:")
+	_nSObjectSelIsGreaterThan                                                            = objc.RegisterName("isGreaterThan:")
+	_nSObjectSelIsNotEqualTo                                                             = objc.RegisterName("isNotEqualTo:")
+	_nSObjectSelDoesContain                                                              = objc.RegisterName("doesContain:")
+	_nSObjectSelIsLike                                                                   = objc.RegisterName("isLike:")
+	_nSObjectSelIsCaseInsensitiveLike                                                    = objc.RegisterName("isCaseInsensitiveLike:")
+	_nSObjectSelScriptingIsEqualTo                                                       = objc.RegisterName("scriptingIsEqualTo:")
+	_nSObjectSelScriptingIsLessThanOrEqualTo                                             = objc.RegisterName("scriptingIsLessThanOrEqualTo:")
+	_nSObjectSelScriptingIsLessThan                                                      = objc.RegisterName("scriptingIsLessThan:")
+	_nSObjectSelScriptingIsGreaterThanOrEqualTo                                          = objc.RegisterName("scriptingIsGreaterThanOrEqualTo:")
+	_nSObjectSelScriptingIsGreaterThan                                                   = objc.RegisterName("scriptingIsGreaterThan:")
+	_nSObjectSelScriptingBeginsWith                                                      = objc.RegisterName("scriptingBeginsWith:")
+	_nSObjectSelScriptingEndsWith                                                        = objc.RegisterName("scriptingEndsWith:")
+	_nSObjectSelScriptingContains                                                        = objc.RegisterName("scriptingContains:")
 )
 
 func NSObjectFromID(id objc.ID) *NSObject {
@@ -177,7 +177,9 @@ func NSObjectFromID(id objc.ID) *NSObject {
 
 func (o *NSObject) Init() *NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectFromID(_ret)
 }
 
@@ -259,13 +261,17 @@ func (o *NSObject) ForwardInvocation(anInvocation *NSInvocation) {
 
 func (o *NSObject) MethodSignatureForSelector(aSelector objc.SEL) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelMethodSignatureForSelector, aSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMethodSignatureFromID(_ret)
 }
 
 func NSObjectInstanceMethodSignatureForSelector(aSelector objc.SEL) *NSMethodSignature {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSObject), _nSObjectSelInstanceMethodSignatureForSelector, aSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMethodSignatureFromID(_ret)
 }
 
@@ -301,13 +307,17 @@ func NSObjectClass() objc.Class {
 
 func NSObjectDescription() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSObject), _nSObjectSelDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSObjectDebugDescription() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSObject), _nSObjectSelDebugDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -585,7 +595,9 @@ func (o *NSObject) DidChangeValueForKeyWithSetMutationUsingObjects(key *NSString
 
 func NSObjectKeyPathsForValuesAffectingValueForKey(key *NSString) *NSSet[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSObject), _nSObjectSelKeyPathsForValuesAffectingValueForKey, key.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[*NSString](_ret)
 }
 
@@ -620,7 +632,9 @@ func (o *NSObject) ReplacementObjectForKeyedArchiver(archiver *NSKeyedArchiver) 
 
 func NSObjectClassFallbacksForKeyedArchiver() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSObject), _nSObjectSelClassFallbacksForKeyedArchiver)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -680,31 +694,41 @@ func (o *NSObject) ClassForPortCoder() objc.Class {
 
 func (o *NSObject) InverseForRelationshipKey(relationshipKey *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelInverseForRelationshipKey, relationshipKey.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSObject) ClassDescription() *NSClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelClassDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSClassDescriptionFromID(_ret)
 }
 
 func (o *NSObject) AttributeKeys() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelAttributeKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSObject) ToOneRelationshipKeys() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelToOneRelationshipKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSObject) ToManyRelationshipKeys() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelToManyRelationshipKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -739,7 +763,9 @@ func (o *NSObject) ClassCode() uint {
 
 func (o *NSObject) ClassName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelClassName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -781,13 +807,17 @@ func (o *NSObject) CoerceValueForKey(value objc.ID, key *NSString) objc.ID {
 
 func (o *NSObject) IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *NSScriptObjectSpecifier) *NSArray[*NSNumber] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelIndicesOfObjectsByEvaluatingObjectSpecifier, specifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSNumber](_ret)
 }
 
 func (o *NSObject) ObjectSpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectSelObjectSpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
 
@@ -875,4 +905,3 @@ func (o *NSObject) ScriptingContains(object objc.ID) bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSObjectSelScriptingContains, object)
 	return _ret
 }
-

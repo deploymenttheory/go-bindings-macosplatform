@@ -582,7 +582,9 @@ func Dispatch_block_testcancel(block func()) int64 {
 func Dispatch_source_create(type_ *Dispatch_source_type_t, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
 	defer cgo.KeepAlive(type_)
 	var _objcPtr_type_ unsafe.Pointer
-	if type_ != nil { _objcPtr_type_ = type_.Ptr() }
+	if type_ != nil {
+		_objcPtr_type_ = type_.Ptr()
+	}
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_source_create(_objcPtr_type_, C.uint64_t(handle), C.uint64_t(mask), queue, &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1133,4 +1135,3 @@ func Dispatch_workloop_set_os_workgroup(workloop unsafe.Pointer, workgroup unsaf
 	C.dispatch_fn_dispatch_workloop_set_os_workgroup(workloop, workgroup, &_exc)
 	cgo.RaiseIfException(_exc)
 }
-

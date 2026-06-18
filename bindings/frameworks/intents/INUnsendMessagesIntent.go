@@ -16,9 +16,9 @@ type INUnsendMessagesIntent struct {
 }
 
 var (
-	_clsINUnsendMessagesIntent = _objcClass("INUnsendMessagesIntent")
+	_clsINUnsendMessagesIntent                           = _objcClass("INUnsendMessagesIntent")
 	_iNUnsendMessagesIntentSelInitWithMessageIdentifiers = objc.RegisterName("initWithMessageIdentifiers:")
-	_iNUnsendMessagesIntentSelMessageIdentifiers = objc.RegisterName("messageIdentifiers")
+	_iNUnsendMessagesIntentSelMessageIdentifiers         = objc.RegisterName("messageIdentifiers")
 )
 
 func INUnsendMessagesIntentFromID(id objc.ID) *INUnsendMessagesIntent {
@@ -33,7 +33,9 @@ func INUnsendMessagesIntentFromID(id objc.ID) *INUnsendMessagesIntent {
 
 func (o *INUnsendMessagesIntent) InitWithMessageIdentifiers(messageIdentifiers *foundation.NSArray[*foundation.NSString]) *INUnsendMessagesIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNUnsendMessagesIntentSelInitWithMessageIdentifiers, messageIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INUnsendMessagesIntentFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *INUnsendMessagesIntent) MessageIdentifiers() *foundation.NSArray[*found
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _iNUnsendMessagesIntentSelMessageIdentifiers)
 	return _ret
 }
-

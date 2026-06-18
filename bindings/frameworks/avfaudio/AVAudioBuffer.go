@@ -17,9 +17,9 @@ type AVAudioBuffer struct {
 }
 
 var (
-	_clsAVAudioBuffer = _objcClass("AVAudioBuffer")
-	_aVAudioBufferSelFormat = objc.RegisterName("format")
-	_aVAudioBufferSelAudioBufferList = objc.RegisterName("audioBufferList")
+	_clsAVAudioBuffer                       = _objcClass("AVAudioBuffer")
+	_aVAudioBufferSelFormat                 = objc.RegisterName("format")
+	_aVAudioBufferSelAudioBufferList        = objc.RegisterName("audioBufferList")
 	_aVAudioBufferSelMutableAudioBufferList = objc.RegisterName("mutableAudioBufferList")
 )
 
@@ -36,7 +36,9 @@ func AVAudioBufferFromID(id objc.ID) *AVAudioBuffer {
 // @property format @abstract The format of the audio in the buffer.
 func (o *AVAudioBuffer) Format() *AVAudioFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioBufferSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioFormatFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *AVAudioBuffer) MutableAudioBufferList() *coreaudiotypes.AudioBufferList
 	_ret := objc.Send[*coreaudiotypes.AudioBufferList](o.Ptr(), _aVAudioBufferSelMutableAudioBufferList)
 	return _ret
 }
-

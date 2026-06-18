@@ -15,7 +15,9 @@ type VirtioEntropyDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioEntropyDeviceConfiguration].
-func (x *VirtioEntropyDeviceConfiguration) Unwrap() *raw.VZVirtioEntropyDeviceConfiguration { return x.inner }
+func (x *VirtioEntropyDeviceConfiguration) Unwrap() *raw.VZVirtioEntropyDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewVirtioEntropyDeviceConfiguration() *VirtioEntropyDeviceConfiguration {
 	return &VirtioEntropyDeviceConfiguration{inner: raw.VZVirtioEntropyDeviceConfigurationFromID(_id)}
 }
 
-func (x *VirtioEntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration { return &x.inner.VZEntropyDeviceConfiguration }
+func (x *VirtioEntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration {
+	return &x.inner.VZEntropyDeviceConfiguration
+}
 
 // VirtioEntropyDeviceConfigurationable is the interface implemented by [VirtioEntropyDeviceConfiguration], for mocking and DI.
 type VirtioEntropyDeviceConfigurationable interface {
@@ -43,4 +47,3 @@ type VirtioEntropyDeviceConfigurationable interface {
 }
 
 var _ VirtioEntropyDeviceConfigurationable = (*VirtioEntropyDeviceConfiguration)(nil)
-

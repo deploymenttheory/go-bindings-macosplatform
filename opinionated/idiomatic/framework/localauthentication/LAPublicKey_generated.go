@@ -126,4 +126,3 @@ type PublicKeyable interface {
 }
 
 var _ PublicKeyable = (*PublicKey)(nil)
-

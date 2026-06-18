@@ -135,7 +135,9 @@ func (x *URLSessionStreamTask) StopSecureConnection() {
 	x.inner.StopSecureConnection()
 }
 
-func (x *URLSessionStreamTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
+func (x *URLSessionStreamTask) asURLSessionTask() *raw.NSURLSessionTask {
+	return &x.inner.NSURLSessionTask
+}
 
 func (x *URLSessionStreamTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
@@ -160,4 +162,3 @@ type URLSessionStreamTaskable interface {
 }
 
 var _ URLSessionStreamTaskable = (*URLSessionStreamTask)(nil)
-

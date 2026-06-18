@@ -16,11 +16,11 @@ type NEFilterReport struct {
 }
 
 var (
-	_clsNEFilterReport = _objcClass("NEFilterReport")
-	_nEFilterReportSelFlow = objc.RegisterName("flow")
-	_nEFilterReportSelAction = objc.RegisterName("action")
-	_nEFilterReportSelEvent = objc.RegisterName("event")
-	_nEFilterReportSelBytesInboundCount = objc.RegisterName("bytesInboundCount")
+	_clsNEFilterReport                   = _objcClass("NEFilterReport")
+	_nEFilterReportSelFlow               = objc.RegisterName("flow")
+	_nEFilterReportSelAction             = objc.RegisterName("action")
+	_nEFilterReportSelEvent              = objc.RegisterName("event")
+	_nEFilterReportSelBytesInboundCount  = objc.RegisterName("bytesInboundCount")
 	_nEFilterReportSelBytesOutboundCount = objc.RegisterName("bytesOutboundCount")
 )
 
@@ -37,7 +37,9 @@ func NEFilterReportFromID(id objc.ID) *NEFilterReport {
 // @property flow @discussion The flow on which the described action was taken.
 func (o *NEFilterReport) Flow() *NEFilterFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterReportSelFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterFlowFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *NEFilterReport) BytesOutboundCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nEFilterReportSelBytesOutboundCount)
 	return _ret
 }
-

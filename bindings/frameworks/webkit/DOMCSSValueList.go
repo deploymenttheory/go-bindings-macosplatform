@@ -15,8 +15,8 @@ type DOMCSSValueList struct {
 }
 
 var (
-	_clsDOMCSSValueList = _objcClass("DOMCSSValueList")
-	_dOMCSSValueListSelItem = objc.RegisterName("item:")
+	_clsDOMCSSValueList       = _objcClass("DOMCSSValueList")
+	_dOMCSSValueListSelItem   = objc.RegisterName("item:")
 	_dOMCSSValueListSelLength = objc.RegisterName("length")
 )
 
@@ -32,7 +32,9 @@ func DOMCSSValueListFromID(id objc.ID) *DOMCSSValueList {
 
 func (o *DOMCSSValueList) Item(index uint) *DOMCSSValue {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCSSValueListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSValueFromID(_ret)
 }
 
@@ -40,4 +42,3 @@ func (o *DOMCSSValueList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMCSSValueListSelLength)
 	return _ret
 }
-

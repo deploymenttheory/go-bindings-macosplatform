@@ -17,47 +17,47 @@ type NSUserActivity struct {
 }
 
 var (
-	_clsNSUserActivity = _objcClass("NSUserActivity")
-	_nSUserActivitySelInitWithActivityType = objc.RegisterName("initWithActivityType:")
-	_nSUserActivitySelInit = objc.RegisterName("init")
-	_nSUserActivitySelAddUserInfoEntriesFromDictionary = objc.RegisterName("addUserInfoEntriesFromDictionary:")
-	_nSUserActivitySelBecomeCurrent = objc.RegisterName("becomeCurrent")
-	_nSUserActivitySelResignCurrent = objc.RegisterName("resignCurrent")
-	_nSUserActivitySelInvalidate = objc.RegisterName("invalidate")
-	_nSUserActivitySelGetContinuationStreamsWithCompletionHandler = objc.RegisterName("getContinuationStreamsWithCompletionHandler:")
+	_clsNSUserActivity                                                                    = _objcClass("NSUserActivity")
+	_nSUserActivitySelInitWithActivityType                                                = objc.RegisterName("initWithActivityType:")
+	_nSUserActivitySelInit                                                                = objc.RegisterName("init")
+	_nSUserActivitySelAddUserInfoEntriesFromDictionary                                    = objc.RegisterName("addUserInfoEntriesFromDictionary:")
+	_nSUserActivitySelBecomeCurrent                                                       = objc.RegisterName("becomeCurrent")
+	_nSUserActivitySelResignCurrent                                                       = objc.RegisterName("resignCurrent")
+	_nSUserActivitySelInvalidate                                                          = objc.RegisterName("invalidate")
+	_nSUserActivitySelGetContinuationStreamsWithCompletionHandler                         = objc.RegisterName("getContinuationStreamsWithCompletionHandler:")
 	_nSUserActivitySelDeleteSavedUserActivitiesWithPersistentIdentifiersCompletionHandler = objc.RegisterName("deleteSavedUserActivitiesWithPersistentIdentifiers:completionHandler:")
-	_nSUserActivitySelDeleteAllSavedUserActivitiesWithCompletionHandler = objc.RegisterName("deleteAllSavedUserActivitiesWithCompletionHandler:")
-	_nSUserActivitySelActivityType = objc.RegisterName("activityType")
-	_nSUserActivitySelTitle = objc.RegisterName("title")
-	_nSUserActivitySelSetTitle = objc.RegisterName("setTitle:")
-	_nSUserActivitySelUserInfo = objc.RegisterName("userInfo")
-	_nSUserActivitySelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_nSUserActivitySelRequiredUserInfoKeys = objc.RegisterName("requiredUserInfoKeys")
-	_nSUserActivitySelSetRequiredUserInfoKeys = objc.RegisterName("setRequiredUserInfoKeys:")
-	_nSUserActivitySelNeedsSave = objc.RegisterName("needsSave")
-	_nSUserActivitySelSetNeedsSave = objc.RegisterName("setNeedsSave:")
-	_nSUserActivitySelWebpageURL = objc.RegisterName("webpageURL")
-	_nSUserActivitySelSetWebpageURL = objc.RegisterName("setWebpageURL:")
-	_nSUserActivitySelReferrerURL = objc.RegisterName("referrerURL")
-	_nSUserActivitySelSetReferrerURL = objc.RegisterName("setReferrerURL:")
-	_nSUserActivitySelExpirationDate = objc.RegisterName("expirationDate")
-	_nSUserActivitySelSetExpirationDate = objc.RegisterName("setExpirationDate:")
-	_nSUserActivitySelKeywords = objc.RegisterName("keywords")
-	_nSUserActivitySelSetKeywords = objc.RegisterName("setKeywords:")
-	_nSUserActivitySelSupportsContinuationStreams = objc.RegisterName("supportsContinuationStreams")
-	_nSUserActivitySelSetSupportsContinuationStreams = objc.RegisterName("setSupportsContinuationStreams:")
-	_nSUserActivitySelDelegate = objc.RegisterName("delegate")
-	_nSUserActivitySelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSUserActivitySelTargetContentIdentifier = objc.RegisterName("targetContentIdentifier")
-	_nSUserActivitySelSetTargetContentIdentifier = objc.RegisterName("setTargetContentIdentifier:")
-	_nSUserActivitySelIsEligibleForHandoff = objc.RegisterName("isEligibleForHandoff")
-	_nSUserActivitySelSetEligibleForHandoff = objc.RegisterName("setEligibleForHandoff:")
-	_nSUserActivitySelIsEligibleForSearch = objc.RegisterName("isEligibleForSearch")
-	_nSUserActivitySelSetEligibleForSearch = objc.RegisterName("setEligibleForSearch:")
-	_nSUserActivitySelIsEligibleForPublicIndexing = objc.RegisterName("isEligibleForPublicIndexing")
-	_nSUserActivitySelSetEligibleForPublicIndexing = objc.RegisterName("setEligibleForPublicIndexing:")
-	_nSUserActivitySelPersistentIdentifier = objc.RegisterName("persistentIdentifier")
-	_nSUserActivitySelSetPersistentIdentifier = objc.RegisterName("setPersistentIdentifier:")
+	_nSUserActivitySelDeleteAllSavedUserActivitiesWithCompletionHandler                   = objc.RegisterName("deleteAllSavedUserActivitiesWithCompletionHandler:")
+	_nSUserActivitySelActivityType                                                        = objc.RegisterName("activityType")
+	_nSUserActivitySelTitle                                                               = objc.RegisterName("title")
+	_nSUserActivitySelSetTitle                                                            = objc.RegisterName("setTitle:")
+	_nSUserActivitySelUserInfo                                                            = objc.RegisterName("userInfo")
+	_nSUserActivitySelSetUserInfo                                                         = objc.RegisterName("setUserInfo:")
+	_nSUserActivitySelRequiredUserInfoKeys                                                = objc.RegisterName("requiredUserInfoKeys")
+	_nSUserActivitySelSetRequiredUserInfoKeys                                             = objc.RegisterName("setRequiredUserInfoKeys:")
+	_nSUserActivitySelNeedsSave                                                           = objc.RegisterName("needsSave")
+	_nSUserActivitySelSetNeedsSave                                                        = objc.RegisterName("setNeedsSave:")
+	_nSUserActivitySelWebpageURL                                                          = objc.RegisterName("webpageURL")
+	_nSUserActivitySelSetWebpageURL                                                       = objc.RegisterName("setWebpageURL:")
+	_nSUserActivitySelReferrerURL                                                         = objc.RegisterName("referrerURL")
+	_nSUserActivitySelSetReferrerURL                                                      = objc.RegisterName("setReferrerURL:")
+	_nSUserActivitySelExpirationDate                                                      = objc.RegisterName("expirationDate")
+	_nSUserActivitySelSetExpirationDate                                                   = objc.RegisterName("setExpirationDate:")
+	_nSUserActivitySelKeywords                                                            = objc.RegisterName("keywords")
+	_nSUserActivitySelSetKeywords                                                         = objc.RegisterName("setKeywords:")
+	_nSUserActivitySelSupportsContinuationStreams                                         = objc.RegisterName("supportsContinuationStreams")
+	_nSUserActivitySelSetSupportsContinuationStreams                                      = objc.RegisterName("setSupportsContinuationStreams:")
+	_nSUserActivitySelDelegate                                                            = objc.RegisterName("delegate")
+	_nSUserActivitySelSetDelegate                                                         = objc.RegisterName("setDelegate:")
+	_nSUserActivitySelTargetContentIdentifier                                             = objc.RegisterName("targetContentIdentifier")
+	_nSUserActivitySelSetTargetContentIdentifier                                          = objc.RegisterName("setTargetContentIdentifier:")
+	_nSUserActivitySelIsEligibleForHandoff                                                = objc.RegisterName("isEligibleForHandoff")
+	_nSUserActivitySelSetEligibleForHandoff                                               = objc.RegisterName("setEligibleForHandoff:")
+	_nSUserActivitySelIsEligibleForSearch                                                 = objc.RegisterName("isEligibleForSearch")
+	_nSUserActivitySelSetEligibleForSearch                                                = objc.RegisterName("setEligibleForSearch:")
+	_nSUserActivitySelIsEligibleForPublicIndexing                                         = objc.RegisterName("isEligibleForPublicIndexing")
+	_nSUserActivitySelSetEligibleForPublicIndexing                                        = objc.RegisterName("setEligibleForPublicIndexing:")
+	_nSUserActivitySelPersistentIdentifier                                                = objc.RegisterName("persistentIdentifier")
+	_nSUserActivitySelSetPersistentIdentifier                                             = objc.RegisterName("setPersistentIdentifier:")
 )
 
 func NSUserActivityFromID(id objc.ID) *NSUserActivity {
@@ -72,14 +72,18 @@ func NSUserActivityFromID(id objc.ID) *NSUserActivity {
 
 func (o *NSUserActivity) InitWithActivityType(activityType *NSString) *NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelInitWithActivityType, activityType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserActivityFromID(_ret)
 }
 
 // Deprecated: Use initWithActivityType: with a specific activity type string
 func (o *NSUserActivity) Init() *NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUserActivityFromID(_ret)
 }
 
@@ -141,13 +145,17 @@ func NSUserActivityDeleteAllSavedUserActivitiesWithCompletionHandler(handler fun
 // Deprecated: Use initWithActivityType: with a specific activity type string
 func (o *NSUserActivity) ActivityType() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelActivityType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSUserActivity) Title() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -166,7 +174,9 @@ func (o *NSUserActivity) SetUserInfo(userInfo *NSDictionary[objc.ID, objc.ID]) {
 
 func (o *NSUserActivity) RequiredUserInfoKeys() *NSSet[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelRequiredUserInfoKeys)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[*NSString](_ret)
 }
 
@@ -185,7 +195,9 @@ func (o *NSUserActivity) SetNeedsSave(needsSave bool) {
 
 func (o *NSUserActivity) WebpageURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelWebpageURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -195,7 +207,9 @@ func (o *NSUserActivity) SetWebpageURL(webpageURL *NSURL) {
 
 func (o *NSUserActivity) ReferrerURL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelReferrerURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
@@ -205,7 +219,9 @@ func (o *NSUserActivity) SetReferrerURL(referrerURL *NSURL) {
 
 func (o *NSUserActivity) ExpirationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -215,7 +231,9 @@ func (o *NSUserActivity) SetExpirationDate(expirationDate *NSDate) {
 
 func (o *NSUserActivity) Keywords() *NSSet[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelKeywords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSetFromID[*NSString](_ret)
 }
 
@@ -243,7 +261,9 @@ func (o *NSUserActivity) SetDelegate(delegate NSUserActivityDelegate) {
 
 func (o *NSUserActivity) TargetContentIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelTargetContentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -280,11 +300,12 @@ func (o *NSUserActivity) SetEligibleForPublicIndexing(eligibleForPublicIndexing 
 
 func (o *NSUserActivity) PersistentIdentifier() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUserActivitySelPersistentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSUserActivity) SetPersistentIdentifier(persistentIdentifier *NSString) {
 	o.Ptr().Send(_nSUserActivitySelSetPersistentIdentifier, persistentIdentifier.Ptr())
 }
-

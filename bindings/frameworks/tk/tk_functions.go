@@ -10,278 +10,278 @@ import (
 )
 
 var (
-	_fnTk_3DBorderColor func(unsafe.Pointer) *XColor
-	_fnTk_3DBorderGC func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
-	_fnTk_3DHorizontalBevel func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int, int, int)
-	_fnTk_3DVerticalBevel func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
-	_fnTk_AddOption func(unsafe.Pointer, string, string, int)
-	_fnTk_Alloc3DBorderFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_AllocBitmapFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) int
-	_fnTk_AllocColorFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) *XColor
-	_fnTk_AllocCursorFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_AllocFontFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_AllocStyleFromObj func(*tcl.Tcl_Interp, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_BindEvent func(*int32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
-	_fnTk_CanvasDrawableCoords func(unsafe.Pointer, float64, float64, *int16, *int16)
-	_fnTk_CanvasEventuallyRedraw func(unsafe.Pointer, int, int, int, int)
-	_fnTk_CanvasGetCoord func(*tcl.Tcl_Interp, unsafe.Pointer, string, *float64) int
-	_fnTk_CanvasGetCoordFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *float64) int
-	_fnTk_CanvasGetTextInfo func(unsafe.Pointer) unsafe.Pointer
-	_fnTk_CanvasPsBitmap func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, int, int, int) int
-	_fnTk_CanvasPsColor func(*tcl.Tcl_Interp, unsafe.Pointer, *XColor) int
-	_fnTk_CanvasPsFont func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_CanvasPsOutline func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_CanvasPsPath func(*tcl.Tcl_Interp, unsafe.Pointer, *float64, int)
-	_fnTk_CanvasPsStipple func(*tcl.Tcl_Interp, unsafe.Pointer, int) int
-	_fnTk_CanvasPsY func(unsafe.Pointer, float64) float64
-	_fnTk_CanvasSetOffset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_CanvasSetStippleOrigin func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_CanvasTagsParseProc func(unsafe.Pointer, *tcl.Tcl_Interp, unsafe.Pointer, string, string, int) int
-	_fnTk_CanvasTagsPrintProc func(unsafe.Pointer, unsafe.Pointer, string, int, unsafe.Pointer) string
-	_fnTk_CanvasTkwin func(unsafe.Pointer) unsafe.Pointer
-	_fnTk_CanvasWindowCoords func(unsafe.Pointer, float64, float64, *int16, *int16)
-	_fnTk_ChangeOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_ChangeWindowAttributes func(unsafe.Pointer, uint, unsafe.Pointer)
-	_fnTk_CharBbox func(unsafe.Pointer, int, *int32, *int32, *int32, *int32) int
-	_fnTk_ClearSelection func(unsafe.Pointer, int)
-	_fnTk_ClipboardAppend func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, string) int
-	_fnTk_ClipboardClear func(*tcl.Tcl_Interp, unsafe.Pointer) int
-	_fnTk_CollapseMotionEvents func(*Display, int) int
-	_fnTk_ComputeTextLayout func(unsafe.Pointer, string, int, int, Tk_Justify, int, *int32, *int32) unsafe.Pointer
-	_fnTk_ConfigOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_ConfigureInfo func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, string, string, int) int
-	_fnTk_ConfigureValue func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, string, string, int) int
-	_fnTk_ConfigureWidget func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, string, string, int) int
-	_fnTk_ConfigureWindow func(unsafe.Pointer, uint, unsafe.Pointer)
-	_fnTk_CoordsToWindow func(int, int, unsafe.Pointer) unsafe.Pointer
-	_fnTk_CreateAnonymousWindow func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
-	_fnTk_CreateBinding func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string, string, int) uint
-	_fnTk_CreateBindingTable func(*tcl.Tcl_Interp) *int32
-	_fnTk_CreateClientMessageHandler func(unsafe.Pointer)
-	_fnTk_CreateConsoleWindow func(*tcl.Tcl_Interp) int
-	_fnTk_CreateErrorHandler func(*Display, int, int, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTk_CreateEventHandler func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_CreateGenericHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_CreateImageType func(unsafe.Pointer)
-	_fnTk_CreateItemType func(unsafe.Pointer)
-	_fnTk_CreateOldImageType func(unsafe.Pointer)
-	_fnTk_CreateOldPhotoImageFormat func(unsafe.Pointer)
-	_fnTk_CreateOptionTable func(*tcl.Tcl_Interp, unsafe.Pointer) unsafe.Pointer
-	_fnTk_CreateOutline func(unsafe.Pointer)
-	_fnTk_CreatePhotoImageFormat func(unsafe.Pointer)
-	_fnTk_CreateSelHandler func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int)
-	_fnTk_CreateSmoothMethod func(*tcl.Tcl_Interp, unsafe.Pointer)
-	_fnTk_CreateStyle func(string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTk_CreateWindow func(*tcl.Tcl_Interp, unsafe.Pointer, string, string) unsafe.Pointer
-	_fnTk_CreateWindowFromPath func(*tcl.Tcl_Interp, unsafe.Pointer, string, string) unsafe.Pointer
-	_fnTk_DefineBitmap func(*tcl.Tcl_Interp, string, string, int, int) int
-	_fnTk_DefineCursor func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_DeleteAllBindings func(*int32, unsafe.Pointer)
-	_fnTk_DeleteBinding func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string) int
-	_fnTk_DeleteBindingTable func(*int32)
-	_fnTk_DeleteClientMessageHandler func(unsafe.Pointer)
-	_fnTk_DeleteErrorHandler func(unsafe.Pointer)
-	_fnTk_DeleteEventHandler func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_DeleteGenericHandler func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_DeleteImage func(*tcl.Tcl_Interp, string)
-	_fnTk_DeleteOptionTable func(unsafe.Pointer)
-	_fnTk_DeleteOutline func(*Display, unsafe.Pointer)
-	_fnTk_DeleteSelHandler func(unsafe.Pointer, int, int)
-	_fnTk_DestroyWindow func(unsafe.Pointer)
-	_fnTk_DisplayName func(unsafe.Pointer) string
-	_fnTk_DistanceToTextLayout func(unsafe.Pointer, int, int) int
-	_fnTk_DitherPhoto func(unsafe.Pointer, int, int, int, int)
-	_fnTk_Draw3DPolygon func(unsafe.Pointer, int, unsafe.Pointer, *XPoint, int, int, int)
-	_fnTk_Draw3DRectangle func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
-	_fnTk_DrawChars func(*Display, int, unsafe.Pointer, unsafe.Pointer, string, int, int, int)
-	_fnTk_DrawElement func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, int, int, int)
-	_fnTk_DrawFocusHighlight func(unsafe.Pointer, unsafe.Pointer, int, int)
-	_fnTk_DrawTextLayout func(*Display, int, unsafe.Pointer, unsafe.Pointer, int, int, int, int)
-	_fnTk_Fill3DPolygon func(unsafe.Pointer, int, unsafe.Pointer, *XPoint, int, int, int)
-	_fnTk_Fill3DRectangle func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
-	_fnTk_FindPhoto func(*tcl.Tcl_Interp, string) unsafe.Pointer
-	_fnTk_FontId func(unsafe.Pointer) int
-	_fnTk_Free3DBorder func(unsafe.Pointer)
-	_fnTk_Free3DBorderFromObj func(unsafe.Pointer, *tcl.Tcl_Obj)
-	_fnTk_FreeBitmap func(*Display, int)
-	_fnTk_FreeBitmapFromObj func(unsafe.Pointer, *tcl.Tcl_Obj)
-	_fnTk_FreeColor func(*XColor)
-	_fnTk_FreeColorFromObj func(unsafe.Pointer, *tcl.Tcl_Obj)
-	_fnTk_FreeColormap func(*Display, int)
-	_fnTk_FreeConfigOptions func(string, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_FreeCursor func(*Display, unsafe.Pointer)
-	_fnTk_FreeCursorFromObj func(unsafe.Pointer, *tcl.Tcl_Obj)
-	_fnTk_FreeFont func(unsafe.Pointer)
-	_fnTk_FreeFontFromObj func(unsafe.Pointer, *tcl.Tcl_Obj)
-	_fnTk_FreeGC func(*Display, unsafe.Pointer)
-	_fnTk_FreeImage func(unsafe.Pointer)
-	_fnTk_FreeOptions func(unsafe.Pointer, string, *Display, int)
-	_fnTk_FreePixmap func(*Display, int)
-	_fnTk_FreeSavedOptions func(unsafe.Pointer)
-	_fnTk_FreeStyle func(unsafe.Pointer)
-	_fnTk_FreeStyleFromObj func(*tcl.Tcl_Obj)
-	_fnTk_FreeTextLayout func(unsafe.Pointer)
-	_fnTk_FreeXId func(*Display, int)
-	_fnTk_GCForColor func(*XColor, int) unsafe.Pointer
-	_fnTk_GeometryRequest func(unsafe.Pointer, int, int)
-	_fnTk_Get3DBorder func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
-	_fnTk_Get3DBorderFromObj func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_GetAllBindings func(*tcl.Tcl_Interp, *int32, unsafe.Pointer)
-	_fnTk_GetAnchor func(*tcl.Tcl_Interp, string, *Tk_Anchor) int
-	_fnTk_GetAnchorFromObj func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *Tk_Anchor) int
-	_fnTk_GetAtomName func(unsafe.Pointer, int) string
-	_fnTk_GetBinding func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string) string
-	_fnTk_GetBitmap func(*tcl.Tcl_Interp, unsafe.Pointer, string) int
-	_fnTk_GetBitmapFromData func(*tcl.Tcl_Interp, unsafe.Pointer, string, int, int) int
-	_fnTk_GetBitmapFromObj func(unsafe.Pointer, *tcl.Tcl_Obj) int
-	_fnTk_GetCapStyle func(*tcl.Tcl_Interp, string, *int32) int
-	_fnTk_GetColor func(*tcl.Tcl_Interp, unsafe.Pointer, string) *XColor
-	_fnTk_GetColorByValue func(unsafe.Pointer, *XColor) *XColor
-	_fnTk_GetColorFromObj func(unsafe.Pointer, *tcl.Tcl_Obj) *XColor
-	_fnTk_GetColormap func(*tcl.Tcl_Interp, unsafe.Pointer, string) int
-	_fnTk_GetCursor func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
-	_fnTk_GetCursorFromData func(*tcl.Tcl_Interp, unsafe.Pointer, string, string, int, int, int, int, string, string) unsafe.Pointer
-	_fnTk_GetCursorFromObj func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_GetDash func(*tcl.Tcl_Interp, string, unsafe.Pointer) int
-	_fnTk_GetElementBorderWidth func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int
-	_fnTk_GetElementBox func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, int, int, *int32, *int32, *int32, *int32)
-	_fnTk_GetElementId func(string) int
-	_fnTk_GetElementSize func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, *int32, *int32)
-	_fnTk_GetFont func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
-	_fnTk_GetFontFromObj func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_GetFontMetrics func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_GetGC func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
-	_fnTk_GetImage func(*tcl.Tcl_Interp, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTk_GetImageMasterData func(*tcl.Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
-	_fnTk_GetItemTypes func() unsafe.Pointer
-	_fnTk_GetJoinStyle func(*tcl.Tcl_Interp, string, *int32) int
-	_fnTk_GetJustify func(*tcl.Tcl_Interp, string, *Tk_Justify) int
-	_fnTk_GetJustifyFromObj func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *Tk_Justify) int
-	_fnTk_GetMMFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *float64) int
-	_fnTk_GetNumMainWindows func() int
-	_fnTk_GetOption func(unsafe.Pointer, string, string) string
-	_fnTk_GetOptionInfo func(*tcl.Tcl_Interp, string, unsafe.Pointer, *tcl.Tcl_Obj, unsafe.Pointer) *tcl.Tcl_Obj
-	_fnTk_GetOptionValue func(*tcl.Tcl_Interp, string, unsafe.Pointer, *tcl.Tcl_Obj, unsafe.Pointer) *tcl.Tcl_Obj
-	_fnTk_GetPixels func(*tcl.Tcl_Interp, unsafe.Pointer, string, *int32) int
-	_fnTk_GetPixelsFromObj func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *int32) int
-	_fnTk_GetPixmap func(*Display, int, int, int, int) int
-	_fnTk_GetRelief func(*tcl.Tcl_Interp, string, *int32) int
-	_fnTk_GetReliefFromObj func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *int32) int
-	_fnTk_GetRootCoords func(unsafe.Pointer, *int32, *int32)
-	_fnTk_GetScreenMM func(*tcl.Tcl_Interp, unsafe.Pointer, string, *float64) int
-	_fnTk_GetScrollInfo func(*tcl.Tcl_Interp, int, string, *float64, *int32) int
-	_fnTk_GetScrollInfoObj func(*tcl.Tcl_Interp, int, unsafe.Pointer, *float64, *int32) int
-	_fnTk_GetSelection func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_GetStyle func(*tcl.Tcl_Interp, string) unsafe.Pointer
-	_fnTk_GetStyleEngine func(string) unsafe.Pointer
-	_fnTk_GetStyleFromObj func(*tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_GetStyledElement func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
-	_fnTk_GetUid func(string) string
-	_fnTk_GetUserInactiveTime func(*Display) int
-	_fnTk_GetVRootGeometry func(unsafe.Pointer, *int32, *int32, *int32, *int32)
-	_fnTk_GetVisual func(*tcl.Tcl_Interp, unsafe.Pointer, string, *int32, *int32) unsafe.Pointer
-	_fnTk_Grab func(*tcl.Tcl_Interp, unsafe.Pointer, int) int
-	_fnTk_HandleEvent func(unsafe.Pointer)
-	_fnTk_IdToWindow func(*Display, unsafe.Pointer) unsafe.Pointer
-	_fnTk_ImageChanged func(unsafe.Pointer, int, int, int, int, int, int)
-	_fnTk_Init func(*tcl.Tcl_Interp) int
-	_fnTk_InitConsoleChannels func(*tcl.Tcl_Interp)
-	_fnTk_InitOptions func(*tcl.Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_InternAtom func(unsafe.Pointer, string) int
-	_fnTk_Interp func(unsafe.Pointer) *tcl.Tcl_Interp
-	_fnTk_IntersectTextLayout func(unsafe.Pointer, int, int, int, int) int
-	_fnTk_MainEx func(int, string, unsafe.Pointer, *tcl.Tcl_Interp)
-	_fnTk_MainLoop func()
-	_fnTk_MainWindow func(*tcl.Tcl_Interp) unsafe.Pointer
-	_fnTk_MaintainGeometry func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
-	_fnTk_MakeWindowExist func(unsafe.Pointer)
-	_fnTk_ManageGeometry func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_MapWindow func(unsafe.Pointer)
-	_fnTk_MeasureChars func(unsafe.Pointer, string, int, int, int, *int32) int
-	_fnTk_MoveResizeWindow func(unsafe.Pointer, int, int, int, int)
-	_fnTk_MoveToplevelWindow func(unsafe.Pointer, int, int)
-	_fnTk_MoveWindow func(unsafe.Pointer, int, int)
-	_fnTk_NameOf3DBorder func(unsafe.Pointer) string
-	_fnTk_NameOfAnchor func(Tk_Anchor) string
-	_fnTk_NameOfBitmap func(*Display, int) string
-	_fnTk_NameOfCapStyle func(int) string
-	_fnTk_NameOfColor func(*XColor) string
-	_fnTk_NameOfCursor func(*Display, unsafe.Pointer) string
-	_fnTk_NameOfFont func(unsafe.Pointer) string
-	_fnTk_NameOfImage func(unsafe.Pointer) string
-	_fnTk_NameOfJoinStyle func(int) string
-	_fnTk_NameOfJustify func(Tk_Justify) string
-	_fnTk_NameOfRelief func(int) string
-	_fnTk_NameOfStyle func(unsafe.Pointer) string
-	_fnTk_NameToWindow func(*tcl.Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
-	_fnTk_OwnSelection func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_ParseArgv func(*tcl.Tcl_Interp, unsafe.Pointer, *int32, string, unsafe.Pointer, int) int
-	_fnTk_PhotoBlank func(unsafe.Pointer)
-	_fnTk_PhotoExpand func(*tcl.Tcl_Interp, unsafe.Pointer, int, int) int
-	_fnTk_PhotoExpand_Panic func(unsafe.Pointer, int, int)
-	_fnTk_PhotoGetImage func(unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_PhotoGetSize func(unsafe.Pointer, *int32, *int32)
-	_fnTk_PhotoPutBlock func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
-	_fnTk_PhotoPutBlock_NoComposite func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
-	_fnTk_PhotoPutBlock_Panic func(unsafe.Pointer, unsafe.Pointer, int, int, int, int, int)
-	_fnTk_PhotoPutZoomedBlock func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int, int, int, int, int) int
+	_fnTk_3DBorderColor                   func(unsafe.Pointer) *XColor
+	_fnTk_3DBorderGC                      func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+	_fnTk_3DHorizontalBevel               func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int, int, int)
+	_fnTk_3DVerticalBevel                 func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
+	_fnTk_AddOption                       func(unsafe.Pointer, string, string, int)
+	_fnTk_Alloc3DBorderFromObj            func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_AllocBitmapFromObj              func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) int
+	_fnTk_AllocColorFromObj               func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) *XColor
+	_fnTk_AllocCursorFromObj              func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_AllocFontFromObj                func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_AllocStyleFromObj               func(*tcl.Tcl_Interp, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_BindEvent                       func(*int32, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
+	_fnTk_CanvasDrawableCoords            func(unsafe.Pointer, float64, float64, *int16, *int16)
+	_fnTk_CanvasEventuallyRedraw          func(unsafe.Pointer, int, int, int, int)
+	_fnTk_CanvasGetCoord                  func(*tcl.Tcl_Interp, unsafe.Pointer, string, *float64) int
+	_fnTk_CanvasGetCoordFromObj           func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *float64) int
+	_fnTk_CanvasGetTextInfo               func(unsafe.Pointer) unsafe.Pointer
+	_fnTk_CanvasPsBitmap                  func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, int, int, int) int
+	_fnTk_CanvasPsColor                   func(*tcl.Tcl_Interp, unsafe.Pointer, *XColor) int
+	_fnTk_CanvasPsFont                    func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_CanvasPsOutline                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_CanvasPsPath                    func(*tcl.Tcl_Interp, unsafe.Pointer, *float64, int)
+	_fnTk_CanvasPsStipple                 func(*tcl.Tcl_Interp, unsafe.Pointer, int) int
+	_fnTk_CanvasPsY                       func(unsafe.Pointer, float64) float64
+	_fnTk_CanvasSetOffset                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_CanvasSetStippleOrigin          func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_CanvasTagsParseProc             func(unsafe.Pointer, *tcl.Tcl_Interp, unsafe.Pointer, string, string, int) int
+	_fnTk_CanvasTagsPrintProc             func(unsafe.Pointer, unsafe.Pointer, string, int, unsafe.Pointer) string
+	_fnTk_CanvasTkwin                     func(unsafe.Pointer) unsafe.Pointer
+	_fnTk_CanvasWindowCoords              func(unsafe.Pointer, float64, float64, *int16, *int16)
+	_fnTk_ChangeOutlineGC                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_ChangeWindowAttributes          func(unsafe.Pointer, uint, unsafe.Pointer)
+	_fnTk_CharBbox                        func(unsafe.Pointer, int, *int32, *int32, *int32, *int32) int
+	_fnTk_ClearSelection                  func(unsafe.Pointer, int)
+	_fnTk_ClipboardAppend                 func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, string) int
+	_fnTk_ClipboardClear                  func(*tcl.Tcl_Interp, unsafe.Pointer) int
+	_fnTk_CollapseMotionEvents            func(*Display, int) int
+	_fnTk_ComputeTextLayout               func(unsafe.Pointer, string, int, int, Tk_Justify, int, *int32, *int32) unsafe.Pointer
+	_fnTk_ConfigOutlineGC                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_ConfigureInfo                   func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, string, string, int) int
+	_fnTk_ConfigureValue                  func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, string, string, int) int
+	_fnTk_ConfigureWidget                 func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, string, string, int) int
+	_fnTk_ConfigureWindow                 func(unsafe.Pointer, uint, unsafe.Pointer)
+	_fnTk_CoordsToWindow                  func(int, int, unsafe.Pointer) unsafe.Pointer
+	_fnTk_CreateAnonymousWindow           func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
+	_fnTk_CreateBinding                   func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string, string, int) uint
+	_fnTk_CreateBindingTable              func(*tcl.Tcl_Interp) *int32
+	_fnTk_CreateClientMessageHandler      func(unsafe.Pointer)
+	_fnTk_CreateConsoleWindow             func(*tcl.Tcl_Interp) int
+	_fnTk_CreateErrorHandler              func(*Display, int, int, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTk_CreateEventHandler              func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_CreateGenericHandler            func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_CreateImageType                 func(unsafe.Pointer)
+	_fnTk_CreateItemType                  func(unsafe.Pointer)
+	_fnTk_CreateOldImageType              func(unsafe.Pointer)
+	_fnTk_CreateOldPhotoImageFormat       func(unsafe.Pointer)
+	_fnTk_CreateOptionTable               func(*tcl.Tcl_Interp, unsafe.Pointer) unsafe.Pointer
+	_fnTk_CreateOutline                   func(unsafe.Pointer)
+	_fnTk_CreatePhotoImageFormat          func(unsafe.Pointer)
+	_fnTk_CreateSelHandler                func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int)
+	_fnTk_CreateSmoothMethod              func(*tcl.Tcl_Interp, unsafe.Pointer)
+	_fnTk_CreateStyle                     func(string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTk_CreateWindow                    func(*tcl.Tcl_Interp, unsafe.Pointer, string, string) unsafe.Pointer
+	_fnTk_CreateWindowFromPath            func(*tcl.Tcl_Interp, unsafe.Pointer, string, string) unsafe.Pointer
+	_fnTk_DefineBitmap                    func(*tcl.Tcl_Interp, string, string, int, int) int
+	_fnTk_DefineCursor                    func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_DeleteAllBindings               func(*int32, unsafe.Pointer)
+	_fnTk_DeleteBinding                   func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string) int
+	_fnTk_DeleteBindingTable              func(*int32)
+	_fnTk_DeleteClientMessageHandler      func(unsafe.Pointer)
+	_fnTk_DeleteErrorHandler              func(unsafe.Pointer)
+	_fnTk_DeleteEventHandler              func(unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_DeleteGenericHandler            func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_DeleteImage                     func(*tcl.Tcl_Interp, string)
+	_fnTk_DeleteOptionTable               func(unsafe.Pointer)
+	_fnTk_DeleteOutline                   func(*Display, unsafe.Pointer)
+	_fnTk_DeleteSelHandler                func(unsafe.Pointer, int, int)
+	_fnTk_DestroyWindow                   func(unsafe.Pointer)
+	_fnTk_DisplayName                     func(unsafe.Pointer) string
+	_fnTk_DistanceToTextLayout            func(unsafe.Pointer, int, int) int
+	_fnTk_DitherPhoto                     func(unsafe.Pointer, int, int, int, int)
+	_fnTk_Draw3DPolygon                   func(unsafe.Pointer, int, unsafe.Pointer, *XPoint, int, int, int)
+	_fnTk_Draw3DRectangle                 func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
+	_fnTk_DrawChars                       func(*Display, int, unsafe.Pointer, unsafe.Pointer, string, int, int, int)
+	_fnTk_DrawElement                     func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, int, int, int)
+	_fnTk_DrawFocusHighlight              func(unsafe.Pointer, unsafe.Pointer, int, int)
+	_fnTk_DrawTextLayout                  func(*Display, int, unsafe.Pointer, unsafe.Pointer, int, int, int, int)
+	_fnTk_Fill3DPolygon                   func(unsafe.Pointer, int, unsafe.Pointer, *XPoint, int, int, int)
+	_fnTk_Fill3DRectangle                 func(unsafe.Pointer, int, unsafe.Pointer, int, int, int, int, int, int)
+	_fnTk_FindPhoto                       func(*tcl.Tcl_Interp, string) unsafe.Pointer
+	_fnTk_FontId                          func(unsafe.Pointer) int
+	_fnTk_Free3DBorder                    func(unsafe.Pointer)
+	_fnTk_Free3DBorderFromObj             func(unsafe.Pointer, *tcl.Tcl_Obj)
+	_fnTk_FreeBitmap                      func(*Display, int)
+	_fnTk_FreeBitmapFromObj               func(unsafe.Pointer, *tcl.Tcl_Obj)
+	_fnTk_FreeColor                       func(*XColor)
+	_fnTk_FreeColorFromObj                func(unsafe.Pointer, *tcl.Tcl_Obj)
+	_fnTk_FreeColormap                    func(*Display, int)
+	_fnTk_FreeConfigOptions               func(string, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_FreeCursor                      func(*Display, unsafe.Pointer)
+	_fnTk_FreeCursorFromObj               func(unsafe.Pointer, *tcl.Tcl_Obj)
+	_fnTk_FreeFont                        func(unsafe.Pointer)
+	_fnTk_FreeFontFromObj                 func(unsafe.Pointer, *tcl.Tcl_Obj)
+	_fnTk_FreeGC                          func(*Display, unsafe.Pointer)
+	_fnTk_FreeImage                       func(unsafe.Pointer)
+	_fnTk_FreeOptions                     func(unsafe.Pointer, string, *Display, int)
+	_fnTk_FreePixmap                      func(*Display, int)
+	_fnTk_FreeSavedOptions                func(unsafe.Pointer)
+	_fnTk_FreeStyle                       func(unsafe.Pointer)
+	_fnTk_FreeStyleFromObj                func(*tcl.Tcl_Obj)
+	_fnTk_FreeTextLayout                  func(unsafe.Pointer)
+	_fnTk_FreeXId                         func(*Display, int)
+	_fnTk_GCForColor                      func(*XColor, int) unsafe.Pointer
+	_fnTk_GeometryRequest                 func(unsafe.Pointer, int, int)
+	_fnTk_Get3DBorder                     func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
+	_fnTk_Get3DBorderFromObj              func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_GetAllBindings                  func(*tcl.Tcl_Interp, *int32, unsafe.Pointer)
+	_fnTk_GetAnchor                       func(*tcl.Tcl_Interp, string, *Tk_Anchor) int
+	_fnTk_GetAnchorFromObj                func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *Tk_Anchor) int
+	_fnTk_GetAtomName                     func(unsafe.Pointer, int) string
+	_fnTk_GetBinding                      func(*tcl.Tcl_Interp, *int32, unsafe.Pointer, string) string
+	_fnTk_GetBitmap                       func(*tcl.Tcl_Interp, unsafe.Pointer, string) int
+	_fnTk_GetBitmapFromData               func(*tcl.Tcl_Interp, unsafe.Pointer, string, int, int) int
+	_fnTk_GetBitmapFromObj                func(unsafe.Pointer, *tcl.Tcl_Obj) int
+	_fnTk_GetCapStyle                     func(*tcl.Tcl_Interp, string, *int32) int
+	_fnTk_GetColor                        func(*tcl.Tcl_Interp, unsafe.Pointer, string) *XColor
+	_fnTk_GetColorByValue                 func(unsafe.Pointer, *XColor) *XColor
+	_fnTk_GetColorFromObj                 func(unsafe.Pointer, *tcl.Tcl_Obj) *XColor
+	_fnTk_GetColormap                     func(*tcl.Tcl_Interp, unsafe.Pointer, string) int
+	_fnTk_GetCursor                       func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
+	_fnTk_GetCursorFromData               func(*tcl.Tcl_Interp, unsafe.Pointer, string, string, int, int, int, int, string, string) unsafe.Pointer
+	_fnTk_GetCursorFromObj                func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_GetDash                         func(*tcl.Tcl_Interp, string, unsafe.Pointer) int
+	_fnTk_GetElementBorderWidth           func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int
+	_fnTk_GetElementBox                   func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, int, int, *int32, *int32, *int32, *int32)
+	_fnTk_GetElementId                    func(string) int
+	_fnTk_GetElementSize                  func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, *int32, *int32)
+	_fnTk_GetFont                         func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
+	_fnTk_GetFontFromObj                  func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_GetFontMetrics                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_GetGC                           func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
+	_fnTk_GetImage                        func(*tcl.Tcl_Interp, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTk_GetImageMasterData              func(*tcl.Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
+	_fnTk_GetItemTypes                    func() unsafe.Pointer
+	_fnTk_GetJoinStyle                    func(*tcl.Tcl_Interp, string, *int32) int
+	_fnTk_GetJustify                      func(*tcl.Tcl_Interp, string, *Tk_Justify) int
+	_fnTk_GetJustifyFromObj               func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *Tk_Justify) int
+	_fnTk_GetMMFromObj                    func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *float64) int
+	_fnTk_GetNumMainWindows               func() int
+	_fnTk_GetOption                       func(unsafe.Pointer, string, string) string
+	_fnTk_GetOptionInfo                   func(*tcl.Tcl_Interp, string, unsafe.Pointer, *tcl.Tcl_Obj, unsafe.Pointer) *tcl.Tcl_Obj
+	_fnTk_GetOptionValue                  func(*tcl.Tcl_Interp, string, unsafe.Pointer, *tcl.Tcl_Obj, unsafe.Pointer) *tcl.Tcl_Obj
+	_fnTk_GetPixels                       func(*tcl.Tcl_Interp, unsafe.Pointer, string, *int32) int
+	_fnTk_GetPixelsFromObj                func(*tcl.Tcl_Interp, unsafe.Pointer, *tcl.Tcl_Obj, *int32) int
+	_fnTk_GetPixmap                       func(*Display, int, int, int, int) int
+	_fnTk_GetRelief                       func(*tcl.Tcl_Interp, string, *int32) int
+	_fnTk_GetReliefFromObj                func(*tcl.Tcl_Interp, *tcl.Tcl_Obj, *int32) int
+	_fnTk_GetRootCoords                   func(unsafe.Pointer, *int32, *int32)
+	_fnTk_GetScreenMM                     func(*tcl.Tcl_Interp, unsafe.Pointer, string, *float64) int
+	_fnTk_GetScrollInfo                   func(*tcl.Tcl_Interp, int, string, *float64, *int32) int
+	_fnTk_GetScrollInfoObj                func(*tcl.Tcl_Interp, int, unsafe.Pointer, *float64, *int32) int
+	_fnTk_GetSelection                    func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_GetStyle                        func(*tcl.Tcl_Interp, string) unsafe.Pointer
+	_fnTk_GetStyleEngine                  func(string) unsafe.Pointer
+	_fnTk_GetStyleFromObj                 func(*tcl.Tcl_Obj) unsafe.Pointer
+	_fnTk_GetStyledElement                func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+	_fnTk_GetUid                          func(string) string
+	_fnTk_GetUserInactiveTime             func(*Display) int
+	_fnTk_GetVRootGeometry                func(unsafe.Pointer, *int32, *int32, *int32, *int32)
+	_fnTk_GetVisual                       func(*tcl.Tcl_Interp, unsafe.Pointer, string, *int32, *int32) unsafe.Pointer
+	_fnTk_Grab                            func(*tcl.Tcl_Interp, unsafe.Pointer, int) int
+	_fnTk_HandleEvent                     func(unsafe.Pointer)
+	_fnTk_IdToWindow                      func(*Display, unsafe.Pointer) unsafe.Pointer
+	_fnTk_ImageChanged                    func(unsafe.Pointer, int, int, int, int, int, int)
+	_fnTk_Init                            func(*tcl.Tcl_Interp) int
+	_fnTk_InitConsoleChannels             func(*tcl.Tcl_Interp)
+	_fnTk_InitOptions                     func(*tcl.Tcl_Interp, string, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_InternAtom                      func(unsafe.Pointer, string) int
+	_fnTk_Interp                          func(unsafe.Pointer) *tcl.Tcl_Interp
+	_fnTk_IntersectTextLayout             func(unsafe.Pointer, int, int, int, int) int
+	_fnTk_MainEx                          func(int, string, unsafe.Pointer, *tcl.Tcl_Interp)
+	_fnTk_MainLoop                        func()
+	_fnTk_MainWindow                      func(*tcl.Tcl_Interp) unsafe.Pointer
+	_fnTk_MaintainGeometry                func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
+	_fnTk_MakeWindowExist                 func(unsafe.Pointer)
+	_fnTk_ManageGeometry                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_MapWindow                       func(unsafe.Pointer)
+	_fnTk_MeasureChars                    func(unsafe.Pointer, string, int, int, int, *int32) int
+	_fnTk_MoveResizeWindow                func(unsafe.Pointer, int, int, int, int)
+	_fnTk_MoveToplevelWindow              func(unsafe.Pointer, int, int)
+	_fnTk_MoveWindow                      func(unsafe.Pointer, int, int)
+	_fnTk_NameOf3DBorder                  func(unsafe.Pointer) string
+	_fnTk_NameOfAnchor                    func(Tk_Anchor) string
+	_fnTk_NameOfBitmap                    func(*Display, int) string
+	_fnTk_NameOfCapStyle                  func(int) string
+	_fnTk_NameOfColor                     func(*XColor) string
+	_fnTk_NameOfCursor                    func(*Display, unsafe.Pointer) string
+	_fnTk_NameOfFont                      func(unsafe.Pointer) string
+	_fnTk_NameOfImage                     func(unsafe.Pointer) string
+	_fnTk_NameOfJoinStyle                 func(int) string
+	_fnTk_NameOfJustify                   func(Tk_Justify) string
+	_fnTk_NameOfRelief                    func(int) string
+	_fnTk_NameOfStyle                     func(unsafe.Pointer) string
+	_fnTk_NameToWindow                    func(*tcl.Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
+	_fnTk_OwnSelection                    func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_ParseArgv                       func(*tcl.Tcl_Interp, unsafe.Pointer, *int32, string, unsafe.Pointer, int) int
+	_fnTk_PhotoBlank                      func(unsafe.Pointer)
+	_fnTk_PhotoExpand                     func(*tcl.Tcl_Interp, unsafe.Pointer, int, int) int
+	_fnTk_PhotoExpand_Panic               func(unsafe.Pointer, int, int)
+	_fnTk_PhotoGetImage                   func(unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_PhotoGetSize                    func(unsafe.Pointer, *int32, *int32)
+	_fnTk_PhotoPutBlock                   func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
+	_fnTk_PhotoPutBlock_NoComposite       func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
+	_fnTk_PhotoPutBlock_Panic             func(unsafe.Pointer, unsafe.Pointer, int, int, int, int, int)
+	_fnTk_PhotoPutZoomedBlock             func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int, int, int, int, int) int
 	_fnTk_PhotoPutZoomedBlock_NoComposite func(unsafe.Pointer, unsafe.Pointer, int, int, int, int, int, int, int, int)
-	_fnTk_PhotoPutZoomedBlock_Panic func(unsafe.Pointer, unsafe.Pointer, int, int, int, int, int, int, int, int, int)
-	_fnTk_PhotoSetSize func(*tcl.Tcl_Interp, unsafe.Pointer, int, int) int
-	_fnTk_PhotoSetSize_Panic func(unsafe.Pointer, int, int)
-	_fnTk_PointToChar func(unsafe.Pointer, int, int) int
-	_fnTk_PostscriptBitmap func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
-	_fnTk_PostscriptColor func(*tcl.Tcl_Interp, unsafe.Pointer, *XColor) int
-	_fnTk_PostscriptFont func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_PostscriptFontName func(unsafe.Pointer, *tcl.Tcl_DString) int
-	_fnTk_PostscriptImage func(unsafe.Pointer, *tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
-	_fnTk_PostscriptPath func(*tcl.Tcl_Interp, unsafe.Pointer, *float64, int)
-	_fnTk_PostscriptPhoto func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int) int
-	_fnTk_PostscriptStipple func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int) int
-	_fnTk_PostscriptY func(float64, unsafe.Pointer) float64
-	_fnTk_PreserveColormap func(*Display, int)
-	_fnTk_QueueWindowEvent func(unsafe.Pointer, tcl.Tcl_QueuePosition)
-	_fnTk_RedrawImage func(unsafe.Pointer, int, int, int, int, int, int, int)
-	_fnTk_RegisterStyleEngine func(string, unsafe.Pointer) unsafe.Pointer
-	_fnTk_RegisterStyledElement func(unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_ResetOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnTk_ResetUserInactiveTime func(*Display)
-	_fnTk_ResizeWindow func(unsafe.Pointer, int, int)
-	_fnTk_RestackWindow func(unsafe.Pointer, int, unsafe.Pointer) int
-	_fnTk_RestoreSavedOptions func(unsafe.Pointer)
-	_fnTk_RestrictEvents func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTk_SafeInit func(*tcl.Tcl_Interp) int
-	_fnTk_SetAppName func(unsafe.Pointer, string) string
-	_fnTk_SetBackgroundFromBorder func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_SetCaretPos func(unsafe.Pointer, int, int, int)
-	_fnTk_SetClass func(unsafe.Pointer, string)
-	_fnTk_SetClassProcs func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnTk_SetGrid func(unsafe.Pointer, int, int, int, int)
-	_fnTk_SetInternalBorder func(unsafe.Pointer, int)
-	_fnTk_SetInternalBorderEx func(unsafe.Pointer, int, int, int, int)
-	_fnTk_SetMinimumRequestSize func(unsafe.Pointer, int, int)
-	_fnTk_SetOptions func(*tcl.Tcl_Interp, string, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) int
-	_fnTk_SetTSOrigin func(unsafe.Pointer, unsafe.Pointer, int, int)
-	_fnTk_SetWindowBackground func(unsafe.Pointer, uint)
-	_fnTk_SetWindowBackgroundPixmap func(unsafe.Pointer, int)
-	_fnTk_SetWindowBorder func(unsafe.Pointer, uint)
-	_fnTk_SetWindowBorderPixmap func(unsafe.Pointer, int)
-	_fnTk_SetWindowBorderWidth func(unsafe.Pointer, int)
-	_fnTk_SetWindowColormap func(unsafe.Pointer, int)
-	_fnTk_SetWindowVisual func(unsafe.Pointer, unsafe.Pointer, int, int) int
-	_fnTk_SizeOfBitmap func(*Display, int, *int32, *int32)
-	_fnTk_SizeOfImage func(unsafe.Pointer, *int32, *int32)
-	_fnTk_StrictMotif func(unsafe.Pointer) int
-	_fnTk_TextLayoutToPostscript func(*tcl.Tcl_Interp, unsafe.Pointer)
-	_fnTk_TextWidth func(unsafe.Pointer, string, int) int
-	_fnTk_UndefineCursor func(unsafe.Pointer)
-	_fnTk_UnderlineChars func(*Display, int, unsafe.Pointer, unsafe.Pointer, string, int, int, int, int)
-	_fnTk_UnderlineTextLayout func(*Display, int, unsafe.Pointer, unsafe.Pointer, int, int, int)
-	_fnTk_Ungrab func(unsafe.Pointer)
-	_fnTk_UnmaintainGeometry func(unsafe.Pointer, unsafe.Pointer)
-	_fnTk_UnmapWindow func(unsafe.Pointer)
-	_fnTk_UnsetGrid func(unsafe.Pointer)
-	_fnTk_UpdatePointer func(unsafe.Pointer, int, int, int)
+	_fnTk_PhotoPutZoomedBlock_Panic       func(unsafe.Pointer, unsafe.Pointer, int, int, int, int, int, int, int, int, int)
+	_fnTk_PhotoSetSize                    func(*tcl.Tcl_Interp, unsafe.Pointer, int, int) int
+	_fnTk_PhotoSetSize_Panic              func(unsafe.Pointer, int, int)
+	_fnTk_PointToChar                     func(unsafe.Pointer, int, int) int
+	_fnTk_PostscriptBitmap                func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
+	_fnTk_PostscriptColor                 func(*tcl.Tcl_Interp, unsafe.Pointer, *XColor) int
+	_fnTk_PostscriptFont                  func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_PostscriptFontName              func(unsafe.Pointer, *tcl.Tcl_DString) int
+	_fnTk_PostscriptImage                 func(unsafe.Pointer, *tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int, int, int, int) int
+	_fnTk_PostscriptPath                  func(*tcl.Tcl_Interp, unsafe.Pointer, *float64, int)
+	_fnTk_PostscriptPhoto                 func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int, int) int
+	_fnTk_PostscriptStipple               func(*tcl.Tcl_Interp, unsafe.Pointer, unsafe.Pointer, int) int
+	_fnTk_PostscriptY                     func(float64, unsafe.Pointer) float64
+	_fnTk_PreserveColormap                func(*Display, int)
+	_fnTk_QueueWindowEvent                func(unsafe.Pointer, tcl.Tcl_QueuePosition)
+	_fnTk_RedrawImage                     func(unsafe.Pointer, int, int, int, int, int, int, int)
+	_fnTk_RegisterStyleEngine             func(string, unsafe.Pointer) unsafe.Pointer
+	_fnTk_RegisterStyledElement           func(unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_ResetOutlineGC                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+	_fnTk_ResetUserInactiveTime           func(*Display)
+	_fnTk_ResizeWindow                    func(unsafe.Pointer, int, int)
+	_fnTk_RestackWindow                   func(unsafe.Pointer, int, unsafe.Pointer) int
+	_fnTk_RestoreSavedOptions             func(unsafe.Pointer)
+	_fnTk_RestrictEvents                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnTk_SafeInit                        func(*tcl.Tcl_Interp) int
+	_fnTk_SetAppName                      func(unsafe.Pointer, string) string
+	_fnTk_SetBackgroundFromBorder         func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_SetCaretPos                     func(unsafe.Pointer, int, int, int)
+	_fnTk_SetClass                        func(unsafe.Pointer, string)
+	_fnTk_SetClassProcs                   func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_SetGrid                         func(unsafe.Pointer, int, int, int, int)
+	_fnTk_SetInternalBorder               func(unsafe.Pointer, int)
+	_fnTk_SetInternalBorderEx             func(unsafe.Pointer, int, int, int, int)
+	_fnTk_SetMinimumRequestSize           func(unsafe.Pointer, int, int)
+	_fnTk_SetOptions                      func(*tcl.Tcl_Interp, string, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) int
+	_fnTk_SetTSOrigin                     func(unsafe.Pointer, unsafe.Pointer, int, int)
+	_fnTk_SetWindowBackground             func(unsafe.Pointer, uint)
+	_fnTk_SetWindowBackgroundPixmap       func(unsafe.Pointer, int)
+	_fnTk_SetWindowBorder                 func(unsafe.Pointer, uint)
+	_fnTk_SetWindowBorderPixmap           func(unsafe.Pointer, int)
+	_fnTk_SetWindowBorderWidth            func(unsafe.Pointer, int)
+	_fnTk_SetWindowColormap               func(unsafe.Pointer, int)
+	_fnTk_SetWindowVisual                 func(unsafe.Pointer, unsafe.Pointer, int, int) int
+	_fnTk_SizeOfBitmap                    func(*Display, int, *int32, *int32)
+	_fnTk_SizeOfImage                     func(unsafe.Pointer, *int32, *int32)
+	_fnTk_StrictMotif                     func(unsafe.Pointer) int
+	_fnTk_TextLayoutToPostscript          func(*tcl.Tcl_Interp, unsafe.Pointer)
+	_fnTk_TextWidth                       func(unsafe.Pointer, string, int) int
+	_fnTk_UndefineCursor                  func(unsafe.Pointer)
+	_fnTk_UnderlineChars                  func(*Display, int, unsafe.Pointer, unsafe.Pointer, string, int, int, int, int)
+	_fnTk_UnderlineTextLayout             func(*Display, int, unsafe.Pointer, unsafe.Pointer, int, int, int)
+	_fnTk_Ungrab                          func(unsafe.Pointer)
+	_fnTk_UnmaintainGeometry              func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_UnmapWindow                     func(unsafe.Pointer)
+	_fnTk_UnsetGrid                       func(unsafe.Pointer)
+	_fnTk_UpdatePointer                   func(unsafe.Pointer, int, int, int)
 )
 
 func Tk_3DBorderColor(border unsafe.Pointer) *XColor {
@@ -1371,4 +1371,3 @@ func Tk_UnsetGrid(tkwin unsafe.Pointer) {
 func Tk_UpdatePointer(tkwin unsafe.Pointer, x int, y int, state int) {
 	_fnTk_UpdatePointer(tkwin, x, y, state)
 }
-

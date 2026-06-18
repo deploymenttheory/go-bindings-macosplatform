@@ -340,4 +340,3 @@ type WindowControllerable interface {
 }
 
 var _ WindowControllerable = (*WindowController)(nil)
-

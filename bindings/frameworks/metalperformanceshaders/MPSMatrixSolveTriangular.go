@@ -18,9 +18,9 @@ type MPSMatrixSolveTriangular struct {
 }
 
 var (
-	_clsMPSMatrixSolveTriangular = _objcClass("MPSMatrixSolveTriangular")
+	_clsMPSMatrixSolveTriangular                                                                      = _objcClass("MPSMatrixSolveTriangular")
 	_mPSMatrixSolveTriangularSelInitWithDeviceRightUpperTransposeUnitOrderNumberOfRightHandSidesAlpha = objc.RegisterName("initWithDevice:right:upper:transpose:unit:order:numberOfRightHandSides:alpha:")
-	_mPSMatrixSolveTriangularSelEncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:rightHandSideMatrix:solutionMatrix:")
+	_mPSMatrixSolveTriangularSelEncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix    = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:rightHandSideMatrix:solutionMatrix:")
 )
 
 func MPSMatrixSolveTriangularFromID(id objc.ID) *MPSMatrixSolveTriangular {
@@ -36,7 +36,9 @@ func MPSMatrixSolveTriangularFromID(id objc.ID) *MPSMatrixSolveTriangular {
 // @abstract   Initialize an MPSMatrixSolveTriangular object on a device @param      device          The device on which the kernel will execute. @param      right           A boolean value which indicates if the coefficient matrix is multiplied on the left or right side of the solution.  NO indicates the multiplication is on the left. @param      upper           A boolean value which indicates if the source is lower or upper triangular.  NO indicates that the coefficient matrix is lower triangular. @param      transpose       A boolean value which indicates if the source matrix should be used in transposed form.  NO indicates that the coefficient matrix is to be used normally. @param      unit            A boolean value which indicates if the source matrix is unit triangular. @param      order           The order of the source matrix and, if right == NO, the number of rows in the solution and right hand side matrices.  If right == YES the number of columns in the solution and right hand side matrices. @param      numberOfRightHandSides  If right == NO, the number of columns in the solution and right hand side matrices.  The number of rows otherwise. @param      alpha           A double precision value used to scale the right hand sides. @discussion This function initializes a MPSMatrixSolveTriangular object.  It may allocate device side memory. @return     A valid MPSMatrixSolveTriangular object or nil, if failure.
 func (o *MPSMatrixSolveTriangular) InitWithDeviceRightUpperTransposeUnitOrderNumberOfRightHandSidesAlpha(device metal.MTLDevice, right bool, upper bool, transpose bool, unit bool, order uint, numberOfRightHandSides uint, alpha float64) *MPSMatrixSolveTriangular {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixSolveTriangularSelInitWithDeviceRightUpperTransposeUnitOrderNumberOfRightHandSidesAlpha, device, right, upper, transpose, unit, order, numberOfRightHandSides, alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixSolveTriangularFromID(_ret)
 }
 
@@ -44,4 +46,3 @@ func (o *MPSMatrixSolveTriangular) InitWithDeviceRightUpperTransposeUnitOrderNum
 func (o *MPSMatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	o.Ptr().Send(_mPSMatrixSolveTriangularSelEncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix, commandBuffer, sourceMatrix.Ptr(), rightHandSideMatrix.Ptr(), solutionMatrix.Ptr())
 }
-

@@ -110,4 +110,3 @@ type NNOptimizerRMSPropable interface {
 }
 
 var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
-

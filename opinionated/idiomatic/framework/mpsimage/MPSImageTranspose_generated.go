@@ -55,7 +55,9 @@ func (x *ImageTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageT
 	return x
 }
 
-func (x *ImageTranspose) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageTranspose) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
 type ImageTransposeable interface {
@@ -66,4 +68,3 @@ type ImageTransposeable interface {
 }
 
 var _ ImageTransposeable = (*ImageTranspose)(nil)
-

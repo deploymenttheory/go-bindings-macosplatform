@@ -114,9 +114,13 @@ func (x *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(p
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterPressureMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterPressureMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterPressureMeasurementable is the interface implemented by [MTRClusterPressureMeasurement], for mocking and DI.
 type MTRClusterPressureMeasurementable interface {
@@ -138,4 +142,3 @@ type MTRClusterPressureMeasurementable interface {
 }
 
 var _ MTRClusterPressureMeasurementable = (*MTRClusterPressureMeasurement)(nil)
-

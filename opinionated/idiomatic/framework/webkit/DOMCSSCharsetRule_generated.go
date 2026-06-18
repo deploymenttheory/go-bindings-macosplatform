@@ -56,7 +56,9 @@ func (x *DOMCSSCharsetRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOM
 
 func (x *DOMCSSCharsetRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
-func (x *DOMCSSCharsetRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+func (x *DOMCSSCharsetRule) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+}
 
 // DOMCSSCharsetRuleable is the interface implemented by [DOMCSSCharsetRule], for mocking and DI.
 type DOMCSSCharsetRuleable interface {
@@ -66,4 +68,3 @@ type DOMCSSCharsetRuleable interface {
 }
 
 var _ DOMCSSCharsetRuleable = (*DOMCSSCharsetRule)(nil)
-

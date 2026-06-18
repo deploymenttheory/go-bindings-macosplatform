@@ -13,49 +13,64 @@ import (
 
 func GlobalUpdateOK() uint8 {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "globalUpdateOK")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint8)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterApplicationDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterApplicationDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterManagerDidAddFilterNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterManagerDidAddFilterNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterManagerDidModifyFilterNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterManagerDidModifyFilterNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterManagerDidRemoveFilterNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterManagerDidRemoveFilterNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterManagerDidSelectFilterNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterManagerDidSelectFilterNotification")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterPDFWorkflowDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterPDFWorkflowDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func KQuartzFilterPrintingDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzfiltersLib, "kQuartzFilterPrintingDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

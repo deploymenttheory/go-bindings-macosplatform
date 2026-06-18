@@ -72,4 +72,3 @@ type TicketedEventReservationable interface {
 }
 
 var _ TicketedEventReservationable = (*TicketedEventReservation)(nil)
-

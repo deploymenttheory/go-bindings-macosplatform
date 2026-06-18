@@ -15,16 +15,16 @@ type MTLAccelerationStructureBoundingBoxGeometryDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureBoundingBoxGeometryDescriptor = _objcClass("MTLAccelerationStructureBoundingBoxGeometryDescriptor")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBuffer = objc.RegisterName("boundingBoxBuffer")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxBuffer = objc.RegisterName("setBoundingBoxBuffer:")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBufferOffset = objc.RegisterName("boundingBoxBufferOffset")
+	_clsMTLAccelerationStructureBoundingBoxGeometryDescriptor                           = _objcClass("MTLAccelerationStructureBoundingBoxGeometryDescriptor")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelDescriptor                 = objc.RegisterName("descriptor")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBuffer          = objc.RegisterName("boundingBoxBuffer")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxBuffer       = objc.RegisterName("setBoundingBoxBuffer:")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxBufferOffset    = objc.RegisterName("boundingBoxBufferOffset")
 	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxBufferOffset = objc.RegisterName("setBoundingBoxBufferOffset:")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxStride = objc.RegisterName("boundingBoxStride")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxStride = objc.RegisterName("setBoundingBoxStride:")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxCount = objc.RegisterName("boundingBoxCount")
-	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount = objc.RegisterName("setBoundingBoxCount:")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxStride          = objc.RegisterName("boundingBoxStride")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxStride       = objc.RegisterName("setBoundingBoxStride:")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelBoundingBoxCount           = objc.RegisterName("boundingBoxCount")
+	_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount        = objc.RegisterName("setBoundingBoxCount:")
 )
 
 func MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(id objc.ID) *MTLAccelerationStructureBoundingBoxGeometryDescriptor {
@@ -39,7 +39,9 @@ func MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(id objc.ID) *MT
 
 func MTLAccelerationStructureBoundingBoxGeometryDescriptorDescriptor() *MTLAccelerationStructureBoundingBoxGeometryDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLAccelerationStructureBoundingBoxGeometryDescriptor), _mTLAccelerationStructureBoundingBoxGeometryDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(_ret)
 }
 
@@ -82,4 +84,3 @@ func (o *MTLAccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount
 func (o *MTLAccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
 	o.Ptr().Send(_mTLAccelerationStructureBoundingBoxGeometryDescriptorSelSetBoundingBoxCount, boundingBoxCount)
 }
-

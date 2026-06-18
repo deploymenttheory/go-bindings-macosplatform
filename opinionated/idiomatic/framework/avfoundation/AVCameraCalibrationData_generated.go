@@ -86,4 +86,3 @@ type CameraCalibrationDataable interface {
 }
 
 var _ CameraCalibrationDataable = (*CameraCalibrationData)(nil)
-

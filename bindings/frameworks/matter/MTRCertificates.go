@@ -18,23 +18,23 @@ type MTRCertificates struct {
 }
 
 var (
-	_clsMTRCertificates = _objcClass("MTRCertificates")
-	_mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDValidityPeriodError = objc.RegisterName("createRootCertificate:issuerID:fabricID:validityPeriod:error:")
-	_mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDError = objc.RegisterName("createRootCertificate:issuerID:fabricID:error:")
-	_mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDValidityPeriodError = objc.RegisterName("createIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerID:fabricID:validityPeriod:error:")
-	_mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDError = objc.RegisterName("createIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerID:fabricID:error:")
+	_clsMTRCertificates                                                                                                                         = _objcClass("MTRCertificates")
+	_mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDValidityPeriodError                                                                 = objc.RegisterName("createRootCertificate:issuerID:fabricID:validityPeriod:error:")
+	_mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDError                                                                               = objc.RegisterName("createRootCertificate:issuerID:fabricID:error:")
+	_mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDValidityPeriodError                     = objc.RegisterName("createIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerID:fabricID:validityPeriod:error:")
+	_mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDError                                   = objc.RegisterName("createIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerID:fabricID:error:")
 	_mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError = objc.RegisterName("createOperationalCertificate:signingCertificate:operationalPublicKey:fabricID:nodeID:caseAuthenticatedTags:validityPeriod:error:")
-	_mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError = objc.RegisterName("createOperationalCertificate:signingCertificate:operationalPublicKey:fabricID:nodeID:caseAuthenticatedTags:error:")
-	_mTRCertificatesSelKeypairMatchesCertificate = objc.RegisterName("keypair:matchesCertificate:")
-	_mTRCertificatesSelIsCertificateEqualTo = objc.RegisterName("isCertificate:equalTo:")
-	_mTRCertificatesSelCreateCertificateSigningRequestError = objc.RegisterName("createCertificateSigningRequest:error:")
-	_mTRCertificatesSelConvertX509Certificate = objc.RegisterName("convertX509Certificate:")
-	_mTRCertificatesSelConvertMatterCertificate = objc.RegisterName("convertMatterCertificate:")
-	_mTRCertificatesSelPublicKeyFromCSRError = objc.RegisterName("publicKeyFromCSR:error:")
-	_mTRCertificatesSelGenerateRootCertificateIssuerIdFabricIdError = objc.RegisterName("generateRootCertificate:issuerId:fabricId:error:")
-	_mTRCertificatesSelGenerateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIdFabricIdError = objc.RegisterName("generateIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerId:fabricId:error:")
-	_mTRCertificatesSelGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError = objc.RegisterName("generateOperationalCertificate:signingCertificate:operationalPublicKey:fabricId:nodeId:caseAuthenticatedTags:error:")
-	_mTRCertificatesSelGenerateCertificateSigningRequestError = objc.RegisterName("generateCertificateSigningRequest:error:")
+	_mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError               = objc.RegisterName("createOperationalCertificate:signingCertificate:operationalPublicKey:fabricID:nodeID:caseAuthenticatedTags:error:")
+	_mTRCertificatesSelKeypairMatchesCertificate                                                                                                = objc.RegisterName("keypair:matchesCertificate:")
+	_mTRCertificatesSelIsCertificateEqualTo                                                                                                     = objc.RegisterName("isCertificate:equalTo:")
+	_mTRCertificatesSelCreateCertificateSigningRequestError                                                                                     = objc.RegisterName("createCertificateSigningRequest:error:")
+	_mTRCertificatesSelConvertX509Certificate                                                                                                   = objc.RegisterName("convertX509Certificate:")
+	_mTRCertificatesSelConvertMatterCertificate                                                                                                 = objc.RegisterName("convertMatterCertificate:")
+	_mTRCertificatesSelPublicKeyFromCSRError                                                                                                    = objc.RegisterName("publicKeyFromCSR:error:")
+	_mTRCertificatesSelGenerateRootCertificateIssuerIdFabricIdError                                                                             = objc.RegisterName("generateRootCertificate:issuerId:fabricId:error:")
+	_mTRCertificatesSelGenerateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIdFabricIdError                                 = objc.RegisterName("generateIntermediateCertificate:rootCertificate:intermediatePublicKey:issuerId:fabricId:error:")
+	_mTRCertificatesSelGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError             = objc.RegisterName("generateOperationalCertificate:signingCertificate:operationalPublicKey:fabricId:nodeId:caseAuthenticatedTags:error:")
+	_mTRCertificatesSelGenerateCertificateSigningRequestError                                                                                   = objc.RegisterName("generateCertificateSigningRequest:error:")
 )
 
 func MTRCertificatesFromID(id objc.ID) *MTRCertificates {
@@ -51,7 +51,9 @@ func MTRCertificatesFromID(id objc.ID) *MTRCertificates {
 func MTRCertificatesCreateRootCertificateIssuerIDFabricIDValidityPeriodError(keypair MTRKeypair, issuerID *foundation.NSNumber, fabricID *foundation.NSNumber, validityPeriod *foundation.NSDateInterval) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDValidityPeriodError, keypair, issuerID.Ptr(), fabricID.Ptr(), validityPeriod.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -62,7 +64,9 @@ func MTRCertificatesCreateRootCertificateIssuerIDFabricIDValidityPeriodError(key
 func MTRCertificatesCreateRootCertificateIssuerIDFabricIDError(keypair MTRKeypair, issuerID *foundation.NSNumber, fabricID *foundation.NSNumber) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateRootCertificateIssuerIDFabricIDError, keypair, issuerID.Ptr(), fabricID.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -73,7 +77,9 @@ func MTRCertificatesCreateRootCertificateIssuerIDFabricIDError(keypair MTRKeypai
 func MTRCertificatesCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDValidityPeriodError(rootKeypair MTRKeypair, rootCertificate *foundation.NSData, intermediatePublicKey unsafe.Pointer, issuerID *foundation.NSNumber, fabricID *foundation.NSNumber, validityPeriod *foundation.NSDateInterval) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDValidityPeriodError, rootKeypair, rootCertificate.Ptr(), intermediatePublicKey, issuerID.Ptr(), fabricID.Ptr(), validityPeriod.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -84,7 +90,9 @@ func MTRCertificatesCreateIntermediateCertificateRootCertificateIntermediatePubl
 func MTRCertificatesCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDError(rootKeypair MTRKeypair, rootCertificate *foundation.NSData, intermediatePublicKey unsafe.Pointer, issuerID *foundation.NSNumber, fabricID *foundation.NSNumber) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIDFabricIDError, rootKeypair, rootCertificate.Ptr(), intermediatePublicKey, issuerID.Ptr(), fabricID.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -95,7 +103,9 @@ func MTRCertificatesCreateIntermediateCertificateRootCertificateIntermediatePubl
 func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricID *foundation.NSNumber, nodeID *foundation.NSNumber, caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber], validityPeriod *foundation.NSDateInterval) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsValidityPeriodError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags, validityPeriod.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -106,7 +116,9 @@ func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPub
 func MTRCertificatesCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricID *foundation.NSNumber, nodeID *foundation.NSNumber, caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIDNodeIDCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricID.Ptr(), nodeID.Ptr(), caseAuthenticatedTags, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -129,7 +141,9 @@ func MTRCertificatesIsCertificateEqualTo(certificate1 *foundation.NSData, certif
 func MTRCertificatesCreateCertificateSigningRequestError(keypair MTRKeypair) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelCreateCertificateSigningRequestError, keypair, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -139,14 +153,18 @@ func MTRCertificatesCreateCertificateSigningRequestError(keypair MTRKeypair) (*f
 // Convert the given X.509v3 DER encoded certificate to the Matter certificate format. Returns nil if the conversion fails (e.g. if the input data cannot be parsed as a DER encoded X.509 certificate, or if the certificate cannot be represented in the Matter certificate format).
 func MTRCertificatesConvertX509Certificate(x509Certificate *foundation.NSData) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelConvertX509Certificate, x509Certificate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // Convert the given Matter TLV encoded certificate to the X.509v3 DER encoded format. Returns nil if the conversion fails (e.g. if the input data cannot be parsed as a Matter TLV encoded certificate, or if the certificate cannot be represented in the X.509v3 DER format).
 func MTRCertificatesConvertMatterCertificate(matterCertificate *foundation.NSData) *foundation.NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelConvertMatterCertificate, matterCertificate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -154,7 +172,9 @@ func MTRCertificatesConvertMatterCertificate(matterCertificate *foundation.NSDat
 func MTRCertificatesPublicKeyFromCSRError(csr *foundation.NSData) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelPublicKeyFromCSRError, csr.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -164,7 +184,9 @@ func MTRCertificatesPublicKeyFromCSRError(csr *foundation.NSData) (*foundation.N
 func MTRCertificatesGenerateRootCertificateIssuerIdFabricIdError(keypair MTRKeypair, issuerId *foundation.NSNumber, fabricId *foundation.NSNumber) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateRootCertificateIssuerIdFabricIdError, keypair, issuerId.Ptr(), fabricId.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -174,7 +196,9 @@ func MTRCertificatesGenerateRootCertificateIssuerIdFabricIdError(keypair MTRKeyp
 func MTRCertificatesGenerateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIdFabricIdError(rootKeypair MTRKeypair, rootCertificate *foundation.NSData, intermediatePublicKey unsafe.Pointer, issuerId *foundation.NSNumber, fabricId *foundation.NSNumber) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateIntermediateCertificateRootCertificateIntermediatePublicKeyIssuerIdFabricIdError, rootKeypair, rootCertificate.Ptr(), intermediatePublicKey, issuerId.Ptr(), fabricId.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -184,7 +208,9 @@ func MTRCertificatesGenerateIntermediateCertificateRootCertificateIntermediatePu
 func MTRCertificatesGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError(signingKeypair MTRKeypair, signingCertificate *foundation.NSData, operationalPublicKey unsafe.Pointer, fabricId *foundation.NSNumber, nodeId *foundation.NSNumber, caseAuthenticatedTags *foundation.NSArray[*foundation.NSNumber]) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateOperationalCertificateSigningCertificateOperationalPublicKeyFabricIdNodeIdCaseAuthenticatedTagsError, signingKeypair, signingCertificate.Ptr(), operationalPublicKey, fabricId.Ptr(), nodeId.Ptr(), caseAuthenticatedTags, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -194,10 +220,11 @@ func MTRCertificatesGenerateOperationalCertificateSigningCertificateOperationalP
 func MTRCertificatesGenerateCertificateSigningRequestError(keypair MTRKeypair) (*foundation.NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTRCertificates), _mTRCertificatesSelGenerateCertificateSigningRequestError, keypair, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return foundation.NSDataFromID(_ret), nil
 }
-

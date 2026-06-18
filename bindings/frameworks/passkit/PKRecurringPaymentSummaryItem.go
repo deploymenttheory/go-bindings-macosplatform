@@ -16,15 +16,15 @@ type PKRecurringPaymentSummaryItem struct {
 }
 
 var (
-	_clsPKRecurringPaymentSummaryItem = _objcClass("PKRecurringPaymentSummaryItem")
-	_pKRecurringPaymentSummaryItemSelStartDate = objc.RegisterName("startDate")
-	_pKRecurringPaymentSummaryItemSelSetStartDate = objc.RegisterName("setStartDate:")
-	_pKRecurringPaymentSummaryItemSelIntervalUnit = objc.RegisterName("intervalUnit")
-	_pKRecurringPaymentSummaryItemSelSetIntervalUnit = objc.RegisterName("setIntervalUnit:")
-	_pKRecurringPaymentSummaryItemSelIntervalCount = objc.RegisterName("intervalCount")
+	_clsPKRecurringPaymentSummaryItem                 = _objcClass("PKRecurringPaymentSummaryItem")
+	_pKRecurringPaymentSummaryItemSelStartDate        = objc.RegisterName("startDate")
+	_pKRecurringPaymentSummaryItemSelSetStartDate     = objc.RegisterName("setStartDate:")
+	_pKRecurringPaymentSummaryItemSelIntervalUnit     = objc.RegisterName("intervalUnit")
+	_pKRecurringPaymentSummaryItemSelSetIntervalUnit  = objc.RegisterName("setIntervalUnit:")
+	_pKRecurringPaymentSummaryItemSelIntervalCount    = objc.RegisterName("intervalCount")
 	_pKRecurringPaymentSummaryItemSelSetIntervalCount = objc.RegisterName("setIntervalCount:")
-	_pKRecurringPaymentSummaryItemSelEndDate = objc.RegisterName("endDate")
-	_pKRecurringPaymentSummaryItemSelSetEndDate = objc.RegisterName("setEndDate:")
+	_pKRecurringPaymentSummaryItemSelEndDate          = objc.RegisterName("endDate")
+	_pKRecurringPaymentSummaryItemSelSetEndDate       = objc.RegisterName("setEndDate:")
 )
 
 func PKRecurringPaymentSummaryItemFromID(id objc.ID) *PKRecurringPaymentSummaryItem {
@@ -39,7 +39,9 @@ func PKRecurringPaymentSummaryItemFromID(id objc.ID) *PKRecurringPaymentSummaryI
 
 func (o *PKRecurringPaymentSummaryItem) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentSummaryItemSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -67,11 +69,12 @@ func (o *PKRecurringPaymentSummaryItem) SetIntervalCount(intervalCount int) {
 
 func (o *PKRecurringPaymentSummaryItem) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKRecurringPaymentSummaryItemSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PKRecurringPaymentSummaryItem) SetEndDate(endDate *foundation.NSDate) {
 	o.Ptr().Send(_pKRecurringPaymentSummaryItemSelSetEndDate, endDate.Ptr())
 }
-

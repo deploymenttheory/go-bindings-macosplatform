@@ -16,17 +16,17 @@ type NSAppearance struct {
 }
 
 var (
-	_clsNSAppearance = _objcClass("NSAppearance")
+	_clsNSAppearance                                  = _objcClass("NSAppearance")
 	_nSAppearanceSelPerformAsCurrentDrawingAppearance = objc.RegisterName("performAsCurrentDrawingAppearance:")
-	_nSAppearanceSelAppearanceNamed = objc.RegisterName("appearanceNamed:")
-	_nSAppearanceSelInitWithAppearanceNamedBundle = objc.RegisterName("initWithAppearanceNamed:bundle:")
-	_nSAppearanceSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_nSAppearanceSelAppearanceNamed                   = objc.RegisterName("appearanceNamed:")
+	_nSAppearanceSelInitWithAppearanceNamedBundle     = objc.RegisterName("initWithAppearanceNamed:bundle:")
+	_nSAppearanceSelInitWithCoder                     = objc.RegisterName("initWithCoder:")
 	_nSAppearanceSelBestMatchFromAppearancesWithNames = objc.RegisterName("bestMatchFromAppearancesWithNames:")
-	_nSAppearanceSelName = objc.RegisterName("name")
-	_nSAppearanceSelCurrentAppearance = objc.RegisterName("currentAppearance")
-	_nSAppearanceSelSetCurrentAppearance = objc.RegisterName("setCurrentAppearance:")
-	_nSAppearanceSelCurrentDrawingAppearance = objc.RegisterName("currentDrawingAppearance")
-	_nSAppearanceSelAllowsVibrancy = objc.RegisterName("allowsVibrancy")
+	_nSAppearanceSelName                              = objc.RegisterName("name")
+	_nSAppearanceSelCurrentAppearance                 = objc.RegisterName("currentAppearance")
+	_nSAppearanceSelSetCurrentAppearance              = objc.RegisterName("setCurrentAppearance:")
+	_nSAppearanceSelCurrentDrawingAppearance          = objc.RegisterName("currentDrawingAppearance")
+	_nSAppearanceSelAllowsVibrancy                    = objc.RegisterName("allowsVibrancy")
 )
 
 func NSAppearanceFromID(id objc.ID) *NSAppearance {
@@ -52,38 +52,50 @@ func (o *NSAppearance) PerformAsCurrentDrawingAppearance(block func()) {
 
 func NSAppearanceAppearanceNamed(name *foundation.NSString) *NSAppearance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppearance), _nSAppearanceSelAppearanceNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
 func (o *NSAppearance) InitWithAppearanceNamedBundle(name *foundation.NSString, bundle *foundation.NSBundle) *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelInitWithAppearanceNamedBundle, name.Ptr(), bundle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
 func (o *NSAppearance) InitWithCoder(coder *foundation.NSCoder) *NSAppearance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
 func (o *NSAppearance) BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelBestMatchFromAppearancesWithNames, appearances)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSAppearance) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAppearanceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: Use -performAsCurrentDrawingAppearance: to temporarily set the drawing appearance, or +currentDrawingAppearance to access the currently drawing appearance.
 func NSAppearanceCurrentAppearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppearance), _nSAppearanceSelCurrentAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -94,7 +106,9 @@ func NSAppearanceSetCurrentAppearance(currentAppearance *NSAppearance) {
 
 func NSAppearanceCurrentDrawingAppearance() *NSAppearance {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAppearance), _nSAppearanceSelCurrentDrawingAppearance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAppearanceFromID(_ret)
 }
 
@@ -102,4 +116,3 @@ func (o *NSAppearance) AllowsVibrancy() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSAppearanceSelAllowsVibrancy)
 	return _ret
 }
-

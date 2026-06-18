@@ -21,22 +21,22 @@ type VNImageRequestHandler struct {
 }
 
 var (
-	_clsVNImageRequestHandler = _objcClass("VNImageRequestHandler")
-	_vNImageRequestHandlerSelInitWithCVPixelBufferOptions = objc.RegisterName("initWithCVPixelBuffer:options:")
-	_vNImageRequestHandlerSelInitWithCVPixelBufferOrientationOptions = objc.RegisterName("initWithCVPixelBuffer:orientation:options:")
-	_vNImageRequestHandlerSelInitWithCVPixelBufferDepthDataOrientationOptions = objc.RegisterName("initWithCVPixelBuffer:depthData:orientation:options:")
-	_vNImageRequestHandlerSelInitWithCGImageOptions = objc.RegisterName("initWithCGImage:options:")
-	_vNImageRequestHandlerSelInitWithCGImageOrientationOptions = objc.RegisterName("initWithCGImage:orientation:options:")
-	_vNImageRequestHandlerSelInitWithCIImageOptions = objc.RegisterName("initWithCIImage:options:")
-	_vNImageRequestHandlerSelInitWithCIImageOrientationOptions = objc.RegisterName("initWithCIImage:orientation:options:")
-	_vNImageRequestHandlerSelInitWithURLOptions = objc.RegisterName("initWithURL:options:")
-	_vNImageRequestHandlerSelInitWithURLOrientationOptions = objc.RegisterName("initWithURL:orientation:options:")
-	_vNImageRequestHandlerSelInitWithDataOptions = objc.RegisterName("initWithData:options:")
-	_vNImageRequestHandlerSelInitWithDataOrientationOptions = objc.RegisterName("initWithData:orientation:options:")
-	_vNImageRequestHandlerSelInitWithCMSampleBufferOptions = objc.RegisterName("initWithCMSampleBuffer:options:")
-	_vNImageRequestHandlerSelInitWithCMSampleBufferOrientationOptions = objc.RegisterName("initWithCMSampleBuffer:orientation:options:")
+	_clsVNImageRequestHandler                                                  = _objcClass("VNImageRequestHandler")
+	_vNImageRequestHandlerSelInitWithCVPixelBufferOptions                      = objc.RegisterName("initWithCVPixelBuffer:options:")
+	_vNImageRequestHandlerSelInitWithCVPixelBufferOrientationOptions           = objc.RegisterName("initWithCVPixelBuffer:orientation:options:")
+	_vNImageRequestHandlerSelInitWithCVPixelBufferDepthDataOrientationOptions  = objc.RegisterName("initWithCVPixelBuffer:depthData:orientation:options:")
+	_vNImageRequestHandlerSelInitWithCGImageOptions                            = objc.RegisterName("initWithCGImage:options:")
+	_vNImageRequestHandlerSelInitWithCGImageOrientationOptions                 = objc.RegisterName("initWithCGImage:orientation:options:")
+	_vNImageRequestHandlerSelInitWithCIImageOptions                            = objc.RegisterName("initWithCIImage:options:")
+	_vNImageRequestHandlerSelInitWithCIImageOrientationOptions                 = objc.RegisterName("initWithCIImage:orientation:options:")
+	_vNImageRequestHandlerSelInitWithURLOptions                                = objc.RegisterName("initWithURL:options:")
+	_vNImageRequestHandlerSelInitWithURLOrientationOptions                     = objc.RegisterName("initWithURL:orientation:options:")
+	_vNImageRequestHandlerSelInitWithDataOptions                               = objc.RegisterName("initWithData:options:")
+	_vNImageRequestHandlerSelInitWithDataOrientationOptions                    = objc.RegisterName("initWithData:orientation:options:")
+	_vNImageRequestHandlerSelInitWithCMSampleBufferOptions                     = objc.RegisterName("initWithCMSampleBuffer:options:")
+	_vNImageRequestHandlerSelInitWithCMSampleBufferOrientationOptions          = objc.RegisterName("initWithCMSampleBuffer:orientation:options:")
 	_vNImageRequestHandlerSelInitWithCMSampleBufferDepthDataOrientationOptions = objc.RegisterName("initWithCMSampleBuffer:depthData:orientation:options:")
-	_vNImageRequestHandlerSelPerformRequestsError = objc.RegisterName("performRequests:error:")
+	_vNImageRequestHandlerSelPerformRequestsError                              = objc.RegisterName("performRequests:error:")
 )
 
 func VNImageRequestHandlerFromID(id objc.ID) *VNImageRequestHandler {
@@ -52,98 +52,126 @@ func VNImageRequestHandlerFromID(id objc.ID) *VNImageRequestHandler {
 // @brief initWithCVPixelBuffer:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer. @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 func (o *VNImageRequestHandler) InitWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCVPixelBufferOptions, pixelBuffer, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCVPixelBuffer:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer. @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 func (o *VNImageRequestHandler) InitWithCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCVPixelBufferOrientationOptions, pixelBuffer, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCVPixelBuffer:depthData:orientation:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer with depth information. @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler. @param depthData An AVDepthData instance associated with the pixelBuffer @param orientation The orientation of the image and depth buffers based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information and should match for both buffers. @param options A dictionary with options specifying auxiliary information for the buffer/image
 func (o *VNImageRequestHandler) InitWithCVPixelBufferDepthDataOrientationOptions(pixelBuffer unsafe.Pointer, depthData *avfoundation.AVDepthData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCVPixelBufferDepthDataOrientationOptions, pixelBuffer, depthData.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCGImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CGImageRef. @param image A CGImageRef containing the image to be used for performing the requests. The content of the image cannot be modified. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 func (o *VNImageRequestHandler) InitWithCGImageOptions(image unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCGImageOptions, image, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCGImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CGImageRef. @param image A CGImageRef containing the image to be used for performing the requests. The content of the image cannot be modified. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
 func (o *VNImageRequestHandler) InitWithCGImageOrientationOptions(image unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCGImageOrientationOptions, image, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCIImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CIImage. @param image A CIImage containing the image to be used for performing the requests. The content of the image cannot be modified. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator. The orientation of the original image should be applied for instance by using imageByApplyingOrientation or use the initWithCIImage:options:orientation API.
 func (o *VNImageRequestHandler) InitWithCIImageOptions(image *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCIImageOptions, image.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithCIImage:options:orientation creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CIImage. @param image A CIImage containing the image to be used for performing the requests. The content of the image cannot be modified. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
 func (o *VNImageRequestHandler) InitWithCIImageOrientationOptions(image *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCIImageOrientationOptions, image.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithURL:options creates a VNImageRequestHandler to be used for performing requests against an image specified by it's URL @param imageURL A URL pointing at an image to be used for performing the requests. The image has to be in a format that is supported by ImageIO. The content of the image cannot be modified. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
 func (o *VNImageRequestHandler) InitWithURLOptions(imageURL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithURLOptions, imageURL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithURL:options creates a VNImageRequestHandler to be used for performing requests against an image specified by it's URL @param imageURL A URL pointing at an image to be used for performing the requests. The image has to be in a format that is supported by ImageIO. The content of the image cannot be modified. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
 func (o *VNImageRequestHandler) InitWithURLOrientationOptions(imageURL *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithURLOrientationOptions, imageURL.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithData:options creates a VNImageRequestHandler to be used for performing requests against an image contained in an NSData object. @param imageData An NSData object containing the content of the image to be used for performing the requests. See CIImage imageWithData for supported format. The content of the image cannot be modified. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
 func (o *VNImageRequestHandler) InitWithDataOptions(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithDataOptions, imageData.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief initWithData:options creates a VNImageRequestHandler to be used for performing requests against an image contained in an NSData object. @param imageData An NSData object containing the content of the image to be used for performing the requests. See CIImage imageWithData for supported format. The content of the image cannot be modified. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note:  Request results may not be accurate in simulator due to CI's inability to render certain pixel formats in the simulator
 func (o *VNImageRequestHandler) InitWithDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithDataOrientationOptions, imageData.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options.
 func (o *VNImageRequestHandler) InitWithCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCMSampleBufferOptions, sampleBuffer, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options. @note:  Because CoreImage is unable to render certain pixel formats in the iOS simulator, request results may not be accurate in those cases.
 func (o *VNImageRequestHandler) InitWithCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCMSampleBufferOrientationOptions, sampleBuffer, orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
 // @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready. @param depthData An AVDepthData instance associated with the pixelBuffer @param orientation The orientation of the image and depth buffers based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information and should match for both buffers. @param options A dictionary with options specifying auxiliary information for the buffer/image @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options. @note:  Because CoreImage is unable to render certain pixel formats in the iOS simulator, request results may not be accurate in those cases.
 func (o *VNImageRequestHandler) InitWithCMSampleBufferDepthDataOrientationOptions(sampleBuffer unsafe.Pointer, depthData *avfoundation.AVDepthData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VNImageRequestHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNImageRequestHandlerSelInitWithCMSampleBufferDepthDataOrientationOptions, sampleBuffer, depthData.Ptr(), orientation, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNImageRequestHandlerFromID(_ret)
 }
 
@@ -156,4 +184,3 @@ func (o *VNImageRequestHandler) PerformRequestsError(requests *foundation.NSArra
 	}
 	return _ret, nil
 }
-

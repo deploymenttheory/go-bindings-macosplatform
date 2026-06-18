@@ -18,14 +18,14 @@ type TKSmartCardUserInteraction struct {
 }
 
 var (
-	_clsTKSmartCardUserInteraction = _objcClass("TKSmartCardUserInteraction")
-	_tKSmartCardUserInteractionSelRunWithReply = objc.RegisterName("runWithReply:")
-	_tKSmartCardUserInteractionSelCancel = objc.RegisterName("cancel")
-	_tKSmartCardUserInteractionSelDelegate = objc.RegisterName("delegate")
-	_tKSmartCardUserInteractionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_tKSmartCardUserInteractionSelInitialTimeout = objc.RegisterName("initialTimeout")
-	_tKSmartCardUserInteractionSelSetInitialTimeout = objc.RegisterName("setInitialTimeout:")
-	_tKSmartCardUserInteractionSelInteractionTimeout = objc.RegisterName("interactionTimeout")
+	_clsTKSmartCardUserInteraction                      = _objcClass("TKSmartCardUserInteraction")
+	_tKSmartCardUserInteractionSelRunWithReply          = objc.RegisterName("runWithReply:")
+	_tKSmartCardUserInteractionSelCancel                = objc.RegisterName("cancel")
+	_tKSmartCardUserInteractionSelDelegate              = objc.RegisterName("delegate")
+	_tKSmartCardUserInteractionSelSetDelegate           = objc.RegisterName("setDelegate:")
+	_tKSmartCardUserInteractionSelInitialTimeout        = objc.RegisterName("initialTimeout")
+	_tKSmartCardUserInteractionSelSetInitialTimeout     = objc.RegisterName("setInitialTimeout:")
+	_tKSmartCardUserInteractionSelInteractionTimeout    = objc.RegisterName("interactionTimeout")
 	_tKSmartCardUserInteractionSelSetInteractionTimeout = objc.RegisterName("setInteractionTimeout:")
 )
 
@@ -86,4 +86,3 @@ func (o *TKSmartCardUserInteraction) InteractionTimeout() float64 {
 func (o *TKSmartCardUserInteraction) SetInteractionTimeout(interactionTimeout float64) {
 	o.Ptr().Send(_tKSmartCardUserInteractionSelSetInteractionTimeout, interactionTimeout)
 }
-

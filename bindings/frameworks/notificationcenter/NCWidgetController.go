@@ -17,9 +17,9 @@ type NCWidgetController struct {
 }
 
 var (
-	_clsNCWidgetController = _objcClass("NCWidgetController")
-	_nCWidgetControllerSelWidgetController = objc.RegisterName("widgetController")
-	_nCWidgetControllerSelDefaultWidgetController = objc.RegisterName("defaultWidgetController")
+	_clsNCWidgetController                                           = _objcClass("NCWidgetController")
+	_nCWidgetControllerSelWidgetController                           = objc.RegisterName("widgetController")
+	_nCWidgetControllerSelDefaultWidgetController                    = objc.RegisterName("defaultWidgetController")
 	_nCWidgetControllerSelSetHasContentForWidgetWithBundleIdentifier = objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:")
 )
 
@@ -36,17 +36,20 @@ func NCWidgetControllerFromID(id objc.ID) *NCWidgetController {
 // Deprecated: Use WidgetKit instead. Today View extensions have been deprecated.
 func NCWidgetControllerWidgetController() *NCWidgetController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNCWidgetController), _nCWidgetControllerSelWidgetController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NCWidgetControllerFromID(_ret)
 }
 
 func NCWidgetControllerDefaultWidgetController() *NCWidgetController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNCWidgetController), _nCWidgetControllerSelDefaultWidgetController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NCWidgetControllerFromID(_ret)
 }
 
 func (o *NCWidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID *foundation.NSString) {
 	o.Ptr().Send(_nCWidgetControllerSelSetHasContentForWidgetWithBundleIdentifier, flag, bundleID.Ptr())
 }
-

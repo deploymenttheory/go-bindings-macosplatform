@@ -15,7 +15,7 @@ type VZVirtioNetworkDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioNetworkDeviceConfiguration = _objcClass("VZVirtioNetworkDeviceConfiguration")
+	_clsVZVirtioNetworkDeviceConfiguration     = _objcClass("VZVirtioNetworkDeviceConfiguration")
 	_vZVirtioNetworkDeviceConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZVirtioNetworkDeviceConfigurationFromID(id objc.ID) *VZVirtioNetworkDevice
 
 func (o *VZVirtioNetworkDeviceConfiguration) Init() *VZVirtioNetworkDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioNetworkDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioNetworkDeviceConfigurationFromID(_ret)
 }
-

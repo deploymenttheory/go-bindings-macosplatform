@@ -18,10 +18,10 @@ type OSSystemExtensionsWorkspace struct {
 }
 
 var (
-	_clsOSSystemExtensionsWorkspace = _objcClass("OSSystemExtensionsWorkspace")
+	_clsOSSystemExtensionsWorkspace                 = _objcClass("OSSystemExtensionsWorkspace")
 	_oSSystemExtensionsWorkspaceSelAddObserverError = objc.RegisterName("addObserver:error:")
-	_oSSystemExtensionsWorkspaceSelRemoveObserver = objc.RegisterName("removeObserver:")
-	_oSSystemExtensionsWorkspaceSelSharedWorkspace = objc.RegisterName("sharedWorkspace")
+	_oSSystemExtensionsWorkspaceSelRemoveObserver   = objc.RegisterName("removeObserver:")
+	_oSSystemExtensionsWorkspaceSelSharedWorkspace  = objc.RegisterName("sharedWorkspace")
 )
 
 func OSSystemExtensionsWorkspaceFromID(id objc.ID) *OSSystemExtensionsWorkspace {
@@ -51,7 +51,8 @@ func (o *OSSystemExtensionsWorkspace) RemoveObserver(observer OSSystemExtensions
 
 func OSSystemExtensionsWorkspaceSharedWorkspace() *OSSystemExtensionsWorkspace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSSystemExtensionsWorkspace), _oSSystemExtensionsWorkspaceSelSharedWorkspace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSSystemExtensionsWorkspaceFromID(_ret)
 }
-

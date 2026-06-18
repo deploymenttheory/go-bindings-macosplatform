@@ -94,4 +94,3 @@ type HostCIDeviceStateMachineable interface {
 }
 
 var _ HostCIDeviceStateMachineable = (*HostCIDeviceStateMachine)(nil)
-

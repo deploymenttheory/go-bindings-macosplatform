@@ -16,10 +16,10 @@ type MTRValveConfigurationAndControlClusterValveStateChangedEvent struct {
 }
 
 var (
-	_clsMTRValveConfigurationAndControlClusterValveStateChangedEvent = _objcClass("MTRValveConfigurationAndControlClusterValveStateChangedEvent")
-	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveState = objc.RegisterName("valveState")
+	_clsMTRValveConfigurationAndControlClusterValveStateChangedEvent              = _objcClass("MTRValveConfigurationAndControlClusterValveStateChangedEvent")
+	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveState    = objc.RegisterName("valveState")
 	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelSetValveState = objc.RegisterName("setValveState:")
-	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveLevel = objc.RegisterName("valveLevel")
+	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveLevel    = objc.RegisterName("valveLevel")
 	_mTRValveConfigurationAndControlClusterValveStateChangedEventSelSetValveLevel = objc.RegisterName("setValveLevel:")
 )
 
@@ -35,7 +35,9 @@ func MTRValveConfigurationAndControlClusterValveStateChangedEventFromID(id objc.
 
 func (o *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveS
 
 func (o *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveLevel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRValveConfigurationAndControlClusterValveStateChangedEventSelValveLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRValveConfigurationAndControlClusterValveStateChangedEvent) SetValveLevel(valveLevel *foundation.NSNumber) {
 	o.Ptr().Send(_mTRValveConfigurationAndControlClusterValveStateChangedEventSelSetValveLevel, valveLevel.Ptr())
 }
-

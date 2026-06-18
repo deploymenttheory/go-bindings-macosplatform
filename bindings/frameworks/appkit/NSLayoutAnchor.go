@@ -16,17 +16,17 @@ type NSLayoutAnchor[AnchorType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSLayoutAnchor = _objcClass("NSLayoutAnchor")
-	_nSLayoutAnchorSelConstraintEqualToAnchor = objc.RegisterName("constraintEqualToAnchor:")
-	_nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchor = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:")
-	_nSLayoutAnchorSelConstraintLessThanOrEqualToAnchor = objc.RegisterName("constraintLessThanOrEqualToAnchor:")
-	_nSLayoutAnchorSelConstraintEqualToAnchorConstant = objc.RegisterName("constraintEqualToAnchor:constant:")
+	_clsNSLayoutAnchor                                             = _objcClass("NSLayoutAnchor")
+	_nSLayoutAnchorSelConstraintEqualToAnchor                      = objc.RegisterName("constraintEqualToAnchor:")
+	_nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchor         = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:")
+	_nSLayoutAnchorSelConstraintLessThanOrEqualToAnchor            = objc.RegisterName("constraintLessThanOrEqualToAnchor:")
+	_nSLayoutAnchorSelConstraintEqualToAnchorConstant              = objc.RegisterName("constraintEqualToAnchor:constant:")
 	_nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchorConstant = objc.RegisterName("constraintGreaterThanOrEqualToAnchor:constant:")
-	_nSLayoutAnchorSelConstraintLessThanOrEqualToAnchorConstant = objc.RegisterName("constraintLessThanOrEqualToAnchor:constant:")
-	_nSLayoutAnchorSelName = objc.RegisterName("name")
-	_nSLayoutAnchorSelItem = objc.RegisterName("item")
-	_nSLayoutAnchorSelHasAmbiguousLayout = objc.RegisterName("hasAmbiguousLayout")
-	_nSLayoutAnchorSelConstraintsAffectingLayout = objc.RegisterName("constraintsAffectingLayout")
+	_nSLayoutAnchorSelConstraintLessThanOrEqualToAnchorConstant    = objc.RegisterName("constraintLessThanOrEqualToAnchor:constant:")
+	_nSLayoutAnchorSelName                                         = objc.RegisterName("name")
+	_nSLayoutAnchorSelItem                                         = objc.RegisterName("item")
+	_nSLayoutAnchorSelHasAmbiguousLayout                           = objc.RegisterName("hasAmbiguousLayout")
+	_nSLayoutAnchorSelConstraintsAffectingLayout                   = objc.RegisterName("constraintsAffectingLayout")
 )
 
 func NSLayoutAnchorFromID[AnchorType purego.AnyObject](id objc.ID) *NSLayoutAnchor[AnchorType] {
@@ -41,43 +41,57 @@ func NSLayoutAnchorFromID[AnchorType purego.AnyObject](id objc.ID) *NSLayoutAnch
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintEqualToAnchor, anchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchor, anchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintLessThanOrEqualToAnchor(anchor *NSLayoutAnchor[AnchorType]) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintLessThanOrEqualToAnchor, anchor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintEqualToAnchorConstant, anchor.Ptr(), c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintGreaterThanOrEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintGreaterThanOrEqualToAnchorConstant, anchor.Ptr(), c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintLessThanOrEqualToAnchorConstant(anchor *NSLayoutAnchor[AnchorType], c float64) *NSLayoutConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintLessThanOrEqualToAnchorConstant, anchor.Ptr(), c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutConstraintFromID(_ret)
 }
 
 func (o *NSLayoutAnchor[AnchorType]) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -93,7 +107,8 @@ func (o *NSLayoutAnchor[AnchorType]) HasAmbiguousLayout() bool {
 
 func (o *NSLayoutAnchor[AnchorType]) ConstraintsAffectingLayout() *foundation.NSArray[*NSLayoutConstraint] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutAnchorSelConstraintsAffectingLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSLayoutConstraint](_ret)
 }
-

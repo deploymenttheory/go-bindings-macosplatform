@@ -16,19 +16,19 @@ type MTRDeviceControllerFactoryParams struct {
 }
 
 var (
-	_clsMTRDeviceControllerFactoryParams = _objcClass("MTRDeviceControllerFactoryParams")
-	_mTRDeviceControllerFactoryParamsSelInitWithStorage = objc.RegisterName("initWithStorage:")
-	_mTRDeviceControllerFactoryParamsSelStorage = objc.RegisterName("storage")
-	_mTRDeviceControllerFactoryParamsSelOtaProviderDelegate = objc.RegisterName("otaProviderDelegate")
-	_mTRDeviceControllerFactoryParamsSelSetOtaProviderDelegate = objc.RegisterName("setOtaProviderDelegate:")
-	_mTRDeviceControllerFactoryParamsSelProductAttestationAuthorityCertificates = objc.RegisterName("productAttestationAuthorityCertificates")
+	_clsMTRDeviceControllerFactoryParams                                           = _objcClass("MTRDeviceControllerFactoryParams")
+	_mTRDeviceControllerFactoryParamsSelInitWithStorage                            = objc.RegisterName("initWithStorage:")
+	_mTRDeviceControllerFactoryParamsSelStorage                                    = objc.RegisterName("storage")
+	_mTRDeviceControllerFactoryParamsSelOtaProviderDelegate                        = objc.RegisterName("otaProviderDelegate")
+	_mTRDeviceControllerFactoryParamsSelSetOtaProviderDelegate                     = objc.RegisterName("setOtaProviderDelegate:")
+	_mTRDeviceControllerFactoryParamsSelProductAttestationAuthorityCertificates    = objc.RegisterName("productAttestationAuthorityCertificates")
 	_mTRDeviceControllerFactoryParamsSelSetProductAttestationAuthorityCertificates = objc.RegisterName("setProductAttestationAuthorityCertificates:")
-	_mTRDeviceControllerFactoryParamsSelCertificationDeclarationCertificates = objc.RegisterName("certificationDeclarationCertificates")
-	_mTRDeviceControllerFactoryParamsSelSetCertificationDeclarationCertificates = objc.RegisterName("setCertificationDeclarationCertificates:")
-	_mTRDeviceControllerFactoryParamsSelPort = objc.RegisterName("port")
-	_mTRDeviceControllerFactoryParamsSelSetPort = objc.RegisterName("setPort:")
-	_mTRDeviceControllerFactoryParamsSelShouldStartServer = objc.RegisterName("shouldStartServer")
-	_mTRDeviceControllerFactoryParamsSelSetShouldStartServer = objc.RegisterName("setShouldStartServer:")
+	_mTRDeviceControllerFactoryParamsSelCertificationDeclarationCertificates       = objc.RegisterName("certificationDeclarationCertificates")
+	_mTRDeviceControllerFactoryParamsSelSetCertificationDeclarationCertificates    = objc.RegisterName("setCertificationDeclarationCertificates:")
+	_mTRDeviceControllerFactoryParamsSelPort                                       = objc.RegisterName("port")
+	_mTRDeviceControllerFactoryParamsSelSetPort                                    = objc.RegisterName("setPort:")
+	_mTRDeviceControllerFactoryParamsSelShouldStartServer                          = objc.RegisterName("shouldStartServer")
+	_mTRDeviceControllerFactoryParamsSelSetShouldStartServer                       = objc.RegisterName("setShouldStartServer:")
 )
 
 func MTRDeviceControllerFactoryParamsFromID(id objc.ID) *MTRDeviceControllerFactoryParams {
@@ -43,7 +43,9 @@ func MTRDeviceControllerFactoryParamsFromID(id objc.ID) *MTRDeviceControllerFact
 
 func (o *MTRDeviceControllerFactoryParams) InitWithStorage(storage MTRStorage) *MTRDeviceControllerFactoryParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactoryParamsSelInitWithStorage, storage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceControllerFactoryParamsFromID(_ret)
 }
 
@@ -81,7 +83,9 @@ func (o *MTRDeviceControllerFactoryParams) SetCertificationDeclarationCertificat
 
 func (o *MTRDeviceControllerFactoryParams) Port() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceControllerFactoryParamsSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -97,4 +101,3 @@ func (o *MTRDeviceControllerFactoryParams) ShouldStartServer() bool {
 func (o *MTRDeviceControllerFactoryParams) SetShouldStartServer(shouldStartServer bool) {
 	o.Ptr().Send(_mTRDeviceControllerFactoryParamsSelSetShouldStartServer, shouldStartServer)
 }
-

@@ -19,21 +19,21 @@ type PKInkingTool struct {
 }
 
 var (
-	_clsPKInkingTool = _objcClass("PKInkingTool")
-	_pKInkingToolSelInitWithInkTypeColorWidth = objc.RegisterName("initWithInkType:color:width:")
+	_clsPKInkingTool                                 = _objcClass("PKInkingTool")
+	_pKInkingToolSelInitWithInkTypeColorWidth        = objc.RegisterName("initWithInkType:color:width:")
 	_pKInkingToolSelInitWithInkTypeColorWidthAzimuth = objc.RegisterName("initWithInkType:color:width:azimuth:")
-	_pKInkingToolSelInitWithInkTypeColor = objc.RegisterName("initWithInkType:color:")
-	_pKInkingToolSelInitWithInkWidth = objc.RegisterName("initWithInk:width:")
-	_pKInkingToolSelDefaultWidthForInkType = objc.RegisterName("defaultWidthForInkType:")
-	_pKInkingToolSelMinimumWidthForInkType = objc.RegisterName("minimumWidthForInkType:")
-	_pKInkingToolSelMaximumWidthForInkType = objc.RegisterName("maximumWidthForInkType:")
-	_pKInkingToolSelInvertColor = objc.RegisterName("invertColor:")
-	_pKInkingToolSelInkType = objc.RegisterName("inkType")
-	_pKInkingToolSelColor = objc.RegisterName("color")
-	_pKInkingToolSelWidth = objc.RegisterName("width")
-	_pKInkingToolSelAzimuth = objc.RegisterName("azimuth")
-	_pKInkingToolSelInk = objc.RegisterName("ink")
-	_pKInkingToolSelRequiredContentVersion = objc.RegisterName("requiredContentVersion")
+	_pKInkingToolSelInitWithInkTypeColor             = objc.RegisterName("initWithInkType:color:")
+	_pKInkingToolSelInitWithInkWidth                 = objc.RegisterName("initWithInk:width:")
+	_pKInkingToolSelDefaultWidthForInkType           = objc.RegisterName("defaultWidthForInkType:")
+	_pKInkingToolSelMinimumWidthForInkType           = objc.RegisterName("minimumWidthForInkType:")
+	_pKInkingToolSelMaximumWidthForInkType           = objc.RegisterName("maximumWidthForInkType:")
+	_pKInkingToolSelInvertColor                      = objc.RegisterName("invertColor:")
+	_pKInkingToolSelInkType                          = objc.RegisterName("inkType")
+	_pKInkingToolSelColor                            = objc.RegisterName("color")
+	_pKInkingToolSelWidth                            = objc.RegisterName("width")
+	_pKInkingToolSelAzimuth                          = objc.RegisterName("azimuth")
+	_pKInkingToolSelInk                              = objc.RegisterName("ink")
+	_pKInkingToolSelRequiredContentVersion           = objc.RegisterName("requiredContentVersion")
 )
 
 func PKInkingToolFromID(id objc.ID) *PKInkingTool {
@@ -48,26 +48,34 @@ func PKInkingToolFromID(id objc.ID) *PKInkingTool {
 
 func (o *PKInkingTool) InitWithInkTypeColorWidth(type_ *foundation.NSString, color *appkit.NSColor, width float64) *PKInkingTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInitWithInkTypeColorWidth, type_.Ptr(), color.Ptr(), width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkingToolFromID(_ret)
 }
 
 func (o *PKInkingTool) InitWithInkTypeColorWidthAzimuth(type_ *foundation.NSString, color *appkit.NSColor, width float64, angle float64) *PKInkingTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInitWithInkTypeColorWidthAzimuth, type_.Ptr(), color.Ptr(), width, angle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkingToolFromID(_ret)
 }
 
 func (o *PKInkingTool) InitWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *PKInkingTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInitWithInkTypeColor, type_.Ptr(), color.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkingToolFromID(_ret)
 }
 
 // Create a new inking tool for the provided ink. @param ink The ink to use. @param width The width of stroke to create.
 func (o *PKInkingTool) InitWithInkWidth(ink *PKInk, width float64) *PKInkingTool {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInitWithInkWidth, ink.Ptr(), width)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkingToolFromID(_ret)
 }
 
@@ -98,13 +106,17 @@ func PKInkingToolInvertColor(color unsafe.Pointer) unsafe.Pointer {
 // The type of ink, eg. pen, pencil...
 func (o *PKInkingTool) InkType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInkType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *PKInkingTool) Color() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -123,7 +135,9 @@ func (o *PKInkingTool) Azimuth() float64 {
 // The ink that this tool will create strokes with.
 func (o *PKInkingTool) Ink() *PKInk {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKInkingToolSelInk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKInkFromID(_ret)
 }
 
@@ -132,4 +146,3 @@ func (o *PKInkingTool) RequiredContentVersion() PKContentVersion {
 	_ret := objc.Send[PKContentVersion](o.Ptr(), _pKInkingToolSelRequiredContentVersion)
 	return _ret
 }
-

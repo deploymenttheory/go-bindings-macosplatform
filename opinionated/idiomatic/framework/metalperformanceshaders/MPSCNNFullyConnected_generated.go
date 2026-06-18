@@ -113,11 +113,17 @@ func (x *CNNFullyConnected) WithLabel(label string) *CNNFullyConnected {
 	return x
 }
 
-func (x *CNNFullyConnected) asCNNConvolution() *mpsneuralnetwork.MPSCNNConvolution { return &x.inner.MPSCNNConvolution }
+func (x *CNNFullyConnected) asCNNConvolution() *mpsneuralnetwork.MPSCNNConvolution {
+	return &x.inner.MPSCNNConvolution
+}
 
-func (x *CNNFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNConvolution.MPSCNNKernel }
+func (x *CNNFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNConvolution.MPSCNNKernel
+}
 
-func (x *CNNFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNConvolution.MPSCNNKernel.MPSKernel }
+func (x *CNNFullyConnected) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNConvolution.MPSCNNKernel.MPSKernel
+}
 
 // CNNFullyConnectedable is the interface implemented by [CNNFullyConnected], for mocking and DI.
 type CNNFullyConnectedable interface {
@@ -136,4 +142,3 @@ type CNNFullyConnectedable interface {
 }
 
 var _ CNNFullyConnectedable = (*CNNFullyConnected)(nil)
-

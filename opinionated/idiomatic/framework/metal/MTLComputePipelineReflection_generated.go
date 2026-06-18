@@ -61,4 +61,3 @@ type ComputePipelineReflectionable interface {
 }
 
 var _ ComputePipelineReflectionable = (*ComputePipelineReflection)(nil)
-

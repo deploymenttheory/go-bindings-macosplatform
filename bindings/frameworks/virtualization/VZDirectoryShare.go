@@ -26,4 +26,3 @@ func VZDirectoryShareFromID(id objc.ID) *VZDirectoryShare {
 	purego.Track(o)
 	return o
 }
-

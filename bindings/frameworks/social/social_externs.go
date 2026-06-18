@@ -36,4 +36,3 @@ func SLServiceTypeTwitter() uintptr {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeTwitter")
 	return ptr
 }
-

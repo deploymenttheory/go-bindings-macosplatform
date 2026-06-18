@@ -203,4 +203,3 @@ type XMLDTDable interface {
 }
 
 var _ XMLDTDable = (*XMLDTD)(nil)
-

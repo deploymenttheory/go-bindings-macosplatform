@@ -16,7 +16,7 @@ type SFContentBlockerState struct {
 }
 
 var (
-	_clsSFContentBlockerState = _objcClass("SFContentBlockerState")
+	_clsSFContentBlockerState          = _objcClass("SFContentBlockerState")
 	_sFContentBlockerStateSelIsEnabled = objc.RegisterName("isEnabled")
 )
 
@@ -34,4 +34,3 @@ func (o *SFContentBlockerState) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _sFContentBlockerStateSelIsEnabled)
 	return _ret
 }
-

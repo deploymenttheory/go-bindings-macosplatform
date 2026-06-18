@@ -17,17 +17,17 @@ type AVMutableVideoCompositionLayerInstruction struct {
 }
 
 var (
-	_clsAVMutableVideoCompositionLayerInstruction = _objcClass("AVMutableVideoCompositionLayerInstruction")
-	_aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstructionWithAssetTrack = objc.RegisterName("videoCompositionLayerInstructionWithAssetTrack:")
-	_aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstruction = objc.RegisterName("videoCompositionLayerInstruction")
-	_aVMutableVideoCompositionLayerInstructionSelSetTransformRampFromStartTransformToEndTransformTimeRange = objc.RegisterName("setTransformRampFromStartTransform:toEndTransform:timeRange:")
-	_aVMutableVideoCompositionLayerInstructionSelSetTransformAtTime = objc.RegisterName("setTransform:atTime:")
-	_aVMutableVideoCompositionLayerInstructionSelSetOpacityRampFromStartOpacityToEndOpacityTimeRange = objc.RegisterName("setOpacityRampFromStartOpacity:toEndOpacity:timeRange:")
-	_aVMutableVideoCompositionLayerInstructionSelSetOpacityAtTime = objc.RegisterName("setOpacity:atTime:")
+	_clsAVMutableVideoCompositionLayerInstruction                                                                      = _objcClass("AVMutableVideoCompositionLayerInstruction")
+	_aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstructionWithAssetTrack                        = objc.RegisterName("videoCompositionLayerInstructionWithAssetTrack:")
+	_aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstruction                                      = objc.RegisterName("videoCompositionLayerInstruction")
+	_aVMutableVideoCompositionLayerInstructionSelSetTransformRampFromStartTransformToEndTransformTimeRange             = objc.RegisterName("setTransformRampFromStartTransform:toEndTransform:timeRange:")
+	_aVMutableVideoCompositionLayerInstructionSelSetTransformAtTime                                                    = objc.RegisterName("setTransform:atTime:")
+	_aVMutableVideoCompositionLayerInstructionSelSetOpacityRampFromStartOpacityToEndOpacityTimeRange                   = objc.RegisterName("setOpacityRampFromStartOpacity:toEndOpacity:timeRange:")
+	_aVMutableVideoCompositionLayerInstructionSelSetOpacityAtTime                                                      = objc.RegisterName("setOpacity:atTime:")
 	_aVMutableVideoCompositionLayerInstructionSelSetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange = objc.RegisterName("setCropRectangleRampFromStartCropRectangle:toEndCropRectangle:timeRange:")
-	_aVMutableVideoCompositionLayerInstructionSelSetCropRectangleAtTime = objc.RegisterName("setCropRectangle:atTime:")
-	_aVMutableVideoCompositionLayerInstructionSelTrackID = objc.RegisterName("trackID")
-	_aVMutableVideoCompositionLayerInstructionSelSetTrackID = objc.RegisterName("setTrackID:")
+	_aVMutableVideoCompositionLayerInstructionSelSetCropRectangleAtTime                                                = objc.RegisterName("setCropRectangle:atTime:")
+	_aVMutableVideoCompositionLayerInstructionSelTrackID                                                               = objc.RegisterName("trackID")
+	_aVMutableVideoCompositionLayerInstructionSelSetTrackID                                                            = objc.RegisterName("setTrackID:")
 )
 
 func AVMutableVideoCompositionLayerInstructionFromID(id objc.ID) *AVMutableVideoCompositionLayerInstruction {
@@ -43,14 +43,18 @@ func AVMutableVideoCompositionLayerInstructionFromID(id objc.ID) *AVMutableVideo
 // Returns a new instance of AVMutableVideoCompositionLayerInstruction with no transform or opacity ramps and a trackID set to the specified track's trackID. - Parameter track: A reference to an AVAssetTrack.
 func AVMutableVideoCompositionLayerInstructionVideoCompositionLayerInstructionWithAssetTrack(track *AVAssetTrack) *AVMutableVideoCompositionLayerInstruction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoCompositionLayerInstruction), _aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstructionWithAssetTrack, track.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionLayerInstructionFromID(_ret)
 }
 
 // Returns a new instance of AVMutableVideoCompositionLayerInstruction with no transform or opacity ramps and a trackID initialized to kCMPersistentTrackID_Invalid.
 func AVMutableVideoCompositionLayerInstructionVideoCompositionLayerInstruction() *AVMutableVideoCompositionLayerInstruction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoCompositionLayerInstruction), _aVMutableVideoCompositionLayerInstructionSelVideoCompositionLayerInstruction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionLayerInstructionFromID(_ret)
 }
 
@@ -93,4 +97,3 @@ func (o *AVMutableVideoCompositionLayerInstruction) TrackID() int32 {
 func (o *AVMutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
 	o.Ptr().Send(_aVMutableVideoCompositionLayerInstructionSelSetTrackID, trackID)
 }
-

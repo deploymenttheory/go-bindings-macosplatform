@@ -16,34 +16,34 @@ type NSWorkspaceOpenConfiguration struct {
 }
 
 var (
-	_clsNSWorkspaceOpenConfiguration = _objcClass("NSWorkspaceOpenConfiguration")
-	_nSWorkspaceOpenConfigurationSelConfiguration = objc.RegisterName("configuration")
-	_nSWorkspaceOpenConfigurationSelPromptsUserIfNeeded = objc.RegisterName("promptsUserIfNeeded")
-	_nSWorkspaceOpenConfigurationSelSetPromptsUserIfNeeded = objc.RegisterName("setPromptsUserIfNeeded:")
-	_nSWorkspaceOpenConfigurationSelAddsToRecentItems = objc.RegisterName("addsToRecentItems")
-	_nSWorkspaceOpenConfigurationSelSetAddsToRecentItems = objc.RegisterName("setAddsToRecentItems:")
-	_nSWorkspaceOpenConfigurationSelActivates = objc.RegisterName("activates")
-	_nSWorkspaceOpenConfigurationSelSetActivates = objc.RegisterName("setActivates:")
-	_nSWorkspaceOpenConfigurationSelHides = objc.RegisterName("hides")
-	_nSWorkspaceOpenConfigurationSelSetHides = objc.RegisterName("setHides:")
-	_nSWorkspaceOpenConfigurationSelHidesOthers = objc.RegisterName("hidesOthers")
-	_nSWorkspaceOpenConfigurationSelSetHidesOthers = objc.RegisterName("setHidesOthers:")
-	_nSWorkspaceOpenConfigurationSelIsForPrinting = objc.RegisterName("isForPrinting")
-	_nSWorkspaceOpenConfigurationSelSetForPrinting = objc.RegisterName("setForPrinting:")
-	_nSWorkspaceOpenConfigurationSelCreatesNewApplicationInstance = objc.RegisterName("createsNewApplicationInstance")
-	_nSWorkspaceOpenConfigurationSelSetCreatesNewApplicationInstance = objc.RegisterName("setCreatesNewApplicationInstance:")
-	_nSWorkspaceOpenConfigurationSelAllowsRunningApplicationSubstitution = objc.RegisterName("allowsRunningApplicationSubstitution")
+	_clsNSWorkspaceOpenConfiguration                                        = _objcClass("NSWorkspaceOpenConfiguration")
+	_nSWorkspaceOpenConfigurationSelConfiguration                           = objc.RegisterName("configuration")
+	_nSWorkspaceOpenConfigurationSelPromptsUserIfNeeded                     = objc.RegisterName("promptsUserIfNeeded")
+	_nSWorkspaceOpenConfigurationSelSetPromptsUserIfNeeded                  = objc.RegisterName("setPromptsUserIfNeeded:")
+	_nSWorkspaceOpenConfigurationSelAddsToRecentItems                       = objc.RegisterName("addsToRecentItems")
+	_nSWorkspaceOpenConfigurationSelSetAddsToRecentItems                    = objc.RegisterName("setAddsToRecentItems:")
+	_nSWorkspaceOpenConfigurationSelActivates                               = objc.RegisterName("activates")
+	_nSWorkspaceOpenConfigurationSelSetActivates                            = objc.RegisterName("setActivates:")
+	_nSWorkspaceOpenConfigurationSelHides                                   = objc.RegisterName("hides")
+	_nSWorkspaceOpenConfigurationSelSetHides                                = objc.RegisterName("setHides:")
+	_nSWorkspaceOpenConfigurationSelHidesOthers                             = objc.RegisterName("hidesOthers")
+	_nSWorkspaceOpenConfigurationSelSetHidesOthers                          = objc.RegisterName("setHidesOthers:")
+	_nSWorkspaceOpenConfigurationSelIsForPrinting                           = objc.RegisterName("isForPrinting")
+	_nSWorkspaceOpenConfigurationSelSetForPrinting                          = objc.RegisterName("setForPrinting:")
+	_nSWorkspaceOpenConfigurationSelCreatesNewApplicationInstance           = objc.RegisterName("createsNewApplicationInstance")
+	_nSWorkspaceOpenConfigurationSelSetCreatesNewApplicationInstance        = objc.RegisterName("setCreatesNewApplicationInstance:")
+	_nSWorkspaceOpenConfigurationSelAllowsRunningApplicationSubstitution    = objc.RegisterName("allowsRunningApplicationSubstitution")
 	_nSWorkspaceOpenConfigurationSelSetAllowsRunningApplicationSubstitution = objc.RegisterName("setAllowsRunningApplicationSubstitution:")
-	_nSWorkspaceOpenConfigurationSelArguments = objc.RegisterName("arguments")
-	_nSWorkspaceOpenConfigurationSelSetArguments = objc.RegisterName("setArguments:")
-	_nSWorkspaceOpenConfigurationSelEnvironment = objc.RegisterName("environment")
-	_nSWorkspaceOpenConfigurationSelSetEnvironment = objc.RegisterName("setEnvironment:")
-	_nSWorkspaceOpenConfigurationSelAppleEvent = objc.RegisterName("appleEvent")
-	_nSWorkspaceOpenConfigurationSelSetAppleEvent = objc.RegisterName("setAppleEvent:")
-	_nSWorkspaceOpenConfigurationSelArchitecture = objc.RegisterName("architecture")
-	_nSWorkspaceOpenConfigurationSelSetArchitecture = objc.RegisterName("setArchitecture:")
-	_nSWorkspaceOpenConfigurationSelRequiresUniversalLinks = objc.RegisterName("requiresUniversalLinks")
-	_nSWorkspaceOpenConfigurationSelSetRequiresUniversalLinks = objc.RegisterName("setRequiresUniversalLinks:")
+	_nSWorkspaceOpenConfigurationSelArguments                               = objc.RegisterName("arguments")
+	_nSWorkspaceOpenConfigurationSelSetArguments                            = objc.RegisterName("setArguments:")
+	_nSWorkspaceOpenConfigurationSelEnvironment                             = objc.RegisterName("environment")
+	_nSWorkspaceOpenConfigurationSelSetEnvironment                          = objc.RegisterName("setEnvironment:")
+	_nSWorkspaceOpenConfigurationSelAppleEvent                              = objc.RegisterName("appleEvent")
+	_nSWorkspaceOpenConfigurationSelSetAppleEvent                           = objc.RegisterName("setAppleEvent:")
+	_nSWorkspaceOpenConfigurationSelArchitecture                            = objc.RegisterName("architecture")
+	_nSWorkspaceOpenConfigurationSelSetArchitecture                         = objc.RegisterName("setArchitecture:")
+	_nSWorkspaceOpenConfigurationSelRequiresUniversalLinks                  = objc.RegisterName("requiresUniversalLinks")
+	_nSWorkspaceOpenConfigurationSelSetRequiresUniversalLinks               = objc.RegisterName("setRequiresUniversalLinks:")
 )
 
 func NSWorkspaceOpenConfigurationFromID(id objc.ID) *NSWorkspaceOpenConfiguration {
@@ -58,7 +58,9 @@ func NSWorkspaceOpenConfigurationFromID(id objc.ID) *NSWorkspaceOpenConfiguratio
 
 func NSWorkspaceOpenConfigurationConfiguration() *NSWorkspaceOpenConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSWorkspaceOpenConfiguration), _nSWorkspaceOpenConfigurationSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSWorkspaceOpenConfigurationFromID(_ret)
 }
 
@@ -154,7 +156,9 @@ func (o *NSWorkspaceOpenConfiguration) SetEnvironment(environment *foundation.NS
 
 func (o *NSWorkspaceOpenConfiguration) AppleEvent() *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSWorkspaceOpenConfigurationSelAppleEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
@@ -179,4 +183,3 @@ func (o *NSWorkspaceOpenConfiguration) RequiresUniversalLinks() bool {
 func (o *NSWorkspaceOpenConfiguration) SetRequiresUniversalLinks(requiresUniversalLinks bool) {
 	o.Ptr().Send(_nSWorkspaceOpenConfigurationSelSetRequiresUniversalLinks, requiresUniversalLinks)
 }
-

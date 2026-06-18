@@ -63,4 +63,3 @@ type SymbolWiggleEffectable interface {
 }
 
 var _ SymbolWiggleEffectable = (*SymbolWiggleEffect)(nil)
-

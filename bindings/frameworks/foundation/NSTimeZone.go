@@ -15,36 +15,36 @@ type NSTimeZone struct {
 }
 
 var (
-	_clsNSTimeZone = _objcClass("NSTimeZone")
-	_nSTimeZoneSelSecondsFromGMTForDate = objc.RegisterName("secondsFromGMTForDate:")
-	_nSTimeZoneSelAbbreviationForDate = objc.RegisterName("abbreviationForDate:")
-	_nSTimeZoneSelIsDaylightSavingTimeForDate = objc.RegisterName("isDaylightSavingTimeForDate:")
-	_nSTimeZoneSelDaylightSavingTimeOffsetForDate = objc.RegisterName("daylightSavingTimeOffsetForDate:")
+	_clsNSTimeZone                                          = _objcClass("NSTimeZone")
+	_nSTimeZoneSelSecondsFromGMTForDate                     = objc.RegisterName("secondsFromGMTForDate:")
+	_nSTimeZoneSelAbbreviationForDate                       = objc.RegisterName("abbreviationForDate:")
+	_nSTimeZoneSelIsDaylightSavingTimeForDate               = objc.RegisterName("isDaylightSavingTimeForDate:")
+	_nSTimeZoneSelDaylightSavingTimeOffsetForDate           = objc.RegisterName("daylightSavingTimeOffsetForDate:")
 	_nSTimeZoneSelNextDaylightSavingTimeTransitionAfterDate = objc.RegisterName("nextDaylightSavingTimeTransitionAfterDate:")
-	_nSTimeZoneSelName = objc.RegisterName("name")
-	_nSTimeZoneSelData = objc.RegisterName("data")
-	_nSTimeZoneSelResetSystemTimeZone = objc.RegisterName("resetSystemTimeZone")
-	_nSTimeZoneSelAbbreviationDictionary = objc.RegisterName("abbreviationDictionary")
-	_nSTimeZoneSelIsEqualToTimeZone = objc.RegisterName("isEqualToTimeZone:")
-	_nSTimeZoneSelLocalizedNameLocale = objc.RegisterName("localizedName:locale:")
-	_nSTimeZoneSelSystemTimeZone = objc.RegisterName("systemTimeZone")
-	_nSTimeZoneSelDefaultTimeZone = objc.RegisterName("defaultTimeZone")
-	_nSTimeZoneSelSetDefaultTimeZone = objc.RegisterName("setDefaultTimeZone:")
-	_nSTimeZoneSelLocalTimeZone = objc.RegisterName("localTimeZone")
-	_nSTimeZoneSelKnownTimeZoneNames = objc.RegisterName("knownTimeZoneNames")
-	_nSTimeZoneSelSetAbbreviationDictionary = objc.RegisterName("setAbbreviationDictionary:")
-	_nSTimeZoneSelTimeZoneDataVersion = objc.RegisterName("timeZoneDataVersion")
-	_nSTimeZoneSelSecondsFromGMT = objc.RegisterName("secondsFromGMT")
-	_nSTimeZoneSelAbbreviation = objc.RegisterName("abbreviation")
-	_nSTimeZoneSelIsDaylightSavingTime = objc.RegisterName("isDaylightSavingTime")
-	_nSTimeZoneSelDaylightSavingTimeOffset = objc.RegisterName("daylightSavingTimeOffset")
-	_nSTimeZoneSelNextDaylightSavingTimeTransition = objc.RegisterName("nextDaylightSavingTimeTransition")
-	_nSTimeZoneSelTimeZoneWithName = objc.RegisterName("timeZoneWithName:")
-	_nSTimeZoneSelTimeZoneWithNameData = objc.RegisterName("timeZoneWithName:data:")
-	_nSTimeZoneSelInitWithName = objc.RegisterName("initWithName:")
-	_nSTimeZoneSelInitWithNameData = objc.RegisterName("initWithName:data:")
-	_nSTimeZoneSelTimeZoneForSecondsFromGMT = objc.RegisterName("timeZoneForSecondsFromGMT:")
-	_nSTimeZoneSelTimeZoneWithAbbreviation = objc.RegisterName("timeZoneWithAbbreviation:")
+	_nSTimeZoneSelName                                      = objc.RegisterName("name")
+	_nSTimeZoneSelData                                      = objc.RegisterName("data")
+	_nSTimeZoneSelResetSystemTimeZone                       = objc.RegisterName("resetSystemTimeZone")
+	_nSTimeZoneSelAbbreviationDictionary                    = objc.RegisterName("abbreviationDictionary")
+	_nSTimeZoneSelIsEqualToTimeZone                         = objc.RegisterName("isEqualToTimeZone:")
+	_nSTimeZoneSelLocalizedNameLocale                       = objc.RegisterName("localizedName:locale:")
+	_nSTimeZoneSelSystemTimeZone                            = objc.RegisterName("systemTimeZone")
+	_nSTimeZoneSelDefaultTimeZone                           = objc.RegisterName("defaultTimeZone")
+	_nSTimeZoneSelSetDefaultTimeZone                        = objc.RegisterName("setDefaultTimeZone:")
+	_nSTimeZoneSelLocalTimeZone                             = objc.RegisterName("localTimeZone")
+	_nSTimeZoneSelKnownTimeZoneNames                        = objc.RegisterName("knownTimeZoneNames")
+	_nSTimeZoneSelSetAbbreviationDictionary                 = objc.RegisterName("setAbbreviationDictionary:")
+	_nSTimeZoneSelTimeZoneDataVersion                       = objc.RegisterName("timeZoneDataVersion")
+	_nSTimeZoneSelSecondsFromGMT                            = objc.RegisterName("secondsFromGMT")
+	_nSTimeZoneSelAbbreviation                              = objc.RegisterName("abbreviation")
+	_nSTimeZoneSelIsDaylightSavingTime                      = objc.RegisterName("isDaylightSavingTime")
+	_nSTimeZoneSelDaylightSavingTimeOffset                  = objc.RegisterName("daylightSavingTimeOffset")
+	_nSTimeZoneSelNextDaylightSavingTimeTransition          = objc.RegisterName("nextDaylightSavingTimeTransition")
+	_nSTimeZoneSelTimeZoneWithName                          = objc.RegisterName("timeZoneWithName:")
+	_nSTimeZoneSelTimeZoneWithNameData                      = objc.RegisterName("timeZoneWithName:data:")
+	_nSTimeZoneSelInitWithName                              = objc.RegisterName("initWithName:")
+	_nSTimeZoneSelInitWithNameData                          = objc.RegisterName("initWithName:data:")
+	_nSTimeZoneSelTimeZoneForSecondsFromGMT                 = objc.RegisterName("timeZoneForSecondsFromGMT:")
+	_nSTimeZoneSelTimeZoneWithAbbreviation                  = objc.RegisterName("timeZoneWithAbbreviation:")
 )
 
 func NSTimeZoneFromID(id objc.ID) *NSTimeZone {
@@ -64,7 +64,9 @@ func (o *NSTimeZone) SecondsFromGMTForDate(aDate *NSDate) int {
 
 func (o *NSTimeZone) AbbreviationForDate(aDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelAbbreviationForDate, aDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -80,19 +82,25 @@ func (o *NSTimeZone) DaylightSavingTimeOffsetForDate(aDate *NSDate) float64 {
 
 func (o *NSTimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *NSDate) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelNextDaylightSavingTimeTransitionAfterDate, aDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSTimeZone) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSTimeZone) Data() *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func NSTimeZoneResetSystemTimeZone() {
 
 func NSTimeZoneAbbreviationDictionary() *NSDictionary[*NSString, *NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelAbbreviationDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSString](_ret)
 }
 
@@ -113,19 +123,25 @@ func (o *NSTimeZone) IsEqualToTimeZone(aTimeZone *NSTimeZone) bool {
 
 func (o *NSTimeZone) LocalizedNameLocale(style NSTimeZoneNameStyle, locale *NSLocale) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelLocalizedNameLocale, style, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSTimeZoneSystemTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelSystemTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func NSTimeZoneDefaultTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelDefaultTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -135,13 +151,17 @@ func NSTimeZoneSetDefaultTimeZone(defaultTimeZone *NSTimeZone) {
 
 func NSTimeZoneLocalTimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelLocalTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func NSTimeZoneKnownTimeZoneNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelKnownTimeZoneNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -151,7 +171,9 @@ func NSTimeZoneSetAbbreviationDictionary(abbreviationDictionary *NSDictionary[*N
 
 func NSTimeZoneTimeZoneDataVersion() *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneDataVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -162,7 +184,9 @@ func (o *NSTimeZone) SecondsFromGMT() int {
 
 func (o *NSTimeZone) Abbreviation() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelAbbreviation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -178,43 +202,56 @@ func (o *NSTimeZone) DaylightSavingTimeOffset() float64 {
 
 func (o *NSTimeZone) NextDaylightSavingTimeTransition() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelNextDaylightSavingTimeTransition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func NSTimeZoneTimeZoneWithName(tzName *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithName, tzName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func NSTimeZoneTimeZoneWithNameData(tzName *NSString, aData *NSData) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithNameData, tzName.Ptr(), aData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func (o *NSTimeZone) InitWithName(tzName *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelInitWithName, tzName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func (o *NSTimeZone) InitWithNameData(tzName *NSString, aData *NSData) *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimeZoneSelInitWithNameData, tzName.Ptr(), aData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func NSTimeZoneTimeZoneForSecondsFromGMT(seconds int) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneForSecondsFromGMT, seconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
 func NSTimeZoneTimeZoneWithAbbreviation(abbreviation *NSString) *NSTimeZone {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimeZone), _nSTimeZoneSelTimeZoneWithAbbreviation, abbreviation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
-

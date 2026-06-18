@@ -26,4 +26,3 @@ type OS_sec_protocol_options interface {
 // OS_sec_trust wraps the ObjC protocol OS_sec_trust.
 type OS_sec_trust interface {
 }
-

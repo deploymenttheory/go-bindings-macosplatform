@@ -16,73 +16,73 @@ type MTLRenderPipelineDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPipelineDescriptor = _objcClass("MTLRenderPipelineDescriptor")
-	_mTLRenderPipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTLRenderPipelineDescriptorSelLabel = objc.RegisterName("label")
-	_mTLRenderPipelineDescriptorSelSetLabel = objc.RegisterName("setLabel:")
-	_mTLRenderPipelineDescriptorSelVertexFunction = objc.RegisterName("vertexFunction")
-	_mTLRenderPipelineDescriptorSelSetVertexFunction = objc.RegisterName("setVertexFunction:")
-	_mTLRenderPipelineDescriptorSelFragmentFunction = objc.RegisterName("fragmentFunction")
-	_mTLRenderPipelineDescriptorSelSetFragmentFunction = objc.RegisterName("setFragmentFunction:")
-	_mTLRenderPipelineDescriptorSelVertexDescriptor = objc.RegisterName("vertexDescriptor")
-	_mTLRenderPipelineDescriptorSelSetVertexDescriptor = objc.RegisterName("setVertexDescriptor:")
-	_mTLRenderPipelineDescriptorSelSampleCount = objc.RegisterName("sampleCount")
-	_mTLRenderPipelineDescriptorSelSetSampleCount = objc.RegisterName("setSampleCount:")
-	_mTLRenderPipelineDescriptorSelRasterSampleCount = objc.RegisterName("rasterSampleCount")
-	_mTLRenderPipelineDescriptorSelSetRasterSampleCount = objc.RegisterName("setRasterSampleCount:")
-	_mTLRenderPipelineDescriptorSelIsAlphaToCoverageEnabled = objc.RegisterName("isAlphaToCoverageEnabled")
-	_mTLRenderPipelineDescriptorSelSetAlphaToCoverageEnabled = objc.RegisterName("setAlphaToCoverageEnabled:")
-	_mTLRenderPipelineDescriptorSelIsAlphaToOneEnabled = objc.RegisterName("isAlphaToOneEnabled")
-	_mTLRenderPipelineDescriptorSelSetAlphaToOneEnabled = objc.RegisterName("setAlphaToOneEnabled:")
-	_mTLRenderPipelineDescriptorSelIsRasterizationEnabled = objc.RegisterName("isRasterizationEnabled")
-	_mTLRenderPipelineDescriptorSelSetRasterizationEnabled = objc.RegisterName("setRasterizationEnabled:")
-	_mTLRenderPipelineDescriptorSelMaxVertexAmplificationCount = objc.RegisterName("maxVertexAmplificationCount")
-	_mTLRenderPipelineDescriptorSelSetMaxVertexAmplificationCount = objc.RegisterName("setMaxVertexAmplificationCount:")
-	_mTLRenderPipelineDescriptorSelColorAttachments = objc.RegisterName("colorAttachments")
-	_mTLRenderPipelineDescriptorSelDepthAttachmentPixelFormat = objc.RegisterName("depthAttachmentPixelFormat")
-	_mTLRenderPipelineDescriptorSelSetDepthAttachmentPixelFormat = objc.RegisterName("setDepthAttachmentPixelFormat:")
-	_mTLRenderPipelineDescriptorSelStencilAttachmentPixelFormat = objc.RegisterName("stencilAttachmentPixelFormat")
-	_mTLRenderPipelineDescriptorSelSetStencilAttachmentPixelFormat = objc.RegisterName("setStencilAttachmentPixelFormat:")
-	_mTLRenderPipelineDescriptorSelInputPrimitiveTopology = objc.RegisterName("inputPrimitiveTopology")
-	_mTLRenderPipelineDescriptorSelSetInputPrimitiveTopology = objc.RegisterName("setInputPrimitiveTopology:")
-	_mTLRenderPipelineDescriptorSelTessellationPartitionMode = objc.RegisterName("tessellationPartitionMode")
-	_mTLRenderPipelineDescriptorSelSetTessellationPartitionMode = objc.RegisterName("setTessellationPartitionMode:")
-	_mTLRenderPipelineDescriptorSelMaxTessellationFactor = objc.RegisterName("maxTessellationFactor")
-	_mTLRenderPipelineDescriptorSelSetMaxTessellationFactor = objc.RegisterName("setMaxTessellationFactor:")
-	_mTLRenderPipelineDescriptorSelIsTessellationFactorScaleEnabled = objc.RegisterName("isTessellationFactorScaleEnabled")
-	_mTLRenderPipelineDescriptorSelSetTessellationFactorScaleEnabled = objc.RegisterName("setTessellationFactorScaleEnabled:")
-	_mTLRenderPipelineDescriptorSelTessellationFactorFormat = objc.RegisterName("tessellationFactorFormat")
-	_mTLRenderPipelineDescriptorSelSetTessellationFactorFormat = objc.RegisterName("setTessellationFactorFormat:")
-	_mTLRenderPipelineDescriptorSelTessellationControlPointIndexType = objc.RegisterName("tessellationControlPointIndexType")
-	_mTLRenderPipelineDescriptorSelSetTessellationControlPointIndexType = objc.RegisterName("setTessellationControlPointIndexType:")
-	_mTLRenderPipelineDescriptorSelTessellationFactorStepFunction = objc.RegisterName("tessellationFactorStepFunction")
-	_mTLRenderPipelineDescriptorSelSetTessellationFactorStepFunction = objc.RegisterName("setTessellationFactorStepFunction:")
-	_mTLRenderPipelineDescriptorSelTessellationOutputWindingOrder = objc.RegisterName("tessellationOutputWindingOrder")
-	_mTLRenderPipelineDescriptorSelSetTessellationOutputWindingOrder = objc.RegisterName("setTessellationOutputWindingOrder:")
-	_mTLRenderPipelineDescriptorSelVertexBuffers = objc.RegisterName("vertexBuffers")
-	_mTLRenderPipelineDescriptorSelFragmentBuffers = objc.RegisterName("fragmentBuffers")
-	_mTLRenderPipelineDescriptorSelSupportIndirectCommandBuffers = objc.RegisterName("supportIndirectCommandBuffers")
-	_mTLRenderPipelineDescriptorSelSetSupportIndirectCommandBuffers = objc.RegisterName("setSupportIndirectCommandBuffers:")
-	_mTLRenderPipelineDescriptorSelBinaryArchives = objc.RegisterName("binaryArchives")
-	_mTLRenderPipelineDescriptorSelSetBinaryArchives = objc.RegisterName("setBinaryArchives:")
-	_mTLRenderPipelineDescriptorSelVertexPreloadedLibraries = objc.RegisterName("vertexPreloadedLibraries")
-	_mTLRenderPipelineDescriptorSelSetVertexPreloadedLibraries = objc.RegisterName("setVertexPreloadedLibraries:")
-	_mTLRenderPipelineDescriptorSelFragmentPreloadedLibraries = objc.RegisterName("fragmentPreloadedLibraries")
-	_mTLRenderPipelineDescriptorSelSetFragmentPreloadedLibraries = objc.RegisterName("setFragmentPreloadedLibraries:")
-	_mTLRenderPipelineDescriptorSelVertexLinkedFunctions = objc.RegisterName("vertexLinkedFunctions")
-	_mTLRenderPipelineDescriptorSelSetVertexLinkedFunctions = objc.RegisterName("setVertexLinkedFunctions:")
-	_mTLRenderPipelineDescriptorSelFragmentLinkedFunctions = objc.RegisterName("fragmentLinkedFunctions")
-	_mTLRenderPipelineDescriptorSelSetFragmentLinkedFunctions = objc.RegisterName("setFragmentLinkedFunctions:")
-	_mTLRenderPipelineDescriptorSelSupportAddingVertexBinaryFunctions = objc.RegisterName("supportAddingVertexBinaryFunctions")
-	_mTLRenderPipelineDescriptorSelSetSupportAddingVertexBinaryFunctions = objc.RegisterName("setSupportAddingVertexBinaryFunctions:")
-	_mTLRenderPipelineDescriptorSelSupportAddingFragmentBinaryFunctions = objc.RegisterName("supportAddingFragmentBinaryFunctions")
+	_clsMTLRenderPipelineDescriptor                                        = _objcClass("MTLRenderPipelineDescriptor")
+	_mTLRenderPipelineDescriptorSelReset                                   = objc.RegisterName("reset")
+	_mTLRenderPipelineDescriptorSelLabel                                   = objc.RegisterName("label")
+	_mTLRenderPipelineDescriptorSelSetLabel                                = objc.RegisterName("setLabel:")
+	_mTLRenderPipelineDescriptorSelVertexFunction                          = objc.RegisterName("vertexFunction")
+	_mTLRenderPipelineDescriptorSelSetVertexFunction                       = objc.RegisterName("setVertexFunction:")
+	_mTLRenderPipelineDescriptorSelFragmentFunction                        = objc.RegisterName("fragmentFunction")
+	_mTLRenderPipelineDescriptorSelSetFragmentFunction                     = objc.RegisterName("setFragmentFunction:")
+	_mTLRenderPipelineDescriptorSelVertexDescriptor                        = objc.RegisterName("vertexDescriptor")
+	_mTLRenderPipelineDescriptorSelSetVertexDescriptor                     = objc.RegisterName("setVertexDescriptor:")
+	_mTLRenderPipelineDescriptorSelSampleCount                             = objc.RegisterName("sampleCount")
+	_mTLRenderPipelineDescriptorSelSetSampleCount                          = objc.RegisterName("setSampleCount:")
+	_mTLRenderPipelineDescriptorSelRasterSampleCount                       = objc.RegisterName("rasterSampleCount")
+	_mTLRenderPipelineDescriptorSelSetRasterSampleCount                    = objc.RegisterName("setRasterSampleCount:")
+	_mTLRenderPipelineDescriptorSelIsAlphaToCoverageEnabled                = objc.RegisterName("isAlphaToCoverageEnabled")
+	_mTLRenderPipelineDescriptorSelSetAlphaToCoverageEnabled               = objc.RegisterName("setAlphaToCoverageEnabled:")
+	_mTLRenderPipelineDescriptorSelIsAlphaToOneEnabled                     = objc.RegisterName("isAlphaToOneEnabled")
+	_mTLRenderPipelineDescriptorSelSetAlphaToOneEnabled                    = objc.RegisterName("setAlphaToOneEnabled:")
+	_mTLRenderPipelineDescriptorSelIsRasterizationEnabled                  = objc.RegisterName("isRasterizationEnabled")
+	_mTLRenderPipelineDescriptorSelSetRasterizationEnabled                 = objc.RegisterName("setRasterizationEnabled:")
+	_mTLRenderPipelineDescriptorSelMaxVertexAmplificationCount             = objc.RegisterName("maxVertexAmplificationCount")
+	_mTLRenderPipelineDescriptorSelSetMaxVertexAmplificationCount          = objc.RegisterName("setMaxVertexAmplificationCount:")
+	_mTLRenderPipelineDescriptorSelColorAttachments                        = objc.RegisterName("colorAttachments")
+	_mTLRenderPipelineDescriptorSelDepthAttachmentPixelFormat              = objc.RegisterName("depthAttachmentPixelFormat")
+	_mTLRenderPipelineDescriptorSelSetDepthAttachmentPixelFormat           = objc.RegisterName("setDepthAttachmentPixelFormat:")
+	_mTLRenderPipelineDescriptorSelStencilAttachmentPixelFormat            = objc.RegisterName("stencilAttachmentPixelFormat")
+	_mTLRenderPipelineDescriptorSelSetStencilAttachmentPixelFormat         = objc.RegisterName("setStencilAttachmentPixelFormat:")
+	_mTLRenderPipelineDescriptorSelInputPrimitiveTopology                  = objc.RegisterName("inputPrimitiveTopology")
+	_mTLRenderPipelineDescriptorSelSetInputPrimitiveTopology               = objc.RegisterName("setInputPrimitiveTopology:")
+	_mTLRenderPipelineDescriptorSelTessellationPartitionMode               = objc.RegisterName("tessellationPartitionMode")
+	_mTLRenderPipelineDescriptorSelSetTessellationPartitionMode            = objc.RegisterName("setTessellationPartitionMode:")
+	_mTLRenderPipelineDescriptorSelMaxTessellationFactor                   = objc.RegisterName("maxTessellationFactor")
+	_mTLRenderPipelineDescriptorSelSetMaxTessellationFactor                = objc.RegisterName("setMaxTessellationFactor:")
+	_mTLRenderPipelineDescriptorSelIsTessellationFactorScaleEnabled        = objc.RegisterName("isTessellationFactorScaleEnabled")
+	_mTLRenderPipelineDescriptorSelSetTessellationFactorScaleEnabled       = objc.RegisterName("setTessellationFactorScaleEnabled:")
+	_mTLRenderPipelineDescriptorSelTessellationFactorFormat                = objc.RegisterName("tessellationFactorFormat")
+	_mTLRenderPipelineDescriptorSelSetTessellationFactorFormat             = objc.RegisterName("setTessellationFactorFormat:")
+	_mTLRenderPipelineDescriptorSelTessellationControlPointIndexType       = objc.RegisterName("tessellationControlPointIndexType")
+	_mTLRenderPipelineDescriptorSelSetTessellationControlPointIndexType    = objc.RegisterName("setTessellationControlPointIndexType:")
+	_mTLRenderPipelineDescriptorSelTessellationFactorStepFunction          = objc.RegisterName("tessellationFactorStepFunction")
+	_mTLRenderPipelineDescriptorSelSetTessellationFactorStepFunction       = objc.RegisterName("setTessellationFactorStepFunction:")
+	_mTLRenderPipelineDescriptorSelTessellationOutputWindingOrder          = objc.RegisterName("tessellationOutputWindingOrder")
+	_mTLRenderPipelineDescriptorSelSetTessellationOutputWindingOrder       = objc.RegisterName("setTessellationOutputWindingOrder:")
+	_mTLRenderPipelineDescriptorSelVertexBuffers                           = objc.RegisterName("vertexBuffers")
+	_mTLRenderPipelineDescriptorSelFragmentBuffers                         = objc.RegisterName("fragmentBuffers")
+	_mTLRenderPipelineDescriptorSelSupportIndirectCommandBuffers           = objc.RegisterName("supportIndirectCommandBuffers")
+	_mTLRenderPipelineDescriptorSelSetSupportIndirectCommandBuffers        = objc.RegisterName("setSupportIndirectCommandBuffers:")
+	_mTLRenderPipelineDescriptorSelBinaryArchives                          = objc.RegisterName("binaryArchives")
+	_mTLRenderPipelineDescriptorSelSetBinaryArchives                       = objc.RegisterName("setBinaryArchives:")
+	_mTLRenderPipelineDescriptorSelVertexPreloadedLibraries                = objc.RegisterName("vertexPreloadedLibraries")
+	_mTLRenderPipelineDescriptorSelSetVertexPreloadedLibraries             = objc.RegisterName("setVertexPreloadedLibraries:")
+	_mTLRenderPipelineDescriptorSelFragmentPreloadedLibraries              = objc.RegisterName("fragmentPreloadedLibraries")
+	_mTLRenderPipelineDescriptorSelSetFragmentPreloadedLibraries           = objc.RegisterName("setFragmentPreloadedLibraries:")
+	_mTLRenderPipelineDescriptorSelVertexLinkedFunctions                   = objc.RegisterName("vertexLinkedFunctions")
+	_mTLRenderPipelineDescriptorSelSetVertexLinkedFunctions                = objc.RegisterName("setVertexLinkedFunctions:")
+	_mTLRenderPipelineDescriptorSelFragmentLinkedFunctions                 = objc.RegisterName("fragmentLinkedFunctions")
+	_mTLRenderPipelineDescriptorSelSetFragmentLinkedFunctions              = objc.RegisterName("setFragmentLinkedFunctions:")
+	_mTLRenderPipelineDescriptorSelSupportAddingVertexBinaryFunctions      = objc.RegisterName("supportAddingVertexBinaryFunctions")
+	_mTLRenderPipelineDescriptorSelSetSupportAddingVertexBinaryFunctions   = objc.RegisterName("setSupportAddingVertexBinaryFunctions:")
+	_mTLRenderPipelineDescriptorSelSupportAddingFragmentBinaryFunctions    = objc.RegisterName("supportAddingFragmentBinaryFunctions")
 	_mTLRenderPipelineDescriptorSelSetSupportAddingFragmentBinaryFunctions = objc.RegisterName("setSupportAddingFragmentBinaryFunctions:")
-	_mTLRenderPipelineDescriptorSelMaxVertexCallStackDepth = objc.RegisterName("maxVertexCallStackDepth")
-	_mTLRenderPipelineDescriptorSelSetMaxVertexCallStackDepth = objc.RegisterName("setMaxVertexCallStackDepth:")
-	_mTLRenderPipelineDescriptorSelMaxFragmentCallStackDepth = objc.RegisterName("maxFragmentCallStackDepth")
-	_mTLRenderPipelineDescriptorSelSetMaxFragmentCallStackDepth = objc.RegisterName("setMaxFragmentCallStackDepth:")
-	_mTLRenderPipelineDescriptorSelShaderValidation = objc.RegisterName("shaderValidation")
-	_mTLRenderPipelineDescriptorSelSetShaderValidation = objc.RegisterName("setShaderValidation:")
+	_mTLRenderPipelineDescriptorSelMaxVertexCallStackDepth                 = objc.RegisterName("maxVertexCallStackDepth")
+	_mTLRenderPipelineDescriptorSelSetMaxVertexCallStackDepth              = objc.RegisterName("setMaxVertexCallStackDepth:")
+	_mTLRenderPipelineDescriptorSelMaxFragmentCallStackDepth               = objc.RegisterName("maxFragmentCallStackDepth")
+	_mTLRenderPipelineDescriptorSelSetMaxFragmentCallStackDepth            = objc.RegisterName("setMaxFragmentCallStackDepth:")
+	_mTLRenderPipelineDescriptorSelShaderValidation                        = objc.RegisterName("shaderValidation")
+	_mTLRenderPipelineDescriptorSelSetShaderValidation                     = objc.RegisterName("setShaderValidation:")
 )
 
 func MTLRenderPipelineDescriptorFromID(id objc.ID) *MTLRenderPipelineDescriptor {
@@ -102,7 +102,9 @@ func (o *MTLRenderPipelineDescriptor) Reset() {
 
 func (o *MTLRenderPipelineDescriptor) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,7 +132,9 @@ func (o *MTLRenderPipelineDescriptor) SetFragmentFunction(fragmentFunction MTLFu
 
 func (o *MTLRenderPipelineDescriptor) VertexDescriptor() *MTLVertexDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelVertexDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLVertexDescriptorFromID(_ret)
 }
 
@@ -200,7 +204,9 @@ func (o *MTLRenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexAm
 
 func (o *MTLRenderPipelineDescriptor) ColorAttachments() *MTLRenderPipelineColorAttachmentDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelColorAttachments)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLRenderPipelineColorAttachmentDescriptorArrayFromID(_ret)
 }
 
@@ -296,13 +302,17 @@ func (o *MTLRenderPipelineDescriptor) SetTessellationOutputWindingOrder(tessella
 
 func (o *MTLRenderPipelineDescriptor) VertexBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelVertexBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
 func (o *MTLRenderPipelineDescriptor) FragmentBuffers() *MTLPipelineBufferDescriptorArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelFragmentBuffers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLPipelineBufferDescriptorArrayFromID(_ret)
 }
 
@@ -318,7 +328,9 @@ func (o *MTLRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIn
 // @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
 func (o *MTLRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[MTLBinaryArchive] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelBinaryArchives)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinaryArchive](_ret)
 }
 
@@ -329,7 +341,9 @@ func (o *MTLRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foundati
 // @property vertexPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
 func (o *MTLRenderPipelineDescriptor) VertexPreloadedLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelVertexPreloadedLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -340,7 +354,9 @@ func (o *MTLRenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloade
 // @property fragmentPreloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
 func (o *MTLRenderPipelineDescriptor) FragmentPreloadedLibraries() *foundation.NSArray[MTLDynamicLibrary] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelFragmentPreloadedLibraries)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLDynamicLibrary](_ret)
 }
 
@@ -351,7 +367,9 @@ func (o *MTLRenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPrel
 // @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
 func (o *MTLRenderPipelineDescriptor) VertexLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelVertexLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -363,7 +381,9 @@ func (o *MTLRenderPipelineDescriptor) SetVertexLinkedFunctions(vertexLinkedFunct
 // @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
 func (o *MTLRenderPipelineDescriptor) FragmentLinkedFunctions() *MTLLinkedFunctions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLRenderPipelineDescriptorSelFragmentLinkedFunctions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLLinkedFunctionsFromID(_ret)
 }
 
@@ -425,4 +445,3 @@ func (o *MTLRenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
 func (o *MTLRenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
 	o.Ptr().Send(_mTLRenderPipelineDescriptorSelSetShaderValidation, shaderValidation)
 }
-

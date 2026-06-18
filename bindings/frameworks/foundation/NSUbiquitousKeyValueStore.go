@@ -15,26 +15,26 @@ type NSUbiquitousKeyValueStore struct {
 }
 
 var (
-	_clsNSUbiquitousKeyValueStore = _objcClass("NSUbiquitousKeyValueStore")
-	_nSUbiquitousKeyValueStoreSelObjectForKey = objc.RegisterName("objectForKey:")
-	_nSUbiquitousKeyValueStoreSelSetObjectForKey = objc.RegisterName("setObject:forKey:")
-	_nSUbiquitousKeyValueStoreSelRemoveObjectForKey = objc.RegisterName("removeObjectForKey:")
-	_nSUbiquitousKeyValueStoreSelStringForKey = objc.RegisterName("stringForKey:")
-	_nSUbiquitousKeyValueStoreSelArrayForKey = objc.RegisterName("arrayForKey:")
-	_nSUbiquitousKeyValueStoreSelDictionaryForKey = objc.RegisterName("dictionaryForKey:")
-	_nSUbiquitousKeyValueStoreSelDataForKey = objc.RegisterName("dataForKey:")
-	_nSUbiquitousKeyValueStoreSelLongLongForKey = objc.RegisterName("longLongForKey:")
-	_nSUbiquitousKeyValueStoreSelDoubleForKey = objc.RegisterName("doubleForKey:")
-	_nSUbiquitousKeyValueStoreSelBoolForKey = objc.RegisterName("boolForKey:")
-	_nSUbiquitousKeyValueStoreSelSetStringForKey = objc.RegisterName("setString:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetDataForKey = objc.RegisterName("setData:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetArrayForKey = objc.RegisterName("setArray:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetDictionaryForKey = objc.RegisterName("setDictionary:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetLongLongForKey = objc.RegisterName("setLongLong:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetDoubleForKey = objc.RegisterName("setDouble:forKey:")
-	_nSUbiquitousKeyValueStoreSelSetBoolForKey = objc.RegisterName("setBool:forKey:")
-	_nSUbiquitousKeyValueStoreSelSynchronize = objc.RegisterName("synchronize")
-	_nSUbiquitousKeyValueStoreSelDefaultStore = objc.RegisterName("defaultStore")
+	_clsNSUbiquitousKeyValueStore                         = _objcClass("NSUbiquitousKeyValueStore")
+	_nSUbiquitousKeyValueStoreSelObjectForKey             = objc.RegisterName("objectForKey:")
+	_nSUbiquitousKeyValueStoreSelSetObjectForKey          = objc.RegisterName("setObject:forKey:")
+	_nSUbiquitousKeyValueStoreSelRemoveObjectForKey       = objc.RegisterName("removeObjectForKey:")
+	_nSUbiquitousKeyValueStoreSelStringForKey             = objc.RegisterName("stringForKey:")
+	_nSUbiquitousKeyValueStoreSelArrayForKey              = objc.RegisterName("arrayForKey:")
+	_nSUbiquitousKeyValueStoreSelDictionaryForKey         = objc.RegisterName("dictionaryForKey:")
+	_nSUbiquitousKeyValueStoreSelDataForKey               = objc.RegisterName("dataForKey:")
+	_nSUbiquitousKeyValueStoreSelLongLongForKey           = objc.RegisterName("longLongForKey:")
+	_nSUbiquitousKeyValueStoreSelDoubleForKey             = objc.RegisterName("doubleForKey:")
+	_nSUbiquitousKeyValueStoreSelBoolForKey               = objc.RegisterName("boolForKey:")
+	_nSUbiquitousKeyValueStoreSelSetStringForKey          = objc.RegisterName("setString:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetDataForKey            = objc.RegisterName("setData:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetArrayForKey           = objc.RegisterName("setArray:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetDictionaryForKey      = objc.RegisterName("setDictionary:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetLongLongForKey        = objc.RegisterName("setLongLong:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetDoubleForKey          = objc.RegisterName("setDouble:forKey:")
+	_nSUbiquitousKeyValueStoreSelSetBoolForKey            = objc.RegisterName("setBool:forKey:")
+	_nSUbiquitousKeyValueStoreSelSynchronize              = objc.RegisterName("synchronize")
+	_nSUbiquitousKeyValueStoreSelDefaultStore             = objc.RegisterName("defaultStore")
 	_nSUbiquitousKeyValueStoreSelDictionaryRepresentation = objc.RegisterName("dictionaryRepresentation")
 )
 
@@ -63,7 +63,9 @@ func (o *NSUbiquitousKeyValueStore) RemoveObjectForKey(aKey *NSString) {
 
 func (o *NSUbiquitousKeyValueStore) StringForKey(aKey *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelStringForKey, aKey.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -79,7 +81,9 @@ func (o *NSUbiquitousKeyValueStore) DictionaryForKey(aKey *NSString) *NSDictiona
 
 func (o *NSUbiquitousKeyValueStore) DataForKey(aKey *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUbiquitousKeyValueStoreSelDataForKey, aKey.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -133,7 +137,9 @@ func (o *NSUbiquitousKeyValueStore) Synchronize() bool {
 
 func NSUbiquitousKeyValueStoreDefaultStore() *NSUbiquitousKeyValueStore {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUbiquitousKeyValueStore), _nSUbiquitousKeyValueStoreSelDefaultStore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUbiquitousKeyValueStoreFromID(_ret)
 }
 
@@ -141,4 +147,3 @@ func (o *NSUbiquitousKeyValueStore) DictionaryRepresentation() *NSDictionary[*NS
 	_ret := objc.Send[*NSDictionary[*NSString, objc.ID]](o.Ptr(), _nSUbiquitousKeyValueStoreSelDictionaryRepresentation)
 	return _ret
 }
-

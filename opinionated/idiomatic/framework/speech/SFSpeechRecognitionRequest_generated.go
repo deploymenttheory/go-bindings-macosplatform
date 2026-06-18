@@ -57,7 +57,9 @@ func (x *SpeechRecognitionRequest) WithContextualStrings(items ...*foundation.NS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -174,7 +176,9 @@ func (x *SpeechRecognitionRequest) SetCustomizedLanguageModel(customizedLanguage
 	x.inner.SetCustomizedLanguageModel(customizedLanguageModel)
 }
 
-func (x *SpeechRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest { return x.inner }
+func (x *SpeechRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest {
+	return x.inner
+}
 
 // SpeechRecognitionRequestable is the interface implemented by [SpeechRecognitionRequest], for mocking and DI.
 type SpeechRecognitionRequestable interface {
@@ -203,4 +207,3 @@ type SpeechRecognitionRequestable interface {
 }
 
 var _ SpeechRecognitionRequestable = (*SpeechRecognitionRequest)(nil)
-

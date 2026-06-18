@@ -18,14 +18,14 @@ type GKEntity struct {
 }
 
 var (
-	_clsGKEntity = _objcClass("GKEntity")
-	_gKEntitySelEntity = objc.RegisterName("entity")
-	_gKEntitySelInit = objc.RegisterName("init")
-	_gKEntitySelUpdateWithDeltaTime = objc.RegisterName("updateWithDeltaTime:")
-	_gKEntitySelAddComponent = objc.RegisterName("addComponent:")
+	_clsGKEntity                        = _objcClass("GKEntity")
+	_gKEntitySelEntity                  = objc.RegisterName("entity")
+	_gKEntitySelInit                    = objc.RegisterName("init")
+	_gKEntitySelUpdateWithDeltaTime     = objc.RegisterName("updateWithDeltaTime:")
+	_gKEntitySelAddComponent            = objc.RegisterName("addComponent:")
 	_gKEntitySelRemoveComponentForClass = objc.RegisterName("removeComponentForClass:")
-	_gKEntitySelComponentForClass = objc.RegisterName("componentForClass:")
-	_gKEntitySelComponents = objc.RegisterName("components")
+	_gKEntitySelComponentForClass       = objc.RegisterName("componentForClass:")
+	_gKEntitySelComponents              = objc.RegisterName("components")
 )
 
 func GKEntityFromID(id objc.ID) *GKEntity {
@@ -41,14 +41,18 @@ func GKEntityFromID(id objc.ID) *GKEntity {
 // Creates a new entity ready to have components added to it.
 func GKEntityEntity() *GKEntity {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKEntity), _gKEntitySelEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKEntityFromID(_ret)
 }
 
 // Creates a new entity ready to have components added to it.
 func (o *GKEntity) Init() *GKEntity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKEntitySelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKEntityFromID(_ret)
 }
 
@@ -70,14 +74,17 @@ func (o *GKEntity) RemoveComponentForClass(componentClass objc.Class) {
 // Gets the component of the indicated class.  Returns nil if entity does not have this component @param componentClass the class of the component you want to get
 func (o *GKEntity) ComponentForClass(componentClass objc.Class) *GKComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKEntitySelComponentForClass, componentClass)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKComponentFromID(_ret)
 }
 
 // Access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
 func (o *GKEntity) Components() *foundation.NSArray[*GKComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKEntitySelComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKComponent](_ret)
 }
-

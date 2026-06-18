@@ -115,11 +115,17 @@ func (x *AudioUnitSampler) SetGlobalTuning(globalTuning float32) {
 	x.inner.SetGlobalTuning(globalTuning)
 }
 
-func (x *AudioUnitSampler) asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument { return &x.inner.AVAudioUnitMIDIInstrument }
+func (x *AudioUnitSampler) asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument {
+	return &x.inner.AVAudioUnitMIDIInstrument
+}
 
-func (x *AudioUnitSampler) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit }
+func (x *AudioUnitSampler) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit
+}
 
-func (x *AudioUnitSampler) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitSampler) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitSamplerable is the interface implemented by [AudioUnitSampler], for mocking and DI.
 type AudioUnitSamplerable interface {
@@ -142,4 +148,3 @@ type AudioUnitSamplerable interface {
 }
 
 var _ AudioUnitSamplerable = (*AudioUnitSampler)(nil)
-

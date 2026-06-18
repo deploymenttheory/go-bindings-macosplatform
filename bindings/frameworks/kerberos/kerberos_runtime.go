@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_kerberosLib uintptr
-	_loadOnce sync.Once
+	_kerberosLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,70 +49,132 @@ func _loadLibrary() {
 		return
 	}
 	_register("KLAcquireInitialTickets", func() { purego.RegisterLibFunc(&_fnKLAcquireInitialTickets, _kerberosLib, "KLAcquireInitialTickets") })
-	_register("KLAcquireInitialTicketsWithPassword", func() { purego.RegisterLibFunc(&_fnKLAcquireInitialTicketsWithPassword, _kerberosLib, "KLAcquireInitialTicketsWithPassword") })
-	_register("KLAcquireNewInitialTicketCredentialsWithPassword", func() { purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketCredentialsWithPassword, _kerberosLib, "KLAcquireNewInitialTicketCredentialsWithPassword") })
-	_register("KLAcquireNewInitialTickets", func() { purego.RegisterLibFunc(&_fnKLAcquireNewInitialTickets, _kerberosLib, "KLAcquireNewInitialTickets") })
-	_register("KLAcquireNewInitialTicketsWithKeytab", func() { purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithKeytab, _kerberosLib, "KLAcquireNewInitialTicketsWithKeytab") })
-	_register("KLAcquireNewInitialTicketsWithPassword", func() { purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithPassword, _kerberosLib, "KLAcquireNewInitialTicketsWithPassword") })
+	_register("KLAcquireInitialTicketsWithPassword", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireInitialTicketsWithPassword, _kerberosLib, "KLAcquireInitialTicketsWithPassword")
+	})
+	_register("KLAcquireNewInitialTicketCredentialsWithPassword", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketCredentialsWithPassword, _kerberosLib, "KLAcquireNewInitialTicketCredentialsWithPassword")
+	})
+	_register("KLAcquireNewInitialTickets", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireNewInitialTickets, _kerberosLib, "KLAcquireNewInitialTickets")
+	})
+	_register("KLAcquireNewInitialTicketsWithKeytab", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithKeytab, _kerberosLib, "KLAcquireNewInitialTicketsWithKeytab")
+	})
+	_register("KLAcquireNewInitialTicketsWithPassword", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireNewInitialTicketsWithPassword, _kerberosLib, "KLAcquireNewInitialTicketsWithPassword")
+	})
 	_register("KLAcquireNewTickets", func() { purego.RegisterLibFunc(&_fnKLAcquireNewTickets, _kerberosLib, "KLAcquireNewTickets") })
-	_register("KLAcquireNewTicketsWithPassword", func() { purego.RegisterLibFunc(&_fnKLAcquireNewTicketsWithPassword, _kerberosLib, "KLAcquireNewTicketsWithPassword") })
+	_register("KLAcquireNewTicketsWithPassword", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireNewTicketsWithPassword, _kerberosLib, "KLAcquireNewTicketsWithPassword")
+	})
 	_register("KLAcquireTickets", func() { purego.RegisterLibFunc(&_fnKLAcquireTickets, _kerberosLib, "KLAcquireTickets") })
-	_register("KLAcquireTicketsWithPassword", func() { purego.RegisterLibFunc(&_fnKLAcquireTicketsWithPassword, _kerberosLib, "KLAcquireTicketsWithPassword") })
+	_register("KLAcquireTicketsWithPassword", func() {
+		purego.RegisterLibFunc(&_fnKLAcquireTicketsWithPassword, _kerberosLib, "KLAcquireTicketsWithPassword")
+	})
 	_register("KLCacheHasValidTickets", func() { purego.RegisterLibFunc(&_fnKLCacheHasValidTickets, _kerberosLib, "KLCacheHasValidTickets") })
 	_register("KLCancelAllDialogs", func() { purego.RegisterLibFunc(&_fnKLCancelAllDialogs, _kerberosLib, "KLCancelAllDialogs") })
 	_register("KLChangePassword", func() { purego.RegisterLibFunc(&_fnKLChangePassword, _kerberosLib, "KLChangePassword") })
-	_register("KLChangePasswordWithPasswords", func() { purego.RegisterLibFunc(&_fnKLChangePasswordWithPasswords, _kerberosLib, "KLChangePasswordWithPasswords") })
+	_register("KLChangePasswordWithPasswords", func() {
+		purego.RegisterLibFunc(&_fnKLChangePasswordWithPasswords, _kerberosLib, "KLChangePasswordWithPasswords")
+	})
 	_register("KLComparePrincipal", func() { purego.RegisterLibFunc(&_fnKLComparePrincipal, _kerberosLib, "KLComparePrincipal") })
 	_register("KLCountKerberosRealms", func() { purego.RegisterLibFunc(&_fnKLCountKerberosRealms, _kerberosLib, "KLCountKerberosRealms") })
 	_register("KLCreateLoginOptions", func() { purego.RegisterLibFunc(&_fnKLCreateLoginOptions, _kerberosLib, "KLCreateLoginOptions") })
-	_register("KLCreatePrincipalFromKerberos5Principal", func() { purego.RegisterLibFunc(&_fnKLCreatePrincipalFromKerberos5Principal, _kerberosLib, "KLCreatePrincipalFromKerberos5Principal") })
-	_register("KLCreatePrincipalFromPrincipal", func() { purego.RegisterLibFunc(&_fnKLCreatePrincipalFromPrincipal, _kerberosLib, "KLCreatePrincipalFromPrincipal") })
-	_register("KLCreatePrincipalFromString", func() { purego.RegisterLibFunc(&_fnKLCreatePrincipalFromString, _kerberosLib, "KLCreatePrincipalFromString") })
-	_register("KLCreatePrincipalFromTriplet", func() { purego.RegisterLibFunc(&_fnKLCreatePrincipalFromTriplet, _kerberosLib, "KLCreatePrincipalFromTriplet") })
+	_register("KLCreatePrincipalFromKerberos5Principal", func() {
+		purego.RegisterLibFunc(&_fnKLCreatePrincipalFromKerberos5Principal, _kerberosLib, "KLCreatePrincipalFromKerberos5Principal")
+	})
+	_register("KLCreatePrincipalFromPrincipal", func() {
+		purego.RegisterLibFunc(&_fnKLCreatePrincipalFromPrincipal, _kerberosLib, "KLCreatePrincipalFromPrincipal")
+	})
+	_register("KLCreatePrincipalFromString", func() {
+		purego.RegisterLibFunc(&_fnKLCreatePrincipalFromString, _kerberosLib, "KLCreatePrincipalFromString")
+	})
+	_register("KLCreatePrincipalFromTriplet", func() {
+		purego.RegisterLibFunc(&_fnKLCreatePrincipalFromTriplet, _kerberosLib, "KLCreatePrincipalFromTriplet")
+	})
 	_register("KLDestroyTickets", func() { purego.RegisterLibFunc(&_fnKLDestroyTickets, _kerberosLib, "KLDestroyTickets") })
 	_register("KLDisposeLoginOptions", func() { purego.RegisterLibFunc(&_fnKLDisposeLoginOptions, _kerberosLib, "KLDisposeLoginOptions") })
 	_register("KLDisposePrincipal", func() { purego.RegisterLibFunc(&_fnKLDisposePrincipal, _kerberosLib, "KLDisposePrincipal") })
 	_register("KLDisposeString", func() { purego.RegisterLibFunc(&_fnKLDisposeString, _kerberosLib, "KLDisposeString") })
-	_register("KLFindKerberosRealmByName", func() { purego.RegisterLibFunc(&_fnKLFindKerberosRealmByName, _kerberosLib, "KLFindKerberosRealmByName") })
+	_register("KLFindKerberosRealmByName", func() {
+		purego.RegisterLibFunc(&_fnKLFindKerberosRealmByName, _kerberosLib, "KLFindKerberosRealmByName")
+	})
 	_register("KLGetApplicationOptions", func() { purego.RegisterLibFunc(&_fnKLGetApplicationOptions, _kerberosLib, "KLGetApplicationOptions") })
 	_register("KLGetDefaultLoginOption", func() { purego.RegisterLibFunc(&_fnKLGetDefaultLoginOption, _kerberosLib, "KLGetDefaultLoginOption") })
-	_register("KLGetDisplayStringFromPrincipal", func() { purego.RegisterLibFunc(&_fnKLGetDisplayStringFromPrincipal, _kerberosLib, "KLGetDisplayStringFromPrincipal") })
+	_register("KLGetDisplayStringFromPrincipal", func() {
+		purego.RegisterLibFunc(&_fnKLGetDisplayStringFromPrincipal, _kerberosLib, "KLGetDisplayStringFromPrincipal")
+	})
 	_register("KLGetErrorString", func() { purego.RegisterLibFunc(&_fnKLGetErrorString, _kerberosLib, "KLGetErrorString") })
 	_register("KLGetIdleCallback", func() { purego.RegisterLibFunc(&_fnKLGetIdleCallback, _kerberosLib, "KLGetIdleCallback") })
-	_register("KLGetKerberosDefaultRealm", func() { purego.RegisterLibFunc(&_fnKLGetKerberosDefaultRealm, _kerberosLib, "KLGetKerberosDefaultRealm") })
-	_register("KLGetKerberosDefaultRealmByName", func() { purego.RegisterLibFunc(&_fnKLGetKerberosDefaultRealmByName, _kerberosLib, "KLGetKerberosDefaultRealmByName") })
+	_register("KLGetKerberosDefaultRealm", func() {
+		purego.RegisterLibFunc(&_fnKLGetKerberosDefaultRealm, _kerberosLib, "KLGetKerberosDefaultRealm")
+	})
+	_register("KLGetKerberosDefaultRealmByName", func() {
+		purego.RegisterLibFunc(&_fnKLGetKerberosDefaultRealmByName, _kerberosLib, "KLGetKerberosDefaultRealmByName")
+	})
 	_register("KLGetKerberosRealm", func() { purego.RegisterLibFunc(&_fnKLGetKerberosRealm, _kerberosLib, "KLGetKerberosRealm") })
 	_register("KLGetStringFromPrincipal", func() { purego.RegisterLibFunc(&_fnKLGetStringFromPrincipal, _kerberosLib, "KLGetStringFromPrincipal") })
-	_register("KLGetTripletFromPrincipal", func() { purego.RegisterLibFunc(&_fnKLGetTripletFromPrincipal, _kerberosLib, "KLGetTripletFromPrincipal") })
+	_register("KLGetTripletFromPrincipal", func() {
+		purego.RegisterLibFunc(&_fnKLGetTripletFromPrincipal, _kerberosLib, "KLGetTripletFromPrincipal")
+	})
 	_register("KLHandleError", func() { purego.RegisterLibFunc(&_fnKLHandleError, _kerberosLib, "KLHandleError") })
 	_register("KLInsertKerberosRealm", func() { purego.RegisterLibFunc(&_fnKLInsertKerberosRealm, _kerberosLib, "KLInsertKerberosRealm") })
 	_register("KLLastChangedTime", func() { purego.RegisterLibFunc(&_fnKLLastChangedTime, _kerberosLib, "KLLastChangedTime") })
-	_register("KLLoginOptionsSetAddressless", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetAddressless, _kerberosLib, "KLLoginOptionsSetAddressless") })
-	_register("KLLoginOptionsSetForwardable", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetForwardable, _kerberosLib, "KLLoginOptionsSetForwardable") })
-	_register("KLLoginOptionsSetProxiable", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetProxiable, _kerberosLib, "KLLoginOptionsSetProxiable") })
-	_register("KLLoginOptionsSetRenewableLifetime", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetRenewableLifetime, _kerberosLib, "KLLoginOptionsSetRenewableLifetime") })
-	_register("KLLoginOptionsSetServiceName", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetServiceName, _kerberosLib, "KLLoginOptionsSetServiceName") })
-	_register("KLLoginOptionsSetTicketLifetime", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketLifetime, _kerberosLib, "KLLoginOptionsSetTicketLifetime") })
-	_register("KLLoginOptionsSetTicketStartTime", func() { purego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketStartTime, _kerberosLib, "KLLoginOptionsSetTicketStartTime") })
-	_register("KLRemoveAllKerberosRealms", func() { purego.RegisterLibFunc(&_fnKLRemoveAllKerberosRealms, _kerberosLib, "KLRemoveAllKerberosRealms") })
+	_register("KLLoginOptionsSetAddressless", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetAddressless, _kerberosLib, "KLLoginOptionsSetAddressless")
+	})
+	_register("KLLoginOptionsSetForwardable", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetForwardable, _kerberosLib, "KLLoginOptionsSetForwardable")
+	})
+	_register("KLLoginOptionsSetProxiable", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetProxiable, _kerberosLib, "KLLoginOptionsSetProxiable")
+	})
+	_register("KLLoginOptionsSetRenewableLifetime", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetRenewableLifetime, _kerberosLib, "KLLoginOptionsSetRenewableLifetime")
+	})
+	_register("KLLoginOptionsSetServiceName", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetServiceName, _kerberosLib, "KLLoginOptionsSetServiceName")
+	})
+	_register("KLLoginOptionsSetTicketLifetime", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketLifetime, _kerberosLib, "KLLoginOptionsSetTicketLifetime")
+	})
+	_register("KLLoginOptionsSetTicketStartTime", func() {
+		purego.RegisterLibFunc(&_fnKLLoginOptionsSetTicketStartTime, _kerberosLib, "KLLoginOptionsSetTicketStartTime")
+	})
+	_register("KLRemoveAllKerberosRealms", func() {
+		purego.RegisterLibFunc(&_fnKLRemoveAllKerberosRealms, _kerberosLib, "KLRemoveAllKerberosRealms")
+	})
 	_register("KLRemoveKerberosRealm", func() { purego.RegisterLibFunc(&_fnKLRemoveKerberosRealm, _kerberosLib, "KLRemoveKerberosRealm") })
 	_register("KLRenewInitialTickets", func() { purego.RegisterLibFunc(&_fnKLRenewInitialTickets, _kerberosLib, "KLRenewInitialTickets") })
 	_register("KLSetApplicationOptions", func() { purego.RegisterLibFunc(&_fnKLSetApplicationOptions, _kerberosLib, "KLSetApplicationOptions") })
 	_register("KLSetDefaultLoginOption", func() { purego.RegisterLibFunc(&_fnKLSetDefaultLoginOption, _kerberosLib, "KLSetDefaultLoginOption") })
 	_register("KLSetIdleCallback", func() { purego.RegisterLibFunc(&_fnKLSetIdleCallback, _kerberosLib, "KLSetIdleCallback") })
-	_register("KLSetKerberosDefaultRealm", func() { purego.RegisterLibFunc(&_fnKLSetKerberosDefaultRealm, _kerberosLib, "KLSetKerberosDefaultRealm") })
-	_register("KLSetKerberosDefaultRealmByName", func() { purego.RegisterLibFunc(&_fnKLSetKerberosDefaultRealmByName, _kerberosLib, "KLSetKerberosDefaultRealmByName") })
+	_register("KLSetKerberosDefaultRealm", func() {
+		purego.RegisterLibFunc(&_fnKLSetKerberosDefaultRealm, _kerberosLib, "KLSetKerberosDefaultRealm")
+	})
+	_register("KLSetKerberosDefaultRealmByName", func() {
+		purego.RegisterLibFunc(&_fnKLSetKerberosDefaultRealmByName, _kerberosLib, "KLSetKerberosDefaultRealmByName")
+	})
 	_register("KLSetKerberosRealm", func() { purego.RegisterLibFunc(&_fnKLSetKerberosRealm, _kerberosLib, "KLSetKerberosRealm") })
 	_register("KLSetSystemDefaultCache", func() { purego.RegisterLibFunc(&_fnKLSetSystemDefaultCache, _kerberosLib, "KLSetSystemDefaultCache") })
-	_register("KLStoreNewInitialTicketCredentials", func() { purego.RegisterLibFunc(&_fnKLStoreNewInitialTicketCredentials, _kerberosLib, "KLStoreNewInitialTicketCredentials") })
+	_register("KLStoreNewInitialTicketCredentials", func() {
+		purego.RegisterLibFunc(&_fnKLStoreNewInitialTicketCredentials, _kerberosLib, "KLStoreNewInitialTicketCredentials")
+	})
 	_register("KLTicketExpirationTime", func() { purego.RegisterLibFunc(&_fnKLTicketExpirationTime, _kerberosLib, "KLTicketExpirationTime") })
 	_register("KLTicketStartTime", func() { purego.RegisterLibFunc(&_fnKLTicketStartTime, _kerberosLib, "KLTicketStartTime") })
 	_register("KLValidateInitialTickets", func() { purego.RegisterLibFunc(&_fnKLValidateInitialTickets, _kerberosLib, "KLValidateInitialTickets") })
-	_register("KLVerifyInitialTicketCredentials", func() { purego.RegisterLibFunc(&_fnKLVerifyInitialTicketCredentials, _kerberosLib, "KLVerifyInitialTicketCredentials") })
+	_register("KLVerifyInitialTicketCredentials", func() {
+		purego.RegisterLibFunc(&_fnKLVerifyInitialTicketCredentials, _kerberosLib, "KLVerifyInitialTicketCredentials")
+	})
 	_register("KLVerifyInitialTickets", func() { purego.RegisterLibFunc(&_fnKLVerifyInitialTickets, _kerberosLib, "KLVerifyInitialTickets") })
 	_register("add_error_table", func() { purego.RegisterLibFunc(&_add_error_table, _kerberosLib, "add_error_table") })
-	_register("apple_gss_krb5_export_authdata_if_relevant_context", func() { purego.RegisterLibFunc(&_apple_gss_krb5_export_authdata_if_relevant_context, _kerberosLib, "apple_gss_krb5_export_authdata_if_relevant_context") })
-	_register("apple_gss_krb5_free_authdata_if_relevant", func() { purego.RegisterLibFunc(&_apple_gss_krb5_free_authdata_if_relevant, _kerberosLib, "apple_gss_krb5_free_authdata_if_relevant") })
+	_register("apple_gss_krb5_export_authdata_if_relevant_context", func() {
+		purego.RegisterLibFunc(&_apple_gss_krb5_export_authdata_if_relevant_context, _kerberosLib, "apple_gss_krb5_export_authdata_if_relevant_context")
+	})
+	_register("apple_gss_krb5_free_authdata_if_relevant", func() {
+		purego.RegisterLibFunc(&_apple_gss_krb5_free_authdata_if_relevant, _kerberosLib, "apple_gss_krb5_free_authdata_if_relevant")
+	})
 	_register("cc_initialize", func() { purego.RegisterLibFunc(&_cc_initialize, _kerberosLib, "cc_initialize") })
 	_register("com_err_va", func() { purego.RegisterLibFunc(&_com_err_va, _kerberosLib, "com_err_va") })
 	_register("error_message", func() { purego.RegisterLibFunc(&_error_message, _kerberosLib, "error_message") })
@@ -138,14 +200,24 @@ func _loadLibrary() {
 	_register("gss_inquire_context", func() { purego.RegisterLibFunc(&_gss_inquire_context, _kerberosLib, "gss_inquire_context") })
 	_register("gss_inquire_cred", func() { purego.RegisterLibFunc(&_gss_inquire_cred, _kerberosLib, "gss_inquire_cred") })
 	_register("gss_inquire_cred_by_mech", func() { purego.RegisterLibFunc(&_gss_inquire_cred_by_mech, _kerberosLib, "gss_inquire_cred_by_mech") })
-	_register("gss_inquire_mechs_for_name", func() { purego.RegisterLibFunc(&_gss_inquire_mechs_for_name, _kerberosLib, "gss_inquire_mechs_for_name") })
-	_register("gss_inquire_names_for_mech", func() { purego.RegisterLibFunc(&_gss_inquire_names_for_mech, _kerberosLib, "gss_inquire_names_for_mech") })
+	_register("gss_inquire_mechs_for_name", func() {
+		purego.RegisterLibFunc(&_gss_inquire_mechs_for_name, _kerberosLib, "gss_inquire_mechs_for_name")
+	})
+	_register("gss_inquire_names_for_mech", func() {
+		purego.RegisterLibFunc(&_gss_inquire_names_for_mech, _kerberosLib, "gss_inquire_names_for_mech")
+	})
 	_register("gss_krb5_ccache_name", func() { purego.RegisterLibFunc(&_gss_krb5_ccache_name, _kerberosLib, "gss_krb5_ccache_name") })
 	_register("gss_krb5_copy_ccache", func() { purego.RegisterLibFunc(&_gss_krb5_copy_ccache, _kerberosLib, "gss_krb5_copy_ccache") })
-	_register("gss_krb5_export_lucid_sec_context", func() { purego.RegisterLibFunc(&_gss_krb5_export_lucid_sec_context, _kerberosLib, "gss_krb5_export_lucid_sec_context") })
-	_register("gss_krb5_free_lucid_sec_context", func() { purego.RegisterLibFunc(&_gss_krb5_free_lucid_sec_context, _kerberosLib, "gss_krb5_free_lucid_sec_context") })
+	_register("gss_krb5_export_lucid_sec_context", func() {
+		purego.RegisterLibFunc(&_gss_krb5_export_lucid_sec_context, _kerberosLib, "gss_krb5_export_lucid_sec_context")
+	})
+	_register("gss_krb5_free_lucid_sec_context", func() {
+		purego.RegisterLibFunc(&_gss_krb5_free_lucid_sec_context, _kerberosLib, "gss_krb5_free_lucid_sec_context")
+	})
 	_register("gss_krb5_get_tkt_flags", func() { purego.RegisterLibFunc(&_gss_krb5_get_tkt_flags, _kerberosLib, "gss_krb5_get_tkt_flags") })
-	_register("gss_krb5_set_allowable_enctypes", func() { purego.RegisterLibFunc(&_gss_krb5_set_allowable_enctypes, _kerberosLib, "gss_krb5_set_allowable_enctypes") })
+	_register("gss_krb5_set_allowable_enctypes", func() {
+		purego.RegisterLibFunc(&_gss_krb5_set_allowable_enctypes, _kerberosLib, "gss_krb5_set_allowable_enctypes")
+	})
 	_register("gss_krb5_ui", func() { purego.RegisterLibFunc(&_gss_krb5_ui, _kerberosLib, "gss_krb5_ui") })
 	_register("gss_oid_to_str", func() { purego.RegisterLibFunc(&_gss_oid_to_str, _kerberosLib, "gss_oid_to_str") })
 	_register("gss_process_context_token", func() { purego.RegisterLibFunc(&_gss_process_context_token, _kerberosLib, "gss_process_context_token") })
@@ -164,10 +236,18 @@ func _loadLibrary() {
 	_register("gss_verify_mic", func() { purego.RegisterLibFunc(&_gss_verify_mic, _kerberosLib, "gss_verify_mic") })
 	_register("gss_wrap", func() { purego.RegisterLibFunc(&_gss_wrap, _kerberosLib, "gss_wrap") })
 	_register("gss_wrap_size_limit", func() { purego.RegisterLibFunc(&_gss_wrap_size_limit, _kerberosLib, "gss_wrap_size_limit") })
-	_register("initialize_asn1_error_table", func() { purego.RegisterLibFunc(&_initialize_asn1_error_table, _kerberosLib, "initialize_asn1_error_table") })
-	_register("initialize_k524_error_table", func() { purego.RegisterLibFunc(&_initialize_k524_error_table, _kerberosLib, "initialize_k524_error_table") })
-	_register("initialize_krb5_error_table", func() { purego.RegisterLibFunc(&_initialize_krb5_error_table, _kerberosLib, "initialize_krb5_error_table") })
-	_register("initialize_prof_error_table", func() { purego.RegisterLibFunc(&_initialize_prof_error_table, _kerberosLib, "initialize_prof_error_table") })
+	_register("initialize_asn1_error_table", func() {
+		purego.RegisterLibFunc(&_initialize_asn1_error_table, _kerberosLib, "initialize_asn1_error_table")
+	})
+	_register("initialize_k524_error_table", func() {
+		purego.RegisterLibFunc(&_initialize_k524_error_table, _kerberosLib, "initialize_k524_error_table")
+	})
+	_register("initialize_krb5_error_table", func() {
+		purego.RegisterLibFunc(&_initialize_krb5_error_table, _kerberosLib, "initialize_krb5_error_table")
+	})
+	_register("initialize_prof_error_table", func() {
+		purego.RegisterLibFunc(&_initialize_prof_error_table, _kerberosLib, "initialize_prof_error_table")
+	})
 	_register("krb5_425_conv_principal", func() { purego.RegisterLibFunc(&_krb5_425_conv_principal, _kerberosLib, "krb5_425_conv_principal") })
 	_register("krb5_524_conv_principal", func() { purego.RegisterLibFunc(&_krb5_524_conv_principal, _kerberosLib, "krb5_524_conv_principal") })
 	_register("krb5_524_convert_creds", func() { purego.RegisterLibFunc(&_krb5_524_convert_creds, _kerberosLib, "krb5_524_convert_creds") })
@@ -179,26 +259,48 @@ func _loadLibrary() {
 	_register("krb5_appdefault_string", func() { purego.RegisterLibFunc(&_krb5_appdefault_string, _kerberosLib, "krb5_appdefault_string") })
 	_register("krb5_auth_con_free", func() { purego.RegisterLibFunc(&_krb5_auth_con_free, _kerberosLib, "krb5_auth_con_free") })
 	_register("krb5_auth_con_genaddrs", func() { purego.RegisterLibFunc(&_krb5_auth_con_genaddrs, _kerberosLib, "krb5_auth_con_genaddrs") })
-	_register("krb5_auth_con_get_checksum_func", func() { purego.RegisterLibFunc(&_krb5_auth_con_get_checksum_func, _kerberosLib, "krb5_auth_con_get_checksum_func") })
+	_register("krb5_auth_con_get_checksum_func", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_get_checksum_func, _kerberosLib, "krb5_auth_con_get_checksum_func")
+	})
 	_register("krb5_auth_con_getaddrs", func() { purego.RegisterLibFunc(&_krb5_auth_con_getaddrs, _kerberosLib, "krb5_auth_con_getaddrs") })
-	_register("krb5_auth_con_getauthenticator", func() { purego.RegisterLibFunc(&_krb5_auth_con_getauthenticator, _kerberosLib, "krb5_auth_con_getauthenticator") })
+	_register("krb5_auth_con_getauthenticator", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_getauthenticator, _kerberosLib, "krb5_auth_con_getauthenticator")
+	})
 	_register("krb5_auth_con_getflags", func() { purego.RegisterLibFunc(&_krb5_auth_con_getflags, _kerberosLib, "krb5_auth_con_getflags") })
 	_register("krb5_auth_con_getkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_getkey, _kerberosLib, "krb5_auth_con_getkey") })
-	_register("krb5_auth_con_getlocalseqnumber", func() { purego.RegisterLibFunc(&_krb5_auth_con_getlocalseqnumber, _kerberosLib, "krb5_auth_con_getlocalseqnumber") })
+	_register("krb5_auth_con_getlocalseqnumber", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_getlocalseqnumber, _kerberosLib, "krb5_auth_con_getlocalseqnumber")
+	})
 	_register("krb5_auth_con_getrcache", func() { purego.RegisterLibFunc(&_krb5_auth_con_getrcache, _kerberosLib, "krb5_auth_con_getrcache") })
-	_register("krb5_auth_con_getrecvsubkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_getrecvsubkey, _kerberosLib, "krb5_auth_con_getrecvsubkey") })
-	_register("krb5_auth_con_getremoteseqnumber", func() { purego.RegisterLibFunc(&_krb5_auth_con_getremoteseqnumber, _kerberosLib, "krb5_auth_con_getremoteseqnumber") })
-	_register("krb5_auth_con_getsendsubkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_getsendsubkey, _kerberosLib, "krb5_auth_con_getsendsubkey") })
+	_register("krb5_auth_con_getrecvsubkey", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_getrecvsubkey, _kerberosLib, "krb5_auth_con_getrecvsubkey")
+	})
+	_register("krb5_auth_con_getremoteseqnumber", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_getremoteseqnumber, _kerberosLib, "krb5_auth_con_getremoteseqnumber")
+	})
+	_register("krb5_auth_con_getsendsubkey", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_getsendsubkey, _kerberosLib, "krb5_auth_con_getsendsubkey")
+	})
 	_register("krb5_auth_con_init", func() { purego.RegisterLibFunc(&_krb5_auth_con_init, _kerberosLib, "krb5_auth_con_init") })
-	_register("krb5_auth_con_set_checksum_func", func() { purego.RegisterLibFunc(&_krb5_auth_con_set_checksum_func, _kerberosLib, "krb5_auth_con_set_checksum_func") })
+	_register("krb5_auth_con_set_checksum_func", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_set_checksum_func, _kerberosLib, "krb5_auth_con_set_checksum_func")
+	})
 	_register("krb5_auth_con_setaddrs", func() { purego.RegisterLibFunc(&_krb5_auth_con_setaddrs, _kerberosLib, "krb5_auth_con_setaddrs") })
 	_register("krb5_auth_con_setflags", func() { purego.RegisterLibFunc(&_krb5_auth_con_setflags, _kerberosLib, "krb5_auth_con_setflags") })
 	_register("krb5_auth_con_setports", func() { purego.RegisterLibFunc(&_krb5_auth_con_setports, _kerberosLib, "krb5_auth_con_setports") })
 	_register("krb5_auth_con_setrcache", func() { purego.RegisterLibFunc(&_krb5_auth_con_setrcache, _kerberosLib, "krb5_auth_con_setrcache") })
-	_register("krb5_auth_con_setrecvsubkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_setrecvsubkey, _kerberosLib, "krb5_auth_con_setrecvsubkey") })
-	_register("krb5_auth_con_setsendsubkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_setsendsubkey, _kerberosLib, "krb5_auth_con_setsendsubkey") })
-	_register("krb5_auth_con_setuseruserkey", func() { purego.RegisterLibFunc(&_krb5_auth_con_setuseruserkey, _kerberosLib, "krb5_auth_con_setuseruserkey") })
-	_register("krb5_build_principal_alloc_va", func() { purego.RegisterLibFunc(&_krb5_build_principal_alloc_va, _kerberosLib, "krb5_build_principal_alloc_va") })
+	_register("krb5_auth_con_setrecvsubkey", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_setrecvsubkey, _kerberosLib, "krb5_auth_con_setrecvsubkey")
+	})
+	_register("krb5_auth_con_setsendsubkey", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_setsendsubkey, _kerberosLib, "krb5_auth_con_setsendsubkey")
+	})
+	_register("krb5_auth_con_setuseruserkey", func() {
+		purego.RegisterLibFunc(&_krb5_auth_con_setuseruserkey, _kerberosLib, "krb5_auth_con_setuseruserkey")
+	})
+	_register("krb5_build_principal_alloc_va", func() {
+		purego.RegisterLibFunc(&_krb5_build_principal_alloc_va, _kerberosLib, "krb5_build_principal_alloc_va")
+	})
 	_register("krb5_c_block_size", func() { purego.RegisterLibFunc(&_krb5_c_block_size, _kerberosLib, "krb5_c_block_size") })
 	_register("krb5_c_checksum_length", func() { purego.RegisterLibFunc(&_krb5_c_checksum_length, _kerberosLib, "krb5_c_checksum_length") })
 	_register("krb5_c_decrypt", func() { purego.RegisterLibFunc(&_krb5_c_decrypt, _kerberosLib, "krb5_c_decrypt") })
@@ -207,9 +309,13 @@ func _loadLibrary() {
 	_register("krb5_c_enctype_compare", func() { purego.RegisterLibFunc(&_krb5_c_enctype_compare, _kerberosLib, "krb5_c_enctype_compare") })
 	_register("krb5_c_free_state", func() { purego.RegisterLibFunc(&_krb5_c_free_state, _kerberosLib, "krb5_c_free_state") })
 	_register("krb5_c_init_state", func() { purego.RegisterLibFunc(&_krb5_c_init_state, _kerberosLib, "krb5_c_init_state") })
-	_register("krb5_c_is_coll_proof_cksum", func() { purego.RegisterLibFunc(&_krb5_c_is_coll_proof_cksum, _kerberosLib, "krb5_c_is_coll_proof_cksum") })
+	_register("krb5_c_is_coll_proof_cksum", func() {
+		purego.RegisterLibFunc(&_krb5_c_is_coll_proof_cksum, _kerberosLib, "krb5_c_is_coll_proof_cksum")
+	})
 	_register("krb5_c_is_keyed_cksum", func() { purego.RegisterLibFunc(&_krb5_c_is_keyed_cksum, _kerberosLib, "krb5_c_is_keyed_cksum") })
-	_register("krb5_c_keyed_checksum_types", func() { purego.RegisterLibFunc(&_krb5_c_keyed_checksum_types, _kerberosLib, "krb5_c_keyed_checksum_types") })
+	_register("krb5_c_keyed_checksum_types", func() {
+		purego.RegisterLibFunc(&_krb5_c_keyed_checksum_types, _kerberosLib, "krb5_c_keyed_checksum_types")
+	})
 	_register("krb5_c_make_checksum", func() { purego.RegisterLibFunc(&_krb5_c_make_checksum, _kerberosLib, "krb5_c_make_checksum") })
 	_register("krb5_c_make_random_key", func() { purego.RegisterLibFunc(&_krb5_c_make_random_key, _kerberosLib, "krb5_c_make_random_key") })
 	_register("krb5_c_random_add_entropy", func() { purego.RegisterLibFunc(&_krb5_c_random_add_entropy, _kerberosLib, "krb5_c_random_add_entropy") })
@@ -217,7 +323,9 @@ func _loadLibrary() {
 	_register("krb5_c_random_os_entropy", func() { purego.RegisterLibFunc(&_krb5_c_random_os_entropy, _kerberosLib, "krb5_c_random_os_entropy") })
 	_register("krb5_c_random_seed", func() { purego.RegisterLibFunc(&_krb5_c_random_seed, _kerberosLib, "krb5_c_random_seed") })
 	_register("krb5_c_string_to_key", func() { purego.RegisterLibFunc(&_krb5_c_string_to_key, _kerberosLib, "krb5_c_string_to_key") })
-	_register("krb5_c_string_to_key_with_params", func() { purego.RegisterLibFunc(&_krb5_c_string_to_key_with_params, _kerberosLib, "krb5_c_string_to_key_with_params") })
+	_register("krb5_c_string_to_key_with_params", func() {
+		purego.RegisterLibFunc(&_krb5_c_string_to_key_with_params, _kerberosLib, "krb5_c_string_to_key_with_params")
+	})
 	_register("krb5_c_valid_cksumtype", func() { purego.RegisterLibFunc(&_krb5_c_valid_cksumtype, _kerberosLib, "krb5_c_valid_cksumtype") })
 	_register("krb5_c_valid_enctype", func() { purego.RegisterLibFunc(&_krb5_c_valid_enctype, _kerberosLib, "krb5_c_valid_enctype") })
 	_register("krb5_c_verify_checksum", func() { purego.RegisterLibFunc(&_krb5_c_verify_checksum, _kerberosLib, "krb5_c_verify_checksum") })
@@ -252,7 +360,9 @@ func _loadLibrary() {
 	_register("krb5_cccol_cursor_free", func() { purego.RegisterLibFunc(&_krb5_cccol_cursor_free, _kerberosLib, "krb5_cccol_cursor_free") })
 	_register("krb5_cccol_cursor_new", func() { purego.RegisterLibFunc(&_krb5_cccol_cursor_new, _kerberosLib, "krb5_cccol_cursor_new") })
 	_register("krb5_cccol_cursor_next", func() { purego.RegisterLibFunc(&_krb5_cccol_cursor_next, _kerberosLib, "krb5_cccol_cursor_next") })
-	_register("krb5_cccol_last_change_time", func() { purego.RegisterLibFunc(&_krb5_cccol_last_change_time, _kerberosLib, "krb5_cccol_last_change_time") })
+	_register("krb5_cccol_last_change_time", func() {
+		purego.RegisterLibFunc(&_krb5_cccol_last_change_time, _kerberosLib, "krb5_cccol_last_change_time")
+	})
 	_register("krb5_cccol_lock", func() { purego.RegisterLibFunc(&_krb5_cccol_lock, _kerberosLib, "krb5_cccol_lock") })
 	_register("krb5_cccol_unlock", func() { purego.RegisterLibFunc(&_krb5_cccol_unlock, _kerberosLib, "krb5_cccol_unlock") })
 	_register("krb5_change_password", func() { purego.RegisterLibFunc(&_krb5_change_password, _kerberosLib, "krb5_change_password") })
@@ -267,7 +377,9 @@ func _loadLibrary() {
 	_register("krb5_copy_creds", func() { purego.RegisterLibFunc(&_krb5_copy_creds, _kerberosLib, "krb5_copy_creds") })
 	_register("krb5_copy_data", func() { purego.RegisterLibFunc(&_krb5_copy_data, _kerberosLib, "krb5_copy_data") })
 	_register("krb5_copy_keyblock", func() { purego.RegisterLibFunc(&_krb5_copy_keyblock, _kerberosLib, "krb5_copy_keyblock") })
-	_register("krb5_copy_keyblock_contents", func() { purego.RegisterLibFunc(&_krb5_copy_keyblock_contents, _kerberosLib, "krb5_copy_keyblock_contents") })
+	_register("krb5_copy_keyblock_contents", func() {
+		purego.RegisterLibFunc(&_krb5_copy_keyblock_contents, _kerberosLib, "krb5_copy_keyblock_contents")
+	})
 	_register("krb5_copy_principal", func() { purego.RegisterLibFunc(&_krb5_copy_principal, _kerberosLib, "krb5_copy_principal") })
 	_register("krb5_copy_ticket", func() { purego.RegisterLibFunc(&_krb5_copy_ticket, _kerberosLib, "krb5_copy_ticket") })
 	_register("krb5_decode_ticket", func() { purego.RegisterLibFunc(&_krb5_decode_ticket, _kerberosLib, "krb5_decode_ticket") })
@@ -284,7 +396,9 @@ func _loadLibrary() {
 	_register("krb5_free_authdata", func() { purego.RegisterLibFunc(&_krb5_free_authdata, _kerberosLib, "krb5_free_authdata") })
 	_register("krb5_free_authenticator", func() { purego.RegisterLibFunc(&_krb5_free_authenticator, _kerberosLib, "krb5_free_authenticator") })
 	_register("krb5_free_checksum", func() { purego.RegisterLibFunc(&_krb5_free_checksum, _kerberosLib, "krb5_free_checksum") })
-	_register("krb5_free_checksum_contents", func() { purego.RegisterLibFunc(&_krb5_free_checksum_contents, _kerberosLib, "krb5_free_checksum_contents") })
+	_register("krb5_free_checksum_contents", func() {
+		purego.RegisterLibFunc(&_krb5_free_checksum_contents, _kerberosLib, "krb5_free_checksum_contents")
+	})
 	_register("krb5_free_cksumtypes", func() { purego.RegisterLibFunc(&_krb5_free_cksumtypes, _kerberosLib, "krb5_free_cksumtypes") })
 	_register("krb5_free_context", func() { purego.RegisterLibFunc(&_krb5_free_context, _kerberosLib, "krb5_free_context") })
 	_register("krb5_free_cred_contents", func() { purego.RegisterLibFunc(&_krb5_free_cred_contents, _kerberosLib, "krb5_free_cred_contents") })
@@ -296,44 +410,90 @@ func _loadLibrary() {
 	_register("krb5_free_error_message", func() { purego.RegisterLibFunc(&_krb5_free_error_message, _kerberosLib, "krb5_free_error_message") })
 	_register("krb5_free_host_realm", func() { purego.RegisterLibFunc(&_krb5_free_host_realm, _kerberosLib, "krb5_free_host_realm") })
 	_register("krb5_free_keyblock", func() { purego.RegisterLibFunc(&_krb5_free_keyblock, _kerberosLib, "krb5_free_keyblock") })
-	_register("krb5_free_keyblock_contents", func() { purego.RegisterLibFunc(&_krb5_free_keyblock_contents, _kerberosLib, "krb5_free_keyblock_contents") })
-	_register("krb5_free_keytab_entry_contents", func() { purego.RegisterLibFunc(&_krb5_free_keytab_entry_contents, _kerberosLib, "krb5_free_keytab_entry_contents") })
+	_register("krb5_free_keyblock_contents", func() {
+		purego.RegisterLibFunc(&_krb5_free_keyblock_contents, _kerberosLib, "krb5_free_keyblock_contents")
+	})
+	_register("krb5_free_keytab_entry_contents", func() {
+		purego.RegisterLibFunc(&_krb5_free_keytab_entry_contents, _kerberosLib, "krb5_free_keytab_entry_contents")
+	})
 	_register("krb5_free_principal", func() { purego.RegisterLibFunc(&_krb5_free_principal, _kerberosLib, "krb5_free_principal") })
 	_register("krb5_free_tgt_creds", func() { purego.RegisterLibFunc(&_krb5_free_tgt_creds, _kerberosLib, "krb5_free_tgt_creds") })
 	_register("krb5_free_ticket", func() { purego.RegisterLibFunc(&_krb5_free_ticket, _kerberosLib, "krb5_free_ticket") })
 	_register("krb5_free_unparsed_name", func() { purego.RegisterLibFunc(&_krb5_free_unparsed_name, _kerberosLib, "krb5_free_unparsed_name") })
 	_register("krb5_fwd_tgt_creds", func() { purego.RegisterLibFunc(&_krb5_fwd_tgt_creds, _kerberosLib, "krb5_fwd_tgt_creds") })
 	_register("krb5_get_credentials", func() { purego.RegisterLibFunc(&_krb5_get_credentials, _kerberosLib, "krb5_get_credentials") })
-	_register("krb5_get_credentials_renew", func() { purego.RegisterLibFunc(&_krb5_get_credentials_renew, _kerberosLib, "krb5_get_credentials_renew") })
-	_register("krb5_get_credentials_validate", func() { purego.RegisterLibFunc(&_krb5_get_credentials_validate, _kerberosLib, "krb5_get_credentials_validate") })
+	_register("krb5_get_credentials_renew", func() {
+		purego.RegisterLibFunc(&_krb5_get_credentials_renew, _kerberosLib, "krb5_get_credentials_renew")
+	})
+	_register("krb5_get_credentials_validate", func() {
+		purego.RegisterLibFunc(&_krb5_get_credentials_validate, _kerberosLib, "krb5_get_credentials_validate")
+	})
 	_register("krb5_get_default_realm", func() { purego.RegisterLibFunc(&_krb5_get_default_realm, _kerberosLib, "krb5_get_default_realm") })
 	_register("krb5_get_error_message", func() { purego.RegisterLibFunc(&_krb5_get_error_message, _kerberosLib, "krb5_get_error_message") })
 	_register("krb5_get_host_realm", func() { purego.RegisterLibFunc(&_krb5_get_host_realm, _kerberosLib, "krb5_get_host_realm") })
-	_register("krb5_get_init_creds_keytab", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_keytab, _kerberosLib, "krb5_get_init_creds_keytab") })
-	_register("krb5_get_init_creds_opt_alloc", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_alloc, _kerberosLib, "krb5_get_init_creds_opt_alloc") })
-	_register("krb5_get_init_creds_opt_free", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_free, _kerberosLib, "krb5_get_init_creds_opt_free") })
-	_register("krb5_get_init_creds_opt_init", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_init, _kerberosLib, "krb5_get_init_creds_opt_init") })
-	_register("krb5_get_init_creds_opt_set_address_list", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_address_list, _kerberosLib, "krb5_get_init_creds_opt_set_address_list") })
-	_register("krb5_get_init_creds_opt_set_canonicalize", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_canonicalize, _kerberosLib, "krb5_get_init_creds_opt_set_canonicalize") })
-	_register("krb5_get_init_creds_opt_set_change_password_prompt", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_change_password_prompt, _kerberosLib, "krb5_get_init_creds_opt_set_change_password_prompt") })
-	_register("krb5_get_init_creds_opt_set_etype_list", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_etype_list, _kerberosLib, "krb5_get_init_creds_opt_set_etype_list") })
-	_register("krb5_get_init_creds_opt_set_forwardable", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_forwardable, _kerberosLib, "krb5_get_init_creds_opt_set_forwardable") })
-	_register("krb5_get_init_creds_opt_set_pa", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_pa, _kerberosLib, "krb5_get_init_creds_opt_set_pa") })
-	_register("krb5_get_init_creds_opt_set_preauth_list", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_preauth_list, _kerberosLib, "krb5_get_init_creds_opt_set_preauth_list") })
-	_register("krb5_get_init_creds_opt_set_process_last_req", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_process_last_req, _kerberosLib, "krb5_get_init_creds_opt_set_process_last_req") })
-	_register("krb5_get_init_creds_opt_set_proxiable", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_proxiable, _kerberosLib, "krb5_get_init_creds_opt_set_proxiable") })
-	_register("krb5_get_init_creds_opt_set_renew_life", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_renew_life, _kerberosLib, "krb5_get_init_creds_opt_set_renew_life") })
-	_register("krb5_get_init_creds_opt_set_salt", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_salt, _kerberosLib, "krb5_get_init_creds_opt_set_salt") })
-	_register("krb5_get_init_creds_opt_set_tkt_life", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_tkt_life, _kerberosLib, "krb5_get_init_creds_opt_set_tkt_life") })
-	_register("krb5_get_init_creds_password", func() { purego.RegisterLibFunc(&_krb5_get_init_creds_password, _kerberosLib, "krb5_get_init_creds_password") })
-	_register("krb5_get_permitted_enctypes", func() { purego.RegisterLibFunc(&_krb5_get_permitted_enctypes, _kerberosLib, "krb5_get_permitted_enctypes") })
+	_register("krb5_get_init_creds_keytab", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_keytab, _kerberosLib, "krb5_get_init_creds_keytab")
+	})
+	_register("krb5_get_init_creds_opt_alloc", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_alloc, _kerberosLib, "krb5_get_init_creds_opt_alloc")
+	})
+	_register("krb5_get_init_creds_opt_free", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_free, _kerberosLib, "krb5_get_init_creds_opt_free")
+	})
+	_register("krb5_get_init_creds_opt_init", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_init, _kerberosLib, "krb5_get_init_creds_opt_init")
+	})
+	_register("krb5_get_init_creds_opt_set_address_list", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_address_list, _kerberosLib, "krb5_get_init_creds_opt_set_address_list")
+	})
+	_register("krb5_get_init_creds_opt_set_canonicalize", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_canonicalize, _kerberosLib, "krb5_get_init_creds_opt_set_canonicalize")
+	})
+	_register("krb5_get_init_creds_opt_set_change_password_prompt", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_change_password_prompt, _kerberosLib, "krb5_get_init_creds_opt_set_change_password_prompt")
+	})
+	_register("krb5_get_init_creds_opt_set_etype_list", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_etype_list, _kerberosLib, "krb5_get_init_creds_opt_set_etype_list")
+	})
+	_register("krb5_get_init_creds_opt_set_forwardable", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_forwardable, _kerberosLib, "krb5_get_init_creds_opt_set_forwardable")
+	})
+	_register("krb5_get_init_creds_opt_set_pa", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_pa, _kerberosLib, "krb5_get_init_creds_opt_set_pa")
+	})
+	_register("krb5_get_init_creds_opt_set_preauth_list", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_preauth_list, _kerberosLib, "krb5_get_init_creds_opt_set_preauth_list")
+	})
+	_register("krb5_get_init_creds_opt_set_process_last_req", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_process_last_req, _kerberosLib, "krb5_get_init_creds_opt_set_process_last_req")
+	})
+	_register("krb5_get_init_creds_opt_set_proxiable", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_proxiable, _kerberosLib, "krb5_get_init_creds_opt_set_proxiable")
+	})
+	_register("krb5_get_init_creds_opt_set_renew_life", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_renew_life, _kerberosLib, "krb5_get_init_creds_opt_set_renew_life")
+	})
+	_register("krb5_get_init_creds_opt_set_salt", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_salt, _kerberosLib, "krb5_get_init_creds_opt_set_salt")
+	})
+	_register("krb5_get_init_creds_opt_set_tkt_life", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_opt_set_tkt_life, _kerberosLib, "krb5_get_init_creds_opt_set_tkt_life")
+	})
+	_register("krb5_get_init_creds_password", func() {
+		purego.RegisterLibFunc(&_krb5_get_init_creds_password, _kerberosLib, "krb5_get_init_creds_password")
+	})
+	_register("krb5_get_permitted_enctypes", func() {
+		purego.RegisterLibFunc(&_krb5_get_permitted_enctypes, _kerberosLib, "krb5_get_permitted_enctypes")
+	})
 	_register("krb5_get_profile", func() { purego.RegisterLibFunc(&_krb5_get_profile, _kerberosLib, "krb5_get_profile") })
 	_register("krb5_get_prompt_types", func() { purego.RegisterLibFunc(&_krb5_get_prompt_types, _kerberosLib, "krb5_get_prompt_types") })
 	_register("krb5_get_renewed_creds", func() { purego.RegisterLibFunc(&_krb5_get_renewed_creds, _kerberosLib, "krb5_get_renewed_creds") })
 	_register("krb5_get_server_rcache", func() { purego.RegisterLibFunc(&_krb5_get_server_rcache, _kerberosLib, "krb5_get_server_rcache") })
 	_register("krb5_get_time_offsets", func() { purego.RegisterLibFunc(&_krb5_get_time_offsets, _kerberosLib, "krb5_get_time_offsets") })
 	_register("krb5_get_validated_creds", func() { purego.RegisterLibFunc(&_krb5_get_validated_creds, _kerberosLib, "krb5_get_validated_creds") })
-	_register("krb5_gss_register_acceptor_identity", func() { purego.RegisterLibFunc(&_krb5_gss_register_acceptor_identity, _kerberosLib, "krb5_gss_register_acceptor_identity") })
+	_register("krb5_gss_register_acceptor_identity", func() {
+		purego.RegisterLibFunc(&_krb5_gss_register_acceptor_identity, _kerberosLib, "krb5_gss_register_acceptor_identity")
+	})
 	_register("krb5_init_context", func() { purego.RegisterLibFunc(&_krb5_init_context, _kerberosLib, "krb5_init_context") })
 	_register("krb5_init_keyblock", func() { purego.RegisterLibFunc(&_krb5_init_keyblock, _kerberosLib, "krb5_init_keyblock") })
 	_register("krb5_init_random_key", func() { purego.RegisterLibFunc(&_krb5_init_random_key, _kerberosLib, "krb5_init_random_key") })
@@ -383,11 +543,17 @@ func _loadLibrary() {
 	_register("krb5_recvauth_version", func() { purego.RegisterLibFunc(&_krb5_recvauth_version, _kerberosLib, "krb5_recvauth_version") })
 	_register("krb5_salttype_to_string", func() { purego.RegisterLibFunc(&_krb5_salttype_to_string, _kerberosLib, "krb5_salttype_to_string") })
 	_register("krb5_sendauth", func() { purego.RegisterLibFunc(&_krb5_sendauth, _kerberosLib, "krb5_sendauth") })
-	_register("krb5_server_decrypt_ticket_keytab", func() { purego.RegisterLibFunc(&_krb5_server_decrypt_ticket_keytab, _kerberosLib, "krb5_server_decrypt_ticket_keytab") })
+	_register("krb5_server_decrypt_ticket_keytab", func() {
+		purego.RegisterLibFunc(&_krb5_server_decrypt_ticket_keytab, _kerberosLib, "krb5_server_decrypt_ticket_keytab")
+	})
 	_register("krb5_set_default_realm", func() { purego.RegisterLibFunc(&_krb5_set_default_realm, _kerberosLib, "krb5_set_default_realm") })
-	_register("krb5_set_default_tgs_enctypes", func() { purego.RegisterLibFunc(&_krb5_set_default_tgs_enctypes, _kerberosLib, "krb5_set_default_tgs_enctypes") })
+	_register("krb5_set_default_tgs_enctypes", func() {
+		purego.RegisterLibFunc(&_krb5_set_default_tgs_enctypes, _kerberosLib, "krb5_set_default_tgs_enctypes")
+	})
 	_register("krb5_set_password", func() { purego.RegisterLibFunc(&_krb5_set_password, _kerberosLib, "krb5_set_password") })
-	_register("krb5_set_password_using_ccache", func() { purego.RegisterLibFunc(&_krb5_set_password_using_ccache, _kerberosLib, "krb5_set_password_using_ccache") })
+	_register("krb5_set_password_using_ccache", func() {
+		purego.RegisterLibFunc(&_krb5_set_password_using_ccache, _kerberosLib, "krb5_set_password_using_ccache")
+	})
 	_register("krb5_set_principal_realm", func() { purego.RegisterLibFunc(&_krb5_set_principal_realm, _kerberosLib, "krb5_set_principal_realm") })
 	_register("krb5_set_real_time", func() { purego.RegisterLibFunc(&_krb5_set_real_time, _kerberosLib, "krb5_set_real_time") })
 	_register("krb5_sname_to_principal", func() { purego.RegisterLibFunc(&_krb5_sname_to_principal, _kerberosLib, "krb5_sname_to_principal") })
@@ -398,23 +564,33 @@ func _loadLibrary() {
 	_register("krb5_string_to_salttype", func() { purego.RegisterLibFunc(&_krb5_string_to_salttype, _kerberosLib, "krb5_string_to_salttype") })
 	_register("krb5_string_to_timestamp", func() { purego.RegisterLibFunc(&_krb5_string_to_timestamp, _kerberosLib, "krb5_string_to_timestamp") })
 	_register("krb5_timeofday", func() { purego.RegisterLibFunc(&_krb5_timeofday, _kerberosLib, "krb5_timeofday") })
-	_register("krb5_timestamp_to_sfstring", func() { purego.RegisterLibFunc(&_krb5_timestamp_to_sfstring, _kerberosLib, "krb5_timestamp_to_sfstring") })
+	_register("krb5_timestamp_to_sfstring", func() {
+		purego.RegisterLibFunc(&_krb5_timestamp_to_sfstring, _kerberosLib, "krb5_timestamp_to_sfstring")
+	})
 	_register("krb5_timestamp_to_string", func() { purego.RegisterLibFunc(&_krb5_timestamp_to_string, _kerberosLib, "krb5_timestamp_to_string") })
 	_register("krb5_unparse_name", func() { purego.RegisterLibFunc(&_krb5_unparse_name, _kerberosLib, "krb5_unparse_name") })
 	_register("krb5_unparse_name_ext", func() { purego.RegisterLibFunc(&_krb5_unparse_name_ext, _kerberosLib, "krb5_unparse_name_ext") })
 	_register("krb5_unparse_name_flags", func() { purego.RegisterLibFunc(&_krb5_unparse_name_flags, _kerberosLib, "krb5_unparse_name_flags") })
-	_register("krb5_unparse_name_flags_ext", func() { purego.RegisterLibFunc(&_krb5_unparse_name_flags_ext, _kerberosLib, "krb5_unparse_name_flags_ext") })
+	_register("krb5_unparse_name_flags_ext", func() {
+		purego.RegisterLibFunc(&_krb5_unparse_name_flags_ext, _kerberosLib, "krb5_unparse_name_flags_ext")
+	})
 	_register("krb5_us_timeofday", func() { purego.RegisterLibFunc(&_krb5_us_timeofday, _kerberosLib, "krb5_us_timeofday") })
 	_register("krb5_use_enctype", func() { purego.RegisterLibFunc(&_krb5_use_enctype, _kerberosLib, "krb5_use_enctype") })
 	_register("krb5_verify_checksum", func() { purego.RegisterLibFunc(&_krb5_verify_checksum, _kerberosLib, "krb5_verify_checksum") })
 	_register("krb5_verify_init_creds", func() { purego.RegisterLibFunc(&_krb5_verify_init_creds, _kerberosLib, "krb5_verify_init_creds") })
-	_register("krb5_verify_init_creds_opt_init", func() { purego.RegisterLibFunc(&_krb5_verify_init_creds_opt_init, _kerberosLib, "krb5_verify_init_creds_opt_init") })
-	_register("krb5_verify_init_creds_opt_set_ap_req_nofail", func() { purego.RegisterLibFunc(&_krb5_verify_init_creds_opt_set_ap_req_nofail, _kerberosLib, "krb5_verify_init_creds_opt_set_ap_req_nofail") })
+	_register("krb5_verify_init_creds_opt_init", func() {
+		purego.RegisterLibFunc(&_krb5_verify_init_creds_opt_init, _kerberosLib, "krb5_verify_init_creds_opt_init")
+	})
+	_register("krb5_verify_init_creds_opt_set_ap_req_nofail", func() {
+		purego.RegisterLibFunc(&_krb5_verify_init_creds_opt_set_ap_req_nofail, _kerberosLib, "krb5_verify_init_creds_opt_set_ap_req_nofail")
+	})
 	_register("krb5_vset_error_message", func() { purego.RegisterLibFunc(&_krb5_vset_error_message, _kerberosLib, "krb5_vset_error_message") })
 	_register("profile_abandon", func() { purego.RegisterLibFunc(&_profile_abandon, _kerberosLib, "profile_abandon") })
 	_register("profile_add_relation", func() { purego.RegisterLibFunc(&_profile_add_relation, _kerberosLib, "profile_add_relation") })
 	_register("profile_clear_relation", func() { purego.RegisterLibFunc(&_profile_clear_relation, _kerberosLib, "profile_clear_relation") })
-	_register("profile_configuration_updated", func() { purego.RegisterLibFunc(&_profile_configuration_updated, _kerberosLib, "profile_configuration_updated") })
+	_register("profile_configuration_updated", func() {
+		purego.RegisterLibFunc(&_profile_configuration_updated, _kerberosLib, "profile_configuration_updated")
+	})
 	_register("profile_flush", func() { purego.RegisterLibFunc(&_profile_flush, _kerberosLib, "profile_flush") })
 	_register("profile_flush_to_buffer", func() { purego.RegisterLibFunc(&_profile_flush_to_buffer, _kerberosLib, "profile_flush_to_buffer") })
 	_register("profile_flush_to_file", func() { purego.RegisterLibFunc(&_profile_flush_to_file, _kerberosLib, "profile_flush_to_file") })
@@ -422,9 +598,13 @@ func _loadLibrary() {
 	_register("profile_free_list", func() { purego.RegisterLibFunc(&_profile_free_list, _kerberosLib, "profile_free_list") })
 	_register("profile_get_boolean", func() { purego.RegisterLibFunc(&_profile_get_boolean, _kerberosLib, "profile_get_boolean") })
 	_register("profile_get_integer", func() { purego.RegisterLibFunc(&_profile_get_integer, _kerberosLib, "profile_get_integer") })
-	_register("profile_get_relation_names", func() { purego.RegisterLibFunc(&_profile_get_relation_names, _kerberosLib, "profile_get_relation_names") })
+	_register("profile_get_relation_names", func() {
+		purego.RegisterLibFunc(&_profile_get_relation_names, _kerberosLib, "profile_get_relation_names")
+	})
 	_register("profile_get_string", func() { purego.RegisterLibFunc(&_profile_get_string, _kerberosLib, "profile_get_string") })
-	_register("profile_get_subsection_names", func() { purego.RegisterLibFunc(&_profile_get_subsection_names, _kerberosLib, "profile_get_subsection_names") })
+	_register("profile_get_subsection_names", func() {
+		purego.RegisterLibFunc(&_profile_get_subsection_names, _kerberosLib, "profile_get_subsection_names")
+	})
 	_register("profile_get_values", func() { purego.RegisterLibFunc(&_profile_get_values, _kerberosLib, "profile_get_values") })
 	_register("profile_init", func() { purego.RegisterLibFunc(&_profile_init, _kerberosLib, "profile_init") })
 	_register("profile_init_path", func() { purego.RegisterLibFunc(&_profile_init_path, _kerberosLib, "profile_init_path") })

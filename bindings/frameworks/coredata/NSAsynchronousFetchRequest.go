@@ -15,12 +15,12 @@ type NSAsynchronousFetchRequest[ResultType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSAsynchronousFetchRequest = _objcClass("NSAsynchronousFetchRequest")
+	_clsNSAsynchronousFetchRequest                                    = _objcClass("NSAsynchronousFetchRequest")
 	_nSAsynchronousFetchRequestSelInitWithFetchRequestCompletionBlock = objc.RegisterName("initWithFetchRequest:completionBlock:")
-	_nSAsynchronousFetchRequestSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSAsynchronousFetchRequestSelCompletionBlock = objc.RegisterName("completionBlock")
-	_nSAsynchronousFetchRequestSelEstimatedResultCount = objc.RegisterName("estimatedResultCount")
-	_nSAsynchronousFetchRequestSelSetEstimatedResultCount = objc.RegisterName("setEstimatedResultCount:")
+	_nSAsynchronousFetchRequestSelFetchRequest                        = objc.RegisterName("fetchRequest")
+	_nSAsynchronousFetchRequestSelCompletionBlock                     = objc.RegisterName("completionBlock")
+	_nSAsynchronousFetchRequestSelEstimatedResultCount                = objc.RegisterName("estimatedResultCount")
+	_nSAsynchronousFetchRequestSelSetEstimatedResultCount             = objc.RegisterName("setEstimatedResultCount:")
 )
 
 func NSAsynchronousFetchRequestFromID[ResultType purego.AnyObject](id objc.ID) *NSAsynchronousFetchRequest[ResultType] {
@@ -45,13 +45,17 @@ func (o *NSAsynchronousFetchRequest[ResultType]) InitWithFetchRequestCompletionB
 		defer __block_blk.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAsynchronousFetchRequestSelInitWithFetchRequestCompletionBlock, request.Ptr(), __block_blk)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAsynchronousFetchRequestFromID[ResultType](_ret)
 }
 
 func (o *NSAsynchronousFetchRequest[ResultType]) FetchRequest() *NSFetchRequest[ResultType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAsynchronousFetchRequestSelFetchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFetchRequestFromID[ResultType](_ret)
 }
 
@@ -68,4 +72,3 @@ func (o *NSAsynchronousFetchRequest[ResultType]) EstimatedResultCount() int {
 func (o *NSAsynchronousFetchRequest[ResultType]) SetEstimatedResultCount(estimatedResultCount int) {
 	o.Ptr().Send(_nSAsynchronousFetchRequestSelSetEstimatedResultCount, estimatedResultCount)
 }
-

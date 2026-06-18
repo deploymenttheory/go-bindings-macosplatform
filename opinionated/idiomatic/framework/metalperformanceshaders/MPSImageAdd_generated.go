@@ -124,11 +124,17 @@ func (x *ImageAdd) WithLabel(label string) *ImageAdd {
 	return x
 }
 
-func (x *ImageAdd) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
+func (x *ImageAdd) asImageArithmetic() *mpsimage.MPSImageArithmetic {
+	return &x.inner.MPSImageArithmetic
+}
 
-func (x *ImageAdd) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
+func (x *ImageAdd) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
+}
 
-func (x *ImageAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel }
+func (x *ImageAdd) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel
+}
 
 // ImageAddable is the interface implemented by [ImageAdd], for mocking and DI.
 type ImageAddable interface {
@@ -150,4 +156,3 @@ type ImageAddable interface {
 }
 
 var _ ImageAddable = (*ImageAdd)(nil)
-

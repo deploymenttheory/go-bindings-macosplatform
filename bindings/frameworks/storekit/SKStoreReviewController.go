@@ -17,7 +17,7 @@ type SKStoreReviewController struct {
 }
 
 var (
-	_clsSKStoreReviewController = _objcClass("SKStoreReviewController")
+	_clsSKStoreReviewController              = _objcClass("SKStoreReviewController")
 	_sKStoreReviewControllerSelRequestReview = objc.RegisterName("requestReview")
 )
 
@@ -36,4 +36,3 @@ func SKStoreReviewControllerFromID(id objc.ID) *SKStoreReviewController {
 func SKStoreReviewControllerRequestReview() {
 	objc.ID(_clsSKStoreReviewController).Send(_sKStoreReviewControllerSelRequestReview)
 }
-

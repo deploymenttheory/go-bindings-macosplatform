@@ -17,22 +17,22 @@ type AVCaptureTimecodeGenerator struct {
 }
 
 var (
-	_clsAVCaptureTimecodeGenerator = _objcClass("AVCaptureTimecodeGenerator")
-	_aVCaptureTimecodeGeneratorSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
+	_clsAVCaptureTimecodeGenerator                                       = _objcClass("AVCaptureTimecodeGenerator")
+	_aVCaptureTimecodeGeneratorSelSetDelegateQueue                       = objc.RegisterName("setDelegate:queue:")
 	_aVCaptureTimecodeGeneratorSelStartSynchronizationWithTimecodeSource = objc.RegisterName("startSynchronizationWithTimecodeSource:")
-	_aVCaptureTimecodeGeneratorSelGenerateInitialTimecode = objc.RegisterName("generateInitialTimecode")
-	_aVCaptureTimecodeGeneratorSelAvailableSources = objc.RegisterName("availableSources")
-	_aVCaptureTimecodeGeneratorSelCurrentSource = objc.RegisterName("currentSource")
-	_aVCaptureTimecodeGeneratorSelDelegate = objc.RegisterName("delegate")
-	_aVCaptureTimecodeGeneratorSelDelegateCallbackQueue = objc.RegisterName("delegateCallbackQueue")
-	_aVCaptureTimecodeGeneratorSelSynchronizationTimeout = objc.RegisterName("synchronizationTimeout")
-	_aVCaptureTimecodeGeneratorSelSetSynchronizationTimeout = objc.RegisterName("setSynchronizationTimeout:")
-	_aVCaptureTimecodeGeneratorSelTimecodeAlignmentOffset = objc.RegisterName("timecodeAlignmentOffset")
-	_aVCaptureTimecodeGeneratorSelSetTimecodeAlignmentOffset = objc.RegisterName("setTimecodeAlignmentOffset:")
-	_aVCaptureTimecodeGeneratorSelTimecodeFrameDuration = objc.RegisterName("timecodeFrameDuration")
-	_aVCaptureTimecodeGeneratorSelSetTimecodeFrameDuration = objc.RegisterName("setTimecodeFrameDuration:")
-	_aVCaptureTimecodeGeneratorSelFrameCountSource = objc.RegisterName("frameCountSource")
-	_aVCaptureTimecodeGeneratorSelRealTimeClockSource = objc.RegisterName("realTimeClockSource")
+	_aVCaptureTimecodeGeneratorSelGenerateInitialTimecode                = objc.RegisterName("generateInitialTimecode")
+	_aVCaptureTimecodeGeneratorSelAvailableSources                       = objc.RegisterName("availableSources")
+	_aVCaptureTimecodeGeneratorSelCurrentSource                          = objc.RegisterName("currentSource")
+	_aVCaptureTimecodeGeneratorSelDelegate                               = objc.RegisterName("delegate")
+	_aVCaptureTimecodeGeneratorSelDelegateCallbackQueue                  = objc.RegisterName("delegateCallbackQueue")
+	_aVCaptureTimecodeGeneratorSelSynchronizationTimeout                 = objc.RegisterName("synchronizationTimeout")
+	_aVCaptureTimecodeGeneratorSelSetSynchronizationTimeout              = objc.RegisterName("setSynchronizationTimeout:")
+	_aVCaptureTimecodeGeneratorSelTimecodeAlignmentOffset                = objc.RegisterName("timecodeAlignmentOffset")
+	_aVCaptureTimecodeGeneratorSelSetTimecodeAlignmentOffset             = objc.RegisterName("setTimecodeAlignmentOffset:")
+	_aVCaptureTimecodeGeneratorSelTimecodeFrameDuration                  = objc.RegisterName("timecodeFrameDuration")
+	_aVCaptureTimecodeGeneratorSelSetTimecodeFrameDuration               = objc.RegisterName("setTimecodeFrameDuration:")
+	_aVCaptureTimecodeGeneratorSelFrameCountSource                       = objc.RegisterName("frameCountSource")
+	_aVCaptureTimecodeGeneratorSelRealTimeClockSource                    = objc.RegisterName("realTimeClockSource")
 )
 
 func AVCaptureTimecodeGeneratorFromID(id objc.ID) *AVCaptureTimecodeGenerator {
@@ -45,7 +45,7 @@ func AVCaptureTimecodeGeneratorFromID(id objc.ID) *AVCaptureTimecodeGenerator {
 	return o
 }
 
-// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks. - Parameter delegate: An object conforming to the ``AVCaptureTimecodeGeneratorDelegate`` protocol. - Parameter callbackQueue: The dispatch queue on which the delegate methods are invoked. The `callbackQueue` parameter may not be `nil`, except when setting the ``AVCaptureTimecodeGeneratorDelegate`` to `nil`, otherwise ``setDelegate:queue:`` throws an `NSInvalidArgumentException`. Use this method to configure a delegate that handles timecode updates. The specified `queue` ensures thread-safe invocation of delegate methods.
+// Assigns a delegate to receive real-time timecode updates and specifies a queue for callbacks. - Parameter delegate: An object conforming to the “AVCaptureTimecodeGeneratorDelegate“ protocol. - Parameter callbackQueue: The dispatch queue on which the delegate methods are invoked. The `callbackQueue` parameter may not be `nil`, except when setting the “AVCaptureTimecodeGeneratorDelegate“ to `nil`, otherwise “setDelegate:queue:“ throws an `NSInvalidArgumentException`. Use this method to configure a delegate that handles timecode updates. The specified `queue` ensures thread-safe invocation of delegate methods.
 func (o *AVCaptureTimecodeGenerator) SetDelegateQueue(delegate AVCaptureTimecodeGeneratorDelegate, callbackQueue *foundation.NSObject) {
 	o.Ptr().Send(_aVCaptureTimecodeGeneratorSelSetDelegateQueue, delegate, callbackQueue.Ptr())
 }
@@ -55,40 +55,46 @@ func (o *AVCaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(sour
 	o.Ptr().Send(_aVCaptureTimecodeGeneratorSelStartSynchronizationWithTimecodeSource, source.Ptr())
 }
 
-// Generates an initial timecode intended to be the first in a sequence. - Returns: A populated ``AVCaptureTimecode`` structure.
+// Generates an initial timecode intended to be the first in a sequence. - Returns: A populated “AVCaptureTimecode“ structure.
 func (o *AVCaptureTimecodeGenerator) GenerateInitialTimecode() AVCaptureTimecode {
 	_ret := objc.Send[AVCaptureTimecode](o.Ptr(), _aVCaptureTimecodeGeneratorSelGenerateInitialTimecode)
 	return _ret
 }
 
-// An array of available timecode synchronization sources that can be used by the timecode generator. This property provides a list of ``AVCaptureTimecodeSource`` objects representing the available timecode sources with which the generator can synchronize. The sources may include built-in options such as the frame counter and real-time clock, as well as dynamically detected sources such as connected MIDI or HID devices. This array is key-value observable, allowing you to monitor changes in real-time. For example, when a new MIDI device is connected, the array is updated to include the corresponding timecode source. - Returns: A read-only array of ``AVCaptureTimecodeSource`` objects representing the available timecode synchronization sources.
+// An array of available timecode synchronization sources that can be used by the timecode generator. This property provides a list of “AVCaptureTimecodeSource“ objects representing the available timecode sources with which the generator can synchronize. The sources may include built-in options such as the frame counter and real-time clock, as well as dynamically detected sources such as connected MIDI or HID devices. This array is key-value observable, allowing you to monitor changes in real-time. For example, when a new MIDI device is connected, the array is updated to include the corresponding timecode source. - Returns: A read-only array of “AVCaptureTimecodeSource“ objects representing the available timecode synchronization sources.
 func (o *AVCaptureTimecodeGenerator) AvailableSources() *foundation.NSArray[*AVCaptureTimecodeSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureTimecodeGeneratorSelAvailableSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureTimecodeSource](_ret)
 }
 
-// The active timecode source used by ``AVCaptureTimecodeGenerator`` to maintain clock synchronization for accurate timecode generation. Indicates the active timecode source, as defined in the ``AVCaptureTimecodeSynchronizationSourceType`` enum. If an ``AVCaptureTimecodeGenerator`` becomes disconnected from its source, it continues generating timecodes using historical data from its ring buffer. This approach allows the generator to maintain synchronization during brief disruptions, as is common in cinema workflows where timecode signals may experience discontinuities.
+// The active timecode source used by “AVCaptureTimecodeGenerator“ to maintain clock synchronization for accurate timecode generation. Indicates the active timecode source, as defined in the “AVCaptureTimecodeSynchronizationSourceType“ enum. If an “AVCaptureTimecodeGenerator“ becomes disconnected from its source, it continues generating timecodes using historical data from its ring buffer. This approach allows the generator to maintain synchronization during brief disruptions, as is common in cinema workflows where timecode signals may experience discontinuities.
 func (o *AVCaptureTimecodeGenerator) CurrentSource() *AVCaptureTimecodeSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureTimecodeGeneratorSelCurrentSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureTimecodeSourceFromID(_ret)
 }
 
-// The delegate that receives timecode updates from the timecode generator. You can use your ``delegate`` to receive real-time timecode updates. Implement the ``timecodeGenerator:didReceiveUpdate:`` method in your delegate to handle updates.
+// The delegate that receives timecode updates from the timecode generator. You can use your “delegate“ to receive real-time timecode updates. Implement the “timecodeGenerator:didReceiveUpdate:“ method in your delegate to handle updates.
 func (o *AVCaptureTimecodeGenerator) Delegate() AVCaptureTimecodeGeneratorDelegate {
 	_ret := objc.Send[AVCaptureTimecodeGeneratorDelegate](o.Ptr(), _aVCaptureTimecodeGeneratorSelDelegate)
 	return _ret
 }
 
-// The dispatch queue on which delegate callbacks are invoked. Provides the queue set in ``setDelegate:queue:``. If no delegate is assigned, this property is `nil`.
+// The dispatch queue on which delegate callbacks are invoked. Provides the queue set in “setDelegate:queue:“. If no delegate is assigned, this property is `nil`.
 func (o *AVCaptureTimecodeGenerator) DelegateCallbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureTimecodeGeneratorSelDelegateCallbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
-// The maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the ``AVCaptureTimecodeGenerator`` will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your ``AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:`` delegate method fires, informing you of the event. The default value is 15 seconds.
+// The maximum time interval allowed for source synchronization attempts before timing out. This property specifies the duration, in seconds, that the “AVCaptureTimecodeGenerator“ will attempt to synchronize with a timecode source before timing out if synchronization cannot be achieved. If this threshold is exceeded, the synchronization status updates to reflect a timeout, and your “AVCaptureTimecodeGeneratorDelegate/timecodeGenerator:transitionedToSynchronizationStatus:forSource:“ delegate method fires, informing you of the event. The default value is 15 seconds.
 func (o *AVCaptureTimecodeGenerator) SynchronizationTimeout() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _aVCaptureTimecodeGeneratorSelSynchronizationTimeout)
 	return _ret
@@ -121,14 +127,17 @@ func (o *AVCaptureTimecodeGenerator) SetTimecodeFrameDuration(timecodeFrameDurat
 // A frame counter timecode source that operates independently of any internal or external synchronization. This class property represents a standalone timecode source that advances based purely on frame count, independent of any real-time or external synchronization. It is ideal for scenarios where a simple, self-contained timing reference is sufficient, without requiring alignment to system clocks or external devices.
 func AVCaptureTimecodeGeneratorFrameCountSource() *AVCaptureTimecodeSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureTimecodeGenerator), _aVCaptureTimecodeGeneratorSelFrameCountSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureTimecodeSourceFromID(_ret)
 }
 
 // A predefined timecode source synchronized to the real-time system clock. This class property provides a default timecode source based on the real-time system clock, requiring no external device. It is ideal for live events or scenarios where alignment with the current time of day is necessary.
 func AVCaptureTimecodeGeneratorRealTimeClockSource() *AVCaptureTimecodeSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureTimecodeGenerator), _aVCaptureTimecodeGeneratorSelRealTimeClockSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureTimecodeSourceFromID(_ret)
 }
-

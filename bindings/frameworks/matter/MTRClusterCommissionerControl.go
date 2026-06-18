@@ -18,16 +18,16 @@ type MTRClusterCommissionerControl struct {
 }
 
 var (
-	_clsMTRClusterCommissionerControl = _objcClass("MTRClusterCommissionerControl")
+	_clsMTRClusterCommissionerControl                                                                                    = _objcClass("MTRClusterCommissionerControl")
 	_mTRClusterCommissionerControlSelRequestCommissioningApprovalWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("requestCommissioningApprovalWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterCommissionerControlSelCommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("commissionNodeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterCommissionerControlSelReadAttributeSupportedDeviceCategoriesWithParams = objc.RegisterName("readAttributeSupportedDeviceCategoriesWithParams:")
-	_mTRClusterCommissionerControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterCommissionerControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterCommissionerControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterCommissionerControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterCommissionerControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterCommissionerControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterCommissionerControlSelCommissionNodeWithParamsExpectedValuesExpectedValueIntervalCompletion               = objc.RegisterName("commissionNodeWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterCommissionerControlSelReadAttributeSupportedDeviceCategoriesWithParams                                    = objc.RegisterName("readAttributeSupportedDeviceCategoriesWithParams:")
+	_mTRClusterCommissionerControlSelReadAttributeGeneratedCommandListWithParams                                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterCommissionerControlSelReadAttributeAcceptedCommandListWithParams                                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterCommissionerControlSelReadAttributeAttributeListWithParams                                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterCommissionerControlSelReadAttributeFeatureMapWithParams                                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterCommissionerControlSelReadAttributeClusterRevisionWithParams                                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterCommissionerControlSelInitWithDeviceEndpointIDQueue                                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterCommissionerControlFromID(id objc.ID) *MTRClusterCommissionerControl {
@@ -98,7 +98,8 @@ func (o *MTRClusterCommissionerControl) ReadAttributeClusterRevisionWithParams(p
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterCommissionerControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterCommissionerControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterCommissionerControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterCommissionerControlFromID(_ret)
 }
-

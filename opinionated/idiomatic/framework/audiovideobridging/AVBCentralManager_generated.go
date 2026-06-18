@@ -65,4 +65,3 @@ type CentralManagerable interface {
 }
 
 var _ CentralManagerable = (*CentralManager)(nil)
-

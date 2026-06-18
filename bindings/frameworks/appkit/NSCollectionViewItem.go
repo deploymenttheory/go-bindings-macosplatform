@@ -16,16 +16,16 @@ type NSCollectionViewItem struct {
 }
 
 var (
-	_clsNSCollectionViewItem = _objcClass("NSCollectionViewItem")
-	_nSCollectionViewItemSelCollectionView = objc.RegisterName("collectionView")
-	_nSCollectionViewItemSelIsSelected = objc.RegisterName("isSelected")
-	_nSCollectionViewItemSelSetSelected = objc.RegisterName("setSelected:")
-	_nSCollectionViewItemSelHighlightState = objc.RegisterName("highlightState")
-	_nSCollectionViewItemSelSetHighlightState = objc.RegisterName("setHighlightState:")
-	_nSCollectionViewItemSelImageView = objc.RegisterName("imageView")
-	_nSCollectionViewItemSelSetImageView = objc.RegisterName("setImageView:")
-	_nSCollectionViewItemSelTextField = objc.RegisterName("textField")
-	_nSCollectionViewItemSelSetTextField = objc.RegisterName("setTextField:")
+	_clsNSCollectionViewItem                        = _objcClass("NSCollectionViewItem")
+	_nSCollectionViewItemSelCollectionView          = objc.RegisterName("collectionView")
+	_nSCollectionViewItemSelIsSelected              = objc.RegisterName("isSelected")
+	_nSCollectionViewItemSelSetSelected             = objc.RegisterName("setSelected:")
+	_nSCollectionViewItemSelHighlightState          = objc.RegisterName("highlightState")
+	_nSCollectionViewItemSelSetHighlightState       = objc.RegisterName("setHighlightState:")
+	_nSCollectionViewItemSelImageView               = objc.RegisterName("imageView")
+	_nSCollectionViewItemSelSetImageView            = objc.RegisterName("setImageView:")
+	_nSCollectionViewItemSelTextField               = objc.RegisterName("textField")
+	_nSCollectionViewItemSelSetTextField            = objc.RegisterName("setTextField:")
 	_nSCollectionViewItemSelDraggingImageComponents = objc.RegisterName("draggingImageComponents")
 )
 
@@ -41,7 +41,9 @@ func NSCollectionViewItemFromID(id objc.ID) *NSCollectionViewItem {
 
 func (o *NSCollectionViewItem) CollectionView() *NSCollectionView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelCollectionView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionViewFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *NSCollectionViewItem) SetHighlightState(highlightState NSCollectionView
 
 func (o *NSCollectionViewItem) ImageView() *NSImageView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelImageView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageViewFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *NSCollectionViewItem) SetImageView(imageView *NSImageView) {
 
 func (o *NSCollectionViewItem) TextField() *NSTextField {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelTextField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFieldFromID(_ret)
 }
 
@@ -85,7 +91,8 @@ func (o *NSCollectionViewItem) SetTextField(textField *NSTextField) {
 
 func (o *NSCollectionViewItem) DraggingImageComponents() *foundation.NSArray[*NSDraggingImageComponent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionViewItemSelDraggingImageComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSDraggingImageComponent](_ret)
 }
-

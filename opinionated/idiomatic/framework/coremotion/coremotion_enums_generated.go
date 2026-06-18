@@ -12,9 +12,9 @@ type CMAuthorizationStatus int64
 
 const (
 	CMAuthorizationStatusNotDetermined CMAuthorizationStatus = 0
-	CMAuthorizationStatusRestricted CMAuthorizationStatus = 1
-	CMAuthorizationStatusDenied CMAuthorizationStatus = 2
-	CMAuthorizationStatusAuthorized CMAuthorizationStatus = 3
+	CMAuthorizationStatusRestricted    CMAuthorizationStatus = 1
+	CMAuthorizationStatusDenied        CMAuthorizationStatus = 2
+	CMAuthorizationStatusAuthorized    CMAuthorizationStatus = 3
 )
 
 func (e CMAuthorizationStatus) String() string {
@@ -35,8 +35,8 @@ func (e CMAuthorizationStatus) String() string {
 type CMDeviceMotionSensorLocation int64
 
 const (
-	CMDeviceMotionSensorLocationDefault CMDeviceMotionSensorLocation = 0
-	CMDeviceMotionSensorLocationHeadphoneLeft CMDeviceMotionSensorLocation = 1
+	CMDeviceMotionSensorLocationDefault        CMDeviceMotionSensorLocation = 0
+	CMDeviceMotionSensorLocationHeadphoneLeft  CMDeviceMotionSensorLocation = 1
 	CMDeviceMotionSensorLocationHeadphoneRight CMDeviceMotionSensorLocation = 2
 )
 
@@ -57,7 +57,7 @@ type CMHeadphoneActivityStatus int64
 
 const (
 	CMHeadphoneActivityStatusDisconnected CMHeadphoneActivityStatus = 0
-	CMHeadphoneActivityStatusConnected CMHeadphoneActivityStatus = 1
+	CMHeadphoneActivityStatusConnected    CMHeadphoneActivityStatus = 1
 )
 
 func (e CMHeadphoneActivityStatus) String() string {
@@ -74,9 +74,9 @@ func (e CMHeadphoneActivityStatus) String() string {
 type CMMotionActivityConfidence int64
 
 const (
-	CMMotionActivityConfidenceLow CMMotionActivityConfidence = 0
+	CMMotionActivityConfidenceLow    CMMotionActivityConfidence = 0
 	CMMotionActivityConfidenceMedium CMMotionActivityConfidence = 1
-	CMMotionActivityConfidenceHigh CMMotionActivityConfidence = 2
+	CMMotionActivityConfidenceHigh   CMMotionActivityConfidence = 2
 )
 
 func (e CMMotionActivityConfidence) String() string {
@@ -96,8 +96,8 @@ type CMOdometerOriginDevice int64
 
 const (
 	CMOdometerOriginDeviceUnknown CMOdometerOriginDevice = 0
-	CMOdometerOriginDeviceLocal CMOdometerOriginDevice = 1
-	CMOdometerOriginDeviceRemote CMOdometerOriginDevice = 2
+	CMOdometerOriginDeviceLocal   CMOdometerOriginDevice = 1
+	CMOdometerOriginDeviceRemote  CMOdometerOriginDevice = 2
 )
 
 func (e CMOdometerOriginDevice) String() string {
@@ -116,7 +116,7 @@ func (e CMOdometerOriginDevice) String() string {
 type CMPedometerEventType int64
 
 const (
-	CMPedometerEventTypePause CMPedometerEventType = 0
+	CMPedometerEventTypePause  CMPedometerEventType = 0
 	CMPedometerEventTypeResume CMPedometerEventType = 1
 )
 
@@ -130,4 +130,3 @@ func (e CMPedometerEventType) String() string {
 		return fmt.Sprintf("CMPedometerEventType(%d)", int64(e))
 	}
 }
-

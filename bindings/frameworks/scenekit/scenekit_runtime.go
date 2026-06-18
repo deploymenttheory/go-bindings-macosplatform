@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_scenekitLib uintptr
-	_loadOnce sync.Once
+	_scenekitLib   uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("SCNExportJavaScriptModule", func() { purego.RegisterLibFunc(&_fnSCNExportJavaScriptModule, _scenekitLib, "SCNExportJavaScriptModule") })
+	_register("SCNExportJavaScriptModule", func() {
+		purego.RegisterLibFunc(&_fnSCNExportJavaScriptModule, _scenekitLib, "SCNExportJavaScriptModule")
+	})
 	_register("SCNMatrix4EqualToMatrix4", func() { purego.RegisterLibFunc(&_fnSCNMatrix4EqualToMatrix4, _scenekitLib, "SCNMatrix4EqualToMatrix4") })
 	_register("SCNMatrix4FromGLKMatrix4", func() { purego.RegisterLibFunc(&_fnSCNMatrix4FromGLKMatrix4, _scenekitLib, "SCNMatrix4FromGLKMatrix4") })
 	_register("SCNMatrix4FromMat4", func() { purego.RegisterLibFunc(&_fnSCNMatrix4FromMat4, _scenekitLib, "SCNMatrix4FromMat4") })
@@ -56,7 +58,9 @@ func _loadLibrary() {
 	_register("SCNMatrix4IsIdentity", func() { purego.RegisterLibFunc(&_fnSCNMatrix4IsIdentity, _scenekitLib, "SCNMatrix4IsIdentity") })
 	_register("SCNMatrix4MakeRotation", func() { purego.RegisterLibFunc(&_fnSCNMatrix4MakeRotation, _scenekitLib, "SCNMatrix4MakeRotation") })
 	_register("SCNMatrix4MakeScale", func() { purego.RegisterLibFunc(&_fnSCNMatrix4MakeScale, _scenekitLib, "SCNMatrix4MakeScale") })
-	_register("SCNMatrix4MakeTranslation", func() { purego.RegisterLibFunc(&_fnSCNMatrix4MakeTranslation, _scenekitLib, "SCNMatrix4MakeTranslation") })
+	_register("SCNMatrix4MakeTranslation", func() {
+		purego.RegisterLibFunc(&_fnSCNMatrix4MakeTranslation, _scenekitLib, "SCNMatrix4MakeTranslation")
+	})
 	_register("SCNMatrix4Mult", func() { purego.RegisterLibFunc(&_fnSCNMatrix4Mult, _scenekitLib, "SCNMatrix4Mult") })
 	_register("SCNMatrix4Rotate", func() { purego.RegisterLibFunc(&_fnSCNMatrix4Rotate, _scenekitLib, "SCNMatrix4Rotate") })
 	_register("SCNMatrix4Scale", func() { purego.RegisterLibFunc(&_fnSCNMatrix4Scale, _scenekitLib, "SCNMatrix4Scale") })

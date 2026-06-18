@@ -16,12 +16,12 @@ type MKCompassButton struct {
 }
 
 var (
-	_clsMKCompassButton = _objcClass("MKCompassButton")
+	_clsMKCompassButton                         = _objcClass("MKCompassButton")
 	_mKCompassButtonSelCompassButtonWithMapView = objc.RegisterName("compassButtonWithMapView:")
-	_mKCompassButtonSelMapView = objc.RegisterName("mapView")
-	_mKCompassButtonSelSetMapView = objc.RegisterName("setMapView:")
-	_mKCompassButtonSelCompassVisibility = objc.RegisterName("compassVisibility")
-	_mKCompassButtonSelSetCompassVisibility = objc.RegisterName("setCompassVisibility:")
+	_mKCompassButtonSelMapView                  = objc.RegisterName("mapView")
+	_mKCompassButtonSelSetMapView               = objc.RegisterName("setMapView:")
+	_mKCompassButtonSelCompassVisibility        = objc.RegisterName("compassVisibility")
+	_mKCompassButtonSelSetCompassVisibility     = objc.RegisterName("setCompassVisibility:")
 )
 
 func MKCompassButtonFromID(id objc.ID) *MKCompassButton {
@@ -36,13 +36,17 @@ func MKCompassButtonFromID(id objc.ID) *MKCompassButton {
 
 func MKCompassButtonCompassButtonWithMapView(mapView *MKMapView) *MKCompassButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMKCompassButton), _mKCompassButtonSelCompassButtonWithMapView, mapView.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKCompassButtonFromID(_ret)
 }
 
 func (o *MKCompassButton) MapView() *MKMapView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKCompassButtonSelMapView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapViewFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MKCompassButton) CompassVisibility() MKFeatureVisibility {
 func (o *MKCompassButton) SetCompassVisibility(compassVisibility MKFeatureVisibility) {
 	o.Ptr().Send(_mKCompassButtonSelSetCompassVisibility, compassVisibility)
 }
-

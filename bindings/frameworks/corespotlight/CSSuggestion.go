@@ -16,11 +16,11 @@ type CSSuggestion struct {
 }
 
 var (
-	_clsCSSuggestion = _objcClass("CSSuggestion")
-	_cSSuggestionSelCompareByRank = objc.RegisterName("compareByRank:")
-	_cSSuggestionSelCompare = objc.RegisterName("compare:")
+	_clsCSSuggestion                              = _objcClass("CSSuggestion")
+	_cSSuggestionSelCompareByRank                 = objc.RegisterName("compareByRank:")
+	_cSSuggestionSelCompare                       = objc.RegisterName("compare:")
 	_cSSuggestionSelLocalizedAttributedSuggestion = objc.RegisterName("localizedAttributedSuggestion")
-	_cSSuggestionSelSuggestionKind = objc.RegisterName("suggestionKind")
+	_cSSuggestionSelSuggestionKind                = objc.RegisterName("suggestionKind")
 )
 
 func CSSuggestionFromID(id objc.ID) *CSSuggestion {
@@ -45,7 +45,9 @@ func (o *CSSuggestion) Compare(other *CSSuggestion) foundation.NSComparisonResul
 
 func (o *CSSuggestion) LocalizedAttributedSuggestion() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cSSuggestionSelLocalizedAttributedSuggestion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -53,4 +55,3 @@ func (o *CSSuggestion) SuggestionKind() CSSuggestionKind {
 	_ret := objc.Send[CSSuggestionKind](o.Ptr(), _cSSuggestionSelSuggestionKind)
 	return _ret
 }
-

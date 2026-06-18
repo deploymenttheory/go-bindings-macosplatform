@@ -17,17 +17,17 @@ type NSTextAttachmentViewProvider struct {
 }
 
 var (
-	_clsNSTextAttachmentViewProvider = _objcClass("NSTextAttachmentViewProvider")
-	_nSTextAttachmentViewProviderSelInitWithTextAttachmentParentViewTextLayoutManagerLocation = objc.RegisterName("initWithTextAttachment:parentView:textLayoutManager:location:")
-	_nSTextAttachmentViewProviderSelLoadView = objc.RegisterName("loadView")
+	_clsNSTextAttachmentViewProvider                                                                               = _objcClass("NSTextAttachmentViewProvider")
+	_nSTextAttachmentViewProviderSelInitWithTextAttachmentParentViewTextLayoutManagerLocation                      = objc.RegisterName("initWithTextAttachment:parentView:textLayoutManager:location:")
+	_nSTextAttachmentViewProviderSelLoadView                                                                       = objc.RegisterName("loadView")
 	_nSTextAttachmentViewProviderSelAttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition = objc.RegisterName("attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:")
-	_nSTextAttachmentViewProviderSelTextAttachment = objc.RegisterName("textAttachment")
-	_nSTextAttachmentViewProviderSelTextLayoutManager = objc.RegisterName("textLayoutManager")
-	_nSTextAttachmentViewProviderSelLocation = objc.RegisterName("location")
-	_nSTextAttachmentViewProviderSelView = objc.RegisterName("view")
-	_nSTextAttachmentViewProviderSelSetView = objc.RegisterName("setView:")
-	_nSTextAttachmentViewProviderSelTracksTextAttachmentViewBounds = objc.RegisterName("tracksTextAttachmentViewBounds")
-	_nSTextAttachmentViewProviderSelSetTracksTextAttachmentViewBounds = objc.RegisterName("setTracksTextAttachmentViewBounds:")
+	_nSTextAttachmentViewProviderSelTextAttachment                                                                 = objc.RegisterName("textAttachment")
+	_nSTextAttachmentViewProviderSelTextLayoutManager                                                              = objc.RegisterName("textLayoutManager")
+	_nSTextAttachmentViewProviderSelLocation                                                                       = objc.RegisterName("location")
+	_nSTextAttachmentViewProviderSelView                                                                           = objc.RegisterName("view")
+	_nSTextAttachmentViewProviderSelSetView                                                                        = objc.RegisterName("setView:")
+	_nSTextAttachmentViewProviderSelTracksTextAttachmentViewBounds                                                 = objc.RegisterName("tracksTextAttachmentViewBounds")
+	_nSTextAttachmentViewProviderSelSetTracksTextAttachmentViewBounds                                              = objc.RegisterName("setTracksTextAttachmentViewBounds:")
 )
 
 func NSTextAttachmentViewProviderFromID(id objc.ID) *NSTextAttachmentViewProvider {
@@ -42,7 +42,9 @@ func NSTextAttachmentViewProviderFromID(id objc.ID) *NSTextAttachmentViewProvide
 
 func (o *NSTextAttachmentViewProvider) InitWithTextAttachmentParentViewTextLayoutManagerLocation(textAttachment *NSTextAttachment, parentView *NSView, textLayoutManager *NSTextLayoutManager, location NSTextLocation) *NSTextAttachmentViewProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelInitWithTextAttachmentParentViewTextLayoutManagerLocation, textAttachment.Ptr(), parentView.Ptr(), textLayoutManager.Ptr(), location)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextAttachmentViewProviderFromID(_ret)
 }
 
@@ -57,13 +59,17 @@ func (o *NSTextAttachmentViewProvider) AttachmentBoundsForAttributesLocationText
 
 func (o *NSTextAttachmentViewProvider) TextAttachment() *NSTextAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelTextAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextAttachmentFromID(_ret)
 }
 
 func (o *NSTextAttachmentViewProvider) TextLayoutManager() *NSTextLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelTextLayoutManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextLayoutManagerFromID(_ret)
 }
 
@@ -74,7 +80,9 @@ func (o *NSTextAttachmentViewProvider) Location() NSTextLocation {
 
 func (o *NSTextAttachmentViewProvider) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextAttachmentViewProviderSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -90,4 +98,3 @@ func (o *NSTextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
 func (o *NSTextAttachmentViewProvider) SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) {
 	o.Ptr().Send(_nSTextAttachmentViewProviderSelSetTracksTextAttachmentViewBounds, tracksTextAttachmentViewBounds)
 }
-

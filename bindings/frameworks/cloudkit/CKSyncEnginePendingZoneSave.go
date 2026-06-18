@@ -15,9 +15,9 @@ type CKSyncEnginePendingZoneSave struct {
 }
 
 var (
-	_clsCKSyncEnginePendingZoneSave = _objcClass("CKSyncEnginePendingZoneSave")
+	_clsCKSyncEnginePendingZoneSave             = _objcClass("CKSyncEnginePendingZoneSave")
 	_cKSyncEnginePendingZoneSaveSelInitWithZone = objc.RegisterName("initWithZone:")
-	_cKSyncEnginePendingZoneSaveSelZone = objc.RegisterName("zone")
+	_cKSyncEnginePendingZoneSaveSelZone         = objc.RegisterName("zone")
 )
 
 func CKSyncEnginePendingZoneSaveFromID(id objc.ID) *CKSyncEnginePendingZoneSave {
@@ -33,13 +33,16 @@ func CKSyncEnginePendingZoneSaveFromID(id objc.ID) *CKSyncEnginePendingZoneSave 
 // Creates a pending zone save for the specified record zone. - Parameters: - zone: The record zone to save. - Returns: An initialized pending zone save.
 func (o *CKSyncEnginePendingZoneSave) InitWithZone(zone *CKRecordZone) *CKSyncEnginePendingZoneSave {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingZoneSaveSelInitWithZone, zone.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEnginePendingZoneSaveFromID(_ret)
 }
 
 func (o *CKSyncEnginePendingZoneSave) Zone() *CKRecordZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEnginePendingZoneSaveSelZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneFromID(_ret)
 }
-

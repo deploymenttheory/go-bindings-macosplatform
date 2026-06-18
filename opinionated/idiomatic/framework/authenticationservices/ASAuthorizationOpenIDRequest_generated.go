@@ -45,7 +45,9 @@ func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -130,9 +132,13 @@ func (x *AuthorizationOpenIDRequest) SetRequestedOperation(requestedOperation *f
 	x.inner.SetRequestedOperation(requestedOperation)
 }
 
-func (x *AuthorizationOpenIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return x.inner }
+func (x *AuthorizationOpenIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
+	return x.inner
+}
 
-func (x *AuthorizationOpenIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationOpenIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationOpenIDRequestable is the interface implemented by [AuthorizationOpenIDRequest], for mocking and DI.
 type AuthorizationOpenIDRequestable interface {
@@ -152,4 +158,3 @@ type AuthorizationOpenIDRequestable interface {
 }
 
 var _ AuthorizationOpenIDRequestable = (*AuthorizationOpenIDRequest)(nil)
-

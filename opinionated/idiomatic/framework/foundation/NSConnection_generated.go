@@ -280,4 +280,3 @@ type Connectionable interface {
 }
 
 var _ Connectionable = (*Connection)(nil)
-

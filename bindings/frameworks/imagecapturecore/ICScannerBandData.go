@@ -18,20 +18,20 @@ type ICScannerBandData struct {
 }
 
 var (
-	_clsICScannerBandData = _objcClass("ICScannerBandData")
-	_iCScannerBandDataSelFullImageWidth = objc.RegisterName("fullImageWidth")
-	_iCScannerBandDataSelFullImageHeight = objc.RegisterName("fullImageHeight")
-	_iCScannerBandDataSelBitsPerPixel = objc.RegisterName("bitsPerPixel")
-	_iCScannerBandDataSelBitsPerComponent = objc.RegisterName("bitsPerComponent")
-	_iCScannerBandDataSelNumComponents = objc.RegisterName("numComponents")
-	_iCScannerBandDataSelIsBigEndian = objc.RegisterName("isBigEndian")
-	_iCScannerBandDataSelPixelDataType = objc.RegisterName("pixelDataType")
+	_clsICScannerBandData                     = _objcClass("ICScannerBandData")
+	_iCScannerBandDataSelFullImageWidth       = objc.RegisterName("fullImageWidth")
+	_iCScannerBandDataSelFullImageHeight      = objc.RegisterName("fullImageHeight")
+	_iCScannerBandDataSelBitsPerPixel         = objc.RegisterName("bitsPerPixel")
+	_iCScannerBandDataSelBitsPerComponent     = objc.RegisterName("bitsPerComponent")
+	_iCScannerBandDataSelNumComponents        = objc.RegisterName("numComponents")
+	_iCScannerBandDataSelIsBigEndian          = objc.RegisterName("isBigEndian")
+	_iCScannerBandDataSelPixelDataType        = objc.RegisterName("pixelDataType")
 	_iCScannerBandDataSelColorSyncProfilePath = objc.RegisterName("colorSyncProfilePath")
-	_iCScannerBandDataSelBytesPerRow = objc.RegisterName("bytesPerRow")
-	_iCScannerBandDataSelDataStartRow = objc.RegisterName("dataStartRow")
-	_iCScannerBandDataSelDataNumRows = objc.RegisterName("dataNumRows")
-	_iCScannerBandDataSelDataSize = objc.RegisterName("dataSize")
-	_iCScannerBandDataSelDataBuffer = objc.RegisterName("dataBuffer")
+	_iCScannerBandDataSelBytesPerRow          = objc.RegisterName("bytesPerRow")
+	_iCScannerBandDataSelDataStartRow         = objc.RegisterName("dataStartRow")
+	_iCScannerBandDataSelDataNumRows          = objc.RegisterName("dataNumRows")
+	_iCScannerBandDataSelDataSize             = objc.RegisterName("dataSize")
+	_iCScannerBandDataSelDataBuffer           = objc.RegisterName("dataBuffer")
 )
 
 func ICScannerBandDataFromID(id objc.ID) *ICScannerBandData {
@@ -121,4 +121,3 @@ func (o *ICScannerBandData) DataBuffer() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iCScannerBandDataSelDataBuffer)
 	return _ret
 }
-

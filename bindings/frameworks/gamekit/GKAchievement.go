@@ -19,31 +19,31 @@ type GKAchievement struct {
 }
 
 var (
-	_clsGKAchievement = _objcClass("GKAchievement")
-	_gKAchievementSelLoadAchievementsWithCompletionHandler = objc.RegisterName("loadAchievementsWithCompletionHandler:")
-	_gKAchievementSelResetAchievementsWithCompletionHandler = objc.RegisterName("resetAchievementsWithCompletionHandler:")
-	_gKAchievementSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_gKAchievementSelInitWithIdentifierPlayer = objc.RegisterName("initWithIdentifier:player:")
-	_gKAchievementSelReportAchievementsWithCompletionHandler = objc.RegisterName("reportAchievements:withCompletionHandler:")
-	_gKAchievementSelIdentifier = objc.RegisterName("identifier")
-	_gKAchievementSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_gKAchievementSelPercentComplete = objc.RegisterName("percentComplete")
-	_gKAchievementSelSetPercentComplete = objc.RegisterName("setPercentComplete:")
-	_gKAchievementSelIsCompleted = objc.RegisterName("isCompleted")
-	_gKAchievementSelLastReportedDate = objc.RegisterName("lastReportedDate")
-	_gKAchievementSelShowsCompletionBanner = objc.RegisterName("showsCompletionBanner")
-	_gKAchievementSelSetShowsCompletionBanner = objc.RegisterName("setShowsCompletionBanner:")
-	_gKAchievementSelPlayer = objc.RegisterName("player")
-	_gKAchievementSelReportAchievementWithCompletionHandler = objc.RegisterName("reportAchievementWithCompletionHandler:")
-	_gKAchievementSelIsHidden = objc.RegisterName("isHidden")
-	_gKAchievementSelInitWithIdentifierForPlayer = objc.RegisterName("initWithIdentifier:forPlayer:")
-	_gKAchievementSelPlayerID = objc.RegisterName("playerID")
-	_gKAchievementSelSelectChallengeablePlayersWithCompletionHandler = objc.RegisterName("selectChallengeablePlayers:withCompletionHandler:")
+	_clsGKAchievement                                                              = _objcClass("GKAchievement")
+	_gKAchievementSelLoadAchievementsWithCompletionHandler                         = objc.RegisterName("loadAchievementsWithCompletionHandler:")
+	_gKAchievementSelResetAchievementsWithCompletionHandler                        = objc.RegisterName("resetAchievementsWithCompletionHandler:")
+	_gKAchievementSelInitWithIdentifier                                            = objc.RegisterName("initWithIdentifier:")
+	_gKAchievementSelInitWithIdentifierPlayer                                      = objc.RegisterName("initWithIdentifier:player:")
+	_gKAchievementSelReportAchievementsWithCompletionHandler                       = objc.RegisterName("reportAchievements:withCompletionHandler:")
+	_gKAchievementSelIdentifier                                                    = objc.RegisterName("identifier")
+	_gKAchievementSelSetIdentifier                                                 = objc.RegisterName("setIdentifier:")
+	_gKAchievementSelPercentComplete                                               = objc.RegisterName("percentComplete")
+	_gKAchievementSelSetPercentComplete                                            = objc.RegisterName("setPercentComplete:")
+	_gKAchievementSelIsCompleted                                                   = objc.RegisterName("isCompleted")
+	_gKAchievementSelLastReportedDate                                              = objc.RegisterName("lastReportedDate")
+	_gKAchievementSelShowsCompletionBanner                                         = objc.RegisterName("showsCompletionBanner")
+	_gKAchievementSelSetShowsCompletionBanner                                      = objc.RegisterName("setShowsCompletionBanner:")
+	_gKAchievementSelPlayer                                                        = objc.RegisterName("player")
+	_gKAchievementSelReportAchievementWithCompletionHandler                        = objc.RegisterName("reportAchievementWithCompletionHandler:")
+	_gKAchievementSelIsHidden                                                      = objc.RegisterName("isHidden")
+	_gKAchievementSelInitWithIdentifierForPlayer                                   = objc.RegisterName("initWithIdentifier:forPlayer:")
+	_gKAchievementSelPlayerID                                                      = objc.RegisterName("playerID")
+	_gKAchievementSelSelectChallengeablePlayersWithCompletionHandler               = objc.RegisterName("selectChallengeablePlayers:withCompletionHandler:")
 	_gKAchievementSelReportAchievementsWithEligibleChallengesWithCompletionHandler = objc.RegisterName("reportAchievements:withEligibleChallenges:withCompletionHandler:")
-	_gKAchievementSelIssueChallengeToPlayersMessage = objc.RegisterName("issueChallengeToPlayers:message:")
-	_gKAchievementSelSelectChallengeablePlayerIDsWithCompletionHandler = objc.RegisterName("selectChallengeablePlayerIDs:withCompletionHandler:")
+	_gKAchievementSelIssueChallengeToPlayersMessage                                = objc.RegisterName("issueChallengeToPlayers:message:")
+	_gKAchievementSelSelectChallengeablePlayerIDsWithCompletionHandler             = objc.RegisterName("selectChallengeablePlayerIDs:withCompletionHandler:")
 	_gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletionHandler = objc.RegisterName("challengeComposeControllerWithMessage:players:completionHandler:")
-	_gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletion = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
+	_gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletion        = objc.RegisterName("challengeComposeControllerWithMessage:players:completion:")
 )
 
 func GKAchievementFromID(id objc.ID) *GKAchievement {
@@ -86,14 +86,18 @@ func GKAchievementResetAchievementsWithCompletionHandler(completionHandler func(
 // Designated initializer
 func (o *GKAchievement) InitWithIdentifier(identifier *foundation.NSString) *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelInitWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKAchievementFromID(_ret)
 }
 
 // Initialize the achievement for a specific player. Use to submit participant achievements when ending a turn-based match.
 func (o *GKAchievement) InitWithIdentifierPlayer(identifier *foundation.NSString, player *GKPlayer) *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelInitWithIdentifierPlayer, identifier.Ptr(), player.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKAchievementFromID(_ret)
 }
 
@@ -112,7 +116,9 @@ func GKAchievementReportAchievementsWithCompletionHandler(achievements *foundati
 // Achievement identifier
 func (o *GKAchievement) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -139,7 +145,9 @@ func (o *GKAchievement) IsCompleted() bool {
 // Date the achievement was last reported. Read-only. Created at initialization
 func (o *GKAchievement) LastReportedDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelLastReportedDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -156,7 +164,9 @@ func (o *GKAchievement) SetShowsCompletionBanner(showsCompletionBanner bool) {
 // The identifier of the player that earned the achievement.
 func (o *GKAchievement) Player() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -182,14 +192,18 @@ func (o *GKAchievement) IsHidden() bool {
 // Deprecated: since macOS 10.10.
 func (o *GKAchievement) InitWithIdentifierForPlayer(identifier *foundation.NSString, playerID *foundation.NSString) *GKAchievement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelInitWithIdentifierForPlayer, identifier.Ptr(), playerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKAchievementFromID(_ret)
 }
 
 // Deprecated: since macOS 10.10.
 func (o *GKAchievement) PlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -237,7 +251,9 @@ func (o *GKAchievement) SelectChallengeablePlayerIDsWithCompletionHandler(player
 // Deprecated: since macOS 14.0.
 func (o *GKAchievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message *foundation.NSString, players *foundation.NSArray[*GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletionHandler, message.Ptr(), players.Ptr(), completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
 
@@ -257,7 +273,8 @@ func (o *GKAchievement) ChallengeComposeControllerWithMessagePlayersCompletion(m
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementSelChallengeComposeControllerWithMessagePlayersCompletion, message.Ptr(), players.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewControllerFromID(_ret)
 }
-

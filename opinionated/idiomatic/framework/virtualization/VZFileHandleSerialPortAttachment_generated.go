@@ -16,7 +16,9 @@ type FileHandleSerialPortAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZFileHandleSerialPortAttachment].
-func (x *FileHandleSerialPortAttachment) Unwrap() *raw.VZFileHandleSerialPortAttachment { return x.inner }
+func (x *FileHandleSerialPortAttachment) Unwrap() *raw.VZFileHandleSerialPortAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -47,7 +49,9 @@ func (x *FileHandleSerialPortAttachment) FileHandleForWriting() *foundation.NSFi
 	return x.inner.FileHandleForWriting()
 }
 
-func (x *FileHandleSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+func (x *FileHandleSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
+	return &x.inner.VZSerialPortAttachment
+}
 
 // FileHandleSerialPortAttachmentable is the interface implemented by [FileHandleSerialPortAttachment], for mocking and DI.
 type FileHandleSerialPortAttachmentable interface {
@@ -57,4 +61,3 @@ type FileHandleSerialPortAttachmentable interface {
 }
 
 var _ FileHandleSerialPortAttachmentable = (*FileHandleSerialPortAttachment)(nil)
-

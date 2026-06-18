@@ -302,4 +302,3 @@ type MusicTrackable interface {
 }
 
 var _ MusicTrackable = (*MusicTrack)(nil)
-

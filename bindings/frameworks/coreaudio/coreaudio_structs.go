@@ -11,21 +11,20 @@ import (
 
 // @struct         AudioHardwareIOProcStreamUsage @abstract       This structure describes which streams a given AudioDeviceIOProc will use. It is used in conjunction with kAudioDevicePropertyIOProcStreamUsage. @field          mIOProc The IOProc whose stream usage is being specified. @field          mNumberStreams The number of streams being specified. @field          mStreamIsOn An array of UInt32's whose length is specified by mNumberStreams. Each element of the array corresponds to a stream. A value of 0 means the stream is not to be enabled. Any other value means the stream is to be used.
 type AudioHardwareIOProcStreamUsage struct {
-	MIOProc unsafe.Pointer
+	MIOProc        unsafe.Pointer
 	MNumberStreams uint
-	MStreamIsOn [1]uint
+	MStreamIsOn    [1]uint
 }
 
 // @struct         AudioObjectPropertyAddress @abstract       An AudioObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission. @field          mSelector The AudioObjectPropertySelector for the property. @field          mScope The AudioObjectPropertyScope for the property. @field          mElement The AudioObjectPropertyElement for the property.
 type AudioObjectPropertyAddress struct {
 	MSelector uint
-	MScope uint
-	MElement uint
+	MScope    uint
+	MElement  uint
 }
 
 // @struct         AudioStreamRangedDescription @abstract       This structure allows a specific sample rate range to be associated with an AudioStreamBasicDescription that specifies its sample rate as kAudioStreamAnyRate. @discussion     Note that this structure is only used to describe the the available formats for a stream. It is not used for the current format. @field          mFormat The AudioStreamBasicDescription that describes the format of the stream. Note that the mSampleRate field of the structure will be the same as the the values in mSampleRateRange when only a single sample rate is supported. It will be kAudioStreamAnyRate when there is a range with more elements. @field          mSampleRateRange The AudioValueRange that describes the minimum and maximum sample rate for the stream. If the mSampleRate field of mFormat is kAudioStreamAnyRate the format supports the range of sample rates described by this structure. Otherwise, the minimum will be the same as the maximum which will be the same as the mSampleRate field of mFormat.
 type AudioStreamRangedDescription struct {
-	MFormat coreaudiotypes.AudioStreamBasicDescription
+	MFormat          coreaudiotypes.AudioStreamBasicDescription
 	MSampleRateRange coreaudiotypes.AudioValueRange
 }
-

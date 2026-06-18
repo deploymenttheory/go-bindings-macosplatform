@@ -18,4 +18,3 @@ func MEMessageSecurityErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_mailkitLib, "MEMessageSecurityErrorDomain")
 	return ptr
 }
-

@@ -422,4 +422,3 @@ func ITLibraryDidChangeNotification() uintptr {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibraryDidChangeNotification")
 	return ptr
 }
-

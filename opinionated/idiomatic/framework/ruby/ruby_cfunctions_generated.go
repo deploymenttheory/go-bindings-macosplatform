@@ -4578,4 +4578,3 @@ func StValues(table *raw.StTable, values *uint, size uint) uint {
 func StValuesCheck(table *raw.StTable, values *uint, size uint, never uint) uint {
 	return raw.StValuesCheck(table, values, size, never)
 }
-

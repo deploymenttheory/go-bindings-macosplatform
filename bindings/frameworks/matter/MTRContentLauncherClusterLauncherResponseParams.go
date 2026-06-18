@@ -18,14 +18,14 @@ type MTRContentLauncherClusterLauncherResponseParams struct {
 }
 
 var (
-	_clsMTRContentLauncherClusterLauncherResponseParams = _objcClass("MTRContentLauncherClusterLauncherResponseParams")
+	_clsMTRContentLauncherClusterLauncherResponseParams                           = _objcClass("MTRContentLauncherClusterLauncherResponseParams")
 	_mTRContentLauncherClusterLauncherResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRContentLauncherClusterLauncherResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRContentLauncherClusterLauncherResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRContentLauncherClusterLauncherResponseParamsSelData = objc.RegisterName("data")
-	_mTRContentLauncherClusterLauncherResponseParamsSelSetData = objc.RegisterName("setData:")
-	_mTRContentLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRContentLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRContentLauncherClusterLauncherResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRContentLauncherClusterLauncherResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRContentLauncherClusterLauncherResponseParamsSelData                       = objc.RegisterName("data")
+	_mTRContentLauncherClusterLauncherResponseParamsSelSetData                    = objc.RegisterName("setData:")
+	_mTRContentLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRContentLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRContentLauncherClusterLauncherResponseParamsFromID(id objc.ID) *MTRContentLauncherClusterLauncherResponseParams {
@@ -42,7 +42,9 @@ func MTRContentLauncherClusterLauncherResponseParamsFromID(id objc.ID) *MTRConte
 func (o *MTRContentLauncherClusterLauncherResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRContentLauncherClusterLauncherResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLauncherResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRContentLauncherClusterLauncherResponseParams) InitWithResponseValueE
 
 func (o *MTRContentLauncherClusterLauncherResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLauncherResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRContentLauncherClusterLauncherResponseParams) SetStatus(status *foun
 
 func (o *MTRContentLauncherClusterLauncherResponseParams) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLauncherResponseParamsSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,11 +78,12 @@ func (o *MTRContentLauncherClusterLauncherResponseParams) SetData(data *foundati
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRContentLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRContentLauncherClusterLauncherResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRContentLauncherClusterLauncherResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRContentLauncherClusterLauncherResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

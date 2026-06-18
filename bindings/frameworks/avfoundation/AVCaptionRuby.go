@@ -16,12 +16,12 @@ type AVCaptionRuby struct {
 }
 
 var (
-	_clsAVCaptionRuby = _objcClass("AVCaptionRuby")
-	_aVCaptionRubySelInitWithText = objc.RegisterName("initWithText:")
+	_clsAVCaptionRuby                              = _objcClass("AVCaptionRuby")
+	_aVCaptionRubySelInitWithText                  = objc.RegisterName("initWithText:")
 	_aVCaptionRubySelInitWithTextPositionAlignment = objc.RegisterName("initWithText:position:alignment:")
-	_aVCaptionRubySelText = objc.RegisterName("text")
-	_aVCaptionRubySelPosition = objc.RegisterName("position")
-	_aVCaptionRubySelAlignment = objc.RegisterName("alignment")
+	_aVCaptionRubySelText                          = objc.RegisterName("text")
+	_aVCaptionRubySelPosition                      = objc.RegisterName("position")
+	_aVCaptionRubySelAlignment                     = objc.RegisterName("alignment")
 )
 
 func AVCaptionRubyFromID(id objc.ID) *AVCaptionRuby {
@@ -36,20 +36,26 @@ func AVCaptionRubyFromID(id objc.ID) *AVCaptionRuby {
 
 func (o *AVCaptionRuby) InitWithText(text *foundation.NSString) *AVCaptionRuby {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRubySelInitWithText, text.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRubyFromID(_ret)
 }
 
 func (o *AVCaptionRuby) InitWithTextPositionAlignment(text *foundation.NSString, position AVCaptionRubyPosition, alignment AVCaptionRubyAlignment) *AVCaptionRuby {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRubySelInitWithTextPositionAlignment, text.Ptr(), position, alignment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptionRubyFromID(_ret)
 }
 
 // @property text @abstract The ruby text
 func (o *AVCaptionRuby) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionRubySelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *AVCaptionRuby) Alignment() AVCaptionRubyAlignment {
 	_ret := objc.Send[AVCaptionRubyAlignment](o.Ptr(), _aVCaptionRubySelAlignment)
 	return _ret
 }
-

@@ -140,4 +140,3 @@ type PlayerLayerable interface {
 }
 
 var _ PlayerLayerable = (*PlayerLayer)(nil)
-

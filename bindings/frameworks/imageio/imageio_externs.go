@@ -3757,4 +3757,3 @@ func KIIOStereoAggressors_Type() uintptr {
 	ptr, _ := purego.Dlsym(_imageioLib, "kIIOStereoAggressors_Type")
 	return ptr
 }
-

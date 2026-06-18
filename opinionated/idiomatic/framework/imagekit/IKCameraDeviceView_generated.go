@@ -402,4 +402,3 @@ type CameraDeviceViewable interface {
 }
 
 var _ CameraDeviceViewable = (*CameraDeviceView)(nil)
-

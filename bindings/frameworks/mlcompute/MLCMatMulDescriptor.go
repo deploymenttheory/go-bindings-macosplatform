@@ -16,12 +16,12 @@ type MLCMatMulDescriptor struct {
 }
 
 var (
-	_clsMLCMatMulDescriptor = _objcClass("MLCMatMulDescriptor")
+	_clsMLCMatMulDescriptor                                          = _objcClass("MLCMatMulDescriptor")
 	_mLCMatMulDescriptorSelDescriptorWithAlphaTransposesXTransposesY = objc.RegisterName("descriptorWithAlpha:transposesX:transposesY:")
-	_mLCMatMulDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mLCMatMulDescriptorSelAlpha = objc.RegisterName("alpha")
-	_mLCMatMulDescriptorSelTransposesX = objc.RegisterName("transposesX")
-	_mLCMatMulDescriptorSelTransposesY = objc.RegisterName("transposesY")
+	_mLCMatMulDescriptorSelDescriptor                                = objc.RegisterName("descriptor")
+	_mLCMatMulDescriptorSelAlpha                                     = objc.RegisterName("alpha")
+	_mLCMatMulDescriptorSelTransposesX                               = objc.RegisterName("transposesX")
+	_mLCMatMulDescriptorSelTransposesY                               = objc.RegisterName("transposesY")
 )
 
 func MLCMatMulDescriptorFromID(id objc.ID) *MLCMatMulDescriptor {
@@ -37,14 +37,18 @@ func MLCMatMulDescriptorFromID(id objc.ID) *MLCMatMulDescriptor {
 // @abstract   A matrix multiplication layer descriptor @param      alpha  a scalar to scale the left hand side, C = alpha x X x Y @param      transposesX  if true, transposes the last two dimensions of X @param      transposesY  if true, transposes the last two dimensions of Y @return     A new matrix multiplication layer descriptor
 func MLCMatMulDescriptorDescriptorWithAlphaTransposesXTransposesY(alpha float32, transposesX bool, transposesY bool) *MLCMatMulDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulDescriptor), _mLCMatMulDescriptorSelDescriptorWithAlphaTransposesXTransposesY, alpha, transposesX, transposesY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMatMulDescriptorFromID(_ret)
 }
 
 // @property   descriptor @abstract   A matrix multiplication layer descriptor
 func MLCMatMulDescriptorDescriptor() *MLCMatMulDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCMatMulDescriptor), _mLCMatMulDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCMatMulDescriptorFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *MLCMatMulDescriptor) TransposesY() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCMatMulDescriptorSelTransposesY)
 	return _ret
 }
-

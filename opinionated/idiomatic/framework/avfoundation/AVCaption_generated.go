@@ -132,4 +132,3 @@ type Captionable interface {
 }
 
 var _ Captionable = (*Caption)(nil)
-

@@ -18,7 +18,9 @@ type NNReductionFeatureChannelsArgumentMinNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsArgumentMinNode].
-func (x *NNReductionFeatureChannelsArgumentMinNode) Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMinNode { return x.inner }
+func (x *NNReductionFeatureChannelsArgumentMinNode) Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMinNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -56,9 +58,13 @@ func (x *NNReductionFeatureChannelsArgumentMinNode) WithLabel(label string) *NNR
 	return x
 }
 
-func (x *NNReductionFeatureChannelsArgumentMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionFeatureChannelsArgumentMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionFeatureChannelsArgumentMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionFeatureChannelsArgumentMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionFeatureChannelsArgumentMinNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMinNode], for mocking and DI.
 type NNReductionFeatureChannelsArgumentMinNodeable interface {
@@ -69,4 +75,3 @@ type NNReductionFeatureChannelsArgumentMinNodeable interface {
 }
 
 var _ NNReductionFeatureChannelsArgumentMinNodeable = (*NNReductionFeatureChannelsArgumentMinNode)(nil)
-

@@ -33,4 +33,3 @@ func FPShowHideFontPanel() error {
 	}
 	return nil
 }
-

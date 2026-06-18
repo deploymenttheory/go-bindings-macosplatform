@@ -54,4 +54,3 @@ type RasterizationRateSampleArrayable interface {
 }
 
 var _ RasterizationRateSampleArrayable = (*RasterizationRateSampleArray)(nil)
-

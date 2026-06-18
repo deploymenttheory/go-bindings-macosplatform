@@ -124,4 +124,3 @@ type WKContentRuleListStoreable interface {
 }
 
 var _ WKContentRuleListStoreable = (*WKContentRuleListStore)(nil)
-

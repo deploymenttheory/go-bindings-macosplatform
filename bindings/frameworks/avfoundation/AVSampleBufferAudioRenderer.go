@@ -19,19 +19,19 @@ type AVSampleBufferAudioRenderer struct {
 }
 
 var (
-	_clsAVSampleBufferAudioRenderer = _objcClass("AVSampleBufferAudioRenderer")
-	_aVSampleBufferAudioRendererSelStatus = objc.RegisterName("status")
-	_aVSampleBufferAudioRendererSelError = objc.RegisterName("error")
-	_aVSampleBufferAudioRendererSelAudioOutputDeviceUniqueID = objc.RegisterName("audioOutputDeviceUniqueID")
-	_aVSampleBufferAudioRendererSelSetAudioOutputDeviceUniqueID = objc.RegisterName("setAudioOutputDeviceUniqueID:")
-	_aVSampleBufferAudioRendererSelAudioTimePitchAlgorithm = objc.RegisterName("audioTimePitchAlgorithm")
-	_aVSampleBufferAudioRendererSelSetAudioTimePitchAlgorithm = objc.RegisterName("setAudioTimePitchAlgorithm:")
-	_aVSampleBufferAudioRendererSelAllowedAudioSpatializationFormats = objc.RegisterName("allowedAudioSpatializationFormats")
+	_clsAVSampleBufferAudioRenderer                                     = _objcClass("AVSampleBufferAudioRenderer")
+	_aVSampleBufferAudioRendererSelStatus                               = objc.RegisterName("status")
+	_aVSampleBufferAudioRendererSelError                                = objc.RegisterName("error")
+	_aVSampleBufferAudioRendererSelAudioOutputDeviceUniqueID            = objc.RegisterName("audioOutputDeviceUniqueID")
+	_aVSampleBufferAudioRendererSelSetAudioOutputDeviceUniqueID         = objc.RegisterName("setAudioOutputDeviceUniqueID:")
+	_aVSampleBufferAudioRendererSelAudioTimePitchAlgorithm              = objc.RegisterName("audioTimePitchAlgorithm")
+	_aVSampleBufferAudioRendererSelSetAudioTimePitchAlgorithm           = objc.RegisterName("setAudioTimePitchAlgorithm:")
+	_aVSampleBufferAudioRendererSelAllowedAudioSpatializationFormats    = objc.RegisterName("allowedAudioSpatializationFormats")
 	_aVSampleBufferAudioRendererSelSetAllowedAudioSpatializationFormats = objc.RegisterName("setAllowedAudioSpatializationFormats:")
-	_aVSampleBufferAudioRendererSelVolume = objc.RegisterName("volume")
-	_aVSampleBufferAudioRendererSelSetVolume = objc.RegisterName("setVolume:")
-	_aVSampleBufferAudioRendererSelIsMuted = objc.RegisterName("isMuted")
-	_aVSampleBufferAudioRendererSelSetMuted = objc.RegisterName("setMuted:")
+	_aVSampleBufferAudioRendererSelVolume                               = objc.RegisterName("volume")
+	_aVSampleBufferAudioRendererSelSetVolume                            = objc.RegisterName("setVolume:")
+	_aVSampleBufferAudioRendererSelIsMuted                              = objc.RegisterName("isMuted")
+	_aVSampleBufferAudioRendererSelSetMuted                             = objc.RegisterName("setMuted:")
 	_aVSampleBufferAudioRendererSelFlushFromSourceTimeCompletionHandler = objc.RegisterName("flushFromSourceTime:completionHandler:")
 )
 
@@ -58,7 +58,9 @@ func (o *AVSampleBufferAudioRenderer) Error() unsafe.Pointer {
 // @property		audioOutputDeviceUniqueID @abstract		Specifies the unique ID of the Core Audio output device used to play audio. @discussion By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
 func (o *AVSampleBufferAudioRenderer) AudioOutputDeviceUniqueID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferAudioRendererSelAudioOutputDeviceUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *AVSampleBufferAudioRenderer) SetAudioOutputDeviceUniqueID(audioOutputDe
 // @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
 func (o *AVSampleBufferAudioRenderer) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferAudioRendererSelAudioTimePitchAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,4 +120,3 @@ func (o *AVSampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_
 	}
 	o.Ptr().Send(_aVSampleBufferAudioRendererSelFlushFromSourceTimeCompletionHandler, time_, __block_completionHandler)
 }
-

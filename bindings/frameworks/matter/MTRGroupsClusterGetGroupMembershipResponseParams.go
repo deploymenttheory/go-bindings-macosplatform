@@ -18,14 +18,14 @@ type MTRGroupsClusterGetGroupMembershipResponseParams struct {
 }
 
 var (
-	_clsMTRGroupsClusterGetGroupMembershipResponseParams = _objcClass("MTRGroupsClusterGetGroupMembershipResponseParams")
+	_clsMTRGroupsClusterGetGroupMembershipResponseParams                           = _objcClass("MTRGroupsClusterGetGroupMembershipResponseParams")
 	_mTRGroupsClusterGetGroupMembershipResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelCapacity = objc.RegisterName("capacity")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetCapacity = objc.RegisterName("setCapacity:")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelGroupList = objc.RegisterName("groupList")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetGroupList = objc.RegisterName("setGroupList:")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelCapacity                   = objc.RegisterName("capacity")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetCapacity                = objc.RegisterName("setCapacity:")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelGroupList                  = objc.RegisterName("groupList")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetGroupList               = objc.RegisterName("setGroupList:")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRGroupsClusterGetGroupMembershipResponseParamsFromID(id objc.ID) *MTRGroupsClusterGetGroupMembershipResponseParams {
@@ -42,7 +42,9 @@ func MTRGroupsClusterGetGroupMembershipResponseParamsFromID(id objc.ID) *MTRGrou
 func (o *MTRGroupsClusterGetGroupMembershipResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterGetGroupMembershipResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -51,7 +53,9 @@ func (o *MTRGroupsClusterGetGroupMembershipResponseParams) InitWithResponseValue
 
 func (o *MTRGroupsClusterGetGroupMembershipResponseParams) Capacity() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterGetGroupMembershipResponseParamsSelCapacity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +75,12 @@ func (o *MTRGroupsClusterGetGroupMembershipResponseParams) SetGroupList(groupLis
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRGroupsClusterGetGroupMembershipResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGroupsClusterGetGroupMembershipResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRGroupsClusterGetGroupMembershipResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRGroupsClusterGetGroupMembershipResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

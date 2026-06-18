@@ -16,12 +16,12 @@ type MPSGraphExecutableSerializationDescriptor struct {
 }
 
 var (
-	_clsMPSGraphExecutableSerializationDescriptor = _objcClass("MPSGraphExecutableSerializationDescriptor")
-	_mPSGraphExecutableSerializationDescriptorSelAppend = objc.RegisterName("append")
-	_mPSGraphExecutableSerializationDescriptorSelSetAppend = objc.RegisterName("setAppend:")
-	_mPSGraphExecutableSerializationDescriptorSelDeploymentPlatform = objc.RegisterName("deploymentPlatform")
-	_mPSGraphExecutableSerializationDescriptorSelSetDeploymentPlatform = objc.RegisterName("setDeploymentPlatform:")
-	_mPSGraphExecutableSerializationDescriptorSelMinimumDeploymentTarget = objc.RegisterName("minimumDeploymentTarget")
+	_clsMPSGraphExecutableSerializationDescriptor                           = _objcClass("MPSGraphExecutableSerializationDescriptor")
+	_mPSGraphExecutableSerializationDescriptorSelAppend                     = objc.RegisterName("append")
+	_mPSGraphExecutableSerializationDescriptorSelSetAppend                  = objc.RegisterName("setAppend:")
+	_mPSGraphExecutableSerializationDescriptorSelDeploymentPlatform         = objc.RegisterName("deploymentPlatform")
+	_mPSGraphExecutableSerializationDescriptorSelSetDeploymentPlatform      = objc.RegisterName("setDeploymentPlatform:")
+	_mPSGraphExecutableSerializationDescriptorSelMinimumDeploymentTarget    = objc.RegisterName("minimumDeploymentTarget")
 	_mPSGraphExecutableSerializationDescriptorSelSetMinimumDeploymentTarget = objc.RegisterName("setMinimumDeploymentTarget:")
 )
 
@@ -58,11 +58,12 @@ func (o *MPSGraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploy
 // The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
 func (o *MPSGraphExecutableSerializationDescriptor) MinimumDeploymentTarget() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphExecutableSerializationDescriptorSelMinimumDeploymentTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MPSGraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(minimumDeploymentTarget *foundation.NSString) {
 	o.Ptr().Send(_mPSGraphExecutableSerializationDescriptorSelSetMinimumDeploymentTarget, minimumDeploymentTarget.Ptr())
 }
-

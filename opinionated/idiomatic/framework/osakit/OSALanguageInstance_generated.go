@@ -85,4 +85,3 @@ type LanguageInstanceable interface {
 }
 
 var _ LanguageInstanceable = (*LanguageInstance)(nil)
-

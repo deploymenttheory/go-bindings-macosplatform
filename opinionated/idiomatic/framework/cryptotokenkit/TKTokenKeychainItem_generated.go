@@ -94,4 +94,3 @@ type TokenKeychainItemable interface {
 }
 
 var _ TokenKeychainItemable = (*TokenKeychainItem)(nil)
-

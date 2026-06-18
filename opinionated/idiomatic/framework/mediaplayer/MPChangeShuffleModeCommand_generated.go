@@ -57,7 +57,9 @@ func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType raw.
 	x.inner.SetCurrentShuffleType(currentShuffleType)
 }
 
-func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
+	return &x.inner.MPRemoteCommand
+}
 
 // ChangeShuffleModeCommandable is the interface implemented by [ChangeShuffleModeCommand], for mocking and DI.
 type ChangeShuffleModeCommandable interface {
@@ -69,4 +71,3 @@ type ChangeShuffleModeCommandable interface {
 }
 
 var _ ChangeShuffleModeCommandable = (*ChangeShuffleModeCommand)(nil)
-

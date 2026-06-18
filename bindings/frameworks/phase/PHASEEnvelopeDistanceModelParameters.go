@@ -15,9 +15,9 @@ type PHASEEnvelopeDistanceModelParameters struct {
 }
 
 var (
-	_clsPHASEEnvelopeDistanceModelParameters = _objcClass("PHASEEnvelopeDistanceModelParameters")
+	_clsPHASEEnvelopeDistanceModelParameters                 = _objcClass("PHASEEnvelopeDistanceModelParameters")
 	_pHASEEnvelopeDistanceModelParametersSelInitWithEnvelope = objc.RegisterName("initWithEnvelope:")
-	_pHASEEnvelopeDistanceModelParametersSelEnvelope = objc.RegisterName("envelope")
+	_pHASEEnvelopeDistanceModelParametersSelEnvelope         = objc.RegisterName("envelope")
 )
 
 func PHASEEnvelopeDistanceModelParametersFromID(id objc.ID) *PHASEEnvelopeDistanceModelParameters {
@@ -33,13 +33,16 @@ func PHASEEnvelopeDistanceModelParametersFromID(id objc.ID) *PHASEEnvelopeDistan
 // @method initWithEnvelope @abstract Initialize a PHASEEnvelopeDistanceModelParameters with a PHASEEnvelope @param envelope An envelope object where x values are interpreted as distance and the y values interpreted as gain. @return An instance, or nil if initialization failed.
 func (o *PHASEEnvelopeDistanceModelParameters) InitWithEnvelope(envelope *PHASEEnvelope) *PHASEEnvelopeDistanceModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeDistanceModelParametersSelInitWithEnvelope, envelope.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEnvelopeDistanceModelParametersFromID(_ret)
 }
 
 func (o *PHASEEnvelopeDistanceModelParameters) Envelope() *PHASEEnvelope {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEnvelopeDistanceModelParametersSelEnvelope)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEnvelopeFromID(_ret)
 }
-

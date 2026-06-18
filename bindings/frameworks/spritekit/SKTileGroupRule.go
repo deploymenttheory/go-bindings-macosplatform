@@ -18,15 +18,15 @@ type SKTileGroupRule struct {
 }
 
 var (
-	_clsSKTileGroupRule = _objcClass("SKTileGroupRule")
+	_clsSKTileGroupRule                                          = _objcClass("SKTileGroupRule")
 	_sKTileGroupRuleSelTileGroupRuleWithAdjacencyTileDefinitions = objc.RegisterName("tileGroupRuleWithAdjacency:tileDefinitions:")
-	_sKTileGroupRuleSelInitWithAdjacencyTileDefinitions = objc.RegisterName("initWithAdjacency:tileDefinitions:")
-	_sKTileGroupRuleSelAdjacency = objc.RegisterName("adjacency")
-	_sKTileGroupRuleSelSetAdjacency = objc.RegisterName("setAdjacency:")
-	_sKTileGroupRuleSelTileDefinitions = objc.RegisterName("tileDefinitions")
-	_sKTileGroupRuleSelSetTileDefinitions = objc.RegisterName("setTileDefinitions:")
-	_sKTileGroupRuleSelName = objc.RegisterName("name")
-	_sKTileGroupRuleSelSetName = objc.RegisterName("setName:")
+	_sKTileGroupRuleSelInitWithAdjacencyTileDefinitions          = objc.RegisterName("initWithAdjacency:tileDefinitions:")
+	_sKTileGroupRuleSelAdjacency                                 = objc.RegisterName("adjacency")
+	_sKTileGroupRuleSelSetAdjacency                              = objc.RegisterName("setAdjacency:")
+	_sKTileGroupRuleSelTileDefinitions                           = objc.RegisterName("tileDefinitions")
+	_sKTileGroupRuleSelSetTileDefinitions                        = objc.RegisterName("setTileDefinitions:")
+	_sKTileGroupRuleSelName                                      = objc.RegisterName("name")
+	_sKTileGroupRuleSelSetName                                   = objc.RegisterName("setName:")
 )
 
 func SKTileGroupRuleFromID(id objc.ID) *SKTileGroupRule {
@@ -42,14 +42,18 @@ func SKTileGroupRuleFromID(id objc.ID) *SKTileGroupRule {
 // Create a tile group rule with the specified adjacency and tile definitions. @param adjacency the adjacency requirements for this rule; use the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group; tiles not masked out must be empty @param tileDefinitions the tile definitions used for this rule
 func SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*SKTileDefinition]) *SKTileGroupRule {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKTileGroupRule), _sKTileGroupRuleSelTileGroupRuleWithAdjacencyTileDefinitions, adjacency, tileDefinitions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupRuleFromID(_ret)
 }
 
 // Initilize a tile group rule with the specified adjacency and tile definitions. @param adjacency the adjacency requirements for this rule; use the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group; tiles not masked out must be empty @param tileDefinitions the tile definitions used for this rule
 func (o *SKTileGroupRule) InitWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*SKTileDefinition]) *SKTileGroupRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupRuleSelInitWithAdjacencyTileDefinitions, adjacency, tileDefinitions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKTileGroupRuleFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *SKTileGroupRule) SetAdjacency(adjacency SKTileAdjacencyMask) {
 // The tile definitions used by this rule. If the rule is evaluated and its conditions are met, one of the tile definitions within this array will be randomly selected for placement within the tile map. Each tile definitions' placement weight is taken into consideration to determine how likely each is to be selected; tile definitions with higher placement weights will be selected more frequently than those with lower placement weights.
 func (o *SKTileGroupRule) TileDefinitions() *foundation.NSArray[*SKTileDefinition] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupRuleSelTileDefinitions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKTileDefinition](_ret)
 }
 
@@ -77,11 +83,12 @@ func (o *SKTileGroupRule) SetTileDefinitions(tileDefinitions *foundation.NSArray
 // Client-assignable name for the tile group rule. Defaults to nil.
 func (o *SKTileGroupRule) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKTileGroupRuleSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *SKTileGroupRule) SetName(name *foundation.NSString) {
 	o.Ptr().Send(_sKTileGroupRuleSelSetName, name.Ptr())
 }
-

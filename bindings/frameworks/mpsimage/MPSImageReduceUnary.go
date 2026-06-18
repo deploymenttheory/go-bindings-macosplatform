@@ -16,8 +16,8 @@ type MPSImageReduceUnary struct {
 }
 
 var (
-	_clsMPSImageReduceUnary = _objcClass("MPSImageReduceUnary")
-	_mPSImageReduceUnarySelClipRectSource = objc.RegisterName("clipRectSource")
+	_clsMPSImageReduceUnary                  = _objcClass("MPSImageReduceUnary")
+	_mPSImageReduceUnarySelClipRectSource    = objc.RegisterName("clipRectSource")
 	_mPSImageReduceUnarySelSetClipRectSource = objc.RegisterName("setClipRectSource:")
 )
 
@@ -40,4 +40,3 @@ func (o *MPSImageReduceUnary) ClipRectSource() metal.MTLRegion {
 func (o *MPSImageReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
 	o.Ptr().Send(_mPSImageReduceUnarySelSetClipRectSource, clipRectSource)
 }
-

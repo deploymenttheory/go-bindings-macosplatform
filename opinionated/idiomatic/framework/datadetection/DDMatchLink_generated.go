@@ -50,4 +50,3 @@ type MatchLinkable interface {
 }
 
 var _ MatchLinkable = (*MatchLink)(nil)
-

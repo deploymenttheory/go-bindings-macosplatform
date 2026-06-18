@@ -35,7 +35,9 @@ func NewAuthorizationPasswordRequest() *AuthorizationPasswordRequest {
 	return &AuthorizationPasswordRequest{inner: raw.ASAuthorizationPasswordRequestFromID(_id)}
 }
 
-func (x *AuthorizationPasswordRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationPasswordRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationPasswordRequestable is the interface implemented by [AuthorizationPasswordRequest], for mocking and DI.
 type AuthorizationPasswordRequestable interface {
@@ -43,4 +45,3 @@ type AuthorizationPasswordRequestable interface {
 }
 
 var _ AuthorizationPasswordRequestable = (*AuthorizationPasswordRequest)(nil)
-

@@ -16,14 +16,14 @@ type MTRTemperatureControlClusterSetTemperatureParams struct {
 }
 
 var (
-	_clsMTRTemperatureControlClusterSetTemperatureParams = _objcClass("MTRTemperatureControlClusterSetTemperatureParams")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperature = objc.RegisterName("targetTemperature")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTargetTemperature = objc.RegisterName("setTargetTemperature:")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperatureLevel = objc.RegisterName("targetTemperatureLevel")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTargetTemperatureLevel = objc.RegisterName("setTargetTemperatureLevel:")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRTemperatureControlClusterSetTemperatureParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRTemperatureControlClusterSetTemperatureParams                               = _objcClass("MTRTemperatureControlClusterSetTemperatureParams")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperature              = objc.RegisterName("targetTemperature")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTargetTemperature           = objc.RegisterName("setTargetTemperature:")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperatureLevel         = objc.RegisterName("targetTemperatureLevel")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTargetTemperatureLevel      = objc.RegisterName("setTargetTemperatureLevel:")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRTemperatureControlClusterSetTemperatureParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRTemperatureControlClusterSetTemperatureParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -39,7 +39,9 @@ func MTRTemperatureControlClusterSetTemperatureParamsFromID(id objc.ID) *MTRTemp
 
 func (o *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperature(
 
 func (o *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTemperatureControlClusterSetTemperatureParamsSelTargetTemperatureLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *MTRTemperatureControlClusterSetTemperatureParams) SetTargetTemperatureL
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTemperatureControlClusterSetTemperatureParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -71,11 +77,12 @@ func (o *MTRTemperatureControlClusterSetTemperatureParams) SetTimedInvokeTimeout
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRTemperatureControlClusterSetTemperatureParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRTemperatureControlClusterSetTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRTemperatureControlClusterSetTemperatureParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

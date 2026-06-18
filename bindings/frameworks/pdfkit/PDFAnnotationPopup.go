@@ -15,7 +15,7 @@ type PDFAnnotationPopup struct {
 }
 
 var (
-	_clsPDFAnnotationPopup = _objcClass("PDFAnnotationPopup")
+	_clsPDFAnnotationPopup          = _objcClass("PDFAnnotationPopup")
 	_pDFAnnotationPopupSelSetIsOpen = objc.RegisterName("setIsOpen:")
 )
 
@@ -32,4 +32,3 @@ func PDFAnnotationPopupFromID(id objc.ID) *PDFAnnotationPopup {
 func (o *PDFAnnotationPopup) SetIsOpen(isOpen bool) {
 	o.Ptr().Send(_pDFAnnotationPopupSelSetIsOpen, isOpen)
 }
-

@@ -107,4 +107,3 @@ type NEVPNConnectionable interface {
 }
 
 var _ NEVPNConnectionable = (*NEVPNConnection)(nil)
-

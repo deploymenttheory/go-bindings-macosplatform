@@ -639,4 +639,3 @@ type MenuItemCellable interface {
 }
 
 var _ MenuItemCellable = (*MenuItemCell)(nil)
-

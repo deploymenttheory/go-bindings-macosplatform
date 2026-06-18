@@ -16,7 +16,7 @@ type PKVoIPPushMetadata struct {
 }
 
 var (
-	_clsPKVoIPPushMetadata = _objcClass("PKVoIPPushMetadata")
+	_clsPKVoIPPushMetadata           = _objcClass("PKVoIPPushMetadata")
 	_pKVoIPPushMetadataSelMustReport = objc.RegisterName("mustReport")
 )
 
@@ -34,4 +34,3 @@ func (o *PKVoIPPushMetadata) MustReport() bool {
 	_ret := objc.Send[bool](o.Ptr(), _pKVoIPPushMetadataSelMustReport)
 	return _ret
 }
-

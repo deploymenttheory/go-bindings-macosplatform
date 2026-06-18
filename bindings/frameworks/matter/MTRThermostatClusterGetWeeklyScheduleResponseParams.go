@@ -18,18 +18,18 @@ type MTRThermostatClusterGetWeeklyScheduleResponseParams struct {
 }
 
 var (
-	_clsMTRThermostatClusterGetWeeklyScheduleResponseParams = _objcClass("MTRThermostatClusterGetWeeklyScheduleResponseParams")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelNumberOfTransitionsForSequence = objc.RegisterName("numberOfTransitionsForSequence")
+	_clsMTRThermostatClusterGetWeeklyScheduleResponseParams                                  = _objcClass("MTRThermostatClusterGetWeeklyScheduleResponseParams")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelInitWithResponseValueError        = objc.RegisterName("initWithResponseValue:error:")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelNumberOfTransitionsForSequence    = objc.RegisterName("numberOfTransitionsForSequence")
 	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetNumberOfTransitionsForSequence = objc.RegisterName("setNumberOfTransitionsForSequence:")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelDayOfWeekForSequence = objc.RegisterName("dayOfWeekForSequence")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetDayOfWeekForSequence = objc.RegisterName("setDayOfWeekForSequence:")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelModeForSequence = objc.RegisterName("modeForSequence")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetModeForSequence = objc.RegisterName("setModeForSequence:")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelTransitions = objc.RegisterName("transitions")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetTransitions = objc.RegisterName("setTransitions:")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelDayOfWeekForSequence              = objc.RegisterName("dayOfWeekForSequence")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetDayOfWeekForSequence           = objc.RegisterName("setDayOfWeekForSequence:")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelModeForSequence                   = objc.RegisterName("modeForSequence")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetModeForSequence                = objc.RegisterName("setModeForSequence:")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelTransitions                       = objc.RegisterName("transitions")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetTransitions                    = objc.RegisterName("setTransitions:")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelTimedInvokeTimeoutMs              = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetTimedInvokeTimeoutMs           = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(id objc.ID) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
@@ -46,7 +46,9 @@ func MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(id objc.ID) *MTRT
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterGetWeeklyScheduleResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -55,7 +57,9 @@ func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) InitWithResponseVa
 
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) NumberOfTransitionsForSequence() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterGetWeeklyScheduleResponseParamsSelNumberOfTransitionsForSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetNumberOfTransit
 
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) DayOfWeekForSequence() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterGetWeeklyScheduleResponseParamsSelDayOfWeekForSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetDayOfWeekForSeq
 
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) ModeForSequence() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterGetWeeklyScheduleResponseParamsSelModeForSequence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,11 +103,12 @@ func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTransitions(tra
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterGetWeeklyScheduleResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterGetWeeklyScheduleResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

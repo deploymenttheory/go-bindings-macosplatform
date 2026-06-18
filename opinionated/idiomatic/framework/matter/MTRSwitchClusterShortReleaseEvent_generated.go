@@ -16,7 +16,9 @@ type MTRSwitchClusterShortReleaseEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRSwitchClusterShortReleaseEvent].
-func (x *MTRSwitchClusterShortReleaseEvent) Unwrap() *raw.MTRSwitchClusterShortReleaseEvent { return x.inner }
+func (x *MTRSwitchClusterShortReleaseEvent) Unwrap() *raw.MTRSwitchClusterShortReleaseEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTRSwitchClusterShortReleaseEventable interface {
 }
 
 var _ MTRSwitchClusterShortReleaseEventable = (*MTRSwitchClusterShortReleaseEvent)(nil)
-

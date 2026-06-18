@@ -11,13 +11,17 @@ import (
 
 func GICDCallbackFunctions() ICD_callback_functions {
 	ptr, _ := purego.Dlsym(_icadevicesLib, "gICDCallbackFunctions")
-	if ptr == 0 { return ICD_callback_functions{} }
+	if ptr == 0 {
+		return ICD_callback_functions{}
+	}
 	return *(*ICD_callback_functions)(unsafe.Pointer(ptr))
 }
 
 func GICDScannerCallbackFunctions() ICD_Scannerscanner_callback_functions {
 	ptr, _ := purego.Dlsym(_icadevicesLib, "gICDScannerCallbackFunctions")
-	if ptr == 0 { return ICD_Scannerscanner_callback_functions{} }
+	if ptr == 0 {
+		return ICD_Scannerscanner_callback_functions{}
+	}
 	return *(*ICD_Scannerscanner_callback_functions)(unsafe.Pointer(ptr))
 }
 
@@ -741,4 +745,3 @@ func KMetaDataDictionaryKey() uintptr {
 	ptr, _ := purego.Dlsym(_icadevicesLib, "kMetaDataDictionaryKey")
 	return ptr
 }
-

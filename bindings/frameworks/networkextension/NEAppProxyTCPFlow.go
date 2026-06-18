@@ -18,11 +18,11 @@ type NEAppProxyTCPFlow struct {
 }
 
 var (
-	_clsNEAppProxyTCPFlow = _objcClass("NEAppProxyTCPFlow")
-	_nEAppProxyTCPFlowSelReadDataWithCompletionHandler = objc.RegisterName("readDataWithCompletionHandler:")
+	_clsNEAppProxyTCPFlow                               = _objcClass("NEAppProxyTCPFlow")
+	_nEAppProxyTCPFlowSelReadDataWithCompletionHandler  = objc.RegisterName("readDataWithCompletionHandler:")
 	_nEAppProxyTCPFlowSelWriteDataWithCompletionHandler = objc.RegisterName("writeData:withCompletionHandler:")
-	_nEAppProxyTCPFlowSelRemoteFlowEndpoint = objc.RegisterName("remoteFlowEndpoint")
-	_nEAppProxyTCPFlowSelRemoteEndpoint = objc.RegisterName("remoteEndpoint")
+	_nEAppProxyTCPFlowSelRemoteFlowEndpoint             = objc.RegisterName("remoteFlowEndpoint")
+	_nEAppProxyTCPFlowSelRemoteEndpoint                 = objc.RegisterName("remoteEndpoint")
 )
 
 func NEAppProxyTCPFlowFromID(id objc.ID) *NEAppProxyTCPFlow {
@@ -65,7 +65,9 @@ func (o *NEAppProxyTCPFlow) WriteDataWithCompletionHandler(data *foundation.NSDa
 // @property remoteFlowEndpoint @discussion An `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
 func (o *NEAppProxyTCPFlow) RemoteFlowEndpoint() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEAppProxyTCPFlowSelRemoteFlowEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -75,4 +77,3 @@ func (o *NEAppProxyTCPFlow) RemoteEndpoint() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nEAppProxyTCPFlowSelRemoteEndpoint)
 	return _ret
 }
-

@@ -46,7 +46,9 @@ func (x *EnvironmentMechanismCompanion) StateHash() *foundation.NSData {
 	return x.inner.StateHash()
 }
 
-func (x *EnvironmentMechanismCompanion) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return &x.inner.LAEnvironmentMechanism }
+func (x *EnvironmentMechanismCompanion) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
+	return &x.inner.LAEnvironmentMechanism
+}
 
 // EnvironmentMechanismCompanionable is the interface implemented by [EnvironmentMechanismCompanion], for mocking and DI.
 type EnvironmentMechanismCompanionable interface {
@@ -56,4 +58,3 @@ type EnvironmentMechanismCompanionable interface {
 }
 
 var _ EnvironmentMechanismCompanionable = (*EnvironmentMechanismCompanion)(nil)
-

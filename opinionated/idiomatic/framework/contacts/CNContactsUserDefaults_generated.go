@@ -58,4 +58,3 @@ type ContactsUserDefaultsable interface {
 }
 
 var _ ContactsUserDefaultsable = (*ContactsUserDefaults)(nil)
-

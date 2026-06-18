@@ -16,19 +16,19 @@ type CAMetalDisplayLink struct {
 }
 
 var (
-	_clsCAMetalDisplayLink = _objcClass("CAMetalDisplayLink")
-	_cAMetalDisplayLinkSelInitWithMetalLayer = objc.RegisterName("initWithMetalLayer:")
-	_cAMetalDisplayLinkSelAddToRunLoopForMode = objc.RegisterName("addToRunLoop:forMode:")
-	_cAMetalDisplayLinkSelRemoveFromRunLoopForMode = objc.RegisterName("removeFromRunLoop:forMode:")
-	_cAMetalDisplayLinkSelInvalidate = objc.RegisterName("invalidate")
-	_cAMetalDisplayLinkSelDelegate = objc.RegisterName("delegate")
-	_cAMetalDisplayLinkSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cAMetalDisplayLinkSelPreferredFrameLatency = objc.RegisterName("preferredFrameLatency")
-	_cAMetalDisplayLinkSelSetPreferredFrameLatency = objc.RegisterName("setPreferredFrameLatency:")
-	_cAMetalDisplayLinkSelPreferredFrameRateRange = objc.RegisterName("preferredFrameRateRange")
+	_clsCAMetalDisplayLink                           = _objcClass("CAMetalDisplayLink")
+	_cAMetalDisplayLinkSelInitWithMetalLayer         = objc.RegisterName("initWithMetalLayer:")
+	_cAMetalDisplayLinkSelAddToRunLoopForMode        = objc.RegisterName("addToRunLoop:forMode:")
+	_cAMetalDisplayLinkSelRemoveFromRunLoopForMode   = objc.RegisterName("removeFromRunLoop:forMode:")
+	_cAMetalDisplayLinkSelInvalidate                 = objc.RegisterName("invalidate")
+	_cAMetalDisplayLinkSelDelegate                   = objc.RegisterName("delegate")
+	_cAMetalDisplayLinkSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_cAMetalDisplayLinkSelPreferredFrameLatency      = objc.RegisterName("preferredFrameLatency")
+	_cAMetalDisplayLinkSelSetPreferredFrameLatency   = objc.RegisterName("setPreferredFrameLatency:")
+	_cAMetalDisplayLinkSelPreferredFrameRateRange    = objc.RegisterName("preferredFrameRateRange")
 	_cAMetalDisplayLinkSelSetPreferredFrameRateRange = objc.RegisterName("setPreferredFrameRateRange:")
-	_cAMetalDisplayLinkSelIsPaused = objc.RegisterName("isPaused")
-	_cAMetalDisplayLinkSelSetPaused = objc.RegisterName("setPaused:")
+	_cAMetalDisplayLinkSelIsPaused                   = objc.RegisterName("isPaused")
+	_cAMetalDisplayLinkSelSetPaused                  = objc.RegisterName("setPaused:")
 )
 
 func CAMetalDisplayLinkFromID(id objc.ID) *CAMetalDisplayLink {
@@ -43,7 +43,9 @@ func CAMetalDisplayLinkFromID(id objc.ID) *CAMetalDisplayLink {
 
 func (o *CAMetalDisplayLink) InitWithMetalLayer(layer *CAMetalLayer) *CAMetalDisplayLink {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAMetalDisplayLinkSelInitWithMetalLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMetalDisplayLinkFromID(_ret)
 }
 
@@ -94,4 +96,3 @@ func (o *CAMetalDisplayLink) IsPaused() bool {
 func (o *CAMetalDisplayLink) SetPaused(paused bool) {
 	o.Ptr().Send(_cAMetalDisplayLinkSelSetPaused, paused)
 }
-

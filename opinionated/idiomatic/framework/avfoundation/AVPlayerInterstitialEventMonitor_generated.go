@@ -16,7 +16,9 @@ type PlayerInterstitialEventMonitor struct {
 }
 
 // Unwrap returns the underlying [raw.AVPlayerInterstitialEventMonitor].
-func (x *PlayerInterstitialEventMonitor) Unwrap() *raw.AVPlayerInterstitialEventMonitor { return x.inner }
+func (x *PlayerInterstitialEventMonitor) Unwrap() *raw.AVPlayerInterstitialEventMonitor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,7 +91,9 @@ func (x *PlayerInterstitialEventMonitor) CurrentEventSkipControlLabel() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *PlayerInterstitialEventMonitor) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor { return x.inner }
+func (x *PlayerInterstitialEventMonitor) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor {
+	return x.inner
+}
 
 // PlayerInterstitialEventMonitorable is the interface implemented by [PlayerInterstitialEventMonitor], for mocking and DI.
 type PlayerInterstitialEventMonitorable interface {
@@ -103,4 +107,3 @@ type PlayerInterstitialEventMonitorable interface {
 }
 
 var _ PlayerInterstitialEventMonitorable = (*PlayerInterstitialEventMonitor)(nil)
-

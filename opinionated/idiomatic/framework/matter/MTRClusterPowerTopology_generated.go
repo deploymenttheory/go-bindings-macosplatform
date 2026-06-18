@@ -72,9 +72,13 @@ func (x *MTRClusterPowerTopology) ReadAttributeClusterRevisionWithParams(params 
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterPowerTopology) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterPowerTopology) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterPowerTopology) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterPowerTopology) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterPowerTopologyable is the interface implemented by [MTRClusterPowerTopology], for mocking and DI.
 type MTRClusterPowerTopologyable interface {
@@ -89,4 +93,3 @@ type MTRClusterPowerTopologyable interface {
 }
 
 var _ MTRClusterPowerTopologyable = (*MTRClusterPowerTopology)(nil)
-

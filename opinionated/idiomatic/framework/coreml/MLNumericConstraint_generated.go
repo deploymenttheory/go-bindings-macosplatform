@@ -60,4 +60,3 @@ type NumericConstraintable interface {
 }
 
 var _ NumericConstraintable = (*NumericConstraint)(nil)
-

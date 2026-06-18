@@ -69,4 +69,3 @@ type NotificationAttachmentable interface {
 }
 
 var _ NotificationAttachmentable = (*NotificationAttachment)(nil)
-

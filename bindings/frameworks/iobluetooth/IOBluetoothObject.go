@@ -26,4 +26,3 @@ func IOBluetoothObjectFromID(id objc.ID) *IOBluetoothObject {
 	purego.Track(o)
 	return o
 }
-

@@ -17,50 +17,50 @@ type DDDevice struct {
 }
 
 var (
-	_clsDDDevice = _objcClass("DDDevice")
+	_clsDDDevice                                                  = _objcClass("DDDevice")
 	_dDDeviceSelInitWithDisplayNameCategoryProtocolTypeIdentifier = objc.RegisterName("initWithDisplayName:category:protocolType:identifier:")
-	_dDDeviceSelDeviceSupports = objc.RegisterName("deviceSupports")
-	_dDDeviceSelSetDeviceSupports = objc.RegisterName("setDeviceSupports:")
-	_dDDeviceSelBluetoothIdentifier = objc.RegisterName("bluetoothIdentifier")
-	_dDDeviceSelSetBluetoothIdentifier = objc.RegisterName("setBluetoothIdentifier:")
-	_dDDeviceSelCategory = objc.RegisterName("category")
-	_dDDeviceSelSetCategory = objc.RegisterName("setCategory:")
-	_dDDeviceSelDisplayImageName = objc.RegisterName("displayImageName")
-	_dDDeviceSelSetDisplayImageName = objc.RegisterName("setDisplayImageName:")
-	_dDDeviceSelDisplayName = objc.RegisterName("displayName")
-	_dDDeviceSelSetDisplayName = objc.RegisterName("setDisplayName:")
-	_dDDeviceSelIdentifier = objc.RegisterName("identifier")
-	_dDDeviceSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_dDDeviceSelMediaPlaybackState = objc.RegisterName("mediaPlaybackState")
-	_dDDeviceSelSetMediaPlaybackState = objc.RegisterName("setMediaPlaybackState:")
-	_dDDeviceSelMediaContentTitle = objc.RegisterName("mediaContentTitle")
-	_dDDeviceSelSetMediaContentTitle = objc.RegisterName("setMediaContentTitle:")
-	_dDDeviceSelMediaContentSubtitle = objc.RegisterName("mediaContentSubtitle")
-	_dDDeviceSelSetMediaContentSubtitle = objc.RegisterName("setMediaContentSubtitle:")
-	_dDDeviceSelNetworkEndpoint = objc.RegisterName("networkEndpoint")
-	_dDDeviceSelSetNetworkEndpoint = objc.RegisterName("setNetworkEndpoint:")
-	_dDDeviceSelProtocol = objc.RegisterName("protocol")
-	_dDDeviceSelSetProtocol = objc.RegisterName("setProtocol:")
-	_dDDeviceSelProtocolType = objc.RegisterName("protocolType")
-	_dDDeviceSelSetProtocolType = objc.RegisterName("setProtocolType:")
-	_dDDeviceSelState = objc.RegisterName("state")
-	_dDDeviceSelSetState = objc.RegisterName("setState:")
-	_dDDeviceSelSSID = objc.RegisterName("SSID")
-	_dDDeviceSelSetSSID = objc.RegisterName("setSSID:")
-	_dDDeviceSelSupportsGrouping = objc.RegisterName("supportsGrouping")
-	_dDDeviceSelSetSupportsGrouping = objc.RegisterName("setSupportsGrouping:")
-	_dDDeviceSelTxtRecordData = objc.RegisterName("txtRecordData")
-	_dDDeviceSelSetTxtRecordData = objc.RegisterName("setTxtRecordData:")
-	_dDDeviceSelUrl = objc.RegisterName("url")
-	_dDDeviceSelSetUrl = objc.RegisterName("setUrl:")
-	_dDDeviceSelWifiAwareServiceName = objc.RegisterName("wifiAwareServiceName")
-	_dDDeviceSelSetWifiAwareServiceName = objc.RegisterName("setWifiAwareServiceName:")
-	_dDDeviceSelWifiAwareServiceRole = objc.RegisterName("wifiAwareServiceRole")
-	_dDDeviceSelSetWifiAwareServiceRole = objc.RegisterName("setWifiAwareServiceRole:")
-	_dDDeviceSelWifiAwareModelName = objc.RegisterName("wifiAwareModelName")
-	_dDDeviceSelSetWifiAwareModelName = objc.RegisterName("setWifiAwareModelName:")
-	_dDDeviceSelWifiAwareVendorName = objc.RegisterName("wifiAwareVendorName")
-	_dDDeviceSelSetWifiAwareVendorName = objc.RegisterName("setWifiAwareVendorName:")
+	_dDDeviceSelDeviceSupports                                    = objc.RegisterName("deviceSupports")
+	_dDDeviceSelSetDeviceSupports                                 = objc.RegisterName("setDeviceSupports:")
+	_dDDeviceSelBluetoothIdentifier                               = objc.RegisterName("bluetoothIdentifier")
+	_dDDeviceSelSetBluetoothIdentifier                            = objc.RegisterName("setBluetoothIdentifier:")
+	_dDDeviceSelCategory                                          = objc.RegisterName("category")
+	_dDDeviceSelSetCategory                                       = objc.RegisterName("setCategory:")
+	_dDDeviceSelDisplayImageName                                  = objc.RegisterName("displayImageName")
+	_dDDeviceSelSetDisplayImageName                               = objc.RegisterName("setDisplayImageName:")
+	_dDDeviceSelDisplayName                                       = objc.RegisterName("displayName")
+	_dDDeviceSelSetDisplayName                                    = objc.RegisterName("setDisplayName:")
+	_dDDeviceSelIdentifier                                        = objc.RegisterName("identifier")
+	_dDDeviceSelSetIdentifier                                     = objc.RegisterName("setIdentifier:")
+	_dDDeviceSelMediaPlaybackState                                = objc.RegisterName("mediaPlaybackState")
+	_dDDeviceSelSetMediaPlaybackState                             = objc.RegisterName("setMediaPlaybackState:")
+	_dDDeviceSelMediaContentTitle                                 = objc.RegisterName("mediaContentTitle")
+	_dDDeviceSelSetMediaContentTitle                              = objc.RegisterName("setMediaContentTitle:")
+	_dDDeviceSelMediaContentSubtitle                              = objc.RegisterName("mediaContentSubtitle")
+	_dDDeviceSelSetMediaContentSubtitle                           = objc.RegisterName("setMediaContentSubtitle:")
+	_dDDeviceSelNetworkEndpoint                                   = objc.RegisterName("networkEndpoint")
+	_dDDeviceSelSetNetworkEndpoint                                = objc.RegisterName("setNetworkEndpoint:")
+	_dDDeviceSelProtocol                                          = objc.RegisterName("protocol")
+	_dDDeviceSelSetProtocol                                       = objc.RegisterName("setProtocol:")
+	_dDDeviceSelProtocolType                                      = objc.RegisterName("protocolType")
+	_dDDeviceSelSetProtocolType                                   = objc.RegisterName("setProtocolType:")
+	_dDDeviceSelState                                             = objc.RegisterName("state")
+	_dDDeviceSelSetState                                          = objc.RegisterName("setState:")
+	_dDDeviceSelSSID                                              = objc.RegisterName("SSID")
+	_dDDeviceSelSetSSID                                           = objc.RegisterName("setSSID:")
+	_dDDeviceSelSupportsGrouping                                  = objc.RegisterName("supportsGrouping")
+	_dDDeviceSelSetSupportsGrouping                               = objc.RegisterName("setSupportsGrouping:")
+	_dDDeviceSelTxtRecordData                                     = objc.RegisterName("txtRecordData")
+	_dDDeviceSelSetTxtRecordData                                  = objc.RegisterName("setTxtRecordData:")
+	_dDDeviceSelUrl                                               = objc.RegisterName("url")
+	_dDDeviceSelSetUrl                                            = objc.RegisterName("setUrl:")
+	_dDDeviceSelWifiAwareServiceName                              = objc.RegisterName("wifiAwareServiceName")
+	_dDDeviceSelSetWifiAwareServiceName                           = objc.RegisterName("setWifiAwareServiceName:")
+	_dDDeviceSelWifiAwareServiceRole                              = objc.RegisterName("wifiAwareServiceRole")
+	_dDDeviceSelSetWifiAwareServiceRole                           = objc.RegisterName("setWifiAwareServiceRole:")
+	_dDDeviceSelWifiAwareModelName                                = objc.RegisterName("wifiAwareModelName")
+	_dDDeviceSelSetWifiAwareModelName                             = objc.RegisterName("setWifiAwareModelName:")
+	_dDDeviceSelWifiAwareVendorName                               = objc.RegisterName("wifiAwareVendorName")
+	_dDDeviceSelSetWifiAwareVendorName                            = objc.RegisterName("setWifiAwareVendorName:")
 )
 
 func DDDeviceFromID(id objc.ID) *DDDevice {
@@ -76,7 +76,9 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 // Initializes a DD device with display name, category, protocol type, and identifier.
 func (o *DDDevice) InitWithDisplayNameCategoryProtocolTypeIdentifier(displayName *foundation.NSString, category DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier *foundation.NSString) *DDDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelInitWithDisplayNameCategoryProtocolTypeIdentifier, displayName.Ptr(), category, protocolType.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DDDeviceFromID(_ret)
 }
 
@@ -94,7 +96,9 @@ func (o *DDDevice) SetDeviceSupports(deviceSupports DDDeviceSupports) {
 // Identifier to communicate with the device via Bluetooth.
 func (o *DDDevice) BluetoothIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelBluetoothIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -115,7 +119,9 @@ func (o *DDDevice) SetCategory(category DDDeviceCategory) {
 // Device's custom asset for product image name in the main App bundle.
 func (o *DDDevice) DisplayImageName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelDisplayImageName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -127,7 +133,9 @@ func (o *DDDevice) SetDisplayImageName(displayImageName *foundation.NSString) {
 // Name of the device. Should be suitable for displaying to a user.
 func (o *DDDevice) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -138,7 +146,9 @@ func (o *DDDevice) SetDisplayName(displayName *foundation.NSString) {
 // Identifier of the device.
 func (o *DDDevice) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -159,7 +169,9 @@ func (o *DDDevice) SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybac
 // Title of the media content being played.
 func (o *DDDevice) MediaContentTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelMediaContentTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -170,7 +182,9 @@ func (o *DDDevice) SetMediaContentTitle(mediaContentTitle *foundation.NSString) 
 // Subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
 func (o *DDDevice) MediaContentSubtitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelMediaContentSubtitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -181,7 +195,9 @@ func (o *DDDevice) SetMediaContentSubtitle(mediaContentSubtitle *foundation.NSSt
 // Endpoint to communicate with the device via networking.
 func (o *DDDevice) NetworkEndpoint() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelNetworkEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -202,7 +218,9 @@ func (o *DDDevice) SetProtocol(protocol DDDeviceProtocol) {
 // Uniform Type for the protocol.
 func (o *DDDevice) ProtocolType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelProtocolType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -223,7 +241,9 @@ func (o *DDDevice) SetState(state DDDeviceState) {
 // Device's WiFi Hotspot SSID.
 func (o *DDDevice) SSID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelSSID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -246,7 +266,9 @@ func (o *DDDevice) SetSupportsGrouping(supportsGrouping bool) {
 // TXT record of the device.
 func (o *DDDevice) TxtRecordData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelTxtRecordData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -257,7 +279,9 @@ func (o *DDDevice) SetTxtRecordData(txtRecordData *foundation.NSData) {
 // URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
 func (o *DDDevice) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -268,7 +292,9 @@ func (o *DDDevice) SetUrl(url *foundation.NSURL) {
 // Device's Wi-Fi Aware's service name.
 func (o *DDDevice) WifiAwareServiceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelWifiAwareServiceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -291,7 +317,9 @@ func (o *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwar
 // Device's Wi-Fi Aware model name.
 func (o *DDDevice) WifiAwareModelName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelWifiAwareModelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -303,7 +331,9 @@ func (o *DDDevice) SetWifiAwareModelName(wifiAwareModelName *foundation.NSString
 // Device's Wi-Fi Aware vendor name.
 func (o *DDDevice) WifiAwareVendorName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDDeviceSelWifiAwareVendorName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -311,4 +341,3 @@ func (o *DDDevice) WifiAwareVendorName() *foundation.NSString {
 func (o *DDDevice) SetWifiAwareVendorName(wifiAwareVendorName *foundation.NSString) {
 	o.Ptr().Send(_dDDeviceSelSetWifiAwareVendorName, wifiAwareVendorName.Ptr())
 }
-

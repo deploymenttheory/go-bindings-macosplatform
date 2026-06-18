@@ -122,4 +122,3 @@ type ClassifySoundRequestable interface {
 }
 
 var _ ClassifySoundRequestable = (*ClassifySoundRequest)(nil)
-

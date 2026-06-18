@@ -322,4 +322,3 @@ type AccessPointable interface {
 }
 
 var _ AccessPointable = (*AccessPoint)(nil)
-

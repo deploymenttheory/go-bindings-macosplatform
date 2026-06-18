@@ -63,4 +63,3 @@ type CheckerboardNoiseSourceable interface {
 }
 
 var _ CheckerboardNoiseSourceable = (*CheckerboardNoiseSource)(nil)
-

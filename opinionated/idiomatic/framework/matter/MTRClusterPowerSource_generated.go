@@ -229,9 +229,13 @@ func (x *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *r
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterPowerSource) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterPowerSource) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterPowerSource) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterPowerSource) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterPowerSourceable is the interface implemented by [MTRClusterPowerSource], for mocking and DI.
 type MTRClusterPowerSourceable interface {
@@ -276,4 +280,3 @@ type MTRClusterPowerSourceable interface {
 }
 
 var _ MTRClusterPowerSourceable = (*MTRClusterPowerSource)(nil)
-

@@ -16,7 +16,7 @@ type MLState struct {
 }
 
 var (
-	_clsMLState = _objcClass("MLState")
+	_clsMLState                                  = _objcClass("MLState")
 	_mLStateSelGetMultiArrayForStateNamedHandler = objc.RegisterName("getMultiArrayForStateNamed:handler:")
 )
 
@@ -44,4 +44,3 @@ func (o *MLState) GetMultiArrayForStateNamedHandler(stateName *foundation.NSStri
 	}
 	o.Ptr().Send(_mLStateSelGetMultiArrayForStateNamedHandler, stateName.Ptr(), __block_handler)
 }
-

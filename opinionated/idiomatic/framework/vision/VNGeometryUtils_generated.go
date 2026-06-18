@@ -41,4 +41,3 @@ type GeometryUtilsable interface {
 }
 
 var _ GeometryUtilsable = (*GeometryUtils)(nil)
-

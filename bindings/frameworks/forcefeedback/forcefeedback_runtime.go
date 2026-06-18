@@ -14,8 +14,8 @@ import (
 
 var (
 	_forcefeedbackLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce         sync.Once
+	_failedSymbols    = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -51,16 +51,30 @@ func _loadLibrary() {
 	_register("FFCreateDevice", func() { purego.RegisterLibFunc(&_fnFFCreateDevice, _forcefeedbackLib, "FFCreateDevice") })
 	_register("FFDeviceCreateEffect", func() { purego.RegisterLibFunc(&_fnFFDeviceCreateEffect, _forcefeedbackLib, "FFDeviceCreateEffect") })
 	_register("FFDeviceEscape", func() { purego.RegisterLibFunc(&_fnFFDeviceEscape, _forcefeedbackLib, "FFDeviceEscape") })
-	_register("FFDeviceGetForceFeedbackCapabilities", func() { purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackCapabilities, _forcefeedbackLib, "FFDeviceGetForceFeedbackCapabilities") })
-	_register("FFDeviceGetForceFeedbackProperty", func() { purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackProperty, _forcefeedbackLib, "FFDeviceGetForceFeedbackProperty") })
-	_register("FFDeviceGetForceFeedbackState", func() { purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackState, _forcefeedbackLib, "FFDeviceGetForceFeedbackState") })
+	_register("FFDeviceGetForceFeedbackCapabilities", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackCapabilities, _forcefeedbackLib, "FFDeviceGetForceFeedbackCapabilities")
+	})
+	_register("FFDeviceGetForceFeedbackProperty", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackProperty, _forcefeedbackLib, "FFDeviceGetForceFeedbackProperty")
+	})
+	_register("FFDeviceGetForceFeedbackState", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackState, _forcefeedbackLib, "FFDeviceGetForceFeedbackState")
+	})
 	_register("FFDeviceReleaseEffect", func() { purego.RegisterLibFunc(&_fnFFDeviceReleaseEffect, _forcefeedbackLib, "FFDeviceReleaseEffect") })
-	_register("FFDeviceSendForceFeedbackCommand", func() { purego.RegisterLibFunc(&_fnFFDeviceSendForceFeedbackCommand, _forcefeedbackLib, "FFDeviceSendForceFeedbackCommand") })
-	_register("FFDeviceSetCooperativeLevel", func() { purego.RegisterLibFunc(&_fnFFDeviceSetCooperativeLevel, _forcefeedbackLib, "FFDeviceSetCooperativeLevel") })
-	_register("FFDeviceSetForceFeedbackProperty", func() { purego.RegisterLibFunc(&_fnFFDeviceSetForceFeedbackProperty, _forcefeedbackLib, "FFDeviceSetForceFeedbackProperty") })
+	_register("FFDeviceSendForceFeedbackCommand", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceSendForceFeedbackCommand, _forcefeedbackLib, "FFDeviceSendForceFeedbackCommand")
+	})
+	_register("FFDeviceSetCooperativeLevel", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceSetCooperativeLevel, _forcefeedbackLib, "FFDeviceSetCooperativeLevel")
+	})
+	_register("FFDeviceSetForceFeedbackProperty", func() {
+		purego.RegisterLibFunc(&_fnFFDeviceSetForceFeedbackProperty, _forcefeedbackLib, "FFDeviceSetForceFeedbackProperty")
+	})
 	_register("FFEffectDownload", func() { purego.RegisterLibFunc(&_fnFFEffectDownload, _forcefeedbackLib, "FFEffectDownload") })
 	_register("FFEffectEscape", func() { purego.RegisterLibFunc(&_fnFFEffectEscape, _forcefeedbackLib, "FFEffectEscape") })
-	_register("FFEffectGetEffectStatus", func() { purego.RegisterLibFunc(&_fnFFEffectGetEffectStatus, _forcefeedbackLib, "FFEffectGetEffectStatus") })
+	_register("FFEffectGetEffectStatus", func() {
+		purego.RegisterLibFunc(&_fnFFEffectGetEffectStatus, _forcefeedbackLib, "FFEffectGetEffectStatus")
+	})
 	_register("FFEffectGetParameters", func() { purego.RegisterLibFunc(&_fnFFEffectGetParameters, _forcefeedbackLib, "FFEffectGetParameters") })
 	_register("FFEffectSetParameters", func() { purego.RegisterLibFunc(&_fnFFEffectSetParameters, _forcefeedbackLib, "FFEffectSetParameters") })
 	_register("FFEffectStart", func() { purego.RegisterLibFunc(&_fnFFEffectStart, _forcefeedbackLib, "FFEffectStart") })

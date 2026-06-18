@@ -15,8 +15,8 @@ type NSFetchedPropertyDescription struct {
 }
 
 var (
-	_clsNSFetchedPropertyDescription = _objcClass("NSFetchedPropertyDescription")
-	_nSFetchedPropertyDescriptionSelFetchRequest = objc.RegisterName("fetchRequest")
+	_clsNSFetchedPropertyDescription                = _objcClass("NSFetchedPropertyDescription")
+	_nSFetchedPropertyDescriptionSelFetchRequest    = objc.RegisterName("fetchRequest")
 	_nSFetchedPropertyDescriptionSelSetFetchRequest = objc.RegisterName("setFetchRequest:")
 )
 
@@ -38,4 +38,3 @@ func (o *NSFetchedPropertyDescription) FetchRequest() *NSFetchRequest[objc.ID] {
 func (o *NSFetchedPropertyDescription) SetFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) {
 	o.Ptr().Send(_nSFetchedPropertyDescriptionSelSetFetchRequest, fetchRequest)
 }
-

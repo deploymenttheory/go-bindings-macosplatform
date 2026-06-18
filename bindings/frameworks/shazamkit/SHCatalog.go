@@ -16,7 +16,7 @@ type SHCatalog struct {
 }
 
 var (
-	_clsSHCatalog = _objcClass("SHCatalog")
+	_clsSHCatalog                              = _objcClass("SHCatalog")
 	_sHCatalogSelMinimumQuerySignatureDuration = objc.RegisterName("minimumQuerySignatureDuration")
 	_sHCatalogSelMaximumQuerySignatureDuration = objc.RegisterName("maximumQuerySignatureDuration")
 )
@@ -42,4 +42,3 @@ func (o *SHCatalog) MaximumQuerySignatureDuration() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sHCatalogSelMaximumQuerySignatureDuration)
 	return _ret
 }
-

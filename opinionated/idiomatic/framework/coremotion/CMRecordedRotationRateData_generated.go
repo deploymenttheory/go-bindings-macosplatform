@@ -41,9 +41,13 @@ func (x *RecordedRotationRateData) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
-func (x *RecordedRotationRateData) asRotationRateData() *raw.CMRotationRateData { return &x.inner.CMRotationRateData }
+func (x *RecordedRotationRateData) asRotationRateData() *raw.CMRotationRateData {
+	return &x.inner.CMRotationRateData
+}
 
-func (x *RecordedRotationRateData) asLogItem() *raw.CMLogItem { return &x.inner.CMRotationRateData.CMLogItem }
+func (x *RecordedRotationRateData) asLogItem() *raw.CMLogItem {
+	return &x.inner.CMRotationRateData.CMLogItem
+}
 
 // RecordedRotationRateDataable is the interface implemented by [RecordedRotationRateData], for mocking and DI.
 type RecordedRotationRateDataable interface {
@@ -52,4 +56,3 @@ type RecordedRotationRateDataable interface {
 }
 
 var _ RecordedRotationRateDataable = (*RecordedRotationRateData)(nil)
-

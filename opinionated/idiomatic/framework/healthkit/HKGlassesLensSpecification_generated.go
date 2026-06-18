@@ -72,7 +72,9 @@ func (x *GlassesLensSpecification) NearPupillaryDistance() *Quantity {
 	return &Quantity{inner: _r}
 }
 
-func (x *GlassesLensSpecification) asLensSpecification() *raw.HKLensSpecification { return &x.inner.HKLensSpecification }
+func (x *GlassesLensSpecification) asLensSpecification() *raw.HKLensSpecification {
+	return &x.inner.HKLensSpecification
+}
 
 // GlassesLensSpecificationable is the interface implemented by [GlassesLensSpecification], for mocking and DI.
 type GlassesLensSpecificationable interface {
@@ -84,4 +86,3 @@ type GlassesLensSpecificationable interface {
 }
 
 var _ GlassesLensSpecificationable = (*GlassesLensSpecification)(nil)
-

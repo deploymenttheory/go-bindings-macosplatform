@@ -16,41 +16,41 @@ type DOMHTMLTableElement struct {
 }
 
 var (
-	_clsDOMHTMLTableElement = _objcClass("DOMHTMLTableElement")
-	_dOMHTMLTableElementSelCreateTHead = objc.RegisterName("createTHead")
-	_dOMHTMLTableElementSelDeleteTHead = objc.RegisterName("deleteTHead")
-	_dOMHTMLTableElementSelCreateTFoot = objc.RegisterName("createTFoot")
-	_dOMHTMLTableElementSelDeleteTFoot = objc.RegisterName("deleteTFoot")
-	_dOMHTMLTableElementSelCreateCaption = objc.RegisterName("createCaption")
-	_dOMHTMLTableElementSelDeleteCaption = objc.RegisterName("deleteCaption")
-	_dOMHTMLTableElementSelInsertRow = objc.RegisterName("insertRow:")
-	_dOMHTMLTableElementSelDeleteRow = objc.RegisterName("deleteRow:")
-	_dOMHTMLTableElementSelCaption = objc.RegisterName("caption")
-	_dOMHTMLTableElementSelSetCaption = objc.RegisterName("setCaption:")
-	_dOMHTMLTableElementSelTHead = objc.RegisterName("tHead")
-	_dOMHTMLTableElementSelSetTHead = objc.RegisterName("setTHead:")
-	_dOMHTMLTableElementSelTFoot = objc.RegisterName("tFoot")
-	_dOMHTMLTableElementSelSetTFoot = objc.RegisterName("setTFoot:")
-	_dOMHTMLTableElementSelRows = objc.RegisterName("rows")
-	_dOMHTMLTableElementSelTBodies = objc.RegisterName("tBodies")
-	_dOMHTMLTableElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLTableElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLTableElementSelBgColor = objc.RegisterName("bgColor")
-	_dOMHTMLTableElementSelSetBgColor = objc.RegisterName("setBgColor:")
-	_dOMHTMLTableElementSelBorder = objc.RegisterName("border")
-	_dOMHTMLTableElementSelSetBorder = objc.RegisterName("setBorder:")
-	_dOMHTMLTableElementSelCellPadding = objc.RegisterName("cellPadding")
-	_dOMHTMLTableElementSelSetCellPadding = objc.RegisterName("setCellPadding:")
-	_dOMHTMLTableElementSelCellSpacing = objc.RegisterName("cellSpacing")
-	_dOMHTMLTableElementSelSetCellSpacing = objc.RegisterName("setCellSpacing:")
-	_dOMHTMLTableElementSelFrameBorders = objc.RegisterName("frameBorders")
+	_clsDOMHTMLTableElement                = _objcClass("DOMHTMLTableElement")
+	_dOMHTMLTableElementSelCreateTHead     = objc.RegisterName("createTHead")
+	_dOMHTMLTableElementSelDeleteTHead     = objc.RegisterName("deleteTHead")
+	_dOMHTMLTableElementSelCreateTFoot     = objc.RegisterName("createTFoot")
+	_dOMHTMLTableElementSelDeleteTFoot     = objc.RegisterName("deleteTFoot")
+	_dOMHTMLTableElementSelCreateCaption   = objc.RegisterName("createCaption")
+	_dOMHTMLTableElementSelDeleteCaption   = objc.RegisterName("deleteCaption")
+	_dOMHTMLTableElementSelInsertRow       = objc.RegisterName("insertRow:")
+	_dOMHTMLTableElementSelDeleteRow       = objc.RegisterName("deleteRow:")
+	_dOMHTMLTableElementSelCaption         = objc.RegisterName("caption")
+	_dOMHTMLTableElementSelSetCaption      = objc.RegisterName("setCaption:")
+	_dOMHTMLTableElementSelTHead           = objc.RegisterName("tHead")
+	_dOMHTMLTableElementSelSetTHead        = objc.RegisterName("setTHead:")
+	_dOMHTMLTableElementSelTFoot           = objc.RegisterName("tFoot")
+	_dOMHTMLTableElementSelSetTFoot        = objc.RegisterName("setTFoot:")
+	_dOMHTMLTableElementSelRows            = objc.RegisterName("rows")
+	_dOMHTMLTableElementSelTBodies         = objc.RegisterName("tBodies")
+	_dOMHTMLTableElementSelAlign           = objc.RegisterName("align")
+	_dOMHTMLTableElementSelSetAlign        = objc.RegisterName("setAlign:")
+	_dOMHTMLTableElementSelBgColor         = objc.RegisterName("bgColor")
+	_dOMHTMLTableElementSelSetBgColor      = objc.RegisterName("setBgColor:")
+	_dOMHTMLTableElementSelBorder          = objc.RegisterName("border")
+	_dOMHTMLTableElementSelSetBorder       = objc.RegisterName("setBorder:")
+	_dOMHTMLTableElementSelCellPadding     = objc.RegisterName("cellPadding")
+	_dOMHTMLTableElementSelSetCellPadding  = objc.RegisterName("setCellPadding:")
+	_dOMHTMLTableElementSelCellSpacing     = objc.RegisterName("cellSpacing")
+	_dOMHTMLTableElementSelSetCellSpacing  = objc.RegisterName("setCellSpacing:")
+	_dOMHTMLTableElementSelFrameBorders    = objc.RegisterName("frameBorders")
 	_dOMHTMLTableElementSelSetFrameBorders = objc.RegisterName("setFrameBorders:")
-	_dOMHTMLTableElementSelRules = objc.RegisterName("rules")
-	_dOMHTMLTableElementSelSetRules = objc.RegisterName("setRules:")
-	_dOMHTMLTableElementSelSummary = objc.RegisterName("summary")
-	_dOMHTMLTableElementSelSetSummary = objc.RegisterName("setSummary:")
-	_dOMHTMLTableElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLTableElementSelSetWidth = objc.RegisterName("setWidth:")
+	_dOMHTMLTableElementSelRules           = objc.RegisterName("rules")
+	_dOMHTMLTableElementSelSetRules        = objc.RegisterName("setRules:")
+	_dOMHTMLTableElementSelSummary         = objc.RegisterName("summary")
+	_dOMHTMLTableElementSelSetSummary      = objc.RegisterName("setSummary:")
+	_dOMHTMLTableElementSelWidth           = objc.RegisterName("width")
+	_dOMHTMLTableElementSelSetWidth        = objc.RegisterName("setWidth:")
 )
 
 func DOMHTMLTableElementFromID(id objc.ID) *DOMHTMLTableElement {
@@ -65,7 +65,9 @@ func DOMHTMLTableElementFromID(id objc.ID) *DOMHTMLTableElement {
 
 func (o *DOMHTMLTableElement) CreateTHead() *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCreateTHead)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
@@ -75,7 +77,9 @@ func (o *DOMHTMLTableElement) DeleteTHead() {
 
 func (o *DOMHTMLTableElement) CreateTFoot() *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCreateTFoot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
@@ -85,7 +89,9 @@ func (o *DOMHTMLTableElement) DeleteTFoot() {
 
 func (o *DOMHTMLTableElement) CreateCaption() *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCreateCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *DOMHTMLTableElement) DeleteCaption() {
 
 func (o *DOMHTMLTableElement) InsertRow(index int) *DOMHTMLElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelInsertRow, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLElementFromID(_ret)
 }
 
@@ -105,7 +113,9 @@ func (o *DOMHTMLTableElement) DeleteRow(index int) {
 
 func (o *DOMHTMLTableElement) Caption() *DOMHTMLTableCaptionElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCaption)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLTableCaptionElementFromID(_ret)
 }
 
@@ -115,7 +125,9 @@ func (o *DOMHTMLTableElement) SetCaption(caption *DOMHTMLTableCaptionElement) {
 
 func (o *DOMHTMLTableElement) THead() *DOMHTMLTableSectionElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelTHead)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLTableSectionElementFromID(_ret)
 }
 
@@ -125,7 +137,9 @@ func (o *DOMHTMLTableElement) SetTHead(tHead *DOMHTMLTableSectionElement) {
 
 func (o *DOMHTMLTableElement) TFoot() *DOMHTMLTableSectionElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelTFoot)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLTableSectionElementFromID(_ret)
 }
 
@@ -135,19 +149,25 @@ func (o *DOMHTMLTableElement) SetTFoot(tFoot *DOMHTMLTableSectionElement) {
 
 func (o *DOMHTMLTableElement) Rows() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelRows)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLTableElement) TBodies() *DOMHTMLCollection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelTBodies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLCollectionFromID(_ret)
 }
 
 func (o *DOMHTMLTableElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -157,7 +177,9 @@ func (o *DOMHTMLTableElement) SetAlign(align *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) BgColor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelBgColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -167,7 +189,9 @@ func (o *DOMHTMLTableElement) SetBgColor(bgColor *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) Border() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelBorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -177,7 +201,9 @@ func (o *DOMHTMLTableElement) SetBorder(border *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) CellPadding() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCellPadding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -187,7 +213,9 @@ func (o *DOMHTMLTableElement) SetCellPadding(cellPadding *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) CellSpacing() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelCellSpacing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -197,7 +225,9 @@ func (o *DOMHTMLTableElement) SetCellSpacing(cellSpacing *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) FrameBorders() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelFrameBorders)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -207,7 +237,9 @@ func (o *DOMHTMLTableElement) SetFrameBorders(frameBorders *foundation.NSString)
 
 func (o *DOMHTMLTableElement) Rules() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelRules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -217,7 +249,9 @@ func (o *DOMHTMLTableElement) SetRules(rules *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) Summary() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelSummary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -227,11 +261,12 @@ func (o *DOMHTMLTableElement) SetSummary(summary *foundation.NSString) {
 
 func (o *DOMHTMLTableElement) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLTableElementSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLTableElement) SetWidth(width *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLTableElementSelSetWidth, width.Ptr())
 }
-

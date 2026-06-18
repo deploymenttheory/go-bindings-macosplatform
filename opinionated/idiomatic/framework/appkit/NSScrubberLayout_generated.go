@@ -126,4 +126,3 @@ type ScrubberLayoutable interface {
 }
 
 var _ ScrubberLayoutable = (*ScrubberLayout)(nil)
-

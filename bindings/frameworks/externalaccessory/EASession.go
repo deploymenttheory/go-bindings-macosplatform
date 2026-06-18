@@ -18,12 +18,12 @@ type EASession struct {
 }
 
 var (
-	_clsEASession = _objcClass("EASession")
+	_clsEASession                             = _objcClass("EASession")
 	_eASessionSelInitWithAccessoryForProtocol = objc.RegisterName("initWithAccessory:forProtocol:")
-	_eASessionSelAccessory = objc.RegisterName("accessory")
-	_eASessionSelProtocolString = objc.RegisterName("protocolString")
-	_eASessionSelInputStream = objc.RegisterName("inputStream")
-	_eASessionSelOutputStream = objc.RegisterName("outputStream")
+	_eASessionSelAccessory                    = objc.RegisterName("accessory")
+	_eASessionSelProtocolString               = objc.RegisterName("protocolString")
+	_eASessionSelInputStream                  = objc.RegisterName("inputStream")
+	_eASessionSelOutputStream                 = objc.RegisterName("outputStream")
 )
 
 func EASessionFromID(id objc.ID) *EASession {
@@ -38,7 +38,9 @@ func EASessionFromID(id objc.ID) *EASession {
 
 func (o *EASession) InitWithAccessoryForProtocol(accessory *EAAccessory, protocolString *foundation.NSString) *EASession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eASessionSelInitWithAccessoryForProtocol, accessory.Ptr(), protocolString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EASessionFromID(_ret)
 }
 
@@ -61,4 +63,3 @@ func (o *EASession) OutputStream() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _eASessionSelOutputStream)
 	return _ret
 }
-

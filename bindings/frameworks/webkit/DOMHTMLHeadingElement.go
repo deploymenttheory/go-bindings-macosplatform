@@ -16,8 +16,8 @@ type DOMHTMLHeadingElement struct {
 }
 
 var (
-	_clsDOMHTMLHeadingElement = _objcClass("DOMHTMLHeadingElement")
-	_dOMHTMLHeadingElementSelAlign = objc.RegisterName("align")
+	_clsDOMHTMLHeadingElement         = _objcClass("DOMHTMLHeadingElement")
+	_dOMHTMLHeadingElementSelAlign    = objc.RegisterName("align")
 	_dOMHTMLHeadingElementSelSetAlign = objc.RegisterName("setAlign:")
 )
 
@@ -33,11 +33,12 @@ func DOMHTMLHeadingElementFromID(id objc.ID) *DOMHTMLHeadingElement {
 
 func (o *DOMHTMLHeadingElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLHeadingElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLHeadingElement) SetAlign(align *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLHeadingElementSelSetAlign, align.Ptr())
 }
-

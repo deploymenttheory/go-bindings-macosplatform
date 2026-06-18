@@ -32,4 +32,3 @@ type TextureProvider interface {
 type WarpGeometryProvider interface {
 	asWarpGeometry() *raw.SKWarpGeometry
 }
-

@@ -15,46 +15,46 @@ type NSUndoManager struct {
 }
 
 var (
-	_clsNSUndoManager = _objcClass("NSUndoManager")
-	_nSUndoManagerSelBeginUndoGrouping = objc.RegisterName("beginUndoGrouping")
-	_nSUndoManagerSelEndUndoGrouping = objc.RegisterName("endUndoGrouping")
-	_nSUndoManagerSelDisableUndoRegistration = objc.RegisterName("disableUndoRegistration")
-	_nSUndoManagerSelEnableUndoRegistration = objc.RegisterName("enableUndoRegistration")
-	_nSUndoManagerSelUndo = objc.RegisterName("undo")
-	_nSUndoManagerSelRedo = objc.RegisterName("redo")
-	_nSUndoManagerSelUndoNestedGroup = objc.RegisterName("undoNestedGroup")
-	_nSUndoManagerSelRemoveAllActions = objc.RegisterName("removeAllActions")
-	_nSUndoManagerSelRemoveAllActionsWithTarget = objc.RegisterName("removeAllActionsWithTarget:")
+	_clsNSUndoManager                                     = _objcClass("NSUndoManager")
+	_nSUndoManagerSelBeginUndoGrouping                    = objc.RegisterName("beginUndoGrouping")
+	_nSUndoManagerSelEndUndoGrouping                      = objc.RegisterName("endUndoGrouping")
+	_nSUndoManagerSelDisableUndoRegistration              = objc.RegisterName("disableUndoRegistration")
+	_nSUndoManagerSelEnableUndoRegistration               = objc.RegisterName("enableUndoRegistration")
+	_nSUndoManagerSelUndo                                 = objc.RegisterName("undo")
+	_nSUndoManagerSelRedo                                 = objc.RegisterName("redo")
+	_nSUndoManagerSelUndoNestedGroup                      = objc.RegisterName("undoNestedGroup")
+	_nSUndoManagerSelRemoveAllActions                     = objc.RegisterName("removeAllActions")
+	_nSUndoManagerSelRemoveAllActionsWithTarget           = objc.RegisterName("removeAllActionsWithTarget:")
 	_nSUndoManagerSelRegisterUndoWithTargetSelectorObject = objc.RegisterName("registerUndoWithTarget:selector:object:")
-	_nSUndoManagerSelPrepareWithInvocationTarget = objc.RegisterName("prepareWithInvocationTarget:")
-	_nSUndoManagerSelRegisterUndoWithTargetHandler = objc.RegisterName("registerUndoWithTarget:handler:")
-	_nSUndoManagerSelSetActionIsDiscardable = objc.RegisterName("setActionIsDiscardable:")
-	_nSUndoManagerSelSetActionName = objc.RegisterName("setActionName:")
-	_nSUndoManagerSelUndoActionUserInfoValueForKey = objc.RegisterName("undoActionUserInfoValueForKey:")
-	_nSUndoManagerSelRedoActionUserInfoValueForKey = objc.RegisterName("redoActionUserInfoValueForKey:")
-	_nSUndoManagerSelSetActionUserInfoValueForKey = objc.RegisterName("setActionUserInfoValue:forKey:")
-	_nSUndoManagerSelUndoMenuTitleForUndoActionName = objc.RegisterName("undoMenuTitleForUndoActionName:")
-	_nSUndoManagerSelRedoMenuTitleForUndoActionName = objc.RegisterName("redoMenuTitleForUndoActionName:")
-	_nSUndoManagerSelGroupingLevel = objc.RegisterName("groupingLevel")
-	_nSUndoManagerSelIsUndoRegistrationEnabled = objc.RegisterName("isUndoRegistrationEnabled")
-	_nSUndoManagerSelGroupsByEvent = objc.RegisterName("groupsByEvent")
-	_nSUndoManagerSelSetGroupsByEvent = objc.RegisterName("setGroupsByEvent:")
-	_nSUndoManagerSelLevelsOfUndo = objc.RegisterName("levelsOfUndo")
-	_nSUndoManagerSelSetLevelsOfUndo = objc.RegisterName("setLevelsOfUndo:")
-	_nSUndoManagerSelRunLoopModes = objc.RegisterName("runLoopModes")
-	_nSUndoManagerSelSetRunLoopModes = objc.RegisterName("setRunLoopModes:")
-	_nSUndoManagerSelCanUndo = objc.RegisterName("canUndo")
-	_nSUndoManagerSelCanRedo = objc.RegisterName("canRedo")
-	_nSUndoManagerSelUndoCount = objc.RegisterName("undoCount")
-	_nSUndoManagerSelRedoCount = objc.RegisterName("redoCount")
-	_nSUndoManagerSelIsUndoing = objc.RegisterName("isUndoing")
-	_nSUndoManagerSelIsRedoing = objc.RegisterName("isRedoing")
-	_nSUndoManagerSelUndoActionIsDiscardable = objc.RegisterName("undoActionIsDiscardable")
-	_nSUndoManagerSelRedoActionIsDiscardable = objc.RegisterName("redoActionIsDiscardable")
-	_nSUndoManagerSelUndoActionName = objc.RegisterName("undoActionName")
-	_nSUndoManagerSelRedoActionName = objc.RegisterName("redoActionName")
-	_nSUndoManagerSelUndoMenuItemTitle = objc.RegisterName("undoMenuItemTitle")
-	_nSUndoManagerSelRedoMenuItemTitle = objc.RegisterName("redoMenuItemTitle")
+	_nSUndoManagerSelPrepareWithInvocationTarget          = objc.RegisterName("prepareWithInvocationTarget:")
+	_nSUndoManagerSelRegisterUndoWithTargetHandler        = objc.RegisterName("registerUndoWithTarget:handler:")
+	_nSUndoManagerSelSetActionIsDiscardable               = objc.RegisterName("setActionIsDiscardable:")
+	_nSUndoManagerSelSetActionName                        = objc.RegisterName("setActionName:")
+	_nSUndoManagerSelUndoActionUserInfoValueForKey        = objc.RegisterName("undoActionUserInfoValueForKey:")
+	_nSUndoManagerSelRedoActionUserInfoValueForKey        = objc.RegisterName("redoActionUserInfoValueForKey:")
+	_nSUndoManagerSelSetActionUserInfoValueForKey         = objc.RegisterName("setActionUserInfoValue:forKey:")
+	_nSUndoManagerSelUndoMenuTitleForUndoActionName       = objc.RegisterName("undoMenuTitleForUndoActionName:")
+	_nSUndoManagerSelRedoMenuTitleForUndoActionName       = objc.RegisterName("redoMenuTitleForUndoActionName:")
+	_nSUndoManagerSelGroupingLevel                        = objc.RegisterName("groupingLevel")
+	_nSUndoManagerSelIsUndoRegistrationEnabled            = objc.RegisterName("isUndoRegistrationEnabled")
+	_nSUndoManagerSelGroupsByEvent                        = objc.RegisterName("groupsByEvent")
+	_nSUndoManagerSelSetGroupsByEvent                     = objc.RegisterName("setGroupsByEvent:")
+	_nSUndoManagerSelLevelsOfUndo                         = objc.RegisterName("levelsOfUndo")
+	_nSUndoManagerSelSetLevelsOfUndo                      = objc.RegisterName("setLevelsOfUndo:")
+	_nSUndoManagerSelRunLoopModes                         = objc.RegisterName("runLoopModes")
+	_nSUndoManagerSelSetRunLoopModes                      = objc.RegisterName("setRunLoopModes:")
+	_nSUndoManagerSelCanUndo                              = objc.RegisterName("canUndo")
+	_nSUndoManagerSelCanRedo                              = objc.RegisterName("canRedo")
+	_nSUndoManagerSelUndoCount                            = objc.RegisterName("undoCount")
+	_nSUndoManagerSelRedoCount                            = objc.RegisterName("redoCount")
+	_nSUndoManagerSelIsUndoing                            = objc.RegisterName("isUndoing")
+	_nSUndoManagerSelIsRedoing                            = objc.RegisterName("isRedoing")
+	_nSUndoManagerSelUndoActionIsDiscardable              = objc.RegisterName("undoActionIsDiscardable")
+	_nSUndoManagerSelRedoActionIsDiscardable              = objc.RegisterName("redoActionIsDiscardable")
+	_nSUndoManagerSelUndoActionName                       = objc.RegisterName("undoActionName")
+	_nSUndoManagerSelRedoActionName                       = objc.RegisterName("redoActionName")
+	_nSUndoManagerSelUndoMenuItemTitle                    = objc.RegisterName("undoMenuItemTitle")
+	_nSUndoManagerSelRedoMenuItemTitle                    = objc.RegisterName("redoMenuItemTitle")
 )
 
 func NSUndoManagerFromID(id objc.ID) *NSUndoManager {
@@ -67,37 +67,37 @@ func NSUndoManagerFromID(id objc.ID) *NSUndoManager {
 	return o
 }
 
-// Marks the beginning of an undo group. All individual undo operations before a subsequent ``endUndoGrouping`` message are grouped together and reversed by a later ``undo`` message. By default undo groups are begun automatically at the start of the event loop, but you can begin your own undo groups with this method, and nest them within other groups. This method posts an ``NSUndoManagerCheckpointNotification`` unless a top-level undo is in progress. It posts an ``NSUndoManagerDidOpenUndoGroupNotification`` if a new group was successfully created.
+// Marks the beginning of an undo group. All individual undo operations before a subsequent “endUndoGrouping“ message are grouped together and reversed by a later “undo“ message. By default undo groups are begun automatically at the start of the event loop, but you can begin your own undo groups with this method, and nest them within other groups. This method posts an “NSUndoManagerCheckpointNotification“ unless a top-level undo is in progress. It posts an “NSUndoManagerDidOpenUndoGroupNotification“ if a new group was successfully created.
 func (o *NSUndoManager) BeginUndoGrouping() {
 	o.Ptr().Send(_nSUndoManagerSelBeginUndoGrouping)
 }
 
-// Marks the end of an undo group. All individual undo operations back to the matching ``beginUndoGrouping`` message are grouped together and reversed by a later ``undo`` or ``undoNestedGroup`` message. Undo groups can be nested, thus providing functionality similar to nested transactions. Raises an ``NSInternalInconsistencyException`` if there’s no ``beginUndoGrouping`` message in effect. This method posts an ``NSUndoManagerCheckpointNotification`` and an ``NSUndoManagerDidCloseUndoGroupNotification`` just before the group is closed.
+// Marks the end of an undo group. All individual undo operations back to the matching “beginUndoGrouping“ message are grouped together and reversed by a later “undo“ or “undoNestedGroup“ message. Undo groups can be nested, thus providing functionality similar to nested transactions. Raises an “NSInternalInconsistencyException“ if there’s no “beginUndoGrouping“ message in effect. This method posts an “NSUndoManagerCheckpointNotification“ and an “NSUndoManagerDidCloseUndoGroupNotification“ just before the group is closed.
 func (o *NSUndoManager) EndUndoGrouping() {
 	o.Ptr().Send(_nSUndoManagerSelEndUndoGrouping)
 }
 
-// Disables the recording of undo operations, whether by ``registerUndoWithTarget:selector:object:`` or by invocation-based undo. This method can be invoked multiple times by multiple clients. The ``enableUndoRegistration`` method must be invoked an equal number of times to re-enable undo registration.
+// Disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
 func (o *NSUndoManager) DisableUndoRegistration() {
 	o.Ptr().Send(_nSUndoManagerSelDisableUndoRegistration)
 }
 
-// Enables the recording of undo operations. Because undo registration is enabled by default, this is used to balance a prior ``disableUndoRegistration``. Undo registration isn’t actually re-enabled until an enable message balances the last disable message in effect. Raises an NSInternalInconsistencyException if invoked while no disableUndoRegistration() message is in effect.
+// Enables the recording of undo operations. Because undo registration is enabled by default, this is used to balance a prior “disableUndoRegistration“. Undo registration isn’t actually re-enabled until an enable message balances the last disable message in effect. Raises an NSInternalInconsistencyException if invoked while no disableUndoRegistration() message is in effect.
 func (o *NSUndoManager) EnableUndoRegistration() {
 	o.Ptr().Send(_nSUndoManagerSelEnableUndoRegistration)
 }
 
-// Closes the top-level undo group if necessary and invokes ``undoNestedGroup``. This method also invokes ``endUndoGrouping`` if the nesting level is 1. Raises an ``NSInternalInconsistencyException`` if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an ``NSUndoManagerCheckpointNotification``.
+// Closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
 func (o *NSUndoManager) Undo() {
 	o.Ptr().Send(_nSUndoManagerSelUndo)
 }
 
-// Performs the operations in the last group on the redo stack, if there are any, recording them on the undo stack as a single group. Raises an ``NSInternalInconsistencyException`` if the method is invoked during an undo operation. This method posts an ``NSUndoManagerCheckpointNotification`` and ``NSUndoManagerWillRedoChangeNotification`` before it performs the redo operation, and it posts the ``NSUndoManagerDidRedoChangeNotification`` after it performs the redo operation.
+// Performs the operations in the last group on the redo stack, if there are any, recording them on the undo stack as a single group. Raises an “NSInternalInconsistencyException“ if the method is invoked during an undo operation. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillRedoChangeNotification“ before it performs the redo operation, and it posts the “NSUndoManagerDidRedoChangeNotification“ after it performs the redo operation.
 func (o *NSUndoManager) Redo() {
 	o.Ptr().Send(_nSUndoManagerSelRedo)
 }
 
-// Performs the undo operations in the last undo group (whether top-level or nested), recording the operations on the redo stack as a single group. Raises an ``NSInternalInconsistencyException`` if any undo operations have been registered since the last ``enableUndoRegistration`` message. This method posts an ``NSUndoManagerCheckpointNotification`` and ``NSUndoManagerWillUndoChangeNotification`` before it performs the undo operation, and it posts an ``NSUndoManagerDidUndoChangeNotification`` after it performs the undo operation.
+// Performs the undo operations in the last undo group (whether top-level or nested), recording the operations on the redo stack as a single group. Raises an “NSInternalInconsistencyException“ if any undo operations have been registered since the last “enableUndoRegistration“ message. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillUndoChangeNotification“ before it performs the undo operation, and it posts an “NSUndoManagerDidUndoChangeNotification“ after it performs the undo operation.
 func (o *NSUndoManager) UndoNestedGroup() {
 	o.Ptr().Send(_nSUndoManagerSelUndoNestedGroup)
 }
@@ -135,7 +135,7 @@ func (o *NSUndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandle
 	o.Ptr().Send(_nSUndoManagerSelRegisterUndoWithTargetHandler, target, __block_undoHandler)
 }
 
-// Sets whether the next undo or redo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the ``NSUndoManagerGroupIsDiscardableKey`` in the `userInfo` dictionary of the ``NSUndoManagerWillCloseUndoGroupNotification``. - Parameter discardable: Specifies if the action is discardable. YES if the next undo or redo action can be discarded; NO otherwise.
+// Sets whether the next undo or redo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the “NSUndoManagerGroupIsDiscardableKey“ in the `userInfo` dictionary of the “NSUndoManagerWillCloseUndoGroupNotification“. - Parameter discardable: Specifies if the action is discardable. YES if the next undo or redo action can be discarded; NO otherwise.
 func (o *NSUndoManager) SetActionIsDiscardable(discardable bool) {
 	o.Ptr().Send(_nSUndoManagerSelSetActionIsDiscardable, discardable)
 }
@@ -162,17 +162,21 @@ func (o *NSUndoManager) SetActionUserInfoValueForKey(info objc.ID, key *NSString
 	o.Ptr().Send(_nSUndoManagerSelSetActionUserInfoValueForKey, info, key.Ptr())
 }
 
-// Returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by ``undoMenuItemTitle``. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
+// Returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
 func (o *NSUndoManager) UndoMenuTitleForUndoActionName(actionName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelUndoMenuTitleForUndoActionName, actionName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
-// Returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by ``redoMenuItemTitle``. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
+// Returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
 func (o *NSUndoManager) RedoMenuTitleForUndoActionName(actionName *NSString) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelRedoMenuTitleForUndoActionName, actionName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -188,7 +192,7 @@ func (o *NSUndoManager) IsUndoRegistrationEnabled() bool {
 	return _ret
 }
 
-// A Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either ``undo`` or ``undoNestedGroup``.
+// A Boolean value that indicates whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (o *NSUndoManager) GroupsByEvent() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUndoManagerSelGroupsByEvent)
 	return _ret
@@ -208,10 +212,12 @@ func (o *NSUndoManager) SetLevelsOfUndo(levelsOfUndo uint) {
 	o.Ptr().Send(_nSUndoManagerSelSetLevelsOfUndo, levelsOfUndo)
 }
 
-// The modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is ``NSDefaultRunLoopMode`` (which excludes data from ``NSConnection`` objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to ``NSEventTrackingRunLoopMode``, or limit it to data received from a modal panel with ``NSModalPanelRunLoopMode``.
+// The modes governing the types of input handled during a cycle of the run loop. An array of string constants specifying the current run-loop modes. By default, the sole run-loop mode is “NSDefaultRunLoopMode“ (which excludes data from “NSConnection“ objects). Some examples of other uses are to limit the input to data received during a mouse-tracking session by setting the mode to “NSEventTrackingRunLoopMode“, or limit it to data received from a modal panel with “NSModalPanelRunLoopMode“.
 func (o *NSUndoManager) RunLoopModes() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelRunLoopModes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -219,7 +225,7 @@ func (o *NSUndoManager) SetRunLoopModes(runLoopModes *NSArray[*NSString]) {
 	o.Ptr().Send(_nSUndoManagerSelSetRunLoopModes, runLoopModes.Ptr())
 }
 
-// Whether the receiver has any actions to undo. The return value does not mean you can safely invoke ``undo`` or ``undoNestedGroup`` — you may have to close open undo groups first.
+// Whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
 func (o *NSUndoManager) CanUndo() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUndoManagerSelCanUndo)
 	return _ret
@@ -243,13 +249,13 @@ func (o *NSUndoManager) RedoCount() uint {
 	return _ret
 }
 
-// Whether the receiver is in the process of performing its ``undo`` or ``undoNestedGroup`` method.
+// Whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
 func (o *NSUndoManager) IsUndoing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUndoManagerSelIsUndoing)
 	return _ret
 }
 
-// Whether the receiver is in the process of performing its ``redo`` method.
+// Whether the receiver is in the process of performing its “redo“ method.
 func (o *NSUndoManager) IsRedoing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSUndoManagerSelIsRedoing)
 	return _ret
@@ -270,28 +276,35 @@ func (o *NSUndoManager) RedoActionIsDiscardable() bool {
 // The name identifying the undo action. The undo action name. Returns an empty string if no action name has been assigned or if there is nothing to undo. For example, if the menu title is “Undo Delete,” the string returned is “Delete.”
 func (o *NSUndoManager) UndoActionName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelUndoActionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // The name identifying the redo action. The redo action name. Returns an empty string if no action name has been assigned or if there is nothing to redo. For example, if the menu title is “Redo Delete,” the string returned is “Delete.”
 func (o *NSUndoManager) RedoActionName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelRedoActionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // The complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
 func (o *NSUndoManager) UndoMenuItemTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelUndoMenuItemTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 // The complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
 func (o *NSUndoManager) RedoMenuItemTitle() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSUndoManagerSelRedoMenuItemTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

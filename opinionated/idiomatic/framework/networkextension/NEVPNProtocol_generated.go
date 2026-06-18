@@ -327,4 +327,3 @@ type NEVPNProtocolable interface {
 }
 
 var _ NEVPNProtocolable = (*NEVPNProtocol)(nil)
-

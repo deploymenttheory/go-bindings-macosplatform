@@ -90,4 +90,3 @@ type AssetVariantVideoAttributesable interface {
 }
 
 var _ AssetVariantVideoAttributesable = (*AssetVariantVideoAttributes)(nil)
-

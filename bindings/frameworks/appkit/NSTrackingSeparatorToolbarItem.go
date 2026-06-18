@@ -16,12 +16,12 @@ type NSTrackingSeparatorToolbarItem struct {
 }
 
 var (
-	_clsNSTrackingSeparatorToolbarItem = _objcClass("NSTrackingSeparatorToolbarItem")
+	_clsNSTrackingSeparatorToolbarItem                                                                = _objcClass("NSTrackingSeparatorToolbarItem")
 	_nSTrackingSeparatorToolbarItemSelTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex = objc.RegisterName("trackingSeparatorToolbarItemWithIdentifier:splitView:dividerIndex:")
-	_nSTrackingSeparatorToolbarItemSelSplitView = objc.RegisterName("splitView")
-	_nSTrackingSeparatorToolbarItemSelSetSplitView = objc.RegisterName("setSplitView:")
-	_nSTrackingSeparatorToolbarItemSelDividerIndex = objc.RegisterName("dividerIndex")
-	_nSTrackingSeparatorToolbarItemSelSetDividerIndex = objc.RegisterName("setDividerIndex:")
+	_nSTrackingSeparatorToolbarItemSelSplitView                                                       = objc.RegisterName("splitView")
+	_nSTrackingSeparatorToolbarItemSelSetSplitView                                                    = objc.RegisterName("setSplitView:")
+	_nSTrackingSeparatorToolbarItemSelDividerIndex                                                    = objc.RegisterName("dividerIndex")
+	_nSTrackingSeparatorToolbarItemSelSetDividerIndex                                                 = objc.RegisterName("setDividerIndex:")
 )
 
 func NSTrackingSeparatorToolbarItemFromID(id objc.ID) *NSTrackingSeparatorToolbarItem {
@@ -37,14 +37,18 @@ func NSTrackingSeparatorToolbarItemFromID(id objc.ID) *NSTrackingSeparatorToolba
 // Creates a new `NSTrackingSeparatorToolbarItem` and configures it to attempt to visually align with the specified divider of the `splitView`. The `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
 func NSTrackingSeparatorToolbarItemTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex(identifier *foundation.NSString, splitView *NSSplitView, dividerIndex int) *NSTrackingSeparatorToolbarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTrackingSeparatorToolbarItem), _nSTrackingSeparatorToolbarItemSelTrackingSeparatorToolbarItemWithIdentifierSplitViewDividerIndex, identifier.Ptr(), splitView.Ptr(), dividerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTrackingSeparatorToolbarItemFromID(_ret)
 }
 
 // The `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
 func (o *NSTrackingSeparatorToolbarItem) SplitView() *NSSplitView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTrackingSeparatorToolbarItemSelSplitView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSplitViewFromID(_ret)
 }
 
@@ -61,4 +65,3 @@ func (o *NSTrackingSeparatorToolbarItem) DividerIndex() int {
 func (o *NSTrackingSeparatorToolbarItem) SetDividerIndex(dividerIndex int) {
 	o.Ptr().Send(_nSTrackingSeparatorToolbarItemSelSetDividerIndex, dividerIndex)
 }
-

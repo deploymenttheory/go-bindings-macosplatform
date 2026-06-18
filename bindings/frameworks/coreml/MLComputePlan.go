@@ -18,13 +18,13 @@ type MLComputePlan struct {
 }
 
 var (
-	_clsMLComputePlan = _objcClass("MLComputePlan")
+	_clsMLComputePlan                                                = _objcClass("MLComputePlan")
 	_mLComputePlanSelLoadContentsOfURLConfigurationCompletionHandler = objc.RegisterName("loadContentsOfURL:configuration:completionHandler:")
-	_mLComputePlanSelLoadModelAssetConfigurationCompletionHandler = objc.RegisterName("loadModelAsset:configuration:completionHandler:")
-	_mLComputePlanSelEstimatedCostOfMLProgramOperation = objc.RegisterName("estimatedCostOfMLProgramOperation:")
-	_mLComputePlanSelComputeDeviceUsageForNeuralNetworkLayer = objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:")
-	_mLComputePlanSelComputeDeviceUsageForMLProgramOperation = objc.RegisterName("computeDeviceUsageForMLProgramOperation:")
-	_mLComputePlanSelModelStructure = objc.RegisterName("modelStructure")
+	_mLComputePlanSelLoadModelAssetConfigurationCompletionHandler    = objc.RegisterName("loadModelAsset:configuration:completionHandler:")
+	_mLComputePlanSelEstimatedCostOfMLProgramOperation               = objc.RegisterName("estimatedCostOfMLProgramOperation:")
+	_mLComputePlanSelComputeDeviceUsageForNeuralNetworkLayer         = objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:")
+	_mLComputePlanSelComputeDeviceUsageForMLProgramOperation         = objc.RegisterName("computeDeviceUsageForMLProgramOperation:")
+	_mLComputePlanSelModelStructure                                  = objc.RegisterName("modelStructure")
 )
 
 func MLComputePlanFromID(id objc.ID) *MLComputePlan {
@@ -70,27 +70,34 @@ func MLComputePlanLoadModelAssetConfigurationCompletionHandler(asset *MLModelAss
 // Returns the estimated cost of executing an ML Program operation. @param operation An ML Program operation. @returns The estimated cost of executing the operation or nil if the cost couldn't be estimated.
 func (o *MLComputePlan) EstimatedCostOfMLProgramOperation(operation *MLModelStructureProgramOperation) *MLComputePlanCost {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLComputePlanSelEstimatedCostOfMLProgramOperation, operation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLComputePlanCostFromID(_ret)
 }
 
 // Returns the anticipated compute devices that would be used for executing a NeuralNetwork layer. @param layer A NeuralNetwork layer. @returns The anticipated compute devices that would be used for executing the layer or `nil` if the usage couldn't be determined.
 func (o *MLComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *MLModelStructureNeuralNetworkLayer) *MLComputePlanDeviceUsage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLComputePlanSelComputeDeviceUsageForNeuralNetworkLayer, layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLComputePlanDeviceUsageFromID(_ret)
 }
 
 // Returns The anticipated compute devices that would be used for executing an ML Program operation. @param operation  An ML Program operation. @returns The anticipated compute devices that would be used for executing the operation or `nil`if the usage couldn't be determined.
 func (o *MLComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *MLModelStructureProgramOperation) *MLComputePlanDeviceUsage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLComputePlanSelComputeDeviceUsageForMLProgramOperation, operation.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLComputePlanDeviceUsageFromID(_ret)
 }
 
 func (o *MLComputePlan) ModelStructure() *MLModelStructure {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLComputePlanSelModelStructure)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelStructureFromID(_ret)
 }
-

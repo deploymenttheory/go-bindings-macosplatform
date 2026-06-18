@@ -15,7 +15,9 @@ type RenderPassStencilAttachmentDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLRenderPassStencilAttachmentDescriptor].
-func (x *RenderPassStencilAttachmentDescriptor) Unwrap() *raw.MTLRenderPassStencilAttachmentDescriptor { return x.inner }
+func (x *RenderPassStencilAttachmentDescriptor) Unwrap() *raw.MTLRenderPassStencilAttachmentDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -133,7 +135,9 @@ func (x *RenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilR
 	x.inner.SetStencilResolveFilter(stencilResolveFilter)
 }
 
-func (x *RenderPassStencilAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+func (x *RenderPassStencilAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor {
+	return &x.inner.MTLRenderPassAttachmentDescriptor
+}
 
 // RenderPassStencilAttachmentDescriptorable is the interface implemented by [RenderPassStencilAttachmentDescriptor], for mocking and DI.
 type RenderPassStencilAttachmentDescriptorable interface {
@@ -158,4 +162,3 @@ type RenderPassStencilAttachmentDescriptorable interface {
 }
 
 var _ RenderPassStencilAttachmentDescriptorable = (*RenderPassStencilAttachmentDescriptor)(nil)
-

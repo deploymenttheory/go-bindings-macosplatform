@@ -54,4 +54,3 @@ type OneTimeCodeCredentialIdentityable interface {
 }
 
 var _ OneTimeCodeCredentialIdentityable = (*OneTimeCodeCredentialIdentity)(nil)
-

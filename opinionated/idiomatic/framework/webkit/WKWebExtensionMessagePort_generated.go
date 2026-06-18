@@ -142,4 +142,3 @@ type WKWebExtensionMessagePortable interface {
 }
 
 var _ WKWebExtensionMessagePortable = (*WKWebExtensionMessagePort)(nil)
-

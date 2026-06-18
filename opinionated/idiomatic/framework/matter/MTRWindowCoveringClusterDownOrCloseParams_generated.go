@@ -16,7 +16,9 @@ type MTRWindowCoveringClusterDownOrCloseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterDownOrCloseParams].
-func (x *MTRWindowCoveringClusterDownOrCloseParams) Unwrap() *raw.MTRWindowCoveringClusterDownOrCloseParams { return x.inner }
+func (x *MTRWindowCoveringClusterDownOrCloseParams) Unwrap() *raw.MTRWindowCoveringClusterDownOrCloseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTRWindowCoveringClusterDownOrCloseParamsable interface {
 }
 
 var _ MTRWindowCoveringClusterDownOrCloseParamsable = (*MTRWindowCoveringClusterDownOrCloseParams)(nil)
-

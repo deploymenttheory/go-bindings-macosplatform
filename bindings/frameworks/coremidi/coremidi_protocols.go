@@ -12,4 +12,3 @@ type MIDICIProfileResponderDelegate interface {
 	ConnectInitiatorWithDeviceInfo(initiatorMUID *foundation.NSNumber, deviceInfo *MIDICIDeviceInfo) bool
 	InitiatorDisconnected(initiatorMUID *foundation.NSNumber)
 }
-

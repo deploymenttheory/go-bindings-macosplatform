@@ -16,17 +16,17 @@ type CAAnimation struct {
 }
 
 var (
-	_clsCAAnimation = _objcClass("CAAnimation")
-	_cAAnimationSelAnimation = objc.RegisterName("animation")
-	_cAAnimationSelDefaultValueForKey = objc.RegisterName("defaultValueForKey:")
-	_cAAnimationSelShouldArchiveValueForKey = objc.RegisterName("shouldArchiveValueForKey:")
-	_cAAnimationSelTimingFunction = objc.RegisterName("timingFunction")
-	_cAAnimationSelSetTimingFunction = objc.RegisterName("setTimingFunction:")
-	_cAAnimationSelDelegate = objc.RegisterName("delegate")
-	_cAAnimationSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cAAnimationSelIsRemovedOnCompletion = objc.RegisterName("isRemovedOnCompletion")
-	_cAAnimationSelSetRemovedOnCompletion = objc.RegisterName("setRemovedOnCompletion:")
-	_cAAnimationSelPreferredFrameRateRange = objc.RegisterName("preferredFrameRateRange")
+	_clsCAAnimation                           = _objcClass("CAAnimation")
+	_cAAnimationSelAnimation                  = objc.RegisterName("animation")
+	_cAAnimationSelDefaultValueForKey         = objc.RegisterName("defaultValueForKey:")
+	_cAAnimationSelShouldArchiveValueForKey   = objc.RegisterName("shouldArchiveValueForKey:")
+	_cAAnimationSelTimingFunction             = objc.RegisterName("timingFunction")
+	_cAAnimationSelSetTimingFunction          = objc.RegisterName("setTimingFunction:")
+	_cAAnimationSelDelegate                   = objc.RegisterName("delegate")
+	_cAAnimationSelSetDelegate                = objc.RegisterName("setDelegate:")
+	_cAAnimationSelIsRemovedOnCompletion      = objc.RegisterName("isRemovedOnCompletion")
+	_cAAnimationSelSetRemovedOnCompletion     = objc.RegisterName("setRemovedOnCompletion:")
+	_cAAnimationSelPreferredFrameRateRange    = objc.RegisterName("preferredFrameRateRange")
 	_cAAnimationSelSetPreferredFrameRateRange = objc.RegisterName("setPreferredFrameRateRange:")
 )
 
@@ -42,7 +42,9 @@ func CAAnimationFromID(id objc.ID) *CAAnimation {
 
 func CAAnimationAnimation() *CAAnimation {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAAnimation), _cAAnimationSelAnimation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAAnimationFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *CAAnimation) ShouldArchiveValueForKey(key *foundation.NSString) bool {
 
 func (o *CAAnimation) TimingFunction() *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAAnimationSelTimingFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
@@ -92,4 +96,3 @@ func (o *CAAnimation) PreferredFrameRateRange() CAFrameRateRange {
 func (o *CAAnimation) SetPreferredFrameRateRange(preferredFrameRateRange CAFrameRateRange) {
 	o.Ptr().Send(_cAAnimationSelSetPreferredFrameRateRange, preferredFrameRateRange)
 }
-

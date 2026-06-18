@@ -16,7 +16,7 @@ type MTRCluster struct {
 }
 
 var (
-	_clsMTRCluster = _objcClass("MTRCluster")
+	_clsMTRCluster           = _objcClass("MTRCluster")
 	_mTRClusterSelEndpointID = objc.RegisterName("endpointID")
 )
 
@@ -32,7 +32,8 @@ func MTRClusterFromID(id objc.ID) *MTRCluster {
 
 func (o *MTRCluster) EndpointID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSelEndpointID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
-

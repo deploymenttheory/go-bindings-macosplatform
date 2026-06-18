@@ -103,4 +103,3 @@ type Tokenizerable interface {
 }
 
 var _ Tokenizerable = (*Tokenizer)(nil)
-

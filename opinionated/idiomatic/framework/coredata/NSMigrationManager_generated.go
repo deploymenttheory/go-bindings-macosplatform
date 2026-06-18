@@ -204,4 +204,3 @@ type MigrationManagerable interface {
 }
 
 var _ MigrationManagerable = (*MigrationManager)(nil)
-

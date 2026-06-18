@@ -50,9 +50,13 @@ func (x *CNNNeuronSoftSignNode) WithLabel(label string) *CNNNeuronSoftSignNode {
 	return x
 }
 
-func (x *CNNNeuronSoftSignNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
+func (x *CNNNeuronSoftSignNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
+	return &x.inner.MPSCNNNeuronNode
+}
 
-func (x *CNNNeuronSoftSignNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronSoftSignNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronSoftSignNodeable is the interface implemented by [CNNNeuronSoftSignNode], for mocking and DI.
 type CNNNeuronSoftSignNodeable interface {
@@ -62,4 +66,3 @@ type CNNNeuronSoftSignNodeable interface {
 }
 
 var _ CNNNeuronSoftSignNodeable = (*CNNNeuronSoftSignNode)(nil)
-

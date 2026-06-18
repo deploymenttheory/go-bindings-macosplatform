@@ -15,11 +15,11 @@ type NSURLQueryItem struct {
 }
 
 var (
-	_clsNSURLQueryItem = _objcClass("NSURLQueryItem")
-	_nSURLQueryItemSelInitWithNameValue = objc.RegisterName("initWithName:value:")
+	_clsNSURLQueryItem                       = _objcClass("NSURLQueryItem")
+	_nSURLQueryItemSelInitWithNameValue      = objc.RegisterName("initWithName:value:")
 	_nSURLQueryItemSelQueryItemWithNameValue = objc.RegisterName("queryItemWithName:value:")
-	_nSURLQueryItemSelName = objc.RegisterName("name")
-	_nSURLQueryItemSelValue = objc.RegisterName("value")
+	_nSURLQueryItemSelName                   = objc.RegisterName("name")
+	_nSURLQueryItemSelValue                  = objc.RegisterName("value")
 )
 
 func NSURLQueryItemFromID(id objc.ID) *NSURLQueryItem {
@@ -34,25 +34,32 @@ func NSURLQueryItemFromID(id objc.ID) *NSURLQueryItem {
 
 func (o *NSURLQueryItem) InitWithNameValue(name *NSString, value *NSString) *NSURLQueryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelInitWithNameValue, name.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLQueryItemFromID(_ret)
 }
 
 func NSURLQueryItemQueryItemWithNameValue(name *NSString, value *NSString) *NSURLQueryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLQueryItem), _nSURLQueryItemSelQueryItemWithNameValue, name.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLQueryItemFromID(_ret)
 }
 
 func (o *NSURLQueryItem) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURLQueryItem) Value() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLQueryItemSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

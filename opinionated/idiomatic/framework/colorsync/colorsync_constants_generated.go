@@ -11,16 +11,24 @@ import (
 )
 
 // KColorSyncGenericGrayProfile returns the value of the CoreFoundation reference constant kColorSyncGenericGrayProfile as an objc.ID.
-func KColorSyncGenericGrayProfile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericGrayProfile()) }
+func KColorSyncGenericGrayProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericGrayProfile())
+}
 
 // KColorSyncGenericGrayGamma22Profile returns the value of the CoreFoundation reference constant kColorSyncGenericGrayGamma22Profile as an objc.ID.
-func KColorSyncGenericGrayGamma22Profile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericGrayGamma22Profile()) }
+func KColorSyncGenericGrayGamma22Profile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericGrayGamma22Profile())
+}
 
 // KColorSyncGenericRGBProfile returns the value of the CoreFoundation reference constant kColorSyncGenericRGBProfile as an objc.ID.
-func KColorSyncGenericRGBProfile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericRGBProfile()) }
+func KColorSyncGenericRGBProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericRGBProfile())
+}
 
 // KColorSyncGenericCMYKProfile returns the value of the CoreFoundation reference constant kColorSyncGenericCMYKProfile as an objc.ID.
-func KColorSyncGenericCMYKProfile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericCMYKProfile()) }
+func KColorSyncGenericCMYKProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericCMYKProfile())
+}
 
 // KColorSyncDisplayP3Profile returns the value of the CoreFoundation reference constant kColorSyncDisplayP3Profile as an objc.ID.
 func KColorSyncDisplayP3Profile() objc.ID { return purego.CFConstant(raw.KColorSyncDisplayP3Profile()) }
@@ -29,16 +37,24 @@ func KColorSyncDisplayP3Profile() objc.ID { return purego.CFConstant(raw.KColorS
 func KColorSyncSRGBProfile() objc.ID { return purego.CFConstant(raw.KColorSyncSRGBProfile()) }
 
 // KColorSyncAdobeRGB1998Profile returns the value of the CoreFoundation reference constant kColorSyncAdobeRGB1998Profile as an objc.ID.
-func KColorSyncAdobeRGB1998Profile() objc.ID { return purego.CFConstant(raw.KColorSyncAdobeRGB1998Profile()) }
+func KColorSyncAdobeRGB1998Profile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncAdobeRGB1998Profile())
+}
 
 // KColorSyncGenericLabProfile returns the value of the CoreFoundation reference constant kColorSyncGenericLabProfile as an objc.ID.
-func KColorSyncGenericLabProfile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericLabProfile()) }
+func KColorSyncGenericLabProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericLabProfile())
+}
 
 // KColorSyncGenericXYZProfile returns the value of the CoreFoundation reference constant kColorSyncGenericXYZProfile as an objc.ID.
-func KColorSyncGenericXYZProfile() objc.ID { return purego.CFConstant(raw.KColorSyncGenericXYZProfile()) }
+func KColorSyncGenericXYZProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncGenericXYZProfile())
+}
 
 // KColorSyncACESCGLinearProfile returns the value of the CoreFoundation reference constant kColorSyncACESCGLinearProfile as an objc.ID.
-func KColorSyncACESCGLinearProfile() objc.ID { return purego.CFConstant(raw.KColorSyncACESCGLinearProfile()) }
+func KColorSyncACESCGLinearProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncACESCGLinearProfile())
+}
 
 // KColorSyncDCIP3Profile returns the value of the CoreFoundation reference constant kColorSyncDCIP3Profile as an objc.ID.
 func KColorSyncDCIP3Profile() objc.ID { return purego.CFConstant(raw.KColorSyncDCIP3Profile()) }
@@ -53,7 +69,9 @@ func KColorSyncITUR2020Profile() objc.ID { return purego.CFConstant(raw.KColorSy
 func KColorSyncROMMRGBProfile() objc.ID { return purego.CFConstant(raw.KColorSyncROMMRGBProfile()) }
 
 // KColorSyncWebSafeColorsProfile returns the value of the CoreFoundation reference constant kColorSyncWebSafeColorsProfile as an objc.ID.
-func KColorSyncWebSafeColorsProfile() objc.ID { return purego.CFConstant(raw.KColorSyncWebSafeColorsProfile()) }
+func KColorSyncWebSafeColorsProfile() objc.ID {
+	return purego.CFConstant(raw.KColorSyncWebSafeColorsProfile())
+}
 
 // KColorSyncProfileHeader returns the value of the CoreFoundation reference constant kColorSyncProfileHeader as an objc.ID.
 func KColorSyncProfileHeader() objc.ID { return purego.CFConstant(raw.KColorSyncProfileHeader()) }
@@ -62,7 +80,9 @@ func KColorSyncProfileHeader() objc.ID { return purego.CFConstant(raw.KColorSync
 func KColorSyncProfileClass() objc.ID { return purego.CFConstant(raw.KColorSyncProfileClass()) }
 
 // KColorSyncProfileColorSpace returns the value of the CoreFoundation reference constant kColorSyncProfileColorSpace as an objc.ID.
-func KColorSyncProfileColorSpace() objc.ID { return purego.CFConstant(raw.KColorSyncProfileColorSpace()) }
+func KColorSyncProfileColorSpace() objc.ID {
+	return purego.CFConstant(raw.KColorSyncProfileColorSpace())
+}
 
 // KColorSyncProfilePCS returns the value of the CoreFoundation reference constant kColorSyncProfilePCS as an objc.ID.
 func KColorSyncProfilePCS() objc.ID { return purego.CFConstant(raw.KColorSyncProfilePCS()) }
@@ -71,7 +91,9 @@ func KColorSyncProfilePCS() objc.ID { return purego.CFConstant(raw.KColorSyncPro
 func KColorSyncProfileURL() objc.ID { return purego.CFConstant(raw.KColorSyncProfileURL()) }
 
 // KColorSyncProfileDescription returns the value of the CoreFoundation reference constant kColorSyncProfileDescription as an objc.ID.
-func KColorSyncProfileDescription() objc.ID { return purego.CFConstant(raw.KColorSyncProfileDescription()) }
+func KColorSyncProfileDescription() objc.ID {
+	return purego.CFConstant(raw.KColorSyncProfileDescription())
+}
 
 // KColorSyncProfileMD5Digest returns the value of the CoreFoundation reference constant kColorSyncProfileMD5Digest as an objc.ID.
 func KColorSyncProfileMD5Digest() objc.ID { return purego.CFConstant(raw.KColorSyncProfileMD5Digest()) }
@@ -119,28 +141,40 @@ func KColorSyncSigAbstractClass() objc.ID { return purego.CFConstant(raw.KColorS
 func KColorSyncSigBlueTRCTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigBlueTRCTag()) }
 
 // KColorSyncSigBlueColorantTag returns the value of the CoreFoundation reference constant kColorSyncSigBlueColorantTag as an objc.ID.
-func KColorSyncSigBlueColorantTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigBlueColorantTag()) }
+func KColorSyncSigBlueColorantTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigBlueColorantTag())
+}
 
 // KColorSyncSigMediaBlackPointTag returns the value of the CoreFoundation reference constant kColorSyncSigMediaBlackPointTag as an objc.ID.
-func KColorSyncSigMediaBlackPointTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigMediaBlackPointTag()) }
+func KColorSyncSigMediaBlackPointTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigMediaBlackPointTag())
+}
 
 // KColorSyncSigCopyrightTag returns the value of the CoreFoundation reference constant kColorSyncSigCopyrightTag as an objc.ID.
 func KColorSyncSigCopyrightTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigCopyrightTag()) }
 
 // KColorSyncSigProfileDescriptionTag returns the value of the CoreFoundation reference constant kColorSyncSigProfileDescriptionTag as an objc.ID.
-func KColorSyncSigProfileDescriptionTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigProfileDescriptionTag()) }
+func KColorSyncSigProfileDescriptionTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigProfileDescriptionTag())
+}
 
 // KColorSyncSigDeviceModelDescTag returns the value of the CoreFoundation reference constant kColorSyncSigDeviceModelDescTag as an objc.ID.
-func KColorSyncSigDeviceModelDescTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigDeviceModelDescTag()) }
+func KColorSyncSigDeviceModelDescTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigDeviceModelDescTag())
+}
 
 // KColorSyncSigDeviceMfgDescTag returns the value of the CoreFoundation reference constant kColorSyncSigDeviceMfgDescTag as an objc.ID.
-func KColorSyncSigDeviceMfgDescTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigDeviceMfgDescTag()) }
+func KColorSyncSigDeviceMfgDescTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigDeviceMfgDescTag())
+}
 
 // KColorSyncSigGreenTRCTag returns the value of the CoreFoundation reference constant kColorSyncSigGreenTRCTag as an objc.ID.
 func KColorSyncSigGreenTRCTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigGreenTRCTag()) }
 
 // KColorSyncSigGreenColorantTag returns the value of the CoreFoundation reference constant kColorSyncSigGreenColorantTag as an objc.ID.
-func KColorSyncSigGreenColorantTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigGreenColorantTag()) }
+func KColorSyncSigGreenColorantTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigGreenColorantTag())
+}
 
 // KColorSyncSigGamutTag returns the value of the CoreFoundation reference constant kColorSyncSigGamutTag as an objc.ID.
 func KColorSyncSigGamutTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigGamutTag()) }
@@ -155,10 +189,14 @@ func KColorSyncSigLinkClass() objc.ID { return purego.CFConstant(raw.KColorSyncS
 func KColorSyncSigDisplayClass() objc.ID { return purego.CFConstant(raw.KColorSyncSigDisplayClass()) }
 
 // KColorSyncSigNamedColor2Tag returns the value of the CoreFoundation reference constant kColorSyncSigNamedColor2Tag as an objc.ID.
-func KColorSyncSigNamedColor2Tag() objc.ID { return purego.CFConstant(raw.KColorSyncSigNamedColor2Tag()) }
+func KColorSyncSigNamedColor2Tag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigNamedColor2Tag())
+}
 
 // KColorSyncSigNamedColorClass returns the value of the CoreFoundation reference constant kColorSyncSigNamedColorClass as an objc.ID.
-func KColorSyncSigNamedColorClass() objc.ID { return purego.CFConstant(raw.KColorSyncSigNamedColorClass()) }
+func KColorSyncSigNamedColorClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigNamedColorClass())
+}
 
 // KColorSyncSigPreview0Tag returns the value of the CoreFoundation reference constant kColorSyncSigPreview0Tag as an objc.ID.
 func KColorSyncSigPreview0Tag() objc.ID { return purego.CFConstant(raw.KColorSyncSigPreview0Tag()) }
@@ -173,46 +211,66 @@ func KColorSyncSigPreview2Tag() objc.ID { return purego.CFConstant(raw.KColorSyn
 func KColorSyncSigOutputClass() objc.ID { return purego.CFConstant(raw.KColorSyncSigOutputClass()) }
 
 // KColorSyncSigProfileSequenceDescTag returns the value of the CoreFoundation reference constant kColorSyncSigProfileSequenceDescTag as an objc.ID.
-func KColorSyncSigProfileSequenceDescTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigProfileSequenceDescTag()) }
+func KColorSyncSigProfileSequenceDescTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigProfileSequenceDescTag())
+}
 
 // KColorSyncSigRedTRCTag returns the value of the CoreFoundation reference constant kColorSyncSigRedTRCTag as an objc.ID.
 func KColorSyncSigRedTRCTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigRedTRCTag()) }
 
 // KColorSyncSigRedColorantTag returns the value of the CoreFoundation reference constant kColorSyncSigRedColorantTag as an objc.ID.
-func KColorSyncSigRedColorantTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigRedColorantTag()) }
+func KColorSyncSigRedColorantTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigRedColorantTag())
+}
 
 // KColorSyncSigInputClass returns the value of the CoreFoundation reference constant kColorSyncSigInputClass as an objc.ID.
 func KColorSyncSigInputClass() objc.ID { return purego.CFConstant(raw.KColorSyncSigInputClass()) }
 
 // KColorSyncSigColorSpaceClass returns the value of the CoreFoundation reference constant kColorSyncSigColorSpaceClass as an objc.ID.
-func KColorSyncSigColorSpaceClass() objc.ID { return purego.CFConstant(raw.KColorSyncSigColorSpaceClass()) }
+func KColorSyncSigColorSpaceClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigColorSpaceClass())
+}
 
 // KColorSyncSigTechnologyTag returns the value of the CoreFoundation reference constant kColorSyncSigTechnologyTag as an objc.ID.
 func KColorSyncSigTechnologyTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigTechnologyTag()) }
 
 // KColorSyncSigViewingConditionsTag returns the value of the CoreFoundation reference constant kColorSyncSigViewingConditionsTag as an objc.ID.
-func KColorSyncSigViewingConditionsTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigViewingConditionsTag()) }
+func KColorSyncSigViewingConditionsTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigViewingConditionsTag())
+}
 
 // KColorSyncSigViewingCondDescTag returns the value of the CoreFoundation reference constant kColorSyncSigViewingCondDescTag as an objc.ID.
-func KColorSyncSigViewingCondDescTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigViewingCondDescTag()) }
+func KColorSyncSigViewingCondDescTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigViewingCondDescTag())
+}
 
 // KColorSyncSigMediaWhitePointTag returns the value of the CoreFoundation reference constant kColorSyncSigMediaWhitePointTag as an objc.ID.
-func KColorSyncSigMediaWhitePointTag() objc.ID { return purego.CFConstant(raw.KColorSyncSigMediaWhitePointTag()) }
+func KColorSyncSigMediaWhitePointTag() objc.ID {
+	return purego.CFConstant(raw.KColorSyncSigMediaWhitePointTag())
+}
 
 // KColorSyncProfileComputerDomain returns the value of the CoreFoundation reference constant kColorSyncProfileComputerDomain as an objc.ID.
-func KColorSyncProfileComputerDomain() objc.ID { return purego.CFConstant(raw.KColorSyncProfileComputerDomain()) }
+func KColorSyncProfileComputerDomain() objc.ID {
+	return purego.CFConstant(raw.KColorSyncProfileComputerDomain())
+}
 
 // KColorSyncProfileUserDomain returns the value of the CoreFoundation reference constant kColorSyncProfileUserDomain as an objc.ID.
-func KColorSyncProfileUserDomain() objc.ID { return purego.CFConstant(raw.KColorSyncProfileUserDomain()) }
+func KColorSyncProfileUserDomain() objc.ID {
+	return purego.CFConstant(raw.KColorSyncProfileUserDomain())
+}
 
 // KColorSyncDoNotSubstituteProfiles returns the value of the CoreFoundation reference constant kColorSyncDoNotSubstituteProfiles as an objc.ID.
-func KColorSyncDoNotSubstituteProfiles() objc.ID { return purego.CFConstant(raw.KColorSyncDoNotSubstituteProfiles()) }
+func KColorSyncDoNotSubstituteProfiles() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDoNotSubstituteProfiles())
+}
 
 // KColorSyncProfileCacheSeed returns the value of the CoreFoundation reference constant kColorSyncProfileCacheSeed as an objc.ID.
 func KColorSyncProfileCacheSeed() objc.ID { return purego.CFConstant(raw.KColorSyncProfileCacheSeed()) }
 
 // KColorSyncWaitForCacheReply returns the value of the CoreFoundation reference constant kColorSyncWaitForCacheReply as an objc.ID.
-func KColorSyncWaitForCacheReply() objc.ID { return purego.CFConstant(raw.KColorSyncWaitForCacheReply()) }
+func KColorSyncWaitForCacheReply() objc.ID {
+	return purego.CFConstant(raw.KColorSyncWaitForCacheReply())
+}
 
 // KColorSyncProfile returns the value of the CoreFoundation reference constant kColorSyncProfile as an objc.ID.
 func KColorSyncProfile() objc.ID { return purego.CFConstant(raw.KColorSyncProfile()) }
@@ -221,40 +279,62 @@ func KColorSyncProfile() objc.ID { return purego.CFConstant(raw.KColorSyncProfil
 func KColorSyncRenderingIntent() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntent()) }
 
 // KColorSyncRenderingIntentPerceptual returns the value of the CoreFoundation reference constant kColorSyncRenderingIntentPerceptual as an objc.ID.
-func KColorSyncRenderingIntentPerceptual() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntentPerceptual()) }
+func KColorSyncRenderingIntentPerceptual() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRenderingIntentPerceptual())
+}
 
 // KColorSyncRenderingIntentRelative returns the value of the CoreFoundation reference constant kColorSyncRenderingIntentRelative as an objc.ID.
-func KColorSyncRenderingIntentRelative() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntentRelative()) }
+func KColorSyncRenderingIntentRelative() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRenderingIntentRelative())
+}
 
 // KColorSyncRenderingIntentSaturation returns the value of the CoreFoundation reference constant kColorSyncRenderingIntentSaturation as an objc.ID.
-func KColorSyncRenderingIntentSaturation() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntentSaturation()) }
+func KColorSyncRenderingIntentSaturation() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRenderingIntentSaturation())
+}
 
 // KColorSyncRenderingIntentAbsolute returns the value of the CoreFoundation reference constant kColorSyncRenderingIntentAbsolute as an objc.ID.
-func KColorSyncRenderingIntentAbsolute() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntentAbsolute()) }
+func KColorSyncRenderingIntentAbsolute() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRenderingIntentAbsolute())
+}
 
 // KColorSyncRenderingIntentUseProfileHeader returns the value of the CoreFoundation reference constant kColorSyncRenderingIntentUseProfileHeader as an objc.ID.
-func KColorSyncRenderingIntentUseProfileHeader() objc.ID { return purego.CFConstant(raw.KColorSyncRenderingIntentUseProfileHeader()) }
+func KColorSyncRenderingIntentUseProfileHeader() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRenderingIntentUseProfileHeader())
+}
 
 // KColorSyncTransformTag returns the value of the CoreFoundation reference constant kColorSyncTransformTag as an objc.ID.
 func KColorSyncTransformTag() objc.ID { return purego.CFConstant(raw.KColorSyncTransformTag()) }
 
 // KColorSyncTransformDeviceToPCS returns the value of the CoreFoundation reference constant kColorSyncTransformDeviceToPCS as an objc.ID.
-func KColorSyncTransformDeviceToPCS() objc.ID { return purego.CFConstant(raw.KColorSyncTransformDeviceToPCS()) }
+func KColorSyncTransformDeviceToPCS() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformDeviceToPCS())
+}
 
 // KColorSyncTransformPCSToPCS returns the value of the CoreFoundation reference constant kColorSyncTransformPCSToPCS as an objc.ID.
-func KColorSyncTransformPCSToPCS() objc.ID { return purego.CFConstant(raw.KColorSyncTransformPCSToPCS()) }
+func KColorSyncTransformPCSToPCS() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformPCSToPCS())
+}
 
 // KColorSyncTransformPCSToDevice returns the value of the CoreFoundation reference constant kColorSyncTransformPCSToDevice as an objc.ID.
-func KColorSyncTransformPCSToDevice() objc.ID { return purego.CFConstant(raw.KColorSyncTransformPCSToDevice()) }
+func KColorSyncTransformPCSToDevice() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformPCSToDevice())
+}
 
 // KColorSyncTransformDeviceToDevice returns the value of the CoreFoundation reference constant kColorSyncTransformDeviceToDevice as an objc.ID.
-func KColorSyncTransformDeviceToDevice() objc.ID { return purego.CFConstant(raw.KColorSyncTransformDeviceToDevice()) }
+func KColorSyncTransformDeviceToDevice() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformDeviceToDevice())
+}
 
 // KColorSyncTransformGamutCheck returns the value of the CoreFoundation reference constant kColorSyncTransformGamutCheck as an objc.ID.
-func KColorSyncTransformGamutCheck() objc.ID { return purego.CFConstant(raw.KColorSyncTransformGamutCheck()) }
+func KColorSyncTransformGamutCheck() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformGamutCheck())
+}
 
 // KColorSyncBlackPointCompensation returns the value of the CoreFoundation reference constant kColorSyncBlackPointCompensation as an objc.ID.
-func KColorSyncBlackPointCompensation() objc.ID { return purego.CFConstant(raw.KColorSyncBlackPointCompensation()) }
+func KColorSyncBlackPointCompensation() objc.ID {
+	return purego.CFConstant(raw.KColorSyncBlackPointCompensation())
+}
 
 // KColorSyncExtendedRange returns the value of the CoreFoundation reference constant kColorSyncExtendedRange as an objc.ID.
 func KColorSyncExtendedRange() objc.ID { return purego.CFConstant(raw.KColorSyncExtendedRange()) }
@@ -284,7 +364,9 @@ func KColorSyncNormalQuality() objc.ID { return purego.CFConstant(raw.KColorSync
 func KColorSyncDraftQuality() objc.ID { return purego.CFConstant(raw.KColorSyncDraftQuality()) }
 
 // KColorSyncConvertUseExtendedRange returns the value of the CoreFoundation reference constant kColorSyncConvertUseExtendedRange as an objc.ID.
-func KColorSyncConvertUseExtendedRange() objc.ID { return purego.CFConstant(raw.KColorSyncConvertUseExtendedRange()) }
+func KColorSyncConvertUseExtendedRange() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConvertUseExtendedRange())
+}
 
 // KColorSyncTransformInfo returns the value of the CoreFoundation reference constant kColorSyncTransformInfo as an objc.ID.
 func KColorSyncTransformInfo() objc.ID { return purego.CFConstant(raw.KColorSyncTransformInfo()) }
@@ -293,58 +375,90 @@ func KColorSyncTransformInfo() objc.ID { return purego.CFConstant(raw.KColorSync
 func KColorSyncTransformCreator() objc.ID { return purego.CFConstant(raw.KColorSyncTransformCreator()) }
 
 // KColorSyncTransformSrcSpace returns the value of the CoreFoundation reference constant kColorSyncTransformSrcSpace as an objc.ID.
-func KColorSyncTransformSrcSpace() objc.ID { return purego.CFConstant(raw.KColorSyncTransformSrcSpace()) }
+func KColorSyncTransformSrcSpace() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformSrcSpace())
+}
 
 // KColorSyncTransformDstSpace returns the value of the CoreFoundation reference constant kColorSyncTransformDstSpace as an objc.ID.
-func KColorSyncTransformDstSpace() objc.ID { return purego.CFConstant(raw.KColorSyncTransformDstSpace()) }
+func KColorSyncTransformDstSpace() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformDstSpace())
+}
 
 // KColorSyncTransformCodeFragmentType returns the value of the CoreFoundation reference constant kColorSyncTransformCodeFragmentType as an objc.ID.
-func KColorSyncTransformCodeFragmentType() objc.ID { return purego.CFConstant(raw.KColorSyncTransformCodeFragmentType()) }
+func KColorSyncTransformCodeFragmentType() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformCodeFragmentType())
+}
 
 // KColorSyncTransformCodeFragmentMD5 returns the value of the CoreFoundation reference constant kColorSyncTransformCodeFragmentMD5 as an objc.ID.
-func KColorSyncTransformCodeFragmentMD5() objc.ID { return purego.CFConstant(raw.KColorSyncTransformCodeFragmentMD5()) }
+func KColorSyncTransformCodeFragmentMD5() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformCodeFragmentMD5())
+}
 
 // KColorSyncTransformFullConversionData returns the value of the CoreFoundation reference constant kColorSyncTransformFullConversionData as an objc.ID.
-func KColorSyncTransformFullConversionData() objc.ID { return purego.CFConstant(raw.KColorSyncTransformFullConversionData()) }
+func KColorSyncTransformFullConversionData() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformFullConversionData())
+}
 
 // KColorSyncTransformSimplifiedConversionData returns the value of the CoreFoundation reference constant kColorSyncTransformSimplifiedConversionData as an objc.ID.
-func KColorSyncTransformSimplifiedConversionData() objc.ID { return purego.CFConstant(raw.KColorSyncTransformSimplifiedConversionData()) }
+func KColorSyncTransformSimplifiedConversionData() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformSimplifiedConversionData())
+}
 
 // KColorSyncTransformParametricConversionData returns the value of the CoreFoundation reference constant kColorSyncTransformParametricConversionData as an objc.ID.
-func KColorSyncTransformParametricConversionData() objc.ID { return purego.CFConstant(raw.KColorSyncTransformParametricConversionData()) }
+func KColorSyncTransformParametricConversionData() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformParametricConversionData())
+}
 
 // KColorSyncTransformProfileSequnce returns the value of the CoreFoundation reference constant kColorSyncTransformProfileSequnce as an objc.ID.
-func KColorSyncTransformProfileSequnce() objc.ID { return purego.CFConstant(raw.KColorSyncTransformProfileSequnce()) }
+func KColorSyncTransformProfileSequnce() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformProfileSequnce())
+}
 
 // KColorSyncTransformUseITU709OETF returns the value of the CoreFoundation reference constant kColorSyncTransformUseITU709OETF as an objc.ID.
-func KColorSyncTransformUseITU709OETF() objc.ID { return purego.CFConstant(raw.KColorSyncTransformUseITU709OETF()) }
+func KColorSyncTransformUseITU709OETF() objc.ID {
+	return purego.CFConstant(raw.KColorSyncTransformUseITU709OETF())
+}
 
 // KColorSyncConversionMatrix returns the value of the CoreFoundation reference constant kColorSyncConversionMatrix as an objc.ID.
 func KColorSyncConversionMatrix() objc.ID { return purego.CFConstant(raw.KColorSyncConversionMatrix()) }
 
 // KColorSyncConversionParamCurve0 returns the value of the CoreFoundation reference constant kColorSyncConversionParamCurve0 as an objc.ID.
-func KColorSyncConversionParamCurve0() objc.ID { return purego.CFConstant(raw.KColorSyncConversionParamCurve0()) }
+func KColorSyncConversionParamCurve0() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionParamCurve0())
+}
 
 // KColorSyncConversionParamCurve1 returns the value of the CoreFoundation reference constant kColorSyncConversionParamCurve1 as an objc.ID.
-func KColorSyncConversionParamCurve1() objc.ID { return purego.CFConstant(raw.KColorSyncConversionParamCurve1()) }
+func KColorSyncConversionParamCurve1() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionParamCurve1())
+}
 
 // KColorSyncConversionParamCurve2 returns the value of the CoreFoundation reference constant kColorSyncConversionParamCurve2 as an objc.ID.
-func KColorSyncConversionParamCurve2() objc.ID { return purego.CFConstant(raw.KColorSyncConversionParamCurve2()) }
+func KColorSyncConversionParamCurve2() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionParamCurve2())
+}
 
 // KColorSyncConversionParamCurve3 returns the value of the CoreFoundation reference constant kColorSyncConversionParamCurve3 as an objc.ID.
-func KColorSyncConversionParamCurve3() objc.ID { return purego.CFConstant(raw.KColorSyncConversionParamCurve3()) }
+func KColorSyncConversionParamCurve3() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionParamCurve3())
+}
 
 // KColorSyncConversionParamCurve4 returns the value of the CoreFoundation reference constant kColorSyncConversionParamCurve4 as an objc.ID.
-func KColorSyncConversionParamCurve4() objc.ID { return purego.CFConstant(raw.KColorSyncConversionParamCurve4()) }
+func KColorSyncConversionParamCurve4() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionParamCurve4())
+}
 
 // KColorSyncConversion1DLut returns the value of the CoreFoundation reference constant kColorSyncConversion1DLut as an objc.ID.
 func KColorSyncConversion1DLut() objc.ID { return purego.CFConstant(raw.KColorSyncConversion1DLut()) }
 
 // KColorSyncConversionGridPoints returns the value of the CoreFoundation reference constant kColorSyncConversionGridPoints as an objc.ID.
-func KColorSyncConversionGridPoints() objc.ID { return purego.CFConstant(raw.KColorSyncConversionGridPoints()) }
+func KColorSyncConversionGridPoints() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionGridPoints())
+}
 
 // KColorSyncConversionChannelID returns the value of the CoreFoundation reference constant kColorSyncConversionChannelID as an objc.ID.
-func KColorSyncConversionChannelID() objc.ID { return purego.CFConstant(raw.KColorSyncConversionChannelID()) }
+func KColorSyncConversionChannelID() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionChannelID())
+}
 
 // KColorSyncConversion3DLut returns the value of the CoreFoundation reference constant kColorSyncConversion3DLut as an objc.ID.
 func KColorSyncConversion3DLut() objc.ID { return purego.CFConstant(raw.KColorSyncConversion3DLut()) }
@@ -353,10 +467,14 @@ func KColorSyncConversion3DLut() objc.ID { return purego.CFConstant(raw.KColorSy
 func KColorSyncConversionNDLut() objc.ID { return purego.CFConstant(raw.KColorSyncConversionNDLut()) }
 
 // KColorSyncConversionInpChan returns the value of the CoreFoundation reference constant kColorSyncConversionInpChan as an objc.ID.
-func KColorSyncConversionInpChan() objc.ID { return purego.CFConstant(raw.KColorSyncConversionInpChan()) }
+func KColorSyncConversionInpChan() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionInpChan())
+}
 
 // KColorSyncConversionOutChan returns the value of the CoreFoundation reference constant kColorSyncConversionOutChan as an objc.ID.
-func KColorSyncConversionOutChan() objc.ID { return purego.CFConstant(raw.KColorSyncConversionOutChan()) }
+func KColorSyncConversionOutChan() objc.ID {
+	return purego.CFConstant(raw.KColorSyncConversionOutChan())
+}
 
 // KColorSyncConversionBPC returns the value of the CoreFoundation reference constant kColorSyncConversionBPC as an objc.ID.
 func KColorSyncConversionBPC() objc.ID { return purego.CFConstant(raw.KColorSyncConversionBPC()) }
@@ -365,16 +483,22 @@ func KColorSyncConversionBPC() objc.ID { return purego.CFConstant(raw.KColorSync
 func KColorSyncFixedPointRange() objc.ID { return purego.CFConstant(raw.KColorSyncFixedPointRange()) }
 
 // KCMMInitializeLinkProfileProcName returns the value of the CoreFoundation reference constant kCMMInitializeLinkProfileProcName as an objc.ID.
-func KCMMInitializeLinkProfileProcName() objc.ID { return purego.CFConstant(raw.KCMMInitializeLinkProfileProcName()) }
+func KCMMInitializeLinkProfileProcName() objc.ID {
+	return purego.CFConstant(raw.KCMMInitializeLinkProfileProcName())
+}
 
 // KCMMInitializeTransformProcName returns the value of the CoreFoundation reference constant kCMMInitializeTransformProcName as an objc.ID.
-func KCMMInitializeTransformProcName() objc.ID { return purego.CFConstant(raw.KCMMInitializeTransformProcName()) }
+func KCMMInitializeTransformProcName() objc.ID {
+	return purego.CFConstant(raw.KCMMInitializeTransformProcName())
+}
 
 // KCMMApplyTransformProcName returns the value of the CoreFoundation reference constant kCMMApplyTransformProcName as an objc.ID.
 func KCMMApplyTransformProcName() objc.ID { return purego.CFConstant(raw.KCMMApplyTransformProcName()) }
 
 // KCMMCreateTransformPropertyProcName returns the value of the CoreFoundation reference constant kCMMCreateTransformPropertyProcName as an objc.ID.
-func KCMMCreateTransformPropertyProcName() objc.ID { return purego.CFConstant(raw.KCMMCreateTransformPropertyProcName()) }
+func KCMMCreateTransformPropertyProcName() objc.ID {
+	return purego.CFConstant(raw.KCMMCreateTransformPropertyProcName())
+}
 
 // KColorSyncDeviceID returns the value of the CoreFoundation reference constant kColorSyncDeviceID as an objc.ID.
 func KColorSyncDeviceID() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceID()) }
@@ -383,25 +507,37 @@ func KColorSyncDeviceID() objc.ID { return purego.CFConstant(raw.KColorSyncDevic
 func KColorSyncDeviceClass() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceClass()) }
 
 // KColorSyncCameraDeviceClass returns the value of the CoreFoundation reference constant kColorSyncCameraDeviceClass as an objc.ID.
-func KColorSyncCameraDeviceClass() objc.ID { return purego.CFConstant(raw.KColorSyncCameraDeviceClass()) }
+func KColorSyncCameraDeviceClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncCameraDeviceClass())
+}
 
 // KColorSyncDisplayDeviceClass returns the value of the CoreFoundation reference constant kColorSyncDisplayDeviceClass as an objc.ID.
-func KColorSyncDisplayDeviceClass() objc.ID { return purego.CFConstant(raw.KColorSyncDisplayDeviceClass()) }
+func KColorSyncDisplayDeviceClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDisplayDeviceClass())
+}
 
 // KColorSyncPrinterDeviceClass returns the value of the CoreFoundation reference constant kColorSyncPrinterDeviceClass as an objc.ID.
-func KColorSyncPrinterDeviceClass() objc.ID { return purego.CFConstant(raw.KColorSyncPrinterDeviceClass()) }
+func KColorSyncPrinterDeviceClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncPrinterDeviceClass())
+}
 
 // KColorSyncScannerDeviceClass returns the value of the CoreFoundation reference constant kColorSyncScannerDeviceClass as an objc.ID.
-func KColorSyncScannerDeviceClass() objc.ID { return purego.CFConstant(raw.KColorSyncScannerDeviceClass()) }
+func KColorSyncScannerDeviceClass() objc.ID {
+	return purego.CFConstant(raw.KColorSyncScannerDeviceClass())
+}
 
 // KColorSyncDeviceProfileURL returns the value of the CoreFoundation reference constant kColorSyncDeviceProfileURL as an objc.ID.
 func KColorSyncDeviceProfileURL() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfileURL()) }
 
 // KColorSyncDeviceDescription returns the value of the CoreFoundation reference constant kColorSyncDeviceDescription as an objc.ID.
-func KColorSyncDeviceDescription() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceDescription()) }
+func KColorSyncDeviceDescription() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceDescription())
+}
 
 // KColorSyncDeviceDescriptions returns the value of the CoreFoundation reference constant kColorSyncDeviceDescriptions as an objc.ID.
-func KColorSyncDeviceDescriptions() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceDescriptions()) }
+func KColorSyncDeviceDescriptions() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceDescriptions())
+}
 
 // KColorSyncFactoryProfiles returns the value of the CoreFoundation reference constant kColorSyncFactoryProfiles as an objc.ID.
 func KColorSyncFactoryProfiles() objc.ID { return purego.CFConstant(raw.KColorSyncFactoryProfiles()) }
@@ -410,13 +546,19 @@ func KColorSyncFactoryProfiles() objc.ID { return purego.CFConstant(raw.KColorSy
 func KColorSyncCustomProfiles() objc.ID { return purego.CFConstant(raw.KColorSyncCustomProfiles()) }
 
 // KColorSyncDeviceModeDescription returns the value of the CoreFoundation reference constant kColorSyncDeviceModeDescription as an objc.ID.
-func KColorSyncDeviceModeDescription() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceModeDescription()) }
+func KColorSyncDeviceModeDescription() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceModeDescription())
+}
 
 // KColorSyncDeviceModeDescriptions returns the value of the CoreFoundation reference constant kColorSyncDeviceModeDescriptions as an objc.ID.
-func KColorSyncDeviceModeDescriptions() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceModeDescriptions()) }
+func KColorSyncDeviceModeDescriptions() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceModeDescriptions())
+}
 
 // KColorSyncDeviceDefaultProfileID returns the value of the CoreFoundation reference constant kColorSyncDeviceDefaultProfileID as an objc.ID.
-func KColorSyncDeviceDefaultProfileID() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceDefaultProfileID()) }
+func KColorSyncDeviceDefaultProfileID() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceDefaultProfileID())
+}
 
 // KColorSyncDeviceHostScope returns the value of the CoreFoundation reference constant kColorSyncDeviceHostScope as an objc.ID.
 func KColorSyncDeviceHostScope() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceHostScope()) }
@@ -431,32 +573,49 @@ func KColorSyncProfileHostScope() objc.ID { return purego.CFConstant(raw.KColorS
 func KColorSyncProfileUserScope() objc.ID { return purego.CFConstant(raw.KColorSyncProfileUserScope()) }
 
 // KColorSyncDeviceProfileIsFactory returns the value of the CoreFoundation reference constant kColorSyncDeviceProfileIsFactory as an objc.ID.
-func KColorSyncDeviceProfileIsFactory() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfileIsFactory()) }
+func KColorSyncDeviceProfileIsFactory() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceProfileIsFactory())
+}
 
 // KColorSyncDeviceProfileIsDefault returns the value of the CoreFoundation reference constant kColorSyncDeviceProfileIsDefault as an objc.ID.
-func KColorSyncDeviceProfileIsDefault() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfileIsDefault()) }
+func KColorSyncDeviceProfileIsDefault() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceProfileIsDefault())
+}
 
 // KColorSyncDeviceProfileIsCurrent returns the value of the CoreFoundation reference constant kColorSyncDeviceProfileIsCurrent as an objc.ID.
-func KColorSyncDeviceProfileIsCurrent() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfileIsCurrent()) }
+func KColorSyncDeviceProfileIsCurrent() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceProfileIsCurrent())
+}
 
 // KColorSyncDeviceProfileID returns the value of the CoreFoundation reference constant kColorSyncDeviceProfileID as an objc.ID.
 func KColorSyncDeviceProfileID() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfileID()) }
 
 // KColorSyncDeviceRegisteredNotification returns the value of the CoreFoundation reference constant kColorSyncDeviceRegisteredNotification as an objc.ID.
-func KColorSyncDeviceRegisteredNotification() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceRegisteredNotification()) }
+func KColorSyncDeviceRegisteredNotification() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceRegisteredNotification())
+}
 
 // KColorSyncDeviceUnregisteredNotification returns the value of the CoreFoundation reference constant kColorSyncDeviceUnregisteredNotification as an objc.ID.
-func KColorSyncDeviceUnregisteredNotification() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceUnregisteredNotification()) }
+func KColorSyncDeviceUnregisteredNotification() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceUnregisteredNotification())
+}
 
 // KColorSyncDeviceProfilesNotification returns the value of the CoreFoundation reference constant kColorSyncDeviceProfilesNotification as an objc.ID.
-func KColorSyncDeviceProfilesNotification() objc.ID { return purego.CFConstant(raw.KColorSyncDeviceProfilesNotification()) }
+func KColorSyncDeviceProfilesNotification() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDeviceProfilesNotification())
+}
 
 // KColorSyncDisplayDeviceProfilesNotification returns the value of the CoreFoundation reference constant kColorSyncDisplayDeviceProfilesNotification as an objc.ID.
-func KColorSyncDisplayDeviceProfilesNotification() objc.ID { return purego.CFConstant(raw.KColorSyncDisplayDeviceProfilesNotification()) }
+func KColorSyncDisplayDeviceProfilesNotification() objc.ID {
+	return purego.CFConstant(raw.KColorSyncDisplayDeviceProfilesNotification())
+}
 
 // KColorSyncProfileRepositoryChangeNotification returns the value of the CoreFoundation reference constant kColorSyncProfileRepositoryChangeNotification as an objc.ID.
-func KColorSyncProfileRepositoryChangeNotification() objc.ID { return purego.CFConstant(raw.KColorSyncProfileRepositoryChangeNotification()) }
+func KColorSyncProfileRepositoryChangeNotification() objc.ID {
+	return purego.CFConstant(raw.KColorSyncProfileRepositoryChangeNotification())
+}
 
 // KColorSyncRegistrationUpdateWindowServer returns the value of the CoreFoundation reference constant kColorSyncRegistrationUpdateWindowServer as an objc.ID.
-func KColorSyncRegistrationUpdateWindowServer() objc.ID { return purego.CFConstant(raw.KColorSyncRegistrationUpdateWindowServer()) }
-
+func KColorSyncRegistrationUpdateWindowServer() objc.ID {
+	return purego.CFConstant(raw.KColorSyncRegistrationUpdateWindowServer())
+}

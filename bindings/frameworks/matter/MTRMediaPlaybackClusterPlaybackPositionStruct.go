@@ -16,11 +16,11 @@ type MTRMediaPlaybackClusterPlaybackPositionStruct struct {
 }
 
 var (
-	_clsMTRMediaPlaybackClusterPlaybackPositionStruct = _objcClass("MTRMediaPlaybackClusterPlaybackPositionStruct")
-	_mTRMediaPlaybackClusterPlaybackPositionStructSelUpdatedAt = objc.RegisterName("updatedAt")
+	_clsMTRMediaPlaybackClusterPlaybackPositionStruct             = _objcClass("MTRMediaPlaybackClusterPlaybackPositionStruct")
+	_mTRMediaPlaybackClusterPlaybackPositionStructSelUpdatedAt    = objc.RegisterName("updatedAt")
 	_mTRMediaPlaybackClusterPlaybackPositionStructSelSetUpdatedAt = objc.RegisterName("setUpdatedAt:")
-	_mTRMediaPlaybackClusterPlaybackPositionStructSelPosition = objc.RegisterName("position")
-	_mTRMediaPlaybackClusterPlaybackPositionStructSelSetPosition = objc.RegisterName("setPosition:")
+	_mTRMediaPlaybackClusterPlaybackPositionStructSelPosition     = objc.RegisterName("position")
+	_mTRMediaPlaybackClusterPlaybackPositionStructSelSetPosition  = objc.RegisterName("setPosition:")
 )
 
 func MTRMediaPlaybackClusterPlaybackPositionStructFromID(id objc.ID) *MTRMediaPlaybackClusterPlaybackPositionStruct {
@@ -35,7 +35,9 @@ func MTRMediaPlaybackClusterPlaybackPositionStructFromID(id objc.ID) *MTRMediaPl
 
 func (o *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackPositionStructSelUpdatedAt)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRMediaPlaybackClusterPlaybackPositionStruct) SetUpdatedAt(updatedAt *
 
 func (o *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterPlaybackPositionStructSelPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMediaPlaybackClusterPlaybackPositionStruct) SetPosition(position *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMediaPlaybackClusterPlaybackPositionStructSelSetPosition, position.Ptr())
 }
-

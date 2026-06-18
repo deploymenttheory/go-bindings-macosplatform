@@ -77,7 +77,9 @@ func (x *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -144,7 +146,9 @@ func (x *BatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate *foundatio
 	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
 }
 
-func (x *BatchUpdateRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+func (x *BatchUpdateRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
+	return &x.inner.NSPersistentStoreRequest
+}
 
 // BatchUpdateRequestable is the interface implemented by [BatchUpdateRequest], for mocking and DI.
 type BatchUpdateRequestable interface {
@@ -167,4 +171,3 @@ type BatchUpdateRequestable interface {
 }
 
 var _ BatchUpdateRequestable = (*BatchUpdateRequest)(nil)
-

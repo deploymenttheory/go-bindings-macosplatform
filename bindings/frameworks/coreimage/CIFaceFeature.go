@@ -16,22 +16,22 @@ type CIFaceFeature struct {
 }
 
 var (
-	_clsCIFaceFeature = _objcClass("CIFaceFeature")
-	_cIFaceFeatureSelHasLeftEyePosition = objc.RegisterName("hasLeftEyePosition")
-	_cIFaceFeatureSelLeftEyePosition = objc.RegisterName("leftEyePosition")
-	_cIFaceFeatureSelHasRightEyePosition = objc.RegisterName("hasRightEyePosition")
-	_cIFaceFeatureSelRightEyePosition = objc.RegisterName("rightEyePosition")
-	_cIFaceFeatureSelHasMouthPosition = objc.RegisterName("hasMouthPosition")
-	_cIFaceFeatureSelMouthPosition = objc.RegisterName("mouthPosition")
-	_cIFaceFeatureSelHasTrackingID = objc.RegisterName("hasTrackingID")
-	_cIFaceFeatureSelTrackingID = objc.RegisterName("trackingID")
+	_clsCIFaceFeature                      = _objcClass("CIFaceFeature")
+	_cIFaceFeatureSelHasLeftEyePosition    = objc.RegisterName("hasLeftEyePosition")
+	_cIFaceFeatureSelLeftEyePosition       = objc.RegisterName("leftEyePosition")
+	_cIFaceFeatureSelHasRightEyePosition   = objc.RegisterName("hasRightEyePosition")
+	_cIFaceFeatureSelRightEyePosition      = objc.RegisterName("rightEyePosition")
+	_cIFaceFeatureSelHasMouthPosition      = objc.RegisterName("hasMouthPosition")
+	_cIFaceFeatureSelMouthPosition         = objc.RegisterName("mouthPosition")
+	_cIFaceFeatureSelHasTrackingID         = objc.RegisterName("hasTrackingID")
+	_cIFaceFeatureSelTrackingID            = objc.RegisterName("trackingID")
 	_cIFaceFeatureSelHasTrackingFrameCount = objc.RegisterName("hasTrackingFrameCount")
-	_cIFaceFeatureSelTrackingFrameCount = objc.RegisterName("trackingFrameCount")
-	_cIFaceFeatureSelHasFaceAngle = objc.RegisterName("hasFaceAngle")
-	_cIFaceFeatureSelFaceAngle = objc.RegisterName("faceAngle")
-	_cIFaceFeatureSelHasSmile = objc.RegisterName("hasSmile")
-	_cIFaceFeatureSelLeftEyeClosed = objc.RegisterName("leftEyeClosed")
-	_cIFaceFeatureSelRightEyeClosed = objc.RegisterName("rightEyeClosed")
+	_cIFaceFeatureSelTrackingFrameCount    = objc.RegisterName("trackingFrameCount")
+	_cIFaceFeatureSelHasFaceAngle          = objc.RegisterName("hasFaceAngle")
+	_cIFaceFeatureSelFaceAngle             = objc.RegisterName("faceAngle")
+	_cIFaceFeatureSelHasSmile              = objc.RegisterName("hasSmile")
+	_cIFaceFeatureSelLeftEyeClosed         = objc.RegisterName("leftEyeClosed")
+	_cIFaceFeatureSelRightEyeClosed        = objc.RegisterName("rightEyeClosed")
 )
 
 func CIFaceFeatureFromID(id objc.ID) *CIFaceFeature {
@@ -116,21 +116,20 @@ func (o *CIFaceFeature) FaceAngle() float32 {
 	return _ret
 }
 
-// A Boolean value that indicates whether a smile is detected in the face. To detect smiles, ``/CIDetector/featuresInImage:options:`` needs to be called with the ``CIDetectorSmile`` option set to true.
+// A Boolean value that indicates whether a smile is detected in the face. To detect smiles, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorSmile“ option set to true.
 func (o *CIFaceFeature) HasSmile() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cIFaceFeatureSelHasSmile)
 	return _ret
 }
 
-// A Boolean value that indicates whether a closed left eye is detected in the face. To detect closed eyes, ``/CIDetector/featuresInImage:options:`` needs to be called with the ``CIDetectorEyeBlink`` option set to true.
+// A Boolean value that indicates whether a closed left eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
 func (o *CIFaceFeature) LeftEyeClosed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cIFaceFeatureSelLeftEyeClosed)
 	return _ret
 }
 
-// A Boolean value that indicates whether a closed right eye is detected in the face. To detect closed eyes, ``/CIDetector/featuresInImage:options:`` needs to be called with the ``CIDetectorEyeBlink`` option set to true.
+// A Boolean value that indicates whether a closed right eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
 func (o *CIFaceFeature) RightEyeClosed() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cIFaceFeatureSelRightEyeClosed)
 	return _ret
 }
-

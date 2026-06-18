@@ -85,4 +85,3 @@ type ManagedObjectModelReferenceable interface {
 }
 
 var _ ManagedObjectModelReferenceable = (*ManagedObjectModelReference)(nil)
-

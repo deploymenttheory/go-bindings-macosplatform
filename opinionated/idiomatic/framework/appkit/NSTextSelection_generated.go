@@ -181,4 +181,3 @@ type TextSelectionable interface {
 }
 
 var _ TextSelectionable = (*TextSelection)(nil)
-

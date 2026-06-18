@@ -30,4 +30,3 @@ type DRTrackDataProduction interface {
 	VerifyDataForTrackInBufferLengthAtAddressBlockSizeIoFlags(track *DRTrack, buffer string, bufferLength uint32, address uint64, blockSize uint32, flags *uint32) bool
 	CleanupTrackAfterVerification(track *DRTrack) bool
 }
-

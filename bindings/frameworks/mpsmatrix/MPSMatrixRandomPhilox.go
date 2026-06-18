@@ -18,11 +18,11 @@ type MPSMatrixRandomPhilox struct {
 }
 
 var (
-	_clsMPSMatrixRandomPhilox = _objcClass("MPSMatrixRandomPhilox")
-	_mPSMatrixRandomPhiloxSelInitWithDevice = objc.RegisterName("initWithDevice:")
+	_clsMPSMatrixRandomPhilox                                                            = _objcClass("MPSMatrixRandomPhilox")
+	_mPSMatrixRandomPhiloxSelInitWithDevice                                              = objc.RegisterName("initWithDevice:")
 	_mPSMatrixRandomPhiloxSelInitWithDeviceDestinationDataTypeSeedDistributionDescriptor = objc.RegisterName("initWithDevice:destinationDataType:seed:distributionDescriptor:")
-	_mPSMatrixRandomPhiloxSelInitWithDeviceDestinationDataTypeSeed = objc.RegisterName("initWithDevice:destinationDataType:seed:")
-	_mPSMatrixRandomPhiloxSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_mPSMatrixRandomPhiloxSelInitWithDeviceDestinationDataTypeSeed                       = objc.RegisterName("initWithDevice:destinationDataType:seed:")
+	_mPSMatrixRandomPhiloxSelInitWithCoderDevice                                         = objc.RegisterName("initWithCoder:device:")
 )
 
 func MPSMatrixRandomPhiloxFromID(id objc.ID) *MPSMatrixRandomPhilox {
@@ -38,27 +38,34 @@ func MPSMatrixRandomPhiloxFromID(id objc.ID) *MPSMatrixRandomPhilox {
 // @abstract   initialize a MPSMatrixRandomPhilox filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
 func (o *MPSMatrixRandomPhilox) InitWithDevice(device metal.MTLDevice) *MPSMatrixRandomPhilox {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomPhiloxSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomPhiloxFromID(_ret)
 }
 
 // @abstract   initialize a MPSMatrixRandomPhilox filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
 func (o *MPSMatrixRandomPhilox) InitWithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *MPSMatrixRandomDistributionDescriptor) *MPSMatrixRandomPhilox {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomPhiloxSelInitWithDeviceDestinationDataTypeSeedDistributionDescriptor, device, destinationDataType, seed, distributionDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomPhiloxFromID(_ret)
 }
 
 // @abstract   initialize a MPSMatrixRandomPhilox filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
 func (o *MPSMatrixRandomPhilox) InitWithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MPSMatrixRandomPhilox {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomPhiloxSelInitWithDeviceDestinationDataTypeSeed, device, destinationDataType, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomPhiloxFromID(_ret)
 }
 
 func (o *MPSMatrixRandomPhilox) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSMatrixRandomPhilox {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixRandomPhiloxSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixRandomPhiloxFromID(_ret)
 }
-

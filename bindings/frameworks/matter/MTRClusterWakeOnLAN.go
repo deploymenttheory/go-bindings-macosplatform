@@ -16,15 +16,15 @@ type MTRClusterWakeOnLAN struct {
 }
 
 var (
-	_clsMTRClusterWakeOnLAN = _objcClass("MTRClusterWakeOnLAN")
-	_mTRClusterWakeOnLANSelReadAttributeMACAddressWithParams = objc.RegisterName("readAttributeMACAddressWithParams:")
-	_mTRClusterWakeOnLANSelReadAttributeLinkLocalAddressWithParams = objc.RegisterName("readAttributeLinkLocalAddressWithParams:")
+	_clsMTRClusterWakeOnLAN                                            = _objcClass("MTRClusterWakeOnLAN")
+	_mTRClusterWakeOnLANSelReadAttributeMACAddressWithParams           = objc.RegisterName("readAttributeMACAddressWithParams:")
+	_mTRClusterWakeOnLANSelReadAttributeLinkLocalAddressWithParams     = objc.RegisterName("readAttributeLinkLocalAddressWithParams:")
 	_mTRClusterWakeOnLANSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterWakeOnLANSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterWakeOnLANSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterWakeOnLANSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterWakeOnLANSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterWakeOnLANSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterWakeOnLANSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterWakeOnLANSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterWakeOnLANSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterWakeOnLANSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterWakeOnLANSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterWakeOnLANFromID(id objc.ID) *MTRClusterWakeOnLAN {
@@ -75,7 +75,8 @@ func (o *MTRClusterWakeOnLAN) ReadAttributeClusterRevisionWithParams(params *MTR
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterWakeOnLAN) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWakeOnLAN {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWakeOnLANSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWakeOnLANFromID(_ret)
 }
-

@@ -18,12 +18,12 @@ type VNGeometryUtils struct {
 }
 
 var (
-	_clsVNGeometryUtils = _objcClass("VNGeometryUtils")
-	_vNGeometryUtilsSelBoundingCircleForContourError = objc.RegisterName("boundingCircleForContour:error:")
-	_vNGeometryUtilsSelBoundingCircleForPointsError = objc.RegisterName("boundingCircleForPoints:error:")
+	_clsVNGeometryUtils                                           = _objcClass("VNGeometryUtils")
+	_vNGeometryUtilsSelBoundingCircleForContourError              = objc.RegisterName("boundingCircleForContour:error:")
+	_vNGeometryUtilsSelBoundingCircleForPointsError               = objc.RegisterName("boundingCircleForPoints:error:")
 	_vNGeometryUtilsSelBoundingCircleForSIMDPointsPointCountError = objc.RegisterName("boundingCircleForSIMDPoints:pointCount:error:")
-	_vNGeometryUtilsSelCalculateAreaForContourOrientedAreaError = objc.RegisterName("calculateArea:forContour:orientedArea:error:")
-	_vNGeometryUtilsSelCalculatePerimeterForContourError = objc.RegisterName("calculatePerimeter:forContour:error:")
+	_vNGeometryUtilsSelCalculateAreaForContourOrientedAreaError   = objc.RegisterName("calculateArea:forContour:orientedArea:error:")
+	_vNGeometryUtilsSelCalculatePerimeterForContourError          = objc.RegisterName("calculatePerimeter:forContour:error:")
 )
 
 func VNGeometryUtilsFromID(id objc.ID) *VNGeometryUtils {
@@ -40,7 +40,9 @@ func VNGeometryUtilsFromID(id objc.ID) *VNGeometryUtils {
 func VNGeometryUtilsBoundingCircleForContourError(contour *VNContour) (*VNCircle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNGeometryUtils), _vNGeometryUtilsSelBoundingCircleForContourError, contour.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -50,7 +52,9 @@ func VNGeometryUtilsBoundingCircleForContourError(contour *VNContour) (*VNCircle
 func VNGeometryUtilsBoundingCircleForPointsError(points *foundation.NSArray[*VNPoint]) (*VNCircle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNGeometryUtils), _vNGeometryUtilsSelBoundingCircleForPointsError, points.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -60,7 +64,9 @@ func VNGeometryUtilsBoundingCircleForPointsError(points *foundation.NSArray[*VNP
 func VNGeometryUtilsBoundingCircleForSIMDPointsPointCountError(points unsafe.Pointer, pointCount int) (*VNCircle, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNGeometryUtils), _vNGeometryUtilsSelBoundingCircleForSIMDPointsPointCountError, points, pointCount, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -86,4 +92,3 @@ func VNGeometryUtilsCalculatePerimeterForContourError(perimeter *float64, contou
 	}
 	return _ret, nil
 }
-

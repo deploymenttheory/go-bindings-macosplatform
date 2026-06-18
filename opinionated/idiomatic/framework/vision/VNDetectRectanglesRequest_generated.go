@@ -156,9 +156,13 @@ func (x *DetectRectanglesRequest) SetMaximumObservations(maximumObservations uin
 	x.inner.SetMaximumObservations(maximumObservations)
 }
 
-func (x *DetectRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectRectanglesRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectRectanglesRequestable is the interface implemented by [DetectRectanglesRequest], for mocking and DI.
 type DetectRectanglesRequestable interface {
@@ -188,4 +192,3 @@ type DetectRectanglesRequestable interface {
 }
 
 var _ DetectRectanglesRequestable = (*DetectRectanglesRequest)(nil)
-

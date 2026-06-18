@@ -47,4 +47,3 @@ type WorkoutRouteable interface {
 }
 
 var _ WorkoutRouteable = (*WorkoutRoute)(nil)
-

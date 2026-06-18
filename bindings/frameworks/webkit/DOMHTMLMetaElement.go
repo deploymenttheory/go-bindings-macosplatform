@@ -16,15 +16,15 @@ type DOMHTMLMetaElement struct {
 }
 
 var (
-	_clsDOMHTMLMetaElement = _objcClass("DOMHTMLMetaElement")
-	_dOMHTMLMetaElementSelContent = objc.RegisterName("content")
-	_dOMHTMLMetaElementSelSetContent = objc.RegisterName("setContent:")
-	_dOMHTMLMetaElementSelHttpEquiv = objc.RegisterName("httpEquiv")
+	_clsDOMHTMLMetaElement             = _objcClass("DOMHTMLMetaElement")
+	_dOMHTMLMetaElementSelContent      = objc.RegisterName("content")
+	_dOMHTMLMetaElementSelSetContent   = objc.RegisterName("setContent:")
+	_dOMHTMLMetaElementSelHttpEquiv    = objc.RegisterName("httpEquiv")
 	_dOMHTMLMetaElementSelSetHttpEquiv = objc.RegisterName("setHttpEquiv:")
-	_dOMHTMLMetaElementSelName = objc.RegisterName("name")
-	_dOMHTMLMetaElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLMetaElementSelScheme = objc.RegisterName("scheme")
-	_dOMHTMLMetaElementSelSetScheme = objc.RegisterName("setScheme:")
+	_dOMHTMLMetaElementSelName         = objc.RegisterName("name")
+	_dOMHTMLMetaElementSelSetName      = objc.RegisterName("setName:")
+	_dOMHTMLMetaElementSelScheme       = objc.RegisterName("scheme")
+	_dOMHTMLMetaElementSelSetScheme    = objc.RegisterName("setScheme:")
 )
 
 func DOMHTMLMetaElementFromID(id objc.ID) *DOMHTMLMetaElement {
@@ -39,7 +39,9 @@ func DOMHTMLMetaElementFromID(id objc.ID) *DOMHTMLMetaElement {
 
 func (o *DOMHTMLMetaElement) Content() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMetaElementSelContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *DOMHTMLMetaElement) SetContent(content *foundation.NSString) {
 
 func (o *DOMHTMLMetaElement) HttpEquiv() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMetaElementSelHttpEquiv)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *DOMHTMLMetaElement) SetHttpEquiv(httpEquiv *foundation.NSString) {
 
 func (o *DOMHTMLMetaElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMetaElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *DOMHTMLMetaElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLMetaElement) Scheme() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLMetaElementSelScheme)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLMetaElement) SetScheme(scheme *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLMetaElementSelSetScheme, scheme.Ptr())
 }
-

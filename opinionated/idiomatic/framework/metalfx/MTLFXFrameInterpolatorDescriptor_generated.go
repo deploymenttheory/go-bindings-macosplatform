@@ -244,4 +244,3 @@ type FrameInterpolatorDescriptorable interface {
 }
 
 var _ FrameInterpolatorDescriptorable = (*FrameInterpolatorDescriptor)(nil)
-

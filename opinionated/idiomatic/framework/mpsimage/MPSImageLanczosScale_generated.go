@@ -72,7 +72,9 @@ func (x *ImageLanczosScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Ima
 
 func (x *ImageLanczosScale) asImageScale() *raw.MPSImageScale { return &x.inner.MPSImageScale }
 
-func (x *ImageLanczosScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
+func (x *ImageLanczosScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSImageScale.MPSUnaryImageKernel
+}
 
 // ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
 type ImageLanczosScaleable interface {
@@ -84,4 +86,3 @@ type ImageLanczosScaleable interface {
 }
 
 var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
-

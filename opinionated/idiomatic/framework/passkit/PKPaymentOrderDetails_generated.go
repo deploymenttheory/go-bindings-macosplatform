@@ -132,4 +132,3 @@ type PaymentOrderDetailsable interface {
 }
 
 var _ PaymentOrderDetailsable = (*PaymentOrderDetails)(nil)
-

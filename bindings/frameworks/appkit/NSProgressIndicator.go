@@ -16,36 +16,36 @@ type NSProgressIndicator struct {
 }
 
 var (
-	_clsNSProgressIndicator = _objcClass("NSProgressIndicator")
-	_nSProgressIndicatorSelIncrementBy = objc.RegisterName("incrementBy:")
-	_nSProgressIndicatorSelStartAnimation = objc.RegisterName("startAnimation:")
-	_nSProgressIndicatorSelStopAnimation = objc.RegisterName("stopAnimation:")
-	_nSProgressIndicatorSelSizeToFit = objc.RegisterName("sizeToFit")
-	_nSProgressIndicatorSelIsIndeterminate = objc.RegisterName("isIndeterminate")
-	_nSProgressIndicatorSelSetIndeterminate = objc.RegisterName("setIndeterminate:")
-	_nSProgressIndicatorSelControlSize = objc.RegisterName("controlSize")
-	_nSProgressIndicatorSelSetControlSize = objc.RegisterName("setControlSize:")
-	_nSProgressIndicatorSelDoubleValue = objc.RegisterName("doubleValue")
-	_nSProgressIndicatorSelSetDoubleValue = objc.RegisterName("setDoubleValue:")
-	_nSProgressIndicatorSelMinValue = objc.RegisterName("minValue")
-	_nSProgressIndicatorSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSProgressIndicatorSelMaxValue = objc.RegisterName("maxValue")
-	_nSProgressIndicatorSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSProgressIndicatorSelObservedProgress = objc.RegisterName("observedProgress")
-	_nSProgressIndicatorSelSetObservedProgress = objc.RegisterName("setObservedProgress:")
-	_nSProgressIndicatorSelUsesThreadedAnimation = objc.RegisterName("usesThreadedAnimation")
+	_clsNSProgressIndicator                         = _objcClass("NSProgressIndicator")
+	_nSProgressIndicatorSelIncrementBy              = objc.RegisterName("incrementBy:")
+	_nSProgressIndicatorSelStartAnimation           = objc.RegisterName("startAnimation:")
+	_nSProgressIndicatorSelStopAnimation            = objc.RegisterName("stopAnimation:")
+	_nSProgressIndicatorSelSizeToFit                = objc.RegisterName("sizeToFit")
+	_nSProgressIndicatorSelIsIndeterminate          = objc.RegisterName("isIndeterminate")
+	_nSProgressIndicatorSelSetIndeterminate         = objc.RegisterName("setIndeterminate:")
+	_nSProgressIndicatorSelControlSize              = objc.RegisterName("controlSize")
+	_nSProgressIndicatorSelSetControlSize           = objc.RegisterName("setControlSize:")
+	_nSProgressIndicatorSelDoubleValue              = objc.RegisterName("doubleValue")
+	_nSProgressIndicatorSelSetDoubleValue           = objc.RegisterName("setDoubleValue:")
+	_nSProgressIndicatorSelMinValue                 = objc.RegisterName("minValue")
+	_nSProgressIndicatorSelSetMinValue              = objc.RegisterName("setMinValue:")
+	_nSProgressIndicatorSelMaxValue                 = objc.RegisterName("maxValue")
+	_nSProgressIndicatorSelSetMaxValue              = objc.RegisterName("setMaxValue:")
+	_nSProgressIndicatorSelObservedProgress         = objc.RegisterName("observedProgress")
+	_nSProgressIndicatorSelSetObservedProgress      = objc.RegisterName("setObservedProgress:")
+	_nSProgressIndicatorSelUsesThreadedAnimation    = objc.RegisterName("usesThreadedAnimation")
 	_nSProgressIndicatorSelSetUsesThreadedAnimation = objc.RegisterName("setUsesThreadedAnimation:")
-	_nSProgressIndicatorSelStyle = objc.RegisterName("style")
-	_nSProgressIndicatorSelSetStyle = objc.RegisterName("setStyle:")
-	_nSProgressIndicatorSelIsDisplayedWhenStopped = objc.RegisterName("isDisplayedWhenStopped")
-	_nSProgressIndicatorSelSetDisplayedWhenStopped = objc.RegisterName("setDisplayedWhenStopped:")
-	_nSProgressIndicatorSelAnimationDelay = objc.RegisterName("animationDelay")
-	_nSProgressIndicatorSelSetAnimationDelay = objc.RegisterName("setAnimationDelay:")
-	_nSProgressIndicatorSelAnimate = objc.RegisterName("animate:")
-	_nSProgressIndicatorSelIsBezeled = objc.RegisterName("isBezeled")
-	_nSProgressIndicatorSelSetBezeled = objc.RegisterName("setBezeled:")
-	_nSProgressIndicatorSelControlTint = objc.RegisterName("controlTint")
-	_nSProgressIndicatorSelSetControlTint = objc.RegisterName("setControlTint:")
+	_nSProgressIndicatorSelStyle                    = objc.RegisterName("style")
+	_nSProgressIndicatorSelSetStyle                 = objc.RegisterName("setStyle:")
+	_nSProgressIndicatorSelIsDisplayedWhenStopped   = objc.RegisterName("isDisplayedWhenStopped")
+	_nSProgressIndicatorSelSetDisplayedWhenStopped  = objc.RegisterName("setDisplayedWhenStopped:")
+	_nSProgressIndicatorSelAnimationDelay           = objc.RegisterName("animationDelay")
+	_nSProgressIndicatorSelSetAnimationDelay        = objc.RegisterName("setAnimationDelay:")
+	_nSProgressIndicatorSelAnimate                  = objc.RegisterName("animate:")
+	_nSProgressIndicatorSelIsBezeled                = objc.RegisterName("isBezeled")
+	_nSProgressIndicatorSelSetBezeled               = objc.RegisterName("setBezeled:")
+	_nSProgressIndicatorSelControlTint              = objc.RegisterName("controlTint")
+	_nSProgressIndicatorSelSetControlTint           = objc.RegisterName("setControlTint:")
 )
 
 func NSProgressIndicatorFromID(id objc.ID) *NSProgressIndicator {
@@ -121,7 +121,9 @@ func (o *NSProgressIndicator) SetMaxValue(maxValue float64) {
 
 func (o *NSProgressIndicator) ObservedProgress() *foundation.NSProgress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSProgressIndicatorSelObservedProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSProgressFromID(_ret)
 }
 
@@ -193,4 +195,3 @@ func (o *NSProgressIndicator) ControlTint() NSControlTint {
 func (o *NSProgressIndicator) SetControlTint(controlTint NSControlTint) {
 	o.Ptr().Send(_nSProgressIndicatorSelSetControlTint, controlTint)
 }
-

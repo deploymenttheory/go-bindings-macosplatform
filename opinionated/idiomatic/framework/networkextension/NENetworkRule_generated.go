@@ -127,4 +127,3 @@ type NENetworkRuleable interface {
 }
 
 var _ NENetworkRuleable = (*NENetworkRule)(nil)
-

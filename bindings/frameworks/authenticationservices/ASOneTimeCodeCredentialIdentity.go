@@ -16,9 +16,9 @@ type ASOneTimeCodeCredentialIdentity struct {
 }
 
 var (
-	_clsASOneTimeCodeCredentialIdentity = _objcClass("ASOneTimeCodeCredentialIdentity")
+	_clsASOneTimeCodeCredentialIdentity                                               = _objcClass("ASOneTimeCodeCredentialIdentity")
 	_aSOneTimeCodeCredentialIdentitySelInitWithServiceIdentifierLabelRecordIdentifier = objc.RegisterName("initWithServiceIdentifier:label:recordIdentifier:")
-	_aSOneTimeCodeCredentialIdentitySelLabel = objc.RegisterName("label")
+	_aSOneTimeCodeCredentialIdentitySelLabel                                          = objc.RegisterName("label")
 )
 
 func ASOneTimeCodeCredentialIdentityFromID(id objc.ID) *ASOneTimeCodeCredentialIdentity {
@@ -34,13 +34,16 @@ func ASOneTimeCodeCredentialIdentityFromID(id objc.ID) *ASOneTimeCodeCredentialI
 // @abstract Initializes an instance of ASOneTimeCodeCredentialIdentity. @param serviceIdentifier The service identifier for which this credential identity is valid. @param label A user-provided label to identify the one time code. @param recordIdentifier An optional string to uniquely identify this record in your local database.
 func (o *ASOneTimeCodeCredentialIdentity) InitWithServiceIdentifierLabelRecordIdentifier(serviceIdentifier *ASCredentialServiceIdentifier, label *foundation.NSString, recordIdentifier *foundation.NSString) *ASOneTimeCodeCredentialIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialIdentitySelInitWithServiceIdentifierLabelRecordIdentifier, serviceIdentifier.Ptr(), label.Ptr(), recordIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASOneTimeCodeCredentialIdentityFromID(_ret)
 }
 
 func (o *ASOneTimeCodeCredentialIdentity) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSOneTimeCodeCredentialIdentitySelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

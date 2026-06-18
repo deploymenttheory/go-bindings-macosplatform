@@ -15,10 +15,10 @@ type VZVirtioConsoleDevice struct {
 }
 
 var (
-	_clsVZVirtioConsoleDevice = _objcClass("VZVirtioConsoleDevice")
-	_vZVirtioConsoleDeviceSelDelegate = objc.RegisterName("delegate")
+	_clsVZVirtioConsoleDevice            = _objcClass("VZVirtioConsoleDevice")
+	_vZVirtioConsoleDeviceSelDelegate    = objc.RegisterName("delegate")
 	_vZVirtioConsoleDeviceSelSetDelegate = objc.RegisterName("setDelegate:")
-	_vZVirtioConsoleDeviceSelPorts = objc.RegisterName("ports")
+	_vZVirtioConsoleDeviceSelPorts       = objc.RegisterName("ports")
 )
 
 func VZVirtioConsoleDeviceFromID(id objc.ID) *VZVirtioConsoleDevice {
@@ -44,7 +44,8 @@ func (o *VZVirtioConsoleDevice) SetDelegate(delegate VZVirtioConsoleDeviceDelega
 // @abstract The console ports currently being used by this console device.
 func (o *VZVirtioConsoleDevice) Ports() *VZVirtioConsolePortArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceSelPorts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioConsolePortArrayFromID(_ret)
 }
-

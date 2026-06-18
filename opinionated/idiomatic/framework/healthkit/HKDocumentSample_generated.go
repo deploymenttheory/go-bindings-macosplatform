@@ -57,4 +57,3 @@ type DocumentSampleable interface {
 }
 
 var _ DocumentSampleable = (*DocumentSample)(nil)
-

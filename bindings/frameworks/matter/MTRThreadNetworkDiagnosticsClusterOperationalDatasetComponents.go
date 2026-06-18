@@ -16,31 +16,31 @@ type MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents = _objcClass("MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelActiveTimestampPresent = objc.RegisterName("activeTimestampPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetActiveTimestampPresent = objc.RegisterName("setActiveTimestampPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPendingTimestampPresent = objc.RegisterName("pendingTimestampPresent")
+	_clsMTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents                           = _objcClass("MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelActiveTimestampPresent     = objc.RegisterName("activeTimestampPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetActiveTimestampPresent  = objc.RegisterName("setActiveTimestampPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPendingTimestampPresent    = objc.RegisterName("pendingTimestampPresent")
 	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetPendingTimestampPresent = objc.RegisterName("setPendingTimestampPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMasterKeyPresent = objc.RegisterName("masterKeyPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetMasterKeyPresent = objc.RegisterName("setMasterKeyPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelNetworkNamePresent = objc.RegisterName("networkNamePresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetNetworkNamePresent = objc.RegisterName("setNetworkNamePresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelExtendedPanIdPresent = objc.RegisterName("extendedPanIdPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetExtendedPanIdPresent = objc.RegisterName("setExtendedPanIdPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMeshLocalPrefixPresent = objc.RegisterName("meshLocalPrefixPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetMeshLocalPrefixPresent = objc.RegisterName("setMeshLocalPrefixPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelDelayPresent = objc.RegisterName("delayPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetDelayPresent = objc.RegisterName("setDelayPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPanIdPresent = objc.RegisterName("panIdPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetPanIdPresent = objc.RegisterName("setPanIdPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelPresent = objc.RegisterName("channelPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetChannelPresent = objc.RegisterName("setChannelPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPskcPresent = objc.RegisterName("pskcPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetPskcPresent = objc.RegisterName("setPskcPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSecurityPolicyPresent = objc.RegisterName("securityPolicyPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetSecurityPolicyPresent = objc.RegisterName("setSecurityPolicyPresent:")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelMaskPresent = objc.RegisterName("channelMaskPresent")
-	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetChannelMaskPresent = objc.RegisterName("setChannelMaskPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMasterKeyPresent           = objc.RegisterName("masterKeyPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetMasterKeyPresent        = objc.RegisterName("setMasterKeyPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelNetworkNamePresent         = objc.RegisterName("networkNamePresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetNetworkNamePresent      = objc.RegisterName("setNetworkNamePresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelExtendedPanIdPresent       = objc.RegisterName("extendedPanIdPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetExtendedPanIdPresent    = objc.RegisterName("setExtendedPanIdPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMeshLocalPrefixPresent     = objc.RegisterName("meshLocalPrefixPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetMeshLocalPrefixPresent  = objc.RegisterName("setMeshLocalPrefixPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelDelayPresent               = objc.RegisterName("delayPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetDelayPresent            = objc.RegisterName("setDelayPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPanIdPresent               = objc.RegisterName("panIdPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetPanIdPresent            = objc.RegisterName("setPanIdPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelPresent             = objc.RegisterName("channelPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetChannelPresent          = objc.RegisterName("setChannelPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPskcPresent                = objc.RegisterName("pskcPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetPskcPresent             = objc.RegisterName("setPskcPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSecurityPolicyPresent      = objc.RegisterName("securityPolicyPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetSecurityPolicyPresent   = objc.RegisterName("setSecurityPolicyPresent:")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelMaskPresent         = objc.RegisterName("channelMaskPresent")
+	_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetChannelMaskPresent      = objc.RegisterName("setChannelMaskPresent:")
 )
 
 func MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
@@ -55,7 +55,9 @@ func MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(id obj
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ActiveTimestampPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelActiveTimestampPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetActi
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PendingTimestampPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPendingTimestampPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetPend
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MasterKeyPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMasterKeyPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +91,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetMast
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) NetworkNamePresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelNetworkNamePresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -95,7 +103,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetNetw
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ExtendedPanIdPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelExtendedPanIdPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -105,7 +115,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetExte
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MeshLocalPrefixPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelMeshLocalPrefixPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -115,7 +127,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetMesh
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) DelayPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelDelayPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -125,7 +139,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetDela
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PanIdPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPanIdPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -135,7 +151,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetPanI
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -145,7 +163,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetChan
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PskcPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelPskcPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -155,7 +175,9 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetPskc
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SecurityPolicyPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSecurityPolicyPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -165,11 +187,12 @@ func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetSecu
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelMaskPresent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelChannelMaskPresent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SetChannelMaskPresent(channelMaskPresent *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsSelSetChannelMaskPresent, channelMaskPresent.Ptr())
 }
-

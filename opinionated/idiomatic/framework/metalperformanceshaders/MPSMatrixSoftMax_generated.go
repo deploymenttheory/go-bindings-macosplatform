@@ -130,7 +130,9 @@ func (x *MatrixSoftMax) SetSourceColumns(sourceColumns uint) {
 	x.inner.SetSourceColumns(sourceColumns)
 }
 
-func (x *MatrixSoftMax) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
+func (x *MatrixSoftMax) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel {
+	return &x.inner.MPSMatrixUnaryKernel
+}
 
 func (x *MatrixSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
 
@@ -154,4 +156,3 @@ type MatrixSoftMaxable interface {
 }
 
 var _ MatrixSoftMaxable = (*MatrixSoftMax)(nil)
-

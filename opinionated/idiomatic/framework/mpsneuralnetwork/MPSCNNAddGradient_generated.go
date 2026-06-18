@@ -182,11 +182,17 @@ func (x *CNNAddGradient) WithDestinationImageAllocator(destinationImageAllocator
 	return x
 }
 
-func (x *CNNAddGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
+func (x *CNNAddGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient {
+	return &x.inner.MPSCNNArithmeticGradient
+}
 
-func (x *CNNAddGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
+func (x *CNNAddGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNAddGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNAddGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNAddGradientable is the interface implemented by [CNNAddGradient], for mocking and DI.
 type CNNAddGradientable interface {
@@ -218,4 +224,3 @@ type CNNAddGradientable interface {
 }
 
 var _ CNNAddGradientable = (*CNNAddGradient)(nil)
-

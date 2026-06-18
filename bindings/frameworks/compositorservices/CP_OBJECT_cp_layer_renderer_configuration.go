@@ -26,4 +26,3 @@ func CP_OBJECT_cp_layer_renderer_configurationFromID(id objc.ID) *CP_OBJECT_cp_l
 	purego.Track(o)
 	return o
 }
-

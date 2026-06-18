@@ -46,9 +46,13 @@ func (x *AsynchronousFetchResult) FinalResult() *foundation.NSArray[objc.ID] {
 	return x.inner.FinalResult()
 }
 
-func (x *AsynchronousFetchResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult { return &x.inner.NSPersistentStoreAsynchronousResult }
+func (x *AsynchronousFetchResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult {
+	return &x.inner.NSPersistentStoreAsynchronousResult
+}
 
-func (x *AsynchronousFetchResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreAsynchronousResult.NSPersistentStoreResult }
+func (x *AsynchronousFetchResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreAsynchronousResult.NSPersistentStoreResult
+}
 
 // AsynchronousFetchResultable is the interface implemented by [AsynchronousFetchResult], for mocking and DI.
 type AsynchronousFetchResultable interface {
@@ -58,4 +62,3 @@ type AsynchronousFetchResultable interface {
 }
 
 var _ AsynchronousFetchResultable = (*AsynchronousFetchResult)(nil)
-

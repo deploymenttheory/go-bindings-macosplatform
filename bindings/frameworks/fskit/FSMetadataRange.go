@@ -18,12 +18,12 @@ type FSMetadataRange struct {
 }
 
 var (
-	_clsFSMetadataRange = _objcClass("FSMetadataRange")
-	_fSMetadataRangeSelInitWithOffsetSegmentLengthSegmentCount = objc.RegisterName("initWithOffset:segmentLength:segmentCount:")
+	_clsFSMetadataRange                                         = _objcClass("FSMetadataRange")
+	_fSMetadataRangeSelInitWithOffsetSegmentLengthSegmentCount  = objc.RegisterName("initWithOffset:segmentLength:segmentCount:")
 	_fSMetadataRangeSelRangeWithOffsetSegmentLengthSegmentCount = objc.RegisterName("rangeWithOffset:segmentLength:segmentCount:")
-	_fSMetadataRangeSelStartOffset = objc.RegisterName("startOffset")
-	_fSMetadataRangeSelSegmentLength = objc.RegisterName("segmentLength")
-	_fSMetadataRangeSelSegmentCount = objc.RegisterName("segmentCount")
+	_fSMetadataRangeSelStartOffset                              = objc.RegisterName("startOffset")
+	_fSMetadataRangeSelSegmentLength                            = objc.RegisterName("segmentLength")
+	_fSMetadataRangeSelSegmentCount                             = objc.RegisterName("segmentCount")
 )
 
 func FSMetadataRangeFromID(id objc.ID) *FSMetadataRange {
@@ -36,27 +36,31 @@ func FSMetadataRangeFromID(id objc.ID) *FSMetadataRange {
 	return o
 }
 
-// Initializes a metadata range with the given properties. - Parameters: - startOffset: The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``. - segmentLength: The segment length in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``. - segmentCount: The number of segments in the range.
+// Initializes a metadata range with the given properties. - Parameters: - startOffset: The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentLength: The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentCount: The number of segments in the range.
 func (o *FSMetadataRange) InitWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *FSMetadataRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSMetadataRangeSelInitWithOffsetSegmentLengthSegmentCount, startOffset, segmentLength, segmentCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSMetadataRangeFromID(_ret)
 }
 
-// Creates a metadata range with the given properties. - Parameters: - startOffset: The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``. - segmentLength: The segment length in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``. - segmentCount: The number of segments in the range.
+// Creates a metadata range with the given properties. - Parameters: - startOffset: The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentLength: The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“. - segmentCount: The number of segments in the range.
 func FSMetadataRangeRangeWithOffsetSegmentLengthSegmentCount(startOffset int64, segmentLength uint64, segmentCount uint64) *FSMetadataRange {
 	_ret := objc.Send[objc.ID](objc.ID(_clsFSMetadataRange), _fSMetadataRangeSelRangeWithOffsetSegmentLengthSegmentCount, startOffset, segmentLength, segmentCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSMetadataRangeFromID(_ret)
 }
 
-// The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``.
+// The start offset of the range in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (o *FSMetadataRange) StartOffset() int64 {
 	_ret := objc.Send[int64](o.Ptr(), _fSMetadataRangeSelStartOffset)
 	return _ret
 }
 
-// The segment length in bytes. Ensure this value is a multiple of the corresponding resource's ``FSBlockDeviceResource-c.class/blockSize``.
+// The segment length in bytes. Ensure this value is a multiple of the corresponding resource's “FSBlockDeviceResource-c.class/blockSize“.
 func (o *FSMetadataRange) SegmentLength() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _fSMetadataRangeSelSegmentLength)
 	return _ret
@@ -67,4 +71,3 @@ func (o *FSMetadataRange) SegmentCount() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _fSMetadataRangeSelSegmentCount)
 	return _ret
 }
-

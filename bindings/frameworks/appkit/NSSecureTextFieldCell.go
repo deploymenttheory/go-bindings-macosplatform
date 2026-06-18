@@ -15,8 +15,8 @@ type NSSecureTextFieldCell struct {
 }
 
 var (
-	_clsNSSecureTextFieldCell = _objcClass("NSSecureTextFieldCell")
-	_nSSecureTextFieldCellSelEchosBullets = objc.RegisterName("echosBullets")
+	_clsNSSecureTextFieldCell                = _objcClass("NSSecureTextFieldCell")
+	_nSSecureTextFieldCellSelEchosBullets    = objc.RegisterName("echosBullets")
 	_nSSecureTextFieldCellSelSetEchosBullets = objc.RegisterName("setEchosBullets:")
 )
 
@@ -38,4 +38,3 @@ func (o *NSSecureTextFieldCell) EchosBullets() bool {
 func (o *NSSecureTextFieldCell) SetEchosBullets(echosBullets bool) {
 	o.Ptr().Send(_nSSecureTextFieldCellSelSetEchosBullets, echosBullets)
 }
-

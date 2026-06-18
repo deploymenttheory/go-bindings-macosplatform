@@ -54,7 +54,9 @@ func (x *ChangeHistoryAddContactEvent) ContainerIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *ChangeHistoryAddContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+func (x *ChangeHistoryAddContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
+	return &x.inner.CNChangeHistoryEvent
+}
 
 // ChangeHistoryAddContactEventable is the interface implemented by [ChangeHistoryAddContactEvent], for mocking and DI.
 type ChangeHistoryAddContactEventable interface {
@@ -64,4 +66,3 @@ type ChangeHistoryAddContactEventable interface {
 }
 
 var _ ChangeHistoryAddContactEventable = (*ChangeHistoryAddContactEvent)(nil)
-

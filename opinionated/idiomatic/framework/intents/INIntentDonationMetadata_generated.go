@@ -35,7 +35,9 @@ func NewIntentDonationMetadata() *IntentDonationMetadata {
 	return &IntentDonationMetadata{inner: raw.INIntentDonationMetadataFromID(_id)}
 }
 
-func (x *IntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata { return x.inner }
+func (x *IntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata {
+	return x.inner
+}
 
 // IntentDonationMetadataable is the interface implemented by [IntentDonationMetadata], for mocking and DI.
 type IntentDonationMetadataable interface {
@@ -43,4 +45,3 @@ type IntentDonationMetadataable interface {
 }
 
 var _ IntentDonationMetadataable = (*IntentDonationMetadata)(nil)
-

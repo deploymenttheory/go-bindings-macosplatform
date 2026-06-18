@@ -50,4 +50,3 @@ type GPUMetricable interface {
 }
 
 var _ GPUMetricable = (*GPUMetric)(nil)
-

@@ -12,9 +12,9 @@ import (
 type CMIOExtensionStreamClockType int64
 
 const (
-	CMIOExtensionStreamClockTypeHostTime CMIOExtensionStreamClockType = 0
+	CMIOExtensionStreamClockTypeHostTime                 CMIOExtensionStreamClockType = 0
 	CMIOExtensionStreamClockTypeLinkedCoreAudioDeviceUID CMIOExtensionStreamClockType = 1
-	CMIOExtensionStreamClockTypeCustom CMIOExtensionStreamClockType = 2
+	CMIOExtensionStreamClockTypeCustom                   CMIOExtensionStreamClockType = 2
 )
 
 func (e CMIOExtensionStreamClockType) String() string {
@@ -34,7 +34,7 @@ type CMIOExtensionStreamDirection int64
 
 const (
 	CMIOExtensionStreamDirectionSource CMIOExtensionStreamDirection = 0
-	CMIOExtensionStreamDirectionSink CMIOExtensionStreamDirection = 1
+	CMIOExtensionStreamDirectionSink   CMIOExtensionStreamDirection = 1
 )
 
 func (e CMIOExtensionStreamDirection) String() string {
@@ -52,9 +52,9 @@ func (e CMIOExtensionStreamDirection) String() string {
 type CMIOExtensionStreamDiscontinuityFlags int64
 
 const (
-	CMIOExtensionStreamDiscontinuityFlagNone CMIOExtensionStreamDiscontinuityFlags = 0
-	CMIOExtensionStreamDiscontinuityFlagUnknown CMIOExtensionStreamDiscontinuityFlags = 1
-	CMIOExtensionStreamDiscontinuityFlagTime CMIOExtensionStreamDiscontinuityFlags = 2
+	CMIOExtensionStreamDiscontinuityFlagNone          CMIOExtensionStreamDiscontinuityFlags = 0
+	CMIOExtensionStreamDiscontinuityFlagUnknown       CMIOExtensionStreamDiscontinuityFlags = 1
+	CMIOExtensionStreamDiscontinuityFlagTime          CMIOExtensionStreamDiscontinuityFlags = 2
 	CMIOExtensionStreamDiscontinuityFlagSampleDropped CMIOExtensionStreamDiscontinuityFlags = 64
 )
 
@@ -74,4 +74,3 @@ func (e CMIOExtensionStreamDiscontinuityFlags) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

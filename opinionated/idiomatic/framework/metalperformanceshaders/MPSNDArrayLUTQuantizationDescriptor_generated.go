@@ -17,7 +17,9 @@ type NDArrayLUTQuantizationDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNDArrayLUTQuantizationDescriptor].
-func (x *NDArrayLUTQuantizationDescriptor) Unwrap() *raw.MPSNDArrayLUTQuantizationDescriptor { return x.inner }
+func (x *NDArrayLUTQuantizationDescriptor) Unwrap() *raw.MPSNDArrayLUTQuantizationDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis(quantizationDataT
 	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(_id)}
 }
 
-func (x *NDArrayLUTQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor { return &x.inner.MPSNDArrayQuantizationDescriptor }
+func (x *NDArrayLUTQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor {
+	return &x.inner.MPSNDArrayQuantizationDescriptor
+}
 
 // NDArrayLUTQuantizationDescriptorable is the interface implemented by [NDArrayLUTQuantizationDescriptor], for mocking and DI.
 type NDArrayLUTQuantizationDescriptorable interface {
@@ -53,4 +57,3 @@ type NDArrayLUTQuantizationDescriptorable interface {
 }
 
 var _ NDArrayLUTQuantizationDescriptorable = (*NDArrayLUTQuantizationDescriptor)(nil)
-

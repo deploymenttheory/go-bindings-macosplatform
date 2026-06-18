@@ -16,11 +16,11 @@ type INAirportGate struct {
 }
 
 var (
-	_clsINAirportGate = _objcClass("INAirportGate")
+	_clsINAirportGate                            = _objcClass("INAirportGate")
 	_iNAirportGateSelInitWithAirportTerminalGate = objc.RegisterName("initWithAirport:terminal:gate:")
-	_iNAirportGateSelAirport = objc.RegisterName("airport")
-	_iNAirportGateSelTerminal = objc.RegisterName("terminal")
-	_iNAirportGateSelGate = objc.RegisterName("gate")
+	_iNAirportGateSelAirport                     = objc.RegisterName("airport")
+	_iNAirportGateSelTerminal                    = objc.RegisterName("terminal")
+	_iNAirportGateSelGate                        = objc.RegisterName("gate")
 )
 
 func INAirportGateFromID(id objc.ID) *INAirportGate {
@@ -35,25 +35,32 @@ func INAirportGateFromID(id objc.ID) *INAirportGate {
 
 func (o *INAirportGate) InitWithAirportTerminalGate(airport *INAirport, terminal *foundation.NSString, gate *foundation.NSString) *INAirportGate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportGateSelInitWithAirportTerminalGate, airport.Ptr(), terminal.Ptr(), gate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirportGateFromID(_ret)
 }
 
 func (o *INAirportGate) Airport() *INAirport {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportGateSelAirport)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INAirportFromID(_ret)
 }
 
 func (o *INAirportGate) Terminal() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportGateSelTerminal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INAirportGate) Gate() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNAirportGateSelGate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

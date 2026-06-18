@@ -17,29 +17,29 @@ type IOBluetoothRFCOMMChannel struct {
 }
 
 var (
-	_clsIOBluetoothRFCOMMChannel = _objcClass("IOBluetoothRFCOMMChannel")
-	_iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelector = objc.RegisterName("registerForChannelOpenNotifications:selector:")
+	_clsIOBluetoothRFCOMMChannel                                                                  = _objcClass("IOBluetoothRFCOMMChannel")
+	_iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelector                       = objc.RegisterName("registerForChannelOpenNotifications:selector:")
 	_iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection = objc.RegisterName("registerForChannelOpenNotifications:selector:withChannelID:direction:")
-	_iOBluetoothRFCOMMChannelSelWithRFCOMMChannelRef = objc.RegisterName("withRFCOMMChannelRef:")
-	_iOBluetoothRFCOMMChannelSelWithObjectID = objc.RegisterName("withObjectID:")
-	_iOBluetoothRFCOMMChannelSelGetRFCOMMChannelRef = objc.RegisterName("getRFCOMMChannelRef")
-	_iOBluetoothRFCOMMChannelSelCloseChannel = objc.RegisterName("closeChannel")
-	_iOBluetoothRFCOMMChannelSelIsOpen = objc.RegisterName("isOpen")
-	_iOBluetoothRFCOMMChannelSelGetMTU = objc.RegisterName("getMTU")
-	_iOBluetoothRFCOMMChannelSelIsTransmissionPaused = objc.RegisterName("isTransmissionPaused")
-	_iOBluetoothRFCOMMChannelSelWriteLengthSleep = objc.RegisterName("write:length:sleep:")
-	_iOBluetoothRFCOMMChannelSelWriteAsyncLengthRefcon = objc.RegisterName("writeAsync:length:refcon:")
-	_iOBluetoothRFCOMMChannelSelWriteSyncLength = objc.RegisterName("writeSync:length:")
-	_iOBluetoothRFCOMMChannelSelWriteSimpleLengthSleepBytesSent = objc.RegisterName("writeSimple:length:sleep:bytesSent:")
-	_iOBluetoothRFCOMMChannelSelSetSerialParametersDataBitsParityStopBits = objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:")
-	_iOBluetoothRFCOMMChannelSelSendRemoteLineStatus = objc.RegisterName("sendRemoteLineStatus:")
-	_iOBluetoothRFCOMMChannelSelSetDelegate = objc.RegisterName("setDelegate:")
-	_iOBluetoothRFCOMMChannelSelDelegate = objc.RegisterName("delegate")
-	_iOBluetoothRFCOMMChannelSelGetChannelID = objc.RegisterName("getChannelID")
-	_iOBluetoothRFCOMMChannelSelIsIncoming = objc.RegisterName("isIncoming")
-	_iOBluetoothRFCOMMChannelSelGetDevice = objc.RegisterName("getDevice")
-	_iOBluetoothRFCOMMChannelSelGetObjectID = objc.RegisterName("getObjectID")
-	_iOBluetoothRFCOMMChannelSelRegisterForChannelCloseNotificationSelector = objc.RegisterName("registerForChannelCloseNotification:selector:")
+	_iOBluetoothRFCOMMChannelSelWithRFCOMMChannelRef                                              = objc.RegisterName("withRFCOMMChannelRef:")
+	_iOBluetoothRFCOMMChannelSelWithObjectID                                                      = objc.RegisterName("withObjectID:")
+	_iOBluetoothRFCOMMChannelSelGetRFCOMMChannelRef                                               = objc.RegisterName("getRFCOMMChannelRef")
+	_iOBluetoothRFCOMMChannelSelCloseChannel                                                      = objc.RegisterName("closeChannel")
+	_iOBluetoothRFCOMMChannelSelIsOpen                                                            = objc.RegisterName("isOpen")
+	_iOBluetoothRFCOMMChannelSelGetMTU                                                            = objc.RegisterName("getMTU")
+	_iOBluetoothRFCOMMChannelSelIsTransmissionPaused                                              = objc.RegisterName("isTransmissionPaused")
+	_iOBluetoothRFCOMMChannelSelWriteLengthSleep                                                  = objc.RegisterName("write:length:sleep:")
+	_iOBluetoothRFCOMMChannelSelWriteAsyncLengthRefcon                                            = objc.RegisterName("writeAsync:length:refcon:")
+	_iOBluetoothRFCOMMChannelSelWriteSyncLength                                                   = objc.RegisterName("writeSync:length:")
+	_iOBluetoothRFCOMMChannelSelWriteSimpleLengthSleepBytesSent                                   = objc.RegisterName("writeSimple:length:sleep:bytesSent:")
+	_iOBluetoothRFCOMMChannelSelSetSerialParametersDataBitsParityStopBits                         = objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:")
+	_iOBluetoothRFCOMMChannelSelSendRemoteLineStatus                                              = objc.RegisterName("sendRemoteLineStatus:")
+	_iOBluetoothRFCOMMChannelSelSetDelegate                                                       = objc.RegisterName("setDelegate:")
+	_iOBluetoothRFCOMMChannelSelDelegate                                                          = objc.RegisterName("delegate")
+	_iOBluetoothRFCOMMChannelSelGetChannelID                                                      = objc.RegisterName("getChannelID")
+	_iOBluetoothRFCOMMChannelSelIsIncoming                                                        = objc.RegisterName("isIncoming")
+	_iOBluetoothRFCOMMChannelSelGetDevice                                                         = objc.RegisterName("getDevice")
+	_iOBluetoothRFCOMMChannelSelGetObjectID                                                       = objc.RegisterName("getObjectID")
+	_iOBluetoothRFCOMMChannelSelRegisterForChannelCloseNotificationSelector                       = objc.RegisterName("registerForChannelCloseNotification:selector:")
 )
 
 func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
@@ -54,26 +54,34 @@ func IOBluetoothRFCOMMChannelFromID(id objc.ID) *IOBluetoothRFCOMMChannel {
 
 func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelector, object, selector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object objc.ID, selector objc.SEL, channelID uint8, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection, object, selector, channelID, inDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
 
 // @method	withRFCOMMChannelRef: @abstract	Method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *. @param	rfcommChannelRef IOBluetoothRFCOMMChannelRef for which an IOBluetoothRFCOMMChannel * is desired. @result		Returns the IOBluetoothRFCOMMChannel * for the given IOBluetoothRFCOMMChannelRef.
 func IOBluetoothRFCOMMChannelWithRFCOMMChannelRef(rfcommChannelRef unsafe.Pointer) *IOBluetoothRFCOMMChannel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelWithRFCOMMChannelRef, rfcommChannelRef)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothRFCOMMChannelFromID(_ret)
 }
 
 func IOBluetoothRFCOMMChannelWithObjectID(objectID uint) *IOBluetoothRFCOMMChannel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothRFCOMMChannel), _iOBluetoothRFCOMMChannelSelWithObjectID, objectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothRFCOMMChannelFromID(_ret)
 }
 
@@ -156,7 +164,9 @@ func (o *IOBluetoothRFCOMMChannel) IsIncoming() bool {
 
 func (o *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothRFCOMMChannelSelGetDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -167,7 +177,8 @@ func (o *IOBluetoothRFCOMMChannel) GetObjectID() uint {
 
 func (o *IOBluetoothRFCOMMChannel) RegisterForChannelCloseNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothRFCOMMChannelSelRegisterForChannelCloseNotificationSelector, observer, inSelector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothUserNotificationFromID(_ret)
 }
-

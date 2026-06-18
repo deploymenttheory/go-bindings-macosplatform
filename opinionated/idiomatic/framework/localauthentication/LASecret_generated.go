@@ -70,4 +70,3 @@ type Secretable interface {
 }
 
 var _ Secretable = (*Secret)(nil)
-

@@ -61,7 +61,7 @@ func (e NSFileProviderDomainTestingModes) String() string {
 type NSFileProviderKnownFolders uint64
 
 const (
-	NSFileProviderDesktop NSFileProviderKnownFolders = 1
+	NSFileProviderDesktop   NSFileProviderKnownFolders = 1
 	NSFileProviderDocuments NSFileProviderKnownFolders = 2
 )
 
@@ -101,13 +101,13 @@ func (e NSFileProviderManagerDisconnectionOptions) String() string {
 type NSFileProviderVolumeUnsupportedReason uint64
 
 const (
-	NSFileProviderVolumeUnsupportedReasonNone NSFileProviderVolumeUnsupportedReason = 0
-	NSFileProviderVolumeUnsupportedReasonUnknown NSFileProviderVolumeUnsupportedReason = 1
-	NSFileProviderVolumeUnsupportedReasonNonAPFS NSFileProviderVolumeUnsupportedReason = 2
+	NSFileProviderVolumeUnsupportedReasonNone         NSFileProviderVolumeUnsupportedReason = 0
+	NSFileProviderVolumeUnsupportedReasonUnknown      NSFileProviderVolumeUnsupportedReason = 1
+	NSFileProviderVolumeUnsupportedReasonNonAPFS      NSFileProviderVolumeUnsupportedReason = 2
 	NSFileProviderVolumeUnsupportedReasonNonEncrypted NSFileProviderVolumeUnsupportedReason = 4
-	NSFileProviderVolumeUnsupportedReasonReadOnly NSFileProviderVolumeUnsupportedReason = 8
-	NSFileProviderVolumeUnsupportedReasonNetwork NSFileProviderVolumeUnsupportedReason = 16
-	NSFileProviderVolumeUnsupportedReasonQuarantined NSFileProviderVolumeUnsupportedReason = 32
+	NSFileProviderVolumeUnsupportedReasonReadOnly     NSFileProviderVolumeUnsupportedReason = 8
+	NSFileProviderVolumeUnsupportedReasonNetwork      NSFileProviderVolumeUnsupportedReason = 16
+	NSFileProviderVolumeUnsupportedReasonQuarantined  NSFileProviderVolumeUnsupportedReason = 32
 )
 
 func (e NSFileProviderVolumeUnsupportedReason) String() string {
@@ -135,4 +135,3 @@ func (e NSFileProviderVolumeUnsupportedReason) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

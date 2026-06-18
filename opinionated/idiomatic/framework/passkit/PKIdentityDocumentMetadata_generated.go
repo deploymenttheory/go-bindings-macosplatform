@@ -107,7 +107,9 @@ func (x *IdentityDocumentMetadata) DocumentType() raw.PKAddIdentityDocumentType 
 	return x.inner.DocumentType()
 }
 
-func (x *IdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return x.inner }
+func (x *IdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
+	return x.inner
+}
 
 // IdentityDocumentMetadataable is the interface implemented by [IdentityDocumentMetadata], for mocking and DI.
 type IdentityDocumentMetadataable interface {
@@ -124,4 +126,3 @@ type IdentityDocumentMetadataable interface {
 }
 
 var _ IdentityDocumentMetadataable = (*IdentityDocumentMetadata)(nil)
-

@@ -18,21 +18,21 @@ type MTRClusterIdentify struct {
 }
 
 var (
-	_clsMTRClusterIdentify = _objcClass("MTRClusterIdentify")
-	_mTRClusterIdentifySelIdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterIdentifySelTriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("triggerEffectWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterIdentifySelReadAttributeIdentifyTimeWithParams = objc.RegisterName("readAttributeIdentifyTimeWithParams:")
-	_mTRClusterIdentifySelWriteAttributeIdentifyTimeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:")
-	_mTRClusterIdentifySelWriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:params:")
-	_mTRClusterIdentifySelReadAttributeIdentifyTypeWithParams = objc.RegisterName("readAttributeIdentifyTypeWithParams:")
-	_mTRClusterIdentifySelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterIdentifySelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterIdentifySelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterIdentifySelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterIdentifySelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterIdentifySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterIdentifySelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterIdentifySelIdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterIdentify                                                                            = _objcClass("MTRClusterIdentify")
+	_mTRClusterIdentifySelIdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion             = objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterIdentifySelTriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("triggerEffectWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterIdentifySelReadAttributeIdentifyTimeWithParams                                         = objc.RegisterName("readAttributeIdentifyTimeWithParams:")
+	_mTRClusterIdentifySelWriteAttributeIdentifyTimeWithValueExpectedValueInterval                    = objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:")
+	_mTRClusterIdentifySelWriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams              = objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:params:")
+	_mTRClusterIdentifySelReadAttributeIdentifyTypeWithParams                                         = objc.RegisterName("readAttributeIdentifyTypeWithParams:")
+	_mTRClusterIdentifySelReadAttributeGeneratedCommandListWithParams                                 = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterIdentifySelReadAttributeAcceptedCommandListWithParams                                  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterIdentifySelReadAttributeAttributeListWithParams                                        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterIdentifySelReadAttributeFeatureMapWithParams                                           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterIdentifySelReadAttributeClusterRevisionWithParams                                      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterIdentifySelInitWithDeviceEndpointIDQueue                                               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterIdentifySelInitWithDeviceEndpointQueue                                                 = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterIdentifySelIdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler      = objc.RegisterName("identifyWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterIdentifySelTriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("triggerEffectWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -114,13 +114,17 @@ func (o *MTRClusterIdentify) ReadAttributeClusterRevisionWithParams(params *MTRR
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterIdentify) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIdentify {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterIdentifySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterIdentifyFromID(_ret)
 }
 
 func (o *MTRClusterIdentify) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterIdentify {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterIdentifySelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterIdentifyFromID(_ret)
 }
 
@@ -145,4 +149,3 @@ func (o *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueI
 	}
 	o.Ptr().Send(_mTRClusterIdentifySelTriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

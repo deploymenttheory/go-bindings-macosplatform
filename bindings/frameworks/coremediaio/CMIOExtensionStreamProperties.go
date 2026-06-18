@@ -16,26 +16,26 @@ type CMIOExtensionStreamProperties struct {
 }
 
 var (
-	_clsCMIOExtensionStreamProperties = _objcClass("CMIOExtensionStreamProperties")
-	_cMIOExtensionStreamPropertiesSelStreamPropertiesWithDictionary = objc.RegisterName("streamPropertiesWithDictionary:")
-	_cMIOExtensionStreamPropertiesSelInitWithDictionary = objc.RegisterName("initWithDictionary:")
-	_cMIOExtensionStreamPropertiesSelSetPropertyStateForProperty = objc.RegisterName("setPropertyState:forProperty:")
-	_cMIOExtensionStreamPropertiesSelActiveFormatIndex = objc.RegisterName("activeFormatIndex")
-	_cMIOExtensionStreamPropertiesSelSetActiveFormatIndex = objc.RegisterName("setActiveFormatIndex:")
-	_cMIOExtensionStreamPropertiesSelFrameDuration = objc.RegisterName("frameDuration")
-	_cMIOExtensionStreamPropertiesSelSetFrameDuration = objc.RegisterName("setFrameDuration:")
-	_cMIOExtensionStreamPropertiesSelMaxFrameDuration = objc.RegisterName("maxFrameDuration")
-	_cMIOExtensionStreamPropertiesSelSetMaxFrameDuration = objc.RegisterName("setMaxFrameDuration:")
-	_cMIOExtensionStreamPropertiesSelSinkBufferQueueSize = objc.RegisterName("sinkBufferQueueSize")
-	_cMIOExtensionStreamPropertiesSelSetSinkBufferQueueSize = objc.RegisterName("setSinkBufferQueueSize:")
-	_cMIOExtensionStreamPropertiesSelSinkBuffersRequiredForStartup = objc.RegisterName("sinkBuffersRequiredForStartup")
+	_clsCMIOExtensionStreamProperties                                 = _objcClass("CMIOExtensionStreamProperties")
+	_cMIOExtensionStreamPropertiesSelStreamPropertiesWithDictionary   = objc.RegisterName("streamPropertiesWithDictionary:")
+	_cMIOExtensionStreamPropertiesSelInitWithDictionary               = objc.RegisterName("initWithDictionary:")
+	_cMIOExtensionStreamPropertiesSelSetPropertyStateForProperty      = objc.RegisterName("setPropertyState:forProperty:")
+	_cMIOExtensionStreamPropertiesSelActiveFormatIndex                = objc.RegisterName("activeFormatIndex")
+	_cMIOExtensionStreamPropertiesSelSetActiveFormatIndex             = objc.RegisterName("setActiveFormatIndex:")
+	_cMIOExtensionStreamPropertiesSelFrameDuration                    = objc.RegisterName("frameDuration")
+	_cMIOExtensionStreamPropertiesSelSetFrameDuration                 = objc.RegisterName("setFrameDuration:")
+	_cMIOExtensionStreamPropertiesSelMaxFrameDuration                 = objc.RegisterName("maxFrameDuration")
+	_cMIOExtensionStreamPropertiesSelSetMaxFrameDuration              = objc.RegisterName("setMaxFrameDuration:")
+	_cMIOExtensionStreamPropertiesSelSinkBufferQueueSize              = objc.RegisterName("sinkBufferQueueSize")
+	_cMIOExtensionStreamPropertiesSelSetSinkBufferQueueSize           = objc.RegisterName("setSinkBufferQueueSize:")
+	_cMIOExtensionStreamPropertiesSelSinkBuffersRequiredForStartup    = objc.RegisterName("sinkBuffersRequiredForStartup")
 	_cMIOExtensionStreamPropertiesSelSetSinkBuffersRequiredForStartup = objc.RegisterName("setSinkBuffersRequiredForStartup:")
-	_cMIOExtensionStreamPropertiesSelSinkBufferUnderrunCount = objc.RegisterName("sinkBufferUnderrunCount")
-	_cMIOExtensionStreamPropertiesSelSetSinkBufferUnderrunCount = objc.RegisterName("setSinkBufferUnderrunCount:")
-	_cMIOExtensionStreamPropertiesSelSinkEndOfData = objc.RegisterName("sinkEndOfData")
-	_cMIOExtensionStreamPropertiesSelSetSinkEndOfData = objc.RegisterName("setSinkEndOfData:")
-	_cMIOExtensionStreamPropertiesSelPropertiesDictionary = objc.RegisterName("propertiesDictionary")
-	_cMIOExtensionStreamPropertiesSelSetPropertiesDictionary = objc.RegisterName("setPropertiesDictionary:")
+	_cMIOExtensionStreamPropertiesSelSinkBufferUnderrunCount          = objc.RegisterName("sinkBufferUnderrunCount")
+	_cMIOExtensionStreamPropertiesSelSetSinkBufferUnderrunCount       = objc.RegisterName("setSinkBufferUnderrunCount:")
+	_cMIOExtensionStreamPropertiesSelSinkEndOfData                    = objc.RegisterName("sinkEndOfData")
+	_cMIOExtensionStreamPropertiesSelSetSinkEndOfData                 = objc.RegisterName("setSinkEndOfData:")
+	_cMIOExtensionStreamPropertiesSelPropertiesDictionary             = objc.RegisterName("propertiesDictionary")
+	_cMIOExtensionStreamPropertiesSelSetPropertiesDictionary          = objc.RegisterName("setPropertiesDictionary:")
 )
 
 func CMIOExtensionStreamPropertiesFromID(id objc.ID) *CMIOExtensionStreamProperties {
@@ -51,14 +51,18 @@ func CMIOExtensionStreamPropertiesFromID(id objc.ID) *CMIOExtensionStreamPropert
 // @method streamPropertiesWithDictionary: @abstract Return a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
 func CMIOExtensionStreamPropertiesStreamPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionStreamProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStreamProperties), _cMIOExtensionStreamPropertiesSelStreamPropertiesWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamPropertiesFromID(_ret)
 }
 
 // @method initWithDictionary: @abstract Initialize a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
 func (o *CMIOExtensionStreamProperties) InitWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CMIOExtensionStreamProperties {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelInitWithDictionary, propertiesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamPropertiesFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *CMIOExtensionStreamProperties) SetPropertyStateForProperty(propertyStat
 // @property activeFormatIndex @abstract The active format index. @discussion The property key is CMIOExtensionPropertyStreamActiveFormatIndex.
 func (o *CMIOExtensionStreamProperties) ActiveFormatIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelActiveFormatIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -101,7 +107,9 @@ func (o *CMIOExtensionStreamProperties) SetMaxFrameDuration(maxFrameDuration *fo
 // @property sinkBufferQueueSize @abstract The sink stream property buffer queue size. @discussion The property key is CMIOExtensionPropertyStreamSinkBufferQueueSize.
 func (o *CMIOExtensionStreamProperties) SinkBufferQueueSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelSinkBufferQueueSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -112,7 +120,9 @@ func (o *CMIOExtensionStreamProperties) SetSinkBufferQueueSize(sinkBufferQueueSi
 // @property sinkBuffersRequiredForStartup @abstract The sink stream property for number of buffers required for startup. @discussion The property key is CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup.
 func (o *CMIOExtensionStreamProperties) SinkBuffersRequiredForStartup() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelSinkBuffersRequiredForStartup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -123,7 +133,9 @@ func (o *CMIOExtensionStreamProperties) SetSinkBuffersRequiredForStartup(sinkBuf
 // @property sinkBufferUnderrunCount @abstract The sink stream property buffer underrun count. @discussion The property key is CMIOExtensionPropertyStreamSinkBufferUnderrunCount.
 func (o *CMIOExtensionStreamProperties) SinkBufferUnderrunCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelSinkBufferUnderrunCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -134,7 +146,9 @@ func (o *CMIOExtensionStreamProperties) SetSinkBufferUnderrunCount(sinkBufferUnd
 // @property sinkEndOfData @abstract The sink stream property end of data. @discussion The property key is CMIOExtensionPropertyStreamSinkEndOfData.
 func (o *CMIOExtensionStreamProperties) SinkEndOfData() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamPropertiesSelSinkEndOfData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -151,4 +165,3 @@ func (o *CMIOExtensionStreamProperties) PropertiesDictionary() *foundation.NSDic
 func (o *CMIOExtensionStreamProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	o.Ptr().Send(_cMIOExtensionStreamPropertiesSelSetPropertiesDictionary, propertiesDictionary)
 }
-

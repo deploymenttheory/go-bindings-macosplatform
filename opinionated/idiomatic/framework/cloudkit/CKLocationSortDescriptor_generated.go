@@ -57,4 +57,3 @@ type LocationSortDescriptorable interface {
 }
 
 var _ LocationSortDescriptorable = (*LocationSortDescriptor)(nil)
-

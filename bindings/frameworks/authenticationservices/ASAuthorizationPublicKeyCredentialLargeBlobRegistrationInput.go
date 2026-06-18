@@ -16,10 +16,10 @@ type ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput")
+	_clsASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput                           = _objcClass("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput")
 	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelInitWithSupportRequirement = objc.RegisterName("initWithSupportRequirement:")
-	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelSupportRequirement = objc.RegisterName("supportRequirement")
-	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelSetSupportRequirement = objc.RegisterName("setSupportRequirement:")
+	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelSupportRequirement         = objc.RegisterName("supportRequirement")
+	_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelSetSupportRequirement      = objc.RegisterName("setSupportRequirement:")
 )
 
 func ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
@@ -34,7 +34,9 @@ func ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id objc.
 
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) InitWithSupportRequirement(requirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelInitWithSupportRequirement, requirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRe
 func (o *ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
 	o.Ptr().Send(_aSAuthorizationPublicKeyCredentialLargeBlobRegistrationInputSelSetSupportRequirement, supportRequirement)
 }
-

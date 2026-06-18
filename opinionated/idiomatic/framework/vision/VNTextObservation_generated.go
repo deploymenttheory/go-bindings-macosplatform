@@ -47,11 +47,17 @@ func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
 	})
 }
 
-func (x *TextObservation) asRectangleObservation() *raw.VNRectangleObservation { return &x.inner.VNRectangleObservation }
+func (x *TextObservation) asRectangleObservation() *raw.VNRectangleObservation {
+	return &x.inner.VNRectangleObservation
+}
 
-func (x *TextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation }
+func (x *TextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation
+}
 
-func (x *TextObservation) asObservation() *raw.VNObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation }
+func (x *TextObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation
+}
 
 // TextObservationable is the interface implemented by [TextObservation], for mocking and DI.
 type TextObservationable interface {
@@ -60,4 +66,3 @@ type TextObservationable interface {
 }
 
 var _ TextObservationable = (*TextObservation)(nil)
-

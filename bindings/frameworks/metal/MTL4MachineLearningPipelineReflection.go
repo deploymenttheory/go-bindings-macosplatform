@@ -16,7 +16,7 @@ type MTL4MachineLearningPipelineReflection struct {
 }
 
 var (
-	_clsMTL4MachineLearningPipelineReflection = _objcClass("MTL4MachineLearningPipelineReflection")
+	_clsMTL4MachineLearningPipelineReflection         = _objcClass("MTL4MachineLearningPipelineReflection")
 	_mTL4MachineLearningPipelineReflectionSelBindings = objc.RegisterName("bindings")
 )
 
@@ -32,7 +32,8 @@ func MTL4MachineLearningPipelineReflectionFromID(id objc.ID) *MTL4MachineLearnin
 
 func (o *MTL4MachineLearningPipelineReflection) Bindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4MachineLearningPipelineReflectionSelBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
-

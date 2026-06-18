@@ -16,7 +16,9 @@ type MTRWindowCoveringClusterGoToLiftValueParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWindowCoveringClusterGoToLiftValueParams].
-func (x *MTRWindowCoveringClusterGoToLiftValueParams) Unwrap() *raw.MTRWindowCoveringClusterGoToLiftValueParams { return x.inner }
+func (x *MTRWindowCoveringClusterGoToLiftValueParams) Unwrap() *raw.MTRWindowCoveringClusterGoToLiftValueParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRWindowCoveringClusterGoToLiftValueParamsable interface {
 }
 
 var _ MTRWindowCoveringClusterGoToLiftValueParamsable = (*MTRWindowCoveringClusterGoToLiftValueParams)(nil)
-

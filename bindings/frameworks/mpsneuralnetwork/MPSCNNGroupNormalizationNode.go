@@ -15,11 +15,11 @@ type MPSCNNGroupNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNGroupNormalizationNode = _objcClass("MPSCNNGroupNormalizationNode")
+	_clsMPSCNNGroupNormalizationNode                         = _objcClass("MPSCNNGroupNormalizationNode")
 	_mPSCNNGroupNormalizationNodeSelNodeWithSourceDataSource = objc.RegisterName("nodeWithSource:dataSource:")
 	_mPSCNNGroupNormalizationNodeSelInitWithSourceDataSource = objc.RegisterName("initWithSource:dataSource:")
-	_mPSCNNGroupNormalizationNodeSelTrainingStyle = objc.RegisterName("trainingStyle")
-	_mPSCNNGroupNormalizationNodeSelSetTrainingStyle = objc.RegisterName("setTrainingStyle:")
+	_mPSCNNGroupNormalizationNodeSelTrainingStyle            = objc.RegisterName("trainingStyle")
+	_mPSCNNGroupNormalizationNodeSelSetTrainingStyle         = objc.RegisterName("setTrainingStyle:")
 )
 
 func MPSCNNGroupNormalizationNodeFromID(id objc.ID) *MPSCNNGroupNormalizationNode {
@@ -34,13 +34,17 @@ func MPSCNNGroupNormalizationNodeFromID(id objc.ID) *MPSCNNGroupNormalizationNod
 
 func MPSCNNGroupNormalizationNodeNodeWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNGroupNormalizationDataSource) *MPSCNNGroupNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNGroupNormalizationNode), _mPSCNNGroupNormalizationNodeSelNodeWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGroupNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNGroupNormalizationNode) InitWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNGroupNormalizationDataSource) *MPSCNNGroupNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGroupNormalizationNodeSelInitWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGroupNormalizationNodeFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *MPSCNNGroupNormalizationNode) TrainingStyle() MPSNNTrainingStyle {
 func (o *MPSCNNGroupNormalizationNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
 	o.Ptr().Send(_mPSCNNGroupNormalizationNodeSelSetTrainingStyle, trainingStyle)
 }
-

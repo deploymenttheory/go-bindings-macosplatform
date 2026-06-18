@@ -44,4 +44,3 @@ type ICDeviceDelegate interface {
 type ICScannerDeviceDelegate interface {
 	ICDeviceDelegate
 }
-

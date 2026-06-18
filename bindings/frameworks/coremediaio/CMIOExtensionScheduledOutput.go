@@ -16,11 +16,11 @@ type CMIOExtensionScheduledOutput struct {
 }
 
 var (
-	_clsCMIOExtensionScheduledOutput = _objcClass("CMIOExtensionScheduledOutput")
+	_clsCMIOExtensionScheduledOutput                                                       = _objcClass("CMIOExtensionScheduledOutput")
 	_cMIOExtensionScheduledOutputSelScheduledOutputWithSequenceNumberHostTimeInNanoseconds = objc.RegisterName("scheduledOutputWithSequenceNumber:hostTimeInNanoseconds:")
-	_cMIOExtensionScheduledOutputSelInitWithSequenceNumberHostTimeInNanoseconds = objc.RegisterName("initWithSequenceNumber:hostTimeInNanoseconds:")
-	_cMIOExtensionScheduledOutputSelSequenceNumber = objc.RegisterName("sequenceNumber")
-	_cMIOExtensionScheduledOutputSelHostTimeInNanoseconds = objc.RegisterName("hostTimeInNanoseconds")
+	_cMIOExtensionScheduledOutputSelInitWithSequenceNumberHostTimeInNanoseconds            = objc.RegisterName("initWithSequenceNumber:hostTimeInNanoseconds:")
+	_cMIOExtensionScheduledOutputSelSequenceNumber                                         = objc.RegisterName("sequenceNumber")
+	_cMIOExtensionScheduledOutputSelHostTimeInNanoseconds                                  = objc.RegisterName("hostTimeInNanoseconds")
 )
 
 func CMIOExtensionScheduledOutputFromID(id objc.ID) *CMIOExtensionScheduledOutput {
@@ -36,14 +36,18 @@ func CMIOExtensionScheduledOutputFromID(id objc.ID) *CMIOExtensionScheduledOutpu
 // @method scheduledOutputWithSequenceNumber:hostTimeInNanoseconds: @abstract Return a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
 func CMIOExtensionScheduledOutputScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *CMIOExtensionScheduledOutput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionScheduledOutput), _cMIOExtensionScheduledOutputSelScheduledOutputWithSequenceNumberHostTimeInNanoseconds, sequenceNumber, hostTimeInNanoseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionScheduledOutputFromID(_ret)
 }
 
 // @method initWithSequenceNumber:hostTimeInNanoseconds: @abstract Initialize a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
 func (o *CMIOExtensionScheduledOutput) InitWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *CMIOExtensionScheduledOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionScheduledOutputSelInitWithSequenceNumberHostTimeInNanoseconds, sequenceNumber, hostTimeInNanoseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionScheduledOutputFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *CMIOExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
 	_ret := objc.Send[uint64](o.Ptr(), _cMIOExtensionScheduledOutputSelHostTimeInNanoseconds)
 	return _ret
 }
-

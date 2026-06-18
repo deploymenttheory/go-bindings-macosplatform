@@ -17,10 +17,10 @@ type AVCaptureReactionEffectState struct {
 }
 
 var (
-	_clsAVCaptureReactionEffectState = _objcClass("AVCaptureReactionEffectState")
+	_clsAVCaptureReactionEffectState             = _objcClass("AVCaptureReactionEffectState")
 	_aVCaptureReactionEffectStateSelReactionType = objc.RegisterName("reactionType")
-	_aVCaptureReactionEffectStateSelStartTime = objc.RegisterName("startTime")
-	_aVCaptureReactionEffectStateSelEndTime = objc.RegisterName("endTime")
+	_aVCaptureReactionEffectStateSelStartTime    = objc.RegisterName("startTime")
+	_aVCaptureReactionEffectStateSelEndTime      = objc.RegisterName("endTime")
 )
 
 func AVCaptureReactionEffectStateFromID(id objc.ID) *AVCaptureReactionEffectState {
@@ -36,7 +36,9 @@ func AVCaptureReactionEffectStateFromID(id objc.ID) *AVCaptureReactionEffectStat
 // @property reactionType @abstract Indicates the reaction which is running. @discussion There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
 func (o *AVCaptureReactionEffectState) ReactionType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureReactionEffectStateSelReactionType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,4 +53,3 @@ func (o *AVCaptureReactionEffectState) EndTime() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVCaptureReactionEffectStateSelEndTime)
 	return _ret
 }
-

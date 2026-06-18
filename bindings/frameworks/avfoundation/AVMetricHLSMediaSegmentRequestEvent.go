@@ -16,13 +16,13 @@ type AVMetricHLSMediaSegmentRequestEvent struct {
 }
 
 var (
-	_clsAVMetricHLSMediaSegmentRequestEvent = _objcClass("AVMetricHLSMediaSegmentRequestEvent")
-	_aVMetricHLSMediaSegmentRequestEventSelUrl = objc.RegisterName("url")
-	_aVMetricHLSMediaSegmentRequestEventSelIsMapSegment = objc.RegisterName("isMapSegment")
-	_aVMetricHLSMediaSegmentRequestEventSelMediaType = objc.RegisterName("mediaType")
-	_aVMetricHLSMediaSegmentRequestEventSelByteRange = objc.RegisterName("byteRange")
-	_aVMetricHLSMediaSegmentRequestEventSelIndexFileURL = objc.RegisterName("indexFileURL")
-	_aVMetricHLSMediaSegmentRequestEventSelSegmentDuration = objc.RegisterName("segmentDuration")
+	_clsAVMetricHLSMediaSegmentRequestEvent                          = _objcClass("AVMetricHLSMediaSegmentRequestEvent")
+	_aVMetricHLSMediaSegmentRequestEventSelUrl                       = objc.RegisterName("url")
+	_aVMetricHLSMediaSegmentRequestEventSelIsMapSegment              = objc.RegisterName("isMapSegment")
+	_aVMetricHLSMediaSegmentRequestEventSelMediaType                 = objc.RegisterName("mediaType")
+	_aVMetricHLSMediaSegmentRequestEventSelByteRange                 = objc.RegisterName("byteRange")
+	_aVMetricHLSMediaSegmentRequestEventSelIndexFileURL              = objc.RegisterName("indexFileURL")
+	_aVMetricHLSMediaSegmentRequestEventSelSegmentDuration           = objc.RegisterName("segmentDuration")
 	_aVMetricHLSMediaSegmentRequestEventSelMediaResourceRequestEvent = objc.RegisterName("mediaResourceRequestEvent")
 )
 
@@ -39,7 +39,9 @@ func AVMetricHLSMediaSegmentRequestEventFromID(id objc.ID) *AVMetricHLSMediaSegm
 // Returns the URL of the media segment. If no value is available, returns nil.
 func (o *AVMetricHLSMediaSegmentRequestEvent) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSMediaSegmentRequestEventSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -52,7 +54,9 @@ func (o *AVMetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
 // Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 func (o *AVMetricHLSMediaSegmentRequestEvent) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSMediaSegmentRequestEventSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *AVMetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
 // Returns the URL of the index file in which this segment was declared. If not available, returns nil.
 func (o *AVMetricHLSMediaSegmentRequestEvent) IndexFileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSMediaSegmentRequestEventSelIndexFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -78,7 +84,8 @@ func (o *AVMetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
 // Returns the media resource request event which was used to satisfy the media segment.
 func (o *AVMetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *AVMetricMediaResourceRequestEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricHLSMediaSegmentRequestEventSelMediaResourceRequestEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaResourceRequestEventFromID(_ret)
 }
-

@@ -243,4 +243,3 @@ type SearchableIndexable interface {
 }
 
 var _ SearchableIndexable = (*SearchableIndex)(nil)
-

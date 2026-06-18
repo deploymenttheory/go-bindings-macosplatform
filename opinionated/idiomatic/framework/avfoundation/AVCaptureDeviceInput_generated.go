@@ -239,4 +239,3 @@ type CaptureDeviceInputable interface {
 }
 
 var _ CaptureDeviceInputable = (*CaptureDeviceInput)(nil)
-

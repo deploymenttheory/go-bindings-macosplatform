@@ -18,10 +18,10 @@ type MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams struct {
 }
 
 var (
-	_clsMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams = _objcClass("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")
+	_clsMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams                           = _objcClass("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")
 	_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelPassphrase = objc.RegisterName("passphrase")
-	_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelSetPassphrase = objc.RegisterName("setPassphrase:")
+	_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelPassphrase                 = objc.RegisterName("passphrase")
+	_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelSetPassphrase              = objc.RegisterName("setPassphrase:")
 )
 
 func MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(id objc.ID) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
@@ -38,7 +38,9 @@ func MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(id obj
 func (o *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -47,11 +49,12 @@ func (o *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) InitWit
 
 func (o *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelPassphrase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase *foundation.NSData) {
 	o.Ptr().Send(_mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsSelSetPassphrase, passphrase.Ptr())
 }
-

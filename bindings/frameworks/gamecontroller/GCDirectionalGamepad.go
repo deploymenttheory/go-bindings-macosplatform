@@ -25,4 +25,3 @@ func GCDirectionalGamepadFromID(id objc.ID) *GCDirectionalGamepad {
 	purego.Track(o)
 	return o
 }
-

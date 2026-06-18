@@ -19,89 +19,89 @@ type NSMenu struct {
 }
 
 var (
-	_clsNSMenu = _objcClass("NSMenu")
-	_nSMenuSelInitWithTitle = objc.RegisterName("initWithTitle:")
-	_nSMenuSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMenuSelPopUpContextMenuWithEventForView = objc.RegisterName("popUpContextMenu:withEvent:forView:")
-	_nSMenuSelPopUpContextMenuWithEventForViewWithFont = objc.RegisterName("popUpContextMenu:withEvent:forView:withFont:")
-	_nSMenuSelPopUpMenuPositioningItemAtLocationInView = objc.RegisterName("popUpMenuPositioningItem:atLocation:inView:")
-	_nSMenuSelSetMenuBarVisible = objc.RegisterName("setMenuBarVisible:")
-	_nSMenuSelMenuBarVisible = objc.RegisterName("menuBarVisible")
-	_nSMenuSelInsertItemAtIndex = objc.RegisterName("insertItem:atIndex:")
-	_nSMenuSelAddItem = objc.RegisterName("addItem:")
-	_nSMenuSelInsertItemWithTitleActionKeyEquivalentAtIndex = objc.RegisterName("insertItemWithTitle:action:keyEquivalent:atIndex:")
-	_nSMenuSelAddItemWithTitleActionKeyEquivalent = objc.RegisterName("addItemWithTitle:action:keyEquivalent:")
-	_nSMenuSelRemoveItemAtIndex = objc.RegisterName("removeItemAtIndex:")
-	_nSMenuSelRemoveItem = objc.RegisterName("removeItem:")
-	_nSMenuSelSetSubmenuForItem = objc.RegisterName("setSubmenu:forItem:")
-	_nSMenuSelRemoveAllItems = objc.RegisterName("removeAllItems")
-	_nSMenuSelItemAtIndex = objc.RegisterName("itemAtIndex:")
-	_nSMenuSelIndexOfItem = objc.RegisterName("indexOfItem:")
-	_nSMenuSelIndexOfItemWithTitle = objc.RegisterName("indexOfItemWithTitle:")
-	_nSMenuSelIndexOfItemWithTag = objc.RegisterName("indexOfItemWithTag:")
-	_nSMenuSelIndexOfItemWithRepresentedObject = objc.RegisterName("indexOfItemWithRepresentedObject:")
-	_nSMenuSelIndexOfItemWithSubmenu = objc.RegisterName("indexOfItemWithSubmenu:")
-	_nSMenuSelIndexOfItemWithTargetAndAction = objc.RegisterName("indexOfItemWithTarget:andAction:")
-	_nSMenuSelItemWithTitle = objc.RegisterName("itemWithTitle:")
-	_nSMenuSelItemWithTag = objc.RegisterName("itemWithTag:")
-	_nSMenuSelUpdate = objc.RegisterName("update")
-	_nSMenuSelPerformKeyEquivalent = objc.RegisterName("performKeyEquivalent:")
-	_nSMenuSelItemChanged = objc.RegisterName("itemChanged:")
-	_nSMenuSelPerformActionForItemAtIndex = objc.RegisterName("performActionForItemAtIndex:")
-	_nSMenuSelCancelTracking = objc.RegisterName("cancelTracking")
-	_nSMenuSelCancelTrackingWithoutAnimation = objc.RegisterName("cancelTrackingWithoutAnimation")
-	_nSMenuSelTitle = objc.RegisterName("title")
-	_nSMenuSelSetTitle = objc.RegisterName("setTitle:")
-	_nSMenuSelSupermenu = objc.RegisterName("supermenu")
-	_nSMenuSelSetSupermenu = objc.RegisterName("setSupermenu:")
-	_nSMenuSelItemArray = objc.RegisterName("itemArray")
-	_nSMenuSelSetItemArray = objc.RegisterName("setItemArray:")
-	_nSMenuSelNumberOfItems = objc.RegisterName("numberOfItems")
-	_nSMenuSelAutoenablesItems = objc.RegisterName("autoenablesItems")
-	_nSMenuSelSetAutoenablesItems = objc.RegisterName("setAutoenablesItems:")
-	_nSMenuSelDelegate = objc.RegisterName("delegate")
-	_nSMenuSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSMenuSelMenuBarHeight = objc.RegisterName("menuBarHeight")
-	_nSMenuSelHighlightedItem = objc.RegisterName("highlightedItem")
-	_nSMenuSelMinimumWidth = objc.RegisterName("minimumWidth")
-	_nSMenuSelSetMinimumWidth = objc.RegisterName("setMinimumWidth:")
-	_nSMenuSelSize = objc.RegisterName("size")
-	_nSMenuSelFont = objc.RegisterName("font")
-	_nSMenuSelSetFont = objc.RegisterName("setFont:")
-	_nSMenuSelAllowsContextMenuPlugIns = objc.RegisterName("allowsContextMenuPlugIns")
-	_nSMenuSelSetAllowsContextMenuPlugIns = objc.RegisterName("setAllowsContextMenuPlugIns:")
-	_nSMenuSelAutomaticallyInsertsWritingToolsItems = objc.RegisterName("automaticallyInsertsWritingToolsItems")
-	_nSMenuSelSetAutomaticallyInsertsWritingToolsItems = objc.RegisterName("setAutomaticallyInsertsWritingToolsItems:")
-	_nSMenuSelShowsStateColumn = objc.RegisterName("showsStateColumn")
-	_nSMenuSelSetShowsStateColumn = objc.RegisterName("setShowsStateColumn:")
-	_nSMenuSelUserInterfaceLayoutDirection = objc.RegisterName("userInterfaceLayoutDirection")
-	_nSMenuSelSetUserInterfaceLayoutDirection = objc.RegisterName("setUserInterfaceLayoutDirection:")
-	_nSMenuSelPaletteMenuWithColorsTitlesSelectionHandler = objc.RegisterName("paletteMenuWithColors:titles:selectionHandler:")
+	_clsNSMenu                                                         = _objcClass("NSMenu")
+	_nSMenuSelInitWithTitle                                            = objc.RegisterName("initWithTitle:")
+	_nSMenuSelInitWithCoder                                            = objc.RegisterName("initWithCoder:")
+	_nSMenuSelPopUpContextMenuWithEventForView                         = objc.RegisterName("popUpContextMenu:withEvent:forView:")
+	_nSMenuSelPopUpContextMenuWithEventForViewWithFont                 = objc.RegisterName("popUpContextMenu:withEvent:forView:withFont:")
+	_nSMenuSelPopUpMenuPositioningItemAtLocationInView                 = objc.RegisterName("popUpMenuPositioningItem:atLocation:inView:")
+	_nSMenuSelSetMenuBarVisible                                        = objc.RegisterName("setMenuBarVisible:")
+	_nSMenuSelMenuBarVisible                                           = objc.RegisterName("menuBarVisible")
+	_nSMenuSelInsertItemAtIndex                                        = objc.RegisterName("insertItem:atIndex:")
+	_nSMenuSelAddItem                                                  = objc.RegisterName("addItem:")
+	_nSMenuSelInsertItemWithTitleActionKeyEquivalentAtIndex            = objc.RegisterName("insertItemWithTitle:action:keyEquivalent:atIndex:")
+	_nSMenuSelAddItemWithTitleActionKeyEquivalent                      = objc.RegisterName("addItemWithTitle:action:keyEquivalent:")
+	_nSMenuSelRemoveItemAtIndex                                        = objc.RegisterName("removeItemAtIndex:")
+	_nSMenuSelRemoveItem                                               = objc.RegisterName("removeItem:")
+	_nSMenuSelSetSubmenuForItem                                        = objc.RegisterName("setSubmenu:forItem:")
+	_nSMenuSelRemoveAllItems                                           = objc.RegisterName("removeAllItems")
+	_nSMenuSelItemAtIndex                                              = objc.RegisterName("itemAtIndex:")
+	_nSMenuSelIndexOfItem                                              = objc.RegisterName("indexOfItem:")
+	_nSMenuSelIndexOfItemWithTitle                                     = objc.RegisterName("indexOfItemWithTitle:")
+	_nSMenuSelIndexOfItemWithTag                                       = objc.RegisterName("indexOfItemWithTag:")
+	_nSMenuSelIndexOfItemWithRepresentedObject                         = objc.RegisterName("indexOfItemWithRepresentedObject:")
+	_nSMenuSelIndexOfItemWithSubmenu                                   = objc.RegisterName("indexOfItemWithSubmenu:")
+	_nSMenuSelIndexOfItemWithTargetAndAction                           = objc.RegisterName("indexOfItemWithTarget:andAction:")
+	_nSMenuSelItemWithTitle                                            = objc.RegisterName("itemWithTitle:")
+	_nSMenuSelItemWithTag                                              = objc.RegisterName("itemWithTag:")
+	_nSMenuSelUpdate                                                   = objc.RegisterName("update")
+	_nSMenuSelPerformKeyEquivalent                                     = objc.RegisterName("performKeyEquivalent:")
+	_nSMenuSelItemChanged                                              = objc.RegisterName("itemChanged:")
+	_nSMenuSelPerformActionForItemAtIndex                              = objc.RegisterName("performActionForItemAtIndex:")
+	_nSMenuSelCancelTracking                                           = objc.RegisterName("cancelTracking")
+	_nSMenuSelCancelTrackingWithoutAnimation                           = objc.RegisterName("cancelTrackingWithoutAnimation")
+	_nSMenuSelTitle                                                    = objc.RegisterName("title")
+	_nSMenuSelSetTitle                                                 = objc.RegisterName("setTitle:")
+	_nSMenuSelSupermenu                                                = objc.RegisterName("supermenu")
+	_nSMenuSelSetSupermenu                                             = objc.RegisterName("setSupermenu:")
+	_nSMenuSelItemArray                                                = objc.RegisterName("itemArray")
+	_nSMenuSelSetItemArray                                             = objc.RegisterName("setItemArray:")
+	_nSMenuSelNumberOfItems                                            = objc.RegisterName("numberOfItems")
+	_nSMenuSelAutoenablesItems                                         = objc.RegisterName("autoenablesItems")
+	_nSMenuSelSetAutoenablesItems                                      = objc.RegisterName("setAutoenablesItems:")
+	_nSMenuSelDelegate                                                 = objc.RegisterName("delegate")
+	_nSMenuSelSetDelegate                                              = objc.RegisterName("setDelegate:")
+	_nSMenuSelMenuBarHeight                                            = objc.RegisterName("menuBarHeight")
+	_nSMenuSelHighlightedItem                                          = objc.RegisterName("highlightedItem")
+	_nSMenuSelMinimumWidth                                             = objc.RegisterName("minimumWidth")
+	_nSMenuSelSetMinimumWidth                                          = objc.RegisterName("setMinimumWidth:")
+	_nSMenuSelSize                                                     = objc.RegisterName("size")
+	_nSMenuSelFont                                                     = objc.RegisterName("font")
+	_nSMenuSelSetFont                                                  = objc.RegisterName("setFont:")
+	_nSMenuSelAllowsContextMenuPlugIns                                 = objc.RegisterName("allowsContextMenuPlugIns")
+	_nSMenuSelSetAllowsContextMenuPlugIns                              = objc.RegisterName("setAllowsContextMenuPlugIns:")
+	_nSMenuSelAutomaticallyInsertsWritingToolsItems                    = objc.RegisterName("automaticallyInsertsWritingToolsItems")
+	_nSMenuSelSetAutomaticallyInsertsWritingToolsItems                 = objc.RegisterName("setAutomaticallyInsertsWritingToolsItems:")
+	_nSMenuSelShowsStateColumn                                         = objc.RegisterName("showsStateColumn")
+	_nSMenuSelSetShowsStateColumn                                      = objc.RegisterName("setShowsStateColumn:")
+	_nSMenuSelUserInterfaceLayoutDirection                             = objc.RegisterName("userInterfaceLayoutDirection")
+	_nSMenuSelSetUserInterfaceLayoutDirection                          = objc.RegisterName("setUserInterfaceLayoutDirection:")
+	_nSMenuSelPaletteMenuWithColorsTitlesSelectionHandler              = objc.RegisterName("paletteMenuWithColors:titles:selectionHandler:")
 	_nSMenuSelPaletteMenuWithColorsTitlesTemplateImageSelectionHandler = objc.RegisterName("paletteMenuWithColors:titles:templateImage:selectionHandler:")
-	_nSMenuSelPresentationStyle = objc.RegisterName("presentationStyle")
-	_nSMenuSelSetPresentationStyle = objc.RegisterName("setPresentationStyle:")
-	_nSMenuSelSelectionMode = objc.RegisterName("selectionMode")
-	_nSMenuSelSetSelectionMode = objc.RegisterName("setSelectionMode:")
-	_nSMenuSelSelectedItems = objc.RegisterName("selectedItems")
-	_nSMenuSelSetSelectedItems = objc.RegisterName("setSelectedItems:")
-	_nSMenuSelSubmenuAction = objc.RegisterName("submenuAction:")
-	_nSMenuSelPropertiesToUpdate = objc.RegisterName("propertiesToUpdate")
-	_nSMenuSelSetMenuRepresentation = objc.RegisterName("setMenuRepresentation:")
-	_nSMenuSelMenuRepresentation = objc.RegisterName("menuRepresentation")
-	_nSMenuSelSetContextMenuRepresentation = objc.RegisterName("setContextMenuRepresentation:")
-	_nSMenuSelContextMenuRepresentation = objc.RegisterName("contextMenuRepresentation")
-	_nSMenuSelSetTearOffMenuRepresentation = objc.RegisterName("setTearOffMenuRepresentation:")
-	_nSMenuSelTearOffMenuRepresentation = objc.RegisterName("tearOffMenuRepresentation")
-	_nSMenuSelMenuZone = objc.RegisterName("menuZone")
-	_nSMenuSelSetMenuZone = objc.RegisterName("setMenuZone:")
-	_nSMenuSelAttachedMenu = objc.RegisterName("attachedMenu")
-	_nSMenuSelIsAttached = objc.RegisterName("isAttached")
-	_nSMenuSelSizeToFit = objc.RegisterName("sizeToFit")
-	_nSMenuSelLocationForSubmenu = objc.RegisterName("locationForSubmenu:")
-	_nSMenuSelHelpRequested = objc.RegisterName("helpRequested:")
-	_nSMenuSelMenuChangedMessagesEnabled = objc.RegisterName("menuChangedMessagesEnabled")
-	_nSMenuSelSetMenuChangedMessagesEnabled = objc.RegisterName("setMenuChangedMessagesEnabled:")
-	_nSMenuSelIsTornOff = objc.RegisterName("isTornOff")
+	_nSMenuSelPresentationStyle                                        = objc.RegisterName("presentationStyle")
+	_nSMenuSelSetPresentationStyle                                     = objc.RegisterName("setPresentationStyle:")
+	_nSMenuSelSelectionMode                                            = objc.RegisterName("selectionMode")
+	_nSMenuSelSetSelectionMode                                         = objc.RegisterName("setSelectionMode:")
+	_nSMenuSelSelectedItems                                            = objc.RegisterName("selectedItems")
+	_nSMenuSelSetSelectedItems                                         = objc.RegisterName("setSelectedItems:")
+	_nSMenuSelSubmenuAction                                            = objc.RegisterName("submenuAction:")
+	_nSMenuSelPropertiesToUpdate                                       = objc.RegisterName("propertiesToUpdate")
+	_nSMenuSelSetMenuRepresentation                                    = objc.RegisterName("setMenuRepresentation:")
+	_nSMenuSelMenuRepresentation                                       = objc.RegisterName("menuRepresentation")
+	_nSMenuSelSetContextMenuRepresentation                             = objc.RegisterName("setContextMenuRepresentation:")
+	_nSMenuSelContextMenuRepresentation                                = objc.RegisterName("contextMenuRepresentation")
+	_nSMenuSelSetTearOffMenuRepresentation                             = objc.RegisterName("setTearOffMenuRepresentation:")
+	_nSMenuSelTearOffMenuRepresentation                                = objc.RegisterName("tearOffMenuRepresentation")
+	_nSMenuSelMenuZone                                                 = objc.RegisterName("menuZone")
+	_nSMenuSelSetMenuZone                                              = objc.RegisterName("setMenuZone:")
+	_nSMenuSelAttachedMenu                                             = objc.RegisterName("attachedMenu")
+	_nSMenuSelIsAttached                                               = objc.RegisterName("isAttached")
+	_nSMenuSelSizeToFit                                                = objc.RegisterName("sizeToFit")
+	_nSMenuSelLocationForSubmenu                                       = objc.RegisterName("locationForSubmenu:")
+	_nSMenuSelHelpRequested                                            = objc.RegisterName("helpRequested:")
+	_nSMenuSelMenuChangedMessagesEnabled                               = objc.RegisterName("menuChangedMessagesEnabled")
+	_nSMenuSelSetMenuChangedMessagesEnabled                            = objc.RegisterName("setMenuChangedMessagesEnabled:")
+	_nSMenuSelIsTornOff                                                = objc.RegisterName("isTornOff")
 )
 
 func NSMenuFromID(id objc.ID) *NSMenu {
@@ -116,13 +116,17 @@ func NSMenuFromID(id objc.ID) *NSMenu {
 
 func (o *NSMenu) InitWithTitle(title *foundation.NSString) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelInitWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
 func (o *NSMenu) InitWithCoder(coder *foundation.NSCoder) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -158,13 +162,17 @@ func (o *NSMenu) AddItem(newItem *NSMenuItem) {
 
 func (o *NSMenu) InsertItemWithTitleActionKeyEquivalentAtIndex(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString, index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelInsertItemWithTitleActionKeyEquivalentAtIndex, string_.Ptr(), selector, charCode.Ptr(), index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSMenu) AddItemWithTitleActionKeyEquivalent(string_ *foundation.NSString, selector objc.SEL, charCode *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelAddItemWithTitleActionKeyEquivalent, string_.Ptr(), selector, charCode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -186,7 +194,9 @@ func (o *NSMenu) RemoveAllItems() {
 
 func (o *NSMenu) ItemAtIndex(index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -222,13 +232,17 @@ func (o *NSMenu) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector o
 
 func (o *NSMenu) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSMenu) ItemWithTag(tag int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemWithTag, tag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -259,7 +273,9 @@ func (o *NSMenu) CancelTrackingWithoutAnimation() {
 
 func (o *NSMenu) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -269,7 +285,9 @@ func (o *NSMenu) SetTitle(title *foundation.NSString) {
 
 func (o *NSMenu) Supermenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelSupermenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -279,7 +297,9 @@ func (o *NSMenu) SetSupermenu(supermenu *NSMenu) {
 
 func (o *NSMenu) ItemArray() *foundation.NSArray[*NSMenuItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelItemArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSMenuItem](_ret)
 }
 
@@ -317,7 +337,9 @@ func (o *NSMenu) MenuBarHeight() float64 {
 
 func (o *NSMenu) HighlightedItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelHighlightedItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -337,7 +359,9 @@ func (o *NSMenu) Size() corefoundation.CGSize {
 
 func (o *NSMenu) Font() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -394,7 +418,9 @@ func NSMenuPaletteMenuWithColorsTitlesSelectionHandler(colors *foundation.NSArra
 		defer __block_onSelectionChange.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesSelectionHandler, colors.Ptr(), itemTitles, __block_onSelectionChange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -411,7 +437,9 @@ func NSMenuPaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors *foun
 		defer __block_onSelectionChange.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMenu), _nSMenuSelPaletteMenuWithColorsTitlesTemplateImageSelectionHandler, colors.Ptr(), itemTitles, image.Ptr(), __block_onSelectionChange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -440,7 +468,9 @@ func (o *NSMenu) SetSelectionMode(selectionMode NSMenuSelectionMode) {
 // The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`. @note This property is settable. Setting `selectedItems` will select any items that are contained in the provided array, and deselect any previously selected items that are not in the array.
 func (o *NSMenu) SelectedItems() *foundation.NSArray[*NSMenuItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelSelectedItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSMenuItem](_ret)
 }
 
@@ -505,7 +535,9 @@ func NSMenuSetMenuZone(zone unsafe.Pointer) {
 // Deprecated: since macOS 10.2.
 func (o *NSMenu) AttachedMenu() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMenuSelAttachedMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -547,4 +579,3 @@ func (o *NSMenu) IsTornOff() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSMenuSelIsTornOff)
 	return _ret
 }
-

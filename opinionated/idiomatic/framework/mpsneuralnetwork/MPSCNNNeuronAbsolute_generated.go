@@ -88,7 +88,9 @@ func (x *CNNNeuronAbsolute) WithDestinationImageAllocator(destinationImageAlloca
 
 func (x *CNNNeuronAbsolute) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronAbsolute) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronAbsolute) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronAbsoluteable is the interface implemented by [CNNNeuronAbsolute], for mocking and DI.
 type CNNNeuronAbsoluteable interface {
@@ -104,4 +106,3 @@ type CNNNeuronAbsoluteable interface {
 }
 
 var _ CNNNeuronAbsoluteable = (*CNNNeuronAbsolute)(nil)
-

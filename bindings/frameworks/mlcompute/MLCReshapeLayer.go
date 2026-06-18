@@ -16,9 +16,9 @@ type MLCReshapeLayer struct {
 }
 
 var (
-	_clsMLCReshapeLayer = _objcClass("MLCReshapeLayer")
+	_clsMLCReshapeLayer               = _objcClass("MLCReshapeLayer")
 	_mLCReshapeLayerSelLayerWithShape = objc.RegisterName("layerWithShape:")
-	_mLCReshapeLayerSelShape = objc.RegisterName("shape")
+	_mLCReshapeLayerSelShape          = objc.RegisterName("shape")
 )
 
 func MLCReshapeLayerFromID(id objc.ID) *MLCReshapeLayer {
@@ -34,7 +34,9 @@ func MLCReshapeLayerFromID(id objc.ID) *MLCReshapeLayer {
 // @abstract   Creates a reshape layer with the shape you specify. @param      shape An array that contains the sizes of each dimension. @return     A new reshape layer.
 func MLCReshapeLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *MLCReshapeLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCReshapeLayer), _mLCReshapeLayerSelLayerWithShape, shape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCReshapeLayerFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MLCReshapeLayer) Shape() *foundation.NSArray[*foundation.NSNumber] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _mLCReshapeLayerSelShape)
 	return _ret
 }
-

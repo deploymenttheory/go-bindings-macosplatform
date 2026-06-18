@@ -21,22 +21,22 @@ type MPSCNNBatchNormalization struct {
 }
 
 var (
-	_clsMPSCNNBatchNormalization = _objcClass("MPSCNNBatchNormalization")
-	_mPSCNNBatchNormalizationSelInitWithDeviceDataSource = objc.RegisterName("initWithDevice:dataSource:")
-	_mPSCNNBatchNormalizationSelInitWithDeviceDataSourceFusedNeuronDescriptor = objc.RegisterName("initWithDevice:dataSource:fusedNeuronDescriptor:")
-	_mPSCNNBatchNormalizationSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNBatchNormalizationSelEncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage = objc.RegisterName("encodeToCommandBuffer:sourceImage:batchNormalizationState:destinationImage:")
+	_clsMPSCNNBatchNormalization                                                                               = _objcClass("MPSCNNBatchNormalization")
+	_mPSCNNBatchNormalizationSelInitWithDeviceDataSource                                                       = objc.RegisterName("initWithDevice:dataSource:")
+	_mPSCNNBatchNormalizationSelInitWithDeviceDataSourceFusedNeuronDescriptor                                  = objc.RegisterName("initWithDevice:dataSource:fusedNeuronDescriptor:")
+	_mPSCNNBatchNormalizationSelInitWithCoderDevice                                                            = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNBatchNormalizationSelEncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage        = objc.RegisterName("encodeToCommandBuffer:sourceImage:batchNormalizationState:destinationImage:")
 	_mPSCNNBatchNormalizationSelEncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:batchNormalizationState:destinationImages:")
-	_mPSCNNBatchNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
-	_mPSCNNBatchNormalizationSelReloadDataSource = objc.RegisterName("reloadDataSource:")
-	_mPSCNNBatchNormalizationSelReloadGammaAndBetaFromDataSource = objc.RegisterName("reloadGammaAndBetaFromDataSource")
-	_mPSCNNBatchNormalizationSelReloadMeanAndVarianceFromDataSource = objc.RegisterName("reloadMeanAndVarianceFromDataSource")
-	_mPSCNNBatchNormalizationSelReloadGammaAndBetaWithCommandBufferGammaAndBetaState = objc.RegisterName("reloadGammaAndBetaWithCommandBuffer:gammaAndBetaState:")
-	_mPSCNNBatchNormalizationSelReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState = objc.RegisterName("reloadMeanAndVarianceWithCommandBuffer:meanAndVarianceState:")
-	_mPSCNNBatchNormalizationSelNumberOfFeatureChannels = objc.RegisterName("numberOfFeatureChannels")
-	_mPSCNNBatchNormalizationSelEpsilon = objc.RegisterName("epsilon")
-	_mPSCNNBatchNormalizationSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSCNNBatchNormalizationSelDataSource = objc.RegisterName("dataSource")
+	_mPSCNNBatchNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage    = objc.RegisterName("temporaryResultStateForCommandBuffer:sourceImage:sourceStates:destinationImage:")
+	_mPSCNNBatchNormalizationSelReloadDataSource                                                               = objc.RegisterName("reloadDataSource:")
+	_mPSCNNBatchNormalizationSelReloadGammaAndBetaFromDataSource                                               = objc.RegisterName("reloadGammaAndBetaFromDataSource")
+	_mPSCNNBatchNormalizationSelReloadMeanAndVarianceFromDataSource                                            = objc.RegisterName("reloadMeanAndVarianceFromDataSource")
+	_mPSCNNBatchNormalizationSelReloadGammaAndBetaWithCommandBufferGammaAndBetaState                           = objc.RegisterName("reloadGammaAndBetaWithCommandBuffer:gammaAndBetaState:")
+	_mPSCNNBatchNormalizationSelReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState                     = objc.RegisterName("reloadMeanAndVarianceWithCommandBuffer:meanAndVarianceState:")
+	_mPSCNNBatchNormalizationSelNumberOfFeatureChannels                                                        = objc.RegisterName("numberOfFeatureChannels")
+	_mPSCNNBatchNormalizationSelEpsilon                                                                        = objc.RegisterName("epsilon")
+	_mPSCNNBatchNormalizationSelSetEpsilon                                                                     = objc.RegisterName("setEpsilon:")
+	_mPSCNNBatchNormalizationSelDataSource                                                                     = objc.RegisterName("dataSource")
 )
 
 func MPSCNNBatchNormalizationFromID(id objc.ID) *MPSCNNBatchNormalization {
@@ -52,21 +52,27 @@ func MPSCNNBatchNormalizationFromID(id objc.ID) *MPSCNNBatchNormalization {
 // @abstract   Initializes a batch normalization kernel using a data source. @param      device                          The MTLDevice on which this filter will be used @param      dataSource                      A pointer to a object that conforms to the MPSCNNBatchNormalizationDataSource protocol.  The data source provides filter weights and bias terms and, optionally, image statistics which may be used to perform the normalization. @return     A valid MPSCNNBatchNormalization object or nil, if failure.
 func (o *MPSCNNBatchNormalization) InitWithDeviceDataSource(device metal.MTLDevice, dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource) *MPSCNNBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelInitWithDeviceDataSource, device, dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationFromID(_ret)
 }
 
 // @abstract   Initializes a batch normalization kernel using a data source and a neuron descriptor. @param      device                          The MTLDevice on which this filter will be used @param      dataSource                      A pointer to a object that conforms to the MPSCNNBatchNormalizationDataSource protocol.  The data source provides filter weights and bias terms and, optionally, image statistics which may be used to perform the normalization. @param      fusedNeuronDescriptor           A MPSNNNeuronDescriptor object which specifies a neuron activation function to be applied to the result of the batch normalization. @return     A valid MPSCNNBatchNormalization object or nil, if failure.
 func (o *MPSCNNBatchNormalization) InitWithDeviceDataSourceFusedNeuronDescriptor(device metal.MTLDevice, dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource, fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *MPSCNNBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelInitWithDeviceDataSourceFusedNeuronDescriptor, device, dataSource, fusedNeuronDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use a subclass of NSCoder that implements the <MPSDeviceProvider> protocol  to tell MPS the MTLDevice to use. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSCNNBatchNormalization object, or nil if failure.
 func (o *MPSCNNBatchNormalization) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNBatchNormalization {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNBatchNormalizationFromID(_ret)
 }
 
@@ -83,7 +89,9 @@ func (o *MPSCNNBatchNormalization) EncodeBatchToCommandBufferSourceImagesBatchNo
 // @abstract       Return a temporary MPSCNNBatchNormalizationState object which may be used with a MPSCNNBatchNormalization filter.
 func (o *MPSCNNBatchNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNBatchNormalizationState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNBatchNormalizationSelTemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage, commandBuffer, sourceImage.Ptr(), sourceStates, destinationImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSCNNBatchNormalizationStateFromID(_ret)
 }
 
@@ -133,4 +141,3 @@ func (o *MPSCNNBatchNormalization) DataSource() mpsneuralnetwork.MPSCNNBatchNorm
 	_ret := objc.Send[mpsneuralnetwork.MPSCNNBatchNormalizationDataSource](o.Ptr(), _mPSCNNBatchNormalizationSelDataSource)
 	return _ret
 }
-

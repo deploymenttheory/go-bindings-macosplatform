@@ -11,9 +11,9 @@ import (
 type IKCameraDeviceViewDisplayMode int64
 
 const (
-	IKCameraDeviceViewDisplayModeNone IKCameraDeviceViewDisplayMode = -1
+	IKCameraDeviceViewDisplayModeNone  IKCameraDeviceViewDisplayMode = -1
 	IKCameraDeviceViewDisplayModeTable IKCameraDeviceViewDisplayMode = 0
-	IKCameraDeviceViewDisplayModeIcon IKCameraDeviceViewDisplayMode = 1
+	IKCameraDeviceViewDisplayModeIcon  IKCameraDeviceViewDisplayMode = 1
 )
 
 func (e IKCameraDeviceViewDisplayMode) String() string {
@@ -32,7 +32,7 @@ func (e IKCameraDeviceViewDisplayMode) String() string {
 type IKCameraDeviceViewTransferMode int64
 
 const (
-	IKCameraDeviceViewTransferModeFileBased IKCameraDeviceViewTransferMode = 0
+	IKCameraDeviceViewTransferModeFileBased   IKCameraDeviceViewTransferMode = 0
 	IKCameraDeviceViewTransferModeMemoryBased IKCameraDeviceViewTransferMode = 1
 )
 
@@ -50,9 +50,9 @@ func (e IKCameraDeviceViewTransferMode) String() string {
 type IKDeviceBrowserViewDisplayMode int64
 
 const (
-	IKDeviceBrowserViewDisplayModeTable IKDeviceBrowserViewDisplayMode = 0
+	IKDeviceBrowserViewDisplayModeTable   IKDeviceBrowserViewDisplayMode = 0
 	IKDeviceBrowserViewDisplayModeOutline IKDeviceBrowserViewDisplayMode = 1
-	IKDeviceBrowserViewDisplayModeIcon IKDeviceBrowserViewDisplayMode = 2
+	IKDeviceBrowserViewDisplayModeIcon    IKDeviceBrowserViewDisplayMode = 2
 )
 
 func (e IKDeviceBrowserViewDisplayMode) String() string {
@@ -71,8 +71,8 @@ func (e IKDeviceBrowserViewDisplayMode) String() string {
 type IKScannerDeviceViewDisplayMode int64
 
 const (
-	IKScannerDeviceViewDisplayModeNone IKScannerDeviceViewDisplayMode = -1
-	IKScannerDeviceViewDisplayModeSimple IKScannerDeviceViewDisplayMode = 0
+	IKScannerDeviceViewDisplayModeNone     IKScannerDeviceViewDisplayMode = -1
+	IKScannerDeviceViewDisplayModeSimple   IKScannerDeviceViewDisplayMode = 0
 	IKScannerDeviceViewDisplayModeAdvanced IKScannerDeviceViewDisplayMode = 1
 )
 
@@ -92,7 +92,7 @@ func (e IKScannerDeviceViewDisplayMode) String() string {
 type IKScannerDeviceViewTransferMode int64
 
 const (
-	IKScannerDeviceViewTransferModeFileBased IKScannerDeviceViewTransferMode = 0
+	IKScannerDeviceViewTransferModeFileBased   IKScannerDeviceViewTransferMode = 0
 	IKScannerDeviceViewTransferModeMemoryBased IKScannerDeviceViewTransferMode = 1
 )
 
@@ -106,4 +106,3 @@ func (e IKScannerDeviceViewTransferMode) String() string {
 		return fmt.Sprintf("IKScannerDeviceViewTransferMode(%d)", int64(e))
 	}
 }
-

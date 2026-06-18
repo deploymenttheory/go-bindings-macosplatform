@@ -16,9 +16,9 @@ type PHASEStringMetaParameterDefinition struct {
 }
 
 var (
-	_clsPHASEStringMetaParameterDefinition = _objcClass("PHASEStringMetaParameterDefinition")
+	_clsPHASEStringMetaParameterDefinition                        = _objcClass("PHASEStringMetaParameterDefinition")
 	_pHASEStringMetaParameterDefinitionSelInitWithValueIdentifier = objc.RegisterName("initWithValue:identifier:")
-	_pHASEStringMetaParameterDefinitionSelInitWithValue = objc.RegisterName("initWithValue:")
+	_pHASEStringMetaParameterDefinitionSelInitWithValue           = objc.RegisterName("initWithValue:")
 )
 
 func PHASEStringMetaParameterDefinitionFromID(id objc.ID) *PHASEStringMetaParameterDefinition {
@@ -34,14 +34,17 @@ func PHASEStringMetaParameterDefinitionFromID(id objc.ID) *PHASEStringMetaParame
 // @method initWithValue:identifier @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASEStringMetaParameterDefinition object
 func (o *PHASEStringMetaParameterDefinition) InitWithValueIdentifier(value *foundation.NSString, identifier *foundation.NSString) *PHASEStringMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStringMetaParameterDefinitionSelInitWithValueIdentifier, value.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEStringMetaParameterDefinitionFromID(_ret)
 }
 
 // @method initWithValue @abstract Create a new string metaparameter definition @param value The initial value of the metaparameter @return The new PHASEStringMetaParameterDefinition object
 func (o *PHASEStringMetaParameterDefinition) InitWithValue(value *foundation.NSString) *PHASEStringMetaParameterDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEStringMetaParameterDefinitionSelInitWithValue, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEStringMetaParameterDefinitionFromID(_ret)
 }
-

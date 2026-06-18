@@ -17,19 +17,19 @@ type PKStrokePoint struct {
 }
 
 var (
-	_clsPKStrokePoint = _objcClass("PKStrokePoint")
-	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:")
-	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:")
+	_clsPKStrokePoint                                                                                 = _objcClass("PKStrokePoint")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude                        = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:")
+	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale          = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:")
 	_pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold = objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:")
-	_pKStrokePointSelLocation = objc.RegisterName("location")
-	_pKStrokePointSelTimeOffset = objc.RegisterName("timeOffset")
-	_pKStrokePointSelSize = objc.RegisterName("size")
-	_pKStrokePointSelOpacity = objc.RegisterName("opacity")
-	_pKStrokePointSelAzimuth = objc.RegisterName("azimuth")
-	_pKStrokePointSelForce = objc.RegisterName("force")
-	_pKStrokePointSelAltitude = objc.RegisterName("altitude")
-	_pKStrokePointSelSecondaryScale = objc.RegisterName("secondaryScale")
-	_pKStrokePointSelThreshold = objc.RegisterName("threshold")
+	_pKStrokePointSelLocation                                                                         = objc.RegisterName("location")
+	_pKStrokePointSelTimeOffset                                                                       = objc.RegisterName("timeOffset")
+	_pKStrokePointSelSize                                                                             = objc.RegisterName("size")
+	_pKStrokePointSelOpacity                                                                          = objc.RegisterName("opacity")
+	_pKStrokePointSelAzimuth                                                                          = objc.RegisterName("azimuth")
+	_pKStrokePointSelForce                                                                            = objc.RegisterName("force")
+	_pKStrokePointSelAltitude                                                                         = objc.RegisterName("altitude")
+	_pKStrokePointSelSecondaryScale                                                                   = objc.RegisterName("secondaryScale")
+	_pKStrokePointSelThreshold                                                                        = objc.RegisterName("threshold")
 )
 
 func PKStrokePointFromID(id objc.ID) *PKStrokePoint {
@@ -45,21 +45,27 @@ func PKStrokePointFromID(id objc.ID) *PKStrokePoint {
 // Create a new point with the provided properties.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude, location, timeOffset, size, opacity, force, azimuth, altitude)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
 // Create a new point with the provided properties.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale, location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
 // Create a new point with the provided properties.
 func (o *PKStrokePoint) InitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *PKStrokePoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStrokePointSelInitWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold, location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStrokePointFromID(_ret)
 }
 
@@ -116,4 +122,3 @@ func (o *PKStrokePoint) Threshold() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _pKStrokePointSelThreshold)
 	return _ret
 }
-

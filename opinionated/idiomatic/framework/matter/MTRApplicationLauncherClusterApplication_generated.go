@@ -16,7 +16,9 @@ type MTRApplicationLauncherClusterApplication struct {
 }
 
 // Unwrap returns the underlying [raw.MTRApplicationLauncherClusterApplication].
-func (x *MTRApplicationLauncherClusterApplication) Unwrap() *raw.MTRApplicationLauncherClusterApplication { return x.inner }
+func (x *MTRApplicationLauncherClusterApplication) Unwrap() *raw.MTRApplicationLauncherClusterApplication {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *MTRApplicationLauncherClusterApplication) WithApplicationId(application
 	return x
 }
 
-func (x *MTRApplicationLauncherClusterApplication) asMTRApplicationLauncherClusterApplicationStruct() *raw.MTRApplicationLauncherClusterApplicationStruct { return &x.inner.MTRApplicationLauncherClusterApplicationStruct }
+func (x *MTRApplicationLauncherClusterApplication) asMTRApplicationLauncherClusterApplicationStruct() *raw.MTRApplicationLauncherClusterApplicationStruct {
+	return &x.inner.MTRApplicationLauncherClusterApplicationStruct
+}
 
 // MTRApplicationLauncherClusterApplicationable is the interface implemented by [MTRApplicationLauncherClusterApplication], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationable interface {
@@ -72,4 +76,3 @@ type MTRApplicationLauncherClusterApplicationable interface {
 }
 
 var _ MTRApplicationLauncherClusterApplicationable = (*MTRApplicationLauncherClusterApplication)(nil)
-

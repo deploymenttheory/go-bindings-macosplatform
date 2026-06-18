@@ -209,4 +209,3 @@ type RulerMarkerable interface {
 }
 
 var _ RulerMarkerable = (*RulerMarker)(nil)
-

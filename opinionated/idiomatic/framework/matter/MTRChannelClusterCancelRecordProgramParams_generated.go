@@ -17,7 +17,9 @@ type MTRChannelClusterCancelRecordProgramParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRChannelClusterCancelRecordProgramParams].
-func (x *MTRChannelClusterCancelRecordProgramParams) Unwrap() *raw.MTRChannelClusterCancelRecordProgramParams { return x.inner }
+func (x *MTRChannelClusterCancelRecordProgramParams) Unwrap() *raw.MTRChannelClusterCancelRecordProgramParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -142,4 +144,3 @@ type MTRChannelClusterCancelRecordProgramParamsable interface {
 }
 
 var _ MTRChannelClusterCancelRecordProgramParamsable = (*MTRChannelClusterCancelRecordProgramParams)(nil)
-

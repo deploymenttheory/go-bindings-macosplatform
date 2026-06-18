@@ -18,11 +18,11 @@ type AVAudioIONode struct {
 }
 
 var (
-	_clsAVAudioIONode = _objcClass("AVAudioIONode")
+	_clsAVAudioIONode                               = _objcClass("AVAudioIONode")
 	_aVAudioIONodeSelSetVoiceProcessingEnabledError = objc.RegisterName("setVoiceProcessingEnabled:error:")
-	_aVAudioIONodeSelPresentationLatency = objc.RegisterName("presentationLatency")
-	_aVAudioIONodeSelAudioUnit = objc.RegisterName("audioUnit")
-	_aVAudioIONodeSelIsVoiceProcessingEnabled = objc.RegisterName("isVoiceProcessingEnabled")
+	_aVAudioIONodeSelPresentationLatency            = objc.RegisterName("presentationLatency")
+	_aVAudioIONodeSelAudioUnit                      = objc.RegisterName("audioUnit")
+	_aVAudioIONodeSelIsVoiceProcessingEnabled       = objc.RegisterName("isVoiceProcessingEnabled")
 )
 
 func AVAudioIONodeFromID(id objc.ID) *AVAudioIONode {
@@ -62,4 +62,3 @@ func (o *AVAudioIONode) IsVoiceProcessingEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioIONodeSelIsVoiceProcessingEnabled)
 	return _ret
 }
-

@@ -26,4 +26,3 @@ func CLConditionFromID(id objc.ID) *CLCondition {
 	purego.Track(o)
 	return o
 }
-

@@ -18,11 +18,11 @@ type PHAssetResourceManager struct {
 }
 
 var (
-	_clsPHAssetResourceManager = _objcClass("PHAssetResourceManager")
-	_pHAssetResourceManagerSelDefaultManager = objc.RegisterName("defaultManager")
+	_clsPHAssetResourceManager                                                                       = _objcClass("PHAssetResourceManager")
+	_pHAssetResourceManagerSelDefaultManager                                                         = objc.RegisterName("defaultManager")
 	_pHAssetResourceManagerSelRequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler = objc.RegisterName("requestDataForAssetResource:options:dataReceivedHandler:completionHandler:")
-	_pHAssetResourceManagerSelWriteDataForAssetResourceToFileOptionsCompletionHandler = objc.RegisterName("writeDataForAssetResource:toFile:options:completionHandler:")
-	_pHAssetResourceManagerSelCancelDataRequest = objc.RegisterName("cancelDataRequest:")
+	_pHAssetResourceManagerSelWriteDataForAssetResourceToFileOptionsCompletionHandler                = objc.RegisterName("writeDataForAssetResource:toFile:options:completionHandler:")
+	_pHAssetResourceManagerSelCancelDataRequest                                                      = objc.RegisterName("cancelDataRequest:")
 )
 
 func PHAssetResourceManagerFromID(id objc.ID) *PHAssetResourceManager {
@@ -37,7 +37,9 @@ func PHAssetResourceManagerFromID(id objc.ID) *PHAssetResourceManager {
 
 func PHAssetResourceManagerDefaultManager() *PHAssetResourceManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHAssetResourceManager), _pHAssetResourceManagerSelDefaultManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAssetResourceManagerFromID(_ret)
 }
 
@@ -77,4 +79,3 @@ func (o *PHAssetResourceManager) WriteDataForAssetResourceToFileOptionsCompletio
 func (o *PHAssetResourceManager) CancelDataRequest(requestID int32) {
 	o.Ptr().Send(_pHAssetResourceManagerSelCancelDataRequest, requestID)
 }
-

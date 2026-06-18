@@ -17,7 +17,9 @@ type PaymentRequestShippingMethodUpdate struct {
 }
 
 // Unwrap returns the underlying [raw.PKPaymentRequestShippingMethodUpdate].
-func (x *PaymentRequestShippingMethodUpdate) Unwrap() *raw.PKPaymentRequestShippingMethodUpdate { return x.inner }
+func (x *PaymentRequestShippingMethodUpdate) Unwrap() *raw.PKPaymentRequestShippingMethodUpdate {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -50,7 +52,9 @@ func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...Pa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asPaymentSummaryItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asPaymentSummaryItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -66,7 +70,9 @@ func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*raw.P
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKShippingMethod](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -82,7 +88,9 @@ func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*ra
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -109,7 +117,9 @@ func (x *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferred
 	return x
 }
 
-func (x *PaymentRequestShippingMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+func (x *PaymentRequestShippingMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate {
+	return &x.inner.PKPaymentRequestUpdate
+}
 
 // PaymentRequestShippingMethodUpdateable is the interface implemented by [PaymentRequestShippingMethodUpdate], for mocking and DI.
 type PaymentRequestShippingMethodUpdateable interface {
@@ -124,4 +134,3 @@ type PaymentRequestShippingMethodUpdateable interface {
 }
 
 var _ PaymentRequestShippingMethodUpdateable = (*PaymentRequestShippingMethodUpdate)(nil)
-

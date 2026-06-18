@@ -6,4 +6,3 @@ package corewlan
 // CWEventDelegate wraps the ObjC protocol CWEventDelegate.
 type CWEventDelegate interface {
 }
-

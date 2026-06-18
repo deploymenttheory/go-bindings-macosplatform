@@ -15,13 +15,13 @@ type MKCircleRenderer struct {
 }
 
 var (
-	_clsMKCircleRenderer = _objcClass("MKCircleRenderer")
+	_clsMKCircleRenderer               = _objcClass("MKCircleRenderer")
 	_mKCircleRendererSelInitWithCircle = objc.RegisterName("initWithCircle:")
-	_mKCircleRendererSelCircle = objc.RegisterName("circle")
-	_mKCircleRendererSelStrokeStart = objc.RegisterName("strokeStart")
+	_mKCircleRendererSelCircle         = objc.RegisterName("circle")
+	_mKCircleRendererSelStrokeStart    = objc.RegisterName("strokeStart")
 	_mKCircleRendererSelSetStrokeStart = objc.RegisterName("setStrokeStart:")
-	_mKCircleRendererSelStrokeEnd = objc.RegisterName("strokeEnd")
-	_mKCircleRendererSelSetStrokeEnd = objc.RegisterName("setStrokeEnd:")
+	_mKCircleRendererSelStrokeEnd      = objc.RegisterName("strokeEnd")
+	_mKCircleRendererSelSetStrokeEnd   = objc.RegisterName("setStrokeEnd:")
 )
 
 func MKCircleRendererFromID(id objc.ID) *MKCircleRenderer {
@@ -36,13 +36,17 @@ func MKCircleRendererFromID(id objc.ID) *MKCircleRenderer {
 
 func (o *MKCircleRenderer) InitWithCircle(circle *MKCircle) *MKCircleRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKCircleRendererSelInitWithCircle, circle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKCircleRendererFromID(_ret)
 }
 
 func (o *MKCircleRenderer) Circle() *MKCircle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKCircleRendererSelCircle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKCircleFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MKCircleRenderer) StrokeEnd() float64 {
 func (o *MKCircleRenderer) SetStrokeEnd(strokeEnd float64) {
 	o.Ptr().Send(_mKCircleRendererSelSetStrokeEnd, strokeEnd)
 }
-

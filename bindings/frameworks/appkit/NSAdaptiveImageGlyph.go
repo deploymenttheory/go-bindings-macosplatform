@@ -17,13 +17,13 @@ type NSAdaptiveImageGlyph struct {
 }
 
 var (
-	_clsNSAdaptiveImageGlyph = _objcClass("NSAdaptiveImageGlyph")
+	_clsNSAdaptiveImageGlyph                     = _objcClass("NSAdaptiveImageGlyph")
 	_nSAdaptiveImageGlyphSelInitWithImageContent = objc.RegisterName("initWithImageContent:")
-	_nSAdaptiveImageGlyphSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSAdaptiveImageGlyphSelImageContent = objc.RegisterName("imageContent")
-	_nSAdaptiveImageGlyphSelContentIdentifier = objc.RegisterName("contentIdentifier")
-	_nSAdaptiveImageGlyphSelContentDescription = objc.RegisterName("contentDescription")
-	_nSAdaptiveImageGlyphSelContentType = objc.RegisterName("contentType")
+	_nSAdaptiveImageGlyphSelInitWithCoder        = objc.RegisterName("initWithCoder:")
+	_nSAdaptiveImageGlyphSelImageContent         = objc.RegisterName("imageContent")
+	_nSAdaptiveImageGlyphSelContentIdentifier    = objc.RegisterName("contentIdentifier")
+	_nSAdaptiveImageGlyphSelContentDescription   = objc.RegisterName("contentDescription")
+	_nSAdaptiveImageGlyphSelContentType          = objc.RegisterName("contentType")
 )
 
 func NSAdaptiveImageGlyphFromID(id objc.ID) *NSAdaptiveImageGlyph {
@@ -38,37 +38,48 @@ func NSAdaptiveImageGlyphFromID(id objc.ID) *NSAdaptiveImageGlyph {
 
 func (o *NSAdaptiveImageGlyph) InitWithImageContent(imageContent *foundation.NSData) *NSAdaptiveImageGlyph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelInitWithImageContent, imageContent.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAdaptiveImageGlyphFromID(_ret)
 }
 
 func (o *NSAdaptiveImageGlyph) InitWithCoder(coder *foundation.NSCoder) *NSAdaptiveImageGlyph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAdaptiveImageGlyphFromID(_ret)
 }
 
 func (o *NSAdaptiveImageGlyph) ImageContent() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelImageContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NSAdaptiveImageGlyph) ContentIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelContentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSAdaptiveImageGlyph) ContentDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSAdaptiveImageGlyphSelContentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSAdaptiveImageGlyphContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSAdaptiveImageGlyph), _nSAdaptiveImageGlyphSelContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
-

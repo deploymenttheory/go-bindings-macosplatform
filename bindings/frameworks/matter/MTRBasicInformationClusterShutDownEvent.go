@@ -26,4 +26,3 @@ func MTRBasicInformationClusterShutDownEventFromID(id objc.ID) *MTRBasicInformat
 	purego.Track(o)
 	return o
 }
-

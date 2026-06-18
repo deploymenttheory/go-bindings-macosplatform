@@ -16,15 +16,15 @@ type MCAdvertiserAssistant struct {
 }
 
 var (
-	_clsMCAdvertiserAssistant = _objcClass("MCAdvertiserAssistant")
+	_clsMCAdvertiserAssistant                                        = _objcClass("MCAdvertiserAssistant")
 	_mCAdvertiserAssistantSelInitWithServiceTypeDiscoveryInfoSession = objc.RegisterName("initWithServiceType:discoveryInfo:session:")
-	_mCAdvertiserAssistantSelStart = objc.RegisterName("start")
-	_mCAdvertiserAssistantSelStop = objc.RegisterName("stop")
-	_mCAdvertiserAssistantSelDelegate = objc.RegisterName("delegate")
-	_mCAdvertiserAssistantSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mCAdvertiserAssistantSelSession = objc.RegisterName("session")
-	_mCAdvertiserAssistantSelDiscoveryInfo = objc.RegisterName("discoveryInfo")
-	_mCAdvertiserAssistantSelServiceType = objc.RegisterName("serviceType")
+	_mCAdvertiserAssistantSelStart                                   = objc.RegisterName("start")
+	_mCAdvertiserAssistantSelStop                                    = objc.RegisterName("stop")
+	_mCAdvertiserAssistantSelDelegate                                = objc.RegisterName("delegate")
+	_mCAdvertiserAssistantSelSetDelegate                             = objc.RegisterName("setDelegate:")
+	_mCAdvertiserAssistantSelSession                                 = objc.RegisterName("session")
+	_mCAdvertiserAssistantSelDiscoveryInfo                           = objc.RegisterName("discoveryInfo")
+	_mCAdvertiserAssistantSelServiceType                             = objc.RegisterName("serviceType")
 )
 
 func MCAdvertiserAssistantFromID(id objc.ID) *MCAdvertiserAssistant {
@@ -39,7 +39,9 @@ func MCAdvertiserAssistantFromID(id objc.ID) *MCAdvertiserAssistant {
 
 func (o *MCAdvertiserAssistant) InitWithServiceTypeDiscoveryInfoSession(serviceType *foundation.NSString, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], session *MCSession) *MCAdvertiserAssistant {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelInitWithServiceTypeDiscoveryInfoSession, serviceType.Ptr(), info, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCAdvertiserAssistantFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *MCAdvertiserAssistant) SetDelegate(delegate MCAdvertiserAssistantDelega
 
 func (o *MCAdvertiserAssistant) Session() *MCSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MCSessionFromID(_ret)
 }
 
@@ -73,7 +77,8 @@ func (o *MCAdvertiserAssistant) DiscoveryInfo() *foundation.NSDictionary[*founda
 
 func (o *MCAdvertiserAssistant) ServiceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mCAdvertiserAssistantSelServiceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

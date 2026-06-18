@@ -15,43 +15,43 @@ type NSURLSessionTaskTransactionMetrics struct {
 }
 
 var (
-	_clsNSURLSessionTaskTransactionMetrics = _objcClass("NSURLSessionTaskTransactionMetrics")
-	_nSURLSessionTaskTransactionMetricsSelInit = objc.RegisterName("init")
-	_nSURLSessionTaskTransactionMetricsSelNew = objc.RegisterName("new")
-	_nSURLSessionTaskTransactionMetricsSelRequest = objc.RegisterName("request")
-	_nSURLSessionTaskTransactionMetricsSelResponse = objc.RegisterName("response")
-	_nSURLSessionTaskTransactionMetricsSelFetchStartDate = objc.RegisterName("fetchStartDate")
-	_nSURLSessionTaskTransactionMetricsSelDomainLookupStartDate = objc.RegisterName("domainLookupStartDate")
-	_nSURLSessionTaskTransactionMetricsSelDomainLookupEndDate = objc.RegisterName("domainLookupEndDate")
-	_nSURLSessionTaskTransactionMetricsSelConnectStartDate = objc.RegisterName("connectStartDate")
-	_nSURLSessionTaskTransactionMetricsSelSecureConnectionStartDate = objc.RegisterName("secureConnectionStartDate")
-	_nSURLSessionTaskTransactionMetricsSelSecureConnectionEndDate = objc.RegisterName("secureConnectionEndDate")
-	_nSURLSessionTaskTransactionMetricsSelConnectEndDate = objc.RegisterName("connectEndDate")
-	_nSURLSessionTaskTransactionMetricsSelRequestStartDate = objc.RegisterName("requestStartDate")
-	_nSURLSessionTaskTransactionMetricsSelRequestEndDate = objc.RegisterName("requestEndDate")
-	_nSURLSessionTaskTransactionMetricsSelResponseStartDate = objc.RegisterName("responseStartDate")
-	_nSURLSessionTaskTransactionMetricsSelResponseEndDate = objc.RegisterName("responseEndDate")
-	_nSURLSessionTaskTransactionMetricsSelNetworkProtocolName = objc.RegisterName("networkProtocolName")
-	_nSURLSessionTaskTransactionMetricsSelIsProxyConnection = objc.RegisterName("isProxyConnection")
-	_nSURLSessionTaskTransactionMetricsSelIsReusedConnection = objc.RegisterName("isReusedConnection")
-	_nSURLSessionTaskTransactionMetricsSelResourceFetchType = objc.RegisterName("resourceFetchType")
-	_nSURLSessionTaskTransactionMetricsSelCountOfRequestHeaderBytesSent = objc.RegisterName("countOfRequestHeaderBytesSent")
-	_nSURLSessionTaskTransactionMetricsSelCountOfRequestBodyBytesSent = objc.RegisterName("countOfRequestBodyBytesSent")
+	_clsNSURLSessionTaskTransactionMetrics                                      = _objcClass("NSURLSessionTaskTransactionMetrics")
+	_nSURLSessionTaskTransactionMetricsSelInit                                  = objc.RegisterName("init")
+	_nSURLSessionTaskTransactionMetricsSelNew                                   = objc.RegisterName("new")
+	_nSURLSessionTaskTransactionMetricsSelRequest                               = objc.RegisterName("request")
+	_nSURLSessionTaskTransactionMetricsSelResponse                              = objc.RegisterName("response")
+	_nSURLSessionTaskTransactionMetricsSelFetchStartDate                        = objc.RegisterName("fetchStartDate")
+	_nSURLSessionTaskTransactionMetricsSelDomainLookupStartDate                 = objc.RegisterName("domainLookupStartDate")
+	_nSURLSessionTaskTransactionMetricsSelDomainLookupEndDate                   = objc.RegisterName("domainLookupEndDate")
+	_nSURLSessionTaskTransactionMetricsSelConnectStartDate                      = objc.RegisterName("connectStartDate")
+	_nSURLSessionTaskTransactionMetricsSelSecureConnectionStartDate             = objc.RegisterName("secureConnectionStartDate")
+	_nSURLSessionTaskTransactionMetricsSelSecureConnectionEndDate               = objc.RegisterName("secureConnectionEndDate")
+	_nSURLSessionTaskTransactionMetricsSelConnectEndDate                        = objc.RegisterName("connectEndDate")
+	_nSURLSessionTaskTransactionMetricsSelRequestStartDate                      = objc.RegisterName("requestStartDate")
+	_nSURLSessionTaskTransactionMetricsSelRequestEndDate                        = objc.RegisterName("requestEndDate")
+	_nSURLSessionTaskTransactionMetricsSelResponseStartDate                     = objc.RegisterName("responseStartDate")
+	_nSURLSessionTaskTransactionMetricsSelResponseEndDate                       = objc.RegisterName("responseEndDate")
+	_nSURLSessionTaskTransactionMetricsSelNetworkProtocolName                   = objc.RegisterName("networkProtocolName")
+	_nSURLSessionTaskTransactionMetricsSelIsProxyConnection                     = objc.RegisterName("isProxyConnection")
+	_nSURLSessionTaskTransactionMetricsSelIsReusedConnection                    = objc.RegisterName("isReusedConnection")
+	_nSURLSessionTaskTransactionMetricsSelResourceFetchType                     = objc.RegisterName("resourceFetchType")
+	_nSURLSessionTaskTransactionMetricsSelCountOfRequestHeaderBytesSent         = objc.RegisterName("countOfRequestHeaderBytesSent")
+	_nSURLSessionTaskTransactionMetricsSelCountOfRequestBodyBytesSent           = objc.RegisterName("countOfRequestBodyBytesSent")
 	_nSURLSessionTaskTransactionMetricsSelCountOfRequestBodyBytesBeforeEncoding = objc.RegisterName("countOfRequestBodyBytesBeforeEncoding")
-	_nSURLSessionTaskTransactionMetricsSelCountOfResponseHeaderBytesReceived = objc.RegisterName("countOfResponseHeaderBytesReceived")
-	_nSURLSessionTaskTransactionMetricsSelCountOfResponseBodyBytesReceived = objc.RegisterName("countOfResponseBodyBytesReceived")
+	_nSURLSessionTaskTransactionMetricsSelCountOfResponseHeaderBytesReceived    = objc.RegisterName("countOfResponseHeaderBytesReceived")
+	_nSURLSessionTaskTransactionMetricsSelCountOfResponseBodyBytesReceived      = objc.RegisterName("countOfResponseBodyBytesReceived")
 	_nSURLSessionTaskTransactionMetricsSelCountOfResponseBodyBytesAfterDecoding = objc.RegisterName("countOfResponseBodyBytesAfterDecoding")
-	_nSURLSessionTaskTransactionMetricsSelLocalAddress = objc.RegisterName("localAddress")
-	_nSURLSessionTaskTransactionMetricsSelLocalPort = objc.RegisterName("localPort")
-	_nSURLSessionTaskTransactionMetricsSelRemoteAddress = objc.RegisterName("remoteAddress")
-	_nSURLSessionTaskTransactionMetricsSelRemotePort = objc.RegisterName("remotePort")
-	_nSURLSessionTaskTransactionMetricsSelNegotiatedTLSProtocolVersion = objc.RegisterName("negotiatedTLSProtocolVersion")
-	_nSURLSessionTaskTransactionMetricsSelNegotiatedTLSCipherSuite = objc.RegisterName("negotiatedTLSCipherSuite")
-	_nSURLSessionTaskTransactionMetricsSelIsCellular = objc.RegisterName("isCellular")
-	_nSURLSessionTaskTransactionMetricsSelIsExpensive = objc.RegisterName("isExpensive")
-	_nSURLSessionTaskTransactionMetricsSelIsConstrained = objc.RegisterName("isConstrained")
-	_nSURLSessionTaskTransactionMetricsSelIsMultipath = objc.RegisterName("isMultipath")
-	_nSURLSessionTaskTransactionMetricsSelDomainResolutionProtocol = objc.RegisterName("domainResolutionProtocol")
+	_nSURLSessionTaskTransactionMetricsSelLocalAddress                          = objc.RegisterName("localAddress")
+	_nSURLSessionTaskTransactionMetricsSelLocalPort                             = objc.RegisterName("localPort")
+	_nSURLSessionTaskTransactionMetricsSelRemoteAddress                         = objc.RegisterName("remoteAddress")
+	_nSURLSessionTaskTransactionMetricsSelRemotePort                            = objc.RegisterName("remotePort")
+	_nSURLSessionTaskTransactionMetricsSelNegotiatedTLSProtocolVersion          = objc.RegisterName("negotiatedTLSProtocolVersion")
+	_nSURLSessionTaskTransactionMetricsSelNegotiatedTLSCipherSuite              = objc.RegisterName("negotiatedTLSCipherSuite")
+	_nSURLSessionTaskTransactionMetricsSelIsCellular                            = objc.RegisterName("isCellular")
+	_nSURLSessionTaskTransactionMetricsSelIsExpensive                           = objc.RegisterName("isExpensive")
+	_nSURLSessionTaskTransactionMetricsSelIsConstrained                         = objc.RegisterName("isConstrained")
+	_nSURLSessionTaskTransactionMetricsSelIsMultipath                           = objc.RegisterName("isMultipath")
+	_nSURLSessionTaskTransactionMetricsSelDomainResolutionProtocol              = objc.RegisterName("domainResolutionProtocol")
 )
 
 func NSURLSessionTaskTransactionMetricsFromID(id objc.ID) *NSURLSessionTaskTransactionMetrics {
@@ -67,7 +67,9 @@ func NSURLSessionTaskTransactionMetricsFromID(id objc.ID) *NSURLSessionTaskTrans
 // Deprecated: Not supported
 func (o *NSURLSessionTaskTransactionMetrics) Init() *NSURLSessionTaskTransactionMetrics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLSessionTaskTransactionMetricsFromID(_ret)
 }
 
@@ -79,85 +81,113 @@ func NSURLSessionTaskTransactionMetricsNew() *NSURLSessionTaskTransactionMetrics
 
 func (o *NSURLSessionTaskTransactionMetrics) Request() *NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLRequestFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) Response() *NSURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLResponseFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) FetchStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelFetchStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) DomainLookupStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainLookupStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) DomainLookupEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainLookupEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) ConnectStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelConnectStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelSecureConnectionStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) SecureConnectionEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelSecureConnectionEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) ConnectEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelConnectEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) RequestStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequestStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) RequestEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRequestEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) ResponseStartDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponseStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) ResponseEndDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelResponseEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) NetworkProtocolName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNetworkProtocolName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -208,37 +238,49 @@ func (o *NSURLSessionTaskTransactionMetrics) CountOfResponseBodyBytesAfterDecodi
 
 func (o *NSURLSessionTaskTransactionMetrics) LocalAddress() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelLocalAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) LocalPort() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelLocalPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) RemoteAddress() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRemoteAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) RemotePort() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelRemotePort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSProtocolVersion() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNegotiatedTLSProtocolVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func (o *NSURLSessionTaskTransactionMetrics) NegotiatedTLSCipherSuite() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelNegotiatedTLSCipherSuite)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -266,4 +308,3 @@ func (o *NSURLSessionTaskTransactionMetrics) DomainResolutionProtocol() NSURLSes
 	_ret := objc.Send[NSURLSessionTaskMetricsDomainResolutionProtocol](o.Ptr(), _nSURLSessionTaskTransactionMetricsSelDomainResolutionProtocol)
 	return _ret
 }
-

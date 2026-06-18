@@ -16,17 +16,17 @@ type HKWorkoutActivity struct {
 }
 
 var (
-	_clsHKWorkoutActivity = _objcClass("HKWorkoutActivity")
-	_hKWorkoutActivitySelStatisticsForType = objc.RegisterName("statisticsForType:")
+	_clsHKWorkoutActivity                                                     = _objcClass("HKWorkoutActivity")
+	_hKWorkoutActivitySelStatisticsForType                                    = objc.RegisterName("statisticsForType:")
 	_hKWorkoutActivitySelInitWithWorkoutConfigurationStartDateEndDateMetadata = objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:")
-	_hKWorkoutActivitySelUUID = objc.RegisterName("UUID")
-	_hKWorkoutActivitySelWorkoutConfiguration = objc.RegisterName("workoutConfiguration")
-	_hKWorkoutActivitySelStartDate = objc.RegisterName("startDate")
-	_hKWorkoutActivitySelEndDate = objc.RegisterName("endDate")
-	_hKWorkoutActivitySelMetadata = objc.RegisterName("metadata")
-	_hKWorkoutActivitySelDuration = objc.RegisterName("duration")
-	_hKWorkoutActivitySelWorkoutEvents = objc.RegisterName("workoutEvents")
-	_hKWorkoutActivitySelAllStatistics = objc.RegisterName("allStatistics")
+	_hKWorkoutActivitySelUUID                                                 = objc.RegisterName("UUID")
+	_hKWorkoutActivitySelWorkoutConfiguration                                 = objc.RegisterName("workoutConfiguration")
+	_hKWorkoutActivitySelStartDate                                            = objc.RegisterName("startDate")
+	_hKWorkoutActivitySelEndDate                                              = objc.RegisterName("endDate")
+	_hKWorkoutActivitySelMetadata                                             = objc.RegisterName("metadata")
+	_hKWorkoutActivitySelDuration                                             = objc.RegisterName("duration")
+	_hKWorkoutActivitySelWorkoutEvents                                        = objc.RegisterName("workoutEvents")
+	_hKWorkoutActivitySelAllStatistics                                        = objc.RegisterName("allStatistics")
 )
 
 func HKWorkoutActivityFromID(id objc.ID) *HKWorkoutActivity {
@@ -42,42 +42,54 @@ func HKWorkoutActivityFromID(id objc.ID) *HKWorkoutActivity {
 // @method        statisticsForType: @discussion    Returns an HKStatistics object containing the statistics for all the samples of the given type that have been added to the workout within the date interval of this activity. If there are no samples of the given type then nil is returned. @param         quantityType    The quantity type to gather statistics about.
 func (o *HKWorkoutActivity) StatisticsForType(quantityType *HKQuantityType) *HKStatistics {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelStatisticsForType, quantityType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStatisticsFromID(_ret)
 }
 
 // @method        initWithWorkoutConfiguration:startDate:endDate:metadata: @abstract      Initialize a new HKWorkoutActivity with the specified values. @param     workoutConfiguration    The configuration object describing the workout activity. @param     startDate               The point in time when the workout activity was started. @param     endDate                 The point in time when the workout activity was ended. @param     metadata                Metadata for the workout activity. (Optional)
 func (o *HKWorkoutActivity) InitWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKWorkoutActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelInitWithWorkoutConfigurationStartDateEndDateMetadata, workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutActivityFromID(_ret)
 }
 
 // @property      UUID @abstract      A unique identifier of the activity in the HealthKit database.
 func (o *HKWorkoutActivity) UUID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelUUID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @property      workoutConfiguration @abstract      The configuration object describing the workout activity.
 func (o *HKWorkoutActivity) WorkoutConfiguration() *HKWorkoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelWorkoutConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKWorkoutConfigurationFromID(_ret)
 }
 
 // @property      startDate @abstract      The point in time when the workout activity was started.
 func (o *HKWorkoutActivity) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @property      endDate @abstract      The point in time when the workout activity was ended. @discussion    This value is nil when a workout activity is in progress.
 func (o *HKWorkoutActivity) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -96,14 +108,17 @@ func (o *HKWorkoutActivity) Duration() float64 {
 // @property      workoutEvents @abstract      An array of HKWorkoutEvents that occurred during the workout activity. @discussion    These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
 func (o *HKWorkoutActivity) WorkoutEvents() *foundation.NSArray[*HKWorkoutEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelWorkoutEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*HKWorkoutEvent](_ret)
 }
 
 // @property      allStatistics @abstract      A dictionary of statistics per quantity type during the activity @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
 func (o *HKWorkoutActivity) AllStatistics() *foundation.NSDictionary[*HKQuantityType, *HKStatistics] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKWorkoutActivitySelAllStatistics)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*HKQuantityType, *HKStatistics](_ret)
 }
-

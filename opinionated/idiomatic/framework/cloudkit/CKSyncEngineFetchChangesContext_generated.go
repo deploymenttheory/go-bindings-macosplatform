@@ -57,4 +57,3 @@ type SyncEngineFetchChangesContextable interface {
 }
 
 var _ SyncEngineFetchChangesContextable = (*SyncEngineFetchChangesContext)(nil)
-

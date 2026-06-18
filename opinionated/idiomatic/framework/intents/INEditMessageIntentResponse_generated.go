@@ -48,7 +48,9 @@ func (x *EditMessageIntentResponse) Code() raw.INEditMessageIntentResponseCode {
 	return x.inner.Code()
 }
 
-func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // EditMessageIntentResponseable is the interface implemented by [EditMessageIntentResponse], for mocking and DI.
 type EditMessageIntentResponseable interface {
@@ -58,4 +60,3 @@ type EditMessageIntentResponseable interface {
 }
 
 var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)
-

@@ -16,7 +16,9 @@ type MTRTestClusterClusterSimpleStructEchoRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTestClusterClusterSimpleStructEchoRequestParams].
-func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) Unwrap() *raw.MTRTestClusterClusterSimpleStructEchoRequestParams { return x.inner }
+func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) Unwrap() *raw.MTRTestClusterClusterSimpleStructEchoRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) WithServerSideProce
 	return x
 }
 
-func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams { return &x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams }
+func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	return &x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams
+}
 
 // MTRTestClusterClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRTestClusterClusterSimpleStructEchoRequestParams], for mocking and DI.
 type MTRTestClusterClusterSimpleStructEchoRequestParamsable interface {
@@ -65,4 +69,3 @@ type MTRTestClusterClusterSimpleStructEchoRequestParamsable interface {
 }
 
 var _ MTRTestClusterClusterSimpleStructEchoRequestParamsable = (*MTRTestClusterClusterSimpleStructEchoRequestParams)(nil)
-

@@ -190,11 +190,17 @@ func (x *CNNDivide) WithLabel(label string) *CNNDivide {
 	return x
 }
 
-func (x *CNNDivide) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
+func (x *CNNDivide) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
+	return &x.inner.MPSCNNArithmetic
+}
 
-func (x *CNNDivide) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNDivide) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
-func (x *CNNDivide) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNDivide) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNDivideable is the interface implemented by [CNNDivide], for mocking and DI.
 type CNNDivideable interface {
@@ -227,4 +233,3 @@ type CNNDivideable interface {
 }
 
 var _ CNNDivideable = (*CNNDivide)(nil)
-

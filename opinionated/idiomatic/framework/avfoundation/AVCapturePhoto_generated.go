@@ -102,4 +102,3 @@ type CapturePhotoable interface {
 }
 
 var _ CapturePhotoable = (*CapturePhoto)(nil)
-

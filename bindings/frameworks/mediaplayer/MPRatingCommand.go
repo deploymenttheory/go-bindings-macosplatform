@@ -15,10 +15,10 @@ type MPRatingCommand struct {
 }
 
 var (
-	_clsMPRatingCommand = _objcClass("MPRatingCommand")
-	_mPRatingCommandSelMinimumRating = objc.RegisterName("minimumRating")
+	_clsMPRatingCommand                 = _objcClass("MPRatingCommand")
+	_mPRatingCommandSelMinimumRating    = objc.RegisterName("minimumRating")
 	_mPRatingCommandSelSetMinimumRating = objc.RegisterName("setMinimumRating:")
-	_mPRatingCommandSelMaximumRating = objc.RegisterName("maximumRating")
+	_mPRatingCommandSelMaximumRating    = objc.RegisterName("maximumRating")
 	_mPRatingCommandSelSetMaximumRating = objc.RegisterName("setMaximumRating:")
 )
 
@@ -51,4 +51,3 @@ func (o *MPRatingCommand) MaximumRating() float32 {
 func (o *MPRatingCommand) SetMaximumRating(maximumRating float32) {
 	o.Ptr().Send(_mPRatingCommandSelSetMaximumRating, maximumRating)
 }
-

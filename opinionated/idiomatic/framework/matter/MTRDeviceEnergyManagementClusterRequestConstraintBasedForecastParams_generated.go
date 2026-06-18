@@ -16,11 +16,15 @@ type MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams struct
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams].
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams (nil for 0).
 func MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
@@ -111,4 +115,3 @@ type MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable in
 }
 
 var _ MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable = (*MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams)(nil)
-

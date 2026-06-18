@@ -16,11 +16,11 @@ type HKDiscreteQuantitySample struct {
 }
 
 var (
-	_clsHKDiscreteQuantitySample = _objcClass("HKDiscreteQuantitySample")
-	_hKDiscreteQuantitySampleSelMinimumQuantity = objc.RegisterName("minimumQuantity")
-	_hKDiscreteQuantitySampleSelAverageQuantity = objc.RegisterName("averageQuantity")
-	_hKDiscreteQuantitySampleSelMaximumQuantity = objc.RegisterName("maximumQuantity")
-	_hKDiscreteQuantitySampleSelMostRecentQuantity = objc.RegisterName("mostRecentQuantity")
+	_clsHKDiscreteQuantitySample                               = _objcClass("HKDiscreteQuantitySample")
+	_hKDiscreteQuantitySampleSelMinimumQuantity                = objc.RegisterName("minimumQuantity")
+	_hKDiscreteQuantitySampleSelAverageQuantity                = objc.RegisterName("averageQuantity")
+	_hKDiscreteQuantitySampleSelMaximumQuantity                = objc.RegisterName("maximumQuantity")
+	_hKDiscreteQuantitySampleSelMostRecentQuantity             = objc.RegisterName("mostRecentQuantity")
 	_hKDiscreteQuantitySampleSelMostRecentQuantityDateInterval = objc.RegisterName("mostRecentQuantityDateInterval")
 )
 
@@ -37,35 +37,44 @@ func HKDiscreteQuantitySampleFromID(id objc.ID) *HKDiscreteQuantitySample {
 // @property      minimumQuantity @abstract      The minimum of the receiver's quantities
 func (o *HKDiscreteQuantitySample) MinimumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDiscreteQuantitySampleSelMinimumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      averageQuantity @abstract      The average of the receiver's quantities
 func (o *HKDiscreteQuantitySample) AverageQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDiscreteQuantitySampleSelAverageQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      maximumQuantity @abstract      The maximum of the receiver's quantities
 func (o *HKDiscreteQuantitySample) MaximumQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDiscreteQuantitySampleSelMaximumQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      mostRecentQuantity @abstract      The receiver's quantity with most recent date interval
 func (o *HKDiscreteQuantitySample) MostRecentQuantity() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDiscreteQuantitySampleSelMostRecentQuantity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property      mostRecentQuantityDateInterval @abstract      The date interval for the receiver's most recent quantity
 func (o *HKDiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKDiscreteQuantitySampleSelMostRecentQuantityDateInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateIntervalFromID(_ret)
 }
-

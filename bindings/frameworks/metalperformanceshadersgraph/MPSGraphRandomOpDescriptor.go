@@ -18,26 +18,26 @@ type MPSGraphRandomOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphRandomOpDescriptor = _objcClass("MPSGraphRandomOpDescriptor")
+	_clsMPSGraphRandomOpDescriptor                                   = _objcClass("MPSGraphRandomOpDescriptor")
 	_mPSGraphRandomOpDescriptorSelDescriptorWithDistributionDataType = objc.RegisterName("descriptorWithDistribution:dataType:")
-	_mPSGraphRandomOpDescriptorSelDistribution = objc.RegisterName("distribution")
-	_mPSGraphRandomOpDescriptorSelSetDistribution = objc.RegisterName("setDistribution:")
-	_mPSGraphRandomOpDescriptorSelDataType = objc.RegisterName("dataType")
-	_mPSGraphRandomOpDescriptorSelSetDataType = objc.RegisterName("setDataType:")
-	_mPSGraphRandomOpDescriptorSelMin = objc.RegisterName("min")
-	_mPSGraphRandomOpDescriptorSelSetMin = objc.RegisterName("setMin:")
-	_mPSGraphRandomOpDescriptorSelMax = objc.RegisterName("max")
-	_mPSGraphRandomOpDescriptorSelSetMax = objc.RegisterName("setMax:")
-	_mPSGraphRandomOpDescriptorSelMinInteger = objc.RegisterName("minInteger")
-	_mPSGraphRandomOpDescriptorSelSetMinInteger = objc.RegisterName("setMinInteger:")
-	_mPSGraphRandomOpDescriptorSelMaxInteger = objc.RegisterName("maxInteger")
-	_mPSGraphRandomOpDescriptorSelSetMaxInteger = objc.RegisterName("setMaxInteger:")
-	_mPSGraphRandomOpDescriptorSelMean = objc.RegisterName("mean")
-	_mPSGraphRandomOpDescriptorSelSetMean = objc.RegisterName("setMean:")
-	_mPSGraphRandomOpDescriptorSelStandardDeviation = objc.RegisterName("standardDeviation")
-	_mPSGraphRandomOpDescriptorSelSetStandardDeviation = objc.RegisterName("setStandardDeviation:")
-	_mPSGraphRandomOpDescriptorSelSamplingMethod = objc.RegisterName("samplingMethod")
-	_mPSGraphRandomOpDescriptorSelSetSamplingMethod = objc.RegisterName("setSamplingMethod:")
+	_mPSGraphRandomOpDescriptorSelDistribution                       = objc.RegisterName("distribution")
+	_mPSGraphRandomOpDescriptorSelSetDistribution                    = objc.RegisterName("setDistribution:")
+	_mPSGraphRandomOpDescriptorSelDataType                           = objc.RegisterName("dataType")
+	_mPSGraphRandomOpDescriptorSelSetDataType                        = objc.RegisterName("setDataType:")
+	_mPSGraphRandomOpDescriptorSelMin                                = objc.RegisterName("min")
+	_mPSGraphRandomOpDescriptorSelSetMin                             = objc.RegisterName("setMin:")
+	_mPSGraphRandomOpDescriptorSelMax                                = objc.RegisterName("max")
+	_mPSGraphRandomOpDescriptorSelSetMax                             = objc.RegisterName("setMax:")
+	_mPSGraphRandomOpDescriptorSelMinInteger                         = objc.RegisterName("minInteger")
+	_mPSGraphRandomOpDescriptorSelSetMinInteger                      = objc.RegisterName("setMinInteger:")
+	_mPSGraphRandomOpDescriptorSelMaxInteger                         = objc.RegisterName("maxInteger")
+	_mPSGraphRandomOpDescriptorSelSetMaxInteger                      = objc.RegisterName("setMaxInteger:")
+	_mPSGraphRandomOpDescriptorSelMean                               = objc.RegisterName("mean")
+	_mPSGraphRandomOpDescriptorSelSetMean                            = objc.RegisterName("setMean:")
+	_mPSGraphRandomOpDescriptorSelStandardDeviation                  = objc.RegisterName("standardDeviation")
+	_mPSGraphRandomOpDescriptorSelSetStandardDeviation               = objc.RegisterName("setStandardDeviation:")
+	_mPSGraphRandomOpDescriptorSelSamplingMethod                     = objc.RegisterName("samplingMethod")
+	_mPSGraphRandomOpDescriptorSelSetSamplingMethod                  = objc.RegisterName("setSamplingMethod:")
 )
 
 func MPSGraphRandomOpDescriptorFromID(id objc.ID) *MPSGraphRandomOpDescriptor {
@@ -53,7 +53,9 @@ func MPSGraphRandomOpDescriptorFromID(id objc.ID) *MPSGraphRandomOpDescriptor {
 // Class method to initialize a distribution descriptor.
 func MPSGraphRandomOpDescriptorDescriptorWithDistributionDataType(distribution MPSGraphRandomDistribution, dataType mpscore.MPSDataType) *MPSGraphRandomOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphRandomOpDescriptor), _mPSGraphRandomOpDescriptorSelDescriptorWithDistributionDataType, distribution, dataType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphRandomOpDescriptorFromID(_ret)
 }
 
@@ -146,4 +148,3 @@ func (o *MPSGraphRandomOpDescriptor) SamplingMethod() MPSGraphRandomNormalSampli
 func (o *MPSGraphRandomOpDescriptor) SetSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) {
 	o.Ptr().Send(_mPSGraphRandomOpDescriptorSelSetSamplingMethod, samplingMethod)
 }
-

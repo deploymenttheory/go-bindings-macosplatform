@@ -18,7 +18,9 @@ type ContentSharingPickerConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.SCContentSharingPickerConfiguration].
-func (x *ContentSharingPickerConfiguration) Unwrap() *raw.SCContentSharingPickerConfiguration[objc.ID] { return x.inner }
+func (x *ContentSharingPickerConfiguration) Unwrap() *raw.SCContentSharingPickerConfiguration[objc.ID] {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -51,7 +53,9 @@ func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...*foun
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -67,7 +71,9 @@ func (x *ContentSharingPickerConfiguration) WithExcludedBundleIDs(items ...*foun
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -152,4 +158,3 @@ type ContentSharingPickerConfigurationable interface {
 }
 
 var _ ContentSharingPickerConfigurationable = (*ContentSharingPickerConfiguration)(nil)
-

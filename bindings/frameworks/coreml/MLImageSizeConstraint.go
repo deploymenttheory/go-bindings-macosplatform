@@ -16,10 +16,10 @@ type MLImageSizeConstraint struct {
 }
 
 var (
-	_clsMLImageSizeConstraint = _objcClass("MLImageSizeConstraint")
-	_mLImageSizeConstraintSelType = objc.RegisterName("type")
-	_mLImageSizeConstraintSelPixelsWideRange = objc.RegisterName("pixelsWideRange")
-	_mLImageSizeConstraintSelPixelsHighRange = objc.RegisterName("pixelsHighRange")
+	_clsMLImageSizeConstraint                     = _objcClass("MLImageSizeConstraint")
+	_mLImageSizeConstraintSelType                 = objc.RegisterName("type")
+	_mLImageSizeConstraintSelPixelsWideRange      = objc.RegisterName("pixelsWideRange")
+	_mLImageSizeConstraintSelPixelsHighRange      = objc.RegisterName("pixelsHighRange")
 	_mLImageSizeConstraintSelEnumeratedImageSizes = objc.RegisterName("enumeratedImageSizes")
 )
 
@@ -50,7 +50,8 @@ func (o *MLImageSizeConstraint) PixelsHighRange() foundation.NSRange {
 
 func (o *MLImageSizeConstraint) EnumeratedImageSizes() *foundation.NSArray[*MLImageSize] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLImageSizeConstraintSelEnumeratedImageSizes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MLImageSize](_ret)
 }
-

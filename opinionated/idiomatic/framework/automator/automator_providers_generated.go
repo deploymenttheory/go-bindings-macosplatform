@@ -17,4 +17,3 @@ type ActionProvider interface {
 type BundleActionProvider interface {
 	asBundleAction() *raw.AMBundleAction
 }
-

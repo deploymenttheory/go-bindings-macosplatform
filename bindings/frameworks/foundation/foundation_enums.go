@@ -12,7 +12,7 @@ import (
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -30,8 +30,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -67,136 +67,236 @@ func (e MDQuerySortOptionFlags) String() string {
 type NSActivityOptions int64
 
 const (
-	NSActivityIdleDisplaySleepDisabled NSActivityOptions = 1099511627776
-	NSActivityIdleSystemSleepDisabled NSActivityOptions = 1048576
-	NSActivitySuddenTerminationDisabled NSActivityOptions = 16384
-	NSActivityAutomaticTerminationDisabled NSActivityOptions = 32768
-	NSActivityAnimationTrackingEnabled NSActivityOptions = 35184372088832
-	NSActivityTrackingEnabled NSActivityOptions = 70368744177664
-	NSActivityUserInitiated NSActivityOptions = 16777215
+	NSActivityIdleDisplaySleepDisabled             NSActivityOptions = 1099511627776
+	NSActivityIdleSystemSleepDisabled              NSActivityOptions = 1048576
+	NSActivitySuddenTerminationDisabled            NSActivityOptions = 16384
+	NSActivityAutomaticTerminationDisabled         NSActivityOptions = 32768
+	NSActivityAnimationTrackingEnabled             NSActivityOptions = 35184372088832
+	NSActivityTrackingEnabled                      NSActivityOptions = 70368744177664
+	NSActivityUserInitiated                        NSActivityOptions = 16777215
 	NSActivityUserInitiatedAllowingIdleSystemSleep NSActivityOptions = 15728639
-	NSActivityBackground NSActivityOptions = 255
-	NSActivityLatencyCritical NSActivityOptions = 1095216660480
-	NSActivityUserInteractive NSActivityOptions = 1095233437695
+	NSActivityBackground                           NSActivityOptions = 255
+	NSActivityLatencyCritical                      NSActivityOptions = 1095216660480
+	NSActivityUserInteractive                      NSActivityOptions = 1095233437695
 )
 
 func (e NSActivityOptions) String() string {
 	var parts []string
-	if e&NSActivityIdleDisplaySleepDisabled != 0 { parts = append(parts, "NSActivityIdleDisplaySleepDisabled") }
-	if e&NSActivityIdleSystemSleepDisabled != 0 { parts = append(parts, "NSActivityIdleSystemSleepDisabled") }
-	if e&NSActivitySuddenTerminationDisabled != 0 { parts = append(parts, "NSActivitySuddenTerminationDisabled") }
-	if e&NSActivityAutomaticTerminationDisabled != 0 { parts = append(parts, "NSActivityAutomaticTerminationDisabled") }
-	if e&NSActivityAnimationTrackingEnabled != 0 { parts = append(parts, "NSActivityAnimationTrackingEnabled") }
-	if e&NSActivityTrackingEnabled != 0 { parts = append(parts, "NSActivityTrackingEnabled") }
-	if e&NSActivityUserInitiated != 0 { parts = append(parts, "NSActivityUserInitiated") }
-	if e&NSActivityUserInitiatedAllowingIdleSystemSleep != 0 { parts = append(parts, "NSActivityUserInitiatedAllowingIdleSystemSleep") }
-	if e&NSActivityBackground != 0 { parts = append(parts, "NSActivityBackground") }
-	if e&NSActivityLatencyCritical != 0 { parts = append(parts, "NSActivityLatencyCritical") }
-	if e&NSActivityUserInteractive != 0 { parts = append(parts, "NSActivityUserInteractive") }
-	if len(parts) == 0 { return "0" }
+	if e&NSActivityIdleDisplaySleepDisabled != 0 {
+		parts = append(parts, "NSActivityIdleDisplaySleepDisabled")
+	}
+	if e&NSActivityIdleSystemSleepDisabled != 0 {
+		parts = append(parts, "NSActivityIdleSystemSleepDisabled")
+	}
+	if e&NSActivitySuddenTerminationDisabled != 0 {
+		parts = append(parts, "NSActivitySuddenTerminationDisabled")
+	}
+	if e&NSActivityAutomaticTerminationDisabled != 0 {
+		parts = append(parts, "NSActivityAutomaticTerminationDisabled")
+	}
+	if e&NSActivityAnimationTrackingEnabled != 0 {
+		parts = append(parts, "NSActivityAnimationTrackingEnabled")
+	}
+	if e&NSActivityTrackingEnabled != 0 {
+		parts = append(parts, "NSActivityTrackingEnabled")
+	}
+	if e&NSActivityUserInitiated != 0 {
+		parts = append(parts, "NSActivityUserInitiated")
+	}
+	if e&NSActivityUserInitiatedAllowingIdleSystemSleep != 0 {
+		parts = append(parts, "NSActivityUserInitiatedAllowingIdleSystemSleep")
+	}
+	if e&NSActivityBackground != 0 {
+		parts = append(parts, "NSActivityBackground")
+	}
+	if e&NSActivityLatencyCritical != 0 {
+		parts = append(parts, "NSActivityLatencyCritical")
+	}
+	if e&NSActivityUserInteractive != 0 {
+		parts = append(parts, "NSActivityUserInteractive")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSAlignmentOptions uint64
 
 const (
-	NSAlignMinXInward NSAlignmentOptions = 1
-	NSAlignMinYInward NSAlignmentOptions = 2
-	NSAlignMaxXInward NSAlignmentOptions = 4
-	NSAlignMaxYInward NSAlignmentOptions = 8
-	NSAlignWidthInward NSAlignmentOptions = 16
-	NSAlignHeightInward NSAlignmentOptions = 32
-	NSAlignMinXOutward NSAlignmentOptions = 256
-	NSAlignMinYOutward NSAlignmentOptions = 512
-	NSAlignMaxXOutward NSAlignmentOptions = 1024
-	NSAlignMaxYOutward NSAlignmentOptions = 2048
-	NSAlignWidthOutward NSAlignmentOptions = 4096
-	NSAlignHeightOutward NSAlignmentOptions = 8192
-	NSAlignMinXNearest NSAlignmentOptions = 65536
-	NSAlignMinYNearest NSAlignmentOptions = 131072
-	NSAlignMaxXNearest NSAlignmentOptions = 262144
-	NSAlignMaxYNearest NSAlignmentOptions = 524288
-	NSAlignWidthNearest NSAlignmentOptions = 1048576
-	NSAlignHeightNearest NSAlignmentOptions = 2097152
-	NSAlignRectFlipped NSAlignmentOptions = 9223372036854775808
-	NSAlignAllEdgesInward NSAlignmentOptions = 15
+	NSAlignMinXInward      NSAlignmentOptions = 1
+	NSAlignMinYInward      NSAlignmentOptions = 2
+	NSAlignMaxXInward      NSAlignmentOptions = 4
+	NSAlignMaxYInward      NSAlignmentOptions = 8
+	NSAlignWidthInward     NSAlignmentOptions = 16
+	NSAlignHeightInward    NSAlignmentOptions = 32
+	NSAlignMinXOutward     NSAlignmentOptions = 256
+	NSAlignMinYOutward     NSAlignmentOptions = 512
+	NSAlignMaxXOutward     NSAlignmentOptions = 1024
+	NSAlignMaxYOutward     NSAlignmentOptions = 2048
+	NSAlignWidthOutward    NSAlignmentOptions = 4096
+	NSAlignHeightOutward   NSAlignmentOptions = 8192
+	NSAlignMinXNearest     NSAlignmentOptions = 65536
+	NSAlignMinYNearest     NSAlignmentOptions = 131072
+	NSAlignMaxXNearest     NSAlignmentOptions = 262144
+	NSAlignMaxYNearest     NSAlignmentOptions = 524288
+	NSAlignWidthNearest    NSAlignmentOptions = 1048576
+	NSAlignHeightNearest   NSAlignmentOptions = 2097152
+	NSAlignRectFlipped     NSAlignmentOptions = 9223372036854775808
+	NSAlignAllEdgesInward  NSAlignmentOptions = 15
 	NSAlignAllEdgesOutward NSAlignmentOptions = 3840
 	NSAlignAllEdgesNearest NSAlignmentOptions = 983040
 )
 
 func (e NSAlignmentOptions) String() string {
 	var parts []string
-	if e&NSAlignMinXInward != 0 { parts = append(parts, "NSAlignMinXInward") }
-	if e&NSAlignMinYInward != 0 { parts = append(parts, "NSAlignMinYInward") }
-	if e&NSAlignMaxXInward != 0 { parts = append(parts, "NSAlignMaxXInward") }
-	if e&NSAlignMaxYInward != 0 { parts = append(parts, "NSAlignMaxYInward") }
-	if e&NSAlignWidthInward != 0 { parts = append(parts, "NSAlignWidthInward") }
-	if e&NSAlignHeightInward != 0 { parts = append(parts, "NSAlignHeightInward") }
-	if e&NSAlignMinXOutward != 0 { parts = append(parts, "NSAlignMinXOutward") }
-	if e&NSAlignMinYOutward != 0 { parts = append(parts, "NSAlignMinYOutward") }
-	if e&NSAlignMaxXOutward != 0 { parts = append(parts, "NSAlignMaxXOutward") }
-	if e&NSAlignMaxYOutward != 0 { parts = append(parts, "NSAlignMaxYOutward") }
-	if e&NSAlignWidthOutward != 0 { parts = append(parts, "NSAlignWidthOutward") }
-	if e&NSAlignHeightOutward != 0 { parts = append(parts, "NSAlignHeightOutward") }
-	if e&NSAlignMinXNearest != 0 { parts = append(parts, "NSAlignMinXNearest") }
-	if e&NSAlignMinYNearest != 0 { parts = append(parts, "NSAlignMinYNearest") }
-	if e&NSAlignMaxXNearest != 0 { parts = append(parts, "NSAlignMaxXNearest") }
-	if e&NSAlignMaxYNearest != 0 { parts = append(parts, "NSAlignMaxYNearest") }
-	if e&NSAlignWidthNearest != 0 { parts = append(parts, "NSAlignWidthNearest") }
-	if e&NSAlignHeightNearest != 0 { parts = append(parts, "NSAlignHeightNearest") }
-	if e&NSAlignRectFlipped != 0 { parts = append(parts, "NSAlignRectFlipped") }
-	if e&NSAlignAllEdgesInward != 0 { parts = append(parts, "NSAlignAllEdgesInward") }
-	if e&NSAlignAllEdgesOutward != 0 { parts = append(parts, "NSAlignAllEdgesOutward") }
-	if e&NSAlignAllEdgesNearest != 0 { parts = append(parts, "NSAlignAllEdgesNearest") }
-	if len(parts) == 0 { return "0" }
+	if e&NSAlignMinXInward != 0 {
+		parts = append(parts, "NSAlignMinXInward")
+	}
+	if e&NSAlignMinYInward != 0 {
+		parts = append(parts, "NSAlignMinYInward")
+	}
+	if e&NSAlignMaxXInward != 0 {
+		parts = append(parts, "NSAlignMaxXInward")
+	}
+	if e&NSAlignMaxYInward != 0 {
+		parts = append(parts, "NSAlignMaxYInward")
+	}
+	if e&NSAlignWidthInward != 0 {
+		parts = append(parts, "NSAlignWidthInward")
+	}
+	if e&NSAlignHeightInward != 0 {
+		parts = append(parts, "NSAlignHeightInward")
+	}
+	if e&NSAlignMinXOutward != 0 {
+		parts = append(parts, "NSAlignMinXOutward")
+	}
+	if e&NSAlignMinYOutward != 0 {
+		parts = append(parts, "NSAlignMinYOutward")
+	}
+	if e&NSAlignMaxXOutward != 0 {
+		parts = append(parts, "NSAlignMaxXOutward")
+	}
+	if e&NSAlignMaxYOutward != 0 {
+		parts = append(parts, "NSAlignMaxYOutward")
+	}
+	if e&NSAlignWidthOutward != 0 {
+		parts = append(parts, "NSAlignWidthOutward")
+	}
+	if e&NSAlignHeightOutward != 0 {
+		parts = append(parts, "NSAlignHeightOutward")
+	}
+	if e&NSAlignMinXNearest != 0 {
+		parts = append(parts, "NSAlignMinXNearest")
+	}
+	if e&NSAlignMinYNearest != 0 {
+		parts = append(parts, "NSAlignMinYNearest")
+	}
+	if e&NSAlignMaxXNearest != 0 {
+		parts = append(parts, "NSAlignMaxXNearest")
+	}
+	if e&NSAlignMaxYNearest != 0 {
+		parts = append(parts, "NSAlignMaxYNearest")
+	}
+	if e&NSAlignWidthNearest != 0 {
+		parts = append(parts, "NSAlignWidthNearest")
+	}
+	if e&NSAlignHeightNearest != 0 {
+		parts = append(parts, "NSAlignHeightNearest")
+	}
+	if e&NSAlignRectFlipped != 0 {
+		parts = append(parts, "NSAlignRectFlipped")
+	}
+	if e&NSAlignAllEdgesInward != 0 {
+		parts = append(parts, "NSAlignAllEdgesInward")
+	}
+	if e&NSAlignAllEdgesOutward != 0 {
+		parts = append(parts, "NSAlignAllEdgesOutward")
+	}
+	if e&NSAlignAllEdgesNearest != 0 {
+		parts = append(parts, "NSAlignAllEdgesNearest")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSAppleEventSendOptions uint64
 
 const (
-	NSAppleEventSendNoReply NSAppleEventSendOptions = 1
-	NSAppleEventSendQueueReply NSAppleEventSendOptions = 2
-	NSAppleEventSendWaitForReply NSAppleEventSendOptions = 3
-	NSAppleEventSendNeverInteract NSAppleEventSendOptions = 16
-	NSAppleEventSendCanInteract NSAppleEventSendOptions = 32
+	NSAppleEventSendNoReply        NSAppleEventSendOptions = 1
+	NSAppleEventSendQueueReply     NSAppleEventSendOptions = 2
+	NSAppleEventSendWaitForReply   NSAppleEventSendOptions = 3
+	NSAppleEventSendNeverInteract  NSAppleEventSendOptions = 16
+	NSAppleEventSendCanInteract    NSAppleEventSendOptions = 32
 	NSAppleEventSendAlwaysInteract NSAppleEventSendOptions = 48
 	NSAppleEventSendCanSwitchLayer NSAppleEventSendOptions = 64
-	NSAppleEventSendDontRecord NSAppleEventSendOptions = 4096
-	NSAppleEventSendDontExecute NSAppleEventSendOptions = 8192
-	NSAppleEventSendDontAnnotate NSAppleEventSendOptions = 65536
+	NSAppleEventSendDontRecord     NSAppleEventSendOptions = 4096
+	NSAppleEventSendDontExecute    NSAppleEventSendOptions = 8192
+	NSAppleEventSendDontAnnotate   NSAppleEventSendOptions = 65536
 	NSAppleEventSendDefaultOptions NSAppleEventSendOptions = 35
 )
 
 func (e NSAppleEventSendOptions) String() string {
 	var parts []string
-	if e&NSAppleEventSendNoReply != 0 { parts = append(parts, "NSAppleEventSendNoReply") }
-	if e&NSAppleEventSendQueueReply != 0 { parts = append(parts, "NSAppleEventSendQueueReply") }
-	if e&NSAppleEventSendWaitForReply != 0 { parts = append(parts, "NSAppleEventSendWaitForReply") }
-	if e&NSAppleEventSendNeverInteract != 0 { parts = append(parts, "NSAppleEventSendNeverInteract") }
-	if e&NSAppleEventSendCanInteract != 0 { parts = append(parts, "NSAppleEventSendCanInteract") }
-	if e&NSAppleEventSendAlwaysInteract != 0 { parts = append(parts, "NSAppleEventSendAlwaysInteract") }
-	if e&NSAppleEventSendCanSwitchLayer != 0 { parts = append(parts, "NSAppleEventSendCanSwitchLayer") }
-	if e&NSAppleEventSendDontRecord != 0 { parts = append(parts, "NSAppleEventSendDontRecord") }
-	if e&NSAppleEventSendDontExecute != 0 { parts = append(parts, "NSAppleEventSendDontExecute") }
-	if e&NSAppleEventSendDontAnnotate != 0 { parts = append(parts, "NSAppleEventSendDontAnnotate") }
-	if e&NSAppleEventSendDefaultOptions != 0 { parts = append(parts, "NSAppleEventSendDefaultOptions") }
-	if len(parts) == 0 { return "0" }
+	if e&NSAppleEventSendNoReply != 0 {
+		parts = append(parts, "NSAppleEventSendNoReply")
+	}
+	if e&NSAppleEventSendQueueReply != 0 {
+		parts = append(parts, "NSAppleEventSendQueueReply")
+	}
+	if e&NSAppleEventSendWaitForReply != 0 {
+		parts = append(parts, "NSAppleEventSendWaitForReply")
+	}
+	if e&NSAppleEventSendNeverInteract != 0 {
+		parts = append(parts, "NSAppleEventSendNeverInteract")
+	}
+	if e&NSAppleEventSendCanInteract != 0 {
+		parts = append(parts, "NSAppleEventSendCanInteract")
+	}
+	if e&NSAppleEventSendAlwaysInteract != 0 {
+		parts = append(parts, "NSAppleEventSendAlwaysInteract")
+	}
+	if e&NSAppleEventSendCanSwitchLayer != 0 {
+		parts = append(parts, "NSAppleEventSendCanSwitchLayer")
+	}
+	if e&NSAppleEventSendDontRecord != 0 {
+		parts = append(parts, "NSAppleEventSendDontRecord")
+	}
+	if e&NSAppleEventSendDontExecute != 0 {
+		parts = append(parts, "NSAppleEventSendDontExecute")
+	}
+	if e&NSAppleEventSendDontAnnotate != 0 {
+		parts = append(parts, "NSAppleEventSendDontAnnotate")
+	}
+	if e&NSAppleEventSendDefaultOptions != 0 {
+		parts = append(parts, "NSAppleEventSendDefaultOptions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSAttributedStringEnumerationOptions uint64
 
 const (
-	NSAttributedStringEnumerationReverse NSAttributedStringEnumerationOptions = 2
+	NSAttributedStringEnumerationReverse                          NSAttributedStringEnumerationOptions = 2
 	NSAttributedStringEnumerationLongestEffectiveRangeNotRequired NSAttributedStringEnumerationOptions = 1048576
 )
 
 func (e NSAttributedStringEnumerationOptions) String() string {
 	var parts []string
-	if e&NSAttributedStringEnumerationReverse != 0 { parts = append(parts, "NSAttributedStringEnumerationReverse") }
-	if e&NSAttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 { parts = append(parts, "NSAttributedStringEnumerationLongestEffectiveRangeNotRequired") }
-	if len(parts) == 0 { return "0" }
+	if e&NSAttributedStringEnumerationReverse != 0 {
+		parts = append(parts, "NSAttributedStringEnumerationReverse")
+	}
+	if e&NSAttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 {
+		parts = append(parts, "NSAttributedStringEnumerationLongestEffectiveRangeNotRequired")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -204,22 +304,28 @@ type NSAttributedStringFormattingOptions uint64
 
 const (
 	NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging NSAttributedStringFormattingOptions = 1
-	NSAttributedStringFormattingApplyReplacementIndexAttribute NSAttributedStringFormattingOptions = 2
+	NSAttributedStringFormattingApplyReplacementIndexAttribute         NSAttributedStringFormattingOptions = 2
 )
 
 func (e NSAttributedStringFormattingOptions) String() string {
 	var parts []string
-	if e&NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging != 0 { parts = append(parts, "NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging") }
-	if e&NSAttributedStringFormattingApplyReplacementIndexAttribute != 0 { parts = append(parts, "NSAttributedStringFormattingApplyReplacementIndexAttribute") }
-	if len(parts) == 0 { return "0" }
+	if e&NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging != 0 {
+		parts = append(parts, "NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging")
+	}
+	if e&NSAttributedStringFormattingApplyReplacementIndexAttribute != 0 {
+		parts = append(parts, "NSAttributedStringFormattingApplyReplacementIndexAttribute")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSAttributedStringMarkdownInterpretedSyntax int64
 
 const (
-	NSAttributedStringMarkdownInterpretedSyntaxFull NSAttributedStringMarkdownInterpretedSyntax = 0
-	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly NSAttributedStringMarkdownInterpretedSyntax = 1
+	NSAttributedStringMarkdownInterpretedSyntaxFull                           NSAttributedStringMarkdownInterpretedSyntax = 0
+	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly                     NSAttributedStringMarkdownInterpretedSyntax = 1
 	NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace NSAttributedStringMarkdownInterpretedSyntax = 2
 )
 
@@ -239,7 +345,7 @@ func (e NSAttributedStringMarkdownInterpretedSyntax) String() string {
 type NSAttributedStringMarkdownParsingFailurePolicy int64
 
 const (
-	NSAttributedStringMarkdownParsingFailureReturnError NSAttributedStringMarkdownParsingFailurePolicy = 0
+	NSAttributedStringMarkdownParsingFailureReturnError                     NSAttributedStringMarkdownParsingFailurePolicy = 0
 	NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible NSAttributedStringMarkdownParsingFailurePolicy = 1
 )
 
@@ -275,27 +381,35 @@ func (e NSBackgroundActivityResult) String() string {
 type NSBinarySearchingOptions uint64
 
 const (
-	NSBinarySearchingFirstEqual NSBinarySearchingOptions = 256
-	NSBinarySearchingLastEqual NSBinarySearchingOptions = 512
+	NSBinarySearchingFirstEqual     NSBinarySearchingOptions = 256
+	NSBinarySearchingLastEqual      NSBinarySearchingOptions = 512
 	NSBinarySearchingInsertionIndex NSBinarySearchingOptions = 1024
 )
 
 func (e NSBinarySearchingOptions) String() string {
 	var parts []string
-	if e&NSBinarySearchingFirstEqual != 0 { parts = append(parts, "NSBinarySearchingFirstEqual") }
-	if e&NSBinarySearchingLastEqual != 0 { parts = append(parts, "NSBinarySearchingLastEqual") }
-	if e&NSBinarySearchingInsertionIndex != 0 { parts = append(parts, "NSBinarySearchingInsertionIndex") }
-	if len(parts) == 0 { return "0" }
+	if e&NSBinarySearchingFirstEqual != 0 {
+		parts = append(parts, "NSBinarySearchingFirstEqual")
+	}
+	if e&NSBinarySearchingLastEqual != 0 {
+		parts = append(parts, "NSBinarySearchingLastEqual")
+	}
+	if e&NSBinarySearchingInsertionIndex != 0 {
+		parts = append(parts, "NSBinarySearchingInsertionIndex")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSByteCountFormatterCountStyle int64
 
 const (
-	NSByteCountFormatterCountStyleFile NSByteCountFormatterCountStyle = 0
-	NSByteCountFormatterCountStyleMemory NSByteCountFormatterCountStyle = 1
+	NSByteCountFormatterCountStyleFile    NSByteCountFormatterCountStyle = 0
+	NSByteCountFormatterCountStyleMemory  NSByteCountFormatterCountStyle = 1
 	NSByteCountFormatterCountStyleDecimal NSByteCountFormatterCountStyle = 2
-	NSByteCountFormatterCountStyleBinary NSByteCountFormatterCountStyle = 3
+	NSByteCountFormatterCountStyleBinary  NSByteCountFormatterCountStyle = 3
 )
 
 func (e NSByteCountFormatterCountStyle) String() string {
@@ -316,43 +430,65 @@ func (e NSByteCountFormatterCountStyle) String() string {
 type NSByteCountFormatterUnits uint64
 
 const (
-	NSByteCountFormatterUseDefault NSByteCountFormatterUnits = 0
-	NSByteCountFormatterUseBytes NSByteCountFormatterUnits = 1
-	NSByteCountFormatterUseKB NSByteCountFormatterUnits = 2
-	NSByteCountFormatterUseMB NSByteCountFormatterUnits = 4
-	NSByteCountFormatterUseGB NSByteCountFormatterUnits = 8
-	NSByteCountFormatterUseTB NSByteCountFormatterUnits = 16
-	NSByteCountFormatterUsePB NSByteCountFormatterUnits = 32
-	NSByteCountFormatterUseEB NSByteCountFormatterUnits = 64
-	NSByteCountFormatterUseZB NSByteCountFormatterUnits = 128
+	NSByteCountFormatterUseDefault    NSByteCountFormatterUnits = 0
+	NSByteCountFormatterUseBytes      NSByteCountFormatterUnits = 1
+	NSByteCountFormatterUseKB         NSByteCountFormatterUnits = 2
+	NSByteCountFormatterUseMB         NSByteCountFormatterUnits = 4
+	NSByteCountFormatterUseGB         NSByteCountFormatterUnits = 8
+	NSByteCountFormatterUseTB         NSByteCountFormatterUnits = 16
+	NSByteCountFormatterUsePB         NSByteCountFormatterUnits = 32
+	NSByteCountFormatterUseEB         NSByteCountFormatterUnits = 64
+	NSByteCountFormatterUseZB         NSByteCountFormatterUnits = 128
 	NSByteCountFormatterUseYBOrHigher NSByteCountFormatterUnits = 65280
-	NSByteCountFormatterUseAll NSByteCountFormatterUnits = 65535
+	NSByteCountFormatterUseAll        NSByteCountFormatterUnits = 65535
 )
 
 func (e NSByteCountFormatterUnits) String() string {
 	var parts []string
-	if e&NSByteCountFormatterUseBytes != 0 { parts = append(parts, "NSByteCountFormatterUseBytes") }
-	if e&NSByteCountFormatterUseKB != 0 { parts = append(parts, "NSByteCountFormatterUseKB") }
-	if e&NSByteCountFormatterUseMB != 0 { parts = append(parts, "NSByteCountFormatterUseMB") }
-	if e&NSByteCountFormatterUseGB != 0 { parts = append(parts, "NSByteCountFormatterUseGB") }
-	if e&NSByteCountFormatterUseTB != 0 { parts = append(parts, "NSByteCountFormatterUseTB") }
-	if e&NSByteCountFormatterUsePB != 0 { parts = append(parts, "NSByteCountFormatterUsePB") }
-	if e&NSByteCountFormatterUseEB != 0 { parts = append(parts, "NSByteCountFormatterUseEB") }
-	if e&NSByteCountFormatterUseZB != 0 { parts = append(parts, "NSByteCountFormatterUseZB") }
-	if e&NSByteCountFormatterUseYBOrHigher != 0 { parts = append(parts, "NSByteCountFormatterUseYBOrHigher") }
-	if e&NSByteCountFormatterUseAll != 0 { parts = append(parts, "NSByteCountFormatterUseAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSByteCountFormatterUseBytes != 0 {
+		parts = append(parts, "NSByteCountFormatterUseBytes")
+	}
+	if e&NSByteCountFormatterUseKB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseKB")
+	}
+	if e&NSByteCountFormatterUseMB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseMB")
+	}
+	if e&NSByteCountFormatterUseGB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseGB")
+	}
+	if e&NSByteCountFormatterUseTB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseTB")
+	}
+	if e&NSByteCountFormatterUsePB != 0 {
+		parts = append(parts, "NSByteCountFormatterUsePB")
+	}
+	if e&NSByteCountFormatterUseEB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseEB")
+	}
+	if e&NSByteCountFormatterUseZB != 0 {
+		parts = append(parts, "NSByteCountFormatterUseZB")
+	}
+	if e&NSByteCountFormatterUseYBOrHigher != 0 {
+		parts = append(parts, "NSByteCountFormatterUseYBOrHigher")
+	}
+	if e&NSByteCountFormatterUseAll != 0 {
+		parts = append(parts, "NSByteCountFormatterUseAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSCalculationError uint64
 
 const (
-	NSCalculationNoError NSCalculationError = 0
+	NSCalculationNoError         NSCalculationError = 0
 	NSCalculationLossOfPrecision NSCalculationError = 1
-	NSCalculationUnderflow NSCalculationError = 2
-	NSCalculationOverflow NSCalculationError = 3
-	NSCalculationDivideByZero NSCalculationError = 4
+	NSCalculationUnderflow       NSCalculationError = 2
+	NSCalculationOverflow        NSCalculationError = 3
+	NSCalculationDivideByZero    NSCalculationError = 4
 )
 
 func (e NSCalculationError) String() string {
@@ -375,108 +511,198 @@ func (e NSCalculationError) String() string {
 type NSCalendarOptions uint64
 
 const (
-	NSCalendarWrapComponents NSCalendarOptions = 1
-	NSCalendarMatchStrictly NSCalendarOptions = 2
-	NSCalendarSearchBackwards NSCalendarOptions = 4
+	NSCalendarWrapComponents                          NSCalendarOptions = 1
+	NSCalendarMatchStrictly                           NSCalendarOptions = 2
+	NSCalendarSearchBackwards                         NSCalendarOptions = 4
 	NSCalendarMatchPreviousTimePreservingSmallerUnits NSCalendarOptions = 256
-	NSCalendarMatchNextTimePreservingSmallerUnits NSCalendarOptions = 512
-	NSCalendarMatchNextTime NSCalendarOptions = 1024
-	NSCalendarMatchFirst NSCalendarOptions = 4096
-	NSCalendarMatchLast NSCalendarOptions = 8192
+	NSCalendarMatchNextTimePreservingSmallerUnits     NSCalendarOptions = 512
+	NSCalendarMatchNextTime                           NSCalendarOptions = 1024
+	NSCalendarMatchFirst                              NSCalendarOptions = 4096
+	NSCalendarMatchLast                               NSCalendarOptions = 8192
 )
 
 func (e NSCalendarOptions) String() string {
 	var parts []string
-	if e&NSCalendarWrapComponents != 0 { parts = append(parts, "NSCalendarWrapComponents") }
-	if e&NSCalendarMatchStrictly != 0 { parts = append(parts, "NSCalendarMatchStrictly") }
-	if e&NSCalendarSearchBackwards != 0 { parts = append(parts, "NSCalendarSearchBackwards") }
-	if e&NSCalendarMatchPreviousTimePreservingSmallerUnits != 0 { parts = append(parts, "NSCalendarMatchPreviousTimePreservingSmallerUnits") }
-	if e&NSCalendarMatchNextTimePreservingSmallerUnits != 0 { parts = append(parts, "NSCalendarMatchNextTimePreservingSmallerUnits") }
-	if e&NSCalendarMatchNextTime != 0 { parts = append(parts, "NSCalendarMatchNextTime") }
-	if e&NSCalendarMatchFirst != 0 { parts = append(parts, "NSCalendarMatchFirst") }
-	if e&NSCalendarMatchLast != 0 { parts = append(parts, "NSCalendarMatchLast") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCalendarWrapComponents != 0 {
+		parts = append(parts, "NSCalendarWrapComponents")
+	}
+	if e&NSCalendarMatchStrictly != 0 {
+		parts = append(parts, "NSCalendarMatchStrictly")
+	}
+	if e&NSCalendarSearchBackwards != 0 {
+		parts = append(parts, "NSCalendarSearchBackwards")
+	}
+	if e&NSCalendarMatchPreviousTimePreservingSmallerUnits != 0 {
+		parts = append(parts, "NSCalendarMatchPreviousTimePreservingSmallerUnits")
+	}
+	if e&NSCalendarMatchNextTimePreservingSmallerUnits != 0 {
+		parts = append(parts, "NSCalendarMatchNextTimePreservingSmallerUnits")
+	}
+	if e&NSCalendarMatchNextTime != 0 {
+		parts = append(parts, "NSCalendarMatchNextTime")
+	}
+	if e&NSCalendarMatchFirst != 0 {
+		parts = append(parts, "NSCalendarMatchFirst")
+	}
+	if e&NSCalendarMatchLast != 0 {
+		parts = append(parts, "NSCalendarMatchLast")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSCalendarUnit uint64
 
 const (
-	NSCalendarUnitEra NSCalendarUnit = 2
-	NSCalendarUnitYear NSCalendarUnit = 4
-	NSCalendarUnitMonth NSCalendarUnit = 8
-	NSCalendarUnitDay NSCalendarUnit = 16
-	NSCalendarUnitHour NSCalendarUnit = 32
-	NSCalendarUnitMinute NSCalendarUnit = 64
-	NSCalendarUnitSecond NSCalendarUnit = 128
-	NSCalendarUnitWeekday NSCalendarUnit = 512
-	NSCalendarUnitWeekdayOrdinal NSCalendarUnit = 1024
-	NSCalendarUnitQuarter NSCalendarUnit = 2048
-	NSCalendarUnitWeekOfMonth NSCalendarUnit = 4096
-	NSCalendarUnitWeekOfYear NSCalendarUnit = 8192
+	NSCalendarUnitEra               NSCalendarUnit = 2
+	NSCalendarUnitYear              NSCalendarUnit = 4
+	NSCalendarUnitMonth             NSCalendarUnit = 8
+	NSCalendarUnitDay               NSCalendarUnit = 16
+	NSCalendarUnitHour              NSCalendarUnit = 32
+	NSCalendarUnitMinute            NSCalendarUnit = 64
+	NSCalendarUnitSecond            NSCalendarUnit = 128
+	NSCalendarUnitWeekday           NSCalendarUnit = 512
+	NSCalendarUnitWeekdayOrdinal    NSCalendarUnit = 1024
+	NSCalendarUnitQuarter           NSCalendarUnit = 2048
+	NSCalendarUnitWeekOfMonth       NSCalendarUnit = 4096
+	NSCalendarUnitWeekOfYear        NSCalendarUnit = 8192
 	NSCalendarUnitYearForWeekOfYear NSCalendarUnit = 16384
-	NSCalendarUnitNanosecond NSCalendarUnit = 32768
-	NSCalendarUnitDayOfYear NSCalendarUnit = 65536
-	NSCalendarUnitCalendar NSCalendarUnit = 1048576
-	NSCalendarUnitTimeZone NSCalendarUnit = 2097152
-	NSCalendarUnitIsLeapMonth NSCalendarUnit = 1073741824
-	NSCalendarUnitIsRepeatedDay NSCalendarUnit = 2147483648
-	NSEraCalendarUnit NSCalendarUnit = 2
-	NSYearCalendarUnit NSCalendarUnit = 4
-	NSMonthCalendarUnit NSCalendarUnit = 8
-	NSDayCalendarUnit NSCalendarUnit = 16
-	NSHourCalendarUnit NSCalendarUnit = 32
-	NSMinuteCalendarUnit NSCalendarUnit = 64
-	NSSecondCalendarUnit NSCalendarUnit = 128
-	NSWeekCalendarUnit NSCalendarUnit = 256
-	NSWeekdayCalendarUnit NSCalendarUnit = 512
-	NSWeekdayOrdinalCalendarUnit NSCalendarUnit = 1024
-	NSQuarterCalendarUnit NSCalendarUnit = 2048
-	NSWeekOfMonthCalendarUnit NSCalendarUnit = 4096
-	NSWeekOfYearCalendarUnit NSCalendarUnit = 8192
+	NSCalendarUnitNanosecond        NSCalendarUnit = 32768
+	NSCalendarUnitDayOfYear         NSCalendarUnit = 65536
+	NSCalendarUnitCalendar          NSCalendarUnit = 1048576
+	NSCalendarUnitTimeZone          NSCalendarUnit = 2097152
+	NSCalendarUnitIsLeapMonth       NSCalendarUnit = 1073741824
+	NSCalendarUnitIsRepeatedDay     NSCalendarUnit = 2147483648
+	NSEraCalendarUnit               NSCalendarUnit = 2
+	NSYearCalendarUnit              NSCalendarUnit = 4
+	NSMonthCalendarUnit             NSCalendarUnit = 8
+	NSDayCalendarUnit               NSCalendarUnit = 16
+	NSHourCalendarUnit              NSCalendarUnit = 32
+	NSMinuteCalendarUnit            NSCalendarUnit = 64
+	NSSecondCalendarUnit            NSCalendarUnit = 128
+	NSWeekCalendarUnit              NSCalendarUnit = 256
+	NSWeekdayCalendarUnit           NSCalendarUnit = 512
+	NSWeekdayOrdinalCalendarUnit    NSCalendarUnit = 1024
+	NSQuarterCalendarUnit           NSCalendarUnit = 2048
+	NSWeekOfMonthCalendarUnit       NSCalendarUnit = 4096
+	NSWeekOfYearCalendarUnit        NSCalendarUnit = 8192
 	NSYearForWeekOfYearCalendarUnit NSCalendarUnit = 16384
-	NSCalendarCalendarUnit NSCalendarUnit = 1048576
-	NSTimeZoneCalendarUnit NSCalendarUnit = 2097152
+	NSCalendarCalendarUnit          NSCalendarUnit = 1048576
+	NSTimeZoneCalendarUnit          NSCalendarUnit = 2097152
 )
 
 func (e NSCalendarUnit) String() string {
 	var parts []string
-	if e&NSCalendarUnitEra != 0 { parts = append(parts, "NSCalendarUnitEra") }
-	if e&NSCalendarUnitYear != 0 { parts = append(parts, "NSCalendarUnitYear") }
-	if e&NSCalendarUnitMonth != 0 { parts = append(parts, "NSCalendarUnitMonth") }
-	if e&NSCalendarUnitDay != 0 { parts = append(parts, "NSCalendarUnitDay") }
-	if e&NSCalendarUnitHour != 0 { parts = append(parts, "NSCalendarUnitHour") }
-	if e&NSCalendarUnitMinute != 0 { parts = append(parts, "NSCalendarUnitMinute") }
-	if e&NSCalendarUnitSecond != 0 { parts = append(parts, "NSCalendarUnitSecond") }
-	if e&NSCalendarUnitWeekday != 0 { parts = append(parts, "NSCalendarUnitWeekday") }
-	if e&NSCalendarUnitWeekdayOrdinal != 0 { parts = append(parts, "NSCalendarUnitWeekdayOrdinal") }
-	if e&NSCalendarUnitQuarter != 0 { parts = append(parts, "NSCalendarUnitQuarter") }
-	if e&NSCalendarUnitWeekOfMonth != 0 { parts = append(parts, "NSCalendarUnitWeekOfMonth") }
-	if e&NSCalendarUnitWeekOfYear != 0 { parts = append(parts, "NSCalendarUnitWeekOfYear") }
-	if e&NSCalendarUnitYearForWeekOfYear != 0 { parts = append(parts, "NSCalendarUnitYearForWeekOfYear") }
-	if e&NSCalendarUnitNanosecond != 0 { parts = append(parts, "NSCalendarUnitNanosecond") }
-	if e&NSCalendarUnitDayOfYear != 0 { parts = append(parts, "NSCalendarUnitDayOfYear") }
-	if e&NSCalendarUnitCalendar != 0 { parts = append(parts, "NSCalendarUnitCalendar") }
-	if e&NSCalendarUnitTimeZone != 0 { parts = append(parts, "NSCalendarUnitTimeZone") }
-	if e&NSCalendarUnitIsLeapMonth != 0 { parts = append(parts, "NSCalendarUnitIsLeapMonth") }
-	if e&NSCalendarUnitIsRepeatedDay != 0 { parts = append(parts, "NSCalendarUnitIsRepeatedDay") }
-	if e&NSEraCalendarUnit != 0 { parts = append(parts, "NSEraCalendarUnit") }
-	if e&NSYearCalendarUnit != 0 { parts = append(parts, "NSYearCalendarUnit") }
-	if e&NSMonthCalendarUnit != 0 { parts = append(parts, "NSMonthCalendarUnit") }
-	if e&NSDayCalendarUnit != 0 { parts = append(parts, "NSDayCalendarUnit") }
-	if e&NSHourCalendarUnit != 0 { parts = append(parts, "NSHourCalendarUnit") }
-	if e&NSMinuteCalendarUnit != 0 { parts = append(parts, "NSMinuteCalendarUnit") }
-	if e&NSSecondCalendarUnit != 0 { parts = append(parts, "NSSecondCalendarUnit") }
-	if e&NSWeekCalendarUnit != 0 { parts = append(parts, "NSWeekCalendarUnit") }
-	if e&NSWeekdayCalendarUnit != 0 { parts = append(parts, "NSWeekdayCalendarUnit") }
-	if e&NSWeekdayOrdinalCalendarUnit != 0 { parts = append(parts, "NSWeekdayOrdinalCalendarUnit") }
-	if e&NSQuarterCalendarUnit != 0 { parts = append(parts, "NSQuarterCalendarUnit") }
-	if e&NSWeekOfMonthCalendarUnit != 0 { parts = append(parts, "NSWeekOfMonthCalendarUnit") }
-	if e&NSWeekOfYearCalendarUnit != 0 { parts = append(parts, "NSWeekOfYearCalendarUnit") }
-	if e&NSYearForWeekOfYearCalendarUnit != 0 { parts = append(parts, "NSYearForWeekOfYearCalendarUnit") }
-	if e&NSCalendarCalendarUnit != 0 { parts = append(parts, "NSCalendarCalendarUnit") }
-	if e&NSTimeZoneCalendarUnit != 0 { parts = append(parts, "NSTimeZoneCalendarUnit") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCalendarUnitEra != 0 {
+		parts = append(parts, "NSCalendarUnitEra")
+	}
+	if e&NSCalendarUnitYear != 0 {
+		parts = append(parts, "NSCalendarUnitYear")
+	}
+	if e&NSCalendarUnitMonth != 0 {
+		parts = append(parts, "NSCalendarUnitMonth")
+	}
+	if e&NSCalendarUnitDay != 0 {
+		parts = append(parts, "NSCalendarUnitDay")
+	}
+	if e&NSCalendarUnitHour != 0 {
+		parts = append(parts, "NSCalendarUnitHour")
+	}
+	if e&NSCalendarUnitMinute != 0 {
+		parts = append(parts, "NSCalendarUnitMinute")
+	}
+	if e&NSCalendarUnitSecond != 0 {
+		parts = append(parts, "NSCalendarUnitSecond")
+	}
+	if e&NSCalendarUnitWeekday != 0 {
+		parts = append(parts, "NSCalendarUnitWeekday")
+	}
+	if e&NSCalendarUnitWeekdayOrdinal != 0 {
+		parts = append(parts, "NSCalendarUnitWeekdayOrdinal")
+	}
+	if e&NSCalendarUnitQuarter != 0 {
+		parts = append(parts, "NSCalendarUnitQuarter")
+	}
+	if e&NSCalendarUnitWeekOfMonth != 0 {
+		parts = append(parts, "NSCalendarUnitWeekOfMonth")
+	}
+	if e&NSCalendarUnitWeekOfYear != 0 {
+		parts = append(parts, "NSCalendarUnitWeekOfYear")
+	}
+	if e&NSCalendarUnitYearForWeekOfYear != 0 {
+		parts = append(parts, "NSCalendarUnitYearForWeekOfYear")
+	}
+	if e&NSCalendarUnitNanosecond != 0 {
+		parts = append(parts, "NSCalendarUnitNanosecond")
+	}
+	if e&NSCalendarUnitDayOfYear != 0 {
+		parts = append(parts, "NSCalendarUnitDayOfYear")
+	}
+	if e&NSCalendarUnitCalendar != 0 {
+		parts = append(parts, "NSCalendarUnitCalendar")
+	}
+	if e&NSCalendarUnitTimeZone != 0 {
+		parts = append(parts, "NSCalendarUnitTimeZone")
+	}
+	if e&NSCalendarUnitIsLeapMonth != 0 {
+		parts = append(parts, "NSCalendarUnitIsLeapMonth")
+	}
+	if e&NSCalendarUnitIsRepeatedDay != 0 {
+		parts = append(parts, "NSCalendarUnitIsRepeatedDay")
+	}
+	if e&NSEraCalendarUnit != 0 {
+		parts = append(parts, "NSEraCalendarUnit")
+	}
+	if e&NSYearCalendarUnit != 0 {
+		parts = append(parts, "NSYearCalendarUnit")
+	}
+	if e&NSMonthCalendarUnit != 0 {
+		parts = append(parts, "NSMonthCalendarUnit")
+	}
+	if e&NSDayCalendarUnit != 0 {
+		parts = append(parts, "NSDayCalendarUnit")
+	}
+	if e&NSHourCalendarUnit != 0 {
+		parts = append(parts, "NSHourCalendarUnit")
+	}
+	if e&NSMinuteCalendarUnit != 0 {
+		parts = append(parts, "NSMinuteCalendarUnit")
+	}
+	if e&NSSecondCalendarUnit != 0 {
+		parts = append(parts, "NSSecondCalendarUnit")
+	}
+	if e&NSWeekCalendarUnit != 0 {
+		parts = append(parts, "NSWeekCalendarUnit")
+	}
+	if e&NSWeekdayCalendarUnit != 0 {
+		parts = append(parts, "NSWeekdayCalendarUnit")
+	}
+	if e&NSWeekdayOrdinalCalendarUnit != 0 {
+		parts = append(parts, "NSWeekdayOrdinalCalendarUnit")
+	}
+	if e&NSQuarterCalendarUnit != 0 {
+		parts = append(parts, "NSQuarterCalendarUnit")
+	}
+	if e&NSWeekOfMonthCalendarUnit != 0 {
+		parts = append(parts, "NSWeekOfMonthCalendarUnit")
+	}
+	if e&NSWeekOfYearCalendarUnit != 0 {
+		parts = append(parts, "NSWeekOfYearCalendarUnit")
+	}
+	if e&NSYearForWeekOfYearCalendarUnit != 0 {
+		parts = append(parts, "NSYearForWeekOfYearCalendarUnit")
+	}
+	if e&NSCalendarCalendarUnit != 0 {
+		parts = append(parts, "NSCalendarCalendarUnit")
+	}
+	if e&NSTimeZoneCalendarUnit != 0 {
+		parts = append(parts, "NSTimeZoneCalendarUnit")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -502,8 +728,8 @@ type NSComparisonPredicateModifier uint64
 
 const (
 	NSDirectPredicateModifier NSComparisonPredicateModifier = 0
-	NSAllPredicateModifier NSComparisonPredicateModifier = 1
-	NSAnyPredicateModifier NSComparisonPredicateModifier = 2
+	NSAllPredicateModifier    NSComparisonPredicateModifier = 1
+	NSAnyPredicateModifier    NSComparisonPredicateModifier = 2
 )
 
 func (e NSComparisonPredicateModifier) String() string {
@@ -522,25 +748,33 @@ func (e NSComparisonPredicateModifier) String() string {
 type NSComparisonPredicateOptions uint64
 
 const (
-	NSCaseInsensitivePredicateOption NSComparisonPredicateOptions = 1
+	NSCaseInsensitivePredicateOption      NSComparisonPredicateOptions = 1
 	NSDiacriticInsensitivePredicateOption NSComparisonPredicateOptions = 2
-	NSNormalizedPredicateOption NSComparisonPredicateOptions = 4
+	NSNormalizedPredicateOption           NSComparisonPredicateOptions = 4
 )
 
 func (e NSComparisonPredicateOptions) String() string {
 	var parts []string
-	if e&NSCaseInsensitivePredicateOption != 0 { parts = append(parts, "NSCaseInsensitivePredicateOption") }
-	if e&NSDiacriticInsensitivePredicateOption != 0 { parts = append(parts, "NSDiacriticInsensitivePredicateOption") }
-	if e&NSNormalizedPredicateOption != 0 { parts = append(parts, "NSNormalizedPredicateOption") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCaseInsensitivePredicateOption != 0 {
+		parts = append(parts, "NSCaseInsensitivePredicateOption")
+	}
+	if e&NSDiacriticInsensitivePredicateOption != 0 {
+		parts = append(parts, "NSDiacriticInsensitivePredicateOption")
+	}
+	if e&NSNormalizedPredicateOption != 0 {
+		parts = append(parts, "NSNormalizedPredicateOption")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSComparisonResult int64
 
 const (
-	NSOrderedAscending NSComparisonResult = -1
-	NSOrderedSame NSComparisonResult = 0
+	NSOrderedAscending  NSComparisonResult = -1
+	NSOrderedSame       NSComparisonResult = 0
 	NSOrderedDescending NSComparisonResult = 1
 )
 
@@ -562,7 +796,7 @@ type NSCompoundPredicateType uint64
 const (
 	NSNotPredicateType NSCompoundPredicateType = 0
 	NSAndPredicateType NSCompoundPredicateType = 1
-	NSOrPredicateType NSCompoundPredicateType = 2
+	NSOrPredicateType  NSCompoundPredicateType = 2
 )
 
 func (e NSCompoundPredicateType) String() string {
@@ -586,27 +820,41 @@ const (
 
 func (e NSDataBase64DecodingOptions) String() string {
 	var parts []string
-	if e&NSDataBase64DecodingIgnoreUnknownCharacters != 0 { parts = append(parts, "NSDataBase64DecodingIgnoreUnknownCharacters") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDataBase64DecodingIgnoreUnknownCharacters != 0 {
+		parts = append(parts, "NSDataBase64DecodingIgnoreUnknownCharacters")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSDataBase64EncodingOptions uint64
 
 const (
-	NSDataBase64Encoding64CharacterLineLength NSDataBase64EncodingOptions = 1
-	NSDataBase64Encoding76CharacterLineLength NSDataBase64EncodingOptions = 2
+	NSDataBase64Encoding64CharacterLineLength     NSDataBase64EncodingOptions = 1
+	NSDataBase64Encoding76CharacterLineLength     NSDataBase64EncodingOptions = 2
 	NSDataBase64EncodingEndLineWithCarriageReturn NSDataBase64EncodingOptions = 16
-	NSDataBase64EncodingEndLineWithLineFeed NSDataBase64EncodingOptions = 32
+	NSDataBase64EncodingEndLineWithLineFeed       NSDataBase64EncodingOptions = 32
 )
 
 func (e NSDataBase64EncodingOptions) String() string {
 	var parts []string
-	if e&NSDataBase64Encoding64CharacterLineLength != 0 { parts = append(parts, "NSDataBase64Encoding64CharacterLineLength") }
-	if e&NSDataBase64Encoding76CharacterLineLength != 0 { parts = append(parts, "NSDataBase64Encoding76CharacterLineLength") }
-	if e&NSDataBase64EncodingEndLineWithCarriageReturn != 0 { parts = append(parts, "NSDataBase64EncodingEndLineWithCarriageReturn") }
-	if e&NSDataBase64EncodingEndLineWithLineFeed != 0 { parts = append(parts, "NSDataBase64EncodingEndLineWithLineFeed") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDataBase64Encoding64CharacterLineLength != 0 {
+		parts = append(parts, "NSDataBase64Encoding64CharacterLineLength")
+	}
+	if e&NSDataBase64Encoding76CharacterLineLength != 0 {
+		parts = append(parts, "NSDataBase64Encoding76CharacterLineLength")
+	}
+	if e&NSDataBase64EncodingEndLineWithCarriageReturn != 0 {
+		parts = append(parts, "NSDataBase64EncodingEndLineWithCarriageReturn")
+	}
+	if e&NSDataBase64EncodingEndLineWithLineFeed != 0 {
+		parts = append(parts, "NSDataBase64EncodingEndLineWithLineFeed")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -614,9 +862,9 @@ type NSDataCompressionAlgorithm int64
 
 const (
 	NSDataCompressionAlgorithmLZFSE NSDataCompressionAlgorithm = 0
-	NSDataCompressionAlgorithmLZ4 NSDataCompressionAlgorithm = 1
-	NSDataCompressionAlgorithmLZMA NSDataCompressionAlgorithm = 2
-	NSDataCompressionAlgorithmZlib NSDataCompressionAlgorithm = 3
+	NSDataCompressionAlgorithmLZ4   NSDataCompressionAlgorithm = 1
+	NSDataCompressionAlgorithmLZMA  NSDataCompressionAlgorithm = 2
+	NSDataCompressionAlgorithmZlib  NSDataCompressionAlgorithm = 3
 )
 
 func (e NSDataCompressionAlgorithm) String() string {
@@ -638,22 +886,36 @@ type NSDataReadingOptions uint64
 
 const (
 	NSDataReadingMappedIfSafe NSDataReadingOptions = 1
-	NSDataReadingUncached NSDataReadingOptions = 2
+	NSDataReadingUncached     NSDataReadingOptions = 2
 	NSDataReadingMappedAlways NSDataReadingOptions = 8
-	NSDataReadingMapped NSDataReadingOptions = 1
-	NSMappedRead NSDataReadingOptions = 1
-	NSUncachedRead NSDataReadingOptions = 2
+	NSDataReadingMapped       NSDataReadingOptions = 1
+	NSMappedRead              NSDataReadingOptions = 1
+	NSUncachedRead            NSDataReadingOptions = 2
 )
 
 func (e NSDataReadingOptions) String() string {
 	var parts []string
-	if e&NSDataReadingMappedIfSafe != 0 { parts = append(parts, "NSDataReadingMappedIfSafe") }
-	if e&NSDataReadingUncached != 0 { parts = append(parts, "NSDataReadingUncached") }
-	if e&NSDataReadingMappedAlways != 0 { parts = append(parts, "NSDataReadingMappedAlways") }
-	if e&NSDataReadingMapped != 0 { parts = append(parts, "NSDataReadingMapped") }
-	if e&NSMappedRead != 0 { parts = append(parts, "NSMappedRead") }
-	if e&NSUncachedRead != 0 { parts = append(parts, "NSUncachedRead") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDataReadingMappedIfSafe != 0 {
+		parts = append(parts, "NSDataReadingMappedIfSafe")
+	}
+	if e&NSDataReadingUncached != 0 {
+		parts = append(parts, "NSDataReadingUncached")
+	}
+	if e&NSDataReadingMappedAlways != 0 {
+		parts = append(parts, "NSDataReadingMappedAlways")
+	}
+	if e&NSDataReadingMapped != 0 {
+		parts = append(parts, "NSDataReadingMapped")
+	}
+	if e&NSMappedRead != 0 {
+		parts = append(parts, "NSMappedRead")
+	}
+	if e&NSUncachedRead != 0 {
+		parts = append(parts, "NSUncachedRead")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -661,53 +923,77 @@ type NSDataSearchOptions uint64
 
 const (
 	NSDataSearchBackwards NSDataSearchOptions = 1
-	NSDataSearchAnchored NSDataSearchOptions = 2
+	NSDataSearchAnchored  NSDataSearchOptions = 2
 )
 
 func (e NSDataSearchOptions) String() string {
 	var parts []string
-	if e&NSDataSearchBackwards != 0 { parts = append(parts, "NSDataSearchBackwards") }
-	if e&NSDataSearchAnchored != 0 { parts = append(parts, "NSDataSearchAnchored") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDataSearchBackwards != 0 {
+		parts = append(parts, "NSDataSearchBackwards")
+	}
+	if e&NSDataSearchAnchored != 0 {
+		parts = append(parts, "NSDataSearchAnchored")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSDataWritingOptions uint64
 
 const (
-	NSDataWritingAtomic NSDataWritingOptions = 1
-	NSDataWritingWithoutOverwriting NSDataWritingOptions = 2
-	NSDataWritingFileProtectionNone NSDataWritingOptions = 268435456
-	NSDataWritingFileProtectionComplete NSDataWritingOptions = 536870912
-	NSDataWritingFileProtectionCompleteUnlessOpen NSDataWritingOptions = 805306368
+	NSDataWritingAtomic                                             NSDataWritingOptions = 1
+	NSDataWritingWithoutOverwriting                                 NSDataWritingOptions = 2
+	NSDataWritingFileProtectionNone                                 NSDataWritingOptions = 268435456
+	NSDataWritingFileProtectionComplete                             NSDataWritingOptions = 536870912
+	NSDataWritingFileProtectionCompleteUnlessOpen                   NSDataWritingOptions = 805306368
 	NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NSDataWritingOptions = 1073741824
-	NSDataWritingFileProtectionMask NSDataWritingOptions = 4026531840
-	NSAtomicWrite NSDataWritingOptions = 1
+	NSDataWritingFileProtectionMask                                 NSDataWritingOptions = 4026531840
+	NSAtomicWrite                                                   NSDataWritingOptions = 1
 )
 
 func (e NSDataWritingOptions) String() string {
 	var parts []string
-	if e&NSDataWritingAtomic != 0 { parts = append(parts, "NSDataWritingAtomic") }
-	if e&NSDataWritingWithoutOverwriting != 0 { parts = append(parts, "NSDataWritingWithoutOverwriting") }
-	if e&NSDataWritingFileProtectionNone != 0 { parts = append(parts, "NSDataWritingFileProtectionNone") }
-	if e&NSDataWritingFileProtectionComplete != 0 { parts = append(parts, "NSDataWritingFileProtectionComplete") }
-	if e&NSDataWritingFileProtectionCompleteUnlessOpen != 0 { parts = append(parts, "NSDataWritingFileProtectionCompleteUnlessOpen") }
-	if e&NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication != 0 { parts = append(parts, "NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication") }
-	if e&NSDataWritingFileProtectionMask != 0 { parts = append(parts, "NSDataWritingFileProtectionMask") }
-	if e&NSAtomicWrite != 0 { parts = append(parts, "NSAtomicWrite") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDataWritingAtomic != 0 {
+		parts = append(parts, "NSDataWritingAtomic")
+	}
+	if e&NSDataWritingWithoutOverwriting != 0 {
+		parts = append(parts, "NSDataWritingWithoutOverwriting")
+	}
+	if e&NSDataWritingFileProtectionNone != 0 {
+		parts = append(parts, "NSDataWritingFileProtectionNone")
+	}
+	if e&NSDataWritingFileProtectionComplete != 0 {
+		parts = append(parts, "NSDataWritingFileProtectionComplete")
+	}
+	if e&NSDataWritingFileProtectionCompleteUnlessOpen != 0 {
+		parts = append(parts, "NSDataWritingFileProtectionCompleteUnlessOpen")
+	}
+	if e&NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication != 0 {
+		parts = append(parts, "NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication")
+	}
+	if e&NSDataWritingFileProtectionMask != 0 {
+		parts = append(parts, "NSDataWritingFileProtectionMask")
+	}
+	if e&NSAtomicWrite != 0 {
+		parts = append(parts, "NSAtomicWrite")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSDateComponentsFormatterUnitsStyle int64
 
 const (
-	NSDateComponentsFormatterUnitsStylePositional NSDateComponentsFormatterUnitsStyle = 0
+	NSDateComponentsFormatterUnitsStylePositional  NSDateComponentsFormatterUnitsStyle = 0
 	NSDateComponentsFormatterUnitsStyleAbbreviated NSDateComponentsFormatterUnitsStyle = 1
-	NSDateComponentsFormatterUnitsStyleShort NSDateComponentsFormatterUnitsStyle = 2
-	NSDateComponentsFormatterUnitsStyleFull NSDateComponentsFormatterUnitsStyle = 3
-	NSDateComponentsFormatterUnitsStyleSpellOut NSDateComponentsFormatterUnitsStyle = 4
-	NSDateComponentsFormatterUnitsStyleBrief NSDateComponentsFormatterUnitsStyle = 5
+	NSDateComponentsFormatterUnitsStyleShort       NSDateComponentsFormatterUnitsStyle = 2
+	NSDateComponentsFormatterUnitsStyleFull        NSDateComponentsFormatterUnitsStyle = 3
+	NSDateComponentsFormatterUnitsStyleSpellOut    NSDateComponentsFormatterUnitsStyle = 4
+	NSDateComponentsFormatterUnitsStyleBrief       NSDateComponentsFormatterUnitsStyle = 5
 )
 
 func (e NSDateComponentsFormatterUnitsStyle) String() string {
@@ -732,24 +1018,38 @@ func (e NSDateComponentsFormatterUnitsStyle) String() string {
 type NSDateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
-	NSDateComponentsFormatterZeroFormattingBehaviorNone NSDateComponentsFormatterZeroFormattingBehavior = 0
-	NSDateComponentsFormatterZeroFormattingBehaviorDefault NSDateComponentsFormatterZeroFormattingBehavior = 1
-	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading NSDateComponentsFormatterZeroFormattingBehavior = 2
-	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle NSDateComponentsFormatterZeroFormattingBehavior = 4
+	NSDateComponentsFormatterZeroFormattingBehaviorNone         NSDateComponentsFormatterZeroFormattingBehavior = 0
+	NSDateComponentsFormatterZeroFormattingBehaviorDefault      NSDateComponentsFormatterZeroFormattingBehavior = 1
+	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading  NSDateComponentsFormatterZeroFormattingBehavior = 2
+	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle   NSDateComponentsFormatterZeroFormattingBehavior = 4
 	NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing NSDateComponentsFormatterZeroFormattingBehavior = 8
-	NSDateComponentsFormatterZeroFormattingBehaviorDropAll NSDateComponentsFormatterZeroFormattingBehavior = 14
-	NSDateComponentsFormatterZeroFormattingBehaviorPad NSDateComponentsFormatterZeroFormattingBehavior = 65536
+	NSDateComponentsFormatterZeroFormattingBehaviorDropAll      NSDateComponentsFormatterZeroFormattingBehavior = 14
+	NSDateComponentsFormatterZeroFormattingBehaviorPad          NSDateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
 func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
 	var parts []string
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDefault != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDefault") }
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropLeading != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropLeading") }
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle") }
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing") }
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropAll != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropAll") }
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorPad != 0 { parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorPad") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorDefault != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDefault")
+	}
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropLeading != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropLeading")
+	}
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle")
+	}
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing")
+	}
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropAll != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropAll")
+	}
+	if e&NSDateComponentsFormatterZeroFormattingBehaviorPad != 0 {
+		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorPad")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -757,8 +1057,8 @@ type NSDateFormatterBehavior uint64
 
 const (
 	NSDateFormatterBehaviorDefault NSDateFormatterBehavior = 0
-	NSDateFormatterBehavior10_0 NSDateFormatterBehavior = 1000
-	NSDateFormatterBehavior10_4 NSDateFormatterBehavior = 1040
+	NSDateFormatterBehavior10_0    NSDateFormatterBehavior = 1000
+	NSDateFormatterBehavior10_4    NSDateFormatterBehavior = 1040
 )
 
 func (e NSDateFormatterBehavior) String() string {
@@ -777,11 +1077,11 @@ func (e NSDateFormatterBehavior) String() string {
 type NSDateFormatterStyle uint64
 
 const (
-	NSDateFormatterNoStyle NSDateFormatterStyle = 0
-	NSDateFormatterShortStyle NSDateFormatterStyle = 1
+	NSDateFormatterNoStyle     NSDateFormatterStyle = 0
+	NSDateFormatterShortStyle  NSDateFormatterStyle = 1
 	NSDateFormatterMediumStyle NSDateFormatterStyle = 2
-	NSDateFormatterLongStyle NSDateFormatterStyle = 3
-	NSDateFormatterFullStyle NSDateFormatterStyle = 4
+	NSDateFormatterLongStyle   NSDateFormatterStyle = 3
+	NSDateFormatterFullStyle   NSDateFormatterStyle = 4
 )
 
 func (e NSDateFormatterStyle) String() string {
@@ -804,11 +1104,11 @@ func (e NSDateFormatterStyle) String() string {
 type NSDateIntervalFormatterStyle uint64
 
 const (
-	NSDateIntervalFormatterNoStyle NSDateIntervalFormatterStyle = 0
-	NSDateIntervalFormatterShortStyle NSDateIntervalFormatterStyle = 1
+	NSDateIntervalFormatterNoStyle     NSDateIntervalFormatterStyle = 0
+	NSDateIntervalFormatterShortStyle  NSDateIntervalFormatterStyle = 1
 	NSDateIntervalFormatterMediumStyle NSDateIntervalFormatterStyle = 2
-	NSDateIntervalFormatterLongStyle NSDateIntervalFormatterStyle = 3
-	NSDateIntervalFormatterFullStyle NSDateIntervalFormatterStyle = 4
+	NSDateIntervalFormatterLongStyle   NSDateIntervalFormatterStyle = 3
+	NSDateIntervalFormatterFullStyle   NSDateIntervalFormatterStyle = 4
 )
 
 func (e NSDateIntervalFormatterStyle) String() string {
@@ -831,7 +1131,7 @@ func (e NSDateIntervalFormatterStyle) String() string {
 type NSDecodingFailurePolicy int64
 
 const (
-	NSDecodingFailurePolicyRaiseException NSDecodingFailurePolicy = 0
+	NSDecodingFailurePolicyRaiseException    NSDecodingFailurePolicy = 0
 	NSDecodingFailurePolicySetErrorAndReturn NSDecodingFailurePolicy = 1
 )
 
@@ -850,20 +1150,32 @@ type NSDirectoryEnumerationOptions uint64
 
 const (
 	NSDirectoryEnumerationSkipsSubdirectoryDescendants NSDirectoryEnumerationOptions = 1
-	NSDirectoryEnumerationSkipsPackageDescendants NSDirectoryEnumerationOptions = 2
-	NSDirectoryEnumerationSkipsHiddenFiles NSDirectoryEnumerationOptions = 4
+	NSDirectoryEnumerationSkipsPackageDescendants      NSDirectoryEnumerationOptions = 2
+	NSDirectoryEnumerationSkipsHiddenFiles             NSDirectoryEnumerationOptions = 4
 	NSDirectoryEnumerationIncludesDirectoriesPostOrder NSDirectoryEnumerationOptions = 8
-	NSDirectoryEnumerationProducesRelativePathURLs NSDirectoryEnumerationOptions = 16
+	NSDirectoryEnumerationProducesRelativePathURLs     NSDirectoryEnumerationOptions = 16
 )
 
 func (e NSDirectoryEnumerationOptions) String() string {
 	var parts []string
-	if e&NSDirectoryEnumerationSkipsSubdirectoryDescendants != 0 { parts = append(parts, "NSDirectoryEnumerationSkipsSubdirectoryDescendants") }
-	if e&NSDirectoryEnumerationSkipsPackageDescendants != 0 { parts = append(parts, "NSDirectoryEnumerationSkipsPackageDescendants") }
-	if e&NSDirectoryEnumerationSkipsHiddenFiles != 0 { parts = append(parts, "NSDirectoryEnumerationSkipsHiddenFiles") }
-	if e&NSDirectoryEnumerationIncludesDirectoriesPostOrder != 0 { parts = append(parts, "NSDirectoryEnumerationIncludesDirectoriesPostOrder") }
-	if e&NSDirectoryEnumerationProducesRelativePathURLs != 0 { parts = append(parts, "NSDirectoryEnumerationProducesRelativePathURLs") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDirectoryEnumerationSkipsSubdirectoryDescendants != 0 {
+		parts = append(parts, "NSDirectoryEnumerationSkipsSubdirectoryDescendants")
+	}
+	if e&NSDirectoryEnumerationSkipsPackageDescendants != 0 {
+		parts = append(parts, "NSDirectoryEnumerationSkipsPackageDescendants")
+	}
+	if e&NSDirectoryEnumerationSkipsHiddenFiles != 0 {
+		parts = append(parts, "NSDirectoryEnumerationSkipsHiddenFiles")
+	}
+	if e&NSDirectoryEnumerationIncludesDirectoriesPostOrder != 0 {
+		parts = append(parts, "NSDirectoryEnumerationIncludesDirectoriesPostOrder")
+	}
+	if e&NSDirectoryEnumerationProducesRelativePathURLs != 0 {
+		parts = append(parts, "NSDirectoryEnumerationProducesRelativePathURLs")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -871,23 +1183,29 @@ type NSDistributedNotificationOptions uint64
 
 const (
 	NSDistributedNotificationDeliverImmediately NSDistributedNotificationOptions = 1
-	NSDistributedNotificationPostToAllSessions NSDistributedNotificationOptions = 2
+	NSDistributedNotificationPostToAllSessions  NSDistributedNotificationOptions = 2
 )
 
 func (e NSDistributedNotificationOptions) String() string {
 	var parts []string
-	if e&NSDistributedNotificationDeliverImmediately != 0 { parts = append(parts, "NSDistributedNotificationDeliverImmediately") }
-	if e&NSDistributedNotificationPostToAllSessions != 0 { parts = append(parts, "NSDistributedNotificationPostToAllSessions") }
-	if len(parts) == 0 { return "0" }
+	if e&NSDistributedNotificationDeliverImmediately != 0 {
+		parts = append(parts, "NSDistributedNotificationDeliverImmediately")
+	}
+	if e&NSDistributedNotificationPostToAllSessions != 0 {
+		parts = append(parts, "NSDistributedNotificationPostToAllSessions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSEnergyFormatterUnit int64
 
 const (
-	NSEnergyFormatterUnitJoule NSEnergyFormatterUnit = 11
-	NSEnergyFormatterUnitKilojoule NSEnergyFormatterUnit = 14
-	NSEnergyFormatterUnitCalorie NSEnergyFormatterUnit = 1793
+	NSEnergyFormatterUnitJoule       NSEnergyFormatterUnit = 11
+	NSEnergyFormatterUnitKilojoule   NSEnergyFormatterUnit = 14
+	NSEnergyFormatterUnitCalorie     NSEnergyFormatterUnit = 1793
 	NSEnergyFormatterUnitKilocalorie NSEnergyFormatterUnit = 1794
 )
 
@@ -910,33 +1228,39 @@ type NSEnumerationOptions uint64
 
 const (
 	NSEnumerationConcurrent NSEnumerationOptions = 1
-	NSEnumerationReverse NSEnumerationOptions = 2
+	NSEnumerationReverse    NSEnumerationOptions = 2
 )
 
 func (e NSEnumerationOptions) String() string {
 	var parts []string
-	if e&NSEnumerationConcurrent != 0 { parts = append(parts, "NSEnumerationConcurrent") }
-	if e&NSEnumerationReverse != 0 { parts = append(parts, "NSEnumerationReverse") }
-	if len(parts) == 0 { return "0" }
+	if e&NSEnumerationConcurrent != 0 {
+		parts = append(parts, "NSEnumerationConcurrent")
+	}
+	if e&NSEnumerationReverse != 0 {
+		parts = append(parts, "NSEnumerationReverse")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSExpressionType uint64
 
 const (
-	NSConstantValueExpressionType NSExpressionType = 0
+	NSConstantValueExpressionType   NSExpressionType = 0
 	NSEvaluatedObjectExpressionType NSExpressionType = 1
-	NSVariableExpressionType NSExpressionType = 2
-	NSKeyPathExpressionType NSExpressionType = 3
-	NSFunctionExpressionType NSExpressionType = 4
-	NSUnionSetExpressionType NSExpressionType = 5
-	NSIntersectSetExpressionType NSExpressionType = 6
-	NSMinusSetExpressionType NSExpressionType = 7
-	NSSubqueryExpressionType NSExpressionType = 13
-	NSAggregateExpressionType NSExpressionType = 14
-	NSAnyKeyExpressionType NSExpressionType = 15
-	NSBlockExpressionType NSExpressionType = 19
-	NSConditionalExpressionType NSExpressionType = 20
+	NSVariableExpressionType        NSExpressionType = 2
+	NSKeyPathExpressionType         NSExpressionType = 3
+	NSFunctionExpressionType        NSExpressionType = 4
+	NSUnionSetExpressionType        NSExpressionType = 5
+	NSIntersectSetExpressionType    NSExpressionType = 6
+	NSMinusSetExpressionType        NSExpressionType = 7
+	NSSubqueryExpressionType        NSExpressionType = 13
+	NSAggregateExpressionType       NSExpressionType = 14
+	NSAnyKeyExpressionType          NSExpressionType = 15
+	NSBlockExpressionType           NSExpressionType = 19
+	NSConditionalExpressionType     NSExpressionType = 20
 )
 
 func (e NSExpressionType) String() string {
@@ -975,55 +1299,83 @@ func (e NSExpressionType) String() string {
 type NSFileCoordinatorReadingOptions uint64
 
 const (
-	NSFileCoordinatorReadingWithoutChanges NSFileCoordinatorReadingOptions = 1
-	NSFileCoordinatorReadingResolvesSymbolicLink NSFileCoordinatorReadingOptions = 2
+	NSFileCoordinatorReadingWithoutChanges                   NSFileCoordinatorReadingOptions = 1
+	NSFileCoordinatorReadingResolvesSymbolicLink             NSFileCoordinatorReadingOptions = 2
 	NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NSFileCoordinatorReadingOptions = 4
-	NSFileCoordinatorReadingForUploading NSFileCoordinatorReadingOptions = 8
+	NSFileCoordinatorReadingForUploading                     NSFileCoordinatorReadingOptions = 8
 )
 
 func (e NSFileCoordinatorReadingOptions) String() string {
 	var parts []string
-	if e&NSFileCoordinatorReadingWithoutChanges != 0 { parts = append(parts, "NSFileCoordinatorReadingWithoutChanges") }
-	if e&NSFileCoordinatorReadingResolvesSymbolicLink != 0 { parts = append(parts, "NSFileCoordinatorReadingResolvesSymbolicLink") }
-	if e&NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly != 0 { parts = append(parts, "NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly") }
-	if e&NSFileCoordinatorReadingForUploading != 0 { parts = append(parts, "NSFileCoordinatorReadingForUploading") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileCoordinatorReadingWithoutChanges != 0 {
+		parts = append(parts, "NSFileCoordinatorReadingWithoutChanges")
+	}
+	if e&NSFileCoordinatorReadingResolvesSymbolicLink != 0 {
+		parts = append(parts, "NSFileCoordinatorReadingResolvesSymbolicLink")
+	}
+	if e&NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly != 0 {
+		parts = append(parts, "NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly")
+	}
+	if e&NSFileCoordinatorReadingForUploading != 0 {
+		parts = append(parts, "NSFileCoordinatorReadingForUploading")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFileCoordinatorWritingOptions uint64
 
 const (
-	NSFileCoordinatorWritingForDeleting NSFileCoordinatorWritingOptions = 1
-	NSFileCoordinatorWritingForMoving NSFileCoordinatorWritingOptions = 2
-	NSFileCoordinatorWritingForMerging NSFileCoordinatorWritingOptions = 4
-	NSFileCoordinatorWritingForReplacing NSFileCoordinatorWritingOptions = 8
+	NSFileCoordinatorWritingForDeleting                    NSFileCoordinatorWritingOptions = 1
+	NSFileCoordinatorWritingForMoving                      NSFileCoordinatorWritingOptions = 2
+	NSFileCoordinatorWritingForMerging                     NSFileCoordinatorWritingOptions = 4
+	NSFileCoordinatorWritingForReplacing                   NSFileCoordinatorWritingOptions = 8
 	NSFileCoordinatorWritingContentIndependentMetadataOnly NSFileCoordinatorWritingOptions = 16
 )
 
 func (e NSFileCoordinatorWritingOptions) String() string {
 	var parts []string
-	if e&NSFileCoordinatorWritingForDeleting != 0 { parts = append(parts, "NSFileCoordinatorWritingForDeleting") }
-	if e&NSFileCoordinatorWritingForMoving != 0 { parts = append(parts, "NSFileCoordinatorWritingForMoving") }
-	if e&NSFileCoordinatorWritingForMerging != 0 { parts = append(parts, "NSFileCoordinatorWritingForMerging") }
-	if e&NSFileCoordinatorWritingForReplacing != 0 { parts = append(parts, "NSFileCoordinatorWritingForReplacing") }
-	if e&NSFileCoordinatorWritingContentIndependentMetadataOnly != 0 { parts = append(parts, "NSFileCoordinatorWritingContentIndependentMetadataOnly") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileCoordinatorWritingForDeleting != 0 {
+		parts = append(parts, "NSFileCoordinatorWritingForDeleting")
+	}
+	if e&NSFileCoordinatorWritingForMoving != 0 {
+		parts = append(parts, "NSFileCoordinatorWritingForMoving")
+	}
+	if e&NSFileCoordinatorWritingForMerging != 0 {
+		parts = append(parts, "NSFileCoordinatorWritingForMerging")
+	}
+	if e&NSFileCoordinatorWritingForReplacing != 0 {
+		parts = append(parts, "NSFileCoordinatorWritingForReplacing")
+	}
+	if e&NSFileCoordinatorWritingContentIndependentMetadataOnly != 0 {
+		parts = append(parts, "NSFileCoordinatorWritingContentIndependentMetadataOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFileManagerItemReplacementOptions uint64
 
 const (
-	NSFileManagerItemReplacementUsingNewMetadataOnly NSFileManagerItemReplacementOptions = 1
+	NSFileManagerItemReplacementUsingNewMetadataOnly      NSFileManagerItemReplacementOptions = 1
 	NSFileManagerItemReplacementWithoutDeletingBackupItem NSFileManagerItemReplacementOptions = 2
 )
 
 func (e NSFileManagerItemReplacementOptions) String() string {
 	var parts []string
-	if e&NSFileManagerItemReplacementUsingNewMetadataOnly != 0 { parts = append(parts, "NSFileManagerItemReplacementUsingNewMetadataOnly") }
-	if e&NSFileManagerItemReplacementWithoutDeletingBackupItem != 0 { parts = append(parts, "NSFileManagerItemReplacementWithoutDeletingBackupItem") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileManagerItemReplacementUsingNewMetadataOnly != 0 {
+		parts = append(parts, "NSFileManagerItemReplacementUsingNewMetadataOnly")
+	}
+	if e&NSFileManagerItemReplacementWithoutDeletingBackupItem != 0 {
+		parts = append(parts, "NSFileManagerItemReplacementWithoutDeletingBackupItem")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1062,9 +1414,15 @@ const (
 
 func (e NSFileManagerSupportedSyncControls) String() string {
 	var parts []string
-	if e&NSFileManagerSupportedSyncControlsPauseSync != 0 { parts = append(parts, "NSFileManagerSupportedSyncControlsPauseSync") }
-	if e&NSFileManagerSupportedSyncControlsFailUploadOnConflict != 0 { parts = append(parts, "NSFileManagerSupportedSyncControlsFailUploadOnConflict") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileManagerSupportedSyncControlsPauseSync != 0 {
+		parts = append(parts, "NSFileManagerSupportedSyncControlsPauseSync")
+	}
+	if e&NSFileManagerSupportedSyncControlsFailUploadOnConflict != 0 {
+		parts = append(parts, "NSFileManagerSupportedSyncControlsFailUploadOnConflict")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1072,14 +1430,20 @@ type NSFileManagerUnmountOptions uint64
 
 const (
 	NSFileManagerUnmountAllPartitionsAndEjectDisk NSFileManagerUnmountOptions = 1
-	NSFileManagerUnmountWithoutUI NSFileManagerUnmountOptions = 2
+	NSFileManagerUnmountWithoutUI                 NSFileManagerUnmountOptions = 2
 )
 
 func (e NSFileManagerUnmountOptions) String() string {
 	var parts []string
-	if e&NSFileManagerUnmountAllPartitionsAndEjectDisk != 0 { parts = append(parts, "NSFileManagerUnmountAllPartitionsAndEjectDisk") }
-	if e&NSFileManagerUnmountWithoutUI != 0 { parts = append(parts, "NSFileManagerUnmountWithoutUI") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileManagerUnmountAllPartitionsAndEjectDisk != 0 {
+		parts = append(parts, "NSFileManagerUnmountAllPartitionsAndEjectDisk")
+	}
+	if e&NSFileManagerUnmountWithoutUI != 0 {
+		parts = append(parts, "NSFileManagerUnmountWithoutUI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1111,8 +1475,12 @@ const (
 
 func (e NSFileVersionAddingOptions) String() string {
 	var parts []string
-	if e&NSFileVersionAddingByMoving != 0 { parts = append(parts, "NSFileVersionAddingByMoving") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileVersionAddingByMoving != 0 {
+		parts = append(parts, "NSFileVersionAddingByMoving")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1124,50 +1492,66 @@ const (
 
 func (e NSFileVersionReplacingOptions) String() string {
 	var parts []string
-	if e&NSFileVersionReplacingByMoving != 0 { parts = append(parts, "NSFileVersionReplacingByMoving") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileVersionReplacingByMoving != 0 {
+		parts = append(parts, "NSFileVersionReplacingByMoving")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFileWrapperReadingOptions uint64
 
 const (
-	NSFileWrapperReadingImmediate NSFileWrapperReadingOptions = 1
+	NSFileWrapperReadingImmediate      NSFileWrapperReadingOptions = 1
 	NSFileWrapperReadingWithoutMapping NSFileWrapperReadingOptions = 2
 )
 
 func (e NSFileWrapperReadingOptions) String() string {
 	var parts []string
-	if e&NSFileWrapperReadingImmediate != 0 { parts = append(parts, "NSFileWrapperReadingImmediate") }
-	if e&NSFileWrapperReadingWithoutMapping != 0 { parts = append(parts, "NSFileWrapperReadingWithoutMapping") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileWrapperReadingImmediate != 0 {
+		parts = append(parts, "NSFileWrapperReadingImmediate")
+	}
+	if e&NSFileWrapperReadingWithoutMapping != 0 {
+		parts = append(parts, "NSFileWrapperReadingWithoutMapping")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFileWrapperWritingOptions uint64
 
 const (
-	NSFileWrapperWritingAtomic NSFileWrapperWritingOptions = 1
+	NSFileWrapperWritingAtomic           NSFileWrapperWritingOptions = 1
 	NSFileWrapperWritingWithNameUpdating NSFileWrapperWritingOptions = 2
 )
 
 func (e NSFileWrapperWritingOptions) String() string {
 	var parts []string
-	if e&NSFileWrapperWritingAtomic != 0 { parts = append(parts, "NSFileWrapperWritingAtomic") }
-	if e&NSFileWrapperWritingWithNameUpdating != 0 { parts = append(parts, "NSFileWrapperWritingWithNameUpdating") }
-	if len(parts) == 0 { return "0" }
+	if e&NSFileWrapperWritingAtomic != 0 {
+		parts = append(parts, "NSFileWrapperWritingAtomic")
+	}
+	if e&NSFileWrapperWritingWithNameUpdating != 0 {
+		parts = append(parts, "NSFileWrapperWritingWithNameUpdating")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSFormattingContext int64
 
 const (
-	NSFormattingContextUnknown NSFormattingContext = 0
-	NSFormattingContextDynamic NSFormattingContext = 1
-	NSFormattingContextStandalone NSFormattingContext = 2
-	NSFormattingContextListItem NSFormattingContext = 3
+	NSFormattingContextUnknown             NSFormattingContext = 0
+	NSFormattingContextDynamic             NSFormattingContext = 1
+	NSFormattingContextStandalone          NSFormattingContext = 2
+	NSFormattingContextListItem            NSFormattingContext = 3
 	NSFormattingContextBeginningOfSentence NSFormattingContext = 4
-	NSFormattingContextMiddleOfSentence NSFormattingContext = 5
+	NSFormattingContextMiddleOfSentence    NSFormattingContext = 5
 )
 
 func (e NSFormattingContext) String() string {
@@ -1192,9 +1576,9 @@ func (e NSFormattingContext) String() string {
 type NSFormattingUnitStyle int64
 
 const (
-	NSFormattingUnitStyleShort NSFormattingUnitStyle = 1
+	NSFormattingUnitStyleShort  NSFormattingUnitStyle = 1
 	NSFormattingUnitStyleMedium NSFormattingUnitStyle = 2
-	NSFormattingUnitStyleLong NSFormattingUnitStyle = 3
+	NSFormattingUnitStyleLong   NSFormattingUnitStyle = 3
 )
 
 func (e NSFormattingUnitStyle) String() string {
@@ -1213,21 +1597,21 @@ func (e NSFormattingUnitStyle) String() string {
 type NSGrammaticalCase int64
 
 const (
-	NSGrammaticalCaseNotSet NSGrammaticalCase = 0
-	NSGrammaticalCaseNominative NSGrammaticalCase = 1
-	NSGrammaticalCaseAccusative NSGrammaticalCase = 2
-	NSGrammaticalCaseDative NSGrammaticalCase = 3
-	NSGrammaticalCaseGenitive NSGrammaticalCase = 4
+	NSGrammaticalCaseNotSet        NSGrammaticalCase = 0
+	NSGrammaticalCaseNominative    NSGrammaticalCase = 1
+	NSGrammaticalCaseAccusative    NSGrammaticalCase = 2
+	NSGrammaticalCaseDative        NSGrammaticalCase = 3
+	NSGrammaticalCaseGenitive      NSGrammaticalCase = 4
 	NSGrammaticalCasePrepositional NSGrammaticalCase = 5
-	NSGrammaticalCaseAblative NSGrammaticalCase = 6
-	NSGrammaticalCaseAdessive NSGrammaticalCase = 7
-	NSGrammaticalCaseAllative NSGrammaticalCase = 8
-	NSGrammaticalCaseElative NSGrammaticalCase = 9
-	NSGrammaticalCaseIllative NSGrammaticalCase = 10
-	NSGrammaticalCaseEssive NSGrammaticalCase = 11
-	NSGrammaticalCaseInessive NSGrammaticalCase = 12
-	NSGrammaticalCaseLocative NSGrammaticalCase = 13
-	NSGrammaticalCaseTranslative NSGrammaticalCase = 14
+	NSGrammaticalCaseAblative      NSGrammaticalCase = 6
+	NSGrammaticalCaseAdessive      NSGrammaticalCase = 7
+	NSGrammaticalCaseAllative      NSGrammaticalCase = 8
+	NSGrammaticalCaseElative       NSGrammaticalCase = 9
+	NSGrammaticalCaseIllative      NSGrammaticalCase = 10
+	NSGrammaticalCaseEssive        NSGrammaticalCase = 11
+	NSGrammaticalCaseInessive      NSGrammaticalCase = 12
+	NSGrammaticalCaseLocative      NSGrammaticalCase = 13
+	NSGrammaticalCaseTranslative   NSGrammaticalCase = 14
 )
 
 func (e NSGrammaticalCase) String() string {
@@ -1270,9 +1654,9 @@ func (e NSGrammaticalCase) String() string {
 type NSGrammaticalDefiniteness int64
 
 const (
-	NSGrammaticalDefinitenessNotSet NSGrammaticalDefiniteness = 0
+	NSGrammaticalDefinitenessNotSet     NSGrammaticalDefiniteness = 0
 	NSGrammaticalDefinitenessIndefinite NSGrammaticalDefiniteness = 1
-	NSGrammaticalDefinitenessDefinite NSGrammaticalDefiniteness = 2
+	NSGrammaticalDefinitenessDefinite   NSGrammaticalDefiniteness = 2
 )
 
 func (e NSGrammaticalDefiniteness) String() string {
@@ -1291,9 +1675,9 @@ func (e NSGrammaticalDefiniteness) String() string {
 type NSGrammaticalDetermination int64
 
 const (
-	NSGrammaticalDeterminationNotSet NSGrammaticalDetermination = 0
+	NSGrammaticalDeterminationNotSet      NSGrammaticalDetermination = 0
 	NSGrammaticalDeterminationIndependent NSGrammaticalDetermination = 1
-	NSGrammaticalDeterminationDependent NSGrammaticalDetermination = 2
+	NSGrammaticalDeterminationDependent   NSGrammaticalDetermination = 2
 )
 
 func (e NSGrammaticalDetermination) String() string {
@@ -1312,10 +1696,10 @@ func (e NSGrammaticalDetermination) String() string {
 type NSGrammaticalGender int64
 
 const (
-	NSGrammaticalGenderNotSet NSGrammaticalGender = 0
-	NSGrammaticalGenderFeminine NSGrammaticalGender = 1
+	NSGrammaticalGenderNotSet    NSGrammaticalGender = 0
+	NSGrammaticalGenderFeminine  NSGrammaticalGender = 1
 	NSGrammaticalGenderMasculine NSGrammaticalGender = 2
-	NSGrammaticalGenderNeuter NSGrammaticalGender = 3
+	NSGrammaticalGenderNeuter    NSGrammaticalGender = 3
 )
 
 func (e NSGrammaticalGender) String() string {
@@ -1336,12 +1720,12 @@ func (e NSGrammaticalGender) String() string {
 type NSGrammaticalNumber int64
 
 const (
-	NSGrammaticalNumberNotSet NSGrammaticalNumber = 0
-	NSGrammaticalNumberSingular NSGrammaticalNumber = 1
-	NSGrammaticalNumberZero NSGrammaticalNumber = 2
-	NSGrammaticalNumberPlural NSGrammaticalNumber = 3
-	NSGrammaticalNumberPluralTwo NSGrammaticalNumber = 4
-	NSGrammaticalNumberPluralFew NSGrammaticalNumber = 5
+	NSGrammaticalNumberNotSet     NSGrammaticalNumber = 0
+	NSGrammaticalNumberSingular   NSGrammaticalNumber = 1
+	NSGrammaticalNumberZero       NSGrammaticalNumber = 2
+	NSGrammaticalNumberPlural     NSGrammaticalNumber = 3
+	NSGrammaticalNumberPluralTwo  NSGrammaticalNumber = 4
+	NSGrammaticalNumberPluralFew  NSGrammaticalNumber = 5
 	NSGrammaticalNumberPluralMany NSGrammaticalNumber = 6
 )
 
@@ -1369,20 +1753,20 @@ func (e NSGrammaticalNumber) String() string {
 type NSGrammaticalPartOfSpeech int64
 
 const (
-	NSGrammaticalPartOfSpeechNotSet NSGrammaticalPartOfSpeech = 0
-	NSGrammaticalPartOfSpeechDeterminer NSGrammaticalPartOfSpeech = 1
-	NSGrammaticalPartOfSpeechPronoun NSGrammaticalPartOfSpeech = 2
-	NSGrammaticalPartOfSpeechLetter NSGrammaticalPartOfSpeech = 3
-	NSGrammaticalPartOfSpeechAdverb NSGrammaticalPartOfSpeech = 4
-	NSGrammaticalPartOfSpeechParticle NSGrammaticalPartOfSpeech = 5
-	NSGrammaticalPartOfSpeechAdjective NSGrammaticalPartOfSpeech = 6
-	NSGrammaticalPartOfSpeechAdposition NSGrammaticalPartOfSpeech = 7
-	NSGrammaticalPartOfSpeechVerb NSGrammaticalPartOfSpeech = 8
-	NSGrammaticalPartOfSpeechNoun NSGrammaticalPartOfSpeech = 9
-	NSGrammaticalPartOfSpeechConjunction NSGrammaticalPartOfSpeech = 10
-	NSGrammaticalPartOfSpeechNumeral NSGrammaticalPartOfSpeech = 11
+	NSGrammaticalPartOfSpeechNotSet       NSGrammaticalPartOfSpeech = 0
+	NSGrammaticalPartOfSpeechDeterminer   NSGrammaticalPartOfSpeech = 1
+	NSGrammaticalPartOfSpeechPronoun      NSGrammaticalPartOfSpeech = 2
+	NSGrammaticalPartOfSpeechLetter       NSGrammaticalPartOfSpeech = 3
+	NSGrammaticalPartOfSpeechAdverb       NSGrammaticalPartOfSpeech = 4
+	NSGrammaticalPartOfSpeechParticle     NSGrammaticalPartOfSpeech = 5
+	NSGrammaticalPartOfSpeechAdjective    NSGrammaticalPartOfSpeech = 6
+	NSGrammaticalPartOfSpeechAdposition   NSGrammaticalPartOfSpeech = 7
+	NSGrammaticalPartOfSpeechVerb         NSGrammaticalPartOfSpeech = 8
+	NSGrammaticalPartOfSpeechNoun         NSGrammaticalPartOfSpeech = 9
+	NSGrammaticalPartOfSpeechConjunction  NSGrammaticalPartOfSpeech = 10
+	NSGrammaticalPartOfSpeechNumeral      NSGrammaticalPartOfSpeech = 11
 	NSGrammaticalPartOfSpeechInterjection NSGrammaticalPartOfSpeech = 12
-	NSGrammaticalPartOfSpeechPreposition NSGrammaticalPartOfSpeech = 13
+	NSGrammaticalPartOfSpeechPreposition  NSGrammaticalPartOfSpeech = 13
 	NSGrammaticalPartOfSpeechAbbreviation NSGrammaticalPartOfSpeech = 14
 )
 
@@ -1427,9 +1811,9 @@ type NSGrammaticalPerson int64
 
 const (
 	NSGrammaticalPersonNotSet NSGrammaticalPerson = 0
-	NSGrammaticalPersonFirst NSGrammaticalPerson = 1
+	NSGrammaticalPersonFirst  NSGrammaticalPerson = 1
 	NSGrammaticalPersonSecond NSGrammaticalPerson = 2
-	NSGrammaticalPersonThird NSGrammaticalPerson = 3
+	NSGrammaticalPersonThird  NSGrammaticalPerson = 3
 )
 
 func (e NSGrammaticalPerson) String() string {
@@ -1450,9 +1834,9 @@ func (e NSGrammaticalPerson) String() string {
 type NSGrammaticalPronounType int64
 
 const (
-	NSGrammaticalPronounTypeNotSet NSGrammaticalPronounType = 0
-	NSGrammaticalPronounTypePersonal NSGrammaticalPronounType = 1
-	NSGrammaticalPronounTypeReflexive NSGrammaticalPronounType = 2
+	NSGrammaticalPronounTypeNotSet     NSGrammaticalPronounType = 0
+	NSGrammaticalPronounTypePersonal   NSGrammaticalPronounType = 1
+	NSGrammaticalPronounTypeReflexive  NSGrammaticalPronounType = 2
 	NSGrammaticalPronounTypePossessive NSGrammaticalPronounType = 3
 )
 
@@ -1474,8 +1858,8 @@ func (e NSGrammaticalPronounType) String() string {
 type NSHTTPCookieAcceptPolicy uint64
 
 const (
-	NSHTTPCookieAcceptPolicyAlways NSHTTPCookieAcceptPolicy = 0
-	NSHTTPCookieAcceptPolicyNever NSHTTPCookieAcceptPolicy = 1
+	NSHTTPCookieAcceptPolicyAlways                     NSHTTPCookieAcceptPolicy = 0
+	NSHTTPCookieAcceptPolicyNever                      NSHTTPCookieAcceptPolicy = 1
 	NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain NSHTTPCookieAcceptPolicy = 2
 )
 
@@ -1495,77 +1879,125 @@ func (e NSHTTPCookieAcceptPolicy) String() string {
 type NSISO8601DateFormatOptions uint64
 
 const (
-	NSISO8601DateFormatWithYear NSISO8601DateFormatOptions = 1
-	NSISO8601DateFormatWithMonth NSISO8601DateFormatOptions = 2
-	NSISO8601DateFormatWithWeekOfYear NSISO8601DateFormatOptions = 4
-	NSISO8601DateFormatWithDay NSISO8601DateFormatOptions = 16
-	NSISO8601DateFormatWithTime NSISO8601DateFormatOptions = 32
-	NSISO8601DateFormatWithTimeZone NSISO8601DateFormatOptions = 64
-	NSISO8601DateFormatWithSpaceBetweenDateAndTime NSISO8601DateFormatOptions = 128
-	NSISO8601DateFormatWithDashSeparatorInDate NSISO8601DateFormatOptions = 256
-	NSISO8601DateFormatWithColonSeparatorInTime NSISO8601DateFormatOptions = 512
+	NSISO8601DateFormatWithYear                     NSISO8601DateFormatOptions = 1
+	NSISO8601DateFormatWithMonth                    NSISO8601DateFormatOptions = 2
+	NSISO8601DateFormatWithWeekOfYear               NSISO8601DateFormatOptions = 4
+	NSISO8601DateFormatWithDay                      NSISO8601DateFormatOptions = 16
+	NSISO8601DateFormatWithTime                     NSISO8601DateFormatOptions = 32
+	NSISO8601DateFormatWithTimeZone                 NSISO8601DateFormatOptions = 64
+	NSISO8601DateFormatWithSpaceBetweenDateAndTime  NSISO8601DateFormatOptions = 128
+	NSISO8601DateFormatWithDashSeparatorInDate      NSISO8601DateFormatOptions = 256
+	NSISO8601DateFormatWithColonSeparatorInTime     NSISO8601DateFormatOptions = 512
 	NSISO8601DateFormatWithColonSeparatorInTimeZone NSISO8601DateFormatOptions = 1024
-	NSISO8601DateFormatWithFractionalSeconds NSISO8601DateFormatOptions = 2048
-	NSISO8601DateFormatWithFullDate NSISO8601DateFormatOptions = 275
-	NSISO8601DateFormatWithFullTime NSISO8601DateFormatOptions = 1632
-	NSISO8601DateFormatWithInternetDateTime NSISO8601DateFormatOptions = 1907
+	NSISO8601DateFormatWithFractionalSeconds        NSISO8601DateFormatOptions = 2048
+	NSISO8601DateFormatWithFullDate                 NSISO8601DateFormatOptions = 275
+	NSISO8601DateFormatWithFullTime                 NSISO8601DateFormatOptions = 1632
+	NSISO8601DateFormatWithInternetDateTime         NSISO8601DateFormatOptions = 1907
 )
 
 func (e NSISO8601DateFormatOptions) String() string {
 	var parts []string
-	if e&NSISO8601DateFormatWithYear != 0 { parts = append(parts, "NSISO8601DateFormatWithYear") }
-	if e&NSISO8601DateFormatWithMonth != 0 { parts = append(parts, "NSISO8601DateFormatWithMonth") }
-	if e&NSISO8601DateFormatWithWeekOfYear != 0 { parts = append(parts, "NSISO8601DateFormatWithWeekOfYear") }
-	if e&NSISO8601DateFormatWithDay != 0 { parts = append(parts, "NSISO8601DateFormatWithDay") }
-	if e&NSISO8601DateFormatWithTime != 0 { parts = append(parts, "NSISO8601DateFormatWithTime") }
-	if e&NSISO8601DateFormatWithTimeZone != 0 { parts = append(parts, "NSISO8601DateFormatWithTimeZone") }
-	if e&NSISO8601DateFormatWithSpaceBetweenDateAndTime != 0 { parts = append(parts, "NSISO8601DateFormatWithSpaceBetweenDateAndTime") }
-	if e&NSISO8601DateFormatWithDashSeparatorInDate != 0 { parts = append(parts, "NSISO8601DateFormatWithDashSeparatorInDate") }
-	if e&NSISO8601DateFormatWithColonSeparatorInTime != 0 { parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTime") }
-	if e&NSISO8601DateFormatWithColonSeparatorInTimeZone != 0 { parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTimeZone") }
-	if e&NSISO8601DateFormatWithFractionalSeconds != 0 { parts = append(parts, "NSISO8601DateFormatWithFractionalSeconds") }
-	if e&NSISO8601DateFormatWithFullDate != 0 { parts = append(parts, "NSISO8601DateFormatWithFullDate") }
-	if e&NSISO8601DateFormatWithFullTime != 0 { parts = append(parts, "NSISO8601DateFormatWithFullTime") }
-	if e&NSISO8601DateFormatWithInternetDateTime != 0 { parts = append(parts, "NSISO8601DateFormatWithInternetDateTime") }
-	if len(parts) == 0 { return "0" }
+	if e&NSISO8601DateFormatWithYear != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithYear")
+	}
+	if e&NSISO8601DateFormatWithMonth != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithMonth")
+	}
+	if e&NSISO8601DateFormatWithWeekOfYear != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithWeekOfYear")
+	}
+	if e&NSISO8601DateFormatWithDay != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithDay")
+	}
+	if e&NSISO8601DateFormatWithTime != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithTime")
+	}
+	if e&NSISO8601DateFormatWithTimeZone != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithTimeZone")
+	}
+	if e&NSISO8601DateFormatWithSpaceBetweenDateAndTime != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithSpaceBetweenDateAndTime")
+	}
+	if e&NSISO8601DateFormatWithDashSeparatorInDate != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithDashSeparatorInDate")
+	}
+	if e&NSISO8601DateFormatWithColonSeparatorInTime != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTime")
+	}
+	if e&NSISO8601DateFormatWithColonSeparatorInTimeZone != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTimeZone")
+	}
+	if e&NSISO8601DateFormatWithFractionalSeconds != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithFractionalSeconds")
+	}
+	if e&NSISO8601DateFormatWithFullDate != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithFullDate")
+	}
+	if e&NSISO8601DateFormatWithFullTime != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithFullTime")
+	}
+	if e&NSISO8601DateFormatWithInternetDateTime != 0 {
+		parts = append(parts, "NSISO8601DateFormatWithInternetDateTime")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSInlinePresentationIntent uint64
 
 const (
-	NSInlinePresentationIntentEmphasized NSInlinePresentationIntent = 1
+	NSInlinePresentationIntentEmphasized         NSInlinePresentationIntent = 1
 	NSInlinePresentationIntentStronglyEmphasized NSInlinePresentationIntent = 2
-	NSInlinePresentationIntentCode NSInlinePresentationIntent = 4
-	NSInlinePresentationIntentStrikethrough NSInlinePresentationIntent = 32
-	NSInlinePresentationIntentSoftBreak NSInlinePresentationIntent = 64
-	NSInlinePresentationIntentLineBreak NSInlinePresentationIntent = 128
-	NSInlinePresentationIntentInlineHTML NSInlinePresentationIntent = 256
-	NSInlinePresentationIntentBlockHTML NSInlinePresentationIntent = 512
+	NSInlinePresentationIntentCode               NSInlinePresentationIntent = 4
+	NSInlinePresentationIntentStrikethrough      NSInlinePresentationIntent = 32
+	NSInlinePresentationIntentSoftBreak          NSInlinePresentationIntent = 64
+	NSInlinePresentationIntentLineBreak          NSInlinePresentationIntent = 128
+	NSInlinePresentationIntentInlineHTML         NSInlinePresentationIntent = 256
+	NSInlinePresentationIntentBlockHTML          NSInlinePresentationIntent = 512
 )
 
 func (e NSInlinePresentationIntent) String() string {
 	var parts []string
-	if e&NSInlinePresentationIntentEmphasized != 0 { parts = append(parts, "NSInlinePresentationIntentEmphasized") }
-	if e&NSInlinePresentationIntentStronglyEmphasized != 0 { parts = append(parts, "NSInlinePresentationIntentStronglyEmphasized") }
-	if e&NSInlinePresentationIntentCode != 0 { parts = append(parts, "NSInlinePresentationIntentCode") }
-	if e&NSInlinePresentationIntentStrikethrough != 0 { parts = append(parts, "NSInlinePresentationIntentStrikethrough") }
-	if e&NSInlinePresentationIntentSoftBreak != 0 { parts = append(parts, "NSInlinePresentationIntentSoftBreak") }
-	if e&NSInlinePresentationIntentLineBreak != 0 { parts = append(parts, "NSInlinePresentationIntentLineBreak") }
-	if e&NSInlinePresentationIntentInlineHTML != 0 { parts = append(parts, "NSInlinePresentationIntentInlineHTML") }
-	if e&NSInlinePresentationIntentBlockHTML != 0 { parts = append(parts, "NSInlinePresentationIntentBlockHTML") }
-	if len(parts) == 0 { return "0" }
+	if e&NSInlinePresentationIntentEmphasized != 0 {
+		parts = append(parts, "NSInlinePresentationIntentEmphasized")
+	}
+	if e&NSInlinePresentationIntentStronglyEmphasized != 0 {
+		parts = append(parts, "NSInlinePresentationIntentStronglyEmphasized")
+	}
+	if e&NSInlinePresentationIntentCode != 0 {
+		parts = append(parts, "NSInlinePresentationIntentCode")
+	}
+	if e&NSInlinePresentationIntentStrikethrough != 0 {
+		parts = append(parts, "NSInlinePresentationIntentStrikethrough")
+	}
+	if e&NSInlinePresentationIntentSoftBreak != 0 {
+		parts = append(parts, "NSInlinePresentationIntentSoftBreak")
+	}
+	if e&NSInlinePresentationIntentLineBreak != 0 {
+		parts = append(parts, "NSInlinePresentationIntentLineBreak")
+	}
+	if e&NSInlinePresentationIntentInlineHTML != 0 {
+		parts = append(parts, "NSInlinePresentationIntentInlineHTML")
+	}
+	if e&NSInlinePresentationIntentBlockHTML != 0 {
+		parts = append(parts, "NSInlinePresentationIntentBlockHTML")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSInsertionPosition uint64
 
 const (
-	NSPositionAfter NSInsertionPosition = 0
-	NSPositionBefore NSInsertionPosition = 1
+	NSPositionAfter     NSInsertionPosition = 0
+	NSPositionBefore    NSInsertionPosition = 1
 	NSPositionBeginning NSInsertionPosition = 2
-	NSPositionEnd NSInsertionPosition = 3
-	NSPositionReplace NSInsertionPosition = 4
+	NSPositionEnd       NSInsertionPosition = 3
+	NSPositionReplace   NSInsertionPosition = 4
 )
 
 func (e NSInsertionPosition) String() string {
@@ -1588,10 +2020,10 @@ func (e NSInsertionPosition) String() string {
 type NSItemProviderErrorCode int64
 
 const (
-	NSItemProviderUnknownError NSItemProviderErrorCode = -1
-	NSItemProviderItemUnavailableError NSItemProviderErrorCode = -1000
+	NSItemProviderUnknownError              NSItemProviderErrorCode = -1
+	NSItemProviderItemUnavailableError      NSItemProviderErrorCode = -1000
 	NSItemProviderUnexpectedValueClassError NSItemProviderErrorCode = -1100
-	NSItemProviderUnavailableCoercionError NSItemProviderErrorCode = -1200
+	NSItemProviderUnavailableCoercionError  NSItemProviderErrorCode = -1200
 )
 
 func (e NSItemProviderErrorCode) String() string {
@@ -1617,16 +2049,20 @@ const (
 
 func (e NSItemProviderFileOptions) String() string {
 	var parts []string
-	if e&NSItemProviderFileOptionOpenInPlace != 0 { parts = append(parts, "NSItemProviderFileOptionOpenInPlace") }
-	if len(parts) == 0 { return "0" }
+	if e&NSItemProviderFileOptionOpenInPlace != 0 {
+		parts = append(parts, "NSItemProviderFileOptionOpenInPlace")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSItemProviderRepresentationVisibility int64
 
 const (
-	NSItemProviderRepresentationVisibilityAll NSItemProviderRepresentationVisibility = 0
-	NSItemProviderRepresentationVisibilityGroup NSItemProviderRepresentationVisibility = 2
+	NSItemProviderRepresentationVisibilityAll        NSItemProviderRepresentationVisibility = 0
+	NSItemProviderRepresentationVisibilityGroup      NSItemProviderRepresentationVisibility = 2
 	NSItemProviderRepresentationVisibilityOwnProcess NSItemProviderRepresentationVisibility = 3
 )
 
@@ -1646,51 +2082,75 @@ func (e NSItemProviderRepresentationVisibility) String() string {
 type NSJSONReadingOptions uint64
 
 const (
-	NSJSONReadingMutableContainers NSJSONReadingOptions = 1
-	NSJSONReadingMutableLeaves NSJSONReadingOptions = 2
-	NSJSONReadingFragmentsAllowed NSJSONReadingOptions = 4
-	NSJSONReadingJSON5Allowed NSJSONReadingOptions = 8
+	NSJSONReadingMutableContainers         NSJSONReadingOptions = 1
+	NSJSONReadingMutableLeaves             NSJSONReadingOptions = 2
+	NSJSONReadingFragmentsAllowed          NSJSONReadingOptions = 4
+	NSJSONReadingJSON5Allowed              NSJSONReadingOptions = 8
 	NSJSONReadingTopLevelDictionaryAssumed NSJSONReadingOptions = 16
-	NSJSONReadingAllowFragments NSJSONReadingOptions = 4
+	NSJSONReadingAllowFragments            NSJSONReadingOptions = 4
 )
 
 func (e NSJSONReadingOptions) String() string {
 	var parts []string
-	if e&NSJSONReadingMutableContainers != 0 { parts = append(parts, "NSJSONReadingMutableContainers") }
-	if e&NSJSONReadingMutableLeaves != 0 { parts = append(parts, "NSJSONReadingMutableLeaves") }
-	if e&NSJSONReadingFragmentsAllowed != 0 { parts = append(parts, "NSJSONReadingFragmentsAllowed") }
-	if e&NSJSONReadingJSON5Allowed != 0 { parts = append(parts, "NSJSONReadingJSON5Allowed") }
-	if e&NSJSONReadingTopLevelDictionaryAssumed != 0 { parts = append(parts, "NSJSONReadingTopLevelDictionaryAssumed") }
-	if e&NSJSONReadingAllowFragments != 0 { parts = append(parts, "NSJSONReadingAllowFragments") }
-	if len(parts) == 0 { return "0" }
+	if e&NSJSONReadingMutableContainers != 0 {
+		parts = append(parts, "NSJSONReadingMutableContainers")
+	}
+	if e&NSJSONReadingMutableLeaves != 0 {
+		parts = append(parts, "NSJSONReadingMutableLeaves")
+	}
+	if e&NSJSONReadingFragmentsAllowed != 0 {
+		parts = append(parts, "NSJSONReadingFragmentsAllowed")
+	}
+	if e&NSJSONReadingJSON5Allowed != 0 {
+		parts = append(parts, "NSJSONReadingJSON5Allowed")
+	}
+	if e&NSJSONReadingTopLevelDictionaryAssumed != 0 {
+		parts = append(parts, "NSJSONReadingTopLevelDictionaryAssumed")
+	}
+	if e&NSJSONReadingAllowFragments != 0 {
+		parts = append(parts, "NSJSONReadingAllowFragments")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSJSONWritingOptions uint64
 
 const (
-	NSJSONWritingPrettyPrinted NSJSONWritingOptions = 1
-	NSJSONWritingSortedKeys NSJSONWritingOptions = 2
-	NSJSONWritingFragmentsAllowed NSJSONWritingOptions = 4
+	NSJSONWritingPrettyPrinted          NSJSONWritingOptions = 1
+	NSJSONWritingSortedKeys             NSJSONWritingOptions = 2
+	NSJSONWritingFragmentsAllowed       NSJSONWritingOptions = 4
 	NSJSONWritingWithoutEscapingSlashes NSJSONWritingOptions = 8
 )
 
 func (e NSJSONWritingOptions) String() string {
 	var parts []string
-	if e&NSJSONWritingPrettyPrinted != 0 { parts = append(parts, "NSJSONWritingPrettyPrinted") }
-	if e&NSJSONWritingSortedKeys != 0 { parts = append(parts, "NSJSONWritingSortedKeys") }
-	if e&NSJSONWritingFragmentsAllowed != 0 { parts = append(parts, "NSJSONWritingFragmentsAllowed") }
-	if e&NSJSONWritingWithoutEscapingSlashes != 0 { parts = append(parts, "NSJSONWritingWithoutEscapingSlashes") }
-	if len(parts) == 0 { return "0" }
+	if e&NSJSONWritingPrettyPrinted != 0 {
+		parts = append(parts, "NSJSONWritingPrettyPrinted")
+	}
+	if e&NSJSONWritingSortedKeys != 0 {
+		parts = append(parts, "NSJSONWritingSortedKeys")
+	}
+	if e&NSJSONWritingFragmentsAllowed != 0 {
+		parts = append(parts, "NSJSONWritingFragmentsAllowed")
+	}
+	if e&NSJSONWritingWithoutEscapingSlashes != 0 {
+		parts = append(parts, "NSJSONWritingWithoutEscapingSlashes")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSKeyValueChange uint64
 
 const (
-	NSKeyValueChangeSetting NSKeyValueChange = 1
-	NSKeyValueChangeInsertion NSKeyValueChange = 2
-	NSKeyValueChangeRemoval NSKeyValueChange = 3
+	NSKeyValueChangeSetting     NSKeyValueChange = 1
+	NSKeyValueChangeInsertion   NSKeyValueChange = 2
+	NSKeyValueChangeRemoval     NSKeyValueChange = 3
 	NSKeyValueChangeReplacement NSKeyValueChange = 4
 )
 
@@ -1712,29 +2172,39 @@ func (e NSKeyValueChange) String() string {
 type NSKeyValueObservingOptions uint64
 
 const (
-	NSKeyValueObservingOptionNew NSKeyValueObservingOptions = 1
-	NSKeyValueObservingOptionOld NSKeyValueObservingOptions = 2
+	NSKeyValueObservingOptionNew     NSKeyValueObservingOptions = 1
+	NSKeyValueObservingOptionOld     NSKeyValueObservingOptions = 2
 	NSKeyValueObservingOptionInitial NSKeyValueObservingOptions = 4
-	NSKeyValueObservingOptionPrior NSKeyValueObservingOptions = 8
+	NSKeyValueObservingOptionPrior   NSKeyValueObservingOptions = 8
 )
 
 func (e NSKeyValueObservingOptions) String() string {
 	var parts []string
-	if e&NSKeyValueObservingOptionNew != 0 { parts = append(parts, "NSKeyValueObservingOptionNew") }
-	if e&NSKeyValueObservingOptionOld != 0 { parts = append(parts, "NSKeyValueObservingOptionOld") }
-	if e&NSKeyValueObservingOptionInitial != 0 { parts = append(parts, "NSKeyValueObservingOptionInitial") }
-	if e&NSKeyValueObservingOptionPrior != 0 { parts = append(parts, "NSKeyValueObservingOptionPrior") }
-	if len(parts) == 0 { return "0" }
+	if e&NSKeyValueObservingOptionNew != 0 {
+		parts = append(parts, "NSKeyValueObservingOptionNew")
+	}
+	if e&NSKeyValueObservingOptionOld != 0 {
+		parts = append(parts, "NSKeyValueObservingOptionOld")
+	}
+	if e&NSKeyValueObservingOptionInitial != 0 {
+		parts = append(parts, "NSKeyValueObservingOptionInitial")
+	}
+	if e&NSKeyValueObservingOptionPrior != 0 {
+		parts = append(parts, "NSKeyValueObservingOptionPrior")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSKeyValueSetMutationKind uint64
 
 const (
-	NSKeyValueUnionSetMutation NSKeyValueSetMutationKind = 1
-	NSKeyValueMinusSetMutation NSKeyValueSetMutationKind = 2
+	NSKeyValueUnionSetMutation     NSKeyValueSetMutationKind = 1
+	NSKeyValueMinusSetMutation     NSKeyValueSetMutationKind = 2
 	NSKeyValueIntersectSetMutation NSKeyValueSetMutationKind = 3
-	NSKeyValueSetSetMutation NSKeyValueSetMutationKind = 4
+	NSKeyValueSetSetMutation       NSKeyValueSetMutationKind = 4
 )
 
 func (e NSKeyValueSetMutationKind) String() string {
@@ -1757,12 +2227,12 @@ type NSLengthFormatterUnit int64
 const (
 	NSLengthFormatterUnitMillimeter NSLengthFormatterUnit = 8
 	NSLengthFormatterUnitCentimeter NSLengthFormatterUnit = 9
-	NSLengthFormatterUnitMeter NSLengthFormatterUnit = 11
-	NSLengthFormatterUnitKilometer NSLengthFormatterUnit = 14
-	NSLengthFormatterUnitInch NSLengthFormatterUnit = 1281
-	NSLengthFormatterUnitFoot NSLengthFormatterUnit = 1282
-	NSLengthFormatterUnitYard NSLengthFormatterUnit = 1283
-	NSLengthFormatterUnitMile NSLengthFormatterUnit = 1284
+	NSLengthFormatterUnitMeter      NSLengthFormatterUnit = 11
+	NSLengthFormatterUnitKilometer  NSLengthFormatterUnit = 14
+	NSLengthFormatterUnitInch       NSLengthFormatterUnit = 1281
+	NSLengthFormatterUnitFoot       NSLengthFormatterUnit = 1282
+	NSLengthFormatterUnitYard       NSLengthFormatterUnit = 1283
+	NSLengthFormatterUnitMile       NSLengthFormatterUnit = 1284
 )
 
 func (e NSLengthFormatterUnit) String() string {
@@ -1791,31 +2261,43 @@ func (e NSLengthFormatterUnit) String() string {
 type NSLinguisticTaggerOptions uint64
 
 const (
-	NSLinguisticTaggerOmitWords NSLinguisticTaggerOptions = 1
+	NSLinguisticTaggerOmitWords       NSLinguisticTaggerOptions = 1
 	NSLinguisticTaggerOmitPunctuation NSLinguisticTaggerOptions = 2
-	NSLinguisticTaggerOmitWhitespace NSLinguisticTaggerOptions = 4
-	NSLinguisticTaggerOmitOther NSLinguisticTaggerOptions = 8
-	NSLinguisticTaggerJoinNames NSLinguisticTaggerOptions = 16
+	NSLinguisticTaggerOmitWhitespace  NSLinguisticTaggerOptions = 4
+	NSLinguisticTaggerOmitOther       NSLinguisticTaggerOptions = 8
+	NSLinguisticTaggerJoinNames       NSLinguisticTaggerOptions = 16
 )
 
 func (e NSLinguisticTaggerOptions) String() string {
 	var parts []string
-	if e&NSLinguisticTaggerOmitWords != 0 { parts = append(parts, "NSLinguisticTaggerOmitWords") }
-	if e&NSLinguisticTaggerOmitPunctuation != 0 { parts = append(parts, "NSLinguisticTaggerOmitPunctuation") }
-	if e&NSLinguisticTaggerOmitWhitespace != 0 { parts = append(parts, "NSLinguisticTaggerOmitWhitespace") }
-	if e&NSLinguisticTaggerOmitOther != 0 { parts = append(parts, "NSLinguisticTaggerOmitOther") }
-	if e&NSLinguisticTaggerJoinNames != 0 { parts = append(parts, "NSLinguisticTaggerJoinNames") }
-	if len(parts) == 0 { return "0" }
+	if e&NSLinguisticTaggerOmitWords != 0 {
+		parts = append(parts, "NSLinguisticTaggerOmitWords")
+	}
+	if e&NSLinguisticTaggerOmitPunctuation != 0 {
+		parts = append(parts, "NSLinguisticTaggerOmitPunctuation")
+	}
+	if e&NSLinguisticTaggerOmitWhitespace != 0 {
+		parts = append(parts, "NSLinguisticTaggerOmitWhitespace")
+	}
+	if e&NSLinguisticTaggerOmitOther != 0 {
+		parts = append(parts, "NSLinguisticTaggerOmitOther")
+	}
+	if e&NSLinguisticTaggerJoinNames != 0 {
+		parts = append(parts, "NSLinguisticTaggerJoinNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSLinguisticTaggerUnit int64
 
 const (
-	NSLinguisticTaggerUnitWord NSLinguisticTaggerUnit = 0
-	NSLinguisticTaggerUnitSentence NSLinguisticTaggerUnit = 1
+	NSLinguisticTaggerUnitWord      NSLinguisticTaggerUnit = 0
+	NSLinguisticTaggerUnitSentence  NSLinguisticTaggerUnit = 1
 	NSLinguisticTaggerUnitParagraph NSLinguisticTaggerUnit = 2
-	NSLinguisticTaggerUnitDocument NSLinguisticTaggerUnit = 3
+	NSLinguisticTaggerUnitDocument  NSLinguisticTaggerUnit = 3
 )
 
 func (e NSLinguisticTaggerUnit) String() string {
@@ -1836,7 +2318,7 @@ func (e NSLinguisticTaggerUnit) String() string {
 type NSLocaleLanguageDirection uint64
 
 const (
-	NSLocaleLanguageDirectionUnknown NSLocaleLanguageDirection = 0
+	NSLocaleLanguageDirectionUnknown     NSLocaleLanguageDirection = 0
 	NSLocaleLanguageDirectionLeftToRight NSLocaleLanguageDirection = 1
 	NSLocaleLanguageDirectionRightToLeft NSLocaleLanguageDirection = 2
 	NSLocaleLanguageDirectionTopToBottom NSLocaleLanguageDirection = 3
@@ -1863,27 +2345,33 @@ func (e NSLocaleLanguageDirection) String() string {
 type NSMachPortOptions uint64
 
 const (
-	NSMachPortDeallocateNone NSMachPortOptions = 0
-	NSMachPortDeallocateSendRight NSMachPortOptions = 1
+	NSMachPortDeallocateNone         NSMachPortOptions = 0
+	NSMachPortDeallocateSendRight    NSMachPortOptions = 1
 	NSMachPortDeallocateReceiveRight NSMachPortOptions = 2
 )
 
 func (e NSMachPortOptions) String() string {
 	var parts []string
-	if e&NSMachPortDeallocateSendRight != 0 { parts = append(parts, "NSMachPortDeallocateSendRight") }
-	if e&NSMachPortDeallocateReceiveRight != 0 { parts = append(parts, "NSMachPortDeallocateReceiveRight") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMachPortDeallocateSendRight != 0 {
+		parts = append(parts, "NSMachPortDeallocateSendRight")
+	}
+	if e&NSMachPortDeallocateReceiveRight != 0 {
+		parts = append(parts, "NSMachPortDeallocateReceiveRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSMassFormatterUnit int64
 
 const (
-	NSMassFormatterUnitGram NSMassFormatterUnit = 11
+	NSMassFormatterUnitGram     NSMassFormatterUnit = 11
 	NSMassFormatterUnitKilogram NSMassFormatterUnit = 14
-	NSMassFormatterUnitOunce NSMassFormatterUnit = 1537
-	NSMassFormatterUnitPound NSMassFormatterUnit = 1538
-	NSMassFormatterUnitStone NSMassFormatterUnit = 1539
+	NSMassFormatterUnitOunce    NSMassFormatterUnit = 1537
+	NSMassFormatterUnitPound    NSMassFormatterUnit = 1538
+	NSMassFormatterUnitStone    NSMassFormatterUnit = 1539
 )
 
 func (e NSMassFormatterUnit) String() string {
@@ -1906,88 +2394,126 @@ func (e NSMassFormatterUnit) String() string {
 type NSMatchingFlags uint64
 
 const (
-	NSMatchingProgress NSMatchingFlags = 1
-	NSMatchingCompleted NSMatchingFlags = 2
-	NSMatchingHitEnd NSMatchingFlags = 4
-	NSMatchingRequiredEnd NSMatchingFlags = 8
+	NSMatchingProgress      NSMatchingFlags = 1
+	NSMatchingCompleted     NSMatchingFlags = 2
+	NSMatchingHitEnd        NSMatchingFlags = 4
+	NSMatchingRequiredEnd   NSMatchingFlags = 8
 	NSMatchingInternalError NSMatchingFlags = 16
 )
 
 func (e NSMatchingFlags) String() string {
 	var parts []string
-	if e&NSMatchingProgress != 0 { parts = append(parts, "NSMatchingProgress") }
-	if e&NSMatchingCompleted != 0 { parts = append(parts, "NSMatchingCompleted") }
-	if e&NSMatchingHitEnd != 0 { parts = append(parts, "NSMatchingHitEnd") }
-	if e&NSMatchingRequiredEnd != 0 { parts = append(parts, "NSMatchingRequiredEnd") }
-	if e&NSMatchingInternalError != 0 { parts = append(parts, "NSMatchingInternalError") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMatchingProgress != 0 {
+		parts = append(parts, "NSMatchingProgress")
+	}
+	if e&NSMatchingCompleted != 0 {
+		parts = append(parts, "NSMatchingCompleted")
+	}
+	if e&NSMatchingHitEnd != 0 {
+		parts = append(parts, "NSMatchingHitEnd")
+	}
+	if e&NSMatchingRequiredEnd != 0 {
+		parts = append(parts, "NSMatchingRequiredEnd")
+	}
+	if e&NSMatchingInternalError != 0 {
+		parts = append(parts, "NSMatchingInternalError")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSMatchingOptions uint64
 
 const (
-	NSMatchingReportProgress NSMatchingOptions = 1
-	NSMatchingReportCompletion NSMatchingOptions = 2
-	NSMatchingAnchored NSMatchingOptions = 4
-	NSMatchingWithTransparentBounds NSMatchingOptions = 8
+	NSMatchingReportProgress         NSMatchingOptions = 1
+	NSMatchingReportCompletion       NSMatchingOptions = 2
+	NSMatchingAnchored               NSMatchingOptions = 4
+	NSMatchingWithTransparentBounds  NSMatchingOptions = 8
 	NSMatchingWithoutAnchoringBounds NSMatchingOptions = 16
 )
 
 func (e NSMatchingOptions) String() string {
 	var parts []string
-	if e&NSMatchingReportProgress != 0 { parts = append(parts, "NSMatchingReportProgress") }
-	if e&NSMatchingReportCompletion != 0 { parts = append(parts, "NSMatchingReportCompletion") }
-	if e&NSMatchingAnchored != 0 { parts = append(parts, "NSMatchingAnchored") }
-	if e&NSMatchingWithTransparentBounds != 0 { parts = append(parts, "NSMatchingWithTransparentBounds") }
-	if e&NSMatchingWithoutAnchoringBounds != 0 { parts = append(parts, "NSMatchingWithoutAnchoringBounds") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMatchingReportProgress != 0 {
+		parts = append(parts, "NSMatchingReportProgress")
+	}
+	if e&NSMatchingReportCompletion != 0 {
+		parts = append(parts, "NSMatchingReportCompletion")
+	}
+	if e&NSMatchingAnchored != 0 {
+		parts = append(parts, "NSMatchingAnchored")
+	}
+	if e&NSMatchingWithTransparentBounds != 0 {
+		parts = append(parts, "NSMatchingWithTransparentBounds")
+	}
+	if e&NSMatchingWithoutAnchoringBounds != 0 {
+		parts = append(parts, "NSMatchingWithoutAnchoringBounds")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSMeasurementFormatterUnitOptions uint64
 
 const (
-	NSMeasurementFormatterUnitOptionsProvidedUnit NSMeasurementFormatterUnitOptions = 1
-	NSMeasurementFormatterUnitOptionsNaturalScale NSMeasurementFormatterUnitOptions = 2
+	NSMeasurementFormatterUnitOptionsProvidedUnit           NSMeasurementFormatterUnitOptions = 1
+	NSMeasurementFormatterUnitOptionsNaturalScale           NSMeasurementFormatterUnitOptions = 2
 	NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit NSMeasurementFormatterUnitOptions = 4
 )
 
 func (e NSMeasurementFormatterUnitOptions) String() string {
 	var parts []string
-	if e&NSMeasurementFormatterUnitOptionsProvidedUnit != 0 { parts = append(parts, "NSMeasurementFormatterUnitOptionsProvidedUnit") }
-	if e&NSMeasurementFormatterUnitOptionsNaturalScale != 0 { parts = append(parts, "NSMeasurementFormatterUnitOptionsNaturalScale") }
-	if e&NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit != 0 { parts = append(parts, "NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit") }
-	if len(parts) == 0 { return "0" }
+	if e&NSMeasurementFormatterUnitOptionsProvidedUnit != 0 {
+		parts = append(parts, "NSMeasurementFormatterUnitOptionsProvidedUnit")
+	}
+	if e&NSMeasurementFormatterUnitOptionsNaturalScale != 0 {
+		parts = append(parts, "NSMeasurementFormatterUnitOptionsNaturalScale")
+	}
+	if e&NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit != 0 {
+		parts = append(parts, "NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSNetServiceOptions uint64
 
 const (
-	NSNetServiceNoAutoRename NSNetServiceOptions = 1
+	NSNetServiceNoAutoRename         NSNetServiceOptions = 1
 	NSNetServiceListenForConnections NSNetServiceOptions = 2
 )
 
 func (e NSNetServiceOptions) String() string {
 	var parts []string
-	if e&NSNetServiceNoAutoRename != 0 { parts = append(parts, "NSNetServiceNoAutoRename") }
-	if e&NSNetServiceListenForConnections != 0 { parts = append(parts, "NSNetServiceListenForConnections") }
-	if len(parts) == 0 { return "0" }
+	if e&NSNetServiceNoAutoRename != 0 {
+		parts = append(parts, "NSNetServiceNoAutoRename")
+	}
+	if e&NSNetServiceListenForConnections != 0 {
+		parts = append(parts, "NSNetServiceListenForConnections")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSNetServicesError int64
 
 const (
-	NSNetServicesUnknownError NSNetServicesError = -72000
-	NSNetServicesCollisionError NSNetServicesError = -72001
-	NSNetServicesNotFoundError NSNetServicesError = -72002
-	NSNetServicesActivityInProgress NSNetServicesError = -72003
-	NSNetServicesBadArgumentError NSNetServicesError = -72004
-	NSNetServicesCancelledError NSNetServicesError = -72005
-	NSNetServicesInvalidError NSNetServicesError = -72006
-	NSNetServicesTimeoutError NSNetServicesError = -72007
+	NSNetServicesUnknownError                      NSNetServicesError = -72000
+	NSNetServicesCollisionError                    NSNetServicesError = -72001
+	NSNetServicesNotFoundError                     NSNetServicesError = -72002
+	NSNetServicesActivityInProgress                NSNetServicesError = -72003
+	NSNetServicesBadArgumentError                  NSNetServicesError = -72004
+	NSNetServicesCancelledError                    NSNetServicesError = -72005
+	NSNetServicesInvalidError                      NSNetServicesError = -72006
+	NSNetServicesTimeoutError                      NSNetServicesError = -72007
 	NSNetServicesMissingRequiredConfigurationError NSNetServicesError = -72008
 )
 
@@ -2019,25 +2545,31 @@ func (e NSNetServicesError) String() string {
 type NSNotificationCoalescing uint64
 
 const (
-	NSNotificationNoCoalescing NSNotificationCoalescing = 0
-	NSNotificationCoalescingOnName NSNotificationCoalescing = 1
+	NSNotificationNoCoalescing       NSNotificationCoalescing = 0
+	NSNotificationCoalescingOnName   NSNotificationCoalescing = 1
 	NSNotificationCoalescingOnSender NSNotificationCoalescing = 2
 )
 
 func (e NSNotificationCoalescing) String() string {
 	var parts []string
-	if e&NSNotificationCoalescingOnName != 0 { parts = append(parts, "NSNotificationCoalescingOnName") }
-	if e&NSNotificationCoalescingOnSender != 0 { parts = append(parts, "NSNotificationCoalescingOnSender") }
-	if len(parts) == 0 { return "0" }
+	if e&NSNotificationCoalescingOnName != 0 {
+		parts = append(parts, "NSNotificationCoalescingOnName")
+	}
+	if e&NSNotificationCoalescingOnSender != 0 {
+		parts = append(parts, "NSNotificationCoalescingOnSender")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSNotificationSuspensionBehavior uint64
 
 const (
-	NSNotificationSuspensionBehaviorDrop NSNotificationSuspensionBehavior = 1
-	NSNotificationSuspensionBehaviorCoalesce NSNotificationSuspensionBehavior = 2
-	NSNotificationSuspensionBehaviorHold NSNotificationSuspensionBehavior = 3
+	NSNotificationSuspensionBehaviorDrop               NSNotificationSuspensionBehavior = 1
+	NSNotificationSuspensionBehaviorCoalesce           NSNotificationSuspensionBehavior = 2
+	NSNotificationSuspensionBehaviorHold               NSNotificationSuspensionBehavior = 3
 	NSNotificationSuspensionBehaviorDeliverImmediately NSNotificationSuspensionBehavior = 4
 )
 
@@ -2060,8 +2592,8 @@ type NSNumberFormatterBehavior uint64
 
 const (
 	NSNumberFormatterBehaviorDefault NSNumberFormatterBehavior = 0
-	NSNumberFormatterBehavior10_0 NSNumberFormatterBehavior = 1000
-	NSNumberFormatterBehavior10_4 NSNumberFormatterBehavior = 1040
+	NSNumberFormatterBehavior10_0    NSNumberFormatterBehavior = 1000
+	NSNumberFormatterBehavior10_4    NSNumberFormatterBehavior = 1040
 )
 
 func (e NSNumberFormatterBehavior) String() string {
@@ -2081,9 +2613,9 @@ type NSNumberFormatterPadPosition uint64
 
 const (
 	NSNumberFormatterPadBeforePrefix NSNumberFormatterPadPosition = 0
-	NSNumberFormatterPadAfterPrefix NSNumberFormatterPadPosition = 1
+	NSNumberFormatterPadAfterPrefix  NSNumberFormatterPadPosition = 1
 	NSNumberFormatterPadBeforeSuffix NSNumberFormatterPadPosition = 2
-	NSNumberFormatterPadAfterSuffix NSNumberFormatterPadPosition = 3
+	NSNumberFormatterPadAfterSuffix  NSNumberFormatterPadPosition = 3
 )
 
 func (e NSNumberFormatterPadPosition) String() string {
@@ -2104,13 +2636,13 @@ func (e NSNumberFormatterPadPosition) String() string {
 type NSNumberFormatterRoundingMode uint64
 
 const (
-	NSNumberFormatterRoundCeiling NSNumberFormatterRoundingMode = 0
-	NSNumberFormatterRoundFloor NSNumberFormatterRoundingMode = 1
-	NSNumberFormatterRoundDown NSNumberFormatterRoundingMode = 2
-	NSNumberFormatterRoundUp NSNumberFormatterRoundingMode = 3
+	NSNumberFormatterRoundCeiling  NSNumberFormatterRoundingMode = 0
+	NSNumberFormatterRoundFloor    NSNumberFormatterRoundingMode = 1
+	NSNumberFormatterRoundDown     NSNumberFormatterRoundingMode = 2
+	NSNumberFormatterRoundUp       NSNumberFormatterRoundingMode = 3
 	NSNumberFormatterRoundHalfEven NSNumberFormatterRoundingMode = 4
 	NSNumberFormatterRoundHalfDown NSNumberFormatterRoundingMode = 5
-	NSNumberFormatterRoundHalfUp NSNumberFormatterRoundingMode = 6
+	NSNumberFormatterRoundHalfUp   NSNumberFormatterRoundingMode = 6
 )
 
 func (e NSNumberFormatterRoundingMode) String() string {
@@ -2137,15 +2669,15 @@ func (e NSNumberFormatterRoundingMode) String() string {
 type NSNumberFormatterStyle uint64
 
 const (
-	NSNumberFormatterNoStyle NSNumberFormatterStyle = 0
-	NSNumberFormatterDecimalStyle NSNumberFormatterStyle = 1
-	NSNumberFormatterCurrencyStyle NSNumberFormatterStyle = 2
-	NSNumberFormatterPercentStyle NSNumberFormatterStyle = 3
-	NSNumberFormatterScientificStyle NSNumberFormatterStyle = 4
-	NSNumberFormatterSpellOutStyle NSNumberFormatterStyle = 5
-	NSNumberFormatterOrdinalStyle NSNumberFormatterStyle = 6
-	NSNumberFormatterCurrencyISOCodeStyle NSNumberFormatterStyle = 8
-	NSNumberFormatterCurrencyPluralStyle NSNumberFormatterStyle = 9
+	NSNumberFormatterNoStyle                 NSNumberFormatterStyle = 0
+	NSNumberFormatterDecimalStyle            NSNumberFormatterStyle = 1
+	NSNumberFormatterCurrencyStyle           NSNumberFormatterStyle = 2
+	NSNumberFormatterPercentStyle            NSNumberFormatterStyle = 3
+	NSNumberFormatterScientificStyle         NSNumberFormatterStyle = 4
+	NSNumberFormatterSpellOutStyle           NSNumberFormatterStyle = 5
+	NSNumberFormatterOrdinalStyle            NSNumberFormatterStyle = 6
+	NSNumberFormatterCurrencyISOCodeStyle    NSNumberFormatterStyle = 8
+	NSNumberFormatterCurrencyPluralStyle     NSNumberFormatterStyle = 9
 	NSNumberFormatterCurrencyAccountingStyle NSNumberFormatterStyle = 10
 )
 
@@ -2179,10 +2711,10 @@ func (e NSNumberFormatterStyle) String() string {
 type NSOperationQueuePriority int64
 
 const (
-	NSOperationQueuePriorityVeryLow NSOperationQueuePriority = -8
-	NSOperationQueuePriorityLow NSOperationQueuePriority = -4
-	NSOperationQueuePriorityNormal NSOperationQueuePriority = 0
-	NSOperationQueuePriorityHigh NSOperationQueuePriority = 4
+	NSOperationQueuePriorityVeryLow  NSOperationQueuePriority = -8
+	NSOperationQueuePriorityLow      NSOperationQueuePriority = -4
+	NSOperationQueuePriorityNormal   NSOperationQueuePriority = 0
+	NSOperationQueuePriorityHigh     NSOperationQueuePriority = 4
 	NSOperationQueuePriorityVeryHigh NSOperationQueuePriority = 8
 )
 
@@ -2216,10 +2748,18 @@ const (
 
 func (e NSOrderedCollectionDifferenceCalculationOptions) String() string {
 	var parts []string
-	if e&NSOrderedCollectionDifferenceCalculationOmitInsertedObjects != 0 { parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitInsertedObjects") }
-	if e&NSOrderedCollectionDifferenceCalculationOmitRemovedObjects != 0 { parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitRemovedObjects") }
-	if e&NSOrderedCollectionDifferenceCalculationInferMoves != 0 { parts = append(parts, "NSOrderedCollectionDifferenceCalculationInferMoves") }
-	if len(parts) == 0 { return "0" }
+	if e&NSOrderedCollectionDifferenceCalculationOmitInsertedObjects != 0 {
+		parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitInsertedObjects")
+	}
+	if e&NSOrderedCollectionDifferenceCalculationOmitRemovedObjects != 0 {
+		parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitRemovedObjects")
+	}
+	if e&NSOrderedCollectionDifferenceCalculationInferMoves != 0 {
+		parts = append(parts, "NSOrderedCollectionDifferenceCalculationInferMoves")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2231,18 +2771,22 @@ const (
 
 func (e NSPersonNameComponentsFormatterOptions) String() string {
 	var parts []string
-	if e&NSPersonNameComponentsFormatterPhonetic != 0 { parts = append(parts, "NSPersonNameComponentsFormatterPhonetic") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPersonNameComponentsFormatterPhonetic != 0 {
+		parts = append(parts, "NSPersonNameComponentsFormatterPhonetic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSPersonNameComponentsFormatterStyle int64
 
 const (
-	NSPersonNameComponentsFormatterStyleDefault NSPersonNameComponentsFormatterStyle = 0
-	NSPersonNameComponentsFormatterStyleShort NSPersonNameComponentsFormatterStyle = 1
-	NSPersonNameComponentsFormatterStyleMedium NSPersonNameComponentsFormatterStyle = 2
-	NSPersonNameComponentsFormatterStyleLong NSPersonNameComponentsFormatterStyle = 3
+	NSPersonNameComponentsFormatterStyleDefault     NSPersonNameComponentsFormatterStyle = 0
+	NSPersonNameComponentsFormatterStyleShort       NSPersonNameComponentsFormatterStyle = 1
+	NSPersonNameComponentsFormatterStyleMedium      NSPersonNameComponentsFormatterStyle = 2
+	NSPersonNameComponentsFormatterStyleLong        NSPersonNameComponentsFormatterStyle = 3
 	NSPersonNameComponentsFormatterStyleAbbreviated NSPersonNameComponentsFormatterStyle = 4
 )
 
@@ -2266,35 +2810,59 @@ func (e NSPersonNameComponentsFormatterStyle) String() string {
 type NSPointerFunctionsOptions uint64
 
 const (
-	NSPointerFunctionsStrongMemory NSPointerFunctionsOptions = 0
-	NSPointerFunctionsZeroingWeakMemory NSPointerFunctionsOptions = 1
-	NSPointerFunctionsOpaqueMemory NSPointerFunctionsOptions = 2
-	NSPointerFunctionsMallocMemory NSPointerFunctionsOptions = 3
-	NSPointerFunctionsMachVirtualMemory NSPointerFunctionsOptions = 4
-	NSPointerFunctionsWeakMemory NSPointerFunctionsOptions = 5
-	NSPointerFunctionsObjectPersonality NSPointerFunctionsOptions = 0
-	NSPointerFunctionsOpaquePersonality NSPointerFunctionsOptions = 256
+	NSPointerFunctionsStrongMemory             NSPointerFunctionsOptions = 0
+	NSPointerFunctionsZeroingWeakMemory        NSPointerFunctionsOptions = 1
+	NSPointerFunctionsOpaqueMemory             NSPointerFunctionsOptions = 2
+	NSPointerFunctionsMallocMemory             NSPointerFunctionsOptions = 3
+	NSPointerFunctionsMachVirtualMemory        NSPointerFunctionsOptions = 4
+	NSPointerFunctionsWeakMemory               NSPointerFunctionsOptions = 5
+	NSPointerFunctionsObjectPersonality        NSPointerFunctionsOptions = 0
+	NSPointerFunctionsOpaquePersonality        NSPointerFunctionsOptions = 256
 	NSPointerFunctionsObjectPointerPersonality NSPointerFunctionsOptions = 512
-	NSPointerFunctionsCStringPersonality NSPointerFunctionsOptions = 768
-	NSPointerFunctionsStructPersonality NSPointerFunctionsOptions = 1024
-	NSPointerFunctionsIntegerPersonality NSPointerFunctionsOptions = 1280
-	NSPointerFunctionsCopyIn NSPointerFunctionsOptions = 65536
+	NSPointerFunctionsCStringPersonality       NSPointerFunctionsOptions = 768
+	NSPointerFunctionsStructPersonality        NSPointerFunctionsOptions = 1024
+	NSPointerFunctionsIntegerPersonality       NSPointerFunctionsOptions = 1280
+	NSPointerFunctionsCopyIn                   NSPointerFunctionsOptions = 65536
 )
 
 func (e NSPointerFunctionsOptions) String() string {
 	var parts []string
-	if e&NSPointerFunctionsZeroingWeakMemory != 0 { parts = append(parts, "NSPointerFunctionsZeroingWeakMemory") }
-	if e&NSPointerFunctionsOpaqueMemory != 0 { parts = append(parts, "NSPointerFunctionsOpaqueMemory") }
-	if e&NSPointerFunctionsMallocMemory != 0 { parts = append(parts, "NSPointerFunctionsMallocMemory") }
-	if e&NSPointerFunctionsMachVirtualMemory != 0 { parts = append(parts, "NSPointerFunctionsMachVirtualMemory") }
-	if e&NSPointerFunctionsWeakMemory != 0 { parts = append(parts, "NSPointerFunctionsWeakMemory") }
-	if e&NSPointerFunctionsOpaquePersonality != 0 { parts = append(parts, "NSPointerFunctionsOpaquePersonality") }
-	if e&NSPointerFunctionsObjectPointerPersonality != 0 { parts = append(parts, "NSPointerFunctionsObjectPointerPersonality") }
-	if e&NSPointerFunctionsCStringPersonality != 0 { parts = append(parts, "NSPointerFunctionsCStringPersonality") }
-	if e&NSPointerFunctionsStructPersonality != 0 { parts = append(parts, "NSPointerFunctionsStructPersonality") }
-	if e&NSPointerFunctionsIntegerPersonality != 0 { parts = append(parts, "NSPointerFunctionsIntegerPersonality") }
-	if e&NSPointerFunctionsCopyIn != 0 { parts = append(parts, "NSPointerFunctionsCopyIn") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPointerFunctionsZeroingWeakMemory != 0 {
+		parts = append(parts, "NSPointerFunctionsZeroingWeakMemory")
+	}
+	if e&NSPointerFunctionsOpaqueMemory != 0 {
+		parts = append(parts, "NSPointerFunctionsOpaqueMemory")
+	}
+	if e&NSPointerFunctionsMallocMemory != 0 {
+		parts = append(parts, "NSPointerFunctionsMallocMemory")
+	}
+	if e&NSPointerFunctionsMachVirtualMemory != 0 {
+		parts = append(parts, "NSPointerFunctionsMachVirtualMemory")
+	}
+	if e&NSPointerFunctionsWeakMemory != 0 {
+		parts = append(parts, "NSPointerFunctionsWeakMemory")
+	}
+	if e&NSPointerFunctionsOpaquePersonality != 0 {
+		parts = append(parts, "NSPointerFunctionsOpaquePersonality")
+	}
+	if e&NSPointerFunctionsObjectPointerPersonality != 0 {
+		parts = append(parts, "NSPointerFunctionsObjectPointerPersonality")
+	}
+	if e&NSPointerFunctionsCStringPersonality != 0 {
+		parts = append(parts, "NSPointerFunctionsCStringPersonality")
+	}
+	if e&NSPointerFunctionsStructPersonality != 0 {
+		parts = append(parts, "NSPointerFunctionsStructPersonality")
+	}
+	if e&NSPointerFunctionsIntegerPersonality != 0 {
+		parts = append(parts, "NSPointerFunctionsIntegerPersonality")
+	}
+	if e&NSPointerFunctionsCopyIn != 0 {
+		parts = append(parts, "NSPointerFunctionsCopyIn")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2302,8 +2870,8 @@ type NSPostingStyle uint64
 
 const (
 	NSPostWhenIdle NSPostingStyle = 1
-	NSPostASAP NSPostingStyle = 2
-	NSPostNow NSPostingStyle = 3
+	NSPostASAP     NSPostingStyle = 2
+	NSPostNow      NSPostingStyle = 3
 )
 
 func (e NSPostingStyle) String() string {
@@ -2322,20 +2890,20 @@ func (e NSPostingStyle) String() string {
 type NSPredicateOperatorType uint64
 
 const (
-	NSLessThanPredicateOperatorType NSPredicateOperatorType = 0
-	NSLessThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 1
-	NSGreaterThanPredicateOperatorType NSPredicateOperatorType = 2
+	NSLessThanPredicateOperatorType             NSPredicateOperatorType = 0
+	NSLessThanOrEqualToPredicateOperatorType    NSPredicateOperatorType = 1
+	NSGreaterThanPredicateOperatorType          NSPredicateOperatorType = 2
 	NSGreaterThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 3
-	NSEqualToPredicateOperatorType NSPredicateOperatorType = 4
-	NSNotEqualToPredicateOperatorType NSPredicateOperatorType = 5
-	NSMatchesPredicateOperatorType NSPredicateOperatorType = 6
-	NSLikePredicateOperatorType NSPredicateOperatorType = 7
-	NSBeginsWithPredicateOperatorType NSPredicateOperatorType = 8
-	NSEndsWithPredicateOperatorType NSPredicateOperatorType = 9
-	NSInPredicateOperatorType NSPredicateOperatorType = 10
-	NSCustomSelectorPredicateOperatorType NSPredicateOperatorType = 11
-	NSContainsPredicateOperatorType NSPredicateOperatorType = 99
-	NSBetweenPredicateOperatorType NSPredicateOperatorType = 100
+	NSEqualToPredicateOperatorType              NSPredicateOperatorType = 4
+	NSNotEqualToPredicateOperatorType           NSPredicateOperatorType = 5
+	NSMatchesPredicateOperatorType              NSPredicateOperatorType = 6
+	NSLikePredicateOperatorType                 NSPredicateOperatorType = 7
+	NSBeginsWithPredicateOperatorType           NSPredicateOperatorType = 8
+	NSEndsWithPredicateOperatorType             NSPredicateOperatorType = 9
+	NSInPredicateOperatorType                   NSPredicateOperatorType = 10
+	NSCustomSelectorPredicateOperatorType       NSPredicateOperatorType = 11
+	NSContainsPredicateOperatorType             NSPredicateOperatorType = 99
+	NSBetweenPredicateOperatorType              NSPredicateOperatorType = 100
 )
 
 func (e NSPredicateOperatorType) String() string {
@@ -2376,18 +2944,18 @@ func (e NSPredicateOperatorType) String() string {
 type NSPresentationIntentKind int64
 
 const (
-	NSPresentationIntentKindParagraph NSPresentationIntentKind = 0
-	NSPresentationIntentKindHeader NSPresentationIntentKind = 1
-	NSPresentationIntentKindOrderedList NSPresentationIntentKind = 2
-	NSPresentationIntentKindUnorderedList NSPresentationIntentKind = 3
-	NSPresentationIntentKindListItem NSPresentationIntentKind = 4
-	NSPresentationIntentKindCodeBlock NSPresentationIntentKind = 5
-	NSPresentationIntentKindBlockQuote NSPresentationIntentKind = 6
-	NSPresentationIntentKindThematicBreak NSPresentationIntentKind = 7
-	NSPresentationIntentKindTable NSPresentationIntentKind = 8
+	NSPresentationIntentKindParagraph      NSPresentationIntentKind = 0
+	NSPresentationIntentKindHeader         NSPresentationIntentKind = 1
+	NSPresentationIntentKindOrderedList    NSPresentationIntentKind = 2
+	NSPresentationIntentKindUnorderedList  NSPresentationIntentKind = 3
+	NSPresentationIntentKindListItem       NSPresentationIntentKind = 4
+	NSPresentationIntentKindCodeBlock      NSPresentationIntentKind = 5
+	NSPresentationIntentKindBlockQuote     NSPresentationIntentKind = 6
+	NSPresentationIntentKindThematicBreak  NSPresentationIntentKind = 7
+	NSPresentationIntentKindTable          NSPresentationIntentKind = 8
 	NSPresentationIntentKindTableHeaderRow NSPresentationIntentKind = 9
-	NSPresentationIntentKindTableRow NSPresentationIntentKind = 10
-	NSPresentationIntentKindTableCell NSPresentationIntentKind = 11
+	NSPresentationIntentKindTableRow       NSPresentationIntentKind = 10
+	NSPresentationIntentKindTableCell      NSPresentationIntentKind = 11
 )
 
 func (e NSPresentationIntentKind) String() string {
@@ -2424,9 +2992,9 @@ func (e NSPresentationIntentKind) String() string {
 type NSPresentationIntentTableColumnAlignment int64
 
 const (
-	NSPresentationIntentTableColumnAlignmentLeft NSPresentationIntentTableColumnAlignment = 0
+	NSPresentationIntentTableColumnAlignmentLeft   NSPresentationIntentTableColumnAlignment = 0
 	NSPresentationIntentTableColumnAlignmentCenter NSPresentationIntentTableColumnAlignment = 1
-	NSPresentationIntentTableColumnAlignmentRight NSPresentationIntentTableColumnAlignment = 2
+	NSPresentationIntentTableColumnAlignmentRight  NSPresentationIntentTableColumnAlignment = 2
 )
 
 func (e NSPresentationIntentTableColumnAlignment) String() string {
@@ -2445,9 +3013,9 @@ func (e NSPresentationIntentTableColumnAlignment) String() string {
 type NSProcessInfoThermalState int64
 
 const (
-	NSProcessInfoThermalStateNominal NSProcessInfoThermalState = 0
-	NSProcessInfoThermalStateFair NSProcessInfoThermalState = 1
-	NSProcessInfoThermalStateSerious NSProcessInfoThermalState = 2
+	NSProcessInfoThermalStateNominal  NSProcessInfoThermalState = 0
+	NSProcessInfoThermalStateFair     NSProcessInfoThermalState = 1
+	NSProcessInfoThermalStateSerious  NSProcessInfoThermalState = 2
 	NSProcessInfoThermalStateCritical NSProcessInfoThermalState = 3
 )
 
@@ -2469,8 +3037,8 @@ func (e NSProcessInfoThermalState) String() string {
 type NSPropertyListFormat uint64
 
 const (
-	NSPropertyListOpenStepFormat NSPropertyListFormat = 1
-	NSPropertyListXMLFormat_v1_0 NSPropertyListFormat = 100
+	NSPropertyListOpenStepFormat    NSPropertyListFormat = 1
+	NSPropertyListXMLFormat_v1_0    NSPropertyListFormat = 100
 	NSPropertyListBinaryFormat_v1_0 NSPropertyListFormat = 200
 )
 
@@ -2490,16 +3058,22 @@ func (e NSPropertyListFormat) String() string {
 type NSPropertyListMutabilityOptions uint64
 
 const (
-	NSPropertyListImmutable NSPropertyListMutabilityOptions = 0
-	NSPropertyListMutableContainers NSPropertyListMutabilityOptions = 1
+	NSPropertyListImmutable                  NSPropertyListMutabilityOptions = 0
+	NSPropertyListMutableContainers          NSPropertyListMutabilityOptions = 1
 	NSPropertyListMutableContainersAndLeaves NSPropertyListMutabilityOptions = 2
 )
 
 func (e NSPropertyListMutabilityOptions) String() string {
 	var parts []string
-	if e&NSPropertyListMutableContainers != 0 { parts = append(parts, "NSPropertyListMutableContainers") }
-	if e&NSPropertyListMutableContainersAndLeaves != 0 { parts = append(parts, "NSPropertyListMutableContainersAndLeaves") }
-	if len(parts) == 0 { return "0" }
+	if e&NSPropertyListMutableContainers != 0 {
+		parts = append(parts, "NSPropertyListMutableContainers")
+	}
+	if e&NSPropertyListMutableContainersAndLeaves != 0 {
+		parts = append(parts, "NSPropertyListMutableContainersAndLeaves")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2507,10 +3081,10 @@ type NSQualityOfService int64
 
 const (
 	NSQualityOfServiceUserInteractive NSQualityOfService = 33
-	NSQualityOfServiceUserInitiated NSQualityOfService = 25
-	NSQualityOfServiceUtility NSQualityOfService = 17
-	NSQualityOfServiceBackground NSQualityOfService = 9
-	NSQualityOfServiceDefault NSQualityOfService = -1
+	NSQualityOfServiceUserInitiated   NSQualityOfService = 25
+	NSQualityOfServiceUtility         NSQualityOfService = 17
+	NSQualityOfServiceBackground      NSQualityOfService = 9
+	NSQualityOfServiceDefault         NSQualityOfService = -1
 )
 
 func (e NSQualityOfService) String() string {
@@ -2537,10 +3111,10 @@ const (
 	NSRectEdgeMinY NSRectEdge = 1
 	NSRectEdgeMaxX NSRectEdge = 2
 	NSRectEdgeMaxY NSRectEdge = 3
-	NSMinXEdge NSRectEdge = 0
-	NSMinYEdge NSRectEdge = 1
-	NSMaxXEdge NSRectEdge = 2
-	NSMaxYEdge NSRectEdge = 3
+	NSMinXEdge     NSRectEdge = 0
+	NSMinYEdge     NSRectEdge = 1
+	NSMaxXEdge     NSRectEdge = 2
+	NSMaxYEdge     NSRectEdge = 3
 )
 
 func (e NSRectEdge) String() string {
@@ -2561,25 +3135,41 @@ func (e NSRectEdge) String() string {
 type NSRegularExpressionOptions uint64
 
 const (
-	NSRegularExpressionCaseInsensitive NSRegularExpressionOptions = 1
+	NSRegularExpressionCaseInsensitive            NSRegularExpressionOptions = 1
 	NSRegularExpressionAllowCommentsAndWhitespace NSRegularExpressionOptions = 2
-	NSRegularExpressionIgnoreMetacharacters NSRegularExpressionOptions = 4
-	NSRegularExpressionDotMatchesLineSeparators NSRegularExpressionOptions = 8
-	NSRegularExpressionAnchorsMatchLines NSRegularExpressionOptions = 16
-	NSRegularExpressionUseUnixLineSeparators NSRegularExpressionOptions = 32
-	NSRegularExpressionUseUnicodeWordBoundaries NSRegularExpressionOptions = 64
+	NSRegularExpressionIgnoreMetacharacters       NSRegularExpressionOptions = 4
+	NSRegularExpressionDotMatchesLineSeparators   NSRegularExpressionOptions = 8
+	NSRegularExpressionAnchorsMatchLines          NSRegularExpressionOptions = 16
+	NSRegularExpressionUseUnixLineSeparators      NSRegularExpressionOptions = 32
+	NSRegularExpressionUseUnicodeWordBoundaries   NSRegularExpressionOptions = 64
 )
 
 func (e NSRegularExpressionOptions) String() string {
 	var parts []string
-	if e&NSRegularExpressionCaseInsensitive != 0 { parts = append(parts, "NSRegularExpressionCaseInsensitive") }
-	if e&NSRegularExpressionAllowCommentsAndWhitespace != 0 { parts = append(parts, "NSRegularExpressionAllowCommentsAndWhitespace") }
-	if e&NSRegularExpressionIgnoreMetacharacters != 0 { parts = append(parts, "NSRegularExpressionIgnoreMetacharacters") }
-	if e&NSRegularExpressionDotMatchesLineSeparators != 0 { parts = append(parts, "NSRegularExpressionDotMatchesLineSeparators") }
-	if e&NSRegularExpressionAnchorsMatchLines != 0 { parts = append(parts, "NSRegularExpressionAnchorsMatchLines") }
-	if e&NSRegularExpressionUseUnixLineSeparators != 0 { parts = append(parts, "NSRegularExpressionUseUnixLineSeparators") }
-	if e&NSRegularExpressionUseUnicodeWordBoundaries != 0 { parts = append(parts, "NSRegularExpressionUseUnicodeWordBoundaries") }
-	if len(parts) == 0 { return "0" }
+	if e&NSRegularExpressionCaseInsensitive != 0 {
+		parts = append(parts, "NSRegularExpressionCaseInsensitive")
+	}
+	if e&NSRegularExpressionAllowCommentsAndWhitespace != 0 {
+		parts = append(parts, "NSRegularExpressionAllowCommentsAndWhitespace")
+	}
+	if e&NSRegularExpressionIgnoreMetacharacters != 0 {
+		parts = append(parts, "NSRegularExpressionIgnoreMetacharacters")
+	}
+	if e&NSRegularExpressionDotMatchesLineSeparators != 0 {
+		parts = append(parts, "NSRegularExpressionDotMatchesLineSeparators")
+	}
+	if e&NSRegularExpressionAnchorsMatchLines != 0 {
+		parts = append(parts, "NSRegularExpressionAnchorsMatchLines")
+	}
+	if e&NSRegularExpressionUseUnixLineSeparators != 0 {
+		parts = append(parts, "NSRegularExpressionUseUnixLineSeparators")
+	}
+	if e&NSRegularExpressionUseUnicodeWordBoundaries != 0 {
+		parts = append(parts, "NSRegularExpressionUseUnicodeWordBoundaries")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2587,7 +3177,7 @@ type NSRelativeDateTimeFormatterStyle int64
 
 const (
 	NSRelativeDateTimeFormatterStyleNumeric NSRelativeDateTimeFormatterStyle = 0
-	NSRelativeDateTimeFormatterStyleNamed NSRelativeDateTimeFormatterStyle = 1
+	NSRelativeDateTimeFormatterStyleNamed   NSRelativeDateTimeFormatterStyle = 1
 )
 
 func (e NSRelativeDateTimeFormatterStyle) String() string {
@@ -2604,9 +3194,9 @@ func (e NSRelativeDateTimeFormatterStyle) String() string {
 type NSRelativeDateTimeFormatterUnitsStyle int64
 
 const (
-	NSRelativeDateTimeFormatterUnitsStyleFull NSRelativeDateTimeFormatterUnitsStyle = 0
-	NSRelativeDateTimeFormatterUnitsStyleSpellOut NSRelativeDateTimeFormatterUnitsStyle = 1
-	NSRelativeDateTimeFormatterUnitsStyleShort NSRelativeDateTimeFormatterUnitsStyle = 2
+	NSRelativeDateTimeFormatterUnitsStyleFull        NSRelativeDateTimeFormatterUnitsStyle = 0
+	NSRelativeDateTimeFormatterUnitsStyleSpellOut    NSRelativeDateTimeFormatterUnitsStyle = 1
+	NSRelativeDateTimeFormatterUnitsStyleShort       NSRelativeDateTimeFormatterUnitsStyle = 2
 	NSRelativeDateTimeFormatterUnitsStyleAbbreviated NSRelativeDateTimeFormatterUnitsStyle = 3
 )
 
@@ -2628,7 +3218,7 @@ func (e NSRelativeDateTimeFormatterUnitsStyle) String() string {
 type NSRelativePosition uint64
 
 const (
-	NSRelativeAfter NSRelativePosition = 0
+	NSRelativeAfter  NSRelativePosition = 0
 	NSRelativeBefore NSRelativePosition = 1
 )
 
@@ -2646,9 +3236,9 @@ func (e NSRelativePosition) String() string {
 type NSRoundingMode uint64
 
 const (
-	NSRoundPlain NSRoundingMode = 0
-	NSRoundDown NSRoundingMode = 1
-	NSRoundUp NSRoundingMode = 2
+	NSRoundPlain   NSRoundingMode = 0
+	NSRoundDown    NSRoundingMode = 1
+	NSRoundUp      NSRoundingMode = 2
 	NSRoundBankers NSRoundingMode = 3
 )
 
@@ -2671,7 +3261,7 @@ type NSSaveOptions uint64
 
 const (
 	NSSaveOptionsYes NSSaveOptions = 0
-	NSSaveOptionsNo NSSaveOptions = 1
+	NSSaveOptionsNo  NSSaveOptions = 1
 	NSSaveOptionsAsk NSSaveOptions = 2
 )
 
@@ -2691,33 +3281,33 @@ func (e NSSaveOptions) String() string {
 type NSSearchPathDirectory uint64
 
 const (
-	NSApplicationDirectory NSSearchPathDirectory = 1
-	NSDemoApplicationDirectory NSSearchPathDirectory = 2
+	NSApplicationDirectory          NSSearchPathDirectory = 1
+	NSDemoApplicationDirectory      NSSearchPathDirectory = 2
 	NSDeveloperApplicationDirectory NSSearchPathDirectory = 3
-	NSAdminApplicationDirectory NSSearchPathDirectory = 4
-	NSLibraryDirectory NSSearchPathDirectory = 5
-	NSDeveloperDirectory NSSearchPathDirectory = 6
-	NSUserDirectory NSSearchPathDirectory = 7
-	NSDocumentationDirectory NSSearchPathDirectory = 8
-	NSDocumentDirectory NSSearchPathDirectory = 9
-	NSCoreServiceDirectory NSSearchPathDirectory = 10
+	NSAdminApplicationDirectory     NSSearchPathDirectory = 4
+	NSLibraryDirectory              NSSearchPathDirectory = 5
+	NSDeveloperDirectory            NSSearchPathDirectory = 6
+	NSUserDirectory                 NSSearchPathDirectory = 7
+	NSDocumentationDirectory        NSSearchPathDirectory = 8
+	NSDocumentDirectory             NSSearchPathDirectory = 9
+	NSCoreServiceDirectory          NSSearchPathDirectory = 10
 	NSAutosavedInformationDirectory NSSearchPathDirectory = 11
-	NSDesktopDirectory NSSearchPathDirectory = 12
-	NSCachesDirectory NSSearchPathDirectory = 13
-	NSApplicationSupportDirectory NSSearchPathDirectory = 14
-	NSDownloadsDirectory NSSearchPathDirectory = 15
-	NSInputMethodsDirectory NSSearchPathDirectory = 16
-	NSMoviesDirectory NSSearchPathDirectory = 17
-	NSMusicDirectory NSSearchPathDirectory = 18
-	NSPicturesDirectory NSSearchPathDirectory = 19
-	NSPrinterDescriptionDirectory NSSearchPathDirectory = 20
-	NSSharedPublicDirectory NSSearchPathDirectory = 21
-	NSPreferencePanesDirectory NSSearchPathDirectory = 22
-	NSApplicationScriptsDirectory NSSearchPathDirectory = 23
-	NSItemReplacementDirectory NSSearchPathDirectory = 99
-	NSAllApplicationsDirectory NSSearchPathDirectory = 100
-	NSAllLibrariesDirectory NSSearchPathDirectory = 101
-	NSTrashDirectory NSSearchPathDirectory = 102
+	NSDesktopDirectory              NSSearchPathDirectory = 12
+	NSCachesDirectory               NSSearchPathDirectory = 13
+	NSApplicationSupportDirectory   NSSearchPathDirectory = 14
+	NSDownloadsDirectory            NSSearchPathDirectory = 15
+	NSInputMethodsDirectory         NSSearchPathDirectory = 16
+	NSMoviesDirectory               NSSearchPathDirectory = 17
+	NSMusicDirectory                NSSearchPathDirectory = 18
+	NSPicturesDirectory             NSSearchPathDirectory = 19
+	NSPrinterDescriptionDirectory   NSSearchPathDirectory = 20
+	NSSharedPublicDirectory         NSSearchPathDirectory = 21
+	NSPreferencePanesDirectory      NSSearchPathDirectory = 22
+	NSApplicationScriptsDirectory   NSSearchPathDirectory = 23
+	NSItemReplacementDirectory      NSSearchPathDirectory = 99
+	NSAllApplicationsDirectory      NSSearchPathDirectory = 100
+	NSAllLibrariesDirectory         NSSearchPathDirectory = 101
+	NSTrashDirectory                NSSearchPathDirectory = 102
 )
 
 func (e NSSearchPathDirectory) String() string {
@@ -2784,21 +3374,33 @@ func (e NSSearchPathDirectory) String() string {
 type NSSearchPathDomainMask uint64
 
 const (
-	NSUserDomainMask NSSearchPathDomainMask = 1
-	NSLocalDomainMask NSSearchPathDomainMask = 2
+	NSUserDomainMask    NSSearchPathDomainMask = 1
+	NSLocalDomainMask   NSSearchPathDomainMask = 2
 	NSNetworkDomainMask NSSearchPathDomainMask = 4
-	NSSystemDomainMask NSSearchPathDomainMask = 8
-	NSAllDomainsMask NSSearchPathDomainMask = 65535
+	NSSystemDomainMask  NSSearchPathDomainMask = 8
+	NSAllDomainsMask    NSSearchPathDomainMask = 65535
 )
 
 func (e NSSearchPathDomainMask) String() string {
 	var parts []string
-	if e&NSUserDomainMask != 0 { parts = append(parts, "NSUserDomainMask") }
-	if e&NSLocalDomainMask != 0 { parts = append(parts, "NSLocalDomainMask") }
-	if e&NSNetworkDomainMask != 0 { parts = append(parts, "NSNetworkDomainMask") }
-	if e&NSSystemDomainMask != 0 { parts = append(parts, "NSSystemDomainMask") }
-	if e&NSAllDomainsMask != 0 { parts = append(parts, "NSAllDomainsMask") }
-	if len(parts) == 0 { return "0" }
+	if e&NSUserDomainMask != 0 {
+		parts = append(parts, "NSUserDomainMask")
+	}
+	if e&NSLocalDomainMask != 0 {
+		parts = append(parts, "NSLocalDomainMask")
+	}
+	if e&NSNetworkDomainMask != 0 {
+		parts = append(parts, "NSNetworkDomainMask")
+	}
+	if e&NSSystemDomainMask != 0 {
+		parts = append(parts, "NSSystemDomainMask")
+	}
+	if e&NSAllDomainsMask != 0 {
+		parts = append(parts, "NSAllDomainsMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2806,36 +3408,54 @@ type NSSortOptions uint64
 
 const (
 	NSSortConcurrent NSSortOptions = 1
-	NSSortStable NSSortOptions = 16
+	NSSortStable     NSSortOptions = 16
 )
 
 func (e NSSortOptions) String() string {
 	var parts []string
-	if e&NSSortConcurrent != 0 { parts = append(parts, "NSSortConcurrent") }
-	if e&NSSortStable != 0 { parts = append(parts, "NSSortStable") }
-	if len(parts) == 0 { return "0" }
+	if e&NSSortConcurrent != 0 {
+		parts = append(parts, "NSSortConcurrent")
+	}
+	if e&NSSortStable != 0 {
+		parts = append(parts, "NSSortStable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSStreamEvent uint64
 
 const (
-	NSStreamEventNone NSStreamEvent = 0
-	NSStreamEventOpenCompleted NSStreamEvent = 1
+	NSStreamEventNone              NSStreamEvent = 0
+	NSStreamEventOpenCompleted     NSStreamEvent = 1
 	NSStreamEventHasBytesAvailable NSStreamEvent = 2
 	NSStreamEventHasSpaceAvailable NSStreamEvent = 4
-	NSStreamEventErrorOccurred NSStreamEvent = 8
-	NSStreamEventEndEncountered NSStreamEvent = 16
+	NSStreamEventErrorOccurred     NSStreamEvent = 8
+	NSStreamEventEndEncountered    NSStreamEvent = 16
 )
 
 func (e NSStreamEvent) String() string {
 	var parts []string
-	if e&NSStreamEventOpenCompleted != 0 { parts = append(parts, "NSStreamEventOpenCompleted") }
-	if e&NSStreamEventHasBytesAvailable != 0 { parts = append(parts, "NSStreamEventHasBytesAvailable") }
-	if e&NSStreamEventHasSpaceAvailable != 0 { parts = append(parts, "NSStreamEventHasSpaceAvailable") }
-	if e&NSStreamEventErrorOccurred != 0 { parts = append(parts, "NSStreamEventErrorOccurred") }
-	if e&NSStreamEventEndEncountered != 0 { parts = append(parts, "NSStreamEventEndEncountered") }
-	if len(parts) == 0 { return "0" }
+	if e&NSStreamEventOpenCompleted != 0 {
+		parts = append(parts, "NSStreamEventOpenCompleted")
+	}
+	if e&NSStreamEventHasBytesAvailable != 0 {
+		parts = append(parts, "NSStreamEventHasBytesAvailable")
+	}
+	if e&NSStreamEventHasSpaceAvailable != 0 {
+		parts = append(parts, "NSStreamEventHasSpaceAvailable")
+	}
+	if e&NSStreamEventErrorOccurred != 0 {
+		parts = append(parts, "NSStreamEventErrorOccurred")
+	}
+	if e&NSStreamEventEndEncountered != 0 {
+		parts = append(parts, "NSStreamEventEndEncountered")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2844,12 +3464,12 @@ type NSStreamStatus uint64
 const (
 	NSStreamStatusNotOpen NSStreamStatus = 0
 	NSStreamStatusOpening NSStreamStatus = 1
-	NSStreamStatusOpen NSStreamStatus = 2
+	NSStreamStatusOpen    NSStreamStatus = 2
 	NSStreamStatusReading NSStreamStatus = 3
 	NSStreamStatusWriting NSStreamStatus = 4
-	NSStreamStatusAtEnd NSStreamStatus = 5
-	NSStreamStatusClosed NSStreamStatus = 6
-	NSStreamStatusError NSStreamStatus = 7
+	NSStreamStatusAtEnd   NSStreamStatus = 5
+	NSStreamStatusClosed  NSStreamStatus = 6
+	NSStreamStatusError   NSStreamStatus = 7
 )
 
 func (e NSStreamStatus) String() string {
@@ -2878,81 +3498,127 @@ func (e NSStreamStatus) String() string {
 type NSStringCompareOptions uint64
 
 const (
-	NSCaseInsensitiveSearch NSStringCompareOptions = 1
-	NSLiteralSearch NSStringCompareOptions = 2
-	NSBackwardsSearch NSStringCompareOptions = 4
-	NSAnchoredSearch NSStringCompareOptions = 8
-	NSNumericSearch NSStringCompareOptions = 64
+	NSCaseInsensitiveSearch      NSStringCompareOptions = 1
+	NSLiteralSearch              NSStringCompareOptions = 2
+	NSBackwardsSearch            NSStringCompareOptions = 4
+	NSAnchoredSearch             NSStringCompareOptions = 8
+	NSNumericSearch              NSStringCompareOptions = 64
 	NSDiacriticInsensitiveSearch NSStringCompareOptions = 128
-	NSWidthInsensitiveSearch NSStringCompareOptions = 256
-	NSForcedOrderingSearch NSStringCompareOptions = 512
-	NSRegularExpressionSearch NSStringCompareOptions = 1024
+	NSWidthInsensitiveSearch     NSStringCompareOptions = 256
+	NSForcedOrderingSearch       NSStringCompareOptions = 512
+	NSRegularExpressionSearch    NSStringCompareOptions = 1024
 )
 
 func (e NSStringCompareOptions) String() string {
 	var parts []string
-	if e&NSCaseInsensitiveSearch != 0 { parts = append(parts, "NSCaseInsensitiveSearch") }
-	if e&NSLiteralSearch != 0 { parts = append(parts, "NSLiteralSearch") }
-	if e&NSBackwardsSearch != 0 { parts = append(parts, "NSBackwardsSearch") }
-	if e&NSAnchoredSearch != 0 { parts = append(parts, "NSAnchoredSearch") }
-	if e&NSNumericSearch != 0 { parts = append(parts, "NSNumericSearch") }
-	if e&NSDiacriticInsensitiveSearch != 0 { parts = append(parts, "NSDiacriticInsensitiveSearch") }
-	if e&NSWidthInsensitiveSearch != 0 { parts = append(parts, "NSWidthInsensitiveSearch") }
-	if e&NSForcedOrderingSearch != 0 { parts = append(parts, "NSForcedOrderingSearch") }
-	if e&NSRegularExpressionSearch != 0 { parts = append(parts, "NSRegularExpressionSearch") }
-	if len(parts) == 0 { return "0" }
+	if e&NSCaseInsensitiveSearch != 0 {
+		parts = append(parts, "NSCaseInsensitiveSearch")
+	}
+	if e&NSLiteralSearch != 0 {
+		parts = append(parts, "NSLiteralSearch")
+	}
+	if e&NSBackwardsSearch != 0 {
+		parts = append(parts, "NSBackwardsSearch")
+	}
+	if e&NSAnchoredSearch != 0 {
+		parts = append(parts, "NSAnchoredSearch")
+	}
+	if e&NSNumericSearch != 0 {
+		parts = append(parts, "NSNumericSearch")
+	}
+	if e&NSDiacriticInsensitiveSearch != 0 {
+		parts = append(parts, "NSDiacriticInsensitiveSearch")
+	}
+	if e&NSWidthInsensitiveSearch != 0 {
+		parts = append(parts, "NSWidthInsensitiveSearch")
+	}
+	if e&NSForcedOrderingSearch != 0 {
+		parts = append(parts, "NSForcedOrderingSearch")
+	}
+	if e&NSRegularExpressionSearch != 0 {
+		parts = append(parts, "NSRegularExpressionSearch")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSStringEncodingConversionOptions uint64
 
 const (
-	NSStringEncodingConversionAllowLossy NSStringEncodingConversionOptions = 1
+	NSStringEncodingConversionAllowLossy             NSStringEncodingConversionOptions = 1
 	NSStringEncodingConversionExternalRepresentation NSStringEncodingConversionOptions = 2
 )
 
 func (e NSStringEncodingConversionOptions) String() string {
 	var parts []string
-	if e&NSStringEncodingConversionAllowLossy != 0 { parts = append(parts, "NSStringEncodingConversionAllowLossy") }
-	if e&NSStringEncodingConversionExternalRepresentation != 0 { parts = append(parts, "NSStringEncodingConversionExternalRepresentation") }
-	if len(parts) == 0 { return "0" }
+	if e&NSStringEncodingConversionAllowLossy != 0 {
+		parts = append(parts, "NSStringEncodingConversionAllowLossy")
+	}
+	if e&NSStringEncodingConversionExternalRepresentation != 0 {
+		parts = append(parts, "NSStringEncodingConversionExternalRepresentation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSStringEnumerationOptions uint64
 
 const (
-	NSStringEnumerationByLines NSStringEnumerationOptions = 0
-	NSStringEnumerationByParagraphs NSStringEnumerationOptions = 1
+	NSStringEnumerationByLines                      NSStringEnumerationOptions = 0
+	NSStringEnumerationByParagraphs                 NSStringEnumerationOptions = 1
 	NSStringEnumerationByComposedCharacterSequences NSStringEnumerationOptions = 2
-	NSStringEnumerationByWords NSStringEnumerationOptions = 3
-	NSStringEnumerationBySentences NSStringEnumerationOptions = 4
-	NSStringEnumerationByCaretPositions NSStringEnumerationOptions = 5
-	NSStringEnumerationByDeletionClusters NSStringEnumerationOptions = 6
-	NSStringEnumerationReverse NSStringEnumerationOptions = 256
-	NSStringEnumerationSubstringNotRequired NSStringEnumerationOptions = 512
-	NSStringEnumerationLocalized NSStringEnumerationOptions = 1024
+	NSStringEnumerationByWords                      NSStringEnumerationOptions = 3
+	NSStringEnumerationBySentences                  NSStringEnumerationOptions = 4
+	NSStringEnumerationByCaretPositions             NSStringEnumerationOptions = 5
+	NSStringEnumerationByDeletionClusters           NSStringEnumerationOptions = 6
+	NSStringEnumerationReverse                      NSStringEnumerationOptions = 256
+	NSStringEnumerationSubstringNotRequired         NSStringEnumerationOptions = 512
+	NSStringEnumerationLocalized                    NSStringEnumerationOptions = 1024
 )
 
 func (e NSStringEnumerationOptions) String() string {
 	var parts []string
-	if e&NSStringEnumerationByParagraphs != 0 { parts = append(parts, "NSStringEnumerationByParagraphs") }
-	if e&NSStringEnumerationByComposedCharacterSequences != 0 { parts = append(parts, "NSStringEnumerationByComposedCharacterSequences") }
-	if e&NSStringEnumerationByWords != 0 { parts = append(parts, "NSStringEnumerationByWords") }
-	if e&NSStringEnumerationBySentences != 0 { parts = append(parts, "NSStringEnumerationBySentences") }
-	if e&NSStringEnumerationByCaretPositions != 0 { parts = append(parts, "NSStringEnumerationByCaretPositions") }
-	if e&NSStringEnumerationByDeletionClusters != 0 { parts = append(parts, "NSStringEnumerationByDeletionClusters") }
-	if e&NSStringEnumerationReverse != 0 { parts = append(parts, "NSStringEnumerationReverse") }
-	if e&NSStringEnumerationSubstringNotRequired != 0 { parts = append(parts, "NSStringEnumerationSubstringNotRequired") }
-	if e&NSStringEnumerationLocalized != 0 { parts = append(parts, "NSStringEnumerationLocalized") }
-	if len(parts) == 0 { return "0" }
+	if e&NSStringEnumerationByParagraphs != 0 {
+		parts = append(parts, "NSStringEnumerationByParagraphs")
+	}
+	if e&NSStringEnumerationByComposedCharacterSequences != 0 {
+		parts = append(parts, "NSStringEnumerationByComposedCharacterSequences")
+	}
+	if e&NSStringEnumerationByWords != 0 {
+		parts = append(parts, "NSStringEnumerationByWords")
+	}
+	if e&NSStringEnumerationBySentences != 0 {
+		parts = append(parts, "NSStringEnumerationBySentences")
+	}
+	if e&NSStringEnumerationByCaretPositions != 0 {
+		parts = append(parts, "NSStringEnumerationByCaretPositions")
+	}
+	if e&NSStringEnumerationByDeletionClusters != 0 {
+		parts = append(parts, "NSStringEnumerationByDeletionClusters")
+	}
+	if e&NSStringEnumerationReverse != 0 {
+		parts = append(parts, "NSStringEnumerationReverse")
+	}
+	if e&NSStringEnumerationSubstringNotRequired != 0 {
+		parts = append(parts, "NSStringEnumerationSubstringNotRequired")
+	}
+	if e&NSStringEnumerationLocalized != 0 {
+		parts = append(parts, "NSStringEnumerationLocalized")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTaskTerminationReason int64
 
 const (
-	NSTaskTerminationReasonExit NSTaskTerminationReason = 1
+	NSTaskTerminationReasonExit           NSTaskTerminationReason = 1
 	NSTaskTerminationReasonUncaughtSignal NSTaskTerminationReason = 2
 )
 
@@ -2970,14 +3636,14 @@ func (e NSTaskTerminationReason) String() string {
 type NSTestComparisonOperation uint64
 
 const (
-	NSEqualToComparison NSTestComparisonOperation = 0
-	NSLessThanOrEqualToComparison NSTestComparisonOperation = 1
-	NSLessThanComparison NSTestComparisonOperation = 2
+	NSEqualToComparison              NSTestComparisonOperation = 0
+	NSLessThanOrEqualToComparison    NSTestComparisonOperation = 1
+	NSLessThanComparison             NSTestComparisonOperation = 2
 	NSGreaterThanOrEqualToComparison NSTestComparisonOperation = 3
-	NSGreaterThanComparison NSTestComparisonOperation = 4
-	NSBeginsWithComparison NSTestComparisonOperation = 5
-	NSEndsWithComparison NSTestComparisonOperation = 6
-	NSContainsComparison NSTestComparisonOperation = 7
+	NSGreaterThanComparison          NSTestComparisonOperation = 4
+	NSBeginsWithComparison           NSTestComparisonOperation = 5
+	NSEndsWithComparison             NSTestComparisonOperation = 6
+	NSContainsComparison             NSTestComparisonOperation = 7
 )
 
 func (e NSTestComparisonOperation) String() string {
@@ -3006,49 +3672,77 @@ func (e NSTestComparisonOperation) String() string {
 type NSTextCheckingType int64
 
 const (
-	NSTextCheckingTypeOrthography NSTextCheckingType = 1
-	NSTextCheckingTypeSpelling NSTextCheckingType = 2
-	NSTextCheckingTypeGrammar NSTextCheckingType = 4
-	NSTextCheckingTypeDate NSTextCheckingType = 8
-	NSTextCheckingTypeAddress NSTextCheckingType = 16
-	NSTextCheckingTypeLink NSTextCheckingType = 32
-	NSTextCheckingTypeQuote NSTextCheckingType = 64
-	NSTextCheckingTypeDash NSTextCheckingType = 128
-	NSTextCheckingTypeReplacement NSTextCheckingType = 256
-	NSTextCheckingTypeCorrection NSTextCheckingType = 512
-	NSTextCheckingTypeRegularExpression NSTextCheckingType = 1024
-	NSTextCheckingTypePhoneNumber NSTextCheckingType = 2048
+	NSTextCheckingTypeOrthography        NSTextCheckingType = 1
+	NSTextCheckingTypeSpelling           NSTextCheckingType = 2
+	NSTextCheckingTypeGrammar            NSTextCheckingType = 4
+	NSTextCheckingTypeDate               NSTextCheckingType = 8
+	NSTextCheckingTypeAddress            NSTextCheckingType = 16
+	NSTextCheckingTypeLink               NSTextCheckingType = 32
+	NSTextCheckingTypeQuote              NSTextCheckingType = 64
+	NSTextCheckingTypeDash               NSTextCheckingType = 128
+	NSTextCheckingTypeReplacement        NSTextCheckingType = 256
+	NSTextCheckingTypeCorrection         NSTextCheckingType = 512
+	NSTextCheckingTypeRegularExpression  NSTextCheckingType = 1024
+	NSTextCheckingTypePhoneNumber        NSTextCheckingType = 2048
 	NSTextCheckingTypeTransitInformation NSTextCheckingType = 4096
 )
 
 func (e NSTextCheckingType) String() string {
 	var parts []string
-	if e&NSTextCheckingTypeOrthography != 0 { parts = append(parts, "NSTextCheckingTypeOrthography") }
-	if e&NSTextCheckingTypeSpelling != 0 { parts = append(parts, "NSTextCheckingTypeSpelling") }
-	if e&NSTextCheckingTypeGrammar != 0 { parts = append(parts, "NSTextCheckingTypeGrammar") }
-	if e&NSTextCheckingTypeDate != 0 { parts = append(parts, "NSTextCheckingTypeDate") }
-	if e&NSTextCheckingTypeAddress != 0 { parts = append(parts, "NSTextCheckingTypeAddress") }
-	if e&NSTextCheckingTypeLink != 0 { parts = append(parts, "NSTextCheckingTypeLink") }
-	if e&NSTextCheckingTypeQuote != 0 { parts = append(parts, "NSTextCheckingTypeQuote") }
-	if e&NSTextCheckingTypeDash != 0 { parts = append(parts, "NSTextCheckingTypeDash") }
-	if e&NSTextCheckingTypeReplacement != 0 { parts = append(parts, "NSTextCheckingTypeReplacement") }
-	if e&NSTextCheckingTypeCorrection != 0 { parts = append(parts, "NSTextCheckingTypeCorrection") }
-	if e&NSTextCheckingTypeRegularExpression != 0 { parts = append(parts, "NSTextCheckingTypeRegularExpression") }
-	if e&NSTextCheckingTypePhoneNumber != 0 { parts = append(parts, "NSTextCheckingTypePhoneNumber") }
-	if e&NSTextCheckingTypeTransitInformation != 0 { parts = append(parts, "NSTextCheckingTypeTransitInformation") }
-	if len(parts) == 0 { return "0" }
+	if e&NSTextCheckingTypeOrthography != 0 {
+		parts = append(parts, "NSTextCheckingTypeOrthography")
+	}
+	if e&NSTextCheckingTypeSpelling != 0 {
+		parts = append(parts, "NSTextCheckingTypeSpelling")
+	}
+	if e&NSTextCheckingTypeGrammar != 0 {
+		parts = append(parts, "NSTextCheckingTypeGrammar")
+	}
+	if e&NSTextCheckingTypeDate != 0 {
+		parts = append(parts, "NSTextCheckingTypeDate")
+	}
+	if e&NSTextCheckingTypeAddress != 0 {
+		parts = append(parts, "NSTextCheckingTypeAddress")
+	}
+	if e&NSTextCheckingTypeLink != 0 {
+		parts = append(parts, "NSTextCheckingTypeLink")
+	}
+	if e&NSTextCheckingTypeQuote != 0 {
+		parts = append(parts, "NSTextCheckingTypeQuote")
+	}
+	if e&NSTextCheckingTypeDash != 0 {
+		parts = append(parts, "NSTextCheckingTypeDash")
+	}
+	if e&NSTextCheckingTypeReplacement != 0 {
+		parts = append(parts, "NSTextCheckingTypeReplacement")
+	}
+	if e&NSTextCheckingTypeCorrection != 0 {
+		parts = append(parts, "NSTextCheckingTypeCorrection")
+	}
+	if e&NSTextCheckingTypeRegularExpression != 0 {
+		parts = append(parts, "NSTextCheckingTypeRegularExpression")
+	}
+	if e&NSTextCheckingTypePhoneNumber != 0 {
+		parts = append(parts, "NSTextCheckingTypePhoneNumber")
+	}
+	if e&NSTextCheckingTypeTransitInformation != 0 {
+		parts = append(parts, "NSTextCheckingTypeTransitInformation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSTimeZoneNameStyle int64
 
 const (
-	NSTimeZoneNameStyleStandard NSTimeZoneNameStyle = 0
-	NSTimeZoneNameStyleShortStandard NSTimeZoneNameStyle = 1
-	NSTimeZoneNameStyleDaylightSaving NSTimeZoneNameStyle = 2
+	NSTimeZoneNameStyleStandard            NSTimeZoneNameStyle = 0
+	NSTimeZoneNameStyleShortStandard       NSTimeZoneNameStyle = 1
+	NSTimeZoneNameStyleDaylightSaving      NSTimeZoneNameStyle = 2
 	NSTimeZoneNameStyleShortDaylightSaving NSTimeZoneNameStyle = 3
-	NSTimeZoneNameStyleGeneric NSTimeZoneNameStyle = 4
-	NSTimeZoneNameStyleShortGeneric NSTimeZoneNameStyle = 5
+	NSTimeZoneNameStyleGeneric             NSTimeZoneNameStyle = 4
+	NSTimeZoneNameStyleShortGeneric        NSTimeZoneNameStyle = 5
 )
 
 func (e NSTimeZoneNameStyle) String() string {
@@ -3073,51 +3767,75 @@ func (e NSTimeZoneNameStyle) String() string {
 type NSURLBookmarkCreationOptions uint64
 
 const (
-	NSURLBookmarkCreationPreferFileIDResolution NSURLBookmarkCreationOptions = 256
-	NSURLBookmarkCreationMinimalBookmark NSURLBookmarkCreationOptions = 512
-	NSURLBookmarkCreationSuitableForBookmarkFile NSURLBookmarkCreationOptions = 1024
-	NSURLBookmarkCreationWithSecurityScope NSURLBookmarkCreationOptions = 2048
+	NSURLBookmarkCreationPreferFileIDResolution           NSURLBookmarkCreationOptions = 256
+	NSURLBookmarkCreationMinimalBookmark                  NSURLBookmarkCreationOptions = 512
+	NSURLBookmarkCreationSuitableForBookmarkFile          NSURLBookmarkCreationOptions = 1024
+	NSURLBookmarkCreationWithSecurityScope                NSURLBookmarkCreationOptions = 2048
 	NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NSURLBookmarkCreationOptions = 4096
-	NSURLBookmarkCreationWithoutImplicitSecurityScope NSURLBookmarkCreationOptions = 536870912
+	NSURLBookmarkCreationWithoutImplicitSecurityScope     NSURLBookmarkCreationOptions = 536870912
 )
 
 func (e NSURLBookmarkCreationOptions) String() string {
 	var parts []string
-	if e&NSURLBookmarkCreationPreferFileIDResolution != 0 { parts = append(parts, "NSURLBookmarkCreationPreferFileIDResolution") }
-	if e&NSURLBookmarkCreationMinimalBookmark != 0 { parts = append(parts, "NSURLBookmarkCreationMinimalBookmark") }
-	if e&NSURLBookmarkCreationSuitableForBookmarkFile != 0 { parts = append(parts, "NSURLBookmarkCreationSuitableForBookmarkFile") }
-	if e&NSURLBookmarkCreationWithSecurityScope != 0 { parts = append(parts, "NSURLBookmarkCreationWithSecurityScope") }
-	if e&NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 { parts = append(parts, "NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess") }
-	if e&NSURLBookmarkCreationWithoutImplicitSecurityScope != 0 { parts = append(parts, "NSURLBookmarkCreationWithoutImplicitSecurityScope") }
-	if len(parts) == 0 { return "0" }
+	if e&NSURLBookmarkCreationPreferFileIDResolution != 0 {
+		parts = append(parts, "NSURLBookmarkCreationPreferFileIDResolution")
+	}
+	if e&NSURLBookmarkCreationMinimalBookmark != 0 {
+		parts = append(parts, "NSURLBookmarkCreationMinimalBookmark")
+	}
+	if e&NSURLBookmarkCreationSuitableForBookmarkFile != 0 {
+		parts = append(parts, "NSURLBookmarkCreationSuitableForBookmarkFile")
+	}
+	if e&NSURLBookmarkCreationWithSecurityScope != 0 {
+		parts = append(parts, "NSURLBookmarkCreationWithSecurityScope")
+	}
+	if e&NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 {
+		parts = append(parts, "NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess")
+	}
+	if e&NSURLBookmarkCreationWithoutImplicitSecurityScope != 0 {
+		parts = append(parts, "NSURLBookmarkCreationWithoutImplicitSecurityScope")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSURLBookmarkResolutionOptions uint64
 
 const (
-	NSURLBookmarkResolutionWithoutUI NSURLBookmarkResolutionOptions = 256
-	NSURLBookmarkResolutionWithoutMounting NSURLBookmarkResolutionOptions = 512
-	NSURLBookmarkResolutionWithSecurityScope NSURLBookmarkResolutionOptions = 1024
+	NSURLBookmarkResolutionWithoutUI                     NSURLBookmarkResolutionOptions = 256
+	NSURLBookmarkResolutionWithoutMounting               NSURLBookmarkResolutionOptions = 512
+	NSURLBookmarkResolutionWithSecurityScope             NSURLBookmarkResolutionOptions = 1024
 	NSURLBookmarkResolutionWithoutImplicitStartAccessing NSURLBookmarkResolutionOptions = 32768
 )
 
 func (e NSURLBookmarkResolutionOptions) String() string {
 	var parts []string
-	if e&NSURLBookmarkResolutionWithoutUI != 0 { parts = append(parts, "NSURLBookmarkResolutionWithoutUI") }
-	if e&NSURLBookmarkResolutionWithoutMounting != 0 { parts = append(parts, "NSURLBookmarkResolutionWithoutMounting") }
-	if e&NSURLBookmarkResolutionWithSecurityScope != 0 { parts = append(parts, "NSURLBookmarkResolutionWithSecurityScope") }
-	if e&NSURLBookmarkResolutionWithoutImplicitStartAccessing != 0 { parts = append(parts, "NSURLBookmarkResolutionWithoutImplicitStartAccessing") }
-	if len(parts) == 0 { return "0" }
+	if e&NSURLBookmarkResolutionWithoutUI != 0 {
+		parts = append(parts, "NSURLBookmarkResolutionWithoutUI")
+	}
+	if e&NSURLBookmarkResolutionWithoutMounting != 0 {
+		parts = append(parts, "NSURLBookmarkResolutionWithoutMounting")
+	}
+	if e&NSURLBookmarkResolutionWithSecurityScope != 0 {
+		parts = append(parts, "NSURLBookmarkResolutionWithSecurityScope")
+	}
+	if e&NSURLBookmarkResolutionWithoutImplicitStartAccessing != 0 {
+		parts = append(parts, "NSURLBookmarkResolutionWithoutImplicitStartAccessing")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSURLCacheStoragePolicy uint64
 
 const (
-	NSURLCacheStorageAllowed NSURLCacheStoragePolicy = 0
+	NSURLCacheStorageAllowed             NSURLCacheStoragePolicy = 0
 	NSURLCacheStorageAllowedInMemoryOnly NSURLCacheStoragePolicy = 1
-	NSURLCacheStorageNotAllowed NSURLCacheStoragePolicy = 2
+	NSURLCacheStorageNotAllowed          NSURLCacheStoragePolicy = 2
 )
 
 func (e NSURLCacheStoragePolicy) String() string {
@@ -3136,9 +3854,9 @@ func (e NSURLCacheStoragePolicy) String() string {
 type NSURLCredentialPersistence uint64
 
 const (
-	NSURLCredentialPersistenceNone NSURLCredentialPersistence = 0
-	NSURLCredentialPersistenceForSession NSURLCredentialPersistence = 1
-	NSURLCredentialPersistencePermanent NSURLCredentialPersistence = 2
+	NSURLCredentialPersistenceNone           NSURLCredentialPersistence = 0
+	NSURLCredentialPersistenceForSession     NSURLCredentialPersistence = 1
+	NSURLCredentialPersistencePermanent      NSURLCredentialPersistence = 2
 	NSURLCredentialPersistenceSynchronizable NSURLCredentialPersistence = 3
 )
 
@@ -3160,9 +3878,9 @@ func (e NSURLCredentialPersistence) String() string {
 type NSURLErrorNetworkUnavailableReason int64
 
 const (
-	NSURLErrorNetworkUnavailableReasonCellular NSURLErrorNetworkUnavailableReason = 0
-	NSURLErrorNetworkUnavailableReasonExpensive NSURLErrorNetworkUnavailableReason = 1
-	NSURLErrorNetworkUnavailableReasonConstrained NSURLErrorNetworkUnavailableReason = 2
+	NSURLErrorNetworkUnavailableReasonCellular         NSURLErrorNetworkUnavailableReason = 0
+	NSURLErrorNetworkUnavailableReasonExpensive        NSURLErrorNetworkUnavailableReason = 1
+	NSURLErrorNetworkUnavailableReasonConstrained      NSURLErrorNetworkUnavailableReason = 2
 	NSURLErrorNetworkUnavailableReasonUltraConstrained NSURLErrorNetworkUnavailableReason = 3
 )
 
@@ -3184,10 +3902,10 @@ func (e NSURLErrorNetworkUnavailableReason) String() string {
 type NSURLHandleStatus uint64
 
 const (
-	NSURLHandleNotLoaded NSURLHandleStatus = 0
-	NSURLHandleLoadSucceeded NSURLHandleStatus = 1
+	NSURLHandleNotLoaded      NSURLHandleStatus = 0
+	NSURLHandleLoadSucceeded  NSURLHandleStatus = 1
 	NSURLHandleLoadInProgress NSURLHandleStatus = 2
-	NSURLHandleLoadFailed NSURLHandleStatus = 3
+	NSURLHandleLoadFailed     NSURLHandleStatus = 3
 )
 
 func (e NSURLHandleStatus) String() string {
@@ -3209,8 +3927,8 @@ type NSURLRelationship int64
 
 const (
 	NSURLRelationshipContains NSURLRelationship = 0
-	NSURLRelationshipSame NSURLRelationship = 1
-	NSURLRelationshipOther NSURLRelationship = 2
+	NSURLRelationshipSame     NSURLRelationship = 1
+	NSURLRelationshipOther    NSURLRelationship = 2
 )
 
 func (e NSURLRelationship) String() string {
@@ -3230,7 +3948,7 @@ type NSURLRequestAttribution uint64
 
 const (
 	NSURLRequestAttributionDeveloper NSURLRequestAttribution = 0
-	NSURLRequestAttributionUser NSURLRequestAttribution = 1
+	NSURLRequestAttributionUser      NSURLRequestAttribution = 1
 )
 
 func (e NSURLRequestAttribution) String() string {
@@ -3247,13 +3965,13 @@ func (e NSURLRequestAttribution) String() string {
 type NSURLRequestCachePolicy uint64
 
 const (
-	NSURLRequestUseProtocolCachePolicy NSURLRequestCachePolicy = 0
-	NSURLRequestReloadIgnoringLocalCacheData NSURLRequestCachePolicy = 1
+	NSURLRequestUseProtocolCachePolicy                NSURLRequestCachePolicy = 0
+	NSURLRequestReloadIgnoringLocalCacheData          NSURLRequestCachePolicy = 1
 	NSURLRequestReloadIgnoringLocalAndRemoteCacheData NSURLRequestCachePolicy = 4
-	NSURLRequestReloadIgnoringCacheData NSURLRequestCachePolicy = 1
-	NSURLRequestReturnCacheDataElseLoad NSURLRequestCachePolicy = 2
-	NSURLRequestReturnCacheDataDontLoad NSURLRequestCachePolicy = 3
-	NSURLRequestReloadRevalidatingCacheData NSURLRequestCachePolicy = 5
+	NSURLRequestReloadIgnoringCacheData               NSURLRequestCachePolicy = 1
+	NSURLRequestReturnCacheDataElseLoad               NSURLRequestCachePolicy = 2
+	NSURLRequestReturnCacheDataDontLoad               NSURLRequestCachePolicy = 3
+	NSURLRequestReloadRevalidatingCacheData           NSURLRequestCachePolicy = 5
 )
 
 func (e NSURLRequestCachePolicy) String() string {
@@ -3278,15 +3996,15 @@ func (e NSURLRequestCachePolicy) String() string {
 type NSURLRequestNetworkServiceType uint64
 
 const (
-	NSURLNetworkServiceTypeDefault NSURLRequestNetworkServiceType = 0
-	NSURLNetworkServiceTypeVoIP NSURLRequestNetworkServiceType = 1
-	NSURLNetworkServiceTypeVideo NSURLRequestNetworkServiceType = 2
-	NSURLNetworkServiceTypeBackground NSURLRequestNetworkServiceType = 3
-	NSURLNetworkServiceTypeVoice NSURLRequestNetworkServiceType = 4
+	NSURLNetworkServiceTypeDefault        NSURLRequestNetworkServiceType = 0
+	NSURLNetworkServiceTypeVoIP           NSURLRequestNetworkServiceType = 1
+	NSURLNetworkServiceTypeVideo          NSURLRequestNetworkServiceType = 2
+	NSURLNetworkServiceTypeBackground     NSURLRequestNetworkServiceType = 3
+	NSURLNetworkServiceTypeVoice          NSURLRequestNetworkServiceType = 4
 	NSURLNetworkServiceTypeResponsiveData NSURLRequestNetworkServiceType = 6
-	NSURLNetworkServiceTypeAVStreaming NSURLRequestNetworkServiceType = 8
-	NSURLNetworkServiceTypeResponsiveAV NSURLRequestNetworkServiceType = 9
-	NSURLNetworkServiceTypeCallSignaling NSURLRequestNetworkServiceType = 11
+	NSURLNetworkServiceTypeAVStreaming    NSURLRequestNetworkServiceType = 8
+	NSURLNetworkServiceTypeResponsiveAV   NSURLRequestNetworkServiceType = 9
+	NSURLNetworkServiceTypeCallSignaling  NSURLRequestNetworkServiceType = 11
 )
 
 func (e NSURLRequestNetworkServiceType) String() string {
@@ -3317,10 +4035,10 @@ func (e NSURLRequestNetworkServiceType) String() string {
 type NSURLSessionAuthChallengeDisposition int64
 
 const (
-	NSURLSessionAuthChallengeUseCredential NSURLSessionAuthChallengeDisposition = 0
-	NSURLSessionAuthChallengePerformDefaultHandling NSURLSessionAuthChallengeDisposition = 1
+	NSURLSessionAuthChallengeUseCredential                 NSURLSessionAuthChallengeDisposition = 0
+	NSURLSessionAuthChallengePerformDefaultHandling        NSURLSessionAuthChallengeDisposition = 1
 	NSURLSessionAuthChallengeCancelAuthenticationChallenge NSURLSessionAuthChallengeDisposition = 2
-	NSURLSessionAuthChallengeRejectProtectionSpace NSURLSessionAuthChallengeDisposition = 3
+	NSURLSessionAuthChallengeRejectProtectionSpace         NSURLSessionAuthChallengeDisposition = 3
 )
 
 func (e NSURLSessionAuthChallengeDisposition) String() string {
@@ -3342,8 +4060,8 @@ type NSURLSessionDelayedRequestDisposition int64
 
 const (
 	NSURLSessionDelayedRequestContinueLoading NSURLSessionDelayedRequestDisposition = 0
-	NSURLSessionDelayedRequestUseNewRequest NSURLSessionDelayedRequestDisposition = 1
-	NSURLSessionDelayedRequestCancel NSURLSessionDelayedRequestDisposition = 2
+	NSURLSessionDelayedRequestUseNewRequest   NSURLSessionDelayedRequestDisposition = 1
+	NSURLSessionDelayedRequestCancel          NSURLSessionDelayedRequestDisposition = 2
 )
 
 func (e NSURLSessionDelayedRequestDisposition) String() string {
@@ -3362,10 +4080,10 @@ func (e NSURLSessionDelayedRequestDisposition) String() string {
 type NSURLSessionResponseDisposition int64
 
 const (
-	NSURLSessionResponseCancel NSURLSessionResponseDisposition = 0
-	NSURLSessionResponseAllow NSURLSessionResponseDisposition = 1
+	NSURLSessionResponseCancel         NSURLSessionResponseDisposition = 0
+	NSURLSessionResponseAllow          NSURLSessionResponseDisposition = 1
 	NSURLSessionResponseBecomeDownload NSURLSessionResponseDisposition = 2
-	NSURLSessionResponseBecomeStream NSURLSessionResponseDisposition = 3
+	NSURLSessionResponseBecomeStream   NSURLSessionResponseDisposition = 3
 )
 
 func (e NSURLSessionResponseDisposition) String() string {
@@ -3387,10 +4105,10 @@ type NSURLSessionTaskMetricsDomainResolutionProtocol int64
 
 const (
 	NSURLSessionTaskMetricsDomainResolutionProtocolUnknown NSURLSessionTaskMetricsDomainResolutionProtocol = 0
-	NSURLSessionTaskMetricsDomainResolutionProtocolUDP NSURLSessionTaskMetricsDomainResolutionProtocol = 1
-	NSURLSessionTaskMetricsDomainResolutionProtocolTCP NSURLSessionTaskMetricsDomainResolutionProtocol = 2
-	NSURLSessionTaskMetricsDomainResolutionProtocolTLS NSURLSessionTaskMetricsDomainResolutionProtocol = 3
-	NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS NSURLSessionTaskMetricsDomainResolutionProtocol = 4
+	NSURLSessionTaskMetricsDomainResolutionProtocolUDP     NSURLSessionTaskMetricsDomainResolutionProtocol = 1
+	NSURLSessionTaskMetricsDomainResolutionProtocolTCP     NSURLSessionTaskMetricsDomainResolutionProtocol = 2
+	NSURLSessionTaskMetricsDomainResolutionProtocolTLS     NSURLSessionTaskMetricsDomainResolutionProtocol = 3
+	NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS   NSURLSessionTaskMetricsDomainResolutionProtocol = 4
 )
 
 func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
@@ -3413,10 +4131,10 @@ func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
 type NSURLSessionTaskMetricsResourceFetchType int64
 
 const (
-	NSURLSessionTaskMetricsResourceFetchTypeUnknown NSURLSessionTaskMetricsResourceFetchType = 0
+	NSURLSessionTaskMetricsResourceFetchTypeUnknown     NSURLSessionTaskMetricsResourceFetchType = 0
 	NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad NSURLSessionTaskMetricsResourceFetchType = 1
-	NSURLSessionTaskMetricsResourceFetchTypeServerPush NSURLSessionTaskMetricsResourceFetchType = 2
-	NSURLSessionTaskMetricsResourceFetchTypeLocalCache NSURLSessionTaskMetricsResourceFetchType = 3
+	NSURLSessionTaskMetricsResourceFetchTypeServerPush  NSURLSessionTaskMetricsResourceFetchType = 2
+	NSURLSessionTaskMetricsResourceFetchTypeLocalCache  NSURLSessionTaskMetricsResourceFetchType = 3
 )
 
 func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
@@ -3437,7 +4155,7 @@ func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
 type NSURLSessionTaskState int64
 
 const (
-	NSURLSessionTaskStateRunning NSURLSessionTaskState = 0
+	NSURLSessionTaskStateRunning   NSURLSessionTaskState = 0
 	NSURLSessionTaskStateSuspended NSURLSessionTaskState = 1
 	NSURLSessionTaskStateCanceling NSURLSessionTaskState = 2
 	NSURLSessionTaskStateCompleted NSURLSessionTaskState = 3
@@ -3461,19 +4179,19 @@ func (e NSURLSessionTaskState) String() string {
 type NSURLSessionWebSocketCloseCode int64
 
 const (
-	NSURLSessionWebSocketCloseCodeInvalid NSURLSessionWebSocketCloseCode = 0
-	NSURLSessionWebSocketCloseCodeNormalClosure NSURLSessionWebSocketCloseCode = 1000
-	NSURLSessionWebSocketCloseCodeGoingAway NSURLSessionWebSocketCloseCode = 1001
-	NSURLSessionWebSocketCloseCodeProtocolError NSURLSessionWebSocketCloseCode = 1002
-	NSURLSessionWebSocketCloseCodeUnsupportedData NSURLSessionWebSocketCloseCode = 1003
-	NSURLSessionWebSocketCloseCodeNoStatusReceived NSURLSessionWebSocketCloseCode = 1005
-	NSURLSessionWebSocketCloseCodeAbnormalClosure NSURLSessionWebSocketCloseCode = 1006
-	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData NSURLSessionWebSocketCloseCode = 1007
-	NSURLSessionWebSocketCloseCodePolicyViolation NSURLSessionWebSocketCloseCode = 1008
-	NSURLSessionWebSocketCloseCodeMessageTooBig NSURLSessionWebSocketCloseCode = 1009
+	NSURLSessionWebSocketCloseCodeInvalid                   NSURLSessionWebSocketCloseCode = 0
+	NSURLSessionWebSocketCloseCodeNormalClosure             NSURLSessionWebSocketCloseCode = 1000
+	NSURLSessionWebSocketCloseCodeGoingAway                 NSURLSessionWebSocketCloseCode = 1001
+	NSURLSessionWebSocketCloseCodeProtocolError             NSURLSessionWebSocketCloseCode = 1002
+	NSURLSessionWebSocketCloseCodeUnsupportedData           NSURLSessionWebSocketCloseCode = 1003
+	NSURLSessionWebSocketCloseCodeNoStatusReceived          NSURLSessionWebSocketCloseCode = 1005
+	NSURLSessionWebSocketCloseCodeAbnormalClosure           NSURLSessionWebSocketCloseCode = 1006
+	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData   NSURLSessionWebSocketCloseCode = 1007
+	NSURLSessionWebSocketCloseCodePolicyViolation           NSURLSessionWebSocketCloseCode = 1008
+	NSURLSessionWebSocketCloseCodeMessageTooBig             NSURLSessionWebSocketCloseCode = 1009
 	NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing NSURLSessionWebSocketCloseCode = 1010
-	NSURLSessionWebSocketCloseCodeInternalServerError NSURLSessionWebSocketCloseCode = 1011
-	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure NSURLSessionWebSocketCloseCode = 1015
+	NSURLSessionWebSocketCloseCodeInternalServerError       NSURLSessionWebSocketCloseCode = 1011
+	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure       NSURLSessionWebSocketCloseCode = 1015
 )
 
 func (e NSURLSessionWebSocketCloseCode) String() string {
@@ -3512,7 +4230,7 @@ func (e NSURLSessionWebSocketCloseCode) String() string {
 type NSURLSessionWebSocketMessageType int64
 
 const (
-	NSURLSessionWebSocketMessageTypeData NSURLSessionWebSocketMessageType = 0
+	NSURLSessionWebSocketMessageTypeData   NSURLSessionWebSocketMessageType = 0
 	NSURLSessionWebSocketMessageTypeString NSURLSessionWebSocketMessageType = 1
 )
 
@@ -3531,10 +4249,10 @@ func (e NSURLSessionWebSocketMessageType) String() string {
 type NSUserNotificationActivationType int64
 
 const (
-	NSUserNotificationActivationTypeNone NSUserNotificationActivationType = 0
-	NSUserNotificationActivationTypeContentsClicked NSUserNotificationActivationType = 1
-	NSUserNotificationActivationTypeActionButtonClicked NSUserNotificationActivationType = 2
-	NSUserNotificationActivationTypeReplied NSUserNotificationActivationType = 3
+	NSUserNotificationActivationTypeNone                    NSUserNotificationActivationType = 0
+	NSUserNotificationActivationTypeContentsClicked         NSUserNotificationActivationType = 1
+	NSUserNotificationActivationTypeActionButtonClicked     NSUserNotificationActivationType = 2
+	NSUserNotificationActivationTypeReplied                 NSUserNotificationActivationType = 3
 	NSUserNotificationActivationTypeAdditionalActionClicked NSUserNotificationActivationType = 4
 )
 
@@ -3558,26 +4276,32 @@ func (e NSUserNotificationActivationType) String() string {
 type NSVolumeEnumerationOptions uint64
 
 const (
-	NSVolumeEnumerationSkipHiddenVolumes NSVolumeEnumerationOptions = 2
+	NSVolumeEnumerationSkipHiddenVolumes        NSVolumeEnumerationOptions = 2
 	NSVolumeEnumerationProduceFileReferenceURLs NSVolumeEnumerationOptions = 4
 )
 
 func (e NSVolumeEnumerationOptions) String() string {
 	var parts []string
-	if e&NSVolumeEnumerationSkipHiddenVolumes != 0 { parts = append(parts, "NSVolumeEnumerationSkipHiddenVolumes") }
-	if e&NSVolumeEnumerationProduceFileReferenceURLs != 0 { parts = append(parts, "NSVolumeEnumerationProduceFileReferenceURLs") }
-	if len(parts) == 0 { return "0" }
+	if e&NSVolumeEnumerationSkipHiddenVolumes != 0 {
+		parts = append(parts, "NSVolumeEnumerationSkipHiddenVolumes")
+	}
+	if e&NSVolumeEnumerationProduceFileReferenceURLs != 0 {
+		parts = append(parts, "NSVolumeEnumerationProduceFileReferenceURLs")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSWhoseSubelementIdentifier uint64
 
 const (
-	NSIndexSubelement NSWhoseSubelementIdentifier = 0
-	NSEverySubelement NSWhoseSubelementIdentifier = 1
+	NSIndexSubelement  NSWhoseSubelementIdentifier = 0
+	NSEverySubelement  NSWhoseSubelementIdentifier = 1
 	NSMiddleSubelement NSWhoseSubelementIdentifier = 2
 	NSRandomSubelement NSWhoseSubelementIdentifier = 3
-	NSNoSubelement NSWhoseSubelementIdentifier = 4
+	NSNoSubelement     NSWhoseSubelementIdentifier = 4
 )
 
 func (e NSWhoseSubelementIdentifier) String() string {
@@ -3600,26 +4324,26 @@ func (e NSWhoseSubelementIdentifier) String() string {
 type NSXMLDTDNodeKind uint64
 
 const (
-	NSXMLEntityGeneralKind NSXMLDTDNodeKind = 1
-	NSXMLEntityParsedKind NSXMLDTDNodeKind = 2
-	NSXMLEntityUnparsedKind NSXMLDTDNodeKind = 3
-	NSXMLEntityParameterKind NSXMLDTDNodeKind = 4
-	NSXMLEntityPredefined NSXMLDTDNodeKind = 5
-	NSXMLAttributeCDATAKind NSXMLDTDNodeKind = 6
-	NSXMLAttributeIDKind NSXMLDTDNodeKind = 7
-	NSXMLAttributeIDRefKind NSXMLDTDNodeKind = 8
-	NSXMLAttributeIDRefsKind NSXMLDTDNodeKind = 9
-	NSXMLAttributeEntityKind NSXMLDTDNodeKind = 10
-	NSXMLAttributeEntitiesKind NSXMLDTDNodeKind = 11
-	NSXMLAttributeNMTokenKind NSXMLDTDNodeKind = 12
-	NSXMLAttributeNMTokensKind NSXMLDTDNodeKind = 13
-	NSXMLAttributeEnumerationKind NSXMLDTDNodeKind = 14
-	NSXMLAttributeNotationKind NSXMLDTDNodeKind = 15
+	NSXMLEntityGeneralKind               NSXMLDTDNodeKind = 1
+	NSXMLEntityParsedKind                NSXMLDTDNodeKind = 2
+	NSXMLEntityUnparsedKind              NSXMLDTDNodeKind = 3
+	NSXMLEntityParameterKind             NSXMLDTDNodeKind = 4
+	NSXMLEntityPredefined                NSXMLDTDNodeKind = 5
+	NSXMLAttributeCDATAKind              NSXMLDTDNodeKind = 6
+	NSXMLAttributeIDKind                 NSXMLDTDNodeKind = 7
+	NSXMLAttributeIDRefKind              NSXMLDTDNodeKind = 8
+	NSXMLAttributeIDRefsKind             NSXMLDTDNodeKind = 9
+	NSXMLAttributeEntityKind             NSXMLDTDNodeKind = 10
+	NSXMLAttributeEntitiesKind           NSXMLDTDNodeKind = 11
+	NSXMLAttributeNMTokenKind            NSXMLDTDNodeKind = 12
+	NSXMLAttributeNMTokensKind           NSXMLDTDNodeKind = 13
+	NSXMLAttributeEnumerationKind        NSXMLDTDNodeKind = 14
+	NSXMLAttributeNotationKind           NSXMLDTDNodeKind = 15
 	NSXMLElementDeclarationUndefinedKind NSXMLDTDNodeKind = 16
-	NSXMLElementDeclarationEmptyKind NSXMLDTDNodeKind = 17
-	NSXMLElementDeclarationAnyKind NSXMLDTDNodeKind = 18
-	NSXMLElementDeclarationMixedKind NSXMLDTDNodeKind = 19
-	NSXMLElementDeclarationElementKind NSXMLDTDNodeKind = 20
+	NSXMLElementDeclarationEmptyKind     NSXMLDTDNodeKind = 17
+	NSXMLElementDeclarationAnyKind       NSXMLDTDNodeKind = 18
+	NSXMLElementDeclarationMixedKind     NSXMLDTDNodeKind = 19
+	NSXMLElementDeclarationElementKind   NSXMLDTDNodeKind = 20
 )
 
 func (e NSXMLDTDNodeKind) String() string {
@@ -3672,10 +4396,10 @@ func (e NSXMLDTDNodeKind) String() string {
 type NSXMLDocumentContentKind uint64
 
 const (
-	NSXMLDocumentXMLKind NSXMLDocumentContentKind = 0
+	NSXMLDocumentXMLKind   NSXMLDocumentContentKind = 0
 	NSXMLDocumentXHTMLKind NSXMLDocumentContentKind = 1
-	NSXMLDocumentHTMLKind NSXMLDocumentContentKind = 2
-	NSXMLDocumentTextKind NSXMLDocumentContentKind = 3
+	NSXMLDocumentHTMLKind  NSXMLDocumentContentKind = 2
+	NSXMLDocumentTextKind  NSXMLDocumentContentKind = 3
 )
 
 func (e NSXMLDocumentContentKind) String() string {
@@ -3696,19 +4420,19 @@ func (e NSXMLDocumentContentKind) String() string {
 type NSXMLNodeKind uint64
 
 const (
-	NSXMLInvalidKind NSXMLNodeKind = 0
-	NSXMLDocumentKind NSXMLNodeKind = 1
-	NSXMLElementKind NSXMLNodeKind = 2
-	NSXMLAttributeKind NSXMLNodeKind = 3
-	NSXMLNamespaceKind NSXMLNodeKind = 4
+	NSXMLInvalidKind               NSXMLNodeKind = 0
+	NSXMLDocumentKind              NSXMLNodeKind = 1
+	NSXMLElementKind               NSXMLNodeKind = 2
+	NSXMLAttributeKind             NSXMLNodeKind = 3
+	NSXMLNamespaceKind             NSXMLNodeKind = 4
 	NSXMLProcessingInstructionKind NSXMLNodeKind = 5
-	NSXMLCommentKind NSXMLNodeKind = 6
-	NSXMLTextKind NSXMLNodeKind = 7
-	NSXMLDTDKind NSXMLNodeKind = 8
-	NSXMLEntityDeclarationKind NSXMLNodeKind = 9
-	NSXMLAttributeDeclarationKind NSXMLNodeKind = 10
-	NSXMLElementDeclarationKind NSXMLNodeKind = 11
-	NSXMLNotationDeclarationKind NSXMLNodeKind = 12
+	NSXMLCommentKind               NSXMLNodeKind = 6
+	NSXMLTextKind                  NSXMLNodeKind = 7
+	NSXMLDTDKind                   NSXMLNodeKind = 8
+	NSXMLEntityDeclarationKind     NSXMLNodeKind = 9
+	NSXMLAttributeDeclarationKind  NSXMLNodeKind = 10
+	NSXMLElementDeclarationKind    NSXMLNodeKind = 11
+	NSXMLNotationDeclarationKind   NSXMLNodeKind = 12
 )
 
 func (e NSXMLNodeKind) String() string {
@@ -3747,165 +4471,221 @@ func (e NSXMLNodeKind) String() string {
 type NSXMLNodeOptions uint64
 
 const (
-	NSXMLNodeOptionsNone NSXMLNodeOptions = 0
-	NSXMLNodeIsCDATA NSXMLNodeOptions = 1
-	NSXMLNodeExpandEmptyElement NSXMLNodeOptions = 2
-	NSXMLNodeCompactEmptyElement NSXMLNodeOptions = 4
-	NSXMLNodeUseSingleQuotes NSXMLNodeOptions = 8
-	NSXMLNodeUseDoubleQuotes NSXMLNodeOptions = 16
-	NSXMLNodeNeverEscapeContents NSXMLNodeOptions = 32
-	NSXMLDocumentTidyHTML NSXMLNodeOptions = 512
-	NSXMLDocumentTidyXML NSXMLNodeOptions = 1024
-	NSXMLDocumentValidate NSXMLNodeOptions = 8192
-	NSXMLNodeLoadExternalEntitiesAlways NSXMLNodeOptions = 16384
+	NSXMLNodeOptionsNone                        NSXMLNodeOptions = 0
+	NSXMLNodeIsCDATA                            NSXMLNodeOptions = 1
+	NSXMLNodeExpandEmptyElement                 NSXMLNodeOptions = 2
+	NSXMLNodeCompactEmptyElement                NSXMLNodeOptions = 4
+	NSXMLNodeUseSingleQuotes                    NSXMLNodeOptions = 8
+	NSXMLNodeUseDoubleQuotes                    NSXMLNodeOptions = 16
+	NSXMLNodeNeverEscapeContents                NSXMLNodeOptions = 32
+	NSXMLDocumentTidyHTML                       NSXMLNodeOptions = 512
+	NSXMLDocumentTidyXML                        NSXMLNodeOptions = 1024
+	NSXMLDocumentValidate                       NSXMLNodeOptions = 8192
+	NSXMLNodeLoadExternalEntitiesAlways         NSXMLNodeOptions = 16384
 	NSXMLNodeLoadExternalEntitiesSameOriginOnly NSXMLNodeOptions = 32768
-	NSXMLNodeLoadExternalEntitiesNever NSXMLNodeOptions = 524288
-	NSXMLDocumentXInclude NSXMLNodeOptions = 65536
-	NSXMLNodePrettyPrint NSXMLNodeOptions = 131072
-	NSXMLDocumentIncludeContentTypeDeclaration NSXMLNodeOptions = 262144
-	NSXMLNodePreserveNamespaceOrder NSXMLNodeOptions = 1048576
-	NSXMLNodePreserveAttributeOrder NSXMLNodeOptions = 2097152
-	NSXMLNodePreserveEntities NSXMLNodeOptions = 4194304
-	NSXMLNodePreservePrefixes NSXMLNodeOptions = 8388608
-	NSXMLNodePreserveCDATA NSXMLNodeOptions = 16777216
-	NSXMLNodePreserveWhitespace NSXMLNodeOptions = 33554432
-	NSXMLNodePreserveDTD NSXMLNodeOptions = 67108864
-	NSXMLNodePreserveCharacterReferences NSXMLNodeOptions = 134217728
-	NSXMLNodePromoteSignificantWhitespace NSXMLNodeOptions = 268435456
-	NSXMLNodePreserveEmptyElements NSXMLNodeOptions = 6
-	NSXMLNodePreserveQuotes NSXMLNodeOptions = 24
-	NSXMLNodePreserveAll NSXMLNodeOptions = 4293918750
+	NSXMLNodeLoadExternalEntitiesNever          NSXMLNodeOptions = 524288
+	NSXMLDocumentXInclude                       NSXMLNodeOptions = 65536
+	NSXMLNodePrettyPrint                        NSXMLNodeOptions = 131072
+	NSXMLDocumentIncludeContentTypeDeclaration  NSXMLNodeOptions = 262144
+	NSXMLNodePreserveNamespaceOrder             NSXMLNodeOptions = 1048576
+	NSXMLNodePreserveAttributeOrder             NSXMLNodeOptions = 2097152
+	NSXMLNodePreserveEntities                   NSXMLNodeOptions = 4194304
+	NSXMLNodePreservePrefixes                   NSXMLNodeOptions = 8388608
+	NSXMLNodePreserveCDATA                      NSXMLNodeOptions = 16777216
+	NSXMLNodePreserveWhitespace                 NSXMLNodeOptions = 33554432
+	NSXMLNodePreserveDTD                        NSXMLNodeOptions = 67108864
+	NSXMLNodePreserveCharacterReferences        NSXMLNodeOptions = 134217728
+	NSXMLNodePromoteSignificantWhitespace       NSXMLNodeOptions = 268435456
+	NSXMLNodePreserveEmptyElements              NSXMLNodeOptions = 6
+	NSXMLNodePreserveQuotes                     NSXMLNodeOptions = 24
+	NSXMLNodePreserveAll                        NSXMLNodeOptions = 4293918750
 )
 
 func (e NSXMLNodeOptions) String() string {
 	var parts []string
-	if e&NSXMLNodeIsCDATA != 0 { parts = append(parts, "NSXMLNodeIsCDATA") }
-	if e&NSXMLNodeExpandEmptyElement != 0 { parts = append(parts, "NSXMLNodeExpandEmptyElement") }
-	if e&NSXMLNodeCompactEmptyElement != 0 { parts = append(parts, "NSXMLNodeCompactEmptyElement") }
-	if e&NSXMLNodeUseSingleQuotes != 0 { parts = append(parts, "NSXMLNodeUseSingleQuotes") }
-	if e&NSXMLNodeUseDoubleQuotes != 0 { parts = append(parts, "NSXMLNodeUseDoubleQuotes") }
-	if e&NSXMLNodeNeverEscapeContents != 0 { parts = append(parts, "NSXMLNodeNeverEscapeContents") }
-	if e&NSXMLDocumentTidyHTML != 0 { parts = append(parts, "NSXMLDocumentTidyHTML") }
-	if e&NSXMLDocumentTidyXML != 0 { parts = append(parts, "NSXMLDocumentTidyXML") }
-	if e&NSXMLDocumentValidate != 0 { parts = append(parts, "NSXMLDocumentValidate") }
-	if e&NSXMLNodeLoadExternalEntitiesAlways != 0 { parts = append(parts, "NSXMLNodeLoadExternalEntitiesAlways") }
-	if e&NSXMLNodeLoadExternalEntitiesSameOriginOnly != 0 { parts = append(parts, "NSXMLNodeLoadExternalEntitiesSameOriginOnly") }
-	if e&NSXMLNodeLoadExternalEntitiesNever != 0 { parts = append(parts, "NSXMLNodeLoadExternalEntitiesNever") }
-	if e&NSXMLDocumentXInclude != 0 { parts = append(parts, "NSXMLDocumentXInclude") }
-	if e&NSXMLNodePrettyPrint != 0 { parts = append(parts, "NSXMLNodePrettyPrint") }
-	if e&NSXMLDocumentIncludeContentTypeDeclaration != 0 { parts = append(parts, "NSXMLDocumentIncludeContentTypeDeclaration") }
-	if e&NSXMLNodePreserveNamespaceOrder != 0 { parts = append(parts, "NSXMLNodePreserveNamespaceOrder") }
-	if e&NSXMLNodePreserveAttributeOrder != 0 { parts = append(parts, "NSXMLNodePreserveAttributeOrder") }
-	if e&NSXMLNodePreserveEntities != 0 { parts = append(parts, "NSXMLNodePreserveEntities") }
-	if e&NSXMLNodePreservePrefixes != 0 { parts = append(parts, "NSXMLNodePreservePrefixes") }
-	if e&NSXMLNodePreserveCDATA != 0 { parts = append(parts, "NSXMLNodePreserveCDATA") }
-	if e&NSXMLNodePreserveWhitespace != 0 { parts = append(parts, "NSXMLNodePreserveWhitespace") }
-	if e&NSXMLNodePreserveDTD != 0 { parts = append(parts, "NSXMLNodePreserveDTD") }
-	if e&NSXMLNodePreserveCharacterReferences != 0 { parts = append(parts, "NSXMLNodePreserveCharacterReferences") }
-	if e&NSXMLNodePromoteSignificantWhitespace != 0 { parts = append(parts, "NSXMLNodePromoteSignificantWhitespace") }
-	if e&NSXMLNodePreserveEmptyElements != 0 { parts = append(parts, "NSXMLNodePreserveEmptyElements") }
-	if e&NSXMLNodePreserveQuotes != 0 { parts = append(parts, "NSXMLNodePreserveQuotes") }
-	if e&NSXMLNodePreserveAll != 0 { parts = append(parts, "NSXMLNodePreserveAll") }
-	if len(parts) == 0 { return "0" }
+	if e&NSXMLNodeIsCDATA != 0 {
+		parts = append(parts, "NSXMLNodeIsCDATA")
+	}
+	if e&NSXMLNodeExpandEmptyElement != 0 {
+		parts = append(parts, "NSXMLNodeExpandEmptyElement")
+	}
+	if e&NSXMLNodeCompactEmptyElement != 0 {
+		parts = append(parts, "NSXMLNodeCompactEmptyElement")
+	}
+	if e&NSXMLNodeUseSingleQuotes != 0 {
+		parts = append(parts, "NSXMLNodeUseSingleQuotes")
+	}
+	if e&NSXMLNodeUseDoubleQuotes != 0 {
+		parts = append(parts, "NSXMLNodeUseDoubleQuotes")
+	}
+	if e&NSXMLNodeNeverEscapeContents != 0 {
+		parts = append(parts, "NSXMLNodeNeverEscapeContents")
+	}
+	if e&NSXMLDocumentTidyHTML != 0 {
+		parts = append(parts, "NSXMLDocumentTidyHTML")
+	}
+	if e&NSXMLDocumentTidyXML != 0 {
+		parts = append(parts, "NSXMLDocumentTidyXML")
+	}
+	if e&NSXMLDocumentValidate != 0 {
+		parts = append(parts, "NSXMLDocumentValidate")
+	}
+	if e&NSXMLNodeLoadExternalEntitiesAlways != 0 {
+		parts = append(parts, "NSXMLNodeLoadExternalEntitiesAlways")
+	}
+	if e&NSXMLNodeLoadExternalEntitiesSameOriginOnly != 0 {
+		parts = append(parts, "NSXMLNodeLoadExternalEntitiesSameOriginOnly")
+	}
+	if e&NSXMLNodeLoadExternalEntitiesNever != 0 {
+		parts = append(parts, "NSXMLNodeLoadExternalEntitiesNever")
+	}
+	if e&NSXMLDocumentXInclude != 0 {
+		parts = append(parts, "NSXMLDocumentXInclude")
+	}
+	if e&NSXMLNodePrettyPrint != 0 {
+		parts = append(parts, "NSXMLNodePrettyPrint")
+	}
+	if e&NSXMLDocumentIncludeContentTypeDeclaration != 0 {
+		parts = append(parts, "NSXMLDocumentIncludeContentTypeDeclaration")
+	}
+	if e&NSXMLNodePreserveNamespaceOrder != 0 {
+		parts = append(parts, "NSXMLNodePreserveNamespaceOrder")
+	}
+	if e&NSXMLNodePreserveAttributeOrder != 0 {
+		parts = append(parts, "NSXMLNodePreserveAttributeOrder")
+	}
+	if e&NSXMLNodePreserveEntities != 0 {
+		parts = append(parts, "NSXMLNodePreserveEntities")
+	}
+	if e&NSXMLNodePreservePrefixes != 0 {
+		parts = append(parts, "NSXMLNodePreservePrefixes")
+	}
+	if e&NSXMLNodePreserveCDATA != 0 {
+		parts = append(parts, "NSXMLNodePreserveCDATA")
+	}
+	if e&NSXMLNodePreserveWhitespace != 0 {
+		parts = append(parts, "NSXMLNodePreserveWhitespace")
+	}
+	if e&NSXMLNodePreserveDTD != 0 {
+		parts = append(parts, "NSXMLNodePreserveDTD")
+	}
+	if e&NSXMLNodePreserveCharacterReferences != 0 {
+		parts = append(parts, "NSXMLNodePreserveCharacterReferences")
+	}
+	if e&NSXMLNodePromoteSignificantWhitespace != 0 {
+		parts = append(parts, "NSXMLNodePromoteSignificantWhitespace")
+	}
+	if e&NSXMLNodePreserveEmptyElements != 0 {
+		parts = append(parts, "NSXMLNodePreserveEmptyElements")
+	}
+	if e&NSXMLNodePreserveQuotes != 0 {
+		parts = append(parts, "NSXMLNodePreserveQuotes")
+	}
+	if e&NSXMLNodePreserveAll != 0 {
+		parts = append(parts, "NSXMLNodePreserveAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type NSXMLParserError int64
 
 const (
-	NSXMLParserInternalError NSXMLParserError = 1
-	NSXMLParserOutOfMemoryError NSXMLParserError = 2
-	NSXMLParserDocumentStartError NSXMLParserError = 3
-	NSXMLParserEmptyDocumentError NSXMLParserError = 4
-	NSXMLParserPrematureDocumentEndError NSXMLParserError = 5
-	NSXMLParserInvalidHexCharacterRefError NSXMLParserError = 6
-	NSXMLParserInvalidDecimalCharacterRefError NSXMLParserError = 7
-	NSXMLParserInvalidCharacterRefError NSXMLParserError = 8
-	NSXMLParserInvalidCharacterError NSXMLParserError = 9
-	NSXMLParserCharacterRefAtEOFError NSXMLParserError = 10
-	NSXMLParserCharacterRefInPrologError NSXMLParserError = 11
-	NSXMLParserCharacterRefInEpilogError NSXMLParserError = 12
-	NSXMLParserCharacterRefInDTDError NSXMLParserError = 13
-	NSXMLParserEntityRefAtEOFError NSXMLParserError = 14
-	NSXMLParserEntityRefInPrologError NSXMLParserError = 15
-	NSXMLParserEntityRefInEpilogError NSXMLParserError = 16
-	NSXMLParserEntityRefInDTDError NSXMLParserError = 17
-	NSXMLParserParsedEntityRefAtEOFError NSXMLParserError = 18
-	NSXMLParserParsedEntityRefInPrologError NSXMLParserError = 19
-	NSXMLParserParsedEntityRefInEpilogError NSXMLParserError = 20
-	NSXMLParserParsedEntityRefInInternalSubsetError NSXMLParserError = 21
-	NSXMLParserEntityReferenceWithoutNameError NSXMLParserError = 22
-	NSXMLParserEntityReferenceMissingSemiError NSXMLParserError = 23
-	NSXMLParserParsedEntityRefNoNameError NSXMLParserError = 24
-	NSXMLParserParsedEntityRefMissingSemiError NSXMLParserError = 25
-	NSXMLParserUndeclaredEntityError NSXMLParserError = 26
-	NSXMLParserUnparsedEntityError NSXMLParserError = 28
-	NSXMLParserEntityIsExternalError NSXMLParserError = 29
-	NSXMLParserEntityIsParameterError NSXMLParserError = 30
-	NSXMLParserUnknownEncodingError NSXMLParserError = 31
-	NSXMLParserEncodingNotSupportedError NSXMLParserError = 32
-	NSXMLParserStringNotStartedError NSXMLParserError = 33
-	NSXMLParserStringNotClosedError NSXMLParserError = 34
-	NSXMLParserNamespaceDeclarationError NSXMLParserError = 35
-	NSXMLParserEntityNotStartedError NSXMLParserError = 36
-	NSXMLParserEntityNotFinishedError NSXMLParserError = 37
-	NSXMLParserLessThanSymbolInAttributeError NSXMLParserError = 38
-	NSXMLParserAttributeNotStartedError NSXMLParserError = 39
-	NSXMLParserAttributeNotFinishedError NSXMLParserError = 40
-	NSXMLParserAttributeHasNoValueError NSXMLParserError = 41
-	NSXMLParserAttributeRedefinedError NSXMLParserError = 42
-	NSXMLParserLiteralNotStartedError NSXMLParserError = 43
-	NSXMLParserLiteralNotFinishedError NSXMLParserError = 44
-	NSXMLParserCommentNotFinishedError NSXMLParserError = 45
-	NSXMLParserProcessingInstructionNotStartedError NSXMLParserError = 46
+	NSXMLParserInternalError                         NSXMLParserError = 1
+	NSXMLParserOutOfMemoryError                      NSXMLParserError = 2
+	NSXMLParserDocumentStartError                    NSXMLParserError = 3
+	NSXMLParserEmptyDocumentError                    NSXMLParserError = 4
+	NSXMLParserPrematureDocumentEndError             NSXMLParserError = 5
+	NSXMLParserInvalidHexCharacterRefError           NSXMLParserError = 6
+	NSXMLParserInvalidDecimalCharacterRefError       NSXMLParserError = 7
+	NSXMLParserInvalidCharacterRefError              NSXMLParserError = 8
+	NSXMLParserInvalidCharacterError                 NSXMLParserError = 9
+	NSXMLParserCharacterRefAtEOFError                NSXMLParserError = 10
+	NSXMLParserCharacterRefInPrologError             NSXMLParserError = 11
+	NSXMLParserCharacterRefInEpilogError             NSXMLParserError = 12
+	NSXMLParserCharacterRefInDTDError                NSXMLParserError = 13
+	NSXMLParserEntityRefAtEOFError                   NSXMLParserError = 14
+	NSXMLParserEntityRefInPrologError                NSXMLParserError = 15
+	NSXMLParserEntityRefInEpilogError                NSXMLParserError = 16
+	NSXMLParserEntityRefInDTDError                   NSXMLParserError = 17
+	NSXMLParserParsedEntityRefAtEOFError             NSXMLParserError = 18
+	NSXMLParserParsedEntityRefInPrologError          NSXMLParserError = 19
+	NSXMLParserParsedEntityRefInEpilogError          NSXMLParserError = 20
+	NSXMLParserParsedEntityRefInInternalSubsetError  NSXMLParserError = 21
+	NSXMLParserEntityReferenceWithoutNameError       NSXMLParserError = 22
+	NSXMLParserEntityReferenceMissingSemiError       NSXMLParserError = 23
+	NSXMLParserParsedEntityRefNoNameError            NSXMLParserError = 24
+	NSXMLParserParsedEntityRefMissingSemiError       NSXMLParserError = 25
+	NSXMLParserUndeclaredEntityError                 NSXMLParserError = 26
+	NSXMLParserUnparsedEntityError                   NSXMLParserError = 28
+	NSXMLParserEntityIsExternalError                 NSXMLParserError = 29
+	NSXMLParserEntityIsParameterError                NSXMLParserError = 30
+	NSXMLParserUnknownEncodingError                  NSXMLParserError = 31
+	NSXMLParserEncodingNotSupportedError             NSXMLParserError = 32
+	NSXMLParserStringNotStartedError                 NSXMLParserError = 33
+	NSXMLParserStringNotClosedError                  NSXMLParserError = 34
+	NSXMLParserNamespaceDeclarationError             NSXMLParserError = 35
+	NSXMLParserEntityNotStartedError                 NSXMLParserError = 36
+	NSXMLParserEntityNotFinishedError                NSXMLParserError = 37
+	NSXMLParserLessThanSymbolInAttributeError        NSXMLParserError = 38
+	NSXMLParserAttributeNotStartedError              NSXMLParserError = 39
+	NSXMLParserAttributeNotFinishedError             NSXMLParserError = 40
+	NSXMLParserAttributeHasNoValueError              NSXMLParserError = 41
+	NSXMLParserAttributeRedefinedError               NSXMLParserError = 42
+	NSXMLParserLiteralNotStartedError                NSXMLParserError = 43
+	NSXMLParserLiteralNotFinishedError               NSXMLParserError = 44
+	NSXMLParserCommentNotFinishedError               NSXMLParserError = 45
+	NSXMLParserProcessingInstructionNotStartedError  NSXMLParserError = 46
 	NSXMLParserProcessingInstructionNotFinishedError NSXMLParserError = 47
-	NSXMLParserNotationNotStartedError NSXMLParserError = 48
-	NSXMLParserNotationNotFinishedError NSXMLParserError = 49
-	NSXMLParserAttributeListNotStartedError NSXMLParserError = 50
-	NSXMLParserAttributeListNotFinishedError NSXMLParserError = 51
-	NSXMLParserMixedContentDeclNotStartedError NSXMLParserError = 52
-	NSXMLParserMixedContentDeclNotFinishedError NSXMLParserError = 53
-	NSXMLParserElementContentDeclNotStartedError NSXMLParserError = 54
-	NSXMLParserElementContentDeclNotFinishedError NSXMLParserError = 55
-	NSXMLParserXMLDeclNotStartedError NSXMLParserError = 56
-	NSXMLParserXMLDeclNotFinishedError NSXMLParserError = 57
-	NSXMLParserConditionalSectionNotStartedError NSXMLParserError = 58
-	NSXMLParserConditionalSectionNotFinishedError NSXMLParserError = 59
-	NSXMLParserExternalSubsetNotFinishedError NSXMLParserError = 60
-	NSXMLParserDOCTYPEDeclNotFinishedError NSXMLParserError = 61
-	NSXMLParserMisplacedCDATAEndStringError NSXMLParserError = 62
-	NSXMLParserCDATANotFinishedError NSXMLParserError = 63
-	NSXMLParserMisplacedXMLDeclarationError NSXMLParserError = 64
-	NSXMLParserSpaceRequiredError NSXMLParserError = 65
-	NSXMLParserSeparatorRequiredError NSXMLParserError = 66
-	NSXMLParserNMTOKENRequiredError NSXMLParserError = 67
-	NSXMLParserNAMERequiredError NSXMLParserError = 68
-	NSXMLParserPCDATARequiredError NSXMLParserError = 69
-	NSXMLParserURIRequiredError NSXMLParserError = 70
-	NSXMLParserPublicIdentifierRequiredError NSXMLParserError = 71
-	NSXMLParserLTRequiredError NSXMLParserError = 72
-	NSXMLParserGTRequiredError NSXMLParserError = 73
-	NSXMLParserLTSlashRequiredError NSXMLParserError = 74
-	NSXMLParserEqualExpectedError NSXMLParserError = 75
-	NSXMLParserTagNameMismatchError NSXMLParserError = 76
-	NSXMLParserUnfinishedTagError NSXMLParserError = 77
-	NSXMLParserStandaloneValueError NSXMLParserError = 78
-	NSXMLParserInvalidEncodingNameError NSXMLParserError = 79
-	NSXMLParserCommentContainsDoubleHyphenError NSXMLParserError = 80
-	NSXMLParserInvalidEncodingError NSXMLParserError = 81
-	NSXMLParserExternalStandaloneEntityError NSXMLParserError = 82
-	NSXMLParserInvalidConditionalSectionError NSXMLParserError = 83
-	NSXMLParserEntityValueRequiredError NSXMLParserError = 84
-	NSXMLParserNotWellBalancedError NSXMLParserError = 85
-	NSXMLParserExtraContentError NSXMLParserError = 86
-	NSXMLParserInvalidCharacterInEntityError NSXMLParserError = 87
-	NSXMLParserParsedEntityRefInInternalError NSXMLParserError = 88
-	NSXMLParserEntityRefLoopError NSXMLParserError = 89
-	NSXMLParserEntityBoundaryError NSXMLParserError = 90
-	NSXMLParserInvalidURIError NSXMLParserError = 91
-	NSXMLParserURIFragmentError NSXMLParserError = 92
-	NSXMLParserNoDTDError NSXMLParserError = 94
-	NSXMLParserDelegateAbortedParseError NSXMLParserError = 512
+	NSXMLParserNotationNotStartedError               NSXMLParserError = 48
+	NSXMLParserNotationNotFinishedError              NSXMLParserError = 49
+	NSXMLParserAttributeListNotStartedError          NSXMLParserError = 50
+	NSXMLParserAttributeListNotFinishedError         NSXMLParserError = 51
+	NSXMLParserMixedContentDeclNotStartedError       NSXMLParserError = 52
+	NSXMLParserMixedContentDeclNotFinishedError      NSXMLParserError = 53
+	NSXMLParserElementContentDeclNotStartedError     NSXMLParserError = 54
+	NSXMLParserElementContentDeclNotFinishedError    NSXMLParserError = 55
+	NSXMLParserXMLDeclNotStartedError                NSXMLParserError = 56
+	NSXMLParserXMLDeclNotFinishedError               NSXMLParserError = 57
+	NSXMLParserConditionalSectionNotStartedError     NSXMLParserError = 58
+	NSXMLParserConditionalSectionNotFinishedError    NSXMLParserError = 59
+	NSXMLParserExternalSubsetNotFinishedError        NSXMLParserError = 60
+	NSXMLParserDOCTYPEDeclNotFinishedError           NSXMLParserError = 61
+	NSXMLParserMisplacedCDATAEndStringError          NSXMLParserError = 62
+	NSXMLParserCDATANotFinishedError                 NSXMLParserError = 63
+	NSXMLParserMisplacedXMLDeclarationError          NSXMLParserError = 64
+	NSXMLParserSpaceRequiredError                    NSXMLParserError = 65
+	NSXMLParserSeparatorRequiredError                NSXMLParserError = 66
+	NSXMLParserNMTOKENRequiredError                  NSXMLParserError = 67
+	NSXMLParserNAMERequiredError                     NSXMLParserError = 68
+	NSXMLParserPCDATARequiredError                   NSXMLParserError = 69
+	NSXMLParserURIRequiredError                      NSXMLParserError = 70
+	NSXMLParserPublicIdentifierRequiredError         NSXMLParserError = 71
+	NSXMLParserLTRequiredError                       NSXMLParserError = 72
+	NSXMLParserGTRequiredError                       NSXMLParserError = 73
+	NSXMLParserLTSlashRequiredError                  NSXMLParserError = 74
+	NSXMLParserEqualExpectedError                    NSXMLParserError = 75
+	NSXMLParserTagNameMismatchError                  NSXMLParserError = 76
+	NSXMLParserUnfinishedTagError                    NSXMLParserError = 77
+	NSXMLParserStandaloneValueError                  NSXMLParserError = 78
+	NSXMLParserInvalidEncodingNameError              NSXMLParserError = 79
+	NSXMLParserCommentContainsDoubleHyphenError      NSXMLParserError = 80
+	NSXMLParserInvalidEncodingError                  NSXMLParserError = 81
+	NSXMLParserExternalStandaloneEntityError         NSXMLParserError = 82
+	NSXMLParserInvalidConditionalSectionError        NSXMLParserError = 83
+	NSXMLParserEntityValueRequiredError              NSXMLParserError = 84
+	NSXMLParserNotWellBalancedError                  NSXMLParserError = 85
+	NSXMLParserExtraContentError                     NSXMLParserError = 86
+	NSXMLParserInvalidCharacterInEntityError         NSXMLParserError = 87
+	NSXMLParserParsedEntityRefInInternalError        NSXMLParserError = 88
+	NSXMLParserEntityRefLoopError                    NSXMLParserError = 89
+	NSXMLParserEntityBoundaryError                   NSXMLParserError = 90
+	NSXMLParserInvalidURIError                       NSXMLParserError = 91
+	NSXMLParserURIFragmentError                      NSXMLParserError = 92
+	NSXMLParserNoDTDError                            NSXMLParserError = 94
+	NSXMLParserDelegateAbortedParseError             NSXMLParserError = 512
 )
 
 func (e NSXMLParserError) String() string {
@@ -4104,10 +4884,10 @@ func (e NSXMLParserError) String() string {
 type NSXMLParserExternalEntityResolvingPolicy uint64
 
 const (
-	NSXMLParserResolveExternalEntitiesNever NSXMLParserExternalEntityResolvingPolicy = 0
-	NSXMLParserResolveExternalEntitiesNoNetwork NSXMLParserExternalEntityResolvingPolicy = 1
+	NSXMLParserResolveExternalEntitiesNever          NSXMLParserExternalEntityResolvingPolicy = 0
+	NSXMLParserResolveExternalEntitiesNoNetwork      NSXMLParserExternalEntityResolvingPolicy = 1
 	NSXMLParserResolveExternalEntitiesSameOriginOnly NSXMLParserExternalEntityResolvingPolicy = 2
-	NSXMLParserResolveExternalEntitiesAlways NSXMLParserExternalEntityResolvingPolicy = 3
+	NSXMLParserResolveExternalEntitiesAlways         NSXMLParserExternalEntityResolvingPolicy = 3
 )
 
 func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
@@ -4133,8 +4913,12 @@ const (
 
 func (e NSXPCConnectionOptions) String() string {
 	var parts []string
-	if e&NSXPCConnectionPrivileged != 0 { parts = append(parts, "NSXPCConnectionPrivileged") }
-	if len(parts) == 0 { return "0" }
+	if e&NSXPCConnectionPrivileged != 0 {
+		parts = append(parts, "NSXPCConnectionPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4142,8 +4926,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -4162,13 +4946,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -4195,24 +4979,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -4253,9 +5037,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -4275,12 +5059,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -4307,14 +5091,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -4343,9 +5127,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -4364,36 +5148,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -4423,8 +5221,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -4444,62 +5242,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -4625,15 +5423,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -4671,7 +5469,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4679,7 +5479,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -4697,8 +5497,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -4717,26 +5517,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -4758,27 +5574,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -4802,11 +5618,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -4831,22 +5647,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -4897,68 +5713,82 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
-	NSASCIIStringEncoding = 1
-	NSISO2022JPStringEncoding = 21
-	NSISOLatin1StringEncoding = 5
-	NSISOLatin2StringEncoding = 9
-	NSJapaneseEUCStringEncoding = 3
-	NSMacOSRomanStringEncoding = 30
-	NSNEXTSTEPStringEncoding = 2
-	NSNonLossyASCIIStringEncoding = 7
-	NSShiftJISStringEncoding = 8
-	NSSymbolStringEncoding = 6
-	NSUTF16BigEndianStringEncoding = 2415919360
+	NSASCIIStringEncoding             = 1
+	NSISO2022JPStringEncoding         = 21
+	NSISOLatin1StringEncoding         = 5
+	NSISOLatin2StringEncoding         = 9
+	NSJapaneseEUCStringEncoding       = 3
+	NSMacOSRomanStringEncoding        = 30
+	NSNEXTSTEPStringEncoding          = 2
+	NSNonLossyASCIIStringEncoding     = 7
+	NSShiftJISStringEncoding          = 8
+	NSSymbolStringEncoding            = 6
+	NSUTF16BigEndianStringEncoding    = 2415919360
 	NSUTF16LittleEndianStringEncoding = 2483028224
-	NSUTF16StringEncoding = 10
-	NSUTF32BigEndianStringEncoding = 2550137088
+	NSUTF16StringEncoding             = 10
+	NSUTF32BigEndianStringEncoding    = 2550137088
 	NSUTF32LittleEndianStringEncoding = 2617245952
-	NSUTF32StringEncoding = 2348810496
-	NSUTF8StringEncoding = 4
-	NSUnicodeStringEncoding = 10
-	NSWindowsCP1250StringEncoding = 15
-	NSWindowsCP1251StringEncoding = 11
-	NSWindowsCP1252StringEncoding = 12
-	NSWindowsCP1253StringEncoding = 13
-	NSWindowsCP1254StringEncoding = 14
+	NSUTF32StringEncoding             = 2348810496
+	NSUTF8StringEncoding              = 4
+	NSUnicodeStringEncoding           = 10
+	NSWindowsCP1250StringEncoding     = 15
+	NSWindowsCP1251StringEncoding     = 11
+	NSWindowsCP1252StringEncoding     = 12
+	NSWindowsCP1253StringEncoding     = 13
+	NSWindowsCP1254StringEncoding     = 14
 )
 
 const (
-	NSBundleExecutableArchitectureARM64 = 16777228
-	NSBundleExecutableArchitectureI386 = 7
-	NSBundleExecutableArchitecturePPC = 18
-	NSBundleExecutableArchitecturePPC64 = 16777234
+	NSBundleExecutableArchitectureARM64  = 16777228
+	NSBundleExecutableArchitectureI386   = 7
+	NSBundleExecutableArchitecturePPC    = 18
+	NSBundleExecutableArchitecturePPC64  = 16777234
 	NSBundleExecutableArchitectureX86_64 = 16777223
 )
 
@@ -4968,114 +5798,114 @@ const (
 )
 
 const (
-	NSBundleErrorMaximum = 5119
-	NSBundleErrorMinimum = 4992
+	NSBundleErrorMaximum                             = 5119
+	NSBundleErrorMinimum                             = 4992
 	NSBundleOnDemandResourceExceededMaximumSizeError = 4993
-	NSBundleOnDemandResourceInvalidTagError = 4994
-	NSBundleOnDemandResourceOutOfSpaceError = 4992
-	NSCloudSharingConflictError = 5123
-	NSCloudSharingErrorMaximum = 5375
-	NSCloudSharingErrorMinimum = 5120
-	NSCloudSharingNetworkFailureError = 5120
-	NSCloudSharingNoPermissionError = 5124
-	NSCloudSharingOtherError = 5375
-	NSCloudSharingQuotaExceededError = 5121
-	NSCloudSharingTooManyParticipantsError = 5122
-	NSCoderErrorMaximum = 4991
-	NSCoderErrorMinimum = 4864
-	NSCoderInvalidValueError = 4866
-	NSCoderReadCorruptError = 4864
-	NSCoderValueNotFoundError = 4865
-	NSCompressionErrorMaximum = 5503
-	NSCompressionErrorMinimum = 5376
-	NSCompressionFailedError = 5376
-	NSDecompressionFailedError = 5377
-	NSExecutableArchitectureMismatchError = 3585
-	NSExecutableErrorMaximum = 3839
-	NSExecutableErrorMinimum = 3584
-	NSExecutableLinkError = 3588
-	NSExecutableLoadError = 3587
-	NSExecutableNotLoadableError = 3584
-	NSExecutableRuntimeMismatchError = 3586
-	NSFeatureUnsupportedError = 3328
-	NSFileErrorMaximum = 1023
-	NSFileErrorMinimum = 0
-	NSFileLockingError = 255
-	NSFileManagerUnmountBusyError = 769
-	NSFileManagerUnmountUnknownError = 768
-	NSFileNoSuchFileError = 4
-	NSFileReadCorruptFileError = 259
-	NSFileReadInapplicableStringEncodingError = 261
-	NSFileReadInvalidFileNameError = 258
-	NSFileReadNoPermissionError = 257
-	NSFileReadNoSuchFileError = 260
-	NSFileReadTooLargeError = 263
-	NSFileReadUnknownError = 256
-	NSFileReadUnknownStringEncodingError = 264
-	NSFileReadUnsupportedSchemeError = 262
-	NSFileWriteFileExistsError = 516
-	NSFileWriteInapplicableStringEncodingError = 517
-	NSFileWriteInvalidFileNameError = 514
-	NSFileWriteNoPermissionError = 513
-	NSFileWriteOutOfSpaceError = 640
-	NSFileWriteUnknownError = 512
-	NSFileWriteUnsupportedSchemeError = 518
-	NSFileWriteVolumeReadOnlyError = 642
-	NSFormattingError = 2048
-	NSFormattingErrorMaximum = 2559
-	NSFormattingErrorMinimum = 2048
-	NSKeyValueValidationError = 1024
-	NSPropertyListErrorMaximum = 4095
-	NSPropertyListErrorMinimum = 3840
-	NSPropertyListReadCorruptError = 3840
-	NSPropertyListReadStreamError = 3842
-	NSPropertyListReadUnknownVersionError = 3841
-	NSPropertyListWriteInvalidError = 3852
-	NSPropertyListWriteStreamError = 3851
-	NSUbiquitousFileErrorMaximum = 4607
-	NSUbiquitousFileErrorMinimum = 4352
-	NSUbiquitousFileNotUploadedDueToQuotaError = 4354
-	NSUbiquitousFileUbiquityServerNotAvailable = 4355
-	NSUbiquitousFileUnavailableError = 4353
-	NSUserActivityConnectionUnavailableError = 4609
-	NSUserActivityErrorMaximum = 4863
-	NSUserActivityErrorMinimum = 4608
-	NSUserActivityHandoffFailedError = 4608
-	NSUserActivityHandoffUserInfoTooLargeError = 4611
-	NSUserActivityRemoteApplicationTimedOutError = 4610
-	NSUserCancelledError = 3072
-	NSValidationErrorMaximum = 2047
-	NSValidationErrorMinimum = 1024
-	NSXPCConnectionCodeSigningRequirementFailure = 4102
-	NSXPCConnectionErrorMaximum = 4224
-	NSXPCConnectionErrorMinimum = 4096
-	NSXPCConnectionInterrupted = 4097
-	NSXPCConnectionInvalid = 4099
-	NSXPCConnectionReplyInvalid = 4101
+	NSBundleOnDemandResourceInvalidTagError          = 4994
+	NSBundleOnDemandResourceOutOfSpaceError          = 4992
+	NSCloudSharingConflictError                      = 5123
+	NSCloudSharingErrorMaximum                       = 5375
+	NSCloudSharingErrorMinimum                       = 5120
+	NSCloudSharingNetworkFailureError                = 5120
+	NSCloudSharingNoPermissionError                  = 5124
+	NSCloudSharingOtherError                         = 5375
+	NSCloudSharingQuotaExceededError                 = 5121
+	NSCloudSharingTooManyParticipantsError           = 5122
+	NSCoderErrorMaximum                              = 4991
+	NSCoderErrorMinimum                              = 4864
+	NSCoderInvalidValueError                         = 4866
+	NSCoderReadCorruptError                          = 4864
+	NSCoderValueNotFoundError                        = 4865
+	NSCompressionErrorMaximum                        = 5503
+	NSCompressionErrorMinimum                        = 5376
+	NSCompressionFailedError                         = 5376
+	NSDecompressionFailedError                       = 5377
+	NSExecutableArchitectureMismatchError            = 3585
+	NSExecutableErrorMaximum                         = 3839
+	NSExecutableErrorMinimum                         = 3584
+	NSExecutableLinkError                            = 3588
+	NSExecutableLoadError                            = 3587
+	NSExecutableNotLoadableError                     = 3584
+	NSExecutableRuntimeMismatchError                 = 3586
+	NSFeatureUnsupportedError                        = 3328
+	NSFileErrorMaximum                               = 1023
+	NSFileErrorMinimum                               = 0
+	NSFileLockingError                               = 255
+	NSFileManagerUnmountBusyError                    = 769
+	NSFileManagerUnmountUnknownError                 = 768
+	NSFileNoSuchFileError                            = 4
+	NSFileReadCorruptFileError                       = 259
+	NSFileReadInapplicableStringEncodingError        = 261
+	NSFileReadInvalidFileNameError                   = 258
+	NSFileReadNoPermissionError                      = 257
+	NSFileReadNoSuchFileError                        = 260
+	NSFileReadTooLargeError                          = 263
+	NSFileReadUnknownError                           = 256
+	NSFileReadUnknownStringEncodingError             = 264
+	NSFileReadUnsupportedSchemeError                 = 262
+	NSFileWriteFileExistsError                       = 516
+	NSFileWriteInapplicableStringEncodingError       = 517
+	NSFileWriteInvalidFileNameError                  = 514
+	NSFileWriteNoPermissionError                     = 513
+	NSFileWriteOutOfSpaceError                       = 640
+	NSFileWriteUnknownError                          = 512
+	NSFileWriteUnsupportedSchemeError                = 518
+	NSFileWriteVolumeReadOnlyError                   = 642
+	NSFormattingError                                = 2048
+	NSFormattingErrorMaximum                         = 2559
+	NSFormattingErrorMinimum                         = 2048
+	NSKeyValueValidationError                        = 1024
+	NSPropertyListErrorMaximum                       = 4095
+	NSPropertyListErrorMinimum                       = 3840
+	NSPropertyListReadCorruptError                   = 3840
+	NSPropertyListReadStreamError                    = 3842
+	NSPropertyListReadUnknownVersionError            = 3841
+	NSPropertyListWriteInvalidError                  = 3852
+	NSPropertyListWriteStreamError                   = 3851
+	NSUbiquitousFileErrorMaximum                     = 4607
+	NSUbiquitousFileErrorMinimum                     = 4352
+	NSUbiquitousFileNotUploadedDueToQuotaError       = 4354
+	NSUbiquitousFileUbiquityServerNotAvailable       = 4355
+	NSUbiquitousFileUnavailableError                 = 4353
+	NSUserActivityConnectionUnavailableError         = 4609
+	NSUserActivityErrorMaximum                       = 4863
+	NSUserActivityErrorMinimum                       = 4608
+	NSUserActivityHandoffFailedError                 = 4608
+	NSUserActivityHandoffUserInfoTooLargeError       = 4611
+	NSUserActivityRemoteApplicationTimedOutError     = 4610
+	NSUserCancelledError                             = 3072
+	NSValidationErrorMaximum                         = 2047
+	NSValidationErrorMinimum                         = 1024
+	NSXPCConnectionCodeSigningRequirementFailure     = 4102
+	NSXPCConnectionErrorMaximum                      = 4224
+	NSXPCConnectionErrorMinimum                      = 4096
+	NSXPCConnectionInterrupted                       = 4097
+	NSXPCConnectionInvalid                           = 4099
+	NSXPCConnectionReplyInvalid                      = 4101
 )
 
 const (
-	NSArgumentEvaluationScriptError = 3
-	NSArgumentsWrongScriptError = 6
-	NSCannotCreateScriptCommandError = 10
-	NSInternalScriptError = 8
-	NSKeySpecifierEvaluationScriptError = 2
-	NSNoScriptError = 0
+	NSArgumentEvaluationScriptError          = 3
+	NSArgumentsWrongScriptError              = 6
+	NSCannotCreateScriptCommandError         = 10
+	NSInternalScriptError                    = 8
+	NSKeySpecifierEvaluationScriptError      = 2
+	NSNoScriptError                          = 0
 	NSOperationNotSupportedForKeyScriptError = 9
-	NSReceiverEvaluationScriptError = 1
-	NSReceiversCantHandleCommandScriptError = 4
-	NSRequiredArgumentsMissingScriptError = 5
-	NSUnknownKeyScriptError = 7
+	NSReceiverEvaluationScriptError          = 1
+	NSReceiversCantHandleCommandScriptError  = 4
+	NSRequiredArgumentsMissingScriptError    = 5
+	NSUnknownKeyScriptError                  = 7
 )
 
 const (
-	NSContainerSpecifierError = 2
-	NSInternalSpecifierError = 5
-	NSInvalidIndexSpecifierError = 4
-	NSNoSpecifierError = 0
-	NSNoTopLevelContainersSpecifierError = 1
+	NSContainerSpecifierError                   = 2
+	NSInternalSpecifierError                    = 5
+	NSInvalidIndexSpecifierError                = 4
+	NSNoSpecifierError                          = 0
+	NSNoTopLevelContainersSpecifierError        = 1
 	NSOperationNotSupportedForKeySpecifierError = 6
-	NSUnknownKeySpecifierError = 3
+	NSUnknownKeySpecifierError                  = 3
 )
 
 const (
@@ -5088,86 +5918,86 @@ const (
 
 const (
 	NSCollectorDisabledOption = 2
-	NSScannedOption = 1
+	NSScannedOption           = 1
 )
 
 const (
 	NSTextCheckingAllCustomTypes = 18446744069414584320
 	NSTextCheckingAllSystemTypes = 4294967295
-	NSTextCheckingAllTypes = 18446744073709551615
+	NSTextCheckingAllTypes       = 18446744073709551615
 )
 
 const (
-	NSURLErrorCancelledReasonBackgroundUpdatesDisabled = 1
+	NSURLErrorCancelledReasonBackgroundUpdatesDisabled   = 1
 	NSURLErrorCancelledReasonInsufficientSystemResources = 2
-	NSURLErrorCancelledReasonUserForceQuitApplication = 0
+	NSURLErrorCancelledReasonUserForceQuitApplication    = 0
 )
 
 const (
 	NSURLErrorAppTransportSecurityRequiresSecureConnection = -1022
-	NSURLErrorBackgroundSessionInUseByAnotherProcess = -996
-	NSURLErrorBackgroundSessionRequiresSharedContainer = -995
-	NSURLErrorBackgroundSessionWasDisconnected = -997
-	NSURLErrorBadServerResponse = -1011
-	NSURLErrorBadURL = -1000
-	NSURLErrorCallIsActive = -1019
-	NSURLErrorCancelled = -999
-	NSURLErrorCannotCloseFile = -3002
-	NSURLErrorCannotConnectToHost = -1004
-	NSURLErrorCannotCreateFile = -3000
-	NSURLErrorCannotDecodeContentData = -1016
-	NSURLErrorCannotDecodeRawData = -1015
-	NSURLErrorCannotFindHost = -1003
-	NSURLErrorCannotLoadFromNetwork = -2000
-	NSURLErrorCannotMoveFile = -3005
-	NSURLErrorCannotOpenFile = -3001
-	NSURLErrorCannotParseResponse = -1017
-	NSURLErrorCannotRemoveFile = -3004
-	NSURLErrorCannotWriteToFile = -3003
-	NSURLErrorClientCertificateRejected = -1205
-	NSURLErrorClientCertificateRequired = -1206
-	NSURLErrorDNSLookupFailed = -1006
-	NSURLErrorDataLengthExceedsMaximum = -1103
-	NSURLErrorDataNotAllowed = -1020
-	NSURLErrorDownloadDecodingFailedMidStream = -3006
-	NSURLErrorDownloadDecodingFailedToComplete = -3007
-	NSURLErrorFileDoesNotExist = -1100
-	NSURLErrorFileIsDirectory = -1101
-	NSURLErrorFileOutsideSafeArea = -1104
-	NSURLErrorHTTPTooManyRedirects = -1007
-	NSURLErrorInternationalRoamingOff = -1018
-	NSURLErrorNetworkConnectionLost = -1005
-	NSURLErrorNoPermissionsToReadFile = -1102
-	NSURLErrorNotConnectedToInternet = -1009
-	NSURLErrorRedirectToNonExistentLocation = -1010
-	NSURLErrorRequestBodyStreamExhausted = -1021
-	NSURLErrorResourceUnavailable = -1008
-	NSURLErrorSecureConnectionFailed = -1200
-	NSURLErrorServerCertificateHasBadDate = -1201
-	NSURLErrorServerCertificateHasUnknownRoot = -1203
-	NSURLErrorServerCertificateNotYetValid = -1204
-	NSURLErrorServerCertificateUntrusted = -1202
-	NSURLErrorTimedOut = -1001
-	NSURLErrorUnknown = -1
-	NSURLErrorUnsupportedURL = -1002
-	NSURLErrorUserAuthenticationRequired = -1013
-	NSURLErrorUserCancelledAuthentication = -1012
-	NSURLErrorZeroByteResource = -1014
+	NSURLErrorBackgroundSessionInUseByAnotherProcess       = -996
+	NSURLErrorBackgroundSessionRequiresSharedContainer     = -995
+	NSURLErrorBackgroundSessionWasDisconnected             = -997
+	NSURLErrorBadServerResponse                            = -1011
+	NSURLErrorBadURL                                       = -1000
+	NSURLErrorCallIsActive                                 = -1019
+	NSURLErrorCancelled                                    = -999
+	NSURLErrorCannotCloseFile                              = -3002
+	NSURLErrorCannotConnectToHost                          = -1004
+	NSURLErrorCannotCreateFile                             = -3000
+	NSURLErrorCannotDecodeContentData                      = -1016
+	NSURLErrorCannotDecodeRawData                          = -1015
+	NSURLErrorCannotFindHost                               = -1003
+	NSURLErrorCannotLoadFromNetwork                        = -2000
+	NSURLErrorCannotMoveFile                               = -3005
+	NSURLErrorCannotOpenFile                               = -3001
+	NSURLErrorCannotParseResponse                          = -1017
+	NSURLErrorCannotRemoveFile                             = -3004
+	NSURLErrorCannotWriteToFile                            = -3003
+	NSURLErrorClientCertificateRejected                    = -1205
+	NSURLErrorClientCertificateRequired                    = -1206
+	NSURLErrorDNSLookupFailed                              = -1006
+	NSURLErrorDataLengthExceedsMaximum                     = -1103
+	NSURLErrorDataNotAllowed                               = -1020
+	NSURLErrorDownloadDecodingFailedMidStream              = -3006
+	NSURLErrorDownloadDecodingFailedToComplete             = -3007
+	NSURLErrorFileDoesNotExist                             = -1100
+	NSURLErrorFileIsDirectory                              = -1101
+	NSURLErrorFileOutsideSafeArea                          = -1104
+	NSURLErrorHTTPTooManyRedirects                         = -1007
+	NSURLErrorInternationalRoamingOff                      = -1018
+	NSURLErrorNetworkConnectionLost                        = -1005
+	NSURLErrorNoPermissionsToReadFile                      = -1102
+	NSURLErrorNotConnectedToInternet                       = -1009
+	NSURLErrorRedirectToNonExistentLocation                = -1010
+	NSURLErrorRequestBodyStreamExhausted                   = -1021
+	NSURLErrorResourceUnavailable                          = -1008
+	NSURLErrorSecureConnectionFailed                       = -1200
+	NSURLErrorServerCertificateHasBadDate                  = -1201
+	NSURLErrorServerCertificateHasUnknownRoot              = -1203
+	NSURLErrorServerCertificateNotYetValid                 = -1204
+	NSURLErrorServerCertificateUntrusted                   = -1202
+	NSURLErrorTimedOut                                     = -1001
+	NSURLErrorUnknown                                      = -1
+	NSURLErrorUnsupportedURL                               = -1002
+	NSURLErrorUserAuthenticationRequired                   = -1013
+	NSURLErrorUserCancelledAuthentication                  = -1012
+	NSURLErrorZeroByteResource                             = -1014
 )
 
 const (
-	NSUbiquitousKeyValueStoreAccountChange = 3
-	NSUbiquitousKeyValueStoreInitialSyncChange = 1
+	NSUbiquitousKeyValueStoreAccountChange        = 3
+	NSUbiquitousKeyValueStoreInitialSyncChange    = 1
 	NSUbiquitousKeyValueStoreQuotaViolationChange = 2
-	NSUbiquitousKeyValueStoreServerChange = 0
+	NSUbiquitousKeyValueStoreServerChange         = 0
 )
 
 const (
-	NSHPUXOperatingSystem = 4
-	NSMACHOperatingSystem = 5
-	NSOSF1OperatingSystem = 7
-	NSSolarisOperatingSystem = 3
-	NSSunOSOperatingSystem = 6
+	NSHPUXOperatingSystem      = 4
+	NSMACHOperatingSystem      = 5
+	NSOSF1OperatingSystem      = 7
+	NSSolarisOperatingSystem   = 3
+	NSSunOSOperatingSystem     = 6
 	NSWindows95OperatingSystem = 2
 	NSWindowsNTOperatingSystem = 1
 )
@@ -5177,8 +6007,7 @@ const (
 )
 
 const (
-	NS_BigEndian = 2
-	NS_LittleEndian = 1
+	NS_BigEndian        = 2
+	NS_LittleEndian     = 1
 	NS_UnknownByteOrder = 0
 )
-

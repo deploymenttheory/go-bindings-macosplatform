@@ -162,4 +162,3 @@ type DeviceBrowserViewable interface {
 }
 
 var _ DeviceBrowserViewable = (*DeviceBrowserView)(nil)
-

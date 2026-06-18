@@ -16,7 +16,9 @@ type MTRDeviceEnergyManagementClusterForecastStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterForecastStruct].
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct { return x.inner }
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -206,4 +208,3 @@ type MTRDeviceEnergyManagementClusterForecastStructable interface {
 }
 
 var _ MTRDeviceEnergyManagementClusterForecastStructable = (*MTRDeviceEnergyManagementClusterForecastStruct)(nil)
-

@@ -26,4 +26,3 @@ func KAERemoteProcessUserIDKey() uintptr {
 	ptr, _ := purego.Dlsym(_aeLib, "kAERemoteProcessUserIDKey")
 	return ptr
 }
-

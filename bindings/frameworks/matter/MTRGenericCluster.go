@@ -15,7 +15,7 @@ type MTRGenericCluster struct {
 }
 
 var (
-	_clsMTRGenericCluster = _objcClass("MTRGenericCluster")
+	_clsMTRGenericCluster       = _objcClass("MTRGenericCluster")
 	_mTRGenericClusterSelDevice = objc.RegisterName("device")
 )
 
@@ -31,7 +31,8 @@ func MTRGenericClusterFromID(id objc.ID) *MTRGenericCluster {
 
 func (o *MTRGenericCluster) Device() *MTRDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRGenericClusterSelDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDeviceFromID(_ret)
 }
-

@@ -16,21 +16,21 @@ type UNMutableNotificationContent struct {
 }
 
 var (
-	_clsUNMutableNotificationContent = _objcClass("UNMutableNotificationContent")
-	_uNMutableNotificationContentSelSetAttachments = objc.RegisterName("setAttachments:")
-	_uNMutableNotificationContentSelSetBadge = objc.RegisterName("setBadge:")
-	_uNMutableNotificationContentSelSetBody = objc.RegisterName("setBody:")
-	_uNMutableNotificationContentSelSetCategoryIdentifier = objc.RegisterName("setCategoryIdentifier:")
-	_uNMutableNotificationContentSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_uNMutableNotificationContentSelSetThreadIdentifier = objc.RegisterName("setThreadIdentifier:")
-	_uNMutableNotificationContentSelSetTitle = objc.RegisterName("setTitle:")
-	_uNMutableNotificationContentSelSetUserInfo = objc.RegisterName("setUserInfo:")
-	_uNMutableNotificationContentSelSetSummaryArgument = objc.RegisterName("setSummaryArgument:")
-	_uNMutableNotificationContentSelSetSummaryArgumentCount = objc.RegisterName("setSummaryArgumentCount:")
+	_clsUNMutableNotificationContent                           = _objcClass("UNMutableNotificationContent")
+	_uNMutableNotificationContentSelSetAttachments             = objc.RegisterName("setAttachments:")
+	_uNMutableNotificationContentSelSetBadge                   = objc.RegisterName("setBadge:")
+	_uNMutableNotificationContentSelSetBody                    = objc.RegisterName("setBody:")
+	_uNMutableNotificationContentSelSetCategoryIdentifier      = objc.RegisterName("setCategoryIdentifier:")
+	_uNMutableNotificationContentSelSetSubtitle                = objc.RegisterName("setSubtitle:")
+	_uNMutableNotificationContentSelSetThreadIdentifier        = objc.RegisterName("setThreadIdentifier:")
+	_uNMutableNotificationContentSelSetTitle                   = objc.RegisterName("setTitle:")
+	_uNMutableNotificationContentSelSetUserInfo                = objc.RegisterName("setUserInfo:")
+	_uNMutableNotificationContentSelSetSummaryArgument         = objc.RegisterName("setSummaryArgument:")
+	_uNMutableNotificationContentSelSetSummaryArgumentCount    = objc.RegisterName("setSummaryArgumentCount:")
 	_uNMutableNotificationContentSelSetTargetContentIdentifier = objc.RegisterName("setTargetContentIdentifier:")
-	_uNMutableNotificationContentSelSetInterruptionLevel = objc.RegisterName("setInterruptionLevel:")
-	_uNMutableNotificationContentSelSetRelevanceScore = objc.RegisterName("setRelevanceScore:")
-	_uNMutableNotificationContentSelSetFilterCriteria = objc.RegisterName("setFilterCriteria:")
+	_uNMutableNotificationContentSelSetInterruptionLevel       = objc.RegisterName("setInterruptionLevel:")
+	_uNMutableNotificationContentSelSetRelevanceScore          = objc.RegisterName("setRelevanceScore:")
+	_uNMutableNotificationContentSelSetFilterCriteria          = objc.RegisterName("setFilterCriteria:")
 )
 
 func UNMutableNotificationContentFromID(id objc.ID) *UNMutableNotificationContent {
@@ -98,4 +98,3 @@ func (o *UNMutableNotificationContent) SetRelevanceScore(relevanceScore float64)
 func (o *UNMutableNotificationContent) SetFilterCriteria(filterCriteria *foundation.NSString) {
 	o.Ptr().Send(_uNMutableNotificationContentSelSetFilterCriteria, filterCriteria.Ptr())
 }
-

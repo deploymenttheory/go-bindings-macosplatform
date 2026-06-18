@@ -61,4 +61,3 @@ type PaymentButtonable interface {
 }
 
 var _ PaymentButtonable = (*PaymentButton)(nil)
-

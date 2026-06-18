@@ -15,32 +15,32 @@ type MPSGraphImToColOpDescriptor struct {
 }
 
 var (
-	_clsMPSGraphImToColOpDescriptor = _objcClass("MPSGraphImToColOpDescriptor")
+	_clsMPSGraphImToColOpDescriptor                                                                                                                                              = _objcClass("MPSGraphImToColOpDescriptor")
 	_mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:paddingLeft:paddingRight:paddingTop:paddingBottom:dataLayout:")
-	_mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:dataLayout:")
-	_mPSGraphImToColOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
-	_mPSGraphImToColOpDescriptorSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSGraphImToColOpDescriptorSelSetKernelWidth = objc.RegisterName("setKernelWidth:")
-	_mPSGraphImToColOpDescriptorSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSGraphImToColOpDescriptorSelSetKernelHeight = objc.RegisterName("setKernelHeight:")
-	_mPSGraphImToColOpDescriptorSelStrideInX = objc.RegisterName("strideInX")
-	_mPSGraphImToColOpDescriptorSelSetStrideInX = objc.RegisterName("setStrideInX:")
-	_mPSGraphImToColOpDescriptorSelStrideInY = objc.RegisterName("strideInY")
-	_mPSGraphImToColOpDescriptorSelSetStrideInY = objc.RegisterName("setStrideInY:")
-	_mPSGraphImToColOpDescriptorSelDilationRateInX = objc.RegisterName("dilationRateInX")
-	_mPSGraphImToColOpDescriptorSelSetDilationRateInX = objc.RegisterName("setDilationRateInX:")
-	_mPSGraphImToColOpDescriptorSelDilationRateInY = objc.RegisterName("dilationRateInY")
-	_mPSGraphImToColOpDescriptorSelSetDilationRateInY = objc.RegisterName("setDilationRateInY:")
-	_mPSGraphImToColOpDescriptorSelPaddingLeft = objc.RegisterName("paddingLeft")
-	_mPSGraphImToColOpDescriptorSelSetPaddingLeft = objc.RegisterName("setPaddingLeft:")
-	_mPSGraphImToColOpDescriptorSelPaddingRight = objc.RegisterName("paddingRight")
-	_mPSGraphImToColOpDescriptorSelSetPaddingRight = objc.RegisterName("setPaddingRight:")
-	_mPSGraphImToColOpDescriptorSelPaddingTop = objc.RegisterName("paddingTop")
-	_mPSGraphImToColOpDescriptorSelSetPaddingTop = objc.RegisterName("setPaddingTop:")
-	_mPSGraphImToColOpDescriptorSelPaddingBottom = objc.RegisterName("paddingBottom")
-	_mPSGraphImToColOpDescriptorSelSetPaddingBottom = objc.RegisterName("setPaddingBottom:")
-	_mPSGraphImToColOpDescriptorSelDataLayout = objc.RegisterName("dataLayout")
-	_mPSGraphImToColOpDescriptorSelSetDataLayout = objc.RegisterName("setDataLayout:")
+	_mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout                                               = objc.RegisterName("descriptorWithKernelWidth:kernelHeight:strideInX:strideInY:dilationRateInX:dilationRateInY:dataLayout:")
+	_mPSGraphImToColOpDescriptorSelSetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom                                                                          = objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:")
+	_mPSGraphImToColOpDescriptorSelKernelWidth                                                                                                                                   = objc.RegisterName("kernelWidth")
+	_mPSGraphImToColOpDescriptorSelSetKernelWidth                                                                                                                                = objc.RegisterName("setKernelWidth:")
+	_mPSGraphImToColOpDescriptorSelKernelHeight                                                                                                                                  = objc.RegisterName("kernelHeight")
+	_mPSGraphImToColOpDescriptorSelSetKernelHeight                                                                                                                               = objc.RegisterName("setKernelHeight:")
+	_mPSGraphImToColOpDescriptorSelStrideInX                                                                                                                                     = objc.RegisterName("strideInX")
+	_mPSGraphImToColOpDescriptorSelSetStrideInX                                                                                                                                  = objc.RegisterName("setStrideInX:")
+	_mPSGraphImToColOpDescriptorSelStrideInY                                                                                                                                     = objc.RegisterName("strideInY")
+	_mPSGraphImToColOpDescriptorSelSetStrideInY                                                                                                                                  = objc.RegisterName("setStrideInY:")
+	_mPSGraphImToColOpDescriptorSelDilationRateInX                                                                                                                               = objc.RegisterName("dilationRateInX")
+	_mPSGraphImToColOpDescriptorSelSetDilationRateInX                                                                                                                            = objc.RegisterName("setDilationRateInX:")
+	_mPSGraphImToColOpDescriptorSelDilationRateInY                                                                                                                               = objc.RegisterName("dilationRateInY")
+	_mPSGraphImToColOpDescriptorSelSetDilationRateInY                                                                                                                            = objc.RegisterName("setDilationRateInY:")
+	_mPSGraphImToColOpDescriptorSelPaddingLeft                                                                                                                                   = objc.RegisterName("paddingLeft")
+	_mPSGraphImToColOpDescriptorSelSetPaddingLeft                                                                                                                                = objc.RegisterName("setPaddingLeft:")
+	_mPSGraphImToColOpDescriptorSelPaddingRight                                                                                                                                  = objc.RegisterName("paddingRight")
+	_mPSGraphImToColOpDescriptorSelSetPaddingRight                                                                                                                               = objc.RegisterName("setPaddingRight:")
+	_mPSGraphImToColOpDescriptorSelPaddingTop                                                                                                                                    = objc.RegisterName("paddingTop")
+	_mPSGraphImToColOpDescriptorSelSetPaddingTop                                                                                                                                 = objc.RegisterName("setPaddingTop:")
+	_mPSGraphImToColOpDescriptorSelPaddingBottom                                                                                                                                 = objc.RegisterName("paddingBottom")
+	_mPSGraphImToColOpDescriptorSelSetPaddingBottom                                                                                                                              = objc.RegisterName("setPaddingBottom:")
+	_mPSGraphImToColOpDescriptorSelDataLayout                                                                                                                                    = objc.RegisterName("dataLayout")
+	_mPSGraphImToColOpDescriptorSelSetDataLayout                                                                                                                                 = objc.RegisterName("setDataLayout:")
 )
 
 func MPSGraphImToColOpDescriptorFromID(id objc.ID) *MPSGraphImToColOpDescriptor {
@@ -56,14 +56,18 @@ func MPSGraphImToColOpDescriptorFromID(id objc.ID) *MPSGraphImToColOpDescriptor 
 // Creates an image to column descriptor with given values for parameters. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property. - dataLayout: See `dataLayout` property. - Returns: A valid MPSGraphImToColOpDescriptor on autoreleasepool.
 func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphImToColOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphImToColOpDescriptor), _mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, dataLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphImToColOpDescriptorFromID(_ret)
 }
 
 // Creates column to image descriptor with given values for parameters. - Parameters: - kernelWidth: See `kernelWidth` property. - kernelHeight: See `kernelHeight` property. - strideInX: See `strideInX` property. - strideInY: See `strideInY` property. - dilationRateInX: See `dilationRateInX` property. - dilationRateInY: See `dilationRateInY` property. - dataLayout: See `dataLayout` property. - Returns: A valid MPSGraphImToColOpDescriptor on autoreleasepool.
 func MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, dataLayout MPSGraphTensorNamedDataLayout) *MPSGraphImToColOpDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphImToColOpDescriptor), _mPSGraphImToColOpDescriptorSelDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout, kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, dataLayout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphImToColOpDescriptorFromID(_ret)
 }
 
@@ -181,4 +185,3 @@ func (o *MPSGraphImToColOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout
 func (o *MPSGraphImToColOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
 	o.Ptr().Send(_mPSGraphImToColOpDescriptorSelSetDataLayout, dataLayout)
 }
-

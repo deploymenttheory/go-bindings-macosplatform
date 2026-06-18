@@ -43,4 +43,3 @@ type GraphObjectable interface {
 }
 
 var _ GraphObjectable = (*GraphObject)(nil)
-

@@ -109,4 +109,3 @@ type SignpostRecordable interface {
 }
 
 var _ SignpostRecordable = (*SignpostRecord)(nil)
-

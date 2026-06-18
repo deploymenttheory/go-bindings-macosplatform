@@ -15,4 +15,3 @@ type ColorSyncProfile struct{}
 
 // ColorSyncTransform is an opaque type.
 type ColorSyncTransform struct{}
-

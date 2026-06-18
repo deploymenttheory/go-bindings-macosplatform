@@ -18,20 +18,20 @@ type SCNGeometrySource struct {
 }
 
 var (
-	_clsSCNGeometrySource = _objcClass("SCNGeometrySource")
+	_clsSCNGeometrySource                                                                                                                 = _objcClass("SCNGeometrySource")
 	_sCNGeometrySourceSelGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride = objc.RegisterName("geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:")
-	_sCNGeometrySourceSelGeometrySourceWithVerticesCount = objc.RegisterName("geometrySourceWithVertices:count:")
-	_sCNGeometrySourceSelGeometrySourceWithNormalsCount = objc.RegisterName("geometrySourceWithNormals:count:")
-	_sCNGeometrySourceSelGeometrySourceWithTextureCoordinatesCount = objc.RegisterName("geometrySourceWithTextureCoordinates:count:")
-	_sCNGeometrySourceSelGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride = objc.RegisterName("geometrySourceWithBuffer:vertexFormat:semantic:vertexCount:dataOffset:dataStride:")
-	_sCNGeometrySourceSelData = objc.RegisterName("data")
-	_sCNGeometrySourceSelSemantic = objc.RegisterName("semantic")
-	_sCNGeometrySourceSelVectorCount = objc.RegisterName("vectorCount")
-	_sCNGeometrySourceSelFloatComponents = objc.RegisterName("floatComponents")
-	_sCNGeometrySourceSelComponentsPerVector = objc.RegisterName("componentsPerVector")
-	_sCNGeometrySourceSelBytesPerComponent = objc.RegisterName("bytesPerComponent")
-	_sCNGeometrySourceSelDataOffset = objc.RegisterName("dataOffset")
-	_sCNGeometrySourceSelDataStride = objc.RegisterName("dataStride")
+	_sCNGeometrySourceSelGeometrySourceWithVerticesCount                                                                                  = objc.RegisterName("geometrySourceWithVertices:count:")
+	_sCNGeometrySourceSelGeometrySourceWithNormalsCount                                                                                   = objc.RegisterName("geometrySourceWithNormals:count:")
+	_sCNGeometrySourceSelGeometrySourceWithTextureCoordinatesCount                                                                        = objc.RegisterName("geometrySourceWithTextureCoordinates:count:")
+	_sCNGeometrySourceSelGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride                                      = objc.RegisterName("geometrySourceWithBuffer:vertexFormat:semantic:vertexCount:dataOffset:dataStride:")
+	_sCNGeometrySourceSelData                                                                                                             = objc.RegisterName("data")
+	_sCNGeometrySourceSelSemantic                                                                                                         = objc.RegisterName("semantic")
+	_sCNGeometrySourceSelVectorCount                                                                                                      = objc.RegisterName("vectorCount")
+	_sCNGeometrySourceSelFloatComponents                                                                                                  = objc.RegisterName("floatComponents")
+	_sCNGeometrySourceSelComponentsPerVector                                                                                              = objc.RegisterName("componentsPerVector")
+	_sCNGeometrySourceSelBytesPerComponent                                                                                                = objc.RegisterName("bytesPerComponent")
+	_sCNGeometrySourceSelDataOffset                                                                                                       = objc.RegisterName("dataOffset")
+	_sCNGeometrySourceSelDataStride                                                                                                       = objc.RegisterName("dataStride")
 )
 
 func SCNGeometrySourceFromID(id objc.ID) *SCNGeometrySource {
@@ -47,49 +47,63 @@ func SCNGeometrySourceFromID(id objc.ID) *SCNGeometrySource {
 // @method geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride: @abstract Creates and returns a geometry source from the given data and parameters. @param data The geometry data. @param semantic The semantic of the geometry source. @param vectorCount The number of geometry source vectors. @param floatComponents A flag that indicates if vector components are floating point values. @param componentsPerVector The number of scalar components in a vector. @param bytesPerComponent The number of bytes that represent a vector component. @param offset The offset from the beginning of the data. In bytes. @param stride The number of bytes from a vector to the next one in the data.
 func SCNGeometrySourceGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data *foundation.NSData, semantic *foundation.NSString, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride, data.Ptr(), semantic.Ptr(), vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @method geometrySourceWithVertices:count: @abstract Creates and returns a geometry source from vertices stored in a buffer of SCNVector3 values. @param vertices The buffer of vertices. @param count The number of vertices. @discussion Input vertices are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
 func SCNGeometrySourceGeometrySourceWithVerticesCount(vertices *SCNVector3, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithVerticesCount, vertices, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @method geometrySourceWithNormals:count: @abstract Creates and returns a geometry source from normals stored in a buffer of SCNVector3 values. @param normals The buffer of normals. @param count The number of normals. @discussion Input normals are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
 func SCNGeometrySourceGeometrySourceWithNormalsCount(normals *SCNVector3, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithNormalsCount, normals, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @method geometrySourceWithTextureCoordinates:count: @abstract Creates and returns a geometry source from texture coordinates stored in a buffer of CGPoint values. @param texcoord The buffer of texture coordinates. @param count The number of texture coordinate points. @discussion Input texture coordinates are copied to an optimized data format. The actual format is described by the properties of the resulting instance.
 func SCNGeometrySourceGeometrySourceWithTextureCoordinatesCount(texcoord *corefoundation.CGPoint, count int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithTextureCoordinatesCount, texcoord, count)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @method geometrySourceWithBuffer:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride: @abstract Creates and returns a geometry source from the given data and parameters. @param buffer A Metal buffer. @param vertexFormat The vertex format. @param semantic The semantic of the geometry source. @param vertexCount The number of vertex. @param offset The offset from the beginning of the data. In bytes. @param stride The number of bytes from a vector to the next one in the data. @discussion Attempting to modify the Metal buffer outside the SCNSceneRenderer delegate callbacks is undefined. The typical usage it to modify the MTLBuffer within the willRenderScene callback, using a compute kernel or a vertex function in the user own command buffer. So something like: - (void)renderer:(id <SCNSceneRenderer>)aRenderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time { // ask for a new command buffer id <MTLCommandBuffer> myCommandBuffer = [aRenderer.commandQueue commandBuffer]; // get a compute command encoder id <MTLComputeCommandEncoder> myComputeCommandEncoder = [myCommandBuffer computeCommandEncoder]; // configure the compute command encoder's pipeline state, buffer inputs etc... //... // dispatch the [myComputeCommandEncoder dispatchThreadgroups:numberOfWorkingGroups threadsPerThreadgroup:numberOfThreads]; [myComputeCommandEncoder endEncoding]; [myCommandBuffer commit]; }
 func SCNGeometrySourceGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride(buffer metal.MTLBuffer, vertexFormat metal.MTLVertexFormat, semantic *foundation.NSString, vertexCount int, offset int, stride int) *SCNGeometrySource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNGeometrySource), _sCNGeometrySourceSelGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride, buffer, vertexFormat, semantic.Ptr(), vertexCount, offset, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNGeometrySourceFromID(_ret)
 }
 
 // @property data @abstract The data for the geometry source
 func (o *SCNGeometrySource) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySourceSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property semantic @abstract The semantic of the geometry source
 func (o *SCNGeometrySource) Semantic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNGeometrySourceSelSemantic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -128,4 +142,3 @@ func (o *SCNGeometrySource) DataStride() int {
 	_ret := objc.Send[int](o.Ptr(), _sCNGeometrySourceSelDataStride)
 	return _ret
 }
-

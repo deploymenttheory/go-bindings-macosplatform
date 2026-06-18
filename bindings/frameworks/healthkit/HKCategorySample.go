@@ -16,12 +16,12 @@ type HKCategorySample struct {
 }
 
 var (
-	_clsHKCategorySample = _objcClass("HKCategorySample")
-	_hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateMetadata = objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:")
-	_hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDate = objc.RegisterName("categorySampleWithType:value:startDate:endDate:")
+	_clsHKCategorySample                                                          = _objcClass("HKCategorySample")
+	_hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateMetadata       = objc.RegisterName("categorySampleWithType:value:startDate:endDate:metadata:")
+	_hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDate               = objc.RegisterName("categorySampleWithType:value:startDate:endDate:")
 	_hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateDeviceMetadata = objc.RegisterName("categorySampleWithType:value:startDate:endDate:device:metadata:")
-	_hKCategorySampleSelCategoryType = objc.RegisterName("categoryType")
-	_hKCategorySampleSelValue = objc.RegisterName("value")
+	_hKCategorySampleSelCategoryType                                              = objc.RegisterName("categoryType")
+	_hKCategorySampleSelValue                                                     = objc.RegisterName("value")
 )
 
 func HKCategorySampleFromID(id objc.ID) *HKCategorySample {
@@ -37,27 +37,35 @@ func HKCategorySampleFromID(id objc.ID) *HKCategorySample {
 // @method     categorySampleWithType:value:startDate:endDate:metadata: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample. @param      metadata   Metadata for the sample (optional).
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDateMetadata(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCategorySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCategorySampleFromID(_ret)
 }
 
 // @method     categorySampleWithType:value:startDate:endDate: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample.
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDate(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate) *HKCategorySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDate, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCategorySampleFromID(_ret)
 }
 
 // @method     categorySampleWithType:value:startDate:endDate:device:metadata: @abstract   Creates a new HKCategorySample. @param      type       The type of the sample. @param      value      The enumeration value for the sample. See HKCategoryTypeIdentifier for appropriate value. @param      startDate  The start date of the sample. @param      endDate    The end date of the sample. @param      device     The HKDevice that generated the sample (optional). @param      metadata   Metadata for the sample (optional).
 func HKCategorySampleCategorySampleWithTypeValueStartDateEndDateDeviceMetadata(type_ *HKCategoryType, value int, startDate *foundation.NSDate, endDate *foundation.NSDate, device *HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKCategorySample {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKCategorySample), _hKCategorySampleSelCategorySampleWithTypeValueStartDateEndDateDeviceMetadata, type_.Ptr(), value, startDate.Ptr(), endDate.Ptr(), device.Ptr(), metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCategorySampleFromID(_ret)
 }
 
 func (o *HKCategorySample) CategoryType() *HKCategoryType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKCategorySampleSelCategoryType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKCategoryTypeFromID(_ret)
 }
 
@@ -66,4 +74,3 @@ func (o *HKCategorySample) Value() int {
 	_ret := objc.Send[int](o.Ptr(), _hKCategorySampleSelValue)
 	return _ret
 }
-

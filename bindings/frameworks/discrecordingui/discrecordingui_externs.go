@@ -59,4 +59,3 @@ func DRSetupPanelSelectedDeviceKey() uintptr {
 	ptr, _ := purego.Dlsym(_discrecordinguiLib, "DRSetupPanelSelectedDeviceKey")
 	return ptr
 }
-

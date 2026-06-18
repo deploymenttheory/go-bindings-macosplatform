@@ -18,23 +18,23 @@ type MTRClusterMicrowaveOvenControl struct {
 }
 
 var (
-	_clsMTRClusterMicrowaveOvenControl = _objcClass("MTRClusterMicrowaveOvenControl")
+	_clsMTRClusterMicrowaveOvenControl                                                                            = _objcClass("MTRClusterMicrowaveOvenControl")
 	_mTRClusterMicrowaveOvenControlSelSetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setCookingParametersWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMicrowaveOvenControlSelSetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("setCookingParametersWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterMicrowaveOvenControlSelAddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("addMoreTimeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeCookTimeWithParams = objc.RegisterName("readAttributeCookTimeWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeMaxCookTimeWithParams = objc.RegisterName("readAttributeMaxCookTimeWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributePowerSettingWithParams = objc.RegisterName("readAttributePowerSettingWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeMinPowerWithParams = objc.RegisterName("readAttributeMinPowerWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeMaxPowerWithParams = objc.RegisterName("readAttributeMaxPowerWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributePowerStepWithParams = objc.RegisterName("readAttributePowerStepWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeWattRatingWithParams = objc.RegisterName("readAttributeWattRatingWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterMicrowaveOvenControlSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterMicrowaveOvenControlSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterMicrowaveOvenControlSelSetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion       = objc.RegisterName("setCookingParametersWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterMicrowaveOvenControlSelAddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion          = objc.RegisterName("addMoreTimeWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeCookTimeWithParams                                             = objc.RegisterName("readAttributeCookTimeWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeMaxCookTimeWithParams                                          = objc.RegisterName("readAttributeMaxCookTimeWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributePowerSettingWithParams                                         = objc.RegisterName("readAttributePowerSettingWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeMinPowerWithParams                                             = objc.RegisterName("readAttributeMinPowerWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeMaxPowerWithParams                                             = objc.RegisterName("readAttributeMaxPowerWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributePowerStepWithParams                                            = objc.RegisterName("readAttributePowerStepWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeWattRatingWithParams                                           = objc.RegisterName("readAttributeWattRatingWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeGeneratedCommandListWithParams                                 = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeAcceptedCommandListWithParams                                  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeAttributeListWithParams                                        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeFeatureMapWithParams                                           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterMicrowaveOvenControlSelReadAttributeClusterRevisionWithParams                                      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterMicrowaveOvenControlSelInitWithDeviceEndpointIDQueue                                               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterMicrowaveOvenControlFromID(id objc.ID) *MTRClusterMicrowaveOvenControl {
@@ -143,7 +143,8 @@ func (o *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterMicrowaveOvenControl) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMicrowaveOvenControl {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterMicrowaveOvenControlSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterMicrowaveOvenControlFromID(_ret)
 }
-

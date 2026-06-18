@@ -122,4 +122,3 @@ type StrokePathable interface {
 }
 
 var _ StrokePathable = (*StrokePath)(nil)
-

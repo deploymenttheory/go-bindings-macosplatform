@@ -18,13 +18,13 @@ type NEAppProxyUDPFlow struct {
 }
 
 var (
-	_clsNEAppProxyUDPFlow = _objcClass("NEAppProxyUDPFlow")
+	_clsNEAppProxyUDPFlow                                                   = _objcClass("NEAppProxyUDPFlow")
 	_nEAppProxyUDPFlowSelReadDatagramsAndFlowEndpointsWithCompletionHandler = objc.RegisterName("readDatagramsAndFlowEndpointsWithCompletionHandler:")
-	_nEAppProxyUDPFlowSelReadDatagramsWithCompletionHandler = objc.RegisterName("readDatagramsWithCompletionHandler:")
+	_nEAppProxyUDPFlowSelReadDatagramsWithCompletionHandler                 = objc.RegisterName("readDatagramsWithCompletionHandler:")
 	_nEAppProxyUDPFlowSelWriteDatagramsSentByFlowEndpointsCompletionHandler = objc.RegisterName("writeDatagrams:sentByFlowEndpoints:completionHandler:")
-	_nEAppProxyUDPFlowSelWriteDatagramsSentByEndpointsCompletionHandler = objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:")
-	_nEAppProxyUDPFlowSelLocalFlowEndpoint = objc.RegisterName("localFlowEndpoint")
-	_nEAppProxyUDPFlowSelLocalEndpoint = objc.RegisterName("localEndpoint")
+	_nEAppProxyUDPFlowSelWriteDatagramsSentByEndpointsCompletionHandler     = objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:")
+	_nEAppProxyUDPFlowSelLocalFlowEndpoint                                  = objc.RegisterName("localFlowEndpoint")
+	_nEAppProxyUDPFlowSelLocalEndpoint                                      = objc.RegisterName("localEndpoint")
 )
 
 func NEAppProxyUDPFlowFromID(id objc.ID) *NEAppProxyUDPFlow {
@@ -76,7 +76,9 @@ func (o *NEAppProxyUDPFlow) WriteDatagramsSentByEndpointsCompletionHandler(datag
 // @property localFlowEndpoint @discussion An `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
 func (o *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEAppProxyUDPFlowSelLocalFlowEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -86,4 +88,3 @@ func (o *NEAppProxyUDPFlow) LocalEndpoint() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nEAppProxyUDPFlowSelLocalEndpoint)
 	return _ret
 }
-

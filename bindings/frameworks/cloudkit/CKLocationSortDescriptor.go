@@ -18,10 +18,10 @@ type CKLocationSortDescriptor struct {
 }
 
 var (
-	_clsCKLocationSortDescriptor = _objcClass("CKLocationSortDescriptor")
+	_clsCKLocationSortDescriptor                            = _objcClass("CKLocationSortDescriptor")
 	_cKLocationSortDescriptorSelInitWithKeyRelativeLocation = objc.RegisterName("initWithKey:relativeLocation:")
-	_cKLocationSortDescriptorSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_cKLocationSortDescriptorSelRelativeLocation = objc.RegisterName("relativeLocation")
+	_cKLocationSortDescriptorSelInitWithCoder               = objc.RegisterName("initWithCoder:")
+	_cKLocationSortDescriptorSelRelativeLocation            = objc.RegisterName("relativeLocation")
 )
 
 func CKLocationSortDescriptorFromID(id objc.ID) *CKLocationSortDescriptor {
@@ -37,14 +37,18 @@ func CKLocationSortDescriptorFromID(id objc.ID) *CKLocationSortDescriptor {
 // Creates a location sort descriptor using the specified key and relative location. - Parameters: - key: The name of the key with a <doc://com.apple.documentation/documentation/corelocation/cllocation> object as its value. The key must belong to the records you're sorting. The sort descriptor uses this key to retrieve the corresponding value from the record. - relativeLocation: The reference location when sorting. CloudKit sorts records according to their distance from this location. During sorting, the sort descriptor computes the distance between the value in the `relativeLocation` parameter and the location value in the specified key of each record. It then sorts the records in ascending order using the distance between the two points. You can't change the sort order.
 func (o *CKLocationSortDescriptor) InitWithKeyRelativeLocation(key *foundation.NSString, relativeLocation unsafe.Pointer) *CKLocationSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKLocationSortDescriptorSelInitWithKeyRelativeLocation, key.Ptr(), relativeLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKLocationSortDescriptorFromID(_ret)
 }
 
 // Creates a location sort descriptor from a serialized instance. - Parameters: - aDecoder: The coder to use when deserializing the location sort descriptor.
 func (o *CKLocationSortDescriptor) InitWithCoder(aDecoder *foundation.NSCoder) *CKLocationSortDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKLocationSortDescriptorSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKLocationSortDescriptorFromID(_ret)
 }
 
@@ -52,4 +56,3 @@ func (o *CKLocationSortDescriptor) RelativeLocation() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKLocationSortDescriptorSelRelativeLocation)
 	return _ret
 }
-

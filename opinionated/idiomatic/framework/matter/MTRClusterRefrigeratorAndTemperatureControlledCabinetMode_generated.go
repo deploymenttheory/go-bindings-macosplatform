@@ -19,11 +19,15 @@ type MTRClusterRefrigeratorAndTemperatureControlledCabinetMode struct {
 }
 
 // Unwrap returns the underlying [raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode].
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) Unwrap() *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode { return x.inner }
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) Unwrap() *raw.MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID adopts an existing object pointer as a MTRClusterRefrigeratorAndTemperatureControlledCabinetMode (nil for 0).
 func MTRClusterRefrigeratorAndTemperatureControlledCabinetModeFromID(id objc.ID) *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode {
@@ -101,9 +105,13 @@ func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttribut
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterRefrigeratorAndTemperatureControlledCabinetMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable is the interface implemented by [MTRClusterRefrigeratorAndTemperatureControlledCabinetMode], for mocking and DI.
 type MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable interface {
@@ -119,4 +127,3 @@ type MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable interface {
 }
 
 var _ MTRClusterRefrigeratorAndTemperatureControlledCabinetModeable = (*MTRClusterRefrigeratorAndTemperatureControlledCabinetMode)(nil)
-

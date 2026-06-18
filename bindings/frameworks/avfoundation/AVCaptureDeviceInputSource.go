@@ -16,7 +16,7 @@ type AVCaptureDeviceInputSource struct {
 }
 
 var (
-	_clsAVCaptureDeviceInputSource = _objcClass("AVCaptureDeviceInputSource")
+	_clsAVCaptureDeviceInputSource              = _objcClass("AVCaptureDeviceInputSource")
 	_aVCaptureDeviceInputSourceSelInputSourceID = objc.RegisterName("inputSourceID")
 	_aVCaptureDeviceInputSourceSelLocalizedName = objc.RegisterName("localizedName")
 )
@@ -34,14 +34,17 @@ func AVCaptureDeviceInputSourceFromID(id objc.ID) *AVCaptureDeviceInputSource {
 // @property inputSourceID @abstract An ID unique among the inputSources exposed by a given AVCaptureDevice. @discussion An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
 func (o *AVCaptureDeviceInputSource) InputSourceID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceInputSourceSelInputSourceID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property localizedName @abstract A localized human-readable name for the receiver. @discussion This property can be used for displaying the name of the capture device input source in a user interface.
 func (o *AVCaptureDeviceInputSource) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceInputSourceSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

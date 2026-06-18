@@ -17,8 +17,8 @@ type AVCaptionGrouper struct {
 }
 
 var (
-	_clsAVCaptionGrouper = _objcClass("AVCaptionGrouper")
-	_aVCaptionGrouperSelAddCaption = objc.RegisterName("addCaption:")
+	_clsAVCaptionGrouper                                     = _objcClass("AVCaptionGrouper")
+	_aVCaptionGrouperSelAddCaption                           = objc.RegisterName("addCaption:")
 	_aVCaptionGrouperSelFlushAddedCaptionsIntoGroupsUpToTime = objc.RegisterName("flushAddedCaptionsIntoGroupsUpToTime:")
 )
 
@@ -38,7 +38,8 @@ func (o *AVCaptionGrouper) AddCaption(input *AVCaption) {
 
 func (o *AVCaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*AVCaptionGroup] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionGrouperSelFlushAddedCaptionsIntoGroupsUpToTime, upToTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptionGroup](_ret)
 }
-

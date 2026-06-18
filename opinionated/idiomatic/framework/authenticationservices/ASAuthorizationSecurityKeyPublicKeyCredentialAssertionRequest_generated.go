@@ -18,11 +18,15 @@ type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest { return x.inner }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) ID() objc.ID { return x.inner.Ptr() }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest (nil for 0).
 func AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
@@ -45,7 +49,9 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -110,7 +116,9 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetPrf(prf
 	x.inner.SetPrf(prf)
 }
 
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
+	return &x.inner.ASAuthorizationRequest
+}
 
 // AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest], for mocking and DI.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable interface {
@@ -127,4 +135,3 @@ type AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable interface {
 }
 
 var _ AuthorizationSecurityKeyPublicKeyCredentialAssertionRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest)(nil)
-

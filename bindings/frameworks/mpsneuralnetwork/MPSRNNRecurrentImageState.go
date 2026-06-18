@@ -16,9 +16,9 @@ type MPSRNNRecurrentImageState struct {
 }
 
 var (
-	_clsMPSRNNRecurrentImageState = _objcClass("MPSRNNRecurrentImageState")
+	_clsMPSRNNRecurrentImageState                                     = _objcClass("MPSRNNRecurrentImageState")
 	_mPSRNNRecurrentImageStateSelGetRecurrentOutputImageForLayerIndex = objc.RegisterName("getRecurrentOutputImageForLayerIndex:")
-	_mPSRNNRecurrentImageStateSelGetMemoryCellImageForLayerIndex = objc.RegisterName("getMemoryCellImageForLayerIndex:")
+	_mPSRNNRecurrentImageStateSelGetMemoryCellImageForLayerIndex      = objc.RegisterName("getMemoryCellImageForLayerIndex:")
 )
 
 func MPSRNNRecurrentImageStateFromID(id objc.ID) *MPSRNNRecurrentImageState {
@@ -34,14 +34,17 @@ func MPSRNNRecurrentImageStateFromID(id objc.ID) *MPSRNNRecurrentImageState {
 // @abstract   Access the stored recurrent image data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output image data, otherwise nil.
 func (o *MPSRNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNRecurrentImageStateSelGetRecurrentOutputImageForLayerIndex, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
 // @abstract   Access the stored memory cell image data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image data, otherwise nil.
 func (o *MPSRNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNRecurrentImageStateSelGetMemoryCellImageForLayerIndex, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
-

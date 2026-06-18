@@ -20,145 +20,145 @@ type AVCaptureDevice struct {
 }
 
 var (
-	_clsAVCaptureDevice = _objcClass("AVCaptureDevice")
-	_aVCaptureDeviceSelDevices = objc.RegisterName("devices")
-	_aVCaptureDeviceSelDevicesWithMediaType = objc.RegisterName("devicesWithMediaType:")
-	_aVCaptureDeviceSelDefaultDeviceWithMediaType = objc.RegisterName("defaultDeviceWithMediaType:")
-	_aVCaptureDeviceSelDeviceWithUniqueID = objc.RegisterName("deviceWithUniqueID:")
-	_aVCaptureDeviceSelHasMediaType = objc.RegisterName("hasMediaType:")
-	_aVCaptureDeviceSelLockForConfiguration = objc.RegisterName("lockForConfiguration:")
-	_aVCaptureDeviceSelUnlockForConfiguration = objc.RegisterName("unlockForConfiguration")
-	_aVCaptureDeviceSelSupportsAVCaptureSessionPreset = objc.RegisterName("supportsAVCaptureSessionPreset:")
-	_aVCaptureDeviceSelUniqueID = objc.RegisterName("uniqueID")
-	_aVCaptureDeviceSelModelID = objc.RegisterName("modelID")
-	_aVCaptureDeviceSelLocalizedName = objc.RegisterName("localizedName")
-	_aVCaptureDeviceSelManufacturer = objc.RegisterName("manufacturer")
-	_aVCaptureDeviceSelTransportType = objc.RegisterName("transportType")
-	_aVCaptureDeviceSelIsConnected = objc.RegisterName("isConnected")
-	_aVCaptureDeviceSelIsInUseByAnotherApplication = objc.RegisterName("isInUseByAnotherApplication")
-	_aVCaptureDeviceSelIsSuspended = objc.RegisterName("isSuspended")
-	_aVCaptureDeviceSelLinkedDevices = objc.RegisterName("linkedDevices")
-	_aVCaptureDeviceSelFormats = objc.RegisterName("formats")
-	_aVCaptureDeviceSelActiveFormat = objc.RegisterName("activeFormat")
-	_aVCaptureDeviceSelSetActiveFormat = objc.RegisterName("setActiveFormat:")
-	_aVCaptureDeviceSelActiveVideoMinFrameDuration = objc.RegisterName("activeVideoMinFrameDuration")
-	_aVCaptureDeviceSelSetActiveVideoMinFrameDuration = objc.RegisterName("setActiveVideoMinFrameDuration:")
-	_aVCaptureDeviceSelActiveVideoMaxFrameDuration = objc.RegisterName("activeVideoMaxFrameDuration")
-	_aVCaptureDeviceSelSetActiveVideoMaxFrameDuration = objc.RegisterName("setActiveVideoMaxFrameDuration:")
-	_aVCaptureDeviceSelIsVideoFrameDurationLocked = objc.RegisterName("isVideoFrameDurationLocked")
-	_aVCaptureDeviceSelMinSupportedLockedVideoFrameDuration = objc.RegisterName("minSupportedLockedVideoFrameDuration")
-	_aVCaptureDeviceSelIsFollowingExternalSyncDevice = objc.RegisterName("isFollowingExternalSyncDevice")
-	_aVCaptureDeviceSelMinSupportedExternalSyncFrameDuration = objc.RegisterName("minSupportedExternalSyncFrameDuration")
-	_aVCaptureDeviceSelIsAutoVideoFrameRateEnabled = objc.RegisterName("isAutoVideoFrameRateEnabled")
-	_aVCaptureDeviceSelSetAutoVideoFrameRateEnabled = objc.RegisterName("setAutoVideoFrameRateEnabled:")
-	_aVCaptureDeviceSelInputSources = objc.RegisterName("inputSources")
-	_aVCaptureDeviceSelActiveInputSource = objc.RegisterName("activeInputSource")
-	_aVCaptureDeviceSelSetActiveInputSource = objc.RegisterName("setActiveInputSource:")
-	_aVCaptureDeviceSelPosition = objc.RegisterName("position")
-	_aVCaptureDeviceSelDeviceType = objc.RegisterName("deviceType")
-	_aVCaptureDeviceSelDefaultDeviceWithDeviceTypeMediaTypePosition = objc.RegisterName("defaultDeviceWithDeviceType:mediaType:position:")
-	_aVCaptureDeviceSelUserPreferredCamera = objc.RegisterName("userPreferredCamera")
-	_aVCaptureDeviceSelSetUserPreferredCamera = objc.RegisterName("setUserPreferredCamera:")
-	_aVCaptureDeviceSelSystemPreferredCamera = objc.RegisterName("systemPreferredCamera")
+	_clsAVCaptureDevice                                                                                  = _objcClass("AVCaptureDevice")
+	_aVCaptureDeviceSelDevices                                                                           = objc.RegisterName("devices")
+	_aVCaptureDeviceSelDevicesWithMediaType                                                              = objc.RegisterName("devicesWithMediaType:")
+	_aVCaptureDeviceSelDefaultDeviceWithMediaType                                                        = objc.RegisterName("defaultDeviceWithMediaType:")
+	_aVCaptureDeviceSelDeviceWithUniqueID                                                                = objc.RegisterName("deviceWithUniqueID:")
+	_aVCaptureDeviceSelHasMediaType                                                                      = objc.RegisterName("hasMediaType:")
+	_aVCaptureDeviceSelLockForConfiguration                                                              = objc.RegisterName("lockForConfiguration:")
+	_aVCaptureDeviceSelUnlockForConfiguration                                                            = objc.RegisterName("unlockForConfiguration")
+	_aVCaptureDeviceSelSupportsAVCaptureSessionPreset                                                    = objc.RegisterName("supportsAVCaptureSessionPreset:")
+	_aVCaptureDeviceSelUniqueID                                                                          = objc.RegisterName("uniqueID")
+	_aVCaptureDeviceSelModelID                                                                           = objc.RegisterName("modelID")
+	_aVCaptureDeviceSelLocalizedName                                                                     = objc.RegisterName("localizedName")
+	_aVCaptureDeviceSelManufacturer                                                                      = objc.RegisterName("manufacturer")
+	_aVCaptureDeviceSelTransportType                                                                     = objc.RegisterName("transportType")
+	_aVCaptureDeviceSelIsConnected                                                                       = objc.RegisterName("isConnected")
+	_aVCaptureDeviceSelIsInUseByAnotherApplication                                                       = objc.RegisterName("isInUseByAnotherApplication")
+	_aVCaptureDeviceSelIsSuspended                                                                       = objc.RegisterName("isSuspended")
+	_aVCaptureDeviceSelLinkedDevices                                                                     = objc.RegisterName("linkedDevices")
+	_aVCaptureDeviceSelFormats                                                                           = objc.RegisterName("formats")
+	_aVCaptureDeviceSelActiveFormat                                                                      = objc.RegisterName("activeFormat")
+	_aVCaptureDeviceSelSetActiveFormat                                                                   = objc.RegisterName("setActiveFormat:")
+	_aVCaptureDeviceSelActiveVideoMinFrameDuration                                                       = objc.RegisterName("activeVideoMinFrameDuration")
+	_aVCaptureDeviceSelSetActiveVideoMinFrameDuration                                                    = objc.RegisterName("setActiveVideoMinFrameDuration:")
+	_aVCaptureDeviceSelActiveVideoMaxFrameDuration                                                       = objc.RegisterName("activeVideoMaxFrameDuration")
+	_aVCaptureDeviceSelSetActiveVideoMaxFrameDuration                                                    = objc.RegisterName("setActiveVideoMaxFrameDuration:")
+	_aVCaptureDeviceSelIsVideoFrameDurationLocked                                                        = objc.RegisterName("isVideoFrameDurationLocked")
+	_aVCaptureDeviceSelMinSupportedLockedVideoFrameDuration                                              = objc.RegisterName("minSupportedLockedVideoFrameDuration")
+	_aVCaptureDeviceSelIsFollowingExternalSyncDevice                                                     = objc.RegisterName("isFollowingExternalSyncDevice")
+	_aVCaptureDeviceSelMinSupportedExternalSyncFrameDuration                                             = objc.RegisterName("minSupportedExternalSyncFrameDuration")
+	_aVCaptureDeviceSelIsAutoVideoFrameRateEnabled                                                       = objc.RegisterName("isAutoVideoFrameRateEnabled")
+	_aVCaptureDeviceSelSetAutoVideoFrameRateEnabled                                                      = objc.RegisterName("setAutoVideoFrameRateEnabled:")
+	_aVCaptureDeviceSelInputSources                                                                      = objc.RegisterName("inputSources")
+	_aVCaptureDeviceSelActiveInputSource                                                                 = objc.RegisterName("activeInputSource")
+	_aVCaptureDeviceSelSetActiveInputSource                                                              = objc.RegisterName("setActiveInputSource:")
+	_aVCaptureDeviceSelPosition                                                                          = objc.RegisterName("position")
+	_aVCaptureDeviceSelDeviceType                                                                        = objc.RegisterName("deviceType")
+	_aVCaptureDeviceSelDefaultDeviceWithDeviceTypeMediaTypePosition                                      = objc.RegisterName("defaultDeviceWithDeviceType:mediaType:position:")
+	_aVCaptureDeviceSelUserPreferredCamera                                                               = objc.RegisterName("userPreferredCamera")
+	_aVCaptureDeviceSelSetUserPreferredCamera                                                            = objc.RegisterName("setUserPreferredCamera:")
+	_aVCaptureDeviceSelSystemPreferredCamera                                                             = objc.RegisterName("systemPreferredCamera")
 	_aVCaptureDeviceSelSetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions = objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:")
-	_aVCaptureDeviceSelPrimaryConstituentDeviceSwitchingBehavior = objc.RegisterName("primaryConstituentDeviceSwitchingBehavior")
-	_aVCaptureDeviceSelPrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditions")
-	_aVCaptureDeviceSelActivePrimaryConstituentDeviceSwitchingBehavior = objc.RegisterName("activePrimaryConstituentDeviceSwitchingBehavior")
-	_aVCaptureDeviceSelActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = objc.RegisterName("activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions")
-	_aVCaptureDeviceSelActivePrimaryConstituentDevice = objc.RegisterName("activePrimaryConstituentDevice")
-	_aVCaptureDeviceSelSupportedFallbackPrimaryConstituentDevices = objc.RegisterName("supportedFallbackPrimaryConstituentDevices")
-	_aVCaptureDeviceSelFallbackPrimaryConstituentDevices = objc.RegisterName("fallbackPrimaryConstituentDevices")
-	_aVCaptureDeviceSelSetFallbackPrimaryConstituentDevices = objc.RegisterName("setFallbackPrimaryConstituentDevices:")
-	_aVCaptureDeviceSelIsFlashModeSupported = objc.RegisterName("isFlashModeSupported:")
-	_aVCaptureDeviceSelHasFlash = objc.RegisterName("hasFlash")
-	_aVCaptureDeviceSelIsFlashAvailable = objc.RegisterName("isFlashAvailable")
-	_aVCaptureDeviceSelFlashMode = objc.RegisterName("flashMode")
-	_aVCaptureDeviceSelSetFlashMode = objc.RegisterName("setFlashMode:")
-	_aVCaptureDeviceSelIsTorchModeSupported = objc.RegisterName("isTorchModeSupported:")
-	_aVCaptureDeviceSelSetTorchModeOnWithLevelError = objc.RegisterName("setTorchModeOnWithLevel:error:")
-	_aVCaptureDeviceSelHasTorch = objc.RegisterName("hasTorch")
-	_aVCaptureDeviceSelIsTorchAvailable = objc.RegisterName("isTorchAvailable")
-	_aVCaptureDeviceSelIsTorchActive = objc.RegisterName("isTorchActive")
-	_aVCaptureDeviceSelTorchLevel = objc.RegisterName("torchLevel")
-	_aVCaptureDeviceSelTorchMode = objc.RegisterName("torchMode")
-	_aVCaptureDeviceSelSetTorchMode = objc.RegisterName("setTorchMode:")
-	_aVCaptureDeviceSelIsFocusModeSupported = objc.RegisterName("isFocusModeSupported:")
-	_aVCaptureDeviceSelDefaultRectForFocusPointOfInterest = objc.RegisterName("defaultRectForFocusPointOfInterest:")
-	_aVCaptureDeviceSelSetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode = objc.RegisterName("setCinematicVideoTrackingFocusWithDetectedObjectID:focusMode:")
-	_aVCaptureDeviceSelSetCinematicVideoTrackingFocusAtPointFocusMode = objc.RegisterName("setCinematicVideoTrackingFocusAtPoint:focusMode:")
-	_aVCaptureDeviceSelSetCinematicVideoFixedFocusAtPointFocusMode = objc.RegisterName("setCinematicVideoFixedFocusAtPoint:focusMode:")
-	_aVCaptureDeviceSelFocusMode = objc.RegisterName("focusMode")
-	_aVCaptureDeviceSelSetFocusMode = objc.RegisterName("setFocusMode:")
-	_aVCaptureDeviceSelIsFocusPointOfInterestSupported = objc.RegisterName("isFocusPointOfInterestSupported")
-	_aVCaptureDeviceSelFocusPointOfInterest = objc.RegisterName("focusPointOfInterest")
-	_aVCaptureDeviceSelSetFocusPointOfInterest = objc.RegisterName("setFocusPointOfInterest:")
-	_aVCaptureDeviceSelIsFocusRectOfInterestSupported = objc.RegisterName("isFocusRectOfInterestSupported")
-	_aVCaptureDeviceSelMinFocusRectOfInterestSize = objc.RegisterName("minFocusRectOfInterestSize")
-	_aVCaptureDeviceSelFocusRectOfInterest = objc.RegisterName("focusRectOfInterest")
-	_aVCaptureDeviceSelSetFocusRectOfInterest = objc.RegisterName("setFocusRectOfInterest:")
-	_aVCaptureDeviceSelIsAdjustingFocus = objc.RegisterName("isAdjustingFocus")
-	_aVCaptureDeviceSelMinimumFocusDistance = objc.RegisterName("minimumFocusDistance")
-	_aVCaptureDeviceSelIsExposureModeSupported = objc.RegisterName("isExposureModeSupported:")
-	_aVCaptureDeviceSelDefaultRectForExposurePointOfInterest = objc.RegisterName("defaultRectForExposurePointOfInterest:")
-	_aVCaptureDeviceSelExposureMode = objc.RegisterName("exposureMode")
-	_aVCaptureDeviceSelSetExposureMode = objc.RegisterName("setExposureMode:")
-	_aVCaptureDeviceSelIsExposurePointOfInterestSupported = objc.RegisterName("isExposurePointOfInterestSupported")
-	_aVCaptureDeviceSelExposurePointOfInterest = objc.RegisterName("exposurePointOfInterest")
-	_aVCaptureDeviceSelSetExposurePointOfInterest = objc.RegisterName("setExposurePointOfInterest:")
-	_aVCaptureDeviceSelIsExposureRectOfInterestSupported = objc.RegisterName("isExposureRectOfInterestSupported")
-	_aVCaptureDeviceSelMinExposureRectOfInterestSize = objc.RegisterName("minExposureRectOfInterestSize")
-	_aVCaptureDeviceSelExposureRectOfInterest = objc.RegisterName("exposureRectOfInterest")
-	_aVCaptureDeviceSelSetExposureRectOfInterest = objc.RegisterName("setExposureRectOfInterest:")
-	_aVCaptureDeviceSelIsAdjustingExposure = objc.RegisterName("isAdjustingExposure")
-	_aVCaptureDeviceSelIsWhiteBalanceModeSupported = objc.RegisterName("isWhiteBalanceModeSupported:")
-	_aVCaptureDeviceSelWhiteBalanceMode = objc.RegisterName("whiteBalanceMode")
-	_aVCaptureDeviceSelSetWhiteBalanceMode = objc.RegisterName("setWhiteBalanceMode:")
-	_aVCaptureDeviceSelIsAdjustingWhiteBalance = objc.RegisterName("isAdjustingWhiteBalance")
-	_aVCaptureDeviceSelDisplayVideoZoomFactorMultiplier = objc.RegisterName("displayVideoZoomFactorMultiplier")
-	_aVCaptureDeviceSelAuthorizationStatusForMediaType = objc.RegisterName("authorizationStatusForMediaType:")
-	_aVCaptureDeviceSelRequestAccessForMediaTypeCompletionHandler = objc.RegisterName("requestAccessForMediaType:completionHandler:")
-	_aVCaptureDeviceSelSetTransportControlsPlaybackModeSpeed = objc.RegisterName("setTransportControlsPlaybackMode:speed:")
-	_aVCaptureDeviceSelTransportControlsSupported = objc.RegisterName("transportControlsSupported")
-	_aVCaptureDeviceSelTransportControlsPlaybackMode = objc.RegisterName("transportControlsPlaybackMode")
-	_aVCaptureDeviceSelTransportControlsSpeed = objc.RegisterName("transportControlsSpeed")
-	_aVCaptureDeviceSelActiveColorSpace = objc.RegisterName("activeColorSpace")
-	_aVCaptureDeviceSelSetActiveColorSpace = objc.RegisterName("setActiveColorSpace:")
-	_aVCaptureDeviceSelCenterStageControlMode = objc.RegisterName("centerStageControlMode")
-	_aVCaptureDeviceSelSetCenterStageControlMode = objc.RegisterName("setCenterStageControlMode:")
-	_aVCaptureDeviceSelIsCenterStageEnabled = objc.RegisterName("isCenterStageEnabled")
-	_aVCaptureDeviceSelSetCenterStageEnabled = objc.RegisterName("setCenterStageEnabled:")
-	_aVCaptureDeviceSelIsCenterStageActive = objc.RegisterName("isCenterStageActive")
-	_aVCaptureDeviceSelCenterStageRectOfInterest = objc.RegisterName("centerStageRectOfInterest")
-	_aVCaptureDeviceSelSetCenterStageRectOfInterest = objc.RegisterName("setCenterStageRectOfInterest:")
-	_aVCaptureDeviceSelIsPortraitEffectEnabled = objc.RegisterName("isPortraitEffectEnabled")
-	_aVCaptureDeviceSelIsPortraitEffectActive = objc.RegisterName("isPortraitEffectActive")
-	_aVCaptureDeviceSelPerformEffectForReaction = objc.RegisterName("performEffectForReaction:")
-	_aVCaptureDeviceSelReactionEffectsEnabled = objc.RegisterName("reactionEffectsEnabled")
-	_aVCaptureDeviceSelReactionEffectGesturesEnabled = objc.RegisterName("reactionEffectGesturesEnabled")
-	_aVCaptureDeviceSelCanPerformReactionEffects = objc.RegisterName("canPerformReactionEffects")
-	_aVCaptureDeviceSelAvailableReactionTypes = objc.RegisterName("availableReactionTypes")
-	_aVCaptureDeviceSelReactionEffectsInProgress = objc.RegisterName("reactionEffectsInProgress")
-	_aVCaptureDeviceSelIsBackgroundReplacementEnabled = objc.RegisterName("isBackgroundReplacementEnabled")
-	_aVCaptureDeviceSelIsBackgroundReplacementActive = objc.RegisterName("isBackgroundReplacementActive")
-	_aVCaptureDeviceSelIsContinuityCamera = objc.RegisterName("isContinuityCamera")
-	_aVCaptureDeviceSelCompanionDeskViewCamera = objc.RegisterName("companionDeskViewCamera")
-	_aVCaptureDeviceSelPreferredMicrophoneMode = objc.RegisterName("preferredMicrophoneMode")
-	_aVCaptureDeviceSelActiveMicrophoneMode = objc.RegisterName("activeMicrophoneMode")
-	_aVCaptureDeviceSelShowSystemUserInterface = objc.RegisterName("showSystemUserInterface:")
-	_aVCaptureDeviceSelSpatialCaptureDiscomfortReasons = objc.RegisterName("spatialCaptureDiscomfortReasons")
-	_aVCaptureDeviceSelCinematicVideoCaptureSceneMonitoringStatuses = objc.RegisterName("cinematicVideoCaptureSceneMonitoringStatuses")
-	_aVCaptureDeviceSelSetDynamicAspectRatioCompletionHandler = objc.RegisterName("setDynamicAspectRatio:completionHandler:")
-	_aVCaptureDeviceSelDynamicAspectRatio = objc.RegisterName("dynamicAspectRatio")
-	_aVCaptureDeviceSelDynamicDimensions = objc.RegisterName("dynamicDimensions")
-	_aVCaptureDeviceSelSmartFramingMonitor = objc.RegisterName("smartFramingMonitor")
-	_aVCaptureDeviceSelIsStudioLightEnabled = objc.RegisterName("isStudioLightEnabled")
-	_aVCaptureDeviceSelIsStudioLightActive = objc.RegisterName("isStudioLightActive")
-	_aVCaptureDeviceSelIsEdgeLightEnabled = objc.RegisterName("isEdgeLightEnabled")
-	_aVCaptureDeviceSelIsEdgeLightActive = objc.RegisterName("isEdgeLightActive")
-	_aVCaptureDeviceSelSetCameraLensSmudgeDetectionEnabledDetectionInterval = objc.RegisterName("setCameraLensSmudgeDetectionEnabled:detectionInterval:")
-	_aVCaptureDeviceSelIsCameraLensSmudgeDetectionEnabled = objc.RegisterName("isCameraLensSmudgeDetectionEnabled")
-	_aVCaptureDeviceSelCameraLensSmudgeDetectionInterval = objc.RegisterName("cameraLensSmudgeDetectionInterval")
-	_aVCaptureDeviceSelCameraLensSmudgeDetectionStatus = objc.RegisterName("cameraLensSmudgeDetectionStatus")
+	_aVCaptureDeviceSelPrimaryConstituentDeviceSwitchingBehavior                                         = objc.RegisterName("primaryConstituentDeviceSwitchingBehavior")
+	_aVCaptureDeviceSelPrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions                     = objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditions")
+	_aVCaptureDeviceSelActivePrimaryConstituentDeviceSwitchingBehavior                                   = objc.RegisterName("activePrimaryConstituentDeviceSwitchingBehavior")
+	_aVCaptureDeviceSelActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions               = objc.RegisterName("activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions")
+	_aVCaptureDeviceSelActivePrimaryConstituentDevice                                                    = objc.RegisterName("activePrimaryConstituentDevice")
+	_aVCaptureDeviceSelSupportedFallbackPrimaryConstituentDevices                                        = objc.RegisterName("supportedFallbackPrimaryConstituentDevices")
+	_aVCaptureDeviceSelFallbackPrimaryConstituentDevices                                                 = objc.RegisterName("fallbackPrimaryConstituentDevices")
+	_aVCaptureDeviceSelSetFallbackPrimaryConstituentDevices                                              = objc.RegisterName("setFallbackPrimaryConstituentDevices:")
+	_aVCaptureDeviceSelIsFlashModeSupported                                                              = objc.RegisterName("isFlashModeSupported:")
+	_aVCaptureDeviceSelHasFlash                                                                          = objc.RegisterName("hasFlash")
+	_aVCaptureDeviceSelIsFlashAvailable                                                                  = objc.RegisterName("isFlashAvailable")
+	_aVCaptureDeviceSelFlashMode                                                                         = objc.RegisterName("flashMode")
+	_aVCaptureDeviceSelSetFlashMode                                                                      = objc.RegisterName("setFlashMode:")
+	_aVCaptureDeviceSelIsTorchModeSupported                                                              = objc.RegisterName("isTorchModeSupported:")
+	_aVCaptureDeviceSelSetTorchModeOnWithLevelError                                                      = objc.RegisterName("setTorchModeOnWithLevel:error:")
+	_aVCaptureDeviceSelHasTorch                                                                          = objc.RegisterName("hasTorch")
+	_aVCaptureDeviceSelIsTorchAvailable                                                                  = objc.RegisterName("isTorchAvailable")
+	_aVCaptureDeviceSelIsTorchActive                                                                     = objc.RegisterName("isTorchActive")
+	_aVCaptureDeviceSelTorchLevel                                                                        = objc.RegisterName("torchLevel")
+	_aVCaptureDeviceSelTorchMode                                                                         = objc.RegisterName("torchMode")
+	_aVCaptureDeviceSelSetTorchMode                                                                      = objc.RegisterName("setTorchMode:")
+	_aVCaptureDeviceSelIsFocusModeSupported                                                              = objc.RegisterName("isFocusModeSupported:")
+	_aVCaptureDeviceSelDefaultRectForFocusPointOfInterest                                                = objc.RegisterName("defaultRectForFocusPointOfInterest:")
+	_aVCaptureDeviceSelSetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode                       = objc.RegisterName("setCinematicVideoTrackingFocusWithDetectedObjectID:focusMode:")
+	_aVCaptureDeviceSelSetCinematicVideoTrackingFocusAtPointFocusMode                                    = objc.RegisterName("setCinematicVideoTrackingFocusAtPoint:focusMode:")
+	_aVCaptureDeviceSelSetCinematicVideoFixedFocusAtPointFocusMode                                       = objc.RegisterName("setCinematicVideoFixedFocusAtPoint:focusMode:")
+	_aVCaptureDeviceSelFocusMode                                                                         = objc.RegisterName("focusMode")
+	_aVCaptureDeviceSelSetFocusMode                                                                      = objc.RegisterName("setFocusMode:")
+	_aVCaptureDeviceSelIsFocusPointOfInterestSupported                                                   = objc.RegisterName("isFocusPointOfInterestSupported")
+	_aVCaptureDeviceSelFocusPointOfInterest                                                              = objc.RegisterName("focusPointOfInterest")
+	_aVCaptureDeviceSelSetFocusPointOfInterest                                                           = objc.RegisterName("setFocusPointOfInterest:")
+	_aVCaptureDeviceSelIsFocusRectOfInterestSupported                                                    = objc.RegisterName("isFocusRectOfInterestSupported")
+	_aVCaptureDeviceSelMinFocusRectOfInterestSize                                                        = objc.RegisterName("minFocusRectOfInterestSize")
+	_aVCaptureDeviceSelFocusRectOfInterest                                                               = objc.RegisterName("focusRectOfInterest")
+	_aVCaptureDeviceSelSetFocusRectOfInterest                                                            = objc.RegisterName("setFocusRectOfInterest:")
+	_aVCaptureDeviceSelIsAdjustingFocus                                                                  = objc.RegisterName("isAdjustingFocus")
+	_aVCaptureDeviceSelMinimumFocusDistance                                                              = objc.RegisterName("minimumFocusDistance")
+	_aVCaptureDeviceSelIsExposureModeSupported                                                           = objc.RegisterName("isExposureModeSupported:")
+	_aVCaptureDeviceSelDefaultRectForExposurePointOfInterest                                             = objc.RegisterName("defaultRectForExposurePointOfInterest:")
+	_aVCaptureDeviceSelExposureMode                                                                      = objc.RegisterName("exposureMode")
+	_aVCaptureDeviceSelSetExposureMode                                                                   = objc.RegisterName("setExposureMode:")
+	_aVCaptureDeviceSelIsExposurePointOfInterestSupported                                                = objc.RegisterName("isExposurePointOfInterestSupported")
+	_aVCaptureDeviceSelExposurePointOfInterest                                                           = objc.RegisterName("exposurePointOfInterest")
+	_aVCaptureDeviceSelSetExposurePointOfInterest                                                        = objc.RegisterName("setExposurePointOfInterest:")
+	_aVCaptureDeviceSelIsExposureRectOfInterestSupported                                                 = objc.RegisterName("isExposureRectOfInterestSupported")
+	_aVCaptureDeviceSelMinExposureRectOfInterestSize                                                     = objc.RegisterName("minExposureRectOfInterestSize")
+	_aVCaptureDeviceSelExposureRectOfInterest                                                            = objc.RegisterName("exposureRectOfInterest")
+	_aVCaptureDeviceSelSetExposureRectOfInterest                                                         = objc.RegisterName("setExposureRectOfInterest:")
+	_aVCaptureDeviceSelIsAdjustingExposure                                                               = objc.RegisterName("isAdjustingExposure")
+	_aVCaptureDeviceSelIsWhiteBalanceModeSupported                                                       = objc.RegisterName("isWhiteBalanceModeSupported:")
+	_aVCaptureDeviceSelWhiteBalanceMode                                                                  = objc.RegisterName("whiteBalanceMode")
+	_aVCaptureDeviceSelSetWhiteBalanceMode                                                               = objc.RegisterName("setWhiteBalanceMode:")
+	_aVCaptureDeviceSelIsAdjustingWhiteBalance                                                           = objc.RegisterName("isAdjustingWhiteBalance")
+	_aVCaptureDeviceSelDisplayVideoZoomFactorMultiplier                                                  = objc.RegisterName("displayVideoZoomFactorMultiplier")
+	_aVCaptureDeviceSelAuthorizationStatusForMediaType                                                   = objc.RegisterName("authorizationStatusForMediaType:")
+	_aVCaptureDeviceSelRequestAccessForMediaTypeCompletionHandler                                        = objc.RegisterName("requestAccessForMediaType:completionHandler:")
+	_aVCaptureDeviceSelSetTransportControlsPlaybackModeSpeed                                             = objc.RegisterName("setTransportControlsPlaybackMode:speed:")
+	_aVCaptureDeviceSelTransportControlsSupported                                                        = objc.RegisterName("transportControlsSupported")
+	_aVCaptureDeviceSelTransportControlsPlaybackMode                                                     = objc.RegisterName("transportControlsPlaybackMode")
+	_aVCaptureDeviceSelTransportControlsSpeed                                                            = objc.RegisterName("transportControlsSpeed")
+	_aVCaptureDeviceSelActiveColorSpace                                                                  = objc.RegisterName("activeColorSpace")
+	_aVCaptureDeviceSelSetActiveColorSpace                                                               = objc.RegisterName("setActiveColorSpace:")
+	_aVCaptureDeviceSelCenterStageControlMode                                                            = objc.RegisterName("centerStageControlMode")
+	_aVCaptureDeviceSelSetCenterStageControlMode                                                         = objc.RegisterName("setCenterStageControlMode:")
+	_aVCaptureDeviceSelIsCenterStageEnabled                                                              = objc.RegisterName("isCenterStageEnabled")
+	_aVCaptureDeviceSelSetCenterStageEnabled                                                             = objc.RegisterName("setCenterStageEnabled:")
+	_aVCaptureDeviceSelIsCenterStageActive                                                               = objc.RegisterName("isCenterStageActive")
+	_aVCaptureDeviceSelCenterStageRectOfInterest                                                         = objc.RegisterName("centerStageRectOfInterest")
+	_aVCaptureDeviceSelSetCenterStageRectOfInterest                                                      = objc.RegisterName("setCenterStageRectOfInterest:")
+	_aVCaptureDeviceSelIsPortraitEffectEnabled                                                           = objc.RegisterName("isPortraitEffectEnabled")
+	_aVCaptureDeviceSelIsPortraitEffectActive                                                            = objc.RegisterName("isPortraitEffectActive")
+	_aVCaptureDeviceSelPerformEffectForReaction                                                          = objc.RegisterName("performEffectForReaction:")
+	_aVCaptureDeviceSelReactionEffectsEnabled                                                            = objc.RegisterName("reactionEffectsEnabled")
+	_aVCaptureDeviceSelReactionEffectGesturesEnabled                                                     = objc.RegisterName("reactionEffectGesturesEnabled")
+	_aVCaptureDeviceSelCanPerformReactionEffects                                                         = objc.RegisterName("canPerformReactionEffects")
+	_aVCaptureDeviceSelAvailableReactionTypes                                                            = objc.RegisterName("availableReactionTypes")
+	_aVCaptureDeviceSelReactionEffectsInProgress                                                         = objc.RegisterName("reactionEffectsInProgress")
+	_aVCaptureDeviceSelIsBackgroundReplacementEnabled                                                    = objc.RegisterName("isBackgroundReplacementEnabled")
+	_aVCaptureDeviceSelIsBackgroundReplacementActive                                                     = objc.RegisterName("isBackgroundReplacementActive")
+	_aVCaptureDeviceSelIsContinuityCamera                                                                = objc.RegisterName("isContinuityCamera")
+	_aVCaptureDeviceSelCompanionDeskViewCamera                                                           = objc.RegisterName("companionDeskViewCamera")
+	_aVCaptureDeviceSelPreferredMicrophoneMode                                                           = objc.RegisterName("preferredMicrophoneMode")
+	_aVCaptureDeviceSelActiveMicrophoneMode                                                              = objc.RegisterName("activeMicrophoneMode")
+	_aVCaptureDeviceSelShowSystemUserInterface                                                           = objc.RegisterName("showSystemUserInterface:")
+	_aVCaptureDeviceSelSpatialCaptureDiscomfortReasons                                                   = objc.RegisterName("spatialCaptureDiscomfortReasons")
+	_aVCaptureDeviceSelCinematicVideoCaptureSceneMonitoringStatuses                                      = objc.RegisterName("cinematicVideoCaptureSceneMonitoringStatuses")
+	_aVCaptureDeviceSelSetDynamicAspectRatioCompletionHandler                                            = objc.RegisterName("setDynamicAspectRatio:completionHandler:")
+	_aVCaptureDeviceSelDynamicAspectRatio                                                                = objc.RegisterName("dynamicAspectRatio")
+	_aVCaptureDeviceSelDynamicDimensions                                                                 = objc.RegisterName("dynamicDimensions")
+	_aVCaptureDeviceSelSmartFramingMonitor                                                               = objc.RegisterName("smartFramingMonitor")
+	_aVCaptureDeviceSelIsStudioLightEnabled                                                              = objc.RegisterName("isStudioLightEnabled")
+	_aVCaptureDeviceSelIsStudioLightActive                                                               = objc.RegisterName("isStudioLightActive")
+	_aVCaptureDeviceSelIsEdgeLightEnabled                                                                = objc.RegisterName("isEdgeLightEnabled")
+	_aVCaptureDeviceSelIsEdgeLightActive                                                                 = objc.RegisterName("isEdgeLightActive")
+	_aVCaptureDeviceSelSetCameraLensSmudgeDetectionEnabledDetectionInterval                              = objc.RegisterName("setCameraLensSmudgeDetectionEnabled:detectionInterval:")
+	_aVCaptureDeviceSelIsCameraLensSmudgeDetectionEnabled                                                = objc.RegisterName("isCameraLensSmudgeDetectionEnabled")
+	_aVCaptureDeviceSelCameraLensSmudgeDetectionInterval                                                 = objc.RegisterName("cameraLensSmudgeDetectionInterval")
+	_aVCaptureDeviceSelCameraLensSmudgeDetectionStatus                                                   = objc.RegisterName("cameraLensSmudgeDetectionStatus")
 )
 
 func AVCaptureDeviceFromID(id objc.ID) *AVCaptureDevice {
@@ -175,7 +175,9 @@ func AVCaptureDeviceFromID(id objc.ID) *AVCaptureDevice {
 // Deprecated: Use AVCaptureDeviceDiscoverySession instead.
 func AVCaptureDeviceDevices() *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
@@ -183,21 +185,27 @@ func AVCaptureDeviceDevices() *foundation.NSArray[*AVCaptureDevice] {
 // Deprecated: Use AVCaptureDeviceDiscoverySession instead.
 func AVCaptureDeviceDevicesWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDevicesWithMediaType, mediaType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
 // @method defaultDeviceWithMediaType: @abstract Returns an AVCaptureDevice instance for the default device of the given media type. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, supported by the returned device. @result The default device with the given media type, or nil if no device with that media type exists. @discussion This method returns the default device of the given media type currently available on the system. For example, for AVMediaTypeVideo, this method will return the built in camera that is primarily used for capture and recording. Media type constants are defined in AVMediaFormat.h.
 func AVCaptureDeviceDefaultDeviceWithMediaType(mediaType *foundation.NSString) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDefaultDeviceWithMediaType, mediaType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
 // @method deviceWithUniqueID: @abstract Returns an AVCaptureDevice instance with the given unique ID. @param deviceUniqueID The unique ID of the device instance to be returned. @result An AVCaptureDevice instance with the given unique ID, or nil if no device with that unique ID is available. @discussion Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. This method can be used to recall or track the status of a specific device whose unique ID has previously been saved.
 func AVCaptureDeviceDeviceWithUniqueID(deviceUniqueID *foundation.NSString) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDeviceWithUniqueID, deviceUniqueID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
@@ -231,28 +239,36 @@ func (o *AVCaptureDevice) SupportsAVCaptureSessionPreset(preset *foundation.NSSt
 // @property uniqueID @abstract An ID unique to the model of device corresponding to the receiver. @discussion Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. Applications can store the value returned by this property to recall or track the status of a specific device in the future.
 func (o *AVCaptureDevice) UniqueID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelUniqueID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property modelID @abstract The model ID of the receiver. @discussion The value of this property is an identifier unique to all devices of the same model. The value is persistent across device connections and disconnections, and across different systems. For example, the model ID of the camera built in to two identical iPhone models will be the same even though they are different physical devices.
 func (o *AVCaptureDevice) ModelID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelModelID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property localizedName @abstract A localized human-readable name for the receiver. @discussion This property can be used for displaying the name of a capture device in a user interface.
 func (o *AVCaptureDevice) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property manufacturer @abstract The human-readable manufacturer name for the receiver. @discussion This property can be used to identify capture devices from a particular manufacturer. All Apple devices return "Apple Inc.". Devices from third party manufacturers may return an empty string.
 func (o *AVCaptureDevice) Manufacturer() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelManufacturer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -283,21 +299,27 @@ func (o *AVCaptureDevice) IsSuspended() bool {
 // @property linkedDevices @abstract An array of AVCaptureDevice objects physically linked to the receiver. @discussion The value of this property is an array of AVCaptureDevice objects that are a part of the same physical device as the receiver. For example, for the external iSight camera, linkedDevices returns an array containing an AVCaptureDevice for the external iSight microphone.
 func (o *AVCaptureDevice) LinkedDevices() *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelLinkedDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
 // @property formats @abstract An array of AVCaptureDeviceFormat objects supported by the receiver. @discussion This property can be used to enumerate the formats natively supported by the receiver. The capture device's activeFormat property may be set to one of the formats in this array. Clients can observe automatic changes to the receiver's formats by key value observing this property.
 func (o *AVCaptureDevice) Formats() *foundation.NSArray[*AVCaptureDeviceFormat] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelFormats)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDeviceFormat](_ret)
 }
 
 // @property activeFormat @abstract The currently active format of the receiver. @discussion This property can be used to get or set the currently active device format. -setActiveFormat: throws an NSInvalidArgumentException if set to a format not present in the formats array. -setActiveFormat: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeFormat by key value observing this property. On iOS, use of AVCaptureDevice's setActiveFormat: and AVCaptureSession's setSessionPreset: are mutually exclusive. If you set a capture device's active format, the session to which it is attached changes its preset to AVCaptureSessionPresetInputPriority. Likewise if you set the AVCaptureSession's sessionPreset property, the session assumes control of its input devices, and configures their activeFormat appropriately. Note that audio devices do not expose any user-configurable formats on iOS. To configure audio input on iOS, you should use the AVAudioSession APIs instead (see AVAudioSession.h). The activeFormat, activeVideoMinFrameDuration, and activeVideoMaxFrameDuration properties may be set simultaneously by using AVCaptureSession's begin/commitConfiguration methods: [session beginConfiguration]; // the session to which the receiver's AVCaptureDeviceInput is added. if ( [device lockForConfiguration:&error] ) { [device setActiveFormat:newFormat]; [device setActiveVideoMinFrameDuration:newMinDuration]; [device setActiveVideoMaxFrameDuration:newMaxDuration]; [device unlockForConfiguration]; } [session commitConfiguration]; // The new format and frame rates are applied together in commitConfiguration Note that when configuring a session to use an active format intended for high resolution still photography and applying one or more of the following operations to an AVCaptureVideoDataOutput, the system may not meet the target framerate: zoom, orientation changes, format conversion.
 func (o *AVCaptureDevice) ActiveFormat() *AVCaptureDeviceFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelActiveFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFormatFromID(_ret)
 }
 
@@ -325,31 +347,31 @@ func (o *AVCaptureDevice) SetActiveVideoMaxFrameDuration(activeVideoMaxFrameDura
 	o.Ptr().Send(_aVCaptureDeviceSelSetActiveVideoMaxFrameDuration, activeVideoMaxFrameDuration)
 }
 
-// Whether the device's video frame rate (expressed as a duration) is currently locked. Returns `true` when an ``AVCaptureDeviceInput`` associated with the device has its ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` property set to something other than `kCMTimeInvalid`. See ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` for more information on video frame duration locking.
+// Whether the device's video frame rate (expressed as a duration) is currently locked. Returns `true` when an “AVCaptureDeviceInput“ associated with the device has its “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ property set to something other than `kCMTimeInvalid`. See “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ for more information on video frame duration locking.
 func (o *AVCaptureDevice) IsVideoFrameDurationLocked() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsVideoFrameDurationLocked)
 	return _ret
 }
 
-// The maximum frame rate (expressed as a minimum duration) that can be set on an input associated with this device. `kCMTimeInvalid` is returned when the device or its current configuration does not support locked frame rate. Use ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` to set the locked frame rate on the input.
+// The maximum frame rate (expressed as a minimum duration) that can be set on an input associated with this device. `kCMTimeInvalid` is returned when the device or its current configuration does not support locked frame rate. Use “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ to set the locked frame rate on the input.
 func (o *AVCaptureDevice) MinSupportedLockedVideoFrameDuration() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVCaptureDeviceSelMinSupportedLockedVideoFrameDuration)
 	return _ret
 }
 
-// Whether the device is following an external sync device. See ``AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:`` for more information on external sync.
+// Whether the device is following an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
 func (o *AVCaptureDevice) IsFollowingExternalSyncDevice() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsFollowingExternalSyncDevice)
 	return _ret
 }
 
-// The minimum frame duration that can be passed as the `videoFrameDuration` when directing your device input to follow an external sync device. Use this property as the minimum allowable frame duration to pass to ``AVCaptureDeviceInput/follow:externalSyncDevice:videoFrameDuration:delegate:`` when you want to follow an external sync device. This property returns `kCMTimeInvalid` when the device's' current configuration does not support external sync device following.
+// The minimum frame duration that can be passed as the `videoFrameDuration` when directing your device input to follow an external sync device. Use this property as the minimum allowable frame duration to pass to “AVCaptureDeviceInput/follow:externalSyncDevice:videoFrameDuration:delegate:“ when you want to follow an external sync device. This property returns `kCMTimeInvalid` when the device's' current configuration does not support external sync device following.
 func (o *AVCaptureDevice) MinSupportedExternalSyncFrameDuration() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVCaptureDeviceSelMinSupportedExternalSyncFrameDuration)
 	return _ret
 }
 
-// Indicates whether the receiver should enable auto video frame rate. When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24. Setting this property throws an `NSInvalidArgumentException` if the active format's ``AVCaptureDeviceFormat/autoVideoFrameRateSupported`` returns `false`. When you change the device's active format, this property resets to its default value of `false`. If you set this property to `true`, frame rate is under device control, and you may not set ``activeVideoMinFrameDuration`` or ``activeVideoMaxFrameDuration``. Doing so throws an `NSInvalidArgumentException`. - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if ``videoFrameDurationLocked`` or ``followingExternalSyncDevice`` are `true`.
+// Indicates whether the receiver should enable auto video frame rate. When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24. Setting this property throws an `NSInvalidArgumentException` if the active format's “AVCaptureDeviceFormat/autoVideoFrameRateSupported“ returns `false`. When you change the device's active format, this property resets to its default value of `false`. If you set this property to `true`, frame rate is under device control, and you may not set “activeVideoMinFrameDuration“ or “activeVideoMaxFrameDuration“. Doing so throws an `NSInvalidArgumentException`. - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if “videoFrameDurationLocked“ or “followingExternalSyncDevice“ are `true`.
 func (o *AVCaptureDevice) IsAutoVideoFrameRateEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsAutoVideoFrameRateEnabled)
 	return _ret
@@ -362,14 +384,18 @@ func (o *AVCaptureDevice) SetAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled
 // @property inputSources @abstract An array of AVCaptureDeviceInputSource objects supported by the receiver. @discussion Some devices can capture data from one of multiple data sources (different input jacks on the same audio device, for example). For devices with multiple possible data sources, inputSources can be used to enumerate the possible choices. Clients can observe automatic changes to the receiver's inputSources by key value observing this property.
 func (o *AVCaptureDevice) InputSources() *foundation.NSArray[*AVCaptureDeviceInputSource] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelInputSources)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDeviceInputSource](_ret)
 }
 
 // @property activeInputSource @abstract The currently active input source of the receiver. @discussion This property can be used to get or set the currently active device input source. -setActiveInputSource: throws an NSInvalidArgumentException if set to a value not present in the inputSources array. -setActiveInputSource: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeInputSource by key value observing this property.
 func (o *AVCaptureDevice) ActiveInputSource() *AVCaptureDeviceInputSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelActiveInputSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceInputSourceFromID(_ret)
 }
 
@@ -384,21 +410,27 @@ func (o *AVCaptureDevice) Position() AVCaptureDevicePosition {
 
 func (o *AVCaptureDevice) DeviceType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelDeviceType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method defaultDeviceWithDeviceType:mediaType:position: @abstract Returns an AVCaptureDevice instance for the default device of the given device type, media type, and position. @param deviceType The device type supported by the returned device. It must be a valid AVCaptureDeviceType. @param mediaType The media type, such as AVMediaTypeVideo, AVMediaTypeAudio, or AVMediaTypeMuxed, supported by the returned device. Pass nil to consider devices with any media type. @param position The position supported by the returned device. Pass AVCaptureDevicePositionUnspecified to consider devices with any position. @result The default device with the given device type, media type and position or nil if no device with that media type exists and nil otherwise. @discussion This method returns the default device of the given combination of device type, media type, and position currently available on the system.
 func AVCaptureDeviceDefaultDeviceWithDeviceTypeMediaTypePosition(deviceType *foundation.NSString, mediaType *foundation.NSString, position AVCaptureDevicePosition) *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelDefaultDeviceWithDeviceTypeMediaTypePosition, deviceType.Ptr(), mediaType.Ptr(), position)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
 // @property userPreferredCamera @abstract Settable property that specifies a user preferred camera. @discussion Setting this property allows an application to persist its user’s preferred camera across app launches and reboots. The property internally maintains a short history, so if your user’s most recent preferred camera is not currently connected, it still reports the next best choice. This property always returns a device that is present. If no camera is available nil is returned. Setting the property to nil has no effect.
 func AVCaptureDeviceUserPreferredCamera() *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelUserPreferredCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
@@ -409,7 +441,9 @@ func AVCaptureDeviceSetUserPreferredCamera(userPreferredCamera *AVCaptureDevice)
 // @property systemPreferredCamera @abstract Specifies the best camera to use as determined by the system. @discussion Apple chooses the default value. This property incorporates userPreferredCamera as well as other factors, such as camera suspension and Apple cameras appearing that should be automatically chosen. The property may change spontaneously, such as when the preferred camera goes away. This property always returns a device that is present. If no camera is available nil is returned. Applications that adopt this API should always key-value observe this property and update their AVCaptureSession’s input device to reflect changes to the systemPreferredCamera. The application can still offer users the ability to pick a camera by setting userPreferredCamera, which will cause the systemPreferredCamera API to put the user’s choice first until either another Apple-preferred device becomes available or the machine is rebooted (after which it reverts to its original behavior of returning the internally determined best camera to use). If the application wishes to offer users a fully manual camera selection mode in addition to automatic camera selection, it is recommended to call setUserPreferredCamera: each time the user makes a camera selection, but ignore key-value observer updates to systemPreferredCamera while in manual selection mode.
 func AVCaptureDeviceSystemPreferredCamera() *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureDevice), _aVCaptureDeviceSelSystemPreferredCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
@@ -445,21 +479,27 @@ func (o *AVCaptureDevice) ActivePrimaryConstituentDeviceRestrictedSwitchingBehav
 // @property activePrimaryConstituentDevice @abstract For virtual devices, this property indicates which constituent device is currently the primary constituent device. The primary constituent device may change when zoom, exposure, or focus changes. @discussion This property returns nil for non-virtual devices. On virtual devices this property returns nil until the device is used in a running AVCaptureSession. This property is key-value observable.
 func (o *AVCaptureDevice) ActivePrimaryConstituentDevice() *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelActivePrimaryConstituentDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
 // @property supportedFallbackPrimaryConstituentDevices @abstract The constituent devices that may be selected as a fallback for a longer focal length primary constituent device. @discussion This property returns an empty array for non-virtual devices. This property never changes for a given virtual device.
 func (o *AVCaptureDevice) SupportedFallbackPrimaryConstituentDevices() *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelSupportedFallbackPrimaryConstituentDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
 // @property fallbackPrimaryConstituentDevices @abstract The constituent devices that may be used as a fallback device when a constituent device with a longer focal length becomes limited by its light sensitivity or minimum focus distance. @discussion This may only be set to the supportedFallbackPrimaryConstituentDevices or a subset thereof. By default this is set to all supportedFallbackPrimaryConstituentDevices. This property will throw an NSInvalidArgumentException if the array includes any device not reported in supportedFallbackPrimaryConstituentDevices. This property is key-value observable.
 func (o *AVCaptureDevice) FallbackPrimaryConstituentDevices() *foundation.NSArray[*AVCaptureDevice] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelFallbackPrimaryConstituentDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureDevice](_ret)
 }
 
@@ -551,7 +591,7 @@ func (o *AVCaptureDevice) IsFocusModeSupported(focusMode AVCaptureFocusMode) boo
 	return _ret
 }
 
-// The default rectangle of interest used for a given focus point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the focus rectangle of interest used for the default focus point of interest at `(0.5, 0.5)`. - Note: The particular default rectangle returned depends on the current focus mode. This method returns `CGRectNull` if ``focusRectOfInterestSupported`` returns `false`.
+// The default rectangle of interest used for a given focus point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the focus rectangle of interest used for the default focus point of interest at `(0.5, 0.5)`. - Note: The particular default rectangle returned depends on the current focus mode. This method returns `CGRectNull` if “focusRectOfInterestSupported“ returns `false`.
 func (o *AVCaptureDevice) DefaultRectForFocusPointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureDeviceSelDefaultRectForFocusPointOfInterest, pointOfInterest)
 	return _ret
@@ -598,19 +638,19 @@ func (o *AVCaptureDevice) SetFocusPointOfInterest(focusPointOfInterest corefound
 	o.Ptr().Send(_aVCaptureDeviceSelSetFocusPointOfInterest, focusPointOfInterest)
 }
 
-// Whether the receiver supports focus rectangles of interest. You may only set the device's ``focusRectOfInterest`` property if this property returns `true`.
+// Whether the receiver supports focus rectangles of interest. You may only set the device's “focusRectOfInterest“ property if this property returns `true`.
 func (o *AVCaptureDevice) IsFocusRectOfInterestSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsFocusRectOfInterestSupported)
 	return _ret
 }
 
-// The minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current ``AVCaptureDevice/activeFormat``. If ``focusRectOfInterestSupported`` returns `false`, this property returns { 0, 0 }.
+// The minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current “AVCaptureDevice/activeFormat“. If “focusRectOfInterestSupported“ returns `false`, this property returns { 0, 0 }.
 func (o *AVCaptureDevice) MinFocusRectOfInterestSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _aVCaptureDeviceSelMinFocusRectOfInterestSize)
 	return _ret
 }
 
-// The device's current focus rectangle of interest, if it has one. The value of this property is a ``CGRect`` determining the device's focus rectangle of interest. Use this as an alternative to setting ``focusPointOfInterest``, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the focus, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting ``focusRectOfInterest`` throws an `NSInvalidArgumentException` if ``focusRectOfInterestSupported`` returns `false`. Setting ``focusRectOfInterest`` throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the ``minFocusRectOfInterestSize``. Setting ``focusRectOfInterest`` throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``. Setting ``focusRectOfInterest`` updates the device's ``focusPointOfInterest`` to the center of your provided rectangle of interest. If you later set the device's ``focusPointOfInterest``, the ``focusRectOfInterest`` resets to the default sized rectangle of interest for the new focus point of interest. If you change your ``AVCaptureDevice/activeFormat``, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's ``focusRectOfInterest`` by key-value observing this property. - Note: Setting ``focusRectOfInterest`` alone does not initiate a focus operation. After setting ``focusRectOfInterest``, set ``focusMode`` to apply the new rectangle of interest.
+// The device's current focus rectangle of interest, if it has one. The value of this property is a “CGRect“ determining the device's focus rectangle of interest. Use this as an alternative to setting “focusPointOfInterest“, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the focus, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting “focusRectOfInterest“ throws an `NSInvalidArgumentException` if “focusRectOfInterestSupported“ returns `false`. Setting “focusRectOfInterest“ throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the “minFocusRectOfInterestSize“. Setting “focusRectOfInterest“ throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“. Setting “focusRectOfInterest“ updates the device's “focusPointOfInterest“ to the center of your provided rectangle of interest. If you later set the device's “focusPointOfInterest“, the “focusRectOfInterest“ resets to the default sized rectangle of interest for the new focus point of interest. If you change your “AVCaptureDevice/activeFormat“, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's “focusRectOfInterest“ by key-value observing this property. - Note: Setting “focusRectOfInterest“ alone does not initiate a focus operation. After setting “focusRectOfInterest“, set “focusMode“ to apply the new rectangle of interest.
 func (o *AVCaptureDevice) FocusRectOfInterest() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureDeviceSelFocusRectOfInterest)
 	return _ret
@@ -638,7 +678,7 @@ func (o *AVCaptureDevice) IsExposureModeSupported(exposureMode AVCaptureExposure
 	return _ret
 }
 
-// The default rectangle of interest used for a given exposure point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the exposure rectangle of interest used for the default exposure point of interest at `(0.5, 0.5)`. This method returns `CGRectNull` if ``exposureRectOfInterestSupported`` returns `false`.
+// The default rectangle of interest used for a given exposure point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the exposure rectangle of interest used for the default exposure point of interest at `(0.5, 0.5)`. This method returns `CGRectNull` if “exposureRectOfInterestSupported“ returns `false`.
 func (o *AVCaptureDevice) DefaultRectForExposurePointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureDeviceSelDefaultRectForExposurePointOfInterest, pointOfInterest)
 	return _ret
@@ -670,19 +710,19 @@ func (o *AVCaptureDevice) SetExposurePointOfInterest(exposurePointOfInterest cor
 	o.Ptr().Send(_aVCaptureDeviceSelSetExposurePointOfInterest, exposurePointOfInterest)
 }
 
-// Whether the device supports exposure rectangles of interest. You may only set the device's ``exposureRectOfInterest`` property if this property returns `true`.
+// Whether the device supports exposure rectangles of interest. You may only set the device's “exposureRectOfInterest“ property if this property returns `true`.
 func (o *AVCaptureDevice) IsExposureRectOfInterestSupported() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsExposureRectOfInterestSupported)
 	return _ret
 }
 
-// The minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current ``AVCaptureDevice/activeFormat``. If ``exposureRectOfInterestSupported`` returns `false`, this property returns { 0, 0 }.
+// The minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current “AVCaptureDevice/activeFormat“. If “exposureRectOfInterestSupported“ returns `false`, this property returns { 0, 0 }.
 func (o *AVCaptureDevice) MinExposureRectOfInterestSize() corefoundation.CGSize {
 	_ret := objc.Send[corefoundation.CGSize](o.Ptr(), _aVCaptureDeviceSelMinExposureRectOfInterestSize)
 	return _ret
 }
 
-// The device's current exposure rectangle of interest, if it has one. The value of this property is a ``CGRect`` determining the device's exposure rectangle of interest. Use this as an alternative to setting ``exposurePointOfInterest``, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the exposure, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting ``exposureRectOfInterest`` throws an `NSInvalidArgumentException` if ``exposureRectOfInterestSupported`` returns `false`. Setting ``exposureRectOfInterest`` throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the ``minExposureRectOfInterestSize``. Setting ``exposureRectOfInterest`` throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``. Setting ``exposureRectOfInterest`` updates the device's ``exposurePointOfInterest`` to the center of your provided rectangle of interest. If you later set the device's ``exposurePointOfInterest``, the ``exposureRectOfInterest`` resets to the default sized rectangle of interest for the new exposure point of interest. If you change your ``AVCaptureDevice/activeFormat``, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's ``exposureRectOfInterest`` by key-value observing this property. - Note: Setting ``exposureRectOfInterest`` alone does not initiate an exposure operation. After setting ``exposureRectOfInterest``, set ``exposureMode`` to apply the new rectangle of interest.
+// The device's current exposure rectangle of interest, if it has one. The value of this property is a “CGRect“ determining the device's exposure rectangle of interest. Use this as an alternative to setting “exposurePointOfInterest“, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the exposure, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting “exposureRectOfInterest“ throws an `NSInvalidArgumentException` if “exposureRectOfInterestSupported“ returns `false`. Setting “exposureRectOfInterest“ throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the “minExposureRectOfInterestSize“. Setting “exposureRectOfInterest“ throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“. Setting “exposureRectOfInterest“ updates the device's “exposurePointOfInterest“ to the center of your provided rectangle of interest. If you later set the device's “exposurePointOfInterest“, the “exposureRectOfInterest“ resets to the default sized rectangle of interest for the new exposure point of interest. If you change your “AVCaptureDevice/activeFormat“, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's “exposureRectOfInterest“ by key-value observing this property. - Note: Setting “exposureRectOfInterest“ alone does not initiate an exposure operation. After setting “exposureRectOfInterest“, set “exposureMode“ to apply the new rectangle of interest.
 func (o *AVCaptureDevice) ExposureRectOfInterest() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _aVCaptureDeviceSelExposureRectOfInterest)
 	return _ret
@@ -856,7 +896,9 @@ func (o *AVCaptureDevice) AvailableReactionTypes() *foundation.NSSet[*foundation
 // @property reactionEffectsInProgress @abstract Contains an array of reaction effects that are currently being performed by the device, sorted by timestamp. If observing old and new values in the KVO callback, the reaction effects which are still running in the new array will have kCMTimeInvalid as their endTime property. Reaction effects which have ended will only be in the old array, and will have their endTime property set to the presentation time of the first frame where the reaction effect was no longer present. @discussion Reaction effects which are triggered by either a call to performEffectForReaction: or by the automatic gesture detection will be reflected in this array. It is key-value observable to be notified when reaction effects begin or end.
 func (o *AVCaptureDevice) ReactionEffectsInProgress() *foundation.NSArray[*AVCaptureReactionEffectState] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelReactionEffectsInProgress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureReactionEffectState](_ret)
 }
 
@@ -879,7 +921,9 @@ func (o *AVCaptureDevice) IsContinuityCamera() bool {
 
 func (o *AVCaptureDevice) CompanionDeskViewCamera() *AVCaptureDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelCompanionDeskViewCamera)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureDeviceFromID(_ret)
 }
 
@@ -910,19 +954,21 @@ func (o *AVCaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() *founda
 	return _ret
 }
 
-// Updates the dynamic aspect ratio of the device. - Parameter dynamicAspectRatio: The new ``AVCaptureAspectRatio`` the device should output. - Parameter handler: A block called by the device when `dynamicAspectRatio` is set to the value specified. If you call ``setDynamicAspectRatio:completionHandler:`` multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the ``AVCaptureSession/synchronizationClock`` prior to comparison with the timestamps of buffers delivered via an ``AVCaptureVideoDataOutput``. You may pass `nil` for the `handler` parameter if you do not need to know when the operation completes. This is the only way of setting ``dynamicAspectRatio``. This method throws an `NSInvalidArgumentException` if `dynamicAspectRatio` is not a supported aspect ratio found in the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios``. This method throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``.
+// Updates the dynamic aspect ratio of the device. - Parameter dynamicAspectRatio: The new “AVCaptureAspectRatio“ the device should output. - Parameter handler: A block called by the device when `dynamicAspectRatio` is set to the value specified. If you call “setDynamicAspectRatio:completionHandler:“ multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the “AVCaptureSession/synchronizationClock“ prior to comparison with the timestamps of buffers delivered via an “AVCaptureVideoDataOutput“. You may pass `nil` for the `handler` parameter if you do not need to know when the operation completes. This is the only way of setting “dynamicAspectRatio“. This method throws an `NSInvalidArgumentException` if `dynamicAspectRatio` is not a supported aspect ratio found in the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“. This method throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“.
 func (o *AVCaptureDevice) SetDynamicAspectRatioCompletionHandler(dynamicAspectRatio *foundation.NSString, handler objc.Block) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetDynamicAspectRatioCompletionHandler, dynamicAspectRatio.Ptr(), handler)
 }
 
-// A key-value observable property indicating the current aspect ratio for a device. This property is initialized to the first ``AVCaptureAspectRatio`` listed in the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` property. If the activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` is an empty array, this property returns nil.
+// A key-value observable property indicating the current aspect ratio for a device. This property is initialized to the first “AVCaptureAspectRatio“ listed in the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ property. If the activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns nil.
 func (o *AVCaptureDevice) DynamicAspectRatio() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureDeviceSelDynamicAspectRatio)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// A key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio. If the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` is an empty array, this property returns {0,0}.
+// A key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio. If the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns {0,0}.
 func (o *AVCaptureDevice) DynamicDimensions() coremedia.CMVideoDimensions {
 	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCaptureDeviceSelDynamicDimensions)
 	return _ret
@@ -957,26 +1003,25 @@ func AVCaptureDeviceIsEdgeLightActive() bool {
 	return _ret
 }
 
-// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections. - Parameter cameraLensSmudgeDetectionEnabled: Specify whether camera lens smudge detection should be enabled. - Parameter detectionInterval: The detection running interval if detection is enabled. Each run of detection processes frames over a short period, and produces one detection result. Use `detectionInterval` to specify the interval time between each run of detections. For example, when ``cameraLensSmudgeDetectionEnabled`` is set to `true` and `detectionInterval` is set to 1 minute, detection runs once per minute, and updates ``AVCaptureCameraLensSmudgeDetectionStatus``. If `detectionInterval` is set to ``kCMTimeInvalid``, detection runs only once after the session starts. If `detectionInterval` is set to ``kCMTimeZero``, detection runs continuously. ``AVCaptureDevice`` throws an `NSInvalidArgumentException` if the ``AVCaptureDeviceFormat/cameraLensSmudgeDetectionSupported`` property on the current active format returns `false`. Enabling detection requires a lengthy reconfiguration of the capture render pipeline, so you should enable detection before calling ``AVCaptureSession/startRunning`` or within ``AVCaptureSession/beginConfiguration`` and ``AVCaptureSession/commitConfiguration`` while running.
+// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections. - Parameter cameraLensSmudgeDetectionEnabled: Specify whether camera lens smudge detection should be enabled. - Parameter detectionInterval: The detection running interval if detection is enabled. Each run of detection processes frames over a short period, and produces one detection result. Use `detectionInterval` to specify the interval time between each run of detections. For example, when “cameraLensSmudgeDetectionEnabled“ is set to `true` and `detectionInterval` is set to 1 minute, detection runs once per minute, and updates “AVCaptureCameraLensSmudgeDetectionStatus“. If `detectionInterval` is set to “kCMTimeInvalid“, detection runs only once after the session starts. If `detectionInterval` is set to “kCMTimeZero“, detection runs continuously. “AVCaptureDevice“ throws an `NSInvalidArgumentException` if the “AVCaptureDeviceFormat/cameraLensSmudgeDetectionSupported“ property on the current active format returns `false`. Enabling detection requires a lengthy reconfiguration of the capture render pipeline, so you should enable detection before calling “AVCaptureSession/startRunning“ or within “AVCaptureSession/beginConfiguration“ and “AVCaptureSession/commitConfiguration“ while running.
 func (o *AVCaptureDevice) SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime) {
 	o.Ptr().Send(_aVCaptureDeviceSelSetCameraLensSmudgeDetectionEnabledDetectionInterval, cameraLensSmudgeDetectionEnabled, detectionInterval)
 }
 
-// Whether camera lens smudge detection is enabled. You enable lens smudge detection by calling ``setCameraLensSmudgeDetectionEnabled:detectionInterval:``. By default, this property is returns `false`.
+// Whether camera lens smudge detection is enabled. You enable lens smudge detection by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property is returns `false`.
 func (o *AVCaptureDevice) IsCameraLensSmudgeDetectionEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVCaptureDeviceSelIsCameraLensSmudgeDetectionEnabled)
 	return _ret
 }
 
-// The camera lens smudge detection interval. ``cameraLensSmudgeDetectionInterval`` is set by calling ``setCameraLensSmudgeDetectionEnabled:detectionInterval:``. By default, this property returns `kCMTimeInvalid`.
+// The camera lens smudge detection interval. “cameraLensSmudgeDetectionInterval“ is set by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property returns `kCMTimeInvalid`.
 func (o *AVCaptureDevice) CameraLensSmudgeDetectionInterval() coremedia.CMTime {
 	_ret := objc.Send[coremedia.CMTime](o.Ptr(), _aVCaptureDeviceSelCameraLensSmudgeDetectionInterval)
 	return _ret
 }
 
-// A value specifying the status of camera lens smudge detection. During initial detection execution, ``cameraLensSmudgeDetectionStatus`` returns ``AVCaptureCameraLensSmudgeDetectionStatusUnknown`` until the detection result settles. Once a detection result is produced, ``cameraLensSmudgeDetectionStatus`` returns the most recent detection result. This property can be key-value observed.
+// A value specifying the status of camera lens smudge detection. During initial detection execution, “cameraLensSmudgeDetectionStatus“ returns “AVCaptureCameraLensSmudgeDetectionStatusUnknown“ until the detection result settles. Once a detection result is produced, “cameraLensSmudgeDetectionStatus“ returns the most recent detection result. This property can be key-value observed.
 func (o *AVCaptureDevice) CameraLensSmudgeDetectionStatus() AVCaptureCameraLensSmudgeDetectionStatus {
 	_ret := objc.Send[AVCaptureCameraLensSmudgeDetectionStatus](o.Ptr(), _aVCaptureDeviceSelCameraLensSmudgeDetectionStatus)
 	return _ret
 }
-

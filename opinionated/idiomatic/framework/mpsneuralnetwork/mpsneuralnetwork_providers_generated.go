@@ -197,4 +197,3 @@ type NNUnaryReductionNodeProvider interface {
 type RNNDescriptorProvider interface {
 	asRNNDescriptor() *raw.MPSRNNDescriptor
 }
-

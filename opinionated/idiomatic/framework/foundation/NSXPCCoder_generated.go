@@ -99,4 +99,3 @@ type XPCCoderable interface {
 }
 
 var _ XPCCoderable = (*XPCCoder)(nil)
-

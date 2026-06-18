@@ -326,9 +326,13 @@ func (x *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedV
 	}
 }
 
-func (x *MTRClusterApplicationLauncher) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterApplicationLauncher) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterApplicationLauncher) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterApplicationLauncher) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterApplicationLauncherable is the interface implemented by [MTRClusterApplicationLauncher], for mocking and DI.
 type MTRClusterApplicationLauncherable interface {
@@ -354,4 +358,3 @@ type MTRClusterApplicationLauncherable interface {
 }
 
 var _ MTRClusterApplicationLauncherable = (*MTRClusterApplicationLauncher)(nil)
-

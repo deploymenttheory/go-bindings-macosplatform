@@ -16,23 +16,23 @@ type NSButtonTouchBarItem struct {
 }
 
 var (
-	_clsNSButtonTouchBarItem = _objcClass("NSButtonTouchBarItem")
-	_nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleTargetAction = objc.RegisterName("buttonTouchBarItemWithIdentifier:title:target:action:")
-	_nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierImageTargetAction = objc.RegisterName("buttonTouchBarItemWithIdentifier:image:target:action:")
+	_clsNSButtonTouchBarItem                                                       = _objcClass("NSButtonTouchBarItem")
+	_nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleTargetAction      = objc.RegisterName("buttonTouchBarItemWithIdentifier:title:target:action:")
+	_nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierImageTargetAction      = objc.RegisterName("buttonTouchBarItemWithIdentifier:image:target:action:")
 	_nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleImageTargetAction = objc.RegisterName("buttonTouchBarItemWithIdentifier:title:image:target:action:")
-	_nSButtonTouchBarItemSelTitle = objc.RegisterName("title")
-	_nSButtonTouchBarItemSelSetTitle = objc.RegisterName("setTitle:")
-	_nSButtonTouchBarItemSelImage = objc.RegisterName("image")
-	_nSButtonTouchBarItemSelSetImage = objc.RegisterName("setImage:")
-	_nSButtonTouchBarItemSelBezelColor = objc.RegisterName("bezelColor")
-	_nSButtonTouchBarItemSelSetBezelColor = objc.RegisterName("setBezelColor:")
-	_nSButtonTouchBarItemSelTarget = objc.RegisterName("target")
-	_nSButtonTouchBarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSButtonTouchBarItemSelAction = objc.RegisterName("action")
-	_nSButtonTouchBarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSButtonTouchBarItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSButtonTouchBarItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSButtonTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
+	_nSButtonTouchBarItemSelTitle                                                  = objc.RegisterName("title")
+	_nSButtonTouchBarItemSelSetTitle                                               = objc.RegisterName("setTitle:")
+	_nSButtonTouchBarItemSelImage                                                  = objc.RegisterName("image")
+	_nSButtonTouchBarItemSelSetImage                                               = objc.RegisterName("setImage:")
+	_nSButtonTouchBarItemSelBezelColor                                             = objc.RegisterName("bezelColor")
+	_nSButtonTouchBarItemSelSetBezelColor                                          = objc.RegisterName("setBezelColor:")
+	_nSButtonTouchBarItemSelTarget                                                 = objc.RegisterName("target")
+	_nSButtonTouchBarItemSelSetTarget                                              = objc.RegisterName("setTarget:")
+	_nSButtonTouchBarItemSelAction                                                 = objc.RegisterName("action")
+	_nSButtonTouchBarItemSelSetAction                                              = objc.RegisterName("setAction:")
+	_nSButtonTouchBarItemSelIsEnabled                                              = objc.RegisterName("isEnabled")
+	_nSButtonTouchBarItemSelSetEnabled                                             = objc.RegisterName("setEnabled:")
+	_nSButtonTouchBarItemSelSetCustomizationLabel                                  = objc.RegisterName("setCustomizationLabel:")
 )
 
 func NSButtonTouchBarItemFromID(id objc.ID) *NSButtonTouchBarItem {
@@ -47,25 +47,33 @@ func NSButtonTouchBarItemFromID(id objc.ID) *NSButtonTouchBarItem {
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierTitleTargetAction(identifier *foundation.NSString, title *foundation.NSString, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleTargetAction, identifier.Ptr(), title.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonTouchBarItemFromID(_ret)
 }
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierImageTargetAction(identifier *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierImageTargetAction, identifier.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonTouchBarItemFromID(_ret)
 }
 
 func NSButtonTouchBarItemButtonTouchBarItemWithIdentifierTitleImageTargetAction(identifier *foundation.NSString, title *foundation.NSString, image *NSImage, target objc.ID, action objc.SEL) *NSButtonTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSButtonTouchBarItem), _nSButtonTouchBarItemSelButtonTouchBarItemWithIdentifierTitleImageTargetAction, identifier.Ptr(), title.Ptr(), image.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonTouchBarItemFromID(_ret)
 }
 
 func (o *NSButtonTouchBarItem) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +83,9 @@ func (o *NSButtonTouchBarItem) SetTitle(title *foundation.NSString) {
 
 func (o *NSButtonTouchBarItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -85,7 +95,9 @@ func (o *NSButtonTouchBarItem) SetImage(image *NSImage) {
 
 func (o *NSButtonTouchBarItem) BezelColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonTouchBarItemSelBezelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -123,4 +135,3 @@ func (o *NSButtonTouchBarItem) SetEnabled(enabled bool) {
 func (o *NSButtonTouchBarItem) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSButtonTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

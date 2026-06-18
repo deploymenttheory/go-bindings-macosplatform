@@ -211,4 +211,3 @@ type PrintPanelable interface {
 }
 
 var _ PrintPanelable = (*PrintPanel)(nil)
-

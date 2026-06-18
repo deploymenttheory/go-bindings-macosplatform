@@ -16,20 +16,20 @@ type DOMHTMLOptionElement struct {
 }
 
 var (
-	_clsDOMHTMLOptionElement = _objcClass("DOMHTMLOptionElement")
-	_dOMHTMLOptionElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLOptionElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLOptionElementSelForm = objc.RegisterName("form")
-	_dOMHTMLOptionElementSelLabel = objc.RegisterName("label")
-	_dOMHTMLOptionElementSelSetLabel = objc.RegisterName("setLabel:")
-	_dOMHTMLOptionElementSelDefaultSelected = objc.RegisterName("defaultSelected")
+	_clsDOMHTMLOptionElement                   = _objcClass("DOMHTMLOptionElement")
+	_dOMHTMLOptionElementSelDisabled           = objc.RegisterName("disabled")
+	_dOMHTMLOptionElementSelSetDisabled        = objc.RegisterName("setDisabled:")
+	_dOMHTMLOptionElementSelForm               = objc.RegisterName("form")
+	_dOMHTMLOptionElementSelLabel              = objc.RegisterName("label")
+	_dOMHTMLOptionElementSelSetLabel           = objc.RegisterName("setLabel:")
+	_dOMHTMLOptionElementSelDefaultSelected    = objc.RegisterName("defaultSelected")
 	_dOMHTMLOptionElementSelSetDefaultSelected = objc.RegisterName("setDefaultSelected:")
-	_dOMHTMLOptionElementSelSelected = objc.RegisterName("selected")
-	_dOMHTMLOptionElementSelSetSelected = objc.RegisterName("setSelected:")
-	_dOMHTMLOptionElementSelValue = objc.RegisterName("value")
-	_dOMHTMLOptionElementSelSetValue = objc.RegisterName("setValue:")
-	_dOMHTMLOptionElementSelText = objc.RegisterName("text")
-	_dOMHTMLOptionElementSelIndex = objc.RegisterName("index")
+	_dOMHTMLOptionElementSelSelected           = objc.RegisterName("selected")
+	_dOMHTMLOptionElementSelSetSelected        = objc.RegisterName("setSelected:")
+	_dOMHTMLOptionElementSelValue              = objc.RegisterName("value")
+	_dOMHTMLOptionElementSelSetValue           = objc.RegisterName("setValue:")
+	_dOMHTMLOptionElementSelText               = objc.RegisterName("text")
+	_dOMHTMLOptionElementSelIndex              = objc.RegisterName("index")
 )
 
 func DOMHTMLOptionElementFromID(id objc.ID) *DOMHTMLOptionElement {
@@ -53,13 +53,17 @@ func (o *DOMHTMLOptionElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLOptionElement) Form() *DOMHTMLFormElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionElementSelForm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMHTMLFormElementFromID(_ret)
 }
 
 func (o *DOMHTMLOptionElement) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionElementSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,7 +91,9 @@ func (o *DOMHTMLOptionElement) SetSelected(selected bool) {
 
 func (o *DOMHTMLOptionElement) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionElementSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,7 +103,9 @@ func (o *DOMHTMLOptionElement) SetValue(value *foundation.NSString) {
 
 func (o *DOMHTMLOptionElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLOptionElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -105,4 +113,3 @@ func (o *DOMHTMLOptionElement) Index() int {
 	_ret := objc.Send[int](o.Ptr(), _dOMHTMLOptionElementSelIndex)
 	return _ret
 }
-

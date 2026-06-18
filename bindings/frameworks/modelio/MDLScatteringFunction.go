@@ -16,17 +16,17 @@ type MDLScatteringFunction struct {
 }
 
 var (
-	_clsMDLScatteringFunction = _objcClass("MDLScatteringFunction")
-	_mDLScatteringFunctionSelName = objc.RegisterName("name")
-	_mDLScatteringFunctionSelSetName = objc.RegisterName("setName:")
-	_mDLScatteringFunctionSelBaseColor = objc.RegisterName("baseColor")
-	_mDLScatteringFunctionSelEmission = objc.RegisterName("emission")
-	_mDLScatteringFunctionSelSpecular = objc.RegisterName("specular")
-	_mDLScatteringFunctionSelMaterialIndexOfRefraction = objc.RegisterName("materialIndexOfRefraction")
+	_clsMDLScatteringFunction                           = _objcClass("MDLScatteringFunction")
+	_mDLScatteringFunctionSelName                       = objc.RegisterName("name")
+	_mDLScatteringFunctionSelSetName                    = objc.RegisterName("setName:")
+	_mDLScatteringFunctionSelBaseColor                  = objc.RegisterName("baseColor")
+	_mDLScatteringFunctionSelEmission                   = objc.RegisterName("emission")
+	_mDLScatteringFunctionSelSpecular                   = objc.RegisterName("specular")
+	_mDLScatteringFunctionSelMaterialIndexOfRefraction  = objc.RegisterName("materialIndexOfRefraction")
 	_mDLScatteringFunctionSelInterfaceIndexOfRefraction = objc.RegisterName("interfaceIndexOfRefraction")
-	_mDLScatteringFunctionSelNormal = objc.RegisterName("normal")
-	_mDLScatteringFunctionSelAmbientOcclusion = objc.RegisterName("ambientOcclusion")
-	_mDLScatteringFunctionSelAmbientOcclusionScale = objc.RegisterName("ambientOcclusionScale")
+	_mDLScatteringFunctionSelNormal                     = objc.RegisterName("normal")
+	_mDLScatteringFunctionSelAmbientOcclusion           = objc.RegisterName("ambientOcclusion")
+	_mDLScatteringFunctionSelAmbientOcclusionScale      = objc.RegisterName("ambientOcclusionScale")
 )
 
 func MDLScatteringFunctionFromID(id objc.ID) *MDLScatteringFunction {
@@ -42,7 +42,9 @@ func MDLScatteringFunctionFromID(id objc.ID) *MDLScatteringFunction {
 // @see MDLNamed
 func (o *MDLScatteringFunction) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -52,49 +54,64 @@ func (o *MDLScatteringFunction) SetName(name *foundation.NSString) {
 
 func (o *MDLScatteringFunction) BaseColor() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelBaseColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) Emission() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelEmission)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) Specular() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelSpecular)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) MaterialIndexOfRefraction() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelMaterialIndexOfRefraction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) InterfaceIndexOfRefraction() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelInterfaceIndexOfRefraction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) Normal() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelNormal)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) AmbientOcclusion() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelAmbientOcclusion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLScatteringFunction) AmbientOcclusionScale() *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLScatteringFunctionSelAmbientOcclusionScale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
-

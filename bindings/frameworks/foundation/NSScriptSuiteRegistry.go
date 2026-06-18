@@ -15,22 +15,22 @@ type NSScriptSuiteRegistry struct {
 }
 
 var (
-	_clsNSScriptSuiteRegistry = _objcClass("NSScriptSuiteRegistry")
-	_nSScriptSuiteRegistrySelSharedScriptSuiteRegistry = objc.RegisterName("sharedScriptSuiteRegistry")
-	_nSScriptSuiteRegistrySelSetSharedScriptSuiteRegistry = objc.RegisterName("setSharedScriptSuiteRegistry:")
-	_nSScriptSuiteRegistrySelLoadSuitesFromBundle = objc.RegisterName("loadSuitesFromBundle:")
-	_nSScriptSuiteRegistrySelLoadSuiteWithDictionaryFromBundle = objc.RegisterName("loadSuiteWithDictionary:fromBundle:")
-	_nSScriptSuiteRegistrySelRegisterClassDescription = objc.RegisterName("registerClassDescription:")
-	_nSScriptSuiteRegistrySelRegisterCommandDescription = objc.RegisterName("registerCommandDescription:")
-	_nSScriptSuiteRegistrySelAppleEventCodeForSuite = objc.RegisterName("appleEventCodeForSuite:")
-	_nSScriptSuiteRegistrySelBundleForSuite = objc.RegisterName("bundleForSuite:")
-	_nSScriptSuiteRegistrySelClassDescriptionsInSuite = objc.RegisterName("classDescriptionsInSuite:")
-	_nSScriptSuiteRegistrySelCommandDescriptionsInSuite = objc.RegisterName("commandDescriptionsInSuite:")
-	_nSScriptSuiteRegistrySelSuiteForAppleEventCode = objc.RegisterName("suiteForAppleEventCode:")
-	_nSScriptSuiteRegistrySelClassDescriptionWithAppleEventCode = objc.RegisterName("classDescriptionWithAppleEventCode:")
+	_clsNSScriptSuiteRegistry                                                       = _objcClass("NSScriptSuiteRegistry")
+	_nSScriptSuiteRegistrySelSharedScriptSuiteRegistry                              = objc.RegisterName("sharedScriptSuiteRegistry")
+	_nSScriptSuiteRegistrySelSetSharedScriptSuiteRegistry                           = objc.RegisterName("setSharedScriptSuiteRegistry:")
+	_nSScriptSuiteRegistrySelLoadSuitesFromBundle                                   = objc.RegisterName("loadSuitesFromBundle:")
+	_nSScriptSuiteRegistrySelLoadSuiteWithDictionaryFromBundle                      = objc.RegisterName("loadSuiteWithDictionary:fromBundle:")
+	_nSScriptSuiteRegistrySelRegisterClassDescription                               = objc.RegisterName("registerClassDescription:")
+	_nSScriptSuiteRegistrySelRegisterCommandDescription                             = objc.RegisterName("registerCommandDescription:")
+	_nSScriptSuiteRegistrySelAppleEventCodeForSuite                                 = objc.RegisterName("appleEventCodeForSuite:")
+	_nSScriptSuiteRegistrySelBundleForSuite                                         = objc.RegisterName("bundleForSuite:")
+	_nSScriptSuiteRegistrySelClassDescriptionsInSuite                               = objc.RegisterName("classDescriptionsInSuite:")
+	_nSScriptSuiteRegistrySelCommandDescriptionsInSuite                             = objc.RegisterName("commandDescriptionsInSuite:")
+	_nSScriptSuiteRegistrySelSuiteForAppleEventCode                                 = objc.RegisterName("suiteForAppleEventCode:")
+	_nSScriptSuiteRegistrySelClassDescriptionWithAppleEventCode                     = objc.RegisterName("classDescriptionWithAppleEventCode:")
 	_nSScriptSuiteRegistrySelCommandDescriptionWithAppleEventClassAndAppleEventCode = objc.RegisterName("commandDescriptionWithAppleEventClass:andAppleEventCode:")
-	_nSScriptSuiteRegistrySelAeteResource = objc.RegisterName("aeteResource:")
-	_nSScriptSuiteRegistrySelSuiteNames = objc.RegisterName("suiteNames")
+	_nSScriptSuiteRegistrySelAeteResource                                           = objc.RegisterName("aeteResource:")
+	_nSScriptSuiteRegistrySelSuiteNames                                             = objc.RegisterName("suiteNames")
 )
 
 func NSScriptSuiteRegistryFromID(id objc.ID) *NSScriptSuiteRegistry {
@@ -45,7 +45,9 @@ func NSScriptSuiteRegistryFromID(id objc.ID) *NSScriptSuiteRegistry {
 
 func NSScriptSuiteRegistrySharedScriptSuiteRegistry() *NSScriptSuiteRegistry {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSScriptSuiteRegistry), _nSScriptSuiteRegistrySelSharedScriptSuiteRegistry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptSuiteRegistryFromID(_ret)
 }
 
@@ -76,49 +78,64 @@ func (o *NSScriptSuiteRegistry) AppleEventCodeForSuite(suiteName *NSString) uint
 
 func (o *NSScriptSuiteRegistry) BundleForSuite(suiteName *NSString) *NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelBundleForSuite, suiteName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSBundleFromID(_ret)
 }
 
 func (o *NSScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName *NSString) *NSDictionary[*NSString, *NSScriptClassDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelClassDescriptionsInSuite, suiteName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSScriptClassDescription](_ret)
 }
 
 func (o *NSScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName *NSString) *NSDictionary[*NSString, *NSScriptCommandDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelCommandDescriptionsInSuite, suiteName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSScriptCommandDescription](_ret)
 }
 
 func (o *NSScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelSuiteForAppleEventCode, appleEventCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode uint) *NSScriptClassDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelClassDescriptionWithAppleEventCode, appleEventCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptClassDescriptionFromID(_ret)
 }
 
 func (o *NSScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *NSScriptCommandDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelCommandDescriptionWithAppleEventClassAndAppleEventCode, appleEventClassCode, appleEventIDCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptCommandDescriptionFromID(_ret)
 }
 
 func (o *NSScriptSuiteRegistry) AeteResource(languageName *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelAeteResource, languageName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSScriptSuiteRegistry) SuiteNames() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptSuiteRegistrySelSuiteNames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
-

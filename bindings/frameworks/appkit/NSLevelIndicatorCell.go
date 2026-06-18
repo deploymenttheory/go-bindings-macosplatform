@@ -16,26 +16,26 @@ type NSLevelIndicatorCell struct {
 }
 
 var (
-	_clsNSLevelIndicatorCell = _objcClass("NSLevelIndicatorCell")
+	_clsNSLevelIndicatorCell                            = _objcClass("NSLevelIndicatorCell")
 	_nSLevelIndicatorCellSelInitWithLevelIndicatorStyle = objc.RegisterName("initWithLevelIndicatorStyle:")
-	_nSLevelIndicatorCellSelRectOfTickMarkAtIndex = objc.RegisterName("rectOfTickMarkAtIndex:")
-	_nSLevelIndicatorCellSelTickMarkValueAtIndex = objc.RegisterName("tickMarkValueAtIndex:")
-	_nSLevelIndicatorCellSelLevelIndicatorStyle = objc.RegisterName("levelIndicatorStyle")
-	_nSLevelIndicatorCellSelSetLevelIndicatorStyle = objc.RegisterName("setLevelIndicatorStyle:")
-	_nSLevelIndicatorCellSelMinValue = objc.RegisterName("minValue")
-	_nSLevelIndicatorCellSelSetMinValue = objc.RegisterName("setMinValue:")
-	_nSLevelIndicatorCellSelMaxValue = objc.RegisterName("maxValue")
-	_nSLevelIndicatorCellSelSetMaxValue = objc.RegisterName("setMaxValue:")
-	_nSLevelIndicatorCellSelWarningValue = objc.RegisterName("warningValue")
-	_nSLevelIndicatorCellSelSetWarningValue = objc.RegisterName("setWarningValue:")
-	_nSLevelIndicatorCellSelCriticalValue = objc.RegisterName("criticalValue")
-	_nSLevelIndicatorCellSelSetCriticalValue = objc.RegisterName("setCriticalValue:")
-	_nSLevelIndicatorCellSelTickMarkPosition = objc.RegisterName("tickMarkPosition")
-	_nSLevelIndicatorCellSelSetTickMarkPosition = objc.RegisterName("setTickMarkPosition:")
-	_nSLevelIndicatorCellSelNumberOfTickMarks = objc.RegisterName("numberOfTickMarks")
-	_nSLevelIndicatorCellSelSetNumberOfTickMarks = objc.RegisterName("setNumberOfTickMarks:")
-	_nSLevelIndicatorCellSelNumberOfMajorTickMarks = objc.RegisterName("numberOfMajorTickMarks")
-	_nSLevelIndicatorCellSelSetNumberOfMajorTickMarks = objc.RegisterName("setNumberOfMajorTickMarks:")
+	_nSLevelIndicatorCellSelRectOfTickMarkAtIndex       = objc.RegisterName("rectOfTickMarkAtIndex:")
+	_nSLevelIndicatorCellSelTickMarkValueAtIndex        = objc.RegisterName("tickMarkValueAtIndex:")
+	_nSLevelIndicatorCellSelLevelIndicatorStyle         = objc.RegisterName("levelIndicatorStyle")
+	_nSLevelIndicatorCellSelSetLevelIndicatorStyle      = objc.RegisterName("setLevelIndicatorStyle:")
+	_nSLevelIndicatorCellSelMinValue                    = objc.RegisterName("minValue")
+	_nSLevelIndicatorCellSelSetMinValue                 = objc.RegisterName("setMinValue:")
+	_nSLevelIndicatorCellSelMaxValue                    = objc.RegisterName("maxValue")
+	_nSLevelIndicatorCellSelSetMaxValue                 = objc.RegisterName("setMaxValue:")
+	_nSLevelIndicatorCellSelWarningValue                = objc.RegisterName("warningValue")
+	_nSLevelIndicatorCellSelSetWarningValue             = objc.RegisterName("setWarningValue:")
+	_nSLevelIndicatorCellSelCriticalValue               = objc.RegisterName("criticalValue")
+	_nSLevelIndicatorCellSelSetCriticalValue            = objc.RegisterName("setCriticalValue:")
+	_nSLevelIndicatorCellSelTickMarkPosition            = objc.RegisterName("tickMarkPosition")
+	_nSLevelIndicatorCellSelSetTickMarkPosition         = objc.RegisterName("setTickMarkPosition:")
+	_nSLevelIndicatorCellSelNumberOfTickMarks           = objc.RegisterName("numberOfTickMarks")
+	_nSLevelIndicatorCellSelSetNumberOfTickMarks        = objc.RegisterName("setNumberOfTickMarks:")
+	_nSLevelIndicatorCellSelNumberOfMajorTickMarks      = objc.RegisterName("numberOfMajorTickMarks")
+	_nSLevelIndicatorCellSelSetNumberOfMajorTickMarks   = objc.RegisterName("setNumberOfMajorTickMarks:")
 )
 
 func NSLevelIndicatorCellFromID(id objc.ID) *NSLevelIndicatorCell {
@@ -50,7 +50,9 @@ func NSLevelIndicatorCellFromID(id objc.ID) *NSLevelIndicatorCell {
 
 func (o *NSLevelIndicatorCell) InitWithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *NSLevelIndicatorCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLevelIndicatorCellSelInitWithLevelIndicatorStyle, levelIndicatorStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLevelIndicatorCellFromID(_ret)
 }
 
@@ -135,4 +137,3 @@ func (o *NSLevelIndicatorCell) NumberOfMajorTickMarks() int {
 func (o *NSLevelIndicatorCell) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
 	o.Ptr().Send(_nSLevelIndicatorCellSelSetNumberOfMajorTickMarks, numberOfMajorTickMarks)
 }
-

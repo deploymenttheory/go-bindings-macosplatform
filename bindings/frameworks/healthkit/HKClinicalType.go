@@ -25,4 +25,3 @@ func HKClinicalTypeFromID(id objc.ID) *HKClinicalType {
 	purego.Track(o)
 	return o
 }
-

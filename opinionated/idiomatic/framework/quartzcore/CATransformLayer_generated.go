@@ -105,7 +105,9 @@ func (x *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -355,7 +357,9 @@ func (x *TransformLayer) WithConstraints(items ...*raw.CAConstraint) *TransformL
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -423,4 +427,3 @@ type TransformLayerable interface {
 }
 
 var _ TransformLayerable = (*TransformLayer)(nil)
-

@@ -24,4 +24,3 @@ type NSFetchedResultsSectionInfo interface {
 	NumberOfObjects() uint
 	Objects() *foundation.NSArray[objc.ID]
 }
-

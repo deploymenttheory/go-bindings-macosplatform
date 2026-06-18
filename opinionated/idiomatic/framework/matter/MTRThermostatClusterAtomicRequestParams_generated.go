@@ -16,7 +16,9 @@ type MTRThermostatClusterAtomicRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterAtomicRequestParams].
-func (x *MTRThermostatClusterAtomicRequestParams) Unwrap() *raw.MTRThermostatClusterAtomicRequestParams { return x.inner }
+func (x *MTRThermostatClusterAtomicRequestParams) Unwrap() *raw.MTRThermostatClusterAtomicRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -130,4 +132,3 @@ type MTRThermostatClusterAtomicRequestParamsable interface {
 }
 
 var _ MTRThermostatClusterAtomicRequestParamsable = (*MTRThermostatClusterAtomicRequestParams)(nil)
-

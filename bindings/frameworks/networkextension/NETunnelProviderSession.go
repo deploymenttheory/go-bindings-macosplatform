@@ -18,9 +18,9 @@ type NETunnelProviderSession struct {
 }
 
 var (
-	_clsNETunnelProviderSession = _objcClass("NETunnelProviderSession")
-	_nETunnelProviderSessionSelStartTunnelWithOptionsAndReturnError = objc.RegisterName("startTunnelWithOptions:andReturnError:")
-	_nETunnelProviderSessionSelStopTunnel = objc.RegisterName("stopTunnel")
+	_clsNETunnelProviderSession                                              = _objcClass("NETunnelProviderSession")
+	_nETunnelProviderSessionSelStartTunnelWithOptionsAndReturnError          = objc.RegisterName("startTunnelWithOptions:andReturnError:")
+	_nETunnelProviderSessionSelStopTunnel                                    = objc.RegisterName("stopTunnel")
 	_nETunnelProviderSessionSelSendProviderMessageReturnErrorResponseHandler = objc.RegisterName("sendProviderMessage:returnError:responseHandler:")
 )
 
@@ -64,4 +64,3 @@ func (o *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(
 	_ret := objc.Send[bool](o.Ptr(), _nETunnelProviderSessionSelSendProviderMessageReturnErrorResponseHandler, messageData.Ptr(), error_, __block_responseHandler)
 	return _ret
 }
-

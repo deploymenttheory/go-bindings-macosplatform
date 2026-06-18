@@ -1023,9 +1023,13 @@ func (x *MTRBaseClusterApplicationBasic) SubscribeAttributeClusterRevisionWithMi
 	}
 }
 
-func (x *MTRBaseClusterApplicationBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterApplicationBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterApplicationBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterApplicationBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterApplicationBasicable is the interface implemented by [MTRBaseClusterApplicationBasic], for mocking and DI.
 type MTRBaseClusterApplicationBasicable interface {
@@ -1085,4 +1089,3 @@ type MTRBaseClusterApplicationBasicable interface {
 }
 
 var _ MTRBaseClusterApplicationBasicable = (*MTRBaseClusterApplicationBasic)(nil)
-

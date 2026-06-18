@@ -45,7 +45,9 @@ func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -76,7 +78,9 @@ func (x *ChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackR
 	x.inner.SetSupportedPlaybackRates(supportedPlaybackRates)
 }
 
-func (x *ChangePlaybackRateCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+func (x *ChangePlaybackRateCommand) asRemoteCommand() *raw.MPRemoteCommand {
+	return &x.inner.MPRemoteCommand
+}
 
 // ChangePlaybackRateCommandable is the interface implemented by [ChangePlaybackRateCommand], for mocking and DI.
 type ChangePlaybackRateCommandable interface {
@@ -88,4 +92,3 @@ type ChangePlaybackRateCommandable interface {
 }
 
 var _ ChangePlaybackRateCommandable = (*ChangePlaybackRateCommand)(nil)
-

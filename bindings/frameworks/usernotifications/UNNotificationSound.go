@@ -16,11 +16,11 @@ type UNNotificationSound struct {
 }
 
 var (
-	_clsUNNotificationSound = _objcClass("UNNotificationSound")
+	_clsUNNotificationSound                                    = _objcClass("UNNotificationSound")
 	_uNNotificationSoundSelDefaultCriticalSoundWithAudioVolume = objc.RegisterName("defaultCriticalSoundWithAudioVolume:")
-	_uNNotificationSoundSelSoundNamed = objc.RegisterName("soundNamed:")
-	_uNNotificationSoundSelCriticalSoundNamedWithAudioVolume = objc.RegisterName("criticalSoundNamed:withAudioVolume:")
-	_uNNotificationSoundSelDefaultSound = objc.RegisterName("defaultSound")
+	_uNNotificationSoundSelSoundNamed                          = objc.RegisterName("soundNamed:")
+	_uNNotificationSoundSelCriticalSoundNamedWithAudioVolume   = objc.RegisterName("criticalSoundNamed:withAudioVolume:")
+	_uNNotificationSoundSelDefaultSound                        = objc.RegisterName("defaultSound")
 )
 
 func UNNotificationSoundFromID(id objc.ID) *UNNotificationSound {
@@ -35,25 +35,32 @@ func UNNotificationSoundFromID(id objc.ID) *UNNotificationSound {
 
 func UNNotificationSoundDefaultCriticalSoundWithAudioVolume(volume float32) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelDefaultCriticalSoundWithAudioVolume, volume)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationSoundFromID(_ret)
 }
 
 func UNNotificationSoundSoundNamed(name *foundation.NSString) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelSoundNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationSoundFromID(_ret)
 }
 
 func UNNotificationSoundCriticalSoundNamedWithAudioVolume(name *foundation.NSString, volume float32) *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelCriticalSoundNamedWithAudioVolume, name.Ptr(), volume)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationSoundFromID(_ret)
 }
 
 func UNNotificationSoundDefaultSound() *UNNotificationSound {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationSound), _uNNotificationSoundSelDefaultSound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationSoundFromID(_ret)
 }
-

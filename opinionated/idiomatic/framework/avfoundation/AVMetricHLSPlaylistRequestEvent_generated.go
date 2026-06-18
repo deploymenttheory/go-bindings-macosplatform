@@ -65,7 +65,9 @@ func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMedia
 	return &MetricMediaResourceRequestEvent{inner: _r}
 }
 
-func (x *MetricHLSPlaylistRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricHLSPlaylistRequestEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricHLSPlaylistRequestEventable is the interface implemented by [MetricHLSPlaylistRequestEvent], for mocking and DI.
 type MetricHLSPlaylistRequestEventable interface {
@@ -77,4 +79,3 @@ type MetricHLSPlaylistRequestEventable interface {
 }
 
 var _ MetricHLSPlaylistRequestEventable = (*MetricHLSPlaylistRequestEvent)(nil)
-

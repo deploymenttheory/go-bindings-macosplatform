@@ -16,8 +16,8 @@ type MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent struct {
 }
 
 var (
-	_clsMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent = _objcClass("MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent")
-	_mTRThreadNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus = objc.RegisterName("connectionStatus")
+	_clsMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent                    = _objcClass("MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent")
+	_mTRThreadNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus    = objc.RegisterName("connectionStatus")
 	_mTRThreadNetworkDiagnosticsClusterConnectionStatusEventSelSetConnectionStatus = objc.RegisterName("setConnectionStatus:")
 )
 
@@ -33,11 +33,12 @@ func MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID(id objc.ID) *
 
 func (o *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadNetworkDiagnosticsClusterConnectionStatusEventSelConnectionStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThreadNetworkDiagnosticsClusterConnectionStatusEventSelSetConnectionStatus, connectionStatus.Ptr())
 }
-

@@ -16,7 +16,9 @@ type DetectFaceCaptureQualityRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNDetectFaceCaptureQualityRequest].
-func (x *DetectFaceCaptureQualityRequest) Unwrap() *raw.VNDetectFaceCaptureQualityRequest { return x.inner }
+func (x *DetectFaceCaptureQualityRequest) Unwrap() *raw.VNDetectFaceCaptureQualityRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *DetectFaceCaptureQualityRequest) WithRevision(revision uint) *DetectFac
 	return x
 }
 
-func (x *DetectFaceCaptureQualityRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *DetectFaceCaptureQualityRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // DetectFaceCaptureQualityRequestable is the interface implemented by [DetectFaceCaptureQualityRequest], for mocking and DI.
 type DetectFaceCaptureQualityRequestable interface {
@@ -74,4 +80,3 @@ type DetectFaceCaptureQualityRequestable interface {
 }
 
 var _ DetectFaceCaptureQualityRequestable = (*DetectFaceCaptureQualityRequest)(nil)
-

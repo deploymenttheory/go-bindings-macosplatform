@@ -117,4 +117,3 @@ type IdentityPickerable interface {
 }
 
 var _ IdentityPickerable = (*IdentityPicker)(nil)
-

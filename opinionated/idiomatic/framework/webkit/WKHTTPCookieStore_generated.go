@@ -90,4 +90,3 @@ type WKHTTPCookieStoreable interface {
 }
 
 var _ WKHTTPCookieStoreable = (*WKHTTPCookieStore)(nil)
-

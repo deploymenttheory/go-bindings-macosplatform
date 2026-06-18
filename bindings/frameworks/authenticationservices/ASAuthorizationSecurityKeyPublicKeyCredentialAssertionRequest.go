@@ -16,13 +16,13 @@ type ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest struct {
 }
 
 var (
-	_clsASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAllowedCredentials = objc.RegisterName("allowedCredentials")
+	_clsASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest                      = _objcClass("ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAllowedCredentials    = objc.RegisterName("allowedCredentials")
 	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetAllowedCredentials = objc.RegisterName("setAllowedCredentials:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAppID = objc.RegisterName("appID")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetAppID = objc.RegisterName("setAppID:")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelPrf = objc.RegisterName("prf")
-	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetPrf = objc.RegisterName("setPrf:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAppID                 = objc.RegisterName("appID")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetAppID              = objc.RegisterName("setAppID:")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelPrf                   = objc.RegisterName("prf")
+	_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetPrf                = objc.RegisterName("setPrf:")
 )
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(id objc.ID) *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
@@ -38,7 +38,9 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(id objc
 // A list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() *foundation.NSArray[*ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAllowedCredentials)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAllow
 // Use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelAppID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAppID
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *ASAuthorizationPublicKeyCredentialPRFAssertionInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionInputFromID(_ret)
 }
 
 func (o *ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetPrf(prf *ASAuthorizationPublicKeyCredentialPRFAssertionInput) {
 	o.Ptr().Send(_aSAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestSelSetPrf, prf.Ptr())
 }
-

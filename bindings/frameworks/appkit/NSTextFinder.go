@@ -17,25 +17,25 @@ type NSTextFinder struct {
 }
 
 var (
-	_clsNSTextFinder = _objcClass("NSTextFinder")
-	_nSTextFinderSelInit = objc.RegisterName("init")
-	_nSTextFinderSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSTextFinderSelPerformAction = objc.RegisterName("performAction:")
-	_nSTextFinderSelValidateAction = objc.RegisterName("validateAction:")
-	_nSTextFinderSelCancelFindIndicator = objc.RegisterName("cancelFindIndicator")
-	_nSTextFinderSelDrawIncrementalMatchHighlightInRect = objc.RegisterName("drawIncrementalMatchHighlightInRect:")
-	_nSTextFinderSelNoteClientStringWillChange = objc.RegisterName("noteClientStringWillChange")
-	_nSTextFinderSelClient = objc.RegisterName("client")
-	_nSTextFinderSelSetClient = objc.RegisterName("setClient:")
-	_nSTextFinderSelFindBarContainer = objc.RegisterName("findBarContainer")
-	_nSTextFinderSelSetFindBarContainer = objc.RegisterName("setFindBarContainer:")
-	_nSTextFinderSelFindIndicatorNeedsUpdate = objc.RegisterName("findIndicatorNeedsUpdate")
-	_nSTextFinderSelSetFindIndicatorNeedsUpdate = objc.RegisterName("setFindIndicatorNeedsUpdate:")
-	_nSTextFinderSelIsIncrementalSearchingEnabled = objc.RegisterName("isIncrementalSearchingEnabled")
-	_nSTextFinderSelSetIncrementalSearchingEnabled = objc.RegisterName("setIncrementalSearchingEnabled:")
-	_nSTextFinderSelIncrementalSearchingShouldDimContentView = objc.RegisterName("incrementalSearchingShouldDimContentView")
+	_clsNSTextFinder                                            = _objcClass("NSTextFinder")
+	_nSTextFinderSelInit                                        = objc.RegisterName("init")
+	_nSTextFinderSelInitWithCoder                               = objc.RegisterName("initWithCoder:")
+	_nSTextFinderSelPerformAction                               = objc.RegisterName("performAction:")
+	_nSTextFinderSelValidateAction                              = objc.RegisterName("validateAction:")
+	_nSTextFinderSelCancelFindIndicator                         = objc.RegisterName("cancelFindIndicator")
+	_nSTextFinderSelDrawIncrementalMatchHighlightInRect         = objc.RegisterName("drawIncrementalMatchHighlightInRect:")
+	_nSTextFinderSelNoteClientStringWillChange                  = objc.RegisterName("noteClientStringWillChange")
+	_nSTextFinderSelClient                                      = objc.RegisterName("client")
+	_nSTextFinderSelSetClient                                   = objc.RegisterName("setClient:")
+	_nSTextFinderSelFindBarContainer                            = objc.RegisterName("findBarContainer")
+	_nSTextFinderSelSetFindBarContainer                         = objc.RegisterName("setFindBarContainer:")
+	_nSTextFinderSelFindIndicatorNeedsUpdate                    = objc.RegisterName("findIndicatorNeedsUpdate")
+	_nSTextFinderSelSetFindIndicatorNeedsUpdate                 = objc.RegisterName("setFindIndicatorNeedsUpdate:")
+	_nSTextFinderSelIsIncrementalSearchingEnabled               = objc.RegisterName("isIncrementalSearchingEnabled")
+	_nSTextFinderSelSetIncrementalSearchingEnabled              = objc.RegisterName("setIncrementalSearchingEnabled:")
+	_nSTextFinderSelIncrementalSearchingShouldDimContentView    = objc.RegisterName("incrementalSearchingShouldDimContentView")
 	_nSTextFinderSelSetIncrementalSearchingShouldDimContentView = objc.RegisterName("setIncrementalSearchingShouldDimContentView:")
-	_nSTextFinderSelIncrementalMatchRanges = objc.RegisterName("incrementalMatchRanges")
+	_nSTextFinderSelIncrementalMatchRanges                      = objc.RegisterName("incrementalMatchRanges")
 )
 
 func NSTextFinderFromID(id objc.ID) *NSTextFinder {
@@ -50,13 +50,17 @@ func NSTextFinderFromID(id objc.ID) *NSTextFinder {
 
 func (o *NSTextFinder) Init() *NSTextFinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFinderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFinderFromID(_ret)
 }
 
 func (o *NSTextFinder) InitWithCoder(coder *foundation.NSCoder) *NSTextFinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextFinderSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextFinderFromID(_ret)
 }
 
@@ -130,4 +134,3 @@ func (o *NSTextFinder) IncrementalMatchRanges() *foundation.NSArray[*foundation.
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSValue]](o.Ptr(), _nSTextFinderSelIncrementalMatchRanges)
 	return _ret
 }
-

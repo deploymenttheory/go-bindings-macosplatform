@@ -16,24 +16,24 @@ type MTRSubscribeParams struct {
 }
 
 var (
-	_clsMTRSubscribeParams = _objcClass("MTRSubscribeParams")
-	_mTRSubscribeParamsSelInitWithMinIntervalMaxInterval = objc.RegisterName("initWithMinInterval:maxInterval:")
+	_clsMTRSubscribeParams                                   = _objcClass("MTRSubscribeParams")
+	_mTRSubscribeParamsSelInitWithMinIntervalMaxInterval     = objc.RegisterName("initWithMinInterval:maxInterval:")
 	_mTRSubscribeParamsSelShouldReplaceExistingSubscriptions = objc.RegisterName("shouldReplaceExistingSubscriptions")
-	_mTRSubscribeParamsSelSetReplaceExistingSubscriptions = objc.RegisterName("setReplaceExistingSubscriptions:")
-	_mTRSubscribeParamsSelShouldResubscribeAutomatically = objc.RegisterName("shouldResubscribeAutomatically")
-	_mTRSubscribeParamsSelSetResubscribeAutomatically = objc.RegisterName("setResubscribeAutomatically:")
-	_mTRSubscribeParamsSelMinInterval = objc.RegisterName("minInterval")
-	_mTRSubscribeParamsSelSetMinInterval = objc.RegisterName("setMinInterval:")
-	_mTRSubscribeParamsSelMaxInterval = objc.RegisterName("maxInterval")
-	_mTRSubscribeParamsSelSetMaxInterval = objc.RegisterName("setMaxInterval:")
-	_mTRSubscribeParamsSelShouldReportEventsUrgently = objc.RegisterName("shouldReportEventsUrgently")
-	_mTRSubscribeParamsSelSetReportEventsUrgently = objc.RegisterName("setReportEventsUrgently:")
-	_mTRSubscribeParamsSelInit = objc.RegisterName("init")
-	_mTRSubscribeParamsSelNew = objc.RegisterName("new")
-	_mTRSubscribeParamsSelKeepPreviousSubscriptions = objc.RegisterName("keepPreviousSubscriptions")
-	_mTRSubscribeParamsSelSetKeepPreviousSubscriptions = objc.RegisterName("setKeepPreviousSubscriptions:")
-	_mTRSubscribeParamsSelAutoResubscribe = objc.RegisterName("autoResubscribe")
-	_mTRSubscribeParamsSelSetAutoResubscribe = objc.RegisterName("setAutoResubscribe:")
+	_mTRSubscribeParamsSelSetReplaceExistingSubscriptions    = objc.RegisterName("setReplaceExistingSubscriptions:")
+	_mTRSubscribeParamsSelShouldResubscribeAutomatically     = objc.RegisterName("shouldResubscribeAutomatically")
+	_mTRSubscribeParamsSelSetResubscribeAutomatically        = objc.RegisterName("setResubscribeAutomatically:")
+	_mTRSubscribeParamsSelMinInterval                        = objc.RegisterName("minInterval")
+	_mTRSubscribeParamsSelSetMinInterval                     = objc.RegisterName("setMinInterval:")
+	_mTRSubscribeParamsSelMaxInterval                        = objc.RegisterName("maxInterval")
+	_mTRSubscribeParamsSelSetMaxInterval                     = objc.RegisterName("setMaxInterval:")
+	_mTRSubscribeParamsSelShouldReportEventsUrgently         = objc.RegisterName("shouldReportEventsUrgently")
+	_mTRSubscribeParamsSelSetReportEventsUrgently            = objc.RegisterName("setReportEventsUrgently:")
+	_mTRSubscribeParamsSelInit                               = objc.RegisterName("init")
+	_mTRSubscribeParamsSelNew                                = objc.RegisterName("new")
+	_mTRSubscribeParamsSelKeepPreviousSubscriptions          = objc.RegisterName("keepPreviousSubscriptions")
+	_mTRSubscribeParamsSelSetKeepPreviousSubscriptions       = objc.RegisterName("setKeepPreviousSubscriptions:")
+	_mTRSubscribeParamsSelAutoResubscribe                    = objc.RegisterName("autoResubscribe")
+	_mTRSubscribeParamsSelSetAutoResubscribe                 = objc.RegisterName("setAutoResubscribe:")
 )
 
 func MTRSubscribeParamsFromID(id objc.ID) *MTRSubscribeParams {
@@ -49,7 +49,9 @@ func MTRSubscribeParamsFromID(id objc.ID) *MTRSubscribeParams {
 // Initialize an MTRSubscribeParams.  Must provide a minInterval and maxInterval; there are no default values for those.
 func (o *MTRSubscribeParams) InitWithMinIntervalMaxInterval(minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber) *MTRSubscribeParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelInitWithMinIntervalMaxInterval, minInterval.Ptr(), maxInterval.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSubscribeParamsFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func (o *MTRSubscribeParams) SetResubscribeAutomatically(resubscribeAutomaticall
 // The minimum time, in seconds, between consecutive reports a server will send for this subscription.  This can be used to rate-limit the subscription traffic.  Any non-negative value is allowed, including 0.
 func (o *MTRSubscribeParams) MinInterval() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelMinInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -85,7 +89,9 @@ func (o *MTRSubscribeParams) SetMinInterval(minInterval *foundation.NSNumber) {
 // The suggested maximum time, in seconds, during which the server is allowed to send no reports at all for this subscription.  Must be at least as large as minInterval.  The server is allowed to use a larger time than this as the maxInterval it selects if it needs to (e.g. to meet its power budget).
 func (o *MTRSubscribeParams) MaxInterval() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelMaxInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -105,7 +111,9 @@ func (o *MTRSubscribeParams) SetReportEventsUrgently(reportEventsUrgently bool) 
 // init and new exist for now, for backwards compatibility, and initialize with minInterval set to 1 and maxInterval set to 0, which will not work on its own.  Uses of MTRSubscribeParams that rely on init must all be using (deprecated) APIs that pass in a separate minInterval and maxInterval.
 func (o *MTRSubscribeParams) Init() *MTRSubscribeParams {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRSubscribeParamsFromID(_ret)
 }
 
@@ -116,7 +124,9 @@ func MTRSubscribeParamsNew() *MTRSubscribeParams {
 
 func (o *MTRSubscribeParams) KeepPreviousSubscriptions() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelKeepPreviousSubscriptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -126,11 +136,12 @@ func (o *MTRSubscribeParams) SetKeepPreviousSubscriptions(keepPreviousSubscripti
 
 func (o *MTRSubscribeParams) AutoResubscribe() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSubscribeParamsSelAutoResubscribe)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSubscribeParams) SetAutoResubscribe(autoResubscribe *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSubscribeParamsSelSetAutoResubscribe, autoResubscribe.Ptr())
 }
-

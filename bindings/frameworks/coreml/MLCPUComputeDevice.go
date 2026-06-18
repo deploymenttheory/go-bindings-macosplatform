@@ -26,4 +26,3 @@ func MLCPUComputeDeviceFromID(id objc.ID) *MLCPUComputeDevice {
 	purego.Track(o)
 	return o
 }
-

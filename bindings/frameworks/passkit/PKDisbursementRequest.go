@@ -18,32 +18,32 @@ type PKDisbursementRequest struct {
 }
 
 var (
-	_clsPKDisbursementRequest = _objcClass("PKDisbursementRequest")
+	_clsPKDisbursementRequest                                                                                                  = _objcClass("PKDisbursementRequest")
 	_pKDisbursementRequestSelInitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems = objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:")
-	_pKDisbursementRequestSelDisbursementContactInvalidErrorWithContactFieldLocalizedDescription = objc.RegisterName("disbursementContactInvalidErrorWithContactField:localizedDescription:")
-	_pKDisbursementRequestSelDisbursementCardUnsupportedError = objc.RegisterName("disbursementCardUnsupportedError")
-	_pKDisbursementRequestSelMerchantIdentifier = objc.RegisterName("merchantIdentifier")
-	_pKDisbursementRequestSelSetMerchantIdentifier = objc.RegisterName("setMerchantIdentifier:")
-	_pKDisbursementRequestSelRegionCode = objc.RegisterName("regionCode")
-	_pKDisbursementRequestSelSetRegionCode = objc.RegisterName("setRegionCode:")
-	_pKDisbursementRequestSelSupportedNetworks = objc.RegisterName("supportedNetworks")
-	_pKDisbursementRequestSelSetSupportedNetworks = objc.RegisterName("setSupportedNetworks:")
-	_pKDisbursementRequestSelMerchantCapabilities = objc.RegisterName("merchantCapabilities")
-	_pKDisbursementRequestSelSetMerchantCapabilities = objc.RegisterName("setMerchantCapabilities:")
-	_pKDisbursementRequestSelSummaryItems = objc.RegisterName("summaryItems")
-	_pKDisbursementRequestSelSetSummaryItems = objc.RegisterName("setSummaryItems:")
-	_pKDisbursementRequestSelCurrencyCode = objc.RegisterName("currencyCode")
-	_pKDisbursementRequestSelSetCurrencyCode = objc.RegisterName("setCurrencyCode:")
-	_pKDisbursementRequestSelRequiredRecipientContactFields = objc.RegisterName("requiredRecipientContactFields")
-	_pKDisbursementRequestSelSetRequiredRecipientContactFields = objc.RegisterName("setRequiredRecipientContactFields:")
-	_pKDisbursementRequestSelRecipientContact = objc.RegisterName("recipientContact")
-	_pKDisbursementRequestSelSetRecipientContact = objc.RegisterName("setRecipientContact:")
-	_pKDisbursementRequestSelSupportedRegions = objc.RegisterName("supportedRegions")
-	_pKDisbursementRequestSelSetSupportedRegions = objc.RegisterName("setSupportedRegions:")
-	_pKDisbursementRequestSelApplicationData = objc.RegisterName("applicationData")
-	_pKDisbursementRequestSelSetApplicationData = objc.RegisterName("setApplicationData:")
-	_pKDisbursementRequestSelIsDelegatedRequest = objc.RegisterName("isDelegatedRequest")
-	_pKDisbursementRequestSelSetIsDelegatedRequest = objc.RegisterName("setIsDelegatedRequest:")
+	_pKDisbursementRequestSelDisbursementContactInvalidErrorWithContactFieldLocalizedDescription                               = objc.RegisterName("disbursementContactInvalidErrorWithContactField:localizedDescription:")
+	_pKDisbursementRequestSelDisbursementCardUnsupportedError                                                                  = objc.RegisterName("disbursementCardUnsupportedError")
+	_pKDisbursementRequestSelMerchantIdentifier                                                                                = objc.RegisterName("merchantIdentifier")
+	_pKDisbursementRequestSelSetMerchantIdentifier                                                                             = objc.RegisterName("setMerchantIdentifier:")
+	_pKDisbursementRequestSelRegionCode                                                                                        = objc.RegisterName("regionCode")
+	_pKDisbursementRequestSelSetRegionCode                                                                                     = objc.RegisterName("setRegionCode:")
+	_pKDisbursementRequestSelSupportedNetworks                                                                                 = objc.RegisterName("supportedNetworks")
+	_pKDisbursementRequestSelSetSupportedNetworks                                                                              = objc.RegisterName("setSupportedNetworks:")
+	_pKDisbursementRequestSelMerchantCapabilities                                                                              = objc.RegisterName("merchantCapabilities")
+	_pKDisbursementRequestSelSetMerchantCapabilities                                                                           = objc.RegisterName("setMerchantCapabilities:")
+	_pKDisbursementRequestSelSummaryItems                                                                                      = objc.RegisterName("summaryItems")
+	_pKDisbursementRequestSelSetSummaryItems                                                                                   = objc.RegisterName("setSummaryItems:")
+	_pKDisbursementRequestSelCurrencyCode                                                                                      = objc.RegisterName("currencyCode")
+	_pKDisbursementRequestSelSetCurrencyCode                                                                                   = objc.RegisterName("setCurrencyCode:")
+	_pKDisbursementRequestSelRequiredRecipientContactFields                                                                    = objc.RegisterName("requiredRecipientContactFields")
+	_pKDisbursementRequestSelSetRequiredRecipientContactFields                                                                 = objc.RegisterName("setRequiredRecipientContactFields:")
+	_pKDisbursementRequestSelRecipientContact                                                                                  = objc.RegisterName("recipientContact")
+	_pKDisbursementRequestSelSetRecipientContact                                                                               = objc.RegisterName("setRecipientContact:")
+	_pKDisbursementRequestSelSupportedRegions                                                                                  = objc.RegisterName("supportedRegions")
+	_pKDisbursementRequestSelSetSupportedRegions                                                                               = objc.RegisterName("setSupportedRegions:")
+	_pKDisbursementRequestSelApplicationData                                                                                   = objc.RegisterName("applicationData")
+	_pKDisbursementRequestSelSetApplicationData                                                                                = objc.RegisterName("setApplicationData:")
+	_pKDisbursementRequestSelIsDelegatedRequest                                                                                = objc.RegisterName("isDelegatedRequest")
+	_pKDisbursementRequestSelSetIsDelegatedRequest                                                                             = objc.RegisterName("setIsDelegatedRequest:")
 )
 
 func PKDisbursementRequestFromID(id objc.ID) *PKDisbursementRequest {
@@ -58,7 +58,9 @@ func PKDisbursementRequestFromID(id objc.ID) *PKDisbursementRequest {
 
 func (o *PKDisbursementRequest) InitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier *foundation.NSString, currencyCode *foundation.NSString, regionCode *foundation.NSString, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems *foundation.NSArray[*PKPaymentSummaryItem]) *PKDisbursementRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelInitWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems, merchantIdentifier.Ptr(), currencyCode.Ptr(), regionCode.Ptr(), supportedNetworks, merchantCapabilities, summaryItems.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKDisbursementRequestFromID(_ret)
 }
 
@@ -74,7 +76,9 @@ func PKDisbursementRequestDisbursementCardUnsupportedError() unsafe.Pointer {
 
 func (o *PKDisbursementRequest) MerchantIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelMerchantIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,7 +88,9 @@ func (o *PKDisbursementRequest) SetMerchantIdentifier(merchantIdentifier *founda
 
 func (o *PKDisbursementRequest) RegionCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelRegionCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -112,7 +118,9 @@ func (o *PKDisbursementRequest) SetMerchantCapabilities(merchantCapabilities PKM
 
 func (o *PKDisbursementRequest) SummaryItems() *foundation.NSArray[*PKPaymentSummaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelSummaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKPaymentSummaryItem](_ret)
 }
 
@@ -122,7 +130,9 @@ func (o *PKDisbursementRequest) SetSummaryItems(summaryItems *foundation.NSArray
 
 func (o *PKDisbursementRequest) CurrencyCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -141,7 +151,9 @@ func (o *PKDisbursementRequest) SetRequiredRecipientContactFields(requiredRecipi
 
 func (o *PKDisbursementRequest) RecipientContact() *PKContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelRecipientContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKContactFromID(_ret)
 }
 
@@ -160,7 +172,9 @@ func (o *PKDisbursementRequest) SetSupportedRegions(supportedRegions *foundation
 
 func (o *PKDisbursementRequest) ApplicationData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKDisbursementRequestSelApplicationData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -177,4 +191,3 @@ func (o *PKDisbursementRequest) IsDelegatedRequest() bool {
 func (o *PKDisbursementRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
 	o.Ptr().Send(_pKDisbursementRequestSelSetIsDelegatedRequest, isDelegatedRequest)
 }
-

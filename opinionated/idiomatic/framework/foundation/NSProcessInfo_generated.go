@@ -302,4 +302,3 @@ type ProcessInfoable interface {
 }
 
 var _ ProcessInfoable = (*ProcessInfo)(nil)
-

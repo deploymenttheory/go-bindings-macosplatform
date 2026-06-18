@@ -36,4 +36,3 @@ type IMKTextInput interface {
 type IMKUnicodeTextInput interface {
 	InsertText(string_ objc.ID)
 }
-

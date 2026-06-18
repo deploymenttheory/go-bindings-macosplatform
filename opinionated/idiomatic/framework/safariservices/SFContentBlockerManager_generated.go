@@ -41,4 +41,3 @@ type ContentBlockerManagerable interface {
 }
 
 var _ ContentBlockerManagerable = (*ContentBlockerManager)(nil)
-

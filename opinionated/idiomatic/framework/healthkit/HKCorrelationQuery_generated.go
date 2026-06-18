@@ -62,4 +62,3 @@ type CorrelationQueryable interface {
 }
 
 var _ CorrelationQueryable = (*CorrelationQuery)(nil)
-

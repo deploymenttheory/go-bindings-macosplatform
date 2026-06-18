@@ -16,7 +16,7 @@ type MLDictionaryConstraint struct {
 }
 
 var (
-	_clsMLDictionaryConstraint = _objcClass("MLDictionaryConstraint")
+	_clsMLDictionaryConstraint        = _objcClass("MLDictionaryConstraint")
 	_mLDictionaryConstraintSelKeyType = objc.RegisterName("keyType")
 )
 
@@ -34,4 +34,3 @@ func (o *MLDictionaryConstraint) KeyType() MLFeatureType {
 	_ret := objc.Send[MLFeatureType](o.Ptr(), _mLDictionaryConstraintSelKeyType)
 	return _ret
 }
-

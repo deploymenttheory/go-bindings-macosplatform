@@ -17,68 +17,68 @@ type DOMElement struct {
 }
 
 var (
-	_clsDOMElement = _objcClass("DOMElement")
-	_dOMElementSelGetAttribute = objc.RegisterName("getAttribute:")
-	_dOMElementSelSetAttributeValue = objc.RegisterName("setAttribute:value:")
-	_dOMElementSelRemoveAttribute = objc.RegisterName("removeAttribute:")
-	_dOMElementSelGetAttributeNode = objc.RegisterName("getAttributeNode:")
-	_dOMElementSelSetAttributeNode = objc.RegisterName("setAttributeNode:")
-	_dOMElementSelRemoveAttributeNode = objc.RegisterName("removeAttributeNode:")
-	_dOMElementSelGetElementsByTagName = objc.RegisterName("getElementsByTagName:")
-	_dOMElementSelGetAttributeNSLocalName = objc.RegisterName("getAttributeNS:localName:")
+	_clsDOMElement                                 = _objcClass("DOMElement")
+	_dOMElementSelGetAttribute                     = objc.RegisterName("getAttribute:")
+	_dOMElementSelSetAttributeValue                = objc.RegisterName("setAttribute:value:")
+	_dOMElementSelRemoveAttribute                  = objc.RegisterName("removeAttribute:")
+	_dOMElementSelGetAttributeNode                 = objc.RegisterName("getAttributeNode:")
+	_dOMElementSelSetAttributeNode                 = objc.RegisterName("setAttributeNode:")
+	_dOMElementSelRemoveAttributeNode              = objc.RegisterName("removeAttributeNode:")
+	_dOMElementSelGetElementsByTagName             = objc.RegisterName("getElementsByTagName:")
+	_dOMElementSelGetAttributeNSLocalName          = objc.RegisterName("getAttributeNS:localName:")
 	_dOMElementSelSetAttributeNSQualifiedNameValue = objc.RegisterName("setAttributeNS:qualifiedName:value:")
-	_dOMElementSelRemoveAttributeNSLocalName = objc.RegisterName("removeAttributeNS:localName:")
-	_dOMElementSelGetElementsByTagNameNSLocalName = objc.RegisterName("getElementsByTagNameNS:localName:")
-	_dOMElementSelGetAttributeNodeNSLocalName = objc.RegisterName("getAttributeNodeNS:localName:")
-	_dOMElementSelSetAttributeNodeNS = objc.RegisterName("setAttributeNodeNS:")
-	_dOMElementSelHasAttribute = objc.RegisterName("hasAttribute:")
-	_dOMElementSelHasAttributeNSLocalName = objc.RegisterName("hasAttributeNS:localName:")
-	_dOMElementSelFocus = objc.RegisterName("focus")
-	_dOMElementSelBlur = objc.RegisterName("blur")
-	_dOMElementSelScrollIntoView = objc.RegisterName("scrollIntoView:")
-	_dOMElementSelScrollIntoViewIfNeeded = objc.RegisterName("scrollIntoViewIfNeeded:")
-	_dOMElementSelGetElementsByClassName = objc.RegisterName("getElementsByClassName:")
-	_dOMElementSelWebkitRequestFullScreen = objc.RegisterName("webkitRequestFullScreen:")
-	_dOMElementSelQuerySelector = objc.RegisterName("querySelector:")
-	_dOMElementSelQuerySelectorAll = objc.RegisterName("querySelectorAll:")
-	_dOMElementSelTagName = objc.RegisterName("tagName")
-	_dOMElementSelStyle = objc.RegisterName("style")
-	_dOMElementSelOffsetLeft = objc.RegisterName("offsetLeft")
-	_dOMElementSelOffsetTop = objc.RegisterName("offsetTop")
-	_dOMElementSelOffsetWidth = objc.RegisterName("offsetWidth")
-	_dOMElementSelOffsetHeight = objc.RegisterName("offsetHeight")
-	_dOMElementSelClientLeft = objc.RegisterName("clientLeft")
-	_dOMElementSelClientTop = objc.RegisterName("clientTop")
-	_dOMElementSelClientWidth = objc.RegisterName("clientWidth")
-	_dOMElementSelClientHeight = objc.RegisterName("clientHeight")
-	_dOMElementSelScrollLeft = objc.RegisterName("scrollLeft")
-	_dOMElementSelSetScrollLeft = objc.RegisterName("setScrollLeft:")
-	_dOMElementSelScrollTop = objc.RegisterName("scrollTop")
-	_dOMElementSelSetScrollTop = objc.RegisterName("setScrollTop:")
-	_dOMElementSelScrollWidth = objc.RegisterName("scrollWidth")
-	_dOMElementSelScrollHeight = objc.RegisterName("scrollHeight")
-	_dOMElementSelOffsetParent = objc.RegisterName("offsetParent")
-	_dOMElementSelInnerHTML = objc.RegisterName("innerHTML")
-	_dOMElementSelSetInnerHTML = objc.RegisterName("setInnerHTML:")
-	_dOMElementSelOuterHTML = objc.RegisterName("outerHTML")
-	_dOMElementSelSetOuterHTML = objc.RegisterName("setOuterHTML:")
-	_dOMElementSelSetClassName = objc.RegisterName("setClassName:")
-	_dOMElementSelInnerText = objc.RegisterName("innerText")
-	_dOMElementSelPreviousElementSibling = objc.RegisterName("previousElementSibling")
-	_dOMElementSelNextElementSibling = objc.RegisterName("nextElementSibling")
-	_dOMElementSelFirstElementChild = objc.RegisterName("firstElementChild")
-	_dOMElementSelLastElementChild = objc.RegisterName("lastElementChild")
-	_dOMElementSelChildElementCount = objc.RegisterName("childElementCount")
-	_dOMElementSelSetAttribute = objc.RegisterName("setAttribute::")
-	_dOMElementSelGetAttributeNS = objc.RegisterName("getAttributeNS::")
-	_dOMElementSelSetAttributeNS = objc.RegisterName("setAttributeNS:::")
-	_dOMElementSelRemoveAttributeNS = objc.RegisterName("removeAttributeNS::")
-	_dOMElementSelGetElementsByTagNameNS = objc.RegisterName("getElementsByTagNameNS::")
-	_dOMElementSelGetAttributeNodeNS = objc.RegisterName("getAttributeNodeNS::")
-	_dOMElementSelHasAttributeNS = objc.RegisterName("hasAttributeNS::")
-	_dOMElementSelScrollByLines = objc.RegisterName("scrollByLines:")
-	_dOMElementSelScrollByPages = objc.RegisterName("scrollByPages:")
-	_dOMElementSelImage = objc.RegisterName("image")
+	_dOMElementSelRemoveAttributeNSLocalName       = objc.RegisterName("removeAttributeNS:localName:")
+	_dOMElementSelGetElementsByTagNameNSLocalName  = objc.RegisterName("getElementsByTagNameNS:localName:")
+	_dOMElementSelGetAttributeNodeNSLocalName      = objc.RegisterName("getAttributeNodeNS:localName:")
+	_dOMElementSelSetAttributeNodeNS               = objc.RegisterName("setAttributeNodeNS:")
+	_dOMElementSelHasAttribute                     = objc.RegisterName("hasAttribute:")
+	_dOMElementSelHasAttributeNSLocalName          = objc.RegisterName("hasAttributeNS:localName:")
+	_dOMElementSelFocus                            = objc.RegisterName("focus")
+	_dOMElementSelBlur                             = objc.RegisterName("blur")
+	_dOMElementSelScrollIntoView                   = objc.RegisterName("scrollIntoView:")
+	_dOMElementSelScrollIntoViewIfNeeded           = objc.RegisterName("scrollIntoViewIfNeeded:")
+	_dOMElementSelGetElementsByClassName           = objc.RegisterName("getElementsByClassName:")
+	_dOMElementSelWebkitRequestFullScreen          = objc.RegisterName("webkitRequestFullScreen:")
+	_dOMElementSelQuerySelector                    = objc.RegisterName("querySelector:")
+	_dOMElementSelQuerySelectorAll                 = objc.RegisterName("querySelectorAll:")
+	_dOMElementSelTagName                          = objc.RegisterName("tagName")
+	_dOMElementSelStyle                            = objc.RegisterName("style")
+	_dOMElementSelOffsetLeft                       = objc.RegisterName("offsetLeft")
+	_dOMElementSelOffsetTop                        = objc.RegisterName("offsetTop")
+	_dOMElementSelOffsetWidth                      = objc.RegisterName("offsetWidth")
+	_dOMElementSelOffsetHeight                     = objc.RegisterName("offsetHeight")
+	_dOMElementSelClientLeft                       = objc.RegisterName("clientLeft")
+	_dOMElementSelClientTop                        = objc.RegisterName("clientTop")
+	_dOMElementSelClientWidth                      = objc.RegisterName("clientWidth")
+	_dOMElementSelClientHeight                     = objc.RegisterName("clientHeight")
+	_dOMElementSelScrollLeft                       = objc.RegisterName("scrollLeft")
+	_dOMElementSelSetScrollLeft                    = objc.RegisterName("setScrollLeft:")
+	_dOMElementSelScrollTop                        = objc.RegisterName("scrollTop")
+	_dOMElementSelSetScrollTop                     = objc.RegisterName("setScrollTop:")
+	_dOMElementSelScrollWidth                      = objc.RegisterName("scrollWidth")
+	_dOMElementSelScrollHeight                     = objc.RegisterName("scrollHeight")
+	_dOMElementSelOffsetParent                     = objc.RegisterName("offsetParent")
+	_dOMElementSelInnerHTML                        = objc.RegisterName("innerHTML")
+	_dOMElementSelSetInnerHTML                     = objc.RegisterName("setInnerHTML:")
+	_dOMElementSelOuterHTML                        = objc.RegisterName("outerHTML")
+	_dOMElementSelSetOuterHTML                     = objc.RegisterName("setOuterHTML:")
+	_dOMElementSelSetClassName                     = objc.RegisterName("setClassName:")
+	_dOMElementSelInnerText                        = objc.RegisterName("innerText")
+	_dOMElementSelPreviousElementSibling           = objc.RegisterName("previousElementSibling")
+	_dOMElementSelNextElementSibling               = objc.RegisterName("nextElementSibling")
+	_dOMElementSelFirstElementChild                = objc.RegisterName("firstElementChild")
+	_dOMElementSelLastElementChild                 = objc.RegisterName("lastElementChild")
+	_dOMElementSelChildElementCount                = objc.RegisterName("childElementCount")
+	_dOMElementSelSetAttribute                     = objc.RegisterName("setAttribute::")
+	_dOMElementSelGetAttributeNS                   = objc.RegisterName("getAttributeNS::")
+	_dOMElementSelSetAttributeNS                   = objc.RegisterName("setAttributeNS:::")
+	_dOMElementSelRemoveAttributeNS                = objc.RegisterName("removeAttributeNS::")
+	_dOMElementSelGetElementsByTagNameNS           = objc.RegisterName("getElementsByTagNameNS::")
+	_dOMElementSelGetAttributeNodeNS               = objc.RegisterName("getAttributeNodeNS::")
+	_dOMElementSelHasAttributeNS                   = objc.RegisterName("hasAttributeNS::")
+	_dOMElementSelScrollByLines                    = objc.RegisterName("scrollByLines:")
+	_dOMElementSelScrollByPages                    = objc.RegisterName("scrollByPages:")
+	_dOMElementSelImage                            = objc.RegisterName("image")
 )
 
 func DOMElementFromID(id objc.ID) *DOMElement {
@@ -93,7 +93,9 @@ func DOMElementFromID(id objc.ID) *DOMElement {
 
 func (o *DOMElement) GetAttribute(name *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttribute, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,31 +109,41 @@ func (o *DOMElement) RemoveAttribute(name *foundation.NSString) {
 
 func (o *DOMElement) GetAttributeNode(name *foundation.NSString) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttributeNode, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
 func (o *DOMElement) SetAttributeNode(newAttr *DOMAttr) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelSetAttributeNode, newAttr.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
 func (o *DOMElement) RemoveAttributeNode(oldAttr *DOMAttr) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelRemoveAttributeNode, oldAttr.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
 func (o *DOMElement) GetElementsByTagName(name *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetElementsByTagName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
 func (o *DOMElement) GetAttributeNSLocalName(namespaceURI *foundation.NSString, localName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttributeNSLocalName, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -145,19 +157,25 @@ func (o *DOMElement) RemoveAttributeNSLocalName(namespaceURI *foundation.NSStrin
 
 func (o *DOMElement) GetElementsByTagNameNSLocalName(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetElementsByTagNameNSLocalName, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
 func (o *DOMElement) GetAttributeNodeNSLocalName(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttributeNodeNSLocalName, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
 func (o *DOMElement) SetAttributeNodeNS(newAttr *DOMAttr) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelSetAttributeNodeNS, newAttr.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
@@ -189,7 +207,9 @@ func (o *DOMElement) ScrollIntoViewIfNeeded(centerIfNeeded bool) {
 
 func (o *DOMElement) GetElementsByClassName(name *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetElementsByClassName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
@@ -199,25 +219,33 @@ func (o *DOMElement) WebkitRequestFullScreen(flags uint16) {
 
 func (o *DOMElement) QuerySelector(selectors *foundation.NSString) *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelQuerySelector, selectors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMElement) QuerySelectorAll(selectors *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelQuerySelectorAll, selectors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
 func (o *DOMElement) TagName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelTagName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMElement) Style() *DOMCSSStyleDeclaration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMCSSStyleDeclarationFromID(_ret)
 }
 
@@ -291,13 +319,17 @@ func (o *DOMElement) ScrollHeight() int {
 
 func (o *DOMElement) OffsetParent() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelOffsetParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMElement) InnerHTML() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelInnerHTML)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -307,7 +339,9 @@ func (o *DOMElement) SetInnerHTML(innerHTML *foundation.NSString) {
 
 func (o *DOMElement) OuterHTML() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelOuterHTML)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -321,31 +355,41 @@ func (o *DOMElement) SetClassName(className *foundation.NSString) {
 
 func (o *DOMElement) InnerText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelInnerText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMElement) PreviousElementSibling() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelPreviousElementSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMElement) NextElementSibling() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelNextElementSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMElement) FirstElementChild() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelFirstElementChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
 func (o *DOMElement) LastElementChild() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelLastElementChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
@@ -360,7 +404,9 @@ func (o *DOMElement) SetAttribute(name *foundation.NSString, value *foundation.N
 
 func (o *DOMElement) GetAttributeNS(namespaceURI *foundation.NSString, localName *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttributeNS, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -374,13 +420,17 @@ func (o *DOMElement) RemoveAttributeNS(namespaceURI *foundation.NSString, localN
 
 func (o *DOMElement) GetElementsByTagNameNS(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetElementsByTagNameNS, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
 func (o *DOMElement) GetAttributeNodeNS(namespaceURI *foundation.NSString, localName *foundation.NSString) *DOMAttr {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelGetAttributeNodeNS, namespaceURI.Ptr(), localName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMAttrFromID(_ret)
 }
 
@@ -399,7 +449,8 @@ func (o *DOMElement) ScrollByPages(pages int) {
 
 func (o *DOMElement) Image() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMElementSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
-

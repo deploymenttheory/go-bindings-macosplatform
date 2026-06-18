@@ -21,11 +21,11 @@ type SFKeychainSavePanel struct {
 }
 
 var (
-	_clsSFKeychainSavePanel = _objcClass("SFKeychainSavePanel")
+	_clsSFKeychainSavePanel                        = _objcClass("SFKeychainSavePanel")
 	_sFKeychainSavePanelSelSharedKeychainSavePanel = objc.RegisterName("sharedKeychainSavePanel")
-	_sFKeychainSavePanelSelSetPassword = objc.RegisterName("setPassword:")
-	_sFKeychainSavePanelSelKeychain = objc.RegisterName("keychain")
-	_sFKeychainSavePanelSelError = objc.RegisterName("error")
+	_sFKeychainSavePanelSelSetPassword             = objc.RegisterName("setPassword:")
+	_sFKeychainSavePanelSelKeychain                = objc.RegisterName("keychain")
+	_sFKeychainSavePanelSelError                   = objc.RegisterName("error")
 )
 
 func SFKeychainSavePanelFromID(id objc.ID) *SFKeychainSavePanel {
@@ -41,7 +41,9 @@ func SFKeychainSavePanelFromID(id objc.ID) *SFKeychainSavePanel {
 // @method sharedKeychainSavePanel @abstract Returns a global instance of SFKeychainSavePanel object.
 func SFKeychainSavePanelSharedKeychainSavePanel() *SFKeychainSavePanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSFKeychainSavePanel), _sFKeychainSavePanelSelSharedKeychainSavePanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFKeychainSavePanelFromID(_ret)
 }
 
@@ -61,4 +63,3 @@ func (o *SFKeychainSavePanel) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _sFKeychainSavePanelSelError)
 	return _ret
 }
-

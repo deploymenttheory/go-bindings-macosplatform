@@ -16,26 +16,26 @@ type MTL4RenderPipelineColorAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTL4RenderPipelineColorAttachmentDescriptor = _objcClass("MTL4RenderPipelineColorAttachmentDescriptor")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelReset = objc.RegisterName("reset")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelPixelFormat = objc.RegisterName("pixelFormat")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetPixelFormat = objc.RegisterName("setPixelFormat:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelBlendingState = objc.RegisterName("blendingState")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetBlendingState = objc.RegisterName("setBlendingState:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSourceRGBBlendFactor = objc.RegisterName("sourceRGBBlendFactor")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceRGBBlendFactor = objc.RegisterName("setSourceRGBBlendFactor:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelDestinationRGBBlendFactor = objc.RegisterName("destinationRGBBlendFactor")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetDestinationRGBBlendFactor = objc.RegisterName("setDestinationRGBBlendFactor:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelRgbBlendOperation = objc.RegisterName("rgbBlendOperation")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetRgbBlendOperation = objc.RegisterName("setRgbBlendOperation:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSourceAlphaBlendFactor = objc.RegisterName("sourceAlphaBlendFactor")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceAlphaBlendFactor = objc.RegisterName("setSourceAlphaBlendFactor:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelDestinationAlphaBlendFactor = objc.RegisterName("destinationAlphaBlendFactor")
+	_clsMTL4RenderPipelineColorAttachmentDescriptor                               = _objcClass("MTL4RenderPipelineColorAttachmentDescriptor")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelReset                          = objc.RegisterName("reset")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelPixelFormat                    = objc.RegisterName("pixelFormat")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetPixelFormat                 = objc.RegisterName("setPixelFormat:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelBlendingState                  = objc.RegisterName("blendingState")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetBlendingState               = objc.RegisterName("setBlendingState:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSourceRGBBlendFactor           = objc.RegisterName("sourceRGBBlendFactor")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceRGBBlendFactor        = objc.RegisterName("setSourceRGBBlendFactor:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelDestinationRGBBlendFactor      = objc.RegisterName("destinationRGBBlendFactor")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetDestinationRGBBlendFactor   = objc.RegisterName("setDestinationRGBBlendFactor:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelRgbBlendOperation              = objc.RegisterName("rgbBlendOperation")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetRgbBlendOperation           = objc.RegisterName("setRgbBlendOperation:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSourceAlphaBlendFactor         = objc.RegisterName("sourceAlphaBlendFactor")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceAlphaBlendFactor      = objc.RegisterName("setSourceAlphaBlendFactor:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelDestinationAlphaBlendFactor    = objc.RegisterName("destinationAlphaBlendFactor")
 	_mTL4RenderPipelineColorAttachmentDescriptorSelSetDestinationAlphaBlendFactor = objc.RegisterName("setDestinationAlphaBlendFactor:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelAlphaBlendOperation = objc.RegisterName("alphaBlendOperation")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetAlphaBlendOperation = objc.RegisterName("setAlphaBlendOperation:")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelWriteMask = objc.RegisterName("writeMask")
-	_mTL4RenderPipelineColorAttachmentDescriptorSelSetWriteMask = objc.RegisterName("setWriteMask:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelAlphaBlendOperation            = objc.RegisterName("alphaBlendOperation")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetAlphaBlendOperation         = objc.RegisterName("setAlphaBlendOperation:")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelWriteMask                      = objc.RegisterName("writeMask")
+	_mTL4RenderPipelineColorAttachmentDescriptorSelSetWriteMask                   = objc.RegisterName("setWriteMask:")
 )
 
 func MTL4RenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -53,7 +53,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) Reset() {
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelReset)
 }
 
-// Configures the pixel format. This property defaults to ``MTLPixelFormatInvalid``.
+// Configures the pixel format. This property defaults to “MTLPixelFormatInvalid“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) PixelFormat() MTLPixelFormat {
 	_ret := objc.Send[MTLPixelFormat](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelPixelFormat)
 	return _ret
@@ -63,7 +63,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetPixelFormat, pixelFormat)
 }
 
-// Configure the blend state for color attachments the pipeline state uses. This property's default value is ``MTL4BlendStateDisabled``.
+// Configure the blend state for color attachments the pipeline state uses. This property's default value is “MTL4BlendStateDisabled“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) BlendingState() MTL4BlendState {
 	_ret := objc.Send[MTL4BlendState](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelBlendingState)
 	return _ret
@@ -73,7 +73,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetBlendingState(blendingS
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetBlendingState, blendingState)
 }
 
-// Configures the source RGB blend factor. This property defaults to ``MTLBlendFactorOne``.
+// Configures the source RGB blend factor. This property defaults to “MTLBlendFactorOne“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() MTLBlendFactor {
 	_ret := objc.Send[MTLBlendFactor](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelSourceRGBBlendFactor)
 	return _ret
@@ -83,7 +83,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetSourceRGBBlendFactor(so
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceRGBBlendFactor, sourceRGBBlendFactor)
 }
 
-// Configures the destination RGB blend factor. This property defaults to ``MTLBlendFactorZero``.
+// Configures the destination RGB blend factor. This property defaults to “MTLBlendFactorZero“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() MTLBlendFactor {
 	_ret := objc.Send[MTLBlendFactor](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelDestinationRGBBlendFactor)
 	return _ret
@@ -93,7 +93,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetDestinationRGBBlendFact
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetDestinationRGBBlendFactor, destinationRGBBlendFactor)
 }
 
-// Configures the RGB blend operation. This property defaults to ``MTLBlendOperationAdd``.
+// Configures the RGB blend operation. This property defaults to “MTLBlendOperationAdd“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() MTLBlendOperation {
 	_ret := objc.Send[MTLBlendOperation](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelRgbBlendOperation)
 	return _ret
@@ -103,7 +103,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetRgbBlendOperation(rgbBl
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetRgbBlendOperation, rgbBlendOperation)
 }
 
-// Configures the source-alpha blend factor. This property defaults to ``MTLBlendFactorOne``.
+// Configures the source-alpha blend factor. This property defaults to “MTLBlendFactorOne“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() MTLBlendFactor {
 	_ret := objc.Send[MTLBlendFactor](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelSourceAlphaBlendFactor)
 	return _ret
@@ -113,7 +113,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetSourceAlphaBlendFactor(
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetSourceAlphaBlendFactor, sourceAlphaBlendFactor)
 }
 
-// Configures the destination-alpha blend factor. This property defaults to ``MTLBlendFactorZero``.
+// Configures the destination-alpha blend factor. This property defaults to “MTLBlendFactorZero“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() MTLBlendFactor {
 	_ret := objc.Send[MTLBlendFactor](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelDestinationAlphaBlendFactor)
 	return _ret
@@ -123,7 +123,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetDestinationAlphaBlendFa
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetDestinationAlphaBlendFactor, destinationAlphaBlendFactor)
 }
 
-// Configures the alpha blending operation. This property defaults to ``MTLBlendOperationAdd``.
+// Configures the alpha blending operation. This property defaults to “MTLBlendOperationAdd“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() MTLBlendOperation {
 	_ret := objc.Send[MTLBlendOperation](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelAlphaBlendOperation)
 	return _ret
@@ -133,7 +133,7 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetAlphaBlendOperation(alp
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetAlphaBlendOperation, alphaBlendOperation)
 }
 
-// Configures the color write mask. This property defaults to ``MTLColorWriteMaskAll``.
+// Configures the color write mask. This property defaults to “MTLColorWriteMaskAll“.
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) WriteMask() MTLColorWriteMask {
 	_ret := objc.Send[MTLColorWriteMask](o.Ptr(), _mTL4RenderPipelineColorAttachmentDescriptorSelWriteMask)
 	return _ret
@@ -142,4 +142,3 @@ func (o *MTL4RenderPipelineColorAttachmentDescriptor) WriteMask() MTLColorWriteM
 func (o *MTL4RenderPipelineColorAttachmentDescriptor) SetWriteMask(writeMask MTLColorWriteMask) {
 	o.Ptr().Send(_mTL4RenderPipelineColorAttachmentDescriptorSelSetWriteMask, writeMask)
 }
-

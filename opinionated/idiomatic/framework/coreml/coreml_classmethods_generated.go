@@ -671,4 +671,3 @@ func UpdateTaskForModelAtURLTrainingDataProgressHandlersError(modelURL string, t
 	}
 	return &UpdateTask{inner: _r}, nil
 }
-

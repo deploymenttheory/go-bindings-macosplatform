@@ -51,7 +51,9 @@ func (x *CoreMLFeatureValueObservation) FeatureName() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *CoreMLFeatureValueObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+func (x *CoreMLFeatureValueObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNObservation
+}
 
 // CoreMLFeatureValueObservationable is the interface implemented by [CoreMLFeatureValueObservation], for mocking and DI.
 type CoreMLFeatureValueObservationable interface {
@@ -61,4 +63,3 @@ type CoreMLFeatureValueObservationable interface {
 }
 
 var _ CoreMLFeatureValueObservationable = (*CoreMLFeatureValueObservation)(nil)
-

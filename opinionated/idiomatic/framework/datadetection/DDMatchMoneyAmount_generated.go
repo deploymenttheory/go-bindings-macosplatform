@@ -60,4 +60,3 @@ type MatchMoneyAmountable interface {
 }
 
 var _ MatchMoneyAmountable = (*MatchMoneyAmount)(nil)
-

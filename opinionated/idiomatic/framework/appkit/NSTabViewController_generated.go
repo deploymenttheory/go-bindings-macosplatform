@@ -70,7 +70,9 @@ func (x *TabViewController) WithTabViewItems(items ...*raw.NSTabViewItem) *TabVi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTabViewItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -116,7 +118,9 @@ func (x *TabViewController) WithChildViewControllers(items ...ViewControllerProv
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -294,9 +298,13 @@ func (x *TabViewController) SetSelectedTabViewItemIndex(selectedTabViewItemIndex
 	x.inner.SetSelectedTabViewItemIndex(selectedTabViewItemIndex)
 }
 
-func (x *TabViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
+func (x *TabViewController) asViewController() *raw.NSViewController {
+	return &x.inner.NSViewController
+}
 
-func (x *TabViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+func (x *TabViewController) asResponder() *raw.NSResponder {
+	return &x.inner.NSViewController.NSResponder
+}
 
 // TabViewControllerable is the interface implemented by [TabViewController], for mocking and DI.
 type TabViewControllerable interface {
@@ -344,4 +352,3 @@ type TabViewControllerable interface {
 }
 
 var _ TabViewControllerable = (*TabViewController)(nil)
-

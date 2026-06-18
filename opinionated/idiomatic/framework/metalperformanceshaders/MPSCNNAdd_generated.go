@@ -190,11 +190,17 @@ func (x *CNNAdd) WithLabel(label string) *CNNAdd {
 	return x
 }
 
-func (x *CNNAdd) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
+func (x *CNNAdd) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
+	return &x.inner.MPSCNNArithmetic
+}
 
-func (x *CNNAdd) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
+func (x *CNNAdd) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
+}
 
-func (x *CNNAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNAdd) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNAddable is the interface implemented by [CNNAdd], for mocking and DI.
 type CNNAddable interface {
@@ -227,4 +233,3 @@ type CNNAddable interface {
 }
 
 var _ CNNAddable = (*CNNAdd)(nil)
-

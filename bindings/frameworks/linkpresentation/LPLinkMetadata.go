@@ -16,20 +16,20 @@ type LPLinkMetadata struct {
 }
 
 var (
-	_clsLPLinkMetadata = _objcClass("LPLinkMetadata")
-	_lPLinkMetadataSelOriginalURL = objc.RegisterName("originalURL")
-	_lPLinkMetadataSelSetOriginalURL = objc.RegisterName("setOriginalURL:")
-	_lPLinkMetadataSelURL = objc.RegisterName("URL")
-	_lPLinkMetadataSelSetURL = objc.RegisterName("setURL:")
-	_lPLinkMetadataSelTitle = objc.RegisterName("title")
-	_lPLinkMetadataSelSetTitle = objc.RegisterName("setTitle:")
-	_lPLinkMetadataSelIconProvider = objc.RegisterName("iconProvider")
-	_lPLinkMetadataSelSetIconProvider = objc.RegisterName("setIconProvider:")
-	_lPLinkMetadataSelImageProvider = objc.RegisterName("imageProvider")
-	_lPLinkMetadataSelSetImageProvider = objc.RegisterName("setImageProvider:")
-	_lPLinkMetadataSelVideoProvider = objc.RegisterName("videoProvider")
-	_lPLinkMetadataSelSetVideoProvider = objc.RegisterName("setVideoProvider:")
-	_lPLinkMetadataSelRemoteVideoURL = objc.RegisterName("remoteVideoURL")
+	_clsLPLinkMetadata                  = _objcClass("LPLinkMetadata")
+	_lPLinkMetadataSelOriginalURL       = objc.RegisterName("originalURL")
+	_lPLinkMetadataSelSetOriginalURL    = objc.RegisterName("setOriginalURL:")
+	_lPLinkMetadataSelURL               = objc.RegisterName("URL")
+	_lPLinkMetadataSelSetURL            = objc.RegisterName("setURL:")
+	_lPLinkMetadataSelTitle             = objc.RegisterName("title")
+	_lPLinkMetadataSelSetTitle          = objc.RegisterName("setTitle:")
+	_lPLinkMetadataSelIconProvider      = objc.RegisterName("iconProvider")
+	_lPLinkMetadataSelSetIconProvider   = objc.RegisterName("setIconProvider:")
+	_lPLinkMetadataSelImageProvider     = objc.RegisterName("imageProvider")
+	_lPLinkMetadataSelSetImageProvider  = objc.RegisterName("setImageProvider:")
+	_lPLinkMetadataSelVideoProvider     = objc.RegisterName("videoProvider")
+	_lPLinkMetadataSelSetVideoProvider  = objc.RegisterName("setVideoProvider:")
+	_lPLinkMetadataSelRemoteVideoURL    = objc.RegisterName("remoteVideoURL")
 	_lPLinkMetadataSelSetRemoteVideoURL = objc.RegisterName("setRemoteVideoURL:")
 )
 
@@ -46,7 +46,9 @@ func LPLinkMetadataFromID(id objc.ID) *LPLinkMetadata {
 // The original URL of the metadata request.
 func (o *LPLinkMetadata) OriginalURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelOriginalURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -54,10 +56,12 @@ func (o *LPLinkMetadata) SetOriginalURL(originalURL *foundation.NSURL) {
 	o.Ptr().Send(_lPLinkMetadataSelSetOriginalURL, originalURL.Ptr())
 }
 
-// The URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the ``LPLinkMetadata/originalURL`` to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
+// The URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
 func (o *LPLinkMetadata) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -68,7 +72,9 @@ func (o *LPLinkMetadata) SetURL(uRL *foundation.NSURL) {
 // A representative title for the URL.
 func (o *LPLinkMetadata) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *LPLinkMetadata) SetTitle(title *foundation.NSString) {
 // An object that retrieves data corresponding to a representative icon for the URL.
 func (o *LPLinkMetadata) IconProvider() *foundation.NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelIconProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSItemProviderFromID(_ret)
 }
 
@@ -90,7 +98,9 @@ func (o *LPLinkMetadata) SetIconProvider(iconProvider *foundation.NSItemProvider
 // An object that retrieves data corresponding to a representative image for the URL.
 func (o *LPLinkMetadata) ImageProvider() *foundation.NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelImageProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSItemProviderFromID(_ret)
 }
 
@@ -101,7 +111,9 @@ func (o *LPLinkMetadata) SetImageProvider(imageProvider *foundation.NSItemProvid
 // An object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
 func (o *LPLinkMetadata) VideoProvider() *foundation.NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelVideoProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSItemProviderFromID(_ret)
 }
 
@@ -112,11 +124,12 @@ func (o *LPLinkMetadata) SetVideoProvider(videoProvider *foundation.NSItemProvid
 // A remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
 func (o *LPLinkMetadata) RemoteVideoURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lPLinkMetadataSelRemoteVideoURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *LPLinkMetadata) SetRemoteVideoURL(remoteVideoURL *foundation.NSURL) {
 	o.Ptr().Send(_lPLinkMetadataSelSetRemoteVideoURL, remoteVideoURL.Ptr())
 }
-

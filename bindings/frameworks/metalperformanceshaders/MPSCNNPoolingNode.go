@@ -18,16 +18,16 @@ type MPSCNNPoolingNode struct {
 }
 
 var (
-	_clsMPSCNNPoolingNode = _objcClass("MPSCNNPoolingNode")
-	_mPSCNNPoolingNodeSelNodeWithSourceFilterSize = objc.RegisterName("nodeWithSource:filterSize:")
-	_mPSCNNPoolingNodeSelNodeWithSourceFilterSizeStride = objc.RegisterName("nodeWithSource:filterSize:stride:")
+	_clsMPSCNNPoolingNode                                                                    = _objcClass("MPSCNNPoolingNode")
+	_mPSCNNPoolingNodeSelNodeWithSourceFilterSize                                            = objc.RegisterName("nodeWithSource:filterSize:")
+	_mPSCNNPoolingNodeSelNodeWithSourceFilterSizeStride                                      = objc.RegisterName("nodeWithSource:filterSize:stride:")
 	_mPSCNNPoolingNodeSelInitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY = objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:")
-	_mPSCNNPoolingNodeSelInitWithSourceFilterSizeStride = objc.RegisterName("initWithSource:filterSize:stride:")
-	_mPSCNNPoolingNodeSelInitWithSourceFilterSize = objc.RegisterName("initWithSource:filterSize:")
-	_mPSCNNPoolingNodeSelKernelWidth = objc.RegisterName("kernelWidth")
-	_mPSCNNPoolingNodeSelKernelHeight = objc.RegisterName("kernelHeight")
-	_mPSCNNPoolingNodeSelStrideInPixelsX = objc.RegisterName("strideInPixelsX")
-	_mPSCNNPoolingNodeSelStrideInPixelsY = objc.RegisterName("strideInPixelsY")
+	_mPSCNNPoolingNodeSelInitWithSourceFilterSizeStride                                      = objc.RegisterName("initWithSource:filterSize:stride:")
+	_mPSCNNPoolingNodeSelInitWithSourceFilterSize                                            = objc.RegisterName("initWithSource:filterSize:")
+	_mPSCNNPoolingNodeSelKernelWidth                                                         = objc.RegisterName("kernelWidth")
+	_mPSCNNPoolingNodeSelKernelHeight                                                        = objc.RegisterName("kernelHeight")
+	_mPSCNNPoolingNodeSelStrideInPixelsX                                                     = objc.RegisterName("strideInPixelsX")
+	_mPSCNNPoolingNodeSelStrideInPixelsY                                                     = objc.RegisterName("strideInPixelsY")
 )
 
 func MPSCNNPoolingNodeFromID(id objc.ID) *MPSCNNPoolingNode {
@@ -43,35 +43,45 @@ func MPSCNNPoolingNodeFromID(id objc.ID) *MPSCNNPoolingNode {
 // @abstract Convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = size @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func MPSCNNPoolingNodeNodeWithSourceFilterSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint) *MPSCNNPoolingNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNPoolingNode), _mPSCNNPoolingNodeSelNodeWithSourceFilterSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels and a different stride @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func MPSCNNPoolingNodeNodeWithSourceFilterSizeStride(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint, stride uint) *MPSCNNPoolingNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNPoolingNode), _mPSCNNPoolingNodeSelNodeWithSourceFilterSizeStride, sourceNode.Ptr(), size, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNPooling kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      kernelWidth             The width of the max filter window @param      kernelHeight            The height of the max filter window @param      strideInPixelsX         The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY         The output stride (downsampling factor) in the y dimension. @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func (o *MPSCNNPoolingNode) InitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(sourceNode *mpsneuralnetwork.MPSNNImageNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *MPSCNNPoolingNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingNodeSelInitWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY, sourceNode.Ptr(), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNPooling nodes with square kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func (o *MPSCNNPoolingNode) InitWithSourceFilterSizeStride(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint, stride uint) *MPSCNNPoolingNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingNodeSelInitWithSourceFilterSizeStride, sourceNode.Ptr(), size, stride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingNodeFromID(_ret)
 }
 
 // @abstract Convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = size @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
 func (o *MPSCNNPoolingNode) InitWithSourceFilterSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, size uint) *MPSCNNPoolingNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNPoolingNodeSelInitWithSourceFilterSize, sourceNode.Ptr(), size)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNPoolingNodeFromID(_ret)
 }
 
@@ -94,4 +104,3 @@ func (o *MPSCNNPoolingNode) StrideInPixelsY() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mPSCNNPoolingNodeSelStrideInPixelsY)
 	return _ret
 }
-

@@ -18,16 +18,16 @@ type MIDIUMPCIProfile struct {
 }
 
 var (
-	_clsMIDIUMPCIProfile = _objcClass("MIDIUMPCIProfile")
+	_clsMIDIUMPCIProfile                                        = _objcClass("MIDIUMPCIProfile")
 	_mIDIUMPCIProfileSelSetProfileStateEnabledChannelCountError = objc.RegisterName("setProfileState:enabledChannelCount:error:")
-	_mIDIUMPCIProfileSelName = objc.RegisterName("name")
-	_mIDIUMPCIProfileSelProfileID = objc.RegisterName("profileID")
-	_mIDIUMPCIProfileSelProfileType = objc.RegisterName("profileType")
-	_mIDIUMPCIProfileSelGroupOffset = objc.RegisterName("groupOffset")
-	_mIDIUMPCIProfileSelFirstChannel = objc.RegisterName("firstChannel")
-	_mIDIUMPCIProfileSelEnabledChannelCount = objc.RegisterName("enabledChannelCount")
-	_mIDIUMPCIProfileSelTotalChannelCount = objc.RegisterName("totalChannelCount")
-	_mIDIUMPCIProfileSelIsEnabled = objc.RegisterName("isEnabled")
+	_mIDIUMPCIProfileSelName                                    = objc.RegisterName("name")
+	_mIDIUMPCIProfileSelProfileID                               = objc.RegisterName("profileID")
+	_mIDIUMPCIProfileSelProfileType                             = objc.RegisterName("profileType")
+	_mIDIUMPCIProfileSelGroupOffset                             = objc.RegisterName("groupOffset")
+	_mIDIUMPCIProfileSelFirstChannel                            = objc.RegisterName("firstChannel")
+	_mIDIUMPCIProfileSelEnabledChannelCount                     = objc.RegisterName("enabledChannelCount")
+	_mIDIUMPCIProfileSelTotalChannelCount                       = objc.RegisterName("totalChannelCount")
+	_mIDIUMPCIProfileSelIsEnabled                               = objc.RegisterName("isEnabled")
 )
 
 func MIDIUMPCIProfileFromID(id objc.ID) *MIDIUMPCIProfile {
@@ -53,7 +53,9 @@ func (o *MIDIUMPCIProfile) SetProfileStateEnabledChannelCountError(isEnabled boo
 // @property 	name @brief		The name of the MIDI-CI proifle.
 func (o *MIDIUMPCIProfile) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPCIProfileSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -98,4 +100,3 @@ func (o *MIDIUMPCIProfile) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDIUMPCIProfileSelIsEnabled)
 	return _ret
 }
-

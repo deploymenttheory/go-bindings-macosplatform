@@ -19,7 +19,9 @@ type MTRBaseClusterNetworkCommissioning struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterNetworkCommissioning].
-func (x *MTRBaseClusterNetworkCommissioning) Unwrap() *raw.MTRBaseClusterNetworkCommissioning { return x.inner }
+func (x *MTRBaseClusterNetworkCommissioning) Unwrap() *raw.MTRBaseClusterNetworkCommissioning {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -1455,9 +1457,13 @@ func (x *MTRBaseClusterNetworkCommissioning) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-func (x *MTRBaseClusterNetworkCommissioning) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterNetworkCommissioning) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterNetworkCommissioning) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterNetworkCommissioning) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterNetworkCommissioningable is the interface implemented by [MTRBaseClusterNetworkCommissioning], for mocking and DI.
 type MTRBaseClusterNetworkCommissioningable interface {
@@ -1540,4 +1546,3 @@ type MTRBaseClusterNetworkCommissioningable interface {
 }
 
 var _ MTRBaseClusterNetworkCommissioningable = (*MTRBaseClusterNetworkCommissioning)(nil)
-

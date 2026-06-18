@@ -15,7 +15,9 @@ type SyncEngineWillFetchRecordZoneChangesEvent struct {
 }
 
 // Unwrap returns the underlying [raw.CKSyncEngineWillFetchRecordZoneChangesEvent].
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) Unwrap() *raw.CKSyncEngineWillFetchRecordZoneChangesEvent { return x.inner }
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) Unwrap() *raw.CKSyncEngineWillFetchRecordZoneChangesEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -44,7 +46,9 @@ func (x *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
+	return &x.inner.CKSyncEngineEvent
+}
 
 // SyncEngineWillFetchRecordZoneChangesEventable is the interface implemented by [SyncEngineWillFetchRecordZoneChangesEvent], for mocking and DI.
 type SyncEngineWillFetchRecordZoneChangesEventable interface {
@@ -53,4 +57,3 @@ type SyncEngineWillFetchRecordZoneChangesEventable interface {
 }
 
 var _ SyncEngineWillFetchRecordZoneChangesEventable = (*SyncEngineWillFetchRecordZoneChangesEvent)(nil)
-

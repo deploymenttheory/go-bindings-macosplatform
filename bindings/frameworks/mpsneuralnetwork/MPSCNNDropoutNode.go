@@ -16,16 +16,16 @@ type MPSCNNDropoutNode struct {
 }
 
 var (
-	_clsMPSCNNDropoutNode = _objcClass("MPSCNNDropoutNode")
-	_mPSCNNDropoutNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSCNNDropoutNodeSelInitWithSource = objc.RegisterName("initWithSource:")
-	_mPSCNNDropoutNodeSelNodeWithSourceKeepProbability = objc.RegisterName("nodeWithSource:keepProbability:")
-	_mPSCNNDropoutNodeSelInitWithSourceKeepProbability = objc.RegisterName("initWithSource:keepProbability:")
+	_clsMPSCNNDropoutNode                                                    = _objcClass("MPSCNNDropoutNode")
+	_mPSCNNDropoutNodeSelNodeWithSource                                      = objc.RegisterName("nodeWithSource:")
+	_mPSCNNDropoutNodeSelInitWithSource                                      = objc.RegisterName("initWithSource:")
+	_mPSCNNDropoutNodeSelNodeWithSourceKeepProbability                       = objc.RegisterName("nodeWithSource:keepProbability:")
+	_mPSCNNDropoutNodeSelInitWithSourceKeepProbability                       = objc.RegisterName("initWithSource:keepProbability:")
 	_mPSCNNDropoutNodeSelNodeWithSourceKeepProbabilitySeedMaskStrideInPixels = objc.RegisterName("nodeWithSource:keepProbability:seed:maskStrideInPixels:")
 	_mPSCNNDropoutNodeSelInitWithSourceKeepProbabilitySeedMaskStrideInPixels = objc.RegisterName("initWithSource:keepProbability:seed:maskStrideInPixels:")
-	_mPSCNNDropoutNodeSelKeepProbability = objc.RegisterName("keepProbability")
-	_mPSCNNDropoutNodeSelSeed = objc.RegisterName("seed")
-	_mPSCNNDropoutNodeSelMaskStrideInPixels = objc.RegisterName("maskStrideInPixels")
+	_mPSCNNDropoutNodeSelKeepProbability                                     = objc.RegisterName("keepProbability")
+	_mPSCNNDropoutNodeSelSeed                                                = objc.RegisterName("seed")
+	_mPSCNNDropoutNodeSelMaskStrideInPixels                                  = objc.RegisterName("maskStrideInPixels")
 )
 
 func MPSCNNDropoutNodeFromID(id objc.ID) *MPSCNNDropoutNode {
@@ -40,37 +40,49 @@ func MPSCNNDropoutNodeFromID(id objc.ID) *MPSCNNDropoutNode {
 
 func MPSCNNDropoutNodeNodeWithSource(source *MPSNNImageNode) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDropoutNode), _mPSCNNDropoutNodeSelNodeWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
 func (o *MPSCNNDropoutNode) InitWithSource(source *MPSNNImageNode) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutNodeSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
 func MPSCNNDropoutNodeNodeWithSourceKeepProbability(source *MPSNNImageNode, keepProbability float32) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDropoutNode), _mPSCNNDropoutNodeSelNodeWithSourceKeepProbability, source.Ptr(), keepProbability)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
 func (o *MPSCNNDropoutNode) InitWithSourceKeepProbability(source *MPSNNImageNode, keepProbability float32) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutNodeSelInitWithSourceKeepProbability, source.Ptr(), keepProbability)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
 func MPSCNNDropoutNodeNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *MPSNNImageNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNDropoutNode), _mPSCNNDropoutNodeSelNodeWithSourceKeepProbabilitySeedMaskStrideInPixels, source.Ptr(), keepProbability, seed, maskStrideInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
 func (o *MPSCNNDropoutNode) InitWithSourceKeepProbabilitySeedMaskStrideInPixels(source *MPSNNImageNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *MPSCNNDropoutNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutNodeSelInitWithSourceKeepProbabilitySeedMaskStrideInPixels, source.Ptr(), keepProbability, seed, maskStrideInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutNodeFromID(_ret)
 }
 
@@ -88,4 +100,3 @@ func (o *MPSCNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
 	_ret := objc.Send[metal.MTLSize](o.Ptr(), _mPSCNNDropoutNodeSelMaskStrideInPixels)
 	return _ret
 }
-

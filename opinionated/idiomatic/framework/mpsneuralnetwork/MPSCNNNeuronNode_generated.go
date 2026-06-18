@@ -78,4 +78,3 @@ type CNNNeuronNodeable interface {
 }
 
 var _ CNNNeuronNodeable = (*CNNNeuronNode)(nil)
-

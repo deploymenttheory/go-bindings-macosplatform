@@ -11,8 +11,8 @@ import (
 type Tcl_PathType int64
 
 const (
-	TCL_PATH_ABSOLUTE Tcl_PathType = 0
-	TCL_PATH_RELATIVE Tcl_PathType = 1
+	TCL_PATH_ABSOLUTE        Tcl_PathType = 0
+	TCL_PATH_RELATIVE        Tcl_PathType = 1
 	TCL_PATH_VOLUME_RELATIVE Tcl_PathType = 2
 )
 
@@ -53,9 +53,9 @@ func (e Tcl_QueuePosition) String() string {
 type Tcl_ValueType int64
 
 const (
-	TCL_INT Tcl_ValueType = 0
-	TCL_DOUBLE Tcl_ValueType = 1
-	TCL_EITHER Tcl_ValueType = 2
+	TCL_INT      Tcl_ValueType = 0
+	TCL_DOUBLE   Tcl_ValueType = 1
+	TCL_EITHER   Tcl_ValueType = 2
 	TCL_WIDE_INT Tcl_ValueType = 3
 )
 
@@ -73,4 +73,3 @@ func (e Tcl_ValueType) String() string {
 		return fmt.Sprintf("Tcl_ValueType(%d)", int64(e))
 	}
 }
-

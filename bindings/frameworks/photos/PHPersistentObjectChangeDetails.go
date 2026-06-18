@@ -16,11 +16,11 @@ type PHPersistentObjectChangeDetails struct {
 }
 
 var (
-	_clsPHPersistentObjectChangeDetails = _objcClass("PHPersistentObjectChangeDetails")
-	_pHPersistentObjectChangeDetailsSelObjectType = objc.RegisterName("objectType")
+	_clsPHPersistentObjectChangeDetails                         = _objcClass("PHPersistentObjectChangeDetails")
+	_pHPersistentObjectChangeDetailsSelObjectType               = objc.RegisterName("objectType")
 	_pHPersistentObjectChangeDetailsSelInsertedLocalIdentifiers = objc.RegisterName("insertedLocalIdentifiers")
-	_pHPersistentObjectChangeDetailsSelUpdatedLocalIdentifiers = objc.RegisterName("updatedLocalIdentifiers")
-	_pHPersistentObjectChangeDetailsSelDeletedLocalIdentifiers = objc.RegisterName("deletedLocalIdentifiers")
+	_pHPersistentObjectChangeDetailsSelUpdatedLocalIdentifiers  = objc.RegisterName("updatedLocalIdentifiers")
+	_pHPersistentObjectChangeDetailsSelDeletedLocalIdentifiers  = objc.RegisterName("deletedLocalIdentifiers")
 )
 
 func PHPersistentObjectChangeDetailsFromID(id objc.ID) *PHPersistentObjectChangeDetails {
@@ -52,4 +52,3 @@ func (o *PHPersistentObjectChangeDetails) DeletedLocalIdentifiers() *foundation.
 	_ret := objc.Send[*foundation.NSSet[*foundation.NSString]](o.Ptr(), _pHPersistentObjectChangeDetailsSelDeletedLocalIdentifiers)
 	return _ret
 }
-

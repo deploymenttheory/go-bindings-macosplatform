@@ -16,15 +16,15 @@ type AXCustomContent struct {
 }
 
 var (
-	_clsAXCustomContent = _objcClass("AXCustomContent")
-	_aXCustomContentSelCustomContentWithLabelValue = objc.RegisterName("customContentWithLabel:value:")
+	_clsAXCustomContent                                                = _objcClass("AXCustomContent")
+	_aXCustomContentSelCustomContentWithLabelValue                     = objc.RegisterName("customContentWithLabel:value:")
 	_aXCustomContentSelCustomContentWithAttributedLabelAttributedValue = objc.RegisterName("customContentWithAttributedLabel:attributedValue:")
-	_aXCustomContentSelLabel = objc.RegisterName("label")
-	_aXCustomContentSelAttributedLabel = objc.RegisterName("attributedLabel")
-	_aXCustomContentSelValue = objc.RegisterName("value")
-	_aXCustomContentSelAttributedValue = objc.RegisterName("attributedValue")
-	_aXCustomContentSelImportance = objc.RegisterName("importance")
-	_aXCustomContentSelSetImportance = objc.RegisterName("setImportance:")
+	_aXCustomContentSelLabel                                           = objc.RegisterName("label")
+	_aXCustomContentSelAttributedLabel                                 = objc.RegisterName("attributedLabel")
+	_aXCustomContentSelValue                                           = objc.RegisterName("value")
+	_aXCustomContentSelAttributedValue                                 = objc.RegisterName("attributedValue")
+	_aXCustomContentSelImportance                                      = objc.RegisterName("importance")
+	_aXCustomContentSelSetImportance                                   = objc.RegisterName("setImportance:")
 )
 
 func AXCustomContentFromID(id objc.ID) *AXCustomContent {
@@ -39,37 +39,49 @@ func AXCustomContentFromID(id objc.ID) *AXCustomContent {
 
 func AXCustomContentCustomContentWithLabelValue(label *foundation.NSString, value *foundation.NSString) *AXCustomContent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXCustomContent), _aXCustomContentSelCustomContentWithLabelValue, label.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXCustomContentFromID(_ret)
 }
 
 func AXCustomContentCustomContentWithAttributedLabelAttributedValue(label *foundation.NSAttributedString, value *foundation.NSAttributedString) *AXCustomContent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAXCustomContent), _aXCustomContentSelCustomContentWithAttributedLabelAttributedValue, label.Ptr(), value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXCustomContentFromID(_ret)
 }
 
 func (o *AXCustomContent) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCustomContentSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AXCustomContent) AttributedLabel() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCustomContentSelAttributedLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
 func (o *AXCustomContent) Value() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCustomContentSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AXCustomContent) AttributedValue() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXCustomContentSelAttributedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -81,4 +93,3 @@ func (o *AXCustomContent) Importance() AXCustomContentImportance {
 func (o *AXCustomContent) SetImportance(importance AXCustomContentImportance) {
 	o.Ptr().Send(_aXCustomContentSelSetImportance, importance)
 }
-

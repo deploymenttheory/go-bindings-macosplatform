@@ -131,4 +131,3 @@ type WindowTabable interface {
 }
 
 var _ WindowTabable = (*WindowTab)(nil)
-

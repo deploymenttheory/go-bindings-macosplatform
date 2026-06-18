@@ -15,7 +15,9 @@ type MTRPumpConfigurationAndControlClusterSensorFailureEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent].
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent { return x.inner }
+func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRPumpConfigurationAndControlClusterSensorFailureEventable interface {
 }
 
 var _ MTRPumpConfigurationAndControlClusterSensorFailureEventable = (*MTRPumpConfigurationAndControlClusterSensorFailureEvent)(nil)
-

@@ -54,4 +54,3 @@ type PGDisplayModeable interface {
 }
 
 var _ PGDisplayModeable = (*PGDisplayMode)(nil)
-

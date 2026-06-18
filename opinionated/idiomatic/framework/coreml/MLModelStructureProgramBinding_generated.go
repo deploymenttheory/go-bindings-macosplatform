@@ -62,4 +62,3 @@ type ModelStructureProgramBindingable interface {
 }
 
 var _ ModelStructureProgramBindingable = (*ModelStructureProgramBinding)(nil)
-

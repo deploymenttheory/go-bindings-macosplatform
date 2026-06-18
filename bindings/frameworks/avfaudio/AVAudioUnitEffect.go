@@ -15,10 +15,10 @@ type AVAudioUnitEffect struct {
 }
 
 var (
-	_clsAVAudioUnitEffect = _objcClass("AVAudioUnitEffect")
+	_clsAVAudioUnitEffect                                  = _objcClass("AVAudioUnitEffect")
 	_aVAudioUnitEffectSelInitWithAudioComponentDescription = objc.RegisterName("initWithAudioComponentDescription:")
-	_aVAudioUnitEffectSelBypass = objc.RegisterName("bypass")
-	_aVAudioUnitEffectSelSetBypass = objc.RegisterName("setBypass:")
+	_aVAudioUnitEffectSelBypass                            = objc.RegisterName("bypass")
+	_aVAudioUnitEffectSelSetBypass                         = objc.RegisterName("setBypass:")
 )
 
 func AVAudioUnitEffectFromID(id objc.ID) *AVAudioUnitEffect {
@@ -34,7 +34,9 @@ func AVAudioUnitEffectFromID(id objc.ID) *AVAudioUnitEffect {
 // @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitEffect object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be one of these types kAudioUnitType_Effect kAudioUnitType_MusicEffect kAudioUnitType_Panner kAudioUnitType_RemoteEffect kAudioUnitType_RemoteMusicEffect
 func (o *AVAudioUnitEffect) InitWithAudioComponentDescription(audioComponentDescription objc.ID) *AVAudioUnitEffect {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioUnitEffectSelInitWithAudioComponentDescription, audioComponentDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioUnitEffectFromID(_ret)
 }
 
@@ -46,4 +48,3 @@ func (o *AVAudioUnitEffect) Bypass() bool {
 func (o *AVAudioUnitEffect) SetBypass(bypass bool) {
 	o.Ptr().Send(_aVAudioUnitEffectSelSetBypass, bypass)
 }
-

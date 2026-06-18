@@ -17,7 +17,9 @@ type WorkoutEffortRelationshipQuery struct {
 }
 
 // Unwrap returns the underlying [raw.HKWorkoutEffortRelationshipQuery].
-func (x *WorkoutEffortRelationshipQuery) Unwrap() *raw.HKWorkoutEffortRelationshipQuery { return x.inner }
+func (x *WorkoutEffortRelationshipQuery) Unwrap() *raw.HKWorkoutEffortRelationshipQuery {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -46,4 +48,3 @@ type WorkoutEffortRelationshipQueryable interface {
 }
 
 var _ WorkoutEffortRelationshipQueryable = (*WorkoutEffortRelationshipQuery)(nil)
-

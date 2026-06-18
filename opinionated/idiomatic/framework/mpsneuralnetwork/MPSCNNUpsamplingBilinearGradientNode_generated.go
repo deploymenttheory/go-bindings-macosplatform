@@ -16,7 +16,9 @@ type CNNUpsamplingBilinearGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNUpsamplingBilinearGradientNode].
-func (x *CNNUpsamplingBilinearGradientNode) Unwrap() *raw.MPSCNNUpsamplingBilinearGradientNode { return x.inner }
+func (x *CNNUpsamplingBilinearGradientNode) Unwrap() *raw.MPSCNNUpsamplingBilinearGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -59,9 +61,13 @@ func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
 	return x.inner.ScaleFactorY()
 }
 
-func (x *CNNUpsamplingBilinearGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNUpsamplingBilinearGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNUpsamplingBilinearGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNUpsamplingBilinearGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNUpsamplingBilinearGradientNodeable is the interface implemented by [CNNUpsamplingBilinearGradientNode], for mocking and DI.
 type CNNUpsamplingBilinearGradientNodeable interface {
@@ -73,4 +79,3 @@ type CNNUpsamplingBilinearGradientNodeable interface {
 }
 
 var _ CNNUpsamplingBilinearGradientNodeable = (*CNNUpsamplingBilinearGradientNode)(nil)
-

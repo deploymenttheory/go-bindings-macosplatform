@@ -122,4 +122,3 @@ type SyncEngineStateable interface {
 }
 
 var _ SyncEngineStateable = (*SyncEngineState)(nil)
-

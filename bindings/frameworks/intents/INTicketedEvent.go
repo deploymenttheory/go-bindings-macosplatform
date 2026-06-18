@@ -17,12 +17,12 @@ type INTicketedEvent struct {
 }
 
 var (
-	_clsINTicketedEvent = _objcClass("INTicketedEvent")
+	_clsINTicketedEvent                                          = _objcClass("INTicketedEvent")
 	_iNTicketedEventSelInitWithCategoryNameEventDurationLocation = objc.RegisterName("initWithCategory:name:eventDuration:location:")
-	_iNTicketedEventSelCategory = objc.RegisterName("category")
-	_iNTicketedEventSelName = objc.RegisterName("name")
-	_iNTicketedEventSelEventDuration = objc.RegisterName("eventDuration")
-	_iNTicketedEventSelLocation = objc.RegisterName("location")
+	_iNTicketedEventSelCategory                                  = objc.RegisterName("category")
+	_iNTicketedEventSelName                                      = objc.RegisterName("name")
+	_iNTicketedEventSelEventDuration                             = objc.RegisterName("eventDuration")
+	_iNTicketedEventSelLocation                                  = objc.RegisterName("location")
 )
 
 func INTicketedEventFromID(id objc.ID) *INTicketedEvent {
@@ -37,7 +37,9 @@ func INTicketedEventFromID(id objc.ID) *INTicketedEvent {
 
 func (o *INTicketedEvent) InitWithCategoryNameEventDurationLocation(category INTicketedEventCategory, name *foundation.NSString, eventDuration *INDateComponentsRange, location *corelocation.CLPlacemark) *INTicketedEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventSelInitWithCategoryNameEventDurationLocation, category, name.Ptr(), eventDuration.Ptr(), location.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INTicketedEventFromID(_ret)
 }
 
@@ -48,19 +50,24 @@ func (o *INTicketedEvent) Category() INTicketedEventCategory {
 
 func (o *INTicketedEvent) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INTicketedEvent) EventDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventSelEventDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INTicketedEvent) Location() *corelocation.CLPlacemark {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return corelocation.CLPlacemarkFromID(_ret)
 }
-

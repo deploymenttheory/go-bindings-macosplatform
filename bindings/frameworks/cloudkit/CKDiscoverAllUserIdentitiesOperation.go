@@ -18,11 +18,11 @@ type CKDiscoverAllUserIdentitiesOperation struct {
 }
 
 var (
-	_clsCKDiscoverAllUserIdentitiesOperation = _objcClass("CKDiscoverAllUserIdentitiesOperation")
-	_cKDiscoverAllUserIdentitiesOperationSelInit = objc.RegisterName("init")
-	_cKDiscoverAllUserIdentitiesOperationSelUserIdentityDiscoveredBlock = objc.RegisterName("userIdentityDiscoveredBlock")
-	_cKDiscoverAllUserIdentitiesOperationSelSetUserIdentityDiscoveredBlock = objc.RegisterName("setUserIdentityDiscoveredBlock:")
-	_cKDiscoverAllUserIdentitiesOperationSelDiscoverAllUserIdentitiesCompletionBlock = objc.RegisterName("discoverAllUserIdentitiesCompletionBlock")
+	_clsCKDiscoverAllUserIdentitiesOperation                                            = _objcClass("CKDiscoverAllUserIdentitiesOperation")
+	_cKDiscoverAllUserIdentitiesOperationSelInit                                        = objc.RegisterName("init")
+	_cKDiscoverAllUserIdentitiesOperationSelUserIdentityDiscoveredBlock                 = objc.RegisterName("userIdentityDiscoveredBlock")
+	_cKDiscoverAllUserIdentitiesOperationSelSetUserIdentityDiscoveredBlock              = objc.RegisterName("setUserIdentityDiscoveredBlock:")
+	_cKDiscoverAllUserIdentitiesOperationSelDiscoverAllUserIdentitiesCompletionBlock    = objc.RegisterName("discoverAllUserIdentitiesCompletionBlock")
 	_cKDiscoverAllUserIdentitiesOperationSelSetDiscoverAllUserIdentitiesCompletionBlock = objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:")
 )
 
@@ -39,7 +39,9 @@ func CKDiscoverAllUserIdentitiesOperationFromID(id objc.ID) *CKDiscoverAllUserId
 // Creates an operation for searching the device's contacts. You can use the operation only once. Create a new operation for each subsequent search.
 func (o *CKDiscoverAllUserIdentitiesOperation) Init() *CKDiscoverAllUserIdentitiesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKDiscoverAllUserIdentitiesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKDiscoverAllUserIdentitiesOperationFromID(_ret)
 }
 
@@ -79,4 +81,3 @@ func (o *CKDiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompl
 	}
 	o.Ptr().Send(_cKDiscoverAllUserIdentitiesOperationSelSetDiscoverAllUserIdentitiesCompletionBlock, __block_discoverAllUserIdentitiesCompletionBlock)
 }
-

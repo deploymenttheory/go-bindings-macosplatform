@@ -15,11 +15,11 @@ type DOMHTMLPreElement struct {
 }
 
 var (
-	_clsDOMHTMLPreElement = _objcClass("DOMHTMLPreElement")
-	_dOMHTMLPreElementSelWidth = objc.RegisterName("width")
+	_clsDOMHTMLPreElement         = _objcClass("DOMHTMLPreElement")
+	_dOMHTMLPreElementSelWidth    = objc.RegisterName("width")
 	_dOMHTMLPreElementSelSetWidth = objc.RegisterName("setWidth:")
-	_dOMHTMLPreElementSelWrap = objc.RegisterName("wrap")
-	_dOMHTMLPreElementSelSetWrap = objc.RegisterName("setWrap:")
+	_dOMHTMLPreElementSelWrap     = objc.RegisterName("wrap")
+	_dOMHTMLPreElementSelSetWrap  = objc.RegisterName("setWrap:")
 )
 
 func DOMHTMLPreElementFromID(id objc.ID) *DOMHTMLPreElement {
@@ -49,4 +49,3 @@ func (o *DOMHTMLPreElement) Wrap() bool {
 func (o *DOMHTMLPreElement) SetWrap(wrap bool) {
 	o.Ptr().Send(_dOMHTMLPreElementSelSetWrap, wrap)
 }
-

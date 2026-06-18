@@ -81,13 +81,21 @@ func (x *ImageLaplacianPyramidAdd) WithLabel(label string) *ImageLaplacianPyrami
 	return x
 }
 
-func (x *ImageLaplacianPyramidAdd) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
+func (x *ImageLaplacianPyramidAdd) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid {
+	return &x.inner.MPSImageLaplacianPyramid
+}
 
-func (x *ImageLaplacianPyramidAdd) asImagePyramid() *mpsimage.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
+func (x *ImageLaplacianPyramidAdd) asImagePyramid() *mpsimage.MPSImagePyramid {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid
+}
 
-func (x *ImageLaplacianPyramidAdd) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageLaplacianPyramidAdd) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel
+}
 
-func (x *ImageLaplacianPyramidAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageLaplacianPyramidAdd) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageLaplacianPyramidAddable is the interface implemented by [ImageLaplacianPyramidAdd], for mocking and DI.
 type ImageLaplacianPyramidAddable interface {
@@ -102,4 +110,3 @@ type ImageLaplacianPyramidAddable interface {
 }
 
 var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)
-

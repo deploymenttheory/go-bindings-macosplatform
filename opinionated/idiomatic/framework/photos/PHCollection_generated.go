@@ -74,4 +74,3 @@ type Collectionable interface {
 }
 
 var _ Collectionable = (*Collection)(nil)
-

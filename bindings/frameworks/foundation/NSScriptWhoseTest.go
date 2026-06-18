@@ -15,9 +15,9 @@ type NSScriptWhoseTest struct {
 }
 
 var (
-	_clsNSScriptWhoseTest = _objcClass("NSScriptWhoseTest")
-	_nSScriptWhoseTestSelIsTrue = objc.RegisterName("isTrue")
-	_nSScriptWhoseTestSelInit = objc.RegisterName("init")
+	_clsNSScriptWhoseTest              = _objcClass("NSScriptWhoseTest")
+	_nSScriptWhoseTestSelIsTrue        = objc.RegisterName("isTrue")
+	_nSScriptWhoseTestSelInit          = objc.RegisterName("init")
 	_nSScriptWhoseTestSelInitWithCoder = objc.RegisterName("initWithCoder:")
 )
 
@@ -38,13 +38,16 @@ func (o *NSScriptWhoseTest) IsTrue() bool {
 
 func (o *NSScriptWhoseTest) Init() *NSScriptWhoseTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptWhoseTestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptWhoseTestFromID(_ret)
 }
 
 func (o *NSScriptWhoseTest) InitWithCoder(inCoder *NSCoder) *NSScriptWhoseTest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScriptWhoseTestSelInitWithCoder, inCoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptWhoseTestFromID(_ret)
 }
-

@@ -11,41 +11,66 @@ import (
 )
 
 // KLSSharedFileListFavoriteVolumes returns the value of the CoreFoundation reference constant kLSSharedFileListFavoriteVolumes as an objc.ID.
-func KLSSharedFileListFavoriteVolumes() objc.ID { return purego.CFConstant(raw.KLSSharedFileListFavoriteVolumes()) }
+func KLSSharedFileListFavoriteVolumes() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListFavoriteVolumes())
+}
 
 // KLSSharedFileListFavoriteItems returns the value of the CoreFoundation reference constant kLSSharedFileListFavoriteItems as an objc.ID.
-func KLSSharedFileListFavoriteItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListFavoriteItems()) }
+func KLSSharedFileListFavoriteItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListFavoriteItems())
+}
 
 // KLSSharedFileListRecentApplicationItems returns the value of the CoreFoundation reference constant kLSSharedFileListRecentApplicationItems as an objc.ID.
-func KLSSharedFileListRecentApplicationItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListRecentApplicationItems()) }
+func KLSSharedFileListRecentApplicationItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListRecentApplicationItems())
+}
 
 // KLSSharedFileListRecentDocumentItems returns the value of the CoreFoundation reference constant kLSSharedFileListRecentDocumentItems as an objc.ID.
-func KLSSharedFileListRecentDocumentItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListRecentDocumentItems()) }
+func KLSSharedFileListRecentDocumentItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListRecentDocumentItems())
+}
 
 // KLSSharedFileListRecentServerItems returns the value of the CoreFoundation reference constant kLSSharedFileListRecentServerItems as an objc.ID.
-func KLSSharedFileListRecentServerItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListRecentServerItems()) }
+func KLSSharedFileListRecentServerItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListRecentServerItems())
+}
 
 // KLSSharedFileListSessionLoginItems returns the value of the CoreFoundation reference constant kLSSharedFileListSessionLoginItems as an objc.ID.
-func KLSSharedFileListSessionLoginItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListSessionLoginItems()) }
+func KLSSharedFileListSessionLoginItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListSessionLoginItems())
+}
 
 // KLSSharedFileListGlobalLoginItems returns the value of the CoreFoundation reference constant kLSSharedFileListGlobalLoginItems as an objc.ID.
-func KLSSharedFileListGlobalLoginItems() objc.ID { return purego.CFConstant(raw.KLSSharedFileListGlobalLoginItems()) }
+func KLSSharedFileListGlobalLoginItems() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListGlobalLoginItems())
+}
 
 // KLSSharedFileListRecentItemsMaxAmount returns the value of the CoreFoundation reference constant kLSSharedFileListRecentItemsMaxAmount as an objc.ID.
-func KLSSharedFileListRecentItemsMaxAmount() objc.ID { return purego.CFConstant(raw.KLSSharedFileListRecentItemsMaxAmount()) }
+func KLSSharedFileListRecentItemsMaxAmount() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListRecentItemsMaxAmount())
+}
 
 // KLSSharedFileListVolumesComputerVisible returns the value of the CoreFoundation reference constant kLSSharedFileListVolumesComputerVisible as an objc.ID.
-func KLSSharedFileListVolumesComputerVisible() objc.ID { return purego.CFConstant(raw.KLSSharedFileListVolumesComputerVisible()) }
+func KLSSharedFileListVolumesComputerVisible() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListVolumesComputerVisible())
+}
 
 // KLSSharedFileListVolumesIDiskVisible returns the value of the CoreFoundation reference constant kLSSharedFileListVolumesIDiskVisible as an objc.ID.
-func KLSSharedFileListVolumesIDiskVisible() objc.ID { return purego.CFConstant(raw.KLSSharedFileListVolumesIDiskVisible()) }
+func KLSSharedFileListVolumesIDiskVisible() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListVolumesIDiskVisible())
+}
 
 // KLSSharedFileListVolumesNetworkVisible returns the value of the CoreFoundation reference constant kLSSharedFileListVolumesNetworkVisible as an objc.ID.
-func KLSSharedFileListVolumesNetworkVisible() objc.ID { return purego.CFConstant(raw.KLSSharedFileListVolumesNetworkVisible()) }
+func KLSSharedFileListVolumesNetworkVisible() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListVolumesNetworkVisible())
+}
 
 // KLSSharedFileListItemHidden returns the value of the CoreFoundation reference constant kLSSharedFileListItemHidden as an objc.ID.
-func KLSSharedFileListItemHidden() objc.ID { return purego.CFConstant(raw.KLSSharedFileListItemHidden()) }
+func KLSSharedFileListItemHidden() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListItemHidden())
+}
 
 // KLSSharedFileListLoginItemHidden returns the value of the CoreFoundation reference constant kLSSharedFileListLoginItemHidden as an objc.ID.
-func KLSSharedFileListLoginItemHidden() objc.ID { return purego.CFConstant(raw.KLSSharedFileListLoginItemHidden()) }
-
+func KLSSharedFileListLoginItemHidden() objc.ID {
+	return purego.CFConstant(raw.KLSSharedFileListLoginItemHidden())
+}

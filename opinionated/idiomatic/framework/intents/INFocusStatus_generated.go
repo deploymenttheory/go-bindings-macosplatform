@@ -49,4 +49,3 @@ type FocusStatusable interface {
 }
 
 var _ FocusStatusable = (*FocusStatus)(nil)
-

@@ -15,8 +15,8 @@ type NSMagnificationGestureRecognizer struct {
 }
 
 var (
-	_clsNSMagnificationGestureRecognizer = _objcClass("NSMagnificationGestureRecognizer")
-	_nSMagnificationGestureRecognizerSelMagnification = objc.RegisterName("magnification")
+	_clsNSMagnificationGestureRecognizer                 = _objcClass("NSMagnificationGestureRecognizer")
+	_nSMagnificationGestureRecognizerSelMagnification    = objc.RegisterName("magnification")
 	_nSMagnificationGestureRecognizerSelSetMagnification = objc.RegisterName("setMagnification:")
 )
 
@@ -38,4 +38,3 @@ func (o *NSMagnificationGestureRecognizer) Magnification() float64 {
 func (o *NSMagnificationGestureRecognizer) SetMagnification(magnification float64) {
 	o.Ptr().Send(_nSMagnificationGestureRecognizerSelSetMagnification, magnification)
 }
-

@@ -56,4 +56,3 @@ type AmbientPressureDataable interface {
 }
 
 var _ AmbientPressureDataable = (*AmbientPressureData)(nil)
-

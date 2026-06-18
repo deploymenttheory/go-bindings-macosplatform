@@ -16,11 +16,11 @@ type HKPHQ9Assessment struct {
 }
 
 var (
-	_clsHKPHQ9Assessment = _objcClass("HKPHQ9Assessment")
-	_hKPHQ9AssessmentSelAssessmentWithDateAnswers = objc.RegisterName("assessmentWithDate:answers:")
+	_clsHKPHQ9Assessment                                  = _objcClass("HKPHQ9Assessment")
+	_hKPHQ9AssessmentSelAssessmentWithDateAnswers         = objc.RegisterName("assessmentWithDate:answers:")
 	_hKPHQ9AssessmentSelAssessmentWithDateAnswersMetadata = objc.RegisterName("assessmentWithDate:answers:metadata:")
-	_hKPHQ9AssessmentSelAnswers = objc.RegisterName("answers")
-	_hKPHQ9AssessmentSelRisk = objc.RegisterName("risk")
+	_hKPHQ9AssessmentSelAnswers                           = objc.RegisterName("answers")
+	_hKPHQ9AssessmentSelRisk                              = objc.RegisterName("risk")
 )
 
 func HKPHQ9AssessmentFromID(id objc.ID) *HKPHQ9Assessment {
@@ -36,14 +36,18 @@ func HKPHQ9AssessmentFromID(id objc.ID) *HKPHQ9Assessment {
 // Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswers(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber]) *HKPHQ9Assessment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswers, date.Ptr(), answers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKPHQ9AssessmentFromID(_ret)
 }
 
 // Creates a new PHQ-9 sample. There must be exactly 9 elements in answers, each answer must be of type `HKPHQ9AssessmentAnswer`. Question #9 is considered optional. If the user does not answer #9, use `HKPHQ9AssessmentAnswerPreferNotToAnswer`
 func HKPHQ9AssessmentAssessmentWithDateAnswersMetadata(date *foundation.NSDate, answers *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKPHQ9Assessment {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKPHQ9Assessment), _hKPHQ9AssessmentSelAssessmentWithDateAnswersMetadata, date.Ptr(), answers, metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKPHQ9AssessmentFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *HKPHQ9Assessment) Risk() HKPHQ9AssessmentRisk {
 	_ret := objc.Send[HKPHQ9AssessmentRisk](o.Ptr(), _hKPHQ9AssessmentSelRisk)
 	return _ret
 }
-

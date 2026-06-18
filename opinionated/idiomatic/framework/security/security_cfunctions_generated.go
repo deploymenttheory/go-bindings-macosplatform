@@ -3194,4 +3194,3 @@ func SecTrustCopyRef(trust unsafe.Pointer) unsafe.Pointer {
 func SecTrustCreate(trust unsafe.Pointer) unsafe.Pointer {
 	return raw.SecTrustCreate(trust)
 }
-

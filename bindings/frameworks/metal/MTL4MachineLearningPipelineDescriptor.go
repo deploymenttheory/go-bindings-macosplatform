@@ -16,12 +16,12 @@ type MTL4MachineLearningPipelineDescriptor struct {
 }
 
 var (
-	_clsMTL4MachineLearningPipelineDescriptor = _objcClass("MTL4MachineLearningPipelineDescriptor")
-	_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsAtBufferIndex = objc.RegisterName("setInputDimensions:atBufferIndex:")
-	_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsWithRange = objc.RegisterName("setInputDimensions:withRange:")
-	_mTL4MachineLearningPipelineDescriptorSelInputDimensionsAtBufferIndex = objc.RegisterName("inputDimensionsAtBufferIndex:")
-	_mTL4MachineLearningPipelineDescriptorSelReset = objc.RegisterName("reset")
-	_mTL4MachineLearningPipelineDescriptorSelMachineLearningFunctionDescriptor = objc.RegisterName("machineLearningFunctionDescriptor")
+	_clsMTL4MachineLearningPipelineDescriptor                                     = _objcClass("MTL4MachineLearningPipelineDescriptor")
+	_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsAtBufferIndex      = objc.RegisterName("setInputDimensions:atBufferIndex:")
+	_mTL4MachineLearningPipelineDescriptorSelSetInputDimensionsWithRange          = objc.RegisterName("setInputDimensions:withRange:")
+	_mTL4MachineLearningPipelineDescriptorSelInputDimensionsAtBufferIndex         = objc.RegisterName("inputDimensionsAtBufferIndex:")
+	_mTL4MachineLearningPipelineDescriptorSelReset                                = objc.RegisterName("reset")
+	_mTL4MachineLearningPipelineDescriptorSelMachineLearningFunctionDescriptor    = objc.RegisterName("machineLearningFunctionDescriptor")
 	_mTL4MachineLearningPipelineDescriptorSelSetMachineLearningFunctionDescriptor = objc.RegisterName("setMachineLearningFunctionDescriptor:")
 )
 
@@ -48,7 +48,9 @@ func (o *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dime
 // Obtains the dimensions of the input tensor at `bufferIndex` if set, `nil` otherwise.
 func (o *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *MTLTensorExtents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4MachineLearningPipelineDescriptorSelInputDimensionsAtBufferIndex, bufferIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLTensorExtentsFromID(_ret)
 }
 
@@ -60,11 +62,12 @@ func (o *MTL4MachineLearningPipelineDescriptor) Reset() {
 // Assigns the function that the machine learning pipeline you create from this descriptor executes.
 func (o *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTL4MachineLearningPipelineDescriptorSelMachineLearningFunctionDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTL4FunctionDescriptorFromID(_ret)
 }
 
 func (o *MTL4MachineLearningPipelineDescriptor) SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *MTL4FunctionDescriptor) {
 	o.Ptr().Send(_mTL4MachineLearningPipelineDescriptorSelSetMachineLearningFunctionDescriptor, machineLearningFunctionDescriptor.Ptr())
 }
-

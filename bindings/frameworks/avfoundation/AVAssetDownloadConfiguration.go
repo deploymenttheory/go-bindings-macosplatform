@@ -16,18 +16,18 @@ type AVAssetDownloadConfiguration struct {
 }
 
 var (
-	_clsAVAssetDownloadConfiguration = _objcClass("AVAssetDownloadConfiguration")
-	_aVAssetDownloadConfigurationSelDownloadConfigurationWithAssetTitle = objc.RegisterName("downloadConfigurationWithAsset:title:")
+	_clsAVAssetDownloadConfiguration                                                            = _objcClass("AVAssetDownloadConfiguration")
+	_aVAssetDownloadConfigurationSelDownloadConfigurationWithAssetTitle                         = objc.RegisterName("downloadConfigurationWithAsset:title:")
 	_aVAssetDownloadConfigurationSelSetInterstitialMediaSelectionCriteriaForMediaCharacteristic = objc.RegisterName("setInterstitialMediaSelectionCriteria:forMediaCharacteristic:")
-	_aVAssetDownloadConfigurationSelArtworkData = objc.RegisterName("artworkData")
-	_aVAssetDownloadConfigurationSelSetArtworkData = objc.RegisterName("setArtworkData:")
-	_aVAssetDownloadConfigurationSelPrimaryContentConfiguration = objc.RegisterName("primaryContentConfiguration")
-	_aVAssetDownloadConfigurationSelAuxiliaryContentConfigurations = objc.RegisterName("auxiliaryContentConfigurations")
-	_aVAssetDownloadConfigurationSelSetAuxiliaryContentConfigurations = objc.RegisterName("setAuxiliaryContentConfigurations:")
-	_aVAssetDownloadConfigurationSelOptimizesAuxiliaryContentConfigurations = objc.RegisterName("optimizesAuxiliaryContentConfigurations")
-	_aVAssetDownloadConfigurationSelSetOptimizesAuxiliaryContentConfigurations = objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:")
-	_aVAssetDownloadConfigurationSelDownloadsInterstitialAssets = objc.RegisterName("downloadsInterstitialAssets")
-	_aVAssetDownloadConfigurationSelSetDownloadsInterstitialAssets = objc.RegisterName("setDownloadsInterstitialAssets:")
+	_aVAssetDownloadConfigurationSelArtworkData                                                 = objc.RegisterName("artworkData")
+	_aVAssetDownloadConfigurationSelSetArtworkData                                              = objc.RegisterName("setArtworkData:")
+	_aVAssetDownloadConfigurationSelPrimaryContentConfiguration                                 = objc.RegisterName("primaryContentConfiguration")
+	_aVAssetDownloadConfigurationSelAuxiliaryContentConfigurations                              = objc.RegisterName("auxiliaryContentConfigurations")
+	_aVAssetDownloadConfigurationSelSetAuxiliaryContentConfigurations                           = objc.RegisterName("setAuxiliaryContentConfigurations:")
+	_aVAssetDownloadConfigurationSelOptimizesAuxiliaryContentConfigurations                     = objc.RegisterName("optimizesAuxiliaryContentConfigurations")
+	_aVAssetDownloadConfigurationSelSetOptimizesAuxiliaryContentConfigurations                  = objc.RegisterName("setOptimizesAuxiliaryContentConfigurations:")
+	_aVAssetDownloadConfigurationSelDownloadsInterstitialAssets                                 = objc.RegisterName("downloadsInterstitialAssets")
+	_aVAssetDownloadConfigurationSelSetDownloadsInterstitialAssets                              = objc.RegisterName("setDownloadsInterstitialAssets:")
 )
 
 func AVAssetDownloadConfigurationFromID(id objc.ID) *AVAssetDownloadConfiguration {
@@ -43,7 +43,9 @@ func AVAssetDownloadConfigurationFromID(id objc.ID) *AVAssetDownloadConfiguratio
 // Creates and initializes a download configuration object. This method will throw an exception if AVURLAsset has been invalidated. - Parameter asset: The asset to create the download configuration for. - Parameter title: A human readable title for this asset, expected to be as suitable as possible for the user's preferred languages. Will show up in the usage pane of the settings app.
 func AVAssetDownloadConfigurationDownloadConfigurationWithAssetTitle(asset *AVURLAsset, title *foundation.NSString) *AVAssetDownloadConfiguration {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadConfiguration), _aVAssetDownloadConfigurationSelDownloadConfigurationWithAssetTitle, asset.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadConfigurationFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *AVAssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForM
 // NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
 func (o *AVAssetDownloadConfiguration) ArtworkData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadConfigurationSelArtworkData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -66,14 +70,18 @@ func (o *AVAssetDownloadConfiguration) SetArtworkData(artworkData *foundation.NS
 // The primary content for the download.
 func (o *AVAssetDownloadConfiguration) PrimaryContentConfiguration() *AVAssetDownloadContentConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadConfigurationSelPrimaryContentConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadContentConfigurationFromID(_ret)
 }
 
 // The auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
 func (o *AVAssetDownloadConfiguration) AuxiliaryContentConfigurations() *foundation.NSArray[*AVAssetDownloadContentConfiguration] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadConfigurationSelAuxiliaryContentConfigurations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetDownloadContentConfiguration](_ret)
 }
 
@@ -100,4 +108,3 @@ func (o *AVAssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
 func (o *AVAssetDownloadConfiguration) SetDownloadsInterstitialAssets(downloadsInterstitialAssets bool) {
 	o.Ptr().Send(_aVAssetDownloadConfigurationSelSetDownloadsInterstitialAssets, downloadsInterstitialAssets)
 }
-

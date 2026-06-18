@@ -16,7 +16,9 @@ type MTRLevelControlClusterMoveWithOnOffParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRLevelControlClusterMoveWithOnOffParams].
-func (x *MTRLevelControlClusterMoveWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams { return x.inner }
+func (x *MTRLevelControlClusterMoveWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -156,4 +158,3 @@ type MTRLevelControlClusterMoveWithOnOffParamsable interface {
 }
 
 var _ MTRLevelControlClusterMoveWithOnOffParamsable = (*MTRLevelControlClusterMoveWithOnOffParams)(nil)
-

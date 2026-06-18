@@ -108,4 +108,3 @@ func NEVPNStatusDidChangeNotification() uintptr {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEVPNStatusDidChangeNotification")
 	return ptr
 }
-

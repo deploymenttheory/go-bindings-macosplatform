@@ -18,11 +18,15 @@ type MTRAccessControlClusterReviewFabricRestrictionsResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams].
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams { return x.inner }
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID adopts an existing object pointer as a MTRAccessControlClusterReviewFabricRestrictionsResponseParams (nil for 0).
 func MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
@@ -68,4 +72,3 @@ type MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable interface
 }
 
 var _ MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable = (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams)(nil)
-

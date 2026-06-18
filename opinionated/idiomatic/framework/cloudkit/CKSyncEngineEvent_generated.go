@@ -169,4 +169,3 @@ type SyncEngineEventable interface {
 }
 
 var _ SyncEngineEventable = (*SyncEngineEvent)(nil)
-

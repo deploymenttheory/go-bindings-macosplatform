@@ -17,20 +17,20 @@ type IOBluetoothOBEXSession struct {
 }
 
 var (
-	_clsIOBluetoothOBEXSession = _objcClass("IOBluetoothOBEXSession")
-	_iOBluetoothOBEXSessionSelWithSDPServiceRecord = objc.RegisterName("withSDPServiceRecord:")
-	_iOBluetoothOBEXSessionSelWithDeviceChannelID = objc.RegisterName("withDevice:channelID:")
-	_iOBluetoothOBEXSessionSelWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon = objc.RegisterName("withIncomingRFCOMMChannel:eventSelector:selectorTarget:refCon:")
-	_iOBluetoothOBEXSessionSelInitWithSDPServiceRecord = objc.RegisterName("initWithSDPServiceRecord:")
-	_iOBluetoothOBEXSessionSelInitWithDeviceChannelID = objc.RegisterName("initWithDevice:channelID:")
+	_clsIOBluetoothOBEXSession                                                               = _objcClass("IOBluetoothOBEXSession")
+	_iOBluetoothOBEXSessionSelWithSDPServiceRecord                                           = objc.RegisterName("withSDPServiceRecord:")
+	_iOBluetoothOBEXSessionSelWithDeviceChannelID                                            = objc.RegisterName("withDevice:channelID:")
+	_iOBluetoothOBEXSessionSelWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon     = objc.RegisterName("withIncomingRFCOMMChannel:eventSelector:selectorTarget:refCon:")
+	_iOBluetoothOBEXSessionSelInitWithSDPServiceRecord                                       = objc.RegisterName("initWithSDPServiceRecord:")
+	_iOBluetoothOBEXSessionSelInitWithDeviceChannelID                                        = objc.RegisterName("initWithDevice:channelID:")
 	_iOBluetoothOBEXSessionSelInitWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon = objc.RegisterName("initWithIncomingRFCOMMChannel:eventSelector:selectorTarget:refCon:")
-	_iOBluetoothOBEXSessionSelGetRFCOMMChannel = objc.RegisterName("getRFCOMMChannel")
-	_iOBluetoothOBEXSessionSelGetDevice = objc.RegisterName("getDevice")
-	_iOBluetoothOBEXSessionSelSendBufferTroughChannel = objc.RegisterName("sendBufferTroughChannel")
-	_iOBluetoothOBEXSessionSelRestartTransmission = objc.RegisterName("restartTransmission")
-	_iOBluetoothOBEXSessionSelIsSessionTargetAMac = objc.RegisterName("isSessionTargetAMac")
-	_iOBluetoothOBEXSessionSelSetOpenTransportConnectionAsyncSelectorTargetRefCon = objc.RegisterName("setOpenTransportConnectionAsyncSelector:target:refCon:")
-	_iOBluetoothOBEXSessionSelSetOBEXSessionOpenConnectionCallbackRefCon = objc.RegisterName("setOBEXSessionOpenConnectionCallback:refCon:")
+	_iOBluetoothOBEXSessionSelGetRFCOMMChannel                                               = objc.RegisterName("getRFCOMMChannel")
+	_iOBluetoothOBEXSessionSelGetDevice                                                      = objc.RegisterName("getDevice")
+	_iOBluetoothOBEXSessionSelSendBufferTroughChannel                                        = objc.RegisterName("sendBufferTroughChannel")
+	_iOBluetoothOBEXSessionSelRestartTransmission                                            = objc.RegisterName("restartTransmission")
+	_iOBluetoothOBEXSessionSelIsSessionTargetAMac                                            = objc.RegisterName("isSessionTargetAMac")
+	_iOBluetoothOBEXSessionSelSetOpenTransportConnectionAsyncSelectorTargetRefCon            = objc.RegisterName("setOpenTransportConnectionAsyncSelector:target:refCon:")
+	_iOBluetoothOBEXSessionSelSetOBEXSessionOpenConnectionCallbackRefCon                     = objc.RegisterName("setOBEXSessionOpenConnectionCallback:refCon:")
 )
 
 func IOBluetoothOBEXSessionFromID(id objc.ID) *IOBluetoothOBEXSession {
@@ -45,49 +45,65 @@ func IOBluetoothOBEXSessionFromID(id objc.ID) *IOBluetoothOBEXSession {
 
 func IOBluetoothOBEXSessionWithSDPServiceRecord(inSDPServiceRecord *IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothOBEXSession), _iOBluetoothOBEXSessionSelWithSDPServiceRecord, inSDPServiceRecord.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func IOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, inRFCOMMChannelID uint8) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothOBEXSession), _iOBluetoothOBEXSessionSelWithDeviceChannelID, inDevice.Ptr(), inRFCOMMChannelID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func IOBluetoothOBEXSessionWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon(inChannel *IOBluetoothRFCOMMChannel, inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsIOBluetoothOBEXSession), _iOBluetoothOBEXSessionSelWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon, inChannel.Ptr(), inEventSelector, inEventSelectorTarget, inUserRefCon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func (o *IOBluetoothOBEXSession) InitWithSDPServiceRecord(inSDPServiceRecord *IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothOBEXSessionSelInitWithSDPServiceRecord, inSDPServiceRecord.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func (o *IOBluetoothOBEXSession) InitWithDeviceChannelID(inDevice *IOBluetoothDevice, inChannelID uint8) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothOBEXSessionSelInitWithDeviceChannelID, inDevice.Ptr(), inChannelID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func (o *IOBluetoothOBEXSession) InitWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon(inChannel *IOBluetoothRFCOMMChannel, inEventSelector objc.SEL, inEventSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) *IOBluetoothOBEXSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothOBEXSessionSelInitWithIncomingRFCOMMChannelEventSelectorSelectorTargetRefCon, inChannel.Ptr(), inEventSelector, inEventSelectorTarget, inUserRefCon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothOBEXSessionFromID(_ret)
 }
 
 func (o *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothOBEXSessionSelGetRFCOMMChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothRFCOMMChannelFromID(_ret)
 }
 
 func (o *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOBluetoothOBEXSessionSelGetDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOBluetoothDeviceFromID(_ret)
 }
 
@@ -115,4 +131,3 @@ func (o *IOBluetoothOBEXSession) SetOpenTransportConnectionAsyncSelectorTargetRe
 func (o *IOBluetoothOBEXSession) SetOBEXSessionOpenConnectionCallbackRefCon(inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) {
 	o.Ptr().Send(_iOBluetoothOBEXSessionSelSetOBEXSessionOpenConnectionCallbackRefCon, inCallback, inUserRefCon)
 }
-

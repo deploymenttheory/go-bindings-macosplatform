@@ -11,4 +11,3 @@ import (
 type MTLTensor interface {
 	metal.MTLResource
 }
-

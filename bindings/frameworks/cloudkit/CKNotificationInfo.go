@@ -18,43 +18,43 @@ type CKNotificationInfo struct {
 }
 
 var (
-	_clsCKNotificationInfo = _objcClass("CKNotificationInfo")
-	_cKNotificationInfoSelAlertBody = objc.RegisterName("alertBody")
-	_cKNotificationInfoSelSetAlertBody = objc.RegisterName("setAlertBody:")
-	_cKNotificationInfoSelAlertLocalizationKey = objc.RegisterName("alertLocalizationKey")
-	_cKNotificationInfoSelSetAlertLocalizationKey = objc.RegisterName("setAlertLocalizationKey:")
-	_cKNotificationInfoSelAlertLocalizationArgs = objc.RegisterName("alertLocalizationArgs")
-	_cKNotificationInfoSelSetAlertLocalizationArgs = objc.RegisterName("setAlertLocalizationArgs:")
-	_cKNotificationInfoSelTitle = objc.RegisterName("title")
-	_cKNotificationInfoSelSetTitle = objc.RegisterName("setTitle:")
-	_cKNotificationInfoSelTitleLocalizationKey = objc.RegisterName("titleLocalizationKey")
-	_cKNotificationInfoSelSetTitleLocalizationKey = objc.RegisterName("setTitleLocalizationKey:")
-	_cKNotificationInfoSelTitleLocalizationArgs = objc.RegisterName("titleLocalizationArgs")
-	_cKNotificationInfoSelSetTitleLocalizationArgs = objc.RegisterName("setTitleLocalizationArgs:")
-	_cKNotificationInfoSelSubtitle = objc.RegisterName("subtitle")
-	_cKNotificationInfoSelSetSubtitle = objc.RegisterName("setSubtitle:")
-	_cKNotificationInfoSelSubtitleLocalizationKey = objc.RegisterName("subtitleLocalizationKey")
-	_cKNotificationInfoSelSetSubtitleLocalizationKey = objc.RegisterName("setSubtitleLocalizationKey:")
-	_cKNotificationInfoSelSubtitleLocalizationArgs = objc.RegisterName("subtitleLocalizationArgs")
-	_cKNotificationInfoSelSetSubtitleLocalizationArgs = objc.RegisterName("setSubtitleLocalizationArgs:")
-	_cKNotificationInfoSelAlertActionLocalizationKey = objc.RegisterName("alertActionLocalizationKey")
+	_clsCKNotificationInfo                              = _objcClass("CKNotificationInfo")
+	_cKNotificationInfoSelAlertBody                     = objc.RegisterName("alertBody")
+	_cKNotificationInfoSelSetAlertBody                  = objc.RegisterName("setAlertBody:")
+	_cKNotificationInfoSelAlertLocalizationKey          = objc.RegisterName("alertLocalizationKey")
+	_cKNotificationInfoSelSetAlertLocalizationKey       = objc.RegisterName("setAlertLocalizationKey:")
+	_cKNotificationInfoSelAlertLocalizationArgs         = objc.RegisterName("alertLocalizationArgs")
+	_cKNotificationInfoSelSetAlertLocalizationArgs      = objc.RegisterName("setAlertLocalizationArgs:")
+	_cKNotificationInfoSelTitle                         = objc.RegisterName("title")
+	_cKNotificationInfoSelSetTitle                      = objc.RegisterName("setTitle:")
+	_cKNotificationInfoSelTitleLocalizationKey          = objc.RegisterName("titleLocalizationKey")
+	_cKNotificationInfoSelSetTitleLocalizationKey       = objc.RegisterName("setTitleLocalizationKey:")
+	_cKNotificationInfoSelTitleLocalizationArgs         = objc.RegisterName("titleLocalizationArgs")
+	_cKNotificationInfoSelSetTitleLocalizationArgs      = objc.RegisterName("setTitleLocalizationArgs:")
+	_cKNotificationInfoSelSubtitle                      = objc.RegisterName("subtitle")
+	_cKNotificationInfoSelSetSubtitle                   = objc.RegisterName("setSubtitle:")
+	_cKNotificationInfoSelSubtitleLocalizationKey       = objc.RegisterName("subtitleLocalizationKey")
+	_cKNotificationInfoSelSetSubtitleLocalizationKey    = objc.RegisterName("setSubtitleLocalizationKey:")
+	_cKNotificationInfoSelSubtitleLocalizationArgs      = objc.RegisterName("subtitleLocalizationArgs")
+	_cKNotificationInfoSelSetSubtitleLocalizationArgs   = objc.RegisterName("setSubtitleLocalizationArgs:")
+	_cKNotificationInfoSelAlertActionLocalizationKey    = objc.RegisterName("alertActionLocalizationKey")
 	_cKNotificationInfoSelSetAlertActionLocalizationKey = objc.RegisterName("setAlertActionLocalizationKey:")
-	_cKNotificationInfoSelAlertLaunchImage = objc.RegisterName("alertLaunchImage")
-	_cKNotificationInfoSelSetAlertLaunchImage = objc.RegisterName("setAlertLaunchImage:")
-	_cKNotificationInfoSelSoundName = objc.RegisterName("soundName")
-	_cKNotificationInfoSelSetSoundName = objc.RegisterName("setSoundName:")
-	_cKNotificationInfoSelDesiredKeys = objc.RegisterName("desiredKeys")
-	_cKNotificationInfoSelSetDesiredKeys = objc.RegisterName("setDesiredKeys:")
-	_cKNotificationInfoSelShouldBadge = objc.RegisterName("shouldBadge")
-	_cKNotificationInfoSelSetShouldBadge = objc.RegisterName("setShouldBadge:")
-	_cKNotificationInfoSelShouldSendContentAvailable = objc.RegisterName("shouldSendContentAvailable")
+	_cKNotificationInfoSelAlertLaunchImage              = objc.RegisterName("alertLaunchImage")
+	_cKNotificationInfoSelSetAlertLaunchImage           = objc.RegisterName("setAlertLaunchImage:")
+	_cKNotificationInfoSelSoundName                     = objc.RegisterName("soundName")
+	_cKNotificationInfoSelSetSoundName                  = objc.RegisterName("setSoundName:")
+	_cKNotificationInfoSelDesiredKeys                   = objc.RegisterName("desiredKeys")
+	_cKNotificationInfoSelSetDesiredKeys                = objc.RegisterName("setDesiredKeys:")
+	_cKNotificationInfoSelShouldBadge                   = objc.RegisterName("shouldBadge")
+	_cKNotificationInfoSelSetShouldBadge                = objc.RegisterName("setShouldBadge:")
+	_cKNotificationInfoSelShouldSendContentAvailable    = objc.RegisterName("shouldSendContentAvailable")
 	_cKNotificationInfoSelSetShouldSendContentAvailable = objc.RegisterName("setShouldSendContentAvailable:")
-	_cKNotificationInfoSelShouldSendMutableContent = objc.RegisterName("shouldSendMutableContent")
-	_cKNotificationInfoSelSetShouldSendMutableContent = objc.RegisterName("setShouldSendMutableContent:")
-	_cKNotificationInfoSelCategory = objc.RegisterName("category")
-	_cKNotificationInfoSelSetCategory = objc.RegisterName("setCategory:")
-	_cKNotificationInfoSelCollapseIDKey = objc.RegisterName("collapseIDKey")
-	_cKNotificationInfoSelSetCollapseIDKey = objc.RegisterName("setCollapseIDKey:")
+	_cKNotificationInfoSelShouldSendMutableContent      = objc.RegisterName("shouldSendMutableContent")
+	_cKNotificationInfoSelSetShouldSendMutableContent   = objc.RegisterName("setShouldSendMutableContent:")
+	_cKNotificationInfoSelCategory                      = objc.RegisterName("category")
+	_cKNotificationInfoSelSetCategory                   = objc.RegisterName("setCategory:")
+	_cKNotificationInfoSelCollapseIDKey                 = objc.RegisterName("collapseIDKey")
+	_cKNotificationInfoSelSetCollapseIDKey              = objc.RegisterName("setCollapseIDKey:")
 )
 
 func CKNotificationInfoFromID(id objc.ID) *CKNotificationInfo {
@@ -67,7 +67,7 @@ func CKNotificationInfoFromID(id objc.ID) *CKNotificationInfo {
 	return o
 }
 
-// The text for the notification's alert. Set this property's value to have the system display the specified string when it receives the corresponding push notification. If you localize your app's content, use the ``CKSubscription/NotificationInfo/alertLocalizationKey`` property instead.
+// The text for the notification's alert. Set this property's value to have the system display the specified string when it receives the corresponding push notification. If you localize your app's content, use the “CKSubscription/NotificationInfo/alertLocalizationKey“ property instead.
 func (o *CKNotificationInfo) AlertBody() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationInfoSelAlertBody)
 	return _ret
@@ -77,7 +77,7 @@ func (o *CKNotificationInfo) SetAlertBody(alertBody unsafe.Pointer) {
 	o.Ptr().Send(_cKNotificationInfoSelSetAlertBody, alertBody)
 }
 
-// The key that identifies the localized string for the notification's alert. Set this property's value to have the system display a localized string when it receives the corresponding push notification. The system uses the key to find the matching string in your app's `Localizable.string` file. If you specify a value for this property, CloudKit ignores the ``CKSubscription/NotificationInfo/alertBody`` property's value. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+// The key that identifies the localized string for the notification's alert. Set this property's value to have the system display a localized string when it receives the corresponding push notification. The system uses the key to find the matching string in your app's `Localizable.string` file. If you specify a value for this property, CloudKit ignores the “CKSubscription/NotificationInfo/alertBody“ property's value. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
 func (o *CKNotificationInfo) AlertLocalizationKey() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationInfoSelAlertLocalizationKey)
 	return _ret
@@ -127,7 +127,7 @@ func (o *CKNotificationInfo) SetTitleLocalizationArgs(titleLocalizationArgs unsa
 	o.Ptr().Send(_cKNotificationInfoSelSetTitleLocalizationArgs, titleLocalizationArgs)
 }
 
-// The notification's subtitle. CloudKit uses this value to set the `subtitle` push notification property. If you set ``CKSubscription/NotificationInfo/subtitleLocalizationKey``, CloudKit ignores this value. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+// The notification's subtitle. CloudKit uses this value to set the `subtitle` push notification property. If you set “CKSubscription/NotificationInfo/subtitleLocalizationKey“, CloudKit ignores this value. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
 func (o *CKNotificationInfo) Subtitle() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationInfoSelSubtitle)
 	return _ret
@@ -137,7 +137,7 @@ func (o *CKNotificationInfo) SetSubtitle(subtitle unsafe.Pointer) {
 	o.Ptr().Send(_cKNotificationInfoSelSetSubtitle, subtitle)
 }
 
-// The key that identifies the localized string for the notification's subtitle. CloudKit uses this value to set the `subtitle-loc-key` push notification property. Setting this property overrides any value in ``CKSubscription/NotificationInfo/subtitle``. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+// The key that identifies the localized string for the notification's subtitle. CloudKit uses this value to set the `subtitle-loc-key` push notification property. Setting this property overrides any value in “CKSubscription/NotificationInfo/subtitle“. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
 func (o *CKNotificationInfo) SubtitleLocalizationKey() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cKNotificationInfoSelSubtitleLocalizationKey)
 	return _ret
@@ -187,7 +187,7 @@ func (o *CKNotificationInfo) SetSoundName(soundName unsafe.Pointer) {
 	o.Ptr().Send(_cKNotificationInfoSelSetSoundName, soundName)
 }
 
-// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and ``CKRecord/Reference``. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
+// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
 func (o *CKNotificationInfo) DesiredKeys() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _cKNotificationInfoSelDesiredKeys)
 	return _ret
@@ -240,11 +240,12 @@ func (o *CKNotificationInfo) SetCategory(category unsafe.Pointer) {
 // A value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
 func (o *CKNotificationInfo) CollapseIDKey() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKNotificationInfoSelCollapseIDKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *CKNotificationInfo) SetCollapseIDKey(collapseIDKey *foundation.NSString) {
 	o.Ptr().Send(_cKNotificationInfoSelSetCollapseIDKey, collapseIDKey.Ptr())
 }
-

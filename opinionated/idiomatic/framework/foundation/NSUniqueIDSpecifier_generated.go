@@ -108,9 +108,13 @@ func (x *UniqueIDSpecifier) SetUniqueID(uniqueID objc.ID) {
 	x.inner.SetUniqueID(uniqueID)
 }
 
-func (x *UniqueIDSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return &x.inner.NSScriptObjectSpecifier }
+func (x *UniqueIDSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
+	return &x.inner.NSScriptObjectSpecifier
+}
 
-func (x *UniqueIDSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
+func (x *UniqueIDSpecifier) asObject() *raw.NSObject {
+	return &x.inner.NSScriptObjectSpecifier.NSObject
+}
 
 // UniqueIDSpecifierable is the interface implemented by [UniqueIDSpecifier], for mocking and DI.
 type UniqueIDSpecifierable interface {
@@ -129,4 +133,3 @@ type UniqueIDSpecifierable interface {
 }
 
 var _ UniqueIDSpecifierable = (*UniqueIDSpecifier)(nil)
-

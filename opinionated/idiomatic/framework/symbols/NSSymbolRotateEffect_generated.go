@@ -63,4 +63,3 @@ type SymbolRotateEffectable interface {
 }
 
 var _ SymbolRotateEffectable = (*SymbolRotateEffect)(nil)
-

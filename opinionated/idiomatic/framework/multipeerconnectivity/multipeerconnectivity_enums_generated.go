@@ -13,7 +13,7 @@ type MCEncryptionPreference int64
 const (
 	MCEncryptionOptional MCEncryptionPreference = 0
 	MCEncryptionRequired MCEncryptionPreference = 1
-	MCEncryptionNone MCEncryptionPreference = 2
+	MCEncryptionNone     MCEncryptionPreference = 2
 )
 
 func (e MCEncryptionPreference) String() string {
@@ -32,7 +32,7 @@ func (e MCEncryptionPreference) String() string {
 type MCSessionSendDataMode int64
 
 const (
-	MCSessionSendDataReliable MCSessionSendDataMode = 0
+	MCSessionSendDataReliable   MCSessionSendDataMode = 0
 	MCSessionSendDataUnreliable MCSessionSendDataMode = 1
 )
 
@@ -46,4 +46,3 @@ func (e MCSessionSendDataMode) String() string {
 		return fmt.Sprintf("MCSessionSendDataMode(%d)", int64(e))
 	}
 }
-

@@ -16,19 +16,19 @@ type DOMHTMLEmbedElement struct {
 }
 
 var (
-	_clsDOMHTMLEmbedElement = _objcClass("DOMHTMLEmbedElement")
-	_dOMHTMLEmbedElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLEmbedElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLEmbedElementSelHeight = objc.RegisterName("height")
+	_clsDOMHTMLEmbedElement          = _objcClass("DOMHTMLEmbedElement")
+	_dOMHTMLEmbedElementSelAlign     = objc.RegisterName("align")
+	_dOMHTMLEmbedElementSelSetAlign  = objc.RegisterName("setAlign:")
+	_dOMHTMLEmbedElementSelHeight    = objc.RegisterName("height")
 	_dOMHTMLEmbedElementSelSetHeight = objc.RegisterName("setHeight:")
-	_dOMHTMLEmbedElementSelName = objc.RegisterName("name")
-	_dOMHTMLEmbedElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLEmbedElementSelSrc = objc.RegisterName("src")
-	_dOMHTMLEmbedElementSelSetSrc = objc.RegisterName("setSrc:")
-	_dOMHTMLEmbedElementSelType = objc.RegisterName("type")
-	_dOMHTMLEmbedElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLEmbedElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLEmbedElementSelSetWidth = objc.RegisterName("setWidth:")
+	_dOMHTMLEmbedElementSelName      = objc.RegisterName("name")
+	_dOMHTMLEmbedElementSelSetName   = objc.RegisterName("setName:")
+	_dOMHTMLEmbedElementSelSrc       = objc.RegisterName("src")
+	_dOMHTMLEmbedElementSelSetSrc    = objc.RegisterName("setSrc:")
+	_dOMHTMLEmbedElementSelType      = objc.RegisterName("type")
+	_dOMHTMLEmbedElementSelSetType   = objc.RegisterName("setType:")
+	_dOMHTMLEmbedElementSelWidth     = objc.RegisterName("width")
+	_dOMHTMLEmbedElementSelSetWidth  = objc.RegisterName("setWidth:")
 )
 
 func DOMHTMLEmbedElementFromID(id objc.ID) *DOMHTMLEmbedElement {
@@ -43,7 +43,9 @@ func DOMHTMLEmbedElementFromID(id objc.ID) *DOMHTMLEmbedElement {
 
 func (o *DOMHTMLEmbedElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLEmbedElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -62,7 +64,9 @@ func (o *DOMHTMLEmbedElement) SetHeight(height int) {
 
 func (o *DOMHTMLEmbedElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLEmbedElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,7 +76,9 @@ func (o *DOMHTMLEmbedElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLEmbedElement) Src() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLEmbedElementSelSrc)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -82,7 +88,9 @@ func (o *DOMHTMLEmbedElement) SetSrc(src *foundation.NSString) {
 
 func (o *DOMHTMLEmbedElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLEmbedElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -98,4 +106,3 @@ func (o *DOMHTMLEmbedElement) Width() int {
 func (o *DOMHTMLEmbedElement) SetWidth(width int) {
 	o.Ptr().Send(_dOMHTMLEmbedElementSelSetWidth, width)
 }
-

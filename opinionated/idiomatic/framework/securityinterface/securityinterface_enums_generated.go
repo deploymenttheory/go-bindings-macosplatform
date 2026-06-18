@@ -12,10 +12,10 @@ import (
 type SFAuthorizationViewState int64
 
 const (
-	SFAuthorizationStartupState SFAuthorizationViewState = 0
-	SFAuthorizationViewLockedState SFAuthorizationViewState = 1
+	SFAuthorizationStartupState        SFAuthorizationViewState = 0
+	SFAuthorizationViewLockedState     SFAuthorizationViewState = 1
 	SFAuthorizationViewInProgressState SFAuthorizationViewState = 2
-	SFAuthorizationViewUnlockedState SFAuthorizationViewState = 3
+	SFAuthorizationViewUnlockedState   SFAuthorizationViewState = 3
 )
 
 func (e SFAuthorizationViewState) String() string {
@@ -38,9 +38,9 @@ type SFButtonType int64
 
 const (
 	SFButtonTypeCancel SFButtonType = 0
-	SFButtonTypeOK SFButtonType = 1
-	SFButtonTypeBack SFButtonType = 0
-	SFButtonTypeLogin SFButtonType = 1
+	SFButtonTypeOK     SFButtonType = 1
+	SFButtonTypeBack   SFButtonType = 0
+	SFButtonTypeLogin  SFButtonType = 1
 )
 
 func (e SFButtonType) String() string {
@@ -59,7 +59,7 @@ type SFViewType int64
 
 const (
 	SFViewTypeIdentityAndCredentials SFViewType = 0
-	SFViewTypeCredentials SFViewType = 1
+	SFViewTypeCredentials            SFViewType = 1
 )
 
 func (e SFViewType) String() string {
@@ -72,4 +72,3 @@ func (e SFViewType) String() string {
 		return fmt.Sprintf("SFViewType(%d)", int64(e))
 	}
 }
-

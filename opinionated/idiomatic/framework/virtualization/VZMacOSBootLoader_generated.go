@@ -43,4 +43,3 @@ type MacOSBootLoaderable interface {
 }
 
 var _ MacOSBootLoaderable = (*MacOSBootLoader)(nil)
-

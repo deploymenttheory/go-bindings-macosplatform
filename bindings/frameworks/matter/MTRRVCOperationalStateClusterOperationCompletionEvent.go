@@ -16,13 +16,13 @@ type MTRRVCOperationalStateClusterOperationCompletionEvent struct {
 }
 
 var (
-	_clsMTRRVCOperationalStateClusterOperationCompletionEvent = _objcClass("MTRRVCOperationalStateClusterOperationCompletionEvent")
-	_mTRRVCOperationalStateClusterOperationCompletionEventSelCompletionErrorCode = objc.RegisterName("completionErrorCode")
-	_mTRRVCOperationalStateClusterOperationCompletionEventSelSetCompletionErrorCode = objc.RegisterName("setCompletionErrorCode:")
-	_mTRRVCOperationalStateClusterOperationCompletionEventSelTotalOperationalTime = objc.RegisterName("totalOperationalTime")
+	_clsMTRRVCOperationalStateClusterOperationCompletionEvent                        = _objcClass("MTRRVCOperationalStateClusterOperationCompletionEvent")
+	_mTRRVCOperationalStateClusterOperationCompletionEventSelCompletionErrorCode     = objc.RegisterName("completionErrorCode")
+	_mTRRVCOperationalStateClusterOperationCompletionEventSelSetCompletionErrorCode  = objc.RegisterName("setCompletionErrorCode:")
+	_mTRRVCOperationalStateClusterOperationCompletionEventSelTotalOperationalTime    = objc.RegisterName("totalOperationalTime")
 	_mTRRVCOperationalStateClusterOperationCompletionEventSelSetTotalOperationalTime = objc.RegisterName("setTotalOperationalTime:")
-	_mTRRVCOperationalStateClusterOperationCompletionEventSelPausedTime = objc.RegisterName("pausedTime")
-	_mTRRVCOperationalStateClusterOperationCompletionEventSelSetPausedTime = objc.RegisterName("setPausedTime:")
+	_mTRRVCOperationalStateClusterOperationCompletionEventSelPausedTime              = objc.RegisterName("pausedTime")
+	_mTRRVCOperationalStateClusterOperationCompletionEventSelSetPausedTime           = objc.RegisterName("setPausedTime:")
 )
 
 func MTRRVCOperationalStateClusterOperationCompletionEventFromID(id objc.ID) *MTRRVCOperationalStateClusterOperationCompletionEvent {
@@ -37,7 +37,9 @@ func MTRRVCOperationalStateClusterOperationCompletionEventFromID(id objc.ID) *MT
 
 func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationCompletionEventSelCompletionErrorCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) SetCompletionErr
 
 func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationCompletionEventSelTotalOperationalTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) SetTotalOperatio
 
 func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) PausedTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRVCOperationalStateClusterOperationCompletionEventSelPausedTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRRVCOperationalStateClusterOperationCompletionEvent) SetPausedTime(pausedTime *foundation.NSNumber) {
 	o.Ptr().Send(_mTRRVCOperationalStateClusterOperationCompletionEventSelSetPausedTime, pausedTime.Ptr())
 }
-

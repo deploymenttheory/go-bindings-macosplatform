@@ -17,22 +17,22 @@ type OSALanguage struct {
 }
 
 var (
-	_clsOSALanguage = _objcClass("OSALanguage")
-	_oSALanguageSelAvailableLanguages = objc.RegisterName("availableLanguages")
-	_oSALanguageSelLanguageForName = objc.RegisterName("languageForName:")
+	_clsOSALanguage                                = _objcClass("OSALanguage")
+	_oSALanguageSelAvailableLanguages              = objc.RegisterName("availableLanguages")
+	_oSALanguageSelLanguageForName                 = objc.RegisterName("languageForName:")
 	_oSALanguageSelLanguageForScriptDataDescriptor = objc.RegisterName("languageForScriptDataDescriptor:")
-	_oSALanguageSelDefaultLanguage = objc.RegisterName("defaultLanguage")
-	_oSALanguageSelSetDefaultLanguage = objc.RegisterName("setDefaultLanguage:")
-	_oSALanguageSelInitWithComponent = objc.RegisterName("initWithComponent:")
-	_oSALanguageSelSharedLanguageInstance = objc.RegisterName("sharedLanguageInstance")
-	_oSALanguageSelComponentInstance = objc.RegisterName("componentInstance")
-	_oSALanguageSelName = objc.RegisterName("name")
-	_oSALanguageSelInfo = objc.RegisterName("info")
-	_oSALanguageSelType = objc.RegisterName("type")
-	_oSALanguageSelSubType = objc.RegisterName("subType")
-	_oSALanguageSelManufacturer = objc.RegisterName("manufacturer")
-	_oSALanguageSelFeatures = objc.RegisterName("features")
-	_oSALanguageSelIsThreadSafe = objc.RegisterName("isThreadSafe")
+	_oSALanguageSelDefaultLanguage                 = objc.RegisterName("defaultLanguage")
+	_oSALanguageSelSetDefaultLanguage              = objc.RegisterName("setDefaultLanguage:")
+	_oSALanguageSelInitWithComponent               = objc.RegisterName("initWithComponent:")
+	_oSALanguageSelSharedLanguageInstance          = objc.RegisterName("sharedLanguageInstance")
+	_oSALanguageSelComponentInstance               = objc.RegisterName("componentInstance")
+	_oSALanguageSelName                            = objc.RegisterName("name")
+	_oSALanguageSelInfo                            = objc.RegisterName("info")
+	_oSALanguageSelType                            = objc.RegisterName("type")
+	_oSALanguageSelSubType                         = objc.RegisterName("subType")
+	_oSALanguageSelManufacturer                    = objc.RegisterName("manufacturer")
+	_oSALanguageSelFeatures                        = objc.RegisterName("features")
+	_oSALanguageSelIsThreadSafe                    = objc.RegisterName("isThreadSafe")
 )
 
 func OSALanguageFromID(id objc.ID) *OSALanguage {
@@ -47,25 +47,33 @@ func OSALanguageFromID(id objc.ID) *OSALanguage {
 
 func OSALanguageAvailableLanguages() *foundation.NSArray[*OSALanguage] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSALanguage), _oSALanguageSelAvailableLanguages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*OSALanguage](_ret)
 }
 
 func OSALanguageLanguageForName(name *foundation.NSString) *OSALanguage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSALanguage), _oSALanguageSelLanguageForName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
 func OSALanguageLanguageForScriptDataDescriptor(descriptor *foundation.NSAppleEventDescriptor) *OSALanguage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSALanguage), _oSALanguageSelLanguageForScriptDataDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
 func OSALanguageDefaultLanguage() *OSALanguage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSALanguage), _oSALanguageSelDefaultLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
@@ -75,13 +83,17 @@ func OSALanguageSetDefaultLanguage(defaultLanguage *OSALanguage) {
 
 func (o *OSALanguage) InitWithComponent(component *carboncore.ComponentRecord) *OSALanguage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageSelInitWithComponent, component)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
 func (o *OSALanguage) SharedLanguageInstance() *OSALanguageInstance {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageSelSharedLanguageInstance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageInstanceFromID(_ret)
 }
 
@@ -92,13 +104,17 @@ func (o *OSALanguage) ComponentInstance() *carboncore.ComponentInstanceRecord {
 
 func (o *OSALanguage) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *OSALanguage) Info() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSALanguageSelInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -126,4 +142,3 @@ func (o *OSALanguage) IsThreadSafe() bool {
 	_ret := objc.Send[bool](o.Ptr(), _oSALanguageSelIsThreadSafe)
 	return _ret
 }
-

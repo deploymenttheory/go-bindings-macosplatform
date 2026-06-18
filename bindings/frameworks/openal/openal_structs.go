@@ -8,4 +8,3 @@ type ALCcontext_struct struct{}
 
 // ALCdevice_struct is an opaque type.
 type ALCdevice_struct struct{}
-

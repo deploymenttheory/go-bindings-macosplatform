@@ -16,10 +16,10 @@ type MTRChannelClusterProgramCategoryStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterProgramCategoryStruct = _objcClass("MTRChannelClusterProgramCategoryStruct")
-	_mTRChannelClusterProgramCategoryStructSelCategory = objc.RegisterName("category")
-	_mTRChannelClusterProgramCategoryStructSelSetCategory = objc.RegisterName("setCategory:")
-	_mTRChannelClusterProgramCategoryStructSelSubCategory = objc.RegisterName("subCategory")
+	_clsMTRChannelClusterProgramCategoryStruct               = _objcClass("MTRChannelClusterProgramCategoryStruct")
+	_mTRChannelClusterProgramCategoryStructSelCategory       = objc.RegisterName("category")
+	_mTRChannelClusterProgramCategoryStructSelSetCategory    = objc.RegisterName("setCategory:")
+	_mTRChannelClusterProgramCategoryStructSelSubCategory    = objc.RegisterName("subCategory")
 	_mTRChannelClusterProgramCategoryStructSelSetSubCategory = objc.RegisterName("setSubCategory:")
 )
 
@@ -35,7 +35,9 @@ func MTRChannelClusterProgramCategoryStructFromID(id objc.ID) *MTRChannelCluster
 
 func (o *MTRChannelClusterProgramCategoryStruct) Category() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramCategoryStructSelCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRChannelClusterProgramCategoryStruct) SetCategory(category *foundatio
 
 func (o *MTRChannelClusterProgramCategoryStruct) SubCategory() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterProgramCategoryStructSelSubCategory)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRChannelClusterProgramCategoryStruct) SetSubCategory(subCategory *foundation.NSString) {
 	o.Ptr().Send(_mTRChannelClusterProgramCategoryStructSelSetSubCategory, subCategory.Ptr())
 }
-

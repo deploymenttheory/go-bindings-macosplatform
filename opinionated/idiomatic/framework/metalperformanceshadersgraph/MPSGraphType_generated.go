@@ -45,4 +45,3 @@ type GraphTypeable interface {
 }
 
 var _ GraphTypeable = (*GraphType)(nil)
-

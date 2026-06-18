@@ -19,7 +19,9 @@ type MTRBaseClusterRVCOperationalState struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterRVCOperationalState].
-func (x *MTRBaseClusterRVCOperationalState) Unwrap() *raw.MTRBaseClusterRVCOperationalState { return x.inner }
+func (x *MTRBaseClusterRVCOperationalState) Unwrap() *raw.MTRBaseClusterRVCOperationalState {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -538,9 +540,13 @@ func (x *MTRBaseClusterRVCOperationalState) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterRVCOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterRVCOperationalState) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterRVCOperationalState) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterRVCOperationalState) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterRVCOperationalStateable is the interface implemented by [MTRBaseClusterRVCOperationalState], for mocking and DI.
 type MTRBaseClusterRVCOperationalStateable interface {
@@ -576,4 +582,3 @@ type MTRBaseClusterRVCOperationalStateable interface {
 }
 
 var _ MTRBaseClusterRVCOperationalStateable = (*MTRBaseClusterRVCOperationalState)(nil)
-

@@ -288,4 +288,3 @@ type Numberable interface {
 }
 
 var _ Numberable = (*Number)(nil)
-

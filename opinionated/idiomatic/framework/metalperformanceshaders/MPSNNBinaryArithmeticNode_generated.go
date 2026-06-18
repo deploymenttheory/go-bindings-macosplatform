@@ -243,7 +243,9 @@ func (x *NNBinaryArithmeticNode) SetMaximumValue(maximumValue float32) {
 	x.inner.SetMaximumValue(maximumValue)
 }
 
-func (x *NNBinaryArithmeticNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *NNBinaryArithmeticNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // NNBinaryArithmeticNodeable is the interface implemented by [NNBinaryArithmeticNode], for mocking and DI.
 type NNBinaryArithmeticNodeable interface {
@@ -288,4 +290,3 @@ type NNBinaryArithmeticNodeable interface {
 }
 
 var _ NNBinaryArithmeticNodeable = (*NNBinaryArithmeticNode)(nil)
-

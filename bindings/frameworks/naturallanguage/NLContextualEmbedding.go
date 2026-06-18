@@ -18,22 +18,22 @@ type NLContextualEmbedding struct {
 }
 
 var (
-	_clsNLContextualEmbedding = _objcClass("NLContextualEmbedding")
-	_nLContextualEmbeddingSelContextualEmbeddingWithModelIdentifier = objc.RegisterName("contextualEmbeddingWithModelIdentifier:")
-	_nLContextualEmbeddingSelContextualEmbeddingsForValues = objc.RegisterName("contextualEmbeddingsForValues:")
-	_nLContextualEmbeddingSelContextualEmbeddingWithLanguage = objc.RegisterName("contextualEmbeddingWithLanguage:")
-	_nLContextualEmbeddingSelContextualEmbeddingWithScript = objc.RegisterName("contextualEmbeddingWithScript:")
-	_nLContextualEmbeddingSelLoadWithError = objc.RegisterName("loadWithError:")
-	_nLContextualEmbeddingSelUnload = objc.RegisterName("unload")
-	_nLContextualEmbeddingSelEmbeddingResultForStringLanguageError = objc.RegisterName("embeddingResultForString:language:error:")
+	_clsNLContextualEmbedding                                            = _objcClass("NLContextualEmbedding")
+	_nLContextualEmbeddingSelContextualEmbeddingWithModelIdentifier      = objc.RegisterName("contextualEmbeddingWithModelIdentifier:")
+	_nLContextualEmbeddingSelContextualEmbeddingsForValues               = objc.RegisterName("contextualEmbeddingsForValues:")
+	_nLContextualEmbeddingSelContextualEmbeddingWithLanguage             = objc.RegisterName("contextualEmbeddingWithLanguage:")
+	_nLContextualEmbeddingSelContextualEmbeddingWithScript               = objc.RegisterName("contextualEmbeddingWithScript:")
+	_nLContextualEmbeddingSelLoadWithError                               = objc.RegisterName("loadWithError:")
+	_nLContextualEmbeddingSelUnload                                      = objc.RegisterName("unload")
+	_nLContextualEmbeddingSelEmbeddingResultForStringLanguageError       = objc.RegisterName("embeddingResultForString:language:error:")
 	_nLContextualEmbeddingSelRequestEmbeddingAssetsWithCompletionHandler = objc.RegisterName("requestEmbeddingAssetsWithCompletionHandler:")
-	_nLContextualEmbeddingSelModelIdentifier = objc.RegisterName("modelIdentifier")
-	_nLContextualEmbeddingSelLanguages = objc.RegisterName("languages")
-	_nLContextualEmbeddingSelScripts = objc.RegisterName("scripts")
-	_nLContextualEmbeddingSelRevision = objc.RegisterName("revision")
-	_nLContextualEmbeddingSelDimension = objc.RegisterName("dimension")
-	_nLContextualEmbeddingSelMaximumSequenceLength = objc.RegisterName("maximumSequenceLength")
-	_nLContextualEmbeddingSelHasAvailableAssets = objc.RegisterName("hasAvailableAssets")
+	_nLContextualEmbeddingSelModelIdentifier                             = objc.RegisterName("modelIdentifier")
+	_nLContextualEmbeddingSelLanguages                                   = objc.RegisterName("languages")
+	_nLContextualEmbeddingSelScripts                                     = objc.RegisterName("scripts")
+	_nLContextualEmbeddingSelRevision                                    = objc.RegisterName("revision")
+	_nLContextualEmbeddingSelDimension                                   = objc.RegisterName("dimension")
+	_nLContextualEmbeddingSelMaximumSequenceLength                       = objc.RegisterName("maximumSequenceLength")
+	_nLContextualEmbeddingSelHasAvailableAssets                          = objc.RegisterName("hasAvailableAssets")
 )
 
 func NLContextualEmbeddingFromID(id objc.ID) *NLContextualEmbedding {
@@ -49,32 +49,40 @@ func NLContextualEmbeddingFromID(id objc.ID) *NLContextualEmbedding {
 // Creates a contextual embedding from a model identifier. - Parameter modelIdentifier: A string that uniquely identifies the embedding model. If you train a custom model with the contextual embedding as the feature layer, keep track of this identifier and use it when loading the custom model in your app.
 func NLContextualEmbeddingContextualEmbeddingWithModelIdentifier(modelIdentifier *foundation.NSString) *NLContextualEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLContextualEmbedding), _nLContextualEmbeddingSelContextualEmbeddingWithModelIdentifier, modelIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLContextualEmbeddingFromID(_ret)
 }
 
 // Returns contextual embedding models that match the specified language, script, or revision criteria.
 func NLContextualEmbeddingContextualEmbeddingsForValues(valuesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*NLContextualEmbedding] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLContextualEmbedding), _nLContextualEmbeddingSelContextualEmbeddingsForValues, valuesDictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NLContextualEmbedding](_ret)
 }
 
 // Creates a contextual embedding from a language. - Parameter language: The language the framework uses to find the most recent embedding suitable for the value you specify. The language the framework uses to find the most recent embedding suitable for the value you specify.
 func NLContextualEmbeddingContextualEmbeddingWithLanguage(language *foundation.NSString) *NLContextualEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLContextualEmbedding), _nLContextualEmbeddingSelContextualEmbeddingWithLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLContextualEmbeddingFromID(_ret)
 }
 
 // Creates a contextual embedding from a script. - Parameter script: The writing system the framework uses to find the most suitable system embedding for the value you specify; for example, Chinese or Latin.
 func NLContextualEmbeddingContextualEmbeddingWithScript(script *foundation.NSString) *NLContextualEmbedding {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNLContextualEmbedding), _nLContextualEmbeddingSelContextualEmbeddingWithScript, script.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NLContextualEmbeddingFromID(_ret)
 }
 
-// The instance method that loads the embedding model. - Returns: A Boolean value that indicates whether the load succeeds. When you create a contextual embedding, the framework doesn't load the model until you need it. Use ``NLContextualEmbedding/load()`` and ``NLContextualEmbedding/unload()`` to control when to load and unload the model. The first time load can be expensive, make sure you load the model before you need to use it. The method fails if the necessary assets aren't on device for the model you specify. Use ``NLContextualEmbedding/hasAvailableAssets`` and ``NLContextualEmbedding/requestAssets(completionHandler:)`` to manage the assets.
+// The instance method that loads the embedding model. - Returns: A Boolean value that indicates whether the load succeeds. When you create a contextual embedding, the framework doesn't load the model until you need it. Use “NLContextualEmbedding/load()“ and “NLContextualEmbedding/unload()“ to control when to load and unload the model. The first time load can be expensive, make sure you load the model before you need to use it. The method fails if the necessary assets aren't on device for the model you specify. Use “NLContextualEmbedding/hasAvailableAssets“ and “NLContextualEmbedding/requestAssets(completionHandler:)“ to manage the assets.
 func (o *NLContextualEmbedding) LoadWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _nLContextualEmbeddingSelLoadWithError, unsafe.Pointer(&_nsErr))
@@ -93,14 +101,16 @@ func (o *NLContextualEmbedding) Unload() {
 func (o *NLContextualEmbedding) EmbeddingResultForStringLanguageError(string_ *foundation.NSString, language *foundation.NSString) (*NLContextualEmbeddingResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLContextualEmbeddingSelEmbeddingResultForStringLanguageError, string_.Ptr(), language.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return NLContextualEmbeddingResultFromID(_ret), nil
 }
 
-// Requests embedding model assets and downloads them if available. - Parameter completionHandler: A closure that notifies your app when the asset request completes. ## Asynchronous alternative You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: ```swift func requestAssets() async throws -> NLContextualEmbedding.AssetsResult ``` For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. ## Discussion You use a contextual embedding after loading the necessary assets onto the device. Use ``NLContextualEmbedding/hasAvailableAssets`` to determine whether assets are available. This method returns immediately if the framework knows the state of the assets or if an error occurs.
+// Requests embedding model assets and downloads them if available. - Parameter completionHandler: A closure that notifies your app when the asset request completes. ## Asynchronous alternative You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: ```swift func requestAssets() async throws -> NLContextualEmbedding.AssetsResult ``` For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. ## Discussion You use a contextual embedding after loading the necessary assets onto the device. Use “NLContextualEmbedding/hasAvailableAssets“ to determine whether assets are available. This method returns immediately if the framework knows the state of the assets or if an error occurs.
 func (o *NLContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -115,7 +125,9 @@ func (o *NLContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(comp
 // A string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
 func (o *NLContextualEmbedding) ModelIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLContextualEmbeddingSelModelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,7 +137,7 @@ func (o *NLContextualEmbedding) Languages() *foundation.NSArray[*foundation.NSSt
 	return _ret
 }
 
-// The writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to ``languages``.
+// The writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
 func (o *NLContextualEmbedding) Scripts() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _nLContextualEmbeddingSelScripts)
 	return _ret
@@ -154,4 +166,3 @@ func (o *NLContextualEmbedding) HasAvailableAssets() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nLContextualEmbeddingSelHasAvailableAssets)
 	return _ret
 }
-

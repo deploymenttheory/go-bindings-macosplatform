@@ -35,7 +35,9 @@ func NewConsoleDeviceConfiguration() *ConsoleDeviceConfiguration {
 	return &ConsoleDeviceConfiguration{inner: raw.VZConsoleDeviceConfigurationFromID(_id)}
 }
 
-func (x *ConsoleDeviceConfiguration) asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration { return x.inner }
+func (x *ConsoleDeviceConfiguration) asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration {
+	return x.inner
+}
 
 // ConsoleDeviceConfigurationable is the interface implemented by [ConsoleDeviceConfiguration], for mocking and DI.
 type ConsoleDeviceConfigurationable interface {
@@ -43,4 +45,3 @@ type ConsoleDeviceConfigurationable interface {
 }
 
 var _ ConsoleDeviceConfigurationable = (*ConsoleDeviceConfiguration)(nil)
-

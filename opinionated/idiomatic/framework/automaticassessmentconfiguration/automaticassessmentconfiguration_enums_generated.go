@@ -32,4 +32,3 @@ func (e AEAutocorrectMode) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

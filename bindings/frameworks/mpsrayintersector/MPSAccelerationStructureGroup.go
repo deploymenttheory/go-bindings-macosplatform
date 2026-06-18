@@ -17,9 +17,9 @@ type MPSAccelerationStructureGroup struct {
 }
 
 var (
-	_clsMPSAccelerationStructureGroup = _objcClass("MPSAccelerationStructureGroup")
+	_clsMPSAccelerationStructureGroup               = _objcClass("MPSAccelerationStructureGroup")
 	_mPSAccelerationStructureGroupSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSAccelerationStructureGroupSelDevice = objc.RegisterName("device")
+	_mPSAccelerationStructureGroupSelDevice         = objc.RegisterName("device")
 )
 
 func MPSAccelerationStructureGroupFromID(id objc.ID) *MPSAccelerationStructureGroup {
@@ -34,7 +34,9 @@ func MPSAccelerationStructureGroupFromID(id objc.ID) *MPSAccelerationStructureGr
 
 func (o *MPSAccelerationStructureGroup) InitWithDevice(device metal.MTLDevice) *MPSAccelerationStructureGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSAccelerationStructureGroupSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSAccelerationStructureGroupFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPSAccelerationStructureGroup) Device() metal.MTLDevice {
 	_ret := objc.Send[metal.MTLDevice](o.Ptr(), _mPSAccelerationStructureGroupSelDevice)
 	return _ret
 }
-

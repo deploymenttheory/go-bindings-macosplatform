@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestNotHandledParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestNotHandledParams].
-func (x *MTRUnitTestingClusterTestNotHandledParams) Unwrap() *raw.MTRUnitTestingClusterTestNotHandledParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNotHandledParams) Unwrap() *raw.MTRUnitTestingClusterTestNotHandledParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,7 +70,9 @@ func (x *MTRUnitTestingClusterTestNotHandledParams) SetServerSideProcessingTimeo
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams { return x.inner }
+func (x *MTRUnitTestingClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestNotHandledParamsable is the interface implemented by [MTRUnitTestingClusterTestNotHandledParams], for mocking and DI.
 type MTRUnitTestingClusterTestNotHandledParamsable interface {
@@ -82,4 +86,3 @@ type MTRUnitTestingClusterTestNotHandledParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestNotHandledParamsable = (*MTRUnitTestingClusterTestNotHandledParams)(nil)
-

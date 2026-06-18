@@ -19,7 +19,9 @@ type MTRBaseClusterContentAppObserver struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterContentAppObserver].
-func (x *MTRBaseClusterContentAppObserver) Unwrap() *raw.MTRBaseClusterContentAppObserver { return x.inner }
+func (x *MTRBaseClusterContentAppObserver) Unwrap() *raw.MTRBaseClusterContentAppObserver {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -192,9 +194,13 @@ func (x *MTRBaseClusterContentAppObserver) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-func (x *MTRBaseClusterContentAppObserver) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterContentAppObserver) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterContentAppObserver) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterContentAppObserver) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterContentAppObserverable is the interface implemented by [MTRBaseClusterContentAppObserver], for mocking and DI.
 type MTRBaseClusterContentAppObserverable interface {
@@ -213,4 +219,3 @@ type MTRBaseClusterContentAppObserverable interface {
 }
 
 var _ MTRBaseClusterContentAppObserverable = (*MTRBaseClusterContentAppObserver)(nil)
-

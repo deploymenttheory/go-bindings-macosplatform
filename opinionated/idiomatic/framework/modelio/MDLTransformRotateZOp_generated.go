@@ -62,4 +62,3 @@ type TransformRotateZOpable interface {
 }
 
 var _ TransformRotateZOpable = (*TransformRotateZOp)(nil)
-

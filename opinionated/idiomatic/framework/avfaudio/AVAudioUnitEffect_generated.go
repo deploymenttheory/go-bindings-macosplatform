@@ -67,4 +67,3 @@ type AudioUnitEffectable interface {
 }
 
 var _ AudioUnitEffectable = (*AudioUnitEffect)(nil)
-

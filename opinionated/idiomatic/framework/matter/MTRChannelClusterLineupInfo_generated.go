@@ -60,7 +60,9 @@ func (x *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType *foundat
 	return x
 }
 
-func (x *MTRChannelClusterLineupInfo) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct { return &x.inner.MTRChannelClusterLineupInfoStruct }
+func (x *MTRChannelClusterLineupInfo) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct {
+	return &x.inner.MTRChannelClusterLineupInfoStruct
+}
 
 // MTRChannelClusterLineupInfoable is the interface implemented by [MTRChannelClusterLineupInfo], for mocking and DI.
 type MTRChannelClusterLineupInfoable interface {
@@ -72,4 +74,3 @@ type MTRChannelClusterLineupInfoable interface {
 }
 
 var _ MTRChannelClusterLineupInfoable = (*MTRChannelClusterLineupInfo)(nil)
-

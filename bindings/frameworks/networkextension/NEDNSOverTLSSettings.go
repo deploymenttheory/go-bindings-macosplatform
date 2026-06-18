@@ -16,10 +16,10 @@ type NEDNSOverTLSSettings struct {
 }
 
 var (
-	_clsNEDNSOverTLSSettings = _objcClass("NEDNSOverTLSSettings")
-	_nEDNSOverTLSSettingsSelServerName = objc.RegisterName("serverName")
-	_nEDNSOverTLSSettingsSelSetServerName = objc.RegisterName("setServerName:")
-	_nEDNSOverTLSSettingsSelIdentityReference = objc.RegisterName("identityReference")
+	_clsNEDNSOverTLSSettings                     = _objcClass("NEDNSOverTLSSettings")
+	_nEDNSOverTLSSettingsSelServerName           = objc.RegisterName("serverName")
+	_nEDNSOverTLSSettingsSelSetServerName        = objc.RegisterName("setServerName:")
+	_nEDNSOverTLSSettingsSelIdentityReference    = objc.RegisterName("identityReference")
 	_nEDNSOverTLSSettingsSelSetIdentityReference = objc.RegisterName("setIdentityReference:")
 )
 
@@ -36,7 +36,9 @@ func NEDNSOverTLSSettingsFromID(id objc.ID) *NEDNSOverTLSSettings {
 // @property serverName @discussion The name of the server to use for TLS certificate validation.
 func (o *NEDNSOverTLSSettings) ServerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSOverTLSSettingsSelServerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,11 +49,12 @@ func (o *NEDNSOverTLSSettings) SetServerName(serverName *foundation.NSString) {
 // @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
 func (o *NEDNSOverTLSSettings) IdentityReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEDNSOverTLSSettingsSelIdentityReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *NEDNSOverTLSSettings) SetIdentityReference(identityReference *foundation.NSData) {
 	o.Ptr().Send(_nEDNSOverTLSSettingsSelSetIdentityReference, identityReference.Ptr())
 }
-

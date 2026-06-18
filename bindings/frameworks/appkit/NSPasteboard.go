@@ -16,43 +16,43 @@ type NSPasteboard struct {
 }
 
 var (
-	_clsNSPasteboard = _objcClass("NSPasteboard")
-	_nSPasteboardSelPasteboardWithName = objc.RegisterName("pasteboardWithName:")
-	_nSPasteboardSelPasteboardWithUniqueName = objc.RegisterName("pasteboardWithUniqueName")
-	_nSPasteboardSelReleaseGlobally = objc.RegisterName("releaseGlobally")
-	_nSPasteboardSelPrepareForNewContentsWithOptions = objc.RegisterName("prepareForNewContentsWithOptions:")
-	_nSPasteboardSelClearContents = objc.RegisterName("clearContents")
-	_nSPasteboardSelWriteObjects = objc.RegisterName("writeObjects:")
-	_nSPasteboardSelReadObjectsForClassesOptions = objc.RegisterName("readObjectsForClasses:options:")
-	_nSPasteboardSelIndexOfPasteboardItem = objc.RegisterName("indexOfPasteboardItem:")
-	_nSPasteboardSelCanReadItemWithDataConformingToTypes = objc.RegisterName("canReadItemWithDataConformingToTypes:")
-	_nSPasteboardSelCanReadObjectForClassesOptions = objc.RegisterName("canReadObjectForClasses:options:")
-	_nSPasteboardSelDeclareTypesOwner = objc.RegisterName("declareTypes:owner:")
-	_nSPasteboardSelAddTypesOwner = objc.RegisterName("addTypes:owner:")
-	_nSPasteboardSelAvailableTypeFromArray = objc.RegisterName("availableTypeFromArray:")
-	_nSPasteboardSelSetDataForType = objc.RegisterName("setData:forType:")
-	_nSPasteboardSelSetPropertyListForType = objc.RegisterName("setPropertyList:forType:")
-	_nSPasteboardSelSetStringForType = objc.RegisterName("setString:forType:")
-	_nSPasteboardSelDataForType = objc.RegisterName("dataForType:")
-	_nSPasteboardSelPropertyListForType = objc.RegisterName("propertyListForType:")
-	_nSPasteboardSelStringForType = objc.RegisterName("stringForType:")
+	_clsNSPasteboard                                           = _objcClass("NSPasteboard")
+	_nSPasteboardSelPasteboardWithName                         = objc.RegisterName("pasteboardWithName:")
+	_nSPasteboardSelPasteboardWithUniqueName                   = objc.RegisterName("pasteboardWithUniqueName")
+	_nSPasteboardSelReleaseGlobally                            = objc.RegisterName("releaseGlobally")
+	_nSPasteboardSelPrepareForNewContentsWithOptions           = objc.RegisterName("prepareForNewContentsWithOptions:")
+	_nSPasteboardSelClearContents                              = objc.RegisterName("clearContents")
+	_nSPasteboardSelWriteObjects                               = objc.RegisterName("writeObjects:")
+	_nSPasteboardSelReadObjectsForClassesOptions               = objc.RegisterName("readObjectsForClasses:options:")
+	_nSPasteboardSelIndexOfPasteboardItem                      = objc.RegisterName("indexOfPasteboardItem:")
+	_nSPasteboardSelCanReadItemWithDataConformingToTypes       = objc.RegisterName("canReadItemWithDataConformingToTypes:")
+	_nSPasteboardSelCanReadObjectForClassesOptions             = objc.RegisterName("canReadObjectForClasses:options:")
+	_nSPasteboardSelDeclareTypesOwner                          = objc.RegisterName("declareTypes:owner:")
+	_nSPasteboardSelAddTypesOwner                              = objc.RegisterName("addTypes:owner:")
+	_nSPasteboardSelAvailableTypeFromArray                     = objc.RegisterName("availableTypeFromArray:")
+	_nSPasteboardSelSetDataForType                             = objc.RegisterName("setData:forType:")
+	_nSPasteboardSelSetPropertyListForType                     = objc.RegisterName("setPropertyList:forType:")
+	_nSPasteboardSelSetStringForType                           = objc.RegisterName("setString:forType:")
+	_nSPasteboardSelDataForType                                = objc.RegisterName("dataForType:")
+	_nSPasteboardSelPropertyListForType                        = objc.RegisterName("propertyListForType:")
+	_nSPasteboardSelStringForType                              = objc.RegisterName("stringForType:")
 	_nSPasteboardSelDetectPatternsForPatternsCompletionHandler = objc.RegisterName("detectPatternsForPatterns:completionHandler:")
-	_nSPasteboardSelDetectValuesForPatternsCompletionHandler = objc.RegisterName("detectValuesForPatterns:completionHandler:")
-	_nSPasteboardSelDetectMetadataForTypesCompletionHandler = objc.RegisterName("detectMetadataForTypes:completionHandler:")
-	_nSPasteboardSelGeneralPasteboard = objc.RegisterName("generalPasteboard")
-	_nSPasteboardSelName = objc.RegisterName("name")
-	_nSPasteboardSelChangeCount = objc.RegisterName("changeCount")
-	_nSPasteboardSelAccessBehavior = objc.RegisterName("accessBehavior")
-	_nSPasteboardSelPasteboardItems = objc.RegisterName("pasteboardItems")
-	_nSPasteboardSelTypes = objc.RegisterName("types")
-	_nSPasteboardSelTypesFilterableTo = objc.RegisterName("typesFilterableTo:")
-	_nSPasteboardSelPasteboardByFilteringFile = objc.RegisterName("pasteboardByFilteringFile:")
-	_nSPasteboardSelPasteboardByFilteringDataOfType = objc.RegisterName("pasteboardByFilteringData:ofType:")
-	_nSPasteboardSelPasteboardByFilteringTypesInPasteboard = objc.RegisterName("pasteboardByFilteringTypesInPasteboard:")
-	_nSPasteboardSelWriteFileContents = objc.RegisterName("writeFileContents:")
-	_nSPasteboardSelReadFileContentsTypeToFile = objc.RegisterName("readFileContentsType:toFile:")
-	_nSPasteboardSelWriteFileWrapper = objc.RegisterName("writeFileWrapper:")
-	_nSPasteboardSelReadFileWrapper = objc.RegisterName("readFileWrapper")
+	_nSPasteboardSelDetectValuesForPatternsCompletionHandler   = objc.RegisterName("detectValuesForPatterns:completionHandler:")
+	_nSPasteboardSelDetectMetadataForTypesCompletionHandler    = objc.RegisterName("detectMetadataForTypes:completionHandler:")
+	_nSPasteboardSelGeneralPasteboard                          = objc.RegisterName("generalPasteboard")
+	_nSPasteboardSelName                                       = objc.RegisterName("name")
+	_nSPasteboardSelChangeCount                                = objc.RegisterName("changeCount")
+	_nSPasteboardSelAccessBehavior                             = objc.RegisterName("accessBehavior")
+	_nSPasteboardSelPasteboardItems                            = objc.RegisterName("pasteboardItems")
+	_nSPasteboardSelTypes                                      = objc.RegisterName("types")
+	_nSPasteboardSelTypesFilterableTo                          = objc.RegisterName("typesFilterableTo:")
+	_nSPasteboardSelPasteboardByFilteringFile                  = objc.RegisterName("pasteboardByFilteringFile:")
+	_nSPasteboardSelPasteboardByFilteringDataOfType            = objc.RegisterName("pasteboardByFilteringData:ofType:")
+	_nSPasteboardSelPasteboardByFilteringTypesInPasteboard     = objc.RegisterName("pasteboardByFilteringTypesInPasteboard:")
+	_nSPasteboardSelWriteFileContents                          = objc.RegisterName("writeFileContents:")
+	_nSPasteboardSelReadFileContentsTypeToFile                 = objc.RegisterName("readFileContentsType:toFile:")
+	_nSPasteboardSelWriteFileWrapper                           = objc.RegisterName("writeFileWrapper:")
+	_nSPasteboardSelReadFileWrapper                            = objc.RegisterName("readFileWrapper")
 )
 
 func NSPasteboardFromID(id objc.ID) *NSPasteboard {
@@ -67,13 +67,17 @@ func NSPasteboardFromID(id objc.ID) *NSPasteboard {
 
 func NSPasteboardPasteboardWithName(name *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardWithName, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
 func NSPasteboardPasteboardWithUniqueName() *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardWithUniqueName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
@@ -128,7 +132,9 @@ func (o *NSPasteboard) AddTypesOwner(newTypes *foundation.NSArray[*foundation.NS
 
 func (o *NSPasteboard) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelAvailableTypeFromArray, types)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,7 +155,9 @@ func (o *NSPasteboard) SetStringForType(string_ *foundation.NSString, dataType *
 
 func (o *NSPasteboard) DataForType(dataType *foundation.NSString) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelDataForType, dataType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -160,7 +168,9 @@ func (o *NSPasteboard) PropertyListForType(dataType *foundation.NSString) objc.I
 
 func (o *NSPasteboard) StringForType(dataType *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelStringForType, dataType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,25 +179,29 @@ func (o *NSPasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foun
 	o.Ptr().Send(_nSPasteboardSelDetectPatternsForPatternsCompletionHandler, patterns, completionHandler)
 }
 
-// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see ``NSPasteboardDetectionPattern``. The following example shows how to use this method to find web URLs and web search terms in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Web search retrieved: %@", searchString); } if (urlString != nil) { NSLog(@"Web URL retrieved: %@", urlString); } if (searchString == nil && urlString == nil) { NSLog(@"No web patterns retrieved."); } }]; ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block returns either a dictionary with the patterns the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched patterns and the values specify the corresponding content of the pasteboard.
+// Determines whether the first pasteboard item matches the specified patterns, reading the contents if it finds a match. For details about the types returned for each pattern, see “NSPasteboardDetectionPattern“. The following example shows how to use this method to find web URLs and web search terms in the first pasteboard item: ```obj-c [NSPasteboard.generalPasteboard detectValuesForPatterns:[NSSet setWithArray:@[NSPasteboardDetectionPatternProbableWebSearch, NSPasteboardDetectionPatternProbableWebURL]] completionHandler:^(NSDictionary<NSPasteboardDetectionPattern, id> *patternValues, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } NSString *searchString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebSearch]; NSString *urlString = (NSString*)patternValues[NSPasteboardDetectionPatternProbableWebURL] ; if (searchString != nil) { NSLog(@"Web search retrieved: %@", searchString); } if (urlString != nil) { NSLog(@"Web URL retrieved: %@", urlString); } if (searchString == nil && urlString == nil) { NSLog(@"No web patterns retrieved."); } }]; ``` > Important: If the system finds a match when calling this method, the system informs the person using the app that the app is trying to read the contents of the pasteboard. If the person denies access to the pasteboard, the completion handler receives an error. - Parameters: - patterns: The patterns to detect on the pasteboard. - completionHandler: A block the system invokes after detecting patterns on the pasteboard. The block returns either a dictionary with the patterns the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched patterns and the values specify the corresponding content of the pasteboard.
 func (o *NSPasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	o.Ptr().Send(_nSPasteboardSelDetectValuesForPatternsCompletionHandler, patterns, completionHandler)
 }
 
-// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see ``NSPasteboardMetadataType``. The following example shows how to use this method to find the content type of a file reference in the first item on the pasteboard: ```obj-c [NSPasteboard.generalPasteboard detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Content type is: %@", contentType.identifier); } else { NSLog(@"Couldn't get content type"); } }]; ``` - Parameters: - types: The metadata types to detect on the pasteboard. - completionHandler: A block the system invokes after detecting metadata on the pasteboard. The block receives either a dictionary with the metadata types the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched metadata types and the values specify the corresponding metadata.
+// Determines available metadata from the specified metadata types for the first pasteboard item, without notifying the person using the app. This method only gives access to limited types of metadata and doesn’t allow the app to access the contents. As a result, the system doesn’t notify the person using the app about reading the contents of the pasteboard. For details about the metadata returned for each type, see “NSPasteboardMetadataType“. The following example shows how to use this method to find the content type of a file reference in the first item on the pasteboard: ```obj-c [NSPasteboard.generalPasteboard detectMetadataForTypes:[NSSet setWithArray:@[NSPasteboardMetadataTypeContentType]] completionHandler:^(NSDictionary<NSPasteboardMetadataType, id> *metadata, NSError *error) { if (error) { NSLog(@"Error: %@", error); return; } UTType *contentType = (UTType*)metadata[NSPasteboardMetadataTypeContentType]; if (contentType) { NSLog(@"Content type is: %@", contentType.identifier); } else { NSLog(@"Couldn't get content type"); } }]; ``` - Parameters: - types: The metadata types to detect on the pasteboard. - completionHandler: A block the system invokes after detecting metadata on the pasteboard. The block receives either a dictionary with the metadata types the system finds on the pasteboard or an error if detection fails. The dictionary keys specify the matched metadata types and the values specify the corresponding metadata.
 func (o *NSPasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
 	o.Ptr().Send(_nSPasteboardSelDetectMetadataForTypesCompletionHandler, types, completionHandler)
 }
 
 func NSPasteboardGeneralPasteboard() *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelGeneralPasteboard)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
 func (o *NSPasteboard) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -204,7 +218,9 @@ func (o *NSPasteboard) AccessBehavior() NSPasteboardAccessBehavior {
 
 func (o *NSPasteboard) PasteboardItems() *foundation.NSArray[*NSPasteboardItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelPasteboardItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPasteboardItem](_ret)
 }
 
@@ -220,19 +236,25 @@ func NSPasteboardTypesFilterableTo(type_ *foundation.NSString) *foundation.NSArr
 
 func NSPasteboardPasteboardByFilteringFile(filename *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardByFilteringFile, filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
 func NSPasteboardPasteboardByFilteringDataOfType(data *foundation.NSData, type_ *foundation.NSString) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardByFilteringDataOfType, data.Ptr(), type_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
 func NSPasteboardPasteboardByFilteringTypesInPasteboard(pboard *NSPasteboard) *NSPasteboard {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPasteboard), _nSPasteboardSelPasteboardByFilteringTypesInPasteboard, pboard.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPasteboardFromID(_ret)
 }
 
@@ -243,7 +265,9 @@ func (o *NSPasteboard) WriteFileContents(filename *foundation.NSString) bool {
 
 func (o *NSPasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, filename *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelReadFileContentsTypeToFile, type_.Ptr(), filename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -254,7 +278,8 @@ func (o *NSPasteboard) WriteFileWrapper(wrapper *foundation.NSFileWrapper) bool 
 
 func (o *NSPasteboard) ReadFileWrapper() *foundation.NSFileWrapper {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPasteboardSelReadFileWrapper)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileWrapperFromID(_ret)
 }
-

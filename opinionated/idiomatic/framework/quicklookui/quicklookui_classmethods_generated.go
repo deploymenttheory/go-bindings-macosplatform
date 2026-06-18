@@ -21,4 +21,3 @@ func SharedPreviewPanel() *PreviewPanel {
 func SharedPreviewPanelExists() bool {
 	return raw.QLPreviewPanelSharedPreviewPanelExists()
 }
-

@@ -1625,4 +1625,3 @@ func NumBytesToNumAudioFileMarkers(inNumBytes uint) uint {
 func SetAudioUnitParameterDisplayType(flags raw.AudioUnitParameterOptions, displayType raw.AudioUnitParameterOptions) raw.AudioUnitParameterOptions {
 	return raw.SetAudioUnitParameterDisplayType(flags, displayType)
 }
-

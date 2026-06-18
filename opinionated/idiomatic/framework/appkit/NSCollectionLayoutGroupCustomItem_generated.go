@@ -16,7 +16,9 @@ type CollectionLayoutGroupCustomItem struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionLayoutGroupCustomItem].
-func (x *CollectionLayoutGroupCustomItem) Unwrap() *raw.NSCollectionLayoutGroupCustomItem { return x.inner }
+func (x *CollectionLayoutGroupCustomItem) Unwrap() *raw.NSCollectionLayoutGroupCustomItem {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,4 +56,3 @@ type CollectionLayoutGroupCustomItemable interface {
 }
 
 var _ CollectionLayoutGroupCustomItemable = (*CollectionLayoutGroupCustomItem)(nil)
-

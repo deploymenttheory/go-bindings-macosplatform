@@ -89,7 +89,9 @@ func (x *MultiPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumbe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -119,9 +121,13 @@ func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
 	return &MultiPolyline{inner: _r}
 }
 
-func (x *MultiPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
+func (x *MultiPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
+	return &x.inner.MKOverlayPathRenderer
+}
 
-func (x *MultiPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+func (x *MultiPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
+	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+}
 
 // MultiPolylineRendererable is the interface implemented by [MultiPolylineRenderer], for mocking and DI.
 type MultiPolylineRendererable interface {
@@ -140,4 +146,3 @@ type MultiPolylineRendererable interface {
 }
 
 var _ MultiPolylineRendererable = (*MultiPolylineRenderer)(nil)
-

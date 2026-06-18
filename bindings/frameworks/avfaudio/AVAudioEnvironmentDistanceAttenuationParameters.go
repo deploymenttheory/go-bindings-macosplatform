@@ -16,15 +16,15 @@ type AVAudioEnvironmentDistanceAttenuationParameters struct {
 }
 
 var (
-	_clsAVAudioEnvironmentDistanceAttenuationParameters = _objcClass("AVAudioEnvironmentDistanceAttenuationParameters")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelDistanceAttenuationModel = objc.RegisterName("distanceAttenuationModel")
+	_clsAVAudioEnvironmentDistanceAttenuationParameters                            = _objcClass("AVAudioEnvironmentDistanceAttenuationParameters")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelDistanceAttenuationModel    = objc.RegisterName("distanceAttenuationModel")
 	_aVAudioEnvironmentDistanceAttenuationParametersSelSetDistanceAttenuationModel = objc.RegisterName("setDistanceAttenuationModel:")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelReferenceDistance = objc.RegisterName("referenceDistance")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelSetReferenceDistance = objc.RegisterName("setReferenceDistance:")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelMaximumDistance = objc.RegisterName("maximumDistance")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelSetMaximumDistance = objc.RegisterName("setMaximumDistance:")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelRolloffFactor = objc.RegisterName("rolloffFactor")
-	_aVAudioEnvironmentDistanceAttenuationParametersSelSetRolloffFactor = objc.RegisterName("setRolloffFactor:")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelReferenceDistance           = objc.RegisterName("referenceDistance")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelSetReferenceDistance        = objc.RegisterName("setReferenceDistance:")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelMaximumDistance             = objc.RegisterName("maximumDistance")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelSetMaximumDistance          = objc.RegisterName("setMaximumDistance:")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelRolloffFactor               = objc.RegisterName("rolloffFactor")
+	_aVAudioEnvironmentDistanceAttenuationParametersSelSetRolloffFactor            = objc.RegisterName("setRolloffFactor:")
 )
 
 func AVAudioEnvironmentDistanceAttenuationParametersFromID(id objc.ID) *AVAudioEnvironmentDistanceAttenuationParameters {
@@ -76,4 +76,3 @@ func (o *AVAudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float3
 func (o *AVAudioEnvironmentDistanceAttenuationParameters) SetRolloffFactor(rolloffFactor float32) {
 	o.Ptr().Send(_aVAudioEnvironmentDistanceAttenuationParametersSelSetRolloffFactor, rolloffFactor)
 }
-

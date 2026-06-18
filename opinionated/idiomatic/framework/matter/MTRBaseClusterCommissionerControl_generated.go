@@ -19,7 +19,9 @@ type MTRBaseClusterCommissionerControl struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterCommissionerControl].
-func (x *MTRBaseClusterCommissionerControl) Unwrap() *raw.MTRBaseClusterCommissionerControl { return x.inner }
+func (x *MTRBaseClusterCommissionerControl) Unwrap() *raw.MTRBaseClusterCommissionerControl {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -245,9 +247,13 @@ func (x *MTRBaseClusterCommissionerControl) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-func (x *MTRBaseClusterCommissionerControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterCommissionerControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterCommissionerControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterCommissionerControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterCommissionerControlable is the interface implemented by [MTRBaseClusterCommissionerControl], for mocking and DI.
 type MTRBaseClusterCommissionerControlable interface {
@@ -269,4 +275,3 @@ type MTRBaseClusterCommissionerControlable interface {
 }
 
 var _ MTRBaseClusterCommissionerControlable = (*MTRBaseClusterCommissionerControl)(nil)
-

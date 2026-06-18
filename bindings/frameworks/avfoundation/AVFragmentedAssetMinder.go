@@ -16,14 +16,14 @@ type AVFragmentedAssetMinder struct {
 }
 
 var (
-	_clsAVFragmentedAssetMinder = _objcClass("AVFragmentedAssetMinder")
+	_clsAVFragmentedAssetMinder                                              = _objcClass("AVFragmentedAssetMinder")
 	_aVFragmentedAssetMinderSelFragmentedAssetMinderWithAssetMindingInterval = objc.RegisterName("fragmentedAssetMinderWithAsset:mindingInterval:")
-	_aVFragmentedAssetMinderSelInitWithAssetMindingInterval = objc.RegisterName("initWithAsset:mindingInterval:")
-	_aVFragmentedAssetMinderSelAddFragmentedAsset = objc.RegisterName("addFragmentedAsset:")
-	_aVFragmentedAssetMinderSelRemoveFragmentedAsset = objc.RegisterName("removeFragmentedAsset:")
-	_aVFragmentedAssetMinderSelMindingInterval = objc.RegisterName("mindingInterval")
-	_aVFragmentedAssetMinderSelSetMindingInterval = objc.RegisterName("setMindingInterval:")
-	_aVFragmentedAssetMinderSelAssets = objc.RegisterName("assets")
+	_aVFragmentedAssetMinderSelInitWithAssetMindingInterval                  = objc.RegisterName("initWithAsset:mindingInterval:")
+	_aVFragmentedAssetMinderSelAddFragmentedAsset                            = objc.RegisterName("addFragmentedAsset:")
+	_aVFragmentedAssetMinderSelRemoveFragmentedAsset                         = objc.RegisterName("removeFragmentedAsset:")
+	_aVFragmentedAssetMinderSelMindingInterval                               = objc.RegisterName("mindingInterval")
+	_aVFragmentedAssetMinderSelSetMindingInterval                            = objc.RegisterName("setMindingInterval:")
+	_aVFragmentedAssetMinderSelAssets                                        = objc.RegisterName("assets")
 )
 
 func AVFragmentedAssetMinderFromID(id objc.ID) *AVFragmentedAssetMinder {
@@ -39,14 +39,18 @@ func AVFragmentedAssetMinderFromID(id objc.ID) *AVFragmentedAssetMinder {
 // Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value. - Parameter asset: An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder - Parameter mindingInterval: The initial minding interval of the AVFragmentedAssetMinder. - Returns: A new instance of AVFragmentedAssetMinder.
 func AVFragmentedAssetMinderFragmentedAssetMinderWithAssetMindingInterval(asset *AVAsset, mindingInterval float64) *AVFragmentedAssetMinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAssetMinder), _aVFragmentedAssetMinderSelFragmentedAssetMinderWithAssetMindingInterval, asset.Ptr(), mindingInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFragmentedAssetMinderFromID(_ret)
 }
 
 // Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value. - Parameter asset: An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder - Parameter mindingInterval: The initial minding interval of the AVFragmentedAssetMinder. - Returns: A new instance of AVFragmentedAssetMinder.
 func (o *AVFragmentedAssetMinder) InitWithAssetMindingInterval(asset *AVAsset, mindingInterval float64) *AVFragmentedAssetMinder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedAssetMinderSelInitWithAssetMindingInterval, asset.Ptr(), mindingInterval)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFragmentedAssetMinderFromID(_ret)
 }
 
@@ -73,7 +77,8 @@ func (o *AVFragmentedAssetMinder) SetMindingInterval(mindingInterval float64) {
 // An NSArray of the AVFragmentedAsset objects being minded.
 func (o *AVFragmentedAssetMinder) Assets() *foundation.NSArray[*AVAsset] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVFragmentedAssetMinderSelAssets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAsset](_ret)
 }
-

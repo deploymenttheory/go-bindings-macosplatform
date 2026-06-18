@@ -18,12 +18,12 @@ type AVSampleBufferGenerator struct {
 }
 
 var (
-	_clsAVSampleBufferGenerator = _objcClass("AVSampleBufferGenerator")
-	_aVSampleBufferGeneratorSelInitWithAssetTimebase = objc.RegisterName("initWithAsset:timebase:")
-	_aVSampleBufferGeneratorSelCreateSampleBufferForRequestError = objc.RegisterName("createSampleBufferForRequest:error:")
-	_aVSampleBufferGeneratorSelCreateSampleBufferForRequest = objc.RegisterName("createSampleBufferForRequest:")
-	_aVSampleBufferGeneratorSelMakeBatch = objc.RegisterName("makeBatch")
-	_aVSampleBufferGeneratorSelCreateSampleBufferForRequestAddingToBatchError = objc.RegisterName("createSampleBufferForRequest:addingToBatch:error:")
+	_clsAVSampleBufferGenerator                                                  = _objcClass("AVSampleBufferGenerator")
+	_aVSampleBufferGeneratorSelInitWithAssetTimebase                             = objc.RegisterName("initWithAsset:timebase:")
+	_aVSampleBufferGeneratorSelCreateSampleBufferForRequestError                 = objc.RegisterName("createSampleBufferForRequest:error:")
+	_aVSampleBufferGeneratorSelCreateSampleBufferForRequest                      = objc.RegisterName("createSampleBufferForRequest:")
+	_aVSampleBufferGeneratorSelMakeBatch                                         = objc.RegisterName("makeBatch")
+	_aVSampleBufferGeneratorSelCreateSampleBufferForRequestAddingToBatchError    = objc.RegisterName("createSampleBufferForRequest:addingToBatch:error:")
 	_aVSampleBufferGeneratorSelNotifyOfDataReadyForSampleBufferCompletionHandler = objc.RegisterName("notifyOfDataReadyForSampleBuffer:completionHandler:")
 )
 
@@ -40,7 +40,9 @@ func AVSampleBufferGeneratorFromID(id objc.ID) *AVSampleBufferGenerator {
 // @method		initWithAsset: timebase: @abstract		Creates an instance of AVSampleBufferGenerator to generate sample buffers from the specified asset. @param 		asset The asset from which sample buffers will be created. @param 		timebase The generator timebase, which governs when sample data for sample buffers is loaded. If NULL, sample data is loaded synchronously. @result		An instance of AVSampleBufferGenerator. @discussion	If the specified asset is an HTTP Live Streaming asset, the generator cannot create sample buffers.
 func (o *AVSampleBufferGenerator) InitWithAssetTimebase(asset *AVAsset, timebase unsafe.Pointer) *AVSampleBufferGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferGeneratorSelInitWithAssetTimebase, asset.Ptr(), timebase)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleBufferGeneratorFromID(_ret)
 }
 
@@ -63,7 +65,9 @@ func (o *AVSampleBufferGenerator) CreateSampleBufferForRequest(request *AVSample
 // @method		makeBatch @abstract		Creates a batch to handle multiple sample buffers, allowing to asynchronously load sample data and optimize I/O when possible. @result		An instance of an AVSampleBufferGeneratorBatch that can be used in calls to createSampleBufferForRequest:addingToBatch:error: of the same AVSampleBufferGenerator instance.
 func (o *AVSampleBufferGenerator) MakeBatch() *AVSampleBufferGeneratorBatch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSampleBufferGeneratorSelMakeBatch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSampleBufferGeneratorBatchFromID(_ret)
 }
 
@@ -87,4 +91,3 @@ func AVSampleBufferGeneratorNotifyOfDataReadyForSampleBufferCompletionHandler(sb
 	}
 	objc.ID(_clsAVSampleBufferGenerator).Send(_aVSampleBufferGeneratorSelNotifyOfDataReadyForSampleBufferCompletionHandler, sbuf, __block_completionHandler)
 }
-

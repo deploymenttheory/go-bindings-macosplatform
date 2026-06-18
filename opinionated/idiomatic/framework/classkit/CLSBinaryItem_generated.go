@@ -79,4 +79,3 @@ type BinaryItemable interface {
 }
 
 var _ BinaryItemable = (*BinaryItem)(nil)
-

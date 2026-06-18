@@ -241,9 +241,13 @@ func (x *CNNConvolutionTranspose) DataSource() mpsneuralnetwork.MPSCNNConvolutio
 	return x.inner.DataSource()
 }
 
-func (x *CNNConvolutionTranspose) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNConvolutionTranspose) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNConvolutionTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNConvolutionTranspose) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNConvolutionTransposeable is the interface implemented by [CNNConvolutionTranspose], for mocking and DI.
 type CNNConvolutionTransposeable interface {
@@ -287,4 +291,3 @@ type CNNConvolutionTransposeable interface {
 }
 
 var _ CNNConvolutionTransposeable = (*CNNConvolutionTranspose)(nil)
-

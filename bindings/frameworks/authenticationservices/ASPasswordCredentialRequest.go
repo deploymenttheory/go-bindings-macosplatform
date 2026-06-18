@@ -16,8 +16,8 @@ type ASPasswordCredentialRequest struct {
 }
 
 var (
-	_clsASPasswordCredentialRequest = _objcClass("ASPasswordCredentialRequest")
-	_aSPasswordCredentialRequestSelInitWithCredentialIdentity = objc.RegisterName("initWithCredentialIdentity:")
+	_clsASPasswordCredentialRequest                              = _objcClass("ASPasswordCredentialRequest")
+	_aSPasswordCredentialRequestSelInitWithCredentialIdentity    = objc.RegisterName("initWithCredentialIdentity:")
 	_aSPasswordCredentialRequestSelRequestWithCredentialIdentity = objc.RegisterName("requestWithCredentialIdentity:")
 )
 
@@ -34,14 +34,17 @@ func ASPasswordCredentialRequestFromID(id objc.ID) *ASPasswordCredentialRequest 
 // @abstract Initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
 func (o *ASPasswordCredentialRequest) InitWithCredentialIdentity(credentialIdentity *ASPasswordCredentialIdentity) *ASPasswordCredentialRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSPasswordCredentialRequestSelInitWithCredentialIdentity, credentialIdentity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialRequestFromID(_ret)
 }
 
 // @abstract Creates and initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
 func ASPasswordCredentialRequestRequestWithCredentialIdentity(credentialIdentity *ASPasswordCredentialIdentity) *ASPasswordCredentialRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASPasswordCredentialRequest), _aSPasswordCredentialRequestSelRequestWithCredentialIdentity, credentialIdentity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASPasswordCredentialRequestFromID(_ret)
 }
-

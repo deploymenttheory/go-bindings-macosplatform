@@ -17,23 +17,23 @@ type MKMarkerAnnotationView struct {
 }
 
 var (
-	_clsMKMarkerAnnotationView = _objcClass("MKMarkerAnnotationView")
-	_mKMarkerAnnotationViewSelTitleVisibility = objc.RegisterName("titleVisibility")
-	_mKMarkerAnnotationViewSelSetTitleVisibility = objc.RegisterName("setTitleVisibility:")
-	_mKMarkerAnnotationViewSelSubtitleVisibility = objc.RegisterName("subtitleVisibility")
+	_clsMKMarkerAnnotationView                      = _objcClass("MKMarkerAnnotationView")
+	_mKMarkerAnnotationViewSelTitleVisibility       = objc.RegisterName("titleVisibility")
+	_mKMarkerAnnotationViewSelSetTitleVisibility    = objc.RegisterName("setTitleVisibility:")
+	_mKMarkerAnnotationViewSelSubtitleVisibility    = objc.RegisterName("subtitleVisibility")
 	_mKMarkerAnnotationViewSelSetSubtitleVisibility = objc.RegisterName("setSubtitleVisibility:")
-	_mKMarkerAnnotationViewSelMarkerTintColor = objc.RegisterName("markerTintColor")
-	_mKMarkerAnnotationViewSelSetMarkerTintColor = objc.RegisterName("setMarkerTintColor:")
-	_mKMarkerAnnotationViewSelGlyphTintColor = objc.RegisterName("glyphTintColor")
-	_mKMarkerAnnotationViewSelSetGlyphTintColor = objc.RegisterName("setGlyphTintColor:")
-	_mKMarkerAnnotationViewSelGlyphText = objc.RegisterName("glyphText")
-	_mKMarkerAnnotationViewSelSetGlyphText = objc.RegisterName("setGlyphText:")
-	_mKMarkerAnnotationViewSelGlyphImage = objc.RegisterName("glyphImage")
-	_mKMarkerAnnotationViewSelSetGlyphImage = objc.RegisterName("setGlyphImage:")
-	_mKMarkerAnnotationViewSelSelectedGlyphImage = objc.RegisterName("selectedGlyphImage")
+	_mKMarkerAnnotationViewSelMarkerTintColor       = objc.RegisterName("markerTintColor")
+	_mKMarkerAnnotationViewSelSetMarkerTintColor    = objc.RegisterName("setMarkerTintColor:")
+	_mKMarkerAnnotationViewSelGlyphTintColor        = objc.RegisterName("glyphTintColor")
+	_mKMarkerAnnotationViewSelSetGlyphTintColor     = objc.RegisterName("setGlyphTintColor:")
+	_mKMarkerAnnotationViewSelGlyphText             = objc.RegisterName("glyphText")
+	_mKMarkerAnnotationViewSelSetGlyphText          = objc.RegisterName("setGlyphText:")
+	_mKMarkerAnnotationViewSelGlyphImage            = objc.RegisterName("glyphImage")
+	_mKMarkerAnnotationViewSelSetGlyphImage         = objc.RegisterName("setGlyphImage:")
+	_mKMarkerAnnotationViewSelSelectedGlyphImage    = objc.RegisterName("selectedGlyphImage")
 	_mKMarkerAnnotationViewSelSetSelectedGlyphImage = objc.RegisterName("setSelectedGlyphImage:")
-	_mKMarkerAnnotationViewSelAnimatesWhenAdded = objc.RegisterName("animatesWhenAdded")
-	_mKMarkerAnnotationViewSelSetAnimatesWhenAdded = objc.RegisterName("setAnimatesWhenAdded:")
+	_mKMarkerAnnotationViewSelAnimatesWhenAdded     = objc.RegisterName("animatesWhenAdded")
+	_mKMarkerAnnotationViewSelSetAnimatesWhenAdded  = objc.RegisterName("setAnimatesWhenAdded:")
 )
 
 func MKMarkerAnnotationViewFromID(id objc.ID) *MKMarkerAnnotationView {
@@ -66,7 +66,9 @@ func (o *MKMarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility MKFeat
 
 func (o *MKMarkerAnnotationView) MarkerTintColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelMarkerTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -76,7 +78,9 @@ func (o *MKMarkerAnnotationView) SetMarkerTintColor(markerTintColor *appkit.NSCo
 
 func (o *MKMarkerAnnotationView) GlyphTintColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphTintColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -86,7 +90,9 @@ func (o *MKMarkerAnnotationView) SetGlyphTintColor(glyphTintColor *appkit.NSColo
 
 func (o *MKMarkerAnnotationView) GlyphText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -96,7 +102,9 @@ func (o *MKMarkerAnnotationView) SetGlyphText(glyphText *foundation.NSString) {
 
 func (o *MKMarkerAnnotationView) GlyphImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelGlyphImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -106,7 +114,9 @@ func (o *MKMarkerAnnotationView) SetGlyphImage(glyphImage *appkit.NSImage) {
 
 func (o *MKMarkerAnnotationView) SelectedGlyphImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMarkerAnnotationViewSelSelectedGlyphImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -122,4 +132,3 @@ func (o *MKMarkerAnnotationView) AnimatesWhenAdded() bool {
 func (o *MKMarkerAnnotationView) SetAnimatesWhenAdded(animatesWhenAdded bool) {
 	o.Ptr().Send(_mKMarkerAnnotationViewSelSetAnimatesWhenAdded, animatesWhenAdded)
 }
-

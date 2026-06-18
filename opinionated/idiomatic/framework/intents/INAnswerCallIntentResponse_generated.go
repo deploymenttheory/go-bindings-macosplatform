@@ -46,7 +46,9 @@ func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.INCallRecord](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -82,7 +84,9 @@ func (x *AnswerCallIntentResponse) SetCallRecords(callRecords *foundation.NSArra
 	x.inner.SetCallRecords(callRecords)
 }
 
-func (x *AnswerCallIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+func (x *AnswerCallIntentResponse) asIntentResponse() *raw.INIntentResponse {
+	return &x.inner.INIntentResponse
+}
 
 // AnswerCallIntentResponseable is the interface implemented by [AnswerCallIntentResponse], for mocking and DI.
 type AnswerCallIntentResponseable interface {
@@ -95,4 +99,3 @@ type AnswerCallIntentResponseable interface {
 }
 
 var _ AnswerCallIntentResponseable = (*AnswerCallIntentResponse)(nil)
-

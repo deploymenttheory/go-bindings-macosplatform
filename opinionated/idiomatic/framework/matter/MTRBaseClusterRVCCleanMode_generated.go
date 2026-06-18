@@ -250,9 +250,13 @@ func (x *MTRBaseClusterRVCCleanMode) SubscribeAttributeClusterRevisionWithParams
 	}
 }
 
-func (x *MTRBaseClusterRVCCleanMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterRVCCleanMode) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterRVCCleanMode) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterRVCCleanMode) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterRVCCleanModeable is the interface implemented by [MTRBaseClusterRVCCleanMode], for mocking and DI.
 type MTRBaseClusterRVCCleanModeable interface {
@@ -275,4 +279,3 @@ type MTRBaseClusterRVCCleanModeable interface {
 }
 
 var _ MTRBaseClusterRVCCleanModeable = (*MTRBaseClusterRVCCleanMode)(nil)
-

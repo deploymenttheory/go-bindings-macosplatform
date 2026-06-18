@@ -16,13 +16,13 @@ type PHASECardioidDirectivityModelSubbandParameters struct {
 }
 
 var (
-	_clsPHASECardioidDirectivityModelSubbandParameters = _objcClass("PHASECardioidDirectivityModelSubbandParameters")
-	_pHASECardioidDirectivityModelSubbandParametersSelInit = objc.RegisterName("init")
-	_pHASECardioidDirectivityModelSubbandParametersSelFrequency = objc.RegisterName("frequency")
+	_clsPHASECardioidDirectivityModelSubbandParameters             = _objcClass("PHASECardioidDirectivityModelSubbandParameters")
+	_pHASECardioidDirectivityModelSubbandParametersSelInit         = objc.RegisterName("init")
+	_pHASECardioidDirectivityModelSubbandParametersSelFrequency    = objc.RegisterName("frequency")
 	_pHASECardioidDirectivityModelSubbandParametersSelSetFrequency = objc.RegisterName("setFrequency:")
-	_pHASECardioidDirectivityModelSubbandParametersSelPattern = objc.RegisterName("pattern")
-	_pHASECardioidDirectivityModelSubbandParametersSelSetPattern = objc.RegisterName("setPattern:")
-	_pHASECardioidDirectivityModelSubbandParametersSelSharpness = objc.RegisterName("sharpness")
+	_pHASECardioidDirectivityModelSubbandParametersSelPattern      = objc.RegisterName("pattern")
+	_pHASECardioidDirectivityModelSubbandParametersSelSetPattern   = objc.RegisterName("setPattern:")
+	_pHASECardioidDirectivityModelSubbandParametersSelSharpness    = objc.RegisterName("sharpness")
 	_pHASECardioidDirectivityModelSubbandParametersSelSetSharpness = objc.RegisterName("setSharpness:")
 )
 
@@ -38,7 +38,9 @@ func PHASECardioidDirectivityModelSubbandParametersFromID(id objc.ID) *PHASECard
 
 func (o *PHASECardioidDirectivityModelSubbandParameters) Init() *PHASECardioidDirectivityModelSubbandParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASECardioidDirectivityModelSubbandParametersSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASECardioidDirectivityModelSubbandParametersFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *PHASECardioidDirectivityModelSubbandParameters) Sharpness() float64 {
 func (o *PHASECardioidDirectivityModelSubbandParameters) SetSharpness(sharpness float64) {
 	o.Ptr().Send(_pHASECardioidDirectivityModelSubbandParametersSelSetSharpness, sharpness)
 }
-

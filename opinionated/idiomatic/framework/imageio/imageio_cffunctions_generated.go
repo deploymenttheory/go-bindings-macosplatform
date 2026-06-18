@@ -17,4 +17,3 @@ func CGImageSourceSetAllowableTypes(allowableTypes objc.ID) error {
 	}
 	return nil
 }
-

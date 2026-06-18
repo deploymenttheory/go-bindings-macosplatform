@@ -16,15 +16,15 @@ type PKPaymentSummaryItem struct {
 }
 
 var (
-	_clsPKPaymentSummaryItem = _objcClass("PKPaymentSummaryItem")
-	_pKPaymentSummaryItemSelSummaryItemWithLabelAmount = objc.RegisterName("summaryItemWithLabel:amount:")
+	_clsPKPaymentSummaryItem                               = _objcClass("PKPaymentSummaryItem")
+	_pKPaymentSummaryItemSelSummaryItemWithLabelAmount     = objc.RegisterName("summaryItemWithLabel:amount:")
 	_pKPaymentSummaryItemSelSummaryItemWithLabelAmountType = objc.RegisterName("summaryItemWithLabel:amount:type:")
-	_pKPaymentSummaryItemSelLabel = objc.RegisterName("label")
-	_pKPaymentSummaryItemSelSetLabel = objc.RegisterName("setLabel:")
-	_pKPaymentSummaryItemSelAmount = objc.RegisterName("amount")
-	_pKPaymentSummaryItemSelSetAmount = objc.RegisterName("setAmount:")
-	_pKPaymentSummaryItemSelType = objc.RegisterName("type")
-	_pKPaymentSummaryItemSelSetType = objc.RegisterName("setType:")
+	_pKPaymentSummaryItemSelLabel                          = objc.RegisterName("label")
+	_pKPaymentSummaryItemSelSetLabel                       = objc.RegisterName("setLabel:")
+	_pKPaymentSummaryItemSelAmount                         = objc.RegisterName("amount")
+	_pKPaymentSummaryItemSelSetAmount                      = objc.RegisterName("setAmount:")
+	_pKPaymentSummaryItemSelType                           = objc.RegisterName("type")
+	_pKPaymentSummaryItemSelSetType                        = objc.RegisterName("setType:")
 )
 
 func PKPaymentSummaryItemFromID(id objc.ID) *PKPaymentSummaryItem {
@@ -39,19 +39,25 @@ func PKPaymentSummaryItemFromID(id objc.ID) *PKPaymentSummaryItem {
 
 func PKPaymentSummaryItemSummaryItemWithLabelAmount(label *foundation.NSString, amount *foundation.NSDecimalNumber) *PKPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentSummaryItem), _pKPaymentSummaryItemSelSummaryItemWithLabelAmount, label.Ptr(), amount.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentSummaryItemFromID(_ret)
 }
 
 func PKPaymentSummaryItemSummaryItemWithLabelAmountType(label *foundation.NSString, amount *foundation.NSDecimalNumber, type_ PKPaymentSummaryItemType) *PKPaymentSummaryItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKPaymentSummaryItem), _pKPaymentSummaryItemSelSummaryItemWithLabelAmountType, label.Ptr(), amount.Ptr(), type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentSummaryItemFromID(_ret)
 }
 
 func (o *PKPaymentSummaryItem) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSummaryItemSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -61,7 +67,9 @@ func (o *PKPaymentSummaryItem) SetLabel(label *foundation.NSString) {
 
 func (o *PKPaymentSummaryItem) Amount() *foundation.NSDecimalNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentSummaryItemSelAmount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDecimalNumberFromID(_ret)
 }
 
@@ -77,4 +85,3 @@ func (o *PKPaymentSummaryItem) Type() PKPaymentSummaryItemType {
 func (o *PKPaymentSummaryItem) SetType(type_ PKPaymentSummaryItemType) {
 	o.Ptr().Send(_pKPaymentSummaryItemSelSetType, type_)
 }
-

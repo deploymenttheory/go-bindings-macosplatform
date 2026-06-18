@@ -26,4 +26,3 @@ func VZSerialPortAttachmentFromID(id objc.ID) *VZSerialPortAttachment {
 	purego.Track(o)
 	return o
 }
-

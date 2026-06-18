@@ -16,16 +16,16 @@ type CAConstraint struct {
 }
 
 var (
-	_clsCAConstraint = _objcClass("CAConstraint")
+	_clsCAConstraint                                                      = _objcClass("CAConstraint")
 	_cAConstraintSelConstraintWithAttributeRelativeToAttributeScaleOffset = objc.RegisterName("constraintWithAttribute:relativeTo:attribute:scale:offset:")
-	_cAConstraintSelConstraintWithAttributeRelativeToAttributeOffset = objc.RegisterName("constraintWithAttribute:relativeTo:attribute:offset:")
-	_cAConstraintSelConstraintWithAttributeRelativeToAttribute = objc.RegisterName("constraintWithAttribute:relativeTo:attribute:")
-	_cAConstraintSelInitWithAttributeRelativeToAttributeScaleOffset = objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:")
-	_cAConstraintSelAttribute = objc.RegisterName("attribute")
-	_cAConstraintSelSourceName = objc.RegisterName("sourceName")
-	_cAConstraintSelSourceAttribute = objc.RegisterName("sourceAttribute")
-	_cAConstraintSelScale = objc.RegisterName("scale")
-	_cAConstraintSelOffset = objc.RegisterName("offset")
+	_cAConstraintSelConstraintWithAttributeRelativeToAttributeOffset      = objc.RegisterName("constraintWithAttribute:relativeTo:attribute:offset:")
+	_cAConstraintSelConstraintWithAttributeRelativeToAttribute            = objc.RegisterName("constraintWithAttribute:relativeTo:attribute:")
+	_cAConstraintSelInitWithAttributeRelativeToAttributeScaleOffset       = objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:")
+	_cAConstraintSelAttribute                                             = objc.RegisterName("attribute")
+	_cAConstraintSelSourceName                                            = objc.RegisterName("sourceName")
+	_cAConstraintSelSourceAttribute                                       = objc.RegisterName("sourceAttribute")
+	_cAConstraintSelScale                                                 = objc.RegisterName("scale")
+	_cAConstraintSelOffset                                                = objc.RegisterName("offset")
 )
 
 func CAConstraintFromID(id objc.ID) *CAConstraint {
@@ -40,25 +40,33 @@ func CAConstraintFromID(id objc.ID) *CAConstraint {
 
 func CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, m float64, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttributeScaleOffset, attr, srcId.Ptr(), srcAttr, m, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAConstraintFromID(_ret)
 }
 
 func CAConstraintConstraintWithAttributeRelativeToAttributeOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttributeOffset, attr, srcId.Ptr(), srcAttr, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAConstraintFromID(_ret)
 }
 
 func CAConstraintConstraintWithAttributeRelativeToAttribute(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute) *CAConstraint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCAConstraint), _cAConstraintSelConstraintWithAttributeRelativeToAttribute, attr, srcId.Ptr(), srcAttr)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAConstraintFromID(_ret)
 }
 
 func (o *CAConstraint) InitWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId *foundation.NSString, srcAttr CAConstraintAttribute, m float64, c float64) *CAConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAConstraintSelInitWithAttributeRelativeToAttributeScaleOffset, attr, srcId.Ptr(), srcAttr, m, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAConstraintFromID(_ret)
 }
 
@@ -69,7 +77,9 @@ func (o *CAConstraint) Attribute() CAConstraintAttribute {
 
 func (o *CAConstraint) SourceName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cAConstraintSelSourceName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -87,4 +97,3 @@ func (o *CAConstraint) Offset() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cAConstraintSelOffset)
 	return _ret
 }
-

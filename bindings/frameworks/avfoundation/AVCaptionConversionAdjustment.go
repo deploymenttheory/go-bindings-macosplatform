@@ -16,7 +16,7 @@ type AVCaptionConversionAdjustment struct {
 }
 
 var (
-	_clsAVCaptionConversionAdjustment = _objcClass("AVCaptionConversionAdjustment")
+	_clsAVCaptionConversionAdjustment               = _objcClass("AVCaptionConversionAdjustment")
 	_aVCaptionConversionAdjustmentSelAdjustmentType = objc.RegisterName("adjustmentType")
 )
 
@@ -32,7 +32,8 @@ func AVCaptionConversionAdjustmentFromID(id objc.ID) *AVCaptionConversionAdjustm
 
 func (o *AVCaptionConversionAdjustment) AdjustmentType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptionConversionAdjustmentSelAdjustmentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

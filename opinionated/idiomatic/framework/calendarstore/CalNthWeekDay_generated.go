@@ -53,4 +53,3 @@ type CalNthWeekDayable interface {
 }
 
 var _ CalNthWeekDayable = (*CalNthWeekDay)(nil)
-

@@ -54,7 +54,9 @@ func (x *InstantFundsOutFeeSummaryItem) WithType(type_ raw.PKPaymentSummaryItemT
 	return x
 }
 
-func (x *InstantFundsOutFeeSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+func (x *InstantFundsOutFeeSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
+	return &x.inner.PKPaymentSummaryItem
+}
 
 // InstantFundsOutFeeSummaryItemable is the interface implemented by [InstantFundsOutFeeSummaryItem], for mocking and DI.
 type InstantFundsOutFeeSummaryItemable interface {
@@ -65,4 +67,3 @@ type InstantFundsOutFeeSummaryItemable interface {
 }
 
 var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)
-

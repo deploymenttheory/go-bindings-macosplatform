@@ -16,11 +16,11 @@ type INSendMessageIntentResponse struct {
 }
 
 var (
-	_clsINSendMessageIntentResponse = _objcClass("INSendMessageIntentResponse")
+	_clsINSendMessageIntentResponse                         = _objcClass("INSendMessageIntentResponse")
 	_iNSendMessageIntentResponseSelInitWithCodeUserActivity = objc.RegisterName("initWithCode:userActivity:")
-	_iNSendMessageIntentResponseSelCode = objc.RegisterName("code")
-	_iNSendMessageIntentResponseSelSentMessages = objc.RegisterName("sentMessages")
-	_iNSendMessageIntentResponseSelSetSentMessages = objc.RegisterName("setSentMessages:")
+	_iNSendMessageIntentResponseSelCode                     = objc.RegisterName("code")
+	_iNSendMessageIntentResponseSelSentMessages             = objc.RegisterName("sentMessages")
+	_iNSendMessageIntentResponseSelSetSentMessages          = objc.RegisterName("setSentMessages:")
 )
 
 func INSendMessageIntentResponseFromID(id objc.ID) *INSendMessageIntentResponse {
@@ -35,7 +35,9 @@ func INSendMessageIntentResponseFromID(id objc.ID) *INSendMessageIntentResponse 
 
 func (o *INSendMessageIntentResponse) InitWithCodeUserActivity(code INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *INSendMessageIntentResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSendMessageIntentResponseSelInitWithCodeUserActivity, code, userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSendMessageIntentResponseFromID(_ret)
 }
 
@@ -52,4 +54,3 @@ func (o *INSendMessageIntentResponse) SentMessages() *foundation.NSArray[objc.ID
 func (o *INSendMessageIntentResponse) SetSentMessages(sentMessages *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_iNSendMessageIntentResponseSelSetSentMessages, sentMessages)
 }
-

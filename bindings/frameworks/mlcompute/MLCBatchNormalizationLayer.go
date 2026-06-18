@@ -15,18 +15,18 @@ type MLCBatchNormalizationLayer struct {
 }
 
 var (
-	_clsMLCBatchNormalizationLayer = _objcClass("MLCBatchNormalizationLayer")
-	_mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon = objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:")
+	_clsMLCBatchNormalizationLayer                                                                         = _objcClass("MLCBatchNormalizationLayer")
+	_mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon         = objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:")
 	_mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum = objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:")
-	_mLCBatchNormalizationLayerSelFeatureChannelCount = objc.RegisterName("featureChannelCount")
-	_mLCBatchNormalizationLayerSelMean = objc.RegisterName("mean")
-	_mLCBatchNormalizationLayerSelVariance = objc.RegisterName("variance")
-	_mLCBatchNormalizationLayerSelBeta = objc.RegisterName("beta")
-	_mLCBatchNormalizationLayerSelGamma = objc.RegisterName("gamma")
-	_mLCBatchNormalizationLayerSelBetaParameter = objc.RegisterName("betaParameter")
-	_mLCBatchNormalizationLayerSelGammaParameter = objc.RegisterName("gammaParameter")
-	_mLCBatchNormalizationLayerSelVarianceEpsilon = objc.RegisterName("varianceEpsilon")
-	_mLCBatchNormalizationLayerSelMomentum = objc.RegisterName("momentum")
+	_mLCBatchNormalizationLayerSelFeatureChannelCount                                                      = objc.RegisterName("featureChannelCount")
+	_mLCBatchNormalizationLayerSelMean                                                                     = objc.RegisterName("mean")
+	_mLCBatchNormalizationLayerSelVariance                                                                 = objc.RegisterName("variance")
+	_mLCBatchNormalizationLayerSelBeta                                                                     = objc.RegisterName("beta")
+	_mLCBatchNormalizationLayerSelGamma                                                                    = objc.RegisterName("gamma")
+	_mLCBatchNormalizationLayerSelBetaParameter                                                            = objc.RegisterName("betaParameter")
+	_mLCBatchNormalizationLayerSelGammaParameter                                                           = objc.RegisterName("gammaParameter")
+	_mLCBatchNormalizationLayerSelVarianceEpsilon                                                          = objc.RegisterName("varianceEpsilon")
+	_mLCBatchNormalizationLayerSelMomentum                                                                 = objc.RegisterName("momentum")
 )
 
 func MLCBatchNormalizationLayerFromID(id objc.ID) *MLCBatchNormalizationLayer {
@@ -42,14 +42,18 @@ func MLCBatchNormalizationLayerFromID(id objc.ID) *MLCBatchNormalizationLayer {
 // @abstract   Create a batch normalization layer @param featureChannelCount The number of feature channels @param mean The mean tensor @param variance The variance tensor @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @return     A new batch normalization layer.
 func MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount uint, mean *MLCTensor, variance *MLCTensor, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32) *MLCBatchNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCBatchNormalizationLayer), _mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon, featureChannelCount, mean.Ptr(), variance.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCBatchNormalizationLayerFromID(_ret)
 }
 
 // @abstract   Create a batch normalization layer @param featureChannelCount The number of feature channels @param mean The mean tensor @param variance The variance tensor @param beta The beta tensor @param gamma The gamma tensor @param varianceEpsilon The  epslion value @param momentum The  momentum value for the running mean and variance computation @return A new batch normalization layer.
 func MLCBatchNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount uint, mean *MLCTensor, variance *MLCTensor, beta *MLCTensor, gamma *MLCTensor, varianceEpsilon float32, momentum float32) *MLCBatchNormalizationLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCBatchNormalizationLayer), _mLCBatchNormalizationLayerSelLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum, featureChannelCount, mean.Ptr(), variance.Ptr(), beta.Ptr(), gamma.Ptr(), varianceEpsilon, momentum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCBatchNormalizationLayerFromID(_ret)
 }
 
@@ -62,42 +66,54 @@ func (o *MLCBatchNormalizationLayer) FeatureChannelCount() uint {
 // @property   mean @abstract   The mean tensor
 func (o *MLCBatchNormalizationLayer) Mean() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelMean)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   variance @abstract   The variance tensor
 func (o *MLCBatchNormalizationLayer) Variance() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelVariance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   beta @abstract   The beta tensor
 func (o *MLCBatchNormalizationLayer) Beta() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelBeta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   gamma @abstract   The gamma tensor
 func (o *MLCBatchNormalizationLayer) Gamma() *MLCTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelGamma)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorFromID(_ret)
 }
 
 // @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
 func (o *MLCBatchNormalizationLayer) BetaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelBetaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
 // @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
 func (o *MLCBatchNormalizationLayer) GammaParameter() *MLCTensorParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCBatchNormalizationLayerSelGammaParameter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCTensorParameterFromID(_ret)
 }
 
@@ -112,4 +128,3 @@ func (o *MLCBatchNormalizationLayer) Momentum() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mLCBatchNormalizationLayerSelMomentum)
 	return _ret
 }
-

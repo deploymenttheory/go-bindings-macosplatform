@@ -18,9 +18,9 @@ type TKTokenKeychainCertificate struct {
 }
 
 var (
-	_clsTKTokenKeychainCertificate = _objcClass("TKTokenKeychainCertificate")
+	_clsTKTokenKeychainCertificate                            = _objcClass("TKTokenKeychainCertificate")
 	_tKTokenKeychainCertificateSelInitWithCertificateObjectID = objc.RegisterName("initWithCertificate:objectID:")
-	_tKTokenKeychainCertificateSelData = objc.RegisterName("data")
+	_tKTokenKeychainCertificateSelData                        = objc.RegisterName("data")
 )
 
 func TKTokenKeychainCertificateFromID(id objc.ID) *TKTokenKeychainCertificate {
@@ -36,13 +36,16 @@ func TKTokenKeychainCertificateFromID(id objc.ID) *TKTokenKeychainCertificate {
 // @discussion initialize TKTokenKeychainCertificate with data from SecCertificateRef.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  @c constraints property is initialized indicating that reading of certificate is always allowed, all other operations are disallowed.
 func (o *TKTokenKeychainCertificate) InitWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TKTokenKeychainCertificate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainCertificateSelInitWithCertificateObjectID, certificateRef, objectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenKeychainCertificateFromID(_ret)
 }
 
 func (o *TKTokenKeychainCertificate) Data() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenKeychainCertificateSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

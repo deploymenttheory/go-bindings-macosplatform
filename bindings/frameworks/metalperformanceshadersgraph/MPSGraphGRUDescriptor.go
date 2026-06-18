@@ -15,25 +15,25 @@ type MPSGraphGRUDescriptor struct {
 }
 
 var (
-	_clsMPSGraphGRUDescriptor = _objcClass("MPSGraphGRUDescriptor")
-	_mPSGraphGRUDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mPSGraphGRUDescriptorSelReverse = objc.RegisterName("reverse")
-	_mPSGraphGRUDescriptorSelSetReverse = objc.RegisterName("setReverse:")
-	_mPSGraphGRUDescriptorSelBidirectional = objc.RegisterName("bidirectional")
-	_mPSGraphGRUDescriptorSelSetBidirectional = objc.RegisterName("setBidirectional:")
-	_mPSGraphGRUDescriptorSelTraining = objc.RegisterName("training")
-	_mPSGraphGRUDescriptorSelSetTraining = objc.RegisterName("setTraining:")
-	_mPSGraphGRUDescriptorSelResetGateFirst = objc.RegisterName("resetGateFirst")
-	_mPSGraphGRUDescriptorSelSetResetGateFirst = objc.RegisterName("setResetGateFirst:")
-	_mPSGraphGRUDescriptorSelResetAfter = objc.RegisterName("resetAfter")
-	_mPSGraphGRUDescriptorSelSetResetAfter = objc.RegisterName("setResetAfter:")
-	_mPSGraphGRUDescriptorSelFlipZ = objc.RegisterName("flipZ")
-	_mPSGraphGRUDescriptorSelSetFlipZ = objc.RegisterName("setFlipZ:")
-	_mPSGraphGRUDescriptorSelUpdateGateActivation = objc.RegisterName("updateGateActivation")
+	_clsMPSGraphGRUDescriptor                        = _objcClass("MPSGraphGRUDescriptor")
+	_mPSGraphGRUDescriptorSelDescriptor              = objc.RegisterName("descriptor")
+	_mPSGraphGRUDescriptorSelReverse                 = objc.RegisterName("reverse")
+	_mPSGraphGRUDescriptorSelSetReverse              = objc.RegisterName("setReverse:")
+	_mPSGraphGRUDescriptorSelBidirectional           = objc.RegisterName("bidirectional")
+	_mPSGraphGRUDescriptorSelSetBidirectional        = objc.RegisterName("setBidirectional:")
+	_mPSGraphGRUDescriptorSelTraining                = objc.RegisterName("training")
+	_mPSGraphGRUDescriptorSelSetTraining             = objc.RegisterName("setTraining:")
+	_mPSGraphGRUDescriptorSelResetGateFirst          = objc.RegisterName("resetGateFirst")
+	_mPSGraphGRUDescriptorSelSetResetGateFirst       = objc.RegisterName("setResetGateFirst:")
+	_mPSGraphGRUDescriptorSelResetAfter              = objc.RegisterName("resetAfter")
+	_mPSGraphGRUDescriptorSelSetResetAfter           = objc.RegisterName("setResetAfter:")
+	_mPSGraphGRUDescriptorSelFlipZ                   = objc.RegisterName("flipZ")
+	_mPSGraphGRUDescriptorSelSetFlipZ                = objc.RegisterName("setFlipZ:")
+	_mPSGraphGRUDescriptorSelUpdateGateActivation    = objc.RegisterName("updateGateActivation")
 	_mPSGraphGRUDescriptorSelSetUpdateGateActivation = objc.RegisterName("setUpdateGateActivation:")
-	_mPSGraphGRUDescriptorSelResetGateActivation = objc.RegisterName("resetGateActivation")
-	_mPSGraphGRUDescriptorSelSetResetGateActivation = objc.RegisterName("setResetGateActivation:")
-	_mPSGraphGRUDescriptorSelOutputGateActivation = objc.RegisterName("outputGateActivation")
+	_mPSGraphGRUDescriptorSelResetGateActivation     = objc.RegisterName("resetGateActivation")
+	_mPSGraphGRUDescriptorSelSetResetGateActivation  = objc.RegisterName("setResetGateActivation:")
+	_mPSGraphGRUDescriptorSelOutputGateActivation    = objc.RegisterName("outputGateActivation")
 	_mPSGraphGRUDescriptorSelSetOutputGateActivation = objc.RegisterName("setOutputGateActivation:")
 )
 
@@ -50,7 +50,9 @@ func MPSGraphGRUDescriptorFromID(id objc.ID) *MPSGraphGRUDescriptor {
 // Creates an GRU descriptor with default values.
 func MPSGraphGRUDescriptorDescriptor() *MPSGraphGRUDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphGRUDescriptor), _mPSGraphGRUDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphGRUDescriptorFromID(_ret)
 }
 
@@ -143,4 +145,3 @@ func (o *MPSGraphGRUDescriptor) OutputGateActivation() MPSGraphRNNActivation {
 func (o *MPSGraphGRUDescriptor) SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation) {
 	o.Ptr().Send(_mPSGraphGRUDescriptorSelSetOutputGateActivation, outputGateActivation)
 }
-

@@ -16,7 +16,9 @@ type MTRICDManagementClusterStayActiveRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRICDManagementClusterStayActiveRequestParams].
-func (x *MTRICDManagementClusterStayActiveRequestParams) Unwrap() *raw.MTRICDManagementClusterStayActiveRequestParams { return x.inner }
+func (x *MTRICDManagementClusterStayActiveRequestParams) Unwrap() *raw.MTRICDManagementClusterStayActiveRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRICDManagementClusterStayActiveRequestParamsable interface {
 }
 
 var _ MTRICDManagementClusterStayActiveRequestParamsable = (*MTRICDManagementClusterStayActiveRequestParams)(nil)
-

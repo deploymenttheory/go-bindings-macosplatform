@@ -16,7 +16,7 @@ type MPSImageAdd struct {
 }
 
 var (
-	_clsMPSImageAdd = _objcClass("MPSImageAdd")
+	_clsMPSImageAdd               = _objcClass("MPSImageAdd")
 	_mPSImageAddSelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -33,7 +33,8 @@ func MPSImageAddFromID(id objc.ID) *MPSImageAdd {
 // @abstract  Initialize the addition operator @param     device           The device the filter will run on. @return    A valid MPSImageAdd object or nil, if failure.
 func (o *MPSImageAdd) InitWithDevice(device metal.MTLDevice) *MPSImageAdd {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageAddSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageAddFromID(_ret)
 }
-

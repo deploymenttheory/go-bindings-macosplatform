@@ -59,4 +59,3 @@ type ScrubberSelectionStyleable interface {
 }
 
 var _ ScrubberSelectionStyleable = (*ScrubberSelectionStyle)(nil)
-

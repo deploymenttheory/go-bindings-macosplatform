@@ -15,11 +15,11 @@ type NSUnitSpeed struct {
 }
 
 var (
-	_clsNSUnitSpeed = _objcClass("NSUnitSpeed")
-	_nSUnitSpeedSelMetersPerSecond = objc.RegisterName("metersPerSecond")
+	_clsNSUnitSpeed                  = _objcClass("NSUnitSpeed")
+	_nSUnitSpeedSelMetersPerSecond   = objc.RegisterName("metersPerSecond")
 	_nSUnitSpeedSelKilometersPerHour = objc.RegisterName("kilometersPerHour")
-	_nSUnitSpeedSelMilesPerHour = objc.RegisterName("milesPerHour")
-	_nSUnitSpeedSelKnots = objc.RegisterName("knots")
+	_nSUnitSpeedSelMilesPerHour      = objc.RegisterName("milesPerHour")
+	_nSUnitSpeedSelKnots             = objc.RegisterName("knots")
 )
 
 func NSUnitSpeedFromID(id objc.ID) *NSUnitSpeed {
@@ -34,25 +34,32 @@ func NSUnitSpeedFromID(id objc.ID) *NSUnitSpeed {
 
 func NSUnitSpeedMetersPerSecond() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelMetersPerSecond)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitSpeedFromID(_ret)
 }
 
 func NSUnitSpeedKilometersPerHour() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelKilometersPerHour)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitSpeedFromID(_ret)
 }
 
 func NSUnitSpeedMilesPerHour() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelMilesPerHour)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitSpeedFromID(_ret)
 }
 
 func NSUnitSpeedKnots() *NSUnitSpeed {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSUnitSpeed), _nSUnitSpeedSelKnots)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSUnitSpeedFromID(_ret)
 }
-

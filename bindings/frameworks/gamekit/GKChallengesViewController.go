@@ -17,8 +17,8 @@ type GKChallengesViewController struct {
 }
 
 var (
-	_clsGKChallengesViewController = _objcClass("GKChallengesViewController")
-	_gKChallengesViewControllerSelChallengeDelegate = objc.RegisterName("challengeDelegate")
+	_clsGKChallengesViewController                     = _objcClass("GKChallengesViewController")
+	_gKChallengesViewControllerSelChallengeDelegate    = objc.RegisterName("challengeDelegate")
 	_gKChallengesViewControllerSelSetChallengeDelegate = objc.RegisterName("setChallengeDelegate:")
 )
 
@@ -40,4 +40,3 @@ func (o *GKChallengesViewController) ChallengeDelegate() GKChallengesViewControl
 func (o *GKChallengesViewController) SetChallengeDelegate(challengeDelegate GKChallengesViewControllerDelegate) {
 	o.Ptr().Send(_gKChallengesViewControllerSelSetChallengeDelegate, challengeDelegate)
 }
-

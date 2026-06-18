@@ -16,9 +16,9 @@ type ASAuthorizationPublicKeyCredentialParameters struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialParameters = _objcClass("ASAuthorizationPublicKeyCredentialParameters")
+	_clsASAuthorizationPublicKeyCredentialParameters                  = _objcClass("ASAuthorizationPublicKeyCredentialParameters")
 	_aSAuthorizationPublicKeyCredentialParametersSelInitWithAlgorithm = objc.RegisterName("initWithAlgorithm:")
-	_aSAuthorizationPublicKeyCredentialParametersSelAlgorithm = objc.RegisterName("algorithm")
+	_aSAuthorizationPublicKeyCredentialParametersSelAlgorithm         = objc.RegisterName("algorithm")
 )
 
 func ASAuthorizationPublicKeyCredentialParametersFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialParameters {
@@ -33,7 +33,9 @@ func ASAuthorizationPublicKeyCredentialParametersFromID(id objc.ID) *ASAuthoriza
 
 func (o *ASAuthorizationPublicKeyCredentialParameters) InitWithAlgorithm(algorithm int) *ASAuthorizationPublicKeyCredentialParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialParametersSelInitWithAlgorithm, algorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialParametersFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *ASAuthorizationPublicKeyCredentialParameters) Algorithm() int {
 	_ret := objc.Send[int](o.Ptr(), _aSAuthorizationPublicKeyCredentialParametersSelAlgorithm)
 	return _ret
 }
-

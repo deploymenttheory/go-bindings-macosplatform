@@ -18,25 +18,25 @@ type PHPhotoLibrary struct {
 }
 
 var (
-	_clsPHPhotoLibrary = _objcClass("PHPhotoLibrary")
-	_pHPhotoLibrarySelSharedPhotoLibrary = objc.RegisterName("sharedPhotoLibrary")
-	_pHPhotoLibrarySelAuthorizationStatusForAccessLevel = objc.RegisterName("authorizationStatusForAccessLevel:")
-	_pHPhotoLibrarySelRequestAuthorizationForAccessLevelHandler = objc.RegisterName("requestAuthorizationForAccessLevel:handler:")
-	_pHPhotoLibrarySelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_pHPhotoLibrarySelRequestAuthorization = objc.RegisterName("requestAuthorization:")
-	_pHPhotoLibrarySelRegisterAvailabilityObserver = objc.RegisterName("registerAvailabilityObserver:")
-	_pHPhotoLibrarySelUnregisterAvailabilityObserver = objc.RegisterName("unregisterAvailabilityObserver:")
-	_pHPhotoLibrarySelPerformChangesCompletionHandler = objc.RegisterName("performChanges:completionHandler:")
-	_pHPhotoLibrarySelPerformChangesAndWaitError = objc.RegisterName("performChangesAndWait:error:")
-	_pHPhotoLibrarySelRegisterChangeObserver = objc.RegisterName("registerChangeObserver:")
-	_pHPhotoLibrarySelUnregisterChangeObserver = objc.RegisterName("unregisterChangeObserver:")
-	_pHPhotoLibrarySelFetchPersistentChangesSinceTokenError = objc.RegisterName("fetchPersistentChangesSinceToken:error:")
-	_pHPhotoLibrarySelUnavailabilityReason = objc.RegisterName("unavailabilityReason")
-	_pHPhotoLibrarySelCurrentChangeToken = objc.RegisterName("currentChangeToken")
+	_clsPHPhotoLibrary                                           = _objcClass("PHPhotoLibrary")
+	_pHPhotoLibrarySelSharedPhotoLibrary                         = objc.RegisterName("sharedPhotoLibrary")
+	_pHPhotoLibrarySelAuthorizationStatusForAccessLevel          = objc.RegisterName("authorizationStatusForAccessLevel:")
+	_pHPhotoLibrarySelRequestAuthorizationForAccessLevelHandler  = objc.RegisterName("requestAuthorizationForAccessLevel:handler:")
+	_pHPhotoLibrarySelAuthorizationStatus                        = objc.RegisterName("authorizationStatus")
+	_pHPhotoLibrarySelRequestAuthorization                       = objc.RegisterName("requestAuthorization:")
+	_pHPhotoLibrarySelRegisterAvailabilityObserver               = objc.RegisterName("registerAvailabilityObserver:")
+	_pHPhotoLibrarySelUnregisterAvailabilityObserver             = objc.RegisterName("unregisterAvailabilityObserver:")
+	_pHPhotoLibrarySelPerformChangesCompletionHandler            = objc.RegisterName("performChanges:completionHandler:")
+	_pHPhotoLibrarySelPerformChangesAndWaitError                 = objc.RegisterName("performChangesAndWait:error:")
+	_pHPhotoLibrarySelRegisterChangeObserver                     = objc.RegisterName("registerChangeObserver:")
+	_pHPhotoLibrarySelUnregisterChangeObserver                   = objc.RegisterName("unregisterChangeObserver:")
+	_pHPhotoLibrarySelFetchPersistentChangesSinceTokenError      = objc.RegisterName("fetchPersistentChangesSinceToken:error:")
+	_pHPhotoLibrarySelUnavailabilityReason                       = objc.RegisterName("unavailabilityReason")
+	_pHPhotoLibrarySelCurrentChangeToken                         = objc.RegisterName("currentChangeToken")
 	_pHPhotoLibrarySelLocalIdentifierMappingsForCloudIdentifiers = objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:")
 	_pHPhotoLibrarySelCloudIdentifierMappingsForLocalIdentifiers = objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:")
-	_pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers = objc.RegisterName("localIdentifiersForCloudIdentifiers:")
-	_pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers = objc.RegisterName("cloudIdentifiersForLocalIdentifiers:")
+	_pHPhotoLibrarySelLocalIdentifiersForCloudIdentifiers        = objc.RegisterName("localIdentifiersForCloudIdentifiers:")
+	_pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers        = objc.RegisterName("cloudIdentifiersForLocalIdentifiers:")
 )
 
 func PHPhotoLibraryFromID(id objc.ID) *PHPhotoLibrary {
@@ -51,7 +51,9 @@ func PHPhotoLibraryFromID(id objc.ID) *PHPhotoLibrary {
 
 func PHPhotoLibrarySharedPhotoLibrary() *PHPhotoLibrary {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHPhotoLibrary), _pHPhotoLibrarySelSharedPhotoLibrary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPhotoLibraryFromID(_ret)
 }
 
@@ -144,7 +146,9 @@ func (o *PHPhotoLibrary) UnregisterChangeObserver(observer PHPhotoLibraryChangeO
 func (o *PHPhotoLibrary) FetchPersistentChangesSinceTokenError(token *PHPersistentChangeToken) (*PHPersistentChangeFetchResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelFetchPersistentChangesSinceTokenError, token.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -158,14 +162,18 @@ func (o *PHPhotoLibrary) UnavailabilityReason() unsafe.Pointer {
 
 func (o *PHPhotoLibrary) CurrentChangeToken() *PHPersistentChangeToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCurrentChangeToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPersistentChangeTokenFromID(_ret)
 }
 
 // @abstract Returns a dictionary that maps each cloud identifier from the provided array to a PLLocalIdentifierMapping result containing the local identifier found for that cloud identifier. @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a local identifier for a given cloud identifier fails, the error parameter will indicate the reason. @param cloudIdentifiers The array of \c PHCloudIdentifier instances whose local identifiers are to being requested.
 func (o *PHPhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*PHCloudIdentifier]) *foundation.NSDictionary[*PHCloudIdentifier, *PHLocalIdentifierMapping] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelLocalIdentifierMappingsForCloudIdentifiers, cloudIdentifiers.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*PHCloudIdentifier, *PHLocalIdentifierMapping](_ret)
 }
 
@@ -185,7 +193,8 @@ func (o *PHPhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *f
 // Deprecated: since macOS 12.
 func (o *PHPhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*PHCloudIdentifier] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPhotoLibrarySelCloudIdentifiersForLocalIdentifiers, localIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHCloudIdentifier](_ret)
 }
-

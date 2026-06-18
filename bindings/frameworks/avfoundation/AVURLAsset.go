@@ -19,23 +19,23 @@ type AVURLAsset struct {
 }
 
 var (
-	_clsAVURLAsset = _objcClass("AVURLAsset")
-	_aVURLAssetSelAudiovisualTypes = objc.RegisterName("audiovisualTypes")
-	_aVURLAssetSelAudiovisualMIMETypes = objc.RegisterName("audiovisualMIMETypes")
-	_aVURLAssetSelIsPlayableExtendedMIMEType = objc.RegisterName("isPlayableExtendedMIMEType:")
-	_aVURLAssetSelURLAssetWithURLOptions = objc.RegisterName("URLAssetWithURL:options:")
-	_aVURLAssetSelInitWithURLOptions = objc.RegisterName("initWithURL:options:")
-	_aVURLAssetSelAudiovisualContentTypes = objc.RegisterName("audiovisualContentTypes")
-	_aVURLAssetSelURL = objc.RegisterName("URL")
-	_aVURLAssetSelHttpSessionIdentifier = objc.RegisterName("httpSessionIdentifier")
-	_aVURLAssetSelResourceLoader = objc.RegisterName("resourceLoader")
-	_aVURLAssetSelAssetCache = objc.RegisterName("assetCache")
-	_aVURLAssetSelCompatibleTrackForCompositionTrack = objc.RegisterName("compatibleTrackForCompositionTrack:")
+	_clsAVURLAsset                                                        = _objcClass("AVURLAsset")
+	_aVURLAssetSelAudiovisualTypes                                        = objc.RegisterName("audiovisualTypes")
+	_aVURLAssetSelAudiovisualMIMETypes                                    = objc.RegisterName("audiovisualMIMETypes")
+	_aVURLAssetSelIsPlayableExtendedMIMEType                              = objc.RegisterName("isPlayableExtendedMIMEType:")
+	_aVURLAssetSelURLAssetWithURLOptions                                  = objc.RegisterName("URLAssetWithURL:options:")
+	_aVURLAssetSelInitWithURLOptions                                      = objc.RegisterName("initWithURL:options:")
+	_aVURLAssetSelAudiovisualContentTypes                                 = objc.RegisterName("audiovisualContentTypes")
+	_aVURLAssetSelURL                                                     = objc.RegisterName("URL")
+	_aVURLAssetSelHttpSessionIdentifier                                   = objc.RegisterName("httpSessionIdentifier")
+	_aVURLAssetSelResourceLoader                                          = objc.RegisterName("resourceLoader")
+	_aVURLAssetSelAssetCache                                              = objc.RegisterName("assetCache")
+	_aVURLAssetSelCompatibleTrackForCompositionTrack                      = objc.RegisterName("compatibleTrackForCompositionTrack:")
 	_aVURLAssetSelFindCompatibleTrackForCompositionTrackCompletionHandler = objc.RegisterName("findCompatibleTrackForCompositionTrack:completionHandler:")
-	_aVURLAssetSelVariants = objc.RegisterName("variants")
-	_aVURLAssetSelMediaExtensionProperties = objc.RegisterName("mediaExtensionProperties")
-	_aVURLAssetSelSidecarURL = objc.RegisterName("sidecarURL")
-	_aVURLAssetSelMayRequireContentKeysForMediaDataProcessing = objc.RegisterName("mayRequireContentKeysForMediaDataProcessing")
+	_aVURLAssetSelVariants                                                = objc.RegisterName("variants")
+	_aVURLAssetSelMediaExtensionProperties                                = objc.RegisterName("mediaExtensionProperties")
+	_aVURLAssetSelSidecarURL                                              = objc.RegisterName("sidecarURL")
+	_aVURLAssetSelMayRequireContentKeysForMediaDataProcessing             = objc.RegisterName("mayRequireContentKeysForMediaDataProcessing")
 )
 
 func AVURLAssetFromID(id objc.ID) *AVURLAsset {
@@ -70,14 +70,18 @@ func AVURLAssetIsPlayableExtendedMIMEType(extendedMIMEType *foundation.NSString)
 // Returns an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
 func AVURLAssetURLAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelURLAssetWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVURLAssetFromID(_ret)
 }
 
 // Initializes an instance of AVURLAsset for inspection of a media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVURLAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVURLAsset.
 func (o *AVURLAsset) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelInitWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVURLAssetFromID(_ret)
 }
 
@@ -90,26 +94,34 @@ func AVURLAssetAudiovisualContentTypes() *foundation.NSArray[*uniformtypeidentif
 // Indicates the URL with which the instance of AVURLAsset was initialized.
 func (o *AVURLAsset) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id". The value is an NSUUID from which the UUID string can be obtained. Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
 func (o *AVURLAsset) HttpSessionIdentifier() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelHttpSessionIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 func (o *AVURLAsset) ResourceLoader() *AVAssetResourceLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelResourceLoader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetResourceLoaderFromID(_ret)
 }
 
 func (o *AVURLAsset) AssetCache() *AVAssetCache {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelAssetCache)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetCacheFromID(_ret)
 }
 
@@ -117,7 +129,9 @@ func (o *AVURLAsset) AssetCache() *AVAssetCache {
 // Deprecated: Use findCompatibleTrackForCompositionTrack:completionHandler: instead
 func (o *AVURLAsset) CompatibleTrackForCompositionTrack(compositionTrack *AVCompositionTrack) *AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelCompatibleTrackForCompositionTrack, compositionTrack.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetTrackFromID(_ret)
 }
 
@@ -136,21 +150,27 @@ func (o *AVURLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(com
 // Provides an array of AVAssetVariants contained in the asset Some variants may not be playable according to the current device configuration.
 func (o *AVURLAsset) Variants() *foundation.NSArray[*AVAssetVariant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelVariants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetVariant](_ret)
 }
 
 // The properties of the MediaExtension format reader for the asset. If the asset is being decoded using a MediaExtension format reader, this property will return a AVMediaExtensionProperties object describing the extension. If the asset is not being decoded with a MediaExtension format reader, this property will return nil.
 func (o *AVURLAsset) MediaExtensionProperties() *AVMediaExtensionProperties {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelMediaExtensionProperties)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaExtensionPropertiesFromID(_ret)
 }
 
 // The sidecar URL used by the MediaExtension. The sidecar URL is returned only if the MediaExtension format reader supports sidecar files, and implements this property [MEFileInfo setSidecarFilename:]. Will return nil otherwise.
 func (o *AVURLAsset) SidecarURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelSidecarURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -158,4 +178,3 @@ func (o *AVURLAsset) MayRequireContentKeysForMediaDataProcessing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVURLAssetSelMayRequireContentKeysForMediaDataProcessing)
 	return _ret
 }
-

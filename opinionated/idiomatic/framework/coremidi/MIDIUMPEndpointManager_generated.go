@@ -54,4 +54,3 @@ type UMPEndpointManagerable interface {
 }
 
 var _ UMPEndpointManagerable = (*UMPEndpointManager)(nil)
-

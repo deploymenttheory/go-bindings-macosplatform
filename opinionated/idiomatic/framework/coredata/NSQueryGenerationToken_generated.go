@@ -41,4 +41,3 @@ type QueryGenerationTokenable interface {
 }
 
 var _ QueryGenerationTokenable = (*QueryGenerationToken)(nil)
-

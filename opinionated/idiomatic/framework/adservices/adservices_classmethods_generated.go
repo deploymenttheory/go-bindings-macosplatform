@@ -20,4 +20,3 @@ func AttributionTokenWithError() (string, error) {
 	}
 	return purego.GoString(_r.Ptr()), nil
 }
-

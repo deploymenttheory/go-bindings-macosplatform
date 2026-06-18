@@ -16,7 +16,9 @@ type MTREnergyEVSEClusterStartDiagnosticsParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterStartDiagnosticsParams].
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) Unwrap() *raw.MTREnergyEVSEClusterStartDiagnosticsParams { return x.inner }
+func (x *MTREnergyEVSEClusterStartDiagnosticsParams) Unwrap() *raw.MTREnergyEVSEClusterStartDiagnosticsParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTREnergyEVSEClusterStartDiagnosticsParamsable interface {
 }
 
 var _ MTREnergyEVSEClusterStartDiagnosticsParamsable = (*MTREnergyEVSEClusterStartDiagnosticsParams)(nil)
-

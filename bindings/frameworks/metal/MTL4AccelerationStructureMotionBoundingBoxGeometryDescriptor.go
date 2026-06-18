@@ -15,13 +15,13 @@ type MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor struct {
 }
 
 var (
-	_clsMTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor = _objcClass("MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor")
-	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers = objc.RegisterName("boundingBoxBuffers")
+	_clsMTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor                      = _objcClass("MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor")
+	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers    = objc.RegisterName("boundingBoxBuffers")
 	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxBuffers = objc.RegisterName("setBoundingBoxBuffers:")
-	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxStride = objc.RegisterName("boundingBoxStride")
-	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxStride = objc.RegisterName("setBoundingBoxStride:")
-	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxCount = objc.RegisterName("boundingBoxCount")
-	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount = objc.RegisterName("setBoundingBoxCount:")
+	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxStride     = objc.RegisterName("boundingBoxStride")
+	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxStride  = objc.RegisterName("setBoundingBoxStride:")
+	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxCount      = objc.RegisterName("boundingBoxCount")
+	_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount   = objc.RegisterName("setBoundingBoxCount:")
 )
 
 func MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(id objc.ID) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
@@ -34,7 +34,7 @@ func MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(id objc.
 	return o
 }
 
-// Configures a reference to a buffer where each entry contains a reference to a buffer of bounding boxes. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a ``MTL4BufferRange`` that, in turn, references a vertex buffer containing the bounding box data for the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+// Configures a reference to a buffer where each entry contains a reference to a buffer of bounding boxes. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a vertex buffer containing the bounding box data for the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
 func (o *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() MTL4BufferRange {
 	_ret := objc.Send[MTL4BufferRange](o.Ptr(), _mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelBoundingBoxBuffers)
 	return _ret
@@ -63,4 +63,3 @@ func (o *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingB
 func (o *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
 	o.Ptr().Send(_mTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorSelSetBoundingBoxCount, boundingBoxCount)
 }
-

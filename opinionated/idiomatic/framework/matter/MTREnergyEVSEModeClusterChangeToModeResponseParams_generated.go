@@ -18,7 +18,9 @@ type MTREnergyEVSEModeClusterChangeToModeResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEModeClusterChangeToModeResponseParams].
-func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeResponseParams { return x.inner }
+func (x *MTREnergyEVSEModeClusterChangeToModeResponseParams) Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -91,4 +93,3 @@ type MTREnergyEVSEModeClusterChangeToModeResponseParamsable interface {
 }
 
 var _ MTREnergyEVSEModeClusterChangeToModeResponseParamsable = (*MTREnergyEVSEModeClusterChangeToModeResponseParams)(nil)
-

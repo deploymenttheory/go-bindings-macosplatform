@@ -57,4 +57,3 @@ type VirtioConsolePortArrayable interface {
 }
 
 var _ VirtioConsolePortArrayable = (*VirtioConsolePortArray)(nil)
-

@@ -235,4 +235,3 @@ type IndexSetable interface {
 }
 
 var _ IndexSetable = (*IndexSet)(nil)
-

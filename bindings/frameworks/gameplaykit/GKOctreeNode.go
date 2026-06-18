@@ -18,7 +18,7 @@ type GKOctreeNode struct {
 }
 
 var (
-	_clsGKOctreeNode = _objcClass("GKOctreeNode")
+	_clsGKOctreeNode    = _objcClass("GKOctreeNode")
 	_gKOctreeNodeSelBox = objc.RegisterName("box")
 )
 
@@ -36,4 +36,3 @@ func (o *GKOctreeNode) Box() GKBox {
 	_ret := objc.Send[GKBox](o.Ptr(), _gKOctreeNodeSelBox)
 	return _ret
 }
-

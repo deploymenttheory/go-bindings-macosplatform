@@ -17,26 +17,26 @@ type NSKeyedUnarchiver struct {
 }
 
 var (
-	_clsNSKeyedUnarchiver = _objcClass("NSKeyedUnarchiver")
-	_nSKeyedUnarchiverSelInitForReadingFromDataError = objc.RegisterName("initForReadingFromData:error:")
-	_nSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataError = objc.RegisterName("unarchivedObjectOfClass:fromData:error:")
-	_nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassFromDataError = objc.RegisterName("unarchivedArrayOfObjectsOfClass:fromData:error:")
-	_nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError = objc.RegisterName("unarchivedDictionaryWithKeysOfClass:objectsOfClass:fromData:error:")
-	_nSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataError = objc.RegisterName("unarchivedObjectOfClasses:fromData:error:")
-	_nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassesFromDataError = objc.RegisterName("unarchivedArrayOfObjectsOfClasses:fromData:error:")
+	_clsNSKeyedUnarchiver                                                                   = _objcClass("NSKeyedUnarchiver")
+	_nSKeyedUnarchiverSelInitForReadingFromDataError                                        = objc.RegisterName("initForReadingFromData:error:")
+	_nSKeyedUnarchiverSelUnarchivedObjectOfClassFromDataError                               = objc.RegisterName("unarchivedObjectOfClass:fromData:error:")
+	_nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassFromDataError                       = objc.RegisterName("unarchivedArrayOfObjectsOfClass:fromData:error:")
+	_nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassObjectsOfClassFromDataError     = objc.RegisterName("unarchivedDictionaryWithKeysOfClass:objectsOfClass:fromData:error:")
+	_nSKeyedUnarchiverSelUnarchivedObjectOfClassesFromDataError                             = objc.RegisterName("unarchivedObjectOfClasses:fromData:error:")
+	_nSKeyedUnarchiverSelUnarchivedArrayOfObjectsOfClassesFromDataError                     = objc.RegisterName("unarchivedArrayOfObjectsOfClasses:fromData:error:")
 	_nSKeyedUnarchiverSelUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError = objc.RegisterName("unarchivedDictionaryWithKeysOfClasses:objectsOfClasses:fromData:error:")
-	_nSKeyedUnarchiverSelInit = objc.RegisterName("init")
-	_nSKeyedUnarchiverSelInitForReadingWithData = objc.RegisterName("initForReadingWithData:")
-	_nSKeyedUnarchiverSelUnarchiveObjectWithData = objc.RegisterName("unarchiveObjectWithData:")
-	_nSKeyedUnarchiverSelUnarchiveTopLevelObjectWithDataError = objc.RegisterName("unarchiveTopLevelObjectWithData:error:")
-	_nSKeyedUnarchiverSelUnarchiveObjectWithFile = objc.RegisterName("unarchiveObjectWithFile:")
-	_nSKeyedUnarchiverSelFinishDecoding = objc.RegisterName("finishDecoding")
-	_nSKeyedUnarchiverSelSetClassForClassName = objc.RegisterName("setClass:forClassName:")
-	_nSKeyedUnarchiverSelClassForClassName = objc.RegisterName("classForClassName:")
-	_nSKeyedUnarchiverSelDelegate = objc.RegisterName("delegate")
-	_nSKeyedUnarchiverSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSKeyedUnarchiverSelSetRequiresSecureCoding = objc.RegisterName("setRequiresSecureCoding:")
-	_nSKeyedUnarchiverSelSetDecodingFailurePolicy = objc.RegisterName("setDecodingFailurePolicy:")
+	_nSKeyedUnarchiverSelInit                                                               = objc.RegisterName("init")
+	_nSKeyedUnarchiverSelInitForReadingWithData                                             = objc.RegisterName("initForReadingWithData:")
+	_nSKeyedUnarchiverSelUnarchiveObjectWithData                                            = objc.RegisterName("unarchiveObjectWithData:")
+	_nSKeyedUnarchiverSelUnarchiveTopLevelObjectWithDataError                               = objc.RegisterName("unarchiveTopLevelObjectWithData:error:")
+	_nSKeyedUnarchiverSelUnarchiveObjectWithFile                                            = objc.RegisterName("unarchiveObjectWithFile:")
+	_nSKeyedUnarchiverSelFinishDecoding                                                     = objc.RegisterName("finishDecoding")
+	_nSKeyedUnarchiverSelSetClassForClassName                                               = objc.RegisterName("setClass:forClassName:")
+	_nSKeyedUnarchiverSelClassForClassName                                                  = objc.RegisterName("classForClassName:")
+	_nSKeyedUnarchiverSelDelegate                                                           = objc.RegisterName("delegate")
+	_nSKeyedUnarchiverSelSetDelegate                                                        = objc.RegisterName("setDelegate:")
+	_nSKeyedUnarchiverSelSetRequiresSecureCoding                                            = objc.RegisterName("setRequiresSecureCoding:")
+	_nSKeyedUnarchiverSelSetDecodingFailurePolicy                                           = objc.RegisterName("setDecodingFailurePolicy:")
 )
 
 func NSKeyedUnarchiverFromID(id objc.ID) *NSKeyedUnarchiver {
@@ -53,7 +53,9 @@ func NSKeyedUnarchiverFromID(id objc.ID) *NSKeyedUnarchiver {
 func (o *NSKeyedUnarchiver) InitForReadingFromDataError(data *NSData) (*NSKeyedUnarchiver, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInitForReadingFromDataError, data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -123,14 +125,18 @@ func NSKeyedUnarchiverUnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromD
 // Deprecated: Use -initForReadingFromData:error: instead
 func (o *NSKeyedUnarchiver) Init() *NSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSKeyedUnarchiverFromID(_ret)
 }
 
 // Deprecated: Use -initForReadingFromData:error: instead
 func (o *NSKeyedUnarchiver) InitForReadingWithData(data *NSData) *NSKeyedUnarchiver {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSKeyedUnarchiverSelInitForReadingWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSKeyedUnarchiverFromID(_ret)
 }
 
@@ -195,4 +201,3 @@ func (o *NSKeyedUnarchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
 func (o *NSKeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) {
 	o.Ptr().Send(_nSKeyedUnarchiverSelSetDecodingFailurePolicy, decodingFailurePolicy)
 }
-

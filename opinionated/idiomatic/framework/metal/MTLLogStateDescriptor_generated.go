@@ -79,4 +79,3 @@ type LogStateDescriptorable interface {
 }
 
 var _ LogStateDescriptorable = (*LogStateDescriptor)(nil)
-

@@ -16,9 +16,9 @@ type MPSRNNRecurrentMatrixState struct {
 }
 
 var (
-	_clsMPSRNNRecurrentMatrixState = _objcClass("MPSRNNRecurrentMatrixState")
+	_clsMPSRNNRecurrentMatrixState                                      = _objcClass("MPSRNNRecurrentMatrixState")
 	_mPSRNNRecurrentMatrixStateSelGetRecurrentOutputMatrixForLayerIndex = objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:")
-	_mPSRNNRecurrentMatrixStateSelGetMemoryCellMatrixForLayerIndex = objc.RegisterName("getMemoryCellMatrixForLayerIndex:")
+	_mPSRNNRecurrentMatrixStateSelGetMemoryCellMatrixForLayerIndex      = objc.RegisterName("getMemoryCellMatrixForLayerIndex:")
 )
 
 func MPSRNNRecurrentMatrixStateFromID(id objc.ID) *MPSRNNRecurrentMatrixState {
@@ -34,14 +34,17 @@ func MPSRNNRecurrentMatrixStateFromID(id objc.ID) *MPSRNNRecurrentMatrixState {
 // @abstract   Access the stored recurrent matrix data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output matrix data, otherwise nil.
 func (o *MPSRNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNRecurrentMatrixStateSelGetRecurrentOutputMatrixForLayerIndex, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSMatrixFromID(_ret)
 }
 
 // @abstract   Access the stored memory cell matrix data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image matrix, otherwise nil.
 func (o *MPSRNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNRecurrentMatrixStateSelGetMemoryCellMatrixForLayerIndex, layerIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSMatrixFromID(_ret)
 }
-

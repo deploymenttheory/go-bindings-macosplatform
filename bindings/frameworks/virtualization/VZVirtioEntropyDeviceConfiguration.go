@@ -15,7 +15,7 @@ type VZVirtioEntropyDeviceConfiguration struct {
 }
 
 var (
-	_clsVZVirtioEntropyDeviceConfiguration = _objcClass("VZVirtioEntropyDeviceConfiguration")
+	_clsVZVirtioEntropyDeviceConfiguration     = _objcClass("VZVirtioEntropyDeviceConfiguration")
 	_vZVirtioEntropyDeviceConfigurationSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZVirtioEntropyDeviceConfigurationFromID(id objc.ID) *VZVirtioEntropyDevice
 
 func (o *VZVirtioEntropyDeviceConfiguration) Init() *VZVirtioEntropyDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioEntropyDeviceConfigurationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZVirtioEntropyDeviceConfigurationFromID(_ret)
 }
-

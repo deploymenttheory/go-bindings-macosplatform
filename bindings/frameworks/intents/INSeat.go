@@ -16,12 +16,12 @@ type INSeat struct {
 }
 
 var (
-	_clsINSeat = _objcClass("INSeat")
+	_clsINSeat                                                = _objcClass("INSeat")
 	_iNSeatSelInitWithSeatSectionSeatRowSeatNumberSeatingType = objc.RegisterName("initWithSeatSection:seatRow:seatNumber:seatingType:")
-	_iNSeatSelSeatSection = objc.RegisterName("seatSection")
-	_iNSeatSelSeatRow = objc.RegisterName("seatRow")
-	_iNSeatSelSeatNumber = objc.RegisterName("seatNumber")
-	_iNSeatSelSeatingType = objc.RegisterName("seatingType")
+	_iNSeatSelSeatSection                                     = objc.RegisterName("seatSection")
+	_iNSeatSelSeatRow                                         = objc.RegisterName("seatRow")
+	_iNSeatSelSeatNumber                                      = objc.RegisterName("seatNumber")
+	_iNSeatSelSeatingType                                     = objc.RegisterName("seatingType")
 )
 
 func INSeatFromID(id objc.ID) *INSeat {
@@ -36,31 +36,40 @@ func INSeatFromID(id objc.ID) *INSeat {
 
 func (o *INSeat) InitWithSeatSectionSeatRowSeatNumberSeatingType(seatSection *foundation.NSString, seatRow *foundation.NSString, seatNumber *foundation.NSString, seatingType *foundation.NSString) *INSeat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelInitWithSeatSectionSeatRowSeatNumberSeatingType, seatSection.Ptr(), seatRow.Ptr(), seatNumber.Ptr(), seatingType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSeatFromID(_ret)
 }
 
 func (o *INSeat) SeatSection() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelSeatSection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INSeat) SeatRow() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelSeatRow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INSeat) SeatNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelSeatNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INSeat) SeatingType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNSeatSelSeatingType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

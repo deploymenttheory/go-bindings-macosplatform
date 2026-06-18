@@ -17,4 +17,3 @@ func DSM_Entry(pOrigin *raw.TW_IDENTITY, pDest *raw.TW_IDENTITY, dG uint, dAT ui
 func DS_Entry(pOrigin *raw.TW_IDENTITY, dG uint, dAT uint16, mSG uint16, pData string) uint16 {
 	return raw.DS_Entry(pOrigin, dG, dAT, mSG, pData)
 }
-

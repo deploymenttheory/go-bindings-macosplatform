@@ -46,7 +46,9 @@ func (x *ArrayQuantizationDescriptor) QuantizationScheme() raw.MPSNDArrayQuantiz
 	return x.inner.QuantizationScheme()
 }
 
-func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor { return x.inner }
+func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor {
+	return x.inner
+}
 
 // ArrayQuantizationDescriptorable is the interface implemented by [ArrayQuantizationDescriptor], for mocking and DI.
 type ArrayQuantizationDescriptorable interface {
@@ -56,4 +58,3 @@ type ArrayQuantizationDescriptorable interface {
 }
 
 var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)
-

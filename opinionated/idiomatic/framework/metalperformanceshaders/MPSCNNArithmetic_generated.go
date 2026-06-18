@@ -270,7 +270,9 @@ func (x *CNNArithmetic) SetMaximumValue(maximumValue float32) {
 	x.inner.SetMaximumValue(maximumValue)
 }
 
-func (x *CNNArithmetic) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNBinaryKernel }
+func (x *CNNArithmetic) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNBinaryKernel
+}
 
 func (x *CNNArithmetic) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNBinaryKernel.MPSKernel }
 
@@ -321,4 +323,3 @@ type CNNArithmeticable interface {
 }
 
 var _ CNNArithmeticable = (*CNNArithmetic)(nil)
-

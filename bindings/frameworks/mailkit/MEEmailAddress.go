@@ -18,10 +18,10 @@ type MEEmailAddress struct {
 }
 
 var (
-	_clsMEEmailAddress = _objcClass("MEEmailAddress")
+	_clsMEEmailAddress                  = _objcClass("MEEmailAddress")
 	_mEEmailAddressSelInitWithRawString = objc.RegisterName("initWithRawString:")
-	_mEEmailAddressSelRawString = objc.RegisterName("rawString")
-	_mEEmailAddressSelAddressString = objc.RegisterName("addressString")
+	_mEEmailAddressSelRawString         = objc.RegisterName("rawString")
+	_mEEmailAddressSelAddressString     = objc.RegisterName("addressString")
 )
 
 func MEEmailAddressFromID(id objc.ID) *MEEmailAddress {
@@ -36,21 +36,26 @@ func MEEmailAddressFromID(id objc.ID) *MEEmailAddress {
 
 func (o *MEEmailAddress) InitWithRawString(rawString *foundation.NSString) *MEEmailAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEmailAddressSelInitWithRawString, rawString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEEmailAddressFromID(_ret)
 }
 
 // @brief The raw string for the email address.
 func (o *MEEmailAddress) RawString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEmailAddressSelRawString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief The simple address string portion of the raw string if it is valid. For example, the  @c addressString of "John Appleseed <j.appleseed@example.com>" will be "j.appleseed@example.com".
 func (o *MEEmailAddress) AddressString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEEmailAddressSelAddressString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

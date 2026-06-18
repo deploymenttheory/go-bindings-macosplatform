@@ -15,12 +15,12 @@ type NSMachPort struct {
 }
 
 var (
-	_clsNSMachPort = _objcClass("NSMachPort")
-	_nSMachPortSelPortWithMachPort = objc.RegisterName("portWithMachPort:")
-	_nSMachPortSelInitWithMachPort = objc.RegisterName("initWithMachPort:")
+	_clsNSMachPort                        = _objcClass("NSMachPort")
+	_nSMachPortSelPortWithMachPort        = objc.RegisterName("portWithMachPort:")
+	_nSMachPortSelInitWithMachPort        = objc.RegisterName("initWithMachPort:")
 	_nSMachPortSelPortWithMachPortOptions = objc.RegisterName("portWithMachPort:options:")
 	_nSMachPortSelInitWithMachPortOptions = objc.RegisterName("initWithMachPort:options:")
-	_nSMachPortSelMachPort = objc.RegisterName("machPort")
+	_nSMachPortSelMachPort                = objc.RegisterName("machPort")
 )
 
 func NSMachPortFromID(id objc.ID) *NSMachPort {
@@ -35,25 +35,33 @@ func NSMachPortFromID(id objc.ID) *NSMachPort {
 
 func NSMachPortPortWithMachPort(machPort uint32) *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMachPort), _nSMachPortSelPortWithMachPort, machPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 func (o *NSMachPort) InitWithMachPort(machPort uint32) *NSMachPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachPortSelInitWithMachPort, machPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMachPortFromID(_ret)
 }
 
 func NSMachPortPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *NSPort {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMachPort), _nSMachPortSelPortWithMachPortOptions, machPort, f)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPortFromID(_ret)
 }
 
 func (o *NSMachPort) InitWithMachPortOptions(machPort uint32, f NSMachPortOptions) *NSMachPort {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMachPortSelInitWithMachPortOptions, machPort, f)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMachPortFromID(_ret)
 }
 
@@ -61,4 +69,3 @@ func (o *NSMachPort) MachPort() uint32 {
 	_ret := objc.Send[uint32](o.Ptr(), _nSMachPortSelMachPort)
 	return _ret
 }
-

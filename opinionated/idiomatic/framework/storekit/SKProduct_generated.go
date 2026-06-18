@@ -180,4 +180,3 @@ type Productable interface {
 }
 
 var _ Productable = (*Product)(nil)
-

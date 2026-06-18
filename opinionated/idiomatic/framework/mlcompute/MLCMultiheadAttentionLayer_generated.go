@@ -129,4 +129,3 @@ type MultiheadAttentionLayerable interface {
 }
 
 var _ MultiheadAttentionLayerable = (*MultiheadAttentionLayer)(nil)
-

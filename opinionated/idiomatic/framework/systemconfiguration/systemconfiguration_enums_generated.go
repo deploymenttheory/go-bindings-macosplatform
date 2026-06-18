@@ -12,10 +12,10 @@ import (
 type SCNetworkConnectionStatus int64
 
 const (
-	KSCNetworkConnectionInvalid SCNetworkConnectionStatus = -1
-	KSCNetworkConnectionDisconnected SCNetworkConnectionStatus = 0
-	KSCNetworkConnectionConnecting SCNetworkConnectionStatus = 1
-	KSCNetworkConnectionConnected SCNetworkConnectionStatus = 2
+	KSCNetworkConnectionInvalid       SCNetworkConnectionStatus = -1
+	KSCNetworkConnectionDisconnected  SCNetworkConnectionStatus = 0
+	KSCNetworkConnectionConnecting    SCNetworkConnectionStatus = 1
+	KSCNetworkConnectionConnected     SCNetworkConnectionStatus = 2
 	KSCNetworkConnectionDisconnecting SCNetworkConnectionStatus = 3
 )
 
@@ -40,14 +40,14 @@ func (e SCNetworkConnectionStatus) String() string {
 type SCNetworkReachabilityFlags int64
 
 const (
-	KSCNetworkReachabilityFlagsTransientConnection SCNetworkReachabilityFlags = 1
-	KSCNetworkReachabilityFlagsReachable SCNetworkReachabilityFlags = 2
-	KSCNetworkReachabilityFlagsConnectionRequired SCNetworkReachabilityFlags = 4
-	KSCNetworkReachabilityFlagsConnectionOnTraffic SCNetworkReachabilityFlags = 8
+	KSCNetworkReachabilityFlagsTransientConnection  SCNetworkReachabilityFlags = 1
+	KSCNetworkReachabilityFlagsReachable            SCNetworkReachabilityFlags = 2
+	KSCNetworkReachabilityFlagsConnectionRequired   SCNetworkReachabilityFlags = 4
+	KSCNetworkReachabilityFlagsConnectionOnTraffic  SCNetworkReachabilityFlags = 8
 	KSCNetworkReachabilityFlagsInterventionRequired SCNetworkReachabilityFlags = 16
-	KSCNetworkReachabilityFlagsConnectionOnDemand SCNetworkReachabilityFlags = 32
-	KSCNetworkReachabilityFlagsIsLocalAddress SCNetworkReachabilityFlags = 65536
-	KSCNetworkReachabilityFlagsIsDirect SCNetworkReachabilityFlags = 131072
+	KSCNetworkReachabilityFlagsConnectionOnDemand   SCNetworkReachabilityFlags = 32
+	KSCNetworkReachabilityFlagsIsLocalAddress       SCNetworkReachabilityFlags = 65536
+	KSCNetworkReachabilityFlagsIsDirect             SCNetworkReachabilityFlags = 131072
 )
 
 func (e SCNetworkReachabilityFlags) String() string {
@@ -81,4 +81,3 @@ func (e SCNetworkReachabilityFlags) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

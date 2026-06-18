@@ -18,7 +18,9 @@ type NNReduceFeatureChannelsArgumentMin struct {
 }
 
 // Unwrap returns the underlying [raw.MPSNNReduceFeatureChannelsArgumentMin].
-func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin { return x.inner }
+func (x *NNReduceFeatureChannelsArgumentMin) Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -100,9 +102,13 @@ func (x *NNReduceFeatureChannelsArgumentMin) WithDestinationImageAllocator(desti
 	return x
 }
 
-func (x *NNReduceFeatureChannelsArgumentMin) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceFeatureChannelsArgumentMin) asNNReduceUnary() *raw.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceFeatureChannelsArgumentMinable is the interface implemented by [NNReduceFeatureChannelsArgumentMin], for mocking and DI.
 type NNReduceFeatureChannelsArgumentMinable interface {
@@ -119,4 +125,3 @@ type NNReduceFeatureChannelsArgumentMinable interface {
 }
 
 var _ NNReduceFeatureChannelsArgumentMinable = (*NNReduceFeatureChannelsArgumentMin)(nil)
-

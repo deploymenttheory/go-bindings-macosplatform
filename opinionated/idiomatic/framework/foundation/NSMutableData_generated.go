@@ -136,4 +136,3 @@ type MutableDataable interface {
 }
 
 var _ MutableDataable = (*MutableData)(nil)
-

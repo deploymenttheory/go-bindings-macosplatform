@@ -79,4 +79,3 @@ type MTRControllerFactoryable interface {
 }
 
 var _ MTRControllerFactoryable = (*MTRControllerFactory)(nil)
-

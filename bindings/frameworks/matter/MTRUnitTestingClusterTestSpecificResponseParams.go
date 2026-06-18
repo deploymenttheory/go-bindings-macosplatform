@@ -18,12 +18,12 @@ type MTRUnitTestingClusterTestSpecificResponseParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestSpecificResponseParams = _objcClass("MTRUnitTestingClusterTestSpecificResponseParams")
+	_clsMTRUnitTestingClusterTestSpecificResponseParams                           = _objcClass("MTRUnitTestingClusterTestSpecificResponseParams")
 	_mTRUnitTestingClusterTestSpecificResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRUnitTestingClusterTestSpecificResponseParamsSelReturnValue = objc.RegisterName("returnValue")
-	_mTRUnitTestingClusterTestSpecificResponseParamsSelSetReturnValue = objc.RegisterName("setReturnValue:")
-	_mTRUnitTestingClusterTestSpecificResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestSpecificResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestSpecificResponseParamsSelReturnValue                = objc.RegisterName("returnValue")
+	_mTRUnitTestingClusterTestSpecificResponseParamsSelSetReturnValue             = objc.RegisterName("setReturnValue:")
+	_mTRUnitTestingClusterTestSpecificResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestSpecificResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTRUnitTestingClusterTestSpecificResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestSpecificResponseParams {
@@ -40,7 +40,9 @@ func MTRUnitTestingClusterTestSpecificResponseParamsFromID(id objc.ID) *MTRUnitT
 func (o *MTRUnitTestingClusterTestSpecificResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestSpecificResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestSpecificResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRUnitTestingClusterTestSpecificResponseParams) InitWithResponseValueE
 
 func (o *MTRUnitTestingClusterTestSpecificResponseParams) ReturnValue() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestSpecificResponseParamsSelReturnValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -60,11 +64,12 @@ func (o *MTRUnitTestingClusterTestSpecificResponseParams) SetReturnValue(returnV
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestSpecificResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestSpecificResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestSpecificResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestSpecificResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

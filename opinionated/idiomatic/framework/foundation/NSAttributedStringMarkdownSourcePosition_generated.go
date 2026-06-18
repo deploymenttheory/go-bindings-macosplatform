@@ -16,7 +16,9 @@ type AttributedStringMarkdownSourcePosition struct {
 }
 
 // Unwrap returns the underlying [raw.NSAttributedStringMarkdownSourcePosition].
-func (x *AttributedStringMarkdownSourcePosition) Unwrap() *raw.NSAttributedStringMarkdownSourcePosition { return x.inner }
+func (x *AttributedStringMarkdownSourcePosition) Unwrap() *raw.NSAttributedStringMarkdownSourcePosition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -82,4 +84,3 @@ type AttributedStringMarkdownSourcePositionable interface {
 }
 
 var _ AttributedStringMarkdownSourcePositionable = (*AttributedStringMarkdownSourcePosition)(nil)
-

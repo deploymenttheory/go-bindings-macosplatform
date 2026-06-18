@@ -150,4 +150,3 @@ func CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionData *uint8, ti
 	}
 	return nil
 }
-

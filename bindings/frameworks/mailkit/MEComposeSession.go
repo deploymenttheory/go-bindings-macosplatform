@@ -16,10 +16,10 @@ type MEComposeSession struct {
 }
 
 var (
-	_clsMEComposeSession = _objcClass("MEComposeSession")
-	_mEComposeSessionSelReloadSession = objc.RegisterName("reloadSession")
-	_mEComposeSessionSelSessionID = objc.RegisterName("sessionID")
-	_mEComposeSessionSelMailMessage = objc.RegisterName("mailMessage")
+	_clsMEComposeSession               = _objcClass("MEComposeSession")
+	_mEComposeSessionSelReloadSession  = objc.RegisterName("reloadSession")
+	_mEComposeSessionSelSessionID      = objc.RegisterName("sessionID")
+	_mEComposeSessionSelMailMessage    = objc.RegisterName("mailMessage")
 	_mEComposeSessionSelComposeContext = objc.RegisterName("composeContext")
 )
 
@@ -41,21 +41,26 @@ func (o *MEComposeSession) ReloadSession() {
 // @brief A unique identifier for the session.
 func (o *MEComposeSession) SessionID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEComposeSessionSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
 // @brief An instance of @c MEMessage that represents properties of the mail message that author is composing in this @c MEComposeSession
 func (o *MEComposeSession) MailMessage() *MEMessage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEComposeSessionSelMailMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEMessageFromID(_ret)
 }
 
 // @brief An instance of @c MEComposeContext that provides additional information about the compose session.
 func (o *MEComposeSession) ComposeContext() *MEComposeContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEComposeSessionSelComposeContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MEComposeContextFromID(_ret)
 }
-

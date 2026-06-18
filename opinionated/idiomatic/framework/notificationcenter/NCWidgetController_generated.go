@@ -48,4 +48,3 @@ type WidgetControllerable interface {
 }
 
 var _ WidgetControllerable = (*WidgetController)(nil)
-

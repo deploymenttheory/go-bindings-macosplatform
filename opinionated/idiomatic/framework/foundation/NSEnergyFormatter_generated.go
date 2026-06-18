@@ -153,4 +153,3 @@ type EnergyFormatterable interface {
 }
 
 var _ EnergyFormatterable = (*EnergyFormatter)(nil)
-

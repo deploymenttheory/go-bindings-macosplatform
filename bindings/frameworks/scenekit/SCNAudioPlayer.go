@@ -17,17 +17,17 @@ type SCNAudioPlayer struct {
 }
 
 var (
-	_clsSCNAudioPlayer = _objcClass("SCNAudioPlayer")
-	_sCNAudioPlayerSelInitWithSource = objc.RegisterName("initWithSource:")
-	_sCNAudioPlayerSelInitWithAVAudioNode = objc.RegisterName("initWithAVAudioNode:")
-	_sCNAudioPlayerSelAudioPlayerWithSource = objc.RegisterName("audioPlayerWithSource:")
+	_clsSCNAudioPlayer                           = _objcClass("SCNAudioPlayer")
+	_sCNAudioPlayerSelInitWithSource             = objc.RegisterName("initWithSource:")
+	_sCNAudioPlayerSelInitWithAVAudioNode        = objc.RegisterName("initWithAVAudioNode:")
+	_sCNAudioPlayerSelAudioPlayerWithSource      = objc.RegisterName("audioPlayerWithSource:")
 	_sCNAudioPlayerSelAudioPlayerWithAVAudioNode = objc.RegisterName("audioPlayerWithAVAudioNode:")
-	_sCNAudioPlayerSelWillStartPlayback = objc.RegisterName("willStartPlayback")
-	_sCNAudioPlayerSelSetWillStartPlayback = objc.RegisterName("setWillStartPlayback:")
-	_sCNAudioPlayerSelDidFinishPlayback = objc.RegisterName("didFinishPlayback")
-	_sCNAudioPlayerSelSetDidFinishPlayback = objc.RegisterName("setDidFinishPlayback:")
-	_sCNAudioPlayerSelAudioNode = objc.RegisterName("audioNode")
-	_sCNAudioPlayerSelAudioSource = objc.RegisterName("audioSource")
+	_sCNAudioPlayerSelWillStartPlayback          = objc.RegisterName("willStartPlayback")
+	_sCNAudioPlayerSelSetWillStartPlayback       = objc.RegisterName("setWillStartPlayback:")
+	_sCNAudioPlayerSelDidFinishPlayback          = objc.RegisterName("didFinishPlayback")
+	_sCNAudioPlayerSelSetDidFinishPlayback       = objc.RegisterName("setDidFinishPlayback:")
+	_sCNAudioPlayerSelAudioNode                  = objc.RegisterName("audioNode")
+	_sCNAudioPlayerSelAudioSource                = objc.RegisterName("audioSource")
 )
 
 func SCNAudioPlayerFromID(id objc.ID) *SCNAudioPlayer {
@@ -43,28 +43,36 @@ func SCNAudioPlayerFromID(id objc.ID) *SCNAudioPlayer {
 // @property initWithSource: @abstract Init an audio player with a source. Most people should use audioPlayerWithSource as it permits to recycle previous players instead of creating new ones for each instance.
 func (o *SCNAudioPlayer) InitWithSource(source *SCNAudioSource) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioPlayerFromID(_ret)
 }
 
 // @property initWithAVAudioNode: @abstract Init an audio player with an AVAudioNode. Most people should use audioPlayerWithAVAudioNode as it permits to recycle previous players instead of creating new ones for each instance.
 func (o *SCNAudioPlayer) InitWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelInitWithAVAudioNode, audioNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioPlayerFromID(_ret)
 }
 
 // @property audioPlayerWithSource: @abstract Create an audio player with a source.
 func SCNAudioPlayerAudioPlayerWithSource(source *SCNAudioSource) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioPlayer), _sCNAudioPlayerSelAudioPlayerWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioPlayerFromID(_ret)
 }
 
 // @property audioPlayerWithAVAudioNode: @abstract Create an audio player with a custom AVAudioNode instance.
 func SCNAudioPlayerAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *SCNAudioPlayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNAudioPlayer), _sCNAudioPlayerSelAudioPlayerWithAVAudioNode, audioNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioPlayerFromID(_ret)
 }
 
@@ -105,14 +113,17 @@ func (o *SCNAudioPlayer) SetDidFinishPlayback(didFinishPlayback func()) {
 // @property audioNode @abstract The audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
 func (o *SCNAudioPlayer) AudioNode() *avfaudio.AVAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelAudioNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioNodeFromID(_ret)
 }
 
 // @property audioSource @abstract The audioSource if there is one.
 func (o *SCNAudioPlayer) AudioSource() *SCNAudioSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNAudioPlayerSelAudioSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNAudioSourceFromID(_ret)
 }
-

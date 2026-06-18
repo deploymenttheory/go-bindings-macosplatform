@@ -16,31 +16,31 @@ type MTROTASoftwareUpdateProviderClusterQueryImageParams struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateProviderClusterQueryImageParams = _objcClass("MTROTASoftwareUpdateProviderClusterQueryImageParams")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorID = objc.RegisterName("vendorID")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetVendorID = objc.RegisterName("setVendorID:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductID = objc.RegisterName("productID")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProductID = objc.RegisterName("setProductID:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSoftwareVersion = objc.RegisterName("softwareVersion")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetSoftwareVersion = objc.RegisterName("setSoftwareVersion:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProtocolsSupported = objc.RegisterName("protocolsSupported")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProtocolsSupported = objc.RegisterName("setProtocolsSupported:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelHardwareVersion = objc.RegisterName("hardwareVersion")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetHardwareVersion = objc.RegisterName("setHardwareVersion:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelLocation = objc.RegisterName("location")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetLocation = objc.RegisterName("setLocation:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelRequestorCanConsent = objc.RegisterName("requestorCanConsent")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetRequestorCanConsent = objc.RegisterName("setRequestorCanConsent:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelMetadataForProvider = objc.RegisterName("metadataForProvider")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetMetadataForProvider = objc.RegisterName("setMetadataForProvider:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTROTASoftwareUpdateProviderClusterQueryImageParams                               = _objcClass("MTROTASoftwareUpdateProviderClusterQueryImageParams")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorID                       = objc.RegisterName("vendorID")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetVendorID                    = objc.RegisterName("setVendorID:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductID                      = objc.RegisterName("productID")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProductID                   = objc.RegisterName("setProductID:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSoftwareVersion                = objc.RegisterName("softwareVersion")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetSoftwareVersion             = objc.RegisterName("setSoftwareVersion:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProtocolsSupported             = objc.RegisterName("protocolsSupported")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProtocolsSupported          = objc.RegisterName("setProtocolsSupported:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelHardwareVersion                = objc.RegisterName("hardwareVersion")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetHardwareVersion             = objc.RegisterName("setHardwareVersion:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelLocation                       = objc.RegisterName("location")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetLocation                    = objc.RegisterName("setLocation:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelRequestorCanConsent            = objc.RegisterName("requestorCanConsent")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetRequestorCanConsent         = objc.RegisterName("setRequestorCanConsent:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelMetadataForProvider            = objc.RegisterName("metadataForProvider")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetMetadataForProvider         = objc.RegisterName("setMetadataForProvider:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorId = objc.RegisterName("vendorId")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetVendorId = objc.RegisterName("setVendorId:")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductId = objc.RegisterName("productId")
-	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProductId = objc.RegisterName("setProductId:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorId                       = objc.RegisterName("vendorId")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetVendorId                    = objc.RegisterName("setVendorId:")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductId                      = objc.RegisterName("productId")
+	_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProductId                   = objc.RegisterName("setProductId:")
 )
 
 func MTROTASoftwareUpdateProviderClusterQueryImageParamsFromID(id objc.ID) *MTROTASoftwareUpdateProviderClusterQueryImageParams {
@@ -55,7 +55,9 @@ func MTROTASoftwareUpdateProviderClusterQueryImageParamsFromID(id objc.ID) *MTRO
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetVendorID(vendor
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProductID(produ
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SoftwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSoftwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -94,7 +100,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProtocolsSuppor
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) HardwareVersion() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelHardwareVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -104,7 +112,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetHardwareVersion
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) Location() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -114,7 +124,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetLocation(locati
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) RequestorCanConsent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelRequestorCanConsent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -124,7 +136,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetRequestorCanCon
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) MetadataForProvider() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelMetadataForProvider)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -135,7 +149,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetMetadataForProv
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -146,7 +162,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetTimedInvokeTime
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -156,7 +174,9 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetServerSideProce
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) VendorId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelVendorId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -166,11 +186,12 @@ func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetVendorId(vendor
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) ProductId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateProviderClusterQueryImageParamsSelProductId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateProviderClusterQueryImageParams) SetProductId(productId *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateProviderClusterQueryImageParamsSelSetProductId, productId.Ptr())
 }
-

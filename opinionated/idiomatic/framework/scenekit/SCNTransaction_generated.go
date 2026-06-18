@@ -41,4 +41,3 @@ type Transactionable interface {
 }
 
 var _ Transactionable = (*Transaction)(nil)
-

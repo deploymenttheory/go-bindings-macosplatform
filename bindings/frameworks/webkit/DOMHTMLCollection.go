@@ -16,11 +16,11 @@ type DOMHTMLCollection struct {
 }
 
 var (
-	_clsDOMHTMLCollection = _objcClass("DOMHTMLCollection")
-	_dOMHTMLCollectionSelItem = objc.RegisterName("item:")
+	_clsDOMHTMLCollection          = _objcClass("DOMHTMLCollection")
+	_dOMHTMLCollectionSelItem      = objc.RegisterName("item:")
 	_dOMHTMLCollectionSelNamedItem = objc.RegisterName("namedItem:")
-	_dOMHTMLCollectionSelTags = objc.RegisterName("tags:")
-	_dOMHTMLCollectionSelLength = objc.RegisterName("length")
+	_dOMHTMLCollectionSelTags      = objc.RegisterName("tags:")
+	_dOMHTMLCollectionSelLength    = objc.RegisterName("length")
 )
 
 func DOMHTMLCollectionFromID(id objc.ID) *DOMHTMLCollection {
@@ -35,19 +35,25 @@ func DOMHTMLCollectionFromID(id objc.ID) *DOMHTMLCollection {
 
 func (o *DOMHTMLCollection) Item(index uint) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLCollectionSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMHTMLCollection) NamedItem(name *foundation.NSString) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLCollectionSelNamedItem, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMHTMLCollection) Tags(name *foundation.NSString) *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLCollectionSelTags, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
@@ -55,4 +61,3 @@ func (o *DOMHTMLCollection) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMHTMLCollectionSelLength)
 	return _ret
 }
-

@@ -54,4 +54,3 @@ type UnitAngleable interface {
 }
 
 var _ UnitAngleable = (*UnitAngle)(nil)
-

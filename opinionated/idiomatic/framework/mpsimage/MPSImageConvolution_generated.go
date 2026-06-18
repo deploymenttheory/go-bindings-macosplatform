@@ -90,7 +90,9 @@ func (x *ImageConvolution) SetBias(bias float32) {
 	x.inner.SetBias(bias)
 }
 
-func (x *ImageConvolution) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageConvolution) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageConvolutionable is the interface implemented by [ImageConvolution], for mocking and DI.
 type ImageConvolutionable interface {
@@ -106,4 +108,3 @@ type ImageConvolutionable interface {
 }
 
 var _ ImageConvolutionable = (*ImageConvolution)(nil)
-

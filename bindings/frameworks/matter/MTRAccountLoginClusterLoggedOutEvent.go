@@ -16,8 +16,8 @@ type MTRAccountLoginClusterLoggedOutEvent struct {
 }
 
 var (
-	_clsMTRAccountLoginClusterLoggedOutEvent = _objcClass("MTRAccountLoginClusterLoggedOutEvent")
-	_mTRAccountLoginClusterLoggedOutEventSelNode = objc.RegisterName("node")
+	_clsMTRAccountLoginClusterLoggedOutEvent        = _objcClass("MTRAccountLoginClusterLoggedOutEvent")
+	_mTRAccountLoginClusterLoggedOutEventSelNode    = objc.RegisterName("node")
 	_mTRAccountLoginClusterLoggedOutEventSelSetNode = objc.RegisterName("setNode:")
 )
 
@@ -33,11 +33,12 @@ func MTRAccountLoginClusterLoggedOutEventFromID(id objc.ID) *MTRAccountLoginClus
 
 func (o *MTRAccountLoginClusterLoggedOutEvent) Node() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAccountLoginClusterLoggedOutEventSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAccountLoginClusterLoggedOutEvent) SetNode(node *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAccountLoginClusterLoggedOutEventSelSetNode, node.Ptr())
 }
-

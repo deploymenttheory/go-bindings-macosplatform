@@ -45,4 +45,3 @@ type AVPlayerViewPictureInPictureDelegate interface {
 // AVRoutePickerViewDelegate wraps the ObjC protocol AVRoutePickerViewDelegate.
 type AVRoutePickerViewDelegate interface {
 }
-

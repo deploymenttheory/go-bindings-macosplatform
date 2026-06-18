@@ -38,4 +38,3 @@ type MKOverlay interface {
 	Coordinate() unsafe.Pointer
 	BoundingMapRect() MKMapRect
 }
-

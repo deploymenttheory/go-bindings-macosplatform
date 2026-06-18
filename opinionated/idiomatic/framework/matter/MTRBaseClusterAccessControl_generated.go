@@ -713,9 +713,13 @@ func (x *MTRBaseClusterAccessControl) SubscribeAttributeClusterRevisionWithMinIn
 	}
 }
 
-func (x *MTRBaseClusterAccessControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterAccessControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterAccessControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterAccessControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterAccessControlable is the interface implemented by [MTRBaseClusterAccessControl], for mocking and DI.
 type MTRBaseClusterAccessControlable interface {
@@ -776,4 +780,3 @@ type MTRBaseClusterAccessControlable interface {
 }
 
 var _ MTRBaseClusterAccessControlable = (*MTRBaseClusterAccessControl)(nil)
-

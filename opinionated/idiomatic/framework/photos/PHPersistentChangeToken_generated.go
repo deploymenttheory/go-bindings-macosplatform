@@ -41,4 +41,3 @@ type PersistentChangeTokenable interface {
 }
 
 var _ PersistentChangeTokenable = (*PersistentChangeToken)(nil)
-

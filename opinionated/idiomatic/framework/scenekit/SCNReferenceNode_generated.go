@@ -204,7 +204,9 @@ func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceN
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asConstraint().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asConstraint().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.SCNConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -220,7 +222,9 @@ func (x *ReferenceNode) WithFilters(items ...*coreimage.CIFilter) *ReferenceNode
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -334,4 +338,3 @@ type ReferenceNodeable interface {
 }
 
 var _ ReferenceNodeable = (*ReferenceNode)(nil)
-

@@ -15,21 +15,21 @@ type CASpringAnimation struct {
 }
 
 var (
-	_clsCASpringAnimation = _objcClass("CASpringAnimation")
+	_clsCASpringAnimation                                 = _objcClass("CASpringAnimation")
 	_cASpringAnimationSelInitWithPerceptualDurationBounce = objc.RegisterName("initWithPerceptualDuration:bounce:")
-	_cASpringAnimationSelMass = objc.RegisterName("mass")
-	_cASpringAnimationSelSetMass = objc.RegisterName("setMass:")
-	_cASpringAnimationSelStiffness = objc.RegisterName("stiffness")
-	_cASpringAnimationSelSetStiffness = objc.RegisterName("setStiffness:")
-	_cASpringAnimationSelDamping = objc.RegisterName("damping")
-	_cASpringAnimationSelSetDamping = objc.RegisterName("setDamping:")
-	_cASpringAnimationSelInitialVelocity = objc.RegisterName("initialVelocity")
-	_cASpringAnimationSelSetInitialVelocity = objc.RegisterName("setInitialVelocity:")
-	_cASpringAnimationSelAllowsOverdamping = objc.RegisterName("allowsOverdamping")
-	_cASpringAnimationSelSetAllowsOverdamping = objc.RegisterName("setAllowsOverdamping:")
-	_cASpringAnimationSelSettlingDuration = objc.RegisterName("settlingDuration")
-	_cASpringAnimationSelPerceptualDuration = objc.RegisterName("perceptualDuration")
-	_cASpringAnimationSelBounce = objc.RegisterName("bounce")
+	_cASpringAnimationSelMass                             = objc.RegisterName("mass")
+	_cASpringAnimationSelSetMass                          = objc.RegisterName("setMass:")
+	_cASpringAnimationSelStiffness                        = objc.RegisterName("stiffness")
+	_cASpringAnimationSelSetStiffness                     = objc.RegisterName("setStiffness:")
+	_cASpringAnimationSelDamping                          = objc.RegisterName("damping")
+	_cASpringAnimationSelSetDamping                       = objc.RegisterName("setDamping:")
+	_cASpringAnimationSelInitialVelocity                  = objc.RegisterName("initialVelocity")
+	_cASpringAnimationSelSetInitialVelocity               = objc.RegisterName("setInitialVelocity:")
+	_cASpringAnimationSelAllowsOverdamping                = objc.RegisterName("allowsOverdamping")
+	_cASpringAnimationSelSetAllowsOverdamping             = objc.RegisterName("setAllowsOverdamping:")
+	_cASpringAnimationSelSettlingDuration                 = objc.RegisterName("settlingDuration")
+	_cASpringAnimationSelPerceptualDuration               = objc.RegisterName("perceptualDuration")
+	_cASpringAnimationSelBounce                           = objc.RegisterName("bounce")
 )
 
 func CASpringAnimationFromID(id objc.ID) *CASpringAnimation {
@@ -44,7 +44,9 @@ func CASpringAnimationFromID(id objc.ID) *CASpringAnimation {
 
 func (o *CASpringAnimation) InitWithPerceptualDurationBounce(perceptualDuration float64, bounce float64) *CASpringAnimation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cASpringAnimationSelInitWithPerceptualDurationBounce, perceptualDuration, bounce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CASpringAnimationFromID(_ret)
 }
 
@@ -107,4 +109,3 @@ func (o *CASpringAnimation) Bounce() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _cASpringAnimationSelBounce)
 	return _ret
 }
-

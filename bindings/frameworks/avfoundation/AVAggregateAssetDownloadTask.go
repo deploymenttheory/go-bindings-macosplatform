@@ -17,7 +17,7 @@ type AVAggregateAssetDownloadTask struct {
 }
 
 var (
-	_clsAVAggregateAssetDownloadTask = _objcClass("AVAggregateAssetDownloadTask")
+	_clsAVAggregateAssetDownloadTask         = _objcClass("AVAggregateAssetDownloadTask")
 	_aVAggregateAssetDownloadTaskSelURLAsset = objc.RegisterName("URLAsset")
 )
 
@@ -35,7 +35,8 @@ func AVAggregateAssetDownloadTaskFromID(id objc.ID) *AVAggregateAssetDownloadTas
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
 func (o *AVAggregateAssetDownloadTask) URLAsset() *AVURLAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAggregateAssetDownloadTaskSelURLAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVURLAssetFromID(_ret)
 }
-

@@ -135,4 +135,3 @@ type CalCalendarable interface {
 }
 
 var _ CalCalendarable = (*CalCalendar)(nil)
-

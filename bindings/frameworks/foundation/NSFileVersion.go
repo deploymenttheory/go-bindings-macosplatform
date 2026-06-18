@@ -17,30 +17,30 @@ type NSFileVersion struct {
 }
 
 var (
-	_clsNSFileVersion = _objcClass("NSFileVersion")
-	_nSFileVersionSelCurrentVersionOfItemAtURL = objc.RegisterName("currentVersionOfItemAtURL:")
-	_nSFileVersionSelOtherVersionsOfItemAtURL = objc.RegisterName("otherVersionsOfItemAtURL:")
-	_nSFileVersionSelUnresolvedConflictVersionsOfItemAtURL = objc.RegisterName("unresolvedConflictVersionsOfItemAtURL:")
-	_nSFileVersionSelGetNonlocalVersionsOfItemAtURLCompletionHandler = objc.RegisterName("getNonlocalVersionsOfItemAtURL:completionHandler:")
-	_nSFileVersionSelVersionOfItemAtURLForPersistentIdentifier = objc.RegisterName("versionOfItemAtURL:forPersistentIdentifier:")
+	_clsNSFileVersion                                                   = _objcClass("NSFileVersion")
+	_nSFileVersionSelCurrentVersionOfItemAtURL                          = objc.RegisterName("currentVersionOfItemAtURL:")
+	_nSFileVersionSelOtherVersionsOfItemAtURL                           = objc.RegisterName("otherVersionsOfItemAtURL:")
+	_nSFileVersionSelUnresolvedConflictVersionsOfItemAtURL              = objc.RegisterName("unresolvedConflictVersionsOfItemAtURL:")
+	_nSFileVersionSelGetNonlocalVersionsOfItemAtURLCompletionHandler    = objc.RegisterName("getNonlocalVersionsOfItemAtURL:completionHandler:")
+	_nSFileVersionSelVersionOfItemAtURLForPersistentIdentifier          = objc.RegisterName("versionOfItemAtURL:forPersistentIdentifier:")
 	_nSFileVersionSelAddVersionOfItemAtURLWithContentsOfURLOptionsError = objc.RegisterName("addVersionOfItemAtURL:withContentsOfURL:options:error:")
-	_nSFileVersionSelTemporaryDirectoryURLForNewVersionOfItemAtURL = objc.RegisterName("temporaryDirectoryURLForNewVersionOfItemAtURL:")
-	_nSFileVersionSelReplaceItemAtURLOptionsError = objc.RegisterName("replaceItemAtURL:options:error:")
-	_nSFileVersionSelRemoveAndReturnError = objc.RegisterName("removeAndReturnError:")
-	_nSFileVersionSelRemoveOtherVersionsOfItemAtURLError = objc.RegisterName("removeOtherVersionsOfItemAtURL:error:")
-	_nSFileVersionSelURL = objc.RegisterName("URL")
-	_nSFileVersionSelLocalizedName = objc.RegisterName("localizedName")
-	_nSFileVersionSelLocalizedNameOfSavingComputer = objc.RegisterName("localizedNameOfSavingComputer")
-	_nSFileVersionSelOriginatorNameComponents = objc.RegisterName("originatorNameComponents")
-	_nSFileVersionSelModificationDate = objc.RegisterName("modificationDate")
-	_nSFileVersionSelPersistentIdentifier = objc.RegisterName("persistentIdentifier")
-	_nSFileVersionSelIsConflict = objc.RegisterName("isConflict")
-	_nSFileVersionSelIsResolved = objc.RegisterName("isResolved")
-	_nSFileVersionSelSetResolved = objc.RegisterName("setResolved:")
-	_nSFileVersionSelIsDiscardable = objc.RegisterName("isDiscardable")
-	_nSFileVersionSelSetDiscardable = objc.RegisterName("setDiscardable:")
-	_nSFileVersionSelHasLocalContents = objc.RegisterName("hasLocalContents")
-	_nSFileVersionSelHasThumbnail = objc.RegisterName("hasThumbnail")
+	_nSFileVersionSelTemporaryDirectoryURLForNewVersionOfItemAtURL      = objc.RegisterName("temporaryDirectoryURLForNewVersionOfItemAtURL:")
+	_nSFileVersionSelReplaceItemAtURLOptionsError                       = objc.RegisterName("replaceItemAtURL:options:error:")
+	_nSFileVersionSelRemoveAndReturnError                               = objc.RegisterName("removeAndReturnError:")
+	_nSFileVersionSelRemoveOtherVersionsOfItemAtURLError                = objc.RegisterName("removeOtherVersionsOfItemAtURL:error:")
+	_nSFileVersionSelURL                                                = objc.RegisterName("URL")
+	_nSFileVersionSelLocalizedName                                      = objc.RegisterName("localizedName")
+	_nSFileVersionSelLocalizedNameOfSavingComputer                      = objc.RegisterName("localizedNameOfSavingComputer")
+	_nSFileVersionSelOriginatorNameComponents                           = objc.RegisterName("originatorNameComponents")
+	_nSFileVersionSelModificationDate                                   = objc.RegisterName("modificationDate")
+	_nSFileVersionSelPersistentIdentifier                               = objc.RegisterName("persistentIdentifier")
+	_nSFileVersionSelIsConflict                                         = objc.RegisterName("isConflict")
+	_nSFileVersionSelIsResolved                                         = objc.RegisterName("isResolved")
+	_nSFileVersionSelSetResolved                                        = objc.RegisterName("setResolved:")
+	_nSFileVersionSelIsDiscardable                                      = objc.RegisterName("isDiscardable")
+	_nSFileVersionSelSetDiscardable                                     = objc.RegisterName("setDiscardable:")
+	_nSFileVersionSelHasLocalContents                                   = objc.RegisterName("hasLocalContents")
+	_nSFileVersionSelHasThumbnail                                       = objc.RegisterName("hasThumbnail")
 )
 
 func NSFileVersionFromID(id objc.ID) *NSFileVersion {
@@ -55,19 +55,25 @@ func NSFileVersionFromID(id objc.ID) *NSFileVersion {
 
 func NSFileVersionCurrentVersionOfItemAtURL(url *NSURL) *NSFileVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelCurrentVersionOfItemAtURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileVersionFromID(_ret)
 }
 
 func NSFileVersionOtherVersionsOfItemAtURL(url *NSURL) *NSArray[*NSFileVersion] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelOtherVersionsOfItemAtURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSFileVersion](_ret)
 }
 
 func NSFileVersionUnresolvedConflictVersionsOfItemAtURL(url *NSURL) *NSArray[*NSFileVersion] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelUnresolvedConflictVersionsOfItemAtURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSFileVersion](_ret)
 }
 
@@ -87,14 +93,18 @@ func NSFileVersionGetNonlocalVersionsOfItemAtURLCompletionHandler(url *NSURL, co
 
 func NSFileVersionVersionOfItemAtURLForPersistentIdentifier(url *NSURL, persistentIdentifier objc.ID) *NSFileVersion {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelVersionOfItemAtURLForPersistentIdentifier, url.Ptr(), persistentIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFileVersionFromID(_ret)
 }
 
 func NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(url *NSURL, contentsURL *NSURL, options NSFileVersionAddingOptions) (*NSFileVersion, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelAddVersionOfItemAtURLWithContentsOfURLOptionsError, url.Ptr(), contentsURL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -103,14 +113,18 @@ func NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(url *NSURL,
 
 func NSFileVersionTemporaryDirectoryURLForNewVersionOfItemAtURL(url *NSURL) *NSURL {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSFileVersion), _nSFileVersionSelTemporaryDirectoryURLForNewVersionOfItemAtURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSFileVersion) ReplaceItemAtURLOptionsError(url *NSURL, options NSFileVersionReplacingOptions) (*NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelReplaceItemAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -137,31 +151,41 @@ func NSFileVersionRemoveOtherVersionsOfItemAtURLError(url *NSURL) (bool, error) 
 
 func (o *NSFileVersion) URL() *NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLFromID(_ret)
 }
 
 func (o *NSFileVersion) LocalizedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFileVersion) LocalizedNameOfSavingComputer() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelLocalizedNameOfSavingComputer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSFileVersion) OriginatorNameComponents() *NSPersonNameComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelOriginatorNameComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersonNameComponentsFromID(_ret)
 }
 
 func (o *NSFileVersion) ModificationDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSFileVersionSelModificationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -202,4 +226,3 @@ func (o *NSFileVersion) HasThumbnail() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSFileVersionSelHasThumbnail)
 	return _ret
 }
-

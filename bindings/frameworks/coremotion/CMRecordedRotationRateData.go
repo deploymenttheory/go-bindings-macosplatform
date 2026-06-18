@@ -16,7 +16,7 @@ type CMRecordedRotationRateData struct {
 }
 
 var (
-	_clsCMRecordedRotationRateData = _objcClass("CMRecordedRotationRateData")
+	_clsCMRecordedRotationRateData          = _objcClass("CMRecordedRotationRateData")
 	_cMRecordedRotationRateDataSelStartDate = objc.RegisterName("startDate")
 )
 
@@ -32,7 +32,8 @@ func CMRecordedRotationRateDataFromID(id objc.ID) *CMRecordedRotationRateData {
 
 func (o *CMRecordedRotationRateData) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMRecordedRotationRateDataSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

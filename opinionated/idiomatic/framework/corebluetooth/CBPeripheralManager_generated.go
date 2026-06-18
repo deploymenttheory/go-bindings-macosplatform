@@ -143,4 +143,3 @@ type PeripheralManagerable interface {
 }
 
 var _ PeripheralManagerable = (*PeripheralManager)(nil)
-

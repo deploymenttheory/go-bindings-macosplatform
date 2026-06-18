@@ -25,4 +25,3 @@ func CurrentDevice() *Device {
 	}
 	return &Device{inner: _r}
 }
-

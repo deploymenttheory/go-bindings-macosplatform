@@ -16,13 +16,13 @@ type VZLinuxBootLoader struct {
 }
 
 var (
-	_clsVZLinuxBootLoader = _objcClass("VZLinuxBootLoader")
-	_vZLinuxBootLoaderSelInitWithKernelURL = objc.RegisterName("initWithKernelURL:")
-	_vZLinuxBootLoaderSelKernelURL = objc.RegisterName("kernelURL")
-	_vZLinuxBootLoaderSelSetKernelURL = objc.RegisterName("setKernelURL:")
-	_vZLinuxBootLoaderSelCommandLine = objc.RegisterName("commandLine")
-	_vZLinuxBootLoaderSelSetCommandLine = objc.RegisterName("setCommandLine:")
-	_vZLinuxBootLoaderSelInitialRamdiskURL = objc.RegisterName("initialRamdiskURL")
+	_clsVZLinuxBootLoader                     = _objcClass("VZLinuxBootLoader")
+	_vZLinuxBootLoaderSelInitWithKernelURL    = objc.RegisterName("initWithKernelURL:")
+	_vZLinuxBootLoaderSelKernelURL            = objc.RegisterName("kernelURL")
+	_vZLinuxBootLoaderSelSetKernelURL         = objc.RegisterName("setKernelURL:")
+	_vZLinuxBootLoaderSelCommandLine          = objc.RegisterName("commandLine")
+	_vZLinuxBootLoaderSelSetCommandLine       = objc.RegisterName("setCommandLine:")
+	_vZLinuxBootLoaderSelInitialRamdiskURL    = objc.RegisterName("initialRamdiskURL")
 	_vZLinuxBootLoaderSelSetInitialRamdiskURL = objc.RegisterName("setInitialRamdiskURL:")
 )
 
@@ -39,14 +39,18 @@ func VZLinuxBootLoaderFromID(id objc.ID) *VZLinuxBootLoader {
 // @abstract Create a VZLinuxBootLoader with the Linux kernel passed as URL. @param kernelURL The URL of Linux kernel on the local file system.
 func (o *VZLinuxBootLoader) InitWithKernelURL(kernelURL *foundation.NSURL) *VZLinuxBootLoader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxBootLoaderSelInitWithKernelURL, kernelURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZLinuxBootLoaderFromID(_ret)
 }
 
 // @abstract URL of the Linux kernel.
 func (o *VZLinuxBootLoader) KernelURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxBootLoaderSelKernelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -57,7 +61,9 @@ func (o *VZLinuxBootLoader) SetKernelURL(kernelURL *foundation.NSURL) {
 // @abstract Define the command-line parameters passed to the kernel on boot. @link https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
 func (o *VZLinuxBootLoader) CommandLine() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxBootLoaderSelCommandLine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,11 +74,12 @@ func (o *VZLinuxBootLoader) SetCommandLine(commandLine *foundation.NSString) {
 // @abstract Set the optional initial RAM disk. The RAM disk is mapped into memory before booting the kernel.
 func (o *VZLinuxBootLoader) InitialRamdiskURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZLinuxBootLoaderSelInitialRamdiskURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *VZLinuxBootLoader) SetInitialRamdiskURL(initialRamdiskURL *foundation.NSURL) {
 	o.Ptr().Send(_vZLinuxBootLoaderSelSetInitialRamdiskURL, initialRamdiskURL.Ptr())
 }
-

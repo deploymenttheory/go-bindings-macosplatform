@@ -71,4 +71,3 @@ type RNNRecurrentMatrixStateable interface {
 }
 
 var _ RNNRecurrentMatrixStateable = (*RNNRecurrentMatrixState)(nil)
-

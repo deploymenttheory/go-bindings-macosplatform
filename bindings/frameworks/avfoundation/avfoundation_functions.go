@@ -28,9 +28,9 @@ var (
 	_fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp func(AVCaptureTimecode, coremedia.CMTime) unsafe.Pointer
 	// Creates a sample buffer containing Timecode Media Description metadata for a specified duration. - Parameter timecode: The ``AVCaptureTimecode`` instance providing the timecode details for the metadata sample. - Parameter duration: The duration that the metadata sample buffer should represent. - Returns: A ``CMSampleBufferRef`` with encoded Timecode Media Description metadata for the given duration, or `nil` if sample buffer creation fails. Use this function for scenarios where timecode metadata needs to span a custom interval (not just a single frame), such as non-frame-accurate workflows or for describing a segment of media with a consistent timecode.
 	_fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration func(AVCaptureTimecode, coremedia.CMTime) unsafe.Pointer
-	_fnAVMakeRectWithAspectRatioInsideRect func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGRect
+	_fnAVMakeRectWithAspectRatioInsideRect                    func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGRect
 	// Attaches an AVContentKey to a CMSampleBuffer for the purpose of content decryption. The client is expected to attach AVContentKeys to CMSampleBuffers that have been created by the client for enqueueing with AVSampleBufferDisplayLayer or AVSampleBufferAudioRenderer, for which the AVContentKeySpecifier matches indications of suitability that are available to the client according to the content key system that's in use. - Parameter sbuf: The sample buffer to which the content key is to be attached. - Parameter contentKey: The content key to be attached. - Parameter outError: If the result is NO and errorOut is non-NULL, the location referenced by errorOut receives an instance of NSError that describes the reason for failure to attach the content key.
-	_fnAVSampleBufferAttachContentKey func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
+	_fnAVSampleBufferAttachContentKey             func(unsafe.Pointer, objc.ID, unsafe.Pointer) bool
 	_fnCMTagCollectionCreateWithVideoOutputPreset func(unsafe.Pointer, CMTagCollectionVideoOutputPreset, unsafe.Pointer) int
 )
 
@@ -52,21 +52,23 @@ func AVCaptionSizeMake(width AVCaptionDimension, height AVCaptionDimension) AVCa
 // @function	AVCaptureReactionSystemImageNameForType @abstract Returns the name for UIImage or NSImage systemImageNamed: method to obtain the recommended iconography for a specified reaction type.
 func AVCaptureReactionSystemImageNameForType(reactionType *foundation.NSString) *foundation.NSString {
 	_ret := _fnAVCaptureReactionSystemImageNameForType(reactionType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
-// Generates a new timecode by adding a specified number of frames to the given timecode, handling overflow for seconds, minutes, and hours. - Parameter timecode: The original ``AVCaptureTimecode`` to be incremented. - Parameter framesToAdd: The number of frames to add to the timecode. - Returns: A new ``AVCaptureTimecode`` struct with the updated time values after adding the specified frames.
+// Generates a new timecode by adding a specified number of frames to the given timecode, handling overflow for seconds, minutes, and hours. - Parameter timecode: The original “AVCaptureTimecode“ to be incremented. - Parameter framesToAdd: The number of frames to add to the timecode. - Returns: A new “AVCaptureTimecode“ struct with the updated time values after adding the specified frames.
 func AVCaptureTimecodeAdvancedByFrames(timecode AVCaptureTimecode, framesToAdd int64) AVCaptureTimecode {
 	return _fnAVCaptureTimecodeAdvancedByFrames(timecode, framesToAdd)
 }
 
-// Creates a sample buffer containing Timecode Media Description metadata for integration with a video track. - Parameter timecode: The ``AVCaptureTimecode`` instance providing the timecode details to encode. - Parameter presentationTimeStamp: The presentation time stamp that determines the exact moment in the media timeline where the metadata should be applied. It is embedded in the sample timing info (``CMSampleTimingInfo``) and ensures that the packaged metadata synchronizes accurately with the corresponding video frame. - Returns: A ``CMSampleBufferRef`` with the encoded Timecode Media Description metadata for video synchronization, or `nil` if sample buffer creation fails.
+// Creates a sample buffer containing Timecode Media Description metadata for integration with a video track. - Parameter timecode: The “AVCaptureTimecode“ instance providing the timecode details to encode. - Parameter presentationTimeStamp: The presentation time stamp that determines the exact moment in the media timeline where the metadata should be applied. It is embedded in the sample timing info (“CMSampleTimingInfo“) and ensures that the packaged metadata synchronizes accurately with the corresponding video frame. - Returns: A “CMSampleBufferRef“ with the encoded Timecode Media Description metadata for video synchronization, or `nil` if sample buffer creation fails.
 func AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode AVCaptureTimecode, presentationTimeStamp coremedia.CMTime) unsafe.Pointer {
 	return _fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode, presentationTimeStamp)
 }
 
-// Creates a sample buffer containing Timecode Media Description metadata for a specified duration. - Parameter timecode: The ``AVCaptureTimecode`` instance providing the timecode details for the metadata sample. - Parameter duration: The duration that the metadata sample buffer should represent. - Returns: A ``CMSampleBufferRef`` with encoded Timecode Media Description metadata for the given duration, or `nil` if sample buffer creation fails. Use this function for scenarios where timecode metadata needs to span a custom interval (not just a single frame), such as non-frame-accurate workflows or for describing a segment of media with a consistent timecode.
+// Creates a sample buffer containing Timecode Media Description metadata for a specified duration. - Parameter timecode: The “AVCaptureTimecode“ instance providing the timecode details for the metadata sample. - Parameter duration: The duration that the metadata sample buffer should represent. - Returns: A “CMSampleBufferRef“ with encoded Timecode Media Description metadata for the given duration, or `nil` if sample buffer creation fails. Use this function for scenarios where timecode metadata needs to span a custom interval (not just a single frame), such as non-frame-accurate workflows or for describing a segment of media with a consistent timecode.
 func AVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode AVCaptureTimecode, duration coremedia.CMTime) unsafe.Pointer {
 	return _fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode, duration)
 }
@@ -83,4 +85,3 @@ func AVSampleBufferAttachContentKey(sbuf unsafe.Pointer, contentKey *AVContentKe
 func CMTagCollectionCreateWithVideoOutputPreset(allocator unsafe.Pointer, preset CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) int {
 	return _fnCMTagCollectionCreateWithVideoOutputPreset(allocator, preset, newCollectionOut)
 }
-

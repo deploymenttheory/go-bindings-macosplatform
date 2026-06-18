@@ -25,4 +25,3 @@ func NSXPCListenerEndpointFromID(id objc.ID) *NSXPCListenerEndpoint {
 	purego.Track(o)
 	return o
 }
-

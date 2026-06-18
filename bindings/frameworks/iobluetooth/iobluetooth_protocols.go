@@ -42,4 +42,3 @@ type IOBluetoothL2CAPChannelDelegate interface {
 // IOBluetoothRFCOMMChannelDelegate wraps the ObjC protocol IOBluetoothRFCOMMChannelDelegate.
 type IOBluetoothRFCOMMChannelDelegate interface {
 }
-

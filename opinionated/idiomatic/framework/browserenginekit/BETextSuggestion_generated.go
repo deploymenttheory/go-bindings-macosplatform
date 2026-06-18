@@ -54,4 +54,3 @@ type TextSuggestionable interface {
 }
 
 var _ TextSuggestionable = (*TextSuggestion)(nil)
-

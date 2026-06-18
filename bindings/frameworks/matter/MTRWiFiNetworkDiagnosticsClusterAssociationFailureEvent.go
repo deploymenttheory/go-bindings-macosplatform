@@ -16,13 +16,13 @@ type MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent struct {
 }
 
 var (
-	_clsMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent = _objcClass("MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent")
-	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailureCause = objc.RegisterName("associationFailureCause")
+	_clsMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent                           = _objcClass("MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent")
+	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailureCause    = objc.RegisterName("associationFailureCause")
 	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetAssociationFailureCause = objc.RegisterName("setAssociationFailureCause:")
-	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailure = objc.RegisterName("associationFailure")
-	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetAssociationFailure = objc.RegisterName("setAssociationFailure:")
-	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelStatus = objc.RegisterName("status")
-	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetStatus = objc.RegisterName("setStatus:")
+	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailure         = objc.RegisterName("associationFailure")
+	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetAssociationFailure      = objc.RegisterName("setAssociationFailure:")
+	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelStatus                     = objc.RegisterName("status")
+	_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetStatus                  = objc.RegisterName("setStatus:")
 )
 
 func MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID(id objc.ID) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
@@ -37,7 +37,9 @@ func MTRWiFiNetworkDiagnosticsClusterAssociationFailureEventFromID(id objc.ID) *
 
 func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailureCause)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociation
 
 func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelAssociationFailure)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetAssociation
 
 func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) SetStatus(status *foundation.NSNumber) {
 	o.Ptr().Send(_mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventSelSetStatus, status.Ptr())
 }
-

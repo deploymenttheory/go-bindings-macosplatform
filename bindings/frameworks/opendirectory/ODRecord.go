@@ -20,43 +20,43 @@ type ODRecord struct {
 }
 
 var (
-	_clsODRecord = _objcClass("ODRecord")
-	_oDRecordSelSetNodeCredentialsPasswordError = objc.RegisterName("setNodeCredentials:password:error:")
+	_clsODRecord                                                                                               = _objcClass("ODRecord")
+	_oDRecordSelSetNodeCredentialsPasswordError                                                                = objc.RegisterName("setNodeCredentials:password:error:")
 	_oDRecordSelSetNodeCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError = objc.RegisterName("setNodeCredentialsWithRecordType:authenticationType:authenticationItems:continueItems:context:error:")
-	_oDRecordSelSetNodeCredentialsUsingKerberosCacheError = objc.RegisterName("setNodeCredentialsUsingKerberosCache:error:")
-	_oDRecordSelPasswordPolicyAndReturnError = objc.RegisterName("passwordPolicyAndReturnError:")
-	_oDRecordSelVerifyPasswordError = objc.RegisterName("verifyPassword:error:")
-	_oDRecordSelVerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError = objc.RegisterName("verifyExtendedWithAuthenticationType:authenticationItems:continueItems:context:error:")
-	_oDRecordSelChangePasswordToPasswordError = objc.RegisterName("changePassword:toPassword:error:")
-	_oDRecordSelSynchronizeAndReturnError = objc.RegisterName("synchronizeAndReturnError:")
-	_oDRecordSelRecordDetailsForAttributesError = objc.RegisterName("recordDetailsForAttributes:error:")
-	_oDRecordSelValuesForAttributeError = objc.RegisterName("valuesForAttribute:error:")
-	_oDRecordSelSetValueForAttributeError = objc.RegisterName("setValue:forAttribute:error:")
-	_oDRecordSelRemoveValuesForAttributeError = objc.RegisterName("removeValuesForAttribute:error:")
-	_oDRecordSelAddValueToAttributeError = objc.RegisterName("addValue:toAttribute:error:")
-	_oDRecordSelRemoveValueFromAttributeError = objc.RegisterName("removeValue:fromAttribute:error:")
-	_oDRecordSelDeleteRecordAndReturnError = objc.RegisterName("deleteRecordAndReturnError:")
-	_oDRecordSelPoliciesAndReturnError = objc.RegisterName("policiesAndReturnError:")
-	_oDRecordSelEffectivePoliciesAndReturnError = objc.RegisterName("effectivePoliciesAndReturnError:")
-	_oDRecordSelSupportedPoliciesAndReturnError = objc.RegisterName("supportedPoliciesAndReturnError:")
-	_oDRecordSelSetPoliciesError = objc.RegisterName("setPolicies:error:")
-	_oDRecordSelSetPolicyValueError = objc.RegisterName("setPolicy:value:error:")
-	_oDRecordSelRemovePolicyError = objc.RegisterName("removePolicy:error:")
-	_oDRecordSelAddAccountPolicyToCategoryError = objc.RegisterName("addAccountPolicy:toCategory:error:")
-	_oDRecordSelRemoveAccountPolicyFromCategoryError = objc.RegisterName("removeAccountPolicy:fromCategory:error:")
-	_oDRecordSelSetAccountPoliciesError = objc.RegisterName("setAccountPolicies:error:")
-	_oDRecordSelAccountPoliciesAndReturnError = objc.RegisterName("accountPoliciesAndReturnError:")
-	_oDRecordSelAuthenticationAllowedAndReturnError = objc.RegisterName("authenticationAllowedAndReturnError:")
-	_oDRecordSelPasswordChangeAllowedError = objc.RegisterName("passwordChangeAllowed:error:")
-	_oDRecordSelWillPasswordExpire = objc.RegisterName("willPasswordExpire:")
-	_oDRecordSelWillAuthenticationsExpire = objc.RegisterName("willAuthenticationsExpire:")
-	_oDRecordSelRecordType = objc.RegisterName("recordType")
-	_oDRecordSelRecordName = objc.RegisterName("recordName")
-	_oDRecordSelSecondsUntilPasswordExpires = objc.RegisterName("secondsUntilPasswordExpires")
-	_oDRecordSelSecondsUntilAuthenticationsExpire = objc.RegisterName("secondsUntilAuthenticationsExpire")
-	_oDRecordSelAddMemberRecordError = objc.RegisterName("addMemberRecord:error:")
-	_oDRecordSelRemoveMemberRecordError = objc.RegisterName("removeMemberRecord:error:")
-	_oDRecordSelIsMemberRecordError = objc.RegisterName("isMemberRecord:error:")
+	_oDRecordSelSetNodeCredentialsUsingKerberosCacheError                                                      = objc.RegisterName("setNodeCredentialsUsingKerberosCache:error:")
+	_oDRecordSelPasswordPolicyAndReturnError                                                                   = objc.RegisterName("passwordPolicyAndReturnError:")
+	_oDRecordSelVerifyPasswordError                                                                            = objc.RegisterName("verifyPassword:error:")
+	_oDRecordSelVerifyExtendedWithAuthenticationTypeAuthenticationItemsContinueItemsContextError               = objc.RegisterName("verifyExtendedWithAuthenticationType:authenticationItems:continueItems:context:error:")
+	_oDRecordSelChangePasswordToPasswordError                                                                  = objc.RegisterName("changePassword:toPassword:error:")
+	_oDRecordSelSynchronizeAndReturnError                                                                      = objc.RegisterName("synchronizeAndReturnError:")
+	_oDRecordSelRecordDetailsForAttributesError                                                                = objc.RegisterName("recordDetailsForAttributes:error:")
+	_oDRecordSelValuesForAttributeError                                                                        = objc.RegisterName("valuesForAttribute:error:")
+	_oDRecordSelSetValueForAttributeError                                                                      = objc.RegisterName("setValue:forAttribute:error:")
+	_oDRecordSelRemoveValuesForAttributeError                                                                  = objc.RegisterName("removeValuesForAttribute:error:")
+	_oDRecordSelAddValueToAttributeError                                                                       = objc.RegisterName("addValue:toAttribute:error:")
+	_oDRecordSelRemoveValueFromAttributeError                                                                  = objc.RegisterName("removeValue:fromAttribute:error:")
+	_oDRecordSelDeleteRecordAndReturnError                                                                     = objc.RegisterName("deleteRecordAndReturnError:")
+	_oDRecordSelPoliciesAndReturnError                                                                         = objc.RegisterName("policiesAndReturnError:")
+	_oDRecordSelEffectivePoliciesAndReturnError                                                                = objc.RegisterName("effectivePoliciesAndReturnError:")
+	_oDRecordSelSupportedPoliciesAndReturnError                                                                = objc.RegisterName("supportedPoliciesAndReturnError:")
+	_oDRecordSelSetPoliciesError                                                                               = objc.RegisterName("setPolicies:error:")
+	_oDRecordSelSetPolicyValueError                                                                            = objc.RegisterName("setPolicy:value:error:")
+	_oDRecordSelRemovePolicyError                                                                              = objc.RegisterName("removePolicy:error:")
+	_oDRecordSelAddAccountPolicyToCategoryError                                                                = objc.RegisterName("addAccountPolicy:toCategory:error:")
+	_oDRecordSelRemoveAccountPolicyFromCategoryError                                                           = objc.RegisterName("removeAccountPolicy:fromCategory:error:")
+	_oDRecordSelSetAccountPoliciesError                                                                        = objc.RegisterName("setAccountPolicies:error:")
+	_oDRecordSelAccountPoliciesAndReturnError                                                                  = objc.RegisterName("accountPoliciesAndReturnError:")
+	_oDRecordSelAuthenticationAllowedAndReturnError                                                            = objc.RegisterName("authenticationAllowedAndReturnError:")
+	_oDRecordSelPasswordChangeAllowedError                                                                     = objc.RegisterName("passwordChangeAllowed:error:")
+	_oDRecordSelWillPasswordExpire                                                                             = objc.RegisterName("willPasswordExpire:")
+	_oDRecordSelWillAuthenticationsExpire                                                                      = objc.RegisterName("willAuthenticationsExpire:")
+	_oDRecordSelRecordType                                                                                     = objc.RegisterName("recordType")
+	_oDRecordSelRecordName                                                                                     = objc.RegisterName("recordName")
+	_oDRecordSelSecondsUntilPasswordExpires                                                                    = objc.RegisterName("secondsUntilPasswordExpires")
+	_oDRecordSelSecondsUntilAuthenticationsExpire                                                              = objc.RegisterName("secondsUntilAuthenticationsExpire")
+	_oDRecordSelAddMemberRecordError                                                                           = objc.RegisterName("addMemberRecord:error:")
+	_oDRecordSelRemoveMemberRecordError                                                                        = objc.RegisterName("removeMemberRecord:error:")
+	_oDRecordSelIsMemberRecordError                                                                            = objc.RegisterName("isMemberRecord:error:")
 )
 
 func ODRecordFromID(id objc.ID) *ODRecord {
@@ -355,14 +355,18 @@ func (o *ODRecord) WillAuthenticationsExpire(willExpireIn uint64) bool {
 // @property   recordType @abstract   Type of the record. @discussion The record type.
 func (o *ODRecord) RecordType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordSelRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property   recordName @abstract   Name of the record. @discussion This is the official record name.
 func (o *ODRecord) RecordName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDRecordSelRecordName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -407,4 +411,3 @@ func (o *ODRecord) IsMemberRecordError(inRecord *ODRecord) (bool, error) {
 	}
 	return _ret, nil
 }
-

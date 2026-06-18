@@ -17,27 +17,27 @@ type NSMorphology struct {
 }
 
 var (
-	_clsNSMorphology = _objcClass("NSMorphology")
-	_nSMorphologySelGrammaticalGender = objc.RegisterName("grammaticalGender")
-	_nSMorphologySelSetGrammaticalGender = objc.RegisterName("setGrammaticalGender:")
-	_nSMorphologySelPartOfSpeech = objc.RegisterName("partOfSpeech")
-	_nSMorphologySelSetPartOfSpeech = objc.RegisterName("setPartOfSpeech:")
-	_nSMorphologySelNumber = objc.RegisterName("number")
-	_nSMorphologySelSetNumber = objc.RegisterName("setNumber:")
-	_nSMorphologySelGrammaticalCase = objc.RegisterName("grammaticalCase")
-	_nSMorphologySelSetGrammaticalCase = objc.RegisterName("setGrammaticalCase:")
-	_nSMorphologySelDetermination = objc.RegisterName("determination")
-	_nSMorphologySelSetDetermination = objc.RegisterName("setDetermination:")
-	_nSMorphologySelGrammaticalPerson = objc.RegisterName("grammaticalPerson")
-	_nSMorphologySelSetGrammaticalPerson = objc.RegisterName("setGrammaticalPerson:")
-	_nSMorphologySelPronounType = objc.RegisterName("pronounType")
-	_nSMorphologySelSetPronounType = objc.RegisterName("setPronounType:")
-	_nSMorphologySelDefiniteness = objc.RegisterName("definiteness")
-	_nSMorphologySelSetDefiniteness = objc.RegisterName("setDefiniteness:")
-	_nSMorphologySelCustomPronounForLanguage = objc.RegisterName("customPronounForLanguage:")
+	_clsNSMorphology                                 = _objcClass("NSMorphology")
+	_nSMorphologySelGrammaticalGender                = objc.RegisterName("grammaticalGender")
+	_nSMorphologySelSetGrammaticalGender             = objc.RegisterName("setGrammaticalGender:")
+	_nSMorphologySelPartOfSpeech                     = objc.RegisterName("partOfSpeech")
+	_nSMorphologySelSetPartOfSpeech                  = objc.RegisterName("setPartOfSpeech:")
+	_nSMorphologySelNumber                           = objc.RegisterName("number")
+	_nSMorphologySelSetNumber                        = objc.RegisterName("setNumber:")
+	_nSMorphologySelGrammaticalCase                  = objc.RegisterName("grammaticalCase")
+	_nSMorphologySelSetGrammaticalCase               = objc.RegisterName("setGrammaticalCase:")
+	_nSMorphologySelDetermination                    = objc.RegisterName("determination")
+	_nSMorphologySelSetDetermination                 = objc.RegisterName("setDetermination:")
+	_nSMorphologySelGrammaticalPerson                = objc.RegisterName("grammaticalPerson")
+	_nSMorphologySelSetGrammaticalPerson             = objc.RegisterName("setGrammaticalPerson:")
+	_nSMorphologySelPronounType                      = objc.RegisterName("pronounType")
+	_nSMorphologySelSetPronounType                   = objc.RegisterName("setPronounType:")
+	_nSMorphologySelDefiniteness                     = objc.RegisterName("definiteness")
+	_nSMorphologySelSetDefiniteness                  = objc.RegisterName("setDefiniteness:")
+	_nSMorphologySelCustomPronounForLanguage         = objc.RegisterName("customPronounForLanguage:")
 	_nSMorphologySelSetCustomPronounForLanguageError = objc.RegisterName("setCustomPronoun:forLanguage:error:")
-	_nSMorphologySelIsUnspecified = objc.RegisterName("isUnspecified")
-	_nSMorphologySelUserMorphology = objc.RegisterName("userMorphology")
+	_nSMorphologySelIsUnspecified                    = objc.RegisterName("isUnspecified")
+	_nSMorphologySelUserMorphology                   = objc.RegisterName("userMorphology")
 )
 
 func NSMorphologyFromID(id objc.ID) *NSMorphology {
@@ -125,7 +125,9 @@ func (o *NSMorphology) SetDefiniteness(definiteness NSGrammaticalDefiniteness) {
 // Deprecated: Use NSTermOfAddress instead
 func (o *NSMorphology) CustomPronounForLanguage(language *NSString) *NSMorphologyCustomPronoun {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMorphologySelCustomPronounForLanguage, language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyCustomPronounFromID(_ret)
 }
 
@@ -146,7 +148,8 @@ func (o *NSMorphology) IsUnspecified() bool {
 
 func NSMorphologyUserMorphology() *NSMorphology {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMorphology), _nSMorphologySelUserMorphology)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMorphologyFromID(_ret)
 }
-

@@ -16,21 +16,21 @@ type QCPlugIn struct {
 }
 
 var (
-	_clsQCPlugIn = _objcClass("QCPlugIn")
-	_qCPlugInSelAttributes = objc.RegisterName("attributes")
-	_qCPlugInSelAttributesForPropertyPortWithKey = objc.RegisterName("attributesForPropertyPortWithKey:")
-	_qCPlugInSelSortedPropertyPortKeys = objc.RegisterName("sortedPropertyPortKeys")
-	_qCPlugInSelExecutionMode = objc.RegisterName("executionMode")
-	_qCPlugInSelTimeMode = objc.RegisterName("timeMode")
-	_qCPlugInSelPlugInKeys = objc.RegisterName("plugInKeys")
-	_qCPlugInSelStartExecution = objc.RegisterName("startExecution:")
-	_qCPlugInSelEnableExecution = objc.RegisterName("enableExecution:")
+	_clsQCPlugIn                                           = _objcClass("QCPlugIn")
+	_qCPlugInSelAttributes                                 = objc.RegisterName("attributes")
+	_qCPlugInSelAttributesForPropertyPortWithKey           = objc.RegisterName("attributesForPropertyPortWithKey:")
+	_qCPlugInSelSortedPropertyPortKeys                     = objc.RegisterName("sortedPropertyPortKeys")
+	_qCPlugInSelExecutionMode                              = objc.RegisterName("executionMode")
+	_qCPlugInSelTimeMode                                   = objc.RegisterName("timeMode")
+	_qCPlugInSelPlugInKeys                                 = objc.RegisterName("plugInKeys")
+	_qCPlugInSelStartExecution                             = objc.RegisterName("startExecution:")
+	_qCPlugInSelEnableExecution                            = objc.RegisterName("enableExecution:")
 	_qCPlugInSelExecutionTimeForContextAtTimeWithArguments = objc.RegisterName("executionTimeForContext:atTime:withArguments:")
-	_qCPlugInSelExecuteAtTimeWithArguments = objc.RegisterName("execute:atTime:withArguments:")
-	_qCPlugInSelDisableExecution = objc.RegisterName("disableExecution:")
-	_qCPlugInSelStopExecution = objc.RegisterName("stopExecution:")
-	_qCPlugInSelSerializedValueForKey = objc.RegisterName("serializedValueForKey:")
-	_qCPlugInSelSetSerializedValueForKey = objc.RegisterName("setSerializedValue:forKey:")
+	_qCPlugInSelExecuteAtTimeWithArguments                 = objc.RegisterName("execute:atTime:withArguments:")
+	_qCPlugInSelDisableExecution                           = objc.RegisterName("disableExecution:")
+	_qCPlugInSelStopExecution                              = objc.RegisterName("stopExecution:")
+	_qCPlugInSelSerializedValueForKey                      = objc.RegisterName("serializedValueForKey:")
+	_qCPlugInSelSetSerializedValueForKey                   = objc.RegisterName("setSerializedValue:forKey:")
 )
 
 func QCPlugInFromID(id objc.ID) *QCPlugIn {
@@ -108,4 +108,3 @@ func (o *QCPlugIn) SerializedValueForKey(key *foundation.NSString) objc.ID {
 func (o *QCPlugIn) SetSerializedValueForKey(serializedValue objc.ID, key *foundation.NSString) {
 	o.Ptr().Send(_qCPlugInSelSetSerializedValueForKey, serializedValue, key.Ptr())
 }
-

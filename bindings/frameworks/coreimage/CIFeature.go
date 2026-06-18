@@ -17,8 +17,8 @@ type CIFeature struct {
 }
 
 var (
-	_clsCIFeature = _objcClass("CIFeature")
-	_cIFeatureSelType = objc.RegisterName("type")
+	_clsCIFeature       = _objcClass("CIFeature")
+	_cIFeatureSelType   = objc.RegisterName("type")
 	_cIFeatureSelBounds = objc.RegisterName("bounds")
 )
 
@@ -32,10 +32,12 @@ func CIFeatureFromID(id objc.ID) *CIFeature {
 	return o
 }
 
-// The type of feature that was discovered. The type can be one of: * ``CIFeatureTypeFace`` * ``CIFeatureTypeRectangle`` * ``CIFeatureTypeQRCode`` * ``CIFeatureTypeText``
+// The type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
 func (o *CIFeature) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIFeatureSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -44,4 +46,3 @@ func (o *CIFeature) Bounds() corefoundation.CGRect {
 	_ret := objc.Send[corefoundation.CGRect](o.Ptr(), _cIFeatureSelBounds)
 	return _ret
 }
-

@@ -16,19 +16,19 @@ type DOMCharacterData struct {
 }
 
 var (
-	_clsDOMCharacterData = _objcClass("DOMCharacterData")
-	_dOMCharacterDataSelSubstringDataLength = objc.RegisterName("substringData:length:")
-	_dOMCharacterDataSelAppendData = objc.RegisterName("appendData:")
-	_dOMCharacterDataSelInsertDataData = objc.RegisterName("insertData:data:")
-	_dOMCharacterDataSelDeleteDataLength = objc.RegisterName("deleteData:length:")
+	_clsDOMCharacterData                      = _objcClass("DOMCharacterData")
+	_dOMCharacterDataSelSubstringDataLength   = objc.RegisterName("substringData:length:")
+	_dOMCharacterDataSelAppendData            = objc.RegisterName("appendData:")
+	_dOMCharacterDataSelInsertDataData        = objc.RegisterName("insertData:data:")
+	_dOMCharacterDataSelDeleteDataLength      = objc.RegisterName("deleteData:length:")
 	_dOMCharacterDataSelReplaceDataLengthData = objc.RegisterName("replaceData:length:data:")
-	_dOMCharacterDataSelData = objc.RegisterName("data")
-	_dOMCharacterDataSelSetData = objc.RegisterName("setData:")
-	_dOMCharacterDataSelLength = objc.RegisterName("length")
-	_dOMCharacterDataSelSubstringData = objc.RegisterName("substringData::")
-	_dOMCharacterDataSelInsertData = objc.RegisterName("insertData::")
-	_dOMCharacterDataSelDeleteData = objc.RegisterName("deleteData::")
-	_dOMCharacterDataSelReplaceData = objc.RegisterName("replaceData:::")
+	_dOMCharacterDataSelData                  = objc.RegisterName("data")
+	_dOMCharacterDataSelSetData               = objc.RegisterName("setData:")
+	_dOMCharacterDataSelLength                = objc.RegisterName("length")
+	_dOMCharacterDataSelSubstringData         = objc.RegisterName("substringData::")
+	_dOMCharacterDataSelInsertData            = objc.RegisterName("insertData::")
+	_dOMCharacterDataSelDeleteData            = objc.RegisterName("deleteData::")
+	_dOMCharacterDataSelReplaceData           = objc.RegisterName("replaceData:::")
 )
 
 func DOMCharacterDataFromID(id objc.ID) *DOMCharacterData {
@@ -43,7 +43,9 @@ func DOMCharacterDataFromID(id objc.ID) *DOMCharacterData {
 
 func (o *DOMCharacterData) SubstringDataLength(offset uint, length uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCharacterDataSelSubstringDataLength, offset, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -65,7 +67,9 @@ func (o *DOMCharacterData) ReplaceDataLengthData(offset uint, length uint, data 
 
 func (o *DOMCharacterData) Data() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCharacterDataSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,7 +84,9 @@ func (o *DOMCharacterData) Length() uint {
 
 func (o *DOMCharacterData) SubstringData(offset uint, length uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMCharacterDataSelSubstringData, offset, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,4 +101,3 @@ func (o *DOMCharacterData) DeleteData(offset uint, length uint) {
 func (o *DOMCharacterData) ReplaceData(offset uint, length uint, data *foundation.NSString) {
 	o.Ptr().Send(_dOMCharacterDataSelReplaceData, offset, length, data.Ptr())
 }
-

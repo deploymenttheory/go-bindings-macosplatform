@@ -26,4 +26,3 @@ func MPSNNReductionFeatureChannelsArgumentMinNodeFromID(id objc.ID) *MPSNNReduct
 	purego.Track(o)
 	return o
 }
-

@@ -35,7 +35,9 @@ func NewMacKeyboardConfiguration() *MacKeyboardConfiguration {
 	return &MacKeyboardConfiguration{inner: raw.VZMacKeyboardConfigurationFromID(_id)}
 }
 
-func (x *MacKeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration { return &x.inner.VZKeyboardConfiguration }
+func (x *MacKeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration {
+	return &x.inner.VZKeyboardConfiguration
+}
 
 // MacKeyboardConfigurationable is the interface implemented by [MacKeyboardConfiguration], for mocking and DI.
 type MacKeyboardConfigurationable interface {
@@ -43,4 +45,3 @@ type MacKeyboardConfigurationable interface {
 }
 
 var _ MacKeyboardConfigurationable = (*MacKeyboardConfiguration)(nil)
-

@@ -41,4 +41,3 @@ type FileSystemable interface {
 }
 
 var _ FileSystemable = (*FileSystem)(nil)
-

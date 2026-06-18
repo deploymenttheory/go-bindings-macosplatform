@@ -16,11 +16,11 @@ type TKTokenSession struct {
 }
 
 var (
-	_clsTKTokenSession = _objcClass("TKTokenSession")
+	_clsTKTokenSession              = _objcClass("TKTokenSession")
 	_tKTokenSessionSelInitWithToken = objc.RegisterName("initWithToken:")
-	_tKTokenSessionSelToken = objc.RegisterName("token")
-	_tKTokenSessionSelDelegate = objc.RegisterName("delegate")
-	_tKTokenSessionSelSetDelegate = objc.RegisterName("setDelegate:")
+	_tKTokenSessionSelToken         = objc.RegisterName("token")
+	_tKTokenSessionSelDelegate      = objc.RegisterName("delegate")
+	_tKTokenSessionSelSetDelegate   = objc.RegisterName("setDelegate:")
 )
 
 func TKTokenSessionFromID(id objc.ID) *TKTokenSession {
@@ -36,13 +36,17 @@ func TKTokenSessionFromID(id objc.ID) *TKTokenSession {
 // @param token Token instance to which is this session instance bound.
 func (o *TKTokenSession) InitWithToken(token *TKToken) *TKTokenSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSessionSelInitWithToken, token.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenSessionFromID(_ret)
 }
 
 func (o *TKTokenSession) Token() *TKToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenSessionSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *TKTokenSession) Delegate() TKTokenSessionDelegate {
 func (o *TKTokenSession) SetDelegate(delegate TKTokenSessionDelegate) {
 	o.Ptr().Send(_tKTokenSessionSelSetDelegate, delegate)
 }
-

@@ -66,4 +66,3 @@ type ThumbnailReplyable interface {
 }
 
 var _ ThumbnailReplyable = (*ThumbnailReply)(nil)
-

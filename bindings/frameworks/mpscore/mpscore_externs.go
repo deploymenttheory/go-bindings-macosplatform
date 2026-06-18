@@ -14,7 +14,8 @@ import (
 // @memberof   MPSKernel @constant   MPSRectNoClip @discussion This is a special constant to indicate no clipping is to be done. The entire image will be used. This is the default clipping rectangle or the input extent for MPSKernels.
 func MPSRectNoClip() metal.MTLRegion {
 	ptr, _ := purego.Dlsym(_mpscoreLib, "MPSRectNoClip")
-	if ptr == 0 { return metal.MTLRegion{} }
+	if ptr == 0 {
+		return metal.MTLRegion{}
+	}
 	return *(*metal.MTLRegion)(unsafe.Pointer(ptr))
 }
-

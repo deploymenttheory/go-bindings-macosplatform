@@ -16,8 +16,8 @@ type MTRBooleanStateConfigurationClusterSensorFaultEvent struct {
 }
 
 var (
-	_clsMTRBooleanStateConfigurationClusterSensorFaultEvent = _objcClass("MTRBooleanStateConfigurationClusterSensorFaultEvent")
-	_mTRBooleanStateConfigurationClusterSensorFaultEventSelSensorFault = objc.RegisterName("sensorFault")
+	_clsMTRBooleanStateConfigurationClusterSensorFaultEvent               = _objcClass("MTRBooleanStateConfigurationClusterSensorFaultEvent")
+	_mTRBooleanStateConfigurationClusterSensorFaultEventSelSensorFault    = objc.RegisterName("sensorFault")
 	_mTRBooleanStateConfigurationClusterSensorFaultEventSelSetSensorFault = objc.RegisterName("setSensorFault:")
 )
 
@@ -33,11 +33,12 @@ func MTRBooleanStateConfigurationClusterSensorFaultEventFromID(id objc.ID) *MTRB
 
 func (o *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRBooleanStateConfigurationClusterSensorFaultEventSelSensorFault)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRBooleanStateConfigurationClusterSensorFaultEvent) SetSensorFault(sensorFault *foundation.NSNumber) {
 	o.Ptr().Send(_mTRBooleanStateConfigurationClusterSensorFaultEventSelSetSensorFault, sensorFault.Ptr())
 }
-

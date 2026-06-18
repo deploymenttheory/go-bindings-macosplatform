@@ -16,11 +16,11 @@ type PHAssetResourceRequestOptions struct {
 }
 
 var (
-	_clsPHAssetResourceRequestOptions = _objcClass("PHAssetResourceRequestOptions")
-	_pHAssetResourceRequestOptionsSelIsNetworkAccessAllowed = objc.RegisterName("isNetworkAccessAllowed")
+	_clsPHAssetResourceRequestOptions                        = _objcClass("PHAssetResourceRequestOptions")
+	_pHAssetResourceRequestOptionsSelIsNetworkAccessAllowed  = objc.RegisterName("isNetworkAccessAllowed")
 	_pHAssetResourceRequestOptionsSelSetNetworkAccessAllowed = objc.RegisterName("setNetworkAccessAllowed:")
-	_pHAssetResourceRequestOptionsSelProgressHandler = objc.RegisterName("progressHandler")
-	_pHAssetResourceRequestOptionsSelSetProgressHandler = objc.RegisterName("setProgressHandler:")
+	_pHAssetResourceRequestOptionsSelProgressHandler         = objc.RegisterName("progressHandler")
+	_pHAssetResourceRequestOptionsSelSetProgressHandler      = objc.RegisterName("setProgressHandler:")
 )
 
 func PHAssetResourceRequestOptionsFromID(id objc.ID) *PHAssetResourceRequestOptions {
@@ -57,4 +57,3 @@ func (o *PHAssetResourceRequestOptions) SetProgressHandler(progressHandler func(
 	}
 	o.Ptr().Send(_pHAssetResourceRequestOptionsSelSetProgressHandler, __block_progressHandler)
 }
-

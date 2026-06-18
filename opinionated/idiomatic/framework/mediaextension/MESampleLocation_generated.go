@@ -59,4 +59,3 @@ type SampleLocationable interface {
 }
 
 var _ SampleLocationable = (*SampleLocation)(nil)
-

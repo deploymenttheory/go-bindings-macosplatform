@@ -19,30 +19,30 @@ type PHASEEngine struct {
 }
 
 var (
-	_clsPHASEEngine = _objcClass("PHASEEngine")
-	_pHASEEngineSelInitWithUpdateMode = objc.RegisterName("initWithUpdateMode:")
-	_pHASEEngineSelStartAndReturnError = objc.RegisterName("startAndReturnError:")
-	_pHASEEngineSelPause = objc.RegisterName("pause")
-	_pHASEEngineSelStop = objc.RegisterName("stop")
-	_pHASEEngineSelUpdate = objc.RegisterName("update")
-	_pHASEEngineSelOutputSpatializationMode = objc.RegisterName("outputSpatializationMode")
+	_clsPHASEEngine                            = _objcClass("PHASEEngine")
+	_pHASEEngineSelInitWithUpdateMode          = objc.RegisterName("initWithUpdateMode:")
+	_pHASEEngineSelStartAndReturnError         = objc.RegisterName("startAndReturnError:")
+	_pHASEEngineSelPause                       = objc.RegisterName("pause")
+	_pHASEEngineSelStop                        = objc.RegisterName("stop")
+	_pHASEEngineSelUpdate                      = objc.RegisterName("update")
+	_pHASEEngineSelOutputSpatializationMode    = objc.RegisterName("outputSpatializationMode")
 	_pHASEEngineSelSetOutputSpatializationMode = objc.RegisterName("setOutputSpatializationMode:")
-	_pHASEEngineSelRenderingState = objc.RegisterName("renderingState")
-	_pHASEEngineSelRootObject = objc.RegisterName("rootObject")
-	_pHASEEngineSelDefaultMedium = objc.RegisterName("defaultMedium")
-	_pHASEEngineSelSetDefaultMedium = objc.RegisterName("setDefaultMedium:")
-	_pHASEEngineSelDefaultReverbPreset = objc.RegisterName("defaultReverbPreset")
-	_pHASEEngineSelSetDefaultReverbPreset = objc.RegisterName("setDefaultReverbPreset:")
-	_pHASEEngineSelUnitsPerSecond = objc.RegisterName("unitsPerSecond")
-	_pHASEEngineSelSetUnitsPerSecond = objc.RegisterName("setUnitsPerSecond:")
-	_pHASEEngineSelUnitsPerMeter = objc.RegisterName("unitsPerMeter")
-	_pHASEEngineSelSetUnitsPerMeter = objc.RegisterName("setUnitsPerMeter:")
-	_pHASEEngineSelAssetRegistry = objc.RegisterName("assetRegistry")
-	_pHASEEngineSelSoundEvents = objc.RegisterName("soundEvents")
-	_pHASEEngineSelGroups = objc.RegisterName("groups")
-	_pHASEEngineSelDuckers = objc.RegisterName("duckers")
-	_pHASEEngineSelActiveGroupPreset = objc.RegisterName("activeGroupPreset")
-	_pHASEEngineSelLastRenderTime = objc.RegisterName("lastRenderTime")
+	_pHASEEngineSelRenderingState              = objc.RegisterName("renderingState")
+	_pHASEEngineSelRootObject                  = objc.RegisterName("rootObject")
+	_pHASEEngineSelDefaultMedium               = objc.RegisterName("defaultMedium")
+	_pHASEEngineSelSetDefaultMedium            = objc.RegisterName("setDefaultMedium:")
+	_pHASEEngineSelDefaultReverbPreset         = objc.RegisterName("defaultReverbPreset")
+	_pHASEEngineSelSetDefaultReverbPreset      = objc.RegisterName("setDefaultReverbPreset:")
+	_pHASEEngineSelUnitsPerSecond              = objc.RegisterName("unitsPerSecond")
+	_pHASEEngineSelSetUnitsPerSecond           = objc.RegisterName("setUnitsPerSecond:")
+	_pHASEEngineSelUnitsPerMeter               = objc.RegisterName("unitsPerMeter")
+	_pHASEEngineSelSetUnitsPerMeter            = objc.RegisterName("setUnitsPerMeter:")
+	_pHASEEngineSelAssetRegistry               = objc.RegisterName("assetRegistry")
+	_pHASEEngineSelSoundEvents                 = objc.RegisterName("soundEvents")
+	_pHASEEngineSelGroups                      = objc.RegisterName("groups")
+	_pHASEEngineSelDuckers                     = objc.RegisterName("duckers")
+	_pHASEEngineSelActiveGroupPreset           = objc.RegisterName("activeGroupPreset")
+	_pHASEEngineSelLastRenderTime              = objc.RegisterName("lastRenderTime")
 )
 
 func PHASEEngineFromID(id objc.ID) *PHASEEngine {
@@ -58,7 +58,9 @@ func PHASEEngineFromID(id objc.ID) *PHASEEngine {
 // @method initWithUpdateMode: @abstract Initialize a new engine with an update mode. @param updateMode Defines how the engine will be updated.
 func (o *PHASEEngine) InitWithUpdateMode(updateMode PHASEUpdateMode) *PHASEEngine {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelInitWithUpdateMode, updateMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEEngineFromID(_ret)
 }
 
@@ -106,14 +108,18 @@ func (o *PHASEEngine) RenderingState() PHASERenderingState {
 // @property rootObject @abstract The root object of the engine's scene graph. @discussion Attach objects to the engine's rootObject or one of its children to make them active within the engine's scene graph. This will ensure they take part in the simulation. @note The rootObject is created and owned by the engine. The rootObject may not be set as the child of another object. This will cause an error to be thrown. The rootObject's transform may not be changed. This will cause an error to be thrown. The rootObject may not be copied. This will cause an error to be thrown.
 func (o *PHASEEngine) RootObject() *PHASEObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelRootObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEObjectFromID(_ret)
 }
 
 // @property defaultMedium @abstract The default medium in the engine. @discussion The default value is PHASEMediumPresetAir.
 func (o *PHASEEngine) DefaultMedium() *PHASEMedium {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelDefaultMedium)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEMediumFromID(_ret)
 }
 
@@ -154,14 +160,18 @@ func (o *PHASEEngine) SetUnitsPerMeter(unitsPerMeter float64) {
 // @property assetRegistry @abstract A registry for assets available to the engine
 func (o *PHASEEngine) AssetRegistry() *PHASEAssetRegistry {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelAssetRegistry)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEAssetRegistryFromID(_ret)
 }
 
 // @property soundEvents @abstract An array of the active sound event objects in the system @discussion Returns a dictionary of the sound events at the time it is retrieved. This includes all sound events that are registered with the engine, including those that are preparing, playing, paused or stopping.
 func (o *PHASEEngine) SoundEvents() *foundation.NSArray[*PHASESoundEvent] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelSoundEvents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASESoundEvent](_ret)
 }
 
@@ -174,21 +184,26 @@ func (o *PHASEEngine) Groups() *foundation.NSDictionary[*foundation.NSString, *P
 // @property duckers @abstract An array of the ducker objects in the system @discussion Returns a dictionary of the ducker objects at the time it is retrieved.
 func (o *PHASEEngine) Duckers() *foundation.NSArray[*PHASEDucker] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelDuckers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PHASEDucker](_ret)
 }
 
 // @property activeGroupPreset @abstract The active group mixer preset in the system @discussion Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
 func (o *PHASEEngine) ActiveGroupPreset() *PHASEGroupPreset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelActiveGroupPreset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGroupPresetFromID(_ret)
 }
 
 // @property lastRenderTime @abstract Obtain the time for which the engine most recently rendered. @discussion Will return nil if the engine is not running
 func (o *PHASEEngine) LastRenderTime() *avfaudio.AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEEngineSelLastRenderTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioTimeFromID(_ret)
 }
-

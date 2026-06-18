@@ -169,4 +169,3 @@ type OBEXFileTransferServicesable interface {
 }
 
 var _ OBEXFileTransferServicesable = (*OBEXFileTransferServices)(nil)
-

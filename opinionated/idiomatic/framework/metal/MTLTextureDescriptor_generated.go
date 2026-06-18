@@ -364,4 +364,3 @@ type TextureDescriptorable interface {
 }
 
 var _ TextureDescriptorable = (*TextureDescriptor)(nil)
-

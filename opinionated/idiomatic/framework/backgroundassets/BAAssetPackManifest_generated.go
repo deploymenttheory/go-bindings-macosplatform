@@ -78,4 +78,3 @@ type AssetPackManifestable interface {
 }
 
 var _ AssetPackManifestable = (*AssetPackManifest)(nil)
-

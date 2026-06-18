@@ -52,7 +52,9 @@ func (x *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...*foundation.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -163,9 +165,13 @@ func (x *FetchSubscriptionsOperation) SetFetchSubscriptionCompletionBlock(fetchS
 	x.inner.SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock)
 }
 
-func (x *FetchSubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchSubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchSubscriptionsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchSubscriptionsOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchSubscriptionsOperationable is the interface implemented by [FetchSubscriptionsOperation], for mocking and DI.
 type FetchSubscriptionsOperationable interface {
@@ -191,4 +197,3 @@ type FetchSubscriptionsOperationable interface {
 }
 
 var _ FetchSubscriptionsOperationable = (*FetchSubscriptionsOperation)(nil)
-

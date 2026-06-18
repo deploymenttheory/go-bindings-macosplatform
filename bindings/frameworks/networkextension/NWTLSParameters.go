@@ -17,14 +17,14 @@ type NWTLSParameters struct {
 }
 
 var (
-	_clsNWTLSParameters = _objcClass("NWTLSParameters")
-	_nWTLSParametersSelTLSSessionID = objc.RegisterName("TLSSessionID")
-	_nWTLSParametersSelSetTLSSessionID = objc.RegisterName("setTLSSessionID:")
-	_nWTLSParametersSelSSLCipherSuites = objc.RegisterName("SSLCipherSuites")
-	_nWTLSParametersSelSetSSLCipherSuites = objc.RegisterName("setSSLCipherSuites:")
-	_nWTLSParametersSelMinimumSSLProtocolVersion = objc.RegisterName("minimumSSLProtocolVersion")
+	_clsNWTLSParameters                             = _objcClass("NWTLSParameters")
+	_nWTLSParametersSelTLSSessionID                 = objc.RegisterName("TLSSessionID")
+	_nWTLSParametersSelSetTLSSessionID              = objc.RegisterName("setTLSSessionID:")
+	_nWTLSParametersSelSSLCipherSuites              = objc.RegisterName("SSLCipherSuites")
+	_nWTLSParametersSelSetSSLCipherSuites           = objc.RegisterName("setSSLCipherSuites:")
+	_nWTLSParametersSelMinimumSSLProtocolVersion    = objc.RegisterName("minimumSSLProtocolVersion")
 	_nWTLSParametersSelSetMinimumSSLProtocolVersion = objc.RegisterName("setMinimumSSLProtocolVersion:")
-	_nWTLSParametersSelMaximumSSLProtocolVersion = objc.RegisterName("maximumSSLProtocolVersion")
+	_nWTLSParametersSelMaximumSSLProtocolVersion    = objc.RegisterName("maximumSSLProtocolVersion")
 	_nWTLSParametersSelSetMaximumSSLProtocolVersion = objc.RegisterName("setMaximumSSLProtocolVersion:")
 )
 
@@ -42,7 +42,9 @@ func NWTLSParametersFromID(id objc.ID) *NWTLSParameters {
 // Deprecated: Use `sec_protocol_options_set_tls_resumption_enabled` in Security framework instead, see deprecation notice in <NetworkExtension/NWTLSParameters.h>
 func (o *NWTLSParameters) TLSSessionID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWTLSParametersSelTLSSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -90,4 +92,3 @@ func (o *NWTLSParameters) MaximumSSLProtocolVersion() uint {
 func (o *NWTLSParameters) SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) {
 	o.Ptr().Send(_nWTLSParametersSelSetMaximumSSLProtocolVersion, maximumSSLProtocolVersion)
 }
-

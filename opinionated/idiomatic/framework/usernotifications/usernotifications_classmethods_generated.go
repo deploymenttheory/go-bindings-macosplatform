@@ -184,4 +184,3 @@ func CurrentNotificationCenter() *UserNotificationCenter {
 	}
 	return &UserNotificationCenter{inner: _r}
 }
-

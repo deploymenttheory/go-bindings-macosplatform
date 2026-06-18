@@ -16,15 +16,15 @@ type MTRActionsClusterActionFailedEvent struct {
 }
 
 var (
-	_clsMTRActionsClusterActionFailedEvent = _objcClass("MTRActionsClusterActionFailedEvent")
-	_mTRActionsClusterActionFailedEventSelActionID = objc.RegisterName("actionID")
+	_clsMTRActionsClusterActionFailedEvent            = _objcClass("MTRActionsClusterActionFailedEvent")
+	_mTRActionsClusterActionFailedEventSelActionID    = objc.RegisterName("actionID")
 	_mTRActionsClusterActionFailedEventSelSetActionID = objc.RegisterName("setActionID:")
-	_mTRActionsClusterActionFailedEventSelInvokeID = objc.RegisterName("invokeID")
+	_mTRActionsClusterActionFailedEventSelInvokeID    = objc.RegisterName("invokeID")
 	_mTRActionsClusterActionFailedEventSelSetInvokeID = objc.RegisterName("setInvokeID:")
 	_mTRActionsClusterActionFailedEventSelGetNewState = objc.RegisterName("getNewState")
 	_mTRActionsClusterActionFailedEventSelSetNewState = objc.RegisterName("setNewState:")
-	_mTRActionsClusterActionFailedEventSelError = objc.RegisterName("error")
-	_mTRActionsClusterActionFailedEventSelSetError = objc.RegisterName("setError:")
+	_mTRActionsClusterActionFailedEventSelError       = objc.RegisterName("error")
+	_mTRActionsClusterActionFailedEventSelSetError    = objc.RegisterName("setError:")
 )
 
 func MTRActionsClusterActionFailedEventFromID(id objc.ID) *MTRActionsClusterActionFailedEvent {
@@ -39,7 +39,9 @@ func MTRActionsClusterActionFailedEventFromID(id objc.ID) *MTRActionsClusterActi
 
 func (o *MTRActionsClusterActionFailedEvent) ActionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionFailedEventSelActionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -49,7 +51,9 @@ func (o *MTRActionsClusterActionFailedEvent) SetActionID(actionID *foundation.NS
 
 func (o *MTRActionsClusterActionFailedEvent) InvokeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionFailedEventSelInvokeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +63,9 @@ func (o *MTRActionsClusterActionFailedEvent) SetInvokeID(invokeID *foundation.NS
 
 func (o *MTRActionsClusterActionFailedEvent) GetNewState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionFailedEventSelGetNewState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,11 +75,12 @@ func (o *MTRActionsClusterActionFailedEvent) SetNewState(newState *foundation.NS
 
 func (o *MTRActionsClusterActionFailedEvent) Error() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionFailedEventSelError)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRActionsClusterActionFailedEvent) SetError(error_ *foundation.NSNumber) {
 	o.Ptr().Send(_mTRActionsClusterActionFailedEventSelSetError, error_.Ptr())
 }
-

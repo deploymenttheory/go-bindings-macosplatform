@@ -18,12 +18,12 @@ type MPSCNNDropoutGradient struct {
 }
 
 var (
-	_clsMPSCNNDropoutGradient = _objcClass("MPSCNNDropoutGradient")
-	_mPSCNNDropoutGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
+	_clsMPSCNNDropoutGradient                                                    = _objcClass("MPSCNNDropoutGradient")
+	_mPSCNNDropoutGradientSelInitWithCoderDevice                                 = objc.RegisterName("initWithCoder:device:")
 	_mPSCNNDropoutGradientSelInitWithDeviceKeepProbabilitySeedMaskStrideInPixels = objc.RegisterName("initWithDevice:keepProbability:seed:maskStrideInPixels:")
-	_mPSCNNDropoutGradientSelKeepProbability = objc.RegisterName("keepProbability")
-	_mPSCNNDropoutGradientSelSeed = objc.RegisterName("seed")
-	_mPSCNNDropoutGradientSelMaskStrideInPixels = objc.RegisterName("maskStrideInPixels")
+	_mPSCNNDropoutGradientSelKeepProbability                                     = objc.RegisterName("keepProbability")
+	_mPSCNNDropoutGradientSelSeed                                                = objc.RegisterName("seed")
+	_mPSCNNDropoutGradientSelMaskStrideInPixels                                  = objc.RegisterName("maskStrideInPixels")
 )
 
 func MPSCNNDropoutGradientFromID(id objc.ID) *MPSCNNDropoutGradient {
@@ -39,14 +39,18 @@ func MPSCNNDropoutGradientFromID(id objc.ID) *MPSCNNDropoutGradient {
 // @abstract <NSSecureCoding> support
 func (o *MPSCNNDropoutGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNDropoutGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutGradientFromID(_ret)
 }
 
 // @abstract   Standard init with default properties per filter type. @param      device              The device that the filter will be used on. @param      keepProbability     The probability that each element in the input is kept. The valid range is (0.0f, 1.0f). @param      seed                The seed used to generate random numbers. @param      maskStrideInPixels  The mask stride in the x, y, and z dimensions, which allows for the broadcasting of mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0. @result     A valid MPSCNNDropoutGradient object or nil, if failure.
 func (o *MPSCNNDropoutGradient) InitWithDeviceKeepProbabilitySeedMaskStrideInPixels(device metal.MTLDevice, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *MPSCNNDropoutGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNDropoutGradientSelInitWithDeviceKeepProbabilitySeedMaskStrideInPixels, device, keepProbability, seed, maskStrideInPixels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNDropoutGradientFromID(_ret)
 }
 
@@ -67,4 +71,3 @@ func (o *MPSCNNDropoutGradient) MaskStrideInPixels() metal.MTLSize {
 	_ret := objc.Send[metal.MTLSize](o.Ptr(), _mPSCNNDropoutGradientSelMaskStrideInPixels)
 	return _ret
 }
-

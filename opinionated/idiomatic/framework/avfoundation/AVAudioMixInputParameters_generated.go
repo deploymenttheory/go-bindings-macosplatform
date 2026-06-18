@@ -62,7 +62,9 @@ func (x *AudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
 	return x.inner.AudioTapProcessor()
 }
 
-func (x *AudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters { return x.inner }
+func (x *AudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters {
+	return x.inner
+}
 
 // AudioMixInputParametersable is the interface implemented by [AudioMixInputParameters], for mocking and DI.
 type AudioMixInputParametersable interface {
@@ -74,4 +76,3 @@ type AudioMixInputParametersable interface {
 }
 
 var _ AudioMixInputParametersable = (*AudioMixInputParameters)(nil)
-

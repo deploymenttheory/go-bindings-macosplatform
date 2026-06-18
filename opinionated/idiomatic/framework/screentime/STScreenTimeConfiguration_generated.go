@@ -47,4 +47,3 @@ type ScreenTimeConfigurationable interface {
 }
 
 var _ ScreenTimeConfigurationable = (*ScreenTimeConfiguration)(nil)
-

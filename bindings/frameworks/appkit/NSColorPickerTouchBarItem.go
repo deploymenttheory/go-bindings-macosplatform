@@ -16,26 +16,26 @@ type NSColorPickerTouchBarItem struct {
 }
 
 var (
-	_clsNSColorPickerTouchBarItem = _objcClass("NSColorPickerTouchBarItem")
-	_nSColorPickerTouchBarItemSelColorPickerWithIdentifier = objc.RegisterName("colorPickerWithIdentifier:")
-	_nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier = objc.RegisterName("textColorPickerWithIdentifier:")
-	_nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier = objc.RegisterName("strokeColorPickerWithIdentifier:")
+	_clsNSColorPickerTouchBarItem                                     = _objcClass("NSColorPickerTouchBarItem")
+	_nSColorPickerTouchBarItemSelColorPickerWithIdentifier            = objc.RegisterName("colorPickerWithIdentifier:")
+	_nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier        = objc.RegisterName("textColorPickerWithIdentifier:")
+	_nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier      = objc.RegisterName("strokeColorPickerWithIdentifier:")
 	_nSColorPickerTouchBarItemSelColorPickerWithIdentifierButtonImage = objc.RegisterName("colorPickerWithIdentifier:buttonImage:")
-	_nSColorPickerTouchBarItemSelColor = objc.RegisterName("color")
-	_nSColorPickerTouchBarItemSelSetColor = objc.RegisterName("setColor:")
-	_nSColorPickerTouchBarItemSelShowsAlpha = objc.RegisterName("showsAlpha")
-	_nSColorPickerTouchBarItemSelSetShowsAlpha = objc.RegisterName("setShowsAlpha:")
-	_nSColorPickerTouchBarItemSelAllowedColorSpaces = objc.RegisterName("allowedColorSpaces")
-	_nSColorPickerTouchBarItemSelSetAllowedColorSpaces = objc.RegisterName("setAllowedColorSpaces:")
-	_nSColorPickerTouchBarItemSelColorList = objc.RegisterName("colorList")
-	_nSColorPickerTouchBarItemSelSetColorList = objc.RegisterName("setColorList:")
-	_nSColorPickerTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
-	_nSColorPickerTouchBarItemSelTarget = objc.RegisterName("target")
-	_nSColorPickerTouchBarItemSelSetTarget = objc.RegisterName("setTarget:")
-	_nSColorPickerTouchBarItemSelAction = objc.RegisterName("action")
-	_nSColorPickerTouchBarItemSelSetAction = objc.RegisterName("setAction:")
-	_nSColorPickerTouchBarItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSColorPickerTouchBarItemSelSetEnabled = objc.RegisterName("setEnabled:")
+	_nSColorPickerTouchBarItemSelColor                                = objc.RegisterName("color")
+	_nSColorPickerTouchBarItemSelSetColor                             = objc.RegisterName("setColor:")
+	_nSColorPickerTouchBarItemSelShowsAlpha                           = objc.RegisterName("showsAlpha")
+	_nSColorPickerTouchBarItemSelSetShowsAlpha                        = objc.RegisterName("setShowsAlpha:")
+	_nSColorPickerTouchBarItemSelAllowedColorSpaces                   = objc.RegisterName("allowedColorSpaces")
+	_nSColorPickerTouchBarItemSelSetAllowedColorSpaces                = objc.RegisterName("setAllowedColorSpaces:")
+	_nSColorPickerTouchBarItemSelColorList                            = objc.RegisterName("colorList")
+	_nSColorPickerTouchBarItemSelSetColorList                         = objc.RegisterName("setColorList:")
+	_nSColorPickerTouchBarItemSelSetCustomizationLabel                = objc.RegisterName("setCustomizationLabel:")
+	_nSColorPickerTouchBarItemSelTarget                               = objc.RegisterName("target")
+	_nSColorPickerTouchBarItemSelSetTarget                            = objc.RegisterName("setTarget:")
+	_nSColorPickerTouchBarItemSelAction                               = objc.RegisterName("action")
+	_nSColorPickerTouchBarItemSelSetAction                            = objc.RegisterName("setAction:")
+	_nSColorPickerTouchBarItemSelIsEnabled                            = objc.RegisterName("isEnabled")
+	_nSColorPickerTouchBarItemSelSetEnabled                           = objc.RegisterName("setEnabled:")
 )
 
 func NSColorPickerTouchBarItemFromID(id objc.ID) *NSColorPickerTouchBarItem {
@@ -51,33 +51,43 @@ func NSColorPickerTouchBarItemFromID(id objc.ID) *NSColorPickerTouchBarItem {
 // Creates a bar item containing a button with the standard color picker icon that invokes the color picker.
 func NSColorPickerTouchBarItemColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
 // Creates a bar item containing a button with the standard text color picker icon that invokes the color picker. Should be used when the item is used for picking text colors.
 func NSColorPickerTouchBarItemTextColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelTextColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
 // Creates a bar item containing a button with the standard stroke color picker icon that invokes the color picker. Should be used when the item is used for picking stroke colors.
 func NSColorPickerTouchBarItemStrokeColorPickerWithIdentifier(identifier *foundation.NSString) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelStrokeColorPickerWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
 func NSColorPickerTouchBarItemColorPickerWithIdentifierButtonImage(identifier *foundation.NSString, image *NSImage) *NSColorPickerTouchBarItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorPickerTouchBarItem), _nSColorPickerTouchBarItemSelColorPickerWithIdentifierButtonImage, identifier.Ptr(), image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorPickerTouchBarItemFromID(_ret)
 }
 
 func (o *NSColorPickerTouchBarItem) Color() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -98,7 +108,9 @@ func (o *NSColorPickerTouchBarItem) SetShowsAlpha(showsAlpha bool) {
 // Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
 func (o *NSColorPickerTouchBarItem) AllowedColorSpaces() *foundation.NSArray[*NSColorSpace] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelAllowedColorSpaces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColorSpace](_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *NSColorPickerTouchBarItem) SetAllowedColorSpaces(allowedColorSpaces *fo
 // The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 func (o *NSColorPickerTouchBarItem) ColorList() *NSColorList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorPickerTouchBarItemSelColorList)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorListFromID(_ret)
 }
 
@@ -148,4 +162,3 @@ func (o *NSColorPickerTouchBarItem) IsEnabled() bool {
 func (o *NSColorPickerTouchBarItem) SetEnabled(enabled bool) {
 	o.Ptr().Send(_nSColorPickerTouchBarItemSelSetEnabled, enabled)
 }
-

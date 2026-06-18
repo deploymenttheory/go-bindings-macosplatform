@@ -33,4 +33,3 @@ func BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl() unsafe.Pointer {
 func BeMemoryInlineJitRestrictWithWitnessSupported() int {
 	return raw.BeMemoryInlineJitRestrictWithWitnessSupported()
 }
-

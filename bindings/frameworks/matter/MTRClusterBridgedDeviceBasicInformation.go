@@ -18,33 +18,33 @@ type MTRClusterBridgedDeviceBasicInformation struct {
 }
 
 var (
-	_clsMTRClusterBridgedDeviceBasicInformation = _objcClass("MTRClusterBridgedDeviceBasicInformation")
+	_clsMTRClusterBridgedDeviceBasicInformation                                                                  = _objcClass("MTRClusterBridgedDeviceBasicInformation")
 	_mTRClusterBridgedDeviceBasicInformationSelKeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("keepActiveWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeVendorNameWithParams = objc.RegisterName("readAttributeVendorNameWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeVendorIDWithParams = objc.RegisterName("readAttributeVendorIDWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductNameWithParams = objc.RegisterName("readAttributeProductNameWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductIDWithParams = objc.RegisterName("readAttributeProductIDWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeNodeLabelWithParams = objc.RegisterName("readAttributeNodeLabelWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelWriteAttributeNodeLabelWithValueExpectedValueInterval = objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:")
-	_mTRClusterBridgedDeviceBasicInformationSelWriteAttributeNodeLabelWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeHardwareVersionWithParams = objc.RegisterName("readAttributeHardwareVersionWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeHardwareVersionStringWithParams = objc.RegisterName("readAttributeHardwareVersionStringWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSoftwareVersionWithParams = objc.RegisterName("readAttributeSoftwareVersionWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSoftwareVersionStringWithParams = objc.RegisterName("readAttributeSoftwareVersionStringWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeManufacturingDateWithParams = objc.RegisterName("readAttributeManufacturingDateWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributePartNumberWithParams = objc.RegisterName("readAttributePartNumberWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductURLWithParams = objc.RegisterName("readAttributeProductURLWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductLabelWithParams = objc.RegisterName("readAttributeProductLabelWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSerialNumberWithParams = objc.RegisterName("readAttributeSerialNumberWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeReachableWithParams = objc.RegisterName("readAttributeReachableWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeUniqueIDWithParams = objc.RegisterName("readAttributeUniqueIDWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductAppearanceWithParams = objc.RegisterName("readAttributeProductAppearanceWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterBridgedDeviceBasicInformationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeVendorNameWithParams                                 = objc.RegisterName("readAttributeVendorNameWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeVendorIDWithParams                                   = objc.RegisterName("readAttributeVendorIDWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductNameWithParams                                = objc.RegisterName("readAttributeProductNameWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductIDWithParams                                  = objc.RegisterName("readAttributeProductIDWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeNodeLabelWithParams                                  = objc.RegisterName("readAttributeNodeLabelWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelWriteAttributeNodeLabelWithValueExpectedValueInterval             = objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:")
+	_mTRClusterBridgedDeviceBasicInformationSelWriteAttributeNodeLabelWithValueExpectedValueIntervalParams       = objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeHardwareVersionWithParams                            = objc.RegisterName("readAttributeHardwareVersionWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeHardwareVersionStringWithParams                      = objc.RegisterName("readAttributeHardwareVersionStringWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSoftwareVersionWithParams                            = objc.RegisterName("readAttributeSoftwareVersionWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSoftwareVersionStringWithParams                      = objc.RegisterName("readAttributeSoftwareVersionStringWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeManufacturingDateWithParams                          = objc.RegisterName("readAttributeManufacturingDateWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributePartNumberWithParams                                 = objc.RegisterName("readAttributePartNumberWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductURLWithParams                                 = objc.RegisterName("readAttributeProductURLWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductLabelWithParams                               = objc.RegisterName("readAttributeProductLabelWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeSerialNumberWithParams                               = objc.RegisterName("readAttributeSerialNumberWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeReachableWithParams                                  = objc.RegisterName("readAttributeReachableWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeUniqueIDWithParams                                   = objc.RegisterName("readAttributeUniqueIDWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeProductAppearanceWithParams                          = objc.RegisterName("readAttributeProductAppearanceWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeGeneratedCommandListWithParams                       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeAcceptedCommandListWithParams                        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeAttributeListWithParams                              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeFeatureMapWithParams                                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelReadAttributeClusterRevisionWithParams                            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterBridgedDeviceBasicInformationSelInitWithDeviceEndpointIDQueue                                     = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRClusterBridgedDeviceBasicInformation {
@@ -189,7 +189,8 @@ func (o *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWi
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterBridgedDeviceBasicInformation) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBridgedDeviceBasicInformation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterBridgedDeviceBasicInformationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterBridgedDeviceBasicInformationFromID(_ret)
 }
-

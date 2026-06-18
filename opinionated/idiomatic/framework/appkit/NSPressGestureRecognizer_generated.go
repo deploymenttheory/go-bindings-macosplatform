@@ -184,7 +184,9 @@ func (x *PressGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequi
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 }
 
-func (x *PressGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+func (x *PressGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer {
+	return &x.inner.NSGestureRecognizer
+}
 
 // PressGestureRecognizerable is the interface implemented by [PressGestureRecognizer], for mocking and DI.
 type PressGestureRecognizerable interface {
@@ -218,4 +220,3 @@ type PressGestureRecognizerable interface {
 }
 
 var _ PressGestureRecognizerable = (*PressGestureRecognizer)(nil)
-

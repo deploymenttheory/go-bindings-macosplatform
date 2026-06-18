@@ -16,11 +16,11 @@ type AVAssetWriterInputGroup struct {
 }
 
 var (
-	_clsAVAssetWriterInputGroup = _objcClass("AVAssetWriterInputGroup")
+	_clsAVAssetWriterInputGroup                                            = _objcClass("AVAssetWriterInputGroup")
 	_aVAssetWriterInputGroupSelAssetWriterInputGroupWithInputsDefaultInput = objc.RegisterName("assetWriterInputGroupWithInputs:defaultInput:")
-	_aVAssetWriterInputGroupSelInitWithInputsDefaultInput = objc.RegisterName("initWithInputs:defaultInput:")
-	_aVAssetWriterInputGroupSelInputs = objc.RegisterName("inputs")
-	_aVAssetWriterInputGroupSelDefaultInput = objc.RegisterName("defaultInput")
+	_aVAssetWriterInputGroupSelInitWithInputsDefaultInput                  = objc.RegisterName("initWithInputs:defaultInput:")
+	_aVAssetWriterInputGroupSelInputs                                      = objc.RegisterName("inputs")
+	_aVAssetWriterInputGroupSelDefaultInput                                = objc.RegisterName("defaultInput")
 )
 
 func AVAssetWriterInputGroupFromID(id objc.ID) *AVAssetWriterInputGroup {
@@ -35,27 +35,34 @@ func AVAssetWriterInputGroupFromID(id objc.ID) *AVAssetWriterInputGroup {
 
 func AVAssetWriterInputGroupAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*AVAssetWriterInput], defaultInput *AVAssetWriterInput) *AVAssetWriterInputGroup {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetWriterInputGroup), _aVAssetWriterInputGroupSelAssetWriterInputGroupWithInputsDefaultInput, inputs.Ptr(), defaultInput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputGroupFromID(_ret)
 }
 
 func (o *AVAssetWriterInputGroup) InitWithInputsDefaultInput(inputs *foundation.NSArray[*AVAssetWriterInput], defaultInput *AVAssetWriterInput) *AVAssetWriterInputGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelInitWithInputsDefaultInput, inputs.Ptr(), defaultInput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputGroupFromID(_ret)
 }
 
 // @property inputs @abstract The inputs grouped together by the receiver. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
 func (o *AVAssetWriterInputGroup) Inputs() *foundation.NSArray[*AVAssetWriterInput] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelInputs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVAssetWriterInput](_ret)
 }
 
 // @property defaultInput @abstract The input designated at the defaultInput of the receiver. @discussion The value of this property is a concrete instance of AVAssetWriterInput.
 func (o *AVAssetWriterInputGroup) DefaultInput() *AVAssetWriterInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetWriterInputGroupSelDefaultInput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetWriterInputFromID(_ret)
 }
-

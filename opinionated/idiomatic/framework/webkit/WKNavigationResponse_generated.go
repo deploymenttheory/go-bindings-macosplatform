@@ -60,4 +60,3 @@ type WKNavigationResponseable interface {
 }
 
 var _ WKNavigationResponseable = (*WKNavigationResponse)(nil)
-

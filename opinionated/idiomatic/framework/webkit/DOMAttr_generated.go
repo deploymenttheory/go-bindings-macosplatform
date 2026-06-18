@@ -111,7 +111,9 @@ func (x *DOMAttr) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMAttr) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMAttr) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMAttr) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMAttrable is the interface implemented by [DOMAttr], for mocking and DI.
 type DOMAttrable interface {
@@ -129,4 +131,3 @@ type DOMAttrable interface {
 }
 
 var _ DOMAttrable = (*DOMAttr)(nil)
-

@@ -18,21 +18,21 @@ type MPSRNNImageInferenceLayer struct {
 }
 
 var (
-	_clsMPSRNNImageInferenceLayer = _objcClass("MPSRNNImageInferenceLayer")
-	_mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptor = objc.RegisterName("initWithDevice:rnnDescriptor:")
-	_mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptors = objc.RegisterName("initWithDevice:rnnDescriptors:")
-	_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates = objc.RegisterName("encodeSequenceToCommandBuffer:sourceImages:destinationImages:recurrentInputState:recurrentOutputStates:")
+	_clsMPSRNNImageInferenceLayer                                                                                                          = _objcClass("MPSRNNImageInferenceLayer")
+	_mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptor                                                                               = objc.RegisterName("initWithDevice:rnnDescriptor:")
+	_mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptors                                                                              = objc.RegisterName("initWithDevice:rnnDescriptors:")
+	_mPSRNNImageInferenceLayerSelEncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates        = objc.RegisterName("encodeSequenceToCommandBuffer:sourceImages:destinationImages:recurrentInputState:recurrentOutputStates:")
 	_mPSRNNImageInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages = objc.RegisterName("encodeBidirectionalSequenceToCommandBuffer:sourceSequence:destinationForwardImages:destinationBackwardImages:")
-	_mPSRNNImageInferenceLayerSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSRNNImageInferenceLayerSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSRNNImageInferenceLayerSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSRNNImageInferenceLayerSelNumberOfLayers = objc.RegisterName("numberOfLayers")
-	_mPSRNNImageInferenceLayerSelRecurrentOutputIsTemporary = objc.RegisterName("recurrentOutputIsTemporary")
-	_mPSRNNImageInferenceLayerSelSetRecurrentOutputIsTemporary = objc.RegisterName("setRecurrentOutputIsTemporary:")
-	_mPSRNNImageInferenceLayerSelStoreAllIntermediateStates = objc.RegisterName("storeAllIntermediateStates")
-	_mPSRNNImageInferenceLayerSelSetStoreAllIntermediateStates = objc.RegisterName("setStoreAllIntermediateStates:")
-	_mPSRNNImageInferenceLayerSelBidirectionalCombineMode = objc.RegisterName("bidirectionalCombineMode")
-	_mPSRNNImageInferenceLayerSelSetBidirectionalCombineMode = objc.RegisterName("setBidirectionalCombineMode:")
+	_mPSRNNImageInferenceLayerSelInitWithCoderDevice                                                                                       = objc.RegisterName("initWithCoder:device:")
+	_mPSRNNImageInferenceLayerSelInputFeatureChannels                                                                                      = objc.RegisterName("inputFeatureChannels")
+	_mPSRNNImageInferenceLayerSelOutputFeatureChannels                                                                                     = objc.RegisterName("outputFeatureChannels")
+	_mPSRNNImageInferenceLayerSelNumberOfLayers                                                                                            = objc.RegisterName("numberOfLayers")
+	_mPSRNNImageInferenceLayerSelRecurrentOutputIsTemporary                                                                                = objc.RegisterName("recurrentOutputIsTemporary")
+	_mPSRNNImageInferenceLayerSelSetRecurrentOutputIsTemporary                                                                             = objc.RegisterName("setRecurrentOutputIsTemporary:")
+	_mPSRNNImageInferenceLayerSelStoreAllIntermediateStates                                                                                = objc.RegisterName("storeAllIntermediateStates")
+	_mPSRNNImageInferenceLayerSelSetStoreAllIntermediateStates                                                                             = objc.RegisterName("setStoreAllIntermediateStates:")
+	_mPSRNNImageInferenceLayerSelBidirectionalCombineMode                                                                                  = objc.RegisterName("bidirectionalCombineMode")
+	_mPSRNNImageInferenceLayerSelSetBidirectionalCombineMode                                                                               = objc.RegisterName("setBidirectionalCombineMode:")
 )
 
 func MPSRNNImageInferenceLayerFromID(id objc.ID) *MPSRNNImageInferenceLayer {
@@ -48,14 +48,18 @@ func MPSRNNImageInferenceLayerFromID(id objc.ID) *MPSRNNImageInferenceLayer {
 // @abstract   Initializes a convolutional RNN kernel @param      device                          The MTLDevice on which this MPSRNNImageLayer filter will be used @param      rnnDescriptor                   The descriptor that defines the RNN layer @return     A valid MPSRNNImageInferenceLayer object or nil, if failure.
 func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptor(device metal.MTLDevice, rnnDescriptor *MPSRNNDescriptor) *MPSRNNImageInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptor, device, rnnDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNImageInferenceLayerFromID(_ret)
 }
 
 // @abstract   Initializes a kernel that implements a stack of convolutional RNN layers @param      device                          The MTLDevice on which this MPSRNNImageLayer filter will be used @param      rnnDescriptors                  An array of RNN descriptors that defines a stack of RNN layers, starting at index zero. The number of layers in stack is the number of entries in the array. All entries in the array must be valid MPSRNNDescriptors. @return     A valid MPSRNNImageInferenceLayer object or nil, if failure.
 func (o *MPSRNNImageInferenceLayer) InitWithDeviceRnnDescriptors(device metal.MTLDevice, rnnDescriptors *foundation.NSArray[*MPSRNNDescriptor]) *MPSRNNImageInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNImageInferenceLayerSelInitWithDeviceRnnDescriptors, device, rnnDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNImageInferenceLayerFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *MPSRNNImageInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSo
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNImageInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNImageInferenceLayer @return     A new MPSRNNImageInferenceLayer object, or nil if failure.
 func (o *MPSRNNImageInferenceLayer) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSRNNImageInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNImageInferenceLayerSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNImageInferenceLayerFromID(_ret)
 }
 
@@ -121,4 +127,3 @@ func (o *MPSRNNImageInferenceLayer) BidirectionalCombineMode() MPSRNNBidirection
 func (o *MPSRNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) {
 	o.Ptr().Send(_mPSRNNImageInferenceLayerSelSetBidirectionalCombineMode, bidirectionalCombineMode)
 }
-

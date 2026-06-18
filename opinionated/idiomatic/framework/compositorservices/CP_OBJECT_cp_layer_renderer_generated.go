@@ -41,4 +41,3 @@ type _cp_layer_rendererable interface {
 }
 
 var _ _cp_layer_rendererable = (*_cp_layer_renderer)(nil)
-

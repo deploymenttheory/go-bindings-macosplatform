@@ -96,4 +96,3 @@ type QCCompositionParameterViewable interface {
 }
 
 var _ QCCompositionParameterViewable = (*QCCompositionParameterView)(nil)
-

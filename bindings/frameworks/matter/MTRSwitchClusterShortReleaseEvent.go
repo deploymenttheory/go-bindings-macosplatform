@@ -16,8 +16,8 @@ type MTRSwitchClusterShortReleaseEvent struct {
 }
 
 var (
-	_clsMTRSwitchClusterShortReleaseEvent = _objcClass("MTRSwitchClusterShortReleaseEvent")
-	_mTRSwitchClusterShortReleaseEventSelPreviousPosition = objc.RegisterName("previousPosition")
+	_clsMTRSwitchClusterShortReleaseEvent                    = _objcClass("MTRSwitchClusterShortReleaseEvent")
+	_mTRSwitchClusterShortReleaseEventSelPreviousPosition    = objc.RegisterName("previousPosition")
 	_mTRSwitchClusterShortReleaseEventSelSetPreviousPosition = objc.RegisterName("setPreviousPosition:")
 )
 
@@ -33,11 +33,12 @@ func MTRSwitchClusterShortReleaseEventFromID(id objc.ID) *MTRSwitchClusterShortR
 
 func (o *MTRSwitchClusterShortReleaseEvent) PreviousPosition() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRSwitchClusterShortReleaseEventSelPreviousPosition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRSwitchClusterShortReleaseEvent) SetPreviousPosition(previousPosition *foundation.NSNumber) {
 	o.Ptr().Send(_mTRSwitchClusterShortReleaseEventSelSetPreviousPosition, previousPosition.Ptr())
 }
-

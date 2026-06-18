@@ -16,13 +16,13 @@ type SBElementArray[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsSBElementArray = _objcClass("SBElementArray")
-	_sBElementArraySelObjectWithName = objc.RegisterName("objectWithName:")
-	_sBElementArraySelObjectWithID = objc.RegisterName("objectWithID:")
-	_sBElementArraySelObjectAtLocation = objc.RegisterName("objectAtLocation:")
-	_sBElementArraySelArrayByApplyingSelector = objc.RegisterName("arrayByApplyingSelector:")
+	_clsSBElementArray                                  = _objcClass("SBElementArray")
+	_sBElementArraySelObjectWithName                    = objc.RegisterName("objectWithName:")
+	_sBElementArraySelObjectWithID                      = objc.RegisterName("objectWithID:")
+	_sBElementArraySelObjectAtLocation                  = objc.RegisterName("objectAtLocation:")
+	_sBElementArraySelArrayByApplyingSelector           = objc.RegisterName("arrayByApplyingSelector:")
 	_sBElementArraySelArrayByApplyingSelectorWithObject = objc.RegisterName("arrayByApplyingSelector:withObject:")
-	_sBElementArraySelGet = objc.RegisterName("get")
+	_sBElementArraySelGet                               = objc.RegisterName("get")
 )
 
 func SBElementArrayFromID[ObjectType purego.AnyObject](id objc.ID) *SBElementArray[ObjectType] {
@@ -47,7 +47,7 @@ func (o *SBElementArray[ObjectType]) ObjectWithID(identifier objc.ID) ObjectType
 	return _ret
 }
 
-// Returns the object at the given location in the receiver. This method is a generalization of <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)> for applications where the "index" is not simply an integer. For example, Finder can specify objects using a <doc://com.apple.documentation/documentation/foundation/nsurl> object as a location. In OSA this is known as "absolute position," a generalization of the notion of “index” in Foundation—it could be an integer, but it doesn't have to be. A single object may even have a number of different "absolute position" values depending on the container. - Parameters: - loc: An object that specifies the absolute position of the object within the array. It can be an integer index, a list of coordinates, a URL, or other determinant. See the discussion for clarification. - Returns: A reference to the ``SBObject`` object identified by `loc` or `nil` if the object couldn’t be located.
+// Returns the object at the given location in the receiver. This method is a generalization of <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)> for applications where the "index" is not simply an integer. For example, Finder can specify objects using a <doc://com.apple.documentation/documentation/foundation/nsurl> object as a location. In OSA this is known as "absolute position," a generalization of the notion of “index” in Foundation—it could be an integer, but it doesn't have to be. A single object may even have a number of different "absolute position" values depending on the container. - Parameters: - loc: An object that specifies the absolute position of the object within the array. It can be an integer index, a list of coordinates, a URL, or other determinant. See the discussion for clarification. - Returns: A reference to the “SBObject“ object identified by `loc` or `nil` if the object couldn’t be located.
 func (o *SBElementArray[ObjectType]) ObjectAtLocation(location objc.ID) ObjectType {
 	_ret := objc.Send[ObjectType](o.Ptr(), _sBElementArraySelObjectAtLocation, location)
 	return _ret
@@ -68,7 +68,8 @@ func (o *SBElementArray[ObjectType]) ArrayByApplyingSelectorWithObject(aSelector
 // Forces evaluation of the receiver, causing the real object to be returned immediately. This method forces the evaluation of the current object reference (the receiver), resulting in the return of the referenced object. By default, Scripting Bridge deals with references to objects until you actually request some concrete data from them or until you call the `get` method. - Returns: The object referenced by the receiver.
 func (o *SBElementArray[ObjectType]) Get() *foundation.NSArray[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sBElementArraySelGet)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ObjectType](_ret)
 }
-

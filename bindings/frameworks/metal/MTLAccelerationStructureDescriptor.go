@@ -16,8 +16,8 @@ type MTLAccelerationStructureDescriptor struct {
 }
 
 var (
-	_clsMTLAccelerationStructureDescriptor = _objcClass("MTLAccelerationStructureDescriptor")
-	_mTLAccelerationStructureDescriptorSelUsage = objc.RegisterName("usage")
+	_clsMTLAccelerationStructureDescriptor         = _objcClass("MTLAccelerationStructureDescriptor")
+	_mTLAccelerationStructureDescriptorSelUsage    = objc.RegisterName("usage")
 	_mTLAccelerationStructureDescriptorSelSetUsage = objc.RegisterName("setUsage:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTLAccelerationStructureDescriptor) Usage() MTLAccelerationStructureUsa
 func (o *MTLAccelerationStructureDescriptor) SetUsage(usage MTLAccelerationStructureUsage) {
 	o.Ptr().Send(_mTLAccelerationStructureDescriptorSelSetUsage, usage)
 }
-

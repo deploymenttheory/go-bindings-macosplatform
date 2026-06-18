@@ -21,17 +21,17 @@ type MPSCNNGradientKernel struct {
 }
 
 var (
-	_clsMPSCNNGradientKernel = _objcClass("MPSCNNGradientKernel")
-	_mPSCNNGradientKernelSelInitWithDevice = objc.RegisterName("initWithDevice:")
-	_mPSCNNGradientKernelSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNGradientKernelSelEncodeToCommandBufferSourceGradientSourceImageGradientState = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:gradientState:")
-	_mPSCNNGradientKernelSelEncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:gradientState:destinationGradient:")
-	_mPSCNNGradientKernelSelEncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:gradientStates:")
+	_clsMPSCNNGradientKernel                                                                                        = _objcClass("MPSCNNGradientKernel")
+	_mPSCNNGradientKernelSelInitWithDevice                                                                          = objc.RegisterName("initWithDevice:")
+	_mPSCNNGradientKernelSelInitWithCoderDevice                                                                     = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNGradientKernelSelEncodeToCommandBufferSourceGradientSourceImageGradientState                             = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:gradientState:")
+	_mPSCNNGradientKernelSelEncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient          = objc.RegisterName("encodeToCommandBuffer:sourceGradient:sourceImage:gradientState:destinationGradient:")
+	_mPSCNNGradientKernelSelEncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates                     = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:gradientStates:")
 	_mPSCNNGradientKernelSelEncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStatesDestinationGradients = objc.RegisterName("encodeBatchToCommandBuffer:sourceGradients:sourceImages:gradientStates:destinationGradients:")
-	_mPSCNNGradientKernelSelKernelOffsetX = objc.RegisterName("kernelOffsetX")
-	_mPSCNNGradientKernelSelSetKernelOffsetX = objc.RegisterName("setKernelOffsetX:")
-	_mPSCNNGradientKernelSelKernelOffsetY = objc.RegisterName("kernelOffsetY")
-	_mPSCNNGradientKernelSelSetKernelOffsetY = objc.RegisterName("setKernelOffsetY:")
+	_mPSCNNGradientKernelSelKernelOffsetX                                                                           = objc.RegisterName("kernelOffsetX")
+	_mPSCNNGradientKernelSelSetKernelOffsetX                                                                        = objc.RegisterName("setKernelOffsetX:")
+	_mPSCNNGradientKernelSelKernelOffsetY                                                                           = objc.RegisterName("kernelOffsetY")
+	_mPSCNNGradientKernelSelSetKernelOffsetY                                                                        = objc.RegisterName("setKernelOffsetY:")
 )
 
 func MPSCNNGradientKernelFromID(id objc.ID) *MPSCNNGradientKernel {
@@ -47,21 +47,27 @@ func MPSCNNGradientKernelFromID(id objc.ID) *MPSCNNGradientKernel {
 // @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     A pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
 func (o *MPSCNNGradientKernel) InitWithDevice(device metal.MTLDevice) *MPSCNNGradientKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGradientKernelSelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGradientKernelFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNGradientKernel) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNGradientKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGradientKernelSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNGradientKernelFromID(_ret)
 }
 
 // @abstract   Encode a gradient filter and return a gradient @discussion During training, gradient filters are used to calculate the gradient associated with the loss for each feature channel in the forward pass source image. For those nodes that are trainable, these are then used to refine the value used in the trainable parameter. They consume a source gradient image which contains the gradients corresponding with the forward pass destination image, and calculate the gradients corresponding to the forward pass source image. A gradient filter consumes a MPSNNGradientState object which captured various forward pass properties such as offset and edgeMode at the time the forward pass was encoded. These are transferred to the MPSCNNBinaryKernel secondary image properties automatically when this method creates its destination image. @param      commandBuffer   The MTLCommandBuffer on which to encode @param      sourceGradient  The gradient image from the "next" filter in the graph (in the inference direction) @param      sourceImage     The image used as source image by the forward inference pass @param      gradientState   The MPSNNGradientState or MPSNNBinaryGradientState subclass produced by the forward inference pass @result   The result gradient from the gradient filter
 func (o *MPSCNNGradientKernel) EncodeToCommandBufferSourceGradientSourceImageGradientState(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, gradientState *mpscore.MPSState) *mpscore.MPSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNGradientKernelSelEncodeToCommandBufferSourceGradientSourceImageGradientState, commandBuffer, sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSImageFromID(_ret)
 }
 
@@ -100,4 +106,3 @@ func (o *MPSCNNGradientKernel) KernelOffsetY() int {
 func (o *MPSCNNGradientKernel) SetKernelOffsetY(kernelOffsetY int) {
 	o.Ptr().Send(_mPSCNNGradientKernelSelSetKernelOffsetY, kernelOffsetY)
 }
-

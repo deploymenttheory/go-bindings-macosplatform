@@ -106,4 +106,3 @@ type WKBackForwardListable interface {
 }
 
 var _ WKBackForwardListable = (*WKBackForwardList)(nil)
-

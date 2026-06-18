@@ -21,28 +21,28 @@ type RPScreenRecorder struct {
 }
 
 var (
-	_clsRPScreenRecorder = _objcClass("RPScreenRecorder")
-	_rPScreenRecorderSelSharedRecorder = objc.RegisterName("sharedRecorder")
-	_rPScreenRecorderSelStartRecordingWithHandler = objc.RegisterName("startRecordingWithHandler:")
-	_rPScreenRecorderSelStopRecordingWithHandler = objc.RegisterName("stopRecordingWithHandler:")
+	_clsRPScreenRecorder                                            = _objcClass("RPScreenRecorder")
+	_rPScreenRecorderSelSharedRecorder                              = objc.RegisterName("sharedRecorder")
+	_rPScreenRecorderSelStartRecordingWithHandler                   = objc.RegisterName("startRecordingWithHandler:")
+	_rPScreenRecorderSelStopRecordingWithHandler                    = objc.RegisterName("stopRecordingWithHandler:")
 	_rPScreenRecorderSelStopRecordingWithOutputURLCompletionHandler = objc.RegisterName("stopRecordingWithOutputURL:completionHandler:")
-	_rPScreenRecorderSelDiscardRecordingWithHandler = objc.RegisterName("discardRecordingWithHandler:")
-	_rPScreenRecorderSelStartCaptureWithHandlerCompletionHandler = objc.RegisterName("startCaptureWithHandler:completionHandler:")
-	_rPScreenRecorderSelStopCaptureWithHandler = objc.RegisterName("stopCaptureWithHandler:")
-	_rPScreenRecorderSelStartClipBufferingWithCompletionHandler = objc.RegisterName("startClipBufferingWithCompletionHandler:")
-	_rPScreenRecorderSelStopClipBufferingWithCompletionHandler = objc.RegisterName("stopClipBufferingWithCompletionHandler:")
-	_rPScreenRecorderSelExportClipToURLDurationCompletionHandler = objc.RegisterName("exportClipToURL:duration:completionHandler:")
-	_rPScreenRecorderSelDelegate = objc.RegisterName("delegate")
-	_rPScreenRecorderSelSetDelegate = objc.RegisterName("setDelegate:")
-	_rPScreenRecorderSelIsAvailable = objc.RegisterName("isAvailable")
-	_rPScreenRecorderSelIsRecording = objc.RegisterName("isRecording")
-	_rPScreenRecorderSelIsMicrophoneEnabled = objc.RegisterName("isMicrophoneEnabled")
-	_rPScreenRecorderSelSetMicrophoneEnabled = objc.RegisterName("setMicrophoneEnabled:")
-	_rPScreenRecorderSelIsCameraEnabled = objc.RegisterName("isCameraEnabled")
-	_rPScreenRecorderSelSetCameraEnabled = objc.RegisterName("setCameraEnabled:")
-	_rPScreenRecorderSelCameraPosition = objc.RegisterName("cameraPosition")
-	_rPScreenRecorderSelSetCameraPosition = objc.RegisterName("setCameraPosition:")
-	_rPScreenRecorderSelCameraPreviewView = objc.RegisterName("cameraPreviewView")
+	_rPScreenRecorderSelDiscardRecordingWithHandler                 = objc.RegisterName("discardRecordingWithHandler:")
+	_rPScreenRecorderSelStartCaptureWithHandlerCompletionHandler    = objc.RegisterName("startCaptureWithHandler:completionHandler:")
+	_rPScreenRecorderSelStopCaptureWithHandler                      = objc.RegisterName("stopCaptureWithHandler:")
+	_rPScreenRecorderSelStartClipBufferingWithCompletionHandler     = objc.RegisterName("startClipBufferingWithCompletionHandler:")
+	_rPScreenRecorderSelStopClipBufferingWithCompletionHandler      = objc.RegisterName("stopClipBufferingWithCompletionHandler:")
+	_rPScreenRecorderSelExportClipToURLDurationCompletionHandler    = objc.RegisterName("exportClipToURL:duration:completionHandler:")
+	_rPScreenRecorderSelDelegate                                    = objc.RegisterName("delegate")
+	_rPScreenRecorderSelSetDelegate                                 = objc.RegisterName("setDelegate:")
+	_rPScreenRecorderSelIsAvailable                                 = objc.RegisterName("isAvailable")
+	_rPScreenRecorderSelIsRecording                                 = objc.RegisterName("isRecording")
+	_rPScreenRecorderSelIsMicrophoneEnabled                         = objc.RegisterName("isMicrophoneEnabled")
+	_rPScreenRecorderSelSetMicrophoneEnabled                        = objc.RegisterName("setMicrophoneEnabled:")
+	_rPScreenRecorderSelIsCameraEnabled                             = objc.RegisterName("isCameraEnabled")
+	_rPScreenRecorderSelSetCameraEnabled                            = objc.RegisterName("setCameraEnabled:")
+	_rPScreenRecorderSelCameraPosition                              = objc.RegisterName("cameraPosition")
+	_rPScreenRecorderSelSetCameraPosition                           = objc.RegisterName("setCameraPosition:")
+	_rPScreenRecorderSelCameraPreviewView                           = objc.RegisterName("cameraPreviewView")
 )
 
 func RPScreenRecorderFromID(id objc.ID) *RPScreenRecorder {
@@ -57,7 +57,9 @@ func RPScreenRecorderFromID(id objc.ID) *RPScreenRecorder {
 
 func RPScreenRecorderSharedRecorder() *RPScreenRecorder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsRPScreenRecorder), _rPScreenRecorderSelSharedRecorder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return RPScreenRecorderFromID(_ret)
 }
 
@@ -227,7 +229,8 @@ func (o *RPScreenRecorder) SetCameraPosition(cameraPosition RPCameraPosition) {
 
 func (o *RPScreenRecorder) CameraPreviewView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _rPScreenRecorderSelCameraPreviewView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
-

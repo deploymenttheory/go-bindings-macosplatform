@@ -18,11 +18,11 @@ type MKLookAroundSnapshotter struct {
 }
 
 var (
-	_clsMKLookAroundSnapshotter = _objcClass("MKLookAroundSnapshotter")
-	_mKLookAroundSnapshotterSelInitWithSceneOptions = objc.RegisterName("initWithScene:options:")
+	_clsMKLookAroundSnapshotter                                 = _objcClass("MKLookAroundSnapshotter")
+	_mKLookAroundSnapshotterSelInitWithSceneOptions             = objc.RegisterName("initWithScene:options:")
 	_mKLookAroundSnapshotterSelGetSnapshotWithCompletionHandler = objc.RegisterName("getSnapshotWithCompletionHandler:")
-	_mKLookAroundSnapshotterSelCancel = objc.RegisterName("cancel")
-	_mKLookAroundSnapshotterSelIsLoading = objc.RegisterName("isLoading")
+	_mKLookAroundSnapshotterSelCancel                           = objc.RegisterName("cancel")
+	_mKLookAroundSnapshotterSelIsLoading                        = objc.RegisterName("isLoading")
 )
 
 func MKLookAroundSnapshotterFromID(id objc.ID) *MKLookAroundSnapshotter {
@@ -37,7 +37,9 @@ func MKLookAroundSnapshotterFromID(id objc.ID) *MKLookAroundSnapshotter {
 
 func (o *MKLookAroundSnapshotter) InitWithSceneOptions(scene *MKLookAroundScene, options *MKLookAroundSnapshotOptions) *MKLookAroundSnapshotter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLookAroundSnapshotterSelInitWithSceneOptions, scene.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLookAroundSnapshotterFromID(_ret)
 }
 
@@ -63,4 +65,3 @@ func (o *MKLookAroundSnapshotter) IsLoading() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKLookAroundSnapshotterSelIsLoading)
 	return _ret
 }
-

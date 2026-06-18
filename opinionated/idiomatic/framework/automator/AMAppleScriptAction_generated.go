@@ -80,4 +80,3 @@ type AppleScriptActionable interface {
 }
 
 var _ AppleScriptActionable = (*AppleScriptAction)(nil)
-

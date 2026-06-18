@@ -17,29 +17,29 @@ type NSTabViewItem struct {
 }
 
 var (
-	_clsNSTabViewItem = _objcClass("NSTabViewItem")
+	_clsNSTabViewItem                              = _objcClass("NSTabViewItem")
 	_nSTabViewItemSelTabViewItemWithViewController = objc.RegisterName("tabViewItemWithViewController:")
-	_nSTabViewItemSelInitWithIdentifier = objc.RegisterName("initWithIdentifier:")
-	_nSTabViewItemSelDrawLabelInRect = objc.RegisterName("drawLabel:inRect:")
-	_nSTabViewItemSelSizeOfLabel = objc.RegisterName("sizeOfLabel:")
-	_nSTabViewItemSelIdentifier = objc.RegisterName("identifier")
-	_nSTabViewItemSelSetIdentifier = objc.RegisterName("setIdentifier:")
-	_nSTabViewItemSelColor = objc.RegisterName("color")
-	_nSTabViewItemSelSetColor = objc.RegisterName("setColor:")
-	_nSTabViewItemSelLabel = objc.RegisterName("label")
-	_nSTabViewItemSelSetLabel = objc.RegisterName("setLabel:")
-	_nSTabViewItemSelImage = objc.RegisterName("image")
-	_nSTabViewItemSelSetImage = objc.RegisterName("setImage:")
-	_nSTabViewItemSelView = objc.RegisterName("view")
-	_nSTabViewItemSelSetView = objc.RegisterName("setView:")
-	_nSTabViewItemSelViewController = objc.RegisterName("viewController")
-	_nSTabViewItemSelSetViewController = objc.RegisterName("setViewController:")
-	_nSTabViewItemSelTabState = objc.RegisterName("tabState")
-	_nSTabViewItemSelTabView = objc.RegisterName("tabView")
-	_nSTabViewItemSelInitialFirstResponder = objc.RegisterName("initialFirstResponder")
-	_nSTabViewItemSelSetInitialFirstResponder = objc.RegisterName("setInitialFirstResponder:")
-	_nSTabViewItemSelToolTip = objc.RegisterName("toolTip")
-	_nSTabViewItemSelSetToolTip = objc.RegisterName("setToolTip:")
+	_nSTabViewItemSelInitWithIdentifier            = objc.RegisterName("initWithIdentifier:")
+	_nSTabViewItemSelDrawLabelInRect               = objc.RegisterName("drawLabel:inRect:")
+	_nSTabViewItemSelSizeOfLabel                   = objc.RegisterName("sizeOfLabel:")
+	_nSTabViewItemSelIdentifier                    = objc.RegisterName("identifier")
+	_nSTabViewItemSelSetIdentifier                 = objc.RegisterName("setIdentifier:")
+	_nSTabViewItemSelColor                         = objc.RegisterName("color")
+	_nSTabViewItemSelSetColor                      = objc.RegisterName("setColor:")
+	_nSTabViewItemSelLabel                         = objc.RegisterName("label")
+	_nSTabViewItemSelSetLabel                      = objc.RegisterName("setLabel:")
+	_nSTabViewItemSelImage                         = objc.RegisterName("image")
+	_nSTabViewItemSelSetImage                      = objc.RegisterName("setImage:")
+	_nSTabViewItemSelView                          = objc.RegisterName("view")
+	_nSTabViewItemSelSetView                       = objc.RegisterName("setView:")
+	_nSTabViewItemSelViewController                = objc.RegisterName("viewController")
+	_nSTabViewItemSelSetViewController             = objc.RegisterName("setViewController:")
+	_nSTabViewItemSelTabState                      = objc.RegisterName("tabState")
+	_nSTabViewItemSelTabView                       = objc.RegisterName("tabView")
+	_nSTabViewItemSelInitialFirstResponder         = objc.RegisterName("initialFirstResponder")
+	_nSTabViewItemSelSetInitialFirstResponder      = objc.RegisterName("setInitialFirstResponder:")
+	_nSTabViewItemSelToolTip                       = objc.RegisterName("toolTip")
+	_nSTabViewItemSelSetToolTip                    = objc.RegisterName("setToolTip:")
 )
 
 func NSTabViewItemFromID(id objc.ID) *NSTabViewItem {
@@ -55,13 +55,17 @@ func NSTabViewItemFromID(id objc.ID) *NSTabViewItem {
 // Creates an autoreleased `TabViewItem` that wraps the provided view controller. The view controller is set as the tab view item’s `viewController` property, which sets several of the tab view item’s other properties. \param viewController The view controller to wrap, used to set the `viewController` property
 func NSTabViewItemTabViewItemWithViewController(viewController *NSViewController) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTabViewItem), _nSTabViewItemSelTabViewItemWithViewController, viewController.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
 func (o *NSTabViewItem) InitWithIdentifier(identifier objc.ID) *NSTabViewItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelInitWithIdentifier, identifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewItemFromID(_ret)
 }
 
@@ -85,7 +89,9 @@ func (o *NSTabViewItem) SetIdentifier(identifier objc.ID) {
 
 func (o *NSTabViewItem) Color() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *NSTabViewItem) SetColor(color *NSColor) {
 
 func (o *NSTabViewItem) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -106,7 +114,9 @@ func (o *NSTabViewItem) SetLabel(label *foundation.NSString) {
 // Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
 func (o *NSTabViewItem) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -117,7 +127,9 @@ func (o *NSTabViewItem) SetImage(image *NSImage) {
 
 func (o *NSTabViewItem) View() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -128,7 +140,9 @@ func (o *NSTabViewItem) SetView(view *NSView) {
 // The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
 func (o *NSTabViewItem) ViewController() *NSViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelViewController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewControllerFromID(_ret)
 }
 
@@ -144,13 +158,17 @@ func (o *NSTabViewItem) TabState() NSTabState {
 
 func (o *NSTabViewItem) TabView() *NSTabView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelTabView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTabViewFromID(_ret)
 }
 
 func (o *NSTabViewItem) InitialFirstResponder() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelInitialFirstResponder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -160,11 +178,12 @@ func (o *NSTabViewItem) SetInitialFirstResponder(initialFirstResponder *NSView) 
 
 func (o *NSTabViewItem) ToolTip() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTabViewItemSelToolTip)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSTabViewItem) SetToolTip(toolTip *foundation.NSString) {
 	o.Ptr().Send(_nSTabViewItemSelSetToolTip, toolTip.Ptr())
 }
-

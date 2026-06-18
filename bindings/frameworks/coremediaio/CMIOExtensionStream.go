@@ -18,22 +18,22 @@ type CMIOExtensionStream struct {
 }
 
 var (
-	_clsCMIOExtensionStream = _objcClass("CMIOExtensionStream")
-	_cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionClockTypeSource = objc.RegisterName("streamWithLocalizedName:streamID:direction:clockType:source:")
+	_clsCMIOExtensionStream                                                                       = _objcClass("CMIOExtensionStream")
+	_cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionClockTypeSource                = objc.RegisterName("streamWithLocalizedName:streamID:direction:clockType:source:")
 	_cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource = objc.RegisterName("streamWithLocalizedName:streamID:direction:customClockConfiguration:source:")
-	_cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionClockTypeSource = objc.RegisterName("initWithLocalizedName:streamID:direction:clockType:source:")
-	_cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource = objc.RegisterName("initWithLocalizedName:streamID:direction:customClockConfiguration:source:")
-	_cMIOExtensionStreamSelNotifyPropertiesChanged = objc.RegisterName("notifyPropertiesChanged:")
-	_cMIOExtensionStreamSelSendSampleBufferDiscontinuityHostTimeInNanoseconds = objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:")
-	_cMIOExtensionStreamSelConsumeSampleBufferFromClientCompletionHandler = objc.RegisterName("consumeSampleBufferFromClient:completionHandler:")
-	_cMIOExtensionStreamSelNotifyScheduledOutputChanged = objc.RegisterName("notifyScheduledOutputChanged:")
-	_cMIOExtensionStreamSelLocalizedName = objc.RegisterName("localizedName")
-	_cMIOExtensionStreamSelStreamID = objc.RegisterName("streamID")
-	_cMIOExtensionStreamSelDirection = objc.RegisterName("direction")
-	_cMIOExtensionStreamSelClockType = objc.RegisterName("clockType")
-	_cMIOExtensionStreamSelCustomClockConfiguration = objc.RegisterName("customClockConfiguration")
-	_cMIOExtensionStreamSelSource = objc.RegisterName("source")
-	_cMIOExtensionStreamSelStreamingClients = objc.RegisterName("streamingClients")
+	_cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionClockTypeSource                  = objc.RegisterName("initWithLocalizedName:streamID:direction:clockType:source:")
+	_cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource   = objc.RegisterName("initWithLocalizedName:streamID:direction:customClockConfiguration:source:")
+	_cMIOExtensionStreamSelNotifyPropertiesChanged                                                = objc.RegisterName("notifyPropertiesChanged:")
+	_cMIOExtensionStreamSelSendSampleBufferDiscontinuityHostTimeInNanoseconds                     = objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:")
+	_cMIOExtensionStreamSelConsumeSampleBufferFromClientCompletionHandler                         = objc.RegisterName("consumeSampleBufferFromClient:completionHandler:")
+	_cMIOExtensionStreamSelNotifyScheduledOutputChanged                                           = objc.RegisterName("notifyScheduledOutputChanged:")
+	_cMIOExtensionStreamSelLocalizedName                                                          = objc.RegisterName("localizedName")
+	_cMIOExtensionStreamSelStreamID                                                               = objc.RegisterName("streamID")
+	_cMIOExtensionStreamSelDirection                                                              = objc.RegisterName("direction")
+	_cMIOExtensionStreamSelClockType                                                              = objc.RegisterName("clockType")
+	_cMIOExtensionStreamSelCustomClockConfiguration                                               = objc.RegisterName("customClockConfiguration")
+	_cMIOExtensionStreamSelSource                                                                 = objc.RegisterName("source")
+	_cMIOExtensionStreamSelStreamingClients                                                       = objc.RegisterName("streamingClients")
 )
 
 func CMIOExtensionStreamFromID(id objc.ID) *CMIOExtensionStream {
@@ -49,27 +49,35 @@ func CMIOExtensionStreamFromID(id objc.ID) *CMIOExtensionStream {
 // @method streamWithLocalizedName:streamID:direction:clockType:source: @abstract Returns a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
 func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStream), _cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionClockTypeSource, localizedName.Ptr(), streamID.Ptr(), direction, clockType, source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFromID(_ret)
 }
 
 // @method streamWithLocalizedName:streamID:direction:customClockConfiguration:source: @abstract Returns a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param customClockConfiguration A CMIOExtensionStreamCustomClockConfiguration object that defines the custom clock configuration. @param source The stream source. @result A CMIOExtensionStream instance that provides data.
 func CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *CMIOExtensionStreamCustomClockConfiguration, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCMIOExtensionStream), _cMIOExtensionStreamSelStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource, localizedName.Ptr(), streamID.Ptr(), direction, customClockConfiguration.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFromID(_ret)
 }
 
 // @method initWithLocalizedName:streamID:direction:clockType:source: @abstract Initialize a stream instance. @param localizedName The localized name of the stream. @param streamID The stream identifier. @param direction The stream direction. @param clockType The stream clock type. @param source The stream source. @result A CMIOExtensionStream instance that provides data. @discussion Note that the clockType parameter may not be CMIOExtensionStreamClockTypeCustom; that value is reserved for streams created with a custom clock configuration. For streams that have a custom clock, use streamWithLocalizedName:streamID:direction:customClockConfiguration:source:.
 func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionClockTypeSource, localizedName.Ptr(), streamID.Ptr(), direction, clockType, source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFromID(_ret)
 }
 
 func (o *CMIOExtensionStream) InitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName *foundation.NSString, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *CMIOExtensionStreamCustomClockConfiguration, source CMIOExtensionStreamSource) *CMIOExtensionStream {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelInitWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource, localizedName.Ptr(), streamID.Ptr(), direction, customClockConfiguration.Ptr(), source)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamFromID(_ret)
 }
 
@@ -103,14 +111,18 @@ func (o *CMIOExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *CMIO
 // @property localizedName @abstract The localized name of the stream.
 func (o *CMIOExtensionStream) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property streamID @abstract The stream identifier.
 func (o *CMIOExtensionStream) StreamID() *foundation.NSUUID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelStreamID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUUIDFromID(_ret)
 }
 
@@ -129,7 +141,9 @@ func (o *CMIOExtensionStream) ClockType() CMIOExtensionStreamClockType {
 // @property customClockConfiguration @abstract Custom clock configuration. @discussion If the stream was specified using a clockType, the returned value will be nil.
 func (o *CMIOExtensionStream) CustomClockConfiguration() *CMIOExtensionStreamCustomClockConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelCustomClockConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMIOExtensionStreamCustomClockConfigurationFromID(_ret)
 }
 
@@ -142,7 +156,8 @@ func (o *CMIOExtensionStream) Source() CMIOExtensionStreamSource {
 // @property streamingClients @abstract The array of streaming clients. @discussion This property is key-value observable.
 func (o *CMIOExtensionStream) StreamingClients() *foundation.NSArray[*CMIOExtensionClient] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMIOExtensionStreamSelStreamingClients)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CMIOExtensionClient](_ret)
 }
-

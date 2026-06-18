@@ -69,9 +69,13 @@ func (x *ImageIntegralOfSquares) WithLabel(label string) *ImageIntegralOfSquares
 	return x
 }
 
-func (x *ImageIntegralOfSquares) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageIntegralOfSquares) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageIntegralOfSquares) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageIntegralOfSquares) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
 type ImageIntegralOfSquaresable interface {
@@ -84,4 +88,3 @@ type ImageIntegralOfSquaresable interface {
 }
 
 var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
-

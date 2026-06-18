@@ -17,94 +17,94 @@ type NSScrollView struct {
 }
 
 var (
-	_clsNSScrollView = _objcClass("NSScrollView")
-	_nSScrollViewSelInitWithFrame = objc.RegisterName("initWithFrame:")
-	_nSScrollViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
+	_clsNSScrollView                                                                                                      = _objcClass("NSScrollView")
+	_nSScrollViewSelInitWithFrame                                                                                         = objc.RegisterName("initWithFrame:")
+	_nSScrollViewSelInitWithCoder                                                                                         = objc.RegisterName("initWithCoder:")
 	_nSScrollViewSelFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle = objc.RegisterName("frameSizeForContentSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:")
 	_nSScrollViewSelContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle = objc.RegisterName("contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle:")
-	_nSScrollViewSelFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType = objc.RegisterName("frameSizeForContentSize:hasHorizontalScroller:hasVerticalScroller:borderType:")
-	_nSScrollViewSelContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType = objc.RegisterName("contentSizeForFrameSize:hasHorizontalScroller:hasVerticalScroller:borderType:")
-	_nSScrollViewSelTile = objc.RegisterName("tile")
-	_nSScrollViewSelFlashScrollers = objc.RegisterName("flashScrollers")
-	_nSScrollViewSelMagnifyToFitRect = objc.RegisterName("magnifyToFitRect:")
-	_nSScrollViewSelSetMagnificationCenteredAtPoint = objc.RegisterName("setMagnification:centeredAtPoint:")
-	_nSScrollViewSelAddFloatingSubviewForAxis = objc.RegisterName("addFloatingSubview:forAxis:")
-	_nSScrollViewSelDocumentVisibleRect = objc.RegisterName("documentVisibleRect")
-	_nSScrollViewSelContentSize = objc.RegisterName("contentSize")
-	_nSScrollViewSelDocumentView = objc.RegisterName("documentView")
-	_nSScrollViewSelSetDocumentView = objc.RegisterName("setDocumentView:")
-	_nSScrollViewSelContentView = objc.RegisterName("contentView")
-	_nSScrollViewSelSetContentView = objc.RegisterName("setContentView:")
-	_nSScrollViewSelDocumentCursor = objc.RegisterName("documentCursor")
-	_nSScrollViewSelSetDocumentCursor = objc.RegisterName("setDocumentCursor:")
-	_nSScrollViewSelBorderType = objc.RegisterName("borderType")
-	_nSScrollViewSelSetBorderType = objc.RegisterName("setBorderType:")
-	_nSScrollViewSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSScrollViewSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSScrollViewSelDrawsBackground = objc.RegisterName("drawsBackground")
-	_nSScrollViewSelSetDrawsBackground = objc.RegisterName("setDrawsBackground:")
-	_nSScrollViewSelHasVerticalScroller = objc.RegisterName("hasVerticalScroller")
-	_nSScrollViewSelSetHasVerticalScroller = objc.RegisterName("setHasVerticalScroller:")
-	_nSScrollViewSelHasHorizontalScroller = objc.RegisterName("hasHorizontalScroller")
-	_nSScrollViewSelSetHasHorizontalScroller = objc.RegisterName("setHasHorizontalScroller:")
-	_nSScrollViewSelVerticalScroller = objc.RegisterName("verticalScroller")
-	_nSScrollViewSelSetVerticalScroller = objc.RegisterName("setVerticalScroller:")
-	_nSScrollViewSelHorizontalScroller = objc.RegisterName("horizontalScroller")
-	_nSScrollViewSelSetHorizontalScroller = objc.RegisterName("setHorizontalScroller:")
-	_nSScrollViewSelAutohidesScrollers = objc.RegisterName("autohidesScrollers")
-	_nSScrollViewSelSetAutohidesScrollers = objc.RegisterName("setAutohidesScrollers:")
-	_nSScrollViewSelHorizontalLineScroll = objc.RegisterName("horizontalLineScroll")
-	_nSScrollViewSelSetHorizontalLineScroll = objc.RegisterName("setHorizontalLineScroll:")
-	_nSScrollViewSelVerticalLineScroll = objc.RegisterName("verticalLineScroll")
-	_nSScrollViewSelSetVerticalLineScroll = objc.RegisterName("setVerticalLineScroll:")
-	_nSScrollViewSelLineScroll = objc.RegisterName("lineScroll")
-	_nSScrollViewSelSetLineScroll = objc.RegisterName("setLineScroll:")
-	_nSScrollViewSelHorizontalPageScroll = objc.RegisterName("horizontalPageScroll")
-	_nSScrollViewSelSetHorizontalPageScroll = objc.RegisterName("setHorizontalPageScroll:")
-	_nSScrollViewSelVerticalPageScroll = objc.RegisterName("verticalPageScroll")
-	_nSScrollViewSelSetVerticalPageScroll = objc.RegisterName("setVerticalPageScroll:")
-	_nSScrollViewSelPageScroll = objc.RegisterName("pageScroll")
-	_nSScrollViewSelSetPageScroll = objc.RegisterName("setPageScroll:")
-	_nSScrollViewSelScrollsDynamically = objc.RegisterName("scrollsDynamically")
-	_nSScrollViewSelSetScrollsDynamically = objc.RegisterName("setScrollsDynamically:")
-	_nSScrollViewSelScrollerStyle = objc.RegisterName("scrollerStyle")
-	_nSScrollViewSelSetScrollerStyle = objc.RegisterName("setScrollerStyle:")
-	_nSScrollViewSelScrollerKnobStyle = objc.RegisterName("scrollerKnobStyle")
-	_nSScrollViewSelSetScrollerKnobStyle = objc.RegisterName("setScrollerKnobStyle:")
-	_nSScrollViewSelHorizontalScrollElasticity = objc.RegisterName("horizontalScrollElasticity")
-	_nSScrollViewSelSetHorizontalScrollElasticity = objc.RegisterName("setHorizontalScrollElasticity:")
-	_nSScrollViewSelVerticalScrollElasticity = objc.RegisterName("verticalScrollElasticity")
-	_nSScrollViewSelSetVerticalScrollElasticity = objc.RegisterName("setVerticalScrollElasticity:")
-	_nSScrollViewSelUsesPredominantAxisScrolling = objc.RegisterName("usesPredominantAxisScrolling")
-	_nSScrollViewSelSetUsesPredominantAxisScrolling = objc.RegisterName("setUsesPredominantAxisScrolling:")
-	_nSScrollViewSelAllowsMagnification = objc.RegisterName("allowsMagnification")
-	_nSScrollViewSelSetAllowsMagnification = objc.RegisterName("setAllowsMagnification:")
-	_nSScrollViewSelMagnification = objc.RegisterName("magnification")
-	_nSScrollViewSelSetMagnification = objc.RegisterName("setMagnification:")
-	_nSScrollViewSelMaxMagnification = objc.RegisterName("maxMagnification")
-	_nSScrollViewSelSetMaxMagnification = objc.RegisterName("setMaxMagnification:")
-	_nSScrollViewSelMinMagnification = objc.RegisterName("minMagnification")
-	_nSScrollViewSelSetMinMagnification = objc.RegisterName("setMinMagnification:")
-	_nSScrollViewSelAutomaticallyAdjustsContentInsets = objc.RegisterName("automaticallyAdjustsContentInsets")
-	_nSScrollViewSelSetAutomaticallyAdjustsContentInsets = objc.RegisterName("setAutomaticallyAdjustsContentInsets:")
-	_nSScrollViewSelContentInsets = objc.RegisterName("contentInsets")
-	_nSScrollViewSelSetContentInsets = objc.RegisterName("setContentInsets:")
-	_nSScrollViewSelScrollerInsets = objc.RegisterName("scrollerInsets")
-	_nSScrollViewSelSetScrollerInsets = objc.RegisterName("setScrollerInsets:")
-	_nSScrollViewSelRulerViewClass = objc.RegisterName("rulerViewClass")
-	_nSScrollViewSelSetRulerViewClass = objc.RegisterName("setRulerViewClass:")
-	_nSScrollViewSelRulersVisible = objc.RegisterName("rulersVisible")
-	_nSScrollViewSelSetRulersVisible = objc.RegisterName("setRulersVisible:")
-	_nSScrollViewSelHasHorizontalRuler = objc.RegisterName("hasHorizontalRuler")
-	_nSScrollViewSelSetHasHorizontalRuler = objc.RegisterName("setHasHorizontalRuler:")
-	_nSScrollViewSelHasVerticalRuler = objc.RegisterName("hasVerticalRuler")
-	_nSScrollViewSelSetHasVerticalRuler = objc.RegisterName("setHasVerticalRuler:")
-	_nSScrollViewSelHorizontalRulerView = objc.RegisterName("horizontalRulerView")
-	_nSScrollViewSelSetHorizontalRulerView = objc.RegisterName("setHorizontalRulerView:")
-	_nSScrollViewSelVerticalRulerView = objc.RegisterName("verticalRulerView")
-	_nSScrollViewSelSetVerticalRulerView = objc.RegisterName("setVerticalRulerView:")
-	_nSScrollViewSelFindBarPosition = objc.RegisterName("findBarPosition")
-	_nSScrollViewSelSetFindBarPosition = objc.RegisterName("setFindBarPosition:")
+	_nSScrollViewSelFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType                             = objc.RegisterName("frameSizeForContentSize:hasHorizontalScroller:hasVerticalScroller:borderType:")
+	_nSScrollViewSelContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType                             = objc.RegisterName("contentSizeForFrameSize:hasHorizontalScroller:hasVerticalScroller:borderType:")
+	_nSScrollViewSelTile                                                                                                  = objc.RegisterName("tile")
+	_nSScrollViewSelFlashScrollers                                                                                        = objc.RegisterName("flashScrollers")
+	_nSScrollViewSelMagnifyToFitRect                                                                                      = objc.RegisterName("magnifyToFitRect:")
+	_nSScrollViewSelSetMagnificationCenteredAtPoint                                                                       = objc.RegisterName("setMagnification:centeredAtPoint:")
+	_nSScrollViewSelAddFloatingSubviewForAxis                                                                             = objc.RegisterName("addFloatingSubview:forAxis:")
+	_nSScrollViewSelDocumentVisibleRect                                                                                   = objc.RegisterName("documentVisibleRect")
+	_nSScrollViewSelContentSize                                                                                           = objc.RegisterName("contentSize")
+	_nSScrollViewSelDocumentView                                                                                          = objc.RegisterName("documentView")
+	_nSScrollViewSelSetDocumentView                                                                                       = objc.RegisterName("setDocumentView:")
+	_nSScrollViewSelContentView                                                                                           = objc.RegisterName("contentView")
+	_nSScrollViewSelSetContentView                                                                                        = objc.RegisterName("setContentView:")
+	_nSScrollViewSelDocumentCursor                                                                                        = objc.RegisterName("documentCursor")
+	_nSScrollViewSelSetDocumentCursor                                                                                     = objc.RegisterName("setDocumentCursor:")
+	_nSScrollViewSelBorderType                                                                                            = objc.RegisterName("borderType")
+	_nSScrollViewSelSetBorderType                                                                                         = objc.RegisterName("setBorderType:")
+	_nSScrollViewSelBackgroundColor                                                                                       = objc.RegisterName("backgroundColor")
+	_nSScrollViewSelSetBackgroundColor                                                                                    = objc.RegisterName("setBackgroundColor:")
+	_nSScrollViewSelDrawsBackground                                                                                       = objc.RegisterName("drawsBackground")
+	_nSScrollViewSelSetDrawsBackground                                                                                    = objc.RegisterName("setDrawsBackground:")
+	_nSScrollViewSelHasVerticalScroller                                                                                   = objc.RegisterName("hasVerticalScroller")
+	_nSScrollViewSelSetHasVerticalScroller                                                                                = objc.RegisterName("setHasVerticalScroller:")
+	_nSScrollViewSelHasHorizontalScroller                                                                                 = objc.RegisterName("hasHorizontalScroller")
+	_nSScrollViewSelSetHasHorizontalScroller                                                                              = objc.RegisterName("setHasHorizontalScroller:")
+	_nSScrollViewSelVerticalScroller                                                                                      = objc.RegisterName("verticalScroller")
+	_nSScrollViewSelSetVerticalScroller                                                                                   = objc.RegisterName("setVerticalScroller:")
+	_nSScrollViewSelHorizontalScroller                                                                                    = objc.RegisterName("horizontalScroller")
+	_nSScrollViewSelSetHorizontalScroller                                                                                 = objc.RegisterName("setHorizontalScroller:")
+	_nSScrollViewSelAutohidesScrollers                                                                                    = objc.RegisterName("autohidesScrollers")
+	_nSScrollViewSelSetAutohidesScrollers                                                                                 = objc.RegisterName("setAutohidesScrollers:")
+	_nSScrollViewSelHorizontalLineScroll                                                                                  = objc.RegisterName("horizontalLineScroll")
+	_nSScrollViewSelSetHorizontalLineScroll                                                                               = objc.RegisterName("setHorizontalLineScroll:")
+	_nSScrollViewSelVerticalLineScroll                                                                                    = objc.RegisterName("verticalLineScroll")
+	_nSScrollViewSelSetVerticalLineScroll                                                                                 = objc.RegisterName("setVerticalLineScroll:")
+	_nSScrollViewSelLineScroll                                                                                            = objc.RegisterName("lineScroll")
+	_nSScrollViewSelSetLineScroll                                                                                         = objc.RegisterName("setLineScroll:")
+	_nSScrollViewSelHorizontalPageScroll                                                                                  = objc.RegisterName("horizontalPageScroll")
+	_nSScrollViewSelSetHorizontalPageScroll                                                                               = objc.RegisterName("setHorizontalPageScroll:")
+	_nSScrollViewSelVerticalPageScroll                                                                                    = objc.RegisterName("verticalPageScroll")
+	_nSScrollViewSelSetVerticalPageScroll                                                                                 = objc.RegisterName("setVerticalPageScroll:")
+	_nSScrollViewSelPageScroll                                                                                            = objc.RegisterName("pageScroll")
+	_nSScrollViewSelSetPageScroll                                                                                         = objc.RegisterName("setPageScroll:")
+	_nSScrollViewSelScrollsDynamically                                                                                    = objc.RegisterName("scrollsDynamically")
+	_nSScrollViewSelSetScrollsDynamically                                                                                 = objc.RegisterName("setScrollsDynamically:")
+	_nSScrollViewSelScrollerStyle                                                                                         = objc.RegisterName("scrollerStyle")
+	_nSScrollViewSelSetScrollerStyle                                                                                      = objc.RegisterName("setScrollerStyle:")
+	_nSScrollViewSelScrollerKnobStyle                                                                                     = objc.RegisterName("scrollerKnobStyle")
+	_nSScrollViewSelSetScrollerKnobStyle                                                                                  = objc.RegisterName("setScrollerKnobStyle:")
+	_nSScrollViewSelHorizontalScrollElasticity                                                                            = objc.RegisterName("horizontalScrollElasticity")
+	_nSScrollViewSelSetHorizontalScrollElasticity                                                                         = objc.RegisterName("setHorizontalScrollElasticity:")
+	_nSScrollViewSelVerticalScrollElasticity                                                                              = objc.RegisterName("verticalScrollElasticity")
+	_nSScrollViewSelSetVerticalScrollElasticity                                                                           = objc.RegisterName("setVerticalScrollElasticity:")
+	_nSScrollViewSelUsesPredominantAxisScrolling                                                                          = objc.RegisterName("usesPredominantAxisScrolling")
+	_nSScrollViewSelSetUsesPredominantAxisScrolling                                                                       = objc.RegisterName("setUsesPredominantAxisScrolling:")
+	_nSScrollViewSelAllowsMagnification                                                                                   = objc.RegisterName("allowsMagnification")
+	_nSScrollViewSelSetAllowsMagnification                                                                                = objc.RegisterName("setAllowsMagnification:")
+	_nSScrollViewSelMagnification                                                                                         = objc.RegisterName("magnification")
+	_nSScrollViewSelSetMagnification                                                                                      = objc.RegisterName("setMagnification:")
+	_nSScrollViewSelMaxMagnification                                                                                      = objc.RegisterName("maxMagnification")
+	_nSScrollViewSelSetMaxMagnification                                                                                   = objc.RegisterName("setMaxMagnification:")
+	_nSScrollViewSelMinMagnification                                                                                      = objc.RegisterName("minMagnification")
+	_nSScrollViewSelSetMinMagnification                                                                                   = objc.RegisterName("setMinMagnification:")
+	_nSScrollViewSelAutomaticallyAdjustsContentInsets                                                                     = objc.RegisterName("automaticallyAdjustsContentInsets")
+	_nSScrollViewSelSetAutomaticallyAdjustsContentInsets                                                                  = objc.RegisterName("setAutomaticallyAdjustsContentInsets:")
+	_nSScrollViewSelContentInsets                                                                                         = objc.RegisterName("contentInsets")
+	_nSScrollViewSelSetContentInsets                                                                                      = objc.RegisterName("setContentInsets:")
+	_nSScrollViewSelScrollerInsets                                                                                        = objc.RegisterName("scrollerInsets")
+	_nSScrollViewSelSetScrollerInsets                                                                                     = objc.RegisterName("setScrollerInsets:")
+	_nSScrollViewSelRulerViewClass                                                                                        = objc.RegisterName("rulerViewClass")
+	_nSScrollViewSelSetRulerViewClass                                                                                     = objc.RegisterName("setRulerViewClass:")
+	_nSScrollViewSelRulersVisible                                                                                         = objc.RegisterName("rulersVisible")
+	_nSScrollViewSelSetRulersVisible                                                                                      = objc.RegisterName("setRulersVisible:")
+	_nSScrollViewSelHasHorizontalRuler                                                                                    = objc.RegisterName("hasHorizontalRuler")
+	_nSScrollViewSelSetHasHorizontalRuler                                                                                 = objc.RegisterName("setHasHorizontalRuler:")
+	_nSScrollViewSelHasVerticalRuler                                                                                      = objc.RegisterName("hasVerticalRuler")
+	_nSScrollViewSelSetHasVerticalRuler                                                                                   = objc.RegisterName("setHasVerticalRuler:")
+	_nSScrollViewSelHorizontalRulerView                                                                                   = objc.RegisterName("horizontalRulerView")
+	_nSScrollViewSelSetHorizontalRulerView                                                                                = objc.RegisterName("setHorizontalRulerView:")
+	_nSScrollViewSelVerticalRulerView                                                                                     = objc.RegisterName("verticalRulerView")
+	_nSScrollViewSelSetVerticalRulerView                                                                                  = objc.RegisterName("setVerticalRulerView:")
+	_nSScrollViewSelFindBarPosition                                                                                       = objc.RegisterName("findBarPosition")
+	_nSScrollViewSelSetFindBarPosition                                                                                    = objc.RegisterName("setFindBarPosition:")
 )
 
 func NSScrollViewFromID(id objc.ID) *NSScrollView {
@@ -119,13 +119,17 @@ func NSScrollViewFromID(id objc.ID) *NSScrollView {
 
 func (o *NSScrollView) InitWithFrame(frameRect corefoundation.CGRect) *NSScrollView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithFrame, frameRect)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
 func (o *NSScrollView) InitWithCoder(coder *foundation.NSCoder) *NSScrollView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
@@ -186,7 +190,9 @@ func (o *NSScrollView) ContentSize() corefoundation.CGSize {
 // Deprecated: +contentSizeForFrameSize:horizontalScrollerClass:verticalScrollerClass:borderType:controlSize:scrollerStyle: instead
 func (o *NSScrollView) DocumentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -197,7 +203,9 @@ func (o *NSScrollView) SetDocumentView(documentView *NSView) {
 
 func (o *NSScrollView) ContentView() *NSClipView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSClipViewFromID(_ret)
 }
 
@@ -207,7 +215,9 @@ func (o *NSScrollView) SetContentView(contentView *NSClipView) {
 
 func (o *NSScrollView) DocumentCursor() *NSCursor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelDocumentCursor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCursorFromID(_ret)
 }
 
@@ -226,7 +236,9 @@ func (o *NSScrollView) SetBorderType(borderType NSBorderType) {
 
 func (o *NSScrollView) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -263,7 +275,9 @@ func (o *NSScrollView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
 
 func (o *NSScrollView) VerticalScroller() *NSScroller {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalScroller)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollerFromID(_ret)
 }
 
@@ -273,7 +287,9 @@ func (o *NSScrollView) SetVerticalScroller(verticalScroller *NSScroller) {
 
 func (o *NSScrollView) HorizontalScroller() *NSScroller {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalScroller)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollerFromID(_ret)
 }
 
@@ -499,7 +515,9 @@ func (o *NSScrollView) SetHasVerticalRuler(hasVerticalRuler bool) {
 
 func (o *NSScrollView) HorizontalRulerView() *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelHorizontalRulerView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerViewFromID(_ret)
 }
 
@@ -509,7 +527,9 @@ func (o *NSScrollView) SetHorizontalRulerView(horizontalRulerView *NSRulerView) 
 
 func (o *NSScrollView) VerticalRulerView() *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSScrollViewSelVerticalRulerView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerViewFromID(_ret)
 }
 
@@ -525,4 +545,3 @@ func (o *NSScrollView) FindBarPosition() NSScrollViewFindBarPosition {
 func (o *NSScrollView) SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition) {
 	o.Ptr().Send(_nSScrollViewSelSetFindBarPosition, findBarPosition)
 }
-

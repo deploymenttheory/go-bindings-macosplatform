@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	_ldapLib uintptr
+	_ldapLib  uintptr
 	_loadOnce sync.Once
 )
 

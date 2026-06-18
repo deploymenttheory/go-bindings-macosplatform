@@ -87,4 +87,3 @@ type MacOSInstallerable interface {
 }
 
 var _ MacOSInstallerable = (*MacOSInstaller)(nil)
-

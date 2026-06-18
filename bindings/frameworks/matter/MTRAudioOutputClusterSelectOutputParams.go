@@ -16,12 +16,12 @@ type MTRAudioOutputClusterSelectOutputParams struct {
 }
 
 var (
-	_clsMTRAudioOutputClusterSelectOutputParams = _objcClass("MTRAudioOutputClusterSelectOutputParams")
-	_mTRAudioOutputClusterSelectOutputParamsSelIndex = objc.RegisterName("index")
-	_mTRAudioOutputClusterSelectOutputParamsSelSetIndex = objc.RegisterName("setIndex:")
-	_mTRAudioOutputClusterSelectOutputParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRAudioOutputClusterSelectOutputParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRAudioOutputClusterSelectOutputParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRAudioOutputClusterSelectOutputParams                               = _objcClass("MTRAudioOutputClusterSelectOutputParams")
+	_mTRAudioOutputClusterSelectOutputParamsSelIndex                          = objc.RegisterName("index")
+	_mTRAudioOutputClusterSelectOutputParamsSelSetIndex                       = objc.RegisterName("setIndex:")
+	_mTRAudioOutputClusterSelectOutputParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRAudioOutputClusterSelectOutputParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRAudioOutputClusterSelectOutputParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRAudioOutputClusterSelectOutputParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRAudioOutputClusterSelectOutputParamsFromID(id objc.ID) *MTRAudioOutputCl
 
 func (o *MTRAudioOutputClusterSelectOutputParams) Index() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterSelectOutputParamsSelIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRAudioOutputClusterSelectOutputParams) SetIndex(index *foundation.NSN
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRAudioOutputClusterSelectOutputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterSelectOutputParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRAudioOutputClusterSelectOutputParams) SetTimedInvokeTimeoutMs(timedI
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRAudioOutputClusterSelectOutputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRAudioOutputClusterSelectOutputParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRAudioOutputClusterSelectOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRAudioOutputClusterSelectOutputParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

@@ -375,4 +375,3 @@ type Databaseable interface {
 }
 
 var _ Databaseable = (*Database)(nil)
-

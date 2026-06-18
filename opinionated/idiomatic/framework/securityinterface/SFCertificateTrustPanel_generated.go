@@ -63,7 +63,9 @@ func (x *CertificateTrustPanel) InformativeText() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *CertificateTrustPanel) asCertificatePanel() *raw.SFCertificatePanel { return &x.inner.SFCertificatePanel }
+func (x *CertificateTrustPanel) asCertificatePanel() *raw.SFCertificatePanel {
+	return &x.inner.SFCertificatePanel
+}
 
 // CertificateTrustPanelable is the interface implemented by [CertificateTrustPanel], for mocking and DI.
 type CertificateTrustPanelable interface {
@@ -75,4 +77,3 @@ type CertificateTrustPanelable interface {
 }
 
 var _ CertificateTrustPanelable = (*CertificateTrustPanel)(nil)
-

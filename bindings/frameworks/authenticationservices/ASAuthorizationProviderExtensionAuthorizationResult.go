@@ -16,17 +16,17 @@ type ASAuthorizationProviderExtensionAuthorizationResult struct {
 }
 
 var (
-	_clsASAuthorizationProviderExtensionAuthorizationResult = _objcClass("ASAuthorizationProviderExtensionAuthorizationResult")
+	_clsASAuthorizationProviderExtensionAuthorizationResult                                 = _objcClass("ASAuthorizationProviderExtensionAuthorizationResult")
 	_aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPAuthorizationHeaders = objc.RegisterName("initWithHTTPAuthorizationHeaders:")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPResponseHttpBody = objc.RegisterName("initWithHTTPResponse:httpBody:")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpAuthorizationHeaders = objc.RegisterName("httpAuthorizationHeaders")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpAuthorizationHeaders = objc.RegisterName("setHttpAuthorizationHeaders:")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpResponse = objc.RegisterName("httpResponse")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpResponse = objc.RegisterName("setHttpResponse:")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpBody = objc.RegisterName("httpBody")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpBody = objc.RegisterName("setHttpBody:")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelPrivateKeys = objc.RegisterName("privateKeys")
-	_aSAuthorizationProviderExtensionAuthorizationResultSelSetPrivateKeys = objc.RegisterName("setPrivateKeys:")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPResponseHttpBody     = objc.RegisterName("initWithHTTPResponse:httpBody:")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpAuthorizationHeaders         = objc.RegisterName("httpAuthorizationHeaders")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpAuthorizationHeaders      = objc.RegisterName("setHttpAuthorizationHeaders:")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpResponse                     = objc.RegisterName("httpResponse")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpResponse                  = objc.RegisterName("setHttpResponse:")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelHttpBody                         = objc.RegisterName("httpBody")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelSetHttpBody                      = objc.RegisterName("setHttpBody:")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelPrivateKeys                      = objc.RegisterName("privateKeys")
+	_aSAuthorizationProviderExtensionAuthorizationResultSelSetPrivateKeys                   = objc.RegisterName("setPrivateKeys:")
 )
 
 func ASAuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *ASAuthorizationProviderExtensionAuthorizationResult {
@@ -42,14 +42,18 @@ func ASAuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *ASAu
 // @abstract Authorization succeeded with an authorization tokens stored in HTTP headers.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) InitWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *ASAuthorizationProviderExtensionAuthorizationResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPAuthorizationHeaders, httpAuthorizationHeaders)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionAuthorizationResultFromID(_ret)
 }
 
 // @abstract Authorization succeeded with a HTTP response.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) InitWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) *ASAuthorizationProviderExtensionAuthorizationResult {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelInitWithHTTPResponseHttpBody, httpResponse.Ptr(), httpBody.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationProviderExtensionAuthorizationResultFromID(_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetHttpAuthorizati
 // @abstract HTTP response for OAUth and SAML based authentications.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) HttpResponse() *foundation.NSHTTPURLResponse {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelHttpResponse)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSHTTPURLResponseFromID(_ret)
 }
 
@@ -77,7 +83,9 @@ func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetHttpResponse(ht
 // @abstract HTTP response body for OAUth and SAML based authentications.
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) HttpBody() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationProviderExtensionAuthorizationResultSelHttpBody)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -94,4 +102,3 @@ func (o *ASAuthorizationProviderExtensionAuthorizationResult) PrivateKeys() *fou
 func (o *ASAuthorizationProviderExtensionAuthorizationResult) SetPrivateKeys(privateKeys *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_aSAuthorizationProviderExtensionAuthorizationResultSelSetPrivateKeys, privateKeys)
 }
-

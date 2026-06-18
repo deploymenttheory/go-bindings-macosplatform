@@ -42,7 +42,9 @@ func (x *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex *foundation.NSNu
 	return x
 }
 
-func (x *MTRBasicClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent { return &x.inner.MTRBasicInformationClusterLeaveEvent }
+func (x *MTRBasicClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent {
+	return &x.inner.MTRBasicInformationClusterLeaveEvent
+}
 
 // MTRBasicClusterLeaveEventable is the interface implemented by [MTRBasicClusterLeaveEvent], for mocking and DI.
 type MTRBasicClusterLeaveEventable interface {
@@ -51,4 +53,3 @@ type MTRBasicClusterLeaveEventable interface {
 }
 
 var _ MTRBasicClusterLeaveEventable = (*MTRBasicClusterLeaveEvent)(nil)
-

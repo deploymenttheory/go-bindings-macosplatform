@@ -114,4 +114,3 @@ type ReverseGeocodingRequestable interface {
 }
 
 var _ ReverseGeocodingRequestable = (*ReverseGeocodingRequest)(nil)
-

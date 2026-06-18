@@ -113,4 +113,3 @@ type NotificationSettingsable interface {
 }
 
 var _ NotificationSettingsable = (*NotificationSettings)(nil)
-

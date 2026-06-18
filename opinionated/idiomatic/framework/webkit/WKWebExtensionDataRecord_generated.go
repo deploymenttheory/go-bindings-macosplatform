@@ -87,4 +87,3 @@ type WKWebExtensionDataRecordable interface {
 }
 
 var _ WKWebExtensionDataRecordable = (*WKWebExtensionDataRecord)(nil)
-

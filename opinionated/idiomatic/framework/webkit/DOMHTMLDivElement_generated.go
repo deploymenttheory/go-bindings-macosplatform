@@ -163,11 +163,17 @@ func (x *DOMHTMLDivElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.i
 
 func (x *DOMHTMLDivElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
 
-func (x *DOMHTMLDivElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLElement.DOMElement.DOMNode }
+func (x *DOMHTMLDivElement) asDOMNode() *raw.DOMNode {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
+}
 
-func (x *DOMHTMLDivElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
+func (x *DOMHTMLDivElement) asDOMObject() *raw.DOMObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
+}
 
-func (x *DOMHTMLDivElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMHTMLDivElement) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMHTMLDivElementable is the interface implemented by [DOMHTMLDivElement], for mocking and DI.
 type DOMHTMLDivElementable interface {
@@ -195,4 +201,3 @@ type DOMHTMLDivElementable interface {
 }
 
 var _ DOMHTMLDivElementable = (*DOMHTMLDivElement)(nil)
-

@@ -16,8 +16,8 @@ type CBManager struct {
 }
 
 var (
-	_clsCBManager = _objcClass("CBManager")
-	_cBManagerSelState = objc.RegisterName("state")
+	_clsCBManager              = _objcClass("CBManager")
+	_cBManagerSelState         = objc.RegisterName("state")
 	_cBManagerSelAuthorization = objc.RegisterName("authorization")
 )
 
@@ -48,4 +48,3 @@ func CBManagerAuthorizationClass() CBManagerAuthorization {
 	_ret := objc.Send[CBManagerAuthorization](objc.ID(_clsCBManager), _cBManagerSelAuthorization)
 	return _ret
 }
-

@@ -18,45 +18,45 @@ type NSPersistentStoreCoordinator struct {
 }
 
 var (
-	_clsNSPersistentStoreCoordinator = _objcClass("NSPersistentStoreCoordinator")
-	_nSPersistentStoreCoordinatorSelInitWithManagedObjectModel = objc.RegisterName("initWithManagedObjectModel:")
-	_nSPersistentStoreCoordinatorSelPersistentStoreForURL = objc.RegisterName("persistentStoreForURL:")
-	_nSPersistentStoreCoordinatorSelURLForPersistentStore = objc.RegisterName("URLForPersistentStore:")
-	_nSPersistentStoreCoordinatorSelSetURLForPersistentStore = objc.RegisterName("setURL:forPersistentStore:")
-	_nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError = objc.RegisterName("addPersistentStoreWithType:configuration:URL:options:error:")
-	_nSPersistentStoreCoordinatorSelAddPersistentStoreWithDescriptionCompletionHandler = objc.RegisterName("addPersistentStoreWithDescription:completionHandler:")
-	_nSPersistentStoreCoordinatorSelRemovePersistentStoreError = objc.RegisterName("removePersistentStore:error:")
-	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStore = objc.RegisterName("setMetadata:forPersistentStore:")
-	_nSPersistentStoreCoordinatorSelMetadataForPersistentStore = objc.RegisterName("metadataForPersistentStore:")
-	_nSPersistentStoreCoordinatorSelManagedObjectIDForURIRepresentation = objc.RegisterName("managedObjectIDForURIRepresentation:")
-	_nSPersistentStoreCoordinatorSelExecuteRequestWithContextError = objc.RegisterName("executeRequest:withContext:error:")
-	_nSPersistentStoreCoordinatorSelRegisterStoreClassForStoreType = objc.RegisterName("registerStoreClass:forStoreType:")
-	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLOptionsError = objc.RegisterName("metadataForPersistentStoreOfType:URL:options:error:")
-	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLOptionsError = objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:options:error:")
-	_nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError = objc.RegisterName("cachedModelForPersistentStoreAtURL:options:error:")
-	_nSPersistentStoreCoordinatorSelElementsDerivedFromExternalRecordURL = objc.RegisterName("elementsDerivedFromExternalRecordURL:")
-	_nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError = objc.RegisterName("importStoreWithIdentifier:fromExternalRecordsDirectory:toURL:options:withType:error:")
-	_nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError = objc.RegisterName("migratePersistentStore:toURL:options:withType:error:")
-	_nSPersistentStoreCoordinatorSelDestroyPersistentStoreAtURLWithTypeOptionsError = objc.RegisterName("destroyPersistentStoreAtURL:withType:options:error:")
+	_clsNSPersistentStoreCoordinator                                                                                                   = _objcClass("NSPersistentStoreCoordinator")
+	_nSPersistentStoreCoordinatorSelInitWithManagedObjectModel                                                                         = objc.RegisterName("initWithManagedObjectModel:")
+	_nSPersistentStoreCoordinatorSelPersistentStoreForURL                                                                              = objc.RegisterName("persistentStoreForURL:")
+	_nSPersistentStoreCoordinatorSelURLForPersistentStore                                                                              = objc.RegisterName("URLForPersistentStore:")
+	_nSPersistentStoreCoordinatorSelSetURLForPersistentStore                                                                           = objc.RegisterName("setURL:forPersistentStore:")
+	_nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError                                             = objc.RegisterName("addPersistentStoreWithType:configuration:URL:options:error:")
+	_nSPersistentStoreCoordinatorSelAddPersistentStoreWithDescriptionCompletionHandler                                                 = objc.RegisterName("addPersistentStoreWithDescription:completionHandler:")
+	_nSPersistentStoreCoordinatorSelRemovePersistentStoreError                                                                         = objc.RegisterName("removePersistentStore:error:")
+	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStore                                                                      = objc.RegisterName("setMetadata:forPersistentStore:")
+	_nSPersistentStoreCoordinatorSelMetadataForPersistentStore                                                                         = objc.RegisterName("metadataForPersistentStore:")
+	_nSPersistentStoreCoordinatorSelManagedObjectIDForURIRepresentation                                                                = objc.RegisterName("managedObjectIDForURIRepresentation:")
+	_nSPersistentStoreCoordinatorSelExecuteRequestWithContextError                                                                     = objc.RegisterName("executeRequest:withContext:error:")
+	_nSPersistentStoreCoordinatorSelRegisterStoreClassForStoreType                                                                     = objc.RegisterName("registerStoreClass:forStoreType:")
+	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLOptionsError                                                    = objc.RegisterName("metadataForPersistentStoreOfType:URL:options:error:")
+	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLOptionsError                                                 = objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:options:error:")
+	_nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError                                                     = objc.RegisterName("cachedModelForPersistentStoreAtURL:options:error:")
+	_nSPersistentStoreCoordinatorSelElementsDerivedFromExternalRecordURL                                                               = objc.RegisterName("elementsDerivedFromExternalRecordURL:")
+	_nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError                     = objc.RegisterName("importStoreWithIdentifier:fromExternalRecordsDirectory:toURL:options:withType:error:")
+	_nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError                                                    = objc.RegisterName("migratePersistentStore:toURL:options:withType:error:")
+	_nSPersistentStoreCoordinatorSelDestroyPersistentStoreAtURLWithTypeOptionsError                                                    = objc.RegisterName("destroyPersistentStoreAtURL:withType:options:error:")
 	_nSPersistentStoreCoordinatorSelReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError = objc.RegisterName("replacePersistentStoreAtURL:destinationOptions:withPersistentStoreFromURL:sourceOptions:storeType:error:")
-	_nSPersistentStoreCoordinatorSelPerformBlock = objc.RegisterName("performBlock:")
-	_nSPersistentStoreCoordinatorSelPerformBlockAndWait = objc.RegisterName("performBlockAndWait:")
-	_nSPersistentStoreCoordinatorSelCurrentPersistentHistoryTokenFromStores = objc.RegisterName("currentPersistentHistoryTokenFromStores:")
-	_nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigration = objc.RegisterName("finishDeferredLightweightMigration:")
-	_nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigrationTask = objc.RegisterName("finishDeferredLightweightMigrationTask:")
-	_nSPersistentStoreCoordinatorSelManagedObjectIDFromUTF8StringLength = objc.RegisterName("managedObjectIDFromUTF8String:length:")
-	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreWithURLError = objc.RegisterName("metadataForPersistentStoreWithURL:error:")
-	_nSPersistentStoreCoordinatorSelLock = objc.RegisterName("lock")
-	_nSPersistentStoreCoordinatorSelUnlock = objc.RegisterName("unlock")
-	_nSPersistentStoreCoordinatorSelTryLock = objc.RegisterName("tryLock")
-	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLError = objc.RegisterName("metadataForPersistentStoreOfType:URL:error:")
-	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLError = objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:error:")
-	_nSPersistentStoreCoordinatorSelRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError = objc.RegisterName("removeUbiquitousContentAndPersistentStoreAtURL:options:error:")
-	_nSPersistentStoreCoordinatorSelManagedObjectModel = objc.RegisterName("managedObjectModel")
-	_nSPersistentStoreCoordinatorSelPersistentStores = objc.RegisterName("persistentStores")
-	_nSPersistentStoreCoordinatorSelName = objc.RegisterName("name")
-	_nSPersistentStoreCoordinatorSelSetName = objc.RegisterName("setName:")
-	_nSPersistentStoreCoordinatorSelRegisteredStoreTypes = objc.RegisterName("registeredStoreTypes")
+	_nSPersistentStoreCoordinatorSelPerformBlock                                                                                       = objc.RegisterName("performBlock:")
+	_nSPersistentStoreCoordinatorSelPerformBlockAndWait                                                                                = objc.RegisterName("performBlockAndWait:")
+	_nSPersistentStoreCoordinatorSelCurrentPersistentHistoryTokenFromStores                                                            = objc.RegisterName("currentPersistentHistoryTokenFromStores:")
+	_nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigration                                                                 = objc.RegisterName("finishDeferredLightweightMigration:")
+	_nSPersistentStoreCoordinatorSelFinishDeferredLightweightMigrationTask                                                             = objc.RegisterName("finishDeferredLightweightMigrationTask:")
+	_nSPersistentStoreCoordinatorSelManagedObjectIDFromUTF8StringLength                                                                = objc.RegisterName("managedObjectIDFromUTF8String:length:")
+	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreWithURLError                                                             = objc.RegisterName("metadataForPersistentStoreWithURL:error:")
+	_nSPersistentStoreCoordinatorSelLock                                                                                               = objc.RegisterName("lock")
+	_nSPersistentStoreCoordinatorSelUnlock                                                                                             = objc.RegisterName("unlock")
+	_nSPersistentStoreCoordinatorSelTryLock                                                                                            = objc.RegisterName("tryLock")
+	_nSPersistentStoreCoordinatorSelMetadataForPersistentStoreOfTypeURLError                                                           = objc.RegisterName("metadataForPersistentStoreOfType:URL:error:")
+	_nSPersistentStoreCoordinatorSelSetMetadataForPersistentStoreOfTypeURLError                                                        = objc.RegisterName("setMetadata:forPersistentStoreOfType:URL:error:")
+	_nSPersistentStoreCoordinatorSelRemoveUbiquitousContentAndPersistentStoreAtURLOptionsError                                         = objc.RegisterName("removeUbiquitousContentAndPersistentStoreAtURL:options:error:")
+	_nSPersistentStoreCoordinatorSelManagedObjectModel                                                                                 = objc.RegisterName("managedObjectModel")
+	_nSPersistentStoreCoordinatorSelPersistentStores                                                                                   = objc.RegisterName("persistentStores")
+	_nSPersistentStoreCoordinatorSelName                                                                                               = objc.RegisterName("name")
+	_nSPersistentStoreCoordinatorSelSetName                                                                                            = objc.RegisterName("setName:")
+	_nSPersistentStoreCoordinatorSelRegisteredStoreTypes                                                                               = objc.RegisterName("registeredStoreTypes")
 )
 
 func NSPersistentStoreCoordinatorFromID(id objc.ID) *NSPersistentStoreCoordinator {
@@ -71,19 +71,25 @@ func NSPersistentStoreCoordinatorFromID(id objc.ID) *NSPersistentStoreCoordinato
 
 func (o *NSPersistentStoreCoordinator) InitWithManagedObjectModel(model *NSManagedObjectModel) *NSPersistentStoreCoordinator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelInitWithManagedObjectModel, model.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreCoordinatorFromID(_ret)
 }
 
 func (o *NSPersistentStoreCoordinator) PersistentStoreForURL(uRL *foundation.NSURL) *NSPersistentStore {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelPersistentStoreForURL, uRL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentStoreFromID(_ret)
 }
 
 func (o *NSPersistentStoreCoordinator) URLForPersistentStore(store *NSPersistentStore) *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelURLForPersistentStore, store.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -95,7 +101,9 @@ func (o *NSPersistentStoreCoordinator) SetURLForPersistentStore(url *foundation.
 func (o *NSPersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType *foundation.NSString, configuration *foundation.NSString, storeURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*NSPersistentStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelAddPersistentStoreWithTypeConfigurationURLOptionsError, storeType.Ptr(), configuration.Ptr(), storeURL.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -136,7 +144,9 @@ func (o *NSPersistentStoreCoordinator) MetadataForPersistentStore(store *NSPersi
 
 func (o *NSPersistentStoreCoordinator) ManagedObjectIDForURIRepresentation(url *foundation.NSURL) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelManagedObjectIDForURIRepresentation, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -174,7 +184,9 @@ func NSPersistentStoreCoordinatorSetMetadataForPersistentStoreOfTypeURLOptionsEr
 func NSPersistentStoreCoordinatorCachedModelForPersistentStoreAtURLOptionsError(url *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID]) (*NSManagedObjectModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelCachedModelForPersistentStoreAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -191,7 +203,9 @@ func NSPersistentStoreCoordinatorElementsDerivedFromExternalRecordURL(fileURL *f
 func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier *foundation.NSString, externalRecordsURL *foundation.NSURL, destinationURL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError, storeIdentifier.Ptr(), externalRecordsURL.Ptr(), destinationURL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -202,7 +216,9 @@ func (o *NSPersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalReco
 func (o *NSPersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *NSPersistentStore, uRL *foundation.NSURL, options *foundation.NSDictionary[objc.ID, objc.ID], storeType *foundation.NSString) (*NSPersistentStore, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelMigratePersistentStoreToURLOptionsWithTypeError, store.Ptr(), uRL.Ptr(), options, storeType.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -251,7 +267,9 @@ func (o *NSPersistentStoreCoordinator) PerformBlockAndWait(block func()) {
 
 func (o *NSPersistentStoreCoordinator) CurrentPersistentHistoryTokenFromStores(stores *foundation.NSArray[objc.ID]) *NSPersistentHistoryToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelCurrentPersistentHistoryTokenFromStores, stores)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryTokenFromID(_ret)
 }
 
@@ -275,7 +293,9 @@ func (o *NSPersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() 
 
 func (o *NSPersistentStoreCoordinator) ManagedObjectIDFromUTF8StringLength(utf8string string, len_ uint) *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelManagedObjectIDFromUTF8StringLength, utf8string, len_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
 
@@ -337,19 +357,25 @@ func NSPersistentStoreCoordinatorRemoveUbiquitousContentAndPersistentStoreAtURLO
 
 func (o *NSPersistentStoreCoordinator) ManagedObjectModel() *NSManagedObjectModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelManagedObjectModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectModelFromID(_ret)
 }
 
 func (o *NSPersistentStoreCoordinator) PersistentStores() *foundation.NSArray[*NSPersistentStore] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelPersistentStores)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPersistentStore](_ret)
 }
 
 func (o *NSPersistentStoreCoordinator) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentStoreCoordinatorSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -361,4 +387,3 @@ func NSPersistentStoreCoordinatorRegisteredStoreTypes() *foundation.NSDictionary
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *foundation.NSValue]](objc.ID(_clsNSPersistentStoreCoordinator), _nSPersistentStoreCoordinatorSelRegisteredStoreTypes)
 	return _ret
 }
-

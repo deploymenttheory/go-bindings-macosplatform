@@ -83,4 +83,3 @@ type CollectionListable interface {
 }
 
 var _ CollectionListable = (*CollectionList)(nil)
-

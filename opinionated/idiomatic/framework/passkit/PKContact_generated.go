@@ -147,4 +147,3 @@ type Contactable interface {
 }
 
 var _ Contactable = (*Contact)(nil)
-

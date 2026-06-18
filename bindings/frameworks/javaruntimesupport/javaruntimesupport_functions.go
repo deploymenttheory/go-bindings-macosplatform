@@ -13,42 +13,42 @@ import (
 
 var (
 	_fnJRSAccessibilityUnregisterUniqueIdForUIElement func(objc.ID)
-	_fnJRSFontAlignStyleForFractionalMeasurement func(uint32) uint32
-	_fnJRSFontAlignStyleForIntegerMeasurement func(uint32) uint32
-	_fnJRSFontCreateFallbackFontForCharacters func(unsafe.Pointer, *uint16, int) unsafe.Pointer
-	_fnJRSFontGetAdvancesForGlyphsAndStyle func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGSize) float64
-	_fnJRSFontGetBoundingBoxesForGlyphsAndStyle func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGRect) corefoundation.CGRect
-	_fnJRSFontGetRenderingStyleForContext func(unsafe.Pointer) uint32
-	_fnJRSFontGetRenderingStyleForHints func(unsafe.Pointer, unsafe.Pointer) uint32
-	_fnJRSFontSetRenderingStyleOnContext func(unsafe.Pointer, uint32)
-	_fnJRSFontStyleIsAntialiased func(uint32) bool
-	_fnJRSFontStyleUsesFractionalMetrics func(uint32) bool
-	_fnJRSUIControlCreate func(uint8) unsafe.Pointer
-	_fnJRSUIControlDraw func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
-	_fnJRSUIControlGetHitPart func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect, corefoundation.CGPoint) int
-	_fnJRSUIControlGetScrollBarOffsetFor func(unsafe.Pointer, corefoundation.CGRect, float64, float64, float64) float64
-	_fnJRSUIControlGetScrollBarPartBounds func(unsafe.Pointer, corefoundation.CGRect, int) corefoundation.CGRect
-	_fnJRSUIControlRelease func(unsafe.Pointer)
-	_fnJRSUIControlSetAlignmentHorizontal func(unsafe.Pointer, int)
-	_fnJRSUIControlSetAlignmentVertical func(unsafe.Pointer, int)
-	_fnJRSUIControlSetAnimating func(unsafe.Pointer, uint8)
-	_fnJRSUIControlSetDirection func(unsafe.Pointer, int)
-	_fnJRSUIControlSetOrientation func(unsafe.Pointer, int)
-	_fnJRSUIControlSetPresentationState func(unsafe.Pointer, int)
-	_fnJRSUIControlSetScrollBarPart func(unsafe.Pointer, int)
-	_fnJRSUIControlSetSegmentPosition func(unsafe.Pointer, int)
-	_fnJRSUIControlSetShowArrows func(unsafe.Pointer, uint8)
-	_fnJRSUIControlSetSize func(unsafe.Pointer, int)
-	_fnJRSUIControlSetState func(unsafe.Pointer, int)
-	_fnJRSUIControlSetUserInterfaceLayoutDirection func(unsafe.Pointer, int)
-	_fnJRSUIControlSetValueByKey func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
-	_fnJRSUIControlSetVariant func(unsafe.Pointer, int)
-	_fnJRSUIControlSetWidget func(unsafe.Pointer, int)
-	_fnJRSUIControlSetWindowType func(unsafe.Pointer, int)
-	_fnJRSUIControlShouldScrollToClick func() uint8
-	_fnJRSUIGetKey func(int) unsafe.Pointer
-	_fnJRSUIRendererCreate func() unsafe.Pointer
-	_fnJRSUIRendererRelease func(unsafe.Pointer)
+	_fnJRSFontAlignStyleForFractionalMeasurement      func(uint32) uint32
+	_fnJRSFontAlignStyleForIntegerMeasurement         func(uint32) uint32
+	_fnJRSFontCreateFallbackFontForCharacters         func(unsafe.Pointer, *uint16, int) unsafe.Pointer
+	_fnJRSFontGetAdvancesForGlyphsAndStyle            func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGSize) float64
+	_fnJRSFontGetBoundingBoxesForGlyphsAndStyle       func(unsafe.Pointer, *corefoundation.CGAffineTransform, uint32, *uint16, uint, *corefoundation.CGRect) corefoundation.CGRect
+	_fnJRSFontGetRenderingStyleForContext             func(unsafe.Pointer) uint32
+	_fnJRSFontGetRenderingStyleForHints               func(unsafe.Pointer, unsafe.Pointer) uint32
+	_fnJRSFontSetRenderingStyleOnContext              func(unsafe.Pointer, uint32)
+	_fnJRSFontStyleIsAntialiased                      func(uint32) bool
+	_fnJRSFontStyleUsesFractionalMetrics              func(uint32) bool
+	_fnJRSUIControlCreate                             func(uint8) unsafe.Pointer
+	_fnJRSUIControlDraw                               func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect)
+	_fnJRSUIControlGetHitPart                         func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect, corefoundation.CGPoint) int
+	_fnJRSUIControlGetScrollBarOffsetFor              func(unsafe.Pointer, corefoundation.CGRect, float64, float64, float64) float64
+	_fnJRSUIControlGetScrollBarPartBounds             func(unsafe.Pointer, corefoundation.CGRect, int) corefoundation.CGRect
+	_fnJRSUIControlRelease                            func(unsafe.Pointer)
+	_fnJRSUIControlSetAlignmentHorizontal             func(unsafe.Pointer, int)
+	_fnJRSUIControlSetAlignmentVertical               func(unsafe.Pointer, int)
+	_fnJRSUIControlSetAnimating                       func(unsafe.Pointer, uint8)
+	_fnJRSUIControlSetDirection                       func(unsafe.Pointer, int)
+	_fnJRSUIControlSetOrientation                     func(unsafe.Pointer, int)
+	_fnJRSUIControlSetPresentationState               func(unsafe.Pointer, int)
+	_fnJRSUIControlSetScrollBarPart                   func(unsafe.Pointer, int)
+	_fnJRSUIControlSetSegmentPosition                 func(unsafe.Pointer, int)
+	_fnJRSUIControlSetShowArrows                      func(unsafe.Pointer, uint8)
+	_fnJRSUIControlSetSize                            func(unsafe.Pointer, int)
+	_fnJRSUIControlSetState                           func(unsafe.Pointer, int)
+	_fnJRSUIControlSetUserInterfaceLayoutDirection    func(unsafe.Pointer, int)
+	_fnJRSUIControlSetValueByKey                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnJRSUIControlSetVariant                         func(unsafe.Pointer, int)
+	_fnJRSUIControlSetWidget                          func(unsafe.Pointer, int)
+	_fnJRSUIControlSetWindowType                      func(unsafe.Pointer, int)
+	_fnJRSUIControlShouldScrollToClick                func() uint8
+	_fnJRSUIGetKey                                    func(int) unsafe.Pointer
+	_fnJRSUIRendererCreate                            func() unsafe.Pointer
+	_fnJRSUIRendererRelease                           func(unsafe.Pointer)
 )
 
 func JRSAccessibilityUnregisterUniqueIdForUIElement(element objc.ID) {
@@ -198,4 +198,3 @@ func JRSUIRendererCreate() unsafe.Pointer {
 func JRSUIRendererRelease(renderer unsafe.Pointer) {
 	_fnJRSUIRendererRelease(renderer)
 }
-

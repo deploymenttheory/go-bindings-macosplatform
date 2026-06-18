@@ -16,10 +16,10 @@ type MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct struct {
 }
 
 var (
-	_clsMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct = _objcClass("MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct")
-	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelOrder = objc.RegisterName("order")
-	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelSetOrder = objc.RegisterName("setOrder:")
-	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelMeasurement = objc.RegisterName("measurement")
+	_clsMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct               = _objcClass("MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct")
+	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelOrder          = objc.RegisterName("order")
+	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelSetOrder       = objc.RegisterName("setOrder:")
+	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelMeasurement    = objc.RegisterName("measurement")
 	_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelSetMeasurement = objc.RegisterName("setMeasurement:")
 )
 
@@ -35,7 +35,9 @@ func MTRElectricalPowerMeasurementClusterHarmonicMeasurementStructFromID(id objc
 
 func (o *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelOrder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetOrder
 
 func (o *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelMeasurement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) SetMeasurement(measurement *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructSelSetMeasurement, measurement.Ptr())
 }
-

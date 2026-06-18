@@ -16,12 +16,12 @@ type MIDI2DeviceInfo struct {
 }
 
 var (
-	_clsMIDI2DeviceInfo = _objcClass("MIDI2DeviceInfo")
+	_clsMIDI2DeviceInfo                                                     = _objcClass("MIDI2DeviceInfo")
 	_mIDI2DeviceInfoSelInitWithManufacturerIDFamilyModelNumberRevisionLevel = objc.RegisterName("initWithManufacturerID:family:modelNumber:revisionLevel:")
-	_mIDI2DeviceInfoSelManufacturerID = objc.RegisterName("manufacturerID")
-	_mIDI2DeviceInfoSelFamily = objc.RegisterName("family")
-	_mIDI2DeviceInfoSelModelNumber = objc.RegisterName("modelNumber")
-	_mIDI2DeviceInfoSelRevisionLevel = objc.RegisterName("revisionLevel")
+	_mIDI2DeviceInfoSelManufacturerID                                       = objc.RegisterName("manufacturerID")
+	_mIDI2DeviceInfoSelFamily                                               = objc.RegisterName("family")
+	_mIDI2DeviceInfoSelModelNumber                                          = objc.RegisterName("modelNumber")
+	_mIDI2DeviceInfoSelRevisionLevel                                        = objc.RegisterName("revisionLevel")
 )
 
 func MIDI2DeviceInfoFromID(id objc.ID) *MIDI2DeviceInfo {
@@ -37,7 +37,9 @@ func MIDI2DeviceInfoFromID(id objc.ID) *MIDI2DeviceInfo {
 // @method		initWithManufacturerID:family:modelNumber:revisionLevel: @brief		The initializer for constructing the MIDI2DeviceInfo object. @param		manufacturerID	The 3-Byte manufacturer System Exclusive ID. @param		family			The 14-bit device family. @param		modelNumber		The 14-bit model number. @param		revisionLevel	The 4-Byte revision level. @discussion	Provided values for family or modelNumber must be within their expected bit range. For example, if modelNumber is outside of the range of a 14-bit number.
 func (o *MIDI2DeviceInfo) InitWithManufacturerIDFamilyModelNumberRevisionLevel(manufacturerID MIDI2DeviceManufacturer, family uint16, modelNumber uint16, revisionLevel MIDI2DeviceRevisionLevel) *MIDI2DeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDI2DeviceInfoSelInitWithManufacturerIDFamilyModelNumberRevisionLevel, manufacturerID, family, modelNumber, revisionLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDI2DeviceInfoFromID(_ret)
 }
 
@@ -64,4 +66,3 @@ func (o *MIDI2DeviceInfo) RevisionLevel() MIDI2DeviceRevisionLevel {
 	_ret := objc.Send[MIDI2DeviceRevisionLevel](o.Ptr(), _mIDI2DeviceInfoSelRevisionLevel)
 	return _ret
 }
-

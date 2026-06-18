@@ -11,8 +11,8 @@ import (
 type Cc_credential_versions int64
 
 const (
-	Cc_credentials_v4 Cc_credential_versions = 1
-	Cc_credentials_v5 Cc_credential_versions = 2
+	Cc_credentials_v4    Cc_credential_versions = 1
+	Cc_credentials_v5    Cc_credential_versions = 2
 	Cc_credentials_v4_v5 Cc_credential_versions = 3
 )
 
@@ -34,7 +34,7 @@ type Cc_lock_modes int64
 
 const (
 	Cc_lock_noblock Cc_lock_modes = 0
-	Cc_lock_block Cc_lock_modes = 1
+	Cc_lock_block   Cc_lock_modes = 1
 )
 
 func (e Cc_lock_modes) String() string {
@@ -52,9 +52,9 @@ func (e Cc_lock_modes) String() string {
 type Cc_lock_types int64
 
 const (
-	Cc_lock_read Cc_lock_types = 0
-	Cc_lock_write Cc_lock_types = 1
-	Cc_lock_upgrade Cc_lock_types = 2
+	Cc_lock_read      Cc_lock_types = 0
+	Cc_lock_write     Cc_lock_types = 1
+	Cc_lock_upgrade   Cc_lock_types = 2
 	Cc_lock_downgrade Cc_lock_types = 3
 )
 
@@ -77,11 +77,11 @@ func (e Cc_lock_types) String() string {
 type Cc_string_to_key_type int64
 
 const (
-	Cc_v4_stk_afs Cc_string_to_key_type = 0
-	Cc_v4_stk_des Cc_string_to_key_type = 1
+	Cc_v4_stk_afs              Cc_string_to_key_type = 0
+	Cc_v4_stk_des              Cc_string_to_key_type = 1
 	Cc_v4_stk_columbia_special Cc_string_to_key_type = 2
-	Cc_v4_stk_krb5 Cc_string_to_key_type = 3
-	Cc_v4_stk_unknown Cc_string_to_key_type = 4
+	Cc_v4_stk_krb5             Cc_string_to_key_type = 3
+	Cc_v4_stk_unknown          Cc_string_to_key_type = 4
 )
 
 func (e Cc_string_to_key_type) String() string {
@@ -104,8 +104,8 @@ func (e Cc_string_to_key_type) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -124,135 +124,134 @@ func (e Idtype_t) String() string {
 
 const (
 	KRB5_C_RANDSOURCE_EXTERNAL_PROTOCOL = 4
-	KRB5_C_RANDSOURCE_MAX = 5
-	KRB5_C_RANDSOURCE_OLDAPI = 0
-	KRB5_C_RANDSOURCE_OSRAND = 1
-	KRB5_C_RANDSOURCE_TIMING = 3
-	KRB5_C_RANDSOURCE_TRUSTEDPARTY = 2
+	KRB5_C_RANDSOURCE_MAX               = 5
+	KRB5_C_RANDSOURCE_OLDAPI            = 0
+	KRB5_C_RANDSOURCE_OSRAND            = 1
+	KRB5_C_RANDSOURCE_TIMING            = 3
+	KRB5_C_RANDSOURCE_TRUSTEDPARTY      = 2
 )
 
 const (
-	CcErrBadAPIVersion = 213
-	CcErrBadCredentialsVersion = 212
-	CcErrBadInternalMessage = 227
-	CcErrBadLockType = 218
-	CcErrBadName = 211
-	CcErrBadParam = 202
-	CcErrCCacheLocked = 216
-	CcErrCCacheNotFound = 221
-	CcErrCCacheUnlocked = 217
-	CcErrClientNotFound = 229
-	CcErrContextLocked = 214
-	CcErrContextNotFound = 222
-	CcErrContextUnlocked = 215
-	CcErrCredentialsNotFound = 220
-	CcErrInvalidCCache = 205
-	CcErrInvalidCCacheIterator = 208
-	CcErrInvalidContext = 204
-	CcErrInvalidCredentials = 207
+	CcErrBadAPIVersion              = 213
+	CcErrBadCredentialsVersion      = 212
+	CcErrBadInternalMessage         = 227
+	CcErrBadLockType                = 218
+	CcErrBadName                    = 211
+	CcErrBadParam                   = 202
+	CcErrCCacheLocked               = 216
+	CcErrCCacheNotFound             = 221
+	CcErrCCacheUnlocked             = 217
+	CcErrClientNotFound             = 229
+	CcErrContextLocked              = 214
+	CcErrContextNotFound            = 222
+	CcErrContextUnlocked            = 215
+	CcErrCredentialsNotFound        = 220
+	CcErrInvalidCCache              = 205
+	CcErrInvalidCCacheIterator      = 208
+	CcErrInvalidContext             = 204
+	CcErrInvalidCredentials         = 207
 	CcErrInvalidCredentialsIterator = 209
-	CcErrInvalidLock = 210
-	CcErrInvalidString = 206
-	CcErrNeverDefault = 219
-	CcErrNoMem = 203
-	CcErrNotImplemented = 228
-	CcErrServerCantBecomeUID = 225
-	CcErrServerInsecure = 224
-	CcErrServerUnavailable = 223
-	CcErrTimeOffsetNotSet = 226
-	CcIteratorEnd = 201
-	CcNoError = 0
+	CcErrInvalidLock                = 210
+	CcErrInvalidString              = 206
+	CcErrNeverDefault               = 219
+	CcErrNoMem                      = 203
+	CcErrNotImplemented             = 228
+	CcErrServerCantBecomeUID        = 225
+	CcErrServerInsecure             = 224
+	CcErrServerUnavailable          = 223
+	CcErrTimeOffsetNotSet           = 226
+	CcIteratorEnd                   = 201
+	CcNoError                       = 0
 )
 
 const (
 	Cc_v4_instance_size = 40
-	Cc_v4_key_size = 8
-	Cc_v4_name_size = 40
-	Cc_v4_realm_size = 40
-	Cc_v4_ticket_size = 1254
+	Cc_v4_key_size      = 8
+	Cc_v4_name_size     = 40
+	Cc_v4_realm_size    = 40
+	Cc_v4_ticket_size   = 1254
 )
 
 const (
-	Ccapi_version_2 = 2
-	Ccapi_version_3 = 3
-	Ccapi_version_4 = 4
-	Ccapi_version_5 = 5
-	Ccapi_version_6 = 6
-	Ccapi_version_7 = 7
+	Ccapi_version_2   = 2
+	Ccapi_version_3   = 3
+	Ccapi_version_4   = 4
+	Ccapi_version_5   = 5
+	Ccapi_version_6   = 6
+	Ccapi_version_7   = 7
 	Ccapi_version_max = 7
 )
 
 const (
 	KerberosVersion_All = 4294967295
 	KerberosVersion_Any = 0
-	KerberosVersion_V4 = 1
-	KerberosVersion_V5 = 2
+	KerberosVersion_V4  = 1
+	KerberosVersion_V5  = 2
 )
 
 const (
-	KlBadLoginOptionsErr = 19279
-	KlBadOptionValueErr = 19379
-	KlBadPasswordErr = 19278
-	KlBadPrincipalErr = 19277
-	KlBadV5ContextErr = 19282
-	KlBufferTooLargeErr = 19377
-	KlBufferTooSmallErr = 19376
-	KlCacheDoesNotExistErr = 19488
-	KlCantContactServerErr = 19776
-	KlCantDisplayUIErr = 19777
-	KlCapsLockErr = 19281
-	KlCredentialsBadAddressErr = 19487
-	KlCredentialsExpiredErr = 19483
+	KlBadLoginOptionsErr           = 19279
+	KlBadOptionValueErr            = 19379
+	KlBadPasswordErr               = 19278
+	KlBadPrincipalErr              = 19277
+	KlBadV5ContextErr              = 19282
+	KlBufferTooLargeErr            = 19377
+	KlBufferTooSmallErr            = 19376
+	KlCacheDoesNotExistErr         = 19488
+	KlCantContactServerErr         = 19776
+	KlCantDisplayUIErr             = 19777
+	KlCapsLockErr                  = 19281
+	KlCredentialsBadAddressErr     = 19487
+	KlCredentialsExpiredErr        = 19483
 	KlCredentialsNeedValidationErr = 19490
-	KlInsecurePasswordErr = 19577
-	KlInvalidOptionErr = 19378
-	KlInvalidVersionErr = 19280
-	KlMemFullErr = 19477
-	KlNoCredentialsErr = 19486
-	KlNoErr = 0
-	KlNoHostnameErr = 19489
-	KlNoRealmsErr = 19484
-	KlParameterErr = 19276
-	KlPasswordChangeFailedErr = 19578
-	KlPasswordMismatchErr = 19576
-	KlPreferencesReadErr = 19478
-	KlPreferencesWriteErr = 19479
-	KlPrincipalDoesNotExistErr = 19481
-	KlRealmDoesNotExistErr = 19485
-	KlServerInsecureErr = 19778
+	KlInsecurePasswordErr          = 19577
+	KlInvalidOptionErr             = 19378
+	KlInvalidVersionErr            = 19280
+	KlMemFullErr                   = 19477
+	KlNoCredentialsErr             = 19486
+	KlNoErr                        = 0
+	KlNoHostnameErr                = 19489
+	KlNoRealmsErr                  = 19484
+	KlParameterErr                 = 19276
+	KlPasswordChangeFailedErr      = 19578
+	KlPasswordMismatchErr          = 19576
+	KlPreferencesReadErr           = 19478
+	KlPreferencesWriteErr          = 19479
+	KlPrincipalDoesNotExistErr     = 19481
+	KlRealmDoesNotExistErr         = 19485
+	KlServerInsecureErr            = 19778
 	KlSystemDefaultDoesNotExistErr = 19482
-	KlUserCanceledErr = 19476
-	KlV5InitializationFailedErr = 19480
+	KlUserCanceledErr              = 19476
+	KlV5InitializationFailedErr    = 19480
 )
 
 const (
 	LoginLibrary_ChangePasswordDialog = 2
-	LoginLibrary_LoginDialog = 0
-	LoginLibrary_OptionsDialog = 1
-	LoginLibrary_ProgressDialog = 3
-	LoginLibrary_PrompterDialog = 4
-	LoginLibrary_UnknownDialog = -1
+	LoginLibrary_LoginDialog          = 0
+	LoginLibrary_OptionsDialog        = 1
+	LoginLibrary_ProgressDialog       = 3
+	LoginLibrary_PrompterDialog       = 4
+	LoginLibrary_UnknownDialog        = -1
 )
 
 const (
 	LoginOption_DefaultAddresslessTicket = 811689074
 	LoginOption_DefaultForwardableTicket = 812021604
-	LoginOption_DefaultProxiableTicket = 812675704
+	LoginOption_DefaultProxiableTicket   = 812675704
 	LoginOption_DefaultRenewableLifetime = 812805222
-	LoginOption_DefaultRenewableTicket = 812807288
-	LoginOption_DefaultTicketLifetime = 812411238
-	LoginOption_LoginInstance = 1768846196
-	LoginOption_LoginName = 1851878757
+	LoginOption_DefaultRenewableTicket   = 812807288
+	LoginOption_DefaultTicketLifetime    = 812411238
+	LoginOption_LoginInstance            = 1768846196
+	LoginOption_LoginName                = 1851878757
 	LoginOption_MaximalRenewableLifetime = 728919142
-	LoginOption_MaximalTicketLifetime = 728525158
+	LoginOption_MaximalTicketLifetime    = 728525158
 	LoginOption_MinimalRenewableLifetime = 762473574
-	LoginOption_MinimalTicketLifetime = 762079590
-	LoginOption_RememberExtras = 1702392946
-	LoginOption_RememberPrincipal = 1886546286
+	LoginOption_MinimalTicketLifetime    = 762079590
+	LoginOption_RememberExtras           = 1702392946
+	LoginOption_RememberPrincipal        = 1886546286
 )
 
 const (
-	RealmList_End = 65535
+	RealmList_End   = 65535
 	RealmList_Start = 0
 )
-

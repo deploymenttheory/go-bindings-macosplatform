@@ -18,10 +18,10 @@ var (
 	// @function   CVBufferCopyAttachments @abstract   Returns a copy of all attachments of a CVBuffer object. It is the caller’s responsibility to release the returned dictionary. @discussion CVBufferCopyAttachments is a convenience call that returns a copy of all attachments with their corresponding keys in a CFDictionary. @param      buffer  Target CVBuffer object. @result     A CFDictionary with all buffer attachments identified by their keys. If no attachment is present or invalid attachment mode,   returns NULL
 	_fnCVBufferCopyAttachments func(unsafe.Pointer, CVAttachmentMode) unsafe.Pointer
 	// @function   CVBufferGetAttachment @abstract   Returns a specific attachment of a CVBuffer object @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferGetAttachment retrieves an attachement identified by a key. @param      buffer  Target CVBuffer object. @param      key	Key in form of a CFString identifying the desired attachment. @param      attachmentMode  Returns the mode of the attachment, if desired.  May be NULL. @result     If found the attachment object
-// Deprecated: since macOS 12.0.
+	// Deprecated: since macOS 12.0.
 	_fnCVBufferGetAttachment func(unsafe.Pointer, unsafe.Pointer, *CVAttachmentMode) unsafe.Pointer
 	// @function   CVBufferGetAttachments @abstract   Returns all attachments of a CVBuffer object @discussion CVBufferGetAttachments is a convenience call that returns all attachments with their corresponding keys in a CFDictionary. @param      buffer  Target CVBuffer object. @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, the dictionary is empty.  Returns NULL for invalid attachment mode.
-// Deprecated: since macOS 12.0.
+	// Deprecated: since macOS 12.0.
 	_fnCVBufferGetAttachments func(unsafe.Pointer, CVAttachmentMode) unsafe.Pointer
 	// @function   CVBufferHasAttachment @abstract   Returns true if an attachment with the passed key is present on a CVBuffer object. @param      buffer  Target CVBuffer object. @param      key    Key in form of a CFString identifying the desired attachment. @result     True if an attachment with this key is present, otherwise false.
 	_fnCVBufferHasAttachment func(unsafe.Pointer, unsafe.Pointer) uint8
@@ -38,7 +38,7 @@ var (
 	// @function   CVBufferSetAttachment @abstract   Sets or adds a attachment of a CVBuffer object @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferGetAttachment stores an attachement identified by a key. If the key doesn't exist, the attachment will be added. If the key does exist, the existing attachment will be replaced. In bouth cases the retain count of the attachment will be incremented. The value can be any CFType but nil has no defined behavior. @param      buffer  Target CVBuffer object. @param      key     Key in form of a CFString identifying the desired attachment. @param      value	Attachment in form af a CF object. @param      attachmentMode	Specifies which attachment mode is desired for this attachment.   A particular attachment key may only exist in a single mode at a time.
 	_fnCVBufferSetAttachment func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, CVAttachmentMode)
 	// @function   CVBufferSetAttachments @abstract   Sets a set of attachments for a CVBuffer @discussion CVBufferSetAttachments is a convenience call that in turn calls CVBufferSetAttachment for each key and value in the given dictionary. All key value pairs must be in the root level of the dictionary. @param      buffer  Target CVBuffer object.
-	_fnCVBufferSetAttachments func(unsafe.Pointer, unsafe.Pointer, CVAttachmentMode)
+	_fnCVBufferSetAttachments                       func(unsafe.Pointer, unsafe.Pointer, CVAttachmentMode)
 	_fnCVColorPrimariesGetIntegerCodePointForString func(unsafe.Pointer) int
 	_fnCVColorPrimariesGetStringForIntegerCodePoint func(int) unsafe.Pointer
 	// @function   CVDisplayLinkCreateWithActiveCGDisplays @abstract   Convenience function to create a CVDisplayLink capable of being used with all active CGDisplays @param      displayLinkOut The newly created CVDisplayLink @result     kCVReturnSuccess if the device was created, or failure
@@ -59,7 +59,7 @@ var (
 	_fnCVDisplayLinkGetNominalOutputVideoRefreshPeriod func(unsafe.Pointer) CVTime
 	// @function   CVDisplayLinkGetOutputVideoLatency @abstract   Retrieves the nominal latency of a CVDisplayLink. @discussion This call allows one to retrieve the device's built in output latency. An NTSC device with one frame of latency might report back 1001/30000 or 2002/60000, for example. @param      displayLink The CVDisplayLink to get the latency period from. @result     A CVTime struct that holds the latency.   This value may be indefinite.
 	_fnCVDisplayLinkGetOutputVideoLatency func(unsafe.Pointer) CVTime
-	_fnCVDisplayLinkGetTypeID func() uint
+	_fnCVDisplayLinkGetTypeID             func() uint
 	// @function   CVDisplayLinkIsRunning @abstract   Retrieves the running state of a CVDisplayLink. @discussion This call queries the running state of the given CVDisplayLink. @param      displayLink The CVDisplayLink to get the running state from. @result     A boolean describing the running state. It returns true if it is running and false if it is not running or the CVDisplayLink is invalid.
 	_fnCVDisplayLinkIsRunning func(unsafe.Pointer) uint8
 	// @function   CVDisplayLinkRelease @abstract   Releases the CVDisplayLink @discussion Use this call to release a CVDisplayLink. @param      displayLink target CVDisplayLinkRef.  NULL safe.
@@ -72,7 +72,7 @@ var (
 	_fnCVDisplayLinkSetCurrentCGDisplayFromOpenGLContext func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVDisplayLinkSetOutputCallback @abstract   Set the renderer output callback function @discussion The DisplayLink will invoke this callback whenever it wants you to output a frame. @param      displayLink target CVDisplayLinkRef @param	callback	CVDisplayLinkOutputCallback function @param	userInfo  User data for the callback to identify the context. @result     CVReturn. kCVReturnSuccess if successfull.
 	_fnCVDisplayLinkSetOutputCallback func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-	_fnCVDisplayLinkSetOutputHandler func(unsafe.Pointer, objc.Block) int32
+	_fnCVDisplayLinkSetOutputHandler  func(unsafe.Pointer, objc.Block) int32
 	// @function   CVDisplayLinkStart @abstract   Start timer for DisplayLink @discussion This call should not be made from inside the CVDisplayLinkOutputCallback @param      displayLink target CVDisplayLinkRef @result     CVReturn. kCVReturnSuccess if successfull. kCVReturnDisplayLinkCallbacksNotSet The DisplayLink cannot be started until the output callback is set.
 	_fnCVDisplayLinkStart func(unsafe.Pointer) int32
 	// @function   CVDisplayLinkStop @abstract   Stop timer for DisplayLink @discussion (description) @param      displayLink target CVDisplayLinkRef @result     CVReturn. kCVReturnSuccess if successfull.
@@ -104,7 +104,7 @@ var (
 	// @function   CVMetalBufferCacheCreateBuffer @abstract   Creates a CVMetalBuffer object from an existing CVImageBuffer @param      allocator The CFAllocatorRef to use for allocating the CVMetalBuffer object. May be NULL. @param      bufferCache The buffer cache object that will manage the buffer. @param      buffer The CVImageBuffer that you want to create a CVMetalBuffer from. @param      bufferOut The newly created buffer object will be placed here. @result     Returns kCVReturnSuccess on success @discussion Creates or returns a cached CVMetalBuffer object mapped to the CVImageBuffer. This creates a live binding between the CVImageBuffer and underlying CVMetalBuffer buffer object. IMPORTANT NOTE: Clients should retain CVMetalBuffer objects until they are done using the images in them. Retaining a CVMetalBuffer is your way to indicate that you're still using the image in the buffer, and that it should not be recycled yet.
 	_fnCVMetalBufferCacheCreateBufferFromImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVMetalBufferCacheFlush @abstract   Performs internal housekeeping/recycling operations @discussion This call must be made periodically to give the buffer cache a chance to do internal housekeeping operations. @param      bufferCache The buffer cache object to flush @param      options Currently unused, set to 0.
-	_fnCVMetalBufferCacheFlush func(unsafe.Pointer, uint64)
+	_fnCVMetalBufferCacheFlush     func(unsafe.Pointer, uint64)
 	_fnCVMetalBufferCacheGetTypeID func() uint
 	// @function   CVMetalBufferGetBuffer @abstract   Returns the Metal MTLBuffer object of the CVMetalBufferRef @param      buffer Target CVMetalBuffer @result     Metal buffer
 	_fnCVMetalBufferGetBuffer func(unsafe.Pointer) metal.MTLBuffer
@@ -114,13 +114,13 @@ var (
 	// @function   CVMetalTextureCacheCreateTextureFromImage @abstract   Creates a CVMetalTexture object from an existing CVImageBuffer @param      allocator The CFAllocatorRef to use for allocating the CVMetalTexture object.  May be NULL. @param      textureCache The texture cache object that will manage the texture. @param      sourceImage The CVImageBuffer that you want to create a CVMetalTexture from. @param      textureAttributes A CFDictionaryRef containing attributes to be used for creating the CVMetalTexture objects.  May be NULL. @param      pixelFormat Specifies the Metal pixel format. @param      width Specifies the width of the texture image. @param      height Specifies the height of the texture image. @param      planeIndex Specifies the plane of the CVImageBuffer to map bind.  Ignored for non-planar CVImageBuffers. @param      textureOut The newly created texture object will be placed here. @result     Returns kCVReturnSuccess on success @discussion Creates or returns a cached CVMetalTexture texture object mapped to the CVImageBuffer and associated params.  This creates a live binding between the CVImageBuffer and underlying CVMetalTexture texture object. IMPORTANT NOTE: Clients should retain CVMetalTexture objects until they are done using the images in them. Retaining a CVMetalTexture is your way to indicate that you're still using the image in the buffer, and that it should not be recycled yet. Note that CoreVideo does not explicitly declare any pixel format types to be Metal compatible.  The assumption is that if the CVPixelBufferMetalCompatibilityKey has been specified, all buffers will be Metal compatible (IOSurface backed), and thus it is the developer's responsibility to choose an appropriate Metal pixel format for the CVPixelBuffers. Here are some example mappings: Mapping a BGRA buffer: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatBGRA8Unorm, width, height, 0, &outTexture); Mapping the luma plane of a 420v buffer: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatR8Unorm, width, height, 0, &outTexture); Mapping the chroma plane of a 420v buffer as a source texture: CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatRG8Unorm width/2, height/2, 1, &outTexture); Mapping a yuvs buffer as a source texture (note: yuvs/f and 2vuy are unpacked and resampled -- not colorspace converted) CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, textureCache, pixelBuffer, NULL, MTLPixelFormatGBGR422, width, height, 1, &outTexture);
 	_fnCVMetalTextureCacheCreateTextureFromImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, metal.MTLPixelFormat, uint, uint, uint, unsafe.Pointer) int32
 	// @function   CVMetalTextureCacheFlush @abstract   Performs internal housekeeping/recycling operations @discussion This call must be made periodically to give the texture cache a chance to do internal housekeeping operations. @param      textureCache The texture cache object to flush @param      options Currently unused, set to 0.
-	_fnCVMetalTextureCacheFlush func(unsafe.Pointer, uint64)
+	_fnCVMetalTextureCacheFlush     func(unsafe.Pointer, uint64)
 	_fnCVMetalTextureCacheGetTypeID func() uint
 	// @function   CVMetalTextureGetCleanTexCoords @abstract   Returns convenient normalized texture coordinates for the part of the image that should be displayed @discussion This function automatically takes into account whether or not the texture is flipped. @param      image Target CVMetalTexture @param      lowerLeft  - array of two floats where the s and t normalized texture coordinates of the lower left corner of the image will be stored @param      lowerRight - array of two floats where the s and t normalized texture coordinates of the lower right corner of the image will be stored @param      upperRight - array of two floats where the s and t normalized texture coordinates of the upper right corner of the image will be stored @param      upperLeft  - array of two floats where the s and t normalized texture coordinates of the upper right corner of the image will be stored
 	_fnCVMetalTextureGetCleanTexCoords func(unsafe.Pointer, *float32, *float32, *float32, *float32)
 	// @function   CVMetalTextureGetTexture @abstract   Returns the Metal MTLTexture object of the CVMetalTextureRef @param      image Target CVMetalTexture @result     Metal texture
 	_fnCVMetalTextureGetTexture func(unsafe.Pointer) metal.MTLTexture
-	_fnCVMetalTextureGetTypeID func() uint
+	_fnCVMetalTextureGetTypeID  func() uint
 	// @function   CVMetalTextureIsFlipped @abstract   Returns whether the image is flipped vertically or not. @param      image Target CVMetalTexture @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left
 	_fnCVMetalTextureIsFlipped func(unsafe.Pointer) uint8
 	// @function   CVOpenGLBufferAttach @param      openGLBuffer The buffer you wish to attach a GL context to @param      cglContext   The CGLContextObj you wish to attach @param      face	     The target GL face enum (0 for non cube maps) @param      level        The mipmap level index you wish to attach to @param      screen       The virtual screen number you want to use @result     kCVReturnSuccess if the attachment succeeded
@@ -129,7 +129,7 @@ var (
 	_fnCVOpenGLBufferCreate func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVOpenGLBufferGetAttributes @param      openGLBuffer Target OpenGL Buffer. @result     CVOpenGLBuffer attributes dictionary, NULL if not set.
 	_fnCVOpenGLBufferGetAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCVOpenGLBufferGetTypeID func() uint
+	_fnCVOpenGLBufferGetTypeID     func() uint
 	// @function   CVOpenGLBufferPoolCreate @abstract   Creates a new OpenGL Buffer pool. @discussion Equivalent to CFRelease, but NULL safe @param      allocator The CFAllocatorRef to use for allocating this buffer pool.  May be NULL. @param      poolAttributes   A CFDictionaryRef containing the attributes to be used for the pool itself. @param      openGLBufferAttributes   A CFDictionaryRef containing the attributes to be used for creating new OpenGLBuffers within the pool. @param      poolOut   The newly created pool will be placed here @result     Returns kCVReturnSuccess on success
 	_fnCVOpenGLBufferPoolCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVOpenGLBufferPoolCreateOpenGLBuffer @abstract   Creates a new OpenGLBuffer object from the pool. @discussion The function creates a new CVOpenGLBuffer with the default attachments using the OpenGL buffer attributes specifed during pool creation. @param      allocator The CFAllocatorRef to use for creating the OpenGL buffer.  May be NULL. @param      openGLBufferPool      The CVOpenGLBufferPool that should create the new CVOpenGLBuffer. @param      openGLBufferOut   The newly created OpenGL buffer will be placed here @result     Returns kCVReturnSuccess on success
@@ -138,7 +138,7 @@ var (
 	_fnCVOpenGLBufferPoolGetAttributes func(unsafe.Pointer) unsafe.Pointer
 	// @function   CVOpenGLBufferPoolGetOpenGLBufferAttributes @abstract   Returns the attributes of OpenGL buffers that will be created from this pool. @discussion This function is provided for those cases where you may need to know some information about the buffers that will be created up front. @param      pool  The CVOpenGLBufferPoolRef to retrieve the attributes from @result     Returns the OpenGL buffer attributes dictionary, or NULL on failure.
 	_fnCVOpenGLBufferPoolGetOpenGLBufferAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCVOpenGLBufferPoolGetTypeID func() uint
+	_fnCVOpenGLBufferPoolGetTypeID                 func() uint
 	// @function   CVOpenGLBufferPoolRelease @abstract   Releases a CVOpenGLBufferPoolRef object @discussion Equivalent to CFRelease, but NULL safe @param      buffer A CVOpenGLBufferPoolRef object that you want to release.
 	_fnCVOpenGLBufferPoolRelease func(unsafe.Pointer)
 	// @function   CVOpenGLBufferPoolRetain @abstract   Retains a CVOpenGLBufferPoolRef object @discussion Equivalent to CFRetain, but NULL safe @param      buffer A CVOpenGLBufferPoolRef object that you want to retain. @result     A CVOpenGLBufferPoolRef object that is the same as the passed in buffer.
@@ -152,7 +152,7 @@ var (
 	// @function   CVOpenGLTextureCacheCreateTextureFromImage @abstract   Creates a CVOpenGLTexture object from an existing CVImageBuffer @param      allocator The CFAllocatorRef to use for allocating the CVOpenGLTexture object.  May be NULL. @param      textureCache The texture cache object that will manage the texture @param      sourceImage The CVImageBuffer that you want to create a CVOpenGLTexture from. @param      attributes For Future use only! - The desired buffer attributes for the CVOpenGLTexture. @param      textureOut The newly created texture object will be placed here. @result     Returns kCVReturnSuccess on success
 	_fnCVOpenGLTextureCacheCreateTextureFromImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVOpenGLTextureCacheFlush @abstract   Performs internal housekeeping/recycling operations @discussion This call must be made periodically to give the texture cache a chance to make OpenGL calls on the OpenGL context used to create it in order to do housekeeping operations. @param      textureCache The texture cache object to flush @param      options Currently unused, set to 0. @result     Returns kCVReturnSuccess on success
-	_fnCVOpenGLTextureCacheFlush func(unsafe.Pointer, uint64)
+	_fnCVOpenGLTextureCacheFlush     func(unsafe.Pointer, uint64)
 	_fnCVOpenGLTextureCacheGetTypeID func() uint
 	// @function   CVOpenGLTextureCacheRelease @abstract   Releases a CVOpenGLTextureCache object @discussion Equivalent to CFRelease, but NULL safe @param      buffer A CVOpenGLTextureCache object that you want to release.
 	_fnCVOpenGLTextureCacheRelease func(unsafe.Pointer)
@@ -207,7 +207,7 @@ var (
 	_fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) uint
 	// @function   CVPixelBufferGetPlaneCount @abstract   Returns number of planes of the PixelBuffer. @param      pixelBuffer Target PixelBuffer. @result     Number of planes.  Returns 0 for non-planar CVPixelBufferRefs.
 	_fnCVPixelBufferGetPlaneCount func(unsafe.Pointer) uint
-	_fnCVPixelBufferGetTypeID func() uint
+	_fnCVPixelBufferGetTypeID     func() uint
 	// @function   CVPixelBufferGetWidth @abstract   Returns the width of the PixelBuffer. @param      pixelBuffer Target PixelBuffer. @result     Width in pixels.
 	_fnCVPixelBufferGetWidth func(unsafe.Pointer) uint
 	// @function   CVPixelBufferGetWidthOfPlane @abstract   Returns the width of the plane at planeIndex in the PixelBuffer. @discussion On OSX 10.10 and earlier, or iOS 8 and earlier, calling this function with a non-planar buffer will have undefined behavior. @param      pixelBuffer Target PixelBuffer. @param      planeIndex  Identifying the plane. @result     Width in pixels, or 0 for non-planar CVPixelBufferRefs.
@@ -221,7 +221,7 @@ var (
 	// @function   CVPixelBufferPoolCreate @abstract   Creates a new Pixel Buffer pool. @param      allocator The CFAllocatorRef to use for allocating this buffer pool.  May be NULL. @param      attributes   A CFDictionaryRef containing the attributes to be used for creating new PixelBuffers within the pool. @param      poolOut   The newly created pool will be placed here @result     Returns kCVReturnSuccess on success
 	_fnCVPixelBufferPoolCreate func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function   CVPixelBufferPoolCreatePixelBuffer @abstract   Creates a new PixelBuffer object from the pool. @discussion The function creates a new (attachment-free) CVPixelBuffer using the pixel buffer attributes specifed during pool creation. @param      allocator The CFAllocatorRef to use for creating the pixel buffer.  May be NULL. @param      pool      The CVPixelBufferPool that should create the new CVPixelBuffer. @param      pixelBufferOut   The newly created pixel buffer will be placed here @result     Returns kCVReturnSuccess on success
-	_fnCVPixelBufferPoolCreatePixelBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+	_fnCVPixelBufferPoolCreatePixelBuffer                  func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	_fnCVPixelBufferPoolCreatePixelBufferWithAuxAttributes func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 	// @function       CVPixelBufferPoolFlush @abstract       Frees as many buffers from the pool as possible. @discussion     By default, this function will free all aged out buffers.  Setting the kCVPixelBufferPoolFlushExcessBuffers flag will cause this call to free all unused buffers regardless of age. @param		pool    The CVPixelBufferPool to be flushed. @param		options Set to kCVPixelBufferPoolFlushExcessBuffers to free all unused buffers regardless of their age.
 	_fnCVPixelBufferPoolFlush func(unsafe.Pointer, CVPixelBufferPoolFlushFlags)
@@ -229,7 +229,7 @@ var (
 	_fnCVPixelBufferPoolGetAttributes func(unsafe.Pointer) unsafe.Pointer
 	// @function   CVPixelBufferPoolGetPixelBufferAttributes @abstract   Returns the attributes of pixel buffers that will be created from this pool. @discussion This function is provided for those cases where you may need to know some information about the buffers that will be created up front. @param      pool  The CVPixelBufferPoolRef to retrieve the attributes from @result     Returns the pixel buffer attributes dictionary, or NULL on failure.
 	_fnCVPixelBufferPoolGetPixelBufferAttributes func(unsafe.Pointer) unsafe.Pointer
-	_fnCVPixelBufferPoolGetTypeID func() uint
+	_fnCVPixelBufferPoolGetTypeID                func() uint
 	// @function   CVPixelBufferPoolRelease @abstract   Releases a CVPixelBufferPoolRef object @discussion Equivalent to CFRelease, but NULL safe @param      buffer A CVPixelBufferPoolRef object that you want to release.
 	_fnCVPixelBufferPoolRelease func(unsafe.Pointer)
 	// @function   CVPixelBufferPoolRetain @abstract   Retains a CVPixelBufferPoolRef object @discussion Equivalent to CFRetain, but NULL safe @param      buffer A CVPixelBufferPoolRef object that you want to retain. @result     A CVPixelBufferPoolRef object that is the same as the passed in buffer.
@@ -239,16 +239,16 @@ var (
 	// @function   CVPixelBufferRetain @abstract   Retains a CVPixelBuffer object @discussion Equivalent to CFRetain, but NULL safe @param      texture A CVPixelBuffer object that you want to retain. @result     A CVPixelBuffer object that is the same as the passed in buffer.
 	_fnCVPixelBufferRetain func(unsafe.Pointer) unsafe.Pointer
 	// @function   CVPixelBufferUnlockBaseAddress @abstract   Description Unlocks the BaseAddress of the PixelBuffer. @param      pixelBuffer Target PixelBuffer. @param      unlockFlags See CVPixelBufferLockFlags. @result     kCVReturnSuccess if the unlock succeeded, or error code on failure
-	_fnCVPixelBufferUnlockBaseAddress func(unsafe.Pointer, CVPixelBufferLockFlags) int32
-	_fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes func(unsafe.Pointer) unsafe.Pointer
-	_fnCVPixelFormatDescriptionCreateWithPixelFormatType func(unsafe.Pointer, uint) unsafe.Pointer
+	_fnCVPixelBufferUnlockBaseAddress                                 func(unsafe.Pointer, CVPixelBufferLockFlags) int32
+	_fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes     func(unsafe.Pointer) unsafe.Pointer
+	_fnCVPixelFormatDescriptionCreateWithPixelFormatType              func(unsafe.Pointer, uint) unsafe.Pointer
 	_fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType func(unsafe.Pointer, uint)
 	// @function CVPixelFormatTypeCopyFourCharCodeString @abstract Creates a string with a formatted representation of a pixel format @param pixelFormat The pixel format to convert @result A string with a user displayable conversion of a pixel format.
-	_fnCVPixelFormatTypeCopyFourCharCodeString func(uint) unsafe.Pointer
+	_fnCVPixelFormatTypeCopyFourCharCodeString        func(uint) unsafe.Pointer
 	_fnCVTransferFunctionGetIntegerCodePointForString func(unsafe.Pointer) int
 	_fnCVTransferFunctionGetStringForIntegerCodePoint func(int) unsafe.Pointer
-	_fnCVYCbCrMatrixGetIntegerCodePointForString func(unsafe.Pointer) int
-	_fnCVYCbCrMatrixGetStringForIntegerCodePoint func(int) unsafe.Pointer
+	_fnCVYCbCrMatrixGetIntegerCodePointForString      func(unsafe.Pointer) int
+	_fnCVYCbCrMatrixGetStringForIntegerCodePoint      func(int) unsafe.Pointer
 )
 
 // @function   CVBufferCopyAttachment @abstract   Returns a retained specific attachment of a CVBuffer object. It is the caller’s responsibility to release the returned value. @discussion You can attach any CF object to a CVBuffer object to store additional information. CVBufferCopyAttachment retrieves a retained attachment identified by a key. @param      buffer  Target CVBuffer object. @param      key    Key in form of a CFString identifying the desired attachment. @param      attachmentMode  Returns the mode of the attachment, if desired.  May be NULL. @result     If found the attachment object, return the value; otherwize, return NULL.
@@ -877,4 +877,3 @@ func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString unsafe.Pointer)
 func CVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint int) unsafe.Pointer {
 	return _fnCVYCbCrMatrixGetStringForIntegerCodePoint(yCbCrMatrixCodePoint)
 }
-

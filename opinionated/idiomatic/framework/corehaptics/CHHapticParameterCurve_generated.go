@@ -85,4 +85,3 @@ type HapticParameterCurveable interface {
 }
 
 var _ HapticParameterCurveable = (*HapticParameterCurve)(nil)
-

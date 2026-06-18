@@ -65,4 +65,3 @@ type ReservationActionable interface {
 }
 
 var _ ReservationActionable = (*ReservationAction)(nil)
-

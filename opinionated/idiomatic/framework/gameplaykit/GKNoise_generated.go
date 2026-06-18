@@ -179,4 +179,3 @@ type Noiseable interface {
 }
 
 var _ Noiseable = (*Noise)(nil)
-

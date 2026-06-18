@@ -16,11 +16,11 @@ type CHHapticEventParameter struct {
 }
 
 var (
-	_clsCHHapticEventParameter = _objcClass("CHHapticEventParameter")
+	_clsCHHapticEventParameter                         = _objcClass("CHHapticEventParameter")
 	_cHHapticEventParameterSelInitWithParameterIDValue = objc.RegisterName("initWithParameterID:value:")
-	_cHHapticEventParameterSelParameterID = objc.RegisterName("parameterID")
-	_cHHapticEventParameterSelValue = objc.RegisterName("value")
-	_cHHapticEventParameterSelSetValue = objc.RegisterName("setValue:")
+	_cHHapticEventParameterSelParameterID              = objc.RegisterName("parameterID")
+	_cHHapticEventParameterSelValue                    = objc.RegisterName("value")
+	_cHHapticEventParameterSelSetValue                 = objc.RegisterName("setValue:")
 )
 
 func CHHapticEventParameterFromID(id objc.ID) *CHHapticEventParameter {
@@ -35,14 +35,18 @@ func CHHapticEventParameterFromID(id objc.ID) *CHHapticEventParameter {
 
 func (o *CHHapticEventParameter) InitWithParameterIDValue(parameterID *foundation.NSString, value float32) *CHHapticEventParameter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventParameterSelInitWithParameterIDValue, parameterID.Ptr(), value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CHHapticEventParameterFromID(_ret)
 }
 
 // @property parameterID The ID of the event parameter to use.
 func (o *CHHapticEventParameter) ParameterID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cHHapticEventParameterSelParameterID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -55,4 +59,3 @@ func (o *CHHapticEventParameter) Value() float32 {
 func (o *CHHapticEventParameter) SetValue(value float32) {
 	o.Ptr().Send(_cHHapticEventParameterSelSetValue, value)
 }
-

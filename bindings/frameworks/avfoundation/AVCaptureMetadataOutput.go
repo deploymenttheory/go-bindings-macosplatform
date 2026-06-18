@@ -17,17 +17,17 @@ type AVCaptureMetadataOutput struct {
 }
 
 var (
-	_clsAVCaptureMetadataOutput = _objcClass("AVCaptureMetadataOutput")
-	_aVCaptureMetadataOutputSelInit = objc.RegisterName("init")
-	_aVCaptureMetadataOutputSelNew = objc.RegisterName("new")
-	_aVCaptureMetadataOutputSelSetMetadataObjectsDelegateQueue = objc.RegisterName("setMetadataObjectsDelegate:queue:")
-	_aVCaptureMetadataOutputSelMetadataObjectsDelegate = objc.RegisterName("metadataObjectsDelegate")
-	_aVCaptureMetadataOutputSelMetadataObjectsCallbackQueue = objc.RegisterName("metadataObjectsCallbackQueue")
-	_aVCaptureMetadataOutputSelAvailableMetadataObjectTypes = objc.RegisterName("availableMetadataObjectTypes")
-	_aVCaptureMetadataOutputSelMetadataObjectTypes = objc.RegisterName("metadataObjectTypes")
-	_aVCaptureMetadataOutputSelSetMetadataObjectTypes = objc.RegisterName("setMetadataObjectTypes:")
-	_aVCaptureMetadataOutputSelRectOfInterest = objc.RegisterName("rectOfInterest")
-	_aVCaptureMetadataOutputSelSetRectOfInterest = objc.RegisterName("setRectOfInterest:")
+	_clsAVCaptureMetadataOutput                                                    = _objcClass("AVCaptureMetadataOutput")
+	_aVCaptureMetadataOutputSelInit                                                = objc.RegisterName("init")
+	_aVCaptureMetadataOutputSelNew                                                 = objc.RegisterName("new")
+	_aVCaptureMetadataOutputSelSetMetadataObjectsDelegateQueue                     = objc.RegisterName("setMetadataObjectsDelegate:queue:")
+	_aVCaptureMetadataOutputSelMetadataObjectsDelegate                             = objc.RegisterName("metadataObjectsDelegate")
+	_aVCaptureMetadataOutputSelMetadataObjectsCallbackQueue                        = objc.RegisterName("metadataObjectsCallbackQueue")
+	_aVCaptureMetadataOutputSelAvailableMetadataObjectTypes                        = objc.RegisterName("availableMetadataObjectTypes")
+	_aVCaptureMetadataOutputSelMetadataObjectTypes                                 = objc.RegisterName("metadataObjectTypes")
+	_aVCaptureMetadataOutputSelSetMetadataObjectTypes                              = objc.RegisterName("setMetadataObjectTypes:")
+	_aVCaptureMetadataOutputSelRectOfInterest                                      = objc.RegisterName("rectOfInterest")
+	_aVCaptureMetadataOutputSelSetRectOfInterest                                   = objc.RegisterName("setRectOfInterest:")
 	_aVCaptureMetadataOutputSelRequiredMetadataObjectTypesForCinematicVideoCapture = objc.RegisterName("requiredMetadataObjectTypesForCinematicVideoCapture")
 )
 
@@ -43,7 +43,9 @@ func AVCaptureMetadataOutputFromID(id objc.ID) *AVCaptureMetadataOutput {
 
 func (o *AVCaptureMetadataOutput) Init() *AVCaptureMetadataOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMetadataOutputSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureMetadataOutputFromID(_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *AVCaptureMetadataOutput) MetadataObjectsDelegate() AVCaptureMetadataOut
 // @property metadataObjectsCallbackQueue @abstract The dispatch queue on which all metadata object delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
 func (o *AVCaptureMetadataOutput) MetadataObjectsCallbackQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureMetadataOutputSelMetadataObjectsCallbackQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -96,9 +100,8 @@ func (o *AVCaptureMetadataOutput) SetRectOfInterest(rectOfInterest corefoundatio
 	o.Ptr().Send(_aVCaptureMetadataOutputSelSetRectOfInterest, rectOfInterest)
 }
 
-// The required metadata object types when Cinematic Video capture is enabled. Since the Cinematic Video algorithm requires a particular set of metadata objects to function optimally, you must set your ``metadataObjectTypes`` property to this property's returned value if you've set ``AVCaptureDeviceInput/cinematicVideoCaptureEnabled`` to `true` on the connected device input, otherwise an `NSInvalidArgumentException` is thrown.
+// The required metadata object types when Cinematic Video capture is enabled. Since the Cinematic Video algorithm requires a particular set of metadata objects to function optimally, you must set your “metadataObjectTypes“ property to this property's returned value if you've set “AVCaptureDeviceInput/cinematicVideoCaptureEnabled“ to `true` on the connected device input, otherwise an `NSInvalidArgumentException` is thrown.
 func (o *AVCaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapture() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _aVCaptureMetadataOutputSelRequiredMetadataObjectTypesForCinematicVideoCapture)
 	return _ret
 }
-

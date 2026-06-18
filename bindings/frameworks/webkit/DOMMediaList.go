@@ -16,13 +16,13 @@ type DOMMediaList struct {
 }
 
 var (
-	_clsDOMMediaList = _objcClass("DOMMediaList")
-	_dOMMediaListSelItem = objc.RegisterName("item:")
+	_clsDOMMediaList             = _objcClass("DOMMediaList")
+	_dOMMediaListSelItem         = objc.RegisterName("item:")
 	_dOMMediaListSelDeleteMedium = objc.RegisterName("deleteMedium:")
 	_dOMMediaListSelAppendMedium = objc.RegisterName("appendMedium:")
-	_dOMMediaListSelMediaText = objc.RegisterName("mediaText")
+	_dOMMediaListSelMediaText    = objc.RegisterName("mediaText")
 	_dOMMediaListSelSetMediaText = objc.RegisterName("setMediaText:")
-	_dOMMediaListSelLength = objc.RegisterName("length")
+	_dOMMediaListSelLength       = objc.RegisterName("length")
 )
 
 func DOMMediaListFromID(id objc.ID) *DOMMediaList {
@@ -37,7 +37,9 @@ func DOMMediaListFromID(id objc.ID) *DOMMediaList {
 
 func (o *DOMMediaList) Item(index uint) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMediaListSelItem, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *DOMMediaList) AppendMedium(newMedium *foundation.NSString) {
 
 func (o *DOMMediaList) MediaText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMMediaListSelMediaText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *DOMMediaList) Length() uint {
 	_ret := objc.Send[uint](o.Ptr(), _dOMMediaListSelLength)
 	return _ret
 }
-

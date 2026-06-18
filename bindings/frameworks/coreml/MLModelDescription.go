@@ -16,17 +16,17 @@ type MLModelDescription struct {
 }
 
 var (
-	_clsMLModelDescription = _objcClass("MLModelDescription")
-	_mLModelDescriptionSelInputDescriptionsByName = objc.RegisterName("inputDescriptionsByName")
-	_mLModelDescriptionSelOutputDescriptionsByName = objc.RegisterName("outputDescriptionsByName")
-	_mLModelDescriptionSelStateDescriptionsByName = objc.RegisterName("stateDescriptionsByName")
-	_mLModelDescriptionSelPredictedFeatureName = objc.RegisterName("predictedFeatureName")
-	_mLModelDescriptionSelPredictedProbabilitiesName = objc.RegisterName("predictedProbabilitiesName")
-	_mLModelDescriptionSelMetadata = objc.RegisterName("metadata")
-	_mLModelDescriptionSelClassLabels = objc.RegisterName("classLabels")
-	_mLModelDescriptionSelIsUpdatable = objc.RegisterName("isUpdatable")
+	_clsMLModelDescription                                = _objcClass("MLModelDescription")
+	_mLModelDescriptionSelInputDescriptionsByName         = objc.RegisterName("inputDescriptionsByName")
+	_mLModelDescriptionSelOutputDescriptionsByName        = objc.RegisterName("outputDescriptionsByName")
+	_mLModelDescriptionSelStateDescriptionsByName         = objc.RegisterName("stateDescriptionsByName")
+	_mLModelDescriptionSelPredictedFeatureName            = objc.RegisterName("predictedFeatureName")
+	_mLModelDescriptionSelPredictedProbabilitiesName      = objc.RegisterName("predictedProbabilitiesName")
+	_mLModelDescriptionSelMetadata                        = objc.RegisterName("metadata")
+	_mLModelDescriptionSelClassLabels                     = objc.RegisterName("classLabels")
+	_mLModelDescriptionSelIsUpdatable                     = objc.RegisterName("isUpdatable")
 	_mLModelDescriptionSelTrainingInputDescriptionsByName = objc.RegisterName("trainingInputDescriptionsByName")
-	_mLModelDescriptionSelParameterDescriptionsByKey = objc.RegisterName("parameterDescriptionsByKey")
+	_mLModelDescriptionSelParameterDescriptionsByKey      = objc.RegisterName("parameterDescriptionsByKey")
 )
 
 func MLModelDescriptionFromID(id objc.ID) *MLModelDescription {
@@ -60,14 +60,18 @@ func (o *MLModelDescription) StateDescriptionsByName() *foundation.NSDictionary[
 // Name of the primary target / predicted output feature in the output descriptions
 func (o *MLModelDescription) PredictedFeatureName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelPredictedFeatureName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Key for all predicted probabilities stored as a MLFeatureTypeDictionary in the output descriptions
 func (o *MLModelDescription) PredictedProbabilitiesName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelPredictedProbabilitiesName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -95,7 +99,8 @@ func (o *MLModelDescription) TrainingInputDescriptionsByName() *foundation.NSDic
 
 func (o *MLModelDescription) ParameterDescriptionsByKey() *foundation.NSDictionary[*MLParameterKey, *MLParameterDescription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelDescriptionSelParameterDescriptionsByKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDictionaryFromID[*MLParameterKey, *MLParameterDescription](_ret)
 }
-

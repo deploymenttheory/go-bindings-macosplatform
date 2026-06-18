@@ -64,4 +64,3 @@ type BasePlayerable interface {
 }
 
 var _ BasePlayerable = (*BasePlayer)(nil)
-

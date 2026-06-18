@@ -16,7 +16,7 @@ type IOBluetoothUserNotification struct {
 }
 
 var (
-	_clsIOBluetoothUserNotification = _objcClass("IOBluetoothUserNotification")
+	_clsIOBluetoothUserNotification           = _objcClass("IOBluetoothUserNotification")
 	_iOBluetoothUserNotificationSelUnregister = objc.RegisterName("unregister")
 )
 
@@ -33,4 +33,3 @@ func IOBluetoothUserNotificationFromID(id objc.ID) *IOBluetoothUserNotification 
 func (o *IOBluetoothUserNotification) Unregister() {
 	o.Ptr().Send(_iOBluetoothUserNotificationSelUnregister)
 }
-

@@ -120,4 +120,3 @@ type ShareMetadataable interface {
 }
 
 var _ ShareMetadataable = (*ShareMetadata)(nil)
-

@@ -16,7 +16,9 @@ type MTREnergyEVSEClusterClearTargetsParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterClearTargetsParams].
-func (x *MTREnergyEVSEClusterClearTargetsParams) Unwrap() *raw.MTREnergyEVSEClusterClearTargetsParams { return x.inner }
+func (x *MTREnergyEVSEClusterClearTargetsParams) Unwrap() *raw.MTREnergyEVSEClusterClearTargetsParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTREnergyEVSEClusterClearTargetsParamsable interface {
 }
 
 var _ MTREnergyEVSEClusterClearTargetsParamsable = (*MTREnergyEVSEClusterClearTargetsParams)(nil)
-

@@ -19,39 +19,39 @@ type NSObjectController struct {
 }
 
 var (
-	_clsNSObjectController = _objcClass("NSObjectController")
-	_nSObjectControllerSelInitWithContent = objc.RegisterName("initWithContent:")
-	_nSObjectControllerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSObjectControllerSelPrepareContent = objc.RegisterName("prepareContent")
-	_nSObjectControllerSelNewObject = objc.RegisterName("newObject")
-	_nSObjectControllerSelAddObject = objc.RegisterName("addObject:")
-	_nSObjectControllerSelRemoveObject = objc.RegisterName("removeObject:")
-	_nSObjectControllerSelAdd = objc.RegisterName("add:")
-	_nSObjectControllerSelRemove = objc.RegisterName("remove:")
-	_nSObjectControllerSelValidateUserInterfaceItem = objc.RegisterName("validateUserInterfaceItem:")
-	_nSObjectControllerSelContent = objc.RegisterName("content")
-	_nSObjectControllerSelSetContent = objc.RegisterName("setContent:")
-	_nSObjectControllerSelSelection = objc.RegisterName("selection")
-	_nSObjectControllerSelSelectedObjects = objc.RegisterName("selectedObjects")
-	_nSObjectControllerSelAutomaticallyPreparesContent = objc.RegisterName("automaticallyPreparesContent")
+	_clsNSObjectController                                = _objcClass("NSObjectController")
+	_nSObjectControllerSelInitWithContent                 = objc.RegisterName("initWithContent:")
+	_nSObjectControllerSelInitWithCoder                   = objc.RegisterName("initWithCoder:")
+	_nSObjectControllerSelPrepareContent                  = objc.RegisterName("prepareContent")
+	_nSObjectControllerSelNewObject                       = objc.RegisterName("newObject")
+	_nSObjectControllerSelAddObject                       = objc.RegisterName("addObject:")
+	_nSObjectControllerSelRemoveObject                    = objc.RegisterName("removeObject:")
+	_nSObjectControllerSelAdd                             = objc.RegisterName("add:")
+	_nSObjectControllerSelRemove                          = objc.RegisterName("remove:")
+	_nSObjectControllerSelValidateUserInterfaceItem       = objc.RegisterName("validateUserInterfaceItem:")
+	_nSObjectControllerSelContent                         = objc.RegisterName("content")
+	_nSObjectControllerSelSetContent                      = objc.RegisterName("setContent:")
+	_nSObjectControllerSelSelection                       = objc.RegisterName("selection")
+	_nSObjectControllerSelSelectedObjects                 = objc.RegisterName("selectedObjects")
+	_nSObjectControllerSelAutomaticallyPreparesContent    = objc.RegisterName("automaticallyPreparesContent")
 	_nSObjectControllerSelSetAutomaticallyPreparesContent = objc.RegisterName("setAutomaticallyPreparesContent:")
-	_nSObjectControllerSelObjectClass = objc.RegisterName("objectClass")
-	_nSObjectControllerSelSetObjectClass = objc.RegisterName("setObjectClass:")
-	_nSObjectControllerSelIsEditable = objc.RegisterName("isEditable")
-	_nSObjectControllerSelSetEditable = objc.RegisterName("setEditable:")
-	_nSObjectControllerSelCanAdd = objc.RegisterName("canAdd")
-	_nSObjectControllerSelCanRemove = objc.RegisterName("canRemove")
-	_nSObjectControllerSelFetchWithRequestMergeError = objc.RegisterName("fetchWithRequest:merge:error:")
-	_nSObjectControllerSelFetch = objc.RegisterName("fetch:")
-	_nSObjectControllerSelDefaultFetchRequest = objc.RegisterName("defaultFetchRequest")
-	_nSObjectControllerSelManagedObjectContext = objc.RegisterName("managedObjectContext")
-	_nSObjectControllerSelSetManagedObjectContext = objc.RegisterName("setManagedObjectContext:")
-	_nSObjectControllerSelEntityName = objc.RegisterName("entityName")
-	_nSObjectControllerSelSetEntityName = objc.RegisterName("setEntityName:")
-	_nSObjectControllerSelFetchPredicate = objc.RegisterName("fetchPredicate")
-	_nSObjectControllerSelSetFetchPredicate = objc.RegisterName("setFetchPredicate:")
-	_nSObjectControllerSelUsesLazyFetching = objc.RegisterName("usesLazyFetching")
-	_nSObjectControllerSelSetUsesLazyFetching = objc.RegisterName("setUsesLazyFetching:")
+	_nSObjectControllerSelObjectClass                     = objc.RegisterName("objectClass")
+	_nSObjectControllerSelSetObjectClass                  = objc.RegisterName("setObjectClass:")
+	_nSObjectControllerSelIsEditable                      = objc.RegisterName("isEditable")
+	_nSObjectControllerSelSetEditable                     = objc.RegisterName("setEditable:")
+	_nSObjectControllerSelCanAdd                          = objc.RegisterName("canAdd")
+	_nSObjectControllerSelCanRemove                       = objc.RegisterName("canRemove")
+	_nSObjectControllerSelFetchWithRequestMergeError      = objc.RegisterName("fetchWithRequest:merge:error:")
+	_nSObjectControllerSelFetch                           = objc.RegisterName("fetch:")
+	_nSObjectControllerSelDefaultFetchRequest             = objc.RegisterName("defaultFetchRequest")
+	_nSObjectControllerSelManagedObjectContext            = objc.RegisterName("managedObjectContext")
+	_nSObjectControllerSelSetManagedObjectContext         = objc.RegisterName("setManagedObjectContext:")
+	_nSObjectControllerSelEntityName                      = objc.RegisterName("entityName")
+	_nSObjectControllerSelSetEntityName                   = objc.RegisterName("setEntityName:")
+	_nSObjectControllerSelFetchPredicate                  = objc.RegisterName("fetchPredicate")
+	_nSObjectControllerSelSetFetchPredicate               = objc.RegisterName("setFetchPredicate:")
+	_nSObjectControllerSelUsesLazyFetching                = objc.RegisterName("usesLazyFetching")
+	_nSObjectControllerSelSetUsesLazyFetching             = objc.RegisterName("setUsesLazyFetching:")
 )
 
 func NSObjectControllerFromID(id objc.ID) *NSObjectController {
@@ -66,13 +66,17 @@ func NSObjectControllerFromID(id objc.ID) *NSObjectController {
 
 func (o *NSObjectController) InitWithContent(content objc.ID) *NSObjectController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelInitWithContent, content)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectControllerFromID(_ret)
 }
 
 func (o *NSObjectController) InitWithCoder(coder *foundation.NSCoder) *NSObjectController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSObjectControllerFromID(_ret)
 }
 
@@ -182,7 +186,9 @@ func (o *NSObjectController) DefaultFetchRequest() *coredata.NSFetchRequest[objc
 
 func (o *NSObjectController) ManagedObjectContext() *coredata.NSManagedObjectContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelManagedObjectContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return coredata.NSManagedObjectContextFromID(_ret)
 }
 
@@ -192,7 +198,9 @@ func (o *NSObjectController) SetManagedObjectContext(managedObjectContext *cored
 
 func (o *NSObjectController) EntityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelEntityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -202,7 +210,9 @@ func (o *NSObjectController) SetEntityName(entityName *foundation.NSString) {
 
 func (o *NSObjectController) FetchPredicate() *foundation.NSPredicate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSObjectControllerSelFetchPredicate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSPredicateFromID(_ret)
 }
 
@@ -218,4 +228,3 @@ func (o *NSObjectController) UsesLazyFetching() bool {
 func (o *NSObjectController) SetUsesLazyFetching(usesLazyFetching bool) {
 	o.Ptr().Send(_nSObjectControllerSelSetUsesLazyFetching, usesLazyFetching)
 }
-

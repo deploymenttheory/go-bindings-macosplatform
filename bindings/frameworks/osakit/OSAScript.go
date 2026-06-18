@@ -18,34 +18,34 @@ type OSAScript struct {
 }
 
 var (
-	_clsOSAScript = _objcClass("OSAScript")
-	_oSAScriptSelScriptDataDescriptorWithContentsOfURL = objc.RegisterName("scriptDataDescriptorWithContentsOfURL:")
-	_oSAScriptSelInitWithSource = objc.RegisterName("initWithSource:")
-	_oSAScriptSelInitWithSourceLanguage = objc.RegisterName("initWithSource:language:")
-	_oSAScriptSelInitWithSourceFromURLLanguageInstanceUsingStorageOptions = objc.RegisterName("initWithSource:fromURL:languageInstance:usingStorageOptions:")
-	_oSAScriptSelInitWithContentsOfURLError = objc.RegisterName("initWithContentsOfURL:error:")
-	_oSAScriptSelInitWithContentsOfURLLanguageError = objc.RegisterName("initWithContentsOfURL:language:error:")
-	_oSAScriptSelInitWithContentsOfURLLanguageInstanceUsingStorageOptionsError = objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:")
-	_oSAScriptSelInitWithCompiledDataError = objc.RegisterName("initWithCompiledData:error:")
-	_oSAScriptSelInitWithCompiledDataFromURLUsingStorageOptionsError = objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:")
+	_clsOSAScript                                                                            = _objcClass("OSAScript")
+	_oSAScriptSelScriptDataDescriptorWithContentsOfURL                                       = objc.RegisterName("scriptDataDescriptorWithContentsOfURL:")
+	_oSAScriptSelInitWithSource                                                              = objc.RegisterName("initWithSource:")
+	_oSAScriptSelInitWithSourceLanguage                                                      = objc.RegisterName("initWithSource:language:")
+	_oSAScriptSelInitWithSourceFromURLLanguageInstanceUsingStorageOptions                    = objc.RegisterName("initWithSource:fromURL:languageInstance:usingStorageOptions:")
+	_oSAScriptSelInitWithContentsOfURLError                                                  = objc.RegisterName("initWithContentsOfURL:error:")
+	_oSAScriptSelInitWithContentsOfURLLanguageError                                          = objc.RegisterName("initWithContentsOfURL:language:error:")
+	_oSAScriptSelInitWithContentsOfURLLanguageInstanceUsingStorageOptionsError               = objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:")
+	_oSAScriptSelInitWithCompiledDataError                                                   = objc.RegisterName("initWithCompiledData:error:")
+	_oSAScriptSelInitWithCompiledDataFromURLUsingStorageOptionsError                         = objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:")
 	_oSAScriptSelInitWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError = objc.RegisterName("initWithScriptDataDescriptor:fromURL:languageInstance:usingStorageOptions:error:")
-	_oSAScriptSelCompileAndReturnError = objc.RegisterName("compileAndReturnError:")
-	_oSAScriptSelExecuteAndReturnError = objc.RegisterName("executeAndReturnError:")
-	_oSAScriptSelExecuteAppleEventError = objc.RegisterName("executeAppleEvent:error:")
-	_oSAScriptSelExecuteAndReturnDisplayValueError = objc.RegisterName("executeAndReturnDisplayValue:error:")
-	_oSAScriptSelExecuteHandlerWithNameArgumentsError = objc.RegisterName("executeHandlerWithName:arguments:error:")
-	_oSAScriptSelRichTextFromDescriptor = objc.RegisterName("richTextFromDescriptor:")
-	_oSAScriptSelWriteToURLOfTypeError = objc.RegisterName("writeToURL:ofType:error:")
-	_oSAScriptSelWriteToURLOfTypeUsingStorageOptionsError = objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:")
-	_oSAScriptSelCompiledDataForTypeUsingStorageOptionsError = objc.RegisterName("compiledDataForType:usingStorageOptions:error:")
-	_oSAScriptSelSource = objc.RegisterName("source")
-	_oSAScriptSelUrl = objc.RegisterName("url")
-	_oSAScriptSelLanguage = objc.RegisterName("language")
-	_oSAScriptSelSetLanguage = objc.RegisterName("setLanguage:")
-	_oSAScriptSelLanguageInstance = objc.RegisterName("languageInstance")
-	_oSAScriptSelSetLanguageInstance = objc.RegisterName("setLanguageInstance:")
-	_oSAScriptSelIsCompiled = objc.RegisterName("isCompiled")
-	_oSAScriptSelRichTextSource = objc.RegisterName("richTextSource")
+	_oSAScriptSelCompileAndReturnError                                                       = objc.RegisterName("compileAndReturnError:")
+	_oSAScriptSelExecuteAndReturnError                                                       = objc.RegisterName("executeAndReturnError:")
+	_oSAScriptSelExecuteAppleEventError                                                      = objc.RegisterName("executeAppleEvent:error:")
+	_oSAScriptSelExecuteAndReturnDisplayValueError                                           = objc.RegisterName("executeAndReturnDisplayValue:error:")
+	_oSAScriptSelExecuteHandlerWithNameArgumentsError                                        = objc.RegisterName("executeHandlerWithName:arguments:error:")
+	_oSAScriptSelRichTextFromDescriptor                                                      = objc.RegisterName("richTextFromDescriptor:")
+	_oSAScriptSelWriteToURLOfTypeError                                                       = objc.RegisterName("writeToURL:ofType:error:")
+	_oSAScriptSelWriteToURLOfTypeUsingStorageOptionsError                                    = objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:")
+	_oSAScriptSelCompiledDataForTypeUsingStorageOptionsError                                 = objc.RegisterName("compiledDataForType:usingStorageOptions:error:")
+	_oSAScriptSelSource                                                                      = objc.RegisterName("source")
+	_oSAScriptSelUrl                                                                         = objc.RegisterName("url")
+	_oSAScriptSelLanguage                                                                    = objc.RegisterName("language")
+	_oSAScriptSelSetLanguage                                                                 = objc.RegisterName("setLanguage:")
+	_oSAScriptSelLanguageInstance                                                            = objc.RegisterName("languageInstance")
+	_oSAScriptSelSetLanguageInstance                                                         = objc.RegisterName("setLanguageInstance:")
+	_oSAScriptSelIsCompiled                                                                  = objc.RegisterName("isCompiled")
+	_oSAScriptSelRichTextSource                                                              = objc.RegisterName("richTextSource")
 )
 
 func OSAScriptFromID(id objc.ID) *OSAScript {
@@ -60,31 +60,41 @@ func OSAScriptFromID(id objc.ID) *OSAScript {
 
 func OSAScriptScriptDataDescriptorWithContentsOfURL(url *foundation.NSURL) *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsOSAScript), _oSAScriptSelScriptDataDescriptorWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSAScript) InitWithSource(source *foundation.NSString) *OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptFromID(_ret)
 }
 
 func (o *OSAScript) InitWithSourceLanguage(source *foundation.NSString, language *OSALanguage) *OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithSourceLanguage, source.Ptr(), language.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptFromID(_ret)
 }
 
 func (o *OSAScript) InitWithSourceFromURLLanguageInstanceUsingStorageOptions(source *foundation.NSString, url *foundation.NSURL, instance *OSALanguageInstance, storageOptions OSAStorageOptions) *OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithSourceFromURLLanguageInstanceUsingStorageOptions, source.Ptr(), url.Ptr(), instance.Ptr(), storageOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptFromID(_ret)
 }
 
 func (o *OSAScript) InitWithContentsOfURLError(url *foundation.NSURL, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *OSAScript {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLError, url.Ptr(), errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSAScriptFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *OSAScript) InitWithContentsOfURLLanguageError(url *foundation.NSURL, la
 func (o *OSAScript) InitWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url *foundation.NSURL, instance *OSALanguageInstance, storageOptions OSAStorageOptions) (*OSAScript, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithContentsOfURLLanguageInstanceUsingStorageOptionsError, url.Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -111,7 +123,9 @@ func (o *OSAScript) InitWithCompiledDataError(data *foundation.NSData, errorInfo
 func (o *OSAScript) InitWithCompiledDataFromURLUsingStorageOptionsError(data *foundation.NSData, url *foundation.NSURL, storageOptions OSAStorageOptions) (*OSAScript, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithCompiledDataFromURLUsingStorageOptionsError, data.Ptr(), url.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -121,7 +135,9 @@ func (o *OSAScript) InitWithCompiledDataFromURLUsingStorageOptionsError(data *fo
 func (o *OSAScript) InitWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError(data *foundation.NSAppleEventDescriptor, url *foundation.NSURL, instance *OSALanguageInstance, storageOptions OSAStorageOptions) (*OSAScript, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelInitWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError, data.Ptr(), url.Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -135,31 +151,41 @@ func (o *OSAScript) CompileAndReturnError(errorInfo *foundation.NSDictionary[*fo
 
 func (o *OSAScript) ExecuteAndReturnError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnError, errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSAScript) ExecuteAppleEventError(event *foundation.NSAppleEventDescriptor, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAppleEventError, event.Ptr(), errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSAScript) ExecuteAndReturnDisplayValueError(displayValue *foundation.NSAttributedString, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteAndReturnDisplayValueError, displayValue.Ptr(), errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSAScript) ExecuteHandlerWithNameArgumentsError(name *foundation.NSString, arguments *foundation.NSArray[objc.ID], errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelExecuteHandlerWithNameArgumentsError, name.Ptr(), arguments, errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAppleEventDescriptorFromID(_ret)
 }
 
 func (o *OSAScript) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelRichTextFromDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -175,25 +201,33 @@ func (o *OSAScript) WriteToURLOfTypeUsingStorageOptionsError(url *foundation.NSU
 
 func (o *OSAScript) CompiledDataForTypeUsingStorageOptionsError(type_ *foundation.NSString, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelCompiledDataForTypeUsingStorageOptionsError, type_.Ptr(), storageOptions, errorInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *OSAScript) Source() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *OSAScript) Url() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelUrl)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *OSAScript) Language() *OSALanguage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return OSALanguageFromID(_ret)
 }
 
@@ -217,7 +251,8 @@ func (o *OSAScript) IsCompiled() bool {
 
 func (o *OSAScript) RichTextSource() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oSAScriptSelRichTextSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
-

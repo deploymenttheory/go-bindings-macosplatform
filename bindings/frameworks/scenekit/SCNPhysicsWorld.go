@@ -17,24 +17,24 @@ type SCNPhysicsWorld struct {
 }
 
 var (
-	_clsSCNPhysicsWorld = _objcClass("SCNPhysicsWorld")
-	_sCNPhysicsWorldSelAddBehavior = objc.RegisterName("addBehavior:")
-	_sCNPhysicsWorldSelRemoveBehavior = objc.RegisterName("removeBehavior:")
-	_sCNPhysicsWorldSelRemoveAllBehaviors = objc.RegisterName("removeAllBehaviors")
-	_sCNPhysicsWorldSelRayTestWithSegmentFromPointToPointOptions = objc.RegisterName("rayTestWithSegmentFromPoint:toPoint:options:")
-	_sCNPhysicsWorldSelContactTestBetweenBodyAndBodyOptions = objc.RegisterName("contactTestBetweenBody:andBody:options:")
-	_sCNPhysicsWorldSelContactTestWithBodyOptions = objc.RegisterName("contactTestWithBody:options:")
+	_clsSCNPhysicsWorld                                                        = _objcClass("SCNPhysicsWorld")
+	_sCNPhysicsWorldSelAddBehavior                                             = objc.RegisterName("addBehavior:")
+	_sCNPhysicsWorldSelRemoveBehavior                                          = objc.RegisterName("removeBehavior:")
+	_sCNPhysicsWorldSelRemoveAllBehaviors                                      = objc.RegisterName("removeAllBehaviors")
+	_sCNPhysicsWorldSelRayTestWithSegmentFromPointToPointOptions               = objc.RegisterName("rayTestWithSegmentFromPoint:toPoint:options:")
+	_sCNPhysicsWorldSelContactTestBetweenBodyAndBodyOptions                    = objc.RegisterName("contactTestBetweenBody:andBody:options:")
+	_sCNPhysicsWorldSelContactTestWithBodyOptions                              = objc.RegisterName("contactTestWithBody:options:")
 	_sCNPhysicsWorldSelConvexSweepTestWithShapeFromTransformToTransformOptions = objc.RegisterName("convexSweepTestWithShape:fromTransform:toTransform:options:")
-	_sCNPhysicsWorldSelUpdateCollisionPairs = objc.RegisterName("updateCollisionPairs")
-	_sCNPhysicsWorldSelGravity = objc.RegisterName("gravity")
-	_sCNPhysicsWorldSelSetGravity = objc.RegisterName("setGravity:")
-	_sCNPhysicsWorldSelSpeed = objc.RegisterName("speed")
-	_sCNPhysicsWorldSelSetSpeed = objc.RegisterName("setSpeed:")
-	_sCNPhysicsWorldSelTimeStep = objc.RegisterName("timeStep")
-	_sCNPhysicsWorldSelSetTimeStep = objc.RegisterName("setTimeStep:")
-	_sCNPhysicsWorldSelContactDelegate = objc.RegisterName("contactDelegate")
-	_sCNPhysicsWorldSelSetContactDelegate = objc.RegisterName("setContactDelegate:")
-	_sCNPhysicsWorldSelAllBehaviors = objc.RegisterName("allBehaviors")
+	_sCNPhysicsWorldSelUpdateCollisionPairs                                    = objc.RegisterName("updateCollisionPairs")
+	_sCNPhysicsWorldSelGravity                                                 = objc.RegisterName("gravity")
+	_sCNPhysicsWorldSelSetGravity                                              = objc.RegisterName("setGravity:")
+	_sCNPhysicsWorldSelSpeed                                                   = objc.RegisterName("speed")
+	_sCNPhysicsWorldSelSetSpeed                                                = objc.RegisterName("setSpeed:")
+	_sCNPhysicsWorldSelTimeStep                                                = objc.RegisterName("timeStep")
+	_sCNPhysicsWorldSelSetTimeStep                                             = objc.RegisterName("setTimeStep:")
+	_sCNPhysicsWorldSelContactDelegate                                         = objc.RegisterName("contactDelegate")
+	_sCNPhysicsWorldSelSetContactDelegate                                      = objc.RegisterName("setContactDelegate:")
+	_sCNPhysicsWorldSelAllBehaviors                                            = objc.RegisterName("allBehaviors")
 )
 
 func SCNPhysicsWorldFromID(id objc.ID) *SCNPhysicsWorld {
@@ -61,25 +61,33 @@ func (o *SCNPhysicsWorld) RemoveAllBehaviors() {
 
 func (o *SCNPhysicsWorld) RayTestWithSegmentFromPointToPointOptions(origin SCNVector3, dest SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNHitTestResult] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelRayTestWithSegmentFromPointToPointOptions, origin, dest, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNHitTestResult](_ret)
 }
 
 func (o *SCNPhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *SCNPhysicsBody, bodyB *SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestBetweenBodyAndBodyOptions, bodyA.Ptr(), bodyB.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
 func (o *SCNPhysicsWorld) ContactTestWithBodyOptions(body *SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelContactTestWithBodyOptions, body.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
 func (o *SCNPhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *SCNPhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*SCNPhysicsContact] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelConvexSweepTestWithShapeFromTransformToTransformOptions, shape.Ptr(), from, to, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNPhysicsContact](_ret)
 }
 
@@ -125,7 +133,8 @@ func (o *SCNPhysicsWorld) SetContactDelegate(contactDelegate SCNPhysicsContactDe
 
 func (o *SCNPhysicsWorld) AllBehaviors() *foundation.NSArray[*SCNPhysicsBehavior] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsWorldSelAllBehaviors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNPhysicsBehavior](_ret)
 }
-

@@ -98,4 +98,3 @@ type VertexBufferLayoutDescriptorable interface {
 }
 
 var _ VertexBufferLayoutDescriptorable = (*VertexBufferLayoutDescriptor)(nil)
-

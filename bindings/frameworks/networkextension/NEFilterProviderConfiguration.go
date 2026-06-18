@@ -16,28 +16,28 @@ type NEFilterProviderConfiguration struct {
 }
 
 var (
-	_clsNEFilterProviderConfiguration = _objcClass("NEFilterProviderConfiguration")
-	_nEFilterProviderConfigurationSelFilterBrowsers = objc.RegisterName("filterBrowsers")
-	_nEFilterProviderConfigurationSelSetFilterBrowsers = objc.RegisterName("setFilterBrowsers:")
-	_nEFilterProviderConfigurationSelFilterSockets = objc.RegisterName("filterSockets")
-	_nEFilterProviderConfigurationSelSetFilterSockets = objc.RegisterName("setFilterSockets:")
-	_nEFilterProviderConfigurationSelFilterPackets = objc.RegisterName("filterPackets")
-	_nEFilterProviderConfigurationSelSetFilterPackets = objc.RegisterName("setFilterPackets:")
-	_nEFilterProviderConfigurationSelVendorConfiguration = objc.RegisterName("vendorConfiguration")
-	_nEFilterProviderConfigurationSelSetVendorConfiguration = objc.RegisterName("setVendorConfiguration:")
-	_nEFilterProviderConfigurationSelServerAddress = objc.RegisterName("serverAddress")
-	_nEFilterProviderConfigurationSelSetServerAddress = objc.RegisterName("setServerAddress:")
-	_nEFilterProviderConfigurationSelUsername = objc.RegisterName("username")
-	_nEFilterProviderConfigurationSelSetUsername = objc.RegisterName("setUsername:")
-	_nEFilterProviderConfigurationSelOrganization = objc.RegisterName("organization")
-	_nEFilterProviderConfigurationSelSetOrganization = objc.RegisterName("setOrganization:")
-	_nEFilterProviderConfigurationSelPasswordReference = objc.RegisterName("passwordReference")
-	_nEFilterProviderConfigurationSelSetPasswordReference = objc.RegisterName("setPasswordReference:")
-	_nEFilterProviderConfigurationSelIdentityReference = objc.RegisterName("identityReference")
-	_nEFilterProviderConfigurationSelSetIdentityReference = objc.RegisterName("setIdentityReference:")
-	_nEFilterProviderConfigurationSelFilterDataProviderBundleIdentifier = objc.RegisterName("filterDataProviderBundleIdentifier")
-	_nEFilterProviderConfigurationSelSetFilterDataProviderBundleIdentifier = objc.RegisterName("setFilterDataProviderBundleIdentifier:")
-	_nEFilterProviderConfigurationSelFilterPacketProviderBundleIdentifier = objc.RegisterName("filterPacketProviderBundleIdentifier")
+	_clsNEFilterProviderConfiguration                                        = _objcClass("NEFilterProviderConfiguration")
+	_nEFilterProviderConfigurationSelFilterBrowsers                          = objc.RegisterName("filterBrowsers")
+	_nEFilterProviderConfigurationSelSetFilterBrowsers                       = objc.RegisterName("setFilterBrowsers:")
+	_nEFilterProviderConfigurationSelFilterSockets                           = objc.RegisterName("filterSockets")
+	_nEFilterProviderConfigurationSelSetFilterSockets                        = objc.RegisterName("setFilterSockets:")
+	_nEFilterProviderConfigurationSelFilterPackets                           = objc.RegisterName("filterPackets")
+	_nEFilterProviderConfigurationSelSetFilterPackets                        = objc.RegisterName("setFilterPackets:")
+	_nEFilterProviderConfigurationSelVendorConfiguration                     = objc.RegisterName("vendorConfiguration")
+	_nEFilterProviderConfigurationSelSetVendorConfiguration                  = objc.RegisterName("setVendorConfiguration:")
+	_nEFilterProviderConfigurationSelServerAddress                           = objc.RegisterName("serverAddress")
+	_nEFilterProviderConfigurationSelSetServerAddress                        = objc.RegisterName("setServerAddress:")
+	_nEFilterProviderConfigurationSelUsername                                = objc.RegisterName("username")
+	_nEFilterProviderConfigurationSelSetUsername                             = objc.RegisterName("setUsername:")
+	_nEFilterProviderConfigurationSelOrganization                            = objc.RegisterName("organization")
+	_nEFilterProviderConfigurationSelSetOrganization                         = objc.RegisterName("setOrganization:")
+	_nEFilterProviderConfigurationSelPasswordReference                       = objc.RegisterName("passwordReference")
+	_nEFilterProviderConfigurationSelSetPasswordReference                    = objc.RegisterName("setPasswordReference:")
+	_nEFilterProviderConfigurationSelIdentityReference                       = objc.RegisterName("identityReference")
+	_nEFilterProviderConfigurationSelSetIdentityReference                    = objc.RegisterName("setIdentityReference:")
+	_nEFilterProviderConfigurationSelFilterDataProviderBundleIdentifier      = objc.RegisterName("filterDataProviderBundleIdentifier")
+	_nEFilterProviderConfigurationSelSetFilterDataProviderBundleIdentifier   = objc.RegisterName("setFilterDataProviderBundleIdentifier:")
+	_nEFilterProviderConfigurationSelFilterPacketProviderBundleIdentifier    = objc.RegisterName("filterPacketProviderBundleIdentifier")
 	_nEFilterProviderConfigurationSelSetFilterPacketProviderBundleIdentifier = objc.RegisterName("setFilterPacketProviderBundleIdentifier:")
 )
 
@@ -96,7 +96,9 @@ func (o *NEFilterProviderConfiguration) SetVendorConfiguration(vendorConfigurati
 // @property serverAddress @discussion The optional address of the server used to support the filter.
 func (o *NEFilterProviderConfiguration) ServerAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelServerAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -107,7 +109,9 @@ func (o *NEFilterProviderConfiguration) SetServerAddress(serverAddress *foundati
 // @property username @discussion The optional username associated with the filter.
 func (o *NEFilterProviderConfiguration) Username() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelUsername)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -118,7 +122,9 @@ func (o *NEFilterProviderConfiguration) SetUsername(username *foundation.NSStrin
 // @property organization @discussion The optional organization associated with the filter.
 func (o *NEFilterProviderConfiguration) Organization() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelOrganization)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,7 +135,9 @@ func (o *NEFilterProviderConfiguration) SetOrganization(organization *foundation
 // @property passwordReference @discussion The optional password keychain reference associated with the filter.
 func (o *NEFilterProviderConfiguration) PasswordReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelPasswordReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -140,7 +148,9 @@ func (o *NEFilterProviderConfiguration) SetPasswordReference(passwordReference *
 // @property identityReference @discussion The optional certificate identity keychain reference associated with the filter.
 func (o *NEFilterProviderConfiguration) IdentityReference() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelIdentityReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -151,7 +161,9 @@ func (o *NEFilterProviderConfiguration) SetIdentityReference(identityReference *
 // @property filterDataProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
 func (o *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelFilterDataProviderBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -162,11 +174,12 @@ func (o *NEFilterProviderConfiguration) SetFilterDataProviderBundleIdentifier(fi
 // @property filterPacketProviderBundleIdentifier @discussion A string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
 func (o *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterProviderConfigurationSelFilterPacketProviderBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NEFilterProviderConfiguration) SetFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nEFilterProviderConfigurationSelSetFilterPacketProviderBundleIdentifier, filterPacketProviderBundleIdentifier.Ptr())
 }
-

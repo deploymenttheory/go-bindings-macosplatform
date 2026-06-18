@@ -19,7 +19,9 @@ type MTRBaseClusterElectricalEnergyMeasurement struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterElectricalEnergyMeasurement].
-func (x *MTRBaseClusterElectricalEnergyMeasurement) Unwrap() *raw.MTRBaseClusterElectricalEnergyMeasurement { return x.inner }
+func (x *MTRBaseClusterElectricalEnergyMeasurement) Unwrap() *raw.MTRBaseClusterElectricalEnergyMeasurement {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -478,9 +480,13 @@ func (x *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeClusterRev
 	}
 }
 
-func (x *MTRBaseClusterElectricalEnergyMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterElectricalEnergyMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterElectricalEnergyMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterElectricalEnergyMeasurement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterElectricalEnergyMeasurementable is the interface implemented by [MTRBaseClusterElectricalEnergyMeasurement], for mocking and DI.
 type MTRBaseClusterElectricalEnergyMeasurementable interface {
@@ -510,4 +516,3 @@ type MTRBaseClusterElectricalEnergyMeasurementable interface {
 }
 
 var _ MTRBaseClusterElectricalEnergyMeasurementable = (*MTRBaseClusterElectricalEnergyMeasurement)(nil)
-

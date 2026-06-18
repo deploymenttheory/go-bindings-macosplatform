@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_openclLib uintptr
-	_loadOnce sync.Once
+	_openclLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -52,9 +52,13 @@ func _loadLibrary() {
 	_register("clCompileProgram", func() { purego.RegisterLibFunc(&_clCompileProgram, _openclLib, "clCompileProgram") })
 	_register("clCreateBuffer", func() { purego.RegisterLibFunc(&_clCreateBuffer, _openclLib, "clCreateBuffer") })
 	_register("clCreateCommandQueue", func() { purego.RegisterLibFunc(&_clCreateCommandQueue, _openclLib, "clCreateCommandQueue") })
-	_register("clCreateCommandQueueWithPropertiesAPPLE", func() { purego.RegisterLibFunc(&_clCreateCommandQueueWithPropertiesAPPLE, _openclLib, "clCreateCommandQueueWithPropertiesAPPLE") })
+	_register("clCreateCommandQueueWithPropertiesAPPLE", func() {
+		purego.RegisterLibFunc(&_clCreateCommandQueueWithPropertiesAPPLE, _openclLib, "clCreateCommandQueueWithPropertiesAPPLE")
+	})
 	_register("clCreateContext", func() { purego.RegisterLibFunc(&_clCreateContext, _openclLib, "clCreateContext") })
-	_register("clCreateContextAndCommandQueueAPPLE", func() { purego.RegisterLibFunc(&_clCreateContextAndCommandQueueAPPLE, _openclLib, "clCreateContextAndCommandQueueAPPLE") })
+	_register("clCreateContextAndCommandQueueAPPLE", func() {
+		purego.RegisterLibFunc(&_clCreateContextAndCommandQueueAPPLE, _openclLib, "clCreateContextAndCommandQueueAPPLE")
+	})
 	_register("clCreateContextFromType", func() { purego.RegisterLibFunc(&_clCreateContextFromType, _openclLib, "clCreateContextFromType") })
 	_register("clCreateDAGAPPLE", func() { purego.RegisterLibFunc(&_clCreateDAGAPPLE, _openclLib, "clCreateDAGAPPLE") })
 	_register("clCreateEventFromGLsyncKHR", func() { purego.RegisterLibFunc(&_clCreateEventFromGLsyncKHR, _openclLib, "clCreateEventFromGLsyncKHR") })
@@ -66,14 +70,22 @@ func _loadLibrary() {
 	_register("clCreateImage", func() { purego.RegisterLibFunc(&_clCreateImage, _openclLib, "clCreateImage") })
 	_register("clCreateImage2D", func() { purego.RegisterLibFunc(&_clCreateImage2D, _openclLib, "clCreateImage2D") })
 	_register("clCreateImage3D", func() { purego.RegisterLibFunc(&_clCreateImage3D, _openclLib, "clCreateImage3D") })
-	_register("clCreateImageFromIOSurface2DAPPLE", func() { purego.RegisterLibFunc(&_clCreateImageFromIOSurface2DAPPLE, _openclLib, "clCreateImageFromIOSurface2DAPPLE") })
-	_register("clCreateImageFromIOSurfaceWithPropertiesAPPLE", func() { purego.RegisterLibFunc(&_clCreateImageFromIOSurfaceWithPropertiesAPPLE, _openclLib, "clCreateImageFromIOSurfaceWithPropertiesAPPLE") })
+	_register("clCreateImageFromIOSurface2DAPPLE", func() {
+		purego.RegisterLibFunc(&_clCreateImageFromIOSurface2DAPPLE, _openclLib, "clCreateImageFromIOSurface2DAPPLE")
+	})
+	_register("clCreateImageFromIOSurfaceWithPropertiesAPPLE", func() {
+		purego.RegisterLibFunc(&_clCreateImageFromIOSurfaceWithPropertiesAPPLE, _openclLib, "clCreateImageFromIOSurfaceWithPropertiesAPPLE")
+	})
 	_register("clCreateKernel", func() { purego.RegisterLibFunc(&_clCreateKernel, _openclLib, "clCreateKernel") })
 	_register("clCreateKernelFromDAGAPPLE", func() { purego.RegisterLibFunc(&_clCreateKernelFromDAGAPPLE, _openclLib, "clCreateKernelFromDAGAPPLE") })
 	_register("clCreateKernelsInProgram", func() { purego.RegisterLibFunc(&_clCreateKernelsInProgram, _openclLib, "clCreateKernelsInProgram") })
-	_register("clCreateProgramAndKernelsWithSourceAPPLE", func() { purego.RegisterLibFunc(&_clCreateProgramAndKernelsWithSourceAPPLE, _openclLib, "clCreateProgramAndKernelsWithSourceAPPLE") })
+	_register("clCreateProgramAndKernelsWithSourceAPPLE", func() {
+		purego.RegisterLibFunc(&_clCreateProgramAndKernelsWithSourceAPPLE, _openclLib, "clCreateProgramAndKernelsWithSourceAPPLE")
+	})
 	_register("clCreateProgramWithBinary", func() { purego.RegisterLibFunc(&_clCreateProgramWithBinary, _openclLib, "clCreateProgramWithBinary") })
-	_register("clCreateProgramWithBuiltInKernels", func() { purego.RegisterLibFunc(&_clCreateProgramWithBuiltInKernels, _openclLib, "clCreateProgramWithBuiltInKernels") })
+	_register("clCreateProgramWithBuiltInKernels", func() {
+		purego.RegisterLibFunc(&_clCreateProgramWithBuiltInKernels, _openclLib, "clCreateProgramWithBuiltInKernels")
+	})
 	_register("clCreateProgramWithSource", func() { purego.RegisterLibFunc(&_clCreateProgramWithSource, _openclLib, "clCreateProgramWithSource") })
 	_register("clCreateSampler", func() { purego.RegisterLibFunc(&_clCreateSampler, _openclLib, "clCreateSampler") })
 	_register("clCreateSubBuffer", func() { purego.RegisterLibFunc(&_clCreateSubBuffer, _openclLib, "clCreateSubBuffer") })
@@ -81,7 +93,9 @@ func _loadLibrary() {
 	_register("clCreateUserEvent", func() { purego.RegisterLibFunc(&_clCreateUserEvent, _openclLib, "clCreateUserEvent") })
 	_register("clEnqueueAcquireGLObjects", func() { purego.RegisterLibFunc(&_clEnqueueAcquireGLObjects, _openclLib, "clEnqueueAcquireGLObjects") })
 	_register("clEnqueueBarrier", func() { purego.RegisterLibFunc(&_clEnqueueBarrier, _openclLib, "clEnqueueBarrier") })
-	_register("clEnqueueBarrierWithWaitList", func() { purego.RegisterLibFunc(&_clEnqueueBarrierWithWaitList, _openclLib, "clEnqueueBarrierWithWaitList") })
+	_register("clEnqueueBarrierWithWaitList", func() {
+		purego.RegisterLibFunc(&_clEnqueueBarrierWithWaitList, _openclLib, "clEnqueueBarrierWithWaitList")
+	})
 	_register("clEnqueueCopyBuffer", func() { purego.RegisterLibFunc(&_clEnqueueCopyBuffer, _openclLib, "clEnqueueCopyBuffer") })
 	_register("clEnqueueCopyBufferRect", func() { purego.RegisterLibFunc(&_clEnqueueCopyBufferRect, _openclLib, "clEnqueueCopyBufferRect") })
 	_register("clEnqueueCopyBufferToImage", func() { purego.RegisterLibFunc(&_clEnqueueCopyBufferToImage, _openclLib, "clEnqueueCopyBufferToImage") })
@@ -92,7 +106,9 @@ func _loadLibrary() {
 	_register("clEnqueueMapBuffer", func() { purego.RegisterLibFunc(&_clEnqueueMapBuffer, _openclLib, "clEnqueueMapBuffer") })
 	_register("clEnqueueMapImage", func() { purego.RegisterLibFunc(&_clEnqueueMapImage, _openclLib, "clEnqueueMapImage") })
 	_register("clEnqueueMarker", func() { purego.RegisterLibFunc(&_clEnqueueMarker, _openclLib, "clEnqueueMarker") })
-	_register("clEnqueueMarkerWithWaitList", func() { purego.RegisterLibFunc(&_clEnqueueMarkerWithWaitList, _openclLib, "clEnqueueMarkerWithWaitList") })
+	_register("clEnqueueMarkerWithWaitList", func() {
+		purego.RegisterLibFunc(&_clEnqueueMarkerWithWaitList, _openclLib, "clEnqueueMarkerWithWaitList")
+	})
 	_register("clEnqueueMigrateMemObjects", func() { purego.RegisterLibFunc(&_clEnqueueMigrateMemObjects, _openclLib, "clEnqueueMigrateMemObjects") })
 	_register("clEnqueueNDRangeKernel", func() { purego.RegisterLibFunc(&_clEnqueueNDRangeKernel, _openclLib, "clEnqueueNDRangeKernel") })
 	_register("clEnqueueNativeKernel", func() { purego.RegisterLibFunc(&_clEnqueueNativeKernel, _openclLib, "clEnqueueNativeKernel") })
@@ -115,8 +131,12 @@ func _loadLibrary() {
 	_register("clGetDeviceInfo", func() { purego.RegisterLibFunc(&_clGetDeviceInfo, _openclLib, "clGetDeviceInfo") })
 	_register("clGetEventInfo", func() { purego.RegisterLibFunc(&_clGetEventInfo, _openclLib, "clGetEventInfo") })
 	_register("clGetEventProfilingInfo", func() { purego.RegisterLibFunc(&_clGetEventProfilingInfo, _openclLib, "clGetEventProfilingInfo") })
-	_register("clGetExtensionFunctionAddress", func() { purego.RegisterLibFunc(&_clGetExtensionFunctionAddress, _openclLib, "clGetExtensionFunctionAddress") })
-	_register("clGetExtensionFunctionAddressForPlatform", func() { purego.RegisterLibFunc(&_clGetExtensionFunctionAddressForPlatform, _openclLib, "clGetExtensionFunctionAddressForPlatform") })
+	_register("clGetExtensionFunctionAddress", func() {
+		purego.RegisterLibFunc(&_clGetExtensionFunctionAddress, _openclLib, "clGetExtensionFunctionAddress")
+	})
+	_register("clGetExtensionFunctionAddressForPlatform", func() {
+		purego.RegisterLibFunc(&_clGetExtensionFunctionAddressForPlatform, _openclLib, "clGetExtensionFunctionAddressForPlatform")
+	})
 	_register("clGetGLContextInfoAPPLE", func() { purego.RegisterLibFunc(&_clGetGLContextInfoAPPLE, _openclLib, "clGetGLContextInfoAPPLE") })
 	_register("clGetGLObjectInfo", func() { purego.RegisterLibFunc(&_clGetGLObjectInfo, _openclLib, "clGetGLObjectInfo") })
 	_register("clGetGLTextureInfo", func() { purego.RegisterLibFunc(&_clGetGLTextureInfo, _openclLib, "clGetGLTextureInfo") })
@@ -134,7 +154,9 @@ func _loadLibrary() {
 	_register("clLinkProgram", func() { purego.RegisterLibFunc(&_clLinkProgram, _openclLib, "clLinkProgram") })
 	_register("clLogMessagesToStderrAPPLE", func() { purego.RegisterLibFunc(&_clLogMessagesToStderrAPPLE, _openclLib, "clLogMessagesToStderrAPPLE") })
 	_register("clLogMessagesToStdoutAPPLE", func() { purego.RegisterLibFunc(&_clLogMessagesToStdoutAPPLE, _openclLib, "clLogMessagesToStdoutAPPLE") })
-	_register("clLogMessagesToSystemLogAPPLE", func() { purego.RegisterLibFunc(&_clLogMessagesToSystemLogAPPLE, _openclLib, "clLogMessagesToSystemLogAPPLE") })
+	_register("clLogMessagesToSystemLogAPPLE", func() {
+		purego.RegisterLibFunc(&_clLogMessagesToSystemLogAPPLE, _openclLib, "clLogMessagesToSystemLogAPPLE")
+	})
 	_register("clReleaseCommandQueue", func() { purego.RegisterLibFunc(&_clReleaseCommandQueue, _openclLib, "clReleaseCommandQueue") })
 	_register("clReleaseContext", func() { purego.RegisterLibFunc(&_clReleaseContext, _openclLib, "clReleaseContext") })
 	_register("clReleaseDAGAPPLE", func() { purego.RegisterLibFunc(&_clReleaseDAGAPPLE, _openclLib, "clReleaseDAGAPPLE") })
@@ -156,8 +178,12 @@ func _loadLibrary() {
 	_register("clSetKernelArg", func() { purego.RegisterLibFunc(&_clSetKernelArg, _openclLib, "clSetKernelArg") })
 	_register("clSetKernelArgByNameAPPLE", func() { purego.RegisterLibFunc(&_clSetKernelArgByNameAPPLE, _openclLib, "clSetKernelArgByNameAPPLE") })
 	_register("clSetKernelArgsVaListAPPLE", func() { purego.RegisterLibFunc(&_clSetKernelArgsVaListAPPLE, _openclLib, "clSetKernelArgsVaListAPPLE") })
-	_register("clSetMemObjectDestructorAPPLE", func() { purego.RegisterLibFunc(&_clSetMemObjectDestructorAPPLE, _openclLib, "clSetMemObjectDestructorAPPLE") })
-	_register("clSetMemObjectDestructorCallback", func() { purego.RegisterLibFunc(&_clSetMemObjectDestructorCallback, _openclLib, "clSetMemObjectDestructorCallback") })
+	_register("clSetMemObjectDestructorAPPLE", func() {
+		purego.RegisterLibFunc(&_clSetMemObjectDestructorAPPLE, _openclLib, "clSetMemObjectDestructorAPPLE")
+	})
+	_register("clSetMemObjectDestructorCallback", func() {
+		purego.RegisterLibFunc(&_clSetMemObjectDestructorCallback, _openclLib, "clSetMemObjectDestructorCallback")
+	})
 	_register("clSetUserEventStatus", func() { purego.RegisterLibFunc(&_clSetUserEventStatus, _openclLib, "clSetUserEventStatus") })
 	_register("clUnloadCompiler", func() { purego.RegisterLibFunc(&_clUnloadCompiler, _openclLib, "clUnloadCompiler") })
 	_register("clUnloadPlatformCompiler", func() { purego.RegisterLibFunc(&_clUnloadPlatformCompiler, _openclLib, "clUnloadPlatformCompiler") })
@@ -168,15 +194,29 @@ func _loadLibrary() {
 	_register("gcl_create_buffer_from_ptr", func() { purego.RegisterLibFunc(&_gcl_create_buffer_from_ptr, _openclLib, "gcl_create_buffer_from_ptr") })
 	_register("gcl_create_dispatch_queue", func() { purego.RegisterLibFunc(&_gcl_create_dispatch_queue, _openclLib, "gcl_create_dispatch_queue") })
 	_register("gcl_create_image", func() { purego.RegisterLibFunc(&_gcl_create_image, _openclLib, "gcl_create_image") })
-	_register("gcl_create_kernel_from_block", func() { purego.RegisterLibFunc(&_gcl_create_kernel_from_block, _openclLib, "gcl_create_kernel_from_block") })
+	_register("gcl_create_kernel_from_block", func() {
+		purego.RegisterLibFunc(&_gcl_create_kernel_from_block, _openclLib, "gcl_create_kernel_from_block")
+	})
 	_register("gcl_free", func() { purego.RegisterLibFunc(&_gcl_free, _openclLib, "gcl_free") })
 	_register("gcl_get_context", func() { purego.RegisterLibFunc(&_gcl_get_context, _openclLib, "gcl_get_context") })
-	_register("gcl_get_device_id_with_dispatch_queue", func() { purego.RegisterLibFunc(&_gcl_get_device_id_with_dispatch_queue, _openclLib, "gcl_get_device_id_with_dispatch_queue") })
-	_register("gcl_get_kernel_block_workgroup_info", func() { purego.RegisterLibFunc(&_gcl_get_kernel_block_workgroup_info, _openclLib, "gcl_get_kernel_block_workgroup_info") })
-	_register("gcl_get_supported_image_formats", func() { purego.RegisterLibFunc(&_gcl_get_supported_image_formats, _openclLib, "gcl_get_supported_image_formats") })
-	_register("gcl_gl_create_image_from_renderbuffer", func() { purego.RegisterLibFunc(&_gcl_gl_create_image_from_renderbuffer, _openclLib, "gcl_gl_create_image_from_renderbuffer") })
-	_register("gcl_gl_create_image_from_texture", func() { purego.RegisterLibFunc(&_gcl_gl_create_image_from_texture, _openclLib, "gcl_gl_create_image_from_texture") })
-	_register("gcl_gl_create_ptr_from_buffer", func() { purego.RegisterLibFunc(&_gcl_gl_create_ptr_from_buffer, _openclLib, "gcl_gl_create_ptr_from_buffer") })
+	_register("gcl_get_device_id_with_dispatch_queue", func() {
+		purego.RegisterLibFunc(&_gcl_get_device_id_with_dispatch_queue, _openclLib, "gcl_get_device_id_with_dispatch_queue")
+	})
+	_register("gcl_get_kernel_block_workgroup_info", func() {
+		purego.RegisterLibFunc(&_gcl_get_kernel_block_workgroup_info, _openclLib, "gcl_get_kernel_block_workgroup_info")
+	})
+	_register("gcl_get_supported_image_formats", func() {
+		purego.RegisterLibFunc(&_gcl_get_supported_image_formats, _openclLib, "gcl_get_supported_image_formats")
+	})
+	_register("gcl_gl_create_image_from_renderbuffer", func() {
+		purego.RegisterLibFunc(&_gcl_gl_create_image_from_renderbuffer, _openclLib, "gcl_gl_create_image_from_renderbuffer")
+	})
+	_register("gcl_gl_create_image_from_texture", func() {
+		purego.RegisterLibFunc(&_gcl_gl_create_image_from_texture, _openclLib, "gcl_gl_create_image_from_texture")
+	})
+	_register("gcl_gl_create_ptr_from_buffer", func() {
+		purego.RegisterLibFunc(&_gcl_gl_create_ptr_from_buffer, _openclLib, "gcl_gl_create_ptr_from_buffer")
+	})
 	_register("gcl_gl_set_sharegroup", func() { purego.RegisterLibFunc(&_gcl_gl_set_sharegroup, _openclLib, "gcl_gl_set_sharegroup") })
 	_register("gcl_malloc", func() { purego.RegisterLibFunc(&_gcl_malloc, _openclLib, "gcl_malloc") })
 	_register("gcl_map_image", func() { purego.RegisterLibFunc(&_gcl_map_image, _openclLib, "gcl_map_image") })

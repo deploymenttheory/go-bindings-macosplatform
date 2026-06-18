@@ -86,7 +86,9 @@ func (x *URLSessionDataTask) WithScriptingProperties(scriptingProperties *raw.NS
 
 func (x *URLSessionDataTask) asURLSessionDataTask() *raw.NSURLSessionDataTask { return x.inner }
 
-func (x *URLSessionDataTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
+func (x *URLSessionDataTask) asURLSessionTask() *raw.NSURLSessionTask {
+	return &x.inner.NSURLSessionTask
+}
 
 func (x *URLSessionDataTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
@@ -104,4 +106,3 @@ type URLSessionDataTaskable interface {
 }
 
 var _ URLSessionDataTaskable = (*URLSessionDataTask)(nil)
-

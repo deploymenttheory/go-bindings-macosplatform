@@ -107,4 +107,3 @@ type PoolingDescriptorable interface {
 }
 
 var _ PoolingDescriptorable = (*PoolingDescriptor)(nil)
-

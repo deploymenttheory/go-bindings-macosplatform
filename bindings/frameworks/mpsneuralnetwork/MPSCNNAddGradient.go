@@ -16,7 +16,7 @@ type MPSCNNAddGradient struct {
 }
 
 var (
-	_clsMPSCNNAddGradient = _objcClass("MPSCNNAddGradient")
+	_clsMPSCNNAddGradient                                      = _objcClass("MPSCNNAddGradient")
 	_mPSCNNAddGradientSelInitWithDeviceIsSecondarySourceFilter = objc.RegisterName("initWithDevice:isSecondarySourceFilter:")
 )
 
@@ -33,7 +33,8 @@ func MPSCNNAddGradientFromID(id objc.ID) *MPSCNNAddGradient {
 // @abstract  Initialize the addition gradient operator. @param     device                   The device the filter will run on. @param     isSecondarySourceFilter  A boolean indicating whether the arithmetic gradient filter is operating on the primary or secondary source image from the forward pass. @return    A valid MPSCNNAddGradient object or nil, if failure.
 func (o *MPSCNNAddGradient) InitWithDeviceIsSecondarySourceFilter(device metal.MTLDevice, isSecondarySourceFilter bool) *MPSCNNAddGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNAddGradientSelInitWithDeviceIsSecondarySourceFilter, device, isSecondarySourceFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNAddGradientFromID(_ret)
 }
-

@@ -293,4 +293,3 @@ func CGImageSourceUpdateData(isrc unsafe.Pointer, data unsafe.Pointer, final boo
 func CGImageSourceUpdateDataProvider(isrc unsafe.Pointer, provider unsafe.Pointer, final bool) {
 	raw.CGImageSourceUpdateDataProvider(isrc, provider, final)
 }
-

@@ -16,16 +16,16 @@ type PHASESpatialMixerDefinition struct {
 }
 
 var (
-	_clsPHASESpatialMixerDefinition = _objcClass("PHASESpatialMixerDefinition")
-	_pHASESpatialMixerDefinitionSelInitWithSpatialPipeline = objc.RegisterName("initWithSpatialPipeline:")
-	_pHASESpatialMixerDefinitionSelInitWithSpatialPipelineIdentifier = objc.RegisterName("initWithSpatialPipeline:identifier:")
-	_pHASESpatialMixerDefinitionSelSpatialPipeline = objc.RegisterName("spatialPipeline")
-	_pHASESpatialMixerDefinitionSelDistanceModelParameters = objc.RegisterName("distanceModelParameters")
-	_pHASESpatialMixerDefinitionSelSetDistanceModelParameters = objc.RegisterName("setDistanceModelParameters:")
-	_pHASESpatialMixerDefinitionSelListenerDirectivityModelParameters = objc.RegisterName("listenerDirectivityModelParameters")
+	_clsPHASESpatialMixerDefinition                                      = _objcClass("PHASESpatialMixerDefinition")
+	_pHASESpatialMixerDefinitionSelInitWithSpatialPipeline               = objc.RegisterName("initWithSpatialPipeline:")
+	_pHASESpatialMixerDefinitionSelInitWithSpatialPipelineIdentifier     = objc.RegisterName("initWithSpatialPipeline:identifier:")
+	_pHASESpatialMixerDefinitionSelSpatialPipeline                       = objc.RegisterName("spatialPipeline")
+	_pHASESpatialMixerDefinitionSelDistanceModelParameters               = objc.RegisterName("distanceModelParameters")
+	_pHASESpatialMixerDefinitionSelSetDistanceModelParameters            = objc.RegisterName("setDistanceModelParameters:")
+	_pHASESpatialMixerDefinitionSelListenerDirectivityModelParameters    = objc.RegisterName("listenerDirectivityModelParameters")
 	_pHASESpatialMixerDefinitionSelSetListenerDirectivityModelParameters = objc.RegisterName("setListenerDirectivityModelParameters:")
-	_pHASESpatialMixerDefinitionSelSourceDirectivityModelParameters = objc.RegisterName("sourceDirectivityModelParameters")
-	_pHASESpatialMixerDefinitionSelSetSourceDirectivityModelParameters = objc.RegisterName("setSourceDirectivityModelParameters:")
+	_pHASESpatialMixerDefinitionSelSourceDirectivityModelParameters      = objc.RegisterName("sourceDirectivityModelParameters")
+	_pHASESpatialMixerDefinitionSelSetSourceDirectivityModelParameters   = objc.RegisterName("setSourceDirectivityModelParameters:")
 )
 
 func PHASESpatialMixerDefinitionFromID(id objc.ID) *PHASESpatialMixerDefinition {
@@ -41,28 +41,36 @@ func PHASESpatialMixerDefinitionFromID(id objc.ID) *PHASESpatialMixerDefinition 
 // @method initWithSpatialPipeline @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @return A new PHASESpatialMixerDefinition object
 func (o *PHASESpatialMixerDefinition) InitWithSpatialPipeline(spatialPipeline *PHASESpatialPipeline) *PHASESpatialMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelInitWithSpatialPipeline, spatialPipeline.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESpatialMixerDefinitionFromID(_ret)
 }
 
 // @method initWithSpatialPipeline:identifier @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @param identifier An optional custom identifier to give to this object @return A new PHASESpatialMixerDefinition object
 func (o *PHASESpatialMixerDefinition) InitWithSpatialPipelineIdentifier(spatialPipeline *PHASESpatialPipeline, identifier *foundation.NSString) *PHASESpatialMixerDefinition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelInitWithSpatialPipelineIdentifier, spatialPipeline.Ptr(), identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESpatialMixerDefinitionFromID(_ret)
 }
 
 // @property spatialPipeline @abstract Spatial Pipeline.
 func (o *PHASESpatialMixerDefinition) SpatialPipeline() *PHASESpatialPipeline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelSpatialPipeline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESpatialPipelineFromID(_ret)
 }
 
 // @property distanceModelParameters @abstract Distance model parameters (optional).
 func (o *PHASESpatialMixerDefinition) DistanceModelParameters() *PHASEDistanceModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelDistanceModelParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEDistanceModelParametersFromID(_ret)
 }
 
@@ -73,7 +81,9 @@ func (o *PHASESpatialMixerDefinition) SetDistanceModelParameters(distanceModelPa
 // @property listenerDirectivityModelParameters @abstract Listener directivity model parameters (optional).
 func (o *PHASESpatialMixerDefinition) ListenerDirectivityModelParameters() *PHASEDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelListenerDirectivityModelParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEDirectivityModelParametersFromID(_ret)
 }
 
@@ -84,11 +94,12 @@ func (o *PHASESpatialMixerDefinition) SetListenerDirectivityModelParameters(list
 // @property sourceDirectivityModelParameters @abstract Source directivity model parameters (optional).
 func (o *PHASESpatialMixerDefinition) SourceDirectivityModelParameters() *PHASEDirectivityModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialMixerDefinitionSelSourceDirectivityModelParameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEDirectivityModelParametersFromID(_ret)
 }
 
 func (o *PHASESpatialMixerDefinition) SetSourceDirectivityModelParameters(sourceDirectivityModelParameters *PHASEDirectivityModelParameters) {
 	o.Ptr().Send(_pHASESpatialMixerDefinitionSelSetSourceDirectivityModelParameters, sourceDirectivityModelParameters.Ptr())
 }
-

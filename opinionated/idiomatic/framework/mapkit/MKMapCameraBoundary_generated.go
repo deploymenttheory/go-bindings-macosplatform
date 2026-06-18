@@ -69,4 +69,3 @@ type MapCameraBoundaryable interface {
 }
 
 var _ MapCameraBoundaryable = (*MapCameraBoundary)(nil)
-

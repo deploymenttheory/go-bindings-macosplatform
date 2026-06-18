@@ -388,4 +388,3 @@ type Colorable interface {
 }
 
 var _ Colorable = (*Color)(nil)
-

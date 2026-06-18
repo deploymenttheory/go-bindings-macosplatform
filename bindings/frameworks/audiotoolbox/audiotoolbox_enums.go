@@ -11,10 +11,10 @@ import (
 type AU3DMixerAttenuationCurve int64
 
 const (
-	K3DMixerAttenuationCurve_Power AU3DMixerAttenuationCurve = 0
+	K3DMixerAttenuationCurve_Power       AU3DMixerAttenuationCurve = 0
 	K3DMixerAttenuationCurve_Exponential AU3DMixerAttenuationCurve = 1
-	K3DMixerAttenuationCurve_Inverse AU3DMixerAttenuationCurve = 2
-	K3DMixerAttenuationCurve_Linear AU3DMixerAttenuationCurve = 3
+	K3DMixerAttenuationCurve_Inverse     AU3DMixerAttenuationCurve = 2
+	K3DMixerAttenuationCurve_Linear      AU3DMixerAttenuationCurve = 3
 )
 
 func (e AU3DMixerAttenuationCurve) String() string {
@@ -35,41 +35,57 @@ func (e AU3DMixerAttenuationCurve) String() string {
 type AU3DMixerRenderingFlags int64
 
 const (
-	K3DMixerRenderingFlags_InterAuralDelay AU3DMixerRenderingFlags = 1
-	K3DMixerRenderingFlags_DopplerShift AU3DMixerRenderingFlags = 2
-	K3DMixerRenderingFlags_DistanceAttenuation AU3DMixerRenderingFlags = 4
-	K3DMixerRenderingFlags_DistanceFilter AU3DMixerRenderingFlags = 8
-	K3DMixerRenderingFlags_DistanceDiffusion AU3DMixerRenderingFlags = 16
+	K3DMixerRenderingFlags_InterAuralDelay           AU3DMixerRenderingFlags = 1
+	K3DMixerRenderingFlags_DopplerShift              AU3DMixerRenderingFlags = 2
+	K3DMixerRenderingFlags_DistanceAttenuation       AU3DMixerRenderingFlags = 4
+	K3DMixerRenderingFlags_DistanceFilter            AU3DMixerRenderingFlags = 8
+	K3DMixerRenderingFlags_DistanceDiffusion         AU3DMixerRenderingFlags = 16
 	K3DMixerRenderingFlags_LinearDistanceAttenuation AU3DMixerRenderingFlags = 32
-	K3DMixerRenderingFlags_ConstantReverbBlend AU3DMixerRenderingFlags = 64
+	K3DMixerRenderingFlags_ConstantReverbBlend       AU3DMixerRenderingFlags = 64
 )
 
 func (e AU3DMixerRenderingFlags) String() string {
 	var parts []string
-	if e&K3DMixerRenderingFlags_InterAuralDelay != 0 { parts = append(parts, "K3DMixerRenderingFlags_InterAuralDelay") }
-	if e&K3DMixerRenderingFlags_DopplerShift != 0 { parts = append(parts, "K3DMixerRenderingFlags_DopplerShift") }
-	if e&K3DMixerRenderingFlags_DistanceAttenuation != 0 { parts = append(parts, "K3DMixerRenderingFlags_DistanceAttenuation") }
-	if e&K3DMixerRenderingFlags_DistanceFilter != 0 { parts = append(parts, "K3DMixerRenderingFlags_DistanceFilter") }
-	if e&K3DMixerRenderingFlags_DistanceDiffusion != 0 { parts = append(parts, "K3DMixerRenderingFlags_DistanceDiffusion") }
-	if e&K3DMixerRenderingFlags_LinearDistanceAttenuation != 0 { parts = append(parts, "K3DMixerRenderingFlags_LinearDistanceAttenuation") }
-	if e&K3DMixerRenderingFlags_ConstantReverbBlend != 0 { parts = append(parts, "K3DMixerRenderingFlags_ConstantReverbBlend") }
-	if len(parts) == 0 { return "0" }
+	if e&K3DMixerRenderingFlags_InterAuralDelay != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_InterAuralDelay")
+	}
+	if e&K3DMixerRenderingFlags_DopplerShift != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_DopplerShift")
+	}
+	if e&K3DMixerRenderingFlags_DistanceAttenuation != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_DistanceAttenuation")
+	}
+	if e&K3DMixerRenderingFlags_DistanceFilter != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_DistanceFilter")
+	}
+	if e&K3DMixerRenderingFlags_DistanceDiffusion != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_DistanceDiffusion")
+	}
+	if e&K3DMixerRenderingFlags_LinearDistanceAttenuation != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_LinearDistanceAttenuation")
+	}
+	if e&K3DMixerRenderingFlags_ConstantReverbBlend != 0 {
+		parts = append(parts, "K3DMixerRenderingFlags_ConstantReverbBlend")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AUAudioMixRenderingStyle int64
 
 const (
-	KAudioMixRenderingStyle_Cinematic AUAudioMixRenderingStyle = 0
-	KAudioMixRenderingStyle_Studio AUAudioMixRenderingStyle = 1
-	KAudioMixRenderingStyle_InFrame AUAudioMixRenderingStyle = 2
+	KAudioMixRenderingStyle_Cinematic               AUAudioMixRenderingStyle = 0
+	KAudioMixRenderingStyle_Studio                  AUAudioMixRenderingStyle = 1
+	KAudioMixRenderingStyle_InFrame                 AUAudioMixRenderingStyle = 2
 	KAudioMixRenderingStyle_CinematicBackgroundStem AUAudioMixRenderingStyle = 3
 	KAudioMixRenderingStyle_CinematicForegroundStem AUAudioMixRenderingStyle = 4
-	KAudioMixRenderingStyle_StudioForegroundStem AUAudioMixRenderingStyle = 5
-	KAudioMixRenderingStyle_InFrameForegroundStem AUAudioMixRenderingStyle = 6
-	KAudioMixRenderingStyle_Standard AUAudioMixRenderingStyle = 7
-	KAudioMixRenderingStyle_StudioBackgroundStem AUAudioMixRenderingStyle = 8
-	KAudioMixRenderingStyle_InFrameBackgroundStem AUAudioMixRenderingStyle = 9
+	KAudioMixRenderingStyle_StudioForegroundStem    AUAudioMixRenderingStyle = 5
+	KAudioMixRenderingStyle_InFrameForegroundStem   AUAudioMixRenderingStyle = 6
+	KAudioMixRenderingStyle_Standard                AUAudioMixRenderingStyle = 7
+	KAudioMixRenderingStyle_StudioBackgroundStem    AUAudioMixRenderingStyle = 8
+	KAudioMixRenderingStyle_InFrameBackgroundStem   AUAudioMixRenderingStyle = 9
 )
 
 func (e AUAudioMixRenderingStyle) String() string {
@@ -102,7 +118,7 @@ func (e AUAudioMixRenderingStyle) String() string {
 type AUAudioUnitBusType int64
 
 const (
-	AUAudioUnitBusTypeInput AUAudioUnitBusType = 1
+	AUAudioUnitBusTypeInput  AUAudioUnitBusType = 1
 	AUAudioUnitBusTypeOutput AUAudioUnitBusType = 2
 )
 
@@ -120,27 +136,37 @@ func (e AUAudioUnitBusType) String() string {
 type AUHostTransportStateFlags uint64
 
 const (
-	AUHostTransportStateChanged AUHostTransportStateFlags = 1
-	AUHostTransportStateMoving AUHostTransportStateFlags = 2
+	AUHostTransportStateChanged   AUHostTransportStateFlags = 1
+	AUHostTransportStateMoving    AUHostTransportStateFlags = 2
 	AUHostTransportStateRecording AUHostTransportStateFlags = 4
-	AUHostTransportStateCycling AUHostTransportStateFlags = 8
+	AUHostTransportStateCycling   AUHostTransportStateFlags = 8
 )
 
 func (e AUHostTransportStateFlags) String() string {
 	var parts []string
-	if e&AUHostTransportStateChanged != 0 { parts = append(parts, "AUHostTransportStateChanged") }
-	if e&AUHostTransportStateMoving != 0 { parts = append(parts, "AUHostTransportStateMoving") }
-	if e&AUHostTransportStateRecording != 0 { parts = append(parts, "AUHostTransportStateRecording") }
-	if e&AUHostTransportStateCycling != 0 { parts = append(parts, "AUHostTransportStateCycling") }
-	if len(parts) == 0 { return "0" }
+	if e&AUHostTransportStateChanged != 0 {
+		parts = append(parts, "AUHostTransportStateChanged")
+	}
+	if e&AUHostTransportStateMoving != 0 {
+		parts = append(parts, "AUHostTransportStateMoving")
+	}
+	if e&AUHostTransportStateRecording != 0 {
+		parts = append(parts, "AUHostTransportStateRecording")
+	}
+	if e&AUHostTransportStateCycling != 0 {
+		parts = append(parts, "AUHostTransportStateCycling")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AUParameterAutomationEventType int64
 
 const (
-	AUParameterAutomationEventTypeValue AUParameterAutomationEventType = 0
-	AUParameterAutomationEventTypeTouch AUParameterAutomationEventType = 1
+	AUParameterAutomationEventTypeValue   AUParameterAutomationEventType = 0
+	AUParameterAutomationEventTypeTouch   AUParameterAutomationEventType = 1
 	AUParameterAutomationEventTypeRelease AUParameterAutomationEventType = 2
 )
 
@@ -161,7 +187,7 @@ type AUParameterEventType int64
 
 const (
 	KParameterEvent_Immediate AUParameterEventType = 1
-	KParameterEvent_Ramped AUParameterEventType = 2
+	KParameterEvent_Ramped    AUParameterEventType = 2
 )
 
 func (e AUParameterEventType) String() string {
@@ -179,32 +205,46 @@ type AUParameterMIDIMappingFlags int64
 
 const (
 	KAUParameterMIDIMapping_AnyChannelFlag AUParameterMIDIMappingFlags = 1
-	KAUParameterMIDIMapping_AnyNoteFlag AUParameterMIDIMappingFlags = 2
-	KAUParameterMIDIMapping_SubRange AUParameterMIDIMappingFlags = 4
-	KAUParameterMIDIMapping_Toggle AUParameterMIDIMappingFlags = 8
-	KAUParameterMIDIMapping_Bipolar AUParameterMIDIMappingFlags = 16
-	KAUParameterMIDIMapping_Bipolar_On AUParameterMIDIMappingFlags = 32
+	KAUParameterMIDIMapping_AnyNoteFlag    AUParameterMIDIMappingFlags = 2
+	KAUParameterMIDIMapping_SubRange       AUParameterMIDIMappingFlags = 4
+	KAUParameterMIDIMapping_Toggle         AUParameterMIDIMappingFlags = 8
+	KAUParameterMIDIMapping_Bipolar        AUParameterMIDIMappingFlags = 16
+	KAUParameterMIDIMapping_Bipolar_On     AUParameterMIDIMappingFlags = 32
 )
 
 func (e AUParameterMIDIMappingFlags) String() string {
 	var parts []string
-	if e&KAUParameterMIDIMapping_AnyChannelFlag != 0 { parts = append(parts, "KAUParameterMIDIMapping_AnyChannelFlag") }
-	if e&KAUParameterMIDIMapping_AnyNoteFlag != 0 { parts = append(parts, "KAUParameterMIDIMapping_AnyNoteFlag") }
-	if e&KAUParameterMIDIMapping_SubRange != 0 { parts = append(parts, "KAUParameterMIDIMapping_SubRange") }
-	if e&KAUParameterMIDIMapping_Toggle != 0 { parts = append(parts, "KAUParameterMIDIMapping_Toggle") }
-	if e&KAUParameterMIDIMapping_Bipolar != 0 { parts = append(parts, "KAUParameterMIDIMapping_Bipolar") }
-	if e&KAUParameterMIDIMapping_Bipolar_On != 0 { parts = append(parts, "KAUParameterMIDIMapping_Bipolar_On") }
-	if len(parts) == 0 { return "0" }
+	if e&KAUParameterMIDIMapping_AnyChannelFlag != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_AnyChannelFlag")
+	}
+	if e&KAUParameterMIDIMapping_AnyNoteFlag != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_AnyNoteFlag")
+	}
+	if e&KAUParameterMIDIMapping_SubRange != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_SubRange")
+	}
+	if e&KAUParameterMIDIMapping_Toggle != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Toggle")
+	}
+	if e&KAUParameterMIDIMapping_Bipolar != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Bipolar")
+	}
+	if e&KAUParameterMIDIMapping_Bipolar_On != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Bipolar_On")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AURenderEventType int64
 
 const (
-	AURenderEventParameter AURenderEventType = 1
+	AURenderEventParameter     AURenderEventType = 1
 	AURenderEventParameterRamp AURenderEventType = 2
-	AURenderEventMIDI AURenderEventType = 8
-	AURenderEventMIDISysEx AURenderEventType = 9
+	AURenderEventMIDI          AURenderEventType = 8
+	AURenderEventMIDISysEx     AURenderEventType = 9
 	AURenderEventMIDIEventList AURenderEventType = 10
 )
 
@@ -228,19 +268,19 @@ func (e AURenderEventType) String() string {
 type AUReverbRoomType int64
 
 const (
-	KReverbRoomType_SmallRoom AUReverbRoomType = 0
-	KReverbRoomType_MediumRoom AUReverbRoomType = 1
-	KReverbRoomType_LargeRoom AUReverbRoomType = 2
-	KReverbRoomType_MediumHall AUReverbRoomType = 3
-	KReverbRoomType_LargeHall AUReverbRoomType = 4
-	KReverbRoomType_Plate AUReverbRoomType = 5
+	KReverbRoomType_SmallRoom     AUReverbRoomType = 0
+	KReverbRoomType_MediumRoom    AUReverbRoomType = 1
+	KReverbRoomType_LargeRoom     AUReverbRoomType = 2
+	KReverbRoomType_MediumHall    AUReverbRoomType = 3
+	KReverbRoomType_LargeHall     AUReverbRoomType = 4
+	KReverbRoomType_Plate         AUReverbRoomType = 5
 	KReverbRoomType_MediumChamber AUReverbRoomType = 6
-	KReverbRoomType_LargeChamber AUReverbRoomType = 7
-	KReverbRoomType_Cathedral AUReverbRoomType = 8
-	KReverbRoomType_LargeRoom2 AUReverbRoomType = 9
-	KReverbRoomType_MediumHall2 AUReverbRoomType = 10
-	KReverbRoomType_MediumHall3 AUReverbRoomType = 11
-	KReverbRoomType_LargeHall2 AUReverbRoomType = 12
+	KReverbRoomType_LargeChamber  AUReverbRoomType = 7
+	KReverbRoomType_Cathedral     AUReverbRoomType = 8
+	KReverbRoomType_LargeRoom2    AUReverbRoomType = 9
+	KReverbRoomType_MediumHall2   AUReverbRoomType = 10
+	KReverbRoomType_MediumHall3   AUReverbRoomType = 11
+	KReverbRoomType_LargeHall2    AUReverbRoomType = 12
 )
 
 func (e AUReverbRoomType) String() string {
@@ -279,33 +319,47 @@ func (e AUReverbRoomType) String() string {
 type AUScheduledAudioSliceFlags int64
 
 const (
-	KScheduledAudioSliceFlag_Complete AUScheduledAudioSliceFlags = 1
-	KScheduledAudioSliceFlag_BeganToRender AUScheduledAudioSliceFlags = 2
+	KScheduledAudioSliceFlag_Complete          AUScheduledAudioSliceFlags = 1
+	KScheduledAudioSliceFlag_BeganToRender     AUScheduledAudioSliceFlags = 2
 	KScheduledAudioSliceFlag_BeganToRenderLate AUScheduledAudioSliceFlags = 4
-	KScheduledAudioSliceFlag_Loop AUScheduledAudioSliceFlags = 8
-	KScheduledAudioSliceFlag_Interrupt AUScheduledAudioSliceFlags = 16
-	KScheduledAudioSliceFlag_InterruptAtLoop AUScheduledAudioSliceFlags = 32
+	KScheduledAudioSliceFlag_Loop              AUScheduledAudioSliceFlags = 8
+	KScheduledAudioSliceFlag_Interrupt         AUScheduledAudioSliceFlags = 16
+	KScheduledAudioSliceFlag_InterruptAtLoop   AUScheduledAudioSliceFlags = 32
 )
 
 func (e AUScheduledAudioSliceFlags) String() string {
 	var parts []string
-	if e&KScheduledAudioSliceFlag_Complete != 0 { parts = append(parts, "KScheduledAudioSliceFlag_Complete") }
-	if e&KScheduledAudioSliceFlag_BeganToRender != 0 { parts = append(parts, "KScheduledAudioSliceFlag_BeganToRender") }
-	if e&KScheduledAudioSliceFlag_BeganToRenderLate != 0 { parts = append(parts, "KScheduledAudioSliceFlag_BeganToRenderLate") }
-	if e&KScheduledAudioSliceFlag_Loop != 0 { parts = append(parts, "KScheduledAudioSliceFlag_Loop") }
-	if e&KScheduledAudioSliceFlag_Interrupt != 0 { parts = append(parts, "KScheduledAudioSliceFlag_Interrupt") }
-	if e&KScheduledAudioSliceFlag_InterruptAtLoop != 0 { parts = append(parts, "KScheduledAudioSliceFlag_InterruptAtLoop") }
-	if len(parts) == 0 { return "0" }
+	if e&KScheduledAudioSliceFlag_Complete != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Complete")
+	}
+	if e&KScheduledAudioSliceFlag_BeganToRender != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_BeganToRender")
+	}
+	if e&KScheduledAudioSliceFlag_BeganToRenderLate != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_BeganToRenderLate")
+	}
+	if e&KScheduledAudioSliceFlag_Loop != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Loop")
+	}
+	if e&KScheduledAudioSliceFlag_Interrupt != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Interrupt")
+	}
+	if e&KScheduledAudioSliceFlag_InterruptAtLoop != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_InterruptAtLoop")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AUSpatialMixerAttenuationCurve int64
 
 const (
-	KSpatialMixerAttenuationCurve_Power AUSpatialMixerAttenuationCurve = 0
+	KSpatialMixerAttenuationCurve_Power       AUSpatialMixerAttenuationCurve = 0
 	KSpatialMixerAttenuationCurve_Exponential AUSpatialMixerAttenuationCurve = 1
-	KSpatialMixerAttenuationCurve_Inverse AUSpatialMixerAttenuationCurve = 2
-	KSpatialMixerAttenuationCurve_Linear AUSpatialMixerAttenuationCurve = 3
+	KSpatialMixerAttenuationCurve_Inverse     AUSpatialMixerAttenuationCurve = 2
+	KSpatialMixerAttenuationCurve_Linear      AUSpatialMixerAttenuationCurve = 3
 )
 
 func (e AUSpatialMixerAttenuationCurve) String() string {
@@ -326,8 +380,8 @@ func (e AUSpatialMixerAttenuationCurve) String() string {
 type AUSpatialMixerOutputType int64
 
 const (
-	KSpatialMixerOutputType_Headphones AUSpatialMixerOutputType = 1
-	KSpatialMixerOutputType_BuiltInSpeakers AUSpatialMixerOutputType = 2
+	KSpatialMixerOutputType_Headphones       AUSpatialMixerOutputType = 1
+	KSpatialMixerOutputType_BuiltInSpeakers  AUSpatialMixerOutputType = 2
 	KSpatialMixerOutputType_ExternalSpeakers AUSpatialMixerOutputType = 3
 )
 
@@ -347,8 +401,8 @@ func (e AUSpatialMixerOutputType) String() string {
 type AUSpatialMixerPersonalizedHRTFMode int64
 
 const (
-	KSpatialMixerPersonalizedHRTFMode_Off AUSpatialMixerPersonalizedHRTFMode = 0
-	KSpatialMixerPersonalizedHRTFMode_On AUSpatialMixerPersonalizedHRTFMode = 1
+	KSpatialMixerPersonalizedHRTFMode_Off  AUSpatialMixerPersonalizedHRTFMode = 0
+	KSpatialMixerPersonalizedHRTFMode_On   AUSpatialMixerPersonalizedHRTFMode = 1
 	KSpatialMixerPersonalizedHRTFMode_Auto AUSpatialMixerPersonalizedHRTFMode = 2
 )
 
@@ -368,7 +422,7 @@ func (e AUSpatialMixerPersonalizedHRTFMode) String() string {
 type AUSpatialMixerPointSourceInHeadMode int64
 
 const (
-	KSpatialMixerPointSourceInHeadMode_Mono AUSpatialMixerPointSourceInHeadMode = 0
+	KSpatialMixerPointSourceInHeadMode_Mono   AUSpatialMixerPointSourceInHeadMode = 0
 	KSpatialMixerPointSourceInHeadMode_Bypass AUSpatialMixerPointSourceInHeadMode = 1
 )
 
@@ -386,15 +440,21 @@ func (e AUSpatialMixerPointSourceInHeadMode) String() string {
 type AUSpatialMixerRenderingFlags int64
 
 const (
-	KSpatialMixerRenderingFlags_InterAuralDelay AUSpatialMixerRenderingFlags = 1
+	KSpatialMixerRenderingFlags_InterAuralDelay     AUSpatialMixerRenderingFlags = 1
 	KSpatialMixerRenderingFlags_DistanceAttenuation AUSpatialMixerRenderingFlags = 4
 )
 
 func (e AUSpatialMixerRenderingFlags) String() string {
 	var parts []string
-	if e&KSpatialMixerRenderingFlags_InterAuralDelay != 0 { parts = append(parts, "KSpatialMixerRenderingFlags_InterAuralDelay") }
-	if e&KSpatialMixerRenderingFlags_DistanceAttenuation != 0 { parts = append(parts, "KSpatialMixerRenderingFlags_DistanceAttenuation") }
-	if len(parts) == 0 { return "0" }
+	if e&KSpatialMixerRenderingFlags_InterAuralDelay != 0 {
+		parts = append(parts, "KSpatialMixerRenderingFlags_InterAuralDelay")
+	}
+	if e&KSpatialMixerRenderingFlags_DistanceAttenuation != 0 {
+		parts = append(parts, "KSpatialMixerRenderingFlags_DistanceAttenuation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -402,9 +462,9 @@ type AUSpatialMixerSourceMode int64
 
 const (
 	KSpatialMixerSourceMode_SpatializeIfMono AUSpatialMixerSourceMode = 0
-	KSpatialMixerSourceMode_Bypass AUSpatialMixerSourceMode = 1
-	KSpatialMixerSourceMode_PointSource AUSpatialMixerSourceMode = 2
-	KSpatialMixerSourceMode_AmbienceBed AUSpatialMixerSourceMode = 3
+	KSpatialMixerSourceMode_Bypass           AUSpatialMixerSourceMode = 1
+	KSpatialMixerSourceMode_PointSource      AUSpatialMixerSourceMode = 2
+	KSpatialMixerSourceMode_AmbienceBed      AUSpatialMixerSourceMode = 3
 )
 
 func (e AUSpatialMixerSourceMode) String() string {
@@ -425,14 +485,14 @@ func (e AUSpatialMixerSourceMode) String() string {
 type AUSpatializationAlgorithm int64
 
 const (
-	KSpatializationAlgorithm_EqualPowerPanning AUSpatializationAlgorithm = 0
-	KSpatializationAlgorithm_SphericalHead AUSpatializationAlgorithm = 1
-	KSpatializationAlgorithm_HRTF AUSpatializationAlgorithm = 2
-	KSpatializationAlgorithm_SoundField AUSpatializationAlgorithm = 3
+	KSpatializationAlgorithm_EqualPowerPanning  AUSpatializationAlgorithm = 0
+	KSpatializationAlgorithm_SphericalHead      AUSpatializationAlgorithm = 1
+	KSpatializationAlgorithm_HRTF               AUSpatializationAlgorithm = 2
+	KSpatializationAlgorithm_SoundField         AUSpatializationAlgorithm = 3
 	KSpatializationAlgorithm_VectorBasedPanning AUSpatializationAlgorithm = 4
-	KSpatializationAlgorithm_StereoPassThrough AUSpatializationAlgorithm = 5
-	KSpatializationAlgorithm_HRTFHQ AUSpatializationAlgorithm = 6
-	KSpatializationAlgorithm_UseOutputType AUSpatializationAlgorithm = 7
+	KSpatializationAlgorithm_StereoPassThrough  AUSpatializationAlgorithm = 5
+	KSpatializationAlgorithm_HRTFHQ             AUSpatializationAlgorithm = 6
+	KSpatializationAlgorithm_UseOutputType      AUSpatializationAlgorithm = 7
 )
 
 func (e AUSpatializationAlgorithm) String() string {
@@ -462,9 +522,9 @@ type AUVoiceIOOtherAudioDuckingLevel int64
 
 const (
 	KAUVoiceIOOtherAudioDuckingLevelDefault AUVoiceIOOtherAudioDuckingLevel = 0
-	KAUVoiceIOOtherAudioDuckingLevelMin AUVoiceIOOtherAudioDuckingLevel = 10
-	KAUVoiceIOOtherAudioDuckingLevelMid AUVoiceIOOtherAudioDuckingLevel = 20
-	KAUVoiceIOOtherAudioDuckingLevelMax AUVoiceIOOtherAudioDuckingLevel = 30
+	KAUVoiceIOOtherAudioDuckingLevelMin     AUVoiceIOOtherAudioDuckingLevel = 10
+	KAUVoiceIOOtherAudioDuckingLevelMid     AUVoiceIOOtherAudioDuckingLevel = 20
+	KAUVoiceIOOtherAudioDuckingLevelMax     AUVoiceIOOtherAudioDuckingLevel = 30
 )
 
 func (e AUVoiceIOOtherAudioDuckingLevel) String() string {
@@ -486,7 +546,7 @@ type AUVoiceIOSpeechActivityEvent int64
 
 const (
 	KAUVoiceIOSpeechActivityHasStarted AUVoiceIOSpeechActivityEvent = 0
-	KAUVoiceIOSpeechActivityHasEnded AUVoiceIOSpeechActivityEvent = 1
+	KAUVoiceIOSpeechActivityHasEnded   AUVoiceIOSpeechActivityEvent = 1
 )
 
 func (e AUVoiceIOSpeechActivityEvent) String() string {
@@ -504,7 +564,7 @@ type AudioBalanceFadeType int64
 
 const (
 	KAudioBalanceFadeType_MaxUnityGain AudioBalanceFadeType = 0
-	KAudioBalanceFadeType_EqualPower AudioBalanceFadeType = 1
+	KAudioBalanceFadeType_EqualPower   AudioBalanceFadeType = 1
 )
 
 func (e AudioBalanceFadeType) String() string {
@@ -526,29 +586,45 @@ const (
 
 func (e AudioBytePacketTranslationFlags) String() string {
 	var parts []string
-	if e&KBytePacketTranslationFlag_IsEstimate != 0 { parts = append(parts, "KBytePacketTranslationFlag_IsEstimate") }
-	if len(parts) == 0 { return "0" }
+	if e&KBytePacketTranslationFlag_IsEstimate != 0 {
+		parts = append(parts, "KBytePacketTranslationFlag_IsEstimate")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioComponentFlags int64
 
 const (
-	KAudioComponentFlag_Unsearchable AudioComponentFlags = 1
-	KAudioComponentFlag_SandboxSafe AudioComponentFlags = 2
-	KAudioComponentFlag_IsV3AudioUnit AudioComponentFlags = 4
+	KAudioComponentFlag_Unsearchable               AudioComponentFlags = 1
+	KAudioComponentFlag_SandboxSafe                AudioComponentFlags = 2
+	KAudioComponentFlag_IsV3AudioUnit              AudioComponentFlags = 4
 	KAudioComponentFlag_RequiresAsyncInstantiation AudioComponentFlags = 8
-	KAudioComponentFlag_CanLoadInProcess AudioComponentFlags = 16
+	KAudioComponentFlag_CanLoadInProcess           AudioComponentFlags = 16
 )
 
 func (e AudioComponentFlags) String() string {
 	var parts []string
-	if e&KAudioComponentFlag_Unsearchable != 0 { parts = append(parts, "KAudioComponentFlag_Unsearchable") }
-	if e&KAudioComponentFlag_SandboxSafe != 0 { parts = append(parts, "KAudioComponentFlag_SandboxSafe") }
-	if e&KAudioComponentFlag_IsV3AudioUnit != 0 { parts = append(parts, "KAudioComponentFlag_IsV3AudioUnit") }
-	if e&KAudioComponentFlag_RequiresAsyncInstantiation != 0 { parts = append(parts, "KAudioComponentFlag_RequiresAsyncInstantiation") }
-	if e&KAudioComponentFlag_CanLoadInProcess != 0 { parts = append(parts, "KAudioComponentFlag_CanLoadInProcess") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioComponentFlag_Unsearchable != 0 {
+		parts = append(parts, "KAudioComponentFlag_Unsearchable")
+	}
+	if e&KAudioComponentFlag_SandboxSafe != 0 {
+		parts = append(parts, "KAudioComponentFlag_SandboxSafe")
+	}
+	if e&KAudioComponentFlag_IsV3AudioUnit != 0 {
+		parts = append(parts, "KAudioComponentFlag_IsV3AudioUnit")
+	}
+	if e&KAudioComponentFlag_RequiresAsyncInstantiation != 0 {
+		parts = append(parts, "KAudioComponentFlag_RequiresAsyncInstantiation")
+	}
+	if e&KAudioComponentFlag_CanLoadInProcess != 0 {
+		parts = append(parts, "KAudioComponentFlag_CanLoadInProcess")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -556,24 +632,30 @@ type AudioComponentInstantiationOptions int64
 
 const (
 	KAudioComponentInstantiation_LoadOutOfProcess AudioComponentInstantiationOptions = 1
-	KAudioComponentInstantiation_LoadInProcess AudioComponentInstantiationOptions = 2
+	KAudioComponentInstantiation_LoadInProcess    AudioComponentInstantiationOptions = 2
 )
 
 func (e AudioComponentInstantiationOptions) String() string {
 	var parts []string
-	if e&KAudioComponentInstantiation_LoadOutOfProcess != 0 { parts = append(parts, "KAudioComponentInstantiation_LoadOutOfProcess") }
-	if e&KAudioComponentInstantiation_LoadInProcess != 0 { parts = append(parts, "KAudioComponentInstantiation_LoadInProcess") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioComponentInstantiation_LoadOutOfProcess != 0 {
+		parts = append(parts, "KAudioComponentInstantiation_LoadOutOfProcess")
+	}
+	if e&KAudioComponentInstantiation_LoadInProcess != 0 {
+		parts = append(parts, "KAudioComponentInstantiation_LoadInProcess")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioComponentValidationResult int64
 
 const (
-	KAudioComponentValidationResult_Unknown AudioComponentValidationResult = 0
-	KAudioComponentValidationResult_Passed AudioComponentValidationResult = 1
-	KAudioComponentValidationResult_Failed AudioComponentValidationResult = 2
-	KAudioComponentValidationResult_TimedOut AudioComponentValidationResult = 3
+	KAudioComponentValidationResult_Unknown                AudioComponentValidationResult = 0
+	KAudioComponentValidationResult_Passed                 AudioComponentValidationResult = 1
+	KAudioComponentValidationResult_Failed                 AudioComponentValidationResult = 2
+	KAudioComponentValidationResult_TimedOut               AudioComponentValidationResult = 3
 	KAudioComponentValidationResult_UnauthorizedError_Open AudioComponentValidationResult = 4
 	KAudioComponentValidationResult_UnauthorizedError_Init AudioComponentValidationResult = 5
 )
@@ -605,31 +687,41 @@ const (
 
 func (e AudioConverterOptions) String() string {
 	var parts []string
-	if e&KAudioConverterOption_Unbuffered != 0 { parts = append(parts, "KAudioConverterOption_Unbuffered") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioConverterOption_Unbuffered != 0 {
+		parts = append(parts, "KAudioConverterOption_Unbuffered")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioFileFlags int64
 
 const (
-	KAudioFileFlags_EraseFile AudioFileFlags = 1
+	KAudioFileFlags_EraseFile              AudioFileFlags = 1
 	KAudioFileFlags_DontPageAlignAudioData AudioFileFlags = 2
 )
 
 func (e AudioFileFlags) String() string {
 	var parts []string
-	if e&KAudioFileFlags_EraseFile != 0 { parts = append(parts, "KAudioFileFlags_EraseFile") }
-	if e&KAudioFileFlags_DontPageAlignAudioData != 0 { parts = append(parts, "KAudioFileFlags_DontPageAlignAudioData") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioFileFlags_EraseFile != 0 {
+		parts = append(parts, "KAudioFileFlags_EraseFile")
+	}
+	if e&KAudioFileFlags_DontPageAlignAudioData != 0 {
+		parts = append(parts, "KAudioFileFlags_DontPageAlignAudioData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioFilePermissions int64
 
 const (
-	KAudioFileReadPermission AudioFilePermissions = 1
-	KAudioFileWritePermission AudioFilePermissions = 2
+	KAudioFileReadPermission      AudioFilePermissions = 1
+	KAudioFileWritePermission     AudioFilePermissions = 2
 	KAudioFileReadWritePermission AudioFilePermissions = 3
 )
 
@@ -649,17 +741,25 @@ func (e AudioFilePermissions) String() string {
 type AudioFileRegionFlags int64
 
 const (
-	KAudioFileRegionFlag_LoopEnable AudioFileRegionFlags = 1
-	KAudioFileRegionFlag_PlayForward AudioFileRegionFlags = 2
+	KAudioFileRegionFlag_LoopEnable   AudioFileRegionFlags = 1
+	KAudioFileRegionFlag_PlayForward  AudioFileRegionFlags = 2
 	KAudioFileRegionFlag_PlayBackward AudioFileRegionFlags = 4
 )
 
 func (e AudioFileRegionFlags) String() string {
 	var parts []string
-	if e&KAudioFileRegionFlag_LoopEnable != 0 { parts = append(parts, "KAudioFileRegionFlag_LoopEnable") }
-	if e&KAudioFileRegionFlag_PlayForward != 0 { parts = append(parts, "KAudioFileRegionFlag_PlayForward") }
-	if e&KAudioFileRegionFlag_PlayBackward != 0 { parts = append(parts, "KAudioFileRegionFlag_PlayBackward") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioFileRegionFlag_LoopEnable != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_LoopEnable")
+	}
+	if e&KAudioFileRegionFlag_PlayForward != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_PlayForward")
+	}
+	if e&KAudioFileRegionFlag_PlayBackward != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_PlayBackward")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -671,8 +771,12 @@ const (
 
 func (e AudioFileStreamParseFlags) String() string {
 	var parts []string
-	if e&KAudioFileStreamParseFlag_Discontinuity != 0 { parts = append(parts, "KAudioFileStreamParseFlag_Discontinuity") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioFileStreamParseFlag_Discontinuity != 0 {
+		parts = append(parts, "KAudioFileStreamParseFlag_Discontinuity")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -680,14 +784,20 @@ type AudioFileStreamPropertyFlags int64
 
 const (
 	KAudioFileStreamPropertyFlag_PropertyIsCached AudioFileStreamPropertyFlags = 1
-	KAudioFileStreamPropertyFlag_CacheProperty AudioFileStreamPropertyFlags = 2
+	KAudioFileStreamPropertyFlag_CacheProperty    AudioFileStreamPropertyFlags = 2
 )
 
 func (e AudioFileStreamPropertyFlags) String() string {
 	var parts []string
-	if e&KAudioFileStreamPropertyFlag_PropertyIsCached != 0 { parts = append(parts, "KAudioFileStreamPropertyFlag_PropertyIsCached") }
-	if e&KAudioFileStreamPropertyFlag_CacheProperty != 0 { parts = append(parts, "KAudioFileStreamPropertyFlag_CacheProperty") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioFileStreamPropertyFlag_PropertyIsCached != 0 {
+		parts = append(parts, "KAudioFileStreamPropertyFlag_PropertyIsCached")
+	}
+	if e&KAudioFileStreamPropertyFlag_CacheProperty != 0 {
+		parts = append(parts, "KAudioFileStreamPropertyFlag_CacheProperty")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -699,15 +809,19 @@ const (
 
 func (e AudioFileStreamSeekFlags) String() string {
 	var parts []string
-	if e&KAudioFileStreamSeekFlag_OffsetIsEstimated != 0 { parts = append(parts, "KAudioFileStreamSeekFlag_OffsetIsEstimated") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioFileStreamSeekFlag_OffsetIsEstimated != 0 {
+		parts = append(parts, "KAudioFileStreamSeekFlag_OffsetIsEstimated")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioPanningMode int64
 
 const (
-	KPanningMode_SoundField AudioPanningMode = 3
+	KPanningMode_SoundField         AudioPanningMode = 3
 	KPanningMode_VectorBasedPanning AudioPanningMode = 4
 )
 
@@ -725,50 +839,72 @@ func (e AudioPanningMode) String() string {
 type AudioQueueProcessingTapFlags int64
 
 const (
-	KAudioQueueProcessingTap_PreEffects AudioQueueProcessingTapFlags = 1
-	KAudioQueueProcessingTap_PostEffects AudioQueueProcessingTapFlags = 2
-	KAudioQueueProcessingTap_Siphon AudioQueueProcessingTapFlags = 4
+	KAudioQueueProcessingTap_PreEffects    AudioQueueProcessingTapFlags = 1
+	KAudioQueueProcessingTap_PostEffects   AudioQueueProcessingTapFlags = 2
+	KAudioQueueProcessingTap_Siphon        AudioQueueProcessingTapFlags = 4
 	KAudioQueueProcessingTap_StartOfStream AudioQueueProcessingTapFlags = 256
-	KAudioQueueProcessingTap_EndOfStream AudioQueueProcessingTapFlags = 512
+	KAudioQueueProcessingTap_EndOfStream   AudioQueueProcessingTapFlags = 512
 )
 
 func (e AudioQueueProcessingTapFlags) String() string {
 	var parts []string
-	if e&KAudioQueueProcessingTap_PreEffects != 0 { parts = append(parts, "KAudioQueueProcessingTap_PreEffects") }
-	if e&KAudioQueueProcessingTap_PostEffects != 0 { parts = append(parts, "KAudioQueueProcessingTap_PostEffects") }
-	if e&KAudioQueueProcessingTap_Siphon != 0 { parts = append(parts, "KAudioQueueProcessingTap_Siphon") }
-	if e&KAudioQueueProcessingTap_StartOfStream != 0 { parts = append(parts, "KAudioQueueProcessingTap_StartOfStream") }
-	if e&KAudioQueueProcessingTap_EndOfStream != 0 { parts = append(parts, "KAudioQueueProcessingTap_EndOfStream") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioQueueProcessingTap_PreEffects != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_PreEffects")
+	}
+	if e&KAudioQueueProcessingTap_PostEffects != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_PostEffects")
+	}
+	if e&KAudioQueueProcessingTap_Siphon != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_Siphon")
+	}
+	if e&KAudioQueueProcessingTap_StartOfStream != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_StartOfStream")
+	}
+	if e&KAudioQueueProcessingTap_EndOfStream != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_EndOfStream")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioSettingsFlags int64
 
 const (
-	KAudioSettingsFlags_ExpertParameter AudioSettingsFlags = 1
-	KAudioSettingsFlags_InvisibleParameter AudioSettingsFlags = 2
-	KAudioSettingsFlags_MetaParameter AudioSettingsFlags = 4
+	KAudioSettingsFlags_ExpertParameter        AudioSettingsFlags = 1
+	KAudioSettingsFlags_InvisibleParameter     AudioSettingsFlags = 2
+	KAudioSettingsFlags_MetaParameter          AudioSettingsFlags = 4
 	KAudioSettingsFlags_UserInterfaceParameter AudioSettingsFlags = 8
 )
 
 func (e AudioSettingsFlags) String() string {
 	var parts []string
-	if e&KAudioSettingsFlags_ExpertParameter != 0 { parts = append(parts, "KAudioSettingsFlags_ExpertParameter") }
-	if e&KAudioSettingsFlags_InvisibleParameter != 0 { parts = append(parts, "KAudioSettingsFlags_InvisibleParameter") }
-	if e&KAudioSettingsFlags_MetaParameter != 0 { parts = append(parts, "KAudioSettingsFlags_MetaParameter") }
-	if e&KAudioSettingsFlags_UserInterfaceParameter != 0 { parts = append(parts, "KAudioSettingsFlags_UserInterfaceParameter") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioSettingsFlags_ExpertParameter != 0 {
+		parts = append(parts, "KAudioSettingsFlags_ExpertParameter")
+	}
+	if e&KAudioSettingsFlags_InvisibleParameter != 0 {
+		parts = append(parts, "KAudioSettingsFlags_InvisibleParameter")
+	}
+	if e&KAudioSettingsFlags_MetaParameter != 0 {
+		parts = append(parts, "KAudioSettingsFlags_MetaParameter")
+	}
+	if e&KAudioSettingsFlags_UserInterfaceParameter != 0 {
+		parts = append(parts, "KAudioSettingsFlags_UserInterfaceParameter")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioUnitEventType int64
 
 const (
-	KAudioUnitEvent_ParameterValueChange AudioUnitEventType = 0
+	KAudioUnitEvent_ParameterValueChange        AudioUnitEventType = 0
 	KAudioUnitEvent_BeginParameterChangeGesture AudioUnitEventType = 1
-	KAudioUnitEvent_EndParameterChangeGesture AudioUnitEventType = 2
-	KAudioUnitEvent_PropertyChange AudioUnitEventType = 3
+	KAudioUnitEvent_EndParameterChangeGesture   AudioUnitEventType = 2
+	KAudioUnitEvent_PropertyChange              AudioUnitEventType = 3
 )
 
 func (e AudioUnitEventType) String() string {
@@ -789,89 +925,135 @@ func (e AudioUnitEventType) String() string {
 type AudioUnitParameterOptions int64
 
 const (
-	KAudioUnitParameterFlag_CFNameRelease AudioUnitParameterOptions = 16
-	KAudioUnitParameterFlag_OmitFromPresets AudioUnitParameterOptions = 8192
-	KAudioUnitParameterFlag_PlotHistory AudioUnitParameterOptions = 16384
-	KAudioUnitParameterFlag_MeterReadOnly AudioUnitParameterOptions = 32768
-	KAudioUnitParameterFlag_DisplayMask AudioUnitParameterOptions = 4653056
-	KAudioUnitParameterFlag_DisplaySquareRoot AudioUnitParameterOptions = 65536
-	KAudioUnitParameterFlag_DisplaySquared AudioUnitParameterOptions = 131072
-	KAudioUnitParameterFlag_DisplayCubed AudioUnitParameterOptions = 196608
-	KAudioUnitParameterFlag_DisplayCubeRoot AudioUnitParameterOptions = 262144
+	KAudioUnitParameterFlag_CFNameRelease      AudioUnitParameterOptions = 16
+	KAudioUnitParameterFlag_OmitFromPresets    AudioUnitParameterOptions = 8192
+	KAudioUnitParameterFlag_PlotHistory        AudioUnitParameterOptions = 16384
+	KAudioUnitParameterFlag_MeterReadOnly      AudioUnitParameterOptions = 32768
+	KAudioUnitParameterFlag_DisplayMask        AudioUnitParameterOptions = 4653056
+	KAudioUnitParameterFlag_DisplaySquareRoot  AudioUnitParameterOptions = 65536
+	KAudioUnitParameterFlag_DisplaySquared     AudioUnitParameterOptions = 131072
+	KAudioUnitParameterFlag_DisplayCubed       AudioUnitParameterOptions = 196608
+	KAudioUnitParameterFlag_DisplayCubeRoot    AudioUnitParameterOptions = 262144
 	KAudioUnitParameterFlag_DisplayExponential AudioUnitParameterOptions = 327680
-	KAudioUnitParameterFlag_HasClump AudioUnitParameterOptions = 1048576
-	KAudioUnitParameterFlag_ValuesHaveStrings AudioUnitParameterOptions = 2097152
+	KAudioUnitParameterFlag_HasClump           AudioUnitParameterOptions = 1048576
+	KAudioUnitParameterFlag_ValuesHaveStrings  AudioUnitParameterOptions = 2097152
 	KAudioUnitParameterFlag_DisplayLogarithmic AudioUnitParameterOptions = 4194304
-	KAudioUnitParameterFlag_IsHighResolution AudioUnitParameterOptions = 8388608
-	KAudioUnitParameterFlag_NonRealTime AudioUnitParameterOptions = 16777216
-	KAudioUnitParameterFlag_CanRamp AudioUnitParameterOptions = 33554432
-	KAudioUnitParameterFlag_ExpertMode AudioUnitParameterOptions = 67108864
-	KAudioUnitParameterFlag_HasCFNameString AudioUnitParameterOptions = 134217728
-	KAudioUnitParameterFlag_IsGlobalMeta AudioUnitParameterOptions = 268435456
-	KAudioUnitParameterFlag_IsElementMeta AudioUnitParameterOptions = 536870912
-	KAudioUnitParameterFlag_IsReadable AudioUnitParameterOptions = 1073741824
-	KAudioUnitParameterFlag_IsWritable AudioUnitParameterOptions = 2147483648
+	KAudioUnitParameterFlag_IsHighResolution   AudioUnitParameterOptions = 8388608
+	KAudioUnitParameterFlag_NonRealTime        AudioUnitParameterOptions = 16777216
+	KAudioUnitParameterFlag_CanRamp            AudioUnitParameterOptions = 33554432
+	KAudioUnitParameterFlag_ExpertMode         AudioUnitParameterOptions = 67108864
+	KAudioUnitParameterFlag_HasCFNameString    AudioUnitParameterOptions = 134217728
+	KAudioUnitParameterFlag_IsGlobalMeta       AudioUnitParameterOptions = 268435456
+	KAudioUnitParameterFlag_IsElementMeta      AudioUnitParameterOptions = 536870912
+	KAudioUnitParameterFlag_IsReadable         AudioUnitParameterOptions = 1073741824
+	KAudioUnitParameterFlag_IsWritable         AudioUnitParameterOptions = 2147483648
 )
 
 func (e AudioUnitParameterOptions) String() string {
 	var parts []string
-	if e&KAudioUnitParameterFlag_CFNameRelease != 0 { parts = append(parts, "KAudioUnitParameterFlag_CFNameRelease") }
-	if e&KAudioUnitParameterFlag_OmitFromPresets != 0 { parts = append(parts, "KAudioUnitParameterFlag_OmitFromPresets") }
-	if e&KAudioUnitParameterFlag_PlotHistory != 0 { parts = append(parts, "KAudioUnitParameterFlag_PlotHistory") }
-	if e&KAudioUnitParameterFlag_MeterReadOnly != 0 { parts = append(parts, "KAudioUnitParameterFlag_MeterReadOnly") }
-	if e&KAudioUnitParameterFlag_DisplayMask != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplayMask") }
-	if e&KAudioUnitParameterFlag_DisplaySquareRoot != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplaySquareRoot") }
-	if e&KAudioUnitParameterFlag_DisplaySquared != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplaySquared") }
-	if e&KAudioUnitParameterFlag_DisplayCubed != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplayCubed") }
-	if e&KAudioUnitParameterFlag_DisplayCubeRoot != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplayCubeRoot") }
-	if e&KAudioUnitParameterFlag_DisplayExponential != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplayExponential") }
-	if e&KAudioUnitParameterFlag_HasClump != 0 { parts = append(parts, "KAudioUnitParameterFlag_HasClump") }
-	if e&KAudioUnitParameterFlag_ValuesHaveStrings != 0 { parts = append(parts, "KAudioUnitParameterFlag_ValuesHaveStrings") }
-	if e&KAudioUnitParameterFlag_DisplayLogarithmic != 0 { parts = append(parts, "KAudioUnitParameterFlag_DisplayLogarithmic") }
-	if e&KAudioUnitParameterFlag_IsHighResolution != 0 { parts = append(parts, "KAudioUnitParameterFlag_IsHighResolution") }
-	if e&KAudioUnitParameterFlag_NonRealTime != 0 { parts = append(parts, "KAudioUnitParameterFlag_NonRealTime") }
-	if e&KAudioUnitParameterFlag_CanRamp != 0 { parts = append(parts, "KAudioUnitParameterFlag_CanRamp") }
-	if e&KAudioUnitParameterFlag_ExpertMode != 0 { parts = append(parts, "KAudioUnitParameterFlag_ExpertMode") }
-	if e&KAudioUnitParameterFlag_HasCFNameString != 0 { parts = append(parts, "KAudioUnitParameterFlag_HasCFNameString") }
-	if e&KAudioUnitParameterFlag_IsGlobalMeta != 0 { parts = append(parts, "KAudioUnitParameterFlag_IsGlobalMeta") }
-	if e&KAudioUnitParameterFlag_IsElementMeta != 0 { parts = append(parts, "KAudioUnitParameterFlag_IsElementMeta") }
-	if e&KAudioUnitParameterFlag_IsReadable != 0 { parts = append(parts, "KAudioUnitParameterFlag_IsReadable") }
-	if e&KAudioUnitParameterFlag_IsWritable != 0 { parts = append(parts, "KAudioUnitParameterFlag_IsWritable") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioUnitParameterFlag_CFNameRelease != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_CFNameRelease")
+	}
+	if e&KAudioUnitParameterFlag_OmitFromPresets != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_OmitFromPresets")
+	}
+	if e&KAudioUnitParameterFlag_PlotHistory != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_PlotHistory")
+	}
+	if e&KAudioUnitParameterFlag_MeterReadOnly != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_MeterReadOnly")
+	}
+	if e&KAudioUnitParameterFlag_DisplayMask != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplayMask")
+	}
+	if e&KAudioUnitParameterFlag_DisplaySquareRoot != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplaySquareRoot")
+	}
+	if e&KAudioUnitParameterFlag_DisplaySquared != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplaySquared")
+	}
+	if e&KAudioUnitParameterFlag_DisplayCubed != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplayCubed")
+	}
+	if e&KAudioUnitParameterFlag_DisplayCubeRoot != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplayCubeRoot")
+	}
+	if e&KAudioUnitParameterFlag_DisplayExponential != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplayExponential")
+	}
+	if e&KAudioUnitParameterFlag_HasClump != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_HasClump")
+	}
+	if e&KAudioUnitParameterFlag_ValuesHaveStrings != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_ValuesHaveStrings")
+	}
+	if e&KAudioUnitParameterFlag_DisplayLogarithmic != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_DisplayLogarithmic")
+	}
+	if e&KAudioUnitParameterFlag_IsHighResolution != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_IsHighResolution")
+	}
+	if e&KAudioUnitParameterFlag_NonRealTime != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_NonRealTime")
+	}
+	if e&KAudioUnitParameterFlag_CanRamp != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_CanRamp")
+	}
+	if e&KAudioUnitParameterFlag_ExpertMode != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_ExpertMode")
+	}
+	if e&KAudioUnitParameterFlag_HasCFNameString != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_HasCFNameString")
+	}
+	if e&KAudioUnitParameterFlag_IsGlobalMeta != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_IsGlobalMeta")
+	}
+	if e&KAudioUnitParameterFlag_IsElementMeta != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_IsElementMeta")
+	}
+	if e&KAudioUnitParameterFlag_IsReadable != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_IsReadable")
+	}
+	if e&KAudioUnitParameterFlag_IsWritable != 0 {
+		parts = append(parts, "KAudioUnitParameterFlag_IsWritable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type AudioUnitParameterUnit int64
 
 const (
-	KAudioUnitParameterUnit_Generic AudioUnitParameterUnit = 0
-	KAudioUnitParameterUnit_Indexed AudioUnitParameterUnit = 1
-	KAudioUnitParameterUnit_Boolean AudioUnitParameterUnit = 2
-	KAudioUnitParameterUnit_Percent AudioUnitParameterUnit = 3
-	KAudioUnitParameterUnit_Seconds AudioUnitParameterUnit = 4
-	KAudioUnitParameterUnit_SampleFrames AudioUnitParameterUnit = 5
-	KAudioUnitParameterUnit_Phase AudioUnitParameterUnit = 6
-	KAudioUnitParameterUnit_Rate AudioUnitParameterUnit = 7
-	KAudioUnitParameterUnit_Hertz AudioUnitParameterUnit = 8
-	KAudioUnitParameterUnit_Cents AudioUnitParameterUnit = 9
-	KAudioUnitParameterUnit_RelativeSemiTones AudioUnitParameterUnit = 10
-	KAudioUnitParameterUnit_MIDINoteNumber AudioUnitParameterUnit = 11
-	KAudioUnitParameterUnit_MIDIController AudioUnitParameterUnit = 12
-	KAudioUnitParameterUnit_Decibels AudioUnitParameterUnit = 13
-	KAudioUnitParameterUnit_LinearGain AudioUnitParameterUnit = 14
-	KAudioUnitParameterUnit_Degrees AudioUnitParameterUnit = 15
+	KAudioUnitParameterUnit_Generic             AudioUnitParameterUnit = 0
+	KAudioUnitParameterUnit_Indexed             AudioUnitParameterUnit = 1
+	KAudioUnitParameterUnit_Boolean             AudioUnitParameterUnit = 2
+	KAudioUnitParameterUnit_Percent             AudioUnitParameterUnit = 3
+	KAudioUnitParameterUnit_Seconds             AudioUnitParameterUnit = 4
+	KAudioUnitParameterUnit_SampleFrames        AudioUnitParameterUnit = 5
+	KAudioUnitParameterUnit_Phase               AudioUnitParameterUnit = 6
+	KAudioUnitParameterUnit_Rate                AudioUnitParameterUnit = 7
+	KAudioUnitParameterUnit_Hertz               AudioUnitParameterUnit = 8
+	KAudioUnitParameterUnit_Cents               AudioUnitParameterUnit = 9
+	KAudioUnitParameterUnit_RelativeSemiTones   AudioUnitParameterUnit = 10
+	KAudioUnitParameterUnit_MIDINoteNumber      AudioUnitParameterUnit = 11
+	KAudioUnitParameterUnit_MIDIController      AudioUnitParameterUnit = 12
+	KAudioUnitParameterUnit_Decibels            AudioUnitParameterUnit = 13
+	KAudioUnitParameterUnit_LinearGain          AudioUnitParameterUnit = 14
+	KAudioUnitParameterUnit_Degrees             AudioUnitParameterUnit = 15
 	KAudioUnitParameterUnit_EqualPowerCrossfade AudioUnitParameterUnit = 16
-	KAudioUnitParameterUnit_MixerFaderCurve1 AudioUnitParameterUnit = 17
-	KAudioUnitParameterUnit_Pan AudioUnitParameterUnit = 18
-	KAudioUnitParameterUnit_Meters AudioUnitParameterUnit = 19
-	KAudioUnitParameterUnit_AbsoluteCents AudioUnitParameterUnit = 20
-	KAudioUnitParameterUnit_Octaves AudioUnitParameterUnit = 21
-	KAudioUnitParameterUnit_BPM AudioUnitParameterUnit = 22
-	KAudioUnitParameterUnit_Beats AudioUnitParameterUnit = 23
-	KAudioUnitParameterUnit_Milliseconds AudioUnitParameterUnit = 24
-	KAudioUnitParameterUnit_Ratio AudioUnitParameterUnit = 25
-	KAudioUnitParameterUnit_CustomUnit AudioUnitParameterUnit = 26
-	KAudioUnitParameterUnit_MIDI2Controller AudioUnitParameterUnit = 27
+	KAudioUnitParameterUnit_MixerFaderCurve1    AudioUnitParameterUnit = 17
+	KAudioUnitParameterUnit_Pan                 AudioUnitParameterUnit = 18
+	KAudioUnitParameterUnit_Meters              AudioUnitParameterUnit = 19
+	KAudioUnitParameterUnit_AbsoluteCents       AudioUnitParameterUnit = 20
+	KAudioUnitParameterUnit_Octaves             AudioUnitParameterUnit = 21
+	KAudioUnitParameterUnit_BPM                 AudioUnitParameterUnit = 22
+	KAudioUnitParameterUnit_Beats               AudioUnitParameterUnit = 23
+	KAudioUnitParameterUnit_Milliseconds        AudioUnitParameterUnit = 24
+	KAudioUnitParameterUnit_Ratio               AudioUnitParameterUnit = 25
+	KAudioUnitParameterUnit_CustomUnit          AudioUnitParameterUnit = 26
+	KAudioUnitParameterUnit_MIDI2Controller     AudioUnitParameterUnit = 27
 )
 
 func (e AudioUnitParameterUnit) String() string {
@@ -941,8 +1123,8 @@ type AudioUnitRemoteControlEvent int64
 
 const (
 	KAudioUnitRemoteControlEvent_TogglePlayPause AudioUnitRemoteControlEvent = 1
-	KAudioUnitRemoteControlEvent_ToggleRecord AudioUnitRemoteControlEvent = 2
-	KAudioUnitRemoteControlEvent_Rewind AudioUnitRemoteControlEvent = 3
+	KAudioUnitRemoteControlEvent_ToggleRecord    AudioUnitRemoteControlEvent = 2
+	KAudioUnitRemoteControlEvent_Rewind          AudioUnitRemoteControlEvent = 3
 )
 
 func (e AudioUnitRemoteControlEvent) String() string {
@@ -961,39 +1143,57 @@ func (e AudioUnitRemoteControlEvent) String() string {
 type AudioUnitRenderActionFlags int64
 
 const (
-	KAudioUnitRenderAction_PreRender AudioUnitRenderActionFlags = 4
-	KAudioUnitRenderAction_PostRender AudioUnitRenderActionFlags = 8
-	KAudioUnitRenderAction_OutputIsSilence AudioUnitRenderActionFlags = 16
-	KAudioOfflineUnitRenderAction_Preflight AudioUnitRenderActionFlags = 32
-	KAudioOfflineUnitRenderAction_Render AudioUnitRenderActionFlags = 64
-	KAudioOfflineUnitRenderAction_Complete AudioUnitRenderActionFlags = 128
-	KAudioUnitRenderAction_PostRenderError AudioUnitRenderActionFlags = 256
+	KAudioUnitRenderAction_PreRender            AudioUnitRenderActionFlags = 4
+	KAudioUnitRenderAction_PostRender           AudioUnitRenderActionFlags = 8
+	KAudioUnitRenderAction_OutputIsSilence      AudioUnitRenderActionFlags = 16
+	KAudioOfflineUnitRenderAction_Preflight     AudioUnitRenderActionFlags = 32
+	KAudioOfflineUnitRenderAction_Render        AudioUnitRenderActionFlags = 64
+	KAudioOfflineUnitRenderAction_Complete      AudioUnitRenderActionFlags = 128
+	KAudioUnitRenderAction_PostRenderError      AudioUnitRenderActionFlags = 256
 	KAudioUnitRenderAction_DoNotCheckRenderArgs AudioUnitRenderActionFlags = 512
 )
 
 func (e AudioUnitRenderActionFlags) String() string {
 	var parts []string
-	if e&KAudioUnitRenderAction_PreRender != 0 { parts = append(parts, "KAudioUnitRenderAction_PreRender") }
-	if e&KAudioUnitRenderAction_PostRender != 0 { parts = append(parts, "KAudioUnitRenderAction_PostRender") }
-	if e&KAudioUnitRenderAction_OutputIsSilence != 0 { parts = append(parts, "KAudioUnitRenderAction_OutputIsSilence") }
-	if e&KAudioOfflineUnitRenderAction_Preflight != 0 { parts = append(parts, "KAudioOfflineUnitRenderAction_Preflight") }
-	if e&KAudioOfflineUnitRenderAction_Render != 0 { parts = append(parts, "KAudioOfflineUnitRenderAction_Render") }
-	if e&KAudioOfflineUnitRenderAction_Complete != 0 { parts = append(parts, "KAudioOfflineUnitRenderAction_Complete") }
-	if e&KAudioUnitRenderAction_PostRenderError != 0 { parts = append(parts, "KAudioUnitRenderAction_PostRenderError") }
-	if e&KAudioUnitRenderAction_DoNotCheckRenderArgs != 0 { parts = append(parts, "KAudioUnitRenderAction_DoNotCheckRenderArgs") }
-	if len(parts) == 0 { return "0" }
+	if e&KAudioUnitRenderAction_PreRender != 0 {
+		parts = append(parts, "KAudioUnitRenderAction_PreRender")
+	}
+	if e&KAudioUnitRenderAction_PostRender != 0 {
+		parts = append(parts, "KAudioUnitRenderAction_PostRender")
+	}
+	if e&KAudioUnitRenderAction_OutputIsSilence != 0 {
+		parts = append(parts, "KAudioUnitRenderAction_OutputIsSilence")
+	}
+	if e&KAudioOfflineUnitRenderAction_Preflight != 0 {
+		parts = append(parts, "KAudioOfflineUnitRenderAction_Preflight")
+	}
+	if e&KAudioOfflineUnitRenderAction_Render != 0 {
+		parts = append(parts, "KAudioOfflineUnitRenderAction_Render")
+	}
+	if e&KAudioOfflineUnitRenderAction_Complete != 0 {
+		parts = append(parts, "KAudioOfflineUnitRenderAction_Complete")
+	}
+	if e&KAudioUnitRenderAction_PostRenderError != 0 {
+		parts = append(parts, "KAudioUnitRenderAction_PostRenderError")
+	}
+	if e&KAudioUnitRenderAction_DoNotCheckRenderArgs != 0 {
+		parts = append(parts, "KAudioUnitRenderAction_DoNotCheckRenderArgs")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CAClockMessage int64
 
 const (
-	KCAClockMessage_StartTimeSet CAClockMessage = 1937009005
-	KCAClockMessage_Started CAClockMessage = 1937011316
-	KCAClockMessage_Stopped CAClockMessage = 1937010544
-	KCAClockMessage_Armed CAClockMessage = 1634889060
-	KCAClockMessage_Disarmed CAClockMessage = 1684107885
-	KCAClockMessage_PropertyChanged CAClockMessage = 1885562983
+	KCAClockMessage_StartTimeSet     CAClockMessage = 1937009005
+	KCAClockMessage_Started          CAClockMessage = 1937011316
+	KCAClockMessage_Stopped          CAClockMessage = 1937010544
+	KCAClockMessage_Armed            CAClockMessage = 1634889060
+	KCAClockMessage_Disarmed         CAClockMessage = 1684107885
+	KCAClockMessage_PropertyChanged  CAClockMessage = 1885562983
 	KCAClockMessage_WrongSMPTEFormat CAClockMessage = 1064529264
 )
 
@@ -1021,19 +1221,19 @@ func (e CAClockMessage) String() string {
 type CAClockPropertyID int64
 
 const (
-	KCAClockProperty_InternalTimebase CAClockPropertyID = 1768846434
-	KCAClockProperty_TimebaseSource CAClockPropertyID = 1769235059
-	KCAClockProperty_SyncMode CAClockPropertyID = 1937337965
-	KCAClockProperty_SyncSource CAClockPropertyID = 1937337971
-	KCAClockProperty_SMPTEFormat CAClockPropertyID = 1936552038
-	KCAClockProperty_SMPTEOffset CAClockPropertyID = 1936552047
+	KCAClockProperty_InternalTimebase      CAClockPropertyID = 1768846434
+	KCAClockProperty_TimebaseSource        CAClockPropertyID = 1769235059
+	KCAClockProperty_SyncMode              CAClockPropertyID = 1937337965
+	KCAClockProperty_SyncSource            CAClockPropertyID = 1937337971
+	KCAClockProperty_SMPTEFormat           CAClockPropertyID = 1936552038
+	KCAClockProperty_SMPTEOffset           CAClockPropertyID = 1936552047
 	KCAClockProperty_MIDIClockDestinations CAClockPropertyID = 1835164516
-	KCAClockProperty_MTCDestinations CAClockPropertyID = 1836344164
-	KCAClockProperty_MTCFreewheelTime CAClockPropertyID = 1836344951
-	KCAClockProperty_TempoMap CAClockPropertyID = 1953329263
-	KCAClockProperty_MeterTrack CAClockPropertyID = 1835365490
-	KCAClockProperty_Name CAClockPropertyID = 1851878757
-	KCAClockProperty_SendMIDISPP CAClockPropertyID = 1836281968
+	KCAClockProperty_MTCDestinations       CAClockPropertyID = 1836344164
+	KCAClockProperty_MTCFreewheelTime      CAClockPropertyID = 1836344951
+	KCAClockProperty_TempoMap              CAClockPropertyID = 1953329263
+	KCAClockProperty_MeterTrack            CAClockPropertyID = 1835365490
+	KCAClockProperty_Name                  CAClockPropertyID = 1851878757
+	KCAClockProperty_SendMIDISPP           CAClockPropertyID = 1836281968
 )
 
 func (e CAClockPropertyID) String() string {
@@ -1072,9 +1272,9 @@ func (e CAClockPropertyID) String() string {
 type CAClockSyncMode int64
 
 const (
-	KCAClockSyncMode_Internal CAClockSyncMode = 1768846450
+	KCAClockSyncMode_Internal           CAClockSyncMode = 1768846450
 	KCAClockSyncMode_MIDIClockTransport CAClockSyncMode = 1835232363
-	KCAClockSyncMode_MTCTransport CAClockSyncMode = 1835889763
+	KCAClockSyncMode_MTCTransport       CAClockSyncMode = 1835889763
 )
 
 func (e CAClockSyncMode) String() string {
@@ -1093,12 +1293,12 @@ func (e CAClockSyncMode) String() string {
 type CAClockTimeFormat int64
 
 const (
-	KCAClockTimeFormat_HostTime CAClockTimeFormat = 1752134516
-	KCAClockTimeFormat_Samples CAClockTimeFormat = 1935764848
-	KCAClockTimeFormat_Beats CAClockTimeFormat = 1650811252
-	KCAClockTimeFormat_Seconds CAClockTimeFormat = 1936024435
-	KCAClockTimeFormat_SMPTESeconds CAClockTimeFormat = 1936552051
-	KCAClockTimeFormat_SMPTETime CAClockTimeFormat = 1936552052
+	KCAClockTimeFormat_HostTime        CAClockTimeFormat = 1752134516
+	KCAClockTimeFormat_Samples         CAClockTimeFormat = 1935764848
+	KCAClockTimeFormat_Beats           CAClockTimeFormat = 1650811252
+	KCAClockTimeFormat_Seconds         CAClockTimeFormat = 1936024435
+	KCAClockTimeFormat_SMPTESeconds    CAClockTimeFormat = 1936552051
+	KCAClockTimeFormat_SMPTETime       CAClockTimeFormat = 1936552052
 	KCAClockTimeFormat_AbsoluteSeconds CAClockTimeFormat = 1634952547
 )
 
@@ -1126,8 +1326,8 @@ func (e CAClockTimeFormat) String() string {
 type CAClockTimebase int64
 
 const (
-	KCAClockTimebase_HostTime CAClockTimebase = 1752134516
-	KCAClockTimebase_AudioDevice CAClockTimebase = 1635083369
+	KCAClockTimebase_HostTime        CAClockTimebase = 1752134516
+	KCAClockTimebase_AudioDevice     CAClockTimebase = 1635083369
 	KCAClockTimebase_AudioOutputUnit CAClockTimebase = 1635086197
 )
 
@@ -1147,32 +1347,46 @@ func (e CAClockTimebase) String() string {
 type CAFFormatFlags int64
 
 const (
-	KCAFLinearPCMFormatFlagIsFloat CAFFormatFlags = 1
+	KCAFLinearPCMFormatFlagIsFloat        CAFFormatFlags = 1
 	KCAFLinearPCMFormatFlagIsLittleEndian CAFFormatFlags = 2
 )
 
 func (e CAFFormatFlags) String() string {
 	var parts []string
-	if e&KCAFLinearPCMFormatFlagIsFloat != 0 { parts = append(parts, "KCAFLinearPCMFormatFlagIsFloat") }
-	if e&KCAFLinearPCMFormatFlagIsLittleEndian != 0 { parts = append(parts, "KCAFLinearPCMFormatFlagIsLittleEndian") }
-	if len(parts) == 0 { return "0" }
+	if e&KCAFLinearPCMFormatFlagIsFloat != 0 {
+		parts = append(parts, "KCAFLinearPCMFormatFlagIsFloat")
+	}
+	if e&KCAFLinearPCMFormatFlagIsLittleEndian != 0 {
+		parts = append(parts, "KCAFLinearPCMFormatFlagIsLittleEndian")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CAFRegionFlags int64
 
 const (
-	KCAFRegionFlag_LoopEnable CAFRegionFlags = 1
-	KCAFRegionFlag_PlayForward CAFRegionFlags = 2
+	KCAFRegionFlag_LoopEnable   CAFRegionFlags = 1
+	KCAFRegionFlag_PlayForward  CAFRegionFlags = 2
 	KCAFRegionFlag_PlayBackward CAFRegionFlags = 4
 )
 
 func (e CAFRegionFlags) String() string {
 	var parts []string
-	if e&KCAFRegionFlag_LoopEnable != 0 { parts = append(parts, "KCAFRegionFlag_LoopEnable") }
-	if e&KCAFRegionFlag_PlayForward != 0 { parts = append(parts, "KCAFRegionFlag_PlayForward") }
-	if e&KCAFRegionFlag_PlayBackward != 0 { parts = append(parts, "KCAFRegionFlag_PlayBackward") }
-	if len(parts) == 0 { return "0" }
+	if e&KCAFRegionFlag_LoopEnable != 0 {
+		parts = append(parts, "KCAFRegionFlag_LoopEnable")
+	}
+	if e&KCAFRegionFlag_PlayForward != 0 {
+		parts = append(parts, "KCAFRegionFlag_PlayForward")
+	}
+	if e&KCAFRegionFlag_PlayBackward != 0 {
+		parts = append(parts, "KCAFRegionFlag_PlayBackward")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1180,7 +1394,7 @@ func (e CAFRegionFlags) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -1198,8 +1412,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -1235,22 +1449,26 @@ func (e MDQuerySortOptionFlags) String() string {
 type MusicSequenceFileFlags int64
 
 const (
-	KMusicSequenceFileFlags_Default MusicSequenceFileFlags = 0
+	KMusicSequenceFileFlags_Default   MusicSequenceFileFlags = 0
 	KMusicSequenceFileFlags_EraseFile MusicSequenceFileFlags = 1
 )
 
 func (e MusicSequenceFileFlags) String() string {
 	var parts []string
-	if e&KMusicSequenceFileFlags_EraseFile != 0 { parts = append(parts, "KMusicSequenceFileFlags_EraseFile") }
-	if len(parts) == 0 { return "0" }
+	if e&KMusicSequenceFileFlags_EraseFile != 0 {
+		parts = append(parts, "KMusicSequenceFileFlags_EraseFile")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MusicSequenceFileTypeID int64
 
 const (
-	KMusicSequenceFile_AnyType MusicSequenceFileTypeID = 0
-	KMusicSequenceFile_MIDIType MusicSequenceFileTypeID = 1835623529
+	KMusicSequenceFile_AnyType     MusicSequenceFileTypeID = 0
+	KMusicSequenceFile_MIDIType    MusicSequenceFileTypeID = 1835623529
 	KMusicSequenceFile_iMelodyType MusicSequenceFileTypeID = 1768777068
 )
 
@@ -1270,21 +1488,25 @@ func (e MusicSequenceFileTypeID) String() string {
 type MusicSequenceLoadFlags int64
 
 const (
-	KMusicSequenceLoadSMF_PreserveTracks MusicSequenceLoadFlags = 0
+	KMusicSequenceLoadSMF_PreserveTracks   MusicSequenceLoadFlags = 0
 	KMusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadFlags = 1
 )
 
 func (e MusicSequenceLoadFlags) String() string {
 	var parts []string
-	if e&KMusicSequenceLoadSMF_ChannelsToTracks != 0 { parts = append(parts, "KMusicSequenceLoadSMF_ChannelsToTracks") }
-	if len(parts) == 0 { return "0" }
+	if e&KMusicSequenceLoadSMF_ChannelsToTracks != 0 {
+		parts = append(parts, "KMusicSequenceLoadSMF_ChannelsToTracks")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type MusicSequenceType int64
 
 const (
-	KMusicSequenceType_Beats MusicSequenceType = 1650811252
+	KMusicSequenceType_Beats   MusicSequenceType = 1650811252
 	KMusicSequenceType_Seconds MusicSequenceType = 1936024435
 	KMusicSequenceType_Samples MusicSequenceType = 1935764848
 )
@@ -1306,8 +1528,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -1326,13 +1548,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -1359,24 +1581,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -1417,9 +1639,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -1439,12 +1661,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -1471,14 +1693,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -1507,9 +1729,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -1528,36 +1750,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1587,8 +1823,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1608,62 +1844,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1789,15 +2025,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1835,7 +2071,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1843,7 +2081,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1861,8 +2099,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1881,26 +2119,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1922,27 +2176,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1966,11 +2220,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1995,22 +2249,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -2061,34 +2315,48 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -2097,76 +2365,76 @@ const (
 )
 
 const (
-	K3DMixerParam_Azimuth = 0
-	K3DMixerParam_BusEnable = 20
-	K3DMixerParam_Distance = 2
-	K3DMixerParam_DryWetReverbBlend = 23
-	K3DMixerParam_Elevation = 1
-	K3DMixerParam_Gain = 3
-	K3DMixerParam_GlobalReverbGain = 6
-	K3DMixerParam_GlobalReverbGainInDecibels = 24
-	K3DMixerParam_MaxGain = 10
-	K3DMixerParam_MaxGainInDecibels = 22
-	K3DMixerParam_MinGain = 9
-	K3DMixerParam_MinGainInDecibels = 21
-	K3DMixerParam_ObstructionAttenuation = 8
+	K3DMixerParam_Azimuth                          = 0
+	K3DMixerParam_BusEnable                        = 20
+	K3DMixerParam_Distance                         = 2
+	K3DMixerParam_DryWetReverbBlend                = 23
+	K3DMixerParam_Elevation                        = 1
+	K3DMixerParam_Gain                             = 3
+	K3DMixerParam_GlobalReverbGain                 = 6
+	K3DMixerParam_GlobalReverbGainInDecibels       = 24
+	K3DMixerParam_MaxGain                          = 10
+	K3DMixerParam_MaxGainInDecibels                = 22
+	K3DMixerParam_MinGain                          = 9
+	K3DMixerParam_MinGainInDecibels                = 21
+	K3DMixerParam_ObstructionAttenuation           = 8
 	K3DMixerParam_ObstructionAttenuationInDecibels = 26
-	K3DMixerParam_OcclusionAttenuation = 7
-	K3DMixerParam_OcclusionAttenuationInDecibels = 25
-	K3DMixerParam_PlaybackRate = 4
-	K3DMixerParam_PostAveragePower = 3000
-	K3DMixerParam_PostPeakHoldLevel = 4000
-	K3DMixerParam_PreAveragePower = 1000
-	K3DMixerParam_PrePeakHoldLevel = 2000
-	K3DMixerParam_ReverbBlend = 5
+	K3DMixerParam_OcclusionAttenuation             = 7
+	K3DMixerParam_OcclusionAttenuationInDecibels   = 25
+	K3DMixerParam_PlaybackRate                     = 4
+	K3DMixerParam_PostAveragePower                 = 3000
+	K3DMixerParam_PostPeakHoldLevel                = 4000
+	K3DMixerParam_PreAveragePower                  = 1000
+	K3DMixerParam_PrePeakHoldLevel                 = 2000
+	K3DMixerParam_ReverbBlend                      = 5
 )
 
 const (
 	KAUAudioMixParameter_RemixAmount = 1
-	KAUAudioMixParameter_Style = 0
+	KAUAudioMixParameter_Style       = 0
 )
 
 const (
-	KAUAudioMixProperty_EnableSpatialization = 5001
+	KAUAudioMixProperty_EnableSpatialization    = 5001
 	KAUAudioMixProperty_SpatialAudioMixMetadata = 5000
 )
 
 const (
 	KAUGraphErr_CannotDoInCurrentContext = -10863
-	KAUGraphErr_InvalidAudioUnit = -10864
-	KAUGraphErr_InvalidConnection = -10861
-	KAUGraphErr_NodeNotFound = -10860
-	KAUGraphErr_OutputNodeErr = -10862
+	KAUGraphErr_InvalidAudioUnit         = -10864
+	KAUGraphErr_InvalidConnection        = -10861
+	KAUGraphErr_NodeNotFound             = -10860
+	KAUGraphErr_OutputNodeErr            = -10862
 )
 
 const (
-	KAUGroupParameterID_AllNotesOff = 123
-	KAUGroupParameterID_AllSoundOff = 120
-	KAUGroupParameterID_ChannelPressure = 208
-	KAUGroupParameterID_DataEntry = 6
-	KAUGroupParameterID_DataEntry_LSB = 38
-	KAUGroupParameterID_Expression = 11
-	KAUGroupParameterID_Expression_LSB = 43
-	KAUGroupParameterID_Foot = 4
-	KAUGroupParameterID_Foot_LSB = 36
-	KAUGroupParameterID_KeyPressure = 160
+	KAUGroupParameterID_AllNotesOff          = 123
+	KAUGroupParameterID_AllSoundOff          = 120
+	KAUGroupParameterID_ChannelPressure      = 208
+	KAUGroupParameterID_DataEntry            = 6
+	KAUGroupParameterID_DataEntry_LSB        = 38
+	KAUGroupParameterID_Expression           = 11
+	KAUGroupParameterID_Expression_LSB       = 43
+	KAUGroupParameterID_Foot                 = 4
+	KAUGroupParameterID_Foot_LSB             = 36
+	KAUGroupParameterID_KeyPressure          = 160
 	KAUGroupParameterID_KeyPressure_FirstKey = 256
-	KAUGroupParameterID_KeyPressure_LastKey = 383
-	KAUGroupParameterID_ModWheel = 1
-	KAUGroupParameterID_ModWheel_LSB = 33
-	KAUGroupParameterID_Pan = 10
-	KAUGroupParameterID_Pan_LSB = 42
-	KAUGroupParameterID_PitchBend = 224
-	KAUGroupParameterID_ResetAllControllers = 121
-	KAUGroupParameterID_Sostenuto = 66
-	KAUGroupParameterID_Sustain = 64
-	KAUGroupParameterID_Volume = 7
-	KAUGroupParameterID_Volume_LSB = 39
+	KAUGroupParameterID_KeyPressure_LastKey  = 383
+	KAUGroupParameterID_ModWheel             = 1
+	KAUGroupParameterID_ModWheel_LSB         = 33
+	KAUGroupParameterID_Pan                  = 10
+	KAUGroupParameterID_Pan_LSB              = 42
+	KAUGroupParameterID_PitchBend            = 224
+	KAUGroupParameterID_ResetAllControllers  = 121
+	KAUGroupParameterID_Sostenuto            = 66
+	KAUGroupParameterID_Sustain              = 64
+	KAUGroupParameterID_Volume               = 7
+	KAUGroupParameterID_Volume_LSB           = 39
 )
 
 const (
 	KAULowShelfParam_CutoffFrequency = 0
-	KAULowShelfParam_Gain = 1
+	KAULowShelfParam_Gain            = 1
 )
 
 const (
@@ -2175,37 +2443,37 @@ const (
 
 const (
 	KAUNBandEQFilterType_2ndOrderButterworthHighPass = 2
-	KAUNBandEQFilterType_2ndOrderButterworthLowPass = 1
-	KAUNBandEQFilterType_BandPass = 5
-	KAUNBandEQFilterType_BandStop = 6
-	KAUNBandEQFilterType_HighShelf = 8
-	KAUNBandEQFilterType_LowShelf = 7
-	KAUNBandEQFilterType_Parametric = 0
-	KAUNBandEQFilterType_ResonantHighPass = 4
-	KAUNBandEQFilterType_ResonantHighShelf = 10
-	KAUNBandEQFilterType_ResonantLowPass = 3
-	KAUNBandEQFilterType_ResonantLowShelf = 9
-	KNumAUNBandEQFilterTypes = 11
+	KAUNBandEQFilterType_2ndOrderButterworthLowPass  = 1
+	KAUNBandEQFilterType_BandPass                    = 5
+	KAUNBandEQFilterType_BandStop                    = 6
+	KAUNBandEQFilterType_HighShelf                   = 8
+	KAUNBandEQFilterType_LowShelf                    = 7
+	KAUNBandEQFilterType_Parametric                  = 0
+	KAUNBandEQFilterType_ResonantHighPass            = 4
+	KAUNBandEQFilterType_ResonantHighShelf           = 10
+	KAUNBandEQFilterType_ResonantLowPass             = 3
+	KAUNBandEQFilterType_ResonantLowShelf            = 9
+	KNumAUNBandEQFilterTypes                         = 11
 )
 
 const (
-	KAUNBandEQParam_Bandwidth = 5000
+	KAUNBandEQParam_Bandwidth  = 5000
 	KAUNBandEQParam_BypassBand = 1000
 	KAUNBandEQParam_FilterType = 2000
-	KAUNBandEQParam_Frequency = 3000
-	KAUNBandEQParam_Gain = 4000
+	KAUNBandEQParam_Frequency  = 3000
+	KAUNBandEQParam_Gain       = 4000
 	KAUNBandEQParam_GlobalGain = 0
 )
 
 const (
 	KAUNBandEQProperty_BiquadCoefficients = 2203
-	KAUNBandEQProperty_MaxNumberOfBands = 2201
-	KAUNBandEQProperty_NumberOfBands = 2200
+	KAUNBandEQProperty_MaxNumberOfBands   = 2201
+	KAUNBandEQProperty_NumberOfBands      = 2200
 )
 
 const (
 	KAUNetReceiveParam_NumParameters = 1
-	KAUNetReceiveParam_Status = 0
+	KAUNetReceiveParam_Status        = 0
 )
 
 const (
@@ -2215,51 +2483,51 @@ const (
 
 const (
 	KAUNetSendParam_NumParameters = 1
-	KAUNetSendParam_Status = 0
+	KAUNetSendParam_Status        = 0
 )
 
 const (
-	KAUNetSendNumPresetFormats = 18
-	KAUNetSendPresetFormat_AAC_128kbpspc = 7
-	KAUNetSendPresetFormat_AAC_32kbpspc = 13
-	KAUNetSendPresetFormat_AAC_40kbpspc = 12
-	KAUNetSendPresetFormat_AAC_48kbpspc = 11
-	KAUNetSendPresetFormat_AAC_64kbpspc = 10
-	KAUNetSendPresetFormat_AAC_80kbpspc = 9
-	KAUNetSendPresetFormat_AAC_96kbpspc = 8
+	KAUNetSendNumPresetFormats             = 18
+	KAUNetSendPresetFormat_AAC_128kbpspc   = 7
+	KAUNetSendPresetFormat_AAC_32kbpspc    = 13
+	KAUNetSendPresetFormat_AAC_40kbpspc    = 12
+	KAUNetSendPresetFormat_AAC_48kbpspc    = 11
+	KAUNetSendPresetFormat_AAC_64kbpspc    = 10
+	KAUNetSendPresetFormat_AAC_80kbpspc    = 9
+	KAUNetSendPresetFormat_AAC_96kbpspc    = 8
 	KAUNetSendPresetFormat_AAC_LD_32kbpspc = 17
 	KAUNetSendPresetFormat_AAC_LD_40kbpspc = 16
 	KAUNetSendPresetFormat_AAC_LD_48kbpspc = 15
 	KAUNetSendPresetFormat_AAC_LD_64kbpspc = 14
-	KAUNetSendPresetFormat_IMA4 = 6
-	KAUNetSendPresetFormat_Lossless16 = 4
-	KAUNetSendPresetFormat_Lossless24 = 3
-	KAUNetSendPresetFormat_PCMFloat32 = 0
-	KAUNetSendPresetFormat_PCMInt16 = 2
-	KAUNetSendPresetFormat_PCMInt24 = 1
-	KAUNetSendPresetFormat_ULaw = 5
+	KAUNetSendPresetFormat_IMA4            = 6
+	KAUNetSendPresetFormat_Lossless16      = 4
+	KAUNetSendPresetFormat_Lossless24      = 3
+	KAUNetSendPresetFormat_PCMFloat32      = 0
+	KAUNetSendPresetFormat_PCMInt16        = 2
+	KAUNetSendPresetFormat_PCMInt24        = 1
+	KAUNetSendPresetFormat_ULaw            = 5
 )
 
 const (
-	KAUNetSendProperty_Disconnect = 3517
-	KAUNetSendProperty_Password = 3518
-	KAUNetSendProperty_PortNum = 3513
-	KAUNetSendProperty_ServiceName = 3516
-	KAUNetSendProperty_TransmissionFormat = 3514
+	KAUNetSendProperty_Disconnect              = 3517
+	KAUNetSendProperty_Password                = 3518
+	KAUNetSendProperty_PortNum                 = 3513
+	KAUNetSendProperty_ServiceName             = 3516
+	KAUNetSendProperty_TransmissionFormat      = 3514
 	KAUNetSendProperty_TransmissionFormatIndex = 3515
 )
 
 const (
-	KAUNetStatus_Connected = 1
-	KAUNetStatus_Connecting = 4
-	KAUNetStatus_Listening = 5
+	KAUNetStatus_Connected    = 1
+	KAUNetStatus_Connecting   = 4
+	KAUNetStatus_Listening    = 5
 	KAUNetStatus_NotConnected = 0
-	KAUNetStatus_Overflow = 2
-	KAUNetStatus_Underflow = 3
+	KAUNetStatus_Overflow     = 2
+	KAUNetStatus_Underflow    = 3
 )
 
 const (
-	KAUNodeInteraction_Connection = 1
+	KAUNodeInteraction_Connection    = 1
 	KAUNodeInteraction_InputCallback = 2
 )
 
@@ -2269,9 +2537,9 @@ const (
 
 const (
 	KAUSamplerParam_CoarseTuning = 901
-	KAUSamplerParam_FineTuning = 902
-	KAUSamplerParam_Gain = 900
-	KAUSamplerParam_Pan = 903
+	KAUSamplerParam_FineTuning   = 902
+	KAUSamplerParam_Gain         = 900
+	KAUSamplerParam_Pan          = 903
 )
 
 const (
@@ -2280,24 +2548,24 @@ const (
 )
 
 const (
-	KAUSamplerProperty_BankAndPreset = 4100
+	KAUSamplerProperty_BankAndPreset      = 4100
 	KAUSamplerProperty_LoadPresetFromBank = 4100
 )
 
 const (
-	KAUSampler_DefaultBankLSB = 0
-	KAUSampler_DefaultMelodicBankMSB = 121
+	KAUSampler_DefaultBankLSB           = 0
+	KAUSampler_DefaultMelodicBankMSB    = 121
 	KAUSampler_DefaultPercussionBankMSB = 120
 )
 
 const (
-	KAUSoundIsolationParam_SoundToIsolate = 1
+	KAUSoundIsolationParam_SoundToIsolate   = 1
 	KAUSoundIsolationParam_WetDryMixPercent = 0
 )
 
 const (
 	KAUSoundIsolationSoundType_HighQualityVoice = 0
-	KAUSoundIsolationSoundType_Voice = 1
+	KAUSoundIsolationSoundType_Voice            = 1
 )
 
 const (
@@ -2305,8 +2573,8 @@ const (
 )
 
 const (
-	KAUVoiceIOProperty_BypassVoiceProcessing = 2100
-	KAUVoiceIOProperty_MuteOutput = 2104
+	KAUVoiceIOProperty_BypassVoiceProcessing    = 2100
+	KAUVoiceIOProperty_MuteOutput               = 2104
 	KAUVoiceIOProperty_VoiceProcessingEnableAGC = 2101
 )
 
@@ -2323,9 +2591,9 @@ const (
 )
 
 const (
-	KAudioCodecBitRateControlMode_Constant = 0
-	KAudioCodecBitRateControlMode_LongTermAverage = 1
-	KAudioCodecBitRateControlMode_Variable = 3
+	KAudioCodecBitRateControlMode_Constant            = 0
+	KAudioCodecBitRateControlMode_LongTermAverage     = 1
+	KAudioCodecBitRateControlMode_Variable            = 3
 	KAudioCodecBitRateControlMode_VariableConstrained = 2
 )
 
@@ -2336,131 +2604,131 @@ const (
 )
 
 const (
-	KAudioCodecContentSource_AV_Spatial_Live = 41
-	KAudioCodecContentSource_AV_Spatial_Offline = 39
-	KAudioCodecContentSource_AV_Traditional_Live = 40
-	KAudioCodecContentSource_AV_Traditional_Offline = 38
-	KAudioCodecContentSource_AppleAV_Spatial_Live = 9
-	KAudioCodecContentSource_AppleAV_Spatial_Offline = 7
-	KAudioCodecContentSource_AppleAV_Traditional_Live = 8
-	KAudioCodecContentSource_AppleAV_Traditional_Offline = 6
-	KAudioCodecContentSource_AppleCapture_Spatial = 2
+	KAudioCodecContentSource_AV_Spatial_Live               = 41
+	KAudioCodecContentSource_AV_Spatial_Offline            = 39
+	KAudioCodecContentSource_AV_Traditional_Live           = 40
+	KAudioCodecContentSource_AV_Traditional_Offline        = 38
+	KAudioCodecContentSource_AppleAV_Spatial_Live          = 9
+	KAudioCodecContentSource_AppleAV_Spatial_Offline       = 7
+	KAudioCodecContentSource_AppleAV_Traditional_Live      = 8
+	KAudioCodecContentSource_AppleAV_Traditional_Offline   = 6
+	KAudioCodecContentSource_AppleCapture_Spatial          = 2
 	KAudioCodecContentSource_AppleCapture_Spatial_Enhanced = 3
-	KAudioCodecContentSource_AppleCapture_Traditional = 1
-	KAudioCodecContentSource_AppleMusic_Spatial = 5
-	KAudioCodecContentSource_AppleMusic_Traditional = 4
-	KAudioCodecContentSource_ApplePassthrough = 10
-	KAudioCodecContentSource_Capture_Spatial = 34
-	KAudioCodecContentSource_Capture_Spatial_Enhanced = 35
-	KAudioCodecContentSource_Capture_Traditional = 33
-	KAudioCodecContentSource_Music_Spatial = 37
-	KAudioCodecContentSource_Music_Traditional = 36
-	KAudioCodecContentSource_Passthrough = 42
-	KAudioCodecContentSource_Reserved = 0
-	KAudioCodecContentSource_Unspecified = -1
+	KAudioCodecContentSource_AppleCapture_Traditional      = 1
+	KAudioCodecContentSource_AppleMusic_Spatial            = 5
+	KAudioCodecContentSource_AppleMusic_Traditional        = 4
+	KAudioCodecContentSource_ApplePassthrough              = 10
+	KAudioCodecContentSource_Capture_Spatial               = 34
+	KAudioCodecContentSource_Capture_Spatial_Enhanced      = 35
+	KAudioCodecContentSource_Capture_Traditional           = 33
+	KAudioCodecContentSource_Music_Spatial                 = 37
+	KAudioCodecContentSource_Music_Traditional             = 36
+	KAudioCodecContentSource_Passthrough                   = 42
+	KAudioCodecContentSource_Reserved                      = 0
+	KAudioCodecContentSource_Unspecified                   = -1
 )
 
 const (
 	KAudioCodecDelayMode_Compatibility = 0
-	KAudioCodecDelayMode_Minimum = 1
-	KAudioCodecDelayMode_Optimal = 2
+	KAudioCodecDelayMode_Minimum       = 1
+	KAudioCodecDelayMode_Optimal       = 2
 )
 
 const (
 	KAudioCodecDynamicRangeControlConfiguration_Capture = 4
-	KAudioCodecDynamicRangeControlConfiguration_Movie = 3
-	KAudioCodecDynamicRangeControlConfiguration_Music = 1
-	KAudioCodecDynamicRangeControlConfiguration_None = 0
-	KAudioCodecDynamicRangeControlConfiguration_Speech = 2
+	KAudioCodecDynamicRangeControlConfiguration_Movie   = 3
+	KAudioCodecDynamicRangeControlConfiguration_Music   = 1
+	KAudioCodecDynamicRangeControlConfiguration_None    = 0
+	KAudioCodecDynamicRangeControlConfiguration_Speech  = 2
 )
 
 const (
-	KAudioCodecAppendInputBufferListSelect = 9
-	KAudioCodecAppendInputDataSelect = 6
-	KAudioCodecGetPropertyInfoSelect = 1
-	KAudioCodecGetPropertySelect = 2
-	KAudioCodecInitializeSelect = 4
+	KAudioCodecAppendInputBufferListSelect   = 9
+	KAudioCodecAppendInputDataSelect         = 6
+	KAudioCodecGetPropertyInfoSelect         = 1
+	KAudioCodecGetPropertySelect             = 2
+	KAudioCodecInitializeSelect              = 4
 	KAudioCodecProduceOutputBufferListSelect = 10
-	KAudioCodecProduceOutputDataSelect = 7
-	KAudioCodecResetSelect = 8
-	KAudioCodecSetPropertySelect = 3
-	KAudioCodecUninitializeSelect = 5
+	KAudioCodecProduceOutputDataSelect       = 7
+	KAudioCodecResetSelect                   = 8
+	KAudioCodecSetPropertySelect             = 3
+	KAudioCodecUninitializeSelect            = 5
 )
 
 const (
-	KAudioCodecBadDataError = 1650549857
-	KAudioCodecBadPropertySizeError = 561211770
-	KAudioCodecIllegalOperationError = 1852797029
-	KAudioCodecNoError = 0
+	KAudioCodecBadDataError              = 1650549857
+	KAudioCodecBadPropertySizeError      = 561211770
+	KAudioCodecIllegalOperationError     = 1852797029
+	KAudioCodecNoError                   = 0
 	KAudioCodecNotEnoughBufferSpaceError = 560100710
-	KAudioCodecStateError = 561214580
-	KAudioCodecUnknownPropertyError = 2003332927
-	KAudioCodecUnspecifiedError = 2003329396
-	KAudioCodecUnsupportedFormatError = 560226676
+	KAudioCodecStateError                = 561214580
+	KAudioCodecUnknownPropertyError      = 2003332927
+	KAudioCodecUnspecifiedError          = 2003329396
+	KAudioCodecUnsupportedFormatError    = 560226676
 )
 
 const (
-	KAudioCodecOutputPrecedenceBitRate = 1
-	KAudioCodecOutputPrecedenceNone = 0
+	KAudioCodecOutputPrecedenceBitRate    = 1
+	KAudioCodecOutputPrecedenceNone       = 0
 	KAudioCodecOutputPrecedenceSampleRate = 2
 )
 
 const (
-	KAudioCodecPrimeMethod_None = 2
+	KAudioCodecPrimeMethod_None   = 2
 	KAudioCodecPrimeMethod_Normal = 1
-	KAudioCodecPrimeMethod_Pre = 0
+	KAudioCodecPrimeMethod_Pre    = 0
 )
 
 const (
-	KAudioCodecProduceOutputPacketAtEOF = 5
-	KAudioCodecProduceOutputPacketFailure = 1
+	KAudioCodecProduceOutputPacketAtEOF              = 5
+	KAudioCodecProduceOutputPacketFailure            = 1
 	KAudioCodecProduceOutputPacketNeedsMoreInputData = 4
-	KAudioCodecProduceOutputPacketSuccess = 2
-	KAudioCodecProduceOutputPacketSuccessConcealed = 6
-	KAudioCodecProduceOutputPacketSuccessHasMore = 3
+	KAudioCodecProduceOutputPacketSuccess            = 2
+	KAudioCodecProduceOutputPacketSuccessConcealed   = 6
+	KAudioCodecProduceOutputPacketSuccessHasMore     = 3
 )
 
 const (
-	KAudioCodecPropertyASPFrequency = 1634955366
-	KAudioCodecPropertyAdjustCompressionProfile = 1584427631
-	KAudioCodecPropertyAdjustLocalQuality = 1584488812
-	KAudioCodecPropertyAdjustTargetLevel = 1584428140
-	KAudioCodecPropertyAdjustTargetLevelConstant = 1584688227
-	KAudioCodecPropertyApplicableBitRateRange = 1651668065
-	KAudioCodecPropertyApplicableInputSampleRates = 1769173601
-	KAudioCodecPropertyApplicableOutputSampleRates = 1869836897
-	KAudioCodecPropertyBitRateControlMode = 1633903206
-	KAudioCodecPropertyBitRateForVBR = 1986163298
-	KAudioCodecPropertyContentSource = 1668510307
-	KAudioCodecPropertyCurrentInputChannelLayout = 1768123424
-	KAudioCodecPropertyCurrentInputFormat = 1768320372
-	KAudioCodecPropertyCurrentInputSampleRate = 1667855218
-	KAudioCodecPropertyCurrentOutputChannelLayout = 1868786720
-	KAudioCodecPropertyCurrentOutputFormat = 1868983668
-	KAudioCodecPropertyCurrentOutputSampleRate = 1668248434
-	KAudioCodecPropertyCurrentTargetBitRate = 1651663220
-	KAudioCodecPropertyDelayMode = 1684893540
+	KAudioCodecPropertyASPFrequency                     = 1634955366
+	KAudioCodecPropertyAdjustCompressionProfile         = 1584427631
+	KAudioCodecPropertyAdjustLocalQuality               = 1584488812
+	KAudioCodecPropertyAdjustTargetLevel                = 1584428140
+	KAudioCodecPropertyAdjustTargetLevelConstant        = 1584688227
+	KAudioCodecPropertyApplicableBitRateRange           = 1651668065
+	KAudioCodecPropertyApplicableInputSampleRates       = 1769173601
+	KAudioCodecPropertyApplicableOutputSampleRates      = 1869836897
+	KAudioCodecPropertyBitRateControlMode               = 1633903206
+	KAudioCodecPropertyBitRateForVBR                    = 1986163298
+	KAudioCodecPropertyContentSource                    = 1668510307
+	KAudioCodecPropertyCurrentInputChannelLayout        = 1768123424
+	KAudioCodecPropertyCurrentInputFormat               = 1768320372
+	KAudioCodecPropertyCurrentInputSampleRate           = 1667855218
+	KAudioCodecPropertyCurrentOutputChannelLayout       = 1868786720
+	KAudioCodecPropertyCurrentOutputFormat              = 1868983668
+	KAudioCodecPropertyCurrentOutputSampleRate          = 1668248434
+	KAudioCodecPropertyCurrentTargetBitRate             = 1651663220
+	KAudioCodecPropertyDelayMode                        = 1684893540
 	KAudioCodecPropertyDynamicRangeControlConfiguration = 1667527267
-	KAudioCodecPropertyDynamicRangeControlMode = 1835299427
-	KAudioCodecPropertyEmploysDependentPackets = 1685089087
-	KAudioCodecPropertyFormatList = 1633904236
-	KAudioCodecPropertyHasVariablePacketByteSizes = 1987078975
-	KAudioCodecPropertyInputBufferSize = 1952609638
-	KAudioCodecPropertyIsInitialized = 1768843636
-	KAudioCodecPropertyMagicCookie = 1802857321
-	KAudioCodecPropertyMaximumPacketByteSize = 1885432674
-	KAudioCodecPropertyPacketFrameSize = 1885432678
-	KAudioCodecPropertyPacketSizeLimitForVBR = 1885432684
-	KAudioCodecPropertyPaddedZeros = 1885430832
-	KAudioCodecPropertyPrimeInfo = 1886546285
-	KAudioCodecPropertyPrimeMethod = 1886547309
-	KAudioCodecPropertyProgramTargetLevel = 1886418028
-	KAudioCodecPropertyProgramTargetLevelConstant = 1886678115
-	KAudioCodecPropertyQualitySetting = 1936876401
-	KAudioCodecPropertyRecommendedBitRateRange = 1651668082
-	KAudioCodecPropertySettings = 1633907488
-	KAudioCodecPropertySoundQualityForVBR = 1986163313
-	KAudioCodecPropertyUsedInputBufferSize = 1969386854
+	KAudioCodecPropertyDynamicRangeControlMode          = 1835299427
+	KAudioCodecPropertyEmploysDependentPackets          = 1685089087
+	KAudioCodecPropertyFormatList                       = 1633904236
+	KAudioCodecPropertyHasVariablePacketByteSizes       = 1987078975
+	KAudioCodecPropertyInputBufferSize                  = 1952609638
+	KAudioCodecPropertyIsInitialized                    = 1768843636
+	KAudioCodecPropertyMagicCookie                      = 1802857321
+	KAudioCodecPropertyMaximumPacketByteSize            = 1885432674
+	KAudioCodecPropertyPacketFrameSize                  = 1885432678
+	KAudioCodecPropertyPacketSizeLimitForVBR            = 1885432684
+	KAudioCodecPropertyPaddedZeros                      = 1885430832
+	KAudioCodecPropertyPrimeInfo                        = 1886546285
+	KAudioCodecPropertyPrimeMethod                      = 1886547309
+	KAudioCodecPropertyProgramTargetLevel               = 1886418028
+	KAudioCodecPropertyProgramTargetLevelConstant       = 1886678115
+	KAudioCodecPropertyQualitySetting                   = 1936876401
+	KAudioCodecPropertyRecommendedBitRateRange          = 1651668082
+	KAudioCodecPropertySettings                         = 1633907488
+	KAudioCodecPropertySoundQualityForVBR               = 1986163313
+	KAudioCodecPropertyUsedInputBufferSize              = 1969386854
 )
 
 const (
@@ -2468,238 +2736,238 @@ const (
 )
 
 const (
-	KAudioCodecPropertyFormatCFString = 1818652530
+	KAudioCodecPropertyFormatCFString       = 1818652530
 	KAudioCodecPropertyManufacturerCFString = 1819107691
-	KAudioCodecPropertyNameCFString = 1819173229
+	KAudioCodecPropertyNameCFString         = 1819173229
 )
 
 const (
-	KAudioCodecBitRateFormat = 1633903206
-	KAudioCodecDoesSampleRateConversion = 1819112035
-	KAudioCodecExtendFrequencies = 1633903974
-	KAudioCodecInputFormatsForOutputFormat = 1768305775
-	KAudioCodecOutputFormatsForInputFormat = 1868969065
-	KAudioCodecOutputPrecedence = 1869639794
-	KAudioCodecPropertyAvailableBitRates = 1651668003
-	KAudioCodecPropertyAvailableInputChannelLayouts = 1634296684
+	KAudioCodecBitRateFormat                         = 1633903206
+	KAudioCodecDoesSampleRateConversion              = 1819112035
+	KAudioCodecExtendFrequencies                     = 1633903974
+	KAudioCodecInputFormatsForOutputFormat           = 1768305775
+	KAudioCodecOutputFormatsForInputFormat           = 1868969065
+	KAudioCodecOutputPrecedence                      = 1869639794
+	KAudioCodecPropertyAvailableBitRates             = 1651668003
+	KAudioCodecPropertyAvailableInputChannelLayouts  = 1634296684
 	KAudioCodecPropertyAvailableOutputChannelLayouts = 1634689900
-	KAudioCodecPropertyInputChannelLayout = 1768123424
-	KAudioCodecPropertyOutputChannelLayout = 1868786720
-	KAudioCodecPropertyRequiresPacketDescription = 1885432676
-	KAudioCodecPropertyZeroFramesPadded = 1885430832
-	KAudioCodecUseRecommendedSampleRate = 1970434930
+	KAudioCodecPropertyInputChannelLayout            = 1768123424
+	KAudioCodecPropertyOutputChannelLayout           = 1868786720
+	KAudioCodecPropertyRequiresPacketDescription     = 1885432676
+	KAudioCodecPropertyZeroFramesPadded              = 1885430832
+	KAudioCodecUseRecommendedSampleRate              = 1970434930
 )
 
 const (
-	KAudioCodecPropertyAvailableBitRateRange = 1633841780
-	KAudioCodecPropertyAvailableInputChannelLayoutTags = 1634296684
-	KAudioCodecPropertyAvailableInputSampleRates = 1634300786
-	KAudioCodecPropertyAvailableNumberChannels = 1668116067
+	KAudioCodecPropertyAvailableBitRateRange            = 1633841780
+	KAudioCodecPropertyAvailableInputChannelLayoutTags  = 1634296684
+	KAudioCodecPropertyAvailableInputSampleRates        = 1634300786
+	KAudioCodecPropertyAvailableNumberChannels          = 1668116067
 	KAudioCodecPropertyAvailableOutputChannelLayoutTags = 1634689900
-	KAudioCodecPropertyAvailableOutputSampleRates = 1634694002
-	KAudioCodecPropertyDoesSampleRateConversion = 1819112035
-	KAudioCodecPropertyFormatInfo = 1633904233
-	KAudioCodecPropertyInputFormatsForOutputFormat = 1768305775
-	KAudioCodecPropertyMinimumNumberInputPackets = 1835952496
-	KAudioCodecPropertyMinimumNumberOutputPackets = 1835954032
-	KAudioCodecPropertyOutputFormatsForInputFormat = 1868969065
-	KAudioCodecPropertySupportedInputFormats = 1768320291
-	KAudioCodecPropertySupportedOutputFormats = 1868983587
+	KAudioCodecPropertyAvailableOutputSampleRates       = 1634694002
+	KAudioCodecPropertyDoesSampleRateConversion         = 1819112035
+	KAudioCodecPropertyFormatInfo                       = 1633904233
+	KAudioCodecPropertyInputFormatsForOutputFormat      = 1768305775
+	KAudioCodecPropertyMinimumNumberInputPackets        = 1835952496
+	KAudioCodecPropertyMinimumNumberOutputPackets       = 1835954032
+	KAudioCodecPropertyOutputFormatsForInputFormat      = 1868969065
+	KAudioCodecPropertySupportedInputFormats            = 1768320291
+	KAudioCodecPropertySupportedOutputFormats           = 1868983587
 )
 
 const (
-	KAudioCodecQuality_High = 96
-	KAudioCodecQuality_Low = 32
-	KAudioCodecQuality_Max = 127
+	KAudioCodecQuality_High   = 96
+	KAudioCodecQuality_Low    = 32
+	KAudioCodecQuality_Max    = 127
 	KAudioCodecQuality_Medium = 64
-	KAudioCodecQuality_Min = 0
+	KAudioCodecQuality_Min    = 0
 )
 
 const (
-	KAudioComponentErr_DuplicateDescription = -66752
+	KAudioComponentErr_DuplicateDescription   = -66752
 	KAudioComponentErr_InitializationTimedOut = -66747
-	KAudioComponentErr_InvalidFormat = -66746
-	KAudioComponentErr_NotPermitted = -66748
-	KAudioComponentErr_TooManyInstances = -66750
-	KAudioComponentErr_UnsupportedType = -66751
+	KAudioComponentErr_InvalidFormat          = -66746
+	KAudioComponentErr_NotPermitted           = -66748
+	KAudioComponentErr_TooManyInstances       = -66750
+	KAudioComponentErr_UnsupportedType        = -66751
 )
 
 const (
-	KAudioConverterErr_BadPropertySizeError = 561211770
-	KAudioConverterErr_FormatNotSupported = 1718449215
-	KAudioConverterErr_InputSampleRateOutOfRange = 560558962
-	KAudioConverterErr_InvalidInputSize = 1768846202
-	KAudioConverterErr_InvalidOutputSize = 1869902714
-	KAudioConverterErr_OperationNotSupported = 1869627199
-	KAudioConverterErr_OutputSampleRateOutOfRange = 560952178
-	KAudioConverterErr_PropertyNotSupported = 1886547824
+	KAudioConverterErr_BadPropertySizeError            = 561211770
+	KAudioConverterErr_FormatNotSupported              = 1718449215
+	KAudioConverterErr_InputSampleRateOutOfRange       = 560558962
+	KAudioConverterErr_InvalidInputSize                = 1768846202
+	KAudioConverterErr_InvalidOutputSize               = 1869902714
+	KAudioConverterErr_OperationNotSupported           = 1869627199
+	KAudioConverterErr_OutputSampleRateOutOfRange      = 560952178
+	KAudioConverterErr_PropertyNotSupported            = 1886547824
 	KAudioConverterErr_RequiresPacketDescriptionsError = 561015652
-	KAudioConverterErr_UnspecifiedError = 2003329396
+	KAudioConverterErr_UnspecifiedError                = 2003329396
 )
 
 const (
 	KAudioConverterPropertyDitherBitDepth = 1684171124
-	KAudioConverterPropertyDithering = 1684632680
+	KAudioConverterPropertyDithering      = 1684632680
 )
 
 const (
 	KAudioConverterPropertyMaximumInputBufferSize = 2020172403
-	KAudioConverterSampleRateConverterAlgorithm = 1936876393
+	KAudioConverterSampleRateConverterAlgorithm   = 1936876393
 )
 
 const (
-	KAudioConverterApplicableEncodeBitRates = 1634034290
-	KAudioConverterApplicableEncodeSampleRates = 1634038642
-	KAudioConverterAvailableEncodeBitRates = 1986355826
-	KAudioConverterAvailableEncodeChannelLayoutTags = 1634034540
-	KAudioConverterAvailableEncodeSampleRates = 1986360178
-	KAudioConverterChannelMap = 1667788144
-	KAudioConverterCodecQuality = 1667527029
-	KAudioConverterCompressionMagicCookie = 1668114275
-	KAudioConverterCurrentInputStreamDescription = 1633904996
-	KAudioConverterCurrentOutputStreamDescription = 1633906532
-	KAudioConverterDecompressionMagicCookie = 1684891491
-	KAudioConverterEncodeAdjustableSampleRate = 1634366322
-	KAudioConverterEncodeBitRate = 1651663220
-	KAudioConverterInputChannelLayout = 1768123424
-	KAudioConverterOutputChannelLayout = 1868786720
-	KAudioConverterPrimeInfo = 1886546285
-	KAudioConverterPrimeMethod = 1886547309
-	KAudioConverterPropertyBitDepthHint = 1633903204
-	KAudioConverterPropertyCalculateInputBufferSize = 1667850867
+	KAudioConverterApplicableEncodeBitRates          = 1634034290
+	KAudioConverterApplicableEncodeSampleRates       = 1634038642
+	KAudioConverterAvailableEncodeBitRates           = 1986355826
+	KAudioConverterAvailableEncodeChannelLayoutTags  = 1634034540
+	KAudioConverterAvailableEncodeSampleRates        = 1986360178
+	KAudioConverterChannelMap                        = 1667788144
+	KAudioConverterCodecQuality                      = 1667527029
+	KAudioConverterCompressionMagicCookie            = 1668114275
+	KAudioConverterCurrentInputStreamDescription     = 1633904996
+	KAudioConverterCurrentOutputStreamDescription    = 1633906532
+	KAudioConverterDecompressionMagicCookie          = 1684891491
+	KAudioConverterEncodeAdjustableSampleRate        = 1634366322
+	KAudioConverterEncodeBitRate                     = 1651663220
+	KAudioConverterInputChannelLayout                = 1768123424
+	KAudioConverterOutputChannelLayout               = 1868786720
+	KAudioConverterPrimeInfo                         = 1886546285
+	KAudioConverterPrimeMethod                       = 1886547309
+	KAudioConverterPropertyBitDepthHint              = 1633903204
+	KAudioConverterPropertyCalculateInputBufferSize  = 1667850867
 	KAudioConverterPropertyCalculateOutputBufferSize = 1668244083
-	KAudioConverterPropertyChannelMixMap = 1835884912
-	KAudioConverterPropertyFormatList = 1718383476
-	KAudioConverterPropertyInputCodecParameters = 1768121456
-	KAudioConverterPropertyMaximumInputPacketSize = 2020175987
-	KAudioConverterPropertyMaximumOutputPacketSize = 2020569203
-	KAudioConverterPropertyMinimumInputBufferSize = 1835623027
-	KAudioConverterPropertyMinimumOutputBufferSize = 1836016243
-	KAudioConverterPropertyOutputCodecParameters = 1868784752
-	KAudioConverterPropertyPerformDownmix = 1684892024
-	KAudioConverterPropertySettings = 1633906803
-	KAudioConverterSampleRateConverterComplexity = 1936876385
-	KAudioConverterSampleRateConverterInitialPhase = 1936876400
-	KAudioConverterSampleRateConverterQuality = 1936876401
+	KAudioConverterPropertyChannelMixMap             = 1835884912
+	KAudioConverterPropertyFormatList                = 1718383476
+	KAudioConverterPropertyInputCodecParameters      = 1768121456
+	KAudioConverterPropertyMaximumInputPacketSize    = 2020175987
+	KAudioConverterPropertyMaximumOutputPacketSize   = 2020569203
+	KAudioConverterPropertyMinimumInputBufferSize    = 1835623027
+	KAudioConverterPropertyMinimumOutputBufferSize   = 1836016243
+	KAudioConverterPropertyOutputCodecParameters     = 1868784752
+	KAudioConverterPropertyPerformDownmix            = 1684892024
+	KAudioConverterPropertySettings                  = 1633906803
+	KAudioConverterSampleRateConverterComplexity     = 1936876385
+	KAudioConverterSampleRateConverterInitialPhase   = 1936876400
+	KAudioConverterSampleRateConverterQuality        = 1936876401
 )
 
 const (
-	KAudioConverterQuality_High = 96
-	KAudioConverterQuality_Low = 32
-	KAudioConverterQuality_Max = 127
+	KAudioConverterQuality_High   = 96
+	KAudioConverterQuality_Low    = 32
+	KAudioConverterQuality_Max    = 127
 	KAudioConverterQuality_Medium = 64
-	KAudioConverterQuality_Min = 0
+	KAudioConverterQuality_Min    = 0
 )
 
 const (
-	KAudioConverterSampleRateConverterComplexity_Linear = 1818848869
-	KAudioConverterSampleRateConverterComplexity_Mastering = 1650553971
+	KAudioConverterSampleRateConverterComplexity_Linear       = 1818848869
+	KAudioConverterSampleRateConverterComplexity_Mastering    = 1650553971
 	KAudioConverterSampleRateConverterComplexity_MinimumPhase = 1835626096
-	KAudioConverterSampleRateConverterComplexity_Normal = 1852797549
+	KAudioConverterSampleRateConverterComplexity_Normal       = 1852797549
 )
 
 const (
-	KAudioDecoderComponentType = 1633969507
-	KAudioEncoderComponentType = 1634037347
+	KAudioDecoderComponentType    = 1633969507
+	KAudioEncoderComponentType    = 1634037347
 	KAudioUnityCodecComponentType = 1633903715
 )
 
 const (
-	KAudioFile3GP2Type = 862416946
-	KAudioFile3GPType = 862417008
-	KAudioFileAAC_ADTSType = 1633973363
-	KAudioFileAC3Type = 1633889587
-	KAudioFileAIFCType = 1095321155
-	KAudioFileAIFFType = 1095321158
-	KAudioFileAMRType = 1634562662
-	KAudioFileBW64Type = 1113011764
-	KAudioFileCAFType = 1667327590
-	KAudioFileFLACType = 1718378851
-	KAudioFileLATMInLOASType = 1819238771
-	KAudioFileM4AType = 1832149350
-	KAudioFileM4BType = 1832149606
-	KAudioFileMP1Type = 1297106737
-	KAudioFileMP2Type = 1297106738
-	KAudioFileMP3Type = 1297106739
-	KAudioFileMPEG4Type = 1836069990
-	KAudioFileNextType = 1315264596
-	KAudioFileRF64Type = 1380333108
+	KAudioFile3GP2Type           = 862416946
+	KAudioFile3GPType            = 862417008
+	KAudioFileAAC_ADTSType       = 1633973363
+	KAudioFileAC3Type            = 1633889587
+	KAudioFileAIFCType           = 1095321155
+	KAudioFileAIFFType           = 1095321158
+	KAudioFileAMRType            = 1634562662
+	KAudioFileBW64Type           = 1113011764
+	KAudioFileCAFType            = 1667327590
+	KAudioFileFLACType           = 1718378851
+	KAudioFileLATMInLOASType     = 1819238771
+	KAudioFileM4AType            = 1832149350
+	KAudioFileM4BType            = 1832149606
+	KAudioFileMP1Type            = 1297106737
+	KAudioFileMP2Type            = 1297106738
+	KAudioFileMP3Type            = 1297106739
+	KAudioFileMPEG4Type          = 1836069990
+	KAudioFileNextType           = 1315264596
+	KAudioFileRF64Type           = 1380333108
 	KAudioFileSoundDesigner2Type = 1399075430
-	KAudioFileWAVEType = 1463899717
-	KAudioFileWave64Type = 1463170150
+	KAudioFileWAVEType           = 1463899717
+	KAudioFileWave64Type         = 1463170150
 )
 
 const (
-	KAudioFileComponent_AvailableFormatIDs = 1718446436
+	KAudioFileComponent_AvailableFormatIDs                   = 1718446436
 	KAudioFileComponent_AvailableStreamDescriptionsForFormat = 1935960420
-	KAudioFileComponent_CanRead = 1668182628
-	KAudioFileComponent_CanWrite = 1668183922
-	KAudioFileComponent_ExtensionsForType = 1717926004
-	KAudioFileComponent_FastDispatchTable = 1717855860
-	KAudioFileComponent_FileTypeName = 1718906477
-	KAudioFileComponent_HFSTypeCodesForType = 1718118003
-	KAudioFileComponent_MIMETypesForType = 1718446445
-	KAudioFileComponent_UTIsForType = 1718973545
+	KAudioFileComponent_CanRead                              = 1668182628
+	KAudioFileComponent_CanWrite                             = 1668183922
+	KAudioFileComponent_ExtensionsForType                    = 1717926004
+	KAudioFileComponent_FastDispatchTable                    = 1717855860
+	KAudioFileComponent_FileTypeName                         = 1718906477
+	KAudioFileComponent_HFSTypeCodesForType                  = 1718118003
+	KAudioFileComponent_MIMETypesForType                     = 1718446445
+	KAudioFileComponent_UTIsForType                          = 1718973545
 )
 
 const (
-	KAudioFileCloseSelect = 6
-	KAudioFileCountUserDataSelect = 20
-	KAudioFileCreateSelect = 1
-	KAudioFileCreateURLSelect = 25
-	KAudioFileDataIsThisFormatSelect = 17
-	KAudioFileExtensionIsThisFormatSelect = 15
-	KAudioFileFileDataIsThisFormatSelect = 27
-	KAudioFileFileIsThisFormatSelect = 16
-	KAudioFileGetGlobalInfoSelect = 19
-	KAudioFileGetGlobalInfoSizeSelect = 18
-	KAudioFileGetPropertyInfoSelect = 12
-	KAudioFileGetPropertySelect = 13
-	KAudioFileGetUserDataAtOffsetSelect = 30
-	KAudioFileGetUserDataSelect = 22
-	KAudioFileGetUserDataSize64Select = 29
-	KAudioFileGetUserDataSizeSelect = 21
-	KAudioFileInitializeSelect = 3
+	KAudioFileCloseSelect                   = 6
+	KAudioFileCountUserDataSelect           = 20
+	KAudioFileCreateSelect                  = 1
+	KAudioFileCreateURLSelect               = 25
+	KAudioFileDataIsThisFormatSelect        = 17
+	KAudioFileExtensionIsThisFormatSelect   = 15
+	KAudioFileFileDataIsThisFormatSelect    = 27
+	KAudioFileFileIsThisFormatSelect        = 16
+	KAudioFileGetGlobalInfoSelect           = 19
+	KAudioFileGetGlobalInfoSizeSelect       = 18
+	KAudioFileGetPropertyInfoSelect         = 12
+	KAudioFileGetPropertySelect             = 13
+	KAudioFileGetUserDataAtOffsetSelect     = 30
+	KAudioFileGetUserDataSelect             = 22
+	KAudioFileGetUserDataSize64Select       = 29
+	KAudioFileGetUserDataSizeSelect         = 21
+	KAudioFileInitializeSelect              = 3
 	KAudioFileInitializeWithCallbacksSelect = 5
-	KAudioFileOpenSelect = 2
-	KAudioFileOpenURLSelect = 26
-	KAudioFileOpenWithCallbacksSelect = 4
-	KAudioFileOptimizeSelect = 7
-	KAudioFileReadBytesSelect = 8
-	KAudioFileReadPacketDataSelect = 28
-	KAudioFileReadPacketsSelect = 10
-	KAudioFileRemoveUserDataSelect = 24
-	KAudioFileSetPropertySelect = 14
-	KAudioFileSetUserDataSelect = 23
-	KAudioFileWriteBytesSelect = 9
-	KAudioFileWritePacketsSelect = 11
+	KAudioFileOpenSelect                    = 2
+	KAudioFileOpenURLSelect                 = 26
+	KAudioFileOpenWithCallbacksSelect       = 4
+	KAudioFileOptimizeSelect                = 7
+	KAudioFileReadBytesSelect               = 8
+	KAudioFileReadPacketDataSelect          = 28
+	KAudioFileReadPacketsSelect             = 10
+	KAudioFileRemoveUserDataSelect          = 24
+	KAudioFileSetPropertySelect             = 14
+	KAudioFileSetUserDataSelect             = 23
+	KAudioFileWriteBytesSelect              = 9
+	KAudioFileWritePacketsSelect            = 11
 )
 
 const (
-	KAudioFileGlobalInfo_AllExtensions = 1634498676
-	KAudioFileGlobalInfo_AllHFSTypeCodes = 1634231923
-	KAudioFileGlobalInfo_AllMIMETypes = 1634560365
-	KAudioFileGlobalInfo_AllUTIs = 1635087465
-	KAudioFileGlobalInfo_AvailableFormatIDs = 1718446436
+	KAudioFileGlobalInfo_AllExtensions                        = 1634498676
+	KAudioFileGlobalInfo_AllHFSTypeCodes                      = 1634231923
+	KAudioFileGlobalInfo_AllMIMETypes                         = 1634560365
+	KAudioFileGlobalInfo_AllUTIs                              = 1635087465
+	KAudioFileGlobalInfo_AvailableFormatIDs                   = 1718446436
 	KAudioFileGlobalInfo_AvailableStreamDescriptionsForFormat = 1935960420
-	KAudioFileGlobalInfo_ExtensionsForType = 1717926004
-	KAudioFileGlobalInfo_FileTypeName = 1718906477
-	KAudioFileGlobalInfo_HFSTypeCodesForType = 1718118003
-	KAudioFileGlobalInfo_MIMETypesForType = 1718446445
-	KAudioFileGlobalInfo_ReadableTypes = 1634103910
-	KAudioFileGlobalInfo_TypesForExtension = 1952807028
-	KAudioFileGlobalInfo_TypesForHFSTypeCode = 1952999027
-	KAudioFileGlobalInfo_TypesForMIMEType = 1953327469
-	KAudioFileGlobalInfo_TypesForUTI = 1953854569
-	KAudioFileGlobalInfo_UTIsForType = 1718973545
-	KAudioFileGlobalInfo_WritableTypes = 1634105190
+	KAudioFileGlobalInfo_ExtensionsForType                    = 1717926004
+	KAudioFileGlobalInfo_FileTypeName                         = 1718906477
+	KAudioFileGlobalInfo_HFSTypeCodesForType                  = 1718118003
+	KAudioFileGlobalInfo_MIMETypesForType                     = 1718446445
+	KAudioFileGlobalInfo_ReadableTypes                        = 1634103910
+	KAudioFileGlobalInfo_TypesForExtension                    = 1952807028
+	KAudioFileGlobalInfo_TypesForHFSTypeCode                  = 1952999027
+	KAudioFileGlobalInfo_TypesForMIMEType                     = 1953327469
+	KAudioFileGlobalInfo_TypesForUTI                          = 1953854569
+	KAudioFileGlobalInfo_UTIsForType                          = 1718973545
+	KAudioFileGlobalInfo_WritableTypes                        = 1634105190
 )
 
 const (
-	KAudioFileLoopDirection_Backward = 3
-	KAudioFileLoopDirection_Forward = 1
+	KAudioFileLoopDirection_Backward           = 3
+	KAudioFileLoopDirection_Forward            = 1
 	KAudioFileLoopDirection_ForwardAndBackward = 2
-	KAudioFileLoopDirection_NoLooping = 0
+	KAudioFileLoopDirection_NoLooping          = 0
 )
 
 const (
@@ -2707,226 +2975,226 @@ const (
 )
 
 const (
-	KAudioFilePropertyAlbumArtwork = 1633776244
-	KAudioFilePropertyAudioDataByteCount = 1650683508
-	KAudioFilePropertyAudioDataPacketCount = 1885564532
-	KAudioFilePropertyAudioTrackCount = 1635017588
-	KAudioFilePropertyBitRate = 1651663220
-	KAudioFilePropertyByteToPacket = 1652125803
-	KAudioFilePropertyChannelLayout = 1668112752
-	KAudioFilePropertyChunkIDs = 1667787108
-	KAudioFilePropertyDataFormat = 1684434292
-	KAudioFilePropertyDataFormatName = 1718512997
-	KAudioFilePropertyDataOffset = 1685022310
-	KAudioFilePropertyDeferSizeUpdates = 1685289589
-	KAudioFilePropertyEstimatedDuration = 1701082482
-	KAudioFilePropertyFileFormat = 1717988724
-	KAudioFilePropertyFormatList = 1718383476
-	KAudioFilePropertyFrameToPacket = 1718775915
-	KAudioFilePropertyID3Tag = 1768174452
-	KAudioFilePropertyID3TagOffset = 1768174447
-	KAudioFilePropertyInfoDictionary = 1768842863
-	KAudioFilePropertyIsOptimized = 1869640813
-	KAudioFilePropertyMagicCookieData = 1835493731
-	KAudioFilePropertyMarkerList = 1835756659
-	KAudioFilePropertyMaximumPacketSize = 1886616165
-	KAudioFilePropertyNextIndependentPacket = 1852403300
+	KAudioFilePropertyAlbumArtwork                   = 1633776244
+	KAudioFilePropertyAudioDataByteCount             = 1650683508
+	KAudioFilePropertyAudioDataPacketCount           = 1885564532
+	KAudioFilePropertyAudioTrackCount                = 1635017588
+	KAudioFilePropertyBitRate                        = 1651663220
+	KAudioFilePropertyByteToPacket                   = 1652125803
+	KAudioFilePropertyChannelLayout                  = 1668112752
+	KAudioFilePropertyChunkIDs                       = 1667787108
+	KAudioFilePropertyDataFormat                     = 1684434292
+	KAudioFilePropertyDataFormatName                 = 1718512997
+	KAudioFilePropertyDataOffset                     = 1685022310
+	KAudioFilePropertyDeferSizeUpdates               = 1685289589
+	KAudioFilePropertyEstimatedDuration              = 1701082482
+	KAudioFilePropertyFileFormat                     = 1717988724
+	KAudioFilePropertyFormatList                     = 1718383476
+	KAudioFilePropertyFrameToPacket                  = 1718775915
+	KAudioFilePropertyID3Tag                         = 1768174452
+	KAudioFilePropertyID3TagOffset                   = 1768174447
+	KAudioFilePropertyInfoDictionary                 = 1768842863
+	KAudioFilePropertyIsOptimized                    = 1869640813
+	KAudioFilePropertyMagicCookieData                = 1835493731
+	KAudioFilePropertyMarkerList                     = 1835756659
+	KAudioFilePropertyMaximumPacketSize              = 1886616165
+	KAudioFilePropertyNextIndependentPacket          = 1852403300
 	KAudioFilePropertyPacketRangeByteCountUpperBound = 1886549346
-	KAudioFilePropertyPacketSizeUpperBound = 1886090594
-	KAudioFilePropertyPacketTableInfo = 1886283375
-	KAudioFilePropertyPacketToByte = 1886085753
-	KAudioFilePropertyPacketToDependencyInfo = 1886086256
-	KAudioFilePropertyPacketToFrame = 1886086770
-	KAudioFilePropertyPacketToRollDistance = 1886089836
-	KAudioFilePropertyPreviousIndependentPacket = 1885957732
-	KAudioFilePropertyRegionList = 1919380595
-	KAudioFilePropertyReserveDuration = 1920168566
-	KAudioFilePropertyRestrictsRandomAccess = 1920098672
-	KAudioFilePropertySourceBitDepth = 1935832164
-	KAudioFilePropertyUseAudioTrack = 1969321067
+	KAudioFilePropertyPacketSizeUpperBound           = 1886090594
+	KAudioFilePropertyPacketTableInfo                = 1886283375
+	KAudioFilePropertyPacketToByte                   = 1886085753
+	KAudioFilePropertyPacketToDependencyInfo         = 1886086256
+	KAudioFilePropertyPacketToFrame                  = 1886086770
+	KAudioFilePropertyPacketToRollDistance           = 1886089836
+	KAudioFilePropertyPreviousIndependentPacket      = 1885957732
+	KAudioFilePropertyRegionList                     = 1919380595
+	KAudioFilePropertyReserveDuration                = 1920168566
+	KAudioFilePropertyRestrictsRandomAccess          = 1920098672
+	KAudioFilePropertySourceBitDepth                 = 1935832164
+	KAudioFilePropertyUseAudioTrack                  = 1969321067
 )
 
 const (
-	KAudioFileStreamError_BadPropertySize = 561211770
-	KAudioFileStreamError_DataUnavailable = 1836020325
+	KAudioFileStreamError_BadPropertySize          = 561211770
+	KAudioFileStreamError_DataUnavailable          = 1836020325
 	KAudioFileStreamError_DiscontinuityCantRecover = 1685283617
-	KAudioFileStreamError_IllegalOperation = 1852797029
-	KAudioFileStreamError_InvalidFile = 1685348671
-	KAudioFileStreamError_InvalidPacketOffset = 1885563711
-	KAudioFileStreamError_NotOptimized = 1869640813
-	KAudioFileStreamError_UnspecifiedError = 2003334207
-	KAudioFileStreamError_UnsupportedDataFormat = 1718449215
-	KAudioFileStreamError_UnsupportedFileType = 1954115647
-	KAudioFileStreamError_UnsupportedProperty = 1886681407
-	KAudioFileStreamError_ValueUnknown = 1970170687
+	KAudioFileStreamError_IllegalOperation         = 1852797029
+	KAudioFileStreamError_InvalidFile              = 1685348671
+	KAudioFileStreamError_InvalidPacketOffset      = 1885563711
+	KAudioFileStreamError_NotOptimized             = 1869640813
+	KAudioFileStreamError_UnspecifiedError         = 2003334207
+	KAudioFileStreamError_UnsupportedDataFormat    = 1718449215
+	KAudioFileStreamError_UnsupportedFileType      = 1954115647
+	KAudioFileStreamError_UnsupportedProperty      = 1886681407
+	KAudioFileStreamError_ValueUnknown             = 1970170687
 )
 
 const (
-	KAudioFileStreamProperty_AudioDataByteCount = 1650683508
-	KAudioFileStreamProperty_AudioDataPacketCount = 1885564532
-	KAudioFileStreamProperty_AverageBytesPerPacket = 1633841264
-	KAudioFileStreamProperty_BitRate = 1651663220
-	KAudioFileStreamProperty_ByteToPacket = 1652125803
-	KAudioFileStreamProperty_ChannelLayout = 1668112752
-	KAudioFileStreamProperty_DataFormat = 1684434292
-	KAudioFileStreamProperty_DataOffset = 1685022310
-	KAudioFileStreamProperty_FileFormat = 1717988724
-	KAudioFileStreamProperty_FormatList = 1718383476
-	KAudioFileStreamProperty_FrameToPacket = 1718775915
-	KAudioFileStreamProperty_InfoDictionary = 1768842863
-	KAudioFileStreamProperty_MagicCookieData = 1835493731
-	KAudioFileStreamProperty_MaximumPacketSize = 1886616165
-	KAudioFileStreamProperty_NextIndependentPacket = 1852403300
-	KAudioFileStreamProperty_PacketSizeUpperBound = 1886090594
-	KAudioFileStreamProperty_PacketTableInfo = 1886283375
-	KAudioFileStreamProperty_PacketToByte = 1886085753
-	KAudioFileStreamProperty_PacketToDependencyInfo = 1886086256
-	KAudioFileStreamProperty_PacketToFrame = 1886086770
-	KAudioFileStreamProperty_PacketToRollDistance = 1886089836
+	KAudioFileStreamProperty_AudioDataByteCount        = 1650683508
+	KAudioFileStreamProperty_AudioDataPacketCount      = 1885564532
+	KAudioFileStreamProperty_AverageBytesPerPacket     = 1633841264
+	KAudioFileStreamProperty_BitRate                   = 1651663220
+	KAudioFileStreamProperty_ByteToPacket              = 1652125803
+	KAudioFileStreamProperty_ChannelLayout             = 1668112752
+	KAudioFileStreamProperty_DataFormat                = 1684434292
+	KAudioFileStreamProperty_DataOffset                = 1685022310
+	KAudioFileStreamProperty_FileFormat                = 1717988724
+	KAudioFileStreamProperty_FormatList                = 1718383476
+	KAudioFileStreamProperty_FrameToPacket             = 1718775915
+	KAudioFileStreamProperty_InfoDictionary            = 1768842863
+	KAudioFileStreamProperty_MagicCookieData           = 1835493731
+	KAudioFileStreamProperty_MaximumPacketSize         = 1886616165
+	KAudioFileStreamProperty_NextIndependentPacket     = 1852403300
+	KAudioFileStreamProperty_PacketSizeUpperBound      = 1886090594
+	KAudioFileStreamProperty_PacketTableInfo           = 1886283375
+	KAudioFileStreamProperty_PacketToByte              = 1886085753
+	KAudioFileStreamProperty_PacketToDependencyInfo    = 1886086256
+	KAudioFileStreamProperty_PacketToFrame             = 1886086770
+	KAudioFileStreamProperty_PacketToRollDistance      = 1886089836
 	KAudioFileStreamProperty_PreviousIndependentPacket = 1885957732
-	KAudioFileStreamProperty_ReadyToProducePackets = 1919247481
-	KAudioFileStreamProperty_RestrictsRandomAccess = 1920098672
+	KAudioFileStreamProperty_ReadyToProducePackets     = 1919247481
+	KAudioFileStreamProperty_RestrictsRandomAccess     = 1920098672
 )
 
 const (
-	KAudioFileBadPropertySizeError = 561211770
+	KAudioFileBadPropertySizeError           = 561211770
 	KAudioFileDoesNotAllow64BitDataSizeError = 1868981823
-	KAudioFileEndOfFileError = -39
-	KAudioFileFileNotFoundError = -43
-	KAudioFileInvalidChunkError = 1667787583
-	KAudioFileInvalidFileError = 1685348671
-	KAudioFileInvalidPacketDependencyError = 1684369471
-	KAudioFileInvalidPacketOffsetError = 1885563711
-	KAudioFileNotOpenError = -38
-	KAudioFileNotOptimizedError = 1869640813
-	KAudioFileOperationNotSupportedError = 1869627199
-	KAudioFilePermissionsError = 1886547263
-	KAudioFilePositionError = -40
-	KAudioFileUnspecifiedError = 2003334207
-	KAudioFileUnsupportedDataFormatError = 1718449215
-	KAudioFileUnsupportedFileTypeError = 1954115647
-	KAudioFileUnsupportedPropertyError = 1886681407
+	KAudioFileEndOfFileError                 = -39
+	KAudioFileFileNotFoundError              = -43
+	KAudioFileInvalidChunkError              = 1667787583
+	KAudioFileInvalidFileError               = 1685348671
+	KAudioFileInvalidPacketDependencyError   = 1684369471
+	KAudioFileInvalidPacketOffsetError       = 1885563711
+	KAudioFileNotOpenError                   = -38
+	KAudioFileNotOptimizedError              = 1869640813
+	KAudioFileOperationNotSupportedError     = 1869627199
+	KAudioFilePermissionsError               = 1886547263
+	KAudioFilePositionError                  = -40
+	KAudioFileUnspecifiedError               = 2003334207
+	KAudioFileUnsupportedDataFormatError     = 1718449215
+	KAudioFileUnsupportedFileTypeError       = 1954115647
+	KAudioFileUnsupportedPropertyError       = 1886681407
 )
 
 const (
-	KAudioFormatProperty_ASBDFromESDS = 1702064996
-	KAudioFormatProperty_ASBDFromMPEGPacket = 1633971568
-	KAudioFormatProperty_AreChannelLayoutsEquivalent = 1667786097
-	KAudioFormatProperty_AvailableDecodeNumberChannels = 1633971811
-	KAudioFormatProperty_AvailableEncodeBitRates = 1634034290
+	KAudioFormatProperty_ASBDFromESDS                     = 1702064996
+	KAudioFormatProperty_ASBDFromMPEGPacket               = 1633971568
+	KAudioFormatProperty_AreChannelLayoutsEquivalent      = 1667786097
+	KAudioFormatProperty_AvailableDecodeNumberChannels    = 1633971811
+	KAudioFormatProperty_AvailableEncodeBitRates          = 1634034290
 	KAudioFormatProperty_AvailableEncodeChannelLayoutTags = 1634034540
-	KAudioFormatProperty_AvailableEncodeNumberChannels = 1635151459
-	KAudioFormatProperty_AvailableEncodeSampleRates = 1634038642
-	KAudioFormatProperty_BalanceFade = 1650551910
-	KAudioFormatProperty_BitmapForLayoutTag = 1651340391
-	KAudioFormatProperty_ChannelLayoutForBitmap = 1668116578
-	KAudioFormatProperty_ChannelLayoutForTag = 1668116588
-	KAudioFormatProperty_ChannelLayoutFromESDS = 1702060908
-	KAudioFormatProperty_ChannelLayoutHash = 1667786849
-	KAudioFormatProperty_ChannelLayoutName = 1819242093
-	KAudioFormatProperty_ChannelLayoutSimpleName = 1819504237
-	KAudioFormatProperty_ChannelMap = 1667788144
-	KAudioFormatProperty_ChannelName = 1668178285
-	KAudioFormatProperty_ChannelShortName = 1668509293
-	KAudioFormatProperty_DecodeFormatIDs = 1633904998
-	KAudioFormatProperty_Decoders = 1635148901
-	KAudioFormatProperty_EncodeFormatIDs = 1633906534
-	KAudioFormatProperty_Encoders = 1635149166
-	KAudioFormatProperty_FirstPlayableFormatFromList = 1718642284
-	KAudioFormatProperty_FormatEmploysDependentPackets = 1717855600
-	KAudioFormatProperty_FormatInfo = 1718449257
-	KAudioFormatProperty_FormatIsEncrypted = 1668446576
-	KAudioFormatProperty_FormatIsExternallyFramed = 1717925990
-	KAudioFormatProperty_FormatIsVBR = 1719034482
-	KAudioFormatProperty_FormatList = 1718383476
-	KAudioFormatProperty_FormatName = 1718509933
-	KAudioFormatProperty_ID3TagSize = 1768174451
-	KAudioFormatProperty_ID3TagToDictionary = 1768174436
-	KAudioFormatProperty_MatrixMixMap = 1835884912
-	KAudioFormatProperty_NumberOfChannelsForLayout = 1852008557
-	KAudioFormatProperty_OutputFormatList = 1868983411
-	KAudioFormatProperty_PanningMatrix = 1885433453
-	KAudioFormatProperty_TagForChannelLayout = 1668116596
-	KAudioFormatProperty_TagsForNumberOfChannels = 1952540515
-	KAudioFormatProperty_ValidateChannelLayout = 1986093932
+	KAudioFormatProperty_AvailableEncodeNumberChannels    = 1635151459
+	KAudioFormatProperty_AvailableEncodeSampleRates       = 1634038642
+	KAudioFormatProperty_BalanceFade                      = 1650551910
+	KAudioFormatProperty_BitmapForLayoutTag               = 1651340391
+	KAudioFormatProperty_ChannelLayoutForBitmap           = 1668116578
+	KAudioFormatProperty_ChannelLayoutForTag              = 1668116588
+	KAudioFormatProperty_ChannelLayoutFromESDS            = 1702060908
+	KAudioFormatProperty_ChannelLayoutHash                = 1667786849
+	KAudioFormatProperty_ChannelLayoutName                = 1819242093
+	KAudioFormatProperty_ChannelLayoutSimpleName          = 1819504237
+	KAudioFormatProperty_ChannelMap                       = 1667788144
+	KAudioFormatProperty_ChannelName                      = 1668178285
+	KAudioFormatProperty_ChannelShortName                 = 1668509293
+	KAudioFormatProperty_DecodeFormatIDs                  = 1633904998
+	KAudioFormatProperty_Decoders                         = 1635148901
+	KAudioFormatProperty_EncodeFormatIDs                  = 1633906534
+	KAudioFormatProperty_Encoders                         = 1635149166
+	KAudioFormatProperty_FirstPlayableFormatFromList      = 1718642284
+	KAudioFormatProperty_FormatEmploysDependentPackets    = 1717855600
+	KAudioFormatProperty_FormatInfo                       = 1718449257
+	KAudioFormatProperty_FormatIsEncrypted                = 1668446576
+	KAudioFormatProperty_FormatIsExternallyFramed         = 1717925990
+	KAudioFormatProperty_FormatIsVBR                      = 1719034482
+	KAudioFormatProperty_FormatList                       = 1718383476
+	KAudioFormatProperty_FormatName                       = 1718509933
+	KAudioFormatProperty_ID3TagSize                       = 1768174451
+	KAudioFormatProperty_ID3TagToDictionary               = 1768174436
+	KAudioFormatProperty_MatrixMixMap                     = 1835884912
+	KAudioFormatProperty_NumberOfChannelsForLayout        = 1852008557
+	KAudioFormatProperty_OutputFormatList                 = 1868983411
+	KAudioFormatProperty_PanningMatrix                    = 1885433453
+	KAudioFormatProperty_TagForChannelLayout              = 1668116596
+	KAudioFormatProperty_TagsForNumberOfChannels          = 1952540515
+	KAudioFormatProperty_ValidateChannelLayout            = 1986093932
 )
 
 const (
-	KAudioFormatBadPropertySizeError = 561211770
-	KAudioFormatBadSpecifierSizeError = 561213539
-	KAudioFormatUnknownFormatError = 560360820
-	KAudioFormatUnspecifiedError = 2003329396
+	KAudioFormatBadPropertySizeError       = 561211770
+	KAudioFormatBadSpecifierSizeError      = 561213539
+	KAudioFormatUnknownFormatError         = 560360820
+	KAudioFormatUnspecifiedError           = 2003329396
 	KAudioFormatUnsupportedDataFormatError = 1718449215
-	KAudioFormatUnsupportedPropertyError = 1886547824
+	KAudioFormatUnsupportedPropertyError   = 1886547824
 )
 
 const (
-	KAudioHardwareServiceDeviceProperty_VirtualMainBalance = 1986880099
-	KAudioHardwareServiceDeviceProperty_VirtualMainVolume = 1986885219
+	KAudioHardwareServiceDeviceProperty_VirtualMainBalance   = 1986880099
+	KAudioHardwareServiceDeviceProperty_VirtualMainVolume    = 1986885219
 	KAudioHardwareServiceDeviceProperty_VirtualMasterBalance = 1986880099
-	KAudioHardwareServiceDeviceProperty_VirtualMasterVolume = 1986885219
-	KAudioHardwareServiceProperty_ServiceRestarted = 1936880500
+	KAudioHardwareServiceDeviceProperty_VirtualMasterVolume  = 1986885219
+	KAudioHardwareServiceProperty_ServiceRestarted           = 1936880500
 )
 
 const (
-	KAudioOutputUnitProperty_ChannelMap = 2002
-	KAudioOutputUnitProperty_CurrentDevice = 2000
-	KAudioOutputUnitProperty_EnableIO = 2003
-	KAudioOutputUnitProperty_HasIO = 2006
-	KAudioOutputUnitProperty_IsRunning = 2001
-	KAudioOutputUnitProperty_OSWorkgroup = 2015
-	KAudioOutputUnitProperty_SetInputCallback = 2005
-	KAudioOutputUnitProperty_StartTime = 2004
+	KAudioOutputUnitProperty_ChannelMap            = 2002
+	KAudioOutputUnitProperty_CurrentDevice         = 2000
+	KAudioOutputUnitProperty_EnableIO              = 2003
+	KAudioOutputUnitProperty_HasIO                 = 2006
+	KAudioOutputUnitProperty_IsRunning             = 2001
+	KAudioOutputUnitProperty_OSWorkgroup           = 2015
+	KAudioOutputUnitProperty_SetInputCallback      = 2005
+	KAudioOutputUnitProperty_StartTime             = 2004
 	KAudioOutputUnitProperty_StartTimestampsAtZero = 2007
 )
 
 const (
 	KAudioOutputUnitProperty_HostReceivesRemoteControlEvents = 2011
-	KAudioOutputUnitProperty_HostTransportState = 2013
-	KAudioOutputUnitProperty_MIDICallbacks = 2010
-	KAudioOutputUnitProperty_NodeComponentDescription = 2014
-	KAudioOutputUnitProperty_RemoteControlToHost = 2012
+	KAudioOutputUnitProperty_HostTransportState              = 2013
+	KAudioOutputUnitProperty_MIDICallbacks                   = 2010
+	KAudioOutputUnitProperty_NodeComponentDescription        = 2014
+	KAudioOutputUnitProperty_RemoteControlToHost             = 2012
 )
 
 const (
-	KAudioOutputUnitRange = 512
+	KAudioOutputUnitRange       = 512
 	KAudioOutputUnitStartSelect = 513
-	KAudioOutputUnitStopSelect = 514
+	KAudioOutputUnitStopSelect  = 514
 )
 
 const (
-	KAudioQueueErr_BufferEmpty = -66686
-	KAudioQueueErr_BufferEnqueuedTwice = -66666
-	KAudioQueueErr_BufferInQueue = -66679
-	KAudioQueueErr_CannotStart = -66681
-	KAudioQueueErr_CannotStartYet = -66665
-	KAudioQueueErr_CodecNotFound = -66673
-	KAudioQueueErr_DisposalPending = -66685
-	KAudioQueueErr_EnqueueDuringReset = -66632
-	KAudioQueueErr_InvalidBuffer = -66687
-	KAudioQueueErr_InvalidCodecAccess = -66672
-	KAudioQueueErr_InvalidDevice = -66680
-	KAudioQueueErr_InvalidOfflineMode = -66626
-	KAudioQueueErr_InvalidParameter = -66682
-	KAudioQueueErr_InvalidProperty = -66684
-	KAudioQueueErr_InvalidPropertySize = -66683
+	KAudioQueueErr_BufferEmpty          = -66686
+	KAudioQueueErr_BufferEnqueuedTwice  = -66666
+	KAudioQueueErr_BufferInQueue        = -66679
+	KAudioQueueErr_CannotStart          = -66681
+	KAudioQueueErr_CannotStartYet       = -66665
+	KAudioQueueErr_CodecNotFound        = -66673
+	KAudioQueueErr_DisposalPending      = -66685
+	KAudioQueueErr_EnqueueDuringReset   = -66632
+	KAudioQueueErr_InvalidBuffer        = -66687
+	KAudioQueueErr_InvalidCodecAccess   = -66672
+	KAudioQueueErr_InvalidDevice        = -66680
+	KAudioQueueErr_InvalidOfflineMode   = -66626
+	KAudioQueueErr_InvalidParameter     = -66682
+	KAudioQueueErr_InvalidProperty      = -66684
+	KAudioQueueErr_InvalidPropertySize  = -66683
 	KAudioQueueErr_InvalidPropertyValue = -66675
-	KAudioQueueErr_InvalidQueueType = -66677
-	KAudioQueueErr_InvalidRunState = -66678
-	KAudioQueueErr_InvalidTapContext = -66669
-	KAudioQueueErr_InvalidTapType = -66667
-	KAudioQueueErr_Permissions = -66676
-	KAudioQueueErr_PrimeTimedOut = -66674
-	KAudioQueueErr_QueueInvalidated = -66671
-	KAudioQueueErr_RecordUnderrun = -66668
-	KAudioQueueErr_TooManyTaps = -66670
+	KAudioQueueErr_InvalidQueueType     = -66677
+	KAudioQueueErr_InvalidRunState      = -66678
+	KAudioQueueErr_InvalidTapContext    = -66669
+	KAudioQueueErr_InvalidTapType       = -66667
+	KAudioQueueErr_Permissions          = -66676
+	KAudioQueueErr_PrimeTimedOut        = -66674
+	KAudioQueueErr_QueueInvalidated     = -66671
+	KAudioQueueErr_RecordUnderrun       = -66668
+	KAudioQueueErr_TooManyTaps          = -66670
 )
 
 const (
-	KAudioQueueParam_Pan = 13
-	KAudioQueueParam_Pitch = 3
-	KAudioQueueParam_PlayRate = 2
-	KAudioQueueParam_Volume = 1
+	KAudioQueueParam_Pan            = 13
+	KAudioQueueParam_Pitch          = 3
+	KAudioQueueParam_PlayRate       = 2
+	KAudioQueueParam_Volume         = 1
 	KAudioQueueParam_VolumeRampTime = 4
 )
 
@@ -2935,93 +3203,93 @@ const (
 )
 
 const (
-	KAudioQueueDeviceProperty_NumberChannels = 1634821219
-	KAudioQueueDeviceProperty_SampleRate = 1634825074
-	KAudioQueueProperty_ChannelLayout = 1634820972
-	KAudioQueueProperty_ConverterError = 1902343781
-	KAudioQueueProperty_CurrentDevice = 1634820964
-	KAudioQueueProperty_CurrentLevelMeter = 1634823542
-	KAudioQueueProperty_CurrentLevelMeterDB = 1634823524
-	KAudioQueueProperty_DecodeBufferSizeFrames = 1684234854
-	KAudioQueueProperty_EnableLevelMetering = 1634823525
-	KAudioQueueProperty_EnableTimePitch = 1902081136
-	KAudioQueueProperty_IsRunning = 1634824814
-	KAudioQueueProperty_MagicCookie = 1634823523
+	KAudioQueueDeviceProperty_NumberChannels    = 1634821219
+	KAudioQueueDeviceProperty_SampleRate        = 1634825074
+	KAudioQueueProperty_ChannelLayout           = 1634820972
+	KAudioQueueProperty_ConverterError          = 1902343781
+	KAudioQueueProperty_CurrentDevice           = 1634820964
+	KAudioQueueProperty_CurrentLevelMeter       = 1634823542
+	KAudioQueueProperty_CurrentLevelMeterDB     = 1634823524
+	KAudioQueueProperty_DecodeBufferSizeFrames  = 1684234854
+	KAudioQueueProperty_EnableLevelMetering     = 1634823525
+	KAudioQueueProperty_EnableTimePitch         = 1902081136
+	KAudioQueueProperty_IsRunning               = 1634824814
+	KAudioQueueProperty_MagicCookie             = 1634823523
 	KAudioQueueProperty_MaximumOutputPacketSize = 2020569203
-	KAudioQueueProperty_StreamDescription = 1634821748
-	KAudioQueueProperty_TimePitchAlgorithm = 1903456353
-	KAudioQueueProperty_TimePitchBypass = 1903456354
+	KAudioQueueProperty_StreamDescription       = 1634821748
+	KAudioQueueProperty_TimePitchAlgorithm      = 1903456353
+	KAudioQueueProperty_TimePitchBypass         = 1903456354
 )
 
 const (
-	KAudioQueueTimePitchAlgorithm_Spectral = 1936745827
+	KAudioQueueTimePitchAlgorithm_Spectral   = 1936745827
 	KAudioQueueTimePitchAlgorithm_TimeDomain = 1953064047
-	KAudioQueueTimePitchAlgorithm_Varispeed = 1987276900
+	KAudioQueueTimePitchAlgorithm_Varispeed  = 1987276900
 )
 
 const (
-	KAudioServicesBadPropertySizeError = 561211770
-	KAudioServicesBadSpecifierSizeError = 561213539
-	KAudioServicesNoError = 0
-	KAudioServicesSystemSoundClientTimedOutError = -1501
+	KAudioServicesBadPropertySizeError                    = 561211770
+	KAudioServicesBadSpecifierSizeError                   = 561213539
+	KAudioServicesNoError                                 = 0
+	KAudioServicesSystemSoundClientTimedOutError          = -1501
 	KAudioServicesSystemSoundExceededMaximumDurationError = -1502
-	KAudioServicesSystemSoundUnspecifiedError = -1500
-	KAudioServicesUnsupportedPropertyError = 1886681407
+	KAudioServicesSystemSoundUnspecifiedError             = -1500
+	KAudioServicesUnsupportedPropertyError                = 1886681407
 )
 
 const (
 	KAudioServicesPropertyCompletePlaybackIfAppDies = 1768318057
-	KAudioServicesPropertyIsUISound = 1769174377
+	KAudioServicesPropertyIsUISound                 = 1769174377
 )
 
 const (
 	KAudioSessionBeginInterruption = 1
-	KAudioSessionEndInterruption = 0
+	KAudioSessionEndInterruption   = 0
 )
 
 const (
-	KAudioSessionCategory_AmbientSound = 1634558569
-	KAudioSessionCategory_AudioProcessing = 1886547811
-	KAudioSessionCategory_MediaPlayback = 1835361385
-	KAudioSessionCategory_PlayAndRecord = 1886151026
-	KAudioSessionCategory_RecordAudio = 1919247201
+	KAudioSessionCategory_AmbientSound     = 1634558569
+	KAudioSessionCategory_AudioProcessing  = 1886547811
+	KAudioSessionCategory_MediaPlayback    = 1835361385
+	KAudioSessionCategory_PlayAndRecord    = 1886151026
+	KAudioSessionCategory_RecordAudio      = 1919247201
 	KAudioSessionCategory_SoloAmbientSound = 1936682095
 )
 
 const (
-	KAudioSessionCategory_LiveAudio = 1818850917
+	KAudioSessionCategory_LiveAudio                 = 1818850917
 	KAudioSessionCategory_UserInterfaceSoundEffects = 1969841784
 )
 
 const (
 	KAudioSessionInterruptionType_ShouldNotResume = 561148781
-	KAudioSessionInterruptionType_ShouldResume = 1769108333
+	KAudioSessionInterruptionType_ShouldResume    = 1769108333
 )
 
 const (
-	KAudioSessionMode_Default = 1684434036
-	KAudioSessionMode_GameChat = 1735222132
-	KAudioSessionMode_Measurement = 1836281204
+	KAudioSessionMode_Default        = 1684434036
+	KAudioSessionMode_GameChat       = 1735222132
+	KAudioSessionMode_Measurement    = 1836281204
 	KAudioSessionMode_VideoRecording = 1987208036
-	KAudioSessionMode_VoiceChat = 1986225012
+	KAudioSessionMode_VoiceChat      = 1986225012
 )
 
 const (
-	KAudioServicesNoHardwareError = 1852794999
-	KAudioSessionAlreadyInitialized = 1768843636
-	KAudioSessionBadPropertySizeError = 561211770
-	KAudioSessionIncompatibleCategory = 560161140
-	KAudioSessionInitializationError = 1768843583
-	KAudioSessionNoCategorySet = 1063477620
-	KAudioSessionNoError = 0
-	KAudioSessionNotActiveError = 560030580
-	KAudioSessionNotInitialized = 560557673
-	KAudioSessionUnspecifiedError = 2003329396
+	KAudioServicesNoHardwareError         = 1852794999
+	KAudioSessionAlreadyInitialized       = 1768843636
+	KAudioSessionBadPropertySizeError     = 561211770
+	KAudioSessionIncompatibleCategory     = 560161140
+	KAudioSessionInitializationError      = 1768843583
+	KAudioSessionNoCategorySet            = 1063477620
+	KAudioSessionNoError                  = 0
+	KAudioSessionNotActiveError           = 560030580
+	KAudioSessionNotInitialized           = 560557673
+	KAudioSessionUnspecifiedError         = 2003329396
 	KAudioSessionUnsupportedPropertyError = 1886681407
 )
 
 const (
-	KAudioSessionOverrideAudioRoute_None = 0
+	KAudioSessionOverrideAudioRoute_None    = 0
 	KAudioSessionOverrideAudioRoute_Speaker = 1936747378
 )
 
@@ -3030,45 +3298,45 @@ const (
 )
 
 const (
-	KAudioSessionProperty_AudioCategory = 1633902964
-	KAudioSessionProperty_AudioInputAvailable = 1634296182
-	KAudioSessionProperty_AudioRouteChange = 1919902568
-	KAudioSessionProperty_AudioRouteDescription = 1668440434
-	KAudioSessionProperty_CurrentHardwareIOBufferDuration = 1667785316
-	KAudioSessionProperty_CurrentHardwareInputLatency = 1667853428
-	KAudioSessionProperty_CurrentHardwareInputNumberChannels = 1667787107
-	KAudioSessionProperty_CurrentHardwareOutputLatency = 1668246644
-	KAudioSessionProperty_CurrentHardwareOutputNumberChannels = 1667788643
-	KAudioSessionProperty_CurrentHardwareOutputVolume = 1667788662
-	KAudioSessionProperty_CurrentHardwareSampleRate = 1667789682
-	KAudioSessionProperty_InputGainAvailable = 1768382838
-	KAudioSessionProperty_InputGainScalar = 1768387427
-	KAudioSessionProperty_InputSource = 1769173603
-	KAudioSessionProperty_InputSources = 1936876403
-	KAudioSessionProperty_InterruptionType = 1954115685
-	KAudioSessionProperty_Mode = 1836016741
-	KAudioSessionProperty_OtherAudioIsPlaying = 1869899890
-	KAudioSessionProperty_OtherMixableAudioShouldDuck = 1685414763
-	KAudioSessionProperty_OutputDestination = 1868854132
-	KAudioSessionProperty_OutputDestinations = 1685288051
-	KAudioSessionProperty_OverrideAudioRoute = 1870033508
-	KAudioSessionProperty_OverrideCategoryDefaultToSpeaker = 1668509803
+	KAudioSessionProperty_AudioCategory                        = 1633902964
+	KAudioSessionProperty_AudioInputAvailable                  = 1634296182
+	KAudioSessionProperty_AudioRouteChange                     = 1919902568
+	KAudioSessionProperty_AudioRouteDescription                = 1668440434
+	KAudioSessionProperty_CurrentHardwareIOBufferDuration      = 1667785316
+	KAudioSessionProperty_CurrentHardwareInputLatency          = 1667853428
+	KAudioSessionProperty_CurrentHardwareInputNumberChannels   = 1667787107
+	KAudioSessionProperty_CurrentHardwareOutputLatency         = 1668246644
+	KAudioSessionProperty_CurrentHardwareOutputNumberChannels  = 1667788643
+	KAudioSessionProperty_CurrentHardwareOutputVolume          = 1667788662
+	KAudioSessionProperty_CurrentHardwareSampleRate            = 1667789682
+	KAudioSessionProperty_InputGainAvailable                   = 1768382838
+	KAudioSessionProperty_InputGainScalar                      = 1768387427
+	KAudioSessionProperty_InputSource                          = 1769173603
+	KAudioSessionProperty_InputSources                         = 1936876403
+	KAudioSessionProperty_InterruptionType                     = 1954115685
+	KAudioSessionProperty_Mode                                 = 1836016741
+	KAudioSessionProperty_OtherAudioIsPlaying                  = 1869899890
+	KAudioSessionProperty_OtherMixableAudioShouldDuck          = 1685414763
+	KAudioSessionProperty_OutputDestination                    = 1868854132
+	KAudioSessionProperty_OutputDestinations                   = 1685288051
+	KAudioSessionProperty_OverrideAudioRoute                   = 1870033508
+	KAudioSessionProperty_OverrideCategoryDefaultToSpeaker     = 1668509803
 	KAudioSessionProperty_OverrideCategoryEnableBluetoothInput = 1667394677
-	KAudioSessionProperty_OverrideCategoryMixWithOthers = 1668114808
-	KAudioSessionProperty_PreferredHardwareIOBufferDuration = 1768907364
-	KAudioSessionProperty_PreferredHardwareSampleRate = 1752658802
-	KAudioSessionProperty_ServerDied = 1684628836
+	KAudioSessionProperty_OverrideCategoryMixWithOthers        = 1668114808
+	KAudioSessionProperty_PreferredHardwareIOBufferDuration    = 1768907364
+	KAudioSessionProperty_PreferredHardwareSampleRate          = 1752658802
+	KAudioSessionProperty_ServerDied                           = 1684628836
 )
 
 const (
-	KAudioSessionRouteChangeReason_CategoryChange = 3
-	KAudioSessionRouteChangeReason_NewDeviceAvailable = 1
+	KAudioSessionRouteChangeReason_CategoryChange             = 3
+	KAudioSessionRouteChangeReason_NewDeviceAvailable         = 1
 	KAudioSessionRouteChangeReason_NoSuitableRouteForCategory = 7
-	KAudioSessionRouteChangeReason_OldDeviceUnavailable = 2
-	KAudioSessionRouteChangeReason_Override = 4
-	KAudioSessionRouteChangeReason_RouteConfigurationChange = 8
-	KAudioSessionRouteChangeReason_Unknown = 0
-	KAudioSessionRouteChangeReason_WakeFromSleep = 6
+	KAudioSessionRouteChangeReason_OldDeviceUnavailable       = 2
+	KAudioSessionRouteChangeReason_Override                   = 4
+	KAudioSessionRouteChangeReason_RouteConfigurationChange   = 8
+	KAudioSessionRouteChangeReason_Unknown                    = 0
+	KAudioSessionRouteChangeReason_WakeFromSleep              = 6
 )
 
 const (
@@ -3077,16 +3345,16 @@ const (
 
 const (
 	KAudioToolboxErr_CannotDoInCurrentContext = -10863
-	KAudioToolboxErr_EndOfTrack = -10857
-	KAudioToolboxErr_IllegalTrackDestination = -10855
-	KAudioToolboxErr_InvalidEventType = -10853
-	KAudioToolboxErr_InvalidPlayerState = -10852
-	KAudioToolboxErr_InvalidSequenceType = -10846
-	KAudioToolboxErr_NoSequence = -10854
-	KAudioToolboxErr_StartOfTrack = -10856
-	KAudioToolboxErr_TrackIndexError = -10859
-	KAudioToolboxErr_TrackNotFound = -10858
-	KAudioToolboxError_NoTrackDestination = -66720
+	KAudioToolboxErr_EndOfTrack               = -10857
+	KAudioToolboxErr_IllegalTrackDestination  = -10855
+	KAudioToolboxErr_InvalidEventType         = -10853
+	KAudioToolboxErr_InvalidPlayerState       = -10852
+	KAudioToolboxErr_InvalidSequenceType      = -10846
+	KAudioToolboxErr_NoSequence               = -10854
+	KAudioToolboxErr_StartOfTrack             = -10856
+	KAudioToolboxErr_TrackIndexError          = -10859
+	KAudioToolboxErr_TrackNotFound            = -10858
+	KAudioToolboxError_NoTrackDestination     = -66720
 )
 
 const (
@@ -3094,40 +3362,40 @@ const (
 )
 
 const (
-	KAudioUnitErr_IllegalInstrument = -10873
+	KAudioUnitErr_IllegalInstrument      = -10873
 	KAudioUnitErr_InstrumentTypeNotFound = -10872
 )
 
 const (
-	KAudioComponentErr_InstanceInvalidated = -66749
-	KAudioComponentErr_InstanceTimedOut = -66754
-	KAudioUnitErr_CannotDoInCurrentContext = -10863
+	KAudioComponentErr_InstanceInvalidated     = -66749
+	KAudioComponentErr_InstanceTimedOut        = -66754
+	KAudioUnitErr_CannotDoInCurrentContext     = -10863
 	KAudioUnitErr_ComponentManagerNotSupported = -66740
-	KAudioUnitErr_ExtensionNotFound = -66744
-	KAudioUnitErr_FailedInitialization = -10875
-	KAudioUnitErr_FileNotSpecified = -10869
-	KAudioUnitErr_FormatNotSupported = -10868
-	KAudioUnitErr_Initialized = -10849
-	KAudioUnitErr_InvalidElement = -10877
-	KAudioUnitErr_InvalidFile = -10871
-	KAudioUnitErr_InvalidFilePath = -66742
-	KAudioUnitErr_InvalidOfflineRender = -10848
-	KAudioUnitErr_InvalidParameter = -10878
-	KAudioUnitErr_InvalidParameterValue = -66743
-	KAudioUnitErr_InvalidProperty = -10879
-	KAudioUnitErr_InvalidPropertyValue = -10851
-	KAudioUnitErr_InvalidScope = -10866
-	KAudioUnitErr_MIDIOutputBufferFull = -66753
-	KAudioUnitErr_MissingKey = -66741
-	KAudioUnitErr_MultipleVoiceProcessors = -66635
-	KAudioUnitErr_NoConnection = -10876
-	KAudioUnitErr_PropertyNotInUse = -10850
-	KAudioUnitErr_PropertyNotWritable = -10865
-	KAudioUnitErr_RenderTimeout = -66745
-	KAudioUnitErr_TooManyFramesToProcess = -10874
-	KAudioUnitErr_Unauthorized = -10847
-	KAudioUnitErr_Uninitialized = -10867
-	KAudioUnitErr_UnknownFileType = -10870
+	KAudioUnitErr_ExtensionNotFound            = -66744
+	KAudioUnitErr_FailedInitialization         = -10875
+	KAudioUnitErr_FileNotSpecified             = -10869
+	KAudioUnitErr_FormatNotSupported           = -10868
+	KAudioUnitErr_Initialized                  = -10849
+	KAudioUnitErr_InvalidElement               = -10877
+	KAudioUnitErr_InvalidFile                  = -10871
+	KAudioUnitErr_InvalidFilePath              = -66742
+	KAudioUnitErr_InvalidOfflineRender         = -10848
+	KAudioUnitErr_InvalidParameter             = -10878
+	KAudioUnitErr_InvalidParameterValue        = -66743
+	KAudioUnitErr_InvalidProperty              = -10879
+	KAudioUnitErr_InvalidPropertyValue         = -10851
+	KAudioUnitErr_InvalidScope                 = -10866
+	KAudioUnitErr_MIDIOutputBufferFull         = -66753
+	KAudioUnitErr_MissingKey                   = -66741
+	KAudioUnitErr_MultipleVoiceProcessors      = -66635
+	KAudioUnitErr_NoConnection                 = -10876
+	KAudioUnitErr_PropertyNotInUse             = -10850
+	KAudioUnitErr_PropertyNotWritable          = -10865
+	KAudioUnitErr_RenderTimeout                = -66745
+	KAudioUnitErr_TooManyFramesToProcess       = -10874
+	KAudioUnitErr_Unauthorized                 = -10847
+	KAudioUnitErr_Uninitialized                = -10867
+	KAudioUnitErr_UnknownFileType              = -10870
 )
 
 const (
@@ -3135,22 +3403,22 @@ const (
 )
 
 const (
-	KAudioUnitMigrateProperty_FromPlugin = 4000
+	KAudioUnitMigrateProperty_FromPlugin    = 4000
 	KAudioUnitMigrateProperty_OldAutomation = 4001
 )
 
 const (
-	KAudioUnitOfflineProperty_InputSize = 3020
-	KAudioUnitOfflineProperty_OutputSize = 3021
-	KAudioUnitOfflineProperty_PreflightName = 3024
+	KAudioUnitOfflineProperty_InputSize             = 3020
+	KAudioUnitOfflineProperty_OutputSize            = 3021
+	KAudioUnitOfflineProperty_PreflightName         = 3024
 	KAudioUnitOfflineProperty_PreflightRequirements = 3023
-	KAudioUnitOfflineProperty_StartOffset = 3022
+	KAudioUnitOfflineProperty_StartOffset           = 3022
 )
 
 const (
 	KAudioUnitParameterFlag_Global = 1
-	KAudioUnitParameterFlag_Group = 8
-	KAudioUnitParameterFlag_Input = 2
+	KAudioUnitParameterFlag_Group  = 8
+	KAudioUnitParameterFlag_Input  = 2
 	KAudioUnitParameterFlag_Output = 4
 )
 
@@ -3164,83 +3432,83 @@ const (
 
 const (
 	KAudioUnitProperty_3DMixerAttenuationCurve = 3013
-	KAudioUnitProperty_3DMixerDistanceAtten = 3004
-	KAudioUnitProperty_3DMixerDistanceParams = 3010
-	KAudioUnitProperty_3DMixerRenderingFlags = 3003
-	KAudioUnitProperty_DopplerShift = 3002
-	KAudioUnitProperty_ReverbPreset = 3012
+	KAudioUnitProperty_3DMixerDistanceAtten    = 3004
+	KAudioUnitProperty_3DMixerDistanceParams   = 3010
+	KAudioUnitProperty_3DMixerRenderingFlags   = 3003
+	KAudioUnitProperty_DopplerShift            = 3002
+	KAudioUnitProperty_ReverbPreset            = 3012
 )
 
 const (
-	KAudioUnitProperty_AddParameterMIDIMapping = 42
-	KAudioUnitProperty_AllParameterMIDIMappings = 41
+	KAudioUnitProperty_AddParameterMIDIMapping    = 42
+	KAudioUnitProperty_AllParameterMIDIMappings   = 41
 	KAudioUnitProperty_HotMapParameterMIDIMapping = 44
 	KAudioUnitProperty_RemoveParameterMIDIMapping = 43
 )
 
 const (
-	KAudioUnitProperty_AUHostIdentifier = 46
-	KAudioUnitProperty_AudioChannelLayout = 19
-	KAudioUnitProperty_AudioUnitMIDIProtocol = 64
-	KAudioUnitProperty_BypassEffect = 21
-	KAudioUnitProperty_CPULoad = 6
-	KAudioUnitProperty_ClassInfo = 0
-	KAudioUnitProperty_ClassInfoFromDocument = 50
-	KAudioUnitProperty_CocoaUI = 31
-	KAudioUnitProperty_ContextName = 25
-	KAudioUnitProperty_DependentParameters = 45
-	KAudioUnitProperty_ElementCount = 11
-	KAudioUnitProperty_ElementName = 30
-	KAudioUnitProperty_FactoryPresets = 24
-	KAudioUnitProperty_FastDispatch = 5
-	KAudioUnitProperty_FrequencyResponse = 52
-	KAudioUnitProperty_GetUIComponentList = 18
-	KAudioUnitProperty_HostCallbacks = 27
-	KAudioUnitProperty_HostMIDIProtocol = 65
-	KAudioUnitProperty_IconLocation = 39
-	KAudioUnitProperty_InPlaceProcessing = 29
-	KAudioUnitProperty_InputSamplesInOutput = 49
-	KAudioUnitProperty_LastRenderError = 22
-	KAudioUnitProperty_LastRenderSampleTime = 61
-	KAudioUnitProperty_Latency = 12
-	KAudioUnitProperty_LoadedOutOfProcess = 62
-	KAudioUnitProperty_MIDIOutputBufferSizeHint = 66
-	KAudioUnitProperty_MIDIOutputCallback = 48
-	KAudioUnitProperty_MIDIOutputCallbackInfo = 47
+	KAudioUnitProperty_AUHostIdentifier            = 46
+	KAudioUnitProperty_AudioChannelLayout          = 19
+	KAudioUnitProperty_AudioUnitMIDIProtocol       = 64
+	KAudioUnitProperty_BypassEffect                = 21
+	KAudioUnitProperty_CPULoad                     = 6
+	KAudioUnitProperty_ClassInfo                   = 0
+	KAudioUnitProperty_ClassInfoFromDocument       = 50
+	KAudioUnitProperty_CocoaUI                     = 31
+	KAudioUnitProperty_ContextName                 = 25
+	KAudioUnitProperty_DependentParameters         = 45
+	KAudioUnitProperty_ElementCount                = 11
+	KAudioUnitProperty_ElementName                 = 30
+	KAudioUnitProperty_FactoryPresets              = 24
+	KAudioUnitProperty_FastDispatch                = 5
+	KAudioUnitProperty_FrequencyResponse           = 52
+	KAudioUnitProperty_GetUIComponentList          = 18
+	KAudioUnitProperty_HostCallbacks               = 27
+	KAudioUnitProperty_HostMIDIProtocol            = 65
+	KAudioUnitProperty_IconLocation                = 39
+	KAudioUnitProperty_InPlaceProcessing           = 29
+	KAudioUnitProperty_InputSamplesInOutput        = 49
+	KAudioUnitProperty_LastRenderError             = 22
+	KAudioUnitProperty_LastRenderSampleTime        = 61
+	KAudioUnitProperty_Latency                     = 12
+	KAudioUnitProperty_LoadedOutOfProcess          = 62
+	KAudioUnitProperty_MIDIOutputBufferSizeHint    = 66
+	KAudioUnitProperty_MIDIOutputCallback          = 48
+	KAudioUnitProperty_MIDIOutputCallbackInfo      = 47
 	KAudioUnitProperty_MIDIOutputEventListCallback = 63
-	KAudioUnitProperty_MakeConnection = 1
-	KAudioUnitProperty_MaximumFramesPerSlice = 14
-	KAudioUnitProperty_NickName = 54
-	KAudioUnitProperty_OfflineRender = 37
-	KAudioUnitProperty_ParameterClumpName = 35
-	KAudioUnitProperty_ParameterHistoryInfo = 53
-	KAudioUnitProperty_ParameterIDName = 34
-	KAudioUnitProperty_ParameterInfo = 4
-	KAudioUnitProperty_ParameterList = 3
-	KAudioUnitProperty_ParameterStringFromValue = 33
-	KAudioUnitProperty_ParameterValueFromString = 38
-	KAudioUnitProperty_ParameterValueStrings = 16
-	KAudioUnitProperty_ParametersForOverview = 57
-	KAudioUnitProperty_PresentPreset = 36
-	KAudioUnitProperty_PresentationLatency = 40
-	KAudioUnitProperty_RenderContextObserver = 60
-	KAudioUnitProperty_RenderQuality = 26
-	KAudioUnitProperty_RequestViewController = 56
-	KAudioUnitProperty_SampleRate = 2
-	KAudioUnitProperty_SetExternalBuffer = 15
-	KAudioUnitProperty_SetRenderCallback = 23
-	KAudioUnitProperty_ShouldAllocateBuffer = 51
-	KAudioUnitProperty_StreamFormat = 8
-	KAudioUnitProperty_SupportedChannelLayoutTags = 32
-	KAudioUnitProperty_SupportedNumChannels = 13
-	KAudioUnitProperty_SupportsMPE = 58
-	KAudioUnitProperty_TailTime = 20
+	KAudioUnitProperty_MakeConnection              = 1
+	KAudioUnitProperty_MaximumFramesPerSlice       = 14
+	KAudioUnitProperty_NickName                    = 54
+	KAudioUnitProperty_OfflineRender               = 37
+	KAudioUnitProperty_ParameterClumpName          = 35
+	KAudioUnitProperty_ParameterHistoryInfo        = 53
+	KAudioUnitProperty_ParameterIDName             = 34
+	KAudioUnitProperty_ParameterInfo               = 4
+	KAudioUnitProperty_ParameterList               = 3
+	KAudioUnitProperty_ParameterStringFromValue    = 33
+	KAudioUnitProperty_ParameterValueFromString    = 38
+	KAudioUnitProperty_ParameterValueStrings       = 16
+	KAudioUnitProperty_ParametersForOverview       = 57
+	KAudioUnitProperty_PresentPreset               = 36
+	KAudioUnitProperty_PresentationLatency         = 40
+	KAudioUnitProperty_RenderContextObserver       = 60
+	KAudioUnitProperty_RenderQuality               = 26
+	KAudioUnitProperty_RequestViewController       = 56
+	KAudioUnitProperty_SampleRate                  = 2
+	KAudioUnitProperty_SetExternalBuffer           = 15
+	KAudioUnitProperty_SetRenderCallback           = 23
+	KAudioUnitProperty_ShouldAllocateBuffer        = 51
+	KAudioUnitProperty_StreamFormat                = 8
+	KAudioUnitProperty_SupportedChannelLayoutTags  = 32
+	KAudioUnitProperty_SupportedNumChannels        = 13
+	KAudioUnitProperty_SupportsMPE                 = 58
+	KAudioUnitProperty_TailTime                    = 20
 )
 
 const (
 	KAudioUnitProperty_DeferredRendererExtraLatency = 3321
-	KAudioUnitProperty_DeferredRendererPullSize = 3320
-	KAudioUnitProperty_DeferredRendererWaitFrames = 3322
+	KAudioUnitProperty_DeferredRendererPullSize     = 3320
+	KAudioUnitProperty_DeferredRendererWaitFrames   = 3322
 )
 
 const (
@@ -3249,41 +3517,41 @@ const (
 
 const (
 	KAudioUnitProperty_InputAnchorTimeStamp = 3016
-	KAudioUnitProperty_MatrixDimensions = 3009
-	KAudioUnitProperty_MatrixLevels = 3006
-	KAudioUnitProperty_MeterClipping = 3011
-	KAudioUnitProperty_MeteringMode = 3007
+	KAudioUnitProperty_MatrixDimensions     = 3009
+	KAudioUnitProperty_MatrixLevels         = 3006
+	KAudioUnitProperty_MeterClipping        = 3011
+	KAudioUnitProperty_MeteringMode         = 3007
 )
 
 const (
-	KAudioUnitProperty_IsInterAppConnected = 101
-	KAudioUnitProperty_PeerURL = 102
+	KAudioUnitProperty_IsInterAppConnected        = 101
+	KAudioUnitProperty_PeerURL                    = 102
 	KAudioUnitProperty_RemoteControlEventListener = 100
 )
 
 const (
-	KAudioUnitProperty_ReverbRoomType = 10
+	KAudioUnitProperty_ReverbRoomType                              = 10
 	KAudioUnitProperty_SpatialMixerAnyInputIsUsingPersonalizedHRTF = 3116
-	KAudioUnitProperty_SpatialMixerAttenuationCurve = 3013
-	KAudioUnitProperty_SpatialMixerDistanceParams = 3010
-	KAudioUnitProperty_SpatialMixerEnableHeadTracking = 3111
-	KAudioUnitProperty_SpatialMixerOutputType = 3100
-	KAudioUnitProperty_SpatialMixerPersonalizedHRTFMode = 3113
-	KAudioUnitProperty_SpatialMixerPointSourceInHeadMode = 3103
-	KAudioUnitProperty_SpatialMixerRenderingFlags = 3003
-	KAudioUnitProperty_SpatialMixerSourceMode = 3005
-	KAudioUnitProperty_SpatializationAlgorithm = 3000
-	KAudioUnitProperty_UsesInternalReverb = 1005
+	KAudioUnitProperty_SpatialMixerAttenuationCurve                = 3013
+	KAudioUnitProperty_SpatialMixerDistanceParams                  = 3010
+	KAudioUnitProperty_SpatialMixerEnableHeadTracking              = 3111
+	KAudioUnitProperty_SpatialMixerOutputType                      = 3100
+	KAudioUnitProperty_SpatialMixerPersonalizedHRTFMode            = 3113
+	KAudioUnitProperty_SpatialMixerPointSourceInHeadMode           = 3103
+	KAudioUnitProperty_SpatialMixerRenderingFlags                  = 3003
+	KAudioUnitProperty_SpatialMixerSourceMode                      = 3005
+	KAudioUnitProperty_SpatializationAlgorithm                     = 3000
+	KAudioUnitProperty_UsesInternalReverb                          = 1005
 )
 
 const (
-	KAudioOfflineUnitProperty_InputSize = 3020
-	KAudioOfflineUnitProperty_OutputSize = 3021
-	KAudioUnitProperty_BusCount = 11
-	KAudioUnitProperty_CurrentPreset = 28
+	KAudioOfflineUnitProperty_InputSize   = 3020
+	KAudioOfflineUnitProperty_OutputSize  = 3021
+	KAudioUnitProperty_BusCount           = 11
+	KAudioUnitProperty_CurrentPreset      = 28
 	KAudioUnitProperty_MIDIControlMapping = 17
 	KAudioUnitProperty_ParameterValueName = 33
-	KAudioUnitProperty_SRCAlgorithm = 9
+	KAudioUnitProperty_SRCAlgorithm       = 9
 )
 
 const (
@@ -3291,17 +3559,17 @@ const (
 )
 
 const (
-	KAudioUnitProperty_CurrentPlayTime = 3302
-	KAudioUnitProperty_ScheduleAudioSlice = 3300
+	KAudioUnitProperty_CurrentPlayTime        = 3302
+	KAudioUnitProperty_ScheduleAudioSlice     = 3300
 	KAudioUnitProperty_ScheduleStartTimeStamp = 3301
 )
 
 const (
 	KAudioUnitProperty_ScheduledFileBufferSizeFrames = 3313
-	KAudioUnitProperty_ScheduledFileIDs = 3310
-	KAudioUnitProperty_ScheduledFileNumberBuffers = 3314
-	KAudioUnitProperty_ScheduledFilePrime = 3312
-	KAudioUnitProperty_ScheduledFileRegion = 3311
+	KAudioUnitProperty_ScheduledFileIDs              = 3310
+	KAudioUnitProperty_ScheduledFileNumberBuffers    = 3314
+	KAudioUnitProperty_ScheduledFilePrime            = 3312
+	KAudioUnitProperty_ScheduledFileRegion           = 3311
 )
 
 const (
@@ -3309,127 +3577,127 @@ const (
 )
 
 const (
-	KAudioUnitAddPropertyListenerSelect = 10
-	KAudioUnitAddRenderNotifySelect = 15
-	KAudioUnitComplexRenderSelect = 19
-	KAudioUnitGetParameterSelect = 6
-	KAudioUnitGetPropertyInfoSelect = 3
-	KAudioUnitGetPropertySelect = 4
-	KAudioUnitInitializeSelect = 1
-	KAudioUnitProcessMultipleSelect = 21
-	KAudioUnitProcessSelect = 20
-	KAudioUnitRange = 0
-	KAudioUnitRemovePropertyListenerSelect = 11
+	KAudioUnitAddPropertyListenerSelect                = 10
+	KAudioUnitAddRenderNotifySelect                    = 15
+	KAudioUnitComplexRenderSelect                      = 19
+	KAudioUnitGetParameterSelect                       = 6
+	KAudioUnitGetPropertyInfoSelect                    = 3
+	KAudioUnitGetPropertySelect                        = 4
+	KAudioUnitInitializeSelect                         = 1
+	KAudioUnitProcessMultipleSelect                    = 21
+	KAudioUnitProcessSelect                            = 20
+	KAudioUnitRange                                    = 0
+	KAudioUnitRemovePropertyListenerSelect             = 11
 	KAudioUnitRemovePropertyListenerWithUserDataSelect = 18
-	KAudioUnitRemoveRenderNotifySelect = 16
-	KAudioUnitRenderSelect = 14
-	KAudioUnitResetSelect = 9
-	KAudioUnitScheduleParametersSelect = 17
-	KAudioUnitSetParameterSelect = 7
-	KAudioUnitSetPropertySelect = 5
-	KAudioUnitUninitializeSelect = 2
+	KAudioUnitRemoveRenderNotifySelect                 = 16
+	KAudioUnitRenderSelect                             = 14
+	KAudioUnitResetSelect                              = 9
+	KAudioUnitScheduleParametersSelect                 = 17
+	KAudioUnitSetParameterSelect                       = 7
+	KAudioUnitSetPropertySelect                        = 5
+	KAudioUnitUninitializeSelect                       = 2
 )
 
 const (
 	KAudioUnitSRCAlgorithm_MediumQuality = 1668510307
-	KAudioUnitSRCAlgorithm_Polyphase = 1886350457
+	KAudioUnitSRCAlgorithm_Polyphase     = 1886350457
 )
 
 const (
-	KAudioUnitSampleRateConverterComplexity_Linear = 1818848869
+	KAudioUnitSampleRateConverterComplexity_Linear    = 1818848869
 	KAudioUnitSampleRateConverterComplexity_Mastering = 1650553971
-	KAudioUnitSampleRateConverterComplexity_Normal = 1852797549
+	KAudioUnitSampleRateConverterComplexity_Normal    = 1852797549
 )
 
 const (
-	KAudioUnitScope_Global = 0
-	KAudioUnitScope_Group = 3
-	KAudioUnitScope_Input = 1
-	KAudioUnitScope_Layer = 6
+	KAudioUnitScope_Global    = 0
+	KAudioUnitScope_Group     = 3
+	KAudioUnitScope_Input     = 1
+	KAudioUnitScope_Layer     = 6
 	KAudioUnitScope_LayerItem = 7
-	KAudioUnitScope_Note = 5
-	KAudioUnitScope_Output = 2
-	KAudioUnitScope_Part = 4
+	KAudioUnitScope_Note      = 5
+	KAudioUnitScope_Output    = 2
+	KAudioUnitScope_Part      = 4
 )
 
 const (
-	KAudioUnitSubType_AUAudioMix = 1634560376
-	KAudioUnitSubType_AUConverter = 1668247158
-	KAudioUnitSubType_AUiPodTimeOther = 1768977519
+	KAudioUnitSubType_AUAudioMix       = 1634560376
+	KAudioUnitSubType_AUConverter      = 1668247158
+	KAudioUnitSubType_AUiPodTimeOther  = 1768977519
 	KAudioUnitSubType_DeferredRenderer = 1684366962
-	KAudioUnitSubType_Merger = 1835364967
-	KAudioUnitSubType_MultiSplitter = 1836281964
-	KAudioUnitSubType_NewTimePitch = 1853191280
-	KAudioUnitSubType_RoundTripAAC = 1918984547
-	KAudioUnitSubType_Splitter = 1936747636
-	KAudioUnitSubType_Varispeed = 1986097769
+	KAudioUnitSubType_Merger           = 1835364967
+	KAudioUnitSubType_MultiSplitter    = 1836281964
+	KAudioUnitSubType_NewTimePitch     = 1853191280
+	KAudioUnitSubType_RoundTripAAC     = 1918984547
+	KAudioUnitSubType_Splitter         = 1936747636
+	KAudioUnitSubType_Varispeed        = 1986097769
 )
 
 const (
-	KAudioUnitSubType_DLSSynth = 1684828960
+	KAudioUnitSubType_DLSSynth  = 1684828960
 	KAudioUnitSubType_MIDISynth = 1836284270
-	KAudioUnitSubType_Sampler = 1935764848
+	KAudioUnitSubType_Sampler   = 1935764848
 )
 
 const (
-	KAudioUnitSubType_GenericOutput = 1734700658
+	KAudioUnitSubType_GenericOutput     = 1734700658
 	KAudioUnitSubType_VoiceProcessingIO = 1987078511
 )
 
 const (
-	KAudioUnitSubType_AUFilter = 1718185076
-	KAudioUnitSubType_GraphicEQ = 1735550321
-	KAudioUnitSubType_MatrixReverb = 1836213622
+	KAudioUnitSubType_AUFilter            = 1718185076
+	KAudioUnitSubType_GraphicEQ           = 1735550321
+	KAudioUnitSubType_MatrixReverb        = 1836213622
 	KAudioUnitSubType_MultiBandCompressor = 1835232624
-	KAudioUnitSubType_NetSend = 1853058660
-	KAudioUnitSubType_Pitch = 1953329268
-	KAudioUnitSubType_RogerBeep = 1919903602
+	KAudioUnitSubType_NetSend             = 1853058660
+	KAudioUnitSubType_Pitch               = 1953329268
+	KAudioUnitSubType_RogerBeep           = 1919903602
 )
 
 const (
 	KAudioUnitSubType_DefaultOutput = 1684366880
-	KAudioUnitSubType_HALOutput = 1634230636
-	KAudioUnitSubType_SystemOutput = 1937339168
+	KAudioUnitSubType_HALOutput     = 1634230636
+	KAudioUnitSubType_SystemOutput  = 1937339168
 )
 
 const (
-	KAudioUnitSubType_MatrixMixer = 1836608888
+	KAudioUnitSubType_MatrixMixer       = 1836608888
 	KAudioUnitSubType_MultiChannelMixer = 1835232632
-	KAudioUnitSubType_SpatialMixer = 862217581
+	KAudioUnitSubType_SpatialMixer      = 862217581
 )
 
 const (
-	KAudioUnitSubType_AudioFilePlayer = 1634103404
-	KAudioUnitSubType_NetReceive = 1852990326
+	KAudioUnitSubType_AudioFilePlayer      = 1634103404
+	KAudioUnitSubType_NetReceive           = 1852990326
 	KAudioUnitSubType_ScheduledSoundPlayer = 1936945260
 )
 
 const (
-	KAudioUnitSubType_AUSoundIsolation = 1987012979
-	KAudioUnitSubType_BandPassFilter = 1651532147
-	KAudioUnitSubType_Delay = 1684368505
-	KAudioUnitSubType_Distortion = 1684632436
+	KAudioUnitSubType_AUSoundIsolation  = 1987012979
+	KAudioUnitSubType_BandPassFilter    = 1651532147
+	KAudioUnitSubType_Delay             = 1684368505
+	KAudioUnitSubType_Distortion        = 1684632436
 	KAudioUnitSubType_DynamicsProcessor = 1684237680
-	KAudioUnitSubType_HighPassFilter = 1752195443
-	KAudioUnitSubType_HighShelfFilter = 1752393830
-	KAudioUnitSubType_LowPassFilter = 1819304307
-	KAudioUnitSubType_LowShelfFilter = 1819502694
-	KAudioUnitSubType_NBandEQ = 1851942257
-	KAudioUnitSubType_ParametricEQ = 1886217585
-	KAudioUnitSubType_PeakLimiter = 1819112562
-	KAudioUnitSubType_Reverb2 = 1920361010
-	KAudioUnitSubType_SampleDelay = 1935961209
+	KAudioUnitSubType_HighPassFilter    = 1752195443
+	KAudioUnitSubType_HighShelfFilter   = 1752393830
+	KAudioUnitSubType_LowPassFilter     = 1819304307
+	KAudioUnitSubType_LowShelfFilter    = 1819502694
+	KAudioUnitSubType_NBandEQ           = 1851942257
+	KAudioUnitSubType_ParametricEQ      = 1886217585
+	KAudioUnitSubType_PeakLimiter       = 1819112562
+	KAudioUnitSubType_Reverb2           = 1920361010
+	KAudioUnitSubType_SampleDelay       = 1935961209
 )
 
 const (
-	KAudioUnitSubType_HRTFPanner = 1752331366
-	KAudioUnitSubType_SoundFieldPanner = 1634558569
+	KAudioUnitSubType_HRTFPanner          = 1752331366
+	KAudioUnitSubType_SoundFieldPanner    = 1634558569
 	KAudioUnitSubType_SphericalHeadPanner = 1936746610
-	KAudioUnitSubType_VectorPanner = 1986158963
+	KAudioUnitSubType_VectorPanner        = 1986158963
 )
 
 const (
-	KAudioUnitSubType_3DMixer = 862219640
+	KAudioUnitSubType_3DMixer     = 862219640
 	KAudioUnitSubType_StereoMixer = 1936554098
 )
 
@@ -3438,213 +3706,213 @@ const (
 )
 
 const (
-	KAudioUnitType_Effect = 1635083896
-	KAudioUnitType_FormatConverter = 1635083875
-	KAudioUnitType_Generator = 1635084142
-	KAudioUnitType_MIDIProcessor = 1635085673
-	KAudioUnitType_Mixer = 1635085688
-	KAudioUnitType_MusicDevice = 1635085685
-	KAudioUnitType_MusicEffect = 1635085670
-	KAudioUnitType_OfflineEffect = 1635086188
-	KAudioUnitType_Output = 1635086197
-	KAudioUnitType_Panner = 1635086446
+	KAudioUnitType_Effect            = 1635083896
+	KAudioUnitType_FormatConverter   = 1635083875
+	KAudioUnitType_Generator         = 1635084142
+	KAudioUnitType_MIDIProcessor     = 1635085673
+	KAudioUnitType_Mixer             = 1635085688
+	KAudioUnitType_MusicDevice       = 1635085685
+	KAudioUnitType_MusicEffect       = 1635085670
+	KAudioUnitType_OfflineEffect     = 1635086188
+	KAudioUnitType_Output            = 1635086197
+	KAudioUnitType_Panner            = 1635086446
 	KAudioUnitType_SpeechSynthesizer = 1635087216
 )
 
 const (
-	KAudioUnitType_RemoteEffect = 1635086968
-	KAudioUnitType_RemoteGenerator = 1635086951
-	KAudioUnitType_RemoteInstrument = 1635086953
+	KAudioUnitType_RemoteEffect      = 1635086968
+	KAudioUnitType_RemoteGenerator   = 1635086951
+	KAudioUnitType_RemoteInstrument  = 1635086953
 	KAudioUnitType_RemoteMusicEffect = 1635086957
 )
 
 const (
-	KBandpassParam_Bandwidth = 1
+	KBandpassParam_Bandwidth       = 1
 	KBandpassParam_CenterFrequency = 0
 )
 
 const (
-	KCAClock_CannotSetTimeError = -66805
-	KCAClock_InvalidPlayRateError = -66806
-	KCAClock_InvalidPropertySizeError = -66815
-	KCAClock_InvalidSMPTEFormatError = -66809
-	KCAClock_InvalidSMPTEOffsetError = -66808
-	KCAClock_InvalidSyncModeError = -66813
-	KCAClock_InvalidSyncSourceError = -66812
-	KCAClock_InvalidTimeFormatError = -66814
-	KCAClock_InvalidTimebaseError = -66811
+	KCAClock_CannotSetTimeError         = -66805
+	KCAClock_InvalidPlayRateError       = -66806
+	KCAClock_InvalidPropertySizeError   = -66815
+	KCAClock_InvalidSMPTEFormatError    = -66809
+	KCAClock_InvalidSMPTEOffsetError    = -66808
+	KCAClock_InvalidSyncModeError       = -66813
+	KCAClock_InvalidSyncSourceError     = -66812
+	KCAClock_InvalidTimeFormatError     = -66814
+	KCAClock_InvalidTimebaseError       = -66811
 	KCAClock_InvalidTimebaseSourceError = -66810
-	KCAClock_InvalidUnitError = -66807
-	KCAClock_UnknownPropertyError = -66816
+	KCAClock_InvalidUnitError           = -66807
+	KCAClock_UnknownPropertyError       = -66816
 )
 
 const (
 	KCAFMarkerType_EditDestinationBegin = 1684170087
-	KCAFMarkerType_EditDestinationEnd = 1684368996
-	KCAFMarkerType_EditSourceBegin = 1667392871
-	KCAFMarkerType_EditSourceEnd = 1667591780
-	KCAFMarkerType_Generic = 0
-	KCAFMarkerType_Index = 1768842360
-	KCAFMarkerType_KeySignature = 1802725735
-	KCAFMarkerType_ProgramEnd = 1885695588
-	KCAFMarkerType_ProgramStart = 1885496679
-	KCAFMarkerType_RegionEnd = 1919250020
-	KCAFMarkerType_RegionStart = 1919051111
-	KCAFMarkerType_RegionSyncPoint = 1920170339
-	KCAFMarkerType_ReleaseLoopEnd = 1919706478
-	KCAFMarkerType_ReleaseLoopStart = 1919705703
-	KCAFMarkerType_SavedPlayPosition = 1936747641
-	KCAFMarkerType_SelectionEnd = 1936027236
-	KCAFMarkerType_SelectionStart = 1935828327
-	KCAFMarkerType_SustainLoopEnd = 1936483694
-	KCAFMarkerType_SustainLoopStart = 1936482919
-	KCAFMarkerType_Tempo = 1953329263
-	KCAFMarkerType_TimeSignature = 1953720679
-	KCAFMarkerType_TrackEnd = 1952804452
-	KCAFMarkerType_TrackStart = 1952605543
+	KCAFMarkerType_EditDestinationEnd   = 1684368996
+	KCAFMarkerType_EditSourceBegin      = 1667392871
+	KCAFMarkerType_EditSourceEnd        = 1667591780
+	KCAFMarkerType_Generic              = 0
+	KCAFMarkerType_Index                = 1768842360
+	KCAFMarkerType_KeySignature         = 1802725735
+	KCAFMarkerType_ProgramEnd           = 1885695588
+	KCAFMarkerType_ProgramStart         = 1885496679
+	KCAFMarkerType_RegionEnd            = 1919250020
+	KCAFMarkerType_RegionStart          = 1919051111
+	KCAFMarkerType_RegionSyncPoint      = 1920170339
+	KCAFMarkerType_ReleaseLoopEnd       = 1919706478
+	KCAFMarkerType_ReleaseLoopStart     = 1919705703
+	KCAFMarkerType_SavedPlayPosition    = 1936747641
+	KCAFMarkerType_SelectionEnd         = 1936027236
+	KCAFMarkerType_SelectionStart       = 1935828327
+	KCAFMarkerType_SustainLoopEnd       = 1936483694
+	KCAFMarkerType_SustainLoopStart     = 1936482919
+	KCAFMarkerType_Tempo                = 1953329263
+	KCAFMarkerType_TimeSignature        = 1953720679
+	KCAFMarkerType_TrackEnd             = 1952804452
+	KCAFMarkerType_TrackStart           = 1952605543
 )
 
 const (
-	KCAF_FileType = 1667327590
+	KCAF_FileType            = 1667327590
 	KCAF_FileVersion_Initial = 1
 )
 
 const (
-	KCAF_SMPTE_TimeType2398 = 12
-	KCAF_SMPTE_TimeType24 = 1
-	KCAF_SMPTE_TimeType25 = 2
-	KCAF_SMPTE_TimeType2997 = 5
+	KCAF_SMPTE_TimeType2398     = 12
+	KCAF_SMPTE_TimeType24       = 1
+	KCAF_SMPTE_TimeType25       = 2
+	KCAF_SMPTE_TimeType2997     = 5
 	KCAF_SMPTE_TimeType2997Drop = 6
-	KCAF_SMPTE_TimeType30 = 4
-	KCAF_SMPTE_TimeType30Drop = 3
-	KCAF_SMPTE_TimeType50 = 11
-	KCAF_SMPTE_TimeType5994 = 8
+	KCAF_SMPTE_TimeType30       = 4
+	KCAF_SMPTE_TimeType30Drop   = 3
+	KCAF_SMPTE_TimeType50       = 11
+	KCAF_SMPTE_TimeType5994     = 8
 	KCAF_SMPTE_TimeType5994Drop = 10
-	KCAF_SMPTE_TimeType60 = 7
-	KCAF_SMPTE_TimeType60Drop = 9
-	KCAF_SMPTE_TimeTypeNone = 0
+	KCAF_SMPTE_TimeType60       = 7
+	KCAF_SMPTE_TimeType60Drop   = 9
+	KCAF_SMPTE_TimeTypeNone     = 0
 )
 
 const (
-	KCAF_AudioDataChunkID = 1684108385
-	KCAF_ChannelLayoutChunkID = 1667785070
-	KCAF_EditCommentsChunkID = 1701077876
-	KCAF_FillerChunkID = 1718773093
-	KCAF_FormatListID = 1818522467
-	KCAF_InfoStringsChunkID = 1768842863
-	KCAF_InstrumentChunkID = 1768846196
-	KCAF_MIDIChunkID = 1835623529
-	KCAF_MagicCookieID = 1802857321
-	KCAF_MarkerChunkID = 1835102827
-	KCAF_OverviewChunkID = 1870034551
-	KCAF_PacketTableChunkID = 1885432692
-	KCAF_PeakChunkID = 1885692267
-	KCAF_RegionChunkID = 1919248238
+	KCAF_AudioDataChunkID         = 1684108385
+	KCAF_ChannelLayoutChunkID     = 1667785070
+	KCAF_EditCommentsChunkID      = 1701077876
+	KCAF_FillerChunkID            = 1718773093
+	KCAF_FormatListID             = 1818522467
+	KCAF_InfoStringsChunkID       = 1768842863
+	KCAF_InstrumentChunkID        = 1768846196
+	KCAF_MIDIChunkID              = 1835623529
+	KCAF_MagicCookieID            = 1802857321
+	KCAF_MarkerChunkID            = 1835102827
+	KCAF_OverviewChunkID          = 1870034551
+	KCAF_PacketTableChunkID       = 1885432692
+	KCAF_PeakChunkID              = 1885692267
+	KCAF_RegionChunkID            = 1919248238
 	KCAF_StreamDescriptionChunkID = 1684370275
-	KCAF_StringsChunkID = 1937011303
-	KCAF_UMIDChunkID = 1970104676
-	KCAF_UUIDChunkID = 1970628964
-	KCAF_iXMLChunkID = 1767394636
+	KCAF_StringsChunkID           = 1937011303
+	KCAF_UMIDChunkID              = 1970104676
+	KCAF_UUIDChunkID              = 1970628964
+	KCAF_iXMLChunkID              = 1767394636
 )
 
 const (
-	KConverterPrimeMethod_None = 2
+	KConverterPrimeMethod_None   = 2
 	KConverterPrimeMethod_Normal = 1
-	KConverterPrimeMethod_Pre = 0
+	KConverterPrimeMethod_Pre    = 0
 )
 
 const (
-	KDelayParam_DelayTime = 1
-	KDelayParam_Feedback = 2
+	KDelayParam_DelayTime    = 1
+	KDelayParam_Feedback     = 2
 	KDelayParam_LopassCutoff = 3
-	KDelayParam_WetDryMix = 0
+	KDelayParam_WetDryMix    = 0
 )
 
 const (
-	KDistortionParam_CubicTerm = 8
-	KDistortionParam_Decay = 1
-	KDistortionParam_Decimation = 3
-	KDistortionParam_DecimationMix = 5
-	KDistortionParam_Delay = 0
-	KDistortionParam_DelayMix = 2
-	KDistortionParam_FinalMix = 15
-	KDistortionParam_LinearTerm = 6
-	KDistortionParam_PolynomialMix = 9
+	KDistortionParam_CubicTerm      = 8
+	KDistortionParam_Decay          = 1
+	KDistortionParam_Decimation     = 3
+	KDistortionParam_DecimationMix  = 5
+	KDistortionParam_Delay          = 0
+	KDistortionParam_DelayMix       = 2
+	KDistortionParam_FinalMix       = 15
+	KDistortionParam_LinearTerm     = 6
+	KDistortionParam_PolynomialMix  = 9
 	KDistortionParam_RingModBalance = 12
-	KDistortionParam_RingModFreq1 = 10
-	KDistortionParam_RingModFreq2 = 11
-	KDistortionParam_RingModMix = 13
-	KDistortionParam_Rounding = 4
-	KDistortionParam_SoftClipGain = 14
-	KDistortionParam_SquaredTerm = 7
+	KDistortionParam_RingModFreq1   = 10
+	KDistortionParam_RingModFreq2   = 11
+	KDistortionParam_RingModMix     = 13
+	KDistortionParam_Rounding       = 4
+	KDistortionParam_SoftClipGain   = 14
+	KDistortionParam_SquaredTerm    = 7
 )
 
 const (
 	KDitherAlgorithm_NoiseShaping = 2
-	KDitherAlgorithm_TPDF = 1
+	KDitherAlgorithm_TPDF         = 1
 )
 
 const (
-	KDynamicRangeCompressionProfile_GeneralCompression = 6
-	KDynamicRangeCompressionProfile_LateNight = 1
+	KDynamicRangeCompressionProfile_GeneralCompression   = 6
+	KDynamicRangeCompressionProfile_LateNight            = 1
 	KDynamicRangeCompressionProfile_LimitedPlaybackRange = 3
-	KDynamicRangeCompressionProfile_NoisyEnvironment = 2
-	KDynamicRangeCompressionProfile_None = 0
+	KDynamicRangeCompressionProfile_NoisyEnvironment     = 2
+	KDynamicRangeCompressionProfile_None                 = 0
 )
 
 const (
 	KDynamicRangeControlMode_Heavy = 2
 	KDynamicRangeControlMode_Light = 1
-	KDynamicRangeControlMode_None = 0
+	KDynamicRangeControlMode_None  = 0
 )
 
 const (
-	KDynamicsProcessorParam_AttackTime = 4
-	KDynamicsProcessorParam_CompressionAmount = 1000
-	KDynamicsProcessorParam_ExpansionRatio = 2
+	KDynamicsProcessorParam_AttackTime         = 4
+	KDynamicsProcessorParam_CompressionAmount  = 1000
+	KDynamicsProcessorParam_ExpansionRatio     = 2
 	KDynamicsProcessorParam_ExpansionThreshold = 3
-	KDynamicsProcessorParam_HeadRoom = 1
-	KDynamicsProcessorParam_InputAmplitude = 2000
-	KDynamicsProcessorParam_MasterGain = 6
-	KDynamicsProcessorParam_OutputAmplitude = 3000
-	KDynamicsProcessorParam_OverallGain = 6
-	KDynamicsProcessorParam_ReleaseTime = 5
-	KDynamicsProcessorParam_Threshold = 0
+	KDynamicsProcessorParam_HeadRoom           = 1
+	KDynamicsProcessorParam_InputAmplitude     = 2000
+	KDynamicsProcessorParam_MasterGain         = 6
+	KDynamicsProcessorParam_OutputAmplitude    = 3000
+	KDynamicsProcessorParam_OverallGain        = 6
+	KDynamicsProcessorParam_ReleaseTime        = 5
+	KDynamicsProcessorParam_Threshold          = 0
 )
 
 const (
 	KExtAudioFileError_AsyncWriteBufferOverflow = -66570
-	KExtAudioFileError_AsyncWriteTooLarge = -66569
-	KExtAudioFileError_InvalidChannelMap = -66564
-	KExtAudioFileError_InvalidDataFormat = -66566
-	KExtAudioFileError_InvalidOperationOrder = -66565
-	KExtAudioFileError_InvalidProperty = -66561
-	KExtAudioFileError_InvalidPropertySize = -66562
-	KExtAudioFileError_InvalidSeek = -66568
-	KExtAudioFileError_MaxPacketSizeUnknown = -66567
-	KExtAudioFileError_NonPCMClientFormat = -66563
+	KExtAudioFileError_AsyncWriteTooLarge       = -66569
+	KExtAudioFileError_InvalidChannelMap        = -66564
+	KExtAudioFileError_InvalidDataFormat        = -66566
+	KExtAudioFileError_InvalidOperationOrder    = -66565
+	KExtAudioFileError_InvalidProperty          = -66561
+	KExtAudioFileError_InvalidPropertySize      = -66562
+	KExtAudioFileError_InvalidSeek              = -66568
+	KExtAudioFileError_MaxPacketSizeUnknown     = -66567
+	KExtAudioFileError_NonPCMClientFormat       = -66563
 )
 
 const (
-	KExtAudioFilePacketTableInfoOverride_UseFileValue = -1
+	KExtAudioFilePacketTableInfoOverride_UseFileValue        = -1
 	KExtAudioFilePacketTableInfoOverride_UseFileValueIfValid = -2
 )
 
 const (
-	KExtAudioFileProperty_AudioConverter = 1633906294
-	KExtAudioFileProperty_AudioFile = 1634101612
+	KExtAudioFileProperty_AudioConverter      = 1633906294
+	KExtAudioFileProperty_AudioFile           = 1634101612
 	KExtAudioFileProperty_ClientChannelLayout = 1667460207
-	KExtAudioFileProperty_ClientDataFormat = 1667657076
+	KExtAudioFileProperty_ClientDataFormat    = 1667657076
 	KExtAudioFileProperty_ClientMaxPacketSize = 1668116595
-	KExtAudioFileProperty_CodecManufacturer = 1668112750
-	KExtAudioFileProperty_ConverterConfig = 1633903462
-	KExtAudioFileProperty_FileChannelLayout = 1717791855
-	KExtAudioFileProperty_FileDataFormat = 1717988724
-	KExtAudioFileProperty_FileLengthFrames = 593916525
-	KExtAudioFileProperty_FileMaxPacketSize = 1718448243
-	KExtAudioFileProperty_IOBuffer = 1768907366
-	KExtAudioFileProperty_IOBufferSizeBytes = 1768907379
-	KExtAudioFileProperty_PacketTable = 2020635753
+	KExtAudioFileProperty_CodecManufacturer   = 1668112750
+	KExtAudioFileProperty_ConverterConfig     = 1633903462
+	KExtAudioFileProperty_FileChannelLayout   = 1717791855
+	KExtAudioFileProperty_FileDataFormat      = 1717988724
+	KExtAudioFileProperty_FileLengthFrames    = 593916525
+	KExtAudioFileProperty_FileMaxPacketSize   = 1718448243
+	KExtAudioFileProperty_IOBuffer            = 1768907366
+	KExtAudioFileProperty_IOBufferSizeBytes   = 1768907379
+	KExtAudioFileProperty_PacketTable         = 2020635753
 )
 
 const (
@@ -3657,164 +3925,164 @@ const (
 
 const (
 	KHighShelfParam_CutOffFrequency = 0
-	KHighShelfParam_Gain = 1
+	KHighShelfParam_Gain            = 1
 )
 
 const (
 	KHintAdvanced = 1
-	KHintBasic = 0
-	KHintHidden = 2
+	KHintBasic    = 0
+	KHintHidden   = 2
 )
 
 const (
 	KHipassParam_CutoffFrequency = 0
-	KHipassParam_Resonance = 1
+	KHipassParam_Resonance       = 1
 )
 
 const (
-	KInstrumentType_AUPreset = 2
+	KInstrumentType_AUPreset  = 2
 	KInstrumentType_Audiofile = 3
 	KInstrumentType_DLSPreset = 1
-	KInstrumentType_EXS24 = 4
+	KInstrumentType_EXS24     = 4
 	KInstrumentType_SF2Preset = 1
 )
 
 const (
 	KLimiterParam_AttackTime = 0
-	KLimiterParam_DecayTime = 1
-	KLimiterParam_PreGain = 2
+	KLimiterParam_DecayTime  = 1
+	KLimiterParam_PreGain    = 2
 )
 
 const (
 	KLowPassParam_CutoffFrequency = 0
-	KLowPassParam_Resonance = 1
+	KLowPassParam_Resonance       = 1
 )
 
 const (
-	KMatrixMixerParam_Enable = 1
-	KMatrixMixerParam_PostAveragePower = 3000
-	KMatrixMixerParam_PostAveragePowerLinear = 7000
-	KMatrixMixerParam_PostPeakHoldLevel = 4000
+	KMatrixMixerParam_Enable                  = 1
+	KMatrixMixerParam_PostAveragePower        = 3000
+	KMatrixMixerParam_PostAveragePowerLinear  = 7000
+	KMatrixMixerParam_PostPeakHoldLevel       = 4000
 	KMatrixMixerParam_PostPeakHoldLevelLinear = 8000
-	KMatrixMixerParam_PreAveragePower = 1000
-	KMatrixMixerParam_PreAveragePowerLinear = 5000
-	KMatrixMixerParam_PrePeakHoldLevel = 2000
-	KMatrixMixerParam_PrePeakHoldLevelLinear = 6000
-	KMatrixMixerParam_Volume = 0
+	KMatrixMixerParam_PreAveragePower         = 1000
+	KMatrixMixerParam_PreAveragePowerLinear   = 5000
+	KMatrixMixerParam_PrePeakHoldLevel        = 2000
+	KMatrixMixerParam_PrePeakHoldLevelLinear  = 6000
+	KMatrixMixerParam_Volume                  = 0
 )
 
 const (
-	KMultiChannelMixerParam_Enable = 1
-	KMultiChannelMixerParam_Pan = 2
-	KMultiChannelMixerParam_PostAveragePower = 3000
+	KMultiChannelMixerParam_Enable            = 1
+	KMultiChannelMixerParam_Pan               = 2
+	KMultiChannelMixerParam_PostAveragePower  = 3000
 	KMultiChannelMixerParam_PostPeakHoldLevel = 4000
-	KMultiChannelMixerParam_PreAveragePower = 1000
-	KMultiChannelMixerParam_PrePeakHoldLevel = 2000
-	KMultiChannelMixerParam_Volume = 0
+	KMultiChannelMixerParam_PreAveragePower   = 1000
+	KMultiChannelMixerParam_PrePeakHoldLevel  = 2000
+	KMultiChannelMixerParam_Volume            = 0
 )
 
 const (
-	KMultibandCompressorParam_AttackTime = 13
+	KMultibandCompressorParam_AttackTime         = 13
 	KMultibandCompressorParam_CompressionAmount1 = 1000
 	KMultibandCompressorParam_CompressionAmount2 = 2000
 	KMultibandCompressorParam_CompressionAmount3 = 3000
 	KMultibandCompressorParam_CompressionAmount4 = 4000
-	KMultibandCompressorParam_Crossover1 = 2
-	KMultibandCompressorParam_Crossover2 = 3
-	KMultibandCompressorParam_Crossover3 = 4
-	KMultibandCompressorParam_EQ1 = 15
-	KMultibandCompressorParam_EQ2 = 16
-	KMultibandCompressorParam_EQ3 = 17
-	KMultibandCompressorParam_EQ4 = 18
-	KMultibandCompressorParam_Headroom1 = 9
-	KMultibandCompressorParam_Headroom2 = 10
-	KMultibandCompressorParam_Headroom3 = 11
-	KMultibandCompressorParam_Headroom4 = 12
-	KMultibandCompressorParam_InputAmplitude1 = 5000
-	KMultibandCompressorParam_InputAmplitude2 = 6000
-	KMultibandCompressorParam_InputAmplitude3 = 7000
-	KMultibandCompressorParam_InputAmplitude4 = 8000
-	KMultibandCompressorParam_OutputAmplitude1 = 9000
-	KMultibandCompressorParam_OutputAmplitude2 = 10000
-	KMultibandCompressorParam_OutputAmplitude3 = 11000
-	KMultibandCompressorParam_OutputAmplitude4 = 12000
-	KMultibandCompressorParam_Postgain = 1
-	KMultibandCompressorParam_Pregain = 0
-	KMultibandCompressorParam_ReleaseTime = 14
-	KMultibandCompressorParam_Threshold1 = 5
-	KMultibandCompressorParam_Threshold2 = 6
-	KMultibandCompressorParam_Threshold3 = 7
-	KMultibandCompressorParam_Threshold4 = 8
+	KMultibandCompressorParam_Crossover1         = 2
+	KMultibandCompressorParam_Crossover2         = 3
+	KMultibandCompressorParam_Crossover3         = 4
+	KMultibandCompressorParam_EQ1                = 15
+	KMultibandCompressorParam_EQ2                = 16
+	KMultibandCompressorParam_EQ3                = 17
+	KMultibandCompressorParam_EQ4                = 18
+	KMultibandCompressorParam_Headroom1          = 9
+	KMultibandCompressorParam_Headroom2          = 10
+	KMultibandCompressorParam_Headroom3          = 11
+	KMultibandCompressorParam_Headroom4          = 12
+	KMultibandCompressorParam_InputAmplitude1    = 5000
+	KMultibandCompressorParam_InputAmplitude2    = 6000
+	KMultibandCompressorParam_InputAmplitude3    = 7000
+	KMultibandCompressorParam_InputAmplitude4    = 8000
+	KMultibandCompressorParam_OutputAmplitude1   = 9000
+	KMultibandCompressorParam_OutputAmplitude2   = 10000
+	KMultibandCompressorParam_OutputAmplitude3   = 11000
+	KMultibandCompressorParam_OutputAmplitude4   = 12000
+	KMultibandCompressorParam_Postgain           = 1
+	KMultibandCompressorParam_Pregain            = 0
+	KMultibandCompressorParam_ReleaseTime        = 14
+	KMultibandCompressorParam_Threshold1         = 5
+	KMultibandCompressorParam_Threshold2         = 6
+	KMultibandCompressorParam_Threshold3         = 7
+	KMultibandCompressorParam_Threshold4         = 8
 )
 
 const (
-	KMultibandFilter_Bandwidth1 = 5
-	KMultibandFilter_Bandwidth2 = 8
-	KMultibandFilter_Bandwidth3 = 11
-	KMultibandFilter_CenterFreq1 = 3
-	KMultibandFilter_CenterFreq2 = 6
-	KMultibandFilter_CenterFreq3 = 9
-	KMultibandFilter_CenterGain1 = 4
-	KMultibandFilter_CenterGain2 = 7
-	KMultibandFilter_CenterGain3 = 10
+	KMultibandFilter_Bandwidth1     = 5
+	KMultibandFilter_Bandwidth2     = 8
+	KMultibandFilter_Bandwidth3     = 11
+	KMultibandFilter_CenterFreq1    = 3
+	KMultibandFilter_CenterFreq2    = 6
+	KMultibandFilter_CenterFreq3    = 9
+	KMultibandFilter_CenterGain1    = 4
+	KMultibandFilter_CenterGain2    = 7
+	KMultibandFilter_CenterGain3    = 10
 	KMultibandFilter_HighFilterType = 12
-	KMultibandFilter_HighFrequency = 13
-	KMultibandFilter_HighGain = 14
-	KMultibandFilter_LowFilterType = 0
-	KMultibandFilter_LowFrequency = 1
-	KMultibandFilter_LowGain = 2
+	KMultibandFilter_HighFrequency  = 13
+	KMultibandFilter_HighGain       = 14
+	KMultibandFilter_LowFilterType  = 0
+	KMultibandFilter_LowFrequency   = 1
+	KMultibandFilter_LowGain        = 2
 )
 
 const (
 	KMusicDeviceParam_ReverbVolume = 2
-	KMusicDeviceParam_Tuning = 0
-	KMusicDeviceParam_Volume = 1
+	KMusicDeviceParam_Tuning       = 0
+	KMusicDeviceParam_Volume       = 1
 )
 
 const (
-	KAudioUnitProperty_PannerMode = 3008
-	KMusicDeviceProperty_GroupOutputBus = 1002
+	KAudioUnitProperty_PannerMode        = 3008
+	KMusicDeviceProperty_GroupOutputBus  = 1002
 	KMusicDeviceProperty_SoundBankFSSpec = 1003
 )
 
 const (
-	KMusicDeviceProperty_BankName = 1007
+	KMusicDeviceProperty_BankName        = 1007
 	KMusicDeviceProperty_InstrumentCount = 1000
-	KMusicDeviceProperty_SoundBankURL = 1100
+	KMusicDeviceProperty_SoundBankURL    = 1100
 )
 
 const (
-	KMusicDeviceProperty_InstrumentName = 1001
+	KMusicDeviceProperty_InstrumentName   = 1001
 	KMusicDeviceProperty_InstrumentNumber = 1004
 )
 
 const (
-	KMusicDeviceProperty_DualSchedulingMode = 1013
-	KMusicDeviceProperty_MIDIXMLNames = 1006
-	KMusicDeviceProperty_PartGroup = 1010
+	KMusicDeviceProperty_DualSchedulingMode    = 1013
+	KMusicDeviceProperty_MIDIXMLNames          = 1006
+	KMusicDeviceProperty_PartGroup             = 1010
 	KMusicDeviceProperty_SupportsStartStopNote = 1014
 )
 
 const (
-	KMusicDeviceProperty_SoundBankData = 1008
-	KMusicDeviceProperty_SoundBankFSRef = 1012
-	KMusicDeviceProperty_StreamFromDisk = 1011
+	KMusicDeviceProperty_SoundBankData      = 1008
+	KMusicDeviceProperty_SoundBankFSRef     = 1012
+	KMusicDeviceProperty_StreamFromDisk     = 1011
 	KMusicDeviceProperty_UsesInternalReverb = 1005
 )
 
 const (
-	KMusicDeviceMIDIEventListSelect = 263
-	KMusicDeviceMIDIEventSelect = 257
+	KMusicDeviceMIDIEventListSelect     = 263
+	KMusicDeviceMIDIEventSelect         = 257
 	KMusicDevicePrepareInstrumentSelect = 259
-	KMusicDeviceRange = 256
+	KMusicDeviceRange                   = 256
 	KMusicDeviceReleaseInstrumentSelect = 260
-	KMusicDeviceStartNoteSelect = 261
-	KMusicDeviceStopNoteSelect = 262
-	KMusicDeviceSysExSelect = 258
+	KMusicDeviceStartNoteSelect         = 261
+	KMusicDeviceStopNoteSelect          = 262
+	KMusicDeviceSysExSelect             = 258
 )
 
 const (
-	KMusicDeviceSampleFrameMask_IsScheduled = 16777216
+	KMusicDeviceSampleFrameMask_IsScheduled  = 16777216
 	KMusicDeviceSampleFrameMask_SampleOffset = 16777215
 )
 
@@ -3823,31 +4091,31 @@ const (
 )
 
 const (
-	KMusicEventType_AUPreset = 10
-	KMusicEventType_ExtendedNote = 1
-	KMusicEventType_ExtendedTempo = 3
+	KMusicEventType_AUPreset           = 10
+	KMusicEventType_ExtendedNote       = 1
+	KMusicEventType_ExtendedTempo      = 3
 	KMusicEventType_MIDIChannelMessage = 7
-	KMusicEventType_MIDINoteMessage = 6
-	KMusicEventType_MIDIRawData = 8
-	KMusicEventType_Meta = 5
-	KMusicEventType_NULL = 0
-	KMusicEventType_Parameter = 9
-	KMusicEventType_User = 4
+	KMusicEventType_MIDINoteMessage    = 6
+	KMusicEventType_MIDIRawData        = 8
+	KMusicEventType_Meta               = 5
+	KMusicEventType_NULL               = 0
+	KMusicEventType_Parameter          = 9
+	KMusicEventType_User               = 4
 )
 
 const (
-	KMusicNoteEvent_Unused = 4294967295
+	KMusicNoteEvent_Unused             = 4294967295
 	KMusicNoteEvent_UseGroupInstrument = 4294967295
 )
 
 const (
-	KNewTimePitchParam_EnablePeakLocking = 6
-	KNewTimePitchParam_EnableSpectralCoherence = 6
+	KNewTimePitchParam_EnablePeakLocking           = 6
+	KNewTimePitchParam_EnableSpectralCoherence     = 6
 	KNewTimePitchParam_EnableTransientPreservation = 7
-	KNewTimePitchParam_Overlap = 4
-	KNewTimePitchParam_Pitch = 1
-	KNewTimePitchParam_Rate = 0
-	KNewTimePitchParam_Smoothness = 4
+	KNewTimePitchParam_Overlap                     = 4
+	KNewTimePitchParam_Pitch                       = 1
+	KNewTimePitchParam_Rate                        = 0
+	KNewTimePitchParam_Smoothness                  = 4
 )
 
 const (
@@ -3856,105 +4124,105 @@ const (
 
 const (
 	KOfflinePreflight_NotRequired = 0
-	KOfflinePreflight_Optional = 1
-	KOfflinePreflight_Required = 2
+	KOfflinePreflight_Optional    = 1
+	KOfflinePreflight_Required    = 2
 )
 
 const (
-	KOtherPluginFormat_AU = 3
+	KOtherPluginFormat_AU        = 3
 	KOtherPluginFormat_Undefined = 0
-	KOtherPluginFormat_kMAS = 1
-	KOtherPluginFormat_kVST = 2
+	KOtherPluginFormat_kMAS      = 1
+	KOtherPluginFormat_kVST      = 2
 )
 
 const (
-	KPannerParam_Azimuth = 1
-	KPannerParam_CoordScale = 4
-	KPannerParam_Distance = 3
-	KPannerParam_Elevation = 2
-	KPannerParam_Gain = 0
+	KPannerParam_Azimuth     = 1
+	KPannerParam_CoordScale  = 4
+	KPannerParam_Distance    = 3
+	KPannerParam_Elevation   = 2
+	KPannerParam_Gain        = 0
 	KPannerParam_RefDistance = 5
 )
 
 const (
 	KParametricEQParam_CenterFreq = 0
-	KParametricEQParam_Gain = 2
-	KParametricEQParam_Q = 1
+	KParametricEQParam_Gain       = 2
+	KParametricEQParam_Q          = 1
 )
 
 const (
 	KProgramTargetLevel_Minus20dB = 3
 	KProgramTargetLevel_Minus23dB = 2
 	KProgramTargetLevel_Minus31dB = 1
-	KProgramTargetLevel_None = 0
+	KProgramTargetLevel_None      = 0
 )
 
 const (
 	KRandomParam_BoundA = 0
 	KRandomParam_BoundB = 1
-	KRandomParam_Curve = 2
+	KRandomParam_Curve  = 2
 )
 
 const (
-	KRenderQuality_High = 96
-	KRenderQuality_Low = 32
-	KRenderQuality_Max = 127
+	KRenderQuality_High   = 96
+	KRenderQuality_Low    = 32
+	KRenderQuality_Max    = 127
 	KRenderQuality_Medium = 64
-	KRenderQuality_Min = 0
+	KRenderQuality_Min    = 0
 )
 
 const (
-	KReverb2Param_DecayTimeAt0Hz = 4
-	KReverb2Param_DecayTimeAtNyquist = 5
-	KReverb2Param_DryWetMix = 0
-	KReverb2Param_Gain = 1
-	KReverb2Param_MaxDelayTime = 3
-	KReverb2Param_MinDelayTime = 2
+	KReverb2Param_DecayTimeAt0Hz       = 4
+	KReverb2Param_DecayTimeAtNyquist   = 5
+	KReverb2Param_DryWetMix            = 0
+	KReverb2Param_Gain                 = 1
+	KReverb2Param_MaxDelayTime         = 3
+	KReverb2Param_MinDelayTime         = 2
 	KReverb2Param_RandomizeReflections = 6
 )
 
 const (
-	KReverbParam_DryWetMix = 0
+	KReverbParam_DryWetMix       = 0
 	KReverbParam_LargeBrightness = 10
-	KReverbParam_LargeDelay = 5
+	KReverbParam_LargeDelay      = 5
 	KReverbParam_LargeDelayRange = 8
-	KReverbParam_LargeDensity = 7
-	KReverbParam_LargeSize = 3
+	KReverbParam_LargeDensity    = 7
+	KReverbParam_LargeSize       = 3
 	KReverbParam_ModulationDepth = 13
-	KReverbParam_ModulationRate = 12
-	KReverbParam_PreDelay = 4
+	KReverbParam_ModulationRate  = 12
+	KReverbParam_PreDelay        = 4
 	KReverbParam_SmallBrightness = 9
 	KReverbParam_SmallDelayRange = 11
-	KReverbParam_SmallDensity = 6
-	KReverbParam_SmallLargeMix = 1
-	KReverbParam_SmallSize = 2
+	KReverbParam_SmallDensity    = 6
+	KReverbParam_SmallLargeMix   = 1
+	KReverbParam_SmallSize       = 2
 )
 
 const (
 	KReverbParam_FilterBandwidth = 15
-	KReverbParam_FilterEnable = 18
+	KReverbParam_FilterEnable    = 18
 	KReverbParam_FilterFrequency = 14
-	KReverbParam_FilterGain = 16
-	KReverbParam_FilterType = 17
+	KReverbParam_FilterGain      = 16
+	KReverbParam_FilterType      = 17
 )
 
 const (
-	KRogerBeepParam_InGateThreshold = 0
-	KRogerBeepParam_InGateThresholdTime = 1
-	KRogerBeepParam_OutGateThreshold = 2
+	KRogerBeepParam_InGateThreshold      = 0
+	KRogerBeepParam_InGateThresholdTime  = 1
+	KRogerBeepParam_OutGateThreshold     = 2
 	KRogerBeepParam_OutGateThresholdTime = 3
-	KRogerBeepParam_RogerGain = 6
-	KRogerBeepParam_RogerType = 5
-	KRogerBeepParam_Sensitivity = 4
+	KRogerBeepParam_RogerGain            = 6
+	KRogerBeepParam_RogerType            = 5
+	KRogerBeepParam_Sensitivity          = 4
 )
 
 const (
-	KRoundTripAACParam_BitRate = 1
+	KRoundTripAACParam_BitRate                    = 1
 	KRoundTripAACParam_CompressedFormatSampleRate = 3
-	KRoundTripAACParam_EncodingStrategy = 1
-	KRoundTripAACParam_Format = 0
-	KRoundTripAACParam_Quality = 2
-	KRoundTripAACParam_RateOrQuality = 2
+	KRoundTripAACParam_EncodingStrategy           = 1
+	KRoundTripAACParam_Format                     = 0
+	KRoundTripAACParam_Quality                    = 2
+	KRoundTripAACParam_RateOrQuality              = 2
 )
 
 const (
@@ -3963,53 +4231,53 @@ const (
 
 const (
 	KSequenceTrackProperty_AutomatedParameters = 4
-	KSequenceTrackProperty_LoopInfo = 0
-	KSequenceTrackProperty_MuteStatus = 2
-	KSequenceTrackProperty_OffsetTime = 1
-	KSequenceTrackProperty_SoloStatus = 3
-	KSequenceTrackProperty_TimeResolution = 6
-	KSequenceTrackProperty_TrackLength = 5
+	KSequenceTrackProperty_LoopInfo            = 0
+	KSequenceTrackProperty_MuteStatus          = 2
+	KSequenceTrackProperty_OffsetTime          = 1
+	KSequenceTrackProperty_SoloStatus          = 3
+	KSequenceTrackProperty_TimeResolution      = 6
+	KSequenceTrackProperty_TrackLength         = 5
 )
 
 const (
-	KSpatialMixerParam_Azimuth = 0
-	KSpatialMixerParam_Distance = 2
-	KSpatialMixerParam_Elevation = 1
-	KSpatialMixerParam_Enable = 5
-	KSpatialMixerParam_Gain = 3
-	KSpatialMixerParam_GlobalReverbGain = 9
-	KSpatialMixerParam_HeadPitch = 20
-	KSpatialMixerParam_HeadRoll = 21
-	KSpatialMixerParam_HeadYaw = 19
-	KSpatialMixerParam_MaxGain = 7
-	KSpatialMixerParam_MinGain = 6
+	KSpatialMixerParam_Azimuth                = 0
+	KSpatialMixerParam_Distance               = 2
+	KSpatialMixerParam_Elevation              = 1
+	KSpatialMixerParam_Enable                 = 5
+	KSpatialMixerParam_Gain                   = 3
+	KSpatialMixerParam_GlobalReverbGain       = 9
+	KSpatialMixerParam_HeadPitch              = 20
+	KSpatialMixerParam_HeadRoll               = 21
+	KSpatialMixerParam_HeadYaw                = 19
+	KSpatialMixerParam_MaxGain                = 7
+	KSpatialMixerParam_MinGain                = 6
 	KSpatialMixerParam_ObstructionAttenuation = 11
-	KSpatialMixerParam_OcclusionAttenuation = 10
-	KSpatialMixerParam_PlaybackRate = 4
-	KSpatialMixerParam_ReverbBlend = 8
+	KSpatialMixerParam_OcclusionAttenuation   = 10
+	KSpatialMixerParam_PlaybackRate           = 4
+	KSpatialMixerParam_ReverbBlend            = 8
 )
 
 const (
-	KSpeakerConfiguration_5_0 = 3
-	KSpeakerConfiguration_5_1 = 3
+	KSpeakerConfiguration_5_0        = 3
+	KSpeakerConfiguration_5_1        = 3
 	KSpeakerConfiguration_HeadPhones = 0
-	KSpeakerConfiguration_Quad = 2
-	KSpeakerConfiguration_Stereo = 1
+	KSpeakerConfiguration_Quad       = 2
+	KSpeakerConfiguration_Stereo     = 1
 )
 
 const (
-	KStereoMixerParam_Pan = 1
-	KStereoMixerParam_PostAveragePower = 3000
+	KStereoMixerParam_Pan               = 1
+	KStereoMixerParam_PostAveragePower  = 3000
 	KStereoMixerParam_PostPeakHoldLevel = 4000
-	KStereoMixerParam_PreAveragePower = 1000
-	KStereoMixerParam_PrePeakHoldLevel = 2000
-	KStereoMixerParam_Volume = 0
+	KStereoMixerParam_PreAveragePower   = 1000
+	KStereoMixerParam_PrePeakHoldLevel  = 2000
+	KStereoMixerParam_Volume            = 0
 )
 
 const (
-	KSystemSoundID_FlashScreen = 4094
+	KSystemSoundID_FlashScreen        = 4094
 	KSystemSoundID_UserPreferredAlert = 4096
-	KUserPreferredAlert = 4096
+	KUserPreferredAlert               = 4096
 )
 
 const (
@@ -4018,12 +4286,11 @@ const (
 
 const (
 	KTimePitchParam_EffectBlend = 2
-	KTimePitchParam_Pitch = 1
-	KTimePitchParam_Rate = 0
+	KTimePitchParam_Pitch       = 1
+	KTimePitchParam_Rate        = 0
 )
 
 const (
 	KVarispeedParam_PlaybackCents = 1
-	KVarispeedParam_PlaybackRate = 0
+	KVarispeedParam_PlaybackRate  = 0
 )
-

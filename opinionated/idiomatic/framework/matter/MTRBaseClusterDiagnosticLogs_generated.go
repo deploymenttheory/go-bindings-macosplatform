@@ -351,9 +351,13 @@ func (x *MTRBaseClusterDiagnosticLogs) SubscribeAttributeClusterRevisionWithMinI
 	}
 }
 
-func (x *MTRBaseClusterDiagnosticLogs) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterDiagnosticLogs) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterDiagnosticLogs) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterDiagnosticLogs) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterDiagnosticLogsable is the interface implemented by [MTRBaseClusterDiagnosticLogs], for mocking and DI.
 type MTRBaseClusterDiagnosticLogsable interface {
@@ -383,4 +387,3 @@ type MTRBaseClusterDiagnosticLogsable interface {
 }
 
 var _ MTRBaseClusterDiagnosticLogsable = (*MTRBaseClusterDiagnosticLogs)(nil)
-

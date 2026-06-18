@@ -73,4 +73,3 @@ type SmartCardTokenSessionable interface {
 }
 
 var _ SmartCardTokenSessionable = (*SmartCardTokenSession)(nil)
-

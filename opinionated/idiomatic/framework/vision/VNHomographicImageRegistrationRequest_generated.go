@@ -16,7 +16,9 @@ type HomographicImageRegistrationRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNHomographicImageRegistrationRequest].
-func (x *HomographicImageRegistrationRequest) Unwrap() *raw.VNHomographicImageRegistrationRequest { return x.inner }
+func (x *HomographicImageRegistrationRequest) Unwrap() *raw.VNHomographicImageRegistrationRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,13 +62,21 @@ func (x *HomographicImageRegistrationRequest) WithRevision(revision uint) *Homog
 	return x
 }
 
-func (x *HomographicImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest { return &x.inner.VNImageRegistrationRequest }
+func (x *HomographicImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest {
+	return &x.inner.VNImageRegistrationRequest
+}
 
-func (x *HomographicImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest }
+func (x *HomographicImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest
+}
 
-func (x *HomographicImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest }
+func (x *HomographicImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest
+}
 
-func (x *HomographicImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
+func (x *HomographicImageRegistrationRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest
+}
 
 // HomographicImageRegistrationRequestable is the interface implemented by [HomographicImageRegistrationRequest], for mocking and DI.
 type HomographicImageRegistrationRequestable interface {
@@ -78,4 +88,3 @@ type HomographicImageRegistrationRequestable interface {
 }
 
 var _ HomographicImageRegistrationRequestable = (*HomographicImageRegistrationRequest)(nil)
-

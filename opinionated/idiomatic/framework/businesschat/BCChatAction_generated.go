@@ -41,4 +41,3 @@ type ChatActionable interface {
 }
 
 var _ ChatActionable = (*ChatAction)(nil)
-

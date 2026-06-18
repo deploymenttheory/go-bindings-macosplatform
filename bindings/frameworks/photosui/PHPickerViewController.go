@@ -17,17 +17,17 @@ type PHPickerViewController struct {
 }
 
 var (
-	_clsPHPickerViewController = _objcClass("PHPickerViewController")
-	_pHPickerViewControllerSelInitWithConfiguration = objc.RegisterName("initWithConfiguration:")
-	_pHPickerViewControllerSelUpdatePickerUsingConfiguration = objc.RegisterName("updatePickerUsingConfiguration:")
-	_pHPickerViewControllerSelDeselectAssetsWithIdentifiers = objc.RegisterName("deselectAssetsWithIdentifiers:")
+	_clsPHPickerViewController                                                = _objcClass("PHPickerViewController")
+	_pHPickerViewControllerSelInitWithConfiguration                           = objc.RegisterName("initWithConfiguration:")
+	_pHPickerViewControllerSelUpdatePickerUsingConfiguration                  = objc.RegisterName("updatePickerUsingConfiguration:")
+	_pHPickerViewControllerSelDeselectAssetsWithIdentifiers                   = objc.RegisterName("deselectAssetsWithIdentifiers:")
 	_pHPickerViewControllerSelMoveAssetWithIdentifierAfterAssetWithIdentifier = objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:")
-	_pHPickerViewControllerSelScrollToInitialPosition = objc.RegisterName("scrollToInitialPosition")
-	_pHPickerViewControllerSelZoomIn = objc.RegisterName("zoomIn")
-	_pHPickerViewControllerSelZoomOut = objc.RegisterName("zoomOut")
-	_pHPickerViewControllerSelConfiguration = objc.RegisterName("configuration")
-	_pHPickerViewControllerSelDelegate = objc.RegisterName("delegate")
-	_pHPickerViewControllerSelSetDelegate = objc.RegisterName("setDelegate:")
+	_pHPickerViewControllerSelScrollToInitialPosition                         = objc.RegisterName("scrollToInitialPosition")
+	_pHPickerViewControllerSelZoomIn                                          = objc.RegisterName("zoomIn")
+	_pHPickerViewControllerSelZoomOut                                         = objc.RegisterName("zoomOut")
+	_pHPickerViewControllerSelConfiguration                                   = objc.RegisterName("configuration")
+	_pHPickerViewControllerSelDelegate                                        = objc.RegisterName("delegate")
+	_pHPickerViewControllerSelSetDelegate                                     = objc.RegisterName("setDelegate:")
 )
 
 func PHPickerViewControllerFromID(id objc.ID) *PHPickerViewController {
@@ -43,7 +43,9 @@ func PHPickerViewControllerFromID(id objc.ID) *PHPickerViewController {
 // Initializes a new picker with the \c configuration the picker should use.
 func (o *PHPickerViewController) InitWithConfiguration(configuration *PHPickerConfiguration) *PHPickerViewController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelInitWithConfiguration, configuration.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPickerViewControllerFromID(_ret)
 }
 
@@ -80,7 +82,9 @@ func (o *PHPickerViewController) ZoomOut() {
 // The configuration passed in during initialization.
 func (o *PHPickerViewController) Configuration() *PHPickerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHPickerViewControllerSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHPickerConfigurationFromID(_ret)
 }
 
@@ -94,4 +98,3 @@ func (o *PHPickerViewController) Delegate() PHPickerViewControllerDelegate {
 func (o *PHPickerViewController) SetDelegate(delegate PHPickerViewControllerDelegate) {
 	o.Ptr().Send(_pHPickerViewControllerSelSetDelegate, delegate)
 }
-

@@ -185,4 +185,3 @@ type NWTCPConnectionable interface {
 }
 
 var _ NWTCPConnectionable = (*NWTCPConnection)(nil)
-

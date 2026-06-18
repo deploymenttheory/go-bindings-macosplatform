@@ -62,11 +62,17 @@ func (x *AudioUnitReverb) SetWetDryMix(wetDryMix float32) {
 	x.inner.SetWetDryMix(wetDryMix)
 }
 
-func (x *AudioUnitReverb) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
+func (x *AudioUnitReverb) asAudioUnitEffect() *raw.AVAudioUnitEffect {
+	return &x.inner.AVAudioUnitEffect
+}
 
-func (x *AudioUnitReverb) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
+func (x *AudioUnitReverb) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit
+}
 
-func (x *AudioUnitReverb) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitReverb) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitReverbable is the interface implemented by [AudioUnitReverb], for mocking and DI.
 type AudioUnitReverbable interface {
@@ -79,4 +85,3 @@ type AudioUnitReverbable interface {
 }
 
 var _ AudioUnitReverbable = (*AudioUnitReverb)(nil)
-

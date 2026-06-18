@@ -69,11 +69,17 @@ func (x *CNNPoolingGradientNode) StrideInPixelsY() uint {
 	return x.inner.StrideInPixelsY()
 }
 
-func (x *CNNPoolingGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode { return x.inner }
+func (x *CNNPoolingGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode {
+	return x.inner
+}
 
-func (x *CNNPoolingGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNPoolingGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNPoolingGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNPoolingGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNPoolingGradientNodeable is the interface implemented by [CNNPoolingGradientNode], for mocking and DI.
 type CNNPoolingGradientNodeable interface {
@@ -87,4 +93,3 @@ type CNNPoolingGradientNodeable interface {
 }
 
 var _ CNNPoolingGradientNodeable = (*CNNPoolingGradientNode)(nil)
-

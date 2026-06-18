@@ -16,8 +16,8 @@ type VZConsolePortConfiguration struct {
 }
 
 var (
-	_clsVZConsolePortConfiguration = _objcClass("VZConsolePortConfiguration")
-	_vZConsolePortConfigurationSelAttachment = objc.RegisterName("attachment")
+	_clsVZConsolePortConfiguration              = _objcClass("VZConsolePortConfiguration")
+	_vZConsolePortConfigurationSelAttachment    = objc.RegisterName("attachment")
 	_vZConsolePortConfigurationSelSetAttachment = objc.RegisterName("setAttachment:")
 )
 
@@ -33,11 +33,12 @@ func VZConsolePortConfigurationFromID(id objc.ID) *VZConsolePortConfiguration {
 
 func (o *VZConsolePortConfiguration) Attachment() *VZSerialPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZConsolePortConfigurationSelAttachment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZSerialPortAttachmentFromID(_ret)
 }
 
 func (o *VZConsolePortConfiguration) SetAttachment(attachment *VZSerialPortAttachment) {
 	o.Ptr().Send(_vZConsolePortConfigurationSelSetAttachment, attachment.Ptr())
 }
-

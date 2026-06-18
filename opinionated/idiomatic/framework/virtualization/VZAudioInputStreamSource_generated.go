@@ -35,7 +35,9 @@ func NewAudioInputStreamSource() *AudioInputStreamSource {
 	return &AudioInputStreamSource{inner: raw.VZAudioInputStreamSourceFromID(_id)}
 }
 
-func (x *AudioInputStreamSource) asAudioInputStreamSource() *raw.VZAudioInputStreamSource { return x.inner }
+func (x *AudioInputStreamSource) asAudioInputStreamSource() *raw.VZAudioInputStreamSource {
+	return x.inner
+}
 
 // AudioInputStreamSourceable is the interface implemented by [AudioInputStreamSource], for mocking and DI.
 type AudioInputStreamSourceable interface {
@@ -43,4 +45,3 @@ type AudioInputStreamSourceable interface {
 }
 
 var _ AudioInputStreamSourceable = (*AudioInputStreamSource)(nil)
-

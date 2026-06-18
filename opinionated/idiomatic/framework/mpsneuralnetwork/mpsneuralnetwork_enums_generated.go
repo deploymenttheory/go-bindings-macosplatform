@@ -106,9 +106,9 @@ func (e MPSCNNConvolutionFlags) String() string {
 type MPSCNNConvolutionGradientOption uint64
 
 const (
-	MPSCNNConvolutionGradientOptionGradientWithData MPSCNNConvolutionGradientOption = 1
+	MPSCNNConvolutionGradientOptionGradientWithData           MPSCNNConvolutionGradientOption = 1
 	MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias MPSCNNConvolutionGradientOption = 2
-	MPSCNNConvolutionGradientOptionAll MPSCNNConvolutionGradientOption = 3
+	MPSCNNConvolutionGradientOptionAll                        MPSCNNConvolutionGradientOption = 3
 )
 
 func (e MPSCNNConvolutionGradientOption) String() string {
@@ -146,17 +146,17 @@ func (e MPSCNNConvolutionWeightsLayout) String() string {
 type MPSCNNLossType int64
 
 const (
-	MPSCNNLossTypeMeanAbsoluteError MPSCNNLossType = 0
-	MPSCNNLossTypeMeanSquaredError MPSCNNLossType = 1
-	MPSCNNLossTypeSoftMaxCrossEntropy MPSCNNLossType = 2
-	MPSCNNLossTypeSigmoidCrossEntropy MPSCNNLossType = 3
-	MPSCNNLossTypeCategoricalCrossEntropy MPSCNNLossType = 4
-	MPSCNNLossTypeHinge MPSCNNLossType = 5
-	MPSCNNLossTypeHuber MPSCNNLossType = 6
-	MPSCNNLossTypeCosineDistance MPSCNNLossType = 7
-	MPSCNNLossTypeLog MPSCNNLossType = 8
+	MPSCNNLossTypeMeanAbsoluteError         MPSCNNLossType = 0
+	MPSCNNLossTypeMeanSquaredError          MPSCNNLossType = 1
+	MPSCNNLossTypeSoftMaxCrossEntropy       MPSCNNLossType = 2
+	MPSCNNLossTypeSigmoidCrossEntropy       MPSCNNLossType = 3
+	MPSCNNLossTypeCategoricalCrossEntropy   MPSCNNLossType = 4
+	MPSCNNLossTypeHinge                     MPSCNNLossType = 5
+	MPSCNNLossTypeHuber                     MPSCNNLossType = 6
+	MPSCNNLossTypeCosineDistance            MPSCNNLossType = 7
+	MPSCNNLossTypeLog                       MPSCNNLossType = 8
 	MPSCNNLossTypeKullbackLeiblerDivergence MPSCNNLossType = 9
-	MPSCNNLossTypeCount MPSCNNLossType = 10
+	MPSCNNLossTypeCount                     MPSCNNLossType = 10
 )
 
 func (e MPSCNNLossType) String() string {
@@ -191,23 +191,23 @@ func (e MPSCNNLossType) String() string {
 type MPSCNNNeuronType int64
 
 const (
-	MPSCNNNeuronTypeNone MPSCNNNeuronType = 0
-	MPSCNNNeuronTypeReLU MPSCNNNeuronType = 1
-	MPSCNNNeuronTypeLinear MPSCNNNeuronType = 2
-	MPSCNNNeuronTypeSigmoid MPSCNNNeuronType = 3
+	MPSCNNNeuronTypeNone        MPSCNNNeuronType = 0
+	MPSCNNNeuronTypeReLU        MPSCNNNeuronType = 1
+	MPSCNNNeuronTypeLinear      MPSCNNNeuronType = 2
+	MPSCNNNeuronTypeSigmoid     MPSCNNNeuronType = 3
 	MPSCNNNeuronTypeHardSigmoid MPSCNNNeuronType = 4
-	MPSCNNNeuronTypeTanH MPSCNNNeuronType = 5
-	MPSCNNNeuronTypeAbsolute MPSCNNNeuronType = 6
-	MPSCNNNeuronTypeSoftPlus MPSCNNNeuronType = 7
-	MPSCNNNeuronTypeSoftSign MPSCNNNeuronType = 8
-	MPSCNNNeuronTypeELU MPSCNNNeuronType = 9
-	MPSCNNNeuronTypePReLU MPSCNNNeuronType = 10
-	MPSCNNNeuronTypeReLUN MPSCNNNeuronType = 11
-	MPSCNNNeuronTypePower MPSCNNNeuronType = 12
+	MPSCNNNeuronTypeTanH        MPSCNNNeuronType = 5
+	MPSCNNNeuronTypeAbsolute    MPSCNNNeuronType = 6
+	MPSCNNNeuronTypeSoftPlus    MPSCNNNeuronType = 7
+	MPSCNNNeuronTypeSoftSign    MPSCNNNeuronType = 8
+	MPSCNNNeuronTypeELU         MPSCNNNeuronType = 9
+	MPSCNNNeuronTypePReLU       MPSCNNNeuronType = 10
+	MPSCNNNeuronTypeReLUN       MPSCNNNeuronType = 11
+	MPSCNNNeuronTypePower       MPSCNNNeuronType = 12
 	MPSCNNNeuronTypeExponential MPSCNNNeuronType = 13
-	MPSCNNNeuronTypeLogarithm MPSCNNNeuronType = 14
-	MPSCNNNeuronTypeGeLU MPSCNNNeuronType = 15
-	MPSCNNNeuronTypeCount MPSCNNNeuronType = 16
+	MPSCNNNeuronTypeLogarithm   MPSCNNNeuronType = 14
+	MPSCNNNeuronTypeGeLU        MPSCNNNeuronType = 15
+	MPSCNNNeuronTypeCount       MPSCNNNeuronType = 16
 )
 
 func (e MPSCNNNeuronType) String() string {
@@ -254,11 +254,11 @@ func (e MPSCNNNeuronType) String() string {
 type MPSCNNReductionType int64
 
 const (
-	MPSCNNReductionTypeNone MPSCNNReductionType = 0
-	MPSCNNReductionTypeSum MPSCNNReductionType = 1
-	MPSCNNReductionTypeMean MPSCNNReductionType = 2
+	MPSCNNReductionTypeNone                MPSCNNReductionType = 0
+	MPSCNNReductionTypeSum                 MPSCNNReductionType = 1
+	MPSCNNReductionTypeMean                MPSCNNReductionType = 2
 	MPSCNNReductionTypeSumByNonZeroWeights MPSCNNReductionType = 3
-	MPSCNNReductionTypeCount MPSCNNReductionType = 4
+	MPSCNNReductionTypeCount               MPSCNNReductionType = 4
 )
 
 func (e MPSCNNReductionType) String() string {
@@ -282,11 +282,11 @@ func (e MPSCNNReductionType) String() string {
 type MPSNNComparisonType uint64
 
 const (
-	MPSNNComparisonTypeEqual MPSNNComparisonType = 0
-	MPSNNComparisonTypeNotEqual MPSNNComparisonType = 1
-	MPSNNComparisonTypeLess MPSNNComparisonType = 2
-	MPSNNComparisonTypeLessOrEqual MPSNNComparisonType = 3
-	MPSNNComparisonTypeGreater MPSNNComparisonType = 4
+	MPSNNComparisonTypeEqual          MPSNNComparisonType = 0
+	MPSNNComparisonTypeNotEqual       MPSNNComparisonType = 1
+	MPSNNComparisonTypeLess           MPSNNComparisonType = 2
+	MPSNNComparisonTypeLessOrEqual    MPSNNComparisonType = 3
+	MPSNNComparisonTypeGreater        MPSNNComparisonType = 4
 	MPSNNComparisonTypeGreaterOrEqual MPSNNComparisonType = 5
 )
 
@@ -338,24 +338,24 @@ func (e MPSNNConvolutionAccumulatorPrecisionOption) String() string {
 type MPSNNPaddingMethod uint64
 
 const (
-	MPSNNPaddingMethodAlignCentered MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAlignTopLeft MPSNNPaddingMethod = 1
-	MPSNNPaddingMethodAlignBottomRight MPSNNPaddingMethod = 2
-	MPSNNPaddingMethodAlign_reserved MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAlignMask MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAddRemainderToTopLeft MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAddRemainderToTopRight MPSNNPaddingMethod = 4
-	MPSNNPaddingMethodAddRemainderToBottomLeft MPSNNPaddingMethod = 8
-	MPSNNPaddingMethodAddRemainderToBottomRight MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodAddRemainderToMask MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodSizeValidOnly MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodSizeSame MPSNNPaddingMethod = 16
-	MPSNNPaddingMethodSizeFull MPSNNPaddingMethod = 32
-	MPSNNPaddingMethodSize_reserved MPSNNPaddingMethod = 48
+	MPSNNPaddingMethodAlignCentered                MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodAlignTopLeft                 MPSNNPaddingMethod = 1
+	MPSNNPaddingMethodAlignBottomRight             MPSNNPaddingMethod = 2
+	MPSNNPaddingMethodAlign_reserved               MPSNNPaddingMethod = 3
+	MPSNNPaddingMethodAlignMask                    MPSNNPaddingMethod = 3
+	MPSNNPaddingMethodAddRemainderToTopLeft        MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodAddRemainderToTopRight       MPSNNPaddingMethod = 4
+	MPSNNPaddingMethodAddRemainderToBottomLeft     MPSNNPaddingMethod = 8
+	MPSNNPaddingMethodAddRemainderToBottomRight    MPSNNPaddingMethod = 12
+	MPSNNPaddingMethodAddRemainderToMask           MPSNNPaddingMethod = 12
+	MPSNNPaddingMethodSizeValidOnly                MPSNNPaddingMethod = 0
+	MPSNNPaddingMethodSizeSame                     MPSNNPaddingMethod = 16
+	MPSNNPaddingMethodSizeFull                     MPSNNPaddingMethod = 32
+	MPSNNPaddingMethodSize_reserved                MPSNNPaddingMethod = 48
 	MPSNNPaddingMethodCustomWhitelistForNodeFusion MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustomAllowForNodeFusion MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustom MPSNNPaddingMethod = 16384
-	MPSNNPaddingMethodSizeMask MPSNNPaddingMethod = 2032
+	MPSNNPaddingMethodCustomAllowForNodeFusion     MPSNNPaddingMethod = 8192
+	MPSNNPaddingMethodCustom                       MPSNNPaddingMethod = 16384
+	MPSNNPaddingMethodSizeMask                     MPSNNPaddingMethod = 2032
 	// The caffe framework constrains the average pooling area to the limits of the padding area in cases where a pixel would read beyond the padding area. Set this bit for Caffe emulation with average pooling.
 	MPSNNPaddingMethodExcludeEdges MPSNNPaddingMethod = 32768
 )
@@ -492,36 +492,36 @@ func (e MPSRNNBidirectionalCombineMode) String() string {
 type MPSRNNMatrixId uint64
 
 const (
-	MPSRNNMatrixIdSingleGateInputWeights MPSRNNMatrixId = 0
-	MPSRNNMatrixIdSingleGateRecurrentWeights MPSRNNMatrixId = 1
-	MPSRNNMatrixIdSingleGateBiasTerms MPSRNNMatrixId = 2
-	MPSRNNMatrixIdLSTMInputGateInputWeights MPSRNNMatrixId = 3
-	MPSRNNMatrixIdLSTMInputGateRecurrentWeights MPSRNNMatrixId = 4
-	MPSRNNMatrixIdLSTMInputGateMemoryWeights MPSRNNMatrixId = 5
-	MPSRNNMatrixIdLSTMInputGateBiasTerms MPSRNNMatrixId = 6
-	MPSRNNMatrixIdLSTMForgetGateInputWeights MPSRNNMatrixId = 7
-	MPSRNNMatrixIdLSTMForgetGateRecurrentWeights MPSRNNMatrixId = 8
-	MPSRNNMatrixIdLSTMForgetGateMemoryWeights MPSRNNMatrixId = 9
-	MPSRNNMatrixIdLSTMForgetGateBiasTerms MPSRNNMatrixId = 10
-	MPSRNNMatrixIdLSTMMemoryGateInputWeights MPSRNNMatrixId = 11
-	MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights MPSRNNMatrixId = 12
-	MPSRNNMatrixIdLSTMMemoryGateMemoryWeights MPSRNNMatrixId = 13
-	MPSRNNMatrixIdLSTMMemoryGateBiasTerms MPSRNNMatrixId = 14
-	MPSRNNMatrixIdLSTMOutputGateInputWeights MPSRNNMatrixId = 15
-	MPSRNNMatrixIdLSTMOutputGateRecurrentWeights MPSRNNMatrixId = 16
-	MPSRNNMatrixIdLSTMOutputGateMemoryWeights MPSRNNMatrixId = 17
-	MPSRNNMatrixIdLSTMOutputGateBiasTerms MPSRNNMatrixId = 18
-	MPSRNNMatrixIdGRUInputGateInputWeights MPSRNNMatrixId = 19
-	MPSRNNMatrixIdGRUInputGateRecurrentWeights MPSRNNMatrixId = 20
-	MPSRNNMatrixIdGRUInputGateBiasTerms MPSRNNMatrixId = 21
-	MPSRNNMatrixIdGRURecurrentGateInputWeights MPSRNNMatrixId = 22
+	MPSRNNMatrixIdSingleGateInputWeights           MPSRNNMatrixId = 0
+	MPSRNNMatrixIdSingleGateRecurrentWeights       MPSRNNMatrixId = 1
+	MPSRNNMatrixIdSingleGateBiasTerms              MPSRNNMatrixId = 2
+	MPSRNNMatrixIdLSTMInputGateInputWeights        MPSRNNMatrixId = 3
+	MPSRNNMatrixIdLSTMInputGateRecurrentWeights    MPSRNNMatrixId = 4
+	MPSRNNMatrixIdLSTMInputGateMemoryWeights       MPSRNNMatrixId = 5
+	MPSRNNMatrixIdLSTMInputGateBiasTerms           MPSRNNMatrixId = 6
+	MPSRNNMatrixIdLSTMForgetGateInputWeights       MPSRNNMatrixId = 7
+	MPSRNNMatrixIdLSTMForgetGateRecurrentWeights   MPSRNNMatrixId = 8
+	MPSRNNMatrixIdLSTMForgetGateMemoryWeights      MPSRNNMatrixId = 9
+	MPSRNNMatrixIdLSTMForgetGateBiasTerms          MPSRNNMatrixId = 10
+	MPSRNNMatrixIdLSTMMemoryGateInputWeights       MPSRNNMatrixId = 11
+	MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights   MPSRNNMatrixId = 12
+	MPSRNNMatrixIdLSTMMemoryGateMemoryWeights      MPSRNNMatrixId = 13
+	MPSRNNMatrixIdLSTMMemoryGateBiasTerms          MPSRNNMatrixId = 14
+	MPSRNNMatrixIdLSTMOutputGateInputWeights       MPSRNNMatrixId = 15
+	MPSRNNMatrixIdLSTMOutputGateRecurrentWeights   MPSRNNMatrixId = 16
+	MPSRNNMatrixIdLSTMOutputGateMemoryWeights      MPSRNNMatrixId = 17
+	MPSRNNMatrixIdLSTMOutputGateBiasTerms          MPSRNNMatrixId = 18
+	MPSRNNMatrixIdGRUInputGateInputWeights         MPSRNNMatrixId = 19
+	MPSRNNMatrixIdGRUInputGateRecurrentWeights     MPSRNNMatrixId = 20
+	MPSRNNMatrixIdGRUInputGateBiasTerms            MPSRNNMatrixId = 21
+	MPSRNNMatrixIdGRURecurrentGateInputWeights     MPSRNNMatrixId = 22
 	MPSRNNMatrixIdGRURecurrentGateRecurrentWeights MPSRNNMatrixId = 23
-	MPSRNNMatrixIdGRURecurrentGateBiasTerms MPSRNNMatrixId = 24
-	MPSRNNMatrixIdGRUOutputGateInputWeights MPSRNNMatrixId = 25
-	MPSRNNMatrixIdGRUOutputGateRecurrentWeights MPSRNNMatrixId = 26
-	MPSRNNMatrixIdGRUOutputGateInputGateWeights MPSRNNMatrixId = 27
-	MPSRNNMatrixIdGRUOutputGateBiasTerms MPSRNNMatrixId = 28
-	MPSRNNMatrixId_count MPSRNNMatrixId = 29
+	MPSRNNMatrixIdGRURecurrentGateBiasTerms        MPSRNNMatrixId = 24
+	MPSRNNMatrixIdGRUOutputGateInputWeights        MPSRNNMatrixId = 25
+	MPSRNNMatrixIdGRUOutputGateRecurrentWeights    MPSRNNMatrixId = 26
+	MPSRNNMatrixIdGRUOutputGateInputGateWeights    MPSRNNMatrixId = 27
+	MPSRNNMatrixIdGRUOutputGateBiasTerms           MPSRNNMatrixId = 28
+	MPSRNNMatrixId_count                           MPSRNNMatrixId = 29
 )
 
 func (e MPSRNNMatrixId) String() string {
@@ -610,4 +610,3 @@ func (e MPSRNNSequenceDirection) String() string {
 		return fmt.Sprintf("MPSRNNSequenceDirection(%d)", int64(e))
 	}
 }
-

@@ -53,4 +53,3 @@ type GearShifterElementable interface {
 }
 
 var _ GearShifterElementable = (*GearShifterElement)(nil)
-

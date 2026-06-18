@@ -18,16 +18,16 @@ type AVCaptureView struct {
 }
 
 var (
-	_clsAVCaptureView = _objcClass("AVCaptureView")
+	_clsAVCaptureView                                           = _objcClass("AVCaptureView")
 	_aVCaptureViewSelSetSessionShowVideoPreviewShowAudioPreview = objc.RegisterName("setSession:showVideoPreview:showAudioPreview:")
-	_aVCaptureViewSelSession = objc.RegisterName("session")
-	_aVCaptureViewSelFileOutput = objc.RegisterName("fileOutput")
-	_aVCaptureViewSelDelegate = objc.RegisterName("delegate")
-	_aVCaptureViewSelSetDelegate = objc.RegisterName("setDelegate:")
-	_aVCaptureViewSelControlsStyle = objc.RegisterName("controlsStyle")
-	_aVCaptureViewSelSetControlsStyle = objc.RegisterName("setControlsStyle:")
-	_aVCaptureViewSelVideoGravity = objc.RegisterName("videoGravity")
-	_aVCaptureViewSelSetVideoGravity = objc.RegisterName("setVideoGravity:")
+	_aVCaptureViewSelSession                                    = objc.RegisterName("session")
+	_aVCaptureViewSelFileOutput                                 = objc.RegisterName("fileOutput")
+	_aVCaptureViewSelDelegate                                   = objc.RegisterName("delegate")
+	_aVCaptureViewSelSetDelegate                                = objc.RegisterName("setDelegate:")
+	_aVCaptureViewSelControlsStyle                              = objc.RegisterName("controlsStyle")
+	_aVCaptureViewSelSetControlsStyle                           = objc.RegisterName("setControlsStyle:")
+	_aVCaptureViewSelVideoGravity                               = objc.RegisterName("videoGravity")
+	_aVCaptureViewSelSetVideoGravity                            = objc.RegisterName("setVideoGravity:")
 )
 
 func AVCaptureViewFromID(id objc.ID) *AVCaptureView {
@@ -48,14 +48,18 @@ func (o *AVCaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfo
 // @property	session @abstract	A capture session represented by this view. @discussion	Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
 func (o *AVCaptureView) Session() *avfoundation.AVCaptureSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVCaptureSessionFromID(_ret)
 }
 
 // @property	fileOutput @abstract	A capture file output used to record media data. @discussion	The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
 func (o *AVCaptureView) FileOutput() *avfoundation.AVCaptureFileOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelFileOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVCaptureFileOutputFromID(_ret)
 }
 
@@ -82,11 +86,12 @@ func (o *AVCaptureView) SetControlsStyle(controlsStyle AVCaptureViewControlsStyl
 // @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
 func (o *AVCaptureView) VideoGravity() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureViewSelVideoGravity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVCaptureView) SetVideoGravity(videoGravity *foundation.NSString) {
 	o.Ptr().Send(_aVCaptureViewSelSetVideoGravity, videoGravity.Ptr())
 }
-

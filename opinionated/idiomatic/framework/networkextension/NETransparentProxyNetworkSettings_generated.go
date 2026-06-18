@@ -18,7 +18,9 @@ type NETransparentProxyNetworkSettings struct {
 }
 
 // Unwrap returns the underlying [raw.NETransparentProxyNetworkSettings].
-func (x *NETransparentProxyNetworkSettings) Unwrap() *raw.NETransparentProxyNetworkSettings { return x.inner }
+func (x *NETransparentProxyNetworkSettings) Unwrap() *raw.NETransparentProxyNetworkSettings {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *NETransparentProxyNetworkSettings) WithIncludedNetworkRules(items ...*r
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NENetworkRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +65,9 @@ func (x *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items ...*r
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NENetworkRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -114,7 +120,9 @@ func (x *NETransparentProxyNetworkSettings) SetExcludedNetworkRules(excludedNetw
 	x.inner.SetExcludedNetworkRules(excludedNetworkRules)
 }
 
-func (x *NETransparentProxyNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NETunnelNetworkSettings }
+func (x *NETransparentProxyNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
+	return &x.inner.NETunnelNetworkSettings
+}
 
 // NETransparentProxyNetworkSettingsable is the interface implemented by [NETransparentProxyNetworkSettings], for mocking and DI.
 type NETransparentProxyNetworkSettingsable interface {
@@ -130,4 +138,3 @@ type NETransparentProxyNetworkSettingsable interface {
 }
 
 var _ NETransparentProxyNetworkSettingsable = (*NETransparentProxyNetworkSettings)(nil)
-

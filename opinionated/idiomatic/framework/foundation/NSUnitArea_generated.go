@@ -54,4 +54,3 @@ type UnitAreaable interface {
 }
 
 var _ UnitAreaable = (*UnitArea)(nil)
-

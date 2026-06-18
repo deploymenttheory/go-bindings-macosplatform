@@ -118,9 +118,13 @@ func (x *HumanBodyPose3DObservation) BodyHeight() float32 {
 	return x.inner.BodyHeight()
 }
 
-func (x *HumanBodyPose3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation { return &x.inner.VNRecognizedPoints3DObservation }
+func (x *HumanBodyPose3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation {
+	return &x.inner.VNRecognizedPoints3DObservation
+}
 
-func (x *HumanBodyPose3DObservation) asObservation() *raw.VNObservation { return &x.inner.VNRecognizedPoints3DObservation.VNObservation }
+func (x *HumanBodyPose3DObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNRecognizedPoints3DObservation.VNObservation
+}
 
 // HumanBodyPose3DObservationable is the interface implemented by [HumanBodyPose3DObservation], for mocking and DI.
 type HumanBodyPose3DObservationable interface {
@@ -138,4 +142,3 @@ type HumanBodyPose3DObservationable interface {
 }
 
 var _ HumanBodyPose3DObservationable = (*HumanBodyPose3DObservation)(nil)
-

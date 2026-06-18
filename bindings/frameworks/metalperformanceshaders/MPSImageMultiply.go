@@ -17,7 +17,7 @@ type MPSImageMultiply struct {
 }
 
 var (
-	_clsMPSImageMultiply = _objcClass("MPSImageMultiply")
+	_clsMPSImageMultiply               = _objcClass("MPSImageMultiply")
 	_mPSImageMultiplySelInitWithDevice = objc.RegisterName("initWithDevice:")
 )
 
@@ -34,7 +34,8 @@ func MPSImageMultiplyFromID(id objc.ID) *MPSImageMultiply {
 // @abstract  Initialize the multiplication operator @param     device           The device the filter will run on. @return    A valid MPSImageMultiply object or nil, if failure.
 func (o *MPSImageMultiply) InitWithDevice(device metal.MTLDevice) *MPSImageMultiply {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSImageMultiplySelInitWithDevice, device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSImageMultiplyFromID(_ret)
 }
-

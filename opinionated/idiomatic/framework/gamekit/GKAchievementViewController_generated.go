@@ -82,7 +82,9 @@ func (x *AchievementViewController) SetAchievementDelegate(achievementDelegate r
 	x.inner.SetAchievementDelegate(achievementDelegate)
 }
 
-func (x *AchievementViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return &x.inner.GKGameCenterViewController }
+func (x *AchievementViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
+	return &x.inner.GKGameCenterViewController
+}
 
 // AchievementViewControllerable is the interface implemented by [AchievementViewController], for mocking and DI.
 type AchievementViewControllerable interface {
@@ -98,4 +100,3 @@ type AchievementViewControllerable interface {
 }
 
 var _ AchievementViewControllerable = (*AchievementViewController)(nil)
-

@@ -90,4 +90,3 @@ type CachedURLResponseable interface {
 }
 
 var _ CachedURLResponseable = (*CachedURLResponse)(nil)
-

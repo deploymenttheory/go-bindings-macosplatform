@@ -184,4 +184,3 @@ type CaptureFileOutputable interface {
 }
 
 var _ CaptureFileOutputable = (*CaptureFileOutput)(nil)
-

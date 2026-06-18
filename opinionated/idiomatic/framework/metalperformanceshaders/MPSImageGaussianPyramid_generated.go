@@ -69,11 +69,17 @@ func (x *ImageGaussianPyramid) WithLabel(label string) *ImageGaussianPyramid {
 	return x
 }
 
-func (x *ImageGaussianPyramid) asImagePyramid() *mpsimage.MPSImagePyramid { return &x.inner.MPSImagePyramid }
+func (x *ImageGaussianPyramid) asImagePyramid() *mpsimage.MPSImagePyramid {
+	return &x.inner.MPSImagePyramid
+}
 
-func (x *ImageGaussianPyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel }
+func (x *ImageGaussianPyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
+}
 
-func (x *ImageGaussianPyramid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageGaussianPyramid) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
 type ImageGaussianPyramidable interface {
@@ -86,4 +92,3 @@ type ImageGaussianPyramidable interface {
 }
 
 var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
-

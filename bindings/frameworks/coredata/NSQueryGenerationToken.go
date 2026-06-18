@@ -16,7 +16,7 @@ type NSQueryGenerationToken struct {
 }
 
 var (
-	_clsNSQueryGenerationToken = _objcClass("NSQueryGenerationToken")
+	_clsNSQueryGenerationToken                            = _objcClass("NSQueryGenerationToken")
 	_nSQueryGenerationTokenSelCurrentQueryGenerationToken = objc.RegisterName("currentQueryGenerationToken")
 )
 
@@ -32,7 +32,8 @@ func NSQueryGenerationTokenFromID(id objc.ID) *NSQueryGenerationToken {
 
 func NSQueryGenerationTokenCurrentQueryGenerationToken() *NSQueryGenerationToken {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSQueryGenerationToken), _nSQueryGenerationTokenSelCurrentQueryGenerationToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSQueryGenerationTokenFromID(_ret)
 }
-

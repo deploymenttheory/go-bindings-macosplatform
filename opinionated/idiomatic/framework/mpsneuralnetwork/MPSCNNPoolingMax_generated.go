@@ -112,4 +112,3 @@ type CNNPoolingMaxable interface {
 }
 
 var _ CNNPoolingMaxable = (*CNNPoolingMax)(nil)
-

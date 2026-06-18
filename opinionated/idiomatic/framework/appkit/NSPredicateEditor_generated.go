@@ -48,7 +48,9 @@ func (x *PredicateEditor) WithRowTemplates(items ...*raw.NSPredicateEditorRowTem
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSPredicateEditorRowTemplate](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -280,7 +282,9 @@ func (x *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -422,7 +426,9 @@ func (x *PredicateEditor) WithBackgroundFilters(items ...*coreimage.CIFilter) *P
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -444,7 +450,9 @@ func (x *PredicateEditor) WithContentFilters(items ...*coreimage.CIFilter) *Pred
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -508,7 +516,9 @@ func (x *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvi
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -629,7 +639,9 @@ func (x *PredicateEditor) asControl() *raw.NSControl { return &x.inner.NSRuleEdi
 
 func (x *PredicateEditor) asView() *raw.NSView { return &x.inner.NSRuleEditor.NSControl.NSView }
 
-func (x *PredicateEditor) asResponder() *raw.NSResponder { return &x.inner.NSRuleEditor.NSControl.NSView.NSResponder }
+func (x *PredicateEditor) asResponder() *raw.NSResponder {
+	return &x.inner.NSRuleEditor.NSControl.NSView.NSResponder
+}
 
 // PredicateEditorable is the interface implemented by [PredicateEditor], for mocking and DI.
 type PredicateEditorable interface {
@@ -725,4 +737,3 @@ type PredicateEditorable interface {
 }
 
 var _ PredicateEditorable = (*PredicateEditor)(nil)
-

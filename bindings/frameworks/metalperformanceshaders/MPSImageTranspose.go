@@ -26,4 +26,3 @@ func MPSImageTransposeFromID(id objc.ID) *MPSImageTranspose {
 	purego.Track(o)
 	return o
 }
-

@@ -18,14 +18,14 @@ type NEPacketTunnelProvider struct {
 }
 
 var (
-	_clsNEPacketTunnelProvider = _objcClass("NEPacketTunnelProvider")
-	_nEPacketTunnelProviderSelStartTunnelWithOptionsCompletionHandler = objc.RegisterName("startTunnelWithOptions:completionHandler:")
-	_nEPacketTunnelProviderSelStopTunnelWithReasonCompletionHandler = objc.RegisterName("stopTunnelWithReason:completionHandler:")
-	_nEPacketTunnelProviderSelCancelTunnelWithError = objc.RegisterName("cancelTunnelWithError:")
+	_clsNEPacketTunnelProvider                                                                         = _objcClass("NEPacketTunnelProvider")
+	_nEPacketTunnelProviderSelStartTunnelWithOptionsCompletionHandler                                  = objc.RegisterName("startTunnelWithOptions:completionHandler:")
+	_nEPacketTunnelProviderSelStopTunnelWithReasonCompletionHandler                                    = objc.RegisterName("stopTunnelWithReason:completionHandler:")
+	_nEPacketTunnelProviderSelCancelTunnelWithError                                                    = objc.RegisterName("cancelTunnelWithError:")
 	_nEPacketTunnelProviderSelCreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate = objc.RegisterName("createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate:")
-	_nEPacketTunnelProviderSelCreateUDPSessionThroughTunnelToEndpointFromEndpoint = objc.RegisterName("createUDPSessionThroughTunnelToEndpoint:fromEndpoint:")
-	_nEPacketTunnelProviderSelPacketFlow = objc.RegisterName("packetFlow")
-	_nEPacketTunnelProviderSelVirtualInterface = objc.RegisterName("virtualInterface")
+	_nEPacketTunnelProviderSelCreateUDPSessionThroughTunnelToEndpointFromEndpoint                      = objc.RegisterName("createUDPSessionThroughTunnelToEndpoint:fromEndpoint:")
+	_nEPacketTunnelProviderSelPacketFlow                                                               = objc.RegisterName("packetFlow")
+	_nEPacketTunnelProviderSelVirtualInterface                                                         = objc.RegisterName("virtualInterface")
 )
 
 func NEPacketTunnelProviderFromID(id objc.ID) *NEPacketTunnelProvider {
@@ -71,7 +71,9 @@ func (o *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
 // Deprecated: Use the `virtualInterface` property with `nw_parameters_require_interface`
 func (o *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate objc.ID) *NWTCPConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelCreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate, remoteEndpoint, enableTLS, tLSParameters.Ptr(), delegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWTCPConnectionFromID(_ret)
 }
 
@@ -79,21 +81,26 @@ func (o *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnabl
 // Deprecated: Use the `virtualInterface` property with `nw_parameters_require_interface`
 func (o *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelCreateUDPSessionThroughTunnelToEndpointFromEndpoint, remoteEndpoint, localEndpoint.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWUDPSessionFromID(_ret)
 }
 
 // @property packetFlow @discussion An NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
 func (o *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelPacketFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEPacketTunnelFlowFromID(_ret)
 }
 
 // @property virtualInterface @abstract The virtual network interface used to route packets to the packet tunnel provider. @discussion For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
 func (o *NEPacketTunnelProvider) VirtualInterface() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEPacketTunnelProviderSelVirtualInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
-

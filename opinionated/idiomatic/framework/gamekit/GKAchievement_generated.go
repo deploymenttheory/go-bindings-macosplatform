@@ -228,4 +228,3 @@ type Achievementable interface {
 }
 
 var _ Achievementable = (*Achievement)(nil)
-

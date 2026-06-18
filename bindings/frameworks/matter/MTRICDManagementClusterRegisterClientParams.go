@@ -16,20 +16,20 @@ type MTRICDManagementClusterRegisterClientParams struct {
 }
 
 var (
-	_clsMTRICDManagementClusterRegisterClientParams = _objcClass("MTRICDManagementClusterRegisterClientParams")
-	_mTRICDManagementClusterRegisterClientParamsSelCheckInNodeID = objc.RegisterName("checkInNodeID")
-	_mTRICDManagementClusterRegisterClientParamsSelSetCheckInNodeID = objc.RegisterName("setCheckInNodeID:")
-	_mTRICDManagementClusterRegisterClientParamsSelMonitoredSubject = objc.RegisterName("monitoredSubject")
-	_mTRICDManagementClusterRegisterClientParamsSelSetMonitoredSubject = objc.RegisterName("setMonitoredSubject:")
-	_mTRICDManagementClusterRegisterClientParamsSelKey = objc.RegisterName("key")
-	_mTRICDManagementClusterRegisterClientParamsSelSetKey = objc.RegisterName("setKey:")
-	_mTRICDManagementClusterRegisterClientParamsSelVerificationKey = objc.RegisterName("verificationKey")
-	_mTRICDManagementClusterRegisterClientParamsSelSetVerificationKey = objc.RegisterName("setVerificationKey:")
-	_mTRICDManagementClusterRegisterClientParamsSelClientType = objc.RegisterName("clientType")
-	_mTRICDManagementClusterRegisterClientParamsSelSetClientType = objc.RegisterName("setClientType:")
-	_mTRICDManagementClusterRegisterClientParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRICDManagementClusterRegisterClientParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRICDManagementClusterRegisterClientParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRICDManagementClusterRegisterClientParams                               = _objcClass("MTRICDManagementClusterRegisterClientParams")
+	_mTRICDManagementClusterRegisterClientParamsSelCheckInNodeID                  = objc.RegisterName("checkInNodeID")
+	_mTRICDManagementClusterRegisterClientParamsSelSetCheckInNodeID               = objc.RegisterName("setCheckInNodeID:")
+	_mTRICDManagementClusterRegisterClientParamsSelMonitoredSubject               = objc.RegisterName("monitoredSubject")
+	_mTRICDManagementClusterRegisterClientParamsSelSetMonitoredSubject            = objc.RegisterName("setMonitoredSubject:")
+	_mTRICDManagementClusterRegisterClientParamsSelKey                            = objc.RegisterName("key")
+	_mTRICDManagementClusterRegisterClientParamsSelSetKey                         = objc.RegisterName("setKey:")
+	_mTRICDManagementClusterRegisterClientParamsSelVerificationKey                = objc.RegisterName("verificationKey")
+	_mTRICDManagementClusterRegisterClientParamsSelSetVerificationKey             = objc.RegisterName("setVerificationKey:")
+	_mTRICDManagementClusterRegisterClientParamsSelClientType                     = objc.RegisterName("clientType")
+	_mTRICDManagementClusterRegisterClientParamsSelSetClientType                  = objc.RegisterName("setClientType:")
+	_mTRICDManagementClusterRegisterClientParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRICDManagementClusterRegisterClientParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRICDManagementClusterRegisterClientParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRICDManagementClusterRegisterClientParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -45,7 +45,9 @@ func MTRICDManagementClusterRegisterClientParamsFromID(id objc.ID) *MTRICDManage
 
 func (o *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelCheckInNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -55,7 +57,9 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetCheckInNodeID(checkInNo
 
 func (o *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelMonitoredSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetMonitoredSubject(monito
 
 func (o *MTRICDManagementClusterRegisterClientParams) Key() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -75,7 +81,9 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetKey(key *foundation.NSD
 
 func (o *MTRICDManagementClusterRegisterClientParams) VerificationKey() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelVerificationKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -85,7 +93,9 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetVerificationKey(verific
 
 func (o *MTRICDManagementClusterRegisterClientParams) ClientType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelClientType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -96,7 +106,9 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetClientType(clientType *
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -107,11 +119,12 @@ func (o *MTRICDManagementClusterRegisterClientParams) SetTimedInvokeTimeoutMs(ti
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRICDManagementClusterRegisterClientParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRICDManagementClusterRegisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRICDManagementClusterRegisterClientParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

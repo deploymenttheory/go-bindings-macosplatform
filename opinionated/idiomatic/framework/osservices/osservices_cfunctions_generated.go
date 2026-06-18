@@ -655,4 +655,3 @@ func Kcfindinternetpasswordwithpath(serverName string, securityDomain string, ac
 func Kcgetkeychainname(keychain unsafe.Pointer, keychainName string) int {
 	return raw.Kcgetkeychainname(keychain, keychainName)
 }
-

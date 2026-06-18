@@ -86,4 +86,3 @@ type AudiogramSensitivityTestable interface {
 }
 
 var _ AudiogramSensitivityTestable = (*AudiogramSensitivityTest)(nil)
-

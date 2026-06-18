@@ -17,7 +17,9 @@ type MTRMediaPlaybackClusterActivateTextTrackParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterActivateTextTrackParams].
-func (x *MTRMediaPlaybackClusterActivateTextTrackParams) Unwrap() *raw.MTRMediaPlaybackClusterActivateTextTrackParams { return x.inner }
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) Unwrap() *raw.MTRMediaPlaybackClusterActivateTextTrackParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -104,4 +106,3 @@ type MTRMediaPlaybackClusterActivateTextTrackParamsable interface {
 }
 
 var _ MTRMediaPlaybackClusterActivateTextTrackParamsable = (*MTRMediaPlaybackClusterActivateTextTrackParams)(nil)
-

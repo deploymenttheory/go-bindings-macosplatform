@@ -56,4 +56,3 @@ type AnimationMetricable interface {
 }
 
 var _ AnimationMetricable = (*AnimationMetric)(nil)
-

@@ -18,7 +18,9 @@ type TitlebarAccessoryViewController struct {
 }
 
 // Unwrap returns the underlying [raw.NSTitlebarAccessoryViewController].
-func (x *TitlebarAccessoryViewController) Unwrap() *raw.NSTitlebarAccessoryViewController { return x.inner }
+func (x *TitlebarAccessoryViewController) Unwrap() *raw.NSTitlebarAccessoryViewController {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,7 +101,9 @@ func (x *TitlebarAccessoryViewController) WithChildViewControllers(items ...View
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -198,9 +202,13 @@ func (x *TitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(pref
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
 }
 
-func (x *TitlebarAccessoryViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
+func (x *TitlebarAccessoryViewController) asViewController() *raw.NSViewController {
+	return &x.inner.NSViewController
+}
 
-func (x *TitlebarAccessoryViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+func (x *TitlebarAccessoryViewController) asResponder() *raw.NSResponder {
+	return &x.inner.NSViewController.NSResponder
+}
 
 // TitlebarAccessoryViewControllerable is the interface implemented by [TitlebarAccessoryViewController], for mocking and DI.
 type TitlebarAccessoryViewControllerable interface {
@@ -234,4 +242,3 @@ type TitlebarAccessoryViewControllerable interface {
 }
 
 var _ TitlebarAccessoryViewControllerable = (*TitlebarAccessoryViewController)(nil)
-

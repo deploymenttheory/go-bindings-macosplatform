@@ -95,4 +95,3 @@ type AssessmentSessionable interface {
 }
 
 var _ AssessmentSessionable = (*AssessmentSession)(nil)
-

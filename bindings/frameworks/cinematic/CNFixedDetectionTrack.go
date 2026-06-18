@@ -17,11 +17,11 @@ type CNFixedDetectionTrack struct {
 }
 
 var (
-	_clsCNFixedDetectionTrack = _objcClass("CNFixedDetectionTrack")
-	_cNFixedDetectionTrackSelInitWithFocusDisparity = objc.RegisterName("initWithFocusDisparity:")
+	_clsCNFixedDetectionTrack                          = _objcClass("CNFixedDetectionTrack")
+	_cNFixedDetectionTrackSelInitWithFocusDisparity    = objc.RegisterName("initWithFocusDisparity:")
 	_cNFixedDetectionTrackSelInitWithOriginalDetection = objc.RegisterName("initWithOriginalDetection:")
-	_cNFixedDetectionTrackSelFocusDisparity = objc.RegisterName("focusDisparity")
-	_cNFixedDetectionTrackSelOriginalDetection = objc.RegisterName("originalDetection")
+	_cNFixedDetectionTrackSelFocusDisparity            = objc.RegisterName("focusDisparity")
+	_cNFixedDetectionTrackSelOriginalDetection         = objc.RegisterName("originalDetection")
 )
 
 func CNFixedDetectionTrackFromID(id objc.ID) *CNFixedDetectionTrack {
@@ -37,14 +37,18 @@ func CNFixedDetectionTrackFromID(id objc.ID) *CNFixedDetectionTrack {
 // Create a detection track with fixed focus at the given disparity.
 func (o *CNFixedDetectionTrack) InitWithFocusDisparity(focusDisparity float32) *CNFixedDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNFixedDetectionTrackSelInitWithFocusDisparity, focusDisparity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNFixedDetectionTrackFromID(_ret)
 }
 
 // Create a detection track with fixed focus at the disparity of an existing detection.
 func (o *CNFixedDetectionTrack) InitWithOriginalDetection(originalDetection *CNDetection) *CNFixedDetectionTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNFixedDetectionTrackSelInitWithOriginalDetection, originalDetection.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNFixedDetectionTrackFromID(_ret)
 }
 
@@ -56,7 +60,8 @@ func (o *CNFixedDetectionTrack) FocusDisparity() float32 {
 // The original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
 func (o *CNFixedDetectionTrack) OriginalDetection() *CNDetection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNFixedDetectionTrackSelOriginalDetection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNDetectionFromID(_ret)
 }
-

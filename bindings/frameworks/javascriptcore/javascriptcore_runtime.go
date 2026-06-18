@@ -14,8 +14,8 @@ import (
 
 var (
 	_javascriptcoreLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,110 +48,218 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("JSBigIntCreateWithDouble", func() { purego.RegisterLibFunc(&_fnJSBigIntCreateWithDouble, _javascriptcoreLib, "JSBigIntCreateWithDouble") })
-	_register("JSBigIntCreateWithInt64", func() { purego.RegisterLibFunc(&_fnJSBigIntCreateWithInt64, _javascriptcoreLib, "JSBigIntCreateWithInt64") })
-	_register("JSBigIntCreateWithString", func() { purego.RegisterLibFunc(&_fnJSBigIntCreateWithString, _javascriptcoreLib, "JSBigIntCreateWithString") })
-	_register("JSBigIntCreateWithUInt64", func() { purego.RegisterLibFunc(&_fnJSBigIntCreateWithUInt64, _javascriptcoreLib, "JSBigIntCreateWithUInt64") })
+	_register("JSBigIntCreateWithDouble", func() {
+		purego.RegisterLibFunc(&_fnJSBigIntCreateWithDouble, _javascriptcoreLib, "JSBigIntCreateWithDouble")
+	})
+	_register("JSBigIntCreateWithInt64", func() {
+		purego.RegisterLibFunc(&_fnJSBigIntCreateWithInt64, _javascriptcoreLib, "JSBigIntCreateWithInt64")
+	})
+	_register("JSBigIntCreateWithString", func() {
+		purego.RegisterLibFunc(&_fnJSBigIntCreateWithString, _javascriptcoreLib, "JSBigIntCreateWithString")
+	})
+	_register("JSBigIntCreateWithUInt64", func() {
+		purego.RegisterLibFunc(&_fnJSBigIntCreateWithUInt64, _javascriptcoreLib, "JSBigIntCreateWithUInt64")
+	})
 	_register("JSCheckScriptSyntax", func() { purego.RegisterLibFunc(&_fnJSCheckScriptSyntax, _javascriptcoreLib, "JSCheckScriptSyntax") })
 	_register("JSClassCreate", func() { purego.RegisterLibFunc(&_fnJSClassCreate, _javascriptcoreLib, "JSClassCreate") })
 	_register("JSClassRelease", func() { purego.RegisterLibFunc(&_fnJSClassRelease, _javascriptcoreLib, "JSClassRelease") })
 	_register("JSClassRetain", func() { purego.RegisterLibFunc(&_fnJSClassRetain, _javascriptcoreLib, "JSClassRetain") })
-	_register("JSContextGetGlobalContext", func() { purego.RegisterLibFunc(&_fnJSContextGetGlobalContext, _javascriptcoreLib, "JSContextGetGlobalContext") })
-	_register("JSContextGetGlobalObject", func() { purego.RegisterLibFunc(&_fnJSContextGetGlobalObject, _javascriptcoreLib, "JSContextGetGlobalObject") })
+	_register("JSContextGetGlobalContext", func() {
+		purego.RegisterLibFunc(&_fnJSContextGetGlobalContext, _javascriptcoreLib, "JSContextGetGlobalContext")
+	})
+	_register("JSContextGetGlobalObject", func() {
+		purego.RegisterLibFunc(&_fnJSContextGetGlobalObject, _javascriptcoreLib, "JSContextGetGlobalObject")
+	})
 	_register("JSContextGetGroup", func() { purego.RegisterLibFunc(&_fnJSContextGetGroup, _javascriptcoreLib, "JSContextGetGroup") })
 	_register("JSContextGroupCreate", func() { purego.RegisterLibFunc(&_fnJSContextGroupCreate, _javascriptcoreLib, "JSContextGroupCreate") })
 	_register("JSContextGroupRelease", func() { purego.RegisterLibFunc(&_fnJSContextGroupRelease, _javascriptcoreLib, "JSContextGroupRelease") })
 	_register("JSContextGroupRetain", func() { purego.RegisterLibFunc(&_fnJSContextGroupRetain, _javascriptcoreLib, "JSContextGroupRetain") })
 	_register("JSEvaluateScript", func() { purego.RegisterLibFunc(&_fnJSEvaluateScript, _javascriptcoreLib, "JSEvaluateScript") })
 	_register("JSGarbageCollect", func() { purego.RegisterLibFunc(&_fnJSGarbageCollect, _javascriptcoreLib, "JSGarbageCollect") })
-	_register("JSGlobalContextCopyName", func() { purego.RegisterLibFunc(&_fnJSGlobalContextCopyName, _javascriptcoreLib, "JSGlobalContextCopyName") })
+	_register("JSGlobalContextCopyName", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextCopyName, _javascriptcoreLib, "JSGlobalContextCopyName")
+	})
 	_register("JSGlobalContextCreate", func() { purego.RegisterLibFunc(&_fnJSGlobalContextCreate, _javascriptcoreLib, "JSGlobalContextCreate") })
-	_register("JSGlobalContextCreateInGroup", func() { purego.RegisterLibFunc(&_fnJSGlobalContextCreateInGroup, _javascriptcoreLib, "JSGlobalContextCreateInGroup") })
-	_register("JSGlobalContextIsInspectable", func() { purego.RegisterLibFunc(&_fnJSGlobalContextIsInspectable, _javascriptcoreLib, "JSGlobalContextIsInspectable") })
-	_register("JSGlobalContextRelease", func() { purego.RegisterLibFunc(&_fnJSGlobalContextRelease, _javascriptcoreLib, "JSGlobalContextRelease") })
+	_register("JSGlobalContextCreateInGroup", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextCreateInGroup, _javascriptcoreLib, "JSGlobalContextCreateInGroup")
+	})
+	_register("JSGlobalContextIsInspectable", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextIsInspectable, _javascriptcoreLib, "JSGlobalContextIsInspectable")
+	})
+	_register("JSGlobalContextRelease", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextRelease, _javascriptcoreLib, "JSGlobalContextRelease")
+	})
 	_register("JSGlobalContextRetain", func() { purego.RegisterLibFunc(&_fnJSGlobalContextRetain, _javascriptcoreLib, "JSGlobalContextRetain") })
-	_register("JSGlobalContextSetInspectable", func() { purego.RegisterLibFunc(&_fnJSGlobalContextSetInspectable, _javascriptcoreLib, "JSGlobalContextSetInspectable") })
-	_register("JSGlobalContextSetName", func() { purego.RegisterLibFunc(&_fnJSGlobalContextSetName, _javascriptcoreLib, "JSGlobalContextSetName") })
-	_register("JSObjectCallAsConstructor", func() { purego.RegisterLibFunc(&_fnJSObjectCallAsConstructor, _javascriptcoreLib, "JSObjectCallAsConstructor") })
-	_register("JSObjectCallAsFunction", func() { purego.RegisterLibFunc(&_fnJSObjectCallAsFunction, _javascriptcoreLib, "JSObjectCallAsFunction") })
-	_register("JSObjectCopyPropertyNames", func() { purego.RegisterLibFunc(&_fnJSObjectCopyPropertyNames, _javascriptcoreLib, "JSObjectCopyPropertyNames") })
-	_register("JSObjectDeleteProperty", func() { purego.RegisterLibFunc(&_fnJSObjectDeleteProperty, _javascriptcoreLib, "JSObjectDeleteProperty") })
-	_register("JSObjectDeletePropertyForKey", func() { purego.RegisterLibFunc(&_fnJSObjectDeletePropertyForKey, _javascriptcoreLib, "JSObjectDeletePropertyForKey") })
-	_register("JSObjectGetArrayBufferByteLength", func() { purego.RegisterLibFunc(&_fnJSObjectGetArrayBufferByteLength, _javascriptcoreLib, "JSObjectGetArrayBufferByteLength") })
-	_register("JSObjectGetArrayBufferBytesPtr", func() { purego.RegisterLibFunc(&_fnJSObjectGetArrayBufferBytesPtr, _javascriptcoreLib, "JSObjectGetArrayBufferBytesPtr") })
+	_register("JSGlobalContextSetInspectable", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextSetInspectable, _javascriptcoreLib, "JSGlobalContextSetInspectable")
+	})
+	_register("JSGlobalContextSetName", func() {
+		purego.RegisterLibFunc(&_fnJSGlobalContextSetName, _javascriptcoreLib, "JSGlobalContextSetName")
+	})
+	_register("JSObjectCallAsConstructor", func() {
+		purego.RegisterLibFunc(&_fnJSObjectCallAsConstructor, _javascriptcoreLib, "JSObjectCallAsConstructor")
+	})
+	_register("JSObjectCallAsFunction", func() {
+		purego.RegisterLibFunc(&_fnJSObjectCallAsFunction, _javascriptcoreLib, "JSObjectCallAsFunction")
+	})
+	_register("JSObjectCopyPropertyNames", func() {
+		purego.RegisterLibFunc(&_fnJSObjectCopyPropertyNames, _javascriptcoreLib, "JSObjectCopyPropertyNames")
+	})
+	_register("JSObjectDeleteProperty", func() {
+		purego.RegisterLibFunc(&_fnJSObjectDeleteProperty, _javascriptcoreLib, "JSObjectDeleteProperty")
+	})
+	_register("JSObjectDeletePropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnJSObjectDeletePropertyForKey, _javascriptcoreLib, "JSObjectDeletePropertyForKey")
+	})
+	_register("JSObjectGetArrayBufferByteLength", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetArrayBufferByteLength, _javascriptcoreLib, "JSObjectGetArrayBufferByteLength")
+	})
+	_register("JSObjectGetArrayBufferBytesPtr", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetArrayBufferBytesPtr, _javascriptcoreLib, "JSObjectGetArrayBufferBytesPtr")
+	})
 	_register("JSObjectGetPrivate", func() { purego.RegisterLibFunc(&_fnJSObjectGetPrivate, _javascriptcoreLib, "JSObjectGetPrivate") })
 	_register("JSObjectGetProperty", func() { purego.RegisterLibFunc(&_fnJSObjectGetProperty, _javascriptcoreLib, "JSObjectGetProperty") })
-	_register("JSObjectGetPropertyAtIndex", func() { purego.RegisterLibFunc(&_fnJSObjectGetPropertyAtIndex, _javascriptcoreLib, "JSObjectGetPropertyAtIndex") })
-	_register("JSObjectGetPropertyForKey", func() { purego.RegisterLibFunc(&_fnJSObjectGetPropertyForKey, _javascriptcoreLib, "JSObjectGetPropertyForKey") })
+	_register("JSObjectGetPropertyAtIndex", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetPropertyAtIndex, _javascriptcoreLib, "JSObjectGetPropertyAtIndex")
+	})
+	_register("JSObjectGetPropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetPropertyForKey, _javascriptcoreLib, "JSObjectGetPropertyForKey")
+	})
 	_register("JSObjectGetPrototype", func() { purego.RegisterLibFunc(&_fnJSObjectGetPrototype, _javascriptcoreLib, "JSObjectGetPrototype") })
-	_register("JSObjectGetTypedArrayBuffer", func() { purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBuffer, _javascriptcoreLib, "JSObjectGetTypedArrayBuffer") })
-	_register("JSObjectGetTypedArrayByteLength", func() { purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteLength, _javascriptcoreLib, "JSObjectGetTypedArrayByteLength") })
-	_register("JSObjectGetTypedArrayByteOffset", func() { purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteOffset, _javascriptcoreLib, "JSObjectGetTypedArrayByteOffset") })
-	_register("JSObjectGetTypedArrayBytesPtr", func() { purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBytesPtr, _javascriptcoreLib, "JSObjectGetTypedArrayBytesPtr") })
-	_register("JSObjectGetTypedArrayLength", func() { purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayLength, _javascriptcoreLib, "JSObjectGetTypedArrayLength") })
+	_register("JSObjectGetTypedArrayBuffer", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBuffer, _javascriptcoreLib, "JSObjectGetTypedArrayBuffer")
+	})
+	_register("JSObjectGetTypedArrayByteLength", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteLength, _javascriptcoreLib, "JSObjectGetTypedArrayByteLength")
+	})
+	_register("JSObjectGetTypedArrayByteOffset", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteOffset, _javascriptcoreLib, "JSObjectGetTypedArrayByteOffset")
+	})
+	_register("JSObjectGetTypedArrayBytesPtr", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBytesPtr, _javascriptcoreLib, "JSObjectGetTypedArrayBytesPtr")
+	})
+	_register("JSObjectGetTypedArrayLength", func() {
+		purego.RegisterLibFunc(&_fnJSObjectGetTypedArrayLength, _javascriptcoreLib, "JSObjectGetTypedArrayLength")
+	})
 	_register("JSObjectHasProperty", func() { purego.RegisterLibFunc(&_fnJSObjectHasProperty, _javascriptcoreLib, "JSObjectHasProperty") })
-	_register("JSObjectHasPropertyForKey", func() { purego.RegisterLibFunc(&_fnJSObjectHasPropertyForKey, _javascriptcoreLib, "JSObjectHasPropertyForKey") })
+	_register("JSObjectHasPropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnJSObjectHasPropertyForKey, _javascriptcoreLib, "JSObjectHasPropertyForKey")
+	})
 	_register("JSObjectIsConstructor", func() { purego.RegisterLibFunc(&_fnJSObjectIsConstructor, _javascriptcoreLib, "JSObjectIsConstructor") })
 	_register("JSObjectIsFunction", func() { purego.RegisterLibFunc(&_fnJSObjectIsFunction, _javascriptcoreLib, "JSObjectIsFunction") })
 	_register("JSObjectMake", func() { purego.RegisterLibFunc(&_fnJSObjectMake, _javascriptcoreLib, "JSObjectMake") })
 	_register("JSObjectMakeArray", func() { purego.RegisterLibFunc(&_fnJSObjectMakeArray, _javascriptcoreLib, "JSObjectMakeArray") })
-	_register("JSObjectMakeArrayBufferWithBytesNoCopy", func() { purego.RegisterLibFunc(&_fnJSObjectMakeArrayBufferWithBytesNoCopy, _javascriptcoreLib, "JSObjectMakeArrayBufferWithBytesNoCopy") })
-	_register("JSObjectMakeConstructor", func() { purego.RegisterLibFunc(&_fnJSObjectMakeConstructor, _javascriptcoreLib, "JSObjectMakeConstructor") })
+	_register("JSObjectMakeArrayBufferWithBytesNoCopy", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeArrayBufferWithBytesNoCopy, _javascriptcoreLib, "JSObjectMakeArrayBufferWithBytesNoCopy")
+	})
+	_register("JSObjectMakeConstructor", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeConstructor, _javascriptcoreLib, "JSObjectMakeConstructor")
+	})
 	_register("JSObjectMakeDate", func() { purego.RegisterLibFunc(&_fnJSObjectMakeDate, _javascriptcoreLib, "JSObjectMakeDate") })
-	_register("JSObjectMakeDeferredPromise", func() { purego.RegisterLibFunc(&_fnJSObjectMakeDeferredPromise, _javascriptcoreLib, "JSObjectMakeDeferredPromise") })
+	_register("JSObjectMakeDeferredPromise", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeDeferredPromise, _javascriptcoreLib, "JSObjectMakeDeferredPromise")
+	})
 	_register("JSObjectMakeError", func() { purego.RegisterLibFunc(&_fnJSObjectMakeError, _javascriptcoreLib, "JSObjectMakeError") })
 	_register("JSObjectMakeFunction", func() { purego.RegisterLibFunc(&_fnJSObjectMakeFunction, _javascriptcoreLib, "JSObjectMakeFunction") })
-	_register("JSObjectMakeFunctionWithCallback", func() { purego.RegisterLibFunc(&_fnJSObjectMakeFunctionWithCallback, _javascriptcoreLib, "JSObjectMakeFunctionWithCallback") })
+	_register("JSObjectMakeFunctionWithCallback", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeFunctionWithCallback, _javascriptcoreLib, "JSObjectMakeFunctionWithCallback")
+	})
 	_register("JSObjectMakeRegExp", func() { purego.RegisterLibFunc(&_fnJSObjectMakeRegExp, _javascriptcoreLib, "JSObjectMakeRegExp") })
-	_register("JSObjectMakeTypedArray", func() { purego.RegisterLibFunc(&_fnJSObjectMakeTypedArray, _javascriptcoreLib, "JSObjectMakeTypedArray") })
-	_register("JSObjectMakeTypedArrayWithArrayBuffer", func() { purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBuffer, _javascriptcoreLib, "JSObjectMakeTypedArrayWithArrayBuffer") })
-	_register("JSObjectMakeTypedArrayWithArrayBufferAndOffset", func() { purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBufferAndOffset, _javascriptcoreLib, "JSObjectMakeTypedArrayWithArrayBufferAndOffset") })
-	_register("JSObjectMakeTypedArrayWithBytesNoCopy", func() { purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithBytesNoCopy, _javascriptcoreLib, "JSObjectMakeTypedArrayWithBytesNoCopy") })
+	_register("JSObjectMakeTypedArray", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeTypedArray, _javascriptcoreLib, "JSObjectMakeTypedArray")
+	})
+	_register("JSObjectMakeTypedArrayWithArrayBuffer", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBuffer, _javascriptcoreLib, "JSObjectMakeTypedArrayWithArrayBuffer")
+	})
+	_register("JSObjectMakeTypedArrayWithArrayBufferAndOffset", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBufferAndOffset, _javascriptcoreLib, "JSObjectMakeTypedArrayWithArrayBufferAndOffset")
+	})
+	_register("JSObjectMakeTypedArrayWithBytesNoCopy", func() {
+		purego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithBytesNoCopy, _javascriptcoreLib, "JSObjectMakeTypedArrayWithBytesNoCopy")
+	})
 	_register("JSObjectSetPrivate", func() { purego.RegisterLibFunc(&_fnJSObjectSetPrivate, _javascriptcoreLib, "JSObjectSetPrivate") })
 	_register("JSObjectSetProperty", func() { purego.RegisterLibFunc(&_fnJSObjectSetProperty, _javascriptcoreLib, "JSObjectSetProperty") })
-	_register("JSObjectSetPropertyAtIndex", func() { purego.RegisterLibFunc(&_fnJSObjectSetPropertyAtIndex, _javascriptcoreLib, "JSObjectSetPropertyAtIndex") })
-	_register("JSObjectSetPropertyForKey", func() { purego.RegisterLibFunc(&_fnJSObjectSetPropertyForKey, _javascriptcoreLib, "JSObjectSetPropertyForKey") })
+	_register("JSObjectSetPropertyAtIndex", func() {
+		purego.RegisterLibFunc(&_fnJSObjectSetPropertyAtIndex, _javascriptcoreLib, "JSObjectSetPropertyAtIndex")
+	})
+	_register("JSObjectSetPropertyForKey", func() {
+		purego.RegisterLibFunc(&_fnJSObjectSetPropertyForKey, _javascriptcoreLib, "JSObjectSetPropertyForKey")
+	})
 	_register("JSObjectSetPrototype", func() { purego.RegisterLibFunc(&_fnJSObjectSetPrototype, _javascriptcoreLib, "JSObjectSetPrototype") })
-	_register("JSPropertyNameAccumulatorAddName", func() { purego.RegisterLibFunc(&_fnJSPropertyNameAccumulatorAddName, _javascriptcoreLib, "JSPropertyNameAccumulatorAddName") })
-	_register("JSPropertyNameArrayGetCount", func() { purego.RegisterLibFunc(&_fnJSPropertyNameArrayGetCount, _javascriptcoreLib, "JSPropertyNameArrayGetCount") })
-	_register("JSPropertyNameArrayGetNameAtIndex", func() { purego.RegisterLibFunc(&_fnJSPropertyNameArrayGetNameAtIndex, _javascriptcoreLib, "JSPropertyNameArrayGetNameAtIndex") })
-	_register("JSPropertyNameArrayRelease", func() { purego.RegisterLibFunc(&_fnJSPropertyNameArrayRelease, _javascriptcoreLib, "JSPropertyNameArrayRelease") })
-	_register("JSPropertyNameArrayRetain", func() { purego.RegisterLibFunc(&_fnJSPropertyNameArrayRetain, _javascriptcoreLib, "JSPropertyNameArrayRetain") })
+	_register("JSPropertyNameAccumulatorAddName", func() {
+		purego.RegisterLibFunc(&_fnJSPropertyNameAccumulatorAddName, _javascriptcoreLib, "JSPropertyNameAccumulatorAddName")
+	})
+	_register("JSPropertyNameArrayGetCount", func() {
+		purego.RegisterLibFunc(&_fnJSPropertyNameArrayGetCount, _javascriptcoreLib, "JSPropertyNameArrayGetCount")
+	})
+	_register("JSPropertyNameArrayGetNameAtIndex", func() {
+		purego.RegisterLibFunc(&_fnJSPropertyNameArrayGetNameAtIndex, _javascriptcoreLib, "JSPropertyNameArrayGetNameAtIndex")
+	})
+	_register("JSPropertyNameArrayRelease", func() {
+		purego.RegisterLibFunc(&_fnJSPropertyNameArrayRelease, _javascriptcoreLib, "JSPropertyNameArrayRelease")
+	})
+	_register("JSPropertyNameArrayRetain", func() {
+		purego.RegisterLibFunc(&_fnJSPropertyNameArrayRetain, _javascriptcoreLib, "JSPropertyNameArrayRetain")
+	})
 	_register("JSStringCopyCFString", func() { purego.RegisterLibFunc(&_fnJSStringCopyCFString, _javascriptcoreLib, "JSStringCopyCFString") })
-	_register("JSStringCreateWithCFString", func() { purego.RegisterLibFunc(&_fnJSStringCreateWithCFString, _javascriptcoreLib, "JSStringCreateWithCFString") })
-	_register("JSStringCreateWithCharacters", func() { purego.RegisterLibFunc(&_fnJSStringCreateWithCharacters, _javascriptcoreLib, "JSStringCreateWithCharacters") })
-	_register("JSStringCreateWithUTF8CString", func() { purego.RegisterLibFunc(&_fnJSStringCreateWithUTF8CString, _javascriptcoreLib, "JSStringCreateWithUTF8CString") })
-	_register("JSStringGetCharactersPtr", func() { purego.RegisterLibFunc(&_fnJSStringGetCharactersPtr, _javascriptcoreLib, "JSStringGetCharactersPtr") })
+	_register("JSStringCreateWithCFString", func() {
+		purego.RegisterLibFunc(&_fnJSStringCreateWithCFString, _javascriptcoreLib, "JSStringCreateWithCFString")
+	})
+	_register("JSStringCreateWithCharacters", func() {
+		purego.RegisterLibFunc(&_fnJSStringCreateWithCharacters, _javascriptcoreLib, "JSStringCreateWithCharacters")
+	})
+	_register("JSStringCreateWithUTF8CString", func() {
+		purego.RegisterLibFunc(&_fnJSStringCreateWithUTF8CString, _javascriptcoreLib, "JSStringCreateWithUTF8CString")
+	})
+	_register("JSStringGetCharactersPtr", func() {
+		purego.RegisterLibFunc(&_fnJSStringGetCharactersPtr, _javascriptcoreLib, "JSStringGetCharactersPtr")
+	})
 	_register("JSStringGetLength", func() { purego.RegisterLibFunc(&_fnJSStringGetLength, _javascriptcoreLib, "JSStringGetLength") })
-	_register("JSStringGetMaximumUTF8CStringSize", func() { purego.RegisterLibFunc(&_fnJSStringGetMaximumUTF8CStringSize, _javascriptcoreLib, "JSStringGetMaximumUTF8CStringSize") })
-	_register("JSStringGetUTF8CString", func() { purego.RegisterLibFunc(&_fnJSStringGetUTF8CString, _javascriptcoreLib, "JSStringGetUTF8CString") })
+	_register("JSStringGetMaximumUTF8CStringSize", func() {
+		purego.RegisterLibFunc(&_fnJSStringGetMaximumUTF8CStringSize, _javascriptcoreLib, "JSStringGetMaximumUTF8CStringSize")
+	})
+	_register("JSStringGetUTF8CString", func() {
+		purego.RegisterLibFunc(&_fnJSStringGetUTF8CString, _javascriptcoreLib, "JSStringGetUTF8CString")
+	})
 	_register("JSStringIsEqual", func() { purego.RegisterLibFunc(&_fnJSStringIsEqual, _javascriptcoreLib, "JSStringIsEqual") })
-	_register("JSStringIsEqualToUTF8CString", func() { purego.RegisterLibFunc(&_fnJSStringIsEqualToUTF8CString, _javascriptcoreLib, "JSStringIsEqualToUTF8CString") })
+	_register("JSStringIsEqualToUTF8CString", func() {
+		purego.RegisterLibFunc(&_fnJSStringIsEqualToUTF8CString, _javascriptcoreLib, "JSStringIsEqualToUTF8CString")
+	})
 	_register("JSStringRelease", func() { purego.RegisterLibFunc(&_fnJSStringRelease, _javascriptcoreLib, "JSStringRelease") })
 	_register("JSStringRetain", func() { purego.RegisterLibFunc(&_fnJSStringRetain, _javascriptcoreLib, "JSStringRetain") })
 	_register("JSValueCompare", func() { purego.RegisterLibFunc(&_fnJSValueCompare, _javascriptcoreLib, "JSValueCompare") })
 	_register("JSValueCompareDouble", func() { purego.RegisterLibFunc(&_fnJSValueCompareDouble, _javascriptcoreLib, "JSValueCompareDouble") })
 	_register("JSValueCompareInt64", func() { purego.RegisterLibFunc(&_fnJSValueCompareInt64, _javascriptcoreLib, "JSValueCompareInt64") })
 	_register("JSValueCompareUInt64", func() { purego.RegisterLibFunc(&_fnJSValueCompareUInt64, _javascriptcoreLib, "JSValueCompareUInt64") })
-	_register("JSValueCreateJSONString", func() { purego.RegisterLibFunc(&_fnJSValueCreateJSONString, _javascriptcoreLib, "JSValueCreateJSONString") })
+	_register("JSValueCreateJSONString", func() {
+		purego.RegisterLibFunc(&_fnJSValueCreateJSONString, _javascriptcoreLib, "JSValueCreateJSONString")
+	})
 	_register("JSValueGetType", func() { purego.RegisterLibFunc(&_fnJSValueGetType, _javascriptcoreLib, "JSValueGetType") })
-	_register("JSValueGetTypedArrayType", func() { purego.RegisterLibFunc(&_fnJSValueGetTypedArrayType, _javascriptcoreLib, "JSValueGetTypedArrayType") })
+	_register("JSValueGetTypedArrayType", func() {
+		purego.RegisterLibFunc(&_fnJSValueGetTypedArrayType, _javascriptcoreLib, "JSValueGetTypedArrayType")
+	})
 	_register("JSValueIsArray", func() { purego.RegisterLibFunc(&_fnJSValueIsArray, _javascriptcoreLib, "JSValueIsArray") })
 	_register("JSValueIsBigInt", func() { purego.RegisterLibFunc(&_fnJSValueIsBigInt, _javascriptcoreLib, "JSValueIsBigInt") })
 	_register("JSValueIsBoolean", func() { purego.RegisterLibFunc(&_fnJSValueIsBoolean, _javascriptcoreLib, "JSValueIsBoolean") })
 	_register("JSValueIsDate", func() { purego.RegisterLibFunc(&_fnJSValueIsDate, _javascriptcoreLib, "JSValueIsDate") })
 	_register("JSValueIsEqual", func() { purego.RegisterLibFunc(&_fnJSValueIsEqual, _javascriptcoreLib, "JSValueIsEqual") })
-	_register("JSValueIsInstanceOfConstructor", func() { purego.RegisterLibFunc(&_fnJSValueIsInstanceOfConstructor, _javascriptcoreLib, "JSValueIsInstanceOfConstructor") })
+	_register("JSValueIsInstanceOfConstructor", func() {
+		purego.RegisterLibFunc(&_fnJSValueIsInstanceOfConstructor, _javascriptcoreLib, "JSValueIsInstanceOfConstructor")
+	})
 	_register("JSValueIsNull", func() { purego.RegisterLibFunc(&_fnJSValueIsNull, _javascriptcoreLib, "JSValueIsNull") })
 	_register("JSValueIsNumber", func() { purego.RegisterLibFunc(&_fnJSValueIsNumber, _javascriptcoreLib, "JSValueIsNumber") })
 	_register("JSValueIsObject", func() { purego.RegisterLibFunc(&_fnJSValueIsObject, _javascriptcoreLib, "JSValueIsObject") })
-	_register("JSValueIsObjectOfClass", func() { purego.RegisterLibFunc(&_fnJSValueIsObjectOfClass, _javascriptcoreLib, "JSValueIsObjectOfClass") })
+	_register("JSValueIsObjectOfClass", func() {
+		purego.RegisterLibFunc(&_fnJSValueIsObjectOfClass, _javascriptcoreLib, "JSValueIsObjectOfClass")
+	})
 	_register("JSValueIsStrictEqual", func() { purego.RegisterLibFunc(&_fnJSValueIsStrictEqual, _javascriptcoreLib, "JSValueIsStrictEqual") })
 	_register("JSValueIsString", func() { purego.RegisterLibFunc(&_fnJSValueIsString, _javascriptcoreLib, "JSValueIsString") })
 	_register("JSValueIsSymbol", func() { purego.RegisterLibFunc(&_fnJSValueIsSymbol, _javascriptcoreLib, "JSValueIsSymbol") })
 	_register("JSValueIsUndefined", func() { purego.RegisterLibFunc(&_fnJSValueIsUndefined, _javascriptcoreLib, "JSValueIsUndefined") })
 	_register("JSValueMakeBoolean", func() { purego.RegisterLibFunc(&_fnJSValueMakeBoolean, _javascriptcoreLib, "JSValueMakeBoolean") })
-	_register("JSValueMakeFromJSONString", func() { purego.RegisterLibFunc(&_fnJSValueMakeFromJSONString, _javascriptcoreLib, "JSValueMakeFromJSONString") })
+	_register("JSValueMakeFromJSONString", func() {
+		purego.RegisterLibFunc(&_fnJSValueMakeFromJSONString, _javascriptcoreLib, "JSValueMakeFromJSONString")
+	})
 	_register("JSValueMakeNull", func() { purego.RegisterLibFunc(&_fnJSValueMakeNull, _javascriptcoreLib, "JSValueMakeNull") })
 	_register("JSValueMakeNumber", func() { purego.RegisterLibFunc(&_fnJSValueMakeNumber, _javascriptcoreLib, "JSValueMakeNumber") })
 	_register("JSValueMakeString", func() { purego.RegisterLibFunc(&_fnJSValueMakeString, _javascriptcoreLib, "JSValueMakeString") })

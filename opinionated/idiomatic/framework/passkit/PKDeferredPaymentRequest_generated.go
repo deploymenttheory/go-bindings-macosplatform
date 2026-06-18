@@ -189,4 +189,3 @@ type DeferredPaymentRequestable interface {
 }
 
 var _ DeferredPaymentRequestable = (*DeferredPaymentRequest)(nil)
-

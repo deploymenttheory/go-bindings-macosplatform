@@ -17,22 +17,22 @@ type MPSNNImageNode struct {
 }
 
 var (
-	_clsMPSNNImageNode = _objcClass("MPSNNImageNode")
-	_mPSNNImageNodeSelInitWithHandle = objc.RegisterName("initWithHandle:")
-	_mPSNNImageNodeSelNodeWithHandle = objc.RegisterName("nodeWithHandle:")
+	_clsMPSNNImageNode                       = _objcClass("MPSNNImageNode")
+	_mPSNNImageNodeSelInitWithHandle         = objc.RegisterName("initWithHandle:")
+	_mPSNNImageNodeSelNodeWithHandle         = objc.RegisterName("nodeWithHandle:")
 	_mPSNNImageNodeSelExportedNodeWithHandle = objc.RegisterName("exportedNodeWithHandle:")
-	_mPSNNImageNodeSelHandle = objc.RegisterName("handle")
-	_mPSNNImageNodeSelSetHandle = objc.RegisterName("setHandle:")
-	_mPSNNImageNodeSelFormat = objc.RegisterName("format")
-	_mPSNNImageNodeSelSetFormat = objc.RegisterName("setFormat:")
-	_mPSNNImageNodeSelImageAllocator = objc.RegisterName("imageAllocator")
-	_mPSNNImageNodeSelSetImageAllocator = objc.RegisterName("setImageAllocator:")
-	_mPSNNImageNodeSelExportFromGraph = objc.RegisterName("exportFromGraph")
-	_mPSNNImageNodeSelSetExportFromGraph = objc.RegisterName("setExportFromGraph:")
-	_mPSNNImageNodeSelSynchronizeResource = objc.RegisterName("synchronizeResource")
+	_mPSNNImageNodeSelHandle                 = objc.RegisterName("handle")
+	_mPSNNImageNodeSelSetHandle              = objc.RegisterName("setHandle:")
+	_mPSNNImageNodeSelFormat                 = objc.RegisterName("format")
+	_mPSNNImageNodeSelSetFormat              = objc.RegisterName("setFormat:")
+	_mPSNNImageNodeSelImageAllocator         = objc.RegisterName("imageAllocator")
+	_mPSNNImageNodeSelSetImageAllocator      = objc.RegisterName("setImageAllocator:")
+	_mPSNNImageNodeSelExportFromGraph        = objc.RegisterName("exportFromGraph")
+	_mPSNNImageNodeSelSetExportFromGraph     = objc.RegisterName("setExportFromGraph:")
+	_mPSNNImageNodeSelSynchronizeResource    = objc.RegisterName("synchronizeResource")
 	_mPSNNImageNodeSelSetSynchronizeResource = objc.RegisterName("setSynchronizeResource:")
-	_mPSNNImageNodeSelStopGradient = objc.RegisterName("stopGradient")
-	_mPSNNImageNodeSelSetStopGradient = objc.RegisterName("setStopGradient:")
+	_mPSNNImageNodeSelStopGradient           = objc.RegisterName("stopGradient")
+	_mPSNNImageNodeSelSetStopGradient        = objc.RegisterName("setStopGradient:")
 )
 
 func MPSNNImageNodeFromID(id objc.ID) *MPSNNImageNode {
@@ -47,20 +47,26 @@ func MPSNNImageNodeFromID(id objc.ID) *MPSNNImageNode {
 
 func (o *MPSNNImageNode) InitWithHandle(handle *foundation.NSObject) *MPSNNImageNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNImageNodeSelInitWithHandle, handle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNImageNodeFromID(_ret)
 }
 
 func MPSNNImageNodeNodeWithHandle(handle *foundation.NSObject) *MPSNNImageNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNImageNode), _mPSNNImageNodeSelNodeWithHandle, handle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNImageNodeFromID(_ret)
 }
 
 // @abstract Create a autoreleased MPSNNImageNode with exportFromGraph = YES. @discussion Note: image is still temporary. See MPSNNImageNode.imageAllocator parameter.
 func MPSNNImageNodeExportedNodeWithHandle(handle *foundation.NSObject) *MPSNNImageNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNImageNode), _mPSNNImageNodeSelExportedNodeWithHandle, handle.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNImageNodeFromID(_ret)
 }
 
@@ -123,4 +129,3 @@ func (o *MPSNNImageNode) StopGradient() bool {
 func (o *MPSNNImageNode) SetStopGradient(stopGradient bool) {
 	o.Ptr().Send(_mPSNNImageNodeSelSetStopGradient, stopGradient)
 }
-

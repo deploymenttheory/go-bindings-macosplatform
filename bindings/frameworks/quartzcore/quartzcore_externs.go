@@ -31,7 +31,9 @@ func CADynamicRangeStandard() uintptr {
 
 func CAFrameRateRangeDefault() CAFrameRateRange {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CAFrameRateRangeDefault")
-	if ptr == 0 { return CAFrameRateRange{} }
+	if ptr == 0 {
+		return CAFrameRateRange{}
+	}
 	return *(*CAFrameRateRange)(unsafe.Pointer(ptr))
 }
 
@@ -52,7 +54,9 @@ func CAToneMapModeNever() uintptr {
 
 func CATransform3DIdentity() CATransform3D {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "CATransform3DIdentity")
-	if ptr == 0 { return CATransform3D{} }
+	if ptr == 0 {
+		return CATransform3D{}
+	}
 	return *(*CATransform3D)(unsafe.Pointer(ptr))
 }
 
@@ -575,4 +579,3 @@ func KCAValueFunctionTranslateZ() uintptr {
 	ptr, _ := purego.Dlsym(_quartzcoreLib, "kCAValueFunctionTranslateZ")
 	return ptr
 }
-

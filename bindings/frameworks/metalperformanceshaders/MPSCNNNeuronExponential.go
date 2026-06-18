@@ -17,7 +17,7 @@ type MPSCNNNeuronExponential struct {
 }
 
 var (
-	_clsMPSCNNNeuronExponential = _objcClass("MPSCNNNeuronExponential")
+	_clsMPSCNNNeuronExponential                  = _objcClass("MPSCNNNeuronExponential")
 	_mPSCNNNeuronExponentialSelInitWithDeviceABC = objc.RegisterName("initWithDevice:a:b:c:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNNeuronExponentialFromID(id objc.ID) *MPSCNNNeuronExponential {
 // @abstract   Initialize a Exponential neuron filter. @param      device          The device the filter will run on. @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @param      c               Filter property "c". See class discussion. @return     A valid MPSCNNNeuronExponential object or nil, if failure.
 func (o *MPSCNNNeuronExponential) InitWithDeviceABC(device metal.MTLDevice, a float32, b float32, c float32) *MPSCNNNeuronExponential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronExponentialSelInitWithDeviceABC, device, a, b, c)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronExponentialFromID(_ret)
 }
-

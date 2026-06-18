@@ -20,35 +20,35 @@ type IOUSBHostObject struct {
 }
 
 var (
-	_clsIOUSBHostObject = _objcClass("IOUSBHostObject")
-	_iOUSBHostObjectSelInitWithIOServiceOptionsQueueErrorInterestHandler = objc.RegisterName("initWithIOService:options:queue:error:interestHandler:")
-	_iOUSBHostObjectSelInitWithIOServiceQueueErrorInterestHandler = objc.RegisterName("initWithIOService:queue:error:interestHandler:")
-	_iOUSBHostObjectSelDestroy = objc.RegisterName("destroy")
-	_iOUSBHostObjectSelDestroyWithOptions = objc.RegisterName("destroyWithOptions:")
-	_iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredCompletionTimeoutError = objc.RegisterName("sendDeviceRequest:data:bytesTransferred:completionTimeout:error:")
-	_iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredError = objc.RegisterName("sendDeviceRequest:data:bytesTransferred:error:")
-	_iOUSBHostObjectSelSendDeviceRequestError = objc.RegisterName("sendDeviceRequest:error:")
-	_iOUSBHostObjectSelEnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler = objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:")
-	_iOUSBHostObjectSelEnqueueDeviceRequestDataErrorCompletionHandler = objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:")
-	_iOUSBHostObjectSelEnqueueDeviceRequestErrorCompletionHandler = objc.RegisterName("enqueueDeviceRequest:error:completionHandler:")
-	_iOUSBHostObjectSelAbortDeviceRequestsWithOptionError = objc.RegisterName("abortDeviceRequestsWithOption:error:")
-	_iOUSBHostObjectSelAbortDeviceRequestsWithError = objc.RegisterName("abortDeviceRequestsWithError:")
+	_clsIOUSBHostObject                                                                        = _objcClass("IOUSBHostObject")
+	_iOUSBHostObjectSelInitWithIOServiceOptionsQueueErrorInterestHandler                       = objc.RegisterName("initWithIOService:options:queue:error:interestHandler:")
+	_iOUSBHostObjectSelInitWithIOServiceQueueErrorInterestHandler                              = objc.RegisterName("initWithIOService:queue:error:interestHandler:")
+	_iOUSBHostObjectSelDestroy                                                                 = objc.RegisterName("destroy")
+	_iOUSBHostObjectSelDestroyWithOptions                                                      = objc.RegisterName("destroyWithOptions:")
+	_iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredCompletionTimeoutError             = objc.RegisterName("sendDeviceRequest:data:bytesTransferred:completionTimeout:error:")
+	_iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredError                              = objc.RegisterName("sendDeviceRequest:data:bytesTransferred:error:")
+	_iOUSBHostObjectSelSendDeviceRequestError                                                  = objc.RegisterName("sendDeviceRequest:error:")
+	_iOUSBHostObjectSelEnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler         = objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:")
+	_iOUSBHostObjectSelEnqueueDeviceRequestDataErrorCompletionHandler                          = objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:")
+	_iOUSBHostObjectSelEnqueueDeviceRequestErrorCompletionHandler                              = objc.RegisterName("enqueueDeviceRequest:error:completionHandler:")
+	_iOUSBHostObjectSelAbortDeviceRequestsWithOptionError                                      = objc.RegisterName("abortDeviceRequestsWithOption:error:")
+	_iOUSBHostObjectSelAbortDeviceRequestsWithError                                            = objc.RegisterName("abortDeviceRequestsWithError:")
 	_iOUSBHostObjectSelDescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError = objc.RegisterName("descriptorWithType:length:index:languageID:requestType:requestRecipient:error:")
-	_iOUSBHostObjectSelDescriptorWithTypeLengthIndexLanguageIDError = objc.RegisterName("descriptorWithType:length:index:languageID:error:")
-	_iOUSBHostObjectSelDescriptorWithTypeLengthError = objc.RegisterName("descriptorWithType:length:error:")
-	_iOUSBHostObjectSelConfigurationDescriptorWithIndexError = objc.RegisterName("configurationDescriptorWithIndex:error:")
-	_iOUSBHostObjectSelConfigurationDescriptorWithConfigurationValueError = objc.RegisterName("configurationDescriptorWithConfigurationValue:error:")
-	_iOUSBHostObjectSelStringWithIndexLanguageIDError = objc.RegisterName("stringWithIndex:languageID:error:")
-	_iOUSBHostObjectSelStringWithIndexError = objc.RegisterName("stringWithIndex:error:")
-	_iOUSBHostObjectSelFrameNumberWithTime = objc.RegisterName("frameNumberWithTime:")
-	_iOUSBHostObjectSelCurrentMicroframeWithTimeError = objc.RegisterName("currentMicroframeWithTime:error:")
-	_iOUSBHostObjectSelReferenceMicroframeWithTimeError = objc.RegisterName("referenceMicroframeWithTime:error:")
-	_iOUSBHostObjectSelIoDataWithCapacityError = objc.RegisterName("ioDataWithCapacity:error:")
-	_iOUSBHostObjectSelIoService = objc.RegisterName("ioService")
-	_iOUSBHostObjectSelQueue = objc.RegisterName("queue")
-	_iOUSBHostObjectSelDeviceDescriptor = objc.RegisterName("deviceDescriptor")
-	_iOUSBHostObjectSelCapabilityDescriptors = objc.RegisterName("capabilityDescriptors")
-	_iOUSBHostObjectSelDeviceAddress = objc.RegisterName("deviceAddress")
+	_iOUSBHostObjectSelDescriptorWithTypeLengthIndexLanguageIDError                            = objc.RegisterName("descriptorWithType:length:index:languageID:error:")
+	_iOUSBHostObjectSelDescriptorWithTypeLengthError                                           = objc.RegisterName("descriptorWithType:length:error:")
+	_iOUSBHostObjectSelConfigurationDescriptorWithIndexError                                   = objc.RegisterName("configurationDescriptorWithIndex:error:")
+	_iOUSBHostObjectSelConfigurationDescriptorWithConfigurationValueError                      = objc.RegisterName("configurationDescriptorWithConfigurationValue:error:")
+	_iOUSBHostObjectSelStringWithIndexLanguageIDError                                          = objc.RegisterName("stringWithIndex:languageID:error:")
+	_iOUSBHostObjectSelStringWithIndexError                                                    = objc.RegisterName("stringWithIndex:error:")
+	_iOUSBHostObjectSelFrameNumberWithTime                                                     = objc.RegisterName("frameNumberWithTime:")
+	_iOUSBHostObjectSelCurrentMicroframeWithTimeError                                          = objc.RegisterName("currentMicroframeWithTime:error:")
+	_iOUSBHostObjectSelReferenceMicroframeWithTimeError                                        = objc.RegisterName("referenceMicroframeWithTime:error:")
+	_iOUSBHostObjectSelIoDataWithCapacityError                                                 = objc.RegisterName("ioDataWithCapacity:error:")
+	_iOUSBHostObjectSelIoService                                                               = objc.RegisterName("ioService")
+	_iOUSBHostObjectSelQueue                                                                   = objc.RegisterName("queue")
+	_iOUSBHostObjectSelDeviceDescriptor                                                        = objc.RegisterName("deviceDescriptor")
+	_iOUSBHostObjectSelCapabilityDescriptors                                                   = objc.RegisterName("capabilityDescriptors")
+	_iOUSBHostObjectSelDeviceAddress                                                           = objc.RegisterName("deviceAddress")
 )
 
 func IOUSBHostObjectFromID(id objc.ID) *IOUSBHostObject {
@@ -74,7 +74,9 @@ func (o *IOUSBHostObject) InitWithIOServiceOptionsQueueErrorInterestHandler(ioSe
 		defer __block_interestHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelInitWithIOServiceOptionsQueueErrorInterestHandler, ioService, options, queue.Ptr(), error_, __block_interestHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostObjectFromID(_ret)
 }
 
@@ -91,7 +93,9 @@ func (o *IOUSBHostObject) InitWithIOServiceQueueErrorInterestHandler(ioService u
 		defer __block_interestHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelInitWithIOServiceQueueErrorInterestHandler, ioService, queue.Ptr(), error_, __block_interestHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostObjectFromID(_ret)
 }
 
@@ -248,7 +252,9 @@ func (o *IOUSBHostObject) ConfigurationDescriptorWithConfigurationValueError(con
 func (o *IOUSBHostObject) StringWithIndexLanguageIDError(index uint, languageID uint) (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelStringWithIndexLanguageIDError, index, languageID, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -259,7 +265,9 @@ func (o *IOUSBHostObject) StringWithIndexLanguageIDError(index uint, languageID 
 func (o *IOUSBHostObject) StringWithIndexError(index uint) (*foundation.NSString, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelStringWithIndexError, index, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -296,7 +304,9 @@ func (o *IOUSBHostObject) ReferenceMicroframeWithTimeError(time_ *uint64) (uint6
 func (o *IOUSBHostObject) IoDataWithCapacityError(capacity uint) (*foundation.NSMutableData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelIoDataWithCapacityError, capacity, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -312,7 +322,9 @@ func (o *IOUSBHostObject) IoService() uint {
 // @brief      The dispatch queue that all asynchronous io will be serviced.
 func (o *IOUSBHostObject) Queue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostObjectSelQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -333,4 +345,3 @@ func (o *IOUSBHostObject) DeviceAddress() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iOUSBHostObjectSelDeviceAddress)
 	return _ret
 }
-

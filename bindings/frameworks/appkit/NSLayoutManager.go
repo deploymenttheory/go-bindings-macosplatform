@@ -19,157 +19,157 @@ type NSLayoutManager struct {
 }
 
 var (
-	_clsNSLayoutManager = _objcClass("NSLayoutManager")
-	_nSLayoutManagerSelInit = objc.RegisterName("init")
-	_nSLayoutManagerSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSLayoutManagerSelReplaceTextStorage = objc.RegisterName("replaceTextStorage:")
-	_nSLayoutManagerSelAddTextContainer = objc.RegisterName("addTextContainer:")
-	_nSLayoutManagerSelInsertTextContainerAtIndex = objc.RegisterName("insertTextContainer:atIndex:")
-	_nSLayoutManagerSelRemoveTextContainerAtIndex = objc.RegisterName("removeTextContainerAtIndex:")
-	_nSLayoutManagerSelTextContainerChangedGeometry = objc.RegisterName("textContainerChangedGeometry:")
-	_nSLayoutManagerSelTextContainerChangedTextView = objc.RegisterName("textContainerChangedTextView:")
-	_nSLayoutManagerSelInvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange = objc.RegisterName("invalidateGlyphsForCharacterRange:changeInLength:actualCharacterRange:")
-	_nSLayoutManagerSelInvalidateLayoutForCharacterRangeActualCharacterRange = objc.RegisterName("invalidateLayoutForCharacterRange:actualCharacterRange:")
-	_nSLayoutManagerSelInvalidateDisplayForCharacterRange = objc.RegisterName("invalidateDisplayForCharacterRange:")
-	_nSLayoutManagerSelInvalidateDisplayForGlyphRange = objc.RegisterName("invalidateDisplayForGlyphRange:")
-	_nSLayoutManagerSelProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange = objc.RegisterName("processEditingForTextStorage:edited:range:changeInLength:invalidatedRange:")
-	_nSLayoutManagerSelEnsureGlyphsForCharacterRange = objc.RegisterName("ensureGlyphsForCharacterRange:")
-	_nSLayoutManagerSelEnsureGlyphsForGlyphRange = objc.RegisterName("ensureGlyphsForGlyphRange:")
-	_nSLayoutManagerSelEnsureLayoutForCharacterRange = objc.RegisterName("ensureLayoutForCharacterRange:")
-	_nSLayoutManagerSelEnsureLayoutForGlyphRange = objc.RegisterName("ensureLayoutForGlyphRange:")
-	_nSLayoutManagerSelEnsureLayoutForTextContainer = objc.RegisterName("ensureLayoutForTextContainer:")
-	_nSLayoutManagerSelEnsureLayoutForBoundingRectInTextContainer = objc.RegisterName("ensureLayoutForBoundingRect:inTextContainer:")
-	_nSLayoutManagerSelSetGlyphsPropertiesCharacterIndexesFontForGlyphRange = objc.RegisterName("setGlyphs:properties:characterIndexes:font:forGlyphRange:")
-	_nSLayoutManagerSelCGGlyphAtIndexIsValidIndex = objc.RegisterName("CGGlyphAtIndex:isValidIndex:")
-	_nSLayoutManagerSelCGGlyphAtIndex = objc.RegisterName("CGGlyphAtIndex:")
-	_nSLayoutManagerSelIsValidGlyphIndex = objc.RegisterName("isValidGlyphIndex:")
-	_nSLayoutManagerSelPropertyForGlyphAtIndex = objc.RegisterName("propertyForGlyphAtIndex:")
-	_nSLayoutManagerSelCharacterIndexForGlyphAtIndex = objc.RegisterName("characterIndexForGlyphAtIndex:")
-	_nSLayoutManagerSelGlyphIndexForCharacterAtIndex = objc.RegisterName("glyphIndexForCharacterAtIndex:")
-	_nSLayoutManagerSelGetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels = objc.RegisterName("getGlyphsInRange:glyphs:properties:characterIndexes:bidiLevels:")
-	_nSLayoutManagerSelSetTextContainerForGlyphRange = objc.RegisterName("setTextContainer:forGlyphRange:")
-	_nSLayoutManagerSelSetLineFragmentRectForGlyphRangeUsedRect = objc.RegisterName("setLineFragmentRect:forGlyphRange:usedRect:")
-	_nSLayoutManagerSelSetExtraLineFragmentRectUsedRectTextContainer = objc.RegisterName("setExtraLineFragmentRect:usedRect:textContainer:")
-	_nSLayoutManagerSelSetLocationForStartOfGlyphRange = objc.RegisterName("setLocation:forStartOfGlyphRange:")
-	_nSLayoutManagerSelSetNotShownAttributeForGlyphAtIndex = objc.RegisterName("setNotShownAttribute:forGlyphAtIndex:")
-	_nSLayoutManagerSelSetDrawsOutsideLineFragmentForGlyphAtIndex = objc.RegisterName("setDrawsOutsideLineFragment:forGlyphAtIndex:")
-	_nSLayoutManagerSelSetAttachmentSizeForGlyphRange = objc.RegisterName("setAttachmentSize:forGlyphRange:")
-	_nSLayoutManagerSelGetFirstUnlaidCharacterIndexGlyphIndex = objc.RegisterName("getFirstUnlaidCharacterIndex:glyphIndex:")
-	_nSLayoutManagerSelFirstUnlaidCharacterIndex = objc.RegisterName("firstUnlaidCharacterIndex")
-	_nSLayoutManagerSelFirstUnlaidGlyphIndex = objc.RegisterName("firstUnlaidGlyphIndex")
-	_nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRange = objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:")
-	_nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout = objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
-	_nSLayoutManagerSelUsedRectForTextContainer = objc.RegisterName("usedRectForTextContainer:")
-	_nSLayoutManagerSelLineFragmentRectForGlyphAtIndexEffectiveRange = objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:")
-	_nSLayoutManagerSelLineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout = objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
-	_nSLayoutManagerSelLineFragmentUsedRectForGlyphAtIndexEffectiveRange = objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:")
-	_nSLayoutManagerSelLineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout = objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
-	_nSLayoutManagerSelLocationForGlyphAtIndex = objc.RegisterName("locationForGlyphAtIndex:")
-	_nSLayoutManagerSelNotShownAttributeForGlyphAtIndex = objc.RegisterName("notShownAttributeForGlyphAtIndex:")
-	_nSLayoutManagerSelDrawsOutsideLineFragmentForGlyphAtIndex = objc.RegisterName("drawsOutsideLineFragmentForGlyphAtIndex:")
-	_nSLayoutManagerSelAttachmentSizeForGlyphAtIndex = objc.RegisterName("attachmentSizeForGlyphAtIndex:")
-	_nSLayoutManagerSelTruncatedGlyphRangeInLineFragmentForGlyphAtIndex = objc.RegisterName("truncatedGlyphRangeInLineFragmentForGlyphAtIndex:")
-	_nSLayoutManagerSelGlyphRangeForCharacterRangeActualCharacterRange = objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:")
-	_nSLayoutManagerSelCharacterRangeForGlyphRangeActualGlyphRange = objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:")
-	_nSLayoutManagerSelGlyphRangeForTextContainer = objc.RegisterName("glyphRangeForTextContainer:")
-	_nSLayoutManagerSelRangeOfNominallySpacedGlyphsContainingIndex = objc.RegisterName("rangeOfNominallySpacedGlyphsContainingIndex:")
-	_nSLayoutManagerSelBoundingRectForGlyphRangeInTextContainer = objc.RegisterName("boundingRectForGlyphRange:inTextContainer:")
-	_nSLayoutManagerSelGlyphRangeForBoundingRectInTextContainer = objc.RegisterName("glyphRangeForBoundingRect:inTextContainer:")
-	_nSLayoutManagerSelGlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer = objc.RegisterName("glyphRangeForBoundingRectWithoutAdditionalLayout:inTextContainer:")
-	_nSLayoutManagerSelGlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph = objc.RegisterName("glyphIndexForPoint:inTextContainer:fractionOfDistanceThroughGlyph:")
-	_nSLayoutManagerSelGlyphIndexForPointInTextContainer = objc.RegisterName("glyphIndexForPoint:inTextContainer:")
-	_nSLayoutManagerSelFractionOfDistanceThroughGlyphForPointInTextContainer = objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:inTextContainer:")
-	_nSLayoutManagerSelCharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints = objc.RegisterName("characterIndexForPoint:inTextContainer:fractionOfDistanceBetweenInsertionPoints:")
-	_nSLayoutManagerSelGetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes = objc.RegisterName("getLineFragmentInsertionPointsForCharacterAtIndex:alternatePositions:inDisplayOrder:positions:characterIndexes:")
-	_nSLayoutManagerSelEnumerateLineFragmentsForGlyphRangeUsing = objc.RegisterName("enumerateLineFragmentsForGlyphRange:usingBlock:")
-	_nSLayoutManagerSelEnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing = objc.RegisterName("enumerateEnclosingRectsForGlyphRange:withinSelectedGlyphRange:inTextContainer:usingBlock:")
-	_nSLayoutManagerSelDrawBackgroundForGlyphRangeAtPoint = objc.RegisterName("drawBackgroundForGlyphRange:atPoint:")
-	_nSLayoutManagerSelDrawGlyphsForGlyphRangeAtPoint = objc.RegisterName("drawGlyphsForGlyphRange:atPoint:")
-	_nSLayoutManagerSelShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext = objc.RegisterName("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:")
-	_nSLayoutManagerSelFillBackgroundRectArrayCountForCharacterRangeColor = objc.RegisterName("fillBackgroundRectArray:count:forCharacterRange:color:")
-	_nSLayoutManagerSelDrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin = objc.RegisterName("drawUnderlineForGlyphRange:underlineType:baselineOffset:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
-	_nSLayoutManagerSelUnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin = objc.RegisterName("underlineGlyphRange:underlineType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
+	_clsNSLayoutManager                                                                                                                   = _objcClass("NSLayoutManager")
+	_nSLayoutManagerSelInit                                                                                                               = objc.RegisterName("init")
+	_nSLayoutManagerSelInitWithCoder                                                                                                      = objc.RegisterName("initWithCoder:")
+	_nSLayoutManagerSelReplaceTextStorage                                                                                                 = objc.RegisterName("replaceTextStorage:")
+	_nSLayoutManagerSelAddTextContainer                                                                                                   = objc.RegisterName("addTextContainer:")
+	_nSLayoutManagerSelInsertTextContainerAtIndex                                                                                         = objc.RegisterName("insertTextContainer:atIndex:")
+	_nSLayoutManagerSelRemoveTextContainerAtIndex                                                                                         = objc.RegisterName("removeTextContainerAtIndex:")
+	_nSLayoutManagerSelTextContainerChangedGeometry                                                                                       = objc.RegisterName("textContainerChangedGeometry:")
+	_nSLayoutManagerSelTextContainerChangedTextView                                                                                       = objc.RegisterName("textContainerChangedTextView:")
+	_nSLayoutManagerSelInvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange                                                = objc.RegisterName("invalidateGlyphsForCharacterRange:changeInLength:actualCharacterRange:")
+	_nSLayoutManagerSelInvalidateLayoutForCharacterRangeActualCharacterRange                                                              = objc.RegisterName("invalidateLayoutForCharacterRange:actualCharacterRange:")
+	_nSLayoutManagerSelInvalidateDisplayForCharacterRange                                                                                 = objc.RegisterName("invalidateDisplayForCharacterRange:")
+	_nSLayoutManagerSelInvalidateDisplayForGlyphRange                                                                                     = objc.RegisterName("invalidateDisplayForGlyphRange:")
+	_nSLayoutManagerSelProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange                                              = objc.RegisterName("processEditingForTextStorage:edited:range:changeInLength:invalidatedRange:")
+	_nSLayoutManagerSelEnsureGlyphsForCharacterRange                                                                                      = objc.RegisterName("ensureGlyphsForCharacterRange:")
+	_nSLayoutManagerSelEnsureGlyphsForGlyphRange                                                                                          = objc.RegisterName("ensureGlyphsForGlyphRange:")
+	_nSLayoutManagerSelEnsureLayoutForCharacterRange                                                                                      = objc.RegisterName("ensureLayoutForCharacterRange:")
+	_nSLayoutManagerSelEnsureLayoutForGlyphRange                                                                                          = objc.RegisterName("ensureLayoutForGlyphRange:")
+	_nSLayoutManagerSelEnsureLayoutForTextContainer                                                                                       = objc.RegisterName("ensureLayoutForTextContainer:")
+	_nSLayoutManagerSelEnsureLayoutForBoundingRectInTextContainer                                                                         = objc.RegisterName("ensureLayoutForBoundingRect:inTextContainer:")
+	_nSLayoutManagerSelSetGlyphsPropertiesCharacterIndexesFontForGlyphRange                                                               = objc.RegisterName("setGlyphs:properties:characterIndexes:font:forGlyphRange:")
+	_nSLayoutManagerSelCGGlyphAtIndexIsValidIndex                                                                                         = objc.RegisterName("CGGlyphAtIndex:isValidIndex:")
+	_nSLayoutManagerSelCGGlyphAtIndex                                                                                                     = objc.RegisterName("CGGlyphAtIndex:")
+	_nSLayoutManagerSelIsValidGlyphIndex                                                                                                  = objc.RegisterName("isValidGlyphIndex:")
+	_nSLayoutManagerSelPropertyForGlyphAtIndex                                                                                            = objc.RegisterName("propertyForGlyphAtIndex:")
+	_nSLayoutManagerSelCharacterIndexForGlyphAtIndex                                                                                      = objc.RegisterName("characterIndexForGlyphAtIndex:")
+	_nSLayoutManagerSelGlyphIndexForCharacterAtIndex                                                                                      = objc.RegisterName("glyphIndexForCharacterAtIndex:")
+	_nSLayoutManagerSelGetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels                                                         = objc.RegisterName("getGlyphsInRange:glyphs:properties:characterIndexes:bidiLevels:")
+	_nSLayoutManagerSelSetTextContainerForGlyphRange                                                                                      = objc.RegisterName("setTextContainer:forGlyphRange:")
+	_nSLayoutManagerSelSetLineFragmentRectForGlyphRangeUsedRect                                                                           = objc.RegisterName("setLineFragmentRect:forGlyphRange:usedRect:")
+	_nSLayoutManagerSelSetExtraLineFragmentRectUsedRectTextContainer                                                                      = objc.RegisterName("setExtraLineFragmentRect:usedRect:textContainer:")
+	_nSLayoutManagerSelSetLocationForStartOfGlyphRange                                                                                    = objc.RegisterName("setLocation:forStartOfGlyphRange:")
+	_nSLayoutManagerSelSetNotShownAttributeForGlyphAtIndex                                                                                = objc.RegisterName("setNotShownAttribute:forGlyphAtIndex:")
+	_nSLayoutManagerSelSetDrawsOutsideLineFragmentForGlyphAtIndex                                                                         = objc.RegisterName("setDrawsOutsideLineFragment:forGlyphAtIndex:")
+	_nSLayoutManagerSelSetAttachmentSizeForGlyphRange                                                                                     = objc.RegisterName("setAttachmentSize:forGlyphRange:")
+	_nSLayoutManagerSelGetFirstUnlaidCharacterIndexGlyphIndex                                                                             = objc.RegisterName("getFirstUnlaidCharacterIndex:glyphIndex:")
+	_nSLayoutManagerSelFirstUnlaidCharacterIndex                                                                                          = objc.RegisterName("firstUnlaidCharacterIndex")
+	_nSLayoutManagerSelFirstUnlaidGlyphIndex                                                                                              = objc.RegisterName("firstUnlaidGlyphIndex")
+	_nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRange                                                                         = objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:")
+	_nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout                                                  = objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
+	_nSLayoutManagerSelUsedRectForTextContainer                                                                                           = objc.RegisterName("usedRectForTextContainer:")
+	_nSLayoutManagerSelLineFragmentRectForGlyphAtIndexEffectiveRange                                                                      = objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:")
+	_nSLayoutManagerSelLineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout                                               = objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
+	_nSLayoutManagerSelLineFragmentUsedRectForGlyphAtIndexEffectiveRange                                                                  = objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:")
+	_nSLayoutManagerSelLineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout                                           = objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:")
+	_nSLayoutManagerSelLocationForGlyphAtIndex                                                                                            = objc.RegisterName("locationForGlyphAtIndex:")
+	_nSLayoutManagerSelNotShownAttributeForGlyphAtIndex                                                                                   = objc.RegisterName("notShownAttributeForGlyphAtIndex:")
+	_nSLayoutManagerSelDrawsOutsideLineFragmentForGlyphAtIndex                                                                            = objc.RegisterName("drawsOutsideLineFragmentForGlyphAtIndex:")
+	_nSLayoutManagerSelAttachmentSizeForGlyphAtIndex                                                                                      = objc.RegisterName("attachmentSizeForGlyphAtIndex:")
+	_nSLayoutManagerSelTruncatedGlyphRangeInLineFragmentForGlyphAtIndex                                                                   = objc.RegisterName("truncatedGlyphRangeInLineFragmentForGlyphAtIndex:")
+	_nSLayoutManagerSelGlyphRangeForCharacterRangeActualCharacterRange                                                                    = objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:")
+	_nSLayoutManagerSelCharacterRangeForGlyphRangeActualGlyphRange                                                                        = objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:")
+	_nSLayoutManagerSelGlyphRangeForTextContainer                                                                                         = objc.RegisterName("glyphRangeForTextContainer:")
+	_nSLayoutManagerSelRangeOfNominallySpacedGlyphsContainingIndex                                                                        = objc.RegisterName("rangeOfNominallySpacedGlyphsContainingIndex:")
+	_nSLayoutManagerSelBoundingRectForGlyphRangeInTextContainer                                                                           = objc.RegisterName("boundingRectForGlyphRange:inTextContainer:")
+	_nSLayoutManagerSelGlyphRangeForBoundingRectInTextContainer                                                                           = objc.RegisterName("glyphRangeForBoundingRect:inTextContainer:")
+	_nSLayoutManagerSelGlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer                                                    = objc.RegisterName("glyphRangeForBoundingRectWithoutAdditionalLayout:inTextContainer:")
+	_nSLayoutManagerSelGlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph                                                    = objc.RegisterName("glyphIndexForPoint:inTextContainer:fractionOfDistanceThroughGlyph:")
+	_nSLayoutManagerSelGlyphIndexForPointInTextContainer                                                                                  = objc.RegisterName("glyphIndexForPoint:inTextContainer:")
+	_nSLayoutManagerSelFractionOfDistanceThroughGlyphForPointInTextContainer                                                              = objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:inTextContainer:")
+	_nSLayoutManagerSelCharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints                                      = objc.RegisterName("characterIndexForPoint:inTextContainer:fractionOfDistanceBetweenInsertionPoints:")
+	_nSLayoutManagerSelGetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes         = objc.RegisterName("getLineFragmentInsertionPointsForCharacterAtIndex:alternatePositions:inDisplayOrder:positions:characterIndexes:")
+	_nSLayoutManagerSelEnumerateLineFragmentsForGlyphRangeUsing                                                                           = objc.RegisterName("enumerateLineFragmentsForGlyphRange:usingBlock:")
+	_nSLayoutManagerSelEnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing                                   = objc.RegisterName("enumerateEnclosingRectsForGlyphRange:withinSelectedGlyphRange:inTextContainer:usingBlock:")
+	_nSLayoutManagerSelDrawBackgroundForGlyphRangeAtPoint                                                                                 = objc.RegisterName("drawBackgroundForGlyphRange:atPoint:")
+	_nSLayoutManagerSelDrawGlyphsForGlyphRangeAtPoint                                                                                     = objc.RegisterName("drawGlyphsForGlyphRange:atPoint:")
+	_nSLayoutManagerSelShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext                                                        = objc.RegisterName("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:")
+	_nSLayoutManagerSelFillBackgroundRectArrayCountForCharacterRangeColor                                                                 = objc.RegisterName("fillBackgroundRectArray:count:forCharacterRange:color:")
+	_nSLayoutManagerSelDrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin         = objc.RegisterName("drawUnderlineForGlyphRange:underlineType:baselineOffset:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
+	_nSLayoutManagerSelUnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin                              = objc.RegisterName("underlineGlyphRange:underlineType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
 	_nSLayoutManagerSelDrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin = objc.RegisterName("drawStrikethroughForGlyphRange:strikethroughType:baselineOffset:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
-	_nSLayoutManagerSelStrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin = objc.RegisterName("strikethroughGlyphRange:strikethroughType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
-	_nSLayoutManagerSelShowAttachmentCellInRectCharacterIndex = objc.RegisterName("showAttachmentCell:inRect:characterIndex:")
-	_nSLayoutManagerSelSetLayoutRectForTextBlockGlyphRange = objc.RegisterName("setLayoutRect:forTextBlock:glyphRange:")
-	_nSLayoutManagerSelSetBoundsRectForTextBlockGlyphRange = objc.RegisterName("setBoundsRect:forTextBlock:glyphRange:")
-	_nSLayoutManagerSelLayoutRectForTextBlockGlyphRange = objc.RegisterName("layoutRectForTextBlock:glyphRange:")
-	_nSLayoutManagerSelBoundsRectForTextBlockGlyphRange = objc.RegisterName("boundsRectForTextBlock:glyphRange:")
-	_nSLayoutManagerSelLayoutRectForTextBlockAtIndexEffectiveRange = objc.RegisterName("layoutRectForTextBlock:atIndex:effectiveRange:")
-	_nSLayoutManagerSelBoundsRectForTextBlockAtIndexEffectiveRange = objc.RegisterName("boundsRectForTextBlock:atIndex:effectiveRange:")
-	_nSLayoutManagerSelTemporaryAttributesAtCharacterIndexEffectiveRange = objc.RegisterName("temporaryAttributesAtCharacterIndex:effectiveRange:")
-	_nSLayoutManagerSelSetTemporaryAttributesForCharacterRange = objc.RegisterName("setTemporaryAttributes:forCharacterRange:")
-	_nSLayoutManagerSelAddTemporaryAttributesForCharacterRange = objc.RegisterName("addTemporaryAttributes:forCharacterRange:")
-	_nSLayoutManagerSelRemoveTemporaryAttributeForCharacterRange = objc.RegisterName("removeTemporaryAttribute:forCharacterRange:")
-	_nSLayoutManagerSelTemporaryAttributeAtCharacterIndexEffectiveRange = objc.RegisterName("temporaryAttribute:atCharacterIndex:effectiveRange:")
-	_nSLayoutManagerSelTemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange = objc.RegisterName("temporaryAttribute:atCharacterIndex:longestEffectiveRange:inRange:")
-	_nSLayoutManagerSelTemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange = objc.RegisterName("temporaryAttributesAtCharacterIndex:longestEffectiveRange:inRange:")
-	_nSLayoutManagerSelAddTemporaryAttributeValueForCharacterRange = objc.RegisterName("addTemporaryAttribute:value:forCharacterRange:")
-	_nSLayoutManagerSelDefaultLineHeightForFont = objc.RegisterName("defaultLineHeightForFont:")
-	_nSLayoutManagerSelDefaultBaselineOffsetForFont = objc.RegisterName("defaultBaselineOffsetForFont:")
-	_nSLayoutManagerSelTextStorage = objc.RegisterName("textStorage")
-	_nSLayoutManagerSelSetTextStorage = objc.RegisterName("setTextStorage:")
-	_nSLayoutManagerSelTextContainers = objc.RegisterName("textContainers")
-	_nSLayoutManagerSelDelegate = objc.RegisterName("delegate")
-	_nSLayoutManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSLayoutManagerSelShowsInvisibleCharacters = objc.RegisterName("showsInvisibleCharacters")
-	_nSLayoutManagerSelSetShowsInvisibleCharacters = objc.RegisterName("setShowsInvisibleCharacters:")
-	_nSLayoutManagerSelShowsControlCharacters = objc.RegisterName("showsControlCharacters")
-	_nSLayoutManagerSelSetShowsControlCharacters = objc.RegisterName("setShowsControlCharacters:")
-	_nSLayoutManagerSelUsesDefaultHyphenation = objc.RegisterName("usesDefaultHyphenation")
-	_nSLayoutManagerSelSetUsesDefaultHyphenation = objc.RegisterName("setUsesDefaultHyphenation:")
-	_nSLayoutManagerSelUsesFontLeading = objc.RegisterName("usesFontLeading")
-	_nSLayoutManagerSelSetUsesFontLeading = objc.RegisterName("setUsesFontLeading:")
-	_nSLayoutManagerSelAllowsNonContiguousLayout = objc.RegisterName("allowsNonContiguousLayout")
-	_nSLayoutManagerSelSetAllowsNonContiguousLayout = objc.RegisterName("setAllowsNonContiguousLayout:")
-	_nSLayoutManagerSelHasNonContiguousLayout = objc.RegisterName("hasNonContiguousLayout")
-	_nSLayoutManagerSelLimitsLayoutForSuspiciousContents = objc.RegisterName("limitsLayoutForSuspiciousContents")
-	_nSLayoutManagerSelSetLimitsLayoutForSuspiciousContents = objc.RegisterName("setLimitsLayoutForSuspiciousContents:")
-	_nSLayoutManagerSelBackgroundLayoutEnabled = objc.RegisterName("backgroundLayoutEnabled")
-	_nSLayoutManagerSelSetBackgroundLayoutEnabled = objc.RegisterName("setBackgroundLayoutEnabled:")
-	_nSLayoutManagerSelDefaultAttachmentScaling = objc.RegisterName("defaultAttachmentScaling")
-	_nSLayoutManagerSelSetDefaultAttachmentScaling = objc.RegisterName("setDefaultAttachmentScaling:")
-	_nSLayoutManagerSelTypesetter = objc.RegisterName("typesetter")
-	_nSLayoutManagerSelSetTypesetter = objc.RegisterName("setTypesetter:")
-	_nSLayoutManagerSelTypesetterBehavior = objc.RegisterName("typesetterBehavior")
-	_nSLayoutManagerSelSetTypesetterBehavior = objc.RegisterName("setTypesetterBehavior:")
-	_nSLayoutManagerSelNumberOfGlyphs = objc.RegisterName("numberOfGlyphs")
-	_nSLayoutManagerSelExtraLineFragmentRect = objc.RegisterName("extraLineFragmentRect")
-	_nSLayoutManagerSelExtraLineFragmentUsedRect = objc.RegisterName("extraLineFragmentUsedRect")
-	_nSLayoutManagerSelExtraLineFragmentTextContainer = objc.RegisterName("extraLineFragmentTextContainer")
-	_nSLayoutManagerSelRulerMarkersForTextViewParagraphStyleRuler = objc.RegisterName("rulerMarkersForTextView:paragraphStyle:ruler:")
-	_nSLayoutManagerSelRulerAccessoryViewForTextViewParagraphStyleRulerEnabled = objc.RegisterName("rulerAccessoryViewForTextView:paragraphStyle:ruler:enabled:")
-	_nSLayoutManagerSelLayoutManagerOwnsFirstResponderInWindow = objc.RegisterName("layoutManagerOwnsFirstResponderInWindow:")
-	_nSLayoutManagerSelFirstTextView = objc.RegisterName("firstTextView")
-	_nSLayoutManagerSelTextViewForBeginningOfSelection = objc.RegisterName("textViewForBeginningOfSelection")
-	_nSLayoutManagerSelGlyphAtIndexIsValidIndex = objc.RegisterName("glyphAtIndex:isValidIndex:")
-	_nSLayoutManagerSelGlyphAtIndex = objc.RegisterName("glyphAtIndex:")
-	_nSLayoutManagerSelRectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount = objc.RegisterName("rectArrayForCharacterRange:withinSelectedCharacterRange:inTextContainer:rectCount:")
-	_nSLayoutManagerSelRectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount = objc.RegisterName("rectArrayForGlyphRange:withinSelectedGlyphRange:inTextContainer:rectCount:")
-	_nSLayoutManagerSelSubstituteFontForFont = objc.RegisterName("substituteFontForFont:")
-	_nSLayoutManagerSelInsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex = objc.RegisterName("insertGlyphs:length:forStartingGlyphAtIndex:characterIndex:")
-	_nSLayoutManagerSelInsertGlyphAtGlyphIndexCharacterIndex = objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:")
-	_nSLayoutManagerSelReplaceGlyphAtIndexWithGlyph = objc.RegisterName("replaceGlyphAtIndex:withGlyph:")
-	_nSLayoutManagerSelDeleteGlyphsInRange = objc.RegisterName("deleteGlyphsInRange:")
-	_nSLayoutManagerSelSetCharacterIndexForGlyphAtIndex = objc.RegisterName("setCharacterIndex:forGlyphAtIndex:")
-	_nSLayoutManagerSelSetIntAttributeValueForGlyphAtIndex = objc.RegisterName("setIntAttribute:value:forGlyphAtIndex:")
-	_nSLayoutManagerSelInvalidateGlyphsOnLayoutInvalidationForGlyphRange = objc.RegisterName("invalidateGlyphsOnLayoutInvalidationForGlyphRange:")
-	_nSLayoutManagerSelIntAttributeForGlyphAtIndex = objc.RegisterName("intAttribute:forGlyphAtIndex:")
-	_nSLayoutManagerSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:")
-	_nSLayoutManagerSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:")
-	_nSLayoutManagerSelGetGlyphsRange = objc.RegisterName("getGlyphs:range:")
-	_nSLayoutManagerSelInvalidateLayoutForCharacterRangeIsSoftActualCharacterRange = objc.RegisterName("invalidateLayoutForCharacterRange:isSoft:actualCharacterRange:")
-	_nSLayoutManagerSelTextStorageEditedRangeChangeInLengthInvalidatedRange = objc.RegisterName("textStorage:edited:range:changeInLength:invalidatedRange:")
-	_nSLayoutManagerSelSetLocationsStartingGlyphIndexesCountForGlyphRange = objc.RegisterName("setLocations:startingGlyphIndexes:count:forGlyphRange:")
-	_nSLayoutManagerSelShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment = objc.RegisterName("showPackedGlyphs:length:glyphRange:atPoint:font:color:printingAdjustment:")
-	_nSLayoutManagerSelShowCGGlyphsPositionsCountFontMatrixAttributesInContext = objc.RegisterName("showCGGlyphs:positions:count:font:matrix:attributes:inContext:")
-	_nSLayoutManagerSelUsesScreenFonts = objc.RegisterName("usesScreenFonts")
-	_nSLayoutManagerSelSetUsesScreenFonts = objc.RegisterName("setUsesScreenFonts:")
-	_nSLayoutManagerSelHyphenationFactor = objc.RegisterName("hyphenationFactor")
-	_nSLayoutManagerSelSetHyphenationFactor = objc.RegisterName("setHyphenationFactor:")
-	_nSLayoutManagerSelGlyphGenerator = objc.RegisterName("glyphGenerator")
-	_nSLayoutManagerSelSetGlyphGenerator = objc.RegisterName("setGlyphGenerator:")
+	_nSLayoutManagerSelStrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin                      = objc.RegisterName("strikethroughGlyphRange:strikethroughType:lineFragmentRect:lineFragmentGlyphRange:containerOrigin:")
+	_nSLayoutManagerSelShowAttachmentCellInRectCharacterIndex                                                                             = objc.RegisterName("showAttachmentCell:inRect:characterIndex:")
+	_nSLayoutManagerSelSetLayoutRectForTextBlockGlyphRange                                                                                = objc.RegisterName("setLayoutRect:forTextBlock:glyphRange:")
+	_nSLayoutManagerSelSetBoundsRectForTextBlockGlyphRange                                                                                = objc.RegisterName("setBoundsRect:forTextBlock:glyphRange:")
+	_nSLayoutManagerSelLayoutRectForTextBlockGlyphRange                                                                                   = objc.RegisterName("layoutRectForTextBlock:glyphRange:")
+	_nSLayoutManagerSelBoundsRectForTextBlockGlyphRange                                                                                   = objc.RegisterName("boundsRectForTextBlock:glyphRange:")
+	_nSLayoutManagerSelLayoutRectForTextBlockAtIndexEffectiveRange                                                                        = objc.RegisterName("layoutRectForTextBlock:atIndex:effectiveRange:")
+	_nSLayoutManagerSelBoundsRectForTextBlockAtIndexEffectiveRange                                                                        = objc.RegisterName("boundsRectForTextBlock:atIndex:effectiveRange:")
+	_nSLayoutManagerSelTemporaryAttributesAtCharacterIndexEffectiveRange                                                                  = objc.RegisterName("temporaryAttributesAtCharacterIndex:effectiveRange:")
+	_nSLayoutManagerSelSetTemporaryAttributesForCharacterRange                                                                            = objc.RegisterName("setTemporaryAttributes:forCharacterRange:")
+	_nSLayoutManagerSelAddTemporaryAttributesForCharacterRange                                                                            = objc.RegisterName("addTemporaryAttributes:forCharacterRange:")
+	_nSLayoutManagerSelRemoveTemporaryAttributeForCharacterRange                                                                          = objc.RegisterName("removeTemporaryAttribute:forCharacterRange:")
+	_nSLayoutManagerSelTemporaryAttributeAtCharacterIndexEffectiveRange                                                                   = objc.RegisterName("temporaryAttribute:atCharacterIndex:effectiveRange:")
+	_nSLayoutManagerSelTemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange                                                     = objc.RegisterName("temporaryAttribute:atCharacterIndex:longestEffectiveRange:inRange:")
+	_nSLayoutManagerSelTemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange                                                    = objc.RegisterName("temporaryAttributesAtCharacterIndex:longestEffectiveRange:inRange:")
+	_nSLayoutManagerSelAddTemporaryAttributeValueForCharacterRange                                                                        = objc.RegisterName("addTemporaryAttribute:value:forCharacterRange:")
+	_nSLayoutManagerSelDefaultLineHeightForFont                                                                                           = objc.RegisterName("defaultLineHeightForFont:")
+	_nSLayoutManagerSelDefaultBaselineOffsetForFont                                                                                       = objc.RegisterName("defaultBaselineOffsetForFont:")
+	_nSLayoutManagerSelTextStorage                                                                                                        = objc.RegisterName("textStorage")
+	_nSLayoutManagerSelSetTextStorage                                                                                                     = objc.RegisterName("setTextStorage:")
+	_nSLayoutManagerSelTextContainers                                                                                                     = objc.RegisterName("textContainers")
+	_nSLayoutManagerSelDelegate                                                                                                           = objc.RegisterName("delegate")
+	_nSLayoutManagerSelSetDelegate                                                                                                        = objc.RegisterName("setDelegate:")
+	_nSLayoutManagerSelShowsInvisibleCharacters                                                                                           = objc.RegisterName("showsInvisibleCharacters")
+	_nSLayoutManagerSelSetShowsInvisibleCharacters                                                                                        = objc.RegisterName("setShowsInvisibleCharacters:")
+	_nSLayoutManagerSelShowsControlCharacters                                                                                             = objc.RegisterName("showsControlCharacters")
+	_nSLayoutManagerSelSetShowsControlCharacters                                                                                          = objc.RegisterName("setShowsControlCharacters:")
+	_nSLayoutManagerSelUsesDefaultHyphenation                                                                                             = objc.RegisterName("usesDefaultHyphenation")
+	_nSLayoutManagerSelSetUsesDefaultHyphenation                                                                                          = objc.RegisterName("setUsesDefaultHyphenation:")
+	_nSLayoutManagerSelUsesFontLeading                                                                                                    = objc.RegisterName("usesFontLeading")
+	_nSLayoutManagerSelSetUsesFontLeading                                                                                                 = objc.RegisterName("setUsesFontLeading:")
+	_nSLayoutManagerSelAllowsNonContiguousLayout                                                                                          = objc.RegisterName("allowsNonContiguousLayout")
+	_nSLayoutManagerSelSetAllowsNonContiguousLayout                                                                                       = objc.RegisterName("setAllowsNonContiguousLayout:")
+	_nSLayoutManagerSelHasNonContiguousLayout                                                                                             = objc.RegisterName("hasNonContiguousLayout")
+	_nSLayoutManagerSelLimitsLayoutForSuspiciousContents                                                                                  = objc.RegisterName("limitsLayoutForSuspiciousContents")
+	_nSLayoutManagerSelSetLimitsLayoutForSuspiciousContents                                                                               = objc.RegisterName("setLimitsLayoutForSuspiciousContents:")
+	_nSLayoutManagerSelBackgroundLayoutEnabled                                                                                            = objc.RegisterName("backgroundLayoutEnabled")
+	_nSLayoutManagerSelSetBackgroundLayoutEnabled                                                                                         = objc.RegisterName("setBackgroundLayoutEnabled:")
+	_nSLayoutManagerSelDefaultAttachmentScaling                                                                                           = objc.RegisterName("defaultAttachmentScaling")
+	_nSLayoutManagerSelSetDefaultAttachmentScaling                                                                                        = objc.RegisterName("setDefaultAttachmentScaling:")
+	_nSLayoutManagerSelTypesetter                                                                                                         = objc.RegisterName("typesetter")
+	_nSLayoutManagerSelSetTypesetter                                                                                                      = objc.RegisterName("setTypesetter:")
+	_nSLayoutManagerSelTypesetterBehavior                                                                                                 = objc.RegisterName("typesetterBehavior")
+	_nSLayoutManagerSelSetTypesetterBehavior                                                                                              = objc.RegisterName("setTypesetterBehavior:")
+	_nSLayoutManagerSelNumberOfGlyphs                                                                                                     = objc.RegisterName("numberOfGlyphs")
+	_nSLayoutManagerSelExtraLineFragmentRect                                                                                              = objc.RegisterName("extraLineFragmentRect")
+	_nSLayoutManagerSelExtraLineFragmentUsedRect                                                                                          = objc.RegisterName("extraLineFragmentUsedRect")
+	_nSLayoutManagerSelExtraLineFragmentTextContainer                                                                                     = objc.RegisterName("extraLineFragmentTextContainer")
+	_nSLayoutManagerSelRulerMarkersForTextViewParagraphStyleRuler                                                                         = objc.RegisterName("rulerMarkersForTextView:paragraphStyle:ruler:")
+	_nSLayoutManagerSelRulerAccessoryViewForTextViewParagraphStyleRulerEnabled                                                            = objc.RegisterName("rulerAccessoryViewForTextView:paragraphStyle:ruler:enabled:")
+	_nSLayoutManagerSelLayoutManagerOwnsFirstResponderInWindow                                                                            = objc.RegisterName("layoutManagerOwnsFirstResponderInWindow:")
+	_nSLayoutManagerSelFirstTextView                                                                                                      = objc.RegisterName("firstTextView")
+	_nSLayoutManagerSelTextViewForBeginningOfSelection                                                                                    = objc.RegisterName("textViewForBeginningOfSelection")
+	_nSLayoutManagerSelGlyphAtIndexIsValidIndex                                                                                           = objc.RegisterName("glyphAtIndex:isValidIndex:")
+	_nSLayoutManagerSelGlyphAtIndex                                                                                                       = objc.RegisterName("glyphAtIndex:")
+	_nSLayoutManagerSelRectArrayForCharacterRangeWithinSelectedCharacterRangeInTextContainerRectCount                                     = objc.RegisterName("rectArrayForCharacterRange:withinSelectedCharacterRange:inTextContainer:rectCount:")
+	_nSLayoutManagerSelRectArrayForGlyphRangeWithinSelectedGlyphRangeInTextContainerRectCount                                             = objc.RegisterName("rectArrayForGlyphRange:withinSelectedGlyphRange:inTextContainer:rectCount:")
+	_nSLayoutManagerSelSubstituteFontForFont                                                                                              = objc.RegisterName("substituteFontForFont:")
+	_nSLayoutManagerSelInsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex                                                            = objc.RegisterName("insertGlyphs:length:forStartingGlyphAtIndex:characterIndex:")
+	_nSLayoutManagerSelInsertGlyphAtGlyphIndexCharacterIndex                                                                              = objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:")
+	_nSLayoutManagerSelReplaceGlyphAtIndexWithGlyph                                                                                       = objc.RegisterName("replaceGlyphAtIndex:withGlyph:")
+	_nSLayoutManagerSelDeleteGlyphsInRange                                                                                                = objc.RegisterName("deleteGlyphsInRange:")
+	_nSLayoutManagerSelSetCharacterIndexForGlyphAtIndex                                                                                   = objc.RegisterName("setCharacterIndex:forGlyphAtIndex:")
+	_nSLayoutManagerSelSetIntAttributeValueForGlyphAtIndex                                                                                = objc.RegisterName("setIntAttribute:value:forGlyphAtIndex:")
+	_nSLayoutManagerSelInvalidateGlyphsOnLayoutInvalidationForGlyphRange                                                                  = objc.RegisterName("invalidateGlyphsOnLayoutInvalidationForGlyphRange:")
+	_nSLayoutManagerSelIntAttributeForGlyphAtIndex                                                                                        = objc.RegisterName("intAttribute:forGlyphAtIndex:")
+	_nSLayoutManagerSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits                                                 = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:")
+	_nSLayoutManagerSelGetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels                                       = objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:")
+	_nSLayoutManagerSelGetGlyphsRange                                                                                                     = objc.RegisterName("getGlyphs:range:")
+	_nSLayoutManagerSelInvalidateLayoutForCharacterRangeIsSoftActualCharacterRange                                                        = objc.RegisterName("invalidateLayoutForCharacterRange:isSoft:actualCharacterRange:")
+	_nSLayoutManagerSelTextStorageEditedRangeChangeInLengthInvalidatedRange                                                               = objc.RegisterName("textStorage:edited:range:changeInLength:invalidatedRange:")
+	_nSLayoutManagerSelSetLocationsStartingGlyphIndexesCountForGlyphRange                                                                 = objc.RegisterName("setLocations:startingGlyphIndexes:count:forGlyphRange:")
+	_nSLayoutManagerSelShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment                                                 = objc.RegisterName("showPackedGlyphs:length:glyphRange:atPoint:font:color:printingAdjustment:")
+	_nSLayoutManagerSelShowCGGlyphsPositionsCountFontMatrixAttributesInContext                                                            = objc.RegisterName("showCGGlyphs:positions:count:font:matrix:attributes:inContext:")
+	_nSLayoutManagerSelUsesScreenFonts                                                                                                    = objc.RegisterName("usesScreenFonts")
+	_nSLayoutManagerSelSetUsesScreenFonts                                                                                                 = objc.RegisterName("setUsesScreenFonts:")
+	_nSLayoutManagerSelHyphenationFactor                                                                                                  = objc.RegisterName("hyphenationFactor")
+	_nSLayoutManagerSelSetHyphenationFactor                                                                                               = objc.RegisterName("setHyphenationFactor:")
+	_nSLayoutManagerSelGlyphGenerator                                                                                                     = objc.RegisterName("glyphGenerator")
+	_nSLayoutManagerSelSetGlyphGenerator                                                                                                  = objc.RegisterName("setGlyphGenerator:")
 )
 
 func NSLayoutManagerFromID(id objc.ID) *NSLayoutManager {
@@ -184,13 +184,17 @@ func NSLayoutManagerFromID(id objc.ID) *NSLayoutManager {
 
 func (o *NSLayoutManager) Init() *NSLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutManagerFromID(_ret)
 }
 
 func (o *NSLayoutManager) InitWithCoder(coder *foundation.NSCoder) *NSLayoutManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLayoutManagerFromID(_ret)
 }
 
@@ -345,13 +349,17 @@ func (o *NSLayoutManager) FirstUnlaidGlyphIndex() uint {
 
 func (o *NSLayoutManager) TextContainerForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRange, glyphIndex, effectiveGlyphRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
 func (o *NSLayoutManager) TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout, glyphIndex, effectiveGlyphRange, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
@@ -585,7 +593,9 @@ func (o *NSLayoutManager) DefaultBaselineOffsetForFont(theFont *NSFont) float64 
 
 func (o *NSLayoutManager) TextStorage() *NSTextStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTextStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextStorageFromID(_ret)
 }
 
@@ -595,7 +605,9 @@ func (o *NSLayoutManager) SetTextStorage(textStorage *NSTextStorage) {
 
 func (o *NSLayoutManager) TextContainers() *foundation.NSArray[*NSTextContainer] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTextContainers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSTextContainer](_ret)
 }
 
@@ -687,7 +699,9 @@ func (o *NSLayoutManager) SetDefaultAttachmentScaling(defaultAttachmentScaling N
 
 func (o *NSLayoutManager) Typesetter() *NSTypesetter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTypesetter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTypesetterFromID(_ret)
 }
 
@@ -721,19 +735,25 @@ func (o *NSLayoutManager) ExtraLineFragmentUsedRect() corefoundation.CGRect {
 
 func (o *NSLayoutManager) ExtraLineFragmentTextContainer() *NSTextContainer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelExtraLineFragmentTextContainer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextContainerFromID(_ret)
 }
 
 func (o *NSLayoutManager) RulerMarkersForTextViewParagraphStyleRuler(view *NSTextView, style *NSParagraphStyle, ruler *NSRulerView) *foundation.NSArray[*NSRulerMarker] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelRulerMarkersForTextViewParagraphStyleRuler, view.Ptr(), style.Ptr(), ruler.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSRulerMarker](_ret)
 }
 
 func (o *NSLayoutManager) RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *NSTextView, style *NSParagraphStyle, ruler *NSRulerView, isEnabled bool) *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelRulerAccessoryViewForTextViewParagraphStyleRulerEnabled, view.Ptr(), style.Ptr(), ruler.Ptr(), isEnabled)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -744,13 +764,17 @@ func (o *NSLayoutManager) LayoutManagerOwnsFirstResponderInWindow(window *NSWind
 
 func (o *NSLayoutManager) FirstTextView() *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelFirstTextView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
 func (o *NSLayoutManager) TextViewForBeginningOfSelection() *NSTextView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelTextViewForBeginningOfSelection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextViewFromID(_ret)
 }
 
@@ -778,7 +802,9 @@ func (o *NSLayoutManager) RectArrayForGlyphRangeWithinSelectedGlyphRangeInTextCo
 // Deprecated: since macOS 10.11.
 func (o *NSLayoutManager) SubstituteFontForFont(originalFont *NSFont) *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelSubstituteFontForFont, originalFont.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -890,11 +916,12 @@ func (o *NSLayoutManager) SetHyphenationFactor(hyphenationFactor float32) {
 
 func (o *NSLayoutManager) GlyphGenerator() *NSGlyphGenerator {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSLayoutManagerSelGlyphGenerator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSGlyphGeneratorFromID(_ret)
 }
 
 func (o *NSLayoutManager) SetGlyphGenerator(glyphGenerator *NSGlyphGenerator) {
 	o.Ptr().Send(_nSLayoutManagerSelSetGlyphGenerator, glyphGenerator.Ptr())
 }
-

@@ -15,7 +15,9 @@ type PersistentCloudKitContainerEventResult struct {
 }
 
 // Unwrap returns the underlying [raw.NSPersistentCloudKitContainerEventResult].
-func (x *PersistentCloudKitContainerEventResult) Unwrap() *raw.NSPersistentCloudKitContainerEventResult { return x.inner }
+func (x *PersistentCloudKitContainerEventResult) Unwrap() *raw.NSPersistentCloudKitContainerEventResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *PersistentCloudKitContainerEventResult) ResultType() raw.NSPersistentCl
 	return x.inner.ResultType()
 }
 
-func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreResult
+}
 
 // PersistentCloudKitContainerEventResultable is the interface implemented by [PersistentCloudKitContainerEventResult], for mocking and DI.
 type PersistentCloudKitContainerEventResultable interface {
@@ -55,4 +59,3 @@ type PersistentCloudKitContainerEventResultable interface {
 }
 
 var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)
-

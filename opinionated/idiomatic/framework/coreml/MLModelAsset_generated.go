@@ -105,4 +105,3 @@ type ModelAssetable interface {
 }
 
 var _ ModelAssetable = (*ModelAsset)(nil)
-

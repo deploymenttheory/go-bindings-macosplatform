@@ -18,16 +18,16 @@ type MTRClusterDeviceEnergyManagementMode struct {
 }
 
 var (
-	_clsMTRClusterDeviceEnergyManagementMode = _objcClass("MTRClusterDeviceEnergyManagementMode")
+	_clsMTRClusterDeviceEnergyManagementMode                                                                    = _objcClass("MTRClusterDeviceEnergyManagementMode")
 	_mTRClusterDeviceEnergyManagementModeSelChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeSupportedModesWithParams = objc.RegisterName("readAttributeSupportedModesWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeCurrentModeWithParams = objc.RegisterName("readAttributeCurrentModeWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterDeviceEnergyManagementModeSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeSupportedModesWithParams                               = objc.RegisterName("readAttributeSupportedModesWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeCurrentModeWithParams                                  = objc.RegisterName("readAttributeCurrentModeWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeGeneratedCommandListWithParams                         = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeAcceptedCommandListWithParams                          = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeAttributeListWithParams                                = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeFeatureMapWithParams                                   = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelReadAttributeClusterRevisionWithParams                              = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterDeviceEnergyManagementModeSelInitWithDeviceEndpointIDQueue                                       = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterDeviceEnergyManagementModeFromID(id objc.ID) *MTRClusterDeviceEnergyManagementMode {
@@ -92,7 +92,8 @@ func (o *MTRClusterDeviceEnergyManagementMode) ReadAttributeClusterRevisionWithP
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterDeviceEnergyManagementMode) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDeviceEnergyManagementMode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDeviceEnergyManagementModeSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDeviceEnergyManagementModeFromID(_ret)
 }
-

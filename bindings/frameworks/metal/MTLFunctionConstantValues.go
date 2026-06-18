@@ -18,11 +18,11 @@ type MTLFunctionConstantValues struct {
 }
 
 var (
-	_clsMTLFunctionConstantValues = _objcClass("MTLFunctionConstantValues")
-	_mTLFunctionConstantValuesSelSetConstantValueTypeAtIndex = objc.RegisterName("setConstantValue:type:atIndex:")
+	_clsMTLFunctionConstantValues                               = _objcClass("MTLFunctionConstantValues")
+	_mTLFunctionConstantValuesSelSetConstantValueTypeAtIndex    = objc.RegisterName("setConstantValue:type:atIndex:")
 	_mTLFunctionConstantValuesSelSetConstantValuesTypeWithRange = objc.RegisterName("setConstantValues:type:withRange:")
-	_mTLFunctionConstantValuesSelSetConstantValueTypeWithName = objc.RegisterName("setConstantValue:type:withName:")
-	_mTLFunctionConstantValuesSelReset = objc.RegisterName("reset")
+	_mTLFunctionConstantValuesSelSetConstantValueTypeWithName   = objc.RegisterName("setConstantValue:type:withName:")
+	_mTLFunctionConstantValuesSelReset                          = objc.RegisterName("reset")
 )
 
 func MTLFunctionConstantValuesFromID(id objc.ID) *MTLFunctionConstantValues {
@@ -50,4 +50,3 @@ func (o *MTLFunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Po
 func (o *MTLFunctionConstantValues) Reset() {
 	o.Ptr().Send(_mTLFunctionConstantValuesSelReset)
 }
-

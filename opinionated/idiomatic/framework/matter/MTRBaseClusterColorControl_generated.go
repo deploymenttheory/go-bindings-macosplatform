@@ -5749,9 +5749,13 @@ func (x *MTRBaseClusterColorControl) WriteAttributeColorPointBIntensityWithValue
 	x.inner.WriteAttributeColorPointBIntensityWithValueParamsCompletionHandler(value, params, completionHandler)
 }
 
-func (x *MTRBaseClusterColorControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterColorControl) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterColorControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterColorControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterColorControlable is the interface implemented by [MTRBaseClusterColorControl], for mocking and DI.
 type MTRBaseClusterColorControlable interface {
@@ -6077,4 +6081,3 @@ type MTRBaseClusterColorControlable interface {
 }
 
 var _ MTRBaseClusterColorControlable = (*MTRBaseClusterColorControl)(nil)
-

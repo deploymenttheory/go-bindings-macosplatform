@@ -18,15 +18,15 @@ type NEFilterSocketFlow struct {
 }
 
 var (
-	_clsNEFilterSocketFlow = _objcClass("NEFilterSocketFlow")
+	_clsNEFilterSocketFlow                   = _objcClass("NEFilterSocketFlow")
 	_nEFilterSocketFlowSelRemoteFlowEndpoint = objc.RegisterName("remoteFlowEndpoint")
-	_nEFilterSocketFlowSelRemoteEndpoint = objc.RegisterName("remoteEndpoint")
-	_nEFilterSocketFlowSelRemoteHostname = objc.RegisterName("remoteHostname")
-	_nEFilterSocketFlowSelLocalFlowEndpoint = objc.RegisterName("localFlowEndpoint")
-	_nEFilterSocketFlowSelLocalEndpoint = objc.RegisterName("localEndpoint")
-	_nEFilterSocketFlowSelSocketFamily = objc.RegisterName("socketFamily")
-	_nEFilterSocketFlowSelSocketType = objc.RegisterName("socketType")
-	_nEFilterSocketFlowSelSocketProtocol = objc.RegisterName("socketProtocol")
+	_nEFilterSocketFlowSelRemoteEndpoint     = objc.RegisterName("remoteEndpoint")
+	_nEFilterSocketFlowSelRemoteHostname     = objc.RegisterName("remoteHostname")
+	_nEFilterSocketFlowSelLocalFlowEndpoint  = objc.RegisterName("localFlowEndpoint")
+	_nEFilterSocketFlowSelLocalEndpoint      = objc.RegisterName("localEndpoint")
+	_nEFilterSocketFlowSelSocketFamily       = objc.RegisterName("socketFamily")
+	_nEFilterSocketFlowSelSocketType         = objc.RegisterName("socketType")
+	_nEFilterSocketFlowSelSocketProtocol     = objc.RegisterName("socketProtocol")
 )
 
 func NEFilterSocketFlowFromID(id objc.ID) *NEFilterSocketFlow {
@@ -42,7 +42,9 @@ func NEFilterSocketFlowFromID(id objc.ID) *NEFilterSocketFlow {
 // @property remoteFlowEndpoint @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
 func (o *NEFilterSocketFlow) RemoteFlowEndpoint() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterSocketFlowSelRemoteFlowEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -56,14 +58,18 @@ func (o *NEFilterSocketFlow) RemoteEndpoint() unsafe.Pointer {
 // @property remoteHostname @discussion The flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
 func (o *NEFilterSocketFlow) RemoteHostname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterSocketFlowSelRemoteHostname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property localFlowEndpoint @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
 func (o *NEFilterSocketFlow) LocalFlowEndpoint() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterSocketFlowSelLocalFlowEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -91,4 +97,3 @@ func (o *NEFilterSocketFlow) SocketProtocol() int {
 	_ret := objc.Send[int](o.Ptr(), _nEFilterSocketFlowSelSocketProtocol)
 	return _ret
 }
-

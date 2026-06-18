@@ -15,29 +15,29 @@ type NSByteCountFormatter struct {
 }
 
 var (
-	_clsNSByteCountFormatter = _objcClass("NSByteCountFormatter")
-	_nSByteCountFormatterSelStringFromByteCountCountStyle = objc.RegisterName("stringFromByteCount:countStyle:")
-	_nSByteCountFormatterSelStringFromByteCount = objc.RegisterName("stringFromByteCount:")
+	_clsNSByteCountFormatter                                = _objcClass("NSByteCountFormatter")
+	_nSByteCountFormatterSelStringFromByteCountCountStyle   = objc.RegisterName("stringFromByteCount:countStyle:")
+	_nSByteCountFormatterSelStringFromByteCount             = objc.RegisterName("stringFromByteCount:")
 	_nSByteCountFormatterSelStringFromMeasurementCountStyle = objc.RegisterName("stringFromMeasurement:countStyle:")
-	_nSByteCountFormatterSelStringFromMeasurement = objc.RegisterName("stringFromMeasurement:")
-	_nSByteCountFormatterSelAllowedUnits = objc.RegisterName("allowedUnits")
-	_nSByteCountFormatterSelSetAllowedUnits = objc.RegisterName("setAllowedUnits:")
-	_nSByteCountFormatterSelCountStyle = objc.RegisterName("countStyle")
-	_nSByteCountFormatterSelSetCountStyle = objc.RegisterName("setCountStyle:")
-	_nSByteCountFormatterSelAllowsNonnumericFormatting = objc.RegisterName("allowsNonnumericFormatting")
-	_nSByteCountFormatterSelSetAllowsNonnumericFormatting = objc.RegisterName("setAllowsNonnumericFormatting:")
-	_nSByteCountFormatterSelIncludesUnit = objc.RegisterName("includesUnit")
-	_nSByteCountFormatterSelSetIncludesUnit = objc.RegisterName("setIncludesUnit:")
-	_nSByteCountFormatterSelIncludesCount = objc.RegisterName("includesCount")
-	_nSByteCountFormatterSelSetIncludesCount = objc.RegisterName("setIncludesCount:")
-	_nSByteCountFormatterSelIncludesActualByteCount = objc.RegisterName("includesActualByteCount")
-	_nSByteCountFormatterSelSetIncludesActualByteCount = objc.RegisterName("setIncludesActualByteCount:")
-	_nSByteCountFormatterSelIsAdaptive = objc.RegisterName("isAdaptive")
-	_nSByteCountFormatterSelSetAdaptive = objc.RegisterName("setAdaptive:")
-	_nSByteCountFormatterSelZeroPadsFractionDigits = objc.RegisterName("zeroPadsFractionDigits")
-	_nSByteCountFormatterSelSetZeroPadsFractionDigits = objc.RegisterName("setZeroPadsFractionDigits:")
-	_nSByteCountFormatterSelFormattingContext = objc.RegisterName("formattingContext")
-	_nSByteCountFormatterSelSetFormattingContext = objc.RegisterName("setFormattingContext:")
+	_nSByteCountFormatterSelStringFromMeasurement           = objc.RegisterName("stringFromMeasurement:")
+	_nSByteCountFormatterSelAllowedUnits                    = objc.RegisterName("allowedUnits")
+	_nSByteCountFormatterSelSetAllowedUnits                 = objc.RegisterName("setAllowedUnits:")
+	_nSByteCountFormatterSelCountStyle                      = objc.RegisterName("countStyle")
+	_nSByteCountFormatterSelSetCountStyle                   = objc.RegisterName("setCountStyle:")
+	_nSByteCountFormatterSelAllowsNonnumericFormatting      = objc.RegisterName("allowsNonnumericFormatting")
+	_nSByteCountFormatterSelSetAllowsNonnumericFormatting   = objc.RegisterName("setAllowsNonnumericFormatting:")
+	_nSByteCountFormatterSelIncludesUnit                    = objc.RegisterName("includesUnit")
+	_nSByteCountFormatterSelSetIncludesUnit                 = objc.RegisterName("setIncludesUnit:")
+	_nSByteCountFormatterSelIncludesCount                   = objc.RegisterName("includesCount")
+	_nSByteCountFormatterSelSetIncludesCount                = objc.RegisterName("setIncludesCount:")
+	_nSByteCountFormatterSelIncludesActualByteCount         = objc.RegisterName("includesActualByteCount")
+	_nSByteCountFormatterSelSetIncludesActualByteCount      = objc.RegisterName("setIncludesActualByteCount:")
+	_nSByteCountFormatterSelIsAdaptive                      = objc.RegisterName("isAdaptive")
+	_nSByteCountFormatterSelSetAdaptive                     = objc.RegisterName("setAdaptive:")
+	_nSByteCountFormatterSelZeroPadsFractionDigits          = objc.RegisterName("zeroPadsFractionDigits")
+	_nSByteCountFormatterSelSetZeroPadsFractionDigits       = objc.RegisterName("setZeroPadsFractionDigits:")
+	_nSByteCountFormatterSelFormattingContext               = objc.RegisterName("formattingContext")
+	_nSByteCountFormatterSelSetFormattingContext            = objc.RegisterName("setFormattingContext:")
 )
 
 func NSByteCountFormatterFromID(id objc.ID) *NSByteCountFormatter {
@@ -52,25 +52,33 @@ func NSByteCountFormatterFromID(id objc.ID) *NSByteCountFormatter {
 
 func NSByteCountFormatterStringFromByteCountCountStyle(byteCount int64, countStyle NSByteCountFormatterCountStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSByteCountFormatter), _nSByteCountFormatterSelStringFromByteCountCountStyle, byteCount, countStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSByteCountFormatter) StringFromByteCount(byteCount int64) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSByteCountFormatterSelStringFromByteCount, byteCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func NSByteCountFormatterStringFromMeasurementCountStyle(measurement *NSMeasurement[*NSUnitInformationStorage], countStyle NSByteCountFormatterCountStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSByteCountFormatter), _nSByteCountFormatterSelStringFromMeasurementCountStyle, measurement.Ptr(), countStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSByteCountFormatter) StringFromMeasurement(measurement *NSMeasurement[*NSUnitInformationStorage]) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSByteCountFormatterSelStringFromMeasurement, measurement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -154,4 +162,3 @@ func (o *NSByteCountFormatter) FormattingContext() NSFormattingContext {
 func (o *NSByteCountFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
 	o.Ptr().Send(_nSByteCountFormatterSelSetFormattingContext, formattingContext)
 }
-

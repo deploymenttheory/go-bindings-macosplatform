@@ -83,4 +83,3 @@ type SplitLayerable interface {
 }
 
 var _ SplitLayerable = (*SplitLayer)(nil)
-

@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestEmitTestEventRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEmitTestEventRequestParams].
-func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -116,7 +118,9 @@ func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetServerSideProce
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestEmitTestEventRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestEventRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestEmitTestEventRequestParamsable interface {
@@ -139,4 +143,3 @@ type MTRUnitTestingClusterTestEmitTestEventRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestEmitTestEventRequestParamsable = (*MTRUnitTestingClusterTestEmitTestEventRequestParams)(nil)
-

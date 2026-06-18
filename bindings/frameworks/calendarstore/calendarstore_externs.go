@@ -110,7 +110,9 @@ func CalCalendarsChangedNotification() uintptr {
 // Deprecated: since macOS 10.8.
 func CalDefaultRecurrenceInterval() uint {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalDefaultRecurrenceInterval")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
@@ -164,4 +166,3 @@ func CalUserUIDKey() uintptr {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalUserUIDKey")
 	return ptr
 }
-

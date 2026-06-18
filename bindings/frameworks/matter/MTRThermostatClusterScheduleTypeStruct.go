@@ -16,12 +16,12 @@ type MTRThermostatClusterScheduleTypeStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterScheduleTypeStruct = _objcClass("MTRThermostatClusterScheduleTypeStruct")
-	_mTRThermostatClusterScheduleTypeStructSelSystemMode = objc.RegisterName("systemMode")
-	_mTRThermostatClusterScheduleTypeStructSelSetSystemMode = objc.RegisterName("setSystemMode:")
-	_mTRThermostatClusterScheduleTypeStructSelNumberOfSchedules = objc.RegisterName("numberOfSchedules")
-	_mTRThermostatClusterScheduleTypeStructSelSetNumberOfSchedules = objc.RegisterName("setNumberOfSchedules:")
-	_mTRThermostatClusterScheduleTypeStructSelScheduleTypeFeatures = objc.RegisterName("scheduleTypeFeatures")
+	_clsMTRThermostatClusterScheduleTypeStruct                        = _objcClass("MTRThermostatClusterScheduleTypeStruct")
+	_mTRThermostatClusterScheduleTypeStructSelSystemMode              = objc.RegisterName("systemMode")
+	_mTRThermostatClusterScheduleTypeStructSelSetSystemMode           = objc.RegisterName("setSystemMode:")
+	_mTRThermostatClusterScheduleTypeStructSelNumberOfSchedules       = objc.RegisterName("numberOfSchedules")
+	_mTRThermostatClusterScheduleTypeStructSelSetNumberOfSchedules    = objc.RegisterName("setNumberOfSchedules:")
+	_mTRThermostatClusterScheduleTypeStructSelScheduleTypeFeatures    = objc.RegisterName("scheduleTypeFeatures")
 	_mTRThermostatClusterScheduleTypeStructSelSetScheduleTypeFeatures = objc.RegisterName("setScheduleTypeFeatures:")
 )
 
@@ -37,7 +37,9 @@ func MTRThermostatClusterScheduleTypeStructFromID(id objc.ID) *MTRThermostatClus
 
 func (o *MTRThermostatClusterScheduleTypeStruct) SystemMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTypeStructSelSystemMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRThermostatClusterScheduleTypeStruct) SetSystemMode(systemMode *found
 
 func (o *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTypeStructSelNumberOfSchedules)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRThermostatClusterScheduleTypeStruct) SetNumberOfSchedules(numberOfSc
 
 func (o *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTypeStructSelScheduleTypeFeatures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterScheduleTypeStruct) SetScheduleTypeFeatures(scheduleTypeFeatures *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterScheduleTypeStructSelSetScheduleTypeFeatures, scheduleTypeFeatures.Ptr())
 }
-

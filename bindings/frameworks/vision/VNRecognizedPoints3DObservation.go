@@ -18,11 +18,11 @@ type VNRecognizedPoints3DObservation struct {
 }
 
 var (
-	_clsVNRecognizedPoints3DObservation = _objcClass("VNRecognizedPoints3DObservation")
-	_vNRecognizedPoints3DObservationSelRecognizedPointForKeyError = objc.RegisterName("recognizedPointForKey:error:")
+	_clsVNRecognizedPoints3DObservation                                 = _objcClass("VNRecognizedPoints3DObservation")
+	_vNRecognizedPoints3DObservationSelRecognizedPointForKeyError       = objc.RegisterName("recognizedPointForKey:error:")
 	_vNRecognizedPoints3DObservationSelRecognizedPointsForGroupKeyError = objc.RegisterName("recognizedPointsForGroupKey:error:")
-	_vNRecognizedPoints3DObservationSelAvailableKeys = objc.RegisterName("availableKeys")
-	_vNRecognizedPoints3DObservationSelAvailableGroupKeys = objc.RegisterName("availableGroupKeys")
+	_vNRecognizedPoints3DObservationSelAvailableKeys                    = objc.RegisterName("availableKeys")
+	_vNRecognizedPoints3DObservationSelAvailableGroupKeys               = objc.RegisterName("availableGroupKeys")
 )
 
 func VNRecognizedPoints3DObservationFromID(id objc.ID) *VNRecognizedPoints3DObservation {
@@ -39,7 +39,9 @@ func VNRecognizedPoints3DObservationFromID(id objc.ID) *VNRecognizedPoints3DObse
 func (o *VNRecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*VNRecognizedPoint3D, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNRecognizedPoints3DObservationSelRecognizedPointForKeyError, pointKey.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,4 +69,3 @@ func (o *VNRecognizedPoints3DObservation) AvailableGroupKeys() *foundation.NSArr
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _vNRecognizedPoints3DObservationSelAvailableGroupKeys)
 	return _ret
 }
-

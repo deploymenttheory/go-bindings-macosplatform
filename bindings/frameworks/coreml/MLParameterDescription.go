@@ -16,9 +16,9 @@ type MLParameterDescription struct {
 }
 
 var (
-	_clsMLParameterDescription = _objcClass("MLParameterDescription")
-	_mLParameterDescriptionSelKey = objc.RegisterName("key")
-	_mLParameterDescriptionSelDefaultValue = objc.RegisterName("defaultValue")
+	_clsMLParameterDescription                  = _objcClass("MLParameterDescription")
+	_mLParameterDescriptionSelKey               = objc.RegisterName("key")
+	_mLParameterDescriptionSelDefaultValue      = objc.RegisterName("defaultValue")
 	_mLParameterDescriptionSelNumericConstraint = objc.RegisterName("numericConstraint")
 )
 
@@ -34,7 +34,9 @@ func MLParameterDescriptionFromID(id objc.ID) *MLParameterDescription {
 
 func (o *MLParameterDescription) Key() *MLParameterKey {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLParameterDescriptionSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLParameterKeyFromID(_ret)
 }
 
@@ -45,7 +47,8 @@ func (o *MLParameterDescription) DefaultValue() objc.ID {
 
 func (o *MLParameterDescription) NumericConstraint() *MLNumericConstraint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLParameterDescriptionSelNumericConstraint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLNumericConstraintFromID(_ret)
 }
-

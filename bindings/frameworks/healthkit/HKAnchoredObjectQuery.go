@@ -18,12 +18,12 @@ type HKAnchoredObjectQuery struct {
 }
 
 var (
-	_clsHKAnchoredObjectQuery = _objcClass("HKAnchoredObjectQuery")
-	_hKAnchoredObjectQuerySelInitWithTypePredicateAnchorLimitResultsHandler = objc.RegisterName("initWithType:predicate:anchor:limit:resultsHandler:")
+	_clsHKAnchoredObjectQuery                                                  = _objcClass("HKAnchoredObjectQuery")
+	_hKAnchoredObjectQuerySelInitWithTypePredicateAnchorLimitResultsHandler    = objc.RegisterName("initWithType:predicate:anchor:limit:resultsHandler:")
 	_hKAnchoredObjectQuerySelInitWithTypePredicateAnchorLimitCompletionHandler = objc.RegisterName("initWithType:predicate:anchor:limit:completionHandler:")
 	_hKAnchoredObjectQuerySelInitWithQueryDescriptorsAnchorLimitResultsHandler = objc.RegisterName("initWithQueryDescriptors:anchor:limit:resultsHandler:")
-	_hKAnchoredObjectQuerySelUpdateHandler = objc.RegisterName("updateHandler")
-	_hKAnchoredObjectQuerySelSetUpdateHandler = objc.RegisterName("setUpdateHandler:")
+	_hKAnchoredObjectQuerySelUpdateHandler                                     = objc.RegisterName("updateHandler")
+	_hKAnchoredObjectQuerySelSetUpdateHandler                                  = objc.RegisterName("setUpdateHandler:")
 )
 
 func HKAnchoredObjectQueryFromID(id objc.ID) *HKAnchoredObjectQuery {
@@ -58,7 +58,9 @@ func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitResultsHandler(t
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAnchoredObjectQuerySelInitWithTypePredicateAnchorLimitResultsHandler, type_.Ptr(), predicate.Ptr(), anchor.Ptr(), limit, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAnchoredObjectQueryFromID(_ret)
 }
 
@@ -77,7 +79,9 @@ func (o *HKAnchoredObjectQuery) InitWithTypePredicateAnchorLimitCompletionHandle
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAnchoredObjectQuerySelInitWithTypePredicateAnchorLimitCompletionHandler, type_.Ptr(), predicate.Ptr(), anchor, limit, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAnchoredObjectQueryFromID(_ret)
 }
 
@@ -103,7 +107,9 @@ func (o *HKAnchoredObjectQuery) InitWithQueryDescriptorsAnchorLimitResultsHandle
 		defer __block_handler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAnchoredObjectQuerySelInitWithQueryDescriptorsAnchorLimitResultsHandler, queryDescriptors.Ptr(), anchor.Ptr(), limit, __block_handler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKAnchoredObjectQueryFromID(_ret)
 }
 
@@ -135,4 +141,3 @@ func (o *HKAnchoredObjectQuery) SetUpdateHandler(updateHandler func(*HKAnchoredO
 	}
 	o.Ptr().Send(_hKAnchoredObjectQuerySelSetUpdateHandler, __block_updateHandler)
 }
-

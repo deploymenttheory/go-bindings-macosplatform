@@ -164,4 +164,3 @@ type LeaderboardSetable interface {
 }
 
 var _ LeaderboardSetable = (*LeaderboardSet)(nil)
-

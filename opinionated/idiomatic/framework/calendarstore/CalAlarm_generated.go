@@ -203,4 +203,3 @@ type CalAlarmable interface {
 }
 
 var _ CalAlarmable = (*CalAlarm)(nil)
-

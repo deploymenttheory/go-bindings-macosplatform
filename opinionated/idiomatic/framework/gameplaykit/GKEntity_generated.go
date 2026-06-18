@@ -82,4 +82,3 @@ type Entityable interface {
 }
 
 var _ Entityable = (*Entity)(nil)
-

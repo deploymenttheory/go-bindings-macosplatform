@@ -4,9 +4,9 @@
 package appkit
 
 type NSDirectionalEdgeInsets struct {
-	Top float64
-	Leading float64
-	Bottom float64
+	Top      float64
+	Leading  float64
+	Bottom   float64
 	Trailing float64
 }
 
@@ -14,4 +14,3 @@ type NSDirectionalEdgeInsets struct {
 // C struct: _NSModalSession
 // NSModalSession is an opaque type.
 type NSModalSession struct{}
-

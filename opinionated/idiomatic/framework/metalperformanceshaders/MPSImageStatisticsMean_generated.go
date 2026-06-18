@@ -93,9 +93,13 @@ func (x *ImageStatisticsMean) SetClipRectSource(clipRectSource metal.MTLRegion) 
 	x.inner.SetClipRectSource(clipRectSource)
 }
 
-func (x *ImageStatisticsMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageStatisticsMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageStatisticsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageStatisticsMean) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageStatisticsMeanable is the interface implemented by [ImageStatisticsMean], for mocking and DI.
 type ImageStatisticsMeanable interface {
@@ -111,4 +115,3 @@ type ImageStatisticsMeanable interface {
 }
 
 var _ ImageStatisticsMeanable = (*ImageStatisticsMean)(nil)
-

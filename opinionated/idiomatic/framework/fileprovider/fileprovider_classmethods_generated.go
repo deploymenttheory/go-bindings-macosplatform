@@ -137,4 +137,3 @@ func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *raw.NSFileProvi
 func CheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError(eligible *bool, url string, unsupportedReason *raw.NSFileProviderVolumeUnsupportedReason) (bool, error) {
 	return raw.NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError(eligible, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), unsupportedReason)
 }
-

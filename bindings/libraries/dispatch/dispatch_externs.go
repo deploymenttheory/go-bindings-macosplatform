@@ -59,4 +59,3 @@ var (
 	// Introduced: macOS 10.6
 	_dispatch_source_type_write unsafe.Pointer
 )
-

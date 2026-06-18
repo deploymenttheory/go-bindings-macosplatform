@@ -45,7 +45,9 @@ func (x *CaptionConversionAdjustment) AdjustmentType() string {
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *CaptionConversionAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment { return x.inner }
+func (x *CaptionConversionAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment {
+	return x.inner
+}
 
 // CaptionConversionAdjustmentable is the interface implemented by [CaptionConversionAdjustment], for mocking and DI.
 type CaptionConversionAdjustmentable interface {
@@ -54,4 +56,3 @@ type CaptionConversionAdjustmentable interface {
 }
 
 var _ CaptionConversionAdjustmentable = (*CaptionConversionAdjustment)(nil)
-

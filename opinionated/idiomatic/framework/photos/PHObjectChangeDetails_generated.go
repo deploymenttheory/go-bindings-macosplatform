@@ -65,4 +65,3 @@ type ObjectChangeDetailsable interface {
 }
 
 var _ ObjectChangeDetailsable = (*ObjectChangeDetails)(nil)
-

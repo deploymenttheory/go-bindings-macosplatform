@@ -250,4 +250,3 @@ type Scoreable interface {
 }
 
 var _ Scoreable = (*Score)(nil)
-

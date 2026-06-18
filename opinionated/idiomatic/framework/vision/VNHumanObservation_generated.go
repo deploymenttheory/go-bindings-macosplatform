@@ -40,9 +40,13 @@ func (x *HumanObservation) UpperBodyOnly() bool {
 	return x.inner.UpperBodyOnly()
 }
 
-func (x *HumanObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
+func (x *HumanObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNDetectedObjectObservation
+}
 
-func (x *HumanObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+func (x *HumanObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNDetectedObjectObservation.VNObservation
+}
 
 // HumanObservationable is the interface implemented by [HumanObservation], for mocking and DI.
 type HumanObservationable interface {
@@ -51,4 +55,3 @@ type HumanObservationable interface {
 }
 
 var _ HumanObservationable = (*HumanObservation)(nil)
-

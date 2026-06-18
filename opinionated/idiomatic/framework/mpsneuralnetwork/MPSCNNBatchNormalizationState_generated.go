@@ -80,7 +80,9 @@ func (x *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization
 	return &CNNBatchNormalization{inner: _r}
 }
 
-func (x *CNNBatchNormalizationState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNBatchNormalizationState) asNNGradientState() *raw.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
 // CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
 type CNNBatchNormalizationStateable interface {
@@ -96,4 +98,3 @@ type CNNBatchNormalizationStateable interface {
 }
 
 var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
-

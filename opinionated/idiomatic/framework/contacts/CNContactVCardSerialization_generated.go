@@ -41,4 +41,3 @@ type ContactVCardSerializationable interface {
 }
 
 var _ ContactVCardSerializationable = (*ContactVCardSerialization)(nil)
-

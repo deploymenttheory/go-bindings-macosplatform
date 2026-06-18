@@ -150,4 +150,3 @@ type AssetInfoable interface {
 }
 
 var _ AssetInfoable = (*AssetInfo)(nil)
-

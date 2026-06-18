@@ -18,7 +18,7 @@ type TKTokenAuthOperation struct {
 }
 
 var (
-	_clsTKTokenAuthOperation = _objcClass("TKTokenAuthOperation")
+	_clsTKTokenAuthOperation                = _objcClass("TKTokenAuthOperation")
 	_tKTokenAuthOperationSelFinishWithError = objc.RegisterName("finishWithError:")
 )
 
@@ -41,4 +41,3 @@ func (o *TKTokenAuthOperation) FinishWithError() (bool, error) {
 	}
 	return _ret, nil
 }
-

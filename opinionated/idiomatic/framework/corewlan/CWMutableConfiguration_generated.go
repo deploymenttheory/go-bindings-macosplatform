@@ -91,7 +91,9 @@ func (x *MutableConfiguration) SetRememberJoinedNetworks(rememberJoinedNetworks 
 	x.inner.SetRememberJoinedNetworks(rememberJoinedNetworks)
 }
 
-func (x *MutableConfiguration) asConfiguration() *raw.CWConfiguration { return &x.inner.CWConfiguration }
+func (x *MutableConfiguration) asConfiguration() *raw.CWConfiguration {
+	return &x.inner.CWConfiguration
+}
 
 // MutableConfigurationable is the interface implemented by [MutableConfiguration], for mocking and DI.
 type MutableConfigurationable interface {
@@ -109,4 +111,3 @@ type MutableConfigurationable interface {
 }
 
 var _ MutableConfigurationable = (*MutableConfiguration)(nil)
-

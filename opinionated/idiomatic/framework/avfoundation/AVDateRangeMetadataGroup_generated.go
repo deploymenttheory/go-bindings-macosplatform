@@ -47,9 +47,13 @@ func (x *DateRangeMetadataGroup) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
-func (x *DateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup { return x.inner }
+func (x *DateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup {
+	return x.inner
+}
 
-func (x *DateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVMetadataGroup }
+func (x *DateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
+	return &x.inner.AVMetadataGroup
+}
 
 // DateRangeMetadataGroupable is the interface implemented by [DateRangeMetadataGroup], for mocking and DI.
 type DateRangeMetadataGroupable interface {
@@ -59,4 +63,3 @@ type DateRangeMetadataGroupable interface {
 }
 
 var _ DateRangeMetadataGroupable = (*DateRangeMetadataGroup)(nil)
-

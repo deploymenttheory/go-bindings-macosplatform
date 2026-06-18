@@ -18,7 +18,9 @@ type MTROperationalCredentialsClusterNOCResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalCredentialsClusterNOCResponseParams].
-func (x *MTROperationalCredentialsClusterNOCResponseParams) Unwrap() *raw.MTROperationalCredentialsClusterNOCResponseParams { return x.inner }
+func (x *MTROperationalCredentialsClusterNOCResponseParams) Unwrap() *raw.MTROperationalCredentialsClusterNOCResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -129,4 +131,3 @@ type MTROperationalCredentialsClusterNOCResponseParamsable interface {
 }
 
 var _ MTROperationalCredentialsClusterNOCResponseParamsable = (*MTROperationalCredentialsClusterNOCResponseParams)(nil)
-

@@ -16,7 +16,9 @@ type GenerateObjectnessBasedSaliencyImageRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGenerateObjectnessBasedSaliencyImageRequest].
-func (x *GenerateObjectnessBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest { return x.inner }
+func (x *GenerateObjectnessBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision uint
 	return x
 }
 
-func (x *GenerateObjectnessBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *GenerateObjectnessBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
 type GenerateObjectnessBasedSaliencyImageRequestable interface {
@@ -74,4 +80,3 @@ type GenerateObjectnessBasedSaliencyImageRequestable interface {
 }
 
 var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
-

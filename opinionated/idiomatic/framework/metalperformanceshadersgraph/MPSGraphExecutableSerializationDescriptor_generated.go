@@ -17,7 +17,9 @@ type GraphExecutableSerializationDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MPSGraphExecutableSerializationDescriptor].
-func (x *GraphExecutableSerializationDescriptor) Unwrap() *raw.MPSGraphExecutableSerializationDescriptor { return x.inner }
+func (x *GraphExecutableSerializationDescriptor) Unwrap() *raw.MPSGraphExecutableSerializationDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -89,7 +91,9 @@ func (x *GraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(mini
 	x.inner.SetMinimumDeploymentTarget(foundation.NSStringStringWithUTF8String(minimumDeploymentTarget))
 }
 
-func (x *GraphExecutableSerializationDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphExecutableSerializationDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphExecutableSerializationDescriptorable is the interface implemented by [GraphExecutableSerializationDescriptor], for mocking and DI.
 type GraphExecutableSerializationDescriptorable interface {
@@ -106,4 +110,3 @@ type GraphExecutableSerializationDescriptorable interface {
 }
 
 var _ GraphExecutableSerializationDescriptorable = (*GraphExecutableSerializationDescriptor)(nil)
-

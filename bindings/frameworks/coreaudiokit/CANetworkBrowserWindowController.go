@@ -16,9 +16,9 @@ type CANetworkBrowserWindowController struct {
 }
 
 var (
-	_clsCANetworkBrowserWindowController = _objcClass("CANetworkBrowserWindowController")
+	_clsCANetworkBrowserWindowController               = _objcClass("CANetworkBrowserWindowController")
 	_cANetworkBrowserWindowControllerSelIsAVBSupported = objc.RegisterName("isAVBSupported")
-	_cANetworkBrowserWindowControllerSelInit = objc.RegisterName("init")
+	_cANetworkBrowserWindowControllerSelInit           = objc.RegisterName("init")
 )
 
 func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowController {
@@ -40,7 +40,8 @@ func CANetworkBrowserWindowControllerIsAVBSupported() bool {
 // @discussion Designated initializer @return initialized instance of CANetworkBrowerWindowController
 func (o *CANetworkBrowserWindowController) Init() *CANetworkBrowserWindowController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cANetworkBrowserWindowControllerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CANetworkBrowserWindowControllerFromID(_ret)
 }
-

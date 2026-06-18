@@ -16,9 +16,9 @@ type MLStateConstraint struct {
 }
 
 var (
-	_clsMLStateConstraint = _objcClass("MLStateConstraint")
+	_clsMLStateConstraint            = _objcClass("MLStateConstraint")
 	_mLStateConstraintSelBufferShape = objc.RegisterName("bufferShape")
-	_mLStateConstraintSelDataType = objc.RegisterName("dataType")
+	_mLStateConstraintSelDataType    = objc.RegisterName("dataType")
 )
 
 func MLStateConstraintFromID(id objc.ID) *MLStateConstraint {
@@ -42,4 +42,3 @@ func (o *MLStateConstraint) DataType() MLMultiArrayDataType {
 	_ret := objc.Send[MLMultiArrayDataType](o.Ptr(), _mLStateConstraintSelDataType)
 	return _ret
 }
-

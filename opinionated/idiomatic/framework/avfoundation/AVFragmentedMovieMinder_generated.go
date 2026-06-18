@@ -64,7 +64,9 @@ func (x *FragmentedMovieMinder) Movies() []*FragmentedMovie {
 	})
 }
 
-func (x *FragmentedMovieMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder { return &x.inner.AVFragmentedAssetMinder }
+func (x *FragmentedMovieMinder) asFragmentedAssetMinder() *raw.AVFragmentedAssetMinder {
+	return &x.inner.AVFragmentedAssetMinder
+}
 
 // FragmentedMovieMinderable is the interface implemented by [FragmentedMovieMinder], for mocking and DI.
 type FragmentedMovieMinderable interface {
@@ -76,4 +78,3 @@ type FragmentedMovieMinderable interface {
 }
 
 var _ FragmentedMovieMinderable = (*FragmentedMovieMinder)(nil)
-

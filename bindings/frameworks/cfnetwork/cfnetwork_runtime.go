@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_cfnetworkLib uintptr
-	_loadOnce sync.Once
+	_cfnetworkLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,40 +48,98 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("CFFTPCreateParsedResourceListing", func() { purego.RegisterLibFunc(&_fnCFFTPCreateParsedResourceListing, _cfnetworkLib, "CFFTPCreateParsedResourceListing") })
-	_register("CFHTTPAuthenticationAppliesToRequest", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationAppliesToRequest, _cfnetworkLib, "CFHTTPAuthenticationAppliesToRequest") })
-	_register("CFHTTPAuthenticationCopyDomains", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyDomains, _cfnetworkLib, "CFHTTPAuthenticationCopyDomains") })
-	_register("CFHTTPAuthenticationCopyMethod", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyMethod, _cfnetworkLib, "CFHTTPAuthenticationCopyMethod") })
-	_register("CFHTTPAuthenticationCopyRealm", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyRealm, _cfnetworkLib, "CFHTTPAuthenticationCopyRealm") })
-	_register("CFHTTPAuthenticationCreateFromResponse", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCreateFromResponse, _cfnetworkLib, "CFHTTPAuthenticationCreateFromResponse") })
-	_register("CFHTTPAuthenticationGetTypeID", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationGetTypeID, _cfnetworkLib, "CFHTTPAuthenticationGetTypeID") })
-	_register("CFHTTPAuthenticationIsValid", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationIsValid, _cfnetworkLib, "CFHTTPAuthenticationIsValid") })
-	_register("CFHTTPAuthenticationRequiresAccountDomain", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresAccountDomain, _cfnetworkLib, "CFHTTPAuthenticationRequiresAccountDomain") })
-	_register("CFHTTPAuthenticationRequiresOrderedRequests", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresOrderedRequests, _cfnetworkLib, "CFHTTPAuthenticationRequiresOrderedRequests") })
-	_register("CFHTTPAuthenticationRequiresUserNameAndPassword", func() { purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresUserNameAndPassword, _cfnetworkLib, "CFHTTPAuthenticationRequiresUserNameAndPassword") })
-	_register("CFHTTPMessageAddAuthentication", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageAddAuthentication, _cfnetworkLib, "CFHTTPMessageAddAuthentication") })
-	_register("CFHTTPMessageAppendBytes", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageAppendBytes, _cfnetworkLib, "CFHTTPMessageAppendBytes") })
-	_register("CFHTTPMessageApplyCredentialDictionary", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentialDictionary, _cfnetworkLib, "CFHTTPMessageApplyCredentialDictionary") })
-	_register("CFHTTPMessageApplyCredentials", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentials, _cfnetworkLib, "CFHTTPMessageApplyCredentials") })
-	_register("CFHTTPMessageCopyAllHeaderFields", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyAllHeaderFields, _cfnetworkLib, "CFHTTPMessageCopyAllHeaderFields") })
+	_register("CFFTPCreateParsedResourceListing", func() {
+		purego.RegisterLibFunc(&_fnCFFTPCreateParsedResourceListing, _cfnetworkLib, "CFFTPCreateParsedResourceListing")
+	})
+	_register("CFHTTPAuthenticationAppliesToRequest", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationAppliesToRequest, _cfnetworkLib, "CFHTTPAuthenticationAppliesToRequest")
+	})
+	_register("CFHTTPAuthenticationCopyDomains", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyDomains, _cfnetworkLib, "CFHTTPAuthenticationCopyDomains")
+	})
+	_register("CFHTTPAuthenticationCopyMethod", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyMethod, _cfnetworkLib, "CFHTTPAuthenticationCopyMethod")
+	})
+	_register("CFHTTPAuthenticationCopyRealm", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCopyRealm, _cfnetworkLib, "CFHTTPAuthenticationCopyRealm")
+	})
+	_register("CFHTTPAuthenticationCreateFromResponse", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationCreateFromResponse, _cfnetworkLib, "CFHTTPAuthenticationCreateFromResponse")
+	})
+	_register("CFHTTPAuthenticationGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationGetTypeID, _cfnetworkLib, "CFHTTPAuthenticationGetTypeID")
+	})
+	_register("CFHTTPAuthenticationIsValid", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationIsValid, _cfnetworkLib, "CFHTTPAuthenticationIsValid")
+	})
+	_register("CFHTTPAuthenticationRequiresAccountDomain", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresAccountDomain, _cfnetworkLib, "CFHTTPAuthenticationRequiresAccountDomain")
+	})
+	_register("CFHTTPAuthenticationRequiresOrderedRequests", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresOrderedRequests, _cfnetworkLib, "CFHTTPAuthenticationRequiresOrderedRequests")
+	})
+	_register("CFHTTPAuthenticationRequiresUserNameAndPassword", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPAuthenticationRequiresUserNameAndPassword, _cfnetworkLib, "CFHTTPAuthenticationRequiresUserNameAndPassword")
+	})
+	_register("CFHTTPMessageAddAuthentication", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageAddAuthentication, _cfnetworkLib, "CFHTTPMessageAddAuthentication")
+	})
+	_register("CFHTTPMessageAppendBytes", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageAppendBytes, _cfnetworkLib, "CFHTTPMessageAppendBytes")
+	})
+	_register("CFHTTPMessageApplyCredentialDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentialDictionary, _cfnetworkLib, "CFHTTPMessageApplyCredentialDictionary")
+	})
+	_register("CFHTTPMessageApplyCredentials", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentials, _cfnetworkLib, "CFHTTPMessageApplyCredentials")
+	})
+	_register("CFHTTPMessageCopyAllHeaderFields", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyAllHeaderFields, _cfnetworkLib, "CFHTTPMessageCopyAllHeaderFields")
+	})
 	_register("CFHTTPMessageCopyBody", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyBody, _cfnetworkLib, "CFHTTPMessageCopyBody") })
-	_register("CFHTTPMessageCopyHeaderFieldValue", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyHeaderFieldValue, _cfnetworkLib, "CFHTTPMessageCopyHeaderFieldValue") })
-	_register("CFHTTPMessageCopyRequestMethod", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestMethod, _cfnetworkLib, "CFHTTPMessageCopyRequestMethod") })
-	_register("CFHTTPMessageCopyRequestURL", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestURL, _cfnetworkLib, "CFHTTPMessageCopyRequestURL") })
-	_register("CFHTTPMessageCopyResponseStatusLine", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyResponseStatusLine, _cfnetworkLib, "CFHTTPMessageCopyResponseStatusLine") })
-	_register("CFHTTPMessageCopySerializedMessage", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopySerializedMessage, _cfnetworkLib, "CFHTTPMessageCopySerializedMessage") })
-	_register("CFHTTPMessageCopyVersion", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCopyVersion, _cfnetworkLib, "CFHTTPMessageCopyVersion") })
+	_register("CFHTTPMessageCopyHeaderFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyHeaderFieldValue, _cfnetworkLib, "CFHTTPMessageCopyHeaderFieldValue")
+	})
+	_register("CFHTTPMessageCopyRequestMethod", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestMethod, _cfnetworkLib, "CFHTTPMessageCopyRequestMethod")
+	})
+	_register("CFHTTPMessageCopyRequestURL", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyRequestURL, _cfnetworkLib, "CFHTTPMessageCopyRequestURL")
+	})
+	_register("CFHTTPMessageCopyResponseStatusLine", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyResponseStatusLine, _cfnetworkLib, "CFHTTPMessageCopyResponseStatusLine")
+	})
+	_register("CFHTTPMessageCopySerializedMessage", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopySerializedMessage, _cfnetworkLib, "CFHTTPMessageCopySerializedMessage")
+	})
+	_register("CFHTTPMessageCopyVersion", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCopyVersion, _cfnetworkLib, "CFHTTPMessageCopyVersion")
+	})
 	_register("CFHTTPMessageCreateCopy", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCreateCopy, _cfnetworkLib, "CFHTTPMessageCreateCopy") })
-	_register("CFHTTPMessageCreateEmpty", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCreateEmpty, _cfnetworkLib, "CFHTTPMessageCreateEmpty") })
-	_register("CFHTTPMessageCreateRequest", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCreateRequest, _cfnetworkLib, "CFHTTPMessageCreateRequest") })
-	_register("CFHTTPMessageCreateResponse", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageCreateResponse, _cfnetworkLib, "CFHTTPMessageCreateResponse") })
-	_register("CFHTTPMessageGetResponseStatusCode", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageGetResponseStatusCode, _cfnetworkLib, "CFHTTPMessageGetResponseStatusCode") })
+	_register("CFHTTPMessageCreateEmpty", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCreateEmpty, _cfnetworkLib, "CFHTTPMessageCreateEmpty")
+	})
+	_register("CFHTTPMessageCreateRequest", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCreateRequest, _cfnetworkLib, "CFHTTPMessageCreateRequest")
+	})
+	_register("CFHTTPMessageCreateResponse", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageCreateResponse, _cfnetworkLib, "CFHTTPMessageCreateResponse")
+	})
+	_register("CFHTTPMessageGetResponseStatusCode", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageGetResponseStatusCode, _cfnetworkLib, "CFHTTPMessageGetResponseStatusCode")
+	})
 	_register("CFHTTPMessageGetTypeID", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageGetTypeID, _cfnetworkLib, "CFHTTPMessageGetTypeID") })
-	_register("CFHTTPMessageIsHeaderComplete", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageIsHeaderComplete, _cfnetworkLib, "CFHTTPMessageIsHeaderComplete") })
+	_register("CFHTTPMessageIsHeaderComplete", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageIsHeaderComplete, _cfnetworkLib, "CFHTTPMessageIsHeaderComplete")
+	})
 	_register("CFHTTPMessageIsRequest", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageIsRequest, _cfnetworkLib, "CFHTTPMessageIsRequest") })
 	_register("CFHTTPMessageSetBody", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageSetBody, _cfnetworkLib, "CFHTTPMessageSetBody") })
-	_register("CFHTTPMessageSetHeaderFieldValue", func() { purego.RegisterLibFunc(&_fnCFHTTPMessageSetHeaderFieldValue, _cfnetworkLib, "CFHTTPMessageSetHeaderFieldValue") })
-	_register("CFHostCancelInfoResolution", func() { purego.RegisterLibFunc(&_fnCFHostCancelInfoResolution, _cfnetworkLib, "CFHostCancelInfoResolution") })
+	_register("CFHTTPMessageSetHeaderFieldValue", func() {
+		purego.RegisterLibFunc(&_fnCFHTTPMessageSetHeaderFieldValue, _cfnetworkLib, "CFHTTPMessageSetHeaderFieldValue")
+	})
+	_register("CFHostCancelInfoResolution", func() {
+		purego.RegisterLibFunc(&_fnCFHostCancelInfoResolution, _cfnetworkLib, "CFHostCancelInfoResolution")
+	})
 	_register("CFHostCreateCopy", func() { purego.RegisterLibFunc(&_fnCFHostCreateCopy, _cfnetworkLib, "CFHostCreateCopy") })
 	_register("CFHostCreateWithAddress", func() { purego.RegisterLibFunc(&_fnCFHostCreateWithAddress, _cfnetworkLib, "CFHostCreateWithAddress") })
 	_register("CFHostCreateWithName", func() { purego.RegisterLibFunc(&_fnCFHostCreateWithName, _cfnetworkLib, "CFHostCreateWithName") })
@@ -89,64 +147,150 @@ func _loadLibrary() {
 	_register("CFHostGetNames", func() { purego.RegisterLibFunc(&_fnCFHostGetNames, _cfnetworkLib, "CFHostGetNames") })
 	_register("CFHostGetReachability", func() { purego.RegisterLibFunc(&_fnCFHostGetReachability, _cfnetworkLib, "CFHostGetReachability") })
 	_register("CFHostGetTypeID", func() { purego.RegisterLibFunc(&_fnCFHostGetTypeID, _cfnetworkLib, "CFHostGetTypeID") })
-	_register("CFHostScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFHostScheduleWithRunLoop, _cfnetworkLib, "CFHostScheduleWithRunLoop") })
+	_register("CFHostScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFHostScheduleWithRunLoop, _cfnetworkLib, "CFHostScheduleWithRunLoop")
+	})
 	_register("CFHostSetClient", func() { purego.RegisterLibFunc(&_fnCFHostSetClient, _cfnetworkLib, "CFHostSetClient") })
-	_register("CFHostStartInfoResolution", func() { purego.RegisterLibFunc(&_fnCFHostStartInfoResolution, _cfnetworkLib, "CFHostStartInfoResolution") })
-	_register("CFHostUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFHostUnscheduleFromRunLoop, _cfnetworkLib, "CFHostUnscheduleFromRunLoop") })
-	_register("CFNetDiagnosticCopyNetworkStatusPassively", func() { purego.RegisterLibFunc(&_fnCFNetDiagnosticCopyNetworkStatusPassively, _cfnetworkLib, "CFNetDiagnosticCopyNetworkStatusPassively") })
-	_register("CFNetDiagnosticCreateWithStreams", func() { purego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithStreams, _cfnetworkLib, "CFNetDiagnosticCreateWithStreams") })
-	_register("CFNetDiagnosticCreateWithURL", func() { purego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithURL, _cfnetworkLib, "CFNetDiagnosticCreateWithURL") })
-	_register("CFNetDiagnosticDiagnoseProblemInteractively", func() { purego.RegisterLibFunc(&_fnCFNetDiagnosticDiagnoseProblemInteractively, _cfnetworkLib, "CFNetDiagnosticDiagnoseProblemInteractively") })
+	_register("CFHostStartInfoResolution", func() {
+		purego.RegisterLibFunc(&_fnCFHostStartInfoResolution, _cfnetworkLib, "CFHostStartInfoResolution")
+	})
+	_register("CFHostUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFHostUnscheduleFromRunLoop, _cfnetworkLib, "CFHostUnscheduleFromRunLoop")
+	})
+	_register("CFNetDiagnosticCopyNetworkStatusPassively", func() {
+		purego.RegisterLibFunc(&_fnCFNetDiagnosticCopyNetworkStatusPassively, _cfnetworkLib, "CFNetDiagnosticCopyNetworkStatusPassively")
+	})
+	_register("CFNetDiagnosticCreateWithStreams", func() {
+		purego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithStreams, _cfnetworkLib, "CFNetDiagnosticCreateWithStreams")
+	})
+	_register("CFNetDiagnosticCreateWithURL", func() {
+		purego.RegisterLibFunc(&_fnCFNetDiagnosticCreateWithURL, _cfnetworkLib, "CFNetDiagnosticCreateWithURL")
+	})
+	_register("CFNetDiagnosticDiagnoseProblemInteractively", func() {
+		purego.RegisterLibFunc(&_fnCFNetDiagnosticDiagnoseProblemInteractively, _cfnetworkLib, "CFNetDiagnosticDiagnoseProblemInteractively")
+	})
 	_register("CFNetDiagnosticSetName", func() { purego.RegisterLibFunc(&_fnCFNetDiagnosticSetName, _cfnetworkLib, "CFNetDiagnosticSetName") })
-	_register("CFNetServiceBrowserCreate", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserCreate, _cfnetworkLib, "CFNetServiceBrowserCreate") })
-	_register("CFNetServiceBrowserGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserGetTypeID, _cfnetworkLib, "CFNetServiceBrowserGetTypeID") })
-	_register("CFNetServiceBrowserInvalidate", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserInvalidate, _cfnetworkLib, "CFNetServiceBrowserInvalidate") })
-	_register("CFNetServiceBrowserScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceBrowserScheduleWithRunLoop") })
-	_register("CFNetServiceBrowserSearchForDomains", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForDomains, _cfnetworkLib, "CFNetServiceBrowserSearchForDomains") })
-	_register("CFNetServiceBrowserSearchForServices", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForServices, _cfnetworkLib, "CFNetServiceBrowserSearchForServices") })
-	_register("CFNetServiceBrowserStopSearch", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserStopSearch, _cfnetworkLib, "CFNetServiceBrowserStopSearch") })
-	_register("CFNetServiceBrowserUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceBrowserUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceBrowserUnscheduleFromRunLoop") })
+	_register("CFNetServiceBrowserCreate", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserCreate, _cfnetworkLib, "CFNetServiceBrowserCreate")
+	})
+	_register("CFNetServiceBrowserGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserGetTypeID, _cfnetworkLib, "CFNetServiceBrowserGetTypeID")
+	})
+	_register("CFNetServiceBrowserInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserInvalidate, _cfnetworkLib, "CFNetServiceBrowserInvalidate")
+	})
+	_register("CFNetServiceBrowserScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceBrowserScheduleWithRunLoop")
+	})
+	_register("CFNetServiceBrowserSearchForDomains", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForDomains, _cfnetworkLib, "CFNetServiceBrowserSearchForDomains")
+	})
+	_register("CFNetServiceBrowserSearchForServices", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForServices, _cfnetworkLib, "CFNetServiceBrowserSearchForServices")
+	})
+	_register("CFNetServiceBrowserStopSearch", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserStopSearch, _cfnetworkLib, "CFNetServiceBrowserStopSearch")
+	})
+	_register("CFNetServiceBrowserUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceBrowserUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceBrowserUnscheduleFromRunLoop")
+	})
 	_register("CFNetServiceCancel", func() { purego.RegisterLibFunc(&_fnCFNetServiceCancel, _cfnetworkLib, "CFNetServiceCancel") })
 	_register("CFNetServiceCreate", func() { purego.RegisterLibFunc(&_fnCFNetServiceCreate, _cfnetworkLib, "CFNetServiceCreate") })
 	_register("CFNetServiceCreateCopy", func() { purego.RegisterLibFunc(&_fnCFNetServiceCreateCopy, _cfnetworkLib, "CFNetServiceCreateCopy") })
-	_register("CFNetServiceCreateDictionaryWithTXTData", func() { purego.RegisterLibFunc(&_fnCFNetServiceCreateDictionaryWithTXTData, _cfnetworkLib, "CFNetServiceCreateDictionaryWithTXTData") })
-	_register("CFNetServiceCreateTXTDataWithDictionary", func() { purego.RegisterLibFunc(&_fnCFNetServiceCreateTXTDataWithDictionary, _cfnetworkLib, "CFNetServiceCreateTXTDataWithDictionary") })
-	_register("CFNetServiceGetAddressing", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetAddressing, _cfnetworkLib, "CFNetServiceGetAddressing") })
+	_register("CFNetServiceCreateDictionaryWithTXTData", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceCreateDictionaryWithTXTData, _cfnetworkLib, "CFNetServiceCreateDictionaryWithTXTData")
+	})
+	_register("CFNetServiceCreateTXTDataWithDictionary", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceCreateTXTDataWithDictionary, _cfnetworkLib, "CFNetServiceCreateTXTDataWithDictionary")
+	})
+	_register("CFNetServiceGetAddressing", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceGetAddressing, _cfnetworkLib, "CFNetServiceGetAddressing")
+	})
 	_register("CFNetServiceGetDomain", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetDomain, _cfnetworkLib, "CFNetServiceGetDomain") })
 	_register("CFNetServiceGetName", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetName, _cfnetworkLib, "CFNetServiceGetName") })
-	_register("CFNetServiceGetPortNumber", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetPortNumber, _cfnetworkLib, "CFNetServiceGetPortNumber") })
+	_register("CFNetServiceGetPortNumber", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceGetPortNumber, _cfnetworkLib, "CFNetServiceGetPortNumber")
+	})
 	_register("CFNetServiceGetTXTData", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetTXTData, _cfnetworkLib, "CFNetServiceGetTXTData") })
-	_register("CFNetServiceGetTargetHost", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetTargetHost, _cfnetworkLib, "CFNetServiceGetTargetHost") })
+	_register("CFNetServiceGetTargetHost", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceGetTargetHost, _cfnetworkLib, "CFNetServiceGetTargetHost")
+	})
 	_register("CFNetServiceGetType", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetType, _cfnetworkLib, "CFNetServiceGetType") })
 	_register("CFNetServiceGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNetServiceGetTypeID, _cfnetworkLib, "CFNetServiceGetTypeID") })
-	_register("CFNetServiceMonitorCreate", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorCreate, _cfnetworkLib, "CFNetServiceMonitorCreate") })
-	_register("CFNetServiceMonitorGetTypeID", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorGetTypeID, _cfnetworkLib, "CFNetServiceMonitorGetTypeID") })
-	_register("CFNetServiceMonitorInvalidate", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorInvalidate, _cfnetworkLib, "CFNetServiceMonitorInvalidate") })
-	_register("CFNetServiceMonitorScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceMonitorScheduleWithRunLoop") })
-	_register("CFNetServiceMonitorStart", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorStart, _cfnetworkLib, "CFNetServiceMonitorStart") })
+	_register("CFNetServiceMonitorCreate", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorCreate, _cfnetworkLib, "CFNetServiceMonitorCreate")
+	})
+	_register("CFNetServiceMonitorGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorGetTypeID, _cfnetworkLib, "CFNetServiceMonitorGetTypeID")
+	})
+	_register("CFNetServiceMonitorInvalidate", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorInvalidate, _cfnetworkLib, "CFNetServiceMonitorInvalidate")
+	})
+	_register("CFNetServiceMonitorScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceMonitorScheduleWithRunLoop")
+	})
+	_register("CFNetServiceMonitorStart", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorStart, _cfnetworkLib, "CFNetServiceMonitorStart")
+	})
 	_register("CFNetServiceMonitorStop", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorStop, _cfnetworkLib, "CFNetServiceMonitorStop") })
-	_register("CFNetServiceMonitorUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceMonitorUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceMonitorUnscheduleFromRunLoop") })
+	_register("CFNetServiceMonitorUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceMonitorUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceMonitorUnscheduleFromRunLoop")
+	})
 	_register("CFNetServiceRegister", func() { purego.RegisterLibFunc(&_fnCFNetServiceRegister, _cfnetworkLib, "CFNetServiceRegister") })
-	_register("CFNetServiceRegisterWithOptions", func() { purego.RegisterLibFunc(&_fnCFNetServiceRegisterWithOptions, _cfnetworkLib, "CFNetServiceRegisterWithOptions") })
+	_register("CFNetServiceRegisterWithOptions", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceRegisterWithOptions, _cfnetworkLib, "CFNetServiceRegisterWithOptions")
+	})
 	_register("CFNetServiceResolve", func() { purego.RegisterLibFunc(&_fnCFNetServiceResolve, _cfnetworkLib, "CFNetServiceResolve") })
-	_register("CFNetServiceResolveWithTimeout", func() { purego.RegisterLibFunc(&_fnCFNetServiceResolveWithTimeout, _cfnetworkLib, "CFNetServiceResolveWithTimeout") })
-	_register("CFNetServiceScheduleWithRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceScheduleWithRunLoop") })
+	_register("CFNetServiceResolveWithTimeout", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceResolveWithTimeout, _cfnetworkLib, "CFNetServiceResolveWithTimeout")
+	})
+	_register("CFNetServiceScheduleWithRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceScheduleWithRunLoop, _cfnetworkLib, "CFNetServiceScheduleWithRunLoop")
+	})
 	_register("CFNetServiceSetClient", func() { purego.RegisterLibFunc(&_fnCFNetServiceSetClient, _cfnetworkLib, "CFNetServiceSetClient") })
 	_register("CFNetServiceSetTXTData", func() { purego.RegisterLibFunc(&_fnCFNetServiceSetTXTData, _cfnetworkLib, "CFNetServiceSetTXTData") })
-	_register("CFNetServiceUnscheduleFromRunLoop", func() { purego.RegisterLibFunc(&_fnCFNetServiceUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceUnscheduleFromRunLoop") })
-	_register("CFNetworkCopyProxiesForAutoConfigurationScript", func() { purego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForAutoConfigurationScript, _cfnetworkLib, "CFNetworkCopyProxiesForAutoConfigurationScript") })
-	_register("CFNetworkCopyProxiesForURL", func() { purego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForURL, _cfnetworkLib, "CFNetworkCopyProxiesForURL") })
-	_register("CFNetworkCopySystemProxySettings", func() { purego.RegisterLibFunc(&_fnCFNetworkCopySystemProxySettings, _cfnetworkLib, "CFNetworkCopySystemProxySettings") })
-	_register("CFNetworkExecuteProxyAutoConfigurationScript", func() { purego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationScript, _cfnetworkLib, "CFNetworkExecuteProxyAutoConfigurationScript") })
-	_register("CFNetworkExecuteProxyAutoConfigurationURL", func() { purego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationURL, _cfnetworkLib, "CFNetworkExecuteProxyAutoConfigurationURL") })
-	_register("CFReadStreamCreateForHTTPRequest", func() { purego.RegisterLibFunc(&_fnCFReadStreamCreateForHTTPRequest, _cfnetworkLib, "CFReadStreamCreateForHTTPRequest") })
-	_register("CFReadStreamCreateForStreamedHTTPRequest", func() { purego.RegisterLibFunc(&_fnCFReadStreamCreateForStreamedHTTPRequest, _cfnetworkLib, "CFReadStreamCreateForStreamedHTTPRequest") })
-	_register("CFReadStreamCreateWithFTPURL", func() { purego.RegisterLibFunc(&_fnCFReadStreamCreateWithFTPURL, _cfnetworkLib, "CFReadStreamCreateWithFTPURL") })
-	_register("CFSocketStreamSOCKSGetError", func() { purego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetError, _cfnetworkLib, "CFSocketStreamSOCKSGetError") })
-	_register("CFSocketStreamSOCKSGetErrorSubdomain", func() { purego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetErrorSubdomain, _cfnetworkLib, "CFSocketStreamSOCKSGetErrorSubdomain") })
-	_register("CFStreamCreatePairWithSocketToCFHost", func() { purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToCFHost, _cfnetworkLib, "CFStreamCreatePairWithSocketToCFHost") })
-	_register("CFStreamCreatePairWithSocketToNetService", func() { purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToNetService, _cfnetworkLib, "CFStreamCreatePairWithSocketToNetService") })
-	_register("CFWriteStreamCreateWithFTPURL", func() { purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFTPURL, _cfnetworkLib, "CFWriteStreamCreateWithFTPURL") })
+	_register("CFNetServiceUnscheduleFromRunLoop", func() {
+		purego.RegisterLibFunc(&_fnCFNetServiceUnscheduleFromRunLoop, _cfnetworkLib, "CFNetServiceUnscheduleFromRunLoop")
+	})
+	_register("CFNetworkCopyProxiesForAutoConfigurationScript", func() {
+		purego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForAutoConfigurationScript, _cfnetworkLib, "CFNetworkCopyProxiesForAutoConfigurationScript")
+	})
+	_register("CFNetworkCopyProxiesForURL", func() {
+		purego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForURL, _cfnetworkLib, "CFNetworkCopyProxiesForURL")
+	})
+	_register("CFNetworkCopySystemProxySettings", func() {
+		purego.RegisterLibFunc(&_fnCFNetworkCopySystemProxySettings, _cfnetworkLib, "CFNetworkCopySystemProxySettings")
+	})
+	_register("CFNetworkExecuteProxyAutoConfigurationScript", func() {
+		purego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationScript, _cfnetworkLib, "CFNetworkExecuteProxyAutoConfigurationScript")
+	})
+	_register("CFNetworkExecuteProxyAutoConfigurationURL", func() {
+		purego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationURL, _cfnetworkLib, "CFNetworkExecuteProxyAutoConfigurationURL")
+	})
+	_register("CFReadStreamCreateForHTTPRequest", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCreateForHTTPRequest, _cfnetworkLib, "CFReadStreamCreateForHTTPRequest")
+	})
+	_register("CFReadStreamCreateForStreamedHTTPRequest", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCreateForStreamedHTTPRequest, _cfnetworkLib, "CFReadStreamCreateForStreamedHTTPRequest")
+	})
+	_register("CFReadStreamCreateWithFTPURL", func() {
+		purego.RegisterLibFunc(&_fnCFReadStreamCreateWithFTPURL, _cfnetworkLib, "CFReadStreamCreateWithFTPURL")
+	})
+	_register("CFSocketStreamSOCKSGetError", func() {
+		purego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetError, _cfnetworkLib, "CFSocketStreamSOCKSGetError")
+	})
+	_register("CFSocketStreamSOCKSGetErrorSubdomain", func() {
+		purego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetErrorSubdomain, _cfnetworkLib, "CFSocketStreamSOCKSGetErrorSubdomain")
+	})
+	_register("CFStreamCreatePairWithSocketToCFHost", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToCFHost, _cfnetworkLib, "CFStreamCreatePairWithSocketToCFHost")
+	})
+	_register("CFStreamCreatePairWithSocketToNetService", func() {
+		purego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToNetService, _cfnetworkLib, "CFStreamCreatePairWithSocketToNetService")
+	})
+	_register("CFWriteStreamCreateWithFTPURL", func() {
+		purego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFTPURL, _cfnetworkLib, "CFWriteStreamCreateWithFTPURL")
+	})
 }
 
 func init() {

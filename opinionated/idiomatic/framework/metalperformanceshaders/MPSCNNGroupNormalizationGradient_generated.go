@@ -19,7 +19,9 @@ type CNNGroupNormalizationGradient struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNGroupNormalizationGradient].
-func (x *CNNGroupNormalizationGradient) Unwrap() *raw.MPSCNNGroupNormalizationGradient { return x.inner }
+func (x *CNNGroupNormalizationGradient) Unwrap() *raw.MPSCNNGroupNormalizationGradient {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -159,11 +161,17 @@ func (x *CNNGroupNormalizationGradient) WithLabel(label string) *CNNGroupNormali
 	return x
 }
 
-func (x *CNNGroupNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
+func (x *CNNGroupNormalizationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNGradientKernel
+}
 
-func (x *CNNGroupNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNGroupNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNGroupNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNGroupNormalizationGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNGroupNormalizationGradientable is the interface implemented by [CNNGroupNormalizationGradient], for mocking and DI.
 type CNNGroupNormalizationGradientable interface {
@@ -191,4 +199,3 @@ type CNNGroupNormalizationGradientable interface {
 }
 
 var _ CNNGroupNormalizationGradientable = (*CNNGroupNormalizationGradient)(nil)
-

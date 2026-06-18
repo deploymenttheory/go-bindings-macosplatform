@@ -17,29 +17,29 @@ type NSSearchFieldCell struct {
 }
 
 var (
-	_clsNSSearchFieldCell = _objcClass("NSSearchFieldCell")
-	_nSSearchFieldCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSSearchFieldCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSSearchFieldCellSelResetSearchButtonCell = objc.RegisterName("resetSearchButtonCell")
-	_nSSearchFieldCellSelResetCancelButtonCell = objc.RegisterName("resetCancelButtonCell")
-	_nSSearchFieldCellSelSearchTextRectForBounds = objc.RegisterName("searchTextRectForBounds:")
-	_nSSearchFieldCellSelSearchButtonRectForBounds = objc.RegisterName("searchButtonRectForBounds:")
-	_nSSearchFieldCellSelCancelButtonRectForBounds = objc.RegisterName("cancelButtonRectForBounds:")
-	_nSSearchFieldCellSelSearchButtonCell = objc.RegisterName("searchButtonCell")
-	_nSSearchFieldCellSelSetSearchButtonCell = objc.RegisterName("setSearchButtonCell:")
-	_nSSearchFieldCellSelCancelButtonCell = objc.RegisterName("cancelButtonCell")
-	_nSSearchFieldCellSelSetCancelButtonCell = objc.RegisterName("setCancelButtonCell:")
-	_nSSearchFieldCellSelSearchMenuTemplate = objc.RegisterName("searchMenuTemplate")
-	_nSSearchFieldCellSelSetSearchMenuTemplate = objc.RegisterName("setSearchMenuTemplate:")
-	_nSSearchFieldCellSelSendsWholeSearchString = objc.RegisterName("sendsWholeSearchString")
-	_nSSearchFieldCellSelSetSendsWholeSearchString = objc.RegisterName("setSendsWholeSearchString:")
-	_nSSearchFieldCellSelMaximumRecents = objc.RegisterName("maximumRecents")
-	_nSSearchFieldCellSelSetMaximumRecents = objc.RegisterName("setMaximumRecents:")
-	_nSSearchFieldCellSelRecentSearches = objc.RegisterName("recentSearches")
-	_nSSearchFieldCellSelSetRecentSearches = objc.RegisterName("setRecentSearches:")
-	_nSSearchFieldCellSelRecentsAutosaveName = objc.RegisterName("recentsAutosaveName")
-	_nSSearchFieldCellSelSetRecentsAutosaveName = objc.RegisterName("setRecentsAutosaveName:")
-	_nSSearchFieldCellSelSendsSearchStringImmediately = objc.RegisterName("sendsSearchStringImmediately")
+	_clsNSSearchFieldCell                                = _objcClass("NSSearchFieldCell")
+	_nSSearchFieldCellSelInitTextCell                    = objc.RegisterName("initTextCell:")
+	_nSSearchFieldCellSelInitWithCoder                   = objc.RegisterName("initWithCoder:")
+	_nSSearchFieldCellSelResetSearchButtonCell           = objc.RegisterName("resetSearchButtonCell")
+	_nSSearchFieldCellSelResetCancelButtonCell           = objc.RegisterName("resetCancelButtonCell")
+	_nSSearchFieldCellSelSearchTextRectForBounds         = objc.RegisterName("searchTextRectForBounds:")
+	_nSSearchFieldCellSelSearchButtonRectForBounds       = objc.RegisterName("searchButtonRectForBounds:")
+	_nSSearchFieldCellSelCancelButtonRectForBounds       = objc.RegisterName("cancelButtonRectForBounds:")
+	_nSSearchFieldCellSelSearchButtonCell                = objc.RegisterName("searchButtonCell")
+	_nSSearchFieldCellSelSetSearchButtonCell             = objc.RegisterName("setSearchButtonCell:")
+	_nSSearchFieldCellSelCancelButtonCell                = objc.RegisterName("cancelButtonCell")
+	_nSSearchFieldCellSelSetCancelButtonCell             = objc.RegisterName("setCancelButtonCell:")
+	_nSSearchFieldCellSelSearchMenuTemplate              = objc.RegisterName("searchMenuTemplate")
+	_nSSearchFieldCellSelSetSearchMenuTemplate           = objc.RegisterName("setSearchMenuTemplate:")
+	_nSSearchFieldCellSelSendsWholeSearchString          = objc.RegisterName("sendsWholeSearchString")
+	_nSSearchFieldCellSelSetSendsWholeSearchString       = objc.RegisterName("setSendsWholeSearchString:")
+	_nSSearchFieldCellSelMaximumRecents                  = objc.RegisterName("maximumRecents")
+	_nSSearchFieldCellSelSetMaximumRecents               = objc.RegisterName("setMaximumRecents:")
+	_nSSearchFieldCellSelRecentSearches                  = objc.RegisterName("recentSearches")
+	_nSSearchFieldCellSelSetRecentSearches               = objc.RegisterName("setRecentSearches:")
+	_nSSearchFieldCellSelRecentsAutosaveName             = objc.RegisterName("recentsAutosaveName")
+	_nSSearchFieldCellSelSetRecentsAutosaveName          = objc.RegisterName("setRecentsAutosaveName:")
+	_nSSearchFieldCellSelSendsSearchStringImmediately    = objc.RegisterName("sendsSearchStringImmediately")
 	_nSSearchFieldCellSelSetSendsSearchStringImmediately = objc.RegisterName("setSendsSearchStringImmediately:")
 )
 
@@ -55,13 +55,17 @@ func NSSearchFieldCellFromID(id objc.ID) *NSSearchFieldCell {
 
 func (o *NSSearchFieldCell) InitTextCell(string_ *foundation.NSString) *NSSearchFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSearchFieldCellFromID(_ret)
 }
 
 func (o *NSSearchFieldCell) InitWithCoder(coder *foundation.NSCoder) *NSSearchFieldCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSearchFieldCellFromID(_ret)
 }
 
@@ -90,7 +94,9 @@ func (o *NSSearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect
 
 func (o *NSSearchFieldCell) SearchButtonCell() *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchButtonCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
@@ -100,7 +106,9 @@ func (o *NSSearchFieldCell) SetSearchButtonCell(searchButtonCell *NSButtonCell) 
 
 func (o *NSSearchFieldCell) CancelButtonCell() *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelCancelButtonCell)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
@@ -110,7 +118,9 @@ func (o *NSSearchFieldCell) SetCancelButtonCell(cancelButtonCell *NSButtonCell) 
 
 func (o *NSSearchFieldCell) SearchMenuTemplate() *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelSearchMenuTemplate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -147,7 +157,9 @@ func (o *NSSearchFieldCell) SetRecentSearches(recentSearches *foundation.NSArray
 
 func (o *NSSearchFieldCell) RecentsAutosaveName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSearchFieldCellSelRecentsAutosaveName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -163,4 +175,3 @@ func (o *NSSearchFieldCell) SendsSearchStringImmediately() bool {
 func (o *NSSearchFieldCell) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
 	o.Ptr().Send(_nSSearchFieldCellSelSetSendsSearchStringImmediately, sendsSearchStringImmediately)
 }
-

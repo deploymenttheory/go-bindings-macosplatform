@@ -18,7 +18,9 @@ type DiskImageStorageDeviceAttachment struct {
 }
 
 // Unwrap returns the underlying [raw.VZDiskImageStorageDeviceAttachment].
-func (x *DiskImageStorageDeviceAttachment) Unwrap() *raw.VZDiskImageStorageDeviceAttachment { return x.inner }
+func (x *DiskImageStorageDeviceAttachment) Unwrap() *raw.VZDiskImageStorageDeviceAttachment {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -74,7 +76,9 @@ func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() raw.VZDiskImage
 	return x.inner.SynchronizationMode()
 }
 
-func (x *DiskImageStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+func (x *DiskImageStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
+	return &x.inner.VZStorageDeviceAttachment
+}
 
 // DiskImageStorageDeviceAttachmentable is the interface implemented by [DiskImageStorageDeviceAttachment], for mocking and DI.
 type DiskImageStorageDeviceAttachmentable interface {
@@ -86,4 +90,3 @@ type DiskImageStorageDeviceAttachmentable interface {
 }
 
 var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)
-

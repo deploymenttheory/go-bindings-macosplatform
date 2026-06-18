@@ -622,4 +622,3 @@ type StreamConfigurationable interface {
 }
 
 var _ StreamConfigurationable = (*StreamConfiguration)(nil)
-

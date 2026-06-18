@@ -17,21 +17,21 @@ type MPSCNNLocalContrastNormalizationGradient struct {
 }
 
 var (
-	_clsMPSCNNLocalContrastNormalizationGradient = _objcClass("MPSCNNLocalContrastNormalizationGradient")
+	_clsMPSCNNLocalContrastNormalizationGradient                                      = _objcClass("MPSCNNLocalContrastNormalizationGradient")
 	_mPSCNNLocalContrastNormalizationGradientSelInitWithDeviceKernelWidthKernelHeight = objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:")
-	_mPSCNNLocalContrastNormalizationGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNLocalContrastNormalizationGradientSelAlpha = objc.RegisterName("alpha")
-	_mPSCNNLocalContrastNormalizationGradientSelSetAlpha = objc.RegisterName("setAlpha:")
-	_mPSCNNLocalContrastNormalizationGradientSelBeta = objc.RegisterName("beta")
-	_mPSCNNLocalContrastNormalizationGradientSelSetBeta = objc.RegisterName("setBeta:")
-	_mPSCNNLocalContrastNormalizationGradientSelDelta = objc.RegisterName("delta")
-	_mPSCNNLocalContrastNormalizationGradientSelSetDelta = objc.RegisterName("setDelta:")
-	_mPSCNNLocalContrastNormalizationGradientSelP0 = objc.RegisterName("p0")
-	_mPSCNNLocalContrastNormalizationGradientSelSetP0 = objc.RegisterName("setP0:")
-	_mPSCNNLocalContrastNormalizationGradientSelPm = objc.RegisterName("pm")
-	_mPSCNNLocalContrastNormalizationGradientSelSetPm = objc.RegisterName("setPm:")
-	_mPSCNNLocalContrastNormalizationGradientSelPs = objc.RegisterName("ps")
-	_mPSCNNLocalContrastNormalizationGradientSelSetPs = objc.RegisterName("setPs:")
+	_mPSCNNLocalContrastNormalizationGradientSelInitWithCoderDevice                   = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNLocalContrastNormalizationGradientSelAlpha                                 = objc.RegisterName("alpha")
+	_mPSCNNLocalContrastNormalizationGradientSelSetAlpha                              = objc.RegisterName("setAlpha:")
+	_mPSCNNLocalContrastNormalizationGradientSelBeta                                  = objc.RegisterName("beta")
+	_mPSCNNLocalContrastNormalizationGradientSelSetBeta                               = objc.RegisterName("setBeta:")
+	_mPSCNNLocalContrastNormalizationGradientSelDelta                                 = objc.RegisterName("delta")
+	_mPSCNNLocalContrastNormalizationGradientSelSetDelta                              = objc.RegisterName("setDelta:")
+	_mPSCNNLocalContrastNormalizationGradientSelP0                                    = objc.RegisterName("p0")
+	_mPSCNNLocalContrastNormalizationGradientSelSetP0                                 = objc.RegisterName("setP0:")
+	_mPSCNNLocalContrastNormalizationGradientSelPm                                    = objc.RegisterName("pm")
+	_mPSCNNLocalContrastNormalizationGradientSelSetPm                                 = objc.RegisterName("setPm:")
+	_mPSCNNLocalContrastNormalizationGradientSelPs                                    = objc.RegisterName("ps")
+	_mPSCNNLocalContrastNormalizationGradientSelSetPs                                 = objc.RegisterName("setPs:")
 )
 
 func MPSCNNLocalContrastNormalizationGradientFromID(id objc.ID) *MPSCNNLocalContrastNormalizationGradient {
@@ -47,14 +47,18 @@ func MPSCNNLocalContrastNormalizationGradientFromID(id objc.ID) *MPSCNNLocalCont
 // @abstract  Initialize a local contrast normalization filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel @param      kernelHeight        The height of the kernel @return     A valid MPSCNNLocalContrastNormalization object or nil, if failure. NOTE:  For now, kernelWidth must be equal to kernelHeight
 func (o *MPSCNNLocalContrastNormalizationGradient) InitWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *MPSCNNLocalContrastNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationGradientSelInitWithDeviceKernelWidthKernelHeight, device, kernelWidth, kernelHeight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNLocalContrastNormalizationGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNLocalContrastNormalizationGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNLocalContrastNormalizationGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNLocalContrastNormalizationGradientFromID(_ret)
 }
 
@@ -117,4 +121,3 @@ func (o *MPSCNNLocalContrastNormalizationGradient) Ps() float32 {
 func (o *MPSCNNLocalContrastNormalizationGradient) SetPs(ps float32) {
 	o.Ptr().Send(_mPSCNNLocalContrastNormalizationGradientSelSetPs, ps)
 }
-

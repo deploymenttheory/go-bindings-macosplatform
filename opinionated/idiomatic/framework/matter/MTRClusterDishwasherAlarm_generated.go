@@ -93,9 +93,13 @@ func (x *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(param
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterDishwasherAlarm) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterDishwasherAlarm) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterDishwasherAlarm) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterDishwasherAlarm) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterDishwasherAlarmable is the interface implemented by [MTRClusterDishwasherAlarm], for mocking and DI.
 type MTRClusterDishwasherAlarmable interface {
@@ -114,4 +118,3 @@ type MTRClusterDishwasherAlarmable interface {
 }
 
 var _ MTRClusterDishwasherAlarmable = (*MTRClusterDishwasherAlarm)(nil)
-

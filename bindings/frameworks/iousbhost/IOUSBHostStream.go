@@ -18,13 +18,13 @@ type IOUSBHostStream struct {
 }
 
 var (
-	_clsIOUSBHostStream = _objcClass("IOUSBHostStream")
-	_iOUSBHostStreamSelAbortWithOptionError = objc.RegisterName("abortWithOption:error:")
-	_iOUSBHostStreamSelAbortWithError = objc.RegisterName("abortWithError:")
-	_iOUSBHostStreamSelSendIORequestWithDataBytesTransferredError = objc.RegisterName("sendIORequestWithData:bytesTransferred:error:")
+	_clsIOUSBHostStream                                               = _objcClass("IOUSBHostStream")
+	_iOUSBHostStreamSelAbortWithOptionError                           = objc.RegisterName("abortWithOption:error:")
+	_iOUSBHostStreamSelAbortWithError                                 = objc.RegisterName("abortWithError:")
+	_iOUSBHostStreamSelSendIORequestWithDataBytesTransferredError     = objc.RegisterName("sendIORequestWithData:bytesTransferred:error:")
 	_iOUSBHostStreamSelEnqueueIORequestWithDataErrorCompletionHandler = objc.RegisterName("enqueueIORequestWithData:error:completionHandler:")
-	_iOUSBHostStreamSelHostPipe = objc.RegisterName("hostPipe")
-	_iOUSBHostStreamSelStreamID = objc.RegisterName("streamID")
+	_iOUSBHostStreamSelHostPipe                                       = objc.RegisterName("hostPipe")
+	_iOUSBHostStreamSelStreamID                                       = objc.RegisterName("streamID")
 )
 
 func IOUSBHostStreamFromID(id objc.ID) *IOUSBHostStream {
@@ -83,7 +83,9 @@ func (o *IOUSBHostStream) EnqueueIORequestWithDataErrorCompletionHandler(data *f
 // @brief   Returns the IOUSBHostPipe this stream was created from @return  IOUSBHostPipe pointer
 func (o *IOUSBHostStream) HostPipe() *IOUSBHostPipe {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iOUSBHostStreamSelHostPipe)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return IOUSBHostPipeFromID(_ret)
 }
 
@@ -92,4 +94,3 @@ func (o *IOUSBHostStream) StreamID() uint {
 	_ret := objc.Send[uint](o.Ptr(), _iOUSBHostStreamSelStreamID)
 	return _ret
 }
-

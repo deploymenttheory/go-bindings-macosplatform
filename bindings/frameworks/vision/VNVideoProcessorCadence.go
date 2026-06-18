@@ -26,4 +26,3 @@ func VNVideoProcessorCadenceFromID(id objc.ID) *VNVideoProcessorCadence {
 	purego.Track(o)
 	return o
 }
-

@@ -16,10 +16,10 @@ type MLModelStructureNeuralNetworkLayer struct {
 }
 
 var (
-	_clsMLModelStructureNeuralNetworkLayer = _objcClass("MLModelStructureNeuralNetworkLayer")
-	_mLModelStructureNeuralNetworkLayerSelName = objc.RegisterName("name")
-	_mLModelStructureNeuralNetworkLayerSelType = objc.RegisterName("type")
-	_mLModelStructureNeuralNetworkLayerSelInputNames = objc.RegisterName("inputNames")
+	_clsMLModelStructureNeuralNetworkLayer            = _objcClass("MLModelStructureNeuralNetworkLayer")
+	_mLModelStructureNeuralNetworkLayerSelName        = objc.RegisterName("name")
+	_mLModelStructureNeuralNetworkLayerSelType        = objc.RegisterName("type")
+	_mLModelStructureNeuralNetworkLayerSelInputNames  = objc.RegisterName("inputNames")
 	_mLModelStructureNeuralNetworkLayerSelOutputNames = objc.RegisterName("outputNames")
 )
 
@@ -36,14 +36,18 @@ func MLModelStructureNeuralNetworkLayerFromID(id objc.ID) *MLModelStructureNeura
 // The layer name.
 func (o *MLModelStructureNeuralNetworkLayer) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The type of the layer, e,g, "elementwise", "pooling", etc.
 func (o *MLModelStructureNeuralNetworkLayer) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,4 +62,3 @@ func (o *MLModelStructureNeuralNetworkLayer) OutputNames() *foundation.NSArray[*
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _mLModelStructureNeuralNetworkLayerSelOutputNames)
 	return _ret
 }
-

@@ -76,7 +76,9 @@ func (x *ImageDilate) KernelWidth() uint {
 
 func (x *ImageDilate) asImageDilate() *raw.MPSImageDilate { return x.inner }
 
-func (x *ImageDilate) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageDilate) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
 type ImageDilateable interface {
@@ -89,4 +91,3 @@ type ImageDilateable interface {
 }
 
 var _ ImageDilateable = (*ImageDilate)(nil)
-

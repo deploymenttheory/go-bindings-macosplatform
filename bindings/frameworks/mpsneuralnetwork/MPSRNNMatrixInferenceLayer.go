@@ -18,22 +18,22 @@ type MPSRNNMatrixInferenceLayer struct {
 }
 
 var (
-	_clsMPSRNNMatrixInferenceLayer = _objcClass("MPSRNNMatrixInferenceLayer")
-	_mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptor = objc.RegisterName("initWithDevice:rnnDescriptor:")
-	_mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptors = objc.RegisterName("initWithDevice:rnnDescriptors:")
+	_clsMPSRNNMatrixInferenceLayer                                                                                                                                      = _objcClass("MPSRNNMatrixInferenceLayer")
+	_mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptor                                                                                                           = objc.RegisterName("initWithDevice:rnnDescriptor:")
+	_mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptors                                                                                                          = objc.RegisterName("initWithDevice:rnnDescriptors:")
 	_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates = objc.RegisterName("encodeSequenceToCommandBuffer:sourceMatrices:sourceOffsets:destinationMatrices:destinationOffsets:recurrentInputState:recurrentOutputStates:")
-	_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates = objc.RegisterName("encodeSequenceToCommandBuffer:sourceMatrices:destinationMatrices:recurrentInputState:recurrentOutputStates:")
-	_mPSRNNMatrixInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices = objc.RegisterName("encodeBidirectionalSequenceToCommandBuffer:sourceSequence:destinationForwardMatrices:destinationBackwardMatrices:")
-	_mPSRNNMatrixInferenceLayerSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSRNNMatrixInferenceLayerSelInputFeatureChannels = objc.RegisterName("inputFeatureChannels")
-	_mPSRNNMatrixInferenceLayerSelOutputFeatureChannels = objc.RegisterName("outputFeatureChannels")
-	_mPSRNNMatrixInferenceLayerSelNumberOfLayers = objc.RegisterName("numberOfLayers")
-	_mPSRNNMatrixInferenceLayerSelRecurrentOutputIsTemporary = objc.RegisterName("recurrentOutputIsTemporary")
-	_mPSRNNMatrixInferenceLayerSelSetRecurrentOutputIsTemporary = objc.RegisterName("setRecurrentOutputIsTemporary:")
-	_mPSRNNMatrixInferenceLayerSelStoreAllIntermediateStates = objc.RegisterName("storeAllIntermediateStates")
-	_mPSRNNMatrixInferenceLayerSelSetStoreAllIntermediateStates = objc.RegisterName("setStoreAllIntermediateStates:")
-	_mPSRNNMatrixInferenceLayerSelBidirectionalCombineMode = objc.RegisterName("bidirectionalCombineMode")
-	_mPSRNNMatrixInferenceLayerSelSetBidirectionalCombineMode = objc.RegisterName("setBidirectionalCombineMode:")
+	_mPSRNNMatrixInferenceLayerSelEncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates                                = objc.RegisterName("encodeSequenceToCommandBuffer:sourceMatrices:destinationMatrices:recurrentInputState:recurrentOutputStates:")
+	_mPSRNNMatrixInferenceLayerSelEncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices                         = objc.RegisterName("encodeBidirectionalSequenceToCommandBuffer:sourceSequence:destinationForwardMatrices:destinationBackwardMatrices:")
+	_mPSRNNMatrixInferenceLayerSelInitWithCoderDevice                                                                                                                   = objc.RegisterName("initWithCoder:device:")
+	_mPSRNNMatrixInferenceLayerSelInputFeatureChannels                                                                                                                  = objc.RegisterName("inputFeatureChannels")
+	_mPSRNNMatrixInferenceLayerSelOutputFeatureChannels                                                                                                                 = objc.RegisterName("outputFeatureChannels")
+	_mPSRNNMatrixInferenceLayerSelNumberOfLayers                                                                                                                        = objc.RegisterName("numberOfLayers")
+	_mPSRNNMatrixInferenceLayerSelRecurrentOutputIsTemporary                                                                                                            = objc.RegisterName("recurrentOutputIsTemporary")
+	_mPSRNNMatrixInferenceLayerSelSetRecurrentOutputIsTemporary                                                                                                         = objc.RegisterName("setRecurrentOutputIsTemporary:")
+	_mPSRNNMatrixInferenceLayerSelStoreAllIntermediateStates                                                                                                            = objc.RegisterName("storeAllIntermediateStates")
+	_mPSRNNMatrixInferenceLayerSelSetStoreAllIntermediateStates                                                                                                         = objc.RegisterName("setStoreAllIntermediateStates:")
+	_mPSRNNMatrixInferenceLayerSelBidirectionalCombineMode                                                                                                              = objc.RegisterName("bidirectionalCombineMode")
+	_mPSRNNMatrixInferenceLayerSelSetBidirectionalCombineMode                                                                                                           = objc.RegisterName("setBidirectionalCombineMode:")
 )
 
 func MPSRNNMatrixInferenceLayerFromID(id objc.ID) *MPSRNNMatrixInferenceLayer {
@@ -49,14 +49,18 @@ func MPSRNNMatrixInferenceLayerFromID(id objc.ID) *MPSRNNMatrixInferenceLayer {
 // @abstract   Initializes a linear (fully connected) RNN kernel @param      device                          The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptor                   The descriptor that defines the RNN layer @return     A valid MPSRNNMatrixInferenceLayer object or nil, if failure.
 func (o *MPSRNNMatrixInferenceLayer) InitWithDeviceRnnDescriptor(device metal.MTLDevice, rnnDescriptor *MPSRNNDescriptor) *MPSRNNMatrixInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptor, device, rnnDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNMatrixInferenceLayerFromID(_ret)
 }
 
 // @abstract   Initializes a kernel that implements a stack of linear (fully connected) RNN layers @param      device                          The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptors                  An array of RNN descriptors that defines a stack of RNN layers, starting at index zero. The number of layers in stack is the number of entries in the array. All entries in the array must be valid MPSRNNDescriptors. @return     A valid MPSRNNMatrixInferenceLayer object or nil, if failure.
 func (o *MPSRNNMatrixInferenceLayer) InitWithDeviceRnnDescriptors(device metal.MTLDevice, rnnDescriptors *foundation.NSArray[*MPSRNNDescriptor]) *MPSRNNMatrixInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixInferenceLayerSelInitWithDeviceRnnDescriptors, device, rnnDescriptors.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNMatrixInferenceLayerFromID(_ret)
 }
 
@@ -75,7 +79,9 @@ func (o *MPSRNNMatrixInferenceLayer) EncodeBidirectionalSequenceToCommandBufferS
 // @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixInferenceLayer @return     A new MPSRNNMatrixInferenceLayer object, or nil if failure.
 func (o *MPSRNNMatrixInferenceLayer) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSRNNMatrixInferenceLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSRNNMatrixInferenceLayerSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSRNNMatrixInferenceLayerFromID(_ret)
 }
 
@@ -126,4 +132,3 @@ func (o *MPSRNNMatrixInferenceLayer) BidirectionalCombineMode() MPSRNNBidirectio
 func (o *MPSRNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) {
 	o.Ptr().Send(_mPSRNNMatrixInferenceLayerSelSetBidirectionalCombineMode, bidirectionalCombineMode)
 }
-

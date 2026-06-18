@@ -16,16 +16,16 @@ type MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams struct {
 }
 
 var (
-	_clsMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams = _objcClass("MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelAttributeId = objc.RegisterName("attributeId")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetAttributeId = objc.RegisterName("setAttributeId:")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelStartTime = objc.RegisterName("startTime")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetStartTime = objc.RegisterName("setStartTime:")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelNumberOfIntervals = objc.RegisterName("numberOfIntervals")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetNumberOfIntervals = objc.RegisterName("setNumberOfIntervals:")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams                               = _objcClass("MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelAttributeId                    = objc.RegisterName("attributeId")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetAttributeId                 = objc.RegisterName("setAttributeId:")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelStartTime                      = objc.RegisterName("startTime")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetStartTime                   = objc.RegisterName("setStartTime:")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelNumberOfIntervals              = objc.RegisterName("numberOfIntervals")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetNumberOfIntervals           = objc.RegisterName("setNumberOfIntervals:")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID(id 
 
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeId() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelAttributeId)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetA
 
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelStartTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetS
 
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelNumberOfIntervals)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetN
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetT
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

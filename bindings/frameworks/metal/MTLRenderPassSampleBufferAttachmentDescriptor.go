@@ -16,17 +16,17 @@ type MTLRenderPassSampleBufferAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLRenderPassSampleBufferAttachmentDescriptor = _objcClass("MTLRenderPassSampleBufferAttachmentDescriptor")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelSampleBuffer = objc.RegisterName("sampleBuffer")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetSampleBuffer = objc.RegisterName("setSampleBuffer:")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelStartOfVertexSampleIndex = objc.RegisterName("startOfVertexSampleIndex")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetStartOfVertexSampleIndex = objc.RegisterName("setStartOfVertexSampleIndex:")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelEndOfVertexSampleIndex = objc.RegisterName("endOfVertexSampleIndex")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetEndOfVertexSampleIndex = objc.RegisterName("setEndOfVertexSampleIndex:")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelStartOfFragmentSampleIndex = objc.RegisterName("startOfFragmentSampleIndex")
+	_clsMTLRenderPassSampleBufferAttachmentDescriptor                              = _objcClass("MTLRenderPassSampleBufferAttachmentDescriptor")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelSampleBuffer                  = objc.RegisterName("sampleBuffer")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetSampleBuffer               = objc.RegisterName("setSampleBuffer:")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelStartOfVertexSampleIndex      = objc.RegisterName("startOfVertexSampleIndex")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetStartOfVertexSampleIndex   = objc.RegisterName("setStartOfVertexSampleIndex:")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelEndOfVertexSampleIndex        = objc.RegisterName("endOfVertexSampleIndex")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetEndOfVertexSampleIndex     = objc.RegisterName("setEndOfVertexSampleIndex:")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelStartOfFragmentSampleIndex    = objc.RegisterName("startOfFragmentSampleIndex")
 	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetStartOfFragmentSampleIndex = objc.RegisterName("setStartOfFragmentSampleIndex:")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelEndOfFragmentSampleIndex = objc.RegisterName("endOfFragmentSampleIndex")
-	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetEndOfFragmentSampleIndex = objc.RegisterName("setEndOfFragmentSampleIndex:")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelEndOfFragmentSampleIndex      = objc.RegisterName("endOfFragmentSampleIndex")
+	_mTLRenderPassSampleBufferAttachmentDescriptorSelSetEndOfFragmentSampleIndex   = objc.RegisterName("setEndOfFragmentSampleIndex:")
 )
 
 func MTLRenderPassSampleBufferAttachmentDescriptorFromID(id objc.ID) *MTLRenderPassSampleBufferAttachmentDescriptor {
@@ -88,4 +88,3 @@ func (o *MTLRenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex
 func (o *MTLRenderPassSampleBufferAttachmentDescriptor) SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint) {
 	o.Ptr().Send(_mTLRenderPassSampleBufferAttachmentDescriptorSelSetEndOfFragmentSampleIndex, endOfFragmentSampleIndex)
 }
-

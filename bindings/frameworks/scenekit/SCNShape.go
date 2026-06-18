@@ -16,18 +16,18 @@ type SCNShape struct {
 }
 
 var (
-	_clsSCNShape = _objcClass("SCNShape")
+	_clsSCNShape                            = _objcClass("SCNShape")
 	_sCNShapeSelShapeWithPathExtrusionDepth = objc.RegisterName("shapeWithPath:extrusionDepth:")
-	_sCNShapeSelPath = objc.RegisterName("path")
-	_sCNShapeSelSetPath = objc.RegisterName("setPath:")
-	_sCNShapeSelExtrusionDepth = objc.RegisterName("extrusionDepth")
-	_sCNShapeSelSetExtrusionDepth = objc.RegisterName("setExtrusionDepth:")
-	_sCNShapeSelChamferMode = objc.RegisterName("chamferMode")
-	_sCNShapeSelSetChamferMode = objc.RegisterName("setChamferMode:")
-	_sCNShapeSelChamferRadius = objc.RegisterName("chamferRadius")
-	_sCNShapeSelSetChamferRadius = objc.RegisterName("setChamferRadius:")
-	_sCNShapeSelChamferProfile = objc.RegisterName("chamferProfile")
-	_sCNShapeSelSetChamferProfile = objc.RegisterName("setChamferProfile:")
+	_sCNShapeSelPath                        = objc.RegisterName("path")
+	_sCNShapeSelSetPath                     = objc.RegisterName("setPath:")
+	_sCNShapeSelExtrusionDepth              = objc.RegisterName("extrusionDepth")
+	_sCNShapeSelSetExtrusionDepth           = objc.RegisterName("setExtrusionDepth:")
+	_sCNShapeSelChamferMode                 = objc.RegisterName("chamferMode")
+	_sCNShapeSelSetChamferMode              = objc.RegisterName("setChamferMode:")
+	_sCNShapeSelChamferRadius               = objc.RegisterName("chamferRadius")
+	_sCNShapeSelSetChamferRadius            = objc.RegisterName("setChamferRadius:")
+	_sCNShapeSelChamferProfile              = objc.RegisterName("chamferProfile")
+	_sCNShapeSelSetChamferProfile           = objc.RegisterName("setChamferProfile:")
 )
 
 func SCNShapeFromID(id objc.ID) *SCNShape {
@@ -43,14 +43,18 @@ func SCNShapeFromID(id objc.ID) *SCNShape {
 // @method shapeWithPath:extrusionDepth: @abstract Creates and returns a 3D representation of the given shape with the given extrusion depth. @param path The cubic Bezier spline to extrude. @param extrusionDepth The extrusion depth.
 func SCNShapeShapeWithPathExtrusionDepth(path *appkit.NSBezierPath, extrusionDepth float64) *SCNShape {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNShape), _sCNShapeSelShapeWithPathExtrusionDepth, path.Ptr(), extrusionDepth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNShapeFromID(_ret)
 }
 
 // @property path @abstract The path defining the shape to be rendered. @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
 func (o *SCNShape) Path() *appkit.NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNShapeSelPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSBezierPathFromID(_ret)
 }
 
@@ -91,11 +95,12 @@ func (o *SCNShape) SetChamferRadius(chamferRadius float64) {
 // @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
 func (o *SCNShape) ChamferProfile() *appkit.NSBezierPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNShapeSelChamferProfile)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSBezierPathFromID(_ret)
 }
 
 func (o *SCNShape) SetChamferProfile(chamferProfile *appkit.NSBezierPath) {
 	o.Ptr().Send(_sCNShapeSelSetChamferProfile, chamferProfile.Ptr())
 }
-

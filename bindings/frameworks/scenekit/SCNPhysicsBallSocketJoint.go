@@ -15,15 +15,15 @@ type SCNPhysicsBallSocketJoint struct {
 }
 
 var (
-	_clsSCNPhysicsBallSocketJoint = _objcClass("SCNPhysicsBallSocketJoint")
+	_clsSCNPhysicsBallSocketJoint                                  = _objcClass("SCNPhysicsBallSocketJoint")
 	_sCNPhysicsBallSocketJointSelJointWithBodyAAnchorABodyBAnchorB = objc.RegisterName("jointWithBodyA:anchorA:bodyB:anchorB:")
-	_sCNPhysicsBallSocketJointSelJointWithBodyAnchor = objc.RegisterName("jointWithBody:anchor:")
-	_sCNPhysicsBallSocketJointSelBodyA = objc.RegisterName("bodyA")
-	_sCNPhysicsBallSocketJointSelAnchorA = objc.RegisterName("anchorA")
-	_sCNPhysicsBallSocketJointSelSetAnchorA = objc.RegisterName("setAnchorA:")
-	_sCNPhysicsBallSocketJointSelBodyB = objc.RegisterName("bodyB")
-	_sCNPhysicsBallSocketJointSelAnchorB = objc.RegisterName("anchorB")
-	_sCNPhysicsBallSocketJointSelSetAnchorB = objc.RegisterName("setAnchorB:")
+	_sCNPhysicsBallSocketJointSelJointWithBodyAnchor               = objc.RegisterName("jointWithBody:anchor:")
+	_sCNPhysicsBallSocketJointSelBodyA                             = objc.RegisterName("bodyA")
+	_sCNPhysicsBallSocketJointSelAnchorA                           = objc.RegisterName("anchorA")
+	_sCNPhysicsBallSocketJointSelSetAnchorA                        = objc.RegisterName("setAnchorA:")
+	_sCNPhysicsBallSocketJointSelBodyB                             = objc.RegisterName("bodyB")
+	_sCNPhysicsBallSocketJointSelAnchorB                           = objc.RegisterName("anchorB")
+	_sCNPhysicsBallSocketJointSelSetAnchorB                        = objc.RegisterName("setAnchorB:")
 )
 
 func SCNPhysicsBallSocketJointFromID(id objc.ID) *SCNPhysicsBallSocketJoint {
@@ -38,19 +38,25 @@ func SCNPhysicsBallSocketJointFromID(id objc.ID) *SCNPhysicsBallSocketJoint {
 
 func SCNPhysicsBallSocketJointJointWithBodyAAnchorABodyBAnchorB(bodyA *SCNPhysicsBody, anchorA SCNVector3, bodyB *SCNPhysicsBody, anchorB SCNVector3) *SCNPhysicsBallSocketJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBallSocketJoint), _sCNPhysicsBallSocketJointSelJointWithBodyAAnchorABodyBAnchorB, bodyA.Ptr(), anchorA, bodyB.Ptr(), anchorB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBallSocketJointFromID(_ret)
 }
 
 func SCNPhysicsBallSocketJointJointWithBodyAnchor(body *SCNPhysicsBody, anchor SCNVector3) *SCNPhysicsBallSocketJoint {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsBallSocketJoint), _sCNPhysicsBallSocketJointSelJointWithBodyAnchor, body.Ptr(), anchor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBallSocketJointFromID(_ret)
 }
 
 func (o *SCNPhysicsBallSocketJoint) BodyA() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsBallSocketJointSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -65,7 +71,9 @@ func (o *SCNPhysicsBallSocketJoint) SetAnchorA(anchorA SCNVector3) {
 
 func (o *SCNPhysicsBallSocketJoint) BodyB() *SCNPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNPhysicsBallSocketJointSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsBodyFromID(_ret)
 }
 
@@ -77,4 +85,3 @@ func (o *SCNPhysicsBallSocketJoint) AnchorB() SCNVector3 {
 func (o *SCNPhysicsBallSocketJoint) SetAnchorB(anchorB SCNVector3) {
 	o.Ptr().Send(_sCNPhysicsBallSocketJointSelSetAnchorB, anchorB)
 }
-

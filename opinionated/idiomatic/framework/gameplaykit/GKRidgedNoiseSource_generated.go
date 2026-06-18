@@ -60,9 +60,13 @@ func (x *RidgedNoiseSource) WithSeed(seed int32) *RidgedNoiseSource {
 	return x
 }
 
-func (x *RidgedNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return &x.inner.GKCoherentNoiseSource }
+func (x *RidgedNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource {
+	return &x.inner.GKCoherentNoiseSource
+}
 
-func (x *RidgedNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKCoherentNoiseSource.GKNoiseSource }
+func (x *RidgedNoiseSource) asNoiseSource() *raw.GKNoiseSource {
+	return &x.inner.GKCoherentNoiseSource.GKNoiseSource
+}
 
 // RidgedNoiseSourceable is the interface implemented by [RidgedNoiseSource], for mocking and DI.
 type RidgedNoiseSourceable interface {
@@ -74,4 +78,3 @@ type RidgedNoiseSourceable interface {
 }
 
 var _ RidgedNoiseSourceable = (*RidgedNoiseSource)(nil)
-

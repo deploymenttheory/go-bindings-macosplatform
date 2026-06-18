@@ -15,7 +15,9 @@ type LinearCongruentialRandomSource struct {
 }
 
 // Unwrap returns the underlying [raw.GKLinearCongruentialRandomSource].
-func (x *LinearCongruentialRandomSource) Unwrap() *raw.GKLinearCongruentialRandomSource { return x.inner }
+func (x *LinearCongruentialRandomSource) Unwrap() *raw.GKLinearCongruentialRandomSource {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -58,7 +60,9 @@ func (x *LinearCongruentialRandomSource) SetSeed(seed uint64) {
 	x.inner.SetSeed(seed)
 }
 
-func (x *LinearCongruentialRandomSource) asRandomSource() *raw.GKRandomSource { return &x.inner.GKRandomSource }
+func (x *LinearCongruentialRandomSource) asRandomSource() *raw.GKRandomSource {
+	return &x.inner.GKRandomSource
+}
 
 // LinearCongruentialRandomSourceable is the interface implemented by [LinearCongruentialRandomSource], for mocking and DI.
 type LinearCongruentialRandomSourceable interface {
@@ -69,4 +73,3 @@ type LinearCongruentialRandomSourceable interface {
 }
 
 var _ LinearCongruentialRandomSourceable = (*LinearCongruentialRandomSource)(nil)
-

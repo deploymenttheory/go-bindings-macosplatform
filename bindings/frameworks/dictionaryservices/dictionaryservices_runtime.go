@@ -14,8 +14,8 @@ import (
 
 var (
 	_dictionaryservicesLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce              sync.Once
+	_failedSymbols         = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,8 +48,12 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("DCSCopyTextDefinition", func() { purego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _dictionaryservicesLib, "DCSCopyTextDefinition") })
-	_register("DCSGetTermRangeInString", func() { purego.RegisterLibFunc(&_fnDCSGetTermRangeInString, _dictionaryservicesLib, "DCSGetTermRangeInString") })
+	_register("DCSCopyTextDefinition", func() {
+		purego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _dictionaryservicesLib, "DCSCopyTextDefinition")
+	})
+	_register("DCSGetTermRangeInString", func() {
+		purego.RegisterLibFunc(&_fnDCSGetTermRangeInString, _dictionaryservicesLib, "DCSGetTermRangeInString")
+	})
 }
 
 func init() {

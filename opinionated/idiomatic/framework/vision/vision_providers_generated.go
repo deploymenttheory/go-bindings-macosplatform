@@ -107,4 +107,3 @@ type TrackingRequestProvider interface {
 type VideoProcessorCadenceProvider interface {
 	asVideoProcessorCadence() *raw.VNVideoProcessorCadence
 }
-

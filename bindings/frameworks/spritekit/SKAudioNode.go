@@ -19,17 +19,17 @@ type SKAudioNode struct {
 }
 
 var (
-	_clsSKAudioNode = _objcClass("SKAudioNode")
+	_clsSKAudioNode                    = _objcClass("SKAudioNode")
 	_sKAudioNodeSelInitWithAVAudioNode = objc.RegisterName("initWithAVAudioNode:")
-	_sKAudioNodeSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_sKAudioNodeSelInitWithFileNamed = objc.RegisterName("initWithFileNamed:")
-	_sKAudioNodeSelInitWithURL = objc.RegisterName("initWithURL:")
-	_sKAudioNodeSelAvAudioNode = objc.RegisterName("avAudioNode")
-	_sKAudioNodeSelSetAvAudioNode = objc.RegisterName("setAvAudioNode:")
-	_sKAudioNodeSelAutoplayLooped = objc.RegisterName("autoplayLooped")
-	_sKAudioNodeSelSetAutoplayLooped = objc.RegisterName("setAutoplayLooped:")
-	_sKAudioNodeSelIsPositional = objc.RegisterName("isPositional")
-	_sKAudioNodeSelSetPositional = objc.RegisterName("setPositional:")
+	_sKAudioNodeSelInitWithCoder       = objc.RegisterName("initWithCoder:")
+	_sKAudioNodeSelInitWithFileNamed   = objc.RegisterName("initWithFileNamed:")
+	_sKAudioNodeSelInitWithURL         = objc.RegisterName("initWithURL:")
+	_sKAudioNodeSelAvAudioNode         = objc.RegisterName("avAudioNode")
+	_sKAudioNodeSelSetAvAudioNode      = objc.RegisterName("setAvAudioNode:")
+	_sKAudioNodeSelAutoplayLooped      = objc.RegisterName("autoplayLooped")
+	_sKAudioNodeSelSetAutoplayLooped   = objc.RegisterName("setAutoplayLooped:")
+	_sKAudioNodeSelIsPositional        = objc.RegisterName("isPositional")
+	_sKAudioNodeSelSetPositional       = objc.RegisterName("setPositional:")
 )
 
 func SKAudioNodeFromID(id objc.ID) *SKAudioNode {
@@ -45,34 +45,44 @@ func SKAudioNodeFromID(id objc.ID) *SKAudioNode {
 // Creates a SpriteKit scene graph audio node from the given AVAudioNode. @see AVAudioNode
 func (o *SKAudioNode) InitWithAVAudioNode(node *avfaudio.AVAudioNode) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithAVAudioNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAudioNodeFromID(_ret)
 }
 
 func (o *SKAudioNode) InitWithCoder(aDecoder *foundation.NSCoder) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithCoder, aDecoder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAudioNodeFromID(_ret)
 }
 
 // Convenience initializer that creates an AVAudioNode from the named audio asset in the main bundle. @see initWithAVAudioNode
 func (o *SKAudioNode) InitWithFileNamed(name *foundation.NSString) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithFileNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAudioNodeFromID(_ret)
 }
 
 // Convenience initializer that creates an AVAudioNode from the URL that contain a audio asset. @see initWithAVAudioNode
 func (o *SKAudioNode) InitWithURL(url *foundation.NSURL) *SKAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelInitWithURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKAudioNodeFromID(_ret)
 }
 
 // Sets or gets the current AVAudioNode used by this instance.
 func (o *SKAudioNode) AvAudioNode() *avfaudio.AVAudioNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKAudioNodeSelAvAudioNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfaudio.AVAudioNodeFromID(_ret)
 }
 
@@ -99,4 +109,3 @@ func (o *SKAudioNode) IsPositional() bool {
 func (o *SKAudioNode) SetPositional(positional bool) {
 	o.Ptr().Send(_sKAudioNodeSelSetPositional, positional)
 }
-

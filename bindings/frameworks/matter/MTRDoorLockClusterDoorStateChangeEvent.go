@@ -16,8 +16,8 @@ type MTRDoorLockClusterDoorStateChangeEvent struct {
 }
 
 var (
-	_clsMTRDoorLockClusterDoorStateChangeEvent = _objcClass("MTRDoorLockClusterDoorStateChangeEvent")
-	_mTRDoorLockClusterDoorStateChangeEventSelDoorState = objc.RegisterName("doorState")
+	_clsMTRDoorLockClusterDoorStateChangeEvent             = _objcClass("MTRDoorLockClusterDoorStateChangeEvent")
+	_mTRDoorLockClusterDoorStateChangeEventSelDoorState    = objc.RegisterName("doorState")
 	_mTRDoorLockClusterDoorStateChangeEventSelSetDoorState = objc.RegisterName("setDoorState:")
 )
 
@@ -33,11 +33,12 @@ func MTRDoorLockClusterDoorStateChangeEventFromID(id objc.ID) *MTRDoorLockCluste
 
 func (o *MTRDoorLockClusterDoorStateChangeEvent) DoorState() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDoorLockClusterDoorStateChangeEventSelDoorState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDoorLockClusterDoorStateChangeEvent) SetDoorState(doorState *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDoorLockClusterDoorStateChangeEventSelSetDoorState, doorState.Ptr())
 }
-

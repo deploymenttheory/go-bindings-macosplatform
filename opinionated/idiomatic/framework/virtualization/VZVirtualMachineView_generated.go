@@ -102,4 +102,3 @@ type VirtualMachineViewable interface {
 }
 
 var _ VirtualMachineViewable = (*VirtualMachineView)(nil)
-

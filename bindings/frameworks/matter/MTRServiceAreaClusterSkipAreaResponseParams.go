@@ -18,12 +18,12 @@ type MTRServiceAreaClusterSkipAreaResponseParams struct {
 }
 
 var (
-	_clsMTRServiceAreaClusterSkipAreaResponseParams = _objcClass("MTRServiceAreaClusterSkipAreaResponseParams")
+	_clsMTRServiceAreaClusterSkipAreaResponseParams                           = _objcClass("MTRServiceAreaClusterSkipAreaResponseParams")
 	_mTRServiceAreaClusterSkipAreaResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRServiceAreaClusterSkipAreaResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRServiceAreaClusterSkipAreaResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRServiceAreaClusterSkipAreaResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRServiceAreaClusterSkipAreaResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRServiceAreaClusterSkipAreaResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRServiceAreaClusterSkipAreaResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRServiceAreaClusterSkipAreaResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRServiceAreaClusterSkipAreaResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRServiceAreaClusterSkipAreaResponseParamsFromID(id objc.ID) *MTRServiceAreaClusterSkipAreaResponseParams {
@@ -40,7 +40,9 @@ func MTRServiceAreaClusterSkipAreaResponseParamsFromID(id objc.ID) *MTRServiceAr
 func (o *MTRServiceAreaClusterSkipAreaResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSkipAreaResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRServiceAreaClusterSkipAreaResponseParams) InitWithResponseValueError
 
 func (o *MTRServiceAreaClusterSkipAreaResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSkipAreaResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRServiceAreaClusterSkipAreaResponseParams) SetStatus(status *foundati
 
 func (o *MTRServiceAreaClusterSkipAreaResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServiceAreaClusterSkipAreaResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRServiceAreaClusterSkipAreaResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRServiceAreaClusterSkipAreaResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

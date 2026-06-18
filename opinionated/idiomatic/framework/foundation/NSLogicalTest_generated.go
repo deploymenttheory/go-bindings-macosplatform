@@ -67,4 +67,3 @@ type LogicalTestable interface {
 }
 
 var _ LogicalTestable = (*LogicalTest)(nil)
-

@@ -16,12 +16,12 @@ type MTRMediaPlaybackClusterSkipBackwardParams struct {
 }
 
 var (
-	_clsMTRMediaPlaybackClusterSkipBackwardParams = _objcClass("MTRMediaPlaybackClusterSkipBackwardParams")
-	_mTRMediaPlaybackClusterSkipBackwardParamsSelDeltaPositionMilliseconds = objc.RegisterName("deltaPositionMilliseconds")
-	_mTRMediaPlaybackClusterSkipBackwardParamsSelSetDeltaPositionMilliseconds = objc.RegisterName("setDeltaPositionMilliseconds:")
-	_mTRMediaPlaybackClusterSkipBackwardParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRMediaPlaybackClusterSkipBackwardParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRMediaPlaybackClusterSkipBackwardParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRMediaPlaybackClusterSkipBackwardParams                               = _objcClass("MTRMediaPlaybackClusterSkipBackwardParams")
+	_mTRMediaPlaybackClusterSkipBackwardParamsSelDeltaPositionMilliseconds      = objc.RegisterName("deltaPositionMilliseconds")
+	_mTRMediaPlaybackClusterSkipBackwardParamsSelSetDeltaPositionMilliseconds   = objc.RegisterName("setDeltaPositionMilliseconds:")
+	_mTRMediaPlaybackClusterSkipBackwardParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRMediaPlaybackClusterSkipBackwardParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRMediaPlaybackClusterSkipBackwardParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRMediaPlaybackClusterSkipBackwardParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRMediaPlaybackClusterSkipBackwardParamsFromID(id objc.ID) *MTRMediaPlayba
 
 func (o *MTRMediaPlaybackClusterSkipBackwardParams) DeltaPositionMilliseconds() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterSkipBackwardParamsSelDeltaPositionMilliseconds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRMediaPlaybackClusterSkipBackwardParams) SetDeltaPositionMilliseconds
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRMediaPlaybackClusterSkipBackwardParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterSkipBackwardParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRMediaPlaybackClusterSkipBackwardParams) SetTimedInvokeTimeoutMs(time
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRMediaPlaybackClusterSkipBackwardParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMediaPlaybackClusterSkipBackwardParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRMediaPlaybackClusterSkipBackwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRMediaPlaybackClusterSkipBackwardParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

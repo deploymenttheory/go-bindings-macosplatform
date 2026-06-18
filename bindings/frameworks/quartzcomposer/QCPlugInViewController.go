@@ -18,9 +18,9 @@ type QCPlugInViewController struct {
 }
 
 var (
-	_clsQCPlugInViewController = _objcClass("QCPlugInViewController")
+	_clsQCPlugInViewController                          = _objcClass("QCPlugInViewController")
 	_qCPlugInViewControllerSelInitWithPlugInViewNibName = objc.RegisterName("initWithPlugIn:viewNibName:")
-	_qCPlugInViewControllerSelPlugIn = objc.RegisterName("plugIn")
+	_qCPlugInViewControllerSelPlugIn                    = objc.RegisterName("plugIn")
 )
 
 func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
@@ -40,7 +40,8 @@ func (o *QCPlugInViewController) InitWithPlugInViewNibName(plugIn *quartz.QCPlug
 
 func (o *QCPlugInViewController) PlugIn() *quartz.QCPlugIn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCPlugInViewControllerSelPlugIn)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartz.QCPlugInFromID(_ret)
 }
-

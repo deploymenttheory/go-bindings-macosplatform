@@ -6,4 +6,3 @@ package veclib
 // OS_la_object wraps the ObjC protocol OS_la_object.
 type OS_la_object interface {
 }
-

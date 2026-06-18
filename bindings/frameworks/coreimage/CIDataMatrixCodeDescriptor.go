@@ -16,13 +16,13 @@ type CIDataMatrixCodeDescriptor struct {
 }
 
 var (
-	_clsCIDataMatrixCodeDescriptor = _objcClass("CIDataMatrixCodeDescriptor")
-	_cIDataMatrixCodeDescriptorSelInitWithPayloadRowCountColumnCountEccVersion = objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:")
+	_clsCIDataMatrixCodeDescriptor                                                   = _objcClass("CIDataMatrixCodeDescriptor")
+	_cIDataMatrixCodeDescriptorSelInitWithPayloadRowCountColumnCountEccVersion       = objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:")
 	_cIDataMatrixCodeDescriptorSelDescriptorWithPayloadRowCountColumnCountEccVersion = objc.RegisterName("descriptorWithPayload:rowCount:columnCount:eccVersion:")
-	_cIDataMatrixCodeDescriptorSelErrorCorrectedPayload = objc.RegisterName("errorCorrectedPayload")
-	_cIDataMatrixCodeDescriptorSelRowCount = objc.RegisterName("rowCount")
-	_cIDataMatrixCodeDescriptorSelColumnCount = objc.RegisterName("columnCount")
-	_cIDataMatrixCodeDescriptorSelEccVersion = objc.RegisterName("eccVersion")
+	_cIDataMatrixCodeDescriptorSelErrorCorrectedPayload                              = objc.RegisterName("errorCorrectedPayload")
+	_cIDataMatrixCodeDescriptorSelRowCount                                           = objc.RegisterName("rowCount")
+	_cIDataMatrixCodeDescriptorSelColumnCount                                        = objc.RegisterName("columnCount")
+	_cIDataMatrixCodeDescriptorSelEccVersion                                         = objc.RegisterName("eccVersion")
 )
 
 func CIDataMatrixCodeDescriptorFromID(id objc.ID) *CIDataMatrixCodeDescriptor {
@@ -35,24 +35,30 @@ func CIDataMatrixCodeDescriptorFromID(id objc.ID) *CIDataMatrixCodeDescriptor {
 	return o
 }
 
-// Initializes a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The ``CIDataMatrixCodeECCVersion`` for the Data Matrix code symbol. - Returns: An initialized ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Initializes a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func (o *CIDataMatrixCodeDescriptor) InitWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *CIDataMatrixCodeDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIDataMatrixCodeDescriptorSelInitWithPayloadRowCountColumnCountEccVersion, errorCorrectedPayload.Ptr(), rowCount, columnCount, eccVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIDataMatrixCodeDescriptorFromID(_ret)
 }
 
-// Creates a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The ``CIDataMatrixCodeECCVersion`` for the Data Matrix code symbol. - Returns: An autoreleased ``CIAztecCodeDescriptor`` instance or `nil` if the parameters are invalid
+// Creates a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An autoreleased “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
 func CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *CIDataMatrixCodeDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCIDataMatrixCodeDescriptor), _cIDataMatrixCodeDescriptorSelDescriptorWithPayloadRowCountColumnCountEccVersion, errorCorrectedPayload.Ptr(), rowCount, columnCount, eccVersion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIDataMatrixCodeDescriptorFromID(_ret)
 }
 
 // The error-corrected payload containing the data encoded in the Data Matrix code symbol. DataMatrix symbols are specified bn ISO/IEC 16022:2006(E). ECC 200-type symbols will always have an even number of rows and columns. For ECC 200-type symbols, the phases of encoding data into a symbol are described in section 5.1 -- Encode procedure overview. The error corrected payload comprises the de-interleaved bits of the message described at the end of Step 1: Data encodation.
 func (o *CIDataMatrixCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIDataMatrixCodeDescriptorSelErrorCorrectedPayload)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -68,9 +74,8 @@ func (o *CIDataMatrixCodeDescriptor) ColumnCount() int {
 	return _ret
 }
 
-// The error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in ``CIDataMatrixCodeECCVersion``. Any symbol with an even number of rows and columns will be ECC 200.
+// The error correction version of the Data Matrix code symbol. The possible error correction version are enumerated in “CIDataMatrixCodeECCVersion“. Any symbol with an even number of rows and columns will be ECC 200.
 func (o *CIDataMatrixCodeDescriptor) EccVersion() CIDataMatrixCodeECCVersion {
 	_ret := objc.Send[CIDataMatrixCodeECCVersion](o.Ptr(), _cIDataMatrixCodeDescriptorSelEccVersion)
 	return _ret
 }
-

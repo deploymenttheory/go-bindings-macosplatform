@@ -139,4 +139,3 @@ type MatrixBinaryKernelable interface {
 }
 
 var _ MatrixBinaryKernelable = (*MatrixBinaryKernel)(nil)
-

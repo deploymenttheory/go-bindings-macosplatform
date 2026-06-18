@@ -16,11 +16,11 @@ type CLSBinaryItem struct {
 }
 
 var (
-	_clsCLSBinaryItem = _objcClass("CLSBinaryItem")
+	_clsCLSBinaryItem                            = _objcClass("CLSBinaryItem")
 	_cLSBinaryItemSelInitWithIdentifierTitleType = objc.RegisterName("initWithIdentifier:title:type:")
-	_cLSBinaryItemSelValue = objc.RegisterName("value")
-	_cLSBinaryItemSelSetValue = objc.RegisterName("setValue:")
-	_cLSBinaryItemSelValueType = objc.RegisterName("valueType")
+	_cLSBinaryItemSelValue                       = objc.RegisterName("value")
+	_cLSBinaryItemSelSetValue                    = objc.RegisterName("setValue:")
+	_cLSBinaryItemSelValueType                   = objc.RegisterName("valueType")
 )
 
 func CLSBinaryItemFromID(id objc.ID) *CLSBinaryItem {
@@ -36,7 +36,9 @@ func CLSBinaryItemFromID(id objc.ID) *CLSBinaryItem {
 // @abstract      Create an item that represents a binary value @param         title           Title of the CLSBinaryItem. @param         identifier      An identifier that is unique within its owning activity. @param         valueType       The type of binary value. Ex. pass or fail.
 func (o *CLSBinaryItem) InitWithIdentifierTitleType(identifier *foundation.NSString, title *foundation.NSString, valueType CLSBinaryValueType) *CLSBinaryItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSBinaryItemSelInitWithIdentifierTitleType, identifier.Ptr(), title.Ptr(), valueType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CLSBinaryItemFromID(_ret)
 }
 
@@ -55,4 +57,3 @@ func (o *CLSBinaryItem) ValueType() CLSBinaryValueType {
 	_ret := objc.Send[CLSBinaryValueType](o.Ptr(), _cLSBinaryItemSelValueType)
 	return _ret
 }
-

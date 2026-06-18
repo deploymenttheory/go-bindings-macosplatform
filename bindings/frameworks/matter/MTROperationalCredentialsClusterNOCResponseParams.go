@@ -18,16 +18,16 @@ type MTROperationalCredentialsClusterNOCResponseParams struct {
 }
 
 var (
-	_clsMTROperationalCredentialsClusterNOCResponseParams = _objcClass("MTROperationalCredentialsClusterNOCResponseParams")
+	_clsMTROperationalCredentialsClusterNOCResponseParams                           = _objcClass("MTROperationalCredentialsClusterNOCResponseParams")
 	_mTROperationalCredentialsClusterNOCResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelStatusCode = objc.RegisterName("statusCode")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelSetStatusCode = objc.RegisterName("setStatusCode:")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelDebugText = objc.RegisterName("debugText")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelSetDebugText = objc.RegisterName("setDebugText:")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTROperationalCredentialsClusterNOCResponseParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelStatusCode                 = objc.RegisterName("statusCode")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelSetStatusCode              = objc.RegisterName("setStatusCode:")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelFabricIndex                = objc.RegisterName("fabricIndex")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelSetFabricIndex             = objc.RegisterName("setFabricIndex:")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelDebugText                  = objc.RegisterName("debugText")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelSetDebugText               = objc.RegisterName("setDebugText:")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelTimedInvokeTimeoutMs       = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTROperationalCredentialsClusterNOCResponseParamsSelSetTimedInvokeTimeoutMs    = objc.RegisterName("setTimedInvokeTimeoutMs:")
 )
 
 func MTROperationalCredentialsClusterNOCResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterNOCResponseParams {
@@ -44,7 +44,9 @@ func MTROperationalCredentialsClusterNOCResponseParamsFromID(id objc.ID) *MTROpe
 func (o *MTROperationalCredentialsClusterNOCResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,7 +55,9 @@ func (o *MTROperationalCredentialsClusterNOCResponseParams) InitWithResponseValu
 
 func (o *MTROperationalCredentialsClusterNOCResponseParams) StatusCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCResponseParamsSelStatusCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTROperationalCredentialsClusterNOCResponseParams) SetStatusCode(status
 
 func (o *MTROperationalCredentialsClusterNOCResponseParams) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCResponseParamsSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTROperationalCredentialsClusterNOCResponseParams) SetFabricIndex(fabri
 
 func (o *MTROperationalCredentialsClusterNOCResponseParams) DebugText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCResponseParamsSelDebugText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -84,11 +92,12 @@ func (o *MTROperationalCredentialsClusterNOCResponseParams) SetDebugText(debugTe
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTROperationalCredentialsClusterNOCResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROperationalCredentialsClusterNOCResponseParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROperationalCredentialsClusterNOCResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
 	o.Ptr().Send(_mTROperationalCredentialsClusterNOCResponseParamsSelSetTimedInvokeTimeoutMs, timedInvokeTimeoutMs.Ptr())
 }
-

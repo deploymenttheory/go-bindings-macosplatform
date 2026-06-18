@@ -78,7 +78,9 @@ func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVPlaybackSpeed](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -467,4 +469,3 @@ type PlayerViewable interface {
 }
 
 var _ PlayerViewable = (*PlayerView)(nil)
-

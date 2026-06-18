@@ -14,8 +14,8 @@ import (
 
 var (
 	_openscriptingLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce         sync.Once
+	_failedSymbols    = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -48,14 +48,18 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("ASCopySourceAttributes", func() { purego.RegisterLibFunc(&_fnASCopySourceAttributes, _openscriptingLib, "ASCopySourceAttributes") })
+	_register("ASCopySourceAttributes", func() {
+		purego.RegisterLibFunc(&_fnASCopySourceAttributes, _openscriptingLib, "ASCopySourceAttributes")
+	})
 	_register("ASGetSourceStyleNames", func() { purego.RegisterLibFunc(&_fnASGetSourceStyleNames, _openscriptingLib, "ASGetSourceStyleNames") })
 	_register("ASGetSourceStyles", func() { purego.RegisterLibFunc(&_fnASGetSourceStyles, _openscriptingLib, "ASGetSourceStyles") })
 	_register("ASInit", func() { purego.RegisterLibFunc(&_fnASInit, _openscriptingLib, "ASInit") })
 	_register("ASSetSourceAttributes", func() { purego.RegisterLibFunc(&_fnASSetSourceAttributes, _openscriptingLib, "ASSetSourceAttributes") })
 	_register("ASSetSourceStyles", func() { purego.RegisterLibFunc(&_fnASSetSourceStyles, _openscriptingLib, "ASSetSourceStyles") })
 	_register("OSAAddStorageType", func() { purego.RegisterLibFunc(&_fnOSAAddStorageType, _openscriptingLib, "OSAAddStorageType") })
-	_register("OSAAvailableDialectCodeList", func() { purego.RegisterLibFunc(&_fnOSAAvailableDialectCodeList, _openscriptingLib, "OSAAvailableDialectCodeList") })
+	_register("OSAAvailableDialectCodeList", func() {
+		purego.RegisterLibFunc(&_fnOSAAvailableDialectCodeList, _openscriptingLib, "OSAAvailableDialectCodeList")
+	})
 	_register("OSAAvailableDialects", func() { purego.RegisterLibFunc(&_fnOSAAvailableDialects, _openscriptingLib, "OSAAvailableDialects") })
 	_register("OSACoerceFromDesc", func() { purego.RegisterLibFunc(&_fnOSACoerceFromDesc, _openscriptingLib, "OSACoerceFromDesc") })
 	_register("OSACoerceToDesc", func() { purego.RegisterLibFunc(&_fnOSACoerceToDesc, _openscriptingLib, "OSACoerceToDesc") })
@@ -64,8 +68,12 @@ func _loadLibrary() {
 	_register("OSACopyDisplayString", func() { purego.RegisterLibFunc(&_fnOSACopyDisplayString, _openscriptingLib, "OSACopyDisplayString") })
 	_register("OSACopyID", func() { purego.RegisterLibFunc(&_fnOSACopyID, _openscriptingLib, "OSACopyID") })
 	_register("OSACopyScript", func() { purego.RegisterLibFunc(&_fnOSACopyScript, _openscriptingLib, "OSACopyScript") })
-	_register("OSACopyScriptingDefinition", func() { purego.RegisterLibFunc(&_fnOSACopyScriptingDefinition, _openscriptingLib, "OSACopyScriptingDefinition") })
-	_register("OSACopyScriptingDefinitionFromURL", func() { purego.RegisterLibFunc(&_fnOSACopyScriptingDefinitionFromURL, _openscriptingLib, "OSACopyScriptingDefinitionFromURL") })
+	_register("OSACopyScriptingDefinition", func() {
+		purego.RegisterLibFunc(&_fnOSACopyScriptingDefinition, _openscriptingLib, "OSACopyScriptingDefinition")
+	})
+	_register("OSACopyScriptingDefinitionFromURL", func() {
+		purego.RegisterLibFunc(&_fnOSACopyScriptingDefinitionFromURL, _openscriptingLib, "OSACopyScriptingDefinitionFromURL")
+	})
 	_register("OSACopySourceString", func() { purego.RegisterLibFunc(&_fnOSACopySourceString, _openscriptingLib, "OSACopySourceString") })
 	_register("OSADisplay", func() { purego.RegisterLibFunc(&_fnOSADisplay, _openscriptingLib, "OSADisplay") })
 	_register("OSADispose", func() { purego.RegisterLibFunc(&_fnOSADispose, _openscriptingLib, "OSADispose") })
@@ -78,17 +86,27 @@ func _loadLibrary() {
 	_register("OSAGetActiveProc", func() { purego.RegisterLibFunc(&_fnOSAGetActiveProc, _openscriptingLib, "OSAGetActiveProc") })
 	_register("OSAGetCreateProc", func() { purego.RegisterLibFunc(&_fnOSAGetCreateProc, _openscriptingLib, "OSAGetCreateProc") })
 	_register("OSAGetCurrentDialect", func() { purego.RegisterLibFunc(&_fnOSAGetCurrentDialect, _openscriptingLib, "OSAGetCurrentDialect") })
-	_register("OSAGetDefaultScriptingComponent", func() { purego.RegisterLibFunc(&_fnOSAGetDefaultScriptingComponent, _openscriptingLib, "OSAGetDefaultScriptingComponent") })
+	_register("OSAGetDefaultScriptingComponent", func() {
+		purego.RegisterLibFunc(&_fnOSAGetDefaultScriptingComponent, _openscriptingLib, "OSAGetDefaultScriptingComponent")
+	})
 	_register("OSAGetDialectInfo", func() { purego.RegisterLibFunc(&_fnOSAGetDialectInfo, _openscriptingLib, "OSAGetDialectInfo") })
 	_register("OSAGetHandler", func() { purego.RegisterLibFunc(&_fnOSAGetHandler, _openscriptingLib, "OSAGetHandler") })
 	_register("OSAGetHandlerNames", func() { purego.RegisterLibFunc(&_fnOSAGetHandlerNames, _openscriptingLib, "OSAGetHandlerNames") })
 	_register("OSAGetProperty", func() { purego.RegisterLibFunc(&_fnOSAGetProperty, _openscriptingLib, "OSAGetProperty") })
 	_register("OSAGetPropertyNames", func() { purego.RegisterLibFunc(&_fnOSAGetPropertyNames, _openscriptingLib, "OSAGetPropertyNames") })
-	_register("OSAGetResumeDispatchProc", func() { purego.RegisterLibFunc(&_fnOSAGetResumeDispatchProc, _openscriptingLib, "OSAGetResumeDispatchProc") })
-	_register("OSAGetScriptDataFromURL", func() { purego.RegisterLibFunc(&_fnOSAGetScriptDataFromURL, _openscriptingLib, "OSAGetScriptDataFromURL") })
+	_register("OSAGetResumeDispatchProc", func() {
+		purego.RegisterLibFunc(&_fnOSAGetResumeDispatchProc, _openscriptingLib, "OSAGetResumeDispatchProc")
+	})
+	_register("OSAGetScriptDataFromURL", func() {
+		purego.RegisterLibFunc(&_fnOSAGetScriptDataFromURL, _openscriptingLib, "OSAGetScriptDataFromURL")
+	})
 	_register("OSAGetScriptInfo", func() { purego.RegisterLibFunc(&_fnOSAGetScriptInfo, _openscriptingLib, "OSAGetScriptInfo") })
-	_register("OSAGetScriptingComponent", func() { purego.RegisterLibFunc(&_fnOSAGetScriptingComponent, _openscriptingLib, "OSAGetScriptingComponent") })
-	_register("OSAGetScriptingComponentFromStored", func() { purego.RegisterLibFunc(&_fnOSAGetScriptingComponentFromStored, _openscriptingLib, "OSAGetScriptingComponentFromStored") })
+	_register("OSAGetScriptingComponent", func() {
+		purego.RegisterLibFunc(&_fnOSAGetScriptingComponent, _openscriptingLib, "OSAGetScriptingComponent")
+	})
+	_register("OSAGetScriptingComponentFromStored", func() {
+		purego.RegisterLibFunc(&_fnOSAGetScriptingComponentFromStored, _openscriptingLib, "OSAGetScriptingComponentFromStored")
+	})
 	_register("OSAGetSendProc", func() { purego.RegisterLibFunc(&_fnOSAGetSendProc, _openscriptingLib, "OSAGetSendProc") })
 	_register("OSAGetSource", func() { purego.RegisterLibFunc(&_fnOSAGetSource, _openscriptingLib, "OSAGetSource") })
 	_register("OSAGetStorageType", func() { purego.RegisterLibFunc(&_fnOSAGetStorageType, _openscriptingLib, "OSAGetStorageType") })
@@ -102,15 +120,21 @@ func _loadLibrary() {
 	_register("OSARealToGenericID", func() { purego.RegisterLibFunc(&_fnOSARealToGenericID, _openscriptingLib, "OSARealToGenericID") })
 	_register("OSARemoveStorageType", func() { purego.RegisterLibFunc(&_fnOSARemoveStorageType, _openscriptingLib, "OSARemoveStorageType") })
 	_register("OSAScriptError", func() { purego.RegisterLibFunc(&_fnOSAScriptError, _openscriptingLib, "OSAScriptError") })
-	_register("OSAScriptingComponentName", func() { purego.RegisterLibFunc(&_fnOSAScriptingComponentName, _openscriptingLib, "OSAScriptingComponentName") })
+	_register("OSAScriptingComponentName", func() {
+		purego.RegisterLibFunc(&_fnOSAScriptingComponentName, _openscriptingLib, "OSAScriptingComponentName")
+	})
 	_register("OSASetActiveProc", func() { purego.RegisterLibFunc(&_fnOSASetActiveProc, _openscriptingLib, "OSASetActiveProc") })
 	_register("OSASetCreateProc", func() { purego.RegisterLibFunc(&_fnOSASetCreateProc, _openscriptingLib, "OSASetCreateProc") })
 	_register("OSASetCurrentDialect", func() { purego.RegisterLibFunc(&_fnOSASetCurrentDialect, _openscriptingLib, "OSASetCurrentDialect") })
-	_register("OSASetDefaultScriptingComponent", func() { purego.RegisterLibFunc(&_fnOSASetDefaultScriptingComponent, _openscriptingLib, "OSASetDefaultScriptingComponent") })
+	_register("OSASetDefaultScriptingComponent", func() {
+		purego.RegisterLibFunc(&_fnOSASetDefaultScriptingComponent, _openscriptingLib, "OSASetDefaultScriptingComponent")
+	})
 	_register("OSASetDefaultTarget", func() { purego.RegisterLibFunc(&_fnOSASetDefaultTarget, _openscriptingLib, "OSASetDefaultTarget") })
 	_register("OSASetHandler", func() { purego.RegisterLibFunc(&_fnOSASetHandler, _openscriptingLib, "OSASetHandler") })
 	_register("OSASetProperty", func() { purego.RegisterLibFunc(&_fnOSASetProperty, _openscriptingLib, "OSASetProperty") })
-	_register("OSASetResumeDispatchProc", func() { purego.RegisterLibFunc(&_fnOSASetResumeDispatchProc, _openscriptingLib, "OSASetResumeDispatchProc") })
+	_register("OSASetResumeDispatchProc", func() {
+		purego.RegisterLibFunc(&_fnOSASetResumeDispatchProc, _openscriptingLib, "OSASetResumeDispatchProc")
+	})
 	_register("OSASetScriptInfo", func() { purego.RegisterLibFunc(&_fnOSASetScriptInfo, _openscriptingLib, "OSASetScriptInfo") })
 	_register("OSASetSendProc", func() { purego.RegisterLibFunc(&_fnOSASetSendProc, _openscriptingLib, "OSASetSendProc") })
 	_register("OSAStartRecording", func() { purego.RegisterLibFunc(&_fnOSAStartRecording, _openscriptingLib, "OSAStartRecording") })

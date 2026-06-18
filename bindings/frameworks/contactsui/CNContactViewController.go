@@ -17,10 +17,10 @@ type CNContactViewController struct {
 }
 
 var (
-	_clsCNContactViewController = _objcClass("CNContactViewController")
+	_clsCNContactViewController                          = _objcClass("CNContactViewController")
 	_cNContactViewControllerSelDescriptorForRequiredKeys = objc.RegisterName("descriptorForRequiredKeys")
-	_cNContactViewControllerSelContact = objc.RegisterName("contact")
-	_cNContactViewControllerSelSetContact = objc.RegisterName("setContact:")
+	_cNContactViewControllerSelContact                   = objc.RegisterName("contact")
+	_cNContactViewControllerSelSetContact                = objc.RegisterName("setContact:")
 )
 
 func CNContactViewControllerFromID(id objc.ID) *CNContactViewController {
@@ -41,11 +41,12 @@ func CNContactViewControllerDescriptorForRequiredKeys() contacts.CNKeyDescriptor
 
 func (o *CNContactViewController) Contact() *contacts.CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNContactViewControllerSelContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return contacts.CNContactFromID(_ret)
 }
 
 func (o *CNContactViewController) SetContact(contact *contacts.CNContact) {
 	o.Ptr().Send(_cNContactViewControllerSelSetContact, contact.Ptr())
 }
-

@@ -17,48 +17,48 @@ type NSData struct {
 }
 
 var (
-	_clsNSData = _objcClass("NSData")
-	_nSDataSelLength = objc.RegisterName("length")
-	_nSDataSelBytes = objc.RegisterName("bytes")
-	_nSDataSelGetBytesLength = objc.RegisterName("getBytes:length:")
-	_nSDataSelGetBytesRange = objc.RegisterName("getBytes:range:")
-	_nSDataSelIsEqualToData = objc.RegisterName("isEqualToData:")
-	_nSDataSelSubdataWithRange = objc.RegisterName("subdataWithRange:")
-	_nSDataSelWriteToFileAtomically = objc.RegisterName("writeToFile:atomically:")
-	_nSDataSelWriteToURLAtomically = objc.RegisterName("writeToURL:atomically:")
-	_nSDataSelWriteToFileOptionsError = objc.RegisterName("writeToFile:options:error:")
-	_nSDataSelWriteToURLOptionsError = objc.RegisterName("writeToURL:options:error:")
-	_nSDataSelRangeOfDataOptionsRange = objc.RegisterName("rangeOfData:options:range:")
-	_nSDataSelEnumerateByteRangesUsing = objc.RegisterName("enumerateByteRangesUsingBlock:")
-	_nSDataSelData = objc.RegisterName("data")
-	_nSDataSelDataWithBytesLength = objc.RegisterName("dataWithBytes:length:")
-	_nSDataSelDataWithBytesNoCopyLength = objc.RegisterName("dataWithBytesNoCopy:length:")
+	_clsNSData                                      = _objcClass("NSData")
+	_nSDataSelLength                                = objc.RegisterName("length")
+	_nSDataSelBytes                                 = objc.RegisterName("bytes")
+	_nSDataSelGetBytesLength                        = objc.RegisterName("getBytes:length:")
+	_nSDataSelGetBytesRange                         = objc.RegisterName("getBytes:range:")
+	_nSDataSelIsEqualToData                         = objc.RegisterName("isEqualToData:")
+	_nSDataSelSubdataWithRange                      = objc.RegisterName("subdataWithRange:")
+	_nSDataSelWriteToFileAtomically                 = objc.RegisterName("writeToFile:atomically:")
+	_nSDataSelWriteToURLAtomically                  = objc.RegisterName("writeToURL:atomically:")
+	_nSDataSelWriteToFileOptionsError               = objc.RegisterName("writeToFile:options:error:")
+	_nSDataSelWriteToURLOptionsError                = objc.RegisterName("writeToURL:options:error:")
+	_nSDataSelRangeOfDataOptionsRange               = objc.RegisterName("rangeOfData:options:range:")
+	_nSDataSelEnumerateByteRangesUsing              = objc.RegisterName("enumerateByteRangesUsingBlock:")
+	_nSDataSelData                                  = objc.RegisterName("data")
+	_nSDataSelDataWithBytesLength                   = objc.RegisterName("dataWithBytes:length:")
+	_nSDataSelDataWithBytesNoCopyLength             = objc.RegisterName("dataWithBytesNoCopy:length:")
 	_nSDataSelDataWithBytesNoCopyLengthFreeWhenDone = objc.RegisterName("dataWithBytesNoCopy:length:freeWhenDone:")
-	_nSDataSelDataWithContentsOfFileOptionsError = objc.RegisterName("dataWithContentsOfFile:options:error:")
-	_nSDataSelDataWithContentsOfURLOptionsError = objc.RegisterName("dataWithContentsOfURL:options:error:")
-	_nSDataSelDataWithContentsOfFile = objc.RegisterName("dataWithContentsOfFile:")
-	_nSDataSelDataWithContentsOfURL = objc.RegisterName("dataWithContentsOfURL:")
-	_nSDataSelInitWithBytesLength = objc.RegisterName("initWithBytes:length:")
-	_nSDataSelInitWithBytesNoCopyLength = objc.RegisterName("initWithBytesNoCopy:length:")
+	_nSDataSelDataWithContentsOfFileOptionsError    = objc.RegisterName("dataWithContentsOfFile:options:error:")
+	_nSDataSelDataWithContentsOfURLOptionsError     = objc.RegisterName("dataWithContentsOfURL:options:error:")
+	_nSDataSelDataWithContentsOfFile                = objc.RegisterName("dataWithContentsOfFile:")
+	_nSDataSelDataWithContentsOfURL                 = objc.RegisterName("dataWithContentsOfURL:")
+	_nSDataSelInitWithBytesLength                   = objc.RegisterName("initWithBytes:length:")
+	_nSDataSelInitWithBytesNoCopyLength             = objc.RegisterName("initWithBytesNoCopy:length:")
 	_nSDataSelInitWithBytesNoCopyLengthFreeWhenDone = objc.RegisterName("initWithBytesNoCopy:length:freeWhenDone:")
-	_nSDataSelInitWithBytesNoCopyLengthDeallocator = objc.RegisterName("initWithBytesNoCopy:length:deallocator:")
-	_nSDataSelInitWithContentsOfFileOptionsError = objc.RegisterName("initWithContentsOfFile:options:error:")
-	_nSDataSelInitWithContentsOfURLOptionsError = objc.RegisterName("initWithContentsOfURL:options:error:")
-	_nSDataSelInitWithContentsOfFile = objc.RegisterName("initWithContentsOfFile:")
-	_nSDataSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSDataSelInitWithData = objc.RegisterName("initWithData:")
-	_nSDataSelDataWithData = objc.RegisterName("dataWithData:")
-	_nSDataSelInitWithBase64EncodedStringOptions = objc.RegisterName("initWithBase64EncodedString:options:")
-	_nSDataSelBase64EncodedStringWithOptions = objc.RegisterName("base64EncodedStringWithOptions:")
-	_nSDataSelInitWithBase64EncodedDataOptions = objc.RegisterName("initWithBase64EncodedData:options:")
-	_nSDataSelBase64EncodedDataWithOptions = objc.RegisterName("base64EncodedDataWithOptions:")
-	_nSDataSelDecompressedDataUsingAlgorithmError = objc.RegisterName("decompressedDataUsingAlgorithm:error:")
-	_nSDataSelCompressedDataUsingAlgorithmError = objc.RegisterName("compressedDataUsingAlgorithm:error:")
-	_nSDataSelGetBytes = objc.RegisterName("getBytes:")
-	_nSDataSelDataWithContentsOfMappedFile = objc.RegisterName("dataWithContentsOfMappedFile:")
-	_nSDataSelInitWithContentsOfMappedFile = objc.RegisterName("initWithContentsOfMappedFile:")
-	_nSDataSelInitWithBase64Encoding = objc.RegisterName("initWithBase64Encoding:")
-	_nSDataSelBase64Encoding = objc.RegisterName("base64Encoding")
+	_nSDataSelInitWithBytesNoCopyLengthDeallocator  = objc.RegisterName("initWithBytesNoCopy:length:deallocator:")
+	_nSDataSelInitWithContentsOfFileOptionsError    = objc.RegisterName("initWithContentsOfFile:options:error:")
+	_nSDataSelInitWithContentsOfURLOptionsError     = objc.RegisterName("initWithContentsOfURL:options:error:")
+	_nSDataSelInitWithContentsOfFile                = objc.RegisterName("initWithContentsOfFile:")
+	_nSDataSelInitWithContentsOfURL                 = objc.RegisterName("initWithContentsOfURL:")
+	_nSDataSelInitWithData                          = objc.RegisterName("initWithData:")
+	_nSDataSelDataWithData                          = objc.RegisterName("dataWithData:")
+	_nSDataSelInitWithBase64EncodedStringOptions    = objc.RegisterName("initWithBase64EncodedString:options:")
+	_nSDataSelBase64EncodedStringWithOptions        = objc.RegisterName("base64EncodedStringWithOptions:")
+	_nSDataSelInitWithBase64EncodedDataOptions      = objc.RegisterName("initWithBase64EncodedData:options:")
+	_nSDataSelBase64EncodedDataWithOptions          = objc.RegisterName("base64EncodedDataWithOptions:")
+	_nSDataSelDecompressedDataUsingAlgorithmError   = objc.RegisterName("decompressedDataUsingAlgorithm:error:")
+	_nSDataSelCompressedDataUsingAlgorithmError     = objc.RegisterName("compressedDataUsingAlgorithm:error:")
+	_nSDataSelGetBytes                              = objc.RegisterName("getBytes:")
+	_nSDataSelDataWithContentsOfMappedFile          = objc.RegisterName("dataWithContentsOfMappedFile:")
+	_nSDataSelInitWithContentsOfMappedFile          = objc.RegisterName("initWithContentsOfMappedFile:")
+	_nSDataSelInitWithBase64Encoding                = objc.RegisterName("initWithBase64Encoding:")
+	_nSDataSelBase64Encoding                        = objc.RegisterName("base64Encoding")
 )
 
 func NSDataFromID(id objc.ID) *NSData {
@@ -96,7 +96,9 @@ func (o *NSData) IsEqualToData(other *NSData) bool {
 
 func (o *NSData) SubdataWithRange(range_ NSRange) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelSubdataWithRange, range_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -139,32 +141,42 @@ func (o *NSData) EnumerateByteRangesUsing(block objc.Block) {
 
 func NSDataData() *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesNoCopyLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithBytesNoCopyLengthFreeWhenDone, bytes_, length, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithContentsOfFileOptionsError(path *NSString, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -174,7 +186,9 @@ func NSDataDataWithContentsOfFileOptionsError(path *NSString, readOptionsMask NS
 func NSDataDataWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -183,31 +197,41 @@ func NSDataDataWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataR
 
 func NSDataDataWithContentsOfFile(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithContentsOfURL(url *NSURL) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithBytesLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithBytesNoCopyLength(bytes_ unsafe.Pointer, length uint) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesNoCopyLength, bytes_, length)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b bool) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesNoCopyLengthFreeWhenDone, bytes_, length, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
@@ -220,14 +244,18 @@ func (o *NSData) InitWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, len
 		defer __block_deallocator.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBytesNoCopyLengthDeallocator, bytes_, length, __block_deallocator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithContentsOfFileOptionsError(path *NSString, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfFileOptionsError, path.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -237,7 +265,9 @@ func (o *NSData) InitWithContentsOfFileOptionsError(path *NSString, readOptionsM
 func (o *NSData) InitWithContentsOfURLOptionsError(url *NSURL, readOptionsMask NSDataReadingOptions) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfURLOptionsError, url.Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -246,56 +276,74 @@ func (o *NSData) InitWithContentsOfURLOptionsError(url *NSURL, readOptionsMask N
 
 func (o *NSData) InitWithContentsOfFile(path *NSString) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithContentsOfURL(url *NSURL) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithContentsOfURL, url.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithData(data *NSData) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func NSDataDataWithData(data *NSData) *NSData {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSData), _nSDataSelDataWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) InitWithBase64EncodedStringOptions(base64String *NSString, options NSDataBase64DecodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBase64EncodedStringOptions, base64String.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) Base64EncodedStringWithOptions(options NSDataBase64EncodingOptions) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64EncodedStringWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSData) InitWithBase64EncodedDataOptions(base64Data *NSData, options NSDataBase64DecodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelInitWithBase64EncodedDataOptions, base64Data.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions) *NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64EncodedDataWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDataFromID(_ret)
 }
 
 func (o *NSData) DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelDecompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -305,7 +353,9 @@ func (o *NSData) DecompressedDataUsingAlgorithmError(algorithm NSDataCompression
 func (o *NSData) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*NSData, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelCompressedDataUsingAlgorithmError, algorithm, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -338,7 +388,8 @@ func (o *NSData) InitWithBase64Encoding(base64String *NSString) objc.ID {
 // Deprecated: Use base64EncodedStringWithOptions: instead
 func (o *NSData) Base64Encoding() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDataSelBase64Encoding)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
-

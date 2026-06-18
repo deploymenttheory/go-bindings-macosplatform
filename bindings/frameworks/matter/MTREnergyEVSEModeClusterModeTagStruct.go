@@ -16,11 +16,11 @@ type MTREnergyEVSEModeClusterModeTagStruct struct {
 }
 
 var (
-	_clsMTREnergyEVSEModeClusterModeTagStruct = _objcClass("MTREnergyEVSEModeClusterModeTagStruct")
-	_mTREnergyEVSEModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTREnergyEVSEModeClusterModeTagStruct           = _objcClass("MTREnergyEVSEModeClusterModeTagStruct")
+	_mTREnergyEVSEModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTREnergyEVSEModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTREnergyEVSEModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTREnergyEVSEModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTREnergyEVSEModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTREnergyEVSEModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTREnergyEVSEModeClusterModeTagStructFromID(id objc.ID) *MTREnergyEVSEModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTREnergyEVSEModeClusterModeTagStructFromID(id objc.ID) *MTREnergyEVSEModeC
 
 func (o *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTREnergyEVSEModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.N
 
 func (o *MTREnergyEVSEModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTREnergyEVSEModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTREnergyEVSEModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

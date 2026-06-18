@@ -73,7 +73,9 @@ func (x *MatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMa
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
 }
 
-func (x *MatrixSolveTriangular) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+func (x *MatrixSolveTriangular) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel {
+	return &x.inner.MPSMatrixBinaryKernel
+}
 
 // MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
 type MatrixSolveTriangularable interface {
@@ -87,4 +89,3 @@ type MatrixSolveTriangularable interface {
 }
 
 var _ MatrixSolveTriangularable = (*MatrixSolveTriangular)(nil)
-

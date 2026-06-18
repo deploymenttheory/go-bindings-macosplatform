@@ -13,7 +13,8 @@ import (
 
 func QLThumbnailErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quicklookthumbnailingLib, "QLThumbnailErrorDomain")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

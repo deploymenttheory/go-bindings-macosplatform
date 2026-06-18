@@ -71,4 +71,3 @@ type GeoJSONFeatureable interface {
 }
 
 var _ GeoJSONFeatureable = (*GeoJSONFeature)(nil)
-

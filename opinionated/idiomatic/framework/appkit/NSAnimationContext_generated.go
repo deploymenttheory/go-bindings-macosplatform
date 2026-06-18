@@ -128,4 +128,3 @@ type AnimationContextable interface {
 }
 
 var _ AnimationContextable = (*AnimationContext)(nil)
-

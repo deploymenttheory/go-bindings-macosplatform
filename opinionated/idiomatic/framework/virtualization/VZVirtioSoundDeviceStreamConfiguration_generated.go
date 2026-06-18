@@ -15,7 +15,9 @@ type VirtioSoundDeviceStreamConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioSoundDeviceStreamConfiguration].
-func (x *VirtioSoundDeviceStreamConfiguration) Unwrap() *raw.VZVirtioSoundDeviceStreamConfiguration { return x.inner }
+func (x *VirtioSoundDeviceStreamConfiguration) Unwrap() *raw.VZVirtioSoundDeviceStreamConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -35,7 +37,9 @@ func NewVirtioSoundDeviceStreamConfiguration() *VirtioSoundDeviceStreamConfigura
 	return &VirtioSoundDeviceStreamConfiguration{inner: raw.VZVirtioSoundDeviceStreamConfigurationFromID(_id)}
 }
 
-func (x *VirtioSoundDeviceStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration { return x.inner }
+func (x *VirtioSoundDeviceStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration {
+	return x.inner
+}
 
 // VirtioSoundDeviceStreamConfigurationable is the interface implemented by [VirtioSoundDeviceStreamConfiguration], for mocking and DI.
 type VirtioSoundDeviceStreamConfigurationable interface {
@@ -43,4 +47,3 @@ type VirtioSoundDeviceStreamConfigurationable interface {
 }
 
 var _ VirtioSoundDeviceStreamConfigurationable = (*VirtioSoundDeviceStreamConfiguration)(nil)
-

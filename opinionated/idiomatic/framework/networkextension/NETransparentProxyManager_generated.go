@@ -44,7 +44,9 @@ func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRulePro
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -97,4 +99,3 @@ type NETransparentProxyManagerable interface {
 }
 
 var _ NETransparentProxyManagerable = (*NETransparentProxyManager)(nil)
-

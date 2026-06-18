@@ -18,12 +18,12 @@ type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRespon
 }
 
 var (
-	_clsMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams = _objcClass("MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams")
+	_clsMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams                           = _objcClass("MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams")
 	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatus = objc.RegisterName("status")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelSetStatus = objc.RegisterName("setStatus:")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatusText = objc.RegisterName("statusText")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelSetStatusText = objc.RegisterName("setStatusText:")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatus                     = objc.RegisterName("status")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelSetStatus                  = objc.RegisterName("setStatus:")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatusText                 = objc.RegisterName("statusText")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelSetStatusText              = objc.RegisterName("setStatusText:")
 )
 
 func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
@@ -40,7 +40,9 @@ func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRespon
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -49,7 +51,9 @@ func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRe
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRe
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) StatusText() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelStatusText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) SetStatusText(statusText *foundation.NSString) {
 	o.Ptr().Send(_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsSelSetStatusText, statusText.Ptr())
 }
-

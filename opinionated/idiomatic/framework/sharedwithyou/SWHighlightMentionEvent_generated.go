@@ -62,4 +62,3 @@ type HighlightMentionEventable interface {
 }
 
 var _ HighlightMentionEventable = (*HighlightMentionEvent)(nil)
-

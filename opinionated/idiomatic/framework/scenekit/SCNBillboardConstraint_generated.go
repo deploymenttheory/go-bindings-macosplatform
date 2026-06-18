@@ -83,4 +83,3 @@ type BillboardConstraintable interface {
 }
 
 var _ BillboardConstraintable = (*BillboardConstraint)(nil)
-

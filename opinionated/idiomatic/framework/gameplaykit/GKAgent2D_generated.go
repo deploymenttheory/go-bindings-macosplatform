@@ -132,4 +132,3 @@ type Agent2Dable interface {
 }
 
 var _ Agent2Dable = (*Agent2D)(nil)
-

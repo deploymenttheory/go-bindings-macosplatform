@@ -15,16 +15,16 @@ type AVParameterEvent struct {
 }
 
 var (
-	_clsAVParameterEvent = _objcClass("AVParameterEvent")
+	_clsAVParameterEvent                                     = _objcClass("AVParameterEvent")
 	_aVParameterEventSelInitWithParameterIDScopeElementValue = objc.RegisterName("initWithParameterID:scope:element:value:")
-	_aVParameterEventSelParameterID = objc.RegisterName("parameterID")
-	_aVParameterEventSelSetParameterID = objc.RegisterName("setParameterID:")
-	_aVParameterEventSelScope = objc.RegisterName("scope")
-	_aVParameterEventSelSetScope = objc.RegisterName("setScope:")
-	_aVParameterEventSelElement = objc.RegisterName("element")
-	_aVParameterEventSelSetElement = objc.RegisterName("setElement:")
-	_aVParameterEventSelValue = objc.RegisterName("value")
-	_aVParameterEventSelSetValue = objc.RegisterName("setValue:")
+	_aVParameterEventSelParameterID                          = objc.RegisterName("parameterID")
+	_aVParameterEventSelSetParameterID                       = objc.RegisterName("setParameterID:")
+	_aVParameterEventSelScope                                = objc.RegisterName("scope")
+	_aVParameterEventSelSetScope                             = objc.RegisterName("setScope:")
+	_aVParameterEventSelElement                              = objc.RegisterName("element")
+	_aVParameterEventSelSetElement                           = objc.RegisterName("setElement:")
+	_aVParameterEventSelValue                                = objc.RegisterName("value")
+	_aVParameterEventSelSetValue                             = objc.RegisterName("setValue:")
 )
 
 func AVParameterEventFromID(id objc.ID) *AVParameterEvent {
@@ -40,7 +40,9 @@ func AVParameterEventFromID(id objc.ID) *AVParameterEvent {
 // @method initWithParameterID:scope:element:value @abstract Initialize the event with the parameter ID, scope, element, and value for the parameter to be set. @param parameterID The ID of the parameter (see AudioUnitParameterID). @param scope The audio unit scope for the parameter (see AudioUnitScope). @param element The element index within the scope (see AudioUnitElement). @param value The value of the parameter to be set.  Range:  Dependent on parameter.
 func (o *AVParameterEvent) InitWithParameterIDScopeElementValue(parameterID uint, scope uint, element uint, value float32) *AVParameterEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVParameterEventSelInitWithParameterIDScopeElementValue, parameterID, scope, element, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVParameterEventFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *AVParameterEvent) Value() float32 {
 func (o *AVParameterEvent) SetValue(value float32) {
 	o.Ptr().Send(_aVParameterEventSelSetValue, value)
 }
-

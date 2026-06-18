@@ -18,34 +18,34 @@ type QCView struct {
 }
 
 var (
-	_clsQCView = _objcClass("QCView")
-	_qCViewSelLoadCompositionFromFile = objc.RegisterName("loadCompositionFromFile:")
-	_qCViewSelLoadComposition = objc.RegisterName("loadComposition:")
-	_qCViewSelLoadedComposition = objc.RegisterName("loadedComposition")
-	_qCViewSelUnloadComposition = objc.RegisterName("unloadComposition")
-	_qCViewSelSetAutostartsRendering = objc.RegisterName("setAutostartsRendering:")
-	_qCViewSelAutostartsRendering = objc.RegisterName("autostartsRendering")
-	_qCViewSelSetEraseColor = objc.RegisterName("setEraseColor:")
-	_qCViewSelEraseColor = objc.RegisterName("eraseColor")
-	_qCViewSelSetEventForwardingMask = objc.RegisterName("setEventForwardingMask:")
-	_qCViewSelEventForwardingMask = objc.RegisterName("eventForwardingMask")
-	_qCViewSelSetMaxRenderingFrameRate = objc.RegisterName("setMaxRenderingFrameRate:")
-	_qCViewSelMaxRenderingFrameRate = objc.RegisterName("maxRenderingFrameRate")
-	_qCViewSelErase = objc.RegisterName("erase")
-	_qCViewSelStartRendering = objc.RegisterName("startRendering")
-	_qCViewSelRenderAtTimeArguments = objc.RegisterName("renderAtTime:arguments:")
-	_qCViewSelPauseRendering = objc.RegisterName("pauseRendering")
-	_qCViewSelIsPausedRendering = objc.RegisterName("isPausedRendering")
-	_qCViewSelResumeRendering = objc.RegisterName("resumeRendering")
-	_qCViewSelStopRendering = objc.RegisterName("stopRendering")
-	_qCViewSelIsRendering = objc.RegisterName("isRendering")
-	_qCViewSelSnapshotImage = objc.RegisterName("snapshotImage")
+	_clsQCView                          = _objcClass("QCView")
+	_qCViewSelLoadCompositionFromFile   = objc.RegisterName("loadCompositionFromFile:")
+	_qCViewSelLoadComposition           = objc.RegisterName("loadComposition:")
+	_qCViewSelLoadedComposition         = objc.RegisterName("loadedComposition")
+	_qCViewSelUnloadComposition         = objc.RegisterName("unloadComposition")
+	_qCViewSelSetAutostartsRendering    = objc.RegisterName("setAutostartsRendering:")
+	_qCViewSelAutostartsRendering       = objc.RegisterName("autostartsRendering")
+	_qCViewSelSetEraseColor             = objc.RegisterName("setEraseColor:")
+	_qCViewSelEraseColor                = objc.RegisterName("eraseColor")
+	_qCViewSelSetEventForwardingMask    = objc.RegisterName("setEventForwardingMask:")
+	_qCViewSelEventForwardingMask       = objc.RegisterName("eventForwardingMask")
+	_qCViewSelSetMaxRenderingFrameRate  = objc.RegisterName("setMaxRenderingFrameRate:")
+	_qCViewSelMaxRenderingFrameRate     = objc.RegisterName("maxRenderingFrameRate")
+	_qCViewSelErase                     = objc.RegisterName("erase")
+	_qCViewSelStartRendering            = objc.RegisterName("startRendering")
+	_qCViewSelRenderAtTimeArguments     = objc.RegisterName("renderAtTime:arguments:")
+	_qCViewSelPauseRendering            = objc.RegisterName("pauseRendering")
+	_qCViewSelIsPausedRendering         = objc.RegisterName("isPausedRendering")
+	_qCViewSelResumeRendering           = objc.RegisterName("resumeRendering")
+	_qCViewSelStopRendering             = objc.RegisterName("stopRendering")
+	_qCViewSelIsRendering               = objc.RegisterName("isRendering")
+	_qCViewSelSnapshotImage             = objc.RegisterName("snapshotImage")
 	_qCViewSelCreateSnapshotImageOfType = objc.RegisterName("createSnapshotImageOfType:")
-	_qCViewSelOpenGLContext = objc.RegisterName("openGLContext")
-	_qCViewSelOpenGLPixelFormat = objc.RegisterName("openGLPixelFormat")
-	_qCViewSelStart = objc.RegisterName("start:")
-	_qCViewSelStop = objc.RegisterName("stop:")
-	_qCViewSelPlay = objc.RegisterName("play:")
+	_qCViewSelOpenGLContext             = objc.RegisterName("openGLContext")
+	_qCViewSelOpenGLPixelFormat         = objc.RegisterName("openGLPixelFormat")
+	_qCViewSelStart                     = objc.RegisterName("start:")
+	_qCViewSelStop                      = objc.RegisterName("stop:")
+	_qCViewSelPlay                      = objc.RegisterName("play:")
 )
 
 func QCViewFromID(id objc.ID) *QCView {
@@ -70,7 +70,9 @@ func (o *QCView) LoadComposition(composition *quartz.QCComposition) bool {
 
 func (o *QCView) LoadedComposition() *quartz.QCComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelLoadedComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartz.QCCompositionFromID(_ret)
 }
 
@@ -93,7 +95,9 @@ func (o *QCView) SetEraseColor(color *appkit.NSColor) {
 
 func (o *QCView) EraseColor() *appkit.NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelEraseColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSColorFromID(_ret)
 }
 
@@ -153,7 +157,9 @@ func (o *QCView) IsRendering() bool {
 
 func (o *QCView) SnapshotImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelSnapshotImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -164,13 +170,17 @@ func (o *QCView) CreateSnapshotImageOfType(type_ *foundation.NSString) objc.ID {
 
 func (o *QCView) OpenGLContext() *appkit.NSOpenGLContext {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSOpenGLContextFromID(_ret)
 }
 
 func (o *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCViewSelOpenGLPixelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSOpenGLPixelFormatFromID(_ret)
 }
 
@@ -185,4 +195,3 @@ func (o *QCView) Stop(sender objc.ID) {
 func (o *QCView) Play(sender objc.ID) {
 	o.Ptr().Send(_qCViewSelPlay, sender)
 }
-

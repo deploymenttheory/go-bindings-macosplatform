@@ -81,4 +81,3 @@ type ComposeContextable interface {
 }
 
 var _ ComposeContextable = (*ComposeContext)(nil)
-

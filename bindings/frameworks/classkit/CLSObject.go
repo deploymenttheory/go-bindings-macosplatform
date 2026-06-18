@@ -16,8 +16,8 @@ type CLSObject struct {
 }
 
 var (
-	_clsCLSObject = _objcClass("CLSObject")
-	_cLSObjectSelDateCreated = objc.RegisterName("dateCreated")
+	_clsCLSObject                 = _objcClass("CLSObject")
+	_cLSObjectSelDateCreated      = objc.RegisterName("dateCreated")
 	_cLSObjectSelDateLastModified = objc.RegisterName("dateLastModified")
 )
 
@@ -34,14 +34,17 @@ func CLSObjectFromID(id objc.ID) *CLSObject {
 // @abstract      The date this object was created.
 func (o *CLSObject) DateCreated() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSObjectSelDateCreated)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // @abstract      The date this object was last modified.
 func (o *CLSObject) DateLastModified() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cLSObjectSelDateLastModified)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

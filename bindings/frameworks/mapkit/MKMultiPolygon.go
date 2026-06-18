@@ -16,9 +16,9 @@ type MKMultiPolygon struct {
 }
 
 var (
-	_clsMKMultiPolygon = _objcClass("MKMultiPolygon")
+	_clsMKMultiPolygon                 = _objcClass("MKMultiPolygon")
 	_mKMultiPolygonSelInitWithPolygons = objc.RegisterName("initWithPolygons:")
-	_mKMultiPolygonSelPolygons = objc.RegisterName("polygons")
+	_mKMultiPolygonSelPolygons         = objc.RegisterName("polygons")
 )
 
 func MKMultiPolygonFromID(id objc.ID) *MKMultiPolygon {
@@ -33,13 +33,16 @@ func MKMultiPolygonFromID(id objc.ID) *MKMultiPolygon {
 
 func (o *MKMultiPolygon) InitWithPolygons(polygons *foundation.NSArray[*MKPolygon]) *MKMultiPolygon {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonSelInitWithPolygons, polygons.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMultiPolygonFromID(_ret)
 }
 
 func (o *MKMultiPolygon) Polygons() *foundation.NSArray[*MKPolygon] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMultiPolygonSelPolygons)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKPolygon](_ret)
 }
-

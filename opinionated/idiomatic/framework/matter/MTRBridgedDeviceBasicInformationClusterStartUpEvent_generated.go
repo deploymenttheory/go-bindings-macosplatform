@@ -16,7 +16,9 @@ type MTRBridgedDeviceBasicInformationClusterStartUpEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SetSoftwareVersion
 	x.inner.SetSoftwareVersion(softwareVersion)
 }
 
-func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent { return x.inner }
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent {
+	return x.inner
+}
 
 // MTRBridgedDeviceBasicInformationClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterStartUpEvent], for mocking and DI.
 type MTRBridgedDeviceBasicInformationClusterStartUpEventable interface {
@@ -63,4 +67,3 @@ type MTRBridgedDeviceBasicInformationClusterStartUpEventable interface {
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterStartUpEventable = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)
-

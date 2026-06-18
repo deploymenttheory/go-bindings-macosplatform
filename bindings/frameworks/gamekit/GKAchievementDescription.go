@@ -19,24 +19,24 @@ type GKAchievementDescription struct {
 }
 
 var (
-	_clsGKAchievementDescription = _objcClass("GKAchievementDescription")
+	_clsGKAchievementDescription                                                 = _objcClass("GKAchievementDescription")
 	_gKAchievementDescriptionSelLoadAchievementDescriptionsWithCompletionHandler = objc.RegisterName("loadAchievementDescriptionsWithCompletionHandler:")
-	_gKAchievementDescriptionSelIdentifier = objc.RegisterName("identifier")
-	_gKAchievementDescriptionSelGroupIdentifier = objc.RegisterName("groupIdentifier")
-	_gKAchievementDescriptionSelTitle = objc.RegisterName("title")
-	_gKAchievementDescriptionSelAchievedDescription = objc.RegisterName("achievedDescription")
-	_gKAchievementDescriptionSelUnachievedDescription = objc.RegisterName("unachievedDescription")
-	_gKAchievementDescriptionSelMaximumPoints = objc.RegisterName("maximumPoints")
-	_gKAchievementDescriptionSelIsHidden = objc.RegisterName("isHidden")
-	_gKAchievementDescriptionSelIsReplayable = objc.RegisterName("isReplayable")
-	_gKAchievementDescriptionSelRarityPercent = objc.RegisterName("rarityPercent")
-	_gKAchievementDescriptionSelReleaseState = objc.RegisterName("releaseState")
-	_gKAchievementDescriptionSelActivityIdentifier = objc.RegisterName("activityIdentifier")
-	_gKAchievementDescriptionSelActivityProperties = objc.RegisterName("activityProperties")
-	_gKAchievementDescriptionSelLoadImageWithCompletionHandler = objc.RegisterName("loadImageWithCompletionHandler:")
-	_gKAchievementDescriptionSelIncompleteAchievementImage = objc.RegisterName("incompleteAchievementImage")
-	_gKAchievementDescriptionSelPlaceholderCompletedAchievementImage = objc.RegisterName("placeholderCompletedAchievementImage")
-	_gKAchievementDescriptionSelImage = objc.RegisterName("image")
+	_gKAchievementDescriptionSelIdentifier                                       = objc.RegisterName("identifier")
+	_gKAchievementDescriptionSelGroupIdentifier                                  = objc.RegisterName("groupIdentifier")
+	_gKAchievementDescriptionSelTitle                                            = objc.RegisterName("title")
+	_gKAchievementDescriptionSelAchievedDescription                              = objc.RegisterName("achievedDescription")
+	_gKAchievementDescriptionSelUnachievedDescription                            = objc.RegisterName("unachievedDescription")
+	_gKAchievementDescriptionSelMaximumPoints                                    = objc.RegisterName("maximumPoints")
+	_gKAchievementDescriptionSelIsHidden                                         = objc.RegisterName("isHidden")
+	_gKAchievementDescriptionSelIsReplayable                                     = objc.RegisterName("isReplayable")
+	_gKAchievementDescriptionSelRarityPercent                                    = objc.RegisterName("rarityPercent")
+	_gKAchievementDescriptionSelReleaseState                                     = objc.RegisterName("releaseState")
+	_gKAchievementDescriptionSelActivityIdentifier                               = objc.RegisterName("activityIdentifier")
+	_gKAchievementDescriptionSelActivityProperties                               = objc.RegisterName("activityProperties")
+	_gKAchievementDescriptionSelLoadImageWithCompletionHandler                   = objc.RegisterName("loadImageWithCompletionHandler:")
+	_gKAchievementDescriptionSelIncompleteAchievementImage                       = objc.RegisterName("incompleteAchievementImage")
+	_gKAchievementDescriptionSelPlaceholderCompletedAchievementImage             = objc.RegisterName("placeholderCompletedAchievementImage")
+	_gKAchievementDescriptionSelImage                                            = objc.RegisterName("image")
 )
 
 func GKAchievementDescriptionFromID(id objc.ID) *GKAchievementDescription {
@@ -66,35 +66,45 @@ func GKAchievementDescriptionLoadAchievementDescriptionsWithCompletionHandler(co
 
 func (o *GKAchievementDescription) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The group identifier for the achievement, if one exists.
 func (o *GKAchievementDescription) GroupIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelGroupIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The title of the achievement.
 func (o *GKAchievementDescription) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The description for an unachieved achievement.
 func (o *GKAchievementDescription) AchievedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelAchievedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The description for an achieved achievement.
 func (o *GKAchievementDescription) UnachievedDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelUnachievedDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +129,9 @@ func (o *GKAchievementDescription) IsReplayable() bool {
 // If present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
 func (o *GKAchievementDescription) RarityPercent() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelRarityPercent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -132,7 +144,9 @@ func (o *GKAchievementDescription) ReleaseState() GKReleaseState {
 // The identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
 func (o *GKAchievementDescription) ActivityIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKAchievementDescriptionSelActivityIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -159,13 +173,17 @@ func (o *GKAchievementDescription) LoadImageWithCompletionHandler(completionHand
 
 func GKAchievementDescriptionIncompleteAchievementImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKAchievementDescription), _gKAchievementDescriptionSelIncompleteAchievementImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
 func GKAchievementDescriptionPlaceholderCompletedAchievementImage() *appkit.NSImage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKAchievementDescription), _gKAchievementDescriptionSelPlaceholderCompletedAchievementImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSImageFromID(_ret)
 }
 
@@ -174,4 +192,3 @@ func (o *GKAchievementDescription) Image() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gKAchievementDescriptionSelImage)
 	return _ret
 }
-

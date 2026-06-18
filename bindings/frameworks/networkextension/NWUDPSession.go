@@ -19,20 +19,20 @@ type NWUDPSession struct {
 }
 
 var (
-	_clsNWUDPSession = _objcClass("NWUDPSession")
-	_nWUDPSessionSelInitWithUpgradeForSession = objc.RegisterName("initWithUpgradeForSession:")
-	_nWUDPSessionSelTryNextResolvedEndpoint = objc.RegisterName("tryNextResolvedEndpoint")
-	_nWUDPSessionSelSetReadHandlerMaxDatagrams = objc.RegisterName("setReadHandler:maxDatagrams:")
+	_clsNWUDPSession                                        = _objcClass("NWUDPSession")
+	_nWUDPSessionSelInitWithUpgradeForSession               = objc.RegisterName("initWithUpgradeForSession:")
+	_nWUDPSessionSelTryNextResolvedEndpoint                 = objc.RegisterName("tryNextResolvedEndpoint")
+	_nWUDPSessionSelSetReadHandlerMaxDatagrams              = objc.RegisterName("setReadHandler:maxDatagrams:")
 	_nWUDPSessionSelWriteMultipleDatagramsCompletionHandler = objc.RegisterName("writeMultipleDatagrams:completionHandler:")
-	_nWUDPSessionSelWriteDatagramCompletionHandler = objc.RegisterName("writeDatagram:completionHandler:")
-	_nWUDPSessionSelCancel = objc.RegisterName("cancel")
-	_nWUDPSessionSelState = objc.RegisterName("state")
-	_nWUDPSessionSelEndpoint = objc.RegisterName("endpoint")
-	_nWUDPSessionSelResolvedEndpoint = objc.RegisterName("resolvedEndpoint")
-	_nWUDPSessionSelIsViable = objc.RegisterName("isViable")
-	_nWUDPSessionSelHasBetterPath = objc.RegisterName("hasBetterPath")
-	_nWUDPSessionSelCurrentPath = objc.RegisterName("currentPath")
-	_nWUDPSessionSelMaximumDatagramLength = objc.RegisterName("maximumDatagramLength")
+	_nWUDPSessionSelWriteDatagramCompletionHandler          = objc.RegisterName("writeDatagram:completionHandler:")
+	_nWUDPSessionSelCancel                                  = objc.RegisterName("cancel")
+	_nWUDPSessionSelState                                   = objc.RegisterName("state")
+	_nWUDPSessionSelEndpoint                                = objc.RegisterName("endpoint")
+	_nWUDPSessionSelResolvedEndpoint                        = objc.RegisterName("resolvedEndpoint")
+	_nWUDPSessionSelIsViable                                = objc.RegisterName("isViable")
+	_nWUDPSessionSelHasBetterPath                           = objc.RegisterName("hasBetterPath")
+	_nWUDPSessionSelCurrentPath                             = objc.RegisterName("currentPath")
+	_nWUDPSessionSelMaximumDatagramLength                   = objc.RegisterName("maximumDatagramLength")
 )
 
 func NWUDPSessionFromID(id objc.ID) *NWUDPSession {
@@ -49,7 +49,9 @@ func NWUDPSessionFromID(id objc.ID) *NWUDPSession {
 // Deprecated: Use `nw_connection_create` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) InitWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWUDPSessionSelInitWithUpgradeForSession, session.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWUDPSessionFromID(_ret)
 }
 
@@ -136,7 +138,9 @@ func (o *NWUDPSession) HasBetterPath() bool {
 // Deprecated: Use `nw_connection_copy_current_path` in Network framework instead, see deprecation notice in <NetworkExtension/NWUDPSession.h>
 func (o *NWUDPSession) CurrentPath() *NWPath {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nWUDPSessionSelCurrentPath)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NWPathFromID(_ret)
 }
 
@@ -146,4 +150,3 @@ func (o *NWUDPSession) MaximumDatagramLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nWUDPSessionSelMaximumDatagramLength)
 	return _ret
 }
-

@@ -214,9 +214,13 @@ func (x *MTRBaseClusterAirQuality) SubscribeAttributeClusterRevisionWithParamsSu
 	}
 }
 
-func (x *MTRBaseClusterAirQuality) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterAirQuality) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterAirQuality) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterAirQuality) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterAirQualityable is the interface implemented by [MTRBaseClusterAirQuality], for mocking and DI.
 type MTRBaseClusterAirQualityable interface {
@@ -236,4 +240,3 @@ type MTRBaseClusterAirQualityable interface {
 }
 
 var _ MTRBaseClusterAirQualityable = (*MTRBaseClusterAirQuality)(nil)
-

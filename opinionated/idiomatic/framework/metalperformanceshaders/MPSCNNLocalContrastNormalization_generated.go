@@ -19,7 +19,9 @@ type CNNLocalContrastNormalization struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNLocalContrastNormalization].
-func (x *CNNLocalContrastNormalization) Unwrap() *raw.MPSCNNLocalContrastNormalization { return x.inner }
+func (x *CNNLocalContrastNormalization) Unwrap() *raw.MPSCNNLocalContrastNormalization {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -203,9 +205,13 @@ func (x *CNNLocalContrastNormalization) SetPs(ps float32) {
 	x.inner.SetPs(ps)
 }
 
-func (x *CNNLocalContrastNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNLocalContrastNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
-func (x *CNNLocalContrastNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+func (x *CNNLocalContrastNormalization) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNKernel.MPSKernel
+}
 
 // CNNLocalContrastNormalizationable is the interface implemented by [CNNLocalContrastNormalization], for mocking and DI.
 type CNNLocalContrastNormalizationable interface {
@@ -241,4 +247,3 @@ type CNNLocalContrastNormalizationable interface {
 }
 
 var _ CNNLocalContrastNormalizationable = (*CNNLocalContrastNormalization)(nil)
-

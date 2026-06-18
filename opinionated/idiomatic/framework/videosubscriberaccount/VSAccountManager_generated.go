@@ -60,4 +60,3 @@ type VSAccountManagerable interface {
 }
 
 var _ VSAccountManagerable = (*VSAccountManager)(nil)
-

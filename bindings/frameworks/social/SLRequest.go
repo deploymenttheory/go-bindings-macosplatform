@@ -19,17 +19,17 @@ type SLRequest struct {
 }
 
 var (
-	_clsSLRequest = _objcClass("SLRequest")
+	_clsSLRequest                                                = _objcClass("SLRequest")
 	_sLRequestSelRequestForServiceTypeRequestMethodURLParameters = objc.RegisterName("requestForServiceType:requestMethod:URL:parameters:")
-	_sLRequestSelAddMultipartDataWithNameTypeFilename = objc.RegisterName("addMultipartData:withName:type:filename:")
-	_sLRequestSelAddMultipartDataWithNameType = objc.RegisterName("addMultipartData:withName:type:")
-	_sLRequestSelPreparedURLRequest = objc.RegisterName("preparedURLRequest")
-	_sLRequestSelPerformRequestWithHandler = objc.RegisterName("performRequestWithHandler:")
-	_sLRequestSelAccount = objc.RegisterName("account")
-	_sLRequestSelSetAccount = objc.RegisterName("setAccount:")
-	_sLRequestSelRequestMethod = objc.RegisterName("requestMethod")
-	_sLRequestSelURL = objc.RegisterName("URL")
-	_sLRequestSelParameters = objc.RegisterName("parameters")
+	_sLRequestSelAddMultipartDataWithNameTypeFilename            = objc.RegisterName("addMultipartData:withName:type:filename:")
+	_sLRequestSelAddMultipartDataWithNameType                    = objc.RegisterName("addMultipartData:withName:type:")
+	_sLRequestSelPreparedURLRequest                              = objc.RegisterName("preparedURLRequest")
+	_sLRequestSelPerformRequestWithHandler                       = objc.RegisterName("performRequestWithHandler:")
+	_sLRequestSelAccount                                         = objc.RegisterName("account")
+	_sLRequestSelSetAccount                                      = objc.RegisterName("setAccount:")
+	_sLRequestSelRequestMethod                                   = objc.RegisterName("requestMethod")
+	_sLRequestSelURL                                             = objc.RegisterName("URL")
+	_sLRequestSelParameters                                      = objc.RegisterName("parameters")
 )
 
 func SLRequestFromID(id objc.ID) *SLRequest {
@@ -44,7 +44,9 @@ func SLRequestFromID(id objc.ID) *SLRequest {
 
 func SLRequestRequestForServiceTypeRequestMethodURLParameters(serviceType *foundation.NSString, requestMethod SLRequestMethod, url *foundation.NSURL, parameters *foundation.NSDictionary[objc.ID, objc.ID]) *SLRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSLRequest), _sLRequestSelRequestForServiceTypeRequestMethodURLParameters, serviceType.Ptr(), requestMethod, url.Ptr(), parameters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SLRequestFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *SLRequest) AddMultipartDataWithNameType(data *foundation.NSData, name *
 
 func (o *SLRequest) PreparedURLRequest() *foundation.NSURLRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLRequestSelPreparedURLRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLRequestFromID(_ret)
 }
 
@@ -81,7 +85,9 @@ func (o *SLRequest) PerformRequestWithHandler(handler func(*foundation.NSData, *
 
 func (o *SLRequest) Account() *accounts.ACAccount {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLRequestSelAccount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return accounts.ACAccountFromID(_ret)
 }
 
@@ -96,7 +102,9 @@ func (o *SLRequest) RequestMethod() SLRequestMethod {
 
 func (o *SLRequest) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sLRequestSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -104,4 +112,3 @@ func (o *SLRequest) Parameters() *foundation.NSDictionary[objc.ID, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[objc.ID, objc.ID]](o.Ptr(), _sLRequestSelParameters)
 	return _ret
 }
-

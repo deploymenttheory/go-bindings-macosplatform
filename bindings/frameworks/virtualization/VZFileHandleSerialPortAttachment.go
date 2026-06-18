@@ -16,10 +16,10 @@ type VZFileHandleSerialPortAttachment struct {
 }
 
 var (
-	_clsVZFileHandleSerialPortAttachment = _objcClass("VZFileHandleSerialPortAttachment")
+	_clsVZFileHandleSerialPortAttachment                                                 = _objcClass("VZFileHandleSerialPortAttachment")
 	_vZFileHandleSerialPortAttachmentSelInitWithFileHandleForReadingFileHandleForWriting = objc.RegisterName("initWithFileHandleForReading:fileHandleForWriting:")
-	_vZFileHandleSerialPortAttachmentSelFileHandleForReading = objc.RegisterName("fileHandleForReading")
-	_vZFileHandleSerialPortAttachmentSelFileHandleForWriting = objc.RegisterName("fileHandleForWriting")
+	_vZFileHandleSerialPortAttachmentSelFileHandleForReading                             = objc.RegisterName("fileHandleForReading")
+	_vZFileHandleSerialPortAttachmentSelFileHandleForWriting                             = objc.RegisterName("fileHandleForWriting")
 )
 
 func VZFileHandleSerialPortAttachmentFromID(id objc.ID) *VZFileHandleSerialPortAttachment {
@@ -35,21 +35,26 @@ func VZFileHandleSerialPortAttachmentFromID(id objc.ID) *VZFileHandleSerialPortA
 // @abstract Initialize the VZFileHandleSerialPortAttachment from file handles. @param fileHandleForReading File handle for reading from the file. @param fileHandleForWriting File handle for writing to the file. @discussion Each file handle must either be nil or have a valid file descriptor.
 func (o *VZFileHandleSerialPortAttachment) InitWithFileHandleForReadingFileHandleForWriting(fileHandleForReading *foundation.NSFileHandle, fileHandleForWriting *foundation.NSFileHandle) *VZFileHandleSerialPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleSerialPortAttachmentSelInitWithFileHandleForReadingFileHandleForWriting, fileHandleForReading.Ptr(), fileHandleForWriting.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZFileHandleSerialPortAttachmentFromID(_ret)
 }
 
 // @abstract File handle for reading from the file. @discussion Data written to fileHandleForReading goes to the guest.
 func (o *VZFileHandleSerialPortAttachment) FileHandleForReading() *foundation.NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleSerialPortAttachmentSelFileHandleForReading)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileHandleFromID(_ret)
 }
 
 // @abstract File handle for writing to the file. @discussion Data sent from the guest appears on fileHandleForWriting.
 func (o *VZFileHandleSerialPortAttachment) FileHandleForWriting() *foundation.NSFileHandle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleSerialPortAttachmentSelFileHandleForWriting)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSFileHandleFromID(_ret)
 }
-

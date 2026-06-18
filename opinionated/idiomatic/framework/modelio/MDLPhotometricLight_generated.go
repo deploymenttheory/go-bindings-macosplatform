@@ -147,11 +147,17 @@ func (x *PhotometricLight) SphericalHarmonicsCoefficients() *foundation.NSData {
 	return x.inner.SphericalHarmonicsCoefficients()
 }
 
-func (x *PhotometricLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return &x.inner.MDLPhysicallyPlausibleLight }
+func (x *PhotometricLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight {
+	return &x.inner.MDLPhysicallyPlausibleLight
+}
 
-func (x *PhotometricLight) asLight() *raw.MDLLight { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight }
+func (x *PhotometricLight) asLight() *raw.MDLLight {
+	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight
+}
 
-func (x *PhotometricLight) asObject() *raw.MDLObject { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject }
+func (x *PhotometricLight) asObject() *raw.MDLObject {
+	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject
+}
 
 // PhotometricLightable is the interface implemented by [PhotometricLight], for mocking and DI.
 type PhotometricLightable interface {
@@ -177,4 +183,3 @@ type PhotometricLightable interface {
 }
 
 var _ PhotometricLightable = (*PhotometricLight)(nil)
-

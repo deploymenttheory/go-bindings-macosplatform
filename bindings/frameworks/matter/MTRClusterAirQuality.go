@@ -16,14 +16,14 @@ type MTRClusterAirQuality struct {
 }
 
 var (
-	_clsMTRClusterAirQuality = _objcClass("MTRClusterAirQuality")
-	_mTRClusterAirQualitySelReadAttributeAirQualityWithParams = objc.RegisterName("readAttributeAirQualityWithParams:")
+	_clsMTRClusterAirQuality                                            = _objcClass("MTRClusterAirQuality")
+	_mTRClusterAirQualitySelReadAttributeAirQualityWithParams           = objc.RegisterName("readAttributeAirQualityWithParams:")
 	_mTRClusterAirQualitySelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterAirQualitySelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterAirQualitySelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterAirQualitySelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterAirQualitySelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterAirQualitySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterAirQualitySelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterAirQualitySelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterAirQualitySelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterAirQualitySelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterAirQualitySelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterAirQualityFromID(id objc.ID) *MTRClusterAirQuality {
@@ -69,7 +69,8 @@ func (o *MTRClusterAirQuality) ReadAttributeClusterRevisionWithParams(params *MT
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterAirQuality) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAirQuality {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAirQualitySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAirQualityFromID(_ret)
 }
-

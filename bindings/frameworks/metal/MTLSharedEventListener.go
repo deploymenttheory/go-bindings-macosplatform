@@ -16,11 +16,11 @@ type MTLSharedEventListener struct {
 }
 
 var (
-	_clsMTLSharedEventListener = _objcClass("MTLSharedEventListener")
-	_mTLSharedEventListenerSelInit = objc.RegisterName("init")
+	_clsMTLSharedEventListener                      = _objcClass("MTLSharedEventListener")
+	_mTLSharedEventListenerSelInit                  = objc.RegisterName("init")
 	_mTLSharedEventListenerSelInitWithDispatchQueue = objc.RegisterName("initWithDispatchQueue:")
-	_mTLSharedEventListenerSelSharedListener = objc.RegisterName("sharedListener")
-	_mTLSharedEventListenerSelDispatchQueue = objc.RegisterName("dispatchQueue")
+	_mTLSharedEventListenerSelSharedListener        = objc.RegisterName("sharedListener")
+	_mTLSharedEventListenerSelDispatchQueue         = objc.RegisterName("dispatchQueue")
 )
 
 func MTLSharedEventListenerFromID(id objc.ID) *MTLSharedEventListener {
@@ -35,25 +35,32 @@ func MTLSharedEventListenerFromID(id objc.ID) *MTLSharedEventListener {
 
 func (o *MTLSharedEventListener) Init() *MTLSharedEventListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventListenerSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLSharedEventListenerFromID(_ret)
 }
 
 func (o *MTLSharedEventListener) InitWithDispatchQueue(dispatchQueue *foundation.NSObject) *MTLSharedEventListener {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventListenerSelInitWithDispatchQueue, dispatchQueue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLSharedEventListenerFromID(_ret)
 }
 
 func MTLSharedEventListenerSharedListener() *MTLSharedEventListener {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLSharedEventListener), _mTLSharedEventListenerSelSharedListener)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLSharedEventListenerFromID(_ret)
 }
 
 func (o *MTLSharedEventListener) DispatchQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedEventListenerSelDispatchQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
-

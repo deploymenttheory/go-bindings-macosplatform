@@ -16,21 +16,21 @@ type CNSaveRequest struct {
 }
 
 var (
-	_clsCNSaveRequest = _objcClass("CNSaveRequest")
+	_clsCNSaveRequest                                    = _objcClass("CNSaveRequest")
 	_cNSaveRequestSelAddContactToContainerWithIdentifier = objc.RegisterName("addContact:toContainerWithIdentifier:")
-	_cNSaveRequestSelUpdateContact = objc.RegisterName("updateContact:")
-	_cNSaveRequestSelDeleteContact = objc.RegisterName("deleteContact:")
-	_cNSaveRequestSelAddGroupToContainerWithIdentifier = objc.RegisterName("addGroup:toContainerWithIdentifier:")
-	_cNSaveRequestSelUpdateGroup = objc.RegisterName("updateGroup:")
-	_cNSaveRequestSelDeleteGroup = objc.RegisterName("deleteGroup:")
-	_cNSaveRequestSelAddSubgroupToGroup = objc.RegisterName("addSubgroup:toGroup:")
-	_cNSaveRequestSelRemoveSubgroupFromGroup = objc.RegisterName("removeSubgroup:fromGroup:")
-	_cNSaveRequestSelAddMemberToGroup = objc.RegisterName("addMember:toGroup:")
-	_cNSaveRequestSelRemoveMemberFromGroup = objc.RegisterName("removeMember:fromGroup:")
-	_cNSaveRequestSelTransactionAuthor = objc.RegisterName("transactionAuthor")
-	_cNSaveRequestSelSetTransactionAuthor = objc.RegisterName("setTransactionAuthor:")
-	_cNSaveRequestSelShouldRefetchContacts = objc.RegisterName("shouldRefetchContacts")
-	_cNSaveRequestSelSetShouldRefetchContacts = objc.RegisterName("setShouldRefetchContacts:")
+	_cNSaveRequestSelUpdateContact                       = objc.RegisterName("updateContact:")
+	_cNSaveRequestSelDeleteContact                       = objc.RegisterName("deleteContact:")
+	_cNSaveRequestSelAddGroupToContainerWithIdentifier   = objc.RegisterName("addGroup:toContainerWithIdentifier:")
+	_cNSaveRequestSelUpdateGroup                         = objc.RegisterName("updateGroup:")
+	_cNSaveRequestSelDeleteGroup                         = objc.RegisterName("deleteGroup:")
+	_cNSaveRequestSelAddSubgroupToGroup                  = objc.RegisterName("addSubgroup:toGroup:")
+	_cNSaveRequestSelRemoveSubgroupFromGroup             = objc.RegisterName("removeSubgroup:fromGroup:")
+	_cNSaveRequestSelAddMemberToGroup                    = objc.RegisterName("addMember:toGroup:")
+	_cNSaveRequestSelRemoveMemberFromGroup               = objc.RegisterName("removeMember:fromGroup:")
+	_cNSaveRequestSelTransactionAuthor                   = objc.RegisterName("transactionAuthor")
+	_cNSaveRequestSelSetTransactionAuthor                = objc.RegisterName("setTransactionAuthor:")
+	_cNSaveRequestSelShouldRefetchContacts               = objc.RegisterName("shouldRefetchContacts")
+	_cNSaveRequestSelSetShouldRefetchContacts            = objc.RegisterName("setShouldRefetchContacts:")
 )
 
 func CNSaveRequestFromID(id objc.ID) *CNSaveRequest {
@@ -96,7 +96,9 @@ func (o *CNSaveRequest) RemoveMemberFromGroup(contact *CNContact, group *CNGroup
 // @abstract    The author of this transaction. @discussion  Use this, in conjunction with @c CNChangeHistoryFetchRequest.excludedTransactionAuthors, to suppress fetching of changes the author already knows about.
 func (o *CNSaveRequest) TransactionAuthor() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNSaveRequestSelTransactionAuthor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -113,4 +115,3 @@ func (o *CNSaveRequest) ShouldRefetchContacts() bool {
 func (o *CNSaveRequest) SetShouldRefetchContacts(shouldRefetchContacts bool) {
 	o.Ptr().Send(_cNSaveRequestSelSetShouldRefetchContacts, shouldRefetchContacts)
 }
-

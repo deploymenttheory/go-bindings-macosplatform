@@ -26,4 +26,3 @@ func VZStorageDeviceAttachmentFromID(id objc.ID) *VZStorageDeviceAttachment {
 	purego.Track(o)
 	return o
 }
-

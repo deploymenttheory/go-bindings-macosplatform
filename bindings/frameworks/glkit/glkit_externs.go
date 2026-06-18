@@ -68,4 +68,3 @@ func KGLKModelErrorKey() uintptr {
 	ptr, _ := purego.Dlsym(_glkitLib, "kGLKModelErrorKey")
 	return ptr
 }
-

@@ -18,26 +18,26 @@ type MLModel struct {
 }
 
 var (
-	_clsMLModel = _objcClass("MLModel")
-	_mLModelSelModelWithContentsOfURLError = objc.RegisterName("modelWithContentsOfURL:error:")
-	_mLModelSelModelWithContentsOfURLConfigurationError = objc.RegisterName("modelWithContentsOfURL:configuration:error:")
-	_mLModelSelLoadContentsOfURLConfigurationCompletionHandler = objc.RegisterName("loadContentsOfURL:configuration:completionHandler:")
-	_mLModelSelPredictionFromFeaturesError = objc.RegisterName("predictionFromFeatures:error:")
-	_mLModelSelPredictionFromFeaturesOptionsError = objc.RegisterName("predictionFromFeatures:options:error:")
-	_mLModelSelPredictionFromFeaturesCompletionHandler = objc.RegisterName("predictionFromFeatures:completionHandler:")
-	_mLModelSelPredictionFromFeaturesOptionsCompletionHandler = objc.RegisterName("predictionFromFeatures:options:completionHandler:")
-	_mLModelSelPredictionsFromBatchError = objc.RegisterName("predictionsFromBatch:error:")
-	_mLModelSelPredictionsFromBatchOptionsError = objc.RegisterName("predictionsFromBatch:options:error:")
-	_mLModelSelParameterValueForKeyError = objc.RegisterName("parameterValueForKey:error:")
-	_mLModelSelLoadModelAssetConfigurationCompletionHandler = objc.RegisterName("loadModelAsset:configuration:completionHandler:")
-	_mLModelSelModelDescription = objc.RegisterName("modelDescription")
-	_mLModelSelConfiguration = objc.RegisterName("configuration")
-	_mLModelSelCompileModelAtURLError = objc.RegisterName("compileModelAtURL:error:")
-	_mLModelSelCompileModelAtURLCompletionHandler = objc.RegisterName("compileModelAtURL:completionHandler:")
-	_mLModelSelAvailableComputeDevices = objc.RegisterName("availableComputeDevices")
-	_mLModelSelNewState = objc.RegisterName("newState")
-	_mLModelSelPredictionFromFeaturesUsingStateError = objc.RegisterName("predictionFromFeatures:usingState:error:")
-	_mLModelSelPredictionFromFeaturesUsingStateOptionsError = objc.RegisterName("predictionFromFeatures:usingState:options:error:")
+	_clsMLModel                                                         = _objcClass("MLModel")
+	_mLModelSelModelWithContentsOfURLError                              = objc.RegisterName("modelWithContentsOfURL:error:")
+	_mLModelSelModelWithContentsOfURLConfigurationError                 = objc.RegisterName("modelWithContentsOfURL:configuration:error:")
+	_mLModelSelLoadContentsOfURLConfigurationCompletionHandler          = objc.RegisterName("loadContentsOfURL:configuration:completionHandler:")
+	_mLModelSelPredictionFromFeaturesError                              = objc.RegisterName("predictionFromFeatures:error:")
+	_mLModelSelPredictionFromFeaturesOptionsError                       = objc.RegisterName("predictionFromFeatures:options:error:")
+	_mLModelSelPredictionFromFeaturesCompletionHandler                  = objc.RegisterName("predictionFromFeatures:completionHandler:")
+	_mLModelSelPredictionFromFeaturesOptionsCompletionHandler           = objc.RegisterName("predictionFromFeatures:options:completionHandler:")
+	_mLModelSelPredictionsFromBatchError                                = objc.RegisterName("predictionsFromBatch:error:")
+	_mLModelSelPredictionsFromBatchOptionsError                         = objc.RegisterName("predictionsFromBatch:options:error:")
+	_mLModelSelParameterValueForKeyError                                = objc.RegisterName("parameterValueForKey:error:")
+	_mLModelSelLoadModelAssetConfigurationCompletionHandler             = objc.RegisterName("loadModelAsset:configuration:completionHandler:")
+	_mLModelSelModelDescription                                         = objc.RegisterName("modelDescription")
+	_mLModelSelConfiguration                                            = objc.RegisterName("configuration")
+	_mLModelSelCompileModelAtURLError                                   = objc.RegisterName("compileModelAtURL:error:")
+	_mLModelSelCompileModelAtURLCompletionHandler                       = objc.RegisterName("compileModelAtURL:completionHandler:")
+	_mLModelSelAvailableComputeDevices                                  = objc.RegisterName("availableComputeDevices")
+	_mLModelSelNewState                                                 = objc.RegisterName("newState")
+	_mLModelSelPredictionFromFeaturesUsingStateError                    = objc.RegisterName("predictionFromFeatures:usingState:error:")
+	_mLModelSelPredictionFromFeaturesUsingStateOptionsError             = objc.RegisterName("predictionFromFeatures:usingState:options:error:")
 	_mLModelSelPredictionFromFeaturesUsingStateOptionsCompletionHandler = objc.RegisterName("predictionFromFeatures:usingState:options:completionHandler:")
 )
 
@@ -55,7 +55,9 @@ func MLModelFromID(id objc.ID) *MLModel {
 func MLModelModelWithContentsOfURLError(url *foundation.NSURL) (*MLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -66,7 +68,9 @@ func MLModelModelWithContentsOfURLError(url *foundation.NSURL) (*MLModel, error)
 func MLModelModelWithContentsOfURLConfigurationError(url *foundation.NSURL, configuration *MLModelConfiguration) (*MLModel, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelModelWithContentsOfURLConfigurationError, url.Ptr(), configuration.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -180,14 +184,18 @@ func MLModelLoadModelAssetConfigurationCompletionHandler(asset *MLModelAsset, co
 // A model holds a description of its required inputs and expected outputs.
 func (o *MLModel) ModelDescription() *MLModelDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelSelModelDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelDescriptionFromID(_ret)
 }
 
 // The load-time parameters used to instantiate this MLModel object.
 func (o *MLModel) Configuration() *MLModelConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLModelSelConfiguration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelConfigurationFromID(_ret)
 }
 
@@ -195,7 +203,9 @@ func (o *MLModel) Configuration() *MLModelConfiguration {
 func MLModelCompileModelAtURLError(modelURL *foundation.NSURL) (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelCompileModelAtURLError, modelURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -218,7 +228,9 @@ func MLModelCompileModelAtURLCompletionHandler(modelURL *foundation.NSURL, handl
 
 func MLModelAvailableComputeDevices() *foundation.NSArray[MLComputeDeviceProtocol] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLModel), _mLModelSelAvailableComputeDevices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MLComputeDeviceProtocol](_ret)
 }
 
@@ -259,4 +271,3 @@ func (o *MLModel) PredictionFromFeaturesUsingStateOptionsCompletionHandler(input
 	}
 	o.Ptr().Send(_mLModelSelPredictionFromFeaturesUsingStateOptionsCompletionHandler, inputFeatures, state.Ptr(), options.Ptr(), __block_completionHandler)
 }
-

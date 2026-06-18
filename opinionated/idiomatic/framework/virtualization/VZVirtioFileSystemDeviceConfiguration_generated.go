@@ -17,7 +17,9 @@ type VirtioFileSystemDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioFileSystemDeviceConfiguration].
-func (x *VirtioFileSystemDeviceConfiguration) Unwrap() *raw.VZVirtioFileSystemDeviceConfiguration { return x.inner }
+func (x *VirtioFileSystemDeviceConfiguration) Unwrap() *raw.VZVirtioFileSystemDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -78,7 +80,9 @@ func (x *VirtioFileSystemDeviceConfiguration) SetShare(share *raw.VZDirectorySha
 	x.inner.SetShare(share)
 }
 
-func (x *VirtioFileSystemDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration { return &x.inner.VZDirectorySharingDeviceConfiguration }
+func (x *VirtioFileSystemDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration {
+	return &x.inner.VZDirectorySharingDeviceConfiguration
+}
 
 // VirtioFileSystemDeviceConfigurationable is the interface implemented by [VirtioFileSystemDeviceConfiguration], for mocking and DI.
 type VirtioFileSystemDeviceConfigurationable interface {
@@ -92,4 +96,3 @@ type VirtioFileSystemDeviceConfigurationable interface {
 }
 
 var _ VirtioFileSystemDeviceConfigurationable = (*VirtioFileSystemDeviceConfiguration)(nil)
-

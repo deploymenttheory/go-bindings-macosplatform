@@ -448,4 +448,3 @@ func WiggleCustomAngleEffect(angle float64) *SymbolWiggleEffect {
 	}
 	return &SymbolWiggleEffect{inner: _r}
 }
-

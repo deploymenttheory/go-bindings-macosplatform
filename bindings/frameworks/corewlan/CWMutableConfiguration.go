@@ -16,12 +16,12 @@ type CWMutableConfiguration struct {
 }
 
 var (
-	_clsCWMutableConfiguration = _objcClass("CWMutableConfiguration")
-	_cWMutableConfigurationSelSetNetworkProfiles = objc.RegisterName("setNetworkProfiles:")
+	_clsCWMutableConfiguration                                      = _objcClass("CWMutableConfiguration")
+	_cWMutableConfigurationSelSetNetworkProfiles                    = objc.RegisterName("setNetworkProfiles:")
 	_cWMutableConfigurationSelSetRequireAdministratorForAssociation = objc.RegisterName("setRequireAdministratorForAssociation:")
-	_cWMutableConfigurationSelSetRequireAdministratorForPower = objc.RegisterName("setRequireAdministratorForPower:")
-	_cWMutableConfigurationSelSetRequireAdministratorForIBSSMode = objc.RegisterName("setRequireAdministratorForIBSSMode:")
-	_cWMutableConfigurationSelSetRememberJoinedNetworks = objc.RegisterName("setRememberJoinedNetworks:")
+	_cWMutableConfigurationSelSetRequireAdministratorForPower       = objc.RegisterName("setRequireAdministratorForPower:")
+	_cWMutableConfigurationSelSetRequireAdministratorForIBSSMode    = objc.RegisterName("setRequireAdministratorForIBSSMode:")
+	_cWMutableConfigurationSelSetRememberJoinedNetworks             = objc.RegisterName("setRememberJoinedNetworks:")
 )
 
 func CWMutableConfigurationFromID(id objc.ID) *CWMutableConfiguration {
@@ -54,4 +54,3 @@ func (o *CWMutableConfiguration) SetRequireAdministratorForIBSSMode(requireAdmin
 func (o *CWMutableConfiguration) SetRememberJoinedNetworks(rememberJoinedNetworks bool) {
 	o.Ptr().Send(_cWMutableConfigurationSelSetRememberJoinedNetworks, rememberJoinedNetworks)
 }
-

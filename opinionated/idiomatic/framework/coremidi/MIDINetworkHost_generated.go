@@ -94,4 +94,3 @@ type NetworkHostable interface {
 }
 
 var _ NetworkHostable = (*NetworkHost)(nil)
-

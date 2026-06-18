@@ -15,9 +15,9 @@ type PHASEGeometricSpreadingDistanceModelParameters struct {
 }
 
 var (
-	_clsPHASEGeometricSpreadingDistanceModelParameters = _objcClass("PHASEGeometricSpreadingDistanceModelParameters")
-	_pHASEGeometricSpreadingDistanceModelParametersSelInit = objc.RegisterName("init")
-	_pHASEGeometricSpreadingDistanceModelParametersSelRolloffFactor = objc.RegisterName("rolloffFactor")
+	_clsPHASEGeometricSpreadingDistanceModelParameters                 = _objcClass("PHASEGeometricSpreadingDistanceModelParameters")
+	_pHASEGeometricSpreadingDistanceModelParametersSelInit             = objc.RegisterName("init")
+	_pHASEGeometricSpreadingDistanceModelParametersSelRolloffFactor    = objc.RegisterName("rolloffFactor")
 	_pHASEGeometricSpreadingDistanceModelParametersSelSetRolloffFactor = objc.RegisterName("setRolloffFactor:")
 )
 
@@ -33,7 +33,9 @@ func PHASEGeometricSpreadingDistanceModelParametersFromID(id objc.ID) *PHASEGeom
 
 func (o *PHASEGeometricSpreadingDistanceModelParameters) Init() *PHASEGeometricSpreadingDistanceModelParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASEGeometricSpreadingDistanceModelParametersSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASEGeometricSpreadingDistanceModelParametersFromID(_ret)
 }
 
@@ -45,4 +47,3 @@ func (o *PHASEGeometricSpreadingDistanceModelParameters) RolloffFactor() float64
 func (o *PHASEGeometricSpreadingDistanceModelParameters) SetRolloffFactor(rolloffFactor float64) {
 	o.Ptr().Send(_pHASEGeometricSpreadingDistanceModelParametersSelSetRolloffFactor, rolloffFactor)
 }
-

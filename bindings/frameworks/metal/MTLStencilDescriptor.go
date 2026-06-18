@@ -16,19 +16,19 @@ type MTLStencilDescriptor struct {
 }
 
 var (
-	_clsMTLStencilDescriptor = _objcClass("MTLStencilDescriptor")
-	_mTLStencilDescriptorSelStencilCompareFunction = objc.RegisterName("stencilCompareFunction")
-	_mTLStencilDescriptorSelSetStencilCompareFunction = objc.RegisterName("setStencilCompareFunction:")
-	_mTLStencilDescriptorSelStencilFailureOperation = objc.RegisterName("stencilFailureOperation")
-	_mTLStencilDescriptorSelSetStencilFailureOperation = objc.RegisterName("setStencilFailureOperation:")
-	_mTLStencilDescriptorSelDepthFailureOperation = objc.RegisterName("depthFailureOperation")
-	_mTLStencilDescriptorSelSetDepthFailureOperation = objc.RegisterName("setDepthFailureOperation:")
-	_mTLStencilDescriptorSelDepthStencilPassOperation = objc.RegisterName("depthStencilPassOperation")
+	_clsMTLStencilDescriptor                             = _objcClass("MTLStencilDescriptor")
+	_mTLStencilDescriptorSelStencilCompareFunction       = objc.RegisterName("stencilCompareFunction")
+	_mTLStencilDescriptorSelSetStencilCompareFunction    = objc.RegisterName("setStencilCompareFunction:")
+	_mTLStencilDescriptorSelStencilFailureOperation      = objc.RegisterName("stencilFailureOperation")
+	_mTLStencilDescriptorSelSetStencilFailureOperation   = objc.RegisterName("setStencilFailureOperation:")
+	_mTLStencilDescriptorSelDepthFailureOperation        = objc.RegisterName("depthFailureOperation")
+	_mTLStencilDescriptorSelSetDepthFailureOperation     = objc.RegisterName("setDepthFailureOperation:")
+	_mTLStencilDescriptorSelDepthStencilPassOperation    = objc.RegisterName("depthStencilPassOperation")
 	_mTLStencilDescriptorSelSetDepthStencilPassOperation = objc.RegisterName("setDepthStencilPassOperation:")
-	_mTLStencilDescriptorSelReadMask = objc.RegisterName("readMask")
-	_mTLStencilDescriptorSelSetReadMask = objc.RegisterName("setReadMask:")
-	_mTLStencilDescriptorSelWriteMask = objc.RegisterName("writeMask")
-	_mTLStencilDescriptorSelSetWriteMask = objc.RegisterName("setWriteMask:")
+	_mTLStencilDescriptorSelReadMask                     = objc.RegisterName("readMask")
+	_mTLStencilDescriptorSelSetReadMask                  = objc.RegisterName("setReadMask:")
+	_mTLStencilDescriptorSelWriteMask                    = objc.RegisterName("writeMask")
+	_mTLStencilDescriptorSelSetWriteMask                 = objc.RegisterName("setWriteMask:")
 )
 
 func MTLStencilDescriptorFromID(id objc.ID) *MTLStencilDescriptor {
@@ -97,4 +97,3 @@ func (o *MTLStencilDescriptor) WriteMask() uint32 {
 func (o *MTLStencilDescriptor) SetWriteMask(writeMask uint32) {
 	o.Ptr().Send(_mTLStencilDescriptorSelSetWriteMask, writeMask)
 }
-

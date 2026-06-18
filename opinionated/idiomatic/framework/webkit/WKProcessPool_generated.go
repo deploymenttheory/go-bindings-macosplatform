@@ -41,4 +41,3 @@ type WKProcessPoolable interface {
 }
 
 var _ WKProcessPoolable = (*WKProcessPool)(nil)
-

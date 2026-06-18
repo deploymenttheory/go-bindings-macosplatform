@@ -53,4 +53,3 @@ type Changeable interface {
 }
 
 var _ Changeable = (*Change)(nil)
-

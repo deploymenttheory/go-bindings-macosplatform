@@ -17,7 +17,8 @@ var (
 // @abstract Returns an array containing all compute devices. @discussion The returned array contains all compute devices that are accessible. If a compute device becomes inaccessible for some reason (for e.g. if an external GPU is unplugged) then the subsequent call to`MLAllComputeDevices` will return an array without the compute device.
 func MLAllComputeDevices() *foundation.NSArray[MLComputeDeviceProtocol] {
 	_ret := _fnMLAllComputeDevices()
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MLComputeDeviceProtocol](_ret)
 }
-

@@ -68,4 +68,3 @@ type Correlationable interface {
 }
 
 var _ Correlationable = (*Correlation)(nil)
-

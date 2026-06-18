@@ -25,4 +25,3 @@ func AVAssetResourceRenewalRequestFromID(id objc.ID) *AVAssetResourceRenewalRequ
 	purego.Track(o)
 	return o
 }
-

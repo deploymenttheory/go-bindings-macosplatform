@@ -22,4 +22,3 @@ type ItemAttributesProvider interface {
 type ResourceProvider interface {
 	asResource() *raw.FSResource
 }
-

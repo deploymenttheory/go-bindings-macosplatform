@@ -16,15 +16,15 @@ type AVBCentralManager struct {
 }
 
 var (
-	_clsAVBCentralManager = _objcClass("AVBCentralManager")
-	_aVBCentralManagerSelStartControllerMatching = objc.RegisterName("startControllerMatching")
-	_aVBCentralManagerSelDidAddInterface = objc.RegisterName("didAddInterface:")
-	_aVBCentralManagerSelDidRemoveInterface = objc.RegisterName("didRemoveInterface:")
-	_aVBCentralManagerSelStreamingEnabledInterfacesOnly = objc.RegisterName("streamingEnabledInterfacesOnly")
-	_aVBCentralManagerSelNextAvailableDynamicEntityID = objc.RegisterName("nextAvailableDynamicEntityID")
-	_aVBCentralManagerSelReleaseDynamicEntityID = objc.RegisterName("releaseDynamicEntityID:")
+	_clsAVBCentralManager                                  = _objcClass("AVBCentralManager")
+	_aVBCentralManagerSelStartControllerMatching           = objc.RegisterName("startControllerMatching")
+	_aVBCentralManagerSelDidAddInterface                   = objc.RegisterName("didAddInterface:")
+	_aVBCentralManagerSelDidRemoveInterface                = objc.RegisterName("didRemoveInterface:")
+	_aVBCentralManagerSelStreamingEnabledInterfacesOnly    = objc.RegisterName("streamingEnabledInterfacesOnly")
+	_aVBCentralManagerSelNextAvailableDynamicEntityID      = objc.RegisterName("nextAvailableDynamicEntityID")
+	_aVBCentralManagerSelReleaseDynamicEntityID            = objc.RegisterName("releaseDynamicEntityID:")
 	_aVBCentralManagerSelNextAvailableDynamicEntityModelID = objc.RegisterName("nextAvailableDynamicEntityModelID")
-	_aVBCentralManagerSelReleaseDynamicEntityModelID = objc.RegisterName("releaseDynamicEntityModelID:")
+	_aVBCentralManagerSelReleaseDynamicEntityModelID       = objc.RegisterName("releaseDynamicEntityModelID:")
 )
 
 func AVBCentralManagerFromID(id objc.ID) *AVBCentralManager {
@@ -79,4 +79,3 @@ func AVBCentralManagerNextAvailableDynamicEntityModelID() uint64 {
 func AVBCentralManagerReleaseDynamicEntityModelID(entityModelID uint64) {
 	objc.ID(_clsAVBCentralManager).Send(_aVBCentralManagerSelReleaseDynamicEntityModelID, entityModelID)
 }
-

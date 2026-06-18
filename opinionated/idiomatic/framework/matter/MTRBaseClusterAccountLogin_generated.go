@@ -381,9 +381,13 @@ func (x *MTRBaseClusterAccountLogin) SubscribeAttributeClusterRevisionWithMinInt
 	}
 }
 
-func (x *MTRBaseClusterAccountLogin) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterAccountLogin) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterAccountLogin) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterAccountLogin) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterAccountLoginable is the interface implemented by [MTRBaseClusterAccountLogin], for mocking and DI.
 type MTRBaseClusterAccountLoginable interface {
@@ -419,4 +423,3 @@ type MTRBaseClusterAccountLoginable interface {
 }
 
 var _ MTRBaseClusterAccountLoginable = (*MTRBaseClusterAccountLogin)(nil)
-

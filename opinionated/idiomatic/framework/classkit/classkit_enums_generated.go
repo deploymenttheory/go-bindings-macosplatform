@@ -11,9 +11,9 @@ import (
 type CLSBinaryValueType int64
 
 const (
-	CLSBinaryValueTypeTrueFalse CLSBinaryValueType = 0
-	CLSBinaryValueTypePassFail CLSBinaryValueType = 1
-	CLSBinaryValueTypeYesNo CLSBinaryValueType = 2
+	CLSBinaryValueTypeTrueFalse        CLSBinaryValueType = 0
+	CLSBinaryValueTypePassFail         CLSBinaryValueType = 1
+	CLSBinaryValueTypeYesNo            CLSBinaryValueType = 2
 	CLSBinaryValueTypeCorrectIncorrect CLSBinaryValueType = 3
 )
 
@@ -35,24 +35,24 @@ func (e CLSBinaryValueType) String() string {
 type CLSContextType int64
 
 const (
-	CLSContextTypeNone CLSContextType = 0
-	CLSContextTypeApp CLSContextType = 1
-	CLSContextTypeChapter CLSContextType = 2
-	CLSContextTypeSection CLSContextType = 3
-	CLSContextTypeLevel CLSContextType = 4
-	CLSContextTypePage CLSContextType = 5
-	CLSContextTypeTask CLSContextType = 6
+	CLSContextTypeNone      CLSContextType = 0
+	CLSContextTypeApp       CLSContextType = 1
+	CLSContextTypeChapter   CLSContextType = 2
+	CLSContextTypeSection   CLSContextType = 3
+	CLSContextTypeLevel     CLSContextType = 4
+	CLSContextTypePage      CLSContextType = 5
+	CLSContextTypeTask      CLSContextType = 6
 	CLSContextTypeChallenge CLSContextType = 7
-	CLSContextTypeQuiz CLSContextType = 8
-	CLSContextTypeExercise CLSContextType = 9
-	CLSContextTypeLesson CLSContextType = 10
-	CLSContextTypeBook CLSContextType = 11
-	CLSContextTypeGame CLSContextType = 12
-	CLSContextTypeDocument CLSContextType = 13
-	CLSContextTypeAudio CLSContextType = 14
-	CLSContextTypeVideo CLSContextType = 15
-	CLSContextTypeCourse CLSContextType = 16
-	CLSContextTypeCustom CLSContextType = 17
+	CLSContextTypeQuiz      CLSContextType = 8
+	CLSContextTypeExercise  CLSContextType = 9
+	CLSContextTypeLesson    CLSContextType = 10
+	CLSContextTypeBook      CLSContextType = 11
+	CLSContextTypeGame      CLSContextType = 12
+	CLSContextTypeDocument  CLSContextType = 13
+	CLSContextTypeAudio     CLSContextType = 14
+	CLSContextTypeVideo     CLSContextType = 15
+	CLSContextTypeCourse    CLSContextType = 16
+	CLSContextTypeCustom    CLSContextType = 17
 )
 
 func (e CLSContextType) String() string {
@@ -102,10 +102,10 @@ type CLSProgressReportingCapabilityKind int64
 
 const (
 	CLSProgressReportingCapabilityKindDuration CLSProgressReportingCapabilityKind = 0
-	CLSProgressReportingCapabilityKindPercent CLSProgressReportingCapabilityKind = 1
-	CLSProgressReportingCapabilityKindBinary CLSProgressReportingCapabilityKind = 2
+	CLSProgressReportingCapabilityKindPercent  CLSProgressReportingCapabilityKind = 1
+	CLSProgressReportingCapabilityKindBinary   CLSProgressReportingCapabilityKind = 2
 	CLSProgressReportingCapabilityKindQuantity CLSProgressReportingCapabilityKind = 3
-	CLSProgressReportingCapabilityKindScore CLSProgressReportingCapabilityKind = 4
+	CLSProgressReportingCapabilityKindScore    CLSProgressReportingCapabilityKind = 4
 )
 
 func (e CLSProgressReportingCapabilityKind) String() string {
@@ -124,4 +124,3 @@ func (e CLSProgressReportingCapabilityKind) String() string {
 		return fmt.Sprintf("CLSProgressReportingCapabilityKind(%d)", int64(e))
 	}
 }
-

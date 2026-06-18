@@ -11,8 +11,8 @@ import (
 type MEFileInfoFragmentsStatus int64
 
 const (
-	MEFileInfoCouldNotContainFragments MEFileInfoFragmentsStatus = 0
-	MEFileInfoContainsFragments MEFileInfoFragmentsStatus = 1
+	MEFileInfoCouldNotContainFragments               MEFileInfoFragmentsStatus = 0
+	MEFileInfoContainsFragments                      MEFileInfoFragmentsStatus = 1
 	MEFileInfoCouldContainButDoesNotContainFragments MEFileInfoFragmentsStatus = 2
 )
 
@@ -28,4 +28,3 @@ func (e MEFileInfoFragmentsStatus) String() string {
 		return fmt.Sprintf("MEFileInfoFragmentsStatus(%d)", int64(e))
 	}
 }
-

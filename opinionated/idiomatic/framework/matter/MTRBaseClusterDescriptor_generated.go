@@ -379,9 +379,13 @@ func (x *MTRBaseClusterDescriptor) SubscribeAttributeClusterRevisionWithMinInter
 	}
 }
 
-func (x *MTRBaseClusterDescriptor) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterDescriptor) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterDescriptor) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterDescriptor) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterDescriptorable is the interface implemented by [MTRBaseClusterDescriptor], for mocking and DI.
 type MTRBaseClusterDescriptorable interface {
@@ -425,4 +429,3 @@ type MTRBaseClusterDescriptorable interface {
 }
 
 var _ MTRBaseClusterDescriptorable = (*MTRBaseClusterDescriptor)(nil)
-

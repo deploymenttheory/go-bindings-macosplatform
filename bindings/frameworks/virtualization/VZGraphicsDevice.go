@@ -16,7 +16,7 @@ type VZGraphicsDevice struct {
 }
 
 var (
-	_clsVZGraphicsDevice = _objcClass("VZGraphicsDevice")
+	_clsVZGraphicsDevice         = _objcClass("VZGraphicsDevice")
 	_vZGraphicsDeviceSelDisplays = objc.RegisterName("displays")
 )
 
@@ -32,7 +32,8 @@ func VZGraphicsDeviceFromID(id objc.ID) *VZGraphicsDevice {
 
 func (o *VZGraphicsDevice) Displays() *foundation.NSArray[*VZGraphicsDisplay] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGraphicsDeviceSelDisplays)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VZGraphicsDisplay](_ret)
 }
-

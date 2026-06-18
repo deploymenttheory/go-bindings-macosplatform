@@ -81,4 +81,3 @@ type StoredValuePassBalanceable interface {
 }
 
 var _ StoredValuePassBalanceable = (*StoredValuePassBalance)(nil)
-

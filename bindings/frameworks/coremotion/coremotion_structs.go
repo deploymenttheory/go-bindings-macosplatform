@@ -10,7 +10,7 @@ type CMAcceleration struct {
 }
 
 type CMCalibratedMagneticField struct {
-	Field CMMagneticField
+	Field    CMMagneticField
 	Accuracy CMMagneticFieldCalibrationAccuracy
 }
 
@@ -44,4 +44,3 @@ type CMRotationRate struct {
 	Y float64
 	Z float64
 }
-

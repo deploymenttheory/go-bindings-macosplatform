@@ -25,4 +25,3 @@ func NSMessagePortFromID(id objc.ID) *NSMessagePort {
 	purego.Track(o)
 	return o
 }
-

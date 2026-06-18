@@ -51,7 +51,9 @@ func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *Mu
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -70,9 +72,13 @@ func (x *MutableTimedMetadataGroup) SetItems(items *foundation.NSArray[*raw.AVMe
 	x.inner.SetItems(items)
 }
 
-func (x *MutableTimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup { return &x.inner.AVTimedMetadataGroup }
+func (x *MutableTimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup {
+	return &x.inner.AVTimedMetadataGroup
+}
 
-func (x *MutableTimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVTimedMetadataGroup.AVMetadataGroup }
+func (x *MutableTimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
+	return &x.inner.AVTimedMetadataGroup.AVMetadataGroup
+}
 
 // MutableTimedMetadataGroupable is the interface implemented by [MutableTimedMetadataGroup], for mocking and DI.
 type MutableTimedMetadataGroupable interface {
@@ -84,4 +90,3 @@ type MutableTimedMetadataGroupable interface {
 }
 
 var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)
-

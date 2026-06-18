@@ -18,19 +18,19 @@ type CMHeadphoneMotionManager struct {
 }
 
 var (
-	_clsCMHeadphoneMotionManager = _objcClass("CMHeadphoneMotionManager")
-	_cMHeadphoneMotionManagerSelAuthorizationStatus = objc.RegisterName("authorizationStatus")
-	_cMHeadphoneMotionManagerSelStartDeviceMotionUpdates = objc.RegisterName("startDeviceMotionUpdates")
+	_clsCMHeadphoneMotionManager                                           = _objcClass("CMHeadphoneMotionManager")
+	_cMHeadphoneMotionManagerSelAuthorizationStatus                        = objc.RegisterName("authorizationStatus")
+	_cMHeadphoneMotionManagerSelStartDeviceMotionUpdates                   = objc.RegisterName("startDeviceMotionUpdates")
 	_cMHeadphoneMotionManagerSelStartDeviceMotionUpdatesToQueueWithHandler = objc.RegisterName("startDeviceMotionUpdatesToQueue:withHandler:")
-	_cMHeadphoneMotionManagerSelStopDeviceMotionUpdates = objc.RegisterName("stopDeviceMotionUpdates")
-	_cMHeadphoneMotionManagerSelStartConnectionStatusUpdates = objc.RegisterName("startConnectionStatusUpdates")
-	_cMHeadphoneMotionManagerSelStopConnectionStatusUpdates = objc.RegisterName("stopConnectionStatusUpdates")
-	_cMHeadphoneMotionManagerSelDelegate = objc.RegisterName("delegate")
-	_cMHeadphoneMotionManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cMHeadphoneMotionManagerSelIsConnectionStatusActive = objc.RegisterName("isConnectionStatusActive")
-	_cMHeadphoneMotionManagerSelIsDeviceMotionAvailable = objc.RegisterName("isDeviceMotionAvailable")
-	_cMHeadphoneMotionManagerSelIsDeviceMotionActive = objc.RegisterName("isDeviceMotionActive")
-	_cMHeadphoneMotionManagerSelDeviceMotion = objc.RegisterName("deviceMotion")
+	_cMHeadphoneMotionManagerSelStopDeviceMotionUpdates                    = objc.RegisterName("stopDeviceMotionUpdates")
+	_cMHeadphoneMotionManagerSelStartConnectionStatusUpdates               = objc.RegisterName("startConnectionStatusUpdates")
+	_cMHeadphoneMotionManagerSelStopConnectionStatusUpdates                = objc.RegisterName("stopConnectionStatusUpdates")
+	_cMHeadphoneMotionManagerSelDelegate                                   = objc.RegisterName("delegate")
+	_cMHeadphoneMotionManagerSelSetDelegate                                = objc.RegisterName("setDelegate:")
+	_cMHeadphoneMotionManagerSelIsConnectionStatusActive                   = objc.RegisterName("isConnectionStatusActive")
+	_cMHeadphoneMotionManagerSelIsDeviceMotionAvailable                    = objc.RegisterName("isDeviceMotionAvailable")
+	_cMHeadphoneMotionManagerSelIsDeviceMotionActive                       = objc.RegisterName("isDeviceMotionActive")
+	_cMHeadphoneMotionManagerSelDeviceMotion                               = objc.RegisterName("deviceMotion")
 )
 
 func CMHeadphoneMotionManagerFromID(id objc.ID) *CMHeadphoneMotionManager {
@@ -104,7 +104,8 @@ func (o *CMHeadphoneMotionManager) IsDeviceMotionActive() bool {
 
 func (o *CMHeadphoneMotionManager) DeviceMotion() *CMDeviceMotion {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMHeadphoneMotionManagerSelDeviceMotion)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CMDeviceMotionFromID(_ret)
 }
-

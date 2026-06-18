@@ -16,14 +16,14 @@ type NSSharingServicePickerTouchBarItem struct {
 }
 
 var (
-	_clsNSSharingServicePickerTouchBarItem = _objcClass("NSSharingServicePickerTouchBarItem")
-	_nSSharingServicePickerTouchBarItemSelDelegate = objc.RegisterName("delegate")
-	_nSSharingServicePickerTouchBarItemSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSSharingServicePickerTouchBarItemSelIsEnabled = objc.RegisterName("isEnabled")
-	_nSSharingServicePickerTouchBarItemSelSetEnabled = objc.RegisterName("setEnabled:")
-	_nSSharingServicePickerTouchBarItemSelButtonTitle = objc.RegisterName("buttonTitle")
+	_clsNSSharingServicePickerTouchBarItem               = _objcClass("NSSharingServicePickerTouchBarItem")
+	_nSSharingServicePickerTouchBarItemSelDelegate       = objc.RegisterName("delegate")
+	_nSSharingServicePickerTouchBarItemSelSetDelegate    = objc.RegisterName("setDelegate:")
+	_nSSharingServicePickerTouchBarItemSelIsEnabled      = objc.RegisterName("isEnabled")
+	_nSSharingServicePickerTouchBarItemSelSetEnabled     = objc.RegisterName("setEnabled:")
+	_nSSharingServicePickerTouchBarItemSelButtonTitle    = objc.RegisterName("buttonTitle")
 	_nSSharingServicePickerTouchBarItemSelSetButtonTitle = objc.RegisterName("setButtonTitle:")
-	_nSSharingServicePickerTouchBarItemSelButtonImage = objc.RegisterName("buttonImage")
+	_nSSharingServicePickerTouchBarItemSelButtonImage    = objc.RegisterName("buttonImage")
 	_nSSharingServicePickerTouchBarItemSelSetButtonImage = objc.RegisterName("setButtonImage:")
 )
 
@@ -57,7 +57,9 @@ func (o *NSSharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
 
 func (o *NSSharingServicePickerTouchBarItem) ButtonTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -67,11 +69,12 @@ func (o *NSSharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle *foundat
 
 func (o *NSSharingServicePickerTouchBarItem) ButtonImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSharingServicePickerTouchBarItemSelButtonImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 func (o *NSSharingServicePickerTouchBarItem) SetButtonImage(buttonImage *NSImage) {
 	o.Ptr().Send(_nSSharingServicePickerTouchBarItemSelSetButtonImage, buttonImage.Ptr())
 }
-

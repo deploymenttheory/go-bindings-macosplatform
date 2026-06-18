@@ -83,4 +83,3 @@ type EntityMigrationPolicyable interface {
 }
 
 var _ EntityMigrationPolicyable = (*EntityMigrationPolicy)(nil)
-

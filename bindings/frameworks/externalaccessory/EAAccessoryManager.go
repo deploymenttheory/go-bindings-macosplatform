@@ -18,9 +18,9 @@ type EAAccessoryManager struct {
 }
 
 var (
-	_clsEAAccessoryManager = _objcClass("EAAccessoryManager")
+	_clsEAAccessoryManager                       = _objcClass("EAAccessoryManager")
 	_eAAccessoryManagerSelSharedAccessoryManager = objc.RegisterName("sharedAccessoryManager")
-	_eAAccessoryManagerSelConnectedAccessories = objc.RegisterName("connectedAccessories")
+	_eAAccessoryManagerSelConnectedAccessories   = objc.RegisterName("connectedAccessories")
 )
 
 func EAAccessoryManagerFromID(id objc.ID) *EAAccessoryManager {
@@ -35,7 +35,9 @@ func EAAccessoryManagerFromID(id objc.ID) *EAAccessoryManager {
 
 func EAAccessoryManagerSharedAccessoryManager() *EAAccessoryManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsEAAccessoryManager), _eAAccessoryManagerSelSharedAccessoryManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EAAccessoryManagerFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *EAAccessoryManager) ConnectedAccessories() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _eAAccessoryManagerSelConnectedAccessories)
 	return _ret
 }
-

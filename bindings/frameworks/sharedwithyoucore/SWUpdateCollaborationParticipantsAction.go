@@ -16,10 +16,10 @@ type SWUpdateCollaborationParticipantsAction struct {
 }
 
 var (
-	_clsSWUpdateCollaborationParticipantsAction = _objcClass("SWUpdateCollaborationParticipantsAction")
+	_clsSWUpdateCollaborationParticipantsAction                      = _objcClass("SWUpdateCollaborationParticipantsAction")
 	_sWUpdateCollaborationParticipantsActionSelCollaborationMetadata = objc.RegisterName("collaborationMetadata")
-	_sWUpdateCollaborationParticipantsActionSelAddedIdentities = objc.RegisterName("addedIdentities")
-	_sWUpdateCollaborationParticipantsActionSelRemovedIdentities = objc.RegisterName("removedIdentities")
+	_sWUpdateCollaborationParticipantsActionSelAddedIdentities       = objc.RegisterName("addedIdentities")
+	_sWUpdateCollaborationParticipantsActionSelRemovedIdentities     = objc.RegisterName("removedIdentities")
 )
 
 func SWUpdateCollaborationParticipantsActionFromID(id objc.ID) *SWUpdateCollaborationParticipantsAction {
@@ -34,19 +34,24 @@ func SWUpdateCollaborationParticipantsActionFromID(id objc.ID) *SWUpdateCollabor
 
 func (o *SWUpdateCollaborationParticipantsAction) CollaborationMetadata() *SWCollaborationMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWUpdateCollaborationParticipantsActionSelCollaborationMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWCollaborationMetadataFromID(_ret)
 }
 
 func (o *SWUpdateCollaborationParticipantsAction) AddedIdentities() *foundation.NSArray[*SWPersonIdentity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWUpdateCollaborationParticipantsActionSelAddedIdentities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SWPersonIdentity](_ret)
 }
 
 func (o *SWUpdateCollaborationParticipantsAction) RemovedIdentities() *foundation.NSArray[*SWPersonIdentity] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWUpdateCollaborationParticipantsActionSelRemovedIdentities)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SWPersonIdentity](_ret)
 }
-

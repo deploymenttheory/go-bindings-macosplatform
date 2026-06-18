@@ -85,4 +85,3 @@ type MTREndpointInfoable interface {
 }
 
 var _ MTREndpointInfoable = (*MTREndpointInfo)(nil)
-

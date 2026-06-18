@@ -98,4 +98,3 @@ type NEFilterSocketFlowable interface {
 }
 
 var _ NEFilterSocketFlowable = (*NEFilterSocketFlow)(nil)
-

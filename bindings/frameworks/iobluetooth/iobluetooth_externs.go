@@ -320,4 +320,3 @@ func KOBEXHeaderIDKeyWho() uintptr {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "kOBEXHeaderIDKeyWho")
 	return ptr
 }
-

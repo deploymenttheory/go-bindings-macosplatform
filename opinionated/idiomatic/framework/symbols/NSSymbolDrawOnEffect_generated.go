@@ -73,4 +73,3 @@ type SymbolDrawOnEffectable interface {
 }
 
 var _ SymbolDrawOnEffectable = (*SymbolDrawOnEffect)(nil)
-

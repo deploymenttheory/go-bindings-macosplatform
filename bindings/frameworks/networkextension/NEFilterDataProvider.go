@@ -18,15 +18,15 @@ type NEFilterDataProvider struct {
 }
 
 var (
-	_clsNEFilterDataProvider = _objcClass("NEFilterDataProvider")
-	_nEFilterDataProviderSelHandleNewFlow = objc.RegisterName("handleNewFlow:")
-	_nEFilterDataProviderSelHandleInboundDataFromFlowReadBytesStartOffsetReadBytes = objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:")
+	_clsNEFilterDataProvider                                                        = _objcClass("NEFilterDataProvider")
+	_nEFilterDataProviderSelHandleNewFlow                                           = objc.RegisterName("handleNewFlow:")
+	_nEFilterDataProviderSelHandleInboundDataFromFlowReadBytesStartOffsetReadBytes  = objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:")
 	_nEFilterDataProviderSelHandleOutboundDataFromFlowReadBytesStartOffsetReadBytes = objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:")
-	_nEFilterDataProviderSelHandleInboundDataCompleteForFlow = objc.RegisterName("handleInboundDataCompleteForFlow:")
-	_nEFilterDataProviderSelHandleOutboundDataCompleteForFlow = objc.RegisterName("handleOutboundDataCompleteForFlow:")
-	_nEFilterDataProviderSelApplySettingsCompletionHandler = objc.RegisterName("applySettings:completionHandler:")
-	_nEFilterDataProviderSelResumeFlowWithVerdict = objc.RegisterName("resumeFlow:withVerdict:")
-	_nEFilterDataProviderSelUpdateFlowUsingVerdictForDirection = objc.RegisterName("updateFlow:usingVerdict:forDirection:")
+	_nEFilterDataProviderSelHandleInboundDataCompleteForFlow                        = objc.RegisterName("handleInboundDataCompleteForFlow:")
+	_nEFilterDataProviderSelHandleOutboundDataCompleteForFlow                       = objc.RegisterName("handleOutboundDataCompleteForFlow:")
+	_nEFilterDataProviderSelApplySettingsCompletionHandler                          = objc.RegisterName("applySettings:completionHandler:")
+	_nEFilterDataProviderSelResumeFlowWithVerdict                                   = objc.RegisterName("resumeFlow:withVerdict:")
+	_nEFilterDataProviderSelUpdateFlowUsingVerdictForDirection                      = objc.RegisterName("updateFlow:usingVerdict:forDirection:")
 )
 
 func NEFilterDataProviderFromID(id objc.ID) *NEFilterDataProvider {
@@ -42,35 +42,45 @@ func NEFilterDataProviderFromID(id objc.ID) *NEFilterDataProvider {
 // @method handleNewFlow: @discussion This function is called by the framework when a filtering decision needs to be made about a new network data flow. Subclasses must override this method to implement the steps necessary to match the flow against some locally stored rules and return an appropriate verdict. @param flow An NEFilterFlow object containing details about the new flow. @return An NEFilterNewFlowVerdict object containing the verdict for the new flow.
 func (o *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterDataProviderSelHandleNewFlow, flow.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterNewFlowVerdictFromID(_ret)
 }
 
 // @method handleInboundDataFromFlow:readBytesStartOffset:readBytes: @discussion This function is called by the framework when a filtering decision needs to be made about some inbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method. @param flow The NEFilterFlow from which the data was read. @param offset The offset in bytes from the start of the flow's inbound data at which readBytes begins. @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly. @return An NEFilterFlowDataVerdict containing the verdict for the flow.
 func (o *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterDataProviderSelHandleInboundDataFromFlowReadBytesStartOffsetReadBytes, flow.Ptr(), offset, readBytes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method handleOutboundDataFromFlow:readBytesStartOffset:readBytes: @discussion This function is called by the framework when a filtering decision needs to be made about some outbound data that the filter previously requested access to via the NEFilterFlowDataVerdict or the NEFilterNewFlowVerdict. Subclasses must override this method. @param flow The NEFilterFlow from which the data was read. @param offset The offset in bytes from the start of the flow's outbound data at which readBytes begins. @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly. @return An NEFilterFlowDataVerdict containing the verdict for the flow.
 func (o *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterDataProviderSelHandleOutboundDataFromFlowReadBytesStartOffsetReadBytes, flow.Ptr(), offset, readBytes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method handleInboundDataCompleteForFlow: @discussion This function is called by the framework after all of the inbound data for a flow has been seen by the filter. Subclasses must override this method to return an appropriate pass/block result. @param flow The flow @return The final NEFilterFlowDataVerdict verdict for the flow.
 func (o *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterDataProviderSelHandleInboundDataCompleteForFlow, flow.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
 // @method handleOutboundDataCompleteForFlow: @discussion This function is called by the framework after all of the outbound data for a flow has been seen by the filter. Subclasses must override this method to return an appropriate pass/block result. @param flow The flow @return The final NEFilterFlowDataVerdict verdict for the flow.
 func (o *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEFilterDataProviderSelHandleOutboundDataCompleteForFlow, flow.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEFilterDataVerdictFromID(_ret)
 }
 
@@ -95,4 +105,3 @@ func (o *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict
 func (o *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
 	o.Ptr().Send(_nEFilterDataProviderSelUpdateFlowUsingVerdictForDirection, flow.Ptr(), verdict.Ptr(), direction)
 }
-

@@ -78,7 +78,9 @@ func (x *XMLElement) WithAttributes(items ...XMLNodeProvider) *XMLElement {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asXMLNode().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asXMLNode().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSXMLNode](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -94,7 +96,9 @@ func (x *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asXMLNode().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asXMLNode().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSXMLNode](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -326,4 +330,3 @@ type XMLElementable interface {
 }
 
 var _ XMLElementable = (*XMLElement)(nil)
-

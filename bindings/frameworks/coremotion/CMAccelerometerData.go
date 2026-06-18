@@ -15,7 +15,7 @@ type CMAccelerometerData struct {
 }
 
 var (
-	_clsCMAccelerometerData = _objcClass("CMAccelerometerData")
+	_clsCMAccelerometerData             = _objcClass("CMAccelerometerData")
 	_cMAccelerometerDataSelAcceleration = objc.RegisterName("acceleration")
 )
 
@@ -33,4 +33,3 @@ func (o *CMAccelerometerData) Acceleration() CMAcceleration {
 	_ret := objc.Send[CMAcceleration](o.Ptr(), _cMAccelerometerDataSelAcceleration)
 	return _ret
 }
-

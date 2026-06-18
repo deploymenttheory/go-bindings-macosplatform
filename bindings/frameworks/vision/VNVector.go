@@ -16,22 +16,22 @@ type VNVector struct {
 }
 
 var (
-	_clsVNVector = _objcClass("VNVector")
-	_vNVectorSelUnitVectorForVector = objc.RegisterName("unitVectorForVector:")
-	_vNVectorSelVectorByMultiplyingVectorByScalar = objc.RegisterName("vectorByMultiplyingVector:byScalar:")
-	_vNVectorSelVectorByAddingVectorToVector = objc.RegisterName("vectorByAddingVector:toVector:")
+	_clsVNVector                                    = _objcClass("VNVector")
+	_vNVectorSelUnitVectorForVector                 = objc.RegisterName("unitVectorForVector:")
+	_vNVectorSelVectorByMultiplyingVectorByScalar   = objc.RegisterName("vectorByMultiplyingVector:byScalar:")
+	_vNVectorSelVectorByAddingVectorToVector        = objc.RegisterName("vectorByAddingVector:toVector:")
 	_vNVectorSelVectorBySubtractingVectorFromVector = objc.RegisterName("vectorBySubtractingVector:fromVector:")
-	_vNVectorSelDotProductOfVectorVector = objc.RegisterName("dotProductOfVector:vector:")
-	_vNVectorSelInitWithXComponentYComponent = objc.RegisterName("initWithXComponent:yComponent:")
-	_vNVectorSelInitWithRTheta = objc.RegisterName("initWithR:theta:")
-	_vNVectorSelInitWithVectorHeadTail = objc.RegisterName("initWithVectorHead:tail:")
-	_vNVectorSelZeroVector = objc.RegisterName("zeroVector")
-	_vNVectorSelX = objc.RegisterName("x")
-	_vNVectorSelY = objc.RegisterName("y")
-	_vNVectorSelR = objc.RegisterName("r")
-	_vNVectorSelTheta = objc.RegisterName("theta")
-	_vNVectorSelLength = objc.RegisterName("length")
-	_vNVectorSelSquaredLength = objc.RegisterName("squaredLength")
+	_vNVectorSelDotProductOfVectorVector            = objc.RegisterName("dotProductOfVector:vector:")
+	_vNVectorSelInitWithXComponentYComponent        = objc.RegisterName("initWithXComponent:yComponent:")
+	_vNVectorSelInitWithRTheta                      = objc.RegisterName("initWithR:theta:")
+	_vNVectorSelInitWithVectorHeadTail              = objc.RegisterName("initWithVectorHead:tail:")
+	_vNVectorSelZeroVector                          = objc.RegisterName("zeroVector")
+	_vNVectorSelX                                   = objc.RegisterName("x")
+	_vNVectorSelY                                   = objc.RegisterName("y")
+	_vNVectorSelR                                   = objc.RegisterName("r")
+	_vNVectorSelTheta                               = objc.RegisterName("theta")
+	_vNVectorSelLength                              = objc.RegisterName("length")
+	_vNVectorSelSquaredLength                       = objc.RegisterName("squaredLength")
 )
 
 func VNVectorFromID(id objc.ID) *VNVector {
@@ -47,28 +47,36 @@ func VNVectorFromID(id objc.ID) *VNVector {
 // @brief Returns a vector that is normalized by preserving direction, such as |v|, or vector length = 1.0.
 func VNVectorUnitVectorForVector(vector *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelUnitVectorForVector, vector.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Returns a vector that whose X and Y projections multiplied by a scalar value.
 func VNVectorVectorByMultiplyingVectorByScalar(vector *VNVector, scalar float64) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorByMultiplyingVectorByScalar, vector.Ptr(), scalar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Adds two vectors v1 and v2 and returns a resulting vector v, such as v = v1 + v2.
 func VNVectorVectorByAddingVectorToVector(v1 *VNVector, v2 *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorByAddingVectorToVector, v1.Ptr(), v2.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Substructs vector v1 from v2 and returns a resulting vector v, such as v = v2 - v1.
 func VNVectorVectorBySubtractingVectorFromVector(v1 *VNVector, v2 *VNVector) *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelVectorBySubtractingVectorFromVector, v1.Ptr(), v2.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
@@ -81,28 +89,36 @@ func VNVectorDotProductOfVectorVector(v1 *VNVector, v2 *VNVector) float64 {
 // @brief Initializes a vector in Cartesian Coordinate space, using its X and Y axis projections.
 func (o *VNVector) InitWithXComponentYComponent(x float64, y float64) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithXComponentYComponent, x, y)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Initializes a vector in polar coordinate space, using R and Theta (radians), where R is the length of the vector and Theta is the ange that the vector forms with the positive direction of X axis.
 func (o *VNVector) InitWithRTheta(r float64, theta float64) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithRTheta, r, theta)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Initializes a vector in Cartesian Coordinate space, using two VNPoints - the head and the tail of the vector.
 func (o *VNVector) InitWithVectorHeadTail(head *VNPoint, tail *VNPoint) *VNVector {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVectorSelInitWithVectorHeadTail, head.Ptr(), tail.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
 // @brief Returns a VNVector object with zero length. The theta for zeroVector is not defined (NaN).
 func VNVectorZeroVector() *VNVector {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVNVector), _vNVectorSelZeroVector)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVectorFromID(_ret)
 }
 
@@ -141,4 +157,3 @@ func (o *VNVector) SquaredLength() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _vNVectorSelSquaredLength)
 	return _ret
 }
-

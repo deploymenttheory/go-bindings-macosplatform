@@ -16,11 +16,11 @@ type ASAuthorizationPublicKeyCredentialPRFRegistrationInput struct {
 }
 
 var (
-	_clsASAuthorizationPublicKeyCredentialPRFRegistrationInput = _objcClass("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")
-	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelCheckForSupport = objc.RegisterName("checkForSupport")
-	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInitWithInputValues = objc.RegisterName("initWithInputValues:")
+	_clsASAuthorizationPublicKeyCredentialPRFRegistrationInput                      = _objcClass("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")
+	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelCheckForSupport       = objc.RegisterName("checkForSupport")
+	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInitWithInputValues   = objc.RegisterName("initWithInputValues:")
 	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelShouldCheckForSupport = objc.RegisterName("shouldCheckForSupport")
-	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInputValues = objc.RegisterName("inputValues")
+	_aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInputValues           = objc.RegisterName("inputValues")
 )
 
 func ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(id objc.ID) *ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
@@ -35,13 +35,17 @@ func ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(id objc.ID) *A
 
 func ASAuthorizationPublicKeyCredentialPRFRegistrationInputCheckForSupport() *ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_ret := objc.Send[objc.ID](objc.ID(_clsASAuthorizationPublicKeyCredentialPRFRegistrationInput), _aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelCheckForSupport)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_ret)
 }
 
 func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationInput) InitWithInputValues(inputValues *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues) *ASAuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInitWithInputValues, inputValues.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_ret)
 }
 
@@ -52,7 +56,8 @@ func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForS
 
 func (o *ASAuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *ASAuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPublicKeyCredentialPRFRegistrationInputSelInputValues)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_ret)
 }
-

@@ -16,21 +16,21 @@ type CalEvent struct {
 }
 
 var (
-	_clsCalEvent = _objcClass("CalEvent")
-	_calEventSelEvent = objc.RegisterName("event")
-	_calEventSelIsAllDay = objc.RegisterName("isAllDay")
-	_calEventSelSetIsAllDay = objc.RegisterName("setIsAllDay:")
-	_calEventSelLocation = objc.RegisterName("location")
-	_calEventSelSetLocation = objc.RegisterName("setLocation:")
-	_calEventSelRecurrenceRule = objc.RegisterName("recurrenceRule")
+	_clsCalEvent                  = _objcClass("CalEvent")
+	_calEventSelEvent             = objc.RegisterName("event")
+	_calEventSelIsAllDay          = objc.RegisterName("isAllDay")
+	_calEventSelSetIsAllDay       = objc.RegisterName("setIsAllDay:")
+	_calEventSelLocation          = objc.RegisterName("location")
+	_calEventSelSetLocation       = objc.RegisterName("setLocation:")
+	_calEventSelRecurrenceRule    = objc.RegisterName("recurrenceRule")
 	_calEventSelSetRecurrenceRule = objc.RegisterName("setRecurrenceRule:")
-	_calEventSelStartDate = objc.RegisterName("startDate")
-	_calEventSelSetStartDate = objc.RegisterName("setStartDate:")
-	_calEventSelEndDate = objc.RegisterName("endDate")
-	_calEventSelSetEndDate = objc.RegisterName("setEndDate:")
-	_calEventSelAttendees = objc.RegisterName("attendees")
-	_calEventSelIsDetached = objc.RegisterName("isDetached")
-	_calEventSelOccurrence = objc.RegisterName("occurrence")
+	_calEventSelStartDate         = objc.RegisterName("startDate")
+	_calEventSelSetStartDate      = objc.RegisterName("setStartDate:")
+	_calEventSelEndDate           = objc.RegisterName("endDate")
+	_calEventSelSetEndDate        = objc.RegisterName("setEndDate:")
+	_calEventSelAttendees         = objc.RegisterName("attendees")
+	_calEventSelIsDetached        = objc.RegisterName("isDetached")
+	_calEventSelOccurrence        = objc.RegisterName("occurrence")
 )
 
 func CalEventFromID(id objc.ID) *CalEvent {
@@ -63,7 +63,9 @@ func (o *CalEvent) SetIsAllDay(isAllDay bool) {
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) Location() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelLocation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -75,7 +77,9 @@ func (o *CalEvent) SetLocation(location *foundation.NSString) {
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) RecurrenceRule() *CalRecurrenceRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelRecurrenceRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CalRecurrenceRuleFromID(_ret)
 }
 
@@ -87,7 +91,9 @@ func (o *CalEvent) SetRecurrenceRule(recurrenceRule *CalRecurrenceRule) {
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -99,7 +105,9 @@ func (o *CalEvent) SetStartDate(startDate *foundation.NSDate) {
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -123,7 +131,8 @@ func (o *CalEvent) IsDetached() bool {
 // Deprecated: since macOS 10.8.
 func (o *CalEvent) Occurrence() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calEventSelOccurrence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
-

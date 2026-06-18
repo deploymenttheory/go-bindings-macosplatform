@@ -44,7 +44,9 @@ func (x *MutableFontCollection) WithQueryDescriptors(items ...*raw.NSFontDescrip
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSFontDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -60,7 +62,9 @@ func (x *MutableFontCollection) WithExclusionDescriptors(items ...*raw.NSFontDes
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSFontDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -89,7 +93,9 @@ func (x *MutableFontCollection) SetExclusionDescriptors(exclusionDescriptors *fo
 	x.inner.SetExclusionDescriptors(exclusionDescriptors)
 }
 
-func (x *MutableFontCollection) asFontCollection() *raw.NSFontCollection { return &x.inner.NSFontCollection }
+func (x *MutableFontCollection) asFontCollection() *raw.NSFontCollection {
+	return &x.inner.NSFontCollection
+}
 
 // MutableFontCollectionable is the interface implemented by [MutableFontCollection], for mocking and DI.
 type MutableFontCollectionable interface {
@@ -103,4 +109,3 @@ type MutableFontCollectionable interface {
 }
 
 var _ MutableFontCollectionable = (*MutableFontCollection)(nil)
-

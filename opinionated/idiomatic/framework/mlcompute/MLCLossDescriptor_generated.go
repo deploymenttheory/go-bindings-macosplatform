@@ -83,4 +83,3 @@ type LossDescriptorable interface {
 }
 
 var _ LossDescriptorable = (*LossDescriptor)(nil)
-

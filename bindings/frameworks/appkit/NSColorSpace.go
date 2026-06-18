@@ -18,29 +18,29 @@ type NSColorSpace struct {
 }
 
 var (
-	_clsNSColorSpace = _objcClass("NSColorSpace")
-	_nSColorSpaceSelInitWithICCProfileData = objc.RegisterName("initWithICCProfileData:")
-	_nSColorSpaceSelInitWithColorSyncProfile = objc.RegisterName("initWithColorSyncProfile:")
-	_nSColorSpaceSelInitWithCGColorSpace = objc.RegisterName("initWithCGColorSpace:")
-	_nSColorSpaceSelAvailableColorSpacesWithModel = objc.RegisterName("availableColorSpacesWithModel:")
-	_nSColorSpaceSelICCProfileData = objc.RegisterName("ICCProfileData")
-	_nSColorSpaceSelColorSyncProfile = objc.RegisterName("colorSyncProfile")
-	_nSColorSpaceSelCGColorSpace = objc.RegisterName("CGColorSpace")
-	_nSColorSpaceSelNumberOfColorComponents = objc.RegisterName("numberOfColorComponents")
-	_nSColorSpaceSelColorSpaceModel = objc.RegisterName("colorSpaceModel")
-	_nSColorSpaceSelLocalizedName = objc.RegisterName("localizedName")
-	_nSColorSpaceSelSRGBColorSpace = objc.RegisterName("sRGBColorSpace")
-	_nSColorSpaceSelGenericGamma22GrayColorSpace = objc.RegisterName("genericGamma22GrayColorSpace")
-	_nSColorSpaceSelExtendedSRGBColorSpace = objc.RegisterName("extendedSRGBColorSpace")
+	_clsNSColorSpace                                     = _objcClass("NSColorSpace")
+	_nSColorSpaceSelInitWithICCProfileData               = objc.RegisterName("initWithICCProfileData:")
+	_nSColorSpaceSelInitWithColorSyncProfile             = objc.RegisterName("initWithColorSyncProfile:")
+	_nSColorSpaceSelInitWithCGColorSpace                 = objc.RegisterName("initWithCGColorSpace:")
+	_nSColorSpaceSelAvailableColorSpacesWithModel        = objc.RegisterName("availableColorSpacesWithModel:")
+	_nSColorSpaceSelICCProfileData                       = objc.RegisterName("ICCProfileData")
+	_nSColorSpaceSelColorSyncProfile                     = objc.RegisterName("colorSyncProfile")
+	_nSColorSpaceSelCGColorSpace                         = objc.RegisterName("CGColorSpace")
+	_nSColorSpaceSelNumberOfColorComponents              = objc.RegisterName("numberOfColorComponents")
+	_nSColorSpaceSelColorSpaceModel                      = objc.RegisterName("colorSpaceModel")
+	_nSColorSpaceSelLocalizedName                        = objc.RegisterName("localizedName")
+	_nSColorSpaceSelSRGBColorSpace                       = objc.RegisterName("sRGBColorSpace")
+	_nSColorSpaceSelGenericGamma22GrayColorSpace         = objc.RegisterName("genericGamma22GrayColorSpace")
+	_nSColorSpaceSelExtendedSRGBColorSpace               = objc.RegisterName("extendedSRGBColorSpace")
 	_nSColorSpaceSelExtendedGenericGamma22GrayColorSpace = objc.RegisterName("extendedGenericGamma22GrayColorSpace")
-	_nSColorSpaceSelDisplayP3ColorSpace = objc.RegisterName("displayP3ColorSpace")
-	_nSColorSpaceSelAdobeRGB1998ColorSpace = objc.RegisterName("adobeRGB1998ColorSpace")
-	_nSColorSpaceSelGenericRGBColorSpace = objc.RegisterName("genericRGBColorSpace")
-	_nSColorSpaceSelGenericGrayColorSpace = objc.RegisterName("genericGrayColorSpace")
-	_nSColorSpaceSelGenericCMYKColorSpace = objc.RegisterName("genericCMYKColorSpace")
-	_nSColorSpaceSelDeviceRGBColorSpace = objc.RegisterName("deviceRGBColorSpace")
-	_nSColorSpaceSelDeviceGrayColorSpace = objc.RegisterName("deviceGrayColorSpace")
-	_nSColorSpaceSelDeviceCMYKColorSpace = objc.RegisterName("deviceCMYKColorSpace")
+	_nSColorSpaceSelDisplayP3ColorSpace                  = objc.RegisterName("displayP3ColorSpace")
+	_nSColorSpaceSelAdobeRGB1998ColorSpace               = objc.RegisterName("adobeRGB1998ColorSpace")
+	_nSColorSpaceSelGenericRGBColorSpace                 = objc.RegisterName("genericRGBColorSpace")
+	_nSColorSpaceSelGenericGrayColorSpace                = objc.RegisterName("genericGrayColorSpace")
+	_nSColorSpaceSelGenericCMYKColorSpace                = objc.RegisterName("genericCMYKColorSpace")
+	_nSColorSpaceSelDeviceRGBColorSpace                  = objc.RegisterName("deviceRGBColorSpace")
+	_nSColorSpaceSelDeviceGrayColorSpace                 = objc.RegisterName("deviceGrayColorSpace")
+	_nSColorSpaceSelDeviceCMYKColorSpace                 = objc.RegisterName("deviceCMYKColorSpace")
 )
 
 func NSColorSpaceFromID(id objc.ID) *NSColorSpace {
@@ -55,31 +55,41 @@ func NSColorSpaceFromID(id objc.ID) *NSColorSpace {
 
 func (o *NSColorSpace) InitWithICCProfileData(iccData *foundation.NSData) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithICCProfileData, iccData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func (o *NSColorSpace) InitWithColorSyncProfile(prof unsafe.Pointer) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithColorSyncProfile, prof)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func (o *NSColorSpace) InitWithCGColorSpace(cgColorSpace unsafe.Pointer) *NSColorSpace {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelInitWithCGColorSpace, cgColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceAvailableColorSpacesWithModel(model NSColorSpaceModel) *foundation.NSArray[*NSColorSpace] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelAvailableColorSpacesWithModel, model)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSColorSpace](_ret)
 }
 
 func (o *NSColorSpace) ICCProfileData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelICCProfileData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -105,79 +115,104 @@ func (o *NSColorSpace) ColorSpaceModel() NSColorSpaceModel {
 
 func (o *NSColorSpace) LocalizedName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSColorSpaceSelLocalizedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSColorSpaceSRGBColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelSRGBColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceGenericGamma22GrayColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelGenericGamma22GrayColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceExtendedSRGBColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelExtendedSRGBColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceExtendedGenericGamma22GrayColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelExtendedGenericGamma22GrayColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceDisplayP3ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelDisplayP3ColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceAdobeRGB1998ColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelAdobeRGB1998ColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceGenericRGBColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelGenericRGBColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceGenericGrayColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelGenericGrayColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceGenericCMYKColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelGenericCMYKColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceDeviceRGBColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelDeviceRGBColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceDeviceGrayColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelDeviceGrayColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
 
 func NSColorSpaceDeviceCMYKColorSpace() *NSColorSpace {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSColorSpace), _nSColorSpaceSelDeviceCMYKColorSpace)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorSpaceFromID(_ret)
 }
-

@@ -16,14 +16,14 @@ type NSConstraintConflict struct {
 }
 
 var (
-	_clsNSConstraintConflict = _objcClass("NSConstraintConflict")
+	_clsNSConstraintConflict                                                                                       = _objcClass("NSConstraintConflict")
 	_nSConstraintConflictSelInitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots = objc.RegisterName("initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:")
-	_nSConstraintConflictSelConstraint = objc.RegisterName("constraint")
-	_nSConstraintConflictSelConstraintValues = objc.RegisterName("constraintValues")
-	_nSConstraintConflictSelDatabaseObject = objc.RegisterName("databaseObject")
-	_nSConstraintConflictSelDatabaseSnapshot = objc.RegisterName("databaseSnapshot")
-	_nSConstraintConflictSelConflictingObjects = objc.RegisterName("conflictingObjects")
-	_nSConstraintConflictSelConflictingSnapshots = objc.RegisterName("conflictingSnapshots")
+	_nSConstraintConflictSelConstraint                                                                             = objc.RegisterName("constraint")
+	_nSConstraintConflictSelConstraintValues                                                                       = objc.RegisterName("constraintValues")
+	_nSConstraintConflictSelDatabaseObject                                                                         = objc.RegisterName("databaseObject")
+	_nSConstraintConflictSelDatabaseSnapshot                                                                       = objc.RegisterName("databaseSnapshot")
+	_nSConstraintConflictSelConflictingObjects                                                                     = objc.RegisterName("conflictingObjects")
+	_nSConstraintConflictSelConflictingSnapshots                                                                   = objc.RegisterName("conflictingSnapshots")
 )
 
 func NSConstraintConflictFromID(id objc.ID) *NSConstraintConflict {
@@ -38,7 +38,9 @@ func NSConstraintConflictFromID(id objc.ID) *NSConstraintConflict {
 
 func (o *NSConstraintConflict) InitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint *foundation.NSArray[*foundation.NSString], databaseObject *NSManagedObject, databaseSnapshot *foundation.NSDictionary[objc.ID, objc.ID], conflictingObjects *foundation.NSArray[*NSManagedObject], conflictingSnapshots *foundation.NSArray[objc.ID]) *NSConstraintConflict {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelInitWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots, contraint, databaseObject.Ptr(), databaseSnapshot, conflictingObjects.Ptr(), conflictingSnapshots)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConstraintConflictFromID(_ret)
 }
 
@@ -54,7 +56,9 @@ func (o *NSConstraintConflict) ConstraintValues() *foundation.NSDictionary[*foun
 
 func (o *NSConstraintConflict) DatabaseObject() *NSManagedObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelDatabaseObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectFromID(_ret)
 }
 
@@ -65,7 +69,9 @@ func (o *NSConstraintConflict) DatabaseSnapshot() *foundation.NSDictionary[*foun
 
 func (o *NSConstraintConflict) ConflictingObjects() *foundation.NSArray[*NSManagedObject] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConstraintConflictSelConflictingObjects)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSManagedObject](_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *NSConstraintConflict) ConflictingSnapshots() *foundation.NSArray[objc.I
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _nSConstraintConflictSelConflictingSnapshots)
 	return _ret
 }
-

@@ -87,4 +87,3 @@ type Measurementable interface {
 }
 
 var _ Measurementable = (*Measurement)(nil)
-

@@ -16,7 +16,9 @@ type MTREnergyEVSEClusterEVNotDetectedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterEVNotDetectedEvent].
-func (x *MTREnergyEVSEClusterEVNotDetectedEvent) Unwrap() *raw.MTREnergyEVSEClusterEVNotDetectedEvent { return x.inner }
+func (x *MTREnergyEVSEClusterEVNotDetectedEvent) Unwrap() *raw.MTREnergyEVSEClusterEVNotDetectedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -118,4 +120,3 @@ type MTREnergyEVSEClusterEVNotDetectedEventable interface {
 }
 
 var _ MTREnergyEVSEClusterEVNotDetectedEventable = (*MTREnergyEVSEClusterEVNotDetectedEvent)(nil)
-

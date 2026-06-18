@@ -16,10 +16,10 @@ type ASAuthorizationPlatformPublicKeyCredentialAssertion struct {
 }
 
 var (
-	_clsASAuthorizationPlatformPublicKeyCredentialAssertion = _objcClass("ASAuthorizationPlatformPublicKeyCredentialAssertion")
+	_clsASAuthorizationPlatformPublicKeyCredentialAssertion           = _objcClass("ASAuthorizationPlatformPublicKeyCredentialAssertion")
 	_aSAuthorizationPlatformPublicKeyCredentialAssertionSelAttachment = objc.RegisterName("attachment")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionSelLargeBlob = objc.RegisterName("largeBlob")
-	_aSAuthorizationPlatformPublicKeyCredentialAssertionSelPrf = objc.RegisterName("prf")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionSelLargeBlob  = objc.RegisterName("largeBlob")
+	_aSAuthorizationPlatformPublicKeyCredentialAssertionSelPrf        = objc.RegisterName("prf")
 )
 
 func ASAuthorizationPlatformPublicKeyCredentialAssertionFromID(id objc.ID) *ASAuthorizationPlatformPublicKeyCredentialAssertion {
@@ -39,13 +39,16 @@ func (o *ASAuthorizationPlatformPublicKeyCredentialAssertion) Attachment() ASAut
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialAssertionSelLargeBlob)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_ret)
 }
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialAssertion) Prf() *ASAuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialAssertionSelPrf)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_ret)
 }
-

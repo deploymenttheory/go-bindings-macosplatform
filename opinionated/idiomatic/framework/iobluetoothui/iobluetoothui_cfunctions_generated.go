@@ -23,4 +23,3 @@ func IOBluetoothGetPairingController() unsafe.Pointer {
 func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle unsafe.Pointer, descriptionText unsafe.Pointer) int {
 	return raw.IOBluetoothValidateHardwareWithDescription(cancelButtonTitle, descriptionText)
 }
-

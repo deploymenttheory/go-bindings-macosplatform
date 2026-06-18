@@ -102,4 +102,3 @@ type StatisticsCollectionQueryable interface {
 }
 
 var _ StatisticsCollectionQueryable = (*StatisticsCollectionQuery)(nil)
-

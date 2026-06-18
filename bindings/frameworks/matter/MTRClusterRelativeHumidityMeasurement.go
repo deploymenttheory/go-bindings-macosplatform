@@ -16,18 +16,18 @@ type MTRClusterRelativeHumidityMeasurement struct {
 }
 
 var (
-	_clsMTRClusterRelativeHumidityMeasurement = _objcClass("MTRClusterRelativeHumidityMeasurement")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMeasuredValueWithParams = objc.RegisterName("readAttributeMeasuredValueWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMinMeasuredValueWithParams = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMaxMeasuredValueWithParams = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeToleranceWithParams = objc.RegisterName("readAttributeToleranceWithParams:")
+	_clsMTRClusterRelativeHumidityMeasurement                                            = _objcClass("MTRClusterRelativeHumidityMeasurement")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMeasuredValueWithParams        = objc.RegisterName("readAttributeMeasuredValueWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMinMeasuredValueWithParams     = objc.RegisterName("readAttributeMinMeasuredValueWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeMaxMeasuredValueWithParams     = objc.RegisterName("readAttributeMaxMeasuredValueWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeToleranceWithParams            = objc.RegisterName("readAttributeToleranceWithParams:")
 	_mTRClusterRelativeHumidityMeasurementSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterRelativeHumidityMeasurementFromID(id objc.ID) *MTRClusterRelativeHumidityMeasurement {
@@ -88,13 +88,16 @@ func (o *MTRClusterRelativeHumidityMeasurement) ReadAttributeClusterRevisionWith
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterRelativeHumidityMeasurement) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRelativeHumidityMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterRelativeHumidityMeasurementFromID(_ret)
 }
 
 func (o *MTRClusterRelativeHumidityMeasurement) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterRelativeHumidityMeasurement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterRelativeHumidityMeasurementSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterRelativeHumidityMeasurementFromID(_ret)
 }
-

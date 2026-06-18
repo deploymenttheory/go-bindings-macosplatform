@@ -17,12 +17,12 @@ type AVPictureInPictureControllerContentSource struct {
 }
 
 var (
-	_clsAVPictureInPictureControllerContentSource = _objcClass("AVPictureInPictureControllerContentSource")
-	_aVPictureInPictureControllerContentSourceSelInitWithPlayerLayer = objc.RegisterName("initWithPlayerLayer:")
-	_aVPictureInPictureControllerContentSourceSelPlayerLayer = objc.RegisterName("playerLayer")
+	_clsAVPictureInPictureControllerContentSource                                                 = _objcClass("AVPictureInPictureControllerContentSource")
+	_aVPictureInPictureControllerContentSourceSelInitWithPlayerLayer                              = objc.RegisterName("initWithPlayerLayer:")
+	_aVPictureInPictureControllerContentSourceSelPlayerLayer                                      = objc.RegisterName("playerLayer")
 	_aVPictureInPictureControllerContentSourceSelInitWithSampleBufferDisplayLayerPlaybackDelegate = objc.RegisterName("initWithSampleBufferDisplayLayer:playbackDelegate:")
-	_aVPictureInPictureControllerContentSourceSelSampleBufferDisplayLayer = objc.RegisterName("sampleBufferDisplayLayer")
-	_aVPictureInPictureControllerContentSourceSelSampleBufferPlaybackDelegate = objc.RegisterName("sampleBufferPlaybackDelegate")
+	_aVPictureInPictureControllerContentSourceSelSampleBufferDisplayLayer                         = objc.RegisterName("sampleBufferDisplayLayer")
+	_aVPictureInPictureControllerContentSourceSelSampleBufferPlaybackDelegate                     = objc.RegisterName("sampleBufferPlaybackDelegate")
 )
 
 func AVPictureInPictureControllerContentSourceFromID(id objc.ID) *AVPictureInPictureControllerContentSource {
@@ -38,27 +38,35 @@ func AVPictureInPictureControllerContentSourceFromID(id objc.ID) *AVPictureInPic
 // @method     initWithPlayerLayer: @param      playerLayer The player layer to be shown in Picture in Picture. @abstract   Use this initializer for a content source with a player layer.
 func (o *AVPictureInPictureControllerContentSource) InitWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *AVPictureInPictureControllerContentSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerContentSourceSelInitWithPlayerLayer, playerLayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPictureInPictureControllerContentSourceFromID(_ret)
 }
 
 func (o *AVPictureInPictureControllerContentSource) PlayerLayer() *avfoundation.AVPlayerLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerContentSourceSelPlayerLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVPlayerLayerFromID(_ret)
 }
 
 // @method		initWithSampleBufferDisplayLayer: @param		sampleBufferDisplayLayer The sample buffer display layer to be shown in Picture in Picture. @param		playbackDelegate The playback delegate for controlling sample buffer display layer's playback in Picture in Picture. @abstract	Use this initializer for a content source with a sample buffer display layer and playback delegate.
 func (o *AVPictureInPictureControllerContentSource) InitWithSampleBufferDisplayLayerPlaybackDelegate(sampleBufferDisplayLayer *avfoundation.AVSampleBufferDisplayLayer, playbackDelegate AVPictureInPictureSampleBufferPlaybackDelegate) *AVPictureInPictureControllerContentSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerContentSourceSelInitWithSampleBufferDisplayLayerPlaybackDelegate, sampleBufferDisplayLayer.Ptr(), playbackDelegate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPictureInPictureControllerContentSourceFromID(_ret)
 }
 
 // @property	sampleBufferDisplayLayer @abstract	The receiver's sample buffer display layer.
 func (o *AVPictureInPictureControllerContentSource) SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPictureInPictureControllerContentSourceSelSampleBufferDisplayLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVSampleBufferDisplayLayerFromID(_ret)
 }
 
@@ -67,4 +75,3 @@ func (o *AVPictureInPictureControllerContentSource) SampleBufferPlaybackDelegate
 	_ret := objc.Send[AVPictureInPictureSampleBufferPlaybackDelegate](o.Ptr(), _aVPictureInPictureControllerContentSourceSelSampleBufferPlaybackDelegate)
 	return _ret
 }
-

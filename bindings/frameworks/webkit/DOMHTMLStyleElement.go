@@ -16,13 +16,13 @@ type DOMHTMLStyleElement struct {
 }
 
 var (
-	_clsDOMHTMLStyleElement = _objcClass("DOMHTMLStyleElement")
-	_dOMHTMLStyleElementSelDisabled = objc.RegisterName("disabled")
+	_clsDOMHTMLStyleElement            = _objcClass("DOMHTMLStyleElement")
+	_dOMHTMLStyleElementSelDisabled    = objc.RegisterName("disabled")
 	_dOMHTMLStyleElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLStyleElementSelMedia = objc.RegisterName("media")
-	_dOMHTMLStyleElementSelSetMedia = objc.RegisterName("setMedia:")
-	_dOMHTMLStyleElementSelType = objc.RegisterName("type")
-	_dOMHTMLStyleElementSelSetType = objc.RegisterName("setType:")
+	_dOMHTMLStyleElementSelMedia       = objc.RegisterName("media")
+	_dOMHTMLStyleElementSelSetMedia    = objc.RegisterName("setMedia:")
+	_dOMHTMLStyleElementSelType        = objc.RegisterName("type")
+	_dOMHTMLStyleElementSelSetType     = objc.RegisterName("setType:")
 )
 
 func DOMHTMLStyleElementFromID(id objc.ID) *DOMHTMLStyleElement {
@@ -46,7 +46,9 @@ func (o *DOMHTMLStyleElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLStyleElement) Media() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLStyleElementSelMedia)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,11 +58,12 @@ func (o *DOMHTMLStyleElement) SetMedia(media *foundation.NSString) {
 
 func (o *DOMHTMLStyleElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLStyleElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLStyleElement) SetType(type_ *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLStyleElementSelSetType, type_.Ptr())
 }
-

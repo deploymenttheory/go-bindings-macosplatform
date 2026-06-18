@@ -52,7 +52,9 @@ func (x *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*raw.CKRecordZone
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -163,9 +165,13 @@ func (x *FetchRecordZonesOperation) SetFetchRecordZonesCompletionBlock(fetchReco
 	x.inner.SetFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock)
 }
 
-func (x *FetchRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchRecordZonesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchRecordZonesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchRecordZonesOperationable is the interface implemented by [FetchRecordZonesOperation], for mocking and DI.
 type FetchRecordZonesOperationable interface {
@@ -191,4 +197,3 @@ type FetchRecordZonesOperationable interface {
 }
 
 var _ FetchRecordZonesOperationable = (*FetchRecordZonesOperation)(nil)
-

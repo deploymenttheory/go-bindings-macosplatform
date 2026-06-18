@@ -28,8 +28,8 @@ func (e Interface_event_t) String() string {
 type Operating_modes_t int64
 
 const (
-	VMNET_HOST_MODE Operating_modes_t = 1000
-	VMNET_SHARED_MODE Operating_modes_t = 1001
+	VMNET_HOST_MODE    Operating_modes_t = 1000
+	VMNET_SHARED_MODE  Operating_modes_t = 1001
 	VMNET_BRIDGED_MODE Operating_modes_t = 1002
 )
 
@@ -50,17 +50,17 @@ func (e Operating_modes_t) String() string {
 type Vmnet_return_t int64
 
 const (
-	VMNET_SUCCESS Vmnet_return_t = 1000
-	VMNET_FAILURE Vmnet_return_t = 1001
-	VMNET_MEM_FAILURE Vmnet_return_t = 1002
-	VMNET_INVALID_ARGUMENT Vmnet_return_t = 1003
-	VMNET_SETUP_INCOMPLETE Vmnet_return_t = 1004
-	VMNET_INVALID_ACCESS Vmnet_return_t = 1005
-	VMNET_PACKET_TOO_BIG Vmnet_return_t = 1006
-	VMNET_BUFFER_EXHAUSTED Vmnet_return_t = 1007
-	VMNET_TOO_MANY_PACKETS Vmnet_return_t = 1008
+	VMNET_SUCCESS              Vmnet_return_t = 1000
+	VMNET_FAILURE              Vmnet_return_t = 1001
+	VMNET_MEM_FAILURE          Vmnet_return_t = 1002
+	VMNET_INVALID_ARGUMENT     Vmnet_return_t = 1003
+	VMNET_SETUP_INCOMPLETE     Vmnet_return_t = 1004
+	VMNET_INVALID_ACCESS       Vmnet_return_t = 1005
+	VMNET_PACKET_TOO_BIG       Vmnet_return_t = 1006
+	VMNET_BUFFER_EXHAUSTED     Vmnet_return_t = 1007
+	VMNET_TOO_MANY_PACKETS     Vmnet_return_t = 1008
 	VMNET_SHARING_SERVICE_BUSY Vmnet_return_t = 1009
-	VMNET_NOT_AUTHORIZED Vmnet_return_t = 1010
+	VMNET_NOT_AUTHORIZED       Vmnet_return_t = 1010
 )
 
 func (e Vmnet_return_t) String() string {
@@ -91,4 +91,3 @@ func (e Vmnet_return_t) String() string {
 		return fmt.Sprintf("Vmnet_return_t(%d)", int64(e))
 	}
 }
-

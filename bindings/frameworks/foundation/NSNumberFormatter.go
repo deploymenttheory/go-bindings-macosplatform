@@ -17,145 +17,145 @@ type NSNumberFormatter struct {
 }
 
 var (
-	_clsNSNumberFormatter = _objcClass("NSNumberFormatter")
-	_nSNumberFormatterSelGetObjectValueForStringRangeError = objc.RegisterName("getObjectValue:forString:range:error:")
-	_nSNumberFormatterSelStringFromNumber = objc.RegisterName("stringFromNumber:")
-	_nSNumberFormatterSelNumberFromString = objc.RegisterName("numberFromString:")
+	_clsNSNumberFormatter                                     = _objcClass("NSNumberFormatter")
+	_nSNumberFormatterSelGetObjectValueForStringRangeError    = objc.RegisterName("getObjectValue:forString:range:error:")
+	_nSNumberFormatterSelStringFromNumber                     = objc.RegisterName("stringFromNumber:")
+	_nSNumberFormatterSelNumberFromString                     = objc.RegisterName("numberFromString:")
 	_nSNumberFormatterSelLocalizedStringFromNumberNumberStyle = objc.RegisterName("localizedStringFromNumber:numberStyle:")
-	_nSNumberFormatterSelDefaultFormatterBehavior = objc.RegisterName("defaultFormatterBehavior")
-	_nSNumberFormatterSelSetDefaultFormatterBehavior = objc.RegisterName("setDefaultFormatterBehavior:")
-	_nSNumberFormatterSelFormattingContext = objc.RegisterName("formattingContext")
-	_nSNumberFormatterSelSetFormattingContext = objc.RegisterName("setFormattingContext:")
-	_nSNumberFormatterSelMinimumGroupingDigits = objc.RegisterName("minimumGroupingDigits")
-	_nSNumberFormatterSelSetMinimumGroupingDigits = objc.RegisterName("setMinimumGroupingDigits:")
-	_nSNumberFormatterSelNumberStyle = objc.RegisterName("numberStyle")
-	_nSNumberFormatterSelSetNumberStyle = objc.RegisterName("setNumberStyle:")
-	_nSNumberFormatterSelLocale = objc.RegisterName("locale")
-	_nSNumberFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_nSNumberFormatterSelGeneratesDecimalNumbers = objc.RegisterName("generatesDecimalNumbers")
-	_nSNumberFormatterSelSetGeneratesDecimalNumbers = objc.RegisterName("setGeneratesDecimalNumbers:")
-	_nSNumberFormatterSelFormatterBehavior = objc.RegisterName("formatterBehavior")
-	_nSNumberFormatterSelSetFormatterBehavior = objc.RegisterName("setFormatterBehavior:")
-	_nSNumberFormatterSelNegativeFormat = objc.RegisterName("negativeFormat")
-	_nSNumberFormatterSelSetNegativeFormat = objc.RegisterName("setNegativeFormat:")
-	_nSNumberFormatterSelTextAttributesForNegativeValues = objc.RegisterName("textAttributesForNegativeValues")
-	_nSNumberFormatterSelSetTextAttributesForNegativeValues = objc.RegisterName("setTextAttributesForNegativeValues:")
-	_nSNumberFormatterSelPositiveFormat = objc.RegisterName("positiveFormat")
-	_nSNumberFormatterSelSetPositiveFormat = objc.RegisterName("setPositiveFormat:")
-	_nSNumberFormatterSelTextAttributesForPositiveValues = objc.RegisterName("textAttributesForPositiveValues")
-	_nSNumberFormatterSelSetTextAttributesForPositiveValues = objc.RegisterName("setTextAttributesForPositiveValues:")
-	_nSNumberFormatterSelAllowsFloats = objc.RegisterName("allowsFloats")
-	_nSNumberFormatterSelSetAllowsFloats = objc.RegisterName("setAllowsFloats:")
-	_nSNumberFormatterSelDecimalSeparator = objc.RegisterName("decimalSeparator")
-	_nSNumberFormatterSelSetDecimalSeparator = objc.RegisterName("setDecimalSeparator:")
-	_nSNumberFormatterSelAlwaysShowsDecimalSeparator = objc.RegisterName("alwaysShowsDecimalSeparator")
-	_nSNumberFormatterSelSetAlwaysShowsDecimalSeparator = objc.RegisterName("setAlwaysShowsDecimalSeparator:")
-	_nSNumberFormatterSelCurrencyDecimalSeparator = objc.RegisterName("currencyDecimalSeparator")
-	_nSNumberFormatterSelSetCurrencyDecimalSeparator = objc.RegisterName("setCurrencyDecimalSeparator:")
-	_nSNumberFormatterSelUsesGroupingSeparator = objc.RegisterName("usesGroupingSeparator")
-	_nSNumberFormatterSelSetUsesGroupingSeparator = objc.RegisterName("setUsesGroupingSeparator:")
-	_nSNumberFormatterSelGroupingSeparator = objc.RegisterName("groupingSeparator")
-	_nSNumberFormatterSelSetGroupingSeparator = objc.RegisterName("setGroupingSeparator:")
-	_nSNumberFormatterSelZeroSymbol = objc.RegisterName("zeroSymbol")
-	_nSNumberFormatterSelSetZeroSymbol = objc.RegisterName("setZeroSymbol:")
-	_nSNumberFormatterSelTextAttributesForZero = objc.RegisterName("textAttributesForZero")
-	_nSNumberFormatterSelSetTextAttributesForZero = objc.RegisterName("setTextAttributesForZero:")
-	_nSNumberFormatterSelNilSymbol = objc.RegisterName("nilSymbol")
-	_nSNumberFormatterSelSetNilSymbol = objc.RegisterName("setNilSymbol:")
-	_nSNumberFormatterSelTextAttributesForNil = objc.RegisterName("textAttributesForNil")
-	_nSNumberFormatterSelSetTextAttributesForNil = objc.RegisterName("setTextAttributesForNil:")
-	_nSNumberFormatterSelNotANumberSymbol = objc.RegisterName("notANumberSymbol")
-	_nSNumberFormatterSelSetNotANumberSymbol = objc.RegisterName("setNotANumberSymbol:")
-	_nSNumberFormatterSelTextAttributesForNotANumber = objc.RegisterName("textAttributesForNotANumber")
-	_nSNumberFormatterSelSetTextAttributesForNotANumber = objc.RegisterName("setTextAttributesForNotANumber:")
-	_nSNumberFormatterSelPositiveInfinitySymbol = objc.RegisterName("positiveInfinitySymbol")
-	_nSNumberFormatterSelSetPositiveInfinitySymbol = objc.RegisterName("setPositiveInfinitySymbol:")
-	_nSNumberFormatterSelTextAttributesForPositiveInfinity = objc.RegisterName("textAttributesForPositiveInfinity")
+	_nSNumberFormatterSelDefaultFormatterBehavior             = objc.RegisterName("defaultFormatterBehavior")
+	_nSNumberFormatterSelSetDefaultFormatterBehavior          = objc.RegisterName("setDefaultFormatterBehavior:")
+	_nSNumberFormatterSelFormattingContext                    = objc.RegisterName("formattingContext")
+	_nSNumberFormatterSelSetFormattingContext                 = objc.RegisterName("setFormattingContext:")
+	_nSNumberFormatterSelMinimumGroupingDigits                = objc.RegisterName("minimumGroupingDigits")
+	_nSNumberFormatterSelSetMinimumGroupingDigits             = objc.RegisterName("setMinimumGroupingDigits:")
+	_nSNumberFormatterSelNumberStyle                          = objc.RegisterName("numberStyle")
+	_nSNumberFormatterSelSetNumberStyle                       = objc.RegisterName("setNumberStyle:")
+	_nSNumberFormatterSelLocale                               = objc.RegisterName("locale")
+	_nSNumberFormatterSelSetLocale                            = objc.RegisterName("setLocale:")
+	_nSNumberFormatterSelGeneratesDecimalNumbers              = objc.RegisterName("generatesDecimalNumbers")
+	_nSNumberFormatterSelSetGeneratesDecimalNumbers           = objc.RegisterName("setGeneratesDecimalNumbers:")
+	_nSNumberFormatterSelFormatterBehavior                    = objc.RegisterName("formatterBehavior")
+	_nSNumberFormatterSelSetFormatterBehavior                 = objc.RegisterName("setFormatterBehavior:")
+	_nSNumberFormatterSelNegativeFormat                       = objc.RegisterName("negativeFormat")
+	_nSNumberFormatterSelSetNegativeFormat                    = objc.RegisterName("setNegativeFormat:")
+	_nSNumberFormatterSelTextAttributesForNegativeValues      = objc.RegisterName("textAttributesForNegativeValues")
+	_nSNumberFormatterSelSetTextAttributesForNegativeValues   = objc.RegisterName("setTextAttributesForNegativeValues:")
+	_nSNumberFormatterSelPositiveFormat                       = objc.RegisterName("positiveFormat")
+	_nSNumberFormatterSelSetPositiveFormat                    = objc.RegisterName("setPositiveFormat:")
+	_nSNumberFormatterSelTextAttributesForPositiveValues      = objc.RegisterName("textAttributesForPositiveValues")
+	_nSNumberFormatterSelSetTextAttributesForPositiveValues   = objc.RegisterName("setTextAttributesForPositiveValues:")
+	_nSNumberFormatterSelAllowsFloats                         = objc.RegisterName("allowsFloats")
+	_nSNumberFormatterSelSetAllowsFloats                      = objc.RegisterName("setAllowsFloats:")
+	_nSNumberFormatterSelDecimalSeparator                     = objc.RegisterName("decimalSeparator")
+	_nSNumberFormatterSelSetDecimalSeparator                  = objc.RegisterName("setDecimalSeparator:")
+	_nSNumberFormatterSelAlwaysShowsDecimalSeparator          = objc.RegisterName("alwaysShowsDecimalSeparator")
+	_nSNumberFormatterSelSetAlwaysShowsDecimalSeparator       = objc.RegisterName("setAlwaysShowsDecimalSeparator:")
+	_nSNumberFormatterSelCurrencyDecimalSeparator             = objc.RegisterName("currencyDecimalSeparator")
+	_nSNumberFormatterSelSetCurrencyDecimalSeparator          = objc.RegisterName("setCurrencyDecimalSeparator:")
+	_nSNumberFormatterSelUsesGroupingSeparator                = objc.RegisterName("usesGroupingSeparator")
+	_nSNumberFormatterSelSetUsesGroupingSeparator             = objc.RegisterName("setUsesGroupingSeparator:")
+	_nSNumberFormatterSelGroupingSeparator                    = objc.RegisterName("groupingSeparator")
+	_nSNumberFormatterSelSetGroupingSeparator                 = objc.RegisterName("setGroupingSeparator:")
+	_nSNumberFormatterSelZeroSymbol                           = objc.RegisterName("zeroSymbol")
+	_nSNumberFormatterSelSetZeroSymbol                        = objc.RegisterName("setZeroSymbol:")
+	_nSNumberFormatterSelTextAttributesForZero                = objc.RegisterName("textAttributesForZero")
+	_nSNumberFormatterSelSetTextAttributesForZero             = objc.RegisterName("setTextAttributesForZero:")
+	_nSNumberFormatterSelNilSymbol                            = objc.RegisterName("nilSymbol")
+	_nSNumberFormatterSelSetNilSymbol                         = objc.RegisterName("setNilSymbol:")
+	_nSNumberFormatterSelTextAttributesForNil                 = objc.RegisterName("textAttributesForNil")
+	_nSNumberFormatterSelSetTextAttributesForNil              = objc.RegisterName("setTextAttributesForNil:")
+	_nSNumberFormatterSelNotANumberSymbol                     = objc.RegisterName("notANumberSymbol")
+	_nSNumberFormatterSelSetNotANumberSymbol                  = objc.RegisterName("setNotANumberSymbol:")
+	_nSNumberFormatterSelTextAttributesForNotANumber          = objc.RegisterName("textAttributesForNotANumber")
+	_nSNumberFormatterSelSetTextAttributesForNotANumber       = objc.RegisterName("setTextAttributesForNotANumber:")
+	_nSNumberFormatterSelPositiveInfinitySymbol               = objc.RegisterName("positiveInfinitySymbol")
+	_nSNumberFormatterSelSetPositiveInfinitySymbol            = objc.RegisterName("setPositiveInfinitySymbol:")
+	_nSNumberFormatterSelTextAttributesForPositiveInfinity    = objc.RegisterName("textAttributesForPositiveInfinity")
 	_nSNumberFormatterSelSetTextAttributesForPositiveInfinity = objc.RegisterName("setTextAttributesForPositiveInfinity:")
-	_nSNumberFormatterSelNegativeInfinitySymbol = objc.RegisterName("negativeInfinitySymbol")
-	_nSNumberFormatterSelSetNegativeInfinitySymbol = objc.RegisterName("setNegativeInfinitySymbol:")
-	_nSNumberFormatterSelTextAttributesForNegativeInfinity = objc.RegisterName("textAttributesForNegativeInfinity")
+	_nSNumberFormatterSelNegativeInfinitySymbol               = objc.RegisterName("negativeInfinitySymbol")
+	_nSNumberFormatterSelSetNegativeInfinitySymbol            = objc.RegisterName("setNegativeInfinitySymbol:")
+	_nSNumberFormatterSelTextAttributesForNegativeInfinity    = objc.RegisterName("textAttributesForNegativeInfinity")
 	_nSNumberFormatterSelSetTextAttributesForNegativeInfinity = objc.RegisterName("setTextAttributesForNegativeInfinity:")
-	_nSNumberFormatterSelPositivePrefix = objc.RegisterName("positivePrefix")
-	_nSNumberFormatterSelSetPositivePrefix = objc.RegisterName("setPositivePrefix:")
-	_nSNumberFormatterSelPositiveSuffix = objc.RegisterName("positiveSuffix")
-	_nSNumberFormatterSelSetPositiveSuffix = objc.RegisterName("setPositiveSuffix:")
-	_nSNumberFormatterSelNegativePrefix = objc.RegisterName("negativePrefix")
-	_nSNumberFormatterSelSetNegativePrefix = objc.RegisterName("setNegativePrefix:")
-	_nSNumberFormatterSelNegativeSuffix = objc.RegisterName("negativeSuffix")
-	_nSNumberFormatterSelSetNegativeSuffix = objc.RegisterName("setNegativeSuffix:")
-	_nSNumberFormatterSelCurrencyCode = objc.RegisterName("currencyCode")
-	_nSNumberFormatterSelSetCurrencyCode = objc.RegisterName("setCurrencyCode:")
-	_nSNumberFormatterSelCurrencySymbol = objc.RegisterName("currencySymbol")
-	_nSNumberFormatterSelSetCurrencySymbol = objc.RegisterName("setCurrencySymbol:")
-	_nSNumberFormatterSelInternationalCurrencySymbol = objc.RegisterName("internationalCurrencySymbol")
-	_nSNumberFormatterSelSetInternationalCurrencySymbol = objc.RegisterName("setInternationalCurrencySymbol:")
-	_nSNumberFormatterSelPercentSymbol = objc.RegisterName("percentSymbol")
-	_nSNumberFormatterSelSetPercentSymbol = objc.RegisterName("setPercentSymbol:")
-	_nSNumberFormatterSelPerMillSymbol = objc.RegisterName("perMillSymbol")
-	_nSNumberFormatterSelSetPerMillSymbol = objc.RegisterName("setPerMillSymbol:")
-	_nSNumberFormatterSelMinusSign = objc.RegisterName("minusSign")
-	_nSNumberFormatterSelSetMinusSign = objc.RegisterName("setMinusSign:")
-	_nSNumberFormatterSelPlusSign = objc.RegisterName("plusSign")
-	_nSNumberFormatterSelSetPlusSign = objc.RegisterName("setPlusSign:")
-	_nSNumberFormatterSelExponentSymbol = objc.RegisterName("exponentSymbol")
-	_nSNumberFormatterSelSetExponentSymbol = objc.RegisterName("setExponentSymbol:")
-	_nSNumberFormatterSelGroupingSize = objc.RegisterName("groupingSize")
-	_nSNumberFormatterSelSetGroupingSize = objc.RegisterName("setGroupingSize:")
-	_nSNumberFormatterSelSecondaryGroupingSize = objc.RegisterName("secondaryGroupingSize")
-	_nSNumberFormatterSelSetSecondaryGroupingSize = objc.RegisterName("setSecondaryGroupingSize:")
-	_nSNumberFormatterSelMultiplier = objc.RegisterName("multiplier")
-	_nSNumberFormatterSelSetMultiplier = objc.RegisterName("setMultiplier:")
-	_nSNumberFormatterSelFormatWidth = objc.RegisterName("formatWidth")
-	_nSNumberFormatterSelSetFormatWidth = objc.RegisterName("setFormatWidth:")
-	_nSNumberFormatterSelPaddingCharacter = objc.RegisterName("paddingCharacter")
-	_nSNumberFormatterSelSetPaddingCharacter = objc.RegisterName("setPaddingCharacter:")
-	_nSNumberFormatterSelPaddingPosition = objc.RegisterName("paddingPosition")
-	_nSNumberFormatterSelSetPaddingPosition = objc.RegisterName("setPaddingPosition:")
-	_nSNumberFormatterSelRoundingMode = objc.RegisterName("roundingMode")
-	_nSNumberFormatterSelSetRoundingMode = objc.RegisterName("setRoundingMode:")
-	_nSNumberFormatterSelRoundingIncrement = objc.RegisterName("roundingIncrement")
-	_nSNumberFormatterSelSetRoundingIncrement = objc.RegisterName("setRoundingIncrement:")
-	_nSNumberFormatterSelMinimumIntegerDigits = objc.RegisterName("minimumIntegerDigits")
-	_nSNumberFormatterSelSetMinimumIntegerDigits = objc.RegisterName("setMinimumIntegerDigits:")
-	_nSNumberFormatterSelMaximumIntegerDigits = objc.RegisterName("maximumIntegerDigits")
-	_nSNumberFormatterSelSetMaximumIntegerDigits = objc.RegisterName("setMaximumIntegerDigits:")
-	_nSNumberFormatterSelMinimumFractionDigits = objc.RegisterName("minimumFractionDigits")
-	_nSNumberFormatterSelSetMinimumFractionDigits = objc.RegisterName("setMinimumFractionDigits:")
-	_nSNumberFormatterSelMaximumFractionDigits = objc.RegisterName("maximumFractionDigits")
-	_nSNumberFormatterSelSetMaximumFractionDigits = objc.RegisterName("setMaximumFractionDigits:")
-	_nSNumberFormatterSelMinimum = objc.RegisterName("minimum")
-	_nSNumberFormatterSelSetMinimum = objc.RegisterName("setMinimum:")
-	_nSNumberFormatterSelMaximum = objc.RegisterName("maximum")
-	_nSNumberFormatterSelSetMaximum = objc.RegisterName("setMaximum:")
-	_nSNumberFormatterSelCurrencyGroupingSeparator = objc.RegisterName("currencyGroupingSeparator")
-	_nSNumberFormatterSelSetCurrencyGroupingSeparator = objc.RegisterName("setCurrencyGroupingSeparator:")
-	_nSNumberFormatterSelIsLenient = objc.RegisterName("isLenient")
-	_nSNumberFormatterSelSetLenient = objc.RegisterName("setLenient:")
-	_nSNumberFormatterSelUsesSignificantDigits = objc.RegisterName("usesSignificantDigits")
-	_nSNumberFormatterSelSetUsesSignificantDigits = objc.RegisterName("setUsesSignificantDigits:")
-	_nSNumberFormatterSelMinimumSignificantDigits = objc.RegisterName("minimumSignificantDigits")
-	_nSNumberFormatterSelSetMinimumSignificantDigits = objc.RegisterName("setMinimumSignificantDigits:")
-	_nSNumberFormatterSelMaximumSignificantDigits = objc.RegisterName("maximumSignificantDigits")
-	_nSNumberFormatterSelSetMaximumSignificantDigits = objc.RegisterName("setMaximumSignificantDigits:")
-	_nSNumberFormatterSelIsPartialStringValidationEnabled = objc.RegisterName("isPartialStringValidationEnabled")
-	_nSNumberFormatterSelSetPartialStringValidationEnabled = objc.RegisterName("setPartialStringValidationEnabled:")
-	_nSNumberFormatterSelHasThousandSeparators = objc.RegisterName("hasThousandSeparators")
-	_nSNumberFormatterSelSetHasThousandSeparators = objc.RegisterName("setHasThousandSeparators:")
-	_nSNumberFormatterSelThousandSeparator = objc.RegisterName("thousandSeparator")
-	_nSNumberFormatterSelSetThousandSeparator = objc.RegisterName("setThousandSeparator:")
-	_nSNumberFormatterSelLocalizesFormat = objc.RegisterName("localizesFormat")
-	_nSNumberFormatterSelSetLocalizesFormat = objc.RegisterName("setLocalizesFormat:")
-	_nSNumberFormatterSelFormat = objc.RegisterName("format")
-	_nSNumberFormatterSelSetFormat = objc.RegisterName("setFormat:")
-	_nSNumberFormatterSelAttributedStringForZero = objc.RegisterName("attributedStringForZero")
-	_nSNumberFormatterSelSetAttributedStringForZero = objc.RegisterName("setAttributedStringForZero:")
-	_nSNumberFormatterSelAttributedStringForNil = objc.RegisterName("attributedStringForNil")
-	_nSNumberFormatterSelSetAttributedStringForNil = objc.RegisterName("setAttributedStringForNil:")
-	_nSNumberFormatterSelAttributedStringForNotANumber = objc.RegisterName("attributedStringForNotANumber")
-	_nSNumberFormatterSelSetAttributedStringForNotANumber = objc.RegisterName("setAttributedStringForNotANumber:")
-	_nSNumberFormatterSelRoundingBehavior = objc.RegisterName("roundingBehavior")
-	_nSNumberFormatterSelSetRoundingBehavior = objc.RegisterName("setRoundingBehavior:")
+	_nSNumberFormatterSelPositivePrefix                       = objc.RegisterName("positivePrefix")
+	_nSNumberFormatterSelSetPositivePrefix                    = objc.RegisterName("setPositivePrefix:")
+	_nSNumberFormatterSelPositiveSuffix                       = objc.RegisterName("positiveSuffix")
+	_nSNumberFormatterSelSetPositiveSuffix                    = objc.RegisterName("setPositiveSuffix:")
+	_nSNumberFormatterSelNegativePrefix                       = objc.RegisterName("negativePrefix")
+	_nSNumberFormatterSelSetNegativePrefix                    = objc.RegisterName("setNegativePrefix:")
+	_nSNumberFormatterSelNegativeSuffix                       = objc.RegisterName("negativeSuffix")
+	_nSNumberFormatterSelSetNegativeSuffix                    = objc.RegisterName("setNegativeSuffix:")
+	_nSNumberFormatterSelCurrencyCode                         = objc.RegisterName("currencyCode")
+	_nSNumberFormatterSelSetCurrencyCode                      = objc.RegisterName("setCurrencyCode:")
+	_nSNumberFormatterSelCurrencySymbol                       = objc.RegisterName("currencySymbol")
+	_nSNumberFormatterSelSetCurrencySymbol                    = objc.RegisterName("setCurrencySymbol:")
+	_nSNumberFormatterSelInternationalCurrencySymbol          = objc.RegisterName("internationalCurrencySymbol")
+	_nSNumberFormatterSelSetInternationalCurrencySymbol       = objc.RegisterName("setInternationalCurrencySymbol:")
+	_nSNumberFormatterSelPercentSymbol                        = objc.RegisterName("percentSymbol")
+	_nSNumberFormatterSelSetPercentSymbol                     = objc.RegisterName("setPercentSymbol:")
+	_nSNumberFormatterSelPerMillSymbol                        = objc.RegisterName("perMillSymbol")
+	_nSNumberFormatterSelSetPerMillSymbol                     = objc.RegisterName("setPerMillSymbol:")
+	_nSNumberFormatterSelMinusSign                            = objc.RegisterName("minusSign")
+	_nSNumberFormatterSelSetMinusSign                         = objc.RegisterName("setMinusSign:")
+	_nSNumberFormatterSelPlusSign                             = objc.RegisterName("plusSign")
+	_nSNumberFormatterSelSetPlusSign                          = objc.RegisterName("setPlusSign:")
+	_nSNumberFormatterSelExponentSymbol                       = objc.RegisterName("exponentSymbol")
+	_nSNumberFormatterSelSetExponentSymbol                    = objc.RegisterName("setExponentSymbol:")
+	_nSNumberFormatterSelGroupingSize                         = objc.RegisterName("groupingSize")
+	_nSNumberFormatterSelSetGroupingSize                      = objc.RegisterName("setGroupingSize:")
+	_nSNumberFormatterSelSecondaryGroupingSize                = objc.RegisterName("secondaryGroupingSize")
+	_nSNumberFormatterSelSetSecondaryGroupingSize             = objc.RegisterName("setSecondaryGroupingSize:")
+	_nSNumberFormatterSelMultiplier                           = objc.RegisterName("multiplier")
+	_nSNumberFormatterSelSetMultiplier                        = objc.RegisterName("setMultiplier:")
+	_nSNumberFormatterSelFormatWidth                          = objc.RegisterName("formatWidth")
+	_nSNumberFormatterSelSetFormatWidth                       = objc.RegisterName("setFormatWidth:")
+	_nSNumberFormatterSelPaddingCharacter                     = objc.RegisterName("paddingCharacter")
+	_nSNumberFormatterSelSetPaddingCharacter                  = objc.RegisterName("setPaddingCharacter:")
+	_nSNumberFormatterSelPaddingPosition                      = objc.RegisterName("paddingPosition")
+	_nSNumberFormatterSelSetPaddingPosition                   = objc.RegisterName("setPaddingPosition:")
+	_nSNumberFormatterSelRoundingMode                         = objc.RegisterName("roundingMode")
+	_nSNumberFormatterSelSetRoundingMode                      = objc.RegisterName("setRoundingMode:")
+	_nSNumberFormatterSelRoundingIncrement                    = objc.RegisterName("roundingIncrement")
+	_nSNumberFormatterSelSetRoundingIncrement                 = objc.RegisterName("setRoundingIncrement:")
+	_nSNumberFormatterSelMinimumIntegerDigits                 = objc.RegisterName("minimumIntegerDigits")
+	_nSNumberFormatterSelSetMinimumIntegerDigits              = objc.RegisterName("setMinimumIntegerDigits:")
+	_nSNumberFormatterSelMaximumIntegerDigits                 = objc.RegisterName("maximumIntegerDigits")
+	_nSNumberFormatterSelSetMaximumIntegerDigits              = objc.RegisterName("setMaximumIntegerDigits:")
+	_nSNumberFormatterSelMinimumFractionDigits                = objc.RegisterName("minimumFractionDigits")
+	_nSNumberFormatterSelSetMinimumFractionDigits             = objc.RegisterName("setMinimumFractionDigits:")
+	_nSNumberFormatterSelMaximumFractionDigits                = objc.RegisterName("maximumFractionDigits")
+	_nSNumberFormatterSelSetMaximumFractionDigits             = objc.RegisterName("setMaximumFractionDigits:")
+	_nSNumberFormatterSelMinimum                              = objc.RegisterName("minimum")
+	_nSNumberFormatterSelSetMinimum                           = objc.RegisterName("setMinimum:")
+	_nSNumberFormatterSelMaximum                              = objc.RegisterName("maximum")
+	_nSNumberFormatterSelSetMaximum                           = objc.RegisterName("setMaximum:")
+	_nSNumberFormatterSelCurrencyGroupingSeparator            = objc.RegisterName("currencyGroupingSeparator")
+	_nSNumberFormatterSelSetCurrencyGroupingSeparator         = objc.RegisterName("setCurrencyGroupingSeparator:")
+	_nSNumberFormatterSelIsLenient                            = objc.RegisterName("isLenient")
+	_nSNumberFormatterSelSetLenient                           = objc.RegisterName("setLenient:")
+	_nSNumberFormatterSelUsesSignificantDigits                = objc.RegisterName("usesSignificantDigits")
+	_nSNumberFormatterSelSetUsesSignificantDigits             = objc.RegisterName("setUsesSignificantDigits:")
+	_nSNumberFormatterSelMinimumSignificantDigits             = objc.RegisterName("minimumSignificantDigits")
+	_nSNumberFormatterSelSetMinimumSignificantDigits          = objc.RegisterName("setMinimumSignificantDigits:")
+	_nSNumberFormatterSelMaximumSignificantDigits             = objc.RegisterName("maximumSignificantDigits")
+	_nSNumberFormatterSelSetMaximumSignificantDigits          = objc.RegisterName("setMaximumSignificantDigits:")
+	_nSNumberFormatterSelIsPartialStringValidationEnabled     = objc.RegisterName("isPartialStringValidationEnabled")
+	_nSNumberFormatterSelSetPartialStringValidationEnabled    = objc.RegisterName("setPartialStringValidationEnabled:")
+	_nSNumberFormatterSelHasThousandSeparators                = objc.RegisterName("hasThousandSeparators")
+	_nSNumberFormatterSelSetHasThousandSeparators             = objc.RegisterName("setHasThousandSeparators:")
+	_nSNumberFormatterSelThousandSeparator                    = objc.RegisterName("thousandSeparator")
+	_nSNumberFormatterSelSetThousandSeparator                 = objc.RegisterName("setThousandSeparator:")
+	_nSNumberFormatterSelLocalizesFormat                      = objc.RegisterName("localizesFormat")
+	_nSNumberFormatterSelSetLocalizesFormat                   = objc.RegisterName("setLocalizesFormat:")
+	_nSNumberFormatterSelFormat                               = objc.RegisterName("format")
+	_nSNumberFormatterSelSetFormat                            = objc.RegisterName("setFormat:")
+	_nSNumberFormatterSelAttributedStringForZero              = objc.RegisterName("attributedStringForZero")
+	_nSNumberFormatterSelSetAttributedStringForZero           = objc.RegisterName("setAttributedStringForZero:")
+	_nSNumberFormatterSelAttributedStringForNil               = objc.RegisterName("attributedStringForNil")
+	_nSNumberFormatterSelSetAttributedStringForNil            = objc.RegisterName("setAttributedStringForNil:")
+	_nSNumberFormatterSelAttributedStringForNotANumber        = objc.RegisterName("attributedStringForNotANumber")
+	_nSNumberFormatterSelSetAttributedStringForNotANumber     = objc.RegisterName("setAttributedStringForNotANumber:")
+	_nSNumberFormatterSelRoundingBehavior                     = objc.RegisterName("roundingBehavior")
+	_nSNumberFormatterSelSetRoundingBehavior                  = objc.RegisterName("setRoundingBehavior:")
 )
 
 func NSNumberFormatterFromID(id objc.ID) *NSNumberFormatter {
@@ -179,19 +179,25 @@ func (o *NSNumberFormatter) GetObjectValueForStringRangeError(obj **ObjcObject, 
 
 func (o *NSNumberFormatter) StringFromNumber(number *NSNumber) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelStringFromNumber, number.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSNumberFormatter) NumberFromString(string_ *NSString) *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNumberFromString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
 func NSNumberFormatterLocalizedStringFromNumberNumberStyle(num *NSNumber, nstyle NSNumberFormatterStyle) *NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSNumberFormatter), _nSNumberFormatterSelLocalizedStringFromNumberNumberStyle, num.Ptr(), nstyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -233,7 +239,9 @@ func (o *NSNumberFormatter) SetNumberStyle(numberStyle NSNumberFormatterStyle) {
 
 func (o *NSNumberFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -261,7 +269,9 @@ func (o *NSNumberFormatter) SetFormatterBehavior(formatterBehavior NSNumberForma
 
 func (o *NSNumberFormatter) NegativeFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -280,7 +290,9 @@ func (o *NSNumberFormatter) SetTextAttributesForNegativeValues(textAttributesFor
 
 func (o *NSNumberFormatter) PositiveFormat() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -308,7 +320,9 @@ func (o *NSNumberFormatter) SetAllowsFloats(allowsFloats bool) {
 
 func (o *NSNumberFormatter) DecimalSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelDecimalSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -327,7 +341,9 @@ func (o *NSNumberFormatter) SetAlwaysShowsDecimalSeparator(alwaysShowsDecimalSep
 
 func (o *NSNumberFormatter) CurrencyDecimalSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyDecimalSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -346,7 +362,9 @@ func (o *NSNumberFormatter) SetUsesGroupingSeparator(usesGroupingSeparator bool)
 
 func (o *NSNumberFormatter) GroupingSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelGroupingSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -356,7 +374,9 @@ func (o *NSNumberFormatter) SetGroupingSeparator(groupingSeparator *NSString) {
 
 func (o *NSNumberFormatter) ZeroSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelZeroSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -375,7 +395,9 @@ func (o *NSNumberFormatter) SetTextAttributesForZero(textAttributesForZero *NSDi
 
 func (o *NSNumberFormatter) NilSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNilSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -394,7 +416,9 @@ func (o *NSNumberFormatter) SetTextAttributesForNil(textAttributesForNil *NSDict
 
 func (o *NSNumberFormatter) NotANumberSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNotANumberSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -413,7 +437,9 @@ func (o *NSNumberFormatter) SetTextAttributesForNotANumber(textAttributesForNotA
 
 func (o *NSNumberFormatter) PositiveInfinitySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveInfinitySymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -432,7 +458,9 @@ func (o *NSNumberFormatter) SetTextAttributesForPositiveInfinity(textAttributesF
 
 func (o *NSNumberFormatter) NegativeInfinitySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeInfinitySymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -451,7 +479,9 @@ func (o *NSNumberFormatter) SetTextAttributesForNegativeInfinity(textAttributesF
 
 func (o *NSNumberFormatter) PositivePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositivePrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -461,7 +491,9 @@ func (o *NSNumberFormatter) SetPositivePrefix(positivePrefix *NSString) {
 
 func (o *NSNumberFormatter) PositiveSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPositiveSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -471,7 +503,9 @@ func (o *NSNumberFormatter) SetPositiveSuffix(positiveSuffix *NSString) {
 
 func (o *NSNumberFormatter) NegativePrefix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativePrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -481,7 +515,9 @@ func (o *NSNumberFormatter) SetNegativePrefix(negativePrefix *NSString) {
 
 func (o *NSNumberFormatter) NegativeSuffix() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelNegativeSuffix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -491,7 +527,9 @@ func (o *NSNumberFormatter) SetNegativeSuffix(negativeSuffix *NSString) {
 
 func (o *NSNumberFormatter) CurrencyCode() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -501,7 +539,9 @@ func (o *NSNumberFormatter) SetCurrencyCode(currencyCode *NSString) {
 
 func (o *NSNumberFormatter) CurrencySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencySymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -511,7 +551,9 @@ func (o *NSNumberFormatter) SetCurrencySymbol(currencySymbol *NSString) {
 
 func (o *NSNumberFormatter) InternationalCurrencySymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelInternationalCurrencySymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -521,7 +563,9 @@ func (o *NSNumberFormatter) SetInternationalCurrencySymbol(internationalCurrency
 
 func (o *NSNumberFormatter) PercentSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPercentSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -531,7 +575,9 @@ func (o *NSNumberFormatter) SetPercentSymbol(percentSymbol *NSString) {
 
 func (o *NSNumberFormatter) PerMillSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPerMillSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -541,7 +587,9 @@ func (o *NSNumberFormatter) SetPerMillSymbol(perMillSymbol *NSString) {
 
 func (o *NSNumberFormatter) MinusSign() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMinusSign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -551,7 +599,9 @@ func (o *NSNumberFormatter) SetMinusSign(minusSign *NSString) {
 
 func (o *NSNumberFormatter) PlusSign() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPlusSign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -561,7 +611,9 @@ func (o *NSNumberFormatter) SetPlusSign(plusSign *NSString) {
 
 func (o *NSNumberFormatter) ExponentSymbol() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelExponentSymbol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -589,7 +641,9 @@ func (o *NSNumberFormatter) SetSecondaryGroupingSize(secondaryGroupingSize uint)
 
 func (o *NSNumberFormatter) Multiplier() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMultiplier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -608,7 +662,9 @@ func (o *NSNumberFormatter) SetFormatWidth(formatWidth uint) {
 
 func (o *NSNumberFormatter) PaddingCharacter() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelPaddingCharacter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -636,7 +692,9 @@ func (o *NSNumberFormatter) SetRoundingMode(roundingMode NSNumberFormatterRoundi
 
 func (o *NSNumberFormatter) RoundingIncrement() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelRoundingIncrement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -682,7 +740,9 @@ func (o *NSNumberFormatter) SetMaximumFractionDigits(maximumFractionDigits uint)
 
 func (o *NSNumberFormatter) Minimum() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMinimum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -692,7 +752,9 @@ func (o *NSNumberFormatter) SetMinimum(minimum *NSNumber) {
 
 func (o *NSNumberFormatter) Maximum() *NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelMaximum)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSNumberFromID(_ret)
 }
 
@@ -702,7 +764,9 @@ func (o *NSNumberFormatter) SetMaximum(maximum *NSNumber) {
 
 func (o *NSNumberFormatter) CurrencyGroupingSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelCurrencyGroupingSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -766,7 +830,9 @@ func (o *NSNumberFormatter) SetHasThousandSeparators(hasThousandSeparators bool)
 
 func (o *NSNumberFormatter) ThousandSeparator() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelThousandSeparator)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -785,7 +851,9 @@ func (o *NSNumberFormatter) SetLocalizesFormat(localizesFormat bool) {
 
 func (o *NSNumberFormatter) Format() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -795,7 +863,9 @@ func (o *NSNumberFormatter) SetFormat(format *NSString) {
 
 func (o *NSNumberFormatter) AttributedStringForZero() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForZero)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -805,7 +875,9 @@ func (o *NSNumberFormatter) SetAttributedStringForZero(attributedStringForZero *
 
 func (o *NSNumberFormatter) AttributedStringForNil() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForNil)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -815,7 +887,9 @@ func (o *NSNumberFormatter) SetAttributedStringForNil(attributedStringForNil *NS
 
 func (o *NSNumberFormatter) AttributedStringForNotANumber() *NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelAttributedStringForNotANumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSAttributedStringFromID(_ret)
 }
 
@@ -825,11 +899,12 @@ func (o *NSNumberFormatter) SetAttributedStringForNotANumber(attributedStringFor
 
 func (o *NSNumberFormatter) RoundingBehavior() *NSDecimalNumberHandler {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSNumberFormatterSelRoundingBehavior)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDecimalNumberHandlerFromID(_ret)
 }
 
 func (o *NSNumberFormatter) SetRoundingBehavior(roundingBehavior *NSDecimalNumberHandler) {
 	o.Ptr().Send(_nSNumberFormatterSelSetRoundingBehavior, roundingBehavior.Ptr())
 }
-

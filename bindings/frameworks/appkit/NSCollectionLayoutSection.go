@@ -16,22 +16,22 @@ type NSCollectionLayoutSection struct {
 }
 
 var (
-	_clsNSCollectionLayoutSection = _objcClass("NSCollectionLayoutSection")
-	_nSCollectionLayoutSectionSelSectionWithGroup = objc.RegisterName("sectionWithGroup:")
-	_nSCollectionLayoutSectionSelContentInsets = objc.RegisterName("contentInsets")
-	_nSCollectionLayoutSectionSelSetContentInsets = objc.RegisterName("setContentInsets:")
-	_nSCollectionLayoutSectionSelInterGroupSpacing = objc.RegisterName("interGroupSpacing")
-	_nSCollectionLayoutSectionSelSetInterGroupSpacing = objc.RegisterName("setInterGroupSpacing:")
-	_nSCollectionLayoutSectionSelOrthogonalScrollingBehavior = objc.RegisterName("orthogonalScrollingBehavior")
-	_nSCollectionLayoutSectionSelSetOrthogonalScrollingBehavior = objc.RegisterName("setOrthogonalScrollingBehavior:")
-	_nSCollectionLayoutSectionSelBoundarySupplementaryItems = objc.RegisterName("boundarySupplementaryItems")
-	_nSCollectionLayoutSectionSelSetBoundarySupplementaryItems = objc.RegisterName("setBoundarySupplementaryItems:")
-	_nSCollectionLayoutSectionSelSupplementariesFollowContentInsets = objc.RegisterName("supplementariesFollowContentInsets")
+	_clsNSCollectionLayoutSection                                      = _objcClass("NSCollectionLayoutSection")
+	_nSCollectionLayoutSectionSelSectionWithGroup                      = objc.RegisterName("sectionWithGroup:")
+	_nSCollectionLayoutSectionSelContentInsets                         = objc.RegisterName("contentInsets")
+	_nSCollectionLayoutSectionSelSetContentInsets                      = objc.RegisterName("setContentInsets:")
+	_nSCollectionLayoutSectionSelInterGroupSpacing                     = objc.RegisterName("interGroupSpacing")
+	_nSCollectionLayoutSectionSelSetInterGroupSpacing                  = objc.RegisterName("setInterGroupSpacing:")
+	_nSCollectionLayoutSectionSelOrthogonalScrollingBehavior           = objc.RegisterName("orthogonalScrollingBehavior")
+	_nSCollectionLayoutSectionSelSetOrthogonalScrollingBehavior        = objc.RegisterName("setOrthogonalScrollingBehavior:")
+	_nSCollectionLayoutSectionSelBoundarySupplementaryItems            = objc.RegisterName("boundarySupplementaryItems")
+	_nSCollectionLayoutSectionSelSetBoundarySupplementaryItems         = objc.RegisterName("setBoundarySupplementaryItems:")
+	_nSCollectionLayoutSectionSelSupplementariesFollowContentInsets    = objc.RegisterName("supplementariesFollowContentInsets")
 	_nSCollectionLayoutSectionSelSetSupplementariesFollowContentInsets = objc.RegisterName("setSupplementariesFollowContentInsets:")
-	_nSCollectionLayoutSectionSelVisibleItemsInvalidationHandler = objc.RegisterName("visibleItemsInvalidationHandler")
-	_nSCollectionLayoutSectionSelSetVisibleItemsInvalidationHandler = objc.RegisterName("setVisibleItemsInvalidationHandler:")
-	_nSCollectionLayoutSectionSelDecorationItems = objc.RegisterName("decorationItems")
-	_nSCollectionLayoutSectionSelSetDecorationItems = objc.RegisterName("setDecorationItems:")
+	_nSCollectionLayoutSectionSelVisibleItemsInvalidationHandler       = objc.RegisterName("visibleItemsInvalidationHandler")
+	_nSCollectionLayoutSectionSelSetVisibleItemsInvalidationHandler    = objc.RegisterName("setVisibleItemsInvalidationHandler:")
+	_nSCollectionLayoutSectionSelDecorationItems                       = objc.RegisterName("decorationItems")
+	_nSCollectionLayoutSectionSelSetDecorationItems                    = objc.RegisterName("setDecorationItems:")
 )
 
 func NSCollectionLayoutSectionFromID(id objc.ID) *NSCollectionLayoutSection {
@@ -46,7 +46,9 @@ func NSCollectionLayoutSectionFromID(id objc.ID) *NSCollectionLayoutSection {
 
 func NSCollectionLayoutSectionSectionWithGroup(group *NSCollectionLayoutGroup) *NSCollectionLayoutSection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSCollectionLayoutSection), _nSCollectionLayoutSectionSelSectionWithGroup, group.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCollectionLayoutSectionFromID(_ret)
 }
 
@@ -79,7 +81,9 @@ func (o *NSCollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScr
 
 func (o *NSCollectionLayoutSection) BoundarySupplementaryItems() *foundation.NSArray[*NSCollectionLayoutBoundarySupplementaryItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSectionSelBoundarySupplementaryItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionLayoutBoundarySupplementaryItem](_ret)
 }
 
@@ -107,11 +111,12 @@ func (o *NSCollectionLayoutSection) SetVisibleItemsInvalidationHandler(visibleIt
 
 func (o *NSCollectionLayoutSection) DecorationItems() *foundation.NSArray[*NSCollectionLayoutDecorationItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCollectionLayoutSectionSelDecorationItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSCollectionLayoutDecorationItem](_ret)
 }
 
 func (o *NSCollectionLayoutSection) SetDecorationItems(decorationItems *foundation.NSArray[*NSCollectionLayoutDecorationItem]) {
 	o.Ptr().Send(_nSCollectionLayoutSectionSelSetDecorationItems, decorationItems.Ptr())
 }
-

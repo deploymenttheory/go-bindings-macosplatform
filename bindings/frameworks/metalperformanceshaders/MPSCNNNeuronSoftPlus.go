@@ -17,7 +17,7 @@ type MPSCNNNeuronSoftPlus struct {
 }
 
 var (
-	_clsMPSCNNNeuronSoftPlus = _objcClass("MPSCNNNeuronSoftPlus")
+	_clsMPSCNNNeuronSoftPlus                 = _objcClass("MPSCNNNeuronSoftPlus")
 	_mPSCNNNeuronSoftPlusSelInitWithDeviceAB = objc.RegisterName("initWithDevice:a:b:")
 )
 
@@ -34,7 +34,8 @@ func MPSCNNNeuronSoftPlusFromID(id objc.ID) *MPSCNNNeuronSoftPlus {
 // @abstract   Initialize a parametric softplus neuron filter @param      device          The device the filter will run on @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @return     A valid MPSCNNNeuronSoftPlus object or nil, if failure.
 func (o *MPSCNNNeuronSoftPlus) InitWithDeviceAB(device metal.MTLDevice, a float32, b float32) *MPSCNNNeuronSoftPlus {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronSoftPlusSelInitWithDeviceAB, device, a, b)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronSoftPlusFromID(_ret)
 }
-

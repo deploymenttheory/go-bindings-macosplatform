@@ -148,7 +148,9 @@ func (x *CNNGroupNormalization) DataSource() mpsneuralnetwork.MPSCNNGroupNormali
 	return x.inner.DataSource()
 }
 
-func (x *CNNGroupNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *CNNGroupNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
 func (x *CNNGroupNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
@@ -176,4 +178,3 @@ type CNNGroupNormalizationable interface {
 }
 
 var _ CNNGroupNormalizationable = (*CNNGroupNormalization)(nil)
-

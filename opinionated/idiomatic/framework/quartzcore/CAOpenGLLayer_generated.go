@@ -112,7 +112,9 @@ func (x *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -362,7 +364,9 @@ func (x *OpenGLLayer) WithConstraints(items ...*raw.CAConstraint) *OpenGLLayer {
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -491,4 +495,3 @@ type OpenGLLayerable interface {
 }
 
 var _ OpenGLLayerable = (*OpenGLLayer)(nil)
-

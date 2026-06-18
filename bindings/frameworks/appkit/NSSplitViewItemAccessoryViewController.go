@@ -15,13 +15,13 @@ type NSSplitViewItemAccessoryViewController struct {
 }
 
 var (
-	_clsNSSplitViewItemAccessoryViewController = _objcClass("NSSplitViewItemAccessoryViewController")
-	_nSSplitViewItemAccessoryViewControllerSelIsHidden = objc.RegisterName("isHidden")
-	_nSSplitViewItemAccessoryViewControllerSelSetHidden = objc.RegisterName("setHidden:")
-	_nSSplitViewItemAccessoryViewControllerSelAutomaticallyAppliesContentInsets = objc.RegisterName("automaticallyAppliesContentInsets")
+	_clsNSSplitViewItemAccessoryViewController                                     = _objcClass("NSSplitViewItemAccessoryViewController")
+	_nSSplitViewItemAccessoryViewControllerSelIsHidden                             = objc.RegisterName("isHidden")
+	_nSSplitViewItemAccessoryViewControllerSelSetHidden                            = objc.RegisterName("setHidden:")
+	_nSSplitViewItemAccessoryViewControllerSelAutomaticallyAppliesContentInsets    = objc.RegisterName("automaticallyAppliesContentInsets")
 	_nSSplitViewItemAccessoryViewControllerSelSetAutomaticallyAppliesContentInsets = objc.RegisterName("setAutomaticallyAppliesContentInsets:")
-	_nSSplitViewItemAccessoryViewControllerSelPreferredScrollEdgeEffectStyle = objc.RegisterName("preferredScrollEdgeEffectStyle")
-	_nSSplitViewItemAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle = objc.RegisterName("setPreferredScrollEdgeEffectStyle:")
+	_nSSplitViewItemAccessoryViewControllerSelPreferredScrollEdgeEffectStyle       = objc.RegisterName("preferredScrollEdgeEffectStyle")
+	_nSSplitViewItemAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle    = objc.RegisterName("setPreferredScrollEdgeEffectStyle:")
 )
 
 func NSSplitViewItemAccessoryViewControllerFromID(id objc.ID) *NSSplitViewItemAccessoryViewController {
@@ -59,7 +59,9 @@ func (o *NSSplitViewItemAccessoryViewController) SetAutomaticallyAppliesContentI
 // The split view item accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the interior edge of a titlebar accessory: splitViewItemAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
 func (o *NSSplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() *NSScrollEdgeEffectStyle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSSplitViewItemAccessoryViewControllerSelPreferredScrollEdgeEffectStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollEdgeEffectStyleFromID(_ret)
 }
 
@@ -67,4 +69,3 @@ func (o *NSSplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle(
 func (o *NSSplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *NSScrollEdgeEffectStyle) {
 	o.Ptr().Send(_nSSplitViewItemAccessoryViewControllerSelSetPreferredScrollEdgeEffectStyle, preferredScrollEdgeEffectStyle.Ptr())
 }
-

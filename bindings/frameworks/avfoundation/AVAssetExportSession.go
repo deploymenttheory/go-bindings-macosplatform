@@ -19,54 +19,54 @@ type AVAssetExportSession struct {
 }
 
 var (
-	_clsAVAssetExportSession = _objcClass("AVAssetExportSession")
-	_aVAssetExportSessionSelExportSessionWithAssetPresetName = objc.RegisterName("exportSessionWithAsset:presetName:")
-	_aVAssetExportSessionSelInitWithAssetPresetName = objc.RegisterName("initWithAsset:presetName:")
-	_aVAssetExportSessionSelExportAsynchronouslyWithCompletionHandler = objc.RegisterName("exportAsynchronouslyWithCompletionHandler:")
-	_aVAssetExportSessionSelCancelExport = objc.RegisterName("cancelExport")
-	_aVAssetExportSessionSelPresetName = objc.RegisterName("presetName")
-	_aVAssetExportSessionSelAsset = objc.RegisterName("asset")
-	_aVAssetExportSessionSelOutputFileType = objc.RegisterName("outputFileType")
-	_aVAssetExportSessionSelSetOutputFileType = objc.RegisterName("setOutputFileType:")
-	_aVAssetExportSessionSelOutputURL = objc.RegisterName("outputURL")
-	_aVAssetExportSessionSelSetOutputURL = objc.RegisterName("setOutputURL:")
-	_aVAssetExportSessionSelShouldOptimizeForNetworkUse = objc.RegisterName("shouldOptimizeForNetworkUse")
-	_aVAssetExportSessionSelSetShouldOptimizeForNetworkUse = objc.RegisterName("setShouldOptimizeForNetworkUse:")
-	_aVAssetExportSessionSelAllowsParallelizedExport = objc.RegisterName("allowsParallelizedExport")
-	_aVAssetExportSessionSelSetAllowsParallelizedExport = objc.RegisterName("setAllowsParallelizedExport:")
-	_aVAssetExportSessionSelStatus = objc.RegisterName("status")
-	_aVAssetExportSessionSelError = objc.RegisterName("error")
-	_aVAssetExportSessionSelProgress = objc.RegisterName("progress")
-	_aVAssetExportSessionSelAllExportPresets = objc.RegisterName("allExportPresets")
-	_aVAssetExportSessionSelExportPresetsCompatibleWithAsset = objc.RegisterName("exportPresetsCompatibleWithAsset:")
+	_clsAVAssetExportSession                                                                             = _objcClass("AVAssetExportSession")
+	_aVAssetExportSessionSelExportSessionWithAssetPresetName                                             = objc.RegisterName("exportSessionWithAsset:presetName:")
+	_aVAssetExportSessionSelInitWithAssetPresetName                                                      = objc.RegisterName("initWithAsset:presetName:")
+	_aVAssetExportSessionSelExportAsynchronouslyWithCompletionHandler                                    = objc.RegisterName("exportAsynchronouslyWithCompletionHandler:")
+	_aVAssetExportSessionSelCancelExport                                                                 = objc.RegisterName("cancelExport")
+	_aVAssetExportSessionSelPresetName                                                                   = objc.RegisterName("presetName")
+	_aVAssetExportSessionSelAsset                                                                        = objc.RegisterName("asset")
+	_aVAssetExportSessionSelOutputFileType                                                               = objc.RegisterName("outputFileType")
+	_aVAssetExportSessionSelSetOutputFileType                                                            = objc.RegisterName("setOutputFileType:")
+	_aVAssetExportSessionSelOutputURL                                                                    = objc.RegisterName("outputURL")
+	_aVAssetExportSessionSelSetOutputURL                                                                 = objc.RegisterName("setOutputURL:")
+	_aVAssetExportSessionSelShouldOptimizeForNetworkUse                                                  = objc.RegisterName("shouldOptimizeForNetworkUse")
+	_aVAssetExportSessionSelSetShouldOptimizeForNetworkUse                                               = objc.RegisterName("setShouldOptimizeForNetworkUse:")
+	_aVAssetExportSessionSelAllowsParallelizedExport                                                     = objc.RegisterName("allowsParallelizedExport")
+	_aVAssetExportSessionSelSetAllowsParallelizedExport                                                  = objc.RegisterName("setAllowsParallelizedExport:")
+	_aVAssetExportSessionSelStatus                                                                       = objc.RegisterName("status")
+	_aVAssetExportSessionSelError                                                                        = objc.RegisterName("error")
+	_aVAssetExportSessionSelProgress                                                                     = objc.RegisterName("progress")
+	_aVAssetExportSessionSelAllExportPresets                                                             = objc.RegisterName("allExportPresets")
+	_aVAssetExportSessionSelExportPresetsCompatibleWithAsset                                             = objc.RegisterName("exportPresetsCompatibleWithAsset:")
 	_aVAssetExportSessionSelDetermineCompatibilityOfExportPresetWithAssetOutputFileTypeCompletionHandler = objc.RegisterName("determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:")
-	_aVAssetExportSessionSelDetermineCompatibleFileTypesWithCompletionHandler = objc.RegisterName("determineCompatibleFileTypesWithCompletionHandler:")
-	_aVAssetExportSessionSelSupportedFileTypes = objc.RegisterName("supportedFileTypes")
-	_aVAssetExportSessionSelEstimateMaximumDurationWithCompletionHandler = objc.RegisterName("estimateMaximumDurationWithCompletionHandler:")
-	_aVAssetExportSessionSelEstimateOutputFileLengthWithCompletionHandler = objc.RegisterName("estimateOutputFileLengthWithCompletionHandler:")
-	_aVAssetExportSessionSelTimeRange = objc.RegisterName("timeRange")
-	_aVAssetExportSessionSelSetTimeRange = objc.RegisterName("setTimeRange:")
-	_aVAssetExportSessionSelMaxDuration = objc.RegisterName("maxDuration")
-	_aVAssetExportSessionSelEstimatedOutputFileLength = objc.RegisterName("estimatedOutputFileLength")
-	_aVAssetExportSessionSelFileLengthLimit = objc.RegisterName("fileLengthLimit")
-	_aVAssetExportSessionSelSetFileLengthLimit = objc.RegisterName("setFileLengthLimit:")
-	_aVAssetExportSessionSelMetadata = objc.RegisterName("metadata")
-	_aVAssetExportSessionSelSetMetadata = objc.RegisterName("setMetadata:")
-	_aVAssetExportSessionSelMetadataItemFilter = objc.RegisterName("metadataItemFilter")
-	_aVAssetExportSessionSelSetMetadataItemFilter = objc.RegisterName("setMetadataItemFilter:")
-	_aVAssetExportSessionSelAudioTimePitchAlgorithm = objc.RegisterName("audioTimePitchAlgorithm")
-	_aVAssetExportSessionSelSetAudioTimePitchAlgorithm = objc.RegisterName("setAudioTimePitchAlgorithm:")
-	_aVAssetExportSessionSelAudioMix = objc.RegisterName("audioMix")
-	_aVAssetExportSessionSelSetAudioMix = objc.RegisterName("setAudioMix:")
-	_aVAssetExportSessionSelVideoComposition = objc.RegisterName("videoComposition")
-	_aVAssetExportSessionSelSetVideoComposition = objc.RegisterName("setVideoComposition:")
-	_aVAssetExportSessionSelCustomVideoCompositor = objc.RegisterName("customVideoCompositor")
-	_aVAssetExportSessionSelAudioTrackGroupHandling = objc.RegisterName("audioTrackGroupHandling")
-	_aVAssetExportSessionSelSetAudioTrackGroupHandling = objc.RegisterName("setAudioTrackGroupHandling:")
-	_aVAssetExportSessionSelCanPerformMultiplePassesOverSourceMediaData = objc.RegisterName("canPerformMultiplePassesOverSourceMediaData")
-	_aVAssetExportSessionSelSetCanPerformMultiplePassesOverSourceMediaData = objc.RegisterName("setCanPerformMultiplePassesOverSourceMediaData:")
-	_aVAssetExportSessionSelDirectoryForTemporaryFiles = objc.RegisterName("directoryForTemporaryFiles")
-	_aVAssetExportSessionSelSetDirectoryForTemporaryFiles = objc.RegisterName("setDirectoryForTemporaryFiles:")
+	_aVAssetExportSessionSelDetermineCompatibleFileTypesWithCompletionHandler                            = objc.RegisterName("determineCompatibleFileTypesWithCompletionHandler:")
+	_aVAssetExportSessionSelSupportedFileTypes                                                           = objc.RegisterName("supportedFileTypes")
+	_aVAssetExportSessionSelEstimateMaximumDurationWithCompletionHandler                                 = objc.RegisterName("estimateMaximumDurationWithCompletionHandler:")
+	_aVAssetExportSessionSelEstimateOutputFileLengthWithCompletionHandler                                = objc.RegisterName("estimateOutputFileLengthWithCompletionHandler:")
+	_aVAssetExportSessionSelTimeRange                                                                    = objc.RegisterName("timeRange")
+	_aVAssetExportSessionSelSetTimeRange                                                                 = objc.RegisterName("setTimeRange:")
+	_aVAssetExportSessionSelMaxDuration                                                                  = objc.RegisterName("maxDuration")
+	_aVAssetExportSessionSelEstimatedOutputFileLength                                                    = objc.RegisterName("estimatedOutputFileLength")
+	_aVAssetExportSessionSelFileLengthLimit                                                              = objc.RegisterName("fileLengthLimit")
+	_aVAssetExportSessionSelSetFileLengthLimit                                                           = objc.RegisterName("setFileLengthLimit:")
+	_aVAssetExportSessionSelMetadata                                                                     = objc.RegisterName("metadata")
+	_aVAssetExportSessionSelSetMetadata                                                                  = objc.RegisterName("setMetadata:")
+	_aVAssetExportSessionSelMetadataItemFilter                                                           = objc.RegisterName("metadataItemFilter")
+	_aVAssetExportSessionSelSetMetadataItemFilter                                                        = objc.RegisterName("setMetadataItemFilter:")
+	_aVAssetExportSessionSelAudioTimePitchAlgorithm                                                      = objc.RegisterName("audioTimePitchAlgorithm")
+	_aVAssetExportSessionSelSetAudioTimePitchAlgorithm                                                   = objc.RegisterName("setAudioTimePitchAlgorithm:")
+	_aVAssetExportSessionSelAudioMix                                                                     = objc.RegisterName("audioMix")
+	_aVAssetExportSessionSelSetAudioMix                                                                  = objc.RegisterName("setAudioMix:")
+	_aVAssetExportSessionSelVideoComposition                                                             = objc.RegisterName("videoComposition")
+	_aVAssetExportSessionSelSetVideoComposition                                                          = objc.RegisterName("setVideoComposition:")
+	_aVAssetExportSessionSelCustomVideoCompositor                                                        = objc.RegisterName("customVideoCompositor")
+	_aVAssetExportSessionSelAudioTrackGroupHandling                                                      = objc.RegisterName("audioTrackGroupHandling")
+	_aVAssetExportSessionSelSetAudioTrackGroupHandling                                                   = objc.RegisterName("setAudioTrackGroupHandling:")
+	_aVAssetExportSessionSelCanPerformMultiplePassesOverSourceMediaData                                  = objc.RegisterName("canPerformMultiplePassesOverSourceMediaData")
+	_aVAssetExportSessionSelSetCanPerformMultiplePassesOverSourceMediaData                               = objc.RegisterName("setCanPerformMultiplePassesOverSourceMediaData:")
+	_aVAssetExportSessionSelDirectoryForTemporaryFiles                                                   = objc.RegisterName("directoryForTemporaryFiles")
+	_aVAssetExportSessionSelSetDirectoryForTemporaryFiles                                                = objc.RegisterName("setDirectoryForTemporaryFiles:")
 )
 
 func AVAssetExportSessionFromID(id objc.ID) *AVAssetExportSession {
@@ -82,14 +82,18 @@ func AVAssetExportSessionFromID(id objc.ID) *AVAssetExportSession {
 // @method						exportSessionWithAsset:presetName: @abstract					Returns an instance of AVAssetExportSession for the specified source asset and preset. @param		asset			An AVAsset object that is intended to be exported. @param		presetName		An NSString specifying the name of the preset template for the export. @result						An instance of AVAssetExportSession. @discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
 func AVAssetExportSessionExportSessionWithAssetPresetName(asset *AVAsset, presetName *foundation.NSString) *AVAssetExportSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetExportSession), _aVAssetExportSessionSelExportSessionWithAssetPresetName, asset.Ptr(), presetName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetExportSessionFromID(_ret)
 }
 
 // @method						initWithAsset:presetName: @abstract					Initialize an AVAssetExportSession with the specified preset and set the source to the contents of the asset. @param		asset			An AVAsset object that is intended to be exported. @param		presetName		An NSString specifying the name of the preset template for the export. @result						Returns the initialized AVAssetExportSession. @discussion					If the specified asset belongs to a mutable subclass of AVAsset, AVMutableComposition or AVMutableMovie, the results of any export-related operation are undefined if you mutate the asset after the operation commences. These operations include but are not limited to: 1) testing the compatibility of export presets with the asset, 2) calculating the maximum duration or estimated length of the output file, and 3) the export operation itself.
 func (o *AVAssetExportSession) InitWithAssetPresetName(asset *AVAsset, presetName *foundation.NSString) *AVAssetExportSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelInitWithAssetPresetName, asset.Ptr(), presetName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetExportSessionFromID(_ret)
 }
 
@@ -112,19 +116,25 @@ func (o *AVAssetExportSession) CancelExport() {
 
 func (o *AVAssetExportSession) PresetName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelPresetName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVAssetExportSession) Asset() *AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetFromID(_ret)
 }
 
 func (o *AVAssetExportSession) OutputFileType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelOutputFileType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -135,7 +145,9 @@ func (o *AVAssetExportSession) SetOutputFileType(outputFileType *foundation.NSSt
 // Deprecated: Use export(to:as:) async throws instead
 func (o *AVAssetExportSession) OutputURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelOutputURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
@@ -262,7 +274,9 @@ func (o *AVAssetExportSession) SetFileLengthLimit(fileLengthLimit int64) {
 
 func (o *AVAssetExportSession) Metadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -272,7 +286,9 @@ func (o *AVAssetExportSession) SetMetadata(metadata *foundation.NSArray[*AVMetad
 
 func (o *AVAssetExportSession) MetadataItemFilter() *AVMetadataItemFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelMetadataItemFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetadataItemFilterFromID(_ret)
 }
 
@@ -282,7 +298,9 @@ func (o *AVAssetExportSession) SetMetadataItemFilter(metadataItemFilter *AVMetad
 
 func (o *AVAssetExportSession) AudioTimePitchAlgorithm() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelAudioTimePitchAlgorithm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -292,7 +310,9 @@ func (o *AVAssetExportSession) SetAudioTimePitchAlgorithm(audioTimePitchAlgorith
 
 func (o *AVAssetExportSession) AudioMix() *AVAudioMix {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelAudioMix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioMixFromID(_ret)
 }
 
@@ -302,7 +322,9 @@ func (o *AVAssetExportSession) SetAudioMix(audioMix *AVAudioMix) {
 
 func (o *AVAssetExportSession) VideoComposition() *AVVideoComposition {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelVideoComposition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVVideoCompositionFromID(_ret)
 }
 
@@ -338,11 +360,12 @@ func (o *AVAssetExportSession) SetCanPerformMultiplePassesOverSourceMediaData(ca
 // @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the export process @discussion AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
 func (o *AVAssetExportSession) DirectoryForTemporaryFiles() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetExportSessionSelDirectoryForTemporaryFiles)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *AVAssetExportSession) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles *foundation.NSURL) {
 	o.Ptr().Send(_aVAssetExportSessionSelSetDirectoryForTemporaryFiles, directoryForTemporaryFiles.Ptr())
 }
-

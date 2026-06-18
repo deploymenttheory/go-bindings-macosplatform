@@ -16,7 +16,9 @@ type MTRGroupsClusterGetGroupMembershipParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGroupsClusterGetGroupMembershipParams].
-func (x *MTRGroupsClusterGetGroupMembershipParams) Unwrap() *raw.MTRGroupsClusterGetGroupMembershipParams { return x.inner }
+func (x *MTRGroupsClusterGetGroupMembershipParams) Unwrap() *raw.MTRGroupsClusterGetGroupMembershipParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,4 +94,3 @@ type MTRGroupsClusterGetGroupMembershipParamsable interface {
 }
 
 var _ MTRGroupsClusterGetGroupMembershipParamsable = (*MTRGroupsClusterGetGroupMembershipParams)(nil)
-

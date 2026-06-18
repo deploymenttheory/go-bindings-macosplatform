@@ -170,4 +170,3 @@ type PersistentDocumentable interface {
 }
 
 var _ PersistentDocumentable = (*PersistentDocument)(nil)
-

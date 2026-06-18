@@ -16,9 +16,9 @@ type AXMathExpressionNumber struct {
 }
 
 var (
-	_clsAXMathExpressionNumber = _objcClass("AXMathExpressionNumber")
+	_clsAXMathExpressionNumber                = _objcClass("AXMathExpressionNumber")
 	_aXMathExpressionNumberSelInitWithContent = objc.RegisterName("initWithContent:")
-	_aXMathExpressionNumberSelContent = objc.RegisterName("content")
+	_aXMathExpressionNumberSelContent         = objc.RegisterName("content")
 )
 
 func AXMathExpressionNumberFromID(id objc.ID) *AXMathExpressionNumber {
@@ -33,13 +33,16 @@ func AXMathExpressionNumberFromID(id objc.ID) *AXMathExpressionNumber {
 
 func (o *AXMathExpressionNumber) InitWithContent(content *foundation.NSString) *AXMathExpressionNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionNumberSelInitWithContent, content.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionNumberFromID(_ret)
 }
 
 func (o *AXMathExpressionNumber) Content() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionNumberSelContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

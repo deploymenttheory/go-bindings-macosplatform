@@ -15,19 +15,19 @@ type NSMutableSet[ObjectType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSMutableSet = _objcClass("NSMutableSet")
-	_nSMutableSetSelAddObject = objc.RegisterName("addObject:")
-	_nSMutableSetSelRemoveObject = objc.RegisterName("removeObject:")
-	_nSMutableSetSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMutableSetSelInit = objc.RegisterName("init")
-	_nSMutableSetSelInitWithCapacity = objc.RegisterName("initWithCapacity:")
-	_nSMutableSetSelAddObjectsFromArray = objc.RegisterName("addObjectsFromArray:")
-	_nSMutableSetSelIntersectSet = objc.RegisterName("intersectSet:")
-	_nSMutableSetSelMinusSet = objc.RegisterName("minusSet:")
-	_nSMutableSetSelRemoveAllObjects = objc.RegisterName("removeAllObjects")
-	_nSMutableSetSelUnionSet = objc.RegisterName("unionSet:")
-	_nSMutableSetSelSetSet = objc.RegisterName("setSet:")
-	_nSMutableSetSelSetWithCapacity = objc.RegisterName("setWithCapacity:")
+	_clsNSMutableSet                     = _objcClass("NSMutableSet")
+	_nSMutableSetSelAddObject            = objc.RegisterName("addObject:")
+	_nSMutableSetSelRemoveObject         = objc.RegisterName("removeObject:")
+	_nSMutableSetSelInitWithCoder        = objc.RegisterName("initWithCoder:")
+	_nSMutableSetSelInit                 = objc.RegisterName("init")
+	_nSMutableSetSelInitWithCapacity     = objc.RegisterName("initWithCapacity:")
+	_nSMutableSetSelAddObjectsFromArray  = objc.RegisterName("addObjectsFromArray:")
+	_nSMutableSetSelIntersectSet         = objc.RegisterName("intersectSet:")
+	_nSMutableSetSelMinusSet             = objc.RegisterName("minusSet:")
+	_nSMutableSetSelRemoveAllObjects     = objc.RegisterName("removeAllObjects")
+	_nSMutableSetSelUnionSet             = objc.RegisterName("unionSet:")
+	_nSMutableSetSelSetSet               = objc.RegisterName("setSet:")
+	_nSMutableSetSelSetWithCapacity      = objc.RegisterName("setWithCapacity:")
 	_nSMutableSetSelFilterUsingPredicate = objc.RegisterName("filterUsingPredicate:")
 )
 
@@ -51,19 +51,25 @@ func (o *NSMutableSet[ObjectType]) RemoveObject(object ObjectType) {
 
 func (o *NSMutableSet[ObjectType]) InitWithCoder(coder *NSCoder) *NSMutableSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableSetSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableSet[ObjectType]) Init() *NSMutableSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableSetSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
 func (o *NSMutableSet[ObjectType]) InitWithCapacity(numItems uint) *NSMutableSet[ObjectType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMutableSetSelInitWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableSetFromID[ObjectType](_ret)
 }
 
@@ -93,11 +99,12 @@ func (o *NSMutableSet[ObjectType]) SetSet(otherSet *NSSet[ObjectType]) {
 
 func NSMutableSetSetWithCapacity(numItems uint) *NSMutableSet[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSMutableSet), _nSMutableSetSelSetWithCapacity, numItems)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMutableSetFromID[objc.ID](_ret)
 }
 
 func (o *NSMutableSet[ObjectType]) FilterUsingPredicate(predicate *NSPredicate) {
 	o.Ptr().Send(_nSMutableSetSelFilterUsingPredicate, predicate.Ptr())
 }
-

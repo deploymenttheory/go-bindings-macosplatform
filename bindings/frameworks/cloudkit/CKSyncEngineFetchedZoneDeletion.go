@@ -16,7 +16,7 @@ type CKSyncEngineFetchedZoneDeletion struct {
 }
 
 var (
-	_clsCKSyncEngineFetchedZoneDeletion = _objcClass("CKSyncEngineFetchedZoneDeletion")
+	_clsCKSyncEngineFetchedZoneDeletion       = _objcClass("CKSyncEngineFetchedZoneDeletion")
 	_cKSyncEngineFetchedZoneDeletionSelZoneID = objc.RegisterName("zoneID")
 	_cKSyncEngineFetchedZoneDeletionSelReason = objc.RegisterName("reason")
 )
@@ -34,7 +34,9 @@ func CKSyncEngineFetchedZoneDeletionFromID(id objc.ID) *CKSyncEngineFetchedZoneD
 // The identifier of the deleted record zone.
 func (o *CKSyncEngineFetchedZoneDeletion) ZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchedZoneDeletionSelZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *CKSyncEngineFetchedZoneDeletion) Reason() CKSyncEngineZoneDeletionReaso
 	_ret := objc.Send[CKSyncEngineZoneDeletionReason](o.Ptr(), _cKSyncEngineFetchedZoneDeletionSelReason)
 	return _ret
 }
-

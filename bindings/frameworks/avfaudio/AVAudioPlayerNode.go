@@ -15,24 +15,24 @@ type AVAudioPlayerNode struct {
 }
 
 var (
-	_clsAVAudioPlayerNode = _objcClass("AVAudioPlayerNode")
-	_aVAudioPlayerNodeSelInit = objc.RegisterName("init")
-	_aVAudioPlayerNodeSelScheduleBufferCompletionHandler = objc.RegisterName("scheduleBuffer:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionHandler = objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionHandler = objc.RegisterName("scheduleFile:atTime:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleFile:atTime:completionCallbackType:completionHandler:")
-	_aVAudioPlayerNodeSelScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler = objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:")
+	_clsAVAudioPlayerNode                                                                                    = _objcClass("AVAudioPlayerNode")
+	_aVAudioPlayerNodeSelInit                                                                                = objc.RegisterName("init")
+	_aVAudioPlayerNodeSelScheduleBufferCompletionHandler                                                     = objc.RegisterName("scheduleBuffer:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleBufferCompletionCallbackTypeCompletionHandler                               = objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionHandler                                        = objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler                  = objc.RegisterName("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionHandler                                                 = objc.RegisterName("scheduleFile:atTime:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleFileAtTimeCompletionCallbackTypeCompletionHandler                           = objc.RegisterName("scheduleFile:atTime:completionCallbackType:completionHandler:")
+	_aVAudioPlayerNodeSelScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler                       = objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:")
 	_aVAudioPlayerNodeSelScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler = objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionCallbackType:completionHandler:")
-	_aVAudioPlayerNodeSelStop = objc.RegisterName("stop")
-	_aVAudioPlayerNodeSelPrepareWithFrameCount = objc.RegisterName("prepareWithFrameCount:")
-	_aVAudioPlayerNodeSelPlay = objc.RegisterName("play")
-	_aVAudioPlayerNodeSelPlayAtTime = objc.RegisterName("playAtTime:")
-	_aVAudioPlayerNodeSelPause = objc.RegisterName("pause")
-	_aVAudioPlayerNodeSelNodeTimeForPlayerTime = objc.RegisterName("nodeTimeForPlayerTime:")
-	_aVAudioPlayerNodeSelPlayerTimeForNodeTime = objc.RegisterName("playerTimeForNodeTime:")
-	_aVAudioPlayerNodeSelIsPlaying = objc.RegisterName("isPlaying")
+	_aVAudioPlayerNodeSelStop                                                                                = objc.RegisterName("stop")
+	_aVAudioPlayerNodeSelPrepareWithFrameCount                                                               = objc.RegisterName("prepareWithFrameCount:")
+	_aVAudioPlayerNodeSelPlay                                                                                = objc.RegisterName("play")
+	_aVAudioPlayerNodeSelPlayAtTime                                                                          = objc.RegisterName("playAtTime:")
+	_aVAudioPlayerNodeSelPause                                                                               = objc.RegisterName("pause")
+	_aVAudioPlayerNodeSelNodeTimeForPlayerTime                                                               = objc.RegisterName("nodeTimeForPlayerTime:")
+	_aVAudioPlayerNodeSelPlayerTimeForNodeTime                                                               = objc.RegisterName("playerTimeForNodeTime:")
+	_aVAudioPlayerNodeSelIsPlaying                                                                           = objc.RegisterName("isPlaying")
 )
 
 func AVAudioPlayerNodeFromID(id objc.ID) *AVAudioPlayerNode {
@@ -47,7 +47,9 @@ func AVAudioPlayerNodeFromID(id objc.ID) *AVAudioPlayerNode {
 
 func (o *AVAudioPlayerNode) Init() *AVAudioPlayerNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioPlayerNodeFromID(_ret)
 }
 
@@ -175,14 +177,18 @@ func (o *AVAudioPlayerNode) Pause() {
 // @method nodeTimeForPlayerTime: @abstract Convert from player time to node time. @param playerTime a time relative to the player's start time @return a node time @discussion This method and its inverse `playerTimeForNodeTime:` are discussed in the introduction to this class. If the player is not playing when this method is called, nil is returned.
 func (o *AVAudioPlayerNode) NodeTimeForPlayerTime(playerTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelNodeTimeForPlayerTime, playerTime.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
 // @method playerTimeForNodeTime: @abstract Convert from node time to player time. @param nodeTime a node time @return a time relative to the player's start time @discussion This method and its inverse `nodeTimeForPlayerTime:` are discussed in the introduction to this class. If the player is not playing when this method is called, nil is returned.
 func (o *AVAudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AVAudioTime) *AVAudioTime {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAudioPlayerNodeSelPlayerTimeForNodeTime, nodeTime.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAudioTimeFromID(_ret)
 }
 
@@ -190,4 +196,3 @@ func (o *AVAudioPlayerNode) IsPlaying() bool {
 	_ret := objc.Send[bool](o.Ptr(), _aVAudioPlayerNodeSelIsPlaying)
 	return _ret
 }
-

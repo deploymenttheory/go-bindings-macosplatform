@@ -16,18 +16,18 @@ type AVSpeechSynthesisVoice struct {
 }
 
 var (
-	_clsAVSpeechSynthesisVoice = _objcClass("AVSpeechSynthesisVoice")
-	_aVSpeechSynthesisVoiceSelSpeechVoices = objc.RegisterName("speechVoices")
+	_clsAVSpeechSynthesisVoice                    = _objcClass("AVSpeechSynthesisVoice")
+	_aVSpeechSynthesisVoiceSelSpeechVoices        = objc.RegisterName("speechVoices")
 	_aVSpeechSynthesisVoiceSelCurrentLanguageCode = objc.RegisterName("currentLanguageCode")
-	_aVSpeechSynthesisVoiceSelVoiceWithLanguage = objc.RegisterName("voiceWithLanguage:")
+	_aVSpeechSynthesisVoiceSelVoiceWithLanguage   = objc.RegisterName("voiceWithLanguage:")
 	_aVSpeechSynthesisVoiceSelVoiceWithIdentifier = objc.RegisterName("voiceWithIdentifier:")
-	_aVSpeechSynthesisVoiceSelLanguage = objc.RegisterName("language")
-	_aVSpeechSynthesisVoiceSelIdentifier = objc.RegisterName("identifier")
-	_aVSpeechSynthesisVoiceSelName = objc.RegisterName("name")
-	_aVSpeechSynthesisVoiceSelQuality = objc.RegisterName("quality")
-	_aVSpeechSynthesisVoiceSelGender = objc.RegisterName("gender")
-	_aVSpeechSynthesisVoiceSelAudioFileSettings = objc.RegisterName("audioFileSettings")
-	_aVSpeechSynthesisVoiceSelVoiceTraits = objc.RegisterName("voiceTraits")
+	_aVSpeechSynthesisVoiceSelLanguage            = objc.RegisterName("language")
+	_aVSpeechSynthesisVoiceSelIdentifier          = objc.RegisterName("identifier")
+	_aVSpeechSynthesisVoiceSelName                = objc.RegisterName("name")
+	_aVSpeechSynthesisVoiceSelQuality             = objc.RegisterName("quality")
+	_aVSpeechSynthesisVoiceSelGender              = objc.RegisterName("gender")
+	_aVSpeechSynthesisVoiceSelAudioFileSettings   = objc.RegisterName("audioFileSettings")
+	_aVSpeechSynthesisVoiceSelVoiceTraits         = objc.RegisterName("voiceTraits")
 )
 
 func AVSpeechSynthesisVoiceFromID(id objc.ID) *AVSpeechSynthesisVoice {
@@ -42,45 +42,59 @@ func AVSpeechSynthesisVoiceFromID(id objc.ID) *AVSpeechSynthesisVoice {
 
 func AVSpeechSynthesisVoiceSpeechVoices() *foundation.NSArray[*AVSpeechSynthesisVoice] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelSpeechVoices)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVSpeechSynthesisVoice](_ret)
 }
 
 func AVSpeechSynthesisVoiceCurrentLanguageCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelCurrentLanguageCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @method        voiceWithLanguage: @abstract      Use a BCP-47 language tag to specify the desired language and region. @param			languageCode Specifies the BCP-47 language tag that represents the voice. @discussion The default is the system's region and language. Passing in nil will return the default voice. Passing in an invalid languageCode will return nil. Will return enhanced quality voice if available, default quality otherwise. Examples: en-US (U.S. English), fr-CA (French Canadian)
 func AVSpeechSynthesisVoiceVoiceWithLanguage(languageCode *foundation.NSString) *AVSpeechSynthesisVoice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelVoiceWithLanguage, languageCode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisVoiceFromID(_ret)
 }
 
 // @method        voiceWithIdentifier: @abstract      Retrieve a voice by its identifier. @param			identifier A unique identifier for a voice. @discussion Passing in an invalid identifier will return nil. Returns nil if the identifier is valid, but the voice is not available on device (i.e. not yet downloaded by the user).
 func AVSpeechSynthesisVoiceVoiceWithIdentifier(identifier *foundation.NSString) *AVSpeechSynthesisVoice {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVSpeechSynthesisVoice), _aVSpeechSynthesisVoiceSelVoiceWithIdentifier, identifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVSpeechSynthesisVoiceFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisVoice) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisVoiceSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisVoice) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisVoiceSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVSpeechSynthesisVoice) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVSpeechSynthesisVoiceSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -103,4 +117,3 @@ func (o *AVSpeechSynthesisVoice) VoiceTraits() AVSpeechSynthesisVoiceTraits {
 	_ret := objc.Send[AVSpeechSynthesisVoiceTraits](o.Ptr(), _aVSpeechSynthesisVoiceSelVoiceTraits)
 	return _ret
 }
-

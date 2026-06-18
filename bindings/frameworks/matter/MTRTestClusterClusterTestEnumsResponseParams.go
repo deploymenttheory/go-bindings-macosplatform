@@ -25,4 +25,3 @@ func MTRTestClusterClusterTestEnumsResponseParamsFromID(id objc.ID) *MTRTestClus
 	purego.Track(o)
 	return o
 }
-

@@ -16,10 +16,10 @@ type MTLIntersectionFunctionTableDescriptor struct {
 }
 
 var (
-	_clsMTLIntersectionFunctionTableDescriptor = _objcClass("MTLIntersectionFunctionTableDescriptor")
+	_clsMTLIntersectionFunctionTableDescriptor                                    = _objcClass("MTLIntersectionFunctionTableDescriptor")
 	_mTLIntersectionFunctionTableDescriptorSelIntersectionFunctionTableDescriptor = objc.RegisterName("intersectionFunctionTableDescriptor")
-	_mTLIntersectionFunctionTableDescriptorSelFunctionCount = objc.RegisterName("functionCount")
-	_mTLIntersectionFunctionTableDescriptorSelSetFunctionCount = objc.RegisterName("setFunctionCount:")
+	_mTLIntersectionFunctionTableDescriptorSelFunctionCount                       = objc.RegisterName("functionCount")
+	_mTLIntersectionFunctionTableDescriptorSelSetFunctionCount                    = objc.RegisterName("setFunctionCount:")
 )
 
 func MTLIntersectionFunctionTableDescriptorFromID(id objc.ID) *MTLIntersectionFunctionTableDescriptor {
@@ -35,7 +35,9 @@ func MTLIntersectionFunctionTableDescriptorFromID(id objc.ID) *MTLIntersectionFu
 // @method intersectionFunctionTableDescriptor @abstract Create an autoreleased intersection function table descriptor
 func MTLIntersectionFunctionTableDescriptorIntersectionFunctionTableDescriptor() *MTLIntersectionFunctionTableDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMTLIntersectionFunctionTableDescriptor), _mTLIntersectionFunctionTableDescriptorSelIntersectionFunctionTableDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLIntersectionFunctionTableDescriptorFromID(_ret)
 }
 
@@ -47,4 +49,3 @@ func (o *MTLIntersectionFunctionTableDescriptor) FunctionCount() uint {
 func (o *MTLIntersectionFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
 	o.Ptr().Send(_mTLIntersectionFunctionTableDescriptorSelSetFunctionCount, functionCount)
 }
-

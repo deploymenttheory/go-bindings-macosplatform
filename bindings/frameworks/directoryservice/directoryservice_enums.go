@@ -12,8 +12,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -32,13 +32,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -65,24 +65,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -123,9 +123,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -145,12 +145,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -177,14 +177,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -213,9 +213,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -234,36 +234,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -293,8 +307,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -314,26 +328,42 @@ func (e Idtype_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -355,27 +385,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -399,11 +429,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -428,46 +458,46 @@ func (e Qos_class_t) String() string {
 type TDirPatternMatch int64
 
 const (
-	EDSNoMatch1 TDirPatternMatch = 0
-	EDSAnyMatch TDirPatternMatch = 1
-	EDSBeginAppleReserve1 TDirPatternMatch = 2
-	EDSEndAppleReserve1 TDirPatternMatch = 8191
-	EDSExact TDirPatternMatch = 8193
-	EDSStartsWith TDirPatternMatch = 8194
-	EDSEndsWith TDirPatternMatch = 8195
-	EDSContains TDirPatternMatch = 8196
-	EDSLessThan TDirPatternMatch = 8197
-	EDSGreaterThan TDirPatternMatch = 8198
-	EDSLessEqual TDirPatternMatch = 8199
-	EDSGreaterEqual TDirPatternMatch = 8200
-	EDSWildCardPattern TDirPatternMatch = 8201
-	EDSRegularExpression TDirPatternMatch = 8202
-	EDSCompoundExpression TDirPatternMatch = 8203
-	EDSiExact TDirPatternMatch = 8449
-	EDSiStartsWith TDirPatternMatch = 8450
-	EDSiEndsWith TDirPatternMatch = 8451
-	EDSiContains TDirPatternMatch = 8452
-	EDSiLessThan TDirPatternMatch = 8453
-	EDSiGreaterThan TDirPatternMatch = 8454
-	EDSiLessEqual TDirPatternMatch = 8455
-	EDSiGreaterEqual TDirPatternMatch = 8456
-	EDSiWildCardPattern TDirPatternMatch = 8457
-	EDSiRegularExpression TDirPatternMatch = 8458
-	EDSiCompoundExpression TDirPatternMatch = 8459
-	EDSLocalNodeNames TDirPatternMatch = 8704
-	EDSSearchNodeName TDirPatternMatch = 8705
-	EDSConfigNodeName TDirPatternMatch = 8706
-	EDSLocalHostedNodes TDirPatternMatch = 8707
+	EDSNoMatch1                     TDirPatternMatch = 0
+	EDSAnyMatch                     TDirPatternMatch = 1
+	EDSBeginAppleReserve1           TDirPatternMatch = 2
+	EDSEndAppleReserve1             TDirPatternMatch = 8191
+	EDSExact                        TDirPatternMatch = 8193
+	EDSStartsWith                   TDirPatternMatch = 8194
+	EDSEndsWith                     TDirPatternMatch = 8195
+	EDSContains                     TDirPatternMatch = 8196
+	EDSLessThan                     TDirPatternMatch = 8197
+	EDSGreaterThan                  TDirPatternMatch = 8198
+	EDSLessEqual                    TDirPatternMatch = 8199
+	EDSGreaterEqual                 TDirPatternMatch = 8200
+	EDSWildCardPattern              TDirPatternMatch = 8201
+	EDSRegularExpression            TDirPatternMatch = 8202
+	EDSCompoundExpression           TDirPatternMatch = 8203
+	EDSiExact                       TDirPatternMatch = 8449
+	EDSiStartsWith                  TDirPatternMatch = 8450
+	EDSiEndsWith                    TDirPatternMatch = 8451
+	EDSiContains                    TDirPatternMatch = 8452
+	EDSiLessThan                    TDirPatternMatch = 8453
+	EDSiGreaterThan                 TDirPatternMatch = 8454
+	EDSiLessEqual                   TDirPatternMatch = 8455
+	EDSiGreaterEqual                TDirPatternMatch = 8456
+	EDSiWildCardPattern             TDirPatternMatch = 8457
+	EDSiRegularExpression           TDirPatternMatch = 8458
+	EDSiCompoundExpression          TDirPatternMatch = 8459
+	EDSLocalNodeNames               TDirPatternMatch = 8704
+	EDSSearchNodeName               TDirPatternMatch = 8705
+	EDSConfigNodeName               TDirPatternMatch = 8706
+	EDSLocalHostedNodes             TDirPatternMatch = 8707
 	EDSAuthenticationSearchNodeName TDirPatternMatch = 8705
-	EDSContactsSearchNodeName TDirPatternMatch = 8708
-	EDSNetworkSearchNodeName TDirPatternMatch = 8709
-	EDSDefaultNetworkNodes TDirPatternMatch = 8710
-	EDSCacheNodeName TDirPatternMatch = 8711
-	DDSBeginPlugInCustom TDirPatternMatch = 12288
-	EDSEndPlugInCustom TDirPatternMatch = 20479
-	EDSBeginAppleReserve2 TDirPatternMatch = 20480
-	EDSEndAppleReserve2 TDirPatternMatch = 65534
-	EDSNoMatch2 TDirPatternMatch = 65535
+	EDSContactsSearchNodeName       TDirPatternMatch = 8708
+	EDSNetworkSearchNodeName        TDirPatternMatch = 8709
+	EDSDefaultNetworkNodes          TDirPatternMatch = 8710
+	EDSCacheNodeName                TDirPatternMatch = 8711
+	DDSBeginPlugInCustom            TDirPatternMatch = 12288
+	EDSEndPlugInCustom              TDirPatternMatch = 20479
+	EDSBeginAppleReserve2           TDirPatternMatch = 20480
+	EDSEndAppleReserve2             TDirPatternMatch = 65534
+	EDSNoMatch2                     TDirPatternMatch = 65535
 )
 
 func (e TDirPatternMatch) String() string {
@@ -559,239 +589,239 @@ func (e TDirPatternMatch) String() string {
 type TDirStatus int64
 
 const (
-	EDSNoErr TDirStatus = 0
-	EDSOpenFailed TDirStatus = -14000
-	EDSCloseFailed TDirStatus = -14001
-	EDSOpenNodeFailed TDirStatus = -14002
-	EDSBadDirRefences TDirStatus = -14003
-	EDSNullRecordReference TDirStatus = -14004
-	EDSMaxSessionsOpen TDirStatus = -14005
-	EDSCannotAccessSession TDirStatus = -14006
-	EDSDirSrvcNotOpened TDirStatus = -14007
-	EDSNodeNotFound TDirStatus = -14008
-	EDSUnknownNodeName TDirStatus = -14009
-	EDSRegisterCustomFailed TDirStatus = -14010
-	EDSGetCustomFailed TDirStatus = -14011
-	EDSUnRegisterFailed TDirStatus = -14012
-	EDSLocalDSDaemonInUse TDirStatus = -14015
-	EDSNormalDSDaemonInUse TDirStatus = -14016
-	EDSAllocationFailed TDirStatus = -14050
-	EDSDeAllocateFailed TDirStatus = -14051
-	EDSCustomBlockFailed TDirStatus = -14052
-	EDSCustomUnblockFailed TDirStatus = -14053
-	EDSCustomYieldFailed TDirStatus = -14054
-	EDSCorruptBuffer TDirStatus = -14060
-	EDSInvalidIndex TDirStatus = -14061
-	EDSIndexOutOfRange TDirStatus = -14062
-	EDSIndexNotFound TDirStatus = -14063
-	EDSCorruptRecEntryData TDirStatus = -14065
-	EDSRefSpaceFull TDirStatus = -14069
-	EDSRefTableAllocError TDirStatus = -14070
-	EDSInvalidReference TDirStatus = -14071
-	EDSInvalidRefType TDirStatus = -14072
-	EDSInvalidDirRef TDirStatus = -14073
-	EDSInvalidNodeRef TDirStatus = -14074
-	EDSInvalidRecordRef TDirStatus = -14075
-	EDSInvalidAttrListRef TDirStatus = -14076
-	EDSInvalidAttrValueRef TDirStatus = -14077
-	EDSInvalidContinueData TDirStatus = -14078
-	EDSInvalidBuffFormat TDirStatus = -14079
-	EDSInvalidPatternMatchType TDirStatus = -14080
-	EDSRefTableError TDirStatus = -14081
-	EDSRefTableNilError TDirStatus = -14082
-	EDSRefTableIndexOutOfBoundsError TDirStatus = -14083
-	EDSRefTableEntryNilError TDirStatus = -14084
-	EDSRefTableCSBPAllocError TDirStatus = -14085
-	EDSRefTableFWAllocError TDirStatus = -14086
-	EDSAuthFailed TDirStatus = -14090
-	EDSAuthMethodNotSupported TDirStatus = -14091
-	EDSAuthResponseBufTooSmall TDirStatus = -14092
-	EDSAuthParameterError TDirStatus = -14093
-	EDSAuthInBuffFormatError TDirStatus = -14094
-	EDSAuthNoSuchEntity TDirStatus = -14095
-	EDSAuthBadPassword TDirStatus = -14096
-	EDSAuthContinueDataBad TDirStatus = -14097
-	EDSAuthUnknownUser TDirStatus = -14098
-	EDSAuthInvalidUserName TDirStatus = -14099
-	EDSAuthCannotRecoverPasswd TDirStatus = -14100
-	EDSAuthFailedClearTextOnly TDirStatus = -14101
-	EDSAuthNoAuthServerFound TDirStatus = -14102
-	EDSAuthServerError TDirStatus = -14103
-	EDSInvalidContext TDirStatus = -14104
-	EDSBadContextData TDirStatus = -14105
-	EDSPermissionError TDirStatus = -14120
-	EDSReadOnly TDirStatus = -14121
-	EDSInvalidDomain TDirStatus = -14122
-	ENetInfoError TDirStatus = -14123
-	EDSInvalidRecordType TDirStatus = -14130
-	EDSInvalidAttributeType TDirStatus = -14131
-	EDSInvalidRecordName TDirStatus = -14133
-	EDSAttributeNotFound TDirStatus = -14134
-	EDSRecordAlreadyExists TDirStatus = -14135
-	EDSRecordNotFound TDirStatus = -14136
-	EDSAttributeDoesNotExist TDirStatus = -14137
-	EDSRecordTypeDisabled TDirStatus = -14138
-	EDSNoStdMappingAvailable TDirStatus = -14140
-	EDSInvalidNativeMapping TDirStatus = -14141
-	EDSSchemaError TDirStatus = -14142
-	EDSAttributeValueNotFound TDirStatus = -14143
-	EDSVersionMismatch TDirStatus = -14149
-	EDSPlugInConfigFileError TDirStatus = -14150
-	EDSInvalidPlugInConfigData TDirStatus = -14151
-	EDSAuthNewPasswordRequired TDirStatus = -14161
-	EDSAuthPasswordExpired TDirStatus = -14162
-	EDSAuthPasswordQualityCheckFailed TDirStatus = -14165
-	EDSAuthAccountDisabled TDirStatus = -14167
-	EDSAuthAccountExpired TDirStatus = -14168
-	EDSAuthAccountInactive TDirStatus = -14169
-	EDSAuthPasswordTooShort TDirStatus = -14170
-	EDSAuthPasswordTooLong TDirStatus = -14171
-	EDSAuthPasswordNeedsLetter TDirStatus = -14172
-	EDSAuthPasswordNeedsDigit TDirStatus = -14173
-	EDSAuthPasswordChangeTooSoon TDirStatus = -14174
-	EDSAuthInvalidLogonHours TDirStatus = -14175
-	EDSAuthInvalidComputer TDirStatus = -14176
-	EDSAuthPrimaryUnreachable TDirStatus = -14177
-	EDSAuthMasterUnreachable TDirStatus = -14177
-	EDSNullParameter TDirStatus = -14200
-	EDSNullDataBuff TDirStatus = -14201
-	EDSNullNodeName TDirStatus = -14202
-	EDSNullRecEntryPtr TDirStatus = -14203
-	EDSNullRecName TDirStatus = -14204
-	EDSNullRecNameList TDirStatus = -14205
-	EDSNullRecType TDirStatus = -14206
-	EDSNullRecTypeList TDirStatus = -14207
-	EDSNullAttribute TDirStatus = -14208
-	EDSNullAttributeAccess TDirStatus = -14209
-	EDSNullAttributeValue TDirStatus = -14210
-	EDSNullAttributeType TDirStatus = -14211
-	EDSNullAttributeTypeList TDirStatus = -14212
-	EDSNullAttributeControlPtr TDirStatus = -14213
-	EDSNullAttributeRequestList TDirStatus = -14214
-	EDSNullDataList TDirStatus = -14215
-	EDSNullDirNodeTypeList TDirStatus = -14216
-	EDSNullAutMethod TDirStatus = -14217
-	EDSNullAuthStepData TDirStatus = -14218
-	EDSNullAuthStepDataResp TDirStatus = -14219
-	EDSNullNodeInfoTypeList TDirStatus = -14220
-	EDSNullPatternMatch TDirStatus = -14221
-	EDSNullNodeNamePattern TDirStatus = -14222
-	EDSNullTargetArgument TDirStatus = -14223
-	EDSEmptyParameter TDirStatus = -14230
-	EDSEmptyBuffer TDirStatus = -14231
-	EDSEmptyNodeName TDirStatus = -14232
-	EDSEmptyRecordName TDirStatus = -14233
-	EDSEmptyRecordNameList TDirStatus = -14234
-	EDSEmptyRecordType TDirStatus = -14235
-	EDSEmptyRecordTypeList TDirStatus = -14236
-	EDSEmptyRecordEntry TDirStatus = -14237
-	EDSEmptyPatternMatch TDirStatus = -14238
-	EDSEmptyNodeNamePattern TDirStatus = -14239
-	EDSEmptyAttribute TDirStatus = -14240
-	EDSEmptyAttributeType TDirStatus = -14241
-	EDSEmptyAttributeTypeList TDirStatus = -14242
-	EDSEmptyAttributeValue TDirStatus = -14243
-	EDSEmptyAttributeRequestList TDirStatus = -14244
-	EDSEmptyDataList TDirStatus = -14245
-	EDSEmptyNodeInfoTypeList TDirStatus = -14246
-	EDSEmptyAuthMethod TDirStatus = -14247
-	EDSEmptyAuthStepData TDirStatus = -14248
-	EDSEmptyAuthStepDataResp TDirStatus = -14249
-	EDSEmptyPattern2Match TDirStatus = -14250
-	EDSBadDataNodeLength TDirStatus = -14255
-	EDSBadDataNodeFormat TDirStatus = -14256
-	EDSBadSourceDataNode TDirStatus = -14257
-	EDSBadTargetDataNode TDirStatus = -14258
-	EDSBufferTooSmall TDirStatus = -14260
-	EDSUnknownMatchType TDirStatus = -14261
-	EDSUnSupportedMatchType TDirStatus = -14262
-	EDSInvalDataList TDirStatus = -14263
-	EDSAttrListError TDirStatus = -14264
-	EServerNotRunning TDirStatus = -14270
-	EUnknownAPICall TDirStatus = -14271
-	EUnknownServerError TDirStatus = -14272
-	EUnknownPlugIn TDirStatus = -14273
-	EPlugInDataError TDirStatus = -14274
-	EPlugInNotFound TDirStatus = -14275
-	EPlugInError TDirStatus = -14276
-	EPlugInInitError TDirStatus = -14277
-	EPlugInNotActive TDirStatus = -14278
-	EPlugInFailedToInitialize TDirStatus = -14279
-	EPlugInCallTimedOut TDirStatus = -14280
-	ENoSearchNodesFound TDirStatus = -14290
-	ESearchPathNotDefined TDirStatus = -14291
-	ENotHandledByThisNode TDirStatus = -14292
-	EIPCSendError TDirStatus = -14330
-	EIPCReceiveError TDirStatus = -14331
-	EServerReplyError TDirStatus = -14332
-	EDSTCPSendError TDirStatus = -14350
-	EDSTCPReceiveError TDirStatus = -14351
-	EDSTCPVersionMismatch TDirStatus = -14352
-	EDSIPUnreachable TDirStatus = -14353
-	EDSUnknownHost TDirStatus = -14354
-	EPluginHandlerNotLoaded TDirStatus = -14400
-	ENoPluginsLoaded TDirStatus = -14402
-	EPluginAlreadyLoaded TDirStatus = -14404
-	EPluginVersionNotFound TDirStatus = -14406
-	EPluginNameNotFound TDirStatus = -14408
-	ENoPluginFactoriesFound TDirStatus = -14410
-	EPluginConfigAvailNotFound TDirStatus = -14412
-	EPluginConfigFileNotFound TDirStatus = -14414
-	ECFMGetFileSysRepErr TDirStatus = -14450
-	ECFPlugInGetBundleErr TDirStatus = -14452
-	ECFBndleGetInfoDictErr TDirStatus = -14454
-	ECFDictGetValueErr TDirStatus = -14456
-	EDSServerTimeout TDirStatus = -14470
-	EDSContinue TDirStatus = -14471
-	EDSInvalidHandle TDirStatus = -14472
-	EDSSendFailed TDirStatus = -14473
-	EDSReceiveFailed TDirStatus = -14474
-	EDSBadPacket TDirStatus = -14475
-	EDSInvalidTag TDirStatus = -14476
-	EDSInvalidSession TDirStatus = -14477
-	EDSInvalidName TDirStatus = -14478
-	EDSUserUnknown TDirStatus = -14479
-	EDSUnrecoverablePassword TDirStatus = -14480
-	EDSAuthenticationFailed TDirStatus = -14481
-	EDSBogusServer TDirStatus = -14482
-	EDSOperationFailed TDirStatus = -14483
-	EDSNotAuthorized TDirStatus = -14484
-	EDSNetInfoError TDirStatus = -14485
-	EDSContactPrimary TDirStatus = -14486
-	EDSContactMaster TDirStatus = -14486
-	EDSServiceUnavailable TDirStatus = -14487
-	EDSInvalidFilePath TDirStatus = -14488
-	EDSOperationTimeout TDirStatus = -14489
-	EFWGetDirNodeNameErr1 TDirStatus = -14501
-	EFWGetDirNodeNameErr2 TDirStatus = -14502
-	EFWGetDirNodeNameErr3 TDirStatus = -14503
-	EFWGetDirNodeNameErr4 TDirStatus = -14504
-	EParameterSendError TDirStatus = -14700
-	EParameterReceiveError TDirStatus = -14720
-	EServerSendError TDirStatus = -14740
-	EServerReceiveError TDirStatus = -14760
-	EMemoryError TDirStatus = -14900
-	EMemoryAllocError TDirStatus = -14901
-	EServerError TDirStatus = -14910
-	EParameterError TDirStatus = -14915
-	EDataReceiveErr_NoDirRef TDirStatus = -14950
-	EDataReceiveErr_NoRecRef TDirStatus = -14951
-	EDataReceiveErr_NoAttrListRef TDirStatus = -14952
+	EDSNoErr                           TDirStatus = 0
+	EDSOpenFailed                      TDirStatus = -14000
+	EDSCloseFailed                     TDirStatus = -14001
+	EDSOpenNodeFailed                  TDirStatus = -14002
+	EDSBadDirRefences                  TDirStatus = -14003
+	EDSNullRecordReference             TDirStatus = -14004
+	EDSMaxSessionsOpen                 TDirStatus = -14005
+	EDSCannotAccessSession             TDirStatus = -14006
+	EDSDirSrvcNotOpened                TDirStatus = -14007
+	EDSNodeNotFound                    TDirStatus = -14008
+	EDSUnknownNodeName                 TDirStatus = -14009
+	EDSRegisterCustomFailed            TDirStatus = -14010
+	EDSGetCustomFailed                 TDirStatus = -14011
+	EDSUnRegisterFailed                TDirStatus = -14012
+	EDSLocalDSDaemonInUse              TDirStatus = -14015
+	EDSNormalDSDaemonInUse             TDirStatus = -14016
+	EDSAllocationFailed                TDirStatus = -14050
+	EDSDeAllocateFailed                TDirStatus = -14051
+	EDSCustomBlockFailed               TDirStatus = -14052
+	EDSCustomUnblockFailed             TDirStatus = -14053
+	EDSCustomYieldFailed               TDirStatus = -14054
+	EDSCorruptBuffer                   TDirStatus = -14060
+	EDSInvalidIndex                    TDirStatus = -14061
+	EDSIndexOutOfRange                 TDirStatus = -14062
+	EDSIndexNotFound                   TDirStatus = -14063
+	EDSCorruptRecEntryData             TDirStatus = -14065
+	EDSRefSpaceFull                    TDirStatus = -14069
+	EDSRefTableAllocError              TDirStatus = -14070
+	EDSInvalidReference                TDirStatus = -14071
+	EDSInvalidRefType                  TDirStatus = -14072
+	EDSInvalidDirRef                   TDirStatus = -14073
+	EDSInvalidNodeRef                  TDirStatus = -14074
+	EDSInvalidRecordRef                TDirStatus = -14075
+	EDSInvalidAttrListRef              TDirStatus = -14076
+	EDSInvalidAttrValueRef             TDirStatus = -14077
+	EDSInvalidContinueData             TDirStatus = -14078
+	EDSInvalidBuffFormat               TDirStatus = -14079
+	EDSInvalidPatternMatchType         TDirStatus = -14080
+	EDSRefTableError                   TDirStatus = -14081
+	EDSRefTableNilError                TDirStatus = -14082
+	EDSRefTableIndexOutOfBoundsError   TDirStatus = -14083
+	EDSRefTableEntryNilError           TDirStatus = -14084
+	EDSRefTableCSBPAllocError          TDirStatus = -14085
+	EDSRefTableFWAllocError            TDirStatus = -14086
+	EDSAuthFailed                      TDirStatus = -14090
+	EDSAuthMethodNotSupported          TDirStatus = -14091
+	EDSAuthResponseBufTooSmall         TDirStatus = -14092
+	EDSAuthParameterError              TDirStatus = -14093
+	EDSAuthInBuffFormatError           TDirStatus = -14094
+	EDSAuthNoSuchEntity                TDirStatus = -14095
+	EDSAuthBadPassword                 TDirStatus = -14096
+	EDSAuthContinueDataBad             TDirStatus = -14097
+	EDSAuthUnknownUser                 TDirStatus = -14098
+	EDSAuthInvalidUserName             TDirStatus = -14099
+	EDSAuthCannotRecoverPasswd         TDirStatus = -14100
+	EDSAuthFailedClearTextOnly         TDirStatus = -14101
+	EDSAuthNoAuthServerFound           TDirStatus = -14102
+	EDSAuthServerError                 TDirStatus = -14103
+	EDSInvalidContext                  TDirStatus = -14104
+	EDSBadContextData                  TDirStatus = -14105
+	EDSPermissionError                 TDirStatus = -14120
+	EDSReadOnly                        TDirStatus = -14121
+	EDSInvalidDomain                   TDirStatus = -14122
+	ENetInfoError                      TDirStatus = -14123
+	EDSInvalidRecordType               TDirStatus = -14130
+	EDSInvalidAttributeType            TDirStatus = -14131
+	EDSInvalidRecordName               TDirStatus = -14133
+	EDSAttributeNotFound               TDirStatus = -14134
+	EDSRecordAlreadyExists             TDirStatus = -14135
+	EDSRecordNotFound                  TDirStatus = -14136
+	EDSAttributeDoesNotExist           TDirStatus = -14137
+	EDSRecordTypeDisabled              TDirStatus = -14138
+	EDSNoStdMappingAvailable           TDirStatus = -14140
+	EDSInvalidNativeMapping            TDirStatus = -14141
+	EDSSchemaError                     TDirStatus = -14142
+	EDSAttributeValueNotFound          TDirStatus = -14143
+	EDSVersionMismatch                 TDirStatus = -14149
+	EDSPlugInConfigFileError           TDirStatus = -14150
+	EDSInvalidPlugInConfigData         TDirStatus = -14151
+	EDSAuthNewPasswordRequired         TDirStatus = -14161
+	EDSAuthPasswordExpired             TDirStatus = -14162
+	EDSAuthPasswordQualityCheckFailed  TDirStatus = -14165
+	EDSAuthAccountDisabled             TDirStatus = -14167
+	EDSAuthAccountExpired              TDirStatus = -14168
+	EDSAuthAccountInactive             TDirStatus = -14169
+	EDSAuthPasswordTooShort            TDirStatus = -14170
+	EDSAuthPasswordTooLong             TDirStatus = -14171
+	EDSAuthPasswordNeedsLetter         TDirStatus = -14172
+	EDSAuthPasswordNeedsDigit          TDirStatus = -14173
+	EDSAuthPasswordChangeTooSoon       TDirStatus = -14174
+	EDSAuthInvalidLogonHours           TDirStatus = -14175
+	EDSAuthInvalidComputer             TDirStatus = -14176
+	EDSAuthPrimaryUnreachable          TDirStatus = -14177
+	EDSAuthMasterUnreachable           TDirStatus = -14177
+	EDSNullParameter                   TDirStatus = -14200
+	EDSNullDataBuff                    TDirStatus = -14201
+	EDSNullNodeName                    TDirStatus = -14202
+	EDSNullRecEntryPtr                 TDirStatus = -14203
+	EDSNullRecName                     TDirStatus = -14204
+	EDSNullRecNameList                 TDirStatus = -14205
+	EDSNullRecType                     TDirStatus = -14206
+	EDSNullRecTypeList                 TDirStatus = -14207
+	EDSNullAttribute                   TDirStatus = -14208
+	EDSNullAttributeAccess             TDirStatus = -14209
+	EDSNullAttributeValue              TDirStatus = -14210
+	EDSNullAttributeType               TDirStatus = -14211
+	EDSNullAttributeTypeList           TDirStatus = -14212
+	EDSNullAttributeControlPtr         TDirStatus = -14213
+	EDSNullAttributeRequestList        TDirStatus = -14214
+	EDSNullDataList                    TDirStatus = -14215
+	EDSNullDirNodeTypeList             TDirStatus = -14216
+	EDSNullAutMethod                   TDirStatus = -14217
+	EDSNullAuthStepData                TDirStatus = -14218
+	EDSNullAuthStepDataResp            TDirStatus = -14219
+	EDSNullNodeInfoTypeList            TDirStatus = -14220
+	EDSNullPatternMatch                TDirStatus = -14221
+	EDSNullNodeNamePattern             TDirStatus = -14222
+	EDSNullTargetArgument              TDirStatus = -14223
+	EDSEmptyParameter                  TDirStatus = -14230
+	EDSEmptyBuffer                     TDirStatus = -14231
+	EDSEmptyNodeName                   TDirStatus = -14232
+	EDSEmptyRecordName                 TDirStatus = -14233
+	EDSEmptyRecordNameList             TDirStatus = -14234
+	EDSEmptyRecordType                 TDirStatus = -14235
+	EDSEmptyRecordTypeList             TDirStatus = -14236
+	EDSEmptyRecordEntry                TDirStatus = -14237
+	EDSEmptyPatternMatch               TDirStatus = -14238
+	EDSEmptyNodeNamePattern            TDirStatus = -14239
+	EDSEmptyAttribute                  TDirStatus = -14240
+	EDSEmptyAttributeType              TDirStatus = -14241
+	EDSEmptyAttributeTypeList          TDirStatus = -14242
+	EDSEmptyAttributeValue             TDirStatus = -14243
+	EDSEmptyAttributeRequestList       TDirStatus = -14244
+	EDSEmptyDataList                   TDirStatus = -14245
+	EDSEmptyNodeInfoTypeList           TDirStatus = -14246
+	EDSEmptyAuthMethod                 TDirStatus = -14247
+	EDSEmptyAuthStepData               TDirStatus = -14248
+	EDSEmptyAuthStepDataResp           TDirStatus = -14249
+	EDSEmptyPattern2Match              TDirStatus = -14250
+	EDSBadDataNodeLength               TDirStatus = -14255
+	EDSBadDataNodeFormat               TDirStatus = -14256
+	EDSBadSourceDataNode               TDirStatus = -14257
+	EDSBadTargetDataNode               TDirStatus = -14258
+	EDSBufferTooSmall                  TDirStatus = -14260
+	EDSUnknownMatchType                TDirStatus = -14261
+	EDSUnSupportedMatchType            TDirStatus = -14262
+	EDSInvalDataList                   TDirStatus = -14263
+	EDSAttrListError                   TDirStatus = -14264
+	EServerNotRunning                  TDirStatus = -14270
+	EUnknownAPICall                    TDirStatus = -14271
+	EUnknownServerError                TDirStatus = -14272
+	EUnknownPlugIn                     TDirStatus = -14273
+	EPlugInDataError                   TDirStatus = -14274
+	EPlugInNotFound                    TDirStatus = -14275
+	EPlugInError                       TDirStatus = -14276
+	EPlugInInitError                   TDirStatus = -14277
+	EPlugInNotActive                   TDirStatus = -14278
+	EPlugInFailedToInitialize          TDirStatus = -14279
+	EPlugInCallTimedOut                TDirStatus = -14280
+	ENoSearchNodesFound                TDirStatus = -14290
+	ESearchPathNotDefined              TDirStatus = -14291
+	ENotHandledByThisNode              TDirStatus = -14292
+	EIPCSendError                      TDirStatus = -14330
+	EIPCReceiveError                   TDirStatus = -14331
+	EServerReplyError                  TDirStatus = -14332
+	EDSTCPSendError                    TDirStatus = -14350
+	EDSTCPReceiveError                 TDirStatus = -14351
+	EDSTCPVersionMismatch              TDirStatus = -14352
+	EDSIPUnreachable                   TDirStatus = -14353
+	EDSUnknownHost                     TDirStatus = -14354
+	EPluginHandlerNotLoaded            TDirStatus = -14400
+	ENoPluginsLoaded                   TDirStatus = -14402
+	EPluginAlreadyLoaded               TDirStatus = -14404
+	EPluginVersionNotFound             TDirStatus = -14406
+	EPluginNameNotFound                TDirStatus = -14408
+	ENoPluginFactoriesFound            TDirStatus = -14410
+	EPluginConfigAvailNotFound         TDirStatus = -14412
+	EPluginConfigFileNotFound          TDirStatus = -14414
+	ECFMGetFileSysRepErr               TDirStatus = -14450
+	ECFPlugInGetBundleErr              TDirStatus = -14452
+	ECFBndleGetInfoDictErr             TDirStatus = -14454
+	ECFDictGetValueErr                 TDirStatus = -14456
+	EDSServerTimeout                   TDirStatus = -14470
+	EDSContinue                        TDirStatus = -14471
+	EDSInvalidHandle                   TDirStatus = -14472
+	EDSSendFailed                      TDirStatus = -14473
+	EDSReceiveFailed                   TDirStatus = -14474
+	EDSBadPacket                       TDirStatus = -14475
+	EDSInvalidTag                      TDirStatus = -14476
+	EDSInvalidSession                  TDirStatus = -14477
+	EDSInvalidName                     TDirStatus = -14478
+	EDSUserUnknown                     TDirStatus = -14479
+	EDSUnrecoverablePassword           TDirStatus = -14480
+	EDSAuthenticationFailed            TDirStatus = -14481
+	EDSBogusServer                     TDirStatus = -14482
+	EDSOperationFailed                 TDirStatus = -14483
+	EDSNotAuthorized                   TDirStatus = -14484
+	EDSNetInfoError                    TDirStatus = -14485
+	EDSContactPrimary                  TDirStatus = -14486
+	EDSContactMaster                   TDirStatus = -14486
+	EDSServiceUnavailable              TDirStatus = -14487
+	EDSInvalidFilePath                 TDirStatus = -14488
+	EDSOperationTimeout                TDirStatus = -14489
+	EFWGetDirNodeNameErr1              TDirStatus = -14501
+	EFWGetDirNodeNameErr2              TDirStatus = -14502
+	EFWGetDirNodeNameErr3              TDirStatus = -14503
+	EFWGetDirNodeNameErr4              TDirStatus = -14504
+	EParameterSendError                TDirStatus = -14700
+	EParameterReceiveError             TDirStatus = -14720
+	EServerSendError                   TDirStatus = -14740
+	EServerReceiveError                TDirStatus = -14760
+	EMemoryError                       TDirStatus = -14900
+	EMemoryAllocError                  TDirStatus = -14901
+	EServerError                       TDirStatus = -14910
+	EParameterError                    TDirStatus = -14915
+	EDataReceiveErr_NoDirRef           TDirStatus = -14950
+	EDataReceiveErr_NoRecRef           TDirStatus = -14951
+	EDataReceiveErr_NoAttrListRef      TDirStatus = -14952
 	EDataReceiveErr_NoAttrValueListRef TDirStatus = -14953
-	EDataReceiveErr_NoAttrEntry TDirStatus = -14954
-	EDataReceiveErr_NoAttrValueEntry TDirStatus = -14955
-	EDataReceiveErr_NoNodeCount TDirStatus = -14956
-	EDataReceiveErr_NoAttrCount TDirStatus = -14957
-	EDataReceiveErr_NoRecEntry TDirStatus = -14958
-	EDataReceiveErr_NoRecEntryCount TDirStatus = -14959
-	EDataReceiveErr_NoRecMatchCount TDirStatus = -14960
-	EDataReceiveErr_NoDataBuff TDirStatus = -14961
-	EDataReceiveErr_NoContinueData TDirStatus = -14962
-	EDataReceiveErr_NoNodeChangeToken TDirStatus = -14963
-	ENoLongerSupported TDirStatus = -14986
-	EUndefinedError TDirStatus = -14987
-	ENotYetImplemented TDirStatus = -14988
-	EDSLastValue TDirStatus = -14999
+	EDataReceiveErr_NoAttrEntry        TDirStatus = -14954
+	EDataReceiveErr_NoAttrValueEntry   TDirStatus = -14955
+	EDataReceiveErr_NoNodeCount        TDirStatus = -14956
+	EDataReceiveErr_NoAttrCount        TDirStatus = -14957
+	EDataReceiveErr_NoRecEntry         TDirStatus = -14958
+	EDataReceiveErr_NoRecEntryCount    TDirStatus = -14959
+	EDataReceiveErr_NoRecMatchCount    TDirStatus = -14960
+	EDataReceiveErr_NoDataBuff         TDirStatus = -14961
+	EDataReceiveErr_NoContinueData     TDirStatus = -14962
+	EDataReceiveErr_NoNodeChangeToken  TDirStatus = -14963
+	ENoLongerSupported                 TDirStatus = -14986
+	EUndefinedError                    TDirStatus = -14987
+	ENotYetImplemented                 TDirStatus = -14988
+	EDSLastValue                       TDirStatus = -14999
 )
 
 func (e TDirStatus) String() string {
@@ -1262,4 +1292,3 @@ func (e TDirStatus) String() string {
 		return fmt.Sprintf("TDirStatus(%d)", int64(e))
 	}
 }
-

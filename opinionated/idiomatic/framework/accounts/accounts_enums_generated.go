@@ -11,9 +11,9 @@ import (
 type ACAccountCredentialRenewResult int64
 
 const (
-	ACAccountCredentialRenewResultRenewed ACAccountCredentialRenewResult = 0
+	ACAccountCredentialRenewResultRenewed  ACAccountCredentialRenewResult = 0
 	ACAccountCredentialRenewResultRejected ACAccountCredentialRenewResult = 1
-	ACAccountCredentialRenewResultFailed ACAccountCredentialRenewResult = 2
+	ACAccountCredentialRenewResultFailed   ACAccountCredentialRenewResult = 2
 )
 
 func (e ACAccountCredentialRenewResult) String() string {
@@ -28,4 +28,3 @@ func (e ACAccountCredentialRenewResult) String() string {
 		return fmt.Sprintf("ACAccountCredentialRenewResult(%d)", int64(e))
 	}
 }
-

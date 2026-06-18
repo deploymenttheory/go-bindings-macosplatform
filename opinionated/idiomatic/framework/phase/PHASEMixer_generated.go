@@ -68,4 +68,3 @@ type Mixerable interface {
 }
 
 var _ Mixerable = (*Mixer)(nil)
-

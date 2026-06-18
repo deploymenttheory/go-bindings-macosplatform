@@ -18,7 +18,9 @@ type AccelerationStructureMotionCurveGeometryDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLAccelerationStructureMotionCurveGeometryDescriptor].
-func (x *AccelerationStructureMotionCurveGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionCurveGeometryDescriptor { return x.inner }
+func (x *AccelerationStructureMotionCurveGeometryDescriptor) Unwrap() *raw.MTLAccelerationStructureMotionCurveGeometryDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointBuf
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -79,7 +83,9 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusBuffers(i
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.MTLMotionKeyframeData](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -358,7 +364,9 @@ func (x *AccelerationStructureMotionCurveGeometryDescriptor) SetCurveEndCaps(cur
 	x.inner.SetCurveEndCaps(curveEndCaps)
 }
 
-func (x *AccelerationStructureMotionCurveGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+func (x *AccelerationStructureMotionCurveGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
+	return &x.inner.MTLAccelerationStructureGeometryDescriptor
+}
 
 // AccelerationStructureMotionCurveGeometryDescriptorable is the interface implemented by [AccelerationStructureMotionCurveGeometryDescriptor], for mocking and DI.
 type AccelerationStructureMotionCurveGeometryDescriptorable interface {
@@ -419,4 +427,3 @@ type AccelerationStructureMotionCurveGeometryDescriptorable interface {
 }
 
 var _ AccelerationStructureMotionCurveGeometryDescriptorable = (*AccelerationStructureMotionCurveGeometryDescriptor)(nil)
-

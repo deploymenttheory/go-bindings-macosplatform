@@ -17,19 +17,19 @@ type MPSNNFilterNode struct {
 }
 
 var (
-	_clsMPSNNFilterNode = _objcClass("MPSNNFilterNode")
-	_mPSNNFilterNodeSelGradientFilterWithSource = objc.RegisterName("gradientFilterWithSource:")
-	_mPSNNFilterNodeSelGradientFilterWithSources = objc.RegisterName("gradientFilterWithSources:")
-	_mPSNNFilterNodeSelGradientFiltersWithSources = objc.RegisterName("gradientFiltersWithSources:")
-	_mPSNNFilterNodeSelGradientFiltersWithSource = objc.RegisterName("gradientFiltersWithSource:")
+	_clsMPSNNFilterNode                                           = _objcClass("MPSNNFilterNode")
+	_mPSNNFilterNodeSelGradientFilterWithSource                   = objc.RegisterName("gradientFilterWithSource:")
+	_mPSNNFilterNodeSelGradientFilterWithSources                  = objc.RegisterName("gradientFilterWithSources:")
+	_mPSNNFilterNodeSelGradientFiltersWithSources                 = objc.RegisterName("gradientFiltersWithSources:")
+	_mPSNNFilterNodeSelGradientFiltersWithSource                  = objc.RegisterName("gradientFiltersWithSource:")
 	_mPSNNFilterNodeSelTrainingGraphWithSourceGradientNodeHandler = objc.RegisterName("trainingGraphWithSourceGradient:nodeHandler:")
-	_mPSNNFilterNodeSelResultImage = objc.RegisterName("resultImage")
-	_mPSNNFilterNodeSelResultState = objc.RegisterName("resultState")
-	_mPSNNFilterNodeSelResultStates = objc.RegisterName("resultStates")
-	_mPSNNFilterNodeSelPaddingPolicy = objc.RegisterName("paddingPolicy")
-	_mPSNNFilterNodeSelSetPaddingPolicy = objc.RegisterName("setPaddingPolicy:")
-	_mPSNNFilterNodeSelLabel = objc.RegisterName("label")
-	_mPSNNFilterNodeSelSetLabel = objc.RegisterName("setLabel:")
+	_mPSNNFilterNodeSelResultImage                                = objc.RegisterName("resultImage")
+	_mPSNNFilterNodeSelResultState                                = objc.RegisterName("resultState")
+	_mPSNNFilterNodeSelResultStates                               = objc.RegisterName("resultStates")
+	_mPSNNFilterNodeSelPaddingPolicy                              = objc.RegisterName("paddingPolicy")
+	_mPSNNFilterNodeSelSetPaddingPolicy                           = objc.RegisterName("setPaddingPolicy:")
+	_mPSNNFilterNodeSelLabel                                      = objc.RegisterName("label")
+	_mPSNNFilterNodeSelSetLabel                                   = objc.RegisterName("setLabel:")
 )
 
 func MPSNNFilterNodeFromID(id objc.ID) *MPSNNFilterNode {
@@ -45,14 +45,18 @@ func MPSNNFilterNodeFromID(id objc.ID) *MPSNNFilterNode {
 // @abstract Return the gradient (backwards) version of this filter. @discussion The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target. @param  gradientImage The gradient images corresponding with the resultImage of the target
 func (o *MPSNNFilterNode) GradientFilterWithSource(gradientImage *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNGradientFilterNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNFilterNodeSelGradientFilterWithSource, gradientImage.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNGradientFilterNodeFromID(_ret)
 }
 
 // @abstract Return the gradient (backwards) version of this filter. @discussion The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target. @param  gradientImages The gradient images corresponding with the resultImage of the target
 func (o *MPSNNFilterNode) GradientFilterWithSources(gradientImages *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNGradientFilterNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNFilterNodeSelGradientFilterWithSources, gradientImages)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNGradientFilterNodeFromID(_ret)
 }
 
@@ -96,14 +100,18 @@ func (o *MPSNNFilterNode) TrainingGraphWithSourceGradientNodeHandler(gradientIma
 // @abstract   Get the node representing the image result of the filter @discussion Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
 func (o *MPSNNFilterNode) ResultImage() *mpsneuralnetwork.MPSNNImageNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNFilterNodeSelResultImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNImageNodeFromID(_ret)
 }
 
 // @abstract   convenience method for resultStates[0] @discussion  If resultStates is nil, returns nil
 func (o *MPSNNFilterNode) ResultState() *mpsneuralnetwork.MPSNNStateNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNFilterNodeSelResultState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpsneuralnetwork.MPSNNStateNodeFromID(_ret)
 }
 
@@ -126,11 +134,12 @@ func (o *MPSNNFilterNode) SetPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNP
 // @property label @abstract A string to help identify this object.
 func (o *MPSNNFilterNode) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNFilterNodeSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MPSNNFilterNode) SetLabel(label *foundation.NSString) {
 	o.Ptr().Send(_mPSNNFilterNodeSelSetLabel, label.Ptr())
 }
-

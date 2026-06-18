@@ -84,7 +84,9 @@ func (x *CNNPoolingNode) StrideInPixelsY() uint {
 	return x.inner.StrideInPixelsY()
 }
 
-func (x *CNNPoolingNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNPoolingNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNPoolingNodeable is the interface implemented by [CNNPoolingNode], for mocking and DI.
 type CNNPoolingNodeable interface {
@@ -98,4 +100,3 @@ type CNNPoolingNodeable interface {
 }
 
 var _ CNNPoolingNodeable = (*CNNPoolingNode)(nil)
-

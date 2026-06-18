@@ -315,9 +315,13 @@ func (x *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpected
 	x.inner.AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterGroups) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterGroups) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterGroups) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterGroups) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterGroupsable is the interface implemented by [MTRClusterGroups], for mocking and DI.
 type MTRClusterGroupsable interface {
@@ -345,4 +349,3 @@ type MTRClusterGroupsable interface {
 }
 
 var _ MTRClusterGroupsable = (*MTRClusterGroups)(nil)
-

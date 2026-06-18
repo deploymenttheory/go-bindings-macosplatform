@@ -241,4 +241,3 @@ func UnregisterIconRef(creator uint, iconType uint) int16 {
 func UpdateIconRef(theIconRef unsafe.Pointer) int16 {
 	return raw.UpdateIconRef(theIconRef)
 }
-

@@ -18,7 +18,9 @@ type NEOnDemandRuleEvaluateConnection struct {
 }
 
 // Unwrap returns the underlying [raw.NEOnDemandRuleEvaluateConnection].
-func (x *NEOnDemandRuleEvaluateConnection) Unwrap() *raw.NEOnDemandRuleEvaluateConnection { return x.inner }
+func (x *NEOnDemandRuleEvaluateConnection) Unwrap() *raw.NEOnDemandRuleEvaluateConnection {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *NEOnDemandRuleEvaluateConnection) WithConnectionRules(items ...*raw.NEE
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEEvaluateConnectionRule](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +65,9 @@ func (x *NEOnDemandRuleEvaluateConnection) WithDNSSearchDomainMatch(items ...*fo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -77,7 +83,9 @@ func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...*f
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -99,7 +107,9 @@ func (x *NEOnDemandRuleEvaluateConnection) WithSSIDMatch(items ...*foundation.NS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -130,7 +140,9 @@ func (x *NEOnDemandRuleEvaluateConnection) SetConnectionRules(connectionRules *f
 	x.inner.SetConnectionRules(connectionRules)
 }
 
-func (x *NEOnDemandRuleEvaluateConnection) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
+func (x *NEOnDemandRuleEvaluateConnection) asNEOnDemandRule() *raw.NEOnDemandRule {
+	return &x.inner.NEOnDemandRule
+}
 
 // NEOnDemandRuleEvaluateConnectionable is the interface implemented by [NEOnDemandRuleEvaluateConnection], for mocking and DI.
 type NEOnDemandRuleEvaluateConnectionable interface {
@@ -146,4 +158,3 @@ type NEOnDemandRuleEvaluateConnectionable interface {
 }
 
 var _ NEOnDemandRuleEvaluateConnectionable = (*NEOnDemandRuleEvaluateConnection)(nil)
-

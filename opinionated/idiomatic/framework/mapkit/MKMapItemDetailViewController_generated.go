@@ -91,4 +91,3 @@ type MapItemDetailViewControllerable interface {
 }
 
 var _ MapItemDetailViewControllerable = (*MapItemDetailViewController)(nil)
-

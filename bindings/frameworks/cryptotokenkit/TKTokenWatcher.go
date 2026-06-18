@@ -16,13 +16,13 @@ type TKTokenWatcher struct {
 }
 
 var (
-	_clsTKTokenWatcher = _objcClass("TKTokenWatcher")
-	_tKTokenWatcherSelInit = objc.RegisterName("init")
-	_tKTokenWatcherSelInitWithInsertionHandler = objc.RegisterName("initWithInsertionHandler:")
-	_tKTokenWatcherSelSetInsertionHandler = objc.RegisterName("setInsertionHandler:")
+	_clsTKTokenWatcher                            = _objcClass("TKTokenWatcher")
+	_tKTokenWatcherSelInit                        = objc.RegisterName("init")
+	_tKTokenWatcherSelInitWithInsertionHandler    = objc.RegisterName("initWithInsertionHandler:")
+	_tKTokenWatcherSelSetInsertionHandler         = objc.RegisterName("setInsertionHandler:")
 	_tKTokenWatcherSelAddRemovalHandlerForTokenID = objc.RegisterName("addRemovalHandler:forTokenID:")
-	_tKTokenWatcherSelTokenInfoForTokenID = objc.RegisterName("tokenInfoForTokenID:")
-	_tKTokenWatcherSelTokenIDs = objc.RegisterName("tokenIDs")
+	_tKTokenWatcherSelTokenInfoForTokenID         = objc.RegisterName("tokenInfoForTokenID:")
+	_tKTokenWatcherSelTokenIDs                    = objc.RegisterName("tokenIDs")
 )
 
 func TKTokenWatcherFromID(id objc.ID) *TKTokenWatcher {
@@ -38,7 +38,9 @@ func TKTokenWatcherFromID(id objc.ID) *TKTokenWatcher {
 // Init watcher
 func (o *TKTokenWatcher) Init() *TKTokenWatcher {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenWatcherFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func (o *TKTokenWatcher) InitWithInsertionHandler(insertionHandler func(*foundat
 		defer __block_insertionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherSelInitWithInsertionHandler, __block_insertionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenWatcherFromID(_ret)
 }
 
@@ -93,7 +97,9 @@ func (o *TKTokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*founda
 // Return TokenInfo for specific tokenID @param tokenID specified tokenID @return A TokenInfo object, or nil if tokenID does not exist
 func (o *TKTokenWatcher) TokenInfoForTokenID(tokenID *foundation.NSString) *TKTokenWatcherTokenInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _tKTokenWatcherSelTokenInfoForTokenID, tokenID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return TKTokenWatcherTokenInfoFromID(_ret)
 }
 
@@ -102,4 +108,3 @@ func (o *TKTokenWatcher) TokenIDs() *foundation.NSArray[*foundation.NSString] {
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _tKTokenWatcherSelTokenIDs)
 	return _ret
 }
-

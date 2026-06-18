@@ -61,4 +61,3 @@ type FunctionStitchingInputNodeable interface {
 }
 
 var _ FunctionStitchingInputNodeable = (*FunctionStitchingInputNode)(nil)
-

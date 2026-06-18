@@ -16,7 +16,9 @@ type ModelStructureProgramNamedValueType struct {
 }
 
 // Unwrap returns the underlying [raw.MLModelStructureProgramNamedValueType].
-func (x *ModelStructureProgramNamedValueType) Unwrap() *raw.MLModelStructureProgramNamedValueType { return x.inner }
+func (x *ModelStructureProgramNamedValueType) Unwrap() *raw.MLModelStructureProgramNamedValueType {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -62,4 +64,3 @@ type ModelStructureProgramNamedValueTypeable interface {
 }
 
 var _ ModelStructureProgramNamedValueTypeable = (*ModelStructureProgramNamedValueType)(nil)
-

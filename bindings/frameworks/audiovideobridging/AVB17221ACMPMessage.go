@@ -18,50 +18,50 @@ type AVB17221ACMPMessage struct {
 }
 
 var (
-	_clsAVB17221ACMPMessage = _objcClass("AVB17221ACMPMessage")
-	_aVB17221ACMPMessageSelErrorForStatusCode = objc.RegisterName("errorForStatusCode:")
-	_aVB17221ACMPMessageSelMessageType = objc.RegisterName("messageType")
-	_aVB17221ACMPMessageSelSetMessageType = objc.RegisterName("setMessageType:")
-	_aVB17221ACMPMessageSelStatus = objc.RegisterName("status")
-	_aVB17221ACMPMessageSelSetStatus = objc.RegisterName("setStatus:")
-	_aVB17221ACMPMessageSelStreamID = objc.RegisterName("streamID")
-	_aVB17221ACMPMessageSelSetStreamID = objc.RegisterName("setStreamID:")
-	_aVB17221ACMPMessageSelControllerEntityID = objc.RegisterName("controllerEntityID")
-	_aVB17221ACMPMessageSelSetControllerEntityID = objc.RegisterName("setControllerEntityID:")
-	_aVB17221ACMPMessageSelTalkerEntityID = objc.RegisterName("talkerEntityID")
-	_aVB17221ACMPMessageSelSetTalkerEntityID = objc.RegisterName("setTalkerEntityID:")
-	_aVB17221ACMPMessageSelListenerEntityID = objc.RegisterName("listenerEntityID")
-	_aVB17221ACMPMessageSelSetListenerEntityID = objc.RegisterName("setListenerEntityID:")
-	_aVB17221ACMPMessageSelTalkerUniqueID = objc.RegisterName("talkerUniqueID")
-	_aVB17221ACMPMessageSelSetTalkerUniqueID = objc.RegisterName("setTalkerUniqueID:")
-	_aVB17221ACMPMessageSelListenerUniqueID = objc.RegisterName("listenerUniqueID")
-	_aVB17221ACMPMessageSelSetListenerUniqueID = objc.RegisterName("setListenerUniqueID:")
-	_aVB17221ACMPMessageSelDestinationMAC = objc.RegisterName("destinationMAC")
-	_aVB17221ACMPMessageSelSetDestinationMAC = objc.RegisterName("setDestinationMAC:")
-	_aVB17221ACMPMessageSelConnectionCount = objc.RegisterName("connectionCount")
-	_aVB17221ACMPMessageSelSetConnectionCount = objc.RegisterName("setConnectionCount:")
-	_aVB17221ACMPMessageSelSequenceID = objc.RegisterName("sequenceID")
-	_aVB17221ACMPMessageSelSetSequenceID = objc.RegisterName("setSequenceID:")
-	_aVB17221ACMPMessageSelFlags = objc.RegisterName("flags")
-	_aVB17221ACMPMessageSelSetFlags = objc.RegisterName("setFlags:")
-	_aVB17221ACMPMessageSelVlanID = objc.RegisterName("vlanID")
-	_aVB17221ACMPMessageSelSetVlanID = objc.RegisterName("setVlanID:")
-	_aVB17221ACMPMessageSelConnectedListenersEntries = objc.RegisterName("connectedListenersEntries")
-	_aVB17221ACMPMessageSelSetConnectedListenersEntries = objc.RegisterName("setConnectedListenersEntries:")
-	_aVB17221ACMPMessageSelConnectedListenersEntriesValid = objc.RegisterName("connectedListenersEntriesValid")
+	_clsAVB17221ACMPMessage                                  = _objcClass("AVB17221ACMPMessage")
+	_aVB17221ACMPMessageSelErrorForStatusCode                = objc.RegisterName("errorForStatusCode:")
+	_aVB17221ACMPMessageSelMessageType                       = objc.RegisterName("messageType")
+	_aVB17221ACMPMessageSelSetMessageType                    = objc.RegisterName("setMessageType:")
+	_aVB17221ACMPMessageSelStatus                            = objc.RegisterName("status")
+	_aVB17221ACMPMessageSelSetStatus                         = objc.RegisterName("setStatus:")
+	_aVB17221ACMPMessageSelStreamID                          = objc.RegisterName("streamID")
+	_aVB17221ACMPMessageSelSetStreamID                       = objc.RegisterName("setStreamID:")
+	_aVB17221ACMPMessageSelControllerEntityID                = objc.RegisterName("controllerEntityID")
+	_aVB17221ACMPMessageSelSetControllerEntityID             = objc.RegisterName("setControllerEntityID:")
+	_aVB17221ACMPMessageSelTalkerEntityID                    = objc.RegisterName("talkerEntityID")
+	_aVB17221ACMPMessageSelSetTalkerEntityID                 = objc.RegisterName("setTalkerEntityID:")
+	_aVB17221ACMPMessageSelListenerEntityID                  = objc.RegisterName("listenerEntityID")
+	_aVB17221ACMPMessageSelSetListenerEntityID               = objc.RegisterName("setListenerEntityID:")
+	_aVB17221ACMPMessageSelTalkerUniqueID                    = objc.RegisterName("talkerUniqueID")
+	_aVB17221ACMPMessageSelSetTalkerUniqueID                 = objc.RegisterName("setTalkerUniqueID:")
+	_aVB17221ACMPMessageSelListenerUniqueID                  = objc.RegisterName("listenerUniqueID")
+	_aVB17221ACMPMessageSelSetListenerUniqueID               = objc.RegisterName("setListenerUniqueID:")
+	_aVB17221ACMPMessageSelDestinationMAC                    = objc.RegisterName("destinationMAC")
+	_aVB17221ACMPMessageSelSetDestinationMAC                 = objc.RegisterName("setDestinationMAC:")
+	_aVB17221ACMPMessageSelConnectionCount                   = objc.RegisterName("connectionCount")
+	_aVB17221ACMPMessageSelSetConnectionCount                = objc.RegisterName("setConnectionCount:")
+	_aVB17221ACMPMessageSelSequenceID                        = objc.RegisterName("sequenceID")
+	_aVB17221ACMPMessageSelSetSequenceID                     = objc.RegisterName("setSequenceID:")
+	_aVB17221ACMPMessageSelFlags                             = objc.RegisterName("flags")
+	_aVB17221ACMPMessageSelSetFlags                          = objc.RegisterName("setFlags:")
+	_aVB17221ACMPMessageSelVlanID                            = objc.RegisterName("vlanID")
+	_aVB17221ACMPMessageSelSetVlanID                         = objc.RegisterName("setVlanID:")
+	_aVB17221ACMPMessageSelConnectedListenersEntries         = objc.RegisterName("connectedListenersEntries")
+	_aVB17221ACMPMessageSelSetConnectedListenersEntries      = objc.RegisterName("setConnectedListenersEntries:")
+	_aVB17221ACMPMessageSelConnectedListenersEntriesValid    = objc.RegisterName("connectedListenersEntriesValid")
 	_aVB17221ACMPMessageSelSetConnectedListenersEntriesValid = objc.RegisterName("setConnectedListenersEntriesValid:")
-	_aVB17221ACMPMessageSelIpFlags = objc.RegisterName("ipFlags")
-	_aVB17221ACMPMessageSelSetIpFlags = objc.RegisterName("setIpFlags:")
-	_aVB17221ACMPMessageSelSourcePort = objc.RegisterName("sourcePort")
-	_aVB17221ACMPMessageSelSetSourcePort = objc.RegisterName("setSourcePort:")
-	_aVB17221ACMPMessageSelDestinationPort = objc.RegisterName("destinationPort")
-	_aVB17221ACMPMessageSelSetDestinationPort = objc.RegisterName("setDestinationPort:")
-	_aVB17221ACMPMessageSelSourceIPAddress = objc.RegisterName("sourceIPAddress")
-	_aVB17221ACMPMessageSelSetSourceIPAddress = objc.RegisterName("setSourceIPAddress:")
-	_aVB17221ACMPMessageSelDestinationIPAddress = objc.RegisterName("destinationIPAddress")
-	_aVB17221ACMPMessageSelSetDestinationIPAddress = objc.RegisterName("setDestinationIPAddress:")
-	_aVB17221ACMPMessageSelSourceMAC = objc.RegisterName("sourceMAC")
-	_aVB17221ACMPMessageSelSetSourceMAC = objc.RegisterName("setSourceMAC:")
+	_aVB17221ACMPMessageSelIpFlags                           = objc.RegisterName("ipFlags")
+	_aVB17221ACMPMessageSelSetIpFlags                        = objc.RegisterName("setIpFlags:")
+	_aVB17221ACMPMessageSelSourcePort                        = objc.RegisterName("sourcePort")
+	_aVB17221ACMPMessageSelSetSourcePort                     = objc.RegisterName("setSourcePort:")
+	_aVB17221ACMPMessageSelDestinationPort                   = objc.RegisterName("destinationPort")
+	_aVB17221ACMPMessageSelSetDestinationPort                = objc.RegisterName("setDestinationPort:")
+	_aVB17221ACMPMessageSelSourceIPAddress                   = objc.RegisterName("sourceIPAddress")
+	_aVB17221ACMPMessageSelSetSourceIPAddress                = objc.RegisterName("setSourceIPAddress:")
+	_aVB17221ACMPMessageSelDestinationIPAddress              = objc.RegisterName("destinationIPAddress")
+	_aVB17221ACMPMessageSelSetDestinationIPAddress           = objc.RegisterName("setDestinationIPAddress:")
+	_aVB17221ACMPMessageSelSourceMAC                         = objc.RegisterName("sourceMAC")
+	_aVB17221ACMPMessageSelSetSourceMAC                      = objc.RegisterName("setSourceMAC:")
 )
 
 func AVB17221ACMPMessageFromID(id objc.ID) *AVB17221ACMPMessage {
@@ -169,7 +169,9 @@ func (o *AVB17221ACMPMessage) SetListenerUniqueID(listenerUniqueID uint16) {
 // @property	destinationMAC @abstract	The dest_mac field of the ACMP message.
 func (o *AVB17221ACMPMessage) DestinationMAC() *AVBMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221ACMPMessageSelDestinationMAC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
 
@@ -270,7 +272,9 @@ func (o *AVB17221ACMPMessage) SetDestinationPort(destinationPort uint16) {
 // @property	sourceAddress @abstract	The source_ip_address field of the ACMP message.
 func (o *AVB17221ACMPMessage) SourceIPAddress() *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221ACMPMessageSelSourceIPAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
@@ -281,7 +285,9 @@ func (o *AVB17221ACMPMessage) SetSourceIPAddress(sourceIPAddress *AVBIPAddress) 
 // @property	destinationAddress @abstract	The destination_ip_address field of the ACMP message.
 func (o *AVB17221ACMPMessage) DestinationIPAddress() *AVBIPAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221ACMPMessageSelDestinationIPAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBIPAddressFromID(_ret)
 }
 
@@ -292,11 +298,12 @@ func (o *AVB17221ACMPMessage) SetDestinationIPAddress(destinationIPAddress *AVBI
 // @property	sourceMAC @abstract	The source_mac field of the ACMP message.
 func (o *AVB17221ACMPMessage) SourceMAC() *AVBMACAddress {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVB17221ACMPMessageSelSourceMAC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVBMACAddressFromID(_ret)
 }
 
 func (o *AVB17221ACMPMessage) SetSourceMAC(sourceMAC *AVBMACAddress) {
 	o.Ptr().Send(_aVB17221ACMPMessageSelSetSourceMAC, sourceMAC.Ptr())
 }
-

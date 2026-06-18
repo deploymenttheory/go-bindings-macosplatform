@@ -21,9 +21,9 @@ type CNRenderingSessionAttributes struct {
 }
 
 var (
-	_clsCNRenderingSessionAttributes = _objcClass("CNRenderingSessionAttributes")
+	_clsCNRenderingSessionAttributes                               = _objcClass("CNRenderingSessionAttributes")
 	_cNRenderingSessionAttributesSelLoadFromAssetCompletionHandler = objc.RegisterName("loadFromAsset:completionHandler:")
-	_cNRenderingSessionAttributesSelRenderingVersion = objc.RegisterName("renderingVersion")
+	_cNRenderingSessionAttributesSelRenderingVersion               = objc.RegisterName("renderingVersion")
 )
 
 func CNRenderingSessionAttributesFromID(id objc.ID) *CNRenderingSessionAttributes {
@@ -56,4 +56,3 @@ func (o *CNRenderingSessionAttributes) RenderingVersion() int {
 	_ret := objc.Send[int](o.Ptr(), _cNRenderingSessionAttributesSelRenderingVersion)
 	return _ret
 }
-

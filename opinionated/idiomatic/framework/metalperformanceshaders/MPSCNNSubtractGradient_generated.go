@@ -196,13 +196,21 @@ func (x *CNNSubtractGradient) WithLabel(label string) *CNNSubtractGradient {
 	return x
 }
 
-func (x *CNNSubtractGradient) asCNNArithmeticGradient() *mpsneuralnetwork.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
+func (x *CNNSubtractGradient) asCNNArithmeticGradient() *mpsneuralnetwork.MPSCNNArithmeticGradient {
+	return &x.inner.MPSCNNArithmeticGradient
+}
 
-func (x *CNNSubtractGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
+func (x *CNNSubtractGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNSubtractGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNSubtractGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
-func (x *CNNSubtractGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+func (x *CNNSubtractGradient) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+}
 
 // CNNSubtractGradientable is the interface implemented by [CNNSubtractGradient], for mocking and DI.
 type CNNSubtractGradientable interface {
@@ -236,4 +244,3 @@ type CNNSubtractGradientable interface {
 }
 
 var _ CNNSubtractGradientable = (*CNNSubtractGradient)(nil)
-

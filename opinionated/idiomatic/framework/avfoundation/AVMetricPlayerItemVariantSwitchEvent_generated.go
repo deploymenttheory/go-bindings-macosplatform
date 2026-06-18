@@ -17,7 +17,9 @@ type MetricPlayerItemVariantSwitchEvent struct {
 }
 
 // Unwrap returns the underlying [raw.AVMetricPlayerItemVariantSwitchEvent].
-func (x *MetricPlayerItemVariantSwitchEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchEvent { return x.inner }
+func (x *MetricPlayerItemVariantSwitchEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -98,7 +100,9 @@ func (x *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
 	return x.inner.DidSucceed()
 }
 
-func (x *MetricPlayerItemVariantSwitchEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+func (x *MetricPlayerItemVariantSwitchEvent) asMetricEvent() *raw.AVMetricEvent {
+	return &x.inner.AVMetricEvent
+}
 
 // MetricPlayerItemVariantSwitchEventable is the interface implemented by [MetricPlayerItemVariantSwitchEvent], for mocking and DI.
 type MetricPlayerItemVariantSwitchEventable interface {
@@ -113,4 +117,3 @@ type MetricPlayerItemVariantSwitchEventable interface {
 }
 
 var _ MetricPlayerItemVariantSwitchEventable = (*MetricPlayerItemVariantSwitchEvent)(nil)
-

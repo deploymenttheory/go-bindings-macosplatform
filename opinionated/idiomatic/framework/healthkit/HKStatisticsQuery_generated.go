@@ -46,4 +46,3 @@ type StatisticsQueryable interface {
 }
 
 var _ StatisticsQueryable = (*StatisticsQuery)(nil)
-

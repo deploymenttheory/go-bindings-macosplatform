@@ -15,7 +15,9 @@ type IssuerProvisioningExtensionStatus struct {
 }
 
 // Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionStatus].
-func (x *IssuerProvisioningExtensionStatus) Unwrap() *raw.PKIssuerProvisioningExtensionStatus { return x.inner }
+func (x *IssuerProvisioningExtensionStatus) Unwrap() *raw.PKIssuerProvisioningExtensionStatus {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -98,4 +100,3 @@ type IssuerProvisioningExtensionStatusable interface {
 }
 
 var _ IssuerProvisioningExtensionStatusable = (*IssuerProvisioningExtensionStatus)(nil)
-

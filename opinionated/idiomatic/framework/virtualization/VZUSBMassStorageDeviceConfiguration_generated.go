@@ -15,7 +15,9 @@ type USBMassStorageDeviceConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZUSBMassStorageDeviceConfiguration].
-func (x *USBMassStorageDeviceConfiguration) Unwrap() *raw.VZUSBMassStorageDeviceConfiguration { return x.inner }
+func (x *USBMassStorageDeviceConfiguration) Unwrap() *raw.VZUSBMassStorageDeviceConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -36,7 +38,9 @@ func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *raw.VZStorag
 	return &USBMassStorageDeviceConfiguration{inner: raw.VZUSBMassStorageDeviceConfigurationFromID(_id)}
 }
 
-func (x *USBMassStorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
+func (x *USBMassStorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
+	return &x.inner.VZStorageDeviceConfiguration
+}
 
 // USBMassStorageDeviceConfigurationable is the interface implemented by [USBMassStorageDeviceConfiguration], for mocking and DI.
 type USBMassStorageDeviceConfigurationable interface {
@@ -44,4 +48,3 @@ type USBMassStorageDeviceConfigurationable interface {
 }
 
 var _ USBMassStorageDeviceConfigurationable = (*USBMassStorageDeviceConfiguration)(nil)
-

@@ -84,7 +84,9 @@ func (x *HybridMapConfiguration) SetShowsTraffic(showsTraffic bool) {
 	x.inner.SetShowsTraffic(showsTraffic)
 }
 
-func (x *HybridMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
+func (x *HybridMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
+	return &x.inner.MKMapConfiguration
+}
 
 // HybridMapConfigurationable is the interface implemented by [HybridMapConfiguration], for mocking and DI.
 type HybridMapConfigurationable interface {
@@ -99,4 +101,3 @@ type HybridMapConfigurationable interface {
 }
 
 var _ HybridMapConfigurationable = (*HybridMapConfiguration)(nil)
-

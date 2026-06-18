@@ -13,19 +13,24 @@ import (
 
 func NSStackTraceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_exceptionhandlingLib, "NSStackTraceKey")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUncaughtRuntimeErrorException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_exceptionhandlingLib, "NSUncaughtRuntimeErrorException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
 func NSUncaughtSystemExceptionException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_exceptionhandlingLib, "NSUncaughtSystemExceptionException")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
-

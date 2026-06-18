@@ -61,4 +61,3 @@ type VertexBufferLayoutable interface {
 }
 
 var _ VertexBufferLayoutable = (*VertexBufferLayout)(nil)
-

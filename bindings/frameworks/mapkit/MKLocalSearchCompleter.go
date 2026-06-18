@@ -16,26 +16,26 @@ type MKLocalSearchCompleter struct {
 }
 
 var (
-	_clsMKLocalSearchCompleter = _objcClass("MKLocalSearchCompleter")
-	_mKLocalSearchCompleterSelCancel = objc.RegisterName("cancel")
-	_mKLocalSearchCompleterSelQueryFragment = objc.RegisterName("queryFragment")
-	_mKLocalSearchCompleterSelSetQueryFragment = objc.RegisterName("setQueryFragment:")
-	_mKLocalSearchCompleterSelRegion = objc.RegisterName("region")
-	_mKLocalSearchCompleterSelSetRegion = objc.RegisterName("setRegion:")
-	_mKLocalSearchCompleterSelRegionPriority = objc.RegisterName("regionPriority")
-	_mKLocalSearchCompleterSelSetRegionPriority = objc.RegisterName("setRegionPriority:")
-	_mKLocalSearchCompleterSelFilterType = objc.RegisterName("filterType")
-	_mKLocalSearchCompleterSelSetFilterType = objc.RegisterName("setFilterType:")
-	_mKLocalSearchCompleterSelResultTypes = objc.RegisterName("resultTypes")
-	_mKLocalSearchCompleterSelSetResultTypes = objc.RegisterName("setResultTypes:")
-	_mKLocalSearchCompleterSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
+	_clsMKLocalSearchCompleter                         = _objcClass("MKLocalSearchCompleter")
+	_mKLocalSearchCompleterSelCancel                   = objc.RegisterName("cancel")
+	_mKLocalSearchCompleterSelQueryFragment            = objc.RegisterName("queryFragment")
+	_mKLocalSearchCompleterSelSetQueryFragment         = objc.RegisterName("setQueryFragment:")
+	_mKLocalSearchCompleterSelRegion                   = objc.RegisterName("region")
+	_mKLocalSearchCompleterSelSetRegion                = objc.RegisterName("setRegion:")
+	_mKLocalSearchCompleterSelRegionPriority           = objc.RegisterName("regionPriority")
+	_mKLocalSearchCompleterSelSetRegionPriority        = objc.RegisterName("setRegionPriority:")
+	_mKLocalSearchCompleterSelFilterType               = objc.RegisterName("filterType")
+	_mKLocalSearchCompleterSelSetFilterType            = objc.RegisterName("setFilterType:")
+	_mKLocalSearchCompleterSelResultTypes              = objc.RegisterName("resultTypes")
+	_mKLocalSearchCompleterSelSetResultTypes           = objc.RegisterName("setResultTypes:")
+	_mKLocalSearchCompleterSelPointOfInterestFilter    = objc.RegisterName("pointOfInterestFilter")
 	_mKLocalSearchCompleterSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKLocalSearchCompleterSelAddressFilter = objc.RegisterName("addressFilter")
-	_mKLocalSearchCompleterSelSetAddressFilter = objc.RegisterName("setAddressFilter:")
-	_mKLocalSearchCompleterSelDelegate = objc.RegisterName("delegate")
-	_mKLocalSearchCompleterSelSetDelegate = objc.RegisterName("setDelegate:")
-	_mKLocalSearchCompleterSelResults = objc.RegisterName("results")
-	_mKLocalSearchCompleterSelIsSearching = objc.RegisterName("isSearching")
+	_mKLocalSearchCompleterSelAddressFilter            = objc.RegisterName("addressFilter")
+	_mKLocalSearchCompleterSelSetAddressFilter         = objc.RegisterName("setAddressFilter:")
+	_mKLocalSearchCompleterSelDelegate                 = objc.RegisterName("delegate")
+	_mKLocalSearchCompleterSelSetDelegate              = objc.RegisterName("setDelegate:")
+	_mKLocalSearchCompleterSelResults                  = objc.RegisterName("results")
+	_mKLocalSearchCompleterSelIsSearching              = objc.RegisterName("isSearching")
 )
 
 func MKLocalSearchCompleterFromID(id objc.ID) *MKLocalSearchCompleter {
@@ -54,7 +54,9 @@ func (o *MKLocalSearchCompleter) Cancel() {
 
 func (o *MKLocalSearchCompleter) QueryFragment() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompleterSelQueryFragment)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,7 +104,9 @@ func (o *MKLocalSearchCompleter) SetResultTypes(resultTypes MKLocalSearchComplet
 
 func (o *MKLocalSearchCompleter) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompleterSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -112,7 +116,9 @@ func (o *MKLocalSearchCompleter) SetPointOfInterestFilter(pointOfInterestFilter 
 
 func (o *MKLocalSearchCompleter) AddressFilter() *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompleterSelAddressFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
 
@@ -131,7 +137,9 @@ func (o *MKLocalSearchCompleter) SetDelegate(delegate MKLocalSearchCompleterDele
 
 func (o *MKLocalSearchCompleter) Results() *foundation.NSArray[*MKLocalSearchCompletion] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchCompleterSelResults)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MKLocalSearchCompletion](_ret)
 }
 
@@ -139,4 +147,3 @@ func (o *MKLocalSearchCompleter) IsSearching() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mKLocalSearchCompleterSelIsSearching)
 	return _ret
 }
-

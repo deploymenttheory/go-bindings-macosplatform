@@ -41,4 +41,3 @@ type MessageActionable interface {
 }
 
 var _ MessageActionable = (*MessageAction)(nil)
-

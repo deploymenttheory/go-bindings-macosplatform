@@ -16,9 +16,9 @@ type MTLSharedTextureHandle struct {
 }
 
 var (
-	_clsMTLSharedTextureHandle = _objcClass("MTLSharedTextureHandle")
+	_clsMTLSharedTextureHandle       = _objcClass("MTLSharedTextureHandle")
 	_mTLSharedTextureHandleSelDevice = objc.RegisterName("device")
-	_mTLSharedTextureHandleSelLabel = objc.RegisterName("label")
+	_mTLSharedTextureHandleSelLabel  = objc.RegisterName("label")
 )
 
 func MTLSharedTextureHandleFromID(id objc.ID) *MTLSharedTextureHandle {
@@ -40,7 +40,8 @@ func (o *MTLSharedTextureHandle) Device() MTLDevice {
 // @property label @abstract A copy of the original texture's label property, if any
 func (o *MTLSharedTextureHandle) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLSharedTextureHandleSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

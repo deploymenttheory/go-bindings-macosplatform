@@ -16,7 +16,9 @@ type MTRThermostatClusterThermostatScheduleTransition struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterThermostatScheduleTransition].
-func (x *MTRThermostatClusterThermostatScheduleTransition) Unwrap() *raw.MTRThermostatClusterThermostatScheduleTransition { return x.inner }
+func (x *MTRThermostatClusterThermostatScheduleTransition) Unwrap() *raw.MTRThermostatClusterThermostatScheduleTransition {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(cool
 	return x
 }
 
-func (x *MTRThermostatClusterThermostatScheduleTransition) asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct { return &x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct }
+func (x *MTRThermostatClusterThermostatScheduleTransition) asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	return &x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct
+}
 
 // MTRThermostatClusterThermostatScheduleTransitionable is the interface implemented by [MTRThermostatClusterThermostatScheduleTransition], for mocking and DI.
 type MTRThermostatClusterThermostatScheduleTransitionable interface {
@@ -65,4 +69,3 @@ type MTRThermostatClusterThermostatScheduleTransitionable interface {
 }
 
 var _ MTRThermostatClusterThermostatScheduleTransitionable = (*MTRThermostatClusterThermostatScheduleTransition)(nil)
-

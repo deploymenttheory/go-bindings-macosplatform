@@ -16,11 +16,11 @@ type UNTextInputNotificationAction struct {
 }
 
 var (
-	_clsUNTextInputNotificationAction = _objcClass("UNTextInputNotificationAction")
-	_uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder = objc.RegisterName("actionWithIdentifier:title:options:textInputButtonTitle:textInputPlaceholder:")
+	_clsUNTextInputNotificationAction                                                                             = _objcClass("UNTextInputNotificationAction")
+	_uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder     = objc.RegisterName("actionWithIdentifier:title:options:textInputButtonTitle:textInputPlaceholder:")
 	_uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder = objc.RegisterName("actionWithIdentifier:title:options:icon:textInputButtonTitle:textInputPlaceholder:")
-	_uNTextInputNotificationActionSelTextInputButtonTitle = objc.RegisterName("textInputButtonTitle")
-	_uNTextInputNotificationActionSelTextInputPlaceholder = objc.RegisterName("textInputPlaceholder")
+	_uNTextInputNotificationActionSelTextInputButtonTitle                                                         = objc.RegisterName("textInputButtonTitle")
+	_uNTextInputNotificationActionSelTextInputPlaceholder                                                         = objc.RegisterName("textInputPlaceholder")
 )
 
 func UNTextInputNotificationActionFromID(id objc.ID) *UNTextInputNotificationAction {
@@ -35,25 +35,32 @@ func UNTextInputNotificationActionFromID(id objc.ID) *UNTextInputNotificationAct
 
 func UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, textInputButtonTitle *foundation.NSString, textInputPlaceholder *foundation.NSString) *UNTextInputNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTextInputNotificationAction), _uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder, identifier.Ptr(), title.Ptr(), options, textInputButtonTitle.Ptr(), textInputPlaceholder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNTextInputNotificationActionFromID(_ret)
 }
 
 func UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier *foundation.NSString, title *foundation.NSString, options UNNotificationActionOptions, icon *UNNotificationActionIcon, textInputButtonTitle *foundation.NSString, textInputPlaceholder *foundation.NSString) *UNTextInputNotificationAction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNTextInputNotificationAction), _uNTextInputNotificationActionSelActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder, identifier.Ptr(), title.Ptr(), options, icon.Ptr(), textInputButtonTitle.Ptr(), textInputPlaceholder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNTextInputNotificationActionFromID(_ret)
 }
 
 func (o *UNTextInputNotificationAction) TextInputButtonTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNTextInputNotificationActionSelTextInputButtonTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNTextInputNotificationAction) TextInputPlaceholder() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNTextInputNotificationActionSelTextInputPlaceholder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

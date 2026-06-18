@@ -52,7 +52,9 @@ func (x *PlayerItemMetadataCollector) DelegateQueue() *foundation.NSObject {
 	return x.inner.DelegateQueue()
 }
 
-func (x *PlayerItemMetadataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector { return &x.inner.AVPlayerItemMediaDataCollector }
+func (x *PlayerItemMetadataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector {
+	return &x.inner.AVPlayerItemMediaDataCollector
+}
 
 // PlayerItemMetadataCollectorable is the interface implemented by [PlayerItemMetadataCollector], for mocking and DI.
 type PlayerItemMetadataCollectorable interface {
@@ -63,4 +65,3 @@ type PlayerItemMetadataCollectorable interface {
 }
 
 var _ PlayerItemMetadataCollectorable = (*PlayerItemMetadataCollector)(nil)
-

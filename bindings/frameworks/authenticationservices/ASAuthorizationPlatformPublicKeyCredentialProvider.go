@@ -16,12 +16,12 @@ type ASAuthorizationPlatformPublicKeyCredentialProvider struct {
 }
 
 var (
-	_clsASAuthorizationPlatformPublicKeyCredentialProvider = _objcClass("ASAuthorizationPlatformPublicKeyCredentialProvider")
-	_aSAuthorizationPlatformPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier = objc.RegisterName("initWithRelyingPartyIdentifier:")
-	_aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeNameUserID = objc.RegisterName("createCredentialRegistrationRequestWithChallenge:name:userID:")
+	_clsASAuthorizationPlatformPublicKeyCredentialProvider                                                                       = _objcClass("ASAuthorizationPlatformPublicKeyCredentialProvider")
+	_aSAuthorizationPlatformPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier                                         = objc.RegisterName("initWithRelyingPartyIdentifier:")
+	_aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeNameUserID             = objc.RegisterName("createCredentialRegistrationRequestWithChallenge:name:userID:")
 	_aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle = objc.RegisterName("createCredentialRegistrationRequestWithChallenge:name:userID:requestStyle:")
-	_aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge = objc.RegisterName("createCredentialAssertionRequestWithChallenge:")
-	_aSAuthorizationPlatformPublicKeyCredentialProviderSelRelyingPartyIdentifier = objc.RegisterName("relyingPartyIdentifier")
+	_aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge                          = objc.RegisterName("createCredentialAssertionRequestWithChallenge:")
+	_aSAuthorizationPlatformPublicKeyCredentialProviderSelRelyingPartyIdentifier                                                 = objc.RegisterName("relyingPartyIdentifier")
 )
 
 func ASAuthorizationPlatformPublicKeyCredentialProviderFromID(id objc.ID) *ASAuthorizationPlatformPublicKeyCredentialProvider {
@@ -36,35 +36,44 @@ func ASAuthorizationPlatformPublicKeyCredentialProviderFromID(id objc.ID) *ASAut
 
 func (o *ASAuthorizationPlatformPublicKeyCredentialProvider) InitWithRelyingPartyIdentifier(relyingPartyIdentifier *foundation.NSString) *ASAuthorizationPlatformPublicKeyCredentialProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialProviderSelInitWithRelyingPartyIdentifier, relyingPartyIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPlatformPublicKeyCredentialProviderFromID(_ret)
 }
 
 // @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
 func (o *ASAuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name *foundation.NSString, userID *foundation.NSData) *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeNameUserID, challenge.Ptr(), name.Ptr(), userID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(_ret)
 }
 
 // @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate. @param requestStyle The style for this request.
 func (o *ASAuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name *foundation.NSString, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle, challenge.Ptr(), name.Ptr(), userID.Ptr(), requestStyle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(_ret)
 }
 
 // @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
 func (o *ASAuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialProviderSelCreateCredentialAssertionRequestWithChallenge, challenge.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(_ret)
 }
 
 // @abstract The Relying Party identifier used for all requests created by this object.
 func (o *ASAuthorizationPlatformPublicKeyCredentialProvider) RelyingPartyIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aSAuthorizationPlatformPublicKeyCredentialProviderSelRelyingPartyIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

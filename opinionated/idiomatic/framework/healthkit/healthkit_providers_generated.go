@@ -77,4 +77,3 @@ type VisionPrescriptionProvider interface {
 type WorkoutBuilderProvider interface {
 	asWorkoutBuilder() *raw.HKWorkoutBuilder
 }
-

@@ -17,7 +17,9 @@ func KOBEXHeaderIDKeyName() objc.ID { return purego.CFConstant(raw.KOBEXHeaderID
 func KOBEXHeaderIDKeyType() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyType()) }
 
 // KOBEXHeaderIDKeyDescription returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyDescription as an objc.ID.
-func KOBEXHeaderIDKeyDescription() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyDescription()) }
+func KOBEXHeaderIDKeyDescription() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyDescription())
+}
 
 // KOBEXHeaderIDKeyTimeISO returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTimeISO as an objc.ID.
 func KOBEXHeaderIDKeyTimeISO() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTimeISO()) }
@@ -41,16 +43,24 @@ func KOBEXHeaderIDKeyEndOfBody() objc.ID { return purego.CFConstant(raw.KOBEXHea
 func KOBEXHeaderIDKeyWho() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyWho()) }
 
 // KOBEXHeaderIDKeyAppParameters returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAppParameters as an objc.ID.
-func KOBEXHeaderIDKeyAppParameters() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAppParameters()) }
+func KOBEXHeaderIDKeyAppParameters() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyAppParameters())
+}
 
 // KOBEXHeaderIDKeyAuthorizationChallenge returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationChallenge as an objc.ID.
-func KOBEXHeaderIDKeyAuthorizationChallenge() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationChallenge()) }
+func KOBEXHeaderIDKeyAuthorizationChallenge() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationChallenge())
+}
 
 // KOBEXHeaderIDKeyAuthorizationResponse returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationResponse as an objc.ID.
-func KOBEXHeaderIDKeyAuthorizationResponse() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationResponse()) }
+func KOBEXHeaderIDKeyAuthorizationResponse() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationResponse())
+}
 
 // KOBEXHeaderIDKeyObjectClass returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyObjectClass as an objc.ID.
-func KOBEXHeaderIDKeyObjectClass() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyObjectClass()) }
+func KOBEXHeaderIDKeyObjectClass() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyObjectClass())
+}
 
 // KOBEXHeaderIDKeyCount returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyCount as an objc.ID.
 func KOBEXHeaderIDKeyCount() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyCount()) }
@@ -59,29 +69,45 @@ func KOBEXHeaderIDKeyCount() objc.ID { return purego.CFConstant(raw.KOBEXHeaderI
 func KOBEXHeaderIDKeyLength() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyLength()) }
 
 // KOBEXHeaderIDKeyConnectionID returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyConnectionID as an objc.ID.
-func KOBEXHeaderIDKeyConnectionID() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyConnectionID()) }
+func KOBEXHeaderIDKeyConnectionID() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyConnectionID())
+}
 
 // KOBEXHeaderIDKeyByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyByteSequence as an objc.ID.
-func KOBEXHeaderIDKeyByteSequence() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyByteSequence()) }
+func KOBEXHeaderIDKeyByteSequence() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyByteSequence())
+}
 
 // KOBEXHeaderIDKeyUnknownUnicodeText returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownUnicodeText as an objc.ID.
-func KOBEXHeaderIDKeyUnknownUnicodeText() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownUnicodeText()) }
+func KOBEXHeaderIDKeyUnknownUnicodeText() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownUnicodeText())
+}
 
 // KOBEXHeaderIDKeyUnknownByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownByteSequence as an objc.ID.
-func KOBEXHeaderIDKeyUnknownByteSequence() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownByteSequence()) }
+func KOBEXHeaderIDKeyUnknownByteSequence() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownByteSequence())
+}
 
 // KOBEXHeaderIDKeyUnknown1ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown1ByteQuantity as an objc.ID.
-func KOBEXHeaderIDKeyUnknown1ByteQuantity() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown1ByteQuantity()) }
+func KOBEXHeaderIDKeyUnknown1ByteQuantity() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown1ByteQuantity())
+}
 
 // KOBEXHeaderIDKeyUnknown4ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown4ByteQuantity as an objc.ID.
-func KOBEXHeaderIDKeyUnknown4ByteQuantity() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown4ByteQuantity()) }
+func KOBEXHeaderIDKeyUnknown4ByteQuantity() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown4ByteQuantity())
+}
 
 // KOBEXHeaderIDKeyUserDefined returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUserDefined as an objc.ID.
-func KOBEXHeaderIDKeyUserDefined() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyUserDefined()) }
+func KOBEXHeaderIDKeyUserDefined() objc.ID {
+	return purego.CFConstant(raw.KOBEXHeaderIDKeyUserDefined())
+}
 
 // @const			kFTSProgressBytesTransferredKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressBytesTransferredKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTransferredKey as an objc.ID.
-func KFTSProgressBytesTransferredKey() objc.ID { return purego.CFConstant(raw.KFTSProgressBytesTransferredKey()) }
+func KFTSProgressBytesTransferredKey() objc.ID {
+	return purego.CFConstant(raw.KFTSProgressBytesTransferredKey())
+}
 
 // @const			kFTSProgressBytesTotalKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressBytesTotalKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTotalKey as an objc.ID.
@@ -96,7 +122,9 @@ func KFTSProgressPrecentageKey() objc.ID { return purego.CFConstant(raw.KFTSProg
 
 // @const			kFTSProgressEstimatedTimeKey @abstract		NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressEstimatedTimeKey returns the value of the CoreFoundation reference constant kFTSProgressEstimatedTimeKey as an objc.ID.
-func KFTSProgressEstimatedTimeKey() objc.ID { return purego.CFConstant(raw.KFTSProgressEstimatedTimeKey()) }
+func KFTSProgressEstimatedTimeKey() objc.ID {
+	return purego.CFConstant(raw.KFTSProgressEstimatedTimeKey())
+}
 
 // @const			kFTSProgressTimeElapsedKey @abstract		NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressTimeElapsedKey returns the value of the CoreFoundation reference constant kFTSProgressTimeElapsedKey as an objc.ID.
@@ -104,7 +132,9 @@ func KFTSProgressTimeElapsedKey() objc.ID { return purego.CFConstant(raw.KFTSPro
 
 // @const			kFTSProgressTransferRateKey @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
 // KFTSProgressTransferRateKey returns the value of the CoreFoundation reference constant kFTSProgressTransferRateKey as an objc.ID.
-func KFTSProgressTransferRateKey() objc.ID { return purego.CFConstant(raw.KFTSProgressTransferRateKey()) }
+func KFTSProgressTransferRateKey() objc.ID {
+	return purego.CFConstant(raw.KFTSProgressTransferRateKey())
+}
 
 // @const			kFTSListingNameKey @abstract		NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingNameKey returns the value of the CoreFoundation reference constant kFTSListingNameKey as an objc.ID.
@@ -117,4 +147,3 @@ func KFTSListingTypeKey() objc.ID { return purego.CFConstant(raw.KFTSListingType
 // @const			kFTSListingSizeKey @abstract		Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
 // KFTSListingSizeKey returns the value of the CoreFoundation reference constant kFTSListingSizeKey as an objc.ID.
 func KFTSListingSizeKey() objc.ID { return purego.CFConstant(raw.KFTSListingSizeKey()) }
-

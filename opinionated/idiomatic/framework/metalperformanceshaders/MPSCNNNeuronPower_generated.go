@@ -102,9 +102,13 @@ func (x *CNNNeuronPower) WithLabel(label string) *CNNNeuronPower {
 
 func (x *CNNNeuronPower) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronPower) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronPower) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronPower) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronPower) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronPowerable is the interface implemented by [CNNNeuronPower], for mocking and DI.
 type CNNNeuronPowerable interface {
@@ -122,4 +126,3 @@ type CNNNeuronPowerable interface {
 }
 
 var _ CNNNeuronPowerable = (*CNNNeuronPower)(nil)
-

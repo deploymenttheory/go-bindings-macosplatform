@@ -82,9 +82,13 @@ func (x *ImageGaussianBlur) Sigma() float32 {
 	return x.inner.Sigma()
 }
 
-func (x *ImageGaussianBlur) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageGaussianBlur) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
-func (x *ImageGaussianBlur) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageGaussianBlur) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
 type ImageGaussianBlurable interface {
@@ -98,4 +102,3 @@ type ImageGaussianBlurable interface {
 }
 
 var _ ImageGaussianBlurable = (*ImageGaussianBlur)(nil)
-

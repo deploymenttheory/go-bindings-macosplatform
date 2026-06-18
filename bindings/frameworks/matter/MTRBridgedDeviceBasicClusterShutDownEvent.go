@@ -25,4 +25,3 @@ func MTRBridgedDeviceBasicClusterShutDownEventFromID(id objc.ID) *MTRBridgedDevi
 	purego.Track(o)
 	return o
 }
-

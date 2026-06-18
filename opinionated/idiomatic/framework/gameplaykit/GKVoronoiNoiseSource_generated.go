@@ -120,4 +120,3 @@ type VoronoiNoiseSourceable interface {
 }
 
 var _ VoronoiNoiseSourceable = (*VoronoiNoiseSource)(nil)
-

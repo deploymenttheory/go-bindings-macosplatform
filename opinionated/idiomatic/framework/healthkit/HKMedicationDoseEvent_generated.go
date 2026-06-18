@@ -106,4 +106,3 @@ type MedicationDoseEventable interface {
 }
 
 var _ MedicationDoseEventable = (*MedicationDoseEvent)(nil)
-

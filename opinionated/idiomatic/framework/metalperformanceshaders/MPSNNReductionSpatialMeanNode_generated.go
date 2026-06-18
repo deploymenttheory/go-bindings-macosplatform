@@ -56,9 +56,13 @@ func (x *NNReductionSpatialMeanNode) WithLabel(label string) *NNReductionSpatial
 	return x
 }
 
-func (x *NNReductionSpatialMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
+func (x *NNReductionSpatialMeanNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
+	return &x.inner.MPSNNUnaryReductionNode
+}
 
-func (x *NNReductionSpatialMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
+func (x *NNReductionSpatialMeanNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+}
 
 // NNReductionSpatialMeanNodeable is the interface implemented by [NNReductionSpatialMeanNode], for mocking and DI.
 type NNReductionSpatialMeanNodeable interface {
@@ -69,4 +73,3 @@ type NNReductionSpatialMeanNodeable interface {
 }
 
 var _ NNReductionSpatialMeanNodeable = (*NNReductionSpatialMeanNode)(nil)
-

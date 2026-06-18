@@ -43,4 +43,3 @@ type InputServerable interface {
 }
 
 var _ InputServerable = (*InputServer)(nil)
-

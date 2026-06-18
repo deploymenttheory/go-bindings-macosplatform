@@ -25,4 +25,3 @@ func HKMedicationDoseEventTypeFromID(id objc.ID) *HKMedicationDoseEventType {
 	purego.Track(o)
 	return o
 }
-

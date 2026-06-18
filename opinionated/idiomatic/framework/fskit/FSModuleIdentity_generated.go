@@ -65,4 +65,3 @@ type ModuleIdentityable interface {
 }
 
 var _ ModuleIdentityable = (*ModuleIdentity)(nil)
-

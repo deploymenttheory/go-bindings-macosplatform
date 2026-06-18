@@ -96,7 +96,9 @@ func (x *CNNDilatedPoolingMax) WithDestinationImageAllocator(destinationImageAll
 
 func (x *CNNDilatedPoolingMax) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
-func (x *CNNDilatedPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
+func (x *CNNDilatedPoolingMax) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNPooling.MPSCNNKernel
+}
 
 // CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
 type CNNDilatedPoolingMaxable interface {
@@ -112,4 +114,3 @@ type CNNDilatedPoolingMaxable interface {
 }
 
 var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)
-

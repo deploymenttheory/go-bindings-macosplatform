@@ -17,27 +17,27 @@ type CKFetchDatabaseChangesOperation struct {
 }
 
 var (
-	_clsCKFetchDatabaseChangesOperation = _objcClass("CKFetchDatabaseChangesOperation")
-	_cKFetchDatabaseChangesOperationSelInit = objc.RegisterName("init")
-	_cKFetchDatabaseChangesOperationSelInitWithPreviousServerChangeToken = objc.RegisterName("initWithPreviousServerChangeToken:")
-	_cKFetchDatabaseChangesOperationSelPreviousServerChangeToken = objc.RegisterName("previousServerChangeToken")
-	_cKFetchDatabaseChangesOperationSelSetPreviousServerChangeToken = objc.RegisterName("setPreviousServerChangeToken:")
-	_cKFetchDatabaseChangesOperationSelResultsLimit = objc.RegisterName("resultsLimit")
-	_cKFetchDatabaseChangesOperationSelSetResultsLimit = objc.RegisterName("setResultsLimit:")
-	_cKFetchDatabaseChangesOperationSelFetchAllChanges = objc.RegisterName("fetchAllChanges")
-	_cKFetchDatabaseChangesOperationSelSetFetchAllChanges = objc.RegisterName("setFetchAllChanges:")
-	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDChangedBlock = objc.RegisterName("recordZoneWithIDChangedBlock")
-	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDChangedBlock = objc.RegisterName("setRecordZoneWithIDChangedBlock:")
-	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasDeletedBlock = objc.RegisterName("recordZoneWithIDWasDeletedBlock")
-	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasDeletedBlock = objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:")
-	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasPurgedBlock = objc.RegisterName("recordZoneWithIDWasPurgedBlock")
-	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasPurgedBlock = objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:")
-	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock = objc.RegisterName("recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock")
+	_clsCKFetchDatabaseChangesOperation                                                              = _objcClass("CKFetchDatabaseChangesOperation")
+	_cKFetchDatabaseChangesOperationSelInit                                                          = objc.RegisterName("init")
+	_cKFetchDatabaseChangesOperationSelInitWithPreviousServerChangeToken                             = objc.RegisterName("initWithPreviousServerChangeToken:")
+	_cKFetchDatabaseChangesOperationSelPreviousServerChangeToken                                     = objc.RegisterName("previousServerChangeToken")
+	_cKFetchDatabaseChangesOperationSelSetPreviousServerChangeToken                                  = objc.RegisterName("setPreviousServerChangeToken:")
+	_cKFetchDatabaseChangesOperationSelResultsLimit                                                  = objc.RegisterName("resultsLimit")
+	_cKFetchDatabaseChangesOperationSelSetResultsLimit                                               = objc.RegisterName("setResultsLimit:")
+	_cKFetchDatabaseChangesOperationSelFetchAllChanges                                               = objc.RegisterName("fetchAllChanges")
+	_cKFetchDatabaseChangesOperationSelSetFetchAllChanges                                            = objc.RegisterName("setFetchAllChanges:")
+	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDChangedBlock                                  = objc.RegisterName("recordZoneWithIDChangedBlock")
+	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDChangedBlock                               = objc.RegisterName("setRecordZoneWithIDChangedBlock:")
+	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasDeletedBlock                               = objc.RegisterName("recordZoneWithIDWasDeletedBlock")
+	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasDeletedBlock                            = objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:")
+	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasPurgedBlock                                = objc.RegisterName("recordZoneWithIDWasPurgedBlock")
+	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasPurgedBlock                             = objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:")
+	_cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock    = objc.RegisterName("recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock")
 	_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock = objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:")
-	_cKFetchDatabaseChangesOperationSelChangeTokenUpdatedBlock = objc.RegisterName("changeTokenUpdatedBlock")
-	_cKFetchDatabaseChangesOperationSelSetChangeTokenUpdatedBlock = objc.RegisterName("setChangeTokenUpdatedBlock:")
-	_cKFetchDatabaseChangesOperationSelFetchDatabaseChangesCompletionBlock = objc.RegisterName("fetchDatabaseChangesCompletionBlock")
-	_cKFetchDatabaseChangesOperationSelSetFetchDatabaseChangesCompletionBlock = objc.RegisterName("setFetchDatabaseChangesCompletionBlock:")
+	_cKFetchDatabaseChangesOperationSelChangeTokenUpdatedBlock                                       = objc.RegisterName("changeTokenUpdatedBlock")
+	_cKFetchDatabaseChangesOperationSelSetChangeTokenUpdatedBlock                                    = objc.RegisterName("setChangeTokenUpdatedBlock:")
+	_cKFetchDatabaseChangesOperationSelFetchDatabaseChangesCompletionBlock                           = objc.RegisterName("fetchDatabaseChangesCompletionBlock")
+	_cKFetchDatabaseChangesOperationSelSetFetchDatabaseChangesCompletionBlock                        = objc.RegisterName("setFetchDatabaseChangesCompletionBlock:")
 )
 
 func CKFetchDatabaseChangesOperationFromID(id objc.ID) *CKFetchDatabaseChangesOperation {
@@ -53,21 +53,27 @@ func CKFetchDatabaseChangesOperationFromID(id objc.ID) *CKFetchDatabaseChangesOp
 // Creates an empty fetch database changes operation.
 func (o *CKFetchDatabaseChangesOperation) Init() *CKFetchDatabaseChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchDatabaseChangesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchDatabaseChangesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching database changes. - Parameters: - previousServerChangeToken: The change token that CloudKit uses to determine which database changes to return. After creating the operation, assign a handler to the ``CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock`` property so that you can process the operation's results. If this is your first fetch, or if you want to refetch all zones, pass `nil` for the change token. If you provide a change token from a previous ``CKFetchDatabaseChangesOperation``, CloudKit returns only the zones with changes since that token. The per-database ``CKServerChangeToken`` isn't the same as the per-record zone ``CKServerChangeToken`` from ``CKFetchRecordZoneChangesOperation``.
+// Creates an operation for fetching database changes. - Parameters: - previousServerChangeToken: The change token that CloudKit uses to determine which database changes to return. After creating the operation, assign a handler to the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ property so that you can process the operation's results. If this is your first fetch, or if you want to refetch all zones, pass `nil` for the change token. If you provide a change token from a previous “CKFetchDatabaseChangesOperation“, CloudKit returns only the zones with changes since that token. The per-database “CKServerChangeToken“ isn't the same as the per-record zone “CKServerChangeToken“ from “CKFetchRecordZoneChangesOperation“.
 func (o *CKFetchDatabaseChangesOperation) InitWithPreviousServerChangeToken(previousServerChangeToken *CKServerChangeToken) *CKFetchDatabaseChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchDatabaseChangesOperationSelInitWithPreviousServerChangeToken, previousServerChangeToken.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchDatabaseChangesOperationFromID(_ret)
 }
 
-// The server change token. Assign the token you receive from the ``CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock`` to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
+// The server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
 func (o *CKFetchDatabaseChangesOperation) PreviousServerChangeToken() *CKServerChangeToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchDatabaseChangesOperationSelPreviousServerChangeToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKServerChangeTokenFromID(_ret)
 }
 
@@ -85,7 +91,7 @@ func (o *CKFetchDatabaseChangesOperation) SetResultsLimit(resultsLimit uint) {
 	o.Ptr().Send(_cKFetchDatabaseChangesOperationSelSetResultsLimit, resultsLimit)
 }
 
-// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the ``CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock`` property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (o *CKFetchDatabaseChangesOperation) FetchAllChanges() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKFetchDatabaseChangesOperationSelFetchAllChanges)
 	return _ret
@@ -155,7 +161,7 @@ func (o *CKFetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(reco
 	o.Ptr().Send(_cKFetchDatabaseChangesOperationSelSetRecordZoneWithIDWasPurgedBlock, __block_recordZoneWithIDWasPurgedBlock)
 }
 
-// The closure to execute when a user-invoked account reset deletes a record zone. The closure returns no value and takes a single parameter: the deleted record zone's ID. The operation executes this closure, instead of ``CKFetchDatabaseChangesOperation/recordZoneWithIDWasDeletedBlock``, after a user action causes CloudKit to delete the record zone. Reupload any locally cached data to iCloud to minimize data loss.
+// The closure to execute when a user-invoked account reset deletes a record zone. The closure returns no value and takes a single parameter: the deleted record zone's ID. The operation executes this closure, instead of “CKFetchDatabaseChangesOperation/recordZoneWithIDWasDeletedBlock“, after a user action causes CloudKit to delete the record zone. Reupload any locally cached data to iCloud to minimize data loss.
 func (o *CKFetchDatabaseChangesOperation) RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchDatabaseChangesOperationSelRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock)
 	return _ret
@@ -195,7 +201,7 @@ func (o *CKFetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(changeToken
 	o.Ptr().Send(_cKFetchDatabaseChangesOperationSelSetChangeTokenUpdatedBlock, __block_changeTokenUpdatedBlock)
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameters: - The change token to store and use in subsequent instances of ``CKFetchDatabaseChangesOperation``. - A Boolen value that indicates whether this is the final database change. If ``CKFetchDatabaseChangesOperation/fetchAllChanges`` is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of ``CKFetchDatabaseChangesOperation`` to fetch further changes. - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the database changes. - Note: The change token and error parameters are mutally exclusive — that is, the closure provides one of them but not both. Your app is responsible for saving the change token at the end of the operation and providing it to future uses of ``CKFetchDatabaseChangesOperation``. If the server returns a ``CKError/Code/changeTokenExpired`` error, the ``CKFetchDatabaseChangesOperation/previousServerChangeToken`` value is stale and your app needs to clear its local cache and refetch the database changes, starting with a `nil` change token.
+// The closure to execute when the operation finishes. The closure returns no value and takes the following parameters: - The change token to store and use in subsequent instances of “CKFetchDatabaseChangesOperation“. - A Boolen value that indicates whether this is the final database change. If “CKFetchDatabaseChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchDatabaseChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the database changes. - Note: The change token and error parameters are mutally exclusive — that is, the closure provides one of them but not both. Your app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchDatabaseChangesOperation“. If the server returns a “CKError/Code/changeTokenExpired“ error, the “CKFetchDatabaseChangesOperation/previousServerChangeToken“ value is stale and your app needs to clear its local cache and refetch the database changes, starting with a `nil` change token.
 func (o *CKFetchDatabaseChangesOperation) FetchDatabaseChangesCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchDatabaseChangesOperationSelFetchDatabaseChangesCompletionBlock)
 	return _ret
@@ -214,4 +220,3 @@ func (o *CKFetchDatabaseChangesOperation) SetFetchDatabaseChangesCompletionBlock
 	}
 	o.Ptr().Send(_cKFetchDatabaseChangesOperationSelSetFetchDatabaseChangesCompletionBlock, __block_fetchDatabaseChangesCompletionBlock)
 }
-

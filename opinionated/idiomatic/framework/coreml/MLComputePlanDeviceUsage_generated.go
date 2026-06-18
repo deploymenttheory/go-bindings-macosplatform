@@ -54,4 +54,3 @@ type ComputePlanDeviceUsageable interface {
 }
 
 var _ ComputePlanDeviceUsageable = (*ComputePlanDeviceUsage)(nil)
-

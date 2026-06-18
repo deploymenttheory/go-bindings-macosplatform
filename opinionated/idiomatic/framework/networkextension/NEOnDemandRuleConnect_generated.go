@@ -44,7 +44,9 @@ func (x *NEOnDemandRuleConnect) WithDNSSearchDomainMatch(items ...*foundation.NS
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -60,7 +62,9 @@ func (x *NEOnDemandRuleConnect) WithDNSServerAddressMatch(items ...*foundation.N
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -82,7 +86,9 @@ func (x *NEOnDemandRuleConnect) WithSSIDMatch(items ...*foundation.NSString) *NE
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -97,7 +103,9 @@ func (x *NEOnDemandRuleConnect) WithProbeURL(probeURL string) *NEOnDemandRuleCon
 	return x
 }
 
-func (x *NEOnDemandRuleConnect) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
+func (x *NEOnDemandRuleConnect) asNEOnDemandRule() *raw.NEOnDemandRule {
+	return &x.inner.NEOnDemandRule
+}
 
 // NEOnDemandRuleConnectable is the interface implemented by [NEOnDemandRuleConnect], for mocking and DI.
 type NEOnDemandRuleConnectable interface {
@@ -110,4 +118,3 @@ type NEOnDemandRuleConnectable interface {
 }
 
 var _ NEOnDemandRuleConnectable = (*NEOnDemandRuleConnect)(nil)
-

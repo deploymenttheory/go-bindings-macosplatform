@@ -86,4 +86,3 @@ type OpenGLPixelBufferable interface {
 }
 
 var _ OpenGLPixelBufferable = (*OpenGLPixelBuffer)(nil)
-

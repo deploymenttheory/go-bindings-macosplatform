@@ -38,4 +38,3 @@ type MCSessionDelegate interface {
 	SessionDidStartReceivingResourceWithNameFromPeerWithProgress(session *MCSession, resourceName *foundation.NSString, peerID *MCPeerID, progress *foundation.NSProgress)
 	SessionDidFinishReceivingResourceWithNameFromPeerAtURLWithError(session *MCSession, resourceName *foundation.NSString, peerID *MCPeerID, localURL *foundation.NSURL, error_ unsafe.Pointer)
 }
-

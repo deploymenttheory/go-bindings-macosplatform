@@ -98,4 +98,3 @@ type VideoRequestOptionsable interface {
 }
 
 var _ VideoRequestOptionsable = (*VideoRequestOptions)(nil)
-

@@ -16,21 +16,21 @@ type EKRecurrenceRule struct {
 }
 
 var (
-	_clsEKRecurrenceRule = _objcClass("EKRecurrenceRule")
-	_eKRecurrenceRuleSelInitRecurrenceWithFrequencyIntervalEnd = objc.RegisterName("initRecurrenceWithFrequency:interval:end:")
+	_clsEKRecurrenceRule                                                                                                                        = _objcClass("EKRecurrenceRule")
+	_eKRecurrenceRuleSelInitRecurrenceWithFrequencyIntervalEnd                                                                                  = objc.RegisterName("initRecurrenceWithFrequency:interval:end:")
 	_eKRecurrenceRuleSelInitRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd = objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:")
-	_eKRecurrenceRuleSelCalendarIdentifier = objc.RegisterName("calendarIdentifier")
-	_eKRecurrenceRuleSelRecurrenceEnd = objc.RegisterName("recurrenceEnd")
-	_eKRecurrenceRuleSelSetRecurrenceEnd = objc.RegisterName("setRecurrenceEnd:")
-	_eKRecurrenceRuleSelFrequency = objc.RegisterName("frequency")
-	_eKRecurrenceRuleSelInterval = objc.RegisterName("interval")
-	_eKRecurrenceRuleSelFirstDayOfTheWeek = objc.RegisterName("firstDayOfTheWeek")
-	_eKRecurrenceRuleSelDaysOfTheWeek = objc.RegisterName("daysOfTheWeek")
-	_eKRecurrenceRuleSelDaysOfTheMonth = objc.RegisterName("daysOfTheMonth")
-	_eKRecurrenceRuleSelDaysOfTheYear = objc.RegisterName("daysOfTheYear")
-	_eKRecurrenceRuleSelWeeksOfTheYear = objc.RegisterName("weeksOfTheYear")
-	_eKRecurrenceRuleSelMonthsOfTheYear = objc.RegisterName("monthsOfTheYear")
-	_eKRecurrenceRuleSelSetPositions = objc.RegisterName("setPositions")
+	_eKRecurrenceRuleSelCalendarIdentifier                                                                                                      = objc.RegisterName("calendarIdentifier")
+	_eKRecurrenceRuleSelRecurrenceEnd                                                                                                           = objc.RegisterName("recurrenceEnd")
+	_eKRecurrenceRuleSelSetRecurrenceEnd                                                                                                        = objc.RegisterName("setRecurrenceEnd:")
+	_eKRecurrenceRuleSelFrequency                                                                                                               = objc.RegisterName("frequency")
+	_eKRecurrenceRuleSelInterval                                                                                                                = objc.RegisterName("interval")
+	_eKRecurrenceRuleSelFirstDayOfTheWeek                                                                                                       = objc.RegisterName("firstDayOfTheWeek")
+	_eKRecurrenceRuleSelDaysOfTheWeek                                                                                                           = objc.RegisterName("daysOfTheWeek")
+	_eKRecurrenceRuleSelDaysOfTheMonth                                                                                                          = objc.RegisterName("daysOfTheMonth")
+	_eKRecurrenceRuleSelDaysOfTheYear                                                                                                           = objc.RegisterName("daysOfTheYear")
+	_eKRecurrenceRuleSelWeeksOfTheYear                                                                                                          = objc.RegisterName("weeksOfTheYear")
+	_eKRecurrenceRuleSelMonthsOfTheYear                                                                                                         = objc.RegisterName("monthsOfTheYear")
+	_eKRecurrenceRuleSelSetPositions                                                                                                            = objc.RegisterName("setPositions")
 )
 
 func EKRecurrenceRuleFromID(id objc.ID) *EKRecurrenceRule {
@@ -46,28 +46,36 @@ func EKRecurrenceRuleFromID(id objc.ID) *EKRecurrenceRule {
 // @method     initRecurrenceWithFrequency:interval:end: @abstract   Simple initializer to create a recurrence. @discussion This is used to create a simple recurrence with a specific type, interval and end. If interval is 0, an exception is raised. The end parameter can be nil.
 func (o *EKRecurrenceRule) InitRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequency, interval int, end *EKRecurrenceEnd) *EKRecurrenceRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceRuleSelInitRecurrenceWithFrequencyIntervalEnd, type_, interval, end.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceRuleFromID(_ret)
 }
 
 // @method     initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end: @abstract   The designated initializer. @discussion This can be used to build any kind of recurrence rule. But be aware that certain combinations make no sense and will be ignored. For example, if you pass daysOfTheWeek for a daily recurrence, they will be ignored. @param      type            The type of recurrence @param      interval        The interval. Passing zero will raise an exception. @param      daysOfTheWeek   An array of EKRecurrenceDayOfWeek objects. Valid for all recurrence types except daily. Ignored otherwise. Corresponds to the BYDAY value in the iCalendar specification. @param      daysOfTheMonth  An array of NSNumbers ([+/-] 1 to 31). Negative numbers infer counting from the end of the month. For example, -1 means the last day of the month. Valid only for monthly recurrences. Ignored otherwise. Corresponds to the BYMONTHDAY value in the iCalendar specification. @param      monthsOfTheYear An array of NSNumbers (1 to 12). Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYMONTH value in the iCalendar specification. @param      weeksOfTheYear  An array of NSNumbers ([+/1] 1 to 53). Negative numbers infer counting from the end of the year. For example, -1 means the last week of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYWEEKNO value in the iCalendar specification. @param      daysOfTheYear   An array of NSNumbers ([+/1] 1 to 366). Negative numbers infer counting from the end of the year. For example, -1 means the last day of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYYEARDAY value in the iCalendar specification. @param      setPositions    An array of NSNumbers ([+/1] 1 to 366). Used at the end of recurrence computation to filter the list to the positions specified. Negative numbers indicate starting at the end, i.e. -1 indicates taking the last result of the set. Valid when daysOfTheWeek, daysOfTheMonth, monthsOfTheYear, weeksOfTheYear, or daysOfTheYear is passed. Ignored otherwise. Corresponds to the BYSETPOS value in the iCalendar specification. @param      end             The recurrence end, or nil.
 func (o *EKRecurrenceRule) InitRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ EKRecurrenceFrequency, interval int, days *foundation.NSArray[*EKRecurrenceDayOfWeek], monthDays *foundation.NSArray[*foundation.NSNumber], months *foundation.NSArray[*foundation.NSNumber], weeksOfTheYear *foundation.NSArray[*foundation.NSNumber], daysOfTheYear *foundation.NSArray[*foundation.NSNumber], setPositions *foundation.NSArray[*foundation.NSNumber], end *EKRecurrenceEnd) *EKRecurrenceRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceRuleSelInitRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd, type_, interval, days.Ptr(), monthDays, months, weeksOfTheYear, daysOfTheYear, setPositions, end.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceRuleFromID(_ret)
 }
 
 // @property       calendarIdentifier; @discussion     Calendar used by this recurrence rule.
 func (o *EKRecurrenceRule) CalendarIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceRuleSelCalendarIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property       recurrenceEnd @discussion     This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
 func (o *EKRecurrenceRule) RecurrenceEnd() *EKRecurrenceEnd {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceRuleSelRecurrenceEnd)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return EKRecurrenceEndFromID(_ret)
 }
 
@@ -96,7 +104,9 @@ func (o *EKRecurrenceRule) FirstDayOfTheWeek() int {
 // @property       daysOfTheWeek @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyWeekly, EKRecurrenceFrequencyMonthly, or EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more EKRecurrenceDayOfWeek objects corresponding to the days of the week the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYDAY in the iCalendar specification.
 func (o *EKRecurrenceRule) DaysOfTheWeek() *foundation.NSArray[*EKRecurrenceDayOfWeek] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _eKRecurrenceRuleSelDaysOfTheWeek)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*EKRecurrenceDayOfWeek](_ret)
 }
 
@@ -129,4 +139,3 @@ func (o *EKRecurrenceRule) SetPositions() *foundation.NSArray[*foundation.NSNumb
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _eKRecurrenceRuleSelSetPositions)
 	return _ret
 }
-

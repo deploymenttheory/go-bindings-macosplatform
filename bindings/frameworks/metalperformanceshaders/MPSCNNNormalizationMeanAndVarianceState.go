@@ -17,11 +17,11 @@ type MPSCNNNormalizationMeanAndVarianceState struct {
 }
 
 var (
-	_clsMPSCNNNormalizationMeanAndVarianceState = _objcClass("MPSCNNNormalizationMeanAndVarianceState")
-	_mPSCNNNormalizationMeanAndVarianceStateSelInitWithMeanVariance = objc.RegisterName("initWithMean:variance:")
+	_clsMPSCNNNormalizationMeanAndVarianceState                                                       = _objcClass("MPSCNNNormalizationMeanAndVarianceState")
+	_mPSCNNNormalizationMeanAndVarianceStateSelInitWithMeanVariance                                   = objc.RegisterName("initWithMean:variance:")
 	_mPSCNNNormalizationMeanAndVarianceStateSelTemporaryStateWithCommandBufferNumberOfFeatureChannels = objc.RegisterName("temporaryStateWithCommandBuffer:numberOfFeatureChannels:")
-	_mPSCNNNormalizationMeanAndVarianceStateSelMean = objc.RegisterName("mean")
-	_mPSCNNNormalizationMeanAndVarianceStateSelVariance = objc.RegisterName("variance")
+	_mPSCNNNormalizationMeanAndVarianceStateSelMean                                                   = objc.RegisterName("mean")
+	_mPSCNNNormalizationMeanAndVarianceStateSelVariance                                               = objc.RegisterName("variance")
 )
 
 func MPSCNNNormalizationMeanAndVarianceStateFromID(id objc.ID) *MPSCNNNormalizationMeanAndVarianceState {
@@ -37,14 +37,18 @@ func MPSCNNNormalizationMeanAndVarianceStateFromID(id objc.ID) *MPSCNNNormalizat
 // @abstract   Initialize a MPSCNNNormalizationMeanAndVarianceState object using values contained in MTLBuffers. @param      mean        The MTLBuffer containing mean terms. @param      variance    The MTLBuffer containing variance terms.
 func (o *MPSCNNNormalizationMeanAndVarianceState) InitWithMeanVariance(mean metal.MTLBuffer, variance metal.MTLBuffer) *MPSCNNNormalizationMeanAndVarianceState {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNormalizationMeanAndVarianceStateSelInitWithMeanVariance, mean, variance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationMeanAndVarianceStateFromID(_ret)
 }
 
 // @abstract   Create a temporary MPSCNNNormalizationMeanAndVarianceState suitable for a normalization operation on images containing no more than the specified number of feature channels. @param      commandBuffer           The command buffer on which the temporary state will be used. @param      numberOfFeatureChannels The number of feature channels used to size the state.
 func MPSCNNNormalizationMeanAndVarianceStateTemporaryStateWithCommandBufferNumberOfFeatureChannels(commandBuffer metal.MTLCommandBuffer, numberOfFeatureChannels uint) *MPSCNNNormalizationMeanAndVarianceState {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNormalizationMeanAndVarianceState), _mPSCNNNormalizationMeanAndVarianceStateSelTemporaryStateWithCommandBufferNumberOfFeatureChannels, commandBuffer, numberOfFeatureChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNormalizationMeanAndVarianceStateFromID(_ret)
 }
 
@@ -59,4 +63,3 @@ func (o *MPSCNNNormalizationMeanAndVarianceState) Variance() metal.MTLBuffer {
 	_ret := objc.Send[metal.MTLBuffer](o.Ptr(), _mPSCNNNormalizationMeanAndVarianceStateSelVariance)
 	return _ret
 }
-

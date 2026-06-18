@@ -18,11 +18,11 @@ type GKSKNodeComponent struct {
 }
 
 var (
-	_clsGKSKNodeComponent = _objcClass("GKSKNodeComponent")
+	_clsGKSKNodeComponent                  = _objcClass("GKSKNodeComponent")
 	_gKSKNodeComponentSelComponentWithNode = objc.RegisterName("componentWithNode:")
-	_gKSKNodeComponentSelInitWithNode = objc.RegisterName("initWithNode:")
-	_gKSKNodeComponentSelNode = objc.RegisterName("node")
-	_gKSKNodeComponentSelSetNode = objc.RegisterName("setNode:")
+	_gKSKNodeComponentSelInitWithNode      = objc.RegisterName("initWithNode:")
+	_gKSKNodeComponentSelNode              = objc.RegisterName("node")
+	_gKSKNodeComponentSelSetNode           = objc.RegisterName("setNode:")
 )
 
 func GKSKNodeComponentFromID(id objc.ID) *GKSKNodeComponent {
@@ -38,24 +38,29 @@ func GKSKNodeComponentFromID(id objc.ID) *GKSKNodeComponent {
 // Creates a component that encapsulate the given SpriteKit node. When the component is added to an entity, the SKNode's entity property will be set. @param node Node to associate with the component. @see SKNode.entity
 func GKSKNodeComponentComponentWithNode(node *spritekit.SKNode) *GKSKNodeComponent {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKSKNodeComponent), _gKSKNodeComponentSelComponentWithNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSKNodeComponentFromID(_ret)
 }
 
 // Initializes component to encapsulate the given SpriteKit node. When the component is added to an entity, the SKNode's entity property will be set. @param node Node to associate with the component. @see SKNode.entity
 func (o *GKSKNodeComponent) InitWithNode(node *spritekit.SKNode) *GKSKNodeComponent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSKNodeComponentSelInitWithNode, node.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKSKNodeComponentFromID(_ret)
 }
 
 func (o *GKSKNodeComponent) Node() *spritekit.SKNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSKNodeComponentSelNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return spritekit.SKNodeFromID(_ret)
 }
 
 func (o *GKSKNodeComponent) SetNode(node *spritekit.SKNode) {
 	o.Ptr().Send(_gKSKNodeComponentSelSetNode, node.Ptr())
 }
-

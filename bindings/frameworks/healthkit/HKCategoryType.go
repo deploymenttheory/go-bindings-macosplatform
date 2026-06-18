@@ -25,4 +25,3 @@ func HKCategoryTypeFromID(id objc.ID) *HKCategoryType {
 	purego.Track(o)
 	return o
 }
-

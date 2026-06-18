@@ -16,15 +16,15 @@ type MTRServerEndpoint struct {
 }
 
 var (
-	_clsMTRServerEndpoint = _objcClass("MTRServerEndpoint")
+	_clsMTRServerEndpoint                              = _objcClass("MTRServerEndpoint")
 	_mTRServerEndpointSelInitWithEndpointIDDeviceTypes = objc.RegisterName("initWithEndpointID:deviceTypes:")
-	_mTRServerEndpointSelAddAccessGrant = objc.RegisterName("addAccessGrant:")
-	_mTRServerEndpointSelRemoveAccessGrant = objc.RegisterName("removeAccessGrant:")
-	_mTRServerEndpointSelAddServerCluster = objc.RegisterName("addServerCluster:")
-	_mTRServerEndpointSelEndpointID = objc.RegisterName("endpointID")
-	_mTRServerEndpointSelDeviceTypes = objc.RegisterName("deviceTypes")
-	_mTRServerEndpointSelAccessGrants = objc.RegisterName("accessGrants")
-	_mTRServerEndpointSelServerClusters = objc.RegisterName("serverClusters")
+	_mTRServerEndpointSelAddAccessGrant                = objc.RegisterName("addAccessGrant:")
+	_mTRServerEndpointSelRemoveAccessGrant             = objc.RegisterName("removeAccessGrant:")
+	_mTRServerEndpointSelAddServerCluster              = objc.RegisterName("addServerCluster:")
+	_mTRServerEndpointSelEndpointID                    = objc.RegisterName("endpointID")
+	_mTRServerEndpointSelDeviceTypes                   = objc.RegisterName("deviceTypes")
+	_mTRServerEndpointSelAccessGrants                  = objc.RegisterName("accessGrants")
+	_mTRServerEndpointSelServerClusters                = objc.RegisterName("serverClusters")
 )
 
 func MTRServerEndpointFromID(id objc.ID) *MTRServerEndpoint {
@@ -40,7 +40,9 @@ func MTRServerEndpointFromID(id objc.ID) *MTRServerEndpoint {
 // The provided endpointID must be in the range 1-65535.  The list of device types provided must be nonempty (but may include vendor-specific device types).
 func (o *MTRServerEndpoint) InitWithEndpointIDDeviceTypes(endpointID *foundation.NSNumber, deviceTypes *foundation.NSArray[*MTRDeviceTypeRevision]) *MTRServerEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerEndpointSelInitWithEndpointIDDeviceTypes, endpointID.Ptr(), deviceTypes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRServerEndpointFromID(_ret)
 }
 
@@ -62,27 +64,34 @@ func (o *MTRServerEndpoint) AddServerCluster(serverCluster *MTRServerCluster) bo
 
 func (o *MTRServerEndpoint) EndpointID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerEndpointSelEndpointID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRServerEndpoint) DeviceTypes() *foundation.NSArray[*MTRDeviceTypeRevision] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerEndpointSelDeviceTypes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRDeviceTypeRevision](_ret)
 }
 
 // The list of entities that are allowed to access all clusters on this endpoint.  If more fine-grained access control is desired, access grants should be defined on individual clusters. Defaults to empty list, which means no access granted.
 func (o *MTRServerEndpoint) AccessGrants() *foundation.NSArray[*MTRAccessGrant] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerEndpointSelAccessGrants)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRAccessGrant](_ret)
 }
 
 // A list of server clusters supported on this endpoint.  The Descriptor cluster does not need to be included unless a TagList attribute is desired on it or it has a non-empty PartsList, or it needs to have cluster-specific access grants.  If not included, the Descriptor cluster will be generated automatically.
 func (o *MTRServerEndpoint) ServerClusters() *foundation.NSArray[*MTRServerCluster] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRServerEndpointSelServerClusters)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MTRServerCluster](_ret)
 }
-

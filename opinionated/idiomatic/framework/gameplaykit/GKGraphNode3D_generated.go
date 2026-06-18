@@ -57,4 +57,3 @@ type GraphNode3Dable interface {
 }
 
 var _ GraphNode3Dable = (*GraphNode3D)(nil)
-

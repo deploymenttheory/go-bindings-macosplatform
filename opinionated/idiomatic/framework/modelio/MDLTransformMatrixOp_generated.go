@@ -62,4 +62,3 @@ type TransformMatrixOpable interface {
 }
 
 var _ TransformMatrixOpable = (*TransformMatrixOp)(nil)
-

@@ -16,23 +16,23 @@ type MKLocalSearchRequest struct {
 }
 
 var (
-	_clsMKLocalSearchRequest = _objcClass("MKLocalSearchRequest")
-	_mKLocalSearchRequestSelInit = objc.RegisterName("init")
-	_mKLocalSearchRequestSelInitWithNaturalLanguageQuery = objc.RegisterName("initWithNaturalLanguageQuery:")
+	_clsMKLocalSearchRequest                                   = _objcClass("MKLocalSearchRequest")
+	_mKLocalSearchRequestSelInit                               = objc.RegisterName("init")
+	_mKLocalSearchRequestSelInitWithNaturalLanguageQuery       = objc.RegisterName("initWithNaturalLanguageQuery:")
 	_mKLocalSearchRequestSelInitWithNaturalLanguageQueryRegion = objc.RegisterName("initWithNaturalLanguageQuery:region:")
-	_mKLocalSearchRequestSelNaturalLanguageQuery = objc.RegisterName("naturalLanguageQuery")
-	_mKLocalSearchRequestSelSetNaturalLanguageQuery = objc.RegisterName("setNaturalLanguageQuery:")
-	_mKLocalSearchRequestSelRegion = objc.RegisterName("region")
-	_mKLocalSearchRequestSelSetRegion = objc.RegisterName("setRegion:")
-	_mKLocalSearchRequestSelRegionPriority = objc.RegisterName("regionPriority")
-	_mKLocalSearchRequestSelSetRegionPriority = objc.RegisterName("setRegionPriority:")
-	_mKLocalSearchRequestSelResultTypes = objc.RegisterName("resultTypes")
-	_mKLocalSearchRequestSelSetResultTypes = objc.RegisterName("setResultTypes:")
-	_mKLocalSearchRequestSelPointOfInterestFilter = objc.RegisterName("pointOfInterestFilter")
-	_mKLocalSearchRequestSelSetPointOfInterestFilter = objc.RegisterName("setPointOfInterestFilter:")
-	_mKLocalSearchRequestSelAddressFilter = objc.RegisterName("addressFilter")
-	_mKLocalSearchRequestSelSetAddressFilter = objc.RegisterName("setAddressFilter:")
-	_mKLocalSearchRequestSelInitWithCompletion = objc.RegisterName("initWithCompletion:")
+	_mKLocalSearchRequestSelNaturalLanguageQuery               = objc.RegisterName("naturalLanguageQuery")
+	_mKLocalSearchRequestSelSetNaturalLanguageQuery            = objc.RegisterName("setNaturalLanguageQuery:")
+	_mKLocalSearchRequestSelRegion                             = objc.RegisterName("region")
+	_mKLocalSearchRequestSelSetRegion                          = objc.RegisterName("setRegion:")
+	_mKLocalSearchRequestSelRegionPriority                     = objc.RegisterName("regionPriority")
+	_mKLocalSearchRequestSelSetRegionPriority                  = objc.RegisterName("setRegionPriority:")
+	_mKLocalSearchRequestSelResultTypes                        = objc.RegisterName("resultTypes")
+	_mKLocalSearchRequestSelSetResultTypes                     = objc.RegisterName("setResultTypes:")
+	_mKLocalSearchRequestSelPointOfInterestFilter              = objc.RegisterName("pointOfInterestFilter")
+	_mKLocalSearchRequestSelSetPointOfInterestFilter           = objc.RegisterName("setPointOfInterestFilter:")
+	_mKLocalSearchRequestSelAddressFilter                      = objc.RegisterName("addressFilter")
+	_mKLocalSearchRequestSelSetAddressFilter                   = objc.RegisterName("setAddressFilter:")
+	_mKLocalSearchRequestSelInitWithCompletion                 = objc.RegisterName("initWithCompletion:")
 )
 
 func MKLocalSearchRequestFromID(id objc.ID) *MKLocalSearchRequest {
@@ -47,25 +47,33 @@ func MKLocalSearchRequestFromID(id objc.ID) *MKLocalSearchRequest {
 
 func (o *MKLocalSearchRequest) Init() *MKLocalSearchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchRequestFromID(_ret)
 }
 
 func (o *MKLocalSearchRequest) InitWithNaturalLanguageQuery(naturalLanguageQuery *foundation.NSString) *MKLocalSearchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelInitWithNaturalLanguageQuery, naturalLanguageQuery.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchRequestFromID(_ret)
 }
 
 func (o *MKLocalSearchRequest) InitWithNaturalLanguageQueryRegion(naturalLanguageQuery *foundation.NSString, region MKCoordinateRegion) *MKLocalSearchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelInitWithNaturalLanguageQueryRegion, naturalLanguageQuery.Ptr(), region)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchRequestFromID(_ret)
 }
 
 func (o *MKLocalSearchRequest) NaturalLanguageQuery() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelNaturalLanguageQuery)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -102,7 +110,9 @@ func (o *MKLocalSearchRequest) SetResultTypes(resultTypes MKLocalSearchResultTyp
 
 func (o *MKLocalSearchRequest) PointOfInterestFilter() *MKPointOfInterestFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelPointOfInterestFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPointOfInterestFilterFromID(_ret)
 }
 
@@ -112,7 +122,9 @@ func (o *MKLocalSearchRequest) SetPointOfInterestFilter(pointOfInterestFilter *M
 
 func (o *MKLocalSearchRequest) AddressFilter() *MKAddressFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelAddressFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKAddressFilterFromID(_ret)
 }
 
@@ -122,7 +134,8 @@ func (o *MKLocalSearchRequest) SetAddressFilter(addressFilter *MKAddressFilter) 
 
 func (o *MKLocalSearchRequest) InitWithCompletion(completion *MKLocalSearchCompletion) *MKLocalSearchRequest {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKLocalSearchRequestSelInitWithCompletion, completion.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKLocalSearchRequestFromID(_ret)
 }
-

@@ -15,17 +15,17 @@ type NSConditionLock struct {
 }
 
 var (
-	_clsNSConditionLock = _objcClass("NSConditionLock")
-	_nSConditionLockSelInitWithCondition = objc.RegisterName("initWithCondition:")
-	_nSConditionLockSelLockWhenCondition = objc.RegisterName("lockWhenCondition:")
-	_nSConditionLockSelTryLock = objc.RegisterName("tryLock")
-	_nSConditionLockSelTryLockWhenCondition = objc.RegisterName("tryLockWhenCondition:")
-	_nSConditionLockSelUnlockWithCondition = objc.RegisterName("unlockWithCondition:")
-	_nSConditionLockSelLockBeforeDate = objc.RegisterName("lockBeforeDate:")
+	_clsNSConditionLock                            = _objcClass("NSConditionLock")
+	_nSConditionLockSelInitWithCondition           = objc.RegisterName("initWithCondition:")
+	_nSConditionLockSelLockWhenCondition           = objc.RegisterName("lockWhenCondition:")
+	_nSConditionLockSelTryLock                     = objc.RegisterName("tryLock")
+	_nSConditionLockSelTryLockWhenCondition        = objc.RegisterName("tryLockWhenCondition:")
+	_nSConditionLockSelUnlockWithCondition         = objc.RegisterName("unlockWithCondition:")
+	_nSConditionLockSelLockBeforeDate              = objc.RegisterName("lockBeforeDate:")
 	_nSConditionLockSelLockWhenConditionBeforeDate = objc.RegisterName("lockWhenCondition:beforeDate:")
-	_nSConditionLockSelCondition = objc.RegisterName("condition")
-	_nSConditionLockSelName = objc.RegisterName("name")
-	_nSConditionLockSelSetName = objc.RegisterName("setName:")
+	_nSConditionLockSelCondition                   = objc.RegisterName("condition")
+	_nSConditionLockSelName                        = objc.RegisterName("name")
+	_nSConditionLockSelSetName                     = objc.RegisterName("setName:")
 )
 
 func NSConditionLockFromID(id objc.ID) *NSConditionLock {
@@ -40,7 +40,9 @@ func NSConditionLockFromID(id objc.ID) *NSConditionLock {
 
 func (o *NSConditionLock) InitWithCondition(condition int) *NSConditionLock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConditionLockSelInitWithCondition, condition)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSConditionLockFromID(_ret)
 }
 
@@ -79,11 +81,12 @@ func (o *NSConditionLock) Condition() int {
 
 func (o *NSConditionLock) Name() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSConditionLockSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSConditionLock) SetName(name *NSString) {
 	o.Ptr().Send(_nSConditionLockSelSetName, name.Ptr())
 }
-

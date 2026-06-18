@@ -17,25 +17,25 @@ type MPSInstanceAccelerationStructure struct {
 }
 
 var (
-	_clsMPSInstanceAccelerationStructure = _objcClass("MPSInstanceAccelerationStructure")
-	_mPSInstanceAccelerationStructureSelAccelerationStructures = objc.RegisterName("accelerationStructures")
+	_clsMPSInstanceAccelerationStructure                          = _objcClass("MPSInstanceAccelerationStructure")
+	_mPSInstanceAccelerationStructureSelAccelerationStructures    = objc.RegisterName("accelerationStructures")
 	_mPSInstanceAccelerationStructureSelSetAccelerationStructures = objc.RegisterName("setAccelerationStructures:")
-	_mPSInstanceAccelerationStructureSelInstanceBuffer = objc.RegisterName("instanceBuffer")
-	_mPSInstanceAccelerationStructureSelSetInstanceBuffer = objc.RegisterName("setInstanceBuffer:")
-	_mPSInstanceAccelerationStructureSelInstanceBufferOffset = objc.RegisterName("instanceBufferOffset")
-	_mPSInstanceAccelerationStructureSelSetInstanceBufferOffset = objc.RegisterName("setInstanceBufferOffset:")
-	_mPSInstanceAccelerationStructureSelTransformBuffer = objc.RegisterName("transformBuffer")
-	_mPSInstanceAccelerationStructureSelSetTransformBuffer = objc.RegisterName("setTransformBuffer:")
-	_mPSInstanceAccelerationStructureSelTransformBufferOffset = objc.RegisterName("transformBufferOffset")
-	_mPSInstanceAccelerationStructureSelSetTransformBufferOffset = objc.RegisterName("setTransformBufferOffset:")
-	_mPSInstanceAccelerationStructureSelTransformType = objc.RegisterName("transformType")
-	_mPSInstanceAccelerationStructureSelSetTransformType = objc.RegisterName("setTransformType:")
-	_mPSInstanceAccelerationStructureSelMaskBuffer = objc.RegisterName("maskBuffer")
-	_mPSInstanceAccelerationStructureSelSetMaskBuffer = objc.RegisterName("setMaskBuffer:")
-	_mPSInstanceAccelerationStructureSelMaskBufferOffset = objc.RegisterName("maskBufferOffset")
-	_mPSInstanceAccelerationStructureSelSetMaskBufferOffset = objc.RegisterName("setMaskBufferOffset:")
-	_mPSInstanceAccelerationStructureSelInstanceCount = objc.RegisterName("instanceCount")
-	_mPSInstanceAccelerationStructureSelSetInstanceCount = objc.RegisterName("setInstanceCount:")
+	_mPSInstanceAccelerationStructureSelInstanceBuffer            = objc.RegisterName("instanceBuffer")
+	_mPSInstanceAccelerationStructureSelSetInstanceBuffer         = objc.RegisterName("setInstanceBuffer:")
+	_mPSInstanceAccelerationStructureSelInstanceBufferOffset      = objc.RegisterName("instanceBufferOffset")
+	_mPSInstanceAccelerationStructureSelSetInstanceBufferOffset   = objc.RegisterName("setInstanceBufferOffset:")
+	_mPSInstanceAccelerationStructureSelTransformBuffer           = objc.RegisterName("transformBuffer")
+	_mPSInstanceAccelerationStructureSelSetTransformBuffer        = objc.RegisterName("setTransformBuffer:")
+	_mPSInstanceAccelerationStructureSelTransformBufferOffset     = objc.RegisterName("transformBufferOffset")
+	_mPSInstanceAccelerationStructureSelSetTransformBufferOffset  = objc.RegisterName("setTransformBufferOffset:")
+	_mPSInstanceAccelerationStructureSelTransformType             = objc.RegisterName("transformType")
+	_mPSInstanceAccelerationStructureSelSetTransformType          = objc.RegisterName("setTransformType:")
+	_mPSInstanceAccelerationStructureSelMaskBuffer                = objc.RegisterName("maskBuffer")
+	_mPSInstanceAccelerationStructureSelSetMaskBuffer             = objc.RegisterName("setMaskBuffer:")
+	_mPSInstanceAccelerationStructureSelMaskBufferOffset          = objc.RegisterName("maskBufferOffset")
+	_mPSInstanceAccelerationStructureSelSetMaskBufferOffset       = objc.RegisterName("setMaskBufferOffset:")
+	_mPSInstanceAccelerationStructureSelInstanceCount             = objc.RegisterName("instanceCount")
+	_mPSInstanceAccelerationStructureSelSetInstanceCount          = objc.RegisterName("setInstanceCount:")
 )
 
 func MPSInstanceAccelerationStructureFromID(id objc.ID) *MPSInstanceAccelerationStructure {
@@ -51,7 +51,9 @@ func MPSInstanceAccelerationStructureFromID(id objc.ID) *MPSInstanceAcceleration
 // @brief Acceleration structures available for use in this instance acceleration structure. Each instance must provide an index into this array in the instance buffer as well as a transformation matrix in the transform buffer. All acceleration structures must share a single vertex buffer, optional index buffer, and optional mask buffer, though they may have different offsets within each buffer, and all acceleration structures must share the same acceleration structure group. If a polygon acceleration structure is rebuilt or refit, the instance acceleration structure must subsequently be rebuilt or refit.
 func (o *MPSInstanceAccelerationStructure) AccelerationStructures() *foundation.NSArray[*MPSPolygonAccelerationStructure] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSInstanceAccelerationStructureSelAccelerationStructures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPSPolygonAccelerationStructure](_ret)
 }
 
@@ -138,4 +140,3 @@ func (o *MPSInstanceAccelerationStructure) InstanceCount() uint {
 func (o *MPSInstanceAccelerationStructure) SetInstanceCount(instanceCount uint) {
 	o.Ptr().Send(_mPSInstanceAccelerationStructureSelSetInstanceCount, instanceCount)
 }
-

@@ -16,7 +16,9 @@ type MTRDoorLockClusterSetAliroReaderConfigParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRDoorLockClusterSetAliroReaderConfigParams].
-func (x *MTRDoorLockClusterSetAliroReaderConfigParams) Unwrap() *raw.MTRDoorLockClusterSetAliroReaderConfigParams { return x.inner }
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) Unwrap() *raw.MTRDoorLockClusterSetAliroReaderConfigParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -156,4 +158,3 @@ type MTRDoorLockClusterSetAliroReaderConfigParamsable interface {
 }
 
 var _ MTRDoorLockClusterSetAliroReaderConfigParamsable = (*MTRDoorLockClusterSetAliroReaderConfigParams)(nil)
-

@@ -128,4 +128,3 @@ type AssetResourceCreationOptionsable interface {
 }
 
 var _ AssetResourceCreationOptionsable = (*AssetResourceCreationOptions)(nil)
-

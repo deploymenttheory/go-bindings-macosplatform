@@ -173,4 +173,3 @@ type CNNCrossChannelNormalizationable interface {
 }
 
 var _ CNNCrossChannelNormalizationable = (*CNNCrossChannelNormalization)(nil)
-

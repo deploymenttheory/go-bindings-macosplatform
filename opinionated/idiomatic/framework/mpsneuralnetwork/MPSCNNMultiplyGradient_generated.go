@@ -182,11 +182,17 @@ func (x *CNNMultiplyGradient) WithDestinationImageAllocator(destinationImageAllo
 	return x
 }
 
-func (x *CNNMultiplyGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
+func (x *CNNMultiplyGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient {
+	return &x.inner.MPSCNNArithmeticGradient
+}
 
-func (x *CNNMultiplyGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
+func (x *CNNMultiplyGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNMultiplyGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNMultiplyGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNMultiplyGradientable is the interface implemented by [CNNMultiplyGradient], for mocking and DI.
 type CNNMultiplyGradientable interface {
@@ -218,4 +224,3 @@ type CNNMultiplyGradientable interface {
 }
 
 var _ CNNMultiplyGradientable = (*CNNMultiplyGradient)(nil)
-

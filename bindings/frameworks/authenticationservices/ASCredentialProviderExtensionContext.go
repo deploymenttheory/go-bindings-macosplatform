@@ -16,12 +16,12 @@ type ASCredentialProviderExtensionContext struct {
 }
 
 var (
-	_clsASCredentialProviderExtensionContext = _objcClass("ASCredentialProviderExtensionContext")
-	_aSCredentialProviderExtensionContextSelCompleteRequestWithSelectedCredentialCompletionHandler = objc.RegisterName("completeRequestWithSelectedCredential:completionHandler:")
-	_aSCredentialProviderExtensionContextSelCompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler = objc.RegisterName("completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:")
+	_clsASCredentialProviderExtensionContext                                                                          = _objcClass("ASCredentialProviderExtensionContext")
+	_aSCredentialProviderExtensionContextSelCompleteRequestWithSelectedCredentialCompletionHandler                    = objc.RegisterName("completeRequestWithSelectedCredential:completionHandler:")
+	_aSCredentialProviderExtensionContextSelCompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler    = objc.RegisterName("completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:")
 	_aSCredentialProviderExtensionContextSelCompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler = objc.RegisterName("completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:")
-	_aSCredentialProviderExtensionContextSelCompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler = objc.RegisterName("completeOneTimeCodeRequestWithSelectedCredential:completionHandler:")
-	_aSCredentialProviderExtensionContextSelCompleteExtensionConfigurationRequest = objc.RegisterName("completeExtensionConfigurationRequest")
+	_aSCredentialProviderExtensionContextSelCompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler         = objc.RegisterName("completeOneTimeCodeRequestWithSelectedCredential:completionHandler:")
+	_aSCredentialProviderExtensionContextSelCompleteExtensionConfigurationRequest                                     = objc.RegisterName("completeExtensionConfigurationRequest")
 )
 
 func ASCredentialProviderExtensionContextFromID(id objc.ID) *ASCredentialProviderExtensionContext {
@@ -86,4 +86,3 @@ func (o *ASCredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSel
 func (o *ASCredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
 	o.Ptr().Send(_aSCredentialProviderExtensionContextSelCompleteExtensionConfigurationRequest)
 }
-

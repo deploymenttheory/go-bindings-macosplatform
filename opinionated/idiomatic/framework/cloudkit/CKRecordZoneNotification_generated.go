@@ -59,4 +59,3 @@ type RecordZoneNotificationable interface {
 }
 
 var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)
-

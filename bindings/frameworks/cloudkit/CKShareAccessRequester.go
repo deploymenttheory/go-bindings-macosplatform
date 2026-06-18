@@ -16,10 +16,10 @@ type CKShareAccessRequester struct {
 }
 
 var (
-	_clsCKShareAccessRequester = _objcClass("CKShareAccessRequester")
-	_cKShareAccessRequesterSelUserIdentity = objc.RegisterName("userIdentity")
+	_clsCKShareAccessRequester                      = _objcClass("CKShareAccessRequester")
+	_cKShareAccessRequesterSelUserIdentity          = objc.RegisterName("userIdentity")
 	_cKShareAccessRequesterSelParticipantLookupInfo = objc.RegisterName("participantLookupInfo")
-	_cKShareAccessRequesterSelContact = objc.RegisterName("contact")
+	_cKShareAccessRequesterSelContact               = objc.RegisterName("contact")
 )
 
 func CKShareAccessRequesterFromID(id objc.ID) *CKShareAccessRequester {
@@ -35,14 +35,18 @@ func CKShareAccessRequesterFromID(id objc.ID) *CKShareAccessRequester {
 // The identity of the user requesting access to the share.
 func (o *CKShareAccessRequester) UserIdentity() *CKUserIdentity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareAccessRequesterSelUserIdentity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityFromID(_ret)
 }
 
-// Lookup information for the requester. Use this lookup info with ``CKFetchShareParticipantsOperation`` to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
+// Lookup information for the requester. Use this lookup info with “CKFetchShareParticipantsOperation“ to fetch the corresponding participant. Once fetched, add the participant to the share to approve the requester.
 func (o *CKShareAccessRequester) ParticipantLookupInfo() *CKUserIdentityLookupInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareAccessRequesterSelParticipantLookupInfo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityLookupInfoFromID(_ret)
 }
 
@@ -51,4 +55,3 @@ func (o *CKShareAccessRequester) Contact() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKShareAccessRequesterSelContact)
 	return _ret
 }
-

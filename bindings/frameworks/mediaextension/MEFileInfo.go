@@ -17,12 +17,12 @@ type MEFileInfo struct {
 }
 
 var (
-	_clsMEFileInfo = _objcClass("MEFileInfo")
-	_mEFileInfoSelDuration = objc.RegisterName("duration")
-	_mEFileInfoSelSetDuration = objc.RegisterName("setDuration:")
-	_mEFileInfoSelFragmentsStatus = objc.RegisterName("fragmentsStatus")
+	_clsMEFileInfo                   = _objcClass("MEFileInfo")
+	_mEFileInfoSelDuration           = objc.RegisterName("duration")
+	_mEFileInfoSelSetDuration        = objc.RegisterName("setDuration:")
+	_mEFileInfoSelFragmentsStatus    = objc.RegisterName("fragmentsStatus")
 	_mEFileInfoSelSetFragmentsStatus = objc.RegisterName("setFragmentsStatus:")
-	_mEFileInfoSelSidecarFileName = objc.RegisterName("sidecarFileName")
+	_mEFileInfoSelSidecarFileName    = objc.RegisterName("sidecarFileName")
 	_mEFileInfoSelSetSidecarFileName = objc.RegisterName("setSidecarFileName:")
 )
 
@@ -59,11 +59,12 @@ func (o *MEFileInfo) SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatu
 // @property		sidecarFileName @abstract		The sidecar filename used by the MediaExtension. @discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
 func (o *MEFileInfo) SidecarFileName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mEFileInfoSelSidecarFileName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MEFileInfo) SetSidecarFileName(sidecarFileName *foundation.NSString) {
 	o.Ptr().Send(_mEFileInfoSelSetSidecarFileName, sidecarFileName.Ptr())
 }
-

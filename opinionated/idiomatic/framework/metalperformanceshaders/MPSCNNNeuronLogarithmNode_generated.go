@@ -57,9 +57,13 @@ func (x *CNNNeuronLogarithmNode) WithLabel(label string) *CNNNeuronLogarithmNode
 	return x
 }
 
-func (x *CNNNeuronLogarithmNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
+func (x *CNNNeuronLogarithmNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode {
+	return &x.inner.MPSCNNNeuronNode
+}
 
-func (x *CNNNeuronLogarithmNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
+func (x *CNNNeuronLogarithmNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode
+}
 
 // CNNNeuronLogarithmNodeable is the interface implemented by [CNNNeuronLogarithmNode], for mocking and DI.
 type CNNNeuronLogarithmNodeable interface {
@@ -69,4 +73,3 @@ type CNNNeuronLogarithmNodeable interface {
 }
 
 var _ CNNNeuronLogarithmNodeable = (*CNNNeuronLogarithmNode)(nil)
-

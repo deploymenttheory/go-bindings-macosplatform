@@ -18,13 +18,13 @@ type MPSNNGramMatrixCalculationNode struct {
 }
 
 var (
-	_clsMPSNNGramMatrixCalculationNode = _objcClass("MPSNNGramMatrixCalculationNode")
-	_mPSNNGramMatrixCalculationNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
-	_mPSNNGramMatrixCalculationNodeSelInitWithSource = objc.RegisterName("initWithSource:")
+	_clsMPSNNGramMatrixCalculationNode                    = _objcClass("MPSNNGramMatrixCalculationNode")
+	_mPSNNGramMatrixCalculationNodeSelNodeWithSource      = objc.RegisterName("nodeWithSource:")
+	_mPSNNGramMatrixCalculationNodeSelInitWithSource      = objc.RegisterName("initWithSource:")
 	_mPSNNGramMatrixCalculationNodeSelNodeWithSourceAlpha = objc.RegisterName("nodeWithSource:alpha:")
 	_mPSNNGramMatrixCalculationNodeSelInitWithSourceAlpha = objc.RegisterName("initWithSource:alpha:")
-	_mPSNNGramMatrixCalculationNodeSelAlpha = objc.RegisterName("alpha")
-	_mPSNNGramMatrixCalculationNodeSelPropertyCallBack = objc.RegisterName("propertyCallBack")
+	_mPSNNGramMatrixCalculationNodeSelAlpha               = objc.RegisterName("alpha")
+	_mPSNNGramMatrixCalculationNodeSelPropertyCallBack    = objc.RegisterName("propertyCallBack")
 	_mPSNNGramMatrixCalculationNodeSelSetPropertyCallBack = objc.RegisterName("setPropertyCallBack:")
 )
 
@@ -41,28 +41,36 @@ func MPSNNGramMatrixCalculationNodeFromID(id objc.ID) *MPSNNGramMatrixCalculatio
 // @abstract   Init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
 func MPSNNGramMatrixCalculationNodeNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSNNGramMatrixCalculationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGramMatrixCalculationNode), _mPSNNGramMatrixCalculationNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
 func (o *MPSNNGramMatrixCalculationNode) InitWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *MPSNNGramMatrixCalculationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @param      alpha                   Scaling factor for the output. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
 func MPSNNGramMatrixCalculationNodeNodeWithSourceAlpha(sourceNode *mpsneuralnetwork.MPSNNImageNode, alpha float32) *MPSNNGramMatrixCalculationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSNNGramMatrixCalculationNode), _mPSNNGramMatrixCalculationNodeSelNodeWithSourceAlpha, sourceNode.Ptr(), alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSNNGramMatrixCalculationNode kernel. @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter. @param      alpha                   Scaling factor for the output. @return     A new MPSNNFilter node for a MPSNNGramMatrixCalculationNode kernel.
 func (o *MPSNNGramMatrixCalculationNode) InitWithSourceAlpha(sourceNode *mpsneuralnetwork.MPSNNImageNode, alpha float32) *MPSNNGramMatrixCalculationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNGramMatrixCalculationNodeSelInitWithSourceAlpha, sourceNode.Ptr(), alpha)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNGramMatrixCalculationNodeFromID(_ret)
 }
 
@@ -81,4 +89,3 @@ func (o *MPSNNGramMatrixCalculationNode) PropertyCallBack() mpsneuralnetwork.MPS
 func (o *MPSNNGramMatrixCalculationNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNGramMatrixCallback) {
 	o.Ptr().Send(_mPSNNGramMatrixCalculationNodeSelSetPropertyCallBack, propertyCallBack)
 }
-

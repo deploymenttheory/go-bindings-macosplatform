@@ -139,4 +139,3 @@ type PDFImageRepable interface {
 }
 
 var _ PDFImageRepable = (*PDFImageRep)(nil)
-

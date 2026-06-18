@@ -17,9 +17,9 @@ type GKRidgedNoiseSource struct {
 }
 
 var (
-	_clsGKRidgedNoiseSource = _objcClass("GKRidgedNoiseSource")
+	_clsGKRidgedNoiseSource                                                        = _objcClass("GKRidgedNoiseSource")
 	_gKRidgedNoiseSourceSelRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed = objc.RegisterName("ridgedNoiseSourceWithFrequency:octaveCount:lacunarity:seed:")
-	_gKRidgedNoiseSourceSelInitWithFrequencyOctaveCountLacunaritySeed = objc.RegisterName("initWithFrequency:octaveCount:lacunarity:seed:")
+	_gKRidgedNoiseSourceSelInitWithFrequencyOctaveCountLacunaritySeed              = objc.RegisterName("initWithFrequency:octaveCount:lacunarity:seed:")
 )
 
 func GKRidgedNoiseSourceFromID(id objc.ID) *GKRidgedNoiseSource {
@@ -34,13 +34,16 @@ func GKRidgedNoiseSourceFromID(id objc.ID) *GKRidgedNoiseSource {
 
 func GKRidgedNoiseSourceRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *GKRidgedNoiseSource {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRidgedNoiseSource), _gKRidgedNoiseSourceSelRidgedNoiseSourceWithFrequencyOctaveCountLacunaritySeed, frequency, octaveCount, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRidgedNoiseSourceFromID(_ret)
 }
 
 func (o *GKRidgedNoiseSource) InitWithFrequencyOctaveCountLacunaritySeed(frequency float64, octaveCount int, lacunarity float64, seed int32) *GKRidgedNoiseSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRidgedNoiseSourceSelInitWithFrequencyOctaveCountLacunaritySeed, frequency, octaveCount, lacunarity, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRidgedNoiseSourceFromID(_ret)
 }
-

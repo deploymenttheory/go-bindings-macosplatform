@@ -234,4 +234,3 @@ type NSFileProviderUserInteractionSuppressing interface {
 	SetInteractionSuppressedForIdentifier(suppression bool, suppressionIdentifier *foundation.NSString)
 	IsInteractionSuppressedForIdentifier(suppressionIdentifier *foundation.NSString) bool
 }
-

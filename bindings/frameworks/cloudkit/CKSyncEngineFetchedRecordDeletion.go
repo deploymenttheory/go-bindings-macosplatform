@@ -16,8 +16,8 @@ type CKSyncEngineFetchedRecordDeletion struct {
 }
 
 var (
-	_clsCKSyncEngineFetchedRecordDeletion = _objcClass("CKSyncEngineFetchedRecordDeletion")
-	_cKSyncEngineFetchedRecordDeletionSelRecordID = objc.RegisterName("recordID")
+	_clsCKSyncEngineFetchedRecordDeletion           = _objcClass("CKSyncEngineFetchedRecordDeletion")
+	_cKSyncEngineFetchedRecordDeletionSelRecordID   = objc.RegisterName("recordID")
 	_cKSyncEngineFetchedRecordDeletionSelRecordType = objc.RegisterName("recordType")
 )
 
@@ -34,14 +34,17 @@ func CKSyncEngineFetchedRecordDeletionFromID(id objc.ID) *CKSyncEngineFetchedRec
 // The deleted record's unique identifier.
 func (o *CKSyncEngineFetchedRecordDeletion) RecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchedRecordDeletionSelRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
 
 // The record type of the deleted record.
 func (o *CKSyncEngineFetchedRecordDeletion) RecordType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchedRecordDeletionSelRecordType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

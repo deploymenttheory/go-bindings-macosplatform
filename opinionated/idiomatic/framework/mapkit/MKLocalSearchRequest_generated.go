@@ -190,4 +190,3 @@ type LocalSearchRequestable interface {
 }
 
 var _ LocalSearchRequestable = (*LocalSearchRequest)(nil)
-

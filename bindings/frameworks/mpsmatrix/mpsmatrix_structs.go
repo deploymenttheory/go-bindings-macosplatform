@@ -4,9 +4,8 @@
 package mpsmatrix
 
 type MPSMatrixCopyOffsets struct {
-	SourceRowOffset uint32
-	SourceColumnOffset uint32
-	DestinationRowOffset uint32
+	SourceRowOffset         uint32
+	SourceColumnOffset      uint32
+	DestinationRowOffset    uint32
 	DestinationColumnOffset uint32
 }
-

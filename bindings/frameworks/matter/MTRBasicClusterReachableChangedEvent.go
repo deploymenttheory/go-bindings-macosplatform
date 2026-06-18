@@ -25,4 +25,3 @@ func MTRBasicClusterReachableChangedEventFromID(id objc.ID) *MTRBasicClusterReac
 	purego.Track(o)
 	return o
 }
-

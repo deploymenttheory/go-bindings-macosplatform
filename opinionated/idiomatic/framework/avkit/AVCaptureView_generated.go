@@ -123,4 +123,3 @@ type CaptureViewable interface {
 }
 
 var _ CaptureViewable = (*CaptureView)(nil)
-

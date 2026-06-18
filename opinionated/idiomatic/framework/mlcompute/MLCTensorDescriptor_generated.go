@@ -115,4 +115,3 @@ type TensorDescriptorable interface {
 }
 
 var _ TensorDescriptorable = (*TensorDescriptor)(nil)
-

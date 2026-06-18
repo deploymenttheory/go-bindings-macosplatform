@@ -16,7 +16,7 @@ type HKSeriesBuilder struct {
 }
 
 var (
-	_clsHKSeriesBuilder = _objcClass("HKSeriesBuilder")
+	_clsHKSeriesBuilder        = _objcClass("HKSeriesBuilder")
 	_hKSeriesBuilderSelDiscard = objc.RegisterName("discard")
 )
 
@@ -34,4 +34,3 @@ func HKSeriesBuilderFromID(id objc.ID) *HKSeriesBuilder {
 func (o *HKSeriesBuilder) Discard() {
 	o.Ptr().Send(_hKSeriesBuilderSelDiscard)
 }
-

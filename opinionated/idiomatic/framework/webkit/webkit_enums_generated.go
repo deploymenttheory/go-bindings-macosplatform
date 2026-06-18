@@ -13,10 +13,10 @@ import (
 type WKAudiovisualMediaTypes uint64
 
 const (
-	WKAudiovisualMediaTypeNone WKAudiovisualMediaTypes = 0
+	WKAudiovisualMediaTypeNone  WKAudiovisualMediaTypes = 0
 	WKAudiovisualMediaTypeAudio WKAudiovisualMediaTypes = 1
 	WKAudiovisualMediaTypeVideo WKAudiovisualMediaTypes = 2
-	WKAudiovisualMediaTypeAll WKAudiovisualMediaTypes = 18446744073709551615
+	WKAudiovisualMediaTypeAll   WKAudiovisualMediaTypes = 18446744073709551615
 )
 
 func (e WKAudiovisualMediaTypes) String() string {
@@ -40,8 +40,8 @@ type WKContentMode int64
 
 const (
 	WKContentModeRecommended WKContentMode = 0
-	WKContentModeMobile WKContentMode = 1
-	WKContentModeDesktop WKContentMode = 2
+	WKContentModeMobile      WKContentMode = 1
+	WKContentModeDesktop     WKContentMode = 2
 )
 
 func (e WKContentMode) String() string {
@@ -60,7 +60,7 @@ func (e WKContentMode) String() string {
 type WKCookiePolicy int64
 
 const (
-	WKCookiePolicyAllow WKCookiePolicy = 0
+	WKCookiePolicyAllow    WKCookiePolicy = 0
 	WKCookiePolicyDisallow WKCookiePolicy = 1
 )
 
@@ -78,10 +78,10 @@ func (e WKCookiePolicy) String() string {
 type WKFullscreenState int64
 
 const (
-	WKFullscreenStateNotInFullscreen WKFullscreenState = 0
+	WKFullscreenStateNotInFullscreen    WKFullscreenState = 0
 	WKFullscreenStateEnteringFullscreen WKFullscreenState = 1
-	WKFullscreenStateInFullscreen WKFullscreenState = 2
-	WKFullscreenStateExitingFullscreen WKFullscreenState = 3
+	WKFullscreenStateInFullscreen       WKFullscreenState = 2
+	WKFullscreenStateExitingFullscreen  WKFullscreenState = 3
 )
 
 func (e WKFullscreenState) String() string {
@@ -102,9 +102,9 @@ func (e WKFullscreenState) String() string {
 type WKInactiveSchedulingPolicy int64
 
 const (
-	WKInactiveSchedulingPolicySuspend WKInactiveSchedulingPolicy = 0
+	WKInactiveSchedulingPolicySuspend  WKInactiveSchedulingPolicy = 0
 	WKInactiveSchedulingPolicyThrottle WKInactiveSchedulingPolicy = 1
-	WKInactiveSchedulingPolicyNone WKInactiveSchedulingPolicy = 2
+	WKInactiveSchedulingPolicyNone     WKInactiveSchedulingPolicy = 2
 )
 
 func (e WKInactiveSchedulingPolicy) String() string {
@@ -123,9 +123,9 @@ func (e WKInactiveSchedulingPolicy) String() string {
 type WKMediaCaptureState int64
 
 const (
-	WKMediaCaptureStateNone WKMediaCaptureState = 0
+	WKMediaCaptureStateNone   WKMediaCaptureState = 0
 	WKMediaCaptureStateActive WKMediaCaptureState = 1
-	WKMediaCaptureStateMuted WKMediaCaptureState = 2
+	WKMediaCaptureStateMuted  WKMediaCaptureState = 2
 )
 
 func (e WKMediaCaptureState) String() string {
@@ -144,9 +144,9 @@ func (e WKMediaCaptureState) String() string {
 type WKMediaPlaybackState int64
 
 const (
-	WKMediaPlaybackStateNone WKMediaPlaybackState = 0
-	WKMediaPlaybackStatePlaying WKMediaPlaybackState = 1
-	WKMediaPlaybackStatePaused WKMediaPlaybackState = 2
+	WKMediaPlaybackStateNone      WKMediaPlaybackState = 0
+	WKMediaPlaybackStatePlaying   WKMediaPlaybackState = 1
+	WKMediaPlaybackStatePaused    WKMediaPlaybackState = 2
 	WKMediaPlaybackStateSuspended WKMediaPlaybackState = 3
 )
 
@@ -168,12 +168,12 @@ func (e WKMediaPlaybackState) String() string {
 type WKNavigationType int64
 
 const (
-	WKNavigationTypeLinkActivated WKNavigationType = 0
-	WKNavigationTypeFormSubmitted WKNavigationType = 1
-	WKNavigationTypeBackForward WKNavigationType = 2
-	WKNavigationTypeReload WKNavigationType = 3
+	WKNavigationTypeLinkActivated   WKNavigationType = 0
+	WKNavigationTypeFormSubmitted   WKNavigationType = 1
+	WKNavigationTypeBackForward     WKNavigationType = 2
+	WKNavigationTypeReload          WKNavigationType = 3
 	WKNavigationTypeFormResubmitted WKNavigationType = 4
-	WKNavigationTypeOther WKNavigationType = -1
+	WKNavigationTypeOther           WKNavigationType = -1
 )
 
 func (e WKNavigationType) String() string {
@@ -198,9 +198,9 @@ func (e WKNavigationType) String() string {
 type WKSecurityRestrictionMode int64
 
 const (
-	WKSecurityRestrictionModeNone WKSecurityRestrictionMode = 0
+	WKSecurityRestrictionModeNone                  WKSecurityRestrictionMode = 0
 	WKSecurityRestrictionModeMaximizeCompatibility WKSecurityRestrictionMode = 1
-	WKSecurityRestrictionModeLockdown WKSecurityRestrictionMode = 2
+	WKSecurityRestrictionModeLockdown              WKSecurityRestrictionMode = 2
 )
 
 func (e WKSecurityRestrictionMode) String() string {
@@ -220,7 +220,7 @@ type WKUserInterfaceDirectionPolicy int64
 
 const (
 	WKUserInterfaceDirectionPolicyContent WKUserInterfaceDirectionPolicy = 0
-	WKUserInterfaceDirectionPolicySystem WKUserInterfaceDirectionPolicy = 1
+	WKUserInterfaceDirectionPolicySystem  WKUserInterfaceDirectionPolicy = 1
 )
 
 func (e WKUserInterfaceDirectionPolicy) String() string {
@@ -238,7 +238,7 @@ type WKUserScriptInjectionTime int64
 
 const (
 	WKUserScriptInjectionTimeAtDocumentStart WKUserScriptInjectionTime = 0
-	WKUserScriptInjectionTimeAtDocumentEnd WKUserScriptInjectionTime = 1
+	WKUserScriptInjectionTimeAtDocumentEnd   WKUserScriptInjectionTime = 1
 )
 
 func (e WKUserScriptInjectionTime) String() string {
@@ -255,13 +255,13 @@ func (e WKUserScriptInjectionTime) String() string {
 type WKWebExtensionContextPermissionStatus int64
 
 const (
-	WKWebExtensionContextPermissionStatusDeniedExplicitly WKWebExtensionContextPermissionStatus = -3
-	WKWebExtensionContextPermissionStatusDeniedImplicitly WKWebExtensionContextPermissionStatus = -2
+	WKWebExtensionContextPermissionStatusDeniedExplicitly    WKWebExtensionContextPermissionStatus = -3
+	WKWebExtensionContextPermissionStatusDeniedImplicitly    WKWebExtensionContextPermissionStatus = -2
 	WKWebExtensionContextPermissionStatusRequestedImplicitly WKWebExtensionContextPermissionStatus = -1
-	WKWebExtensionContextPermissionStatusUnknown WKWebExtensionContextPermissionStatus = 0
+	WKWebExtensionContextPermissionStatusUnknown             WKWebExtensionContextPermissionStatus = 0
 	WKWebExtensionContextPermissionStatusRequestedExplicitly WKWebExtensionContextPermissionStatus = 1
-	WKWebExtensionContextPermissionStatusGrantedImplicitly WKWebExtensionContextPermissionStatus = 2
-	WKWebExtensionContextPermissionStatusGrantedExplicitly WKWebExtensionContextPermissionStatus = 3
+	WKWebExtensionContextPermissionStatusGrantedImplicitly   WKWebExtensionContextPermissionStatus = 2
+	WKWebExtensionContextPermissionStatusGrantedExplicitly   WKWebExtensionContextPermissionStatus = 3
 )
 
 func (e WKWebExtensionContextPermissionStatus) String() string {
@@ -289,9 +289,9 @@ func (e WKWebExtensionContextPermissionStatus) String() string {
 type WKWebExtensionMatchPatternOptions uint64
 
 const (
-	WKWebExtensionMatchPatternOptionsNone WKWebExtensionMatchPatternOptions = 0
-	WKWebExtensionMatchPatternOptionsIgnoreSchemes WKWebExtensionMatchPatternOptions = 1
-	WKWebExtensionMatchPatternOptionsIgnorePaths WKWebExtensionMatchPatternOptions = 2
+	WKWebExtensionMatchPatternOptionsNone                 WKWebExtensionMatchPatternOptions = 0
+	WKWebExtensionMatchPatternOptionsIgnoreSchemes        WKWebExtensionMatchPatternOptions = 1
+	WKWebExtensionMatchPatternOptionsIgnorePaths          WKWebExtensionMatchPatternOptions = 2
 	WKWebExtensionMatchPatternOptionsMatchBidirectionally WKWebExtensionMatchPatternOptions = 4
 )
 
@@ -316,16 +316,16 @@ func (e WKWebExtensionMatchPatternOptions) String() string {
 type WKWebExtensionTabChangedProperties uint64
 
 const (
-	WKWebExtensionTabChangedPropertiesNone WKWebExtensionTabChangedProperties = 0
-	WKWebExtensionTabChangedPropertiesLoading WKWebExtensionTabChangedProperties = 2
-	WKWebExtensionTabChangedPropertiesMuted WKWebExtensionTabChangedProperties = 4
-	WKWebExtensionTabChangedPropertiesPinned WKWebExtensionTabChangedProperties = 8
+	WKWebExtensionTabChangedPropertiesNone         WKWebExtensionTabChangedProperties = 0
+	WKWebExtensionTabChangedPropertiesLoading      WKWebExtensionTabChangedProperties = 2
+	WKWebExtensionTabChangedPropertiesMuted        WKWebExtensionTabChangedProperties = 4
+	WKWebExtensionTabChangedPropertiesPinned       WKWebExtensionTabChangedProperties = 8
 	WKWebExtensionTabChangedPropertiesPlayingAudio WKWebExtensionTabChangedProperties = 16
-	WKWebExtensionTabChangedPropertiesReaderMode WKWebExtensionTabChangedProperties = 32
-	WKWebExtensionTabChangedPropertiesSize WKWebExtensionTabChangedProperties = 64
-	WKWebExtensionTabChangedPropertiesTitle WKWebExtensionTabChangedProperties = 128
-	WKWebExtensionTabChangedPropertiesURL WKWebExtensionTabChangedProperties = 256
-	WKWebExtensionTabChangedPropertiesZoomFactor WKWebExtensionTabChangedProperties = 512
+	WKWebExtensionTabChangedPropertiesReaderMode   WKWebExtensionTabChangedProperties = 32
+	WKWebExtensionTabChangedPropertiesSize         WKWebExtensionTabChangedProperties = 64
+	WKWebExtensionTabChangedPropertiesTitle        WKWebExtensionTabChangedProperties = 128
+	WKWebExtensionTabChangedPropertiesURL          WKWebExtensionTabChangedProperties = 256
+	WKWebExtensionTabChangedPropertiesZoomFactor   WKWebExtensionTabChangedProperties = 512
 )
 
 func (e WKWebExtensionTabChangedProperties) String() string {
@@ -366,9 +366,9 @@ func (e WKWebExtensionTabChangedProperties) String() string {
 type WKWebExtensionWindowState int64
 
 const (
-	WKWebExtensionWindowStateNormal WKWebExtensionWindowState = 0
-	WKWebExtensionWindowStateMinimized WKWebExtensionWindowState = 1
-	WKWebExtensionWindowStateMaximized WKWebExtensionWindowState = 2
+	WKWebExtensionWindowStateNormal     WKWebExtensionWindowState = 0
+	WKWebExtensionWindowStateMinimized  WKWebExtensionWindowState = 1
+	WKWebExtensionWindowStateMaximized  WKWebExtensionWindowState = 2
 	WKWebExtensionWindowStateFullscreen WKWebExtensionWindowState = 3
 )
 
@@ -391,7 +391,7 @@ type WKWebExtensionWindowType int64
 
 const (
 	WKWebExtensionWindowTypeNormal WKWebExtensionWindowType = 0
-	WKWebExtensionWindowTypePopup WKWebExtensionWindowType = 1
+	WKWebExtensionWindowTypePopup  WKWebExtensionWindowType = 1
 )
 
 func (e WKWebExtensionWindowType) String() string {
@@ -426,10 +426,10 @@ func (e WKWebViewDataType) String() string {
 type WKWebpagePreferencesUpgradeToHTTPSPolicy int64
 
 const (
-	WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested WKWebpagePreferencesUpgradeToHTTPSPolicy = 0
-	WKWebpagePreferencesUpgradeToHTTPSPolicyAutomaticFallbackToHTTP WKWebpagePreferencesUpgradeToHTTPSPolicy = 1
+	WKWebpagePreferencesUpgradeToHTTPSPolicyKeepAsRequested            WKWebpagePreferencesUpgradeToHTTPSPolicy = 0
+	WKWebpagePreferencesUpgradeToHTTPSPolicyAutomaticFallbackToHTTP    WKWebpagePreferencesUpgradeToHTTPSPolicy = 1
 	WKWebpagePreferencesUpgradeToHTTPSPolicyUserMediatedFallbackToHTTP WKWebpagePreferencesUpgradeToHTTPSPolicy = 2
-	WKWebpagePreferencesUpgradeToHTTPSPolicyErrorOnFailure WKWebpagePreferencesUpgradeToHTTPSPolicy = 3
+	WKWebpagePreferencesUpgradeToHTTPSPolicyErrorOnFailure             WKWebpagePreferencesUpgradeToHTTPSPolicy = 3
 )
 
 func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
@@ -450,8 +450,8 @@ func (e WKWebpagePreferencesUpgradeToHTTPSPolicy) String() string {
 type WebCacheModel uint64
 
 const (
-	WebCacheModelDocumentViewer WebCacheModel = 0
-	WebCacheModelDocumentBrowser WebCacheModel = 1
+	WebCacheModelDocumentViewer    WebCacheModel = 0
+	WebCacheModelDocumentBrowser   WebCacheModel = 1
 	WebCacheModelPrimaryWebBrowser WebCacheModel = 2
 )
 
@@ -467,4 +467,3 @@ func (e WebCacheModel) String() string {
 		return fmt.Sprintf("WebCacheModel(%d)", int64(e))
 	}
 }
-

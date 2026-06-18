@@ -88,7 +88,9 @@ func (x *CNNNeuronSoftPlus) WithDestinationImageAllocator(destinationImageAlloca
 
 func (x *CNNNeuronSoftPlus) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronSoftPlus) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronSoftPlus) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronSoftPlusable is the interface implemented by [CNNNeuronSoftPlus], for mocking and DI.
 type CNNNeuronSoftPlusable interface {
@@ -104,4 +106,3 @@ type CNNNeuronSoftPlusable interface {
 }
 
 var _ CNNNeuronSoftPlusable = (*CNNNeuronSoftPlus)(nil)
-

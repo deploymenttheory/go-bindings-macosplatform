@@ -16,8 +16,8 @@ type MTRUnitTestingClusterDoubleNestedStructList struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterDoubleNestedStructList = _objcClass("MTRUnitTestingClusterDoubleNestedStructList")
-	_mTRUnitTestingClusterDoubleNestedStructListSelA = objc.RegisterName("a")
+	_clsMTRUnitTestingClusterDoubleNestedStructList     = _objcClass("MTRUnitTestingClusterDoubleNestedStructList")
+	_mTRUnitTestingClusterDoubleNestedStructListSelA    = objc.RegisterName("a")
 	_mTRUnitTestingClusterDoubleNestedStructListSelSetA = objc.RegisterName("setA:")
 )
 
@@ -39,4 +39,3 @@ func (o *MTRUnitTestingClusterDoubleNestedStructList) A() *foundation.NSArray[ob
 func (o *MTRUnitTestingClusterDoubleNestedStructList) SetA(a *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRUnitTestingClusterDoubleNestedStructListSelSetA, a)
 }
-

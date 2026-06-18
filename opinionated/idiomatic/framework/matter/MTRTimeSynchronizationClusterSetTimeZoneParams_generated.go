@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterSetTimeZoneParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetTimeZoneParams].
-func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetTimeZoneParams { return x.inner }
+func (x *MTRTimeSynchronizationClusterSetTimeZoneParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetTimeZoneParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -92,4 +94,3 @@ type MTRTimeSynchronizationClusterSetTimeZoneParamsable interface {
 }
 
 var _ MTRTimeSynchronizationClusterSetTimeZoneParamsable = (*MTRTimeSynchronizationClusterSetTimeZoneParams)(nil)
-

@@ -112,4 +112,3 @@ type DeleteCommandable interface {
 }
 
 var _ DeleteCommandable = (*DeleteCommand)(nil)
-

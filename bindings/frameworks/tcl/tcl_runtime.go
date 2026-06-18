@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_tclLib uintptr
-	_loadOnce sync.Once
+	_tclLib        uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -98,7 +98,9 @@ func _loadLibrary() {
 	_register("Tcl_ChannelOutputProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelOutputProc, _tclLib, "Tcl_ChannelOutputProc") })
 	_register("Tcl_ChannelSeekProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelSeekProc, _tclLib, "Tcl_ChannelSeekProc") })
 	_register("Tcl_ChannelSetOptionProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelSetOptionProc, _tclLib, "Tcl_ChannelSetOptionProc") })
-	_register("Tcl_ChannelThreadActionProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelThreadActionProc, _tclLib, "Tcl_ChannelThreadActionProc") })
+	_register("Tcl_ChannelThreadActionProc", func() {
+		purego.RegisterLibFunc(&_fnTcl_ChannelThreadActionProc, _tclLib, "Tcl_ChannelThreadActionProc")
+	})
 	_register("Tcl_ChannelTruncateProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelTruncateProc, _tclLib, "Tcl_ChannelTruncateProc") })
 	_register("Tcl_ChannelVersion", func() { purego.RegisterLibFunc(&_fnTcl_ChannelVersion, _tclLib, "Tcl_ChannelVersion") })
 	_register("Tcl_ChannelWatchProc", func() { purego.RegisterLibFunc(&_fnTcl_ChannelWatchProc, _tclLib, "Tcl_ChannelWatchProc") })
@@ -135,7 +137,9 @@ func _loadLibrary() {
 	_register("Tcl_CreateObjTrace", func() { purego.RegisterLibFunc(&_fnTcl_CreateObjTrace, _tclLib, "Tcl_CreateObjTrace") })
 	_register("Tcl_CreateSlave", func() { purego.RegisterLibFunc(&_fnTcl_CreateSlave, _tclLib, "Tcl_CreateSlave") })
 	_register("Tcl_CreateThread", func() { purego.RegisterLibFunc(&_fnTcl_CreateThread, _tclLib, "Tcl_CreateThread") })
-	_register("Tcl_CreateThreadExitHandler", func() { purego.RegisterLibFunc(&_fnTcl_CreateThreadExitHandler, _tclLib, "Tcl_CreateThreadExitHandler") })
+	_register("Tcl_CreateThreadExitHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_CreateThreadExitHandler, _tclLib, "Tcl_CreateThreadExitHandler")
+	})
 	_register("Tcl_CreateTimerHandler", func() { purego.RegisterLibFunc(&_fnTcl_CreateTimerHandler, _tclLib, "Tcl_CreateTimerHandler") })
 	_register("Tcl_CreateTrace", func() { purego.RegisterLibFunc(&_fnTcl_CreateTrace, _tclLib, "Tcl_CreateTrace") })
 	_register("Tcl_CutChannel", func() { purego.RegisterLibFunc(&_fnTcl_CutChannel, _tclLib, "Tcl_CutChannel") })
@@ -178,7 +182,9 @@ func _loadLibrary() {
 	_register("Tcl_DeleteHashTable", func() { purego.RegisterLibFunc(&_fnTcl_DeleteHashTable, _tclLib, "Tcl_DeleteHashTable") })
 	_register("Tcl_DeleteInterp", func() { purego.RegisterLibFunc(&_fnTcl_DeleteInterp, _tclLib, "Tcl_DeleteInterp") })
 	_register("Tcl_DeleteNamespace", func() { purego.RegisterLibFunc(&_fnTcl_DeleteNamespace, _tclLib, "Tcl_DeleteNamespace") })
-	_register("Tcl_DeleteThreadExitHandler", func() { purego.RegisterLibFunc(&_fnTcl_DeleteThreadExitHandler, _tclLib, "Tcl_DeleteThreadExitHandler") })
+	_register("Tcl_DeleteThreadExitHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_DeleteThreadExitHandler, _tclLib, "Tcl_DeleteThreadExitHandler")
+	})
 	_register("Tcl_DeleteTimerHandler", func() { purego.RegisterLibFunc(&_fnTcl_DeleteTimerHandler, _tclLib, "Tcl_DeleteTimerHandler") })
 	_register("Tcl_DeleteTrace", func() { purego.RegisterLibFunc(&_fnTcl_DeleteTrace, _tclLib, "Tcl_DeleteTrace") })
 	_register("Tcl_DetachChannel", func() { purego.RegisterLibFunc(&_fnTcl_DetachChannel, _tclLib, "Tcl_DetachChannel") })
@@ -247,7 +253,9 @@ func _loadLibrary() {
 	_register("Tcl_FSGetNormalizedPath", func() { purego.RegisterLibFunc(&_fnTcl_FSGetNormalizedPath, _tclLib, "Tcl_FSGetNormalizedPath") })
 	_register("Tcl_FSGetPathType", func() { purego.RegisterLibFunc(&_fnTcl_FSGetPathType, _tclLib, "Tcl_FSGetPathType") })
 	_register("Tcl_FSGetTranslatedPath", func() { purego.RegisterLibFunc(&_fnTcl_FSGetTranslatedPath, _tclLib, "Tcl_FSGetTranslatedPath") })
-	_register("Tcl_FSGetTranslatedStringPath", func() { purego.RegisterLibFunc(&_fnTcl_FSGetTranslatedStringPath, _tclLib, "Tcl_FSGetTranslatedStringPath") })
+	_register("Tcl_FSGetTranslatedStringPath", func() {
+		purego.RegisterLibFunc(&_fnTcl_FSGetTranslatedStringPath, _tclLib, "Tcl_FSGetTranslatedStringPath")
+	})
 	_register("Tcl_FSJoinPath", func() { purego.RegisterLibFunc(&_fnTcl_FSJoinPath, _tclLib, "Tcl_FSJoinPath") })
 	_register("Tcl_FSJoinToPath", func() { purego.RegisterLibFunc(&_fnTcl_FSJoinToPath, _tclLib, "Tcl_FSJoinToPath") })
 	_register("Tcl_FSLink", func() { purego.RegisterLibFunc(&_fnTcl_FSLink, _tclLib, "Tcl_FSLink") })
@@ -307,7 +315,9 @@ func _loadLibrary() {
 	_register("Tcl_GetCommandFromObj", func() { purego.RegisterLibFunc(&_fnTcl_GetCommandFromObj, _tclLib, "Tcl_GetCommandFromObj") })
 	_register("Tcl_GetCommandFullName", func() { purego.RegisterLibFunc(&_fnTcl_GetCommandFullName, _tclLib, "Tcl_GetCommandFullName") })
 	_register("Tcl_GetCommandInfo", func() { purego.RegisterLibFunc(&_fnTcl_GetCommandInfo, _tclLib, "Tcl_GetCommandInfo") })
-	_register("Tcl_GetCommandInfoFromToken", func() { purego.RegisterLibFunc(&_fnTcl_GetCommandInfoFromToken, _tclLib, "Tcl_GetCommandInfoFromToken") })
+	_register("Tcl_GetCommandInfoFromToken", func() {
+		purego.RegisterLibFunc(&_fnTcl_GetCommandInfoFromToken, _tclLib, "Tcl_GetCommandInfoFromToken")
+	})
 	_register("Tcl_GetCommandName", func() { purego.RegisterLibFunc(&_fnTcl_GetCommandName, _tclLib, "Tcl_GetCommandName") })
 	_register("Tcl_GetCurrentNamespace", func() { purego.RegisterLibFunc(&_fnTcl_GetCurrentNamespace, _tclLib, "Tcl_GetCurrentNamespace") })
 	_register("Tcl_GetCurrentThread", func() { purego.RegisterLibFunc(&_fnTcl_GetCurrentThread, _tclLib, "Tcl_GetCurrentThread") })
@@ -318,14 +328,20 @@ func _loadLibrary() {
 	_register("Tcl_GetEncoding", func() { purego.RegisterLibFunc(&_fnTcl_GetEncoding, _tclLib, "Tcl_GetEncoding") })
 	_register("Tcl_GetEncodingFromObj", func() { purego.RegisterLibFunc(&_fnTcl_GetEncodingFromObj, _tclLib, "Tcl_GetEncodingFromObj") })
 	_register("Tcl_GetEncodingName", func() { purego.RegisterLibFunc(&_fnTcl_GetEncodingName, _tclLib, "Tcl_GetEncodingName") })
-	_register("Tcl_GetEncodingNameFromEnvironment", func() { purego.RegisterLibFunc(&_fnTcl_GetEncodingNameFromEnvironment, _tclLib, "Tcl_GetEncodingNameFromEnvironment") })
+	_register("Tcl_GetEncodingNameFromEnvironment", func() {
+		purego.RegisterLibFunc(&_fnTcl_GetEncodingNameFromEnvironment, _tclLib, "Tcl_GetEncodingNameFromEnvironment")
+	})
 	_register("Tcl_GetEncodingNames", func() { purego.RegisterLibFunc(&_fnTcl_GetEncodingNames, _tclLib, "Tcl_GetEncodingNames") })
 	_register("Tcl_GetEncodingSearchPath", func() { purego.RegisterLibFunc(&_fnTcl_GetEncodingSearchPath, _tclLib, "Tcl_GetEncodingSearchPath") })
 	_register("Tcl_GetEnsembleFlags", func() { purego.RegisterLibFunc(&_fnTcl_GetEnsembleFlags, _tclLib, "Tcl_GetEnsembleFlags") })
 	_register("Tcl_GetEnsembleMappingDict", func() { purego.RegisterLibFunc(&_fnTcl_GetEnsembleMappingDict, _tclLib, "Tcl_GetEnsembleMappingDict") })
 	_register("Tcl_GetEnsembleNamespace", func() { purego.RegisterLibFunc(&_fnTcl_GetEnsembleNamespace, _tclLib, "Tcl_GetEnsembleNamespace") })
-	_register("Tcl_GetEnsembleSubcommandList", func() { purego.RegisterLibFunc(&_fnTcl_GetEnsembleSubcommandList, _tclLib, "Tcl_GetEnsembleSubcommandList") })
-	_register("Tcl_GetEnsembleUnknownHandler", func() { purego.RegisterLibFunc(&_fnTcl_GetEnsembleUnknownHandler, _tclLib, "Tcl_GetEnsembleUnknownHandler") })
+	_register("Tcl_GetEnsembleSubcommandList", func() {
+		purego.RegisterLibFunc(&_fnTcl_GetEnsembleSubcommandList, _tclLib, "Tcl_GetEnsembleSubcommandList")
+	})
+	_register("Tcl_GetEnsembleUnknownHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_GetEnsembleUnknownHandler, _tclLib, "Tcl_GetEnsembleUnknownHandler")
+	})
 	_register("Tcl_GetErrno", func() { purego.RegisterLibFunc(&_fnTcl_GetErrno, _tclLib, "Tcl_GetErrno") })
 	_register("Tcl_GetGlobalNamespace", func() { purego.RegisterLibFunc(&_fnTcl_GetGlobalNamespace, _tclLib, "Tcl_GetGlobalNamespace") })
 	_register("Tcl_GetHostName", func() { purego.RegisterLibFunc(&_fnTcl_GetHostName, _tclLib, "Tcl_GetHostName") })
@@ -339,7 +355,9 @@ func _loadLibrary() {
 	_register("Tcl_GetMathFuncInfo", func() { purego.RegisterLibFunc(&_fnTcl_GetMathFuncInfo, _tclLib, "Tcl_GetMathFuncInfo") })
 	_register("Tcl_GetMemoryInfo", func() { purego.RegisterLibFunc(&_fnTcl_GetMemoryInfo, _tclLib, "Tcl_GetMemoryInfo") })
 	_register("Tcl_GetNameOfExecutable", func() { purego.RegisterLibFunc(&_fnTcl_GetNameOfExecutable, _tclLib, "Tcl_GetNameOfExecutable") })
-	_register("Tcl_GetNamespaceUnknownHandler", func() { purego.RegisterLibFunc(&_fnTcl_GetNamespaceUnknownHandler, _tclLib, "Tcl_GetNamespaceUnknownHandler") })
+	_register("Tcl_GetNamespaceUnknownHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_GetNamespaceUnknownHandler, _tclLib, "Tcl_GetNamespaceUnknownHandler")
+	})
 	_register("Tcl_GetObjResult", func() { purego.RegisterLibFunc(&_fnTcl_GetObjResult, _tclLib, "Tcl_GetObjResult") })
 	_register("Tcl_GetObjType", func() { purego.RegisterLibFunc(&_fnTcl_GetObjType, _tclLib, "Tcl_GetObjType") })
 	_register("Tcl_GetOpenFile", func() { purego.RegisterLibFunc(&_fnTcl_GetOpenFile, _tclLib, "Tcl_GetOpenFile") })
@@ -418,8 +436,12 @@ func _loadLibrary() {
 	_register("Tcl_ListObjLength", func() { purego.RegisterLibFunc(&_fnTcl_ListObjLength, _tclLib, "Tcl_ListObjLength") })
 	_register("Tcl_ListObjReplace", func() { purego.RegisterLibFunc(&_fnTcl_ListObjReplace, _tclLib, "Tcl_ListObjReplace") })
 	_register("Tcl_LogCommandInfo", func() { purego.RegisterLibFunc(&_fnTcl_LogCommandInfo, _tclLib, "Tcl_LogCommandInfo") })
-	_register("Tcl_MacOSXOpenBundleResources", func() { purego.RegisterLibFunc(&_fnTcl_MacOSXOpenBundleResources, _tclLib, "Tcl_MacOSXOpenBundleResources") })
-	_register("Tcl_MacOSXOpenVersionedBundleResources", func() { purego.RegisterLibFunc(&_fnTcl_MacOSXOpenVersionedBundleResources, _tclLib, "Tcl_MacOSXOpenVersionedBundleResources") })
+	_register("Tcl_MacOSXOpenBundleResources", func() {
+		purego.RegisterLibFunc(&_fnTcl_MacOSXOpenBundleResources, _tclLib, "Tcl_MacOSXOpenBundleResources")
+	})
+	_register("Tcl_MacOSXOpenVersionedBundleResources", func() {
+		purego.RegisterLibFunc(&_fnTcl_MacOSXOpenVersionedBundleResources, _tclLib, "Tcl_MacOSXOpenVersionedBundleResources")
+	})
 	_register("Tcl_Main", func() { purego.RegisterLibFunc(&_fnTcl_Main, _tclLib, "Tcl_Main") })
 	_register("Tcl_MakeFileChannel", func() { purego.RegisterLibFunc(&_fnTcl_MakeFileChannel, _tclLib, "Tcl_MakeFileChannel") })
 	_register("Tcl_MakeSafe", func() { purego.RegisterLibFunc(&_fnTcl_MakeSafe, _tclLib, "Tcl_MakeSafe") })
@@ -513,14 +535,20 @@ func _loadLibrary() {
 	_register("Tcl_SetChannelErrorInterp", func() { purego.RegisterLibFunc(&_fnTcl_SetChannelErrorInterp, _tclLib, "Tcl_SetChannelErrorInterp") })
 	_register("Tcl_SetChannelOption", func() { purego.RegisterLibFunc(&_fnTcl_SetChannelOption, _tclLib, "Tcl_SetChannelOption") })
 	_register("Tcl_SetCommandInfo", func() { purego.RegisterLibFunc(&_fnTcl_SetCommandInfo, _tclLib, "Tcl_SetCommandInfo") })
-	_register("Tcl_SetCommandInfoFromToken", func() { purego.RegisterLibFunc(&_fnTcl_SetCommandInfoFromToken, _tclLib, "Tcl_SetCommandInfoFromToken") })
+	_register("Tcl_SetCommandInfoFromToken", func() {
+		purego.RegisterLibFunc(&_fnTcl_SetCommandInfoFromToken, _tclLib, "Tcl_SetCommandInfoFromToken")
+	})
 	_register("Tcl_SetDefaultEncodingDir", func() { purego.RegisterLibFunc(&_fnTcl_SetDefaultEncodingDir, _tclLib, "Tcl_SetDefaultEncodingDir") })
 	_register("Tcl_SetDoubleObj", func() { purego.RegisterLibFunc(&_fnTcl_SetDoubleObj, _tclLib, "Tcl_SetDoubleObj") })
 	_register("Tcl_SetEncodingSearchPath", func() { purego.RegisterLibFunc(&_fnTcl_SetEncodingSearchPath, _tclLib, "Tcl_SetEncodingSearchPath") })
 	_register("Tcl_SetEnsembleFlags", func() { purego.RegisterLibFunc(&_fnTcl_SetEnsembleFlags, _tclLib, "Tcl_SetEnsembleFlags") })
 	_register("Tcl_SetEnsembleMappingDict", func() { purego.RegisterLibFunc(&_fnTcl_SetEnsembleMappingDict, _tclLib, "Tcl_SetEnsembleMappingDict") })
-	_register("Tcl_SetEnsembleSubcommandList", func() { purego.RegisterLibFunc(&_fnTcl_SetEnsembleSubcommandList, _tclLib, "Tcl_SetEnsembleSubcommandList") })
-	_register("Tcl_SetEnsembleUnknownHandler", func() { purego.RegisterLibFunc(&_fnTcl_SetEnsembleUnknownHandler, _tclLib, "Tcl_SetEnsembleUnknownHandler") })
+	_register("Tcl_SetEnsembleSubcommandList", func() {
+		purego.RegisterLibFunc(&_fnTcl_SetEnsembleSubcommandList, _tclLib, "Tcl_SetEnsembleSubcommandList")
+	})
+	_register("Tcl_SetEnsembleUnknownHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_SetEnsembleUnknownHandler, _tclLib, "Tcl_SetEnsembleUnknownHandler")
+	})
 	_register("Tcl_SetErrno", func() { purego.RegisterLibFunc(&_fnTcl_SetErrno, _tclLib, "Tcl_SetErrno") })
 	_register("Tcl_SetErrorCodeVA", func() { purego.RegisterLibFunc(&_fnTcl_SetErrorCodeVA, _tclLib, "Tcl_SetErrorCodeVA") })
 	_register("Tcl_SetExitProc", func() { purego.RegisterLibFunc(&_fnTcl_SetExitProc, _tclLib, "Tcl_SetExitProc") })
@@ -529,7 +557,9 @@ func _loadLibrary() {
 	_register("Tcl_SetLongObj", func() { purego.RegisterLibFunc(&_fnTcl_SetLongObj, _tclLib, "Tcl_SetLongObj") })
 	_register("Tcl_SetMainLoop", func() { purego.RegisterLibFunc(&_fnTcl_SetMainLoop, _tclLib, "Tcl_SetMainLoop") })
 	_register("Tcl_SetMaxBlockTime", func() { purego.RegisterLibFunc(&_fnTcl_SetMaxBlockTime, _tclLib, "Tcl_SetMaxBlockTime") })
-	_register("Tcl_SetNamespaceUnknownHandler", func() { purego.RegisterLibFunc(&_fnTcl_SetNamespaceUnknownHandler, _tclLib, "Tcl_SetNamespaceUnknownHandler") })
+	_register("Tcl_SetNamespaceUnknownHandler", func() {
+		purego.RegisterLibFunc(&_fnTcl_SetNamespaceUnknownHandler, _tclLib, "Tcl_SetNamespaceUnknownHandler")
+	})
 	_register("Tcl_SetNotifier", func() { purego.RegisterLibFunc(&_fnTcl_SetNotifier, _tclLib, "Tcl_SetNotifier") })
 	_register("Tcl_SetObjErrorCode", func() { purego.RegisterLibFunc(&_fnTcl_SetObjErrorCode, _tclLib, "Tcl_SetObjErrorCode") })
 	_register("Tcl_SetObjLength", func() { purego.RegisterLibFunc(&_fnTcl_SetObjLength, _tclLib, "Tcl_SetObjLength") })

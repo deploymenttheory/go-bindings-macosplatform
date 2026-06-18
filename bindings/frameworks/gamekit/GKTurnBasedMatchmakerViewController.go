@@ -16,14 +16,14 @@ type GKTurnBasedMatchmakerViewController struct {
 }
 
 var (
-	_clsGKTurnBasedMatchmakerViewController = _objcClass("GKTurnBasedMatchmakerViewController")
-	_gKTurnBasedMatchmakerViewControllerSelTurnBasedMatchmakerDelegate = objc.RegisterName("turnBasedMatchmakerDelegate")
+	_clsGKTurnBasedMatchmakerViewController                               = _objcClass("GKTurnBasedMatchmakerViewController")
+	_gKTurnBasedMatchmakerViewControllerSelTurnBasedMatchmakerDelegate    = objc.RegisterName("turnBasedMatchmakerDelegate")
 	_gKTurnBasedMatchmakerViewControllerSelSetTurnBasedMatchmakerDelegate = objc.RegisterName("setTurnBasedMatchmakerDelegate:")
-	_gKTurnBasedMatchmakerViewControllerSelShowExistingMatches = objc.RegisterName("showExistingMatches")
-	_gKTurnBasedMatchmakerViewControllerSelSetShowExistingMatches = objc.RegisterName("setShowExistingMatches:")
-	_gKTurnBasedMatchmakerViewControllerSelMatchmakingMode = objc.RegisterName("matchmakingMode")
-	_gKTurnBasedMatchmakerViewControllerSelSetMatchmakingMode = objc.RegisterName("setMatchmakingMode:")
-	_gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest = objc.RegisterName("initWithMatchRequest:")
+	_gKTurnBasedMatchmakerViewControllerSelShowExistingMatches            = objc.RegisterName("showExistingMatches")
+	_gKTurnBasedMatchmakerViewControllerSelSetShowExistingMatches         = objc.RegisterName("setShowExistingMatches:")
+	_gKTurnBasedMatchmakerViewControllerSelMatchmakingMode                = objc.RegisterName("matchmakingMode")
+	_gKTurnBasedMatchmakerViewControllerSelSetMatchmakingMode             = objc.RegisterName("setMatchmakingMode:")
+	_gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest           = objc.RegisterName("initWithMatchRequest:")
 )
 
 func GKTurnBasedMatchmakerViewControllerFromID(id objc.ID) *GKTurnBasedMatchmakerViewController {
@@ -67,4 +67,3 @@ func (o *GKTurnBasedMatchmakerViewController) InitWithMatchRequest(request *GKMa
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKTurnBasedMatchmakerViewControllerSelInitWithMatchRequest, request.Ptr())
 	return _ret
 }
-

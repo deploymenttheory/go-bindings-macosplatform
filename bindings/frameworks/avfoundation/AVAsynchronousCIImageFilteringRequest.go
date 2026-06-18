@@ -20,12 +20,12 @@ type AVAsynchronousCIImageFilteringRequest struct {
 }
 
 var (
-	_clsAVAsynchronousCIImageFilteringRequest = _objcClass("AVAsynchronousCIImageFilteringRequest")
+	_clsAVAsynchronousCIImageFilteringRequest                       = _objcClass("AVAsynchronousCIImageFilteringRequest")
 	_aVAsynchronousCIImageFilteringRequestSelFinishWithImageContext = objc.RegisterName("finishWithImage:context:")
-	_aVAsynchronousCIImageFilteringRequestSelFinishWithError = objc.RegisterName("finishWithError:")
-	_aVAsynchronousCIImageFilteringRequestSelRenderSize = objc.RegisterName("renderSize")
-	_aVAsynchronousCIImageFilteringRequestSelCompositionTime = objc.RegisterName("compositionTime")
-	_aVAsynchronousCIImageFilteringRequestSelSourceImage = objc.RegisterName("sourceImage")
+	_aVAsynchronousCIImageFilteringRequestSelFinishWithError        = objc.RegisterName("finishWithError:")
+	_aVAsynchronousCIImageFilteringRequestSelRenderSize             = objc.RegisterName("renderSize")
+	_aVAsynchronousCIImageFilteringRequestSelCompositionTime        = objc.RegisterName("compositionTime")
+	_aVAsynchronousCIImageFilteringRequestSelSourceImage            = objc.RegisterName("sourceImage")
 )
 
 func AVAsynchronousCIImageFilteringRequestFromID(id objc.ID) *AVAsynchronousCIImageFilteringRequest {
@@ -65,4 +65,3 @@ func (o *AVAsynchronousCIImageFilteringRequest) SourceImage() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAsynchronousCIImageFilteringRequestSelSourceImage)
 	return _ret
 }
-

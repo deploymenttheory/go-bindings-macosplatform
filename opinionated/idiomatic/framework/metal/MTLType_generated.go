@@ -49,4 +49,3 @@ type Typeable interface {
 }
 
 var _ Typeable = (*Type)(nil)
-

@@ -47,4 +47,3 @@ type SafariExtensionStateable interface {
 }
 
 var _ SafariExtensionStateable = (*SafariExtensionState)(nil)
-

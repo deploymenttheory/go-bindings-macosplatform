@@ -131,4 +131,3 @@ type BarcodeEventSignatureRequestable interface {
 }
 
 var _ BarcodeEventSignatureRequestable = (*BarcodeEventSignatureRequest)(nil)
-

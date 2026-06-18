@@ -41,4 +41,3 @@ type AssetVariantQualifierable interface {
 }
 
 var _ AssetVariantQualifierable = (*AssetVariantQualifier)(nil)
-

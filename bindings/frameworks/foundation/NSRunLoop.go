@@ -17,25 +17,25 @@ type NSRunLoop struct {
 }
 
 var (
-	_clsNSRunLoop = _objcClass("NSRunLoop")
-	_nSRunLoopSelGetCFRunLoop = objc.RegisterName("getCFRunLoop")
-	_nSRunLoopSelAddTimerForMode = objc.RegisterName("addTimer:forMode:")
-	_nSRunLoopSelAddPortForMode = objc.RegisterName("addPort:forMode:")
-	_nSRunLoopSelRemovePortForMode = objc.RegisterName("removePort:forMode:")
-	_nSRunLoopSelLimitDateForMode = objc.RegisterName("limitDateForMode:")
-	_nSRunLoopSelAcceptInputForModeBeforeDate = objc.RegisterName("acceptInputForMode:beforeDate:")
-	_nSRunLoopSelCurrentRunLoop = objc.RegisterName("currentRunLoop")
-	_nSRunLoopSelMainRunLoop = objc.RegisterName("mainRunLoop")
-	_nSRunLoopSelCurrentMode = objc.RegisterName("currentMode")
-	_nSRunLoopSelRun = objc.RegisterName("run")
-	_nSRunLoopSelRunUntilDate = objc.RegisterName("runUntilDate:")
-	_nSRunLoopSelRunModeBeforeDate = objc.RegisterName("runMode:beforeDate:")
-	_nSRunLoopSelConfigureAsServer = objc.RegisterName("configureAsServer")
-	_nSRunLoopSelPerformInModesBlock = objc.RegisterName("performInModes:block:")
-	_nSRunLoopSelPerformBlock = objc.RegisterName("performBlock:")
+	_clsNSRunLoop                                        = _objcClass("NSRunLoop")
+	_nSRunLoopSelGetCFRunLoop                            = objc.RegisterName("getCFRunLoop")
+	_nSRunLoopSelAddTimerForMode                         = objc.RegisterName("addTimer:forMode:")
+	_nSRunLoopSelAddPortForMode                          = objc.RegisterName("addPort:forMode:")
+	_nSRunLoopSelRemovePortForMode                       = objc.RegisterName("removePort:forMode:")
+	_nSRunLoopSelLimitDateForMode                        = objc.RegisterName("limitDateForMode:")
+	_nSRunLoopSelAcceptInputForModeBeforeDate            = objc.RegisterName("acceptInputForMode:beforeDate:")
+	_nSRunLoopSelCurrentRunLoop                          = objc.RegisterName("currentRunLoop")
+	_nSRunLoopSelMainRunLoop                             = objc.RegisterName("mainRunLoop")
+	_nSRunLoopSelCurrentMode                             = objc.RegisterName("currentMode")
+	_nSRunLoopSelRun                                     = objc.RegisterName("run")
+	_nSRunLoopSelRunUntilDate                            = objc.RegisterName("runUntilDate:")
+	_nSRunLoopSelRunModeBeforeDate                       = objc.RegisterName("runMode:beforeDate:")
+	_nSRunLoopSelConfigureAsServer                       = objc.RegisterName("configureAsServer")
+	_nSRunLoopSelPerformInModesBlock                     = objc.RegisterName("performInModes:block:")
+	_nSRunLoopSelPerformBlock                            = objc.RegisterName("performBlock:")
 	_nSRunLoopSelPerformSelectorTargetArgumentOrderModes = objc.RegisterName("performSelector:target:argument:order:modes:")
-	_nSRunLoopSelCancelPerformSelectorTargetArgument = objc.RegisterName("cancelPerformSelector:target:argument:")
-	_nSRunLoopSelCancelPerformSelectorsWithTarget = objc.RegisterName("cancelPerformSelectorsWithTarget:")
+	_nSRunLoopSelCancelPerformSelectorTargetArgument     = objc.RegisterName("cancelPerformSelector:target:argument:")
+	_nSRunLoopSelCancelPerformSelectorsWithTarget        = objc.RegisterName("cancelPerformSelectorsWithTarget:")
 )
 
 func NSRunLoopFromID(id objc.ID) *NSRunLoop {
@@ -67,7 +67,9 @@ func (o *NSRunLoop) RemovePortForMode(aPort *NSPort, mode *NSString) {
 
 func (o *NSRunLoop) LimitDateForMode(mode *NSString) *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunLoopSelLimitDateForMode, mode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -77,19 +79,25 @@ func (o *NSRunLoop) AcceptInputForModeBeforeDate(mode *NSString, limitDate *NSDa
 
 func NSRunLoopCurrentRunLoop() *NSRunLoop {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunLoop), _nSRunLoopSelCurrentRunLoop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunLoopFromID(_ret)
 }
 
 func NSRunLoopMainRunLoop() *NSRunLoop {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSRunLoop), _nSRunLoopSelMainRunLoop)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRunLoopFromID(_ret)
 }
 
 func (o *NSRunLoop) CurrentMode() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRunLoopSelCurrentMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -146,4 +154,3 @@ func (o *NSRunLoop) CancelPerformSelectorTargetArgument(aSelector objc.SEL, targ
 func (o *NSRunLoop) CancelPerformSelectorsWithTarget(target objc.ID) {
 	o.Ptr().Send(_nSRunLoopSelCancelPerformSelectorsWithTarget, target)
 }
-

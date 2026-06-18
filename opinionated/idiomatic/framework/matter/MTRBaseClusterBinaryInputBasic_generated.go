@@ -1307,9 +1307,13 @@ func (x *MTRBaseClusterBinaryInputBasic) SubscribeAttributeClusterRevisionWithMi
 	}
 }
 
-func (x *MTRBaseClusterBinaryInputBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBinaryInputBasic) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBinaryInputBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBinaryInputBasic) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBinaryInputBasicable is the interface implemented by [MTRBaseClusterBinaryInputBasic], for mocking and DI.
 type MTRBaseClusterBinaryInputBasicable interface {
@@ -1397,4 +1401,3 @@ type MTRBaseClusterBinaryInputBasicable interface {
 }
 
 var _ MTRBaseClusterBinaryInputBasicable = (*MTRBaseClusterBinaryInputBasic)(nil)
-

@@ -19,29 +19,29 @@ type GKSession struct {
 }
 
 var (
-	_clsGKSession = _objcClass("GKSession")
+	_clsGKSession                                        = _objcClass("GKSession")
 	_gKSessionSelInitWithSessionIDDisplayNameSessionMode = objc.RegisterName("initWithSessionID:displayName:sessionMode:")
-	_gKSessionSelDisplayNameForPeer = objc.RegisterName("displayNameForPeer:")
-	_gKSessionSelSendDataToPeersWithDataModeError = objc.RegisterName("sendData:toPeers:withDataMode:error:")
-	_gKSessionSelSendDataToAllPeersWithDataModeError = objc.RegisterName("sendDataToAllPeers:withDataMode:error:")
-	_gKSessionSelSetDataReceiveHandlerWithContext = objc.RegisterName("setDataReceiveHandler:withContext:")
-	_gKSessionSelConnectToPeerWithTimeout = objc.RegisterName("connectToPeer:withTimeout:")
-	_gKSessionSelCancelConnectToPeer = objc.RegisterName("cancelConnectToPeer:")
-	_gKSessionSelAcceptConnectionFromPeerError = objc.RegisterName("acceptConnectionFromPeer:error:")
-	_gKSessionSelDenyConnectionFromPeer = objc.RegisterName("denyConnectionFromPeer:")
-	_gKSessionSelDisconnectPeerFromAllPeers = objc.RegisterName("disconnectPeerFromAllPeers:")
-	_gKSessionSelDisconnectFromAllPeers = objc.RegisterName("disconnectFromAllPeers")
-	_gKSessionSelPeersWithConnectionState = objc.RegisterName("peersWithConnectionState:")
-	_gKSessionSelDelegate = objc.RegisterName("delegate")
-	_gKSessionSelSetDelegate = objc.RegisterName("setDelegate:")
-	_gKSessionSelSessionID = objc.RegisterName("sessionID")
-	_gKSessionSelDisplayName = objc.RegisterName("displayName")
-	_gKSessionSelSessionMode = objc.RegisterName("sessionMode")
-	_gKSessionSelPeerID = objc.RegisterName("peerID")
-	_gKSessionSelIsAvailable = objc.RegisterName("isAvailable")
-	_gKSessionSelSetAvailable = objc.RegisterName("setAvailable:")
-	_gKSessionSelDisconnectTimeout = objc.RegisterName("disconnectTimeout")
-	_gKSessionSelSetDisconnectTimeout = objc.RegisterName("setDisconnectTimeout:")
+	_gKSessionSelDisplayNameForPeer                      = objc.RegisterName("displayNameForPeer:")
+	_gKSessionSelSendDataToPeersWithDataModeError        = objc.RegisterName("sendData:toPeers:withDataMode:error:")
+	_gKSessionSelSendDataToAllPeersWithDataModeError     = objc.RegisterName("sendDataToAllPeers:withDataMode:error:")
+	_gKSessionSelSetDataReceiveHandlerWithContext        = objc.RegisterName("setDataReceiveHandler:withContext:")
+	_gKSessionSelConnectToPeerWithTimeout                = objc.RegisterName("connectToPeer:withTimeout:")
+	_gKSessionSelCancelConnectToPeer                     = objc.RegisterName("cancelConnectToPeer:")
+	_gKSessionSelAcceptConnectionFromPeerError           = objc.RegisterName("acceptConnectionFromPeer:error:")
+	_gKSessionSelDenyConnectionFromPeer                  = objc.RegisterName("denyConnectionFromPeer:")
+	_gKSessionSelDisconnectPeerFromAllPeers              = objc.RegisterName("disconnectPeerFromAllPeers:")
+	_gKSessionSelDisconnectFromAllPeers                  = objc.RegisterName("disconnectFromAllPeers")
+	_gKSessionSelPeersWithConnectionState                = objc.RegisterName("peersWithConnectionState:")
+	_gKSessionSelDelegate                                = objc.RegisterName("delegate")
+	_gKSessionSelSetDelegate                             = objc.RegisterName("setDelegate:")
+	_gKSessionSelSessionID                               = objc.RegisterName("sessionID")
+	_gKSessionSelDisplayName                             = objc.RegisterName("displayName")
+	_gKSessionSelSessionMode                             = objc.RegisterName("sessionMode")
+	_gKSessionSelPeerID                                  = objc.RegisterName("peerID")
+	_gKSessionSelIsAvailable                             = objc.RegisterName("isAvailable")
+	_gKSessionSelSetAvailable                            = objc.RegisterName("setAvailable:")
+	_gKSessionSelDisconnectTimeout                       = objc.RegisterName("disconnectTimeout")
+	_gKSessionSelSetDisconnectTimeout                    = objc.RegisterName("setDisconnectTimeout:")
 )
 
 func GKSessionFromID(id objc.ID) *GKSession {
@@ -63,7 +63,9 @@ func (o *GKSession) InitWithSessionIDDisplayNameSessionMode(sessionID *foundatio
 // Return the application chosen name of a specific peer
 func (o *GKSession) DisplayNameForPeer(peerID *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelDisplayNameForPeer, peerID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -149,14 +151,18 @@ func (o *GKSession) SetDelegate(delegate GKSessionDelegate) {
 // Deprecated: No longer supported.
 func (o *GKSession) SessionID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelSessionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: No longer supported.
 func (o *GKSession) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -169,7 +175,9 @@ func (o *GKSession) SessionMode() GKSessionMode {
 // Deprecated: No longer supported.
 func (o *GKSession) PeerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKSessionSelPeerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -192,4 +200,3 @@ func (o *GKSession) DisconnectTimeout() float64 {
 func (o *GKSession) SetDisconnectTimeout(disconnectTimeout float64) {
 	o.Ptr().Send(_gKSessionSelSetDisconnectTimeout, disconnectTimeout)
 }
-

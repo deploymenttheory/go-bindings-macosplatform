@@ -41,7 +41,9 @@ func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
 	return x.inner.MaskData()
 }
 
-func (x *CNNDropoutGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNDropoutGradientState) asNNGradientState() *raw.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
 // CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
 type CNNDropoutGradientStateable interface {
@@ -50,4 +52,3 @@ type CNNDropoutGradientStateable interface {
 }
 
 var _ CNNDropoutGradientStateable = (*CNNDropoutGradientState)(nil)
-

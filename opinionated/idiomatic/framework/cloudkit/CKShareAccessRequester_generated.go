@@ -67,4 +67,3 @@ type ShareAccessRequesterable interface {
 }
 
 var _ ShareAccessRequesterable = (*ShareAccessRequester)(nil)
-

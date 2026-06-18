@@ -391,4 +391,3 @@ type OrderedSetable interface {
 }
 
 var _ OrderedSetable = (*OrderedSet)(nil)
-

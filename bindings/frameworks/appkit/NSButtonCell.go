@@ -18,57 +18,57 @@ type NSButtonCell struct {
 }
 
 var (
-	_clsNSButtonCell = _objcClass("NSButtonCell")
-	_nSButtonCellSelInitTextCell = objc.RegisterName("initTextCell:")
-	_nSButtonCellSelInitImageCell = objc.RegisterName("initImageCell:")
-	_nSButtonCellSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSButtonCellSelSetButtonType = objc.RegisterName("setButtonType:")
-	_nSButtonCellSelSetPeriodicDelayInterval = objc.RegisterName("setPeriodicDelay:interval:")
-	_nSButtonCellSelMouseEntered = objc.RegisterName("mouseEntered:")
-	_nSButtonCellSelMouseExited = objc.RegisterName("mouseExited:")
-	_nSButtonCellSelDrawBezelWithFrameInView = objc.RegisterName("drawBezelWithFrame:inView:")
-	_nSButtonCellSelDrawImageWithFrameInView = objc.RegisterName("drawImage:withFrame:inView:")
-	_nSButtonCellSelDrawTitleWithFrameInView = objc.RegisterName("drawTitle:withFrame:inView:")
-	_nSButtonCellSelBezelStyle = objc.RegisterName("bezelStyle")
-	_nSButtonCellSelSetBezelStyle = objc.RegisterName("setBezelStyle:")
-	_nSButtonCellSelHighlightsBy = objc.RegisterName("highlightsBy")
-	_nSButtonCellSelSetHighlightsBy = objc.RegisterName("setHighlightsBy:")
-	_nSButtonCellSelShowsStateBy = objc.RegisterName("showsStateBy")
-	_nSButtonCellSelSetShowsStateBy = objc.RegisterName("setShowsStateBy:")
-	_nSButtonCellSelAttributedTitle = objc.RegisterName("attributedTitle")
-	_nSButtonCellSelSetAttributedTitle = objc.RegisterName("setAttributedTitle:")
-	_nSButtonCellSelAlternateTitle = objc.RegisterName("alternateTitle")
-	_nSButtonCellSelSetAlternateTitle = objc.RegisterName("setAlternateTitle:")
-	_nSButtonCellSelAttributedAlternateTitle = objc.RegisterName("attributedAlternateTitle")
-	_nSButtonCellSelSetAttributedAlternateTitle = objc.RegisterName("setAttributedAlternateTitle:")
-	_nSButtonCellSelAlternateImage = objc.RegisterName("alternateImage")
-	_nSButtonCellSelSetAlternateImage = objc.RegisterName("setAlternateImage:")
-	_nSButtonCellSelImagePosition = objc.RegisterName("imagePosition")
-	_nSButtonCellSelSetImagePosition = objc.RegisterName("setImagePosition:")
-	_nSButtonCellSelImageScaling = objc.RegisterName("imageScaling")
-	_nSButtonCellSelSetImageScaling = objc.RegisterName("setImageScaling:")
-	_nSButtonCellSelSetKeyEquivalent = objc.RegisterName("setKeyEquivalent:")
-	_nSButtonCellSelKeyEquivalentModifierMask = objc.RegisterName("keyEquivalentModifierMask")
-	_nSButtonCellSelSetKeyEquivalentModifierMask = objc.RegisterName("setKeyEquivalentModifierMask:")
-	_nSButtonCellSelIsTransparent = objc.RegisterName("isTransparent")
-	_nSButtonCellSelSetTransparent = objc.RegisterName("setTransparent:")
-	_nSButtonCellSelImageDimsWhenDisabled = objc.RegisterName("imageDimsWhenDisabled")
-	_nSButtonCellSelSetImageDimsWhenDisabled = objc.RegisterName("setImageDimsWhenDisabled:")
-	_nSButtonCellSelShowsBorderOnlyWhileMouseInside = objc.RegisterName("showsBorderOnlyWhileMouseInside")
+	_clsNSButtonCell                                   = _objcClass("NSButtonCell")
+	_nSButtonCellSelInitTextCell                       = objc.RegisterName("initTextCell:")
+	_nSButtonCellSelInitImageCell                      = objc.RegisterName("initImageCell:")
+	_nSButtonCellSelInitWithCoder                      = objc.RegisterName("initWithCoder:")
+	_nSButtonCellSelSetButtonType                      = objc.RegisterName("setButtonType:")
+	_nSButtonCellSelSetPeriodicDelayInterval           = objc.RegisterName("setPeriodicDelay:interval:")
+	_nSButtonCellSelMouseEntered                       = objc.RegisterName("mouseEntered:")
+	_nSButtonCellSelMouseExited                        = objc.RegisterName("mouseExited:")
+	_nSButtonCellSelDrawBezelWithFrameInView           = objc.RegisterName("drawBezelWithFrame:inView:")
+	_nSButtonCellSelDrawImageWithFrameInView           = objc.RegisterName("drawImage:withFrame:inView:")
+	_nSButtonCellSelDrawTitleWithFrameInView           = objc.RegisterName("drawTitle:withFrame:inView:")
+	_nSButtonCellSelBezelStyle                         = objc.RegisterName("bezelStyle")
+	_nSButtonCellSelSetBezelStyle                      = objc.RegisterName("setBezelStyle:")
+	_nSButtonCellSelHighlightsBy                       = objc.RegisterName("highlightsBy")
+	_nSButtonCellSelSetHighlightsBy                    = objc.RegisterName("setHighlightsBy:")
+	_nSButtonCellSelShowsStateBy                       = objc.RegisterName("showsStateBy")
+	_nSButtonCellSelSetShowsStateBy                    = objc.RegisterName("setShowsStateBy:")
+	_nSButtonCellSelAttributedTitle                    = objc.RegisterName("attributedTitle")
+	_nSButtonCellSelSetAttributedTitle                 = objc.RegisterName("setAttributedTitle:")
+	_nSButtonCellSelAlternateTitle                     = objc.RegisterName("alternateTitle")
+	_nSButtonCellSelSetAlternateTitle                  = objc.RegisterName("setAlternateTitle:")
+	_nSButtonCellSelAttributedAlternateTitle           = objc.RegisterName("attributedAlternateTitle")
+	_nSButtonCellSelSetAttributedAlternateTitle        = objc.RegisterName("setAttributedAlternateTitle:")
+	_nSButtonCellSelAlternateImage                     = objc.RegisterName("alternateImage")
+	_nSButtonCellSelSetAlternateImage                  = objc.RegisterName("setAlternateImage:")
+	_nSButtonCellSelImagePosition                      = objc.RegisterName("imagePosition")
+	_nSButtonCellSelSetImagePosition                   = objc.RegisterName("setImagePosition:")
+	_nSButtonCellSelImageScaling                       = objc.RegisterName("imageScaling")
+	_nSButtonCellSelSetImageScaling                    = objc.RegisterName("setImageScaling:")
+	_nSButtonCellSelSetKeyEquivalent                   = objc.RegisterName("setKeyEquivalent:")
+	_nSButtonCellSelKeyEquivalentModifierMask          = objc.RegisterName("keyEquivalentModifierMask")
+	_nSButtonCellSelSetKeyEquivalentModifierMask       = objc.RegisterName("setKeyEquivalentModifierMask:")
+	_nSButtonCellSelIsTransparent                      = objc.RegisterName("isTransparent")
+	_nSButtonCellSelSetTransparent                     = objc.RegisterName("setTransparent:")
+	_nSButtonCellSelImageDimsWhenDisabled              = objc.RegisterName("imageDimsWhenDisabled")
+	_nSButtonCellSelSetImageDimsWhenDisabled           = objc.RegisterName("setImageDimsWhenDisabled:")
+	_nSButtonCellSelShowsBorderOnlyWhileMouseInside    = objc.RegisterName("showsBorderOnlyWhileMouseInside")
 	_nSButtonCellSelSetShowsBorderOnlyWhileMouseInside = objc.RegisterName("setShowsBorderOnlyWhileMouseInside:")
-	_nSButtonCellSelSound = objc.RegisterName("sound")
-	_nSButtonCellSelSetSound = objc.RegisterName("setSound:")
-	_nSButtonCellSelBackgroundColor = objc.RegisterName("backgroundColor")
-	_nSButtonCellSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_nSButtonCellSelSetAlternateTitleWithMnemonic = objc.RegisterName("setAlternateTitleWithMnemonic:")
-	_nSButtonCellSelSetAlternateMnemonicLocation = objc.RegisterName("setAlternateMnemonicLocation:")
-	_nSButtonCellSelAlternateMnemonicLocation = objc.RegisterName("alternateMnemonicLocation")
-	_nSButtonCellSelAlternateMnemonic = objc.RegisterName("alternateMnemonic")
-	_nSButtonCellSelSetKeyEquivalentFontSize = objc.RegisterName("setKeyEquivalentFont:size:")
-	_nSButtonCellSelGradientType = objc.RegisterName("gradientType")
-	_nSButtonCellSelSetGradientType = objc.RegisterName("setGradientType:")
-	_nSButtonCellSelKeyEquivalentFont = objc.RegisterName("keyEquivalentFont")
-	_nSButtonCellSelSetKeyEquivalentFont = objc.RegisterName("setKeyEquivalentFont:")
+	_nSButtonCellSelSound                              = objc.RegisterName("sound")
+	_nSButtonCellSelSetSound                           = objc.RegisterName("setSound:")
+	_nSButtonCellSelBackgroundColor                    = objc.RegisterName("backgroundColor")
+	_nSButtonCellSelSetBackgroundColor                 = objc.RegisterName("setBackgroundColor:")
+	_nSButtonCellSelSetAlternateTitleWithMnemonic      = objc.RegisterName("setAlternateTitleWithMnemonic:")
+	_nSButtonCellSelSetAlternateMnemonicLocation       = objc.RegisterName("setAlternateMnemonicLocation:")
+	_nSButtonCellSelAlternateMnemonicLocation          = objc.RegisterName("alternateMnemonicLocation")
+	_nSButtonCellSelAlternateMnemonic                  = objc.RegisterName("alternateMnemonic")
+	_nSButtonCellSelSetKeyEquivalentFontSize           = objc.RegisterName("setKeyEquivalentFont:size:")
+	_nSButtonCellSelGradientType                       = objc.RegisterName("gradientType")
+	_nSButtonCellSelSetGradientType                    = objc.RegisterName("setGradientType:")
+	_nSButtonCellSelKeyEquivalentFont                  = objc.RegisterName("keyEquivalentFont")
+	_nSButtonCellSelSetKeyEquivalentFont               = objc.RegisterName("setKeyEquivalentFont:")
 )
 
 func NSButtonCellFromID(id objc.ID) *NSButtonCell {
@@ -83,19 +83,25 @@ func NSButtonCellFromID(id objc.ID) *NSButtonCell {
 
 func (o *NSButtonCell) InitTextCell(string_ *foundation.NSString) *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitTextCell, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
 func (o *NSButtonCell) InitImageCell(image *NSImage) *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitImageCell, image.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
 func (o *NSButtonCell) InitWithCoder(coder *foundation.NSCoder) *NSButtonCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSButtonCellFromID(_ret)
 }
 
@@ -157,7 +163,9 @@ func (o *NSButtonCell) SetShowsStateBy(showsStateBy NSCellStyleMask) {
 
 func (o *NSButtonCell) AttributedTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -167,7 +175,9 @@ func (o *NSButtonCell) SetAttributedTitle(attributedTitle *foundation.NSAttribut
 
 func (o *NSButtonCell) AlternateTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -177,7 +187,9 @@ func (o *NSButtonCell) SetAlternateTitle(alternateTitle *foundation.NSString) {
 
 func (o *NSButtonCell) AttributedAlternateTitle() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAttributedAlternateTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -187,7 +199,9 @@ func (o *NSButtonCell) SetAttributedAlternateTitle(attributedAlternateTitle *fou
 
 func (o *NSButtonCell) AlternateImage() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
@@ -255,7 +269,9 @@ func (o *NSButtonCell) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMo
 
 func (o *NSButtonCell) Sound() *NSSound {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelSound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSSoundFromID(_ret)
 }
 
@@ -265,7 +281,9 @@ func (o *NSButtonCell) SetSound(sound *NSSound) {
 
 func (o *NSButtonCell) BackgroundColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelBackgroundColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -292,7 +310,9 @@ func (o *NSButtonCell) AlternateMnemonicLocation() uint {
 // Deprecated: Mnemonics are not used on macOS. This property always returns an empty string.
 func (o *NSButtonCell) AlternateMnemonic() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelAlternateMnemonic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -315,7 +335,9 @@ func (o *NSButtonCell) SetGradientType(gradientType NSGradientType) {
 // Deprecated: The keyEquivalentFont property is no longer used. It always returns the NSButtonCell's font, and setting it has no effect.
 func (o *NSButtonCell) KeyEquivalentFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSButtonCellSelKeyEquivalentFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -323,4 +345,3 @@ func (o *NSButtonCell) KeyEquivalentFont() *NSFont {
 func (o *NSButtonCell) SetKeyEquivalentFont(keyEquivalentFont *NSFont) {
 	o.Ptr().Send(_nSButtonCellSelSetKeyEquivalentFont, keyEquivalentFont.Ptr())
 }
-

@@ -18,7 +18,9 @@ type MTREnergyEVSEClusterGetTargetsResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTREnergyEVSEClusterGetTargetsResponseParams].
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) Unwrap() *raw.MTREnergyEVSEClusterGetTargetsResponseParams { return x.inner }
+func (x *MTREnergyEVSEClusterGetTargetsResponseParams) Unwrap() *raw.MTREnergyEVSEClusterGetTargetsResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,4 +63,3 @@ type MTREnergyEVSEClusterGetTargetsResponseParamsable interface {
 }
 
 var _ MTREnergyEVSEClusterGetTargetsResponseParamsable = (*MTREnergyEVSEClusterGetTargetsResponseParams)(nil)
-

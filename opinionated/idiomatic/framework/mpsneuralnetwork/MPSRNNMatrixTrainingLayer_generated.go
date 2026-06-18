@@ -188,4 +188,3 @@ type RNNMatrixTrainingLayerable interface {
 }
 
 var _ RNNMatrixTrainingLayerable = (*RNNMatrixTrainingLayer)(nil)
-

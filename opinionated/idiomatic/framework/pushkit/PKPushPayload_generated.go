@@ -59,4 +59,3 @@ type PushPayloadable interface {
 }
 
 var _ PushPayloadable = (*PushPayload)(nil)
-

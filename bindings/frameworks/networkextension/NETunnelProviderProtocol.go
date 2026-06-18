@@ -16,10 +16,10 @@ type NETunnelProviderProtocol struct {
 }
 
 var (
-	_clsNETunnelProviderProtocol = _objcClass("NETunnelProviderProtocol")
-	_nETunnelProviderProtocolSelProviderConfiguration = objc.RegisterName("providerConfiguration")
-	_nETunnelProviderProtocolSelSetProviderConfiguration = objc.RegisterName("setProviderConfiguration:")
-	_nETunnelProviderProtocolSelProviderBundleIdentifier = objc.RegisterName("providerBundleIdentifier")
+	_clsNETunnelProviderProtocol                            = _objcClass("NETunnelProviderProtocol")
+	_nETunnelProviderProtocolSelProviderConfiguration       = objc.RegisterName("providerConfiguration")
+	_nETunnelProviderProtocolSelSetProviderConfiguration    = objc.RegisterName("setProviderConfiguration:")
+	_nETunnelProviderProtocolSelProviderBundleIdentifier    = objc.RegisterName("providerBundleIdentifier")
 	_nETunnelProviderProtocolSelSetProviderBundleIdentifier = objc.RegisterName("setProviderBundleIdentifier:")
 )
 
@@ -46,11 +46,12 @@ func (o *NETunnelProviderProtocol) SetProviderConfiguration(providerConfiguratio
 // @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NETunnelProvider to be used by this configuration.
 func (o *NETunnelProviderProtocol) ProviderBundleIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nETunnelProviderProtocolSelProviderBundleIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NETunnelProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier *foundation.NSString) {
 	o.Ptr().Send(_nETunnelProviderProtocolSelSetProviderBundleIdentifier, providerBundleIdentifier.Ptr())
 }
-

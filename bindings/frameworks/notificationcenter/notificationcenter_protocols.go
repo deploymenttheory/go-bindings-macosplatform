@@ -26,4 +26,3 @@ type NCWidgetSearchViewDelegate interface {
 	WidgetSearchTermCleared(controller *NCWidgetSearchViewController)
 	WidgetSearchResultSelected(controller *NCWidgetSearchViewController, object objc.ID)
 }
-

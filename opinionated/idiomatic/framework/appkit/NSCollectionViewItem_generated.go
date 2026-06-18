@@ -94,7 +94,9 @@ func (x *CollectionViewItem) WithChildViewControllers(items ...ViewControllerPro
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -207,9 +209,13 @@ func (x *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent
 	})
 }
 
-func (x *CollectionViewItem) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
+func (x *CollectionViewItem) asViewController() *raw.NSViewController {
+	return &x.inner.NSViewController
+}
 
-func (x *CollectionViewItem) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+func (x *CollectionViewItem) asResponder() *raw.NSResponder {
+	return &x.inner.NSViewController.NSResponder
+}
 
 // CollectionViewItemable is the interface implemented by [CollectionViewItem], for mocking and DI.
 type CollectionViewItemable interface {
@@ -242,4 +248,3 @@ type CollectionViewItemable interface {
 }
 
 var _ CollectionViewItemable = (*CollectionViewItem)(nil)
-

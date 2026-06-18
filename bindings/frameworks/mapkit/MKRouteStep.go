@@ -18,11 +18,11 @@ type MKRouteStep struct {
 }
 
 var (
-	_clsMKRouteStep = _objcClass("MKRouteStep")
-	_mKRouteStepSelInstructions = objc.RegisterName("instructions")
-	_mKRouteStepSelNotice = objc.RegisterName("notice")
-	_mKRouteStepSelPolyline = objc.RegisterName("polyline")
-	_mKRouteStepSelDistance = objc.RegisterName("distance")
+	_clsMKRouteStep              = _objcClass("MKRouteStep")
+	_mKRouteStepSelInstructions  = objc.RegisterName("instructions")
+	_mKRouteStepSelNotice        = objc.RegisterName("notice")
+	_mKRouteStepSelPolyline      = objc.RegisterName("polyline")
+	_mKRouteStepSelDistance      = objc.RegisterName("distance")
 	_mKRouteStepSelTransportType = objc.RegisterName("transportType")
 )
 
@@ -38,19 +38,25 @@ func MKRouteStepFromID(id objc.ID) *MKRouteStep {
 
 func (o *MKRouteStep) Instructions() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteStepSelInstructions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKRouteStep) Notice() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteStepSelNotice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKRouteStep) Polyline() *MKPolyline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKRouteStepSelPolyline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolylineFromID(_ret)
 }
 
@@ -63,4 +69,3 @@ func (o *MKRouteStep) TransportType() MKDirectionsTransportType {
 	_ret := objc.Send[MKDirectionsTransportType](o.Ptr(), _mKRouteStepSelTransportType)
 	return _ret
 }
-

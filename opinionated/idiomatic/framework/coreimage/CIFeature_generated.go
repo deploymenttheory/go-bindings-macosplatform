@@ -61,4 +61,3 @@ type Featureable interface {
 }
 
 var _ Featureable = (*Feature)(nil)
-

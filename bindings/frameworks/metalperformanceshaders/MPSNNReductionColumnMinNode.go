@@ -26,4 +26,3 @@ func MPSNNReductionColumnMinNodeFromID(id objc.ID) *MPSNNReductionColumnMinNode 
 	purego.Track(o)
 	return o
 }
-

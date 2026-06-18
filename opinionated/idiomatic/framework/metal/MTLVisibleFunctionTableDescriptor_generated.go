@@ -15,7 +15,9 @@ type VisibleFunctionTableDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTLVisibleFunctionTableDescriptor].
-func (x *VisibleFunctionTableDescriptor) Unwrap() *raw.MTLVisibleFunctionTableDescriptor { return x.inner }
+func (x *VisibleFunctionTableDescriptor) Unwrap() *raw.MTLVisibleFunctionTableDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,4 +62,3 @@ type VisibleFunctionTableDescriptorable interface {
 }
 
 var _ VisibleFunctionTableDescriptorable = (*VisibleFunctionTableDescriptor)(nil)
-

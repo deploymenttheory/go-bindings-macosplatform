@@ -158,4 +158,3 @@ type SpeechRecognizerable interface {
 }
 
 var _ SpeechRecognizerable = (*SpeechRecognizer)(nil)
-

@@ -86,4 +86,3 @@ type PersistentHistoryChangeable interface {
 }
 
 var _ PersistentHistoryChangeable = (*PersistentHistoryChange)(nil)
-

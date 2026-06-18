@@ -50,4 +50,3 @@ type INStartCallIntentHandling interface {
 type INUnsendMessagesIntentHandling interface {
 	HandleUnsendMessagesCompletion(intent *INUnsendMessagesIntent, completion func(*INUnsendMessagesIntentResponse))
 }
-

@@ -25,4 +25,3 @@ func VNImageAlignmentObservationFromID(id objc.ID) *VNImageAlignmentObservation 
 	purego.Track(o)
 	return o
 }
-

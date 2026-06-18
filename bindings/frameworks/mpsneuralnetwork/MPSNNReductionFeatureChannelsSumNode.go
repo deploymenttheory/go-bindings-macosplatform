@@ -15,8 +15,8 @@ type MPSNNReductionFeatureChannelsSumNode struct {
 }
 
 var (
-	_clsMPSNNReductionFeatureChannelsSumNode = _objcClass("MPSNNReductionFeatureChannelsSumNode")
-	_mPSNNReductionFeatureChannelsSumNodeSelWeight = objc.RegisterName("weight")
+	_clsMPSNNReductionFeatureChannelsSumNode          = _objcClass("MPSNNReductionFeatureChannelsSumNode")
+	_mPSNNReductionFeatureChannelsSumNodeSelWeight    = objc.RegisterName("weight")
 	_mPSNNReductionFeatureChannelsSumNodeSelSetWeight = objc.RegisterName("setWeight:")
 )
 
@@ -39,4 +39,3 @@ func (o *MPSNNReductionFeatureChannelsSumNode) Weight() float32 {
 func (o *MPSNNReductionFeatureChannelsSumNode) SetWeight(weight float32) {
 	o.Ptr().Send(_mPSNNReductionFeatureChannelsSumNodeSelSetWeight, weight)
 }
-

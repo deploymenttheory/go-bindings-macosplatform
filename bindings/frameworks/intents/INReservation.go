@@ -16,14 +16,14 @@ type INReservation struct {
 }
 
 var (
-	_clsINReservation = _objcClass("INReservation")
-	_iNReservationSelItemReference = objc.RegisterName("itemReference")
-	_iNReservationSelReservationNumber = objc.RegisterName("reservationNumber")
-	_iNReservationSelBookingTime = objc.RegisterName("bookingTime")
-	_iNReservationSelReservationStatus = objc.RegisterName("reservationStatus")
+	_clsINReservation                      = _objcClass("INReservation")
+	_iNReservationSelItemReference         = objc.RegisterName("itemReference")
+	_iNReservationSelReservationNumber     = objc.RegisterName("reservationNumber")
+	_iNReservationSelBookingTime           = objc.RegisterName("bookingTime")
+	_iNReservationSelReservationStatus     = objc.RegisterName("reservationStatus")
 	_iNReservationSelReservationHolderName = objc.RegisterName("reservationHolderName")
-	_iNReservationSelActions = objc.RegisterName("actions")
-	_iNReservationSelURL = objc.RegisterName("URL")
+	_iNReservationSelActions               = objc.RegisterName("actions")
+	_iNReservationSelURL                   = objc.RegisterName("URL")
 )
 
 func INReservationFromID(id objc.ID) *INReservation {
@@ -38,19 +38,25 @@ func INReservationFromID(id objc.ID) *INReservation {
 
 func (o *INReservation) ItemReference() *INSpeakableString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelItemReference)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INSpeakableStringFromID(_ret)
 }
 
 func (o *INReservation) ReservationNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelReservationNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INReservation) BookingTime() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelBookingTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -61,19 +67,24 @@ func (o *INReservation) ReservationStatus() INReservationStatus {
 
 func (o *INReservation) ReservationHolderName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelReservationHolderName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *INReservation) Actions() *foundation.NSArray[*INReservationAction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelActions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INReservationAction](_ret)
 }
 
 func (o *INReservation) URL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationSelURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

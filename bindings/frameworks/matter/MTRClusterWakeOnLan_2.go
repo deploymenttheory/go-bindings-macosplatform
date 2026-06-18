@@ -16,7 +16,7 @@ type MTRClusterWakeOnLan struct {
 }
 
 var (
-	_clsMTRClusterWakeOnLan = _objcClass("MTRClusterWakeOnLan")
+	_clsMTRClusterWakeOnLan                            = _objcClass("MTRClusterWakeOnLan")
 	_mTRClusterWakeOnLanSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
@@ -32,7 +32,8 @@ func MTRClusterWakeOnLanFromID(id objc.ID) *MTRClusterWakeOnLan {
 
 func (o *MTRClusterWakeOnLan) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWakeOnLan {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterWakeOnLanSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterWakeOnLanFromID(_ret)
 }
-

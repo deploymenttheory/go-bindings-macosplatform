@@ -130,4 +130,3 @@ type MatrixDescriptorable interface {
 }
 
 var _ MatrixDescriptorable = (*MatrixDescriptor)(nil)
-

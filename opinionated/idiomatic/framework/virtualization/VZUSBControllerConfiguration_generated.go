@@ -46,7 +46,9 @@ func (x *USBControllerConfiguration) SetUsbDevices(usbDevices *foundation.NSArra
 	x.inner.SetUsbDevices(usbDevices)
 }
 
-func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration { return x.inner }
+func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration {
+	return x.inner
+}
 
 // USBControllerConfigurationable is the interface implemented by [USBControllerConfiguration], for mocking and DI.
 type USBControllerConfigurationable interface {
@@ -56,4 +58,3 @@ type USBControllerConfigurationable interface {
 }
 
 var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)
-

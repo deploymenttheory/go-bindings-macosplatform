@@ -18,7 +18,9 @@ type MTRICDManagementClusterStayActiveResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRICDManagementClusterStayActiveResponseParams].
-func (x *MTRICDManagementClusterStayActiveResponseParams) Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams { return x.inner }
+func (x *MTRICDManagementClusterStayActiveResponseParams) Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -68,4 +70,3 @@ type MTRICDManagementClusterStayActiveResponseParamsable interface {
 }
 
 var _ MTRICDManagementClusterStayActiveResponseParamsable = (*MTRICDManagementClusterStayActiveResponseParams)(nil)
-

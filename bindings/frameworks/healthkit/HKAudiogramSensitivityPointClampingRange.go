@@ -18,10 +18,10 @@ type HKAudiogramSensitivityPointClampingRange struct {
 }
 
 var (
-	_clsHKAudiogramSensitivityPointClampingRange = _objcClass("HKAudiogramSensitivityPointClampingRange")
+	_clsHKAudiogramSensitivityPointClampingRange                                           = _objcClass("HKAudiogramSensitivityPointClampingRange")
 	_hKAudiogramSensitivityPointClampingRangeSelClampingRangeWithLowerBoundUpperBoundError = objc.RegisterName("clampingRangeWithLowerBound:upperBound:error:")
-	_hKAudiogramSensitivityPointClampingRangeSelLowerBound = objc.RegisterName("lowerBound")
-	_hKAudiogramSensitivityPointClampingRangeSelUpperBound = objc.RegisterName("upperBound")
+	_hKAudiogramSensitivityPointClampingRangeSelLowerBound                                 = objc.RegisterName("lowerBound")
+	_hKAudiogramSensitivityPointClampingRangeSelUpperBound                                 = objc.RegisterName("upperBound")
 )
 
 func HKAudiogramSensitivityPointClampingRangeFromID(id objc.ID) *HKAudiogramSensitivityPointClampingRange {
@@ -38,7 +38,9 @@ func HKAudiogramSensitivityPointClampingRangeFromID(id objc.ID) *HKAudiogramSens
 func HKAudiogramSensitivityPointClampingRangeClampingRangeWithLowerBoundUpperBoundError(lowerBound *foundation.NSNumber, upperBound *foundation.NSNumber) (*HKAudiogramSensitivityPointClampingRange, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKAudiogramSensitivityPointClampingRange), _hKAudiogramSensitivityPointClampingRangeSelClampingRangeWithLowerBoundUpperBoundError, lowerBound.Ptr(), upperBound.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -48,14 +50,17 @@ func HKAudiogramSensitivityPointClampingRangeClampingRangeWithLowerBoundUpperBou
 // @property lowerBound @abstract The lower bound of the clamping range, if any, in dBHL.
 func (o *HKAudiogramSensitivityPointClampingRange) LowerBound() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointClampingRangeSelLowerBound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
 
 // @property upperBound @abstract The upper bound of the clamping range, if any, in dBHL.
 func (o *HKAudiogramSensitivityPointClampingRange) UpperBound() *HKQuantity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKAudiogramSensitivityPointClampingRangeSelUpperBound)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKQuantityFromID(_ret)
 }
-

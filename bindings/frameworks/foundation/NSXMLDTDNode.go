@@ -17,19 +17,19 @@ type NSXMLDTDNode struct {
 }
 
 var (
-	_clsNSXMLDTDNode = _objcClass("NSXMLDTDNode")
-	_nSXMLDTDNodeSelInitWithXMLString = objc.RegisterName("initWithXMLString:")
+	_clsNSXMLDTDNode                    = _objcClass("NSXMLDTDNode")
+	_nSXMLDTDNodeSelInitWithXMLString   = objc.RegisterName("initWithXMLString:")
 	_nSXMLDTDNodeSelInitWithKindOptions = objc.RegisterName("initWithKind:options:")
-	_nSXMLDTDNodeSelInit = objc.RegisterName("init")
-	_nSXMLDTDNodeSelDTDKind = objc.RegisterName("DTDKind")
-	_nSXMLDTDNodeSelSetDTDKind = objc.RegisterName("setDTDKind:")
-	_nSXMLDTDNodeSelIsExternal = objc.RegisterName("isExternal")
-	_nSXMLDTDNodeSelPublicID = objc.RegisterName("publicID")
-	_nSXMLDTDNodeSelSetPublicID = objc.RegisterName("setPublicID:")
-	_nSXMLDTDNodeSelSystemID = objc.RegisterName("systemID")
-	_nSXMLDTDNodeSelSetSystemID = objc.RegisterName("setSystemID:")
-	_nSXMLDTDNodeSelNotationName = objc.RegisterName("notationName")
-	_nSXMLDTDNodeSelSetNotationName = objc.RegisterName("setNotationName:")
+	_nSXMLDTDNodeSelInit                = objc.RegisterName("init")
+	_nSXMLDTDNodeSelDTDKind             = objc.RegisterName("DTDKind")
+	_nSXMLDTDNodeSelSetDTDKind          = objc.RegisterName("setDTDKind:")
+	_nSXMLDTDNodeSelIsExternal          = objc.RegisterName("isExternal")
+	_nSXMLDTDNodeSelPublicID            = objc.RegisterName("publicID")
+	_nSXMLDTDNodeSelSetPublicID         = objc.RegisterName("setPublicID:")
+	_nSXMLDTDNodeSelSystemID            = objc.RegisterName("systemID")
+	_nSXMLDTDNodeSelSetSystemID         = objc.RegisterName("setSystemID:")
+	_nSXMLDTDNodeSelNotationName        = objc.RegisterName("notationName")
+	_nSXMLDTDNodeSelSetNotationName     = objc.RegisterName("setNotationName:")
 )
 
 func NSXMLDTDNodeFromID(id objc.ID) *NSXMLDTDNode {
@@ -45,19 +45,25 @@ func NSXMLDTDNodeFromID(id objc.ID) *NSXMLDTDNode {
 // @method initWithXMLString: @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
 func (o *NSXMLDTDNode) InitWithXMLString(string_ *NSString) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelInitWithXMLString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 func (o *NSXMLDTDNode) InitWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelInitWithKindOptions, kind, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
 func (o *NSXMLDTDNode) Init() *NSXMLDTDNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSXMLDTDNodeFromID(_ret)
 }
 
@@ -80,7 +86,9 @@ func (o *NSXMLDTDNode) IsExternal() bool {
 // @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
 func (o *NSXMLDTDNode) PublicID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelPublicID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -91,7 +99,9 @@ func (o *NSXMLDTDNode) SetPublicID(publicID *NSString) {
 // @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
 func (o *NSXMLDTDNode) SystemID() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelSystemID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -102,11 +112,12 @@ func (o *NSXMLDTDNode) SetSystemID(systemID *NSString) {
 // @abstract Set the notation name. Valid for entities only.
 func (o *NSXMLDTDNode) NotationName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSXMLDTDNodeSelNotationName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSXMLDTDNode) SetNotationName(notationName *NSString) {
 	o.Ptr().Send(_nSXMLDTDNodeSelSetNotationName, notationName.Ptr())
 }
-

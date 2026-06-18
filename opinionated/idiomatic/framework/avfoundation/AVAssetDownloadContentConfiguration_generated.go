@@ -18,7 +18,9 @@ type AssetDownloadContentConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetDownloadContentConfiguration].
-func (x *AssetDownloadContentConfiguration) Unwrap() *raw.AVAssetDownloadContentConfiguration { return x.inner }
+func (x *AssetDownloadContentConfiguration) Unwrap() *raw.AVAssetDownloadContentConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -45,7 +47,9 @@ func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVAssetVariantQualifier](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +65,9 @@ func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSe
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMediaSelection().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMediaSelection().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMediaSelection](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -114,4 +120,3 @@ type AssetDownloadContentConfigurationable interface {
 }
 
 var _ AssetDownloadContentConfigurationable = (*AssetDownloadContentConfiguration)(nil)
-

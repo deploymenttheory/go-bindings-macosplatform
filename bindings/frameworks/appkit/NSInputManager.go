@@ -17,20 +17,20 @@ type NSInputManager struct {
 }
 
 var (
-	_clsNSInputManager = _objcClass("NSInputManager")
-	_nSInputManagerSelCurrentInputManager = objc.RegisterName("currentInputManager")
-	_nSInputManagerSelCycleToNextInputLanguage = objc.RegisterName("cycleToNextInputLanguage:")
-	_nSInputManagerSelCycleToNextInputServerInLanguage = objc.RegisterName("cycleToNextInputServerInLanguage:")
-	_nSInputManagerSelInitWithNameHost = objc.RegisterName("initWithName:host:")
-	_nSInputManagerSelLocalizedInputManagerName = objc.RegisterName("localizedInputManagerName")
-	_nSInputManagerSelMarkedTextAbandoned = objc.RegisterName("markedTextAbandoned:")
-	_nSInputManagerSelMarkedTextSelectionChangedClient = objc.RegisterName("markedTextSelectionChanged:client:")
-	_nSInputManagerSelWantsToInterpretAllKeystrokes = objc.RegisterName("wantsToInterpretAllKeystrokes")
-	_nSInputManagerSelLanguage = objc.RegisterName("language")
-	_nSInputManagerSelImage = objc.RegisterName("image")
-	_nSInputManagerSelServer = objc.RegisterName("server")
-	_nSInputManagerSelWantsToHandleMouseEvents = objc.RegisterName("wantsToHandleMouseEvents")
-	_nSInputManagerSelHandleMouseEvent = objc.RegisterName("handleMouseEvent:")
+	_clsNSInputManager                                    = _objcClass("NSInputManager")
+	_nSInputManagerSelCurrentInputManager                 = objc.RegisterName("currentInputManager")
+	_nSInputManagerSelCycleToNextInputLanguage            = objc.RegisterName("cycleToNextInputLanguage:")
+	_nSInputManagerSelCycleToNextInputServerInLanguage    = objc.RegisterName("cycleToNextInputServerInLanguage:")
+	_nSInputManagerSelInitWithNameHost                    = objc.RegisterName("initWithName:host:")
+	_nSInputManagerSelLocalizedInputManagerName           = objc.RegisterName("localizedInputManagerName")
+	_nSInputManagerSelMarkedTextAbandoned                 = objc.RegisterName("markedTextAbandoned:")
+	_nSInputManagerSelMarkedTextSelectionChangedClient    = objc.RegisterName("markedTextSelectionChanged:client:")
+	_nSInputManagerSelWantsToInterpretAllKeystrokes       = objc.RegisterName("wantsToInterpretAllKeystrokes")
+	_nSInputManagerSelLanguage                            = objc.RegisterName("language")
+	_nSInputManagerSelImage                               = objc.RegisterName("image")
+	_nSInputManagerSelServer                              = objc.RegisterName("server")
+	_nSInputManagerSelWantsToHandleMouseEvents            = objc.RegisterName("wantsToHandleMouseEvents")
+	_nSInputManagerSelHandleMouseEvent                    = objc.RegisterName("handleMouseEvent:")
 	_nSInputManagerSelWantsToDelayTextChangeNotifications = objc.RegisterName("wantsToDelayTextChangeNotifications")
 )
 
@@ -47,7 +47,9 @@ func NSInputManagerFromID(id objc.ID) *NSInputManager {
 // Deprecated: since macOS 10.6.
 func NSInputManagerCurrentInputManager() *NSInputManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSInputManager), _nSInputManagerSelCurrentInputManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputManagerFromID(_ret)
 }
 
@@ -64,14 +66,18 @@ func NSInputManagerCycleToNextInputServerInLanguage(sender objc.ID) {
 // Deprecated: since macOS 10.6.
 func (o *NSInputManager) InitWithNameHost(inputServerName *foundation.NSString, hostName *foundation.NSString) *NSInputManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputManagerSelInitWithNameHost, inputServerName.Ptr(), hostName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputManagerFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSInputManager) LocalizedInputManagerName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputManagerSelLocalizedInputManagerName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -94,21 +100,27 @@ func (o *NSInputManager) WantsToInterpretAllKeystrokes() bool {
 // Deprecated: since macOS 10.6.
 func (o *NSInputManager) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputManagerSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSInputManager) Image() *NSImage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputManagerSelImage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSImageFromID(_ret)
 }
 
 // Deprecated: since macOS 10.6.
 func (o *NSInputManager) Server() *NSInputServer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSInputManagerSelServer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSInputServerFromID(_ret)
 }
 
@@ -129,4 +141,3 @@ func (o *NSInputManager) WantsToDelayTextChangeNotifications() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nSInputManagerSelWantsToDelayTextChangeNotifications)
 	return _ret
 }
-

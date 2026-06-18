@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_quicklookLib uintptr
-	_loadOnce sync.Once
+	_quicklookLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,46 +48,110 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("QLPreviewRequestCopyContentUTI", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestCopyContentUTI, _quicklookLib, "QLPreviewRequestCopyContentUTI") })
-	_register("QLPreviewRequestCopyOptions", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestCopyOptions, _quicklookLib, "QLPreviewRequestCopyOptions") })
+	_register("QLPreviewRequestCopyContentUTI", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestCopyContentUTI, _quicklookLib, "QLPreviewRequestCopyContentUTI")
+	})
+	_register("QLPreviewRequestCopyOptions", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestCopyOptions, _quicklookLib, "QLPreviewRequestCopyOptions")
+	})
 	_register("QLPreviewRequestCopyURL", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestCopyURL, _quicklookLib, "QLPreviewRequestCopyURL") })
-	_register("QLPreviewRequestCreateContext", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _quicklookLib, "QLPreviewRequestCreateContext") })
-	_register("QLPreviewRequestCreatePDFContext", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _quicklookLib, "QLPreviewRequestCreatePDFContext") })
-	_register("QLPreviewRequestFlushContext", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestFlushContext, _quicklookLib, "QLPreviewRequestFlushContext") })
-	_register("QLPreviewRequestGetDocumentObject", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestGetDocumentObject, _quicklookLib, "QLPreviewRequestGetDocumentObject") })
-	_register("QLPreviewRequestGetGeneratorBundle", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestGetGeneratorBundle, _quicklookLib, "QLPreviewRequestGetGeneratorBundle") })
-	_register("QLPreviewRequestGetTypeID", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestGetTypeID, _quicklookLib, "QLPreviewRequestGetTypeID") })
-	_register("QLPreviewRequestIsCancelled", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestIsCancelled, _quicklookLib, "QLPreviewRequestIsCancelled") })
-	_register("QLPreviewRequestSetDataRepresentation", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestSetDataRepresentation, _quicklookLib, "QLPreviewRequestSetDataRepresentation") })
-	_register("QLPreviewRequestSetDocumentObject", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestSetDocumentObject, _quicklookLib, "QLPreviewRequestSetDocumentObject") })
-	_register("QLPreviewRequestSetURLRepresentation", func() { purego.RegisterLibFunc(&_fnQLPreviewRequestSetURLRepresentation, _quicklookLib, "QLPreviewRequestSetURLRepresentation") })
+	_register("QLPreviewRequestCreateContext", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _quicklookLib, "QLPreviewRequestCreateContext")
+	})
+	_register("QLPreviewRequestCreatePDFContext", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _quicklookLib, "QLPreviewRequestCreatePDFContext")
+	})
+	_register("QLPreviewRequestFlushContext", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestFlushContext, _quicklookLib, "QLPreviewRequestFlushContext")
+	})
+	_register("QLPreviewRequestGetDocumentObject", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestGetDocumentObject, _quicklookLib, "QLPreviewRequestGetDocumentObject")
+	})
+	_register("QLPreviewRequestGetGeneratorBundle", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestGetGeneratorBundle, _quicklookLib, "QLPreviewRequestGetGeneratorBundle")
+	})
+	_register("QLPreviewRequestGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestGetTypeID, _quicklookLib, "QLPreviewRequestGetTypeID")
+	})
+	_register("QLPreviewRequestIsCancelled", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestIsCancelled, _quicklookLib, "QLPreviewRequestIsCancelled")
+	})
+	_register("QLPreviewRequestSetDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestSetDataRepresentation, _quicklookLib, "QLPreviewRequestSetDataRepresentation")
+	})
+	_register("QLPreviewRequestSetDocumentObject", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestSetDocumentObject, _quicklookLib, "QLPreviewRequestSetDocumentObject")
+	})
+	_register("QLPreviewRequestSetURLRepresentation", func() {
+		purego.RegisterLibFunc(&_fnQLPreviewRequestSetURLRepresentation, _quicklookLib, "QLPreviewRequestSetURLRepresentation")
+	})
 	_register("QLThumbnailCancel", func() { purego.RegisterLibFunc(&_fnQLThumbnailCancel, _quicklookLib, "QLThumbnailCancel") })
-	_register("QLThumbnailCopyDocumentURL", func() { purego.RegisterLibFunc(&_fnQLThumbnailCopyDocumentURL, _quicklookLib, "QLThumbnailCopyDocumentURL") })
+	_register("QLThumbnailCopyDocumentURL", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailCopyDocumentURL, _quicklookLib, "QLThumbnailCopyDocumentURL")
+	})
 	_register("QLThumbnailCopyImage", func() { purego.RegisterLibFunc(&_fnQLThumbnailCopyImage, _quicklookLib, "QLThumbnailCopyImage") })
 	_register("QLThumbnailCopyOptions", func() { purego.RegisterLibFunc(&_fnQLThumbnailCopyOptions, _quicklookLib, "QLThumbnailCopyOptions") })
 	_register("QLThumbnailCreate", func() { purego.RegisterLibFunc(&_fnQLThumbnailCreate, _quicklookLib, "QLThumbnailCreate") })
-	_register("QLThumbnailDispatchAsync", func() { purego.RegisterLibFunc(&_fnQLThumbnailDispatchAsync, _quicklookLib, "QLThumbnailDispatchAsync") })
-	_register("QLThumbnailGetContentRect", func() { purego.RegisterLibFunc(&_fnQLThumbnailGetContentRect, _quicklookLib, "QLThumbnailGetContentRect") })
-	_register("QLThumbnailGetMaximumSize", func() { purego.RegisterLibFunc(&_fnQLThumbnailGetMaximumSize, _quicklookLib, "QLThumbnailGetMaximumSize") })
+	_register("QLThumbnailDispatchAsync", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailDispatchAsync, _quicklookLib, "QLThumbnailDispatchAsync")
+	})
+	_register("QLThumbnailGetContentRect", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailGetContentRect, _quicklookLib, "QLThumbnailGetContentRect")
+	})
+	_register("QLThumbnailGetMaximumSize", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailGetMaximumSize, _quicklookLib, "QLThumbnailGetMaximumSize")
+	})
 	_register("QLThumbnailGetTypeID", func() { purego.RegisterLibFunc(&_fnQLThumbnailGetTypeID, _quicklookLib, "QLThumbnailGetTypeID") })
 	_register("QLThumbnailImageCreate", func() { purego.RegisterLibFunc(&_fnQLThumbnailImageCreate, _quicklookLib, "QLThumbnailImageCreate") })
 	_register("QLThumbnailIsCancelled", func() { purego.RegisterLibFunc(&_fnQLThumbnailIsCancelled, _quicklookLib, "QLThumbnailIsCancelled") })
-	_register("QLThumbnailRequestCopyContentUTI", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyContentUTI, _quicklookLib, "QLThumbnailRequestCopyContentUTI") })
-	_register("QLThumbnailRequestCopyOptions", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyOptions, _quicklookLib, "QLThumbnailRequestCopyOptions") })
-	_register("QLThumbnailRequestCopyURL", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyURL, _quicklookLib, "QLThumbnailRequestCopyURL") })
-	_register("QLThumbnailRequestCreateContext", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestCreateContext, _quicklookLib, "QLThumbnailRequestCreateContext") })
-	_register("QLThumbnailRequestFlushContext", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestFlushContext, _quicklookLib, "QLThumbnailRequestFlushContext") })
-	_register("QLThumbnailRequestGetDocumentObject", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestGetDocumentObject, _quicklookLib, "QLThumbnailRequestGetDocumentObject") })
-	_register("QLThumbnailRequestGetGeneratorBundle", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestGetGeneratorBundle, _quicklookLib, "QLThumbnailRequestGetGeneratorBundle") })
-	_register("QLThumbnailRequestGetMaximumSize", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestGetMaximumSize, _quicklookLib, "QLThumbnailRequestGetMaximumSize") })
-	_register("QLThumbnailRequestGetTypeID", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestGetTypeID, _quicklookLib, "QLThumbnailRequestGetTypeID") })
-	_register("QLThumbnailRequestIsCancelled", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestIsCancelled, _quicklookLib, "QLThumbnailRequestIsCancelled") })
-	_register("QLThumbnailRequestSetDocumentObject", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetDocumentObject, _quicklookLib, "QLThumbnailRequestSetDocumentObject") })
-	_register("QLThumbnailRequestSetImage", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImage, _quicklookLib, "QLThumbnailRequestSetImage") })
-	_register("QLThumbnailRequestSetImageAtURL", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageAtURL, _quicklookLib, "QLThumbnailRequestSetImageAtURL") })
-	_register("QLThumbnailRequestSetImageWithData", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageWithData, _quicklookLib, "QLThumbnailRequestSetImageWithData") })
-	_register("QLThumbnailRequestSetThumbnailWithDataRepresentation", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithDataRepresentation, _quicklookLib, "QLThumbnailRequestSetThumbnailWithDataRepresentation") })
-	_register("QLThumbnailRequestSetThumbnailWithURLRepresentation", func() { purego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithURLRepresentation, _quicklookLib, "QLThumbnailRequestSetThumbnailWithURLRepresentation") })
+	_register("QLThumbnailRequestCopyContentUTI", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyContentUTI, _quicklookLib, "QLThumbnailRequestCopyContentUTI")
+	})
+	_register("QLThumbnailRequestCopyOptions", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyOptions, _quicklookLib, "QLThumbnailRequestCopyOptions")
+	})
+	_register("QLThumbnailRequestCopyURL", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestCopyURL, _quicklookLib, "QLThumbnailRequestCopyURL")
+	})
+	_register("QLThumbnailRequestCreateContext", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestCreateContext, _quicklookLib, "QLThumbnailRequestCreateContext")
+	})
+	_register("QLThumbnailRequestFlushContext", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestFlushContext, _quicklookLib, "QLThumbnailRequestFlushContext")
+	})
+	_register("QLThumbnailRequestGetDocumentObject", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestGetDocumentObject, _quicklookLib, "QLThumbnailRequestGetDocumentObject")
+	})
+	_register("QLThumbnailRequestGetGeneratorBundle", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestGetGeneratorBundle, _quicklookLib, "QLThumbnailRequestGetGeneratorBundle")
+	})
+	_register("QLThumbnailRequestGetMaximumSize", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestGetMaximumSize, _quicklookLib, "QLThumbnailRequestGetMaximumSize")
+	})
+	_register("QLThumbnailRequestGetTypeID", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestGetTypeID, _quicklookLib, "QLThumbnailRequestGetTypeID")
+	})
+	_register("QLThumbnailRequestIsCancelled", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestIsCancelled, _quicklookLib, "QLThumbnailRequestIsCancelled")
+	})
+	_register("QLThumbnailRequestSetDocumentObject", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetDocumentObject, _quicklookLib, "QLThumbnailRequestSetDocumentObject")
+	})
+	_register("QLThumbnailRequestSetImage", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImage, _quicklookLib, "QLThumbnailRequestSetImage")
+	})
+	_register("QLThumbnailRequestSetImageAtURL", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageAtURL, _quicklookLib, "QLThumbnailRequestSetImageAtURL")
+	})
+	_register("QLThumbnailRequestSetImageWithData", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetImageWithData, _quicklookLib, "QLThumbnailRequestSetImageWithData")
+	})
+	_register("QLThumbnailRequestSetThumbnailWithDataRepresentation", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithDataRepresentation, _quicklookLib, "QLThumbnailRequestSetThumbnailWithDataRepresentation")
+	})
+	_register("QLThumbnailRequestSetThumbnailWithURLRepresentation", func() {
+		purego.RegisterLibFunc(&_fnQLThumbnailRequestSetThumbnailWithURLRepresentation, _quicklookLib, "QLThumbnailRequestSetThumbnailWithURLRepresentation")
+	})
 }
 
 func init() {

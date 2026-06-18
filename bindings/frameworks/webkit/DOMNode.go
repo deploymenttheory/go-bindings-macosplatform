@@ -17,50 +17,50 @@ type DOMNode struct {
 }
 
 var (
-	_clsDOMNode = _objcClass("DOMNode")
-	_dOMNodeSelInsertBeforeRefChild = objc.RegisterName("insertBefore:refChild:")
-	_dOMNodeSelReplaceChildOldChild = objc.RegisterName("replaceChild:oldChild:")
-	_dOMNodeSelRemoveChild = objc.RegisterName("removeChild:")
-	_dOMNodeSelAppendChild = objc.RegisterName("appendChild:")
-	_dOMNodeSelHasChildNodes = objc.RegisterName("hasChildNodes")
-	_dOMNodeSelCloneNode = objc.RegisterName("cloneNode:")
-	_dOMNodeSelNormalize = objc.RegisterName("normalize")
-	_dOMNodeSelIsSupportedVersion = objc.RegisterName("isSupported:version:")
-	_dOMNodeSelHasAttributes = objc.RegisterName("hasAttributes")
-	_dOMNodeSelIsSameNode = objc.RegisterName("isSameNode:")
-	_dOMNodeSelIsEqualNode = objc.RegisterName("isEqualNode:")
-	_dOMNodeSelLookupPrefix = objc.RegisterName("lookupPrefix:")
-	_dOMNodeSelLookupNamespaceURI = objc.RegisterName("lookupNamespaceURI:")
-	_dOMNodeSelIsDefaultNamespace = objc.RegisterName("isDefaultNamespace:")
+	_clsDOMNode                        = _objcClass("DOMNode")
+	_dOMNodeSelInsertBeforeRefChild    = objc.RegisterName("insertBefore:refChild:")
+	_dOMNodeSelReplaceChildOldChild    = objc.RegisterName("replaceChild:oldChild:")
+	_dOMNodeSelRemoveChild             = objc.RegisterName("removeChild:")
+	_dOMNodeSelAppendChild             = objc.RegisterName("appendChild:")
+	_dOMNodeSelHasChildNodes           = objc.RegisterName("hasChildNodes")
+	_dOMNodeSelCloneNode               = objc.RegisterName("cloneNode:")
+	_dOMNodeSelNormalize               = objc.RegisterName("normalize")
+	_dOMNodeSelIsSupportedVersion      = objc.RegisterName("isSupported:version:")
+	_dOMNodeSelHasAttributes           = objc.RegisterName("hasAttributes")
+	_dOMNodeSelIsSameNode              = objc.RegisterName("isSameNode:")
+	_dOMNodeSelIsEqualNode             = objc.RegisterName("isEqualNode:")
+	_dOMNodeSelLookupPrefix            = objc.RegisterName("lookupPrefix:")
+	_dOMNodeSelLookupNamespaceURI      = objc.RegisterName("lookupNamespaceURI:")
+	_dOMNodeSelIsDefaultNamespace      = objc.RegisterName("isDefaultNamespace:")
 	_dOMNodeSelCompareDocumentPosition = objc.RegisterName("compareDocumentPosition:")
-	_dOMNodeSelContains = objc.RegisterName("contains:")
-	_dOMNodeSelNodeName = objc.RegisterName("nodeName")
-	_dOMNodeSelNodeValue = objc.RegisterName("nodeValue")
-	_dOMNodeSelSetNodeValue = objc.RegisterName("setNodeValue:")
-	_dOMNodeSelNodeType = objc.RegisterName("nodeType")
-	_dOMNodeSelParentNode = objc.RegisterName("parentNode")
-	_dOMNodeSelChildNodes = objc.RegisterName("childNodes")
-	_dOMNodeSelFirstChild = objc.RegisterName("firstChild")
-	_dOMNodeSelLastChild = objc.RegisterName("lastChild")
-	_dOMNodeSelPreviousSibling = objc.RegisterName("previousSibling")
-	_dOMNodeSelNextSibling = objc.RegisterName("nextSibling")
-	_dOMNodeSelOwnerDocument = objc.RegisterName("ownerDocument")
-	_dOMNodeSelNamespaceURI = objc.RegisterName("namespaceURI")
-	_dOMNodeSelPrefix = objc.RegisterName("prefix")
-	_dOMNodeSelSetPrefix = objc.RegisterName("setPrefix:")
-	_dOMNodeSelLocalName = objc.RegisterName("localName")
-	_dOMNodeSelAttributes = objc.RegisterName("attributes")
-	_dOMNodeSelBaseURI = objc.RegisterName("baseURI")
-	_dOMNodeSelTextContent = objc.RegisterName("textContent")
-	_dOMNodeSelSetTextContent = objc.RegisterName("setTextContent:")
-	_dOMNodeSelParentElement = objc.RegisterName("parentElement")
-	_dOMNodeSelIsContentEditable = objc.RegisterName("isContentEditable")
-	_dOMNodeSelInsertBefore = objc.RegisterName("insertBefore::")
-	_dOMNodeSelReplaceChild = objc.RegisterName("replaceChild::")
-	_dOMNodeSelIsSupported = objc.RegisterName("isSupported::")
-	_dOMNodeSelBoundingBox = objc.RegisterName("boundingBox")
-	_dOMNodeSelLineBoxRects = objc.RegisterName("lineBoxRects")
-	_dOMNodeSelWebArchive = objc.RegisterName("webArchive")
+	_dOMNodeSelContains                = objc.RegisterName("contains:")
+	_dOMNodeSelNodeName                = objc.RegisterName("nodeName")
+	_dOMNodeSelNodeValue               = objc.RegisterName("nodeValue")
+	_dOMNodeSelSetNodeValue            = objc.RegisterName("setNodeValue:")
+	_dOMNodeSelNodeType                = objc.RegisterName("nodeType")
+	_dOMNodeSelParentNode              = objc.RegisterName("parentNode")
+	_dOMNodeSelChildNodes              = objc.RegisterName("childNodes")
+	_dOMNodeSelFirstChild              = objc.RegisterName("firstChild")
+	_dOMNodeSelLastChild               = objc.RegisterName("lastChild")
+	_dOMNodeSelPreviousSibling         = objc.RegisterName("previousSibling")
+	_dOMNodeSelNextSibling             = objc.RegisterName("nextSibling")
+	_dOMNodeSelOwnerDocument           = objc.RegisterName("ownerDocument")
+	_dOMNodeSelNamespaceURI            = objc.RegisterName("namespaceURI")
+	_dOMNodeSelPrefix                  = objc.RegisterName("prefix")
+	_dOMNodeSelSetPrefix               = objc.RegisterName("setPrefix:")
+	_dOMNodeSelLocalName               = objc.RegisterName("localName")
+	_dOMNodeSelAttributes              = objc.RegisterName("attributes")
+	_dOMNodeSelBaseURI                 = objc.RegisterName("baseURI")
+	_dOMNodeSelTextContent             = objc.RegisterName("textContent")
+	_dOMNodeSelSetTextContent          = objc.RegisterName("setTextContent:")
+	_dOMNodeSelParentElement           = objc.RegisterName("parentElement")
+	_dOMNodeSelIsContentEditable       = objc.RegisterName("isContentEditable")
+	_dOMNodeSelInsertBefore            = objc.RegisterName("insertBefore::")
+	_dOMNodeSelReplaceChild            = objc.RegisterName("replaceChild::")
+	_dOMNodeSelIsSupported             = objc.RegisterName("isSupported::")
+	_dOMNodeSelBoundingBox             = objc.RegisterName("boundingBox")
+	_dOMNodeSelLineBoxRects            = objc.RegisterName("lineBoxRects")
+	_dOMNodeSelWebArchive              = objc.RegisterName("webArchive")
 )
 
 func DOMNodeFromID(id objc.ID) *DOMNode {
@@ -75,25 +75,33 @@ func DOMNodeFromID(id objc.ID) *DOMNode {
 
 func (o *DOMNode) InsertBeforeRefChild(newChild *DOMNode, refChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelInsertBeforeRefChild, newChild.Ptr(), refChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) ReplaceChildOldChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelReplaceChildOldChild, newChild.Ptr(), oldChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) RemoveChild(oldChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelRemoveChild, oldChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) AppendChild(newChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelAppendChild, newChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -104,7 +112,9 @@ func (o *DOMNode) HasChildNodes() bool {
 
 func (o *DOMNode) CloneNode(deep bool) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelCloneNode, deep)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -134,13 +144,17 @@ func (o *DOMNode) IsEqualNode(other *DOMNode) bool {
 
 func (o *DOMNode) LookupPrefix(namespaceURI *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelLookupPrefix, namespaceURI.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMNode) LookupNamespaceURI(prefix *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelLookupNamespaceURI, prefix.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -161,13 +175,17 @@ func (o *DOMNode) Contains(other *DOMNode) bool {
 
 func (o *DOMNode) NodeName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelNodeName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMNode) NodeValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelNodeValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -182,55 +200,73 @@ func (o *DOMNode) NodeType() uint16 {
 
 func (o *DOMNode) ParentNode() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelParentNode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) ChildNodes() *DOMNodeList {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelChildNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeListFromID(_ret)
 }
 
 func (o *DOMNode) FirstChild() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelFirstChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) LastChild() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelLastChild)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) PreviousSibling() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelPreviousSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) NextSibling() *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelNextSibling)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) OwnerDocument() *DOMDocument {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelOwnerDocument)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMDocumentFromID(_ret)
 }
 
 func (o *DOMNode) NamespaceURI() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelNamespaceURI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMNode) Prefix() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelPrefix)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -240,25 +276,33 @@ func (o *DOMNode) SetPrefix(prefix *foundation.NSString) {
 
 func (o *DOMNode) LocalName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelLocalName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMNode) Attributes() *DOMNamedNodeMap {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNamedNodeMapFromID(_ret)
 }
 
 func (o *DOMNode) BaseURI() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelBaseURI)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMNode) TextContent() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelTextContent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -268,7 +312,9 @@ func (o *DOMNode) SetTextContent(textContent *foundation.NSString) {
 
 func (o *DOMNode) ParentElement() *DOMElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelParentElement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMElementFromID(_ret)
 }
 
@@ -279,13 +325,17 @@ func (o *DOMNode) IsContentEditable() bool {
 
 func (o *DOMNode) InsertBefore(newChild *DOMNode, refChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelInsertBefore, newChild.Ptr(), refChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
 func (o *DOMNode) ReplaceChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelReplaceChild, newChild.Ptr(), oldChild.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DOMNodeFromID(_ret)
 }
 
@@ -306,7 +356,8 @@ func (o *DOMNode) LineBoxRects() *foundation.NSArray[objc.ID] {
 
 func (o *DOMNode) WebArchive() *WebArchive {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMNodeSelWebArchive)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return WebArchiveFromID(_ret)
 }
-

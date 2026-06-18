@@ -16,8 +16,8 @@ type CNChangeHistoryAddGroupEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryAddGroupEvent = _objcClass("CNChangeHistoryAddGroupEvent")
-	_cNChangeHistoryAddGroupEventSelGroup = objc.RegisterName("group")
+	_clsCNChangeHistoryAddGroupEvent                    = _objcClass("CNChangeHistoryAddGroupEvent")
+	_cNChangeHistoryAddGroupEventSelGroup               = objc.RegisterName("group")
 	_cNChangeHistoryAddGroupEventSelContainerIdentifier = objc.RegisterName("containerIdentifier")
 )
 
@@ -33,13 +33,16 @@ func CNChangeHistoryAddGroupEventFromID(id objc.ID) *CNChangeHistoryAddGroupEven
 
 func (o *CNChangeHistoryAddGroupEvent) Group() *CNGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddGroupEventSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNGroupFromID(_ret)
 }
 
 func (o *CNChangeHistoryAddGroupEvent) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddGroupEventSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

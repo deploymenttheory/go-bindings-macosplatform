@@ -18,14 +18,14 @@ type PKPaymentAuthorizationResult struct {
 }
 
 var (
-	_clsPKPaymentAuthorizationResult = _objcClass("PKPaymentAuthorizationResult")
+	_clsPKPaymentAuthorizationResult                     = _objcClass("PKPaymentAuthorizationResult")
 	_pKPaymentAuthorizationResultSelInitWithStatusErrors = objc.RegisterName("initWithStatus:errors:")
-	_pKPaymentAuthorizationResultSelStatus = objc.RegisterName("status")
-	_pKPaymentAuthorizationResultSelSetStatus = objc.RegisterName("setStatus:")
-	_pKPaymentAuthorizationResultSelErrors = objc.RegisterName("errors")
-	_pKPaymentAuthorizationResultSelSetErrors = objc.RegisterName("setErrors:")
-	_pKPaymentAuthorizationResultSelOrderDetails = objc.RegisterName("orderDetails")
-	_pKPaymentAuthorizationResultSelSetOrderDetails = objc.RegisterName("setOrderDetails:")
+	_pKPaymentAuthorizationResultSelStatus               = objc.RegisterName("status")
+	_pKPaymentAuthorizationResultSelSetStatus            = objc.RegisterName("setStatus:")
+	_pKPaymentAuthorizationResultSelErrors               = objc.RegisterName("errors")
+	_pKPaymentAuthorizationResultSelSetErrors            = objc.RegisterName("setErrors:")
+	_pKPaymentAuthorizationResultSelOrderDetails         = objc.RegisterName("orderDetails")
+	_pKPaymentAuthorizationResultSelSetOrderDetails      = objc.RegisterName("setOrderDetails:")
 )
 
 func PKPaymentAuthorizationResultFromID(id objc.ID) *PKPaymentAuthorizationResult {
@@ -41,7 +41,9 @@ func PKPaymentAuthorizationResultFromID(id objc.ID) *PKPaymentAuthorizationResul
 func (o *PKPaymentAuthorizationResult) InitWithStatusErrors(status PKPaymentAuthorizationStatus) (*PKPaymentAuthorizationResult, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationResultSelInitWithStatusErrors, status, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -73,11 +75,12 @@ func (o *PKPaymentAuthorizationResult) SetErrors() error {
 
 func (o *PKPaymentAuthorizationResult) OrderDetails() *PKPaymentOrderDetails {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentAuthorizationResultSelOrderDetails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentOrderDetailsFromID(_ret)
 }
 
 func (o *PKPaymentAuthorizationResult) SetOrderDetails(orderDetails *PKPaymentOrderDetails) {
 	o.Ptr().Send(_pKPaymentAuthorizationResultSelSetOrderDetails, orderDetails.Ptr())
 }
-

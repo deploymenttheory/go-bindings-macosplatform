@@ -58,4 +58,3 @@ type SyncEngineFailedZoneSaveable interface {
 }
 
 var _ SyncEngineFailedZoneSaveable = (*SyncEngineFailedZoneSave)(nil)
-

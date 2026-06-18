@@ -16,13 +16,13 @@ type BADownload struct {
 }
 
 var (
-	_clsBADownload = _objcClass("BADownload")
+	_clsBADownload                   = _objcClass("BADownload")
 	_bADownloadSelCopyAsNonEssential = objc.RegisterName("copyAsNonEssential")
-	_bADownloadSelState = objc.RegisterName("state")
-	_bADownloadSelIdentifier = objc.RegisterName("identifier")
-	_bADownloadSelUniqueIdentifier = objc.RegisterName("uniqueIdentifier")
-	_bADownloadSelPriority = objc.RegisterName("priority")
-	_bADownloadSelIsEssential = objc.RegisterName("isEssential")
+	_bADownloadSelState              = objc.RegisterName("state")
+	_bADownloadSelIdentifier         = objc.RegisterName("identifier")
+	_bADownloadSelUniqueIdentifier   = objc.RegisterName("uniqueIdentifier")
+	_bADownloadSelPriority           = objc.RegisterName("priority")
+	_bADownloadSelIsEssential        = objc.RegisterName("isEssential")
 )
 
 func BADownloadFromID(id objc.ID) *BADownload {
@@ -50,14 +50,18 @@ func (o *BADownload) State() BADownloadState {
 // @brief A client defined identifier that uniquely identifies this asset.
 func (o *BADownload) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bADownloadSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @brief A UUID that uniquely identifies the download object.
 func (o *BADownload) UniqueIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _bADownloadSelUniqueIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -72,4 +76,3 @@ func (o *BADownload) IsEssential() bool {
 	_ret := objc.Send[bool](o.Ptr(), _bADownloadSelIsEssential)
 	return _ret
 }
-

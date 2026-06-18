@@ -17,16 +17,16 @@ type AVPlayerInterstitialEventController struct {
 }
 
 var (
-	_clsAVPlayerInterstitialEventController = _objcClass("AVPlayerInterstitialEventController")
+	_clsAVPlayerInterstitialEventController                                             = _objcClass("AVPlayerInterstitialEventController")
 	_aVPlayerInterstitialEventControllerSelInterstitialEventControllerWithPrimaryPlayer = objc.RegisterName("interstitialEventControllerWithPrimaryPlayer:")
-	_aVPlayerInterstitialEventControllerSelInitWithPrimaryPlayer = objc.RegisterName("initWithPrimaryPlayer:")
-	_aVPlayerInterstitialEventControllerSelCancelCurrentEventWithResumptionOffset = objc.RegisterName("cancelCurrentEventWithResumptionOffset:")
-	_aVPlayerInterstitialEventControllerSelSkipCurrentEvent = objc.RegisterName("skipCurrentEvent")
-	_aVPlayerInterstitialEventControllerSelSetEvents = objc.RegisterName("setEvents:")
-	_aVPlayerInterstitialEventControllerSelLocalizedStringsBundle = objc.RegisterName("localizedStringsBundle")
-	_aVPlayerInterstitialEventControllerSelSetLocalizedStringsBundle = objc.RegisterName("setLocalizedStringsBundle:")
-	_aVPlayerInterstitialEventControllerSelLocalizedStringsTableName = objc.RegisterName("localizedStringsTableName")
-	_aVPlayerInterstitialEventControllerSelSetLocalizedStringsTableName = objc.RegisterName("setLocalizedStringsTableName:")
+	_aVPlayerInterstitialEventControllerSelInitWithPrimaryPlayer                        = objc.RegisterName("initWithPrimaryPlayer:")
+	_aVPlayerInterstitialEventControllerSelCancelCurrentEventWithResumptionOffset       = objc.RegisterName("cancelCurrentEventWithResumptionOffset:")
+	_aVPlayerInterstitialEventControllerSelSkipCurrentEvent                             = objc.RegisterName("skipCurrentEvent")
+	_aVPlayerInterstitialEventControllerSelSetEvents                                    = objc.RegisterName("setEvents:")
+	_aVPlayerInterstitialEventControllerSelLocalizedStringsBundle                       = objc.RegisterName("localizedStringsBundle")
+	_aVPlayerInterstitialEventControllerSelSetLocalizedStringsBundle                    = objc.RegisterName("setLocalizedStringsBundle:")
+	_aVPlayerInterstitialEventControllerSelLocalizedStringsTableName                    = objc.RegisterName("localizedStringsTableName")
+	_aVPlayerInterstitialEventControllerSelSetLocalizedStringsTableName                 = objc.RegisterName("setLocalizedStringsTableName:")
 )
 
 func AVPlayerInterstitialEventControllerFromID(id objc.ID) *AVPlayerInterstitialEventController {
@@ -42,14 +42,18 @@ func AVPlayerInterstitialEventControllerFromID(id objc.ID) *AVPlayerInterstitial
 // Returns an instance of AVPlayerInterstitialEvent for use in observing and scheduling interstitial playback. This method throws an exception if the primary player is an interstitial player. - Parameter primaryPlayer: The AVPlayer that will play the primaryItems of the receiver's interstitial events. - Returns: An instance of AVPlayerInterstitialEventController.
 func AVPlayerInterstitialEventControllerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayerInterstitialEventController), _aVPlayerInterstitialEventControllerSelInterstitialEventControllerWithPrimaryPlayer, primaryPlayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventControllerFromID(_ret)
 }
 
 // This method throws an exception if the primary player is an interstitial player.
 func (o *AVPlayerInterstitialEventController) InitWithPrimaryPlayer(primaryPlayer *AVPlayer) *AVPlayerInterstitialEventController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventControllerSelInitWithPrimaryPlayer, primaryPlayer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerInterstitialEventControllerFromID(_ret)
 }
 
@@ -70,7 +74,9 @@ func (o *AVPlayerInterstitialEventController) SetEvents(events *foundation.NSArr
 // The bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, any UI elements triggered by the AVPlayerInterstitialEventController, such as the skip button, may contain a generic label based on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (o *AVPlayerInterstitialEventController) LocalizedStringsBundle() *foundation.NSBundle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventControllerSelLocalizedStringsBundle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSBundleFromID(_ret)
 }
 
@@ -81,11 +87,12 @@ func (o *AVPlayerInterstitialEventController) SetLocalizedStringsBundle(localize
 // The name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, it will default to "Localizable"
 func (o *AVPlayerInterstitialEventController) LocalizedStringsTableName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerInterstitialEventControllerSelLocalizedStringsTableName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *AVPlayerInterstitialEventController) SetLocalizedStringsTableName(localizedStringsTableName *foundation.NSString) {
 	o.Ptr().Send(_aVPlayerInterstitialEventControllerSelSetLocalizedStringsTableName, localizedStringsTableName.Ptr())
 }
-

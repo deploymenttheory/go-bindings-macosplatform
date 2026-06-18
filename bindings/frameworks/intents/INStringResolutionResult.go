@@ -16,8 +16,8 @@ type INStringResolutionResult struct {
 }
 
 var (
-	_clsINStringResolutionResult = _objcClass("INStringResolutionResult")
-	_iNStringResolutionResultSelSuccessWithResolvedString = objc.RegisterName("successWithResolvedString:")
+	_clsINStringResolutionResult                                        = _objcClass("INStringResolutionResult")
+	_iNStringResolutionResultSelSuccessWithResolvedString               = objc.RegisterName("successWithResolvedString:")
 	_iNStringResolutionResultSelDisambiguationWithStringsToDisambiguate = objc.RegisterName("disambiguationWithStringsToDisambiguate:")
 	_iNStringResolutionResultSelConfirmationRequiredWithStringToConfirm = objc.RegisterName("confirmationRequiredWithStringToConfirm:")
 )
@@ -34,19 +34,24 @@ func INStringResolutionResultFromID(id objc.ID) *INStringResolutionResult {
 
 func INStringResolutionResultSuccessWithResolvedString(resolvedString *foundation.NSString) *INStringResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINStringResolutionResult), _iNStringResolutionResultSelSuccessWithResolvedString, resolvedString.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStringResolutionResultFromID(_ret)
 }
 
 func INStringResolutionResultDisambiguationWithStringsToDisambiguate(stringsToDisambiguate *foundation.NSArray[*foundation.NSString]) *INStringResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINStringResolutionResult), _iNStringResolutionResultSelDisambiguationWithStringsToDisambiguate, stringsToDisambiguate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStringResolutionResultFromID(_ret)
 }
 
 func INStringResolutionResultConfirmationRequiredWithStringToConfirm(stringToConfirm *foundation.NSString) *INStringResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINStringResolutionResult), _iNStringResolutionResultSelConfirmationRequiredWithStringToConfirm, stringToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStringResolutionResultFromID(_ret)
 }
-

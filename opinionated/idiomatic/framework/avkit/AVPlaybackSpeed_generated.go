@@ -70,4 +70,3 @@ type PlaybackSpeedable interface {
 }
 
 var _ PlaybackSpeedable = (*PlaybackSpeed)(nil)
-

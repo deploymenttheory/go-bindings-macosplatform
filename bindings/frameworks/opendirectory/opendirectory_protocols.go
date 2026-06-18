@@ -15,4 +15,3 @@ import (
 type ODQueryDelegate interface {
 	QueryFoundResultsError(inQuery *ODQuery, inResults *foundation.NSArray[objc.ID], inError unsafe.Pointer)
 }
-

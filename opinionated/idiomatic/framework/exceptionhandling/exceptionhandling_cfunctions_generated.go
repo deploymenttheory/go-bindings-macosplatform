@@ -12,4 +12,3 @@ import (
 func NSExceptionHandlerResume() {
 	raw.NSExceptionHandlerResume()
 }
-

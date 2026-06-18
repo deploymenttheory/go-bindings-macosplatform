@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	_fnIOBluetoothGetDeviceSelectorController func() unsafe.Pointer
-	_fnIOBluetoothGetPairingController func() unsafe.Pointer
+	_fnIOBluetoothGetDeviceSelectorController     func() unsafe.Pointer
+	_fnIOBluetoothGetPairingController            func() unsafe.Pointer
 	_fnIOBluetoothValidateHardwareWithDescription func(unsafe.Pointer, unsafe.Pointer) int
 )
 
@@ -24,4 +24,3 @@ func IOBluetoothGetPairingController() unsafe.Pointer {
 func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle unsafe.Pointer, descriptionText unsafe.Pointer) int {
 	return _fnIOBluetoothValidateHardwareWithDescription(cancelButtonTitle, descriptionText)
 }
-

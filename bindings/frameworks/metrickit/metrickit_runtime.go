@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_metrickitLib uintptr
-	_loadOnce sync.Once
+	_metrickitLib  uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -48,7 +48,9 @@ func _loadLibrary() {
 		}
 		return
 	}
-	_register("_MXSignpostMetricsSnapshot", func() { purego.RegisterLibFunc(&__MXSignpostMetricsSnapshot, _metrickitLib, "_MXSignpostMetricsSnapshot") })
+	_register("_MXSignpostMetricsSnapshot", func() {
+		purego.RegisterLibFunc(&__MXSignpostMetricsSnapshot, _metrickitLib, "_MXSignpostMetricsSnapshot")
+	})
 }
 
 func init() {

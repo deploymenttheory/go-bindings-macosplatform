@@ -16,11 +16,11 @@ type MPSCNNNeuronNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronNode = _objcClass("MPSCNNNeuronNode")
+	_clsMPSCNNNeuronNode                         = _objcClass("MPSCNNNeuronNode")
 	_mPSCNNNeuronNodeSelNodeWithSourceDescriptor = objc.RegisterName("nodeWithSource:descriptor:")
-	_mPSCNNNeuronNodeSelA = objc.RegisterName("a")
-	_mPSCNNNeuronNodeSelB = objc.RegisterName("b")
-	_mPSCNNNeuronNodeSelC = objc.RegisterName("c")
+	_mPSCNNNeuronNodeSelA                        = objc.RegisterName("a")
+	_mPSCNNNeuronNodeSelB                        = objc.RegisterName("b")
+	_mPSCNNNeuronNodeSelC                        = objc.RegisterName("c")
 )
 
 func MPSCNNNeuronNodeFromID(id objc.ID) *MPSCNNNeuronNode {
@@ -36,7 +36,9 @@ func MPSCNNNeuronNodeFromID(id objc.ID) *MPSCNNNeuronNode {
 // @abstract Create a neuron node of the appropriate type with a MPSNNNeuronDescriptor
 func MPSCNNNeuronNodeNodeWithSourceDescriptor(sourceNode *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *MPSCNNNeuronNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronNode), _mPSCNNNeuronNodeSelNodeWithSourceDescriptor, sourceNode.Ptr(), descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronNodeFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *MPSCNNNeuronNode) C() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _mPSCNNNeuronNodeSelC)
 	return _ret
 }
-

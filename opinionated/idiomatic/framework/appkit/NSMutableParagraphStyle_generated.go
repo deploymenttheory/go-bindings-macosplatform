@@ -122,7 +122,9 @@ func (x *MutableParagraphStyle) WithTabStops(items ...*raw.NSTextTab) *MutablePa
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTextTab](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -156,7 +158,9 @@ func (x *MutableParagraphStyle) WithTextLists(items ...*raw.NSTextList) *Mutable
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTextList](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -184,7 +188,9 @@ func (x *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *Muta
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asTextBlock().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTextBlock().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSTextBlock](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -324,7 +330,9 @@ func (x *MutableParagraphStyle) SetHeaderLevel(headerLevel int) {
 	x.inner.SetHeaderLevel(headerLevel)
 }
 
-func (x *MutableParagraphStyle) asParagraphStyle() *raw.NSParagraphStyle { return &x.inner.NSParagraphStyle }
+func (x *MutableParagraphStyle) asParagraphStyle() *raw.NSParagraphStyle {
+	return &x.inner.NSParagraphStyle
+}
 
 // MutableParagraphStyleable is the interface implemented by [MutableParagraphStyle], for mocking and DI.
 type MutableParagraphStyleable interface {
@@ -379,4 +387,3 @@ type MutableParagraphStyleable interface {
 }
 
 var _ MutableParagraphStyleable = (*MutableParagraphStyle)(nil)
-

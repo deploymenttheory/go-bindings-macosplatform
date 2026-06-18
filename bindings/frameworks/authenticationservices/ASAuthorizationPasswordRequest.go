@@ -25,4 +25,3 @@ func ASAuthorizationPasswordRequestFromID(id objc.ID) *ASAuthorizationPasswordRe
 	purego.Track(o)
 	return o
 }
-

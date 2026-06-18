@@ -76,11 +76,17 @@ func (x *ImageReduceRowMax) WithLabel(label string) *ImageReduceRowMax {
 	return x
 }
 
-func (x *ImageReduceRowMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
+func (x *ImageReduceRowMax) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
+	return &x.inner.MPSImageReduceUnary
+}
 
-func (x *ImageReduceRowMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
+func (x *ImageReduceRowMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+}
 
-func (x *ImageReduceRowMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
+func (x *ImageReduceRowMax) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
+}
 
 // ImageReduceRowMaxable is the interface implemented by [ImageReduceRowMax], for mocking and DI.
 type ImageReduceRowMaxable interface {
@@ -94,4 +100,3 @@ type ImageReduceRowMaxable interface {
 }
 
 var _ ImageReduceRowMaxable = (*ImageReduceRowMax)(nil)
-

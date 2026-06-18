@@ -17,7 +17,9 @@ type MTRModeSelectClusterModeOptionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRModeSelectClusterModeOptionStruct].
-func (x *MTRModeSelectClusterModeOptionStruct) Unwrap() *raw.MTRModeSelectClusterModeOptionStruct { return x.inner }
+func (x *MTRModeSelectClusterModeOptionStruct) Unwrap() *raw.MTRModeSelectClusterModeOptionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -97,4 +99,3 @@ type MTRModeSelectClusterModeOptionStructable interface {
 }
 
 var _ MTRModeSelectClusterModeOptionStructable = (*MTRModeSelectClusterModeOptionStruct)(nil)
-

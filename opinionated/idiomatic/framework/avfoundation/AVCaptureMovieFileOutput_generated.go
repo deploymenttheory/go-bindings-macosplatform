@@ -52,7 +52,9 @@ func (x *CaptureMovieFileOutput) WithMetadata(items ...MetadataItemProvider) *Ca
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asMetadataItem().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -179,9 +181,13 @@ func (x *CaptureMovieFileOutput) SetSpatialVideoCaptureEnabled(spatialVideoCaptu
 	x.inner.SetSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled)
 }
 
-func (x *CaptureMovieFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return &x.inner.AVCaptureFileOutput }
+func (x *CaptureMovieFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput {
+	return &x.inner.AVCaptureFileOutput
+}
 
-func (x *CaptureMovieFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureFileOutput.AVCaptureOutput }
+func (x *CaptureMovieFileOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureFileOutput.AVCaptureOutput
+}
 
 // CaptureMovieFileOutputable is the interface implemented by [CaptureMovieFileOutput], for mocking and DI.
 type CaptureMovieFileOutputable interface {
@@ -212,4 +218,3 @@ type CaptureMovieFileOutputable interface {
 }
 
 var _ CaptureMovieFileOutputable = (*CaptureMovieFileOutput)(nil)
-

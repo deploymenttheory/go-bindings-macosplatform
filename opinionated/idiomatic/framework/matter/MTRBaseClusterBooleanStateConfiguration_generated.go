@@ -19,7 +19,9 @@ type MTRBaseClusterBooleanStateConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBaseClusterBooleanStateConfiguration].
-func (x *MTRBaseClusterBooleanStateConfiguration) Unwrap() *raw.MTRBaseClusterBooleanStateConfiguration { return x.inner }
+func (x *MTRBaseClusterBooleanStateConfiguration) Unwrap() *raw.MTRBaseClusterBooleanStateConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -570,9 +572,13 @@ func (x *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeClusterRevis
 	}
 }
 
-func (x *MTRBaseClusterBooleanStateConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterBooleanStateConfiguration) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterBooleanStateConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterBooleanStateConfiguration) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterBooleanStateConfigurationable is the interface implemented by [MTRBaseClusterBooleanStateConfiguration], for mocking and DI.
 type MTRBaseClusterBooleanStateConfigurationable interface {
@@ -610,4 +616,3 @@ type MTRBaseClusterBooleanStateConfigurationable interface {
 }
 
 var _ MTRBaseClusterBooleanStateConfigurationable = (*MTRBaseClusterBooleanStateConfiguration)(nil)
-

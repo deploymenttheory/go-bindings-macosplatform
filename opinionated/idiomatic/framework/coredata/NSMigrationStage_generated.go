@@ -68,4 +68,3 @@ type MigrationStageable interface {
 }
 
 var _ MigrationStageable = (*MigrationStage)(nil)
-

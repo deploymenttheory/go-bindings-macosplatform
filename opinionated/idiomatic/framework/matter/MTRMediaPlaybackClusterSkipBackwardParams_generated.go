@@ -16,7 +16,9 @@ type MTRMediaPlaybackClusterSkipBackwardParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRMediaPlaybackClusterSkipBackwardParams].
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) Unwrap() *raw.MTRMediaPlaybackClusterSkipBackwardParams { return x.inner }
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) Unwrap() *raw.MTRMediaPlaybackClusterSkipBackwardParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,4 +101,3 @@ type MTRMediaPlaybackClusterSkipBackwardParamsable interface {
 }
 
 var _ MTRMediaPlaybackClusterSkipBackwardParamsable = (*MTRMediaPlaybackClusterSkipBackwardParams)(nil)
-

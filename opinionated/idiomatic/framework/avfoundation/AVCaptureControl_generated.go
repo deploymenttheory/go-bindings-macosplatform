@@ -62,4 +62,3 @@ type CaptureControlable interface {
 }
 
 var _ CaptureControlable = (*CaptureControl)(nil)
-

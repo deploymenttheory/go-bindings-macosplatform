@@ -25,4 +25,3 @@ func HKHeartbeatSeriesSampleFromID(id objc.ID) *HKHeartbeatSeriesSample {
 	purego.Track(o)
 	return o
 }
-

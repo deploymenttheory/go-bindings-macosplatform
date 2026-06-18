@@ -85,4 +85,3 @@ type AssetPackable interface {
 }
 
 var _ AssetPackable = (*AssetPack)(nil)
-

@@ -11,9 +11,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -32,9 +32,9 @@ func (e CGLCPContextPriorityRequest) String() string {
 type CMPackingType int64
 
 const (
-	KCMPackingType_None CMPackingType = 1852796517
+	KCMPackingType_None       CMPackingType = 1852796517
 	KCMPackingType_SideBySide CMPackingType = 1936286821
-	KCMPackingType_OverUnder CMPackingType = 1870030194
+	KCMPackingType_OverUnder  CMPackingType = 1870030194
 )
 
 func (e CMPackingType) String() string {
@@ -53,10 +53,10 @@ func (e CMPackingType) String() string {
 type CMProjectionType int64
 
 const (
-	KCMProjectionType_Rectangular CMProjectionType = 1919247220
-	KCMProjectionType_Equirectangular CMProjectionType = 1701934441
+	KCMProjectionType_Rectangular         CMProjectionType = 1919247220
+	KCMProjectionType_Equirectangular     CMProjectionType = 1701934441
 	KCMProjectionType_HalfEquirectangular CMProjectionType = 1751478645
-	KCMProjectionType_Fisheye CMProjectionType = 1718186856
+	KCMProjectionType_Fisheye             CMProjectionType = 1718186856
 	KCMProjectionType_ParametricImmersive CMProjectionType = 1886546285
 )
 
@@ -80,48 +80,60 @@ func (e CMProjectionType) String() string {
 type CMStereoViewComponents int64
 
 const (
-	KCMStereoView_None CMStereoViewComponents = 0
-	KCMStereoView_LeftEye CMStereoViewComponents = 1
+	KCMStereoView_None     CMStereoViewComponents = 0
+	KCMStereoView_LeftEye  CMStereoViewComponents = 1
 	KCMStereoView_RightEye CMStereoViewComponents = 2
 )
 
 func (e CMStereoViewComponents) String() string {
 	var parts []string
-	if e&KCMStereoView_LeftEye != 0 { parts = append(parts, "KCMStereoView_LeftEye") }
-	if e&KCMStereoView_RightEye != 0 { parts = append(parts, "KCMStereoView_RightEye") }
-	if len(parts) == 0 { return "0" }
+	if e&KCMStereoView_LeftEye != 0 {
+		parts = append(parts, "KCMStereoView_LeftEye")
+	}
+	if e&KCMStereoView_RightEye != 0 {
+		parts = append(parts, "KCMStereoView_RightEye")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CMStereoViewInterpretationOptions int64
 
 const (
-	KCMStereoViewInterpretation_Default CMStereoViewInterpretationOptions = 0
+	KCMStereoViewInterpretation_Default             CMStereoViewInterpretationOptions = 0
 	KCMStereoViewInterpretation_StereoOrderReversed CMStereoViewInterpretationOptions = 1
-	KCMStereoViewInterpretation_AdditionalViews CMStereoViewInterpretationOptions = 2
+	KCMStereoViewInterpretation_AdditionalViews     CMStereoViewInterpretationOptions = 2
 )
 
 func (e CMStereoViewInterpretationOptions) String() string {
 	var parts []string
-	if e&KCMStereoViewInterpretation_StereoOrderReversed != 0 { parts = append(parts, "KCMStereoViewInterpretation_StereoOrderReversed") }
-	if e&KCMStereoViewInterpretation_AdditionalViews != 0 { parts = append(parts, "KCMStereoViewInterpretation_AdditionalViews") }
-	if len(parts) == 0 { return "0" }
+	if e&KCMStereoViewInterpretation_StereoOrderReversed != 0 {
+		parts = append(parts, "KCMStereoViewInterpretation_StereoOrderReversed")
+	}
+	if e&KCMStereoViewInterpretation_AdditionalViews != 0 {
+		parts = append(parts, "KCMStereoViewInterpretation_AdditionalViews")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CMTagCategory int64
 
 const (
-	KCMTagCategory_Undefined CMTagCategory = 0
-	KCMTagCategory_MediaType CMTagCategory = 1835297121
-	KCMTagCategory_MediaSubType CMTagCategory = 1836283234
-	KCMTagCategory_TrackID CMTagCategory = 1953653099
-	KCMTagCategory_ChannelID CMTagCategory = 1986226286
-	KCMTagCategory_VideoLayerID CMTagCategory = 1986814329
-	KCMTagCategory_PixelFormat CMTagCategory = 1885960294
-	KCMTagCategory_PackingType CMTagCategory = 1885430635
-	KCMTagCategory_ProjectionType CMTagCategory = 1886547818
-	KCMTagCategory_StereoView CMTagCategory = 1702454643
+	KCMTagCategory_Undefined                CMTagCategory = 0
+	KCMTagCategory_MediaType                CMTagCategory = 1835297121
+	KCMTagCategory_MediaSubType             CMTagCategory = 1836283234
+	KCMTagCategory_TrackID                  CMTagCategory = 1953653099
+	KCMTagCategory_ChannelID                CMTagCategory = 1986226286
+	KCMTagCategory_VideoLayerID             CMTagCategory = 1986814329
+	KCMTagCategory_PixelFormat              CMTagCategory = 1885960294
+	KCMTagCategory_PackingType              CMTagCategory = 1885430635
+	KCMTagCategory_ProjectionType           CMTagCategory = 1886547818
+	KCMTagCategory_StereoView               CMTagCategory = 1702454643
 	KCMTagCategory_StereoViewInterpretation CMTagCategory = 1702455664
 )
 
@@ -157,16 +169,16 @@ func (e CMTagCategory) String() string {
 type CMTagCollectionError int64
 
 const (
-	KCMTagCollectionError_ParamErr CMTagCollectionError = -15740
-	KCMTagCollectionError_AllocationFailed CMTagCollectionError = -15741
-	KCMTagCollectionError_InternalError CMTagCollectionError = -15742
-	KCMTagCollectionError_InvalidTag CMTagCollectionError = -15743
-	KCMTagCollectionError_InvalidTagCollectionDictionary CMTagCollectionError = -15744
-	KCMTagCollectionError_InvalidTagCollectionData CMTagCollectionError = -15745
-	KCMTagCollectionError_TagNotFound CMTagCollectionError = -15746
+	KCMTagCollectionError_ParamErr                        CMTagCollectionError = -15740
+	KCMTagCollectionError_AllocationFailed                CMTagCollectionError = -15741
+	KCMTagCollectionError_InternalError                   CMTagCollectionError = -15742
+	KCMTagCollectionError_InvalidTag                      CMTagCollectionError = -15743
+	KCMTagCollectionError_InvalidTagCollectionDictionary  CMTagCollectionError = -15744
+	KCMTagCollectionError_InvalidTagCollectionData        CMTagCollectionError = -15745
+	KCMTagCollectionError_TagNotFound                     CMTagCollectionError = -15746
 	KCMTagCollectionError_InvalidTagCollectionDataVersion CMTagCollectionError = -15747
-	KCMTagCollectionError_ExhaustedBufferSize CMTagCollectionError = -15748
-	KCMTagCollectionError_NotYetImplemented CMTagCollectionError = -15749
+	KCMTagCollectionError_ExhaustedBufferSize             CMTagCollectionError = -15748
+	KCMTagCollectionError_NotYetImplemented               CMTagCollectionError = -15749
 )
 
 func (e CMTagCollectionError) String() string {
@@ -200,10 +212,10 @@ type CMTagDataType int64
 
 const (
 	KCMTagDataType_Invalid CMTagDataType = 0
-	KCMTagDataType_SInt64 CMTagDataType = 2
+	KCMTagDataType_SInt64  CMTagDataType = 2
 	KCMTagDataType_Float64 CMTagDataType = 3
-	KCMTagDataType_OSType CMTagDataType = 5
-	KCMTagDataType_Flags CMTagDataType = 7
+	KCMTagDataType_OSType  CMTagDataType = 5
+	KCMTagDataType_Flags   CMTagDataType = 7
 )
 
 func (e CMTagDataType) String() string {
@@ -226,7 +238,7 @@ func (e CMTagDataType) String() string {
 type CMTagError int64
 
 const (
-	KCMTagError_ParamErr CMTagError = -15730
+	KCMTagError_ParamErr         CMTagError = -15730
 	KCMTagError_AllocationFailed CMTagError = -15731
 )
 
@@ -244,9 +256,9 @@ func (e CMTagError) String() string {
 type CMTaggedBufferGroupError int64
 
 const (
-	KCMTaggedBufferGroupError_ParamErr CMTaggedBufferGroupError = -15780
+	KCMTaggedBufferGroupError_ParamErr         CMTaggedBufferGroupError = -15780
 	KCMTaggedBufferGroupError_AllocationFailed CMTaggedBufferGroupError = -15781
-	KCMTaggedBufferGroupError_InternalError CMTaggedBufferGroupError = -15782
+	KCMTaggedBufferGroupError_InternalError    CMTaggedBufferGroupError = -15782
 )
 
 func (e CMTaggedBufferGroupError) String() string {
@@ -265,36 +277,50 @@ func (e CMTaggedBufferGroupError) String() string {
 type CMTimeFlags int64
 
 const (
-	KCMTimeFlags_Valid CMTimeFlags = 1
-	KCMTimeFlags_HasBeenRounded CMTimeFlags = 2
-	KCMTimeFlags_PositiveInfinity CMTimeFlags = 4
-	KCMTimeFlags_NegativeInfinity CMTimeFlags = 8
-	KCMTimeFlags_Indefinite CMTimeFlags = 16
+	KCMTimeFlags_Valid                 CMTimeFlags = 1
+	KCMTimeFlags_HasBeenRounded        CMTimeFlags = 2
+	KCMTimeFlags_PositiveInfinity      CMTimeFlags = 4
+	KCMTimeFlags_NegativeInfinity      CMTimeFlags = 8
+	KCMTimeFlags_Indefinite            CMTimeFlags = 16
 	KCMTimeFlags_ImpliedValueFlagsMask CMTimeFlags = 28
 )
 
 func (e CMTimeFlags) String() string {
 	var parts []string
-	if e&KCMTimeFlags_Valid != 0 { parts = append(parts, "KCMTimeFlags_Valid") }
-	if e&KCMTimeFlags_HasBeenRounded != 0 { parts = append(parts, "KCMTimeFlags_HasBeenRounded") }
-	if e&KCMTimeFlags_PositiveInfinity != 0 { parts = append(parts, "KCMTimeFlags_PositiveInfinity") }
-	if e&KCMTimeFlags_NegativeInfinity != 0 { parts = append(parts, "KCMTimeFlags_NegativeInfinity") }
-	if e&KCMTimeFlags_Indefinite != 0 { parts = append(parts, "KCMTimeFlags_Indefinite") }
-	if e&KCMTimeFlags_ImpliedValueFlagsMask != 0 { parts = append(parts, "KCMTimeFlags_ImpliedValueFlagsMask") }
-	if len(parts) == 0 { return "0" }
+	if e&KCMTimeFlags_Valid != 0 {
+		parts = append(parts, "KCMTimeFlags_Valid")
+	}
+	if e&KCMTimeFlags_HasBeenRounded != 0 {
+		parts = append(parts, "KCMTimeFlags_HasBeenRounded")
+	}
+	if e&KCMTimeFlags_PositiveInfinity != 0 {
+		parts = append(parts, "KCMTimeFlags_PositiveInfinity")
+	}
+	if e&KCMTimeFlags_NegativeInfinity != 0 {
+		parts = append(parts, "KCMTimeFlags_NegativeInfinity")
+	}
+	if e&KCMTimeFlags_Indefinite != 0 {
+		parts = append(parts, "KCMTimeFlags_Indefinite")
+	}
+	if e&KCMTimeFlags_ImpliedValueFlagsMask != 0 {
+		parts = append(parts, "KCMTimeFlags_ImpliedValueFlagsMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type CMTimeRoundingMethod int64
 
 const (
-	KCMTimeRoundingMethod_RoundHalfAwayFromZero CMTimeRoundingMethod = 1
-	KCMTimeRoundingMethod_RoundTowardZero CMTimeRoundingMethod = 2
-	KCMTimeRoundingMethod_RoundAwayFromZero CMTimeRoundingMethod = 3
-	KCMTimeRoundingMethod_QuickTime CMTimeRoundingMethod = 4
+	KCMTimeRoundingMethod_RoundHalfAwayFromZero       CMTimeRoundingMethod = 1
+	KCMTimeRoundingMethod_RoundTowardZero             CMTimeRoundingMethod = 2
+	KCMTimeRoundingMethod_RoundAwayFromZero           CMTimeRoundingMethod = 3
+	KCMTimeRoundingMethod_QuickTime                   CMTimeRoundingMethod = 4
 	KCMTimeRoundingMethod_RoundTowardPositiveInfinity CMTimeRoundingMethod = 5
 	KCMTimeRoundingMethod_RoundTowardNegativeInfinity CMTimeRoundingMethod = 6
-	KCMTimeRoundingMethod_Default CMTimeRoundingMethod = 1
+	KCMTimeRoundingMethod_Default                     CMTimeRoundingMethod = 1
 )
 
 func (e CMTimeRoundingMethod) String() string {
@@ -319,10 +345,10 @@ func (e CMTimeRoundingMethod) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -347,7 +373,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -365,8 +391,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -402,8 +428,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -423,7 +449,7 @@ func (e NXMouseButton) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -442,8 +468,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -462,13 +488,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -495,24 +521,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -553,9 +579,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -575,12 +601,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -607,14 +633,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -643,9 +669,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -664,36 +690,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -723,8 +763,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -744,62 +784,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -925,15 +965,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -971,7 +1011,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -979,7 +1021,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -997,8 +1039,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1017,26 +1059,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1058,27 +1116,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1102,11 +1160,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1131,22 +1189,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1197,59 +1255,73 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 const (
 	KCMAttachmentMode_ShouldNotPropagate = 0
-	KCMAttachmentMode_ShouldPropagate = 1
+	KCMAttachmentMode_ShouldPropagate    = 1
 )
 
 const (
 	KCMAudioCodecType_AAC_AudibleProtected = 1633771875
-	KCMAudioCodecType_AAC_LCProtected = 1885430115
+	KCMAudioCodecType_AAC_LCProtected      = 1885430115
 )
 
 const (
-	KCMAudioFormatDescriptionMask_All = 15
-	KCMAudioFormatDescriptionMask_ChannelLayout = 4
-	KCMAudioFormatDescriptionMask_Extensions = 8
-	KCMAudioFormatDescriptionMask_MagicCookie = 2
+	KCMAudioFormatDescriptionMask_All                    = 15
+	KCMAudioFormatDescriptionMask_ChannelLayout          = 4
+	KCMAudioFormatDescriptionMask_Extensions             = 8
+	KCMAudioFormatDescriptionMask_MagicCookie            = 2
 	KCMAudioFormatDescriptionMask_StreamBasicDescription = 1
 )
 
 const (
-	KCMBlockBufferAlwaysCopyDataFlag = 2
-	KCMBlockBufferAssureMemoryNowFlag = 1
-	KCMBlockBufferDontOptimizeDepthFlag = 4
+	KCMBlockBufferAlwaysCopyDataFlag       = 2
+	KCMBlockBufferAssureMemoryNowFlag      = 1
+	KCMBlockBufferDontOptimizeDepthFlag    = 4
 	KCMBlockBufferPermitEmptyReferenceFlag = 8
 )
 
@@ -1258,114 +1330,114 @@ const (
 )
 
 const (
-	KCMBlockBufferBadCustomBlockSourceErr = -12702
-	KCMBlockBufferBadLengthParameterErr = -12704
-	KCMBlockBufferBadOffsetParameterErr = -12703
-	KCMBlockBufferBadPointerParameterErr = -12705
-	KCMBlockBufferBlockAllocationFailedErr = -12701
-	KCMBlockBufferEmptyBBufErr = -12706
-	KCMBlockBufferInsufficientSpaceErr = -12708
-	KCMBlockBufferNoErr = 0
+	KCMBlockBufferBadCustomBlockSourceErr      = -12702
+	KCMBlockBufferBadLengthParameterErr        = -12704
+	KCMBlockBufferBadOffsetParameterErr        = -12703
+	KCMBlockBufferBadPointerParameterErr       = -12705
+	KCMBlockBufferBlockAllocationFailedErr     = -12701
+	KCMBlockBufferEmptyBBufErr                 = -12706
+	KCMBlockBufferInsufficientSpaceErr         = -12708
+	KCMBlockBufferNoErr                        = 0
 	KCMBlockBufferStructureAllocationFailedErr = -12700
-	KCMBlockBufferUnallocatedBlockErr = -12707
+	KCMBlockBufferUnallocatedBlockErr          = -12707
 )
 
 const (
-	KCMBufferQueueError_AllocationFailed = -12760
-	KCMBufferQueueError_BadTriggerDuration = -12765
+	KCMBufferQueueError_AllocationFailed                     = -12760
+	KCMBufferQueueError_BadTriggerDuration                   = -12765
 	KCMBufferQueueError_CannotModifyQueueFromTriggerCallback = -12766
-	KCMBufferQueueError_EnqueueAfterEndOfData = -12763
-	KCMBufferQueueError_InvalidBuffer = -12769
-	KCMBufferQueueError_InvalidCMBufferCallbacksStruct = -12762
-	KCMBufferQueueError_InvalidTriggerCondition = -12767
-	KCMBufferQueueError_InvalidTriggerToken = -12768
-	KCMBufferQueueError_QueueIsFull = -12764
-	KCMBufferQueueError_RequiredParameterMissing = -12761
+	KCMBufferQueueError_EnqueueAfterEndOfData                = -12763
+	KCMBufferQueueError_InvalidBuffer                        = -12769
+	KCMBufferQueueError_InvalidCMBufferCallbacksStruct       = -12762
+	KCMBufferQueueError_InvalidTriggerCondition              = -12767
+	KCMBufferQueueError_InvalidTriggerToken                  = -12768
+	KCMBufferQueueError_QueueIsFull                          = -12764
+	KCMBufferQueueError_RequiredParameterMissing             = -12761
 )
 
 const (
-	KCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan = 11
-	KCMBufferQueueTrigger_WhenBufferCountBecomesLessThan = 10
-	KCMBufferQueueTrigger_WhenDataBecomesReady = 7
-	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThan = 3
-	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualTo = 4
+	KCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan                                       = 11
+	KCMBufferQueueTrigger_WhenBufferCountBecomesLessThan                                          = 10
+	KCMBufferQueueTrigger_WhenDataBecomesReady                                                    = 7
+	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThan                                          = 3
+	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualTo                                 = 4
 	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan = 12
-	KCMBufferQueueTrigger_WhenDurationBecomesLessThan = 1
-	KCMBufferQueueTrigger_WhenDurationBecomesLessThanOrEqualTo = 2
-	KCMBufferQueueTrigger_WhenEndOfDataReached = 8
-	KCMBufferQueueTrigger_WhenMaxPresentationTimeStampChanges = 6
-	KCMBufferQueueTrigger_WhenMinPresentationTimeStampChanges = 5
-	KCMBufferQueueTrigger_WhenReset = 9
+	KCMBufferQueueTrigger_WhenDurationBecomesLessThan                                             = 1
+	KCMBufferQueueTrigger_WhenDurationBecomesLessThanOrEqualTo                                    = 2
+	KCMBufferQueueTrigger_WhenEndOfDataReached                                                    = 8
+	KCMBufferQueueTrigger_WhenMaxPresentationTimeStampChanges                                     = 6
+	KCMBufferQueueTrigger_WhenMinPresentationTimeStampChanges                                     = 5
+	KCMBufferQueueTrigger_WhenReset                                                               = 9
 )
 
 const (
-	KCMClockError_AllocationFailed = -12747
-	KCMClockError_InvalidParameter = -12746
+	KCMClockError_AllocationFailed         = -12747
+	KCMClockError_InvalidParameter         = -12746
 	KCMClockError_MissingRequiredParameter = -12745
-	KCMClockError_UnsupportedOperation = -12756
+	KCMClockError_UnsupportedOperation     = -12756
 )
 
 const (
-	KCMClosedCaptionFormatType_ATSC = 1635017571
+	KCMClosedCaptionFormatType_ATSC   = 1635017571
 	KCMClosedCaptionFormatType_CEA608 = 1664495672
 	KCMClosedCaptionFormatType_CEA708 = 1664561208
 )
 
 const (
-	KCMFormatDescriptionBridgeError_AllocationFailed = -12713
-	KCMFormatDescriptionBridgeError_IncompatibleFormatDescription = -12716
-	KCMFormatDescriptionBridgeError_InvalidFormatDescription = -12715
-	KCMFormatDescriptionBridgeError_InvalidParameter = -12712
+	KCMFormatDescriptionBridgeError_AllocationFailed                   = -12713
+	KCMFormatDescriptionBridgeError_IncompatibleFormatDescription      = -12716
+	KCMFormatDescriptionBridgeError_InvalidFormatDescription           = -12715
+	KCMFormatDescriptionBridgeError_InvalidParameter                   = -12712
 	KCMFormatDescriptionBridgeError_InvalidSerializedSampleDescription = -12714
-	KCMFormatDescriptionBridgeError_InvalidSlice = -12719
+	KCMFormatDescriptionBridgeError_InvalidSlice                       = -12719
 	KCMFormatDescriptionBridgeError_UnsupportedSampleDescriptionFlavor = -12717
 )
 
 const (
-	KCMFormatDescriptionError_AllocationFailed = -12711
-	KCMFormatDescriptionError_InvalidParameter = -12710
+	KCMFormatDescriptionError_AllocationFailed  = -12711
+	KCMFormatDescriptionError_InvalidParameter  = -12710
 	KCMFormatDescriptionError_ValueNotAvailable = -12718
 )
 
 const (
-	KCMMPEG2VideoProfile_HDV_1080i50 = 1751414323
-	KCMMPEG2VideoProfile_HDV_1080i60 = 1751414322
-	KCMMPEG2VideoProfile_HDV_1080p24 = 1751414326
-	KCMMPEG2VideoProfile_HDV_1080p25 = 1751414327
-	KCMMPEG2VideoProfile_HDV_1080p30 = 1751414328
-	KCMMPEG2VideoProfile_HDV_720p24 = 1751414324
-	KCMMPEG2VideoProfile_HDV_720p25 = 1751414325
-	KCMMPEG2VideoProfile_HDV_720p30 = 1751414321
-	KCMMPEG2VideoProfile_HDV_720p50 = 1751414369
-	KCMMPEG2VideoProfile_HDV_720p60 = 1751414329
-	KCMMPEG2VideoProfile_XDCAM_EX_1080i50_VBR35 = 2019849827
-	KCMMPEG2VideoProfile_XDCAM_EX_1080i60_VBR35 = 2019849826
-	KCMMPEG2VideoProfile_XDCAM_EX_1080p24_VBR35 = 2019849828
-	KCMMPEG2VideoProfile_XDCAM_EX_1080p25_VBR35 = 2019849829
-	KCMMPEG2VideoProfile_XDCAM_EX_1080p30_VBR35 = 2019849830
-	KCMMPEG2VideoProfile_XDCAM_EX_720p24_VBR35 = 2019849780
-	KCMMPEG2VideoProfile_XDCAM_EX_720p25_VBR35 = 2019849781
-	KCMMPEG2VideoProfile_XDCAM_EX_720p30_VBR35 = 2019849777
-	KCMMPEG2VideoProfile_XDCAM_EX_720p50_VBR35 = 2019849825
-	KCMMPEG2VideoProfile_XDCAM_EX_720p60_VBR35 = 2019849785
+	KCMMPEG2VideoProfile_HDV_1080i50               = 1751414323
+	KCMMPEG2VideoProfile_HDV_1080i60               = 1751414322
+	KCMMPEG2VideoProfile_HDV_1080p24               = 1751414326
+	KCMMPEG2VideoProfile_HDV_1080p25               = 1751414327
+	KCMMPEG2VideoProfile_HDV_1080p30               = 1751414328
+	KCMMPEG2VideoProfile_HDV_720p24                = 1751414324
+	KCMMPEG2VideoProfile_HDV_720p25                = 1751414325
+	KCMMPEG2VideoProfile_HDV_720p30                = 1751414321
+	KCMMPEG2VideoProfile_HDV_720p50                = 1751414369
+	KCMMPEG2VideoProfile_HDV_720p60                = 1751414329
+	KCMMPEG2VideoProfile_XDCAM_EX_1080i50_VBR35    = 2019849827
+	KCMMPEG2VideoProfile_XDCAM_EX_1080i60_VBR35    = 2019849826
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p24_VBR35    = 2019849828
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p25_VBR35    = 2019849829
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p30_VBR35    = 2019849830
+	KCMMPEG2VideoProfile_XDCAM_EX_720p24_VBR35     = 2019849780
+	KCMMPEG2VideoProfile_XDCAM_EX_720p25_VBR35     = 2019849781
+	KCMMPEG2VideoProfile_XDCAM_EX_720p30_VBR35     = 2019849777
+	KCMMPEG2VideoProfile_XDCAM_EX_720p50_VBR35     = 2019849825
+	KCMMPEG2VideoProfile_XDCAM_EX_720p60_VBR35     = 2019849785
 	KCMMPEG2VideoProfile_XDCAM_HD422_1080i50_CBR50 = 2019833187
 	KCMMPEG2VideoProfile_XDCAM_HD422_1080i60_CBR50 = 2019833186
 	KCMMPEG2VideoProfile_XDCAM_HD422_1080p24_CBR50 = 2019833188
 	KCMMPEG2VideoProfile_XDCAM_HD422_1080p25_CBR50 = 2019833189
 	KCMMPEG2VideoProfile_XDCAM_HD422_1080p30_CBR50 = 2019833190
-	KCMMPEG2VideoProfile_XDCAM_HD422_540p = 2019846194
-	KCMMPEG2VideoProfile_XDCAM_HD422_720p24_CBR50 = 2019833140
-	KCMMPEG2VideoProfile_XDCAM_HD422_720p25_CBR50 = 2019833141
-	KCMMPEG2VideoProfile_XDCAM_HD422_720p30_CBR50 = 2019833137
-	KCMMPEG2VideoProfile_XDCAM_HD422_720p50_CBR50 = 2019833185
-	KCMMPEG2VideoProfile_XDCAM_HD422_720p60_CBR50 = 2019833145
-	KCMMPEG2VideoProfile_XDCAM_HD_1080i50_VBR35 = 2019849779
-	KCMMPEG2VideoProfile_XDCAM_HD_1080i60_VBR35 = 2019849778
-	KCMMPEG2VideoProfile_XDCAM_HD_1080p24_VBR35 = 2019849782
-	KCMMPEG2VideoProfile_XDCAM_HD_1080p25_VBR35 = 2019849783
-	KCMMPEG2VideoProfile_XDCAM_HD_1080p30_VBR35 = 2019849784
-	KCMMPEG2VideoProfile_XDCAM_HD_540p = 2019846244
-	KCMMPEG2VideoProfile_XF = 2019981873
+	KCMMPEG2VideoProfile_XDCAM_HD422_540p          = 2019846194
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p24_CBR50  = 2019833140
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p25_CBR50  = 2019833141
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p30_CBR50  = 2019833137
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p50_CBR50  = 2019833185
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p60_CBR50  = 2019833145
+	KCMMPEG2VideoProfile_XDCAM_HD_1080i50_VBR35    = 2019849779
+	KCMMPEG2VideoProfile_XDCAM_HD_1080i60_VBR35    = 2019849778
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p24_VBR35    = 2019849782
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p25_VBR35    = 2019849783
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p30_VBR35    = 2019849784
+	KCMMPEG2VideoProfile_XDCAM_HD_540p             = 2019846244
+	KCMMPEG2VideoProfile_XF                        = 2019981873
 )
 
 const (
@@ -1373,15 +1445,15 @@ const (
 )
 
 const (
-	KCMMediaType_Audio = 1936684398
-	KCMMediaType_ClosedCaption = 1668047728
-	KCMMediaType_Metadata = 1835365473
-	KCMMediaType_Muxed = 1836415096
-	KCMMediaType_Subtitle = 1935832172
+	KCMMediaType_Audio             = 1936684398
+	KCMMediaType_ClosedCaption     = 1668047728
+	KCMMediaType_Metadata          = 1835365473
+	KCMMediaType_Muxed             = 1836415096
+	KCMMediaType_Subtitle          = 1935832172
 	KCMMediaType_TaggedBufferGroup = 1952606066
-	KCMMediaType_Text = 1952807028
-	KCMMediaType_TimeCode = 1953325924
-	KCMMediaType_Video = 1986618469
+	KCMMediaType_Text              = 1952807028
+	KCMMediaType_TimeCode          = 1953325924
+	KCMMediaType_Video             = 1986618469
 )
 
 const (
@@ -1390,39 +1462,39 @@ const (
 )
 
 const (
-	KCMMetadataDataTypeRegistryError_AllocationFailed = -16310
-	KCMMetadataDataTypeRegistryError_BadDataTypeIdentifier = -16312
-	KCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered = -16313
+	KCMMetadataDataTypeRegistryError_AllocationFailed            = -16310
+	KCMMetadataDataTypeRegistryError_BadDataTypeIdentifier       = -16312
+	KCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered   = -16313
 	KCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes = -16315
-	KCMMetadataDataTypeRegistryError_RequiredParameterMissing = -16311
-	KCMMetadataDataTypeRegistryError_RequiresConformingBaseType = -16314
+	KCMMetadataDataTypeRegistryError_RequiredParameterMissing    = -16311
+	KCMMetadataDataTypeRegistryError_RequiresConformingBaseType  = -16314
 )
 
 const (
 	KCMMetadataFormatType_Boxed = 1835360888
-	KCMMetadataFormatType_EMSG = 1701671783
-	KCMMetadataFormatType_ICY = 1768126752
-	KCMMetadataFormatType_ID3 = 1768174368
+	KCMMetadataFormatType_EMSG  = 1701671783
+	KCMMetadataFormatType_ICY   = 1768126752
+	KCMMetadataFormatType_ID3   = 1768174368
 )
 
 const (
-	KCMMetadataIdentifierError_AllocationFailed = -16300
-	KCMMetadataIdentifierError_BadIdentifier = -16307
-	KCMMetadataIdentifierError_BadKey = -16302
-	KCMMetadataIdentifierError_BadKeyLength = -16303
-	KCMMetadataIdentifierError_BadKeySpace = -16306
-	KCMMetadataIdentifierError_BadKeyType = -16304
-	KCMMetadataIdentifierError_BadNumberKey = -16305
-	KCMMetadataIdentifierError_NoKeyValueAvailable = -16308
+	KCMMetadataIdentifierError_AllocationFailed         = -16300
+	KCMMetadataIdentifierError_BadIdentifier            = -16307
+	KCMMetadataIdentifierError_BadKey                   = -16302
+	KCMMetadataIdentifierError_BadKeyLength             = -16303
+	KCMMetadataIdentifierError_BadKeySpace              = -16306
+	KCMMetadataIdentifierError_BadKeyType               = -16304
+	KCMMetadataIdentifierError_BadNumberKey             = -16305
+	KCMMetadataIdentifierError_NoKeyValueAvailable      = -16308
 	KCMMetadataIdentifierError_RequiredParameterMissing = -16301
 )
 
 const (
-	KCMMuxedStreamType_DV = 1685463072
+	KCMMuxedStreamType_DV                            = 1685463072
 	KCMMuxedStreamType_EmbeddedDeviceScreenRecording = 1769173536
-	KCMMuxedStreamType_MPEG1System = 1836069235
-	KCMMuxedStreamType_MPEG2Program = 1836069488
-	KCMMuxedStreamType_MPEG2Transport = 1836069492
+	KCMMuxedStreamType_MPEG1System                   = 1836069235
+	KCMMuxedStreamType_MPEG2Program                  = 1836069488
+	KCMMuxedStreamType_MPEG2Transport                = 1836069492
 )
 
 const (
@@ -1430,42 +1502,42 @@ const (
 )
 
 const (
-	KCMPixelFormat_16BE555 = 16
-	KCMPixelFormat_16BE565 = 1110783541
-	KCMPixelFormat_16LE555 = 1278555445
-	KCMPixelFormat_16LE5551 = 892679473
-	KCMPixelFormat_16LE565 = 1278555701
-	KCMPixelFormat_24RGB = 24
-	KCMPixelFormat_32ARGB = 32
-	KCMPixelFormat_32BGRA = 1111970369
-	KCMPixelFormat_422YpCbCr10 = 1983000880
-	KCMPixelFormat_422YpCbCr16 = 1983000886
-	KCMPixelFormat_422YpCbCr8 = 846624121
-	KCMPixelFormat_422YpCbCr8_yuvs = 2037741171
-	KCMPixelFormat_4444YpCbCrA8 = 1983131704
-	KCMPixelFormat_444YpCbCr10 = 1983131952
-	KCMPixelFormat_444YpCbCr8 = 1983066168
+	KCMPixelFormat_16BE555                  = 16
+	KCMPixelFormat_16BE565                  = 1110783541
+	KCMPixelFormat_16LE555                  = 1278555445
+	KCMPixelFormat_16LE5551                 = 892679473
+	KCMPixelFormat_16LE565                  = 1278555701
+	KCMPixelFormat_24RGB                    = 24
+	KCMPixelFormat_32ARGB                   = 32
+	KCMPixelFormat_32BGRA                   = 1111970369
+	KCMPixelFormat_422YpCbCr10              = 1983000880
+	KCMPixelFormat_422YpCbCr16              = 1983000886
+	KCMPixelFormat_422YpCbCr8               = 846624121
+	KCMPixelFormat_422YpCbCr8_yuvs          = 2037741171
+	KCMPixelFormat_4444YpCbCrA8             = 1983131704
+	KCMPixelFormat_444YpCbCr10              = 1983131952
+	KCMPixelFormat_444YpCbCr8               = 1983066168
 	KCMPixelFormat_8IndexedGray_WhiteIsZero = 40
 )
 
 const (
-	KCMSampleBufferError_AllocationFailed = -12730
-	KCMSampleBufferError_AlreadyHasDataBuffer = -12732
-	KCMSampleBufferError_ArrayTooSmall = -12737
-	KCMSampleBufferError_BufferHasNoSampleSizes = -12735
-	KCMSampleBufferError_BufferHasNoSampleTimingInfo = -12736
-	KCMSampleBufferError_BufferNotReady = -12733
-	KCMSampleBufferError_CannotSubdivide = -12739
-	KCMSampleBufferError_DataCanceled = -16751
-	KCMSampleBufferError_DataFailed = -16750
-	KCMSampleBufferError_InvalidEntryCount = -12738
-	KCMSampleBufferError_InvalidMediaFormat = -12743
+	KCMSampleBufferError_AllocationFailed             = -12730
+	KCMSampleBufferError_AlreadyHasDataBuffer         = -12732
+	KCMSampleBufferError_ArrayTooSmall                = -12737
+	KCMSampleBufferError_BufferHasNoSampleSizes       = -12735
+	KCMSampleBufferError_BufferHasNoSampleTimingInfo  = -12736
+	KCMSampleBufferError_BufferNotReady               = -12733
+	KCMSampleBufferError_CannotSubdivide              = -12739
+	KCMSampleBufferError_DataCanceled                 = -16751
+	KCMSampleBufferError_DataFailed                   = -16750
+	KCMSampleBufferError_InvalidEntryCount            = -12738
+	KCMSampleBufferError_InvalidMediaFormat           = -12743
 	KCMSampleBufferError_InvalidMediaTypeForOperation = -12741
-	KCMSampleBufferError_InvalidSampleData = -12742
-	KCMSampleBufferError_Invalidated = -12744
-	KCMSampleBufferError_RequiredParameterMissing = -12731
-	KCMSampleBufferError_SampleIndexOutOfRange = -12734
-	KCMSampleBufferError_SampleTimingInfoInvalid = -12740
+	KCMSampleBufferError_InvalidSampleData            = -12742
+	KCMSampleBufferError_Invalidated                  = -12744
+	KCMSampleBufferError_RequiredParameterMissing     = -12731
+	KCMSampleBufferError_SampleIndexOutOfRange        = -12734
+	KCMSampleBufferError_SampleTimingInfoInvalid      = -12740
 )
 
 const (
@@ -1473,9 +1545,9 @@ const (
 )
 
 const (
-	KCMSimpleQueueError_AllocationFailed = -12770
-	KCMSimpleQueueError_ParameterOutOfRange = -12772
-	KCMSimpleQueueError_QueueIsFull = -12773
+	KCMSimpleQueueError_AllocationFailed         = -12770
+	KCMSimpleQueueError_ParameterOutOfRange      = -12772
+	KCMSimpleQueueError_QueueIsFull              = -12773
 	KCMSimpleQueueError_RequiredParameterMissing = -12771
 )
 
@@ -1485,10 +1557,10 @@ const (
 )
 
 const (
-	KCMSyncError_AllocationFailed = -12754
-	KCMSyncError_InvalidParameter = -12753
+	KCMSyncError_AllocationFailed         = -12754
+	KCMSyncError_InvalidParameter         = -12753
 	KCMSyncError_MissingRequiredParameter = -12752
-	KCMSyncError_RateMustBeNonZero = -12755
+	KCMSyncError_RateMustBeNonZero        = -12755
 )
 
 const (
@@ -1496,19 +1568,19 @@ const (
 )
 
 const (
-	KCMTextDisplayFlag_allSubtitlesForced = 2147483648
-	KCMTextDisplayFlag_continuousKaraoke = 2048
-	KCMTextDisplayFlag_fillTextRegion = 262144
-	KCMTextDisplayFlag_forcedSubtitlesPresent = 1073741824
-	KCMTextDisplayFlag_obeySubtitleFormatting = 536870912
-	KCMTextDisplayFlag_scrollDirectionMask = 384
+	KCMTextDisplayFlag_allSubtitlesForced          = 2147483648
+	KCMTextDisplayFlag_continuousKaraoke           = 2048
+	KCMTextDisplayFlag_fillTextRegion              = 262144
+	KCMTextDisplayFlag_forcedSubtitlesPresent      = 1073741824
+	KCMTextDisplayFlag_obeySubtitleFormatting      = 536870912
+	KCMTextDisplayFlag_scrollDirectionMask         = 384
 	KCMTextDisplayFlag_scrollDirection_bottomToTop = 0
 	KCMTextDisplayFlag_scrollDirection_leftToRight = 384
 	KCMTextDisplayFlag_scrollDirection_rightToLeft = 128
 	KCMTextDisplayFlag_scrollDirection_topToBottom = 256
-	KCMTextDisplayFlag_scrollIn = 32
-	KCMTextDisplayFlag_scrollOut = 64
-	KCMTextDisplayFlag_writeTextVertically = 131072
+	KCMTextDisplayFlag_scrollIn                    = 32
+	KCMTextDisplayFlag_scrollOut                   = 64
+	KCMTextDisplayFlag_writeTextVertically         = 131072
 )
 
 const (
@@ -1518,70 +1590,69 @@ const (
 
 const (
 	KCMTextJustification_bottom_right = -1
-	KCMTextJustification_centered = 1
-	KCMTextJustification_left_top = 0
+	KCMTextJustification_centered     = 1
+	KCMTextJustification_left_top     = 0
 )
 
 const (
-	KCMTimeCodeFlag_24HourMax = 2
-	KCMTimeCodeFlag_DropFrame = 1
+	KCMTimeCodeFlag_24HourMax  = 2
+	KCMTimeCodeFlag_DropFrame  = 1
 	KCMTimeCodeFlag_NegTimesOK = 4
 )
 
 const (
-	KCMTimeCodeFormatType_Counter32 = 1668166450
-	KCMTimeCodeFormatType_Counter64 = 1668167220
+	KCMTimeCodeFormatType_Counter32  = 1668166450
+	KCMTimeCodeFormatType_Counter64  = 1668167220
 	KCMTimeCodeFormatType_TimeCode32 = 1953325924
 	KCMTimeCodeFormatType_TimeCode64 = 1952658996
 )
 
 const (
-	KCMTimebaseError_AllocationFailed = -12750
-	KCMTimebaseError_InvalidParameter = -12749
+	KCMTimebaseError_AllocationFailed         = -12750
+	KCMTimebaseError_InvalidParameter         = -12749
 	KCMTimebaseError_MissingRequiredParameter = -12748
-	KCMTimebaseError_ReadOnly = -12757
-	KCMTimebaseError_TimerIntervalTooShort = -12751
+	KCMTimebaseError_ReadOnly                 = -12757
+	KCMTimebaseError_TimerIntervalTooShort    = -12751
 )
 
 const (
-	KCMVideoCodecType_422YpCbCr8 = 846624121
-	KCMVideoCodecType_AV1 = 1635135537
-	KCMVideoCodecType_Animation = 1919706400
-	KCMVideoCodecType_AppleProRes422 = 1634755438
-	KCMVideoCodecType_AppleProRes422HQ = 1634755432
-	KCMVideoCodecType_AppleProRes422LT = 1634755443
+	KCMVideoCodecType_422YpCbCr8          = 846624121
+	KCMVideoCodecType_AV1                 = 1635135537
+	KCMVideoCodecType_Animation           = 1919706400
+	KCMVideoCodecType_AppleProRes422      = 1634755438
+	KCMVideoCodecType_AppleProRes422HQ    = 1634755432
+	KCMVideoCodecType_AppleProRes422LT    = 1634755443
 	KCMVideoCodecType_AppleProRes422Proxy = 1634755439
-	KCMVideoCodecType_AppleProRes4444 = 1634743400
-	KCMVideoCodecType_AppleProRes4444XQ = 1634743416
-	KCMVideoCodecType_AppleProResRAW = 1634759278
-	KCMVideoCodecType_AppleProResRAWHQ = 1634759272
-	KCMVideoCodecType_Cinepak = 1668704612
-	KCMVideoCodecType_DVCNTSC = 1685480224
-	KCMVideoCodecType_DVCPAL = 1685480304
-	KCMVideoCodecType_DVCPROHD1080i50 = 1685481525
-	KCMVideoCodecType_DVCPROHD1080i60 = 1685481526
-	KCMVideoCodecType_DVCPROHD1080p25 = 1685481522
-	KCMVideoCodecType_DVCPROHD1080p30 = 1685481523
-	KCMVideoCodecType_DVCPROHD720p50 = 1685481585
-	KCMVideoCodecType_DVCPROHD720p60 = 1685481584
-	KCMVideoCodecType_DVCPro50NTSC = 1685468526
-	KCMVideoCodecType_DVCPro50PAL = 1685468528
-	KCMVideoCodecType_DVCProPAL = 1685483632
-	KCMVideoCodecType_DepthHEVC = 1684369512
-	KCMVideoCodecType_DisparityHEVC = 1684632424
-	KCMVideoCodecType_DolbyVisionHEVC = 1685481521
-	KCMVideoCodecType_H263 = 1748121139
-	KCMVideoCodecType_H264 = 1635148593
-	KCMVideoCodecType_HEVC = 1752589105
-	KCMVideoCodecType_HEVCWithAlpha = 1836415073
-	KCMVideoCodecType_JPEG = 1785750887
-	KCMVideoCodecType_JPEG_OpenDML = 1684890161
-	KCMVideoCodecType_JPEG_XL = 1786276963
-	KCMVideoCodecType_MPEG1Video = 1836069238
-	KCMVideoCodecType_MPEG2Video = 1836069494
-	KCMVideoCodecType_MPEG4Video = 1836070006
-	KCMVideoCodecType_SorensonVideo = 1398165809
-	KCMVideoCodecType_SorensonVideo3 = 1398165811
-	KCMVideoCodecType_VP9 = 1987063865
+	KCMVideoCodecType_AppleProRes4444     = 1634743400
+	KCMVideoCodecType_AppleProRes4444XQ   = 1634743416
+	KCMVideoCodecType_AppleProResRAW      = 1634759278
+	KCMVideoCodecType_AppleProResRAWHQ    = 1634759272
+	KCMVideoCodecType_Cinepak             = 1668704612
+	KCMVideoCodecType_DVCNTSC             = 1685480224
+	KCMVideoCodecType_DVCPAL              = 1685480304
+	KCMVideoCodecType_DVCPROHD1080i50     = 1685481525
+	KCMVideoCodecType_DVCPROHD1080i60     = 1685481526
+	KCMVideoCodecType_DVCPROHD1080p25     = 1685481522
+	KCMVideoCodecType_DVCPROHD1080p30     = 1685481523
+	KCMVideoCodecType_DVCPROHD720p50      = 1685481585
+	KCMVideoCodecType_DVCPROHD720p60      = 1685481584
+	KCMVideoCodecType_DVCPro50NTSC        = 1685468526
+	KCMVideoCodecType_DVCPro50PAL         = 1685468528
+	KCMVideoCodecType_DVCProPAL           = 1685483632
+	KCMVideoCodecType_DepthHEVC           = 1684369512
+	KCMVideoCodecType_DisparityHEVC       = 1684632424
+	KCMVideoCodecType_DolbyVisionHEVC     = 1685481521
+	KCMVideoCodecType_H263                = 1748121139
+	KCMVideoCodecType_H264                = 1635148593
+	KCMVideoCodecType_HEVC                = 1752589105
+	KCMVideoCodecType_HEVCWithAlpha       = 1836415073
+	KCMVideoCodecType_JPEG                = 1785750887
+	KCMVideoCodecType_JPEG_OpenDML        = 1684890161
+	KCMVideoCodecType_JPEG_XL             = 1786276963
+	KCMVideoCodecType_MPEG1Video          = 1836069238
+	KCMVideoCodecType_MPEG2Video          = 1836069494
+	KCMVideoCodecType_MPEG4Video          = 1836070006
+	KCMVideoCodecType_SorensonVideo       = 1398165809
+	KCMVideoCodecType_SorensonVideo3      = 1398165811
+	KCMVideoCodecType_VP9                 = 1987063865
 )
-

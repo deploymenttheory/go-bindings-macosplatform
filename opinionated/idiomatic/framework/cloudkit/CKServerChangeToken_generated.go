@@ -41,4 +41,3 @@ type ServerChangeTokenable interface {
 }
 
 var _ ServerChangeTokenable = (*ServerChangeToken)(nil)
-

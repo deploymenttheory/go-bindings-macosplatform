@@ -153,7 +153,9 @@ func (x *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asLayer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CALayer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -403,7 +405,9 @@ func (x *ReplicatorLayer) WithConstraints(items ...*raw.CAConstraint) *Replicato
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -587,4 +591,3 @@ type ReplicatorLayerable interface {
 }
 
 var _ ReplicatorLayerable = (*ReplicatorLayer)(nil)
-

@@ -16,10 +16,10 @@ type CalAttendee struct {
 }
 
 var (
-	_clsCalAttendee = _objcClass("CalAttendee")
-	_calAttendeeSelAddress = objc.RegisterName("address")
+	_clsCalAttendee           = _objcClass("CalAttendee")
+	_calAttendeeSelAddress    = objc.RegisterName("address")
 	_calAttendeeSelCommonName = objc.RegisterName("commonName")
-	_calAttendeeSelStatus = objc.RegisterName("status")
+	_calAttendeeSelStatus     = objc.RegisterName("status")
 )
 
 func CalAttendeeFromID(id objc.ID) *CalAttendee {
@@ -35,21 +35,26 @@ func CalAttendeeFromID(id objc.ID) *CalAttendee {
 // Deprecated: since macOS 10.8.
 func (o *CalAttendee) Address() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAttendeeSelAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalAttendee) CommonName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAttendeeSelCommonName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Deprecated: since macOS 10.8.
 func (o *CalAttendee) Status() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _calAttendeeSelStatus)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

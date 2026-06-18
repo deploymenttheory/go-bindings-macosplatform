@@ -78,7 +78,9 @@ func (x *MTRChannelClusterChannelInfo) WithType(type_ *foundation.NSNumber) *MTR
 	return x
 }
 
-func (x *MTRChannelClusterChannelInfo) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct { return &x.inner.MTRChannelClusterChannelInfoStruct }
+func (x *MTRChannelClusterChannelInfo) asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct {
+	return &x.inner.MTRChannelClusterChannelInfoStruct
+}
 
 // MTRChannelClusterChannelInfoable is the interface implemented by [MTRChannelClusterChannelInfo], for mocking and DI.
 type MTRChannelClusterChannelInfoable interface {
@@ -93,4 +95,3 @@ type MTRChannelClusterChannelInfoable interface {
 }
 
 var _ MTRChannelClusterChannelInfoable = (*MTRChannelClusterChannelInfo)(nil)
-

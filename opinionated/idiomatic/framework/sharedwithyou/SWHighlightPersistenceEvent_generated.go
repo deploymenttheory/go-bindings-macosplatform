@@ -48,4 +48,3 @@ type HighlightPersistenceEventable interface {
 }
 
 var _ HighlightPersistenceEventable = (*HighlightPersistenceEvent)(nil)
-

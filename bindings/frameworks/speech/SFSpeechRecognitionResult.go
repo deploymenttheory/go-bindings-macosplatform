@@ -16,10 +16,10 @@ type SFSpeechRecognitionResult struct {
 }
 
 var (
-	_clsSFSpeechRecognitionResult = _objcClass("SFSpeechRecognitionResult")
-	_sFSpeechRecognitionResultSelBestTranscription = objc.RegisterName("bestTranscription")
-	_sFSpeechRecognitionResultSelTranscriptions = objc.RegisterName("transcriptions")
-	_sFSpeechRecognitionResultSelIsFinal = objc.RegisterName("isFinal")
+	_clsSFSpeechRecognitionResult                          = _objcClass("SFSpeechRecognitionResult")
+	_sFSpeechRecognitionResultSelBestTranscription         = objc.RegisterName("bestTranscription")
+	_sFSpeechRecognitionResultSelTranscriptions            = objc.RegisterName("transcriptions")
+	_sFSpeechRecognitionResultSelIsFinal                   = objc.RegisterName("isFinal")
 	_sFSpeechRecognitionResultSelSpeechRecognitionMetadata = objc.RegisterName("speechRecognitionMetadata")
 )
 
@@ -36,14 +36,18 @@ func SFSpeechRecognitionResultFromID(id objc.ID) *SFSpeechRecognitionResult {
 // The transcription with the highest confidence level.
 func (o *SFSpeechRecognitionResult) BestTranscription() *SFTranscription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionResultSelBestTranscription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFTranscriptionFromID(_ret)
 }
 
 // An array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
 func (o *SFSpeechRecognitionResult) Transcriptions() *foundation.NSArray[*SFTranscription] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionResultSelTranscriptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SFTranscription](_ret)
 }
 
@@ -56,7 +60,8 @@ func (o *SFSpeechRecognitionResult) IsFinal() bool {
 // An object that contains the metadata results for a speech recognition request.
 func (o *SFSpeechRecognitionResult) SpeechRecognitionMetadata() *SFSpeechRecognitionMetadata {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFSpeechRecognitionResultSelSpeechRecognitionMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SFSpeechRecognitionMetadataFromID(_ret)
 }
-

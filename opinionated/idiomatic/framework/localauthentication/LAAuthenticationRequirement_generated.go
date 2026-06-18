@@ -41,4 +41,3 @@ type AuthenticationRequirementable interface {
 }
 
 var _ AuthenticationRequirementable = (*AuthenticationRequirement)(nil)
-

@@ -16,26 +16,26 @@ type MDLMaterial struct {
 }
 
 var (
-	_clsMDLMaterial = _objcClass("MDLMaterial")
+	_clsMDLMaterial                               = _objcClass("MDLMaterial")
 	_mDLMaterialSelInitWithNameScatteringFunction = objc.RegisterName("initWithName:scatteringFunction:")
-	_mDLMaterialSelSetProperty = objc.RegisterName("setProperty:")
-	_mDLMaterialSelRemoveProperty = objc.RegisterName("removeProperty:")
-	_mDLMaterialSelPropertyNamed = objc.RegisterName("propertyNamed:")
-	_mDLMaterialSelPropertyWithSemantic = objc.RegisterName("propertyWithSemantic:")
-	_mDLMaterialSelPropertiesWithSemantic = objc.RegisterName("propertiesWithSemantic:")
-	_mDLMaterialSelRemoveAllProperties = objc.RegisterName("removeAllProperties")
-	_mDLMaterialSelResolveTexturesWithResolver = objc.RegisterName("resolveTexturesWithResolver:")
-	_mDLMaterialSelLoadTexturesUsingResolver = objc.RegisterName("loadTexturesUsingResolver:")
-	_mDLMaterialSelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
-	_mDLMaterialSelObjectForKeyedSubscript = objc.RegisterName("objectForKeyedSubscript:")
-	_mDLMaterialSelScatteringFunction = objc.RegisterName("scatteringFunction")
-	_mDLMaterialSelName = objc.RegisterName("name")
-	_mDLMaterialSelSetName = objc.RegisterName("setName:")
-	_mDLMaterialSelBaseMaterial = objc.RegisterName("baseMaterial")
-	_mDLMaterialSelSetBaseMaterial = objc.RegisterName("setBaseMaterial:")
-	_mDLMaterialSelCount = objc.RegisterName("count")
-	_mDLMaterialSelMaterialFace = objc.RegisterName("materialFace")
-	_mDLMaterialSelSetMaterialFace = objc.RegisterName("setMaterialFace:")
+	_mDLMaterialSelSetProperty                    = objc.RegisterName("setProperty:")
+	_mDLMaterialSelRemoveProperty                 = objc.RegisterName("removeProperty:")
+	_mDLMaterialSelPropertyNamed                  = objc.RegisterName("propertyNamed:")
+	_mDLMaterialSelPropertyWithSemantic           = objc.RegisterName("propertyWithSemantic:")
+	_mDLMaterialSelPropertiesWithSemantic         = objc.RegisterName("propertiesWithSemantic:")
+	_mDLMaterialSelRemoveAllProperties            = objc.RegisterName("removeAllProperties")
+	_mDLMaterialSelResolveTexturesWithResolver    = objc.RegisterName("resolveTexturesWithResolver:")
+	_mDLMaterialSelLoadTexturesUsingResolver      = objc.RegisterName("loadTexturesUsingResolver:")
+	_mDLMaterialSelObjectAtIndexedSubscript       = objc.RegisterName("objectAtIndexedSubscript:")
+	_mDLMaterialSelObjectForKeyedSubscript        = objc.RegisterName("objectForKeyedSubscript:")
+	_mDLMaterialSelScatteringFunction             = objc.RegisterName("scatteringFunction")
+	_mDLMaterialSelName                           = objc.RegisterName("name")
+	_mDLMaterialSelSetName                        = objc.RegisterName("setName:")
+	_mDLMaterialSelBaseMaterial                   = objc.RegisterName("baseMaterial")
+	_mDLMaterialSelSetBaseMaterial                = objc.RegisterName("setBaseMaterial:")
+	_mDLMaterialSelCount                          = objc.RegisterName("count")
+	_mDLMaterialSelMaterialFace                   = objc.RegisterName("materialFace")
+	_mDLMaterialSelSetMaterialFace                = objc.RegisterName("setMaterialFace:")
 )
 
 func MDLMaterialFromID(id objc.ID) *MDLMaterial {
@@ -50,7 +50,9 @@ func MDLMaterialFromID(id objc.ID) *MDLMaterial {
 
 func (o *MDLMaterial) InitWithNameScatteringFunction(name *foundation.NSString, scatteringFunction *MDLScatteringFunction) *MDLMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelInitWithNameScatteringFunction, name.Ptr(), scatteringFunction.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialFromID(_ret)
 }
 
@@ -64,19 +66,25 @@ func (o *MDLMaterial) RemoveProperty(property *MDLMaterialProperty) {
 
 func (o *MDLMaterial) PropertyNamed(name *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertyNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterial) PropertyWithSemantic(semantic MDLMaterialSemantic) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertyWithSemantic, semantic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterial) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*MDLMaterialProperty] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelPropertiesWithSemantic, semantic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MDLMaterialProperty](_ret)
 }
 
@@ -94,26 +102,34 @@ func (o *MDLMaterial) LoadTexturesUsingResolver(resolver MDLAssetResolver) {
 
 func (o *MDLMaterial) ObjectAtIndexedSubscript(idx uint) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelObjectAtIndexedSubscript, idx)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterial) ObjectForKeyedSubscript(name *foundation.NSString) *MDLMaterialProperty {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelObjectForKeyedSubscript, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialPropertyFromID(_ret)
 }
 
 func (o *MDLMaterial) ScatteringFunction() *MDLScatteringFunction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelScatteringFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLScatteringFunctionFromID(_ret)
 }
 
 // @see MDLNamed
 func (o *MDLMaterial) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -123,7 +139,9 @@ func (o *MDLMaterial) SetName(name *foundation.NSString) {
 
 func (o *MDLMaterial) BaseMaterial() *MDLMaterial {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLMaterialSelBaseMaterial)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLMaterialFromID(_ret)
 }
 
@@ -144,4 +162,3 @@ func (o *MDLMaterial) MaterialFace() MDLMaterialFace {
 func (o *MDLMaterial) SetMaterialFace(materialFace MDLMaterialFace) {
 	o.Ptr().Send(_mDLMaterialSelSetMaterialFace, materialFace)
 }
-

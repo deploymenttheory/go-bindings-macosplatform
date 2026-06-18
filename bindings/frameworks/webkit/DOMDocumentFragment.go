@@ -25,4 +25,3 @@ func DOMDocumentFragmentFromID(id objc.ID) *DOMDocumentFragment {
 	purego.Track(o)
 	return o
 }
-

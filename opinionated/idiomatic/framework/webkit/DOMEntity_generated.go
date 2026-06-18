@@ -86,7 +86,9 @@ func (x *DOMEntity) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMEntity) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
-func (x *DOMEntity) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+func (x *DOMEntity) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMNode.DOMObject.WebScriptObject
+}
 
 // DOMEntityable is the interface implemented by [DOMEntity], for mocking and DI.
 type DOMEntityable interface {
@@ -100,4 +102,3 @@ type DOMEntityable interface {
 }
 
 var _ DOMEntityable = (*DOMEntity)(nil)
-

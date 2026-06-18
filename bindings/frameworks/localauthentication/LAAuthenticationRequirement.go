@@ -18,11 +18,11 @@ type LAAuthenticationRequirement struct {
 }
 
 var (
-	_clsLAAuthenticationRequirement = _objcClass("LAAuthenticationRequirement")
+	_clsLAAuthenticationRequirement                                = _objcClass("LAAuthenticationRequirement")
 	_lAAuthenticationRequirementSelBiometryRequirementWithFallback = objc.RegisterName("biometryRequirementWithFallback:")
-	_lAAuthenticationRequirementSelDefaultRequirement = objc.RegisterName("defaultRequirement")
-	_lAAuthenticationRequirementSelBiometryRequirement = objc.RegisterName("biometryRequirement")
-	_lAAuthenticationRequirementSelBiometryCurrentSetRequirement = objc.RegisterName("biometryCurrentSetRequirement")
+	_lAAuthenticationRequirementSelDefaultRequirement              = objc.RegisterName("defaultRequirement")
+	_lAAuthenticationRequirementSelBiometryRequirement             = objc.RegisterName("biometryRequirement")
+	_lAAuthenticationRequirementSelBiometryCurrentSetRequirement   = objc.RegisterName("biometryCurrentSetRequirement")
 )
 
 func LAAuthenticationRequirementFromID(id objc.ID) *LAAuthenticationRequirement {
@@ -38,28 +38,35 @@ func LAAuthenticationRequirementFromID(id objc.ID) *LAAuthenticationRequirement 
 // @brief Requires biometric authentication or the given fallback method. @param fallback Fallback used in case biometry authentication fails, is not available or not preferred by the user. @return @c LAAuthenticationRequirement instance
 func LAAuthenticationRequirementBiometryRequirementWithFallback(fallback *LABiometryFallbackRequirement) *LAAuthenticationRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAAuthenticationRequirement), _lAAuthenticationRequirementSelBiometryRequirementWithFallback, fallback.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationRequirementFromID(_ret)
 }
 
 // @brief Requires user authentication @return @c LAAuthenticationRequirement instance
 func LAAuthenticationRequirementDefaultRequirement() *LAAuthenticationRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAAuthenticationRequirement), _lAAuthenticationRequirementSelDefaultRequirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationRequirementFromID(_ret)
 }
 
 // @brief Requires biometric authentication @discussion The authorization will fail if: @li • Biometry is not available in the current device @li • There are no biometric enrollments @return @c LAAuthenticationRequirement instance
 func LAAuthenticationRequirementBiometryRequirement() *LAAuthenticationRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAAuthenticationRequirement), _lAAuthenticationRequirementSelBiometryRequirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationRequirementFromID(_ret)
 }
 
 // @brief Requires user authentication with the current biometric set @discussion The authorization will fail if: @li • Biometry is not available in the current device @li • There are no biometric enrollments @li • There is a change in the enrollment database -e.g a new TouchID finger is enrolled. @return @c LAAuthenticationRequirement instance
 func LAAuthenticationRequirementBiometryCurrentSetRequirement() *LAAuthenticationRequirement {
 	_ret := objc.Send[objc.ID](objc.ID(_clsLAAuthenticationRequirement), _lAAuthenticationRequirementSelBiometryCurrentSetRequirement)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LAAuthenticationRequirementFromID(_ret)
 }
-

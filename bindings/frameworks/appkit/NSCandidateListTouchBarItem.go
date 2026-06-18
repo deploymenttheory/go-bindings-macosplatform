@@ -16,24 +16,24 @@ type NSCandidateListTouchBarItem[CandidateType purego.AnyObject] struct {
 }
 
 var (
-	_clsNSCandidateListTouchBarItem = _objcClass("NSCandidateListTouchBarItem")
-	_nSCandidateListTouchBarItemSelUpdateWithInsertionPointVisibility = objc.RegisterName("updateWithInsertionPointVisibility:")
+	_clsNSCandidateListTouchBarItem                                      = _objcClass("NSCandidateListTouchBarItem")
+	_nSCandidateListTouchBarItemSelUpdateWithInsertionPointVisibility    = objc.RegisterName("updateWithInsertionPointVisibility:")
 	_nSCandidateListTouchBarItemSelSetCandidatesForSelectedRangeInString = objc.RegisterName("setCandidates:forSelectedRange:inString:")
-	_nSCandidateListTouchBarItemSelClient = objc.RegisterName("client")
-	_nSCandidateListTouchBarItemSelSetClient = objc.RegisterName("setClient:")
-	_nSCandidateListTouchBarItemSelDelegate = objc.RegisterName("delegate")
-	_nSCandidateListTouchBarItemSelSetDelegate = objc.RegisterName("setDelegate:")
-	_nSCandidateListTouchBarItemSelIsCollapsed = objc.RegisterName("isCollapsed")
-	_nSCandidateListTouchBarItemSelSetCollapsed = objc.RegisterName("setCollapsed:")
-	_nSCandidateListTouchBarItemSelAllowsCollapsing = objc.RegisterName("allowsCollapsing")
-	_nSCandidateListTouchBarItemSelSetAllowsCollapsing = objc.RegisterName("setAllowsCollapsing:")
-	_nSCandidateListTouchBarItemSelIsCandidateListVisible = objc.RegisterName("isCandidateListVisible")
-	_nSCandidateListTouchBarItemSelAllowsTextInputContextCandidates = objc.RegisterName("allowsTextInputContextCandidates")
-	_nSCandidateListTouchBarItemSelSetAllowsTextInputContextCandidates = objc.RegisterName("setAllowsTextInputContextCandidates:")
-	_nSCandidateListTouchBarItemSelAttributedStringForCandidate = objc.RegisterName("attributedStringForCandidate")
-	_nSCandidateListTouchBarItemSelSetAttributedStringForCandidate = objc.RegisterName("setAttributedStringForCandidate:")
-	_nSCandidateListTouchBarItemSelCandidates = objc.RegisterName("candidates")
-	_nSCandidateListTouchBarItemSelSetCustomizationLabel = objc.RegisterName("setCustomizationLabel:")
+	_nSCandidateListTouchBarItemSelClient                                = objc.RegisterName("client")
+	_nSCandidateListTouchBarItemSelSetClient                             = objc.RegisterName("setClient:")
+	_nSCandidateListTouchBarItemSelDelegate                              = objc.RegisterName("delegate")
+	_nSCandidateListTouchBarItemSelSetDelegate                           = objc.RegisterName("setDelegate:")
+	_nSCandidateListTouchBarItemSelIsCollapsed                           = objc.RegisterName("isCollapsed")
+	_nSCandidateListTouchBarItemSelSetCollapsed                          = objc.RegisterName("setCollapsed:")
+	_nSCandidateListTouchBarItemSelAllowsCollapsing                      = objc.RegisterName("allowsCollapsing")
+	_nSCandidateListTouchBarItemSelSetAllowsCollapsing                   = objc.RegisterName("setAllowsCollapsing:")
+	_nSCandidateListTouchBarItemSelIsCandidateListVisible                = objc.RegisterName("isCandidateListVisible")
+	_nSCandidateListTouchBarItemSelAllowsTextInputContextCandidates      = objc.RegisterName("allowsTextInputContextCandidates")
+	_nSCandidateListTouchBarItemSelSetAllowsTextInputContextCandidates   = objc.RegisterName("setAllowsTextInputContextCandidates:")
+	_nSCandidateListTouchBarItemSelAttributedStringForCandidate          = objc.RegisterName("attributedStringForCandidate")
+	_nSCandidateListTouchBarItemSelSetAttributedStringForCandidate       = objc.RegisterName("setAttributedStringForCandidate:")
+	_nSCandidateListTouchBarItemSelCandidates                            = objc.RegisterName("candidates")
+	_nSCandidateListTouchBarItemSelSetCustomizationLabel                 = objc.RegisterName("setCustomizationLabel:")
 )
 
 func NSCandidateListTouchBarItemFromID[CandidateType purego.AnyObject](id objc.ID) *NSCandidateListTouchBarItem[CandidateType] {
@@ -56,7 +56,9 @@ func (o *NSCandidateListTouchBarItem[CandidateType]) SetCandidatesForSelectedRan
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) Client() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelClient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -116,11 +118,12 @@ func (o *NSCandidateListTouchBarItem[CandidateType]) SetAttributedStringForCandi
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) Candidates() *foundation.NSArray[CandidateType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSCandidateListTouchBarItemSelCandidates)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[CandidateType](_ret)
 }
 
 func (o *NSCandidateListTouchBarItem[CandidateType]) SetCustomizationLabel(customizationLabel *foundation.NSString) {
 	o.Ptr().Send(_nSCandidateListTouchBarItemSelSetCustomizationLabel, customizationLabel.Ptr())
 }
-

@@ -17,7 +17,7 @@ type MPSCNNSoftMaxNode struct {
 }
 
 var (
-	_clsMPSCNNSoftMaxNode = _objcClass("MPSCNNSoftMaxNode")
+	_clsMPSCNNSoftMaxNode               = _objcClass("MPSCNNSoftMaxNode")
 	_mPSCNNSoftMaxNodeSelNodeWithSource = objc.RegisterName("nodeWithSource:")
 	_mPSCNNSoftMaxNodeSelInitWithSource = objc.RegisterName("initWithSource:")
 )
@@ -35,14 +35,17 @@ func MPSCNNSoftMaxNodeFromID(id objc.ID) *MPSCNNSoftMaxNode {
 // @abstract   Init a node representing a autoreleased MPSCNNSoftMax kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSCNNSoftMax kernel.
 func MPSCNNSoftMaxNodeNodeWithSource(sourceNode *MPSNNImageNode) *MPSCNNSoftMaxNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNSoftMaxNode), _mPSCNNSoftMaxNodeSelNodeWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNSoftMax kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @return     A new MPSNNFilter node for a MPSCNNSoftMax kernel.
 func (o *MPSCNNSoftMaxNode) InitWithSource(sourceNode *MPSNNImageNode) *MPSCNNSoftMaxNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNSoftMaxNodeSelInitWithSource, sourceNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNSoftMaxNodeFromID(_ret)
 }
-

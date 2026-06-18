@@ -18,10 +18,10 @@ type GKMonteCarloStrategist struct {
 }
 
 var (
-	_clsGKMonteCarloStrategist = _objcClass("GKMonteCarloStrategist")
-	_gKMonteCarloStrategistSelBudget = objc.RegisterName("budget")
-	_gKMonteCarloStrategistSelSetBudget = objc.RegisterName("setBudget:")
-	_gKMonteCarloStrategistSelExplorationParameter = objc.RegisterName("explorationParameter")
+	_clsGKMonteCarloStrategist                        = _objcClass("GKMonteCarloStrategist")
+	_gKMonteCarloStrategistSelBudget                  = objc.RegisterName("budget")
+	_gKMonteCarloStrategistSelSetBudget               = objc.RegisterName("setBudget:")
+	_gKMonteCarloStrategistSelExplorationParameter    = objc.RegisterName("explorationParameter")
 	_gKMonteCarloStrategistSelSetExplorationParameter = objc.RegisterName("setExplorationParameter:")
 )
 
@@ -54,4 +54,3 @@ func (o *GKMonteCarloStrategist) ExplorationParameter() uint {
 func (o *GKMonteCarloStrategist) SetExplorationParameter(explorationParameter uint) {
 	o.Ptr().Send(_gKMonteCarloStrategistSelSetExplorationParameter, explorationParameter)
 }
-

@@ -91,9 +91,13 @@ func (x *CNNBatchNormalizationState) BatchNormalization() *mpsneuralnetwork.MPSC
 	return x.inner.BatchNormalization()
 }
 
-func (x *CNNBatchNormalizationState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+func (x *CNNBatchNormalizationState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
+	return &x.inner.MPSNNGradientState
+}
 
-func (x *CNNBatchNormalizationState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+func (x *CNNBatchNormalizationState) asState() *mpscore.MPSState {
+	return &x.inner.MPSNNGradientState.MPSState
+}
 
 // CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
 type CNNBatchNormalizationStateable interface {
@@ -111,4 +115,3 @@ type CNNBatchNormalizationStateable interface {
 }
 
 var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
-

@@ -16,7 +16,7 @@ type MLModelStructureProgram struct {
 }
 
 var (
-	_clsMLModelStructureProgram = _objcClass("MLModelStructureProgram")
+	_clsMLModelStructureProgram          = _objcClass("MLModelStructureProgram")
 	_mLModelStructureProgramSelFunctions = objc.RegisterName("functions")
 )
 
@@ -34,4 +34,3 @@ func (o *MLModelStructureProgram) Functions() *foundation.NSDictionary[*foundati
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLModelStructureProgramFunction]](o.Ptr(), _mLModelStructureProgramSelFunctions)
 	return _ret
 }
-

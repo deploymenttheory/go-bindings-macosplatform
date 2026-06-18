@@ -125,4 +125,3 @@ type ColorListable interface {
 }
 
 var _ ColorListable = (*ColorList)(nil)
-

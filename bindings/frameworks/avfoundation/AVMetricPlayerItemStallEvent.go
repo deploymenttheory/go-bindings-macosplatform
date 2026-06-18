@@ -25,4 +25,3 @@ func AVMetricPlayerItemStallEventFromID(id objc.ID) *AVMetricPlayerItemStallEven
 	purego.Track(o)
 	return o
 }
-

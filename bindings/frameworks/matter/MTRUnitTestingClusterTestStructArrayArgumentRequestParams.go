@@ -16,22 +16,22 @@ type MTRUnitTestingClusterTestStructArrayArgumentRequestParams struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterTestStructArrayArgumentRequestParams = _objcClass("MTRUnitTestingClusterTestStructArrayArgumentRequestParams")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg1 = objc.RegisterName("arg1")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg1 = objc.RegisterName("setArg1:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg2 = objc.RegisterName("arg2")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg2 = objc.RegisterName("setArg2:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg3 = objc.RegisterName("arg3")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg3 = objc.RegisterName("setArg3:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg4 = objc.RegisterName("arg4")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg4 = objc.RegisterName("setArg4:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg5 = objc.RegisterName("arg5")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg5 = objc.RegisterName("setArg5:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg6 = objc.RegisterName("arg6")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg6 = objc.RegisterName("setArg6:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRUnitTestingClusterTestStructArrayArgumentRequestParams                               = _objcClass("MTRUnitTestingClusterTestStructArrayArgumentRequestParams")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg1                           = objc.RegisterName("arg1")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg1                        = objc.RegisterName("setArg1:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg2                           = objc.RegisterName("arg2")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg2                        = objc.RegisterName("setArg2:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg3                           = objc.RegisterName("arg3")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg3                        = objc.RegisterName("setArg3:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg4                           = objc.RegisterName("arg4")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg4                        = objc.RegisterName("setArg4:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg5                           = objc.RegisterName("arg5")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg5                        = objc.RegisterName("setArg5:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg6                           = objc.RegisterName("arg6")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetArg6                        = objc.RegisterName("setArg6:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -83,7 +83,9 @@ func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg4(arg4
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg5() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg5)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,7 +95,9 @@ func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg5(arg5
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg6() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelArg6)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -104,7 +108,9 @@ func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg6(arg6
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -115,11 +121,12 @@ func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetTimedInvo
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRUnitTestingClusterTestStructArrayArgumentRequestParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

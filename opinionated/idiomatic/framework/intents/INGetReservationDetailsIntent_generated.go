@@ -82,4 +82,3 @@ type GetReservationDetailsIntentable interface {
 }
 
 var _ GetReservationDetailsIntentable = (*GetReservationDetailsIntent)(nil)
-

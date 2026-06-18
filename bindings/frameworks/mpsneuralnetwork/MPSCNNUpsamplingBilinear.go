@@ -16,8 +16,8 @@ type MPSCNNUpsamplingBilinear struct {
 }
 
 var (
-	_clsMPSCNNUpsamplingBilinear = _objcClass("MPSCNNUpsamplingBilinear")
-	_mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY = objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:")
+	_clsMPSCNNUpsamplingBilinear                                                                 = _objcClass("MPSCNNUpsamplingBilinear")
+	_mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY             = objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:")
 	_mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorYAlignCorners = objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:alignCorners:")
 )
 
@@ -34,14 +34,17 @@ func MPSCNNUpsamplingBilinearFromID(id objc.ID) *MPSCNNUpsamplingBilinear {
 // @abstract  Initialize the bilinear spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The upsampling factor for the x dimension. @param     integerScaleFactorY      The upsampling factor for the y dimension. @return    A valid MPSCNNUpsamplingBilinear object or nil, if failure.
 func (o *MPSCNNUpsamplingBilinear) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *MPSCNNUpsamplingBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorY, device, integerScaleFactorX, integerScaleFactorY)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearFromID(_ret)
 }
 
 // @abstract  Initialize the bilinear spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The upsampling factor for the x dimension. @param     integerScaleFactorY      The upsampling factor for the y dimension. @param     alignCorners             Specifier whether the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. @return    A valid MPSCNNUpsamplingBilinear object or nil, if failure.
 func (o *MPSCNNUpsamplingBilinear) InitWithDeviceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint, alignCorners bool) *MPSCNNUpsamplingBilinear {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNUpsamplingBilinearSelInitWithDeviceIntegerScaleFactorXIntegerScaleFactorYAlignCorners, device, integerScaleFactorX, integerScaleFactorY, alignCorners)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNUpsamplingBilinearFromID(_ret)
 }
-

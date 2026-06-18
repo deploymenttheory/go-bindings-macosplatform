@@ -15,7 +15,7 @@ type AVMetadataBodyObject struct {
 }
 
 var (
-	_clsAVMetadataBodyObject = _objcClass("AVMetadataBodyObject")
+	_clsAVMetadataBodyObject       = _objcClass("AVMetadataBodyObject")
 	_aVMetadataBodyObjectSelBodyID = objc.RegisterName("bodyID")
 )
 
@@ -33,4 +33,3 @@ func (o *AVMetadataBodyObject) BodyID() int {
 	_ret := objc.Send[int](o.Ptr(), _aVMetadataBodyObjectSelBodyID)
 	return _ret
 }
-

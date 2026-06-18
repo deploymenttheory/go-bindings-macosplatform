@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_glkitLib uintptr
-	_loadOnce sync.Once
+	_glkitLib      uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -57,31 +57,49 @@ func _loadLibrary() {
 	_register("GLKMatrix3GetMatrix2", func() { purego.RegisterLibFunc(&_fnGLKMatrix3GetMatrix2, _glkitLib, "GLKMatrix3GetMatrix2") })
 	_register("GLKMatrix3GetRow", func() { purego.RegisterLibFunc(&_fnGLKMatrix3GetRow, _glkitLib, "GLKMatrix3GetRow") })
 	_register("GLKMatrix3Invert", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Invert, _glkitLib, "GLKMatrix3Invert") })
-	_register("GLKMatrix3InvertAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix3InvertAndTranspose, _glkitLib, "GLKMatrix3InvertAndTranspose") })
+	_register("GLKMatrix3InvertAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3InvertAndTranspose, _glkitLib, "GLKMatrix3InvertAndTranspose")
+	})
 	_register("GLKMatrix3Make", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Make, _glkitLib, "GLKMatrix3Make") })
-	_register("GLKMatrix3MakeAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeAndTranspose, _glkitLib, "GLKMatrix3MakeAndTranspose") })
+	_register("GLKMatrix3MakeAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3MakeAndTranspose, _glkitLib, "GLKMatrix3MakeAndTranspose")
+	})
 	_register("GLKMatrix3MakeRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeRotation, _glkitLib, "GLKMatrix3MakeRotation") })
 	_register("GLKMatrix3MakeScale", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeScale, _glkitLib, "GLKMatrix3MakeScale") })
 	_register("GLKMatrix3MakeWithArray", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithArray, _glkitLib, "GLKMatrix3MakeWithArray") })
-	_register("GLKMatrix3MakeWithArrayAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithArrayAndTranspose, _glkitLib, "GLKMatrix3MakeWithArrayAndTranspose") })
+	_register("GLKMatrix3MakeWithArrayAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithArrayAndTranspose, _glkitLib, "GLKMatrix3MakeWithArrayAndTranspose")
+	})
 	_register("GLKMatrix3MakeWithColumns", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithColumns, _glkitLib, "GLKMatrix3MakeWithColumns") })
-	_register("GLKMatrix3MakeWithQuaternion", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithQuaternion, _glkitLib, "GLKMatrix3MakeWithQuaternion") })
+	_register("GLKMatrix3MakeWithQuaternion", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithQuaternion, _glkitLib, "GLKMatrix3MakeWithQuaternion")
+	})
 	_register("GLKMatrix3MakeWithRows", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeWithRows, _glkitLib, "GLKMatrix3MakeWithRows") })
 	_register("GLKMatrix3MakeXRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeXRotation, _glkitLib, "GLKMatrix3MakeXRotation") })
 	_register("GLKMatrix3MakeYRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeYRotation, _glkitLib, "GLKMatrix3MakeYRotation") })
 	_register("GLKMatrix3MakeZRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MakeZRotation, _glkitLib, "GLKMatrix3MakeZRotation") })
 	_register("GLKMatrix3Multiply", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Multiply, _glkitLib, "GLKMatrix3Multiply") })
 	_register("GLKMatrix3MultiplyVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MultiplyVector3, _glkitLib, "GLKMatrix3MultiplyVector3") })
-	_register("GLKMatrix3MultiplyVector3Array", func() { purego.RegisterLibFunc(&_fnGLKMatrix3MultiplyVector3Array, _glkitLib, "GLKMatrix3MultiplyVector3Array") })
+	_register("GLKMatrix3MultiplyVector3Array", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3MultiplyVector3Array, _glkitLib, "GLKMatrix3MultiplyVector3Array")
+	})
 	_register("GLKMatrix3Rotate", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Rotate, _glkitLib, "GLKMatrix3Rotate") })
-	_register("GLKMatrix3RotateWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector3, _glkitLib, "GLKMatrix3RotateWithVector3") })
-	_register("GLKMatrix3RotateWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector4, _glkitLib, "GLKMatrix3RotateWithVector4") })
+	_register("GLKMatrix3RotateWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector3, _glkitLib, "GLKMatrix3RotateWithVector3")
+	})
+	_register("GLKMatrix3RotateWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector4, _glkitLib, "GLKMatrix3RotateWithVector4")
+	})
 	_register("GLKMatrix3RotateX", func() { purego.RegisterLibFunc(&_fnGLKMatrix3RotateX, _glkitLib, "GLKMatrix3RotateX") })
 	_register("GLKMatrix3RotateY", func() { purego.RegisterLibFunc(&_fnGLKMatrix3RotateY, _glkitLib, "GLKMatrix3RotateY") })
 	_register("GLKMatrix3RotateZ", func() { purego.RegisterLibFunc(&_fnGLKMatrix3RotateZ, _glkitLib, "GLKMatrix3RotateZ") })
 	_register("GLKMatrix3Scale", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Scale, _glkitLib, "GLKMatrix3Scale") })
-	_register("GLKMatrix3ScaleWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector3, _glkitLib, "GLKMatrix3ScaleWithVector3") })
-	_register("GLKMatrix3ScaleWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector4, _glkitLib, "GLKMatrix3ScaleWithVector4") })
+	_register("GLKMatrix3ScaleWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector3, _glkitLib, "GLKMatrix3ScaleWithVector3")
+	})
+	_register("GLKMatrix3ScaleWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector4, _glkitLib, "GLKMatrix3ScaleWithVector4")
+	})
 	_register("GLKMatrix3SetColumn", func() { purego.RegisterLibFunc(&_fnGLKMatrix3SetColumn, _glkitLib, "GLKMatrix3SetColumn") })
 	_register("GLKMatrix3SetRow", func() { purego.RegisterLibFunc(&_fnGLKMatrix3SetRow, _glkitLib, "GLKMatrix3SetRow") })
 	_register("GLKMatrix3Subtract", func() { purego.RegisterLibFunc(&_fnGLKMatrix3Subtract, _glkitLib, "GLKMatrix3Subtract") })
@@ -92,9 +110,13 @@ func _loadLibrary() {
 	_register("GLKMatrix4GetMatrix3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4GetMatrix3, _glkitLib, "GLKMatrix4GetMatrix3") })
 	_register("GLKMatrix4GetRow", func() { purego.RegisterLibFunc(&_fnGLKMatrix4GetRow, _glkitLib, "GLKMatrix4GetRow") })
 	_register("GLKMatrix4Invert", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Invert, _glkitLib, "GLKMatrix4Invert") })
-	_register("GLKMatrix4InvertAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix4InvertAndTranspose, _glkitLib, "GLKMatrix4InvertAndTranspose") })
+	_register("GLKMatrix4InvertAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4InvertAndTranspose, _glkitLib, "GLKMatrix4InvertAndTranspose")
+	})
 	_register("GLKMatrix4Make", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Make, _glkitLib, "GLKMatrix4Make") })
-	_register("GLKMatrix4MakeAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeAndTranspose, _glkitLib, "GLKMatrix4MakeAndTranspose") })
+	_register("GLKMatrix4MakeAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MakeAndTranspose, _glkitLib, "GLKMatrix4MakeAndTranspose")
+	})
 	_register("GLKMatrix4MakeFrustum", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeFrustum, _glkitLib, "GLKMatrix4MakeFrustum") })
 	_register("GLKMatrix4MakeLookAt", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeLookAt, _glkitLib, "GLKMatrix4MakeLookAt") })
 	_register("GLKMatrix4MakeOrtho", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeOrtho, _glkitLib, "GLKMatrix4MakeOrtho") })
@@ -103,65 +125,117 @@ func _loadLibrary() {
 	_register("GLKMatrix4MakeScale", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeScale, _glkitLib, "GLKMatrix4MakeScale") })
 	_register("GLKMatrix4MakeTranslation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeTranslation, _glkitLib, "GLKMatrix4MakeTranslation") })
 	_register("GLKMatrix4MakeWithArray", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithArray, _glkitLib, "GLKMatrix4MakeWithArray") })
-	_register("GLKMatrix4MakeWithArrayAndTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithArrayAndTranspose, _glkitLib, "GLKMatrix4MakeWithArrayAndTranspose") })
+	_register("GLKMatrix4MakeWithArrayAndTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithArrayAndTranspose, _glkitLib, "GLKMatrix4MakeWithArrayAndTranspose")
+	})
 	_register("GLKMatrix4MakeWithColumns", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithColumns, _glkitLib, "GLKMatrix4MakeWithColumns") })
-	_register("GLKMatrix4MakeWithQuaternion", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithQuaternion, _glkitLib, "GLKMatrix4MakeWithQuaternion") })
+	_register("GLKMatrix4MakeWithQuaternion", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithQuaternion, _glkitLib, "GLKMatrix4MakeWithQuaternion")
+	})
 	_register("GLKMatrix4MakeWithRows", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeWithRows, _glkitLib, "GLKMatrix4MakeWithRows") })
 	_register("GLKMatrix4MakeXRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeXRotation, _glkitLib, "GLKMatrix4MakeXRotation") })
 	_register("GLKMatrix4MakeYRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeYRotation, _glkitLib, "GLKMatrix4MakeYRotation") })
 	_register("GLKMatrix4MakeZRotation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MakeZRotation, _glkitLib, "GLKMatrix4MakeZRotation") })
 	_register("GLKMatrix4Multiply", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Multiply, _glkitLib, "GLKMatrix4Multiply") })
-	_register("GLKMatrix4MultiplyAndProjectVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3, _glkitLib, "GLKMatrix4MultiplyAndProjectVector3") })
-	_register("GLKMatrix4MultiplyAndProjectVector3Array", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3Array, _glkitLib, "GLKMatrix4MultiplyAndProjectVector3Array") })
+	_register("GLKMatrix4MultiplyAndProjectVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3, _glkitLib, "GLKMatrix4MultiplyAndProjectVector3")
+	})
+	_register("GLKMatrix4MultiplyAndProjectVector3Array", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3Array, _glkitLib, "GLKMatrix4MultiplyAndProjectVector3Array")
+	})
 	_register("GLKMatrix4MultiplyVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3, _glkitLib, "GLKMatrix4MultiplyVector3") })
-	_register("GLKMatrix4MultiplyVector3Array", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3Array, _glkitLib, "GLKMatrix4MultiplyVector3Array") })
-	_register("GLKMatrix4MultiplyVector3ArrayWithTranslation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3ArrayWithTranslation, _glkitLib, "GLKMatrix4MultiplyVector3ArrayWithTranslation") })
-	_register("GLKMatrix4MultiplyVector3WithTranslation", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3WithTranslation, _glkitLib, "GLKMatrix4MultiplyVector3WithTranslation") })
+	_register("GLKMatrix4MultiplyVector3Array", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3Array, _glkitLib, "GLKMatrix4MultiplyVector3Array")
+	})
+	_register("GLKMatrix4MultiplyVector3ArrayWithTranslation", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3ArrayWithTranslation, _glkitLib, "GLKMatrix4MultiplyVector3ArrayWithTranslation")
+	})
+	_register("GLKMatrix4MultiplyVector3WithTranslation", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3WithTranslation, _glkitLib, "GLKMatrix4MultiplyVector3WithTranslation")
+	})
 	_register("GLKMatrix4MultiplyVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector4, _glkitLib, "GLKMatrix4MultiplyVector4") })
-	_register("GLKMatrix4MultiplyVector4Array", func() { purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector4Array, _glkitLib, "GLKMatrix4MultiplyVector4Array") })
+	_register("GLKMatrix4MultiplyVector4Array", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector4Array, _glkitLib, "GLKMatrix4MultiplyVector4Array")
+	})
 	_register("GLKMatrix4Rotate", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Rotate, _glkitLib, "GLKMatrix4Rotate") })
-	_register("GLKMatrix4RotateWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector3, _glkitLib, "GLKMatrix4RotateWithVector3") })
-	_register("GLKMatrix4RotateWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector4, _glkitLib, "GLKMatrix4RotateWithVector4") })
+	_register("GLKMatrix4RotateWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector3, _glkitLib, "GLKMatrix4RotateWithVector3")
+	})
+	_register("GLKMatrix4RotateWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector4, _glkitLib, "GLKMatrix4RotateWithVector4")
+	})
 	_register("GLKMatrix4RotateX", func() { purego.RegisterLibFunc(&_fnGLKMatrix4RotateX, _glkitLib, "GLKMatrix4RotateX") })
 	_register("GLKMatrix4RotateY", func() { purego.RegisterLibFunc(&_fnGLKMatrix4RotateY, _glkitLib, "GLKMatrix4RotateY") })
 	_register("GLKMatrix4RotateZ", func() { purego.RegisterLibFunc(&_fnGLKMatrix4RotateZ, _glkitLib, "GLKMatrix4RotateZ") })
 	_register("GLKMatrix4Scale", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Scale, _glkitLib, "GLKMatrix4Scale") })
-	_register("GLKMatrix4ScaleWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector3, _glkitLib, "GLKMatrix4ScaleWithVector3") })
-	_register("GLKMatrix4ScaleWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector4, _glkitLib, "GLKMatrix4ScaleWithVector4") })
+	_register("GLKMatrix4ScaleWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector3, _glkitLib, "GLKMatrix4ScaleWithVector3")
+	})
+	_register("GLKMatrix4ScaleWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector4, _glkitLib, "GLKMatrix4ScaleWithVector4")
+	})
 	_register("GLKMatrix4SetColumn", func() { purego.RegisterLibFunc(&_fnGLKMatrix4SetColumn, _glkitLib, "GLKMatrix4SetColumn") })
 	_register("GLKMatrix4SetRow", func() { purego.RegisterLibFunc(&_fnGLKMatrix4SetRow, _glkitLib, "GLKMatrix4SetRow") })
 	_register("GLKMatrix4Subtract", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Subtract, _glkitLib, "GLKMatrix4Subtract") })
 	_register("GLKMatrix4Translate", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Translate, _glkitLib, "GLKMatrix4Translate") })
-	_register("GLKMatrix4TranslateWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector3, _glkitLib, "GLKMatrix4TranslateWithVector3") })
-	_register("GLKMatrix4TranslateWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector4, _glkitLib, "GLKMatrix4TranslateWithVector4") })
+	_register("GLKMatrix4TranslateWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector3, _glkitLib, "GLKMatrix4TranslateWithVector3")
+	})
+	_register("GLKMatrix4TranslateWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector4, _glkitLib, "GLKMatrix4TranslateWithVector4")
+	})
 	_register("GLKMatrix4Transpose", func() { purego.RegisterLibFunc(&_fnGLKMatrix4Transpose, _glkitLib, "GLKMatrix4Transpose") })
 	_register("GLKMatrixStackCreate", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackCreate, _glkitLib, "GLKMatrixStackCreate") })
 	_register("GLKMatrixStackGetMatrix2", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix2, _glkitLib, "GLKMatrixStackGetMatrix2") })
 	_register("GLKMatrixStackGetMatrix3", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3, _glkitLib, "GLKMatrixStackGetMatrix3") })
-	_register("GLKMatrixStackGetMatrix3Inverse", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3Inverse, _glkitLib, "GLKMatrixStackGetMatrix3Inverse") })
-	_register("GLKMatrixStackGetMatrix3InverseTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3InverseTranspose, _glkitLib, "GLKMatrixStackGetMatrix3InverseTranspose") })
+	_register("GLKMatrixStackGetMatrix3Inverse", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3Inverse, _glkitLib, "GLKMatrixStackGetMatrix3Inverse")
+	})
+	_register("GLKMatrixStackGetMatrix3InverseTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3InverseTranspose, _glkitLib, "GLKMatrixStackGetMatrix3InverseTranspose")
+	})
 	_register("GLKMatrixStackGetMatrix4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4, _glkitLib, "GLKMatrixStackGetMatrix4") })
-	_register("GLKMatrixStackGetMatrix4Inverse", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4Inverse, _glkitLib, "GLKMatrixStackGetMatrix4Inverse") })
-	_register("GLKMatrixStackGetMatrix4InverseTranspose", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4InverseTranspose, _glkitLib, "GLKMatrixStackGetMatrix4InverseTranspose") })
+	_register("GLKMatrixStackGetMatrix4Inverse", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4Inverse, _glkitLib, "GLKMatrixStackGetMatrix4Inverse")
+	})
+	_register("GLKMatrixStackGetMatrix4InverseTranspose", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4InverseTranspose, _glkitLib, "GLKMatrixStackGetMatrix4InverseTranspose")
+	})
 	_register("GLKMatrixStackGetTypeID", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackGetTypeID, _glkitLib, "GLKMatrixStackGetTypeID") })
 	_register("GLKMatrixStackLoadMatrix4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackLoadMatrix4, _glkitLib, "GLKMatrixStackLoadMatrix4") })
-	_register("GLKMatrixStackMultiplyMatrix4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrix4, _glkitLib, "GLKMatrixStackMultiplyMatrix4") })
-	_register("GLKMatrixStackMultiplyMatrixStack", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrixStack, _glkitLib, "GLKMatrixStackMultiplyMatrixStack") })
+	_register("GLKMatrixStackMultiplyMatrix4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrix4, _glkitLib, "GLKMatrixStackMultiplyMatrix4")
+	})
+	_register("GLKMatrixStackMultiplyMatrixStack", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrixStack, _glkitLib, "GLKMatrixStackMultiplyMatrixStack")
+	})
 	_register("GLKMatrixStackPop", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackPop, _glkitLib, "GLKMatrixStackPop") })
 	_register("GLKMatrixStackPush", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackPush, _glkitLib, "GLKMatrixStackPush") })
 	_register("GLKMatrixStackRotate", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotate, _glkitLib, "GLKMatrixStackRotate") })
-	_register("GLKMatrixStackRotateWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector3, _glkitLib, "GLKMatrixStackRotateWithVector3") })
-	_register("GLKMatrixStackRotateWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector4, _glkitLib, "GLKMatrixStackRotateWithVector4") })
+	_register("GLKMatrixStackRotateWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector3, _glkitLib, "GLKMatrixStackRotateWithVector3")
+	})
+	_register("GLKMatrixStackRotateWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackRotateWithVector4, _glkitLib, "GLKMatrixStackRotateWithVector4")
+	})
 	_register("GLKMatrixStackRotateX", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotateX, _glkitLib, "GLKMatrixStackRotateX") })
 	_register("GLKMatrixStackRotateY", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotateY, _glkitLib, "GLKMatrixStackRotateY") })
 	_register("GLKMatrixStackRotateZ", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackRotateZ, _glkitLib, "GLKMatrixStackRotateZ") })
 	_register("GLKMatrixStackScale", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackScale, _glkitLib, "GLKMatrixStackScale") })
-	_register("GLKMatrixStackScaleWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector3, _glkitLib, "GLKMatrixStackScaleWithVector3") })
-	_register("GLKMatrixStackScaleWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector4, _glkitLib, "GLKMatrixStackScaleWithVector4") })
+	_register("GLKMatrixStackScaleWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector3, _glkitLib, "GLKMatrixStackScaleWithVector3")
+	})
+	_register("GLKMatrixStackScaleWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackScaleWithVector4, _glkitLib, "GLKMatrixStackScaleWithVector4")
+	})
 	_register("GLKMatrixStackSize", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackSize, _glkitLib, "GLKMatrixStackSize") })
 	_register("GLKMatrixStackTranslate", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackTranslate, _glkitLib, "GLKMatrixStackTranslate") })
-	_register("GLKMatrixStackTranslateWithVector3", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector3, _glkitLib, "GLKMatrixStackTranslateWithVector3") })
-	_register("GLKMatrixStackTranslateWithVector4", func() { purego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector4, _glkitLib, "GLKMatrixStackTranslateWithVector4") })
+	_register("GLKMatrixStackTranslateWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector3, _glkitLib, "GLKMatrixStackTranslateWithVector3")
+	})
+	_register("GLKMatrixStackTranslateWithVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKMatrixStackTranslateWithVector4, _glkitLib, "GLKMatrixStackTranslateWithVector4")
+	})
 	_register("GLKQuaternionAdd", func() { purego.RegisterLibFunc(&_fnGLKQuaternionAdd, _glkitLib, "GLKQuaternionAdd") })
 	_register("GLKQuaternionAngle", func() { purego.RegisterLibFunc(&_fnGLKQuaternionAngle, _glkitLib, "GLKQuaternionAngle") })
 	_register("GLKQuaternionAxis", func() { purego.RegisterLibFunc(&_fnGLKQuaternionAxis, _glkitLib, "GLKQuaternionAxis") })
@@ -169,28 +243,60 @@ func _loadLibrary() {
 	_register("GLKQuaternionInvert", func() { purego.RegisterLibFunc(&_fnGLKQuaternionInvert, _glkitLib, "GLKQuaternionInvert") })
 	_register("GLKQuaternionLength", func() { purego.RegisterLibFunc(&_fnGLKQuaternionLength, _glkitLib, "GLKQuaternionLength") })
 	_register("GLKQuaternionMake", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMake, _glkitLib, "GLKQuaternionMake") })
-	_register("GLKQuaternionMakeWithAngleAndAxis", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndAxis, _glkitLib, "GLKQuaternionMakeWithAngleAndAxis") })
-	_register("GLKQuaternionMakeWithAngleAndVector3Axis", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndVector3Axis, _glkitLib, "GLKQuaternionMakeWithAngleAndVector3Axis") })
-	_register("GLKQuaternionMakeWithArray", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithArray, _glkitLib, "GLKQuaternionMakeWithArray") })
-	_register("GLKQuaternionMakeWithMatrix3", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix3, _glkitLib, "GLKQuaternionMakeWithMatrix3") })
-	_register("GLKQuaternionMakeWithMatrix4", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix4, _glkitLib, "GLKQuaternionMakeWithMatrix4") })
-	_register("GLKQuaternionMakeWithVector3", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithVector3, _glkitLib, "GLKQuaternionMakeWithVector3") })
+	_register("GLKQuaternionMakeWithAngleAndAxis", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndAxis, _glkitLib, "GLKQuaternionMakeWithAngleAndAxis")
+	})
+	_register("GLKQuaternionMakeWithAngleAndVector3Axis", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndVector3Axis, _glkitLib, "GLKQuaternionMakeWithAngleAndVector3Axis")
+	})
+	_register("GLKQuaternionMakeWithArray", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithArray, _glkitLib, "GLKQuaternionMakeWithArray")
+	})
+	_register("GLKQuaternionMakeWithMatrix3", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix3, _glkitLib, "GLKQuaternionMakeWithMatrix3")
+	})
+	_register("GLKQuaternionMakeWithMatrix4", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix4, _glkitLib, "GLKQuaternionMakeWithMatrix4")
+	})
+	_register("GLKQuaternionMakeWithVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionMakeWithVector3, _glkitLib, "GLKQuaternionMakeWithVector3")
+	})
 	_register("GLKQuaternionMultiply", func() { purego.RegisterLibFunc(&_fnGLKQuaternionMultiply, _glkitLib, "GLKQuaternionMultiply") })
 	_register("GLKQuaternionNormalize", func() { purego.RegisterLibFunc(&_fnGLKQuaternionNormalize, _glkitLib, "GLKQuaternionNormalize") })
-	_register("GLKQuaternionRotateVector3", func() { purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector3, _glkitLib, "GLKQuaternionRotateVector3") })
-	_register("GLKQuaternionRotateVector3Array", func() { purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector3Array, _glkitLib, "GLKQuaternionRotateVector3Array") })
-	_register("GLKQuaternionRotateVector4", func() { purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4, _glkitLib, "GLKQuaternionRotateVector4") })
-	_register("GLKQuaternionRotateVector4Array", func() { purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4Array, _glkitLib, "GLKQuaternionRotateVector4Array") })
+	_register("GLKQuaternionRotateVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector3, _glkitLib, "GLKQuaternionRotateVector3")
+	})
+	_register("GLKQuaternionRotateVector3Array", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector3Array, _glkitLib, "GLKQuaternionRotateVector3Array")
+	})
+	_register("GLKQuaternionRotateVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4, _glkitLib, "GLKQuaternionRotateVector4")
+	})
+	_register("GLKQuaternionRotateVector4Array", func() {
+		purego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4Array, _glkitLib, "GLKQuaternionRotateVector4Array")
+	})
 	_register("GLKQuaternionSlerp", func() { purego.RegisterLibFunc(&_fnGLKQuaternionSlerp, _glkitLib, "GLKQuaternionSlerp") })
 	_register("GLKQuaternionSubtract", func() { purego.RegisterLibFunc(&_fnGLKQuaternionSubtract, _glkitLib, "GLKQuaternionSubtract") })
 	_register("GLKVector2Add", func() { purego.RegisterLibFunc(&_fnGLKVector2Add, _glkitLib, "GLKVector2Add") })
 	_register("GLKVector2AddScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2AddScalar, _glkitLib, "GLKVector2AddScalar") })
-	_register("GLKVector2AllEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2AllEqualToScalar, _glkitLib, "GLKVector2AllEqualToScalar") })
-	_register("GLKVector2AllEqualToVector2", func() { purego.RegisterLibFunc(&_fnGLKVector2AllEqualToVector2, _glkitLib, "GLKVector2AllEqualToVector2") })
-	_register("GLKVector2AllGreaterThanOrEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector2AllGreaterThanOrEqualToScalar") })
-	_register("GLKVector2AllGreaterThanOrEqualToVector2", func() { purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanOrEqualToVector2, _glkitLib, "GLKVector2AllGreaterThanOrEqualToVector2") })
-	_register("GLKVector2AllGreaterThanScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanScalar, _glkitLib, "GLKVector2AllGreaterThanScalar") })
-	_register("GLKVector2AllGreaterThanVector2", func() { purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanVector2, _glkitLib, "GLKVector2AllGreaterThanVector2") })
+	_register("GLKVector2AllEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllEqualToScalar, _glkitLib, "GLKVector2AllEqualToScalar")
+	})
+	_register("GLKVector2AllEqualToVector2", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllEqualToVector2, _glkitLib, "GLKVector2AllEqualToVector2")
+	})
+	_register("GLKVector2AllGreaterThanOrEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector2AllGreaterThanOrEqualToScalar")
+	})
+	_register("GLKVector2AllGreaterThanOrEqualToVector2", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanOrEqualToVector2, _glkitLib, "GLKVector2AllGreaterThanOrEqualToVector2")
+	})
+	_register("GLKVector2AllGreaterThanScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanScalar, _glkitLib, "GLKVector2AllGreaterThanScalar")
+	})
+	_register("GLKVector2AllGreaterThanVector2", func() {
+		purego.RegisterLibFunc(&_fnGLKVector2AllGreaterThanVector2, _glkitLib, "GLKVector2AllGreaterThanVector2")
+	})
 	_register("GLKVector2Distance", func() { purego.RegisterLibFunc(&_fnGLKVector2Distance, _glkitLib, "GLKVector2Distance") })
 	_register("GLKVector2Divide", func() { purego.RegisterLibFunc(&_fnGLKVector2Divide, _glkitLib, "GLKVector2Divide") })
 	_register("GLKVector2DivideScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2DivideScalar, _glkitLib, "GLKVector2DivideScalar") })
@@ -210,12 +316,24 @@ func _loadLibrary() {
 	_register("GLKVector2SubtractScalar", func() { purego.RegisterLibFunc(&_fnGLKVector2SubtractScalar, _glkitLib, "GLKVector2SubtractScalar") })
 	_register("GLKVector3Add", func() { purego.RegisterLibFunc(&_fnGLKVector3Add, _glkitLib, "GLKVector3Add") })
 	_register("GLKVector3AddScalar", func() { purego.RegisterLibFunc(&_fnGLKVector3AddScalar, _glkitLib, "GLKVector3AddScalar") })
-	_register("GLKVector3AllEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector3AllEqualToScalar, _glkitLib, "GLKVector3AllEqualToScalar") })
-	_register("GLKVector3AllEqualToVector3", func() { purego.RegisterLibFunc(&_fnGLKVector3AllEqualToVector3, _glkitLib, "GLKVector3AllEqualToVector3") })
-	_register("GLKVector3AllGreaterThanOrEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector3AllGreaterThanOrEqualToScalar") })
-	_register("GLKVector3AllGreaterThanOrEqualToVector3", func() { purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanOrEqualToVector3, _glkitLib, "GLKVector3AllGreaterThanOrEqualToVector3") })
-	_register("GLKVector3AllGreaterThanScalar", func() { purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanScalar, _glkitLib, "GLKVector3AllGreaterThanScalar") })
-	_register("GLKVector3AllGreaterThanVector3", func() { purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanVector3, _glkitLib, "GLKVector3AllGreaterThanVector3") })
+	_register("GLKVector3AllEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllEqualToScalar, _glkitLib, "GLKVector3AllEqualToScalar")
+	})
+	_register("GLKVector3AllEqualToVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllEqualToVector3, _glkitLib, "GLKVector3AllEqualToVector3")
+	})
+	_register("GLKVector3AllGreaterThanOrEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector3AllGreaterThanOrEqualToScalar")
+	})
+	_register("GLKVector3AllGreaterThanOrEqualToVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanOrEqualToVector3, _glkitLib, "GLKVector3AllGreaterThanOrEqualToVector3")
+	})
+	_register("GLKVector3AllGreaterThanScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanScalar, _glkitLib, "GLKVector3AllGreaterThanScalar")
+	})
+	_register("GLKVector3AllGreaterThanVector3", func() {
+		purego.RegisterLibFunc(&_fnGLKVector3AllGreaterThanVector3, _glkitLib, "GLKVector3AllGreaterThanVector3")
+	})
 	_register("GLKVector3CrossProduct", func() { purego.RegisterLibFunc(&_fnGLKVector3CrossProduct, _glkitLib, "GLKVector3CrossProduct") })
 	_register("GLKVector3Distance", func() { purego.RegisterLibFunc(&_fnGLKVector3Distance, _glkitLib, "GLKVector3Distance") })
 	_register("GLKVector3Divide", func() { purego.RegisterLibFunc(&_fnGLKVector3Divide, _glkitLib, "GLKVector3Divide") })
@@ -236,12 +354,24 @@ func _loadLibrary() {
 	_register("GLKVector3SubtractScalar", func() { purego.RegisterLibFunc(&_fnGLKVector3SubtractScalar, _glkitLib, "GLKVector3SubtractScalar") })
 	_register("GLKVector4Add", func() { purego.RegisterLibFunc(&_fnGLKVector4Add, _glkitLib, "GLKVector4Add") })
 	_register("GLKVector4AddScalar", func() { purego.RegisterLibFunc(&_fnGLKVector4AddScalar, _glkitLib, "GLKVector4AddScalar") })
-	_register("GLKVector4AllEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector4AllEqualToScalar, _glkitLib, "GLKVector4AllEqualToScalar") })
-	_register("GLKVector4AllEqualToVector4", func() { purego.RegisterLibFunc(&_fnGLKVector4AllEqualToVector4, _glkitLib, "GLKVector4AllEqualToVector4") })
-	_register("GLKVector4AllGreaterThanOrEqualToScalar", func() { purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector4AllGreaterThanOrEqualToScalar") })
-	_register("GLKVector4AllGreaterThanOrEqualToVector4", func() { purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanOrEqualToVector4, _glkitLib, "GLKVector4AllGreaterThanOrEqualToVector4") })
-	_register("GLKVector4AllGreaterThanScalar", func() { purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanScalar, _glkitLib, "GLKVector4AllGreaterThanScalar") })
-	_register("GLKVector4AllGreaterThanVector4", func() { purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanVector4, _glkitLib, "GLKVector4AllGreaterThanVector4") })
+	_register("GLKVector4AllEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllEqualToScalar, _glkitLib, "GLKVector4AllEqualToScalar")
+	})
+	_register("GLKVector4AllEqualToVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllEqualToVector4, _glkitLib, "GLKVector4AllEqualToVector4")
+	})
+	_register("GLKVector4AllGreaterThanOrEqualToScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanOrEqualToScalar, _glkitLib, "GLKVector4AllGreaterThanOrEqualToScalar")
+	})
+	_register("GLKVector4AllGreaterThanOrEqualToVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanOrEqualToVector4, _glkitLib, "GLKVector4AllGreaterThanOrEqualToVector4")
+	})
+	_register("GLKVector4AllGreaterThanScalar", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanScalar, _glkitLib, "GLKVector4AllGreaterThanScalar")
+	})
+	_register("GLKVector4AllGreaterThanVector4", func() {
+		purego.RegisterLibFunc(&_fnGLKVector4AllGreaterThanVector4, _glkitLib, "GLKVector4AllGreaterThanVector4")
+	})
 	_register("GLKVector4CrossProduct", func() { purego.RegisterLibFunc(&_fnGLKVector4CrossProduct, _glkitLib, "GLKVector4CrossProduct") })
 	_register("GLKVector4Distance", func() { purego.RegisterLibFunc(&_fnGLKVector4Distance, _glkitLib, "GLKVector4Distance") })
 	_register("GLKVector4Divide", func() { purego.RegisterLibFunc(&_fnGLKVector4Divide, _glkitLib, "GLKVector4Divide") })
@@ -261,7 +391,9 @@ func _loadLibrary() {
 	_register("GLKVector4Project", func() { purego.RegisterLibFunc(&_fnGLKVector4Project, _glkitLib, "GLKVector4Project") })
 	_register("GLKVector4Subtract", func() { purego.RegisterLibFunc(&_fnGLKVector4Subtract, _glkitLib, "GLKVector4Subtract") })
 	_register("GLKVector4SubtractScalar", func() { purego.RegisterLibFunc(&_fnGLKVector4SubtractScalar, _glkitLib, "GLKVector4SubtractScalar") })
-	_register("GLKVertexAttributeParametersFromModelIO", func() { purego.RegisterLibFunc(&_fnGLKVertexAttributeParametersFromModelIO, _glkitLib, "GLKVertexAttributeParametersFromModelIO") })
+	_register("GLKVertexAttributeParametersFromModelIO", func() {
+		purego.RegisterLibFunc(&_fnGLKVertexAttributeParametersFromModelIO, _glkitLib, "GLKVertexAttributeParametersFromModelIO")
+	})
 	_register("NSStringFromGLKMatrix2", func() { purego.RegisterLibFunc(&_fnNSStringFromGLKMatrix2, _glkitLib, "NSStringFromGLKMatrix2") })
 	_register("NSStringFromGLKMatrix3", func() { purego.RegisterLibFunc(&_fnNSStringFromGLKMatrix3, _glkitLib, "NSStringFromGLKMatrix3") })
 	_register("NSStringFromGLKMatrix4", func() { purego.RegisterLibFunc(&_fnNSStringFromGLKMatrix4, _glkitLib, "NSStringFromGLKMatrix4") })

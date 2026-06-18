@@ -18,12 +18,12 @@ type MLTask struct {
 }
 
 var (
-	_clsMLTask = _objcClass("MLTask")
-	_mLTaskSelResume = objc.RegisterName("resume")
-	_mLTaskSelCancel = objc.RegisterName("cancel")
+	_clsMLTask               = _objcClass("MLTask")
+	_mLTaskSelResume         = objc.RegisterName("resume")
+	_mLTaskSelCancel         = objc.RegisterName("cancel")
 	_mLTaskSelTaskIdentifier = objc.RegisterName("taskIdentifier")
-	_mLTaskSelState = objc.RegisterName("state")
-	_mLTaskSelError = objc.RegisterName("error")
+	_mLTaskSelState          = objc.RegisterName("state")
+	_mLTaskSelError          = objc.RegisterName("error")
 )
 
 func MLTaskFromID(id objc.ID) *MLTask {
@@ -46,7 +46,9 @@ func (o *MLTask) Cancel() {
 
 func (o *MLTask) TaskIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLTaskSelTaskIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -59,4 +61,3 @@ func (o *MLTask) Error() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _mLTaskSelError)
 	return _ret
 }
-

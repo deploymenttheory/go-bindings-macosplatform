@@ -18,15 +18,15 @@ type NSOpenGLPixelFormat struct {
 }
 
 var (
-	_clsNSOpenGLPixelFormat = _objcClass("NSOpenGLPixelFormat")
-	_nSOpenGLPixelFormatSelInitWithCGLPixelFormatObj = objc.RegisterName("initWithCGLPixelFormatObj:")
-	_nSOpenGLPixelFormatSelInitWithAttributes = objc.RegisterName("initWithAttributes:")
-	_nSOpenGLPixelFormatSelInitWithData = objc.RegisterName("initWithData:")
-	_nSOpenGLPixelFormatSelAttributes = objc.RegisterName("attributes")
-	_nSOpenGLPixelFormatSelSetAttributes = objc.RegisterName("setAttributes:")
+	_clsNSOpenGLPixelFormat                                      = _objcClass("NSOpenGLPixelFormat")
+	_nSOpenGLPixelFormatSelInitWithCGLPixelFormatObj             = objc.RegisterName("initWithCGLPixelFormatObj:")
+	_nSOpenGLPixelFormatSelInitWithAttributes                    = objc.RegisterName("initWithAttributes:")
+	_nSOpenGLPixelFormatSelInitWithData                          = objc.RegisterName("initWithData:")
+	_nSOpenGLPixelFormatSelAttributes                            = objc.RegisterName("attributes")
+	_nSOpenGLPixelFormatSelSetAttributes                         = objc.RegisterName("setAttributes:")
 	_nSOpenGLPixelFormatSelGetValuesForAttributeForVirtualScreen = objc.RegisterName("getValues:forAttribute:forVirtualScreen:")
-	_nSOpenGLPixelFormatSelNumberOfVirtualScreens = objc.RegisterName("numberOfVirtualScreens")
-	_nSOpenGLPixelFormatSelCGLPixelFormatObj = objc.RegisterName("CGLPixelFormatObj")
+	_nSOpenGLPixelFormatSelNumberOfVirtualScreens                = objc.RegisterName("numberOfVirtualScreens")
+	_nSOpenGLPixelFormatSelCGLPixelFormatObj                     = objc.RegisterName("CGLPixelFormatObj")
 )
 
 func NSOpenGLPixelFormatFromID(id objc.ID) *NSOpenGLPixelFormat {
@@ -41,13 +41,17 @@ func NSOpenGLPixelFormatFromID(id objc.ID) *NSOpenGLPixelFormat {
 
 func (o *NSOpenGLPixelFormat) InitWithCGLPixelFormatObj(format unsafe.Pointer) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelInitWithCGLPixelFormatObj, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
 func (o *NSOpenGLPixelFormat) InitWithAttributes(attribs *uint32) *NSOpenGLPixelFormat {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelInitWithAttributes, attribs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSOpenGLPixelFormatFromID(_ret)
 }
 
@@ -60,7 +64,9 @@ func (o *NSOpenGLPixelFormat) InitWithData(attribs *foundation.NSData) objc.ID {
 // Deprecated: since macOS 10.6.
 func (o *NSOpenGLPixelFormat) Attributes() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSOpenGLPixelFormatSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -84,4 +90,3 @@ func (o *NSOpenGLPixelFormat) CGLPixelFormatObj() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSOpenGLPixelFormatSelCGLPixelFormatObj)
 	return _ret
 }
-

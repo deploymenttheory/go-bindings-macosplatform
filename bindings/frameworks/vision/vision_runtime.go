@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_visionLib uintptr
-	_loadOnce sync.Once
+	_visionLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,17 +49,39 @@ func _loadLibrary() {
 		return
 	}
 	_register("VNElementTypeSize", func() { purego.RegisterLibFunc(&_fnVNElementTypeSize, _visionLib, "VNElementTypeSize") })
-	_register("VNImagePointForFaceLandmarkPoint", func() { purego.RegisterLibFunc(&_fnVNImagePointForFaceLandmarkPoint, _visionLib, "VNImagePointForFaceLandmarkPoint") })
-	_register("VNImagePointForNormalizedPoint", func() { purego.RegisterLibFunc(&_fnVNImagePointForNormalizedPoint, _visionLib, "VNImagePointForNormalizedPoint") })
-	_register("VNImagePointForNormalizedPointUsingRegionOfInterest", func() { purego.RegisterLibFunc(&_fnVNImagePointForNormalizedPointUsingRegionOfInterest, _visionLib, "VNImagePointForNormalizedPointUsingRegionOfInterest") })
-	_register("VNImageRectForNormalizedRect", func() { purego.RegisterLibFunc(&_fnVNImageRectForNormalizedRect, _visionLib, "VNImageRectForNormalizedRect") })
-	_register("VNImageRectForNormalizedRectUsingRegionOfInterest", func() { purego.RegisterLibFunc(&_fnVNImageRectForNormalizedRectUsingRegionOfInterest, _visionLib, "VNImageRectForNormalizedRectUsingRegionOfInterest") })
-	_register("VNNormalizedFaceBoundingBoxPointForLandmarkPoint", func() { purego.RegisterLibFunc(&_fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint, _visionLib, "VNNormalizedFaceBoundingBoxPointForLandmarkPoint") })
-	_register("VNNormalizedPointForImagePoint", func() { purego.RegisterLibFunc(&_fnVNNormalizedPointForImagePoint, _visionLib, "VNNormalizedPointForImagePoint") })
-	_register("VNNormalizedPointForImagePointUsingRegionOfInterest", func() { purego.RegisterLibFunc(&_fnVNNormalizedPointForImagePointUsingRegionOfInterest, _visionLib, "VNNormalizedPointForImagePointUsingRegionOfInterest") })
-	_register("VNNormalizedRectForImageRect", func() { purego.RegisterLibFunc(&_fnVNNormalizedRectForImageRect, _visionLib, "VNNormalizedRectForImageRect") })
-	_register("VNNormalizedRectForImageRectUsingRegionOfInterest", func() { purego.RegisterLibFunc(&_fnVNNormalizedRectForImageRectUsingRegionOfInterest, _visionLib, "VNNormalizedRectForImageRectUsingRegionOfInterest") })
-	_register("VNNormalizedRectIsIdentityRect", func() { purego.RegisterLibFunc(&_fnVNNormalizedRectIsIdentityRect, _visionLib, "VNNormalizedRectIsIdentityRect") })
+	_register("VNImagePointForFaceLandmarkPoint", func() {
+		purego.RegisterLibFunc(&_fnVNImagePointForFaceLandmarkPoint, _visionLib, "VNImagePointForFaceLandmarkPoint")
+	})
+	_register("VNImagePointForNormalizedPoint", func() {
+		purego.RegisterLibFunc(&_fnVNImagePointForNormalizedPoint, _visionLib, "VNImagePointForNormalizedPoint")
+	})
+	_register("VNImagePointForNormalizedPointUsingRegionOfInterest", func() {
+		purego.RegisterLibFunc(&_fnVNImagePointForNormalizedPointUsingRegionOfInterest, _visionLib, "VNImagePointForNormalizedPointUsingRegionOfInterest")
+	})
+	_register("VNImageRectForNormalizedRect", func() {
+		purego.RegisterLibFunc(&_fnVNImageRectForNormalizedRect, _visionLib, "VNImageRectForNormalizedRect")
+	})
+	_register("VNImageRectForNormalizedRectUsingRegionOfInterest", func() {
+		purego.RegisterLibFunc(&_fnVNImageRectForNormalizedRectUsingRegionOfInterest, _visionLib, "VNImageRectForNormalizedRectUsingRegionOfInterest")
+	})
+	_register("VNNormalizedFaceBoundingBoxPointForLandmarkPoint", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint, _visionLib, "VNNormalizedFaceBoundingBoxPointForLandmarkPoint")
+	})
+	_register("VNNormalizedPointForImagePoint", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedPointForImagePoint, _visionLib, "VNNormalizedPointForImagePoint")
+	})
+	_register("VNNormalizedPointForImagePointUsingRegionOfInterest", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedPointForImagePointUsingRegionOfInterest, _visionLib, "VNNormalizedPointForImagePointUsingRegionOfInterest")
+	})
+	_register("VNNormalizedRectForImageRect", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedRectForImageRect, _visionLib, "VNNormalizedRectForImageRect")
+	})
+	_register("VNNormalizedRectForImageRectUsingRegionOfInterest", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedRectForImageRectUsingRegionOfInterest, _visionLib, "VNNormalizedRectForImageRectUsingRegionOfInterest")
+	})
+	_register("VNNormalizedRectIsIdentityRect", func() {
+		purego.RegisterLibFunc(&_fnVNNormalizedRectIsIdentityRect, _visionLib, "VNNormalizedRectIsIdentityRect")
+	})
 }
 
 func init() {

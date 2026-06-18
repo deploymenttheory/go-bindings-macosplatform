@@ -99,4 +99,3 @@ type ScrubberLayoutAttributesable interface {
 }
 
 var _ ScrubberLayoutAttributesable = (*ScrubberLayoutAttributes)(nil)
-

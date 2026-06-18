@@ -17,10 +17,10 @@ type NWPath struct {
 }
 
 var (
-	_clsNWPath = _objcClass("NWPath")
+	_clsNWPath              = _objcClass("NWPath")
 	_nWPathSelIsEqualToPath = objc.RegisterName("isEqualToPath:")
-	_nWPathSelStatus = objc.RegisterName("status")
-	_nWPathSelIsExpensive = objc.RegisterName("isExpensive")
+	_nWPathSelStatus        = objc.RegisterName("status")
+	_nWPathSelIsExpensive   = objc.RegisterName("isExpensive")
 	_nWPathSelIsConstrained = objc.RegisterName("isConstrained")
 )
 
@@ -61,4 +61,3 @@ func (o *NWPath) IsConstrained() bool {
 	_ret := objc.Send[bool](o.Ptr(), _nWPathSelIsConstrained)
 	return _ret
 }
-

@@ -72,4 +72,3 @@ type VSAccountProviderResponseable interface {
 }
 
 var _ VSAccountProviderResponseable = (*VSAccountProviderResponse)(nil)
-

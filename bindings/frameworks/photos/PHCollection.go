@@ -16,13 +16,13 @@ type PHCollection struct {
 }
 
 var (
-	_clsPHCollection = _objcClass("PHCollection")
-	_pHCollectionSelCanPerformEditOperation = objc.RegisterName("canPerformEditOperation:")
+	_clsPHCollection                                        = _objcClass("PHCollection")
+	_pHCollectionSelCanPerformEditOperation                 = objc.RegisterName("canPerformEditOperation:")
 	_pHCollectionSelFetchCollectionsInCollectionListOptions = objc.RegisterName("fetchCollectionsInCollectionList:options:")
 	_pHCollectionSelFetchTopLevelUserCollectionsWithOptions = objc.RegisterName("fetchTopLevelUserCollectionsWithOptions:")
-	_pHCollectionSelCanContainAssets = objc.RegisterName("canContainAssets")
-	_pHCollectionSelCanContainCollections = objc.RegisterName("canContainCollections")
-	_pHCollectionSelLocalizedTitle = objc.RegisterName("localizedTitle")
+	_pHCollectionSelCanContainAssets                        = objc.RegisterName("canContainAssets")
+	_pHCollectionSelCanContainCollections                   = objc.RegisterName("canContainCollections")
+	_pHCollectionSelLocalizedTitle                          = objc.RegisterName("localizedTitle")
 )
 
 func PHCollectionFromID(id objc.ID) *PHCollection {
@@ -42,13 +42,17 @@ func (o *PHCollection) CanPerformEditOperation(anOperation PHCollectionEditOpera
 
 func PHCollectionFetchCollectionsInCollectionListOptions(collectionList *PHCollectionList, options *PHFetchOptions) *PHFetchResult[*PHCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollection), _pHCollectionSelFetchCollectionsInCollectionListOptions, collectionList.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHCollection](_ret)
 }
 
 func PHCollectionFetchTopLevelUserCollectionsWithOptions(options *PHFetchOptions) *PHFetchResult[*PHCollection] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollection), _pHCollectionSelFetchTopLevelUserCollectionsWithOptions, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHCollection](_ret)
 }
 
@@ -64,7 +68,8 @@ func (o *PHCollection) CanContainCollections() bool {
 
 func (o *PHCollection) LocalizedTitle() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionSelLocalizedTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

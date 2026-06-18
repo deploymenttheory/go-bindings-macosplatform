@@ -99,4 +99,3 @@ type NNStateNodeable interface {
 }
 
 var _ NNStateNodeable = (*NNStateNode)(nil)
-

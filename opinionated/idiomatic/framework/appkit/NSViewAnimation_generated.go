@@ -45,7 +45,9 @@ func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*fo
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[objc.ID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -97,7 +99,9 @@ func (x *ViewAnimation) WithProgressMarks(items ...*foundation.NSNumber) *ViewAn
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -134,4 +138,3 @@ type ViewAnimationable interface {
 }
 
 var _ ViewAnimationable = (*ViewAnimation)(nil)
-

@@ -57,7 +57,9 @@ func (x *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
 	return &VolumeIdentifier{inner: _r}
 }
 
-func (x *ContainerIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return &x.inner.FSEntityIdentifier }
+func (x *ContainerIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier {
+	return &x.inner.FSEntityIdentifier
+}
 
 // ContainerIdentifierable is the interface implemented by [ContainerIdentifier], for mocking and DI.
 type ContainerIdentifierable interface {
@@ -68,4 +70,3 @@ type ContainerIdentifierable interface {
 }
 
 var _ ContainerIdentifierable = (*ContainerIdentifier)(nil)
-

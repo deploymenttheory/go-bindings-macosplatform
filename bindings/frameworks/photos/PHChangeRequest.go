@@ -26,4 +26,3 @@ func PHChangeRequestFromID(id objc.ID) *PHChangeRequest {
 	purego.Track(o)
 	return o
 }
-

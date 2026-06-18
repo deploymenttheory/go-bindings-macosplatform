@@ -23,4 +23,3 @@ func NameForLineStyle(style raw.PDFLineStyle) string {
 	}
 	return purego.GoString(_r.Ptr())
 }
-

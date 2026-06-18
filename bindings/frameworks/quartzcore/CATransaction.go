@@ -16,22 +16,22 @@ type CATransaction struct {
 }
 
 var (
-	_clsCATransaction = _objcClass("CATransaction")
-	_cATransactionSelBegin = objc.RegisterName("begin")
-	_cATransactionSelCommit = objc.RegisterName("commit")
-	_cATransactionSelFlush = objc.RegisterName("flush")
-	_cATransactionSelLock = objc.RegisterName("lock")
-	_cATransactionSelUnlock = objc.RegisterName("unlock")
-	_cATransactionSelAnimationDuration = objc.RegisterName("animationDuration")
-	_cATransactionSelSetAnimationDuration = objc.RegisterName("setAnimationDuration:")
-	_cATransactionSelAnimationTimingFunction = objc.RegisterName("animationTimingFunction")
+	_clsCATransaction                           = _objcClass("CATransaction")
+	_cATransactionSelBegin                      = objc.RegisterName("begin")
+	_cATransactionSelCommit                     = objc.RegisterName("commit")
+	_cATransactionSelFlush                      = objc.RegisterName("flush")
+	_cATransactionSelLock                       = objc.RegisterName("lock")
+	_cATransactionSelUnlock                     = objc.RegisterName("unlock")
+	_cATransactionSelAnimationDuration          = objc.RegisterName("animationDuration")
+	_cATransactionSelSetAnimationDuration       = objc.RegisterName("setAnimationDuration:")
+	_cATransactionSelAnimationTimingFunction    = objc.RegisterName("animationTimingFunction")
 	_cATransactionSelSetAnimationTimingFunction = objc.RegisterName("setAnimationTimingFunction:")
-	_cATransactionSelDisableActions = objc.RegisterName("disableActions")
-	_cATransactionSelSetDisableActions = objc.RegisterName("setDisableActions:")
-	_cATransactionSelCompletionBlock = objc.RegisterName("completionBlock")
-	_cATransactionSelSetCompletionBlock = objc.RegisterName("setCompletionBlock:")
-	_cATransactionSelValueForKey = objc.RegisterName("valueForKey:")
-	_cATransactionSelSetValueForKey = objc.RegisterName("setValue:forKey:")
+	_cATransactionSelDisableActions             = objc.RegisterName("disableActions")
+	_cATransactionSelSetDisableActions          = objc.RegisterName("setDisableActions:")
+	_cATransactionSelCompletionBlock            = objc.RegisterName("completionBlock")
+	_cATransactionSelSetCompletionBlock         = objc.RegisterName("setCompletionBlock:")
+	_cATransactionSelValueForKey                = objc.RegisterName("valueForKey:")
+	_cATransactionSelSetValueForKey             = objc.RegisterName("setValue:forKey:")
 )
 
 func CATransactionFromID(id objc.ID) *CATransaction {
@@ -75,7 +75,9 @@ func CATransactionSetAnimationDuration(dur float64) {
 
 func CATransactionAnimationTimingFunction() *CAMediaTimingFunction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCATransaction), _cATransactionSelAnimationTimingFunction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CAMediaTimingFunctionFromID(_ret)
 }
 
@@ -116,4 +118,3 @@ func CATransactionValueForKey(key *foundation.NSString) objc.ID {
 func CATransactionSetValueForKey(anObject objc.ID, key *foundation.NSString) {
 	objc.ID(_clsCATransaction).Send(_cATransactionSelSetValueForKey, anObject, key.Ptr())
 }
-

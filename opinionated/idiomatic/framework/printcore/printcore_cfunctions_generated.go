@@ -578,4 +578,3 @@ func PMSetScale(pageFormat unsafe.Pointer, scale float64) int {
 func PMWorkflowSubmitPDFWithSettings(workflowItem unsafe.Pointer, settings unsafe.Pointer, pdfFile unsafe.Pointer) int {
 	return raw.PMWorkflowSubmitPDFWithSettings(workflowItem, settings, pdfFile)
 }
-

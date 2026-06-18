@@ -16,7 +16,9 @@ type GenerateImageFeaturePrintRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNGenerateImageFeaturePrintRequest].
-func (x *GenerateImageFeaturePrintRequest) Unwrap() *raw.VNGenerateImageFeaturePrintRequest { return x.inner }
+func (x *GenerateImageFeaturePrintRequest) Unwrap() *raw.VNGenerateImageFeaturePrintRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -76,9 +78,13 @@ func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropA
 	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
 }
 
-func (x *GenerateImageFeaturePrintRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *GenerateImageFeaturePrintRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // GenerateImageFeaturePrintRequestable is the interface implemented by [GenerateImageFeaturePrintRequest], for mocking and DI.
 type GenerateImageFeaturePrintRequestable interface {
@@ -93,4 +99,3 @@ type GenerateImageFeaturePrintRequestable interface {
 }
 
 var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)
-

@@ -74,7 +74,9 @@ func (x *AudioUnitEQ) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inn
 
 func (x *AudioUnitEQ) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
 
-func (x *AudioUnitEQ) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitEQ) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitEQable is the interface implemented by [AudioUnitEQ], for mocking and DI.
 type AudioUnitEQable interface {
@@ -87,4 +89,3 @@ type AudioUnitEQable interface {
 }
 
 var _ AudioUnitEQable = (*AudioUnitEQ)(nil)
-

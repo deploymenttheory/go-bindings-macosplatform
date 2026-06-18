@@ -21,20 +21,20 @@ type CARenderer struct {
 }
 
 var (
-	_clsCARenderer = _objcClass("CARenderer")
+	_clsCARenderer                              = _objcClass("CARenderer")
 	_cARendererSelRendererWithCGLContextOptions = objc.RegisterName("rendererWithCGLContext:options:")
 	_cARendererSelRendererWithMTLTextureOptions = objc.RegisterName("rendererWithMTLTexture:options:")
-	_cARendererSelBeginFrameAtTimeTimeStamp = objc.RegisterName("beginFrameAtTime:timeStamp:")
-	_cARendererSelUpdateBounds = objc.RegisterName("updateBounds")
-	_cARendererSelAddUpdateRect = objc.RegisterName("addUpdateRect:")
-	_cARendererSelRender = objc.RegisterName("render")
-	_cARendererSelNextFrameTime = objc.RegisterName("nextFrameTime")
-	_cARendererSelEndFrame = objc.RegisterName("endFrame")
-	_cARendererSelSetDestination = objc.RegisterName("setDestination:")
-	_cARendererSelLayer = objc.RegisterName("layer")
-	_cARendererSelSetLayer = objc.RegisterName("setLayer:")
-	_cARendererSelBounds = objc.RegisterName("bounds")
-	_cARendererSelSetBounds = objc.RegisterName("setBounds:")
+	_cARendererSelBeginFrameAtTimeTimeStamp     = objc.RegisterName("beginFrameAtTime:timeStamp:")
+	_cARendererSelUpdateBounds                  = objc.RegisterName("updateBounds")
+	_cARendererSelAddUpdateRect                 = objc.RegisterName("addUpdateRect:")
+	_cARendererSelRender                        = objc.RegisterName("render")
+	_cARendererSelNextFrameTime                 = objc.RegisterName("nextFrameTime")
+	_cARendererSelEndFrame                      = objc.RegisterName("endFrame")
+	_cARendererSelSetDestination                = objc.RegisterName("setDestination:")
+	_cARendererSelLayer                         = objc.RegisterName("layer")
+	_cARendererSelSetLayer                      = objc.RegisterName("setLayer:")
+	_cARendererSelBounds                        = objc.RegisterName("bounds")
+	_cARendererSelSetBounds                     = objc.RegisterName("setBounds:")
 )
 
 func CARendererFromID(id objc.ID) *CARenderer {
@@ -49,13 +49,17 @@ func CARendererFromID(id objc.ID) *CARenderer {
 
 func CARendererRendererWithCGLContextOptions(ctx unsafe.Pointer, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CARenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithCGLContextOptions, ctx, dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CARendererFromID(_ret)
 }
 
 func CARendererRendererWithMTLTextureOptions(tex metal.MTLTexture, dict *foundation.NSDictionary[objc.ID, objc.ID]) *CARenderer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCARenderer), _cARendererSelRendererWithMTLTextureOptions, tex, dict)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CARendererFromID(_ret)
 }
 
@@ -91,7 +95,9 @@ func (o *CARenderer) SetDestination(tex metal.MTLTexture) {
 
 func (o *CARenderer) Layer() *CALayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cARendererSelLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CALayerFromID(_ret)
 }
 
@@ -107,4 +113,3 @@ func (o *CARenderer) Bounds() corefoundation.CGRect {
 func (o *CARenderer) SetBounds(bounds corefoundation.CGRect) {
 	o.Ptr().Send(_cARendererSelSetBounds, bounds)
 }
-

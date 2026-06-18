@@ -236,4 +236,3 @@ type ShareablePassMetadataable interface {
 }
 
 var _ ShareablePassMetadataable = (*ShareablePassMetadata)(nil)
-

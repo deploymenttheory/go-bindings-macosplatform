@@ -17,17 +17,17 @@ type MDLAnimatedQuaternionArray struct {
 }
 
 var (
-	_clsMDLAnimatedQuaternionArray = _objcClass("MDLAnimatedQuaternionArray")
-	_mDLAnimatedQuaternionArraySelInitWithElementCount = objc.RegisterName("initWithElementCount:")
-	_mDLAnimatedQuaternionArraySelSetFloatQuaternionArrayCountAtTime = objc.RegisterName("setFloatQuaternionArray:count:atTime:")
-	_mDLAnimatedQuaternionArraySelSetDoubleQuaternionArrayCountAtTime = objc.RegisterName("setDoubleQuaternionArray:count:atTime:")
-	_mDLAnimatedQuaternionArraySelGetFloatQuaternionArrayMaxCountAtTime = objc.RegisterName("getFloatQuaternionArray:maxCount:atTime:")
-	_mDLAnimatedQuaternionArraySelGetDoubleQuaternionArrayMaxCountAtTime = objc.RegisterName("getDoubleQuaternionArray:maxCount:atTime:")
-	_mDLAnimatedQuaternionArraySelResetWithFloatQuaternionArrayCountAtTimesCount = objc.RegisterName("resetWithFloatQuaternionArray:count:atTimes:count:")
+	_clsMDLAnimatedQuaternionArray                                                = _objcClass("MDLAnimatedQuaternionArray")
+	_mDLAnimatedQuaternionArraySelInitWithElementCount                            = objc.RegisterName("initWithElementCount:")
+	_mDLAnimatedQuaternionArraySelSetFloatQuaternionArrayCountAtTime              = objc.RegisterName("setFloatQuaternionArray:count:atTime:")
+	_mDLAnimatedQuaternionArraySelSetDoubleQuaternionArrayCountAtTime             = objc.RegisterName("setDoubleQuaternionArray:count:atTime:")
+	_mDLAnimatedQuaternionArraySelGetFloatQuaternionArrayMaxCountAtTime           = objc.RegisterName("getFloatQuaternionArray:maxCount:atTime:")
+	_mDLAnimatedQuaternionArraySelGetDoubleQuaternionArrayMaxCountAtTime          = objc.RegisterName("getDoubleQuaternionArray:maxCount:atTime:")
+	_mDLAnimatedQuaternionArraySelResetWithFloatQuaternionArrayCountAtTimesCount  = objc.RegisterName("resetWithFloatQuaternionArray:count:atTimes:count:")
 	_mDLAnimatedQuaternionArraySelResetWithDoubleQuaternionArrayCountAtTimesCount = objc.RegisterName("resetWithDoubleQuaternionArray:count:atTimes:count:")
-	_mDLAnimatedQuaternionArraySelGetFloatQuaternionArrayMaxCount = objc.RegisterName("getFloatQuaternionArray:maxCount:")
-	_mDLAnimatedQuaternionArraySelGetDoubleQuaternionArrayMaxCount = objc.RegisterName("getDoubleQuaternionArray:maxCount:")
-	_mDLAnimatedQuaternionArraySelElementCount = objc.RegisterName("elementCount")
+	_mDLAnimatedQuaternionArraySelGetFloatQuaternionArrayMaxCount                 = objc.RegisterName("getFloatQuaternionArray:maxCount:")
+	_mDLAnimatedQuaternionArraySelGetDoubleQuaternionArrayMaxCount                = objc.RegisterName("getDoubleQuaternionArray:maxCount:")
+	_mDLAnimatedQuaternionArraySelElementCount                                    = objc.RegisterName("elementCount")
 )
 
 func MDLAnimatedQuaternionArrayFromID(id objc.ID) *MDLAnimatedQuaternionArray {
@@ -85,4 +85,3 @@ func (o *MDLAnimatedQuaternionArray) ElementCount() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mDLAnimatedQuaternionArraySelElementCount)
 	return _ret
 }
-

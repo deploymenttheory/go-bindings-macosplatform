@@ -16,7 +16,9 @@ type DelegatingPlaybackCoordinatorPlaybackControlCommand struct {
 }
 
 // Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand].
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return x.inner }
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentIte
 	return purego.GoString(_r.Ptr())
 }
 
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return x.inner }
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
+	return x.inner
+}
 
 // DelegatingPlaybackCoordinatorPlaybackControlCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlaybackControlCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
@@ -64,4 +68,3 @@ type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
 }
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandable = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)
-

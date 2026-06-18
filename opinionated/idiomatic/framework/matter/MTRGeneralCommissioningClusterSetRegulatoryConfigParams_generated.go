@@ -17,7 +17,9 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams].
-func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams { return x.inner }
+func (x *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Unwrap() *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -142,4 +144,3 @@ type MTRGeneralCommissioningClusterSetRegulatoryConfigParamsable interface {
 }
 
 var _ MTRGeneralCommissioningClusterSetRegulatoryConfigParamsable = (*MTRGeneralCommissioningClusterSetRegulatoryConfigParams)(nil)
-

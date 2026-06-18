@@ -18,15 +18,15 @@ type CMPedometerData struct {
 }
 
 var (
-	_clsCMPedometerData = _objcClass("CMPedometerData")
-	_cMPedometerDataSelStartDate = objc.RegisterName("startDate")
-	_cMPedometerDataSelEndDate = objc.RegisterName("endDate")
-	_cMPedometerDataSelNumberOfSteps = objc.RegisterName("numberOfSteps")
-	_cMPedometerDataSelDistance = objc.RegisterName("distance")
-	_cMPedometerDataSelFloorsAscended = objc.RegisterName("floorsAscended")
-	_cMPedometerDataSelFloorsDescended = objc.RegisterName("floorsDescended")
-	_cMPedometerDataSelCurrentPace = objc.RegisterName("currentPace")
-	_cMPedometerDataSelCurrentCadence = objc.RegisterName("currentCadence")
+	_clsCMPedometerData                  = _objcClass("CMPedometerData")
+	_cMPedometerDataSelStartDate         = objc.RegisterName("startDate")
+	_cMPedometerDataSelEndDate           = objc.RegisterName("endDate")
+	_cMPedometerDataSelNumberOfSteps     = objc.RegisterName("numberOfSteps")
+	_cMPedometerDataSelDistance          = objc.RegisterName("distance")
+	_cMPedometerDataSelFloorsAscended    = objc.RegisterName("floorsAscended")
+	_cMPedometerDataSelFloorsDescended   = objc.RegisterName("floorsDescended")
+	_cMPedometerDataSelCurrentPace       = objc.RegisterName("currentPace")
+	_cMPedometerDataSelCurrentCadence    = objc.RegisterName("currentCadence")
 	_cMPedometerDataSelAverageActivePace = objc.RegisterName("averageActivePace")
 )
 
@@ -42,37 +42,49 @@ func CMPedometerDataFromID(id objc.ID) *CMPedometerData {
 
 func (o *CMPedometerData) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *CMPedometerData) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *CMPedometerData) NumberOfSteps() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelNumberOfSteps)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CMPedometerData) Distance() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelDistance)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CMPedometerData) FloorsAscended() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelFloorsAscended)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *CMPedometerData) FloorsDescended() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerDataSelFloorsDescended)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -90,4 +102,3 @@ func (o *CMPedometerData) AverageActivePace() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _cMPedometerDataSelAverageActivePace)
 	return _ret
 }
-

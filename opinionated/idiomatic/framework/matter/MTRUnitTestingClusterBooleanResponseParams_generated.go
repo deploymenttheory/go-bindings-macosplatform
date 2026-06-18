@@ -18,7 +18,9 @@ type MTRUnitTestingClusterBooleanResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterBooleanResponseParams].
-func (x *MTRUnitTestingClusterBooleanResponseParams) Unwrap() *raw.MTRUnitTestingClusterBooleanResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterBooleanResponseParams) Unwrap() *raw.MTRUnitTestingClusterBooleanResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -75,7 +77,9 @@ func (x *MTRUnitTestingClusterBooleanResponseParams) SetTimedInvokeTimeoutMs(tim
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 }
 
-func (x *MTRUnitTestingClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterBooleanResponseParamsable is the interface implemented by [MTRUnitTestingClusterBooleanResponseParams], for mocking and DI.
 type MTRUnitTestingClusterBooleanResponseParamsable interface {
@@ -89,4 +93,3 @@ type MTRUnitTestingClusterBooleanResponseParamsable interface {
 }
 
 var _ MTRUnitTestingClusterBooleanResponseParamsable = (*MTRUnitTestingClusterBooleanResponseParams)(nil)
-

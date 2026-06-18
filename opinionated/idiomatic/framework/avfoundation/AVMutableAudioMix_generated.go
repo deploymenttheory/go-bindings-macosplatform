@@ -44,7 +44,9 @@ func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersPr
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asAudioMixInputParameters().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asAudioMixInputParameters().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -68,4 +70,3 @@ type MutableAudioMixable interface {
 }
 
 var _ MutableAudioMixable = (*MutableAudioMix)(nil)
-

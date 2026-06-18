@@ -56,4 +56,3 @@ type MapSnapshotable interface {
 }
 
 var _ MapSnapshotable = (*MapSnapshot)(nil)
-

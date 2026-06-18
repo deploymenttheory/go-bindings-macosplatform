@@ -15,13 +15,13 @@ type NSTextTableBlock struct {
 }
 
 var (
-	_clsNSTextTableBlock = _objcClass("NSTextTableBlock")
+	_clsNSTextTableBlock                                                        = _objcClass("NSTextTableBlock")
 	_nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan = objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:")
-	_nSTextTableBlockSelTable = objc.RegisterName("table")
-	_nSTextTableBlockSelStartingRow = objc.RegisterName("startingRow")
-	_nSTextTableBlockSelRowSpan = objc.RegisterName("rowSpan")
-	_nSTextTableBlockSelStartingColumn = objc.RegisterName("startingColumn")
-	_nSTextTableBlockSelColumnSpan = objc.RegisterName("columnSpan")
+	_nSTextTableBlockSelTable                                                   = objc.RegisterName("table")
+	_nSTextTableBlockSelStartingRow                                             = objc.RegisterName("startingRow")
+	_nSTextTableBlockSelRowSpan                                                 = objc.RegisterName("rowSpan")
+	_nSTextTableBlockSelStartingColumn                                          = objc.RegisterName("startingColumn")
+	_nSTextTableBlockSelColumnSpan                                              = objc.RegisterName("columnSpan")
 )
 
 func NSTextTableBlockFromID(id objc.ID) *NSTextTableBlock {
@@ -36,13 +36,17 @@ func NSTextTableBlockFromID(id objc.ID) *NSTextTableBlock {
 
 func (o *NSTextTableBlock) InitWithTableStartingRowRowSpanStartingColumnColumnSpan(table *NSTextTable, row int, rowSpan int, col int, colSpan int) *NSTextTableBlock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelInitWithTableStartingRowRowSpanStartingColumnColumnSpan, table.Ptr(), row, rowSpan, col, colSpan)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextTableBlockFromID(_ret)
 }
 
 func (o *NSTextTableBlock) Table() *NSTextTable {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextTableBlockSelTable)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextTableFromID(_ret)
 }
 
@@ -65,4 +69,3 @@ func (o *NSTextTableBlock) ColumnSpan() int {
 	_ret := objc.Send[int](o.Ptr(), _nSTextTableBlockSelColumnSpan)
 	return _ret
 }
-

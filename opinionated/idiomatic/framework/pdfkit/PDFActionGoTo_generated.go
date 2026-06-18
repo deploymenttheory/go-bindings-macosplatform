@@ -67,4 +67,3 @@ type ActionGoToable interface {
 }
 
 var _ ActionGoToable = (*ActionGoTo)(nil)
-

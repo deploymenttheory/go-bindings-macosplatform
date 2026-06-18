@@ -16,9 +16,9 @@ type NEEthernetTunnelNetworkSettings struct {
 }
 
 var (
-	_clsNEEthernetTunnelNetworkSettings = _objcClass("NEEthernetTunnelNetworkSettings")
+	_clsNEEthernetTunnelNetworkSettings                                              = _objcClass("NEEthernetTunnelNetworkSettings")
 	_nEEthernetTunnelNetworkSettingsSelInitWithTunnelRemoteAddressEthernetAddressMtu = objc.RegisterName("initWithTunnelRemoteAddress:ethernetAddress:mtu:")
-	_nEEthernetTunnelNetworkSettingsSelEthernetAddress = objc.RegisterName("ethernetAddress")
+	_nEEthernetTunnelNetworkSettingsSelEthernetAddress                               = objc.RegisterName("ethernetAddress")
 )
 
 func NEEthernetTunnelNetworkSettingsFromID(id objc.ID) *NEEthernetTunnelNetworkSettings {
@@ -34,13 +34,16 @@ func NEEthernetTunnelNetworkSettingsFromID(id objc.ID) *NEEthernetTunnelNetworkS
 // @method initWithTunnelRemoteAddress: @discussion This function initializes a newly-allocated NEEthernetTunnelNetworkSettings object with a given tunnel remote address and MAC address. @param address The address of the remote endpoint that is providing the tunnel service. @param ethernetAddress The ethernet address to be assigned to the tunnel interface. This string should be in the format "xx:xx:xx:xx:xx:xx", where each xx is a hexidecimal number between 0 and ff. @param mtu The MTU (Maxium Transmission Unit) in bytes to be assigned to the tunnel interface.
 func (o *NEEthernetTunnelNetworkSettings) InitWithTunnelRemoteAddressEthernetAddressMtu(address *foundation.NSString, ethernetAddress *foundation.NSString, mtu int) *NEEthernetTunnelNetworkSettings {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEEthernetTunnelNetworkSettingsSelInitWithTunnelRemoteAddressEthernetAddressMtu, address.Ptr(), ethernetAddress.Ptr(), mtu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NEEthernetTunnelNetworkSettingsFromID(_ret)
 }
 
 func (o *NEEthernetTunnelNetworkSettings) EthernetAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nEEthernetTunnelNetworkSettingsSelEthernetAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -17,12 +17,12 @@ type GLKEffectPropertyTransform struct {
 }
 
 var (
-	_clsGLKEffectPropertyTransform = _objcClass("GLKEffectPropertyTransform")
-	_gLKEffectPropertyTransformSelModelviewMatrix = objc.RegisterName("modelviewMatrix")
-	_gLKEffectPropertyTransformSelSetModelviewMatrix = objc.RegisterName("setModelviewMatrix:")
-	_gLKEffectPropertyTransformSelProjectionMatrix = objc.RegisterName("projectionMatrix")
+	_clsGLKEffectPropertyTransform                    = _objcClass("GLKEffectPropertyTransform")
+	_gLKEffectPropertyTransformSelModelviewMatrix     = objc.RegisterName("modelviewMatrix")
+	_gLKEffectPropertyTransformSelSetModelviewMatrix  = objc.RegisterName("setModelviewMatrix:")
+	_gLKEffectPropertyTransformSelProjectionMatrix    = objc.RegisterName("projectionMatrix")
 	_gLKEffectPropertyTransformSelSetProjectionMatrix = objc.RegisterName("setProjectionMatrix:")
-	_gLKEffectPropertyTransformSelNormalMatrix = objc.RegisterName("normalMatrix")
+	_gLKEffectPropertyTransformSelNormalMatrix        = objc.RegisterName("normalMatrix")
 )
 
 func GLKEffectPropertyTransformFromID(id objc.ID) *GLKEffectPropertyTransform {
@@ -57,4 +57,3 @@ func (o *GLKEffectPropertyTransform) NormalMatrix() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _gLKEffectPropertyTransformSelNormalMatrix)
 	return _ret
 }
-

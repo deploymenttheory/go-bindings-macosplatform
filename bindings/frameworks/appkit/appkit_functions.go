@@ -13,128 +13,130 @@ import (
 )
 
 var (
-	_fnNSAccessibilityActionDescription func(objc.ID) objc.ID
-	_fnNSAccessibilityFrameInView func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
-	_fnNSAccessibilityPointInView func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
-	_fnNSAccessibilityPostNotification func(objc.ID, objc.ID)
+	_fnNSAccessibilityActionDescription            func(objc.ID) objc.ID
+	_fnNSAccessibilityFrameInView                  func(objc.ID, corefoundation.CGRect) corefoundation.CGRect
+	_fnNSAccessibilityPointInView                  func(objc.ID, corefoundation.CGPoint) corefoundation.CGPoint
+	_fnNSAccessibilityPostNotification             func(objc.ID, objc.ID)
 	_fnNSAccessibilityPostNotificationWithUserInfo func(objc.ID, objc.ID, *foundation.NSDictionary[*foundation.NSString, objc.ID])
-// Deprecated: Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.
-	_fnNSAccessibilityRaiseBadArgumentException func(objc.ID, objc.ID, objc.ID)
-	_fnNSAccessibilityRoleDescription func(objc.ID, objc.ID) objc.ID
-	_fnNSAccessibilityRoleDescriptionForUIElement func(objc.ID) objc.ID
+	// Deprecated: Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.
+	_fnNSAccessibilityRaiseBadArgumentException     func(objc.ID, objc.ID, objc.ID)
+	_fnNSAccessibilityRoleDescription               func(objc.ID, objc.ID) objc.ID
+	_fnNSAccessibilityRoleDescriptionForUIElement   func(objc.ID) objc.ID
 	_fnNSAccessibilitySetMayContainProtectedContent func(bool) bool
-	_fnNSAccessibilityUnignoredAncestor func(objc.ID) objc.ID
-	_fnNSAccessibilityUnignoredChildren func(*foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
+	_fnNSAccessibilityUnignoredAncestor             func(objc.ID) objc.ID
+	_fnNSAccessibilityUnignoredChildren             func(*foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
 	_fnNSAccessibilityUnignoredChildrenForOnlyChild func(objc.ID) *foundation.NSArray[objc.ID]
-	_fnNSAccessibilityUnignoredDescendant func(objc.ID) objc.ID
+	_fnNSAccessibilityUnignoredDescendant           func(objc.ID) objc.ID
 	// @c NSApplicationLoad should be called when loading a Cocoa bundle in a Carbon app in order to initialize @c NSApplication and other Cocoa objects.  Redundant calls are ignored.
 	_fnNSApplicationLoad func() bool
 	// An Application's startup function.
-	_fnNSApplicationMain func(int, string) int
+	_fnNSApplicationMain       func(int, string) int
 	_fnNSAvailableWindowDepths func() *NSWindowDepth
-// Deprecated: since macOS 10.0.
+	// Deprecated: since macOS 10.0.
 	_fnNSBeep func()
-// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert beginSheetModalForWindow:completionHandler:] instead
+	// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert beginSheetModalForWindow:completionHandler:] instead
 	_fnNSBeginInformationalAlertSheet func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.SEL, objc.SEL, unsafe.Pointer, objc.ID)
-	_fnNSBestDepth func(objc.ID, int, int, bool, *bool) NSWindowDepth
-	_fnNSBitsPerPixelFromDepth func(NSWindowDepth) int
-	_fnNSBitsPerSampleFromDepth func(NSWindowDepth) int
-	_fnNSColorSpaceFromDepth func(NSWindowDepth) objc.ID
-// Deprecated: since macOS 10.13.
+	_fnNSBestDepth                    func(objc.ID, int, int, bool, *bool) NSWindowDepth
+	_fnNSBitsPerPixelFromDepth        func(NSWindowDepth) int
+	_fnNSBitsPerSampleFromDepth       func(NSWindowDepth) int
+	_fnNSColorSpaceFromDepth          func(NSWindowDepth) objc.ID
+	// Deprecated: since macOS 10.13.
 	_fnNSConvertGlyphsToPackedGlyphs func(*uint, int, NSMultibyteGlyphPacking, string) int
-// Deprecated: since macOS 10.10.
+	// Deprecated: since macOS 10.10.
 	_fnNSCopyBits func(int, corefoundation.CGRect, corefoundation.CGPoint)
-// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
+	// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
 	_fnNSCountWindows func(*int64)
-// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
-	_fnNSCountWindowsForContext func(int, *int64)
+	// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
+	_fnNSCountWindowsForContext       func(int, *int64)
 	_fnNSCreateFileContentsPboardType func(objc.ID) objc.ID
-	_fnNSCreateFilenamePboardType func(objc.ID) objc.ID
-	_fnNSDirectionalEdgeInsetsMake func(float64, float64, float64, float64) NSDirectionalEdgeInsets
-// Deprecated: As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSDisableScreenUpdates.
+	_fnNSCreateFilenamePboardType     func(objc.ID) objc.ID
+	_fnNSDirectionalEdgeInsetsMake    func(float64, float64, float64, float64) NSDirectionalEdgeInsets
+	// Deprecated: As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSDisableScreenUpdates.
 	_fnNSDisableScreenUpdates func()
-	_fnNSDottedFrameRect func(corefoundation.CGRect)
-// Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
+	_fnNSDottedFrameRect      func(corefoundation.CGRect)
+	// Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
 	_fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, unsafe.Pointer)
 	_fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
-// Deprecated: Doesn't return anything useful since 10.0
+	// Deprecated: Doesn't return anything useful since 10.0
 	_fnNSDrawColorTiledRects func(corefoundation.CGRect, corefoundation.CGRect, *foundation.NSRectEdge, objc.ID, int) corefoundation.CGRect
-// Deprecated: Doesn't return anything useful since 10.0
+	// Deprecated: Doesn't return anything useful since 10.0
 	_fnNSDrawDarkBezel func(corefoundation.CGRect, corefoundation.CGRect)
 	_fnNSDrawGrayBezel func(corefoundation.CGRect, corefoundation.CGRect)
-	_fnNSDrawGroove func(corefoundation.CGRect, corefoundation.CGRect)
-// Deprecated: Doesn't return anything useful since 10.0
-	_fnNSDrawLightBezel func(corefoundation.CGRect, corefoundation.CGRect)
-	_fnNSDrawNinePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, NSCompositingOperation, float64, bool)
-	_fnNSDrawThreePartImage func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, bool, NSCompositingOperation, float64, bool)
-	_fnNSDrawTiledRects func(corefoundation.CGRect, corefoundation.CGRect, *foundation.NSRectEdge, *float64, int) corefoundation.CGRect
-	_fnNSDrawWhiteBezel func(corefoundation.CGRect, corefoundation.CGRect)
+	_fnNSDrawGroove    func(corefoundation.CGRect, corefoundation.CGRect)
+	// Deprecated: Doesn't return anything useful since 10.0
+	_fnNSDrawLightBezel       func(corefoundation.CGRect, corefoundation.CGRect)
+	_fnNSDrawNinePartImage    func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, NSCompositingOperation, float64, bool)
+	_fnNSDrawThreePartImage   func(corefoundation.CGRect, objc.ID, objc.ID, objc.ID, bool, NSCompositingOperation, float64, bool)
+	_fnNSDrawTiledRects       func(corefoundation.CGRect, corefoundation.CGRect, *foundation.NSRectEdge, *float64, int) corefoundation.CGRect
+	_fnNSDrawWhiteBezel       func(corefoundation.CGRect, corefoundation.CGRect)
 	_fnNSDrawWindowBackground func(corefoundation.CGRect)
-// Deprecated: As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSEnableScreenUpdates.
+	// Deprecated: As of 10.11 it is not generally necessary to take explicit action to achieve visual atomicity. +[NSAnimationContext runAnimationGroup:] and other similar methods can be used when a stronger than normal need for visual atomicity is required. The NSAnimationContext methods do not suffer from the same performance problems as NSEnableScreenUpdates.
 	_fnNSEnableScreenUpdates func()
-	_fnNSEraseRect func(corefoundation.CGRect)
-// Deprecated: since macOS 10.12.
-	_fnNSEventMaskFromType func(NSEventType) NSEventMask
-	_fnNSFrameRect func(corefoundation.CGRect)
-	_fnNSFrameRectWithWidth func(corefoundation.CGRect, float64)
+	_fnNSEraseRect           func(corefoundation.CGRect)
+	// Deprecated: since macOS 10.12.
+	_fnNSEventMaskFromType                func(NSEventType) NSEventMask
+	_fnNSFrameRect                        func(corefoundation.CGRect)
+	_fnNSFrameRectWithWidth               func(corefoundation.CGRect, float64)
 	_fnNSFrameRectWithWidthUsingOperation func(corefoundation.CGRect, float64, NSCompositingOperation)
-	_fnNSGetFileType func(objc.ID) objc.ID
-	_fnNSGetFileTypes func(*foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString]
-// Deprecated: Use NSAlert with a style of NSAlertStyleInformational instead
+	_fnNSGetFileType                      func(objc.ID) objc.ID
+	_fnNSGetFileTypes                     func(*foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString]
+	// Deprecated: Use NSAlert with a style of NSAlertStyleInformational instead
 	_fnNSGetInformationalAlertPanel func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
-// Deprecated: Doesn't return anything useful since 10.0
+	// Deprecated: Doesn't return anything useful since 10.0
 	_fnNSGetWindowServerMemory func(int, *int64, *int64, objc.ID) int
-// Deprecated: since macOS 10.0.
+	// Deprecated: since macOS 10.0.
 	_fnNSHighlightRect func(corefoundation.CGRect)
-// Deprecated: since macOS 10.8.
+	// Deprecated: since macOS 10.8.
 	_fnNSInterfaceStyleForKey func(objc.ID, objc.ID) uint
-// Deprecated: since macOS 11.0.
-	_fnNSIsControllerMarker func(objc.ID) bool
+	// Deprecated: since macOS 11.0.
+	_fnNSIsControllerMarker      func(objc.ID) bool
 	_fnNSNumberOfColorComponents func(objc.ID) int
-	_fnNSOpenGLGetOption func(NSOpenGLGlobalOption, *int32)
-	_fnNSOpenGLGetVersion func(*int32, *int32)
-	_fnNSOpenGLSetOption func(NSOpenGLGlobalOption, int32)
-	_fnNSPerformService func(objc.ID, objc.ID) bool
-	_fnNSPlanarFromDepth func(NSWindowDepth) bool
-// Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
-	_fnNSReadPixel func(corefoundation.CGPoint) objc.ID
-	_fnNSRectClip func(corefoundation.CGRect)
-	_fnNSRectClipList func(*corefoundation.CGRect, int)
-	_fnNSRectFill func(corefoundation.CGRect)
-	_fnNSRectFillList func(*corefoundation.CGRect, int)
-	_fnNSRectFillListUsingOperation func(*corefoundation.CGRect, int, NSCompositingOperation)
-	_fnNSRectFillListWithColors func(*corefoundation.CGRect, unsafe.Pointer, int)
+	_fnNSOpenGLGetOption         func(NSOpenGLGlobalOption, *int32)
+	_fnNSOpenGLGetVersion        func(*int32, *int32)
+	_fnNSOpenGLSetOption         func(NSOpenGLGlobalOption, int32)
+	_fnNSPerformService          func(objc.ID, objc.ID) bool
+	_fnNSPlanarFromDepth         func(NSWindowDepth) bool
+	// Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
+	_fnNSReadPixel                            func(corefoundation.CGPoint) objc.ID
+	_fnNSRectClip                             func(corefoundation.CGRect)
+	_fnNSRectClipList                         func(*corefoundation.CGRect, int)
+	_fnNSRectFill                             func(corefoundation.CGRect)
+	_fnNSRectFillList                         func(*corefoundation.CGRect, int)
+	_fnNSRectFillListUsingOperation           func(*corefoundation.CGRect, int, NSCompositingOperation)
+	_fnNSRectFillListWithColors               func(*corefoundation.CGRect, unsafe.Pointer, int)
 	_fnNSRectFillListWithColorsUsingOperation func(*corefoundation.CGRect, unsafe.Pointer, int, NSCompositingOperation)
-	_fnNSRectFillListWithGrays func(*corefoundation.CGRect, *float64, int)
-	_fnNSRectFillUsingOperation func(corefoundation.CGRect, NSCompositingOperation)
+	_fnNSRectFillListWithGrays                func(*corefoundation.CGRect, *float64, int)
+	_fnNSRectFillUsingOperation               func(corefoundation.CGRect, NSCompositingOperation)
 	// Apps should use -setServicesProvider.
 	_fnNSRegisterServicesProvider func(objc.ID, objc.ID)
-// Deprecated: Use NSAlert instead
+	// Deprecated: Use NSAlert instead
 	_fnNSReleaseAlertPanel func(objc.ID)
-// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert runModal] instead
+	// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert runModal] instead
 	_fnNSRunInformationalAlertPanel func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
-// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert beginSheetModalForWindow:completionHandler:] instead
+	// Deprecated: Use NSAlert with a style of NSAlertStyleInformational, and present it with -[NSAlert beginSheetModalForWindow:completionHandler:] instead
 	_fnNSRunInformationalAlertPanelRelativeToWindow func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
-	_fnNSSetFocusRingStyle func(NSFocusRingPlacement)
+	_fnNSSetFocusRingStyle                          func(NSFocusRingPlacement)
 	// @c NSSetShowsServicesMenuItem() has no effect, and always returns 0.
 	_fnNSSetShowsServicesMenuItem func(objc.ID, bool) int
-// Deprecated: Use +[NSCursor disappearingItemCursor] instead
+	// Deprecated: Use +[NSCursor disappearingItemCursor] instead
 	_fnNSShowAnimationEffect func(NSAnimationEffect, corefoundation.CGPoint, corefoundation.CGSize, objc.ID, objc.SEL, unsafe.Pointer)
 	// @c NSShowsServicesMenuItem() always returns @c YES.
-	_fnNSShowsServicesMenuItem func(objc.ID) bool
-	_fnNSTouchTypeMaskFromType func(NSTouchType) NSTouchTypeMask
+	_fnNSShowsServicesMenuItem      func(objc.ID) bool
+	_fnNSTouchTypeMaskFromType      func(NSTouchType) NSTouchTypeMask
 	_fnNSUnregisterServicesProvider func(objc.ID)
 	// @c NSUpdateDynamicServices() causes the services information for the system to be updated. This will only be necessary if your program adds dynamic services to the system (i.e. services not found in mach-o segments of executables).
 	_fnNSUpdateDynamicServices func()
-// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
+	// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
 	_fnNSWindowList func(int, *int64)
-// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
+	// Deprecated: Use +[NSWindow windowNumbersWithOptions:] instead
 	_fnNSWindowListForContext func(int, int, *int64)
 )
 
 func NSAccessibilityActionDescription(action *foundation.NSString) *foundation.NSString {
 	_ret := _fnNSAccessibilityActionDescription(action.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -161,13 +163,17 @@ func NSAccessibilityRaiseBadArgumentException(element objc.ID, attribute *founda
 
 func NSAccessibilityRoleDescription(role *foundation.NSString, subrole *foundation.NSString) *foundation.NSString {
 	_ret := _fnNSAccessibilityRoleDescription(role.Ptr(), subrole.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSAccessibilityRoleDescriptionForUIElement(element objc.ID) *foundation.NSString {
 	_ret := _fnNSAccessibilityRoleDescriptionForUIElement(element)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -229,7 +235,9 @@ func NSBitsPerSampleFromDepth(depth NSWindowDepth) int {
 
 func NSColorSpaceFromDepth(depth NSWindowDepth) *foundation.NSString {
 	_ret := _fnNSColorSpaceFromDepth(depth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -255,13 +263,17 @@ func NSCountWindowsForContext(context_ int, count *int64) {
 
 func NSCreateFileContentsPboardType(fileType *foundation.NSString) *foundation.NSString {
 	_ret := _fnNSCreateFileContentsPboardType(fileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func NSCreateFilenamePboardType(fileType *foundation.NSString) *foundation.NSString {
 	_ret := _fnNSCreateFilenamePboardType(fileType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -358,7 +370,9 @@ func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth f
 
 func NSGetFileType(pboardType *foundation.NSString) *foundation.NSString {
 	_ret := _fnNSGetFileType(pboardType.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -418,7 +432,9 @@ func NSPlanarFromDepth(depth NSWindowDepth) bool {
 // Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
 func NSReadPixel(passedPoint corefoundation.CGPoint) *NSColor {
 	_ret := _fnNSReadPixel(passedPoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -519,4 +535,3 @@ func NSWindowList(size int, list *int64) {
 func NSWindowListForContext(context_ int, size int, list *int64) {
 	_fnNSWindowListForContext(context_, size, list)
 }
-

@@ -4025,4 +4025,3 @@ func X80tod(x80 unsafe.Pointer) float64 {
 func X80told(x80 unsafe.Pointer, x unsafe.Pointer) {
 	raw.X80told(x80, x)
 }
-

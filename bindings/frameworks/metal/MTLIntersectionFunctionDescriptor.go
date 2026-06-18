@@ -25,4 +25,3 @@ func MTLIntersectionFunctionDescriptorFromID(id objc.ID) *MTLIntersectionFunctio
 	purego.Track(o)
 	return o
 }
-

@@ -17,14 +17,14 @@ type NSPDFImageRep struct {
 }
 
 var (
-	_clsNSPDFImageRep = _objcClass("NSPDFImageRep")
-	_nSPDFImageRepSelImageRepWithData = objc.RegisterName("imageRepWithData:")
-	_nSPDFImageRepSelInitWithData = objc.RegisterName("initWithData:")
+	_clsNSPDFImageRep                  = _objcClass("NSPDFImageRep")
+	_nSPDFImageRepSelImageRepWithData  = objc.RegisterName("imageRepWithData:")
+	_nSPDFImageRepSelInitWithData      = objc.RegisterName("initWithData:")
 	_nSPDFImageRepSelPDFRepresentation = objc.RegisterName("PDFRepresentation")
-	_nSPDFImageRepSelBounds = objc.RegisterName("bounds")
-	_nSPDFImageRepSelCurrentPage = objc.RegisterName("currentPage")
-	_nSPDFImageRepSelSetCurrentPage = objc.RegisterName("setCurrentPage:")
-	_nSPDFImageRepSelPageCount = objc.RegisterName("pageCount")
+	_nSPDFImageRepSelBounds            = objc.RegisterName("bounds")
+	_nSPDFImageRepSelCurrentPage       = objc.RegisterName("currentPage")
+	_nSPDFImageRepSelSetCurrentPage    = objc.RegisterName("setCurrentPage:")
+	_nSPDFImageRepSelPageCount         = objc.RegisterName("pageCount")
 )
 
 func NSPDFImageRepFromID(id objc.ID) *NSPDFImageRep {
@@ -39,19 +39,25 @@ func NSPDFImageRepFromID(id objc.ID) *NSPDFImageRep {
 
 func NSPDFImageRepImageRepWithData(pdfData *foundation.NSData) *NSPDFImageRep {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPDFImageRep), _nSPDFImageRepSelImageRepWithData, pdfData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPDFImageRepFromID(_ret)
 }
 
 func (o *NSPDFImageRep) InitWithData(pdfData *foundation.NSData) *NSPDFImageRep {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFImageRepSelInitWithData, pdfData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPDFImageRepFromID(_ret)
 }
 
 func (o *NSPDFImageRep) PDFRepresentation() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPDFImageRepSelPDFRepresentation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,4 +79,3 @@ func (o *NSPDFImageRep) PageCount() int {
 	_ret := objc.Send[int](o.Ptr(), _nSPDFImageRepSelPageCount)
 	return _ret
 }
-

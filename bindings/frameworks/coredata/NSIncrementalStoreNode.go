@@ -16,11 +16,11 @@ type NSIncrementalStoreNode struct {
 }
 
 var (
-	_clsNSIncrementalStoreNode = _objcClass("NSIncrementalStoreNode")
+	_clsNSIncrementalStoreNode                                  = _objcClass("NSIncrementalStoreNode")
 	_nSIncrementalStoreNodeSelInitWithObjectIDWithValuesVersion = objc.RegisterName("initWithObjectID:withValues:version:")
-	_nSIncrementalStoreNodeSelUpdateWithValuesVersion = objc.RegisterName("updateWithValues:version:")
-	_nSIncrementalStoreNodeSelValueForPropertyDescription = objc.RegisterName("valueForPropertyDescription:")
-	_nSIncrementalStoreNodeSelObjectID = objc.RegisterName("objectID")
+	_nSIncrementalStoreNodeSelUpdateWithValuesVersion           = objc.RegisterName("updateWithValues:version:")
+	_nSIncrementalStoreNodeSelValueForPropertyDescription       = objc.RegisterName("valueForPropertyDescription:")
+	_nSIncrementalStoreNodeSelObjectID                          = objc.RegisterName("objectID")
 )
 
 func NSIncrementalStoreNodeFromID(id objc.ID) *NSIncrementalStoreNode {
@@ -35,7 +35,9 @@ func NSIncrementalStoreNodeFromID(id objc.ID) *NSIncrementalStoreNode {
 
 func (o *NSIncrementalStoreNode) InitWithObjectIDWithValuesVersion(objectID *NSManagedObjectID, values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) *NSIncrementalStoreNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreNodeSelInitWithObjectIDWithValuesVersion, objectID.Ptr(), values, version)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSIncrementalStoreNodeFromID(_ret)
 }
 
@@ -50,7 +52,8 @@ func (o *NSIncrementalStoreNode) ValueForPropertyDescription(prop *NSPropertyDes
 
 func (o *NSIncrementalStoreNode) ObjectID() *NSManagedObjectID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSIncrementalStoreNodeSelObjectID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSManagedObjectIDFromID(_ret)
 }
-

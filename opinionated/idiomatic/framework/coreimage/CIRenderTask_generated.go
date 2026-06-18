@@ -54,4 +54,3 @@ type RenderTaskable interface {
 }
 
 var _ RenderTaskable = (*RenderTask)(nil)
-

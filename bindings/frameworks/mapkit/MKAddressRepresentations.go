@@ -16,13 +16,13 @@ type MKAddressRepresentations struct {
 }
 
 var (
-	_clsMKAddressRepresentations = _objcClass("MKAddressRepresentations")
+	_clsMKAddressRepresentations                                     = _objcClass("MKAddressRepresentations")
 	_mKAddressRepresentationsSelFullAddressIncludingRegionSingleLine = objc.RegisterName("fullAddressIncludingRegion:singleLine:")
-	_mKAddressRepresentationsSelCityWithContextUsingStyle = objc.RegisterName("cityWithContextUsingStyle:")
-	_mKAddressRepresentationsSelCityName = objc.RegisterName("cityName")
-	_mKAddressRepresentationsSelCityWithContext = objc.RegisterName("cityWithContext")
-	_mKAddressRepresentationsSelRegionName = objc.RegisterName("regionName")
-	_mKAddressRepresentationsSelRegionCode = objc.RegisterName("regionCode")
+	_mKAddressRepresentationsSelCityWithContextUsingStyle            = objc.RegisterName("cityWithContextUsingStyle:")
+	_mKAddressRepresentationsSelCityName                             = objc.RegisterName("cityName")
+	_mKAddressRepresentationsSelCityWithContext                      = objc.RegisterName("cityWithContext")
+	_mKAddressRepresentationsSelRegionName                           = objc.RegisterName("regionName")
+	_mKAddressRepresentationsSelRegionCode                           = objc.RegisterName("regionCode")
 )
 
 func MKAddressRepresentationsFromID(id objc.ID) *MKAddressRepresentations {
@@ -37,37 +37,48 @@ func MKAddressRepresentationsFromID(id objc.ID) *MKAddressRepresentations {
 
 func (o *MKAddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelFullAddressIncludingRegionSingleLine, includingRegion, singleLine)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddressRepresentations) CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelCityWithContextUsingStyle, style)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddressRepresentations) CityName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelCityName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddressRepresentations) CityWithContext() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelCityWithContext)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddressRepresentations) RegionName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelRegionName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MKAddressRepresentations) RegionCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKAddressRepresentationsSelRegionCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

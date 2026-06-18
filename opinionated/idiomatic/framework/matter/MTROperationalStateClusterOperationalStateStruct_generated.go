@@ -17,7 +17,9 @@ type MTROperationalStateClusterOperationalStateStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalStateStruct].
-func (x *MTROperationalStateClusterOperationalStateStruct) Unwrap() *raw.MTROperationalStateClusterOperationalStateStruct { return x.inner }
+func (x *MTROperationalStateClusterOperationalStateStruct) Unwrap() *raw.MTROperationalStateClusterOperationalStateStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -85,4 +87,3 @@ type MTROperationalStateClusterOperationalStateStructable interface {
 }
 
 var _ MTROperationalStateClusterOperationalStateStructable = (*MTROperationalStateClusterOperationalStateStruct)(nil)
-

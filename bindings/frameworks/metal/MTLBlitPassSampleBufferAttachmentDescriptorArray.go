@@ -16,8 +16,8 @@ type MTLBlitPassSampleBufferAttachmentDescriptorArray struct {
 }
 
 var (
-	_clsMTLBlitPassSampleBufferAttachmentDescriptorArray = _objcClass("MTLBlitPassSampleBufferAttachmentDescriptorArray")
-	_mTLBlitPassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript = objc.RegisterName("objectAtIndexedSubscript:")
+	_clsMTLBlitPassSampleBufferAttachmentDescriptorArray                            = _objcClass("MTLBlitPassSampleBufferAttachmentDescriptorArray")
+	_mTLBlitPassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript    = objc.RegisterName("objectAtIndexedSubscript:")
 	_mTLBlitPassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript = objc.RegisterName("setObject:atIndexedSubscript:")
 )
 
@@ -33,11 +33,12 @@ func MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *MTLBlit
 
 func (o *MTLBlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTLBlitPassSampleBufferAttachmentDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLBlitPassSampleBufferAttachmentDescriptorArraySelObjectAtIndexedSubscript, attachmentIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTLBlitPassSampleBufferAttachmentDescriptorFromID(_ret)
 }
 
 func (o *MTLBlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
 	o.Ptr().Send(_mTLBlitPassSampleBufferAttachmentDescriptorArraySelSetObjectAtIndexedSubscript, attachment.Ptr(), attachmentIndex)
 }
-

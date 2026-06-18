@@ -21,23 +21,23 @@ type SFAuthorizationPluginView struct {
 }
 
 var (
-	_clsSFAuthorizationPluginView = _objcClass("SFAuthorizationPluginView")
+	_clsSFAuthorizationPluginView                              = _objcClass("SFAuthorizationPluginView")
 	_sFAuthorizationPluginViewSelInitWithCallbacksAndEngineRef = objc.RegisterName("initWithCallbacks:andEngineRef:")
-	_sFAuthorizationPluginViewSelEngineRef = objc.RegisterName("engineRef")
-	_sFAuthorizationPluginViewSelCallbacks = objc.RegisterName("callbacks")
-	_sFAuthorizationPluginViewSelButtonPressed = objc.RegisterName("buttonPressed:")
-	_sFAuthorizationPluginViewSelLastError = objc.RegisterName("lastError")
-	_sFAuthorizationPluginViewSelDidActivate = objc.RegisterName("didActivate")
-	_sFAuthorizationPluginViewSelWillActivateWithUser = objc.RegisterName("willActivateWithUser:")
-	_sFAuthorizationPluginViewSelDidDeactivate = objc.RegisterName("didDeactivate")
-	_sFAuthorizationPluginViewSelFirstKeyView = objc.RegisterName("firstKeyView")
-	_sFAuthorizationPluginViewSelFirstResponder = objc.RegisterName("firstResponder")
-	_sFAuthorizationPluginViewSelLastKeyView = objc.RegisterName("lastKeyView")
-	_sFAuthorizationPluginViewSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sFAuthorizationPluginViewSelViewForType = objc.RegisterName("viewForType:")
-	_sFAuthorizationPluginViewSelDisplayView = objc.RegisterName("displayView")
-	_sFAuthorizationPluginViewSelSetButtonEnabled = objc.RegisterName("setButton:enabled:")
-	_sFAuthorizationPluginViewSelUpdateView = objc.RegisterName("updateView")
+	_sFAuthorizationPluginViewSelEngineRef                     = objc.RegisterName("engineRef")
+	_sFAuthorizationPluginViewSelCallbacks                     = objc.RegisterName("callbacks")
+	_sFAuthorizationPluginViewSelButtonPressed                 = objc.RegisterName("buttonPressed:")
+	_sFAuthorizationPluginViewSelLastError                     = objc.RegisterName("lastError")
+	_sFAuthorizationPluginViewSelDidActivate                   = objc.RegisterName("didActivate")
+	_sFAuthorizationPluginViewSelWillActivateWithUser          = objc.RegisterName("willActivateWithUser:")
+	_sFAuthorizationPluginViewSelDidDeactivate                 = objc.RegisterName("didDeactivate")
+	_sFAuthorizationPluginViewSelFirstKeyView                  = objc.RegisterName("firstKeyView")
+	_sFAuthorizationPluginViewSelFirstResponder                = objc.RegisterName("firstResponder")
+	_sFAuthorizationPluginViewSelLastKeyView                   = objc.RegisterName("lastKeyView")
+	_sFAuthorizationPluginViewSelSetEnabled                    = objc.RegisterName("setEnabled:")
+	_sFAuthorizationPluginViewSelViewForType                   = objc.RegisterName("viewForType:")
+	_sFAuthorizationPluginViewSelDisplayView                   = objc.RegisterName("displayView")
+	_sFAuthorizationPluginViewSelSetButtonEnabled              = objc.RegisterName("setButton:enabled:")
+	_sFAuthorizationPluginViewSelUpdateView                    = objc.RegisterName("updateView")
 )
 
 func SFAuthorizationPluginViewFromID(id objc.ID) *SFAuthorizationPluginView {
@@ -97,21 +97,27 @@ func (o *SFAuthorizationPluginView) DidDeactivate() {
 // @method firstKeyView @abstract When called by the AuthorizationPlugin, the subclass should return the first view in the keyboard loop of the NSView.  The default value returned is nil.
 func (o *SFAuthorizationPluginView) FirstKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelFirstKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
 // @method firstResponder @abstract When called by the AuthorizationPlugin, the subclass should return the view that should get the focus for keyboard events.  The default value returned is nil.
 func (o *SFAuthorizationPluginView) FirstResponder() *appkit.NSResponder {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelFirstResponder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSResponderFromID(_ret)
 }
 
 // @method lastKeyView @abstract When called by the AuthorizationPlugin, the subclass should return the last view in the keyboard loop for the view.  The default value returned is nil.
 func (o *SFAuthorizationPluginView) LastKeyView() *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelLastKeyView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -123,7 +129,9 @@ func (o *SFAuthorizationPluginView) SetEnabled(inEnabled bool) {
 // @method viewForType: @abstract When called by the AuthorizationPlugin, the subclass should return the appropriate NSView for the requested SFViewType.  The NSView and its contents should have the autoresize flags set as appropriate to allow for the view to be resized. @param inType is the type of view being requested by the AuthorizationPlugin. NOTE: Currently a maximum width of 394 points is supported, but Apple reserves the right to change that in the future.  Do not assume that the width of the NSView won't change.
 func (o *SFAuthorizationPluginView) ViewForType(inType SFViewType) *appkit.NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sFAuthorizationPluginViewSelViewForType, inType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSViewFromID(_ret)
 }
 
@@ -141,4 +149,3 @@ func (o *SFAuthorizationPluginView) SetButtonEnabled(inButtonType SFButtonType, 
 func (o *SFAuthorizationPluginView) UpdateView() {
 	o.Ptr().Send(_sFAuthorizationPluginViewSelUpdateView)
 }
-

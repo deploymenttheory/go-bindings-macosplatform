@@ -97,11 +97,17 @@ func (x *NNAdditionGradientNode) WithLabel(label string) *NNAdditionGradientNode
 	return x
 }
 
-func (x *NNAdditionGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
+func (x *NNAdditionGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode {
+	return &x.inner.MPSNNArithmeticGradientNode
+}
 
-func (x *NNAdditionGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
+func (x *NNAdditionGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *NNAdditionGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *NNAdditionGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
+	return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // NNAdditionGradientNodeable is the interface implemented by [NNAdditionGradientNode], for mocking and DI.
 type NNAdditionGradientNodeable interface {
@@ -119,4 +125,3 @@ type NNAdditionGradientNodeable interface {
 }
 
 var _ NNAdditionGradientNodeable = (*NNAdditionGradientNode)(nil)
-

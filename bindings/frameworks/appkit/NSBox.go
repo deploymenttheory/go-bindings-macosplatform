@@ -17,37 +17,37 @@ type NSBox struct {
 }
 
 var (
-	_clsNSBox = _objcClass("NSBox")
-	_nSBoxSelSizeToFit = objc.RegisterName("sizeToFit")
+	_clsNSBox                         = _objcClass("NSBox")
+	_nSBoxSelSizeToFit                = objc.RegisterName("sizeToFit")
 	_nSBoxSelSetFrameFromContentFrame = objc.RegisterName("setFrameFromContentFrame:")
-	_nSBoxSelBoxType = objc.RegisterName("boxType")
-	_nSBoxSelSetBoxType = objc.RegisterName("setBoxType:")
-	_nSBoxSelTitlePosition = objc.RegisterName("titlePosition")
-	_nSBoxSelSetTitlePosition = objc.RegisterName("setTitlePosition:")
-	_nSBoxSelTitle = objc.RegisterName("title")
-	_nSBoxSelSetTitle = objc.RegisterName("setTitle:")
-	_nSBoxSelTitleFont = objc.RegisterName("titleFont")
-	_nSBoxSelSetTitleFont = objc.RegisterName("setTitleFont:")
-	_nSBoxSelBorderRect = objc.RegisterName("borderRect")
-	_nSBoxSelTitleRect = objc.RegisterName("titleRect")
-	_nSBoxSelTitleCell = objc.RegisterName("titleCell")
-	_nSBoxSelContentViewMargins = objc.RegisterName("contentViewMargins")
-	_nSBoxSelSetContentViewMargins = objc.RegisterName("setContentViewMargins:")
-	_nSBoxSelContentView = objc.RegisterName("contentView")
-	_nSBoxSelSetContentView = objc.RegisterName("setContentView:")
-	_nSBoxSelIsTransparent = objc.RegisterName("isTransparent")
-	_nSBoxSelSetTransparent = objc.RegisterName("setTransparent:")
-	_nSBoxSelBorderWidth = objc.RegisterName("borderWidth")
-	_nSBoxSelSetBorderWidth = objc.RegisterName("setBorderWidth:")
-	_nSBoxSelCornerRadius = objc.RegisterName("cornerRadius")
-	_nSBoxSelSetCornerRadius = objc.RegisterName("setCornerRadius:")
-	_nSBoxSelBorderColor = objc.RegisterName("borderColor")
-	_nSBoxSelSetBorderColor = objc.RegisterName("setBorderColor:")
-	_nSBoxSelFillColor = objc.RegisterName("fillColor")
-	_nSBoxSelSetFillColor = objc.RegisterName("setFillColor:")
-	_nSBoxSelSetTitleWithMnemonic = objc.RegisterName("setTitleWithMnemonic:")
-	_nSBoxSelBorderType = objc.RegisterName("borderType")
-	_nSBoxSelSetBorderType = objc.RegisterName("setBorderType:")
+	_nSBoxSelBoxType                  = objc.RegisterName("boxType")
+	_nSBoxSelSetBoxType               = objc.RegisterName("setBoxType:")
+	_nSBoxSelTitlePosition            = objc.RegisterName("titlePosition")
+	_nSBoxSelSetTitlePosition         = objc.RegisterName("setTitlePosition:")
+	_nSBoxSelTitle                    = objc.RegisterName("title")
+	_nSBoxSelSetTitle                 = objc.RegisterName("setTitle:")
+	_nSBoxSelTitleFont                = objc.RegisterName("titleFont")
+	_nSBoxSelSetTitleFont             = objc.RegisterName("setTitleFont:")
+	_nSBoxSelBorderRect               = objc.RegisterName("borderRect")
+	_nSBoxSelTitleRect                = objc.RegisterName("titleRect")
+	_nSBoxSelTitleCell                = objc.RegisterName("titleCell")
+	_nSBoxSelContentViewMargins       = objc.RegisterName("contentViewMargins")
+	_nSBoxSelSetContentViewMargins    = objc.RegisterName("setContentViewMargins:")
+	_nSBoxSelContentView              = objc.RegisterName("contentView")
+	_nSBoxSelSetContentView           = objc.RegisterName("setContentView:")
+	_nSBoxSelIsTransparent            = objc.RegisterName("isTransparent")
+	_nSBoxSelSetTransparent           = objc.RegisterName("setTransparent:")
+	_nSBoxSelBorderWidth              = objc.RegisterName("borderWidth")
+	_nSBoxSelSetBorderWidth           = objc.RegisterName("setBorderWidth:")
+	_nSBoxSelCornerRadius             = objc.RegisterName("cornerRadius")
+	_nSBoxSelSetCornerRadius          = objc.RegisterName("setCornerRadius:")
+	_nSBoxSelBorderColor              = objc.RegisterName("borderColor")
+	_nSBoxSelSetBorderColor           = objc.RegisterName("setBorderColor:")
+	_nSBoxSelFillColor                = objc.RegisterName("fillColor")
+	_nSBoxSelSetFillColor             = objc.RegisterName("setFillColor:")
+	_nSBoxSelSetTitleWithMnemonic     = objc.RegisterName("setTitleWithMnemonic:")
+	_nSBoxSelBorderType               = objc.RegisterName("borderType")
+	_nSBoxSelSetBorderType            = objc.RegisterName("setBorderType:")
 )
 
 func NSBoxFromID(id objc.ID) *NSBox {
@@ -88,7 +88,9 @@ func (o *NSBox) SetTitlePosition(titlePosition NSTitlePosition) {
 
 func (o *NSBox) Title() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -98,7 +100,9 @@ func (o *NSBox) SetTitle(title *foundation.NSString) {
 
 func (o *NSBox) TitleFont() *NSFont {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelTitleFont)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSFontFromID(_ret)
 }
 
@@ -132,7 +136,9 @@ func (o *NSBox) SetContentViewMargins(contentViewMargins corefoundation.CGSize) 
 
 func (o *NSBox) ContentView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelContentView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -169,7 +175,9 @@ func (o *NSBox) SetCornerRadius(cornerRadius float64) {
 
 func (o *NSBox) BorderColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelBorderColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -179,7 +187,9 @@ func (o *NSBox) SetBorderColor(borderColor *NSColor) {
 
 func (o *NSBox) FillColor() *NSColor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSBoxSelFillColor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSColorFromID(_ret)
 }
 
@@ -202,4 +212,3 @@ func (o *NSBox) BorderType() NSBorderType {
 func (o *NSBox) SetBorderType(borderType NSBorderType) {
 	o.Ptr().Send(_nSBoxSelSetBorderType, borderType)
 }
-

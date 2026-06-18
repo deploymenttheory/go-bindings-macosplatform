@@ -18,18 +18,18 @@ type CWWiFiClient struct {
 }
 
 var (
-	_clsCWWiFiClient = _objcClass("CWWiFiClient")
-	_cWWiFiClientSelSharedWiFiClient = objc.RegisterName("sharedWiFiClient")
-	_cWWiFiClientSelInit = objc.RegisterName("init")
-	_cWWiFiClientSelInterface = objc.RegisterName("interface")
-	_cWWiFiClientSelInterfaceNames = objc.RegisterName("interfaceNames")
-	_cWWiFiClientSelInterfaceWithName = objc.RegisterName("interfaceWithName:")
-	_cWWiFiClientSelInterfaces = objc.RegisterName("interfaces")
-	_cWWiFiClientSelStartMonitoringEventWithTypeError = objc.RegisterName("startMonitoringEventWithType:error:")
-	_cWWiFiClientSelStopMonitoringEventWithTypeError = objc.RegisterName("stopMonitoringEventWithType:error:")
+	_clsCWWiFiClient                                      = _objcClass("CWWiFiClient")
+	_cWWiFiClientSelSharedWiFiClient                      = objc.RegisterName("sharedWiFiClient")
+	_cWWiFiClientSelInit                                  = objc.RegisterName("init")
+	_cWWiFiClientSelInterface                             = objc.RegisterName("interface")
+	_cWWiFiClientSelInterfaceNames                        = objc.RegisterName("interfaceNames")
+	_cWWiFiClientSelInterfaceWithName                     = objc.RegisterName("interfaceWithName:")
+	_cWWiFiClientSelInterfaces                            = objc.RegisterName("interfaces")
+	_cWWiFiClientSelStartMonitoringEventWithTypeError     = objc.RegisterName("startMonitoringEventWithType:error:")
+	_cWWiFiClientSelStopMonitoringEventWithTypeError      = objc.RegisterName("stopMonitoringEventWithType:error:")
 	_cWWiFiClientSelStopMonitoringAllEventsAndReturnError = objc.RegisterName("stopMonitoringAllEventsAndReturnError:")
-	_cWWiFiClientSelDelegate = objc.RegisterName("delegate")
-	_cWWiFiClientSelSetDelegate = objc.RegisterName("setDelegate:")
+	_cWWiFiClientSelDelegate                              = objc.RegisterName("delegate")
+	_cWWiFiClientSelSetDelegate                           = objc.RegisterName("setDelegate:")
 )
 
 func CWWiFiClientFromID(id objc.ID) *CWWiFiClient {
@@ -45,21 +45,27 @@ func CWWiFiClientFromID(id objc.ID) *CWWiFiClient {
 // @method @abstract Returns the shared CWWiFiClient instance. There is a single shared instance per process.
 func CWWiFiClientSharedWiFiClient() *CWWiFiClient {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCWWiFiClient), _cWWiFiClientSelSharedWiFiClient)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWWiFiClientFromID(_ret)
 }
 
 // @method @abstract Initializes a CWWiFiClient object.
 func (o *CWWiFiClient) Init() *CWWiFiClient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWWiFiClientFromID(_ret)
 }
 
 // @method @abstract Returns the CWInterface object for the default Wi-Fi interface.
 func (o *CWWiFiClient) Interface() *CWInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWInterfaceFromID(_ret)
 }
 
@@ -78,14 +84,18 @@ func CWWiFiClientInterfaceNames() *foundation.NSArray[*foundation.NSString] {
 // @method @param interfaceName The name of an available Wi-Fi interface. @abstract Get the CWInterface object bound to the Wi-Fi interface with a specific interface name. @discussion Use +[CWWiFiClient interfaceNames] to get a list of available Wi-Fi interface names. Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
 func (o *CWWiFiClient) InterfaceWithName(interfaceName *foundation.NSString) *CWInterface {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterfaceWithName, interfaceName.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWInterfaceFromID(_ret)
 }
 
 // @method @result An NSArray of CWInterface objects. @abstract Returns all available Wi-Fi interfaces. @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
 func (o *CWWiFiClient) Interfaces() *foundation.NSArray[*CWInterface] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWWiFiClientSelInterfaces)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CWInterface](_ret)
 }
 
@@ -128,4 +138,3 @@ func (o *CWWiFiClient) Delegate() objc.ID {
 func (o *CWWiFiClient) SetDelegate(delegate objc.ID) {
 	o.Ptr().Send(_cWWiFiClientSelSetDelegate, delegate)
 }
-

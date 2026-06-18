@@ -15,20 +15,20 @@ type NSURLCredentialStorage struct {
 }
 
 var (
-	_clsNSURLCredentialStorage = _objcClass("NSURLCredentialStorage")
-	_nSURLCredentialStorageSelCredentialsForProtectionSpace = objc.RegisterName("credentialsForProtectionSpace:")
-	_nSURLCredentialStorageSelSetCredentialForProtectionSpace = objc.RegisterName("setCredential:forProtectionSpace:")
-	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpace = objc.RegisterName("removeCredential:forProtectionSpace:")
-	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptions = objc.RegisterName("removeCredential:forProtectionSpace:options:")
-	_nSURLCredentialStorageSelDefaultCredentialForProtectionSpace = objc.RegisterName("defaultCredentialForProtectionSpace:")
-	_nSURLCredentialStorageSelSetDefaultCredentialForProtectionSpace = objc.RegisterName("setDefaultCredential:forProtectionSpace:")
-	_nSURLCredentialStorageSelSharedCredentialStorage = objc.RegisterName("sharedCredentialStorage")
-	_nSURLCredentialStorageSelAllCredentials = objc.RegisterName("allCredentials")
-	_nSURLCredentialStorageSelGetCredentialsForProtectionSpaceTaskCompletionHandler = objc.RegisterName("getCredentialsForProtectionSpace:task:completionHandler:")
-	_nSURLCredentialStorageSelSetCredentialForProtectionSpaceTask = objc.RegisterName("setCredential:forProtectionSpace:task:")
-	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptionsTask = objc.RegisterName("removeCredential:forProtectionSpace:options:task:")
+	_clsNSURLCredentialStorage                                                            = _objcClass("NSURLCredentialStorage")
+	_nSURLCredentialStorageSelCredentialsForProtectionSpace                               = objc.RegisterName("credentialsForProtectionSpace:")
+	_nSURLCredentialStorageSelSetCredentialForProtectionSpace                             = objc.RegisterName("setCredential:forProtectionSpace:")
+	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpace                          = objc.RegisterName("removeCredential:forProtectionSpace:")
+	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptions                   = objc.RegisterName("removeCredential:forProtectionSpace:options:")
+	_nSURLCredentialStorageSelDefaultCredentialForProtectionSpace                         = objc.RegisterName("defaultCredentialForProtectionSpace:")
+	_nSURLCredentialStorageSelSetDefaultCredentialForProtectionSpace                      = objc.RegisterName("setDefaultCredential:forProtectionSpace:")
+	_nSURLCredentialStorageSelSharedCredentialStorage                                     = objc.RegisterName("sharedCredentialStorage")
+	_nSURLCredentialStorageSelAllCredentials                                              = objc.RegisterName("allCredentials")
+	_nSURLCredentialStorageSelGetCredentialsForProtectionSpaceTaskCompletionHandler       = objc.RegisterName("getCredentialsForProtectionSpace:task:completionHandler:")
+	_nSURLCredentialStorageSelSetCredentialForProtectionSpaceTask                         = objc.RegisterName("setCredential:forProtectionSpace:task:")
+	_nSURLCredentialStorageSelRemoveCredentialForProtectionSpaceOptionsTask               = objc.RegisterName("removeCredential:forProtectionSpace:options:task:")
 	_nSURLCredentialStorageSelGetDefaultCredentialForProtectionSpaceTaskCompletionHandler = objc.RegisterName("getDefaultCredentialForProtectionSpace:task:completionHandler:")
-	_nSURLCredentialStorageSelSetDefaultCredentialForProtectionSpaceTask = objc.RegisterName("setDefaultCredential:forProtectionSpace:task:")
+	_nSURLCredentialStorageSelSetDefaultCredentialForProtectionSpaceTask                  = objc.RegisterName("setDefaultCredential:forProtectionSpace:task:")
 )
 
 func NSURLCredentialStorageFromID(id objc.ID) *NSURLCredentialStorage {
@@ -44,7 +44,9 @@ func NSURLCredentialStorageFromID(id objc.ID) *NSURLCredentialStorage {
 // @method credentialsForProtectionSpace: @abstract Get a dictionary mapping usernames to credentials for the specified protection space. @param space An NSURLProtectionSpace indicating the protection space for which to get credentials @result A dictionary where the keys are usernames and the values are the corresponding NSURLCredentials.
 func (o *NSURLCredentialStorage) CredentialsForProtectionSpace(space *NSURLProtectionSpace) *NSDictionary[*NSString, *NSURLCredential] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialStorageSelCredentialsForProtectionSpace, space.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDictionaryFromID[*NSString, *NSURLCredential](_ret)
 }
 
@@ -66,7 +68,9 @@ func (o *NSURLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(crede
 // @method defaultCredentialForProtectionSpace: @abstract Get the default credential for the specified protection space. @param space The protection space for which to get the default credential.
 func (o *NSURLCredentialStorage) DefaultCredentialForProtectionSpace(space *NSURLProtectionSpace) *NSURLCredential {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLCredentialStorageSelDefaultCredentialForProtectionSpace, space.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialFromID(_ret)
 }
 
@@ -78,7 +82,9 @@ func (o *NSURLCredentialStorage) SetDefaultCredentialForProtectionSpace(credenti
 // @property sharedCredentialStorage @abstract Get the shared singleton authentication storage @result the shared authentication storage
 func NSURLCredentialStorageSharedCredentialStorage() *NSURLCredentialStorage {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLCredentialStorage), _nSURLCredentialStorageSelSharedCredentialStorage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSURLCredentialStorageFromID(_ret)
 }
 
@@ -127,4 +133,3 @@ func (o *NSURLCredentialStorage) GetDefaultCredentialForProtectionSpaceTaskCompl
 func (o *NSURLCredentialStorage) SetDefaultCredentialForProtectionSpaceTask(credential *NSURLCredential, protectionSpace *NSURLProtectionSpace, task *NSURLSessionTask) {
 	o.Ptr().Send(_nSURLCredentialStorageSelSetDefaultCredentialForProtectionSpaceTask, credential.Ptr(), protectionSpace.Ptr(), task.Ptr())
 }
-

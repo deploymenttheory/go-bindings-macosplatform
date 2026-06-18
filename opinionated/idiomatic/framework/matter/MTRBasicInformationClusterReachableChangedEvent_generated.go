@@ -16,7 +16,9 @@ type MTRBasicInformationClusterReachableChangedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRBasicInformationClusterReachableChangedEvent].
-func (x *MTRBasicInformationClusterReachableChangedEvent) Unwrap() *raw.MTRBasicInformationClusterReachableChangedEvent { return x.inner }
+func (x *MTRBasicInformationClusterReachableChangedEvent) Unwrap() *raw.MTRBasicInformationClusterReachableChangedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -52,7 +54,9 @@ func (x *MTRBasicInformationClusterReachableChangedEvent) SetReachableNewValue(r
 	x.inner.SetReachableNewValue(reachableNewValue)
 }
 
-func (x *MTRBasicInformationClusterReachableChangedEvent) asMTRBasicInformationClusterReachableChangedEvent() *raw.MTRBasicInformationClusterReachableChangedEvent { return x.inner }
+func (x *MTRBasicInformationClusterReachableChangedEvent) asMTRBasicInformationClusterReachableChangedEvent() *raw.MTRBasicInformationClusterReachableChangedEvent {
+	return x.inner
+}
 
 // MTRBasicInformationClusterReachableChangedEventable is the interface implemented by [MTRBasicInformationClusterReachableChangedEvent], for mocking and DI.
 type MTRBasicInformationClusterReachableChangedEventable interface {
@@ -63,4 +67,3 @@ type MTRBasicInformationClusterReachableChangedEventable interface {
 }
 
 var _ MTRBasicInformationClusterReachableChangedEventable = (*MTRBasicInformationClusterReachableChangedEvent)(nil)
-

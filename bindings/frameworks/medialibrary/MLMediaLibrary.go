@@ -16,9 +16,9 @@ type MLMediaLibrary struct {
 }
 
 var (
-	_clsMLMediaLibrary = _objcClass("MLMediaLibrary")
+	_clsMLMediaLibrary                = _objcClass("MLMediaLibrary")
 	_mLMediaLibrarySelInitWithOptions = objc.RegisterName("initWithOptions:")
-	_mLMediaLibrarySelMediaSources = objc.RegisterName("mediaSources")
+	_mLMediaLibrarySelMediaSources    = objc.RegisterName("mediaSources")
 )
 
 func MLMediaLibraryFromID(id objc.ID) *MLMediaLibrary {
@@ -33,7 +33,9 @@ func MLMediaLibraryFromID(id objc.ID) *MLMediaLibrary {
 
 func (o *MLMediaLibrary) InitWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MLMediaLibrary {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLMediaLibrarySelInitWithOptions, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMediaLibraryFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *MLMediaLibrary) MediaSources() *foundation.NSDictionary[*foundation.NSS
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *MLMediaSource]](o.Ptr(), _mLMediaLibrarySelMediaSources)
 	return _ret
 }
-

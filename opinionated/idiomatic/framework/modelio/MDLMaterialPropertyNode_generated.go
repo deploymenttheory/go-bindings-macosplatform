@@ -108,4 +108,3 @@ type MaterialPropertyNodeable interface {
 }
 
 var _ MaterialPropertyNodeable = (*MaterialPropertyNode)(nil)
-

@@ -16,15 +16,15 @@ type MTRClusterPowerTopology struct {
 }
 
 var (
-	_clsMTRClusterPowerTopology = _objcClass("MTRClusterPowerTopology")
-	_mTRClusterPowerTopologySelReadAttributeAvailableEndpointsWithParams = objc.RegisterName("readAttributeAvailableEndpointsWithParams:")
-	_mTRClusterPowerTopologySelReadAttributeActiveEndpointsWithParams = objc.RegisterName("readAttributeActiveEndpointsWithParams:")
+	_clsMTRClusterPowerTopology                                            = _objcClass("MTRClusterPowerTopology")
+	_mTRClusterPowerTopologySelReadAttributeAvailableEndpointsWithParams   = objc.RegisterName("readAttributeAvailableEndpointsWithParams:")
+	_mTRClusterPowerTopologySelReadAttributeActiveEndpointsWithParams      = objc.RegisterName("readAttributeActiveEndpointsWithParams:")
 	_mTRClusterPowerTopologySelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterPowerTopologySelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterPowerTopologySelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterPowerTopologySelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterPowerTopologySelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterPowerTopologySelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterPowerTopologySelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterPowerTopologySelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterPowerTopologySelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterPowerTopologySelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterPowerTopologySelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
 )
 
 func MTRClusterPowerTopologyFromID(id objc.ID) *MTRClusterPowerTopology {
@@ -75,7 +75,8 @@ func (o *MTRClusterPowerTopology) ReadAttributeClusterRevisionWithParams(params 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterPowerTopology) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPowerTopology {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterPowerTopologySelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterPowerTopologyFromID(_ret)
 }
-

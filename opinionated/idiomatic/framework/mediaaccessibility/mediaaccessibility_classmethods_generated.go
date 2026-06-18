@@ -16,4 +16,3 @@ func SharedManager() *MusicHapticsManager {
 	}
 	return &MusicHapticsManager{inner: _r}
 }
-

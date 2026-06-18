@@ -17,22 +17,22 @@ type SWAttributionView struct {
 }
 
 var (
-	_clsSWAttributionView = _objcClass("SWAttributionView")
-	_sWAttributionViewSelHighlight = objc.RegisterName("highlight")
-	_sWAttributionViewSelSetHighlight = objc.RegisterName("setHighlight:")
-	_sWAttributionViewSelDisplayContext = objc.RegisterName("displayContext")
-	_sWAttributionViewSelSetDisplayContext = objc.RegisterName("setDisplayContext:")
-	_sWAttributionViewSelHorizontalAlignment = objc.RegisterName("horizontalAlignment")
-	_sWAttributionViewSelSetHorizontalAlignment = objc.RegisterName("setHorizontalAlignment:")
-	_sWAttributionViewSelBackgroundStyle = objc.RegisterName("backgroundStyle")
-	_sWAttributionViewSelSetBackgroundStyle = objc.RegisterName("setBackgroundStyle:")
-	_sWAttributionViewSelPreferredMaxLayoutWidth = objc.RegisterName("preferredMaxLayoutWidth")
+	_clsSWAttributionView                           = _objcClass("SWAttributionView")
+	_sWAttributionViewSelHighlight                  = objc.RegisterName("highlight")
+	_sWAttributionViewSelSetHighlight               = objc.RegisterName("setHighlight:")
+	_sWAttributionViewSelDisplayContext             = objc.RegisterName("displayContext")
+	_sWAttributionViewSelSetDisplayContext          = objc.RegisterName("setDisplayContext:")
+	_sWAttributionViewSelHorizontalAlignment        = objc.RegisterName("horizontalAlignment")
+	_sWAttributionViewSelSetHorizontalAlignment     = objc.RegisterName("setHorizontalAlignment:")
+	_sWAttributionViewSelBackgroundStyle            = objc.RegisterName("backgroundStyle")
+	_sWAttributionViewSelSetBackgroundStyle         = objc.RegisterName("setBackgroundStyle:")
+	_sWAttributionViewSelPreferredMaxLayoutWidth    = objc.RegisterName("preferredMaxLayoutWidth")
 	_sWAttributionViewSelSetPreferredMaxLayoutWidth = objc.RegisterName("setPreferredMaxLayoutWidth:")
-	_sWAttributionViewSelHighlightMenu = objc.RegisterName("highlightMenu")
-	_sWAttributionViewSelMenuTitleForHideAction = objc.RegisterName("menuTitleForHideAction")
-	_sWAttributionViewSelSetMenuTitleForHideAction = objc.RegisterName("setMenuTitleForHideAction:")
-	_sWAttributionViewSelSupplementalMenu = objc.RegisterName("supplementalMenu")
-	_sWAttributionViewSelSetSupplementalMenu = objc.RegisterName("setSupplementalMenu:")
+	_sWAttributionViewSelHighlightMenu              = objc.RegisterName("highlightMenu")
+	_sWAttributionViewSelMenuTitleForHideAction     = objc.RegisterName("menuTitleForHideAction")
+	_sWAttributionViewSelSetMenuTitleForHideAction  = objc.RegisterName("setMenuTitleForHideAction:")
+	_sWAttributionViewSelSupplementalMenu           = objc.RegisterName("supplementalMenu")
+	_sWAttributionViewSelSetSupplementalMenu        = objc.RegisterName("setSupplementalMenu:")
 )
 
 func SWAttributionViewFromID(id objc.ID) *SWAttributionView {
@@ -48,7 +48,9 @@ func SWAttributionViewFromID(id objc.ID) *SWAttributionView {
 // @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
 func (o *SWAttributionView) Highlight() *SWHighlight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlight)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SWHighlightFromID(_ret)
 }
 
@@ -98,14 +100,18 @@ func (o *SWAttributionView) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth f
 
 func (o *SWAttributionView) HighlightMenu() *appkit.NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelHighlightMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuFromID(_ret)
 }
 
 // @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
 func (o *SWAttributionView) MenuTitleForHideAction() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelMenuTitleForHideAction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -115,11 +121,12 @@ func (o *SWAttributionView) SetMenuTitleForHideAction(menuTitleForHideAction *fo
 
 func (o *SWAttributionView) SupplementalMenu() *appkit.NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sWAttributionViewSelSupplementalMenu)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSMenuItemFromID(_ret)
 }
 
 func (o *SWAttributionView) SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem) {
 	o.Ptr().Send(_sWAttributionViewSelSetSupplementalMenu, supplementalMenu.Ptr())
 }
-

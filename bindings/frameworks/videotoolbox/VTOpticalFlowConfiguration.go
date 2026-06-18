@@ -16,19 +16,19 @@ type VTOpticalFlowConfiguration struct {
 }
 
 var (
-	_clsVTOpticalFlowConfiguration = _objcClass("VTOpticalFlowConfiguration")
+	_clsVTOpticalFlowConfiguration                                                           = _objcClass("VTOpticalFlowConfiguration")
 	_vTOpticalFlowConfigurationSelInitWithFrameWidthFrameHeightQualityPrioritizationRevision = objc.RegisterName("initWithFrameWidth:frameHeight:qualityPrioritization:revision:")
-	_vTOpticalFlowConfigurationSelFrameWidth = objc.RegisterName("frameWidth")
-	_vTOpticalFlowConfigurationSelFrameHeight = objc.RegisterName("frameHeight")
-	_vTOpticalFlowConfigurationSelQualityPrioritization = objc.RegisterName("qualityPrioritization")
-	_vTOpticalFlowConfigurationSelRevision = objc.RegisterName("revision")
-	_vTOpticalFlowConfigurationSelSupportedRevisions = objc.RegisterName("supportedRevisions")
-	_vTOpticalFlowConfigurationSelDefaultRevision = objc.RegisterName("defaultRevision")
-	_vTOpticalFlowConfigurationSelFrameSupportedPixelFormats = objc.RegisterName("frameSupportedPixelFormats")
-	_vTOpticalFlowConfigurationSelSourcePixelBufferAttributes = objc.RegisterName("sourcePixelBufferAttributes")
-	_vTOpticalFlowConfigurationSelDestinationPixelBufferAttributes = objc.RegisterName("destinationPixelBufferAttributes")
-	_vTOpticalFlowConfigurationSelIsSupported = objc.RegisterName("isSupported")
-	_vTOpticalFlowConfigurationSelProcessorSupported = objc.RegisterName("processorSupported")
+	_vTOpticalFlowConfigurationSelFrameWidth                                                 = objc.RegisterName("frameWidth")
+	_vTOpticalFlowConfigurationSelFrameHeight                                                = objc.RegisterName("frameHeight")
+	_vTOpticalFlowConfigurationSelQualityPrioritization                                      = objc.RegisterName("qualityPrioritization")
+	_vTOpticalFlowConfigurationSelRevision                                                   = objc.RegisterName("revision")
+	_vTOpticalFlowConfigurationSelSupportedRevisions                                         = objc.RegisterName("supportedRevisions")
+	_vTOpticalFlowConfigurationSelDefaultRevision                                            = objc.RegisterName("defaultRevision")
+	_vTOpticalFlowConfigurationSelFrameSupportedPixelFormats                                 = objc.RegisterName("frameSupportedPixelFormats")
+	_vTOpticalFlowConfigurationSelSourcePixelBufferAttributes                                = objc.RegisterName("sourcePixelBufferAttributes")
+	_vTOpticalFlowConfigurationSelDestinationPixelBufferAttributes                           = objc.RegisterName("destinationPixelBufferAttributes")
+	_vTOpticalFlowConfigurationSelIsSupported                                                = objc.RegisterName("isSupported")
+	_vTOpticalFlowConfigurationSelProcessorSupported                                         = objc.RegisterName("processorSupported")
 )
 
 func VTOpticalFlowConfigurationFromID(id objc.ID) *VTOpticalFlowConfiguration {
@@ -41,10 +41,12 @@ func VTOpticalFlowConfigurationFromID(id objc.ID) *VTOpticalFlowConfiguration {
 	return o
 }
 
-// Creates a new optical flow configuration. Returns ``nil`` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see ``VTOpticalFlowConfigurationQualityPrioritization``. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new optical flow configuration. Returns “nil“ if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTOpticalFlowConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
 func (o *VTOpticalFlowConfiguration) InitWithFrameWidthFrameHeightQualityPrioritizationRevision(frameWidth int, frameHeight int, qualityPrioritization VTOpticalFlowConfigurationQualityPrioritization, revision VTOpticalFlowConfigurationRevision) *VTOpticalFlowConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTOpticalFlowConfigurationSelInitWithFrameWidthFrameHeightQualityPrioritizationRevision, frameWidth, frameHeight, qualityPrioritization, revision)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTOpticalFlowConfigurationFromID(_ret)
 }
 
@@ -60,7 +62,7 @@ func (o *VTOpticalFlowConfiguration) FrameHeight() int {
 	return _ret
 }
 
-// A parameter you use to control quality and performance levels. For more information about supported levels, see ``VTOpticalFlowConfigurationQualityPrioritization``.
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTOpticalFlowConfigurationQualityPrioritization“.
 func (o *VTOpticalFlowConfiguration) QualityPrioritization() VTOpticalFlowConfigurationQualityPrioritization {
 	_ret := objc.Send[VTOpticalFlowConfigurationQualityPrioritization](o.Ptr(), _vTOpticalFlowConfigurationSelQualityPrioritization)
 	return _ret
@@ -75,7 +77,9 @@ func (o *VTOpticalFlowConfiguration) Revision() VTOpticalFlowConfigurationRevisi
 // Provides the collection of currently supported algorithms or configuration revisions for the class of configuration. A property you use to introspect at runtime which revisions are available for each configuration.
 func VTOpticalFlowConfigurationSupportedRevisions() *foundation.NSIndexSet {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVTOpticalFlowConfiguration), _vTOpticalFlowConfigurationSelSupportedRevisions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSIndexSetFromID(_ret)
 }
 
@@ -91,13 +95,13 @@ func (o *VTOpticalFlowConfiguration) FrameSupportedPixelFormats() *foundation.NS
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTOpticalFlowConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTOpticalFlowConfigurationSelSourcePixelBufferAttributes)
 	return _ret
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use ``CVPixelBufferCreateResolvedAttributesDictionary`` to combine this dictionary with your pixel buffer attributes dictionary.
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
 func (o *VTOpticalFlowConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, objc.ID]](o.Ptr(), _vTOpticalFlowConfigurationSelDestinationPixelBufferAttributes)
 	return _ret
@@ -114,4 +118,3 @@ func VTOpticalFlowConfigurationProcessorSupported() uint8 {
 	_ret := objc.Send[uint8](objc.ID(_clsVTOpticalFlowConfiguration), _vTOpticalFlowConfigurationSelProcessorSupported)
 	return _ret
 }
-

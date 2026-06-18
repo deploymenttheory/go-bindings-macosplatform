@@ -108,4 +108,3 @@ type CloseCommandable interface {
 }
 
 var _ CloseCommandable = (*CloseCommand)(nil)
-

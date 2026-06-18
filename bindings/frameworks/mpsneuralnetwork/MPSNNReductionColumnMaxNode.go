@@ -25,4 +25,3 @@ func MPSNNReductionColumnMaxNodeFromID(id objc.ID) *MPSNNReductionColumnMaxNode 
 	purego.Track(o)
 	return o
 }
-

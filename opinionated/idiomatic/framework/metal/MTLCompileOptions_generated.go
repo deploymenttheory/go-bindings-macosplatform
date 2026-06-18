@@ -325,4 +325,3 @@ type CompileOptionsable interface {
 }
 
 var _ CompileOptionsable = (*CompileOptions)(nil)
-

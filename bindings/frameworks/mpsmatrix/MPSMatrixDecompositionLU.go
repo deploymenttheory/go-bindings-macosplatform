@@ -17,8 +17,8 @@ type MPSMatrixDecompositionLU struct {
 }
 
 var (
-	_clsMPSMatrixDecompositionLU = _objcClass("MPSMatrixDecompositionLU")
-	_mPSMatrixDecompositionLUSelInitWithDeviceRowsColumns = objc.RegisterName("initWithDevice:rows:columns:")
+	_clsMPSMatrixDecompositionLU                                                                = _objcClass("MPSMatrixDecompositionLU")
+	_mPSMatrixDecompositionLUSelInitWithDeviceRowsColumns                                       = objc.RegisterName("initWithDevice:rows:columns:")
 	_mPSMatrixDecompositionLUSelEncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus = objc.RegisterName("encodeToCommandBuffer:sourceMatrix:resultMatrix:pivotIndices:status:")
 )
 
@@ -35,7 +35,9 @@ func MPSMatrixDecompositionLUFromID(id objc.ID) *MPSMatrixDecompositionLU {
 // @abstract   Initialize an MPSMatrixDecompositionLU object on a device @param      device          The device on which the kernel will execute. @param      rows            The number of rows in the source matrix. @param      columns         The number of columns in the source matrix. @return     A valid MPSMatrixDecompositionLU object or nil, if failure.
 func (o *MPSMatrixDecompositionLU) InitWithDeviceRowsColumns(device metal.MTLDevice, rows uint, columns uint) *MPSMatrixDecompositionLU {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSMatrixDecompositionLUSelInitWithDeviceRowsColumns, device, rows, columns)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSMatrixDecompositionLUFromID(_ret)
 }
 
@@ -43,4 +45,3 @@ func (o *MPSMatrixDecompositionLU) InitWithDeviceRowsColumns(device metal.MTLDev
 func (o *MPSMatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	o.Ptr().Send(_mPSMatrixDecompositionLUSelEncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus, commandBuffer, sourceMatrix.Ptr(), resultMatrix.Ptr(), pivotIndices.Ptr(), status)
 }
-

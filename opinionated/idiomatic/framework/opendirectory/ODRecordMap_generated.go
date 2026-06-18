@@ -113,4 +113,3 @@ type RecordMapable interface {
 }
 
 var _ RecordMapable = (*RecordMap)(nil)
-

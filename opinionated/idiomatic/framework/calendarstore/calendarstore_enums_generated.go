@@ -11,10 +11,10 @@ import (
 type CalRecurrenceType int64
 
 const (
-	CalRecurrenceDaily CalRecurrenceType = 0
-	CalRecurrenceWeekly CalRecurrenceType = 1
+	CalRecurrenceDaily   CalRecurrenceType = 0
+	CalRecurrenceWeekly  CalRecurrenceType = 1
 	CalRecurrenceMonthly CalRecurrenceType = 2
-	CalRecurrenceYearly CalRecurrenceType = 3
+	CalRecurrenceYearly  CalRecurrenceType = 3
 )
 
 func (e CalRecurrenceType) String() string {
@@ -35,9 +35,9 @@ func (e CalRecurrenceType) String() string {
 type CalSpan int64
 
 const (
-	CalSpanThisEvent CalSpan = 0
+	CalSpanThisEvent    CalSpan = 0
 	CalSpanFutureEvents CalSpan = 1
-	CalSpanAllEvents CalSpan = 2
+	CalSpanAllEvents    CalSpan = 2
 )
 
 func (e CalSpan) String() string {
@@ -52,4 +52,3 @@ func (e CalSpan) String() string {
 		return fmt.Sprintf("CalSpan(%d)", int64(e))
 	}
 }
-

@@ -169,4 +169,3 @@ func StopInterface(interface_ unsafe.Pointer, queue *foundation.NSObject, handle
 func Write(interface_ unsafe.Pointer, packets *raw.Vmpktdesc, pktcnt *int32) raw.Vmnet_return_t {
 	return raw.VmnetWrite(interface_, packets, pktcnt)
 }
-

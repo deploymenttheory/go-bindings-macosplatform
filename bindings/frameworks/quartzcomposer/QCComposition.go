@@ -17,14 +17,14 @@ type QCComposition struct {
 }
 
 var (
-	_clsQCComposition = _objcClass("QCComposition")
+	_clsQCComposition                    = _objcClass("QCComposition")
 	_qCCompositionSelCompositionWithFile = objc.RegisterName("compositionWithFile:")
 	_qCCompositionSelCompositionWithData = objc.RegisterName("compositionWithData:")
-	_qCCompositionSelProtocols = objc.RegisterName("protocols")
-	_qCCompositionSelAttributes = objc.RegisterName("attributes")
-	_qCCompositionSelInputKeys = objc.RegisterName("inputKeys")
-	_qCCompositionSelOutputKeys = objc.RegisterName("outputKeys")
-	_qCCompositionSelIdentifier = objc.RegisterName("identifier")
+	_qCCompositionSelProtocols           = objc.RegisterName("protocols")
+	_qCCompositionSelAttributes          = objc.RegisterName("attributes")
+	_qCCompositionSelInputKeys           = objc.RegisterName("inputKeys")
+	_qCCompositionSelOutputKeys          = objc.RegisterName("outputKeys")
+	_qCCompositionSelIdentifier          = objc.RegisterName("identifier")
 )
 
 func QCCompositionFromID(id objc.ID) *QCComposition {
@@ -39,13 +39,17 @@ func QCCompositionFromID(id objc.ID) *QCComposition {
 
 func QCCompositionCompositionWithFile(path *foundation.NSString) *quartz.QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithFile, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartz.QCCompositionFromID(_ret)
 }
 
 func QCCompositionCompositionWithData(data *foundation.NSData) *quartz.QCComposition {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQCComposition), _qCCompositionSelCompositionWithData, data.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return quartz.QCCompositionFromID(_ret)
 }
 
@@ -71,7 +75,8 @@ func (o *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
 
 func (o *QCComposition) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qCCompositionSelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

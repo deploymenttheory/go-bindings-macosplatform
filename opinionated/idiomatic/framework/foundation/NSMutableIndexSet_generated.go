@@ -100,4 +100,3 @@ type MutableIndexSetable interface {
 }
 
 var _ MutableIndexSetable = (*MutableIndexSet)(nil)
-

@@ -15,9 +15,9 @@ type CNChangeHistoryAddMemberToGroupEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryAddMemberToGroupEvent = _objcClass("CNChangeHistoryAddMemberToGroupEvent")
+	_clsCNChangeHistoryAddMemberToGroupEvent       = _objcClass("CNChangeHistoryAddMemberToGroupEvent")
 	_cNChangeHistoryAddMemberToGroupEventSelMember = objc.RegisterName("member")
-	_cNChangeHistoryAddMemberToGroupEventSelGroup = objc.RegisterName("group")
+	_cNChangeHistoryAddMemberToGroupEventSelGroup  = objc.RegisterName("group")
 )
 
 func CNChangeHistoryAddMemberToGroupEventFromID(id objc.ID) *CNChangeHistoryAddMemberToGroupEvent {
@@ -32,13 +32,16 @@ func CNChangeHistoryAddMemberToGroupEventFromID(id objc.ID) *CNChangeHistoryAddM
 
 func (o *CNChangeHistoryAddMemberToGroupEvent) Member() *CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddMemberToGroupEventSelMember)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactFromID(_ret)
 }
 
 func (o *CNChangeHistoryAddMemberToGroupEvent) Group() *CNGroup {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddMemberToGroupEventSelGroup)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNGroupFromID(_ret)
 }
-

@@ -19,24 +19,24 @@ type CKFetchRecordChangesOperation struct {
 }
 
 var (
-	_clsCKFetchRecordChangesOperation = _objcClass("CKFetchRecordChangesOperation")
-	_cKFetchRecordChangesOperationSelInit = objc.RegisterName("init")
+	_clsCKFetchRecordChangesOperation                                              = _objcClass("CKFetchRecordChangesOperation")
+	_cKFetchRecordChangesOperationSelInit                                          = objc.RegisterName("init")
 	_cKFetchRecordChangesOperationSelInitWithRecordZoneIDPreviousServerChangeToken = objc.RegisterName("initWithRecordZoneID:previousServerChangeToken:")
-	_cKFetchRecordChangesOperationSelRecordZoneID = objc.RegisterName("recordZoneID")
-	_cKFetchRecordChangesOperationSelSetRecordZoneID = objc.RegisterName("setRecordZoneID:")
-	_cKFetchRecordChangesOperationSelPreviousServerChangeToken = objc.RegisterName("previousServerChangeToken")
-	_cKFetchRecordChangesOperationSelSetPreviousServerChangeToken = objc.RegisterName("setPreviousServerChangeToken:")
-	_cKFetchRecordChangesOperationSelResultsLimit = objc.RegisterName("resultsLimit")
-	_cKFetchRecordChangesOperationSelSetResultsLimit = objc.RegisterName("setResultsLimit:")
-	_cKFetchRecordChangesOperationSelDesiredKeys = objc.RegisterName("desiredKeys")
-	_cKFetchRecordChangesOperationSelSetDesiredKeys = objc.RegisterName("setDesiredKeys:")
-	_cKFetchRecordChangesOperationSelRecordChangedBlock = objc.RegisterName("recordChangedBlock")
-	_cKFetchRecordChangesOperationSelSetRecordChangedBlock = objc.RegisterName("setRecordChangedBlock:")
-	_cKFetchRecordChangesOperationSelRecordWithIDWasDeletedBlock = objc.RegisterName("recordWithIDWasDeletedBlock")
-	_cKFetchRecordChangesOperationSelSetRecordWithIDWasDeletedBlock = objc.RegisterName("setRecordWithIDWasDeletedBlock:")
-	_cKFetchRecordChangesOperationSelMoreComing = objc.RegisterName("moreComing")
-	_cKFetchRecordChangesOperationSelFetchRecordChangesCompletionBlock = objc.RegisterName("fetchRecordChangesCompletionBlock")
-	_cKFetchRecordChangesOperationSelSetFetchRecordChangesCompletionBlock = objc.RegisterName("setFetchRecordChangesCompletionBlock:")
+	_cKFetchRecordChangesOperationSelRecordZoneID                                  = objc.RegisterName("recordZoneID")
+	_cKFetchRecordChangesOperationSelSetRecordZoneID                               = objc.RegisterName("setRecordZoneID:")
+	_cKFetchRecordChangesOperationSelPreviousServerChangeToken                     = objc.RegisterName("previousServerChangeToken")
+	_cKFetchRecordChangesOperationSelSetPreviousServerChangeToken                  = objc.RegisterName("setPreviousServerChangeToken:")
+	_cKFetchRecordChangesOperationSelResultsLimit                                  = objc.RegisterName("resultsLimit")
+	_cKFetchRecordChangesOperationSelSetResultsLimit                               = objc.RegisterName("setResultsLimit:")
+	_cKFetchRecordChangesOperationSelDesiredKeys                                   = objc.RegisterName("desiredKeys")
+	_cKFetchRecordChangesOperationSelSetDesiredKeys                                = objc.RegisterName("setDesiredKeys:")
+	_cKFetchRecordChangesOperationSelRecordChangedBlock                            = objc.RegisterName("recordChangedBlock")
+	_cKFetchRecordChangesOperationSelSetRecordChangedBlock                         = objc.RegisterName("setRecordChangedBlock:")
+	_cKFetchRecordChangesOperationSelRecordWithIDWasDeletedBlock                   = objc.RegisterName("recordWithIDWasDeletedBlock")
+	_cKFetchRecordChangesOperationSelSetRecordWithIDWasDeletedBlock                = objc.RegisterName("setRecordWithIDWasDeletedBlock:")
+	_cKFetchRecordChangesOperationSelMoreComing                                    = objc.RegisterName("moreComing")
+	_cKFetchRecordChangesOperationSelFetchRecordChangesCompletionBlock             = objc.RegisterName("fetchRecordChangesCompletionBlock")
+	_cKFetchRecordChangesOperationSelSetFetchRecordChangesCompletionBlock          = objc.RegisterName("setFetchRecordChangesCompletionBlock:")
 )
 
 func CKFetchRecordChangesOperationFromID(id objc.ID) *CKFetchRecordChangesOperation {
@@ -53,21 +53,27 @@ func CKFetchRecordChangesOperationFromID(id objc.ID) *CKFetchRecordChangesOperat
 // Deprecated: since macOS 10.12.
 func (o *CKFetchRecordChangesOperation) Init() *CKFetchRecordChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordChangesOperationFromID(_ret)
 }
 
-// Creates an operation for fetching changes in the specified record zone. - Parameters: - recordZoneID: The zone that contains the records you want to fetch. You can fetch changes in a custom zone. CloudKit doesn't support syncing the default zone. - previousServerChangeToken: The change token from a previous fetch operation. This is the token that the system passes to your ``CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock`` handler during a previous fetch operation. Use this token to limit the returned data to only those changes that occur after that fetch request. If you specify `nil` for this parameter, the operation object fetches all records and their contents. - Returns: An initialized operation object. When initializing the operation object, use the token from a previous fetch request if you have one. You can archive tokens and write them to disk for later use. The returned operation object retrieves all changed fields of the record, including any assets in those fields. If you want to minimize the amount of data that returns even further, configure the ``CKFetchRecordChangesOperation/desiredKeys`` property with the subset of keys that have values you want to fetch. After initializing the operation, associate at least one progress block with the operation object (excluding the completion block) to process the results.
+// Creates an operation for fetching changes in the specified record zone. - Parameters: - recordZoneID: The zone that contains the records you want to fetch. You can fetch changes in a custom zone. CloudKit doesn't support syncing the default zone. - previousServerChangeToken: The change token from a previous fetch operation. This is the token that the system passes to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler during a previous fetch operation. Use this token to limit the returned data to only those changes that occur after that fetch request. If you specify `nil` for this parameter, the operation object fetches all records and their contents. - Returns: An initialized operation object. When initializing the operation object, use the token from a previous fetch request if you have one. You can archive tokens and write them to disk for later use. The returned operation object retrieves all changed fields of the record, including any assets in those fields. If you want to minimize the amount of data that returns even further, configure the “CKFetchRecordChangesOperation/desiredKeys“ property with the subset of keys that have values you want to fetch. After initializing the operation, associate at least one progress block with the operation object (excluding the completion block) to process the results.
 func (o *CKFetchRecordChangesOperation) InitWithRecordZoneIDPreviousServerChangeToken(recordZoneID *CKRecordZoneID, previousServerChangeToken *CKServerChangeToken) *CKFetchRecordChangesOperation {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelInitWithRecordZoneIDPreviousServerChangeToken, recordZoneID.Ptr(), previousServerChangeToken.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKFetchRecordChangesOperationFromID(_ret)
 }
 
 // The ID of the record zone with the records you want to fetch. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value before executing the operation or submitting it to a queue.
 func (o *CKFetchRecordChangesOperation) RecordZoneID() *CKRecordZoneID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelRecordZoneID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordZoneIDFromID(_ret)
 }
 
@@ -75,10 +81,12 @@ func (o *CKFetchRecordChangesOperation) SetRecordZoneID(recordZoneID *CKRecordZo
 	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetRecordZoneID, recordZoneID.Ptr())
 }
 
-// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your ``CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock`` handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
+// The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
 func (o *CKFetchRecordChangesOperation) PreviousServerChangeToken() *CKServerChangeToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchRecordChangesOperationSelPreviousServerChangeToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKServerChangeTokenFromID(_ret)
 }
 
@@ -86,7 +94,7 @@ func (o *CKFetchRecordChangesOperation) SetPreviousServerChangeToken(previousSer
 	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetPreviousServerChangeToken, previousServerChangeToken.Ptr())
 }
 
-// The maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the ``CKFetchRecordChangesOperation/moreComing`` property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the ``CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock`` property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new ``CKFetchRecordChangesOperation`` object to fetch more results.
+// The maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the “CKFetchRecordChangesOperation/moreComing“ property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new “CKFetchRecordChangesOperation“ object to fetch more results.
 func (o *CKFetchRecordChangesOperation) ResultsLimit() uint {
 	_ret := objc.Send[uint](o.Ptr(), _cKFetchRecordChangesOperationSelResultsLimit)
 	return _ret
@@ -106,7 +114,7 @@ func (o *CKFetchRecordChangesOperation) SetDesiredKeys(desiredKeys *foundation.N
 	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetDesiredKeys, desiredKeys)
 }
 
-// The block to execute with the contents of a changed record. The block returns no value and takes the following parameters: - term `record`: The changed record. If you specify a value for the ``CKFetchRecordChangesOperation/desiredKeys`` property, the record only contains the fields in the ``CKFetchRecordChangesOperation/desiredKeys`` property. The operation object executes this block once for each record in the zone with changes since the previous fetch request. Each time the block executes, it executes serially with respect to the other progress blocks of the operation. If no records change, the block doesn't execute. If you intend to use this block to process results, set it before executing the operation or submitting it to a queue.
+// The block to execute with the contents of a changed record. The block returns no value and takes the following parameters: - term `record`: The changed record. If you specify a value for the “CKFetchRecordChangesOperation/desiredKeys“ property, the record only contains the fields in the “CKFetchRecordChangesOperation/desiredKeys“ property. The operation object executes this block once for each record in the zone with changes since the previous fetch request. Each time the block executes, it executes serially with respect to the other progress blocks of the operation. If no records change, the block doesn't execute. If you intend to use this block to process results, set it before executing the operation or submitting it to a queue.
 func (o *CKFetchRecordChangesOperation) RecordChangedBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordChangesOperationSelRecordChangedBlock)
 	return _ret
@@ -146,13 +154,13 @@ func (o *CKFetchRecordChangesOperation) SetRecordWithIDWasDeletedBlock(recordWit
 	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetRecordWithIDWasDeletedBlock, __block_recordWithIDWasDeletedBlock)
 }
 
-// A Boolean value that indicates whether more results are available. If the server is unable to deliver all of the changed results with this operation object, it sets this property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the ``CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock`` property. To fetch the remaining changes, create a new ``CKFetchRecordChangesOperation`` object using the change token that the server returns.
+// A Boolean value that indicates whether more results are available. If the server is unable to deliver all of the changed results with this operation object, it sets this property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. To fetch the remaining changes, create a new “CKFetchRecordChangesOperation“ object using the change token that the server returns.
 func (o *CKFetchRecordChangesOperation) MoreComing() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cKFetchRecordChangesOperationSelMoreComing)
 	return _ret
 }
 
-// The block to execute when the system finishes processing all changes. The block returns no value and takes the following parameters: - term `serverChangeToken`: The new change token from the server. You can store this token locally and use it during subsequent fetch operations to limit the results to records that the system changes after executing the operation. - term `clientChangeToken`: The most recent client change token from the device. If the change token isn't the most recent change token you provided, the server might not have received the associated changes. - term `operationError`: An error object that contains information about a problem, or `nil` if the system successfully retrieves the changes. When implementing this block, check the ``CKFetchRecordChangesOperation/moreComing`` property of the operation object to verify that the server was able to deliver all results. If that property is <doc://com.apple.documentation/documentation/swift/true>, you must create another operation object using the value in the `serverChangeToken` parameter to fetch any remaining changes. The operation object executes this block only once at the conclusion of the operation. It executes after all individual change blocks, but before the operation's completion block. The block executes serially with respect to the other progress blocks of the operation. If you intend to use this block to process results, set it before executing the operation or submitting the operation object to a queue.
+// The block to execute when the system finishes processing all changes. The block returns no value and takes the following parameters: - term `serverChangeToken`: The new change token from the server. You can store this token locally and use it during subsequent fetch operations to limit the results to records that the system changes after executing the operation. - term `clientChangeToken`: The most recent client change token from the device. If the change token isn't the most recent change token you provided, the server might not have received the associated changes. - term `operationError`: An error object that contains information about a problem, or `nil` if the system successfully retrieves the changes. When implementing this block, check the “CKFetchRecordChangesOperation/moreComing“ property of the operation object to verify that the server was able to deliver all results. If that property is <doc://com.apple.documentation/documentation/swift/true>, you must create another operation object using the value in the `serverChangeToken` parameter to fetch any remaining changes. The operation object executes this block only once at the conclusion of the operation. It executes after all individual change blocks, but before the operation's completion block. The block executes serially with respect to the other progress blocks of the operation. If you intend to use this block to process results, set it before executing the operation or submitting the operation object to a queue.
 func (o *CKFetchRecordChangesOperation) FetchRecordChangesCompletionBlock() objc.Block {
 	_ret := objc.Send[objc.Block](o.Ptr(), _cKFetchRecordChangesOperationSelFetchRecordChangesCompletionBlock)
 	return _ret
@@ -174,4 +182,3 @@ func (o *CKFetchRecordChangesOperation) SetFetchRecordChangesCompletionBlock(fet
 	}
 	o.Ptr().Send(_cKFetchRecordChangesOperationSelSetFetchRecordChangesCompletionBlock, __block_fetchRecordChangesCompletionBlock)
 }
-

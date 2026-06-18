@@ -16,20 +16,20 @@ type AVMediaSelectionOption struct {
 }
 
 var (
-	_clsAVMediaSelectionOption = _objcClass("AVMediaSelectionOption")
-	_aVMediaSelectionOptionSelHasMediaCharacteristic = objc.RegisterName("hasMediaCharacteristic:")
-	_aVMediaSelectionOptionSelMetadataForFormat = objc.RegisterName("metadataForFormat:")
+	_clsAVMediaSelectionOption                                                    = _objcClass("AVMediaSelectionOption")
+	_aVMediaSelectionOptionSelHasMediaCharacteristic                              = objc.RegisterName("hasMediaCharacteristic:")
+	_aVMediaSelectionOptionSelMetadataForFormat                                   = objc.RegisterName("metadataForFormat:")
 	_aVMediaSelectionOptionSelAssociatedMediaSelectionOptionInMediaSelectionGroup = objc.RegisterName("associatedMediaSelectionOptionInMediaSelectionGroup:")
-	_aVMediaSelectionOptionSelPropertyList = objc.RegisterName("propertyList")
-	_aVMediaSelectionOptionSelDisplayNameWithLocale = objc.RegisterName("displayNameWithLocale:")
-	_aVMediaSelectionOptionSelMediaType = objc.RegisterName("mediaType")
-	_aVMediaSelectionOptionSelMediaSubTypes = objc.RegisterName("mediaSubTypes")
-	_aVMediaSelectionOptionSelIsPlayable = objc.RegisterName("isPlayable")
-	_aVMediaSelectionOptionSelExtendedLanguageTag = objc.RegisterName("extendedLanguageTag")
-	_aVMediaSelectionOptionSelLocale = objc.RegisterName("locale")
-	_aVMediaSelectionOptionSelCommonMetadata = objc.RegisterName("commonMetadata")
-	_aVMediaSelectionOptionSelAvailableMetadataFormats = objc.RegisterName("availableMetadataFormats")
-	_aVMediaSelectionOptionSelDisplayName = objc.RegisterName("displayName")
+	_aVMediaSelectionOptionSelPropertyList                                        = objc.RegisterName("propertyList")
+	_aVMediaSelectionOptionSelDisplayNameWithLocale                               = objc.RegisterName("displayNameWithLocale:")
+	_aVMediaSelectionOptionSelMediaType                                           = objc.RegisterName("mediaType")
+	_aVMediaSelectionOptionSelMediaSubTypes                                       = objc.RegisterName("mediaSubTypes")
+	_aVMediaSelectionOptionSelIsPlayable                                          = objc.RegisterName("isPlayable")
+	_aVMediaSelectionOptionSelExtendedLanguageTag                                 = objc.RegisterName("extendedLanguageTag")
+	_aVMediaSelectionOptionSelLocale                                              = objc.RegisterName("locale")
+	_aVMediaSelectionOptionSelCommonMetadata                                      = objc.RegisterName("commonMetadata")
+	_aVMediaSelectionOptionSelAvailableMetadataFormats                            = objc.RegisterName("availableMetadataFormats")
+	_aVMediaSelectionOptionSelDisplayName                                         = objc.RegisterName("displayName")
 )
 
 func AVMediaSelectionOptionFromID(id objc.ID) *AVMediaSelectionOption {
@@ -51,14 +51,18 @@ func (o *AVMediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic *fou
 // Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems.
 func (o *AVMediaSelectionOption) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelMetadataForFormat, format.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
 // If a media selection option in another group is associated with the specified option, returns a reference to the associated option. Audible media selection options often have associated legible media selection options; in particular, audible options are typically associated with forced-only subtitle options with the same locale. See AVMediaCharacteristicContainsOnlyForcedSubtitles in AVMediaFormat.h for a discussion of forced-only subtitles. - Parameter mediaSelectionGroup: A media selection group in which an associated option is to be sought. - Returns: An instance of AVMediaSelectionOption.
 func (o *AVMediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *AVMediaSelectionGroup) *AVMediaSelectionOption {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelAssociatedMediaSelectionOptionInMediaSelectionGroup, mediaSelectionGroup.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMediaSelectionOptionFromID(_ret)
 }
 
@@ -71,14 +75,18 @@ func (o *AVMediaSelectionOption) PropertyList() objc.ID {
 // Provides an NSString suitable for display. May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale. - Parameter locale: Localize manufactured portions of the string using the specificed locale.
 func (o *AVMediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelDisplayNameWithLocale, locale.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The media type of the media data, e.g. AVMediaTypeAudio, AVMediaTypeSubtitle, etc.
 func (o *AVMediaSelectionOption) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -97,21 +105,27 @@ func (o *AVMediaSelectionOption) IsPlayable() bool {
 // Indicates the RFC 4646 language tag associated with the option. May be nil.
 func (o *AVMediaSelectionOption) ExtendedLanguageTag() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelExtendedLanguageTag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Indicates the locale for which the media option was authored. Use -[NSLocale objectForKey:NSLocaleLanguageCode] to obtain the language code of the locale. See NSLocale.h for additional information.
 func (o *AVMediaSelectionOption) Locale() *foundation.NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSLocaleFromID(_ret)
 }
 
 // Provides an array of AVMetadataItems for each common metadata key for which a value is available. The array of AVMetadataItems can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. Example: to obtain the name (or title) of a media selection option in any of the user's preferred languages. ```objc NSString *title = nil; NSArray *titles = [AVMetadataItem metadataItemsFromArray:[mediaSelectionOption commonMetadata] withKey:AVMetadataCommonKeyTitle keySpace:AVMetadataKeySpaceCommon]; if ([titles count] > 0) { // Try to get a title that matches one of the user's preferred languages. NSArray *titlesForPreferredLanguages = [AVMetadataItem metadataItemsFromArray:titles filteredAndSortedAccordingToPreferredLanguages:[NSLocale preferredLanguages]]; if ([titlesForPreferredLanguages count] > 0) { title = [[titlesForPreferredLanguages objectAtIndex:0] stringValue]; } // No matches in any of the preferred languages. Just use the primary title metadata we find. if (title == nil) { title = [[titles objectAtIndex:0] stringValue]; } } ```
 func (o *AVMediaSelectionOption) CommonMetadata() *foundation.NSArray[*AVMetadataItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelCommonMetadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVMetadataItem](_ret)
 }
 
@@ -124,7 +138,8 @@ func (o *AVMediaSelectionOption) AvailableMetadataFormats() *foundation.NSArray[
 // Provides an NSString suitable for display using the current system locale. May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers. For a display name strictly with the specified locale use displayNameWithLocale: instead.
 func (o *AVMediaSelectionOption) DisplayName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMediaSelectionOptionSelDisplayName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

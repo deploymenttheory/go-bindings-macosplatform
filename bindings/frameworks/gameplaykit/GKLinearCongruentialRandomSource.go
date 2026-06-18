@@ -17,11 +17,11 @@ type GKLinearCongruentialRandomSource struct {
 }
 
 var (
-	_clsGKLinearCongruentialRandomSource = _objcClass("GKLinearCongruentialRandomSource")
-	_gKLinearCongruentialRandomSourceSelInit = objc.RegisterName("init")
+	_clsGKLinearCongruentialRandomSource             = _objcClass("GKLinearCongruentialRandomSource")
+	_gKLinearCongruentialRandomSourceSelInit         = objc.RegisterName("init")
 	_gKLinearCongruentialRandomSourceSelInitWithSeed = objc.RegisterName("initWithSeed:")
-	_gKLinearCongruentialRandomSourceSelSeed = objc.RegisterName("seed")
-	_gKLinearCongruentialRandomSourceSelSetSeed = objc.RegisterName("setSeed:")
+	_gKLinearCongruentialRandomSourceSelSeed         = objc.RegisterName("seed")
+	_gKLinearCongruentialRandomSourceSelSetSeed      = objc.RegisterName("setSeed:")
 )
 
 func GKLinearCongruentialRandomSourceFromID(id objc.ID) *GKLinearCongruentialRandomSource {
@@ -37,14 +37,18 @@ func GKLinearCongruentialRandomSourceFromID(id objc.ID) *GKLinearCongruentialRan
 // Initializes a linear congruential random source with bits from high entropy system resource like SecRandomCopyBytes.
 func (o *GKLinearCongruentialRandomSource) Init() *GKLinearCongruentialRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLinearCongruentialRandomSourceSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLinearCongruentialRandomSourceFromID(_ret)
 }
 
 // Initializes a linear congruential random source with bits the given 64 bit seed.
 func (o *GKLinearCongruentialRandomSource) InitWithSeed(seed uint64) *GKLinearCongruentialRandomSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKLinearCongruentialRandomSourceSelInitWithSeed, seed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKLinearCongruentialRandomSourceFromID(_ret)
 }
 
@@ -57,4 +61,3 @@ func (o *GKLinearCongruentialRandomSource) Seed() uint64 {
 func (o *GKLinearCongruentialRandomSource) SetSeed(seed uint64) {
 	o.Ptr().Send(_gKLinearCongruentialRandomSourceSelSetSeed, seed)
 }
-

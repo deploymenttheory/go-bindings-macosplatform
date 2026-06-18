@@ -10,4 +10,3 @@ type UNNotificationContentProviding interface {
 // UNUserNotificationCenterDelegate wraps the ObjC protocol UNUserNotificationCenterDelegate.
 type UNUserNotificationCenterDelegate interface {
 }
-

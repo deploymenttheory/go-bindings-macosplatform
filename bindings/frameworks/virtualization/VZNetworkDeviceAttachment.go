@@ -26,4 +26,3 @@ func VZNetworkDeviceAttachmentFromID(id objc.ID) *VZNetworkDeviceAttachment {
 	purego.Track(o)
 	return o
 }
-

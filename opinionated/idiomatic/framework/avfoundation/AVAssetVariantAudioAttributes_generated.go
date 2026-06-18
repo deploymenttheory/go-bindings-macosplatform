@@ -65,4 +65,3 @@ type AssetVariantAudioAttributesable interface {
 }
 
 var _ AssetVariantAudioAttributesable = (*AssetVariantAudioAttributes)(nil)
-

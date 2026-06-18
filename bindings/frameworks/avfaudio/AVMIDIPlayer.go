@@ -18,18 +18,18 @@ type AVMIDIPlayer struct {
 }
 
 var (
-	_clsAVMIDIPlayer = _objcClass("AVMIDIPlayer")
+	_clsAVMIDIPlayer                                       = _objcClass("AVMIDIPlayer")
 	_aVMIDIPlayerSelInitWithContentsOfURLSoundBankURLError = objc.RegisterName("initWithContentsOfURL:soundBankURL:error:")
-	_aVMIDIPlayerSelInitWithDataSoundBankURLError = objc.RegisterName("initWithData:soundBankURL:error:")
-	_aVMIDIPlayerSelPrepareToPlay = objc.RegisterName("prepareToPlay")
-	_aVMIDIPlayerSelPlay = objc.RegisterName("play:")
-	_aVMIDIPlayerSelStop = objc.RegisterName("stop")
-	_aVMIDIPlayerSelDuration = objc.RegisterName("duration")
-	_aVMIDIPlayerSelIsPlaying = objc.RegisterName("isPlaying")
-	_aVMIDIPlayerSelRate = objc.RegisterName("rate")
-	_aVMIDIPlayerSelSetRate = objc.RegisterName("setRate:")
-	_aVMIDIPlayerSelCurrentPosition = objc.RegisterName("currentPosition")
-	_aVMIDIPlayerSelSetCurrentPosition = objc.RegisterName("setCurrentPosition:")
+	_aVMIDIPlayerSelInitWithDataSoundBankURLError          = objc.RegisterName("initWithData:soundBankURL:error:")
+	_aVMIDIPlayerSelPrepareToPlay                          = objc.RegisterName("prepareToPlay")
+	_aVMIDIPlayerSelPlay                                   = objc.RegisterName("play:")
+	_aVMIDIPlayerSelStop                                   = objc.RegisterName("stop")
+	_aVMIDIPlayerSelDuration                               = objc.RegisterName("duration")
+	_aVMIDIPlayerSelIsPlaying                              = objc.RegisterName("isPlaying")
+	_aVMIDIPlayerSelRate                                   = objc.RegisterName("rate")
+	_aVMIDIPlayerSelSetRate                                = objc.RegisterName("setRate:")
+	_aVMIDIPlayerSelCurrentPosition                        = objc.RegisterName("currentPosition")
+	_aVMIDIPlayerSelSetCurrentPosition                     = objc.RegisterName("setCurrentPosition:")
 )
 
 func AVMIDIPlayerFromID(id objc.ID) *AVMIDIPlayer {
@@ -46,7 +46,9 @@ func AVMIDIPlayerFromID(id objc.ID) *AVMIDIPlayer {
 func (o *AVMIDIPlayer) InitWithContentsOfURLSoundBankURLError(inURL *foundation.NSURL, bankURL *foundation.NSURL) (*AVMIDIPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithContentsOfURLSoundBankURLError, inURL.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -57,7 +59,9 @@ func (o *AVMIDIPlayer) InitWithContentsOfURLSoundBankURLError(inURL *foundation.
 func (o *AVMIDIPlayer) InitWithDataSoundBankURLError(data *foundation.NSData, bankURL *foundation.NSURL) (*AVMIDIPlayer, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMIDIPlayerSelInitWithDataSoundBankURLError, data.Ptr(), bankURL.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -117,4 +121,3 @@ func (o *AVMIDIPlayer) CurrentPosition() float64 {
 func (o *AVMIDIPlayer) SetCurrentPosition(currentPosition float64) {
 	o.Ptr().Send(_aVMIDIPlayerSelSetCurrentPosition, currentPosition)
 }
-

@@ -100,7 +100,9 @@ func (x *NNInitialGradient) WithLabel(label string) *NNInitialGradient {
 	return x
 }
 
-func (x *NNInitialGradient) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+func (x *NNInitialGradient) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNKernel
+}
 
 func (x *NNInitialGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
@@ -120,4 +122,3 @@ type NNInitialGradientable interface {
 }
 
 var _ NNInitialGradientable = (*NNInitialGradient)(nil)
-

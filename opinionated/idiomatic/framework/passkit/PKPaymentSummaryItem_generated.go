@@ -106,4 +106,3 @@ type PaymentSummaryItemable interface {
 }
 
 var _ PaymentSummaryItemable = (*PaymentSummaryItem)(nil)
-

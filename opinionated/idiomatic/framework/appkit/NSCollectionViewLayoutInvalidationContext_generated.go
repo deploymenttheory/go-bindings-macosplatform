@@ -17,7 +17,9 @@ type CollectionViewLayoutInvalidationContext struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewLayoutInvalidationContext].
-func (x *CollectionViewLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewLayoutInvalidationContext { return x.inner }
+func (x *CollectionViewLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewLayoutInvalidationContext {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -109,7 +111,9 @@ func (x *CollectionViewLayoutInvalidationContext) SetContentSizeAdjustment(conte
 	x.inner.SetContentSizeAdjustment(contentSizeAdjustment)
 }
 
-func (x *CollectionViewLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext { return x.inner }
+func (x *CollectionViewLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext {
+	return x.inner
+}
 
 // CollectionViewLayoutInvalidationContextable is the interface implemented by [CollectionViewLayoutInvalidationContext], for mocking and DI.
 type CollectionViewLayoutInvalidationContextable interface {
@@ -131,4 +135,3 @@ type CollectionViewLayoutInvalidationContextable interface {
 }
 
 var _ CollectionViewLayoutInvalidationContextable = (*CollectionViewLayoutInvalidationContext)(nil)
-

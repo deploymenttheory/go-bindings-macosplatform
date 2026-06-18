@@ -19,12 +19,12 @@ type SKProductStorePromotionController struct {
 }
 
 var (
-	_clsSKProductStorePromotionController = _objcClass("SKProductStorePromotionController")
-	_sKProductStorePromotionControllerSelDefaultController = objc.RegisterName("defaultController")
-	_sKProductStorePromotionControllerSelFetchStorePromotionVisibilityForProductCompletionHandler = objc.RegisterName("fetchStorePromotionVisibilityForProduct:completionHandler:")
+	_clsSKProductStorePromotionController                                                          = _objcClass("SKProductStorePromotionController")
+	_sKProductStorePromotionControllerSelDefaultController                                         = objc.RegisterName("defaultController")
+	_sKProductStorePromotionControllerSelFetchStorePromotionVisibilityForProductCompletionHandler  = objc.RegisterName("fetchStorePromotionVisibilityForProduct:completionHandler:")
 	_sKProductStorePromotionControllerSelUpdateStorePromotionVisibilityForProductCompletionHandler = objc.RegisterName("updateStorePromotionVisibility:forProduct:completionHandler:")
-	_sKProductStorePromotionControllerSelFetchStorePromotionOrderWithCompletionHandler = objc.RegisterName("fetchStorePromotionOrderWithCompletionHandler:")
-	_sKProductStorePromotionControllerSelUpdateStorePromotionOrderCompletionHandler = objc.RegisterName("updateStorePromotionOrder:completionHandler:")
+	_sKProductStorePromotionControllerSelFetchStorePromotionOrderWithCompletionHandler             = objc.RegisterName("fetchStorePromotionOrderWithCompletionHandler:")
+	_sKProductStorePromotionControllerSelUpdateStorePromotionOrderCompletionHandler                = objc.RegisterName("updateStorePromotionOrder:completionHandler:")
 )
 
 func SKProductStorePromotionControllerFromID(id objc.ID) *SKProductStorePromotionController {
@@ -40,7 +40,9 @@ func SKProductStorePromotionControllerFromID(id objc.ID) *SKProductStorePromotio
 // Deprecated: Use Product.PromotionInfo.
 func SKProductStorePromotionControllerDefaultController() *SKProductStorePromotionController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKProductStorePromotionController), _sKProductStorePromotionControllerSelDefaultController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKProductStorePromotionControllerFromID(_ret)
 }
 
@@ -94,4 +96,3 @@ func (o *SKProductStorePromotionController) UpdateStorePromotionOrderCompletionH
 	}
 	o.Ptr().Send(_sKProductStorePromotionControllerSelUpdateStorePromotionOrderCompletionHandler, promotionOrder.Ptr(), __block_completionHandler)
 }
-

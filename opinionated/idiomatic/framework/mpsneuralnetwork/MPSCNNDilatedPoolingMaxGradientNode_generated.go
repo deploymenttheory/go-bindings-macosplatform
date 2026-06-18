@@ -16,7 +16,9 @@ type CNNDilatedPoolingMaxGradientNode struct {
 }
 
 // Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxGradientNode].
-func (x *CNNDilatedPoolingMaxGradientNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode { return x.inner }
+func (x *CNNDilatedPoolingMaxGradientNode) Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -59,11 +61,17 @@ func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() uint {
 	return x.inner.DilationRateY()
 }
 
-func (x *CNNDilatedPoolingMaxGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
+func (x *CNNDilatedPoolingMaxGradientNode) asCNNPoolingGradientNode() *raw.MPSCNNPoolingGradientNode {
+	return &x.inner.MPSCNNPoolingGradientNode
+}
 
-func (x *CNNDilatedPoolingMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
+func (x *CNNDilatedPoolingMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode
+}
 
-func (x *CNNDilatedPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNDilatedPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNDilatedPoolingMaxGradientNodeable is the interface implemented by [CNNDilatedPoolingMaxGradientNode], for mocking and DI.
 type CNNDilatedPoolingMaxGradientNodeable interface {
@@ -75,4 +83,3 @@ type CNNDilatedPoolingMaxGradientNodeable interface {
 }
 
 var _ CNNDilatedPoolingMaxGradientNodeable = (*CNNDilatedPoolingMaxGradientNode)(nil)
-

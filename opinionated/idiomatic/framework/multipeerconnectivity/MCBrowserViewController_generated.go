@@ -127,4 +127,3 @@ type BrowserViewControllerable interface {
 }
 
 var _ BrowserViewControllerable = (*BrowserViewController)(nil)
-

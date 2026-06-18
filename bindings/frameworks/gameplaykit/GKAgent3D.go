@@ -19,14 +19,14 @@ type GKAgent3D struct {
 }
 
 var (
-	_clsGKAgent3D = _objcClass("GKAgent3D")
-	_gKAgent3DSelPosition = objc.RegisterName("position")
-	_gKAgent3DSelSetPosition = objc.RegisterName("setPosition:")
-	_gKAgent3DSelVelocity = objc.RegisterName("velocity")
-	_gKAgent3DSelRightHanded = objc.RegisterName("rightHanded")
+	_clsGKAgent3D               = _objcClass("GKAgent3D")
+	_gKAgent3DSelPosition       = objc.RegisterName("position")
+	_gKAgent3DSelSetPosition    = objc.RegisterName("setPosition:")
+	_gKAgent3DSelVelocity       = objc.RegisterName("velocity")
+	_gKAgent3DSelRightHanded    = objc.RegisterName("rightHanded")
 	_gKAgent3DSelSetRightHanded = objc.RegisterName("setRightHanded:")
-	_gKAgent3DSelRotation = objc.RegisterName("rotation")
-	_gKAgent3DSelSetRotation = objc.RegisterName("setRotation:")
+	_gKAgent3DSelRotation       = objc.RegisterName("rotation")
+	_gKAgent3DSelSetRotation    = objc.RegisterName("setRotation:")
 )
 
 func GKAgent3DFromID(id objc.ID) *GKAgent3D {
@@ -74,4 +74,3 @@ func (o *GKAgent3D) Rotation() unsafe.Pointer {
 func (o *GKAgent3D) SetRotation(rotation unsafe.Pointer) {
 	o.Ptr().Send(_gKAgent3DSelSetRotation, rotation)
 }
-

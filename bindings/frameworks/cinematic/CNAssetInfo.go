@@ -23,22 +23,22 @@ type CNAssetInfo struct {
 }
 
 var (
-	_clsCNAssetInfo = _objcClass("CNAssetInfo")
+	_clsCNAssetInfo                                  = _objcClass("CNAssetInfo")
 	_cNAssetInfoSelCheckIfCinematicCompletionHandler = objc.RegisterName("checkIfCinematic:completionHandler:")
-	_cNAssetInfoSelLoadFromAssetCompletionHandler = objc.RegisterName("loadFromAsset:completionHandler:")
-	_cNAssetInfoSelAsset = objc.RegisterName("asset")
-	_cNAssetInfoSelAllCinematicTracks = objc.RegisterName("allCinematicTracks")
-	_cNAssetInfoSelCinematicVideoTrack = objc.RegisterName("cinematicVideoTrack")
-	_cNAssetInfoSelCinematicDisparityTrack = objc.RegisterName("cinematicDisparityTrack")
-	_cNAssetInfoSelCinematicMetadataTrack = objc.RegisterName("cinematicMetadataTrack")
-	_cNAssetInfoSelTimeRange = objc.RegisterName("timeRange")
-	_cNAssetInfoSelNaturalSize = objc.RegisterName("naturalSize")
-	_cNAssetInfoSelPreferredSize = objc.RegisterName("preferredSize")
-	_cNAssetInfoSelPreferredTransform = objc.RegisterName("preferredTransform")
-	_cNAssetInfoSelFrameTimingTrack = objc.RegisterName("frameTimingTrack")
-	_cNAssetInfoSelVideoCompositionTracks = objc.RegisterName("videoCompositionTracks")
-	_cNAssetInfoSelVideoCompositionTrackIDs = objc.RegisterName("videoCompositionTrackIDs")
-	_cNAssetInfoSelSampleDataTrackIDs = objc.RegisterName("sampleDataTrackIDs")
+	_cNAssetInfoSelLoadFromAssetCompletionHandler    = objc.RegisterName("loadFromAsset:completionHandler:")
+	_cNAssetInfoSelAsset                             = objc.RegisterName("asset")
+	_cNAssetInfoSelAllCinematicTracks                = objc.RegisterName("allCinematicTracks")
+	_cNAssetInfoSelCinematicVideoTrack               = objc.RegisterName("cinematicVideoTrack")
+	_cNAssetInfoSelCinematicDisparityTrack           = objc.RegisterName("cinematicDisparityTrack")
+	_cNAssetInfoSelCinematicMetadataTrack            = objc.RegisterName("cinematicMetadataTrack")
+	_cNAssetInfoSelTimeRange                         = objc.RegisterName("timeRange")
+	_cNAssetInfoSelNaturalSize                       = objc.RegisterName("naturalSize")
+	_cNAssetInfoSelPreferredSize                     = objc.RegisterName("preferredSize")
+	_cNAssetInfoSelPreferredTransform                = objc.RegisterName("preferredTransform")
+	_cNAssetInfoSelFrameTimingTrack                  = objc.RegisterName("frameTimingTrack")
+	_cNAssetInfoSelVideoCompositionTracks            = objc.RegisterName("videoCompositionTracks")
+	_cNAssetInfoSelVideoCompositionTrackIDs          = objc.RegisterName("videoCompositionTrackIDs")
+	_cNAssetInfoSelSampleDataTrackIDs                = objc.RegisterName("sampleDataTrackIDs")
 )
 
 func CNAssetInfoFromID(id objc.ID) *CNAssetInfo {
@@ -80,7 +80,9 @@ func CNAssetInfoLoadFromAssetCompletionHandler(asset *avfoundation.AVAsset, comp
 
 func (o *CNAssetInfo) Asset() *avfoundation.AVAsset {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelAsset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetFromID(_ret)
 }
 
@@ -91,19 +93,25 @@ func (o *CNAssetInfo) AllCinematicTracks() *foundation.NSArray[*avfoundation.AVA
 
 func (o *CNAssetInfo) CinematicVideoTrack() *avfoundation.AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelCinematicVideoTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetTrackFromID(_ret)
 }
 
 func (o *CNAssetInfo) CinematicDisparityTrack() *avfoundation.AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelCinematicDisparityTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetTrackFromID(_ret)
 }
 
 func (o *CNAssetInfo) CinematicMetadataTrack() *avfoundation.AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelCinematicMetadataTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetTrackFromID(_ret)
 }
 
@@ -134,7 +142,9 @@ func (o *CNAssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
 // Track to be used for frame timing
 func (o *CNAssetInfo) FrameTimingTrack() *avfoundation.AVAssetTrack {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNAssetInfoSelFrameTimingTrack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return avfoundation.AVAssetTrackFromID(_ret)
 }
 
@@ -155,4 +165,3 @@ func (o *CNAssetInfo) SampleDataTrackIDs() *foundation.NSArray[*foundation.NSNum
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _cNAssetInfoSelSampleDataTrackIDs)
 	return _ret
 }
-

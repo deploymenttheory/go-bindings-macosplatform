@@ -76,7 +76,9 @@ func (x *ImageAreaMax) KernelWidth() uint {
 
 func (x *ImageAreaMax) asImageAreaMax() *raw.MPSImageAreaMax { return x.inner }
 
-func (x *ImageAreaMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageAreaMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
 type ImageAreaMaxable interface {
@@ -89,4 +91,3 @@ type ImageAreaMaxable interface {
 }
 
 var _ ImageAreaMaxable = (*ImageAreaMax)(nil)
-

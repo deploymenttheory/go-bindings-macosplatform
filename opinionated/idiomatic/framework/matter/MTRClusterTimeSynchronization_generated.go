@@ -176,9 +176,13 @@ func (x *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(p
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterTimeSynchronization) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterTimeSynchronization) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterTimeSynchronization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterTimeSynchronization) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterTimeSynchronizationable is the interface implemented by [MTRClusterTimeSynchronization], for mocking and DI.
 type MTRClusterTimeSynchronizationable interface {
@@ -209,4 +213,3 @@ type MTRClusterTimeSynchronizationable interface {
 }
 
 var _ MTRClusterTimeSynchronizationable = (*MTRClusterTimeSynchronization)(nil)
-

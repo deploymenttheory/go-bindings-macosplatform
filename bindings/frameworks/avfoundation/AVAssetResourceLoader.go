@@ -16,13 +16,13 @@ type AVAssetResourceLoader struct {
 }
 
 var (
-	_clsAVAssetResourceLoader = _objcClass("AVAssetResourceLoader")
-	_aVAssetResourceLoaderSelSetDelegateQueue = objc.RegisterName("setDelegate:queue:")
-	_aVAssetResourceLoaderSelDelegate = objc.RegisterName("delegate")
-	_aVAssetResourceLoaderSelDelegateQueue = objc.RegisterName("delegateQueue")
-	_aVAssetResourceLoaderSelPreloadsEligibleContentKeys = objc.RegisterName("preloadsEligibleContentKeys")
-	_aVAssetResourceLoaderSelSetPreloadsEligibleContentKeys = objc.RegisterName("setPreloadsEligibleContentKeys:")
-	_aVAssetResourceLoaderSelSendsCommonMediaClientDataAsHTTPHeaders = objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders")
+	_clsAVAssetResourceLoader                                           = _objcClass("AVAssetResourceLoader")
+	_aVAssetResourceLoaderSelSetDelegateQueue                           = objc.RegisterName("setDelegate:queue:")
+	_aVAssetResourceLoaderSelDelegate                                   = objc.RegisterName("delegate")
+	_aVAssetResourceLoaderSelDelegateQueue                              = objc.RegisterName("delegateQueue")
+	_aVAssetResourceLoaderSelPreloadsEligibleContentKeys                = objc.RegisterName("preloadsEligibleContentKeys")
+	_aVAssetResourceLoaderSelSetPreloadsEligibleContentKeys             = objc.RegisterName("setPreloadsEligibleContentKeys:")
+	_aVAssetResourceLoaderSelSendsCommonMediaClientDataAsHTTPHeaders    = objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders")
 	_aVAssetResourceLoaderSelSetSendsCommonMediaClientDataAsHTTPHeaders = objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:")
 )
 
@@ -50,7 +50,9 @@ func (o *AVAssetResourceLoader) Delegate() AVAssetResourceLoaderDelegate {
 // @property 		delegateQueue @abstract		The dispatch queue on which all delegate methods will be invoked. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
 func (o *AVAssetResourceLoader) DelegateQueue() *foundation.NSObject {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetResourceLoaderSelDelegateQueue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSObjectFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *AVAssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
 func (o *AVAssetResourceLoader) SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) {
 	o.Ptr().Send(_aVAssetResourceLoaderSelSetSendsCommonMediaClientDataAsHTTPHeaders, sendsCommonMediaClientDataAsHTTPHeaders)
 }
-

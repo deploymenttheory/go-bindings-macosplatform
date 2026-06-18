@@ -16,13 +16,13 @@ type GLKSubmesh struct {
 }
 
 var (
-	_clsGLKSubmesh = _objcClass("GLKSubmesh")
-	_gLKSubmeshSelType = objc.RegisterName("type")
-	_gLKSubmeshSelMode = objc.RegisterName("mode")
-	_gLKSubmeshSelElementCount = objc.RegisterName("elementCount")
+	_clsGLKSubmesh              = _objcClass("GLKSubmesh")
+	_gLKSubmeshSelType          = objc.RegisterName("type")
+	_gLKSubmeshSelMode          = objc.RegisterName("mode")
+	_gLKSubmeshSelElementCount  = objc.RegisterName("elementCount")
 	_gLKSubmeshSelElementBuffer = objc.RegisterName("elementBuffer")
-	_gLKSubmeshSelMesh = objc.RegisterName("mesh")
-	_gLKSubmeshSelName = objc.RegisterName("name")
+	_gLKSubmeshSelMesh          = objc.RegisterName("mesh")
+	_gLKSubmeshSelName          = objc.RegisterName("name")
 )
 
 func GLKSubmeshFromID(id objc.ID) *GLKSubmesh {
@@ -56,21 +56,26 @@ func (o *GLKSubmesh) ElementCount() int32 {
 // @property elementBuffer @abstract Name of buffer object with index data @discussion The buffer name to be used with DrawElements
 func (o *GLKSubmesh) ElementBuffer() *GLKMeshBuffer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSubmeshSelElementBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKMeshBufferFromID(_ret)
 }
 
 // @property mesh @abstract Parent GLKit mesh containing vertex data of this object @discussion Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
 func (o *GLKSubmesh) Mesh() *GLKMesh {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSubmeshSelMesh)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GLKMeshFromID(_ret)
 }
 
 // @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
 func (o *GLKSubmesh) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gLKSubmeshSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

@@ -20,5 +20,6 @@ func KAERemoteProcessNameKey() objc.ID { return purego.CFConstant(raw.KAERemoteP
 func KAERemoteProcessUserIDKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessUserIDKey()) }
 
 // KAERemoteProcessProcessIDKey returns the value of the CoreFoundation reference constant kAERemoteProcessProcessIDKey as an objc.ID.
-func KAERemoteProcessProcessIDKey() objc.ID { return purego.CFConstant(raw.KAERemoteProcessProcessIDKey()) }
-
+func KAERemoteProcessProcessIDKey() objc.ID {
+	return purego.CFConstant(raw.KAERemoteProcessProcessIDKey())
+}

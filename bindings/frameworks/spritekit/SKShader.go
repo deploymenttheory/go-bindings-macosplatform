@@ -16,22 +16,22 @@ type SKShader struct {
 }
 
 var (
-	_clsSKShader = _objcClass("SKShader")
-	_sKShaderSelInitWithSource = objc.RegisterName("initWithSource:")
-	_sKShaderSelInitWithSourceUniforms = objc.RegisterName("initWithSource:uniforms:")
-	_sKShaderSelShader = objc.RegisterName("shader")
-	_sKShaderSelShaderWithSource = objc.RegisterName("shaderWithSource:")
+	_clsSKShader                         = _objcClass("SKShader")
+	_sKShaderSelInitWithSource           = objc.RegisterName("initWithSource:")
+	_sKShaderSelInitWithSourceUniforms   = objc.RegisterName("initWithSource:uniforms:")
+	_sKShaderSelShader                   = objc.RegisterName("shader")
+	_sKShaderSelShaderWithSource         = objc.RegisterName("shaderWithSource:")
 	_sKShaderSelShaderWithSourceUniforms = objc.RegisterName("shaderWithSource:uniforms:")
-	_sKShaderSelShaderWithFileNamed = objc.RegisterName("shaderWithFileNamed:")
-	_sKShaderSelAddUniform = objc.RegisterName("addUniform:")
-	_sKShaderSelUniformNamed = objc.RegisterName("uniformNamed:")
-	_sKShaderSelRemoveUniformNamed = objc.RegisterName("removeUniformNamed:")
-	_sKShaderSelSource = objc.RegisterName("source")
-	_sKShaderSelSetSource = objc.RegisterName("setSource:")
-	_sKShaderSelUniforms = objc.RegisterName("uniforms")
-	_sKShaderSelSetUniforms = objc.RegisterName("setUniforms:")
-	_sKShaderSelAttributes = objc.RegisterName("attributes")
-	_sKShaderSelSetAttributes = objc.RegisterName("setAttributes:")
+	_sKShaderSelShaderWithFileNamed      = objc.RegisterName("shaderWithFileNamed:")
+	_sKShaderSelAddUniform               = objc.RegisterName("addUniform:")
+	_sKShaderSelUniformNamed             = objc.RegisterName("uniformNamed:")
+	_sKShaderSelRemoveUniformNamed       = objc.RegisterName("removeUniformNamed:")
+	_sKShaderSelSource                   = objc.RegisterName("source")
+	_sKShaderSelSetSource                = objc.RegisterName("setSource:")
+	_sKShaderSelUniforms                 = objc.RegisterName("uniforms")
+	_sKShaderSelSetUniforms              = objc.RegisterName("setUniforms:")
+	_sKShaderSelAttributes               = objc.RegisterName("attributes")
+	_sKShaderSelSetAttributes            = objc.RegisterName("setAttributes:")
 )
 
 func SKShaderFromID(id objc.ID) *SKShader {
@@ -47,39 +47,51 @@ func SKShaderFromID(id objc.ID) *SKShader {
 // Create a custom shader with source code. @param source the source code for the custom fragment shader.
 func (o *SKShader) InitWithSource(source *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelInitWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 // Create a custom shader with source code and uniforms. @param source the source code for the custom fragment shader. @param uniforms the array of uniforms supplied to this shader
 func (o *SKShader) InitWithSourceUniforms(source *foundation.NSString, uniforms *foundation.NSArray[*SKUniform]) *SKShader {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelInitWithSourceUniforms, source.Ptr(), uniforms.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func SKShaderShader() *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShader)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func SKShaderShaderWithSource(source *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithSource, source.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 func SKShaderShaderWithSourceUniforms(source *foundation.NSString, uniforms *foundation.NSArray[*SKUniform]) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithSourceUniforms, source.Ptr(), uniforms.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
 // Loads a shader source file named 'name' from the main bundle. This is simpler yet functionally equivalent to the following code [SKShader shaderWithSource:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:@"fsh"] encoding:NSUTF8StringEncoding error:NULL]]; The encoding is assumed to be NSUTF8StringEncoding.
 func SKShaderShaderWithFileNamed(name *foundation.NSString) *SKShader {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSKShader), _sKShaderSelShaderWithFileNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKShaderFromID(_ret)
 }
 
@@ -89,7 +101,9 @@ func (o *SKShader) AddUniform(uniform *SKUniform) {
 
 func (o *SKShader) UniformNamed(name *foundation.NSString) *SKUniform {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelUniformNamed, name.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKUniformFromID(_ret)
 }
 
@@ -99,7 +113,9 @@ func (o *SKShader) RemoveUniformNamed(name *foundation.NSString) {
 
 func (o *SKShader) Source() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +126,9 @@ func (o *SKShader) SetSource(source *foundation.NSString) {
 // You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
 func (o *SKShader) Uniforms() *foundation.NSArray[*SKUniform] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelUniforms)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKUniform](_ret)
 }
 
@@ -120,11 +138,12 @@ func (o *SKShader) SetUniforms(uniforms *foundation.NSArray[*SKUniform]) {
 
 func (o *SKShader) Attributes() *foundation.NSArray[*SKAttribute] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKShaderSelAttributes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SKAttribute](_ret)
 }
 
 func (o *SKShader) SetAttributes(attributes *foundation.NSArray[*SKAttribute]) {
 	o.Ptr().Send(_sKShaderSelSetAttributes, attributes.Ptr())
 }
-

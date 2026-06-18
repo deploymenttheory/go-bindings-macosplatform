@@ -46,7 +46,9 @@ func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEIPv6Route](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -62,7 +64,9 @@ func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NEIPv6Route](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -139,4 +143,3 @@ type NEIPv6Settingsable interface {
 }
 
 var _ NEIPv6Settingsable = (*NEIPv6Settings)(nil)
-

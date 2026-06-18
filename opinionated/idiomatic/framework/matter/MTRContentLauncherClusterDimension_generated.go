@@ -16,7 +16,9 @@ type MTRContentLauncherClusterDimension struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterDimension].
-func (x *MTRContentLauncherClusterDimension) Unwrap() *raw.MTRContentLauncherClusterDimension { return x.inner }
+func (x *MTRContentLauncherClusterDimension) Unwrap() *raw.MTRContentLauncherClusterDimension {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -54,7 +56,9 @@ func (x *MTRContentLauncherClusterDimension) WithMetric(metric *foundation.NSNum
 	return x
 }
 
-func (x *MTRContentLauncherClusterDimension) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct { return &x.inner.MTRContentLauncherClusterDimensionStruct }
+func (x *MTRContentLauncherClusterDimension) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct {
+	return &x.inner.MTRContentLauncherClusterDimensionStruct
+}
 
 // MTRContentLauncherClusterDimensionable is the interface implemented by [MTRContentLauncherClusterDimension], for mocking and DI.
 type MTRContentLauncherClusterDimensionable interface {
@@ -65,4 +69,3 @@ type MTRContentLauncherClusterDimensionable interface {
 }
 
 var _ MTRContentLauncherClusterDimensionable = (*MTRContentLauncherClusterDimension)(nil)
-

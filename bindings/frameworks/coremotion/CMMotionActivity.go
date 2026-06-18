@@ -16,13 +16,13 @@ type CMMotionActivity struct {
 }
 
 var (
-	_clsCMMotionActivity = _objcClass("CMMotionActivity")
+	_clsCMMotionActivity           = _objcClass("CMMotionActivity")
 	_cMMotionActivitySelConfidence = objc.RegisterName("confidence")
-	_cMMotionActivitySelStartDate = objc.RegisterName("startDate")
-	_cMMotionActivitySelUnknown = objc.RegisterName("unknown")
+	_cMMotionActivitySelStartDate  = objc.RegisterName("startDate")
+	_cMMotionActivitySelUnknown    = objc.RegisterName("unknown")
 	_cMMotionActivitySelStationary = objc.RegisterName("stationary")
-	_cMMotionActivitySelWalking = objc.RegisterName("walking")
-	_cMMotionActivitySelRunning = objc.RegisterName("running")
+	_cMMotionActivitySelWalking    = objc.RegisterName("walking")
+	_cMMotionActivitySelRunning    = objc.RegisterName("running")
 	_cMMotionActivitySelAutomotive = objc.RegisterName("automotive")
 )
 
@@ -43,7 +43,9 @@ func (o *CMMotionActivity) Confidence() CMMotionActivityConfidence {
 
 func (o *CMMotionActivity) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMMotionActivitySelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *CMMotionActivity) Automotive() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cMMotionActivitySelAutomotive)
 	return _ret
 }
-

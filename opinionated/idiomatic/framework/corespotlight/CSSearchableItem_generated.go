@@ -176,4 +176,3 @@ type SearchableItemable interface {
 }
 
 var _ SearchableItemable = (*SearchableItem)(nil)
-

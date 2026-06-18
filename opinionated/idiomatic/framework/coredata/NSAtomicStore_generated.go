@@ -153,4 +153,3 @@ type AtomicStoreable interface {
 }
 
 var _ AtomicStoreable = (*AtomicStore)(nil)
-

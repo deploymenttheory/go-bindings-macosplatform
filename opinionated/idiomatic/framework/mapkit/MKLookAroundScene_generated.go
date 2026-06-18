@@ -41,4 +41,3 @@ type LookAroundSceneable interface {
 }
 
 var _ LookAroundSceneable = (*LookAroundScene)(nil)
-

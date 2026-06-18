@@ -73,4 +73,3 @@ type CIDeviceInfoable interface {
 }
 
 var _ CIDeviceInfoable = (*CIDeviceInfo)(nil)
-

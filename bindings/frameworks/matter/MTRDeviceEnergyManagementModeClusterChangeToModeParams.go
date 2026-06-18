@@ -16,12 +16,12 @@ type MTRDeviceEnergyManagementModeClusterChangeToModeParams struct {
 }
 
 var (
-	_clsMTRDeviceEnergyManagementModeClusterChangeToModeParams = _objcClass("MTRDeviceEnergyManagementModeClusterChangeToModeParams")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelGetNewMode = objc.RegisterName("getNewMode")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetNewMode = objc.RegisterName("setNewMode:")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRDeviceEnergyManagementModeClusterChangeToModeParams                               = _objcClass("MTRDeviceEnergyManagementModeClusterChangeToModeParams")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelGetNewMode                     = objc.RegisterName("getNewMode")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetNewMode                     = objc.RegisterName("setNewMode:")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -37,7 +37,9 @@ func MTRDeviceEnergyManagementModeClusterChangeToModeParamsFromID(id objc.ID) *M
 
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelGetNewMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -48,7 +50,9 @@ func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetNewMode(newM
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,11 +63,12 @@ func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetTimedInvokeT
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRDeviceEnergyManagementModeClusterChangeToModeParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

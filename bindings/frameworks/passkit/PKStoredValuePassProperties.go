@@ -16,12 +16,12 @@ type PKStoredValuePassProperties struct {
 }
 
 var (
-	_clsPKStoredValuePassProperties = _objcClass("PKStoredValuePassProperties")
+	_clsPKStoredValuePassProperties                      = _objcClass("PKStoredValuePassProperties")
 	_pKStoredValuePassPropertiesSelPassPropertiesForPass = objc.RegisterName("passPropertiesForPass:")
-	_pKStoredValuePassPropertiesSelIsBlacklisted = objc.RegisterName("isBlacklisted")
-	_pKStoredValuePassPropertiesSelIsBlocked = objc.RegisterName("isBlocked")
-	_pKStoredValuePassPropertiesSelExpirationDate = objc.RegisterName("expirationDate")
-	_pKStoredValuePassPropertiesSelBalances = objc.RegisterName("balances")
+	_pKStoredValuePassPropertiesSelIsBlacklisted         = objc.RegisterName("isBlacklisted")
+	_pKStoredValuePassPropertiesSelIsBlocked             = objc.RegisterName("isBlocked")
+	_pKStoredValuePassPropertiesSelExpirationDate        = objc.RegisterName("expirationDate")
+	_pKStoredValuePassPropertiesSelBalances              = objc.RegisterName("balances")
 )
 
 func PKStoredValuePassPropertiesFromID(id objc.ID) *PKStoredValuePassProperties {
@@ -36,7 +36,9 @@ func PKStoredValuePassPropertiesFromID(id objc.ID) *PKStoredValuePassProperties 
 
 func PKStoredValuePassPropertiesPassPropertiesForPass(pass *PKPass) *PKStoredValuePassProperties {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPKStoredValuePassProperties), _pKStoredValuePassPropertiesSelPassPropertiesForPass, pass.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKStoredValuePassPropertiesFromID(_ret)
 }
 
@@ -53,13 +55,16 @@ func (o *PKStoredValuePassProperties) IsBlocked() bool {
 
 func (o *PKStoredValuePassProperties) ExpirationDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassPropertiesSelExpirationDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PKStoredValuePassProperties) Balances() *foundation.NSArray[*PKStoredValuePassBalance] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKStoredValuePassPropertiesSelBalances)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*PKStoredValuePassBalance](_ret)
 }
-

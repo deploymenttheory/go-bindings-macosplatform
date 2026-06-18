@@ -100,4 +100,3 @@ type IOBluetoothHostControllerable interface {
 }
 
 var _ IOBluetoothHostControllerable = (*IOBluetoothHostController)(nil)
-

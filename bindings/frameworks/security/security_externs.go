@@ -11,2779 +11,3705 @@ import (
 
 func CSSMOID_ADC_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ADC_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AD_CA_ISSUERS() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AD_CA_ISSUERS")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AD_CA_REPOSITORY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AD_CA_REPOSITORY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AD_OCSP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AD_OCSP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AD_TIME_STAMPING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AD_TIME_STAMPING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_EPHEM() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_EPHEM")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_EPHEM_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_EPHEM_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_HYBRID1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_HYBRID1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_HYBRID1_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_HYBRID1_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_HYBRID2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_HYBRID2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_HYBRID2_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_HYBRID2_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_HYBRID_ONEFLOW() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_HYBRID_ONEFLOW")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_ONE_FLOW() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_ONE_FLOW")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_ONE_FLOW_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_ONE_FLOW_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_PUB_NUMBER() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_PUB_NUMBER")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_STATIC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_STATIC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_DH_STATIC_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_DH_STATIC_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_MQV1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_MQV1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_MQV1_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_MQV1_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_MQV2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_MQV2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ANSI_MQV2_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ANSI_MQV2_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLEID_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLEID_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLEID_SHARING_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLEID_SHARING_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_ASC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_ASC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_ECDSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_ECDSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_CODE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_CODE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_CODE_SIGNING_DEV() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_CODE_SIGNING_DEV")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_ICHAT_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_ICHAT_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_PASSBOOK_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_PASSBOOK_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_RESOURCE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_RESOURCE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EKU_SYSTEM_IDENTITY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EKU_SYSTEM_IDENTITY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_APPLEID_SHARING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_APPLEID_SHARING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_APPLE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_APPLE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_CODE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_CODE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_FEE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_FEE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_FEED() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_FEED")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_FEEDEXP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_FEEDEXP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_FEE_MD5() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_FEE_MD5")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_FEE_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_FEE_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_ISIGN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_ISIGN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_APPLEID_SHARING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_APPLEID_SHARING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_CODE_SIGN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_CODE_SIGN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_CODE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_CODE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_CSR_GEN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_CSR_GEN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_EAP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_EAP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_ESCROW_SERVICE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_ESCROW_SERVICE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_ICHAT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_ICHAT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_IP_SEC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_IP_SEC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_LOCAL_CERT_GEN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_LOCAL_CERT_GEN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_MOBILE_STORE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_MOBILE_STORE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PACKAGE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PACKAGE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PASSBOOK_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PASSBOOK_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PKINIT_CLIENT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PKINIT_CLIENT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PKINIT_SERVER() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PKINIT_SERVER")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_QA_PROFILE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_QA_PROFILE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_RESOURCE_SIGN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_RESOURCE_SIGN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_REVOCATION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_REVOCATION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_REVOCATION_CRL() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_REVOCATION_CRL")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_REVOCATION_OCSP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_REVOCATION_OCSP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_SMIME() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_SMIME")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_SSL() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_SSL")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_SW_UPDATE_SIGNING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_SW_UPDATE_SIGNING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_TEST_MOBILE_STORE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_TEST_MOBILE_STORE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_TP_TIMESTAMPING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_TP_TIMESTAMPING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_APPLE_X509_BASIC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_APPLE_X509_BASIC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AliasedEntryName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AliasedEntryName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AuthorityInfoAccess() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AuthorityInfoAccess")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AuthorityKeyIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AuthorityKeyIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_AuthorityRevocationList() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_AuthorityRevocationList")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_BasicConstraints() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_BasicConstraints")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_BiometricInfo() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_BiometricInfo")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_BusinessCategory() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_BusinessCategory")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CACertificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CACertificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CSSMKeyStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CSSMKeyStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CertIssuer() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CertIssuer")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Certicom() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Certicom")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CerticomEllCurve() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CerticomEllCurve")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CertificatePolicies() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CertificatePolicies")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CertificateRevocationList() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CertificateRevocationList")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ChallengePassword() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ChallengePassword")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ClientAuth() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ClientAuth")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveFacsimileTelephoneNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveFacsimileTelephoneNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveInternationalISDNNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveInternationalISDNNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveOrganizationName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveOrganizationName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveOrganizationalUnitName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveOrganizationalUnitName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectivePhysicalDeliveryOfficeName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectivePhysicalDeliveryOfficeName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectivePostOfficeBox() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectivePostOfficeBox")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectivePostalAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectivePostalAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectivePostalCode() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectivePostalCode")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveStateProvinceName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveStateProvinceName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveStreetAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveStreetAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveTelephoneNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveTelephoneNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveTelexNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveTelexNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CollectiveTelexTerminalIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CollectiveTelexTerminalIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CommonName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CommonName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ContentType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ContentType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CounterSignature() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CounterSignature")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CountryName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CountryName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CrlDistributionPoints() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CrlDistributionPoints")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CrlNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CrlNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CrlReason() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CrlReason")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_CrossCertificatePair() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_CrossCertificatePair")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DES_CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DES_CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DH() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DH")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DNQualifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DNQualifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_EMAIL_SIGN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_EMAIL_SIGN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_EXTENSION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_EXTENSION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_IDENTITY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_IDENTITY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_IDENTITY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_IDENTITY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DSA_CMS() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DSA_CMS")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DSA_JDK() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DSA_JDK")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DeltaCrlIndicator() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DeltaCrlIndicator")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Description() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Description")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DestinationIndicator() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DestinationIndicator")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DistinguishedName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DistinguishedName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_DomainComponent() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_DomainComponent")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSHA224() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSHA224")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSHA256() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSHA256")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSHA384() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSHA384")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSHA512() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSHA512")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ECDSA_WithSpecified() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ECDSA_WithSpecified")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_EKU_IPSec() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_EKU_IPSec")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ETSI_QCS_QC_COMPLIANCE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ETSI_QCS_QC_COMPLIANCE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ETSI_QCS_QC_LIMIT_VALUE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ETSI_QCS_QC_LIMIT_VALUE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ETSI_QCS_QC_RETENTION() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ETSI_QCS_QC_RETENTION")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ETSI_QCS_QC_SSCD() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ETSI_QCS_QC_SSCD")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_EmailAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_EmailAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_EmailProtection() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_EmailProtection")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_EnhancedSearchGuide() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_EnhancedSearchGuide")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ExtendedCertificateAttributes() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ExtendedCertificateAttributes")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ExtendedKeyUsage() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ExtendedKeyUsage")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ExtendedKeyUsageAny() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ExtendedKeyUsageAny")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ExtendedUseCodeSigning() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ExtendedUseCodeSigning")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_FacsimileTelephoneNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_FacsimileTelephoneNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_GenerationQualifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_GenerationQualifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_GivenName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_GivenName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_HoldInstructionCode() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_HoldInstructionCode")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_HouseIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_HouseIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_InhibitAnyPolicy() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_InhibitAnyPolicy")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Initials() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Initials")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_InternationalISDNNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_InternationalISDNNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_InvalidityDate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_InvalidityDate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_IssuerAltName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_IssuerAltName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_IssuingDistributionPoint() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_IssuingDistributionPoint")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_IssuingDistributionPoints() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_IssuingDistributionPoints")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KERBv5_PKINIT_AUTH_DATA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KERBv5_PKINIT_AUTH_DATA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KERBv5_PKINIT_DH_KEY_DATA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KERBv5_PKINIT_DH_KEY_DATA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KERBv5_PKINIT_KP_KDC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KERBv5_PKINIT_KP_KDC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KERBv5_PKINIT_RKEY_DATA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KERBv5_PKINIT_RKEY_DATA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KeyUsage() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KeyUsage")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_KnowledgeInformation() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_KnowledgeInformation")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_LocalityName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_LocalityName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MACAPPSTORE_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MACAPPSTORE_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD2WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD2WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD4() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD4")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD4WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD4WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD5() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD5")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MD5WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MD5WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MOBILE_STORE_SIGNING_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MOBILE_STORE_SIGNING_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Member() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Member")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MessageDigest() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MessageDigest")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_MicrosoftSGC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_MicrosoftSGC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Name() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Name")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_NameConstraints() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_NameConstraints")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_NetscapeCertSequence() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_NetscapeCertSequence")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_NetscapeCertType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_NetscapeCertType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_NetscapeSGC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_NetscapeSGC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OAEP_ID_PSPECIFIED() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OAEP_ID_PSPECIFIED")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OAEP_MGF1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OAEP_MGF1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OCSPSigning() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OCSPSigning")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OID_QCS_SYNTAX_V1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OID_QCS_SYNTAX_V1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OID_QCS_SYNTAX_V2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OID_QCS_SYNTAX_V2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ObjectClass() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ObjectClass")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OrganizationName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OrganizationName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_OrganizationalUnitName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_OrganizationalUnitName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Owner() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Owner")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PDA_COUNTRY_CITIZEN() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PDA_COUNTRY_CITIZEN")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PDA_COUNTRY_RESIDENCE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PDA_COUNTRY_RESIDENCE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PDA_DATE_OF_BIRTH() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PDA_DATE_OF_BIRTH")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PDA_GENDER() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PDA_GENDER")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PDA_PLACE_OF_BIRTH() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PDA_PLACE_OF_BIRTH")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_certBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_certBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_crlBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_crlBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_keyBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_keyBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_safeContentsBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_safeContentsBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_secretBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_secretBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS12_shroudedKeyBag() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS12_shroudedKeyBag")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS3() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS3")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_DES_EDE3_CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_DES_EDE3_CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_DIGEST_ALG() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_DIGEST_ALG")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_ENCRYPT_ALG() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_ENCRYPT_ALG")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_HMAC_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_HMAC_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_PBES2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_PBES2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_PBKDF2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_PBKDF2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_PBMAC1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_PBMAC1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_RC2_CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_RC2_CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_RC5_CBC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_RC5_CBC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithMD2AndDES() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithMD2AndDES")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithMD2AndRC2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithMD2AndRC2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithMD5AndDES() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithMD5AndDES")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithMD5AndRC2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithMD5AndRC2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithSHA1AndDES() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithSHA1AndDES")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS5_pbeWithSHA1AndRC2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS5_pbeWithSHA1AndRC2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_Data() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_Data")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_DataWithAttributes() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_DataWithAttributes")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_DigestedData() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_DigestedData")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_EncryptedData() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_EncryptedData")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_EncryptedPrivateKeyInfo() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_EncryptedPrivateKeyInfo")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_EnvelopedData() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_EnvelopedData")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_SignedAndEnvelopedData() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_SignedAndEnvelopedData")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS7_SignedData() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS7_SignedData")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_CertTypes() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_CertTypes")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_CrlTypes() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_CrlTypes")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_FriendlyName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_FriendlyName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_Id_Ct_TSTInfo() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_Id_Ct_TSTInfo")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_LocalKeyId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_LocalKeyId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_SdsiCertificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_SdsiCertificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_TimeStampToken() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_TimeStampToken")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_X509Certificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_X509Certificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKCS9_X509Crl() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKCS9_X509Crl")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_BASIC() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_BASIC")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_CRL() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_CRL")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_NOCHECK() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_NOCHECK")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_NONCE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_NONCE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_RESPONSE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_RESPONSE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PKIX_OCSP_SERVICE_LOCATOR() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PKIX_OCSP_SERVICE_LOCATOR")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PhysicalDeliveryOfficeName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PhysicalDeliveryOfficeName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PolicyConstraints() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PolicyConstraints")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PolicyMappings() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PolicyMappings")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PostOfficeBox() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PostOfficeBox")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PostalAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PostalAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PostalCode() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PostalCode")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PreferredDeliveryMethod() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PreferredDeliveryMethod")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PresentationAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PresentationAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_PrivateKeyUsagePeriod() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_PrivateKeyUsagePeriod")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ProtocolInformation() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ProtocolInformation")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_QC_Statements() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_QC_Statements")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_QT_CPS() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_QT_CPS")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_QT_UNOTICE() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_QT_UNOTICE")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_RSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_RSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_RSAWithOAEP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_RSAWithOAEP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_RegisteredAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_RegisteredAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_RoleOccupant() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_RoleOccupant")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1WithDSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1WithDSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1WithDSA_CMS() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1WithDSA_CMS")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1WithDSA_JDK() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1WithDSA_JDK")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA1WithRSA_OIW() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA1WithRSA_OIW")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA224() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA224")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA224WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA224WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA256() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA256")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA256WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA256WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA384() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA384")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA384WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA384WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA512() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA512")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SHA512WithRSA() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SHA512WithRSA")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SearchGuide() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SearchGuide")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SeeAlso() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SeeAlso")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SerialNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SerialNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ServerAuth() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ServerAuth")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SigningTime() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SigningTime")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_StateProvinceName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_StateProvinceName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_StreetAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_StreetAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectAltName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectAltName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectDirectoryAttributes() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectDirectoryAttributes")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectEmailAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectEmailAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectInfoAccess() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectInfoAccess")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectKeyIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectKeyIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectPicture() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectPicture")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SubjectSignatureBitmap() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SubjectSignatureBitmap")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_SupportedApplicationContext() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_SupportedApplicationContext")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Surname() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Surname")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_TelephoneNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_TelephoneNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_TelexNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_TelexNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_TelexTerminalIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_TelexTerminalIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_TimeStamping() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_TimeStamping")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_Title() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_Title")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UniqueIdentifier() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UniqueIdentifier")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UniqueMember() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UniqueMember")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UnstructuredAddress() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UnstructuredAddress")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UnstructuredName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UnstructuredName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UseExemptions() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UseExemptions")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UserCertificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UserCertificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UserID() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UserID")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_UserPassword() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_UserPassword")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLIssuerNameCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLIssuerNameCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLIssuerNameLDAP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLIssuerNameLDAP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLIssuerStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLIssuerStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLNextUpdate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLNextUpdate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLNumberOfRevokedCertEntries() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLNumberOfRevokedCertEntries")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedCertificatesCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedCertificatesCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedCertificatesStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedCertificatesStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedEntryCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedEntryCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedEntryRevocationDate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedEntryRevocationDate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedEntrySerialNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedEntrySerialNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLRevokedEntryStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLRevokedEntryStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CRLThisUpdate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CRLThisUpdate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CertificateIssuerUniqueId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CertificateIssuerUniqueId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1CertificateSubjectUniqueId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1CertificateSubjectUniqueId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1IssuerName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1IssuerName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1IssuerNameCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1IssuerNameCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1IssuerNameLDAP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1IssuerNameLDAP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1IssuerNameStd() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1IssuerNameStd")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SerialNumber() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SerialNumber")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1Signature() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1Signature")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SignatureAlgorithm() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SignatureAlgorithm")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SignatureAlgorithmParameters() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SignatureAlgorithmParameters")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SignatureAlgorithmTBS() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SignatureAlgorithmTBS")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SignatureCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SignatureCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SignatureStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SignatureStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectName() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectName")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectNameCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectNameCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectNameLDAP() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectNameLDAP")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectNameStd() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectNameStd")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectPublicKey() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectPublicKey")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectPublicKeyAlgorithm() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectPublicKeyAlgorithm")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1SubjectPublicKeyCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1SubjectPublicKeyCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1ValidityNotAfter() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1ValidityNotAfter")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1ValidityNotBefore() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1ValidityNotBefore")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V1Version() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V1Version")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLAllExtensionsCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLAllExtensionsCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLAllExtensionsStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLAllExtensionsStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLExtensionCritical() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLExtensionCritical")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLExtensionId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLExtensionId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLExtensionType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLExtensionType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLNumberOfExtensions() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLNumberOfExtensions")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryExtensionCritical() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryExtensionCritical")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryExtensionId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryExtensionId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryExtensionType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryExtensionType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryExtensionValue() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryExtensionValue")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLSignedCrlCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLSignedCrlCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLSignedCrlStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLSignedCrlStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLSingleExtensionCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLSingleExtensionCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLSingleExtensionStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLSingleExtensionStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLTbsCertListCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLTbsCertListCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLTbsCertListStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLTbsCertListStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V2CRLVersion() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V2CRLVersion")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3Certificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3Certificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionCritical() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionCritical")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionId() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionId")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionValue() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionValue")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionsCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionsCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateExtensionsStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateExtensionsStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3CertificateNumberOfExtensions() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3CertificateNumberOfExtensions")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3SignedCertificate() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3SignedCertificate")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X509V3SignedCertificateCStruct() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X509V3SignedCertificateCStruct")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_C_TwoCurve() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_C_TwoCurve")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_EllCurve() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_EllCurve")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_FieldType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_FieldType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_PrimeCurve() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_PrimeCurve")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_PubKeyType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_PubKeyType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X9_62_SigType() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X9_62_SigType")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_X_121Address() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_X_121Address")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_ecPublicKey() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_ecPublicKey")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp112r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp112r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp112r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp112r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp128r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp128r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp128r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp128r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp160k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp160k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp160r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp160r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp160r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp160r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp192k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp192k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp192r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp192r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp224k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp224k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp224r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp224r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp256k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp256k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp256r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp256r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp384r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp384r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_secp521r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_secp521r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect113r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect113r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect113r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect113r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect131r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect131r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect131r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect131r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect163k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect163k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect163r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect163r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect163r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect163r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect193r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect193r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect193r2() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect193r2")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect233k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect233k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect233r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect233r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect239k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect239k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect283k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect283k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect283r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect283r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect409k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect409k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect409r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect409r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect571k1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect571k1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func CSSMOID_sect571r1() CssmData {
 	ptr, _ := purego.Dlsym(_securityLib, "CSSMOID_sect571r1")
-	if ptr == 0 { return CssmData{} }
+	if ptr == 0 {
+		return CssmData{}
+	}
 	return *(*CssmData)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleCSP() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleCSP")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleCSPDL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleCSPDL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleDotMacDL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleDotMacDL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleDotMacTP() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleDotMacTP")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleFileDL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleFileDL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleLDAPDL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleLDAPDL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleSdCSPDL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleSdCSPDL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleX509CL() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleX509CL")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidAppleX509TP() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidAppleX509TP")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
 func GGuidCssm() CssmGuid {
 	ptr, _ := purego.Dlsym(_securityLib, "gGuidCssm")
-	if ptr == 0 { return CssmGuid{} }
+	if ptr == 0 {
+		return CssmGuid{}
+	}
 	return *(*CssmGuid)(unsafe.Pointer(ptr))
 }
 
@@ -6318,4 +7244,3 @@ func OidSubjectKeyIdentifier() uintptr {
 	ptr, _ := purego.Dlsym(_securityLib, "oidSubjectKeyIdentifier")
 	return ptr
 }
-

@@ -16,11 +16,11 @@ type GKDialogController struct {
 }
 
 var (
-	_clsGKDialogController = _objcClass("GKDialogController")
-	_gKDialogControllerSelPresentViewController = objc.RegisterName("presentViewController:")
-	_gKDialogControllerSelDismiss = objc.RegisterName("dismiss:")
-	_gKDialogControllerSelParentWindow = objc.RegisterName("parentWindow")
-	_gKDialogControllerSelSetParentWindow = objc.RegisterName("setParentWindow:")
+	_clsGKDialogController                       = _objcClass("GKDialogController")
+	_gKDialogControllerSelPresentViewController  = objc.RegisterName("presentViewController:")
+	_gKDialogControllerSelDismiss                = objc.RegisterName("dismiss:")
+	_gKDialogControllerSelParentWindow           = objc.RegisterName("parentWindow")
+	_gKDialogControllerSelSetParentWindow        = objc.RegisterName("setParentWindow:")
 	_gKDialogControllerSelSharedDialogController = objc.RegisterName("sharedDialogController")
 )
 
@@ -45,7 +45,9 @@ func (o *GKDialogController) Dismiss(sender objc.ID) {
 
 func (o *GKDialogController) ParentWindow() *appkit.NSWindow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKDialogControllerSelParentWindow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return appkit.NSWindowFromID(_ret)
 }
 
@@ -55,7 +57,8 @@ func (o *GKDialogController) SetParentWindow(parentWindow *appkit.NSWindow) {
 
 func GKDialogControllerSharedDialogController() *GKDialogController {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKDialogController), _gKDialogControllerSelSharedDialogController)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKDialogControllerFromID(_ret)
 }
-

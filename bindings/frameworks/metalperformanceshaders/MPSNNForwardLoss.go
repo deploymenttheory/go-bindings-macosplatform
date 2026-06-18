@@ -20,23 +20,23 @@ type MPSNNForwardLoss struct {
 }
 
 var (
-	_clsMPSNNForwardLoss = _objcClass("MPSNNForwardLoss")
-	_mPSNNForwardLossSelInitWithDeviceLossDescriptor = objc.RegisterName("initWithDevice:lossDescriptor:")
-	_mPSNNForwardLossSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSNNForwardLossSelEncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:weights:destinationStates:destinationImages:")
+	_clsMPSNNForwardLoss                                                                                                = _objcClass("MPSNNForwardLoss")
+	_mPSNNForwardLossSelInitWithDeviceLossDescriptor                                                                    = objc.RegisterName("initWithDevice:lossDescriptor:")
+	_mPSNNForwardLossSelInitWithCoderDevice                                                                             = objc.RegisterName("initWithCoder:device:")
+	_mPSNNForwardLossSelEncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages           = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:weights:destinationStates:destinationImages:")
 	_mPSNNForwardLossSelEncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary = objc.RegisterName("encodeBatchToCommandBuffer:sourceImages:labels:weights:destinationStates:destinationStateIsTemporary:")
-	_mPSNNForwardLossSelLossType = objc.RegisterName("lossType")
-	_mPSNNForwardLossSelReductionType = objc.RegisterName("reductionType")
-	_mPSNNForwardLossSelReduceAcrossBatch = objc.RegisterName("reduceAcrossBatch")
-	_mPSNNForwardLossSelNumberOfClasses = objc.RegisterName("numberOfClasses")
-	_mPSNNForwardLossSelWeight = objc.RegisterName("weight")
-	_mPSNNForwardLossSelSetWeight = objc.RegisterName("setWeight:")
-	_mPSNNForwardLossSelLabelSmoothing = objc.RegisterName("labelSmoothing")
-	_mPSNNForwardLossSelSetLabelSmoothing = objc.RegisterName("setLabelSmoothing:")
-	_mPSNNForwardLossSelEpsilon = objc.RegisterName("epsilon")
-	_mPSNNForwardLossSelSetEpsilon = objc.RegisterName("setEpsilon:")
-	_mPSNNForwardLossSelDelta = objc.RegisterName("delta")
-	_mPSNNForwardLossSelSetDelta = objc.RegisterName("setDelta:")
+	_mPSNNForwardLossSelLossType                                                                                        = objc.RegisterName("lossType")
+	_mPSNNForwardLossSelReductionType                                                                                   = objc.RegisterName("reductionType")
+	_mPSNNForwardLossSelReduceAcrossBatch                                                                               = objc.RegisterName("reduceAcrossBatch")
+	_mPSNNForwardLossSelNumberOfClasses                                                                                 = objc.RegisterName("numberOfClasses")
+	_mPSNNForwardLossSelWeight                                                                                          = objc.RegisterName("weight")
+	_mPSNNForwardLossSelSetWeight                                                                                       = objc.RegisterName("setWeight:")
+	_mPSNNForwardLossSelLabelSmoothing                                                                                  = objc.RegisterName("labelSmoothing")
+	_mPSNNForwardLossSelSetLabelSmoothing                                                                               = objc.RegisterName("setLabelSmoothing:")
+	_mPSNNForwardLossSelEpsilon                                                                                         = objc.RegisterName("epsilon")
+	_mPSNNForwardLossSelSetEpsilon                                                                                      = objc.RegisterName("setEpsilon:")
+	_mPSNNForwardLossSelDelta                                                                                           = objc.RegisterName("delta")
+	_mPSNNForwardLossSelSetDelta                                                                                        = objc.RegisterName("setDelta:")
 )
 
 func MPSNNForwardLossFromID(id objc.ID) *MPSNNForwardLoss {
@@ -52,14 +52,18 @@ func MPSNNForwardLossFromID(id objc.ID) *MPSNNForwardLoss {
 // @abstract   Initialize the loss forward pass filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSNNForwardLoss object or nil, if failure.
 func (o *MPSNNForwardLoss) InitWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *MPSNNForwardLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossSelInitWithDeviceLossDescriptor, device, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNForwardLossFromID(_ret)
 }
 
 // @abstract <NSSecureCoding> support
 func (o *MPSNNForwardLoss) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSNNForwardLoss {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNNForwardLossSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNNForwardLossFromID(_ret)
 }
 
@@ -128,4 +132,3 @@ func (o *MPSNNForwardLoss) Delta() float32 {
 func (o *MPSNNForwardLoss) SetDelta(delta float32) {
 	o.Ptr().Send(_mPSNNForwardLossSelSetDelta, delta)
 }
-

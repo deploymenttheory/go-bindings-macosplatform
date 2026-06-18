@@ -41,4 +41,3 @@ type AnimationEventable interface {
 }
 
 var _ AnimationEventable = (*AnimationEvent)(nil)
-

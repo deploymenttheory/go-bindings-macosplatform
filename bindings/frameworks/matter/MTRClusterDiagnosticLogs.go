@@ -18,15 +18,15 @@ type MTRClusterDiagnosticLogs struct {
 }
 
 var (
-	_clsMTRClusterDiagnosticLogs = _objcClass("MTRClusterDiagnosticLogs")
-	_mTRClusterDiagnosticLogsSelRetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("retrieveLogsRequestWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterDiagnosticLogsSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterDiagnosticLogsSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterDiagnosticLogsSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterDiagnosticLogsSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterDiagnosticLogsSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterDiagnosticLogsSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterDiagnosticLogsSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_clsMTRClusterDiagnosticLogs                                                                                  = _objcClass("MTRClusterDiagnosticLogs")
+	_mTRClusterDiagnosticLogsSelRetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("retrieveLogsRequestWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterDiagnosticLogsSelReadAttributeGeneratedCommandListWithParams                                       = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterDiagnosticLogsSelReadAttributeAcceptedCommandListWithParams                                        = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterDiagnosticLogsSelReadAttributeAttributeListWithParams                                              = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterDiagnosticLogsSelReadAttributeFeatureMapWithParams                                                 = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterDiagnosticLogsSelReadAttributeClusterRevisionWithParams                                            = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterDiagnosticLogsSelInitWithDeviceEndpointIDQueue                                                     = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterDiagnosticLogsSelInitWithDeviceEndpointQueue                                                       = objc.RegisterName("initWithDevice:endpoint:queue:")
 	_mTRClusterDiagnosticLogsSelRetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("retrieveLogsRequestWithParams:expectedValues:expectedValueInterval:completionHandler:")
 )
 
@@ -82,13 +82,17 @@ func (o *MTRClusterDiagnosticLogs) ReadAttributeClusterRevisionWithParams(params
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterDiagnosticLogs) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDiagnosticLogs {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDiagnosticLogsSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDiagnosticLogsFromID(_ret)
 }
 
 func (o *MTRClusterDiagnosticLogs) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterDiagnosticLogs {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterDiagnosticLogsSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterDiagnosticLogsFromID(_ret)
 }
 
@@ -105,4 +109,3 @@ func (o *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesEx
 	}
 	o.Ptr().Send(_mTRClusterDiagnosticLogsSelRetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler, params.Ptr(), expectedDataValueDictionaries, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

@@ -45,7 +45,9 @@ func (x *BatchUpdateResult) ResultType() raw.NSBatchUpdateRequestResultType {
 	return x.inner.ResultType()
 }
 
-func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreResult
+}
 
 // BatchUpdateResultable is the interface implemented by [BatchUpdateResult], for mocking and DI.
 type BatchUpdateResultable interface {
@@ -55,4 +57,3 @@ type BatchUpdateResultable interface {
 }
 
 var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)
-

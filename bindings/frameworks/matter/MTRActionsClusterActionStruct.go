@@ -16,19 +16,19 @@ type MTRActionsClusterActionStruct struct {
 }
 
 var (
-	_clsMTRActionsClusterActionStruct = _objcClass("MTRActionsClusterActionStruct")
-	_mTRActionsClusterActionStructSelActionID = objc.RegisterName("actionID")
-	_mTRActionsClusterActionStructSelSetActionID = objc.RegisterName("setActionID:")
-	_mTRActionsClusterActionStructSelName = objc.RegisterName("name")
-	_mTRActionsClusterActionStructSelSetName = objc.RegisterName("setName:")
-	_mTRActionsClusterActionStructSelType = objc.RegisterName("type")
-	_mTRActionsClusterActionStructSelSetType = objc.RegisterName("setType:")
-	_mTRActionsClusterActionStructSelEndpointListID = objc.RegisterName("endpointListID")
-	_mTRActionsClusterActionStructSelSetEndpointListID = objc.RegisterName("setEndpointListID:")
-	_mTRActionsClusterActionStructSelSupportedCommands = objc.RegisterName("supportedCommands")
+	_clsMTRActionsClusterActionStruct                     = _objcClass("MTRActionsClusterActionStruct")
+	_mTRActionsClusterActionStructSelActionID             = objc.RegisterName("actionID")
+	_mTRActionsClusterActionStructSelSetActionID          = objc.RegisterName("setActionID:")
+	_mTRActionsClusterActionStructSelName                 = objc.RegisterName("name")
+	_mTRActionsClusterActionStructSelSetName              = objc.RegisterName("setName:")
+	_mTRActionsClusterActionStructSelType                 = objc.RegisterName("type")
+	_mTRActionsClusterActionStructSelSetType              = objc.RegisterName("setType:")
+	_mTRActionsClusterActionStructSelEndpointListID       = objc.RegisterName("endpointListID")
+	_mTRActionsClusterActionStructSelSetEndpointListID    = objc.RegisterName("setEndpointListID:")
+	_mTRActionsClusterActionStructSelSupportedCommands    = objc.RegisterName("supportedCommands")
 	_mTRActionsClusterActionStructSelSetSupportedCommands = objc.RegisterName("setSupportedCommands:")
-	_mTRActionsClusterActionStructSelState = objc.RegisterName("state")
-	_mTRActionsClusterActionStructSelSetState = objc.RegisterName("setState:")
+	_mTRActionsClusterActionStructSelState                = objc.RegisterName("state")
+	_mTRActionsClusterActionStructSelSetState             = objc.RegisterName("setState:")
 )
 
 func MTRActionsClusterActionStructFromID(id objc.ID) *MTRActionsClusterActionStruct {
@@ -43,7 +43,9 @@ func MTRActionsClusterActionStructFromID(id objc.ID) *MTRActionsClusterActionStr
 
 func (o *MTRActionsClusterActionStruct) ActionID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelActionID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRActionsClusterActionStruct) SetActionID(actionID *foundation.NSNumbe
 
 func (o *MTRActionsClusterActionStruct) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRActionsClusterActionStruct) SetName(name *foundation.NSString) {
 
 func (o *MTRActionsClusterActionStruct) Type() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRActionsClusterActionStruct) SetType(type_ *foundation.NSNumber) {
 
 func (o *MTRActionsClusterActionStruct) EndpointListID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelEndpointListID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRActionsClusterActionStruct) SetEndpointListID(endpointListID *founda
 
 func (o *MTRActionsClusterActionStruct) SupportedCommands() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelSupportedCommands)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRActionsClusterActionStruct) SetSupportedCommands(supportedCommands *
 
 func (o *MTRActionsClusterActionStruct) State() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRActionsClusterActionStructSelState)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRActionsClusterActionStruct) SetState(state *foundation.NSNumber) {
 	o.Ptr().Send(_mTRActionsClusterActionStructSelSetState, state.Ptr())
 }
-

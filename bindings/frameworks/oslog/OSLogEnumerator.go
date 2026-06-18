@@ -26,4 +26,3 @@ func OSLogEnumeratorFromID(id objc.ID) *OSLogEnumerator {
 	purego.Track(o)
 	return o
 }
-

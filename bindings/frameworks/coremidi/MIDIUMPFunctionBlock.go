@@ -16,18 +16,18 @@ type MIDIUMPFunctionBlock struct {
 }
 
 var (
-	_clsMIDIUMPFunctionBlock = _objcClass("MIDIUMPFunctionBlock")
-	_mIDIUMPFunctionBlockSelName = objc.RegisterName("name")
-	_mIDIUMPFunctionBlockSelFunctionBlockID = objc.RegisterName("functionBlockID")
-	_mIDIUMPFunctionBlockSelDirection = objc.RegisterName("direction")
-	_mIDIUMPFunctionBlockSelFirstGroup = objc.RegisterName("firstGroup")
+	_clsMIDIUMPFunctionBlock                   = _objcClass("MIDIUMPFunctionBlock")
+	_mIDIUMPFunctionBlockSelName               = objc.RegisterName("name")
+	_mIDIUMPFunctionBlockSelFunctionBlockID    = objc.RegisterName("functionBlockID")
+	_mIDIUMPFunctionBlockSelDirection          = objc.RegisterName("direction")
+	_mIDIUMPFunctionBlockSelFirstGroup         = objc.RegisterName("firstGroup")
 	_mIDIUMPFunctionBlockSelTotalGroupsSpanned = objc.RegisterName("totalGroupsSpanned")
-	_mIDIUMPFunctionBlockSelMaxSysEx8Streams = objc.RegisterName("maxSysEx8Streams")
-	_mIDIUMPFunctionBlockSelMIDI1Info = objc.RegisterName("MIDI1Info")
-	_mIDIUMPFunctionBlockSelUIHint = objc.RegisterName("UIHint")
-	_mIDIUMPFunctionBlockSelUMPEndpoint = objc.RegisterName("UMPEndpoint")
-	_mIDIUMPFunctionBlockSelMidiCIDevice = objc.RegisterName("midiCIDevice")
-	_mIDIUMPFunctionBlockSelIsEnabled = objc.RegisterName("isEnabled")
+	_mIDIUMPFunctionBlockSelMaxSysEx8Streams   = objc.RegisterName("maxSysEx8Streams")
+	_mIDIUMPFunctionBlockSelMIDI1Info          = objc.RegisterName("MIDI1Info")
+	_mIDIUMPFunctionBlockSelUIHint             = objc.RegisterName("UIHint")
+	_mIDIUMPFunctionBlockSelUMPEndpoint        = objc.RegisterName("UMPEndpoint")
+	_mIDIUMPFunctionBlockSelMidiCIDevice       = objc.RegisterName("midiCIDevice")
+	_mIDIUMPFunctionBlockSelIsEnabled          = objc.RegisterName("isEnabled")
 )
 
 func MIDIUMPFunctionBlockFromID(id objc.ID) *MIDIUMPFunctionBlock {
@@ -43,7 +43,9 @@ func MIDIUMPFunctionBlockFromID(id objc.ID) *MIDIUMPFunctionBlock {
 // @property 	name @brief		A string containing the Function Block's name.
 func (o *MIDIUMPFunctionBlock) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPFunctionBlockSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -92,14 +94,18 @@ func (o *MIDIUMPFunctionBlock) UIHint() MIDIUMPFunctionBlockUIHint {
 // @property 	UMPEndpoint @brief		The UMP Endpoint to which this Function Block is registered. @discussion If the function block does not belong to an endpoint this property will be nil.
 func (o *MIDIUMPFunctionBlock) UMPEndpoint() *MIDIUMPEndpoint {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPFunctionBlockSelUMPEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDIUMPEndpointFromID(_ret)
 }
 
 // @property     MIDICIDevice @brief        Retrieve the MIDICIDevice class interface if the Function Block supports MIDI-CI. @discussion   If a Function Block was created as a MIDICIDevice object, this property will provide an in-place MIDICIDevice interface that may be used with MIDI-CI API. If the device was not created as a MIDICIDevice, this method returns nil.
 func (o *MIDIUMPFunctionBlock) MidiCIDevice() *MIDICIDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPFunctionBlockSelMidiCIDevice)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceFromID(_ret)
 }
 
@@ -108,4 +114,3 @@ func (o *MIDIUMPFunctionBlock) IsEnabled() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mIDIUMPFunctionBlockSelIsEnabled)
 	return _ret
 }
-

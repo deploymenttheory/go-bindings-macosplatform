@@ -16,7 +16,9 @@ type CollectionViewFlowLayoutInvalidationContext struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewFlowLayoutInvalidationContext].
-func (x *CollectionViewFlowLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewFlowLayoutInvalidationContext { return x.inner }
+func (x *CollectionViewFlowLayoutInvalidationContext) Unwrap() *raw.NSCollectionViewFlowLayoutInvalidationContext {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,7 +82,9 @@ func (x *CollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutAtt
 	x.inner.SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes)
 }
 
-func (x *CollectionViewFlowLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext { return &x.inner.NSCollectionViewLayoutInvalidationContext }
+func (x *CollectionViewFlowLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext {
+	return &x.inner.NSCollectionViewLayoutInvalidationContext
+}
 
 // CollectionViewFlowLayoutInvalidationContextable is the interface implemented by [CollectionViewFlowLayoutInvalidationContext], for mocking and DI.
 type CollectionViewFlowLayoutInvalidationContextable interface {
@@ -96,4 +100,3 @@ type CollectionViewFlowLayoutInvalidationContextable interface {
 }
 
 var _ CollectionViewFlowLayoutInvalidationContextable = (*CollectionViewFlowLayoutInvalidationContext)(nil)
-

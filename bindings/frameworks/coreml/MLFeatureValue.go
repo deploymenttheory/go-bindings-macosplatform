@@ -19,33 +19,33 @@ type MLFeatureValue struct {
 }
 
 var (
-	_clsMLFeatureValue = _objcClass("MLFeatureValue")
-	_mLFeatureValueSelFeatureValueWithInt64 = objc.RegisterName("featureValueWithInt64:")
-	_mLFeatureValueSelFeatureValueWithDouble = objc.RegisterName("featureValueWithDouble:")
-	_mLFeatureValueSelFeatureValueWithString = objc.RegisterName("featureValueWithString:")
-	_mLFeatureValueSelFeatureValueWithMultiArray = objc.RegisterName("featureValueWithMultiArray:")
-	_mLFeatureValueSelFeatureValueWithPixelBuffer = objc.RegisterName("featureValueWithPixelBuffer:")
-	_mLFeatureValueSelFeatureValueWithSequence = objc.RegisterName("featureValueWithSequence:")
-	_mLFeatureValueSelUndefinedFeatureValueWithType = objc.RegisterName("undefinedFeatureValueWithType:")
-	_mLFeatureValueSelFeatureValueWithDictionaryError = objc.RegisterName("featureValueWithDictionary:error:")
-	_mLFeatureValueSelIsEqualToFeatureValue = objc.RegisterName("isEqualToFeatureValue:")
-	_mLFeatureValueSelType = objc.RegisterName("type")
-	_mLFeatureValueSelIsUndefined = objc.RegisterName("isUndefined")
-	_mLFeatureValueSelInt64Value = objc.RegisterName("int64Value")
-	_mLFeatureValueSelDoubleValue = objc.RegisterName("doubleValue")
-	_mLFeatureValueSelStringValue = objc.RegisterName("stringValue")
-	_mLFeatureValueSelMultiArrayValue = objc.RegisterName("multiArrayValue")
-	_mLFeatureValueSelDictionaryValue = objc.RegisterName("dictionaryValue")
-	_mLFeatureValueSelImageBufferValue = objc.RegisterName("imageBufferValue")
-	_mLFeatureValueSelSequenceValue = objc.RegisterName("sequenceValue")
-	_mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError = objc.RegisterName("featureValueWithImageAtURL:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
-	_mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError = objc.RegisterName("featureValueWithImageAtURL:constraint:options:error:")
-	_mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError = objc.RegisterName("featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
-	_mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError = objc.RegisterName("featureValueWithCGImage:constraint:options:error:")
+	_clsMLFeatureValue                                                                                     = _objcClass("MLFeatureValue")
+	_mLFeatureValueSelFeatureValueWithInt64                                                                = objc.RegisterName("featureValueWithInt64:")
+	_mLFeatureValueSelFeatureValueWithDouble                                                               = objc.RegisterName("featureValueWithDouble:")
+	_mLFeatureValueSelFeatureValueWithString                                                               = objc.RegisterName("featureValueWithString:")
+	_mLFeatureValueSelFeatureValueWithMultiArray                                                           = objc.RegisterName("featureValueWithMultiArray:")
+	_mLFeatureValueSelFeatureValueWithPixelBuffer                                                          = objc.RegisterName("featureValueWithPixelBuffer:")
+	_mLFeatureValueSelFeatureValueWithSequence                                                             = objc.RegisterName("featureValueWithSequence:")
+	_mLFeatureValueSelUndefinedFeatureValueWithType                                                        = objc.RegisterName("undefinedFeatureValueWithType:")
+	_mLFeatureValueSelFeatureValueWithDictionaryError                                                      = objc.RegisterName("featureValueWithDictionary:error:")
+	_mLFeatureValueSelIsEqualToFeatureValue                                                                = objc.RegisterName("isEqualToFeatureValue:")
+	_mLFeatureValueSelType                                                                                 = objc.RegisterName("type")
+	_mLFeatureValueSelIsUndefined                                                                          = objc.RegisterName("isUndefined")
+	_mLFeatureValueSelInt64Value                                                                           = objc.RegisterName("int64Value")
+	_mLFeatureValueSelDoubleValue                                                                          = objc.RegisterName("doubleValue")
+	_mLFeatureValueSelStringValue                                                                          = objc.RegisterName("stringValue")
+	_mLFeatureValueSelMultiArrayValue                                                                      = objc.RegisterName("multiArrayValue")
+	_mLFeatureValueSelDictionaryValue                                                                      = objc.RegisterName("dictionaryValue")
+	_mLFeatureValueSelImageBufferValue                                                                     = objc.RegisterName("imageBufferValue")
+	_mLFeatureValueSelSequenceValue                                                                        = objc.RegisterName("sequenceValue")
+	_mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError            = objc.RegisterName("featureValueWithImageAtURL:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
+	_mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError                                     = objc.RegisterName("featureValueWithImageAtURL:constraint:options:error:")
+	_mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError               = objc.RegisterName("featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
+	_mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError                                        = objc.RegisterName("featureValueWithCGImage:constraint:options:error:")
 	_mLFeatureValueSelFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError = objc.RegisterName("featureValueWithImageAtURL:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
-	_mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError = objc.RegisterName("featureValueWithImageAtURL:orientation:constraint:options:error:")
-	_mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError = objc.RegisterName("featureValueWithCGImage:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
-	_mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError = objc.RegisterName("featureValueWithCGImage:orientation:constraint:options:error:")
+	_mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError                          = objc.RegisterName("featureValueWithImageAtURL:orientation:constraint:options:error:")
+	_mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError    = objc.RegisterName("featureValueWithCGImage:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:error:")
+	_mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError                             = objc.RegisterName("featureValueWithCGImage:orientation:constraint:options:error:")
 )
 
 func MLFeatureValueFromID(id objc.ID) *MLFeatureValue {
@@ -61,44 +61,58 @@ func MLFeatureValueFromID(id objc.ID) *MLFeatureValue {
 // Hold an object with the specified value
 func MLFeatureValueFeatureValueWithInt64(value int64) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithInt64, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 func MLFeatureValueFeatureValueWithDouble(value float64) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDouble, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 func MLFeatureValueFeatureValueWithString(value *foundation.NSString) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithString, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 func MLFeatureValueFeatureValueWithMultiArray(value *MLMultiArray) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithMultiArray, value.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 func MLFeatureValueFeatureValueWithPixelBuffer(value unsafe.Pointer) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithPixelBuffer, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 func MLFeatureValueFeatureValueWithSequence(sequence *MLSequence) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithSequence, sequence.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
 // Represent an undefined value of a specified type
 func MLFeatureValueUndefinedFeatureValueWithType(type_ MLFeatureType) *MLFeatureValue {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelUndefinedFeatureValueWithType, type_)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLFeatureValueFromID(_ret)
 }
 
@@ -106,7 +120,9 @@ func MLFeatureValueUndefinedFeatureValueWithType(type_ MLFeatureType) *MLFeature
 func MLFeatureValueFeatureValueWithDictionaryError(value *foundation.NSDictionary[objc.ID, *foundation.NSNumber]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithDictionaryError, value, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -146,14 +162,18 @@ func (o *MLFeatureValue) DoubleValue() float64 {
 // Populated value if the type is MLFeatureTypeString
 func (o *MLFeatureValue) StringValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureValueSelStringValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // Populated value if the type is MLFeatureTypeMultiArray
 func (o *MLFeatureValue) MultiArrayValue() *MLMultiArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureValueSelMultiArrayValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLMultiArrayFromID(_ret)
 }
 
@@ -172,7 +192,9 @@ func (o *MLFeatureValue) ImageBufferValue() unsafe.Pointer {
 // Populated value if the type is MLFeatureTypeSequence
 func (o *MLFeatureValue) SequenceValue() *MLSequence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLFeatureValueSelSequenceValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLSequenceFromID(_ret)
 }
 
@@ -180,7 +202,9 @@ func (o *MLFeatureValue) SequenceValue() *MLSequence {
 func MLFeatureValueFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError(url *foundation.NSURL, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -191,7 +215,9 @@ func MLFeatureValueFeatureValueWithImageAtURLPixelsWidePixelsHighPixelFormatType
 func MLFeatureValueFeatureValueWithImageAtURLConstraintOptionsError(url *foundation.NSURL, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLConstraintOptionsError, url.Ptr(), constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -202,7 +228,9 @@ func MLFeatureValueFeatureValueWithImageAtURLConstraintOptionsError(url *foundat
 func MLFeatureValueFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage unsafe.Pointer, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -213,7 +241,9 @@ func MLFeatureValueFeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOpt
 func MLFeatureValueFeatureValueWithCGImageConstraintOptionsError(cgImage unsafe.Pointer, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageConstraintOptionsError, cgImage, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -224,7 +254,9 @@ func MLFeatureValueFeatureValueWithCGImageConstraintOptionsError(cgImage unsafe.
 func MLFeatureValueFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError(url *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, url.Ptr(), orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -235,7 +267,9 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationPixelsWidePixelsHighPixe
 func MLFeatureValueFeatureValueWithImageAtURLOrientationConstraintOptionsError(url *foundation.NSURL, orientation imageio.CGImagePropertyOrientation, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithImageAtURLOrientationConstraintOptionsError, url.Ptr(), orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -246,7 +280,9 @@ func MLFeatureValueFeatureValueWithImageAtURLOrientationConstraintOptionsError(u
 func MLFeatureValueFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, pixelsWide int, pixelsHigh int, pixelFormatType uint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFormatTypeOptionsError, cgImage, orientation, pixelsWide, pixelsHigh, pixelFormatType, options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -257,10 +293,11 @@ func MLFeatureValueFeatureValueWithCGImageOrientationPixelsWidePixelsHighPixelFo
 func MLFeatureValueFeatureValueWithCGImageOrientationConstraintOptionsError(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, constraint *MLImageConstraint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MLFeatureValue, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLFeatureValue), _mLFeatureValueSelFeatureValueWithCGImageOrientationConstraintOptionsError, cgImage, orientation, constraint.Ptr(), options, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
 	return MLFeatureValueFromID(_ret), nil
 }
-

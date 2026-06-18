@@ -16,16 +16,16 @@ type UNNotificationCategory struct {
 }
 
 var (
-	_clsUNNotificationCategory = _objcClass("UNNotificationCategory")
-	_uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersOptions = objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:options:")
-	_uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions = objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:options:")
+	_clsUNNotificationCategory                                                                                                        = _objcClass("UNNotificationCategory")
+	_uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersOptions                                                   = objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:options:")
+	_uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions                      = objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:options:")
 	_uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions = objc.RegisterName("categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:categorySummaryFormat:options:")
-	_uNNotificationCategorySelIdentifier = objc.RegisterName("identifier")
-	_uNNotificationCategorySelActions = objc.RegisterName("actions")
-	_uNNotificationCategorySelIntentIdentifiers = objc.RegisterName("intentIdentifiers")
-	_uNNotificationCategorySelOptions = objc.RegisterName("options")
-	_uNNotificationCategorySelHiddenPreviewsBodyPlaceholder = objc.RegisterName("hiddenPreviewsBodyPlaceholder")
-	_uNNotificationCategorySelCategorySummaryFormat = objc.RegisterName("categorySummaryFormat")
+	_uNNotificationCategorySelIdentifier                                                                                              = objc.RegisterName("identifier")
+	_uNNotificationCategorySelActions                                                                                                 = objc.RegisterName("actions")
+	_uNNotificationCategorySelIntentIdentifiers                                                                                       = objc.RegisterName("intentIdentifiers")
+	_uNNotificationCategorySelOptions                                                                                                 = objc.RegisterName("options")
+	_uNNotificationCategorySelHiddenPreviewsBodyPlaceholder                                                                           = objc.RegisterName("hiddenPreviewsBodyPlaceholder")
+	_uNNotificationCategorySelCategorySummaryFormat                                                                                   = objc.RegisterName("categorySummaryFormat")
 )
 
 func UNNotificationCategoryFromID(id objc.ID) *UNNotificationCategory {
@@ -40,31 +40,41 @@ func UNNotificationCategoryFromID(id objc.ID) *UNNotificationCategory {
 
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], options UNNotificationCategoryOptions) *UNNotificationCategory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationCategoryFromID(_ret)
 }
 
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder *foundation.NSString, options UNNotificationCategoryOptions) *UNNotificationCategory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, hiddenPreviewsBodyPlaceholder.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationCategoryFromID(_ret)
 }
 
 func UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier *foundation.NSString, actions *foundation.NSArray[*UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder *foundation.NSString, categorySummaryFormat *foundation.NSString, options UNNotificationCategoryOptions) *UNNotificationCategory {
 	_ret := objc.Send[objc.ID](objc.ID(_clsUNNotificationCategory), _uNNotificationCategorySelCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions, identifier.Ptr(), actions.Ptr(), intentIdentifiers, hiddenPreviewsBodyPlaceholder.Ptr(), categorySummaryFormat.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return UNNotificationCategoryFromID(_ret)
 }
 
 func (o *UNNotificationCategory) Identifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationCategorySelIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *UNNotificationCategory) Actions() *foundation.NSArray[*UNNotificationAction] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationCategorySelActions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*UNNotificationAction](_ret)
 }
 
@@ -80,14 +90,17 @@ func (o *UNNotificationCategory) Options() UNNotificationCategoryOptions {
 
 func (o *UNNotificationCategory) HiddenPreviewsBodyPlaceholder() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationCategorySelHiddenPreviewsBodyPlaceholder)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %@". The arguments list is optional, "%u new messages" is also accepted.
 func (o *UNNotificationCategory) CategorySummaryFormat() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _uNNotificationCategorySelCategorySummaryFormat)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

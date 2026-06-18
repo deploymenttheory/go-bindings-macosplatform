@@ -63,4 +63,3 @@ type ScoreChallengeable interface {
 }
 
 var _ ScoreChallengeable = (*ScoreChallenge)(nil)
-

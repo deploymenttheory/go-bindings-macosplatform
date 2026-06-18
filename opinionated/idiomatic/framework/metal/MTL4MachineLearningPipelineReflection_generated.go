@@ -16,7 +16,9 @@ type MTL4MachineLearningPipelineReflection struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4MachineLearningPipelineReflection].
-func (x *MTL4MachineLearningPipelineReflection) Unwrap() *raw.MTL4MachineLearningPipelineReflection { return x.inner }
+func (x *MTL4MachineLearningPipelineReflection) Unwrap() *raw.MTL4MachineLearningPipelineReflection {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,4 +50,3 @@ type MTL4MachineLearningPipelineReflectionable interface {
 }
 
 var _ MTL4MachineLearningPipelineReflectionable = (*MTL4MachineLearningPipelineReflection)(nil)
-

@@ -57,7 +57,9 @@ func (x *MetadataQuery) WithSortDescriptors(items ...*raw.NSSortDescriptor) *Met
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -73,7 +75,9 @@ func (x *MetadataQuery) WithValueListAttributes(items ...StringProvider) *Metada
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -89,7 +93,9 @@ func (x *MetadataQuery) WithGroupingAttributes(items ...StringProvider) *Metadat
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asString().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
 	_arr := raw.NSArrayFromID[*raw.NSString](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -368,4 +374,3 @@ type MetadataQueryable interface {
 }
 
 var _ MetadataQueryable = (*MetadataQuery)(nil)
-

@@ -15,13 +15,13 @@ type NSDistributedLock struct {
 }
 
 var (
-	_clsNSDistributedLock = _objcClass("NSDistributedLock")
+	_clsNSDistributedLock             = _objcClass("NSDistributedLock")
 	_nSDistributedLockSelLockWithPath = objc.RegisterName("lockWithPath:")
 	_nSDistributedLockSelInitWithPath = objc.RegisterName("initWithPath:")
-	_nSDistributedLockSelTryLock = objc.RegisterName("tryLock")
-	_nSDistributedLockSelUnlock = objc.RegisterName("unlock")
-	_nSDistributedLockSelBreakLock = objc.RegisterName("breakLock")
-	_nSDistributedLockSelLockDate = objc.RegisterName("lockDate")
+	_nSDistributedLockSelTryLock      = objc.RegisterName("tryLock")
+	_nSDistributedLockSelUnlock       = objc.RegisterName("unlock")
+	_nSDistributedLockSelBreakLock    = objc.RegisterName("breakLock")
+	_nSDistributedLockSelLockDate     = objc.RegisterName("lockDate")
 )
 
 func NSDistributedLockFromID(id objc.ID) *NSDistributedLock {
@@ -36,13 +36,17 @@ func NSDistributedLockFromID(id objc.ID) *NSDistributedLock {
 
 func NSDistributedLockLockWithPath(path *NSString) *NSDistributedLock {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSDistributedLock), _nSDistributedLockSelLockWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistributedLockFromID(_ret)
 }
 
 func (o *NSDistributedLock) InitWithPath(path *NSString) *NSDistributedLock {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistributedLockSelInitWithPath, path.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDistributedLockFromID(_ret)
 }
 
@@ -61,7 +65,8 @@ func (o *NSDistributedLock) BreakLock() {
 
 func (o *NSDistributedLock) LockDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDistributedLockSelLockDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
-

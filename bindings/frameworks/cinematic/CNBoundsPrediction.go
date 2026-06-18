@@ -17,11 +17,11 @@ type CNBoundsPrediction struct {
 }
 
 var (
-	_clsCNBoundsPrediction = _objcClass("CNBoundsPrediction")
-	_cNBoundsPredictionSelNormalizedBounds = objc.RegisterName("normalizedBounds")
+	_clsCNBoundsPrediction                    = _objcClass("CNBoundsPrediction")
+	_cNBoundsPredictionSelNormalizedBounds    = objc.RegisterName("normalizedBounds")
 	_cNBoundsPredictionSelSetNormalizedBounds = objc.RegisterName("setNormalizedBounds:")
-	_cNBoundsPredictionSelConfidence = objc.RegisterName("confidence")
-	_cNBoundsPredictionSelSetConfidence = objc.RegisterName("setConfidence:")
+	_cNBoundsPredictionSelConfidence          = objc.RegisterName("confidence")
+	_cNBoundsPredictionSelSetConfidence       = objc.RegisterName("setConfidence:")
 )
 
 func CNBoundsPredictionFromID(id objc.ID) *CNBoundsPrediction {
@@ -53,4 +53,3 @@ func (o *CNBoundsPrediction) Confidence() float32 {
 func (o *CNBoundsPrediction) SetConfidence(confidence float32) {
 	o.Ptr().Send(_cNBoundsPredictionSelSetConfidence, confidence)
 }
-

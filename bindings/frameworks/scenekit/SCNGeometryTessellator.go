@@ -17,23 +17,23 @@ type SCNGeometryTessellator struct {
 }
 
 var (
-	_clsSCNGeometryTessellator = _objcClass("SCNGeometryTessellator")
-	_sCNGeometryTessellatorSelTessellationFactorScale = objc.RegisterName("tessellationFactorScale")
-	_sCNGeometryTessellatorSelSetTessellationFactorScale = objc.RegisterName("setTessellationFactorScale:")
-	_sCNGeometryTessellatorSelTessellationPartitionMode = objc.RegisterName("tessellationPartitionMode")
+	_clsSCNGeometryTessellator                             = _objcClass("SCNGeometryTessellator")
+	_sCNGeometryTessellatorSelTessellationFactorScale      = objc.RegisterName("tessellationFactorScale")
+	_sCNGeometryTessellatorSelSetTessellationFactorScale   = objc.RegisterName("setTessellationFactorScale:")
+	_sCNGeometryTessellatorSelTessellationPartitionMode    = objc.RegisterName("tessellationPartitionMode")
 	_sCNGeometryTessellatorSelSetTessellationPartitionMode = objc.RegisterName("setTessellationPartitionMode:")
-	_sCNGeometryTessellatorSelIsAdaptive = objc.RegisterName("isAdaptive")
-	_sCNGeometryTessellatorSelSetAdaptive = objc.RegisterName("setAdaptive:")
-	_sCNGeometryTessellatorSelIsScreenSpace = objc.RegisterName("isScreenSpace")
-	_sCNGeometryTessellatorSelSetScreenSpace = objc.RegisterName("setScreenSpace:")
-	_sCNGeometryTessellatorSelEdgeTessellationFactor = objc.RegisterName("edgeTessellationFactor")
-	_sCNGeometryTessellatorSelSetEdgeTessellationFactor = objc.RegisterName("setEdgeTessellationFactor:")
-	_sCNGeometryTessellatorSelInsideTessellationFactor = objc.RegisterName("insideTessellationFactor")
-	_sCNGeometryTessellatorSelSetInsideTessellationFactor = objc.RegisterName("setInsideTessellationFactor:")
-	_sCNGeometryTessellatorSelMaximumEdgeLength = objc.RegisterName("maximumEdgeLength")
-	_sCNGeometryTessellatorSelSetMaximumEdgeLength = objc.RegisterName("setMaximumEdgeLength:")
-	_sCNGeometryTessellatorSelSmoothingMode = objc.RegisterName("smoothingMode")
-	_sCNGeometryTessellatorSelSetSmoothingMode = objc.RegisterName("setSmoothingMode:")
+	_sCNGeometryTessellatorSelIsAdaptive                   = objc.RegisterName("isAdaptive")
+	_sCNGeometryTessellatorSelSetAdaptive                  = objc.RegisterName("setAdaptive:")
+	_sCNGeometryTessellatorSelIsScreenSpace                = objc.RegisterName("isScreenSpace")
+	_sCNGeometryTessellatorSelSetScreenSpace               = objc.RegisterName("setScreenSpace:")
+	_sCNGeometryTessellatorSelEdgeTessellationFactor       = objc.RegisterName("edgeTessellationFactor")
+	_sCNGeometryTessellatorSelSetEdgeTessellationFactor    = objc.RegisterName("setEdgeTessellationFactor:")
+	_sCNGeometryTessellatorSelInsideTessellationFactor     = objc.RegisterName("insideTessellationFactor")
+	_sCNGeometryTessellatorSelSetInsideTessellationFactor  = objc.RegisterName("setInsideTessellationFactor:")
+	_sCNGeometryTessellatorSelMaximumEdgeLength            = objc.RegisterName("maximumEdgeLength")
+	_sCNGeometryTessellatorSelSetMaximumEdgeLength         = objc.RegisterName("setMaximumEdgeLength:")
+	_sCNGeometryTessellatorSelSmoothingMode                = objc.RegisterName("smoothingMode")
+	_sCNGeometryTessellatorSelSetSmoothingMode             = objc.RegisterName("setSmoothingMode:")
 )
 
 func SCNGeometryTessellatorFromID(id objc.ID) *SCNGeometryTessellator {
@@ -125,4 +125,3 @@ func (o *SCNGeometryTessellator) SmoothingMode() SCNTessellationSmoothingMode {
 func (o *SCNGeometryTessellator) SetSmoothingMode(smoothingMode SCNTessellationSmoothingMode) {
 	o.Ptr().Send(_sCNGeometryTessellatorSelSetSmoothingMode, smoothingMode)
 }
-

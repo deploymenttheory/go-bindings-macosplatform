@@ -16,17 +16,17 @@ type PHCollectionList struct {
 }
 
 var (
-	_clsPHCollectionList = _objcClass("PHCollectionList")
-	_pHCollectionListSelFetchCollectionListsContainingCollectionOptions = objc.RegisterName("fetchCollectionListsContainingCollection:options:")
-	_pHCollectionListSelFetchCollectionListsWithLocalIdentifiersOptions = objc.RegisterName("fetchCollectionListsWithLocalIdentifiers:options:")
-	_pHCollectionListSelFetchCollectionListsWithTypeSubtypeOptions = objc.RegisterName("fetchCollectionListsWithType:subtype:options:")
-	_pHCollectionListSelTransientCollectionListWithCollectionsTitle = objc.RegisterName("transientCollectionListWithCollections:title:")
+	_clsPHCollectionList                                                       = _objcClass("PHCollectionList")
+	_pHCollectionListSelFetchCollectionListsContainingCollectionOptions        = objc.RegisterName("fetchCollectionListsContainingCollection:options:")
+	_pHCollectionListSelFetchCollectionListsWithLocalIdentifiersOptions        = objc.RegisterName("fetchCollectionListsWithLocalIdentifiers:options:")
+	_pHCollectionListSelFetchCollectionListsWithTypeSubtypeOptions             = objc.RegisterName("fetchCollectionListsWithType:subtype:options:")
+	_pHCollectionListSelTransientCollectionListWithCollectionsTitle            = objc.RegisterName("transientCollectionListWithCollections:title:")
 	_pHCollectionListSelTransientCollectionListWithCollectionsFetchResultTitle = objc.RegisterName("transientCollectionListWithCollectionsFetchResult:title:")
-	_pHCollectionListSelCollectionListType = objc.RegisterName("collectionListType")
-	_pHCollectionListSelCollectionListSubtype = objc.RegisterName("collectionListSubtype")
-	_pHCollectionListSelStartDate = objc.RegisterName("startDate")
-	_pHCollectionListSelEndDate = objc.RegisterName("endDate")
-	_pHCollectionListSelLocalizedLocationNames = objc.RegisterName("localizedLocationNames")
+	_pHCollectionListSelCollectionListType                                     = objc.RegisterName("collectionListType")
+	_pHCollectionListSelCollectionListSubtype                                  = objc.RegisterName("collectionListSubtype")
+	_pHCollectionListSelStartDate                                              = objc.RegisterName("startDate")
+	_pHCollectionListSelEndDate                                                = objc.RegisterName("endDate")
+	_pHCollectionListSelLocalizedLocationNames                                 = objc.RegisterName("localizedLocationNames")
 )
 
 func PHCollectionListFromID(id objc.ID) *PHCollectionList {
@@ -41,31 +41,41 @@ func PHCollectionListFromID(id objc.ID) *PHCollectionList {
 
 func PHCollectionListFetchCollectionListsContainingCollectionOptions(collection *PHCollection, options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsContainingCollectionOptions, collection.Ptr(), options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
 func PHCollectionListFetchCollectionListsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsWithLocalIdentifiersOptions, identifiers, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
 func PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListType PHCollectionListType, subtype PHCollectionListSubtype, options *PHFetchOptions) *PHFetchResult[*PHCollectionList] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelFetchCollectionListsWithTypeSubtypeOptions, collectionListType, subtype, options.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHFetchResultFromID[*PHCollectionList](_ret)
 }
 
 func PHCollectionListTransientCollectionListWithCollectionsTitle(collections *foundation.NSArray[*PHCollection], title *foundation.NSString) *PHCollectionList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelTransientCollectionListWithCollectionsTitle, collections.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListFromID(_ret)
 }
 
 func PHCollectionListTransientCollectionListWithCollectionsFetchResultTitle(fetchResult *PHFetchResult[*PHCollection], title *foundation.NSString) *PHCollectionList {
 	_ret := objc.Send[objc.ID](objc.ID(_clsPHCollectionList), _pHCollectionListSelTransientCollectionListWithCollectionsFetchResultTitle, fetchResult.Ptr(), title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHCollectionListFromID(_ret)
 }
 
@@ -81,13 +91,17 @@ func (o *PHCollectionList) CollectionListSubtype() PHCollectionListSubtype {
 
 func (o *PHCollectionList) StartDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionListSelStartDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *PHCollectionList) EndDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHCollectionListSelEndDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -95,4 +109,3 @@ func (o *PHCollectionList) LocalizedLocationNames() *foundation.NSArray[*foundat
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSString]](o.Ptr(), _pHCollectionListSelLocalizedLocationNames)
 	return _ret
 }
-

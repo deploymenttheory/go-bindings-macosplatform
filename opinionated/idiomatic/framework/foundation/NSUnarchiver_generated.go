@@ -82,4 +82,3 @@ type Unarchiverable interface {
 }
 
 var _ Unarchiverable = (*Unarchiver)(nil)
-

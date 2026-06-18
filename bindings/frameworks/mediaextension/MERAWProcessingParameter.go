@@ -16,12 +16,12 @@ type MERAWProcessingParameter struct {
 }
 
 var (
-	_clsMERAWProcessingParameter = _objcClass("MERAWProcessingParameter")
-	_mERAWProcessingParameterSelName = objc.RegisterName("name")
-	_mERAWProcessingParameterSelKey = objc.RegisterName("key")
+	_clsMERAWProcessingParameter                = _objcClass("MERAWProcessingParameter")
+	_mERAWProcessingParameterSelName            = objc.RegisterName("name")
+	_mERAWProcessingParameterSelKey             = objc.RegisterName("key")
 	_mERAWProcessingParameterSelLongDescription = objc.RegisterName("longDescription")
-	_mERAWProcessingParameterSelEnabled = objc.RegisterName("enabled")
-	_mERAWProcessingParameterSelSetEnabled = objc.RegisterName("setEnabled:")
+	_mERAWProcessingParameterSelEnabled         = objc.RegisterName("enabled")
+	_mERAWProcessingParameterSelSetEnabled      = objc.RegisterName("setEnabled:")
 )
 
 func MERAWProcessingParameterFromID(id objc.ID) *MERAWProcessingParameter {
@@ -37,21 +37,27 @@ func MERAWProcessingParameterFromID(id objc.ID) *MERAWProcessingParameter {
 // @property		name @abstract		A localized human-readable name for the parameter, suitable for displaying in application UI.
 func (o *MERAWProcessingParameter) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingParameterSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property		key @abstract		A unique key string identifying this parameter.
 func (o *MERAWProcessingParameter) Key() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingParameterSelKey)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property		longDescription @abstract		A localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
 func (o *MERAWProcessingParameter) LongDescription() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mERAWProcessingParameterSelLongDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,4 +70,3 @@ func (o *MERAWProcessingParameter) Enabled() bool {
 func (o *MERAWProcessingParameter) SetEnabled(enabled bool) {
 	o.Ptr().Send(_mERAWProcessingParameterSelSetEnabled, enabled)
 }
-

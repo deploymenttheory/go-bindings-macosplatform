@@ -41,8 +41,8 @@ func (e PKContentVersion) String() string {
 type PKEraserType int64
 
 const (
-	PKEraserTypeVector PKEraserType = 0
-	PKEraserTypeBitmap PKEraserType = 1
+	PKEraserTypeVector           PKEraserType = 0
+	PKEraserTypeBitmap           PKEraserType = 1
 	PKEraserTypeFixedWidthBitmap PKEraserType = 2
 )
 
@@ -58,4 +58,3 @@ func (e PKEraserType) String() string {
 		return fmt.Sprintf("PKEraserType(%d)", int64(e))
 	}
 }
-

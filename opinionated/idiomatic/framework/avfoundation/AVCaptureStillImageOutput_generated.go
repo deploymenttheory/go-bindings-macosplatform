@@ -108,7 +108,9 @@ func (x *CaptureStillImageOutput) IsCapturingStillImage() bool {
 	return x.inner.IsCapturingStillImage()
 }
 
-func (x *CaptureStillImageOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+func (x *CaptureStillImageOutput) asCaptureOutput() *raw.AVCaptureOutput {
+	return &x.inner.AVCaptureOutput
+}
 
 // CaptureStillImageOutputable is the interface implemented by [CaptureStillImageOutput], for mocking and DI.
 type CaptureStillImageOutputable interface {
@@ -127,4 +129,3 @@ type CaptureStillImageOutputable interface {
 }
 
 var _ CaptureStillImageOutputable = (*CaptureStillImageOutput)(nil)
-

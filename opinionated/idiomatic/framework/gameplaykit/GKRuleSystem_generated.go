@@ -163,4 +163,3 @@ type RuleSystemable interface {
 }
 
 var _ RuleSystemable = (*RuleSystem)(nil)
-

@@ -15,7 +15,9 @@ type FormatReaderInstantiationOptions struct {
 }
 
 // Unwrap returns the underlying [raw.MEFormatReaderInstantiationOptions].
-func (x *FormatReaderInstantiationOptions) Unwrap() *raw.MEFormatReaderInstantiationOptions { return x.inner }
+func (x *FormatReaderInstantiationOptions) Unwrap() *raw.MEFormatReaderInstantiationOptions {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -47,4 +49,3 @@ type FormatReaderInstantiationOptionsable interface {
 }
 
 var _ FormatReaderInstantiationOptionsable = (*FormatReaderInstantiationOptions)(nil)
-

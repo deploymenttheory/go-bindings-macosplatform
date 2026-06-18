@@ -21,13 +21,13 @@ type CNRenderingSessionFrameAttributes struct {
 }
 
 var (
-	_clsCNRenderingSessionFrameAttributes = _objcClass("CNRenderingSessionFrameAttributes")
-	_cNRenderingSessionFrameAttributesSelInitWithSampleBufferSessionAttributes = objc.RegisterName("initWithSampleBuffer:sessionAttributes:")
+	_clsCNRenderingSessionFrameAttributes                                            = _objcClass("CNRenderingSessionFrameAttributes")
+	_cNRenderingSessionFrameAttributesSelInitWithSampleBufferSessionAttributes       = objc.RegisterName("initWithSampleBuffer:sessionAttributes:")
 	_cNRenderingSessionFrameAttributesSelInitWithTimedMetadataGroupSessionAttributes = objc.RegisterName("initWithTimedMetadataGroup:sessionAttributes:")
-	_cNRenderingSessionFrameAttributesSelFocusDisparity = objc.RegisterName("focusDisparity")
-	_cNRenderingSessionFrameAttributesSelSetFocusDisparity = objc.RegisterName("setFocusDisparity:")
-	_cNRenderingSessionFrameAttributesSelFNumber = objc.RegisterName("fNumber")
-	_cNRenderingSessionFrameAttributesSelSetFNumber = objc.RegisterName("setFNumber:")
+	_cNRenderingSessionFrameAttributesSelFocusDisparity                              = objc.RegisterName("focusDisparity")
+	_cNRenderingSessionFrameAttributesSelSetFocusDisparity                           = objc.RegisterName("setFocusDisparity:")
+	_cNRenderingSessionFrameAttributesSelFNumber                                     = objc.RegisterName("fNumber")
+	_cNRenderingSessionFrameAttributesSelSetFNumber                                  = objc.RegisterName("setFNumber:")
 )
 
 func CNRenderingSessionFrameAttributesFromID(id objc.ID) *CNRenderingSessionFrameAttributes {
@@ -43,14 +43,18 @@ func CNRenderingSessionFrameAttributesFromID(id objc.ID) *CNRenderingSessionFram
 // Initialize rendering frame attributes from a sample buffer read from a cinematic metadata track. - Parameters: - sampleBuffer: A sample buffer read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
 func (o *CNRenderingSessionFrameAttributes) InitWithSampleBufferSessionAttributes(sampleBuffer unsafe.Pointer, sessionAttributes *CNRenderingSessionAttributes) *CNRenderingSessionFrameAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionFrameAttributesSelInitWithSampleBufferSessionAttributes, sampleBuffer, sessionAttributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNRenderingSessionFrameAttributesFromID(_ret)
 }
 
 // Initialize rendering frame attributes from a timed metadata group read from a cinematic metadata track. - Parameters: - metadataGroup: An AVTimedMetadataGroup read from the timed cinematic metadata track of a cinematic asset. - sessionAttributes: Rendering session attributes loaded from a cinematic asset.
 func (o *CNRenderingSessionFrameAttributes) InitWithTimedMetadataGroupSessionAttributes(metadataGroup *avfoundation.AVTimedMetadataGroup, sessionAttributes *CNRenderingSessionAttributes) *CNRenderingSessionFrameAttributes {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNRenderingSessionFrameAttributesSelInitWithTimedMetadataGroupSessionAttributes, metadataGroup.Ptr(), sessionAttributes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNRenderingSessionFrameAttributesFromID(_ret)
 }
 
@@ -73,4 +77,3 @@ func (o *CNRenderingSessionFrameAttributes) FNumber() float32 {
 func (o *CNRenderingSessionFrameAttributes) SetFNumber(fNumber float32) {
 	o.Ptr().Send(_cNRenderingSessionFrameAttributesSelSetFNumber, fNumber)
 }
-

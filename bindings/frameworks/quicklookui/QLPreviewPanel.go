@@ -17,23 +17,23 @@ type QLPreviewPanel struct {
 }
 
 var (
-	_clsQLPreviewPanel = _objcClass("QLPreviewPanel")
-	_qLPreviewPanelSelSharedPreviewPanel = objc.RegisterName("sharedPreviewPanel")
-	_qLPreviewPanelSelSharedPreviewPanelExists = objc.RegisterName("sharedPreviewPanelExists")
-	_qLPreviewPanelSelUpdateController = objc.RegisterName("updateController")
-	_qLPreviewPanelSelReloadData = objc.RegisterName("reloadData")
-	_qLPreviewPanelSelRefreshCurrentPreviewItem = objc.RegisterName("refreshCurrentPreviewItem")
+	_clsQLPreviewPanel                               = _objcClass("QLPreviewPanel")
+	_qLPreviewPanelSelSharedPreviewPanel             = objc.RegisterName("sharedPreviewPanel")
+	_qLPreviewPanelSelSharedPreviewPanelExists       = objc.RegisterName("sharedPreviewPanelExists")
+	_qLPreviewPanelSelUpdateController               = objc.RegisterName("updateController")
+	_qLPreviewPanelSelReloadData                     = objc.RegisterName("reloadData")
+	_qLPreviewPanelSelRefreshCurrentPreviewItem      = objc.RegisterName("refreshCurrentPreviewItem")
 	_qLPreviewPanelSelEnterFullScreenModeWithOptions = objc.RegisterName("enterFullScreenMode:withOptions:")
-	_qLPreviewPanelSelExitFullScreenModeWithOptions = objc.RegisterName("exitFullScreenModeWithOptions:")
-	_qLPreviewPanelSelCurrentController = objc.RegisterName("currentController")
-	_qLPreviewPanelSelDataSource = objc.RegisterName("dataSource")
-	_qLPreviewPanelSelSetDataSource = objc.RegisterName("setDataSource:")
-	_qLPreviewPanelSelCurrentPreviewItemIndex = objc.RegisterName("currentPreviewItemIndex")
-	_qLPreviewPanelSelSetCurrentPreviewItemIndex = objc.RegisterName("setCurrentPreviewItemIndex:")
-	_qLPreviewPanelSelCurrentPreviewItem = objc.RegisterName("currentPreviewItem")
-	_qLPreviewPanelSelDisplayState = objc.RegisterName("displayState")
-	_qLPreviewPanelSelSetDisplayState = objc.RegisterName("setDisplayState:")
-	_qLPreviewPanelSelIsInFullScreenMode = objc.RegisterName("isInFullScreenMode")
+	_qLPreviewPanelSelExitFullScreenModeWithOptions  = objc.RegisterName("exitFullScreenModeWithOptions:")
+	_qLPreviewPanelSelCurrentController              = objc.RegisterName("currentController")
+	_qLPreviewPanelSelDataSource                     = objc.RegisterName("dataSource")
+	_qLPreviewPanelSelSetDataSource                  = objc.RegisterName("setDataSource:")
+	_qLPreviewPanelSelCurrentPreviewItemIndex        = objc.RegisterName("currentPreviewItemIndex")
+	_qLPreviewPanelSelSetCurrentPreviewItemIndex     = objc.RegisterName("setCurrentPreviewItemIndex:")
+	_qLPreviewPanelSelCurrentPreviewItem             = objc.RegisterName("currentPreviewItem")
+	_qLPreviewPanelSelDisplayState                   = objc.RegisterName("displayState")
+	_qLPreviewPanelSelSetDisplayState                = objc.RegisterName("setDisplayState:")
+	_qLPreviewPanelSelIsInFullScreenMode             = objc.RegisterName("isInFullScreenMode")
 )
 
 func QLPreviewPanelFromID(id objc.ID) *QLPreviewPanel {
@@ -46,10 +46,12 @@ func QLPreviewPanelFromID(id objc.ID) *QLPreviewPanel {
 	return o
 }
 
-// Returns the shared Quick Look preview panel instance. This method creates the panel if it doesn’t exist yet. Use ``QuickLookUI/QLPreviewPanel/sharedPreviewPanelExists`` if you want to determine whether the panel exists without creating it. - Returns: The shared Quick Look preview panel instance for the application.
+// Returns the shared Quick Look preview panel instance. This method creates the panel if it doesn’t exist yet. Use “QuickLookUI/QLPreviewPanel/sharedPreviewPanelExists“ if you want to determine whether the panel exists without creating it. - Returns: The shared Quick Look preview panel instance for the application.
 func QLPreviewPanelSharedPreviewPanel() *QLPreviewPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsQLPreviewPanel), _qLPreviewPanelSelSharedPreviewPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return QLPreviewPanelFromID(_ret)
 }
 
@@ -132,4 +134,3 @@ func (o *QLPreviewPanel) IsInFullScreenMode() bool {
 	_ret := objc.Send[bool](o.Ptr(), _qLPreviewPanelSelIsInFullScreenMode)
 	return _ret
 }
-

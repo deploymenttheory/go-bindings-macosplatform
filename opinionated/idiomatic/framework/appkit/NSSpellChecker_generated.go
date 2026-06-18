@@ -398,4 +398,3 @@ type SpellCheckerable interface {
 }
 
 var _ SpellCheckerable = (*SpellChecker)(nil)
-

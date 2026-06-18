@@ -17,39 +17,39 @@ type NSRulerView struct {
 }
 
 var (
-	_clsNSRulerView = _objcClass("NSRulerView")
+	_clsNSRulerView                                                                                     = _objcClass("NSRulerView")
 	_nSRulerViewSelRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStepUpCycleStepDownCycle = objc.RegisterName("registerUnitWithName:abbreviation:unitToPointsConversionFactor:stepUpCycle:stepDownCycle:")
-	_nSRulerViewSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSRulerViewSelInitWithScrollViewOrientation = objc.RegisterName("initWithScrollView:orientation:")
-	_nSRulerViewSelAddMarker = objc.RegisterName("addMarker:")
-	_nSRulerViewSelRemoveMarker = objc.RegisterName("removeMarker:")
-	_nSRulerViewSelTrackMarkerWithMouseEvent = objc.RegisterName("trackMarker:withMouseEvent:")
-	_nSRulerViewSelMoveRulerlineFromLocationToLocation = objc.RegisterName("moveRulerlineFromLocation:toLocation:")
-	_nSRulerViewSelInvalidateHashMarks = objc.RegisterName("invalidateHashMarks")
-	_nSRulerViewSelDrawHashMarksAndLabelsInRect = objc.RegisterName("drawHashMarksAndLabelsInRect:")
-	_nSRulerViewSelDrawMarkersInRect = objc.RegisterName("drawMarkersInRect:")
-	_nSRulerViewSelScrollView = objc.RegisterName("scrollView")
-	_nSRulerViewSelSetScrollView = objc.RegisterName("setScrollView:")
-	_nSRulerViewSelOrientation = objc.RegisterName("orientation")
-	_nSRulerViewSelSetOrientation = objc.RegisterName("setOrientation:")
-	_nSRulerViewSelBaselineLocation = objc.RegisterName("baselineLocation")
-	_nSRulerViewSelRequiredThickness = objc.RegisterName("requiredThickness")
-	_nSRulerViewSelRuleThickness = objc.RegisterName("ruleThickness")
-	_nSRulerViewSelSetRuleThickness = objc.RegisterName("setRuleThickness:")
-	_nSRulerViewSelReservedThicknessForMarkers = objc.RegisterName("reservedThicknessForMarkers")
-	_nSRulerViewSelSetReservedThicknessForMarkers = objc.RegisterName("setReservedThicknessForMarkers:")
-	_nSRulerViewSelReservedThicknessForAccessoryView = objc.RegisterName("reservedThicknessForAccessoryView")
-	_nSRulerViewSelSetReservedThicknessForAccessoryView = objc.RegisterName("setReservedThicknessForAccessoryView:")
-	_nSRulerViewSelMeasurementUnits = objc.RegisterName("measurementUnits")
-	_nSRulerViewSelSetMeasurementUnits = objc.RegisterName("setMeasurementUnits:")
-	_nSRulerViewSelOriginOffset = objc.RegisterName("originOffset")
-	_nSRulerViewSelSetOriginOffset = objc.RegisterName("setOriginOffset:")
-	_nSRulerViewSelClientView = objc.RegisterName("clientView")
-	_nSRulerViewSelSetClientView = objc.RegisterName("setClientView:")
-	_nSRulerViewSelMarkers = objc.RegisterName("markers")
-	_nSRulerViewSelSetMarkers = objc.RegisterName("setMarkers:")
-	_nSRulerViewSelAccessoryView = objc.RegisterName("accessoryView")
-	_nSRulerViewSelSetAccessoryView = objc.RegisterName("setAccessoryView:")
+	_nSRulerViewSelInitWithCoder                                                                        = objc.RegisterName("initWithCoder:")
+	_nSRulerViewSelInitWithScrollViewOrientation                                                        = objc.RegisterName("initWithScrollView:orientation:")
+	_nSRulerViewSelAddMarker                                                                            = objc.RegisterName("addMarker:")
+	_nSRulerViewSelRemoveMarker                                                                         = objc.RegisterName("removeMarker:")
+	_nSRulerViewSelTrackMarkerWithMouseEvent                                                            = objc.RegisterName("trackMarker:withMouseEvent:")
+	_nSRulerViewSelMoveRulerlineFromLocationToLocation                                                  = objc.RegisterName("moveRulerlineFromLocation:toLocation:")
+	_nSRulerViewSelInvalidateHashMarks                                                                  = objc.RegisterName("invalidateHashMarks")
+	_nSRulerViewSelDrawHashMarksAndLabelsInRect                                                         = objc.RegisterName("drawHashMarksAndLabelsInRect:")
+	_nSRulerViewSelDrawMarkersInRect                                                                    = objc.RegisterName("drawMarkersInRect:")
+	_nSRulerViewSelScrollView                                                                           = objc.RegisterName("scrollView")
+	_nSRulerViewSelSetScrollView                                                                        = objc.RegisterName("setScrollView:")
+	_nSRulerViewSelOrientation                                                                          = objc.RegisterName("orientation")
+	_nSRulerViewSelSetOrientation                                                                       = objc.RegisterName("setOrientation:")
+	_nSRulerViewSelBaselineLocation                                                                     = objc.RegisterName("baselineLocation")
+	_nSRulerViewSelRequiredThickness                                                                    = objc.RegisterName("requiredThickness")
+	_nSRulerViewSelRuleThickness                                                                        = objc.RegisterName("ruleThickness")
+	_nSRulerViewSelSetRuleThickness                                                                     = objc.RegisterName("setRuleThickness:")
+	_nSRulerViewSelReservedThicknessForMarkers                                                          = objc.RegisterName("reservedThicknessForMarkers")
+	_nSRulerViewSelSetReservedThicknessForMarkers                                                       = objc.RegisterName("setReservedThicknessForMarkers:")
+	_nSRulerViewSelReservedThicknessForAccessoryView                                                    = objc.RegisterName("reservedThicknessForAccessoryView")
+	_nSRulerViewSelSetReservedThicknessForAccessoryView                                                 = objc.RegisterName("setReservedThicknessForAccessoryView:")
+	_nSRulerViewSelMeasurementUnits                                                                     = objc.RegisterName("measurementUnits")
+	_nSRulerViewSelSetMeasurementUnits                                                                  = objc.RegisterName("setMeasurementUnits:")
+	_nSRulerViewSelOriginOffset                                                                         = objc.RegisterName("originOffset")
+	_nSRulerViewSelSetOriginOffset                                                                      = objc.RegisterName("setOriginOffset:")
+	_nSRulerViewSelClientView                                                                           = objc.RegisterName("clientView")
+	_nSRulerViewSelSetClientView                                                                        = objc.RegisterName("setClientView:")
+	_nSRulerViewSelMarkers                                                                              = objc.RegisterName("markers")
+	_nSRulerViewSelSetMarkers                                                                           = objc.RegisterName("setMarkers:")
+	_nSRulerViewSelAccessoryView                                                                        = objc.RegisterName("accessoryView")
+	_nSRulerViewSelSetAccessoryView                                                                     = objc.RegisterName("setAccessoryView:")
 )
 
 func NSRulerViewFromID(id objc.ID) *NSRulerView {
@@ -68,13 +68,17 @@ func NSRulerViewRegisterUnitWithNameAbbreviationUnitToPointsConversionFactorStep
 
 func (o *NSRulerView) InitWithCoder(coder *foundation.NSCoder) *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerViewFromID(_ret)
 }
 
 func (o *NSRulerView) InitWithScrollViewOrientation(scrollView *NSScrollView, orientation NSRulerOrientation) *NSRulerView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelInitWithScrollViewOrientation, scrollView.Ptr(), orientation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRulerViewFromID(_ret)
 }
 
@@ -109,7 +113,9 @@ func (o *NSRulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
 
 func (o *NSRulerView) ScrollView() *NSScrollView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelScrollView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScrollViewFromID(_ret)
 }
 
@@ -165,7 +171,9 @@ func (o *NSRulerView) SetReservedThicknessForAccessoryView(reservedThicknessForA
 
 func (o *NSRulerView) MeasurementUnits() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMeasurementUnits)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -184,7 +192,9 @@ func (o *NSRulerView) SetOriginOffset(originOffset float64) {
 
 func (o *NSRulerView) ClientView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelClientView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
@@ -194,7 +204,9 @@ func (o *NSRulerView) SetClientView(clientView *NSView) {
 
 func (o *NSRulerView) Markers() *foundation.NSArray[*NSRulerMarker] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelMarkers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSRulerMarker](_ret)
 }
 
@@ -204,11 +216,12 @@ func (o *NSRulerView) SetMarkers(markers *foundation.NSArray[*NSRulerMarker]) {
 
 func (o *NSRulerView) AccessoryView() *NSView {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRulerViewSelAccessoryView)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSViewFromID(_ret)
 }
 
 func (o *NSRulerView) SetAccessoryView(accessoryView *NSView) {
 	o.Ptr().Send(_nSRulerViewSelSetAccessoryView, accessoryView.Ptr())
 }
-

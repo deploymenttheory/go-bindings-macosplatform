@@ -25,4 +25,3 @@ func TKSmartCardTokenDriverFromID(id objc.ID) *TKSmartCardTokenDriver {
 	purego.Track(o)
 	return o
 }
-

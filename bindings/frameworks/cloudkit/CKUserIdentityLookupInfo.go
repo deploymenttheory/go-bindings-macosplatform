@@ -16,16 +16,16 @@ type CKUserIdentityLookupInfo struct {
 }
 
 var (
-	_clsCKUserIdentityLookupInfo = _objcClass("CKUserIdentityLookupInfo")
-	_cKUserIdentityLookupInfoSelInitWithEmailAddress = objc.RegisterName("initWithEmailAddress:")
-	_cKUserIdentityLookupInfoSelInitWithPhoneNumber = objc.RegisterName("initWithPhoneNumber:")
-	_cKUserIdentityLookupInfoSelInitWithUserRecordID = objc.RegisterName("initWithUserRecordID:")
-	_cKUserIdentityLookupInfoSelLookupInfosWithEmails = objc.RegisterName("lookupInfosWithEmails:")
+	_clsCKUserIdentityLookupInfo                            = _objcClass("CKUserIdentityLookupInfo")
+	_cKUserIdentityLookupInfoSelInitWithEmailAddress        = objc.RegisterName("initWithEmailAddress:")
+	_cKUserIdentityLookupInfoSelInitWithPhoneNumber         = objc.RegisterName("initWithPhoneNumber:")
+	_cKUserIdentityLookupInfoSelInitWithUserRecordID        = objc.RegisterName("initWithUserRecordID:")
+	_cKUserIdentityLookupInfoSelLookupInfosWithEmails       = objc.RegisterName("lookupInfosWithEmails:")
 	_cKUserIdentityLookupInfoSelLookupInfosWithPhoneNumbers = objc.RegisterName("lookupInfosWithPhoneNumbers:")
-	_cKUserIdentityLookupInfoSelLookupInfosWithRecordIDs = objc.RegisterName("lookupInfosWithRecordIDs:")
-	_cKUserIdentityLookupInfoSelEmailAddress = objc.RegisterName("emailAddress")
-	_cKUserIdentityLookupInfoSelPhoneNumber = objc.RegisterName("phoneNumber")
-	_cKUserIdentityLookupInfoSelUserRecordID = objc.RegisterName("userRecordID")
+	_cKUserIdentityLookupInfoSelLookupInfosWithRecordIDs    = objc.RegisterName("lookupInfosWithRecordIDs:")
+	_cKUserIdentityLookupInfoSelEmailAddress                = objc.RegisterName("emailAddress")
+	_cKUserIdentityLookupInfoSelPhoneNumber                 = objc.RegisterName("phoneNumber")
+	_cKUserIdentityLookupInfoSelUserRecordID                = objc.RegisterName("userRecordID")
 )
 
 func CKUserIdentityLookupInfoFromID(id objc.ID) *CKUserIdentityLookupInfo {
@@ -38,66 +38,83 @@ func CKUserIdentityLookupInfoFromID(id objc.ID) *CKUserIdentityLookupInfo {
 	return o
 }
 
-// Creates a lookup info for the specified email address. - Parameters: - emailAddress: The email address for looking up the user identity. After you create a lookup info, use the ``CKDiscoverUserIdentitiesOperation`` operation or the  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identity.
+// Creates a lookup info for the specified email address. - Parameters: - emailAddress: The email address for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
 func (o *CKUserIdentityLookupInfo) InitWithEmailAddress(emailAddress *foundation.NSString) *CKUserIdentityLookupInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelInitWithEmailAddress, emailAddress.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityLookupInfoFromID(_ret)
 }
 
-// Creates a lookup info for the specified phone number. - Parameters: - phoneNumber: The phone number for looking up the user identity. After you create a lookup info, use the ``CKDiscoverUserIdentitiesOperation`` operation or the  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identity.
+// Creates a lookup info for the specified phone number. - Parameters: - phoneNumber: The phone number for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
 func (o *CKUserIdentityLookupInfo) InitWithPhoneNumber(phoneNumber *foundation.NSString) *CKUserIdentityLookupInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelInitWithPhoneNumber, phoneNumber.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityLookupInfoFromID(_ret)
 }
 
-// Creates a lookup info for the specified user record ID. - Parameters: - userRecordID: The user record ID for looking up the user identity. After you create a lookup info, use the ``CKDiscoverUserIdentitiesOperation`` operation or the  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identity.
+// Creates a lookup info for the specified user record ID. - Parameters: - userRecordID: The user record ID for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
 func (o *CKUserIdentityLookupInfo) InitWithUserRecordID(userRecordID *CKRecordID) *CKUserIdentityLookupInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelInitWithUserRecordID, userRecordID.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKUserIdentityLookupInfoFromID(_ret)
 }
 
-// Returns an array of lookup infos for the specified email addresses. - Parameters: - emails: The email addresses for looking up the user identities. Use the values that this method returns in an ``CKDiscoverUserIdentitiesOperation`` operation or an  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identities.
+// Returns an array of lookup infos for the specified email addresses. - Parameters: - emails: The email addresses for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
 func CKUserIdentityLookupInfoLookupInfosWithEmails(emails *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*CKUserIdentityLookupInfo] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithEmails, emails)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKUserIdentityLookupInfo](_ret)
 }
 
-// Returns an array of lookup infos for the specified phone numbers. - Parameters: - phoneNumbers: The phone numbers for looking up the user identities. Use the values that this method returns in an ``CKDiscoverUserIdentitiesOperation`` operation or an  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identities.
+// Returns an array of lookup infos for the specified phone numbers. - Parameters: - phoneNumbers: The phone numbers for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
 func CKUserIdentityLookupInfoLookupInfosWithPhoneNumbers(phoneNumbers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*CKUserIdentityLookupInfo] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithPhoneNumbers, phoneNumbers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKUserIdentityLookupInfo](_ret)
 }
 
-// Returns an array of lookup infos for the specified user record IDs. - Parameters: - recordIDs: The user record IDs for looking up the user identities. Use the values that this method returns in an ``CKDiscoverUserIdentitiesOperation`` operation or an  ``CKFetchShareParticipantsOperation`` operation to retrieve the corresponding user identities.
+// Returns an array of lookup infos for the specified user record IDs. - Parameters: - recordIDs: The user record IDs for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
 func CKUserIdentityLookupInfoLookupInfosWithRecordIDs(recordIDs *foundation.NSArray[*CKRecordID]) *foundation.NSArray[*CKUserIdentityLookupInfo] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsCKUserIdentityLookupInfo), _cKUserIdentityLookupInfoSelLookupInfosWithRecordIDs, recordIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CKUserIdentityLookupInfo](_ret)
 }
 
 // The user's email address.
 func (o *CKUserIdentityLookupInfo) EmailAddress() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelEmailAddress)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The user's phone number.
 func (o *CKUserIdentityLookupInfo) PhoneNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelPhoneNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The ID of the user record. Use this value to retrieve the user record for the user identity. The user record doesn't contain any personal information about the user, by default. You can add data to the user record, but you shouldn't add anything sensitive.
 func (o *CKUserIdentityLookupInfo) UserRecordID() *CKRecordID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKUserIdentityLookupInfoSelUserRecordID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKRecordIDFromID(_ret)
 }
-

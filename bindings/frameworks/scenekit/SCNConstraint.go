@@ -16,13 +16,13 @@ type SCNConstraint struct {
 }
 
 var (
-	_clsSCNConstraint = _objcClass("SCNConstraint")
-	_sCNConstraintSelIsEnabled = objc.RegisterName("isEnabled")
-	_sCNConstraintSelSetEnabled = objc.RegisterName("setEnabled:")
-	_sCNConstraintSelInfluenceFactor = objc.RegisterName("influenceFactor")
+	_clsSCNConstraint                   = _objcClass("SCNConstraint")
+	_sCNConstraintSelIsEnabled          = objc.RegisterName("isEnabled")
+	_sCNConstraintSelSetEnabled         = objc.RegisterName("setEnabled:")
+	_sCNConstraintSelInfluenceFactor    = objc.RegisterName("influenceFactor")
 	_sCNConstraintSelSetInfluenceFactor = objc.RegisterName("setInfluenceFactor:")
-	_sCNConstraintSelIsIncremental = objc.RegisterName("isIncremental")
-	_sCNConstraintSelSetIncremental = objc.RegisterName("setIncremental:")
+	_sCNConstraintSelIsIncremental      = objc.RegisterName("isIncremental")
+	_sCNConstraintSelSetIncremental     = objc.RegisterName("setIncremental:")
 )
 
 func SCNConstraintFromID(id objc.ID) *SCNConstraint {
@@ -64,4 +64,3 @@ func (o *SCNConstraint) IsIncremental() bool {
 func (o *SCNConstraint) SetIncremental(incremental bool) {
 	o.Ptr().Send(_sCNConstraintSelSetIncremental, incremental)
 }
-

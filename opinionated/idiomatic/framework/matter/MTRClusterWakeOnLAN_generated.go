@@ -37,11 +37,17 @@ func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *raw.MTRDevice, endpoi
 	return &MTRClusterWakeOnLan{inner: raw.MTRClusterWakeOnLanFromID(_id)}
 }
 
-func (x *MTRClusterWakeOnLan) asMTRClusterWakeOnLAN() *raw.MTRClusterWakeOnLAN { return &x.inner.MTRClusterWakeOnLAN }
+func (x *MTRClusterWakeOnLan) asMTRClusterWakeOnLAN() *raw.MTRClusterWakeOnLAN {
+	return &x.inner.MTRClusterWakeOnLAN
+}
 
-func (x *MTRClusterWakeOnLan) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster }
+func (x *MTRClusterWakeOnLan) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster
+}
 
-func (x *MTRClusterWakeOnLan) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterWakeOnLan) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterWakeOnLanable is the interface implemented by [MTRClusterWakeOnLan], for mocking and DI.
 type MTRClusterWakeOnLanable interface {
@@ -49,4 +55,3 @@ type MTRClusterWakeOnLanable interface {
 }
 
 var _ MTRClusterWakeOnLanable = (*MTRClusterWakeOnLan)(nil)
-

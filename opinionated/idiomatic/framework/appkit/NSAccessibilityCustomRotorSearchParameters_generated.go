@@ -17,7 +17,9 @@ type AccessibilityCustomRotorSearchParameters struct {
 }
 
 // Unwrap returns the underlying [raw.NSAccessibilityCustomRotorSearchParameters].
-func (x *AccessibilityCustomRotorSearchParameters) Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters { return x.inner }
+func (x *AccessibilityCustomRotorSearchParameters) Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,4 +110,3 @@ type AccessibilityCustomRotorSearchParametersable interface {
 }
 
 var _ AccessibilityCustomRotorSearchParametersable = (*AccessibilityCustomRotorSearchParameters)(nil)
-

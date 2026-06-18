@@ -16,10 +16,10 @@ type MPSCNNConvolutionGradientState struct {
 }
 
 var (
-	_clsMPSCNNConvolutionGradientState = _objcClass("MPSCNNConvolutionGradientState")
-	_mPSCNNConvolutionGradientStateSelGradientForWeights = objc.RegisterName("gradientForWeights")
-	_mPSCNNConvolutionGradientStateSelGradientForBiases = objc.RegisterName("gradientForBiases")
-	_mPSCNNConvolutionGradientStateSelConvolution = objc.RegisterName("convolution")
+	_clsMPSCNNConvolutionGradientState                         = _objcClass("MPSCNNConvolutionGradientState")
+	_mPSCNNConvolutionGradientStateSelGradientForWeights       = objc.RegisterName("gradientForWeights")
+	_mPSCNNConvolutionGradientStateSelGradientForBiases        = objc.RegisterName("gradientForBiases")
+	_mPSCNNConvolutionGradientStateSelConvolution              = objc.RegisterName("convolution")
 	_mPSCNNConvolutionGradientStateSelGradientForWeightsLayout = objc.RegisterName("gradientForWeightsLayout")
 )
 
@@ -48,7 +48,9 @@ func (o *MPSCNNConvolutionGradientState) GradientForBiases() metal.MTLBuffer {
 // @property   convolution @abstract   The convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
 func (o *MPSCNNConvolutionGradientState) Convolution() *MPSCNNConvolution {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionGradientStateSelConvolution)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionFromID(_ret)
 }
 
@@ -57,4 +59,3 @@ func (o *MPSCNNConvolutionGradientState) GradientForWeightsLayout() MPSCNNConvol
 	_ret := objc.Send[MPSCNNConvolutionWeightsLayout](o.Ptr(), _mPSCNNConvolutionGradientStateSelGradientForWeightsLayout)
 	return _ret
 }
-

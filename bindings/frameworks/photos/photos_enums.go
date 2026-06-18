@@ -11,9 +11,9 @@ import (
 type CGLCPContextPriorityRequest int64
 
 const (
-	KCGLCPContextPriorityRequestHigh CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
 	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
-	KCGLCPContextPriorityRequestLow CGLCPContextPriorityRequest = 2
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
 )
 
 func (e CGLCPContextPriorityRequest) String() string {
@@ -32,10 +32,10 @@ func (e CGLCPContextPriorityRequest) String() string {
 type EvCmd int64
 
 const (
-	EVNOP EvCmd = 0
-	EVHIDE EvCmd = 1
-	EVSHOW EvCmd = 2
-	EVMOVE EvCmd = 3
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
 	EVLEVEL EvCmd = 4
 )
 
@@ -60,7 +60,7 @@ func (e EvCmd) String() string {
 type MDLabelDomain int64
 
 const (
-	KMDLabelUserDomain MDLabelDomain = 0
+	KMDLabelUserDomain  MDLabelDomain = 0
 	KMDLabelLocalDomain MDLabelDomain = 1
 )
 
@@ -78,8 +78,8 @@ func (e MDLabelDomain) String() string {
 type MDQueryOptionFlags int64
 
 const (
-	KMDQuerySynchronous MDQueryOptionFlags = 1
-	KMDQueryWantsUpdates MDQueryOptionFlags = 4
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
 	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
 )
 
@@ -115,8 +115,8 @@ func (e MDQuerySortOptionFlags) String() string {
 type NXMouseButton int64
 
 const (
-	NX_OneButton NXMouseButton = 0
-	NX_LeftButton NXMouseButton = 1
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
 	NX_RightButton NXMouseButton = 2
 )
 
@@ -136,7 +136,7 @@ func (e NXMouseButton) String() string {
 type PHAccessLevel int64
 
 const (
-	PHAccessLevelAddOnly PHAccessLevel = 1
+	PHAccessLevelAddOnly   PHAccessLevel = 1
 	PHAccessLevelReadWrite PHAccessLevel = 2
 )
 
@@ -154,23 +154,29 @@ func (e PHAccessLevel) String() string {
 type PHAssetBurstSelectionType uint64
 
 const (
-	PHAssetBurstSelectionTypeNone PHAssetBurstSelectionType = 0
+	PHAssetBurstSelectionTypeNone     PHAssetBurstSelectionType = 0
 	PHAssetBurstSelectionTypeAutoPick PHAssetBurstSelectionType = 1
 	PHAssetBurstSelectionTypeUserPick PHAssetBurstSelectionType = 2
 )
 
 func (e PHAssetBurstSelectionType) String() string {
 	var parts []string
-	if e&PHAssetBurstSelectionTypeAutoPick != 0 { parts = append(parts, "PHAssetBurstSelectionTypeAutoPick") }
-	if e&PHAssetBurstSelectionTypeUserPick != 0 { parts = append(parts, "PHAssetBurstSelectionTypeUserPick") }
-	if len(parts) == 0 { return "0" }
+	if e&PHAssetBurstSelectionTypeAutoPick != 0 {
+		parts = append(parts, "PHAssetBurstSelectionTypeAutoPick")
+	}
+	if e&PHAssetBurstSelectionTypeUserPick != 0 {
+		parts = append(parts, "PHAssetBurstSelectionTypeUserPick")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type PHAssetCollectionType int64
 
 const (
-	PHAssetCollectionTypeAlbum PHAssetCollectionType = 1
+	PHAssetCollectionTypeAlbum      PHAssetCollectionType = 1
 	PHAssetCollectionTypeSmartAlbum PHAssetCollectionType = 2
 )
 
@@ -188,8 +194,8 @@ func (e PHAssetCollectionType) String() string {
 type PHAssetEditOperation int64
 
 const (
-	PHAssetEditOperationDelete PHAssetEditOperation = 1
-	PHAssetEditOperationContent PHAssetEditOperation = 2
+	PHAssetEditOperationDelete     PHAssetEditOperation = 1
+	PHAssetEditOperationContent    PHAssetEditOperation = 2
 	PHAssetEditOperationProperties PHAssetEditOperation = 3
 )
 
@@ -209,34 +215,58 @@ func (e PHAssetEditOperation) String() string {
 type PHAssetMediaSubtype uint64
 
 const (
-	PHAssetMediaSubtypeNone PHAssetMediaSubtype = 0
-	PHAssetMediaSubtypePhotoPanorama PHAssetMediaSubtype = 1
-	PHAssetMediaSubtypePhotoHDR PHAssetMediaSubtype = 2
-	PHAssetMediaSubtypePhotoScreenshot PHAssetMediaSubtype = 4
-	PHAssetMediaSubtypePhotoLive PHAssetMediaSubtype = 8
-	PHAssetMediaSubtypePhotoDepthEffect PHAssetMediaSubtype = 16
-	PHAssetMediaSubtypeSpatialMedia PHAssetMediaSubtype = 1024
-	PHAssetMediaSubtypeVideoStreamed PHAssetMediaSubtype = 65536
-	PHAssetMediaSubtypeVideoHighFrameRate PHAssetMediaSubtype = 131072
-	PHAssetMediaSubtypeVideoTimelapse PHAssetMediaSubtype = 262144
+	PHAssetMediaSubtypeNone                 PHAssetMediaSubtype = 0
+	PHAssetMediaSubtypePhotoPanorama        PHAssetMediaSubtype = 1
+	PHAssetMediaSubtypePhotoHDR             PHAssetMediaSubtype = 2
+	PHAssetMediaSubtypePhotoScreenshot      PHAssetMediaSubtype = 4
+	PHAssetMediaSubtypePhotoLive            PHAssetMediaSubtype = 8
+	PHAssetMediaSubtypePhotoDepthEffect     PHAssetMediaSubtype = 16
+	PHAssetMediaSubtypeSpatialMedia         PHAssetMediaSubtype = 1024
+	PHAssetMediaSubtypeVideoStreamed        PHAssetMediaSubtype = 65536
+	PHAssetMediaSubtypeVideoHighFrameRate   PHAssetMediaSubtype = 131072
+	PHAssetMediaSubtypeVideoTimelapse       PHAssetMediaSubtype = 262144
 	PHAssetMediaSubtypeVideoScreenRecording PHAssetMediaSubtype = 524288
-	PHAssetMediaSubtypeVideoCinematic PHAssetMediaSubtype = 2097152
+	PHAssetMediaSubtypeVideoCinematic       PHAssetMediaSubtype = 2097152
 )
 
 func (e PHAssetMediaSubtype) String() string {
 	var parts []string
-	if e&PHAssetMediaSubtypePhotoPanorama != 0 { parts = append(parts, "PHAssetMediaSubtypePhotoPanorama") }
-	if e&PHAssetMediaSubtypePhotoHDR != 0 { parts = append(parts, "PHAssetMediaSubtypePhotoHDR") }
-	if e&PHAssetMediaSubtypePhotoScreenshot != 0 { parts = append(parts, "PHAssetMediaSubtypePhotoScreenshot") }
-	if e&PHAssetMediaSubtypePhotoLive != 0 { parts = append(parts, "PHAssetMediaSubtypePhotoLive") }
-	if e&PHAssetMediaSubtypePhotoDepthEffect != 0 { parts = append(parts, "PHAssetMediaSubtypePhotoDepthEffect") }
-	if e&PHAssetMediaSubtypeSpatialMedia != 0 { parts = append(parts, "PHAssetMediaSubtypeSpatialMedia") }
-	if e&PHAssetMediaSubtypeVideoStreamed != 0 { parts = append(parts, "PHAssetMediaSubtypeVideoStreamed") }
-	if e&PHAssetMediaSubtypeVideoHighFrameRate != 0 { parts = append(parts, "PHAssetMediaSubtypeVideoHighFrameRate") }
-	if e&PHAssetMediaSubtypeVideoTimelapse != 0 { parts = append(parts, "PHAssetMediaSubtypeVideoTimelapse") }
-	if e&PHAssetMediaSubtypeVideoScreenRecording != 0 { parts = append(parts, "PHAssetMediaSubtypeVideoScreenRecording") }
-	if e&PHAssetMediaSubtypeVideoCinematic != 0 { parts = append(parts, "PHAssetMediaSubtypeVideoCinematic") }
-	if len(parts) == 0 { return "0" }
+	if e&PHAssetMediaSubtypePhotoPanorama != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoPanorama")
+	}
+	if e&PHAssetMediaSubtypePhotoHDR != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoHDR")
+	}
+	if e&PHAssetMediaSubtypePhotoScreenshot != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoScreenshot")
+	}
+	if e&PHAssetMediaSubtypePhotoLive != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoLive")
+	}
+	if e&PHAssetMediaSubtypePhotoDepthEffect != 0 {
+		parts = append(parts, "PHAssetMediaSubtypePhotoDepthEffect")
+	}
+	if e&PHAssetMediaSubtypeSpatialMedia != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeSpatialMedia")
+	}
+	if e&PHAssetMediaSubtypeVideoStreamed != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeVideoStreamed")
+	}
+	if e&PHAssetMediaSubtypeVideoHighFrameRate != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeVideoHighFrameRate")
+	}
+	if e&PHAssetMediaSubtypeVideoTimelapse != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeVideoTimelapse")
+	}
+	if e&PHAssetMediaSubtypeVideoScreenRecording != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeVideoScreenRecording")
+	}
+	if e&PHAssetMediaSubtypeVideoCinematic != 0 {
+		parts = append(parts, "PHAssetMediaSubtypeVideoCinematic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -244,9 +274,9 @@ type PHAssetMediaType int64
 
 const (
 	PHAssetMediaTypeUnknown PHAssetMediaType = 0
-	PHAssetMediaTypeImage PHAssetMediaType = 1
-	PHAssetMediaTypeVideo PHAssetMediaType = 2
-	PHAssetMediaTypeAudio PHAssetMediaType = 3
+	PHAssetMediaTypeImage   PHAssetMediaType = 1
+	PHAssetMediaTypeVideo   PHAssetMediaType = 2
+	PHAssetMediaTypeAudio   PHAssetMediaType = 3
 )
 
 func (e PHAssetMediaType) String() string {
@@ -267,12 +297,12 @@ func (e PHAssetMediaType) String() string {
 type PHAssetPlaybackStyle int64
 
 const (
-	PHAssetPlaybackStyleUnsupported PHAssetPlaybackStyle = 0
-	PHAssetPlaybackStyleImage PHAssetPlaybackStyle = 1
+	PHAssetPlaybackStyleUnsupported   PHAssetPlaybackStyle = 0
+	PHAssetPlaybackStyleImage         PHAssetPlaybackStyle = 1
 	PHAssetPlaybackStyleImageAnimated PHAssetPlaybackStyle = 2
-	PHAssetPlaybackStyleLivePhoto PHAssetPlaybackStyle = 3
-	PHAssetPlaybackStyleVideo PHAssetPlaybackStyle = 4
-	PHAssetPlaybackStyleVideoLooping PHAssetPlaybackStyle = 5
+	PHAssetPlaybackStyleLivePhoto     PHAssetPlaybackStyle = 3
+	PHAssetPlaybackStyleVideo         PHAssetPlaybackStyle = 4
+	PHAssetPlaybackStyleVideoLooping  PHAssetPlaybackStyle = 5
 )
 
 func (e PHAssetPlaybackStyle) String() string {
@@ -297,19 +327,19 @@ func (e PHAssetPlaybackStyle) String() string {
 type PHAssetResourceType int64
 
 const (
-	PHAssetResourceTypePhoto PHAssetResourceType = 1
-	PHAssetResourceTypeVideo PHAssetResourceType = 2
-	PHAssetResourceTypeAudio PHAssetResourceType = 3
-	PHAssetResourceTypeAlternatePhoto PHAssetResourceType = 4
-	PHAssetResourceTypeFullSizePhoto PHAssetResourceType = 5
-	PHAssetResourceTypeFullSizeVideo PHAssetResourceType = 6
-	PHAssetResourceTypeAdjustmentData PHAssetResourceType = 7
-	PHAssetResourceTypeAdjustmentBasePhoto PHAssetResourceType = 8
-	PHAssetResourceTypePairedVideo PHAssetResourceType = 9
-	PHAssetResourceTypeFullSizePairedVideo PHAssetResourceType = 10
+	PHAssetResourceTypePhoto                     PHAssetResourceType = 1
+	PHAssetResourceTypeVideo                     PHAssetResourceType = 2
+	PHAssetResourceTypeAudio                     PHAssetResourceType = 3
+	PHAssetResourceTypeAlternatePhoto            PHAssetResourceType = 4
+	PHAssetResourceTypeFullSizePhoto             PHAssetResourceType = 5
+	PHAssetResourceTypeFullSizeVideo             PHAssetResourceType = 6
+	PHAssetResourceTypeAdjustmentData            PHAssetResourceType = 7
+	PHAssetResourceTypeAdjustmentBasePhoto       PHAssetResourceType = 8
+	PHAssetResourceTypePairedVideo               PHAssetResourceType = 9
+	PHAssetResourceTypeFullSizePairedVideo       PHAssetResourceType = 10
 	PHAssetResourceTypeAdjustmentBasePairedVideo PHAssetResourceType = 11
-	PHAssetResourceTypeAdjustmentBaseVideo PHAssetResourceType = 12
-	PHAssetResourceTypePhotoProxy PHAssetResourceType = 19
+	PHAssetResourceTypeAdjustmentBaseVideo       PHAssetResourceType = 12
+	PHAssetResourceTypePhotoProxy                PHAssetResourceType = 19
 )
 
 func (e PHAssetResourceType) String() string {
@@ -348,18 +378,26 @@ func (e PHAssetResourceType) String() string {
 type PHAssetSourceType uint64
 
 const (
-	PHAssetSourceTypeNone PHAssetSourceType = 0
-	PHAssetSourceTypeUserLibrary PHAssetSourceType = 1
-	PHAssetSourceTypeCloudShared PHAssetSourceType = 2
+	PHAssetSourceTypeNone         PHAssetSourceType = 0
+	PHAssetSourceTypeUserLibrary  PHAssetSourceType = 1
+	PHAssetSourceTypeCloudShared  PHAssetSourceType = 2
 	PHAssetSourceTypeiTunesSynced PHAssetSourceType = 4
 )
 
 func (e PHAssetSourceType) String() string {
 	var parts []string
-	if e&PHAssetSourceTypeUserLibrary != 0 { parts = append(parts, "PHAssetSourceTypeUserLibrary") }
-	if e&PHAssetSourceTypeCloudShared != 0 { parts = append(parts, "PHAssetSourceTypeCloudShared") }
-	if e&PHAssetSourceTypeiTunesSynced != 0 { parts = append(parts, "PHAssetSourceTypeiTunesSynced") }
-	if len(parts) == 0 { return "0" }
+	if e&PHAssetSourceTypeUserLibrary != 0 {
+		parts = append(parts, "PHAssetSourceTypeUserLibrary")
+	}
+	if e&PHAssetSourceTypeCloudShared != 0 {
+		parts = append(parts, "PHAssetSourceTypeCloudShared")
+	}
+	if e&PHAssetSourceTypeiTunesSynced != 0 {
+		parts = append(parts, "PHAssetSourceTypeiTunesSynced")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -367,10 +405,10 @@ type PHAuthorizationStatus int64
 
 const (
 	PHAuthorizationStatusNotDetermined PHAuthorizationStatus = 0
-	PHAuthorizationStatusRestricted PHAuthorizationStatus = 1
-	PHAuthorizationStatusDenied PHAuthorizationStatus = 2
-	PHAuthorizationStatusAuthorized PHAuthorizationStatus = 3
-	PHAuthorizationStatusLimited PHAuthorizationStatus = 4
+	PHAuthorizationStatusRestricted    PHAuthorizationStatus = 1
+	PHAuthorizationStatusDenied        PHAuthorizationStatus = 2
+	PHAuthorizationStatusAuthorized    PHAuthorizationStatus = 3
+	PHAuthorizationStatusLimited       PHAuthorizationStatus = 4
 )
 
 func (e PHAuthorizationStatus) String() string {
@@ -393,13 +431,13 @@ func (e PHAuthorizationStatus) String() string {
 type PHCollectionEditOperation int64
 
 const (
-	PHCollectionEditOperationDeleteContent PHCollectionEditOperation = 1
-	PHCollectionEditOperationRemoveContent PHCollectionEditOperation = 2
-	PHCollectionEditOperationAddContent PHCollectionEditOperation = 3
-	PHCollectionEditOperationCreateContent PHCollectionEditOperation = 4
+	PHCollectionEditOperationDeleteContent    PHCollectionEditOperation = 1
+	PHCollectionEditOperationRemoveContent    PHCollectionEditOperation = 2
+	PHCollectionEditOperationAddContent       PHCollectionEditOperation = 3
+	PHCollectionEditOperationCreateContent    PHCollectionEditOperation = 4
 	PHCollectionEditOperationRearrangeContent PHCollectionEditOperation = 5
-	PHCollectionEditOperationDelete PHCollectionEditOperation = 6
-	PHCollectionEditOperationRename PHCollectionEditOperation = 7
+	PHCollectionEditOperationDelete           PHCollectionEditOperation = 6
+	PHCollectionEditOperationRename           PHCollectionEditOperation = 7
 )
 
 func (e PHCollectionEditOperation) String() string {
@@ -427,8 +465,8 @@ type PHCollectionListSubtype uint64
 
 const (
 	PHCollectionListSubtypeSmartFolderEvents PHCollectionListSubtype = 200
-	PHCollectionListSubtypeSmartFolderFaces PHCollectionListSubtype = 201
-	PHCollectionListSubtypeAny PHCollectionListSubtype = 9223372036854775807
+	PHCollectionListSubtypeSmartFolderFaces  PHCollectionListSubtype = 201
+	PHCollectionListSubtypeAny               PHCollectionListSubtype = 9223372036854775807
 )
 
 func (e PHCollectionListSubtype) String() string {
@@ -446,8 +484,7 @@ func (e PHCollectionListSubtype) String() string {
 
 type PHCollectionListType int64
 
-const (
-)
+const ()
 
 func (e PHCollectionListType) String() string {
 	switch e {
@@ -459,9 +496,9 @@ func (e PHCollectionListType) String() string {
 type PHImageContentMode int64
 
 const (
-	PHImageContentModeAspectFit PHImageContentMode = 0
+	PHImageContentModeAspectFit  PHImageContentMode = 0
 	PHImageContentModeAspectFill PHImageContentMode = 1
-	PHImageContentModeDefault PHImageContentMode = 0
+	PHImageContentModeDefault    PHImageContentMode = 0
 )
 
 func (e PHImageContentMode) String() string {
@@ -478,9 +515,9 @@ func (e PHImageContentMode) String() string {
 type PHImageRequestOptionsDeliveryMode int64
 
 const (
-	PHImageRequestOptionsDeliveryModeOpportunistic PHImageRequestOptionsDeliveryMode = 0
+	PHImageRequestOptionsDeliveryModeOpportunistic     PHImageRequestOptionsDeliveryMode = 0
 	PHImageRequestOptionsDeliveryModeHighQualityFormat PHImageRequestOptionsDeliveryMode = 1
-	PHImageRequestOptionsDeliveryModeFastFormat PHImageRequestOptionsDeliveryMode = 2
+	PHImageRequestOptionsDeliveryModeFastFormat        PHImageRequestOptionsDeliveryMode = 2
 )
 
 func (e PHImageRequestOptionsDeliveryMode) String() string {
@@ -499,8 +536,8 @@ func (e PHImageRequestOptionsDeliveryMode) String() string {
 type PHImageRequestOptionsResizeMode int64
 
 const (
-	PHImageRequestOptionsResizeModeNone PHImageRequestOptionsResizeMode = 0
-	PHImageRequestOptionsResizeModeFast PHImageRequestOptionsResizeMode = 1
+	PHImageRequestOptionsResizeModeNone  PHImageRequestOptionsResizeMode = 0
+	PHImageRequestOptionsResizeModeFast  PHImageRequestOptionsResizeMode = 1
 	PHImageRequestOptionsResizeModeExact PHImageRequestOptionsResizeMode = 2
 )
 
@@ -520,9 +557,9 @@ func (e PHImageRequestOptionsResizeMode) String() string {
 type PHImageRequestOptionsVersion int64
 
 const (
-	PHImageRequestOptionsVersionCurrent PHImageRequestOptionsVersion = 0
+	PHImageRequestOptionsVersionCurrent    PHImageRequestOptionsVersion = 0
 	PHImageRequestOptionsVersionUnadjusted PHImageRequestOptionsVersion = 1
-	PHImageRequestOptionsVersionOriginal PHImageRequestOptionsVersion = 2
+	PHImageRequestOptionsVersionOriginal   PHImageRequestOptionsVersion = 2
 )
 
 func (e PHImageRequestOptionsVersion) String() string {
@@ -582,9 +619,9 @@ func (e PHLivePhotoFrameType) String() string {
 type PHObjectType int64
 
 const (
-	PHObjectTypeAsset PHObjectType = 1
+	PHObjectTypeAsset           PHObjectType = 1
 	PHObjectTypeAssetCollection PHObjectType = 2
-	PHObjectTypeCollectionList PHObjectType = 3
+	PHObjectTypeCollectionList  PHObjectType = 3
 )
 
 func (e PHObjectType) String() string {
@@ -603,28 +640,28 @@ func (e PHObjectType) String() string {
 type PHPhotosError int64
 
 const (
-	PHPhotosErrorInternalError PHPhotosError = -1
-	PHPhotosErrorUserCancelled PHPhotosError = 3072
-	PHPhotosErrorLibraryVolumeOffline PHPhotosError = 3114
+	PHPhotosErrorInternalError                      PHPhotosError = -1
+	PHPhotosErrorUserCancelled                      PHPhotosError = 3072
+	PHPhotosErrorLibraryVolumeOffline               PHPhotosError = 3114
 	PHPhotosErrorRelinquishingLibraryBundleToWriter PHPhotosError = 3142
-	PHPhotosErrorSwitchingSystemPhotoLibrary PHPhotosError = 3143
-	PHPhotosErrorNetworkAccessRequired PHPhotosError = 3164
-	PHPhotosErrorNetworkError PHPhotosError = 3169
-	PHPhotosErrorIdentifierNotFound PHPhotosError = 3201
-	PHPhotosErrorMultipleIdentifiersFound PHPhotosError = 3202
-	PHPhotosErrorChangeNotSupported PHPhotosError = 3300
-	PHPhotosErrorOperationInterrupted PHPhotosError = 3301
-	PHPhotosErrorInvalidResource PHPhotosError = 3302
-	PHPhotosErrorMissingResource PHPhotosError = 3303
-	PHPhotosErrorNotEnoughSpace PHPhotosError = 3305
-	PHPhotosErrorRequestNotSupportedForAsset PHPhotosError = 3306
-	PHPhotosErrorLimitExceeded PHPhotosError = 3307
-	PHPhotosErrorAccessRestricted PHPhotosError = 3310
-	PHPhotosErrorAccessUserDenied PHPhotosError = 3311
-	PHPhotosErrorLibraryInFileProviderSyncRoot PHPhotosError = 5423
-	PHPhotosErrorPersistentChangeTokenExpired PHPhotosError = 3105
+	PHPhotosErrorSwitchingSystemPhotoLibrary        PHPhotosError = 3143
+	PHPhotosErrorNetworkAccessRequired              PHPhotosError = 3164
+	PHPhotosErrorNetworkError                       PHPhotosError = 3169
+	PHPhotosErrorIdentifierNotFound                 PHPhotosError = 3201
+	PHPhotosErrorMultipleIdentifiersFound           PHPhotosError = 3202
+	PHPhotosErrorChangeNotSupported                 PHPhotosError = 3300
+	PHPhotosErrorOperationInterrupted               PHPhotosError = 3301
+	PHPhotosErrorInvalidResource                    PHPhotosError = 3302
+	PHPhotosErrorMissingResource                    PHPhotosError = 3303
+	PHPhotosErrorNotEnoughSpace                     PHPhotosError = 3305
+	PHPhotosErrorRequestNotSupportedForAsset        PHPhotosError = 3306
+	PHPhotosErrorLimitExceeded                      PHPhotosError = 3307
+	PHPhotosErrorAccessRestricted                   PHPhotosError = 3310
+	PHPhotosErrorAccessUserDenied                   PHPhotosError = 3311
+	PHPhotosErrorLibraryInFileProviderSyncRoot      PHPhotosError = 5423
+	PHPhotosErrorPersistentChangeTokenExpired       PHPhotosError = 3105
 	PHPhotosErrorPersistentChangeDetailsUnavailable PHPhotosError = 3210
-	PHPhotosErrorInvalid PHPhotosError = -1
+	PHPhotosErrorInvalid                            PHPhotosError = -1
 )
 
 func (e PHPhotosError) String() string {
@@ -679,10 +716,10 @@ func (e PHPhotosError) String() string {
 type PHVideoRequestOptionsDeliveryMode int64
 
 const (
-	PHVideoRequestOptionsDeliveryModeAutomatic PHVideoRequestOptionsDeliveryMode = 0
-	PHVideoRequestOptionsDeliveryModeHighQualityFormat PHVideoRequestOptionsDeliveryMode = 1
+	PHVideoRequestOptionsDeliveryModeAutomatic           PHVideoRequestOptionsDeliveryMode = 0
+	PHVideoRequestOptionsDeliveryModeHighQualityFormat   PHVideoRequestOptionsDeliveryMode = 1
 	PHVideoRequestOptionsDeliveryModeMediumQualityFormat PHVideoRequestOptionsDeliveryMode = 2
-	PHVideoRequestOptionsDeliveryModeFastFormat PHVideoRequestOptionsDeliveryMode = 3
+	PHVideoRequestOptionsDeliveryModeFastFormat          PHVideoRequestOptionsDeliveryMode = 3
 )
 
 func (e PHVideoRequestOptionsDeliveryMode) String() string {
@@ -703,7 +740,7 @@ func (e PHVideoRequestOptionsDeliveryMode) String() string {
 type PHVideoRequestOptionsVersion int64
 
 const (
-	PHVideoRequestOptionsVersionCurrent PHVideoRequestOptionsVersion = 0
+	PHVideoRequestOptionsVersionCurrent  PHVideoRequestOptionsVersion = 0
 	PHVideoRequestOptionsVersionOriginal PHVideoRequestOptionsVersion = 1
 )
 
@@ -721,7 +758,7 @@ func (e PHVideoRequestOptionsVersion) String() string {
 type PMPageToPaperMappingType int64
 
 const (
-	KPMPageToPaperMappingNone PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
 	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
 )
 
@@ -749,8 +786,8 @@ type Acl_entry_id_t int64
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY Acl_entry_id_t = -1
-	ACL_LAST_ENTRY Acl_entry_id_t = -2
+	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
+	ACL_LAST_ENTRY  Acl_entry_id_t = -2
 )
 
 func (e Acl_entry_id_t) String() string {
@@ -769,13 +806,13 @@ func (e Acl_entry_id_t) String() string {
 type Acl_flag_t int64
 
 const (
-	ACL_FLAG_DEFER_INHERIT Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT Acl_flag_t = 32
+	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
+	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
+	ACL_ENTRY_INHERITED         Acl_flag_t = 16
+	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
 	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT Acl_flag_t = 256
+	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
+	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
 )
 
 func (e Acl_flag_t) String() string {
@@ -802,24 +839,24 @@ func (e Acl_flag_t) String() string {
 type Acl_perm_t int64
 
 const (
-	ACL_READ_DATA Acl_perm_t = 2
-	ACL_LIST_DIRECTORY Acl_perm_t = 2
-	ACL_WRITE_DATA Acl_perm_t = 4
-	ACL_ADD_FILE Acl_perm_t = 4
-	ACL_EXECUTE Acl_perm_t = 8
-	ACL_SEARCH Acl_perm_t = 8
-	ACL_DELETE Acl_perm_t = 16
-	ACL_APPEND_DATA Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY Acl_perm_t = 32
-	ACL_DELETE_CHILD Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES Acl_perm_t = 512
+	ACL_READ_DATA           Acl_perm_t = 2
+	ACL_LIST_DIRECTORY      Acl_perm_t = 2
+	ACL_WRITE_DATA          Acl_perm_t = 4
+	ACL_ADD_FILE            Acl_perm_t = 4
+	ACL_EXECUTE             Acl_perm_t = 8
+	ACL_SEARCH              Acl_perm_t = 8
+	ACL_DELETE              Acl_perm_t = 16
+	ACL_APPEND_DATA         Acl_perm_t = 32
+	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
+	ACL_DELETE_CHILD        Acl_perm_t = 64
+	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
+	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
+	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
 	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY Acl_perm_t = 2048
-	ACL_WRITE_SECURITY Acl_perm_t = 4096
-	ACL_CHANGE_OWNER Acl_perm_t = 8192
-	ACL_SYNCHRONIZE Acl_perm_t = 1048576
+	ACL_READ_SECURITY       Acl_perm_t = 2048
+	ACL_WRITE_SECURITY      Acl_perm_t = 4096
+	ACL_CHANGE_OWNER        Acl_perm_t = 8192
+	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
 )
 
 func (e Acl_perm_t) String() string {
@@ -860,9 +897,9 @@ func (e Acl_perm_t) String() string {
 type Acl_tag_t int64
 
 const (
-	ACL_UNDEFINED_TAG Acl_tag_t = 0
+	ACL_UNDEFINED_TAG  Acl_tag_t = 0
 	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY Acl_tag_t = 2
+	ACL_EXTENDED_DENY  Acl_tag_t = 2
 )
 
 func (e Acl_tag_t) String() string {
@@ -882,12 +919,12 @@ type Acl_type_t int64
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS Acl_type_t = 0
-	ACL_TYPE_DEFAULT Acl_type_t = 1
-	ACL_TYPE_AFS Acl_type_t = 2
-	ACL_TYPE_CODA Acl_type_t = 3
-	ACL_TYPE_NTFS Acl_type_t = 4
-	ACL_TYPE_NWFS Acl_type_t = 5
+	ACL_TYPE_ACCESS   Acl_type_t = 0
+	ACL_TYPE_DEFAULT  Acl_type_t = 1
+	ACL_TYPE_AFS      Acl_type_t = 2
+	ACL_TYPE_CODA     Acl_type_t = 3
+	ACL_TYPE_NTFS     Acl_type_t = 4
+	ACL_TYPE_NWFS     Acl_type_t = 5
 )
 
 func (e Acl_type_t) String() string {
@@ -914,14 +951,14 @@ func (e Acl_type_t) String() string {
 type Clockid_t int64
 
 const (
-	_CLOCK_REALTIME Clockid_t = 0
-	_CLOCK_MONOTONIC Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW Clockid_t = 4
+	_CLOCK_REALTIME             Clockid_t = 0
+	_CLOCK_MONOTONIC            Clockid_t = 6
+	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
 	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID Clockid_t = 16
+	_CLOCK_UPTIME_RAW           Clockid_t = 8
+	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
+	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
+	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
 )
 
 func (e Clockid_t) String() string {
@@ -950,9 +987,9 @@ func (e Clockid_t) String() string {
 type Dispatch_autorelease_frequency_t uint64
 
 const (
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT   Dispatch_autorelease_frequency_t = 0
 	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER     Dispatch_autorelease_frequency_t = 2
 )
 
 func (e Dispatch_autorelease_frequency_t) String() string {
@@ -971,36 +1008,50 @@ func (e Dispatch_autorelease_frequency_t) String() string {
 type Dispatch_block_flags_t uint64
 
 const (
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_BARRIER           Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_DETACHED          Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_ASSIGN_CURRENT    Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_NO_QOS_CLASS      Dispatch_block_flags_t = 8
 	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
 	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
 )
 
 func (e Dispatch_block_flags_t) String() string {
 	var parts []string
-	if e&DISPATCH_BLOCK_BARRIER != 0 { parts = append(parts, "DISPATCH_BLOCK_BARRIER") }
-	if e&DISPATCH_BLOCK_DETACHED != 0 { parts = append(parts, "DISPATCH_BLOCK_DETACHED") }
-	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 { parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT") }
-	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS") }
-	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 { parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS") }
-	if len(parts) == 0 { return "0" }
+	if e&DISPATCH_BLOCK_BARRIER != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_BARRIER")
+	}
+	if e&DISPATCH_BLOCK_DETACHED != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_DETACHED")
+	}
+	if e&DISPATCH_BLOCK_ASSIGN_CURRENT != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ASSIGN_CURRENT")
+	}
+	if e&DISPATCH_BLOCK_NO_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_NO_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_INHERIT_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_INHERIT_QOS_CLASS")
+	}
+	if e&DISPATCH_BLOCK_ENFORCE_QOS_CLASS != 0 {
+		parts = append(parts, "DISPATCH_BLOCK_ENFORCE_QOS_CLASS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Filesec_property_t int64
 
 const (
-	FILESEC_OWNER Filesec_property_t = 1
-	FILESEC_GROUP Filesec_property_t = 2
-	FILESEC_UUID Filesec_property_t = 3
-	FILESEC_MODE Filesec_property_t = 4
-	FILESEC_ACL Filesec_property_t = 5
-	FILESEC_GRPUUID Filesec_property_t = 6
-	FILESEC_ACL_RAW Filesec_property_t = 100
+	FILESEC_OWNER         Filesec_property_t = 1
+	FILESEC_GROUP         Filesec_property_t = 2
+	FILESEC_UUID          Filesec_property_t = 3
+	FILESEC_MODE          Filesec_property_t = 4
+	FILESEC_ACL           Filesec_property_t = 5
+	FILESEC_GRPUUID       Filesec_property_t = 6
+	FILESEC_ACL_RAW       Filesec_property_t = 100
 	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
 )
 
@@ -1030,8 +1081,8 @@ func (e Filesec_property_t) String() string {
 type Idtype_t int64
 
 const (
-	P_ALL Idtype_t = 0
-	P_PID Idtype_t = 1
+	P_ALL  Idtype_t = 0
+	P_PID  Idtype_t = 1
 	P_PGID Idtype_t = 2
 )
 
@@ -1051,62 +1102,62 @@ func (e Idtype_t) String() string {
 type Ipc_info_object_type_t int64
 
 const (
-	IPC_OTYPE_NONE Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER Ipc_info_object_type_t = 37
+	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
+	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
+	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
+	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
+	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
+	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
+	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
+	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
+	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
+	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
+	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
+	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
+	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
+	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
+	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
+	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
+	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
+	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
+	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
+	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
+	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
+	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
+	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
+	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
+	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
+	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
+	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
+	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
+	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
+	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
+	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
+	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
+	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
+	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
+	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
 	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
+	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
+	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
+	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
+	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
+	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
+	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
+	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
+	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
+	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
+	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
+	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
+	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
+	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
+	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
+	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
 )
 
 func (e Ipc_info_object_type_t) String() string {
@@ -1232,15 +1283,15 @@ type Launch_data_type_t int64
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
-	LAUNCH_DATA_ARRAY Launch_data_type_t = 2
-	LAUNCH_DATA_FD Launch_data_type_t = 3
-	LAUNCH_DATA_INTEGER Launch_data_type_t = 4
-	LAUNCH_DATA_REAL Launch_data_type_t = 5
-	LAUNCH_DATA_BOOL Launch_data_type_t = 6
-	LAUNCH_DATA_STRING Launch_data_type_t = 7
-	LAUNCH_DATA_OPAQUE Launch_data_type_t = 8
-	LAUNCH_DATA_ERRNO Launch_data_type_t = 9
-	LAUNCH_DATA_MACHPORT Launch_data_type_t = 10
+	LAUNCH_DATA_ARRAY      Launch_data_type_t = 2
+	LAUNCH_DATA_FD         Launch_data_type_t = 3
+	LAUNCH_DATA_INTEGER    Launch_data_type_t = 4
+	LAUNCH_DATA_REAL       Launch_data_type_t = 5
+	LAUNCH_DATA_BOOL       Launch_data_type_t = 6
+	LAUNCH_DATA_STRING     Launch_data_type_t = 7
+	LAUNCH_DATA_OPAQUE     Launch_data_type_t = 8
+	LAUNCH_DATA_ERRNO      Launch_data_type_t = 9
+	LAUNCH_DATA_MACHPORT   Launch_data_type_t = 10
 )
 
 func (e Launch_data_type_t) String() string {
@@ -1278,7 +1329,9 @@ const (
 
 func (e Mach_vm_range_flags_t) String() string {
 	var parts []string
-	if len(parts) == 0 { return "0" }
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1286,7 +1339,7 @@ type Mach_vm_range_flavor_t int64
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1 Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
 )
 
 func (e Mach_vm_range_flavor_t) String() string {
@@ -1304,8 +1357,8 @@ type Mach_vm_range_tag_t int64
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
+	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
 )
 
 func (e Mach_vm_range_tag_t) String() string {
@@ -1324,26 +1377,42 @@ func (e Mach_vm_range_tag_t) String() string {
 type Mpo_flags_t int64
 
 const (
-	MPO_PORT Mpo_flags_t = 0
-	MPO_SERVICE_PORT Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT Mpo_flags_t = 2048
-	MPO_REPLY_PORT Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT Mpo_flags_t = 32768
+	MPO_PORT                            Mpo_flags_t = 0
+	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
+	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
+	MPO_REPLY_PORT                      Mpo_flags_t = 4096
+	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
+	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
+	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
 	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
 )
 
 func (e Mpo_flags_t) String() string {
 	var parts []string
-	if e&MPO_SERVICE_PORT != 0 { parts = append(parts, "MPO_SERVICE_PORT") }
-	if e&MPO_CONNECTION_PORT != 0 { parts = append(parts, "MPO_CONNECTION_PORT") }
-	if e&MPO_REPLY_PORT != 0 { parts = append(parts, "MPO_REPLY_PORT") }
-	if e&MPO_WEAK_REPLY_PORT != 0 { parts = append(parts, "MPO_WEAK_REPLY_PORT") }
-	if e&MPO_NOTIFICATION_PORT != 0 { parts = append(parts, "MPO_NOTIFICATION_PORT") }
-	if e&MPO_EXCEPTION_PORT != 0 { parts = append(parts, "MPO_EXCEPTION_PORT") }
-	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 { parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY") }
-	if len(parts) == 0 { return "0" }
+	if e&MPO_SERVICE_PORT != 0 {
+		parts = append(parts, "MPO_SERVICE_PORT")
+	}
+	if e&MPO_CONNECTION_PORT != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT")
+	}
+	if e&MPO_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_REPLY_PORT")
+	}
+	if e&MPO_WEAK_REPLY_PORT != 0 {
+		parts = append(parts, "MPO_WEAK_REPLY_PORT")
+	}
+	if e&MPO_NOTIFICATION_PORT != 0 {
+		parts = append(parts, "MPO_NOTIFICATION_PORT")
+	}
+	if e&MPO_EXCEPTION_PORT != 0 {
+		parts = append(parts, "MPO_EXCEPTION_PORT")
+	}
+	if e&MPO_CONNECTION_PORT_WITH_PORT_ARRAY != 0 {
+		parts = append(parts, "MPO_CONNECTION_PORT_WITH_PORT_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
@@ -1365,27 +1434,27 @@ func (e Os_clockid_t) String() string {
 type Ptrauth_key int64
 
 const (
-	Ptrauth_key_none Ptrauth_key = -1
-	Ptrauth_key_asia Ptrauth_key = 0
-	Ptrauth_key_asib Ptrauth_key = 1
-	Ptrauth_key_asda Ptrauth_key = 2
-	Ptrauth_key_asdb Ptrauth_key = 3
+	Ptrauth_key_none                     Ptrauth_key = -1
+	Ptrauth_key_asia                     Ptrauth_key = 0
+	Ptrauth_key_asib                     Ptrauth_key = 1
+	Ptrauth_key_asda                     Ptrauth_key = 2
+	Ptrauth_key_asdb                     Ptrauth_key = 3
 	Ptrauth_key_process_independent_code Ptrauth_key = 0
-	Ptrauth_key_process_dependent_code Ptrauth_key = 1
+	Ptrauth_key_process_dependent_code   Ptrauth_key = 1
 	Ptrauth_key_process_independent_data Ptrauth_key = 2
-	Ptrauth_key_process_dependent_data Ptrauth_key = 3
-	Ptrauth_key_return_address Ptrauth_key = 1
-	Ptrauth_key_frame_pointer Ptrauth_key = 3
-	Ptrauth_key_function_pointer Ptrauth_key = 0
-	Ptrauth_key_block_function Ptrauth_key = 0
-	Ptrauth_key_cxx_vtable_pointer Ptrauth_key = 2
-	Ptrauth_key_method_list_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_isa_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_super_pointer Ptrauth_key = 2
-	Ptrauth_key_objc_sel_pointer Ptrauth_key = 3
-	Ptrauth_key_objc_class_ro_pointer Ptrauth_key = 2
+	Ptrauth_key_process_dependent_data   Ptrauth_key = 3
+	Ptrauth_key_return_address           Ptrauth_key = 1
+	Ptrauth_key_frame_pointer            Ptrauth_key = 3
+	Ptrauth_key_function_pointer         Ptrauth_key = 0
+	Ptrauth_key_block_function           Ptrauth_key = 0
+	Ptrauth_key_cxx_vtable_pointer       Ptrauth_key = 2
+	Ptrauth_key_method_list_pointer      Ptrauth_key = 2
+	Ptrauth_key_objc_isa_pointer         Ptrauth_key = 2
+	Ptrauth_key_objc_super_pointer       Ptrauth_key = 2
+	Ptrauth_key_objc_sel_pointer         Ptrauth_key = 3
+	Ptrauth_key_objc_class_ro_pointer    Ptrauth_key = 2
 	Ptrauth_key_block_descriptor_pointer Ptrauth_key = 2
-	Ptrauth_key_init_fini_pointer Ptrauth_key = 0
+	Ptrauth_key_init_fini_pointer        Ptrauth_key = 0
 )
 
 func (e Ptrauth_key) String() string {
@@ -1409,11 +1478,11 @@ type Qos_class_t uint32
 
 const (
 	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED Qos_class_t = 25
-	QOS_CLASS_DEFAULT Qos_class_t = 21
-	QOS_CLASS_UTILITY Qos_class_t = 17
-	QOS_CLASS_BACKGROUND Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED Qos_class_t = 0
+	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
+	QOS_CLASS_DEFAULT          Qos_class_t = 21
+	QOS_CLASS_UTILITY          Qos_class_t = 17
+	QOS_CLASS_BACKGROUND       Qos_class_t = 9
+	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
 )
 
 func (e Qos_class_t) String() string {
@@ -1438,22 +1507,22 @@ func (e Qos_class_t) String() string {
 type Virtual_memory_guard_exception_code_t int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 202
+	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
+	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
 	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
 )
@@ -1504,34 +1573,47 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 type Xpc_listener_create_flags_t int64
 
 const (
-	XPC_LISTENER_CREATE_NONE Xpc_listener_create_flags_t = 0
-	XPC_LISTENER_CREATE_INACTIVE Xpc_listener_create_flags_t = 1
-	XPC_LISTENER_CREATE_FORCE_MACH Xpc_listener_create_flags_t = 2
+	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
+	XPC_LISTENER_CREATE_INACTIVE         Xpc_listener_create_flags_t = 1
+	XPC_LISTENER_CREATE_FORCE_MACH       Xpc_listener_create_flags_t = 2
 	XPC_LISTENER_CREATE_FORCE_XPCSERVICE Xpc_listener_create_flags_t = 4
 )
 
 func (e Xpc_listener_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_LISTENER_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE") }
-	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH") }
-	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 { parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_LISTENER_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_INACTIVE")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_MACH != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_MACH")
+	}
+	if e&XPC_LISTENER_CREATE_FORCE_XPCSERVICE != 0 {
+		parts = append(parts, "XPC_LISTENER_CREATE_FORCE_XPCSERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
 
 type Xpc_session_create_flags_t int64
 
 const (
-	XPC_SESSION_CREATE_NONE Xpc_session_create_flags_t = 0
-	XPC_SESSION_CREATE_INACTIVE Xpc_session_create_flags_t = 1
+	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0
+	XPC_SESSION_CREATE_INACTIVE        Xpc_session_create_flags_t = 1
 	XPC_SESSION_CREATE_MACH_PRIVILEGED Xpc_session_create_flags_t = 2
 )
 
 func (e Xpc_session_create_flags_t) String() string {
 	var parts []string
-	if e&XPC_SESSION_CREATE_INACTIVE != 0 { parts = append(parts, "XPC_SESSION_CREATE_INACTIVE") }
-	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 { parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED") }
-	if len(parts) == 0 { return "0" }
+	if e&XPC_SESSION_CREATE_INACTIVE != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_INACTIVE")
+	}
+	if e&XPC_SESSION_CREATE_MACH_PRIVILEGED != 0 {
+		parts = append(parts, "XPC_SESSION_CREATE_MACH_PRIVILEGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
 	return strings.Join(parts, "|")
 }
-

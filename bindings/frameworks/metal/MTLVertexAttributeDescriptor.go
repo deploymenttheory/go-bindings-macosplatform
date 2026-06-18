@@ -16,12 +16,12 @@ type MTLVertexAttributeDescriptor struct {
 }
 
 var (
-	_clsMTLVertexAttributeDescriptor = _objcClass("MTLVertexAttributeDescriptor")
-	_mTLVertexAttributeDescriptorSelFormat = objc.RegisterName("format")
-	_mTLVertexAttributeDescriptorSelSetFormat = objc.RegisterName("setFormat:")
-	_mTLVertexAttributeDescriptorSelOffset = objc.RegisterName("offset")
-	_mTLVertexAttributeDescriptorSelSetOffset = objc.RegisterName("setOffset:")
-	_mTLVertexAttributeDescriptorSelBufferIndex = objc.RegisterName("bufferIndex")
+	_clsMTLVertexAttributeDescriptor               = _objcClass("MTLVertexAttributeDescriptor")
+	_mTLVertexAttributeDescriptorSelFormat         = objc.RegisterName("format")
+	_mTLVertexAttributeDescriptorSelSetFormat      = objc.RegisterName("setFormat:")
+	_mTLVertexAttributeDescriptorSelOffset         = objc.RegisterName("offset")
+	_mTLVertexAttributeDescriptorSelSetOffset      = objc.RegisterName("setOffset:")
+	_mTLVertexAttributeDescriptorSelBufferIndex    = objc.RegisterName("bufferIndex")
 	_mTLVertexAttributeDescriptorSelSetBufferIndex = objc.RegisterName("setBufferIndex:")
 )
 
@@ -61,4 +61,3 @@ func (o *MTLVertexAttributeDescriptor) BufferIndex() uint {
 func (o *MTLVertexAttributeDescriptor) SetBufferIndex(bufferIndex uint) {
 	o.Ptr().Send(_mTLVertexAttributeDescriptorSelSetBufferIndex, bufferIndex)
 }
-

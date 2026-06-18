@@ -159,4 +159,3 @@ type NNImageNodeable interface {
 }
 
 var _ NNImageNodeable = (*NNImageNode)(nil)
-

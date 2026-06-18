@@ -43,4 +43,3 @@ func DREraseSetupPanelSetupPanel() *EraseSetupPanel {
 	}
 	return &EraseSetupPanel{inner: _r}
 }
-

@@ -16,23 +16,23 @@ type DOMEvent struct {
 }
 
 var (
-	_clsDOMEvent = _objcClass("DOMEvent")
-	_dOMEventSelStopPropagation = objc.RegisterName("stopPropagation")
-	_dOMEventSelPreventDefault = objc.RegisterName("preventDefault")
+	_clsDOMEvent                                   = _objcClass("DOMEvent")
+	_dOMEventSelStopPropagation                    = objc.RegisterName("stopPropagation")
+	_dOMEventSelPreventDefault                     = objc.RegisterName("preventDefault")
 	_dOMEventSelInitEventCanBubbleArgCancelableArg = objc.RegisterName("initEvent:canBubbleArg:cancelableArg:")
-	_dOMEventSelType = objc.RegisterName("type")
-	_dOMEventSelTarget = objc.RegisterName("target")
-	_dOMEventSelCurrentTarget = objc.RegisterName("currentTarget")
-	_dOMEventSelEventPhase = objc.RegisterName("eventPhase")
-	_dOMEventSelBubbles = objc.RegisterName("bubbles")
-	_dOMEventSelCancelable = objc.RegisterName("cancelable")
-	_dOMEventSelTimeStamp = objc.RegisterName("timeStamp")
-	_dOMEventSelSrcElement = objc.RegisterName("srcElement")
-	_dOMEventSelReturnValue = objc.RegisterName("returnValue")
-	_dOMEventSelSetReturnValue = objc.RegisterName("setReturnValue:")
-	_dOMEventSelCancelBubble = objc.RegisterName("cancelBubble")
-	_dOMEventSelSetCancelBubble = objc.RegisterName("setCancelBubble:")
-	_dOMEventSelInitEvent = objc.RegisterName("initEvent:::")
+	_dOMEventSelType                               = objc.RegisterName("type")
+	_dOMEventSelTarget                             = objc.RegisterName("target")
+	_dOMEventSelCurrentTarget                      = objc.RegisterName("currentTarget")
+	_dOMEventSelEventPhase                         = objc.RegisterName("eventPhase")
+	_dOMEventSelBubbles                            = objc.RegisterName("bubbles")
+	_dOMEventSelCancelable                         = objc.RegisterName("cancelable")
+	_dOMEventSelTimeStamp                          = objc.RegisterName("timeStamp")
+	_dOMEventSelSrcElement                         = objc.RegisterName("srcElement")
+	_dOMEventSelReturnValue                        = objc.RegisterName("returnValue")
+	_dOMEventSelSetReturnValue                     = objc.RegisterName("setReturnValue:")
+	_dOMEventSelCancelBubble                       = objc.RegisterName("cancelBubble")
+	_dOMEventSelSetCancelBubble                    = objc.RegisterName("setCancelBubble:")
+	_dOMEventSelInitEvent                          = objc.RegisterName("initEvent:::")
 )
 
 func DOMEventFromID(id objc.ID) *DOMEvent {
@@ -59,7 +59,9 @@ func (o *DOMEvent) InitEventCanBubbleArgCancelableArg(eventTypeArg *foundation.N
 
 func (o *DOMEvent) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMEventSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,4 +121,3 @@ func (o *DOMEvent) SetCancelBubble(cancelBubble bool) {
 func (o *DOMEvent) InitEvent(eventTypeArg *foundation.NSString, canBubbleArg bool, cancelableArg bool) {
 	o.Ptr().Send(_dOMEventSelInitEvent, eventTypeArg.Ptr(), canBubbleArg, cancelableArg)
 }
-

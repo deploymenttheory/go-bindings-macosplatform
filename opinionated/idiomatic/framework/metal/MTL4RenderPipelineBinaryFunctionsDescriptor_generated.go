@@ -16,7 +16,9 @@ type MTL4RenderPipelineBinaryFunctionsDescriptor struct {
 }
 
 // Unwrap returns the underlying [raw.MTL4RenderPipelineBinaryFunctionsDescriptor].
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Unwrap() *raw.MTL4RenderPipelineBinaryFunctionsDescriptor { return x.inner }
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Unwrap() *raw.MTL4RenderPipelineBinaryFunctionsDescriptor {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,4 +110,3 @@ type MTL4RenderPipelineBinaryFunctionsDescriptorable interface {
 }
 
 var _ MTL4RenderPipelineBinaryFunctionsDescriptorable = (*MTL4RenderPipelineBinaryFunctionsDescriptor)(nil)
-

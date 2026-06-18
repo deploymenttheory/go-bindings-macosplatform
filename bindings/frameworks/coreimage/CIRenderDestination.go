@@ -19,31 +19,31 @@ type CIRenderDestination struct {
 }
 
 var (
-	_clsCIRenderDestination = _objcClass("CIRenderDestination")
-	_cIRenderDestinationSelInitWithPixelBuffer = objc.RegisterName("initWithPixelBuffer:")
-	_cIRenderDestinationSelInitWithIOSurface = objc.RegisterName("initWithIOSurface:")
-	_cIRenderDestinationSelInitWithMTLTextureCommandBuffer = objc.RegisterName("initWithMTLTexture:commandBuffer:")
+	_clsCIRenderDestination                                                              = _objcClass("CIRenderDestination")
+	_cIRenderDestinationSelInitWithPixelBuffer                                           = objc.RegisterName("initWithPixelBuffer:")
+	_cIRenderDestinationSelInitWithIOSurface                                             = objc.RegisterName("initWithIOSurface:")
+	_cIRenderDestinationSelInitWithMTLTextureCommandBuffer                               = objc.RegisterName("initWithMTLTexture:commandBuffer:")
 	_cIRenderDestinationSelInitWithWidthHeightPixelFormatCommandBufferMtlTextureProvider = objc.RegisterName("initWithWidth:height:pixelFormat:commandBuffer:mtlTextureProvider:")
-	_cIRenderDestinationSelInitWithGLTextureTargetWidthHeight = objc.RegisterName("initWithGLTexture:target:width:height:")
-	_cIRenderDestinationSelInitWithBitmapDataWidthHeightBytesPerRowFormat = objc.RegisterName("initWithBitmapData:width:height:bytesPerRow:format:")
-	_cIRenderDestinationSelWidth = objc.RegisterName("width")
-	_cIRenderDestinationSelHeight = objc.RegisterName("height")
-	_cIRenderDestinationSelAlphaMode = objc.RegisterName("alphaMode")
-	_cIRenderDestinationSelSetAlphaMode = objc.RegisterName("setAlphaMode:")
-	_cIRenderDestinationSelIsFlipped = objc.RegisterName("isFlipped")
-	_cIRenderDestinationSelSetFlipped = objc.RegisterName("setFlipped:")
-	_cIRenderDestinationSelIsDithered = objc.RegisterName("isDithered")
-	_cIRenderDestinationSelSetDithered = objc.RegisterName("setDithered:")
-	_cIRenderDestinationSelIsClamped = objc.RegisterName("isClamped")
-	_cIRenderDestinationSelSetClamped = objc.RegisterName("setClamped:")
-	_cIRenderDestinationSelColorSpace = objc.RegisterName("colorSpace")
-	_cIRenderDestinationSelSetColorSpace = objc.RegisterName("setColorSpace:")
-	_cIRenderDestinationSelBlendKernel = objc.RegisterName("blendKernel")
-	_cIRenderDestinationSelSetBlendKernel = objc.RegisterName("setBlendKernel:")
-	_cIRenderDestinationSelBlendsInDestinationColorSpace = objc.RegisterName("blendsInDestinationColorSpace")
-	_cIRenderDestinationSelSetBlendsInDestinationColorSpace = objc.RegisterName("setBlendsInDestinationColorSpace:")
-	_cIRenderDestinationSelCaptureTraceURL = objc.RegisterName("captureTraceURL")
-	_cIRenderDestinationSelSetCaptureTraceURL = objc.RegisterName("setCaptureTraceURL:")
+	_cIRenderDestinationSelInitWithGLTextureTargetWidthHeight                            = objc.RegisterName("initWithGLTexture:target:width:height:")
+	_cIRenderDestinationSelInitWithBitmapDataWidthHeightBytesPerRowFormat                = objc.RegisterName("initWithBitmapData:width:height:bytesPerRow:format:")
+	_cIRenderDestinationSelWidth                                                         = objc.RegisterName("width")
+	_cIRenderDestinationSelHeight                                                        = objc.RegisterName("height")
+	_cIRenderDestinationSelAlphaMode                                                     = objc.RegisterName("alphaMode")
+	_cIRenderDestinationSelSetAlphaMode                                                  = objc.RegisterName("setAlphaMode:")
+	_cIRenderDestinationSelIsFlipped                                                     = objc.RegisterName("isFlipped")
+	_cIRenderDestinationSelSetFlipped                                                    = objc.RegisterName("setFlipped:")
+	_cIRenderDestinationSelIsDithered                                                    = objc.RegisterName("isDithered")
+	_cIRenderDestinationSelSetDithered                                                   = objc.RegisterName("setDithered:")
+	_cIRenderDestinationSelIsClamped                                                     = objc.RegisterName("isClamped")
+	_cIRenderDestinationSelSetClamped                                                    = objc.RegisterName("setClamped:")
+	_cIRenderDestinationSelColorSpace                                                    = objc.RegisterName("colorSpace")
+	_cIRenderDestinationSelSetColorSpace                                                 = objc.RegisterName("setColorSpace:")
+	_cIRenderDestinationSelBlendKernel                                                   = objc.RegisterName("blendKernel")
+	_cIRenderDestinationSelSetBlendKernel                                                = objc.RegisterName("setBlendKernel:")
+	_cIRenderDestinationSelBlendsInDestinationColorSpace                                 = objc.RegisterName("blendsInDestinationColorSpace")
+	_cIRenderDestinationSelSetBlendsInDestinationColorSpace                              = objc.RegisterName("setBlendsInDestinationColorSpace:")
+	_cIRenderDestinationSelCaptureTraceURL                                               = objc.RegisterName("captureTraceURL")
+	_cIRenderDestinationSelSetCaptureTraceURL                                            = objc.RegisterName("setCaptureTraceURL:")
 )
 
 func CIRenderDestinationFromID(id objc.ID) *CIRenderDestination {
@@ -58,37 +58,49 @@ func CIRenderDestinationFromID(id objc.ID) *CIRenderDestination {
 
 func (o *CIRenderDestination) InitWithPixelBuffer(pixelBuffer unsafe.Pointer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithPixelBuffer, pixelBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
 func (o *CIRenderDestination) InitWithIOSurface(surface unsafe.Pointer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithIOSurface, surface)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
 func (o *CIRenderDestination) InitWithMTLTextureCommandBuffer(texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithMTLTextureCommandBuffer, texture, commandBuffer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
 func (o *CIRenderDestination) InitWithWidthHeightPixelFormatCommandBufferMtlTextureProvider(width uint, height uint, pixelFormat metal.MTLPixelFormat, commandBuffer metal.MTLCommandBuffer, block objc.Block) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithWidthHeightPixelFormatCommandBufferMtlTextureProvider, width, height, pixelFormat, commandBuffer, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
 func (o *CIRenderDestination) InitWithGLTextureTargetWidthHeight(texture uint, target uint, width uint, height uint) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithGLTextureTargetWidthHeight, texture, target, width, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
 func (o *CIRenderDestination) InitWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.Pointer, width uint, height uint, bytesPerRow uint, format int) *CIRenderDestination {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelInitWithBitmapDataWidthHeightBytesPerRowFormat, data, width, height, bytesPerRow, format)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIRenderDestinationFromID(_ret)
 }
 
@@ -149,7 +161,9 @@ func (o *CIRenderDestination) SetColorSpace(colorSpace unsafe.Pointer) {
 
 func (o *CIRenderDestination) BlendKernel() *CIBlendKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelBlendKernel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CIBlendKernelFromID(_ret)
 }
 
@@ -169,11 +183,12 @@ func (o *CIRenderDestination) SetBlendsInDestinationColorSpace(blendsInDestinati
 // Tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
 func (o *CIRenderDestination) CaptureTraceURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cIRenderDestinationSelCaptureTraceURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *CIRenderDestination) SetCaptureTraceURL(captureTraceURL *foundation.NSURL) {
 	o.Ptr().Send(_cIRenderDestinationSelSetCaptureTraceURL, captureTraceURL.Ptr())
 }
-

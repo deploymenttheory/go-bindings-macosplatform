@@ -131,4 +131,3 @@ type DateIntervalable interface {
 }
 
 var _ DateIntervalable = (*DateInterval)(nil)
-

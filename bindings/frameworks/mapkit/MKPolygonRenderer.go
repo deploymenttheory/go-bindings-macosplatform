@@ -15,13 +15,13 @@ type MKPolygonRenderer struct {
 }
 
 var (
-	_clsMKPolygonRenderer = _objcClass("MKPolygonRenderer")
+	_clsMKPolygonRenderer                = _objcClass("MKPolygonRenderer")
 	_mKPolygonRendererSelInitWithPolygon = objc.RegisterName("initWithPolygon:")
-	_mKPolygonRendererSelPolygon = objc.RegisterName("polygon")
-	_mKPolygonRendererSelStrokeStart = objc.RegisterName("strokeStart")
-	_mKPolygonRendererSelSetStrokeStart = objc.RegisterName("setStrokeStart:")
-	_mKPolygonRendererSelStrokeEnd = objc.RegisterName("strokeEnd")
-	_mKPolygonRendererSelSetStrokeEnd = objc.RegisterName("setStrokeEnd:")
+	_mKPolygonRendererSelPolygon         = objc.RegisterName("polygon")
+	_mKPolygonRendererSelStrokeStart     = objc.RegisterName("strokeStart")
+	_mKPolygonRendererSelSetStrokeStart  = objc.RegisterName("setStrokeStart:")
+	_mKPolygonRendererSelStrokeEnd       = objc.RegisterName("strokeEnd")
+	_mKPolygonRendererSelSetStrokeEnd    = objc.RegisterName("setStrokeEnd:")
 )
 
 func MKPolygonRendererFromID(id objc.ID) *MKPolygonRenderer {
@@ -36,13 +36,17 @@ func MKPolygonRendererFromID(id objc.ID) *MKPolygonRenderer {
 
 func (o *MKPolygonRenderer) InitWithPolygon(polygon *MKPolygon) *MKPolygonRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolygonRendererSelInitWithPolygon, polygon.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonRendererFromID(_ret)
 }
 
 func (o *MKPolygonRenderer) Polygon() *MKPolygon {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKPolygonRendererSelPolygon)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKPolygonFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MKPolygonRenderer) StrokeEnd() float64 {
 func (o *MKPolygonRenderer) SetStrokeEnd(strokeEnd float64) {
 	o.Ptr().Send(_mKPolygonRendererSelSetStrokeEnd, strokeEnd)
 }
-

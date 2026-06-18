@@ -17,14 +17,14 @@ type INDateComponentsRange struct {
 }
 
 var (
-	_clsINDateComponentsRange = _objcClass("INDateComponentsRange")
-	_iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents = objc.RegisterName("initWithStartDateComponents:endDateComponents:")
+	_clsINDateComponentsRange                                                           = _objcClass("INDateComponentsRange")
+	_iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents               = objc.RegisterName("initWithStartDateComponents:endDateComponents:")
 	_iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponentsRecurrenceRule = objc.RegisterName("initWithStartDateComponents:endDateComponents:recurrenceRule:")
-	_iNDateComponentsRangeSelInitWithEKRecurrenceRule = objc.RegisterName("initWithEKRecurrenceRule:")
-	_iNDateComponentsRangeSelEKRecurrenceRule = objc.RegisterName("EKRecurrenceRule")
-	_iNDateComponentsRangeSelStartDateComponents = objc.RegisterName("startDateComponents")
-	_iNDateComponentsRangeSelEndDateComponents = objc.RegisterName("endDateComponents")
-	_iNDateComponentsRangeSelRecurrenceRule = objc.RegisterName("recurrenceRule")
+	_iNDateComponentsRangeSelInitWithEKRecurrenceRule                                   = objc.RegisterName("initWithEKRecurrenceRule:")
+	_iNDateComponentsRangeSelEKRecurrenceRule                                           = objc.RegisterName("EKRecurrenceRule")
+	_iNDateComponentsRangeSelStartDateComponents                                        = objc.RegisterName("startDateComponents")
+	_iNDateComponentsRangeSelEndDateComponents                                          = objc.RegisterName("endDateComponents")
+	_iNDateComponentsRangeSelRecurrenceRule                                             = objc.RegisterName("recurrenceRule")
 )
 
 func INDateComponentsRangeFromID(id objc.ID) *INDateComponentsRange {
@@ -39,37 +39,49 @@ func INDateComponentsRangeFromID(id objc.ID) *INDateComponentsRange {
 
 func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponents, startDateComponents.Ptr(), endDateComponents.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INDateComponentsRange) InitWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents, recurrenceRule objc.ID) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithStartDateComponentsEndDateComponentsRecurrenceRule, startDateComponents.Ptr(), endDateComponents.Ptr(), recurrenceRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INDateComponentsRange) InitWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecurrenceRule) *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelInitWithEKRecurrenceRule, recurrenceRule.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INDateComponentsRange) EKRecurrenceRule() *eventkit.EKRecurrenceRule {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelEKRecurrenceRule)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return eventkit.EKRecurrenceRuleFromID(_ret)
 }
 
 func (o *INDateComponentsRange) StartDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelStartDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
 func (o *INDateComponentsRange) EndDateComponents() *foundation.NSDateComponents {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelEndDateComponents)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateComponentsFromID(_ret)
 }
 
@@ -77,4 +89,3 @@ func (o *INDateComponentsRange) RecurrenceRule() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNDateComponentsRangeSelRecurrenceRule)
 	return _ret
 }
-

@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	_mapkitLib uintptr
-	_loadOnce sync.Once
+	_mapkitLib     uintptr
+	_loadOnce      sync.Once
 	_failedSymbols = make(map[string]bool)
 )
 
@@ -49,14 +49,20 @@ func _loadLibrary() {
 		return
 	}
 	_register("MKCoordinateForMapPoint", func() { purego.RegisterLibFunc(&_fnMKCoordinateForMapPoint, _mapkitLib, "MKCoordinateForMapPoint") })
-	_register("MKCoordinateRegionForMapRect", func() { purego.RegisterLibFunc(&_fnMKCoordinateRegionForMapRect, _mapkitLib, "MKCoordinateRegionForMapRect") })
+	_register("MKCoordinateRegionForMapRect", func() {
+		purego.RegisterLibFunc(&_fnMKCoordinateRegionForMapRect, _mapkitLib, "MKCoordinateRegionForMapRect")
+	})
 	_register("MKCoordinateRegionMake", func() { purego.RegisterLibFunc(&_fnMKCoordinateRegionMake, _mapkitLib, "MKCoordinateRegionMake") })
-	_register("MKCoordinateRegionMakeWithDistance", func() { purego.RegisterLibFunc(&_fnMKCoordinateRegionMakeWithDistance, _mapkitLib, "MKCoordinateRegionMakeWithDistance") })
+	_register("MKCoordinateRegionMakeWithDistance", func() {
+		purego.RegisterLibFunc(&_fnMKCoordinateRegionMakeWithDistance, _mapkitLib, "MKCoordinateRegionMakeWithDistance")
+	})
 	_register("MKCoordinateSpanMake", func() { purego.RegisterLibFunc(&_fnMKCoordinateSpanMake, _mapkitLib, "MKCoordinateSpanMake") })
 	_register("MKMapPointEqualToPoint", func() { purego.RegisterLibFunc(&_fnMKMapPointEqualToPoint, _mapkitLib, "MKMapPointEqualToPoint") })
 	_register("MKMapPointForCoordinate", func() { purego.RegisterLibFunc(&_fnMKMapPointForCoordinate, _mapkitLib, "MKMapPointForCoordinate") })
 	_register("MKMapPointMake", func() { purego.RegisterLibFunc(&_fnMKMapPointMake, _mapkitLib, "MKMapPointMake") })
-	_register("MKMapPointsPerMeterAtLatitude", func() { purego.RegisterLibFunc(&_fnMKMapPointsPerMeterAtLatitude, _mapkitLib, "MKMapPointsPerMeterAtLatitude") })
+	_register("MKMapPointsPerMeterAtLatitude", func() {
+		purego.RegisterLibFunc(&_fnMKMapPointsPerMeterAtLatitude, _mapkitLib, "MKMapPointsPerMeterAtLatitude")
+	})
 	_register("MKMapRectContainsPoint", func() { purego.RegisterLibFunc(&_fnMKMapRectContainsPoint, _mapkitLib, "MKMapRectContainsPoint") })
 	_register("MKMapRectContainsRect", func() { purego.RegisterLibFunc(&_fnMKMapRectContainsRect, _mapkitLib, "MKMapRectContainsRect") })
 	_register("MKMapRectDivide", func() { purego.RegisterLibFunc(&_fnMKMapRectDivide, _mapkitLib, "MKMapRectDivide") })
@@ -77,12 +83,16 @@ func _loadLibrary() {
 	_register("MKMapRectMake", func() { purego.RegisterLibFunc(&_fnMKMapRectMake, _mapkitLib, "MKMapRectMake") })
 	_register("MKMapRectOffset", func() { purego.RegisterLibFunc(&_fnMKMapRectOffset, _mapkitLib, "MKMapRectOffset") })
 	_register("MKMapRectRemainder", func() { purego.RegisterLibFunc(&_fnMKMapRectRemainder, _mapkitLib, "MKMapRectRemainder") })
-	_register("MKMapRectSpans180thMeridian", func() { purego.RegisterLibFunc(&_fnMKMapRectSpans180thMeridian, _mapkitLib, "MKMapRectSpans180thMeridian") })
+	_register("MKMapRectSpans180thMeridian", func() {
+		purego.RegisterLibFunc(&_fnMKMapRectSpans180thMeridian, _mapkitLib, "MKMapRectSpans180thMeridian")
+	})
 	_register("MKMapRectUnion", func() { purego.RegisterLibFunc(&_fnMKMapRectUnion, _mapkitLib, "MKMapRectUnion") })
 	_register("MKMapSizeEqualToSize", func() { purego.RegisterLibFunc(&_fnMKMapSizeEqualToSize, _mapkitLib, "MKMapSizeEqualToSize") })
 	_register("MKMapSizeMake", func() { purego.RegisterLibFunc(&_fnMKMapSizeMake, _mapkitLib, "MKMapSizeMake") })
 	_register("MKMetersBetweenMapPoints", func() { purego.RegisterLibFunc(&_fnMKMetersBetweenMapPoints, _mapkitLib, "MKMetersBetweenMapPoints") })
-	_register("MKMetersPerMapPointAtLatitude", func() { purego.RegisterLibFunc(&_fnMKMetersPerMapPointAtLatitude, _mapkitLib, "MKMetersPerMapPointAtLatitude") })
+	_register("MKMetersPerMapPointAtLatitude", func() {
+		purego.RegisterLibFunc(&_fnMKMetersPerMapPointAtLatitude, _mapkitLib, "MKMetersPerMapPointAtLatitude")
+	})
 	_register("MKRoadWidthAtZoomScale", func() { purego.RegisterLibFunc(&_fnMKRoadWidthAtZoomScale, _mapkitLib, "MKRoadWidthAtZoomScale") })
 	_register("MKStringFromMapPoint", func() { purego.RegisterLibFunc(&_fnMKStringFromMapPoint, _mapkitLib, "MKStringFromMapPoint") })
 	_register("MKStringFromMapRect", func() { purego.RegisterLibFunc(&_fnMKStringFromMapRect, _mapkitLib, "MKStringFromMapRect") })

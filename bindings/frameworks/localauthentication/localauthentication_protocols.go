@@ -6,4 +6,3 @@ package localauthentication
 // LAEnvironmentObserver wraps the ObjC protocol LAEnvironmentObserver.
 type LAEnvironmentObserver interface {
 }
-

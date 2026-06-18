@@ -168,4 +168,3 @@ type SkyboxEffectable interface {
 }
 
 var _ SkyboxEffectable = (*SkyboxEffect)(nil)
-

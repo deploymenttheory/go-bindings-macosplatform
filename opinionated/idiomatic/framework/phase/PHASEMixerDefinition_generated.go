@@ -87,4 +87,3 @@ type MixerDefinitionable interface {
 }
 
 var _ MixerDefinitionable = (*MixerDefinition)(nil)
-

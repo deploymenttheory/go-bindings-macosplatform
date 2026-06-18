@@ -159,4 +159,3 @@ type Messageable interface {
 }
 
 var _ Messageable = (*Message)(nil)
-

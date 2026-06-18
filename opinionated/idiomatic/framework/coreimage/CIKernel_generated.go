@@ -72,4 +72,3 @@ type Kernelable interface {
 }
 
 var _ Kernelable = (*Kernel)(nil)
-

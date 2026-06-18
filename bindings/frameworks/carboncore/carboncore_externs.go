@@ -61,7 +61,8 @@ func KFSOperationUserVisibleObjectsRemainingKey() uintptr {
 
 func Pi() float64 {
 	ptr, _ := purego.Dlsym(_carboncoreLib, "pi")
-	if ptr == 0 { return 0 }
+	if ptr == 0 {
+		return 0
+	}
 	return *(*float64)(unsafe.Pointer(ptr))
 }
-

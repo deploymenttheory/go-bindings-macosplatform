@@ -13,13 +13,13 @@ import (
 type CAAutoresizingMask uint32
 
 const (
-	KCALayerNotSizable CAAutoresizingMask = 0
-	KCALayerMinXMargin CAAutoresizingMask = 1
-	KCALayerWidthSizable CAAutoresizingMask = 2
-	KCALayerMaxXMargin CAAutoresizingMask = 4
-	KCALayerMinYMargin CAAutoresizingMask = 8
+	KCALayerNotSizable    CAAutoresizingMask = 0
+	KCALayerMinXMargin    CAAutoresizingMask = 1
+	KCALayerWidthSizable  CAAutoresizingMask = 2
+	KCALayerMaxXMargin    CAAutoresizingMask = 4
+	KCALayerMinYMargin    CAAutoresizingMask = 8
 	KCALayerHeightSizable CAAutoresizingMask = 16
-	KCALayerMaxYMargin CAAutoresizingMask = 32
+	KCALayerMaxYMargin    CAAutoresizingMask = 32
 )
 
 func (e CAAutoresizingMask) String() string {
@@ -51,13 +51,13 @@ func (e CAAutoresizingMask) String() string {
 type CAConstraintAttribute int32
 
 const (
-	KCAConstraintMinX CAConstraintAttribute = 0
-	KCAConstraintMidX CAConstraintAttribute = 1
-	KCAConstraintMaxX CAConstraintAttribute = 2
-	KCAConstraintWidth CAConstraintAttribute = 3
-	KCAConstraintMinY CAConstraintAttribute = 4
-	KCAConstraintMidY CAConstraintAttribute = 5
-	KCAConstraintMaxY CAConstraintAttribute = 6
+	KCAConstraintMinX   CAConstraintAttribute = 0
+	KCAConstraintMidX   CAConstraintAttribute = 1
+	KCAConstraintMaxX   CAConstraintAttribute = 2
+	KCAConstraintWidth  CAConstraintAttribute = 3
+	KCAConstraintMinY   CAConstraintAttribute = 4
+	KCAConstraintMidY   CAConstraintAttribute = 5
+	KCAConstraintMaxY   CAConstraintAttribute = 6
 	KCAConstraintHeight CAConstraintAttribute = 7
 )
 
@@ -118,10 +118,10 @@ func (e CACornerMask) String() string {
 type CAEdgeAntialiasingMask uint32
 
 const (
-	KCALayerLeftEdge CAEdgeAntialiasingMask = 1
-	KCALayerRightEdge CAEdgeAntialiasingMask = 2
+	KCALayerLeftEdge   CAEdgeAntialiasingMask = 1
+	KCALayerRightEdge  CAEdgeAntialiasingMask = 2
 	KCALayerBottomEdge CAEdgeAntialiasingMask = 4
-	KCALayerTopEdge CAEdgeAntialiasingMask = 8
+	KCALayerTopEdge    CAEdgeAntialiasingMask = 8
 )
 
 func (e CAEdgeAntialiasingMask) String() string {
@@ -143,4 +143,3 @@ func (e CAEdgeAntialiasingMask) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

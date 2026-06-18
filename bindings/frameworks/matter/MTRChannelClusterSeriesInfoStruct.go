@@ -16,10 +16,10 @@ type MTRChannelClusterSeriesInfoStruct struct {
 }
 
 var (
-	_clsMTRChannelClusterSeriesInfoStruct = _objcClass("MTRChannelClusterSeriesInfoStruct")
-	_mTRChannelClusterSeriesInfoStructSelSeason = objc.RegisterName("season")
-	_mTRChannelClusterSeriesInfoStructSelSetSeason = objc.RegisterName("setSeason:")
-	_mTRChannelClusterSeriesInfoStructSelEpisode = objc.RegisterName("episode")
+	_clsMTRChannelClusterSeriesInfoStruct           = _objcClass("MTRChannelClusterSeriesInfoStruct")
+	_mTRChannelClusterSeriesInfoStructSelSeason     = objc.RegisterName("season")
+	_mTRChannelClusterSeriesInfoStructSelSetSeason  = objc.RegisterName("setSeason:")
+	_mTRChannelClusterSeriesInfoStructSelEpisode    = objc.RegisterName("episode")
 	_mTRChannelClusterSeriesInfoStructSelSetEpisode = objc.RegisterName("setEpisode:")
 )
 
@@ -35,7 +35,9 @@ func MTRChannelClusterSeriesInfoStructFromID(id objc.ID) *MTRChannelClusterSerie
 
 func (o *MTRChannelClusterSeriesInfoStruct) Season() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterSeriesInfoStructSelSeason)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRChannelClusterSeriesInfoStruct) SetSeason(season *foundation.NSStrin
 
 func (o *MTRChannelClusterSeriesInfoStruct) Episode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRChannelClusterSeriesInfoStructSelEpisode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRChannelClusterSeriesInfoStruct) SetEpisode(episode *foundation.NSString) {
 	o.Ptr().Send(_mTRChannelClusterSeriesInfoStructSelSetEpisode, episode.Ptr())
 }
-

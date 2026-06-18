@@ -16,10 +16,10 @@ type PHASESpatialPipeline struct {
 }
 
 var (
-	_clsPHASESpatialPipeline = _objcClass("PHASESpatialPipeline")
+	_clsPHASESpatialPipeline              = _objcClass("PHASESpatialPipeline")
 	_pHASESpatialPipelineSelInitWithFlags = objc.RegisterName("initWithFlags:")
-	_pHASESpatialPipelineSelFlags = objc.RegisterName("flags")
-	_pHASESpatialPipelineSelEntries = objc.RegisterName("entries")
+	_pHASESpatialPipelineSelFlags         = objc.RegisterName("flags")
+	_pHASESpatialPipelineSelEntries       = objc.RegisterName("entries")
 )
 
 func PHASESpatialPipelineFromID(id objc.ID) *PHASESpatialPipeline {
@@ -35,7 +35,9 @@ func PHASESpatialPipelineFromID(id objc.ID) *PHASESpatialPipeline {
 // @method initWithFlags @abstract Initialize a Spatial Pipeline with the provided flags. @discussion It's invalid to pass flags == 0 to this function. Doing so will return nil. @param flags Options for direct path transmission, early reflections, late reverb, etc.
 func (o *PHASESpatialPipeline) InitWithFlags(flags PHASESpatialPipelineFlags) *PHASESpatialPipeline {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHASESpatialPipelineSelInitWithFlags, flags)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHASESpatialPipelineFromID(_ret)
 }
 
@@ -50,4 +52,3 @@ func (o *PHASESpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NS
 	_ret := objc.Send[*foundation.NSDictionary[*foundation.NSString, *PHASESpatialPipelineEntry]](o.Ptr(), _pHASESpatialPipelineSelEntries)
 	return _ret
 }
-

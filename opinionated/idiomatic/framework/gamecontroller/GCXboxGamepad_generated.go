@@ -94,7 +94,9 @@ func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
 
 func (x *XboxGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return &x.inner.GCExtendedGamepad }
 
-func (x *XboxGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile }
+func (x *XboxGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+}
 
 // XboxGamepadable is the interface implemented by [XboxGamepad], for mocking and DI.
 type XboxGamepadable interface {
@@ -109,4 +111,3 @@ type XboxGamepadable interface {
 }
 
 var _ XboxGamepadable = (*XboxGamepad)(nil)
-

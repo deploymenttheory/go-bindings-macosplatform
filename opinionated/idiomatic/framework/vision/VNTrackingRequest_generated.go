@@ -119,7 +119,9 @@ func (x *TrackingRequest) SetLastFrame(lastFrame bool) {
 
 func (x *TrackingRequest) asTrackingRequest() *raw.VNTrackingRequest { return x.inner }
 
-func (x *TrackingRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *TrackingRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
 func (x *TrackingRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
@@ -143,4 +145,3 @@ type TrackingRequestable interface {
 }
 
 var _ TrackingRequestable = (*TrackingRequest)(nil)
-

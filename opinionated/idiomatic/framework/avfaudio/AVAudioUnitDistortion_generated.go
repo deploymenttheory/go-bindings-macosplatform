@@ -78,11 +78,17 @@ func (x *AudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
 	x.inner.SetWetDryMix(wetDryMix)
 }
 
-func (x *AudioUnitDistortion) asAudioUnitEffect() *raw.AVAudioUnitEffect { return &x.inner.AVAudioUnitEffect }
+func (x *AudioUnitDistortion) asAudioUnitEffect() *raw.AVAudioUnitEffect {
+	return &x.inner.AVAudioUnitEffect
+}
 
-func (x *AudioUnitDistortion) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnitEffect.AVAudioUnit }
+func (x *AudioUnitDistortion) asAudioUnit() *raw.AVAudioUnit {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit
+}
 
-func (x *AudioUnitDistortion) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode }
+func (x *AudioUnitDistortion) asAudioNode() *raw.AVAudioNode {
+	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+}
 
 // AudioUnitDistortionable is the interface implemented by [AudioUnitDistortion], for mocking and DI.
 type AudioUnitDistortionable interface {
@@ -98,4 +104,3 @@ type AudioUnitDistortionable interface {
 }
 
 var _ AudioUnitDistortionable = (*AudioUnitDistortion)(nil)
-

@@ -16,7 +16,9 @@ type CalculateImageAestheticsScoresRequest struct {
 }
 
 // Unwrap returns the underlying [raw.VNCalculateImageAestheticsScoresRequest].
-func (x *CalculateImageAestheticsScoresRequest) Unwrap() *raw.VNCalculateImageAestheticsScoresRequest { return x.inner }
+func (x *CalculateImageAestheticsScoresRequest) Unwrap() *raw.VNCalculateImageAestheticsScoresRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,9 +62,13 @@ func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision uint) *Cal
 	return x
 }
 
-func (x *CalculateImageAestheticsScoresRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
+func (x *CalculateImageAestheticsScoresRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
+	return &x.inner.VNImageBasedRequest
+}
 
-func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest {
+	return &x.inner.VNImageBasedRequest.VNRequest
+}
 
 // CalculateImageAestheticsScoresRequestable is the interface implemented by [CalculateImageAestheticsScoresRequest], for mocking and DI.
 type CalculateImageAestheticsScoresRequestable interface {
@@ -74,4 +80,3 @@ type CalculateImageAestheticsScoresRequestable interface {
 }
 
 var _ CalculateImageAestheticsScoresRequestable = (*CalculateImageAestheticsScoresRequest)(nil)
-

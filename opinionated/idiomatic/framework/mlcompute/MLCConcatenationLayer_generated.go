@@ -64,4 +64,3 @@ type ConcatenationLayerable interface {
 }
 
 var _ ConcatenationLayerable = (*ConcatenationLayer)(nil)
-

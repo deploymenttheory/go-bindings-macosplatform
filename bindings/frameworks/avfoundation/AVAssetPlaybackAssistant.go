@@ -16,8 +16,8 @@ type AVAssetPlaybackAssistant struct {
 }
 
 var (
-	_clsAVAssetPlaybackAssistant = _objcClass("AVAssetPlaybackAssistant")
-	_aVAssetPlaybackAssistantSelAssetPlaybackAssistantWithAsset = objc.RegisterName("assetPlaybackAssistantWithAsset:")
+	_clsAVAssetPlaybackAssistant                                                      = _objcClass("AVAssetPlaybackAssistant")
+	_aVAssetPlaybackAssistantSelAssetPlaybackAssistantWithAsset                       = objc.RegisterName("assetPlaybackAssistantWithAsset:")
 	_aVAssetPlaybackAssistantSelLoadPlaybackConfigurationOptionsWithCompletionHandler = objc.RegisterName("loadPlaybackConfigurationOptionsWithCompletionHandler:")
 )
 
@@ -34,7 +34,9 @@ func AVAssetPlaybackAssistantFromID(id objc.ID) *AVAssetPlaybackAssistant {
 // Returns an instance of AVAssetPlaybackAssistant for inspection of an AVAsset object. - Parameter asset: An instance of AVAsset. - Returns: An instance of AVAssetPlaybackAssistant.
 func AVAssetPlaybackAssistantAssetPlaybackAssistantWithAsset(asset *AVAsset) *AVAssetPlaybackAssistant {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetPlaybackAssistant), _aVAssetPlaybackAssistantSelAssetPlaybackAssistantWithAsset, asset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetPlaybackAssistantFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func AVAssetPlaybackAssistantAssetPlaybackAssistantWithAsset(asset *AVAsset) *AV
 func (o *AVAssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {
 	o.Ptr().Send(_aVAssetPlaybackAssistantSelLoadPlaybackConfigurationOptionsWithCompletionHandler, completionHandler)
 }
-

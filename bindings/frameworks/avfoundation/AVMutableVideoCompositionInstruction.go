@@ -19,13 +19,13 @@ type AVMutableVideoCompositionInstruction struct {
 }
 
 var (
-	_clsAVMutableVideoCompositionInstruction = _objcClass("AVMutableVideoCompositionInstruction")
-	_aVMutableVideoCompositionInstructionSelVideoCompositionInstruction = objc.RegisterName("videoCompositionInstruction")
-	_aVMutableVideoCompositionInstructionSelTimeRange = objc.RegisterName("timeRange")
-	_aVMutableVideoCompositionInstructionSelSetTimeRange = objc.RegisterName("setTimeRange:")
-	_aVMutableVideoCompositionInstructionSelSetBackgroundColor = objc.RegisterName("setBackgroundColor:")
-	_aVMutableVideoCompositionInstructionSelSetLayerInstructions = objc.RegisterName("setLayerInstructions:")
-	_aVMutableVideoCompositionInstructionSelSetEnablePostProcessing = objc.RegisterName("setEnablePostProcessing:")
+	_clsAVMutableVideoCompositionInstruction                                    = _objcClass("AVMutableVideoCompositionInstruction")
+	_aVMutableVideoCompositionInstructionSelVideoCompositionInstruction         = objc.RegisterName("videoCompositionInstruction")
+	_aVMutableVideoCompositionInstructionSelTimeRange                           = objc.RegisterName("timeRange")
+	_aVMutableVideoCompositionInstructionSelSetTimeRange                        = objc.RegisterName("setTimeRange:")
+	_aVMutableVideoCompositionInstructionSelSetBackgroundColor                  = objc.RegisterName("setBackgroundColor:")
+	_aVMutableVideoCompositionInstructionSelSetLayerInstructions                = objc.RegisterName("setLayerInstructions:")
+	_aVMutableVideoCompositionInstructionSelSetEnablePostProcessing             = objc.RegisterName("setEnablePostProcessing:")
 	_aVMutableVideoCompositionInstructionSelSetRequiredSourceSampleDataTrackIDs = objc.RegisterName("setRequiredSourceSampleDataTrackIDs:")
 )
 
@@ -42,7 +42,9 @@ func AVMutableVideoCompositionInstructionFromID(id objc.ID) *AVMutableVideoCompo
 // Returns a new instance of AVMutableVideoCompositionInstruction. The returned AVMutableVideoCompositionInstruction will have a timeRange of kCMTimeRangeInvalid, a NULL backgroundColor, and a nil array of layerInstructions.
 func AVMutableVideoCompositionInstructionVideoCompositionInstruction() *AVMutableVideoCompositionInstruction {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVMutableVideoCompositionInstruction), _aVMutableVideoCompositionInstructionSelVideoCompositionInstruction)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMutableVideoCompositionInstructionFromID(_ret)
 }
 
@@ -71,4 +73,3 @@ func (o *AVMutableVideoCompositionInstruction) SetEnablePostProcessing(enablePos
 func (o *AVMutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
 	o.Ptr().Send(_aVMutableVideoCompositionInstructionSelSetRequiredSourceSampleDataTrackIDs, requiredSourceSampleDataTrackIDs)
 }
-

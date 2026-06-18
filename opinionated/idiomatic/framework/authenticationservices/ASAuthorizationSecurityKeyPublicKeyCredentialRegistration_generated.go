@@ -17,7 +17,9 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistration struct {
 }
 
 // Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration { return x.inner }
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -65,4 +67,3 @@ type AuthorizationSecurityKeyPublicKeyCredentialRegistrationable interface {
 }
 
 var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistration)(nil)
-

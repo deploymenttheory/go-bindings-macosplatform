@@ -93,4 +93,3 @@ type ExternalSyncDeviceable interface {
 }
 
 var _ ExternalSyncDeviceable = (*ExternalSyncDevice)(nil)
-

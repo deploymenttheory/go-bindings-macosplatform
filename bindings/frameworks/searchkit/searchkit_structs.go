@@ -26,4 +26,3 @@ type SKSearchResults struct{}
 // C struct: __SKSummary
 // SKSummary is an opaque type.
 type SKSummary struct{}
-

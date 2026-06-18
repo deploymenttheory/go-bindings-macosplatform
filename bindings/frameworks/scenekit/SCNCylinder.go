@@ -15,16 +15,16 @@ type SCNCylinder struct {
 }
 
 var (
-	_clsSCNCylinder = _objcClass("SCNCylinder")
+	_clsSCNCylinder                         = _objcClass("SCNCylinder")
 	_sCNCylinderSelCylinderWithRadiusHeight = objc.RegisterName("cylinderWithRadius:height:")
-	_sCNCylinderSelRadius = objc.RegisterName("radius")
-	_sCNCylinderSelSetRadius = objc.RegisterName("setRadius:")
-	_sCNCylinderSelHeight = objc.RegisterName("height")
-	_sCNCylinderSelSetHeight = objc.RegisterName("setHeight:")
-	_sCNCylinderSelRadialSegmentCount = objc.RegisterName("radialSegmentCount")
-	_sCNCylinderSelSetRadialSegmentCount = objc.RegisterName("setRadialSegmentCount:")
-	_sCNCylinderSelHeightSegmentCount = objc.RegisterName("heightSegmentCount")
-	_sCNCylinderSelSetHeightSegmentCount = objc.RegisterName("setHeightSegmentCount:")
+	_sCNCylinderSelRadius                   = objc.RegisterName("radius")
+	_sCNCylinderSelSetRadius                = objc.RegisterName("setRadius:")
+	_sCNCylinderSelHeight                   = objc.RegisterName("height")
+	_sCNCylinderSelSetHeight                = objc.RegisterName("setHeight:")
+	_sCNCylinderSelRadialSegmentCount       = objc.RegisterName("radialSegmentCount")
+	_sCNCylinderSelSetRadialSegmentCount    = objc.RegisterName("setRadialSegmentCount:")
+	_sCNCylinderSelHeightSegmentCount       = objc.RegisterName("heightSegmentCount")
+	_sCNCylinderSelSetHeightSegmentCount    = objc.RegisterName("setHeightSegmentCount:")
 )
 
 func SCNCylinderFromID(id objc.ID) *SCNCylinder {
@@ -40,7 +40,9 @@ func SCNCylinderFromID(id objc.ID) *SCNCylinder {
 // @method cylinderWithRadius:height: @abstract Creates and returns a cylinder with given radius and height. @param radius The radius of the cylinder. @param height The height of the cylinder.
 func SCNCylinderCylinderWithRadiusHeight(radius float64, height float64) *SCNCylinder {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNCylinder), _sCNCylinderSelCylinderWithRadiusHeight, radius, height)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNCylinderFromID(_ret)
 }
 
@@ -83,4 +85,3 @@ func (o *SCNCylinder) HeightSegmentCount() int {
 func (o *SCNCylinder) SetHeightSegmentCount(heightSegmentCount int) {
 	o.Ptr().Send(_sCNCylinderSelSetHeightSegmentCount, heightSegmentCount)
 }
-

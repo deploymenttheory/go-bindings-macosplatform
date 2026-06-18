@@ -18,16 +18,16 @@ type WKWebExtensionMessagePort struct {
 }
 
 var (
-	_clsWKWebExtensionMessagePort = _objcClass("WKWebExtensionMessagePort")
+	_clsWKWebExtensionMessagePort                             = _objcClass("WKWebExtensionMessagePort")
 	_wKWebExtensionMessagePortSelSendMessageCompletionHandler = objc.RegisterName("sendMessage:completionHandler:")
-	_wKWebExtensionMessagePortSelDisconnect = objc.RegisterName("disconnect")
-	_wKWebExtensionMessagePortSelDisconnectWithError = objc.RegisterName("disconnectWithError:")
-	_wKWebExtensionMessagePortSelApplicationIdentifier = objc.RegisterName("applicationIdentifier")
-	_wKWebExtensionMessagePortSelMessageHandler = objc.RegisterName("messageHandler")
-	_wKWebExtensionMessagePortSelSetMessageHandler = objc.RegisterName("setMessageHandler:")
-	_wKWebExtensionMessagePortSelDisconnectHandler = objc.RegisterName("disconnectHandler")
-	_wKWebExtensionMessagePortSelSetDisconnectHandler = objc.RegisterName("setDisconnectHandler:")
-	_wKWebExtensionMessagePortSelIsDisconnected = objc.RegisterName("isDisconnected")
+	_wKWebExtensionMessagePortSelDisconnect                   = objc.RegisterName("disconnect")
+	_wKWebExtensionMessagePortSelDisconnectWithError          = objc.RegisterName("disconnectWithError:")
+	_wKWebExtensionMessagePortSelApplicationIdentifier        = objc.RegisterName("applicationIdentifier")
+	_wKWebExtensionMessagePortSelMessageHandler               = objc.RegisterName("messageHandler")
+	_wKWebExtensionMessagePortSelSetMessageHandler            = objc.RegisterName("setMessageHandler:")
+	_wKWebExtensionMessagePortSelDisconnectHandler            = objc.RegisterName("disconnectHandler")
+	_wKWebExtensionMessagePortSelSetDisconnectHandler         = objc.RegisterName("setDisconnectHandler:")
+	_wKWebExtensionMessagePortSelIsDisconnected               = objc.RegisterName("isDisconnected")
 )
 
 func WKWebExtensionMessagePortFromID(id objc.ID) *WKWebExtensionMessagePort {
@@ -40,7 +40,7 @@ func WKWebExtensionMessagePortFromID(id objc.ID) *WKWebExtensionMessagePort {
 	return o
 }
 
-// @abstract Sends a message to the connected web extension. @param message The JSON-serializable message to be sent. @param completionHandler An optional block to be invoked after the message is sent, taking an optional error. @note The message must be JSON-serializable according to ``NSJSONSerialization``.
+// @abstract Sends a message to the connected web extension. @param message The JSON-serializable message to be sent. @param completionHandler An optional block to be invoked after the message is sent, taking an optional error. @note The message must be JSON-serializable according to “NSJSONSerialization“.
 func (o *WKWebExtensionMessagePort) SendMessageCompletionHandler(message objc.ID, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -65,7 +65,9 @@ func (o *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
 // @abstract The unique identifier for the app to which this port should be connected. @discussion This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (o *WKWebExtensionMessagePort) ApplicationIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _wKWebExtensionMessagePortSelApplicationIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,4 +110,3 @@ func (o *WKWebExtensionMessagePort) IsDisconnected() bool {
 	_ret := objc.Send[bool](o.Ptr(), _wKWebExtensionMessagePortSelIsDisconnected)
 	return _ret
 }
-

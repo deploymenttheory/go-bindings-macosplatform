@@ -83,4 +83,3 @@ type CompassButtonable interface {
 }
 
 var _ CompassButtonable = (*CompassButton)(nil)
-

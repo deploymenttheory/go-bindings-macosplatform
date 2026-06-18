@@ -111,7 +111,9 @@ func (x *IncrementalStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObj
 	return x.inner.ReferenceObjectForObjectID(objectID)
 }
 
-func (x *IncrementalStore) asPersistentStore() *raw.NSPersistentStore { return &x.inner.NSPersistentStore }
+func (x *IncrementalStore) asPersistentStore() *raw.NSPersistentStore {
+	return &x.inner.NSPersistentStore
+}
 
 // IncrementalStoreable is the interface implemented by [IncrementalStore], for mocking and DI.
 type IncrementalStoreable interface {
@@ -131,4 +133,3 @@ type IncrementalStoreable interface {
 }
 
 var _ IncrementalStoreable = (*IncrementalStore)(nil)
-

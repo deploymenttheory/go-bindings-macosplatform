@@ -58,9 +58,13 @@ func (x *RectangleObservation) BottomRight() corefoundation.CGPoint {
 
 func (x *RectangleObservation) asRectangleObservation() *raw.VNRectangleObservation { return x.inner }
 
-func (x *RectangleObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
+func (x *RectangleObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
+	return &x.inner.VNDetectedObjectObservation
+}
 
-func (x *RectangleObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+func (x *RectangleObservation) asObservation() *raw.VNObservation {
+	return &x.inner.VNDetectedObjectObservation.VNObservation
+}
 
 // RectangleObservationable is the interface implemented by [RectangleObservation], for mocking and DI.
 type RectangleObservationable interface {
@@ -72,4 +76,3 @@ type RectangleObservationable interface {
 }
 
 var _ RectangleObservationable = (*RectangleObservation)(nil)
-

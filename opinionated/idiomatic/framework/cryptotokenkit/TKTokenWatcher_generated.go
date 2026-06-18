@@ -103,4 +103,3 @@ type TokenWatcherable interface {
 }
 
 var _ TokenWatcherable = (*TokenWatcher)(nil)
-

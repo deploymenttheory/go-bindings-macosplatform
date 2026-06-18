@@ -146,4 +146,3 @@ type ExtendedNoteOnEventable interface {
 }
 
 var _ ExtendedNoteOnEventable = (*ExtendedNoteOnEvent)(nil)
-

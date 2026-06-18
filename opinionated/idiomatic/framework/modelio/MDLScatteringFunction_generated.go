@@ -148,4 +148,3 @@ type ScatteringFunctionable interface {
 }
 
 var _ ScatteringFunctionable = (*ScatteringFunction)(nil)
-

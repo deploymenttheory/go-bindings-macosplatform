@@ -16,8 +16,8 @@ type MTLFunctionReflection struct {
 }
 
 var (
-	_clsMTLFunctionReflection = _objcClass("MTLFunctionReflection")
-	_mTLFunctionReflectionSelBindings = objc.RegisterName("bindings")
+	_clsMTLFunctionReflection               = _objcClass("MTLFunctionReflection")
+	_mTLFunctionReflectionSelBindings       = objc.RegisterName("bindings")
 	_mTLFunctionReflectionSelUserAnnotation = objc.RegisterName("userAnnotation")
 )
 
@@ -34,14 +34,17 @@ func MTLFunctionReflectionFromID(id objc.ID) *MTLFunctionReflection {
 // Provides a list of inputs and outputs of the function.
 func (o *MTLFunctionReflection) Bindings() *foundation.NSArray[MTLBinding] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionReflectionSelBindings)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[MTLBinding](_ret)
 }
 
 // The string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
 func (o *MTLFunctionReflection) UserAnnotation() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTLFunctionReflectionSelUserAnnotation)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

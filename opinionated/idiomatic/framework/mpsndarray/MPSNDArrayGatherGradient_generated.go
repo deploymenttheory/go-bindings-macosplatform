@@ -42,11 +42,17 @@ func (x *ArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllo
 	return x
 }
 
-func (x *ArrayGatherGradient) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel }
+func (x *ArrayGatherGradient) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel
+}
 
-func (x *ArrayGatherGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
+func (x *ArrayGatherGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel
+}
 
-func (x *ArrayGatherGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
+func (x *ArrayGatherGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
+	return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+}
 
 // ArrayGatherGradientable is the interface implemented by [ArrayGatherGradient], for mocking and DI.
 type ArrayGatherGradientable interface {
@@ -55,4 +61,3 @@ type ArrayGatherGradientable interface {
 }
 
 var _ ArrayGatherGradientable = (*ArrayGatherGradient)(nil)
-

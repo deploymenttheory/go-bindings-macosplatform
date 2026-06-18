@@ -145,4 +145,3 @@ type SpeechSynthesisProviderVoiceable interface {
 }
 
 var _ SpeechSynthesisProviderVoiceable = (*SpeechSynthesisProviderVoice)(nil)
-

@@ -16,13 +16,13 @@ type MIDICIDeviceInfo struct {
 }
 
 var (
-	_clsMIDICIDeviceInfo = _objcClass("MIDICIDeviceInfo")
+	_clsMIDICIDeviceInfo                                                   = _objcClass("MIDICIDeviceInfo")
 	_mIDICIDeviceInfoSelInitWithDestinationManufacturerFamilyModelRevision = objc.RegisterName("initWithDestination:manufacturer:family:model:revision:")
-	_mIDICIDeviceInfoSelManufacturerID = objc.RegisterName("manufacturerID")
-	_mIDICIDeviceInfoSelFamily = objc.RegisterName("family")
-	_mIDICIDeviceInfoSelModelNumber = objc.RegisterName("modelNumber")
-	_mIDICIDeviceInfoSelRevisionLevel = objc.RegisterName("revisionLevel")
-	_mIDICIDeviceInfoSelMidiDestination = objc.RegisterName("midiDestination")
+	_mIDICIDeviceInfoSelManufacturerID                                     = objc.RegisterName("manufacturerID")
+	_mIDICIDeviceInfoSelFamily                                             = objc.RegisterName("family")
+	_mIDICIDeviceInfoSelModelNumber                                        = objc.RegisterName("modelNumber")
+	_mIDICIDeviceInfoSelRevisionLevel                                      = objc.RegisterName("revisionLevel")
+	_mIDICIDeviceInfoSelMidiDestination                                    = objc.RegisterName("midiDestination")
 )
 
 func MIDICIDeviceInfoFromID(id objc.ID) *MIDICIDeviceInfo {
@@ -37,31 +37,41 @@ func MIDICIDeviceInfoFromID(id objc.ID) *MIDICIDeviceInfo {
 
 func (o *MIDICIDeviceInfo) InitWithDestinationManufacturerFamilyModelRevision(midiDestination uint, manufacturer *foundation.NSData, family *foundation.NSData, modelNumber *foundation.NSData, revisionLevel *foundation.NSData) *MIDICIDeviceInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelInitWithDestinationManufacturerFamilyModelRevision, midiDestination, manufacturer.Ptr(), family.Ptr(), modelNumber.Ptr(), revisionLevel.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MIDICIDeviceInfoFromID(_ret)
 }
 
 func (o *MIDICIDeviceInfo) ManufacturerID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelManufacturerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MIDICIDeviceInfo) Family() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelFamily)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MIDICIDeviceInfo) ModelNumber() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelModelNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MIDICIDeviceInfo) RevisionLevel() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mIDICIDeviceInfoSelRevisionLevel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -69,4 +79,3 @@ func (o *MIDICIDeviceInfo) MidiDestination() uint {
 	_ret := objc.Send[uint](o.Ptr(), _mIDICIDeviceInfoSelMidiDestination)
 	return _ret
 }
-

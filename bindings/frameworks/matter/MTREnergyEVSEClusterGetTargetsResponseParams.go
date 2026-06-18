@@ -18,9 +18,9 @@ type MTREnergyEVSEClusterGetTargetsResponseParams struct {
 }
 
 var (
-	_clsMTREnergyEVSEClusterGetTargetsResponseParams = _objcClass("MTREnergyEVSEClusterGetTargetsResponseParams")
+	_clsMTREnergyEVSEClusterGetTargetsResponseParams                           = _objcClass("MTREnergyEVSEClusterGetTargetsResponseParams")
 	_mTREnergyEVSEClusterGetTargetsResponseParamsSelInitWithResponseValueError = objc.RegisterName("initWithResponseValue:error:")
-	_mTREnergyEVSEClusterGetTargetsResponseParamsSelChargingTargetSchedules = objc.RegisterName("chargingTargetSchedules")
+	_mTREnergyEVSEClusterGetTargetsResponseParamsSelChargingTargetSchedules    = objc.RegisterName("chargingTargetSchedules")
 	_mTREnergyEVSEClusterGetTargetsResponseParamsSelSetChargingTargetSchedules = objc.RegisterName("setChargingTargetSchedules:")
 )
 
@@ -38,7 +38,9 @@ func MTREnergyEVSEClusterGetTargetsResponseParamsFromID(id objc.ID) *MTREnergyEV
 func (o *MTREnergyEVSEClusterGetTargetsResponseParams) InitWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTREnergyEVSEClusterGetTargetsResponseParamsSelInitWithResponseValueError, responseValue, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -53,4 +55,3 @@ func (o *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules()
 func (o *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTREnergyEVSEClusterGetTargetsResponseParamsSelSetChargingTargetSchedules, chargingTargetSchedules)
 }
-

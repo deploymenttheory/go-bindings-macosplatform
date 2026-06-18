@@ -16,36 +16,36 @@ type DOMHTMLAnchorElement struct {
 }
 
 var (
-	_clsDOMHTMLAnchorElement = _objcClass("DOMHTMLAnchorElement")
-	_dOMHTMLAnchorElementSelCharset = objc.RegisterName("charset")
-	_dOMHTMLAnchorElementSelSetCharset = objc.RegisterName("setCharset:")
-	_dOMHTMLAnchorElementSelCoords = objc.RegisterName("coords")
-	_dOMHTMLAnchorElementSelSetCoords = objc.RegisterName("setCoords:")
-	_dOMHTMLAnchorElementSelHreflang = objc.RegisterName("hreflang")
-	_dOMHTMLAnchorElementSelSetHreflang = objc.RegisterName("setHreflang:")
-	_dOMHTMLAnchorElementSelName = objc.RegisterName("name")
-	_dOMHTMLAnchorElementSelSetName = objc.RegisterName("setName:")
-	_dOMHTMLAnchorElementSelRel = objc.RegisterName("rel")
-	_dOMHTMLAnchorElementSelSetRel = objc.RegisterName("setRel:")
-	_dOMHTMLAnchorElementSelRev = objc.RegisterName("rev")
-	_dOMHTMLAnchorElementSelSetRev = objc.RegisterName("setRev:")
-	_dOMHTMLAnchorElementSelShape = objc.RegisterName("shape")
-	_dOMHTMLAnchorElementSelSetShape = objc.RegisterName("setShape:")
-	_dOMHTMLAnchorElementSelTarget = objc.RegisterName("target")
-	_dOMHTMLAnchorElementSelSetTarget = objc.RegisterName("setTarget:")
-	_dOMHTMLAnchorElementSelType = objc.RegisterName("type")
-	_dOMHTMLAnchorElementSelSetType = objc.RegisterName("setType:")
-	_dOMHTMLAnchorElementSelText = objc.RegisterName("text")
+	_clsDOMHTMLAnchorElement                = _objcClass("DOMHTMLAnchorElement")
+	_dOMHTMLAnchorElementSelCharset         = objc.RegisterName("charset")
+	_dOMHTMLAnchorElementSelSetCharset      = objc.RegisterName("setCharset:")
+	_dOMHTMLAnchorElementSelCoords          = objc.RegisterName("coords")
+	_dOMHTMLAnchorElementSelSetCoords       = objc.RegisterName("setCoords:")
+	_dOMHTMLAnchorElementSelHreflang        = objc.RegisterName("hreflang")
+	_dOMHTMLAnchorElementSelSetHreflang     = objc.RegisterName("setHreflang:")
+	_dOMHTMLAnchorElementSelName            = objc.RegisterName("name")
+	_dOMHTMLAnchorElementSelSetName         = objc.RegisterName("setName:")
+	_dOMHTMLAnchorElementSelRel             = objc.RegisterName("rel")
+	_dOMHTMLAnchorElementSelSetRel          = objc.RegisterName("setRel:")
+	_dOMHTMLAnchorElementSelRev             = objc.RegisterName("rev")
+	_dOMHTMLAnchorElementSelSetRev          = objc.RegisterName("setRev:")
+	_dOMHTMLAnchorElementSelShape           = objc.RegisterName("shape")
+	_dOMHTMLAnchorElementSelSetShape        = objc.RegisterName("setShape:")
+	_dOMHTMLAnchorElementSelTarget          = objc.RegisterName("target")
+	_dOMHTMLAnchorElementSelSetTarget       = objc.RegisterName("setTarget:")
+	_dOMHTMLAnchorElementSelType            = objc.RegisterName("type")
+	_dOMHTMLAnchorElementSelSetType         = objc.RegisterName("setType:")
+	_dOMHTMLAnchorElementSelText            = objc.RegisterName("text")
 	_dOMHTMLAnchorElementSelAbsoluteLinkURL = objc.RegisterName("absoluteLinkURL")
-	_dOMHTMLAnchorElementSelHref = objc.RegisterName("href")
-	_dOMHTMLAnchorElementSelSetHref = objc.RegisterName("setHref:")
-	_dOMHTMLAnchorElementSelProtocol = objc.RegisterName("protocol")
-	_dOMHTMLAnchorElementSelHost = objc.RegisterName("host")
-	_dOMHTMLAnchorElementSelHostname = objc.RegisterName("hostname")
-	_dOMHTMLAnchorElementSelPort = objc.RegisterName("port")
-	_dOMHTMLAnchorElementSelPathname = objc.RegisterName("pathname")
-	_dOMHTMLAnchorElementSelSearch = objc.RegisterName("search")
-	_dOMHTMLAnchorElementSelHashName = objc.RegisterName("hashName")
+	_dOMHTMLAnchorElementSelHref            = objc.RegisterName("href")
+	_dOMHTMLAnchorElementSelSetHref         = objc.RegisterName("setHref:")
+	_dOMHTMLAnchorElementSelProtocol        = objc.RegisterName("protocol")
+	_dOMHTMLAnchorElementSelHost            = objc.RegisterName("host")
+	_dOMHTMLAnchorElementSelHostname        = objc.RegisterName("hostname")
+	_dOMHTMLAnchorElementSelPort            = objc.RegisterName("port")
+	_dOMHTMLAnchorElementSelPathname        = objc.RegisterName("pathname")
+	_dOMHTMLAnchorElementSelSearch          = objc.RegisterName("search")
+	_dOMHTMLAnchorElementSelHashName        = objc.RegisterName("hashName")
 )
 
 func DOMHTMLAnchorElementFromID(id objc.ID) *DOMHTMLAnchorElement {
@@ -60,7 +60,9 @@ func DOMHTMLAnchorElementFromID(id objc.ID) *DOMHTMLAnchorElement {
 
 func (o *DOMHTMLAnchorElement) Charset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelCharset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -70,7 +72,9 @@ func (o *DOMHTMLAnchorElement) SetCharset(charset *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Coords() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelCoords)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -80,7 +84,9 @@ func (o *DOMHTMLAnchorElement) SetCoords(coords *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Hreflang() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelHreflang)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -90,7 +96,9 @@ func (o *DOMHTMLAnchorElement) SetHreflang(hreflang *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -100,7 +108,9 @@ func (o *DOMHTMLAnchorElement) SetName(name *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Rel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelRel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -110,7 +120,9 @@ func (o *DOMHTMLAnchorElement) SetRel(rel *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Rev() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelRev)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -120,7 +132,9 @@ func (o *DOMHTMLAnchorElement) SetRev(rev *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Shape() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelShape)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -130,7 +144,9 @@ func (o *DOMHTMLAnchorElement) SetShape(shape *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -140,7 +156,9 @@ func (o *DOMHTMLAnchorElement) SetTarget(target *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -150,19 +168,25 @@ func (o *DOMHTMLAnchorElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) AbsoluteLinkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelAbsoluteLinkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -172,43 +196,56 @@ func (o *DOMHTMLAnchorElement) SetHref(href *foundation.NSString) {
 
 func (o *DOMHTMLAnchorElement) Protocol() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelProtocol)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Host() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelHost)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Hostname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelHostname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Port() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelPort)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Pathname() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelPathname)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) Search() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelSearch)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLAnchorElement) HashName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLAnchorElementSelHashName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

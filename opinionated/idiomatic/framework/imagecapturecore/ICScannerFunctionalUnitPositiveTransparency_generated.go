@@ -17,7 +17,9 @@ type ScannerFunctionalUnitPositiveTransparency struct {
 }
 
 // Unwrap returns the underlying [raw.ICScannerFunctionalUnitPositiveTransparency].
-func (x *ScannerFunctionalUnitPositiveTransparency) Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency { return x.inner }
+func (x *ScannerFunctionalUnitPositiveTransparency) Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -123,7 +125,9 @@ func (x *ScannerFunctionalUnitPositiveTransparency) DocumentSize() corefoundatio
 	return x.inner.DocumentSize()
 }
 
-func (x *ScannerFunctionalUnitPositiveTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit { return &x.inner.ICScannerFunctionalUnit }
+func (x *ScannerFunctionalUnitPositiveTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
+	return &x.inner.ICScannerFunctionalUnit
+}
 
 // ScannerFunctionalUnitPositiveTransparencyable is the interface implemented by [ScannerFunctionalUnitPositiveTransparency], for mocking and DI.
 type ScannerFunctionalUnitPositiveTransparencyable interface {
@@ -146,4 +150,3 @@ type ScannerFunctionalUnitPositiveTransparencyable interface {
 }
 
 var _ ScannerFunctionalUnitPositiveTransparencyable = (*ScannerFunctionalUnitPositiveTransparency)(nil)
-

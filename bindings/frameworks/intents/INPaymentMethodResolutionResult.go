@@ -16,8 +16,8 @@ type INPaymentMethodResolutionResult struct {
 }
 
 var (
-	_clsINPaymentMethodResolutionResult = _objcClass("INPaymentMethodResolutionResult")
-	_iNPaymentMethodResolutionResultSelSuccessWithResolvedPaymentMethod = objc.RegisterName("successWithResolvedPaymentMethod:")
+	_clsINPaymentMethodResolutionResult                                               = _objcClass("INPaymentMethodResolutionResult")
+	_iNPaymentMethodResolutionResultSelSuccessWithResolvedPaymentMethod               = objc.RegisterName("successWithResolvedPaymentMethod:")
 	_iNPaymentMethodResolutionResultSelDisambiguationWithPaymentMethodsToDisambiguate = objc.RegisterName("disambiguationWithPaymentMethodsToDisambiguate:")
 	_iNPaymentMethodResolutionResultSelConfirmationRequiredWithPaymentMethodToConfirm = objc.RegisterName("confirmationRequiredWithPaymentMethodToConfirm:")
 )
@@ -34,19 +34,24 @@ func INPaymentMethodResolutionResultFromID(id objc.ID) *INPaymentMethodResolutio
 
 func INPaymentMethodResolutionResultSuccessWithResolvedPaymentMethod(resolvedPaymentMethod *INPaymentMethod) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelSuccessWithResolvedPaymentMethod, resolvedPaymentMethod.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPaymentMethodResolutionResultFromID(_ret)
 }
 
 func INPaymentMethodResolutionResultDisambiguationWithPaymentMethodsToDisambiguate(paymentMethodsToDisambiguate *foundation.NSArray[*INPaymentMethod]) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelDisambiguationWithPaymentMethodsToDisambiguate, paymentMethodsToDisambiguate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPaymentMethodResolutionResultFromID(_ret)
 }
 
 func INPaymentMethodResolutionResultConfirmationRequiredWithPaymentMethodToConfirm(paymentMethodToConfirm *INPaymentMethod) *INPaymentMethodResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINPaymentMethodResolutionResult), _iNPaymentMethodResolutionResultSelConfirmationRequiredWithPaymentMethodToConfirm, paymentMethodToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INPaymentMethodResolutionResultFromID(_ret)
 }
-

@@ -16,7 +16,7 @@ type MXGPUMetric struct {
 }
 
 var (
-	_clsMXGPUMetric = _objcClass("MXGPUMetric")
+	_clsMXGPUMetric                  = _objcClass("MXGPUMetric")
 	_mXGPUMetricSelCumulativeGPUTime = objc.RegisterName("cumulativeGPUTime")
 )
 
@@ -34,4 +34,3 @@ func (o *MXGPUMetric) CumulativeGPUTime() *foundation.NSMeasurement[*foundation.
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitDuration]](o.Ptr(), _mXGPUMetricSelCumulativeGPUTime)
 	return _ret
 }
-

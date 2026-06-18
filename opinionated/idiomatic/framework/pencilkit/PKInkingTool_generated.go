@@ -112,4 +112,3 @@ type InkingToolable interface {
 }
 
 var _ InkingToolable = (*InkingTool)(nil)
-

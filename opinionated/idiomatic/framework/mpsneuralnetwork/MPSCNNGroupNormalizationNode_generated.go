@@ -65,7 +65,9 @@ func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle raw.MPSNNTrai
 	x.inner.SetTrainingStyle(trainingStyle)
 }
 
-func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNFilterNode
+}
 
 // CNNGroupNormalizationNodeable is the interface implemented by [CNNGroupNormalizationNode], for mocking and DI.
 type CNNGroupNormalizationNodeable interface {
@@ -78,4 +80,3 @@ type CNNGroupNormalizationNodeable interface {
 }
 
 var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)
-

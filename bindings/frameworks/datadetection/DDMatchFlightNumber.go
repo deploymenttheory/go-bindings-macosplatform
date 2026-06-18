@@ -18,8 +18,8 @@ type DDMatchFlightNumber struct {
 }
 
 var (
-	_clsDDMatchFlightNumber = _objcClass("DDMatchFlightNumber")
-	_dDMatchFlightNumberSelAirline = objc.RegisterName("airline")
+	_clsDDMatchFlightNumber             = _objcClass("DDMatchFlightNumber")
+	_dDMatchFlightNumberSelAirline      = objc.RegisterName("airline")
 	_dDMatchFlightNumberSelFlightNumber = objc.RegisterName("flightNumber")
 )
 
@@ -36,14 +36,17 @@ func DDMatchFlightNumberFromID(id objc.ID) *DDMatchFlightNumber {
 // The name of an airline.
 func (o *DDMatchFlightNumber) Airline() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchFlightNumberSelAirline)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // A string that represents a flight number.
 func (o *DDMatchFlightNumber) FlightNumber() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dDMatchFlightNumberSelFlightNumber)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

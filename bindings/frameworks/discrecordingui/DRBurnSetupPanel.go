@@ -19,18 +19,18 @@ type DRBurnSetupPanel struct {
 }
 
 var (
-	_clsDRBurnSetupPanel = _objcClass("DRBurnSetupPanel")
-	_dRBurnSetupPanelSelSetupPanel = objc.RegisterName("setupPanel")
-	_dRBurnSetupPanelSelSetDefaultButtonTitle = objc.RegisterName("setDefaultButtonTitle:")
-	_dRBurnSetupPanelSelSetCanSelectTestBurn = objc.RegisterName("setCanSelectTestBurn:")
+	_clsDRBurnSetupPanel                            = _objcClass("DRBurnSetupPanel")
+	_dRBurnSetupPanelSelSetupPanel                  = objc.RegisterName("setupPanel")
+	_dRBurnSetupPanelSelSetDefaultButtonTitle       = objc.RegisterName("setDefaultButtonTitle:")
+	_dRBurnSetupPanelSelSetCanSelectTestBurn        = objc.RegisterName("setCanSelectTestBurn:")
 	_dRBurnSetupPanelSelSetCanSelectAppendableMedia = objc.RegisterName("setCanSelectAppendableMedia:")
-	_dRBurnSetupPanelSelBurnObject = objc.RegisterName("burnObject")
-	_dRBurnSetupPanelSelExpand = objc.RegisterName("expand:")
-	_dRBurnSetupPanelSelBurnSpeed = objc.RegisterName("burnSpeed:")
-	_dRBurnSetupPanelSelAppendable = objc.RegisterName("appendable:")
-	_dRBurnSetupPanelSelCompletionAction = objc.RegisterName("completionAction:")
-	_dRBurnSetupPanelSelTestBurn = objc.RegisterName("testBurn:")
-	_dRBurnSetupPanelSelVerifyBurn = objc.RegisterName("verifyBurn:")
+	_dRBurnSetupPanelSelBurnObject                  = objc.RegisterName("burnObject")
+	_dRBurnSetupPanelSelExpand                      = objc.RegisterName("expand:")
+	_dRBurnSetupPanelSelBurnSpeed                   = objc.RegisterName("burnSpeed:")
+	_dRBurnSetupPanelSelAppendable                  = objc.RegisterName("appendable:")
+	_dRBurnSetupPanelSelCompletionAction            = objc.RegisterName("completionAction:")
+	_dRBurnSetupPanelSelTestBurn                    = objc.RegisterName("testBurn:")
+	_dRBurnSetupPanelSelVerifyBurn                  = objc.RegisterName("verifyBurn:")
 )
 
 func DRBurnSetupPanelFromID(id objc.ID) *DRBurnSetupPanel {
@@ -46,7 +46,9 @@ func DRBurnSetupPanelFromID(id objc.ID) *DRBurnSetupPanel {
 // @method		setupPanel @abstract	Creates and return an instance of a burn setup panel. @result		A pointer to the newly created DRBurnSetupPanel.
 func DRBurnSetupPanelSetupPanel() *DRBurnSetupPanel {
 	_ret := objc.Send[objc.ID](objc.ID(_clsDRBurnSetupPanel), _dRBurnSetupPanelSelSetupPanel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return DRBurnSetupPanelFromID(_ret)
 }
 
@@ -68,7 +70,9 @@ func (o *DRBurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
 // @method		burnObject @abstract	Creates and returns a new DRBurn object that's configured to write data to the currently selected device. @discussion	The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session ( @link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link ) because the burn object information is only updated just before the modal session ends. @result  	A new DRBurn object.
 func (o *DRBurnSetupPanel) BurnObject() *discrecording.DRBurn {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dRBurnSetupPanelSelBurnObject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return discrecording.DRBurnFromID(_ret)
 }
 
@@ -101,4 +105,3 @@ func (o *DRBurnSetupPanel) TestBurn(sender objc.ID) {
 func (o *DRBurnSetupPanel) VerifyBurn(sender objc.ID) {
 	o.Ptr().Send(_dRBurnSetupPanelSelVerifyBurn, sender)
 }
-

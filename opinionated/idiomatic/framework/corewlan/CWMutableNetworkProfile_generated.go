@@ -58,7 +58,9 @@ func (x *MutableNetworkProfile) SetSecurity(security raw.CWSecurity) {
 	x.inner.SetSecurity(security)
 }
 
-func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile { return &x.inner.CWNetworkProfile }
+func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile {
+	return &x.inner.CWNetworkProfile
+}
 
 // MutableNetworkProfileable is the interface implemented by [MutableNetworkProfile], for mocking and DI.
 type MutableNetworkProfileable interface {
@@ -70,4 +72,3 @@ type MutableNetworkProfileable interface {
 }
 
 var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)
-

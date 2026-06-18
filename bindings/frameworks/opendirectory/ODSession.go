@@ -21,18 +21,18 @@ type ODSession struct {
 }
 
 var (
-	_clsODSession = _objcClass("ODSession")
-	_oDSessionSelDefaultSession = objc.RegisterName("defaultSession")
-	_oDSessionSelSessionWithOptionsError = objc.RegisterName("sessionWithOptions:error:")
-	_oDSessionSelInitWithOptionsError = objc.RegisterName("initWithOptions:error:")
-	_oDSessionSelNodeNamesAndReturnError = objc.RegisterName("nodeNamesAndReturnError:")
+	_clsODSession                                                       = _objcClass("ODSession")
+	_oDSessionSelDefaultSession                                         = objc.RegisterName("defaultSession")
+	_oDSessionSelSessionWithOptionsError                                = objc.RegisterName("sessionWithOptions:error:")
+	_oDSessionSelInitWithOptionsError                                   = objc.RegisterName("initWithOptions:error:")
+	_oDSessionSelNodeNamesAndReturnError                                = objc.RegisterName("nodeNamesAndReturnError:")
 	_oDSessionSelConfigurationAuthorizationAllowingUserInteractionError = objc.RegisterName("configurationAuthorizationAllowingUserInteraction:error:")
-	_oDSessionSelConfigurationForNodename = objc.RegisterName("configurationForNodename:")
-	_oDSessionSelAddConfigurationAuthorizationError = objc.RegisterName("addConfiguration:authorization:error:")
-	_oDSessionSelDeleteConfigurationAuthorizationError = objc.RegisterName("deleteConfiguration:authorization:error:")
-	_oDSessionSelDeleteConfigurationWithNodenameAuthorizationError = objc.RegisterName("deleteConfigurationWithNodename:authorization:error:")
-	_oDSessionSelConfigurationTemplateNames = objc.RegisterName("configurationTemplateNames")
-	_oDSessionSelMappingTemplateNames = objc.RegisterName("mappingTemplateNames")
+	_oDSessionSelConfigurationForNodename                               = objc.RegisterName("configurationForNodename:")
+	_oDSessionSelAddConfigurationAuthorizationError                     = objc.RegisterName("addConfiguration:authorization:error:")
+	_oDSessionSelDeleteConfigurationAuthorizationError                  = objc.RegisterName("deleteConfiguration:authorization:error:")
+	_oDSessionSelDeleteConfigurationWithNodenameAuthorizationError      = objc.RegisterName("deleteConfigurationWithNodename:authorization:error:")
+	_oDSessionSelConfigurationTemplateNames                             = objc.RegisterName("configurationTemplateNames")
+	_oDSessionSelMappingTemplateNames                                   = objc.RegisterName("mappingTemplateNames")
 )
 
 func ODSessionFromID(id objc.ID) *ODSession {
@@ -48,7 +48,9 @@ func ODSessionFromID(id objc.ID) *ODSession {
 // @method     defaultSession @abstract   Returns a shared instance of a local ODSession @discussion Returns a shared instance of a local ODSession.  This can be used for most situations unless more control is needed over the session.
 func ODSessionDefaultSession() *ODSession {
 	_ret := objc.Send[objc.ID](objc.ID(_clsODSession), _oDSessionSelDefaultSession)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODSessionFromID(_ret)
 }
 
@@ -56,7 +58,9 @@ func ODSessionDefaultSession() *ODSession {
 func ODSessionSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*ODSession, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](objc.ID(_clsODSession), _oDSessionSelSessionWithOptionsError, inOptions, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,7 +71,9 @@ func ODSessionSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID
 func (o *ODSession) InitWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*ODSession, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelInitWithOptionsError, inOptions, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -88,7 +94,9 @@ func (o *ODSession) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], err
 func (o *ODSession) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelConfigurationAuthorizationAllowingUserInteractionError, allowInteraction, unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -98,7 +106,9 @@ func (o *ODSession) ConfigurationAuthorizationAllowingUserInteractionError(allow
 // @method configurationForNodename: @abstract Reads the configuration for a given nodename. @discussion Reads the configuration for a given nodename.
 func (o *ODSession) ConfigurationForNodename(nodename *foundation.NSString) *ODConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _oDSessionSelConfigurationForNodename, nodename.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return ODConfigurationFromID(_ret)
 }
 
@@ -143,4 +153,3 @@ func (o *ODSession) MappingTemplateNames() *foundation.NSArray[objc.ID] {
 	_ret := objc.Send[*foundation.NSArray[objc.ID]](o.Ptr(), _oDSessionSelMappingTemplateNames)
 	return _ret
 }
-

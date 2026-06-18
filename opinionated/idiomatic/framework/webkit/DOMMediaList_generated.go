@@ -83,7 +83,9 @@ func (x *DOMMediaList) Length() uint {
 
 func (x *DOMMediaList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMMediaList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMMediaList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMMediaListable is the interface implemented by [DOMMediaList], for mocking and DI.
 type DOMMediaListable interface {
@@ -98,4 +100,3 @@ type DOMMediaListable interface {
 }
 
 var _ DOMMediaListable = (*DOMMediaList)(nil)
-

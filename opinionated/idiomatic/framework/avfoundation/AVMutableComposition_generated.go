@@ -133,4 +133,3 @@ type MutableCompositionable interface {
 }
 
 var _ MutableCompositionable = (*MutableComposition)(nil)
-

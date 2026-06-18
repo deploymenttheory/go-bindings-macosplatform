@@ -64,4 +64,3 @@ type PersistentChangeable interface {
 }
 
 var _ PersistentChangeable = (*PersistentChange)(nil)
-

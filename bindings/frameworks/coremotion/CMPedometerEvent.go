@@ -16,7 +16,7 @@ type CMPedometerEvent struct {
 }
 
 var (
-	_clsCMPedometerEvent = _objcClass("CMPedometerEvent")
+	_clsCMPedometerEvent     = _objcClass("CMPedometerEvent")
 	_cMPedometerEventSelDate = objc.RegisterName("date")
 	_cMPedometerEventSelType = objc.RegisterName("type")
 )
@@ -33,7 +33,9 @@ func CMPedometerEventFromID(id objc.ID) *CMPedometerEvent {
 
 func (o *CMPedometerEvent) Date() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cMPedometerEventSelDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
@@ -41,4 +43,3 @@ func (o *CMPedometerEvent) Type() CMPedometerEventType {
 	_ret := objc.Send[CMPedometerEventType](o.Ptr(), _cMPedometerEventSelType)
 	return _ret
 }
-

@@ -12,9 +12,9 @@ import (
 type SCNActionTimingMode int64
 
 const (
-	SCNActionTimingModeLinear SCNActionTimingMode = 0
-	SCNActionTimingModeEaseIn SCNActionTimingMode = 1
-	SCNActionTimingModeEaseOut SCNActionTimingMode = 2
+	SCNActionTimingModeLinear        SCNActionTimingMode = 0
+	SCNActionTimingModeEaseIn        SCNActionTimingMode = 1
+	SCNActionTimingModeEaseOut       SCNActionTimingMode = 2
 	SCNActionTimingModeEaseInEaseOut SCNActionTimingMode = 3
 )
 
@@ -36,10 +36,10 @@ func (e SCNActionTimingMode) String() string {
 type SCNAntialiasingMode uint64
 
 const (
-	SCNAntialiasingModeNone SCNAntialiasingMode = 0
-	SCNAntialiasingModeMultisampling2X SCNAntialiasingMode = 1
-	SCNAntialiasingModeMultisampling4X SCNAntialiasingMode = 2
-	SCNAntialiasingModeMultisampling8X SCNAntialiasingMode = 3
+	SCNAntialiasingModeNone             SCNAntialiasingMode = 0
+	SCNAntialiasingModeMultisampling2X  SCNAntialiasingMode = 1
+	SCNAntialiasingModeMultisampling4X  SCNAntialiasingMode = 2
+	SCNAntialiasingModeMultisampling8X  SCNAntialiasingMode = 3
 	SCNAntialiasingModeMultisampling16X SCNAntialiasingMode = 4
 )
 
@@ -64,9 +64,9 @@ func (e SCNAntialiasingMode) String() string {
 type SCNBillboardAxis uint64
 
 const (
-	SCNBillboardAxisX SCNBillboardAxis = 1
-	SCNBillboardAxisY SCNBillboardAxis = 2
-	SCNBillboardAxisZ SCNBillboardAxis = 4
+	SCNBillboardAxisX   SCNBillboardAxis = 1
+	SCNBillboardAxisY   SCNBillboardAxis = 2
+	SCNBillboardAxisZ   SCNBillboardAxis = 4
 	SCNBillboardAxisAll SCNBillboardAxis = 7
 )
 
@@ -93,13 +93,13 @@ func (e SCNBillboardAxis) String() string {
 type SCNBlendMode int64
 
 const (
-	SCNBlendModeAlpha SCNBlendMode = 0
-	SCNBlendModeAdd SCNBlendMode = 1
+	SCNBlendModeAlpha    SCNBlendMode = 0
+	SCNBlendModeAdd      SCNBlendMode = 1
 	SCNBlendModeSubtract SCNBlendMode = 2
 	SCNBlendModeMultiply SCNBlendMode = 3
-	SCNBlendModeScreen SCNBlendMode = 4
-	SCNBlendModeReplace SCNBlendMode = 5
-	SCNBlendModeMax SCNBlendMode = 6
+	SCNBlendModeScreen   SCNBlendMode = 4
+	SCNBlendModeReplace  SCNBlendMode = 5
+	SCNBlendModeMax      SCNBlendMode = 6
 )
 
 func (e SCNBlendMode) String() string {
@@ -126,8 +126,8 @@ func (e SCNBlendMode) String() string {
 type SCNBufferFrequency int64
 
 const (
-	SCNBufferFrequencyPerFrame SCNBufferFrequency = 0
-	SCNBufferFrequencyPerNode SCNBufferFrequency = 1
+	SCNBufferFrequencyPerFrame    SCNBufferFrequency = 0
+	SCNBufferFrequencyPerNode     SCNBufferFrequency = 1
 	SCNBufferFrequencyPerShadable SCNBufferFrequency = 2
 )
 
@@ -147,7 +147,7 @@ func (e SCNBufferFrequency) String() string {
 type SCNCameraProjectionDirection int64
 
 const (
-	SCNCameraProjectionDirectionVertical SCNCameraProjectionDirection = 0
+	SCNCameraProjectionDirectionVertical   SCNCameraProjectionDirection = 0
 	SCNCameraProjectionDirectionHorizontal SCNCameraProjectionDirection = 1
 )
 
@@ -165,9 +165,9 @@ func (e SCNCameraProjectionDirection) String() string {
 type SCNChamferMode int64
 
 const (
-	SCNChamferModeBoth SCNChamferMode = 0
+	SCNChamferModeBoth  SCNChamferMode = 0
 	SCNChamferModeFront SCNChamferMode = 1
-	SCNChamferModeBack SCNChamferMode = 2
+	SCNChamferModeBack  SCNChamferMode = 2
 )
 
 func (e SCNChamferMode) String() string {
@@ -187,12 +187,12 @@ func (e SCNChamferMode) String() string {
 type SCNColorMask int64
 
 const (
-	SCNColorMaskNone SCNColorMask = 0
-	SCNColorMaskRed SCNColorMask = 8
+	SCNColorMaskNone  SCNColorMask = 0
+	SCNColorMaskRed   SCNColorMask = 8
 	SCNColorMaskGreen SCNColorMask = 4
-	SCNColorMaskBlue SCNColorMask = 2
+	SCNColorMaskBlue  SCNColorMask = 2
 	SCNColorMaskAlpha SCNColorMask = 1
-	SCNColorMaskAll SCNColorMask = 15
+	SCNColorMaskAll   SCNColorMask = 15
 )
 
 func (e SCNColorMask) String() string {
@@ -221,7 +221,7 @@ func (e SCNColorMask) String() string {
 type SCNCullMode int64
 
 const (
-	SCNCullModeBack SCNCullMode = 0
+	SCNCullModeBack  SCNCullMode = 0
 	SCNCullModeFront SCNCullMode = 1
 )
 
@@ -239,7 +239,7 @@ func (e SCNCullMode) String() string {
 type SCNFillMode uint64
 
 const (
-	SCNFillModeFill SCNFillMode = 0
+	SCNFillModeFill  SCNFillMode = 0
 	SCNFillModeLines SCNFillMode = 1
 )
 
@@ -257,9 +257,9 @@ func (e SCNFillMode) String() string {
 type SCNFilterMode int64
 
 const (
-	SCNFilterModeNone SCNFilterMode = 0
+	SCNFilterModeNone    SCNFilterMode = 0
 	SCNFilterModeNearest SCNFilterMode = 1
-	SCNFilterModeLinear SCNFilterMode = 2
+	SCNFilterModeLinear  SCNFilterMode = 2
 )
 
 func (e SCNFilterMode) String() string {
@@ -278,11 +278,11 @@ func (e SCNFilterMode) String() string {
 type SCNGeometryPrimitiveType int64
 
 const (
-	SCNGeometryPrimitiveTypeTriangles SCNGeometryPrimitiveType = 0
+	SCNGeometryPrimitiveTypeTriangles     SCNGeometryPrimitiveType = 0
 	SCNGeometryPrimitiveTypeTriangleStrip SCNGeometryPrimitiveType = 1
-	SCNGeometryPrimitiveTypeLine SCNGeometryPrimitiveType = 2
-	SCNGeometryPrimitiveTypePoint SCNGeometryPrimitiveType = 3
-	SCNGeometryPrimitiveTypePolygon SCNGeometryPrimitiveType = 4
+	SCNGeometryPrimitiveTypeLine          SCNGeometryPrimitiveType = 2
+	SCNGeometryPrimitiveTypePoint         SCNGeometryPrimitiveType = 3
+	SCNGeometryPrimitiveTypePolygon       SCNGeometryPrimitiveType = 4
 )
 
 func (e SCNGeometryPrimitiveType) String() string {
@@ -305,13 +305,13 @@ func (e SCNGeometryPrimitiveType) String() string {
 type SCNInteractionMode int64
 
 const (
-	SCNInteractionModeFly SCNInteractionMode = 0
-	SCNInteractionModeOrbitTurntable SCNInteractionMode = 1
-	SCNInteractionModeOrbitAngleMapping SCNInteractionMode = 2
+	SCNInteractionModeFly                  SCNInteractionMode = 0
+	SCNInteractionModeOrbitTurntable       SCNInteractionMode = 1
+	SCNInteractionModeOrbitAngleMapping    SCNInteractionMode = 2
 	SCNInteractionModeOrbitCenteredArcball SCNInteractionMode = 3
-	SCNInteractionModeOrbitArcball SCNInteractionMode = 4
-	SCNInteractionModePan SCNInteractionMode = 5
-	SCNInteractionModeTruck SCNInteractionMode = 6
+	SCNInteractionModeOrbitArcball         SCNInteractionMode = 4
+	SCNInteractionModePan                  SCNInteractionMode = 5
+	SCNInteractionModeTruck                SCNInteractionMode = 6
 )
 
 func (e SCNInteractionMode) String() string {
@@ -339,7 +339,7 @@ type SCNLightAreaType int64
 
 const (
 	SCNLightAreaTypeRectangle SCNLightAreaType = 1
-	SCNLightAreaTypePolygon SCNLightAreaType = 4
+	SCNLightAreaTypePolygon   SCNLightAreaType = 4
 )
 
 func (e SCNLightAreaType) String() string {
@@ -357,7 +357,7 @@ type SCNLightProbeType int64
 
 const (
 	SCNLightProbeTypeIrradiance SCNLightProbeType = 0
-	SCNLightProbeTypeRadiance SCNLightProbeType = 1
+	SCNLightProbeTypeRadiance   SCNLightProbeType = 1
 )
 
 func (e SCNLightProbeType) String() string {
@@ -374,7 +374,7 @@ func (e SCNLightProbeType) String() string {
 type SCNLightProbeUpdateType int64
 
 const (
-	SCNLightProbeUpdateTypeNever SCNLightProbeUpdateType = 0
+	SCNLightProbeUpdateTypeNever    SCNLightProbeUpdateType = 0
 	SCNLightProbeUpdateTypeRealtime SCNLightProbeUpdateType = 1
 )
 
@@ -393,7 +393,7 @@ type SCNMorpherCalculationMode int64
 
 const (
 	SCNMorpherCalculationModeNormalized SCNMorpherCalculationMode = 0
-	SCNMorpherCalculationModeAdditive SCNMorpherCalculationMode = 1
+	SCNMorpherCalculationModeAdditive   SCNMorpherCalculationMode = 1
 )
 
 func (e SCNMorpherCalculationMode) String() string {
@@ -410,7 +410,7 @@ func (e SCNMorpherCalculationMode) String() string {
 type SCNMovabilityHint int64
 
 const (
-	SCNMovabilityHintFixed SCNMovabilityHint = 0
+	SCNMovabilityHintFixed   SCNMovabilityHint = 0
 	SCNMovabilityHintMovable SCNMovabilityHint = 1
 )
 
@@ -428,7 +428,7 @@ func (e SCNMovabilityHint) String() string {
 type SCNNodeFocusBehavior int64
 
 const (
-	SCNNodeFocusBehaviorNone SCNNodeFocusBehavior = 0
+	SCNNodeFocusBehaviorNone      SCNNodeFocusBehavior = 0
 	SCNNodeFocusBehaviorOccluding SCNNodeFocusBehavior = 1
 	SCNNodeFocusBehaviorFocusable SCNNodeFocusBehavior = 2
 )
@@ -449,9 +449,9 @@ func (e SCNNodeFocusBehavior) String() string {
 type SCNParticleBirthDirection int64
 
 const (
-	SCNParticleBirthDirectionConstant SCNParticleBirthDirection = 0
+	SCNParticleBirthDirectionConstant      SCNParticleBirthDirection = 0
 	SCNParticleBirthDirectionSurfaceNormal SCNParticleBirthDirection = 1
-	SCNParticleBirthDirectionRandom SCNParticleBirthDirection = 2
+	SCNParticleBirthDirectionRandom        SCNParticleBirthDirection = 2
 )
 
 func (e SCNParticleBirthDirection) String() string {
@@ -471,8 +471,8 @@ type SCNParticleBirthLocation int64
 
 const (
 	SCNParticleBirthLocationSurface SCNParticleBirthLocation = 0
-	SCNParticleBirthLocationVolume SCNParticleBirthLocation = 1
-	SCNParticleBirthLocationVertex SCNParticleBirthLocation = 2
+	SCNParticleBirthLocationVolume  SCNParticleBirthLocation = 1
+	SCNParticleBirthLocationVertex  SCNParticleBirthLocation = 2
 )
 
 func (e SCNParticleBirthLocation) String() string {
@@ -494,9 +494,9 @@ const (
 	SCNParticleBlendModeAdditive SCNParticleBlendMode = 0
 	SCNParticleBlendModeSubtract SCNParticleBlendMode = 1
 	SCNParticleBlendModeMultiply SCNParticleBlendMode = 2
-	SCNParticleBlendModeScreen SCNParticleBlendMode = 3
-	SCNParticleBlendModeAlpha SCNParticleBlendMode = 4
-	SCNParticleBlendModeReplace SCNParticleBlendMode = 5
+	SCNParticleBlendModeScreen   SCNParticleBlendMode = 3
+	SCNParticleBlendModeAlpha    SCNParticleBlendMode = 4
+	SCNParticleBlendModeReplace  SCNParticleBlendMode = 5
 )
 
 func (e SCNParticleBlendMode) String() string {
@@ -521,8 +521,8 @@ func (e SCNParticleBlendMode) String() string {
 type SCNParticleEvent int64
 
 const (
-	SCNParticleEventBirth SCNParticleEvent = 0
-	SCNParticleEventDeath SCNParticleEvent = 1
+	SCNParticleEventBirth     SCNParticleEvent = 0
+	SCNParticleEventDeath     SCNParticleEvent = 1
 	SCNParticleEventCollision SCNParticleEvent = 2
 )
 
@@ -542,8 +542,8 @@ func (e SCNParticleEvent) String() string {
 type SCNParticleImageSequenceAnimationMode int64
 
 const (
-	SCNParticleImageSequenceAnimationModeRepeat SCNParticleImageSequenceAnimationMode = 0
-	SCNParticleImageSequenceAnimationModeClamp SCNParticleImageSequenceAnimationMode = 1
+	SCNParticleImageSequenceAnimationModeRepeat      SCNParticleImageSequenceAnimationMode = 0
+	SCNParticleImageSequenceAnimationModeClamp       SCNParticleImageSequenceAnimationMode = 1
 	SCNParticleImageSequenceAnimationModeAutoReverse SCNParticleImageSequenceAnimationMode = 2
 )
 
@@ -563,8 +563,8 @@ func (e SCNParticleImageSequenceAnimationMode) String() string {
 type SCNParticleInputMode int64
 
 const (
-	SCNParticleInputModeOverLife SCNParticleInputMode = 0
-	SCNParticleInputModeOverDistance SCNParticleInputMode = 1
+	SCNParticleInputModeOverLife          SCNParticleInputMode = 0
+	SCNParticleInputModeOverDistance      SCNParticleInputMode = 1
 	SCNParticleInputModeOverOtherProperty SCNParticleInputMode = 2
 )
 
@@ -584,9 +584,9 @@ func (e SCNParticleInputMode) String() string {
 type SCNParticleModifierStage int64
 
 const (
-	SCNParticleModifierStagePreDynamics SCNParticleModifierStage = 0
-	SCNParticleModifierStagePostDynamics SCNParticleModifierStage = 1
-	SCNParticleModifierStagePreCollision SCNParticleModifierStage = 2
+	SCNParticleModifierStagePreDynamics   SCNParticleModifierStage = 0
+	SCNParticleModifierStagePostDynamics  SCNParticleModifierStage = 1
+	SCNParticleModifierStagePreCollision  SCNParticleModifierStage = 2
 	SCNParticleModifierStagePostCollision SCNParticleModifierStage = 3
 )
 
@@ -609,9 +609,9 @@ type SCNParticleOrientationMode int64
 
 const (
 	SCNParticleOrientationModeBillboardScreenAligned SCNParticleOrientationMode = 0
-	SCNParticleOrientationModeBillboardViewAligned SCNParticleOrientationMode = 1
-	SCNParticleOrientationModeFree SCNParticleOrientationMode = 2
-	SCNParticleOrientationModeBillboardYAligned SCNParticleOrientationMode = 3
+	SCNParticleOrientationModeBillboardViewAligned   SCNParticleOrientationMode = 1
+	SCNParticleOrientationModeFree                   SCNParticleOrientationMode = 2
+	SCNParticleOrientationModeBillboardYAligned      SCNParticleOrientationMode = 3
 )
 
 func (e SCNParticleOrientationMode) String() string {
@@ -632,11 +632,11 @@ func (e SCNParticleOrientationMode) String() string {
 type SCNParticleSortingMode int64
 
 const (
-	SCNParticleSortingModeNone SCNParticleSortingMode = 0
+	SCNParticleSortingModeNone           SCNParticleSortingMode = 0
 	SCNParticleSortingModeProjectedDepth SCNParticleSortingMode = 1
-	SCNParticleSortingModeDistance SCNParticleSortingMode = 2
-	SCNParticleSortingModeOldestFirst SCNParticleSortingMode = 3
-	SCNParticleSortingModeYoungestFirst SCNParticleSortingMode = 4
+	SCNParticleSortingModeDistance       SCNParticleSortingMode = 2
+	SCNParticleSortingModeOldestFirst    SCNParticleSortingMode = 3
+	SCNParticleSortingModeYoungestFirst  SCNParticleSortingMode = 4
 )
 
 func (e SCNParticleSortingMode) String() string {
@@ -659,8 +659,8 @@ func (e SCNParticleSortingMode) String() string {
 type SCNPhysicsBodyType int64
 
 const (
-	SCNPhysicsBodyTypeStatic SCNPhysicsBodyType = 0
-	SCNPhysicsBodyTypeDynamic SCNPhysicsBodyType = 1
+	SCNPhysicsBodyTypeStatic    SCNPhysicsBodyType = 0
+	SCNPhysicsBodyTypeDynamic   SCNPhysicsBodyType = 1
 	SCNPhysicsBodyTypeKinematic SCNPhysicsBodyType = 2
 )
 
@@ -680,7 +680,7 @@ func (e SCNPhysicsBodyType) String() string {
 type SCNPhysicsFieldScope int64
 
 const (
-	SCNPhysicsFieldScopeInsideExtent SCNPhysicsFieldScope = 0
+	SCNPhysicsFieldScopeInsideExtent  SCNPhysicsFieldScope = 0
 	SCNPhysicsFieldScopeOutsideExtent SCNPhysicsFieldScope = 1
 )
 
@@ -699,7 +699,7 @@ type SCNReferenceLoadingPolicy int64
 
 const (
 	SCNReferenceLoadingPolicyImmediate SCNReferenceLoadingPolicy = 0
-	SCNReferenceLoadingPolicyOnDemand SCNReferenceLoadingPolicy = 1
+	SCNReferenceLoadingPolicyOnDemand  SCNReferenceLoadingPolicy = 1
 )
 
 func (e SCNReferenceLoadingPolicy) String() string {
@@ -716,11 +716,11 @@ func (e SCNReferenceLoadingPolicy) String() string {
 type SCNSceneSourceStatus int64
 
 const (
-	SCNSceneSourceStatusError SCNSceneSourceStatus = -1
-	SCNSceneSourceStatusParsing SCNSceneSourceStatus = 4
+	SCNSceneSourceStatusError      SCNSceneSourceStatus = -1
+	SCNSceneSourceStatusParsing    SCNSceneSourceStatus = 4
 	SCNSceneSourceStatusValidating SCNSceneSourceStatus = 8
 	SCNSceneSourceStatusProcessing SCNSceneSourceStatus = 12
-	SCNSceneSourceStatusComplete SCNSceneSourceStatus = 16
+	SCNSceneSourceStatusComplete   SCNSceneSourceStatus = 16
 )
 
 func (e SCNSceneSourceStatus) String() string {
@@ -743,8 +743,8 @@ func (e SCNSceneSourceStatus) String() string {
 type SCNShadowMode int64
 
 const (
-	SCNShadowModeForward SCNShadowMode = 0
-	SCNShadowModeDeferred SCNShadowMode = 1
+	SCNShadowModeForward   SCNShadowMode = 0
+	SCNShadowModeDeferred  SCNShadowMode = 1
 	SCNShadowModeModulated SCNShadowMode = 2
 )
 
@@ -764,9 +764,9 @@ func (e SCNShadowMode) String() string {
 type SCNTessellationSmoothingMode int64
 
 const (
-	SCNTessellationSmoothingModeNone SCNTessellationSmoothingMode = 0
+	SCNTessellationSmoothingModeNone        SCNTessellationSmoothingMode = 0
 	SCNTessellationSmoothingModePNTriangles SCNTessellationSmoothingMode = 1
-	SCNTessellationSmoothingModePhong SCNTessellationSmoothingMode = 2
+	SCNTessellationSmoothingModePhong       SCNTessellationSmoothingMode = 2
 )
 
 func (e SCNTessellationSmoothingMode) String() string {
@@ -785,11 +785,11 @@ func (e SCNTessellationSmoothingMode) String() string {
 type SCNTransparencyMode int64
 
 const (
-	SCNTransparencyModeAOne SCNTransparencyMode = 0
-	SCNTransparencyModeRGBZero SCNTransparencyMode = 1
+	SCNTransparencyModeAOne        SCNTransparencyMode = 0
+	SCNTransparencyModeRGBZero     SCNTransparencyMode = 1
 	SCNTransparencyModeSingleLayer SCNTransparencyMode = 2
-	SCNTransparencyModeDualLayer SCNTransparencyMode = 3
-	SCNTransparencyModeDefault SCNTransparencyMode = 0
+	SCNTransparencyModeDualLayer   SCNTransparencyMode = 3
+	SCNTransparencyModeDefault     SCNTransparencyMode = 0
 )
 
 func (e SCNTransparencyMode) String() string {
@@ -810,10 +810,10 @@ func (e SCNTransparencyMode) String() string {
 type SCNWrapMode int64
 
 const (
-	SCNWrapModeClamp SCNWrapMode = 1
-	SCNWrapModeRepeat SCNWrapMode = 2
+	SCNWrapModeClamp         SCNWrapMode = 1
+	SCNWrapModeRepeat        SCNWrapMode = 2
 	SCNWrapModeClampToBorder SCNWrapMode = 3
-	SCNWrapModeMirror SCNWrapMode = 4
+	SCNWrapModeMirror        SCNWrapMode = 4
 )
 
 func (e SCNWrapMode) String() string {
@@ -830,4 +830,3 @@ func (e SCNWrapMode) String() string {
 		return fmt.Sprintf("SCNWrapMode(%d)", int64(e))
 	}
 }
-

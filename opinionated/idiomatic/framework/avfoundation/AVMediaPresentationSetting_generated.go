@@ -63,4 +63,3 @@ type MediaPresentationSettingable interface {
 }
 
 var _ MediaPresentationSettingable = (*MediaPresentationSetting)(nil)
-

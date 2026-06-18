@@ -18,14 +18,14 @@ type GKFriendRequestComposeViewController struct {
 }
 
 var (
-	_clsGKFriendRequestComposeViewController = _objcClass("GKFriendRequestComposeViewController")
-	_gKFriendRequestComposeViewControllerSelMaxNumberOfRecipients = objc.RegisterName("maxNumberOfRecipients")
-	_gKFriendRequestComposeViewControllerSelSetMessage = objc.RegisterName("setMessage:")
-	_gKFriendRequestComposeViewControllerSelAddRecipientPlayers = objc.RegisterName("addRecipientPlayers:")
-	_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs = objc.RegisterName("addRecipientsWithPlayerIDs:")
+	_clsGKFriendRequestComposeViewController                                = _objcClass("GKFriendRequestComposeViewController")
+	_gKFriendRequestComposeViewControllerSelMaxNumberOfRecipients           = objc.RegisterName("maxNumberOfRecipients")
+	_gKFriendRequestComposeViewControllerSelSetMessage                      = objc.RegisterName("setMessage:")
+	_gKFriendRequestComposeViewControllerSelAddRecipientPlayers             = objc.RegisterName("addRecipientPlayers:")
+	_gKFriendRequestComposeViewControllerSelAddRecipientsWithPlayerIDs      = objc.RegisterName("addRecipientsWithPlayerIDs:")
 	_gKFriendRequestComposeViewControllerSelAddRecipientsWithEmailAddresses = objc.RegisterName("addRecipientsWithEmailAddresses:")
-	_gKFriendRequestComposeViewControllerSelComposeViewDelegate = objc.RegisterName("composeViewDelegate")
-	_gKFriendRequestComposeViewControllerSelSetComposeViewDelegate = objc.RegisterName("setComposeViewDelegate:")
+	_gKFriendRequestComposeViewControllerSelComposeViewDelegate             = objc.RegisterName("composeViewDelegate")
+	_gKFriendRequestComposeViewControllerSelSetComposeViewDelegate          = objc.RegisterName("setComposeViewDelegate:")
 )
 
 func GKFriendRequestComposeViewControllerFromID(id objc.ID) *GKFriendRequestComposeViewController {
@@ -75,4 +75,3 @@ func (o *GKFriendRequestComposeViewController) ComposeViewDelegate() GKFriendReq
 func (o *GKFriendRequestComposeViewController) SetComposeViewDelegate(composeViewDelegate GKFriendRequestComposeViewControllerDelegate) {
 	o.Ptr().Send(_gKFriendRequestComposeViewControllerSelSetComposeViewDelegate, composeViewDelegate)
 }
-

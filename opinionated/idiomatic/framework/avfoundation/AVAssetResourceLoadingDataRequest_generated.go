@@ -16,7 +16,9 @@ type AssetResourceLoadingDataRequest struct {
 }
 
 // Unwrap returns the underlying [raw.AVAssetResourceLoadingDataRequest].
-func (x *AssetResourceLoadingDataRequest) Unwrap() *raw.AVAssetResourceLoadingDataRequest { return x.inner }
+func (x *AssetResourceLoadingDataRequest) Unwrap() *raw.AVAssetResourceLoadingDataRequest {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -72,4 +74,3 @@ type AssetResourceLoadingDataRequestable interface {
 }
 
 var _ AssetResourceLoadingDataRequestable = (*AssetResourceLoadingDataRequest)(nil)
-

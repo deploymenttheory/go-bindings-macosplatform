@@ -16,12 +16,12 @@ type MPSGraphOperation struct {
 }
 
 var (
-	_clsMPSGraphOperation = _objcClass("MPSGraphOperation")
-	_mPSGraphOperationSelInputTensors = objc.RegisterName("inputTensors")
-	_mPSGraphOperationSelOutputTensors = objc.RegisterName("outputTensors")
+	_clsMPSGraphOperation                    = _objcClass("MPSGraphOperation")
+	_mPSGraphOperationSelInputTensors        = objc.RegisterName("inputTensors")
+	_mPSGraphOperationSelOutputTensors       = objc.RegisterName("outputTensors")
 	_mPSGraphOperationSelControlDependencies = objc.RegisterName("controlDependencies")
-	_mPSGraphOperationSelGraph = objc.RegisterName("graph")
-	_mPSGraphOperationSelName = objc.RegisterName("name")
+	_mPSGraphOperationSelGraph               = objc.RegisterName("graph")
+	_mPSGraphOperationSelName                = objc.RegisterName("name")
 )
 
 func MPSGraphOperationFromID(id objc.ID) *MPSGraphOperation {
@@ -37,35 +37,44 @@ func MPSGraphOperationFromID(id objc.ID) *MPSGraphOperation {
 // The input tensors of the operation.
 func (o *MPSGraphOperation) InputTensors() *foundation.NSArray[*MPSGraphTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphOperationSelInputTensors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPSGraphTensor](_ret)
 }
 
 // The output tensors of the operation.
 func (o *MPSGraphOperation) OutputTensors() *foundation.NSArray[*MPSGraphTensor] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphOperationSelOutputTensors)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPSGraphTensor](_ret)
 }
 
 // The set of operations guaranteed to execute before this operation.
 func (o *MPSGraphOperation) ControlDependencies() *foundation.NSArray[*MPSGraphOperation] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphOperationSelControlDependencies)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*MPSGraphOperation](_ret)
 }
 
 // The graph on which the operation is defined.
 func (o *MPSGraphOperation) Graph() *MPSGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphOperationSelGraph)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphFromID(_ret)
 }
 
 // Name of the operation.
 func (o *MPSGraphOperation) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphOperationSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

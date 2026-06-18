@@ -16,10 +16,10 @@ type AVMetricContentKeyRequestEvent struct {
 }
 
 var (
-	_clsAVMetricContentKeyRequestEvent = _objcClass("AVMetricContentKeyRequestEvent")
-	_aVMetricContentKeyRequestEventSelContentKeySpecifier = objc.RegisterName("contentKeySpecifier")
-	_aVMetricContentKeyRequestEventSelMediaType = objc.RegisterName("mediaType")
-	_aVMetricContentKeyRequestEventSelIsClientInitiated = objc.RegisterName("isClientInitiated")
+	_clsAVMetricContentKeyRequestEvent                          = _objcClass("AVMetricContentKeyRequestEvent")
+	_aVMetricContentKeyRequestEventSelContentKeySpecifier       = objc.RegisterName("contentKeySpecifier")
+	_aVMetricContentKeyRequestEventSelMediaType                 = objc.RegisterName("mediaType")
+	_aVMetricContentKeyRequestEventSelIsClientInitiated         = objc.RegisterName("isClientInitiated")
 	_aVMetricContentKeyRequestEventSelMediaResourceRequestEvent = objc.RegisterName("mediaResourceRequestEvent")
 )
 
@@ -36,14 +36,18 @@ func AVMetricContentKeyRequestEventFromID(id objc.ID) *AVMetricContentKeyRequest
 // Returns the content key specifier for the request.
 func (o *AVMetricContentKeyRequestEvent) ContentKeySpecifier() *AVContentKeySpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricContentKeyRequestEventSelContentKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVContentKeySpecifierFromID(_ret)
 }
 
 // Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 func (o *AVMetricContentKeyRequestEvent) MediaType() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricContentKeyRequestEventSelMediaType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -56,7 +60,8 @@ func (o *AVMetricContentKeyRequestEvent) IsClientInitiated() bool {
 // Returns the media resource request event which was used to satisfy the content key.
 func (o *AVMetricContentKeyRequestEvent) MediaResourceRequestEvent() *AVMetricMediaResourceRequestEvent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVMetricContentKeyRequestEventSelMediaResourceRequestEvent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVMetricMediaResourceRequestEventFromID(_ret)
 }
-

@@ -16,39 +16,39 @@ type SCNPhysicsField struct {
 }
 
 var (
-	_clsSCNPhysicsField = _objcClass("SCNPhysicsField")
-	_sCNPhysicsFieldSelDragField = objc.RegisterName("dragField")
-	_sCNPhysicsFieldSelVortexField = objc.RegisterName("vortexField")
-	_sCNPhysicsFieldSelRadialGravityField = objc.RegisterName("radialGravityField")
-	_sCNPhysicsFieldSelLinearGravityField = objc.RegisterName("linearGravityField")
-	_sCNPhysicsFieldSelNoiseFieldWithSmoothnessAnimationSpeed = objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:")
+	_clsSCNPhysicsField                                            = _objcClass("SCNPhysicsField")
+	_sCNPhysicsFieldSelDragField                                   = objc.RegisterName("dragField")
+	_sCNPhysicsFieldSelVortexField                                 = objc.RegisterName("vortexField")
+	_sCNPhysicsFieldSelRadialGravityField                          = objc.RegisterName("radialGravityField")
+	_sCNPhysicsFieldSelLinearGravityField                          = objc.RegisterName("linearGravityField")
+	_sCNPhysicsFieldSelNoiseFieldWithSmoothnessAnimationSpeed      = objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:")
 	_sCNPhysicsFieldSelTurbulenceFieldWithSmoothnessAnimationSpeed = objc.RegisterName("turbulenceFieldWithSmoothness:animationSpeed:")
-	_sCNPhysicsFieldSelSpringField = objc.RegisterName("springField")
-	_sCNPhysicsFieldSelElectricField = objc.RegisterName("electricField")
-	_sCNPhysicsFieldSelMagneticField = objc.RegisterName("magneticField")
-	_sCNPhysicsFieldSelCustomFieldWithEvaluationBlock = objc.RegisterName("customFieldWithEvaluationBlock:")
-	_sCNPhysicsFieldSelStrength = objc.RegisterName("strength")
-	_sCNPhysicsFieldSelSetStrength = objc.RegisterName("setStrength:")
-	_sCNPhysicsFieldSelFalloffExponent = objc.RegisterName("falloffExponent")
-	_sCNPhysicsFieldSelSetFalloffExponent = objc.RegisterName("setFalloffExponent:")
-	_sCNPhysicsFieldSelMinimumDistance = objc.RegisterName("minimumDistance")
-	_sCNPhysicsFieldSelSetMinimumDistance = objc.RegisterName("setMinimumDistance:")
-	_sCNPhysicsFieldSelIsActive = objc.RegisterName("isActive")
-	_sCNPhysicsFieldSelSetActive = objc.RegisterName("setActive:")
-	_sCNPhysicsFieldSelIsExclusive = objc.RegisterName("isExclusive")
-	_sCNPhysicsFieldSelSetExclusive = objc.RegisterName("setExclusive:")
-	_sCNPhysicsFieldSelHalfExtent = objc.RegisterName("halfExtent")
-	_sCNPhysicsFieldSelSetHalfExtent = objc.RegisterName("setHalfExtent:")
-	_sCNPhysicsFieldSelUsesEllipsoidalExtent = objc.RegisterName("usesEllipsoidalExtent")
-	_sCNPhysicsFieldSelSetUsesEllipsoidalExtent = objc.RegisterName("setUsesEllipsoidalExtent:")
-	_sCNPhysicsFieldSelScope = objc.RegisterName("scope")
-	_sCNPhysicsFieldSelSetScope = objc.RegisterName("setScope:")
-	_sCNPhysicsFieldSelOffset = objc.RegisterName("offset")
-	_sCNPhysicsFieldSelSetOffset = objc.RegisterName("setOffset:")
-	_sCNPhysicsFieldSelDirection = objc.RegisterName("direction")
-	_sCNPhysicsFieldSelSetDirection = objc.RegisterName("setDirection:")
-	_sCNPhysicsFieldSelCategoryBitMask = objc.RegisterName("categoryBitMask")
-	_sCNPhysicsFieldSelSetCategoryBitMask = objc.RegisterName("setCategoryBitMask:")
+	_sCNPhysicsFieldSelSpringField                                 = objc.RegisterName("springField")
+	_sCNPhysicsFieldSelElectricField                               = objc.RegisterName("electricField")
+	_sCNPhysicsFieldSelMagneticField                               = objc.RegisterName("magneticField")
+	_sCNPhysicsFieldSelCustomFieldWithEvaluationBlock              = objc.RegisterName("customFieldWithEvaluationBlock:")
+	_sCNPhysicsFieldSelStrength                                    = objc.RegisterName("strength")
+	_sCNPhysicsFieldSelSetStrength                                 = objc.RegisterName("setStrength:")
+	_sCNPhysicsFieldSelFalloffExponent                             = objc.RegisterName("falloffExponent")
+	_sCNPhysicsFieldSelSetFalloffExponent                          = objc.RegisterName("setFalloffExponent:")
+	_sCNPhysicsFieldSelMinimumDistance                             = objc.RegisterName("minimumDistance")
+	_sCNPhysicsFieldSelSetMinimumDistance                          = objc.RegisterName("setMinimumDistance:")
+	_sCNPhysicsFieldSelIsActive                                    = objc.RegisterName("isActive")
+	_sCNPhysicsFieldSelSetActive                                   = objc.RegisterName("setActive:")
+	_sCNPhysicsFieldSelIsExclusive                                 = objc.RegisterName("isExclusive")
+	_sCNPhysicsFieldSelSetExclusive                                = objc.RegisterName("setExclusive:")
+	_sCNPhysicsFieldSelHalfExtent                                  = objc.RegisterName("halfExtent")
+	_sCNPhysicsFieldSelSetHalfExtent                               = objc.RegisterName("setHalfExtent:")
+	_sCNPhysicsFieldSelUsesEllipsoidalExtent                       = objc.RegisterName("usesEllipsoidalExtent")
+	_sCNPhysicsFieldSelSetUsesEllipsoidalExtent                    = objc.RegisterName("setUsesEllipsoidalExtent:")
+	_sCNPhysicsFieldSelScope                                       = objc.RegisterName("scope")
+	_sCNPhysicsFieldSelSetScope                                    = objc.RegisterName("setScope:")
+	_sCNPhysicsFieldSelOffset                                      = objc.RegisterName("offset")
+	_sCNPhysicsFieldSelSetOffset                                   = objc.RegisterName("setOffset:")
+	_sCNPhysicsFieldSelDirection                                   = objc.RegisterName("direction")
+	_sCNPhysicsFieldSelSetDirection                                = objc.RegisterName("setDirection:")
+	_sCNPhysicsFieldSelCategoryBitMask                             = objc.RegisterName("categoryBitMask")
+	_sCNPhysicsFieldSelSetCategoryBitMask                          = objc.RegisterName("setCategoryBitMask:")
 )
 
 func SCNPhysicsFieldFromID(id objc.ID) *SCNPhysicsField {
@@ -64,70 +64,90 @@ func SCNPhysicsFieldFromID(id objc.ID) *SCNPhysicsField {
 // Slows an object proportionally to the object’s velocity. Use this to simulate effects such as friction from motion through the air.
 func SCNPhysicsFieldDragField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelDragField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // Applies a force tangential to the direction from the sample point to the field's position. The force will be CCW to the direction. Make the strength negative to apply force in the CW direction. Amount is proportional to distance from center and the object's mass. Use this to create effects such as tornadoes.
 func SCNPhysicsFieldVortexField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelVortexField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // Applies a force in the direction of the origin of the field in local space. To repel objects, use a negative strength. The force is proportional to the distance from the field origin. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
 func SCNPhysicsFieldRadialGravityField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelRadialGravityField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // Applies a force in the direction of the "direction" vector in the local space. To repel objects, use a negative strength. The force is the same everywhere in the field. Varies with the mass of the object according to F = ma The field node's rotation property can be used to orient the gravity in a particular direction.
 func SCNPhysicsFieldLinearGravityField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelLinearGravityField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // A time varying differentiable Perlin simplex noise field. A smoothness of 0 means as noisy as possible. Use this to simulate such effects as fireflies, or snow. To freeze the noise in place, set animationSpeed to 0.0. Mass is ignored. You can change the "smoothness" and "animationSpeed" using KVC.
 func SCNPhysicsFieldNoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelNoiseFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // Just like Noise, except the strength of the noise is proportional to the velocity of the object in the field.
 func SCNPhysicsFieldTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelTurbulenceFieldWithSmoothnessAnimationSpeed, smoothness, speed)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // A Hooke’s law force - a force linearly proportional to distance from the center of the field. An object in this field will oscillate with a period proportional to the inverse of the mass. An example use is to keep objects confined to a particular region.
 func SCNPhysicsFieldSpringField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelSpringField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // A force proportional to the charge on the object. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the first part of the Lorentz equation, F = qE
 func SCNPhysicsFieldElectricField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelElectricField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // A force proportional to the charge on the object and the object’s velocity. An example use of this field is to make objects behavior differently from one another when they enter a region, or to make an object's behavior different than its mass based behavior This field models the second part of the Lorentz equation, F = qvB
 func SCNPhysicsFieldMagneticField() *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelMagneticField)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
 // A field force with a custom force evaluator.
 func SCNPhysicsFieldCustomFieldWithEvaluationBlock(block objc.Block) *SCNPhysicsField {
 	_ret := objc.Send[objc.ID](objc.ID(_clsSCNPhysicsField), _sCNPhysicsFieldSelCustomFieldWithEvaluationBlock, block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SCNPhysicsFieldFromID(_ret)
 }
 
@@ -230,4 +250,3 @@ func (o *SCNPhysicsField) CategoryBitMask() uint {
 func (o *SCNPhysicsField) SetCategoryBitMask(categoryBitMask uint) {
 	o.Ptr().Send(_sCNPhysicsFieldSelSetCategoryBitMask, categoryBitMask)
 }
-

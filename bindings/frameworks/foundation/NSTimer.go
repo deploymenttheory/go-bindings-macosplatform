@@ -15,24 +15,24 @@ type NSTimer struct {
 }
 
 var (
-	_clsNSTimer = _objcClass("NSTimer")
-	_nSTimerSelTimerWithTimeIntervalInvocationRepeats = objc.RegisterName("timerWithTimeInterval:invocation:repeats:")
-	_nSTimerSelScheduledTimerWithTimeIntervalInvocationRepeats = objc.RegisterName("scheduledTimerWithTimeInterval:invocation:repeats:")
-	_nSTimerSelTimerWithTimeIntervalTargetSelectorUserInfoRepeats = objc.RegisterName("timerWithTimeInterval:target:selector:userInfo:repeats:")
+	_clsNSTimer                                                            = _objcClass("NSTimer")
+	_nSTimerSelTimerWithTimeIntervalInvocationRepeats                      = objc.RegisterName("timerWithTimeInterval:invocation:repeats:")
+	_nSTimerSelScheduledTimerWithTimeIntervalInvocationRepeats             = objc.RegisterName("scheduledTimerWithTimeInterval:invocation:repeats:")
+	_nSTimerSelTimerWithTimeIntervalTargetSelectorUserInfoRepeats          = objc.RegisterName("timerWithTimeInterval:target:selector:userInfo:repeats:")
 	_nSTimerSelScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats = objc.RegisterName("scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:")
-	_nSTimerSelTimerWithTimeIntervalRepeatsBlock = objc.RegisterName("timerWithTimeInterval:repeats:block:")
-	_nSTimerSelScheduledTimerWithTimeIntervalRepeatsBlock = objc.RegisterName("scheduledTimerWithTimeInterval:repeats:block:")
-	_nSTimerSelInitWithFireDateIntervalRepeatsBlock = objc.RegisterName("initWithFireDate:interval:repeats:block:")
-	_nSTimerSelInitWithFireDateIntervalTargetSelectorUserInfoRepeats = objc.RegisterName("initWithFireDate:interval:target:selector:userInfo:repeats:")
-	_nSTimerSelFire = objc.RegisterName("fire")
-	_nSTimerSelInvalidate = objc.RegisterName("invalidate")
-	_nSTimerSelFireDate = objc.RegisterName("fireDate")
-	_nSTimerSelSetFireDate = objc.RegisterName("setFireDate:")
-	_nSTimerSelTimeInterval = objc.RegisterName("timeInterval")
-	_nSTimerSelTolerance = objc.RegisterName("tolerance")
-	_nSTimerSelSetTolerance = objc.RegisterName("setTolerance:")
-	_nSTimerSelIsValid = objc.RegisterName("isValid")
-	_nSTimerSelUserInfo = objc.RegisterName("userInfo")
+	_nSTimerSelTimerWithTimeIntervalRepeatsBlock                           = objc.RegisterName("timerWithTimeInterval:repeats:block:")
+	_nSTimerSelScheduledTimerWithTimeIntervalRepeatsBlock                  = objc.RegisterName("scheduledTimerWithTimeInterval:repeats:block:")
+	_nSTimerSelInitWithFireDateIntervalRepeatsBlock                        = objc.RegisterName("initWithFireDate:interval:repeats:block:")
+	_nSTimerSelInitWithFireDateIntervalTargetSelectorUserInfoRepeats       = objc.RegisterName("initWithFireDate:interval:target:selector:userInfo:repeats:")
+	_nSTimerSelFire                                                        = objc.RegisterName("fire")
+	_nSTimerSelInvalidate                                                  = objc.RegisterName("invalidate")
+	_nSTimerSelFireDate                                                    = objc.RegisterName("fireDate")
+	_nSTimerSelSetFireDate                                                 = objc.RegisterName("setFireDate:")
+	_nSTimerSelTimeInterval                                                = objc.RegisterName("timeInterval")
+	_nSTimerSelTolerance                                                   = objc.RegisterName("tolerance")
+	_nSTimerSelSetTolerance                                                = objc.RegisterName("setTolerance:")
+	_nSTimerSelIsValid                                                     = objc.RegisterName("isValid")
+	_nSTimerSelUserInfo                                                    = objc.RegisterName("userInfo")
 )
 
 func NSTimerFromID(id objc.ID) *NSTimer {
@@ -47,25 +47,33 @@ func NSTimerFromID(id objc.ID) *NSTimer {
 
 func NSTimerTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *NSInvocation, yesOrNo bool) *NSTimer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelTimerWithTimeIntervalInvocationRepeats, ti, invocation.Ptr(), yesOrNo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
 func NSTimerScheduledTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *NSInvocation, yesOrNo bool) *NSTimer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelScheduledTimerWithTimeIntervalInvocationRepeats, ti, invocation.Ptr(), yesOrNo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
 func NSTimerTimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti float64, aTarget objc.ID, aSelector objc.SEL, userInfo objc.ID, yesOrNo bool) *NSTimer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelTimerWithTimeIntervalTargetSelectorUserInfoRepeats, ti, aTarget, aSelector, userInfo, yesOrNo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
 func NSTimerScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats(ti float64, aTarget objc.ID, aSelector objc.SEL, userInfo objc.ID, yesOrNo bool) *NSTimer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelScheduledTimerWithTimeIntervalTargetSelectorUserInfoRepeats, ti, aTarget, aSelector, userInfo, yesOrNo)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
@@ -82,7 +90,9 @@ func NSTimerTimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, bl
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelTimerWithTimeIntervalRepeatsBlock, interval, repeats, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func NSTimerScheduledTimerWithTimeIntervalRepeatsBlock(interval float64, repeats
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSTimer), _nSTimerSelScheduledTimerWithTimeIntervalRepeatsBlock, interval, repeats, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
@@ -116,13 +128,17 @@ func (o *NSTimer) InitWithFireDateIntervalRepeatsBlock(date *NSDate, interval fl
 		defer __block_block.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimerSelInitWithFireDateIntervalRepeatsBlock, date.Ptr(), interval, repeats, __block_block)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
 func (o *NSTimer) InitWithFireDateIntervalTargetSelectorUserInfoRepeats(date *NSDate, ti float64, t objc.ID, s objc.SEL, ui objc.ID, rep bool) *NSTimer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimerSelInitWithFireDateIntervalTargetSelectorUserInfoRepeats, date.Ptr(), ti, t, s, ui, rep)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimerFromID(_ret)
 }
 
@@ -136,7 +152,9 @@ func (o *NSTimer) Invalidate() {
 
 func (o *NSTimer) FireDate() *NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimerSelFireDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSDateFromID(_ret)
 }
 
@@ -167,4 +185,3 @@ func (o *NSTimer) UserInfo() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTimerSelUserInfo)
 	return _ret
 }
-

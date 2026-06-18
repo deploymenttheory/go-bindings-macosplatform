@@ -19,7 +19,9 @@ type FetchRecordZoneChangesOperation struct {
 }
 
 // Unwrap returns the underlying [raw.CKFetchRecordZoneChangesOperation].
-func (x *FetchRecordZoneChangesOperation) Unwrap() *raw.CKFetchRecordZoneChangesOperation { return x.inner }
+func (x *FetchRecordZoneChangesOperation) Unwrap() *raw.CKFetchRecordZoneChangesOperation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*raw.CKReco
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -314,9 +318,13 @@ func (x *FetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByReco
 	x.inner.SetOptionsByRecordZoneID(optionsByRecordZoneID)
 }
 
-func (x *FetchRecordZoneChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
+func (x *FetchRecordZoneChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
+	return &x.inner.CKDatabaseOperation
+}
 
-func (x *FetchRecordZoneChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+func (x *FetchRecordZoneChangesOperation) asOperation() *raw.CKOperation {
+	return &x.inner.CKDatabaseOperation.CKOperation
+}
 
 // FetchRecordZoneChangesOperationable is the interface implemented by [FetchRecordZoneChangesOperation], for mocking and DI.
 type FetchRecordZoneChangesOperationable interface {
@@ -363,4 +371,3 @@ type FetchRecordZoneChangesOperationable interface {
 }
 
 var _ FetchRecordZoneChangesOperationable = (*FetchRecordZoneChangesOperation)(nil)
-

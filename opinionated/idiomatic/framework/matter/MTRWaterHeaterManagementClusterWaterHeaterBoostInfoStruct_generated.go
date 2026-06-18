@@ -16,11 +16,15 @@ type MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct].
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Unwrap() *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct { return x.inner }
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Unwrap() *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID adopts an existing object pointer as a MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct (nil for 0).
 func MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(id objc.ID) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
@@ -156,4 +160,3 @@ type MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable interface {
 }
 
 var _ MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructable = (*MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)(nil)
-

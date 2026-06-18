@@ -16,8 +16,8 @@ type CKSyncEngineFetchChangesContext struct {
 }
 
 var (
-	_clsCKSyncEngineFetchChangesContext = _objcClass("CKSyncEngineFetchChangesContext")
-	_cKSyncEngineFetchChangesContextSelReason = objc.RegisterName("reason")
+	_clsCKSyncEngineFetchChangesContext        = _objcClass("CKSyncEngineFetchChangesContext")
+	_cKSyncEngineFetchChangesContextSelReason  = objc.RegisterName("reason")
 	_cKSyncEngineFetchChangesContextSelOptions = objc.RegisterName("options")
 )
 
@@ -40,7 +40,8 @@ func (o *CKSyncEngineFetchChangesContext) Reason() CKSyncEngineSyncReason {
 // The options being used for this attempt to fetch changes.
 func (o *CKSyncEngineFetchChangesContext) Options() *CKSyncEngineFetchChangesOptions {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cKSyncEngineFetchChangesContextSelOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CKSyncEngineFetchChangesOptionsFromID(_ret)
 }
-

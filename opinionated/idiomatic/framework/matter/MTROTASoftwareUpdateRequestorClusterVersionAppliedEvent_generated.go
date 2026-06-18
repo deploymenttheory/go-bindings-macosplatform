@@ -16,7 +16,9 @@ type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent { return x.inner }
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -48,7 +50,9 @@ func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent }
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
+	return &x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
+}
 
 // MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
@@ -58,4 +62,3 @@ type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)
-

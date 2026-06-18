@@ -17,38 +17,38 @@ type AVCaptureConnection struct {
 }
 
 var (
-	_clsAVCaptureConnection = _objcClass("AVCaptureConnection")
-	_aVCaptureConnectionSelConnectionWithInputPortsOutput = objc.RegisterName("connectionWithInputPorts:output:")
+	_clsAVCaptureConnection                                         = _objcClass("AVCaptureConnection")
+	_aVCaptureConnectionSelConnectionWithInputPortsOutput           = objc.RegisterName("connectionWithInputPorts:output:")
 	_aVCaptureConnectionSelConnectionWithInputPortVideoPreviewLayer = objc.RegisterName("connectionWithInputPort:videoPreviewLayer:")
-	_aVCaptureConnectionSelInitWithInputPortsOutput = objc.RegisterName("initWithInputPorts:output:")
-	_aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer = objc.RegisterName("initWithInputPort:videoPreviewLayer:")
-	_aVCaptureConnectionSelIsVideoRotationAngleSupported = objc.RegisterName("isVideoRotationAngleSupported:")
-	_aVCaptureConnectionSelInputPorts = objc.RegisterName("inputPorts")
-	_aVCaptureConnectionSelOutput = objc.RegisterName("output")
-	_aVCaptureConnectionSelVideoPreviewLayer = objc.RegisterName("videoPreviewLayer")
-	_aVCaptureConnectionSelIsEnabled = objc.RegisterName("isEnabled")
-	_aVCaptureConnectionSelSetEnabled = objc.RegisterName("setEnabled:")
-	_aVCaptureConnectionSelIsActive = objc.RegisterName("isActive")
-	_aVCaptureConnectionSelAudioChannels = objc.RegisterName("audioChannels")
-	_aVCaptureConnectionSelIsVideoMirroringSupported = objc.RegisterName("isVideoMirroringSupported")
-	_aVCaptureConnectionSelIsVideoMirrored = objc.RegisterName("isVideoMirrored")
-	_aVCaptureConnectionSelSetVideoMirrored = objc.RegisterName("setVideoMirrored:")
-	_aVCaptureConnectionSelAutomaticallyAdjustsVideoMirroring = objc.RegisterName("automaticallyAdjustsVideoMirroring")
-	_aVCaptureConnectionSelSetAutomaticallyAdjustsVideoMirroring = objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:")
-	_aVCaptureConnectionSelVideoRotationAngle = objc.RegisterName("videoRotationAngle")
-	_aVCaptureConnectionSelSetVideoRotationAngle = objc.RegisterName("setVideoRotationAngle:")
-	_aVCaptureConnectionSelIsVideoOrientationSupported = objc.RegisterName("isVideoOrientationSupported")
-	_aVCaptureConnectionSelVideoOrientation = objc.RegisterName("videoOrientation")
-	_aVCaptureConnectionSelSetVideoOrientation = objc.RegisterName("setVideoOrientation:")
-	_aVCaptureConnectionSelIsVideoFieldModeSupported = objc.RegisterName("isVideoFieldModeSupported")
-	_aVCaptureConnectionSelVideoFieldMode = objc.RegisterName("videoFieldMode")
-	_aVCaptureConnectionSelSetVideoFieldMode = objc.RegisterName("setVideoFieldMode:")
-	_aVCaptureConnectionSelIsVideoMinFrameDurationSupported = objc.RegisterName("isVideoMinFrameDurationSupported")
-	_aVCaptureConnectionSelVideoMinFrameDuration = objc.RegisterName("videoMinFrameDuration")
-	_aVCaptureConnectionSelSetVideoMinFrameDuration = objc.RegisterName("setVideoMinFrameDuration:")
-	_aVCaptureConnectionSelIsVideoMaxFrameDurationSupported = objc.RegisterName("isVideoMaxFrameDurationSupported")
-	_aVCaptureConnectionSelVideoMaxFrameDuration = objc.RegisterName("videoMaxFrameDuration")
-	_aVCaptureConnectionSelSetVideoMaxFrameDuration = objc.RegisterName("setVideoMaxFrameDuration:")
+	_aVCaptureConnectionSelInitWithInputPortsOutput                 = objc.RegisterName("initWithInputPorts:output:")
+	_aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer       = objc.RegisterName("initWithInputPort:videoPreviewLayer:")
+	_aVCaptureConnectionSelIsVideoRotationAngleSupported            = objc.RegisterName("isVideoRotationAngleSupported:")
+	_aVCaptureConnectionSelInputPorts                               = objc.RegisterName("inputPorts")
+	_aVCaptureConnectionSelOutput                                   = objc.RegisterName("output")
+	_aVCaptureConnectionSelVideoPreviewLayer                        = objc.RegisterName("videoPreviewLayer")
+	_aVCaptureConnectionSelIsEnabled                                = objc.RegisterName("isEnabled")
+	_aVCaptureConnectionSelSetEnabled                               = objc.RegisterName("setEnabled:")
+	_aVCaptureConnectionSelIsActive                                 = objc.RegisterName("isActive")
+	_aVCaptureConnectionSelAudioChannels                            = objc.RegisterName("audioChannels")
+	_aVCaptureConnectionSelIsVideoMirroringSupported                = objc.RegisterName("isVideoMirroringSupported")
+	_aVCaptureConnectionSelIsVideoMirrored                          = objc.RegisterName("isVideoMirrored")
+	_aVCaptureConnectionSelSetVideoMirrored                         = objc.RegisterName("setVideoMirrored:")
+	_aVCaptureConnectionSelAutomaticallyAdjustsVideoMirroring       = objc.RegisterName("automaticallyAdjustsVideoMirroring")
+	_aVCaptureConnectionSelSetAutomaticallyAdjustsVideoMirroring    = objc.RegisterName("setAutomaticallyAdjustsVideoMirroring:")
+	_aVCaptureConnectionSelVideoRotationAngle                       = objc.RegisterName("videoRotationAngle")
+	_aVCaptureConnectionSelSetVideoRotationAngle                    = objc.RegisterName("setVideoRotationAngle:")
+	_aVCaptureConnectionSelIsVideoOrientationSupported              = objc.RegisterName("isVideoOrientationSupported")
+	_aVCaptureConnectionSelVideoOrientation                         = objc.RegisterName("videoOrientation")
+	_aVCaptureConnectionSelSetVideoOrientation                      = objc.RegisterName("setVideoOrientation:")
+	_aVCaptureConnectionSelIsVideoFieldModeSupported                = objc.RegisterName("isVideoFieldModeSupported")
+	_aVCaptureConnectionSelVideoFieldMode                           = objc.RegisterName("videoFieldMode")
+	_aVCaptureConnectionSelSetVideoFieldMode                        = objc.RegisterName("setVideoFieldMode:")
+	_aVCaptureConnectionSelIsVideoMinFrameDurationSupported         = objc.RegisterName("isVideoMinFrameDurationSupported")
+	_aVCaptureConnectionSelVideoMinFrameDuration                    = objc.RegisterName("videoMinFrameDuration")
+	_aVCaptureConnectionSelSetVideoMinFrameDuration                 = objc.RegisterName("setVideoMinFrameDuration:")
+	_aVCaptureConnectionSelIsVideoMaxFrameDurationSupported         = objc.RegisterName("isVideoMaxFrameDurationSupported")
+	_aVCaptureConnectionSelVideoMaxFrameDuration                    = objc.RegisterName("videoMaxFrameDuration")
+	_aVCaptureConnectionSelSetVideoMaxFrameDuration                 = objc.RegisterName("setVideoMaxFrameDuration:")
 )
 
 func AVCaptureConnectionFromID(id objc.ID) *AVCaptureConnection {
@@ -64,28 +64,36 @@ func AVCaptureConnectionFromID(id objc.ID) *AVCaptureConnection {
 // @method connectionWithInputPorts:output: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPorts and the specified output. @param ports An array of AVCaptureInputPort objects associated with AVCaptureInput objects. @param output An AVCaptureOutput object. @result An AVCaptureConnection instance joining the specified inputPorts to the specified output port. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
 func AVCaptureConnectionConnectionWithInputPortsOutput(ports *foundation.NSArray[*AVCaptureInputPort], output *AVCaptureOutput) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureConnection), _aVCaptureConnectionSelConnectionWithInputPortsOutput, ports.Ptr(), output.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
 // @method connectionWithInputPort:videoPreviewLayer: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPort and the specified AVCaptureVideoPreviewLayer instance. @param port An AVCaptureInputPort object associated with an AVCaptureInput object. @param layer An AVCaptureVideoPreviewLayer object. @result An AVCaptureConnection instance joining the specified inputPort to the specified video preview layer. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
 func AVCaptureConnectionConnectionWithInputPortVideoPreviewLayer(port *AVCaptureInputPort, layer *AVCaptureVideoPreviewLayer) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptureConnection), _aVCaptureConnectionSelConnectionWithInputPortVideoPreviewLayer, port.Ptr(), layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
 // @method initWithInputPorts:output: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPorts and the specified output. @param ports An array of AVCaptureInputPort objects associated with AVCaptureInput objects. @param output An AVCaptureOutput object. @result An AVCaptureConnection instance joining the specified inputPorts to the specified output port. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
 func (o *AVCaptureConnection) InitWithInputPortsOutput(ports *foundation.NSArray[*AVCaptureInputPort], output *AVCaptureOutput) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelInitWithInputPortsOutput, ports.Ptr(), output.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
 // @method initWithInputPort:videoPreviewLayer: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPort and the specified AVCaptureVideoPreviewLayer instance. @param port An AVCaptureInputPort object associated with an AVCaptureInput object. @param layer An AVCaptureVideoPreviewLayer object. @result An AVCaptureConnection instance joining the specified inputPort to the specified video preview layer. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
 func (o *AVCaptureConnection) InitWithInputPortVideoPreviewLayer(port *AVCaptureInputPort, layer *AVCaptureVideoPreviewLayer) *AVCaptureConnection {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelInitWithInputPortVideoPreviewLayer, port.Ptr(), layer.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureConnectionFromID(_ret)
 }
 
@@ -98,21 +106,27 @@ func (o *AVCaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle f
 // @property inputPorts @abstract An array of AVCaptureInputPort instances providing data through this connection. @discussion An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's inputPorts remain static for the life of the object.
 func (o *AVCaptureConnection) InputPorts() *foundation.NSArray[*AVCaptureInputPort] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelInputPorts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureInputPort](_ret)
 }
 
 // @property output @abstract The AVCaptureOutput instance consuming data from this connection's inputPorts. @discussion An AVCaptureConnection may involve one or more AVCaptureInputPorts producing data to the connection's AVCaptureOutput. This property is read-only. An AVCaptureConnection's output remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
 func (o *AVCaptureConnection) Output() *AVCaptureOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelOutput)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureOutputFromID(_ret)
 }
 
 // @property videoPreviewLayer @abstract The AVCaptureVideoPreviewLayer instance consuming data from this connection's inputPort. @discussion An AVCaptureConnection may involve one AVCaptureInputPort producing data to an AVCaptureVideoPreviewLayer object. This property is read-only. An AVCaptureConnection's videoPreviewLayer remains static for the life of the object. Note that a connection can either be to an output or a video preview layer, but never to both.
 func (o *AVCaptureConnection) VideoPreviewLayer() *AVCaptureVideoPreviewLayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelVideoPreviewLayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVCaptureVideoPreviewLayerFromID(_ret)
 }
 
@@ -135,7 +149,9 @@ func (o *AVCaptureConnection) IsActive() bool {
 // @property audioChannels @abstract An array of AVCaptureAudioChannel objects representing individual channels of audio data flowing through the connection. @discussion This property is only applicable to AVCaptureConnection instances involving audio. In such connections, the audioChannels array contains one AVCaptureAudioChannel object for each channel of audio data flowing through this connection.
 func (o *AVCaptureConnection) AudioChannels() *foundation.NSArray[*AVCaptureAudioChannel] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVCaptureConnectionSelAudioChannels)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AVCaptureAudioChannel](_ret)
 }
 
@@ -241,4 +257,3 @@ func (o *AVCaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
 func (o *AVCaptureConnection) SetVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) {
 	o.Ptr().Send(_aVCaptureConnectionSelSetVideoMaxFrameDuration, videoMaxFrameDuration)
 }
-

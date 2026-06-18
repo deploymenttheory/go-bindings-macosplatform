@@ -65,9 +65,13 @@ func (x *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
 	return x.inner.MaskStrideInPixels()
 }
 
-func (x *CNNDropoutGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
+func (x *CNNDropoutGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
+	return &x.inner.MPSNNGradientFilterNode
+}
 
-func (x *CNNDropoutGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+func (x *CNNDropoutGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
+	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+}
 
 // CNNDropoutGradientNodeable is the interface implemented by [CNNDropoutGradientNode], for mocking and DI.
 type CNNDropoutGradientNodeable interface {
@@ -80,4 +84,3 @@ type CNNDropoutGradientNodeable interface {
 }
 
 var _ CNNDropoutGradientNodeable = (*CNNDropoutGradientNode)(nil)
-

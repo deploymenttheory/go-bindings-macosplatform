@@ -16,7 +16,9 @@ type MTRUnitTestingClusterTestListInt8UReverseRequestParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams].
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -78,7 +80,9 @@ func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetServerSidePr
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 }
 
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) asMTRUnitTestingClusterTestListInt8UReverseRequestParams() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams { return x.inner }
+func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) asMTRUnitTestingClusterTestListInt8UReverseRequestParams() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestListInt8UReverseRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestListInt8UReverseRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestListInt8UReverseRequestParamsable interface {
@@ -94,4 +98,3 @@ type MTRUnitTestingClusterTestListInt8UReverseRequestParamsable interface {
 }
 
 var _ MTRUnitTestingClusterTestListInt8UReverseRequestParamsable = (*MTRUnitTestingClusterTestListInt8UReverseRequestParams)(nil)
-

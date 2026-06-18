@@ -16,9 +16,9 @@ type PHProjectTextElement struct {
 }
 
 var (
-	_clsPHProjectTextElement = _objcClass("PHProjectTextElement")
-	_pHProjectTextElementSelText = objc.RegisterName("text")
-	_pHProjectTextElementSelAttributedText = objc.RegisterName("attributedText")
+	_clsPHProjectTextElement                = _objcClass("PHProjectTextElement")
+	_pHProjectTextElementSelText            = objc.RegisterName("text")
+	_pHProjectTextElementSelAttributedText  = objc.RegisterName("attributedText")
 	_pHProjectTextElementSelTextElementType = objc.RegisterName("textElementType")
 )
 
@@ -35,14 +35,18 @@ func PHProjectTextElementFromID(id objc.ID) *PHProjectTextElement {
 // Unformatted, raw string for the text element
 func (o *PHProjectTextElement) Text() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTextElementSelText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // If the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
 func (o *PHProjectTextElement) AttributedText() *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHProjectTextElementSelAttributedText)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSAttributedStringFromID(_ret)
 }
 
@@ -50,4 +54,3 @@ func (o *PHProjectTextElement) TextElementType() PHProjectTextElementType {
 	_ret := objc.Send[PHProjectTextElementType](o.Ptr(), _pHProjectTextElementSelTextElementType)
 	return _ret
 }
-

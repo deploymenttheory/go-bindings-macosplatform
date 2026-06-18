@@ -59,4 +59,3 @@ type PickerResultable interface {
 }
 
 var _ PickerResultable = (*PickerResult)(nil)
-

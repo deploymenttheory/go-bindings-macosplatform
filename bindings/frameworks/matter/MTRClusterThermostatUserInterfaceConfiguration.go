@@ -16,23 +16,23 @@ type MTRClusterThermostatUserInterfaceConfiguration struct {
 }
 
 var (
-	_clsMTRClusterThermostatUserInterfaceConfiguration = _objcClass("MTRClusterThermostatUserInterfaceConfiguration")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeTemperatureDisplayModeWithParams = objc.RegisterName("readAttributeTemperatureDisplayModeWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval = objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:params:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeKeypadLockoutWithParams = objc.RegisterName("readAttributeKeypadLockoutWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeKeypadLockoutWithValueExpectedValueInterval = objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:params:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeScheduleProgrammingVisibilityWithParams = objc.RegisterName("readAttributeScheduleProgrammingVisibilityWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval = objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:")
+	_clsMTRClusterThermostatUserInterfaceConfiguration                                                                                = _objcClass("MTRClusterThermostatUserInterfaceConfiguration")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeTemperatureDisplayModeWithParams                                   = objc.RegisterName("readAttributeTemperatureDisplayModeWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval              = objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams        = objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:params:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeKeypadLockoutWithParams                                            = objc.RegisterName("readAttributeKeypadLockoutWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeKeypadLockoutWithValueExpectedValueInterval                       = objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams                 = objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:params:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeScheduleProgrammingVisibilityWithParams                            = objc.RegisterName("readAttributeScheduleProgrammingVisibilityWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval       = objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:")
 	_mTRClusterThermostatUserInterfaceConfigurationSelWriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams = objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:params:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeGeneratedCommandListWithParams                                     = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeAcceptedCommandListWithParams                                      = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeAttributeListWithParams                                            = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeFeatureMapWithParams                                               = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelReadAttributeClusterRevisionWithParams                                          = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointIDQueue                                                   = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointQueue                                                     = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterThermostatUserInterfaceConfigurationFromID(id objc.ID) *MTRClusterThermostatUserInterfaceConfiguration {
@@ -112,13 +112,16 @@ func (o *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRev
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterThermostatUserInterfaceConfiguration) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThermostatUserInterfaceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterThermostatUserInterfaceConfigurationFromID(_ret)
 }
 
 func (o *MTRClusterThermostatUserInterfaceConfiguration) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterThermostatUserInterfaceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterThermostatUserInterfaceConfigurationSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterThermostatUserInterfaceConfigurationFromID(_ret)
 }
-

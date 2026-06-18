@@ -100,9 +100,13 @@ func (x *NNReduceColumnMean) WithDestinationImageAllocator(destinationImageAlloc
 	return x
 }
 
-func (x *NNReduceColumnMean) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
+func (x *NNReduceColumnMean) asNNReduceUnary() *raw.MPSNNReduceUnary {
+	return &x.inner.MPSNNReduceUnary
+}
 
-func (x *NNReduceColumnMean) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
+func (x *NNReduceColumnMean) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSNNReduceUnary.MPSCNNKernel
+}
 
 // NNReduceColumnMeanable is the interface implemented by [NNReduceColumnMean], for mocking and DI.
 type NNReduceColumnMeanable interface {
@@ -119,4 +123,3 @@ type NNReduceColumnMeanable interface {
 }
 
 var _ NNReduceColumnMeanable = (*NNReduceColumnMean)(nil)
-

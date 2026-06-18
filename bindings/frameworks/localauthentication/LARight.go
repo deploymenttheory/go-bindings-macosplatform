@@ -20,15 +20,15 @@ type LARight struct {
 }
 
 var (
-	_clsLARight = _objcClass("LARight")
-	_lARightSelInit = objc.RegisterName("init")
-	_lARightSelInitWithRequirement = objc.RegisterName("initWithRequirement:")
+	_clsLARight                                       = _objcClass("LARight")
+	_lARightSelInit                                   = objc.RegisterName("init")
+	_lARightSelInitWithRequirement                    = objc.RegisterName("initWithRequirement:")
 	_lARightSelAuthorizeWithLocalizedReasonCompletion = objc.RegisterName("authorizeWithLocalizedReason:completion:")
-	_lARightSelCheckCanAuthorizeWithCompletion = objc.RegisterName("checkCanAuthorizeWithCompletion:")
-	_lARightSelDeauthorizeWithCompletion = objc.RegisterName("deauthorizeWithCompletion:")
-	_lARightSelState = objc.RegisterName("state")
-	_lARightSelTag = objc.RegisterName("tag")
-	_lARightSelSetTag = objc.RegisterName("setTag:")
+	_lARightSelCheckCanAuthorizeWithCompletion        = objc.RegisterName("checkCanAuthorizeWithCompletion:")
+	_lARightSelDeauthorizeWithCompletion              = objc.RegisterName("deauthorizeWithCompletion:")
+	_lARightSelState                                  = objc.RegisterName("state")
+	_lARightSelTag                                    = objc.RegisterName("tag")
+	_lARightSelSetTag                                 = objc.RegisterName("setTag:")
 )
 
 func LARightFromID(id objc.ID) *LARight {
@@ -44,14 +44,18 @@ func LARightFromID(id objc.ID) *LARight {
 // @brief Constructs a right using default authorization requirements @discussion For authorizing a right with default requirements a user will be asked to authenticate using biometry or the device passcode. @return @c LARight instance
 func (o *LARight) Init() *LARight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lARightSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LARightFromID(_ret)
 }
 
 // @brief Constructs a right that will be granted only when the given @c LAAuthenticationRequirement is satisfied. @param requirement Requirement that needs to be satisfied to authorize the right @return @c LARight instance
 func (o *LARight) InitWithRequirement(requirement *LAAuthenticationRequirement) *LARight {
 	_ret := objc.Send[objc.ID](o.Ptr(), _lARightSelInitWithRequirement, requirement.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return LARightFromID(_ret)
 }
 
@@ -106,4 +110,3 @@ func (o *LARight) Tag() int {
 func (o *LARight) SetTag(tag int) {
 	o.Ptr().Send(_lARightSelSetTag, tag)
 }
-

@@ -300,4 +300,3 @@ type StereoscopicCameraable interface {
 }
 
 var _ StereoscopicCameraable = (*StereoscopicCamera)(nil)
-

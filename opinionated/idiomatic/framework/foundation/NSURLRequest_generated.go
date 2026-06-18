@@ -215,4 +215,3 @@ type URLRequestable interface {
 }
 
 var _ URLRequestable = (*URLRequest)(nil)
-

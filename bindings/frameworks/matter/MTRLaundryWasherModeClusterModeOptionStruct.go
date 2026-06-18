@@ -16,12 +16,12 @@ type MTRLaundryWasherModeClusterModeOptionStruct struct {
 }
 
 var (
-	_clsMTRLaundryWasherModeClusterModeOptionStruct = _objcClass("MTRLaundryWasherModeClusterModeOptionStruct")
-	_mTRLaundryWasherModeClusterModeOptionStructSelLabel = objc.RegisterName("label")
-	_mTRLaundryWasherModeClusterModeOptionStructSelSetLabel = objc.RegisterName("setLabel:")
-	_mTRLaundryWasherModeClusterModeOptionStructSelMode = objc.RegisterName("mode")
-	_mTRLaundryWasherModeClusterModeOptionStructSelSetMode = objc.RegisterName("setMode:")
-	_mTRLaundryWasherModeClusterModeOptionStructSelModeTags = objc.RegisterName("modeTags")
+	_clsMTRLaundryWasherModeClusterModeOptionStruct            = _objcClass("MTRLaundryWasherModeClusterModeOptionStruct")
+	_mTRLaundryWasherModeClusterModeOptionStructSelLabel       = objc.RegisterName("label")
+	_mTRLaundryWasherModeClusterModeOptionStructSelSetLabel    = objc.RegisterName("setLabel:")
+	_mTRLaundryWasherModeClusterModeOptionStructSelMode        = objc.RegisterName("mode")
+	_mTRLaundryWasherModeClusterModeOptionStructSelSetMode     = objc.RegisterName("setMode:")
+	_mTRLaundryWasherModeClusterModeOptionStructSelModeTags    = objc.RegisterName("modeTags")
 	_mTRLaundryWasherModeClusterModeOptionStructSelSetModeTags = objc.RegisterName("setModeTags:")
 )
 
@@ -37,7 +37,9 @@ func MTRLaundryWasherModeClusterModeOptionStructFromID(id objc.ID) *MTRLaundryWa
 
 func (o *MTRLaundryWasherModeClusterModeOptionStruct) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLaundryWasherModeClusterModeOptionStructSelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRLaundryWasherModeClusterModeOptionStruct) SetLabel(label *foundation
 
 func (o *MTRLaundryWasherModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRLaundryWasherModeClusterModeOptionStructSelMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *MTRLaundryWasherModeClusterModeOptionStruct) ModeTags() *foundation.NSA
 func (o *MTRLaundryWasherModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
 	o.Ptr().Send(_mTRLaundryWasherModeClusterModeOptionStructSelSetModeTags, modeTags)
 }
-

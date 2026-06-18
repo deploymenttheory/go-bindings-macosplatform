@@ -16,8 +16,8 @@ type VNVideoProcessorRequestProcessingOptions struct {
 }
 
 var (
-	_clsVNVideoProcessorRequestProcessingOptions = _objcClass("VNVideoProcessorRequestProcessingOptions")
-	_vNVideoProcessorRequestProcessingOptionsSelCadence = objc.RegisterName("cadence")
+	_clsVNVideoProcessorRequestProcessingOptions           = _objcClass("VNVideoProcessorRequestProcessingOptions")
+	_vNVideoProcessorRequestProcessingOptionsSelCadence    = objc.RegisterName("cadence")
 	_vNVideoProcessorRequestProcessingOptionsSelSetCadence = objc.RegisterName("setCadence:")
 )
 
@@ -33,11 +33,12 @@ func VNVideoProcessorRequestProcessingOptionsFromID(id objc.ID) *VNVideoProcesso
 
 func (o *VNVideoProcessorRequestProcessingOptions) Cadence() *VNVideoProcessorCadence {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vNVideoProcessorRequestProcessingOptionsSelCadence)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VNVideoProcessorCadenceFromID(_ret)
 }
 
 func (o *VNVideoProcessorRequestProcessingOptions) SetCadence(cadence *VNVideoProcessorCadence) {
 	o.Ptr().Send(_vNVideoProcessorRequestProcessingOptionsSelSetCadence, cadence.Ptr())
 }
-

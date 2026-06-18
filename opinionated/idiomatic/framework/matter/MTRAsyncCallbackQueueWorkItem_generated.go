@@ -93,4 +93,3 @@ type MTRAsyncCallbackQueueWorkItemable interface {
 }
 
 var _ MTRAsyncCallbackQueueWorkItemable = (*MTRAsyncCallbackQueueWorkItem)(nil)
-

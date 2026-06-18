@@ -16,13 +16,13 @@ type NSPropertyMapping struct {
 }
 
 var (
-	_clsNSPropertyMapping = _objcClass("NSPropertyMapping")
-	_nSPropertyMappingSelName = objc.RegisterName("name")
-	_nSPropertyMappingSelSetName = objc.RegisterName("setName:")
-	_nSPropertyMappingSelValueExpression = objc.RegisterName("valueExpression")
+	_clsNSPropertyMapping                   = _objcClass("NSPropertyMapping")
+	_nSPropertyMappingSelName               = objc.RegisterName("name")
+	_nSPropertyMappingSelSetName            = objc.RegisterName("setName:")
+	_nSPropertyMappingSelValueExpression    = objc.RegisterName("valueExpression")
 	_nSPropertyMappingSelSetValueExpression = objc.RegisterName("setValueExpression:")
-	_nSPropertyMappingSelUserInfo = objc.RegisterName("userInfo")
-	_nSPropertyMappingSelSetUserInfo = objc.RegisterName("setUserInfo:")
+	_nSPropertyMappingSelUserInfo           = objc.RegisterName("userInfo")
+	_nSPropertyMappingSelSetUserInfo        = objc.RegisterName("setUserInfo:")
 )
 
 func NSPropertyMappingFromID(id objc.ID) *NSPropertyMapping {
@@ -37,7 +37,9 @@ func NSPropertyMappingFromID(id objc.ID) *NSPropertyMapping {
 
 func (o *NSPropertyMapping) Name() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyMappingSelName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *NSPropertyMapping) SetName(name *foundation.NSString) {
 
 func (o *NSPropertyMapping) ValueExpression() *foundation.NSExpression {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPropertyMappingSelValueExpression)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSExpressionFromID(_ret)
 }
 
@@ -63,4 +67,3 @@ func (o *NSPropertyMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID
 func (o *NSPropertyMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
 	o.Ptr().Send(_nSPropertyMappingSelSetUserInfo, userInfo)
 }
-

@@ -16,20 +16,20 @@ type NSPersistentHistoryTransaction struct {
 }
 
 var (
-	_clsNSPersistentHistoryTransaction = _objcClass("NSPersistentHistoryTransaction")
+	_clsNSPersistentHistoryTransaction                             = _objcClass("NSPersistentHistoryTransaction")
 	_nSPersistentHistoryTransactionSelEntityDescriptionWithContext = objc.RegisterName("entityDescriptionWithContext:")
-	_nSPersistentHistoryTransactionSelObjectIDNotification = objc.RegisterName("objectIDNotification")
-	_nSPersistentHistoryTransactionSelEntityDescription = objc.RegisterName("entityDescription")
-	_nSPersistentHistoryTransactionSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSPersistentHistoryTransactionSelTimestamp = objc.RegisterName("timestamp")
-	_nSPersistentHistoryTransactionSelChanges = objc.RegisterName("changes")
-	_nSPersistentHistoryTransactionSelTransactionNumber = objc.RegisterName("transactionNumber")
-	_nSPersistentHistoryTransactionSelStoreID = objc.RegisterName("storeID")
-	_nSPersistentHistoryTransactionSelBundleID = objc.RegisterName("bundleID")
-	_nSPersistentHistoryTransactionSelProcessID = objc.RegisterName("processID")
-	_nSPersistentHistoryTransactionSelContextName = objc.RegisterName("contextName")
-	_nSPersistentHistoryTransactionSelAuthor = objc.RegisterName("author")
-	_nSPersistentHistoryTransactionSelToken = objc.RegisterName("token")
+	_nSPersistentHistoryTransactionSelObjectIDNotification         = objc.RegisterName("objectIDNotification")
+	_nSPersistentHistoryTransactionSelEntityDescription            = objc.RegisterName("entityDescription")
+	_nSPersistentHistoryTransactionSelFetchRequest                 = objc.RegisterName("fetchRequest")
+	_nSPersistentHistoryTransactionSelTimestamp                    = objc.RegisterName("timestamp")
+	_nSPersistentHistoryTransactionSelChanges                      = objc.RegisterName("changes")
+	_nSPersistentHistoryTransactionSelTransactionNumber            = objc.RegisterName("transactionNumber")
+	_nSPersistentHistoryTransactionSelStoreID                      = objc.RegisterName("storeID")
+	_nSPersistentHistoryTransactionSelBundleID                     = objc.RegisterName("bundleID")
+	_nSPersistentHistoryTransactionSelProcessID                    = objc.RegisterName("processID")
+	_nSPersistentHistoryTransactionSelContextName                  = objc.RegisterName("contextName")
+	_nSPersistentHistoryTransactionSelAuthor                       = objc.RegisterName("author")
+	_nSPersistentHistoryTransactionSelToken                        = objc.RegisterName("token")
 )
 
 func NSPersistentHistoryTransactionFromID(id objc.ID) *NSPersistentHistoryTransaction {
@@ -44,19 +44,25 @@ func NSPersistentHistoryTransactionFromID(id objc.ID) *NSPersistentHistoryTransa
 
 func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *NSManagedObjectContext) *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryTransaction), _nSPersistentHistoryTransactionSelEntityDescriptionWithContext, context_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) ObjectIDNotification() *foundation.NSNotification {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelObjectIDNotification)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNotificationFromID(_ret)
 }
 
 func NSPersistentHistoryTransactionEntityDescription() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryTransaction), _nSPersistentHistoryTransactionSelEntityDescription)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -67,13 +73,17 @@ func NSPersistentHistoryTransactionFetchRequest() *NSFetchRequest[objc.ID] {
 
 func (o *NSPersistentHistoryTransaction) Timestamp() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelTimestamp)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) Changes() *foundation.NSArray[*NSPersistentHistoryChange] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelChanges)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSPersistentHistoryChange](_ret)
 }
 
@@ -84,37 +94,48 @@ func (o *NSPersistentHistoryTransaction) TransactionNumber() int64 {
 
 func (o *NSPersistentHistoryTransaction) StoreID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelStoreID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) BundleID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelBundleID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) ProcessID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelProcessID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) ContextName() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelContextName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) Author() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelAuthor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *NSPersistentHistoryTransaction) Token() *NSPersistentHistoryToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryTransactionSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryTokenFromID(_ret)
 }
-

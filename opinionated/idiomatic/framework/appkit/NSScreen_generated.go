@@ -210,4 +210,3 @@ type Screenable interface {
 }
 
 var _ Screenable = (*Screen)(nil)
-

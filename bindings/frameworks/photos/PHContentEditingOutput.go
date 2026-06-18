@@ -19,14 +19,14 @@ type PHContentEditingOutput struct {
 }
 
 var (
-	_clsPHContentEditingOutput = _objcClass("PHContentEditingOutput")
-	_pHContentEditingOutputSelInitWithContentEditingInput = objc.RegisterName("initWithContentEditingInput:")
-	_pHContentEditingOutputSelRenderedContentURLForTypeError = objc.RegisterName("renderedContentURLForType:error:")
-	_pHContentEditingOutputSelAdjustmentData = objc.RegisterName("adjustmentData")
-	_pHContentEditingOutputSelSetAdjustmentData = objc.RegisterName("setAdjustmentData:")
-	_pHContentEditingOutputSelRenderedContentURL = objc.RegisterName("renderedContentURL")
-	_pHContentEditingOutputSelDefaultRenderedContentType = objc.RegisterName("defaultRenderedContentType")
-	_pHContentEditingOutputSelSupportedRenderedContentTypes = objc.RegisterName("supportedRenderedContentTypes")
+	_clsPHContentEditingOutput                                   = _objcClass("PHContentEditingOutput")
+	_pHContentEditingOutputSelInitWithContentEditingInput        = objc.RegisterName("initWithContentEditingInput:")
+	_pHContentEditingOutputSelRenderedContentURLForTypeError     = objc.RegisterName("renderedContentURLForType:error:")
+	_pHContentEditingOutputSelAdjustmentData                     = objc.RegisterName("adjustmentData")
+	_pHContentEditingOutputSelSetAdjustmentData                  = objc.RegisterName("setAdjustmentData:")
+	_pHContentEditingOutputSelRenderedContentURL                 = objc.RegisterName("renderedContentURL")
+	_pHContentEditingOutputSelDefaultRenderedContentType         = objc.RegisterName("defaultRenderedContentType")
+	_pHContentEditingOutputSelSupportedRenderedContentTypes      = objc.RegisterName("supportedRenderedContentTypes")
 	_pHContentEditingOutputSelInitWithPlaceholderForCreatedAsset = objc.RegisterName("initWithPlaceholderForCreatedAsset:")
 )
 
@@ -42,7 +42,9 @@ func PHContentEditingOutputFromID(id objc.ID) *PHContentEditingOutput {
 
 func (o *PHContentEditingOutput) InitWithContentEditingInput(contentEditingInput *PHContentEditingInput) *PHContentEditingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelInitWithContentEditingInput, contentEditingInput.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHContentEditingOutputFromID(_ret)
 }
 
@@ -50,7 +52,9 @@ func (o *PHContentEditingOutput) InitWithContentEditingInput(contentEditingInput
 func (o *PHContentEditingOutput) RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelRenderedContentURLForTypeError, type_.Ptr(), unsafe.Pointer(&_nsErr))
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,7 +63,9 @@ func (o *PHContentEditingOutput) RenderedContentURLForTypeError(type_ *uniformty
 
 func (o *PHContentEditingOutput) AdjustmentData() *PHAdjustmentData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelAdjustmentData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHAdjustmentDataFromID(_ret)
 }
 
@@ -70,14 +76,18 @@ func (o *PHContentEditingOutput) SetAdjustmentData(adjustmentData *PHAdjustmentD
 // File URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
 func (o *PHContentEditingOutput) RenderedContentURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelRenderedContentURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
 
 // Returns the default type for the rendered content output
 func (o *PHContentEditingOutput) DefaultRenderedContentType() *uniformtypeidentifiers.UTType {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelDefaultRenderedContentType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return uniformtypeidentifiers.UTTypeFromID(_ret)
 }
 
@@ -89,7 +99,8 @@ func (o *PHContentEditingOutput) SupportedRenderedContentTypes() *foundation.NSA
 
 func (o *PHContentEditingOutput) InitWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *PHObjectPlaceholder) *PHContentEditingOutput {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pHContentEditingOutputSelInitWithPlaceholderForCreatedAsset, placeholderForCreatedAsset.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PHContentEditingOutputFromID(_ret)
 }
-

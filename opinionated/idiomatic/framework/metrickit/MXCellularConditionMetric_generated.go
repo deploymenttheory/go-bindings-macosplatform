@@ -49,4 +49,3 @@ type CellularConditionMetricable interface {
 }
 
 var _ CellularConditionMetricable = (*CellularConditionMetric)(nil)
-

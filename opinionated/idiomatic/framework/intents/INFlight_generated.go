@@ -104,4 +104,3 @@ type Flightable interface {
 }
 
 var _ Flightable = (*Flight)(nil)
-

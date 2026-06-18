@@ -66,4 +66,3 @@ type ProductsResponseable interface {
 }
 
 var _ ProductsResponseable = (*ProductsResponse)(nil)
-

@@ -16,12 +16,12 @@ type GCRacingWheelInputState struct {
 }
 
 var (
-	_clsGCRacingWheelInputState = _objcClass("GCRacingWheelInputState")
-	_gCRacingWheelInputStateSelWheel = objc.RegisterName("wheel")
+	_clsGCRacingWheelInputState                 = _objcClass("GCRacingWheelInputState")
+	_gCRacingWheelInputStateSelWheel            = objc.RegisterName("wheel")
 	_gCRacingWheelInputStateSelAcceleratorPedal = objc.RegisterName("acceleratorPedal")
-	_gCRacingWheelInputStateSelBrakePedal = objc.RegisterName("brakePedal")
-	_gCRacingWheelInputStateSelClutchPedal = objc.RegisterName("clutchPedal")
-	_gCRacingWheelInputStateSelShifter = objc.RegisterName("shifter")
+	_gCRacingWheelInputStateSelBrakePedal       = objc.RegisterName("brakePedal")
+	_gCRacingWheelInputStateSelClutchPedal      = objc.RegisterName("clutchPedal")
+	_gCRacingWheelInputStateSelShifter          = objc.RegisterName("shifter")
 )
 
 func GCRacingWheelInputStateFromID(id objc.ID) *GCRacingWheelInputState {
@@ -37,7 +37,9 @@ func GCRacingWheelInputStateFromID(id objc.ID) *GCRacingWheelInputState {
 // The steering wheel element.
 func (o *GCRacingWheelInputState) Wheel() *GCSteeringWheelElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputStateSelWheel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCSteeringWheelElementFromID(_ret)
 }
 
@@ -59,7 +61,8 @@ func (o *GCRacingWheelInputState) ClutchPedal() GCButtonElement {
 // The element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
 func (o *GCRacingWheelInputState) Shifter() *GCGearShifterElement {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gCRacingWheelInputStateSelShifter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GCGearShifterElementFromID(_ret)
 }
-

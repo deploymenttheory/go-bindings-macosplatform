@@ -19,11 +19,11 @@ type NSMovie struct {
 }
 
 var (
-	_clsNSMovie = _objcClass("NSMovie")
+	_clsNSMovie              = _objcClass("NSMovie")
 	_nSMovieSelInitWithCoder = objc.RegisterName("initWithCoder:")
-	_nSMovieSelInit = objc.RegisterName("init")
+	_nSMovieSelInit          = objc.RegisterName("init")
 	_nSMovieSelInitWithMovie = objc.RegisterName("initWithMovie:")
-	_nSMovieSelQTMovie = objc.RegisterName("QTMovie")
+	_nSMovieSelQTMovie       = objc.RegisterName("QTMovie")
 )
 
 func NSMovieFromID(id objc.ID) *NSMovie {
@@ -39,21 +39,27 @@ func NSMovieFromID(id objc.ID) *NSMovie {
 // Deprecated: since macOS 10.5.
 func (o *NSMovie) InitWithCoder(coder *foundation.NSCoder) *NSMovie {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMovieSelInitWithCoder, coder.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMovieFromID(_ret)
 }
 
 // Deprecated: As of macOS 10.15 this method always returns nil.
 func (o *NSMovie) Init() *NSMovie {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMovieSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMovieFromID(_ret)
 }
 
 // Deprecated: As of macOS 10.15 this method always returns nil.
 func (o *NSMovie) InitWithMovie(movie unsafe.Pointer) *NSMovie {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMovieSelInitWithMovie, movie)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMovieFromID(_ret)
 }
 
@@ -62,4 +68,3 @@ func (o *NSMovie) QTMovie() unsafe.Pointer {
 	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _nSMovieSelQTMovie)
 	return _ret
 }
-

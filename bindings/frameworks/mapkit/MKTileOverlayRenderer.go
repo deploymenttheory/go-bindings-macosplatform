@@ -15,9 +15,9 @@ type MKTileOverlayRenderer struct {
 }
 
 var (
-	_clsMKTileOverlayRenderer = _objcClass("MKTileOverlayRenderer")
+	_clsMKTileOverlayRenderer                    = _objcClass("MKTileOverlayRenderer")
 	_mKTileOverlayRendererSelInitWithTileOverlay = objc.RegisterName("initWithTileOverlay:")
-	_mKTileOverlayRendererSelReloadData = objc.RegisterName("reloadData")
+	_mKTileOverlayRendererSelReloadData          = objc.RegisterName("reloadData")
 )
 
 func MKTileOverlayRendererFromID(id objc.ID) *MKTileOverlayRenderer {
@@ -32,11 +32,12 @@ func MKTileOverlayRendererFromID(id objc.ID) *MKTileOverlayRenderer {
 
 func (o *MKTileOverlayRenderer) InitWithTileOverlay(overlay *MKTileOverlay) *MKTileOverlayRenderer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKTileOverlayRendererSelInitWithTileOverlay, overlay.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKTileOverlayRendererFromID(_ret)
 }
 
 func (o *MKTileOverlayRenderer) ReloadData() {
 	o.Ptr().Send(_mKTileOverlayRendererSelReloadData)
 }
-

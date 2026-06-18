@@ -16,18 +16,18 @@ type MTRThermostatClusterScheduleTransitionStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterScheduleTransitionStruct = _objcClass("MTRThermostatClusterScheduleTransitionStruct")
-	_mTRThermostatClusterScheduleTransitionStructSelDayOfWeek = objc.RegisterName("dayOfWeek")
-	_mTRThermostatClusterScheduleTransitionStructSelSetDayOfWeek = objc.RegisterName("setDayOfWeek:")
-	_mTRThermostatClusterScheduleTransitionStructSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRThermostatClusterScheduleTransitionStructSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRThermostatClusterScheduleTransitionStructSelPresetHandle = objc.RegisterName("presetHandle")
-	_mTRThermostatClusterScheduleTransitionStructSelSetPresetHandle = objc.RegisterName("setPresetHandle:")
-	_mTRThermostatClusterScheduleTransitionStructSelSystemMode = objc.RegisterName("systemMode")
-	_mTRThermostatClusterScheduleTransitionStructSelSetSystemMode = objc.RegisterName("setSystemMode:")
-	_mTRThermostatClusterScheduleTransitionStructSelCoolingSetpoint = objc.RegisterName("coolingSetpoint")
+	_clsMTRThermostatClusterScheduleTransitionStruct                   = _objcClass("MTRThermostatClusterScheduleTransitionStruct")
+	_mTRThermostatClusterScheduleTransitionStructSelDayOfWeek          = objc.RegisterName("dayOfWeek")
+	_mTRThermostatClusterScheduleTransitionStructSelSetDayOfWeek       = objc.RegisterName("setDayOfWeek:")
+	_mTRThermostatClusterScheduleTransitionStructSelTransitionTime     = objc.RegisterName("transitionTime")
+	_mTRThermostatClusterScheduleTransitionStructSelSetTransitionTime  = objc.RegisterName("setTransitionTime:")
+	_mTRThermostatClusterScheduleTransitionStructSelPresetHandle       = objc.RegisterName("presetHandle")
+	_mTRThermostatClusterScheduleTransitionStructSelSetPresetHandle    = objc.RegisterName("setPresetHandle:")
+	_mTRThermostatClusterScheduleTransitionStructSelSystemMode         = objc.RegisterName("systemMode")
+	_mTRThermostatClusterScheduleTransitionStructSelSetSystemMode      = objc.RegisterName("setSystemMode:")
+	_mTRThermostatClusterScheduleTransitionStructSelCoolingSetpoint    = objc.RegisterName("coolingSetpoint")
 	_mTRThermostatClusterScheduleTransitionStructSelSetCoolingSetpoint = objc.RegisterName("setCoolingSetpoint:")
-	_mTRThermostatClusterScheduleTransitionStructSelHeatingSetpoint = objc.RegisterName("heatingSetpoint")
+	_mTRThermostatClusterScheduleTransitionStructSelHeatingSetpoint    = objc.RegisterName("heatingSetpoint")
 	_mTRThermostatClusterScheduleTransitionStructSelSetHeatingSetpoint = objc.RegisterName("setHeatingSetpoint:")
 )
 
@@ -43,7 +43,9 @@ func MTRThermostatClusterScheduleTransitionStructFromID(id objc.ID) *MTRThermost
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) DayOfWeek() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelDayOfWeek)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *MTRThermostatClusterScheduleTransitionStruct) SetDayOfWeek(dayOfWeek *f
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -63,7 +67,9 @@ func (o *MTRThermostatClusterScheduleTransitionStruct) SetTransitionTime(transit
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) PresetHandle() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelPresetHandle)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
@@ -73,7 +79,9 @@ func (o *MTRThermostatClusterScheduleTransitionStruct) SetPresetHandle(presetHan
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) SystemMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelSystemMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,7 +91,9 @@ func (o *MTRThermostatClusterScheduleTransitionStruct) SetSystemMode(systemMode 
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) CoolingSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelCoolingSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -93,11 +103,12 @@ func (o *MTRThermostatClusterScheduleTransitionStruct) SetCoolingSetpoint(coolin
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) HeatingSetpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterScheduleTransitionStructSelHeatingSetpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterScheduleTransitionStruct) SetHeatingSetpoint(heatingSetpoint *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterScheduleTransitionStructSelSetHeatingSetpoint, heatingSetpoint.Ptr())
 }
-

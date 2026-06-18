@@ -16,11 +16,11 @@ type VZVirtioSocketConnection struct {
 }
 
 var (
-	_clsVZVirtioSocketConnection = _objcClass("VZVirtioSocketConnection")
-	_vZVirtioSocketConnectionSelClose = objc.RegisterName("close")
+	_clsVZVirtioSocketConnection                = _objcClass("VZVirtioSocketConnection")
+	_vZVirtioSocketConnectionSelClose           = objc.RegisterName("close")
 	_vZVirtioSocketConnectionSelDestinationPort = objc.RegisterName("destinationPort")
-	_vZVirtioSocketConnectionSelSourcePort = objc.RegisterName("sourcePort")
-	_vZVirtioSocketConnectionSelFileDescriptor = objc.RegisterName("fileDescriptor")
+	_vZVirtioSocketConnectionSelSourcePort      = objc.RegisterName("sourcePort")
+	_vZVirtioSocketConnectionSelFileDescriptor  = objc.RegisterName("fileDescriptor")
 )
 
 func VZVirtioSocketConnectionFromID(id objc.ID) *VZVirtioSocketConnection {
@@ -55,4 +55,3 @@ func (o *VZVirtioSocketConnection) FileDescriptor() int {
 	_ret := objc.Send[int](o.Ptr(), _vZVirtioSocketConnectionSelFileDescriptor)
 	return _ret
 }
-

@@ -54,4 +54,3 @@ type LocalizedStringable interface {
 }
 
 var _ LocalizedStringable = (*LocalizedString)(nil)
-

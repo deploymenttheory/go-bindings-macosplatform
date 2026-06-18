@@ -16,14 +16,14 @@ type MTRControllerFactoryParams struct {
 }
 
 var (
-	_clsMTRControllerFactoryParams = _objcClass("MTRControllerFactoryParams")
+	_clsMTRControllerFactoryParams                = _objcClass("MTRControllerFactoryParams")
 	_mTRControllerFactoryParamsSelStorageDelegate = objc.RegisterName("storageDelegate")
-	_mTRControllerFactoryParamsSelStartServer = objc.RegisterName("startServer")
-	_mTRControllerFactoryParamsSelSetStartServer = objc.RegisterName("setStartServer:")
-	_mTRControllerFactoryParamsSelPaaCerts = objc.RegisterName("paaCerts")
-	_mTRControllerFactoryParamsSelSetPaaCerts = objc.RegisterName("setPaaCerts:")
-	_mTRControllerFactoryParamsSelCdCerts = objc.RegisterName("cdCerts")
-	_mTRControllerFactoryParamsSelSetCdCerts = objc.RegisterName("setCdCerts:")
+	_mTRControllerFactoryParamsSelStartServer     = objc.RegisterName("startServer")
+	_mTRControllerFactoryParamsSelSetStartServer  = objc.RegisterName("setStartServer:")
+	_mTRControllerFactoryParamsSelPaaCerts        = objc.RegisterName("paaCerts")
+	_mTRControllerFactoryParamsSelSetPaaCerts     = objc.RegisterName("setPaaCerts:")
+	_mTRControllerFactoryParamsSelCdCerts         = objc.RegisterName("cdCerts")
+	_mTRControllerFactoryParamsSelSetCdCerts      = objc.RegisterName("setCdCerts:")
 )
 
 func MTRControllerFactoryParamsFromID(id objc.ID) *MTRControllerFactoryParams {
@@ -67,4 +67,3 @@ func (o *MTRControllerFactoryParams) CdCerts() *foundation.NSArray[*foundation.N
 func (o *MTRControllerFactoryParams) SetCdCerts(cdCerts *foundation.NSArray[*foundation.NSData]) {
 	o.Ptr().Send(_mTRControllerFactoryParamsSelSetCdCerts, cdCerts)
 }
-

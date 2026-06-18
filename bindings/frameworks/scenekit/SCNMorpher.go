@@ -16,19 +16,19 @@ type SCNMorpher struct {
 }
 
 var (
-	_clsSCNMorpher = _objcClass("SCNMorpher")
+	_clsSCNMorpher                          = _objcClass("SCNMorpher")
 	_sCNMorpherSelSetWeightForTargetAtIndex = objc.RegisterName("setWeight:forTargetAtIndex:")
-	_sCNMorpherSelWeightForTargetAtIndex = objc.RegisterName("weightForTargetAtIndex:")
-	_sCNMorpherSelSetWeightForTargetNamed = objc.RegisterName("setWeight:forTargetNamed:")
-	_sCNMorpherSelWeightForTargetNamed = objc.RegisterName("weightForTargetNamed:")
-	_sCNMorpherSelTargets = objc.RegisterName("targets")
-	_sCNMorpherSelSetTargets = objc.RegisterName("setTargets:")
-	_sCNMorpherSelWeights = objc.RegisterName("weights")
-	_sCNMorpherSelSetWeights = objc.RegisterName("setWeights:")
-	_sCNMorpherSelCalculationMode = objc.RegisterName("calculationMode")
-	_sCNMorpherSelSetCalculationMode = objc.RegisterName("setCalculationMode:")
-	_sCNMorpherSelUnifiesNormals = objc.RegisterName("unifiesNormals")
-	_sCNMorpherSelSetUnifiesNormals = objc.RegisterName("setUnifiesNormals:")
+	_sCNMorpherSelWeightForTargetAtIndex    = objc.RegisterName("weightForTargetAtIndex:")
+	_sCNMorpherSelSetWeightForTargetNamed   = objc.RegisterName("setWeight:forTargetNamed:")
+	_sCNMorpherSelWeightForTargetNamed      = objc.RegisterName("weightForTargetNamed:")
+	_sCNMorpherSelTargets                   = objc.RegisterName("targets")
+	_sCNMorpherSelSetTargets                = objc.RegisterName("setTargets:")
+	_sCNMorpherSelWeights                   = objc.RegisterName("weights")
+	_sCNMorpherSelSetWeights                = objc.RegisterName("setWeights:")
+	_sCNMorpherSelCalculationMode           = objc.RegisterName("calculationMode")
+	_sCNMorpherSelSetCalculationMode        = objc.RegisterName("setCalculationMode:")
+	_sCNMorpherSelUnifiesNormals            = objc.RegisterName("unifiesNormals")
+	_sCNMorpherSelSetUnifiesNormals         = objc.RegisterName("setUnifiesNormals:")
 )
 
 func SCNMorpherFromID(id objc.ID) *SCNMorpher {
@@ -66,7 +66,9 @@ func (o *SCNMorpher) WeightForTargetNamed(targetName *foundation.NSString) float
 // @property targets @abstract Specifies the morph targets as an array of SCNGeometry. @discussion The target geometries must have the same number of entries in their geometry sources and the same topology as the base geometry.
 func (o *SCNMorpher) Targets() *foundation.NSArray[*SCNGeometry] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sCNMorpherSelTargets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*SCNGeometry](_ret)
 }
 
@@ -103,4 +105,3 @@ func (o *SCNMorpher) UnifiesNormals() bool {
 func (o *SCNMorpher) SetUnifiesNormals(unifiesNormals bool) {
 	o.Ptr().Send(_sCNMorpherSelSetUnifiesNormals, unifiesNormals)
 }
-

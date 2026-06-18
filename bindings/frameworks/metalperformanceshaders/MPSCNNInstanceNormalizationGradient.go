@@ -26,4 +26,3 @@ func MPSCNNInstanceNormalizationGradientFromID(id objc.ID) *MPSCNNInstanceNormal
 	purego.Track(o)
 	return o
 }
-

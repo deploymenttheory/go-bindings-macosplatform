@@ -16,9 +16,9 @@ type AXMathExpressionTableCell struct {
 }
 
 var (
-	_clsAXMathExpressionTableCell = _objcClass("AXMathExpressionTableCell")
+	_clsAXMathExpressionTableCell                    = _objcClass("AXMathExpressionTableCell")
 	_aXMathExpressionTableCellSelInitWithExpressions = objc.RegisterName("initWithExpressions:")
-	_aXMathExpressionTableCellSelExpressions = objc.RegisterName("expressions")
+	_aXMathExpressionTableCellSelExpressions         = objc.RegisterName("expressions")
 )
 
 func AXMathExpressionTableCellFromID(id objc.ID) *AXMathExpressionTableCell {
@@ -33,13 +33,16 @@ func AXMathExpressionTableCellFromID(id objc.ID) *AXMathExpressionTableCell {
 
 func (o *AXMathExpressionTableCell) InitWithExpressions(expressions *foundation.NSArray[*AXMathExpression]) *AXMathExpressionTableCell {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionTableCellSelInitWithExpressions, expressions.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AXMathExpressionTableCellFromID(_ret)
 }
 
 func (o *AXMathExpressionTableCell) Expressions() *foundation.NSArray[*AXMathExpression] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aXMathExpressionTableCellSelExpressions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*AXMathExpression](_ret)
 }
-

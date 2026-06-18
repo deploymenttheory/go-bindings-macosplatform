@@ -16,25 +16,25 @@ type DOMHTMLLinkElement struct {
 }
 
 var (
-	_clsDOMHTMLLinkElement = _objcClass("DOMHTMLLinkElement")
-	_dOMHTMLLinkElementSelDisabled = objc.RegisterName("disabled")
-	_dOMHTMLLinkElementSelSetDisabled = objc.RegisterName("setDisabled:")
-	_dOMHTMLLinkElementSelCharset = objc.RegisterName("charset")
-	_dOMHTMLLinkElementSelSetCharset = objc.RegisterName("setCharset:")
-	_dOMHTMLLinkElementSelHref = objc.RegisterName("href")
-	_dOMHTMLLinkElementSelSetHref = objc.RegisterName("setHref:")
-	_dOMHTMLLinkElementSelHreflang = objc.RegisterName("hreflang")
-	_dOMHTMLLinkElementSelSetHreflang = objc.RegisterName("setHreflang:")
-	_dOMHTMLLinkElementSelMedia = objc.RegisterName("media")
-	_dOMHTMLLinkElementSelSetMedia = objc.RegisterName("setMedia:")
-	_dOMHTMLLinkElementSelRel = objc.RegisterName("rel")
-	_dOMHTMLLinkElementSelSetRel = objc.RegisterName("setRel:")
-	_dOMHTMLLinkElementSelRev = objc.RegisterName("rev")
-	_dOMHTMLLinkElementSelSetRev = objc.RegisterName("setRev:")
-	_dOMHTMLLinkElementSelTarget = objc.RegisterName("target")
-	_dOMHTMLLinkElementSelSetTarget = objc.RegisterName("setTarget:")
-	_dOMHTMLLinkElementSelType = objc.RegisterName("type")
-	_dOMHTMLLinkElementSelSetType = objc.RegisterName("setType:")
+	_clsDOMHTMLLinkElement                = _objcClass("DOMHTMLLinkElement")
+	_dOMHTMLLinkElementSelDisabled        = objc.RegisterName("disabled")
+	_dOMHTMLLinkElementSelSetDisabled     = objc.RegisterName("setDisabled:")
+	_dOMHTMLLinkElementSelCharset         = objc.RegisterName("charset")
+	_dOMHTMLLinkElementSelSetCharset      = objc.RegisterName("setCharset:")
+	_dOMHTMLLinkElementSelHref            = objc.RegisterName("href")
+	_dOMHTMLLinkElementSelSetHref         = objc.RegisterName("setHref:")
+	_dOMHTMLLinkElementSelHreflang        = objc.RegisterName("hreflang")
+	_dOMHTMLLinkElementSelSetHreflang     = objc.RegisterName("setHreflang:")
+	_dOMHTMLLinkElementSelMedia           = objc.RegisterName("media")
+	_dOMHTMLLinkElementSelSetMedia        = objc.RegisterName("setMedia:")
+	_dOMHTMLLinkElementSelRel             = objc.RegisterName("rel")
+	_dOMHTMLLinkElementSelSetRel          = objc.RegisterName("setRel:")
+	_dOMHTMLLinkElementSelRev             = objc.RegisterName("rev")
+	_dOMHTMLLinkElementSelSetRev          = objc.RegisterName("setRev:")
+	_dOMHTMLLinkElementSelTarget          = objc.RegisterName("target")
+	_dOMHTMLLinkElementSelSetTarget       = objc.RegisterName("setTarget:")
+	_dOMHTMLLinkElementSelType            = objc.RegisterName("type")
+	_dOMHTMLLinkElementSelSetType         = objc.RegisterName("setType:")
 	_dOMHTMLLinkElementSelAbsoluteLinkURL = objc.RegisterName("absoluteLinkURL")
 )
 
@@ -59,7 +59,9 @@ func (o *DOMHTMLLinkElement) SetDisabled(disabled bool) {
 
 func (o *DOMHTMLLinkElement) Charset() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelCharset)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -69,7 +71,9 @@ func (o *DOMHTMLLinkElement) SetCharset(charset *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Href() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelHref)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -79,7 +83,9 @@ func (o *DOMHTMLLinkElement) SetHref(href *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Hreflang() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelHreflang)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -89,7 +95,9 @@ func (o *DOMHTMLLinkElement) SetHreflang(hreflang *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Media() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelMedia)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -99,7 +107,9 @@ func (o *DOMHTMLLinkElement) SetMedia(media *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Rel() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelRel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -109,7 +119,9 @@ func (o *DOMHTMLLinkElement) SetRel(rel *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Rev() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelRev)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -119,7 +131,9 @@ func (o *DOMHTMLLinkElement) SetRev(rev *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Target() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelTarget)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -129,7 +143,9 @@ func (o *DOMHTMLLinkElement) SetTarget(target *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) Type() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -139,7 +155,8 @@ func (o *DOMHTMLLinkElement) SetType(type_ *foundation.NSString) {
 
 func (o *DOMHTMLLinkElement) AbsoluteLinkURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLLinkElementSelAbsoluteLinkURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

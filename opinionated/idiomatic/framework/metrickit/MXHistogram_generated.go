@@ -54,4 +54,3 @@ type Histogramable interface {
 }
 
 var _ Histogramable = (*Histogram)(nil)
-

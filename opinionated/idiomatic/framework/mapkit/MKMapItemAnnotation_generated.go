@@ -52,4 +52,3 @@ type MapItemAnnotationable interface {
 }
 
 var _ MapItemAnnotationable = (*MapItemAnnotation)(nil)
-

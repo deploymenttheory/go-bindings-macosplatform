@@ -72,4 +72,3 @@ type TokenWatcherTokenInfoable interface {
 }
 
 var _ TokenWatcherTokenInfoable = (*TokenWatcherTokenInfo)(nil)
-

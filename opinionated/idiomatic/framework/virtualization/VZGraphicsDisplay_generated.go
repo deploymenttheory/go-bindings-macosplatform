@@ -74,4 +74,3 @@ type GraphicsDisplayable interface {
 }
 
 var _ GraphicsDisplayable = (*GraphicsDisplay)(nil)
-

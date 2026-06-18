@@ -15,7 +15,7 @@ type VZNATNetworkDeviceAttachment struct {
 }
 
 var (
-	_clsVZNATNetworkDeviceAttachment = _objcClass("VZNATNetworkDeviceAttachment")
+	_clsVZNATNetworkDeviceAttachment     = _objcClass("VZNATNetworkDeviceAttachment")
 	_vZNATNetworkDeviceAttachmentSelInit = objc.RegisterName("init")
 )
 
@@ -31,7 +31,8 @@ func VZNATNetworkDeviceAttachmentFromID(id objc.ID) *VZNATNetworkDeviceAttachmen
 
 func (o *VZNATNetworkDeviceAttachment) Init() *VZNATNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNATNetworkDeviceAttachmentSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VZNATNetworkDeviceAttachmentFromID(_ret)
 }
-

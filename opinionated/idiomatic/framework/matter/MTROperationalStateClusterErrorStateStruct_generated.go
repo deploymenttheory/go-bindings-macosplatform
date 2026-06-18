@@ -17,7 +17,9 @@ type MTROperationalStateClusterErrorStateStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTROperationalStateClusterErrorStateStruct].
-func (x *MTROperationalStateClusterErrorStateStruct) Unwrap() *raw.MTROperationalStateClusterErrorStateStruct { return x.inner }
+func (x *MTROperationalStateClusterErrorStateStruct) Unwrap() *raw.MTROperationalStateClusterErrorStateStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -108,4 +110,3 @@ type MTROperationalStateClusterErrorStateStructable interface {
 }
 
 var _ MTROperationalStateClusterErrorStateStructable = (*MTROperationalStateClusterErrorStateStruct)(nil)
-

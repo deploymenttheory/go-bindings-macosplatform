@@ -17,11 +17,11 @@ type SKPhysicsContact struct {
 }
 
 var (
-	_clsSKPhysicsContact = _objcClass("SKPhysicsContact")
-	_sKPhysicsContactSelBodyA = objc.RegisterName("bodyA")
-	_sKPhysicsContactSelBodyB = objc.RegisterName("bodyB")
-	_sKPhysicsContactSelContactPoint = objc.RegisterName("contactPoint")
-	_sKPhysicsContactSelContactNormal = objc.RegisterName("contactNormal")
+	_clsSKPhysicsContact                 = _objcClass("SKPhysicsContact")
+	_sKPhysicsContactSelBodyA            = objc.RegisterName("bodyA")
+	_sKPhysicsContactSelBodyB            = objc.RegisterName("bodyB")
+	_sKPhysicsContactSelContactPoint     = objc.RegisterName("contactPoint")
+	_sKPhysicsContactSelContactNormal    = objc.RegisterName("contactNormal")
 	_sKPhysicsContactSelCollisionImpulse = objc.RegisterName("collisionImpulse")
 )
 
@@ -37,13 +37,17 @@ func SKPhysicsContactFromID(id objc.ID) *SKPhysicsContact {
 
 func (o *SKPhysicsContact) BodyA() *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsContactSelBodyA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
 func (o *SKPhysicsContact) BodyB() *SKPhysicsBody {
 	_ret := objc.Send[objc.ID](o.Ptr(), _sKPhysicsContactSelBodyB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return SKPhysicsBodyFromID(_ret)
 }
 
@@ -61,4 +65,3 @@ func (o *SKPhysicsContact) CollisionImpulse() float64 {
 	_ret := objc.Send[float64](o.Ptr(), _sKPhysicsContactSelCollisionImpulse)
 	return _ret
 }
-

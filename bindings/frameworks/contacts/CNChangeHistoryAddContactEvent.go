@@ -16,8 +16,8 @@ type CNChangeHistoryAddContactEvent struct {
 }
 
 var (
-	_clsCNChangeHistoryAddContactEvent = _objcClass("CNChangeHistoryAddContactEvent")
-	_cNChangeHistoryAddContactEventSelContact = objc.RegisterName("contact")
+	_clsCNChangeHistoryAddContactEvent                    = _objcClass("CNChangeHistoryAddContactEvent")
+	_cNChangeHistoryAddContactEventSelContact             = objc.RegisterName("contact")
 	_cNChangeHistoryAddContactEventSelContainerIdentifier = objc.RegisterName("containerIdentifier")
 )
 
@@ -33,13 +33,16 @@ func CNChangeHistoryAddContactEventFromID(id objc.ID) *CNChangeHistoryAddContact
 
 func (o *CNChangeHistoryAddContactEvent) Contact() *CNContact {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddContactEventSelContact)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CNContactFromID(_ret)
 }
 
 func (o *CNChangeHistoryAddContactEvent) ContainerIdentifier() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cNChangeHistoryAddContactEventSelContainerIdentifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

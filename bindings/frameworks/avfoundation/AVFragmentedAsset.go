@@ -16,7 +16,7 @@ type AVFragmentedAsset struct {
 }
 
 var (
-	_clsAVFragmentedAsset = _objcClass("AVFragmentedAsset")
+	_clsAVFragmentedAsset                              = _objcClass("AVFragmentedAsset")
 	_aVFragmentedAssetSelFragmentedAssetWithURLOptions = objc.RegisterName("fragmentedAssetWithURL:options:")
 )
 
@@ -33,7 +33,8 @@ func AVFragmentedAssetFromID(id objc.ID) *AVFragmentedAsset {
 // Returns an instance of AVFragmentedAsset for inspection of a fragmented media resource. - Parameter URL: An instance of NSURL that references a media resource. - Parameter options: An instance of NSDictionary that contains keys for specifying options for the initialization of the AVFragmentedAsset. See AVURLAssetPreferPreciseDurationAndTimingKey and AVURLAssetReferenceRestrictionsKey above. - Returns: An instance of AVFragmentedAsset.
 func AVFragmentedAssetFragmentedAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVFragmentedAsset {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAsset), _aVFragmentedAssetSelFragmentedAssetWithURLOptions, uRL.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVFragmentedAssetFromID(_ret)
 }
-

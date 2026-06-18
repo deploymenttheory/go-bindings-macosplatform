@@ -88,7 +88,9 @@ func (x *CNNNeuronExponential) WithDestinationImageAllocator(destinationImageAll
 
 func (x *CNNNeuronExponential) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
-func (x *CNNNeuronExponential) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronExponential) asCNNKernel() *raw.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
 // CNNNeuronExponentialable is the interface implemented by [CNNNeuronExponential], for mocking and DI.
 type CNNNeuronExponentialable interface {
@@ -104,4 +106,3 @@ type CNNNeuronExponentialable interface {
 }
 
 var _ CNNNeuronExponentialable = (*CNNNeuronExponential)(nil)
-

@@ -15,11 +15,11 @@ type MPSCNNInstanceNormalizationNode struct {
 }
 
 var (
-	_clsMPSCNNInstanceNormalizationNode = _objcClass("MPSCNNInstanceNormalizationNode")
+	_clsMPSCNNInstanceNormalizationNode                         = _objcClass("MPSCNNInstanceNormalizationNode")
 	_mPSCNNInstanceNormalizationNodeSelNodeWithSourceDataSource = objc.RegisterName("nodeWithSource:dataSource:")
 	_mPSCNNInstanceNormalizationNodeSelInitWithSourceDataSource = objc.RegisterName("initWithSource:dataSource:")
-	_mPSCNNInstanceNormalizationNodeSelTrainingStyle = objc.RegisterName("trainingStyle")
-	_mPSCNNInstanceNormalizationNodeSelSetTrainingStyle = objc.RegisterName("setTrainingStyle:")
+	_mPSCNNInstanceNormalizationNodeSelTrainingStyle            = objc.RegisterName("trainingStyle")
+	_mPSCNNInstanceNormalizationNodeSelSetTrainingStyle         = objc.RegisterName("setTrainingStyle:")
 )
 
 func MPSCNNInstanceNormalizationNodeFromID(id objc.ID) *MPSCNNInstanceNormalizationNode {
@@ -34,13 +34,17 @@ func MPSCNNInstanceNormalizationNodeFromID(id objc.ID) *MPSCNNInstanceNormalizat
 
 func MPSCNNInstanceNormalizationNodeNodeWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNInstanceNormalizationDataSource) *MPSCNNInstanceNormalizationNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNInstanceNormalizationNode), _mPSCNNInstanceNormalizationNodeSelNodeWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNInstanceNormalizationNodeFromID(_ret)
 }
 
 func (o *MPSCNNInstanceNormalizationNode) InitWithSourceDataSource(source *MPSNNImageNode, dataSource MPSCNNInstanceNormalizationDataSource) *MPSCNNInstanceNormalizationNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNInstanceNormalizationNodeSelInitWithSourceDataSource, source.Ptr(), dataSource)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNInstanceNormalizationNodeFromID(_ret)
 }
 
@@ -54,4 +58,3 @@ func (o *MPSCNNInstanceNormalizationNode) TrainingStyle() MPSNNTrainingStyle {
 func (o *MPSCNNInstanceNormalizationNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
 	o.Ptr().Send(_mPSCNNInstanceNormalizationNodeSelSetTrainingStyle, trainingStyle)
 }
-

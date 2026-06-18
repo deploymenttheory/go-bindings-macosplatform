@@ -17,31 +17,31 @@ type NSItemProvider struct {
 }
 
 var (
-	_clsNSItemProvider = _objcClass("NSItemProvider")
-	_nSItemProviderSelInit = objc.RegisterName("init")
-	_nSItemProviderSelRegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler = objc.RegisterName("registerDataRepresentationForTypeIdentifier:visibility:loadHandler:")
+	_clsNSItemProvider                                                                            = _objcClass("NSItemProvider")
+	_nSItemProviderSelInit                                                                        = objc.RegisterName("init")
+	_nSItemProviderSelRegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler            = objc.RegisterName("registerDataRepresentationForTypeIdentifier:visibility:loadHandler:")
 	_nSItemProviderSelRegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler = objc.RegisterName("registerFileRepresentationForTypeIdentifier:fileOptions:visibility:loadHandler:")
-	_nSItemProviderSelRegisteredTypeIdentifiersWithFileOptions = objc.RegisterName("registeredTypeIdentifiersWithFileOptions:")
-	_nSItemProviderSelHasItemConformingToTypeIdentifier = objc.RegisterName("hasItemConformingToTypeIdentifier:")
-	_nSItemProviderSelHasRepresentationConformingToTypeIdentifierFileOptions = objc.RegisterName("hasRepresentationConformingToTypeIdentifier:fileOptions:")
-	_nSItemProviderSelLoadDataRepresentationForTypeIdentifierCompletionHandler = objc.RegisterName("loadDataRepresentationForTypeIdentifier:completionHandler:")
-	_nSItemProviderSelLoadFileRepresentationForTypeIdentifierCompletionHandler = objc.RegisterName("loadFileRepresentationForTypeIdentifier:completionHandler:")
-	_nSItemProviderSelLoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler = objc.RegisterName("loadInPlaceFileRepresentationForTypeIdentifier:completionHandler:")
-	_nSItemProviderSelInitWithObject = objc.RegisterName("initWithObject:")
-	_nSItemProviderSelRegisterObjectVisibility = objc.RegisterName("registerObject:visibility:")
-	_nSItemProviderSelRegisterObjectOfClassVisibilityLoadHandler = objc.RegisterName("registerObjectOfClass:visibility:loadHandler:")
-	_nSItemProviderSelCanLoadObjectOfClass = objc.RegisterName("canLoadObjectOfClass:")
-	_nSItemProviderSelLoadObjectOfClassCompletionHandler = objc.RegisterName("loadObjectOfClass:completionHandler:")
-	_nSItemProviderSelInitWithItemTypeIdentifier = objc.RegisterName("initWithItem:typeIdentifier:")
-	_nSItemProviderSelInitWithContentsOfURL = objc.RegisterName("initWithContentsOfURL:")
-	_nSItemProviderSelRegisterItemForTypeIdentifierLoadHandler = objc.RegisterName("registerItemForTypeIdentifier:loadHandler:")
-	_nSItemProviderSelLoadItemForTypeIdentifierOptionsCompletionHandler = objc.RegisterName("loadItemForTypeIdentifier:options:completionHandler:")
-	_nSItemProviderSelRegisteredTypeIdentifiers = objc.RegisterName("registeredTypeIdentifiers")
-	_nSItemProviderSelSuggestedName = objc.RegisterName("suggestedName")
-	_nSItemProviderSelSetSuggestedName = objc.RegisterName("setSuggestedName:")
-	_nSItemProviderSelLoadPreviewImageWithOptionsCompletionHandler = objc.RegisterName("loadPreviewImageWithOptions:completionHandler:")
-	_nSItemProviderSelPreviewImageHandler = objc.RegisterName("previewImageHandler")
-	_nSItemProviderSelSetPreviewImageHandler = objc.RegisterName("setPreviewImageHandler:")
+	_nSItemProviderSelRegisteredTypeIdentifiersWithFileOptions                                    = objc.RegisterName("registeredTypeIdentifiersWithFileOptions:")
+	_nSItemProviderSelHasItemConformingToTypeIdentifier                                           = objc.RegisterName("hasItemConformingToTypeIdentifier:")
+	_nSItemProviderSelHasRepresentationConformingToTypeIdentifierFileOptions                      = objc.RegisterName("hasRepresentationConformingToTypeIdentifier:fileOptions:")
+	_nSItemProviderSelLoadDataRepresentationForTypeIdentifierCompletionHandler                    = objc.RegisterName("loadDataRepresentationForTypeIdentifier:completionHandler:")
+	_nSItemProviderSelLoadFileRepresentationForTypeIdentifierCompletionHandler                    = objc.RegisterName("loadFileRepresentationForTypeIdentifier:completionHandler:")
+	_nSItemProviderSelLoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler             = objc.RegisterName("loadInPlaceFileRepresentationForTypeIdentifier:completionHandler:")
+	_nSItemProviderSelInitWithObject                                                              = objc.RegisterName("initWithObject:")
+	_nSItemProviderSelRegisterObjectVisibility                                                    = objc.RegisterName("registerObject:visibility:")
+	_nSItemProviderSelRegisterObjectOfClassVisibilityLoadHandler                                  = objc.RegisterName("registerObjectOfClass:visibility:loadHandler:")
+	_nSItemProviderSelCanLoadObjectOfClass                                                        = objc.RegisterName("canLoadObjectOfClass:")
+	_nSItemProviderSelLoadObjectOfClassCompletionHandler                                          = objc.RegisterName("loadObjectOfClass:completionHandler:")
+	_nSItemProviderSelInitWithItemTypeIdentifier                                                  = objc.RegisterName("initWithItem:typeIdentifier:")
+	_nSItemProviderSelInitWithContentsOfURL                                                       = objc.RegisterName("initWithContentsOfURL:")
+	_nSItemProviderSelRegisterItemForTypeIdentifierLoadHandler                                    = objc.RegisterName("registerItemForTypeIdentifier:loadHandler:")
+	_nSItemProviderSelLoadItemForTypeIdentifierOptionsCompletionHandler                           = objc.RegisterName("loadItemForTypeIdentifier:options:completionHandler:")
+	_nSItemProviderSelRegisteredTypeIdentifiers                                                   = objc.RegisterName("registeredTypeIdentifiers")
+	_nSItemProviderSelSuggestedName                                                               = objc.RegisterName("suggestedName")
+	_nSItemProviderSelSetSuggestedName                                                            = objc.RegisterName("setSuggestedName:")
+	_nSItemProviderSelLoadPreviewImageWithOptionsCompletionHandler                                = objc.RegisterName("loadPreviewImageWithOptions:completionHandler:")
+	_nSItemProviderSelPreviewImageHandler                                                         = objc.RegisterName("previewImageHandler")
+	_nSItemProviderSelSetPreviewImageHandler                                                      = objc.RegisterName("setPreviewImageHandler:")
 )
 
 func NSItemProviderFromID(id objc.ID) *NSItemProvider {
@@ -56,7 +56,9 @@ func NSItemProviderFromID(id objc.ID) *NSItemProvider {
 
 func (o *NSItemProvider) Init() *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInit)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemProviderFromID(_ret)
 }
 
@@ -70,7 +72,9 @@ func (o *NSItemProvider) RegisterFileRepresentationForTypeIdentifierFileOptionsV
 
 func (o *NSItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions NSItemProviderFileOptions) *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelRegisteredTypeIdentifiersWithFileOptions, fileOptions)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
@@ -96,7 +100,9 @@ func (o *NSItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandle
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelLoadDataRepresentationForTypeIdentifierCompletionHandler, typeIdentifier.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
@@ -112,7 +118,9 @@ func (o *NSItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandle
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelLoadFileRepresentationForTypeIdentifierCompletionHandler, typeIdentifier.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
@@ -128,13 +136,17 @@ func (o *NSItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletio
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelLoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler, typeIdentifier.Ptr(), __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func (o *NSItemProvider) InitWithObject(object NSItemProviderWriting) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithObject, object)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemProviderFromID(_ret)
 }
 
@@ -160,19 +172,25 @@ func (o *NSItemProvider) LoadObjectOfClassCompletionHandler(aClass unsafe.Pointe
 		defer __block_completionHandler.Release()
 	}
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelLoadObjectOfClassCompletionHandler, aClass, __block_completionHandler)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSProgressFromID(_ret)
 }
 
 func (o *NSItemProvider) InitWithItemTypeIdentifier(item NSSecureCoding, typeIdentifier *NSString) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithItemTypeIdentifier, item, typeIdentifier.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemProviderFromID(_ret)
 }
 
 func (o *NSItemProvider) InitWithContentsOfURL(fileURL *NSURL) *NSItemProvider {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelInitWithContentsOfURL, fileURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSItemProviderFromID(_ret)
 }
 
@@ -193,13 +211,17 @@ func (o *NSItemProvider) LoadItemForTypeIdentifierOptionsCompletionHandler(typeI
 
 func (o *NSItemProvider) RegisteredTypeIdentifiers() *NSArray[*NSString] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelRegisteredTypeIdentifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSArrayFromID[*NSString](_ret)
 }
 
 func (o *NSItemProvider) SuggestedName() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSItemProviderSelSuggestedName)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -226,4 +248,3 @@ func (o *NSItemProvider) PreviewImageHandler() objc.Block {
 func (o *NSItemProvider) SetPreviewImageHandler(previewImageHandler objc.Block) {
 	o.Ptr().Send(_nSItemProviderSelSetPreviewImageHandler, previewImageHandler)
 }
-

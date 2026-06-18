@@ -16,7 +16,9 @@ type MTRContentLauncherClusterStyleInformation struct {
 }
 
 // Unwrap returns the underlying [raw.MTRContentLauncherClusterStyleInformation].
-func (x *MTRContentLauncherClusterStyleInformation) Unwrap() *raw.MTRContentLauncherClusterStyleInformation { return x.inner }
+func (x *MTRContentLauncherClusterStyleInformation) Unwrap() *raw.MTRContentLauncherClusterStyleInformation {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -60,7 +62,9 @@ func (x *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLaun
 	return x
 }
 
-func (x *MTRContentLauncherClusterStyleInformation) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct { return &x.inner.MTRContentLauncherClusterStyleInformationStruct }
+func (x *MTRContentLauncherClusterStyleInformation) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct {
+	return &x.inner.MTRContentLauncherClusterStyleInformationStruct
+}
 
 // MTRContentLauncherClusterStyleInformationable is the interface implemented by [MTRContentLauncherClusterStyleInformation], for mocking and DI.
 type MTRContentLauncherClusterStyleInformationable interface {
@@ -72,4 +76,3 @@ type MTRContentLauncherClusterStyleInformationable interface {
 }
 
 var _ MTRContentLauncherClusterStyleInformationable = (*MTRContentLauncherClusterStyleInformation)(nil)
-

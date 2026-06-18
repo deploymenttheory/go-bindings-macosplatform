@@ -80,4 +80,3 @@ type SpeechRecognitionResultable interface {
 }
 
 var _ SpeechRecognitionResultable = (*SpeechRecognitionResult)(nil)
-

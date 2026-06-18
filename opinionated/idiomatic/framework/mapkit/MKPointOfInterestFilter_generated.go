@@ -62,4 +62,3 @@ type PointOfInterestFilterable interface {
 }
 
 var _ PointOfInterestFilterable = (*PointOfInterestFilter)(nil)
-

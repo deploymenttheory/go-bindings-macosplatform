@@ -15,7 +15,7 @@ type NSMoveCommand struct {
 }
 
 var (
-	_clsNSMoveCommand = _objcClass("NSMoveCommand")
+	_clsNSMoveCommand             = _objcClass("NSMoveCommand")
 	_nSMoveCommandSelKeySpecifier = objc.RegisterName("keySpecifier")
 )
 
@@ -31,7 +31,8 @@ func NSMoveCommandFromID(id objc.ID) *NSMoveCommand {
 
 func (o *NSMoveCommand) KeySpecifier() *NSScriptObjectSpecifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSMoveCommandSelKeySpecifier)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSScriptObjectSpecifierFromID(_ret)
 }
-

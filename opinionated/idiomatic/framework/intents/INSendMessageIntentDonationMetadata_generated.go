@@ -15,7 +15,9 @@ type SendMessageIntentDonationMetadata struct {
 }
 
 // Unwrap returns the underlying [raw.INSendMessageIntentDonationMetadata].
-func (x *SendMessageIntentDonationMetadata) Unwrap() *raw.INSendMessageIntentDonationMetadata { return x.inner }
+func (x *SendMessageIntentDonationMetadata) Unwrap() *raw.INSendMessageIntentDonationMetadata {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -99,7 +101,9 @@ func (x *SendMessageIntentDonationMetadata) SetRecipientCount(recipientCount uin
 	x.inner.SetRecipientCount(recipientCount)
 }
 
-func (x *SendMessageIntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata { return &x.inner.INIntentDonationMetadata }
+func (x *SendMessageIntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata {
+	return &x.inner.INIntentDonationMetadata
+}
 
 // SendMessageIntentDonationMetadataable is the interface implemented by [SendMessageIntentDonationMetadata], for mocking and DI.
 type SendMessageIntentDonationMetadataable interface {
@@ -119,4 +123,3 @@ type SendMessageIntentDonationMetadataable interface {
 }
 
 var _ SendMessageIntentDonationMetadataable = (*SendMessageIntentDonationMetadata)(nil)
-

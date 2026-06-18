@@ -51,7 +51,9 @@ func (x *DOMStyleSheetList) Length() uint {
 
 func (x *DOMStyleSheetList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMStyleSheetList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMStyleSheetList) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMStyleSheetListable is the interface implemented by [DOMStyleSheetList], for mocking and DI.
 type DOMStyleSheetListable interface {
@@ -61,4 +63,3 @@ type DOMStyleSheetListable interface {
 }
 
 var _ DOMStyleSheetListable = (*DOMStyleSheetList)(nil)
-

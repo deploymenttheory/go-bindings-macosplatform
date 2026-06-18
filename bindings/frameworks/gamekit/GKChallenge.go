@@ -19,17 +19,17 @@ type GKChallenge struct {
 }
 
 var (
-	_clsGKChallenge = _objcClass("GKChallenge")
+	_clsGKChallenge                                            = _objcClass("GKChallenge")
 	_gKChallengeSelLoadReceivedChallengesWithCompletionHandler = objc.RegisterName("loadReceivedChallengesWithCompletionHandler:")
-	_gKChallengeSelDecline = objc.RegisterName("decline")
-	_gKChallengeSelIssuingPlayer = objc.RegisterName("issuingPlayer")
-	_gKChallengeSelReceivingPlayer = objc.RegisterName("receivingPlayer")
-	_gKChallengeSelState = objc.RegisterName("state")
-	_gKChallengeSelIssueDate = objc.RegisterName("issueDate")
-	_gKChallengeSelCompletionDate = objc.RegisterName("completionDate")
-	_gKChallengeSelMessage = objc.RegisterName("message")
-	_gKChallengeSelIssuingPlayerID = objc.RegisterName("issuingPlayerID")
-	_gKChallengeSelReceivingPlayerID = objc.RegisterName("receivingPlayerID")
+	_gKChallengeSelDecline                                     = objc.RegisterName("decline")
+	_gKChallengeSelIssuingPlayer                               = objc.RegisterName("issuingPlayer")
+	_gKChallengeSelReceivingPlayer                             = objc.RegisterName("receivingPlayer")
+	_gKChallengeSelState                                       = objc.RegisterName("state")
+	_gKChallengeSelIssueDate                                   = objc.RegisterName("issueDate")
+	_gKChallengeSelCompletionDate                              = objc.RegisterName("completionDate")
+	_gKChallengeSelMessage                                     = objc.RegisterName("message")
+	_gKChallengeSelIssuingPlayerID                             = objc.RegisterName("issuingPlayerID")
+	_gKChallengeSelReceivingPlayerID                           = objc.RegisterName("receivingPlayerID")
 )
 
 func GKChallengeFromID(id objc.ID) *GKChallenge {
@@ -66,14 +66,18 @@ func (o *GKChallenge) Decline() {
 // The GKPlayer who issued the challenge
 func (o *GKChallenge) IssuingPlayer() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelIssuingPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
 // The GKPlayer who has received the challenge
 func (o *GKChallenge) ReceivingPlayer() *GKPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelReceivingPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKPlayerFromID(_ret)
 }
 
@@ -86,21 +90,27 @@ func (o *GKChallenge) State() GKChallengeState {
 // Date the challenge was issued
 func (o *GKChallenge) IssueDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelIssueDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Date the challenge was completed or aborted
 func (o *GKChallenge) CompletionDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelCompletionDate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // The message sent to receivers of this challenge
 func (o *GKChallenge) Message() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelMessage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -108,7 +118,9 @@ func (o *GKChallenge) Message() *foundation.NSString {
 // Deprecated: since macOS 10.10.
 func (o *GKChallenge) IssuingPlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelIssuingPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -116,7 +128,8 @@ func (o *GKChallenge) IssuingPlayerID() *foundation.NSString {
 // Deprecated: since macOS 10.10.
 func (o *GKChallenge) ReceivingPlayerID() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKChallengeSelReceivingPlayerID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

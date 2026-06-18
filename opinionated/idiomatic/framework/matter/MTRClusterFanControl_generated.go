@@ -205,9 +205,13 @@ func (x *MTRClusterFanControl) ReadAttributeClusterRevisionWithParams(params *ra
 	return x.inner.ReadAttributeClusterRevisionWithParams(params)
 }
 
-func (x *MTRClusterFanControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterFanControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterFanControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterFanControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterFanControlable is the interface implemented by [MTRClusterFanControl], for mocking and DI.
 type MTRClusterFanControlable interface {
@@ -247,4 +251,3 @@ type MTRClusterFanControlable interface {
 }
 
 var _ MTRClusterFanControlable = (*MTRClusterFanControl)(nil)
-

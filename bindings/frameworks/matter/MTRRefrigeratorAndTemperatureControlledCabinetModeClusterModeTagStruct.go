@@ -16,11 +16,11 @@ type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct stru
 }
 
 var (
-	_clsMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct = _objcClass("MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelMfgCode = objc.RegisterName("mfgCode")
+	_clsMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct           = _objcClass("MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelMfgCode    = objc.RegisterName("mfgCode")
 	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelSetMfgCode = objc.RegisterName("setMfgCode:")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelValue = objc.RegisterName("value")
-	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelSetValue = objc.RegisterName("setValue:")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelValue      = objc.RegisterName("value")
+	_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelSetValue   = objc.RegisterName("setValue:")
 )
 
 func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructFromID(id objc.ID) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct {
@@ -35,7 +35,9 @@ func MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructFromI
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelMfgCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct)
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Value() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
 	o.Ptr().Send(_mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructSelSetValue, value.Ptr())
 }
-

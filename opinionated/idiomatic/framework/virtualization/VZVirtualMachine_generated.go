@@ -338,4 +338,3 @@ type VirtualMachineable interface {
 }
 
 var _ VirtualMachineable = (*VirtualMachine)(nil)
-

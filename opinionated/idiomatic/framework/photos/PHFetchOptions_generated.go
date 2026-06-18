@@ -51,7 +51,9 @@ func (x *FetchOptions) WithSortDescriptors(items ...*foundation.NSSortDescriptor
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -193,4 +195,3 @@ type FetchOptionsable interface {
 }
 
 var _ FetchOptionsable = (*FetchOptions)(nil)
-

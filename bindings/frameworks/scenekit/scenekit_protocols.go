@@ -196,4 +196,3 @@ type SCNTechniqueSupport interface {
 	Technique() *SCNTechnique
 	SetTechnique(technique *SCNTechnique)
 }
-

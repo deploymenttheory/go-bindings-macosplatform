@@ -87,7 +87,9 @@ func (x *PageController) WithChildViewControllers(items ...ViewControllerProvide
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asViewController().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSViewController](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -244,4 +246,3 @@ type PageControllerable interface {
 }
 
 var _ PageControllerable = (*PageController)(nil)
-

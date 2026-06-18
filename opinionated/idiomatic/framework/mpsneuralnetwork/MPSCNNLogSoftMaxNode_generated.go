@@ -59,4 +59,3 @@ type CNNLogSoftMaxNodeable interface {
 }
 
 var _ CNNLogSoftMaxNodeable = (*CNNLogSoftMaxNode)(nil)
-

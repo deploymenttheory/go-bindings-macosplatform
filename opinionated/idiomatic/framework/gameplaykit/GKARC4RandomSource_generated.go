@@ -76,4 +76,3 @@ type ARC4RandomSourceable interface {
 }
 
 var _ ARC4RandomSourceable = (*ARC4RandomSource)(nil)
-

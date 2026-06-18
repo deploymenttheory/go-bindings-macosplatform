@@ -17,7 +17,9 @@ type VirtioConsolePortConfiguration struct {
 }
 
 // Unwrap returns the underlying [raw.VZVirtioConsolePortConfiguration].
-func (x *VirtioConsolePortConfiguration) Unwrap() *raw.VZVirtioConsolePortConfiguration { return x.inner }
+func (x *VirtioConsolePortConfiguration) Unwrap() *raw.VZVirtioConsolePortConfiguration {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -79,7 +81,9 @@ func (x *VirtioConsolePortConfiguration) SetIsConsole(isConsole bool) {
 	x.inner.SetIsConsole(isConsole)
 }
 
-func (x *VirtioConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration { return &x.inner.VZConsolePortConfiguration }
+func (x *VirtioConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration {
+	return &x.inner.VZConsolePortConfiguration
+}
 
 // VirtioConsolePortConfigurationable is the interface implemented by [VirtioConsolePortConfiguration], for mocking and DI.
 type VirtioConsolePortConfigurationable interface {
@@ -94,4 +98,3 @@ type VirtioConsolePortConfigurationable interface {
 }
 
 var _ VirtioConsolePortConfigurationable = (*VirtioConsolePortConfiguration)(nil)
-

@@ -16,14 +16,14 @@ type HKStateOfMind struct {
 }
 
 var (
-	_clsHKStateOfMind = _objcClass("HKStateOfMind")
-	_hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociations = objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:")
+	_clsHKStateOfMind                                                         = _objcClass("HKStateOfMind")
+	_hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociations         = objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:")
 	_hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociationsMetadata = objc.RegisterName("stateOfMindWithDate:kind:valence:labels:associations:metadata:")
-	_hKStateOfMindSelKind = objc.RegisterName("kind")
-	_hKStateOfMindSelValence = objc.RegisterName("valence")
-	_hKStateOfMindSelValenceClassification = objc.RegisterName("valenceClassification")
-	_hKStateOfMindSelLabels = objc.RegisterName("labels")
-	_hKStateOfMindSelAssociations = objc.RegisterName("associations")
+	_hKStateOfMindSelKind                                                     = objc.RegisterName("kind")
+	_hKStateOfMindSelValence                                                  = objc.RegisterName("valence")
+	_hKStateOfMindSelValenceClassification                                    = objc.RegisterName("valenceClassification")
+	_hKStateOfMindSelLabels                                                   = objc.RegisterName("labels")
+	_hKStateOfMindSelAssociations                                             = objc.RegisterName("associations")
 )
 
 func HKStateOfMindFromID(id objc.ID) *HKStateOfMind {
@@ -39,14 +39,18 @@ func HKStateOfMindFromID(id objc.ID) *HKStateOfMind {
 // Creates a new log describing an experienced emotion at a moment in time.
 func HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber]) *HKStateOfMind {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociations, date.Ptr(), kind, valence, labels, associations)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStateOfMindFromID(_ret)
 }
 
 // Creates a new log describing an experienced emotion at a moment in time.
 func HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *HKStateOfMind {
 	_ret := objc.Send[objc.ID](objc.ID(_clsHKStateOfMind), _hKStateOfMindSelStateOfMindWithDateKindValenceLabelsAssociationsMetadata, date.Ptr(), kind, valence, labels, associations, metadata)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return HKStateOfMindFromID(_ret)
 }
 
@@ -79,4 +83,3 @@ func (o *HKStateOfMind) Associations() *foundation.NSArray[*foundation.NSNumber]
 	_ret := objc.Send[*foundation.NSArray[*foundation.NSNumber]](o.Ptr(), _hKStateOfMindSelAssociations)
 	return _ret
 }
-

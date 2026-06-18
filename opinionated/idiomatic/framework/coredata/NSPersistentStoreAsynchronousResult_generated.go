@@ -17,7 +17,9 @@ type PersistentStoreAsynchronousResult struct {
 }
 
 // Unwrap returns the underlying [raw.NSPersistentStoreAsynchronousResult].
-func (x *PersistentStoreAsynchronousResult) Unwrap() *raw.NSPersistentStoreAsynchronousResult { return x.inner }
+func (x *PersistentStoreAsynchronousResult) Unwrap() *raw.NSPersistentStoreAsynchronousResult {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -61,9 +63,13 @@ func (x *PersistentStoreAsynchronousResult) Progress() *foundation.NSProgress {
 	return x.inner.Progress()
 }
 
-func (x *PersistentStoreAsynchronousResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult { return x.inner }
+func (x *PersistentStoreAsynchronousResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult {
+	return x.inner
+}
 
-func (x *PersistentStoreAsynchronousResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+func (x *PersistentStoreAsynchronousResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
+	return &x.inner.NSPersistentStoreResult
+}
 
 // PersistentStoreAsynchronousResultable is the interface implemented by [PersistentStoreAsynchronousResult], for mocking and DI.
 type PersistentStoreAsynchronousResultable interface {
@@ -75,4 +81,3 @@ type PersistentStoreAsynchronousResultable interface {
 }
 
 var _ PersistentStoreAsynchronousResultable = (*PersistentStoreAsynchronousResult)(nil)
-

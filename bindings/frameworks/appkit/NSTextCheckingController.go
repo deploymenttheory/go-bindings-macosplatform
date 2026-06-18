@@ -16,27 +16,27 @@ type NSTextCheckingController struct {
 }
 
 var (
-	_clsNSTextCheckingController = _objcClass("NSTextCheckingController")
-	_nSTextCheckingControllerSelInitWithClient = objc.RegisterName("initWithClient:")
-	_nSTextCheckingControllerSelInvalidate = objc.RegisterName("invalidate")
-	_nSTextCheckingControllerSelDidChangeTextInRange = objc.RegisterName("didChangeTextInRange:")
-	_nSTextCheckingControllerSelInsertedTextInRange = objc.RegisterName("insertedTextInRange:")
-	_nSTextCheckingControllerSelDidChangeSelectedRange = objc.RegisterName("didChangeSelectedRange")
-	_nSTextCheckingControllerSelConsiderTextCheckingForRange = objc.RegisterName("considerTextCheckingForRange:")
-	_nSTextCheckingControllerSelCheckTextInRangeTypesOptions = objc.RegisterName("checkTextInRange:types:options:")
-	_nSTextCheckingControllerSelCheckTextInSelection = objc.RegisterName("checkTextInSelection:")
-	_nSTextCheckingControllerSelCheckTextInDocument = objc.RegisterName("checkTextInDocument:")
-	_nSTextCheckingControllerSelOrderFrontSubstitutionsPanel = objc.RegisterName("orderFrontSubstitutionsPanel:")
-	_nSTextCheckingControllerSelCheckSpelling = objc.RegisterName("checkSpelling:")
-	_nSTextCheckingControllerSelShowGuessPanel = objc.RegisterName("showGuessPanel:")
-	_nSTextCheckingControllerSelChangeSpelling = objc.RegisterName("changeSpelling:")
-	_nSTextCheckingControllerSelIgnoreSpelling = objc.RegisterName("ignoreSpelling:")
-	_nSTextCheckingControllerSelUpdateCandidates = objc.RegisterName("updateCandidates")
-	_nSTextCheckingControllerSelValidAnnotations = objc.RegisterName("validAnnotations")
+	_clsNSTextCheckingController                                            = _objcClass("NSTextCheckingController")
+	_nSTextCheckingControllerSelInitWithClient                              = objc.RegisterName("initWithClient:")
+	_nSTextCheckingControllerSelInvalidate                                  = objc.RegisterName("invalidate")
+	_nSTextCheckingControllerSelDidChangeTextInRange                        = objc.RegisterName("didChangeTextInRange:")
+	_nSTextCheckingControllerSelInsertedTextInRange                         = objc.RegisterName("insertedTextInRange:")
+	_nSTextCheckingControllerSelDidChangeSelectedRange                      = objc.RegisterName("didChangeSelectedRange")
+	_nSTextCheckingControllerSelConsiderTextCheckingForRange                = objc.RegisterName("considerTextCheckingForRange:")
+	_nSTextCheckingControllerSelCheckTextInRangeTypesOptions                = objc.RegisterName("checkTextInRange:types:options:")
+	_nSTextCheckingControllerSelCheckTextInSelection                        = objc.RegisterName("checkTextInSelection:")
+	_nSTextCheckingControllerSelCheckTextInDocument                         = objc.RegisterName("checkTextInDocument:")
+	_nSTextCheckingControllerSelOrderFrontSubstitutionsPanel                = objc.RegisterName("orderFrontSubstitutionsPanel:")
+	_nSTextCheckingControllerSelCheckSpelling                               = objc.RegisterName("checkSpelling:")
+	_nSTextCheckingControllerSelShowGuessPanel                              = objc.RegisterName("showGuessPanel:")
+	_nSTextCheckingControllerSelChangeSpelling                              = objc.RegisterName("changeSpelling:")
+	_nSTextCheckingControllerSelIgnoreSpelling                              = objc.RegisterName("ignoreSpelling:")
+	_nSTextCheckingControllerSelUpdateCandidates                            = objc.RegisterName("updateCandidates")
+	_nSTextCheckingControllerSelValidAnnotations                            = objc.RegisterName("validAnnotations")
 	_nSTextCheckingControllerSelMenuAtIndexClickedOnSelectionEffectiveRange = objc.RegisterName("menuAtIndex:clickedOnSelection:effectiveRange:")
-	_nSTextCheckingControllerSelClient = objc.RegisterName("client")
-	_nSTextCheckingControllerSelSpellCheckerDocumentTag = objc.RegisterName("spellCheckerDocumentTag")
-	_nSTextCheckingControllerSelSetSpellCheckerDocumentTag = objc.RegisterName("setSpellCheckerDocumentTag:")
+	_nSTextCheckingControllerSelClient                                      = objc.RegisterName("client")
+	_nSTextCheckingControllerSelSpellCheckerDocumentTag                     = objc.RegisterName("spellCheckerDocumentTag")
+	_nSTextCheckingControllerSelSetSpellCheckerDocumentTag                  = objc.RegisterName("setSpellCheckerDocumentTag:")
 )
 
 func NSTextCheckingControllerFromID(id objc.ID) *NSTextCheckingController {
@@ -51,7 +51,9 @@ func NSTextCheckingControllerFromID(id objc.ID) *NSTextCheckingController {
 
 func (o *NSTextCheckingController) InitWithClient(client NSTextCheckingClient) *NSTextCheckingController {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingControllerSelInitWithClient, client)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTextCheckingControllerFromID(_ret)
 }
 
@@ -118,7 +120,9 @@ func (o *NSTextCheckingController) ValidAnnotations() *foundation.NSArray[*found
 
 func (o *NSTextCheckingController) MenuAtIndexClickedOnSelectionEffectiveRange(location uint, clickedOnSelection bool, effectiveRange *foundation.NSRange) *NSMenu {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSTextCheckingControllerSelMenuAtIndexClickedOnSelectionEffectiveRange, location, clickedOnSelection, effectiveRange)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuFromID(_ret)
 }
 
@@ -135,4 +139,3 @@ func (o *NSTextCheckingController) SpellCheckerDocumentTag() int {
 func (o *NSTextCheckingController) SetSpellCheckerDocumentTag(spellCheckerDocumentTag int) {
 	o.Ptr().Send(_nSTextCheckingControllerSelSetSpellCheckerDocumentTag, spellCheckerDocumentTag)
 }
-

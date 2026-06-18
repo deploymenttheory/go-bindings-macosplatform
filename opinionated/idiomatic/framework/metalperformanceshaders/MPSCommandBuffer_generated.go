@@ -106,4 +106,3 @@ type CommandBufferable interface {
 }
 
 var _ CommandBufferable = (*CommandBuffer)(nil)
-

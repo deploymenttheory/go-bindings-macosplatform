@@ -60,4 +60,3 @@ type ObjectSectionable interface {
 }
 
 var _ ObjectSectionable = (*ObjectSection)(nil)
-

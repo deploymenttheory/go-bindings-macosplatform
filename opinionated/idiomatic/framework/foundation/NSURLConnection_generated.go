@@ -108,4 +108,3 @@ type URLConnectionable interface {
 }
 
 var _ URLConnectionable = (*URLConnection)(nil)
-

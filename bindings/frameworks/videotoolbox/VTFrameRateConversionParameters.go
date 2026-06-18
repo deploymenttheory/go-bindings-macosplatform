@@ -16,14 +16,14 @@ type VTFrameRateConversionParameters struct {
 }
 
 var (
-	_clsVTFrameRateConversionParameters = _objcClass("VTFrameRateConversionParameters")
+	_clsVTFrameRateConversionParameters                                                                                         = _objcClass("VTFrameRateConversionParameters")
 	_vTFrameRateConversionParametersSelInitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames = objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:")
-	_vTFrameRateConversionParametersSelSourceFrame = objc.RegisterName("sourceFrame")
-	_vTFrameRateConversionParametersSelNextFrame = objc.RegisterName("nextFrame")
-	_vTFrameRateConversionParametersSelOpticalFlow = objc.RegisterName("opticalFlow")
-	_vTFrameRateConversionParametersSelInterpolationPhase = objc.RegisterName("interpolationPhase")
-	_vTFrameRateConversionParametersSelSubmissionMode = objc.RegisterName("submissionMode")
-	_vTFrameRateConversionParametersSelDestinationFrames = objc.RegisterName("destinationFrames")
+	_vTFrameRateConversionParametersSelSourceFrame                                                                              = objc.RegisterName("sourceFrame")
+	_vTFrameRateConversionParametersSelNextFrame                                                                                = objc.RegisterName("nextFrame")
+	_vTFrameRateConversionParametersSelOpticalFlow                                                                              = objc.RegisterName("opticalFlow")
+	_vTFrameRateConversionParametersSelInterpolationPhase                                                                       = objc.RegisterName("interpolationPhase")
+	_vTFrameRateConversionParametersSelSubmissionMode                                                                           = objc.RegisterName("submissionMode")
+	_vTFrameRateConversionParametersSelDestinationFrames                                                                        = objc.RegisterName("destinationFrames")
 )
 
 func VTFrameRateConversionParametersFromID(id objc.ID) *VTFrameRateConversionParameters {
@@ -36,31 +36,39 @@ func VTFrameRateConversionParametersFromID(id objc.ID) *VTFrameRateConversionPar
 	return o
 }
 
-// Creates new frame rate conversion parameters. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, if `sourceFrame` and reference frames don't have the same pixel format, or if `interpolationPhase` array count does not match `destinationFrames` array count. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; must be non `nil`. - opticalFlow: Optional ``VTFrameProcessorOpticalFlow`` object that contains forward and backward optical flow with next frame. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - interpolationPhase: Array of float numbers that indicate intervals at which the processor inserts a frame between current and next frame. The array size indicates how many frames to interpolate and this size must match `destinationFrames` size, with one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see ``VTFrameRateConversionParametersSubmissionMode``. - destinationFrames: Caller-allocated array of ``VTFrameProcessorFrame`` that contains pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase`.
+// Creates new frame rate conversion parameters. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, if `sourceFrame` and reference frames don't have the same pixel format, or if `interpolationPhase` array count does not match `destinationFrames` array count. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order; must be non `nil`. - opticalFlow: Optional “VTFrameProcessorOpticalFlow“ object that contains forward and backward optical flow with next frame. You only need to use this if the optical flow is pre-computed. For the first frame this is always `nil`. - interpolationPhase: Array of float numbers that indicate intervals at which the processor inserts a frame between current and next frame. The array size indicates how many frames to interpolate and this size must match `destinationFrames` size, with one interval for each destination frame. Use float number values between 0 and 1, for example, to insert one frame in the middle use a value of 0.5. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTFrameRateConversionParametersSubmissionMode“. - destinationFrames: Caller-allocated array of “VTFrameProcessorFrame“ that contains pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase`.
 func (o *VTFrameRateConversionParameters) InitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *VTFrameProcessorFrame, nextFrame *VTFrameProcessorFrame, opticalFlow *VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*VTFrameProcessorFrame]) *VTFrameRateConversionParameters {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelInitWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames, sourceFrame.Ptr(), nextFrame.Ptr(), opticalFlow.Ptr(), interpolationPhase, submissionMode, destinationFrame.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameRateConversionParametersFromID(_ret)
 }
 
 // Current source frame, which must be non `nil`.
 func (o *VTFrameRateConversionParameters) SourceFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelSourceFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // The next source frame in presentation time order, which is `nil` for the last frame.
 func (o *VTFrameRateConversionParameters) NextFrame() *VTFrameProcessorFrame {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelNextFrame)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorFrameFromID(_ret)
 }
 
 // An optional object that contains forward and backward optical flow with next frame. Only needed if optical flow is pre-computed. For the last frame this is `nil`.
 func (o *VTFrameRateConversionParameters) OpticalFlow() *VTFrameProcessorOpticalFlow {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelOpticalFlow)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return VTFrameProcessorOpticalFlowFromID(_ret)
 }
 
@@ -79,7 +87,8 @@ func (o *VTFrameRateConversionParameters) SubmissionMode() VTFrameRateConversion
 // Caller-allocated array of video frame objects that contain pixel buffers to receive the results. Must contain the same number of elements as `interpolationPhase` NSArray.
 func (o *VTFrameRateConversionParameters) DestinationFrames() *foundation.NSArray[*VTFrameProcessorFrame] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vTFrameRateConversionParametersSelDestinationFrames)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*VTFrameProcessorFrame](_ret)
 }
-

@@ -101,4 +101,3 @@ type AdvertiserAssistantable interface {
 }
 
 var _ AdvertiserAssistantable = (*AdvertiserAssistant)(nil)
-

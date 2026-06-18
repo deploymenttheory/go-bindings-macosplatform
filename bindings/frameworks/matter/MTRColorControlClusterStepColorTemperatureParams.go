@@ -16,25 +16,25 @@ type MTRColorControlClusterStepColorTemperatureParams struct {
 }
 
 var (
-	_clsMTRColorControlClusterStepColorTemperatureParams = _objcClass("MTRColorControlClusterStepColorTemperatureParams")
-	_mTRColorControlClusterStepColorTemperatureParamsSelStepMode = objc.RegisterName("stepMode")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetStepMode = objc.RegisterName("setStepMode:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelStepSize = objc.RegisterName("stepSize")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetStepSize = objc.RegisterName("setStepSize:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelTransitionTime = objc.RegisterName("transitionTime")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetTransitionTime = objc.RegisterName("setTransitionTime:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMinimumMireds = objc.RegisterName("colorTemperatureMinimumMireds")
+	_clsMTRColorControlClusterStepColorTemperatureParams                                 = _objcClass("MTRColorControlClusterStepColorTemperatureParams")
+	_mTRColorControlClusterStepColorTemperatureParamsSelStepMode                         = objc.RegisterName("stepMode")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetStepMode                      = objc.RegisterName("setStepMode:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelStepSize                         = objc.RegisterName("stepSize")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetStepSize                      = objc.RegisterName("setStepSize:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelTransitionTime                   = objc.RegisterName("transitionTime")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetTransitionTime                = objc.RegisterName("setTransitionTime:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMinimumMireds    = objc.RegisterName("colorTemperatureMinimumMireds")
 	_mTRColorControlClusterStepColorTemperatureParamsSelSetColorTemperatureMinimumMireds = objc.RegisterName("setColorTemperatureMinimumMireds:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMaximumMireds = objc.RegisterName("colorTemperatureMaximumMireds")
+	_mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMaximumMireds    = objc.RegisterName("colorTemperatureMaximumMireds")
 	_mTRColorControlClusterStepColorTemperatureParamsSelSetColorTemperatureMaximumMireds = objc.RegisterName("setColorTemperatureMaximumMireds:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelOptionsMask = objc.RegisterName("optionsMask")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetOptionsMask = objc.RegisterName("setOptionsMask:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelOptionsOverride = objc.RegisterName("optionsOverride")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetOptionsOverride = objc.RegisterName("setOptionsOverride:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRColorControlClusterStepColorTemperatureParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
-	_mTRColorControlClusterStepColorTemperatureParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelOptionsMask                      = objc.RegisterName("optionsMask")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetOptionsMask                   = objc.RegisterName("setOptionsMask:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelOptionsOverride                  = objc.RegisterName("optionsOverride")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetOptionsOverride               = objc.RegisterName("setOptionsOverride:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelTimedInvokeTimeoutMs             = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetTimedInvokeTimeoutMs          = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRColorControlClusterStepColorTemperatureParamsSelServerSideProcessingTimeout      = objc.RegisterName("serverSideProcessingTimeout")
+	_mTRColorControlClusterStepColorTemperatureParamsSelSetServerSideProcessingTimeout   = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
 func MTRColorControlClusterStepColorTemperatureParamsFromID(id objc.ID) *MTRColorControlClusterStepColorTemperatureParams {
@@ -49,7 +49,9 @@ func MTRColorControlClusterStepColorTemperatureParamsFromID(id objc.ID) *MTRColo
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) StepMode() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelStepMode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -59,7 +61,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetStepMode(stepMode 
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) StepSize() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelStepSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -69,7 +73,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetStepSize(stepSize 
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) TransitionTime() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelTransitionTime)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -79,7 +85,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetTransitionTime(tra
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMinimumMireds() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMinimumMireds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,7 +97,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMi
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMaximumMireds() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelColorTemperatureMaximumMireds)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -99,7 +109,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMa
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) OptionsMask() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelOptionsMask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -109,7 +121,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetOptionsMask(option
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) OptionsOverride() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelOptionsOverride)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -120,7 +134,9 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetOptionsOverride(op
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRColorControlClusterStepColorTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -131,11 +147,12 @@ func (o *MTRColorControlClusterStepColorTemperatureParams) SetTimedInvokeTimeout
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRColorControlClusterStepColorTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRColorControlClusterStepColorTemperatureParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRColorControlClusterStepColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRColorControlClusterStepColorTemperatureParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

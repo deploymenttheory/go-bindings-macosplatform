@@ -19,13 +19,13 @@ type GKCircleObstacle struct {
 }
 
 var (
-	_clsGKCircleObstacle = _objcClass("GKCircleObstacle")
+	_clsGKCircleObstacle                   = _objcClass("GKCircleObstacle")
 	_gKCircleObstacleSelObstacleWithRadius = objc.RegisterName("obstacleWithRadius:")
-	_gKCircleObstacleSelInitWithRadius = objc.RegisterName("initWithRadius:")
-	_gKCircleObstacleSelRadius = objc.RegisterName("radius")
-	_gKCircleObstacleSelSetRadius = objc.RegisterName("setRadius:")
-	_gKCircleObstacleSelPosition = objc.RegisterName("position")
-	_gKCircleObstacleSelSetPosition = objc.RegisterName("setPosition:")
+	_gKCircleObstacleSelInitWithRadius     = objc.RegisterName("initWithRadius:")
+	_gKCircleObstacleSelRadius             = objc.RegisterName("radius")
+	_gKCircleObstacleSelSetRadius          = objc.RegisterName("setRadius:")
+	_gKCircleObstacleSelPosition           = objc.RegisterName("position")
+	_gKCircleObstacleSelSetPosition        = objc.RegisterName("setPosition:")
 )
 
 func GKCircleObstacleFromID(id objc.ID) *GKCircleObstacle {
@@ -40,13 +40,17 @@ func GKCircleObstacleFromID(id objc.ID) *GKCircleObstacle {
 
 func GKCircleObstacleObstacleWithRadius(radius float32) *GKCircleObstacle {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKCircleObstacle), _gKCircleObstacleSelObstacleWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCircleObstacleFromID(_ret)
 }
 
 func (o *GKCircleObstacle) InitWithRadius(radius float32) *GKCircleObstacle {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKCircleObstacleSelInitWithRadius, radius)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKCircleObstacleFromID(_ret)
 }
 
@@ -69,4 +73,3 @@ func (o *GKCircleObstacle) Position() unsafe.Pointer {
 func (o *GKCircleObstacle) SetPosition(position unsafe.Pointer) {
 	o.Ptr().Send(_gKCircleObstacleSelSetPosition, position)
 }
-

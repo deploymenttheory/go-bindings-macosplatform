@@ -15,20 +15,20 @@ type NSRelationshipDescription struct {
 }
 
 var (
-	_clsNSRelationshipDescription = _objcClass("NSRelationshipDescription")
-	_nSRelationshipDescriptionSelDestinationEntity = objc.RegisterName("destinationEntity")
-	_nSRelationshipDescriptionSelSetDestinationEntity = objc.RegisterName("setDestinationEntity:")
-	_nSRelationshipDescriptionSelInverseRelationship = objc.RegisterName("inverseRelationship")
+	_clsNSRelationshipDescription                       = _objcClass("NSRelationshipDescription")
+	_nSRelationshipDescriptionSelDestinationEntity      = objc.RegisterName("destinationEntity")
+	_nSRelationshipDescriptionSelSetDestinationEntity   = objc.RegisterName("setDestinationEntity:")
+	_nSRelationshipDescriptionSelInverseRelationship    = objc.RegisterName("inverseRelationship")
 	_nSRelationshipDescriptionSelSetInverseRelationship = objc.RegisterName("setInverseRelationship:")
-	_nSRelationshipDescriptionSelMaxCount = objc.RegisterName("maxCount")
-	_nSRelationshipDescriptionSelSetMaxCount = objc.RegisterName("setMaxCount:")
-	_nSRelationshipDescriptionSelMinCount = objc.RegisterName("minCount")
-	_nSRelationshipDescriptionSelSetMinCount = objc.RegisterName("setMinCount:")
-	_nSRelationshipDescriptionSelDeleteRule = objc.RegisterName("deleteRule")
-	_nSRelationshipDescriptionSelSetDeleteRule = objc.RegisterName("setDeleteRule:")
-	_nSRelationshipDescriptionSelIsToMany = objc.RegisterName("isToMany")
-	_nSRelationshipDescriptionSelIsOrdered = objc.RegisterName("isOrdered")
-	_nSRelationshipDescriptionSelSetOrdered = objc.RegisterName("setOrdered:")
+	_nSRelationshipDescriptionSelMaxCount               = objc.RegisterName("maxCount")
+	_nSRelationshipDescriptionSelSetMaxCount            = objc.RegisterName("setMaxCount:")
+	_nSRelationshipDescriptionSelMinCount               = objc.RegisterName("minCount")
+	_nSRelationshipDescriptionSelSetMinCount            = objc.RegisterName("setMinCount:")
+	_nSRelationshipDescriptionSelDeleteRule             = objc.RegisterName("deleteRule")
+	_nSRelationshipDescriptionSelSetDeleteRule          = objc.RegisterName("setDeleteRule:")
+	_nSRelationshipDescriptionSelIsToMany               = objc.RegisterName("isToMany")
+	_nSRelationshipDescriptionSelIsOrdered              = objc.RegisterName("isOrdered")
+	_nSRelationshipDescriptionSelSetOrdered             = objc.RegisterName("setOrdered:")
 )
 
 func NSRelationshipDescriptionFromID(id objc.ID) *NSRelationshipDescription {
@@ -43,7 +43,9 @@ func NSRelationshipDescriptionFromID(id objc.ID) *NSRelationshipDescription {
 
 func (o *NSRelationshipDescription) DestinationEntity() *NSEntityDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelationshipDescriptionSelDestinationEntity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSEntityDescriptionFromID(_ret)
 }
 
@@ -53,7 +55,9 @@ func (o *NSRelationshipDescription) SetDestinationEntity(destinationEntity *NSEn
 
 func (o *NSRelationshipDescription) InverseRelationship() *NSRelationshipDescription {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSRelationshipDescriptionSelInverseRelationship)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSRelationshipDescriptionFromID(_ret)
 }
 
@@ -101,4 +105,3 @@ func (o *NSRelationshipDescription) IsOrdered() bool {
 func (o *NSRelationshipDescription) SetOrdered(ordered bool) {
 	o.Ptr().Send(_nSRelationshipDescriptionSelSetOrdered, ordered)
 }
-

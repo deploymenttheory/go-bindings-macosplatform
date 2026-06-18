@@ -15,21 +15,21 @@ type NSDateIntervalFormatter struct {
 }
 
 var (
-	_clsNSDateIntervalFormatter = _objcClass("NSDateIntervalFormatter")
-	_nSDateIntervalFormatterSelStringFromDateToDate = objc.RegisterName("stringFromDate:toDate:")
+	_clsNSDateIntervalFormatter                       = _objcClass("NSDateIntervalFormatter")
+	_nSDateIntervalFormatterSelStringFromDateToDate   = objc.RegisterName("stringFromDate:toDate:")
 	_nSDateIntervalFormatterSelStringFromDateInterval = objc.RegisterName("stringFromDateInterval:")
-	_nSDateIntervalFormatterSelLocale = objc.RegisterName("locale")
-	_nSDateIntervalFormatterSelSetLocale = objc.RegisterName("setLocale:")
-	_nSDateIntervalFormatterSelCalendar = objc.RegisterName("calendar")
-	_nSDateIntervalFormatterSelSetCalendar = objc.RegisterName("setCalendar:")
-	_nSDateIntervalFormatterSelTimeZone = objc.RegisterName("timeZone")
-	_nSDateIntervalFormatterSelSetTimeZone = objc.RegisterName("setTimeZone:")
-	_nSDateIntervalFormatterSelDateTemplate = objc.RegisterName("dateTemplate")
-	_nSDateIntervalFormatterSelSetDateTemplate = objc.RegisterName("setDateTemplate:")
-	_nSDateIntervalFormatterSelDateStyle = objc.RegisterName("dateStyle")
-	_nSDateIntervalFormatterSelSetDateStyle = objc.RegisterName("setDateStyle:")
-	_nSDateIntervalFormatterSelTimeStyle = objc.RegisterName("timeStyle")
-	_nSDateIntervalFormatterSelSetTimeStyle = objc.RegisterName("setTimeStyle:")
+	_nSDateIntervalFormatterSelLocale                 = objc.RegisterName("locale")
+	_nSDateIntervalFormatterSelSetLocale              = objc.RegisterName("setLocale:")
+	_nSDateIntervalFormatterSelCalendar               = objc.RegisterName("calendar")
+	_nSDateIntervalFormatterSelSetCalendar            = objc.RegisterName("setCalendar:")
+	_nSDateIntervalFormatterSelTimeZone               = objc.RegisterName("timeZone")
+	_nSDateIntervalFormatterSelSetTimeZone            = objc.RegisterName("setTimeZone:")
+	_nSDateIntervalFormatterSelDateTemplate           = objc.RegisterName("dateTemplate")
+	_nSDateIntervalFormatterSelSetDateTemplate        = objc.RegisterName("setDateTemplate:")
+	_nSDateIntervalFormatterSelDateStyle              = objc.RegisterName("dateStyle")
+	_nSDateIntervalFormatterSelSetDateStyle           = objc.RegisterName("setDateStyle:")
+	_nSDateIntervalFormatterSelTimeStyle              = objc.RegisterName("timeStyle")
+	_nSDateIntervalFormatterSelSetTimeStyle           = objc.RegisterName("setTimeStyle:")
 )
 
 func NSDateIntervalFormatterFromID(id objc.ID) *NSDateIntervalFormatter {
@@ -44,19 +44,25 @@ func NSDateIntervalFormatterFromID(id objc.ID) *NSDateIntervalFormatter {
 
 func (o *NSDateIntervalFormatter) StringFromDateToDate(fromDate *NSDate, toDate *NSDate) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelStringFromDateToDate, fromDate.Ptr(), toDate.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSDateIntervalFormatter) StringFromDateInterval(dateInterval *NSDateInterval) *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelStringFromDateInterval, dateInterval.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
 func (o *NSDateIntervalFormatter) Locale() *NSLocale {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelLocale)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSLocaleFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *NSDateIntervalFormatter) SetLocale(locale *NSLocale) {
 
 func (o *NSDateIntervalFormatter) Calendar() *NSCalendar {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelCalendar)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSCalendarFromID(_ret)
 }
 
@@ -76,7 +84,9 @@ func (o *NSDateIntervalFormatter) SetCalendar(calendar *NSCalendar) {
 
 func (o *NSDateIntervalFormatter) TimeZone() *NSTimeZone {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelTimeZone)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSTimeZoneFromID(_ret)
 }
 
@@ -86,7 +96,9 @@ func (o *NSDateIntervalFormatter) SetTimeZone(timeZone *NSTimeZone) {
 
 func (o *NSDateIntervalFormatter) DateTemplate() *NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSDateIntervalFormatterSelDateTemplate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSStringFromID(_ret)
 }
 
@@ -111,4 +123,3 @@ func (o *NSDateIntervalFormatter) TimeStyle() NSDateIntervalFormatterStyle {
 func (o *NSDateIntervalFormatter) SetTimeStyle(timeStyle NSDateIntervalFormatterStyle) {
 	o.Ptr().Send(_nSDateIntervalFormatterSelSetTimeStyle, timeStyle)
 }
-

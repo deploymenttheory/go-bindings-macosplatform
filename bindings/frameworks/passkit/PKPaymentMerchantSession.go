@@ -16,7 +16,7 @@ type PKPaymentMerchantSession struct {
 }
 
 var (
-	_clsPKPaymentMerchantSession = _objcClass("PKPaymentMerchantSession")
+	_clsPKPaymentMerchantSession                   = _objcClass("PKPaymentMerchantSession")
 	_pKPaymentMerchantSessionSelInitWithDictionary = objc.RegisterName("initWithDictionary:")
 )
 
@@ -32,7 +32,8 @@ func PKPaymentMerchantSessionFromID(id objc.ID) *PKPaymentMerchantSession {
 
 func (o *PKPaymentMerchantSession) InitWithDictionary(dictionary *foundation.NSDictionary[objc.ID, objc.ID]) *PKPaymentMerchantSession {
 	_ret := objc.Send[objc.ID](o.Ptr(), _pKPaymentMerchantSessionSelInitWithDictionary, dictionary)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return PKPaymentMerchantSessionFromID(_ret)
 }
-

@@ -100,11 +100,17 @@ func (x *CNNNeuronExponential) WithLabel(label string) *CNNNeuronExponential {
 	return x
 }
 
-func (x *CNNNeuronExponential) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
+func (x *CNNNeuronExponential) asCNNNeuron() *mpsneuralnetwork.MPSCNNNeuron {
+	return &x.inner.MPSCNNNeuron
+}
 
-func (x *CNNNeuronExponential) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
+func (x *CNNNeuronExponential) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel
+}
 
-func (x *CNNNeuronExponential) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
+func (x *CNNNeuronExponential) asKernel() *mpscore.MPSKernel {
+	return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel
+}
 
 // CNNNeuronExponentialable is the interface implemented by [CNNNeuronExponential], for mocking and DI.
 type CNNNeuronExponentialable interface {
@@ -122,4 +128,3 @@ type CNNNeuronExponentialable interface {
 }
 
 var _ CNNNeuronExponentialable = (*CNNNeuronExponential)(nil)
-

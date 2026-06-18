@@ -16,13 +16,13 @@ type MTROTASoftwareUpdateRequestorClusterProviderLocation struct {
 }
 
 var (
-	_clsMTROTASoftwareUpdateRequestorClusterProviderLocation = _objcClass("MTROTASoftwareUpdateRequestorClusterProviderLocation")
-	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelProviderNodeID = objc.RegisterName("providerNodeID")
+	_clsMTROTASoftwareUpdateRequestorClusterProviderLocation                  = _objcClass("MTROTASoftwareUpdateRequestorClusterProviderLocation")
+	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelProviderNodeID    = objc.RegisterName("providerNodeID")
 	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetProviderNodeID = objc.RegisterName("setProviderNodeID:")
-	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelEndpoint = objc.RegisterName("endpoint")
-	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetEndpoint = objc.RegisterName("setEndpoint:")
-	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelFabricIndex = objc.RegisterName("fabricIndex")
-	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetFabricIndex = objc.RegisterName("setFabricIndex:")
+	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelEndpoint          = objc.RegisterName("endpoint")
+	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetEndpoint       = objc.RegisterName("setEndpoint:")
+	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelFabricIndex       = objc.RegisterName("fabricIndex")
+	_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetFabricIndex    = objc.RegisterName("setFabricIndex:")
 )
 
 func MTROTASoftwareUpdateRequestorClusterProviderLocationFromID(id objc.ID) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
@@ -37,7 +37,9 @@ func MTROTASoftwareUpdateRequestorClusterProviderLocationFromID(id objc.ID) *MTR
 
 func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) ProviderNodeID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterProviderLocationSelProviderNodeID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetProviderNodeID
 
 func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) Endpoint() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterProviderLocationSelEndpoint)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetEndpoint(endpo
 
 func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) FabricIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTROTASoftwareUpdateRequestorClusterProviderLocationSelFabricIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTROTASoftwareUpdateRequestorClusterProviderLocation) SetFabricIndex(fabricIndex *foundation.NSNumber) {
 	o.Ptr().Send(_mTROTASoftwareUpdateRequestorClusterProviderLocationSelSetFabricIndex, fabricIndex.Ptr())
 }
-

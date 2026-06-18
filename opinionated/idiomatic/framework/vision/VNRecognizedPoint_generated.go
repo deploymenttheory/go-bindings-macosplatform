@@ -56,4 +56,3 @@ type RecognizedPointable interface {
 }
 
 var _ RecognizedPointable = (*RecognizedPoint)(nil)
-

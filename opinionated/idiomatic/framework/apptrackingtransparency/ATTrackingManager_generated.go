@@ -41,4 +41,3 @@ type TrackingManagerable interface {
 }
 
 var _ TrackingManagerable = (*TrackingManager)(nil)
-

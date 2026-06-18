@@ -12,4 +12,3 @@ import (
 type FSObjectProvider interface {
 	asFSObject() *raw.DRFSObject
 }
-

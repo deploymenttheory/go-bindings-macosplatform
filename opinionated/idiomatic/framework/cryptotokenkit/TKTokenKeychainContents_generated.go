@@ -87,4 +87,3 @@ type TokenKeychainContentsable interface {
 }
 
 var _ TokenKeychainContentsable = (*TokenKeychainContents)(nil)
-

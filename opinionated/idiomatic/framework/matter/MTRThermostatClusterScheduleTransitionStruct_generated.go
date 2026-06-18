@@ -16,7 +16,9 @@ type MTRThermostatClusterScheduleTransitionStruct struct {
 }
 
 // Unwrap returns the underlying [raw.MTRThermostatClusterScheduleTransitionStruct].
-func (x *MTRThermostatClusterScheduleTransitionStruct) Unwrap() *raw.MTRThermostatClusterScheduleTransitionStruct { return x.inner }
+func (x *MTRThermostatClusterScheduleTransitionStruct) Unwrap() *raw.MTRThermostatClusterScheduleTransitionStruct {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -156,4 +158,3 @@ type MTRThermostatClusterScheduleTransitionStructable interface {
 }
 
 var _ MTRThermostatClusterScheduleTransitionStructable = (*MTRThermostatClusterScheduleTransitionStruct)(nil)
-

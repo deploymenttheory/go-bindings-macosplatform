@@ -46,7 +46,9 @@ func (x *DOMAbstractView) Document() *DOMDocument {
 
 func (x *DOMAbstractView) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
-func (x *DOMAbstractView) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+func (x *DOMAbstractView) asWebScriptObject() *raw.WebScriptObject {
+	return &x.inner.DOMObject.WebScriptObject
+}
 
 // DOMAbstractViewable is the interface implemented by [DOMAbstractView], for mocking and DI.
 type DOMAbstractViewable interface {
@@ -55,4 +57,3 @@ type DOMAbstractViewable interface {
 }
 
 var _ DOMAbstractViewable = (*DOMAbstractView)(nil)
-

@@ -16,14 +16,14 @@ type INStartCallIntent struct {
 }
 
 var (
-	_clsINStartCallIntent = _objcClass("INStartCallIntent")
+	_clsINStartCallIntent                                                                                            = _objcClass("INStartCallIntent")
 	_iNStartCallIntentSelInitWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability = objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:")
-	_iNStartCallIntentSelCallRecordFilter = objc.RegisterName("callRecordFilter")
-	_iNStartCallIntentSelCallRecordToCallBack = objc.RegisterName("callRecordToCallBack")
-	_iNStartCallIntentSelAudioRoute = objc.RegisterName("audioRoute")
-	_iNStartCallIntentSelDestinationType = objc.RegisterName("destinationType")
-	_iNStartCallIntentSelContacts = objc.RegisterName("contacts")
-	_iNStartCallIntentSelCallCapability = objc.RegisterName("callCapability")
+	_iNStartCallIntentSelCallRecordFilter                                                                            = objc.RegisterName("callRecordFilter")
+	_iNStartCallIntentSelCallRecordToCallBack                                                                        = objc.RegisterName("callRecordToCallBack")
+	_iNStartCallIntentSelAudioRoute                                                                                  = objc.RegisterName("audioRoute")
+	_iNStartCallIntentSelDestinationType                                                                             = objc.RegisterName("destinationType")
+	_iNStartCallIntentSelContacts                                                                                    = objc.RegisterName("contacts")
+	_iNStartCallIntentSelCallCapability                                                                              = objc.RegisterName("callCapability")
 )
 
 func INStartCallIntentFromID(id objc.ID) *INStartCallIntent {
@@ -38,19 +38,25 @@ func INStartCallIntentFromID(id objc.ID) *INStartCallIntent {
 
 func (o *INStartCallIntent) InitWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *INCallRecordFilter, callRecordToCallBack *INCallRecord, audioRoute INCallAudioRoute, destinationType INCallDestinationType, contacts *foundation.NSArray[*INPerson], callCapability INCallCapability) *INStartCallIntent {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallIntentSelInitWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability, callRecordFilter.Ptr(), callRecordToCallBack.Ptr(), audioRoute, destinationType, contacts.Ptr(), callCapability)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INStartCallIntentFromID(_ret)
 }
 
 func (o *INStartCallIntent) CallRecordFilter() *INCallRecordFilter {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallIntentSelCallRecordFilter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFilterFromID(_ret)
 }
 
 func (o *INStartCallIntent) CallRecordToCallBack() *INCallRecord {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallIntentSelCallRecordToCallBack)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INCallRecordFromID(_ret)
 }
 
@@ -66,7 +72,9 @@ func (o *INStartCallIntent) DestinationType() INCallDestinationType {
 
 func (o *INStartCallIntent) Contacts() *foundation.NSArray[*INPerson] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNStartCallIntentSelContacts)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*INPerson](_ret)
 }
 
@@ -74,4 +82,3 @@ func (o *INStartCallIntent) CallCapability() INCallCapability {
 	_ret := objc.Send[INCallCapability](o.Ptr(), _iNStartCallIntentSelCallCapability)
 	return _ret
 }
-

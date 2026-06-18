@@ -16,11 +16,15 @@ type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams].
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams { return x.inner }
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams (nil for 0).
 func MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
@@ -90,7 +94,9 @@ func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVend
 	return x
 }
 
-func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams { return &x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams }
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
+	return &x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+}
 
 // MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable interface {
@@ -107,4 +113,3 @@ type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable interface
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable = (*MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams)(nil)
-

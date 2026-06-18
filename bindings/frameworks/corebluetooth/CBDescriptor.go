@@ -15,9 +15,9 @@ type CBDescriptor struct {
 }
 
 var (
-	_clsCBDescriptor = _objcClass("CBDescriptor")
+	_clsCBDescriptor               = _objcClass("CBDescriptor")
 	_cBDescriptorSelCharacteristic = objc.RegisterName("characteristic")
-	_cBDescriptorSelValue = objc.RegisterName("value")
+	_cBDescriptorSelValue          = objc.RegisterName("value")
 )
 
 func CBDescriptorFromID(id objc.ID) *CBDescriptor {
@@ -33,7 +33,9 @@ func CBDescriptorFromID(id objc.ID) *CBDescriptor {
 // @property characteristic @discussion A back-pointer to the characteristic this descriptor belongs to.
 func (o *CBDescriptor) Characteristic() *CBCharacteristic {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBDescriptorSelCharacteristic)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBCharacteristicFromID(_ret)
 }
 
@@ -42,4 +44,3 @@ func (o *CBDescriptor) Value() objc.ID {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBDescriptorSelValue)
 	return _ret
 }
-

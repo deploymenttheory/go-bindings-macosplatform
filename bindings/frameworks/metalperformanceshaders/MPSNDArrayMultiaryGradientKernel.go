@@ -19,9 +19,9 @@ type MPSNDArrayMultiaryGradientKernel struct {
 }
 
 var (
-	_clsMPSNDArrayMultiaryGradientKernel = _objcClass("MPSNDArrayMultiaryGradientKernel")
-	_mPSNDArrayMultiaryGradientKernelSelInitWithDeviceSourceCountSourceGradientIndex = objc.RegisterName("initWithDevice:sourceCount:sourceGradientIndex:")
-	_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientState = objc.RegisterName("encodeToCommandBuffer:sourceArrays:sourceGradient:gradientState:")
+	_clsMPSNDArrayMultiaryGradientKernel                                                                             = _objcClass("MPSNDArrayMultiaryGradientKernel")
+	_mPSNDArrayMultiaryGradientKernelSelInitWithDeviceSourceCountSourceGradientIndex                                 = objc.RegisterName("initWithDevice:sourceCount:sourceGradientIndex:")
+	_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientState                 = objc.RegisterName("encodeToCommandBuffer:sourceArrays:sourceGradient:gradientState:")
 	_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray = objc.RegisterName("encodeToCommandBuffer:sourceArrays:sourceGradient:gradientState:destinationArray:")
 )
 
@@ -38,17 +38,20 @@ func MPSNDArrayMultiaryGradientKernelFromID(id objc.ID) *MPSNDArrayMultiaryGradi
 // @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device                The device on which the kernel will run @param      count                 The maximum number of NDArrays read by the kernel @param      sourceGradientIndex   The source index for which gradient will be calculated @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
 func (o *MPSNDArrayMultiaryGradientKernel) InitWithDeviceSourceCountSourceGradientIndex(device metal.MTLDevice, count uint, sourceGradientIndex uint) *MPSNDArrayMultiaryGradientKernel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryGradientKernelSelInitWithDeviceSourceCountSourceGradientIndex, device, count, sourceGradientIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayMultiaryGradientKernelFromID(_ret)
 }
 
 func (o *MPSNDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientState, cmdBuf, sources, gradient.Ptr(), state.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
 func (o *MPSNDArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
 	o.Ptr().Send(_mPSNDArrayMultiaryGradientKernelSelEncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray, cmdBuf, sources, gradient.Ptr(), state.Ptr(), destination.Ptr())
 }
-

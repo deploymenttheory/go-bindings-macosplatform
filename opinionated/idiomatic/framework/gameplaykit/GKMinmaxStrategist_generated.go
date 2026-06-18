@@ -72,4 +72,3 @@ type MinmaxStrategistable interface {
 }
 
 var _ MinmaxStrategistable = (*MinmaxStrategist)(nil)
-

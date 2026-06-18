@@ -210,9 +210,13 @@ func (x *MTRClusterBarrierControl) BarrierControlStopWithExpectedValuesExpectedV
 	x.inner.BarrierControlStopWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
 }
 
-func (x *MTRClusterBarrierControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
+func (x *MTRClusterBarrierControl) asMTRGenericCluster() *raw.MTRGenericCluster {
+	return &x.inner.MTRGenericCluster
+}
 
-func (x *MTRClusterBarrierControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+func (x *MTRClusterBarrierControl) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericCluster.MTRCluster
+}
 
 // MTRClusterBarrierControlable is the interface implemented by [MTRClusterBarrierControl], for mocking and DI.
 type MTRClusterBarrierControlable interface {
@@ -253,4 +257,3 @@ type MTRClusterBarrierControlable interface {
 }
 
 var _ MTRClusterBarrierControlable = (*MTRClusterBarrierControl)(nil)
-

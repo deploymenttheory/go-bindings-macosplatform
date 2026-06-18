@@ -16,10 +16,10 @@ type MLOptimizationHints struct {
 }
 
 var (
-	_clsMLOptimizationHints = _objcClass("MLOptimizationHints")
-	_mLOptimizationHintsSelReshapeFrequency = objc.RegisterName("reshapeFrequency")
-	_mLOptimizationHintsSelSetReshapeFrequency = objc.RegisterName("setReshapeFrequency:")
-	_mLOptimizationHintsSelSpecializationStrategy = objc.RegisterName("specializationStrategy")
+	_clsMLOptimizationHints                          = _objcClass("MLOptimizationHints")
+	_mLOptimizationHintsSelReshapeFrequency          = objc.RegisterName("reshapeFrequency")
+	_mLOptimizationHintsSelSetReshapeFrequency       = objc.RegisterName("setReshapeFrequency:")
+	_mLOptimizationHintsSelSpecializationStrategy    = objc.RegisterName("specializationStrategy")
 	_mLOptimizationHintsSelSetSpecializationStrategy = objc.RegisterName("setSpecializationStrategy:")
 )
 
@@ -52,4 +52,3 @@ func (o *MLOptimizationHints) SpecializationStrategy() MLSpecializationStrategy 
 func (o *MLOptimizationHints) SetSpecializationStrategy(specializationStrategy MLSpecializationStrategy) {
 	o.Ptr().Send(_mLOptimizationHintsSelSetSpecializationStrategy, specializationStrategy)
 }
-

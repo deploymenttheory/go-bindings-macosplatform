@@ -16,25 +16,25 @@ type TKSmartCardPINFormat struct {
 }
 
 var (
-	_clsTKSmartCardPINFormat = _objcClass("TKSmartCardPINFormat")
-	_tKSmartCardPINFormatSelCharset = objc.RegisterName("charset")
-	_tKSmartCardPINFormatSelSetCharset = objc.RegisterName("setCharset:")
-	_tKSmartCardPINFormatSelEncoding = objc.RegisterName("encoding")
-	_tKSmartCardPINFormatSelSetEncoding = objc.RegisterName("setEncoding:")
-	_tKSmartCardPINFormatSelMinPINLength = objc.RegisterName("minPINLength")
-	_tKSmartCardPINFormatSelSetMinPINLength = objc.RegisterName("setMinPINLength:")
-	_tKSmartCardPINFormatSelMaxPINLength = objc.RegisterName("maxPINLength")
-	_tKSmartCardPINFormatSelSetMaxPINLength = objc.RegisterName("setMaxPINLength:")
-	_tKSmartCardPINFormatSelPINBlockByteLength = objc.RegisterName("PINBlockByteLength")
+	_clsTKSmartCardPINFormat                      = _objcClass("TKSmartCardPINFormat")
+	_tKSmartCardPINFormatSelCharset               = objc.RegisterName("charset")
+	_tKSmartCardPINFormatSelSetCharset            = objc.RegisterName("setCharset:")
+	_tKSmartCardPINFormatSelEncoding              = objc.RegisterName("encoding")
+	_tKSmartCardPINFormatSelSetEncoding           = objc.RegisterName("setEncoding:")
+	_tKSmartCardPINFormatSelMinPINLength          = objc.RegisterName("minPINLength")
+	_tKSmartCardPINFormatSelSetMinPINLength       = objc.RegisterName("setMinPINLength:")
+	_tKSmartCardPINFormatSelMaxPINLength          = objc.RegisterName("maxPINLength")
+	_tKSmartCardPINFormatSelSetMaxPINLength       = objc.RegisterName("setMaxPINLength:")
+	_tKSmartCardPINFormatSelPINBlockByteLength    = objc.RegisterName("PINBlockByteLength")
 	_tKSmartCardPINFormatSelSetPINBlockByteLength = objc.RegisterName("setPINBlockByteLength:")
-	_tKSmartCardPINFormatSelPINJustification = objc.RegisterName("PINJustification")
-	_tKSmartCardPINFormatSelSetPINJustification = objc.RegisterName("setPINJustification:")
-	_tKSmartCardPINFormatSelPINBitOffset = objc.RegisterName("PINBitOffset")
-	_tKSmartCardPINFormatSelSetPINBitOffset = objc.RegisterName("setPINBitOffset:")
-	_tKSmartCardPINFormatSelPINLengthBitOffset = objc.RegisterName("PINLengthBitOffset")
+	_tKSmartCardPINFormatSelPINJustification      = objc.RegisterName("PINJustification")
+	_tKSmartCardPINFormatSelSetPINJustification   = objc.RegisterName("setPINJustification:")
+	_tKSmartCardPINFormatSelPINBitOffset          = objc.RegisterName("PINBitOffset")
+	_tKSmartCardPINFormatSelSetPINBitOffset       = objc.RegisterName("setPINBitOffset:")
+	_tKSmartCardPINFormatSelPINLengthBitOffset    = objc.RegisterName("PINLengthBitOffset")
 	_tKSmartCardPINFormatSelSetPINLengthBitOffset = objc.RegisterName("setPINLengthBitOffset:")
-	_tKSmartCardPINFormatSelPINLengthBitSize = objc.RegisterName("PINLengthBitSize")
-	_tKSmartCardPINFormatSelSetPINLengthBitSize = objc.RegisterName("setPINLengthBitSize:")
+	_tKSmartCardPINFormatSelPINLengthBitSize      = objc.RegisterName("PINLengthBitSize")
+	_tKSmartCardPINFormatSelSetPINLengthBitSize   = objc.RegisterName("setPINLengthBitSize:")
 )
 
 func TKSmartCardPINFormatFromID(id objc.ID) *TKSmartCardPINFormat {
@@ -136,4 +136,3 @@ func (o *TKSmartCardPINFormat) PINLengthBitSize() int {
 func (o *TKSmartCardPINFormat) SetPINLengthBitSize(pINLengthBitSize int) {
 	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINLengthBitSize, pINLengthBitSize)
 }
-

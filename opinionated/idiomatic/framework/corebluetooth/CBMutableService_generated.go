@@ -45,7 +45,9 @@ func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *Mutable
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asService().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asService().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CBService](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -61,7 +63,9 @@ func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *M
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asCharacteristic().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asCharacteristic().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.CBCharacteristic](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -94,4 +98,3 @@ type MutableServiceable interface {
 }
 
 var _ MutableServiceable = (*MutableService)(nil)
-

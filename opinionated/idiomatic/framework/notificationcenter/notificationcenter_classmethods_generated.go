@@ -25,4 +25,3 @@ func DefaultWidgetController() *WidgetController {
 	}
 	return &WidgetController{inner: _r}
 }
-

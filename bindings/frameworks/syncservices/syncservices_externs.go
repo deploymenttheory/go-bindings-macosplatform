@@ -150,4 +150,3 @@ func ISyncUnsupportedEntityException() uintptr {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncUnsupportedEntityException")
 	return ptr
 }
-

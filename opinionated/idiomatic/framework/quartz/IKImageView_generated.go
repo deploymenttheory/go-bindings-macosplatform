@@ -449,4 +449,3 @@ type IKImageViewable interface {
 }
 
 var _ IKImageViewable = (*IKImageView)(nil)
-

@@ -170,4 +170,3 @@ type ASWebAuthenticationSessionWebBrowserSessionHandling interface {
 	BeginHandlingWebAuthenticationSessionRequest(request *ASWebAuthenticationSessionRequest)
 	CancelWebAuthenticationSessionRequest(request *ASWebAuthenticationSessionRequest)
 }
-

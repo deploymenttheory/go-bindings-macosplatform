@@ -15,9 +15,9 @@ type MLCYOLOLossLayer struct {
 }
 
 var (
-	_clsMLCYOLOLossLayer = _objcClass("MLCYOLOLossLayer")
+	_clsMLCYOLOLossLayer                    = _objcClass("MLCYOLOLossLayer")
 	_mLCYOLOLossLayerSelLayerWithDescriptor = objc.RegisterName("layerWithDescriptor:")
-	_mLCYOLOLossLayerSelYoloLossDescriptor = objc.RegisterName("yoloLossDescriptor")
+	_mLCYOLOLossLayerSelYoloLossDescriptor  = objc.RegisterName("yoloLossDescriptor")
 )
 
 func MLCYOLOLossLayerFromID(id objc.ID) *MLCYOLOLossLayer {
@@ -33,14 +33,17 @@ func MLCYOLOLossLayerFromID(id objc.ID) *MLCYOLOLossLayer {
 // @abstract   Create a YOLO loss layer @param      lossDescriptor          The loss descriptor @return     A new YOLO loss layer.
 func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *MLCYOLOLossDescriptor) *MLCYOLOLossLayer {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCYOLOLossLayer), _mLCYOLOLossLayerSelLayerWithDescriptor, lossDescriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCYOLOLossLayerFromID(_ret)
 }
 
 // @property   yoloLossDescriptor @abstract   The YOLO loss descriptor
 func (o *MLCYOLOLossLayer) YoloLossDescriptor() *MLCYOLOLossDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCYOLOLossLayerSelYoloLossDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCYOLOLossDescriptorFromID(_ret)
 }
-

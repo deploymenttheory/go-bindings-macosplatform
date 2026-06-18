@@ -16,19 +16,19 @@ type NSPersistentHistoryChangeRequest struct {
 }
 
 var (
-	_clsNSPersistentHistoryChangeRequest = _objcClass("NSPersistentHistoryChangeRequest")
-	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterDate = objc.RegisterName("fetchHistoryAfterDate:")
-	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterToken = objc.RegisterName("fetchHistoryAfterToken:")
-	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterTransaction = objc.RegisterName("fetchHistoryAfterTransaction:")
-	_nSPersistentHistoryChangeRequestSelFetchHistoryWithFetchRequest = objc.RegisterName("fetchHistoryWithFetchRequest:")
-	_nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeDate = objc.RegisterName("deleteHistoryBeforeDate:")
-	_nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeToken = objc.RegisterName("deleteHistoryBeforeToken:")
+	_clsNSPersistentHistoryChangeRequest                               = _objcClass("NSPersistentHistoryChangeRequest")
+	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterDate          = objc.RegisterName("fetchHistoryAfterDate:")
+	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterToken         = objc.RegisterName("fetchHistoryAfterToken:")
+	_nSPersistentHistoryChangeRequestSelFetchHistoryAfterTransaction   = objc.RegisterName("fetchHistoryAfterTransaction:")
+	_nSPersistentHistoryChangeRequestSelFetchHistoryWithFetchRequest   = objc.RegisterName("fetchHistoryWithFetchRequest:")
+	_nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeDate        = objc.RegisterName("deleteHistoryBeforeDate:")
+	_nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeToken       = objc.RegisterName("deleteHistoryBeforeToken:")
 	_nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeTransaction = objc.RegisterName("deleteHistoryBeforeTransaction:")
-	_nSPersistentHistoryChangeRequestSelResultType = objc.RegisterName("resultType")
-	_nSPersistentHistoryChangeRequestSelSetResultType = objc.RegisterName("setResultType:")
-	_nSPersistentHistoryChangeRequestSelToken = objc.RegisterName("token")
-	_nSPersistentHistoryChangeRequestSelFetchRequest = objc.RegisterName("fetchRequest")
-	_nSPersistentHistoryChangeRequestSelSetFetchRequest = objc.RegisterName("setFetchRequest:")
+	_nSPersistentHistoryChangeRequestSelResultType                     = objc.RegisterName("resultType")
+	_nSPersistentHistoryChangeRequestSelSetResultType                  = objc.RegisterName("setResultType:")
+	_nSPersistentHistoryChangeRequestSelToken                          = objc.RegisterName("token")
+	_nSPersistentHistoryChangeRequestSelFetchRequest                   = objc.RegisterName("fetchRequest")
+	_nSPersistentHistoryChangeRequestSelSetFetchRequest                = objc.RegisterName("setFetchRequest:")
 )
 
 func NSPersistentHistoryChangeRequestFromID(id objc.ID) *NSPersistentHistoryChangeRequest {
@@ -43,43 +43,57 @@ func NSPersistentHistoryChangeRequestFromID(id objc.ID) *NSPersistentHistoryChan
 
 func NSPersistentHistoryChangeRequestFetchHistoryAfterDate(date *foundation.NSDate) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestFetchHistoryAfterToken(token *NSPersistentHistoryToken) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterToken, token.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestFetchHistoryAfterTransaction(transaction *NSPersistentHistoryTransaction) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryAfterTransaction, transaction.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestFetchHistoryWithFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelFetchHistoryWithFetchRequest, fetchRequest)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeDate(date *foundation.NSDate) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeDate, date.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeToken(token *NSPersistentHistoryToken) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeToken, token.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
 func NSPersistentHistoryChangeRequestDeleteHistoryBeforeTransaction(transaction *NSPersistentHistoryTransaction) *NSPersistentHistoryChangeRequest {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPersistentHistoryChangeRequest), _nSPersistentHistoryChangeRequestSelDeleteHistoryBeforeTransaction, transaction.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryChangeRequestFromID(_ret)
 }
 
@@ -94,7 +108,9 @@ func (o *NSPersistentHistoryChangeRequest) SetResultType(resultType NSPersistent
 
 func (o *NSPersistentHistoryChangeRequest) Token() *NSPersistentHistoryToken {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPersistentHistoryChangeRequestSelToken)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPersistentHistoryTokenFromID(_ret)
 }
 
@@ -106,4 +122,3 @@ func (o *NSPersistentHistoryChangeRequest) FetchRequest() *NSFetchRequest[objc.I
 func (o *NSPersistentHistoryChangeRequest) SetFetchRequest(fetchRequest *NSFetchRequest[objc.ID]) {
 	o.Ptr().Send(_nSPersistentHistoryChangeRequestSelSetFetchRequest, fetchRequest)
 }
-

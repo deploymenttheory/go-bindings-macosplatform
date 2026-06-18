@@ -15,7 +15,9 @@ type MTRTimeSynchronizationClusterDSTTableEmptyEvent struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDSTTableEmptyEvent].
-func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) Unwrap() *raw.MTRTimeSynchronizationClusterDSTTableEmptyEvent { return x.inner }
+func (x *MTRTimeSynchronizationClusterDSTTableEmptyEvent) Unwrap() *raw.MTRTimeSynchronizationClusterDSTTableEmptyEvent {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -41,4 +43,3 @@ type MTRTimeSynchronizationClusterDSTTableEmptyEventable interface {
 }
 
 var _ MTRTimeSynchronizationClusterDSTTableEmptyEventable = (*MTRTimeSynchronizationClusterDSTTableEmptyEvent)(nil)
-

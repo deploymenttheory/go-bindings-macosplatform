@@ -16,7 +16,9 @@ type MTROvenCavityOperationalStateClusterStopParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterStopParams].
-func (x *MTROvenCavityOperationalStateClusterStopParams) Unwrap() *raw.MTROvenCavityOperationalStateClusterStopParams { return x.inner }
+func (x *MTROvenCavityOperationalStateClusterStopParams) Unwrap() *raw.MTROvenCavityOperationalStateClusterStopParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -80,4 +82,3 @@ type MTROvenCavityOperationalStateClusterStopParamsable interface {
 }
 
 var _ MTROvenCavityOperationalStateClusterStopParamsable = (*MTROvenCavityOperationalStateClusterStopParams)(nil)
-

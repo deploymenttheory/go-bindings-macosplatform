@@ -16,7 +16,9 @@ type CollectionViewTransitionLayout struct {
 }
 
 // Unwrap returns the underlying [raw.NSCollectionViewTransitionLayout].
-func (x *CollectionViewTransitionLayout) Unwrap() *raw.NSCollectionViewTransitionLayout { return x.inner }
+func (x *CollectionViewTransitionLayout) Unwrap() *raw.NSCollectionViewTransitionLayout {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -81,7 +83,9 @@ func (x *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
 	return &CollectionViewLayout{inner: _r}
 }
 
-func (x *CollectionViewTransitionLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+func (x *CollectionViewTransitionLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
+	return &x.inner.NSCollectionViewLayout
+}
 
 // CollectionViewTransitionLayoutable is the interface implemented by [CollectionViewTransitionLayout], for mocking and DI.
 type CollectionViewTransitionLayoutable interface {
@@ -96,4 +100,3 @@ type CollectionViewTransitionLayoutable interface {
 }
 
 var _ CollectionViewTransitionLayoutable = (*CollectionViewTransitionLayout)(nil)
-

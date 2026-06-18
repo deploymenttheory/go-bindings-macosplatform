@@ -35,7 +35,9 @@ func NewIntentResolutionResult() *IntentResolutionResult {
 	return &IntentResolutionResult{inner: raw.INIntentResolutionResultFromID(_id)}
 }
 
-func (x *IntentResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return x.inner }
+func (x *IntentResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
+	return x.inner
+}
 
 // IntentResolutionResultable is the interface implemented by [IntentResolutionResult], for mocking and DI.
 type IntentResolutionResultable interface {
@@ -43,4 +45,3 @@ type IntentResolutionResultable interface {
 }
 
 var _ IntentResolutionResultable = (*IntentResolutionResult)(nil)
-

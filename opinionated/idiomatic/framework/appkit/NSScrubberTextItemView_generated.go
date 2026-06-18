@@ -66,7 +66,9 @@ func (x *ScrubberTextItemView) WithSubviews(items ...ViewProvider) *ScrubberText
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSView](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -208,7 +210,9 @@ func (x *ScrubberTextItemView) WithBackgroundFilters(items ...*coreimage.CIFilte
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -230,7 +234,9 @@ func (x *ScrubberTextItemView) WithContentFilters(items ...*coreimage.CIFilter) 
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -294,7 +300,9 @@ func (x *ScrubberTextItemView) WithGestureRecognizers(items ...GestureRecognizer
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
 	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
 		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
 			objc.RegisterName("arrayWithObjects:count:"),
@@ -416,13 +424,21 @@ func (x *ScrubberTextItemView) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
-func (x *ScrubberTextItemView) asScrubberItemView() *raw.NSScrubberItemView { return &x.inner.NSScrubberItemView }
+func (x *ScrubberTextItemView) asScrubberItemView() *raw.NSScrubberItemView {
+	return &x.inner.NSScrubberItemView
+}
 
-func (x *ScrubberTextItemView) asScrubberArrangedView() *raw.NSScrubberArrangedView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView }
+func (x *ScrubberTextItemView) asScrubberArrangedView() *raw.NSScrubberArrangedView {
+	return &x.inner.NSScrubberItemView.NSScrubberArrangedView
+}
 
-func (x *ScrubberTextItemView) asView() *raw.NSView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView }
+func (x *ScrubberTextItemView) asView() *raw.NSView {
+	return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView
+}
 
-func (x *ScrubberTextItemView) asResponder() *raw.NSResponder { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder }
+func (x *ScrubberTextItemView) asResponder() *raw.NSResponder {
+	return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder
+}
 
 // ScrubberTextItemViewable is the interface implemented by [ScrubberTextItemView], for mocking and DI.
 type ScrubberTextItemViewable interface {
@@ -485,4 +501,3 @@ type ScrubberTextItemViewable interface {
 }
 
 var _ ScrubberTextItemViewable = (*ScrubberTextItemView)(nil)
-

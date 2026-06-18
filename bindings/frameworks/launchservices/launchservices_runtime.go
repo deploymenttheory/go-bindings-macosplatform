@@ -14,8 +14,8 @@ import (
 
 var (
 	_launchservicesLib uintptr
-	_loadOnce sync.Once
-	_failedSymbols = make(map[string]bool)
+	_loadOnce          sync.Once
+	_failedSymbols     = make(map[string]bool)
 )
 
 // _register binds one C symbol, recording the symbol on failure so
@@ -52,42 +52,92 @@ func _loadLibrary() {
 	_register("CompositeIconRef", func() { purego.RegisterLibFunc(&_fnCompositeIconRef, _launchservicesLib, "CompositeIconRef") })
 	_register("GetCustomIconsEnabled", func() { purego.RegisterLibFunc(&_fnGetCustomIconsEnabled, _launchservicesLib, "GetCustomIconsEnabled") })
 	_register("GetIconRef", func() { purego.RegisterLibFunc(&_fnGetIconRef, _launchservicesLib, "GetIconRef") })
-	_register("GetIconRefFromComponent", func() { purego.RegisterLibFunc(&_fnGetIconRefFromComponent, _launchservicesLib, "GetIconRefFromComponent") })
-	_register("GetIconRefFromFileInfo", func() { purego.RegisterLibFunc(&_fnGetIconRefFromFileInfo, _launchservicesLib, "GetIconRefFromFileInfo") })
+	_register("GetIconRefFromComponent", func() {
+		purego.RegisterLibFunc(&_fnGetIconRefFromComponent, _launchservicesLib, "GetIconRefFromComponent")
+	})
+	_register("GetIconRefFromFileInfo", func() {
+		purego.RegisterLibFunc(&_fnGetIconRefFromFileInfo, _launchservicesLib, "GetIconRefFromFileInfo")
+	})
 	_register("GetIconRefFromFolder", func() { purego.RegisterLibFunc(&_fnGetIconRefFromFolder, _launchservicesLib, "GetIconRefFromFolder") })
-	_register("GetIconRefFromIconFamilyPtr", func() { purego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _launchservicesLib, "GetIconRefFromIconFamilyPtr") })
-	_register("GetIconRefFromTypeInfo", func() { purego.RegisterLibFunc(&_fnGetIconRefFromTypeInfo, _launchservicesLib, "GetIconRefFromTypeInfo") })
+	_register("GetIconRefFromIconFamilyPtr", func() {
+		purego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _launchservicesLib, "GetIconRefFromIconFamilyPtr")
+	})
+	_register("GetIconRefFromTypeInfo", func() {
+		purego.RegisterLibFunc(&_fnGetIconRefFromTypeInfo, _launchservicesLib, "GetIconRefFromTypeInfo")
+	})
 	_register("GetIconRefOwners", func() { purego.RegisterLibFunc(&_fnGetIconRefOwners, _launchservicesLib, "GetIconRefOwners") })
-	_register("IsDataAvailableInIconRef", func() { purego.RegisterLibFunc(&_fnIsDataAvailableInIconRef, _launchservicesLib, "IsDataAvailableInIconRef") })
+	_register("IsDataAvailableInIconRef", func() {
+		purego.RegisterLibFunc(&_fnIsDataAvailableInIconRef, _launchservicesLib, "IsDataAvailableInIconRef")
+	})
 	_register("IsIconRefComposite", func() { purego.RegisterLibFunc(&_fnIsIconRefComposite, _launchservicesLib, "IsIconRefComposite") })
 	_register("IsValidIconRef", func() { purego.RegisterLibFunc(&_fnIsValidIconRef, _launchservicesLib, "IsValidIconRef") })
 	_register("LSCanRefAcceptItem", func() { purego.RegisterLibFunc(&_fnLSCanRefAcceptItem, _launchservicesLib, "LSCanRefAcceptItem") })
 	_register("LSCanURLAcceptURL", func() { purego.RegisterLibFunc(&_fnLSCanURLAcceptURL, _launchservicesLib, "LSCanURLAcceptURL") })
-	_register("LSCopyAllHandlersForURLScheme", func() { purego.RegisterLibFunc(&_fnLSCopyAllHandlersForURLScheme, _launchservicesLib, "LSCopyAllHandlersForURLScheme") })
-	_register("LSCopyAllRoleHandlersForContentType", func() { purego.RegisterLibFunc(&_fnLSCopyAllRoleHandlersForContentType, _launchservicesLib, "LSCopyAllRoleHandlersForContentType") })
-	_register("LSCopyApplicationForMIMEType", func() { purego.RegisterLibFunc(&_fnLSCopyApplicationForMIMEType, _launchservicesLib, "LSCopyApplicationForMIMEType") })
-	_register("LSCopyApplicationURLsForBundleIdentifier", func() { purego.RegisterLibFunc(&_fnLSCopyApplicationURLsForBundleIdentifier, _launchservicesLib, "LSCopyApplicationURLsForBundleIdentifier") })
-	_register("LSCopyApplicationURLsForURL", func() { purego.RegisterLibFunc(&_fnLSCopyApplicationURLsForURL, _launchservicesLib, "LSCopyApplicationURLsForURL") })
-	_register("LSCopyDefaultApplicationURLForContentType", func() { purego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForContentType, _launchservicesLib, "LSCopyDefaultApplicationURLForContentType") })
-	_register("LSCopyDefaultApplicationURLForURL", func() { purego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForURL, _launchservicesLib, "LSCopyDefaultApplicationURLForURL") })
-	_register("LSCopyDefaultHandlerForURLScheme", func() { purego.RegisterLibFunc(&_fnLSCopyDefaultHandlerForURLScheme, _launchservicesLib, "LSCopyDefaultHandlerForURLScheme") })
-	_register("LSCopyDefaultRoleHandlerForContentType", func() { purego.RegisterLibFunc(&_fnLSCopyDefaultRoleHandlerForContentType, _launchservicesLib, "LSCopyDefaultRoleHandlerForContentType") })
-	_register("LSCopyDisplayNameForRef", func() { purego.RegisterLibFunc(&_fnLSCopyDisplayNameForRef, _launchservicesLib, "LSCopyDisplayNameForRef") })
-	_register("LSCopyDisplayNameForURL", func() { purego.RegisterLibFunc(&_fnLSCopyDisplayNameForURL, _launchservicesLib, "LSCopyDisplayNameForURL") })
+	_register("LSCopyAllHandlersForURLScheme", func() {
+		purego.RegisterLibFunc(&_fnLSCopyAllHandlersForURLScheme, _launchservicesLib, "LSCopyAllHandlersForURLScheme")
+	})
+	_register("LSCopyAllRoleHandlersForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSCopyAllRoleHandlersForContentType, _launchservicesLib, "LSCopyAllRoleHandlersForContentType")
+	})
+	_register("LSCopyApplicationForMIMEType", func() {
+		purego.RegisterLibFunc(&_fnLSCopyApplicationForMIMEType, _launchservicesLib, "LSCopyApplicationForMIMEType")
+	})
+	_register("LSCopyApplicationURLsForBundleIdentifier", func() {
+		purego.RegisterLibFunc(&_fnLSCopyApplicationURLsForBundleIdentifier, _launchservicesLib, "LSCopyApplicationURLsForBundleIdentifier")
+	})
+	_register("LSCopyApplicationURLsForURL", func() {
+		purego.RegisterLibFunc(&_fnLSCopyApplicationURLsForURL, _launchservicesLib, "LSCopyApplicationURLsForURL")
+	})
+	_register("LSCopyDefaultApplicationURLForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForContentType, _launchservicesLib, "LSCopyDefaultApplicationURLForContentType")
+	})
+	_register("LSCopyDefaultApplicationURLForURL", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForURL, _launchservicesLib, "LSCopyDefaultApplicationURLForURL")
+	})
+	_register("LSCopyDefaultHandlerForURLScheme", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDefaultHandlerForURLScheme, _launchservicesLib, "LSCopyDefaultHandlerForURLScheme")
+	})
+	_register("LSCopyDefaultRoleHandlerForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDefaultRoleHandlerForContentType, _launchservicesLib, "LSCopyDefaultRoleHandlerForContentType")
+	})
+	_register("LSCopyDisplayNameForRef", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDisplayNameForRef, _launchservicesLib, "LSCopyDisplayNameForRef")
+	})
+	_register("LSCopyDisplayNameForURL", func() {
+		purego.RegisterLibFunc(&_fnLSCopyDisplayNameForURL, _launchservicesLib, "LSCopyDisplayNameForURL")
+	})
 	_register("LSCopyItemAttribute", func() { purego.RegisterLibFunc(&_fnLSCopyItemAttribute, _launchservicesLib, "LSCopyItemAttribute") })
 	_register("LSCopyItemAttributes", func() { purego.RegisterLibFunc(&_fnLSCopyItemAttributes, _launchservicesLib, "LSCopyItemAttributes") })
 	_register("LSCopyItemInfoForRef", func() { purego.RegisterLibFunc(&_fnLSCopyItemInfoForRef, _launchservicesLib, "LSCopyItemInfoForRef") })
 	_register("LSCopyItemInfoForURL", func() { purego.RegisterLibFunc(&_fnLSCopyItemInfoForURL, _launchservicesLib, "LSCopyItemInfoForURL") })
-	_register("LSCopyKindStringForMIMEType", func() { purego.RegisterLibFunc(&_fnLSCopyKindStringForMIMEType, _launchservicesLib, "LSCopyKindStringForMIMEType") })
-	_register("LSCopyKindStringForRef", func() { purego.RegisterLibFunc(&_fnLSCopyKindStringForRef, _launchservicesLib, "LSCopyKindStringForRef") })
-	_register("LSCopyKindStringForTypeInfo", func() { purego.RegisterLibFunc(&_fnLSCopyKindStringForTypeInfo, _launchservicesLib, "LSCopyKindStringForTypeInfo") })
-	_register("LSCopyKindStringForURL", func() { purego.RegisterLibFunc(&_fnLSCopyKindStringForURL, _launchservicesLib, "LSCopyKindStringForURL") })
-	_register("LSFindApplicationForInfo", func() { purego.RegisterLibFunc(&_fnLSFindApplicationForInfo, _launchservicesLib, "LSFindApplicationForInfo") })
-	_register("LSGetApplicationForInfo", func() { purego.RegisterLibFunc(&_fnLSGetApplicationForInfo, _launchservicesLib, "LSGetApplicationForInfo") })
-	_register("LSGetApplicationForItem", func() { purego.RegisterLibFunc(&_fnLSGetApplicationForItem, _launchservicesLib, "LSGetApplicationForItem") })
-	_register("LSGetApplicationForURL", func() { purego.RegisterLibFunc(&_fnLSGetApplicationForURL, _launchservicesLib, "LSGetApplicationForURL") })
+	_register("LSCopyKindStringForMIMEType", func() {
+		purego.RegisterLibFunc(&_fnLSCopyKindStringForMIMEType, _launchservicesLib, "LSCopyKindStringForMIMEType")
+	})
+	_register("LSCopyKindStringForRef", func() {
+		purego.RegisterLibFunc(&_fnLSCopyKindStringForRef, _launchservicesLib, "LSCopyKindStringForRef")
+	})
+	_register("LSCopyKindStringForTypeInfo", func() {
+		purego.RegisterLibFunc(&_fnLSCopyKindStringForTypeInfo, _launchservicesLib, "LSCopyKindStringForTypeInfo")
+	})
+	_register("LSCopyKindStringForURL", func() {
+		purego.RegisterLibFunc(&_fnLSCopyKindStringForURL, _launchservicesLib, "LSCopyKindStringForURL")
+	})
+	_register("LSFindApplicationForInfo", func() {
+		purego.RegisterLibFunc(&_fnLSFindApplicationForInfo, _launchservicesLib, "LSFindApplicationForInfo")
+	})
+	_register("LSGetApplicationForInfo", func() {
+		purego.RegisterLibFunc(&_fnLSGetApplicationForInfo, _launchservicesLib, "LSGetApplicationForInfo")
+	})
+	_register("LSGetApplicationForItem", func() {
+		purego.RegisterLibFunc(&_fnLSGetApplicationForItem, _launchservicesLib, "LSGetApplicationForItem")
+	})
+	_register("LSGetApplicationForURL", func() {
+		purego.RegisterLibFunc(&_fnLSGetApplicationForURL, _launchservicesLib, "LSGetApplicationForURL")
+	})
 	_register("LSGetExtensionInfo", func() { purego.RegisterLibFunc(&_fnLSGetExtensionInfo, _launchservicesLib, "LSGetExtensionInfo") })
-	_register("LSGetHandlerOptionsForContentType", func() { purego.RegisterLibFunc(&_fnLSGetHandlerOptionsForContentType, _launchservicesLib, "LSGetHandlerOptionsForContentType") })
+	_register("LSGetHandlerOptionsForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSGetHandlerOptionsForContentType, _launchservicesLib, "LSGetHandlerOptionsForContentType")
+	})
 	_register("LSOpenApplication", func() { purego.RegisterLibFunc(&_fnLSOpenApplication, _launchservicesLib, "LSOpenApplication") })
 	_register("LSOpenCFURLRef", func() { purego.RegisterLibFunc(&_fnLSOpenCFURLRef, _launchservicesLib, "LSOpenCFURLRef") })
 	_register("LSOpenFSRef", func() { purego.RegisterLibFunc(&_fnLSOpenFSRef, _launchservicesLib, "LSOpenFSRef") })
@@ -97,29 +147,55 @@ func _loadLibrary() {
 	_register("LSOpenURLsWithRole", func() { purego.RegisterLibFunc(&_fnLSOpenURLsWithRole, _launchservicesLib, "LSOpenURLsWithRole") })
 	_register("LSRegisterFSRef", func() { purego.RegisterLibFunc(&_fnLSRegisterFSRef, _launchservicesLib, "LSRegisterFSRef") })
 	_register("LSRegisterURL", func() { purego.RegisterLibFunc(&_fnLSRegisterURL, _launchservicesLib, "LSRegisterURL") })
-	_register("LSSetDefaultHandlerForURLScheme", func() { purego.RegisterLibFunc(&_fnLSSetDefaultHandlerForURLScheme, _launchservicesLib, "LSSetDefaultHandlerForURLScheme") })
-	_register("LSSetDefaultRoleHandlerForContentType", func() { purego.RegisterLibFunc(&_fnLSSetDefaultRoleHandlerForContentType, _launchservicesLib, "LSSetDefaultRoleHandlerForContentType") })
-	_register("LSSetExtensionHiddenForRef", func() { purego.RegisterLibFunc(&_fnLSSetExtensionHiddenForRef, _launchservicesLib, "LSSetExtensionHiddenForRef") })
-	_register("LSSetExtensionHiddenForURL", func() { purego.RegisterLibFunc(&_fnLSSetExtensionHiddenForURL, _launchservicesLib, "LSSetExtensionHiddenForURL") })
-	_register("LSSetHandlerOptionsForContentType", func() { purego.RegisterLibFunc(&_fnLSSetHandlerOptionsForContentType, _launchservicesLib, "LSSetHandlerOptionsForContentType") })
+	_register("LSSetDefaultHandlerForURLScheme", func() {
+		purego.RegisterLibFunc(&_fnLSSetDefaultHandlerForURLScheme, _launchservicesLib, "LSSetDefaultHandlerForURLScheme")
+	})
+	_register("LSSetDefaultRoleHandlerForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSSetDefaultRoleHandlerForContentType, _launchservicesLib, "LSSetDefaultRoleHandlerForContentType")
+	})
+	_register("LSSetExtensionHiddenForRef", func() {
+		purego.RegisterLibFunc(&_fnLSSetExtensionHiddenForRef, _launchservicesLib, "LSSetExtensionHiddenForRef")
+	})
+	_register("LSSetExtensionHiddenForURL", func() {
+		purego.RegisterLibFunc(&_fnLSSetExtensionHiddenForURL, _launchservicesLib, "LSSetExtensionHiddenForURL")
+	})
+	_register("LSSetHandlerOptionsForContentType", func() {
+		purego.RegisterLibFunc(&_fnLSSetHandlerOptionsForContentType, _launchservicesLib, "LSSetHandlerOptionsForContentType")
+	})
 	_register("LSSetItemAttribute", func() { purego.RegisterLibFunc(&_fnLSSetItemAttribute, _launchservicesLib, "LSSetItemAttribute") })
 	_register("OverrideIconRef", func() { purego.RegisterLibFunc(&_fnOverrideIconRef, _launchservicesLib, "OverrideIconRef") })
 	_register("ReadIconFromFSRef", func() { purego.RegisterLibFunc(&_fnReadIconFromFSRef, _launchservicesLib, "ReadIconFromFSRef") })
-	_register("RegisterIconRefFromFSRef", func() { purego.RegisterLibFunc(&_fnRegisterIconRefFromFSRef, _launchservicesLib, "RegisterIconRefFromFSRef") })
-	_register("RegisterIconRefFromIconFamily", func() { purego.RegisterLibFunc(&_fnRegisterIconRefFromIconFamily, _launchservicesLib, "RegisterIconRefFromIconFamily") })
+	_register("RegisterIconRefFromFSRef", func() {
+		purego.RegisterLibFunc(&_fnRegisterIconRefFromFSRef, _launchservicesLib, "RegisterIconRefFromFSRef")
+	})
+	_register("RegisterIconRefFromIconFamily", func() {
+		purego.RegisterLibFunc(&_fnRegisterIconRefFromIconFamily, _launchservicesLib, "RegisterIconRefFromIconFamily")
+	})
 	_register("ReleaseIconRef", func() { purego.RegisterLibFunc(&_fnReleaseIconRef, _launchservicesLib, "ReleaseIconRef") })
 	_register("RemoveIconRefOverride", func() { purego.RegisterLibFunc(&_fnRemoveIconRefOverride, _launchservicesLib, "RemoveIconRefOverride") })
 	_register("SetCustomIconsEnabled", func() { purego.RegisterLibFunc(&_fnSetCustomIconsEnabled, _launchservicesLib, "SetCustomIconsEnabled") })
-	_register("UTCreateStringForOSType", func() { purego.RegisterLibFunc(&_fnUTCreateStringForOSType, _launchservicesLib, "UTCreateStringForOSType") })
+	_register("UTCreateStringForOSType", func() {
+		purego.RegisterLibFunc(&_fnUTCreateStringForOSType, _launchservicesLib, "UTCreateStringForOSType")
+	})
 	_register("UTGetOSTypeFromString", func() { purego.RegisterLibFunc(&_fnUTGetOSTypeFromString, _launchservicesLib, "UTGetOSTypeFromString") })
 	_register("UTTypeConformsTo", func() { purego.RegisterLibFunc(&_fnUTTypeConformsTo, _launchservicesLib, "UTTypeConformsTo") })
-	_register("UTTypeCopyAllTagsWithClass", func() { purego.RegisterLibFunc(&_fnUTTypeCopyAllTagsWithClass, _launchservicesLib, "UTTypeCopyAllTagsWithClass") })
+	_register("UTTypeCopyAllTagsWithClass", func() {
+		purego.RegisterLibFunc(&_fnUTTypeCopyAllTagsWithClass, _launchservicesLib, "UTTypeCopyAllTagsWithClass")
+	})
 	_register("UTTypeCopyDeclaration", func() { purego.RegisterLibFunc(&_fnUTTypeCopyDeclaration, _launchservicesLib, "UTTypeCopyDeclaration") })
-	_register("UTTypeCopyDeclaringBundleURL", func() { purego.RegisterLibFunc(&_fnUTTypeCopyDeclaringBundleURL, _launchservicesLib, "UTTypeCopyDeclaringBundleURL") })
+	_register("UTTypeCopyDeclaringBundleURL", func() {
+		purego.RegisterLibFunc(&_fnUTTypeCopyDeclaringBundleURL, _launchservicesLib, "UTTypeCopyDeclaringBundleURL")
+	})
 	_register("UTTypeCopyDescription", func() { purego.RegisterLibFunc(&_fnUTTypeCopyDescription, _launchservicesLib, "UTTypeCopyDescription") })
-	_register("UTTypeCopyPreferredTagWithClass", func() { purego.RegisterLibFunc(&_fnUTTypeCopyPreferredTagWithClass, _launchservicesLib, "UTTypeCopyPreferredTagWithClass") })
-	_register("UTTypeCreateAllIdentifiersForTag", func() { purego.RegisterLibFunc(&_fnUTTypeCreateAllIdentifiersForTag, _launchservicesLib, "UTTypeCreateAllIdentifiersForTag") })
-	_register("UTTypeCreatePreferredIdentifierForTag", func() { purego.RegisterLibFunc(&_fnUTTypeCreatePreferredIdentifierForTag, _launchservicesLib, "UTTypeCreatePreferredIdentifierForTag") })
+	_register("UTTypeCopyPreferredTagWithClass", func() {
+		purego.RegisterLibFunc(&_fnUTTypeCopyPreferredTagWithClass, _launchservicesLib, "UTTypeCopyPreferredTagWithClass")
+	})
+	_register("UTTypeCreateAllIdentifiersForTag", func() {
+		purego.RegisterLibFunc(&_fnUTTypeCreateAllIdentifiersForTag, _launchservicesLib, "UTTypeCreateAllIdentifiersForTag")
+	})
+	_register("UTTypeCreatePreferredIdentifierForTag", func() {
+		purego.RegisterLibFunc(&_fnUTTypeCreatePreferredIdentifierForTag, _launchservicesLib, "UTTypeCreatePreferredIdentifierForTag")
+	})
 	_register("UTTypeEqual", func() { purego.RegisterLibFunc(&_fnUTTypeEqual, _launchservicesLib, "UTTypeEqual") })
 	_register("UTTypeIsDeclared", func() { purego.RegisterLibFunc(&_fnUTTypeIsDeclared, _launchservicesLib, "UTTypeIsDeclared") })
 	_register("UTTypeIsDynamic", func() { purego.RegisterLibFunc(&_fnUTTypeIsDynamic, _launchservicesLib, "UTTypeIsDynamic") })

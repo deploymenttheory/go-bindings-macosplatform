@@ -18,17 +18,17 @@ type MPSCNNConvolutionTransposeGradient struct {
 }
 
 var (
-	_clsMPSCNNConvolutionTransposeGradient = _objcClass("MPSCNNConvolutionTransposeGradient")
-	_mPSCNNConvolutionTransposeGradientSelInitWithDeviceWeights = objc.RegisterName("initWithDevice:weights:")
-	_mPSCNNConvolutionTransposeGradientSelInitWithCoderDevice = objc.RegisterName("initWithCoder:device:")
-	_mPSCNNConvolutionTransposeGradientSelReloadWeightsAndBiasesFromDataSource = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
+	_clsMPSCNNConvolutionTransposeGradient                                             = _objcClass("MPSCNNConvolutionTransposeGradient")
+	_mPSCNNConvolutionTransposeGradientSelInitWithDeviceWeights                        = objc.RegisterName("initWithDevice:weights:")
+	_mPSCNNConvolutionTransposeGradientSelInitWithCoderDevice                          = objc.RegisterName("initWithCoder:device:")
+	_mPSCNNConvolutionTransposeGradientSelReloadWeightsAndBiasesFromDataSource         = objc.RegisterName("reloadWeightsAndBiasesFromDataSource")
 	_mPSCNNConvolutionTransposeGradientSelReloadWeightsAndBiasesWithCommandBufferState = objc.RegisterName("reloadWeightsAndBiasesWithCommandBuffer:state:")
-	_mPSCNNConvolutionTransposeGradientSelSourceGradientFeatureChannels = objc.RegisterName("sourceGradientFeatureChannels")
-	_mPSCNNConvolutionTransposeGradientSelSourceImageFeatureChannels = objc.RegisterName("sourceImageFeatureChannels")
-	_mPSCNNConvolutionTransposeGradientSelGroups = objc.RegisterName("groups")
-	_mPSCNNConvolutionTransposeGradientSelDataSource = objc.RegisterName("dataSource")
-	_mPSCNNConvolutionTransposeGradientSelGradientOption = objc.RegisterName("gradientOption")
-	_mPSCNNConvolutionTransposeGradientSelSetGradientOption = objc.RegisterName("setGradientOption:")
+	_mPSCNNConvolutionTransposeGradientSelSourceGradientFeatureChannels                = objc.RegisterName("sourceGradientFeatureChannels")
+	_mPSCNNConvolutionTransposeGradientSelSourceImageFeatureChannels                   = objc.RegisterName("sourceImageFeatureChannels")
+	_mPSCNNConvolutionTransposeGradientSelGroups                                       = objc.RegisterName("groups")
+	_mPSCNNConvolutionTransposeGradientSelDataSource                                   = objc.RegisterName("dataSource")
+	_mPSCNNConvolutionTransposeGradientSelGradientOption                               = objc.RegisterName("gradientOption")
+	_mPSCNNConvolutionTransposeGradientSelSetGradientOption                            = objc.RegisterName("setGradientOption:")
 )
 
 func MPSCNNConvolutionTransposeGradientFromID(id objc.ID) *MPSCNNConvolutionTransposeGradient {
@@ -44,14 +44,18 @@ func MPSCNNConvolutionTransposeGradientFromID(id objc.ID) *MPSCNNConvolutionTran
 // @abstract   Initializes a convolution transpose gradient (with respect to weights and bias) object. @param      device                          The MTLDevice on which this MPSCNNConvolutionGradient filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. Note that same data source as provided to forward convolution should be used. @return     A valid MPSCNNConvolutionTransposeGradient object or nil, if failure.
 func (o *MPSCNNConvolutionTransposeGradient) InitWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *MPSCNNConvolutionTransposeGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeGradientSelInitWithDeviceWeights, device, weights)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeGradientFromID(_ret)
 }
 
 // @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
 func (o *MPSCNNConvolutionTransposeGradient) InitWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MPSCNNConvolutionTransposeGradient {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNConvolutionTransposeGradientSelInitWithCoderDevice, aDecoder.Ptr(), device)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNConvolutionTransposeGradientFromID(_ret)
 }
 
@@ -98,4 +102,3 @@ func (o *MPSCNNConvolutionTransposeGradient) GradientOption() mpsneuralnetwork.M
 func (o *MPSCNNConvolutionTransposeGradient) SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) {
 	o.Ptr().Send(_mPSCNNConvolutionTransposeGradientSelSetGradientOption, gradientOption)
 }
-

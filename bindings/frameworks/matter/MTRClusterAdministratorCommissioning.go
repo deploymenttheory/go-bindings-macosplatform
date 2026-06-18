@@ -18,25 +18,25 @@ type MTRClusterAdministratorCommissioning struct {
 }
 
 var (
-	_clsMTRClusterAdministratorCommissioning = _objcClass("MTRClusterAdministratorCommissioning")
-	_mTRClusterAdministratorCommissioningSelOpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAdministratorCommissioningSelOpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("openBasicCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completion:")
-	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletion = objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completion:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeWindowStatusWithParams = objc.RegisterName("readAttributeWindowStatusWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeAdminFabricIndexWithParams = objc.RegisterName("readAttributeAdminFabricIndexWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeAdminVendorIdWithParams = objc.RegisterName("readAttributeAdminVendorIdWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterAdministratorCommissioningSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
-	_mTRClusterAdministratorCommissioningSelOpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_clsMTRClusterAdministratorCommissioning                                                                                           = _objcClass("MTRClusterAdministratorCommissioning")
+	_mTRClusterAdministratorCommissioningSelOpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion             = objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAdministratorCommissioningSelOpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion        = objc.RegisterName("openBasicCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletion                 = objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completion:")
+	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletion                       = objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completion:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeWindowStatusWithParams                                                        = objc.RegisterName("readAttributeWindowStatusWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeAdminFabricIndexWithParams                                                    = objc.RegisterName("readAttributeAdminFabricIndexWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeAdminVendorIdWithParams                                                       = objc.RegisterName("readAttributeAdminVendorIdWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeGeneratedCommandListWithParams                                                = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeAcceptedCommandListWithParams                                                 = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeAttributeListWithParams                                                       = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeFeatureMapWithParams                                                          = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterAdministratorCommissioningSelReadAttributeClusterRevisionWithParams                                                     = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointIDQueue                                                              = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointQueue                                                                = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterAdministratorCommissioningSelOpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler      = objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completionHandler:")
 	_mTRClusterAdministratorCommissioningSelOpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("openBasicCommissioningWindowWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completionHandler:")
-	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler = objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletionHandler          = objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completionHandler:")
+	_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler                = objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completionHandler:")
 )
 
 func MTRClusterAdministratorCommissioningFromID(id objc.ID) *MTRClusterAdministratorCommissioning {
@@ -136,13 +136,17 @@ func (o *MTRClusterAdministratorCommissioning) ReadAttributeClusterRevisionWithP
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func (o *MTRClusterAdministratorCommissioning) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAdministratorCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAdministratorCommissioningFromID(_ret)
 }
 
 func (o *MTRClusterAdministratorCommissioning) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterAdministratorCommissioning {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterAdministratorCommissioningSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterAdministratorCommissioningFromID(_ret)
 }
 
@@ -189,4 +193,3 @@ func (o *MTRClusterAdministratorCommissioning) RevokeCommissioningWithExpectedVa
 	}
 	o.Ptr().Send(_mTRClusterAdministratorCommissioningSelRevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler, expectedValues, expectedValueIntervalMs.Ptr(), __block_completionHandler)
 }
-

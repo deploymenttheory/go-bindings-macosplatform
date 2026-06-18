@@ -14,7 +14,9 @@ import (
 // Denotes the first edition of the Apple-provided sound classifier.
 func SNClassifierIdentifierVersion1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_soundanalysisLib, "SNClassifierIdentifierVersion1")
-	if ptr == 0 { return nil }
+	if ptr == 0 {
+		return nil
+	}
 	return *(**foundation.NSString)(unsafe.Pointer(ptr))
 }
 
@@ -22,4 +24,3 @@ func SNErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_soundanalysisLib, "SNErrorDomain")
 	return ptr
 }
-

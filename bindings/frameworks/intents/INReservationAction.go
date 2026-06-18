@@ -16,11 +16,11 @@ type INReservationAction struct {
 }
 
 var (
-	_clsINReservationAction = _objcClass("INReservationAction")
+	_clsINReservationAction                                      = _objcClass("INReservationAction")
 	_iNReservationActionSelInitWithTypeValidDurationUserActivity = objc.RegisterName("initWithType:validDuration:userActivity:")
-	_iNReservationActionSelType = objc.RegisterName("type")
-	_iNReservationActionSelValidDuration = objc.RegisterName("validDuration")
-	_iNReservationActionSelUserActivity = objc.RegisterName("userActivity")
+	_iNReservationActionSelType                                  = objc.RegisterName("type")
+	_iNReservationActionSelValidDuration                         = objc.RegisterName("validDuration")
+	_iNReservationActionSelUserActivity                          = objc.RegisterName("userActivity")
 )
 
 func INReservationActionFromID(id objc.ID) *INReservationAction {
@@ -35,7 +35,9 @@ func INReservationActionFromID(id objc.ID) *INReservationAction {
 
 func (o *INReservationAction) InitWithTypeValidDurationUserActivity(type_ INReservationActionType, validDuration *INDateComponentsRange, userActivity *foundation.NSUserActivity) *INReservationAction {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationActionSelInitWithTypeValidDurationUserActivity, type_, validDuration.Ptr(), userActivity.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INReservationActionFromID(_ret)
 }
 
@@ -46,13 +48,16 @@ func (o *INReservationAction) Type() INReservationActionType {
 
 func (o *INReservationAction) ValidDuration() *INDateComponentsRange {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationActionSelValidDuration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INDateComponentsRangeFromID(_ret)
 }
 
 func (o *INReservationAction) UserActivity() *foundation.NSUserActivity {
 	_ret := objc.Send[objc.ID](o.Ptr(), _iNReservationActionSelUserActivity)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSUserActivityFromID(_ret)
 }
-

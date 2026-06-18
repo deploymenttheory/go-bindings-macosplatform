@@ -16,11 +16,11 @@ type MLUpdateContext struct {
 }
 
 var (
-	_clsMLUpdateContext = _objcClass("MLUpdateContext")
-	_mLUpdateContextSelTask = objc.RegisterName("task")
-	_mLUpdateContextSelModel = objc.RegisterName("model")
-	_mLUpdateContextSelEvent = objc.RegisterName("event")
-	_mLUpdateContextSelMetrics = objc.RegisterName("metrics")
+	_clsMLUpdateContext           = _objcClass("MLUpdateContext")
+	_mLUpdateContextSelTask       = objc.RegisterName("task")
+	_mLUpdateContextSelModel      = objc.RegisterName("model")
+	_mLUpdateContextSelEvent      = objc.RegisterName("event")
+	_mLUpdateContextSelMetrics    = objc.RegisterName("metrics")
 	_mLUpdateContextSelParameters = objc.RegisterName("parameters")
 )
 
@@ -36,13 +36,17 @@ func MLUpdateContextFromID(id objc.ID) *MLUpdateContext {
 
 func (o *MLUpdateContext) Task() *MLUpdateTask {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLUpdateContextSelTask)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLUpdateTaskFromID(_ret)
 }
 
 func (o *MLUpdateContext) Model() *MLModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLUpdateContextSelModel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLModelFromID(_ret)
 }
 
@@ -60,4 +64,3 @@ func (o *MLUpdateContext) Parameters() *foundation.NSDictionary[*MLParameterKey,
 	_ret := objc.Send[*foundation.NSDictionary[*MLParameterKey, objc.ID]](o.Ptr(), _mLUpdateContextSelParameters)
 	return _ret
 }
-

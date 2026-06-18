@@ -20,7 +20,7 @@ type OpaqueVTFrameSilo struct{}
 // OpaqueVTHDRPerFrameMetadataGenerationSession is an opaque type.
 type OpaqueVTHDRPerFrameMetadataGenerationSession struct{}
 
-// A reference to a Video Toolbox motion-estimation session. A motion-estimation session supports two `CVPixelBuffer`s of the same size and type, and returns motion vectors in the form of a ``CVPixelBuffer``. The session is a reference-counted CF object. To create a motion-estimation session, call ``VTMotionEstimationSessionCreate``; then you can optionally configure the session using `VTSessionSetProperty`. To create motion-estimations, call ``VTMotionEstimationSessionCreateMotionEstimation``. When you are done with the session, you should call ``VTMotionEstimationSessionInvalidate`` to tear it down and ``CFRelease`` to release the session object reference.
+// A reference to a Video Toolbox motion-estimation session. A motion-estimation session supports two `CVPixelBuffer`s of the same size and type, and returns motion vectors in the form of a “CVPixelBuffer“. The session is a reference-counted CF object. To create a motion-estimation session, call “VTMotionEstimationSessionCreate“; then you can optionally configure the session using `VTSessionSetProperty`. To create motion-estimations, call “VTMotionEstimationSessionCreateMotionEstimation“. When you are done with the session, you should call “VTMotionEstimationSessionInvalidate“ to tear it down and “CFRelease“ to release the session object reference.
 // OpaqueVTMotionEstimationSession is an opaque type.
 type OpaqueVTMotionEstimationSession struct{}
 
@@ -40,7 +40,7 @@ type OpaqueVTRAWProcessingSession struct{}
 
 type VTDecompressionOutputCallbackRecord struct {
 	DecompressionOutputCallback unsafe.Pointer
-	DecompressionOutputRefCon unsafe.Pointer
+	DecompressionOutputRefCon   unsafe.Pointer
 }
 
 type VTInt32Point struct {
@@ -49,7 +49,6 @@ type VTInt32Point struct {
 }
 
 type VTInt32Size struct {
-	Width int32
+	Width  int32
 	Height int32
 }
-

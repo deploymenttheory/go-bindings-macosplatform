@@ -16,13 +16,13 @@ type MTRCertificateInfo struct {
 }
 
 var (
-	_clsMTRCertificateInfo = _objcClass("MTRCertificateInfo")
+	_clsMTRCertificateInfo                 = _objcClass("MTRCertificateInfo")
 	_mTRCertificateInfoSelInitWithTLVBytes = objc.RegisterName("initWithTLVBytes:")
-	_mTRCertificateInfoSelIssuer = objc.RegisterName("issuer")
-	_mTRCertificateInfoSelSubject = objc.RegisterName("subject")
-	_mTRCertificateInfoSelNotBefore = objc.RegisterName("notBefore")
-	_mTRCertificateInfoSelNotAfter = objc.RegisterName("notAfter")
-	_mTRCertificateInfoSelPublicKeyData = objc.RegisterName("publicKeyData")
+	_mTRCertificateInfoSelIssuer           = objc.RegisterName("issuer")
+	_mTRCertificateInfoSelSubject          = objc.RegisterName("subject")
+	_mTRCertificateInfoSelNotBefore        = objc.RegisterName("notBefore")
+	_mTRCertificateInfoSelNotAfter         = objc.RegisterName("notAfter")
+	_mTRCertificateInfoSelPublicKeyData    = objc.RegisterName("publicKeyData")
 )
 
 func MTRCertificateInfoFromID(id objc.ID) *MTRCertificateInfo {
@@ -38,40 +38,51 @@ func MTRCertificateInfoFromID(id objc.ID) *MTRCertificateInfo {
 // Initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
 func (o *MTRCertificateInfo) InitWithTLVBytes(bytes_ *foundation.NSData) *MTRCertificateInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelInitWithTLVBytes, bytes_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRCertificateInfoFromID(_ret)
 }
 
 // The Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
 func (o *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelIssuer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDistinguishedNameInfoFromID(_ret)
 }
 
 // The Distinguished Name of the entity represented by the certificate.
 func (o *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelSubject)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRDistinguishedNameInfoFromID(_ret)
 }
 
 func (o *MTRCertificateInfo) NotBefore() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelNotBefore)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 func (o *MTRCertificateInfo) NotAfter() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelNotAfter)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDateFromID(_ret)
 }
 
 // Public key data for this certificate
 func (o *MTRCertificateInfo) PublicKeyData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRCertificateInfoSelPublicKeyData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

@@ -124,4 +124,3 @@ type TextAttachmentViewProviderable interface {
 }
 
 var _ TextAttachmentViewProviderable = (*TextAttachmentViewProvider)(nil)
-

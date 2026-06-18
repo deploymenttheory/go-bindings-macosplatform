@@ -16,10 +16,10 @@ type MTRHEPAFilterMonitoringClusterReplacementProductStruct struct {
 }
 
 var (
-	_clsMTRHEPAFilterMonitoringClusterReplacementProductStruct = _objcClass("MTRHEPAFilterMonitoringClusterReplacementProductStruct")
-	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierType = objc.RegisterName("productIdentifierType")
-	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierType = objc.RegisterName("setProductIdentifierType:")
-	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue = objc.RegisterName("productIdentifierValue")
+	_clsMTRHEPAFilterMonitoringClusterReplacementProductStruct                          = _objcClass("MTRHEPAFilterMonitoringClusterReplacementProductStruct")
+	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierType     = objc.RegisterName("productIdentifierType")
+	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierType  = objc.RegisterName("setProductIdentifierType:")
+	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue    = objc.RegisterName("productIdentifierValue")
 	_mTRHEPAFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierValue = objc.RegisterName("setProductIdentifierValue:")
 )
 
@@ -35,7 +35,9 @@ func MTRHEPAFilterMonitoringClusterReplacementProductStructFromID(id objc.ID) *M
 
 func (o *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierType)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -45,11 +47,12 @@ func (o *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdent
 
 func (o *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRHEPAFilterMonitoringClusterReplacementProductStructSelProductIdentifierValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue *foundation.NSString) {
 	o.Ptr().Send(_mTRHEPAFilterMonitoringClusterReplacementProductStructSelSetProductIdentifierValue, productIdentifierValue.Ptr())
 }
-

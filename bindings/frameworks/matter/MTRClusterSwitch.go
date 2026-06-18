@@ -16,17 +16,17 @@ type MTRClusterSwitch struct {
 }
 
 var (
-	_clsMTRClusterSwitch = _objcClass("MTRClusterSwitch")
-	_mTRClusterSwitchSelReadAttributeNumberOfPositionsWithParams = objc.RegisterName("readAttributeNumberOfPositionsWithParams:")
-	_mTRClusterSwitchSelReadAttributeCurrentPositionWithParams = objc.RegisterName("readAttributeCurrentPositionWithParams:")
-	_mTRClusterSwitchSelReadAttributeMultiPressMaxWithParams = objc.RegisterName("readAttributeMultiPressMaxWithParams:")
+	_clsMTRClusterSwitch                                            = _objcClass("MTRClusterSwitch")
+	_mTRClusterSwitchSelReadAttributeNumberOfPositionsWithParams    = objc.RegisterName("readAttributeNumberOfPositionsWithParams:")
+	_mTRClusterSwitchSelReadAttributeCurrentPositionWithParams      = objc.RegisterName("readAttributeCurrentPositionWithParams:")
+	_mTRClusterSwitchSelReadAttributeMultiPressMaxWithParams        = objc.RegisterName("readAttributeMultiPressMaxWithParams:")
 	_mTRClusterSwitchSelReadAttributeGeneratedCommandListWithParams = objc.RegisterName("readAttributeGeneratedCommandListWithParams:")
-	_mTRClusterSwitchSelReadAttributeAcceptedCommandListWithParams = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
-	_mTRClusterSwitchSelReadAttributeAttributeListWithParams = objc.RegisterName("readAttributeAttributeListWithParams:")
-	_mTRClusterSwitchSelReadAttributeFeatureMapWithParams = objc.RegisterName("readAttributeFeatureMapWithParams:")
-	_mTRClusterSwitchSelReadAttributeClusterRevisionWithParams = objc.RegisterName("readAttributeClusterRevisionWithParams:")
-	_mTRClusterSwitchSelInitWithDeviceEndpointIDQueue = objc.RegisterName("initWithDevice:endpointID:queue:")
-	_mTRClusterSwitchSelInitWithDeviceEndpointQueue = objc.RegisterName("initWithDevice:endpoint:queue:")
+	_mTRClusterSwitchSelReadAttributeAcceptedCommandListWithParams  = objc.RegisterName("readAttributeAcceptedCommandListWithParams:")
+	_mTRClusterSwitchSelReadAttributeAttributeListWithParams        = objc.RegisterName("readAttributeAttributeListWithParams:")
+	_mTRClusterSwitchSelReadAttributeFeatureMapWithParams           = objc.RegisterName("readAttributeFeatureMapWithParams:")
+	_mTRClusterSwitchSelReadAttributeClusterRevisionWithParams      = objc.RegisterName("readAttributeClusterRevisionWithParams:")
+	_mTRClusterSwitchSelInitWithDeviceEndpointIDQueue               = objc.RegisterName("initWithDevice:endpointID:queue:")
+	_mTRClusterSwitchSelInitWithDeviceEndpointQueue                 = objc.RegisterName("initWithDevice:endpoint:queue:")
 )
 
 func MTRClusterSwitchFromID(id objc.ID) *MTRClusterSwitch {
@@ -82,13 +82,16 @@ func (o *MTRClusterSwitch) ReadAttributeClusterRevisionWithParams(params *MTRRea
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func (o *MTRClusterSwitch) InitWithDeviceEndpointIDQueue(device *MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterSwitch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSwitchSelInitWithDeviceEndpointIDQueue, device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterSwitchFromID(_ret)
 }
 
 func (o *MTRClusterSwitch) InitWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterSwitch {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRClusterSwitchSelInitWithDeviceEndpointQueue, device.Ptr(), endpoint, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRClusterSwitchFromID(_ret)
 }
-

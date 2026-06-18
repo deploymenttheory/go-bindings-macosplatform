@@ -55,7 +55,9 @@ func (x *TokenKeychainCertificate) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
-func (x *TokenKeychainCertificate) asTokenKeychainItem() *raw.TKTokenKeychainItem { return &x.inner.TKTokenKeychainItem }
+func (x *TokenKeychainCertificate) asTokenKeychainItem() *raw.TKTokenKeychainItem {
+	return &x.inner.TKTokenKeychainItem
+}
 
 // TokenKeychainCertificateable is the interface implemented by [TokenKeychainCertificate], for mocking and DI.
 type TokenKeychainCertificateable interface {
@@ -66,4 +68,3 @@ type TokenKeychainCertificateable interface {
 }
 
 var _ TokenKeychainCertificateable = (*TokenKeychainCertificate)(nil)
-

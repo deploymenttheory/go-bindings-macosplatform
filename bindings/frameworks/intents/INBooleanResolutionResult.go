@@ -16,8 +16,8 @@ type INBooleanResolutionResult struct {
 }
 
 var (
-	_clsINBooleanResolutionResult = _objcClass("INBooleanResolutionResult")
-	_iNBooleanResolutionResultSelSuccessWithResolvedValue = objc.RegisterName("successWithResolvedValue:")
+	_clsINBooleanResolutionResult                                       = _objcClass("INBooleanResolutionResult")
+	_iNBooleanResolutionResultSelSuccessWithResolvedValue               = objc.RegisterName("successWithResolvedValue:")
 	_iNBooleanResolutionResultSelConfirmationRequiredWithValueToConfirm = objc.RegisterName("confirmationRequiredWithValueToConfirm:")
 )
 
@@ -33,13 +33,16 @@ func INBooleanResolutionResultFromID(id objc.ID) *INBooleanResolutionResult {
 
 func INBooleanResolutionResultSuccessWithResolvedValue(resolvedValue bool) *INBooleanResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINBooleanResolutionResult), _iNBooleanResolutionResultSelSuccessWithResolvedValue, resolvedValue)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBooleanResolutionResultFromID(_ret)
 }
 
 func INBooleanResolutionResultConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber) *INBooleanResolutionResult {
 	_ret := objc.Send[objc.ID](objc.ID(_clsINBooleanResolutionResult), _iNBooleanResolutionResultSelConfirmationRequiredWithValueToConfirm, valueToConfirm.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return INBooleanResolutionResultFromID(_ret)
 }
-

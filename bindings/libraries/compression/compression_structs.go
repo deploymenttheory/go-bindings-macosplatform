@@ -8,10 +8,9 @@ import "unsafe"
 
 // [compression.h:310]
 type Compression_stream struct {
-	Dst_ptr *uint8
+	Dst_ptr  *uint8
 	Dst_size uint64
-	Src_ptr *uint8
+	Src_ptr  *uint8
 	Src_size uint64
-	State unsafe.Pointer
+	State    unsafe.Pointer
 }
-

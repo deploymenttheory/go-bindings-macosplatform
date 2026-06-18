@@ -16,7 +16,7 @@ type QLFilePreviewRequest struct {
 }
 
 var (
-	_clsQLFilePreviewRequest = _objcClass("QLFilePreviewRequest")
+	_clsQLFilePreviewRequest        = _objcClass("QLFilePreviewRequest")
 	_qLFilePreviewRequestSelFileURL = objc.RegisterName("fileURL")
 )
 
@@ -32,7 +32,8 @@ func QLFilePreviewRequestFromID(id objc.ID) *QLFilePreviewRequest {
 
 func (o *QLFilePreviewRequest) FileURL() *foundation.NSURL {
 	_ret := objc.Send[objc.ID](o.Ptr(), _qLFilePreviewRequestSelFileURL)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSURLFromID(_ret)
 }
-

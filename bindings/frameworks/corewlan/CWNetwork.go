@@ -16,20 +16,20 @@ type CWNetwork struct {
 }
 
 var (
-	_clsCWNetwork = _objcClass("CWNetwork")
-	_cWNetworkSelIsEqualToNetwork = objc.RegisterName("isEqualToNetwork:")
-	_cWNetworkSelSupportsSecurity = objc.RegisterName("supportsSecurity:")
-	_cWNetworkSelSupportsPHYMode = objc.RegisterName("supportsPHYMode:")
-	_cWNetworkSelSsid = objc.RegisterName("ssid")
-	_cWNetworkSelSsidData = objc.RegisterName("ssidData")
-	_cWNetworkSelBssid = objc.RegisterName("bssid")
-	_cWNetworkSelWlanChannel = objc.RegisterName("wlanChannel")
-	_cWNetworkSelRssiValue = objc.RegisterName("rssiValue")
-	_cWNetworkSelNoiseMeasurement = objc.RegisterName("noiseMeasurement")
+	_clsCWNetwork                       = _objcClass("CWNetwork")
+	_cWNetworkSelIsEqualToNetwork       = objc.RegisterName("isEqualToNetwork:")
+	_cWNetworkSelSupportsSecurity       = objc.RegisterName("supportsSecurity:")
+	_cWNetworkSelSupportsPHYMode        = objc.RegisterName("supportsPHYMode:")
+	_cWNetworkSelSsid                   = objc.RegisterName("ssid")
+	_cWNetworkSelSsidData               = objc.RegisterName("ssidData")
+	_cWNetworkSelBssid                  = objc.RegisterName("bssid")
+	_cWNetworkSelWlanChannel            = objc.RegisterName("wlanChannel")
+	_cWNetworkSelRssiValue              = objc.RegisterName("rssiValue")
+	_cWNetworkSelNoiseMeasurement       = objc.RegisterName("noiseMeasurement")
 	_cWNetworkSelInformationElementData = objc.RegisterName("informationElementData")
-	_cWNetworkSelCountryCode = objc.RegisterName("countryCode")
-	_cWNetworkSelBeaconInterval = objc.RegisterName("beaconInterval")
-	_cWNetworkSelIbss = objc.RegisterName("ibss")
+	_cWNetworkSelCountryCode            = objc.RegisterName("countryCode")
+	_cWNetworkSelBeaconInterval         = objc.RegisterName("beaconInterval")
+	_cWNetworkSelIbss                   = objc.RegisterName("ibss")
 )
 
 func CWNetworkFromID(id objc.ID) *CWNetwork {
@@ -63,28 +63,36 @@ func (o *CWNetwork) SupportsPHYMode(phyMode CWPHYMode) bool {
 // @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWNetwork) Ssid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelSsid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. @discussion The SSID is defined as 1-32 octets. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWNetwork) SsidData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelSsidData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property @abstract Returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. @discussion Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX. @note BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWNetwork) Bssid() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelBssid)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // @property @abstract The operating channel of the Wi-Fi device.
 func (o *CWNetwork) WlanChannel() *CWChannel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelWlanChannel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CWChannelFromID(_ret)
 }
 
@@ -103,14 +111,18 @@ func (o *CWNetwork) NoiseMeasurement() int {
 // @property @abstract Returns information element data included in beacon or probe response frames.
 func (o *CWNetwork) InformationElementData() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelInformationElementData)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // @property @abstract Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device. @note Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
 func (o *CWNetwork) CountryCode() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cWNetworkSelCountryCode)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -125,4 +137,3 @@ func (o *CWNetwork) Ibss() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cWNetworkSelIbss)
 	return _ret
 }
-

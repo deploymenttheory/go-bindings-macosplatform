@@ -63,4 +63,3 @@ type SymbolBounceEffectable interface {
 }
 
 var _ SymbolBounceEffectable = (*SymbolBounceEffect)(nil)
-

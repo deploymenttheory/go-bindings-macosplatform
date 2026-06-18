@@ -18,11 +18,15 @@ type MTRUnitTestingClusterTestComplexNullableOptionalResponseParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams].
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) ID() objc.ID { return x.inner.Ptr() }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) ID() objc.ID {
+	return x.inner.Ptr()
+}
 
 // MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestComplexNullableOptionalResponseParams (nil for 0).
 func MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
@@ -513,7 +517,9 @@ func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetTime
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 }
 
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) asMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams { return x.inner }
+func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) asMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	return x.inner
+}
 
 // MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestComplexNullableOptionalResponseParams], for mocking and DI.
 type MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable interface {
@@ -605,4 +611,3 @@ type MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable interfac
 }
 
 var _ MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable = (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams)(nil)
-

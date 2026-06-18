@@ -16,19 +16,19 @@ type MTRDeviceAttestationDeviceInfo struct {
 }
 
 var (
-	_clsMTRDeviceAttestationDeviceInfo = _objcClass("MTRDeviceAttestationDeviceInfo")
-	_mTRDeviceAttestationDeviceInfoSelVendorID = objc.RegisterName("vendorID")
-	_mTRDeviceAttestationDeviceInfoSelProductID = objc.RegisterName("productID")
-	_mTRDeviceAttestationDeviceInfoSelBasicInformationVendorID = objc.RegisterName("basicInformationVendorID")
+	_clsMTRDeviceAttestationDeviceInfo                          = _objcClass("MTRDeviceAttestationDeviceInfo")
+	_mTRDeviceAttestationDeviceInfoSelVendorID                  = objc.RegisterName("vendorID")
+	_mTRDeviceAttestationDeviceInfoSelProductID                 = objc.RegisterName("productID")
+	_mTRDeviceAttestationDeviceInfoSelBasicInformationVendorID  = objc.RegisterName("basicInformationVendorID")
 	_mTRDeviceAttestationDeviceInfoSelBasicInformationProductID = objc.RegisterName("basicInformationProductID")
-	_mTRDeviceAttestationDeviceInfoSelDacCertificate = objc.RegisterName("dacCertificate")
-	_mTRDeviceAttestationDeviceInfoSelDacPAICertificate = objc.RegisterName("dacPAICertificate")
-	_mTRDeviceAttestationDeviceInfoSelCertificateDeclaration = objc.RegisterName("certificateDeclaration")
-	_mTRDeviceAttestationDeviceInfoSelAttestationChallenge = objc.RegisterName("attestationChallenge")
-	_mTRDeviceAttestationDeviceInfoSelAttestationNonce = objc.RegisterName("attestationNonce")
-	_mTRDeviceAttestationDeviceInfoSelElementsTLV = objc.RegisterName("elementsTLV")
-	_mTRDeviceAttestationDeviceInfoSelCertificationDeclaration = objc.RegisterName("certificationDeclaration")
-	_mTRDeviceAttestationDeviceInfoSelElementsSignature = objc.RegisterName("elementsSignature")
+	_mTRDeviceAttestationDeviceInfoSelDacCertificate            = objc.RegisterName("dacCertificate")
+	_mTRDeviceAttestationDeviceInfoSelDacPAICertificate         = objc.RegisterName("dacPAICertificate")
+	_mTRDeviceAttestationDeviceInfoSelCertificateDeclaration    = objc.RegisterName("certificateDeclaration")
+	_mTRDeviceAttestationDeviceInfoSelAttestationChallenge      = objc.RegisterName("attestationChallenge")
+	_mTRDeviceAttestationDeviceInfoSelAttestationNonce          = objc.RegisterName("attestationNonce")
+	_mTRDeviceAttestationDeviceInfoSelElementsTLV               = objc.RegisterName("elementsTLV")
+	_mTRDeviceAttestationDeviceInfoSelCertificationDeclaration  = objc.RegisterName("certificationDeclaration")
+	_mTRDeviceAttestationDeviceInfoSelElementsSignature         = objc.RegisterName("elementsSignature")
 )
 
 func MTRDeviceAttestationDeviceInfoFromID(id objc.ID) *MTRDeviceAttestationDeviceInfo {
@@ -44,81 +44,104 @@ func MTRDeviceAttestationDeviceInfoFromID(id objc.ID) *MTRDeviceAttestationDevic
 // The vendor ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
 func (o *MTRDeviceAttestationDeviceInfo) VendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The product ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
 func (o *MTRDeviceAttestationDeviceInfo) ProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The vendor ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match the vendor ID from the certification declaration.
 func (o *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelBasicInformationVendorID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // The product ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match one of the product IDs from the certification declaration.
 func (o *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelBasicInformationProductID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRDeviceAttestationDeviceInfo) DacCertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelDacCertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRDeviceAttestationDeviceInfo) DacPAICertificate() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelDacPAICertificate)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelCertificateDeclaration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The attestation challenge from the secure session.
 func (o *MTRDeviceAttestationDeviceInfo) AttestationChallenge() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelAttestationChallenge)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The attestation nonce from the AttestationRequest command.
 func (o *MTRDeviceAttestationDeviceInfo) AttestationNonce() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelAttestationNonce)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The TLV-encoded attestation_elements_message that was used to find the certificationDeclaration (possibly unsuccessfully).
 func (o *MTRDeviceAttestationDeviceInfo) ElementsTLV() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelElementsTLV)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // The certification declaration of the device, if available.  This is a DER-encoded string representing a CMS-formatted certification declaration.  May be nil only if attestation verification failed.
 func (o *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelCertificationDeclaration)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 // A signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and attestationChallenge.
 func (o *MTRDeviceAttestationDeviceInfo) ElementsSignature() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRDeviceAttestationDeviceInfoSelElementsSignature)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
-

@@ -152,4 +152,3 @@ type Groupable interface {
 }
 
 var _ Groupable = (*Group)(nil)
-

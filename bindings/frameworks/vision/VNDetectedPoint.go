@@ -15,7 +15,7 @@ type VNDetectedPoint struct {
 }
 
 var (
-	_clsVNDetectedPoint = _objcClass("VNDetectedPoint")
+	_clsVNDetectedPoint           = _objcClass("VNDetectedPoint")
 	_vNDetectedPointSelConfidence = objc.RegisterName("confidence")
 )
 
@@ -33,4 +33,3 @@ func (o *VNDetectedPoint) Confidence() float32 {
 	_ret := objc.Send[float32](o.Ptr(), _vNDetectedPointSelConfidence)
 	return _ret
 }
-

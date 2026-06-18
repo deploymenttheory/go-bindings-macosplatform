@@ -134,4 +134,3 @@ type FaceFeatureable interface {
 }
 
 var _ FaceFeatureable = (*FaceFeature)(nil)
-

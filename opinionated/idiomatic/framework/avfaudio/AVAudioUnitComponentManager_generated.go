@@ -85,4 +85,3 @@ type AudioUnitComponentManagerable interface {
 }
 
 var _ AudioUnitComponentManagerable = (*AudioUnitComponentManager)(nil)
-

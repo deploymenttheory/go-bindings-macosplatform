@@ -18,14 +18,14 @@ type MDLCheckerboardTexture struct {
 }
 
 var (
-	_clsMDLCheckerboardTexture = _objcClass("MDLCheckerboardTexture")
+	_clsMDLCheckerboardTexture                                                                       = _objcClass("MDLCheckerboardTexture")
 	_mDLCheckerboardTextureSelInitWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 = objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:")
-	_mDLCheckerboardTextureSelDivisions = objc.RegisterName("divisions")
-	_mDLCheckerboardTextureSelSetDivisions = objc.RegisterName("setDivisions:")
-	_mDLCheckerboardTextureSelColor1 = objc.RegisterName("color1")
-	_mDLCheckerboardTextureSelSetColor1 = objc.RegisterName("setColor1:")
-	_mDLCheckerboardTextureSelColor2 = objc.RegisterName("color2")
-	_mDLCheckerboardTextureSelSetColor2 = objc.RegisterName("setColor2:")
+	_mDLCheckerboardTextureSelDivisions                                                              = objc.RegisterName("divisions")
+	_mDLCheckerboardTextureSelSetDivisions                                                           = objc.RegisterName("setDivisions:")
+	_mDLCheckerboardTextureSelColor1                                                                 = objc.RegisterName("color1")
+	_mDLCheckerboardTextureSelSetColor1                                                              = objc.RegisterName("setColor1:")
+	_mDLCheckerboardTextureSelColor2                                                                 = objc.RegisterName("color2")
+	_mDLCheckerboardTextureSelSetColor2                                                              = objc.RegisterName("setColor2:")
 )
 
 func MDLCheckerboardTextureFromID(id objc.ID) *MDLCheckerboardTexture {
@@ -40,7 +40,9 @@ func MDLCheckerboardTextureFromID(id objc.ID) *MDLCheckerboardTexture {
 
 func (o *MDLCheckerboardTexture) InitWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name *foundation.NSString, dimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *MDLCheckerboardTexture {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mDLCheckerboardTextureSelInitWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2, divisions, name.Ptr(), dimensions, channelCount, channelEncoding, color1, color2)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MDLCheckerboardTextureFromID(_ret)
 }
 
@@ -70,4 +72,3 @@ func (o *MDLCheckerboardTexture) Color2() unsafe.Pointer {
 func (o *MDLCheckerboardTexture) SetColor2(color2 unsafe.Pointer) {
 	o.Ptr().Send(_mDLCheckerboardTextureSelSetColor2, color2)
 }
-

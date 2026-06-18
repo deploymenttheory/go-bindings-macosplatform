@@ -16,8 +16,8 @@ type MTRMessagesClusterMessagePresentedEvent struct {
 }
 
 var (
-	_clsMTRMessagesClusterMessagePresentedEvent = _objcClass("MTRMessagesClusterMessagePresentedEvent")
-	_mTRMessagesClusterMessagePresentedEventSelMessageID = objc.RegisterName("messageID")
+	_clsMTRMessagesClusterMessagePresentedEvent             = _objcClass("MTRMessagesClusterMessagePresentedEvent")
+	_mTRMessagesClusterMessagePresentedEventSelMessageID    = objc.RegisterName("messageID")
 	_mTRMessagesClusterMessagePresentedEventSelSetMessageID = objc.RegisterName("setMessageID:")
 )
 
@@ -33,11 +33,12 @@ func MTRMessagesClusterMessagePresentedEventFromID(id objc.ID) *MTRMessagesClust
 
 func (o *MTRMessagesClusterMessagePresentedEvent) MessageID() *foundation.NSData {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRMessagesClusterMessagePresentedEventSelMessageID)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSDataFromID(_ret)
 }
 
 func (o *MTRMessagesClusterMessagePresentedEvent) SetMessageID(messageID *foundation.NSData) {
 	o.Ptr().Send(_mTRMessagesClusterMessagePresentedEventSelSetMessageID, messageID.Ptr())
 }
-

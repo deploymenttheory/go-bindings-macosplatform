@@ -136,4 +136,3 @@ type AudioUnitEQFilterParametersable interface {
 }
 
 var _ AudioUnitEQFilterParametersable = (*AudioUnitEQFilterParameters)(nil)
-

@@ -41,7 +41,9 @@ func (x *MessagePortNameServer) WithScriptingProperties(scriptingProperties *raw
 	return x
 }
 
-func (x *MessagePortNameServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
+func (x *MessagePortNameServer) asPortNameServer() *raw.NSPortNameServer {
+	return &x.inner.NSPortNameServer
+}
 
 func (x *MessagePortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
 
@@ -52,4 +54,3 @@ type MessagePortNameServerable interface {
 }
 
 var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)
-

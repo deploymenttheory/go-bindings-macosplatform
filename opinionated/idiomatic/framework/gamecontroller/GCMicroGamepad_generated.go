@@ -150,7 +150,9 @@ func (x *MicroGamepad) SetAllowsRotation(allowsRotation bool) {
 
 func (x *MicroGamepad) asMicroGamepad() *raw.GCMicroGamepad { return x.inner }
 
-func (x *MicroGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+func (x *MicroGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
+	return &x.inner.GCPhysicalInputProfile
+}
 
 // MicroGamepadable is the interface implemented by [MicroGamepad], for mocking and DI.
 type MicroGamepadable interface {
@@ -175,4 +177,3 @@ type MicroGamepadable interface {
 }
 
 var _ MicroGamepadable = (*MicroGamepad)(nil)
-

@@ -17,48 +17,48 @@ type NSPopUpButton struct {
 }
 
 var (
-	_clsNSPopUpButton = _objcClass("NSPopUpButton")
-	_nSPopUpButtonSelPopUpButtonWithMenuTargetAction = objc.RegisterName("popUpButtonWithMenu:target:action:")
-	_nSPopUpButtonSelPullDownButtonWithTitleMenu = objc.RegisterName("pullDownButtonWithTitle:menu:")
-	_nSPopUpButtonSelPullDownButtonWithImageMenu = objc.RegisterName("pullDownButtonWithImage:menu:")
+	_clsNSPopUpButton                                 = _objcClass("NSPopUpButton")
+	_nSPopUpButtonSelPopUpButtonWithMenuTargetAction  = objc.RegisterName("popUpButtonWithMenu:target:action:")
+	_nSPopUpButtonSelPullDownButtonWithTitleMenu      = objc.RegisterName("pullDownButtonWithTitle:menu:")
+	_nSPopUpButtonSelPullDownButtonWithImageMenu      = objc.RegisterName("pullDownButtonWithImage:menu:")
 	_nSPopUpButtonSelPullDownButtonWithTitleImageMenu = objc.RegisterName("pullDownButtonWithTitle:image:menu:")
-	_nSPopUpButtonSelInitWithFramePullsDown = objc.RegisterName("initWithFrame:pullsDown:")
-	_nSPopUpButtonSelAddItemWithTitle = objc.RegisterName("addItemWithTitle:")
-	_nSPopUpButtonSelAddItemsWithTitles = objc.RegisterName("addItemsWithTitles:")
-	_nSPopUpButtonSelInsertItemWithTitleAtIndex = objc.RegisterName("insertItemWithTitle:atIndex:")
-	_nSPopUpButtonSelRemoveItemWithTitle = objc.RegisterName("removeItemWithTitle:")
-	_nSPopUpButtonSelRemoveItemAtIndex = objc.RegisterName("removeItemAtIndex:")
-	_nSPopUpButtonSelRemoveAllItems = objc.RegisterName("removeAllItems")
-	_nSPopUpButtonSelIndexOfItem = objc.RegisterName("indexOfItem:")
-	_nSPopUpButtonSelIndexOfItemWithTitle = objc.RegisterName("indexOfItemWithTitle:")
-	_nSPopUpButtonSelIndexOfItemWithTag = objc.RegisterName("indexOfItemWithTag:")
+	_nSPopUpButtonSelInitWithFramePullsDown           = objc.RegisterName("initWithFrame:pullsDown:")
+	_nSPopUpButtonSelAddItemWithTitle                 = objc.RegisterName("addItemWithTitle:")
+	_nSPopUpButtonSelAddItemsWithTitles               = objc.RegisterName("addItemsWithTitles:")
+	_nSPopUpButtonSelInsertItemWithTitleAtIndex       = objc.RegisterName("insertItemWithTitle:atIndex:")
+	_nSPopUpButtonSelRemoveItemWithTitle              = objc.RegisterName("removeItemWithTitle:")
+	_nSPopUpButtonSelRemoveItemAtIndex                = objc.RegisterName("removeItemAtIndex:")
+	_nSPopUpButtonSelRemoveAllItems                   = objc.RegisterName("removeAllItems")
+	_nSPopUpButtonSelIndexOfItem                      = objc.RegisterName("indexOfItem:")
+	_nSPopUpButtonSelIndexOfItemWithTitle             = objc.RegisterName("indexOfItemWithTitle:")
+	_nSPopUpButtonSelIndexOfItemWithTag               = objc.RegisterName("indexOfItemWithTag:")
 	_nSPopUpButtonSelIndexOfItemWithRepresentedObject = objc.RegisterName("indexOfItemWithRepresentedObject:")
-	_nSPopUpButtonSelIndexOfItemWithTargetAndAction = objc.RegisterName("indexOfItemWithTarget:andAction:")
-	_nSPopUpButtonSelItemAtIndex = objc.RegisterName("itemAtIndex:")
-	_nSPopUpButtonSelItemWithTitle = objc.RegisterName("itemWithTitle:")
-	_nSPopUpButtonSelSelectItem = objc.RegisterName("selectItem:")
-	_nSPopUpButtonSelSelectItemAtIndex = objc.RegisterName("selectItemAtIndex:")
-	_nSPopUpButtonSelSelectItemWithTitle = objc.RegisterName("selectItemWithTitle:")
-	_nSPopUpButtonSelSelectItemWithTag = objc.RegisterName("selectItemWithTag:")
-	_nSPopUpButtonSelSynchronizeTitleAndSelectedItem = objc.RegisterName("synchronizeTitleAndSelectedItem")
-	_nSPopUpButtonSelItemTitleAtIndex = objc.RegisterName("itemTitleAtIndex:")
-	_nSPopUpButtonSelPullsDown = objc.RegisterName("pullsDown")
-	_nSPopUpButtonSelSetPullsDown = objc.RegisterName("setPullsDown:")
-	_nSPopUpButtonSelAutoenablesItems = objc.RegisterName("autoenablesItems")
-	_nSPopUpButtonSelSetAutoenablesItems = objc.RegisterName("setAutoenablesItems:")
-	_nSPopUpButtonSelPreferredEdge = objc.RegisterName("preferredEdge")
-	_nSPopUpButtonSelSetPreferredEdge = objc.RegisterName("setPreferredEdge:")
-	_nSPopUpButtonSelUsesItemFromMenu = objc.RegisterName("usesItemFromMenu")
-	_nSPopUpButtonSelSetUsesItemFromMenu = objc.RegisterName("setUsesItemFromMenu:")
-	_nSPopUpButtonSelAltersStateOfSelectedItem = objc.RegisterName("altersStateOfSelectedItem")
-	_nSPopUpButtonSelSetAltersStateOfSelectedItem = objc.RegisterName("setAltersStateOfSelectedItem:")
-	_nSPopUpButtonSelItemArray = objc.RegisterName("itemArray")
-	_nSPopUpButtonSelNumberOfItems = objc.RegisterName("numberOfItems")
-	_nSPopUpButtonSelLastItem = objc.RegisterName("lastItem")
-	_nSPopUpButtonSelSelectedItem = objc.RegisterName("selectedItem")
-	_nSPopUpButtonSelIndexOfSelectedItem = objc.RegisterName("indexOfSelectedItem")
-	_nSPopUpButtonSelItemTitles = objc.RegisterName("itemTitles")
-	_nSPopUpButtonSelTitleOfSelectedItem = objc.RegisterName("titleOfSelectedItem")
+	_nSPopUpButtonSelIndexOfItemWithTargetAndAction   = objc.RegisterName("indexOfItemWithTarget:andAction:")
+	_nSPopUpButtonSelItemAtIndex                      = objc.RegisterName("itemAtIndex:")
+	_nSPopUpButtonSelItemWithTitle                    = objc.RegisterName("itemWithTitle:")
+	_nSPopUpButtonSelSelectItem                       = objc.RegisterName("selectItem:")
+	_nSPopUpButtonSelSelectItemAtIndex                = objc.RegisterName("selectItemAtIndex:")
+	_nSPopUpButtonSelSelectItemWithTitle              = objc.RegisterName("selectItemWithTitle:")
+	_nSPopUpButtonSelSelectItemWithTag                = objc.RegisterName("selectItemWithTag:")
+	_nSPopUpButtonSelSynchronizeTitleAndSelectedItem  = objc.RegisterName("synchronizeTitleAndSelectedItem")
+	_nSPopUpButtonSelItemTitleAtIndex                 = objc.RegisterName("itemTitleAtIndex:")
+	_nSPopUpButtonSelPullsDown                        = objc.RegisterName("pullsDown")
+	_nSPopUpButtonSelSetPullsDown                     = objc.RegisterName("setPullsDown:")
+	_nSPopUpButtonSelAutoenablesItems                 = objc.RegisterName("autoenablesItems")
+	_nSPopUpButtonSelSetAutoenablesItems              = objc.RegisterName("setAutoenablesItems:")
+	_nSPopUpButtonSelPreferredEdge                    = objc.RegisterName("preferredEdge")
+	_nSPopUpButtonSelSetPreferredEdge                 = objc.RegisterName("setPreferredEdge:")
+	_nSPopUpButtonSelUsesItemFromMenu                 = objc.RegisterName("usesItemFromMenu")
+	_nSPopUpButtonSelSetUsesItemFromMenu              = objc.RegisterName("setUsesItemFromMenu:")
+	_nSPopUpButtonSelAltersStateOfSelectedItem        = objc.RegisterName("altersStateOfSelectedItem")
+	_nSPopUpButtonSelSetAltersStateOfSelectedItem     = objc.RegisterName("setAltersStateOfSelectedItem:")
+	_nSPopUpButtonSelItemArray                        = objc.RegisterName("itemArray")
+	_nSPopUpButtonSelNumberOfItems                    = objc.RegisterName("numberOfItems")
+	_nSPopUpButtonSelLastItem                         = objc.RegisterName("lastItem")
+	_nSPopUpButtonSelSelectedItem                     = objc.RegisterName("selectedItem")
+	_nSPopUpButtonSelIndexOfSelectedItem              = objc.RegisterName("indexOfSelectedItem")
+	_nSPopUpButtonSelItemTitles                       = objc.RegisterName("itemTitles")
+	_nSPopUpButtonSelTitleOfSelectedItem              = objc.RegisterName("titleOfSelectedItem")
 )
 
 func NSPopUpButtonFromID(id objc.ID) *NSPopUpButton {
@@ -74,34 +74,44 @@ func NSPopUpButtonFromID(id objc.ID) *NSPopUpButton {
 // Creates a standard pop-up button with a menu, target, and action. @param menu A menu presented by the pop-up button, containing items that the user can choose between. @param target The target object that receives action messages from the control. @param action The action message sent by the control. @discussion If `menu` is non-empty, the pop-up button uses the first item for its initial selection. @return An initialized pop-up button object.
 func NSPopUpButtonPopUpButtonWithMenuTargetAction(menu *NSMenu, target objc.ID, action objc.SEL) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPopUpButtonWithMenuTargetAction, menu.Ptr(), target, action)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopUpButtonFromID(_ret)
 }
 
 // Creates a standard pull-down button with a title and menu. @param title The localized title string that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
 func NSPopUpButtonPullDownButtonWithTitleMenu(title *foundation.NSString, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleMenu, title.Ptr(), menu.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopUpButtonFromID(_ret)
 }
 
 // Creates a standard pull-down button with an image and menu. @param image The icon that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
 func NSPopUpButtonPullDownButtonWithImageMenu(image *NSImage, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithImageMenu, image.Ptr(), menu.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopUpButtonFromID(_ret)
 }
 
 // Creates a standard pull-down button with a title, image, and menu. @param title The localized title string that is displayed on the button. @param image The icon that is displayed on the button. @param menu The pull-down menu to present when interacting with the button. @discussion Pull-down buttons created using this method have the `usesItemFromMenu` property set to `NO`. @return An initialized pull-down button object.
 func NSPopUpButtonPullDownButtonWithTitleImageMenu(title *foundation.NSString, image *NSImage, menu *NSMenu) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](objc.ID(_clsNSPopUpButton), _nSPopUpButtonSelPullDownButtonWithTitleImageMenu, title.Ptr(), image.Ptr(), menu.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopUpButtonFromID(_ret)
 }
 
 func (o *NSPopUpButton) InitWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bool) *NSPopUpButton {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelInitWithFramePullsDown, buttonFrame, flag)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSPopUpButtonFromID(_ret)
 }
 
@@ -156,13 +166,17 @@ func (o *NSPopUpButton) IndexOfItemWithTargetAndAction(target objc.ID, actionSel
 
 func (o *NSPopUpButton) ItemAtIndex(index int) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSPopUpButton) ItemWithTitle(title *foundation.NSString) *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemWithTitle, title.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -189,7 +203,9 @@ func (o *NSPopUpButton) SynchronizeTitleAndSelectedItem() {
 
 func (o *NSPopUpButton) ItemTitleAtIndex(index int) *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemTitleAtIndex, index)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -250,7 +266,9 @@ func (o *NSPopUpButton) SetAltersStateOfSelectedItem(altersStateOfSelectedItem b
 
 func (o *NSPopUpButton) ItemArray() *foundation.NSArray[*NSMenuItem] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelItemArray)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*NSMenuItem](_ret)
 }
 
@@ -261,13 +279,17 @@ func (o *NSPopUpButton) NumberOfItems() int {
 
 func (o *NSPopUpButton) LastItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelLastItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
 func (o *NSPopUpButton) SelectedItem() *NSMenuItem {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelSelectedItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return NSMenuItemFromID(_ret)
 }
 
@@ -283,7 +305,8 @@ func (o *NSPopUpButton) ItemTitles() *foundation.NSArray[*foundation.NSString] {
 
 func (o *NSPopUpButton) TitleOfSelectedItem() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nSPopUpButtonSelTitleOfSelectedItem)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

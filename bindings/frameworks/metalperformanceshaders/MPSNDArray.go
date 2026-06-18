@@ -20,33 +20,33 @@ type MPSNDArray struct {
 }
 
 var (
-	_clsMPSNDArray = _objcClass("MPSNDArray")
-	_mPSNDArraySelDefaultAllocator = objc.RegisterName("defaultAllocator")
-	_mPSNDArraySelLengthOfDimension = objc.RegisterName("lengthOfDimension:")
-	_mPSNDArraySelDescriptor = objc.RegisterName("descriptor")
-	_mPSNDArraySelInitWithDeviceDescriptor = objc.RegisterName("initWithDevice:descriptor:")
-	_mPSNDArraySelInitWithDeviceScalar = objc.RegisterName("initWithDevice:scalar:")
-	_mPSNDArraySelInitWithBufferOffsetDescriptor = objc.RegisterName("initWithBuffer:offset:descriptor:")
-	_mPSNDArraySelUserBuffer = objc.RegisterName("userBuffer")
-	_mPSNDArraySelResourceSize = objc.RegisterName("resourceSize")
-	_mPSNDArraySelArrayViewWithCommandBufferDescriptorAliasing = objc.RegisterName("arrayViewWithCommandBuffer:descriptor:aliasing:")
-	_mPSNDArraySelArrayViewWithDescriptor = objc.RegisterName("arrayViewWithDescriptor:")
-	_mPSNDArraySelArrayViewWithShapeStrides = objc.RegisterName("arrayViewWithShape:strides:")
-	_mPSNDArraySelArrayViewWithDimensionCountDimensionSizesStrides = objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:")
+	_clsMPSNDArray                                                                       = _objcClass("MPSNDArray")
+	_mPSNDArraySelDefaultAllocator                                                       = objc.RegisterName("defaultAllocator")
+	_mPSNDArraySelLengthOfDimension                                                      = objc.RegisterName("lengthOfDimension:")
+	_mPSNDArraySelDescriptor                                                             = objc.RegisterName("descriptor")
+	_mPSNDArraySelInitWithDeviceDescriptor                                               = objc.RegisterName("initWithDevice:descriptor:")
+	_mPSNDArraySelInitWithDeviceScalar                                                   = objc.RegisterName("initWithDevice:scalar:")
+	_mPSNDArraySelInitWithBufferOffsetDescriptor                                         = objc.RegisterName("initWithBuffer:offset:descriptor:")
+	_mPSNDArraySelUserBuffer                                                             = objc.RegisterName("userBuffer")
+	_mPSNDArraySelResourceSize                                                           = objc.RegisterName("resourceSize")
+	_mPSNDArraySelArrayViewWithCommandBufferDescriptorAliasing                           = objc.RegisterName("arrayViewWithCommandBuffer:descriptor:aliasing:")
+	_mPSNDArraySelArrayViewWithDescriptor                                                = objc.RegisterName("arrayViewWithDescriptor:")
+	_mPSNDArraySelArrayViewWithShapeStrides                                              = objc.RegisterName("arrayViewWithShape:strides:")
+	_mPSNDArraySelArrayViewWithDimensionCountDimensionSizesStrides                       = objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:")
 	_mPSNDArraySelExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides = objc.RegisterName("exportDataWithCommandBuffer:toBuffer:destinationDataType:offset:rowStrides:")
-	_mPSNDArraySelImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides = objc.RegisterName("importDataWithCommandBuffer:fromBuffer:sourceDataType:offset:rowStrides:")
-	_mPSNDArraySelExportDataWithCommandBufferToImagesOffset = objc.RegisterName("exportDataWithCommandBuffer:toImages:offset:")
-	_mPSNDArraySelImportDataWithCommandBufferFromImagesOffset = objc.RegisterName("importDataWithCommandBuffer:fromImages:offset:")
-	_mPSNDArraySelReadBytesStrideBytes = objc.RegisterName("readBytes:strideBytes:")
-	_mPSNDArraySelWriteBytesStrideBytes = objc.RegisterName("writeBytes:strideBytes:")
-	_mPSNDArraySelSynchronizeOnCommandBuffer = objc.RegisterName("synchronizeOnCommandBuffer:")
-	_mPSNDArraySelLabel = objc.RegisterName("label")
-	_mPSNDArraySelSetLabel = objc.RegisterName("setLabel:")
-	_mPSNDArraySelDataType = objc.RegisterName("dataType")
-	_mPSNDArraySelDataTypeSize = objc.RegisterName("dataTypeSize")
-	_mPSNDArraySelNumberOfDimensions = objc.RegisterName("numberOfDimensions")
-	_mPSNDArraySelDevice = objc.RegisterName("device")
-	_mPSNDArraySelParent = objc.RegisterName("parent")
+	_mPSNDArraySelImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides    = objc.RegisterName("importDataWithCommandBuffer:fromBuffer:sourceDataType:offset:rowStrides:")
+	_mPSNDArraySelExportDataWithCommandBufferToImagesOffset                              = objc.RegisterName("exportDataWithCommandBuffer:toImages:offset:")
+	_mPSNDArraySelImportDataWithCommandBufferFromImagesOffset                            = objc.RegisterName("importDataWithCommandBuffer:fromImages:offset:")
+	_mPSNDArraySelReadBytesStrideBytes                                                   = objc.RegisterName("readBytes:strideBytes:")
+	_mPSNDArraySelWriteBytesStrideBytes                                                  = objc.RegisterName("writeBytes:strideBytes:")
+	_mPSNDArraySelSynchronizeOnCommandBuffer                                             = objc.RegisterName("synchronizeOnCommandBuffer:")
+	_mPSNDArraySelLabel                                                                  = objc.RegisterName("label")
+	_mPSNDArraySelSetLabel                                                               = objc.RegisterName("setLabel:")
+	_mPSNDArraySelDataType                                                               = objc.RegisterName("dataType")
+	_mPSNDArraySelDataTypeSize                                                           = objc.RegisterName("dataTypeSize")
+	_mPSNDArraySelNumberOfDimensions                                                     = objc.RegisterName("numberOfDimensions")
+	_mPSNDArraySelDevice                                                                 = objc.RegisterName("device")
+	_mPSNDArraySelParent                                                                 = objc.RegisterName("parent")
 )
 
 func MPSNDArrayFromID(id objc.ID) *MPSNDArray {
@@ -74,27 +74,35 @@ func (o *MPSNDArray) LengthOfDimension(dimensionIndex uint) uint {
 // @abstract  Create a MPSNDArrayDescriptor that describes this MPSNDArray @discussion The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application. @return     A new autoreleased MPSNDArrayDescriptor that matches the shape of the MPSNDArray, suitable for introduction of slice, cast and transpose operations.
 func (o *MPSNDArray) Descriptor() *mpscore.MPSNDArrayDescriptor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayDescriptorFromID(_ret)
 }
 
 // @abstract   Initialize an MPSNDArrayDescriptor object on a device for given dimension sizes in descriptor. @param      device          The device on which the data type will be created. @param      descriptor      The MPSNDArrayDescriptor used for initializing the the NDArray @return     A valid MPSNDArray object or nil, if failure.
 func (o *MPSNDArray) InitWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.MPSNDArrayDescriptor) *MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelInitWithDeviceDescriptor, device, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayFromID(_ret)
 }
 
 // @abstract   Create a 1-Dimensional length=1 NDArray to hold a scalar
 func (o *MPSNDArray) InitWithDeviceScalar(device metal.MTLDevice, value float64) *MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelInitWithDeviceScalar, device, value)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayFromID(_ret)
 }
 
 func (o *MPSNDArray) InitWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *mpscore.MPSNDArrayDescriptor) *MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelInitWithBufferOffsetDescriptor, buffer, offset, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSNDArrayFromID(_ret)
 }
 
@@ -113,28 +121,36 @@ func (o *MPSNDArray) ResourceSize() uint {
 // @abstract   Make a new representation of a MPSNDArray with a slice, transpose or other change in property @discussion If possible, the views will merely record the slice or transpose without performing the operation. Many MPSKernels are able to operate on subregions of a MPSNDArray or operate on transposed data, so making a new copy of the data for these operations would be wasteful.  A copy may be forced by a change in dataType, rowBytes, or when using a view with a MPSKernel that does not support the deferred operation. To force an operation to occur immediately, use MPSAliasingStrategyShallNotAlias Otherwise, it is likely that the new MPSNDArray will share a MTLBuffer with the parent and alias its memory. @param      cmdBuf      The command buffer on which to perform physical copies if any are required @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data @param      aliasing    A aliasing strategy to direct MPS how to respond to cases when aliasing can or can not be performed. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
 func (o *MPSNDArray) ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *mpscore.MPSNDArrayDescriptor, aliasing mpscore.MPSAliasingStrategy) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelArrayViewWithCommandBufferDescriptorAliasing, cmdBuf, descriptor.Ptr(), aliasing)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
 // @abstract   Make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. @discussion The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods. @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
 func (o *MPSNDArray) ArrayViewWithDescriptor(descriptor *mpscore.MPSNDArrayDescriptor) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelArrayViewWithDescriptor, descriptor.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
 // @abstract   Make a new representation of a MPSNDArray with given strides and a new shape. @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers. @param      shape             The new shape for the NDArray. Fastest running dimension last. If nil then current shape is used. @param      strides           The strides for each dimension. Must be at least length of new shape. Last number must be one. Must be non-increasing. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
 func (o *MPSNDArray) ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelArrayViewWithShapeStrides, shape, strides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
 // @abstract   Make a new representation of a MPSNDArray with given strides and a new shape. @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers. @param      numberOfDimensions          Number of dimensions in the new view. @param      dimensionSizes              Size of each new dimension. Fastest running dimension first. Must be of length numberOfDimensions. @param      dimStrides                  The strides for each dimension. First number must be one. Must be non-decreasing.  Must be of length numberOfDimensions. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
 func (o *MPSNDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelArrayViewWithDimensionCountDimensionSizesStrides, numberOfDimensions, dimensionSizes, dimStrides)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
 
@@ -175,7 +191,9 @@ func (o *MPSNDArray) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBu
 // @abstract   A used specified string to help identify the array during debugging. @discussion May be externally visible to tools like Instruments
 func (o *MPSNDArray) Label() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelLabel)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -210,7 +228,8 @@ func (o *MPSNDArray) Device() metal.MTLDevice {
 // @abstract   The parent MPSNDArray that this object aliases @discussion If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
 func (o *MPSNDArray) Parent() *mpscore.MPSNDArray {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSNDArraySelParent)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return mpscore.MPSNDArrayFromID(_ret)
 }
-

@@ -15,10 +15,10 @@ type VImageCVImageFormat struct{}
 
 // C struct: vImageChannelDescription
 type VImageChannelDescription struct {
-	Min float64
+	Min  float64
 	Zero float64
 	Full float64
-	Max float64
+	Max  float64
 }
 
 // C struct: vImageConverter
@@ -27,26 +27,26 @@ type VImageConverter struct{}
 
 // C struct: vImageRGBPrimaries
 type VImageRGBPrimaries struct {
-	Red_x float32
+	Red_x   float32
 	Green_x float32
-	Blue_x float32
+	Blue_x  float32
 	White_x float32
-	Red_y float32
+	Red_y   float32
 	Green_y float32
-	Blue_y float32
+	Blue_y  float32
 	White_y float32
 }
 
 // C struct: vImageTransferFunction
 type VImageTransferFunction struct {
-	C0 float64
-	C1 float64
-	C2 float64
-	C3 float64
-	Gamma float64
+	C0     float64
+	C1     float64
+	C2     float64
+	C3     float64
+	Gamma  float64
 	Cutoff float64
-	C4 float64
-	C5 float64
+	C4     float64
+	C5     float64
 }
 
 // C struct: vImageWhitePoint
@@ -63,41 +63,41 @@ type VImageARGBToYpCbCr struct {
 
 // C struct: vImage_ARGBToYpCbCrMatrix
 type VImageARGBToYpCbCrMatrix struct {
-	R_Yp float32
-	G_Yp float32
-	B_Yp float32
-	R_Cb float32
-	G_Cb float32
+	R_Yp      float32
+	G_Yp      float32
+	B_Yp      float32
+	R_Cb      float32
+	G_Cb      float32
 	B_Cb_R_Cr float32
-	G_Cr float32
-	B_Cr float32
+	G_Cr      float32
+	B_Cr      float32
 }
 
 // C struct: vImage_AffineTransform
 type VImageAffineTransform struct {
-	A float32
-	B float32
-	C float32
-	D float32
+	A  float32
+	B  float32
+	C  float32
+	D  float32
 	Tx float32
 	Ty float32
 }
 
 // C struct: vImage_AffineTransform_Double
 type VImageAffineTransformDouble struct {
-	A float64
-	B float64
-	C float64
-	D float64
+	A  float64
+	B  float64
+	C  float64
+	D  float64
 	Tx float64
 	Ty float64
 }
 
 // C struct: vImage_Buffer
 type VImageBuffer struct {
-	Data unsafe.Pointer
-	Height uint
-	Width uint
+	Data     unsafe.Pointer
+	Height   uint
+	Width    uint
 	RowBytes uint
 }
 
@@ -105,12 +105,12 @@ type VImageBuffer struct {
 // C struct: vImage_CGImageFormat
 type VImageCGImageFormat struct {
 	BitsPerComponent uint32
-	BitsPerPixel uint32
-	ColorSpace unsafe.Pointer
-	BitmapInfo coregraphics.CGBitmapInfo
-	Version uint32
-	Decode *float64
-	RenderingIntent coregraphics.CGColorRenderingIntent
+	BitsPerPixel     uint32
+	ColorSpace       unsafe.Pointer
+	BitmapInfo       coregraphics.CGBitmapInfo
+	Version          uint32
+	Decode           *float64
+	RenderingIntent  coregraphics.CGColorRenderingIntent
 }
 
 // C struct: vImage_MultidimensionalTableData
@@ -120,28 +120,28 @@ type VImageMultidimensionalTableData struct{}
 // @typedef  vImage_PerpsectiveTransform @abstract Coefficients defining the 3x3 perspective (projective) transform matrix @field  a        top left cell in 3x3 transform matrix @field  b        top middle cell in 3x3 transform matrix @field  c        middle left cell in 3x3 transform matrix @field  d        middle right cell in 3x3 transform matrix @field  tx       The x-coordinate translation @field  ty       The y-coordinate translation @field  vx      The x-component of the projective vector @field  vy      The y-component of the projective vector @field  v        The homogeneous scale factor
 // C struct: vImage_PerpsectiveTransform
 type VImagePerpsectiveTransform struct {
-	A float32
-	B float32
-	C float32
-	D float32
+	A  float32
+	B  float32
+	C  float32
+	D  float32
 	Tx float32
 	Ty float32
 	Vx float32
 	Vy float32
-	V float32
+	V  float32
 }
 
 // @typedef vImage_YpCbCrPixelRange @abstract  Range and clamping information for Y'CbCr pixel formats @discussion Y'CbCr formats frequently don't use the entire representable range available to them to represent image data. While a "full range" video format does use the entire range, a "video range" format often leaves the extrema unused, except perhaps to represent values outside of the standard Y'=[0,1] CbCr = [-0.5, 0.5] range. For example, a 8-bit video range format typically uses the range [16,235] for Y' and [16, 240] for Cb and Cr. Some examples: @textblock (vImage_YpCbCrPixelRange){ 16, 128, 235, 240, 255, 0, 255, 1 }      // video range 8-bit, unclamped (vImage_YpCbCrPixelRange){ 16, 128, 235, 240, 235, 16, 240, 16 }    // video range 8-bit, clamped to video range (vImage_YpCbCrPixelRange){ 0, 128, 255, 255, 255, 1, 255, 0 }       // full range 8-bit, clamped to full range @/textblock The bias will be the prebias for YUV -> RGB and postbias for RGB -> YUV. @field Yp_bias The encoding for Y' = 0.0 for this video format (varies by bitdepth) @field CbCr_bias The encoding for {Cb,Cr} = 0.0 for this video format. This is usually the MIDDLE of the range of CbCr, not the low end. @field YpRangeMax The encoding for Y' = 1.0 for this video format. For video range, this is typically less than the maximum representable value. @field CbCrRangeMax The encoding for {Cb,Cr} = 0.5 for this video format. This is usually near the high end of the encodable range (e.g. 0xf0), if not the maximum encodable value (e.g. 0xff) @field YpMax  The encoding for the maximum allowed Y' value. All values larger than this will be clamped to this value. @field YpMin   The encoding of the minimum allowed Y' value. All values less than this will be clamped to this value. @field CbCrMax The encoding of the maximum allowed {Cb, Cr} value. All chroma values greater than this value will be clamped to this value. @field CbCrMin The encoding of the minimum allowed {Cb, Cr} value. All chroma values less than this value will be clamped to this value. @seealso vImageChannelDescription
 // C struct: vImage_YpCbCrPixelRange
 type VImageYpCbCrPixelRange struct {
-	Yp_bias int32
-	CbCr_bias int32
-	YpRangeMax int32
+	Yp_bias      int32
+	CbCr_bias    int32
+	YpRangeMax   int32
 	CbCrRangeMax int32
-	YpMax int32
-	YpMin int32
-	CbCrMax int32
-	CbCrMin int32
+	YpMax        int32
+	YpMin        int32
+	CbCrMax      int32
+	CbCrMin      int32
 }
 
 // C struct: vImage_YpCbCrToARGB
@@ -151,10 +151,9 @@ type VImageYpCbCrToARGB struct {
 
 // C struct: vImage_YpCbCrToARGBMatrix
 type VImageYpCbCrToARGBMatrix struct {
-	Yp float32
+	Yp   float32
 	Cr_R float32
 	Cr_G float32
 	Cb_G float32
 	Cb_B float32
 }
-

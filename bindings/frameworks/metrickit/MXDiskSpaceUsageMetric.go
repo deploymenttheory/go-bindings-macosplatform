@@ -16,13 +16,13 @@ type MXDiskSpaceUsageMetric struct {
 }
 
 var (
-	_clsMXDiskSpaceUsageMetric = _objcClass("MXDiskSpaceUsageMetric")
-	_mXDiskSpaceUsageMetricSelTotalBinaryFileSize = objc.RegisterName("totalBinaryFileSize")
-	_mXDiskSpaceUsageMetricSelTotalBinaryFileCount = objc.RegisterName("totalBinaryFileCount")
-	_mXDiskSpaceUsageMetricSelTotalDataFileSize = objc.RegisterName("totalDataFileSize")
-	_mXDiskSpaceUsageMetricSelTotalDataFileCount = objc.RegisterName("totalDataFileCount")
-	_mXDiskSpaceUsageMetricSelTotalCacheFolderSize = objc.RegisterName("totalCacheFolderSize")
-	_mXDiskSpaceUsageMetricSelTotalCloneSize = objc.RegisterName("totalCloneSize")
+	_clsMXDiskSpaceUsageMetric                       = _objcClass("MXDiskSpaceUsageMetric")
+	_mXDiskSpaceUsageMetricSelTotalBinaryFileSize    = objc.RegisterName("totalBinaryFileSize")
+	_mXDiskSpaceUsageMetricSelTotalBinaryFileCount   = objc.RegisterName("totalBinaryFileCount")
+	_mXDiskSpaceUsageMetricSelTotalDataFileSize      = objc.RegisterName("totalDataFileSize")
+	_mXDiskSpaceUsageMetricSelTotalDataFileCount     = objc.RegisterName("totalDataFileCount")
+	_mXDiskSpaceUsageMetricSelTotalCacheFolderSize   = objc.RegisterName("totalCacheFolderSize")
+	_mXDiskSpaceUsageMetricSelTotalCloneSize         = objc.RegisterName("totalCloneSize")
 	_mXDiskSpaceUsageMetricSelTotalDiskSpaceUsedSize = objc.RegisterName("totalDiskSpaceUsedSize")
 	_mXDiskSpaceUsageMetricSelTotalDiskSpaceCapacity = objc.RegisterName("totalDiskSpaceCapacity")
 )
@@ -84,4 +84,3 @@ func (o *MXDiskSpaceUsageMetric) TotalDiskSpaceCapacity() *foundation.NSMeasurem
 	_ret := objc.Send[*foundation.NSMeasurement[*foundation.NSUnitInformationStorage]](o.Ptr(), _mXDiskSpaceUsageMetricSelTotalDiskSpaceCapacity)
 	return _ret
 }
-

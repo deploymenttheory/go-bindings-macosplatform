@@ -16,12 +16,12 @@ type NLContextualEmbeddingResult struct {
 }
 
 var (
-	_clsNLContextualEmbeddingResult = _objcClass("NLContextualEmbeddingResult")
+	_clsNLContextualEmbeddingResult                                  = _objcClass("NLContextualEmbeddingResult")
 	_nLContextualEmbeddingResultSelEnumerateTokenVectorsInRangeUsing = objc.RegisterName("enumerateTokenVectorsInRange:usingBlock:")
-	_nLContextualEmbeddingResultSelTokenVectorAtIndexTokenRange = objc.RegisterName("tokenVectorAtIndex:tokenRange:")
-	_nLContextualEmbeddingResultSelString = objc.RegisterName("string")
-	_nLContextualEmbeddingResultSelLanguage = objc.RegisterName("language")
-	_nLContextualEmbeddingResultSelSequenceLength = objc.RegisterName("sequenceLength")
+	_nLContextualEmbeddingResultSelTokenVectorAtIndexTokenRange      = objc.RegisterName("tokenVectorAtIndex:tokenRange:")
+	_nLContextualEmbeddingResultSelString                            = objc.RegisterName("string")
+	_nLContextualEmbeddingResultSelLanguage                          = objc.RegisterName("language")
+	_nLContextualEmbeddingResultSelSequenceLength                    = objc.RegisterName("sequenceLength")
 )
 
 func NLContextualEmbeddingResultFromID(id objc.ID) *NLContextualEmbeddingResult {
@@ -48,14 +48,18 @@ func (o *NLContextualEmbeddingResult) TokenVectorAtIndexTokenRange(characterInde
 // A copy of the input string used to generate the embedding vectors.
 func (o *NLContextualEmbeddingResult) String() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLContextualEmbeddingResultSelString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 // The language that the framework identified or used when processing the input string.
 func (o *NLContextualEmbeddingResult) Language() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _nLContextualEmbeddingResultSelLanguage)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -64,4 +68,3 @@ func (o *NLContextualEmbeddingResult) SequenceLength() uint {
 	_ret := objc.Send[uint](o.Ptr(), _nLContextualEmbeddingResultSelSequenceLength)
 	return _ret
 }
-

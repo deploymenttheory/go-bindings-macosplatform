@@ -16,7 +16,9 @@ type MTRTimeSynchronizationClusterSetUtcTimeParams struct {
 }
 
 // Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterSetUtcTimeParams].
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams { return x.inner }
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams {
+	return x.inner
+}
 
 // ID returns the underlying Objective-C object pointer (objc.ID), for
 // passing to C APIs that take an object or CFTypeRef pointer.
@@ -66,7 +68,9 @@ func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithServerSideProcessing
 	return x
 }
 
-func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams { return &x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams }
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams {
+	return &x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams
+}
 
 // MTRTimeSynchronizationClusterSetUtcTimeParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetUtcTimeParams], for mocking and DI.
 type MTRTimeSynchronizationClusterSetUtcTimeParamsable interface {
@@ -79,4 +83,3 @@ type MTRTimeSynchronizationClusterSetUtcTimeParamsable interface {
 }
 
 var _ MTRTimeSynchronizationClusterSetUtcTimeParamsable = (*MTRTimeSynchronizationClusterSetUtcTimeParams)(nil)
-

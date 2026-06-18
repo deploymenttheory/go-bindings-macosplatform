@@ -18,14 +18,14 @@ type GKGraph struct {
 }
 
 var (
-	_clsGKGraph = _objcClass("GKGraph")
-	_gKGraphSelGraphWithNodes = objc.RegisterName("graphWithNodes:")
-	_gKGraphSelInitWithNodes = objc.RegisterName("initWithNodes:")
+	_clsGKGraph                                         = _objcClass("GKGraph")
+	_gKGraphSelGraphWithNodes                           = objc.RegisterName("graphWithNodes:")
+	_gKGraphSelInitWithNodes                            = objc.RegisterName("initWithNodes:")
 	_gKGraphSelConnectNodeToLowestCostNodeBidirectional = objc.RegisterName("connectNodeToLowestCostNode:bidirectional:")
-	_gKGraphSelRemoveNodes = objc.RegisterName("removeNodes:")
-	_gKGraphSelAddNodes = objc.RegisterName("addNodes:")
-	_gKGraphSelFindPathFromNodeToNode = objc.RegisterName("findPathFromNode:toNode:")
-	_gKGraphSelNodes = objc.RegisterName("nodes")
+	_gKGraphSelRemoveNodes                              = objc.RegisterName("removeNodes:")
+	_gKGraphSelAddNodes                                 = objc.RegisterName("addNodes:")
+	_gKGraphSelFindPathFromNodeToNode                   = objc.RegisterName("findPathFromNode:toNode:")
+	_gKGraphSelNodes                                    = objc.RegisterName("nodes")
 )
 
 func GKGraphFromID(id objc.ID) *GKGraph {
@@ -41,13 +41,17 @@ func GKGraphFromID(id objc.ID) *GKGraph {
 // Creates a graph with the provided array of nodes. @params nodes the nodes to create the graph with
 func GKGraphGraphWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGraph {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKGraph), _gKGraphSelGraphWithNodes, nodes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGraphFromID(_ret)
 }
 
 func (o *GKGraph) InitWithNodes(nodes *foundation.NSArray[*GKGraphNode]) *GKGraph {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphSelInitWithNodes, nodes.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKGraphFromID(_ret)
 }
 
@@ -69,14 +73,17 @@ func (o *GKGraph) AddNodes(nodes *foundation.NSArray[*GKGraphNode]) {
 // Attempts to find the optimal path between the two nodes indicated. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. Asserts if neither of these nodes are in this graph.  Use [GKGraphNode findPathFromNode:] instead. @param startNode node to start pathing from @param endNode goal node of the pathfinding attempt
 func (o *GKGraph) FindPathFromNodeToNode(startNode *GKGraphNode, endNode *GKGraphNode) *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphSelFindPathFromNodeToNode, startNode.Ptr(), endNode.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
 
 // The list of nodes in this graph
 func (o *GKGraph) Nodes() *foundation.NSArray[*GKGraphNode] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKGraphSelNodes)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*GKGraphNode](_ret)
 }
-

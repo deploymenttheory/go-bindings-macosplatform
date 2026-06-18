@@ -12,4 +12,3 @@ func FPUIErrorDomain() uintptr {
 	ptr, _ := purego.Dlsym(_fileprovideruiLib, "FPUIErrorDomain")
 	return ptr
 }
-

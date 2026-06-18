@@ -115,7 +115,9 @@ func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescripto
 	x.inner.SetCompilationDescriptor(compilationDescriptor)
 }
 
-func (x *GraphExecutionDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+func (x *GraphExecutionDescriptor) asGraphObject() *raw.MPSGraphObject {
+	return &x.inner.MPSGraphObject
+}
 
 // GraphExecutionDescriptorable is the interface implemented by [GraphExecutionDescriptor], for mocking and DI.
 type GraphExecutionDescriptorable interface {
@@ -137,4 +139,3 @@ type GraphExecutionDescriptorable interface {
 }
 
 var _ GraphExecutionDescriptorable = (*GraphExecutionDescriptor)(nil)
-

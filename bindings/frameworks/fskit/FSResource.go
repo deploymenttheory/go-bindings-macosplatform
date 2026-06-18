@@ -16,9 +16,9 @@ type FSResource struct {
 }
 
 var (
-	_clsFSResource = _objcClass("FSResource")
+	_clsFSResource          = _objcClass("FSResource")
 	_fSResourceSelMakeProxy = objc.RegisterName("makeProxy")
-	_fSResourceSelRevoke = objc.RegisterName("revoke")
+	_fSResourceSelRevoke    = objc.RegisterName("revoke")
 	_fSResourceSelIsRevoked = objc.RegisterName("isRevoked")
 )
 
@@ -35,7 +35,9 @@ func FSResourceFromID(id objc.ID) *FSResource {
 // Creates a proxy object of this resource. If you create a proxy from a proxy resource, this method returns a copy of the proxy.
 func (o *FSResource) MakeProxy() *FSResource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _fSResourceSelMakeProxy)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return FSResourceFromID(_ret)
 }
 
@@ -49,4 +51,3 @@ func (o *FSResource) IsRevoked() bool {
 	_ret := objc.Send[bool](o.Ptr(), _fSResourceSelIsRevoked)
 	return _ret
 }
-

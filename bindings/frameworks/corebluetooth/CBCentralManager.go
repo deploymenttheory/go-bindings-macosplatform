@@ -16,18 +16,18 @@ type CBCentralManager struct {
 }
 
 var (
-	_clsCBCentralManager = _objcClass("CBCentralManager")
-	_cBCentralManagerSelInitWithDelegateQueue = objc.RegisterName("initWithDelegate:queue:")
-	_cBCentralManagerSelInitWithDelegateQueueOptions = objc.RegisterName("initWithDelegate:queue:options:")
-	_cBCentralManagerSelRetrievePeripheralsWithIdentifiers = objc.RegisterName("retrievePeripheralsWithIdentifiers:")
+	_clsCBCentralManager                                         = _objcClass("CBCentralManager")
+	_cBCentralManagerSelInitWithDelegateQueue                    = objc.RegisterName("initWithDelegate:queue:")
+	_cBCentralManagerSelInitWithDelegateQueueOptions             = objc.RegisterName("initWithDelegate:queue:options:")
+	_cBCentralManagerSelRetrievePeripheralsWithIdentifiers       = objc.RegisterName("retrievePeripheralsWithIdentifiers:")
 	_cBCentralManagerSelRetrieveConnectedPeripheralsWithServices = objc.RegisterName("retrieveConnectedPeripheralsWithServices:")
-	_cBCentralManagerSelScanForPeripheralsWithServicesOptions = objc.RegisterName("scanForPeripheralsWithServices:options:")
-	_cBCentralManagerSelStopScan = objc.RegisterName("stopScan")
-	_cBCentralManagerSelConnectPeripheralOptions = objc.RegisterName("connectPeripheral:options:")
-	_cBCentralManagerSelCancelPeripheralConnection = objc.RegisterName("cancelPeripheralConnection:")
-	_cBCentralManagerSelDelegate = objc.RegisterName("delegate")
-	_cBCentralManagerSelSetDelegate = objc.RegisterName("setDelegate:")
-	_cBCentralManagerSelIsScanning = objc.RegisterName("isScanning")
+	_cBCentralManagerSelScanForPeripheralsWithServicesOptions    = objc.RegisterName("scanForPeripheralsWithServices:options:")
+	_cBCentralManagerSelStopScan                                 = objc.RegisterName("stopScan")
+	_cBCentralManagerSelConnectPeripheralOptions                 = objc.RegisterName("connectPeripheral:options:")
+	_cBCentralManagerSelCancelPeripheralConnection               = objc.RegisterName("cancelPeripheralConnection:")
+	_cBCentralManagerSelDelegate                                 = objc.RegisterName("delegate")
+	_cBCentralManagerSelSetDelegate                              = objc.RegisterName("setDelegate:")
+	_cBCentralManagerSelIsScanning                               = objc.RegisterName("isScanning")
 )
 
 func CBCentralManagerFromID(id objc.ID) *CBCentralManager {
@@ -43,28 +43,36 @@ func CBCentralManagerFromID(id objc.ID) *CBCentralManager {
 // @method initWithDelegate:queue: @param delegate The delegate that will receive central role events. @param queue    The dispatch queue on which the events will be dispatched. @discussion     The initialization call. The events of the central role will be dispatched on the provided queue. If <i>nil</i>, the main queue will be used.
 func (o *CBCentralManager) InitWithDelegateQueue(delegate CBCentralManagerDelegate, queue *foundation.NSObject) *CBCentralManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCentralManagerSelInitWithDelegateQueue, delegate, queue.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBCentralManagerFromID(_ret)
 }
 
 // @method initWithDelegate:queue:options: @param delegate The delegate that will receive central role events. @param queue    The dispatch queue on which the events will be dispatched. @param options  An optional dictionary specifying options for the manager. @discussion     The initialization call. The events of the central role will be dispatched on the provided queue. If <i>nil</i>, the main queue will be used. @seealso		CBCentralManagerOptionShowPowerAlertKey @seealso		CBCentralManagerOptionRestoreIdentifierKey
 func (o *CBCentralManager) InitWithDelegateQueueOptions(delegate CBCentralManagerDelegate, queue *foundation.NSObject, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CBCentralManager {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCentralManagerSelInitWithDelegateQueueOptions, delegate, queue.Ptr(), options)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return CBCentralManagerFromID(_ret)
 }
 
 // @method retrievePeripheralsWithIdentifiers: @param identifiers	A list of <code>NSUUID</code> objects. @discussion			Attempts to retrieve the <code>CBPeripheral</code> object(s) with the corresponding <i>identifiers</i>. @return				A list of <code>CBPeripheral</code> objects.
 func (o *CBCentralManager) RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*CBPeripheral] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCentralManagerSelRetrievePeripheralsWithIdentifiers, identifiers)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBPeripheral](_ret)
 }
 
 // @method retrieveConnectedPeripheralsWithServices @discussion Retrieves all peripherals that are connected to the system and implement any of the services listed in <i>serviceUUIDs</i>. Note that this set can include peripherals which were connected by other applications, which will need to be connected locally via {@link connectPeripheral:options:} before they can be used. @return		A list of <code>CBPeripheral</code> objects.
 func (o *CBCentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*CBUUID]) *foundation.NSArray[*CBPeripheral] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _cBCentralManagerSelRetrieveConnectedPeripheralsWithServices, serviceUUIDs.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[*CBPeripheral](_ret)
 }
 
@@ -103,4 +111,3 @@ func (o *CBCentralManager) IsScanning() bool {
 	_ret := objc.Send[bool](o.Ptr(), _cBCentralManagerSelIsScanning)
 	return _ret
 }
-

@@ -15,13 +15,13 @@ type MPSGraphFFTDescriptor struct {
 }
 
 var (
-	_clsMPSGraphFFTDescriptor = _objcClass("MPSGraphFFTDescriptor")
-	_mPSGraphFFTDescriptorSelDescriptor = objc.RegisterName("descriptor")
-	_mPSGraphFFTDescriptorSelInverse = objc.RegisterName("inverse")
-	_mPSGraphFFTDescriptorSelSetInverse = objc.RegisterName("setInverse:")
-	_mPSGraphFFTDescriptorSelScalingMode = objc.RegisterName("scalingMode")
-	_mPSGraphFFTDescriptorSelSetScalingMode = objc.RegisterName("setScalingMode:")
-	_mPSGraphFFTDescriptorSelRoundToOddHermitean = objc.RegisterName("roundToOddHermitean")
+	_clsMPSGraphFFTDescriptor                       = _objcClass("MPSGraphFFTDescriptor")
+	_mPSGraphFFTDescriptorSelDescriptor             = objc.RegisterName("descriptor")
+	_mPSGraphFFTDescriptorSelInverse                = objc.RegisterName("inverse")
+	_mPSGraphFFTDescriptorSelSetInverse             = objc.RegisterName("setInverse:")
+	_mPSGraphFFTDescriptorSelScalingMode            = objc.RegisterName("scalingMode")
+	_mPSGraphFFTDescriptorSelSetScalingMode         = objc.RegisterName("setScalingMode:")
+	_mPSGraphFFTDescriptorSelRoundToOddHermitean    = objc.RegisterName("roundToOddHermitean")
 	_mPSGraphFFTDescriptorSelSetRoundToOddHermitean = objc.RegisterName("setRoundToOddHermitean:")
 )
 
@@ -38,7 +38,9 @@ func MPSGraphFFTDescriptorFromID(id objc.ID) *MPSGraphFFTDescriptor {
 // Creates a fast Fourier transform descriptor with default parameter values.
 func MPSGraphFFTDescriptorDescriptor() *MPSGraphFFTDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSGraphFFTDescriptor), _mPSGraphFFTDescriptorSelDescriptor)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSGraphFFTDescriptorFromID(_ret)
 }
 
@@ -62,7 +64,7 @@ func (o *MPSGraphFFTDescriptor) SetScalingMode(scalingMode MPSGraphFFTScalingMod
 	o.Ptr().Send(_mPSGraphFFTDescriptorSelSetScalingMode, scalingMode)
 }
 
-// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in ``MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:`` to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
 func (o *MPSGraphFFTDescriptor) RoundToOddHermitean() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mPSGraphFFTDescriptorSelRoundToOddHermitean)
 	return _ret
@@ -71,4 +73,3 @@ func (o *MPSGraphFFTDescriptor) RoundToOddHermitean() bool {
 func (o *MPSGraphFFTDescriptor) SetRoundToOddHermitean(roundToOddHermitean bool) {
 	o.Ptr().Send(_mPSGraphFFTDescriptorSelSetRoundToOddHermitean, roundToOddHermitean)
 }
-

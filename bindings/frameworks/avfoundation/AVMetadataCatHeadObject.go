@@ -25,4 +25,3 @@ func AVMetadataCatHeadObjectFromID(id objc.ID) *AVMetadataCatHeadObject {
 	purego.Track(o)
 	return o
 }
-

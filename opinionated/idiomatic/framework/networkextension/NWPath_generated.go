@@ -65,4 +65,3 @@ type NWPathable interface {
 }
 
 var _ NWPathable = (*NWPath)(nil)
-

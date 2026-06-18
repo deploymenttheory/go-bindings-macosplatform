@@ -13,17 +13,17 @@ import (
 type NSActivityOptions int64
 
 const (
-	NSActivityIdleDisplaySleepDisabled NSActivityOptions = 1099511627776
-	NSActivityIdleSystemSleepDisabled NSActivityOptions = 1048576
-	NSActivitySuddenTerminationDisabled NSActivityOptions = 16384
-	NSActivityAutomaticTerminationDisabled NSActivityOptions = 32768
-	NSActivityAnimationTrackingEnabled NSActivityOptions = 35184372088832
-	NSActivityTrackingEnabled NSActivityOptions = 70368744177664
-	NSActivityUserInitiated NSActivityOptions = 16777215
+	NSActivityIdleDisplaySleepDisabled             NSActivityOptions = 1099511627776
+	NSActivityIdleSystemSleepDisabled              NSActivityOptions = 1048576
+	NSActivitySuddenTerminationDisabled            NSActivityOptions = 16384
+	NSActivityAutomaticTerminationDisabled         NSActivityOptions = 32768
+	NSActivityAnimationTrackingEnabled             NSActivityOptions = 35184372088832
+	NSActivityTrackingEnabled                      NSActivityOptions = 70368744177664
+	NSActivityUserInitiated                        NSActivityOptions = 16777215
 	NSActivityUserInitiatedAllowingIdleSystemSleep NSActivityOptions = 15728639
-	NSActivityBackground NSActivityOptions = 255
-	NSActivityLatencyCritical NSActivityOptions = 1095216660480
-	NSActivityUserInteractive NSActivityOptions = 1095233437695
+	NSActivityBackground                           NSActivityOptions = 255
+	NSActivityLatencyCritical                      NSActivityOptions = 1095216660480
+	NSActivityUserInteractive                      NSActivityOptions = 1095233437695
 )
 
 func (e NSActivityOptions) String() string {
@@ -71,26 +71,26 @@ func (e NSActivityOptions) String() string {
 type NSAlignmentOptions uint64
 
 const (
-	NSAlignMinXInward NSAlignmentOptions = 1
-	NSAlignMinYInward NSAlignmentOptions = 2
-	NSAlignMaxXInward NSAlignmentOptions = 4
-	NSAlignMaxYInward NSAlignmentOptions = 8
-	NSAlignWidthInward NSAlignmentOptions = 16
-	NSAlignHeightInward NSAlignmentOptions = 32
-	NSAlignMinXOutward NSAlignmentOptions = 256
-	NSAlignMinYOutward NSAlignmentOptions = 512
-	NSAlignMaxXOutward NSAlignmentOptions = 1024
-	NSAlignMaxYOutward NSAlignmentOptions = 2048
-	NSAlignWidthOutward NSAlignmentOptions = 4096
-	NSAlignHeightOutward NSAlignmentOptions = 8192
-	NSAlignMinXNearest NSAlignmentOptions = 65536
-	NSAlignMinYNearest NSAlignmentOptions = 131072
-	NSAlignMaxXNearest NSAlignmentOptions = 262144
-	NSAlignMaxYNearest NSAlignmentOptions = 524288
-	NSAlignWidthNearest NSAlignmentOptions = 1048576
-	NSAlignHeightNearest NSAlignmentOptions = 2097152
-	NSAlignRectFlipped NSAlignmentOptions = 9223372036854775808
-	NSAlignAllEdgesInward NSAlignmentOptions = 15
+	NSAlignMinXInward      NSAlignmentOptions = 1
+	NSAlignMinYInward      NSAlignmentOptions = 2
+	NSAlignMaxXInward      NSAlignmentOptions = 4
+	NSAlignMaxYInward      NSAlignmentOptions = 8
+	NSAlignWidthInward     NSAlignmentOptions = 16
+	NSAlignHeightInward    NSAlignmentOptions = 32
+	NSAlignMinXOutward     NSAlignmentOptions = 256
+	NSAlignMinYOutward     NSAlignmentOptions = 512
+	NSAlignMaxXOutward     NSAlignmentOptions = 1024
+	NSAlignMaxYOutward     NSAlignmentOptions = 2048
+	NSAlignWidthOutward    NSAlignmentOptions = 4096
+	NSAlignHeightOutward   NSAlignmentOptions = 8192
+	NSAlignMinXNearest     NSAlignmentOptions = 65536
+	NSAlignMinYNearest     NSAlignmentOptions = 131072
+	NSAlignMaxXNearest     NSAlignmentOptions = 262144
+	NSAlignMaxYNearest     NSAlignmentOptions = 524288
+	NSAlignWidthNearest    NSAlignmentOptions = 1048576
+	NSAlignHeightNearest   NSAlignmentOptions = 2097152
+	NSAlignRectFlipped     NSAlignmentOptions = 9223372036854775808
+	NSAlignAllEdgesInward  NSAlignmentOptions = 15
 	NSAlignAllEdgesOutward NSAlignmentOptions = 3840
 	NSAlignAllEdgesNearest NSAlignmentOptions = 983040
 )
@@ -173,16 +173,16 @@ func (e NSAlignmentOptions) String() string {
 type NSAppleEventSendOptions uint64
 
 const (
-	NSAppleEventSendNoReply NSAppleEventSendOptions = 1
-	NSAppleEventSendQueueReply NSAppleEventSendOptions = 2
-	NSAppleEventSendWaitForReply NSAppleEventSendOptions = 3
-	NSAppleEventSendNeverInteract NSAppleEventSendOptions = 16
-	NSAppleEventSendCanInteract NSAppleEventSendOptions = 32
+	NSAppleEventSendNoReply        NSAppleEventSendOptions = 1
+	NSAppleEventSendQueueReply     NSAppleEventSendOptions = 2
+	NSAppleEventSendWaitForReply   NSAppleEventSendOptions = 3
+	NSAppleEventSendNeverInteract  NSAppleEventSendOptions = 16
+	NSAppleEventSendCanInteract    NSAppleEventSendOptions = 32
 	NSAppleEventSendAlwaysInteract NSAppleEventSendOptions = 48
 	NSAppleEventSendCanSwitchLayer NSAppleEventSendOptions = 64
-	NSAppleEventSendDontRecord NSAppleEventSendOptions = 4096
-	NSAppleEventSendDontExecute NSAppleEventSendOptions = 8192
-	NSAppleEventSendDontAnnotate NSAppleEventSendOptions = 65536
+	NSAppleEventSendDontRecord     NSAppleEventSendOptions = 4096
+	NSAppleEventSendDontExecute    NSAppleEventSendOptions = 8192
+	NSAppleEventSendDontAnnotate   NSAppleEventSendOptions = 65536
 	NSAppleEventSendDefaultOptions NSAppleEventSendOptions = 35
 )
 
@@ -231,7 +231,7 @@ func (e NSAppleEventSendOptions) String() string {
 type NSAttributedStringEnumerationOptions uint64
 
 const (
-	NSAttributedStringEnumerationReverse NSAttributedStringEnumerationOptions = 2
+	NSAttributedStringEnumerationReverse                          NSAttributedStringEnumerationOptions = 2
 	NSAttributedStringEnumerationLongestEffectiveRangeNotRequired NSAttributedStringEnumerationOptions = 1048576
 )
 
@@ -254,7 +254,7 @@ type NSAttributedStringFormattingOptions uint64
 
 const (
 	NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging NSAttributedStringFormattingOptions = 1
-	NSAttributedStringFormattingApplyReplacementIndexAttribute NSAttributedStringFormattingOptions = 2
+	NSAttributedStringFormattingApplyReplacementIndexAttribute         NSAttributedStringFormattingOptions = 2
 )
 
 func (e NSAttributedStringFormattingOptions) String() string {
@@ -274,8 +274,8 @@ func (e NSAttributedStringFormattingOptions) String() string {
 type NSAttributedStringMarkdownInterpretedSyntax int64
 
 const (
-	NSAttributedStringMarkdownInterpretedSyntaxFull NSAttributedStringMarkdownInterpretedSyntax = 0
-	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly NSAttributedStringMarkdownInterpretedSyntax = 1
+	NSAttributedStringMarkdownInterpretedSyntaxFull                           NSAttributedStringMarkdownInterpretedSyntax = 0
+	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly                     NSAttributedStringMarkdownInterpretedSyntax = 1
 	NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace NSAttributedStringMarkdownInterpretedSyntax = 2
 )
 
@@ -295,7 +295,7 @@ func (e NSAttributedStringMarkdownInterpretedSyntax) String() string {
 type NSAttributedStringMarkdownParsingFailurePolicy int64
 
 const (
-	NSAttributedStringMarkdownParsingFailureReturnError NSAttributedStringMarkdownParsingFailurePolicy = 0
+	NSAttributedStringMarkdownParsingFailureReturnError                     NSAttributedStringMarkdownParsingFailurePolicy = 0
 	NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible NSAttributedStringMarkdownParsingFailurePolicy = 1
 )
 
@@ -314,8 +314,8 @@ func (e NSAttributedStringMarkdownParsingFailurePolicy) String() string {
 type NSBinarySearchingOptions uint64
 
 const (
-	NSBinarySearchingFirstEqual NSBinarySearchingOptions = 256
-	NSBinarySearchingLastEqual NSBinarySearchingOptions = 512
+	NSBinarySearchingFirstEqual     NSBinarySearchingOptions = 256
+	NSBinarySearchingLastEqual      NSBinarySearchingOptions = 512
 	NSBinarySearchingInsertionIndex NSBinarySearchingOptions = 1024
 )
 
@@ -339,10 +339,10 @@ func (e NSBinarySearchingOptions) String() string {
 type NSByteCountFormatterCountStyle int64
 
 const (
-	NSByteCountFormatterCountStyleFile NSByteCountFormatterCountStyle = 0
-	NSByteCountFormatterCountStyleMemory NSByteCountFormatterCountStyle = 1
+	NSByteCountFormatterCountStyleFile    NSByteCountFormatterCountStyle = 0
+	NSByteCountFormatterCountStyleMemory  NSByteCountFormatterCountStyle = 1
 	NSByteCountFormatterCountStyleDecimal NSByteCountFormatterCountStyle = 2
-	NSByteCountFormatterCountStyleBinary NSByteCountFormatterCountStyle = 3
+	NSByteCountFormatterCountStyleBinary  NSByteCountFormatterCountStyle = 3
 )
 
 func (e NSByteCountFormatterCountStyle) String() string {
@@ -364,17 +364,17 @@ func (e NSByteCountFormatterCountStyle) String() string {
 type NSByteCountFormatterUnits uint64
 
 const (
-	NSByteCountFormatterUseDefault NSByteCountFormatterUnits = 0
-	NSByteCountFormatterUseBytes NSByteCountFormatterUnits = 1
-	NSByteCountFormatterUseKB NSByteCountFormatterUnits = 2
-	NSByteCountFormatterUseMB NSByteCountFormatterUnits = 4
-	NSByteCountFormatterUseGB NSByteCountFormatterUnits = 8
-	NSByteCountFormatterUseTB NSByteCountFormatterUnits = 16
-	NSByteCountFormatterUsePB NSByteCountFormatterUnits = 32
-	NSByteCountFormatterUseEB NSByteCountFormatterUnits = 64
-	NSByteCountFormatterUseZB NSByteCountFormatterUnits = 128
+	NSByteCountFormatterUseDefault    NSByteCountFormatterUnits = 0
+	NSByteCountFormatterUseBytes      NSByteCountFormatterUnits = 1
+	NSByteCountFormatterUseKB         NSByteCountFormatterUnits = 2
+	NSByteCountFormatterUseMB         NSByteCountFormatterUnits = 4
+	NSByteCountFormatterUseGB         NSByteCountFormatterUnits = 8
+	NSByteCountFormatterUseTB         NSByteCountFormatterUnits = 16
+	NSByteCountFormatterUsePB         NSByteCountFormatterUnits = 32
+	NSByteCountFormatterUseEB         NSByteCountFormatterUnits = 64
+	NSByteCountFormatterUseZB         NSByteCountFormatterUnits = 128
 	NSByteCountFormatterUseYBOrHigher NSByteCountFormatterUnits = 65280
-	NSByteCountFormatterUseAll NSByteCountFormatterUnits = 65535
+	NSByteCountFormatterUseAll        NSByteCountFormatterUnits = 65535
 )
 
 func (e NSByteCountFormatterUnits) String() string {
@@ -418,11 +418,11 @@ func (e NSByteCountFormatterUnits) String() string {
 type NSCalculationError uint64
 
 const (
-	NSCalculationNoError NSCalculationError = 0
+	NSCalculationNoError         NSCalculationError = 0
 	NSCalculationLossOfPrecision NSCalculationError = 1
-	NSCalculationUnderflow NSCalculationError = 2
-	NSCalculationOverflow NSCalculationError = 3
-	NSCalculationDivideByZero NSCalculationError = 4
+	NSCalculationUnderflow       NSCalculationError = 2
+	NSCalculationOverflow        NSCalculationError = 3
+	NSCalculationDivideByZero    NSCalculationError = 4
 )
 
 func (e NSCalculationError) String() string {
@@ -446,14 +446,14 @@ func (e NSCalculationError) String() string {
 type NSCalendarOptions uint64
 
 const (
-	NSCalendarWrapComponents NSCalendarOptions = 1
-	NSCalendarMatchStrictly NSCalendarOptions = 2
-	NSCalendarSearchBackwards NSCalendarOptions = 4
+	NSCalendarWrapComponents                          NSCalendarOptions = 1
+	NSCalendarMatchStrictly                           NSCalendarOptions = 2
+	NSCalendarSearchBackwards                         NSCalendarOptions = 4
 	NSCalendarMatchPreviousTimePreservingSmallerUnits NSCalendarOptions = 256
-	NSCalendarMatchNextTimePreservingSmallerUnits NSCalendarOptions = 512
-	NSCalendarMatchNextTime NSCalendarOptions = 1024
-	NSCalendarMatchFirst NSCalendarOptions = 4096
-	NSCalendarMatchLast NSCalendarOptions = 8192
+	NSCalendarMatchNextTimePreservingSmallerUnits     NSCalendarOptions = 512
+	NSCalendarMatchNextTime                           NSCalendarOptions = 1024
+	NSCalendarMatchFirst                              NSCalendarOptions = 4096
+	NSCalendarMatchLast                               NSCalendarOptions = 8192
 )
 
 func (e NSCalendarOptions) String() string {
@@ -492,25 +492,25 @@ func (e NSCalendarOptions) String() string {
 type NSCalendarUnit uint64
 
 const (
-	NSCalendarUnitEra NSCalendarUnit = 2
-	NSCalendarUnitYear NSCalendarUnit = 4
-	NSCalendarUnitMonth NSCalendarUnit = 8
-	NSCalendarUnitDay NSCalendarUnit = 16
-	NSCalendarUnitHour NSCalendarUnit = 32
-	NSCalendarUnitMinute NSCalendarUnit = 64
-	NSCalendarUnitSecond NSCalendarUnit = 128
-	NSCalendarUnitWeekday NSCalendarUnit = 512
-	NSCalendarUnitWeekdayOrdinal NSCalendarUnit = 1024
-	NSCalendarUnitQuarter NSCalendarUnit = 2048
-	NSCalendarUnitWeekOfMonth NSCalendarUnit = 4096
-	NSCalendarUnitWeekOfYear NSCalendarUnit = 8192
+	NSCalendarUnitEra               NSCalendarUnit = 2
+	NSCalendarUnitYear              NSCalendarUnit = 4
+	NSCalendarUnitMonth             NSCalendarUnit = 8
+	NSCalendarUnitDay               NSCalendarUnit = 16
+	NSCalendarUnitHour              NSCalendarUnit = 32
+	NSCalendarUnitMinute            NSCalendarUnit = 64
+	NSCalendarUnitSecond            NSCalendarUnit = 128
+	NSCalendarUnitWeekday           NSCalendarUnit = 512
+	NSCalendarUnitWeekdayOrdinal    NSCalendarUnit = 1024
+	NSCalendarUnitQuarter           NSCalendarUnit = 2048
+	NSCalendarUnitWeekOfMonth       NSCalendarUnit = 4096
+	NSCalendarUnitWeekOfYear        NSCalendarUnit = 8192
 	NSCalendarUnitYearForWeekOfYear NSCalendarUnit = 16384
-	NSCalendarUnitNanosecond NSCalendarUnit = 32768
-	NSCalendarUnitDayOfYear NSCalendarUnit = 65536
-	NSCalendarUnitCalendar NSCalendarUnit = 1048576
-	NSCalendarUnitTimeZone NSCalendarUnit = 2097152
-	NSCalendarUnitIsLeapMonth NSCalendarUnit = 1073741824
-	NSCalendarUnitIsRepeatedDay NSCalendarUnit = 2147483648
+	NSCalendarUnitNanosecond        NSCalendarUnit = 32768
+	NSCalendarUnitDayOfYear         NSCalendarUnit = 65536
+	NSCalendarUnitCalendar          NSCalendarUnit = 1048576
+	NSCalendarUnitTimeZone          NSCalendarUnit = 2097152
+	NSCalendarUnitIsLeapMonth       NSCalendarUnit = 1073741824
+	NSCalendarUnitIsRepeatedDay     NSCalendarUnit = 2147483648
 	// Deprecated: since macOS 10.10.
 	NSEraCalendarUnit NSCalendarUnit = 2
 	// Deprecated: since macOS 10.10.
@@ -680,8 +680,8 @@ type NSComparisonPredicateModifier uint64
 
 const (
 	NSDirectPredicateModifier NSComparisonPredicateModifier = 0
-	NSAllPredicateModifier NSComparisonPredicateModifier = 1
-	NSAnyPredicateModifier NSComparisonPredicateModifier = 2
+	NSAllPredicateModifier    NSComparisonPredicateModifier = 1
+	NSAnyPredicateModifier    NSComparisonPredicateModifier = 2
 )
 
 func (e NSComparisonPredicateModifier) String() string {
@@ -701,9 +701,9 @@ func (e NSComparisonPredicateModifier) String() string {
 type NSComparisonPredicateOptions uint64
 
 const (
-	NSCaseInsensitivePredicateOption NSComparisonPredicateOptions = 1
+	NSCaseInsensitivePredicateOption      NSComparisonPredicateOptions = 1
 	NSDiacriticInsensitivePredicateOption NSComparisonPredicateOptions = 2
-	NSNormalizedPredicateOption NSComparisonPredicateOptions = 4
+	NSNormalizedPredicateOption           NSComparisonPredicateOptions = 4
 )
 
 func (e NSComparisonPredicateOptions) String() string {
@@ -726,8 +726,8 @@ func (e NSComparisonPredicateOptions) String() string {
 type NSComparisonResult int64
 
 const (
-	NSOrderedAscending NSComparisonResult = -1
-	NSOrderedSame NSComparisonResult = 0
+	NSOrderedAscending  NSComparisonResult = -1
+	NSOrderedSame       NSComparisonResult = 0
 	NSOrderedDescending NSComparisonResult = 1
 )
 
@@ -749,7 +749,7 @@ type NSCompoundPredicateType uint64
 const (
 	NSNotPredicateType NSCompoundPredicateType = 0
 	NSAndPredicateType NSCompoundPredicateType = 1
-	NSOrPredicateType NSCompoundPredicateType = 2
+	NSOrPredicateType  NSCompoundPredicateType = 2
 )
 
 func (e NSCompoundPredicateType) String() string {
@@ -787,10 +787,10 @@ func (e NSDataBase64DecodingOptions) String() string {
 type NSDataBase64EncodingOptions uint64
 
 const (
-	NSDataBase64Encoding64CharacterLineLength NSDataBase64EncodingOptions = 1
-	NSDataBase64Encoding76CharacterLineLength NSDataBase64EncodingOptions = 2
+	NSDataBase64Encoding64CharacterLineLength     NSDataBase64EncodingOptions = 1
+	NSDataBase64Encoding76CharacterLineLength     NSDataBase64EncodingOptions = 2
 	NSDataBase64EncodingEndLineWithCarriageReturn NSDataBase64EncodingOptions = 16
-	NSDataBase64EncodingEndLineWithLineFeed NSDataBase64EncodingOptions = 32
+	NSDataBase64EncodingEndLineWithLineFeed       NSDataBase64EncodingOptions = 32
 )
 
 func (e NSDataBase64EncodingOptions) String() string {
@@ -817,9 +817,9 @@ type NSDataCompressionAlgorithm int64
 
 const (
 	NSDataCompressionAlgorithmLZFSE NSDataCompressionAlgorithm = 0
-	NSDataCompressionAlgorithmLZ4 NSDataCompressionAlgorithm = 1
-	NSDataCompressionAlgorithmLZMA NSDataCompressionAlgorithm = 2
-	NSDataCompressionAlgorithmZlib NSDataCompressionAlgorithm = 3
+	NSDataCompressionAlgorithmLZ4   NSDataCompressionAlgorithm = 1
+	NSDataCompressionAlgorithmLZMA  NSDataCompressionAlgorithm = 2
+	NSDataCompressionAlgorithmZlib  NSDataCompressionAlgorithm = 3
 )
 
 func (e NSDataCompressionAlgorithm) String() string {
@@ -842,7 +842,7 @@ type NSDataReadingOptions uint64
 
 const (
 	NSDataReadingMappedIfSafe NSDataReadingOptions = 1
-	NSDataReadingUncached NSDataReadingOptions = 2
+	NSDataReadingUncached     NSDataReadingOptions = 2
 	NSDataReadingMappedAlways NSDataReadingOptions = 8
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	NSDataReadingMapped NSDataReadingOptions = 1
@@ -883,7 +883,7 @@ type NSDataSearchOptions uint64
 
 const (
 	NSDataSearchBackwards NSDataSearchOptions = 1
-	NSDataSearchAnchored NSDataSearchOptions = 2
+	NSDataSearchAnchored  NSDataSearchOptions = 2
 )
 
 func (e NSDataSearchOptions) String() string {
@@ -905,13 +905,13 @@ type NSDataWritingOptions uint64
 
 const (
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSDataWritingAtomic NSDataWritingOptions = 1
-	NSDataWritingWithoutOverwriting NSDataWritingOptions = 2
-	NSDataWritingFileProtectionNone NSDataWritingOptions = 268435456
-	NSDataWritingFileProtectionComplete NSDataWritingOptions = 536870912
-	NSDataWritingFileProtectionCompleteUnlessOpen NSDataWritingOptions = 805306368
+	NSDataWritingAtomic                                             NSDataWritingOptions = 1
+	NSDataWritingWithoutOverwriting                                 NSDataWritingOptions = 2
+	NSDataWritingFileProtectionNone                                 NSDataWritingOptions = 268435456
+	NSDataWritingFileProtectionComplete                             NSDataWritingOptions = 536870912
+	NSDataWritingFileProtectionCompleteUnlessOpen                   NSDataWritingOptions = 805306368
 	NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NSDataWritingOptions = 1073741824
-	NSDataWritingFileProtectionMask NSDataWritingOptions = 4026531840
+	NSDataWritingFileProtectionMask                                 NSDataWritingOptions = 4026531840
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	NSAtomicWrite NSDataWritingOptions = 1
 )
@@ -951,12 +951,12 @@ func (e NSDataWritingOptions) String() string {
 type NSDateComponentsFormatterUnitsStyle int64
 
 const (
-	NSDateComponentsFormatterUnitsStylePositional NSDateComponentsFormatterUnitsStyle = 0
+	NSDateComponentsFormatterUnitsStylePositional  NSDateComponentsFormatterUnitsStyle = 0
 	NSDateComponentsFormatterUnitsStyleAbbreviated NSDateComponentsFormatterUnitsStyle = 1
-	NSDateComponentsFormatterUnitsStyleShort NSDateComponentsFormatterUnitsStyle = 2
-	NSDateComponentsFormatterUnitsStyleFull NSDateComponentsFormatterUnitsStyle = 3
-	NSDateComponentsFormatterUnitsStyleSpellOut NSDateComponentsFormatterUnitsStyle = 4
-	NSDateComponentsFormatterUnitsStyleBrief NSDateComponentsFormatterUnitsStyle = 5
+	NSDateComponentsFormatterUnitsStyleShort       NSDateComponentsFormatterUnitsStyle = 2
+	NSDateComponentsFormatterUnitsStyleFull        NSDateComponentsFormatterUnitsStyle = 3
+	NSDateComponentsFormatterUnitsStyleSpellOut    NSDateComponentsFormatterUnitsStyle = 4
+	NSDateComponentsFormatterUnitsStyleBrief       NSDateComponentsFormatterUnitsStyle = 5
 )
 
 func (e NSDateComponentsFormatterUnitsStyle) String() string {
@@ -982,13 +982,13 @@ func (e NSDateComponentsFormatterUnitsStyle) String() string {
 type NSDateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
-	NSDateComponentsFormatterZeroFormattingBehaviorNone NSDateComponentsFormatterZeroFormattingBehavior = 0
-	NSDateComponentsFormatterZeroFormattingBehaviorDefault NSDateComponentsFormatterZeroFormattingBehavior = 1
-	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading NSDateComponentsFormatterZeroFormattingBehavior = 2
-	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle NSDateComponentsFormatterZeroFormattingBehavior = 4
+	NSDateComponentsFormatterZeroFormattingBehaviorNone         NSDateComponentsFormatterZeroFormattingBehavior = 0
+	NSDateComponentsFormatterZeroFormattingBehaviorDefault      NSDateComponentsFormatterZeroFormattingBehavior = 1
+	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading  NSDateComponentsFormatterZeroFormattingBehavior = 2
+	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle   NSDateComponentsFormatterZeroFormattingBehavior = 4
 	NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing NSDateComponentsFormatterZeroFormattingBehavior = 8
-	NSDateComponentsFormatterZeroFormattingBehaviorDropAll NSDateComponentsFormatterZeroFormattingBehavior = 14
-	NSDateComponentsFormatterZeroFormattingBehaviorPad NSDateComponentsFormatterZeroFormattingBehavior = 65536
+	NSDateComponentsFormatterZeroFormattingBehaviorDropAll      NSDateComponentsFormatterZeroFormattingBehavior = 14
+	NSDateComponentsFormatterZeroFormattingBehaviorPad          NSDateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
 func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
@@ -1021,8 +1021,8 @@ type NSDateFormatterBehavior uint64
 
 const (
 	NSDateFormatterBehaviorDefault NSDateFormatterBehavior = 0
-	NSDateFormatterBehavior10_0 NSDateFormatterBehavior = 1000
-	NSDateFormatterBehavior10_4 NSDateFormatterBehavior = 1040
+	NSDateFormatterBehavior10_0    NSDateFormatterBehavior = 1000
+	NSDateFormatterBehavior10_4    NSDateFormatterBehavior = 1040
 )
 
 func (e NSDateFormatterBehavior) String() string {
@@ -1041,11 +1041,11 @@ func (e NSDateFormatterBehavior) String() string {
 type NSDateFormatterStyle uint64
 
 const (
-	NSDateFormatterNoStyle NSDateFormatterStyle = 0
-	NSDateFormatterShortStyle NSDateFormatterStyle = 1
+	NSDateFormatterNoStyle     NSDateFormatterStyle = 0
+	NSDateFormatterShortStyle  NSDateFormatterStyle = 1
 	NSDateFormatterMediumStyle NSDateFormatterStyle = 2
-	NSDateFormatterLongStyle NSDateFormatterStyle = 3
-	NSDateFormatterFullStyle NSDateFormatterStyle = 4
+	NSDateFormatterLongStyle   NSDateFormatterStyle = 3
+	NSDateFormatterFullStyle   NSDateFormatterStyle = 4
 )
 
 func (e NSDateFormatterStyle) String() string {
@@ -1068,11 +1068,11 @@ func (e NSDateFormatterStyle) String() string {
 type NSDateIntervalFormatterStyle uint64
 
 const (
-	NSDateIntervalFormatterNoStyle NSDateIntervalFormatterStyle = 0
-	NSDateIntervalFormatterShortStyle NSDateIntervalFormatterStyle = 1
+	NSDateIntervalFormatterNoStyle     NSDateIntervalFormatterStyle = 0
+	NSDateIntervalFormatterShortStyle  NSDateIntervalFormatterStyle = 1
 	NSDateIntervalFormatterMediumStyle NSDateIntervalFormatterStyle = 2
-	NSDateIntervalFormatterLongStyle NSDateIntervalFormatterStyle = 3
-	NSDateIntervalFormatterFullStyle NSDateIntervalFormatterStyle = 4
+	NSDateIntervalFormatterLongStyle   NSDateIntervalFormatterStyle = 3
+	NSDateIntervalFormatterFullStyle   NSDateIntervalFormatterStyle = 4
 )
 
 func (e NSDateIntervalFormatterStyle) String() string {
@@ -1095,7 +1095,7 @@ func (e NSDateIntervalFormatterStyle) String() string {
 type NSDecodingFailurePolicy int64
 
 const (
-	NSDecodingFailurePolicyRaiseException NSDecodingFailurePolicy = 0
+	NSDecodingFailurePolicyRaiseException    NSDecodingFailurePolicy = 0
 	NSDecodingFailurePolicySetErrorAndReturn NSDecodingFailurePolicy = 1
 )
 
@@ -1115,10 +1115,10 @@ type NSDirectoryEnumerationOptions uint64
 
 const (
 	NSDirectoryEnumerationSkipsSubdirectoryDescendants NSDirectoryEnumerationOptions = 1
-	NSDirectoryEnumerationSkipsPackageDescendants NSDirectoryEnumerationOptions = 2
-	NSDirectoryEnumerationSkipsHiddenFiles NSDirectoryEnumerationOptions = 4
+	NSDirectoryEnumerationSkipsPackageDescendants      NSDirectoryEnumerationOptions = 2
+	NSDirectoryEnumerationSkipsHiddenFiles             NSDirectoryEnumerationOptions = 4
 	NSDirectoryEnumerationIncludesDirectoriesPostOrder NSDirectoryEnumerationOptions = 8
-	NSDirectoryEnumerationProducesRelativePathURLs NSDirectoryEnumerationOptions = 16
+	NSDirectoryEnumerationProducesRelativePathURLs     NSDirectoryEnumerationOptions = 16
 )
 
 func (e NSDirectoryEnumerationOptions) String() string {
@@ -1149,7 +1149,7 @@ type NSDistributedNotificationOptions uint64
 
 const (
 	NSDistributedNotificationDeliverImmediately NSDistributedNotificationOptions = 1
-	NSDistributedNotificationPostToAllSessions NSDistributedNotificationOptions = 2
+	NSDistributedNotificationPostToAllSessions  NSDistributedNotificationOptions = 2
 )
 
 func (e NSDistributedNotificationOptions) String() string {
@@ -1169,9 +1169,9 @@ func (e NSDistributedNotificationOptions) String() string {
 type NSEnergyFormatterUnit int64
 
 const (
-	NSEnergyFormatterUnitJoule NSEnergyFormatterUnit = 11
-	NSEnergyFormatterUnitKilojoule NSEnergyFormatterUnit = 14
-	NSEnergyFormatterUnitCalorie NSEnergyFormatterUnit = 1793
+	NSEnergyFormatterUnitJoule       NSEnergyFormatterUnit = 11
+	NSEnergyFormatterUnitKilojoule   NSEnergyFormatterUnit = 14
+	NSEnergyFormatterUnitCalorie     NSEnergyFormatterUnit = 1793
 	NSEnergyFormatterUnitKilocalorie NSEnergyFormatterUnit = 1794
 )
 
@@ -1195,7 +1195,7 @@ type NSEnumerationOptions uint64
 
 const (
 	NSEnumerationConcurrent NSEnumerationOptions = 1
-	NSEnumerationReverse NSEnumerationOptions = 2
+	NSEnumerationReverse    NSEnumerationOptions = 2
 )
 
 func (e NSEnumerationOptions) String() string {
@@ -1215,19 +1215,19 @@ func (e NSEnumerationOptions) String() string {
 type NSExpressionType uint64
 
 const (
-	NSConstantValueExpressionType NSExpressionType = 0
+	NSConstantValueExpressionType   NSExpressionType = 0
 	NSEvaluatedObjectExpressionType NSExpressionType = 1
-	NSVariableExpressionType NSExpressionType = 2
-	NSKeyPathExpressionType NSExpressionType = 3
-	NSFunctionExpressionType NSExpressionType = 4
-	NSUnionSetExpressionType NSExpressionType = 5
-	NSIntersectSetExpressionType NSExpressionType = 6
-	NSMinusSetExpressionType NSExpressionType = 7
-	NSSubqueryExpressionType NSExpressionType = 13
-	NSAggregateExpressionType NSExpressionType = 14
-	NSAnyKeyExpressionType NSExpressionType = 15
-	NSBlockExpressionType NSExpressionType = 19
-	NSConditionalExpressionType NSExpressionType = 20
+	NSVariableExpressionType        NSExpressionType = 2
+	NSKeyPathExpressionType         NSExpressionType = 3
+	NSFunctionExpressionType        NSExpressionType = 4
+	NSUnionSetExpressionType        NSExpressionType = 5
+	NSIntersectSetExpressionType    NSExpressionType = 6
+	NSMinusSetExpressionType        NSExpressionType = 7
+	NSSubqueryExpressionType        NSExpressionType = 13
+	NSAggregateExpressionType       NSExpressionType = 14
+	NSAnyKeyExpressionType          NSExpressionType = 15
+	NSBlockExpressionType           NSExpressionType = 19
+	NSConditionalExpressionType     NSExpressionType = 20
 )
 
 func (e NSExpressionType) String() string {
@@ -1267,10 +1267,10 @@ func (e NSExpressionType) String() string {
 type NSFileCoordinatorReadingOptions uint64
 
 const (
-	NSFileCoordinatorReadingWithoutChanges NSFileCoordinatorReadingOptions = 1
-	NSFileCoordinatorReadingResolvesSymbolicLink NSFileCoordinatorReadingOptions = 2
+	NSFileCoordinatorReadingWithoutChanges                   NSFileCoordinatorReadingOptions = 1
+	NSFileCoordinatorReadingResolvesSymbolicLink             NSFileCoordinatorReadingOptions = 2
 	NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NSFileCoordinatorReadingOptions = 4
-	NSFileCoordinatorReadingForUploading NSFileCoordinatorReadingOptions = 8
+	NSFileCoordinatorReadingForUploading                     NSFileCoordinatorReadingOptions = 8
 )
 
 func (e NSFileCoordinatorReadingOptions) String() string {
@@ -1297,10 +1297,10 @@ func (e NSFileCoordinatorReadingOptions) String() string {
 type NSFileCoordinatorWritingOptions uint64
 
 const (
-	NSFileCoordinatorWritingForDeleting NSFileCoordinatorWritingOptions = 1
-	NSFileCoordinatorWritingForMoving NSFileCoordinatorWritingOptions = 2
-	NSFileCoordinatorWritingForMerging NSFileCoordinatorWritingOptions = 4
-	NSFileCoordinatorWritingForReplacing NSFileCoordinatorWritingOptions = 8
+	NSFileCoordinatorWritingForDeleting                    NSFileCoordinatorWritingOptions = 1
+	NSFileCoordinatorWritingForMoving                      NSFileCoordinatorWritingOptions = 2
+	NSFileCoordinatorWritingForMerging                     NSFileCoordinatorWritingOptions = 4
+	NSFileCoordinatorWritingForReplacing                   NSFileCoordinatorWritingOptions = 8
 	NSFileCoordinatorWritingContentIndependentMetadataOnly NSFileCoordinatorWritingOptions = 16
 )
 
@@ -1331,7 +1331,7 @@ func (e NSFileCoordinatorWritingOptions) String() string {
 type NSFileManagerItemReplacementOptions uint64
 
 const (
-	NSFileManagerItemReplacementUsingNewMetadataOnly NSFileManagerItemReplacementOptions = 1
+	NSFileManagerItemReplacementUsingNewMetadataOnly      NSFileManagerItemReplacementOptions = 1
 	NSFileManagerItemReplacementWithoutDeletingBackupItem NSFileManagerItemReplacementOptions = 2
 )
 
@@ -1378,7 +1378,7 @@ type NSFileManagerUnmountOptions uint64
 
 const (
 	NSFileManagerUnmountAllPartitionsAndEjectDisk NSFileManagerUnmountOptions = 1
-	NSFileManagerUnmountWithoutUI NSFileManagerUnmountOptions = 2
+	NSFileManagerUnmountWithoutUI                 NSFileManagerUnmountOptions = 2
 )
 
 func (e NSFileManagerUnmountOptions) String() string {
@@ -1455,7 +1455,7 @@ func (e NSFileVersionReplacingOptions) String() string {
 type NSFileWrapperReadingOptions uint64
 
 const (
-	NSFileWrapperReadingImmediate NSFileWrapperReadingOptions = 1
+	NSFileWrapperReadingImmediate      NSFileWrapperReadingOptions = 1
 	NSFileWrapperReadingWithoutMapping NSFileWrapperReadingOptions = 2
 )
 
@@ -1477,7 +1477,7 @@ func (e NSFileWrapperReadingOptions) String() string {
 type NSFileWrapperWritingOptions uint64
 
 const (
-	NSFileWrapperWritingAtomic NSFileWrapperWritingOptions = 1
+	NSFileWrapperWritingAtomic           NSFileWrapperWritingOptions = 1
 	NSFileWrapperWritingWithNameUpdating NSFileWrapperWritingOptions = 2
 )
 
@@ -1498,12 +1498,12 @@ func (e NSFileWrapperWritingOptions) String() string {
 type NSFormattingContext int64
 
 const (
-	NSFormattingContextUnknown NSFormattingContext = 0
-	NSFormattingContextDynamic NSFormattingContext = 1
-	NSFormattingContextStandalone NSFormattingContext = 2
-	NSFormattingContextListItem NSFormattingContext = 3
+	NSFormattingContextUnknown             NSFormattingContext = 0
+	NSFormattingContextDynamic             NSFormattingContext = 1
+	NSFormattingContextStandalone          NSFormattingContext = 2
+	NSFormattingContextListItem            NSFormattingContext = 3
 	NSFormattingContextBeginningOfSentence NSFormattingContext = 4
-	NSFormattingContextMiddleOfSentence NSFormattingContext = 5
+	NSFormattingContextMiddleOfSentence    NSFormattingContext = 5
 )
 
 func (e NSFormattingContext) String() string {
@@ -1528,9 +1528,9 @@ func (e NSFormattingContext) String() string {
 type NSFormattingUnitStyle int64
 
 const (
-	NSFormattingUnitStyleShort NSFormattingUnitStyle = 1
+	NSFormattingUnitStyleShort  NSFormattingUnitStyle = 1
 	NSFormattingUnitStyleMedium NSFormattingUnitStyle = 2
-	NSFormattingUnitStyleLong NSFormattingUnitStyle = 3
+	NSFormattingUnitStyleLong   NSFormattingUnitStyle = 3
 )
 
 func (e NSFormattingUnitStyle) String() string {
@@ -1549,21 +1549,21 @@ func (e NSFormattingUnitStyle) String() string {
 type NSGrammaticalCase int64
 
 const (
-	NSGrammaticalCaseNotSet NSGrammaticalCase = 0
-	NSGrammaticalCaseNominative NSGrammaticalCase = 1
-	NSGrammaticalCaseAccusative NSGrammaticalCase = 2
-	NSGrammaticalCaseDative NSGrammaticalCase = 3
-	NSGrammaticalCaseGenitive NSGrammaticalCase = 4
+	NSGrammaticalCaseNotSet        NSGrammaticalCase = 0
+	NSGrammaticalCaseNominative    NSGrammaticalCase = 1
+	NSGrammaticalCaseAccusative    NSGrammaticalCase = 2
+	NSGrammaticalCaseDative        NSGrammaticalCase = 3
+	NSGrammaticalCaseGenitive      NSGrammaticalCase = 4
 	NSGrammaticalCasePrepositional NSGrammaticalCase = 5
-	NSGrammaticalCaseAblative NSGrammaticalCase = 6
-	NSGrammaticalCaseAdessive NSGrammaticalCase = 7
-	NSGrammaticalCaseAllative NSGrammaticalCase = 8
-	NSGrammaticalCaseElative NSGrammaticalCase = 9
-	NSGrammaticalCaseIllative NSGrammaticalCase = 10
-	NSGrammaticalCaseEssive NSGrammaticalCase = 11
-	NSGrammaticalCaseInessive NSGrammaticalCase = 12
-	NSGrammaticalCaseLocative NSGrammaticalCase = 13
-	NSGrammaticalCaseTranslative NSGrammaticalCase = 14
+	NSGrammaticalCaseAblative      NSGrammaticalCase = 6
+	NSGrammaticalCaseAdessive      NSGrammaticalCase = 7
+	NSGrammaticalCaseAllative      NSGrammaticalCase = 8
+	NSGrammaticalCaseElative       NSGrammaticalCase = 9
+	NSGrammaticalCaseIllative      NSGrammaticalCase = 10
+	NSGrammaticalCaseEssive        NSGrammaticalCase = 11
+	NSGrammaticalCaseInessive      NSGrammaticalCase = 12
+	NSGrammaticalCaseLocative      NSGrammaticalCase = 13
+	NSGrammaticalCaseTranslative   NSGrammaticalCase = 14
 )
 
 func (e NSGrammaticalCase) String() string {
@@ -1606,9 +1606,9 @@ func (e NSGrammaticalCase) String() string {
 type NSGrammaticalDefiniteness int64
 
 const (
-	NSGrammaticalDefinitenessNotSet NSGrammaticalDefiniteness = 0
+	NSGrammaticalDefinitenessNotSet     NSGrammaticalDefiniteness = 0
 	NSGrammaticalDefinitenessIndefinite NSGrammaticalDefiniteness = 1
-	NSGrammaticalDefinitenessDefinite NSGrammaticalDefiniteness = 2
+	NSGrammaticalDefinitenessDefinite   NSGrammaticalDefiniteness = 2
 )
 
 func (e NSGrammaticalDefiniteness) String() string {
@@ -1627,9 +1627,9 @@ func (e NSGrammaticalDefiniteness) String() string {
 type NSGrammaticalDetermination int64
 
 const (
-	NSGrammaticalDeterminationNotSet NSGrammaticalDetermination = 0
+	NSGrammaticalDeterminationNotSet      NSGrammaticalDetermination = 0
 	NSGrammaticalDeterminationIndependent NSGrammaticalDetermination = 1
-	NSGrammaticalDeterminationDependent NSGrammaticalDetermination = 2
+	NSGrammaticalDeterminationDependent   NSGrammaticalDetermination = 2
 )
 
 func (e NSGrammaticalDetermination) String() string {
@@ -1648,10 +1648,10 @@ func (e NSGrammaticalDetermination) String() string {
 type NSGrammaticalGender int64
 
 const (
-	NSGrammaticalGenderNotSet NSGrammaticalGender = 0
-	NSGrammaticalGenderFeminine NSGrammaticalGender = 1
+	NSGrammaticalGenderNotSet    NSGrammaticalGender = 0
+	NSGrammaticalGenderFeminine  NSGrammaticalGender = 1
 	NSGrammaticalGenderMasculine NSGrammaticalGender = 2
-	NSGrammaticalGenderNeuter NSGrammaticalGender = 3
+	NSGrammaticalGenderNeuter    NSGrammaticalGender = 3
 )
 
 func (e NSGrammaticalGender) String() string {
@@ -1672,12 +1672,12 @@ func (e NSGrammaticalGender) String() string {
 type NSGrammaticalNumber int64
 
 const (
-	NSGrammaticalNumberNotSet NSGrammaticalNumber = 0
-	NSGrammaticalNumberSingular NSGrammaticalNumber = 1
-	NSGrammaticalNumberZero NSGrammaticalNumber = 2
-	NSGrammaticalNumberPlural NSGrammaticalNumber = 3
-	NSGrammaticalNumberPluralTwo NSGrammaticalNumber = 4
-	NSGrammaticalNumberPluralFew NSGrammaticalNumber = 5
+	NSGrammaticalNumberNotSet     NSGrammaticalNumber = 0
+	NSGrammaticalNumberSingular   NSGrammaticalNumber = 1
+	NSGrammaticalNumberZero       NSGrammaticalNumber = 2
+	NSGrammaticalNumberPlural     NSGrammaticalNumber = 3
+	NSGrammaticalNumberPluralTwo  NSGrammaticalNumber = 4
+	NSGrammaticalNumberPluralFew  NSGrammaticalNumber = 5
 	NSGrammaticalNumberPluralMany NSGrammaticalNumber = 6
 )
 
@@ -1705,20 +1705,20 @@ func (e NSGrammaticalNumber) String() string {
 type NSGrammaticalPartOfSpeech int64
 
 const (
-	NSGrammaticalPartOfSpeechNotSet NSGrammaticalPartOfSpeech = 0
-	NSGrammaticalPartOfSpeechDeterminer NSGrammaticalPartOfSpeech = 1
-	NSGrammaticalPartOfSpeechPronoun NSGrammaticalPartOfSpeech = 2
-	NSGrammaticalPartOfSpeechLetter NSGrammaticalPartOfSpeech = 3
-	NSGrammaticalPartOfSpeechAdverb NSGrammaticalPartOfSpeech = 4
-	NSGrammaticalPartOfSpeechParticle NSGrammaticalPartOfSpeech = 5
-	NSGrammaticalPartOfSpeechAdjective NSGrammaticalPartOfSpeech = 6
-	NSGrammaticalPartOfSpeechAdposition NSGrammaticalPartOfSpeech = 7
-	NSGrammaticalPartOfSpeechVerb NSGrammaticalPartOfSpeech = 8
-	NSGrammaticalPartOfSpeechNoun NSGrammaticalPartOfSpeech = 9
-	NSGrammaticalPartOfSpeechConjunction NSGrammaticalPartOfSpeech = 10
-	NSGrammaticalPartOfSpeechNumeral NSGrammaticalPartOfSpeech = 11
+	NSGrammaticalPartOfSpeechNotSet       NSGrammaticalPartOfSpeech = 0
+	NSGrammaticalPartOfSpeechDeterminer   NSGrammaticalPartOfSpeech = 1
+	NSGrammaticalPartOfSpeechPronoun      NSGrammaticalPartOfSpeech = 2
+	NSGrammaticalPartOfSpeechLetter       NSGrammaticalPartOfSpeech = 3
+	NSGrammaticalPartOfSpeechAdverb       NSGrammaticalPartOfSpeech = 4
+	NSGrammaticalPartOfSpeechParticle     NSGrammaticalPartOfSpeech = 5
+	NSGrammaticalPartOfSpeechAdjective    NSGrammaticalPartOfSpeech = 6
+	NSGrammaticalPartOfSpeechAdposition   NSGrammaticalPartOfSpeech = 7
+	NSGrammaticalPartOfSpeechVerb         NSGrammaticalPartOfSpeech = 8
+	NSGrammaticalPartOfSpeechNoun         NSGrammaticalPartOfSpeech = 9
+	NSGrammaticalPartOfSpeechConjunction  NSGrammaticalPartOfSpeech = 10
+	NSGrammaticalPartOfSpeechNumeral      NSGrammaticalPartOfSpeech = 11
 	NSGrammaticalPartOfSpeechInterjection NSGrammaticalPartOfSpeech = 12
-	NSGrammaticalPartOfSpeechPreposition NSGrammaticalPartOfSpeech = 13
+	NSGrammaticalPartOfSpeechPreposition  NSGrammaticalPartOfSpeech = 13
 	NSGrammaticalPartOfSpeechAbbreviation NSGrammaticalPartOfSpeech = 14
 )
 
@@ -1763,9 +1763,9 @@ type NSGrammaticalPerson int64
 
 const (
 	NSGrammaticalPersonNotSet NSGrammaticalPerson = 0
-	NSGrammaticalPersonFirst NSGrammaticalPerson = 1
+	NSGrammaticalPersonFirst  NSGrammaticalPerson = 1
 	NSGrammaticalPersonSecond NSGrammaticalPerson = 2
-	NSGrammaticalPersonThird NSGrammaticalPerson = 3
+	NSGrammaticalPersonThird  NSGrammaticalPerson = 3
 )
 
 func (e NSGrammaticalPerson) String() string {
@@ -1786,9 +1786,9 @@ func (e NSGrammaticalPerson) String() string {
 type NSGrammaticalPronounType int64
 
 const (
-	NSGrammaticalPronounTypeNotSet NSGrammaticalPronounType = 0
-	NSGrammaticalPronounTypePersonal NSGrammaticalPronounType = 1
-	NSGrammaticalPronounTypeReflexive NSGrammaticalPronounType = 2
+	NSGrammaticalPronounTypeNotSet     NSGrammaticalPronounType = 0
+	NSGrammaticalPronounTypePersonal   NSGrammaticalPronounType = 1
+	NSGrammaticalPronounTypeReflexive  NSGrammaticalPronounType = 2
 	NSGrammaticalPronounTypePossessive NSGrammaticalPronounType = 3
 )
 
@@ -1810,8 +1810,8 @@ func (e NSGrammaticalPronounType) String() string {
 type NSHTTPCookieAcceptPolicy uint64
 
 const (
-	NSHTTPCookieAcceptPolicyAlways NSHTTPCookieAcceptPolicy = 0
-	NSHTTPCookieAcceptPolicyNever NSHTTPCookieAcceptPolicy = 1
+	NSHTTPCookieAcceptPolicyAlways                     NSHTTPCookieAcceptPolicy = 0
+	NSHTTPCookieAcceptPolicyNever                      NSHTTPCookieAcceptPolicy = 1
 	NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain NSHTTPCookieAcceptPolicy = 2
 )
 
@@ -1832,20 +1832,20 @@ func (e NSHTTPCookieAcceptPolicy) String() string {
 type NSISO8601DateFormatOptions uint64
 
 const (
-	NSISO8601DateFormatWithYear NSISO8601DateFormatOptions = 1
-	NSISO8601DateFormatWithMonth NSISO8601DateFormatOptions = 2
-	NSISO8601DateFormatWithWeekOfYear NSISO8601DateFormatOptions = 4
-	NSISO8601DateFormatWithDay NSISO8601DateFormatOptions = 16
-	NSISO8601DateFormatWithTime NSISO8601DateFormatOptions = 32
-	NSISO8601DateFormatWithTimeZone NSISO8601DateFormatOptions = 64
-	NSISO8601DateFormatWithSpaceBetweenDateAndTime NSISO8601DateFormatOptions = 128
-	NSISO8601DateFormatWithDashSeparatorInDate NSISO8601DateFormatOptions = 256
-	NSISO8601DateFormatWithColonSeparatorInTime NSISO8601DateFormatOptions = 512
+	NSISO8601DateFormatWithYear                     NSISO8601DateFormatOptions = 1
+	NSISO8601DateFormatWithMonth                    NSISO8601DateFormatOptions = 2
+	NSISO8601DateFormatWithWeekOfYear               NSISO8601DateFormatOptions = 4
+	NSISO8601DateFormatWithDay                      NSISO8601DateFormatOptions = 16
+	NSISO8601DateFormatWithTime                     NSISO8601DateFormatOptions = 32
+	NSISO8601DateFormatWithTimeZone                 NSISO8601DateFormatOptions = 64
+	NSISO8601DateFormatWithSpaceBetweenDateAndTime  NSISO8601DateFormatOptions = 128
+	NSISO8601DateFormatWithDashSeparatorInDate      NSISO8601DateFormatOptions = 256
+	NSISO8601DateFormatWithColonSeparatorInTime     NSISO8601DateFormatOptions = 512
 	NSISO8601DateFormatWithColonSeparatorInTimeZone NSISO8601DateFormatOptions = 1024
-	NSISO8601DateFormatWithFractionalSeconds NSISO8601DateFormatOptions = 2048
-	NSISO8601DateFormatWithFullDate NSISO8601DateFormatOptions = 275
-	NSISO8601DateFormatWithFullTime NSISO8601DateFormatOptions = 1632
-	NSISO8601DateFormatWithInternetDateTime NSISO8601DateFormatOptions = 1907
+	NSISO8601DateFormatWithFractionalSeconds        NSISO8601DateFormatOptions = 2048
+	NSISO8601DateFormatWithFullDate                 NSISO8601DateFormatOptions = 275
+	NSISO8601DateFormatWithFullTime                 NSISO8601DateFormatOptions = 1632
+	NSISO8601DateFormatWithInternetDateTime         NSISO8601DateFormatOptions = 1907
 )
 
 func (e NSISO8601DateFormatOptions) String() string {
@@ -1901,11 +1901,11 @@ func (e NSISO8601DateFormatOptions) String() string {
 type NSInsertionPosition uint64
 
 const (
-	NSPositionAfter NSInsertionPosition = 0
-	NSPositionBefore NSInsertionPosition = 1
+	NSPositionAfter     NSInsertionPosition = 0
+	NSPositionBefore    NSInsertionPosition = 1
 	NSPositionBeginning NSInsertionPosition = 2
-	NSPositionEnd NSInsertionPosition = 3
-	NSPositionReplace NSInsertionPosition = 4
+	NSPositionEnd       NSInsertionPosition = 3
+	NSPositionReplace   NSInsertionPosition = 4
 )
 
 func (e NSInsertionPosition) String() string {
@@ -1946,8 +1946,8 @@ func (e NSItemProviderFileOptions) String() string {
 type NSItemProviderRepresentationVisibility int64
 
 const (
-	NSItemProviderRepresentationVisibilityAll NSItemProviderRepresentationVisibility = 0
-	NSItemProviderRepresentationVisibilityGroup NSItemProviderRepresentationVisibility = 2
+	NSItemProviderRepresentationVisibilityAll        NSItemProviderRepresentationVisibility = 0
+	NSItemProviderRepresentationVisibilityGroup      NSItemProviderRepresentationVisibility = 2
 	NSItemProviderRepresentationVisibilityOwnProcess NSItemProviderRepresentationVisibility = 3
 )
 
@@ -1968,10 +1968,10 @@ func (e NSItemProviderRepresentationVisibility) String() string {
 type NSJSONReadingOptions uint64
 
 const (
-	NSJSONReadingMutableContainers NSJSONReadingOptions = 1
-	NSJSONReadingMutableLeaves NSJSONReadingOptions = 2
-	NSJSONReadingFragmentsAllowed NSJSONReadingOptions = 4
-	NSJSONReadingJSON5Allowed NSJSONReadingOptions = 8
+	NSJSONReadingMutableContainers         NSJSONReadingOptions = 1
+	NSJSONReadingMutableLeaves             NSJSONReadingOptions = 2
+	NSJSONReadingFragmentsAllowed          NSJSONReadingOptions = 4
+	NSJSONReadingJSON5Allowed              NSJSONReadingOptions = 8
 	NSJSONReadingTopLevelDictionaryAssumed NSJSONReadingOptions = 16
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
 	NSJSONReadingAllowFragments NSJSONReadingOptions = 4
@@ -2007,9 +2007,9 @@ func (e NSJSONReadingOptions) String() string {
 type NSJSONWritingOptions uint64
 
 const (
-	NSJSONWritingPrettyPrinted NSJSONWritingOptions = 1
-	NSJSONWritingSortedKeys NSJSONWritingOptions = 2
-	NSJSONWritingFragmentsAllowed NSJSONWritingOptions = 4
+	NSJSONWritingPrettyPrinted          NSJSONWritingOptions = 1
+	NSJSONWritingSortedKeys             NSJSONWritingOptions = 2
+	NSJSONWritingFragmentsAllowed       NSJSONWritingOptions = 4
 	NSJSONWritingWithoutEscapingSlashes NSJSONWritingOptions = 8
 )
 
@@ -2036,9 +2036,9 @@ func (e NSJSONWritingOptions) String() string {
 type NSKeyValueChange uint64
 
 const (
-	NSKeyValueChangeSetting NSKeyValueChange = 1
-	NSKeyValueChangeInsertion NSKeyValueChange = 2
-	NSKeyValueChangeRemoval NSKeyValueChange = 3
+	NSKeyValueChangeSetting     NSKeyValueChange = 1
+	NSKeyValueChangeInsertion   NSKeyValueChange = 2
+	NSKeyValueChangeRemoval     NSKeyValueChange = 3
 	NSKeyValueChangeReplacement NSKeyValueChange = 4
 )
 
@@ -2061,10 +2061,10 @@ func (e NSKeyValueChange) String() string {
 type NSKeyValueObservingOptions uint64
 
 const (
-	NSKeyValueObservingOptionNew NSKeyValueObservingOptions = 1
-	NSKeyValueObservingOptionOld NSKeyValueObservingOptions = 2
+	NSKeyValueObservingOptionNew     NSKeyValueObservingOptions = 1
+	NSKeyValueObservingOptionOld     NSKeyValueObservingOptions = 2
 	NSKeyValueObservingOptionInitial NSKeyValueObservingOptions = 4
-	NSKeyValueObservingOptionPrior NSKeyValueObservingOptions = 8
+	NSKeyValueObservingOptionPrior   NSKeyValueObservingOptions = 8
 )
 
 func (e NSKeyValueObservingOptions) String() string {
@@ -2090,10 +2090,10 @@ func (e NSKeyValueObservingOptions) String() string {
 type NSKeyValueSetMutationKind uint64
 
 const (
-	NSKeyValueUnionSetMutation NSKeyValueSetMutationKind = 1
-	NSKeyValueMinusSetMutation NSKeyValueSetMutationKind = 2
+	NSKeyValueUnionSetMutation     NSKeyValueSetMutationKind = 1
+	NSKeyValueMinusSetMutation     NSKeyValueSetMutationKind = 2
 	NSKeyValueIntersectSetMutation NSKeyValueSetMutationKind = 3
-	NSKeyValueSetSetMutation NSKeyValueSetMutationKind = 4
+	NSKeyValueSetSetMutation       NSKeyValueSetMutationKind = 4
 )
 
 func (e NSKeyValueSetMutationKind) String() string {
@@ -2116,12 +2116,12 @@ type NSLengthFormatterUnit int64
 const (
 	NSLengthFormatterUnitMillimeter NSLengthFormatterUnit = 8
 	NSLengthFormatterUnitCentimeter NSLengthFormatterUnit = 9
-	NSLengthFormatterUnitMeter NSLengthFormatterUnit = 11
-	NSLengthFormatterUnitKilometer NSLengthFormatterUnit = 14
-	NSLengthFormatterUnitInch NSLengthFormatterUnit = 1281
-	NSLengthFormatterUnitFoot NSLengthFormatterUnit = 1282
-	NSLengthFormatterUnitYard NSLengthFormatterUnit = 1283
-	NSLengthFormatterUnitMile NSLengthFormatterUnit = 1284
+	NSLengthFormatterUnitMeter      NSLengthFormatterUnit = 11
+	NSLengthFormatterUnitKilometer  NSLengthFormatterUnit = 14
+	NSLengthFormatterUnitInch       NSLengthFormatterUnit = 1281
+	NSLengthFormatterUnitFoot       NSLengthFormatterUnit = 1282
+	NSLengthFormatterUnitYard       NSLengthFormatterUnit = 1283
+	NSLengthFormatterUnitMile       NSLengthFormatterUnit = 1284
 )
 
 func (e NSLengthFormatterUnit) String() string {
@@ -2151,11 +2151,11 @@ func (e NSLengthFormatterUnit) String() string {
 type NSLinguisticTaggerOptions uint64
 
 const (
-	NSLinguisticTaggerOmitWords NSLinguisticTaggerOptions = 1
+	NSLinguisticTaggerOmitWords       NSLinguisticTaggerOptions = 1
 	NSLinguisticTaggerOmitPunctuation NSLinguisticTaggerOptions = 2
-	NSLinguisticTaggerOmitWhitespace NSLinguisticTaggerOptions = 4
-	NSLinguisticTaggerOmitOther NSLinguisticTaggerOptions = 8
-	NSLinguisticTaggerJoinNames NSLinguisticTaggerOptions = 16
+	NSLinguisticTaggerOmitWhitespace  NSLinguisticTaggerOptions = 4
+	NSLinguisticTaggerOmitOther       NSLinguisticTaggerOptions = 8
+	NSLinguisticTaggerJoinNames       NSLinguisticTaggerOptions = 16
 )
 
 func (e NSLinguisticTaggerOptions) String() string {
@@ -2184,10 +2184,10 @@ func (e NSLinguisticTaggerOptions) String() string {
 type NSLinguisticTaggerUnit int64
 
 const (
-	NSLinguisticTaggerUnitWord NSLinguisticTaggerUnit = 0
-	NSLinguisticTaggerUnitSentence NSLinguisticTaggerUnit = 1
+	NSLinguisticTaggerUnitWord      NSLinguisticTaggerUnit = 0
+	NSLinguisticTaggerUnitSentence  NSLinguisticTaggerUnit = 1
 	NSLinguisticTaggerUnitParagraph NSLinguisticTaggerUnit = 2
-	NSLinguisticTaggerUnitDocument NSLinguisticTaggerUnit = 3
+	NSLinguisticTaggerUnitDocument  NSLinguisticTaggerUnit = 3
 )
 
 func (e NSLinguisticTaggerUnit) String() string {
@@ -2208,7 +2208,7 @@ func (e NSLinguisticTaggerUnit) String() string {
 type NSLocaleLanguageDirection uint64
 
 const (
-	NSLocaleLanguageDirectionUnknown NSLocaleLanguageDirection = 0
+	NSLocaleLanguageDirectionUnknown     NSLocaleLanguageDirection = 0
 	NSLocaleLanguageDirectionLeftToRight NSLocaleLanguageDirection = 1
 	NSLocaleLanguageDirectionRightToLeft NSLocaleLanguageDirection = 2
 	NSLocaleLanguageDirectionTopToBottom NSLocaleLanguageDirection = 3
@@ -2236,8 +2236,8 @@ func (e NSLocaleLanguageDirection) String() string {
 type NSMachPortOptions uint64
 
 const (
-	NSMachPortDeallocateNone NSMachPortOptions = 0
-	NSMachPortDeallocateSendRight NSMachPortOptions = 1
+	NSMachPortDeallocateNone         NSMachPortOptions = 0
+	NSMachPortDeallocateSendRight    NSMachPortOptions = 1
 	NSMachPortDeallocateReceiveRight NSMachPortOptions = 2
 )
 
@@ -2258,11 +2258,11 @@ func (e NSMachPortOptions) String() string {
 type NSMassFormatterUnit int64
 
 const (
-	NSMassFormatterUnitGram NSMassFormatterUnit = 11
+	NSMassFormatterUnitGram     NSMassFormatterUnit = 11
 	NSMassFormatterUnitKilogram NSMassFormatterUnit = 14
-	NSMassFormatterUnitOunce NSMassFormatterUnit = 1537
-	NSMassFormatterUnitPound NSMassFormatterUnit = 1538
-	NSMassFormatterUnitStone NSMassFormatterUnit = 1539
+	NSMassFormatterUnitOunce    NSMassFormatterUnit = 1537
+	NSMassFormatterUnitPound    NSMassFormatterUnit = 1538
+	NSMassFormatterUnitStone    NSMassFormatterUnit = 1539
 )
 
 func (e NSMassFormatterUnit) String() string {
@@ -2286,10 +2286,10 @@ func (e NSMassFormatterUnit) String() string {
 type NSMatchingFlags uint64
 
 const (
-	NSMatchingProgress NSMatchingFlags = 1
-	NSMatchingCompleted NSMatchingFlags = 2
-	NSMatchingHitEnd NSMatchingFlags = 4
-	NSMatchingRequiredEnd NSMatchingFlags = 8
+	NSMatchingProgress      NSMatchingFlags = 1
+	NSMatchingCompleted     NSMatchingFlags = 2
+	NSMatchingHitEnd        NSMatchingFlags = 4
+	NSMatchingRequiredEnd   NSMatchingFlags = 8
 	NSMatchingInternalError NSMatchingFlags = 16
 )
 
@@ -2320,10 +2320,10 @@ func (e NSMatchingFlags) String() string {
 type NSMatchingOptions uint64
 
 const (
-	NSMatchingReportProgress NSMatchingOptions = 1
-	NSMatchingReportCompletion NSMatchingOptions = 2
-	NSMatchingAnchored NSMatchingOptions = 4
-	NSMatchingWithTransparentBounds NSMatchingOptions = 8
+	NSMatchingReportProgress         NSMatchingOptions = 1
+	NSMatchingReportCompletion       NSMatchingOptions = 2
+	NSMatchingAnchored               NSMatchingOptions = 4
+	NSMatchingWithTransparentBounds  NSMatchingOptions = 8
 	NSMatchingWithoutAnchoringBounds NSMatchingOptions = 16
 )
 
@@ -2354,8 +2354,8 @@ func (e NSMatchingOptions) String() string {
 type NSMeasurementFormatterUnitOptions uint64
 
 const (
-	NSMeasurementFormatterUnitOptionsProvidedUnit NSMeasurementFormatterUnitOptions = 1
-	NSMeasurementFormatterUnitOptionsNaturalScale NSMeasurementFormatterUnitOptions = 2
+	NSMeasurementFormatterUnitOptionsProvidedUnit           NSMeasurementFormatterUnitOptions = 1
+	NSMeasurementFormatterUnitOptionsNaturalScale           NSMeasurementFormatterUnitOptions = 2
 	NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit NSMeasurementFormatterUnitOptions = 4
 )
 
@@ -2380,7 +2380,7 @@ func (e NSMeasurementFormatterUnitOptions) String() string {
 type NSNetServiceOptions uint64
 
 const (
-	NSNetServiceNoAutoRename NSNetServiceOptions = 1
+	NSNetServiceNoAutoRename         NSNetServiceOptions = 1
 	NSNetServiceListenForConnections NSNetServiceOptions = 2
 )
 
@@ -2402,8 +2402,8 @@ func (e NSNetServiceOptions) String() string {
 type NSNotificationCoalescing uint64
 
 const (
-	NSNotificationNoCoalescing NSNotificationCoalescing = 0
-	NSNotificationCoalescingOnName NSNotificationCoalescing = 1
+	NSNotificationNoCoalescing       NSNotificationCoalescing = 0
+	NSNotificationCoalescingOnName   NSNotificationCoalescing = 1
 	NSNotificationCoalescingOnSender NSNotificationCoalescing = 2
 )
 
@@ -2424,9 +2424,9 @@ func (e NSNotificationCoalescing) String() string {
 type NSNotificationSuspensionBehavior uint64
 
 const (
-	NSNotificationSuspensionBehaviorDrop NSNotificationSuspensionBehavior = 1
-	NSNotificationSuspensionBehaviorCoalesce NSNotificationSuspensionBehavior = 2
-	NSNotificationSuspensionBehaviorHold NSNotificationSuspensionBehavior = 3
+	NSNotificationSuspensionBehaviorDrop               NSNotificationSuspensionBehavior = 1
+	NSNotificationSuspensionBehaviorCoalesce           NSNotificationSuspensionBehavior = 2
+	NSNotificationSuspensionBehaviorHold               NSNotificationSuspensionBehavior = 3
 	NSNotificationSuspensionBehaviorDeliverImmediately NSNotificationSuspensionBehavior = 4
 )
 
@@ -2449,8 +2449,8 @@ type NSNumberFormatterBehavior uint64
 
 const (
 	NSNumberFormatterBehaviorDefault NSNumberFormatterBehavior = 0
-	NSNumberFormatterBehavior10_0 NSNumberFormatterBehavior = 1000
-	NSNumberFormatterBehavior10_4 NSNumberFormatterBehavior = 1040
+	NSNumberFormatterBehavior10_0    NSNumberFormatterBehavior = 1000
+	NSNumberFormatterBehavior10_4    NSNumberFormatterBehavior = 1040
 )
 
 func (e NSNumberFormatterBehavior) String() string {
@@ -2470,9 +2470,9 @@ type NSNumberFormatterPadPosition uint64
 
 const (
 	NSNumberFormatterPadBeforePrefix NSNumberFormatterPadPosition = 0
-	NSNumberFormatterPadAfterPrefix NSNumberFormatterPadPosition = 1
+	NSNumberFormatterPadAfterPrefix  NSNumberFormatterPadPosition = 1
 	NSNumberFormatterPadBeforeSuffix NSNumberFormatterPadPosition = 2
-	NSNumberFormatterPadAfterSuffix NSNumberFormatterPadPosition = 3
+	NSNumberFormatterPadAfterSuffix  NSNumberFormatterPadPosition = 3
 )
 
 func (e NSNumberFormatterPadPosition) String() string {
@@ -2493,13 +2493,13 @@ func (e NSNumberFormatterPadPosition) String() string {
 type NSNumberFormatterRoundingMode uint64
 
 const (
-	NSNumberFormatterRoundCeiling NSNumberFormatterRoundingMode = 0
-	NSNumberFormatterRoundFloor NSNumberFormatterRoundingMode = 1
-	NSNumberFormatterRoundDown NSNumberFormatterRoundingMode = 2
-	NSNumberFormatterRoundUp NSNumberFormatterRoundingMode = 3
+	NSNumberFormatterRoundCeiling  NSNumberFormatterRoundingMode = 0
+	NSNumberFormatterRoundFloor    NSNumberFormatterRoundingMode = 1
+	NSNumberFormatterRoundDown     NSNumberFormatterRoundingMode = 2
+	NSNumberFormatterRoundUp       NSNumberFormatterRoundingMode = 3
 	NSNumberFormatterRoundHalfEven NSNumberFormatterRoundingMode = 4
 	NSNumberFormatterRoundHalfDown NSNumberFormatterRoundingMode = 5
-	NSNumberFormatterRoundHalfUp NSNumberFormatterRoundingMode = 6
+	NSNumberFormatterRoundHalfUp   NSNumberFormatterRoundingMode = 6
 )
 
 func (e NSNumberFormatterRoundingMode) String() string {
@@ -2526,15 +2526,15 @@ func (e NSNumberFormatterRoundingMode) String() string {
 type NSNumberFormatterStyle uint64
 
 const (
-	NSNumberFormatterNoStyle NSNumberFormatterStyle = 0
-	NSNumberFormatterDecimalStyle NSNumberFormatterStyle = 1
-	NSNumberFormatterCurrencyStyle NSNumberFormatterStyle = 2
-	NSNumberFormatterPercentStyle NSNumberFormatterStyle = 3
-	NSNumberFormatterScientificStyle NSNumberFormatterStyle = 4
-	NSNumberFormatterSpellOutStyle NSNumberFormatterStyle = 5
-	NSNumberFormatterOrdinalStyle NSNumberFormatterStyle = 6
-	NSNumberFormatterCurrencyISOCodeStyle NSNumberFormatterStyle = 8
-	NSNumberFormatterCurrencyPluralStyle NSNumberFormatterStyle = 9
+	NSNumberFormatterNoStyle                 NSNumberFormatterStyle = 0
+	NSNumberFormatterDecimalStyle            NSNumberFormatterStyle = 1
+	NSNumberFormatterCurrencyStyle           NSNumberFormatterStyle = 2
+	NSNumberFormatterPercentStyle            NSNumberFormatterStyle = 3
+	NSNumberFormatterScientificStyle         NSNumberFormatterStyle = 4
+	NSNumberFormatterSpellOutStyle           NSNumberFormatterStyle = 5
+	NSNumberFormatterOrdinalStyle            NSNumberFormatterStyle = 6
+	NSNumberFormatterCurrencyISOCodeStyle    NSNumberFormatterStyle = 8
+	NSNumberFormatterCurrencyPluralStyle     NSNumberFormatterStyle = 9
 	NSNumberFormatterCurrencyAccountingStyle NSNumberFormatterStyle = 10
 )
 
@@ -2568,10 +2568,10 @@ func (e NSNumberFormatterStyle) String() string {
 type NSOperationQueuePriority int64
 
 const (
-	NSOperationQueuePriorityVeryLow NSOperationQueuePriority = -8
-	NSOperationQueuePriorityLow NSOperationQueuePriority = -4
-	NSOperationQueuePriorityNormal NSOperationQueuePriority = 0
-	NSOperationQueuePriorityHigh NSOperationQueuePriority = 4
+	NSOperationQueuePriorityVeryLow  NSOperationQueuePriority = -8
+	NSOperationQueuePriorityLow      NSOperationQueuePriority = -4
+	NSOperationQueuePriorityNormal   NSOperationQueuePriority = 0
+	NSOperationQueuePriorityHigh     NSOperationQueuePriority = 4
 	NSOperationQueuePriorityVeryHigh NSOperationQueuePriority = 8
 )
 
@@ -2642,10 +2642,10 @@ func (e NSPersonNameComponentsFormatterOptions) String() string {
 type NSPersonNameComponentsFormatterStyle int64
 
 const (
-	NSPersonNameComponentsFormatterStyleDefault NSPersonNameComponentsFormatterStyle = 0
-	NSPersonNameComponentsFormatterStyleShort NSPersonNameComponentsFormatterStyle = 1
-	NSPersonNameComponentsFormatterStyleMedium NSPersonNameComponentsFormatterStyle = 2
-	NSPersonNameComponentsFormatterStyleLong NSPersonNameComponentsFormatterStyle = 3
+	NSPersonNameComponentsFormatterStyleDefault     NSPersonNameComponentsFormatterStyle = 0
+	NSPersonNameComponentsFormatterStyleShort       NSPersonNameComponentsFormatterStyle = 1
+	NSPersonNameComponentsFormatterStyleMedium      NSPersonNameComponentsFormatterStyle = 2
+	NSPersonNameComponentsFormatterStyleLong        NSPersonNameComponentsFormatterStyle = 3
 	NSPersonNameComponentsFormatterStyleAbbreviated NSPersonNameComponentsFormatterStyle = 4
 )
 
@@ -2672,18 +2672,18 @@ type NSPointerFunctionsOptions uint64
 const (
 	NSPointerFunctionsStrongMemory NSPointerFunctionsOptions = 0
 	// Deprecated: GC no longer supported
-	NSPointerFunctionsZeroingWeakMemory NSPointerFunctionsOptions = 1
-	NSPointerFunctionsOpaqueMemory NSPointerFunctionsOptions = 2
-	NSPointerFunctionsMallocMemory NSPointerFunctionsOptions = 3
-	NSPointerFunctionsMachVirtualMemory NSPointerFunctionsOptions = 4
-	NSPointerFunctionsWeakMemory NSPointerFunctionsOptions = 5
-	NSPointerFunctionsObjectPersonality NSPointerFunctionsOptions = 0
-	NSPointerFunctionsOpaquePersonality NSPointerFunctionsOptions = 256
+	NSPointerFunctionsZeroingWeakMemory        NSPointerFunctionsOptions = 1
+	NSPointerFunctionsOpaqueMemory             NSPointerFunctionsOptions = 2
+	NSPointerFunctionsMallocMemory             NSPointerFunctionsOptions = 3
+	NSPointerFunctionsMachVirtualMemory        NSPointerFunctionsOptions = 4
+	NSPointerFunctionsWeakMemory               NSPointerFunctionsOptions = 5
+	NSPointerFunctionsObjectPersonality        NSPointerFunctionsOptions = 0
+	NSPointerFunctionsOpaquePersonality        NSPointerFunctionsOptions = 256
 	NSPointerFunctionsObjectPointerPersonality NSPointerFunctionsOptions = 512
-	NSPointerFunctionsCStringPersonality NSPointerFunctionsOptions = 768
-	NSPointerFunctionsStructPersonality NSPointerFunctionsOptions = 1024
-	NSPointerFunctionsIntegerPersonality NSPointerFunctionsOptions = 1280
-	NSPointerFunctionsCopyIn NSPointerFunctionsOptions = 65536
+	NSPointerFunctionsCStringPersonality       NSPointerFunctionsOptions = 768
+	NSPointerFunctionsStructPersonality        NSPointerFunctionsOptions = 1024
+	NSPointerFunctionsIntegerPersonality       NSPointerFunctionsOptions = 1280
+	NSPointerFunctionsCopyIn                   NSPointerFunctionsOptions = 65536
 )
 
 func (e NSPointerFunctionsOptions) String() string {
@@ -2731,8 +2731,8 @@ type NSPostingStyle uint64
 
 const (
 	NSPostWhenIdle NSPostingStyle = 1
-	NSPostASAP NSPostingStyle = 2
-	NSPostNow NSPostingStyle = 3
+	NSPostASAP     NSPostingStyle = 2
+	NSPostNow      NSPostingStyle = 3
 )
 
 func (e NSPostingStyle) String() string {
@@ -2751,20 +2751,20 @@ func (e NSPostingStyle) String() string {
 type NSPredicateOperatorType uint64
 
 const (
-	NSLessThanPredicateOperatorType NSPredicateOperatorType = 0
-	NSLessThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 1
-	NSGreaterThanPredicateOperatorType NSPredicateOperatorType = 2
+	NSLessThanPredicateOperatorType             NSPredicateOperatorType = 0
+	NSLessThanOrEqualToPredicateOperatorType    NSPredicateOperatorType = 1
+	NSGreaterThanPredicateOperatorType          NSPredicateOperatorType = 2
 	NSGreaterThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 3
-	NSEqualToPredicateOperatorType NSPredicateOperatorType = 4
-	NSNotEqualToPredicateOperatorType NSPredicateOperatorType = 5
-	NSMatchesPredicateOperatorType NSPredicateOperatorType = 6
-	NSLikePredicateOperatorType NSPredicateOperatorType = 7
-	NSBeginsWithPredicateOperatorType NSPredicateOperatorType = 8
-	NSEndsWithPredicateOperatorType NSPredicateOperatorType = 9
-	NSInPredicateOperatorType NSPredicateOperatorType = 10
-	NSCustomSelectorPredicateOperatorType NSPredicateOperatorType = 11
-	NSContainsPredicateOperatorType NSPredicateOperatorType = 99
-	NSBetweenPredicateOperatorType NSPredicateOperatorType = 100
+	NSEqualToPredicateOperatorType              NSPredicateOperatorType = 4
+	NSNotEqualToPredicateOperatorType           NSPredicateOperatorType = 5
+	NSMatchesPredicateOperatorType              NSPredicateOperatorType = 6
+	NSLikePredicateOperatorType                 NSPredicateOperatorType = 7
+	NSBeginsWithPredicateOperatorType           NSPredicateOperatorType = 8
+	NSEndsWithPredicateOperatorType             NSPredicateOperatorType = 9
+	NSInPredicateOperatorType                   NSPredicateOperatorType = 10
+	NSCustomSelectorPredicateOperatorType       NSPredicateOperatorType = 11
+	NSContainsPredicateOperatorType             NSPredicateOperatorType = 99
+	NSBetweenPredicateOperatorType              NSPredicateOperatorType = 100
 )
 
 func (e NSPredicateOperatorType) String() string {
@@ -2805,18 +2805,18 @@ func (e NSPredicateOperatorType) String() string {
 type NSPresentationIntentKind int64
 
 const (
-	NSPresentationIntentKindParagraph NSPresentationIntentKind = 0
-	NSPresentationIntentKindHeader NSPresentationIntentKind = 1
-	NSPresentationIntentKindOrderedList NSPresentationIntentKind = 2
-	NSPresentationIntentKindUnorderedList NSPresentationIntentKind = 3
-	NSPresentationIntentKindListItem NSPresentationIntentKind = 4
-	NSPresentationIntentKindCodeBlock NSPresentationIntentKind = 5
-	NSPresentationIntentKindBlockQuote NSPresentationIntentKind = 6
-	NSPresentationIntentKindThematicBreak NSPresentationIntentKind = 7
-	NSPresentationIntentKindTable NSPresentationIntentKind = 8
+	NSPresentationIntentKindParagraph      NSPresentationIntentKind = 0
+	NSPresentationIntentKindHeader         NSPresentationIntentKind = 1
+	NSPresentationIntentKindOrderedList    NSPresentationIntentKind = 2
+	NSPresentationIntentKindUnorderedList  NSPresentationIntentKind = 3
+	NSPresentationIntentKindListItem       NSPresentationIntentKind = 4
+	NSPresentationIntentKindCodeBlock      NSPresentationIntentKind = 5
+	NSPresentationIntentKindBlockQuote     NSPresentationIntentKind = 6
+	NSPresentationIntentKindThematicBreak  NSPresentationIntentKind = 7
+	NSPresentationIntentKindTable          NSPresentationIntentKind = 8
 	NSPresentationIntentKindTableHeaderRow NSPresentationIntentKind = 9
-	NSPresentationIntentKindTableRow NSPresentationIntentKind = 10
-	NSPresentationIntentKindTableCell NSPresentationIntentKind = 11
+	NSPresentationIntentKindTableRow       NSPresentationIntentKind = 10
+	NSPresentationIntentKindTableCell      NSPresentationIntentKind = 11
 )
 
 func (e NSPresentationIntentKind) String() string {
@@ -2853,9 +2853,9 @@ func (e NSPresentationIntentKind) String() string {
 type NSProcessInfoThermalState int64
 
 const (
-	NSProcessInfoThermalStateNominal NSProcessInfoThermalState = 0
-	NSProcessInfoThermalStateFair NSProcessInfoThermalState = 1
-	NSProcessInfoThermalStateSerious NSProcessInfoThermalState = 2
+	NSProcessInfoThermalStateNominal  NSProcessInfoThermalState = 0
+	NSProcessInfoThermalStateFair     NSProcessInfoThermalState = 1
+	NSProcessInfoThermalStateSerious  NSProcessInfoThermalState = 2
 	NSProcessInfoThermalStateCritical NSProcessInfoThermalState = 3
 )
 
@@ -2877,8 +2877,8 @@ func (e NSProcessInfoThermalState) String() string {
 type NSPropertyListFormat uint64
 
 const (
-	NSPropertyListOpenStepFormat NSPropertyListFormat = 1
-	NSPropertyListXMLFormat_v1_0 NSPropertyListFormat = 100
+	NSPropertyListOpenStepFormat    NSPropertyListFormat = 1
+	NSPropertyListXMLFormat_v1_0    NSPropertyListFormat = 100
 	NSPropertyListBinaryFormat_v1_0 NSPropertyListFormat = 200
 )
 
@@ -2899,8 +2899,8 @@ func (e NSPropertyListFormat) String() string {
 type NSPropertyListMutabilityOptions uint64
 
 const (
-	NSPropertyListImmutable NSPropertyListMutabilityOptions = 0
-	NSPropertyListMutableContainers NSPropertyListMutabilityOptions = 1
+	NSPropertyListImmutable                  NSPropertyListMutabilityOptions = 0
+	NSPropertyListMutableContainers          NSPropertyListMutabilityOptions = 1
 	NSPropertyListMutableContainersAndLeaves NSPropertyListMutabilityOptions = 2
 )
 
@@ -2922,10 +2922,10 @@ type NSQualityOfService int64
 
 const (
 	NSQualityOfServiceUserInteractive NSQualityOfService = 33
-	NSQualityOfServiceUserInitiated NSQualityOfService = 25
-	NSQualityOfServiceUtility NSQualityOfService = 17
-	NSQualityOfServiceBackground NSQualityOfService = 9
-	NSQualityOfServiceDefault NSQualityOfService = -1
+	NSQualityOfServiceUserInitiated   NSQualityOfService = 25
+	NSQualityOfServiceUtility         NSQualityOfService = 17
+	NSQualityOfServiceBackground      NSQualityOfService = 9
+	NSQualityOfServiceDefault         NSQualityOfService = -1
 )
 
 func (e NSQualityOfService) String() string {
@@ -2952,10 +2952,10 @@ const (
 	NSRectEdgeMinY NSRectEdge = 1
 	NSRectEdgeMaxX NSRectEdge = 2
 	NSRectEdgeMaxY NSRectEdge = 3
-	NSMinXEdge NSRectEdge = 0
-	NSMinYEdge NSRectEdge = 1
-	NSMaxXEdge NSRectEdge = 2
-	NSMaxYEdge NSRectEdge = 3
+	NSMinXEdge     NSRectEdge = 0
+	NSMinYEdge     NSRectEdge = 1
+	NSMaxXEdge     NSRectEdge = 2
+	NSMaxYEdge     NSRectEdge = 3
 )
 
 func (e NSRectEdge) String() string {
@@ -2977,13 +2977,13 @@ func (e NSRectEdge) String() string {
 type NSRegularExpressionOptions uint64
 
 const (
-	NSRegularExpressionCaseInsensitive NSRegularExpressionOptions = 1
+	NSRegularExpressionCaseInsensitive            NSRegularExpressionOptions = 1
 	NSRegularExpressionAllowCommentsAndWhitespace NSRegularExpressionOptions = 2
-	NSRegularExpressionIgnoreMetacharacters NSRegularExpressionOptions = 4
-	NSRegularExpressionDotMatchesLineSeparators NSRegularExpressionOptions = 8
-	NSRegularExpressionAnchorsMatchLines NSRegularExpressionOptions = 16
-	NSRegularExpressionUseUnixLineSeparators NSRegularExpressionOptions = 32
-	NSRegularExpressionUseUnicodeWordBoundaries NSRegularExpressionOptions = 64
+	NSRegularExpressionIgnoreMetacharacters       NSRegularExpressionOptions = 4
+	NSRegularExpressionDotMatchesLineSeparators   NSRegularExpressionOptions = 8
+	NSRegularExpressionAnchorsMatchLines          NSRegularExpressionOptions = 16
+	NSRegularExpressionUseUnixLineSeparators      NSRegularExpressionOptions = 32
+	NSRegularExpressionUseUnicodeWordBoundaries   NSRegularExpressionOptions = 64
 )
 
 func (e NSRegularExpressionOptions) String() string {
@@ -3019,7 +3019,7 @@ type NSRelativeDateTimeFormatterStyle int64
 
 const (
 	NSRelativeDateTimeFormatterStyleNumeric NSRelativeDateTimeFormatterStyle = 0
-	NSRelativeDateTimeFormatterStyleNamed NSRelativeDateTimeFormatterStyle = 1
+	NSRelativeDateTimeFormatterStyleNamed   NSRelativeDateTimeFormatterStyle = 1
 )
 
 func (e NSRelativeDateTimeFormatterStyle) String() string {
@@ -3036,9 +3036,9 @@ func (e NSRelativeDateTimeFormatterStyle) String() string {
 type NSRelativeDateTimeFormatterUnitsStyle int64
 
 const (
-	NSRelativeDateTimeFormatterUnitsStyleFull NSRelativeDateTimeFormatterUnitsStyle = 0
-	NSRelativeDateTimeFormatterUnitsStyleSpellOut NSRelativeDateTimeFormatterUnitsStyle = 1
-	NSRelativeDateTimeFormatterUnitsStyleShort NSRelativeDateTimeFormatterUnitsStyle = 2
+	NSRelativeDateTimeFormatterUnitsStyleFull        NSRelativeDateTimeFormatterUnitsStyle = 0
+	NSRelativeDateTimeFormatterUnitsStyleSpellOut    NSRelativeDateTimeFormatterUnitsStyle = 1
+	NSRelativeDateTimeFormatterUnitsStyleShort       NSRelativeDateTimeFormatterUnitsStyle = 2
 	NSRelativeDateTimeFormatterUnitsStyleAbbreviated NSRelativeDateTimeFormatterUnitsStyle = 3
 )
 
@@ -3060,7 +3060,7 @@ func (e NSRelativeDateTimeFormatterUnitsStyle) String() string {
 type NSRelativePosition uint64
 
 const (
-	NSRelativeAfter NSRelativePosition = 0
+	NSRelativeAfter  NSRelativePosition = 0
 	NSRelativeBefore NSRelativePosition = 1
 )
 
@@ -3078,9 +3078,9 @@ func (e NSRelativePosition) String() string {
 type NSRoundingMode uint64
 
 const (
-	NSRoundPlain NSRoundingMode = 0
-	NSRoundDown NSRoundingMode = 1
-	NSRoundUp NSRoundingMode = 2
+	NSRoundPlain   NSRoundingMode = 0
+	NSRoundDown    NSRoundingMode = 1
+	NSRoundUp      NSRoundingMode = 2
 	NSRoundBankers NSRoundingMode = 3
 )
 
@@ -3103,7 +3103,7 @@ type NSSaveOptions uint64
 
 const (
 	NSSaveOptionsYes NSSaveOptions = 0
-	NSSaveOptionsNo NSSaveOptions = 1
+	NSSaveOptionsNo  NSSaveOptions = 1
 	NSSaveOptionsAsk NSSaveOptions = 2
 )
 
@@ -3123,33 +3123,33 @@ func (e NSSaveOptions) String() string {
 type NSSearchPathDirectory uint64
 
 const (
-	NSApplicationDirectory NSSearchPathDirectory = 1
-	NSDemoApplicationDirectory NSSearchPathDirectory = 2
+	NSApplicationDirectory          NSSearchPathDirectory = 1
+	NSDemoApplicationDirectory      NSSearchPathDirectory = 2
 	NSDeveloperApplicationDirectory NSSearchPathDirectory = 3
-	NSAdminApplicationDirectory NSSearchPathDirectory = 4
-	NSLibraryDirectory NSSearchPathDirectory = 5
-	NSDeveloperDirectory NSSearchPathDirectory = 6
-	NSUserDirectory NSSearchPathDirectory = 7
-	NSDocumentationDirectory NSSearchPathDirectory = 8
-	NSDocumentDirectory NSSearchPathDirectory = 9
-	NSCoreServiceDirectory NSSearchPathDirectory = 10
+	NSAdminApplicationDirectory     NSSearchPathDirectory = 4
+	NSLibraryDirectory              NSSearchPathDirectory = 5
+	NSDeveloperDirectory            NSSearchPathDirectory = 6
+	NSUserDirectory                 NSSearchPathDirectory = 7
+	NSDocumentationDirectory        NSSearchPathDirectory = 8
+	NSDocumentDirectory             NSSearchPathDirectory = 9
+	NSCoreServiceDirectory          NSSearchPathDirectory = 10
 	NSAutosavedInformationDirectory NSSearchPathDirectory = 11
-	NSDesktopDirectory NSSearchPathDirectory = 12
-	NSCachesDirectory NSSearchPathDirectory = 13
-	NSApplicationSupportDirectory NSSearchPathDirectory = 14
-	NSDownloadsDirectory NSSearchPathDirectory = 15
-	NSInputMethodsDirectory NSSearchPathDirectory = 16
-	NSMoviesDirectory NSSearchPathDirectory = 17
-	NSMusicDirectory NSSearchPathDirectory = 18
-	NSPicturesDirectory NSSearchPathDirectory = 19
-	NSPrinterDescriptionDirectory NSSearchPathDirectory = 20
-	NSSharedPublicDirectory NSSearchPathDirectory = 21
-	NSPreferencePanesDirectory NSSearchPathDirectory = 22
-	NSApplicationScriptsDirectory NSSearchPathDirectory = 23
-	NSItemReplacementDirectory NSSearchPathDirectory = 99
-	NSAllApplicationsDirectory NSSearchPathDirectory = 100
-	NSAllLibrariesDirectory NSSearchPathDirectory = 101
-	NSTrashDirectory NSSearchPathDirectory = 102
+	NSDesktopDirectory              NSSearchPathDirectory = 12
+	NSCachesDirectory               NSSearchPathDirectory = 13
+	NSApplicationSupportDirectory   NSSearchPathDirectory = 14
+	NSDownloadsDirectory            NSSearchPathDirectory = 15
+	NSInputMethodsDirectory         NSSearchPathDirectory = 16
+	NSMoviesDirectory               NSSearchPathDirectory = 17
+	NSMusicDirectory                NSSearchPathDirectory = 18
+	NSPicturesDirectory             NSSearchPathDirectory = 19
+	NSPrinterDescriptionDirectory   NSSearchPathDirectory = 20
+	NSSharedPublicDirectory         NSSearchPathDirectory = 21
+	NSPreferencePanesDirectory      NSSearchPathDirectory = 22
+	NSApplicationScriptsDirectory   NSSearchPathDirectory = 23
+	NSItemReplacementDirectory      NSSearchPathDirectory = 99
+	NSAllApplicationsDirectory      NSSearchPathDirectory = 100
+	NSAllLibrariesDirectory         NSSearchPathDirectory = 101
+	NSTrashDirectory                NSSearchPathDirectory = 102
 )
 
 func (e NSSearchPathDirectory) String() string {
@@ -3217,11 +3217,11 @@ func (e NSSearchPathDirectory) String() string {
 type NSSearchPathDomainMask uint64
 
 const (
-	NSUserDomainMask NSSearchPathDomainMask = 1
-	NSLocalDomainMask NSSearchPathDomainMask = 2
+	NSUserDomainMask    NSSearchPathDomainMask = 1
+	NSLocalDomainMask   NSSearchPathDomainMask = 2
 	NSNetworkDomainMask NSSearchPathDomainMask = 4
-	NSSystemDomainMask NSSearchPathDomainMask = 8
-	NSAllDomainsMask NSSearchPathDomainMask = 65535
+	NSSystemDomainMask  NSSearchPathDomainMask = 8
+	NSAllDomainsMask    NSSearchPathDomainMask = 65535
 )
 
 func (e NSSearchPathDomainMask) String() string {
@@ -3252,7 +3252,7 @@ type NSSortOptions uint64
 
 const (
 	NSSortConcurrent NSSortOptions = 1
-	NSSortStable NSSortOptions = 16
+	NSSortStable     NSSortOptions = 16
 )
 
 func (e NSSortOptions) String() string {
@@ -3274,12 +3274,12 @@ type NSStreamStatus uint64
 const (
 	NSStreamStatusNotOpen NSStreamStatus = 0
 	NSStreamStatusOpening NSStreamStatus = 1
-	NSStreamStatusOpen NSStreamStatus = 2
+	NSStreamStatusOpen    NSStreamStatus = 2
 	NSStreamStatusReading NSStreamStatus = 3
 	NSStreamStatusWriting NSStreamStatus = 4
-	NSStreamStatusAtEnd NSStreamStatus = 5
-	NSStreamStatusClosed NSStreamStatus = 6
-	NSStreamStatusError NSStreamStatus = 7
+	NSStreamStatusAtEnd   NSStreamStatus = 5
+	NSStreamStatusClosed  NSStreamStatus = 6
+	NSStreamStatusError   NSStreamStatus = 7
 )
 
 func (e NSStreamStatus) String() string {
@@ -3309,15 +3309,15 @@ func (e NSStreamStatus) String() string {
 type NSStringCompareOptions uint64
 
 const (
-	NSCaseInsensitiveSearch NSStringCompareOptions = 1
-	NSLiteralSearch NSStringCompareOptions = 2
-	NSBackwardsSearch NSStringCompareOptions = 4
-	NSAnchoredSearch NSStringCompareOptions = 8
-	NSNumericSearch NSStringCompareOptions = 64
+	NSCaseInsensitiveSearch      NSStringCompareOptions = 1
+	NSLiteralSearch              NSStringCompareOptions = 2
+	NSBackwardsSearch            NSStringCompareOptions = 4
+	NSAnchoredSearch             NSStringCompareOptions = 8
+	NSNumericSearch              NSStringCompareOptions = 64
 	NSDiacriticInsensitiveSearch NSStringCompareOptions = 128
-	NSWidthInsensitiveSearch NSStringCompareOptions = 256
-	NSForcedOrderingSearch NSStringCompareOptions = 512
-	NSRegularExpressionSearch NSStringCompareOptions = 1024
+	NSWidthInsensitiveSearch     NSStringCompareOptions = 256
+	NSForcedOrderingSearch       NSStringCompareOptions = 512
+	NSRegularExpressionSearch    NSStringCompareOptions = 1024
 )
 
 func (e NSStringCompareOptions) String() string {
@@ -3359,7 +3359,7 @@ func (e NSStringCompareOptions) String() string {
 type NSStringEncodingConversionOptions uint64
 
 const (
-	NSStringEncodingConversionAllowLossy NSStringEncodingConversionOptions = 1
+	NSStringEncodingConversionAllowLossy             NSStringEncodingConversionOptions = 1
 	NSStringEncodingConversionExternalRepresentation NSStringEncodingConversionOptions = 2
 )
 
@@ -3381,16 +3381,16 @@ func (e NSStringEncodingConversionOptions) String() string {
 type NSStringEnumerationOptions uint64
 
 const (
-	NSStringEnumerationByLines NSStringEnumerationOptions = 0
-	NSStringEnumerationByParagraphs NSStringEnumerationOptions = 1
+	NSStringEnumerationByLines                      NSStringEnumerationOptions = 0
+	NSStringEnumerationByParagraphs                 NSStringEnumerationOptions = 1
 	NSStringEnumerationByComposedCharacterSequences NSStringEnumerationOptions = 2
-	NSStringEnumerationByWords NSStringEnumerationOptions = 3
-	NSStringEnumerationBySentences NSStringEnumerationOptions = 4
-	NSStringEnumerationByCaretPositions NSStringEnumerationOptions = 5
-	NSStringEnumerationByDeletionClusters NSStringEnumerationOptions = 6
-	NSStringEnumerationReverse NSStringEnumerationOptions = 256
-	NSStringEnumerationSubstringNotRequired NSStringEnumerationOptions = 512
-	NSStringEnumerationLocalized NSStringEnumerationOptions = 1024
+	NSStringEnumerationByWords                      NSStringEnumerationOptions = 3
+	NSStringEnumerationBySentences                  NSStringEnumerationOptions = 4
+	NSStringEnumerationByCaretPositions             NSStringEnumerationOptions = 5
+	NSStringEnumerationByDeletionClusters           NSStringEnumerationOptions = 6
+	NSStringEnumerationReverse                      NSStringEnumerationOptions = 256
+	NSStringEnumerationSubstringNotRequired         NSStringEnumerationOptions = 512
+	NSStringEnumerationLocalized                    NSStringEnumerationOptions = 1024
 )
 
 func (e NSStringEnumerationOptions) String() string {
@@ -3431,7 +3431,7 @@ func (e NSStringEnumerationOptions) String() string {
 type NSTaskTerminationReason int64
 
 const (
-	NSTaskTerminationReasonExit NSTaskTerminationReason = 1
+	NSTaskTerminationReasonExit           NSTaskTerminationReason = 1
 	NSTaskTerminationReasonUncaughtSignal NSTaskTerminationReason = 2
 )
 
@@ -3449,14 +3449,14 @@ func (e NSTaskTerminationReason) String() string {
 type NSTestComparisonOperation uint64
 
 const (
-	NSEqualToComparison NSTestComparisonOperation = 0
-	NSLessThanOrEqualToComparison NSTestComparisonOperation = 1
-	NSLessThanComparison NSTestComparisonOperation = 2
+	NSEqualToComparison              NSTestComparisonOperation = 0
+	NSLessThanOrEqualToComparison    NSTestComparisonOperation = 1
+	NSLessThanComparison             NSTestComparisonOperation = 2
 	NSGreaterThanOrEqualToComparison NSTestComparisonOperation = 3
-	NSGreaterThanComparison NSTestComparisonOperation = 4
-	NSBeginsWithComparison NSTestComparisonOperation = 5
-	NSEndsWithComparison NSTestComparisonOperation = 6
-	NSContainsComparison NSTestComparisonOperation = 7
+	NSGreaterThanComparison          NSTestComparisonOperation = 4
+	NSBeginsWithComparison           NSTestComparisonOperation = 5
+	NSEndsWithComparison             NSTestComparisonOperation = 6
+	NSContainsComparison             NSTestComparisonOperation = 7
 )
 
 func (e NSTestComparisonOperation) String() string {
@@ -3486,18 +3486,18 @@ func (e NSTestComparisonOperation) String() string {
 type NSTextCheckingType int64
 
 const (
-	NSTextCheckingTypeOrthography NSTextCheckingType = 1
-	NSTextCheckingTypeSpelling NSTextCheckingType = 2
-	NSTextCheckingTypeGrammar NSTextCheckingType = 4
-	NSTextCheckingTypeDate NSTextCheckingType = 8
-	NSTextCheckingTypeAddress NSTextCheckingType = 16
-	NSTextCheckingTypeLink NSTextCheckingType = 32
-	NSTextCheckingTypeQuote NSTextCheckingType = 64
-	NSTextCheckingTypeDash NSTextCheckingType = 128
-	NSTextCheckingTypeReplacement NSTextCheckingType = 256
-	NSTextCheckingTypeCorrection NSTextCheckingType = 512
-	NSTextCheckingTypeRegularExpression NSTextCheckingType = 1024
-	NSTextCheckingTypePhoneNumber NSTextCheckingType = 2048
+	NSTextCheckingTypeOrthography        NSTextCheckingType = 1
+	NSTextCheckingTypeSpelling           NSTextCheckingType = 2
+	NSTextCheckingTypeGrammar            NSTextCheckingType = 4
+	NSTextCheckingTypeDate               NSTextCheckingType = 8
+	NSTextCheckingTypeAddress            NSTextCheckingType = 16
+	NSTextCheckingTypeLink               NSTextCheckingType = 32
+	NSTextCheckingTypeQuote              NSTextCheckingType = 64
+	NSTextCheckingTypeDash               NSTextCheckingType = 128
+	NSTextCheckingTypeReplacement        NSTextCheckingType = 256
+	NSTextCheckingTypeCorrection         NSTextCheckingType = 512
+	NSTextCheckingTypeRegularExpression  NSTextCheckingType = 1024
+	NSTextCheckingTypePhoneNumber        NSTextCheckingType = 2048
 	NSTextCheckingTypeTransitInformation NSTextCheckingType = 4096
 )
 
@@ -3551,12 +3551,12 @@ func (e NSTextCheckingType) String() string {
 type NSTimeZoneNameStyle int64
 
 const (
-	NSTimeZoneNameStyleStandard NSTimeZoneNameStyle = 0
-	NSTimeZoneNameStyleShortStandard NSTimeZoneNameStyle = 1
-	NSTimeZoneNameStyleDaylightSaving NSTimeZoneNameStyle = 2
+	NSTimeZoneNameStyleStandard            NSTimeZoneNameStyle = 0
+	NSTimeZoneNameStyleShortStandard       NSTimeZoneNameStyle = 1
+	NSTimeZoneNameStyleDaylightSaving      NSTimeZoneNameStyle = 2
 	NSTimeZoneNameStyleShortDaylightSaving NSTimeZoneNameStyle = 3
-	NSTimeZoneNameStyleGeneric NSTimeZoneNameStyle = 4
-	NSTimeZoneNameStyleShortGeneric NSTimeZoneNameStyle = 5
+	NSTimeZoneNameStyleGeneric             NSTimeZoneNameStyle = 4
+	NSTimeZoneNameStyleShortGeneric        NSTimeZoneNameStyle = 5
 )
 
 func (e NSTimeZoneNameStyle) String() string {
@@ -3587,10 +3587,10 @@ const (
 	// Deprecated: Not supported
 	NSURLBookmarkCreationMinimalBookmark NSURLBookmarkCreationOptions = 512
 	// Deprecated: Not supported
-	NSURLBookmarkCreationSuitableForBookmarkFile NSURLBookmarkCreationOptions = 1024
-	NSURLBookmarkCreationWithSecurityScope NSURLBookmarkCreationOptions = 2048
+	NSURLBookmarkCreationSuitableForBookmarkFile          NSURLBookmarkCreationOptions = 1024
+	NSURLBookmarkCreationWithSecurityScope                NSURLBookmarkCreationOptions = 2048
 	NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NSURLBookmarkCreationOptions = 4096
-	NSURLBookmarkCreationWithoutImplicitSecurityScope NSURLBookmarkCreationOptions = 536870912
+	NSURLBookmarkCreationWithoutImplicitSecurityScope     NSURLBookmarkCreationOptions = 536870912
 )
 
 func (e NSURLBookmarkCreationOptions) String() string {
@@ -3623,9 +3623,9 @@ func (e NSURLBookmarkCreationOptions) String() string {
 type NSURLBookmarkResolutionOptions uint64
 
 const (
-	NSURLBookmarkResolutionWithoutUI NSURLBookmarkResolutionOptions = 256
-	NSURLBookmarkResolutionWithoutMounting NSURLBookmarkResolutionOptions = 512
-	NSURLBookmarkResolutionWithSecurityScope NSURLBookmarkResolutionOptions = 1024
+	NSURLBookmarkResolutionWithoutUI                     NSURLBookmarkResolutionOptions = 256
+	NSURLBookmarkResolutionWithoutMounting               NSURLBookmarkResolutionOptions = 512
+	NSURLBookmarkResolutionWithSecurityScope             NSURLBookmarkResolutionOptions = 1024
 	NSURLBookmarkResolutionWithoutImplicitStartAccessing NSURLBookmarkResolutionOptions = 32768
 )
 
@@ -3652,9 +3652,9 @@ func (e NSURLBookmarkResolutionOptions) String() string {
 type NSURLCacheStoragePolicy uint64
 
 const (
-	NSURLCacheStorageAllowed NSURLCacheStoragePolicy = 0
+	NSURLCacheStorageAllowed             NSURLCacheStoragePolicy = 0
 	NSURLCacheStorageAllowedInMemoryOnly NSURLCacheStoragePolicy = 1
-	NSURLCacheStorageNotAllowed NSURLCacheStoragePolicy = 2
+	NSURLCacheStorageNotAllowed          NSURLCacheStoragePolicy = 2
 )
 
 func (e NSURLCacheStoragePolicy) String() string {
@@ -3673,9 +3673,9 @@ func (e NSURLCacheStoragePolicy) String() string {
 type NSURLCredentialPersistence uint64
 
 const (
-	NSURLCredentialPersistenceNone NSURLCredentialPersistence = 0
-	NSURLCredentialPersistenceForSession NSURLCredentialPersistence = 1
-	NSURLCredentialPersistencePermanent NSURLCredentialPersistence = 2
+	NSURLCredentialPersistenceNone           NSURLCredentialPersistence = 0
+	NSURLCredentialPersistenceForSession     NSURLCredentialPersistence = 1
+	NSURLCredentialPersistencePermanent      NSURLCredentialPersistence = 2
 	NSURLCredentialPersistenceSynchronizable NSURLCredentialPersistence = 3
 )
 
@@ -3697,10 +3697,10 @@ func (e NSURLCredentialPersistence) String() string {
 type NSURLHandleStatus uint64
 
 const (
-	NSURLHandleNotLoaded NSURLHandleStatus = 0
-	NSURLHandleLoadSucceeded NSURLHandleStatus = 1
+	NSURLHandleNotLoaded      NSURLHandleStatus = 0
+	NSURLHandleLoadSucceeded  NSURLHandleStatus = 1
 	NSURLHandleLoadInProgress NSURLHandleStatus = 2
-	NSURLHandleLoadFailed NSURLHandleStatus = 3
+	NSURLHandleLoadFailed     NSURLHandleStatus = 3
 )
 
 func (e NSURLHandleStatus) String() string {
@@ -3722,8 +3722,8 @@ type NSURLRelationship int64
 
 const (
 	NSURLRelationshipContains NSURLRelationship = 0
-	NSURLRelationshipSame NSURLRelationship = 1
-	NSURLRelationshipOther NSURLRelationship = 2
+	NSURLRelationshipSame     NSURLRelationship = 1
+	NSURLRelationshipOther    NSURLRelationship = 2
 )
 
 func (e NSURLRelationship) String() string {
@@ -3743,7 +3743,7 @@ type NSURLRequestAttribution uint64
 
 const (
 	NSURLRequestAttributionDeveloper NSURLRequestAttribution = 0
-	NSURLRequestAttributionUser NSURLRequestAttribution = 1
+	NSURLRequestAttributionUser      NSURLRequestAttribution = 1
 )
 
 func (e NSURLRequestAttribution) String() string {
@@ -3760,13 +3760,13 @@ func (e NSURLRequestAttribution) String() string {
 type NSURLRequestCachePolicy uint64
 
 const (
-	NSURLRequestUseProtocolCachePolicy NSURLRequestCachePolicy = 0
-	NSURLRequestReloadIgnoringLocalCacheData NSURLRequestCachePolicy = 1
+	NSURLRequestUseProtocolCachePolicy                NSURLRequestCachePolicy = 0
+	NSURLRequestReloadIgnoringLocalCacheData          NSURLRequestCachePolicy = 1
 	NSURLRequestReloadIgnoringLocalAndRemoteCacheData NSURLRequestCachePolicy = 4
-	NSURLRequestReloadIgnoringCacheData NSURLRequestCachePolicy = 1
-	NSURLRequestReturnCacheDataElseLoad NSURLRequestCachePolicy = 2
-	NSURLRequestReturnCacheDataDontLoad NSURLRequestCachePolicy = 3
-	NSURLRequestReloadRevalidatingCacheData NSURLRequestCachePolicy = 5
+	NSURLRequestReloadIgnoringCacheData               NSURLRequestCachePolicy = 1
+	NSURLRequestReturnCacheDataElseLoad               NSURLRequestCachePolicy = 2
+	NSURLRequestReturnCacheDataDontLoad               NSURLRequestCachePolicy = 3
+	NSURLRequestReloadRevalidatingCacheData           NSURLRequestCachePolicy = 5
 )
 
 func (e NSURLRequestCachePolicy) String() string {
@@ -3802,9 +3802,9 @@ const (
 	NSURLNetworkServiceTypeVoice NSURLRequestNetworkServiceType = 4
 	// Deprecated: Use PushKit for VoIP control purposes
 	NSURLNetworkServiceTypeResponsiveData NSURLRequestNetworkServiceType = 6
-	NSURLNetworkServiceTypeAVStreaming NSURLRequestNetworkServiceType = 8
-	NSURLNetworkServiceTypeResponsiveAV NSURLRequestNetworkServiceType = 9
-	NSURLNetworkServiceTypeCallSignaling NSURLRequestNetworkServiceType = 11
+	NSURLNetworkServiceTypeAVStreaming    NSURLRequestNetworkServiceType = 8
+	NSURLNetworkServiceTypeResponsiveAV   NSURLRequestNetworkServiceType = 9
+	NSURLNetworkServiceTypeCallSignaling  NSURLRequestNetworkServiceType = 11
 )
 
 func (e NSURLRequestNetworkServiceType) String() string {
@@ -3836,10 +3836,10 @@ type NSURLSessionTaskMetricsDomainResolutionProtocol int64
 
 const (
 	NSURLSessionTaskMetricsDomainResolutionProtocolUnknown NSURLSessionTaskMetricsDomainResolutionProtocol = 0
-	NSURLSessionTaskMetricsDomainResolutionProtocolUDP NSURLSessionTaskMetricsDomainResolutionProtocol = 1
-	NSURLSessionTaskMetricsDomainResolutionProtocolTCP NSURLSessionTaskMetricsDomainResolutionProtocol = 2
-	NSURLSessionTaskMetricsDomainResolutionProtocolTLS NSURLSessionTaskMetricsDomainResolutionProtocol = 3
-	NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS NSURLSessionTaskMetricsDomainResolutionProtocol = 4
+	NSURLSessionTaskMetricsDomainResolutionProtocolUDP     NSURLSessionTaskMetricsDomainResolutionProtocol = 1
+	NSURLSessionTaskMetricsDomainResolutionProtocolTCP     NSURLSessionTaskMetricsDomainResolutionProtocol = 2
+	NSURLSessionTaskMetricsDomainResolutionProtocolTLS     NSURLSessionTaskMetricsDomainResolutionProtocol = 3
+	NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS   NSURLSessionTaskMetricsDomainResolutionProtocol = 4
 )
 
 func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
@@ -3862,7 +3862,7 @@ func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
 type NSURLSessionTaskMetricsResourceFetchType int64
 
 const (
-	NSURLSessionTaskMetricsResourceFetchTypeUnknown NSURLSessionTaskMetricsResourceFetchType = 0
+	NSURLSessionTaskMetricsResourceFetchTypeUnknown     NSURLSessionTaskMetricsResourceFetchType = 0
 	NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad NSURLSessionTaskMetricsResourceFetchType = 1
 	// Deprecated: Server push is no longer supported as of iOS 17 and aligned releases
 	NSURLSessionTaskMetricsResourceFetchTypeServerPush NSURLSessionTaskMetricsResourceFetchType = 2
@@ -3888,7 +3888,7 @@ func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
 type NSURLSessionTaskState int64
 
 const (
-	NSURLSessionTaskStateRunning NSURLSessionTaskState = 0
+	NSURLSessionTaskStateRunning   NSURLSessionTaskState = 0
 	NSURLSessionTaskStateSuspended NSURLSessionTaskState = 1
 	NSURLSessionTaskStateCanceling NSURLSessionTaskState = 2
 	NSURLSessionTaskStateCompleted NSURLSessionTaskState = 3
@@ -3912,19 +3912,19 @@ func (e NSURLSessionTaskState) String() string {
 type NSURLSessionWebSocketCloseCode int64
 
 const (
-	NSURLSessionWebSocketCloseCodeInvalid NSURLSessionWebSocketCloseCode = 0
-	NSURLSessionWebSocketCloseCodeNormalClosure NSURLSessionWebSocketCloseCode = 1000
-	NSURLSessionWebSocketCloseCodeGoingAway NSURLSessionWebSocketCloseCode = 1001
-	NSURLSessionWebSocketCloseCodeProtocolError NSURLSessionWebSocketCloseCode = 1002
-	NSURLSessionWebSocketCloseCodeUnsupportedData NSURLSessionWebSocketCloseCode = 1003
-	NSURLSessionWebSocketCloseCodeNoStatusReceived NSURLSessionWebSocketCloseCode = 1005
-	NSURLSessionWebSocketCloseCodeAbnormalClosure NSURLSessionWebSocketCloseCode = 1006
-	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData NSURLSessionWebSocketCloseCode = 1007
-	NSURLSessionWebSocketCloseCodePolicyViolation NSURLSessionWebSocketCloseCode = 1008
-	NSURLSessionWebSocketCloseCodeMessageTooBig NSURLSessionWebSocketCloseCode = 1009
+	NSURLSessionWebSocketCloseCodeInvalid                   NSURLSessionWebSocketCloseCode = 0
+	NSURLSessionWebSocketCloseCodeNormalClosure             NSURLSessionWebSocketCloseCode = 1000
+	NSURLSessionWebSocketCloseCodeGoingAway                 NSURLSessionWebSocketCloseCode = 1001
+	NSURLSessionWebSocketCloseCodeProtocolError             NSURLSessionWebSocketCloseCode = 1002
+	NSURLSessionWebSocketCloseCodeUnsupportedData           NSURLSessionWebSocketCloseCode = 1003
+	NSURLSessionWebSocketCloseCodeNoStatusReceived          NSURLSessionWebSocketCloseCode = 1005
+	NSURLSessionWebSocketCloseCodeAbnormalClosure           NSURLSessionWebSocketCloseCode = 1006
+	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData   NSURLSessionWebSocketCloseCode = 1007
+	NSURLSessionWebSocketCloseCodePolicyViolation           NSURLSessionWebSocketCloseCode = 1008
+	NSURLSessionWebSocketCloseCodeMessageTooBig             NSURLSessionWebSocketCloseCode = 1009
 	NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing NSURLSessionWebSocketCloseCode = 1010
-	NSURLSessionWebSocketCloseCodeInternalServerError NSURLSessionWebSocketCloseCode = 1011
-	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure NSURLSessionWebSocketCloseCode = 1015
+	NSURLSessionWebSocketCloseCodeInternalServerError       NSURLSessionWebSocketCloseCode = 1011
+	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure       NSURLSessionWebSocketCloseCode = 1015
 )
 
 func (e NSURLSessionWebSocketCloseCode) String() string {
@@ -3963,7 +3963,7 @@ func (e NSURLSessionWebSocketCloseCode) String() string {
 type NSURLSessionWebSocketMessageType int64
 
 const (
-	NSURLSessionWebSocketMessageTypeData NSURLSessionWebSocketMessageType = 0
+	NSURLSessionWebSocketMessageTypeData   NSURLSessionWebSocketMessageType = 0
 	NSURLSessionWebSocketMessageTypeString NSURLSessionWebSocketMessageType = 1
 )
 
@@ -3982,10 +3982,10 @@ func (e NSURLSessionWebSocketMessageType) String() string {
 type NSUserNotificationActivationType int64
 
 const (
-	NSUserNotificationActivationTypeNone NSUserNotificationActivationType = 0
-	NSUserNotificationActivationTypeContentsClicked NSUserNotificationActivationType = 1
-	NSUserNotificationActivationTypeActionButtonClicked NSUserNotificationActivationType = 2
-	NSUserNotificationActivationTypeReplied NSUserNotificationActivationType = 3
+	NSUserNotificationActivationTypeNone                    NSUserNotificationActivationType = 0
+	NSUserNotificationActivationTypeContentsClicked         NSUserNotificationActivationType = 1
+	NSUserNotificationActivationTypeActionButtonClicked     NSUserNotificationActivationType = 2
+	NSUserNotificationActivationTypeReplied                 NSUserNotificationActivationType = 3
 	NSUserNotificationActivationTypeAdditionalActionClicked NSUserNotificationActivationType = 4
 )
 
@@ -4010,7 +4010,7 @@ func (e NSUserNotificationActivationType) String() string {
 type NSVolumeEnumerationOptions uint64
 
 const (
-	NSVolumeEnumerationSkipHiddenVolumes NSVolumeEnumerationOptions = 2
+	NSVolumeEnumerationSkipHiddenVolumes        NSVolumeEnumerationOptions = 2
 	NSVolumeEnumerationProduceFileReferenceURLs NSVolumeEnumerationOptions = 4
 )
 
@@ -4031,11 +4031,11 @@ func (e NSVolumeEnumerationOptions) String() string {
 type NSWhoseSubelementIdentifier uint64
 
 const (
-	NSIndexSubelement NSWhoseSubelementIdentifier = 0
-	NSEverySubelement NSWhoseSubelementIdentifier = 1
+	NSIndexSubelement  NSWhoseSubelementIdentifier = 0
+	NSEverySubelement  NSWhoseSubelementIdentifier = 1
 	NSMiddleSubelement NSWhoseSubelementIdentifier = 2
 	NSRandomSubelement NSWhoseSubelementIdentifier = 3
-	NSNoSubelement NSWhoseSubelementIdentifier = 4
+	NSNoSubelement     NSWhoseSubelementIdentifier = 4
 )
 
 func (e NSWhoseSubelementIdentifier) String() string {
@@ -4058,26 +4058,26 @@ func (e NSWhoseSubelementIdentifier) String() string {
 type NSXMLDTDNodeKind uint64
 
 const (
-	NSXMLEntityGeneralKind NSXMLDTDNodeKind = 1
-	NSXMLEntityParsedKind NSXMLDTDNodeKind = 2
-	NSXMLEntityUnparsedKind NSXMLDTDNodeKind = 3
-	NSXMLEntityParameterKind NSXMLDTDNodeKind = 4
-	NSXMLEntityPredefined NSXMLDTDNodeKind = 5
-	NSXMLAttributeCDATAKind NSXMLDTDNodeKind = 6
-	NSXMLAttributeIDKind NSXMLDTDNodeKind = 7
-	NSXMLAttributeIDRefKind NSXMLDTDNodeKind = 8
-	NSXMLAttributeIDRefsKind NSXMLDTDNodeKind = 9
-	NSXMLAttributeEntityKind NSXMLDTDNodeKind = 10
-	NSXMLAttributeEntitiesKind NSXMLDTDNodeKind = 11
-	NSXMLAttributeNMTokenKind NSXMLDTDNodeKind = 12
-	NSXMLAttributeNMTokensKind NSXMLDTDNodeKind = 13
-	NSXMLAttributeEnumerationKind NSXMLDTDNodeKind = 14
-	NSXMLAttributeNotationKind NSXMLDTDNodeKind = 15
+	NSXMLEntityGeneralKind               NSXMLDTDNodeKind = 1
+	NSXMLEntityParsedKind                NSXMLDTDNodeKind = 2
+	NSXMLEntityUnparsedKind              NSXMLDTDNodeKind = 3
+	NSXMLEntityParameterKind             NSXMLDTDNodeKind = 4
+	NSXMLEntityPredefined                NSXMLDTDNodeKind = 5
+	NSXMLAttributeCDATAKind              NSXMLDTDNodeKind = 6
+	NSXMLAttributeIDKind                 NSXMLDTDNodeKind = 7
+	NSXMLAttributeIDRefKind              NSXMLDTDNodeKind = 8
+	NSXMLAttributeIDRefsKind             NSXMLDTDNodeKind = 9
+	NSXMLAttributeEntityKind             NSXMLDTDNodeKind = 10
+	NSXMLAttributeEntitiesKind           NSXMLDTDNodeKind = 11
+	NSXMLAttributeNMTokenKind            NSXMLDTDNodeKind = 12
+	NSXMLAttributeNMTokensKind           NSXMLDTDNodeKind = 13
+	NSXMLAttributeEnumerationKind        NSXMLDTDNodeKind = 14
+	NSXMLAttributeNotationKind           NSXMLDTDNodeKind = 15
 	NSXMLElementDeclarationUndefinedKind NSXMLDTDNodeKind = 16
-	NSXMLElementDeclarationEmptyKind NSXMLDTDNodeKind = 17
-	NSXMLElementDeclarationAnyKind NSXMLDTDNodeKind = 18
-	NSXMLElementDeclarationMixedKind NSXMLDTDNodeKind = 19
-	NSXMLElementDeclarationElementKind NSXMLDTDNodeKind = 20
+	NSXMLElementDeclarationEmptyKind     NSXMLDTDNodeKind = 17
+	NSXMLElementDeclarationAnyKind       NSXMLDTDNodeKind = 18
+	NSXMLElementDeclarationMixedKind     NSXMLDTDNodeKind = 19
+	NSXMLElementDeclarationElementKind   NSXMLDTDNodeKind = 20
 )
 
 func (e NSXMLDTDNodeKind) String() string {
@@ -4130,10 +4130,10 @@ func (e NSXMLDTDNodeKind) String() string {
 type NSXMLDocumentContentKind uint64
 
 const (
-	NSXMLDocumentXMLKind NSXMLDocumentContentKind = 0
+	NSXMLDocumentXMLKind   NSXMLDocumentContentKind = 0
 	NSXMLDocumentXHTMLKind NSXMLDocumentContentKind = 1
-	NSXMLDocumentHTMLKind NSXMLDocumentContentKind = 2
-	NSXMLDocumentTextKind NSXMLDocumentContentKind = 3
+	NSXMLDocumentHTMLKind  NSXMLDocumentContentKind = 2
+	NSXMLDocumentTextKind  NSXMLDocumentContentKind = 3
 )
 
 func (e NSXMLDocumentContentKind) String() string {
@@ -4154,19 +4154,19 @@ func (e NSXMLDocumentContentKind) String() string {
 type NSXMLNodeKind uint64
 
 const (
-	NSXMLInvalidKind NSXMLNodeKind = 0
-	NSXMLDocumentKind NSXMLNodeKind = 1
-	NSXMLElementKind NSXMLNodeKind = 2
-	NSXMLAttributeKind NSXMLNodeKind = 3
-	NSXMLNamespaceKind NSXMLNodeKind = 4
+	NSXMLInvalidKind               NSXMLNodeKind = 0
+	NSXMLDocumentKind              NSXMLNodeKind = 1
+	NSXMLElementKind               NSXMLNodeKind = 2
+	NSXMLAttributeKind             NSXMLNodeKind = 3
+	NSXMLNamespaceKind             NSXMLNodeKind = 4
 	NSXMLProcessingInstructionKind NSXMLNodeKind = 5
-	NSXMLCommentKind NSXMLNodeKind = 6
-	NSXMLTextKind NSXMLNodeKind = 7
-	NSXMLDTDKind NSXMLNodeKind = 8
-	NSXMLEntityDeclarationKind NSXMLNodeKind = 9
-	NSXMLAttributeDeclarationKind NSXMLNodeKind = 10
-	NSXMLElementDeclarationKind NSXMLNodeKind = 11
-	NSXMLNotationDeclarationKind NSXMLNodeKind = 12
+	NSXMLCommentKind               NSXMLNodeKind = 6
+	NSXMLTextKind                  NSXMLNodeKind = 7
+	NSXMLDTDKind                   NSXMLNodeKind = 8
+	NSXMLEntityDeclarationKind     NSXMLNodeKind = 9
+	NSXMLAttributeDeclarationKind  NSXMLNodeKind = 10
+	NSXMLElementDeclarationKind    NSXMLNodeKind = 11
+	NSXMLNotationDeclarationKind   NSXMLNodeKind = 12
 )
 
 func (e NSXMLNodeKind) String() string {
@@ -4206,34 +4206,34 @@ func (e NSXMLNodeKind) String() string {
 type NSXMLNodeOptions uint64
 
 const (
-	NSXMLNodeOptionsNone NSXMLNodeOptions = 0
-	NSXMLNodeIsCDATA NSXMLNodeOptions = 1
-	NSXMLNodeExpandEmptyElement NSXMLNodeOptions = 2
-	NSXMLNodeCompactEmptyElement NSXMLNodeOptions = 4
-	NSXMLNodeUseSingleQuotes NSXMLNodeOptions = 8
-	NSXMLNodeUseDoubleQuotes NSXMLNodeOptions = 16
-	NSXMLNodeNeverEscapeContents NSXMLNodeOptions = 32
-	NSXMLDocumentTidyHTML NSXMLNodeOptions = 512
-	NSXMLDocumentTidyXML NSXMLNodeOptions = 1024
-	NSXMLDocumentValidate NSXMLNodeOptions = 8192
-	NSXMLNodeLoadExternalEntitiesAlways NSXMLNodeOptions = 16384
+	NSXMLNodeOptionsNone                        NSXMLNodeOptions = 0
+	NSXMLNodeIsCDATA                            NSXMLNodeOptions = 1
+	NSXMLNodeExpandEmptyElement                 NSXMLNodeOptions = 2
+	NSXMLNodeCompactEmptyElement                NSXMLNodeOptions = 4
+	NSXMLNodeUseSingleQuotes                    NSXMLNodeOptions = 8
+	NSXMLNodeUseDoubleQuotes                    NSXMLNodeOptions = 16
+	NSXMLNodeNeverEscapeContents                NSXMLNodeOptions = 32
+	NSXMLDocumentTidyHTML                       NSXMLNodeOptions = 512
+	NSXMLDocumentTidyXML                        NSXMLNodeOptions = 1024
+	NSXMLDocumentValidate                       NSXMLNodeOptions = 8192
+	NSXMLNodeLoadExternalEntitiesAlways         NSXMLNodeOptions = 16384
 	NSXMLNodeLoadExternalEntitiesSameOriginOnly NSXMLNodeOptions = 32768
-	NSXMLNodeLoadExternalEntitiesNever NSXMLNodeOptions = 524288
-	NSXMLDocumentXInclude NSXMLNodeOptions = 65536
-	NSXMLNodePrettyPrint NSXMLNodeOptions = 131072
-	NSXMLDocumentIncludeContentTypeDeclaration NSXMLNodeOptions = 262144
-	NSXMLNodePreserveNamespaceOrder NSXMLNodeOptions = 1048576
-	NSXMLNodePreserveAttributeOrder NSXMLNodeOptions = 2097152
-	NSXMLNodePreserveEntities NSXMLNodeOptions = 4194304
-	NSXMLNodePreservePrefixes NSXMLNodeOptions = 8388608
-	NSXMLNodePreserveCDATA NSXMLNodeOptions = 16777216
-	NSXMLNodePreserveWhitespace NSXMLNodeOptions = 33554432
-	NSXMLNodePreserveDTD NSXMLNodeOptions = 67108864
-	NSXMLNodePreserveCharacterReferences NSXMLNodeOptions = 134217728
-	NSXMLNodePromoteSignificantWhitespace NSXMLNodeOptions = 268435456
-	NSXMLNodePreserveEmptyElements NSXMLNodeOptions = 6
-	NSXMLNodePreserveQuotes NSXMLNodeOptions = 24
-	NSXMLNodePreserveAll NSXMLNodeOptions = 4293918750
+	NSXMLNodeLoadExternalEntitiesNever          NSXMLNodeOptions = 524288
+	NSXMLDocumentXInclude                       NSXMLNodeOptions = 65536
+	NSXMLNodePrettyPrint                        NSXMLNodeOptions = 131072
+	NSXMLDocumentIncludeContentTypeDeclaration  NSXMLNodeOptions = 262144
+	NSXMLNodePreserveNamespaceOrder             NSXMLNodeOptions = 1048576
+	NSXMLNodePreserveAttributeOrder             NSXMLNodeOptions = 2097152
+	NSXMLNodePreserveEntities                   NSXMLNodeOptions = 4194304
+	NSXMLNodePreservePrefixes                   NSXMLNodeOptions = 8388608
+	NSXMLNodePreserveCDATA                      NSXMLNodeOptions = 16777216
+	NSXMLNodePreserveWhitespace                 NSXMLNodeOptions = 33554432
+	NSXMLNodePreserveDTD                        NSXMLNodeOptions = 67108864
+	NSXMLNodePreserveCharacterReferences        NSXMLNodeOptions = 134217728
+	NSXMLNodePromoteSignificantWhitespace       NSXMLNodeOptions = 268435456
+	NSXMLNodePreserveEmptyElements              NSXMLNodeOptions = 6
+	NSXMLNodePreserveQuotes                     NSXMLNodeOptions = 24
+	NSXMLNodePreserveAll                        NSXMLNodeOptions = 4293918750
 )
 
 func (e NSXMLNodeOptions) String() string {
@@ -4328,10 +4328,10 @@ func (e NSXMLNodeOptions) String() string {
 type NSXMLParserExternalEntityResolvingPolicy uint64
 
 const (
-	NSXMLParserResolveExternalEntitiesNever NSXMLParserExternalEntityResolvingPolicy = 0
-	NSXMLParserResolveExternalEntitiesNoNetwork NSXMLParserExternalEntityResolvingPolicy = 1
+	NSXMLParserResolveExternalEntitiesNever          NSXMLParserExternalEntityResolvingPolicy = 0
+	NSXMLParserResolveExternalEntitiesNoNetwork      NSXMLParserExternalEntityResolvingPolicy = 1
 	NSXMLParserResolveExternalEntitiesSameOriginOnly NSXMLParserExternalEntityResolvingPolicy = 2
-	NSXMLParserResolveExternalEntitiesAlways NSXMLParserExternalEntityResolvingPolicy = 3
+	NSXMLParserResolveExternalEntitiesAlways         NSXMLParserExternalEntityResolvingPolicy = 3
 )
 
 func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
@@ -4366,4 +4366,3 @@ func (e NSXPCConnectionOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
-

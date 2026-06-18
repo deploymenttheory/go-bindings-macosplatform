@@ -182,11 +182,17 @@ func (x *CNNSubtractGradient) WithDestinationImageAllocator(destinationImageAllo
 	return x
 }
 
-func (x *CNNSubtractGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient { return &x.inner.MPSCNNArithmeticGradient }
+func (x *CNNSubtractGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient {
+	return &x.inner.MPSCNNArithmeticGradient
+}
 
-func (x *CNNSubtractGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel }
+func (x *CNNSubtractGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel
+}
 
-func (x *CNNSubtractGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+func (x *CNNSubtractGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
+	return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
+}
 
 // CNNSubtractGradientable is the interface implemented by [CNNSubtractGradient], for mocking and DI.
 type CNNSubtractGradientable interface {
@@ -218,4 +224,3 @@ type CNNSubtractGradientable interface {
 }
 
 var _ CNNSubtractGradientable = (*CNNSubtractGradient)(nil)
-

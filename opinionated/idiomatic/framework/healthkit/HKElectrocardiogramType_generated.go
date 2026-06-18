@@ -37,7 +37,9 @@ func NewElectrocardiogramType() *ElectrocardiogramType {
 
 func (x *ElectrocardiogramType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
 
-func (x *ElectrocardiogramType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
+func (x *ElectrocardiogramType) asObjectType() *raw.HKObjectType {
+	return &x.inner.HKSampleType.HKObjectType
+}
 
 // ElectrocardiogramTypeable is the interface implemented by [ElectrocardiogramType], for mocking and DI.
 type ElectrocardiogramTypeable interface {
@@ -45,4 +47,3 @@ type ElectrocardiogramTypeable interface {
 }
 
 var _ ElectrocardiogramTypeable = (*ElectrocardiogramType)(nil)
-

@@ -16,9 +16,9 @@ type MKMapItemIdentifier struct {
 }
 
 var (
-	_clsMKMapItemIdentifier = _objcClass("MKMapItemIdentifier")
+	_clsMKMapItemIdentifier                         = _objcClass("MKMapItemIdentifier")
 	_mKMapItemIdentifierSelInitWithIdentifierString = objc.RegisterName("initWithIdentifierString:")
-	_mKMapItemIdentifierSelIdentifierString = objc.RegisterName("identifierString")
+	_mKMapItemIdentifierSelIdentifierString         = objc.RegisterName("identifierString")
 )
 
 func MKMapItemIdentifierFromID(id objc.ID) *MKMapItemIdentifier {
@@ -33,13 +33,16 @@ func MKMapItemIdentifierFromID(id objc.ID) *MKMapItemIdentifier {
 
 func (o *MKMapItemIdentifier) InitWithIdentifierString(string_ *foundation.NSString) *MKMapItemIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemIdentifierSelInitWithIdentifierString, string_.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MKMapItemIdentifierFromID(_ret)
 }
 
 func (o *MKMapItemIdentifier) IdentifierString() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mKMapItemIdentifierSelIdentifierString)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
-

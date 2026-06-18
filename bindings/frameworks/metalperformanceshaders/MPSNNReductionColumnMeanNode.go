@@ -26,4 +26,3 @@ func MPSNNReductionColumnMeanNodeFromID(id objc.ID) *MPSNNReductionColumnMeanNod
 	purego.Track(o)
 	return o
 }
-

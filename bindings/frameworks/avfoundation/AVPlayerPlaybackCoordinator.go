@@ -17,12 +17,12 @@ type AVPlayerPlaybackCoordinator struct {
 }
 
 var (
-	_clsAVPlayerPlaybackCoordinator = _objcClass("AVPlayerPlaybackCoordinator")
-	_aVPlayerPlaybackCoordinatorSelPlayer = objc.RegisterName("player")
-	_aVPlayerPlaybackCoordinatorSelDelegate = objc.RegisterName("delegate")
-	_aVPlayerPlaybackCoordinatorSelSetDelegate = objc.RegisterName("setDelegate:")
+	_clsAVPlayerPlaybackCoordinator                                       = _objcClass("AVPlayerPlaybackCoordinator")
+	_aVPlayerPlaybackCoordinatorSelPlayer                                 = objc.RegisterName("player")
+	_aVPlayerPlaybackCoordinatorSelDelegate                               = objc.RegisterName("delegate")
+	_aVPlayerPlaybackCoordinatorSelSetDelegate                            = objc.RegisterName("setDelegate:")
 	_aVPlayerPlaybackCoordinatorSelCoordinateUsingCoordinationMediumError = objc.RegisterName("coordinateUsingCoordinationMedium:error:")
-	_aVPlayerPlaybackCoordinatorSelPlaybackCoordinationMedium = objc.RegisterName("playbackCoordinationMedium")
+	_aVPlayerPlaybackCoordinatorSelPlaybackCoordinationMedium             = objc.RegisterName("playbackCoordinationMedium")
 )
 
 func AVPlayerPlaybackCoordinatorFromID(id objc.ID) *AVPlayerPlaybackCoordinator {
@@ -38,7 +38,9 @@ func AVPlayerPlaybackCoordinatorFromID(id objc.ID) *AVPlayerPlaybackCoordinator 
 // The AVPlayer this coordinator is controlling.
 func (o *AVPlayerPlaybackCoordinator) Player() *AVPlayer {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerPlaybackCoordinatorSelPlayer)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlayerFromID(_ret)
 }
 
@@ -64,7 +66,8 @@ func (o *AVPlayerPlaybackCoordinator) CoordinateUsingCoordinationMediumError(coo
 
 func (o *AVPlayerPlaybackCoordinator) PlaybackCoordinationMedium() *AVPlaybackCoordinationMedium {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerPlaybackCoordinatorSelPlaybackCoordinationMedium)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVPlaybackCoordinationMediumFromID(_ret)
 }
-

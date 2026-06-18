@@ -669,9 +669,13 @@ func (x *MTRBaseClusterICDManagement) SubscribeAttributeClusterRevisionWithParam
 	}
 }
 
-func (x *MTRBaseClusterICDManagement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
+func (x *MTRBaseClusterICDManagement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
+	return &x.inner.MTRGenericBaseCluster
+}
 
-func (x *MTRBaseClusterICDManagement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+func (x *MTRBaseClusterICDManagement) asMTRCluster() *raw.MTRCluster {
+	return &x.inner.MTRGenericBaseCluster.MTRCluster
+}
 
 // MTRBaseClusterICDManagementable is the interface implemented by [MTRBaseClusterICDManagement], for mocking and DI.
 type MTRBaseClusterICDManagementable interface {
@@ -712,4 +716,3 @@ type MTRBaseClusterICDManagementable interface {
 }
 
 var _ MTRBaseClusterICDManagementable = (*MTRBaseClusterICDManagement)(nil)
-

@@ -16,12 +16,12 @@ type MTRUnitTestingClusterNestedStruct struct {
 }
 
 var (
-	_clsMTRUnitTestingClusterNestedStruct = _objcClass("MTRUnitTestingClusterNestedStruct")
-	_mTRUnitTestingClusterNestedStructSelA = objc.RegisterName("a")
+	_clsMTRUnitTestingClusterNestedStruct     = _objcClass("MTRUnitTestingClusterNestedStruct")
+	_mTRUnitTestingClusterNestedStructSelA    = objc.RegisterName("a")
 	_mTRUnitTestingClusterNestedStructSelSetA = objc.RegisterName("setA:")
-	_mTRUnitTestingClusterNestedStructSelB = objc.RegisterName("b")
+	_mTRUnitTestingClusterNestedStructSelB    = objc.RegisterName("b")
 	_mTRUnitTestingClusterNestedStructSelSetB = objc.RegisterName("setB:")
-	_mTRUnitTestingClusterNestedStructSelC = objc.RegisterName("c")
+	_mTRUnitTestingClusterNestedStructSelC    = objc.RegisterName("c")
 	_mTRUnitTestingClusterNestedStructSelSetC = objc.RegisterName("setC:")
 )
 
@@ -37,7 +37,9 @@ func MTRUnitTestingClusterNestedStructFromID(id objc.ID) *MTRUnitTestingClusterN
 
 func (o *MTRUnitTestingClusterNestedStruct) A() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructSelA)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRUnitTestingClusterNestedStruct) SetA(a *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterNestedStruct) B() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructSelB)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRUnitTestingClusterNestedStruct) SetB(b *foundation.NSNumber) {
 
 func (o *MTRUnitTestingClusterNestedStruct) C() *MTRUnitTestingClusterSimpleStruct {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRUnitTestingClusterNestedStructSelC)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MTRUnitTestingClusterSimpleStructFromID(_ret)
 }
 
 func (o *MTRUnitTestingClusterNestedStruct) SetC(c *MTRUnitTestingClusterSimpleStruct) {
 	o.Ptr().Send(_mTRUnitTestingClusterNestedStructSelSetC, c.Ptr())
 }
-

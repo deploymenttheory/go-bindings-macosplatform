@@ -19,7 +19,7 @@ type MPSCNNNeuronPReLUNode struct {
 }
 
 var (
-	_clsMPSCNNNeuronPReLUNode = _objcClass("MPSCNNNeuronPReLUNode")
+	_clsMPSCNNNeuronPReLUNode                    = _objcClass("MPSCNNNeuronPReLUNode")
 	_mPSCNNNeuronPReLUNodeSelNodeWithSourceAData = objc.RegisterName("nodeWithSource:aData:")
 	_mPSCNNNeuronPReLUNodeSelInitWithSourceAData = objc.RegisterName("initWithSource:aData:")
 )
@@ -36,14 +36,17 @@ func MPSCNNNeuronPReLUNodeFromID(id objc.ID) *MPSCNNNeuronPReLUNode {
 
 func MPSCNNNeuronPReLUNodeNodeWithSourceAData(sourceNode *mpsneuralnetwork.MPSNNImageNode, aData *foundation.NSData) *MPSCNNNeuronPReLUNode {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMPSCNNNeuronPReLUNode), _mPSCNNNeuronPReLUNodeSelNodeWithSourceAData, sourceNode.Ptr(), aData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronPReLUNodeFromID(_ret)
 }
 
 // @abstract   Init a node representing a MPSCNNNeuronTanH kernel @discussion For each pixel, applies the following function: @code f(x) = x                if x >= 0 = aData[i] * x     if x < 0,  i is the index of the feature channel @endcode @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      aData                   An array of single precision floating-point alpha values to use @return     A new MPSNNFilter node for a MPSCNNNeuronTanH kernel.
 func (o *MPSCNNNeuronPReLUNode) InitWithSourceAData(sourceNode *mpsneuralnetwork.MPSNNImageNode, aData *foundation.NSData) *MPSCNNNeuronPReLUNode {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSCNNNeuronPReLUNodeSelInitWithSourceAData, sourceNode.Ptr(), aData.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MPSCNNNeuronPReLUNodeFromID(_ret)
 }
-

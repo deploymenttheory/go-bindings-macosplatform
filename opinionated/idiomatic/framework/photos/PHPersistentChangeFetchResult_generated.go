@@ -47,4 +47,3 @@ type PersistentChangeFetchResultable interface {
 }
 
 var _ PersistentChangeFetchResultable = (*PersistentChangeFetchResult)(nil)
-

@@ -60,4 +60,3 @@ type CollectionViewUpdateItemable interface {
 }
 
 var _ CollectionViewUpdateItemable = (*CollectionViewUpdateItem)(nil)
-

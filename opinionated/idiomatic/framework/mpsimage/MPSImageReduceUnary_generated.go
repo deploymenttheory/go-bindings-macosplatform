@@ -73,7 +73,9 @@ func (x *ImageReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
 
 func (x *ImageReduceUnary) asImageReduceUnary() *raw.MPSImageReduceUnary { return x.inner }
 
-func (x *ImageReduceUnary) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+func (x *ImageReduceUnary) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
+	return &x.inner.MPSUnaryImageKernel
+}
 
 // ImageReduceUnaryable is the interface implemented by [ImageReduceUnary], for mocking and DI.
 type ImageReduceUnaryable interface {
@@ -87,4 +89,3 @@ type ImageReduceUnaryable interface {
 }
 
 var _ ImageReduceUnaryable = (*ImageReduceUnary)(nil)
-

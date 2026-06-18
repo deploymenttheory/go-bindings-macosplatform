@@ -20,14 +20,14 @@ type GKRTree[ElementType purego.AnyObject] struct {
 }
 
 var (
-	_clsGKRTree = _objcClass("GKRTree")
-	_gKRTreeSelTreeWithMaxNumberOfChildren = objc.RegisterName("treeWithMaxNumberOfChildren:")
-	_gKRTreeSelInitWithMaxNumberOfChildren = objc.RegisterName("initWithMaxNumberOfChildren:")
+	_clsGKRTree                                                      = _objcClass("GKRTree")
+	_gKRTreeSelTreeWithMaxNumberOfChildren                           = objc.RegisterName("treeWithMaxNumberOfChildren:")
+	_gKRTreeSelInitWithMaxNumberOfChildren                           = objc.RegisterName("initWithMaxNumberOfChildren:")
 	_gKRTreeSelAddElementBoundingRectMinBoundingRectMaxSplitStrategy = objc.RegisterName("addElement:boundingRectMin:boundingRectMax:splitStrategy:")
-	_gKRTreeSelRemoveElementBoundingRectMinBoundingRectMax = objc.RegisterName("removeElement:boundingRectMin:boundingRectMax:")
-	_gKRTreeSelElementsInBoundingRectMinRectMax = objc.RegisterName("elementsInBoundingRectMin:rectMax:")
-	_gKRTreeSelQueryReserve = objc.RegisterName("queryReserve")
-	_gKRTreeSelSetQueryReserve = objc.RegisterName("setQueryReserve:")
+	_gKRTreeSelRemoveElementBoundingRectMinBoundingRectMax           = objc.RegisterName("removeElement:boundingRectMin:boundingRectMax:")
+	_gKRTreeSelElementsInBoundingRectMinRectMax                      = objc.RegisterName("elementsInBoundingRectMin:rectMax:")
+	_gKRTreeSelQueryReserve                                          = objc.RegisterName("queryReserve")
+	_gKRTreeSelSetQueryReserve                                       = objc.RegisterName("setQueryReserve:")
 )
 
 func GKRTreeFromID[ElementType purego.AnyObject](id objc.ID) *GKRTree[ElementType] {
@@ -43,13 +43,17 @@ func GKRTreeFromID[ElementType purego.AnyObject](id objc.ID) *GKRTree[ElementTyp
 // Creates an RTree with a given maximum number of children per node.  Nodes that grow beyond this number of children will be split. @param maxNumberOfChildren the maximum number of children per node before splitting
 func GKRTreeTreeWithMaxNumberOfChildren(maxNumberOfChildren uint) *GKRTree[objc.ID] {
 	_ret := objc.Send[objc.ID](objc.ID(_clsGKRTree), _gKRTreeSelTreeWithMaxNumberOfChildren, maxNumberOfChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRTreeFromID[objc.ID](_ret)
 }
 
 func (o *GKRTree[ElementType]) InitWithMaxNumberOfChildren(maxNumberOfChildren uint) *GKRTree[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRTreeSelInitWithMaxNumberOfChildren, maxNumberOfChildren)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return GKRTreeFromID[ElementType](_ret)
 }
 
@@ -66,7 +70,9 @@ func (o *GKRTree[ElementType]) RemoveElementBoundingRectMinBoundingRectMax(eleme
 // Queries all the elements that are in this RTree within the given bounding rect. @param rectMin the min point (lower left) of the rect to query @param rectMax the max point (upper right) of the rect to query @return an NSArray of all of the elements that fall within the query rect
 func (o *GKRTree[ElementType]) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[ElementType] {
 	_ret := objc.Send[objc.ID](o.Ptr(), _gKRTreeSelElementsInBoundingRectMinRectMax, rectMin, rectMax)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSArrayFromID[ElementType](_ret)
 }
 
@@ -79,4 +85,3 @@ func (o *GKRTree[ElementType]) QueryReserve() uint {
 func (o *GKRTree[ElementType]) SetQueryReserve(queryReserve uint) {
 	o.Ptr().Send(_gKRTreeSelSetQueryReserve, queryReserve)
 }
-

@@ -16,16 +16,16 @@ type MTRFanControlClusterStepParams struct {
 }
 
 var (
-	_clsMTRFanControlClusterStepParams = _objcClass("MTRFanControlClusterStepParams")
-	_mTRFanControlClusterStepParamsSelDirection = objc.RegisterName("direction")
-	_mTRFanControlClusterStepParamsSelSetDirection = objc.RegisterName("setDirection:")
-	_mTRFanControlClusterStepParamsSelWrap = objc.RegisterName("wrap")
-	_mTRFanControlClusterStepParamsSelSetWrap = objc.RegisterName("setWrap:")
-	_mTRFanControlClusterStepParamsSelLowestOff = objc.RegisterName("lowestOff")
-	_mTRFanControlClusterStepParamsSelSetLowestOff = objc.RegisterName("setLowestOff:")
-	_mTRFanControlClusterStepParamsSelTimedInvokeTimeoutMs = objc.RegisterName("timedInvokeTimeoutMs")
-	_mTRFanControlClusterStepParamsSelSetTimedInvokeTimeoutMs = objc.RegisterName("setTimedInvokeTimeoutMs:")
-	_mTRFanControlClusterStepParamsSelServerSideProcessingTimeout = objc.RegisterName("serverSideProcessingTimeout")
+	_clsMTRFanControlClusterStepParams                               = _objcClass("MTRFanControlClusterStepParams")
+	_mTRFanControlClusterStepParamsSelDirection                      = objc.RegisterName("direction")
+	_mTRFanControlClusterStepParamsSelSetDirection                   = objc.RegisterName("setDirection:")
+	_mTRFanControlClusterStepParamsSelWrap                           = objc.RegisterName("wrap")
+	_mTRFanControlClusterStepParamsSelSetWrap                        = objc.RegisterName("setWrap:")
+	_mTRFanControlClusterStepParamsSelLowestOff                      = objc.RegisterName("lowestOff")
+	_mTRFanControlClusterStepParamsSelSetLowestOff                   = objc.RegisterName("setLowestOff:")
+	_mTRFanControlClusterStepParamsSelTimedInvokeTimeoutMs           = objc.RegisterName("timedInvokeTimeoutMs")
+	_mTRFanControlClusterStepParamsSelSetTimedInvokeTimeoutMs        = objc.RegisterName("setTimedInvokeTimeoutMs:")
+	_mTRFanControlClusterStepParamsSelServerSideProcessingTimeout    = objc.RegisterName("serverSideProcessingTimeout")
 	_mTRFanControlClusterStepParamsSelSetServerSideProcessingTimeout = objc.RegisterName("setServerSideProcessingTimeout:")
 )
 
@@ -41,7 +41,9 @@ func MTRFanControlClusterStepParamsFromID(id objc.ID) *MTRFanControlClusterStepP
 
 func (o *MTRFanControlClusterStepParams) Direction() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFanControlClusterStepParamsSelDirection)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -51,7 +53,9 @@ func (o *MTRFanControlClusterStepParams) SetDirection(direction *foundation.NSNu
 
 func (o *MTRFanControlClusterStepParams) Wrap() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFanControlClusterStepParamsSelWrap)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -61,7 +65,9 @@ func (o *MTRFanControlClusterStepParams) SetWrap(wrap *foundation.NSNumber) {
 
 func (o *MTRFanControlClusterStepParams) LowestOff() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFanControlClusterStepParamsSelLowestOff)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -72,7 +78,9 @@ func (o *MTRFanControlClusterStepParams) SetLowestOff(lowestOff *foundation.NSNu
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (o *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFanControlClusterStepParamsSelTimedInvokeTimeoutMs)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -83,11 +91,12 @@ func (o *MTRFanControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTime
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (o *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRFanControlClusterStepParamsSelServerSideProcessingTimeout)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRFanControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
 	o.Ptr().Send(_mTRFanControlClusterStepParamsSelSetServerSideProcessingTimeout, serverSideProcessingTimeout.Ptr())
 }
-

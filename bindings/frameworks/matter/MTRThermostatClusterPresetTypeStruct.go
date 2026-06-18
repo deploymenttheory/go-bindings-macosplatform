@@ -16,12 +16,12 @@ type MTRThermostatClusterPresetTypeStruct struct {
 }
 
 var (
-	_clsMTRThermostatClusterPresetTypeStruct = _objcClass("MTRThermostatClusterPresetTypeStruct")
-	_mTRThermostatClusterPresetTypeStructSelPresetScenario = objc.RegisterName("presetScenario")
-	_mTRThermostatClusterPresetTypeStructSelSetPresetScenario = objc.RegisterName("setPresetScenario:")
-	_mTRThermostatClusterPresetTypeStructSelNumberOfPresets = objc.RegisterName("numberOfPresets")
-	_mTRThermostatClusterPresetTypeStructSelSetNumberOfPresets = objc.RegisterName("setNumberOfPresets:")
-	_mTRThermostatClusterPresetTypeStructSelPresetTypeFeatures = objc.RegisterName("presetTypeFeatures")
+	_clsMTRThermostatClusterPresetTypeStruct                      = _objcClass("MTRThermostatClusterPresetTypeStruct")
+	_mTRThermostatClusterPresetTypeStructSelPresetScenario        = objc.RegisterName("presetScenario")
+	_mTRThermostatClusterPresetTypeStructSelSetPresetScenario     = objc.RegisterName("setPresetScenario:")
+	_mTRThermostatClusterPresetTypeStructSelNumberOfPresets       = objc.RegisterName("numberOfPresets")
+	_mTRThermostatClusterPresetTypeStructSelSetNumberOfPresets    = objc.RegisterName("setNumberOfPresets:")
+	_mTRThermostatClusterPresetTypeStructSelPresetTypeFeatures    = objc.RegisterName("presetTypeFeatures")
 	_mTRThermostatClusterPresetTypeStructSelSetPresetTypeFeatures = objc.RegisterName("setPresetTypeFeatures:")
 )
 
@@ -37,7 +37,9 @@ func MTRThermostatClusterPresetTypeStructFromID(id objc.ID) *MTRThermostatCluste
 
 func (o *MTRThermostatClusterPresetTypeStruct) PresetScenario() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetTypeStructSelPresetScenario)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -47,7 +49,9 @@ func (o *MTRThermostatClusterPresetTypeStruct) SetPresetScenario(presetScenario 
 
 func (o *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetTypeStructSelNumberOfPresets)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -57,11 +61,12 @@ func (o *MTRThermostatClusterPresetTypeStruct) SetNumberOfPresets(numberOfPreset
 
 func (o *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThermostatClusterPresetTypeStructSelPresetTypeFeatures)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 func (o *MTRThermostatClusterPresetTypeStruct) SetPresetTypeFeatures(presetTypeFeatures *foundation.NSNumber) {
 	o.Ptr().Send(_mTRThermostatClusterPresetTypeStructSelSetPresetTypeFeatures, presetTypeFeatures.Ptr())
 }
-

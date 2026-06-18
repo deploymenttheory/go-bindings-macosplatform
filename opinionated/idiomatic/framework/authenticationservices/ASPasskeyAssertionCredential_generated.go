@@ -114,4 +114,3 @@ type PasskeyAssertionCredentialable interface {
 }
 
 var _ PasskeyAssertionCredentialable = (*PasskeyAssertionCredential)(nil)
-

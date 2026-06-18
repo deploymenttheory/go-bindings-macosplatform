@@ -43,4 +43,3 @@ type XHCIControllerable interface {
 }
 
 var _ XHCIControllerable = (*XHCIController)(nil)
-

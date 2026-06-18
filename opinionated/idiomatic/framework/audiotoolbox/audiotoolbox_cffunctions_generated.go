@@ -384,4 +384,3 @@ func MusicDeviceSysEx(inUnit *carboncore.ComponentInstanceRecord, inData *uint8,
 	}
 	return nil
 }
-

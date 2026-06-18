@@ -16,10 +16,10 @@ type AVAssetDownloadStorageManager struct {
 }
 
 var (
-	_clsAVAssetDownloadStorageManager = _objcClass("AVAssetDownloadStorageManager")
-	_aVAssetDownloadStorageManagerSelSharedDownloadStorageManager = objc.RegisterName("sharedDownloadStorageManager")
+	_clsAVAssetDownloadStorageManager                                 = _objcClass("AVAssetDownloadStorageManager")
+	_aVAssetDownloadStorageManagerSelSharedDownloadStorageManager     = objc.RegisterName("sharedDownloadStorageManager")
 	_aVAssetDownloadStorageManagerSelSetStorageManagementPolicyForURL = objc.RegisterName("setStorageManagementPolicy:forURL:")
-	_aVAssetDownloadStorageManagerSelStorageManagementPolicyForURL = objc.RegisterName("storageManagementPolicyForURL:")
+	_aVAssetDownloadStorageManagerSelStorageManagementPolicyForURL    = objc.RegisterName("storageManagementPolicyForURL:")
 )
 
 func AVAssetDownloadStorageManagerFromID(id objc.ID) *AVAssetDownloadStorageManager {
@@ -35,7 +35,9 @@ func AVAssetDownloadStorageManagerFromID(id objc.ID) *AVAssetDownloadStorageMana
 // returns singleton instance.
 func AVAssetDownloadStorageManagerSharedDownloadStorageManager() *AVAssetDownloadStorageManager {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVAssetDownloadStorageManager), _aVAssetDownloadStorageManagerSelSharedDownloadStorageManager)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadStorageManagerFromID(_ret)
 }
 
@@ -47,7 +49,8 @@ func (o *AVAssetDownloadStorageManager) SetStorageManagementPolicyForURL(storage
 // Returns the storage management policy for asset downloaded at downloadStorageURL. This may be nil if a storageManagementPolicy was never set on the downloaded asset. - Parameter downloadStorageURL: The location of downloaded asset.
 func (o *AVAssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL *foundation.NSURL) *AVAssetDownloadStorageManagementPolicy {
 	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadStorageManagerSelStorageManagementPolicyForURL, downloadStorageURL.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return AVAssetDownloadStorageManagementPolicyFromID(_ret)
 }
-

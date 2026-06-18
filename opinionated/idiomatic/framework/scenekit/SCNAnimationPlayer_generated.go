@@ -126,4 +126,3 @@ type AnimationPlayerable interface {
 }
 
 var _ AnimationPlayerable = (*AnimationPlayer)(nil)
-

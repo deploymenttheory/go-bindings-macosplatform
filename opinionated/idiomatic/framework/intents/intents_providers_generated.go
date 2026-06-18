@@ -42,4 +42,3 @@ type PersonResolutionResultProvider interface {
 type ReservationProvider interface {
 	asReservation() *raw.INReservation
 }
-

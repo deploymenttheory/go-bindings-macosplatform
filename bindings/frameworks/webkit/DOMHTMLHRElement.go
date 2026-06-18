@@ -16,15 +16,15 @@ type DOMHTMLHRElement struct {
 }
 
 var (
-	_clsDOMHTMLHRElement = _objcClass("DOMHTMLHRElement")
-	_dOMHTMLHRElementSelAlign = objc.RegisterName("align")
-	_dOMHTMLHRElementSelSetAlign = objc.RegisterName("setAlign:")
-	_dOMHTMLHRElementSelNoShade = objc.RegisterName("noShade")
+	_clsDOMHTMLHRElement           = _objcClass("DOMHTMLHRElement")
+	_dOMHTMLHRElementSelAlign      = objc.RegisterName("align")
+	_dOMHTMLHRElementSelSetAlign   = objc.RegisterName("setAlign:")
+	_dOMHTMLHRElementSelNoShade    = objc.RegisterName("noShade")
 	_dOMHTMLHRElementSelSetNoShade = objc.RegisterName("setNoShade:")
-	_dOMHTMLHRElementSelSize = objc.RegisterName("size")
-	_dOMHTMLHRElementSelSetSize = objc.RegisterName("setSize:")
-	_dOMHTMLHRElementSelWidth = objc.RegisterName("width")
-	_dOMHTMLHRElementSelSetWidth = objc.RegisterName("setWidth:")
+	_dOMHTMLHRElementSelSize       = objc.RegisterName("size")
+	_dOMHTMLHRElementSelSetSize    = objc.RegisterName("setSize:")
+	_dOMHTMLHRElementSelWidth      = objc.RegisterName("width")
+	_dOMHTMLHRElementSelSetWidth   = objc.RegisterName("setWidth:")
 )
 
 func DOMHTMLHRElementFromID(id objc.ID) *DOMHTMLHRElement {
@@ -39,7 +39,9 @@ func DOMHTMLHRElementFromID(id objc.ID) *DOMHTMLHRElement {
 
 func (o *DOMHTMLHRElement) Align() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLHRElementSelAlign)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -58,7 +60,9 @@ func (o *DOMHTMLHRElement) SetNoShade(noShade bool) {
 
 func (o *DOMHTMLHRElement) Size() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLHRElementSelSize)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
@@ -68,11 +72,12 @@ func (o *DOMHTMLHRElement) SetSize(size *foundation.NSString) {
 
 func (o *DOMHTMLHRElement) Width() *foundation.NSString {
 	_ret := objc.Send[objc.ID](o.Ptr(), _dOMHTMLHRElementSelWidth)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSStringFromID(_ret)
 }
 
 func (o *DOMHTMLHRElement) SetWidth(width *foundation.NSString) {
 	o.Ptr().Send(_dOMHTMLHRElementSelSetWidth, width.Ptr())
 }
-

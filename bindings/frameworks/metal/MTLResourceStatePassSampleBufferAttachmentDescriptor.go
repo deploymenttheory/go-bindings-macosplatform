@@ -16,13 +16,13 @@ type MTLResourceStatePassSampleBufferAttachmentDescriptor struct {
 }
 
 var (
-	_clsMTLResourceStatePassSampleBufferAttachmentDescriptor = _objcClass("MTLResourceStatePassSampleBufferAttachmentDescriptor")
-	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSampleBuffer = objc.RegisterName("sampleBuffer")
-	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetSampleBuffer = objc.RegisterName("setSampleBuffer:")
-	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex = objc.RegisterName("startOfEncoderSampleIndex")
+	_clsMTLResourceStatePassSampleBufferAttachmentDescriptor                             = _objcClass("MTLResourceStatePassSampleBufferAttachmentDescriptor")
+	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSampleBuffer                 = objc.RegisterName("sampleBuffer")
+	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetSampleBuffer              = objc.RegisterName("setSampleBuffer:")
+	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelStartOfEncoderSampleIndex    = objc.RegisterName("startOfEncoderSampleIndex")
 	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetStartOfEncoderSampleIndex = objc.RegisterName("setStartOfEncoderSampleIndex:")
-	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex = objc.RegisterName("endOfEncoderSampleIndex")
-	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex = objc.RegisterName("setEndOfEncoderSampleIndex:")
+	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelEndOfEncoderSampleIndex      = objc.RegisterName("endOfEncoderSampleIndex")
+	_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex   = objc.RegisterName("setEndOfEncoderSampleIndex:")
 )
 
 func MTLResourceStatePassSampleBufferAttachmentDescriptorFromID(id objc.ID) *MTLResourceStatePassSampleBufferAttachmentDescriptor {
@@ -64,4 +64,3 @@ func (o *MTLResourceStatePassSampleBufferAttachmentDescriptor) EndOfEncoderSampl
 func (o *MTLResourceStatePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) {
 	o.Ptr().Send(_mTLResourceStatePassSampleBufferAttachmentDescriptorSelSetEndOfEncoderSampleIndex, endOfEncoderSampleIndex)
 }
-

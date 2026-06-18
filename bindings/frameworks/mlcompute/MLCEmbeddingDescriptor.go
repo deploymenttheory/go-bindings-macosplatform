@@ -16,15 +16,15 @@ type MLCEmbeddingDescriptor struct {
 }
 
 var (
-	_clsMLCEmbeddingDescriptor = _objcClass("MLCEmbeddingDescriptor")
-	_mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimension = objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:")
+	_clsMLCEmbeddingDescriptor                                                                                                    = _objcClass("MLCEmbeddingDescriptor")
+	_mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimension                                                      = objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:")
 	_mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency = objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:paddingIndex:maximumNorm:pNorm:scalesGradientByFrequency:")
-	_mLCEmbeddingDescriptorSelEmbeddingCount = objc.RegisterName("embeddingCount")
-	_mLCEmbeddingDescriptorSelEmbeddingDimension = objc.RegisterName("embeddingDimension")
-	_mLCEmbeddingDescriptorSelPaddingIndex = objc.RegisterName("paddingIndex")
-	_mLCEmbeddingDescriptorSelMaximumNorm = objc.RegisterName("maximumNorm")
-	_mLCEmbeddingDescriptorSelPNorm = objc.RegisterName("pNorm")
-	_mLCEmbeddingDescriptorSelScalesGradientByFrequency = objc.RegisterName("scalesGradientByFrequency")
+	_mLCEmbeddingDescriptorSelEmbeddingCount                                                                                      = objc.RegisterName("embeddingCount")
+	_mLCEmbeddingDescriptorSelEmbeddingDimension                                                                                  = objc.RegisterName("embeddingDimension")
+	_mLCEmbeddingDescriptorSelPaddingIndex                                                                                        = objc.RegisterName("paddingIndex")
+	_mLCEmbeddingDescriptorSelMaximumNorm                                                                                         = objc.RegisterName("maximumNorm")
+	_mLCEmbeddingDescriptorSelPNorm                                                                                               = objc.RegisterName("pNorm")
+	_mLCEmbeddingDescriptorSelScalesGradientByFrequency                                                                           = objc.RegisterName("scalesGradientByFrequency")
 )
 
 func MLCEmbeddingDescriptorFromID(id objc.ID) *MLCEmbeddingDescriptor {
@@ -39,48 +39,62 @@ func MLCEmbeddingDescriptorFromID(id objc.ID) *MLCEmbeddingDescriptor {
 
 func MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber) *MLCEmbeddingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingDescriptor), _mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimension, embeddingCount.Ptr(), embeddingDimension.Ptr())
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCEmbeddingDescriptorFromID(_ret)
 }
 
 func MLCEmbeddingDescriptorDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount *foundation.NSNumber, embeddingDimension *foundation.NSNumber, paddingIndex *foundation.NSNumber, maximumNorm *foundation.NSNumber, pNorm *foundation.NSNumber, scalesGradientByFrequency bool) *MLCEmbeddingDescriptor {
 	_ret := objc.Send[objc.ID](objc.ID(_clsMLCEmbeddingDescriptor), _mLCEmbeddingDescriptorSelDescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency, embeddingCount.Ptr(), embeddingDimension.Ptr(), paddingIndex.Ptr(), maximumNorm.Ptr(), pNorm.Ptr(), scalesGradientByFrequency)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return MLCEmbeddingDescriptorFromID(_ret)
 }
 
 // @property   embeddingCount @abstract   The size of the dictionary
 func (o *MLCEmbeddingDescriptor) EmbeddingCount() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingDescriptorSelEmbeddingCount)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property   embeddingDimension @abstract   The dimension of embedding vectors
 func (o *MLCEmbeddingDescriptor) EmbeddingDimension() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingDescriptorSelEmbeddingDimension)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property   paddingIndex @abstract   If set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
 func (o *MLCEmbeddingDescriptor) PaddingIndex() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingDescriptorSelPaddingIndex)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property   maximumNorm @abstract   A float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
 func (o *MLCEmbeddingDescriptor) MaximumNorm() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingDescriptorSelMaximumNorm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
 // @property   pNorm @abstract   A float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
 func (o *MLCEmbeddingDescriptor) PNorm() *foundation.NSNumber {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mLCEmbeddingDescriptorSelPNorm)
-	if _ret != 0 { _ret.Send(objc.RegisterName("retain")) }
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
 	return foundation.NSNumberFromID(_ret)
 }
 
@@ -89,4 +103,3 @@ func (o *MLCEmbeddingDescriptor) ScalesGradientByFrequency() bool {
 	_ret := objc.Send[bool](o.Ptr(), _mLCEmbeddingDescriptorSelScalesGradientByFrequency)
 	return _ret
 }
-

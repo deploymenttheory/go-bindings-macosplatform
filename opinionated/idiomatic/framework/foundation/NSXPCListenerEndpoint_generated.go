@@ -50,4 +50,3 @@ type XPCListenerEndpointable interface {
 }
 
 var _ XPCListenerEndpointable = (*XPCListenerEndpoint)(nil)
-
